@@ -1,0 +1,20 @@
+{
+  "name": "Neuralese Compiler",
+  "short_name": "Neuralese",
+  "description": "Convert natural English prose into high-density, LLM-readable neuralese notation.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b1020",
+  "theme_color": "#0b1020",
+  "categories": ["productivity", "utilities", "developer"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

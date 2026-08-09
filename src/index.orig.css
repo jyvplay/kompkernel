@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+/* Parity with the package's app/layout.tsx body shell (bg-[#0b1020],
+   text-slate-100, antialiased). Declared here so the dark shell is guaranteed
+   even if the HTML scanner misses the arbitrary-value class. */
+html,
+body {
+  background-color: #0b1020;
+  color: #f1f5f9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
