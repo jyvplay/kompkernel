@@ -129,6 +129,7 @@ import { helixEncode, helixDecode, HELIX_SYSTEM_PROMPT } from './helix';
 import { pulseEncode, pulseDecode, PULSE_SYSTEM_PROMPT } from './pulse';
 import { anaphoraEncode, anaphoraDecode, anaphoraDecoderPrompt } from './anaphora';
 import { praxisEncode, praxisDecode, PRAXIS_SYSTEM_PROMPT } from './praxis';
+import { sigmaEncode, sigmaDecode } from './sigma';
 import { ideographPool } from './strata';
 
 export interface MosaicRegion {
@@ -246,6 +247,16 @@ const LANES: Lane[] = [
     },
     decode: praxisDecode,
     prompt: PRAXIS_SYSTEM_PROMPT,
+  },
+  {
+    tag: 's',
+    name: 'sigma-local',
+    encode: (t, e) => {
+      const r = sigmaEncode(t, e);
+      return { wire: r.wire, applied: r.applied };
+    },
+    decode: sigmaDecode,
+    prompt: 'SIGMA exact: fold homogeneous JSONL or CSV blocks into a typed schema and tab-separated rows; reconstruct original JSON/CSV spelling exactly; otherwise literal.',
   },
 ];
 
@@ -661,7 +672,7 @@ export function mosaicDecoderPrompt(r?: MosaicResult | null): string {
     'Split the body on S. Each piece starts with a one-letter tag naming the',
     'codec used for that region, followed by that region\'s own encoded text:',
     '  i = literal (the region is exactly as written)',
-    '  g = SIGNET · h = HELIX · p = PULSE · a = ANAPHORA · d = local PRAXIS dictionary',
+    '  g = SIGNET · h = HELIX · p = PULSE · a = ANAPHORA · d = local PRAXIS dictionary · s = local SIGMA schema fold',
     'Decode each region with the rules for its tag, then join the decoded',
     'regions with a newline, in order. That is the original document, exactly.',
     'If the message does NOT start with [MZ1], it is a single region and you',

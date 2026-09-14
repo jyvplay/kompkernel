@@ -90,6 +90,8 @@ function compactPartition(wire: string, sentinel: '[MZ1]\n' | '[AR1]\n'): string
   if (tags.has('h')) rules.push('h ' + compactHelix());
   if (tags.has('p')) rules.push('p ' + compactPulse());
   if (tags.has('a')) rules.push('a ' + compactAnaphora(bodies.get('a') ?? ''));
+  if (tags.has('d')) rules.push('d PX2 exact: legend rows before [/PX2] map one-character aliases to phrases; expand aliases bottom-to-top; else literal.');
+  if (tags.has('s')) rules.push('s SIGMA exact: decode typed JSONL/CSV schema rows; restore original spelling exactly.');
   return rules.join(' ');
 }
 
