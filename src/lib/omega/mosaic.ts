@@ -134,6 +134,9 @@ import { meridianEncode, meridianDecode, MERIDIAN_SYSTEM_PROMPT } from './meridi
 import { quasarEncode, quasarDecode, QUASAR_SYSTEM_PROMPT } from './quasar';
 import { plexusEncode, plexusDecode, PLEXUS_SYSTEM_PROMPT } from './plexus';
 import { veritasEncode, veritasDecode, VERITAS_SYSTEM_PROMPT } from './veritas';
+import { axiomEncode, axiomDecode, AXIOM_SYSTEM_PROMPT } from './axiom';
+import { tesseraEncode, tesseraDecode, TESSERA_SYSTEM_PROMPT } from './tessera';
+import { strataEncode, strataDecode, STRATA_SYSTEM_PROMPT } from './strata';
 import { ideographPool } from './strata';
 
 export interface MosaicRegion {
@@ -286,6 +289,20 @@ const LANES: Lane[] = [
     tag: 'v', name: 'veritas-local',
     encode: (t, e) => { if (t.length < 64) return { wire: t, applied: false }; const r = veritasEncode(t, e); return { wire: r.wire, applied: r.mode !== 'identity' }; },
     decode: veritasDecode, prompt: VERITAS_SYSTEM_PROMPT,
+  },  {
+    tag: 'o', name: 'axiom-local',
+    encode: (t, e) => { if (t.length < 128) return { wire: t, applied: false }; const r = axiomEncode(t, e, []); return { wire: r.wire, applied: r.mode !== 'identity' }; },
+    decode: (w) => axiomDecode(w, []), prompt: AXIOM_SYSTEM_PROMPT,
+  },
+  {
+    tag: 't', name: 'tessera-local',
+    encode: (t, e) => { if (t.length < 128) return { wire: t, applied: false }; const r = tesseraEncode(t, e); return { wire: r.wire, applied: r.mode !== 'identity' }; },
+    decode: tesseraDecode, prompt: TESSERA_SYSTEM_PROMPT,
+  },
+  {
+    tag: 'r', name: 'strata-local',
+    encode: (t, e) => { if (t.length < 128) return { wire: t, applied: false }; const x = strataEncode(t, e); return { wire: x.wire, applied: x.mode !== 'identity' }; },
+    decode: strataDecode, prompt: STRATA_SYSTEM_PROMPT,
   },
 ];
 
@@ -441,6 +458,9 @@ function bareDecode(wire: string, depth: number): string {
   if (wire.startsWith('⟨QSR⟩\n')) return quasarDecode(wire);
   if (wire.startsWith('[PX]\n')) return plexusDecode(wire);
   if (wire.startsWith('[[VX1\n')) return veritasDecode(wire);
+  if (wire.startsWith('[AX1]\n')) return axiomDecode(wire, []);
+  if (wire.startsWith('[TS1]\n')) return tesseraDecode(wire);
+  if (wire.startsWith('[ST1]\n')) return strataDecode(wire);
   return helixDecode(wire);
 }
 
@@ -705,7 +725,7 @@ export function mosaicDecoderPrompt(r?: MosaicResult | null): string {
     'Split the body on S. Each piece starts with a one-letter tag naming the',
     'codec used for that region, followed by that region\'s own encoded text:',
     '  i = literal (the region is exactly as written)',
-    '  g = SIGNET · h = HELIX · p = PULSE · a = ANAPHORA · d = local PRAXIS dictionary · s = local SIGMA schema fold · m = local MERIDIAN · q = local QUASAR · x = local PLEXUS · v = local VERITAS',
+    '  g = SIGNET · h = HELIX · p = PULSE · a = ANAPHORA · d = local PRAXIS dictionary · s = local SIGMA schema fold · m = local MERIDIAN · q = local QUASAR · x = local PLEXUS · v = local VERITAS · o = local AXIOM · t = local TESSERA · r = local STRATA',
     'Decode each region with the rules for its tag, then join the decoded',
     'regions with a newline, in order. That is the original document, exactly.',
     'If the message does NOT start with [MZ1], it is a single region and you',

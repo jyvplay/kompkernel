@@ -96,6 +96,9 @@ function compactPartition(wire: string, sentinel: '[MZ1]\n' | '[AR1]\n'): string
   if (tags.has('q')) rules.push('q QUASAR exact: decode QSR dictionary bindings bottom-to-top with literal fallback.');
   if (tags.has('x')) rules.push('x PLEXUS exact: decode PX bindings and nested HELIX composition; literal fallback.');
   if (tags.has('v')) rules.push('v VERITAS exact: decode VX1 escaped dictionary aliases; all unbound text literal.');
+  if (tags.has('o')) rules.push('o AXIOM exact: decode AX1 exact bindings and nested numeric expansions; literal fallback.');
+  if (tags.has('t')) rules.push('t TESSERA exact: decode TS1 typed structural bindings; literal fallback.');
+  if (tags.has('r')) rules.push('r STRATA exact: decode ST1 structural bindings and HELIX runs; literal fallback.');
   return rules.join(' ');
 }
 
