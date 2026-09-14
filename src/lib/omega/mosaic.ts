@@ -131,6 +131,9 @@ import { anaphoraEncode, anaphoraDecode, anaphoraDecoderPrompt } from './anaphor
 import { praxisEncode, praxisDecode, PRAXIS_SYSTEM_PROMPT } from './praxis';
 import { sigmaEncode, sigmaDecode } from './sigma';
 import { meridianEncode, meridianDecode, MERIDIAN_SYSTEM_PROMPT } from './meridian';
+import { quasarEncode, quasarDecode, QUASAR_SYSTEM_PROMPT } from './quasar';
+import { plexusEncode, plexusDecode, PLEXUS_SYSTEM_PROMPT } from './plexus';
+import { veritasEncode, veritasDecode, VERITAS_SYSTEM_PROMPT } from './veritas';
 import { ideographPool } from './strata';
 
 export interface MosaicRegion {
@@ -269,6 +272,20 @@ const LANES: Lane[] = [
     },
     decode: meridianDecode,
     prompt: MERIDIAN_SYSTEM_PROMPT,
+  },  {
+    tag: 'q', name: 'quasar-local',
+    encode: (t, e) => { if (t.length < 64) return { wire: t, applied: false }; const r = quasarEncode(t, e); return { wire: r.wire, applied: r.mode !== 'identity' }; },
+    decode: quasarDecode, prompt: QUASAR_SYSTEM_PROMPT,
+  },
+  {
+    tag: 'x', name: 'plexus-local',
+    encode: (t, e) => { if (t.length < 64) return { wire: t, applied: false }; const r = plexusEncode(t, e); return { wire: r.wire, applied: r.mode !== 'identity' }; },
+    decode: plexusDecode, prompt: PLEXUS_SYSTEM_PROMPT,
+  },
+  {
+    tag: 'v', name: 'veritas-local',
+    encode: (t, e) => { if (t.length < 64) return { wire: t, applied: false }; const r = veritasEncode(t, e); return { wire: r.wire, applied: r.mode !== 'identity' }; },
+    decode: veritasDecode, prompt: VERITAS_SYSTEM_PROMPT,
   },
 ];
 
@@ -421,6 +438,9 @@ function bareDecode(wire: string, depth: number): string {
     return peeled === wire ? wire : bareDecode(peeled, depth + 1);
   }
   if (wire.startsWith('[M1]\n')) return meridianDecode(wire);
+  if (wire.startsWith('⟨QSR⟩\n')) return quasarDecode(wire);
+  if (wire.startsWith('[PX]\n')) return plexusDecode(wire);
+  if (wire.startsWith('[[VX1\n')) return veritasDecode(wire);
   return helixDecode(wire);
 }
 
@@ -685,7 +705,7 @@ export function mosaicDecoderPrompt(r?: MosaicResult | null): string {
     'Split the body on S. Each piece starts with a one-letter tag naming the',
     'codec used for that region, followed by that region\'s own encoded text:',
     '  i = literal (the region is exactly as written)',
-    '  g = SIGNET · h = HELIX · p = PULSE · a = ANAPHORA · d = local PRAXIS dictionary · s = local SIGMA schema fold',
+    '  g = SIGNET · h = HELIX · p = PULSE · a = ANAPHORA · d = local PRAXIS dictionary · s = local SIGMA schema fold · m = local MERIDIAN · q = local QUASAR · x = local PLEXUS · v = local VERITAS',
     'Decode each region with the rules for its tag, then join the decoded',
     'regions with a newline, in order. That is the original document, exactly.',
     'If the message does NOT start with [MZ1], it is a single region and you',

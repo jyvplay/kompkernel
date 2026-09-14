@@ -93,6 +93,9 @@ function compactPartition(wire: string, sentinel: '[MZ1]\n' | '[AR1]\n'): string
   if (tags.has('d')) rules.push('d PX2 exact: legend rows before [/PX2] map one-character aliases to phrases; expand aliases bottom-to-top; else literal.');
   if (tags.has('s')) rules.push('s SIGMA exact: decode typed JSONL/CSV schema rows; restore original spelling exactly.');
   if (tags.has('m')) rules.push('m MERIDIAN exact: decode its visible M1 anaphora/HELIX composition; expand bindings and arithmetic runs; else literal.');
+  if (tags.has('q')) rules.push('q QUASAR exact: decode QSR dictionary bindings bottom-to-top with literal fallback.');
+  if (tags.has('x')) rules.push('x PLEXUS exact: decode PX bindings and nested HELIX composition; literal fallback.');
+  if (tags.has('v')) rules.push('v VERITAS exact: decode VX1 escaped dictionary aliases; all unbound text literal.');
   return rules.join(' ');
 }
 
