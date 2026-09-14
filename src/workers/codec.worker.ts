@@ -25,7 +25,8 @@ import { crownEncodeFromMembers } from '../lib/omega/crown';
 import { irisEncodeFromCrown } from '../lib/omega/iris';
 import { kernelEncodeFromCrown } from '../lib/omega/kernel';
 import { zenithEncodeFromKernel } from '../lib/omega/zenith';
-import { eclipseFromZenith } from '../lib/omega/eclipse';
+import { eclipseFromCandidates } from '../lib/omega/eclipse';
+import { spliceEncode } from '../lib/omega/splice';
 import { mnemeApply } from '../lib/omega/persistent-dict';
 import type { CodecWorkerRequest, CodecWorkerResponse } from './codec.types';
 
@@ -91,7 +92,8 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const iris = irisEncodeFromCrown(input, crown, 'o200k_base');
       const kernel = kernelEncodeFromCrown(input, crown, 'o200k_base');
       const zenith = zenithEncodeFromKernel(input, kernel, 'o200k_base');
-      const eclipse = eclipseFromZenith(input, zenith, 'o200k_base');
+      const splice = spliceEncode(input, 'o200k_base');
+      const eclipse = eclipseFromCandidates(input, zenith, splice, 'o200k_base');
 
       const response: CodecWorkerResponse = {
         id,

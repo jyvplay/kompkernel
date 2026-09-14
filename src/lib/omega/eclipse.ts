@@ -17,6 +17,7 @@
  */
 import { countTokens, type EncodingName } from './bpe';
 import { zenithEncode, type ZenithResult } from './zenith';
+import { spliceEncode, type SpliceResult } from './splice';
 
 export interface EclipseResult extends Omit<ZenithResult, 'renderer'> {
   renderer: 'eclipse-contract';
@@ -33,9 +34,11 @@ function contractCandidates(contract: string): string[] {
   return [...new Set(candidates)];
 }
 
-export function eclipseFromZenith(
+type Refinable = Pick<ZenithResult, 'wire' | 'decoded' | 'exact' | 'inTokens' | 'outTokens' | 'contractPrompt' | 'contractTokens' | 'deliveredTokens' | 'deliveredVsRaw' | 'savingsPct' | 'sourceMember' | 'encodeMs' | 'notes'>;
+
+function eclipseFromBase(
   text: string,
-  zenith: ZenithResult,
+  zenith: Refinable,
   enc: EncodingName = 'o200k_base',
 ): EclipseResult {
   const variants = contractCandidates(zenith.contractPrompt);
@@ -71,8 +74,18 @@ export function eclipseFromZenith(
   };
 }
 
+export function eclipseFromZenith(text: string, zenith: ZenithResult, enc: EncodingName = 'o200k_base'): EclipseResult {
+  return eclipseFromBase(text, zenith, enc);
+}
+
+export function eclipseFromCandidates(text: string, zenith: ZenithResult, splice: SpliceResult, enc: EncodingName = 'o200k_base'): EclipseResult {
+  const spliceBase: Refinable = { ...splice, sourceMember: splice.source, encodeMs: splice.encodeMs };
+  return eclipseFromBase(text, splice.deliveredTokens < zenith.deliveredTokens ? spliceBase : zenith, enc);
+}
+
 export async function eclipseEncode(text: string, enc: EncodingName = 'o200k_base'): Promise<EclipseResult> {
-  return eclipseFromZenith(text, await zenithEncode(text, enc), enc);
+  const [zenith, splice] = await Promise.all([zenithEncode(text, enc), Promise.resolve(spliceEncode(text, enc))]);
+  return eclipseFromCandidates(text, zenith, splice, enc);
 }
 
 export interface EclipseSelfTest { name: string; pass: boolean; details: string }
