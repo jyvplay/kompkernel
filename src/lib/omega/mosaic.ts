@@ -130,6 +130,7 @@ import { pulseEncode, pulseDecode, PULSE_SYSTEM_PROMPT } from './pulse';
 import { anaphoraEncode, anaphoraDecode, anaphoraDecoderPrompt } from './anaphora';
 import { praxisEncode, praxisDecode, PRAXIS_SYSTEM_PROMPT } from './praxis';
 import { sigmaEncode, sigmaDecode } from './sigma';
+import { meridianEncode, meridianDecode, MERIDIAN_SYSTEM_PROMPT } from './meridian';
 import { ideographPool } from './strata';
 
 export interface MosaicRegion {
@@ -257,6 +258,17 @@ const LANES: Lane[] = [
     },
     decode: sigmaDecode,
     prompt: 'SIGMA exact: fold homogeneous JSONL or CSV blocks into a typed schema and tab-separated rows; reconstruct original JSON/CSV spelling exactly; otherwise literal.',
+  },
+  {
+    tag: 'm',
+    name: 'meridian-local',
+    encode: (t, e) => {
+      if (t.length < 128) return { wire: t, applied: false };
+      const r = meridianEncode(t, e);
+      return { wire: r.wire, applied: r.mode !== 'identity' };
+    },
+    decode: meridianDecode,
+    prompt: MERIDIAN_SYSTEM_PROMPT,
   },
 ];
 
@@ -408,6 +420,7 @@ function bareDecode(wire: string, depth: number): string {
     const peeled = anaphoraDecode(wire);
     return peeled === wire ? wire : bareDecode(peeled, depth + 1);
   }
+  if (wire.startsWith('[M1]\n')) return meridianDecode(wire);
   return helixDecode(wire);
 }
 

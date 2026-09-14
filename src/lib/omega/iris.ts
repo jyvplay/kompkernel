@@ -91,6 +91,7 @@ function partitionContract(wire: string, sentinel: '[MZ1]\n' | '[AR1]\n'): strin
     else if (tag === 'a') contracts.set('a', 'a: ' + anaphoraContract(body));
     else if (tag === 'd') contracts.set('d', 'd: PX2 legend rows map aliases to phrases; expand bottom-to-top; else literal.');
     else if (tag === 's') contracts.set('s', 's: SIGMA typed schema rows reconstruct exact JSONL/CSV spelling.');
+    else if (tag === 'm') contracts.set('m', 'm: MERIDIAN M1 bindings and HELIX arithmetic composition; exact literal fallback.');
   }
   return `${sentinel.trim()} exact partition: line 2 is separator S; split following S<tag><region> pieces, decode each by tag, then join regions with newline. ${[...contracts.values()].join(' ')}`;
 }
