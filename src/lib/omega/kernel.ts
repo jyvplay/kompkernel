@@ -99,6 +99,7 @@ function compactPartition(wire: string, sentinel: '[MZ1]\n' | '[AR1]\n'): string
   if (tags.has('o')) rules.push('o AXIOM exact: decode AX1 exact bindings and nested numeric expansions; literal fallback.');
   if (tags.has('t')) rules.push('t TESSERA exact: decode TS1 typed structural bindings; literal fallback.');
   if (tags.has('r')) rules.push('r STRATA exact: decode ST1 structural bindings and HELIX runs; literal fallback.');
+  if (tags.has('b')) rules.push('b REPAIR exact: decode RP1 JSON binary grammar rules recursively; unbound text literal.');
   return rules.join(' ');
 }
 
