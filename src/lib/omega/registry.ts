@@ -48,6 +48,9 @@ import { irisEncode } from './iris';
 import { kernelEncode } from './kernel';
 import { zenithEncode } from './zenith';
 import { eclipseEncode } from './eclipse';
+import { prismEncode } from './prism';
+import { replayEncode } from './replay';
+import { raptorEncode } from './raptor';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -215,6 +218,36 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = await eclipseEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'prism',
+      label: '◈ PRISM-P1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = prismEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'replay',
+      label: '↻ REPLAY-R1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = replayEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'raptor',
+      label: '⟁ RAPTOR-T1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = raptorEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },

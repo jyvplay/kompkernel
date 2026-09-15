@@ -25,6 +25,7 @@ import type { IrisResult } from '../lib/omega/iris';
 import type { KernelResult } from '../lib/omega/kernel';
 import type { ZenithResult } from '../lib/omega/zenith';
 import type { EclipseResult } from '../lib/omega/eclipse';
+import type { PrismResult } from '../lib/omega/prism';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -65,6 +66,7 @@ export interface CodecWorkerResult {
   kernel: KernelResult;
   zenith: ZenithResult;
   eclipse: EclipseResult;
+  prism: PrismResult;
 }
 
 export interface CodecWorkerFailure {
