@@ -48,6 +48,7 @@ import { irisEncode } from './iris';
 import { kernelEncode } from './kernel';
 import { zenithEncode } from './zenith';
 import { eclipseEncode } from './eclipse';
+import { prismEncode } from './prism';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -215,6 +216,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = await eclipseEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'prism',
+      label: '◈ PRISM-P1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = prismEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
