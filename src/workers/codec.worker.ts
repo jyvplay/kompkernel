@@ -32,6 +32,7 @@ import { replayEncode } from '../lib/omega/replay';
 import { raptorEncode } from '../lib/omega/raptor';
 import { foldEncode } from '../lib/omega/fold';
 import { tableEncode } from '../lib/omega/table';
+import { pathEncode } from '../lib/omega/path';
 import { mnemeApply } from '../lib/omega/persistent-dict';
 import type { CodecWorkerRequest, CodecWorkerResponse } from './codec.types';
 
@@ -102,7 +103,8 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const raptor = raptorEncode(input, 'o200k_base');
       const fold = foldEncode(input, 'o200k_base');
       const table = tableEncode(input, 'o200k_base');
-      const eclipse = eclipseFromCandidates(input, zenith, splice, replay, raptor, 'o200k_base', fold, table);
+      const path = pathEncode(input, 'o200k_base');
+      const eclipse = eclipseFromCandidates(input, zenith, splice, replay, raptor, 'o200k_base', fold, table, path);
       const prism = prismEncode(input, 'o200k_base');
 
       const response: CodecWorkerResponse = {
@@ -137,6 +139,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         zenith,
         eclipse,
         prism,
+        path,
       };
       ctx.postMessage(response);
     } catch (error) {

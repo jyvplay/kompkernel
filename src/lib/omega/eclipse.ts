@@ -3,14 +3,15 @@
  *
  * ECLIPSE searches a small, explicitly semantics-preserving normal-form set for
  * the decoder contract of the best exact candidate among ZENITH, SPLICE, REPLAY,
- * RAPTOR, inline structured-token FOLD, and flat-JSON-array TABLE lanes. The admitted contract transformations remove the non-operative
+ * RAPTOR, inline structured-token FOLD, flat-JSON-array TABLE, and nested
+ * structural-path PATH lanes. The admitted contract transformations remove the non-operative
  * adjective "exact" and shorten "other text literal" to "else literal". A
  * candidate is accepted only after its full wire, decoder result, and delivered
  * tokenizer cost are measured.
  *
  * Consequently ECLIPSE is weakly Pareto-dominant over the supplied portfolio on
  * delivered tokens, and can strictly improve when tokenizer-aware references
- * such as REPLAY, RAPTOR, FOLD, or TABLE fit the tokenizer better. This is intentionally
+ * such as REPLAY, RAPTOR, FOLD, TABLE, or PATH fit the tokenizer better. This is intentionally
  * modest: identity/incompressibility prevents strict improvement on every
  * possible input, and natural-language contract equivalence is not claimed as a
  * theorem.
@@ -22,6 +23,7 @@ import { replayEncode, type ReplayResult } from './replay';
 import { raptorEncode, type RaptorResult } from './raptor';
 import { foldEncode, type FoldResult } from './fold';
 import { tableEncode, type TableResult } from './table';
+import { pathEncode, type PathResult } from './path';
 
 export interface EclipseResult extends Omit<ZenithResult, 'renderer'> {
   renderer: 'eclipse-contract';
@@ -91,6 +93,7 @@ export function eclipseFromCandidates(
   enc: EncodingName = 'o200k_base',
   fold?: FoldResult | null,
   table?: TableResult | null,
+  path?: PathResult | null,
 ): EclipseResult {
   const candidates: Refinable[] = [
     zenith,
@@ -100,6 +103,7 @@ export function eclipseFromCandidates(
   if (raptor) candidates.push({ ...raptor, sourceMember: raptor.source, encodeMs: raptor.encodeMs });
   if (fold) candidates.push({ ...fold, sourceMember: fold.mode, encodeMs: fold.encodeMs });
   if (table) candidates.push({ ...table, sourceMember: table.mode, encodeMs: table.encodeMs });
+  if (path) candidates.push({ ...path, sourceMember: path.mode, encodeMs: path.encodeMs });
   const best = candidates.reduce((winner, candidate) =>
     candidate.exact && candidate.deliveredTokens < winner.deliveredTokens ? candidate : winner,
   );
@@ -107,15 +111,16 @@ export function eclipseFromCandidates(
 }
 
 export async function eclipseEncode(text: string, enc: EncodingName = 'o200k_base'): Promise<EclipseResult> {
-  const [zenith, splice, replay, raptor, fold, table] = await Promise.all([
+  const [zenith, splice, replay, raptor, fold, table, path] = await Promise.all([
     zenithEncode(text, enc),
     Promise.resolve(spliceEncode(text, enc)),
     Promise.resolve(replayEncode(text, enc)),
     Promise.resolve(raptorEncode(text, enc)),
     Promise.resolve(foldEncode(text, enc)),
     Promise.resolve(tableEncode(text, enc)),
+    Promise.resolve(pathEncode(text, enc)),
   ]);
-  return eclipseFromCandidates(text, zenith, splice, replay, raptor, enc, fold, table);
+  return eclipseFromCandidates(text, zenith, splice, replay, raptor, enc, fold, table, path);
 }
 
 export interface EclipseSelfTest { name: string; pass: boolean; details: string }
