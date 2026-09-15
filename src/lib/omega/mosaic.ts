@@ -139,6 +139,7 @@ import { tesseraEncode, tesseraDecode, TESSERA_SYSTEM_PROMPT } from './tessera';
 import { strataEncode, strataDecode, STRATA_SYSTEM_PROMPT } from './strata';
 import { repairEncode, repairDecode, REPAIR_SYSTEM_PROMPT } from './repair';
 import { trieEncode, trieDecode, TRIE_SYSTEM_PROMPT } from './trie';
+import { columnEncode, columnDecode, COLUMN_SYSTEM_PROMPT } from './column';
 import { ideographPool } from './strata';
 
 export interface MosaicRegion {
@@ -302,9 +303,9 @@ const LANES: Lane[] = [
     decode: tesseraDecode, prompt: TESSERA_SYSTEM_PROMPT,
   },
   {
-    tag: 'l', name: 'trie-local',
-    encode: (t, e) => { const x = trieEncode(t, e); return { wire: x.wire, applied: x.applied }; },
-    decode: trieDecode, prompt: TRIE_SYSTEM_PROMPT,
+    tag: 'c', name: 'column-local',
+    encode: (t, e) => { const x = columnEncode(t, e); return { wire: x.wire, applied: x.applied }; },
+    decode: columnDecode, prompt: COLUMN_SYSTEM_PROMPT,
   },
 ];
 
@@ -465,6 +466,7 @@ function bareDecode(wire: string, depth: number): string {
   if (wire.startsWith('[ST1]\n')) return strataDecode(wire);
   if (wire.startsWith('[RP1]\n')) return repairDecode(wire);
   if (wire.startsWith('[TR1]\n')) return trieDecode(wire);
+  if (wire.startsWith('[CL1]\n')) return columnDecode(wire);
   return helixDecode(wire);
 }
 
@@ -729,7 +731,7 @@ export function mosaicDecoderPrompt(r?: MosaicResult | null): string {
     'Split the body on S. Each piece starts with a one-letter tag naming the',
     'codec used for that region, followed by that region\'s own encoded text:',
     '  i = literal (the region is exactly as written)',
-    '  g = SIGNET · h = HELIX · p = PULSE · a = ANAPHORA · d = local PRAXIS dictionary · s = local SIGMA schema fold · m = local MERIDIAN · q = local QUASAR · x = local PLEXUS · v = local VERITAS · o = local AXIOM · t = local TESSERA · r = local STRATA · b = local REPAIR grammar · l = local TRIE prefix factoring',
+    '  g = SIGNET · h = HELIX · p = PULSE · a = ANAPHORA · d = local PRAXIS dictionary · s = local SIGMA schema fold · m = local MERIDIAN · q = local QUASAR · x = local PLEXUS · v = local VERITAS · o = local AXIOM · t = local TESSERA · r = local STRATA · b = local REPAIR grammar · l = local TRIE prefix factoring · c = local COLUMN prefix/suffix factoring',
     'Decode each region with the rules for its tag, then join the decoded',
     'regions with a newline, in order. That is the original document, exactly.',
     'If the message does NOT start with [MZ1], it is a single region and you',

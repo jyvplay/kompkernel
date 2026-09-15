@@ -101,6 +101,7 @@ function compactPartition(wire: string, sentinel: '[MZ1]\n' | '[AR1]\n'): string
   if (tags.has('r')) rules.push('r STRATA exact: decode ST1 structural bindings and HELIX runs; literal fallback.');
   if (tags.has('b')) rules.push('b REPAIR exact: decode RP1 JSON binary grammar rules recursively; unbound text literal.');
   if (tags.has('l')) rules.push('l TRIE exact: decode TR1 prefix, suffix list, and trailing-newline flag.');
+  if (tags.has('c')) rules.push('c COLUMN exact: decode CL1 prefix, suffix, middle rows, and trailing-newline flag.');
   return rules.join(' ');
 }
 
