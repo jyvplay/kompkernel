@@ -62,9 +62,10 @@
  * fires on them — that is the intended domain of the codebook, not
  * overfitting. The measured wins below are from the CLEANED book.
  *
- * WIRE FORMAT
- *   φ\n<folded>        — phrases folded to glyphs (the payload path)
- *   φφ\n<literal>      — forced literal wrap (safety lane, see G5)
+ * WIRE FORMAT (v1.1 — sentinel diet: 'φ' + body measures exactly +1 token,
+ * vs +2 for 'φ\n' + body; the newline never merges and the bare φ does)
+ *   φ<folded>          — phrases folded to glyphs (the payload path)
+ *   φφ<literal>        — forced literal wrap (safety lane, see G5)
  *   anything else      — not a φ wire; phraseDecode returns it unchanged
  *
  * GLYPHS. Deterministic scan of Hangul syllables U+AC00..U+D7A3 for
@@ -93,8 +94,8 @@
 
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 
-export const PHRASE_SENTINEL = 'φ\n';
-export const PHRASE_LITERAL = 'φφ\n';
+export const PHRASE_SENTINEL = 'φ';
+export const PHRASE_LITERAL = 'φφ';
 
 const FOLD_CAP = 120_000; // texts above this are returned as identity
 const GLYPH_CAP = 512;
@@ -251,6 +252,7 @@ export function phraseDecode(wire: string, enc: EncodingName = 'o200k_base'): st
   if (wire.startsWith(PHRASE_SENTINEL)) return phraseExpand(wire.slice(PHRASE_SENTINEL.length), enc);
   return wire;
 }
+// (decode order matters: 'φφ' is checked before 'φ' — the literal wrap wins)
 
 export function phraseEncode(text: string, enc: EncodingName = 'o200k_base'): PhraseResult {
   const inTokens = countTokens(text, enc);
@@ -268,8 +270,9 @@ export function phraseEncode(text: string, enc: EncodingName = 'o200k_base'): Ph
 
   if (!text || text.length > FOLD_CAP) return identity('empty or over cap');
 
-  // G2 — a bare identity wire would be misread by phraseDecode: literal-wrap.
-  if (text.startsWith(PHRASE_SENTINEL) || text.startsWith(PHRASE_LITERAL)) {
+  // G2 — a bare identity wire would be misread by phraseDecode: literal-wrap
+  // (any source starting with 'φ', since the v1.1 sentinel is a bare φ).
+  if (text.startsWith('φ')) {
     const wire = PHRASE_LITERAL + text;
     const decoded = phraseDecode(wire, enc);
     return {
@@ -325,8 +328,8 @@ export function phraseDecoderPrompt(): string {
   for (let i = 0; i < pairs.length; i += 4) lines.push('  ' + pairs.slice(i, i + 4).join('  '));
   return [
     '# φ PHRASEBOOK-φ1 — static phrase codebook wire',
-    'A φ message is: φ\\n<body> (or φφ\\n<body> for a forced literal wrap — strip',
-    'the 3-char prefix and output the rest verbatim). In a φ\\n body, every',
+    'A φ message is: φ<body> (or φφ<body> for a forced literal wrap — strip',
+    'the 2-char prefix and output the rest verbatim). In a φ body, every',
     'Hangul syllable listed below expands to its phrase; everything else is',
     'literal. Reconstruction is byte-exact; nothing was summarised or dropped.',
     'The codebook is versioned (PHRASEBOOK_V1 in src/lib/omega/phrase.ts):',

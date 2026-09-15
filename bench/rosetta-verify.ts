@@ -13,6 +13,7 @@ import { omegaXiCompress } from '@/lib/omega/atom-codec';
 import { CHAOS_900, CHAOS_F_LLM_REPORT, CHAOS_G_CJK, mosaicFixtures, MOSAIC_HANDTRACE_300 } from './fixtures';
 import { kappaEncode } from '@/lib/omega/kappa';
 import { phraseEncode } from '@/lib/omega/phrase';
+import { tauEncode } from '@/lib/omega/tau';
 
 const enc = 'o200k_base';
 const tok = (s: string) => countTokens(s, enc);
@@ -68,16 +69,17 @@ async function compare(name: string, text: string) {
   const splice = spliceEncode(text, enc).outTokens;
   const kappa = kappaEncode(text, enc).outTokens;
   const phrase = phraseEncode(text, enc).outTokens;
+  const tau = tauEncode(text, enc).outTokens;
   const xi = (await omegaXiCompress(text, enc)).outTokens;
   // Direct-reasoning class = every codec that decodes from a prompt/contract
   // (incl. the duplex residual lanes ltp/eidolon/apex/nexus). Ω-Ξ ATOM is
   // binary transport needing middleware — out of class, reported separately.
-  const bestDirect = Math.min(eid, ltp, signet, mosaic, orbit, apex, nexus, splice, kappa, phrase, inTok);
+  const bestDirect = Math.min(eid, ltp, signet, mosaic, orbit, apex, nexus, splice, kappa, phrase, tau, inTok);
   const superior = r.exact && rt && r.outTokens < bestDirect;
   const vsXi = r.outTokens < xi ? 'also < Ω-Ξ' : `(Ω-Ξ ${xi} out-of-class${r.outTokens < xi ? '' : ', not beaten'})`;
   console.log(
     `${name.padEnd(14)} in=${String(inTok).padStart(5)}  ROSETTA=${String(r.outTokens).padStart(4)} ` +
-    `(${r.member})  | bestDirect=${bestDirect} (eidolon=${eid} ltp=${ltp} orbit=${orbit} signet/mosaic/splice=${signet} phrase=${phrase})  ` +
+    `(${r.member})  | bestDirect=${bestDirect} (eidolon=${eid} ltp=${ltp} orbit=${orbit} signet/mosaic/splice=${signet} phrase=${phrase} tau=${tau})  ` +
     `${superior ? 'IN-CLASS STRICTLY-SUPERIOR ✓' : 'NOT SUPERIOR ✗'}  · ${vsXi}`,
   );
   return superior;

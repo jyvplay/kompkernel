@@ -1,7 +1,8 @@
 /**
  * src/lib/omega/rosetta.ts
  * =============================================================================
- * ROSETTA-R1 — Notational transposition (dual-spelling argmin) + gated Pareto
+ * ROSETTA-R2 — Notational transposition (dual-spelling argmin) + gated Pareto
+ * (R2 = R1 + table/YAML/JSON-family span systems P/Y/F + the τ member lane)
  * tournament over every self-contained exact lane in this repository.
  *
  * THE BLINDSPOT (measured, and shared by every codec in this repository)
@@ -138,6 +139,7 @@ import { mosaicEncode, mosaicDecode, type MosaicResult } from './mosaic';
 import { orbitEncode, type OrbitResult } from './orbit';
 import { kappaEncode, kappaDecode, KAPPA_SENTINEL } from './kappa';
 import { phraseEncode, phraseDecode, phraseFold, hasCodebookGlyph, phraseCodebook, PHRASE_SENTINEL, PHRASE_LITERAL } from './phrase';
+import { tauEncode, tauDecode, TAU_SENTINEL, TAU_LITERAL, pipeSpan, commaSpan, yamlFromLines } from './tau';
 import { crownEncodeCached, crownDecode, type CrownResult } from './crown';
 import { spliceEncode, spliceDecode, type SpliceResult } from './splice';
 import { eidolonProject } from './eidolon';
@@ -408,13 +410,14 @@ export interface RosettaTranspose {
 }
 
 /**
- * Pick the glyph window [k, k+M) (M = 2 + table size: mark, RNS-1 regions,
- * and the W phrase-flag glyph pool[k+1+RNS1_REGIONS.length]) disjoint from
- * the source text. The disjointness is what removes the need for escapes.
+ * Pick the glyph window [k, k+M) (M = 3 + table size: mark, RNS-1 regions,
+ * the W phrase-flag glyph pool[k+1+RNS1_REGIONS.length], and the Y pair
+ * separator pool[k+2+RNS1_REGIONS.length]) disjoint from the source text.
+ * The disjointness is what removes the need for escapes.
  */
 function pickWindow(text: string, enc: EncodingName): number | null {
   const pool = rosettaPool(enc);
-  const m = 2 + RNS1_REGIONS.length;
+  const m = 3 + RNS1_REGIONS.length;
   if (pool.length < m + 1) return null;
   const src = new Set<string>();
   for (const ch of text) src.add(ch);
@@ -434,13 +437,15 @@ function pickWindow(text: string, enc: EncodingName): number | null {
  * `phraseByGlyph` (W-wires only) expands PHRASEBOOK-φ1 glyphs; it is null for
  * plain transposition wires, so a source that literally contains a codebook
  * glyph can never be expanded by accident — phrase mode is only reachable
- * through the dedicated flag line.
+ * through the dedicated flag line. `sep` (also window-derived, null for
+ * non-R2 decode paths) is the Y-span pair separator.
  */
 function expandBody(
   s: string,
   mark: string,
   regionByGlyph: Map<string, string>,
   phraseByGlyph: Map<string, string> | null = null,
+  sep: string | null = null,
 ): string {
   let out = '';
   let i = 0;
@@ -457,7 +462,7 @@ function expandBody(
       if (s[i + 1] === 'J') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
-          const payload = expandBody(s.slice(i + 2, payloadEnd), mark, regionByGlyph, phraseByGlyph);
+          const payload = expandBody(s.slice(i + 2, payloadEnd), mark, regionByGlyph, phraseByGlyph, sep);
           const pairs = parseKvPayload(payload);
           const json = pairs ? unfoldJsonPairs(pairs) : null;
           if (json !== null) {
@@ -476,12 +481,85 @@ function expandBody(
           for (const row of rows) {
             const fields = row.split(' ');
             if (fields.length < 2) { ok = false; break; }
-            rebuilt.push(fields.map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph)).join(','));
+            rebuilt.push(fields.map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph, sep)).join(','));
           }
           if (ok) {
             out += rebuilt.join('\n');
             i = payloadEnd + 1;
             continue;
+          }
+        }
+      }
+      // P — pipe table span (R2): fields were space-joined; re-render
+      // '| f | f | … |' with each field expanded first.
+      if (s[i + 1] === 'P') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const rows = s.slice(i + 2, payloadEnd).split('\n');
+          let ok = true;
+          const rebuilt: string[] = [];
+          for (const row of rows) {
+            const fields = row.split(' ');
+            if (fields.length < 2) { ok = false; break; }
+            rebuilt.push('| ' + fields.map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph, sep)).join(' | ') + ' |');
+          }
+          if (ok) {
+            out += rebuilt.join('\n');
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
+      // F — JSON line-family span (R2): first payload line is the shared key
+      // sequence; each following line carries one record's values. Re-render
+      // the compact JSON object per record, expanding each value first.
+      if (s[i + 1] === 'F') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const lines = s.slice(i + 2, payloadEnd).split('\n');
+          const keys = (lines[0] ?? '').split(' ');
+          let ok = keys.length >= 1 && keys.every((k) => KEY_RE.test(k));
+          const rebuilt: string[] = [];
+          if (ok) {
+            for (let r = 1; r < lines.length; r++) {
+              const vals = lines[r].split(' ');
+              if (vals.length !== keys.length) { ok = false; break; }
+              rebuilt.push(
+                '{' + keys.map((k, c) => `"${k}":${expandBody(vals[c], mark, regionByGlyph, phraseByGlyph, sep)}`).join(',') + '}',
+              );
+            }
+          }
+          if (ok && rebuilt.length > 0) {
+            out += rebuilt.join('\n');
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
+      // Y — YAML kv span (R2): payload = name + SEP + k=v SEP pairs; the SEP
+      // glyph is window slot pool[k+2+RNS-1 size] and values are literal.
+      if (s[i + 1] === 'Y' && sep !== null) {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const sp = payload.indexOf(sep);
+          if (sp > 0) {
+            const name = payload.slice(0, sp);
+            const pairs = payload.slice(sp + 1).split(sep);
+            let ok = /^[A-Za-z_][\w-]*$/.test(name) && pairs.length >= 2;
+            const rebuilt = [name + ':'];
+            if (ok) {
+              for (const p of pairs) {
+                const eq = p.indexOf('=');
+                if (eq <= 0 || !KEY_RE.test(p.slice(0, eq))) { ok = false; break; }
+                rebuilt.push('  ' + p.slice(0, eq) + ': ' + expandBody(p.slice(eq + 1), mark, regionByGlyph, phraseByGlyph, sep));
+              }
+            }
+            if (ok) {
+              out += rebuilt.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
           }
         }
       }
@@ -594,6 +672,7 @@ export function rosettaTranspose(
   if (k === null) return empty;
   const pool = rosettaPool(enc);
   const mark = pool[k];
+  const sep = pool[k + 2 + RNS1_REGIONS.length]; // Y-span pair separator (R2)
   const measure = text.length <= MEASURE_CAP;
   const phraseByGlyph = folded !== null ? phraseCodebook(enc).byGlyph : null;
 
@@ -629,7 +708,7 @@ export function rosettaTranspose(
       // SOURCE run, not the glyphed one.
       const rebuilt = payload
         .split('\n')
-        .map((row) => row.split(' ').map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph)).join(','))
+        .map((row) => row.split(' ').map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph, sep)).join(','))
         .join('\n');
       const srcRows = csvRunSrc.join('\n');
       const profitable = !measure || countTokens(span, enc) < countTokens(orig, enc);
@@ -654,6 +733,112 @@ export function rosettaTranspose(
   for (let li = 0; li < lines.length; li++) {
     const line = lines[li];
     const srcLine = srcLines[li];
+
+    // ---- R2 run systems: pipe tables (P), JSON line families (F), YAML (Y) --
+    // These consume WHOLE RUNS of lines, so they are detected before the
+    // per-line J/C logic. G1: the expanded render must equal the SOURCE run;
+    // profitability is measured on the transformed run vs the span.
+    {
+      // pipe run
+      let j = li;
+      while (j < lines.length && lines[j].startsWith('|')) j++;
+      if (j - li >= 2) {
+        const run = lines.slice(li, j);
+        const srcRun = srcLines.slice(li, j);
+        const ps = pipeSpan(run, mark);
+        if (ps !== null) {
+          const span = mark + 'P' + run.map((r) => r.startsWith('| ') && r.endsWith(' |') ? r.slice(2, -2).split(' | ').join(' ') : r).join('\n') + mark;
+          // render check through the decode primitive, against the SOURCE run
+          const rebuilt = span
+            .slice(2, -1)
+            .split('\n')
+            .map((row) => '| ' + row.split(' ').map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph, sep)).join(' | ') + ' |')
+            .join('\n');
+          const profitable = !measure || countTokens(span, enc) < countTokens(run.join('\n'), enc);
+          if (rebuilt === srcRun.join('\n') && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('P');
+            li = j - 1;
+            continue;
+          }
+        }
+      }
+      // yaml fence block
+      if (line === '\u0060\u0060\u0060yaml') {
+        const end = lines.indexOf('\u0060\u0060\u0060', li + 1);
+        if (end > 0) {
+          const inner = lines.slice(li + 1, end);
+          const srcInner = srcLines.slice(li + 1, end);
+          const ys = yamlFromLines(inner, mark, sep);
+          if (ys !== null) {
+            const span = mark + 'Y' + inner[0].slice(0, -1) + sep + inner.slice(1).map((l) => { const m = /^  ([A-Za-z_][\w-]*): (.*)$/.exec(l); return m![1] + '=' + m![2]; }).join(sep) + mark;
+            const rebuilt = (() => {
+              const sp = span.indexOf(sep);
+              const out = [span.slice(2, sp) + ':'];
+              for (const pr of span.slice(sp + 1).split(sep)) {
+                const eq = pr.indexOf('=');
+                out.push('  ' + pr.slice(0, eq) + ': ' + expandBody(pr.slice(eq + 1), mark, regionByGlyph, phraseByGlyph, sep));
+              }
+              return out.join('\n');
+            })();
+            const wrapped = '\u0060\u0060\u0060yaml\n' + span + '\n\u0060\u0060\u0060';
+            const profitable = !measure || countTokens(wrapped, enc) < countTokens(lines.slice(li, end + 1).join('\n'), enc);
+            if (rebuilt === srcInner.join('\n') && profitable) {
+              flushCsv();
+              outLines.push('\u0060\u0060\u0060yaml', span, '\u0060\u0060\u0060');
+              systems.add('Y');
+              li = end; // loop's li++ moves past the closing fence
+              continue;
+            }
+          }
+        }
+      }
+      // JSON line family run (same flat-key sequence across >= 2 lines)
+      if (line.startsWith('{')) {
+        let j2 = li;
+        while (j2 < lines.length && lines[j2].startsWith('{')) j2++;
+        if (j2 - li >= 2) {
+          const run = lines.slice(li, j2);
+          const srcRun = srcLines.slice(li, j2);
+          let keys: string[] | null = null;
+          let vals: string[][] = [];
+          let famOk = true;
+          for (const l of run) {
+            try {
+              const o = JSON.parse(l);
+              if (typeof o !== 'object' || o === null || Array.isArray(o)) { famOk = false; break; }
+              const ks = Object.keys(o);
+              if (keys === null) keys = ks;
+              else if (ks.join('\u0001') !== keys.join('\u0001')) { famOk = false; break; }
+              const raw: string[] = [];
+              for (const key of ks) {
+                const v = JSON.stringify((o as Record<string, unknown>)[key]);
+                if (v.includes(' ') || v.includes('\n')) { famOk = false; break; }
+                raw.push(v);
+              }
+              if (!famOk) break;
+              vals.push(raw);
+            } catch { famOk = false; break; }
+          }
+          if (famOk && keys !== null && keys.every((key) => KEY_RE.test(key))) {
+            const span = mark + 'F' + keys.join(' ') + '\n' + vals.map((r) => r.join(' ')).join('\n') + mark;
+            const rebuilt = vals
+              .map((r) => '{' + keys!.map((key, c) => '"' + key + '":' + expandBody(r[c], mark, regionByGlyph, phraseByGlyph, sep)).join(',') + '}')
+              .join('\n');
+            const profitable = !measure || countTokens(span, enc) < countTokens(run.join('\n'), enc);
+            if (rebuilt === srcRun.join('\n') && profitable) {
+              flushCsv();
+              outLines.push(span);
+              systems.add('F');
+              li = j2 - 1;
+              continue;
+            }
+          }
+        }
+      }
+    }
+
     const tsLine = tsTransposeLine(line, mark, enc, measure);
     if (tsLine !== line) systems.add('T');
 
@@ -690,7 +875,7 @@ export function rosettaTranspose(
 
   // G2 — the assembled body must expand back to the original text (with the
   // phrase map in W mode: the fold is part of what must invert).
-  if (expandBody(body, mark, regionByGlyph, phraseByGlyph) !== text) return empty;
+  if (expandBody(body, mark, regionByGlyph, phraseByGlyph, sep) !== text) return empty;
 
   // W-wires carry the flag line so the decoder reaches phrase mode; the flag
   // glyph is window-reserved, so it can never occur in a plain wire's body.
@@ -750,8 +935,10 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   if (wire.startsWith('[⌘STENCIL]')) return stencilDecode(wire);
   if (wire.startsWith('[Ϻ]')) return morphDecode(wire);
   if (wire.startsWith(KAPPA_SENTINEL)) return kappaDecode(wire, enc);
-  // PHRASEBOOK-φ member lane: φ\n / φφ\n sentinels dispatch to its decoder.
+  // PHRASEBOOK-φ member lane: bare-φ / φφ sentinels dispatch to its decoder.
   if (wire.startsWith(PHRASE_SENTINEL) || wire.startsWith(PHRASE_LITERAL)) return phraseDecode(wire, enc);
+  // TAU member lane: τ\n / ττ\n sentinels dispatch to its decoder.
+  if (wire.startsWith(TAU_SENTINEL) || wire.startsWith(TAU_LITERAL)) return tauDecode(wire, enc);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
   if (wire.includes('⟐')) return helixDecode(wire);
@@ -766,11 +953,13 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
       }
       // W-wire: the flag glyph (window-reserved, never a region glyph, never
       // in a plain body) followed by a newline switches on phrase expansion.
+      // The Y-separator glyph is two window slots past the region table.
       const flag = pool[idx + 1 + RNS1_REGIONS.length];
+      const ysep = pool[idx + 2 + RNS1_REGIONS.length] ?? null;
       if (flag !== undefined && wire.length >= 4 && wire[2] === flag && wire[3] === '\n') {
-        return expandBody(wire.slice(4), mark, regionByGlyph, phraseCodebook(enc).byGlyph);
+        return expandBody(wire.slice(4), mark, regionByGlyph, phraseCodebook(enc).byGlyph, ysep);
       }
-      return expandBody(wire.slice(2), mark, regionByGlyph);
+      return expandBody(wire.slice(2), mark, regionByGlyph, null, ysep);
     }
   }
   return wire;
@@ -895,7 +1084,7 @@ async function rosettaEncodeUncached(
     text.includes('⟐') ||
     ['[MZ1]\n', '[SG1]\n', '[P1]\n', '[M1]\n', '⟨QSR⟩\n', '[PX]\n', '[[VX1\n', '[AX1]\n',
      '[TS1]\n', '[ST1]\n', '[RP1]\n', '[TR1]\n', '[CL1]\n', '[SP1]\n', '[⌘STENCIL]', '[Ϻ]', 'κ\n',
-     'φ\n', 'φφ\n']
+     'φ', 'τ\n', 'ττ\n']
       .some((s) => text.startsWith(s));
   if (!ambiguousIdentity) admit('identity', text, () => text);
 
@@ -934,6 +1123,13 @@ async function rosettaEncodeUncached(
   {
     const phr = phraseEncode(text, enc);
     if (phr.exact && phr.decoded === text) admit('phrase', phr.wire, () => phraseDecode(phr.wire, enc));
+  }
+
+  // TAU-τ1 member — delimiter tables + YAML transposition (R2). Identity-
+  // fallback wires are blocked by the same ambiguity guard inside admit.
+  {
+    const tu = tauEncode(text, enc);
+    if (tu.exact && tu.decoded === text) admit('tau', tu.wire, () => tauDecode(tu.wire, enc), tu.systems);
   }
 
   {
@@ -1050,7 +1246,7 @@ async function rosettaEncodeUncached(
 export function rosettaDecoderPrompt(): string {
   const pool = rosettaPool('o200k_base');
   return [
-    '# ⟿ ROSETTA-R1 — byte-exact notational transposition wire',
+    '# ⟿ ROSETTA-R2 — byte-exact notational transposition wire',
     'A ROSETTA message is: <glyph>\\n<body>. The first glyph comes from the',
     'ROSETTA glyph pool (version-stable, tokenizer-verified single-token',
     'characters; reference: rosettaPool in src/lib/omega/rosetta.ts). Its pool',
@@ -1067,15 +1263,29 @@ export function rosettaDecoderPrompt(): string {
     '   the exact compact JSON {"k":v,…} preserving key order.',
     '3. marker + C + rows + marker → a comma table. Each line\'s fields were',
     '   space-joined; re-join them with commas.',
+    '3a. marker + P + rows + marker → a pipe table. Each line\'s fields were',
+    '   space-joined; re-join with pipe-space " | " and wrap in pipes and',
+    '   spaces: "team tickets sla" → "| team | tickets | sla |".',
+    '3b. marker + F + keys + newline + value-rows + marker → a JSON line',
+    '   family. The first line is the shared key sequence (space-joined);',
+    '   each row carries one record\'s values (space-joined raw JSON',
+    '   literals). Rebuild one compact JSON object per row:',
+    '   keys [a b] + row [1 "x"] → {"a":1,"b":"x"}.',
+    '3c. inside a \\u0060\\u0060\\u0060yaml block, marker + Y + name + SEP + k=v SEP',
+    '   k=v … + marker → flat YAML: the name line, then "  k: v" per pair',
+    '   (SEP = pool[k+2+RNS-1 size]; values are literal).',
     `4. any other glyph from pool[k+1 .. k+${RNS1_REGIONS.length}] → its RNS-1 region name.`,
     '5. anything else is literal text.',
-    'Nested marker+timestamp spans inside J and C payloads expand too.',
+    'Nested marker+timestamp spans inside J, C, P and F payloads expand too.',
     'W-wires: when the first body line is a single pool glyph followed by \\n',
     '(the phrase flag, pool[k+1+RNS-1 size]), every Hangul syllable of the',
     'PHRASEBOOK-φ1 codebook (versioned in src/lib/omega/phrase.ts) in the body',
     'expands to its phrase — a folded multi-token spelling restored as one',
-    'glyph. Wires starting φ\\n or φφ\\n are PHRASEBOOK member wires: decode',
-    'them with the φ codebook rules (φφ\\n = forced literal wrap, strip 3).',
+    'glyph. Wires starting φ or φφ are PHRASEBOOK member wires: decode',
+    'them with the φ codebook rules (φφ = forced literal wrap, strip 2).',
+    'Wires starting τ\\n or ττ\\n are TAU-τ1 member wires: decode them with',
+    'the τ table/YAML transposition rules (ττ\\n = forced literal wrap,',
+    'strip 3).',
     'Reconstruction is byte-exact; nothing was summarised or dropped.',
     `Pool head (o200k): ${pool.slice(0, 6).join(' ')} … full pool and region order are versioned in rosetta.ts.`,
   ].join('\n');

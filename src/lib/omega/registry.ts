@@ -51,6 +51,7 @@ import { eclipseEncode } from './eclipse';
 import { rosettaEncode } from './rosetta';
 import { kappaEncode } from './kappa';
 import { phraseEncode } from './phrase';
+import { tauEncode } from './tau';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -322,8 +323,18 @@ export function codecEntries(): Entry[] {
       },
     },
     {
+      key: 'tau',
+      label: 'τ TAU-τ1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = tauEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
       key: 'rosetta',
-      label: '𓋹 ROSETTA-R1',
+      label: '𓋹 ROSETTA-R2',
       family: 'exact',
       fidelity: 'exact',
       run: async (t, enc) => {

@@ -41,6 +41,7 @@ import { omegaXiCompress, omegaXiDecode } from '@/lib/omega/atom-codec';
 import { rosettaEncode } from '@/lib/omega/rosetta';
 import { kappaEncode } from '@/lib/omega/kappa';
 import { phraseEncode } from '@/lib/omega/phrase';
+import { tauEncode } from '@/lib/omega/tau';
 
 export interface Row {
   key: string; wireTokens: number; deliveredTokens: number | null;
@@ -97,6 +98,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('signet', () => signetEncode(text, enc));
   await run('kappa', () => kappaEncode(text, enc));
   await run('phrase', () => phraseEncode(text, enc));
+  await run('tau', () => tauEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));
   await run('mosaic', () => mosaicEncode(text, enc));
   await run('orbit', async () => orbitEncode(text, enc));

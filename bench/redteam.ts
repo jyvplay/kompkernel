@@ -7,6 +7,7 @@
  * P4 determinism & purity (cache, double-encode, wire-re-encode)
  * P5 cross-encoding (cl100k_base end-to-end)
  * P7 PHRASEBOOK-φ1 + ROSETTA-W adversarial shapes
+ * P8 TAU-τ1 + ROSETTA-R2 adversarial shapes
  */
 import { rosettaEncode, rosettaDecode, rosettaPool } from '@/lib/omega/rosetta';
 import { countTokens } from '@/lib/omega/bpe';
@@ -15,6 +16,7 @@ import { mosaicEncode } from '@/lib/omega/mosaic';
 import { CHAOS_900, MOSAIC_HANDTRACE_300, CHAOS_G_CJK } from './fixtures';
 import { kappaEncode, kappaDecode, KAPPA_SENTINEL, KAPPA_HOLE } from '@/lib/omega/kappa';
 import { phraseEncode, phraseDecode, phraseCodebook } from '@/lib/omega/phrase';
+import { tauEncode, tauDecode, tauMarkers } from '@/lib/omega/tau';
 
 let pass = 0;
 let fail = 0;
@@ -316,9 +318,120 @@ async function p7() {
   }
 }
 
+
+async function p8() {
+  console.log('P8 — TAU-τ1 + ROSETTA-R2 adversarial shapes');
+  const { mark, sep } = tauMarkers('o200k_base');
+
+  // ---- standalone τ shapes: exact + never-worse (safety lane exempt) -------
+  const shapes: Array<[string, string]> = [
+    ['empty', ''],
+    ['single char', 'x'],
+    ['τ sentinel source', 'τ\n| a | b |\n| 1 | 2 |'],
+    ['ττ literal sentinel source', 'ττ\n| a | b |\n| 1 | 2 |'],
+    ['τ without newline', 'τ is a greek letter; | a | b |'],
+    ['marker-poisoned', '| a | b |\n| 1 | 2 |\nstray ' + mark + ' glyph'],
+    ['sep-poisoned', '```yaml\nserver:\n  port: 8080\n  replicas: 4\n```\nstray ' + sep],
+    ['pipe basic', '| team | tickets | sla |\n| search | 14 | 97% |\n| infra | 8 | 99% |'],
+    ['pipe field with pipe inside', '| a|b | c |\n| 1 | 2 |'],
+    ['pipe single row (no fold)', '| a | b |'],
+    ['pipe spaced fields (no fold)', '| team name | tickets |\n| search team | 14 |'],
+    ['pipe field with digit-run', '| id | ts |\n| 42 | 2026 |\n| 43 | 2027 |'],
+    ['yaml basic', '```yaml\nserver:\n  port: 8080\n  timeout_ms: 3000\n  replicas: 4\n```'],
+    ['yaml value with = and spaces', '```yaml\napp:\n  cmd: run --flag=3 yes\n  zone: us-east-1\n```'],
+    ['yaml bracket list', '```yaml\nserver:\n  regions: [us-east-1, eu-west-1]\n  timeout_ms: 3000\n```'],
+    ['yaml single pair (no fold)', '```yaml\nserver:\n  port: 8080\n```'],
+    ['yaml unclosed fence', '```yaml\nserver:\n  port: 8080'],
+    ['comma basic', 'service,env,replicas\ningest,prod,6\nquery,prod,4'],
+    ['comma with empty field (no fold)', 'a,b\n1,\n,3'],
+    ['comma with spaces (no fold)', 'a,b c\n1,2'],
+    ['json family via τ (none expected)', '{"a":1,"b":2}\n{"a":3,"b":4}'],
+    ['mixed doc', '| a | b |\n| 1 | 2 |\nplain\nx,y\n1,2\n```yaml\ns:\n  p: 1\n  q: 2\n```'],
+  ];
+  for (const [label, text] of shapes) {
+    const r = tauEncode(text, 'o200k_base');
+    const back = tauDecode(r.wire, 'o200k_base');
+    const safety = r.notes.startsWith('forced literal wrap');
+    ok(back === text && r.decoded === text && r.exact, `τ ${label} (exact)`, `out=${r.outTokens}/${r.inTokens} systems=[${r.systems.join(',')}]`);
+    ok(safety || r.outTokens <= r.inTokens, `τ ${label} (never-worse)`, `out=${r.outTokens} in=${r.inTokens}`);
+  }
+
+  // τ wire re-encode round-trips (τ-prefixed → wrap path)
+  {
+    const doc = '| team | tickets |\n| search | 14 |\n| infra | 8 |';
+    const w = tauEncode(doc, 'o200k_base');
+    const re = tauEncode(w.wire, 'o200k_base');
+    ok(re.exact && tauDecode(re.wire, 'o200k_base') === w.wire, 'τ wire re-encode exact', `note=${re.notes}`);
+  }
+
+  // decode never throws on garbage
+  {
+    let noThrow = true;
+    for (const g of ['τ', 'τ\n', 'ττ\n', 'τ\n' + mark + 'P', 'τ\n' + mark + 'P2\none row', 'τ\n' + mark + 'C3\na b\nc', 'τ\n' + mark + 'Y' + sep, 'τ\n' + mark + 'Q9\nx', mark, sep, 'τ\n' + mark + 'P0\nx y']) {
+      try { tauDecode(g, 'o200k_base'); } catch { noThrow = false; }
+    }
+    ok(noThrow, 'τ decode never throws on garbage');
+  }
+
+  // ---- ROSETTA-R2 shapes -----------------------------------------------------
+  {
+    // chaos-E: P fires inside the transposition; round-trip + strict improvement
+    const E = 'Weekly report: search quality dipped after the sharding change.\n- p95 latency 480ms (was 210ms)\n- 3 regression bugs filed by QA\n| team | tickets | sla |\n| search | 14 | 97% |\n| infra | 8 | 99% |\n| data | 5 | 91% |\n```yaml\nserver:\n  port: 8080\n  regions: [us-east-1, eu-west-1]\n  timeout_ms: 3000\n```\n{"build":"2841","passed":812,"failed":3,"skipped":17,"flaky":["search-7"]}\nNote: 日文团队报告索引重建将在周五完成，请确认窗口。\naudit 2026-09-15T09:02:33Z deploy finished in 42s\nFollow-ups: revert the sharding flag, re-run the suite, page data-oncall.';
+    const r = await rt(E);
+    ok(r.exact, 'R2 chaos-E exact', `member=${r.r.member} ${r.out}/${r.in} systems=[${r.r.systems.join(',')}]`);
+    ok(r.out < 184, 'R2 chaos-E improves on R1 champion (184)', `${r.out}`);
+    // F-system: same-schema JSON family
+    const FJ = '{"svc":"gateway","status":"ok","checks":14,"ms":812}\n{"svc":"auth","status":"ok","checks":9,"ms":301}\n{"svc":"search","status":"warn","checks":7,"ms":640}';
+    const rf = await rt(FJ);
+    ok(rf.exact, 'R2 JSON family exact', `member=${rf.r.member} ${rf.out}/${rf.in} systems=[${rf.r.systems.join(',')}]`);
+    ok(rf.out < rf.in, 'R2 JSON family profitable', `${rf.out} < ${rf.in}`);
+    // JSON family adversaries: duplicate keys, spaced values, nested objects
+    for (const [lbl, doc] of [
+      ['dup keys', '{"a":1,"a":2}\n{"a":3,"a":4}'],
+      ['spaced string value', '{"a":"x y"}\n{"a":"z w"}'],
+      ['nested object', '{"a":{"b":1}}\n{"a":{"b":2}}'],
+      ['mixed keys order', '{"a":1,"b":2}\n{"b":3,"a":4}'],
+    ] as Array<[string, string]>) {
+      const ra = await rt(doc);
+      ok(ra.exact, `R2 JSON family adversary: ${lbl}`, `member=${ra.r.member} systems=[${ra.r.systems.join(',')}]`);
+    }
+    // pseudo-P source: a source line that looks like a rendered P span
+    const pool = rosettaPool('o200k_base');
+    const pseudoP = pool[0] + 'P' + 'team tickets sla\nsearch 14 97%\ntail line';
+    const rp = await rt(pseudoP);
+    ok(rp.exact, 'pseudo-P source exact (safe wrap)', `member=${rp.r.member} ${rp.out}/${rp.in}`);
+    // pipe + W composition: phrases inside pipe fields
+    const comp = '| svc | status | note |\n| gateway | ok | 影響範囲 checked |\n| auth | ok | タイムアウト none |\nFollow up during the window.';
+    const rc2 = await rt(comp);
+    ok(rc2.exact, 'P+W composition exact', `member=${rc2.r.member} systems=[${rc2.r.systems.join(',')}] ${rc2.out}/${rc2.in}`);
+  }
+
+  // adversarial fuzz incl. table/yaml/json structure + markers + φ/τ sentinels
+  {
+    let fuzzOk = true;
+    let neverWorse = 0;
+    const N = 40;
+    let seed = 192837465;
+    const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+    const alpha = ['|', ' ', ',', '{', '}', '"', ':', '=', '[', ']', '\n', '`', 'y', 'a', 'm', 'l', '1', '4', '9', 'τ', 'φ', mark, sep, 'ぁ', '影', '響', '가', 'ㅌ', '-', '_'];
+    for (let i = 0; i < N; i++) {
+      let doc = '';
+      const len = 40 + Math.floor(rnd() * 320);
+      for (let j = 0; j < len; j++) doc += alpha[Math.floor(rnd() * alpha.length)];
+      const { r, exact, out, in: tin } = await rt(doc);
+      if (!exact) { fuzzOk = false; console.log('    fuzz fail:', JSON.stringify(doc.slice(0, 90))); }
+      if (out <= tin || r.member === 'forced-wrap') neverWorse++;
+      const tr = tauEncode(doc, 'o200k_base');
+      if (!(tr.exact && tauDecode(tr.wire, 'o200k_base') === doc)) { fuzzOk = false; console.log('    τ fuzz fail:', JSON.stringify(doc.slice(0, 90))); }
+    }
+    ok(fuzzOk, 'P8 fuzz exact on table/marker/φ/τ-soaked docs (40)');
+    ok(neverWorse === N, 'P8 fuzz never-worse on table/marker-soaked docs', `${neverWorse}/${N}`);
+  }
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }
