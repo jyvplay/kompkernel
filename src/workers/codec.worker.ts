@@ -26,7 +26,11 @@ import { irisEncodeFromCrown } from '../lib/omega/iris';
 import { kernelEncodeFromCrown } from '../lib/omega/kernel';
 import { zenithEncodeFromKernel } from '../lib/omega/zenith';
 import { eclipseFromCandidates } from '../lib/omega/eclipse';
+import { prismEncode } from '../lib/omega/prism';
 import { spliceEncode } from '../lib/omega/splice';
+import { replayEncode } from '../lib/omega/replay';
+import { raptorEncode } from '../lib/omega/raptor';
+import { foldEncode } from '../lib/omega/fold';
 import { mnemeApply } from '../lib/omega/persistent-dict';
 import type { CodecWorkerRequest, CodecWorkerResponse } from './codec.types';
 
@@ -93,7 +97,11 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const kernel = kernelEncodeFromCrown(input, crown, 'o200k_base');
       const zenith = zenithEncodeFromKernel(input, kernel, 'o200k_base');
       const splice = spliceEncode(input, 'o200k_base');
-      const eclipse = eclipseFromCandidates(input, zenith, splice, 'o200k_base');
+      const replay = replayEncode(input, 'o200k_base');
+      const raptor = raptorEncode(input, 'o200k_base');
+      const fold = foldEncode(input, 'o200k_base');
+      const eclipse = eclipseFromCandidates(input, zenith, splice, replay, raptor, 'o200k_base', fold);
+      const prism = prismEncode(input, 'o200k_base');
 
       const response: CodecWorkerResponse = {
         id,
@@ -126,6 +134,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         kernel,
         zenith,
         eclipse,
+        prism,
       };
       ctx.postMessage(response);
     } catch (error) {
