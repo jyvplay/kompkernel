@@ -19,6 +19,7 @@ import { tesseraEncode } from '../lib/omega/tessera';
 import { strataEncode } from '../lib/omega/strata';
 import { signetEncode } from '../lib/omega/signet';
 import { mosaicEncode } from '../lib/omega/mosaic';
+import { prismEncode } from '../lib/omega/prism';
 import { atlasEncodeCached } from '../lib/omega/atlas';
 import { auroraEncodeCached } from '../lib/omega/aurora';
 import { crownEncodeFromMembers } from '../lib/omega/crown';
@@ -60,6 +61,9 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const strata = strataEncode(input, 'o200k_base');
       const axiom = axiomEncode(input, 'o200k_base', axiomLedger);
       const mosaic = mosaicEncode(input, 'o200k_base');
+      // PRISM re-uses MOSAIC through its own memoized encoder, so this adds the
+      // prepass probes only; the partition DP is not recomputed from scratch.
+      const prism = prismEncode(input, 'o200k_base');
       const orbit = await orbitEncode(input, 'o200k_base', apex, axiomLedger, {
         meridian,
         anaphora,
@@ -113,6 +117,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         strata,
         signet,
         mosaic,
+        prism,
         atlas,
         aurora,
         crown,

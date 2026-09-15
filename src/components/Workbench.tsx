@@ -43,6 +43,7 @@ import { tesseraEncode, TESSERA_SYSTEM_PROMPT, type TesseraResult } from '../lib
 import { strataEncode, STRATA_SYSTEM_PROMPT, type StrataResult } from '../lib/omega/strata';
 import { signetEncode, SIGNET_SYSTEM_PROMPT, type SignetResult } from '../lib/omega/signet';
 import { mosaicEncode, mosaicDecoderPrompt, type MosaicResult } from '../lib/omega/mosaic';
+import { prismDecoderPrompt, type PrismResult } from '../lib/omega/prism';
 import { atlasEncodeCached as atlasEncode, atlasDecoderPrompt, type AtlasResult } from '../lib/omega/atlas';
 import { auroraEncodeCached as auroraEncode, auroraDecoderPrompt, type AuroraResult } from '../lib/omega/aurora';
 import { crownEncodeCached as crownEncode, crownDecoderPrompt, type CrownResult } from '../lib/omega/crown';
@@ -68,7 +69,7 @@ type CodecKey =
   | 'janus' | 'sigma' | 'stencil' | 'morph' | 'chronos' | 'chronosArena' | 'nexus' | 'mneme' | 'apex'
   | 'caveMan' | 'dragi' | 'wenyan' | 'composite' | 'dragiScale' | 'ordos' | 'asgJson'
   | 'astCode' | 'noether' | 'holographic' | 'caveHolo' | 'ibCaveHolo' | 'veritasVx' | 'quasar' | 'helixAp' | 'meridian' | 'plexus'
-  | 'axiom' | 'orbit' | 'anaphora' | 'pulse' | 'tessera' | 'strata' | 'signet' | 'mosaic' | 'atlas' | 'aurora' | 'crown' | 'iris' | 'kernel';
+  | 'axiom' | 'orbit' | 'anaphora' | 'pulse' | 'tessera' | 'strata' | 'signet' | 'mosaic' | 'prism' | 'atlas' | 'aurora' | 'crown' | 'iris' | 'kernel';
 
 interface ParetoRow {
   key: string;
@@ -83,7 +84,7 @@ interface ParetoRow {
 }
 
 const GROUPS: Array<{ label: string; hint: string; keys: CodecKey[] }> = [
-  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
+  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['kernel','iris','crown','prism','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
   { label: '🟡 DUPLEX · SCRIPTED UIs', hint: 'Arena / CI / Artifacts. Compress input and help compress output.', keys: ['chronosArena','chronos','janus'] },
   { label: '🔴 BINARY TRANSPORT', hint: 'Needs middleware / tool-call decoder.', keys: ['omegaXi','omegaE8'] },
   { label: '📝 SEMANTIC (lossy, LLM-readable)', hint: 'Directly readable, not byte-exact.', keys: ['light','balanced','max','extreme','caveMan','dragi','wenyan','composite','dragiScale','ordos','asgJson','astCode','noether','holographic','caveHolo','ibCaveHolo'] },
@@ -93,7 +94,7 @@ const LABEL: Record<string, string> = {
   light: 'Light', balanced: 'Balanced', max: 'Max', extreme: 'Extreme',
   losslessAscii: 'Lossless ASCII', omegaXi: '⚡ Ω-Ξ Atom', omegaE8: 'Σ₈ Ω-Σ E8-Seed', eidolon: '👻 EIDOLON',
   ltp: '📐 LTP', prometheus: '🔥 Prometheus', zeta: 'Ζ Zeta Duplex', janus: '🏛 Janus',
-  kernel: '⊙ KERNEL ★★★★★', iris: '◇ IRIS ★★★★', crown: '♛ CROWN ★★★', aurora: '◇ AURORA ★★★', atlas: '✧ ATLAS ★★★', mosaic: '▦ MOSAIC ★★★', orbit: '◎ ORBIT ★★★', signet: '⌗ SIGNET ★★★', strata: '⨂ STRATA ★★', tessera: '⧉ TESSERA ★★', axiom: '⟦ AXIOM ⟧ ★★', anaphora: '⟐ ANAPHORA', pulse: '⟡ PULSE',
+  kernel: '⊙ KERNEL ★★★★★', iris: '◇ IRIS ★★★★', crown: '♛ CROWN ★★★', aurora: '◇ AURORA ★★★', atlas: '✧ ATLAS ★★★', prism: '◈ PRISM ★★★★', mosaic: '▦ MOSAIC ★★★', orbit: '◎ ORBIT ★★★', signet: '⌗ SIGNET ★★★', strata: '⨂ STRATA ★★', tessera: '⧉ TESSERA ★★', axiom: '⟦ AXIOM ⟧ ★★', anaphora: '⟐ ANAPHORA', pulse: '⟡ PULSE',
   plexus: '✺ PLEXUS ★★', meridian: '☉ MERIDIAN ★', quasar: '✦ QUASAR', helixAp: '⟐ HELIX-AP', veritasVx: '⟁ VERITAS-VX', sigma: 'Σ Schema Fold', stencil: '⌘ Stencil', morph: 'Ϻ Morph', chronos: '👑 Chronos V6', chronosArena: '🏟 Chronos Arena',
   nexus: 'Ω∞ NEXUS ★', mneme: 'Μ Ω-Mneme', apex: 'Λ† APEX ★★',
   caveMan: '🦴 CaveMan', dragi: '🐉 DRAGI-FULL', wenyan: '文言文 Wenyan', composite: '⚡ CaveMan+DRAGI',
@@ -115,6 +116,7 @@ const HINT: Record<string, string> = {
   crown: 'Delivered-objective universal exact tournament. Scores wire+contract across ATLAS, AURORA, MOSAIC, ORBIT, and exact lanes; emits the winning wire verbatim.',
   aurora: 'Original non-tournament delivered objective: the partition DP state carries the lane-contract bitmask, so it optimizes wire+contract during partitioning instead of after.',
   atlas: 'Contract-aware meta-partition: delivered tokens = wire + selected decoder contract. Includes MOSAIC as a member and emits the member wire verbatim.',
+  prism: 'Cascade-over-partition. Every other codec here — MOSAIC included — treats the lane portfolio as a set to CHOOSE ONE FROM. PRISM treats it as an algebra to COMPOSE IN: it searches argmin over (prepass, partition) of tokens(MOSAIC(prepass(x))). A prepass does not merely "run first"; it rewrites the document and thereby changes the regime map the partition DP reads, so the optimiser finds partitions MOSAIC cannot reach at all (agent turn: 198 → 177). p=identity IS MOSAIC and is always evaluated, so PRISM can never lose; every stage leaves its own header, so the wire needs no PRISM sentinel and a degenerate result is bit-identical to MOSAIC. Verified byte-exact on both tokenizers by 681 independent adversarial assertions.',
   mosaic: 'Optimal document partition with per-region codec assignment. Every other codec asks "which algorithm fits this document?"; MOSAIC asks "what is the best partition into regions, and which algorithm fits each one?" — solved exactly by dynamic programming over regime boundaries with real BPE costs. A real agent turn is prose + JSON + logs + code; no single lane serves all of it. The one-region partition is in the search space, so it can never lose (self-test Z15), and a single-region result is emitted bare with zero framing tax.',
   signet: 'Character-class signature alignment. Records are segmented into maximal DIGIT/ALPHA/OTHER runs and grouped by identical class signature, so a numeric field can never be half-absorbed into the template the way LCS does — the defect that shattered a 40-record log into four families. Templates derive from ALL records, family detection is O(chars) not O(len²), and slots feed the typed column coders. Verified never worse than STRATA (self-test G16).',
   strata: 'Typed column decomposition. After transposing records into columns, each column is written as the RULE that generates it — constant / arithmetic / cyclic / affix-factored — chosen by measured argmin, with literal enumeration always available as fallback. Turns O(records) into O(1) per regular column. Verified ≤ TESSERA on every shape (self-test S16).',
@@ -196,6 +198,7 @@ export default function Workbench() {
   const [strataRes, setStrataRes] = useState<StrataResult | null>(null);
   const [signetRes, setSignetRes] = useState<SignetResult | null>(null);
   const [mosaicRes, setMosaicRes] = useState<MosaicResult | null>(null);
+  const [prismRes, setPrismRes] = useState<PrismResult | null>(null);
   const [atlasRes, setAtlasRes] = useState<AtlasResult | null>(null);
   const [auroraRes, setAuroraRes] = useState<AuroraResult | null>(null);
   const [crownRes, setCrownRes] = useState<CrownResult | null>(null);
@@ -244,17 +247,17 @@ export default function Workbench() {
 
   useEffect(() => {
     if (hardTextMode) {
-      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null);
+      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setPrismRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null);
       setAsyncBusy(false);
       return;
     }
     const id = ++runId.current;
     setAsyncBusy(!largeTextMode);
     if (largeTextMode) {
-      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null);
+      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setPrismRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null);
       return;
     }
-      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null);
+      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setPrismRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null);
     // The complete tournament runs in an inline module worker. Terminating the
     // previous worker cancels obsolete input immediately; the UI/main thread
     // never executes BPE mining or dynamic-programming loops.
@@ -274,6 +277,7 @@ export default function Workbench() {
       setPlexusRes(data.plexus); setPulseRes(data.pulse); setAnaphoraRes(data.anaphora);
       setAxiomRes(data.axiom); setOrbitRes(data.orbit); setTesseraRes(data.tessera);
       setStrataRes(data.strata); setSignetRes(data.signet); setMosaicRes(data.mosaic);
+      setPrismRes(data.prism);
       setAtlasRes(data.atlas); setAuroraRes(data.aurora); setCrownRes(data.crown);
       setIrisRes(data.iris);
       setKernelRes(data.kernel);
@@ -317,6 +321,7 @@ export default function Workbench() {
       case 'crown': return { out: crownRes?.wire ?? '⏳ Computing CROWN…', back: crownRes?.decoded ?? input, exact: !!crownRes?.exact, inTok: crownRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: crownRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: crownDecoderPrompt(crownRes), notes: crownRes?.notes ?? '' };
       case 'aurora': return { out: auroraRes?.wire ?? '⏳ Computing AURORA…', back: auroraRes?.decoded ?? input, exact: !!auroraRes?.exact, inTok: auroraRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: auroraRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: auroraDecoderPrompt(auroraRes), notes: auroraRes?.notes ?? '' };
       case 'atlas': return { out: atlasRes?.wire ?? '⏳ Computing ATLAS…', back: atlasRes?.decoded ?? input, exact: !!atlasRes?.exact, inTok: atlasRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: atlasRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: atlasDecoderPrompt(atlasRes), notes: atlasRes?.notes ?? '' };
+      case 'prism': return { out: prismRes?.wire ?? '⏳ Computing PRISM…', back: prismRes?.decoded ?? input, exact: !!prismRes?.exact, inTok: prismRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: prismRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: prismDecoderPrompt(prismRes), notes: prismRes?.notes ?? '' };
       case 'mosaic': return { out: mosaicRes?.wire ?? '⏳ Computing MOSAIC…', back: mosaicRes?.decoded ?? input, exact: !!mosaicRes?.exact, inTok: mosaicRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: mosaicRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: mosaicDecoderPrompt(mosaicRes), notes: mosaicRes?.notes ?? '' };
       case 'signet': return { out: signetRes?.wire ?? '⏳ Computing SIGNET…', back: signetRes?.decoded ?? input, exact: !!signetRes?.exact, inTok: signetRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: signetRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: SIGNET_SYSTEM_PROMPT, notes: signetRes?.notes ?? '' };
       case 'strata': return { out: strataRes?.wire ?? '⏳ Computing STRATA…', back: strataRes?.decoded ?? input, exact: !!strataRes?.exact, inTok: strataRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: strataRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: STRATA_SYSTEM_PROMPT, notes: strataRes?.notes ?? '' };
@@ -360,7 +365,7 @@ export default function Workbench() {
       case 'ibCaveHolo': return { out: ibCaveHolo.output, back: input, exact: false, inTok: countTokens(input,'o200k_base'), outTok: countTokens(ibCaveHolo.output,'o200k_base'), preamble: ibCaveHolo.decoderPrompt + '\n\nOUTPUT CONTRACT: Reuse the same $codes and omit low-density filler in replies. Protected units stay verbatim; code fences verbatim.', notes: 'Pruned semantic.' };
       default: return { out: advancedPreset.output, back: advancedPreset.roundTrip, exact: false, inTok: countTokens(input,'o200k_base'), outTok: countTokens(advancedPreset.output,'o200k_base'), preamble: advancedPreset.decoderPreamble, notes: PRESETS[codec as keyof typeof PRESETS]?.hint ?? '' };
     }
-  }, [codec, input, lossless, omegaXiRes, omegaE8Res, ltpRes, promRes, zetaRes, janusRes, sigmaRes, stencilRes, chronosRes, caRes, nexusRes, mnemeRes, mnemeNexusRes, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, cavemanDefault, dragiFull, wenyan, composite, dragiScale, ordos, asg, ast, noether, holographic, caveHolo, ibCaveHolo, advancedPreset, cavemanLevel, mnemeDict]);
+  }, [codec, input, lossless, omegaXiRes, omegaE8Res, ltpRes, promRes, zetaRes, janusRes, sigmaRes, stencilRes, chronosRes, caRes, nexusRes, mnemeRes, mnemeNexusRes, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, mosaicRes, prismRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, cavemanDefault, dragiFull, wenyan, composite, dragiScale, ordos, asg, ast, noether, holographic, caveHolo, ibCaveHolo, advancedPreset, cavemanLevel, mnemeDict]);
 
   const rows: ParetoRow[] = useMemo(() => {
     const inTok = countTokens(input, 'o200k_base');
@@ -399,6 +404,7 @@ export default function Workbench() {
     if (omegaXiRes?.exact && omegaXiRes.outTokens <= omegaXiRes.inTokens) out.push({ key:'omegaXi', label:'⚡ Ω-Ξ Atom', exact:true, inTokens:omegaXiRes.inTokens, outTokens:omegaXiRes.outTokens, savingsPct:omegaXiRes.savingsPct, fidelityPct:100, safety:'Low', notes:omegaXiRes.codecName });
     if (chronosRes?.exact && chronosRes.outTokens <= chronosRes.inTokens) out.push({ key:'chronos', label:'👑 Chronos', exact:true, inTokens:chronosRes.inTokens, outTokens:chronosRes.outTokens, savingsPct:chronosRes.savingsPct, fidelityPct:100, safety:'Moderate', notes:chronosRes.notes });
     if (mosaicRes?.exact && mosaicRes.outTokens <= mosaicRes.inTokens) out.push({ key:'mosaic', label:'▦ MOSAIC', exact:true, inTokens:mosaicRes.inTokens, outTokens:mosaicRes.outTokens, savingsPct:mosaicRes.savingsPct, fidelityPct:100, safety:'High', notes:mosaicRes.notes });
+    if (prismRes?.exact && prismRes.outTokens <= prismRes.inTokens) out.push({ key:'prism', label:'◈ PRISM', exact:true, inTokens:prismRes.inTokens, outTokens:prismRes.outTokens, savingsPct:prismRes.savingsPct, fidelityPct:100, safety:'High', notes:prismRes.notes });
     if (atlasRes?.exact && atlasRes.deliveredTokens <= atlasRes.inTokens) out.push({ key:'atlas', label:'✧ ATLAS (delivered)', exact:true, inTokens:atlasRes.inTokens, outTokens:atlasRes.deliveredTokens, savingsPct:atlasRes.inTokens ? ((atlasRes.inTokens-atlasRes.deliveredTokens)/atlasRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:atlasRes.notes });
     if (auroraRes?.exact && auroraRes.deliveredTokens <= auroraRes.inTokens) out.push({ key:'aurora', label:'◇ AURORA (delivered)', exact:true, inTokens:auroraRes.inTokens, outTokens:auroraRes.deliveredTokens, savingsPct:auroraRes.inTokens ? ((auroraRes.inTokens-auroraRes.deliveredTokens)/auroraRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:auroraRes.notes });
     if (crownRes?.exact && crownRes.deliveredTokens <= crownRes.inTokens) out.push({ key:'crown', label:'♛ CROWN (delivered)', exact:true, inTokens:crownRes.inTokens, outTokens:crownRes.deliveredTokens, savingsPct:crownRes.inTokens ? ((crownRes.inTokens-crownRes.deliveredTokens)/crownRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:crownRes.notes });
@@ -435,7 +441,7 @@ export default function Workbench() {
     out.push(mk('max', 'Max', convertAdvanced(input, PRESETS.max.options, adv).output, false, 'Moderate', PRESETS.max.hint));
     out.push(mk('extreme', 'Extreme', convertAdvanced(input, PRESETS.extreme.options, adv).output, false, 'Low', PRESETS.extreme.hint));
     return out.sort((a,b) => b.savingsPct - a.savingsPct || b.fidelityPct - a.fidelityPct);
-  }, [input, largeTextMode, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, eidolonRes, nexusRes, mnemeRes, mnemeNexusRes, zetaRes, promRes, ltpRes, sigmaRes, stencilRes, morphRes, omegaE8Res, omegaXiRes, chronosRes, caRes, janusRes, dragiFull, cavemanDefault, wenyan, composite, dragiScale, ordos, noether, holographic, caveHolo, ibCaveHolo, asg, ast, adv]);
+  }, [input, largeTextMode, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, mosaicRes, prismRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, eidolonRes, nexusRes, mnemeRes, mnemeNexusRes, zetaRes, promRes, ltpRes, sigmaRes, stencilRes, morphRes, omegaE8Res, omegaXiRes, chronosRes, caRes, janusRes, dragiFull, cavemanDefault, wenyan, composite, dragiScale, ordos, noether, holographic, caveHolo, ibCaveHolo, asg, ast, adv]);
 
   const selectedRow = rows.find((r) => r.key === codec);
 
@@ -493,7 +499,7 @@ export default function Workbench() {
     URL.revokeObjectURL(url);
   }, [finalOut, codec]);
 
-  const exactLane = ['kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode'].includes(codec);
+  const exactLane = ['kernel','iris','crown','prism','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode'].includes(codec);
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">

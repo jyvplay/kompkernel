@@ -6,3 +6,6 @@ out/
 .env*
 npm-debug.log*
 .DS_Store
+
+# benchmark harness build artifacts (sources are tracked, bundles are not)
+bench/*.mjs

@@ -41,6 +41,7 @@ import { tesseraEncode } from './tessera';
 import { strataEncode } from './strata';
 import { signetEncode } from './signet';
 import { mosaicEncode } from './mosaic';
+import { prismEncode } from './prism';
 import { atlasEncodeCached as atlasEncode } from './atlas';
 import { auroraEncodeCached as auroraEncode } from './aurora';
 import { crownEncodeCached as crownEncode } from './crown';
@@ -163,6 +164,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = mosaicEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'prism',
+      label: '◈ PRISM-P1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = prismEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },

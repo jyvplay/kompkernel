@@ -18,6 +18,7 @@ import type { TesseraResult } from '../lib/omega/tessera';
 import type { StrataResult } from '../lib/omega/strata';
 import type { SignetResult } from '../lib/omega/signet';
 import type { MosaicResult } from '../lib/omega/mosaic';
+import type { PrismResult } from '../lib/omega/prism';
 import type { AtlasResult } from '../lib/omega/atlas';
 import type { AuroraResult } from '../lib/omega/aurora';
 import type { CrownResult } from '../lib/omega/crown';
@@ -56,6 +57,7 @@ export interface CodecWorkerResult {
   strata: StrataResult;
   signet: SignetResult;
   mosaic: MosaicResult;
+  prism: PrismResult;
   atlas: AtlasResult;
   aurora: AuroraResult;
   crown: CrownResult;
