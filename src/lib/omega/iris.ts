@@ -99,6 +99,7 @@ function partitionContract(wire: string, sentinel: '[MZ1]\n' | '[AR1]\n'): strin
     else if (tag === 't') contracts.set('t', 't: TESSERA TS1 structural bindings; literal fallback.');
     else if (tag === 'r') contracts.set('r', 'r: STRATA ST1 structural bindings and HELIX runs; literal fallback.');
     else if (tag === 'b') contracts.set('b', 'b: REPAIR RP1 binary grammar rules expand recursively; unbound text literal.');
+    else if (tag === 'l') contracts.set('l', 'l: TRIE prefix plus suffix rows reconstruct exact lines and final newline.');
   }
   return `${sentinel.trim()} exact partition: line 2 is separator S; split following S<tag><region> pieces, decode each by tag, then join regions with newline. ${[...contracts.values()].join(' ')}`;
 }
