@@ -23,6 +23,8 @@ import type { AuroraResult } from '../lib/omega/aurora';
 import type { CrownResult } from '../lib/omega/crown';
 import type { IrisResult } from '../lib/omega/iris';
 import type { KernelResult } from '../lib/omega/kernel';
+import type { ZenithResult } from '../lib/omega/zenith';
+import type { EclipseResult } from '../lib/omega/eclipse';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -61,6 +63,8 @@ export interface CodecWorkerResult {
   crown: CrownResult;
   iris: IrisResult;
   kernel: KernelResult;
+  zenith: ZenithResult;
+  eclipse: EclipseResult;
 }
 
 export interface CodecWorkerFailure {

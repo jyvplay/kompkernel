@@ -90,6 +90,18 @@ function compactPartition(wire: string, sentinel: '[MZ1]\n' | '[AR1]\n'): string
   if (tags.has('h')) rules.push('h ' + compactHelix());
   if (tags.has('p')) rules.push('p ' + compactPulse());
   if (tags.has('a')) rules.push('a ' + compactAnaphora(bodies.get('a') ?? ''));
+  if (tags.has('d')) rules.push('d PX2 exact: legend rows before [/PX2] map one-character aliases to phrases; expand aliases bottom-to-top; else literal.');
+  if (tags.has('s')) rules.push('s SIGMA exact: decode typed JSONL/CSV schema rows; restore original spelling exactly.');
+  if (tags.has('m')) rules.push('m MERIDIAN exact: decode its visible M1 anaphora/HELIX composition; expand bindings and arithmetic runs; else literal.');
+  if (tags.has('q')) rules.push('q QUASAR exact: decode QSR dictionary bindings bottom-to-top with literal fallback.');
+  if (tags.has('x')) rules.push('x PLEXUS exact: decode PX bindings and nested HELIX composition; literal fallback.');
+  if (tags.has('v')) rules.push('v VERITAS exact: decode VX1 escaped dictionary aliases; all unbound text literal.');
+  if (tags.has('o')) rules.push('o AXIOM exact: decode AX1 exact bindings and nested numeric expansions; literal fallback.');
+  if (tags.has('t')) rules.push('t TESSERA exact: decode TS1 typed structural bindings; literal fallback.');
+  if (tags.has('r')) rules.push('r STRATA exact: decode ST1 structural bindings and HELIX runs; literal fallback.');
+  if (tags.has('b')) rules.push('b REPAIR exact: decode RP1 JSON binary grammar rules recursively; unbound text literal.');
+  if (tags.has('l')) rules.push('l TRIE exact: decode TR1 prefix, suffix list, and trailing-newline flag.');
+  if (tags.has('c')) rules.push('c COLUMN exact: decode CL1 prefix, suffix, middle rows, and trailing-newline flag.');
   return rules.join(' ');
 }
 
