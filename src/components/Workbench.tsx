@@ -115,7 +115,7 @@ const HINT: Record<string, string> = {
   stencil: 'Template induction for recurring shapes with varying values.',
   iris: 'Runtime decoder-contract partial evaluation: CROWN’s exact winning wire is unchanged, while unreachable grammar productions are removed from its decoder contract. Strict delivered-token improvement with one linear scan.',
   kernel: 'Canonical minimal operational contract: chooses the real-BPE minimum of IRIS prose and a semantics-equivalent compact decoder notation. IRIS is the fallback, so delivered tokens never increase; exact CROWN wire is unchanged.',
-  eclipse: 'Contract normal-form refinement over ZENITH: same exact wire, fewer-or-equal delivered tokens when the tokenizer rewards a shorter equivalent decoder instruction.',
+  eclipse: 'Exact readable portfolio over ZENITH, SPLICE, and REPLAY, with tokenizer-measured decoder-contract refinement and identity fallback.',
   zenith: 'Weak-Pareto exact portfolio: CROWN searches the readable exact lanes, then KERNEL compiles the selected decoder contract. It is never worse than MOSAIC/CROWN on delivered real-BPE tokens; strict improvement is input-dependent.',
   crown: 'Delivered-objective universal exact tournament. Scores wire+contract across ATLAS, AURORA, MOSAIC, ORBIT, and exact lanes; emits the winning wire verbatim.',
   aurora: 'Original non-tournament delivered objective: the partition DP state carries the lane-contract bitmask, so it optimizes wire+contract during partitioning instead of after.',

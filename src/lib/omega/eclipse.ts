@@ -1,23 +1,24 @@
 /**
- * ECLIPSE-E1 — contract-cost refinement over ZENITH.
+ * ECLIPSE-E1 — exact readable portfolio plus contract-cost refinement.
  *
- * This codec does not invent a second wire grammar. It searches a small,
- * explicitly semantics-preserving normal-form set for the decoder contract of
- * ZENITH's already exact wire. The only transformations currently admitted are
- * removal of the non-operative adjective "exact" and the equivalent shorter
- * phrase "other text literal" → "else literal". The wire and decoder identity
- * are inherited unchanged; a candidate is accepted only when it is no longer
- * than ZENITH's contract.
+ * ECLIPSE searches a small, explicitly semantics-preserving normal-form set for
+ * the decoder contract of the best exact candidate among ZENITH, SPLICE, and
+ * REPLAY. The admitted contract transformations remove the non-operative
+ * adjective "exact" and shorten "other text literal" to "else literal". A
+ * candidate is accepted only after its full wire, decoder result, and delivered
+ * tokenizer cost are measured.
  *
- * Consequently ECLIPSE is weakly Pareto-dominant over ZENITH on delivered
- * tokens, and can strictly improve only when the tokenizer charges the shorter
- * normal form less. This is intentionally modest: natural-language contract
- * equivalence is the remaining external interface and is not claimed as a
+ * Consequently ECLIPSE is weakly Pareto-dominant over the supplied portfolio on
+ * delivered tokens, and can strictly improve when a candidate such as REPLAY's
+ * readable forward references fits the tokenizer better. This is intentionally
+ * modest: identity/incompressibility prevents strict improvement on every
+ * possible input, and natural-language contract equivalence is not claimed as a
  * theorem.
  */
 import { countTokens, type EncodingName } from './bpe';
 import { zenithEncode, type ZenithResult } from './zenith';
 import { spliceEncode, type SpliceResult } from './splice';
+import { replayEncode, type ReplayResult } from './replay';
 
 export interface EclipseResult extends Omit<ZenithResult, 'renderer'> {
   renderer: 'eclipse-contract';
@@ -78,14 +79,31 @@ export function eclipseFromZenith(text: string, zenith: ZenithResult, enc: Encod
   return eclipseFromBase(text, zenith, enc);
 }
 
-export function eclipseFromCandidates(text: string, zenith: ZenithResult, splice: SpliceResult, enc: EncodingName = 'o200k_base'): EclipseResult {
-  const spliceBase: Refinable = { ...splice, sourceMember: splice.source, encodeMs: splice.encodeMs };
-  return eclipseFromBase(text, splice.deliveredTokens < zenith.deliveredTokens ? spliceBase : zenith, enc);
+export function eclipseFromCandidates(
+  text: string,
+  zenith: ZenithResult,
+  splice: SpliceResult,
+  replay?: ReplayResult | null,
+  enc: EncodingName = 'o200k_base',
+): EclipseResult {
+  const candidates: Refinable[] = [
+    zenith,
+    { ...splice, sourceMember: splice.source, encodeMs: splice.encodeMs },
+  ];
+  if (replay) candidates.push({ ...replay, sourceMember: replay.source, encodeMs: replay.encodeMs });
+  const best = candidates.reduce((winner, candidate) =>
+    candidate.exact && candidate.deliveredTokens < winner.deliveredTokens ? candidate : winner,
+  );
+  return eclipseFromBase(text, best, enc);
 }
 
 export async function eclipseEncode(text: string, enc: EncodingName = 'o200k_base'): Promise<EclipseResult> {
-  const [zenith, splice] = await Promise.all([zenithEncode(text, enc), Promise.resolve(spliceEncode(text, enc))]);
-  return eclipseFromCandidates(text, zenith, splice, enc);
+  const [zenith, splice, replay] = await Promise.all([
+    zenithEncode(text, enc),
+    Promise.resolve(spliceEncode(text, enc)),
+    Promise.resolve(replayEncode(text, enc)),
+  ]);
+  return eclipseFromCandidates(text, zenith, splice, replay, enc);
 }
 
 export interface EclipseSelfTest { name: string; pass: boolean; details: string }
