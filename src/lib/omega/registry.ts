@@ -48,6 +48,8 @@ import { irisEncode } from './iris';
 import { kernelEncode } from './kernel';
 import { zenithEncode } from './zenith';
 import { eclipseEncode } from './eclipse';
+import { rosettaEncode } from './rosetta';
+import { kappaEncode } from './kappa';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -295,6 +297,26 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = pulseEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'kappa',
+      label: 'κ KAPPA-κ1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = kappaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'rosetta',
+      label: '𓋹 ROSETTA-R1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await rosettaEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
