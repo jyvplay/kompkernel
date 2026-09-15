@@ -28,6 +28,7 @@ import { zenithEncodeFromKernel } from '../lib/omega/zenith';
 import { eclipseFromCandidates } from '../lib/omega/eclipse';
 import { rosettaEncode } from '../lib/omega/rosetta';
 import { kappaEncode } from '../lib/omega/kappa';
+import { phraseEncode } from '../lib/omega/phrase';
 import { spliceEncode } from '../lib/omega/splice';
 import { mnemeApply } from '../lib/omega/persistent-dict';
 import type { CodecWorkerRequest, CodecWorkerResponse } from './codec.types';
@@ -98,6 +99,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const eclipse = eclipseFromCandidates(input, zenith, splice, 'o200k_base');
       const rosetta = await rosettaEncode(input, 'o200k_base', { orbit, crown, mosaic, splice });
       const kappa = kappaEncode(input, 'o200k_base');
+      const phrase = phraseEncode(input, 'o200k_base');
 
       const response: CodecWorkerResponse = {
         id,
@@ -132,6 +134,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         eclipse,
         rosetta,
         kappa,
+        phrase,
       };
       ctx.postMessage(response);
     } catch (error) {

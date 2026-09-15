@@ -73,3 +73,32 @@ export const CHAOS_F_LLM_REPORT = [
   '备注：网关和认证迁移已完成，搜索服务还有两个分片待处理，建议明天重试后再确认。',
   'Summary: 2 of 3 migrations verified with no issues found; retry the search shards, then re-run the checks and confirm the counts all match now.',
 ].join('\n');
+
+/**
+ * CHAOS_G — CJK-heavy chaotic heterogeneous fixture (exactly 900 chars, like
+ * CHAOS_900): Japanese incident report + Chinese ops notes + CSV + JSON +
+ * Python + shell + English follow-up. The lane where the PHRASEBOOK-φ1
+ * codebook (standard JP katakana IT loanwords + CN technical terms) has the
+ * most headroom — Japanese carries the worst o200k token tax of any major
+ * language (1.33–2.17× English, masonailab measurements).
+ */
+export const CHAOS_G_CJK: string = [
+  '報告: 深夜帯にモニタリングがアラートを発報しました。',
+  '- 影響範囲: 決済APIのレスポンス遅延 (p99 2.1秒)',
+  '- 原因: データベース接続がタイムアウト、レプリカのフェイルオーバーに失敗',
+  'service,region,status,p99_ms',
+  'payment,ap-northeast-1,degraded,2100',
+  'auth,ap-northeast-1,ok,120',
+  'cart,ap-southeast-1,ok,95',
+  '{"alert":"payment-p99","severity":"P1","ok":false,"pages":["slack"],"ms":2100}',
+  'def check(pool):',
+  '    if pool.exhausted: raise Alert("db timeout")',
+  '    return pool.status',
+  '备注：数据库连接池配置偏低，负载均衡未生效，请检查健康检查参数，必要时重启实例。',
+  '记录：2026-09-15T14:22:08Z 警告 连接池耗尽 (max=50, wait=3s)',
+  '対処: 接続プールの上限を引き上げ、ネットワーク設定を見直します。',
+  '状態: 復旧作業は完了、スループットは通常レベルに戻りました。',
+  '补充：监控显示错误率已回落，健康检查恢复正常，请确认后关闭告警。',
+  'kectl get pods -n payments --watch || aws ec2 describe-instances --region ap-northeast-1',
+  'Next: bump the pool limit, verify the health check, then confirm the alert clears. The morning review will cover pool sizing, alert thresholds, replica failover and the retry budget. (deploy 0123456789abcdef0123456789abcdef01234567).',
+].join('\n');

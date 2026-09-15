@@ -1,5 +1,6 @@
 /** Focused ROSETTA test: self-tests + chaos fixtures + key repo fixtures. */
 import { rosettaEncode, rosettaDecode, rosettaSelfTest, rosettaTranspose, ROSETTA_CHAOS_900 } from '@/lib/omega/rosetta';
+import { phraseSelfTest } from '@/lib/omega/phrase';
 import { countTokens } from '@/lib/omega/bpe';
 import { CHAOS_900, mosaicFixtures, MOSAIC_HANDTRACE_300 } from './fixtures';
 
@@ -12,6 +13,16 @@ async function main() {
     console.log(`${t.pass ? 'PASS' : 'FAIL'}  ${t.name.padEnd(46)} ${t.details}`);
   }
   console.log(`${st.length - fails}/${st.length} pass`);
+
+  console.log('\n=== PHRASEBOOK-φ1 SELF-TESTS ===');
+  const pst = phraseSelfTest('o200k_base');
+  let pfails = 0;
+  for (const t of pst) {
+    if (!t.pass) pfails++;
+    console.log(`${t.pass ? 'PASS' : 'FAIL'}  ${t.name.padEnd(46)} ${t.detail}`);
+  }
+  console.log(`${pst.length - pfails}/${pst.length} pass`);
+  fails += pfails;
 
   console.log('\n=== chaos-900 wire inspection ===');
   const r = await rosettaEncode(ROSETTA_CHAOS_900, 'o200k_base');

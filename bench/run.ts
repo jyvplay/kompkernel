@@ -3,7 +3,7 @@
  * hetero fixture plus the repo's canonical fixture set. Real tokenizer only.
  */
 import { leaderboard, printBoard, type Row } from './leaderboard';
-import { CHAOS_900, mosaicFixtures, MOSAIC_HANDTRACE_300 } from './fixtures';
+import { CHAOS_900, CHAOS_G_CJK, mosaicFixtures, MOSAIC_HANDTRACE_300 } from './fixtures';
 
 // ---------------------------------------------------------------------------
 // THE 900-CHARACTER CHAOTIC HETERO FIXTURE
@@ -22,6 +22,18 @@ async function main() {
 
   const board = await leaderboard(CHAOS_900, encArg);
   printBoard('CHAOS-900', CHAOS_900, encArg, board.rows, board.inTokens);
+
+  const gLen = [...CHAOS_G_CJK].length;
+  console.log(`CHAOS_G length = ${CHAOS_G_CJK.length} chars, ${gLen} code points`);
+  if (CHAOS_G_CJK.length !== 900) {
+    console.error('FIXTURE LENGTH != 900, fix the fixture');
+    process.exit(2);
+  }
+  const gBoard = await leaderboard(CHAOS_G_CJK, encArg);
+  printBoard('CHAOS-G (CJK-heavy)', CHAOS_G_CJK, encArg, gBoard.rows, gBoard.inTokens);
+  const gExact = gBoard.rows.filter((r) => r.exact && r.rt && r.wireTokens >= 0);
+  const gBest = Math.min(...gExact.map((r) => r.wireTokens));
+  console.log(`\nbest wire tokens on CHAOS-G = ${gBest} (${gExact.filter((r) => r.wireTokens === gBest).map((r) => r.key).join(', ')})`);
 
   // Pareto analysis on CHAOS-900: frontier over (wireTokens) for exact codecs.
   const exactRows = board.rows.filter((r) => r.exact && r.rt && r.wireTokens >= 0);

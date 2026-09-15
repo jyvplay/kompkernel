@@ -19,6 +19,7 @@ import type { StrataResult } from '../lib/omega/strata';
 import type { SignetResult } from '../lib/omega/signet';
 import type { RosettaResult } from '../lib/omega/rosetta';
 import type { KappaResult } from '../lib/omega/kappa';
+import type { PhraseResult } from '../lib/omega/phrase';
 import type { MosaicResult } from '../lib/omega/mosaic';
 import type { AtlasResult } from '../lib/omega/atlas';
 import type { AuroraResult } from '../lib/omega/aurora';
@@ -61,6 +62,7 @@ export interface CodecWorkerResult {
   signet: SignetResult;
   rosetta: RosettaResult;
   kappa: KappaResult;
+  phrase: PhraseResult;
   mosaic: MosaicResult;
   atlas: AtlasResult;
   aurora: AuroraResult;

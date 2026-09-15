@@ -57,9 +57,21 @@
  * whole codebook:
  *   mark                 = pool[k]        (span marker, 1 token)
  *   region[i] glyph      = pool[k+1+i]    (versioned region table RNS-1)
+ *   phrase flag          = pool[k+1+RNS-1 size]  (W-wires only)
  * The window [k, k+M) is chosen at encode time to be disjoint from the source
  * text, so no escape sequences are ever needed: a glyph can only mean what
  * the header says it means.
+ *
+ * W-wires (the PHRASEBOOK-φ1 composition, systems=['W',…]):
+ *   <mark>\n<flag>\n<body>
+ * where <body> is the transposition of the PHRASE-FOLDED source: every
+ * occurrence of a PHRASEBOOK-φ1 codebook phrase was first replaced by its
+ * single-token Hangul glyph (U+AC00+, a namespace disjoint from the pool),
+ * then the region/JSON/CSV/timestamp systems ran on top. The flag line is
+ * what makes phrase mode reachable at decode time and NOTHING else: a plain
+ * wire's body can never contain the flag glyph (window disjointness), so a
+ * source that literally contains Hangul can never be phrase-expanded by
+ * accident.
  *
  * In <body>:
  *   mark + <basic-timestamp>        a transposed ISO-8601 instant
@@ -125,6 +137,7 @@ import { axiomDecode } from './axiom';
 import { mosaicEncode, mosaicDecode, type MosaicResult } from './mosaic';
 import { orbitEncode, type OrbitResult } from './orbit';
 import { kappaEncode, kappaDecode, KAPPA_SENTINEL } from './kappa';
+import { phraseEncode, phraseDecode, phraseFold, hasCodebookGlyph, phraseCodebook, PHRASE_SENTINEL, PHRASE_LITERAL } from './phrase';
 import { crownEncodeCached, crownDecode, type CrownResult } from './crown';
 import { spliceEncode, spliceDecode, type SpliceResult } from './splice';
 import { eidolonProject } from './eidolon';
@@ -395,12 +408,13 @@ export interface RosettaTranspose {
 }
 
 /**
- * Pick the glyph window [k, k+M) (M = 1 + table size) disjoint from the
- * source text. The disjointness is what removes the need for escapes.
+ * Pick the glyph window [k, k+M) (M = 2 + table size: mark, RNS-1 regions,
+ * and the W phrase-flag glyph pool[k+1+RNS1_REGIONS.length]) disjoint from
+ * the source text. The disjointness is what removes the need for escapes.
  */
 function pickWindow(text: string, enc: EncodingName): number | null {
   const pool = rosettaPool(enc);
-  const m = 1 + RNS1_REGIONS.length;
+  const m = 2 + RNS1_REGIONS.length;
   if (pool.length < m + 1) return null;
   const src = new Set<string>();
   for (const ch of text) src.add(ch);
@@ -415,8 +429,19 @@ function pickWindow(text: string, enc: EncodingName): number | null {
   return null;
 }
 
-/** Expand a body under a mark and region map. The single decode primitive. */
-function expandBody(s: string, mark: string, regionByGlyph: Map<string, string>): string {
+/**
+ * Expand a body under a mark and region map. The single decode primitive.
+ * `phraseByGlyph` (W-wires only) expands PHRASEBOOK-φ1 glyphs; it is null for
+ * plain transposition wires, so a source that literally contains a codebook
+ * glyph can never be expanded by accident — phrase mode is only reachable
+ * through the dedicated flag line.
+ */
+function expandBody(
+  s: string,
+  mark: string,
+  regionByGlyph: Map<string, string>,
+  phraseByGlyph: Map<string, string> | null = null,
+): string {
   let out = '';
   let i = 0;
   const n = s.length;
@@ -432,7 +457,7 @@ function expandBody(s: string, mark: string, regionByGlyph: Map<string, string>)
       if (s[i + 1] === 'J') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
-          const payload = expandBody(s.slice(i + 2, payloadEnd), mark, regionByGlyph);
+          const payload = expandBody(s.slice(i + 2, payloadEnd), mark, regionByGlyph, phraseByGlyph);
           const pairs = parseKvPayload(payload);
           const json = pairs ? unfoldJsonPairs(pairs) : null;
           if (json !== null) {
@@ -451,7 +476,7 @@ function expandBody(s: string, mark: string, regionByGlyph: Map<string, string>)
           for (const row of rows) {
             const fields = row.split(' ');
             if (fields.length < 2) { ok = false; break; }
-            rebuilt.push(fields.map((f) => expandBody(f, mark, regionByGlyph)).join(','));
+            rebuilt.push(fields.map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph)).join(','));
           }
           if (ok) {
             out += rebuilt.join('\n');
@@ -469,6 +494,14 @@ function expandBody(s: string, mark: string, regionByGlyph: Map<string, string>)
       out += region;
       i++;
       continue;
+    }
+    if (phraseByGlyph !== null) {
+      const phrase = phraseByGlyph.get(c);
+      if (phrase !== undefined) {
+        out += phrase;
+        i++;
+        continue;
+      }
     }
     out += c;
     i++;
@@ -542,8 +575,19 @@ const TRANSPOSE_CAP = 120_000;
  * The transposition itself: region glyphs → JSON folds → comma-table folds →
  * timestamp folds. G1: every span is re-expanded and byte-compared before it
  * may enter the wire; G2: the assembled body must expand to the source.
+ *
+ * `folded` (W system, PHRASEBOOK-φ1): when non-null it is the phrase-folded
+ * variant of `text` (glyphs already substituting codebook phrases); the whole
+ * pipeline then runs on it and the wire gains the flag line
+ * pool[k+1+RNS1_REGIONS.length] + '\n' so the decoder knows to expand phrase
+ * glyphs. Folding happens BEFORE the region pass; phrases contain no kana and
+ * no newlines, so window disjointness and line alignment are untouched.
  */
-export function rosettaTranspose(text: string, enc: EncodingName = 'o200k_base'): RosettaTranspose {
+export function rosettaTranspose(
+  text: string,
+  enc: EncodingName = 'o200k_base',
+  folded: string | null = null,
+): RosettaTranspose {
   const empty: RosettaTranspose = { wire: null, mark: '', windowStart: -1, systems: [] };
   if (!text || text.length > TRANSPOSE_CAP) return empty;
   const k = pickWindow(text, enc);
@@ -551,16 +595,17 @@ export function rosettaTranspose(text: string, enc: EncodingName = 'o200k_base')
   const pool = rosettaPool(enc);
   const mark = pool[k];
   const measure = text.length <= MEASURE_CAP;
+  const phraseByGlyph = folded !== null ? phraseCodebook(enc).byGlyph : null;
 
   // ---- region pass (RS) ----------------------------------------------------
-  let t = text;
+  let t = folded ?? text;
   const regionByGlyph = new Map<string, string>();
   for (let i = 0; i < RNS1_REGIONS.length; i++) {
     const glyph = pool[k + 1 + i];
     regionByGlyph.set(glyph, RNS1_REGIONS[i]);
     if (t.includes(RNS1_REGIONS[i])) t = t.split(RNS1_REGIONS[i]).join(glyph);
   }
-  const hasRegions = t !== text;
+  const hasRegions = t !== (folded ?? text);
 
   // ---- per-line structural pass (J, C) with inline TS ----------------------
   // `lines` are region-passed; `srcLines` are the original source lines. The
@@ -568,7 +613,7 @@ export function rosettaTranspose(text: string, enc: EncodingName = 'o200k_base')
   const lines = t.split('\n');
   const srcLines = text.split('\n');
   const outLines: string[] = [];
-  const systems = new Set<string>(hasRegions ? ['R'] : []);
+  const systems = new Set<string>([...(folded !== null ? ['W'] : []), ...(hasRegions ? ['R'] : [])]);
   let csvRun: string[] = [];
   let csvRunOrig: string[] = [];
   let csvRunSrc: string[] = [];
@@ -579,11 +624,12 @@ export function rosettaTranspose(text: string, enc: EncodingName = 'o200k_base')
       const span = mark + 'C' + payload + mark;
       const orig = csvRunOrig.join('\n');
       // G1: a C span decodes DIRECTLY to the source rows — decode expands
-      // nested timestamp spans AND region glyphs inside the payload — so the
-      // byte-compare target is the pre-region SOURCE run, not the glyphed one.
+      // nested timestamp spans, region glyphs AND (W-wires) phrase glyphs
+      // inside the payload — so the byte-compare target is the pre-region
+      // SOURCE run, not the glyphed one.
       const rebuilt = payload
         .split('\n')
-        .map((row) => row.split(' ').map((f) => expandBody(f, mark, regionByGlyph)).join(','))
+        .map((row) => row.split(' ').map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph)).join(','))
         .join('\n');
       const srcRows = csvRunSrc.join('\n');
       const profitable = !measure || countTokens(span, enc) < countTokens(orig, enc);
@@ -642,10 +688,14 @@ export function rosettaTranspose(text: string, enc: EncodingName = 'o200k_base')
   if (systems.size === 0) return empty;
   const body = outLines.join('\n');
 
-  // G2 — the assembled body must expand back to the original text.
-  if (expandBody(body, mark, regionByGlyph) !== text) return empty;
+  // G2 — the assembled body must expand back to the original text (with the
+  // phrase map in W mode: the fold is part of what must invert).
+  if (expandBody(body, mark, regionByGlyph, phraseByGlyph) !== text) return empty;
 
-  return { wire: mark + '\n' + body, mark, windowStart: k, systems: [...systems] };
+  // W-wires carry the flag line so the decoder reaches phrase mode; the flag
+  // glyph is window-reserved, so it can never occur in a plain wire's body.
+  const wire = folded !== null ? mark + '\n' + pool[k + 1 + RNS1_REGIONS.length] + '\n' + body : mark + '\n' + body;
+  return { wire, mark, windowStart: k, systems: [...systems] };
 }
 
 /** Transpose every extended timestamp in one line to mark + basic form. */
@@ -700,8 +750,10 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   if (wire.startsWith('[⌘STENCIL]')) return stencilDecode(wire);
   if (wire.startsWith('[Ϻ]')) return morphDecode(wire);
   if (wire.startsWith(KAPPA_SENTINEL)) return kappaDecode(wire, enc);
+  // PHRASEBOOK-φ member lane: φ\n / φφ\n sentinels dispatch to its decoder.
+  if (wire.startsWith(PHRASE_SENTINEL) || wire.startsWith(PHRASE_LITERAL)) return phraseDecode(wire, enc);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
-  // glyph is a helix wire — the same default mosaic's bareDecode applies.
+    // glyph is a helix wire — the same default mosaic's bareDecode applies.
   if (wire.includes('⟐')) return helixDecode(wire);
   if (wire.length >= 2 && wire[1] === '\n') {
     const pool = rosettaPool(enc);
@@ -711,6 +763,12 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
       const regionByGlyph = new Map<string, string>();
       for (let i = 0; i < RNS1_REGIONS.length; i++) {
         regionByGlyph.set(pool[idx + 1 + i], RNS1_REGIONS[i]);
+      }
+      // W-wire: the flag glyph (window-reserved, never a region glyph, never
+      // in a plain body) followed by a newline switches on phrase expansion.
+      const flag = pool[idx + 1 + RNS1_REGIONS.length];
+      if (flag !== undefined && wire.length >= 4 && wire[2] === flag && wire[3] === '\n') {
+        return expandBody(wire.slice(4), mark, regionByGlyph, phraseCodebook(enc).byGlyph);
       }
       return expandBody(wire.slice(2), mark, regionByGlyph);
     }
@@ -836,7 +894,8 @@ async function rosettaEncodeUncached(
     (text.length >= 2 && text[1] === '\n' && rosettaPool(enc).includes(text[0])) ||
     text.includes('⟐') ||
     ['[MZ1]\n', '[SG1]\n', '[P1]\n', '[M1]\n', '⟨QSR⟩\n', '[PX]\n', '[[VX1\n', '[AX1]\n',
-     '[TS1]\n', '[ST1]\n', '[RP1]\n', '[TR1]\n', '[CL1]\n', '[SP1]\n', '[⌘STENCIL]', '[Ϻ]', 'κ\n']
+     '[TS1]\n', '[ST1]\n', '[RP1]\n', '[TR1]\n', '[CL1]\n', '[SP1]\n', '[⌘STENCIL]', '[Ϻ]', 'κ\n',
+     'φ\n', 'φφ\n']
       .some((s) => text.startsWith(s));
   if (!ambiguousIdentity) admit('identity', text, () => text);
 
@@ -854,6 +913,27 @@ async function rosettaEncodeUncached(
     }
     // If no clear window exists either, no safe wrap is possible; the final
     // identity fallback below carries an explicit decode caveat in `notes`.
+  }
+
+  // ---- W system: PHRASEBOOK-φ1 fold before the region pass ------------------
+  // Skipped entirely when the source contains a codebook glyph (a literal
+  // glyph would counterfeit a phrase on expansion); the argmin against the
+  // plain transposition member makes the flag-line overhead self-policing.
+  if (!hasCodebookGlyph(text, enc)) {
+    const folded = phraseFold(text, enc);
+    if (folded !== text) {
+      const trW = rosettaTranspose(text, enc, folded);
+      if (trW.wire !== null && trW.wire !== tr.wire && rosettaDecode(trW.wire, enc) === text) {
+        admit('rosetta-W', trW.wire, () => rosettaDecode(trW.wire as string, enc), trW.systems);
+      }
+    }
+  }
+
+  // PHRASEBOOK-φ1 member — the standalone codebook lane (identity-fallback
+  // wires are blocked by the same ambiguity guard as identity inside admit).
+  {
+    const phr = phraseEncode(text, enc);
+    if (phr.exact && phr.decoded === text) admit('phrase', phr.wire, () => phraseDecode(phr.wire, enc));
   }
 
   {
@@ -990,6 +1070,12 @@ export function rosettaDecoderPrompt(): string {
     `4. any other glyph from pool[k+1 .. k+${RNS1_REGIONS.length}] → its RNS-1 region name.`,
     '5. anything else is literal text.',
     'Nested marker+timestamp spans inside J and C payloads expand too.',
+    'W-wires: when the first body line is a single pool glyph followed by \\n',
+    '(the phrase flag, pool[k+1+RNS-1 size]), every Hangul syllable of the',
+    'PHRASEBOOK-φ1 codebook (versioned in src/lib/omega/phrase.ts) in the body',
+    'expands to its phrase — a folded multi-token spelling restored as one',
+    'glyph. Wires starting φ\\n or φφ\\n are PHRASEBOOK member wires: decode',
+    'them with the φ codebook rules (φφ\\n = forced literal wrap, strip 3).',
     'Reconstruction is byte-exact; nothing was summarised or dropped.',
     `Pool head (o200k): ${pool.slice(0, 6).join(' ')} … full pool and region order are versioned in rosetta.ts.`,
   ].join('\n');
@@ -1161,6 +1247,40 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
     });
   } catch (e) {
     out.push({ name: 'C4 chaos-900 beats best rival wire (incl. duplex lanes)', pass: false, details: (e as Error).message });
+  }
+
+  // C6/C7: the W system (PHRASEBOOK-φ1 composed into the transposition) and
+  // its glyph-poisoning adversary. C6 checks the W transpose directly: it
+  // must fire on a phrase-heavy sample, decode byte-exact, and not lose to
+  // the plain transposition. C7 poisons the source with a literal codebook
+  // glyph: W must be skipped entirely and the emitted wire must still decode.
+  try {
+    const WSAMPLE =
+      '報告: 影響範囲はデータベースのタイムアウトによるものです。対応: モニタリングとアラート設定を再確認します。\n' +
+      '备注：连接池和负载均衡需要健康检查，必要时重启实例。\n' +
+      'audit: 2026-09-15T08:22:41Z WARN payment degraded (p99=890ms) us-east-1';
+    const folded = phraseFold(WSAMPLE, enc);
+    const trW = rosettaTranspose(WSAMPLE, enc, folded);
+    const trP = rosettaTranspose(WSAMPLE, enc);
+    const wOk = trW.wire !== null && trW.systems.includes('W') && rosettaDecode(trW.wire, enc) === WSAMPLE;
+    const wWin = trP.wire === null
+      || countTokens(trW.wire as string, enc) < countTokens(trP.wire, enc);
+    out.push({
+      name: 'C6 W transpose fires, decodes, beats plain T',
+      pass: wOk && wWin,
+      details: `W ${trW.wire ? countTokens(trW.wire, enc) : '∅'} vs T ${trP.wire ? countTokens(trP.wire, enc) : '∅'} · systems=[${trW.systems.join(',')}]`,
+    });
+    const g = [...phraseCodebook(enc).byGlyph.keys()][0];
+    const poisoned = WSAMPLE + '\nstray ' + g + ' glyph';
+    const rp = await rosettaEncode(poisoned, enc);
+    out.push({
+      name: 'C7 glyph-poisoned source: W skipped, decode-safe',
+      pass: rp.exact && rosettaDecode(rp.wire, enc) === poisoned && !rp.systems.includes('W') && rp.outTokens <= rp.inTokens,
+      details: `${rp.member} ${rp.inTokens}→${rp.outTokens} systems=[${rp.systems.join(',')}]`,
+    });
+  } catch (e) {
+    out.push({ name: 'C6 W transpose fires, decodes, beats plain T', pass: false, details: (e as Error).message });
+    out.push({ name: 'C7 glyph-poisoned source: W skipped, decode-safe', pass: false, details: (e as Error).message });
   }
 
   return out;

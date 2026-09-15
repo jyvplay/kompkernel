@@ -6,13 +6,15 @@
  * P3 grammar fuzz (random structured docs, exactness + never-worse)
  * P4 determinism & purity (cache, double-encode, wire-re-encode)
  * P5 cross-encoding (cl100k_base end-to-end)
+ * P7 PHRASEBOOK-φ1 + ROSETTA-W adversarial shapes
  */
 import { rosettaEncode, rosettaDecode, rosettaPool } from '@/lib/omega/rosetta';
 import { countTokens } from '@/lib/omega/bpe';
 import { signetEncode } from '@/lib/omega/signet';
 import { mosaicEncode } from '@/lib/omega/mosaic';
-import { CHAOS_900, MOSAIC_HANDTRACE_300 } from './fixtures';
+import { CHAOS_900, MOSAIC_HANDTRACE_300, CHAOS_G_CJK } from './fixtures';
 import { kappaEncode, kappaDecode, KAPPA_SENTINEL, KAPPA_HOLE } from '@/lib/omega/kappa';
+import { phraseEncode, phraseDecode, phraseCodebook } from '@/lib/omega/phrase';
 
 let pass = 0;
 let fail = 0;
@@ -200,9 +202,123 @@ async function p6() {
   ok(noThrow, 'κ decode never throws on garbage');
 }
 
+
+async function p7() {
+  console.log('P7 — PHRASEBOOK-φ1 + ROSETTA-W adversarial shapes');
+  const glyphs = [...phraseCodebook('o200k_base').byGlyph.keys()];
+  const jp = '影響範囲はデータベースのタイムアウトです。対応: モニタリングとアラートの再起動をします。';
+  const cn = '备注：连接池和负载均衡需要健康检查，必要时请检查配置，已完成版本回滚。';
+
+  // ---- standalone φ shapes: exact + never-worse (safety lane exempt) -------
+  const shapes: Array<[string, string]> = [
+    ['empty', ''],
+    ['single char', 'x'],
+    ['φ sentinel source', 'φ\n' + jp],
+    ['φφ literal sentinel source', 'φφ\n' + jp],
+    ['φ without newline', 'φ is a greek letter, 影響範囲 not folded from here'],
+    ['glyph-poisoned mid-text', 'before ' + glyphs[5] + ' after 影響範囲 phrase present'],
+    ['glyph-poisoned + phrases', jp + '\nstray ' + glyphs[0] + ' glyph'],
+    ['phrase-heavy jp', jp],
+    ['phrase-heavy cn', cn],
+    ['overlap chain', ' I will be there and the plan of the week will be noted.'],
+    ['repeat x8', 'the root cause of the blast radius\n'.repeat(8)],
+    ['phrase inside JSON', '{"msg":"影響範囲 and the タイムアウト of the run","code":404}'],
+    ['phrase inside CSV field', 'note,impact\nrow1,影響範囲\nrow2,タイムアウト'],
+    ['phrase adjacent to timestamp', 'at 2026-09-15T06:02:11Z the 影響範囲 was measured'],
+    ['non-codebook hangul source', '한국어 텍스트가 여기에 있습니다 影響範囲 mixed'],
+    ['chaos-G fixture', CHAOS_G_CJK],
+    ['long phrase-dense', (jp + '\n' + cn + '\n').repeat(40)],
+  ];
+  for (const [label, text] of shapes) {
+    const r = phraseEncode(text, 'o200k_base');
+    const back = phraseDecode(r.wire, 'o200k_base');
+    const safety = r.notes.startsWith('forced literal wrap');
+    ok(back === text && r.decoded === text && r.exact, `φ ${label} (exact)`, `out=${r.outTokens}/${r.inTokens} applied=${r.applied}`);
+    ok(safety || r.outTokens <= r.inTokens, `φ ${label} (never-worse)`, `out=${r.outTokens} in=${r.inTokens}`);
+  }
+
+  // glyph-poisoned must NOT fold (identity wire, decode-safe)
+  {
+    const poisoned = jp + ' ' + glyphs[3];
+    const r = phraseEncode(poisoned, 'o200k_base');
+    ok(!r.applied && r.wire === poisoned, 'φ poisoned source stays identity');
+  }
+
+  // φ wire re-encode: the wire starts with the φ sentinel → literal wrap path
+  {
+    const w = phraseEncode(CHAOS_G_CJK, 'o200k_base');
+    const re = phraseEncode(w.wire, 'o200k_base');
+    ok(re.exact && phraseDecode(re.wire, 'o200k_base') === w.wire, 'φ wire re-encode exact', `note=${re.notes}`);
+  }
+
+  // decode never throws on garbage
+  {
+    let noThrow = true;
+    for (const g of ['φ', 'φ\n', 'φφ\n', 'φ\n' + glyphs[0], 'φφ\nφ\n' + glyphs[1] + glyphs[2], '♡', glyphs.slice(0, 30).join('')]) {
+      try { phraseDecode(g, 'o200k_base'); } catch { noThrow = false; }
+    }
+    ok(noThrow, 'φ decode never throws on garbage');
+  }
+
+  // ---- ROSETTA-W shapes -----------------------------------------------------
+  {
+    const r = await rt(CHAOS_G_CJK);
+    ok(r.exact, 'W chaos-G exact', `member=${r.r.member} ${r.out}/${r.in} systems=[${r.r.systems.join(',')}]`);
+    ok(r.out < r.in, 'W chaos-G profitable', `${r.out} < ${r.in}`);
+    const r2 = await rt(jp + '\n' + cn);
+    ok(r2.exact, 'W jp+cn exact', `member=${r2.r.member} systems=[${r2.r.systems.join(',')}]`);
+  }
+  {
+    // glyph-poisoned: W must be skipped entirely, wire still decodes
+    const poisoned = CHAOS_G_CJK + '\nstray ' + glyphs[0] + ' glyph';
+    const { r, exact } = await rt(poisoned);
+    ok(exact && !r.systems.includes('W'), 'W skipped on glyph-poisoned source', `member=${r.member} systems=[${r.systems.join(',')}]`);
+  }
+  {
+    // pseudo-W source: starts like a W wire (pool glyph, newline, flag-looking
+    // glyph, newline) — G5 must force a safe wrap; round-trip byte-exact.
+    const pool = rosettaPool('o200k_base');
+    const pseudoW = pool[10] + '\n' + pool[10 + 1 + 103] + '\n' + jp + '\nplain tail';
+    const { r, exact } = await rt(pseudoW);
+    ok(exact, 'pseudo-W source exact (forced safe wrap)', `member=${r.member} ${r.out}/${r.in}`);
+  }
+  {
+    // φ-sentinel source through ROSETTA: identity withheld, decode-safe
+    const phiSource = 'φ\n' + jp;
+    const { r, exact } = await rt(phiSource);
+    ok(exact, 'φ-sentinel source through ROSETTA exact', `member=${r.member}`);
+  }
+  {
+    // W wire re-encode: a W wire fed back through rosettaEncode round-trips
+    const first = await rosettaEncode(CHAOS_G_CJK, 'o200k_base');
+    const re = await rt(first.wire);
+    ok(re.exact, 'W wire re-encode exact', `member=${re.r.member}`);
+  }
+
+  // adversarial fuzz incl. codebook glyphs + φ + kana + JSON/CSV structure
+  {
+    let fuzzOk = true;
+    let neverWorse = 0;
+    const N = 40;
+    let seed = 987654321;
+    const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+    const alpha = ['a', 'b', ' ', '\n', ',', '"', '{', '}', '=', ':', '1', '9', 'φ', 'ぁ', 'あ', ...glyphs.slice(0, 8), '影', '響', '範', '囲', '校', '한', '글'];
+    for (let i = 0; i < N; i++) {
+      let doc = '';
+      const len = 40 + Math.floor(rnd() * 300);
+      for (let j = 0; j < len; j++) doc += alpha[Math.floor(rnd() * alpha.length)];
+      const { r, exact, out, in: tin } = await rt(doc);
+      if (!exact) { fuzzOk = false; console.log('    fuzz fail:', JSON.stringify(doc.slice(0, 80))); }
+      if (out <= tin || r.member === 'forced-wrap') neverWorse++;
+    }
+    ok(fuzzOk, 'P7 fuzz exact on glyph/φ-soaked docs (40)');
+    ok(neverWorse === N, 'P7 fuzz never-worse on glyph/φ-soaked docs', `${neverWorse}/${N}`);
+  }
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }
