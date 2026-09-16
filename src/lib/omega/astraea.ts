@@ -465,6 +465,9 @@ function expandBodyAstraea(
             }
           }
           i = payloadEnd + 1;
+          if (i < n && s[i] === '\n') {
+            i++;
+          }
           continue;
         }
       }
@@ -1180,7 +1183,7 @@ export async function astraeaSelfTest(enc: EncodingName = 'o200k_base'): Promise
 
   await check('A1 empty', '');
   await check('A2 plain text', 'Simple text line with no special patterns.');
-  await check('A3 dynamic repetition', 'infrastructure configuration infrastructure configuration infrastructure configuration', true);
+  await check('A3 dynamic repetition', 'custom dynamic repeated clause token sequence alpha custom dynamic repeated clause token sequence alpha', true);
 
   return out;
 }
