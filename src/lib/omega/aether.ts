@@ -179,6 +179,12 @@ export const AETHER_PHRASEBOOK_STRINGS: string[] = [
   'スループットは通常レベルに戻りました',
   '健康检查恢复正常',
   '请确认后关闭告警',
+
+  // High-Frequency Technical Subwords & Prompt Multi-Tokens (≥2 tokens)
+  ' partitioning', ' utilization', ' implementation', ' configuration', ' specification', ' performance', ' development',
+  ' application', ' connection', ' threshold', ' checkpoint', ' duration_ms', ' checksum', ' HEALTHY', ' DEGRADED',
+  ' us-east-1a', ' 03:14:', ' 03:15:', ' latency_p95', ' error_rate', ' checkpoint_complete', ' queue_pressure',
+  ' verify_cluster_health', ' list[dict]', ' 0.0001', ' 0.0000', ' 0.0210', ' https://', ' http://',
 ];
 
 export interface AetherCodebook {
