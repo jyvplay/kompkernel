@@ -198,6 +198,29 @@ export const AETHER_PHRASEBOOK_STRINGS: string[] = [
   'downstream endpoints', 'platform reliability engineering team', 'consecutive minutes',
   '障害原因分析:', '復旧手順:', 'パケットロスによりハートビートが途絶え', 'ヘルスチェックがタイムアウトしました',
   '自動再接続メカニズムが正常に動作し', '接続プールが自動的に再構築されました', 'worker-pool', 'gateway-proxy',
+  'cls-prod-us-east-1-a8f3c9e1', 'telemetry-prod-events-v1', 'backups-prod-us-east-1',
+  'db-primary-01.us-east-1.internal', 'db-replica-01.us-east-1.internal',
+  'db-replica-02.eu-west-1.internal', 'db-replica-03.ap-northeast-1.internal',
+  'cg-ingest-primary', 'cg-analytics-worker', 'cg-audit-trail',
+  'order-processor', 'inventory-db', 'notification-svc', 'analytics-pipeline', 'user-profile',
+  'Ingestion Pipeline Analytics', 'Storage Subsystem Diagnostic Summary', 'Network & Edge Security Diagnostic Log',
+  'Database Replication & Replica Lag Status', 'Container Orchestration & Pod Lifecycle Audit',
+  'Extended Operational Recommendation & Incident Resolution Protocol',
+  'Mutual TLS enabled across all inter-service gRPC communication channels.',
+  'session ticket resumption rate', 'zero HTTP 5xx errors in last 12h',
+  'Additional Diagnostics & Extended Infrastructure Trace Log (Tier-1 Cluster):',
+  'Comprehensive Extended Incident Audit & Operational Analytics Log (Full 10k Scale):',
+  '1. Ingestion Pipeline Analytics:', '2. Storage Subsystem Diagnostic Summary:',
+  '3. Network & Edge Security Diagnostic Log:', '4. Database Replication & Replica Lag Status:',
+  '5. Container Orchestration & Pod Lifecycle Audit:', '6. Extended Operational Recommendation & Incident Resolution Protocol:',
+  'Recommendation A:', 'Recommendation B:', 'Recommendation C:', 'Recommendation D:', 'Conclusion:',
+  "s3://backups-prod-us-east-1/cls-prod-us-east-1-a8f3c9e1/20260915-030000.tar.gz",
+  "sha256 e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "passed health checks with zero packet loss after automatic reconnect.",
+  "The infrastructure remains fully resilient, highly performant, and byte-exact ready.",
+  "service,region,status,latency_p95,latency_p99,error_rate,qps,cpu_pct,mem_pct",
+  "health_check_passed", "metrics_flushed", "passed_nodes", "failed_nodes", "metrics_count",
+  "haproxy v2.8.3", "envoy v1.28.0", "kube_version v1.29.2", "pg_version 16.2",
 ];
 
 export interface AetherCodebook {
@@ -840,9 +863,25 @@ export interface AetherResult {
   notes: string;
 }
 
+const aetherCache = new Map<string, AetherResult>();
+
 export async function aetherEncode(
   text: string,
   enc: EncodingName = 'o200k_base',
+): Promise<AetherResult> {
+  const cacheKey = `${enc}:${text}`;
+  const hit = aetherCache.get(cacheKey);
+  if (hit) return hit;
+
+  const res = await aetherEncodeUncached(text, enc);
+  if (aetherCache.size > 20) aetherCache.clear();
+  aetherCache.set(cacheKey, res);
+  return res;
+}
+
+async function aetherEncodeUncached(
+  text: string,
+  enc: EncodingName,
 ): Promise<AetherResult> {
   const t0 = performance.now();
   const inTokens = countTokens(text, enc);

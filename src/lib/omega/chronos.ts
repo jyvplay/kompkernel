@@ -63,16 +63,18 @@ export function chronosGrammarFold(
   text: string,
   enc: EncodingName = 'o200k_base',
 ): ChronosGrammarFold {
-  if (!text || text.length < 50) return { text, rules: [] };
+  if (!text || text.length < 100) return { text, rules: [] };
 
-  // Word-level n-gram frequency counter (fast and O(N))
   const words = text.split(/(\s+)/);
   const counts = new Map<string, number>();
 
-  for (let nGrams = 3; nGrams <= 8; nGrams++) {
-    for (let i = 0; i <= words.length - (nGrams * 2 - 1); i += 2) {
-      const phrase = words.slice(i, i + nGrams * 2 - 1).join('');
-      if (phrase.includes('\n') || phrase.length < 10) continue;
+  // Fast stride n-gram scanner
+  for (const nGrams of [4, 6]) {
+    const span = nGrams * 2 - 1;
+    const limit = words.length - span;
+    for (let i = 0; i <= limit; i += 4) {
+      const phrase = words.slice(i, i + span).join('');
+      if (phrase.includes('\n') || phrase.length < 12) continue;
       counts.set(phrase, (counts.get(phrase) ?? 0) + 1);
     }
   }
@@ -87,21 +89,23 @@ export function chronosGrammarFold(
   filtered.sort((a, b) => (b.count * b.len) - (a.count * a.len));
 
   let t = text;
-  let cp = 0xd000; // Hangul Syllables U+D000..U+D7A3
+  let cp = 0xd000;
   const rules: GrammarRule[] = [];
 
-  for (const c of filtered.slice(0, 5)) {
+  for (const c of filtered.slice(0, 3)) {
     if (t.includes(c.phrase)) {
-      const pTok = countTokens(c.phrase, enc);
       const occs = t.split(c.phrase).length - 1;
-      if (pTok >= 2 && occs >= 2) {
-        let glyph = String.fromCodePoint(cp++);
-        while (cp <= 0xd7a3 && (encodeIds(glyph, enc).length !== 1 || text.includes(glyph))) {
-          glyph = String.fromCodePoint(cp++);
-        }
-        if (cp <= 0xd7a3) {
-          t = t.split(c.phrase).join(glyph);
-          rules.push({ glyph, phrase: c.phrase });
+      if (occs >= 2) {
+        const pTok = countTokens(c.phrase, enc);
+        if (pTok >= 2) {
+          let glyph = String.fromCodePoint(cp++);
+          while (cp <= 0xd7a3 && (encodeIds(glyph, enc).length !== 1 || text.includes(glyph))) {
+            glyph = String.fromCodePoint(cp++);
+          }
+          if (cp <= 0xd7a3) {
+            t = t.split(c.phrase).join(glyph);
+            rules.push({ glyph, phrase: c.phrase });
+          }
         }
       }
     }
@@ -162,9 +166,25 @@ export interface ChronosResult {
   notes: string;
 }
 
+const chronosCache = new Map<string, ChronosResult>();
+
 export async function chronosEncode(
   text: string,
   enc: EncodingName = 'o200k_base',
+): Promise<ChronosResult> {
+  const cacheKey = `${enc}:${text}`;
+  const hit = chronosCache.get(cacheKey);
+  if (hit) return hit;
+
+  const res = await chronosEncodeUncached(text, enc);
+  if (chronosCache.size > 20) chronosCache.clear();
+  chronosCache.set(cacheKey, res);
+  return res;
+}
+
+async function chronosEncodeUncached(
+  text: string,
+  enc: EncodingName,
 ): Promise<ChronosResult> {
   const t0 = performance.now();
   const inTokens = countTokens(text, enc);
