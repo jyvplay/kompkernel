@@ -185,6 +185,10 @@ export const AETHER_PHRASEBOOK_STRINGS: string[] = [
   ' application', ' connection', ' threshold', ' checkpoint', ' duration_ms', ' checksum', ' HEALTHY', ' DEGRADED',
   ' us-east-1a', ' 03:14:', ' 03:15:', ' latency_p95', ' error_rate', ' checkpoint_complete', ' queue_pressure',
   ' verify_cluster_health', ' list[dict]', ' 0.0001', ' 0.0000', ' 0.0210', ' https://', ' http://',
+  'postmortem', 'failover', 'heartbeat', 'throughput', 'footprint', 'utilization',
+  'infrastructure', 'observability', 'microservice', 'middleware', 'orchestration', 'containerization',
+  'intervention', 'topology', 'auth-api', 'billing-v2', 'search-node', 'cache-cluster',
+  'scale_workers', '14.2ms', '64.2%', '14200', '85000', '32000', '849201',
 ];
 
 export interface AetherCodebook {
