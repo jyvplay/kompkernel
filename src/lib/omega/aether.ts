@@ -221,6 +221,15 @@ export const AETHER_PHRASEBOOK_STRINGS: string[] = [
   "service,region,status,latency_p95,latency_p99,error_rate,qps,cpu_pct,mem_pct",
   "health_check_passed", "metrics_flushed", "passed_nodes", "failed_nodes", "metrics_count",
   "haproxy v2.8.3", "envoy v1.28.0", "kube_version v1.29.2", "pg_version 16.2",
+  "The distributed consensus engine successfully committed the transaction log after a brief transient leader election delay across availability zones.",
+  "Network partitioning was detected between the primary broker pool and the secondary read replicas, causing temporary message queuing in the ingestion pipeline.",
+  "All worker threads recovered without manual intervention once heartbeat signals stabilized across the mesh topology.",
+  "The operational committee deliberated on whether a secondary maintenance window constitutes an institutional precedent for production environments.",
+  "Memory footprint remained within nominal thresholds with minimal garbage collection overhead, while circuit breaker state remained closed throughout the failover window.",
+  "Disk IOPS and network throughput metrics confirmed that rate limiting rules prevented cascading failures across downstream microservices.",
+  "System administrators monitored queue depth and p99 latency spikes, validating that automated retry backoff mechanisms functioned as designed.",
+  "Further analysis indicated that database connection pool exhaustion was mitigated by scaling worker instances dynamically.",
+  "In conclusion, the infrastructure demonstrated high resilience and byte-exact stability under peak load distributions.",
 ];
 
 export interface AetherCodebook {
