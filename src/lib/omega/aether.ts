@@ -230,6 +230,13 @@ export const AETHER_PHRASEBOOK_STRINGS: string[] = [
   "System administrators monitored queue depth and p99 latency spikes, validating that automated retry backoff mechanisms functioned as designed.",
   "Further analysis indicated that database connection pool exhaustion was mitigated by scaling worker instances dynamically.",
   "In conclusion, the infrastructure demonstrated high resilience and byte-exact stability under peak load distributions.",
+  "Status: deploy finished, but two pods restart. Queue depth climbed while the retry storm was live; on-call was paged twice during the window.\n- queue depth 14, p99 latency 812ms (spike)\n- flaky test `test_retry_backoff` failed twice on shard 7\n- cache warmup aborted: TLS handshake timeout",
+  "region,dc,hosts,errors\nus-east-1,iad-3,42,0\neu-west-1,dub-1,17,2\nap-south-1,bom-2,9,1",
+  "{\"job\":\"sync\",\"retries\":3,\"ok\":false,\"warn\":[\"timeout\",\"auth\"],\"ms\":812}",
+  "def run(ctx):\n    for k, v in ctx.items():\n        if v is None: raise ValueError(k)\n    return sum(ctx.values())",
+  "備考：データベース遷移已完成，但缓存预热失败，请检查连接池配置和超时参数，必要时重启实例后再观察。\nログ：2026-09-15T06:02:11Z WARN pool exhausted (max=20, wait=5s)",
+  "kectl rollout status deploy/api --timeout=90s || kubectl get events --sort-by=.ts",
+  "Next steps? Audit the pool config, bump the limits, then rerun. Watch pod memory and the retry budget closely; escalate if the error rate doubles.\nSummary: 2 of 3 migrations verified with no issues found; retry the search shards, then re-run the checks and confirm the counts all match now.",
 ];
 
 export interface AetherCodebook {
