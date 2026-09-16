@@ -55,6 +55,7 @@ import { zenithEncode } from './zenith';
 import { valkyrieEncode } from './valkyrie';
 import { aetherEncode } from './aether';
 import { yggdrasilEncode } from './yggdrasil';
+import { oblivionEncode } from './oblivion';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -115,6 +116,16 @@ function presetEntries(): Entry[] {
 export function codecEntries(): Entry[] {
   const base: Entry[] = [
     ...presetEntries(),
+    {
+      key: 'oblivion',
+      label: '★ OBLIVION-O1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = oblivionEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
     {
       key: 'yggdrasil',
       label: '★ YGGDRASIL-Y1',
