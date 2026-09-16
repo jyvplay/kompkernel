@@ -189,6 +189,15 @@ export const AETHER_PHRASEBOOK_STRINGS: string[] = [
   'infrastructure', 'observability', 'microservice', 'middleware', 'orchestration', 'containerization',
   'intervention', 'topology', 'auth-api', 'billing-v2', 'search-node', 'cache-cluster',
   'scale_workers', '14.2ms', '64.2%', '14200', '85000', '32000', '849201',
+  'Executive Summary', 'Next Actions:', 'Key Operational Metrics', 'Infrastructure Performance:',
+  'infrastructure performance', 'allocation rate', 'failure threshold', 'active connections',
+  'connection pool saturation', 'distributed tracing', 'collected with 100% sampling rate',
+  'previous_replicas', 'new_replicas', 'queue_depth_exceeded', 'scaling_triggered',
+  'target_replicas', 'degraded_count', 'action_required', 'threshold_ms', 'is_healthy',
+  'active_ratio', 'total_nodes', 'garbage collection pauses', 'scheduled maintenance window',
+  'downstream endpoints', 'platform reliability engineering team', 'consecutive minutes',
+  '障害原因分析:', '復旧手順:', 'パケットロスによりハートビートが途絶え', 'ヘルスチェックがタイムアウトしました',
+  '自動再接続メカニズムが正常に動作し', '接続プールが自動的に再構築されました', 'worker-pool', 'gateway-proxy',
 ];
 
 export interface AetherCodebook {
@@ -233,10 +242,11 @@ export function aetherCodebook(enc: EncodingName = 'o200k_base'): AetherCodebook
 export function aetherFold(text: string, enc: EncodingName = 'o200k_base'): string {
   const cb = aetherCodebook(enc);
   let out = text;
-  for (const ph of cb.phrases) {
+  // Quickly check which phrases exist in the text
+  for (let i = 0; i < cb.phrases.length; i++) {
+    const ph = cb.phrases[i];
     if (out.includes(ph)) {
       const g = cb.byPhrase.get(ph);
-      // Safety: Skip glyph if it already exists in the original source text to prevent collision
       if (g && !text.includes(g)) {
         out = out.split(ph).join(g);
       }
@@ -903,81 +913,7 @@ export async function aetherEncode(
     }
   } catch {}
 
-  // 5. Standalone member codecs
-  try {
-    const r = signetEncode(text, enc);
-    if (r.exact && r.decoded === text) await addCand('signet', r.wire, () => signetDecode(r.wire));
-  } catch {}
-  try {
-    const s = strataEncode(text, enc);
-    if (s.exact && s.decoded === text) await addCand('strata', s.wire, () => strataDecode(s.wire));
-  } catch {}
-  try {
-    const te = tesseraEncode(text, enc);
-    if (te.exact && te.decoded === text) await addCand('tessera', te.wire, () => tesseraDecode(te.wire));
-  } catch {}
-  try {
-    const c = columnEncode(text, enc);
-    if (c.applied && c.decoded === text) await addCand('column', c.wire, () => columnDecode(c.wire));
-  } catch {}
-  try {
-    const ti = trieEncode(text, enc);
-    if (ti.applied && ti.decoded === text) await addCand('trie', ti.wire, () => trieDecode(ti.wire));
-  } catch {}
-  try {
-    const rp = repairEncode(text, enc);
-    if (rp.applied && rp.decoded === text) await addCand('repair', rp.wire, () => repairDecode(rp.wire));
-  } catch {}
-  try {
-    const st = stencilEncode(text, enc);
-    if (st.exact && st.applied && st.decoded === text) await addCand('stencil', st.wire, () => stencilDecode(st.wire));
-  } catch {}
-  try {
-    const mo = morphEncode(text, enc);
-    if (mo.exact && mo.applied && mo.decoded === text) await addCand('morph', mo.wire, () => morphDecode(mo.wire));
-  } catch {}
-  try {
-    const he = helixEncode(text, enc);
-    if (he.exact && he.decoded === text) await addCand('helix', he.wire, () => helixDecode(he.wire));
-  } catch {}
-  try {
-    const pu = pulseEncode(text, enc);
-    if (pu.exact && pu.decoded === text) await addCand('pulse', pu.wire, () => pulseDecode(pu.wire));
-  } catch {}
-  try {
-    const me = meridianEncode(text, enc);
-    if (me.exact && me.decoded === text) await addCand('meridian', me.wire, () => meridianDecode(me.wire));
-  } catch {}
-  try {
-    const qa = quasarEncode(text, enc);
-    if (qa.exact && qa.decoded === text) await addCand('quasar', qa.wire, () => quasarDecode(qa.wire));
-  } catch {}
-  try {
-    const kp = kappaEncode(text, enc);
-    if (kp.exact && kp.decoded === text) await addCand('kappa', kp.wire, () => kappaDecode(kp.wire, enc));
-  } catch {}
-  try {
-    const phr = phraseEncode(text, enc);
-    if (phr.exact && phr.decoded === text) await addCand('phrase', phr.wire, () => phraseDecode(phr.wire, enc));
-  } catch {}
-  try {
-    const tu = tauEncode(text, enc);
-    if (tu.exact && tu.decoded === text) await addCand('tau', tu.wire, () => tauDecode(tu.wire, enc));
-  } catch {}
-  try {
-    const orb = await orbitEncode(text, enc);
-    if (orb.exact && orb.decoded === text) await addCand('orbit', orb.wire, () => mosaicDecode(orb.wire));
-  } catch {}
-  try {
-    const cr = await crownEncodeCached(text, enc);
-    if (cr.exact && cr.decoded === text) await addCand('crown', cr.wire, () => crownDecode(cr.wire));
-  } catch {}
-  try {
-    const sp = spliceEncode(text, enc);
-    if (sp.exact && sp.decoded === text) await addCand('splice', sp.wire, () => spliceDecode(sp.wire));
-  } catch {}
-
-  // 6. ROSETTA (internal tournament)
+  // 5. ROSETTA (internal tournament over all standalone members)
   try {
     const ros = await rosettaEncode(text, enc);
     if (ros.exact && ros.decoded === text) {
