@@ -8,6 +8,7 @@ import { signetEncode, signetDecode, SIGNET_SYSTEM_PROMPT, type SignetResult } f
 import { helixEncode, helixDecode, HELIX_SYSTEM_PROMPT, type HelixResult } from './helix';
 import { pulseEncode, pulseDecode, PULSE_SYSTEM_PROMPT, type PulseResult } from './pulse';
 import { anaphoraEncode, anaphoraDecode, anaphoraDecoderPrompt, type AnaphoraResult } from './anaphora';
+import { starlightEncode, starlightDecode, STARLIGHT_SYSTEM_PROMPT, type StarlightResult } from './starlight';
 
 export interface CrownAudit { lane: string; wire: number; contract: number; delivered: number }
 export interface CrownResult {
@@ -30,6 +31,7 @@ export interface CrownResult {
 interface Member { lane: string; wire: string; decoded: string; contract: string; decode: (w: string) => string }
 
 export interface CrownSuppliedMembers {
+  starlight?: StarlightResult;
   atlas?: AtlasResult;
   aurora?: AuroraResult;
   mosaic?: MosaicResult;
@@ -41,7 +43,7 @@ export interface CrownSuppliedMembers {
 }
 
 export function crownDecode(wire: string): string {
-  for (const fn of [atlasDecode, auroraDecode, mosaicDecode, signetDecode, pulseDecode, anaphoraDecode, helixDecode]) {
+  for (const fn of [starlightDecode, atlasDecode, auroraDecode, mosaicDecode, signetDecode, pulseDecode, anaphoraDecode, helixDecode]) {
     try {
       const d = fn(wire);
       if (d !== wire) return d;
@@ -88,6 +90,7 @@ export async function crownEncodeFromMembers(
   if (!text) return identity('empty input');
 
   const members: Member[] = [{ lane: 'identity', wire: text, decoded: text, contract: '', decode: (w) => w }];
+  try { const r = supplied.starlight ?? starlightEncode(text, enc); members.push({ lane: 'starlight', wire: r.wire, decoded: r.decoded, contract: STARLIGHT_SYSTEM_PROMPT, decode: starlightDecode }); } catch { /* skip */ }
   try { const r = supplied.atlas ?? atlasEncode(text, enc); members.push({ lane: 'atlas', wire: r.wire, decoded: r.decoded, contract: atlasDecoderPrompt(r), decode: atlasDecode }); } catch { /* skip */ }
   try { const r = supplied.aurora ?? auroraEncode(text, enc); members.push({ lane: 'aurora', wire: r.wire, decoded: r.decoded, contract: auroraDecoderPrompt(r), decode: auroraDecode }); } catch { /* skip */ }
   try { const r = supplied.mosaic ?? mosaicEncode(text, enc); members.push({ lane: 'mosaic', wire: r.wire, decoded: r.decoded, contract: mosaicDecoderPrompt(r), decode: mosaicDecode }); } catch { /* skip */ }

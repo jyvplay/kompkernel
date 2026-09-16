@@ -46,6 +46,7 @@ import { auroraEncodeCached as auroraEncode } from './aurora';
 import { crownEncodeCached as crownEncode } from './crown';
 import { irisEncode } from './iris';
 import { kernelEncode } from './kernel';
+import { starlightEncode, starlightDecode } from './starlight';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -106,6 +107,16 @@ function presetEntries(): Entry[] {
 export function codecEntries(): Entry[] {
   const base: Entry[] = [
     ...presetEntries(),
+    {
+      key: 'starlight',
+      label: '★ STARLIGHT-S1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = starlightEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
     {
       key: 'veritasVx',
       label: '⟁ VERITAS-VX',
