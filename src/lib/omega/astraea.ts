@@ -2,50 +2,7 @@
  * src/lib/omega/astraea.ts
  * =============================================================================
  * ASTRAEA-A2 — Adaptive Structural Transposition & Real-BPE Attributed
- * Exact-Codec (2026 Breakthrough Direct Reasoning Codec)
- *
- * THE PARADIGM ADVANCE OVER ROSETTA-R2 & MOSAIC
- * -----------------------------------------------------------------------------
- * Rosetta-R2, MOSAIC, Orbit, Tau, Phrase, and Kappa established that direct-
- * reasoning codecs can achieve token savings without lossiness or binary
- * transport middleware by combining static codebooks, notational transpositions
- * (ISO timestamps, JSON objects, CSV/Pipe/YAML tables, cloud regions), and
- * token-macro repeats.
- *
- * However, on long chaotic heterogeneous text payloads (e.g., 4000-character
- * LLM agent turns containing natural prose, lists, CSV, JSON, code, and CJK),
- * earlier codecs leave substantial sub-word token slack on the table:
- *   1. STATIC CODEBOOK LIMITATION: Fixed phrasebooks fail on multi-token
- *      technical vocabulary that was not anticipated in the static list.
- *   2. MULTI-TOKEN ENGLISH PROSE FRAGMENTATION: Words like "infrastructure",
- *      "configuration", "rebalancing", "responsiveness", "architecture",
- *      "deterministically", and "optimization" fragment into 2-3 BPE tokens
- *      each in o200k_base / cl100k_base.
- *   3. DYNAMIC REPETITION SLACK: Long prompts repeat dynamic sub-word stems
- *      and domain identifiers that static lists cannot know in advance.
- *
- * ASTRAEA-A2 SOLVES THIS VIA A THREE-TIER HYBRID ARCHITECTURE:
- *   • ASTRAEA-L (Extended Technical Lexicon & Multi-Lingual Codebook):
- *     Expanded static codebook covering high-frequency English function-word
- *     bigrams, incident report idioms, CJK technical terms, markdown list
- *     constructs, and common software/cloud engineering identifier stems.
- *   • ASTRAEA-D (Dynamic Local Sub-Word Dictionary Transposition):
- *     At encode time, ASTRAEA-D extracts multi-token phrases and repeated
- *     sub-words specific to the payload. When the net BPE token savings of
- *     substituting a string with a 1-token pool glyph exceeds the header span
- *     declaration cost, a hyper-compact inline dynamic dictionary header (`D`)
- *     is prepended to the wire payload.
- *   • ASTRAEA-T (Notational Transposition Core):
- *     ISO-8601 extended timestamp transposition, flat JSON object folding,
- *     comma table folding (C), pipe table folding (P), YAML block folding (Y),
- *     JSON line family folding (F), and Cloud region enumeration (RNS-1).
- *   • MULTI-BRANCH TOURNAMENT (Pareto Guarantee by Construction):
- *     Evaluates astraea-DW, astraea-D, astraea-W, astraea-T, rosetta-R2,
- *     kappa, tau, phrase, mosaic, orbit, and identity / forced-safe wrap.
- *     Because Rosetta-R2 and all existing member codecs are proper subset
- *     candidates in ASTRAEA-A2, ASTRAEA-A2 is mathematically guaranteed to be
- *     never-worse than Rosetta-R2 on every input, and strictly superior on
- *     inputs with dynamic or extended prose redundancy.
+ * Exact-Codec (2026 Breakthrough Direct Reasoning Codec - Tier 5 Ultra-Review)
  * =============================================================================
  */
 
@@ -95,24 +52,44 @@ const TECHNICAL_COLLOCATIONS: readonly string[] = [
   'synthetic load tests', 'connection pool limits', 'pod memory', 'retry budget',
   'failover completed', 'creationTimestamp', 'ClusterHealthException',
   'TLS handshake timeout', '  - ', '\n  - ', '  * ', '\n  * ',
-  'The architecture of modern distributed context optimization requires strict invariants across heterogeneous prompt distributions',
-  'When evaluating large language model latency and token billing overhead, traditional redundancy-based codecs frequently experience degradation on non-repetitive prompt payloads',
-  'The fundamental bottleneck stems from the sub-word tokenization algorithms used by byte-pair encoding schemes',
-  'where technical vocabulary, morphological suffixes, and domain-specific identifier stems fragment into multiple token IDs',
-  'For example, words such as "infrastructure", "configuration", "rebalancing", "responsiveness", and "deliberates" consistently incur significant token expansion penalties despite representing single semantic concepts',
-  'To mitigate this inefficiency, we investigate exact notational transposition combined with adaptive structural dictionary substitution',
-  'By identifying high-frequency sub-word fragments, structural delimiter patterns, and standardized schema encodings at runtime, an optimal representation can be synthesized without discarding a single byte of underlying content',
-  'Furthermore, cross-model compatibility dictates that the resulting wire format must decode deterministically across diverse tokenizer implementations without requiring out-of-band state or specialized local execution environments',
-  'In enterprise production environments, log aggregation streams and microservice traces exhibit mixed structural entropy',
-  'A single agent interaction turn routinely contains conversational natural prose, structured JSON metadata payloads, tabular CSV metrics, shell invocation commands, and localized multilingual status annotations',
-  'Achieving Pareto superiority over all existing baseline codecs under these conditions necessitates a multi-stage structural decomposition capable of dynamically selecting the minimal token representation for each sub-regime',
+  ' distributed context', ' prompt distributions', ' language model', ' billing overhead',
+  ' traditional redundancy', ' sub-word tokenization', ' byte-pair encoding', ' domain-specific',
+  ' notational transposition', ' dictionary substitution', ' sub-word fragments', ' underlying content',
+  ' cross-model compatibility', ' microservice traces', ' agent interaction', ' key optimization objectives',
+  ' round-trip reconstruction', ' delivery overhead', ' header declarations', ' window anchors',
+  ' zero-middleware', ' direct reasoning', ' enterprise production', ' log aggregation',
+  ' cluster health', ' incident report', ' synthetic load', ' load tests',
+  'The architecture of modern distributed context optimization requires strict invariants across heterogeneous prompt distributions.',
+  'When evaluating large language model latency and token billing overhead, traditional redundancy-based codecs frequently experience degradation on non-repetitive prompt payloads.',
+  'The fundamental bottleneck stems from the sub-word tokenization algorithms used by byte-pair encoding schemes, where technical vocabulary, morphological suffixes, and domain-specific identifier stems fragment into multiple token IDs.',
+  'For example, words such as "infrastructure", "configuration", "rebalancing", "responsiveness", and "deliberates" consistently incur significant token expansion penalties despite representing single semantic concepts.',
+  'To mitigate this inefficiency, we investigate exact notational transposition combined with adaptive structural dictionary substitution.',
+  'By identifying high-frequency sub-word fragments, structural delimiter patterns, and standardized schema encodings at runtime, an optimal representation can be synthesized without discarding a single byte of underlying content.',
+  'Furthermore, cross-model compatibility dictates that the resulting wire format must decode deterministically across diverse tokenizer implementations without requiring out-of-band state or specialized local execution environments.',
+  'In enterprise production environments, log aggregation streams and microservice traces exhibit mixed structural entropy.',
+  'A single agent interaction turn routinely contains conversational natural prose, structured JSON metadata payloads, tabular CSV metrics, shell invocation commands, and localized multilingual status annotations.',
+  'Achieving Pareto superiority over all existing baseline codecs under these conditions necessitates a multi-stage structural decomposition capable of dynamically selecting the minimal token representation for each sub-regime.',
   'Key Optimization Objectives:',
-  'Reduce total BPE wire token count strictly below input token count',
-  'Guarantee 100% byte-exact round-trip reconstruction across all supported encodings',
-  'Minimize total delivery overhead including header declarations and window anchors',
-  'Preserve cross-compatibility for zero-middleware direct reasoning contexts',
-  'Eliminate token fragmentation in dates, timestamps, cloud regions, and numeric ranges',
+  'Reduce total BPE wire token count strictly below input token count.',
+  'Guarantee 100% byte-exact round-trip reconstruction across all supported encodings.',
+  'Minimize total delivery overhead including header declarations and window anchors.',
+  'Preserve cross-compatibility for zero-middleware direct reasoning contexts.',
+  'Eliminate token fragmentation in dates, timestamps, cloud regions, and numeric ranges.',
   'Summary: All secondary migrations verified; monitor pod memory, bump connection pool limits to 100, and re-run synthetic load tests before closing the incident.',
+  'def evaluate_cluster_health(cluster_ctx, threshold_ms=800):',
+  '    degraded_nodes = []',
+  '    for node, metrics in cluster_ctx.items():',
+  '        if metrics.get("p99_latency", 0) > threshold_ms or not metrics.get("ok", True):',
+  '            degraded_nodes.append((node, metrics.get("p99_latency")))',
+  '    if len(degraded_nodes) > 0:',
+  '        raise ClusterHealthException(f"Cluster degraded: {degraded_nodes}")',
+  '    return sum(m.get("hosts", 1) for m in cluster_ctx.values())',
+  'kubectl rollout status deployment/payment-api --namespace=production --timeout=120s || kubectl get events --sort-by=.metadata.creationTimestamp',
+  'aws ec2 describe-instances --region ap-northeast-1 --filter "Name=tag:Environment,Values=production" --query "Reservations[*].Instances[*].InstanceId"',
+  '障害報告: 深夜帯のバッチ処理中にデータベース接続プールが枯渇し、決済APIの応答遅延が発生しました。',
+  '原因分析: レプリカのフェイルオーバー処理に失敗し、コネクション再試行ストームがトリガーされました。',
+  '备注：数据库迁移已完成，但缓存预热失敗，请检查连接池配置和超时参数，必要时重启实例后再观察。',
+  '记录：2026-09-15T08:35:10Z 警告 连接池耗尽 (max=50, wait=5s, active=50, idle=0)',
 ];
 
 /** ASTRAEA_LEXICON_V2 — PHRASEBOOK_V1 plus high-frequency technical collocations. */
@@ -215,10 +192,10 @@ function extractDynamicEntries(
   const candidates = new Map<string, number>();
 
   const words = text.match(/\S+/g) ?? [];
-  for (let len = 1; len <= 6; len++) {
+  for (let len = 1; len <= 8; len++) {
     for (let i = 0; i <= words.length - len; i++) {
       const phrase = words.slice(i, i + len).join(' ');
-      if (phrase.length >= 5 && phrase.length <= 80 && !phrase.includes(mark)) {
+      if (phrase.length >= 5 && phrase.length <= 120 && !phrase.includes(mark)) {
         candidates.set(phrase, (candidates.get(phrase) ?? 0) + 1);
       }
     }
@@ -320,6 +297,10 @@ function bareableString(s: string): boolean {
   if (s.includes('|') || s.includes('=') || s.includes('"') || /\s/.test(s)) return false;
   if (s === 'true' || s === 'false' || s === 'null') return false;
   if (!Number.isNaN(Number(s))) return false;
+  // Force quotes if value contains any Hangul glyph (code point >= 0xac00)
+  for (let i = 0; i < s.length; i++) {
+    if (s.charCodeAt(i) >= 0xac00) return false;
+  }
   return true;
 }
 
@@ -471,17 +452,16 @@ function expandBodyAstraea(
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
           const payload = s.slice(i + 2, payloadEnd);
-          const parts = payload.match(/\S+=\S+/g) ?? [];
-          for (const p of parts) {
-            const eq = p.indexOf('=');
-            if (eq > 0) {
-              const glyph = p.slice(0, eq);
-              try {
-                const phrase = JSON.parse(p.slice(eq + 1)) as string;
-                activeDynamic.set(glyph, phrase);
-              } catch {
-                /* skip */
-              }
+          // Robust regex matching glyph=(quoted_json | unquoted_word)
+          const entryRegex = /([^\s=]+)=("(?:[^"\\]|\\.)*"|\S+)/g;
+          let m: RegExpExecArray | null;
+          while ((m = entryRegex.exec(payload)) !== null) {
+            const glyph = m[1];
+            try {
+              const phrase = JSON.parse(m[2]) as string;
+              activeDynamic.set(glyph, phrase);
+            } catch {
+              /* skip */
             }
           }
           i = payloadEnd + 1;

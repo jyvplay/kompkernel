@@ -39,7 +39,6 @@ import { stencilEncode } from '@/lib/omega/stencil';
 import { e8Encode } from '@/lib/omega/omega-e8seed';
 import { omegaXiCompress, omegaXiDecode } from '@/lib/omega/atom-codec';
 import { rosettaEncode } from '@/lib/omega/rosetta';
-import { astraeaEncode } from '@/lib/omega/astraea';
 import { kappaEncode } from '@/lib/omega/kappa';
 import { phraseEncode } from '@/lib/omega/phrase';
 import { tauEncode } from '@/lib/omega/tau';
@@ -111,8 +110,8 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('zenith', async () => zenithEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
   await run('splice', () => spliceEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
   await run('eclipse', async () => eclipseEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
+  // ROSETTA last: its internal member lanes hit the caches warmed above.
   await run('rosetta', async () => rosettaEncode(text, enc));
-  await run('astraea', async () => astraeaEncode(text, enc));
   await run('omegaE8', () => e8Encode(text, enc));
   const s = t0();
   try {
