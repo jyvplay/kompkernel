@@ -47,6 +47,7 @@ import { crownEncodeCached as crownEncode } from './crown';
 import { irisEncode } from './iris';
 import { kernelEncode } from './kernel';
 import { starlightEncode, starlightDecode } from './starlight';
+import { astraeaEncode, astraeaDecode } from './starlight-prime';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -107,6 +108,16 @@ function presetEntries(): Entry[] {
 export function codecEntries(): Entry[] {
   const base: Entry[] = [
     ...presetEntries(),
+    {
+      key: 'astraea',
+      label: '★ ASTRAEA-A1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = astraeaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
     {
       key: 'starlight',
       label: '★ STARLIGHT-S1',
