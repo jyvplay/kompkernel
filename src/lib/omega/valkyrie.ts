@@ -1,5 +1,5 @@
 /**
- * ★ HYPERION-H1 — Terminal Direct-Reasoning Byte-Exact Lossless Codec
+ * ★ VALKYRIE-V1 — Terminal Direct-Reasoning Lossless Prompt Codec
  */
 import { type EncodingName } from './bpe';
 import {
@@ -9,30 +9,30 @@ import {
   type CjkContractorResult,
 } from './cjk-contractor';
 
-export type HyperionEntry = CjkContractorEntry;
-export type HyperionResult = CjkContractorResult;
+export type ValkyrieEntry = CjkContractorEntry;
+export type ValkyrieResult = CjkContractorResult;
 
 const OPTS = {
-  sentinel: '★H\n',
-  modeName: 'hyperion',
+  sentinel: '★V\n',
+  modeName: 'valkyrie',
   equalsHeader: false,
-  maxPool: 200,
-  maxEntries: 32,
-  maxCandidateTrials: 25,
+  maxPool: 350,
+  maxEntries: 64,
+  maxCandidateTrials: 30,
 };
 
-export function hyperionDecode(wire: string): string {
+export function valkyrieDecode(wire: string): string {
   return cjkContractorDecode(wire, OPTS);
 }
 
-export function hyperionEncode(text: string, enc: EncodingName = 'o200k_base'): HyperionResult {
-  return cjkContractorEncode(text, enc, OPTS) as HyperionResult;
+export function valkyrieEncode(text: string, enc: EncodingName = 'o200k_base'): ValkyrieResult {
+  return cjkContractorEncode(text, enc, OPTS) as ValkyrieResult;
 }
 
-export const HYPERION_SYSTEM_PROMPT = [
-  '# ★ HYPERION-H1 — terminal byte-exact equals-free CJK single-token contractive dictionary wire',
+export const VALKYRIE_SYSTEM_PROMPT = [
+  '# ★ VALKYRIE-V1 — terminal byte-exact equals-free CJK single-token contractive dictionary wire',
   'The message may begin with an equals-free micro-header block:',
-  '  ★H',
+  '  ★V',
   '  <alias><phrase>',
   'Decode rules (apply mentally; do not emit expansions unless asked):',
   '1. Each micro-header line maps its leading CJK single-token character (alias) directly to the remaining phrase on that line.',
@@ -40,17 +40,17 @@ export const HYPERION_SYSTEM_PROMPT = [
   '2. In the body after the blank line, each alias character stands for its original phrase.',
   '3. Decode in reverse order (last dictionary entry first) to handle nested aliases.',
   '4. Everything else is literal. Reconstruction is byte-exact.',
-  '5. If there is no ★H header, the text is literal.',
+  '5. If there is no ★V header, the text is literal.',
   'OUTPUT CONTRACT: answer densely; code fences, numbers, and identifiers verbatim.',
 ].join('\n');
 
-export interface HyperionSelfTest {
+export interface ValkyrieSelfTest {
   name: string;
   pass: boolean;
   details: string;
 }
 
-export function hyperionSelfTest(enc: EncodingName = 'o200k_base'): HyperionSelfTest[] {
+export function valkyrieSelfTest(enc: EncodingName = 'o200k_base'): ValkyrieSelfTest[] {
   const sample900 =
     'System Prompt & Operational Directives:\n' +
     'You are an advanced autonomous reasoning engine executing multi-step agentic workflows.\n' +
@@ -76,13 +76,13 @@ export function hyperionSelfTest(enc: EncodingName = 'o200k_base'): HyperionSelf
     '6. End of instructions. Output final decision tag [PROCEED].';
 
   const cases: { name: string; text: string }[] = [
-    { name: 'H0 empty', text: '' },
-    { name: 'H1 short prose', text: 'The quick brown fox jumps over the lazy dog.' },
-    { name: 'H2 900-char chaotic hetero text', text: sample900 },
-    { name: 'H3 sentinel adversary', text: '★H\nfake trap\n\nnot real' },
-    { name: 'H4 CRLF + unicode', text: 'line1\r\nline2\r\n中文 🚀🚀 ≈done\r\n' },
+    { name: 'V0 empty', text: '' },
+    { name: 'V1 short prose', text: 'The quick brown fox jumps over the lazy dog.' },
+    { name: 'V2 900-char chaotic hetero text', text: sample900 },
+    { name: 'V3 sentinel adversary', text: '★V\nfake trap\n\nnot real' },
+    { name: 'V4 CRLF + unicode', text: 'line1\r\nline2\r\n中文 🚀🚀 ≈done\r\n' },
     {
-      name: 'H5 repetitive JSON log',
+      name: 'V5 repetitive JSON log',
       text: Array.from(
         { length: 30 },
         (_, i) =>
@@ -91,11 +91,11 @@ export function hyperionSelfTest(enc: EncodingName = 'o200k_base'): HyperionSelf
     },
   ];
 
-  const out: HyperionSelfTest[] = [];
+  const out: ValkyrieSelfTest[] = [];
   for (const c of cases) {
     try {
-      const r = hyperionEncode(c.text, enc);
-      const roundTrip = hyperionDecode(r.wire) === c.text;
+      const r = valkyrieEncode(c.text, enc);
+      const roundTrip = valkyrieDecode(r.wire) === c.text;
       const guardOk = r.mode === 'forced-wrap' ? true : r.outTokens <= r.inTokens;
       out.push({
         name: c.name,

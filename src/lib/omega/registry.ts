@@ -46,12 +46,13 @@ import { auroraEncodeCached as auroraEncode } from './aurora';
 import { crownEncodeCached as crownEncode } from './crown';
 import { irisEncode } from './iris';
 import { kernelEncode } from './kernel';
-import { starlightEncode, starlightDecode } from './starlight';
-import { astraeaEncode, astraeaDecode } from './starlight-prime';
-import { pallasEncode, pallasDecode } from './pallas';
-import { hyperionEncode, hyperionDecode } from './hyperion';
-import { chronosEncode, chronosDecode } from './chronos-x1';
-import { zenithEncode, zenithDecode } from './zenith';
+import { starlightEncode } from './starlight';
+import { astraeaEncode } from './starlight-prime';
+import { pallasEncode } from './pallas';
+import { hyperionEncode } from './hyperion';
+import { chronosEncode } from './chronos-x1';
+import { zenithEncode } from './zenith';
+import { valkyrieEncode } from './valkyrie';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -112,6 +113,16 @@ function presetEntries(): Entry[] {
 export function codecEntries(): Entry[] {
   const base: Entry[] = [
     ...presetEntries(),
+    {
+      key: 'valkyrie',
+      label: '★ VALKYRIE-V1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = valkyrieEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
     {
       key: 'zenith',
       label: '★ ZENITH-Z1',
