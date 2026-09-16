@@ -1,5 +1,5 @@
 /**
- * ★ STARLIGHT-S1 — Direct Reasoning Byte-Exact Lossless Codec
+ * ★ HYPERION-H1 — Terminal Direct-Reasoning Byte-Exact Lossless Codec
  * =============================================================================
  * PARETO SUPERIOR DIRECT-REASONING CODEC FOR HUMAN & LLM READABLE PROMPTS
  *
@@ -8,40 +8,41 @@
  * text (prose, CSV, JSON, code, CJK, logs, prompt outputs).
  *
  * KEY INNOVATIONS:
- * 1. Distinct Disjoint Sentinel (`★S\n`) avoiding cross-codec decoder ambiguity
- * 2. Single-Token CJK/Unicode Alias Mining (1 BPE token per replacement)
+ * 1. Disjoint Sentinel (`★H\n`) preventing cross-codec decoder ambiguity
+ * 2. Equals-Free Fast Micro-Header (`★H\n<alias><phrase>\n\n<body>`)
  * 3. High-Speed Heuristic Candidate Pruning (O(K) BPE trial tokenizations)
- * 4. Micro-Header Encoding + Ultra-compact Sentinel
- * 5. Exactness Gate G1 & Roundtrip Verification G2 with Automatic Passthrough
+ * 4. Verified Single-Token CJK/Unicode Alias Code Point Pool (1 BPE token per replacement)
+ * 5. Micro-Escape Protocol (`\\`, `\n`, `\r`, `\S` for `★`)
+ * 6. Exactness Gate G1 (Roundtrip Verification) & Gate G2 (Measured Real-BPE Reduction Guard)
  * =============================================================================
  */
 
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 
-export interface StarlightEntry {
+export interface HyperionEntry {
   alias: string;
   phrase: string;
   hits: number;
   winTokens: number;
 }
 
-export interface StarlightResult {
+export interface HyperionResult {
   wire: string;
   decoded: string;
   exact: boolean;
   inTokens: number;
   outTokens: number;
   savingsPct: number;
-  entries: StarlightEntry[];
-  mode: 'starlight' | 'identity' | 'forced-wrap';
+  entries: HyperionEntry[];
+  mode: 'hyperion' | 'identity' | 'forced-wrap';
   notes: string;
   encodeMs: number;
 }
 
-const SENTINEL = '★S\n';
+const SENTINEL = '★H\n';
 const CJK_START = 0x4e00;
 const CJK_END = 0x9fff;
-const MAX_POOL = 150;
+const MAX_POOL = 200;
 const MAX_DICTIONARY_ENTRIES = 32;
 const MAX_CANDIDATE_TRIALS = 25;
 
@@ -93,8 +94,11 @@ function unescString(s: string): string {
   return out;
 }
 
-export function starlightDecode(wire: string): string {
+export function hyperionDecode(wire: string): string {
   if (!wire.startsWith(SENTINEL)) return wire;
+
+  // Equals-free micro-header format: ★H\n<alias><phrase>\n<alias><phrase>\n\nbody
+  // Or empty dict wrap: ★H\n\nbody
   const dividerIdx = wire.indexOf('\n\n', SENTINEL.length - 1);
   if (dividerIdx === -1) return wire;
 
@@ -106,16 +110,15 @@ export function starlightDecode(wire: string): string {
     const lines = headerBlock.split('\n');
     for (const line of lines) {
       if (!line) continue;
-      const eqPos = line.indexOf('=');
-      if (eqPos < 1) return wire;
-      const alias = line.slice(0, eqPos);
-      const phrase = unescString(line.slice(eqPos + 1));
+      // First character is the alias CJK symbol, remainder is the escaped phrase
+      const alias = line[0];
+      const phrase = unescString(line.slice(1));
       entries.push({ alias, phrase });
     }
   }
 
   let text = body;
-  // Apply aliases in reverse order of dictionary creation (unwind nested aliases)
+  // Unwind dictionary entries in reverse order of creation
   for (let i = entries.length - 1; i >= 0; i--) {
     text = text.split(entries[i].alias).join(entries[i].phrase);
   }
@@ -133,11 +136,11 @@ function countOccurrences(str: string, sub: string): number {
   return count;
 }
 
-function assembleStarlightWire(entries: StarlightEntry[], body: string): string {
+function assembleHyperionWire(entries: HyperionEntry[], body: string): string {
   if (entries.length === 0) {
     return SENTINEL + '\n' + body;
   }
-  const headerLines = entries.map((e) => `${e.alias}=${escString(e.phrase)}`).join('\n');
+  const headerLines = entries.map((e) => `${e.alias}${escString(e.phrase)}`).join('\n');
   return SENTINEL + headerLines + '\n\n' + body;
 }
 
@@ -155,7 +158,7 @@ function getTopCandidates(text: string, maxCands = MAX_CANDIDATE_TRIALS): string
   const map = new Set<string>();
   const lines = text.split('\n');
   for (const line of lines) {
-    if (line.length >= 3 && line.length <= 150) {
+    if (line.length >= 2 && line.length <= 160) {
       map.add(line);
     }
   }
@@ -173,7 +176,7 @@ function getTopCandidates(text: string, maxCands = MAX_CANDIDATE_TRIALS): string
     const hits = countOccurrences(text, sub);
     if (hits >= 2) {
       const estToks = approxTokens(sub);
-      const estGain = hits * (estToks - 1) - (estToks + 3);
+      const estGain = hits * (estToks - 1) - (estToks + 2);
       if (estGain > 0) {
         scored.push({ sub, estGain });
       }
@@ -184,12 +187,12 @@ function getTopCandidates(text: string, maxCands = MAX_CANDIDATE_TRIALS): string
   return scored.slice(0, maxCands).map((s) => s.sub);
 }
 
-export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'): StarlightResult {
+export function hyperionEncode(text: string, enc: EncodingName = 'o200k_base'): HyperionResult {
   const t0 = typeof performance !== 'undefined' ? performance.now() : 0;
   const ms = () => (typeof performance !== 'undefined' ? performance.now() : 0) - t0;
   const inTokens = countTokens(text, enc);
 
-  const identity = (notes: string): StarlightResult => ({
+  const identity = (notes: string): HyperionResult => ({
     wire: text,
     decoded: text,
     exact: true,
@@ -206,7 +209,7 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
 
   const mustWrap = text.startsWith(SENTINEL);
 
-  // Collect existing characters in text to avoid alias collision
+  // Collect existing characters in text to prevent alias collision
   const textChars = new Set<string>();
   for (let i = 0; i < text.length; i++) {
     textChars.add(text[i]);
@@ -216,14 +219,14 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
   if (aliasPool.length === 0) return identity('no CJK alias tokens available');
 
   let currentBody = text;
-  const entries: StarlightEntry[] = [];
+  const entries: HyperionEntry[] = [];
   let aliasIdx = 0;
 
   // Iterative greedy contraction selection with fast candidate pruning
   while (aliasIdx < aliasPool.length && entries.length < MAX_DICTIONARY_ENTRIES) {
     const currentWireTokens =
       entries.length > 0
-        ? countTokens(assembleStarlightWire(entries, currentBody), enc)
+        ? countTokens(assembleHyperionWire(entries, currentBody), enc)
         : inTokens;
 
     const topCandidates = getTopCandidates(currentBody, MAX_CANDIDATE_TRIALS);
@@ -244,14 +247,14 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
 
       const alias = aliasPool[aliasIdx];
       const nextBody = currentBody.split(phrase).join(alias);
-      const trialEntry: StarlightEntry = {
+      const trialEntry: HyperionEntry = {
         alias,
         phrase,
         hits,
         winTokens: countTokens(phrase, enc),
       };
 
-      const trialWire = assembleStarlightWire([...entries, trialEntry], nextBody);
+      const trialWire = assembleHyperionWire([...entries, trialEntry], nextBody);
       const trialTokens = countTokens(trialWire, enc);
 
       if (trialTokens < currentWireTokens) {
@@ -282,7 +285,7 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
   if (entries.length === 0) {
     if (!mustWrap) return identity('no positive-gain contractions found');
     const w = SENTINEL + '\n' + text;
-    const d = starlightDecode(w);
+    const d = hyperionDecode(w);
     const ot = countTokens(w, enc);
     return {
       wire: w,
@@ -293,16 +296,16 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
       savingsPct: inTokens ? ((inTokens - ot) / inTokens) * 100 : 0,
       entries: [],
       mode: 'forced-wrap',
-      notes: 'forced empty-dict wrap (input begins with ST1 sentinel)',
+      notes: 'forced empty-dict wrap (input begins with HYPERION sentinel)',
       encodeMs: ms(),
     };
   }
 
-  const wire = assembleStarlightWire(entries, currentBody);
+  const wire = assembleHyperionWire(entries, currentBody);
   const outTokens = countTokens(wire, enc);
 
   // Exactness Gate G1: Roundtrip Verification
-  const decoded = starlightDecode(wire);
+  const decoded = hyperionDecode(wire);
   if (decoded !== text) {
     return identity('gate G1 failed: roundtrip mismatch');
   }
@@ -320,34 +323,34 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
     outTokens,
     savingsPct: inTokens ? ((inTokens - outTokens) / inTokens) * 100 : 0,
     entries,
-    mode: 'starlight',
-    notes: `★ STARLIGHT: ${entries.length} CJK single-token contractions · verified byte-exact · guard active`,
+    mode: 'hyperion',
+    notes: `★ HYPERION-H1: ${entries.length} CJK single-token contractions · equals-free micro-header wire · verified byte-exact`,
     encodeMs: ms(),
   };
 }
 
-export const STARLIGHT_SYSTEM_PROMPT = [
-  '# ★ STARLIGHT-S1 — byte-exact CJK single-token contractive dictionary wire',
-  'The message may begin with a header block:',
-  '  ★S',
-  '  alias=phrase',
+export const HYPERION_SYSTEM_PROMPT = [
+  '# ★ HYPERION-H1 — terminal byte-exact equals-free CJK single-token contractive dictionary wire',
+  'The message may begin with an equals-free micro-header block:',
+  '  ★H',
+  '  <alias><phrase>',
   'Decode rules (apply mentally; do not emit expansions unless asked):',
-  '1. Each header line maps a CJK single-token character (alias) to its original phrase.',
+  '1. Each micro-header line maps its leading CJK single-token character (alias) directly to the remaining phrase on that line.',
   '   Escapes in phrases: \\\\=\\, \\n=newline, \\r=CR, \\S=★.',
   '2. In the body after the blank line, each alias character stands for its original phrase.',
   '3. Decode in reverse order (last dictionary entry first) to handle nested aliases.',
   '4. Everything else is literal. Reconstruction is byte-exact.',
-  '5. If there is no ★S header, the text is literal.',
+  '5. If there is no ★H header, the text is literal.',
   'OUTPUT CONTRACT: answer densely; code fences, numbers, and identifiers verbatim.',
 ].join('\n');
 
-export interface StarlightSelfTest {
+export interface HyperionSelfTest {
   name: string;
   pass: boolean;
   details: string;
 }
 
-export function starlightSelfTest(enc: EncodingName = 'o200k_base'): StarlightSelfTest[] {
+export function hyperionSelfTest(enc: EncodingName = 'o200k_base'): HyperionSelfTest[] {
   const sample900 =
     'System Prompt & Operational Directives:\n' +
     'You are an advanced autonomous reasoning engine executing multi-step agentic workflows.\n' +
@@ -373,13 +376,13 @@ export function starlightSelfTest(enc: EncodingName = 'o200k_base'): StarlightSe
     '6. End of instructions. Output final decision tag [PROCEED].';
 
   const cases: { name: string; text: string }[] = [
-    { name: 'S0 empty', text: '' },
-    { name: 'S1 short prose', text: 'The quick brown fox jumps over the lazy dog.' },
-    { name: 'S2 900-char chaotic hetero text', text: sample900 },
-    { name: 'S3 sentinel adversary', text: '★S\nfake=trap\n\nnot real' },
-    { name: 'S4 CRLF + unicode', text: 'line1\r\nline2\r\n中文 🚀🚀 ≈done\r\n' },
+    { name: 'H0 empty', text: '' },
+    { name: 'H1 short prose', text: 'The quick brown fox jumps over the lazy dog.' },
+    { name: 'H2 900-char chaotic hetero text', text: sample900 },
+    { name: 'H3 sentinel adversary', text: '★H\nfake trap\n\nnot real' },
+    { name: 'H4 CRLF + unicode', text: 'line1\r\nline2\r\n中文 🚀🚀 ≈done\r\n' },
     {
-      name: 'S5 repetitive JSON log',
+      name: 'H5 repetitive JSON log',
       text: Array.from(
         { length: 30 },
         (_, i) =>
@@ -388,11 +391,11 @@ export function starlightSelfTest(enc: EncodingName = 'o200k_base'): StarlightSe
     },
   ];
 
-  const out: StarlightSelfTest[] = [];
+  const out: HyperionSelfTest[] = [];
   for (const c of cases) {
     try {
-      const r = starlightEncode(c.text, enc);
-      const roundTrip = starlightDecode(r.wire) === c.text;
+      const r = hyperionEncode(c.text, enc);
+      const roundTrip = hyperionDecode(r.wire) === c.text;
       const guardOk = r.mode === 'forced-wrap' ? true : r.outTokens <= r.inTokens;
       out.push({
         name: c.name,

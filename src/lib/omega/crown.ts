@@ -11,6 +11,7 @@ import { anaphoraEncode, anaphoraDecode, anaphoraDecoderPrompt, type AnaphoraRes
 import { starlightEncode, starlightDecode, STARLIGHT_SYSTEM_PROMPT, type StarlightResult } from './starlight';
 import { astraeaEncode, astraeaDecode, ASTRAEA_SYSTEM_PROMPT, type AstraeaResult } from './starlight-prime';
 import { pallasEncode, pallasDecode, PALLAS_SYSTEM_PROMPT, type PallasResult } from './pallas';
+import { hyperionEncode, hyperionDecode, HYPERION_SYSTEM_PROMPT, type HyperionResult } from './hyperion';
 
 export interface CrownAudit { lane: string; wire: number; contract: number; delivered: number }
 export interface CrownResult {
@@ -33,6 +34,7 @@ export interface CrownResult {
 interface Member { lane: string; wire: string; decoded: string; contract: string; decode: (w: string) => string }
 
 export interface CrownSuppliedMembers {
+  hyperion?: HyperionResult;
   pallas?: PallasResult;
   astraea?: AstraeaResult;
   starlight?: StarlightResult;
@@ -47,7 +49,7 @@ export interface CrownSuppliedMembers {
 }
 
 export function crownDecode(wire: string): string {
-  for (const fn of [pallasDecode, astraeaDecode, starlightDecode, atlasDecode, auroraDecode, mosaicDecode, signetDecode, pulseDecode, anaphoraDecode, helixDecode]) {
+  for (const fn of [hyperionDecode, pallasDecode, astraeaDecode, starlightDecode, atlasDecode, auroraDecode, mosaicDecode, signetDecode, pulseDecode, anaphoraDecode, helixDecode]) {
     try {
       const d = fn(wire);
       if (d !== wire) return d;
@@ -94,6 +96,7 @@ export async function crownEncodeFromMembers(
   if (!text) return identity('empty input');
 
   const members: Member[] = [{ lane: 'identity', wire: text, decoded: text, contract: '', decode: (w) => w }];
+  try { const r = supplied.hyperion ?? hyperionEncode(text, enc); members.push({ lane: 'hyperion', wire: r.wire, decoded: r.decoded, contract: HYPERION_SYSTEM_PROMPT, decode: hyperionDecode }); } catch { /* skip */ }
   try { const r = supplied.pallas ?? pallasEncode(text, enc); members.push({ lane: 'pallas', wire: r.wire, decoded: r.decoded, contract: PALLAS_SYSTEM_PROMPT, decode: pallasDecode }); } catch { /* skip */ }
   try { const r = supplied.astraea ?? astraeaEncode(text, enc); members.push({ lane: 'astraea', wire: r.wire, decoded: r.decoded, contract: ASTRAEA_SYSTEM_PROMPT, decode: astraeaDecode }); } catch { /* skip */ }
   try { const r = supplied.starlight ?? starlightEncode(text, enc); members.push({ lane: 'starlight', wire: r.wire, decoded: r.decoded, contract: STARLIGHT_SYSTEM_PROMPT, decode: starlightDecode }); } catch { /* skip */ }

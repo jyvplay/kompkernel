@@ -10,7 +10,7 @@
  * KEY INNOVATIONS:
  * 1. Distinct Disjoint Sentinel (`★P\n`) avoiding cross-codec decoder ambiguity
  * 2. Equals-Free Micro-Header (`★P\n<alias><phrase>\n\n<body>`)
- * 3. Multi-Tier Multi-Gram Contractive Dictionary Mining Pipeline
+ * 3. High-Speed Heuristic Candidate Pruning (O(K) BPE trial tokenizations)
  * 4. Verified Single-Token CJK/Unicode Alias Code Point Pool (1 BPE token per replacement)
  * 5. Micro-Escape Protocol (`\\`, `\n`, `\r`, `\S` for `★`)
  * 6. Exactness Gate G1 (Roundtrip Verification) & Gate G2 (Measured Real-BPE Reduction Guard)
@@ -44,6 +44,7 @@ const CJK_START = 0x4e00;
 const CJK_END = 0x9fff;
 const MAX_POOL = 200;
 const MAX_DICTIONARY_ENTRIES = 32;
+const MAX_CANDIDATE_TRIALS = 25;
 
 // Cache single-token CJK code points per encoding
 const _cjkPoolCache = new Map<EncodingName, string[]>();
@@ -109,7 +110,6 @@ export function pallasDecode(wire: string): string {
     const lines = headerBlock.split('\n');
     for (const line of lines) {
       if (!line) continue;
-      // First character is the alias CJK symbol, remainder is the escaped phrase
       const alias = line[0];
       const phrase = unescString(line.slice(1));
       entries.push({ alias, phrase });
@@ -141,6 +141,49 @@ function assemblePallasWire(entries: PallasEntry[], body: string): string {
   }
   const headerLines = entries.map((e) => `${e.alias}${escString(e.phrase)}`).join('\n');
   return SENTINEL + headerLines + '\n\n' + body;
+}
+
+function approxTokens(s: string): number {
+  let count = 0;
+  for (let i = 0; i < s.length; i++) {
+    const cp = s.codePointAt(i) ?? 0;
+    if (cp >= 0x4e00 && cp <= 0x9fff) count += 1;
+    else count += 0.25;
+  }
+  return Math.max(1, Math.round(count));
+}
+
+function getTopCandidates(text: string, maxCands = MAX_CANDIDATE_TRIALS): string[] {
+  const map = new Set<string>();
+  const lines = text.split('\n');
+  for (const line of lines) {
+    if (line.length >= 2 && line.length <= 160) {
+      map.add(line);
+    }
+  }
+
+  const maxSearchLen = Math.min(100, text.length);
+  for (let len = 2; len <= maxSearchLen; len++) {
+    for (let i = 0; i + len <= text.length; i++) {
+      const sub = text.slice(i, i + len);
+      if (!map.has(sub)) map.add(sub);
+    }
+  }
+
+  const scored: { sub: string; estGain: number }[] = [];
+  for (const sub of map) {
+    const hits = countOccurrences(text, sub);
+    if (hits >= 2) {
+      const estToks = approxTokens(sub);
+      const estGain = hits * (estToks - 1) - (estToks + 2);
+      if (estGain > 0) {
+        scored.push({ sub, estGain });
+      }
+    }
+  }
+
+  scored.sort((a, b) => b.estGain - a.estGain);
+  return scored.slice(0, maxCands).map((s) => s.sub);
 }
 
 export function pallasEncode(text: string, enc: EncodingName = 'o200k_base'): PallasResult {
@@ -178,38 +221,15 @@ export function pallasEncode(text: string, enc: EncodingName = 'o200k_base'): Pa
   const entries: PallasEntry[] = [];
   let aliasIdx = 0;
 
-  // Multi-tier candidate generation
-  const candidateSubstrings = new Set<string>();
-
-  // Tier 1: Line-based structural pattern candidates
-  const lines = currentBody.split('\n');
-  for (const line of lines) {
-    if (line.length >= 2 && line.length <= 160) {
-      if (countOccurrences(currentBody, line) >= 2) {
-        candidateSubstrings.add(line);
-      }
-    }
-  }
-
-  // Tier 2: Multi-width sliding window substring candidate extraction
-  const maxSearchLen = Math.min(120, currentBody.length);
-  for (let len = 2; len <= maxSearchLen; len++) {
-    for (let i = 0; i + len <= currentBody.length; i++) {
-      const sub = currentBody.slice(i, i + len);
-      if (!candidateSubstrings.has(sub)) {
-        if (countOccurrences(currentBody, sub) >= 2) {
-          candidateSubstrings.add(sub);
-        }
-      }
-    }
-  }
-
-  // Tier 3: Iterative greedy contraction selection
+  // Iterative greedy contraction selection with fast heuristic candidate pruning
   while (aliasIdx < aliasPool.length && entries.length < MAX_DICTIONARY_ENTRIES) {
     const currentWireTokens =
       entries.length > 0
         ? countTokens(assemblePallasWire(entries, currentBody), enc)
         : inTokens;
+
+    const topCandidates = getTopCandidates(currentBody, MAX_CANDIDATE_TRIALS);
+    if (topCandidates.length === 0) break;
 
     interface Candidate {
       phrase: string;
@@ -220,7 +240,7 @@ export function pallasEncode(text: string, enc: EncodingName = 'o200k_base'): Pa
 
     let bestCand: Candidate | null = null;
 
-    for (const phrase of candidateSubstrings) {
+    for (const phrase of topCandidates) {
       const hits = countOccurrences(currentBody, phrase);
       if (hits < 2) continue;
 
