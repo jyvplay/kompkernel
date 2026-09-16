@@ -12,6 +12,7 @@ import { valkyrieEncode, valkyrieDecode, VALKYRIE_SYSTEM_PROMPT, type ValkyrieRe
 import { aetherEncode, aetherDecode, AETHER_SYSTEM_PROMPT, type AetherResult } from './aether';
 import { yggdrasilEncode, yggdrasilDecode, YGGDRASIL_SYSTEM_PROMPT, type YggdrasilResult } from './yggdrasil';
 import { oblivionEncode, oblivionDecode, OBLIVION_SYSTEM_PROMPT, type OblivionResult } from './oblivion';
+import { eidolonEncode, eidolonDecode, EIDOLON_SYSTEM_PROMPT, type EidolonResult } from './eidolon';
 import { zenithEncode, zenithDecode, ZENITH_SYSTEM_PROMPT, type ZenithResult } from './zenith';
 import { chronosEncode, chronosDecode, CHRONOS_SYSTEM_PROMPT, type ChronosResult } from './chronos-x1';
 import { hyperionEncode, hyperionDecode, HYPERION_SYSTEM_PROMPT, type HyperionResult } from './hyperion';
@@ -40,6 +41,7 @@ export interface CrownResult {
 interface Member { lane: string; wire: string; decoded: string; contract: string; decode: (w: string) => string }
 
 export interface CrownSuppliedMembers {
+  eidolon?: EidolonResult;
   oblivion?: OblivionResult;
   yggdrasil?: YggdrasilResult;
   aether?: AetherResult;
@@ -61,7 +63,7 @@ export interface CrownSuppliedMembers {
 }
 
 export function crownDecode(wire: string): string {
-  for (const fn of [oblivionDecode, yggdrasilDecode, aetherDecode, valkyrieDecode, zenithDecode, chronosDecode, hyperionDecode, pallasDecode, astraeaDecode, starlightDecode, atlasDecode, auroraDecode, mosaicDecode, signetDecode, pulseDecode, anaphoraDecode, helixDecode]) {
+  for (const fn of [eidolonDecode, oblivionDecode, yggdrasilDecode, aetherDecode, valkyrieDecode, zenithDecode, chronosDecode, hyperionDecode, pallasDecode, astraeaDecode, starlightDecode, atlasDecode, auroraDecode, mosaicDecode, signetDecode, pulseDecode, anaphoraDecode, helixDecode]) {
     try {
       const d = fn(wire);
       if (d !== wire) return d;
@@ -108,11 +110,17 @@ export async function crownEncodeFromMembers(
   if (!text) return identity('empty input');
 
   const members: Member[] = [{ lane: 'identity', wire: text, decoded: text, contract: '', decode: (w) => w }];
+  try { const r = supplied.eidolon ?? eidolonEncode(text, enc); members.push({ lane: 'eidolon', wire: r.wire, decoded: r.decoded, contract: EIDOLON_SYSTEM_PROMPT, decode: eidolonDecode }); } catch { /* skip */ }
   try { const r = supplied.oblivion ?? oblivionEncode(text, enc); members.push({ lane: 'oblivion', wire: r.wire, decoded: r.decoded, contract: OBLIVION_SYSTEM_PROMPT, decode: oblivionDecode }); } catch { /* skip */ }
   try { const r = supplied.yggdrasil ?? yggdrasilEncode(text, enc); members.push({ lane: 'yggdrasil', wire: r.wire, decoded: r.decoded, contract: YGGDRASIL_SYSTEM_PROMPT, decode: yggdrasilDecode }); } catch { /* skip */ }
   try { const r = supplied.aether ?? aetherEncode(text, enc); members.push({ lane: 'aether', wire: r.wire, decoded: r.decoded, contract: AETHER_SYSTEM_PROMPT, decode: aetherDecode }); } catch { /* skip */ }
   try { const r = supplied.valkyrie ?? valkyrieEncode(text, enc); members.push({ lane: 'valkyrie', wire: r.wire, decoded: r.decoded, contract: VALKYRIE_SYSTEM_PROMPT, decode: valkyrieDecode }); } catch { /* skip */ }
   try { const r = supplied.zenith ?? zenithEncode(text, enc); members.push({ lane: 'zenith', wire: r.wire, decoded: r.decoded, contract: ZENITH_SYSTEM_PROMPT, decode: zenithDecode }); } catch { /* skip */ }
+  try { const r = supplied.chronos ?? chronosEncode(text, enc); members.push({ lane: 'chronos', wire: r.wire, decoded: r.decoded, contract: CHRONOS_SYSTEM_PROMPT, decode: chronosDecode }); } catch { /* skip */ }
+  try { const r = supplied.hyperion ?? hyperionEncode(text, enc); members.push({ lane: 'hyperion', wire: r.wire, decoded: r.decoded, contract: HYPERION_SYSTEM_PROMPT, decode: hyperionDecode }); } catch { /* skip */ }
+  try { const r = supplied.pallas ?? pallasEncode(text, enc); members.push({ lane: 'pallas', wire: r.wire, decoded: r.decoded, contract: PALLAS_SYSTEM_PROMPT, decode: pallasDecode }); } catch { /* skip */ }
+  try { const r = supplied.astraea ?? astraeaEncode(text, enc); members.push({ lane: 'astraea', wire: r.wire, decoded: r.decoded, contract: ASTRAEA_SYSTEM_PROMPT, decode: astraeaDecode }); } catch { /* skip */ }
+  try { const r = supplied.starlight ?? starlightEncode(text, enc); members.push({ lane: 'starlight', wire: r.wire, decoded: r.decoded, contract: STARLIGHT_SYSTEM_PROMPT, decode: starlightDecode }); } catch { /* skip */ }
   try { const r = supplied.atlas ?? atlasEncode(text, enc); members.push({ lane: 'atlas', wire: r.wire, decoded: r.decoded, contract: atlasDecoderPrompt(r), decode: atlasDecode }); } catch { /* skip */ }
   try { const r = supplied.aurora ?? auroraEncode(text, enc); members.push({ lane: 'aurora', wire: r.wire, decoded: r.decoded, contract: auroraDecoderPrompt(r), decode: auroraDecode }); } catch { /* skip */ }
   try { const r = supplied.mosaic ?? mosaicEncode(text, enc); members.push({ lane: 'mosaic', wire: r.wire, decoded: r.decoded, contract: mosaicDecoderPrompt(r), decode: mosaicDecode }); } catch { /* skip */ }

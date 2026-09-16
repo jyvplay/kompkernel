@@ -56,6 +56,7 @@ import { valkyrieEncode } from './valkyrie';
 import { aetherEncode } from './aether';
 import { yggdrasilEncode } from './yggdrasil';
 import { oblivionEncode } from './oblivion';
+import { eidolonEncode } from './eidolon';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -116,6 +117,16 @@ function presetEntries(): Entry[] {
 export function codecEntries(): Entry[] {
   const base: Entry[] = [
     ...presetEntries(),
+    {
+      key: 'eidolon',
+      label: '★ EIDOLON-E1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = eidolonEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
     {
       key: 'oblivion',
       label: '★ OBLIVION-O1',
