@@ -1,48 +1,48 @@
 /**
- * ★ STARLIGHT-S1 — Direct Reasoning Byte-Exact Lossless Codec
+ * ★ PALLAS-P1 (Hyper-PALLAS) — Terminal Direct-Reasoning Lossless Prompt Codec
  * =============================================================================
  * PARETO SUPERIOR DIRECT-REASONING CODEC FOR HUMAN & LLM READABLE PROMPTS
  *
- * Designed to strictly dominate Rosetta, MOSAIC, VERITAS-VX, QUASAR, MERIDIAN,
- * and all existing byte-exact direct-reasoning codecs on chaotic heterogeneous
- * text (prose, CSV, JSON, code, CJK, logs, prompt outputs).
+ * Designed to strictly dominate ASTRAEA-A1, STARLIGHT-S1, VERITAS-VX, MOSAIC,
+ * QUASAR, MERIDIAN, and all existing byte-exact direct-reasoning codecs on
+ * chaotic heterogeneous text (prose, CSV, JSON, code, CJK, logs, prompt outputs).
  *
  * KEY INNOVATIONS:
- * 1. Distinct Disjoint Sentinel (`★S\n`) avoiding cross-codec decoder ambiguity
- * 2. Single-Token CJK/Unicode Alias Mining (1 BPE token per replacement)
- * 3. Multi-gram Overlapping Token-Ngram Contractive Dictionary Optimization
- * 4. High-Frequency Structural & Delimiter Phrase Pre-pass
- * 5. Micro-Header Base-62 Header Encoding + Ultra-compact Sentinel
- * 6. Exactness Gate G1 & Roundtrip Verification G2 with Automatic Passthrough
+ * 1. Distinct Disjoint Sentinel (`★P\n`) avoiding cross-codec decoder ambiguity
+ * 2. Equals-Free Micro-Header (`★P\n<alias><phrase>\n\n<body>`)
+ * 3. Multi-Tier Multi-Gram Contractive Dictionary Mining Pipeline
+ * 4. Verified Single-Token CJK/Unicode Alias Code Point Pool (1 BPE token per replacement)
+ * 5. Micro-Escape Protocol (`\\`, `\n`, `\r`, `\S` for `★`)
+ * 6. Exactness Gate G1 (Roundtrip Verification) & Gate G2 (Measured Real-BPE Reduction Guard)
  * =============================================================================
  */
 
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 
-export interface StarlightEntry {
+export interface PallasEntry {
   alias: string;
   phrase: string;
   hits: number;
   winTokens: number;
 }
 
-export interface StarlightResult {
+export interface PallasResult {
   wire: string;
   decoded: string;
   exact: boolean;
   inTokens: number;
   outTokens: number;
   savingsPct: number;
-  entries: StarlightEntry[];
-  mode: 'starlight' | 'identity' | 'forced-wrap';
+  entries: PallasEntry[];
+  mode: 'pallas' | 'identity' | 'forced-wrap';
   notes: string;
   encodeMs: number;
 }
 
-const SENTINEL = '★S\n';
+const SENTINEL = '★P\n';
 const CJK_START = 0x4e00;
 const CJK_END = 0x9fff;
-const MAX_POOL = 150;
+const MAX_POOL = 200;
 const MAX_DICTIONARY_ENTRIES = 32;
 
 // Cache single-token CJK code points per encoding
@@ -93,8 +93,11 @@ function unescString(s: string): string {
   return out;
 }
 
-export function starlightDecode(wire: string): string {
+export function pallasDecode(wire: string): string {
   if (!wire.startsWith(SENTINEL)) return wire;
+
+  // Equals-free micro-header format: ★P\n<alias><phrase>\n<alias><phrase>\n\nbody
+  // Or empty dict wrap: ★P\n\nbody
   const dividerIdx = wire.indexOf('\n\n', SENTINEL.length - 1);
   if (dividerIdx === -1) return wire;
 
@@ -106,16 +109,15 @@ export function starlightDecode(wire: string): string {
     const lines = headerBlock.split('\n');
     for (const line of lines) {
       if (!line) continue;
-      const eqPos = line.indexOf('=');
-      if (eqPos < 1) return wire;
-      const alias = line.slice(0, eqPos);
-      const phrase = unescString(line.slice(eqPos + 1));
+      // First character is the alias CJK symbol, remainder is the escaped phrase
+      const alias = line[0];
+      const phrase = unescString(line.slice(1));
       entries.push({ alias, phrase });
     }
   }
 
   let text = body;
-  // Apply aliases in reverse order of dictionary creation (unwind nested aliases)
+  // Unwind dictionary entries in reverse order of creation
   for (let i = entries.length - 1; i >= 0; i--) {
     text = text.split(entries[i].alias).join(entries[i].phrase);
   }
@@ -133,20 +135,20 @@ function countOccurrences(str: string, sub: string): number {
   return count;
 }
 
-function assembleStarlightWire(entries: StarlightEntry[], body: string): string {
+function assemblePallasWire(entries: PallasEntry[], body: string): string {
   if (entries.length === 0) {
     return SENTINEL + '\n' + body;
   }
-  const headerLines = entries.map((e) => `${e.alias}=${escString(e.phrase)}`).join('\n');
+  const headerLines = entries.map((e) => `${e.alias}${escString(e.phrase)}`).join('\n');
   return SENTINEL + headerLines + '\n\n' + body;
 }
 
-export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'): StarlightResult {
+export function pallasEncode(text: string, enc: EncodingName = 'o200k_base'): PallasResult {
   const t0 = typeof performance !== 'undefined' ? performance.now() : 0;
   const ms = () => (typeof performance !== 'undefined' ? performance.now() : 0) - t0;
   const inTokens = countTokens(text, enc);
 
-  const identity = (notes: string): StarlightResult => ({
+  const identity = (notes: string): PallasResult => ({
     wire: text,
     decoded: text,
     exact: true,
@@ -163,7 +165,7 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
 
   const mustWrap = text.startsWith(SENTINEL);
 
-  // Collect existing characters in text to avoid alias collision
+  // Collect existing characters in text to prevent alias collision
   const textChars = new Set<string>();
   for (let i = 0; i < text.length; i++) {
     textChars.add(text[i]);
@@ -173,23 +175,23 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
   if (aliasPool.length === 0) return identity('no CJK alias tokens available');
 
   let currentBody = text;
-  const entries: StarlightEntry[] = [];
+  const entries: PallasEntry[] = [];
   let aliasIdx = 0;
 
-  // Candidate generation pass
+  // Multi-tier candidate generation
   const candidateSubstrings = new Set<string>();
 
-  // 1. Structural pattern candidates (lines, CSV fields, JSON keys/prefixes, log tags)
+  // Tier 1: Line-based structural pattern candidates
   const lines = currentBody.split('\n');
   for (const line of lines) {
-    if (line.length >= 3 && line.length <= 150) {
+    if (line.length >= 2 && line.length <= 160) {
       if (countOccurrences(currentBody, line) >= 2) {
         candidateSubstrings.add(line);
       }
     }
   }
 
-  // 2. Sliding window substring candidate extraction
+  // Tier 2: Multi-width sliding window substring candidate extraction
   const maxSearchLen = Math.min(120, currentBody.length);
   for (let len = 2; len <= maxSearchLen; len++) {
     for (let i = 0; i + len <= currentBody.length; i++) {
@@ -202,11 +204,11 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
     }
   }
 
-  // Iterative greedy contraction selection
+  // Tier 3: Iterative greedy contraction selection
   while (aliasIdx < aliasPool.length && entries.length < MAX_DICTIONARY_ENTRIES) {
     const currentWireTokens =
       entries.length > 0
-        ? countTokens(assembleStarlightWire(entries, currentBody), enc)
+        ? countTokens(assemblePallasWire(entries, currentBody), enc)
         : inTokens;
 
     interface Candidate {
@@ -224,14 +226,14 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
 
       const alias = aliasPool[aliasIdx];
       const nextBody = currentBody.split(phrase).join(alias);
-      const trialEntry: StarlightEntry = {
+      const trialEntry: PallasEntry = {
         alias,
         phrase,
         hits,
         winTokens: countTokens(phrase, enc),
       };
 
-      const trialWire = assembleStarlightWire([...entries, trialEntry], nextBody);
+      const trialWire = assemblePallasWire([...entries, trialEntry], nextBody);
       const trialTokens = countTokens(trialWire, enc);
 
       if (trialTokens < currentWireTokens) {
@@ -262,7 +264,7 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
   if (entries.length === 0) {
     if (!mustWrap) return identity('no positive-gain contractions found');
     const w = SENTINEL + '\n' + text;
-    const d = starlightDecode(w);
+    const d = pallasDecode(w);
     const ot = countTokens(w, enc);
     return {
       wire: w,
@@ -273,16 +275,16 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
       savingsPct: inTokens ? ((inTokens - ot) / inTokens) * 100 : 0,
       entries: [],
       mode: 'forced-wrap',
-      notes: 'forced empty-dict wrap (input begins with ST1 sentinel)',
+      notes: 'forced empty-dict wrap (input begins with PALLAS sentinel)',
       encodeMs: ms(),
     };
   }
 
-  const wire = assembleStarlightWire(entries, currentBody);
+  const wire = assemblePallasWire(entries, currentBody);
   const outTokens = countTokens(wire, enc);
 
   // Exactness Gate G1: Roundtrip Verification
-  const decoded = starlightDecode(wire);
+  const decoded = pallasDecode(wire);
   if (decoded !== text) {
     return identity('gate G1 failed: roundtrip mismatch');
   }
@@ -300,34 +302,34 @@ export function starlightEncode(text: string, enc: EncodingName = 'o200k_base'):
     outTokens,
     savingsPct: inTokens ? ((inTokens - outTokens) / inTokens) * 100 : 0,
     entries,
-    mode: 'starlight',
-    notes: `★ STARLIGHT: ${entries.length} CJK single-token contractions · verified byte-exact · guard active`,
+    mode: 'pallas',
+    notes: `★ PALLAS-P1: ${entries.length} CJK single-token contractions · equals-free micro-header wire · verified byte-exact`,
     encodeMs: ms(),
   };
 }
 
-export const STARLIGHT_SYSTEM_PROMPT = [
-  '# ★ STARLIGHT-S1 — byte-exact CJK single-token contractive dictionary wire',
-  'The message may begin with a header block:',
-  '  ★S',
-  '  alias=phrase',
+export const PALLAS_SYSTEM_PROMPT = [
+  '# ★ PALLAS-P1 — terminal byte-exact equals-free CJK single-token contractive dictionary wire',
+  'The message may begin with an equals-free micro-header block:',
+  '  ★P',
+  '  <alias><phrase>',
   'Decode rules (apply mentally; do not emit expansions unless asked):',
-  '1. Each header line maps a CJK single-token character (alias) to its original phrase.',
+  '1. Each micro-header line maps its leading CJK single-token character (alias) directly to the remaining phrase on that line.',
   '   Escapes in phrases: \\\\=\\, \\n=newline, \\r=CR, \\S=★.',
   '2. In the body after the blank line, each alias character stands for its original phrase.',
   '3. Decode in reverse order (last dictionary entry first) to handle nested aliases.',
   '4. Everything else is literal. Reconstruction is byte-exact.',
-  '5. If there is no ★S header, the text is literal.',
+  '5. If there is no ★P header, the text is literal.',
   'OUTPUT CONTRACT: answer densely; code fences, numbers, and identifiers verbatim.',
 ].join('\n');
 
-export interface StarlightSelfTest {
+export interface PallasSelfTest {
   name: string;
   pass: boolean;
   details: string;
 }
 
-export function starlightSelfTest(enc: EncodingName = 'o200k_base'): StarlightSelfTest[] {
+export function pallasSelfTest(enc: EncodingName = 'o200k_base'): PallasSelfTest[] {
   const sample900 =
     'System Prompt & Operational Directives:\n' +
     'You are an advanced autonomous reasoning engine executing multi-step agentic workflows.\n' +
@@ -353,13 +355,13 @@ export function starlightSelfTest(enc: EncodingName = 'o200k_base'): StarlightSe
     '6. End of instructions. Output final decision tag [PROCEED].';
 
   const cases: { name: string; text: string }[] = [
-    { name: 'S0 empty', text: '' },
-    { name: 'S1 short prose', text: 'The quick brown fox jumps over the lazy dog.' },
-    { name: 'S2 900-char chaotic hetero text', text: sample900 },
-    { name: 'S3 sentinel adversary', text: '★S\nfake=trap\n\nnot real' },
-    { name: 'S4 CRLF + unicode', text: 'line1\r\nline2\r\n中文 🚀🚀 ≈done\r\n' },
+    { name: 'P0 empty', text: '' },
+    { name: 'P1 short prose', text: 'The quick brown fox jumps over the lazy dog.' },
+    { name: 'P2 900-char chaotic hetero text', text: sample900 },
+    { name: 'P3 sentinel adversary', text: '★P\nfake trap\n\nnot real' },
+    { name: 'P4 CRLF + unicode', text: 'line1\r\nline2\r\n中文 🚀🚀 ≈done\r\n' },
     {
-      name: 'S5 repetitive JSON log',
+      name: 'P5 repetitive JSON log',
       text: Array.from(
         { length: 30 },
         (_, i) =>
@@ -368,11 +370,11 @@ export function starlightSelfTest(enc: EncodingName = 'o200k_base'): StarlightSe
     },
   ];
 
-  const out: StarlightSelfTest[] = [];
+  const out: PallasSelfTest[] = [];
   for (const c of cases) {
     try {
-      const r = starlightEncode(c.text, enc);
-      const roundTrip = starlightDecode(r.wire) === c.text;
+      const r = pallasEncode(c.text, enc);
+      const roundTrip = pallasDecode(r.wire) === c.text;
       const guardOk = r.mode === 'forced-wrap' ? true : r.outTokens <= r.inTokens;
       out.push({
         name: c.name,

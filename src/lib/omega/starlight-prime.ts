@@ -8,11 +8,12 @@
  * heterogeneous text (prose, CSV, JSON, code, CJK, logs, prompt outputs).
  *
  * KEY INNOVATIONS:
- * 1. Ultra-Compact Micro-Header (`★<alias>=<phrase>\n\n<body>`) saving 1–2 overhead tokens
- * 2. Multi-tier Multi-Gram Contraction Pipeline (Lines, Sub-strings, Delimiters)
- * 3. Verified Single-Token CJK/Unicode Alias Code Point Pool (1 BPE token per replacement)
- * 4. Micro-Escape Protocol (`\\`, `\n`, `\r`, `\S` for `★`)
- * 5. Exactness Gate G1 (Roundtrip Verification) & Gate G2 (Measured Real-BPE Reduction Guard)
+ * 1. Distinct Disjoint Sentinel (`★A\n`) avoiding cross-codec decoder ambiguity
+ * 2. Ultra-Compact Micro-Header (`★A\n<alias>=<phrase>\n\n<body>`)
+ * 3. Multi-tier Multi-Gram Contraction Pipeline (Lines, Sub-strings, Delimiters)
+ * 4. Verified Single-Token CJK/Unicode Alias Code Point Pool (1 BPE token per replacement)
+ * 5. Micro-Escape Protocol (`\\`, `\n`, `\r`, `\S` for `★`)
+ * 6. Exactness Gate G1 (Roundtrip Verification) & Gate G2 (Measured Real-BPE Reduction Guard)
  * =============================================================================
  */
 
@@ -38,11 +39,10 @@ export interface AstraeaResult {
   encodeMs: number;
 }
 
-const SENTINEL = '★';
+const SENTINEL = '★A\n';
 const CJK_START = 0x4e00;
 const CJK_END = 0x9fff;
 const MAX_POOL = 180;
-const MAX_MINING_TOKENS = 250_000;
 const MAX_DICTIONARY_ENTRIES = 32;
 
 // Cache single-token CJK code points per encoding
@@ -96,9 +96,9 @@ function unescString(s: string): string {
 export function astraeaDecode(wire: string): string {
   if (!wire.startsWith(SENTINEL)) return wire;
 
-  // Ultra-compact header format: ★alias=phrase\nalias=phrase\n\nbody
-  // Or empty dict wrap: ★\n\nbody
-  const dividerIdx = wire.indexOf('\n\n', 1);
+  // Ultra-compact micro-header format: ★A\n<alias>=<phrase>\n<alias>=<phrase>\n\nbody
+  // Or empty dict wrap: ★A\n\nbody
+  const dividerIdx = wire.indexOf('\n\n', SENTINEL.length - 1);
   if (dividerIdx === -1) return wire;
 
   const headerBlock = wire.slice(SENTINEL.length, dividerIdx);
@@ -138,7 +138,7 @@ function countOccurrences(str: string, sub: string): number {
 
 function assembleAstraeaWire(entries: AstraeaEntry[], body: string): string {
   if (entries.length === 0) {
-    return SENTINEL + '\n\n' + body;
+    return SENTINEL + '\n' + body;
   }
   const headerLines = entries.map((e) => `${e.alias}=${escString(e.phrase)}`).join('\n');
   return SENTINEL + headerLines + '\n\n' + body;
@@ -193,7 +193,8 @@ export function astraeaEncode(text: string, enc: EncodingName = 'o200k_base'): A
   }
 
   // Tier 2: Multi-width sliding window substring candidate extraction
-  for (let len = 2; len <= 120; len++) {
+  const maxSearchLen = Math.min(120, currentBody.length);
+  for (let len = 2; len <= maxSearchLen; len++) {
     for (let i = 0; i + len <= currentBody.length; i++) {
       const sub = currentBody.slice(i, i + len);
       if (!candidateSubstrings.has(sub)) {
@@ -263,7 +264,7 @@ export function astraeaEncode(text: string, enc: EncodingName = 'o200k_base'): A
 
   if (entries.length === 0) {
     if (!mustWrap) return identity('no positive-gain contractions found');
-    const w = SENTINEL + '\n\n' + text;
+    const w = SENTINEL + '\n' + text;
     const d = astraeaDecode(w);
     const ot = countTokens(w, enc);
     return {
@@ -311,14 +312,15 @@ export function astraeaEncode(text: string, enc: EncodingName = 'o200k_base'): A
 export const ASTRAEA_SYSTEM_PROMPT = [
   '# ★ ASTRAEA-A1 — terminal byte-exact CJK single-token contractive dictionary wire',
   'The message may begin with an ultra-compact micro-header block:',
-  '  ★alias=phrase',
+  '  ★A',
+  '  <alias>=<phrase>',
   'Decode rules (apply mentally; do not emit expansions unless asked):',
   '1. Each micro-header line maps a CJK single-token character (alias) to its original phrase.',
   '   Escapes in phrases: \\\\=\\, \\n=newline, \\r=CR, \\S=★.',
   '2. In the body after the blank line, each alias character stands for its original phrase.',
   '3. Decode in reverse order (last dictionary entry first) to handle nested aliases.',
   '4. Everything else is literal. Reconstruction is byte-exact.',
-  '5. If there is no ★ header, the text is literal.',
+  '5. If there is no ★A header, the text is literal.',
   'OUTPUT CONTRACT: answer densely; code fences, numbers, and identifiers verbatim.',
 ].join('\n');
 
@@ -357,7 +359,7 @@ export function astraeaSelfTest(enc: EncodingName = 'o200k_base'): AstraeaSelfTe
     { name: 'A0 empty', text: '' },
     { name: 'A1 short prose', text: 'The quick brown fox jumps over the lazy dog.' },
     { name: 'A2 900-char chaotic hetero text', text: sample900 },
-    { name: 'A3 sentinel adversary', text: '★fake=trap\n\nnot real' },
+    { name: 'A3 sentinel adversary', text: '★A\nfake=trap\n\nnot real' },
     { name: 'A4 CRLF + unicode', text: 'line1\r\nline2\r\n中文 🚀🚀 ≈done\r\n' },
     {
       name: 'A5 repetitive JSON log',
