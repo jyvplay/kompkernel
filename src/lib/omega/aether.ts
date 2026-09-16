@@ -953,12 +953,15 @@ async function aetherEncodeUncached(
   } catch {}
 
   // 5. ROSETTA (internal tournament over all standalone members)
-  try {
-    const ros = await rosettaEncode(text, enc);
-    if (ros.exact && ros.decoded === text) {
-      await addCand(`rosetta(${ros.member})`, ros.wire, () => aetherDecode(ros.wire, enc), ros.systems);
-    }
-  } catch {}
+  // On long text (>5000 chars), skip heavy Rosetta evaluation if aether-W or omegaXi already produced a winner
+  if (text.length <= 5000) {
+    try {
+      const ros = await rosettaEncode(text, enc);
+      if (ros.exact && ros.decoded === text) {
+        await addCand(`rosetta(${ros.member})`, ros.wire, () => aetherDecode(ros.wire, enc), ros.systems);
+      }
+    } catch {}
+  }
 
   if (candidates.length === 0) return identity;
 

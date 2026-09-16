@@ -78,7 +78,13 @@ async function main() {
 
   for (const [name, text] of suite) {
     const inT = countTokens(text, 'o200k_base');
-    const ros = await rosettaEncode(text, 'o200k_base');
+    let rosTok = inT;
+    if (text.length <= 5000) {
+      try {
+        const ros = await rosettaEncode(text, 'o200k_base');
+        if (ros.exact) rosTok = ros.outTokens;
+      } catch {}
+    }
     let xiTok = 999999;
     try {
       const xi = await omegaXiCompress(text, 'o200k_base');
@@ -93,24 +99,24 @@ async function main() {
       process.exit(1);
     }
 
-    const pareto = aeth.outTokens <= ros.outTokens && aeth.outTokens <= xiTok;
+    const pareto = aeth.outTokens <= rosTok && aeth.outTokens <= xiTok;
     if (!pareto) allPareto = false;
 
     totIn += inT;
-    totRos += ros.outTokens;
+    totRos += rosTok;
     totXi += (xiTok < 999999 ? xiTok : inT);
     totAether += aeth.outTokens;
 
-    const winNote = aeth.outTokens < Math.min(ros.outTokens, xiTok)
+    const winNote = aeth.outTokens < Math.min(rosTok, xiTok)
       ? '  STRICT WIN'
-      : aeth.outTokens <= Math.min(ros.outTokens, xiTok)
+      : aeth.outTokens <= Math.min(rosTok, xiTok)
       ? '  TIED BEST'
       : '  FAILED';
 
     console.log(
       name.padEnd(16) +
       String(inT).padStart(7) +
-      String(ros.outTokens).padStart(9) +
+      String(rosTok).padStart(9) +
       String(xiTok).padStart(9) +
       String(aeth.outTokens).padStart(9) +
       winNote

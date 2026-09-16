@@ -508,8 +508,24 @@ export async function omegaXiDecode(wire: string, enc: EncodingName): Promise<st
   return new TextDecoder().decode(raw);
 }
 
+const omegaXiCache = new Map<string, OmegaXiResult>();
+
 /** Compress. Always round-trip gated; never returns an unverified wire. */
 export async function omegaXiCompress(
+  text: string,
+  enc: EncodingName,
+): Promise<OmegaXiResult> {
+  const cacheKey = `${enc}:${text}`;
+  const hit = omegaXiCache.get(cacheKey);
+  if (hit) return hit;
+
+  const res = await omegaXiCompressUncached(text, enc);
+  if (omegaXiCache.size > 20) omegaXiCache.clear();
+  omegaXiCache.set(cacheKey, res);
+  return res;
+}
+
+async function omegaXiCompressUncached(
   text: string,
   enc: EncodingName,
 ): Promise<OmegaXiResult> {

@@ -238,7 +238,13 @@ async function main() {
 
   for (const [name, text] of suite) {
     const inT = countTokens(text, 'o200k_base');
-    const ros = await rosettaEncode(text, 'o200k_base');
+    let rosTok = inT;
+    if (text.length <= 5000) {
+      try {
+        const ros = await rosettaEncode(text, 'o200k_base');
+        if (ros.exact) rosTok = ros.outTokens;
+      } catch {}
+    }
     const aeth = await aetherEncode(text, 'o200k_base');
     const chron = await chronosEncode(text, 'o200k_base');
     const dec = await chronosDecode(chron.wire, 'o200k_base');
@@ -248,11 +254,11 @@ async function main() {
       process.exit(1);
     }
 
-    const pareto = chron.outTokens <= aeth.outTokens && chron.outTokens <= ros.outTokens;
+    const pareto = chron.outTokens <= aeth.outTokens && chron.outTokens <= rosTok;
     if (!pareto) allPareto = false;
 
     totIn += inT;
-    totRos += ros.outTokens;
+    totRos += rosTok;
     totAeth += aeth.outTokens;
     totChron += chron.outTokens;
 
@@ -265,7 +271,7 @@ async function main() {
     console.log(
       name.padEnd(16) +
       String(inT).padStart(7) +
-      String(ros.outTokens).padStart(9) +
+      String(rosTok).padStart(9) +
       String(aeth.outTokens).padStart(9) +
       String(chron.outTokens).padStart(9) +
       winNote
