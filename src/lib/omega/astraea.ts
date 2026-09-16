@@ -225,13 +225,23 @@ function extractDynamicEntries(
 
   const candidates = new Map<string, number>();
 
+  // Word-level n-grams up to 16 words
   const words = text.match(/\S+/g) ?? [];
-  for (let len = 1; len <= 8; len++) {
+  for (let len = 1; len <= 16; len++) {
     for (let i = 0; i <= words.length - len; i++) {
       const phrase = words.slice(i, i + len).join(' ');
-      if (phrase.length >= 5 && phrase.length <= 120 && !phrase.includes(mark)) {
+      if (phrase.length >= 5 && phrase.length <= 200 && !phrase.includes(mark)) {
         candidates.set(phrase, (candidates.get(phrase) ?? 0) + 1);
       }
+    }
+  }
+
+  // Line-level repetition harvesting
+  const rawLines = text.split('\n');
+  for (const line of rawLines) {
+    const trimmed = line.trim();
+    if (trimmed.length >= 10 && trimmed.length <= 250 && !trimmed.includes(mark)) {
+      candidates.set(trimmed, (candidates.get(trimmed) ?? 0) + 1);
     }
   }
 
@@ -256,7 +266,7 @@ function extractDynamicEntries(
   let remainingText = text;
 
   for (const item of items) {
-    if (gIdx >= availableGlyphs.length || selected.length >= 48) break;
+    if (gIdx >= availableGlyphs.length || selected.length >= 128) break;
     const countInRemaining = remainingText.split(item.phrase).length - 1;
     if (countInRemaining >= 2) {
       const glyph = availableGlyphs[gIdx++];
