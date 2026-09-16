@@ -51,6 +51,7 @@ import { astraeaEncode, astraeaDecode } from './starlight-prime';
 import { pallasEncode, pallasDecode } from './pallas';
 import { hyperionEncode, hyperionDecode } from './hyperion';
 import { chronosEncode, chronosDecode } from './chronos-x1';
+import { zenithEncode, zenithDecode } from './zenith';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -111,6 +112,16 @@ function presetEntries(): Entry[] {
 export function codecEntries(): Entry[] {
   const base: Entry[] = [
     ...presetEntries(),
+    {
+      key: 'zenith',
+      label: '★ ZENITH-Z1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = zenithEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
     {
       key: 'chronos',
       label: '★ CHRONOS-X1',
