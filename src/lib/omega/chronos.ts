@@ -63,45 +63,40 @@ export function chronosGrammarFold(
   text: string,
   enc: EncodingName = 'o200k_base',
 ): ChronosGrammarFold {
-  if (!text || text.length < 20) return { text, rules: [] };
+  if (!text || text.length < 50) return { text, rules: [] };
 
+  // Word-level n-gram frequency counter (fast and O(N))
+  const words = text.split(/(\s+)/);
   const counts = new Map<string, number>();
-  const minLen = 5;
-  const maxLen = 40;
 
-  for (let i = 0; i < text.length; i++) {
-    for (let len = minLen; len <= maxLen && i + len <= text.length; len++) {
-      const sub = text.slice(i, i + len);
-      if (sub.includes('\n')) continue; // keep rules line-aligned
-      counts.set(sub, (counts.get(sub) ?? 0) + 1);
+  for (let nGrams = 3; nGrams <= 8; nGrams++) {
+    for (let i = 0; i <= words.length - (nGrams * 2 - 1); i += 2) {
+      const phrase = words.slice(i, i + nGrams * 2 - 1).join('');
+      if (phrase.includes('\n') || phrase.length < 10) continue;
+      counts.set(phrase, (counts.get(phrase) ?? 0) + 1);
     }
   }
 
-  const cands: { phrase: string; count: number; pTok: number; profit: number }[] = [];
+  const filtered: { phrase: string; count: number; len: number }[] = [];
   for (const [phrase, count] of counts.entries()) {
     if (count >= 2) {
-      const pTok = countTokens(phrase, enc);
-      if (pTok >= 2) {
-        const profit = (count - 1) * (pTok - 1) - (pTok + 2);
-        if (profit >= 1) {
-          cands.push({ phrase, count, pTok, profit });
-        }
-      }
+      filtered.push({ phrase, count, len: phrase.length });
     }
   }
 
-  cands.sort((a, b) => b.profit - a.profit);
+  filtered.sort((a, b) => (b.count * b.len) - (a.count * a.len));
 
   let t = text;
   let cp = 0xd000; // Hangul Syllables U+D000..U+D7A3
   const rules: GrammarRule[] = [];
 
-  for (const c of cands) {
+  for (const c of filtered.slice(0, 5)) {
     if (t.includes(c.phrase)) {
+      const pTok = countTokens(c.phrase, enc);
       const occs = t.split(c.phrase).length - 1;
-      if (occs >= 2) {
+      if (pTok >= 2 && occs >= 2) {
         let glyph = String.fromCodePoint(cp++);
-        while (cp <= 0xd7a3 && encodeIds(glyph, enc).length !== 1) {
+        while (cp <= 0xd7a3 && (encodeIds(glyph, enc).length !== 1 || text.includes(glyph))) {
           glyph = String.fromCodePoint(cp++);
         }
         if (cp <= 0xd7a3) {
@@ -133,7 +128,8 @@ export async function chronosDecode(
       const body = wire.slice(endHeader + 6);
       let expandedBody = await aetherDecode(body, enc);
 
-      for (const line of headerLines) {
+      // Process rules in REVERSE order (bottom-to-top) so nested rules unroll correctly
+      for (const line of [...headerLines].reverse()) {
         const eq = line.indexOf('=');
         if (eq > 0) {
           const glyph = line.slice(0, eq);

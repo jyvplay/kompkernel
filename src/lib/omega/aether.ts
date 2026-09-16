@@ -236,7 +236,10 @@ export function aetherFold(text: string, enc: EncodingName = 'o200k_base'): stri
   for (const ph of cb.phrases) {
     if (out.includes(ph)) {
       const g = cb.byPhrase.get(ph);
-      if (g) out = out.split(ph).join(g);
+      // Safety: Skip glyph if it already exists in the original source text to prevent collision
+      if (g && !text.includes(g)) {
+        out = out.split(ph).join(g);
+      }
     }
   }
   return out;
