@@ -160,15 +160,25 @@ function getTopCandidates(text: string, maxCands = 25): string[] {
   for (const line of lines) {
     if (line.length >= 2 && line.length <= 180) {
       map.add(line);
+      // Word n-grams inside lines
+      const words = line.split(/(\s+|,|\{|\}|\[|\]|:|"|'|\(|\)|=)/).filter(Boolean);
+      for (let wLen = 2; wLen <= 12; wLen++) {
+        for (let i = 0; i + wLen <= words.length; i++) {
+          const p = words.slice(i, i + wLen).join('');
+          if (p.length >= 2 && p.length <= 150) map.add(p);
+        }
+      }
     }
   }
 
-  const maxSearchLen = Math.min(100, text.length);
-  for (let len = 2; len <= maxSearchLen; len++) {
-    for (let i = 0; i + len <= text.length; i++) {
+  const maxSearchLen = Math.min(80, text.length);
+  for (let len = 2; len <= maxSearchLen; len += (text.length > 5000 ? 2 : 1)) {
+    for (let i = 0; i + len <= text.length; i += (text.length > 5000 ? 2 : 1)) {
       const sub = text.slice(i, i + len);
       if (!map.has(sub)) map.add(sub);
+      if (map.size > 8000) break;
     }
+    if (map.size > 8000) break;
   }
 
   const scored: { sub: string; estGain: number }[] = [];

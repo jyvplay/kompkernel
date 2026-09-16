@@ -53,6 +53,7 @@ import { hyperionEncode } from './hyperion';
 import { chronosEncode } from './chronos-x1';
 import { zenithEncode } from './zenith';
 import { valkyrieEncode } from './valkyrie';
+import { aetherEncode } from './aether';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -113,6 +114,16 @@ function presetEntries(): Entry[] {
 export function codecEntries(): Entry[] {
   const base: Entry[] = [
     ...presetEntries(),
+    {
+      key: 'aether',
+      label: '★ AETHER-A1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = aetherEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
     {
       key: 'valkyrie',
       label: '★ VALKYRIE-V1',
