@@ -34,6 +34,7 @@ import { meridianDecode } from './meridian';
 import { quasarDecode } from './quasar';
 import { plexusDecode } from './plexus';
 import { veritasDecode } from './veritas';
+import { CJK_CONTRACTIVE_ENTRIES } from './cjk-contractor';
 
 /* --------------------------- ASTRAEA-L LEXICON ---------------------------- */
 
@@ -124,10 +125,11 @@ const TECHNICAL_COLLOCATIONS: readonly string[] = [
   'Recommended remediation items include increasing connection pool capacity, tuning handshake timeout parameters, and refining secondary fallback failover rules.',
 ];
 
-/** ASTRAEA_LEXICON_V2 — PHRASEBOOK_V1 plus high-frequency technical collocations. */
+/** ASTRAEA_LEXICON_V2 — PHRASEBOOK_V1 plus high-frequency technical collocations & CJK contractive phrases. */
 export const ASTRAEA_LEXICON_V2: readonly string[] = [
   ...PHRASEBOOK_V1,
   ...TECHNICAL_COLLOCATIONS,
+  ...CJK_CONTRACTIVE_ENTRIES,
 ];
 
 /* ------------------------------ GLYPH POOLS -------------------------------- */
