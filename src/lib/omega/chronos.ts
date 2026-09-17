@@ -68,7 +68,6 @@ export function chronosGrammarFold(
   const words = text.split(/(\s+)/);
   const counts = new Map<string, number>();
 
-  // Fast stride n-gram scanner
   for (const nGrams of [4, 6]) {
     const span = nGrams * 2 - 1;
     const limit = words.length - span;
@@ -132,7 +131,6 @@ export async function chronosDecode(
       const body = wire.slice(endHeader + 6);
       let expandedBody = await aetherDecode(body, enc);
 
-      // Process rules in REVERSE order (bottom-to-top) so nested rules unroll correctly
       for (const line of [...headerLines].reverse()) {
         const eq = line.indexOf('=');
         if (eq > 0) {

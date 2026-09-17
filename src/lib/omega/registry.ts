@@ -125,22 +125,22 @@ export function codecEntries(): Entry[] {
       },
     },
     {
-      key: 'chronos',
-      label: '⏳ CHRONOS-Ω',
-      family: 'exact',
-      fidelity: 'exact',
-      run: async (t, enc) => {
-        const r = await chronosEncode(t, enc);
-        return { output: r.wire, decoded: r.decoded, note: r.notes };
-      },
-    },
-    {
       key: 'aether',
       label: '⟿ AETHER-A1',
       family: 'exact',
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = await aetherEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'chronos',
+      label: '⏳ CHRONOS-Ω',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await chronosEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
