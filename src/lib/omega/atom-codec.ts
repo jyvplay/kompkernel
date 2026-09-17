@@ -47,46 +47,8 @@ import {
 
 export { alephAnalyze };
 
-export const OMEGA_XI_SYSTEM_PROMPT = `[SYSTEM PROMPT / TOOL INSTRUCTION FOR Ω-Ξ ATOM CODEC (v3 "Aleph") DECOMPRESSION]
-Scope, stated honestly: Ω-Ξ v3 is a transport codec: it is byte-exact and token-minimal, and it requires the Ω-Ξ v3 reference decompressor "omegaXiDecode" from the file "src/lib/omega/atom-codec.ts" of the kompkernel npm package (equivalent source at https://github.com/jyvplay/kompkernel). Unlike semantic or lossy summarization notation, an LLM should not attempt to decompress or guess the plaintext of an Ω-Ξ wire directly from the surface word-salad in-context. Each emitted word is a verified 1-token BPE atom (in o200k_base or cl100k_base), placed in a base-M mixed-radix packing over 512-byte blocks (M = the exact runtime-scanned single-token English-word alphabet, currently ≈ 28,000 atoms). The payload beneath the atom envelope is one of thirteen exactness-gated candidates: {CM-Ω, deflate-raw, gzip, brotli} × {raw, SHFP prepass, LZ77 super-prior seed, both} plus three ℵ Aleph v3 pipelines (typed structural prepass over ISO timestamps / decimals / long integers / HH:MM(:SS) times → CM-Ω or LZ77-seeded brotli, with or without an additional SHFP dictionary pass).
-
-To decompress this payload in an automated pipeline, agent framework, or code execution environment, paste and execute the following exact decompressor specification and API invocation:
-
-### OPTION A: Tool / API Execution Schema (For Tool-Use LLMs & Agent Connectors)
-Invoke the decompressor endpoint directly:
-\`\`\`json
-{
-  "tool": "omega_xi_decode",
-  "arguments": {
-    "wire": "<paste compressed atom word-salad here>",
-    "encoding": "o200k_base"
-  }
-}
-\`\`\`
-Or via HTTP POST to the local/hosted API route:
-\`\`\`bash
-curl -X POST /api/codec-audit \\
-  -H "Content-Type: application/json" \\
-  -d '{"codec": "omegaXi", "operation": "decode", "text": "<paste compressed atom word-salad here>"}'
-\`\`\`
-
-### OPTION B: Programmatic TypeScript / JavaScript Reference Decompressor
-When integrating into a runtime without the npm package, use the following self-contained decoder logic:
-\`\`\`typescript
-import { omegaXiDecode } from '@/lib/omega/atom-codec';
-// Or relative import from this repository:
-import { omegaXiDecode } from "./lib/omega/atom-codec";
-
-async function readOmegaXiPayload(wireText: string): Promise<string> {
-  // 1. Unpack base-M atom digits to bitstream (M = exact live alphabet radix)
-  // 2. Decode header (4-bit codec ID + 24-bit payload length)
-  // 3. Reverse entropy layer (CM-Ω arithmetic decode, Deflate-Raw, Brotli, or Gzip)
-  // 4. Reverse Static High-Frequency Phrase (SHFP) dictionary prepass
-  const exactPlaintext = await omegaXiDecode(wireText, "o200k_base");
-  return exactPlaintext;
-}
-\`\`\`
-[END SYSTEM PROMPT INSTRUCTION]`;
+export const OMEGA_XI_SYSTEM_PROMPT = `[CODEC SPECIFICATION: Ω-Ξ ATOM DECOMPRESSION PROTOCOL]
+Specification: Ω-Ξ v3 transport codec is a byte-exact, token-minimal binary transport format. Each word is a 1-token BPE atom in a base-M mixed-radix packing over 512-byte blocks. Payload decompression is executed programmatically via the "omegaXiDecode" function in "src/lib/omega/atom-codec.ts".`;
 
 export const CODEC_CM = 0;
 export const CODEC_DEFLATE = 1;

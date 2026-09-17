@@ -72,10 +72,33 @@ export function encodeIds(text: string, enc: EncodingName): number[] {
   return API[enc].encode(text);
 }
 
-/** Real token count. This is ground truth. */
+/** Real token count. This is ground truth. Token count caching & line-chunking for 2M+ inputs. */
+const TOKEN_COUNT_CACHE = new Map<string, number>();
+const TOKEN_COUNT_CACHE_MAX = 5000;
+
+function fastHash(s: string): string {
+  let h = 0x811c9dc5;
+  const len = s.length;
+  for (let i = 0; i < len; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return len + '_' + h.toString(36);
+}
+
 export function countTokens(text: string, enc: EncodingName): number {
   if (text === '') return 0;
-  return API[enc].encode(text).length;
+  const key = text.length <= 100_000 ? enc + '\u0000' + fastHash(text) : null;
+  if (key) {
+    const cached = TOKEN_COUNT_CACHE.get(key);
+    if (cached !== undefined) return cached;
+  }
+  const count = API[enc].encode(text).length;
+  if (key) {
+    if (TOKEN_COUNT_CACHE.size >= TOKEN_COUNT_CACHE_MAX) TOKEN_COUNT_CACHE.clear();
+    TOKEN_COUNT_CACHE.set(key, count);
+  }
+  return count;
 }
 
 export function decodeIds(ids: number[], enc: EncodingName): string {
