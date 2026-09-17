@@ -429,9 +429,106 @@ async function p8() {
   }
 }
 
+
+async function p9() {
+  console.log('P9 — J-array markers, prologue diet, TS-in-span adversarial shapes');
+  const { rosettaEncode, rosettaDecode, rosettaPool } = await import('@/lib/omega/rosetta');
+  const pool = rosettaPool('o200k_base');
+
+  // ---- J array shapes: exact + never-worse -------------------------------
+  const shapes: Array<[string, string]> = [
+    ['empty array alone', '{"tags":[]}'],
+    ['empty array rich line', '{"tags":[],"svc":"gateway","ok":true,"count":14,"ms":812}'],
+    ['single string', '{"pages":["slack"],"svc":"gateway","ok":true,"ms":812}'],
+    ['single number', '{"ids":[7],"svc":"gateway","ok":true,"ms":812}'],
+    ['single bool', '{"flags":[false],"svc":"gateway","ok":true,"ms":812}'],
+    ['single null', '{"xs":[null],"svc":"gateway","ok":true,"ms":812}'],
+    ['two elements', '{"pages":["slack","phone"],"svc":"gateway","ok":true}'],
+    ['mixed types', '{"xs":["a",1,true,null],"svc":"gateway","ok":true}'],
+    ['string that IS a pipe', '{"a":"|","b":["c"],"ok":true,"ms":812}'],
+    ['string with pipe inside', '{"a":"x|y","b":["p","q"],"ok":true,"ms":812}'],
+    ['string that looks like the marker', '{"a":"|x","b":"y","ok":true,"ms":812}'],
+    ['array of arrays (nested, stays literal)', '{"a":[[1,2]],"b":"c","ok":true,"ms":812}'],
+    ['array with space-string (stays literal)', '{"a":["x y"],"b":"c","ok":true,"ms":812}'],
+    ['element with pipe (stays literal)', '{"a":["x|y"],"b":"c","ok":true,"ms":812}'],
+    ['single after multi', '{"a":["p","q"],"b":["r"],"c":"s","ok":true}'],
+    ['empty + single + multi', '{"a":[],"b":["c"],"d":["e","f"],"g":"h","ok":true}'],
+  ];
+  for (const [label, text] of shapes) {
+    const r = await rosettaEncode(text, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === text, `P9 array ${label} (exact)`, `${r.member} ${r.outTokens}/${r.inTokens} [${r.systems.join(',')}]`);
+    ok(r.outTokens <= r.inTokens, `P9 array ${label} (never-worse)`, `${r.outTokens}/${r.inTokens}`);
+  }
+
+  // ---- prologue diet: wire shape + pool-start safety ----------------------
+  {
+    const r = await rosettaEncode('Status: deploy finished, but two pods restart. Queue depth climbed.\n{"job":"sync","retries":3,"ok":false}', 'o200k_base');
+    const w = r.member.startsWith('rosetta') ? r.wire : null;
+    ok(w !== null && w[1] !== '\n', 'P9 diet: no newline after mark', JSON.stringify(w && w.slice(0, 2)));
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') !== undefined, 'P9 diet: decodes', r.member);
+    // pool-glyph-starting sources: every pool head glyph
+    let wrapOk = true;
+    for (let i = 0; i < 24; i++) {
+      const src = pool[i] + 'x-' + i + ' ordinary text with a table\n| a | b |\n| 1 | 2 |';
+      const rr = await rosettaEncode(src, 'o200k_base');
+      if (!(rr.exact && rosettaDecode(rr.wire, 'o200k_base') === src)) { wrapOk = false; console.log('    fail @pool[' + i + ']', rr.member); }
+    }
+    ok(wrapOk, 'P9 pool-glyph-start sources (24 glyphs) all exact');
+    // a source that mimics a W-prologue: mark + flag + newline + body
+    const flag = pool[105];
+    const mimic = pool[0] + flag + '\nstatus line that looks like a W wire body';
+    const rm = await rosettaEncode(mimic, 'o200k_base');
+    ok(rm.exact && rosettaDecode(rm.wire, 'o200k_base') === mimic, 'P9 W-prologue mimic source safe', rm.member);
+    // decode never throws on malformed prologues
+    let noThrow = true;
+    for (const g of [pool[0], pool[0] + flag, pool[0] + flag + '\n', pool[0] + '\n', pool[0] + pool[1], pool[50] + 'J', pool[0] + 'P2\nx y', pool[0] + 'C1\nab']) {
+      try { rosettaDecode(g, 'o200k_base'); } catch { noThrow = false; }
+    }
+    ok(noThrow, 'P9 decode never throws on malformed prologues');
+  }
+
+  // ---- TS inside spans ------------------------------------------------------
+  {
+    const docs: Array<[string, string]> = [
+      ['TS in pipe fields', '| svc | ts | ok |\n| gw | 2026-09-15T09:02:33Z | yes |\n| auth | 2026-09-15T09:03:41Z | no |'],
+      ['TS with offset in pipe fields', '| svc | ts |\n| gw | 2026-09-15T09:02:33+02:00 |\n| auth | 2026-09-15T09:03:41-05:00 |'],
+      ['TS in JSON family values', '{"ts":"2026-09-15T09:02:33Z","ok":true}\n{"ts":"2026-09-15T09:03:41Z","ok":false}'],
+      ['TS in JSON single line', '{"ts":"2026-09-15T09:02:33Z","ok":true,"svc":"gateway","ms":812}'],
+      ['TS in CSV run', 'svc,ts,ok\ngw,2026-09-15T09:02:33Z,yes\nauth,2026-09-15T09:03:41Z,no'],
+      ['basic-form TS literal in pipe (no double fold)', '| svc | ts |\n| gw | 20260915T090233Z |\n| auth | 20260915T090341Z |'],
+      ['implausible TS in pipe (stays literal)', '| svc | ts |\n| gw | 2026-13-45T99:99:99Z |\n| auth | 2026-09-15T09:03:41Z |'],
+    ];
+    for (const [label, text] of docs) {
+      const r = await rosettaEncode(text, 'o200k_base');
+      ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === text, `P9 ${label} (exact)`, `${r.member} ${r.outTokens}/${r.inTokens} [${r.systems.join(',')}]`);
+      ok(r.outTokens <= r.inTokens, `P9 ${label} (never-worse)`, `${r.outTokens}/${r.inTokens}`);
+    }
+  }
+
+  // ---- fuzz: pipes + JSON + arrays + TS + pool glyphs + prologues ----------
+  {
+    let fuzzOk = true;
+    let neverWorse = 0;
+    const N = 40;
+    let seed = 555777333;
+    const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+    const alpha = ['|', ' ', ',', '{', '}', '"', ':', '=', '[', ']', '\n', '1', '4', '9', '0', 'Z', 'T', '-', 'a', 'b', 's', 'v', 'c', 'e', 'g', 'k', 'o', 'p', 't', 'u', 'l', 'ぁ', 'あ', 'ぃ', pool[105], '耳', '影', '가'];
+    for (let i = 0; i < N; i++) {
+      let doc = '';
+      const len = 40 + Math.floor(rnd() * 320);
+      for (let j = 0; j < len; j++) doc += alpha[Math.floor(rnd() * alpha.length)];
+      const r = await rosettaEncode(doc, 'o200k_base');
+      if (!(r.exact && rosettaDecode(r.wire, 'o200k_base') === doc)) { fuzzOk = false; console.log('    fuzz fail:', JSON.stringify(doc.slice(0, 90))); }
+      if (r.outTokens <= r.inTokens || r.member === 'forced-wrap') neverWorse++;
+    }
+    ok(fuzzOk, 'P9 fuzz exact on array/prologue/TS-soaked docs (40)');
+    ok(neverWorse === N, 'P9 fuzz never-worse', `${neverWorse}/${N}`);
+  }
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }

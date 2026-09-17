@@ -2,7 +2,13 @@
  * src/lib/omega/rosetta.ts
  * =============================================================================
  * ROSETTA-R2 — Notational transposition (dual-spelling argmin) + gated Pareto
- * (R2 = R1 + table/YAML/JSON-family span systems P/Y/F + the τ member lane)
+ * (R2 = R1 + table/YAML/JSON-family span systems P/Y/F + the τ member lane;
+ *  R2.1 = J-array leading-pipe markers (single/empty arrays now fold — the
+ *  G1 gate used to veto whole lines over ["x"]/[] values), the prologue diet
+ *  (no newline after the mark: −1 token on every wire, measured — the bare
+ *  newline never merges), TS-transposition inside P-span fields and F-family
+ *  values (parity with the C system), and a total φφ-literal forced-wrap for
+ *  pool-soaked sources that no disjoint window can protect.)
  * tournament over every self-contained exact lane in this repository.
  *
  * THE BLINDSPOT (measured, and shared by every codec in this repository)
@@ -337,7 +343,11 @@ function foldJsonLine(line: string): RosettaKvPair[] | null {
     } else if (typeof v === 'number' || typeof v === 'boolean' || v === null) {
       pairs.push({ key: k, val: v === null ? 'null' : String(v) });
     } else if (Array.isArray(v)) {
-      if (v.length === 0) return null; // '' is ambiguous with empty string
+      // Arrays fold to '|'-joined elements. A single-element (or empty)
+      // array would be ambiguous with a bare string ('' also means empty
+      // string), so it carries a LEADING pipe: ["slack"] -> '|slack',
+      // [] -> '|'. Bare strings can never contain '|' (bareableString),
+      // quoted values start with '"' — the marker is unambiguous.
       const parts: string[] = [];
       for (const el of v) {
         if (typeof el === 'string') {
@@ -349,7 +359,7 @@ function foldJsonLine(line: string): RosettaKvPair[] | null {
           return null; // nested arrays/objects
         }
       }
-      pairs.push({ key: k, val: parts.join('|') });
+      pairs.push({ key: k, val: parts.length <= 1 ? '|' + parts.join('|') : parts.join('|') });
     } else {
       return null; // nested object
     }
@@ -367,6 +377,18 @@ function unfoldJsonPairs(pairs: RosettaKvPair[]): string | null {
     if (v.startsWith('"')) {
       if (!v.endsWith('"') || v.length < 2) return null;
       rendered = JSON.stringify(kvUnescape(v.slice(1, -1)));
+    } else if (v.startsWith('|')) {
+      // leading-pipe array marker: '|x' -> ["x"], '|' -> []
+      const arr: unknown[] = [];
+      if (v.length > 1) {
+        for (const part of v.slice(1).split('|')) {
+          if (part === 'true' || part === 'false') arr.push(part === 'true');
+          else if (part === 'null') arr.push(null);
+          else if (part !== '' && !Number.isNaN(Number(part))) arr.push(Number(part));
+          else arr.push(part);
+        }
+      }
+      rendered = JSON.stringify(arr);
     } else if (v.includes('|')) {
       const arr: unknown[] = [];
       for (const part of v.split('|')) {
@@ -402,7 +424,7 @@ function csvFoldableLine(line: string): boolean {
 /* ------------------------------ transposition ------------------------------ */
 
 export interface RosettaTranspose {
-  /** mark + '\n' + body, or null when nothing transposed. */
+  /** mark + body (prologue diet: no newline after the mark), or null. */
   wire: string | null;
   mark: string;
   windowStart: number;
@@ -739,11 +761,14 @@ export function rosettaTranspose(
     // per-line J/C logic. G1: the expanded render must equal the SOURCE run;
     // profitability is measured on the transformed run vs the span.
     {
-      // pipe run
+      // pipe run (timestamps inside fields transpose first — the same
+      // discipline the C system applies to CSV runs; a folded field carries
+      // a mark+basic-TS span that the P decode expands per field)
       let j = li;
       while (j < lines.length && lines[j].startsWith('|')) j++;
       if (j - li >= 2) {
-        const run = lines.slice(li, j);
+        const run = lines.slice(li, j).map((l) => tsTransposeLine(l, mark, enc, measure));
+        for (let r = li; r < j; r++) if (run[r - li] !== lines[r]) systems.add('T');
         const srcRun = srcLines.slice(li, j);
         const ps = pipeSpan(run, mark);
         if (ps !== null) {
@@ -799,7 +824,8 @@ export function rosettaTranspose(
         let j2 = li;
         while (j2 < lines.length && lines[j2].startsWith('{')) j2++;
         if (j2 - li >= 2) {
-          const run = lines.slice(li, j2);
+          const run = lines.slice(li, j2).map((l) => tsTransposeLine(l, mark, enc, measure));
+          for (let r = li; r < j2; r++) if (run[r - li] !== lines[r]) systems.add('T');
           const srcRun = srcLines.slice(li, j2);
           let keys: string[] | null = null;
           let vals: string[][] = [];
@@ -877,9 +903,12 @@ export function rosettaTranspose(
   // phrase map in W mode: the fold is part of what must invert).
   if (expandBody(body, mark, regionByGlyph, phraseByGlyph, sep) !== text) return empty;
 
-  // W-wires carry the flag line so the decoder reaches phrase mode; the flag
-  // glyph is window-reserved, so it can never occur in a plain wire's body.
-  const wire = folded !== null ? mark + '\n' + pool[k + 1 + RNS1_REGIONS.length] + '\n' + body : mark + '\n' + body;
+  // Wires carry no newline after the mark (the measured prologue diet: the
+  // bare '\n' never merges, so it cost exactly one token on every wire). A
+  // W-wire is mark + flag + '\n' + body; a plain wire is mark + body. The
+  // flag glyph is window-reserved, so it can never occur in a plain body and
+  // the two forms are unambiguous.
+  const wire = folded !== null ? mark + pool[k + 1 + RNS1_REGIONS.length] + '\n' + body : mark + body;
   return { wire, mark, windowStart: k, systems: [...systems] };
 }
 
@@ -908,7 +937,8 @@ function tsTransposeLine(
 /* --------------------------------- decode ---------------------------------- */
 
 /**
- * Total decoder for ROSETTA wires. A wire is ROSETTA's iff it starts with a
+ * Total decoder for ROSETTA wires (mark + body; mark + flag + '\n' + body
+ * for W-wires). A wire is ROSETTA's iff it starts with a
  * pool glyph followed by a newline (the window discipline guarantees an
  * emitted wire can only be confused with a source that was never transposed,
  * because the mark never occurs in a transposed source). Wires that carry a
@@ -942,7 +972,7 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
   if (wire.includes('⟐')) return helixDecode(wire);
-  if (wire.length >= 2 && wire[1] === '\n') {
+  if (wire.length >= 1) {
     const pool = rosettaPool(enc);
     const idx = pool.indexOf(wire[0]);
     if (idx >= 0) {
@@ -951,15 +981,15 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
       for (let i = 0; i < RNS1_REGIONS.length; i++) {
         regionByGlyph.set(pool[idx + 1 + i], RNS1_REGIONS[i]);
       }
-      // W-wire: the flag glyph (window-reserved, never a region glyph, never
-      // in a plain body) followed by a newline switches on phrase expansion.
-      // The Y-separator glyph is two window slots past the region table.
+      // W-wire: mark + flag + newline (the flag is window-reserved — never a
+      // region glyph, never in a plain body). The Y-separator glyph is two
+      // window slots past the region table.
       const flag = pool[idx + 1 + RNS1_REGIONS.length];
       const ysep = pool[idx + 2 + RNS1_REGIONS.length] ?? null;
-      if (flag !== undefined && wire.length >= 4 && wire[2] === flag && wire[3] === '\n') {
-        return expandBody(wire.slice(4), mark, regionByGlyph, phraseCodebook(enc).byGlyph, ysep);
+      if (flag !== undefined && wire.length >= 3 && wire[1] === flag && wire[2] === '\n') {
+        return expandBody(wire.slice(3), mark, regionByGlyph, phraseCodebook(enc).byGlyph, ysep);
       }
-      return expandBody(wire.slice(2), mark, regionByGlyph, null, ysep);
+      return expandBody(wire.slice(1), mark, regionByGlyph, null, ysep);
     }
   }
   return wire;
@@ -1075,12 +1105,12 @@ async function rosettaEncodeUncached(
   };
 
   // ---- G5: identity ambiguity (computed before any admit call) ---------------
-  // If the SOURCE itself would be misread by rosettaDecode (it starts with a
-  // member sentinel or a pool glyph + newline, or contains the inline HELIX
-  // glyph), a bare identity wire is withheld and a marked literal wire is
-  // offered instead — the same discipline as MOSAIC's sentinel force-wrap.
+  // Since the prologue diet (no newline after the mark), ANY source starting
+  // with a pool glyph would be parsed as a wire by rosettaDecode — so a bare
+  // identity wire is withheld for those, for member-sentinel prefixes, and
+  // for HELIX-glyph contents; a marked literal wrap is offered instead.
   const ambiguousIdentity =
-    (text.length >= 2 && text[1] === '\n' && rosettaPool(enc).includes(text[0])) ||
+    (text.length >= 1 && rosettaPool(enc).includes(text[0])) ||
     text.includes('⟐') ||
     ['[MZ1]\n', '[SG1]\n', '[P1]\n', '[M1]\n', '⟨QSR⟩\n', '[PX]\n', '[[VX1\n', '[AX1]\n',
      '[TS1]\n', '[ST1]\n', '[RP1]\n', '[TR1]\n', '[CL1]\n', '[SP1]\n', '[⌘STENCIL]', '[Ϻ]', 'κ\n',
@@ -1097,11 +1127,15 @@ async function rosettaEncodeUncached(
   else {
     const k = pickWindow(text, enc);
     if (k !== null) {
-      const wrapWire = rosettaPool(enc)[k] + '\n' + text;
+      const wrapWire = rosettaPool(enc)[k] + text;
       admit('forced-wrap', wrapWire, () => rosettaDecode(wrapWire, enc), [], true);
+    } else {
+      // No disjoint window exists (the source soaks the pool). The φ literal
+      // wrap is TOTAL — pure prefixing, no window, no glyph constraints — so
+      // byte-exactness never depends on the caveat note.
+      const phiWrap = PHRASE_LITERAL + text;
+      admit('forced-wrap', phiWrap, () => phraseDecode(phiWrap, enc), [], true);
     }
-    // If no clear window exists either, no safe wrap is possible; the final
-    // identity fallback below carries an explicit decode caveat in `notes`.
   }
 
   // ---- W system: PHRASEBOOK-φ1 fold before the region pass ------------------
@@ -1247,10 +1281,11 @@ export function rosettaDecoderPrompt(): string {
   const pool = rosettaPool('o200k_base');
   return [
     '# ⟿ ROSETTA-R2 — byte-exact notational transposition wire',
-    'A ROSETTA message is: <glyph>\\n<body>. The first glyph comes from the',
-    'ROSETTA glyph pool (version-stable, tokenizer-verified single-token',
-    'characters; reference: rosettaPool in src/lib/omega/rosetta.ts). Its pool',
-    'index k anchors the codebook: glyph pool[k] is the span marker; glyph',
+    'A ROSETTA message is: <glyph><body> — the FIRST character is the mark',
+    'glyph and the body follows IMMEDIATELY (no newline after the mark). The',
+    'mark comes from the ROSETTA glyph pool (version-stable, tokenizer-verified',
+    'single-token characters; reference: rosettaPool in src/lib/omega/rosetta.ts).',
+    'Its pool index k anchors the codebook: glyph pool[k] is the span marker;',
     `pool[k+1+i] denotes region i of the RNS-1 table (${RNS1_REGIONS.length} cloud`,
     'regions, in the fixed order shipped in rosetta.ts).',
     'Decode <body> left to right:',
@@ -1259,8 +1294,10 @@ export function rosettaDecoderPrompt(): string {
     '   2026-09-15T06:02:11Z; a ±HHMM offset becomes ±HH:MM).',
     '2. marker + J + pairs + marker → a JSON object. Pairs are key=value',
     '   separated by single spaces. A quoted value is a string; a bare value',
-    '   is true/false/null, a number, or a string; a|b|c is an array. Rebuild',
-    '   the exact compact JSON {"k":v,…} preserving key order.',
+    '   is true/false/null, a number, or a string; a|b|c is an array; a value',
+    '   STARTING with | is an array too — |x is the one-element array ["x"]',
+    '   and a lone | is the empty array []. Rebuild the exact compact JSON',
+    '   {"k":v,…} preserving key order.',
     '3. marker + C + rows + marker → a comma table. Each line\'s fields were',
     '   space-joined; re-join them with commas.',
     '3a. marker + P + rows + marker → a pipe table. Each line\'s fields were',
@@ -1277,7 +1314,7 @@ export function rosettaDecoderPrompt(): string {
     `4. any other glyph from pool[k+1 .. k+${RNS1_REGIONS.length}] → its RNS-1 region name.`,
     '5. anything else is literal text.',
     'Nested marker+timestamp spans inside J, C, P and F payloads expand too.',
-    'W-wires: when the first body line is a single pool glyph followed by \\n',
+    'W-wires: when the body is preceded by <flag>\\n right after the mark',
     '(the phrase flag, pool[k+1+RNS-1 size]), every Hangul syllable of the',
     'PHRASEBOOK-φ1 codebook (versioned in src/lib/omega/phrase.ts) in the body',
     'expands to its phrase — a folded multi-token spelling restored as one',
@@ -1491,6 +1528,78 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
   } catch (e) {
     out.push({ name: 'C6 W transpose fires, decodes, beats plain T', pass: false, details: (e as Error).message });
     out.push({ name: 'C7 glyph-poisoned source: W skipped, decode-safe', pass: false, details: (e as Error).message });
+  }
+
+  // ---- B-series (R2.1): array fold, prologue diet, span/TS composition ------
+  try {
+    // B1: single-element array folds (the J-array fix)
+    const A1 = '{"pages":["slack"],"n":8,"ok":true}';
+    const rA1 = await rosettaEncode(A1, enc);
+    out.push({
+      name: 'B1 single-element array folds via J',
+      pass: rA1.exact && rosettaDecode(rA1.wire, enc) === A1 && rA1.systems.includes('J') && rA1.outTokens < rA1.inTokens,
+      details: `${rA1.inTokens}→${rA1.outTokens} systems=[${rA1.systems.join(',')}]`,
+    });
+    // B2: empty array folds (long enough line for the fold to pay)
+    const A2 = '{"tags":[],"svc":"gateway","ok":true,"count":14,"ms":812,"mode":"strict"}';
+    const rA2 = await rosettaEncode(A2, enc);
+    out.push({
+      name: 'B2 empty array folds via J',
+      pass: rA2.exact && rosettaDecode(rA2.wire, enc) === A2 && rA2.systems.includes('J'),
+      details: `${rA2.inTokens}→${rA2.outTokens} systems=[${rA2.systems.join(',')}]`,
+    });
+    // B3: a quoted string containing a pipe never misreads as an array
+    const A3 = '{"a":"x|y","b":["p","q"],"c":"|"}';
+    const rA3 = await rosettaEncode(A3, enc);
+    out.push({
+      name: 'B3 pipe-in-string stays exact',
+      pass: rA3.exact && rosettaDecode(rA3.wire, enc) === A3,
+      details: `${rA3.inTokens}→${rA3.outTokens} systems=[${rA3.systems.join(',')}]`,
+    });
+    // B4: prologue diet — no newline after the mark
+    const P4 = ROSETTA_CHAOS_900;
+    const rP4 = await rosettaEncode(P4, enc);
+    const w = rP4.member.startsWith('rosetta') ? rP4.wire : '';
+    const plainOk = w.length >= 1 && !w.startsWith('\n') && w[1] !== '\n';
+    out.push({
+      name: 'B4 prologue diet: mark not followed by newline',
+      pass: rP4.exact && rosettaDecode(rP4.wire, enc) === P4 && plainOk,
+      details: `wire starts ${JSON.stringify((w || rP4.wire).slice(0, 2))} (${rP4.member})`,
+    });
+    // B5: pool-glyph-starting source is force-wrapped, byte-exact
+    const pool5 = rosettaPool(enc);
+    const P5 = pool5[3] + ' rare source starting with a pool glyph';
+    const rP5 = await rosettaEncode(P5, enc);
+    out.push({
+      name: 'B5 pool-glyph-start source: forced wrap, exact',
+      pass: rP5.exact && rosettaDecode(rP5.wire, enc) === P5 && (rP5.member === 'forced-wrap' || rP5.outTokens <= rP5.inTokens),
+      details: `${rP5.member} ${rP5.inTokens}→${rP5.outTokens}`,
+    });
+    // B6: timestamps inside pipe fields compose with the P span
+    const P6 = '| svc | ts | ok |\n| gw | 2026-09-15T09:02:33Z | yes |\n| auth | 2026-09-15T09:03:41Z | no |';
+    const rP6 = await rosettaEncode(P6, enc);
+    out.push({
+      name: 'B6 TS-in-pipe-fields composes with P',
+      pass: rP6.exact && rosettaDecode(rP6.wire, enc) === P6 && rP6.systems.includes('P') && rP6.systems.includes('T'),
+      details: `${rP6.inTokens}→${rP6.outTokens} systems=[${rP6.systems.join(',')}]`,
+    });
+    // B7: timestamps inside JSON family values compose with F
+    const P7 = '{"ts":"2026-09-15T09:02:33Z","ok":true}\n{"ts":"2026-09-15T09:03:41Z","ok":false}';
+    const rP7 = await rosettaEncode(P7, enc);
+    out.push({
+      name: 'B7 TS-in-JSON-values composes with F',
+      pass: rP7.exact && rosettaDecode(rP7.wire, enc) === P7 && rP7.systems.includes('F') && rP7.systems.includes('T'),
+      details: `${rP7.inTokens}→${rP7.outTokens} systems=[${rP7.systems.join(',')}]`,
+    });
+    // B8: decode never throws on malformed prologues
+    let noThrow = true;
+    for (const g of [pool5[0], pool5[0] + pool5[105], pool5[0] + '\n', pool5[0] + pool5[105] + '\n', pool5[0] + 'J', pool5[0] + 'P2\nx y']) {
+      try { rosettaDecode(g, enc); } catch { noThrow = false; }
+    }
+    out.push({ name: 'B8 decode never throws on malformed prologues', pass: noThrow, details: '6 shapes' });
+  } catch (e) {
+    out.push({ name: 'B1 single-element array folds via J', pass: false, details: (e as Error).message });
+    out.push({ name: 'B8 decode never throws on malformed prologues', pass: false, details: (e as Error).message });
   }
 
   return out;
