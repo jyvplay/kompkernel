@@ -5,7 +5,7 @@
 import { countTokens, type EncodingName } from './bpe';
 export interface ChronosResult { ok: boolean; encoding: EncodingName; codec: 'OMEGA-V6 CHRONOS'; label: string; wire: string; decoded: string; exact: boolean; inChars: number; outChars: number; inTokens: number; outTokens: number; savedTokens: number; savingsPct: number; outputChannelSavingsEstPct: number; tensorRowsPacked: number; shorthandSymbolsUsed: number; arenaDecoderBlock: string; encodeMs: number; decodeMs: number; notes: string; webUiCompatible: true; zeroCotOverhead: true; biDirectionalEnabled: true; }
 const CHRONOS_HEADER_START = '[Ω6-CHRONOS TENSOR CODEC]'; const CHRONOS_HEADER_END = '[/Ω6]';
-export const OMEGA_V6_SYSTEM_PROMPT = `[SYSTEM PROMPT / TOOL CONTRACT FOR OMEGA-V6 CHRONOS]\n1. INPUT: When you see [Ω6-CHRONOS TENSOR CODEC], reason directly over delta-packed tensors and meta-tokens. Do not generate CoT decompression.\n2. OUTPUT: Emit explanatory prose using the meta-tokens; client runtime expands locally.`;
+export const OMEGA_V6_SYSTEM_PROMPT = `[CODEC SPECIFICATION: OMEGA-V6 CHRONOS DECOMPRESSION SCHEMA]\nFormat: Delta-packed tensor notations and shorthand symbols. Client-side runtime expands shorthand symbols locally.`;
 const CHRONOS_SYMBOLS = ['§A','§B','§C','§D','§E','§F','§G','§H','§J','§K','§L','§M','§N','§P','§Q','§R','§S','§T','§U','§V','§W','§X','§Y','§Z','‡1','‡2','‡3','‡4','‡5','‡6','‡7','‡8','‡9','µ1','µ2','µ3','Δ1','Δ2','Δ3','Δ4','Δ5','Δ6','Δ7','Δ8','Δ9','Θ1','Θ2','Θ3'];
 function applyShorthandBinding(text: string, enc: EncodingName, avail: string[]): { text: string; symbolsUsed: number; rules: Array<{key:string;val:string}> } {
   let out = text; const rules: Array<{key:string;val:string}> = []; let si = 0;

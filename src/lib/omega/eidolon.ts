@@ -195,7 +195,5 @@ export function eidolonRestore(wire: string, residual: LtpOp[]): string {
   return out;
 }
 
-export const EIDOLON_SYSTEM_PROMPT = `[SYSTEM PROMPT: OMEGA-V8 EIDOLON PROTOCOL]
-You are receiving a telegraphic prompt where predictable grammatical words may be absent to conserve tokens. Read the retained nouns, verbs, numbers, identifiers, and punctuation directly. If a relation is ambiguous, ask rather than inventing content.
-OUTPUT CONTRACT: Reply in the same dense telegraphic style. Omit optional articles, copulas, and conversational filler. Write code blocks and technical identifiers verbatim. The local client can restore the source syntax from its residual.`;
+export const EIDOLON_SYSTEM_PROMPT = `[CODEC SPECIFICATION: OMEGA-V8 EIDOLON PROTOCOL]\nFormat: Telegraphic semantic projection. Structural syntax is retained in local residual objects.`;
 

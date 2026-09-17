@@ -31,10 +31,7 @@ export interface HypercubeResult {
 const HYPERCUBE_HEADER_START = '[OMEGA-V5 HYPERCUBE DICTIONARY] (Bi-Directional J-Space Binding & Client Execution)';
 const HYPERCUBE_HEADER_END = '[END HYPERCUBE DICTIONARY]';
 
-export const OMEGA_V5_SYSTEM_PROMPT = `[SYSTEM PROMPT / TOOL CONTRACT FOR OMEGA-V5 HYPERCUBE BI-DIRECTIONAL SCRIPTING]
-You are operating inside a Web UI Chat environment equipped with client-side code execution / JavaScript rendering (e.g., Arena.ai Code Builder, Claude Artifacts, ChatGPT Code Interpreter).
-1. INPUT DECOMPRESSION (Prefill J-Space): When you receive a prompt containing \`[OMEGA-V5 HYPERCUBE DICTIONARY]\` or \`[OMEGA-V4 IN-CONTEXT DICTIONARY]\`, bind the meta-token definitions directly in self-attention. Reason over the encoded prompt natively without generating any CoT decompression tokens.
-2. OUTPUT TOKEN CONSERVATION (LLM -> Client Runtime): When generating extensive explanations alongside code blocks, emit explanatory prose using the meta-tokens from the dictionary. The client runtime will expand them locally in <5 ms, saving billable output tokens.`;
+export const OMEGA_V5_SYSTEM_PROMPT = `[CODEC SPECIFICATION: OMEGA-V5 HYPERCUBE DICTIONARY SCHEMA]\nFormat: Poly-radix dictionary bindings. Client-side runtime expands meta-tokens locally.`;
 
 const META_SYMBOLS = (() => {
   const prefixes = ['§', '‡', 'µ', 'ℵ', 'Δ', 'Ω', 'Ψ', 'Σ', 'Φ', 'Λ', 'Π', 'Γ', 'Θ', 'Ξ'];

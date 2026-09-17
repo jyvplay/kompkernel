@@ -852,15 +852,12 @@ export function rosettaTranspose(
       }
     }
 
-    const tsLine = tsTransposeLine(line, mark, enc, measure);
-    if (tsLine !== line) systems.add('T');
-
-    const pairs = foldJsonLine(tsLine);
+    let tsLine = line;
+    const pairs = foldJsonLine(line);
     if (pairs !== null) {
       const kv = pairs.map((p) => `${p.key}=${p.val}`).join(' ');
       const back = parseKvPayload(kv);
-      // G1: the fold must expand back to the (TS-transposed) line, exactly.
-      if (back !== null && unfoldJsonPairs(back) === tsLine) {
+      if (back !== null && unfoldJsonPairs(back) === line) {
         const span = mark + 'J' + kv + mark;
         if (!measure || countTokens(span, enc) < countTokens(line, enc)) {
           flushCsv();
@@ -870,6 +867,9 @@ export function rosettaTranspose(
         }
       }
     }
+
+    tsLine = tsTransposeLine(line, mark, enc, measure);
+    if (tsLine !== line) systems.add('T');
 
     if (csvFoldableLine(tsLine)) {
       csvRun.push(tsLine.split(',').join(' '));
