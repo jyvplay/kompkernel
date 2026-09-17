@@ -1,39 +1,61 @@
 /**
- * bench/large-input-perf.ts — Performance and exactness verification for inputs up to 2,000,000 characters.
+ * bench/large-input-perf.ts — Performance and exactness verification for inputs up to 10,000,000 characters.
  */
 
 import { rosettaEncode, rosettaDecode } from '../src/lib/omega/rosetta';
 import { countTokens } from '../src/lib/omega/bpe';
 
-function generateLargeText(targetChars: number): string {
-  const seed = [
-    'Status: deploy finished, but two pods restart. Queue depth climbed while retry storm was live.',
-    'region,dc,hosts,errors',
-    'us-east-1,iad-3,42,0',
-    'eu-west-1,dub-1,17,2',
-    'ap-south-1,bom-2,9,1',
-    '{"job":"sync","retries":3,"ok":false,"warn":["timeout","auth"],"ms":812}',
-    'def run(ctx):\n    for k, v in ctx.items():\n        if v is None: raise ValueError(k)\n    return sum(ctx.values())',
-    '2026-09-15T06:02:11Z WARN pool exhausted (max=20, wait=5s)',
-    'kubectl rollout status deploy/api --timeout=90s || kubectl get events --sort-by=.ts',
-    'Actions: pause indexer, drain shard 7, then verify counts.'
-  ].join('\n');
+function generateLargeCodebaseText(targetChars: number): string {
+  const fileTemplate = (id: number) => `
+// File: src/components/module_${id}.ts
+import { useState, useEffect } from 'react';
+import { countTokens } from '../lib/omega/bpe';
 
-  let current = seed;
+export interface ModuleConfig_${id} {
+  id: number;
+  region: string;
+  active: boolean;
+  timestamp: string;
+}
+
+export function processModule_${id}(config: ModuleConfig_${id}) {
+  console.log("Processing module ${id} in region", config.region);
+  const data = {
+    job: "sync",
+    retries: ${id % 5},
+    ok: true,
+    tags: ["prod", "v2", "node_${id}"],
+    ms: ${100 + (id * 17) % 500}
+  };
+  if (config.timestamp === '2026-09-15T06:02:11Z') {
+    return { ...data, status: "ready" };
+  }
+  return data;
+}
+
+// Region deployment spec
+// region,dc,hosts,errors
+// us-east-1,iad-3,${40 + id},0
+// eu-west-1,dub-1,${10 + id},1
+// ap-south-1,bom-2,${5 + id},0
+`;
+
+  let current = '';
+  let fid = 0;
   while (current.length < targetChars) {
-    current += '\n' + seed;
+    current += fileTemplate(fid++);
   }
   return current.slice(0, targetChars);
 }
 
 async function runBenchmark() {
-  console.log('=== LARGE INPUT PERFORMANCE & FIDELITY BENCHMARK ===\n');
+  console.log('=== 10,000,000 CHARACTER CODEBASE PERFORMANCE & FIDELITY BENCHMARK ===\n');
 
-  const sizes = [100_000, 500_000, 1_000_000, 2_000_000];
+  const sizes = [100_000, 1_000_000, 5_000_000, 10_000_000];
 
   for (const size of sizes) {
-    console.log(`Generating payload for size: ${size.toLocaleString()} chars...`);
-    const text = generateLargeText(size);
+    console.log(`Generating codebase payload for size: ${size.toLocaleString()} chars...`);
+    const text = generateLargeCodebaseText(size);
     const inTokens = countTokens(text, 'o200k_base');
 
     console.log(`Input: ${text.length.toLocaleString()} chars, ${inTokens.toLocaleString()} tokens.`);
@@ -63,10 +85,10 @@ async function runBenchmark() {
     }
   }
 
-  console.log('🎉 ALL LARGE INPUT BENCHMARKS PASSED PERFECTLY!');
+  console.log('🎉 ALL 10,000,000 CHARACTER CODEBASE BENCHMARKS PASSED PERFECTLY!');
 }
 
 runBenchmark().catch((err) => {
-  console.error('Error during large input benchmark:', err);
+  console.error('Error during large codebase input benchmark:', err);
   process.exit(1);
 });

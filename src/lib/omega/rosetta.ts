@@ -647,7 +647,7 @@ function parseKvPayload(payload: string): RosettaKvPair[] | null {
 }
 
 const MEASURE_CAP = 12_000; // per-span token measurement below this size
-const TRANSPOSE_CAP = 2_000_000;
+const TRANSPOSE_CAP = 10_000_000;
 
 /**
  * The transposition itself: region glyphs → JSON folds → comma-table folds →
@@ -1052,6 +1052,15 @@ async function rosettaEncodeChunk(
   enc: EncodingName,
 ): Promise<RosettaResult> {
   const inTokens = countTokens(chunk, enc);
+
+  const ambiguousIdentity =
+    (chunk.length >= 2 && chunk[1] === '\n' && rosettaPool(enc).includes(chunk[0])) ||
+    chunk.includes('⟐') ||
+    ['[MZ1]\n', '[SG1]\n', '[P1]\n', '[M1]\n', '⟨QSR⟩\n', '[PX]\n', '[[VX1\n', '[AX1]\n',
+     '[TS1]\n', '[ST1]\n', '[RP1]\n', '[TR1]\n', '[CL1]\n', '[SP1]\n', '[⌘STENCIL]', '[Ϻ]', 'κ\n',
+     'φ', 'τ\n', 'ττ\n']
+      .some((s) => chunk.startsWith(s));
+
   const tr = rosettaTranspose(chunk, enc);
   if (tr.wire !== null && rosettaDecode(tr.wire, enc) === chunk) {
     const tk = countTokens(tr.wire, enc);
@@ -1106,6 +1115,26 @@ async function rosettaEncodeChunk(
     };
   }
 
+  if (ambiguousIdentity) {
+    const k = pickWindow(chunk, enc);
+    if (k !== null) {
+      const wrapWire = rosettaPool(enc)[k] + '\n' + chunk;
+      return {
+        wire: wrapWire,
+        decoded: chunk,
+        exact: true,
+        inTokens,
+        outTokens: countTokens(wrapWire, enc),
+        savingsPct: 0,
+        member: 'forced-wrap',
+        systems: [],
+        audit: [],
+        notes: 'forced-wrap chunk',
+        encodeMs: 0,
+      };
+    }
+  }
+
   return {
     wire: chunk,
     decoded: chunk,
@@ -1147,7 +1176,7 @@ async function rosettaEncodeUncached(
   if (!text) return identity('empty input');
 
   if (text.length > 50_000) {
-    const CHUNK_SIZE = 50_000;
+    const CHUNK_SIZE = 100_000;
     const chunks: string[] = [];
     let start = 0;
     while (start < text.length) {
