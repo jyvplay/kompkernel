@@ -66,7 +66,7 @@ function approxTokens(s: string): number {
   return Math.max(1, Math.round(count));
 }
 
-function getTerminusCandidates(text: string, maxCands = 40): string[] {
+function getTerminusCandidates(text: string, maxCands = 100): string[] {
   const map = new Set<string>();
 
   // 1. Paragraphs / Blocks
@@ -164,8 +164,8 @@ export function encodeTerminus(
   let currentBody = text;
   const entries: CjkContractorEntry[] = [];
   let aliasIdx = 0;
-  const maxEntries = opts?.maxEntries ?? 48;
-  const maxCandidateTrials = opts?.maxCandidateTrials ?? 35;
+  const maxEntries = opts?.maxEntries ?? 64;
+  const maxCandidateTrials = opts?.maxCandidateTrials ?? 80;
 
   while (aliasIdx < aliasPool.length && entries.length < maxEntries) {
     const currentWireTokens =
