@@ -38,7 +38,7 @@ import { CJK_CONTRACTIVE_ENTRIES } from './cjk-contractor';
 
 /* --------------------------- ASTRAEA-L LEXICON ---------------------------- */
 
-/** Additional high-frequency multi-token technical words and collocations. */
+/** Additional high-frequency multi-token technical words, Markdown, and JSON collocations. */
 const TECHNICAL_COLLOCATIONS: readonly string[] = [
   'infrastructure', 'configuration', 'rebalancing', 'responsiveness', 'deliberates',
   'architecture', 'optimization', 'heterogeneous', 'evaluating', 'frequently',
@@ -62,7 +62,8 @@ const TECHNICAL_COLLOCATIONS: readonly string[] = [
   '| node-101 | us-east-1 | HEALTHY | 14ms | 24 | 0 |',
   '| node-102 | us-west-2 | DEGRADED | 840ms | 18 | 12 |',
   '| node-103 | ap-northeast-1 | HEALTHY | 42ms | 32 | 1 |',
-  '  - ', '\n  - ', '  * ', '\n  * ',
+  '  - ', '\n  - ', '  * ', '\n  * ', '\n- [ ] ', '\n- [x] ', '```typescript\n', '```json\n', '```yaml\n', '```bash\n',
+  ' && ', ' || ', '"status":', '"message":', '"error":', '"timestamp":', '"reason":', '"retries":',
   ' distributed context', ' prompt distributions', ' language model', ' billing overhead',
   ' traditional redundancy', ' sub-word tokenization', ' byte-pair encoding', ' domain-specific',
   ' notational transposition', ' dictionary substitution', ' sub-word fragments', ' underlying content',
@@ -241,6 +242,15 @@ function extractDynamicEntries(
   for (const line of rawLines) {
     const trimmed = line.trim();
     if (trimmed.length >= 10 && trimmed.length <= 250 && !trimmed.includes(mark)) {
+      candidates.set(trimmed, (candidates.get(trimmed) ?? 0) + 1);
+    }
+  }
+
+  // Clause-level punctuation harvesting (commas, colons, semicolons, brackets)
+  const clauses = text.split(/[,;:()[\]{}]/);
+  for (const clause of clauses) {
+    const trimmed = clause.trim();
+    if (trimmed.length >= 6 && trimmed.length <= 180 && !trimmed.includes(mark)) {
       candidates.set(trimmed, (candidates.get(trimmed) ?? 0) + 1);
     }
   }
