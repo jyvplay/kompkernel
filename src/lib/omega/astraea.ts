@@ -226,10 +226,11 @@ function extractDynamicEntries(
 
   const candidates = new Map<string, number>();
 
-  // Word-level n-grams up to 16 words
+  // Word-level n-grams up to 16 words (capped to maxWords for streaming efficiency)
   const words = text.match(/\S+/g) ?? [];
+  const maxWords = Math.min(words.length, 50_000);
   for (let len = 1; len <= 16; len++) {
-    for (let i = 0; i <= words.length - len; i++) {
+    for (let i = 0; i <= maxWords - len; i++) {
       const phrase = words.slice(i, i + len).join(' ');
       if (phrase.length >= 5 && phrase.length <= 200 && !phrase.includes(mark)) {
         candidates.set(phrase, (candidates.get(phrase) ?? 0) + 1);
@@ -239,8 +240,9 @@ function extractDynamicEntries(
 
   // Line-level repetition harvesting
   const rawLines = text.split('\n');
-  for (const line of rawLines) {
-    const trimmed = line.trim();
+  const maxLines = Math.min(rawLines.length, 10_000);
+  for (let i = 0; i < maxLines; i++) {
+    const trimmed = rawLines[i].trim();
     if (trimmed.length >= 10 && trimmed.length <= 250 && !trimmed.includes(mark)) {
       candidates.set(trimmed, (candidates.get(trimmed) ?? 0) + 1);
     }
@@ -248,8 +250,9 @@ function extractDynamicEntries(
 
   // Clause-level punctuation harvesting (commas, colons, semicolons, brackets)
   const clauses = text.split(/[,;:()[\]{}]/);
-  for (const clause of clauses) {
-    const trimmed = clause.trim();
+  const maxClauses = Math.min(clauses.length, 10_000);
+  for (let i = 0; i < maxClauses; i++) {
+    const trimmed = clauses[i].trim();
     if (trimmed.length >= 6 && trimmed.length <= 180 && !trimmed.includes(mark)) {
       candidates.set(trimmed, (candidates.get(trimmed) ?? 0) + 1);
     }
