@@ -241,6 +241,59 @@ export function cjkContractorEncode(
   const maxEntries = opts.maxEntries ?? 32;
   const maxCandidateTrials = opts.maxCandidateTrials ?? 25;
 
+  // Linear sub-second fast path for mega-inputs (> 100,000 characters)
+  if (text.length > 100000) {
+    const prefixSample = text.slice(0, 25000);
+    const candidateSet = new Set<string>();
+
+    const lines = prefixSample.split('\n');
+    for (const l of lines) {
+      if (l.length >= 4 && l.length <= 180) candidateSet.add(l);
+    }
+
+    const scored = Array.from(candidateSet).map((phrase) => {
+      let count = 0;
+      let pos = 0;
+      while ((pos = prefixSample.indexOf(phrase, pos)) !== -1) {
+        count++;
+        pos += phrase.length;
+      }
+      return { phrase, count };
+    }).filter((s) => s.count >= 2).sort((a, b) => b.count - a.count).slice(0, Math.min(16, maxEntries));
+
+    for (const cand of scored) {
+      if (aliasIdx >= aliasPool.length) break;
+      const alias = aliasPool[aliasIdx];
+      currentBody = currentBody.split(cand.phrase).join(alias);
+      entries.push({
+        alias,
+        phrase: cand.phrase,
+        hits: cand.count,
+        winTokens: countTokens(cand.phrase, enc),
+      });
+      aliasIdx++;
+    }
+
+    const wire = assembleWire(entries, currentBody, opts);
+    const outTokens = countTokens(wire, enc);
+    const decoded = cjkContractorDecode(wire, opts);
+
+    if (decoded === text && outTokens < inTokens) {
+      return {
+        wire,
+        decoded,
+        exact: true,
+        inTokens,
+        outTokens,
+        savingsPct: inTokens ? ((inTokens - outTokens) / inTokens) * 100 : 0,
+        entries,
+        mode: opts.modeName,
+        notes: `${opts.modeName.toUpperCase()}: ${entries.length} CJK linear fast-path contractions · verified byte-exact`,
+        encodeMs: ms(),
+      };
+    }
+  }
+
   while (aliasIdx < aliasPool.length && entries.length < maxEntries) {
     const currentWireTokens =
       entries.length > 0

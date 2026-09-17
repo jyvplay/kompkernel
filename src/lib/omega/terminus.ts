@@ -12,6 +12,7 @@
 
 import { countTokens, type EncodingName } from './bpe';
 import {
+  cjkContractorEncode,
   cjkContractorDecode,
   getCjkAliasPool,
   escString,
@@ -145,6 +146,21 @@ function getTerminusCandidates(text: string, maxCands = 100): string[] {
 }
 
 export function encodeTerminus(
+  text: string,
+  encName: EncodingName = 'cl100k_base',
+  opts?: TerminusOptions,
+): CjkContractorResult {
+  return cjkContractorEncode(text, encName, {
+    sentinel: TERMINUS_SENTINEL,
+    modeName: 'TERMINUS-T1',
+    equalsHeader: false,
+    maxPool: opts?.maxPool ?? 300,
+    maxEntries: opts?.maxEntries ?? 64,
+    maxCandidateTrials: opts?.maxCandidateTrials ?? 80,
+  });
+}
+
+export function encodeTerminusLegacy(
   text: string,
   encName: EncodingName = 'cl100k_base',
   opts?: TerminusOptions,
