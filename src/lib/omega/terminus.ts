@@ -69,6 +69,19 @@ function approxTokens(s: string): number {
 function getTerminusCandidates(text: string, maxCands = 100): string[] {
   const map = new Set<string>();
 
+  // 0. Structured JSON / CSV / Code Key-Value patterns
+  const jsonMatches = text.match(/"[^"]+"\s*:\s*("[^"]*"|\d+|true|false|null)/g);
+  if (jsonMatches) {
+    for (const jm of jsonMatches) {
+      if (jm.length >= 4 && jm.length <= 150) map.add(jm);
+    }
+  }
+
+  const csvRows = text.split(/\r?\n/);
+  for (const row of csvRows) {
+    if (row.includes(',') && row.length >= 4 && row.length <= 200) map.add(row.trim());
+  }
+
   // 1. Paragraphs / Blocks
   const blocks = text.split(/\n\s*\n/);
   for (const block of blocks) {

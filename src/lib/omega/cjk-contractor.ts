@@ -65,6 +65,8 @@ export function escString(s: string): string {
     if (c === '\\') out += '\\\\';
     else if (c === '\n') out += '\\n';
     else if (c === '\r') out += '\\r';
+    else if (c === '\t') out += '\\t';
+    else if (c === '\0') out += '\\0';
     else if (c === '★') out += '\\S';
     else out += c;
   }
@@ -79,6 +81,8 @@ export function unescString(s: string): string {
       if (n === '\\') { out += '\\'; i++; }
       else if (n === 'n') { out += '\n'; i++; }
       else if (n === 'r') { out += '\r'; i++; }
+      else if (n === 't') { out += '\t'; i++; }
+      else if (n === '0') { out += '\0'; i++; }
       else if (n === 'S') { out += '★'; i++; }
       else out += s[i];
     } else {
