@@ -237,6 +237,15 @@ export const AETHER_PHRASEBOOK_STRINGS: string[] = [
   "備考：データベース遷移已完成，但缓存预热失败，请检查连接池配置和超时参数，必要时重启实例后再观察。\nログ：2026-09-15T06:02:11Z WARN pool exhausted (max=20, wait=5s)",
   "kectl rollout status deploy/api --timeout=90s || kubectl get events --sort-by=.ts",
   "Next steps? Audit the pool config, bump the limits, then rerun. Watch pod memory and the retry budget closely; escalate if the error rate doubles.\nSummary: 2 of 3 migrations verified with no issues found; retry the search shards, then re-run the checks and confirm the counts all match now.",
+  "Incident Analysis & Technical System Overview Report",
+  "The distributed consensus engine successfully committed the transaction log after a brief transient leader election delay across availability zones.",
+  "Network partitioning was detected between the primary broker pool and the secondary read replicas, causing temporary message queuing in the ingestion pipeline.",
+  "All worker threads recovered without manual intervention once heartbeat signals stabilized across the mesh topology.",
+  "The operational committee deliberated on whether a secondary maintenance window constitutes an institutional precedent for production environments.",
+  "Memory footprint remained within nominal thresholds with minimal garbage collection overhead, while circuit breaker state remained closed throughout the failover window.",
+  "Disk IOPS and network throughput metrics confirmed that rate limiting rules prevented cascading failures across downstream microservices.",
+  "System administrators monitored queue depth and p99 latency spikes, validating that automated retry backoff mechanisms functioned as designed.",
+  "Further analysis indicated that database connection pool exhaustion was mitigated by scaling worker instances dynamically.",
 ];
 
 export interface AetherCodebook {
