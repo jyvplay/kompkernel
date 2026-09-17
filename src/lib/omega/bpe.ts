@@ -76,9 +76,19 @@ export function encodeIds(text: string, enc: EncodingName): number[] {
 const TOKEN_COUNT_CACHE = new Map<string, number>();
 const TOKEN_COUNT_CACHE_MAX = 5000;
 
+function fastHash(s: string): string {
+  let h = 0x811c9dc5;
+  const len = s.length;
+  for (let i = 0; i < len; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return len + '_' + h.toString(36);
+}
+
 export function countTokens(text: string, enc: EncodingName): number {
   if (text === '') return 0;
-  const key = text.length <= 100_000 ? enc + '\u0000' + text : null;
+  const key = text.length <= 100_000 ? enc + '\u0000' + fastHash(text) : null;
   if (key) {
     const cached = TOKEN_COUNT_CACHE.get(key);
     if (cached !== undefined) return cached;

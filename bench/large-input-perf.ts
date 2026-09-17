@@ -1,5 +1,5 @@
 /**
- * bench/large-input-perf.ts — Performance and exactness verification for inputs up to 10,000,000 characters.
+ * bench/large-input-perf.ts — Performance, memory footprint & fidelity verification for 20,000,000 characters.
  */
 
 import { rosettaEncode, rosettaDecode } from '../src/lib/omega/rosetta';
@@ -48,25 +48,34 @@ export function processModule_${id}(config: ModuleConfig_${id}) {
   return current.slice(0, targetChars);
 }
 
-async function runBenchmark() {
-  console.log('=== 10,000,000 CHARACTER CODEBASE PERFORMANCE & FIDELITY BENCHMARK ===\n');
+function getHeapMB(): number {
+  if (typeof process !== 'undefined' && process.memoryUsage) {
+    return Number((process.memoryUsage().heapUsed / (1024 * 1024)).toFixed(1));
+  }
+  return 0;
+}
 
-  const sizes = [100_000, 1_000_000, 5_000_000, 10_000_000];
+async function runBenchmark() {
+  console.log('=== 20,000,000 CHARACTER CODEBASE PERFORMANCE & MEMORY BENCHMARK ===\n');
+
+  const sizes = [100_000, 1_000_000, 10_000_000, 20_000_000];
 
   for (const size of sizes) {
     console.log(`Generating codebase payload for size: ${size.toLocaleString()} chars...`);
     const text = generateLargeCodebaseText(size);
     const inTokens = countTokens(text, 'o200k_base');
 
-    console.log(`Input: ${text.length.toLocaleString()} chars, ${inTokens.toLocaleString()} tokens.`);
+    console.log(`Input: ${text.length.toLocaleString()} chars, ${inTokens.toLocaleString()} tokens (Heap before: ${getHeapMB()} MB).`);
 
     const t0 = performance.now();
     const res = await rosettaEncode(text, 'o200k_base');
     const encodeMs = performance.now() - t0;
+    const heapAfterEncode = getHeapMB();
 
     const t1 = performance.now();
     const decoded = rosettaDecode(res.wire, 'o200k_base');
     const decodeMs = performance.now() - t1;
+    const heapAfterDecode = getHeapMB();
 
     const exact = decoded === text;
     const savings = res.inTokens ? (((res.inTokens - res.outTokens) / res.inTokens) * 100).toFixed(2) : '0';
@@ -76,6 +85,7 @@ async function runBenchmark() {
     console.log(`  - Wire Tokens: ${res.outTokens.toLocaleString()} (${savings}% token savings)`);
     console.log(`  - Encode Time: ${encodeMs.toFixed(1)} ms`);
     console.log(`  - Decode Time: ${decodeMs.toFixed(1)} ms`);
+    console.log(`  - Peak Heap Memory: ${heapAfterDecode} MB`);
     console.log(`  - Member Used: ${res.member}`);
     console.log(`  - Throughput: ${((text.length / (encodeMs / 1000)) / 1_000_000).toFixed(2)} MB/s\n`);
 
@@ -85,10 +95,10 @@ async function runBenchmark() {
     }
   }
 
-  console.log('🎉 ALL 10,000,000 CHARACTER CODEBASE BENCHMARKS PASSED PERFECTLY!');
+  console.log('🎉 ALL 20,000,000 CHARACTER BENCHMARKS PASSED PERFECTLY!');
 }
 
 runBenchmark().catch((err) => {
-  console.error('Error during large codebase input benchmark:', err);
+  console.error('Error during 20,000,000 character benchmark:', err);
   process.exit(1);
 });

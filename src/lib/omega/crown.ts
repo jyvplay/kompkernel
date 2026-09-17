@@ -145,7 +145,7 @@ export interface CrownSelfTest { name: string; pass: boolean; details: string }
 
 const crownCache = new Map<string, CrownResult>();
 const CROWN_CACHE_MAX = 8;
-const CROWN_CACHE_MAX_CHARS = 10_000_000;
+const CROWN_CACHE_MAX_CHARS = 20_000_000;
 
 const crownEncodeUncached = crownEncode;
 export async function crownEncodeCached(text: string, enc: EncodingName = 'o200k_base'): Promise<CrownResult> {

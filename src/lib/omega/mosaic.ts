@@ -176,7 +176,7 @@ const SENTINEL = '[MZ1]\n';
  * "the window hid the optimum" failures permanently.
  */
 const MAX_BLOCKS = 10;
-const MAX_CHARS = 10_000_000;
+const MAX_CHARS = 20_000_000;
 const MAX_LINES = 100_000;
 const REGIME_SIG_CAP = 48;
 const REGIME_SCAN_CAP = 200;

@@ -17,7 +17,7 @@ function applyShorthandBinding(text: string, enc: EncodingName, avail: string[])
 export async function chronosEncode(text: string, enc: EncodingName = 'o200k_base'): Promise<ChronosResult> {
   const t0 = performance.now(); const inTokens = countTokens(text, enc); const inChars = text.length;
   const mkId = (notes: string): ChronosResult => ({ ok:true, encoding:enc, codec:'OMEGA-V6 CHRONOS', label:'👑 OMEGA-V6 CHRONOS', wire:text, decoded:text, exact:true, inChars, outChars:inChars, inTokens, outTokens:inTokens, savedTokens:0, savingsPct:0, outputChannelSavingsEstPct:0, tensorRowsPacked:0, shorthandSymbolsUsed:0, arenaDecoderBlock:'', encodeMs:performance.now()-t0, decodeMs:0, notes, webUiCompatible:true, zeroCotOverhead:true, biDirectionalEnabled:true });
-  if (text.length > 10000000) return mkId('skipped over 10M chars for latency safety');
+  if (text.length > 20000000) return mkId('skipped over 20M chars for latency safety');
   if (!text || inTokens < 5) return mkId('identity');
   const avail = CHRONOS_SYMBOLS.filter(s => !text.includes(s));
   const sh = applyShorthandBinding(text, enc, avail);

@@ -647,7 +647,7 @@ function parseKvPayload(payload: string): RosettaKvPair[] | null {
 }
 
 const MEASURE_CAP = 12_000; // per-span token measurement below this size
-const TRANSPOSE_CAP = 10_000_000;
+const TRANSPOSE_CAP = 20_000_000;
 
 /**
  * The transposition itself: region glyphs → JSON folds → comma-table folds →
@@ -680,7 +680,7 @@ export function rosettaTranspose(
   // Single-pass regex substitution for fast O(N) performance on 2M character inputs.
   let t = folded ?? text;
   const regionByGlyph = new Map<string, string>();
-  const presentRegions = RNS1_REGIONS.filter((r) => t.includes(r));
+  const presentRegions = RNS1_REGIONS.filter((r) => t.includes(r)).sort((a, b) => b.length - a.length);
   if (presentRegions.length > 0) {
     const regMap = new Map<string, string>();
     for (const r of presentRegions) {
@@ -1177,7 +1177,8 @@ async function rosettaEncodeUncached(
 
   if (text.length > 50_000) {
     const CHUNK_SIZE = 100_000;
-    const chunks: string[] = [];
+    const wireParts: string[] = ['[R2-STREAM]'];
+    let chunkCount = 0;
     let start = 0;
     while (start < text.length) {
       let end = Math.min(start + CHUNK_SIZE, text.length);
@@ -1187,16 +1188,14 @@ async function rosettaEncodeUncached(
           end = nextNl + 1;
         }
       }
-      chunks.push(text.slice(start, end));
+      const chunk = text.slice(start, end);
+      const r = await rosettaEncodeChunk(chunk, enc);
+      wireParts.push(`${r.wire.length}:${r.wire}`);
+      chunkCount++;
       start = end;
     }
 
-    const chunkResults: RosettaResult[] = [];
-    for (const chunk of chunks) {
-      chunkResults.push(await rosettaEncodeChunk(chunk, enc));
-    }
-
-    const streamWire = '[R2-STREAM]\n' + chunkResults.map((r) => `${r.wire.length}:${r.wire}`).join('\n');
+    const streamWire = wireParts.join('\n');
     const decodedStream = rosettaDecode(streamWire, enc);
     if (decodedStream === text) {
       const outTokens = countTokens(streamWire, enc);
@@ -1211,7 +1210,7 @@ async function rosettaEncodeUncached(
           member: 'rosetta-stream',
           systems: ['STREAM'],
           audit: [],
-          notes: `ROSETTA streaming ${chunks.length} chunks over ${text.length} chars · byte-exact`,
+          notes: `ROSETTA streaming ${chunkCount} chunks over ${text.length} chars · byte-exact`,
           encodeMs: ms(),
         };
       }
