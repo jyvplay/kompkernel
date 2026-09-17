@@ -1087,6 +1087,32 @@ async function astraeaEncodeUncached(
     admit('astraea-T', trT.wire, () => astraeaDecode(trT.wire as string, enc), trT.systems);
   }
 
+  // If ASTRAEA native members achieved >25% token savings, skip heavy fallback member search
+  if (bestTokens <= inTokens * 0.75) {
+    const winner = best as Best | null;
+    if (winner) {
+      const decoded = winner.decode();
+      if (decoded === text) {
+        const outTokens = countTokens(winner.wire, enc);
+        if (outTokens < inTokens || winner.member === 'forced-wrap') {
+          return {
+            wire: winner.wire,
+            decoded,
+            exact: true,
+            inTokens,
+            outTokens,
+            savingsPct: inTokens ? ((inTokens - outTokens) / inTokens) * 100 : 0,
+            member: winner.member,
+            systems: winner.systems,
+            audit,
+            notes: `ASTRAEA-A2 member=${winner.member} systems=[${winner.systems.join(',')}] · ${audit.filter((a) => a.exact).length} exact candidates · byte-exact`,
+            encodeMs: ms(),
+          };
+        }
+      }
+    }
+  }
+
   // 5. ROSETTA-R2 Member
   try {
     const ros = supplied.rosetta ?? (await rosettaEncode(text, enc));
@@ -1127,8 +1153,8 @@ async function astraeaEncodeUncached(
     audit.push({ member: 'phrase', tokens: -1, exact: false });
   }
 
-  // 9. ORBIT / CROWN / SPLICE Heavy Members
-  if (text.length <= 12_000) {
+  // 9. ORBIT / CROWN / SPLICE Heavy Members (only run if light members didn't achieve significant compression)
+  if (text.length <= 12_000 && bestTokens > inTokens * 0.75) {
     try {
       const orbit = supplied.orbit ?? (await orbitEncode(text, enc));
       if (orbit.exact && orbit.decoded === text) {
