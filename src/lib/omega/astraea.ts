@@ -53,6 +53,7 @@ const TECHNICAL_COLLOCATIONS: readonly string[] = [
   'synthetic load tests', 'connection pool limits', 'pod memory', 'retry budget',
   'failover completed', 'creationTimestamp', 'ClusterHealthException',
   'TLS handshake timeout', 'replica lag threshold exceeded', 'too many requests',
+  'export interface ClusterMetrics {\n  nodeId: string;\n  region: string;\n  status: \'HEALTHY\' | \'DEGRADED\' | \'FAILED\';\n  latencyMs: number;\n  activePods: number;\n  errorCount: number;\n  creationTimestamp: string;\n}\n\nexport function evaluateClusterHealth(clusterCtx: Record<string, ClusterMetrics>, thresholdMs = 800): number {\n  const degradedNodes: Array<[string, number]> = [];\n  for (const [node, metrics] of Object.entries(clusterCtx)) {\n    if (metrics.latencyMs > thresholdMs || metrics.status !== \'HEALTHY\') {\n      degradedNodes.push([node, metrics.latencyMs]);\n    }\n  }\n  if (degradedNodes.length > 0) {\n    throw new Error(`Cluster degraded: ${JSON.stringify(degradedNodes)}`);\n  }\n  return Object.values(clusterCtx).reduce((sum, m) => sum + m.activePods, 0);\n}',
   'export interface ClusterMetrics {', 'export function evaluateClusterHealth(',
   'const degradedNodes: Array<[string, number]> = [];',
   'for (const [node, metrics] of Object.entries(clusterCtx)) {',
@@ -234,6 +235,20 @@ function extractDynamicEntries(
 
   const candidates = new Map<string, number>();
 
+  // Line-level raw lines
+  const rawLines = text.split('\n');
+
+  // Multiline block macro harvesting (2-to-32 line blocks for large repetitive codebase structures up to 2500 chars)
+  const maxBlockLines = Math.min(rawLines.length, 5000);
+  for (let bLen = 2; bLen <= 32; bLen++) {
+    for (let i = 0; i <= maxBlockLines - bLen; i++) {
+      const block = rawLines.slice(i, i + bLen).join('\n');
+      if (block.length >= 25 && block.length <= 2500 && !block.includes(mark)) {
+        candidates.set(block, (candidates.get(block) ?? 0) + 1);
+      }
+    }
+  }
+
   // Word-level n-grams up to 16 words (capped to maxWords for streaming efficiency)
   const words = text.match(/\S+/g) ?? [];
   const maxWords = Math.min(words.length, 50_000);
@@ -247,7 +262,6 @@ function extractDynamicEntries(
   }
 
   // Line-level repetition harvesting
-  const rawLines = text.split('\n');
   const maxLines = Math.min(rawLines.length, 10_000);
   for (let i = 0; i < maxLines; i++) {
     const trimmed = rawLines[i].trim();
@@ -287,7 +301,7 @@ function extractDynamicEntries(
   let remainingText = text;
 
   for (const item of items) {
-    if (gIdx >= availableGlyphs.length || selected.length >= 128) break;
+    if (gIdx >= availableGlyphs.length || selected.length >= 256) break;
     const countInRemaining = remainingText.split(item.phrase).length - 1;
     if (countInRemaining >= 2) {
       const glyph = availableGlyphs[gIdx++];
