@@ -647,7 +647,7 @@ function parseKvPayload(payload: string): RosettaKvPair[] | null {
 }
 
 const MEASURE_CAP = 12_000; // per-span token measurement below this size
-const TRANSPOSE_CAP = 120_000;
+const TRANSPOSE_CAP = 2_000_000;
 
 /**
  * The transposition itself: region glyphs → JSON folds → comma-table folds →
@@ -677,14 +677,27 @@ export function rosettaTranspose(
   const phraseByGlyph = folded !== null ? phraseCodebook(enc).byGlyph : null;
 
   // ---- region pass (RS) ----------------------------------------------------
+  // Single-pass regex substitution for fast O(N) performance on 2M character inputs.
   let t = folded ?? text;
   const regionByGlyph = new Map<string, string>();
-  for (let i = 0; i < RNS1_REGIONS.length; i++) {
-    const glyph = pool[k + 1 + i];
-    regionByGlyph.set(glyph, RNS1_REGIONS[i]);
-    if (t.includes(RNS1_REGIONS[i])) t = t.split(RNS1_REGIONS[i]).join(glyph);
+  const presentRegions = RNS1_REGIONS.filter((r) => t.includes(r));
+  if (presentRegions.length > 0) {
+    const regMap = new Map<string, string>();
+    for (const r of presentRegions) {
+      const idx = RNS1_REGIONS.indexOf(r);
+      const glyph = pool[k + 1 + idx];
+      regMap.set(r, glyph);
+    }
+    const regRegex = new RegExp(
+      presentRegions.map((r) => r.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'),
+      'g',
+    );
+    t = t.replace(regRegex, (match) => regMap.get(match)!);
   }
-  const hasRegions = t !== (folded ?? text);
+  for (let i = 0; i < RNS1_REGIONS.length; i++) {
+    regionByGlyph.set(pool[k + 1 + i], RNS1_REGIONS[i]);
+  }
+  const hasRegions = presentRegions.length > 0;
 
   // ---- per-line structural pass (J, C) with inline TS ----------------------
   // `lines` are region-passed; `srcLines` are the original source lines. The
@@ -917,6 +930,23 @@ function tsTransposeLine(
  * function; anything else is returned unchanged.
  */
 export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): string {
+  if (wire.startsWith('[R2-STREAM]\n')) {
+    const rest = wire.slice('[R2-STREAM]\n'.length);
+    let i = 0;
+    const outParts: string[] = [];
+    while (i < rest.length) {
+      const colon = rest.indexOf(':', i);
+      if (colon === -1) break;
+      const lenStr = rest.slice(i, colon);
+      const len = parseInt(lenStr, 10);
+      if (isNaN(len)) break;
+      const chunkWire = rest.slice(colon + 1, colon + 1 + len);
+      outParts.push(rosettaDecode(chunkWire, enc));
+      i = colon + 1 + len;
+      if (rest[i] === '\n') i++;
+    }
+    return outParts.join('');
+  }
   // member-lane sentinels (the tournament may emit a member wire verbatim)
   if (wire.startsWith('[MZ1]\n')) return mosaicDecode(wire);
   if (wire.startsWith('[SG1]\n')) return signetDecode(wire);
@@ -1017,6 +1047,80 @@ export async function rosettaEncode(
   return r;
 }
 
+async function rosettaEncodeChunk(
+  chunk: string,
+  enc: EncodingName,
+): Promise<RosettaResult> {
+  const inTokens = countTokens(chunk, enc);
+  const tr = rosettaTranspose(chunk, enc);
+  if (tr.wire !== null && rosettaDecode(tr.wire, enc) === chunk) {
+    const tk = countTokens(tr.wire, enc);
+    if (tk < inTokens) {
+      return {
+        wire: tr.wire,
+        decoded: chunk,
+        exact: true,
+        inTokens,
+        outTokens: tk,
+        savingsPct: ((inTokens - tk) / inTokens) * 100,
+        member: 'rosetta-T',
+        systems: tr.systems,
+        audit: [],
+        notes: 'fast chunk transpose',
+        encodeMs: 0,
+      };
+    }
+  }
+
+  const phr = phraseEncode(chunk, enc);
+  if (phr.exact && phr.decoded === chunk && phr.outTokens < inTokens) {
+    return {
+      wire: phr.wire,
+      decoded: chunk,
+      exact: true,
+      inTokens,
+      outTokens: phr.outTokens,
+      savingsPct: phr.savingsPct,
+      member: 'phrase',
+      systems: [],
+      audit: [],
+      notes: 'fast chunk phrase',
+      encodeMs: 0,
+    };
+  }
+
+  const tu = tauEncode(chunk, enc);
+  if (tu.exact && tu.decoded === chunk && tu.outTokens < inTokens) {
+    return {
+      wire: tu.wire,
+      decoded: chunk,
+      exact: true,
+      inTokens,
+      outTokens: tu.outTokens,
+      savingsPct: tu.savingsPct,
+      member: 'tau',
+      systems: tu.systems,
+      audit: [],
+      notes: 'fast chunk tau',
+      encodeMs: 0,
+    };
+  }
+
+  return {
+    wire: chunk,
+    decoded: chunk,
+    exact: true,
+    inTokens,
+    outTokens: inTokens,
+    savingsPct: 0,
+    member: 'identity',
+    systems: [],
+    audit: [],
+    notes: 'identity chunk',
+    encodeMs: 0,
+  };
+}
+
 async function rosettaEncodeUncached(
   text: string,
   enc: EncodingName,
@@ -1041,6 +1145,49 @@ async function rosettaEncodeUncached(
   });
 
   if (!text) return identity('empty input');
+
+  if (text.length > 50_000) {
+    const CHUNK_SIZE = 50_000;
+    const chunks: string[] = [];
+    let start = 0;
+    while (start < text.length) {
+      let end = Math.min(start + CHUNK_SIZE, text.length);
+      if (end < text.length) {
+        const nextNl = text.indexOf('\n', end);
+        if (nextNl !== -1 && nextNl - start < CHUNK_SIZE * 2) {
+          end = nextNl + 1;
+        }
+      }
+      chunks.push(text.slice(start, end));
+      start = end;
+    }
+
+    const chunkResults: RosettaResult[] = [];
+    for (const chunk of chunks) {
+      chunkResults.push(await rosettaEncodeChunk(chunk, enc));
+    }
+
+    const streamWire = '[R2-STREAM]\n' + chunkResults.map((r) => `${r.wire.length}:${r.wire}`).join('\n');
+    const decodedStream = rosettaDecode(streamWire, enc);
+    if (decodedStream === text) {
+      const outTokens = countTokens(streamWire, enc);
+      if (outTokens < inTokens) {
+        return {
+          wire: streamWire,
+          decoded: decodedStream,
+          exact: true,
+          inTokens,
+          outTokens,
+          savingsPct: ((inTokens - outTokens) / inTokens) * 100,
+          member: 'rosetta-stream',
+          systems: ['STREAM'],
+          audit: [],
+          notes: `ROSETTA streaming ${chunks.length} chunks over ${text.length} chars · byte-exact`,
+          encodeMs: ms(),
+        };
+      }
+    }
+  }
 
   const audit: RosettaCandidate[] = [];
   interface Best { wire: string; member: string; systems: string[]; decode: () => string }
@@ -1094,14 +1241,12 @@ async function rosettaEncodeUncached(
     admit('rosetta-T', tr.wire, () => rosettaDecode(tr.wire as string, enc), tr.systems);
   }
 
-  else {
+  if (ambiguousIdentity) {
     const k = pickWindow(text, enc);
     if (k !== null) {
       const wrapWire = rosettaPool(enc)[k] + '\n' + text;
       admit('forced-wrap', wrapWire, () => rosettaDecode(wrapWire, enc), [], true);
     }
-    // If no clear window exists either, no safe wrap is possible; the final
-    // identity fallback below carries an explicit decode caveat in `notes`.
   }
 
   // ---- W system: PHRASEBOOK-φ1 fold before the region pass ------------------
