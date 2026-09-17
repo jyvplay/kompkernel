@@ -69,35 +69,38 @@ function approxTokens(s: string): number {
 function getTerminusCandidates(text: string, maxCands = 100): string[] {
   const map = new Set<string>();
 
+  // Optimization for mega-inputs (> 25k chars): mine patterns from representative 25k sample prefix
+  const miningText = text.length > 25000 ? text.slice(0, 25000) : text;
+
   // 0. Structured JSON / CSV / Code Key-Value patterns
-  const jsonMatches = text.match(/"[^"]+"\s*:\s*("[^"]*"|\d+|true|false|null)/g);
+  const jsonMatches = miningText.match(/"[^"]+"\s*:\s*("[^"]*"|\d+|true|false|null)/g);
   if (jsonMatches) {
     for (const jm of jsonMatches) {
       if (jm.length >= 4 && jm.length <= 150) map.add(jm);
     }
   }
 
-  const csvRows = text.split(/\r?\n/);
+  const csvRows = miningText.split(/\r?\n/);
   for (const row of csvRows) {
     if (row.includes(',') && row.length >= 4 && row.length <= 200) map.add(row.trim());
   }
 
   // 1. Paragraphs / Blocks
-  const blocks = text.split(/\n\s*\n/);
+  const blocks = miningText.split(/\n\s*\n/);
   for (const block of blocks) {
     const trimmed = block.trim();
     if (trimmed.length >= 3 && trimmed.length <= 300) map.add(trimmed);
   }
 
   // 2. Sentences
-  const sentences = text.split(/(?<=[.!?])\s+/);
+  const sentences = miningText.split(/(?<=[.!?])\s+/);
   for (const s of sentences) {
     const trimmed = s.trim();
     if (trimmed.length >= 3 && trimmed.length <= 250) map.add(trimmed);
   }
 
   // 3. Lines
-  const lines = text.split('\n');
+  const lines = miningText.split('\n');
   for (const line of lines) {
     if (line.length >= 2 && line.length <= 200) map.add(line);
   }
@@ -114,19 +117,20 @@ function getTerminusCandidates(text: string, maxCands = 100): string[] {
   }
 
   // 5. Sliding window substrings
-  const maxSearchLen = Math.min(100, text.length);
-  for (let len = 2; len <= maxSearchLen; len += (text.length > 5000 ? 3 : 1)) {
-    for (let i = 0; i + len <= text.length; i += (text.length > 5000 ? 3 : 1)) {
-      const sub = text.slice(i, i + len);
+  const maxSearchLen = Math.min(100, miningText.length);
+  const step = miningText.length > 5000 ? 4 : 1;
+  for (let len = 2; len <= maxSearchLen; len += step) {
+    for (let i = 0; i + len <= miningText.length; i += step) {
+      const sub = miningText.slice(i, i + len);
       if (!map.has(sub)) map.add(sub);
-      if (map.size > 10000) break;
+      if (map.size > 8000) break;
     }
-    if (map.size > 10000) break;
+    if (map.size > 8000) break;
   }
 
   const scored: { sub: string; estGain: number }[] = [];
   for (const sub of map) {
-    const hits = countOccurrences(text, sub);
+    const hits = countOccurrences(text.length > 50000 ? miningText : text, sub);
     if (hits >= 2) {
       const estToks = approxTokens(sub);
       const estGain = hits * (estToks - 1) - (estToks + 2);
