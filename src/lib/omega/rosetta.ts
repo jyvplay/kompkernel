@@ -705,6 +705,7 @@ export function rosettaTranspose(
   const lines = t.split('\n');
   const srcLines = text.split('\n');
   const outLines: string[] = [];
+  const lineMemo = new Map<string, { span?: string; tsLine: string; isJ: boolean }>();
   const systems = new Set<string>([...(folded !== null ? ['W'] : []), ...(hasRegions ? ['R'] : [])]);
   let csvRun: string[] = [];
   let csvRunOrig: string[] = [];
@@ -853,23 +854,40 @@ export function rosettaTranspose(
     }
 
     let tsLine = line;
-    const pairs = foldJsonLine(line);
-    if (pairs !== null) {
-      const kv = pairs.map((p) => `${p.key}=${p.val}`).join(' ');
-      const back = parseKvPayload(kv);
-      if (back !== null && unfoldJsonPairs(back) === line) {
-        const span = mark + 'J' + kv + mark;
-        if (!measure || countTokens(span, enc) < countTokens(line, enc)) {
-          flushCsv();
-          outLines.push(span);
-          systems.add('J');
-          continue;
+    let isJ = false;
+    let jSpan: string | undefined;
+
+    const memo = lineMemo.get(line);
+    if (memo !== undefined) {
+      if (memo.isJ && memo.span) {
+        flushCsv();
+        outLines.push(memo.span);
+        systems.add('J');
+        continue;
+      }
+      tsLine = memo.tsLine;
+      if (tsLine !== line) systems.add('T');
+    } else {
+      const pairs = foldJsonLine(line);
+      if (pairs !== null) {
+        const kv = pairs.map((p) => `${p.key}=${p.val}`).join(' ');
+        const back = parseKvPayload(kv);
+        if (back !== null && unfoldJsonPairs(back) === line) {
+          const span = mark + 'J' + kv + mark;
+          if (!measure || countTokens(span, enc) < countTokens(line, enc)) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('J');
+            lineMemo.set(line, { tsLine: line, isJ: true, span });
+            continue;
+          }
         }
       }
-    }
 
-    tsLine = tsTransposeLine(line, mark, enc, measure);
-    if (tsLine !== line) systems.add('T');
+      tsLine = tsTransposeLine(line, mark, enc, measure);
+      if (tsLine !== line) systems.add('T');
+      lineMemo.set(line, { tsLine, isJ: false });
+    }
 
     if (csvFoldableLine(tsLine)) {
       csvRun.push(tsLine.split(',').join(' '));
