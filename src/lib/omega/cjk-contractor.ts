@@ -245,25 +245,51 @@ export function cjkContractorEncode(
   const maxEntries = opts.maxEntries ?? 32;
   const maxCandidateTrials = opts.maxCandidateTrials ?? 25;
 
-  // Linear sub-second fast path for mega-inputs (> 100,000 characters)
+  // Multi-tier linear fast path for mega-inputs (> 100,000 characters)
   if (text.length > 100000) {
-    const prefixSample = text.slice(0, 25000);
+    const prefixSample = text.slice(0, 35000);
     const candidateSet = new Set<string>();
 
-    const lines = prefixSample.split('\n');
-    for (const l of lines) {
-      if (l.length >= 4 && l.length <= 180) candidateSet.add(l);
+    // 1. Multi-line code blocks and function definitions
+    const blocks = prefixSample.split(/\n\s*\n/);
+    for (const b of blocks) {
+      const t = b.trim();
+      if (t.length >= 10 && t.length <= 500) candidateSet.add(t);
     }
 
-    const scored = Array.from(candidateSet).map((phrase) => {
-      let count = 0;
-      let pos = 0;
-      while ((pos = prefixSample.indexOf(phrase, pos)) !== -1) {
-        count++;
-        pos += phrase.length;
+    // 2. Lines
+    const lines = prefixSample.split('\n');
+    for (const l of lines) {
+      const t = l.trim();
+      if (t.length >= 4 && t.length <= 250) candidateSet.add(t);
+    }
+
+    // 3. Word n-grams
+    for (const line of lines) {
+      const words = line.split(/(\s+|,|\{|\}|\[|\]|:|"|'|\(|\)|=)/).filter(Boolean);
+      for (let wLen = 2; wLen <= 20; wLen++) {
+        for (let i = 0; i + wLen <= words.length; i++) {
+          const p = words.slice(i, i + wLen).join('');
+          if (p.length >= 4 && p.length <= 250) candidateSet.add(p);
+        }
       }
-      return { phrase, count };
-    }).filter((s) => s.count >= 2).sort((a, b) => b.count - a.count).slice(0, Math.min(16, maxEntries));
+    }
+
+    const targetMaxEntries = Math.max(32, Math.min(maxEntries, 64));
+    const scored = Array.from(candidateSet)
+      .map((phrase) => {
+        let count = 0;
+        let pos = 0;
+        while ((pos = prefixSample.indexOf(phrase, pos)) !== -1) {
+          count++;
+          pos += phrase.length;
+        }
+        const netCharGain = count * (phrase.length - 1) - (phrase.length + 3);
+        return { phrase, count, netCharGain };
+      })
+      .filter((s) => s.count >= 2 && s.netCharGain > 0)
+      .sort((a, b) => b.netCharGain - a.netCharGain)
+      .slice(0, targetMaxEntries);
 
     for (const cand of scored) {
       if (aliasIdx >= aliasPool.length) break;
