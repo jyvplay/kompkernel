@@ -208,7 +208,11 @@ export function cjkContractorEncode(
 ): CjkContractorResult {
   const t0 = typeof performance !== 'undefined' ? performance.now() : 0;
   const ms = () => (typeof performance !== 'undefined' ? performance.now() : 0) - t0;
-  const inTokens = countTokens(text, enc);
+
+  // Fast approximate token counting for mega inputs (> 20M chars) to prevent V8 Uint32Array heap overflow
+  const inTokens = text.length > 20000000
+    ? Math.round((text.length / 30000) * countTokens(text.slice(0, 30000), enc))
+    : countTokens(text, enc);
 
   const identity = (notes: string): CjkContractorResult => ({
     wire: text,
@@ -275,7 +279,9 @@ export function cjkContractorEncode(
     }
 
     const wire = assembleWire(entries, currentBody, opts);
-    const outTokens = countTokens(wire, enc);
+    const outTokens = text.length > 20000000
+      ? Math.round((wire.length / 30000) * countTokens(wire.slice(0, 30000), enc))
+      : countTokens(wire, enc);
     const decoded = cjkContractorDecode(wire, opts);
 
     if (decoded === text && outTokens < inTokens) {
