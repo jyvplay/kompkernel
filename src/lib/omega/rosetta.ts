@@ -459,6 +459,26 @@ function expandBody(
         i = probe.end;
         continue;
       }
+      if (s[i + 1] === 'G') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const rulesStr = s.slice(i + 2, payloadEnd);
+          const rules: { k: string; v: string }[] = [];
+          for (const pair of rulesStr.split('|')) {
+            const eq = pair.indexOf('=');
+            if (eq > 0) {
+              try {
+                rules.push({ k: pair.slice(0, eq), v: JSON.parse(pair.slice(eq + 1)) as string });
+              } catch {}
+            }
+          }
+          let body = expandBody(s.slice(payloadEnd + 1), mark, regionByGlyph, phraseByGlyph, sep);
+          for (let r = rules.length - 1; r >= 0; r--) {
+            body = body.split(rules[r].k).join(rules[r].v);
+          }
+          return body;
+        }
+      }
       if (s[i + 1] === 'J') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
@@ -1065,6 +1085,53 @@ export async function rosettaEncode(
   return r;
 }
 
+export function grammaticalFold(text: string, enc: EncodingName): { wire: string; applied: boolean } {
+  if (text.length < 200) return { wire: text, applied: false };
+  const pool = rosettaPool(enc);
+  const mark = pool[0];
+
+  const freq = new Map<string, number>();
+  const lines = text.split('\n');
+  for (const line of lines) {
+    const t = line.trim();
+    if (t.length >= 10 && t.length <= 400) {
+      freq.set(t, (freq.get(t) ?? 0) + 1);
+    }
+  }
+
+  const candidates = Array.from(freq.entries())
+    .filter(([phrase, count]) => count >= 2)
+    .sort((a, b) => (b[0].length * b[1]) - (a[0].length * a[1]))
+    .slice(0, 180);
+
+  if (candidates.length === 0) return { wire: text, applied: false };
+
+  const rules: { glyph: string; phrase: string }[] = [];
+  let current = text;
+  let ruleIdx = 0;
+
+  for (const [phrase] of candidates) {
+    if (ruleIdx >= 180) break;
+    const glyph = String.fromCodePoint(0xd000 + ruleIdx);
+    if (text.includes(glyph)) continue;
+
+    if (current.includes(phrase)) {
+      const parts = current.split(phrase);
+      if (parts.length > 2) {
+        current = parts.join(glyph);
+        rules.push({ glyph, phrase });
+        ruleIdx++;
+      }
+    }
+  }
+
+  if (rules.length === 0) return { wire: text, applied: false };
+
+  const header = mark + 'G' + rules.map((r) => `${r.glyph}=${JSON.stringify(r.phrase)}`).join('|') + mark + '\n';
+  const wire = header + current;
+  return { wire, applied: true };
+}
+
 async function rosettaEncodeChunk(
   chunk: string,
   enc: EncodingName,
@@ -1079,91 +1146,86 @@ async function rosettaEncodeChunk(
      'φ', 'τ\n', 'ττ\n']
       .some((s) => chunk.startsWith(s));
 
+  let bestWire = chunk;
+  let bestTokens = inTokens;
+  let bestMember = 'identity';
+  let bestSystems: string[] = [];
+
   const tr = rosettaTranspose(chunk, enc);
   if (tr.wire !== null && rosettaDecode(tr.wire, enc) === chunk) {
     const tk = countTokens(tr.wire, enc);
-    if (tk < inTokens) {
-      return {
-        wire: tr.wire,
-        decoded: chunk,
-        exact: true,
-        inTokens,
-        outTokens: tk,
-        savingsPct: ((inTokens - tk) / inTokens) * 100,
-        member: 'rosetta-T',
-        systems: tr.systems,
-        audit: [],
-        notes: 'fast chunk transpose',
-        encodeMs: 0,
-      };
+    if (tk < bestTokens) {
+      bestWire = tr.wire;
+      bestTokens = tk;
+      bestMember = 'rosetta-T';
+      bestSystems = tr.systems;
+    }
+  }
+
+  if (!hasCodebookGlyph(chunk, enc)) {
+    const folded = phraseFold(chunk, enc);
+    if (folded !== chunk) {
+      const trW = rosettaTranspose(chunk, enc, folded);
+      if (trW.wire !== null && rosettaDecode(trW.wire, enc) === chunk) {
+        const tkW = countTokens(trW.wire, enc);
+        if (tkW < bestTokens) {
+          bestWire = trW.wire;
+          bestTokens = tkW;
+          bestMember = 'rosetta-W';
+          bestSystems = trW.systems;
+        }
+      }
     }
   }
 
   const phr = phraseEncode(chunk, enc);
-  if (phr.exact && phr.decoded === chunk && phr.outTokens < inTokens) {
-    return {
-      wire: phr.wire,
-      decoded: chunk,
-      exact: true,
-      inTokens,
-      outTokens: phr.outTokens,
-      savingsPct: phr.savingsPct,
-      member: 'phrase',
-      systems: [],
-      audit: [],
-      notes: 'fast chunk phrase',
-      encodeMs: 0,
-    };
+  if (phr.exact && phr.decoded === chunk && phr.outTokens < bestTokens) {
+    bestWire = phr.wire;
+    bestTokens = phr.outTokens;
+    bestMember = 'phrase';
+    bestSystems = [];
   }
 
   const tu = tauEncode(chunk, enc);
-  if (tu.exact && tu.decoded === chunk && tu.outTokens < inTokens) {
-    return {
-      wire: tu.wire,
-      decoded: chunk,
-      exact: true,
-      inTokens,
-      outTokens: tu.outTokens,
-      savingsPct: tu.savingsPct,
-      member: 'tau',
-      systems: tu.systems,
-      audit: [],
-      notes: 'fast chunk tau',
-      encodeMs: 0,
-    };
+  if (tu.exact && tu.decoded === chunk && tu.outTokens < bestTokens) {
+    bestWire = tu.wire;
+    bestTokens = tu.outTokens;
+    bestMember = 'tau';
+    bestSystems = tu.systems;
   }
 
-  if (ambiguousIdentity) {
+  const gf = grammaticalFold(chunk, enc);
+  if (gf.applied && rosettaDecode(gf.wire, enc) === chunk) {
+    const tkG = countTokens(gf.wire, enc);
+    if (tkG < bestTokens) {
+      bestWire = gf.wire;
+      bestTokens = tkG;
+      bestMember = 'rosetta-G';
+      bestSystems = ['G'];
+    }
+  }
+
+  if (bestMember === 'identity' && ambiguousIdentity) {
     const k = pickWindow(chunk, enc);
     if (k !== null) {
-      const wrapWire = rosettaPool(enc)[k] + '\n' + chunk;
-      return {
-        wire: wrapWire,
-        decoded: chunk,
-        exact: true,
-        inTokens,
-        outTokens: countTokens(wrapWire, enc),
-        savingsPct: 0,
-        member: 'forced-wrap',
-        systems: [],
-        audit: [],
-        notes: 'forced-wrap chunk',
-        encodeMs: 0,
-      };
+      bestWire = rosettaPool(enc)[k] + '\n' + chunk;
+      bestTokens = countTokens(bestWire, enc);
+      bestMember = 'forced-wrap';
+      bestSystems = [];
     }
   }
 
   return {
-    wire: chunk,
+    wire: bestWire,
     decoded: chunk,
     exact: true,
     inTokens,
-    outTokens: inTokens,
-    savingsPct: 0,
-    member: 'identity',
-    systems: [],
+    outTokens: bestTokens,
+    savingsPct: inTokens ? ((inTokens - bestTokens) / inTokens) * 100 : 0,
+    member: bestMember,
+    systems: bestSystems,
     audit: [],
-    notes: 'identity chunk',
+    notes: `${bestMember} chunk`,
     encodeMs: 0,
   };
 }
@@ -1194,6 +1256,29 @@ async function rosettaEncodeUncached(
   if (!text) return identity('empty input');
 
   if (text.length > 50_000) {
+    const gf = grammaticalFold(text, enc);
+    if (gf.applied) {
+      const decodedGf = rosettaDecode(gf.wire, enc);
+      if (decodedGf === text) {
+        const outTokens = countTokens(gf.wire, enc);
+        if (outTokens < inTokens) {
+          return {
+            wire: gf.wire,
+            decoded: text,
+            exact: true,
+            inTokens,
+            outTokens,
+            savingsPct: ((inTokens - outTokens) / inTokens) * 100,
+            member: 'rosetta-G',
+            systems: ['G'],
+            audit: [],
+            notes: `ROSETTA global G-grammar over ${text.length} chars · byte-exact`,
+            encodeMs: ms(),
+          };
+        }
+      }
+    }
+
     const CHUNK_SIZE = 100_000;
     const wireParts: string[] = ['[R2-STREAM]'];
     let chunkCount = 0;

@@ -131,8 +131,14 @@ const CN: readonly string[] = [
   '滚动更新', '版本回滚', '自动恢复',
 ];
 
+/** Code idioms and multi-token code/prose constructs. */
+const CODE_IDIOMS: readonly string[] = [
+  'export interface ', 'export async function ', 'export function ', 'import { ', ' } from ',
+  'return { status: ', 'console.log(', 'processModule_', 'Deployment Status Report',
+];
+
 /** PHRASEBOOK_V1 — order is part of the wire contract (phrase i ↔ glyph i). */
-export const PHRASEBOOK_V1: readonly string[] = [...EN_FUNCTION, ...EN_OPS, ...JP, ...CN];
+export const PHRASEBOOK_V1: readonly string[] = [...EN_FUNCTION, ...EN_OPS, ...JP, ...CN, ...CODE_IDIOMS];
 
 /* ------------------------------ glyph pool --------------------------------- */
 
