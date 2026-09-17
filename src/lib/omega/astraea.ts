@@ -38,7 +38,7 @@ import { CJK_CONTRACTIVE_ENTRIES } from './cjk-contractor';
 
 /* --------------------------- ASTRAEA-L LEXICON ---------------------------- */
 
-/** Additional high-frequency multi-token technical words, Markdown, and JSON collocations. */
+/** Additional high-frequency multi-token technical words, Markdown, code, and JSON collocations. */
 const TECHNICAL_COLLOCATIONS: readonly string[] = [
   'infrastructure', 'configuration', 'rebalancing', 'responsiveness', 'deliberates',
   'architecture', 'optimization', 'heterogeneous', 'evaluating', 'frequently',
@@ -53,6 +53,14 @@ const TECHNICAL_COLLOCATIONS: readonly string[] = [
   'synthetic load tests', 'connection pool limits', 'pod memory', 'retry budget',
   'failover completed', 'creationTimestamp', 'ClusterHealthException',
   'TLS handshake timeout', 'replica lag threshold exceeded', 'too many requests',
+  'export interface ClusterMetrics {', 'export function evaluateClusterHealth(',
+  'const degradedNodes: Array<[string, number]> = [];',
+  'for (const [node, metrics] of Object.entries(clusterCtx)) {',
+  'if (metrics.latencyMs > thresholdMs || metrics.status !== \'HEALTHY\') {',
+  'degradedNodes.push([node, metrics.latencyMs]);',
+  'return Object.values(clusterCtx).reduce((sum, m) => sum + m.activePods, 0);',
+  '  nodeId: string;', '  region: string;', '  status: \'HEALTHY\' | \'DEGRADED\' | \'FAILED\';',
+  '  latencyMs: number;', '  activePods: number;', '  errorCount: number;', '  creationTimestamp: string;',
   'additional_metrics,node_name,cpu_percent,memory_mb,active_conns,error_rate_pct',
   'metric_a,node-iad-01,78.5,16384,142,0.02',
   'metric_b,node-iad-02,82.1,16384,189,0.05',
