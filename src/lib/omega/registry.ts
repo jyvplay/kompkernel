@@ -57,6 +57,7 @@ import { aetherEncode } from './aether';
 import { yggdrasilEncode } from './yggdrasil';
 import { oblivionEncode } from './oblivion';
 import { eidolonEncode } from './eidolon';
+import { encodeTerminus, decodeTerminus } from './terminus';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -117,6 +118,16 @@ function presetEntries(): Entry[] {
 export function codecEntries(): Entry[] {
   const base: Entry[] = [
     ...presetEntries(),
+    {
+      key: 'terminus',
+      label: '★ TERMINUS-T1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = encodeTerminus(t, enc);
+        return { output: r.wire, decoded: decodeTerminus(r.wire), note: r.notes };
+      },
+    },
     {
       key: 'eidolon',
       label: '★ EIDOLON-E1',

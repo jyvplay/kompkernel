@@ -13,6 +13,7 @@ import { aetherEncode, aetherDecode, AETHER_SYSTEM_PROMPT, type AetherResult } f
 import { yggdrasilEncode, yggdrasilDecode, YGGDRASIL_SYSTEM_PROMPT, type YggdrasilResult } from './yggdrasil';
 import { oblivionEncode, oblivionDecode, OBLIVION_SYSTEM_PROMPT, type OblivionResult } from './oblivion';
 import { eidolonEncode, eidolonDecode, EIDOLON_SYSTEM_PROMPT, type EidolonResult } from './eidolon';
+import { encodeTerminus, decodeTerminus, TERMINUS_SENTINEL } from './terminus';
 import { zenithEncode, zenithDecode, ZENITH_SYSTEM_PROMPT, type ZenithResult } from './zenith';
 import { chronosEncode, chronosDecode, CHRONOS_SYSTEM_PROMPT, type ChronosResult } from './chronos-x1';
 import { hyperionEncode, hyperionDecode, HYPERION_SYSTEM_PROMPT, type HyperionResult } from './hyperion';
@@ -41,6 +42,7 @@ export interface CrownResult {
 interface Member { lane: string; wire: string; decoded: string; contract: string; decode: (w: string) => string }
 
 export interface CrownSuppliedMembers {
+  terminus?: any;
   eidolon?: EidolonResult;
   oblivion?: OblivionResult;
   yggdrasil?: YggdrasilResult;
@@ -63,7 +65,8 @@ export interface CrownSuppliedMembers {
 }
 
 export function crownDecode(wire: string): string {
-  for (const fn of [eidolonDecode, oblivionDecode, yggdrasilDecode, aetherDecode, valkyrieDecode, zenithDecode, chronosDecode, hyperionDecode, pallasDecode, astraeaDecode, starlightDecode, atlasDecode, auroraDecode, mosaicDecode, signetDecode, pulseDecode, anaphoraDecode, helixDecode]) {
+  if (wire.startsWith(TERMINUS_SENTINEL)) return decodeTerminus(wire);
+  for (const fn of [decodeTerminus, eidolonDecode, oblivionDecode, yggdrasilDecode, aetherDecode, valkyrieDecode, zenithDecode, chronosDecode, hyperionDecode, pallasDecode, astraeaDecode, starlightDecode, atlasDecode, auroraDecode, mosaicDecode, signetDecode, pulseDecode, anaphoraDecode, helixDecode]) {
     try {
       const d = fn(wire);
       if (d !== wire) return d;
@@ -110,6 +113,7 @@ export async function crownEncodeFromMembers(
   if (!text) return identity('empty input');
 
   const members: Member[] = [{ lane: 'identity', wire: text, decoded: text, contract: '', decode: (w) => w }];
+  try { const r = supplied.terminus ?? encodeTerminus(text, enc); members.push({ lane: 'terminus', wire: r.wire, decoded: r.decoded, contract: '★ TERMINUS-T1: Terminal Architecture lossless direct-reasoning CJK dictionary codec.', decode: decodeTerminus }); } catch { /* skip */ }
   try { const r = supplied.eidolon ?? eidolonEncode(text, enc); members.push({ lane: 'eidolon', wire: r.wire, decoded: r.decoded, contract: EIDOLON_SYSTEM_PROMPT, decode: eidolonDecode }); } catch { /* skip */ }
   try { const r = supplied.oblivion ?? oblivionEncode(text, enc); members.push({ lane: 'oblivion', wire: r.wire, decoded: r.decoded, contract: OBLIVION_SYSTEM_PROMPT, decode: oblivionDecode }); } catch { /* skip */ }
   try { const r = supplied.yggdrasil ?? yggdrasilEncode(text, enc); members.push({ lane: 'yggdrasil', wire: r.wire, decoded: r.decoded, contract: YGGDRASIL_SYSTEM_PROMPT, decode: yggdrasilDecode }); } catch { /* skip */ }
