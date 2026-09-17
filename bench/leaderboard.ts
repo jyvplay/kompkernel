@@ -42,8 +42,6 @@ import { rosettaEncode } from '@/lib/omega/rosetta';
 import { kappaEncode } from '@/lib/omega/kappa';
 import { phraseEncode } from '@/lib/omega/phrase';
 import { tauEncode } from '@/lib/omega/tau';
-import { aetherEncode } from '@/lib/omega/aether';
-import { chronosEncode } from '@/lib/omega/chronos';
 
 export interface Row {
   key: string; wireTokens: number; deliveredTokens: number | null;
@@ -112,10 +110,8 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('zenith', async () => zenithEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
   await run('splice', () => spliceEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
   await run('eclipse', async () => eclipseEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
-  // ROSETTA, AETHER, and CHRONOS last: hit caches warmed above.
+  // ROSETTA last: its internal member lanes hit the caches warmed above.
   await run('rosetta', async () => rosettaEncode(text, enc));
-  await run('aether', async () => aetherEncode(text, enc));
-  await run('chronos', async () => chronosEncode(text, enc));
   await run('omegaE8', () => e8Encode(text, enc));
   const s = t0();
   try {

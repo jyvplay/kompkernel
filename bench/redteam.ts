@@ -17,8 +17,6 @@ import { CHAOS_900, MOSAIC_HANDTRACE_300, CHAOS_G_CJK } from './fixtures';
 import { kappaEncode, kappaDecode, KAPPA_SENTINEL, KAPPA_HOLE } from '@/lib/omega/kappa';
 import { phraseEncode, phraseDecode, phraseCodebook } from '@/lib/omega/phrase';
 import { tauEncode, tauDecode, tauMarkers } from '@/lib/omega/tau';
-import { chronosEncode, chronosDecode } from '@/lib/omega/chronos';
-import { aetherEncode, aetherDecode } from '@/lib/omega/aether';
 
 let pass = 0;
 let fail = 0;
@@ -431,34 +429,9 @@ async function p8() {
   }
 }
 
-async function p9() {
-  console.log('P9 — CHRONOS-Ω & AETHER-A1 adversarial shapes');
-  const shapes: Array<[string, string]> = [
-    ['empty', ''],
-    ['single char', 'x'],
-    ['crlf text', 'line 1\r\nline 2\r\nline 3\r\n'],
-    ['slp grammar header-like text', '⟨G⟩\n가=test\n⟨/G⟩\nbody text'],
-    ['cjk with hangul glyphs in source', '한국어 텍스트가 여기에 있습니다 影響範囲 mixed'],
-    ['malformed JSON line', '{"key": "val" incomplete'],
-    ['nested rules text', 'ruleA ruleB ruleA ruleB ruleC ruleA ruleB ruleC'],
-    ['chaos-900', CHAOS_900],
-    ['chaos-G', CHAOS_G_CJK],
-  ];
-
-  for (const [label, text] of shapes) {
-    const cRes = await chronosEncode(text, 'o200k_base');
-    const cDec = await chronosDecode(cRes.wire, 'o200k_base');
-    ok(cDec === text && cRes.exact, `CHRONOS ${label} (exact)`, `out=${cRes.outTokens}/${cRes.inTokens}`);
-
-    const aRes = await aetherEncode(text, 'o200k_base');
-    const aDec = await aetherDecode(aRes.wire, 'o200k_base');
-    ok(aDec === text && aRes.exact, `AETHER ${label} (exact)`, `out=${aRes.outTokens}/${aRes.inTokens}`);
-  }
-}
-
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }
