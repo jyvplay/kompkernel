@@ -8,6 +8,18 @@ import { signetEncode, signetDecode, SIGNET_SYSTEM_PROMPT, type SignetResult } f
 import { helixEncode, helixDecode, HELIX_SYSTEM_PROMPT, type HelixResult } from './helix';
 import { pulseEncode, pulseDecode, PULSE_SYSTEM_PROMPT, type PulseResult } from './pulse';
 import { anaphoraEncode, anaphoraDecode, anaphoraDecoderPrompt, type AnaphoraResult } from './anaphora';
+import { valkyrieEncode, valkyrieDecode, VALKYRIE_SYSTEM_PROMPT, type ValkyrieResult } from './valkyrie';
+import { aetherEncode, aetherDecode, AETHER_SYSTEM_PROMPT, type AetherResult } from './aether';
+import { yggdrasilEncode, yggdrasilDecode, YGGDRASIL_SYSTEM_PROMPT, type YggdrasilResult } from './yggdrasil';
+import { oblivionEncode, oblivionDecode, OBLIVION_SYSTEM_PROMPT, type OblivionResult } from './oblivion';
+import { eidolonEncode, eidolonDecode, EIDOLON_SYSTEM_PROMPT, type EidolonResult } from './eidolon';
+import { encodeTerminus, decodeTerminus, TERMINUS_SENTINEL } from './terminus';
+import { zenithEncode, zenithDecode, ZENITH_SYSTEM_PROMPT, type ZenithResult } from './zenith';
+import { chronosEncode, chronosDecode, CHRONOS_SYSTEM_PROMPT, type ChronosResult } from './chronos-x1';
+import { hyperionEncode, hyperionDecode, HYPERION_SYSTEM_PROMPT, type HyperionResult } from './hyperion';
+import { pallasEncode, pallasDecode, PALLAS_SYSTEM_PROMPT, type PallasResult } from './pallas';
+import { astraeaEncode, astraeaDecode, ASTRAEA_SYSTEM_PROMPT, type AstraeaResult } from './starlight-prime';
+import { starlightEncode, starlightDecode, STARLIGHT_SYSTEM_PROMPT, type StarlightResult } from './starlight';
 
 export interface CrownAudit { lane: string; wire: number; contract: number; delivered: number }
 export interface CrownResult {
@@ -30,6 +42,18 @@ export interface CrownResult {
 interface Member { lane: string; wire: string; decoded: string; contract: string; decode: (w: string) => string }
 
 export interface CrownSuppliedMembers {
+  terminus?: any;
+  eidolon?: EidolonResult;
+  oblivion?: OblivionResult;
+  yggdrasil?: YggdrasilResult;
+  aether?: AetherResult;
+  valkyrie?: ValkyrieResult;
+  zenith?: ZenithResult;
+  chronos?: ChronosResult;
+  hyperion?: HyperionResult;
+  pallas?: PallasResult;
+  astraea?: AstraeaResult;
+  starlight?: StarlightResult;
   atlas?: AtlasResult;
   aurora?: AuroraResult;
   mosaic?: MosaicResult;
@@ -41,7 +65,8 @@ export interface CrownSuppliedMembers {
 }
 
 export function crownDecode(wire: string): string {
-  for (const fn of [atlasDecode, auroraDecode, mosaicDecode, signetDecode, pulseDecode, anaphoraDecode, helixDecode]) {
+  if (wire.startsWith(TERMINUS_SENTINEL)) return decodeTerminus(wire);
+  for (const fn of [decodeTerminus, eidolonDecode, oblivionDecode, yggdrasilDecode, aetherDecode, valkyrieDecode, zenithDecode, chronosDecode, hyperionDecode, pallasDecode, astraeaDecode, starlightDecode, atlasDecode, auroraDecode, mosaicDecode, signetDecode, pulseDecode, anaphoraDecode, helixDecode]) {
     try {
       const d = fn(wire);
       if (d !== wire) return d;
@@ -87,15 +112,92 @@ export async function crownEncodeFromMembers(
   });
   if (!text) return identity('empty input');
 
-  const members: Member[] = [{ lane: 'identity', wire: text, decoded: text, contract: '', decode: (w) => w }];
-  try { const r = supplied.atlas ?? atlasEncode(text, enc); members.push({ lane: 'atlas', wire: r.wire, decoded: r.decoded, contract: atlasDecoderPrompt(r), decode: atlasDecode }); } catch { /* skip */ }
-  try { const r = supplied.aurora ?? auroraEncode(text, enc); members.push({ lane: 'aurora', wire: r.wire, decoded: r.decoded, contract: auroraDecoderPrompt(r), decode: auroraDecode }); } catch { /* skip */ }
-  try { const r = supplied.mosaic ?? mosaicEncode(text, enc); members.push({ lane: 'mosaic', wire: r.wire, decoded: r.decoded, contract: mosaicDecoderPrompt(r), decode: mosaicDecode }); } catch { /* skip */ }
-  try { const r = supplied.orbit ?? await orbitEncode(text, enc, null, []); members.push({ lane: 'orbit', wire: r.wire, decoded: r.decoded, contract: orbitDecoderPrompt(r), decode: crownDecode }); } catch { /* skip */ }
-  try { const r = supplied.signet ?? signetEncode(text, enc); members.push({ lane: 'signet', wire: r.wire, decoded: r.decoded, contract: SIGNET_SYSTEM_PROMPT, decode: signetDecode }); } catch { /* skip */ }
-  try { const r = supplied.helix ?? helixEncode(text, enc); members.push({ lane: 'helix', wire: r.wire, decoded: r.decoded, contract: HELIX_SYSTEM_PROMPT, decode: helixDecode }); } catch { /* skip */ }
-  try { const r = supplied.pulse ?? pulseEncode(text, enc); members.push({ lane: 'pulse', wire: r.wire, decoded: r.decoded, contract: PULSE_SYSTEM_PROMPT, decode: pulseDecode }); } catch { /* skip */ }
-  try { const r = supplied.anaphora ?? anaphoraEncode(text, enc); members.push({ lane: 'anaphora', wire: r.wire, decoded: r.decoded, contract: anaphoraDecoderPrompt(r), decode: anaphoraDecode }); } catch { /* skip */ }
+  const memberTasks: Array<Promise<Member | null>> = [
+    Promise.resolve({ lane: 'identity', wire: text, decoded: text, contract: '', decode: (w) => w }),
+    Promise.resolve().then(() => {
+      const r = supplied.terminus ?? encodeTerminus(text, enc);
+      return { lane: 'terminus', wire: r.wire, decoded: r.decoded, contract: '★ TERMINUS-T1: Terminal Architecture lossless direct-reasoning CJK dictionary codec.', decode: decodeTerminus };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.eidolon ?? eidolonEncode(text, enc);
+      return { lane: 'eidolon', wire: r.wire, decoded: r.decoded, contract: EIDOLON_SYSTEM_PROMPT, decode: eidolonDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.oblivion ?? oblivionEncode(text, enc);
+      return { lane: 'oblivion', wire: r.wire, decoded: r.decoded, contract: OBLIVION_SYSTEM_PROMPT, decode: oblivionDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.yggdrasil ?? yggdrasilEncode(text, enc);
+      return { lane: 'yggdrasil', wire: r.wire, decoded: r.decoded, contract: YGGDRASIL_SYSTEM_PROMPT, decode: yggdrasilDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.aether ?? aetherEncode(text, enc);
+      return { lane: 'aether', wire: r.wire, decoded: r.decoded, contract: AETHER_SYSTEM_PROMPT, decode: aetherDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.valkyrie ?? valkyrieEncode(text, enc);
+      return { lane: 'valkyrie', wire: r.wire, decoded: r.decoded, contract: VALKYRIE_SYSTEM_PROMPT, decode: valkyrieDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.zenith ?? zenithEncode(text, enc);
+      return { lane: 'zenith', wire: r.wire, decoded: r.decoded, contract: ZENITH_SYSTEM_PROMPT, decode: zenithDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.chronos ?? chronosEncode(text, enc);
+      return { lane: 'chronos', wire: r.wire, decoded: r.decoded, contract: CHRONOS_SYSTEM_PROMPT, decode: chronosDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.hyperion ?? hyperionEncode(text, enc);
+      return { lane: 'hyperion', wire: r.wire, decoded: r.decoded, contract: HYPERION_SYSTEM_PROMPT, decode: hyperionDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.pallas ?? pallasEncode(text, enc);
+      return { lane: 'pallas', wire: r.wire, decoded: r.decoded, contract: PALLAS_SYSTEM_PROMPT, decode: pallasDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.astraea ?? astraeaEncode(text, enc);
+      return { lane: 'astraea', wire: r.wire, decoded: r.decoded, contract: ASTRAEA_SYSTEM_PROMPT, decode: astraeaDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.starlight ?? starlightEncode(text, enc);
+      return { lane: 'starlight', wire: r.wire, decoded: r.decoded, contract: STARLIGHT_SYSTEM_PROMPT, decode: starlightDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.atlas ?? atlasEncode(text, enc);
+      return { lane: 'atlas', wire: r.wire, decoded: r.decoded, contract: atlasDecoderPrompt(r), decode: atlasDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.aurora ?? auroraEncode(text, enc);
+      return { lane: 'aurora', wire: r.wire, decoded: r.decoded, contract: auroraDecoderPrompt(r), decode: auroraDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.mosaic ?? mosaicEncode(text, enc);
+      return { lane: 'mosaic', wire: r.wire, decoded: r.decoded, contract: mosaicDecoderPrompt(r), decode: mosaicDecode };
+    }).catch(() => null),
+    Promise.resolve().then(async () => {
+      const r = supplied.orbit ?? await orbitEncode(text, enc, null, []);
+      return { lane: 'orbit', wire: r.wire, decoded: r.decoded, contract: orbitDecoderPrompt(r), decode: crownDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.signet ?? signetEncode(text, enc);
+      return { lane: 'signet', wire: r.wire, decoded: r.decoded, contract: SIGNET_SYSTEM_PROMPT, decode: signetDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.helix ?? helixEncode(text, enc);
+      return { lane: 'helix', wire: r.wire, decoded: r.decoded, contract: HELIX_SYSTEM_PROMPT, decode: helixDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.pulse ?? pulseEncode(text, enc);
+      return { lane: 'pulse', wire: r.wire, decoded: r.decoded, contract: PULSE_SYSTEM_PROMPT, decode: pulseDecode };
+    }).catch(() => null),
+    Promise.resolve().then(() => {
+      const r = supplied.anaphora ?? anaphoraEncode(text, enc);
+      return { lane: 'anaphora', wire: r.wire, decoded: r.decoded, contract: anaphoraDecoderPrompt(r), decode: anaphoraDecode };
+    }).catch(() => null),
+  ];
+
+  const resolvedMembers = await Promise.all(memberTasks);
+  const members: Member[] = resolvedMembers.filter((m): m is Member => m !== null);
 
   const audit: CrownAudit[] = [];
   let best: Member | null = null;
