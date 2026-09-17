@@ -502,7 +502,15 @@ function expandBodyAstraea(
           while ((m = entryRegex.exec(payload)) !== null) {
             const glyph = m[1];
             try {
-              const phrase = JSON.parse(m[2]) as string;
+              let phrase = JSON.parse(m[2]) as string;
+              if (lexiconByGlyph !== null) {
+                // Recursively expand any lexicon glyphs present inside dynamic phrases
+                let expandedPhrase = '';
+                for (const ch of phrase) {
+                  expandedPhrase += lexiconByGlyph.get(ch) ?? ch;
+                }
+                phrase = expandedPhrase;
+              }
               activeDynamic.set(glyph, phrase);
             } catch {
               /* skip */
