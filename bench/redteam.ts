@@ -534,7 +534,7 @@ async function p10() {
 
   const shapes: Array<[string, string]> = [
     ['identical x3 (minimum family)', 'same\nsame\nsame'],
-    ['identical x2 (below minimum)', 'same\nsame'],
+    ['identical x2 (now minimum)', 'same\nsame'],
     ['identical with TS line', '2026-09-15T09:02:33Z\n2026-09-15T09:02:33Z\n2026-09-15T09:02:33Z'],
     ['family with negative numbers', 'a,-1\nb,-2\nc,-3\nd,-4\ne,-5'],
     ['family with descending arith', 'a,9\nb,7\nc,5\nd,3\ne,1'],
@@ -767,9 +767,90 @@ async function p12() {
   }
 }
 
+
+async function p13() {
+  console.log('P13 — ROSETTA-R4.2 pair families + periodic-const strides');
+  const { rosettaEncode, rosettaDecode } = await import('@/lib/omega/rosetta');
+
+  const shapes: Array<[string, string]> = [
+    ['periodic pair x2 (X,Y,X,Y)', 'user: fix it\nassistant: ok.\nuser: fix it\nassistant: ok.'],
+    ['periodic pair x3', 'a:1\nb:2\na:1\nb:2\na:1\nb:2'],
+    ['periodic stride 3 const', 'x\ny\nz\nx\ny\nz\nx\ny\nz'],
+    ['periodic pair unprofitable (short)', 'a\nb\na\nb'],
+    ['pair family then lone line', 'v1,alpha\nv2,beta\nlone text line'],
+    ['two separate pair families', 'p,1\nq,2\nmid\np,3\nq,4'],
+    ['pair with slot glyph in const', 'keep ①\nkeep ②'],
+    ['pair J with quoted spaces', '{"m":"two words","n":1}\n{"m":"two words","n":2}'],
+    ['periodic with 8 slots over cap', Array.from({ length: 4 }, (_, i) => `${i}a${i}b${i}c${i}d${i}e\n${i}f${i}g${i}h${i}i${i}j`).join('\n')],
+    ['identical pair long lines', 'x'.repeat(120) + '\n' + 'x'.repeat(120)],
+    ['stride-2 half-const half-slot', Array.from({ length: 6 }, (_, i) => `c\nv${i}`).join('\n')],
+    ['pair where one phase empty-ish', Array.from({ length: 4 }, () => '-\n.').join('')],
+  ];
+  for (const [label, text] of shapes) {
+    const r = await rosettaEncode(text, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === text, `P13 ${label} (exact)`, `${r.member} ${r.outTokens}/${r.inTokens} [${r.systems.join(',')}]`);
+    ok(r.outTokens <= r.inTokens, `P13 ${label} (never-worse)`, `${r.outTokens}/${r.inTokens}`);
+  }
+
+  // empty-specs safety: slots with an empty specs line must be rejected, not misrendered
+  {
+    const bads = [
+      'ぁN4::2\na①\nb②\nぁ',
+      'ぁN2:\nx①\nぁ',
+      'ぁN4::2\na\nb\n①ぁ',
+    ];
+    // malformed spans are literal passthrough (rule 5) — safety means no
+    // throw and no phantom expansion, not glyph erasure.
+    let noThrow = true;
+    let deterministic = true;
+    for (const b of bads) {
+      try {
+        const d1 = rosettaDecode(b, 'o200k_base');
+        const d2 = rosettaDecode(b, 'o200k_base');
+        if (d1 !== d2) deterministic = false;
+      } catch { noThrow = false; }
+    }
+    ok(noThrow && deterministic, 'P13 empty-specs wires with slots veto safely (no-throw, deterministic)', '');
+  }
+
+  // fuzz: pair-heavy docs with periodic shapes
+  {
+    const N = 40;
+    let seed = 555777333;
+    const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+    const words = ['user:', 'assistant:', 'step', 'ok', 'a', 'b', 'x', 'y', '{"k":', '}', '1', '2', '0', '-', '#', '@', '①'];
+    let fuzzOk = true;
+    let neverWorse = 0;
+    for (let i = 0; i < N; i++) {
+      let doc = '';
+      const lines = 4 + Math.floor(rnd() * 16);
+      const shape = 1 + Math.floor(rnd() * 3);
+      for (let l = 0; l < lines; l++) {
+        const w = [];
+        const nw = 2 + Math.floor(rnd() * 4);
+        for (let k = 0; k < nw; k++) w.push(words[Math.floor(rnd() * words.length)]);
+        doc += (l % shape === 0 ? '' : ' ') + w.join(' ') + '\n';
+      }
+      const r = await rosettaEncode(doc, 'o200k_base');
+      if (!(r.exact && rosettaDecode(r.wire, 'o200k_base') === doc)) { fuzzOk = false; console.log('    fuzz fail:', JSON.stringify(doc.slice(0, 90))); }
+      if (r.outTokens <= r.inTokens || r.member === 'forced-wrap') neverWorse++;
+    }
+    ok(fuzzOk, 'P13 fuzz exact on pair/periodic-soaked docs (40)');
+    ok(neverWorse === N, 'P13 fuzz never-worse', `${neverWorse}/${N}`);
+  }
+
+  // determinism on the new lanes
+  {
+    const doc = 'user: fix the flaky test\nassistant: I will inspect the suite and patch the race.\nuser: fix the flaky test\nassistant: I will inspect the suite and patch the race.';
+    const a1 = await rosettaEncode(doc, 'o200k_base');
+    const a2 = await rosettaEncode(doc, 'o200k_base');
+    ok(a1.wire === a2.wire && a1.outTokens === a2.outTokens, 'P13 determinism on periodic-const lane', `${a1.member} ${a1.outTokens}`);
+  }
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }

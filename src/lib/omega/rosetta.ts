@@ -447,7 +447,9 @@ export interface RosettaTranspose {
 const SLOT_GLYPHS = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧']; // 1-token slots
 const RLE_MIN_RUN = 40;   // char runs shorter than this never pay for a span
 const ARITH_MIN = 4;      // numbers in an A-span run
-const FAMILY_MIN = 3;     // lines in an N field family
+const FAMILY_MIN = 2;     // lines in an N family — 2 suffices: the per-span
+                          // profitability gate rejects any pair whose wire is not a
+                          // strict token win, so the minimum only bounds attempts
 
 /** Class signature of a string: A(lpha) D(igit) O(ther) per char, run-coded. */
 function classSig(s: string): string {
@@ -540,7 +542,14 @@ function renderSpec(vals: string[], enc: EncodingName): string | null {
     cycBody = cycled.join('|');
   }
   const cycleSpec = (pre ? '^' + pre : '') + (suf ? '$' + suf : '') + '@' + cycBody;
-  const cands = [arithSpec, cycleSpec].filter((c): c is string => c !== null);
+  // unfactored range candidate: '10'..'19' is both ^1@0-9 and @10-19 —
+  // argmin over both forms (the factored form is not always cheaper).
+  let rangeSpec: string | null = null;
+  if (vals.length >= 3 && vals.every((v) => /^\d+$/.test(v) && String(Number(v)) === v)) {
+    const ns = vals.map(Number);
+    if (ns.every((n, i) => i === 0 || n === ns[i - 1] + 1)) rangeSpec = '@' + String(ns[0]) + '-' + String(ns[ns.length - 1]);
+  }
+  const cands = [arithSpec, cycleSpec, rangeSpec].filter((c): c is string => c !== null);
   if (cands.length === 0) return null;
   return cands.reduce((a, b) => (countTokens(b, enc) < countTokens(a, enc) ? b : a));
 }
@@ -705,7 +714,7 @@ function decodeSpanForG1(
     const template = rest.slice(0, snl);
     const specs = rest.slice(snl + 1).split(' ').filter((x) => x !== '');
     const fns = specs.map((sp) => parseSpec(sp));
-    if (fns.length === 0 || fns.some((f) => f === null)) return null;
+    if (fns.some((f) => f === null)) return null;
     if ([...template].some((ch) => SLOT_GLYPHS.indexOf(ch) >= fns.length)) return null;
     for (let r = 0; r < m; r++) {
       let line2 = '';
@@ -731,7 +740,7 @@ function decodeSpanForG1(
     }
     const specs = rest.slice(cursor).split(' ').filter((x) => x !== '');
     const fns = specs.map((sp) => parseSpec(sp));
-    if (fns.length === 0 || fns.some((f) => f === null)) return null;
+    if (fns.some((f) => f === null)) return null;
     if (templates.some((t) => [...t].some((ch) => SLOT_GLYPHS.indexOf(ch) >= fns.length))) return null;
     for (let r = 0; r < m; r++) {
       const template = templates[r % stride]!;
@@ -1001,7 +1010,7 @@ function expandBody(
                   const template = rest.slice(0, secondNl);
                   const specs = rest.slice(secondNl + 1).split(' ').filter((x) => x !== '');
                   const fns = specs.map(parseSpec);
-                  if (specs.length === 0 || fns.some((f) => f === null) || specs.length > SLOT_GLYPHS.length) ok = false;
+                  if (fns.some((f) => f === null) || specs.length > SLOT_GLYPHS.length) ok = false;
                   if (ok && [...template].some((ch) => SLOT_GLYPHS.indexOf(ch) >= specs.length)) ok = false; // slot out of range
                   if (ok) {
                     for (let r = 0; r < m; r++) {
@@ -1029,9 +1038,12 @@ function expandBody(
                   }
                 }
                 if (ok) {
+                  // an EMPTY specs line is legal: an all-const stride family
+                  // (X,Y,X,Y…) carries no slots; the slot-range check below
+                  // still vetoes any slot glyph in that case.
                   const specs = rest.slice(cursor).split(' ').filter((x) => x !== '');
                   const fns = specs.map(parseSpec);
-                  if (specs.length === 0 || fns.some((f) => f === null) || specs.length > SLOT_GLYPHS.length) ok = false;
+                  if (fns.some((f) => f === null) || specs.length > SLOT_GLYPHS.length) ok = false;
                   if (ok && templates.some((t) => [...t].some((ch) => SLOT_GLYPHS.indexOf(ch) >= specs.length))) ok = false; // slot out of range
                   if (ok) {
                     for (let r = 0; r < m; r++) {
@@ -1986,7 +1998,7 @@ async function rosettaEncodeUncached(
 export function rosettaDecoderPrompt(): string {
   const pool = rosettaPool('o200k_base');
   return [
-    '# ⟿ ROSETTA-R4.1 — byte-exact notational transposition wire',
+    '# ⟿ ROSETTA-R4.2 — byte-exact notational transposition wire',
     'A ROSETTA message is: <glyph><body> — the FIRST character is the mark',
     'glyph and the body follows IMMEDIATELY (no newline after the mark). The',
     'mark comes from the ROSETTA glyph pool (version-stable, tokenizer-verified',
@@ -2047,7 +2059,9 @@ export function rosettaDecoderPrompt(): string {
     '3i. marker + N + count + \':\:\' + s + newline + s templates (one per',
     '   line) + newline + specs + marker → a STRIDE FAMILY: line i uses',
     '   template[i mod s]; its slots evaluate at floor(i/s). Two slots with',
-    '   identical value sequences share one glyph and one spec.',
+    '   identical value sequences share one glyph and one spec. The specs',
+    '   line may be EMPTY when no template carries a slot — a periodic',
+    '   family of constant lines (X,Y,X,Y…).',
     '3j. marker + N + count + J + \':\' + newline + template + newline +',
     '   specs + marker → a J-SIGNATURE FAMILY: like 3h, but the template is',
     '   a J pair line (key=value space-joined, rule 2). Substitute the',
@@ -2219,8 +2233,8 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       'assistant: I will inspect the suite and patch the race.';
     const r = await rosettaEncode(HT, enc);
     out.push({
-      name: 'C5 handtrace κ lane win (≤108, prev best 109)',
-      pass: r.exact && rosettaDecode(r.wire, enc) === HT && r.outTokens <= 108,
+      name: 'C5 handtrace lane win (≤104, native families overtake κ)',
+      pass: r.exact && rosettaDecode(r.wire, enc) === HT && r.outTokens <= 104 && r.systems.includes('N'),
       details: `${r.member} ${r.inTokens}→${r.outTokens} (${r.savingsPct.toFixed(1)}%)`,
     });
   }
@@ -2580,6 +2594,41 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       name: 'E12 negative cycles stay unambiguous',
       pass: rE12.exact && rosettaDecode(rE12.wire, enc) === rg3,
       details: `${rE12.inTokens}→${rE12.outTokens}`,
+    });
+    // E13: periodic-const stride family — X,Y,X,Y with NO slots (empty specs)
+    const pc = 'user: fix the flaky test\nassistant: I will inspect the suite.\nuser: fix the flaky test\nassistant: I will inspect the suite.';
+    const rE13 = await rosettaEncode(pc, enc);
+    out.push({
+      name: 'E13 periodic-const stride family (empty specs)',
+      pass: rE13.exact && rosettaDecode(rE13.wire, enc) === pc && /N\d+::2\n/.test(rE13.wire) && rE13.outTokens < rE13.inTokens,
+      details: `${rE13.inTokens}→${rE13.outTokens} systems=[${rE13.systems.join(',')}]`,
+    });
+
+    // E14: pair signature family (minimum 2) — near-identical code lines
+    const pr = 'for(let i=0;i<3;i++){s+=a[i];}\nfor(let j=0;j<3;j++){s+=a[j];}';
+    const rE14 = await rosettaEncode(pr, enc);
+    out.push({
+      name: 'E14 pair signature family (FAMILY_MIN=2)',
+      pass: rE14.exact && rosettaDecode(rE14.wire, enc) === pr && rE14.systems.includes('N') && rE14.outTokens < rE14.inTokens,
+      details: `${rE14.inTokens}→${rE14.outTokens} systems=[${rE14.systems.join(',')}]`,
+    });
+
+    // E15: pair J-composed family — two JSON object lines
+    const pj = '{"id":7,"ok":true}\n{"id":8,"ok":true}';
+    const rE15 = await rosettaEncode(pj, enc);
+    out.push({
+      name: 'E15 pair J-composed family',
+      pass: rE15.exact && rosettaDecode(rE15.wire, enc) === pj && rE15.systems.includes('J') && rE15.systems.includes('N') && rE15.outTokens < rE15.inTokens,
+      details: `${rE15.inTokens}→${rE15.outTokens} systems=[${rE15.systems.join(',')}]`,
+    });
+
+    // E16: unprofitable pair stays literal (gate self-polices the minimum)
+    const up = 'a,12\nb,12';
+    const rE16 = await rosettaEncode(up, enc);
+    out.push({
+      name: 'E16 unprofitable pair stays literal',
+      pass: rE16.exact && rosettaDecode(rE16.wire, enc) === up && rE16.outTokens <= rE16.inTokens,
+      details: `member=${rE16.member} ${rE16.inTokens}→${rE16.outTokens}`,
     });
   } catch (e) {
     out.push({ name: 'E1 signature family (inline digit slots)', pass: false, details: (e as Error).message });

@@ -159,8 +159,11 @@ async function main() {
   {
     const r = await rosettaEncode(MOSAIC_HANDTRACE_300, 'o200k_base');
     const kp = kappaEncode(MOSAIC_HANDTRACE_300, 'o200k_base');
-    const win = r.exact && r.outTokens < 109 && kp.outTokens <= r.outTokens;
-    console.log(`handtrace-300    in=118 ROSETTA=${r.outTokens} (${r.member}) κ=${kp.outTokens} prev-best=109 ${win ? 'κ lane win ✓' : 'REGRESSION ✗'}`);
+    // R4.2: the native N families (pair families + periodic-const stride)
+    // overtake κ on this lane; the assertion is rosetta ≤ κ and < the old
+    // best (109) — the winner may be either member.
+    const win = r.exact && r.outTokens < 109 && r.outTokens <= kp.outTokens;
+    console.log(`handtrace-300    in=118 ROSETTA=${r.outTokens} (${r.member}) κ=${kp.outTokens} prev-best=109 ${win ? 'lane win ✓' : 'REGRESSION ✗'}`);
     ok = win && ok;
   }
   console.log(ok ? 'ALL REGIME FIXTURES: never worse.' : 'REGRESSIONS PRESENT');
