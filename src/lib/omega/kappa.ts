@@ -485,16 +485,7 @@ export function kappaEncode(text: string, enc: EncodingName = 'o200k_base'): Kap
   };
   if (!text || text.length > 12_000) return base;
   const measure = text.length <= 12_000;
-  const costCache = new Map<string, number>();
-  const cost = (s: string) => {
-    if (!measure) return s.length >> 2;
-    let hit = costCache.get(s);
-    if (hit === undefined) {
-      hit = countTokens(s, enc);
-      costCache.set(s, hit);
-    }
-    return hit;
-  };
+  const cost = (s: string) => (measure ? countTokens(s, enc) : s.length >> 2);
 
   // A source that itself starts with the κ sentinel would be misread by
   // kappaDecode on the identity path: bind it under a macro-less header

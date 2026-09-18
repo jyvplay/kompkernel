@@ -544,28 +544,16 @@ function mosaicEncodeUncached(text: string, enc: EncodingName): MosaicResult {
     const hit = spanMemo.get(mk);
     if (hit !== undefined) return hit;
     const src = lines.slice(a, b).join('\n');
+    // Admission-exact prefilters (see the note above hasUnitRun).
     const nLines = b - a;
-    const srcLen = src.length;
-
-    // Admission-exact prefilters
-    const okPulse = srcLen >= 40 && hasUnitRun(src, 4);
-    const okHelix = srcLen >= 12 && digitRunCount(src, 3) >= 3;
-    const okSigma = (src.includes('{') || src.includes(',')) && nLines >= 2;
-    const okColumn = nLines >= 2 && (src.includes(' ') || src.includes(',') || src.includes('|'));
-
+    const okPulse = hasUnitRun(src, 4);
+    const okHelix = digitRunCount(src, 3) >= 3;
     let best: SpanBest | null = null;
-    const isWholeDoc = nLines === lines.length;
     for (const lane of LANES) {
       if (lane.tag === 'p' && !okPulse) continue;
       if (lane.tag === 'h' && !okHelix) continue;
       if (lane.tag === 'g' && nLines < 2) continue;
-      if (lane.tag === 'a' && srcLen < 16) continue;
-      if (lane.tag === 's' && !okSigma) continue;
-      if (lane.tag === 'c' && !okColumn) continue;
-      if (!isWholeDoc && (lane.tag === 'm' || lane.tag === 'o' || lane.tag === 't' || lane.tag === 'q' || lane.tag === 'x' || lane.tag === 'v')) continue;
-      if ((lane.tag === 'm' || lane.tag === 'o' || lane.tag === 't') && srcLen < 128) continue;
-      if ((lane.tag === 'd' || lane.tag === 'q' || lane.tag === 'x' || lane.tag === 'v') && srcLen < 64) continue;
-
+      if (lane.tag === 'a' && src.length < 16) continue;
       let wire: string;
       let applied: boolean;
       try {
