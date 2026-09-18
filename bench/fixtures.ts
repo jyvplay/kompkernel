@@ -40,6 +40,14 @@ export function mosaicFixtures() {
   return { jsonLog, csv, chat, grid, rle, idrun, prose };
 }
 
+/** Interleaved near-duplicate records: deliberately outside the existing contiguous families. */
+export const BANYAN_INTERLEAVED = Array.from({ length: 96 }, (_, i) => {
+  const id = String((i * 7919 + 104729) % 1000000000000).padStart(12, '0');
+  const body = `request-${id}-payload-${id}-${id}`;
+  const tail = ' accepted after bounded retry; preserve all metadata exactly; retain provenance and audit details without normalization '.repeat(3);
+  return `component-${i}-audit record ${body}${tail}`;
+}).join('\n');
+
 export const MOSAIC_HANDTRACE_300 =
   'Ship it: retry 3x, never log secrets.\n' +
   '{"id":7,"ok":true}\n{"id":8,"ok":true}\n' +

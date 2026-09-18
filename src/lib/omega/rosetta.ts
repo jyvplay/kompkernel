@@ -135,6 +135,7 @@
  * =============================================================================
  */
 import { countTokens, encodeIds, type EncodingName } from './bpe';
+import { banyanCandidate, banyanDecode, BANYAN_SENTINEL, BANYAN_LITERAL } from './banyan';
 import { signetEncode, signetDecode } from './signet';
 import { strataDecode } from './strata';
 import { tesseraDecode } from './tessera';
@@ -1730,6 +1731,7 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   if (wire.startsWith(PHRASE_SENTINEL) || wire.startsWith(PHRASE_LITERAL)) return phraseDecode(wire, enc);
   // TAU member lane: τ\n / ττ\n sentinels dispatch to its decoder.
   if (wire.startsWith(TAU_SENTINEL) || wire.startsWith(TAU_LITERAL)) return tauDecode(wire, enc);
+  if (wire.startsWith(BANYAN_SENTINEL) || wire.startsWith(BANYAN_LITERAL)) return banyanDecode(wire);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
   if (wire.includes('⟐')) return helixDecode(wire);
@@ -1874,7 +1876,7 @@ async function rosettaEncodeUncached(
     text.includes('⟐') ||
     ['[MZ1]\n', '[SG1]\n', '[P1]\n', '[M1]\n', '⟨QSR⟩\n', '[PX]\n', '[[VX1\n', '[AX1]\n',
      '[TS1]\n', '[ST1]\n', '[RP1]\n', '[TR1]\n', '[CL1]\n', '[SP1]\n', '[⌘STENCIL]', '[Ϻ]', 'κ\n',
-     'φ', 'τ\n', 'ττ\n']
+     'φ', 'τ\n', 'ττ\n', 'βB1\n', 'βB1L\n']
       .some((s) => text.startsWith(s));
   if (!ambiguousIdentity) admit('identity', text, () => text);
 
@@ -1896,6 +1898,14 @@ async function rosettaEncodeUncached(
       const phiWrap = PHRASE_LITERAL + text;
       admit('forced-wrap', phiWrap, () => phraseDecode(phiWrap, enc), [], true);
     }
+  }
+
+  // ---- BANYAN-B1: bounded backward near-duplicate line forest ---------------
+  // A separate prompt-decoded member for interleaved records; the strict gate
+  // makes it inert on ordinary prose and existing line-family fixtures.
+  {
+    const ba = banyanCandidate(text, enc);
+    if (ba) admit('banyan', ba.wire, () => banyanDecode(ba.wire), ['B']);
   }
 
   // ---- W system: PHRASEBOOK-φ1 fold before the region pass ------------------
@@ -2077,6 +2087,7 @@ export function rosettaDecoderPrompt(): string {
     'Wires starting τ\\n or ττ\\n are TAU-τ1 member wires: decode them with',
     'the τ table/YAML transposition rules (ττ\\n = forced literal wrap,',
     'strip 3).',
+    'BANYAN wires: βB1\\n<count>,<final-newline> followed by one line record per source line. R<line> is a root literal; D<parent>,<prefix>,<suffix>:<middle> rebuilds a line from a prior bounded record. βB1L\\n is the forced literal form. The bounded parent forest is forward-decodable and byte-exact.',
     'κ-wires: κ\\n<glyph>\\n<body> — KAPPA-κ1 inline-bind macros. The glyph',
     'is a pool window base w; macro j uses O_j = pool[w+1+2j] (definition',
     'delimiters) and U_j = pool[w+2+2j] (use site). Scan left to right:',
