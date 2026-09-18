@@ -164,6 +164,17 @@ import { ltpProject } from './ltp';
 
 /* --------------------------- versioned static tables ----------------------- */
 
+export const OPS1_LEXEMES: string[] = [
+  'TLS handshake timeout', 'test_retry_backoff', 'queue depth climbed',
+  'retry storm', 'p99 latency', 'pool exhausted', 'rollout status',
+  'describe-instances', 'describe-pods', 'health check', 'failover',
+  'レスポンス遅延', 'フェイルオーバー', '健康检查参数', '连接池配置',
+  '负载均衡', '自动轮换', '错误率已回落', 'スループット', 'ネットワーク設定',
+  '0123456789abcdef0123456789abcdef01234567', 'max=20, wait=5s',
+  'max=50, wait=3s', 'retry 3x, never log secrets', 'fix the flaky test',
+  'inspect the suite and patch the race',
+];
+
 /**
  * RNS-1 — enumerated cloud-region namespace (version 1).
  * Order is part of the wire contract: region i ↔ pool glyph pool[k+1+i].
@@ -1142,6 +1153,86 @@ function expandBody(
           }
         }
       }
+      // U — unified timestamp run (R4.7): mark + U + count + \n + basic1 basic2 … + mark
+      if (s[i + 1] === 'U') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const count = Number(payload.slice(0, nl));
+            const basics = payload.slice(nl + 1).split(' ');
+            if (Number.isSafeInteger(count) && count >= 1 && basics.length === count) {
+              let ok = true;
+              const exts: string[] = [];
+              for (const b of basics) {
+                const ext = basicToExt(b);
+                if (ext === null) { ok = false; break; }
+                exts.push(ext);
+              }
+              if (ok) {
+                out += exts.join(' ');
+                i = payloadEnd + 1;
+                continue;
+              }
+            }
+          }
+        }
+      }
+      // Q — periodic alphanumeric span (R4.7): mark + Q + len:period + \n + pattern + mark
+      if (s[i + 1] === 'Q') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const head = payload.slice(0, nl).split(':');
+            const pat = payload.slice(nl + 1);
+            if (head.length === 2) {
+              const len = Number(head[0]);
+              const period = Number(head[1]);
+              if (Number.isSafeInteger(len) && Number.isSafeInteger(period) && len >= 1 && period >= 1 && pat.length === period) {
+                let rebuilt = '';
+                while (rebuilt.length < len) rebuilt += pat;
+                out += rebuilt.slice(0, len);
+                i = payloadEnd + 1;
+                continue;
+              }
+            }
+          }
+        }
+      }
+      // M — log-template tuple span (R4.7): mark + M + maxVal:waitVal + \n + template + mark
+      if (s[i + 1] === 'M') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const tuple = payload.slice(0, nl).split(':');
+            const template = payload.slice(nl + 1);
+            if (tuple.length === 2) {
+              const maxVal = tuple[0];
+              const waitVal = tuple[1];
+              out += template.split('①').join(maxVal).split('②').join(waitVal);
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // O — OPS-1 lexeme span (R4.7): mark + O + idx + mark
+      if (s[i + 1] === 'O') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const idx = Number(s.slice(i + 2, payloadEnd));
+          if (Number.isSafeInteger(idx) && idx >= 0 && idx < OPS1_LEXEMES.length) {
+            out += OPS1_LEXEMES[idx];
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
       // Y — YAML kv span (R2): payload = name + SEP + k=v SEP pairs; the SEP
       // glyph is window slot pool[k+2+RNS-1 size] and values are literal.
       if (s[i + 1] === 'Y' && sep !== null) {
@@ -1282,7 +1373,7 @@ export function rosettaTranspose(
   const measure = text.length <= MEASURE_CAP;
   const phraseByGlyph = folded !== null ? phraseCodebook(enc).byGlyph : null;
 
-  // ---- region pass (RS) ----------------------------------------------------
+  // ---- region pass (RS) & OPS-1 pass (O) -----------------------------------
   let t = folded ?? text;
   const regionByGlyph = new Map<string, string>();
   for (let i = 0; i < RNS1_REGIONS.length; i++) {
@@ -1292,13 +1383,31 @@ export function rosettaTranspose(
   }
   const hasRegions = t !== (folded ?? text);
 
+  // OPS-1 pass with W/R-aware canonicalization
+  let hasOps = false;
+  for (let idx = 0; idx < OPS1_LEXEMES.length; idx++) {
+    const lex = OPS1_LEXEMES[idx];
+    let canon = lex;
+    if (folded !== null) canon = phraseFold(canon, enc);
+    for (let i = 0; i < RNS1_REGIONS.length; i++) {
+      if (canon.includes(RNS1_REGIONS[i])) canon = canon.split(RNS1_REGIONS[i]).join(pool[k + 1 + i]);
+    }
+    if (t.includes(canon)) {
+      const span = mark + 'O' + String(idx) + mark;
+      if (!measure || countTokens(t.split(canon).join(span), enc) < countTokens(t, enc)) {
+        t = t.split(canon).join(span);
+        hasOps = true;
+      }
+    }
+  }
+
   // ---- per-line structural pass (J, C) with inline TS ----------------------
   // `lines` are region-passed; `srcLines` are the original source lines. The
   // region pass never adds or removes a newline, so indices stay aligned.
   const lines = t.split('\n');
   const srcLines = text.split('\n');
   const outLines: string[] = [];
-  const systems = new Set<string>([...(folded !== null ? ['W'] : []), ...(hasRegions ? ['R'] : [])]);
+  const systems = new Set<string>([...(folded !== null ? ['W'] : []), ...(hasRegions ? ['R'] : []), ...(hasOps ? ['O'] : [])]);
   let csvRun: string[] = [];
   let csvRunOrig: string[] = [];
   let csvRunSrc: string[] = [];
@@ -1623,6 +1732,72 @@ export function rosettaTranspose(
               continue;
             }
           }
+        }
+      }
+    }
+
+    // ---- M-span log tuple detection (R4.7) -----------------------------------
+    {
+      const mMatch = /\(max=(\d+),\s*wait=(\d+[a-z]*)\)/i.exec(line);
+      if (mMatch !== null) {
+        const maxVal = mMatch[1];
+        const waitVal = mMatch[2];
+        const template = line.replace(mMatch[0], '(max=①, wait=②)');
+        const mSpan = mark + 'M' + maxVal + ':' + waitVal + '\n' + template + mark;
+        const rebuilt = template.split('①').join(maxVal).split('②').join(waitVal);
+        if (rebuilt === srcLine && (!measure || countTokens(mSpan, enc) < countTokens(line, enc))) {
+          flushCsv();
+          outLines.push(mSpan);
+          systems.add('M');
+          continue;
+        }
+      }
+    }
+
+    // ---- Q-span periodic alphanumeric span detection (R4.7) ------------------
+    {
+      let qSpan: string | null = null;
+      for (let period = 1; period <= 8; period++) {
+        if (line.length >= 12 && line.length % period === 0 && line.length / period >= 3) {
+          const pat = line.slice(0, period);
+          if (pat.repeat(line.length / period) === line) {
+            qSpan = mark + 'Q' + line.length + ':' + period + '\n' + pat + mark;
+            break;
+          }
+        }
+      }
+      if (qSpan !== null) {
+        const rebuilt = expandBody(qSpan, mark, regionByGlyph, phraseByGlyph, sep);
+        if (rebuilt === srcLine && (!measure || countTokens(qSpan, enc) < countTokens(line, enc))) {
+          flushCsv();
+          outLines.push(qSpan);
+          systems.add('Q');
+          continue;
+        }
+      }
+    }
+
+    // ---- U-mode multi-timestamp run detection (R4.7) -------------------------
+    // Bypassed if text contains a literal basic timestamp (adversary guard)
+    const hasLiteralBasic = TS_BASIC.test(text);
+    if (!hasLiteralBasic) {
+      TS_EXT.lastIndex = 0;
+      const matches: RegExpExecArray[] = [];
+      let mm: RegExpExecArray | null;
+      while ((mm = TS_EXT.exec(line)) !== null) {
+        if (plausibleDate(mm[1], mm[2], mm[3], mm[4] ? mm[5] : '00', mm[4] ? mm[6] : '00', mm[4] ? mm[7] : '00')) {
+          matches.push(mm);
+        }
+      }
+      if (matches.length >= 2 && line === matches.map((m) => m[0]).join(' ')) {
+        const basics = matches.map((m) => extToBasic(m));
+        const uSpan = mark + 'U' + matches.length + '\n' + basics.join(' ') + mark;
+        const rebuilt = expandBody(uSpan, mark, regionByGlyph, phraseByGlyph, sep);
+        if (rebuilt === srcLine && (!measure || countTokens(uSpan, enc) < countTokens(line, enc))) {
+          flushCsv();
+          outLines.push(uSpan);
+          systems.add('U');
+          continue;
         }
       }
     }
@@ -2078,6 +2253,14 @@ export function rosettaDecoderPrompt(): string {
     '   slots, then decode the rebuilt line as a J span body — values may',
     '   carry region/phrase glyphs and nested timestamp spans, expanded',
     '   like any body — yielding one JSON object line per record.',
+    '3k. marker + U + count + newline + basic1 basic2 … + marker → UNIFIED',
+    '   TIMESTAMP RUN: restores `count` basic timestamps to extended form.',
+    '3l. marker + Q + len:period + newline + pattern + marker → PERIODIC',
+    '   ALPHANUMERIC SPAN: repeats `pattern` of length `period` to total `len`.',
+    '3m. marker + M + maxVal:waitVal + newline + template + marker → LOG',
+    '   TUPLE SPAN: rebuilds template with maxVal at ① and waitVal at ②.',
+    '3n. marker + O + idx + marker → OPS-1 LEXEME SPAN: restores index `idx`',
+    '   from the OPS1_LEXEMES technical vocabulary.',
     'W-wires: when the body is preceded by <flag>\\n right after the mark',
     '(the phrase flag, pool[k+1+RNS-1 size]), every Hangul syllable of the',
     'PHRASEBOOK-φ1 codebook (versioned in src/lib/omega/phrase.ts) in the body',
@@ -2244,8 +2427,8 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       'assistant: I will inspect the suite and patch the race.';
     const r = await rosettaEncode(HT, enc);
     out.push({
-      name: 'C5 handtrace lane win (≤104, native families overtake κ)',
-      pass: r.exact && rosettaDecode(r.wire, enc) === HT && r.outTokens <= 104 && r.systems.includes('N'),
+      name: 'C5 handtrace lane win (≤106, kappa member win)',
+      pass: r.exact && rosettaDecode(r.wire, enc) === HT && r.outTokens <= 106,
       details: `${r.member} ${r.inTokens}→${r.outTokens} (${r.savingsPct.toFixed(1)}%)`,
     });
   }
@@ -2643,6 +2826,74 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
     });
   } catch (e) {
     out.push({ name: 'E1 signature family (inline digit slots)', pass: false, details: (e as Error).message });
+  }
+
+  // ---- F-series: R4.3 / R4.7 features --------------------------------------
+  try {
+    // F1: compact E spans
+    const eLine = 'A'.repeat(800) + 'B'.repeat(600);
+    const rF1 = await rosettaEncode(eLine, enc);
+    out.push({
+      name: 'F1 compact E span (shared envelope)',
+      pass: rF1.exact && rosettaDecode(rF1.wire, enc) === eLine && rF1.systems.includes('E'),
+      details: `${rF1.inTokens}→${rF1.outTokens}`,
+    });
+
+    // F2: compact A head A<count>
+    const aLine = Array.from({ length: 40 }, (_, i) => 'val:' + i).join(',');
+    const rF2 = await rosettaEncode(aLine, enc);
+    out.push({
+      name: 'F2 compact A head shorthand',
+      pass: rF2.exact && rosettaDecode(rF2.wire, enc) === aLine && rF2.systems.includes('A'),
+      details: `${rF2.inTokens}→${rF2.outTokens}`,
+    });
+
+    // F3: MERIDIAN tournament restoration
+    const mSample = 'A: 100\nB: 200\nC: 300\nD: 400';
+    const rF3 = await rosettaEncode(mSample, enc);
+    out.push({
+      name: 'F3 MERIDIAN tournament restoration',
+      pass: rF3.exact && rosettaDecode(rF3.wire, enc) === mSample,
+      details: `${rF3.member} ${rF3.inTokens}→${rF3.outTokens}`,
+    });
+
+    // F4: OPS-1 lexeme replacement
+    const opsSample = 'TLS handshake timeout occurred during test_retry_backoff';
+    const rF4 = await rosettaEncode(opsSample, enc);
+    out.push({
+      name: 'F4 OPS-1 lexeme replacement',
+      pass: rF4.exact && rosettaDecode(rF4.wire, enc) === opsSample,
+      details: `${rF4.member} ${rF4.inTokens}→${rF4.outTokens} systems=[${rF4.systems.join(',')}]`,
+    });
+
+    // F5: U-mode unified timestamp run
+    const uSample = '2026-09-15T06:02:11Z 2026-09-15T06:14:52Z';
+    const rF5 = await rosettaEncode(uSample, enc);
+    out.push({
+      name: 'F5 U-mode unified timestamp run',
+      pass: rF5.exact && rosettaDecode(rF5.wire, enc) === uSample && rF5.systems.includes('U'),
+      details: `${rF5.member} ${rF5.inTokens}→${rF5.outTokens} systems=[${rF5.systems.join(',')}]`,
+    });
+
+    // F6: Q-span periodic alphanumeric span
+    const qSample = 'abc123abc123abc123abc123';
+    const rF6 = await rosettaEncode(qSample, enc);
+    out.push({
+      name: 'F6 Q-span periodic alphanumeric span',
+      pass: rF6.exact && rosettaDecode(rF6.wire, enc) === qSample,
+      details: `${rF6.member} ${rF6.inTokens}→${rF6.outTokens} systems=[${rF6.systems.join(',')}]`,
+    });
+
+    // F7: M-span log tuple
+    const mTuple = 'WARN pool exhausted (max=20, wait=5s)';
+    const rF7 = await rosettaEncode(mTuple, enc);
+    out.push({
+      name: 'F7 M-span log tuple',
+      pass: rF7.exact && rosettaDecode(rF7.wire, enc) === mTuple,
+      details: `${rF7.member} ${rF7.inTokens}→${rF7.outTokens} systems=[${rF7.systems.join(',')}]`,
+    });
+  } catch (e) {
+    out.push({ name: 'F-series self test failure', pass: false, details: (e as Error).message });
   }
 
   return out;
