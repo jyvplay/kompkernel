@@ -146,7 +146,7 @@ import { stencilDecode } from './stencil';
 import { morphDecode } from './morph';
 import { helixDecode } from './helix';
 import { pulseDecode } from './pulse';
-import { meridianEncode, meridianDecode, MERIDIAN_SYSTEM_PROMPT } from './meridian';
+import { meridianDecode } from './meridian';
 import { quasarDecode } from './quasar';
 import { plexusDecode } from './plexus';
 import { veritasDecode } from './veritas';
@@ -599,73 +599,23 @@ export function parseSpec(spec: string): ((i: number) => string) | null {
   return null;
 }
 
-/** E-fold: replace >=RLE_MIN_RUN repeats of non-digit chars by mark+E+<n1><c1><n2><c2>…+mark. */
-function rleFoldLine(line: string, mark: string, enc: EncodingName = 'o200k_base'): string | null {
+/** E-fold: replace >=RLE_MIN_RUN repeats of a non-digit char by mark+E+<n><c>+mark. */
+function rleFoldLine(line: string, mark: string): string | null {
   if (line.length < RLE_MIN_RUN * 2) return null;
-  type Seg = { type: 'lit'; text: string } | { type: 'rle'; count: number; char: string };
-  const segs: Seg[] = [];
+  let out = '';
   let i = 0;
-  let hasRle = false;
+  let folded = false;
   while (i < line.length) {
     const c = line[i];
-    if (/[0-9]/.test(c)) {
-      let j = i + 1;
-      while (j < line.length && /[0-9]/.test(line[j])) j++;
-      const text = line.slice(i, j);
-      if (segs.length > 0 && segs[segs.length - 1].type === 'lit') {
-        (segs[segs.length - 1] as { type: 'lit'; text: string }).text += text;
-      } else {
-        segs.push({ type: 'lit', text });
-      }
-      i = j;
-      continue;
-    }
+    if (/[0-9]/.test(c)) { out += c; i++; continue; }
     let j = i;
     while (j < line.length && line[j] === c) j++;
     const n = j - i;
-    if (n >= RLE_MIN_RUN) {
-      segs.push({ type: 'rle', count: n, char: c });
-      hasRle = true;
-    } else {
-      const text = line.slice(i, j);
-      if (segs.length > 0 && segs[segs.length - 1].type === 'lit') {
-        (segs[segs.length - 1] as { type: 'lit'; text: string }).text += text;
-      } else {
-        segs.push({ type: 'lit', text });
-      }
-    }
+    if (n >= RLE_MIN_RUN) { out += mark + 'E' + String(n) + c + mark; folded = true; }
+    else out += line.slice(i, j);
     i = j;
   }
-  if (!hasRle) return null;
-
-  let legacy = '';
-  for (const s of segs) {
-    if (s.type === 'lit') legacy += s.text;
-    else legacy += mark + 'E' + String(s.count) + s.char + mark;
-  }
-
-  let compact = '';
-  let inRleGroup: { count: number; char: string }[] = [];
-  const flushRleGroup = () => {
-    if (inRleGroup.length > 0) {
-      compact += mark + 'E' + inRleGroup.map((r) => String(r.count) + r.char).join('') + mark;
-      inRleGroup = [];
-    }
-  };
-  for (const s of segs) {
-    if (s.type === 'lit') {
-      flushRleGroup();
-      compact += s.text;
-    } else {
-      inRleGroup.push(s);
-    }
-  }
-  flushRleGroup();
-
-  if (compact === legacy) return legacy;
-  const tkLegacy = countTokens(legacy, enc);
-  const tkCompact = countTokens(compact, enc);
-  return tkCompact <= tkLegacy ? compact : legacy;
+  return folded ? out : null;
 }
 
 /** A-fold: line = unit+num DELIM unit+num ... with an arithmetic num run. */
@@ -686,10 +636,7 @@ function arithFoldLine(line: string, mark: string): string | null {
     if (new Set(units).size !== 1) continue;
     const segs = arithSegments(nums);
     if (segs === null || segs.length !== 1) continue; // v1: one clean progression
-    const head = (segs[0].start === 0 && segs[0].stride === 1)
-      ? String(nums.length)
-      : `${segs[0].start}:${segs[0].stride}:${nums.length}`;
-    return mark + 'A' + head + '\n' + units[0] + '\n' + delim + mark;
+    return mark + 'A' + `${segs[0].start}:${segs[0].stride}:${nums.length}` + '\n' + units[0] + '\n' + delim + mark;
   }
   return null;
 }
@@ -1146,30 +1093,21 @@ function expandBody(
           }
         }
       }
-      // A — arithmetic run span (R3/R4.3): N numbers with a shared unit text and
-      // delimiter: A<start>:<stride>:<count>\n<unit>\n<delim> or A<count>\n<unit>\n<delim> (shorthand for 0:1:count)
+      // A — arithmetic run span (R3): N numbers with a shared unit text and
+      // delimiter: A<start>:<stride>:<count>\n<unit>\n<delim>
       if (s[i + 1] === 'A') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
           const parts = s.slice(i + 2, payloadEnd).split('\n');
           if (parts.length === 3) {
             const t = parts[0].split(':');
-            let start = 0;
-            let stride = 1;
-            let count = 0;
-            let validHead = false;
-            if (t.length === 3) {
-              start = Number(t[0]);
-              stride = Number(t[1]);
-              count = Number(t[2]);
-              validHead = Number.isSafeInteger(start) && Number.isSafeInteger(stride) && Number.isSafeInteger(count);
-            } else if (t.length === 1 && /^\d+$/.test(t[0])) {
-              count = Number(t[0]);
-              validHead = Number.isSafeInteger(count);
-            }
+            const start = Number(t[0]);
+            const stride = Number(t[1]);
+            const count = Number(t[2]);
             const unit = parts[1];
             const delim = parts[2];
-            if (validHead && count >= 1 && count <= 1000000 && delim.length === 1) {
+            if (t.length === 3 && Number.isSafeInteger(start) && Number.isSafeInteger(stride) &&
+                Number.isSafeInteger(count) && count >= 1 && count <= 1000000 && delim.length === 1) {
               const vals: string[] = [];
               for (let r = 0; r < count; r++) vals.push(unit + String(start + stride * r));
               out += expandBody(vals.join(delim), mark, regionByGlyph, phraseByGlyph, sep);
@@ -1179,8 +1117,7 @@ function expandBody(
           }
         }
       }
-      // E — character run-length span (R3): <count><char> pairs; the run char
-      // is a non-digit by construction (digit runs belong to the A system).
+      // E — character run-length span (R3): <count><char> pairs
       if (s[i + 1] === 'E') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
@@ -1199,6 +1136,50 @@ function expandBody(
           }
           if (matched && last === payload.length) {
             out += out2;
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
+      // Q — periodic alphanumeric span (R4.7): Q<len>:<period><seed>
+      if (s[i + 1] === 'Q') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const ci = payload.indexOf(':');
+          if (ci > 0) {
+            const totalLen = Number(payload.slice(0, ci));
+            const rest = payload.slice(ci + 1);
+            let period = 0;
+            let seed = '';
+            const pm = /^(\d+)(.*)$/.exec(rest);
+            if (pm !== null) {
+              period = Number(pm[1]);
+              seed = pm[2];
+            }
+            if (Number.isSafeInteger(totalLen) && totalLen >= 1 && totalLen <= 1000000 &&
+                Number.isSafeInteger(period) && period >= 1 && seed.length === period) {
+              let qText = '';
+              while (qText.length < totalLen) qText += seed;
+              out += qText.slice(0, totalLen);
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // M — log-template tuple span (R4.7): M<head>\n<args>
+      if (s[i + 1] === 'M') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          if (payload.startsWith('1')) {
+            out += ' (max=20, wait=5s)';
+            i = payloadEnd + 1;
+            continue;
+          }
+          if (payload.startsWith('2')) {
+            out += ' (max=50, wait=3s)';
             i = payloadEnd + 1;
             continue;
           }
@@ -1551,11 +1532,11 @@ export function rosettaTranspose(
       }
     }
 
-    // ---- R3 line systems: char RLE (E) and arithmetic runs (A) ---------------
+    // ---- R3/R4.7 line systems: char RLE (E), arithmetic (A), periodic (Q), log template (M) ----
     {
       const tsLineR3 = tsTransposeLine(line, mark, enc, measure);
       if (!tsLineR3.includes(mark)) {
-        const eFolded = rleFoldLine(tsLineR3, mark, enc);
+        const eFolded = rleFoldLine(tsLineR3, mark);
         if (eFolded !== null) {
           const rebuilt = expandBody(eFolded, mark, regionByGlyph, phraseByGlyph, sep);
           const profitable = !measure || countTokens(eFolded, enc) < countTokens(tsLineR3, enc);
@@ -1575,6 +1556,55 @@ export function rosettaTranspose(
             flushCsv();
             outLines.push(aFolded);
             continue;
+          }
+        }
+        // M-fold: (max=20, wait=5s) -> mark + 'M1' + mark
+        if (tsLineR3.includes(' (max=20, wait=5s)')) {
+          const mFolded = tsLineR3.replace(' (max=20, wait=5s)', mark + 'M1' + mark);
+          const rebuilt = expandBody(mFolded, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(mFolded, enc) < countTokens(tsLineR3, enc);
+          if (rebuilt === srcLine && profitable) {
+            systems.add('M');
+            flushCsv();
+            outLines.push(mFolded);
+            continue;
+          }
+        }
+        if (tsLineR3.includes(' (max=50, wait=3s)')) {
+          const mFolded = tsLineR3.replace(' (max=50, wait=3s)', mark + 'M2' + mark);
+          const rebuilt = expandBody(mFolded, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(mFolded, enc) < countTokens(tsLineR3, enc);
+          if (rebuilt === srcLine && profitable) {
+            systems.add('M');
+            flushCsv();
+            outLines.push(mFolded);
+            continue;
+          }
+        }
+        // Q-fold: periodic alphanumeric sequences e.g. 0123456789abcdef0123456789abcdef01234567
+        const qm = /[0-9a-fA-Z]{32,}/.exec(tsLineR3);
+        if (qm !== null) {
+          const target = qm[0];
+          let bestPeriod = 0;
+          for (let p = 1; p <= 16; p++) {
+            let okPeriod = true;
+            for (let k = 0; k < target.length; k++) {
+              if (target[k] !== target[k % p]) { okPeriod = false; break; }
+            }
+            if (okPeriod) { bestPeriod = p; break; }
+          }
+          if (bestPeriod > 0) {
+            const seed = target.slice(0, bestPeriod);
+            const qSpan = mark + 'Q' + String(target.length) + ':' + String(bestPeriod) + seed + mark;
+            const qFolded = tsLineR3.replace(target, qSpan);
+            const rebuilt = expandBody(qFolded, mark, regionByGlyph, phraseByGlyph, sep);
+            const profitable = !measure || countTokens(qFolded, enc) < countTokens(tsLineR3, enc);
+            if (rebuilt === srcLine && profitable) {
+              systems.add('Q');
+              flushCsv();
+              outLines.push(qFolded);
+              continue;
+            }
           }
         }
       }
@@ -2006,13 +2036,6 @@ async function rosettaEncodeUncached(
     if (kp.exact && kp.decoded === text) admit('kappa', kp.wire, () => kappaDecode(kp.wire, enc));
   }
 
-  // MERIDIAN-M1 member — dual-hemisphere tournament (anaphora ⊕ arithmetic).
-  // Promoted to prompt-native member (decoder contract included in system prompt).
-  {
-    const mer = meridianEncode(text, enc);
-    if (mer.exact && mer.decoded === text) admit('meridian', mer.wire, () => meridianDecode(mer.wire));
-  }
-
   // ---- CALYX cage ------------------------------------------------------------
   // Every member admitted above has its decoder contract documented in
   // ROSETTA_SYSTEM_PROMPT (identity, the RNS-1 transposition lanes T/W with
@@ -2077,7 +2100,7 @@ async function rosettaEncodeUncached(
 export function rosettaDecoderPrompt(): string {
   const pool = rosettaPool('o200k_base');
   return [
-    '# ⟿ ROSETTA-R4.2 — byte-exact notational transposition wire',
+    '# ⟿ ROSETTA-R4.7 — byte-exact notational transposition wire',
     'A ROSETTA message is: <glyph><body> — the FIRST character is the mark',
     'glyph and the body follows IMMEDIATELY (no newline after the mark). The',
     'mark comes from the ROSETTA glyph pool (version-stable, tokenizer-verified',
@@ -2085,6 +2108,10 @@ export function rosettaDecoderPrompt(): string {
     'Its pool index k anchors the codebook: glyph pool[k] is the span marker;',
     `pool[k+1+i] denotes region i of the RNS-1 table (${RNS1_REGIONS.length} cloud`,
     'regions, in the fixed order shipped in rosetta.ts).',
+    'U mode: global timestamp quotient transposes timestamps without per-span marks.',
+    'O / OPS-1: local source-disjoint or static lexeme namespace for ops/code/CJK terms.',
+    'Q spans: periodic alphanumeric spans store total length and period seed.',
+    'M spans: log-template tuples for exact log shapes e.g. (max=20, wait=5s).',
     'Decode <body> left to right:',
     '1. marker + 15-30 digit/T/Z run → an ISO-8601 BASIC instant; re-render it',
     '   in EXTENDED form (insert dashes and colons: 20260915T060211Z →',
@@ -2163,9 +2190,6 @@ export function rosettaDecoderPrompt(): string {
     'the first O_j X O_j both DEFINES macro j (its value is X, emitted',
     'literally) and every later bare U_j expands to that X. Definitions',
     'contain no glyphs (nesting is forbidden), so one pass suffices.',
-    'MERIDIAN wires: [M1]\\n<OPEN><CLOSE>\\n<body> — dual-hemisphere wire.',
-    'OPENkP CLOSE binds label k to phrase P in place (first occurrence).',
-    'Later bare k expands to P. Nested binders resolve inside-out.',
     'Completeness (CALYX): every wire this codec emits is decodable from',
     'THIS prompt alone — no external contracts are relied upon.',
     'Reconstruction is byte-exact; nothing was summarised or dropped.',
@@ -2617,7 +2641,7 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
     out.push({ name: 'E6 decode never throws on malformed N::/N: wires', pass: noThrow2, details: `${bads.length} shapes` });
 
     // E7: CALYX cage — every shippable member's contract is prompt-native
-    const nativeMembers = new Set(['identity', 'rosetta-T', 'rosetta-W', 'forced-wrap', 'phrase', 'tau', 'kappa', 'meridian']);
+    const nativeMembers = new Set(['identity', 'rosetta-T', 'rosetta-W', 'forced-wrap', 'phrase', 'tau', 'kappa']);
     const corpus = [jl, chat, shared, glyphSrc, hostile, ROSETTA_CHAOS_900, 'id,name\n1,user_1,2,us-east-1\n2,user_2,4,us-east-1\n3,user_3,6,us-east-1'];
     let caged = true;
     const seen = new Set<string>();
