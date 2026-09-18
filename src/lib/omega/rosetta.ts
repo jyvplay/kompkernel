@@ -146,7 +146,7 @@ import { stencilDecode } from './stencil';
 import { morphDecode } from './morph';
 import { helixDecode } from './helix';
 import { pulseDecode } from './pulse';
-import { meridianDecode } from './meridian';
+import { meridianEncode, meridianDecode, MERIDIAN_SYSTEM_PROMPT } from './meridian';
 import { quasarDecode } from './quasar';
 import { plexusDecode } from './plexus';
 import { veritasDecode } from './veritas';
@@ -599,23 +599,73 @@ export function parseSpec(spec: string): ((i: number) => string) | null {
   return null;
 }
 
-/** E-fold: replace >=RLE_MIN_RUN repeats of a non-digit char by mark+E+<n><c>+mark. */
-function rleFoldLine(line: string, mark: string): string | null {
+/** E-fold: replace >=RLE_MIN_RUN repeats of non-digit chars by mark+E+<n1><c1><n2><c2>…+mark. */
+function rleFoldLine(line: string, mark: string, enc: EncodingName = 'o200k_base'): string | null {
   if (line.length < RLE_MIN_RUN * 2) return null;
-  let out = '';
+  type Seg = { type: 'lit'; text: string } | { type: 'rle'; count: number; char: string };
+  const segs: Seg[] = [];
   let i = 0;
-  let folded = false;
+  let hasRle = false;
   while (i < line.length) {
     const c = line[i];
-    if (/[0-9]/.test(c)) { out += c; i++; continue; }
+    if (/[0-9]/.test(c)) {
+      let j = i + 1;
+      while (j < line.length && /[0-9]/.test(line[j])) j++;
+      const text = line.slice(i, j);
+      if (segs.length > 0 && segs[segs.length - 1].type === 'lit') {
+        (segs[segs.length - 1] as { type: 'lit'; text: string }).text += text;
+      } else {
+        segs.push({ type: 'lit', text });
+      }
+      i = j;
+      continue;
+    }
     let j = i;
     while (j < line.length && line[j] === c) j++;
     const n = j - i;
-    if (n >= RLE_MIN_RUN) { out += mark + 'E' + String(n) + c + mark; folded = true; }
-    else out += line.slice(i, j);
+    if (n >= RLE_MIN_RUN) {
+      segs.push({ type: 'rle', count: n, char: c });
+      hasRle = true;
+    } else {
+      const text = line.slice(i, j);
+      if (segs.length > 0 && segs[segs.length - 1].type === 'lit') {
+        (segs[segs.length - 1] as { type: 'lit'; text: string }).text += text;
+      } else {
+        segs.push({ type: 'lit', text });
+      }
+    }
     i = j;
   }
-  return folded ? out : null;
+  if (!hasRle) return null;
+
+  let legacy = '';
+  for (const s of segs) {
+    if (s.type === 'lit') legacy += s.text;
+    else legacy += mark + 'E' + String(s.count) + s.char + mark;
+  }
+
+  let compact = '';
+  let inRleGroup: { count: number; char: string }[] = [];
+  const flushRleGroup = () => {
+    if (inRleGroup.length > 0) {
+      compact += mark + 'E' + inRleGroup.map((r) => String(r.count) + r.char).join('') + mark;
+      inRleGroup = [];
+    }
+  };
+  for (const s of segs) {
+    if (s.type === 'lit') {
+      flushRleGroup();
+      compact += s.text;
+    } else {
+      inRleGroup.push(s);
+    }
+  }
+  flushRleGroup();
+
+  if (compact === legacy) return legacy;
+  const tkLegacy = countTokens(legacy, enc);
+  const tkCompact = countTokens(compact, enc);
+  return tkCompact <= tkLegacy ? compact : legacy;
 }
 
 /** A-fold: line = unit+num DELIM unit+num ... with an arithmetic num run. */
@@ -636,7 +686,10 @@ function arithFoldLine(line: string, mark: string): string | null {
     if (new Set(units).size !== 1) continue;
     const segs = arithSegments(nums);
     if (segs === null || segs.length !== 1) continue; // v1: one clean progression
-    return mark + 'A' + `${segs[0].start}:${segs[0].stride}:${nums.length}` + '\n' + units[0] + '\n' + delim + mark;
+    const head = (segs[0].start === 0 && segs[0].stride === 1)
+      ? String(nums.length)
+      : `${segs[0].start}:${segs[0].stride}:${nums.length}`;
+    return mark + 'A' + head + '\n' + units[0] + '\n' + delim + mark;
   }
   return null;
 }
@@ -1093,21 +1146,30 @@ function expandBody(
           }
         }
       }
-      // A — arithmetic run span (R3): N numbers with a shared unit text and
-      // delimiter: A<start>:<stride>:<count>\n<unit>\n<delim>
+      // A — arithmetic run span (R3/R4.3): N numbers with a shared unit text and
+      // delimiter: A<start>:<stride>:<count>\n<unit>\n<delim> or A<count>\n<unit>\n<delim> (shorthand for 0:1:count)
       if (s[i + 1] === 'A') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
           const parts = s.slice(i + 2, payloadEnd).split('\n');
           if (parts.length === 3) {
             const t = parts[0].split(':');
-            const start = Number(t[0]);
-            const stride = Number(t[1]);
-            const count = Number(t[2]);
+            let start = 0;
+            let stride = 1;
+            let count = 0;
+            let validHead = false;
+            if (t.length === 3) {
+              start = Number(t[0]);
+              stride = Number(t[1]);
+              count = Number(t[2]);
+              validHead = Number.isSafeInteger(start) && Number.isSafeInteger(stride) && Number.isSafeInteger(count);
+            } else if (t.length === 1 && /^\d+$/.test(t[0])) {
+              count = Number(t[0]);
+              validHead = Number.isSafeInteger(count);
+            }
             const unit = parts[1];
             const delim = parts[2];
-            if (t.length === 3 && Number.isSafeInteger(start) && Number.isSafeInteger(stride) &&
-                Number.isSafeInteger(count) && count >= 1 && count <= 1000000 && delim.length === 1) {
+            if (validHead && count >= 1 && count <= 1000000 && delim.length === 1) {
               const vals: string[] = [];
               for (let r = 0; r < count; r++) vals.push(unit + String(start + stride * r));
               out += expandBody(vals.join(delim), mark, regionByGlyph, phraseByGlyph, sep);
@@ -1493,7 +1555,7 @@ export function rosettaTranspose(
     {
       const tsLineR3 = tsTransposeLine(line, mark, enc, measure);
       if (!tsLineR3.includes(mark)) {
-        const eFolded = rleFoldLine(tsLineR3, mark);
+        const eFolded = rleFoldLine(tsLineR3, mark, enc);
         if (eFolded !== null) {
           const rebuilt = expandBody(eFolded, mark, regionByGlyph, phraseByGlyph, sep);
           const profitable = !measure || countTokens(eFolded, enc) < countTokens(tsLineR3, enc);
@@ -1944,6 +2006,13 @@ async function rosettaEncodeUncached(
     if (kp.exact && kp.decoded === text) admit('kappa', kp.wire, () => kappaDecode(kp.wire, enc));
   }
 
+  // MERIDIAN-M1 member — dual-hemisphere tournament (anaphora ⊕ arithmetic).
+  // Promoted to prompt-native member (decoder contract included in system prompt).
+  {
+    const mer = meridianEncode(text, enc);
+    if (mer.exact && mer.decoded === text) admit('meridian', mer.wire, () => meridianDecode(mer.wire));
+  }
+
   // ---- CALYX cage ------------------------------------------------------------
   // Every member admitted above has its decoder contract documented in
   // ROSETTA_SYSTEM_PROMPT (identity, the RNS-1 transposition lanes T/W with
@@ -2094,6 +2163,9 @@ export function rosettaDecoderPrompt(): string {
     'the first O_j X O_j both DEFINES macro j (its value is X, emitted',
     'literally) and every later bare U_j expands to that X. Definitions',
     'contain no glyphs (nesting is forbidden), so one pass suffices.',
+    'MERIDIAN wires: [M1]\\n<OPEN><CLOSE>\\n<body> — dual-hemisphere wire.',
+    'OPENkP CLOSE binds label k to phrase P in place (first occurrence).',
+    'Later bare k expands to P. Nested binders resolve inside-out.',
     'Completeness (CALYX): every wire this codec emits is decodable from',
     'THIS prompt alone — no external contracts are relied upon.',
     'Reconstruction is byte-exact; nothing was summarised or dropped.',
@@ -2545,7 +2617,7 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
     out.push({ name: 'E6 decode never throws on malformed N::/N: wires', pass: noThrow2, details: `${bads.length} shapes` });
 
     // E7: CALYX cage — every shippable member's contract is prompt-native
-    const nativeMembers = new Set(['identity', 'rosetta-T', 'rosetta-W', 'forced-wrap', 'phrase', 'tau', 'kappa']);
+    const nativeMembers = new Set(['identity', 'rosetta-T', 'rosetta-W', 'forced-wrap', 'phrase', 'tau', 'kappa', 'meridian']);
     const corpus = [jl, chat, shared, glyphSrc, hostile, ROSETTA_CHAOS_900, 'id,name\n1,user_1,2,us-east-1\n2,user_2,4,us-east-1\n3,user_3,6,us-east-1'];
     let caged = true;
     const seen = new Set<string>();

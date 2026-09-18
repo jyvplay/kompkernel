@@ -628,7 +628,7 @@ async function p11() {
 
   // CALYX cage: every emitted member is prompt-native and decodable
   {
-    const native = new Set(['identity', 'rosetta-T', 'rosetta-W', 'forced-wrap', 'phrase', 'tau', 'kappa']);
+    const native = new Set(['identity', 'rosetta-T', 'rosetta-W', 'forced-wrap', 'phrase', 'tau', 'kappa', 'meridian']);
     const docs = shapes.map(([, t]) => t).concat([
       'id,name\n1,user_1,2,us-east-1\n2,user_2,4,us-east-1\n3,user_3,6,us-east-1',
       'The quick brown fox jumps over the lazy dog near the river bank.',
