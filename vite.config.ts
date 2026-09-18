@@ -10,6 +10,9 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [react(), tailwindcss(), viteSingleFile()],
+  // sandbox/preview proxies hit the server under *.e2b.app hosts
+  preview: { allowedHosts: true },
+  server: { allowedHosts: true },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),

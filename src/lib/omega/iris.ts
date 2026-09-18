@@ -89,6 +89,18 @@ function partitionContract(wire: string, sentinel: '[MZ1]\n' | '[AR1]\n'): strin
     else if (tag === 'h') contracts.set('h', 'h: ' + helixContract());
     else if (tag === 'p') contracts.set('p', 'p: ' + pulseContract());
     else if (tag === 'a') contracts.set('a', 'a: ' + anaphoraContract(body));
+    else if (tag === 'd') contracts.set('d', 'd: PX2 legend rows map aliases to phrases; expand bottom-to-top; else literal.');
+    else if (tag === 's') contracts.set('s', 's: SIGMA typed schema rows reconstruct exact JSONL/CSV spelling.');
+    else if (tag === 'm') contracts.set('m', 'm: MERIDIAN M1 bindings and HELIX arithmetic composition; exact literal fallback.');
+    else if (tag === 'q') contracts.set('q', 'q: QUASAR dictionary bindings bottom-to-top; literal fallback.');
+    else if (tag === 'x') contracts.set('x', 'x: PLEXUS bindings and nested HELIX composition; literal fallback.');
+    else if (tag === 'v') contracts.set('v', 'v: VERITAS VX1 escaped dictionary aliases; unbound text literal.');
+    else if (tag === 'o') contracts.set('o', 'o: AXIOM AX1 bindings and numeric expansions; literal fallback.');
+    else if (tag === 't') contracts.set('t', 't: TESSERA TS1 structural bindings; literal fallback.');
+    else if (tag === 'r') contracts.set('r', 'r: STRATA ST1 structural bindings and HELIX runs; literal fallback.');
+    else if (tag === 'b') contracts.set('b', 'b: REPAIR RP1 binary grammar rules expand recursively; unbound text literal.');
+    else if (tag === 'l') contracts.set('l', 'l: TRIE prefix plus suffix rows reconstruct exact lines and final newline.');
+    else if (tag === 'c') contracts.set('c', 'c: COLUMN prefix/suffix plus middle rows reconstruct exact lines and final newline.');
   }
   return `${sentinel.trim()} exact partition: line 2 is separator S; split following S<tag><region> pieces, decode each by tag, then join regions with newline. ${[...contracts.values()].join(' ')}`;
 }

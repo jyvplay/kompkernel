@@ -46,6 +46,12 @@ import { auroraEncodeCached as auroraEncode } from './aurora';
 import { crownEncodeCached as crownEncode } from './crown';
 import { irisEncode } from './iris';
 import { kernelEncode } from './kernel';
+import { zenithEncode } from './zenith';
+import { eclipseEncode } from './eclipse';
+import { rosettaEncode } from './rosetta';
+import { kappaEncode } from './kappa';
+import { phraseEncode } from './phrase';
+import { tauEncode } from './tau';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -197,6 +203,26 @@ export function codecEntries(): Entry[] {
       },
     },
     {
+      key: 'zenith',
+      label: '☀ ZENITH-Z1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await zenithEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'eclipse',
+      label: '◐ ECLIPSE-E1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await eclipseEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
       key: 'iris',
       label: '◇ IRIS-I1',
       family: 'exact',
@@ -273,6 +299,46 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = pulseEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'kappa',
+      label: 'κ KAPPA-κ1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = kappaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'phrase',
+      label: 'φ PHRASEBOOK-φ1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = phraseEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'tau',
+      label: 'τ TAU-τ1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = tauEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'rosetta',
+      label: '𓋹 ROSETTA-R4.2',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await rosettaEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },

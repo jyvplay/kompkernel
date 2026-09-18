@@ -17,12 +17,18 @@ import type { OrbitResult } from '../lib/omega/orbit';
 import type { TesseraResult } from '../lib/omega/tessera';
 import type { StrataResult } from '../lib/omega/strata';
 import type { SignetResult } from '../lib/omega/signet';
+import type { RosettaResult } from '../lib/omega/rosetta';
+import type { KappaResult } from '../lib/omega/kappa';
+import type { PhraseResult } from '../lib/omega/phrase';
+import type { TauResult } from '../lib/omega/tau';
 import type { MosaicResult } from '../lib/omega/mosaic';
 import type { AtlasResult } from '../lib/omega/atlas';
 import type { AuroraResult } from '../lib/omega/aurora';
 import type { CrownResult } from '../lib/omega/crown';
 import type { IrisResult } from '../lib/omega/iris';
 import type { KernelResult } from '../lib/omega/kernel';
+import type { ZenithResult } from '../lib/omega/zenith';
+import type { EclipseResult } from '../lib/omega/eclipse';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -55,12 +61,18 @@ export interface CodecWorkerResult {
   tessera: TesseraResult;
   strata: StrataResult;
   signet: SignetResult;
+  rosetta: RosettaResult;
+  kappa: KappaResult;
+  phrase: PhraseResult;
+  tau: TauResult;
   mosaic: MosaicResult;
   atlas: AtlasResult;
   aurora: AuroraResult;
   crown: CrownResult;
   iris: IrisResult;
   kernel: KernelResult;
+  zenith: ZenithResult;
+  eclipse: EclipseResult;
 }
 
 export interface CodecWorkerFailure {

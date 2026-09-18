@@ -42,12 +42,18 @@ import { axiomEncode, AXIOM_SYSTEM_PROMPT, loadAxiomLedger, saveAxiomLedger, typ
 import { tesseraEncode, TESSERA_SYSTEM_PROMPT, type TesseraResult } from '../lib/omega/tessera';
 import { strataEncode, STRATA_SYSTEM_PROMPT, type StrataResult } from '../lib/omega/strata';
 import { signetEncode, SIGNET_SYSTEM_PROMPT, type SignetResult } from '../lib/omega/signet';
+import { ROSETTA_SYSTEM_PROMPT, type RosettaResult } from '../lib/omega/rosetta';
+import { KAPPA_SYSTEM_PROMPT, type KappaResult } from '../lib/omega/kappa';
+import { PHRASE_SYSTEM_PROMPT, type PhraseResult } from '../lib/omega/phrase';
+import { TAU_SYSTEM_PROMPT, type TauResult } from '../lib/omega/tau';
 import { mosaicEncode, mosaicDecoderPrompt, type MosaicResult } from '../lib/omega/mosaic';
 import { atlasEncodeCached as atlasEncode, atlasDecoderPrompt, type AtlasResult } from '../lib/omega/atlas';
 import { auroraEncodeCached as auroraEncode, auroraDecoderPrompt, type AuroraResult } from '../lib/omega/aurora';
 import { crownEncodeCached as crownEncode, crownDecoderPrompt, type CrownResult } from '../lib/omega/crown';
 import { irisDecoderPrompt, type IrisResult } from '../lib/omega/iris';
 import { kernelDecoderPrompt, type KernelResult } from '../lib/omega/kernel';
+import { zenithDecoderPrompt, type ZenithResult } from '../lib/omega/zenith';
+import { type EclipseResult } from '../lib/omega/eclipse';
 import CodecWorker from '../workers/codec.worker?worker&inline';
 import type { CodecWorkerResponse } from '../workers/codec.types';
 import { compressDragiFull, type DragiFullResult } from '../lib/omega/dragi-full';
@@ -68,7 +74,7 @@ type CodecKey =
   | 'janus' | 'sigma' | 'stencil' | 'morph' | 'chronos' | 'chronosArena' | 'nexus' | 'mneme' | 'apex'
   | 'caveMan' | 'dragi' | 'wenyan' | 'composite' | 'dragiScale' | 'ordos' | 'asgJson'
   | 'astCode' | 'noether' | 'holographic' | 'caveHolo' | 'ibCaveHolo' | 'veritasVx' | 'quasar' | 'helixAp' | 'meridian' | 'plexus'
-  | 'axiom' | 'orbit' | 'anaphora' | 'pulse' | 'tessera' | 'strata' | 'signet' | 'mosaic' | 'atlas' | 'aurora' | 'crown' | 'iris' | 'kernel';
+  | 'axiom' | 'orbit' | 'anaphora' | 'pulse' | 'tessera' | 'strata' | 'signet' | 'mosaic' | 'atlas' | 'aurora' | 'crown' | 'iris' | 'kernel' | 'zenith' | 'eclipse' | 'rosetta' | 'kappa' | 'phrase' | 'tau';
 
 interface ParetoRow {
   key: string;
@@ -83,7 +89,7 @@ interface ParetoRow {
 }
 
 const GROUPS: Array<{ label: string; hint: string; keys: CodecKey[] }> = [
-  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
+  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
   { label: '🟡 DUPLEX · SCRIPTED UIs', hint: 'Arena / CI / Artifacts. Compress input and help compress output.', keys: ['chronosArena','chronos','janus'] },
   { label: '🔴 BINARY TRANSPORT', hint: 'Needs middleware / tool-call decoder.', keys: ['omegaXi','omegaE8'] },
   { label: '📝 SEMANTIC (lossy, LLM-readable)', hint: 'Directly readable, not byte-exact.', keys: ['light','balanced','max','extreme','caveMan','dragi','wenyan','composite','dragiScale','ordos','asgJson','astCode','noether','holographic','caveHolo','ibCaveHolo'] },
@@ -93,9 +99,13 @@ const LABEL: Record<string, string> = {
   light: 'Light', balanced: 'Balanced', max: 'Max', extreme: 'Extreme',
   losslessAscii: 'Lossless ASCII', omegaXi: '⚡ Ω-Ξ Atom', omegaE8: 'Σ₈ Ω-Σ E8-Seed', eidolon: '👻 EIDOLON',
   ltp: '📐 LTP', prometheus: '🔥 Prometheus', zeta: 'Ζ Zeta Duplex', janus: '🏛 Janus',
-  kernel: '⊙ KERNEL ★★★★★', iris: '◇ IRIS ★★★★', crown: '♛ CROWN ★★★', aurora: '◇ AURORA ★★★', atlas: '✧ ATLAS ★★★', mosaic: '▦ MOSAIC ★★★', orbit: '◎ ORBIT ★★★', signet: '⌗ SIGNET ★★★', strata: '⨂ STRATA ★★', tessera: '⧉ TESSERA ★★', axiom: '⟦ AXIOM ⟧ ★★', anaphora: '⟐ ANAPHORA', pulse: '⟡ PULSE',
+  eclipse: '◐ ECLIPSE ★★★★★★★', zenith: '☀ ZENITH ★★★★★★', kernel: '⊙ KERNEL ★★★★★', iris: '◇ IRIS ★★★★', crown: '♛ CROWN ★★★', aurora: '◇ AURORA ★★★', atlas: '✧ ATLAS ★★★', mosaic: '▦ MOSAIC ★★★', orbit: '◎ ORBIT ★★★', signet: '⌗ SIGNET ★★★', strata: '⨂ STRATA ★★', tessera: '⧉ TESSERA ★★', axiom: '⟦ AXIOM ⟧ ★★', anaphora: '⟐ ANAPHORA', pulse: '⟡ PULSE',
   plexus: '✺ PLEXUS ★★', meridian: '☉ MERIDIAN ★', quasar: '✦ QUASAR', helixAp: '⟐ HELIX-AP', veritasVx: '⟁ VERITAS-VX', sigma: 'Σ Schema Fold', stencil: '⌘ Stencil', morph: 'Ϻ Morph', chronos: '👑 Chronos V6', chronosArena: '🏟 Chronos Arena',
   nexus: 'Ω∞ NEXUS ★', mneme: 'Μ Ω-Mneme', apex: 'Λ† APEX ★★',
+  rosetta: '𓋹 ROSETTA ★★★★★',
+  kappa: 'κ KAPPA ★★',
+  phrase: 'φ PHRASEBOOK ★★',
+  tau: 'τ TAU ★★',
   caveMan: '🦴 CaveMan', dragi: '🐉 DRAGI-FULL', wenyan: '文言文 Wenyan', composite: '⚡ CaveMan+DRAGI',
   dragiScale: '📚 DRAGI Multi', ordos: '🔺 Ordos', asgJson: 'ASG JSON', astCode: '💻 AST Code',
   noether: '⚛ Noether', holographic: '🌀 Holographic', caveHolo: '🔥 CaveHolo', ibCaveHolo: '🧊 IB-CaveHolo',
@@ -112,11 +122,17 @@ const HINT: Record<string, string> = {
   stencil: 'Template induction for recurring shapes with varying values.',
   iris: 'Runtime decoder-contract partial evaluation: CROWN’s exact winning wire is unchanged, while unreachable grammar productions are removed from its decoder contract. Strict delivered-token improvement with one linear scan.',
   kernel: 'Canonical minimal operational contract: chooses the real-BPE minimum of IRIS prose and a semantics-equivalent compact decoder notation. IRIS is the fallback, so delivered tokens never increase; exact CROWN wire is unchanged.',
+  eclipse: 'Contract normal-form refinement over ZENITH: same exact wire, fewer-or-equal delivered tokens when the tokenizer rewards a shorter equivalent decoder instruction.',
+  zenith: 'Weak-Pareto exact portfolio: CROWN searches the readable exact lanes, then KERNEL compiles the selected decoder contract. It is never worse than MOSAIC/CROWN on delivered real-BPE tokens; strict improvement is input-dependent.',
   crown: 'Delivered-objective universal exact tournament. Scores wire+contract across ATLAS, AURORA, MOSAIC, ORBIT, and exact lanes; emits the winning wire verbatim.',
   aurora: 'Original non-tournament delivered objective: the partition DP state carries the lane-contract bitmask, so it optimizes wire+contract during partitioning instead of after.',
   atlas: 'Contract-aware meta-partition: delivered tokens = wire + selected decoder contract. Includes MOSAIC as a member and emits the member wire verbatim.',
   mosaic: 'Optimal document partition with per-region codec assignment. Every other codec asks "which algorithm fits this document?"; MOSAIC asks "what is the best partition into regions, and which algorithm fits each one?" — solved exactly by dynamic programming over regime boundaries with real BPE costs. A real agent turn is prose + JSON + logs + code; no single lane serves all of it. The one-region partition is in the search space, so it can never lose (self-test Z15), and a single-region result is emitted bare with zero framing tax.',
   signet: 'Character-class signature alignment. Records are segmented into maximal DIGIT/ALPHA/OTHER runs and grouped by identical class signature, so a numeric field can never be half-absorbed into the template the way LCS does — the defect that shattered a 40-record log into four families. Templates derive from ALL records, family detection is O(chars) not O(len²), and slots feed the typed column coders. Verified never worse than STRATA (self-test G16).',
+  rosetta: 'Kana-window transposition (RNS-1). A window of single-token kana glyphs that appear nowhere in the source is picked; cloud regions fold to one glyph, JSON lines to k=v pairs, CSV runs to space-separated rows, and ISO timestamps to a compact basic form — all under the same single mark. Self-dispatching: any member wire decodes too. Measured strictly superior to every direct-reasoning codec on the chaos fixtures (267 vs 288 in on chaos-900).',
+  tau: 'Delimiter-parameterized table transposition (XMill structure/data separation generalized to any single-char delimiter — pipe markdown tables, comma tables — plus fenced flat YAML key-value blocks and, inside ROSETTA-R2, same-schema JSON line families with shared keys factored out). Every block is admitted only by measured token profit and byte-exact re-render. Standalone it beats the ROSETTA champion itself on chaos-E (192→180 vs 184); as a member + R2 systems it extends the champion to 173 on E and 239 on F. Never loses: unprofitable blocks stay literal.',
+  phrase: 'Static phrase codebook (zip2zip hypertokens + MedTPE static pair-merging + XRAGLog dictionary-in-prompt + measured CJK token tax). Frequent English ops phrases and standard Japanese/Chinese technical terms fold to single-token Hangul glyphs (U+AC00+); the versioned PHRASEBOOK_V1 ships in the system prompt and the wire carries no header. Takes the Japanese-heavy chaos lane outright (251→240 vs previous best 247) and composes into ROSETTA as the W system (chaos-900 267→259, chaos-D 221→210). Never loses: no phrase hits → identity.',
+  kappa: 'Inline-bind token macros (LTSC meta-token economics + MR-RePair maximal repeats + prefix-stable parameter holes). Repeated token subsequences — including one-variable variants like for(let i…)/for(let j…) — bind to disjoint kana glyph pairs at first use and expand to a single glyph afterwards. Wins the handtrace lane outright (118→106 vs previous best 109) and never loses elsewhere.',
   strata: 'Typed column decomposition. After transposing records into columns, each column is written as the RULE that generates it — constant / arithmetic / cyclic / affix-factored — chosen by measured argmin, with literal enumeration always available as fallback. Turns O(records) into O(1) per regular column. Verified ≤ TESSERA on every shape (self-test S16).',
   tessera: 'Columnar transposition: the only lane that PERMUTES rather than substitutes. Detects line families (record strides 1–4), emits the template once, groups slot values into columns so HELIX/binders finally see adjacent material. Composes with every other lane.',
   axiom: 'Session-anchored: labels bound in EARLIER turns cost 1 token and need no definition (admission floor n≥1, not n≥2). Cascade binds + TESSERA/HELIX/PULSE tournament. Cold-start = PLEXUS.',
@@ -195,12 +211,18 @@ export default function Workbench() {
   const [tesseraRes, setTesseraRes] = useState<TesseraResult | null>(null);
   const [strataRes, setStrataRes] = useState<StrataResult | null>(null);
   const [signetRes, setSignetRes] = useState<SignetResult | null>(null);
+  const [rosettaRes, setRosettaRes] = useState<RosettaResult | null>(null);
+  const [kappaRes, setKappaRes] = useState<KappaResult | null>(null);
+  const [phraseRes, setPhraseRes] = useState<PhraseResult | null>(null);
+  const [tauRes, setTauRes] = useState<TauResult | null>(null);
   const [mosaicRes, setMosaicRes] = useState<MosaicResult | null>(null);
   const [atlasRes, setAtlasRes] = useState<AtlasResult | null>(null);
   const [auroraRes, setAuroraRes] = useState<AuroraResult | null>(null);
   const [crownRes, setCrownRes] = useState<CrownResult | null>(null);
   const [irisRes, setIrisRes] = useState<IrisResult | null>(null);
   const [kernelRes, setKernelRes] = useState<KernelResult | null>(null);
+  const [zenithRes, setZenithRes] = useState<ZenithResult | null>(null);
+  const [eclipseRes, setEclipseRes] = useState<EclipseResult | null>(null);
   const [axiomLedger, setAxiomLedger] = useState<AxiomLedgerEntry[]>([]);
   const [includeDecoder, setIncludeDecoder] = useState(false);
   const [asyncBusy, setAsyncBusy] = useState(false);
@@ -244,17 +266,17 @@ export default function Workbench() {
 
   useEffect(() => {
     if (hardTextMode) {
-      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null);
+      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null); setZenithRes(null); setEclipseRes(null);
       setAsyncBusy(false);
       return;
     }
     const id = ++runId.current;
     setAsyncBusy(!largeTextMode);
     if (largeTextMode) {
-      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null);
+      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null); setZenithRes(null); setEclipseRes(null);
       return;
     }
-      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null);
+      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null); setZenithRes(null); setEclipseRes(null);
     // The complete tournament runs in an inline module worker. Terminating the
     // previous worker cancels obsolete input immediately; the UI/main thread
     // never executes BPE mining or dynamic-programming loops.
@@ -273,10 +295,12 @@ export default function Workbench() {
       setQuasarRes(data.quasar); setHelixRes(data.helix); setMeridianRes(data.meridian);
       setPlexusRes(data.plexus); setPulseRes(data.pulse); setAnaphoraRes(data.anaphora);
       setAxiomRes(data.axiom); setOrbitRes(data.orbit); setTesseraRes(data.tessera);
-      setStrataRes(data.strata); setSignetRes(data.signet); setMosaicRes(data.mosaic);
+      setStrataRes(data.strata); setSignetRes(data.signet); setMosaicRes(data.mosaic); setRosettaRes(data.rosetta); setKappaRes(data.kappa); setPhraseRes(data.phrase); setTauRes(data.tau);
       setAtlasRes(data.atlas); setAuroraRes(data.aurora); setCrownRes(data.crown);
       setIrisRes(data.iris);
       setKernelRes(data.kernel);
+      setZenithRes(data.zenith);
+      setEclipseRes(data.eclipse);
       setAsyncBusy(false);
     };
     worker.onerror = (event) => {
@@ -312,6 +336,8 @@ export default function Workbench() {
       };
     }
     switch (codec) {
+      case 'eclipse': return { out: eclipseRes?.wire ?? '⏳ Computing ECLIPSE…', back: eclipseRes?.decoded ?? input, exact: !!eclipseRes?.exact, inTok: eclipseRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: eclipseRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: eclipseRes?.contractPrompt ?? '', notes: eclipseRes?.notes ?? '' };
+      case 'zenith': return { out: zenithRes?.wire ?? '⏳ Computing ZENITH…', back: zenithRes?.decoded ?? input, exact: !!zenithRes?.exact, inTok: zenithRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: zenithRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: zenithDecoderPrompt(zenithRes), notes: zenithRes?.notes ?? '' };
       case 'kernel': return { out: kernelRes?.wire ?? '⏳ Computing KERNEL…', back: kernelRes?.decoded ?? input, exact: !!kernelRes?.exact, inTok: kernelRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: kernelRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: kernelDecoderPrompt(kernelRes), notes: kernelRes?.notes ?? '' };
       case 'iris': return { out: irisRes?.wire ?? '⏳ Computing IRIS…', back: irisRes?.decoded ?? input, exact: !!irisRes?.exact, inTok: irisRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: irisRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: irisDecoderPrompt(irisRes), notes: irisRes?.notes ?? '' };
       case 'crown': return { out: crownRes?.wire ?? '⏳ Computing CROWN…', back: crownRes?.decoded ?? input, exact: !!crownRes?.exact, inTok: crownRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: crownRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: crownDecoderPrompt(crownRes), notes: crownRes?.notes ?? '' };
@@ -319,6 +345,10 @@ export default function Workbench() {
       case 'atlas': return { out: atlasRes?.wire ?? '⏳ Computing ATLAS…', back: atlasRes?.decoded ?? input, exact: !!atlasRes?.exact, inTok: atlasRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: atlasRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: atlasDecoderPrompt(atlasRes), notes: atlasRes?.notes ?? '' };
       case 'mosaic': return { out: mosaicRes?.wire ?? '⏳ Computing MOSAIC…', back: mosaicRes?.decoded ?? input, exact: !!mosaicRes?.exact, inTok: mosaicRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: mosaicRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: mosaicDecoderPrompt(mosaicRes), notes: mosaicRes?.notes ?? '' };
       case 'signet': return { out: signetRes?.wire ?? '⏳ Computing SIGNET…', back: signetRes?.decoded ?? input, exact: !!signetRes?.exact, inTok: signetRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: signetRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: SIGNET_SYSTEM_PROMPT, notes: signetRes?.notes ?? '' };
+      case 'rosetta': return { out: rosettaRes?.wire ?? '⏳ Computing ROSETTA…', back: rosettaRes?.decoded ?? input, exact: !!rosettaRes?.exact, inTok: rosettaRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: rosettaRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: ROSETTA_SYSTEM_PROMPT, notes: rosettaRes?.notes ?? '' };
+      case 'kappa': return { out: kappaRes?.wire ?? '⏳ Computing KAPPA…', back: kappaRes?.decoded ?? input, exact: !!kappaRes?.exact, inTok: kappaRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: kappaRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: KAPPA_SYSTEM_PROMPT, notes: kappaRes?.notes ?? '' };
+      case 'phrase': return { out: phraseRes?.wire ?? '⏳ Computing PHRASEBOOK…', back: phraseRes?.decoded ?? input, exact: !!phraseRes?.exact, inTok: phraseRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: phraseRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: PHRASE_SYSTEM_PROMPT, notes: phraseRes?.notes ?? '' };
+      case 'tau': return { out: tauRes?.wire ?? '⏳ Computing TAU…', back: tauRes?.decoded ?? input, exact: !!tauRes?.exact, inTok: tauRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: tauRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: TAU_SYSTEM_PROMPT, notes: tauRes?.notes ?? '' };
       case 'strata': return { out: strataRes?.wire ?? '⏳ Computing STRATA…', back: strataRes?.decoded ?? input, exact: !!strataRes?.exact, inTok: strataRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: strataRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: STRATA_SYSTEM_PROMPT, notes: strataRes?.notes ?? '' };
       case 'tessera': return { out: tesseraRes?.wire ?? '⏳ Computing TESSERA…', back: tesseraRes?.decoded ?? input, exact: !!tesseraRes?.exact, inTok: tesseraRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: tesseraRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: TESSERA_SYSTEM_PROMPT, notes: tesseraRes?.notes ?? '' };
       case 'axiom': return { out: axiomRes?.wire ?? '⏳ Computing AXIOM…', back: axiomRes?.decoded ?? input, exact: !!axiomRes?.exact, inTok: axiomRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: axiomRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: AXIOM_SYSTEM_PROMPT, notes: axiomRes?.notes ?? '' };
@@ -360,7 +390,7 @@ export default function Workbench() {
       case 'ibCaveHolo': return { out: ibCaveHolo.output, back: input, exact: false, inTok: countTokens(input,'o200k_base'), outTok: countTokens(ibCaveHolo.output,'o200k_base'), preamble: ibCaveHolo.decoderPrompt + '\n\nOUTPUT CONTRACT: Reuse the same $codes and omit low-density filler in replies. Protected units stay verbatim; code fences verbatim.', notes: 'Pruned semantic.' };
       default: return { out: advancedPreset.output, back: advancedPreset.roundTrip, exact: false, inTok: countTokens(input,'o200k_base'), outTok: countTokens(advancedPreset.output,'o200k_base'), preamble: advancedPreset.decoderPreamble, notes: PRESETS[codec as keyof typeof PRESETS]?.hint ?? '' };
     }
-  }, [codec, input, lossless, omegaXiRes, omegaE8Res, ltpRes, promRes, zetaRes, janusRes, sigmaRes, stencilRes, chronosRes, caRes, nexusRes, mnemeRes, mnemeNexusRes, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, cavemanDefault, dragiFull, wenyan, composite, dragiScale, ordos, asg, ast, noether, holographic, caveHolo, ibCaveHolo, advancedPreset, cavemanLevel, mnemeDict]);
+  }, [codec, input, lossless, omegaXiRes, omegaE8Res, ltpRes, promRes, zetaRes, janusRes, sigmaRes, stencilRes, chronosRes, caRes, nexusRes, mnemeRes, mnemeNexusRes, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, cavemanDefault, dragiFull, wenyan, composite, dragiScale, ordos, asg, ast, noether, holographic, caveHolo, ibCaveHolo, advancedPreset, cavemanLevel, mnemeDict]);
 
   const rows: ParetoRow[] = useMemo(() => {
     const inTok = countTokens(input, 'o200k_base');
@@ -403,8 +433,14 @@ export default function Workbench() {
     if (auroraRes?.exact && auroraRes.deliveredTokens <= auroraRes.inTokens) out.push({ key:'aurora', label:'◇ AURORA (delivered)', exact:true, inTokens:auroraRes.inTokens, outTokens:auroraRes.deliveredTokens, savingsPct:auroraRes.inTokens ? ((auroraRes.inTokens-auroraRes.deliveredTokens)/auroraRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:auroraRes.notes });
     if (crownRes?.exact && crownRes.deliveredTokens <= crownRes.inTokens) out.push({ key:'crown', label:'♛ CROWN (delivered)', exact:true, inTokens:crownRes.inTokens, outTokens:crownRes.deliveredTokens, savingsPct:crownRes.inTokens ? ((crownRes.inTokens-crownRes.deliveredTokens)/crownRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:crownRes.notes });
     if (irisRes?.exact && irisRes.deliveredTokens <= irisRes.inTokens) out.push({ key:'iris', label:'◇ IRIS (delivered)', exact:true, inTokens:irisRes.inTokens, outTokens:irisRes.deliveredTokens, savingsPct:irisRes.inTokens ? ((irisRes.inTokens-irisRes.deliveredTokens)/irisRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:irisRes.notes });
+    if (eclipseRes?.exact && eclipseRes.deliveredTokens <= eclipseRes.inTokens) out.push({ key:'eclipse', label:'◐ ECLIPSE (delivered)', exact:true, inTokens:eclipseRes.inTokens, outTokens:eclipseRes.deliveredTokens, savingsPct:eclipseRes.inTokens ? ((eclipseRes.inTokens-eclipseRes.deliveredTokens)/eclipseRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:eclipseRes.notes });
+    if (zenithRes?.exact && zenithRes.deliveredTokens <= zenithRes.inTokens) out.push({ key:'zenith', label:'☀ ZENITH (delivered)', exact:true, inTokens:zenithRes.inTokens, outTokens:zenithRes.deliveredTokens, savingsPct:zenithRes.inTokens ? ((zenithRes.inTokens-zenithRes.deliveredTokens)/zenithRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:zenithRes.notes });
     if (kernelRes?.exact && kernelRes.deliveredTokens <= kernelRes.inTokens) out.push({ key:'kernel', label:'⊙ KERNEL (delivered)', exact:true, inTokens:kernelRes.inTokens, outTokens:kernelRes.deliveredTokens, savingsPct:kernelRes.inTokens ? ((kernelRes.inTokens-kernelRes.deliveredTokens)/kernelRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:kernelRes.notes });
     if (signetRes?.exact && signetRes.outTokens <= signetRes.inTokens) out.push({ key:'signet', label:'⌗ SIGNET', exact:true, inTokens:signetRes.inTokens, outTokens:signetRes.outTokens, savingsPct:signetRes.savingsPct, fidelityPct:100, safety:'High', notes:signetRes.notes });
+    if (tauRes?.exact && tauRes.applied) out.push({ key:'tau', label:'τ TAU', exact:true, inTokens:tauRes.inTokens, outTokens:tauRes.outTokens, savingsPct:tauRes.savingsPct, fidelityPct:100, safety:'High', notes:tauRes.notes });
+    if (phraseRes?.exact && phraseRes.applied) out.push({ key:'phrase', label:'φ PHRASEBOOK', exact:true, inTokens:phraseRes.inTokens, outTokens:phraseRes.outTokens, savingsPct:phraseRes.savingsPct, fidelityPct:100, safety:'High', notes:phraseRes.notes });
+    if (kappaRes?.exact && kappaRes.applied) out.push({ key:'kappa', label:'κ KAPPA', exact:true, inTokens:kappaRes.inTokens, outTokens:kappaRes.outTokens, savingsPct:kappaRes.savingsPct, fidelityPct:100, safety:'High', notes:kappaRes.notes });
+    if (rosettaRes?.exact) out.push({ key:'rosetta', label:'𓋹 ROSETTA', exact:true, inTokens:rosettaRes.inTokens, outTokens:rosettaRes.outTokens, savingsPct:rosettaRes.savingsPct, fidelityPct:100, safety:'High', notes:rosettaRes.notes });
     if (strataRes?.exact && strataRes.outTokens <= strataRes.inTokens) out.push({ key:'strata', label:'⨂ STRATA', exact:true, inTokens:strataRes.inTokens, outTokens:strataRes.outTokens, savingsPct:strataRes.savingsPct, fidelityPct:100, safety:'High', notes:strataRes.notes });
     if (tesseraRes?.exact && tesseraRes.outTokens <= tesseraRes.inTokens) out.push({ key:'tessera', label:'⧉ TESSERA', exact:true, inTokens:tesseraRes.inTokens, outTokens:tesseraRes.outTokens, savingsPct:tesseraRes.savingsPct, fidelityPct:100, safety:'High', notes:tesseraRes.notes });
     if (axiomRes?.exact && axiomRes.outTokens <= axiomRes.inTokens) out.push({ key:'axiom', label:'⟦ AXIOM ⟧', exact:true, inTokens:axiomRes.inTokens, outTokens:axiomRes.outTokens, savingsPct:axiomRes.savingsPct, fidelityPct:100, safety:'High', notes:axiomRes.notes });
@@ -435,7 +471,7 @@ export default function Workbench() {
     out.push(mk('max', 'Max', convertAdvanced(input, PRESETS.max.options, adv).output, false, 'Moderate', PRESETS.max.hint));
     out.push(mk('extreme', 'Extreme', convertAdvanced(input, PRESETS.extreme.options, adv).output, false, 'Low', PRESETS.extreme.hint));
     return out.sort((a,b) => b.savingsPct - a.savingsPct || b.fidelityPct - a.fidelityPct);
-  }, [input, largeTextMode, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, eidolonRes, nexusRes, mnemeRes, mnemeNexusRes, zetaRes, promRes, ltpRes, sigmaRes, stencilRes, morphRes, omegaE8Res, omegaXiRes, chronosRes, caRes, janusRes, dragiFull, cavemanDefault, wenyan, composite, dragiScale, ordos, noether, holographic, caveHolo, ibCaveHolo, asg, ast, adv]);
+  }, [input, largeTextMode, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, eidolonRes, nexusRes, mnemeRes, mnemeNexusRes, zetaRes, promRes, ltpRes, sigmaRes, stencilRes, morphRes, omegaE8Res, omegaXiRes, chronosRes, caRes, janusRes, dragiFull, cavemanDefault, wenyan, composite, dragiScale, ordos, noether, holographic, caveHolo, ibCaveHolo, asg, ast, adv]);
 
   const selectedRow = rows.find((r) => r.key === codec);
 
@@ -493,7 +529,7 @@ export default function Workbench() {
     URL.revokeObjectURL(url);
   }, [finalOut, codec]);
 
-  const exactLane = ['kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode'].includes(codec);
+  const exactLane = ['rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode'].includes(codec);
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">

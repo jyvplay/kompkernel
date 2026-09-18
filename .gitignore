@@ -6,3 +6,5 @@ out/
 .env*
 npm-debug.log*
 .DS_Store
+bench/*.mjs
+bench/tmp/
