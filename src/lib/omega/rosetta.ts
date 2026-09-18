@@ -136,28 +136,28 @@
  */
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 import { signetEncode, signetDecode } from './signet';
-import { strataEncode, strataDecode } from './strata';
-import { tesseraEncode, tesseraDecode } from './tessera';
-import { columnEncode, columnDecode } from './column';
-import { trieEncode, trieDecode } from './trie';
-import { repairEncode, repairDecode } from './repair';
-import { stencilEncode, stencilDecode } from './stencil';
-import { morphEncode, morphDecode } from './morph';
-import { helixEncode, helixDecode } from './helix';
-import { pulseEncode, pulseDecode } from './pulse';
-import { meridianEncode, meridianDecode } from './meridian';
-import { quasarEncode, quasarDecode } from './quasar';
+import { strataDecode } from './strata';
+import { tesseraDecode } from './tessera';
+import { columnDecode } from './column';
+import { trieDecode } from './trie';
+import { repairDecode } from './repair';
+import { stencilDecode } from './stencil';
+import { morphDecode } from './morph';
+import { helixDecode } from './helix';
+import { pulseDecode } from './pulse';
+import { meridianDecode } from './meridian';
+import { quasarDecode } from './quasar';
 import { plexusDecode } from './plexus';
 import { veritasDecode } from './veritas';
 import { anaphoraDecode } from './anaphora';
 import { axiomDecode } from './axiom';
 import { mosaicEncode, mosaicDecode, type MosaicResult } from './mosaic';
-import { orbitEncode, type OrbitResult } from './orbit';
+import { type OrbitResult } from './orbit';
 import { kappaEncode, kappaDecode, KAPPA_SENTINEL } from './kappa';
 import { phraseEncode, phraseDecode, phraseFold, hasCodebookGlyph, phraseCodebook, PHRASE_SENTINEL, PHRASE_LITERAL } from './phrase';
 import { tauEncode, tauDecode, TAU_SENTINEL, TAU_LITERAL, pipeSpan, commaSpan, yamlFromLines } from './tau';
-import { crownEncodeCached, crownDecode, type CrownResult } from './crown';
-import { spliceEncode, spliceDecode, type SpliceResult } from './splice';
+import { crownDecode, type CrownResult } from './crown';
+import { spliceDecode, type SpliceResult } from './splice';
 import { eidolonProject } from './eidolon';
 import { ltpProject } from './ltp';
 
@@ -491,7 +491,9 @@ function renderSpec(vals: string[], enc: EncodingName): string | null {
   if (vals.some((v) => [...v].some((c) => SPEC_BAD.has(c)))) return null;
   const nums = vals.map((v) => (/^-?\d+$/.test(v) ? Number(v) : NaN));
   let arithSpec: string | null = null;
-  if (!nums.some(Number.isNaN)) {
+  // Arithmetic renders via String(number) — only admissible when every value
+  // is already in canonical form ('00' or '+5' would decode back lossily).
+  if (!nums.some(Number.isNaN) && vals.every((v) => v === String(Number(v)))) {
     const segs = arithSegments(nums);
     if (segs !== null) {
       arithSpec = '#' + segs.map((g) => `${g.start}:${g.stride}:${g.count}`).join(';');
@@ -659,12 +661,41 @@ function decodeSpanForG1(
   if (nl < 2) return null;
   const head = payload.slice(0, nl);
   const rest = payload.slice(nl + 1);
+  const dd = head.indexOf('::');
+  const sigMode = (dd >= 0 && dd === head.length - 3) || head.indexOf(':') === head.length - 1; // 'N<m>::<s>' or 'N<m>:'
+  const stride = dd >= 0 && dd === head.length - 3 ? Number(head[head.length - 1]) : 1;
   const ci = head.indexOf(':');
-  const fieldMode = ci > 0;
-  const m = Number(fieldMode ? head.slice(0, ci) : head);
+  const fieldMode = ci > 0 && !sigMode;
+  const m = Number(fieldMode || sigMode ? head.slice(0, dd >= 0 ? dd : ci) : head);
   const d = fieldMode ? head[ci + 1] : '\n';
   if (!Number.isSafeInteger(m) || m < 1 || (fieldMode && (d === undefined || d.length !== 1 || /[0-9]/.test(d)))) return null;
+  if (sigMode && !(stride >= 1 && stride <= 3 && m % stride === 0)) return null;
   const outL: string[] = [];
+  if (sigMode) {
+    const templates: string[] = [];
+    let cursor = 0;
+    for (let t = 0; t < stride; t++) {
+      const tnl = rest.indexOf('\n', cursor);
+      if (tnl < 0) return null;
+      templates.push(rest.slice(cursor, tnl));
+      cursor = tnl + 1;
+    }
+    const specs = rest.slice(cursor).split(' ').filter((x) => x !== '');
+    const fns = specs.map((sp) => parseSpec(sp));
+    if (fns.length === 0 || fns.some((f) => f === null)) return null;
+    if (templates.some((t) => [...t].some((ch) => SLOT_GLYPHS.indexOf(ch) >= fns.length))) return null;
+    for (let r = 0; r < m; r++) {
+      const template = templates[r % stride]!;
+      const si = Math.floor(r / stride);
+      let line2 = '';
+      for (const ch of template) {
+        const gi = SLOT_GLYPHS.indexOf(ch);
+        line2 += gi >= 0 ? (fns[gi]!(si) as string) : ch;
+      }
+      outL.push(line2);
+    }
+    return outL.map((l) => expandBody(l, mark, regionByGlyph, phraseByGlyph, sep)).join('\n');
+  }
   if (fieldMode) {
     const snl = rest.indexOf('\n');
     if (snl < 0) return null;
@@ -682,6 +713,86 @@ function decodeSpanForG1(
     for (let r = 0; r < m; r++) outL.push(rest);
   }
   return outL.map((l) => expandBody(l, mark, regionByGlyph, phraseByGlyph, sep)).join('\n');
+}
+
+
+/** Split a line into maximal single-class runs (A / D / O). */
+function classRuns(line: string): string[] {
+  const out: string[] = [];
+  let i = 0;
+  while (i < line.length) {
+    const c = /[A-Za-z]/.test(line[i]) ? 'A' : /[0-9]/.test(line[i]) ? 'D' : 'O';
+    let j = i + 1;
+    while (j < line.length) {
+      const cj = /[A-Za-z]/.test(line[j]) ? 'A' : /[0-9]/.test(line[j]) ? 'D' : 'O';
+      if (cj !== c) break;
+      j++;
+    }
+    out.push(line.slice(i, j));
+    i = j;
+  }
+  return out;
+}
+
+const SIG_RUN_CAP = 96;
+
+/**
+ * Signature-mode fold (R4): lines whose class-run sequences repeat with
+ * period s form a family — each phase keeps its own template, a run
+ * position that agrees everywhere within a phase is template text,
+ * otherwise it is a slot (①-⑧) with a typed spec. s = 1 covers uniform
+ * lines (JSON logs with varying digits fold with no delimiter at all);
+ * s = 2/3 covers alternating shapes (chat turns, key/value blocks).
+ * Identical value sequences across phases share one spec. Runs are taken
+ * from the PRE-timestamp lines: the extended form keeps varying digits in
+ * their own short runs, while the basic form would merge them into long
+ * untemplateable stretches.
+ */
+function signatureFold(run: string[], mark: string, enc: EncodingName, stride: number): string | null {
+  const m = run.length;
+  if (stride < 1 || stride > 3 || m % stride !== 0 || m / stride < FAMILY_MIN) return null;
+  const sigChar = (r: string) => (/[A-Za-z]/.test(r[0]) ? 'A' : /[0-9]/.test(r[0]) ? 'D' : 'O');
+  const phaseGrids: string[][][] = [];
+  for (let p = 0; p < stride; p++) {
+    const grids: string[][] = [];
+    for (let k = p; k < m; k += stride) grids.push(classRuns(run[k]));
+    const w = grids[0].length;
+    if (w < 1 || w > SIG_RUN_CAP) return null;
+    for (const g of grids) {
+      if (g.length !== w) return null;
+      for (let c = 0; c < w; c++) if (sigChar(g[c]) !== sigChar(grids[0][c])) return null;
+    }
+    phaseGrids.push(grids);
+  }
+  const templates: string[] = [];
+  const slotVals: string[][] = [];
+  const glyphOfVals = new Map<string, string>();
+  for (let p = 0; p < stride; p++) {
+    const grids = phaseGrids[p];
+    const tmpl: string[] = [];
+    for (let c = 0; c < grids[0].length; c++) {
+      const colVals = grids.map((g) => g[c]);
+      if (new Set(colVals).size === 1) {
+        if ([...colVals[0]].some((ch) => SLOT_GLYPHS.includes(ch))) return null; // literal slot glyph would counterfeit
+        tmpl.push(colVals[0]);
+        continue;
+      }
+      const key = colVals.join('\u0000');
+      let glyph = glyphOfVals.get(key);
+      if (glyph === undefined) {
+        if (slotVals.length >= SLOT_GLYPHS.length) return null;
+        glyph = SLOT_GLYPHS[slotVals.length];
+        slotVals.push(colVals);
+        glyphOfVals.set(key, glyph);
+      }
+      tmpl.push(glyph);
+    }
+    templates.push(tmpl.join(''));
+  }
+  const specs = slotVals.map((v) => renderSpec(v, enc));
+  if (specs.some((x) => x === null)) return null;
+  const head = stride === 1 ? 'N' + String(m) + ':' : 'N' + String(m) + '::' + String(stride);
+  return mark + head + '\n' + templates.join('\n') + '\n' + specs.join(' ') + mark;
 }
 
 /**
@@ -823,14 +934,46 @@ function expandBody(
           if (nl > 1) {
             const head = payload.slice(0, nl);
             const rest = payload.slice(nl + 1);
+            const dd = head.indexOf('::');
+            const sigMode = (dd >= 0 && dd === head.length - 3) || head.indexOf(':') === head.length - 1; // 'N<m>::<s>' or 'N<m>:'
+            const stride = dd >= 0 && dd === head.length - 3 ? Number(head[head.length - 1]) : 1;
             const ci = head.indexOf(':');
-            const fieldMode = ci > 0;
-            const m = Number(fieldMode ? head.slice(0, ci) : head);
+            const fieldMode = ci > 0 && !sigMode;
+            const m = Number(fieldMode || sigMode ? head.slice(0, dd >= 0 ? dd : ci) : head);
             const d = fieldMode ? head[ci + 1] : '\n';
-            if (Number.isSafeInteger(m) && m >= 1 && m <= 100000 && !(fieldMode && /[0-9\n]/.test(d))) {
+            if (Number.isSafeInteger(m) && m >= 1 && m <= 100000 && !(fieldMode && /[0-9\n]/.test(d)) && (!sigMode || (stride >= 1 && stride <= 3 && m % stride === 0))) {
               let ok = true;
               const rebuilt: string[] = [];
-              if (fieldMode) {
+              if (sigMode) {
+                const templates: string[] = [];
+                let cursor = 0;
+                for (let t = 0; t < stride && ok; t++) {
+                  const tnl = rest.indexOf('\n', cursor);
+                  if (tnl < 0) ok = false;
+                  else {
+                    templates.push(rest.slice(cursor, tnl));
+                    cursor = tnl + 1;
+                  }
+                }
+                if (ok) {
+                  const specs = rest.slice(cursor).split(' ').filter((x) => x !== '');
+                  const fns = specs.map(parseSpec);
+                  if (specs.length === 0 || fns.some((f) => f === null) || specs.length > SLOT_GLYPHS.length) ok = false;
+                  if (ok && templates.some((t) => [...t].some((ch) => SLOT_GLYPHS.indexOf(ch) >= specs.length))) ok = false; // slot out of range
+                  if (ok) {
+                    for (let r = 0; r < m; r++) {
+                      const template = templates[r % stride]!;
+                      const si = Math.floor(r / stride);
+                      let line2 = '';
+                      for (const ch of template) {
+                        const gi = SLOT_GLYPHS.indexOf(ch);
+                        line2 += gi >= 0 ? (fns as Array<(i: number) => string>)[gi](si) : ch;
+                      }
+                      rebuilt.push(line2);
+                    }
+                  }
+                }
+              } else if (fieldMode) {
                 const secondNl = rest.indexOf('\n');
                 if (secondNl < 0) { ok = false; }
                 if (ok) {
@@ -1134,7 +1277,56 @@ export function rosettaTranspose(
           continue;
         }
       }
-      // (b) field family: [li, end) with consistent count + per-field signature.
+      // (b) signature family (R4): lines whose class-run signatures repeat
+      // with period 1/2/3 — free-text, JSON and alternating chat lines all
+      // fold here. Runs are PRE-timestamp (extended TS keeps digits atomic).
+      {
+        const sigCache = new Map<string, string>();
+        const sigOf = (l: string) => {
+          let sig = sigCache.get(l);
+          if (sig === undefined) {
+            sig = classRuns(l).map((r) => (/[A-Za-z]/.test(r[0]) ? 'A' : /[0-9]/.test(r[0]) ? 'D' : 'O')).join('');
+            sigCache.set(l, sig);
+          }
+          return sig;
+        };
+        const trySignature = (jEnd: number, stride: number): boolean => {
+          const famLines = lines.slice(li, jEnd);
+          const span = signatureFold(famLines, mark, enc, stride);
+          if (span === null) return false;
+          const srcRun = srcLines.slice(li, jEnd);
+          const rebuilt = decodeSpanForG1(span, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(span, enc) < countTokens(famLines.join('\n'), enc);
+          if (rebuilt !== null && rebuilt === srcRun.join('\n') && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('N');
+            li = jEnd - 1;
+            return true;
+          }
+          return false;
+        };
+        const sig0 = sigOf(lines[li]);
+        if (sig0.length >= 1 && sig0.length <= SIG_RUN_CAP) {
+          let j = li;
+          while (j < lines.length && sigOf(lines[j]) === sig0) j++;
+          if (j - li >= FAMILY_MIN && trySignature(j, 1)) continue;
+        }
+        let sigEmitted = false;
+        for (const stride of [2, 3] as const) {
+          const pat = [0, 1, 2].slice(0, stride).map((k) => (li + k < lines.length ? sigOf(lines[li + k]) : null));
+          if (pat.some((x) => x === null) || pat.some((x) => x!.length < 1 || x!.length > SIG_RUN_CAP)) continue;
+          let j = li;
+          while (j < lines.length && sigOf(lines[j]) === pat[(j - li) % stride]) j++;
+          const jEnd = li + Math.floor((j - li) / stride) * stride;
+          if (jEnd - li >= stride * FAMILY_MIN && trySignature(jEnd, stride)) {
+            sigEmitted = true;
+            break;
+          }
+        }
+        if (sigEmitted) continue;
+      }
+      // (c) field family: [li, end) with consistent count + per-field signature.
       // Only families STARTING at li are emitted — a header line falls through
       // to the per-line systems and the rows form their own family at li+1.
       if (lines[li].includes(',')) {
@@ -1469,7 +1661,6 @@ export interface RosettaSuppliedMembers {
   splice?: SpliceResult;
 }
 
-const HEAVY_MEMBER_CAP = 6_000; // chars; heavy members/compositions above this
 
 const encodeCache = new Map<string, RosettaResult>();
 const CACHE_MAX = 6;
@@ -1611,68 +1802,26 @@ async function rosettaEncodeUncached(
     if (tu.exact && tu.decoded === text) admit('tau', tu.wire, () => tauDecode(tu.wire, enc), tu.systems);
   }
 
+  // KAPPA-κ1 member — inline-bind token macros (parameterized repeats).
+  // Identity-fallback wires are blocked by the same ambiguity guard as
+  // identity inside admit.
   {
-    const r = signetEncode(text, enc);
-    if (r.exact && r.decoded === text) admit('signet', r.wire, () => signetDecode(r.wire));
-    const s = strataEncode(text, enc);
-    if (s.exact && s.decoded === text) admit('strata', s.wire, () => strataDecode(s.wire));
-    const te = tesseraEncode(text, enc);
-    if (te.exact && te.decoded === text) admit('tessera', te.wire, () => tesseraDecode(te.wire));
-    const c = columnEncode(text, enc);
-    if (c.applied && c.decoded === text) admit('column', c.wire, () => columnDecode(c.wire));
-    const ti = trieEncode(text, enc);
-    if (ti.applied && ti.decoded === text) admit('trie', ti.wire, () => trieDecode(ti.wire));
-    const rp = repairEncode(text, enc);
-    if (rp.applied && rp.decoded === text) admit('repair', rp.wire, () => repairDecode(rp.wire));
-    const st = stencilEncode(text, enc);
-    if (st.exact && st.applied && st.decoded === text) admit('stencil', st.wire, () => stencilDecode(st.wire));
-    const mo = morphEncode(text, enc);
-    if (mo.exact && mo.applied && mo.decoded === text) admit('morph', mo.wire, () => morphDecode(mo.wire));
-    const he = helixEncode(text, enc);
-    if (he.exact && he.decoded === text) admit('helix', he.wire, () => helixDecode(he.wire));
-    const pu = pulseEncode(text, enc);
-    if (pu.exact && pu.decoded === text) admit('pulse', pu.wire, () => pulseDecode(pu.wire));
-    const me = meridianEncode(text, enc);
-    if (me.exact && me.decoded === text) admit('meridian', me.wire, () => meridianDecode(me.wire));
-    const qa = quasarEncode(text, enc);
-    if (qa.exact && qa.decoded === text) admit('quasar', qa.wire, () => quasarDecode(qa.wire));
-    // KAPPA — inline-bind token macros (parameterized repeats); identity-
-    // fallback wires are blocked by the same ambiguity guard as identity.
     const kp = kappaEncode(text, enc);
     if (kp.exact && kp.decoded === text) admit('kappa', kp.wire, () => kappaDecode(kp.wire, enc));
   }
 
-  // ORBIT — contains APEX/MOSAIC/SIGNET/STRATA/TESSERA/AXIOM/ANAPHORA/
-  // MERIDIAN/QUASAR/PLEXUS/PULSE/HELIX/VERITAS.
-  try {
-    const orbit = supplied.orbit ?? (await orbitEncode(text, enc));
-    if (orbit.exact && orbit.decoded === text) {
-      // ORBIT emits the winning member's wire verbatim; mosaicDecode already
-      // dispatches on every member sentinel (its bareDecode is total).
-      admit('orbit', orbit.wire, () => mosaicDecode(orbit.wire));
-    }
-  } catch {
-    audit.push({ member: 'orbit', tokens: -1, exact: false });
-  }
-
-  if (text.length <= HEAVY_MEMBER_CAP) {
-    try {
-      const crown = supplied.crown ?? (await crownEncodeCached(text, enc));
-      if (crown.exact && crown.decoded === text) {
-        admit('crown', crown.wire, () => crownDecode(crown.wire));
-      }
-    } catch {
-      audit.push({ member: 'crown', tokens: -1, exact: false });
-    }
-    try {
-      const sp = supplied.splice ?? spliceEncode(text, enc);
-      if (sp.exact && sp.decoded === text) {
-        admit('splice', sp.wire, () => spliceDecode(sp.wire));
-      }
-    } catch {
-      audit.push({ member: 'splice', tokens: -1, exact: false });
-    }
-  }
+  // ---- CALYX cage ------------------------------------------------------------
+  // Every member admitted above has its decoder contract documented in
+  // ROSETTA_SYSTEM_PROMPT (identity, the RNS-1 transposition lanes T/W with
+  // their J/C/P/F/Y/N/A/E span systems, the φ1 phrasebook, the τ1 tables and
+  // the κ1 inline-bind macros). Foreign registry codecs (signet, strata,
+  // tessera, column, trie, repair, stencil, morph, helix, pulse, meridian,
+  // quasar, orbit, crown, splice) are NO LONGER tournament candidates: a wire
+  // whose contract the shipped prompt does not recognize is inadmissible —
+  // it would win the cage on dishonest accounting (the model at the other
+  // end could not decode it). They remain available as registry comparison
+  // lanes in the benchmark board, and rosettaDecode still dispatches on
+  // their sentinels defensively for legacy wires.
 
   // ---- compositions: REMOVED (decode-soundness) -----------------------------
   // Earlier builds admitted T⊕{member} and mosaic⊕T wires. Their full decode
@@ -1725,7 +1874,7 @@ async function rosettaEncodeUncached(
 export function rosettaDecoderPrompt(): string {
   const pool = rosettaPool('o200k_base');
   return [
-    '# ⟿ ROSETTA-R2 — byte-exact notational transposition wire',
+    '# ⟿ ROSETTA-R4 — byte-exact notational transposition wire',
     'A ROSETTA message is: <glyph><body> — the FIRST character is the mark',
     'glyph and the body follows IMMEDIATELY (no newline after the mark). The',
     'mark comes from the ROSETTA glyph pool (version-stable, tokenizer-verified',
@@ -1776,6 +1925,15 @@ export function rosettaDecoderPrompt(): string {
     '   (count terms) joined by the single-char delimiter.',
     '3g. marker + E + (digits + non-digit char)+ … + marker → character',
     '   run-length pairs: each (count, char) emits the char repeated.',
+    '3h. marker + N + count + \':\' + newline + template + newline + specs +',
+    '   marker → a SIGNATURE FAMILY: `count` lines sharing one run shape,',
+    '   with NO delimiter — the template is one whole line in which each',
+    '   varying run is an inline slot ①..⑧ and all other text is constant.',
+    '   Spec syntax is exactly 3e, evaluated at line index i (0-based).',
+    '3i. marker + N + count + \':\:\' + s + newline + s templates (one per',
+    '   line) + newline + specs + marker → a STRIDE FAMILY: line i uses',
+    '   template[i mod s]; its slots evaluate at floor(i/s). Two slots with',
+    '   identical value sequences share one glyph and one spec.',
     'W-wires: when the body is preceded by <flag>\\n right after the mark',
     '(the phrase flag, pool[k+1+RNS-1 size]), every Hangul syllable of the',
     'PHRASEBOOK-φ1 codebook (versioned in src/lib/omega/phrase.ts) in the body',
@@ -1785,6 +1943,14 @@ export function rosettaDecoderPrompt(): string {
     'Wires starting τ\\n or ττ\\n are TAU-τ1 member wires: decode them with',
     'the τ table/YAML transposition rules (ττ\\n = forced literal wrap,',
     'strip 3).',
+    'κ-wires: κ\\n<glyph>\\n<body> — KAPPA-κ1 inline-bind macros. The glyph',
+    'is a pool window base w; macro j uses O_j = pool[w+1+2j] (definition',
+    'delimiters) and U_j = pool[w+2+2j] (use site). Scan left to right:',
+    'the first O_j X O_j both DEFINES macro j (its value is X, emitted',
+    'literally) and every later bare U_j expands to that X. Definitions',
+    'contain no glyphs (nesting is forbidden), so one pass suffices.',
+    'Completeness (CALYX): every wire this codec emits is decodable from',
+    'THIS prompt alone — no external contracts are relied upon.',
     'Reconstruction is byte-exact; nothing was summarised or dropped.',
     `Pool head (o200k): ${pool.slice(0, 6).join(' ')} … full pool and region order are versioned in rosetta.ts.`,
   ].join('\n');
@@ -2153,6 +2319,107 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
   } catch (e) {
     out.push({ name: 'D1 N identical-line family', pass: false, details: (e as Error).message });
     out.push({ name: 'D9 decode never throws on malformed N/A/E', pass: false, details: (e as Error).message });
+  }
+
+  // ---- E-series: R4 signature families + CALYX cage ------------------------
+  try {
+    // E1: signature family — varying digits inline (no delimiter at all)
+    const jl = Array.from(
+      { length: 12 },
+      (_, i) => `{"ts":"2026-07-1${i % 10}T12:0${i % 6}:00Z","level":"INFO","msg":"done","latency_ms":${40 + i}}`,
+    ).join('\n');
+    const rE1 = await rosettaEncode(jl, enc);
+    out.push({
+      name: 'E1 signature family (inline digit slots)',
+      pass: rE1.exact && rosettaDecode(rE1.wire, enc) === jl && rE1.systems.includes('N') && rE1.outTokens < rE1.inTokens,
+      details: `${rE1.inTokens}→${rE1.outTokens} systems=[${rE1.systems.join(',')}]`,
+    });
+
+    // E2: stride-2 family — alternating line shapes (chat turns)
+    const chat = Array.from(
+      { length: 16 },
+      (_, i) => `user: run step ${i}\nassistant: step ${i} completed with status ok.`,
+    ).join('\n');
+    const rE2 = await rosettaEncode(chat, enc);
+    out.push({
+      name: 'E2 stride-2 family (alternating shapes)',
+      pass: rE2.exact && rosettaDecode(rE2.wire, enc) === chat && rE2.systems.includes('N') && rE2.outTokens < rE2.inTokens,
+      details: `${rE2.inTokens}→${rE2.outTokens} systems=[${rE2.systems.join(',')}]`,
+    });
+
+    // E3: stride-2 spec sharing — phases with DIFFERENT signatures but
+    // identical slot value sequences share one glyph and one spec.
+    const shared = 'x:0\ny0\nx:1\ny1\nx:2\ny2\nx:3\ny3\nx:4\ny4\nx:5\ny5';
+    const rE3 = await rosettaEncode(shared, enc);
+    const wireE3 = rE3.wire;
+    const specsE3 = wireE3.includes('\n') ? wireE3.split('\n') : [];
+    const lastLine = specsE3[specsE3.length - 1] ?? '';
+    const specCount = lastLine.replace(/ぁ$/, '').split(' ').filter((x) => x !== '').length;
+    const oneSpec = specCount === 1 && rE3.outTokens < rE3.inTokens;
+    out.push({
+      name: 'E3 stride-2 shared spec (value-seq dedup)',
+      pass: rE3.exact && rosettaDecode(rE3.wire, enc) === shared && rE3.systems.includes('N') && oneSpec,
+      details: `${rE3.inTokens}→${rE3.outTokens} specs=${JSON.stringify(specsE3[specsE3.length - 1] ?? '')}`,
+    });
+
+    // E4: literal slot glyph in a const run must veto the family (no counterfeit)
+    const glyphSrc = Array.from({ length: 5 }, (_, i) => `keep ① fixed ${i}`).join('\n');
+    const rE4 = await rosettaEncode(glyphSrc, enc);
+    out.push({
+      name: 'E4 slot-glyph const run vetoes family',
+      pass: rE4.exact && rosettaDecode(rE4.wire, enc) === glyphSrc,
+      details: `member=${rE4.member} ${rE4.inTokens}→${rE4.outTokens}`,
+    });
+
+    // E5: stride family with unrenderable slot values falls back safely
+    const hostile = Array.from({ length: 8 }, (_, i) => `a${i === 3 ? ' ' : ''}${i} b|c${i}`).join('\n');
+    const rE5 = await rosettaEncode(hostile, enc);
+    out.push({
+      name: 'E5 spec-hostile stride falls back safely',
+      pass: rE5.exact && rosettaDecode(rE5.wire, enc) === hostile,
+      details: `member=${rE5.member} ${rE5.inTokens}→${rE5.outTokens}`,
+    });
+
+    // E6: malformed N:: wires never throw
+    const bads = [
+      'ぁN4::2\n only one template\n#0:1:4ぁ',
+      'ぁN4::9\na\nb\n#0:1:4ぁ',
+      'ぁN3::2\na\nb\nぁ',
+      'ぁN4::2\na①\nb②\n#0:1:4ぁ',
+      'ぁN5:\na\n#0:1:5ぁ',
+      'ぁN:\na\n#0:1:5ぁ',
+    ];
+    let noThrow2 = true;
+    for (const b of bads) {
+      try {
+        rosettaDecode(b, enc);
+      } catch {
+        noThrow2 = false;
+      }
+    }
+    out.push({ name: 'E6 decode never throws on malformed N::/N: wires', pass: noThrow2, details: `${bads.length} shapes` });
+
+    // E7: CALYX cage — every shippable member's contract is prompt-native
+    const nativeMembers = new Set(['identity', 'rosetta-T', 'rosetta-W', 'forced-wrap', 'phrase', 'tau', 'kappa']);
+    const corpus = [jl, chat, shared, glyphSrc, hostile, ROSETTA_CHAOS_900, 'id,name\n1,user_1,2,us-east-1\n2,user_2,4,us-east-1\n3,user_3,6,us-east-1'];
+    let caged = true;
+    const seen = new Set<string>();
+    for (const c of corpus) {
+      const rc = await rosettaEncode(c, enc);
+      seen.add(rc.member);
+      if (!nativeMembers.has(rc.member)) caged = false;
+      if (rosettaDecode(rc.wire, enc) !== c) caged = false;
+    }
+    const prompt = ROSETTA_SYSTEM_PROMPT;
+    const docsK = prompt.includes('κ-wires') && prompt.includes('inline-bind');
+    const docsSig = prompt.includes('SIGNATURE FAMILY') && prompt.includes('STRIDE FAMILY');
+    out.push({
+      name: 'E7 CALYX cage (prompt-native members only)',
+      pass: caged && docsK && docsSig,
+      details: `members seen: ${[...seen].join(',')} · κ docs=${docsK} · N:: docs=${docsSig}`,
+    });
+  } catch (e) {
+    out.push({ name: 'E1 signature family (inline digit slots)', pass: false, details: (e as Error).message });
   }
 
   return out;

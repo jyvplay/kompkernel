@@ -334,7 +334,7 @@ export function codecEntries(): Entry[] {
     },
     {
       key: 'rosetta',
-      label: '𓋹 ROSETTA-R3',
+      label: '𓋹 ROSETTA-R4',
       family: 'exact',
       fidelity: 'exact',
       run: async (t, enc) => {

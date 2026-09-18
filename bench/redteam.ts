@@ -590,9 +590,95 @@ async function p10() {
   }
 }
 
+
+async function p11() {
+  console.log('P11 — ROSETTA-R4 signature/stride families + CALYX cage');
+  const { rosettaEncode, rosettaDecode, ROSETTA_SYSTEM_PROMPT } = await import('@/lib/omega/rosetta');
+
+  const shapes: Array<[string, string]> = [
+    ['sig family zero-padded minutes', Array.from({ length: 12 }, (_, i) => `t 12:0${i % 6}:00 ${40 + i}`).join('\n')],
+    ['sig family non-canonical numerics', 'v 007\nv 007\nv 008\nv 009\nv 010\nv 011'],
+    ['stride-2 differing run counts', Array.from({ length: 12 }, (_, i) => `a,${i}\nbb,${i}`).join('\n')],
+    ['stride-3 cycle shapes', Array.from({ length: 12 }, (_, i) => `a${i}\n-b${i}\n.cc${i}`).join('\n')],
+    ['stride-2 unrenderable slot (space)', Array.from({ length: 10 }, (_, i) => `a${i}\nb ${i}`).join('\n')],
+    ['literal slot glyph in const run', Array.from({ length: 5 }, (_, i) => `keep ① fixed ${i}`).join('\n')],
+    ['slot glyph in varying values', '①,x\n②,y\n③,z\n④,w\n⑤,v'],
+    ['odd-length alternating family', Array.from({ length: 13 }, (_, i) => `u:${i}\na:${i}`).join('\n')],
+    ['nine varying runs (over slot cap)', Array.from({ length: 6 }, (_, i) => `${i}a${i}b${i}c${i}d${i}e${i}`).join('\n')],
+    ['stride-2 over slot cap', Array.from({ length: 8 }, (_, i) => `${i}a${i}b${i}c${i}d${i}\n${i}e${i}f${i}g${i}h${i}`).join('\n')],
+    ['family then prose then family', 'a,1\nb,2\nc,3\nplain words here\nx,9\ny,8\nz,7'],
+    ['huge alternating family', Array.from({ length: 200 }, (_, i) => `user step ${i}\nassistant done ${i}`).join('\n')],
+    ['signature with CJK const runs', Array.from({ length: 8 }, (_, i) => `警告：服务${i}已重启`).join('\n')],
+    ['empty-ish lines in stride', Array.from({ length: 8 }, (_, i) => `${i}\n-`).join('\n')],
+    ['stride phases unequal value counts', Array.from({ length: 9 }, (_, i) => `n:${i * 2}\nm:`).join('\n')],
+  ];
+  for (const [label, text] of shapes) {
+    const r = await rosettaEncode(text, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === text, `P11 ${label} (exact)`, `${r.member} ${r.outTokens}/${r.inTokens} [${r.systems.join(',')}]`);
+    ok(r.outTokens <= r.inTokens, `P11 ${label} (never-worse)`, `${r.outTokens}/${r.inTokens}`);
+  }
+
+  // zero-pad regression: the decoded minutes must keep their leading zero
+  {
+    const text = Array.from({ length: 12 }, (_, i) => `t 12:0${i % 6}:00 ${40 + i}`).join('\n');
+    const r = await rosettaEncode(text, 'o200k_base');
+    const dec = rosettaDecode(r.wire, 'o200k_base');
+    ok(dec === text && dec.includes('12:00:00') && dec.includes('12:05:00'), 'P11 zero-padding survives round-trip', '');
+  }
+
+  // CALYX cage: every emitted member is prompt-native and decodable
+  {
+    const native = new Set(['identity', 'rosetta-T', 'rosetta-W', 'forced-wrap', 'phrase', 'tau', 'kappa']);
+    const docs = shapes.map(([, t]) => t).concat([
+      'id,name\n1,user_1,2,us-east-1\n2,user_2,4,us-east-1\n3,user_3,6,us-east-1',
+      'The quick brown fox jumps over the lazy dog near the river bank.',
+    ]);
+    let allNative = true;
+    let allDecode = true;
+    const seen = new Set<string>();
+    for (const d of docs) {
+      const r = await rosettaEncode(d, 'o200k_base');
+      seen.add(r.member);
+      if (!native.has(r.member)) allNative = false;
+      if (rosettaDecode(r.wire, 'o200k_base') !== d) allDecode = false;
+    }
+    ok(allNative, 'P11 CALYX cage: members prompt-native only', [...seen].join(','));
+    ok(allDecode, 'P11 CALYX cage: all wires decode byte-exact', '');
+    ok(ROSETTA_SYSTEM_PROMPT.includes('SIGNATURE FAMILY') && ROSETTA_SYSTEM_PROMPT.includes('STRIDE FAMILY') && ROSETTA_SYSTEM_PROMPT.includes('κ-wires'), 'P11 prompt documents N:/N:: and κ contracts', '');
+  }
+
+  // fuzz: signature/spec-metachar-soaked alternating docs
+  {
+    const N = 40;
+    let seed = 987654321;
+    const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+    const alpha = [',', '\n', ':', '::', '#', '@', '^', '$', '|', ';', '①', '②', '③', 'a', 'b', 'u', 's', 'e', 'r', '_', '0', '1', '7', '9', '-', '.', 'ぁ', 'あ', '{', '"', ' '];
+    let fuzzOk = true;
+    let neverWorse = 0;
+    for (let i = 0; i < N; i++) {
+      let doc = '';
+      const len = 40 + Math.floor(rnd() * 300);
+      for (let j = 0; j < len; j++) doc += alpha[Math.floor(rnd() * alpha.length)];
+      const r = await rosettaEncode(doc, 'o200k_base');
+      if (!(r.exact && rosettaDecode(r.wire, 'o200k_base') === doc)) { fuzzOk = false; console.log('    fuzz fail:', JSON.stringify(doc.slice(0, 90))); }
+      if (r.outTokens <= r.inTokens || r.member === 'forced-wrap') neverWorse++;
+    }
+    ok(fuzzOk, 'P11 fuzz exact on signature-soaked docs (40)');
+    ok(neverWorse === N, 'P11 fuzz never-worse', `${neverWorse}/${N}`);
+  }
+
+  // determinism: stride wires are pure functions of the input
+  {
+    const doc = Array.from({ length: 20 }, (_, i) => `user: run step ${i}\nassistant: step ${i} completed with status ok.`).join('\n') + '\n' + 'Q'.repeat(150);
+    const a1 = await rosettaEncode(doc, 'o200k_base');
+    const a2 = await rosettaEncode(doc, 'o200k_base');
+    ok(a1.wire === a2.wire && a1.outTokens === a2.outTokens, 'P11 determinism on stride lanes', `${a1.member} ${a1.outTokens}`);
+  }
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }
