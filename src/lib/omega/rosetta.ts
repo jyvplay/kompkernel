@@ -157,6 +157,7 @@ import { type OrbitResult } from './orbit';
 import { kappaEncode, kappaDecode, KAPPA_SENTINEL } from './kappa';
 import { phraseEncode, phraseDecode, phraseFold, hasCodebookGlyph, phraseCodebook, PHRASE_SENTINEL, PHRASE_LITERAL } from './phrase';
 import { tauEncode, tauDecode, TAU_SENTINEL, TAU_LITERAL, pipeSpan, commaSpan, yamlFromLines } from './tau';
+import { meridianEncode, meridianDecode } from './meridian';
 import { crownDecode, type CrownResult } from './crown';
 import { spliceDecode, type SpliceResult } from './splice';
 import { eidolonProject } from './eidolon';
@@ -599,23 +600,61 @@ export function parseSpec(spec: string): ((i: number) => string) | null {
   return null;
 }
 
-/** E-fold: replace >=RLE_MIN_RUN repeats of a non-digit char by mark+E+<n><c>+mark. */
-function rleFoldLine(line: string, mark: string): string | null {
+/** E-fold: replace >=RLE_MIN_RUN repeats of non-digit chars by mark+E+(<n><c>)+mark. */
+function rleFoldLine(line: string, mark: string, enc: EncodingName = 'o200k_base'): string | null {
   if (line.length < RLE_MIN_RUN * 2) return null;
-  let out = '';
+  const runs: Array<{ count: number; char: string; start: number; end: number }> = [];
   let i = 0;
-  let folded = false;
   while (i < line.length) {
     const c = line[i];
-    if (/[0-9]/.test(c)) { out += c; i++; continue; }
+    if (/[0-9]/.test(c)) { i++; continue; }
     let j = i;
     while (j < line.length && line[j] === c) j++;
     const n = j - i;
-    if (n >= RLE_MIN_RUN) { out += mark + 'E' + String(n) + c + mark; folded = true; }
-    else out += line.slice(i, j);
+    if (n >= RLE_MIN_RUN) {
+      runs.push({ count: n, char: c, start: i, end: j });
+    }
     i = j;
   }
-  return folded ? out : null;
+  if (runs.length === 0) return null;
+
+  // Option 1: Separate E envelopes per run
+  let separateStr = '';
+  let lastIndex = 0;
+  for (const r of runs) {
+    separateStr += line.slice(lastIndex, r.start) + mark + 'E' + String(r.count) + r.char + mark;
+    lastIndex = r.end;
+  }
+  separateStr += line.slice(lastIndex);
+
+  // Option 2: Shared E envelope for adjacent runs (ROSETTA-R4.3 compact E spans)
+  let sharedStr = '';
+  lastIndex = 0;
+  let inGroup = false;
+  for (let idx = 0; idx < runs.length; idx++) {
+    const r = runs[idx];
+    const prev = idx > 0 ? runs[idx - 1] : null;
+    if (prev && prev.end === r.start) {
+      // Adjacent run continuation
+      sharedStr += String(r.count) + r.char;
+    } else {
+      if (inGroup) {
+        sharedStr += mark;
+        inGroup = false;
+      }
+      sharedStr += line.slice(lastIndex, r.start) + mark + 'E' + String(r.count) + r.char;
+      inGroup = true;
+    }
+    lastIndex = r.end;
+  }
+  if (inGroup) {
+    sharedStr += mark;
+  }
+  sharedStr += line.slice(lastIndex);
+
+  // Pick candidate with minimum token cost
+  const cands = [separateStr, sharedStr].filter((c): c is string => c !== null);
+  return cands.reduce((a, b) => (countTokens(b, enc) < countTokens(a, enc) ? b : a));
 }
 
 /** A-fold: line = unit+num DELIM unit+num ... with an arithmetic num run. */
@@ -636,7 +675,11 @@ function arithFoldLine(line: string, mark: string): string | null {
     if (new Set(units).size !== 1) continue;
     const segs = arithSegments(nums);
     if (segs === null || segs.length !== 1) continue; // v1: one clean progression
-    return mark + 'A' + `${segs[0].start}:${segs[0].stride}:${nums.length}` + '\n' + units[0] + '\n' + delim + mark;
+    // ROSETTA-R4.3 compact A heads: A<count> shorthand for start=0,stride=1
+    const head = (segs[0].start === 0 && segs[0].stride === 1)
+      ? String(nums.length)
+      : `${segs[0].start}:${segs[0].stride}:${nums.length}`;
+    return mark + 'A' + head + '\n' + units[0] + '\n' + delim + mark;
   }
   return null;
 }
@@ -1094,19 +1137,29 @@ function expandBody(
         }
       }
       // A — arithmetic run span (R3): N numbers with a shared unit text and
-      // delimiter: A<start>:<stride>:<count>\n<unit>\n<delim>
+      // delimiter: A<start>:<stride>:<count>\n<unit>\n<delim> or compact head A<count>\n<unit>\n<delim>
       if (s[i + 1] === 'A') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
           const parts = s.slice(i + 2, payloadEnd).split('\n');
           if (parts.length === 3) {
-            const t = parts[0].split(':');
-            const start = Number(t[0]);
-            const stride = Number(t[1]);
-            const count = Number(t[2]);
+            let start = 0;
+            let stride = 1;
+            let count = NaN;
+            if (/^\d+$/.test(parts[0])) {
+              // Compact A head: A<count> shorthand for start=0,stride=1
+              count = Number(parts[0]);
+            } else {
+              const t = parts[0].split(':');
+              if (t.length === 3) {
+                start = Number(t[0]);
+                stride = Number(t[1]);
+                count = Number(t[2]);
+              }
+            }
             const unit = parts[1];
             const delim = parts[2];
-            if (t.length === 3 && Number.isSafeInteger(start) && Number.isSafeInteger(stride) &&
+            if (Number.isSafeInteger(start) && Number.isSafeInteger(stride) &&
                 Number.isSafeInteger(count) && count >= 1 && count <= 1000000 && delim.length === 1) {
               const vals: string[] = [];
               for (let r = 0; r < count; r++) vals.push(unit + String(start + stride * r));
@@ -1493,7 +1546,7 @@ export function rosettaTranspose(
     {
       const tsLineR3 = tsTransposeLine(line, mark, enc, measure);
       if (!tsLineR3.includes(mark)) {
-        const eFolded = rleFoldLine(tsLineR3, mark);
+        const eFolded = rleFoldLine(tsLineR3, mark, enc);
         if (eFolded !== null) {
           const rebuilt = expandBody(eFolded, mark, regionByGlyph, phraseByGlyph, sep);
           const profitable = !measure || countTokens(eFolded, enc) < countTokens(tsLineR3, enc);
@@ -1922,6 +1975,12 @@ async function rosettaEncodeUncached(
     }
   }
 
+  // MERIDIAN-M1 member — restored prompt-native member
+  {
+    const me = meridianEncode(text, enc);
+    if (me.exact && me.decoded === text) admit('meridian', me.wire, () => meridianDecode(me.wire), ['M']);
+  }
+
   // PHRASEBOOK-φ1 member — the standalone codebook lane (identity-fallback
   // wires are blocked by the same ambiguity guard as identity inside admit).
   {
@@ -2058,7 +2117,8 @@ export function rosettaDecoderPrompt(): string {
     '   and joining with the delim.',
     '3f. marker + A + start:stride:count + newline + unit + newline + delim +',
     '   marker → an arithmetic run: unit+start, unit+(start+stride), …',
-    '   (count terms) joined by the single-char delimiter.',
+    '   (count terms) joined by the single-char delimiter. The compact head',
+    '   A<count> is shorthand for start=0,stride=1.',
     '3g. marker + E + (digits + non-digit char)+ … + marker → character',
     '   run-length pairs: each (count, char) emits the char repeated.',
     '3h. marker + N + count + \':\' + newline + template + newline + specs +',
@@ -2088,6 +2148,7 @@ export function rosettaDecoderPrompt(): string {
     'the τ table/YAML transposition rules (ττ\\n = forced literal wrap,',
     'strip 3).',
     'BANYAN wires: βB1\\n<count>,<final-newline> followed by one line record per source line. R<line> is a root literal; D<parent>,<prefix>,<suffix>:<middle> rebuilds a line from a prior bounded record. βB1L\\n is the forced literal form. The bounded parent forest is forward-decodable and byte-exact.',
+    'MERIDIAN wires: [M1]\\n<body> — MERIDIAN-M1 prompt-native member wire.',
     'κ-wires: κ\\n<glyph>\\n<body> — KAPPA-κ1 inline-bind macros. The glyph',
     'is a pool window base w; macro j uses O_j = pool[w+1+2j] (definition',
     'delimiters) and U_j = pool[w+2+2j] (use site). Scan left to right:',
@@ -2403,21 +2464,30 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       pass: rD3.exact && hdr.includes('id,name') === false || rD3.exact,
       details: 'structural (see D2)',
     });
-    // D4: arithmetic run (A)
+    // D4: arithmetic run (A) with compact A<count> head
     const D4 = Array.from({ length: 50 }, (_, i) => 'id:' + i).join(',');
     const rD4 = await rosettaEncode(D4, enc);
     out.push({
-      name: 'D4 A arithmetic run',
-      pass: rD4.exact && rosettaDecode(rD4.wire, enc) === D4 && rD4.systems.includes('A') && rD4.outTokens < 50,
-      details: `${rD4.inTokens}→${rD4.outTokens} systems=[${rD4.systems.join(',')}]`,
+      name: 'D4 A arithmetic run (compact head A<count>)',
+      pass: rD4.exact && rosettaDecode(rD4.wire, enc) === D4 && rD4.systems.includes('A') && rD4.outTokens < 50 && rD4.wire.includes('A50\n'),
+      details: `${rD4.inTokens}→${rD4.outTokens} systems=[${rD4.systems.join(',')}] wire=${JSON.stringify(rD4.wire)}`,
     });
-    // D5: char RLE (E)
+    // D4b: arithmetic run with non-zero start (full A<start>:<stride>:<count> head)
+    const D4b = Array.from({ length: 50 }, (_, i) => 'id:' + (i + 5)).join(',');
+    const rD4b = await rosettaEncode(D4b, enc);
+    out.push({
+      name: 'D4b A arithmetic run (full head start=5)',
+      pass: rD4b.exact && rosettaDecode(rD4b.wire, enc) === D4b && rD4b.systems.includes('A') && rD4b.wire.includes('A5:1:50\n'),
+      details: `${rD4b.inTokens}→${rD4b.outTokens} systems=[${rD4b.systems.join(',')}]`,
+    });
+
+    // D5: char RLE (E) with compact adjacent runs
     const D5 = 'A'.repeat(300) + 'B'.repeat(200);
     const rD5 = await rosettaEncode(D5, enc);
     out.push({
-      name: 'D5 E char run-length',
-      pass: rD5.exact && rosettaDecode(rD5.wire, enc) === D5 && rD5.systems.includes('E') && rD5.outTokens < 20,
-      details: `${rD5.inTokens}→${rD5.outTokens} systems=[${rD5.systems.join(',')}]`,
+      name: 'D5 E char run-length (compact adjacent runs)',
+      pass: rD5.exact && rosettaDecode(rD5.wire, enc) === D5 && rD5.systems.includes('E') && rD5.outTokens < 20 && rD5.wire.includes('E300A200B'),
+      details: `${rD5.inTokens}→${rD5.outTokens} systems=[${rD5.systems.join(',')}] wire=${JSON.stringify(rD5.wire)}`,
     });
     // D6: short runs stay literal (E never fires below threshold)
     const D6 = 'A'.repeat(10) + 'xy' + 'B'.repeat(12);
@@ -2545,7 +2615,7 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
     out.push({ name: 'E6 decode never throws on malformed N::/N: wires', pass: noThrow2, details: `${bads.length} shapes` });
 
     // E7: CALYX cage — every shippable member's contract is prompt-native
-    const nativeMembers = new Set(['identity', 'rosetta-T', 'rosetta-W', 'forced-wrap', 'phrase', 'tau', 'kappa']);
+    const nativeMembers = new Set(['identity', 'rosetta-T', 'rosetta-W', 'forced-wrap', 'phrase', 'tau', 'kappa', 'meridian']);
     const corpus = [jl, chat, shared, glyphSrc, hostile, ROSETTA_CHAOS_900, 'id,name\n1,user_1,2,us-east-1\n2,user_2,4,us-east-1\n3,user_3,6,us-east-1'];
     let caged = true;
     const seen = new Set<string>();

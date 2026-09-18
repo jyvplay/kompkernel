@@ -55,6 +55,7 @@ export interface PrometheusResult {
   ok: boolean;
   encoding: EncodingName;
   input: string;
+  wire: string;
   output: string;
   decoded: string;
   exact: boolean;
@@ -187,7 +188,7 @@ export async function compressPrometheusICDM(
   const inChars = text.length;
   if (text.length > 120000) {
     return {
-      ok: true, encoding: enc, input: text, output: text, decoded: text, exact: true,
+      ok: true, encoding: enc, input: text, wire: text, output: text, decoded: text, exact: true,
       inChars, outChars: inChars, inTokens, outTokens: inTokens, savingsTokens: 0, savingsPct: 0,
       dictionaryCount: 0, candidates: [], encodeMs: performance.now() - started, decodeMs: 0,
       webUiCompatible: true, zeroCotOverhead: true,
@@ -198,6 +199,7 @@ export async function compressPrometheusICDM(
       ok: true,
       encoding: enc,
       input: text,
+      wire: text,
       output: text,
       decoded: text,
       exact: true,
@@ -295,6 +297,7 @@ export async function compressPrometheusICDM(
     ok: true,
     encoding: enc,
     input: text,
+    wire,
     output: wire,
     decoded,
     exact,
