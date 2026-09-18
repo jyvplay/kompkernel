@@ -249,12 +249,12 @@ export function rosettaPool(enc: EncodingName): string[] {
 
 /* ---------------------------- timestamp system ----------------------------- */
 
-// ISO-8601 / RFC-3339 extended instant: 2026-09-15T06:02:11[.fff][Z|+05:30]
+// ISO-8601 extended instant or date: 2026-09-15T06:02:11[.fff][Z|+05:30] or 2026-09-15
 const TS_EXT =
-  /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{1,9})?(Z|[+-]\d{2}:\d{2})?/g;
-// basic instant (wire form), FULL match only: 20260915T060211[.fff][Z|+0530]
+  /(\d{4})-(\d{2})-(\d{2})(T(\d{2}):(\d{2}):(\d{2})(\.\d{1,9})?(Z|[+-]\d{2}:\d{2})?)?/g;
+// basic instant or date (wire form), FULL match only: 20260915T060211[.fff][Z|+0530] or 20260915
 const TS_BASIC =
-  /^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})(\.\d{1,9})?(Z|[+-]\d{4})?$/;
+  /^(\d{4})(\d{2})(\d{2})(T(\d{2})(\d{2})(\d{2})(\.\d{1,9})?(Z|[+-]\d{4})?)?$/;
 
 const BASIC_MIN = 15; // 20260915T060211
 const BASIC_MAX = 30; // 20260915T060211.123456789+0530
@@ -272,19 +272,24 @@ function plausibleDate(y: string, mo: string, d: string, h: string, mi: string, 
 }
 
 function extToBasic(m: RegExpExecArray): string {
-  const zone = m[8] ? m[8].replace(':', '') : '';
-  return `${m[1]}${m[2]}${m[3]}T${m[4]}${m[5]}${m[6]}${m[7] ?? ''}${zone}`;
+  if (m[4]) {
+    const zone = m[9] ? m[9].replace(':', '') : '';
+    return `${m[1]}${m[2]}${m[3]}T${m[5]}${m[6]}${m[7]}${m[8] ?? ''}${zone}`;
+  }
+  return `${m[1]}${m[2]}${m[3]}`;
 }
 
 function basicToExt(b: string): string | null {
   const m = TS_BASIC.exec(b);
   if (!m || m[0] !== b) return null;
-  const zone = m[8] ? (m[8] === 'Z' ? 'Z' : `${m[8].slice(0, 3)}:${m[8].slice(3)}`) : '';
-  return `${m[1]}-${m[2]}-${m[3]}T${m[4]}:${m[5]}:${m[6]}${m[7] ?? ''}${zone}`;
+  if (m[4]) {
+    const zone = m[9] ? (m[9] === 'Z' ? 'Z' : `${m[9].slice(0, 3)}:${m[9].slice(3)}`) : '';
+    return `${m[1]}-${m[2]}-${m[3]}T${m[5]}:${m[6]}:${m[7]}${m[8] ?? ''}${zone}`;
+  }
+  return `${m[1]}-${m[2]}-${m[3]}`;
 }
 
-/** Longest basic-timestamp span at s[i+1..], or null. Longest-first matters:
- *  an offset tail (+0530) must not be left behind as literal text. */
+/** Longest basic-timestamp or basic-date span at s[i+1..], or null. */
 function probeBasic(s: string, i: number): { ext: string; end: number } | null {
   for (let len = BASIC_MAX; len >= BASIC_MIN; len--) {
     if (i + 1 + len > s.length) continue;
@@ -298,6 +303,13 @@ function probeBasic(s: string, i: number): { ext: string; end: number } | null {
       )
     ) {
       return { ext, end: i + 1 + len };
+    }
+  }
+  if (i + 1 + 8 <= s.length) {
+    const cand = s.slice(i + 1, i + 1 + 8);
+    const ext = basicToExt(cand);
+    if (ext !== null && plausibleDate(cand.slice(0, 4), cand.slice(4, 6), cand.slice(6, 8), '00', '00', '00')) {
+      return { ext, end: i + 1 + 8 };
     }
   }
   return null;
@@ -1732,7 +1744,8 @@ function tsTransposeLine(
   let last = 0;
   let m: RegExpExecArray | null;
   while ((m = TS_EXT.exec(line)) !== null) {
-    if (!plausibleDate(m[1], m[2], m[3], m[4], m[5], m[6])) continue;
+    const isTs = Boolean(m[4]);
+    if (!plausibleDate(m[1], m[2], m[3], isTs ? m[5] : '00', isTs ? m[6] : '00', isTs ? m[7] : '00')) continue;
     const basic = mark + extToBasic(m);
     if (measure && countTokens(basic, enc) >= countTokens(m[0], enc)) continue;
     out += line.slice(last, m.index) + basic;
