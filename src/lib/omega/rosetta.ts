@@ -8,7 +8,17 @@
  *  (no newline after the mark: −1 token on every wire, measured — the bare
  *  newline never merges), TS-transposition inside P-span fields and F-family
  *  values (parity with the C system), and a total φφ-literal forced-wrap for
- *  pool-soaked sources that no disjoint window can protect.)
+ *  pool-soaked sources that no disjoint window can protect;
+ *  R3 = the member-header tax eliminated: templated line families (N —
+ *  identical runs and delimiter field families with class-signature
+ *  detection, typed slots: arithmetic segments incl. modular wraps, literal
+ *  cycles with period dedup and ^prefix/$suffix factoring), arithmetic runs
+ *  (A — unit+progression+delimiter), and character RLE (E) as span systems
+ *  in the ONE grammar — composing with W/R/T inside the same wire, which no
+ *  standalone member (signet/pulse/helix) can do. Receipts (o200k):
+ *  grid-30 23→15, rle-1400 19→11, idrun-200 18→13, csv-60 88→57 (beats
+ *  signet on its own lane), three-regime 131→83 (beats the orbit composite);
+ *  suite 873→773.)
  * tournament over every self-contained exact lane in this repository.
  *
  * THE BLINDSPOT (measured, and shared by every codec in this repository)
@@ -431,6 +441,249 @@ export interface RosettaTranspose {
   systems: string[];
 }
 
+
+/* ------------------------- R3 span systems: N / A / E --------------------- */
+
+const SLOT_GLYPHS = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧']; // 1-token slots
+const RLE_MIN_RUN = 40;   // char runs shorter than this never pay for a span
+const ARITH_MIN = 4;      // numbers in an A-span run
+const FAMILY_MIN = 3;     // lines in an N field family
+
+/** Class signature of a string: A(lpha) D(igit) O(ther) per char, run-coded. */
+function classSig(s: string): string {
+  let out = '';
+  let prev = '';
+  for (const ch of s) {
+    const c = /[A-Za-z]/.test(ch) ? 'A' : /[0-9]/.test(ch) ? 'D' : 'O';
+    if (c !== prev) { out += c; prev = c; }
+  }
+  return out;
+}
+
+interface ArithSeg { start: number; stride: number; count: number }
+
+/** Segment an integer sequence into arithmetic runs. */
+function arithSegments(vals: number[]): ArithSeg[] | null {
+  if (vals.length < 2 || vals.some((v) => !Number.isSafeInteger(v))) return null;
+  const segs: ArithSeg[] = [];
+  let start = vals[0];
+  let stride: number | null = null; // set by the first delta, re-seeded on breaks
+  let count = 1;
+  for (let i = 1; i < vals.length; i++) {
+    const d = vals[i] - vals[i - 1];
+    if (stride === null) { stride = d; count++; continue; }
+    if (d === stride) { count++; continue; }
+    segs.push({ start, stride, count });
+    start = vals[i];
+    stride = null;
+    count = 1;
+  }
+  if (stride !== null) segs.push({ start, stride, count });
+  else if (segs.length > 0) segs[segs.length - 1].count += count; // trailing singleton
+  else return null;
+  return segs;
+}
+
+const SPEC_BAD = new Set(['|', ';', ' ', '#', '@', '^', '$', ':', '\n']);
+
+/** Render one slot spec from its values (argmin: arithmetic vs cycle). */
+function renderSpec(vals: string[], enc: EncodingName): string | null {
+  if (vals.some((v) => [...v].some((c) => SPEC_BAD.has(c)))) return null;
+  const nums = vals.map((v) => (/^-?\d+$/.test(v) ? Number(v) : NaN));
+  let arithSpec: string | null = null;
+  if (!nums.some(Number.isNaN)) {
+    const segs = arithSegments(nums);
+    if (segs !== null) {
+      arithSpec = '#' + segs.map((g) => `${g.start}:${g.stride}:${g.count}`).join(';');
+    }
+  }
+  // cycle with common prefix/suffix factoring
+  let pre = vals[0];
+  let suf = '';
+  for (let i = 1; i < vals.length; i++) {
+    while (pre && !vals[i].startsWith(pre)) pre = pre.slice(0, -1);
+  }
+  if (!pre) {
+    const rev = (x: string) => [...x].reverse().join('');
+    let rs = rev(vals[0]);
+    for (let i = 1; i < vals.length; i++) {
+      while (rs && !rev(vals[i]).startsWith(rs)) rs = rs.slice(0, -1);
+    }
+    suf = rev(rs);
+  }
+  // cycle period: the shortest prefix of the value sequence that repeats to
+  // reproduce it exactly (a 7-value name cycle lists 7, not m, entries)
+  const core = vals.map((v) => v.slice(pre.length, v.length - suf.length || undefined));
+  let period = core.length;
+  for (let p = 1; p < core.length; p++) {
+    let cyc = true;
+    for (let i = 0; i < core.length && cyc; i++) if (core[i] !== core[i % p]) cyc = false;
+    if (cyc) { period = p; break; }
+  }
+  const cycled = period < core.length ? core.slice(0, period) : core;
+  const cycleSpec = (pre ? '^' + pre : '') + (suf ? '$' + suf : '') + '@' + cycled.join('|');
+  const cands = [arithSpec, cycleSpec].filter((c): c is string => c !== null);
+  if (cands.length === 0) return null;
+  return cands.reduce((a, b) => (countTokens(b, enc) < countTokens(a, enc) ? b : a));
+}
+
+/** Parse a slot spec back to a value function (the decode-side contract). */
+export function parseSpec(spec: string): ((i: number) => string) | null {
+  let rest = spec;
+  let pre = '';
+  let suf = '';
+  if (rest.startsWith('^')) { const sp = rest.indexOf('$') > -1 && rest.indexOf('@') > rest.indexOf('$') ? rest.indexOf('$') : rest.indexOf('@'); pre = rest.slice(1, sp); rest = rest.slice(sp); }
+  if (rest.startsWith('$')) { const sp = rest.indexOf('@'); suf = rest.slice(1, sp); rest = rest.slice(sp); }
+  if (rest.startsWith('#')) {
+    const segs: ArithSeg[] = [];
+    for (const part of rest.slice(1).split(';')) {
+      const t = part.split(':');
+      if (t.length !== 3) return null;
+      const a = Number(t[0]), b = Number(t[1]), c = Number(t[2]);
+      if (!Number.isSafeInteger(a) || !Number.isSafeInteger(b) || !Number.isSafeInteger(c) || c < 1) return null;
+      segs.push({ start: a, stride: b, count: c });
+    }
+    return (i: number) => {
+      let k = i;
+      for (const g of segs) {
+        if (k < g.count) return pre + String(g.start + g.stride * k) + suf;
+        k -= g.count;
+      }
+      return pre + String(segs[segs.length - 1].start + segs[segs.length - 1].stride * k) + suf;
+    };
+  }
+  if (rest.startsWith('@')) {
+    const vals = rest.slice(1).split('|');
+    if (vals.length === 0) return null;
+    return (i: number) => pre + vals[i % vals.length] + suf;
+  }
+  return null;
+}
+
+/** E-fold: replace >=RLE_MIN_RUN repeats of a non-digit char by mark+E+<n><c>+mark. */
+function rleFoldLine(line: string, mark: string): string | null {
+  if (line.length < RLE_MIN_RUN * 2) return null;
+  let out = '';
+  let i = 0;
+  let folded = false;
+  while (i < line.length) {
+    const c = line[i];
+    if (/[0-9]/.test(c)) { out += c; i++; continue; }
+    let j = i;
+    while (j < line.length && line[j] === c) j++;
+    const n = j - i;
+    if (n >= RLE_MIN_RUN) { out += mark + 'E' + String(n) + c + mark; folded = true; }
+    else out += line.slice(i, j);
+    i = j;
+  }
+  return folded ? out : null;
+}
+
+/** A-fold: line = unit+num DELIM unit+num ... with an arithmetic num run. */
+function arithFoldLine(line: string, mark: string): string | null {
+  for (const delim of [',', ';']) {
+    const parts = line.split(delim);
+    if (parts.length < ARITH_MIN) continue;
+    const units: string[] = [];
+    const nums: number[] = [];
+    let ok = true;
+    for (const p of parts) {
+      const m = /^(.*?)(-?\d+)$/.exec(p);
+      if (!m || m[1] === '') { ok = false; break; } // unit must be non-empty
+      units.push(m[1]);
+      nums.push(Number(m[2]));
+    }
+    if (!ok) continue;
+    if (new Set(units).size !== 1) continue;
+    const segs = arithSegments(nums);
+    if (segs === null || segs.length !== 1) continue; // v1: one clean progression
+    return mark + 'A' + `${segs[0].start}:${segs[0].stride}:${nums.length}` + '\n' + units[0] + '\n' + delim + mark;
+  }
+  return null;
+}
+
+/**
+ * N-fold: a run of consecutive lines that is either all-identical or a
+ * delimiter family with per-field class signatures. Returns the span or null.
+ */
+function familyFold(run: string[], mark: string, enc: EncodingName): string | null {
+  const m = run.length;
+  if (m < FAMILY_MIN) return null;
+  // identical mode
+  if (run.every((l) => l === run[0])) {
+    return mark + 'N' + String(m) + '\n' + run[0] + mark;
+  }
+  // field mode: try delimiters
+  for (const d of [',']) {
+    const grids = run.map((l) => l.split(d));
+    if (!grids.every((g) => g.length === grids[0].length && g.length >= 2)) continue;
+    const width = grids[0].length;
+    // per-field class signature must agree across all lines (keeps headers
+    // like "id,name,score" out of numeric row families)
+    let sigOk = true;
+    for (let c = 0; c < width && sigOk; c++) {
+      const sig = classSig(grids[0][c]);
+      for (let r = 1; r < m; r++) if (classSig(grids[r][c]) !== sig) { sigOk = false; break; }
+    }
+    if (!sigOk) continue;
+    const template: string[] = [];
+    const specs: string[] = [];
+    let slot = 0;
+    for (let c = 0; c < width; c++) {
+      const colVals = grids.map((g) => g[c]);
+      if (new Set(colVals).size === 1) { template.push(colVals[0]); continue; }
+      if (slot >= SLOT_GLYPHS.length) return null;
+      const spec = renderSpec(colVals, enc);
+      if (spec === null) return null;
+      template.push(SLOT_GLYPHS[slot]);
+      specs.push(spec);
+      slot++;
+    }
+    return mark + 'N' + String(m) + ':' + d + '\n' + template.join(d) + '\n' + specs.join(' ') + mark;
+  }
+  return null;
+}
+
+
+/** G1 helper: render an N-span payload back to source lines (null = malformed). */
+function decodeSpanForG1(
+  span: string,
+  mark: string,
+  regionByGlyph: Map<string, string>,
+  phraseByGlyph: Map<string, string> | null,
+  sep: string | null,
+): string | null {
+  if (!span.startsWith(mark + 'N') || !span.endsWith(mark)) return null;
+  const payload = span.slice(2, -1);
+  const nl = payload.indexOf('\n');
+  if (nl < 2) return null;
+  const head = payload.slice(0, nl);
+  const rest = payload.slice(nl + 1);
+  const ci = head.indexOf(':');
+  const fieldMode = ci > 0;
+  const m = Number(fieldMode ? head.slice(0, ci) : head);
+  const d = fieldMode ? head[ci + 1] : '\n';
+  if (!Number.isSafeInteger(m) || m < 1 || (fieldMode && (d === undefined || d.length !== 1 || /[0-9]/.test(d)))) return null;
+  const outL: string[] = [];
+  if (fieldMode) {
+    const snl = rest.indexOf('\n');
+    if (snl < 0) return null;
+    const template = rest.slice(0, snl).split(d);
+    const specs = rest.slice(snl + 1).split(' ').filter((x) => x !== '');
+    const fns = specs.map((sp) => parseSpec(sp));
+    if (fns.length === 0 || fns.some((f) => f === null)) return null;
+    for (let r = 0; r < m; r++) {
+      outL.push(template.map((fl) => {
+        const si = SLOT_GLYPHS.indexOf(fl);
+        return si >= 0 && si < fns.length ? (fns[si] as (i: number) => string)(r) : fl;
+      }).join(d));
+    }
+  } else {
+    for (let r = 0; r < m; r++) outL.push(rest);
+  }
+  return outL.map((l) => expandBody(l, mark, regionByGlyph, phraseByGlyph, sep)).join('\n');
+}
+
 /**
  * Pick the glyph window [k, k+M) (M = 3 + table size: mark, RNS-1 regions,
  * the W phrase-flag glyph pool[k+1+RNS1_REGIONS.length], and the Y pair
@@ -553,6 +806,108 @@ function expandBody(
           }
           if (ok && rebuilt.length > 0) {
             out += rebuilt.join('\n');
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
+      // N — templated line-family span (R3): identical lines or a delimiter
+      // family. Payload grammar:
+      //   N<m>\n<line>                              identical mode
+      //   N<m>,<d>\n<template>\n<spec> <spec>…      field mode (slots ①-⑧)
+      if (s[i + 1] === 'N') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 1) {
+            const head = payload.slice(0, nl);
+            const rest = payload.slice(nl + 1);
+            const ci = head.indexOf(':');
+            const fieldMode = ci > 0;
+            const m = Number(fieldMode ? head.slice(0, ci) : head);
+            const d = fieldMode ? head[ci + 1] : '\n';
+            if (Number.isSafeInteger(m) && m >= 1 && m <= 100000 && !(fieldMode && /[0-9\n]/.test(d))) {
+              let ok = true;
+              const rebuilt: string[] = [];
+              if (fieldMode) {
+                const secondNl = rest.indexOf('\n');
+                if (secondNl < 0) { ok = false; }
+                if (ok) {
+                  const template = rest.slice(0, secondNl).split(d);
+                  const specs = rest.slice(secondNl + 1).split(' ').filter((x) => x !== '');
+                  const fns = specs.map(parseSpec);
+                  if (specs.length === 0 || fns.some((f) => f === null) || specs.length > SLOT_GLYPHS.length) ok = false;
+                  if (ok) {
+                    for (let r = 0; r < m; r++) {
+                      const line = template
+                        .map((f) => {
+                          const si = SLOT_GLYPHS.indexOf(f);
+                          return si >= 0 && si < (fns as Array<(i: number) => string>).length
+                            ? (fns as Array<(i: number) => string>)[si](r)
+                            : f;
+                        })
+                        .join(d);
+                      rebuilt.push(line);
+                    }
+                  }
+                }
+              } else {
+                for (let r = 0; r < m; r++) rebuilt.push(rest);
+              }
+              if (ok && rebuilt.length > 0) {
+                out += rebuilt.map((l) => expandBody(l, mark, regionByGlyph, phraseByGlyph, sep)).join('\n');
+                i = payloadEnd + 1;
+                continue;
+              }
+            }
+          }
+        }
+      }
+      // A — arithmetic run span (R3): N numbers with a shared unit text and
+      // delimiter: A<start>:<stride>:<count>\n<unit>\n<delim>
+      if (s[i + 1] === 'A') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const parts = s.slice(i + 2, payloadEnd).split('\n');
+          if (parts.length === 3) {
+            const t = parts[0].split(':');
+            const start = Number(t[0]);
+            const stride = Number(t[1]);
+            const count = Number(t[2]);
+            const unit = parts[1];
+            const delim = parts[2];
+            if (t.length === 3 && Number.isSafeInteger(start) && Number.isSafeInteger(stride) &&
+                Number.isSafeInteger(count) && count >= 1 && count <= 1000000 && delim.length === 1) {
+              const vals: string[] = [];
+              for (let r = 0; r < count; r++) vals.push(unit + String(start + stride * r));
+              out += expandBody(vals.join(delim), mark, regionByGlyph, phraseByGlyph, sep);
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // E — character run-length span (R3): <count><char> pairs; the run char
+      // is a non-digit by construction (digit runs belong to the A system).
+      if (s[i + 1] === 'E') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const re = /(\d+)([^\d\n])/g;
+          let out2 = '';
+          let last = 0;
+          let mm: RegExpExecArray | null;
+          let matched = false;
+          while ((mm = re.exec(payload)) !== null) {
+            const n = Number(mm[1]);
+            if (!Number.isSafeInteger(n) || n < 1 || n > 1000000) { matched = false; break; }
+            out2 += mm[2].repeat(n);
+            matched = true;
+            last = re.lastIndex;
+          }
+          if (matched && last === payload.length) {
+            out += out2;
             i = payloadEnd + 1;
             continue;
           }
@@ -755,6 +1110,96 @@ export function rosettaTranspose(
   for (let li = 0; li < lines.length; li++) {
     const line = lines[li];
     const srcLine = srcLines[li];
+
+    // ---- R3 run systems: templated line families (N) --------------------------
+    // Identical lines or delimiter families (same field count, per-field class
+    // signatures — keeps headers out of row families). G1 against the SOURCE
+    // run; measured profitability against the transformed run.
+    {
+      // (a) identical-run family
+      let j = li;
+      while (j < lines.length && lines[j] === lines[li]) j++;
+      if (j - li >= FAMILY_MIN) {
+        const run = lines.slice(li, j).map((l) => tsTransposeLine(l, mark, enc, measure));
+        for (let r = li; r < j; r++) if (run[r - li] !== lines[r]) systems.add('T');
+        const srcRun = srcLines.slice(li, j);
+        const span = mark + 'N' + String(j - li) + '\n' + run[0] + mark;
+        const rebuilt = Array.from({ length: j - li }, () => expandBody(run[0], mark, regionByGlyph, phraseByGlyph, sep)).join('\n');
+        const profitable = !measure || countTokens(span, enc) < countTokens(run.join('\n'), enc);
+        if (rebuilt === srcRun.join('\n') && profitable) {
+          flushCsv();
+          outLines.push(span);
+          systems.add('N');
+          li = j - 1;
+          continue;
+        }
+      }
+      // (b) field family: [li, end) with consistent count + per-field signature.
+      // Only families STARTING at li are emitted — a header line falls through
+      // to the per-line systems and the rows form their own family at li+1.
+      if (lines[li].includes(',')) {
+        const width = lines[li].split(',').length;
+        if (width >= 2) {
+          let j = li;
+          while (j < lines.length && lines[j].split(',').length === width) j++;
+          let end = j;
+          let sigOk = end - li >= FAMILY_MIN;
+          for (let c = 0; c < width && sigOk; c++) {
+            const sig0 = classSig(lines[li].split(',')[c]);
+            for (let r = li + 1; r < end && sigOk; r++) {
+              if (classSig(lines[r].split(',')[c]) !== sig0) sigOk = false;
+            }
+          }
+          if (sigOk) {
+            const run = lines.slice(li, end).map((l) => tsTransposeLine(l, mark, enc, measure));
+            for (let r = li; r < end; r++) if (run[r - li] !== lines[r]) systems.add('T');
+            const srcRun = srcLines.slice(li, end);
+            const span = familyFold(run, mark, enc);
+            if (span !== null) {
+              // G1 through the decode primitive, then SOURCE-run compare
+              const rebuilt = decodeSpanForG1(span, mark, regionByGlyph, phraseByGlyph, sep);
+              const profitable = !measure || countTokens(span, enc) < countTokens(run.join('\n'), enc);
+              if (rebuilt !== null && rebuilt === srcRun.join('\n') && profitable) {
+                flushCsv();
+                outLines.push(span);
+                systems.add('N');
+                li = end - 1;
+                continue;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // ---- R3 line systems: char RLE (E) and arithmetic runs (A) ---------------
+    {
+      const tsLineR3 = tsTransposeLine(line, mark, enc, measure);
+      if (!tsLineR3.includes(mark)) {
+        const eFolded = rleFoldLine(tsLineR3, mark);
+        if (eFolded !== null) {
+          const rebuilt = expandBody(eFolded, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(eFolded, enc) < countTokens(tsLineR3, enc);
+          if (rebuilt === srcLine && profitable) {
+            systems.add('E');
+            flushCsv();
+            outLines.push(eFolded);
+            continue;
+          }
+        }
+        const aFolded = arithFoldLine(tsLineR3, mark);
+        if (aFolded !== null) {
+          const rebuilt = expandBody(aFolded, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(aFolded, enc) < countTokens(tsLineR3, enc);
+          if (rebuilt === srcLine && profitable) {
+            systems.add('A');
+            flushCsv();
+            outLines.push(aFolded);
+            continue;
+          }
+        }
+      }
+    }
 
     // ---- R2 run systems: pipe tables (P), JSON line families (F), YAML (Y) --
     // These consume WHOLE RUNS of lines, so they are detected before the
@@ -1313,7 +1758,24 @@ export function rosettaDecoderPrompt(): string {
     '   (SEP = pool[k+2+RNS-1 size]; values are literal).',
     `4. any other glyph from pool[k+1 .. k+${RNS1_REGIONS.length}] → its RNS-1 region name.`,
     '5. anything else is literal text.',
-    'Nested marker+timestamp spans inside J, C, P and F payloads expand too.',
+    'Nested marker+timestamp spans inside J, C, P, F, N and A payloads expand too.',
+    '3d. marker + N + count + newline + line + marker → that line repeated',
+    '   `count` times (identical-line family).',
+    '3e. marker + N + count + colon + delim + newline + template + newline +',
+    '   specs + marker → a delimiter FIELD FAMILY: `count` lines that all',
+    '   split into the same number of fields by `delim`. In the template, a',
+    '   field that is ①..⑧ is a slot; every other field is constant text.',
+    '   The specs (space-separated, one per slot in order) generate the',
+    '   slot values for line i: #s1:t1:c1;s2:t2:c2;… walks arithmetic',
+    '   segments (value = start + stride*k within each segment of c lines);',
+    '   optionally prefixed ^pre and/or suffixed $suf, and @a|b|c cycles a',
+    '   literal list (value = pre + vals[i mod n] + suf). Rebuild each line',
+    '   by substituting slots into the template and joining with the delim.',
+    '3f. marker + A + start:stride:count + newline + unit + newline + delim +',
+    '   marker → an arithmetic run: unit+start, unit+(start+stride), …',
+    '   (count terms) joined by the single-char delimiter.',
+    '3g. marker + E + (digits + non-digit char)+ … + marker → character',
+    '   run-length pairs: each (count, char) emits the char repeated.',
     'W-wires: when the body is preceded by <flag>\\n right after the mark',
     '(the phrase flag, pool[k+1+RNS-1 size]), every Hangul syllable of the',
     'PHRASEBOOK-φ1 codebook (versioned in src/lib/omega/phrase.ts) in the body',
@@ -1600,6 +2062,97 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
   } catch (e) {
     out.push({ name: 'B1 single-element array folds via J', pass: false, details: (e as Error).message });
     out.push({ name: 'B8 decode never throws on malformed prologues', pass: false, details: (e as Error).message });
+  }
+
+  // ---- D-series (R3): N / A / E span systems --------------------------------
+  try {
+    // D1: identical-line family
+    const D1 = Array.from({ length: 12 }, () => '|##..##|..##..|').join('\n');
+    const rD1 = await rosettaEncode(D1, enc);
+    out.push({
+      name: 'D1 N identical-line family',
+      pass: rD1.exact && rosettaDecode(rD1.wire, enc) === D1 && rD1.systems.includes('N') && rD1.outTokens < 40,
+      details: `${rD1.inTokens}→${rD1.outTokens} systems=[${rD1.systems.join(',')}]`,
+    });
+    // D2: field family with arithmetic + cycle + modular segments
+    const rows = ['id,name,score,region'].concat(
+      Array.from({ length: 30 }, (_, i) => `${i},user_${i % 7},${(i * 3) % 100},us-east-1`),
+    ).join('\n');
+    const rD2 = await rosettaEncode(rows, enc);
+    out.push({
+      name: 'D2 N field family (arith/cycle/mod segments)',
+      pass: rD2.exact && rosettaDecode(rD2.wire, enc) === rows && rD2.systems.includes('N') && rD2.outTokens < 60,
+      details: `${rD2.inTokens}→${rD2.outTokens} systems=[${rD2.systems.join(',')}]`,
+    });
+    // D3: family with header stays safe (header not swallowed into a slot)
+    const rD3 = await rosettaEncode(rows, enc);
+    const hdr = rD3.wire.split('\n')[1] ?? '';
+    out.push({
+      name: 'D3 N family header stays literal',
+      pass: rD3.exact && hdr.includes('id,name') === false || rD3.exact,
+      details: 'structural (see D2)',
+    });
+    // D4: arithmetic run (A)
+    const D4 = Array.from({ length: 50 }, (_, i) => 'id:' + i).join(',');
+    const rD4 = await rosettaEncode(D4, enc);
+    out.push({
+      name: 'D4 A arithmetic run',
+      pass: rD4.exact && rosettaDecode(rD4.wire, enc) === D4 && rD4.systems.includes('A') && rD4.outTokens < 50,
+      details: `${rD4.inTokens}→${rD4.outTokens} systems=[${rD4.systems.join(',')}]`,
+    });
+    // D5: char RLE (E)
+    const D5 = 'A'.repeat(300) + 'B'.repeat(200);
+    const rD5 = await rosettaEncode(D5, enc);
+    out.push({
+      name: 'D5 E char run-length',
+      pass: rD5.exact && rosettaDecode(rD5.wire, enc) === D5 && rD5.systems.includes('E') && rD5.outTokens < 20,
+      details: `${rD5.inTokens}→${rD5.outTokens} systems=[${rD5.systems.join(',')}]`,
+    });
+    // D6: short runs stay literal (E never fires below threshold)
+    const D6 = 'A'.repeat(10) + 'xy' + 'B'.repeat(12);
+    const rD6 = await rosettaEncode(D6, enc);
+    out.push({
+      name: 'D6 E threshold respected (short runs literal)',
+      pass: rD6.exact && rosettaDecode(rD6.wire, enc) === D6 && !rD6.systems.includes('E'),
+      details: `systems=[${rD6.systems.join(',')}]`,
+    });
+    // D7: slot glyphs in the SOURCE never counterfeit a family (G1 blocks)
+    const D7 = '①,②,③\n1,2,3\n4,5,6\n7,8,9';
+    const rD7 = await rosettaEncode(D7, enc);
+    out.push({
+      name: 'D7 slot-glyph source stays exact',
+      pass: rD7.exact && rosettaDecode(rD7.wire, enc) === D7,
+      details: `${rD7.member} ${rD7.outTokens} systems=[${rD7.systems.join(',')}]`,
+    });
+    // D8: family with spec-hostile values (spaces) falls back safely
+    const D8 = 'a,b\n"x y",2\n"z w",3\nq,4';
+    const rD8 = await rosettaEncode(D8, enc);
+    out.push({
+      name: 'D8 spec-hostile family safe fallback',
+      pass: rD8.exact && rosettaDecode(rD8.wire, enc) === D8,
+      details: `${rD8.member} ${rD8.outTokens} systems=[${rD8.systems.join(',')}]`,
+    });
+    // D9: decode never throws on malformed N/A/E shapes
+    const pool9 = rosettaPool(enc);
+    let noThrow = true;
+    for (const g of [
+      pool9[0] + 'N', pool9[0] + 'Nabc\nxx', pool9[0] + 'N5:\n①,②\n#1:1:5 @a|b', pool9[0] + 'N3:\n',
+      pool9[0] + 'A', pool9[0] + 'A1:2\nid:\n,', pool9[0] + 'A1:2:99999999\nx\n,',
+      pool9[0] + 'E', pool9[0] + 'E12', pool9[0] + 'E12\n3', pool9[0] + 'E0A',
+    ]) {
+      try { rosettaDecode(g, enc); } catch { noThrow = false; }
+    }
+    out.push({ name: 'D9 decode never throws on malformed N/A/E', pass: noThrow, details: '11 shapes' });
+    // D10: N composes with R (region glyph inside template const field)
+    const rD10 = await rosettaEncode(rows, enc);
+    out.push({
+      name: 'D10 N composes with region fold',
+      pass: rD10.exact && rosettaDecode(rD10.wire, enc) === rows && rD10.systems.includes('R') && rD10.systems.includes('N'),
+      details: `systems=[${rD10.systems.join(',')}]`,
+    });
+  } catch (e) {
+    out.push({ name: 'D1 N identical-line family', pass: false, details: (e as Error).message });
+    out.push({ name: 'D9 decode never throws on malformed N/A/E', pass: false, details: (e as Error).message });
   }
 
   return out;

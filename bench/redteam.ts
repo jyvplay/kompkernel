@@ -526,9 +526,73 @@ async function p9() {
   }
 }
 
+
+async function p10() {
+  console.log('P10 — ROSETTA-R3 N/A/E span adversarial shapes');
+  const { rosettaEncode, rosettaDecode, rosettaPool } = await import('@/lib/omega/rosetta');
+  const pool = rosettaPool('o200k_base');
+
+  const shapes: Array<[string, string]> = [
+    ['identical x3 (minimum family)', 'same\nsame\nsame'],
+    ['identical x2 (below minimum)', 'same\nsame'],
+    ['identical with TS line', '2026-09-15T09:02:33Z\n2026-09-15T09:02:33Z\n2026-09-15T09:02:33Z'],
+    ['family with negative numbers', 'a,-1\nb,-2\nc,-3\nd,-4\ne,-5'],
+    ['family with descending arith', 'a,9\nb,7\nc,5\nd,3\ne,1'],
+    ['family mixed types per field', 'a,1\nb,x\nc,3\nd,y\ne,5'],
+    ['family with empty field', 'a,\nb,\nc,\nd,\ne,'],
+    ['family constant only', 'a,7\nb,7\nc,7\nd,7\ne,7'],
+    ['cycle with 2 values', 'a,0\nb,1\nc,0\nd,1\ne,0'],
+    ['modular wrap scores', 'a,0\nb,3\nc,6\nd,9\ne,2\nf,5'],
+    ['huge count identical', Array.from({ length: 200 }, () => 'x').join('\n')],
+    ['A descending', Array.from({ length: 20 }, (_, i) => 'n:' + (40 - i * 2)).join(',')],
+    ['A stride 7', Array.from({ length: 15 }, (_, i) => 'v=' + (7 * i)).join(';')],
+    ['A non-arithmetic (stays literal)', 'a:1,b:2,c:4,d:8,e:16'],
+    ['E digit char (excluded from E)', '7'.repeat(200)],
+    ['E mixed runs and text', 'x' + 'A'.repeat(120) + 'mid' + 'B'.repeat(90) + 'y'],
+    ['N then other systems after', 'a,1\nb,2\nc,3\nd,4\nplain prose line\n{"j":1}'],
+    ['slot glyph in family values', '①,x\n②,y\n③,z\n④,w'],
+    ['spec metachars in values', 'a,p|q\nb,p|r\nc,p|s\nd,p|t'],
+    ['colon delimiter family', 'a:1\nb:2\nc:3\nd:4\ne:5'],
+    ['semicolon values with spaces', 'a, x\nb, y\nc, z\nd, w'],
+  ];
+  for (const [label, text] of shapes) {
+    const r = await rosettaEncode(text, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === text, `P10 ${label} (exact)`, `${r.member} ${r.outTokens}/${r.inTokens} [${r.systems.join(',')}]`);
+    ok(r.outTokens <= r.inTokens, `P10 ${label} (never-worse)`, `${r.outTokens}/${r.inTokens}`);
+  }
+
+  // adversarial fuzz: family/RLE/arith-soaked documents with pool glyphs
+  {
+    let fuzzOk = true;
+    let neverWorse = 0;
+    const N = 40;
+    let seed = 987654321;
+    const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+    const alpha = [',', '\n', ':', ';', '|', '#', '@', '^', '$', '①', '②', 'a', 'b', 'u', 's', 'e', 'r', '_', '0', '1', '2', '7', '9', '-', '.', 'ぁ', 'あ', 'A', 'B', '{', '}', '"'];
+    for (let i = 0; i < N; i++) {
+      let doc = '';
+      const len = 40 + Math.floor(rnd() * 300);
+      for (let j = 0; j < len; j++) doc += alpha[Math.floor(rnd() * alpha.length)];
+      const r = await rosettaEncode(doc, 'o200k_base');
+      if (!(r.exact && rosettaDecode(r.wire, 'o200k_base') === doc)) { fuzzOk = false; console.log('    fuzz fail:', JSON.stringify(doc.slice(0, 90))); }
+      if (r.outTokens <= r.inTokens || r.member === 'forced-wrap') neverWorse++;
+    }
+    ok(fuzzOk, 'P10 fuzz exact on family/spec-soaked docs (40)');
+    ok(neverWorse === N, 'P10 fuzz never-worse', `${neverWorse}/${N}`);
+  }
+
+  // determinism: N/A/E wires are pure functions of the input
+  {
+    const doc = Array.from({ length: 20 }, (_, i) => `${i},u${i % 3},${i * 2}`).join('\n') + '\n' + 'Q'.repeat(150);
+    const a1 = await rosettaEncode(doc, 'o200k_base');
+    const a2 = await rosettaEncode(doc, 'o200k_base');
+    ok(a1.wire === a2.wire && a1.outTokens === a2.outTokens, 'P10 determinism on N/E lanes', `${a1.member} ${a1.outTokens}`);
+  }
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }
