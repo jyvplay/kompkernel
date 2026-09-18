@@ -676,9 +676,100 @@ async function p11() {
   }
 }
 
+
+async function p12() {
+  console.log('P12 — ROSETTA-R4.1 J-composed families + range bodies');
+  const { rosettaEncode, rosettaDecode } = await import('@/lib/omega/rosetta');
+
+  const shapes: Array<[string, string]> = [
+    ['J family duplicate keys', '{"a":1,"a":2}\n{"a":3,"a":4}\n{"a":5,"a":6}'],
+    ['J family nested object value', '{"a":{"x":1},"b":2}\n{"a":{"x":2},"b":3}\n{"a":{"x":3},"b":4}'],
+    ['J family escaped quote value', Array.from({ length: 5 }, (_, i) => `{"msg":"say \\"hi\\" ${i}","n":${i}}`).join('\n')],
+    ['J family space in varying value', Array.from({ length: 6 }, (_, i) => `{"msg":"two ${i} words","n":${i}}`).join('\n')],
+    ['J run interrupted by prose', '{"a":1}\n{"a":2}\n{"a":3}\nplain\n{"a":4}\n{"a":5}\n{"a":6}'],
+    ['J family exactly minimum (3)', '{"a":0}\n{"a":1}\n{"a":2}'],
+    ['J family all-const values', '{"a":1}\n{"a":1}\n{"a":1}'],
+    ['field family with J delimiter', 'aJ1\nbJ2\ncJ3\ndJ4'],
+    ['J family unicode values', Array.from({ length: 5 }, (_, i) => `{"注":"值${i}","n":${i}}`).join('\n')],
+    ['J family big numbers', Array.from({ length: 6 }, (_, i) => `{"id":${1000000 + i * 7},"v":${(i * 11) % 97}}`).join('\n')],
+    ['range body two values (no range)', Array.from({ length: 8 }, (_, i) => `x,${i % 2}`).join('\n')],
+    ['range body non-consecutive', Array.from({ length: 9 }, (_, i) => `y,${[0, 2, 4, 6, 8][i % 5]}`).join('\n')],
+    ['range body with dash-valued fields', Array.from({ length: 6 }, (_, i) => `z,${i},a-b`).join('\n')],
+    ['J family stride-2 shapes (not composed)', Array.from({ length: 8 }, (_, i) => `{"u":${i}}\n[${i}]`).join('\n')],
+  ];
+  for (const [label, text] of shapes) {
+    const r = await rosettaEncode(text, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === text, `P12 ${label} (exact)`, `${r.member} ${r.outTokens}/${r.inTokens} [${r.systems.join(',')}]`);
+    ok(r.outTokens <= r.inTokens, `P12 ${label} (never-worse)`, `${r.outTokens}/${r.inTokens}`);
+  }
+
+  // head-collision guard: N<m>J: (J-composed) vs N<m>:J (field delim J)
+  {
+    const fld = 'aJ1\nbJ2\ncJ3\ndJ4\neJ5';
+    const r = await rosettaEncode(fld, 'o200k_base');
+    const jHead = /N\d+J:/.test(r.wire);
+    const fieldHead = /N\d+:J\n/.test(r.wire);
+    ok(rosettaDecode(r.wire, 'o200k_base') === fld && !(jHead && fieldHead), 'P12 J-flag vs J-delimiter heads disjoint', `jHead=${jHead} fieldHead=${fieldHead}`);
+  }
+
+  // malformed N<m>J: wires never throw
+  {
+    const bads = [
+      'ぁN3J:\na=①\n#0:1:3ぁ',
+      'ぁN3J:\nnot kv at all\n#0:1:3ぁ',
+      'ぁN2J:\na=1\nぁ',
+      'ぁN3J:\na=①\n@0-0ぁ',
+      'ぁN3J:ぁ',
+    ];
+    let noThrow = true;
+    for (const b of bads) {
+      try { rosettaDecode(b, 'o200k_base'); } catch { noThrow = false; }
+    }
+    ok(noThrow, 'P12 decode never throws on malformed N<m>J:/@lo-hi wires', `${bads.length} shapes`);
+  }
+
+  // fuzz: JSON-object + range-metachar soaked docs
+  {
+    const N = 40;
+    let seed = 1928374650;
+    const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+    const keys = ['a', 'b', 'msg', 'ts', 'n', 'v'];
+    let fuzzOk = true;
+    let neverWorse = 0;
+    for (let i = 0; i < N; i++) {
+      let doc = '';
+      const lines = 3 + Math.floor(rnd() * 12);
+      for (let l = 0; l < lines; l++) {
+        if (rnd() < 0.7) {
+          const k1 = keys[Math.floor(rnd() * keys.length)];
+          const k2 = keys[Math.floor(rnd() * keys.length)];
+          const v1 = Math.floor(rnd() * 40);
+          const v2 = Math.floor(rnd() * 1000);
+          doc += `{"${k1}":${v1},"${k2}":${v2}}\n`;
+        } else {
+          doc += `row ${Math.floor(rnd() * 50)} - ${Math.floor(rnd() * 50)}\n`;
+        }
+      }
+      const r = await rosettaEncode(doc, 'o200k_base');
+      if (!(r.exact && rosettaDecode(r.wire, 'o200k_base') === doc)) { fuzzOk = false; console.log('    fuzz fail:', JSON.stringify(doc.slice(0, 90))); }
+      if (r.outTokens <= r.inTokens || r.member === 'forced-wrap') neverWorse++;
+    }
+    ok(fuzzOk, 'P12 fuzz exact on JSON/range-soaked docs (40)');
+    ok(neverWorse === N, 'P12 fuzz never-worse', `${neverWorse}/${N}`);
+  }
+
+  // determinism on the J-composed lane
+  {
+    const doc = Array.from({ length: 20 }, (_, i) => `{"ts":"2026-07-1${i % 10}T12:0${i % 6}:00Z","n":${i}}`).join('\n');
+    const a1 = await rosettaEncode(doc, 'o200k_base');
+    const a2 = await rosettaEncode(doc, 'o200k_base');
+    ok(a1.wire === a2.wire && a1.outTokens === a2.outTokens, 'P12 determinism on J-composed lane', `${a1.member} ${a1.outTokens}`);
+  }
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }

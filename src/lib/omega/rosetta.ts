@@ -523,7 +523,23 @@ function renderSpec(vals: string[], enc: EncodingName): string | null {
     if (cyc) { period = p; break; }
   }
   const cycled = period < core.length ? core.slice(0, period) : core;
-  const cycleSpec = (pre ? '^' + pre : '') + (suf ? '$' + suf : '') + '@' + cycled.join('|');
+  // Range body: 3+ consecutive canonical non-negative integers compress to
+  // 'lo-hi'. Safe from collision: a D-run value is pure digits (no '-'), and
+  // a multi-value literal body always contains '|' — so a body matching
+  // ^\d+-\d+$ can only be a range.
+  let cycBody: string;
+  if (
+    cycled.length >= 3 &&
+    cycled.every((v) => /^\d+$/.test(v) && String(Number(v)) === v)
+  ) {
+    const ns = cycled.map(Number);
+    cycBody = ns.every((n, i) => i === 0 || n === ns[i - 1] + 1)
+      ? String(ns[0]) + '-' + String(ns[ns.length - 1])
+      : cycled.join('|');
+  } else {
+    cycBody = cycled.join('|');
+  }
+  const cycleSpec = (pre ? '^' + pre : '') + (suf ? '$' + suf : '') + '@' + cycBody;
   const cands = [arithSpec, cycleSpec].filter((c): c is string => c !== null);
   if (cands.length === 0) return null;
   return cands.reduce((a, b) => (countTokens(b, enc) < countTokens(a, enc) ? b : a));
@@ -555,7 +571,18 @@ export function parseSpec(spec: string): ((i: number) => string) | null {
     };
   }
   if (rest.startsWith('@')) {
-    const vals = rest.slice(1).split('|');
+    const body = rest.slice(1);
+    let vals: string[];
+    const rm = /^(\d+)-(\d+)$/.exec(body);
+    if (rm !== null) {
+      const lo = Number(rm[1]);
+      const hi = Number(rm[2]);
+      // canonical form only; hi > lo (a 1-value cycle is never emitted)
+      if (String(lo) !== rm[1] || String(hi) !== rm[2] || hi <= lo) return null;
+      vals = Array.from({ length: hi - lo + 1 }, (_, k) => String(lo + k));
+    } else {
+      vals = body.split('|');
+    }
     if (vals.length === 0) return null;
     return (i: number) => pre + vals[i % vals.length] + suf;
   }
@@ -661,16 +688,38 @@ function decodeSpanForG1(
   if (nl < 2) return null;
   const head = payload.slice(0, nl);
   const rest = payload.slice(nl + 1);
+  const jm = /^(\d+)J:$/.exec(head); // 'N<m>J:' — J-composed signature
   const dd = head.indexOf('::');
-  const sigMode = (dd >= 0 && dd === head.length - 3) || head.indexOf(':') === head.length - 1; // 'N<m>::<s>' or 'N<m>:'
+  const sigMode = jm === null && ((dd >= 0 && dd === head.length - 3) || head.indexOf(':') === head.length - 1); // 'N<m>::<s>' or 'N<m>:'
   const stride = dd >= 0 && dd === head.length - 3 ? Number(head[head.length - 1]) : 1;
   const ci = head.indexOf(':');
-  const fieldMode = ci > 0 && !sigMode;
-  const m = Number(fieldMode || sigMode ? head.slice(0, dd >= 0 ? dd : ci) : head);
+  const fieldMode = jm === null && ci > 0 && !sigMode;
+  const m = Number(jm !== null ? jm[1] : fieldMode || sigMode ? head.slice(0, dd >= 0 ? dd : ci) : head);
   const d = fieldMode ? head[ci + 1] : '\n';
   if (!Number.isSafeInteger(m) || m < 1 || (fieldMode && (d === undefined || d.length !== 1 || /[0-9]/.test(d)))) return null;
   if (sigMode && !(stride >= 1 && stride <= 3 && m % stride === 0)) return null;
   const outL: string[] = [];
+  if (jm !== null) {
+    const snl = rest.indexOf('\n');
+    if (snl < 0) return null;
+    const template = rest.slice(0, snl);
+    const specs = rest.slice(snl + 1).split(' ').filter((x) => x !== '');
+    const fns = specs.map((sp) => parseSpec(sp));
+    if (fns.length === 0 || fns.some((f) => f === null)) return null;
+    if ([...template].some((ch) => SLOT_GLYPHS.indexOf(ch) >= fns.length)) return null;
+    for (let r = 0; r < m; r++) {
+      let line2 = '';
+      for (const ch of template) {
+        const gi = SLOT_GLYPHS.indexOf(ch);
+        line2 += gi >= 0 ? (fns[gi]!(r) as string) : ch;
+      }
+      const pairs = parseKvPayload(expandBody(line2, mark, regionByGlyph, phraseByGlyph, sep));
+      const json = pairs === null ? null : unfoldJsonPairs(pairs);
+      if (json === null) return null;
+      outL.push(json);
+    }
+    return outL.join('\n');
+  }
   if (sigMode) {
     const templates: string[] = [];
     let cursor = 0;
@@ -934,17 +983,41 @@ function expandBody(
           if (nl > 1) {
             const head = payload.slice(0, nl);
             const rest = payload.slice(nl + 1);
+            const jm = /^(\d+)J:$/.exec(head); // 'N<m>J:' — J-composed signature
             const dd = head.indexOf('::');
-            const sigMode = (dd >= 0 && dd === head.length - 3) || head.indexOf(':') === head.length - 1; // 'N<m>::<s>' or 'N<m>:'
+            const sigMode = jm === null && ((dd >= 0 && dd === head.length - 3) || head.indexOf(':') === head.length - 1); // 'N<m>::<s>' or 'N<m>:'
             const stride = dd >= 0 && dd === head.length - 3 ? Number(head[head.length - 1]) : 1;
             const ci = head.indexOf(':');
-            const fieldMode = ci > 0 && !sigMode;
-            const m = Number(fieldMode || sigMode ? head.slice(0, dd >= 0 ? dd : ci) : head);
+            const fieldMode = jm === null && ci > 0 && !sigMode;
+            const m = Number(jm !== null ? jm[1] : fieldMode || sigMode ? head.slice(0, dd >= 0 ? dd : ci) : head);
             const d = fieldMode ? head[ci + 1] : '\n';
             if (Number.isSafeInteger(m) && m >= 1 && m <= 100000 && !(fieldMode && /[0-9\n]/.test(d)) && (!sigMode || (stride >= 1 && stride <= 3 && m % stride === 0))) {
               let ok = true;
               const rebuilt: string[] = [];
-              if (sigMode) {
+              if (jm !== null) {
+                const secondNl = rest.indexOf('\n');
+                if (secondNl < 0) ok = false;
+                if (ok) {
+                  const template = rest.slice(0, secondNl);
+                  const specs = rest.slice(secondNl + 1).split(' ').filter((x) => x !== '');
+                  const fns = specs.map(parseSpec);
+                  if (specs.length === 0 || fns.some((f) => f === null) || specs.length > SLOT_GLYPHS.length) ok = false;
+                  if (ok && [...template].some((ch) => SLOT_GLYPHS.indexOf(ch) >= specs.length)) ok = false; // slot out of range
+                  if (ok) {
+                    for (let r = 0; r < m; r++) {
+                      let line2 = '';
+                      for (const ch of template) {
+                        const si = SLOT_GLYPHS.indexOf(ch);
+                        line2 += si >= 0 ? (fns as Array<(i: number) => string>)[si](r) : ch;
+                      }
+                      const pairs = parseKvPayload(expandBody(line2, mark, regionByGlyph, phraseByGlyph, sep));
+                      const json = pairs === null ? null : unfoldJsonPairs(pairs);
+                      if (json === null) { ok = false; break; }
+                      rebuilt.push(json);
+                    }
+                  }
+                }
+              } else if (sigMode) {
                 const templates: string[] = [];
                 let cursor = 0;
                 for (let t = 0; t < stride && ok; t++) {
@@ -1259,6 +1332,45 @@ export function rosettaTranspose(
     // signatures — keeps headers out of row families). G1 against the SOURCE
     // run; measured profitability against the transformed run.
     {
+      // (a0) J-composed signature family (R4.1): a run of JSON-object lines
+      // transposes each line to J pair form FIRST (rule 2 — no braces,
+      // quotes or colons), then the pair lines signature-fold with inline
+      // slots under the head flag N<m>J:. Timestamps stay EXTENDED here:
+      // the basic TS form would merge the varying digits into long runs.
+      // The rebuilt pair line decodes as a J body (values may carry region/
+      // phrase glyphs and nested spans, expanded like any body).
+      if (lines[li].startsWith('{')) {
+        let j2 = li;
+        const virt: string[] = [];
+        while (j2 < lines.length && lines[j2].startsWith('{')) {
+          const prs = foldJsonLine(lines[j2]);
+          if (prs === null) break;
+          const kv = prs.map((x) => `${x.key}=${x.val}`).join(' ');
+          const back = parseKvPayload(kv);
+          if (back === null || unfoldJsonPairs(back) !== lines[j2]) break;
+          virt.push(kv);
+          j2++;
+        }
+        if (j2 - li >= FAMILY_MIN) {
+          const span = signatureFold(virt, mark, enc, 1);
+          if (span !== null) {
+            // splice the J flag in before the head's ':' (mark+'N'+m+':')
+            const at = 2 + String(j2 - li).length;
+            const jSpan = span.slice(0, at) + 'J' + span.slice(at);
+            const srcRun = srcLines.slice(li, j2);
+            const rebuilt = decodeSpanForG1(jSpan, mark, regionByGlyph, phraseByGlyph, sep);
+            const profitable = !measure || countTokens(jSpan, enc) < countTokens(lines.slice(li, j2).join('\n'), enc);
+            if (rebuilt !== null && rebuilt === srcRun.join('\n') && profitable) {
+              flushCsv();
+              outLines.push(jSpan);
+              systems.add('J');
+              systems.add('N');
+              li = j2 - 1;
+              continue;
+            }
+          }
+        }
+      }
       // (a) identical-run family
       let j = li;
       while (j < lines.length && lines[j] === lines[li]) j++;
@@ -1874,7 +1986,7 @@ async function rosettaEncodeUncached(
 export function rosettaDecoderPrompt(): string {
   const pool = rosettaPool('o200k_base');
   return [
-    '# ⟿ ROSETTA-R4 — byte-exact notational transposition wire',
+    '# ⟿ ROSETTA-R4.1 — byte-exact notational transposition wire',
     'A ROSETTA message is: <glyph><body> — the FIRST character is the mark',
     'glyph and the body follows IMMEDIATELY (no newline after the mark). The',
     'mark comes from the ROSETTA glyph pool (version-stable, tokenizer-verified',
@@ -1918,8 +2030,10 @@ export function rosettaDecoderPrompt(): string {
     '   slot values for line i: #s1:t1:c1;s2:t2:c2;… walks arithmetic',
     '   segments (value = start + stride*k within each segment of c lines);',
     '   optionally prefixed ^pre and/or suffixed $suf, and @a|b|c cycles a',
-    '   literal list (value = pre + vals[i mod n] + suf). Rebuild each line',
-    '   by substituting slots into the template and joining with the delim.',
+    '   literal list (value = pre + vals[i mod n] + suf). A cycle body of',
+    '   the form lo-hi (canonical integers, hi > lo) is the inclusive range',
+    '   lo..hi. Rebuild each line by substituting slots into the template',
+    '   and joining with the delim.',
     '3f. marker + A + start:stride:count + newline + unit + newline + delim +',
     '   marker → an arithmetic run: unit+start, unit+(start+stride), …',
     '   (count terms) joined by the single-char delimiter.',
@@ -1934,6 +2048,12 @@ export function rosettaDecoderPrompt(): string {
     '   line) + newline + specs + marker → a STRIDE FAMILY: line i uses',
     '   template[i mod s]; its slots evaluate at floor(i/s). Two slots with',
     '   identical value sequences share one glyph and one spec.',
+    '3j. marker + N + count + J + \':\' + newline + template + newline +',
+    '   specs + marker → a J-SIGNATURE FAMILY: like 3h, but the template is',
+    '   a J pair line (key=value space-joined, rule 2). Substitute the',
+    '   slots, then decode the rebuilt line as a J span body — values may',
+    '   carry region/phrase glyphs and nested timestamp spans, expanded',
+    '   like any body — yielding one JSON object line per record.',
     'W-wires: when the body is preceded by <flag>\\n right after the mark',
     '(the phrase flag, pool[k+1+RNS-1 size]), every Hangul syllable of the',
     'PHRASEBOOK-φ1 codebook (versioned in src/lib/omega/phrase.ts) in the body',
@@ -2417,6 +2537,49 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       name: 'E7 CALYX cage (prompt-native members only)',
       pass: caged && docsK && docsSig,
       details: `members seen: ${[...seen].join(',')} · κ docs=${docsK} · N:: docs=${docsSig}`,
+    });
+    // E8: range-body cycle — consecutive integers compress to lo-hi
+    const rg = Array.from({ length: 12 }, (_, i) => `a,${i % 10}`).join('\n');
+    const rE8 = await rosettaEncode(rg, enc);
+    out.push({
+      name: 'E8 range-body cycle (@lo-hi)',
+      pass: rE8.exact && rosettaDecode(rE8.wire, enc) === rg && rE8.wire.includes('@0-9') && rE8.outTokens < rE8.inTokens,
+      details: `${rE8.inTokens}→${rE8.outTokens} range=${rE8.wire.includes('@0-9')}`,
+    });
+
+    // E9: J-composed signature family fires (N<m>J: head)
+    const rE9 = await rosettaEncode(jl, enc);
+    out.push({
+      name: 'E9 J-composed family (N<m>J:)',
+      pass: rE9.exact && rosettaDecode(rE9.wire, enc) === jl && rE9.systems.includes('J') && rE9.systems.includes('N') && /N\d+J:/.test(rE9.wire) && rE9.outTokens < rE9.inTokens,
+      details: `${rE9.inTokens}→${rE9.outTokens} systems=[${rE9.systems.join(',')}]`,
+    });
+
+    // E10: J-composed with region-glyph values (R composed inside J)
+    const jreg = Array.from({ length: 6 }, (_, i) => `{"region":"us-east-1","n":${i}}`).join('\n');
+    const rE10 = await rosettaEncode(jreg, enc);
+    out.push({
+      name: 'E10 J-composed with region values',
+      pass: rE10.exact && rosettaDecode(rE10.wire, enc) === jreg && rE10.systems.includes('J') && rE10.systems.includes('N') && rE10.outTokens < rE10.inTokens,
+      details: `${rE10.inTokens}→${rE10.outTokens} systems=[${rE10.systems.join(',')}]`,
+    });
+
+    // E11: range body only for canonical non-negative runs
+    const rg2 = Array.from({ length: 9 }, (_, i) => `b,${5 + (i % 5)}`).join('\n');
+    const rE11 = await rosettaEncode(rg2, enc);
+    out.push({
+      name: 'E11 range body @5-9 round-trip',
+      pass: rE11.exact && rosettaDecode(rE11.wire, enc) === rg2 && rE11.wire.includes('@5-9'),
+      details: `${rE11.inTokens}→${rE11.outTokens}`,
+    });
+
+    // E12: negative/mixed cycle values never misparse as ranges
+    const rg3 = Array.from({ length: 8 }, (_, i) => `c,${(i % 3) - 3}`).join('\n');
+    const rE12 = await rosettaEncode(rg3, enc);
+    out.push({
+      name: 'E12 negative cycles stay unambiguous',
+      pass: rE12.exact && rosettaDecode(rE12.wire, enc) === rg3,
+      details: `${rE12.inTokens}→${rE12.outTokens}`,
     });
   } catch (e) {
     out.push({ name: 'E1 signature family (inline digit slots)', pass: false, details: (e as Error).message });
