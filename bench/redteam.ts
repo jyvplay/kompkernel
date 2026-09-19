@@ -868,9 +868,37 @@ async function p13() {
   }
 }
 
+async function p14() {
+  console.log('P14 — ASTRAL-A1 dictionary & symbol-folding adversarial shapes');
+  const { astralEncode, astralDecode, astralSelfTest, ASTRAL_DICTIONARY_V1 } = await import('@/lib/omega/astral');
+
+  const tests = astralSelfTest('o200k_base');
+  for (const t of tests) {
+    ok(t.pass, `ASTRAL self-test: ${t.name}`, t.details);
+  }
+
+  const phraseSample = ASTRAL_DICTIONARY_V1[0] + '. ' + ASTRAL_DICTIONARY_V1[1] + '.';
+  const r = astralEncode(phraseSample, 'o200k_base');
+  const back = astralDecode(r.wire, 'o200k_base');
+  ok(r.exact && back === phraseSample && r.outTokens < r.inTokens, 'ASTRAL folds standard dictionary phrases', `${r.inTokens} -> ${r.outTokens}`);
+
+  // Literal wrap
+  const literalSrc = 'αsome leading literal α sentinel text';
+  const rLit = astralEncode(literalSrc, 'o200k_base');
+  const backLit = astralDecode(rLit.wire, 'o200k_base');
+  ok(rLit.exact && backLit === literalSrc && rLit.wire.startsWith('αα'), 'ASTRAL literal sentinel wrap roundtrip');
+
+  // Decode never throws on bad inputs
+  let noThrow = true;
+  for (const g of ['α', 'αα', 'ααα', 'α\u0391\u0392\u0393', 'αinvalid_glyph_here_12345']) {
+    try { astralDecode(g, 'o200k_base'); } catch { noThrow = false; }
+  }
+  ok(noThrow, 'ASTRAL decode never throws on malformed inputs');
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }

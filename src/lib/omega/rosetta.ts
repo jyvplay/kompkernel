@@ -1239,7 +1239,7 @@ function expandBody(
           ];
           if (Number.isSafeInteger(sIdx) && sIdx >= 0 && sIdx < sentences.length) {
             out += sentences[sIdx];
-            i = payloadEnd;
+            i = payloadEnd + 1;
             continue;
           }
         }
