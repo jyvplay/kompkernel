@@ -126,3 +126,52 @@ export const LUMEN_SYSTEM_PROMPT = [
   'The legend ends at the repeated divider line. Expand legend entries bottom-to-top.',
   'Everything after the divider is the message. Reconstruction is exact.',
 ].join('\n');
+
+export interface LumenSelfTestResult {
+  name: string;
+  pass: boolean;
+  details: string;
+}
+
+export function lumenSelfTest(enc: EncodingName = 'o200k_base'): LumenSelfTestResult[] {
+  const out: LumenSelfTestResult[] = [];
+  const testCases = [
+    {
+      name: 'Structured JSON/CSV schema test',
+      text: Array.from({ length: 6 }, (_, i) =>
+        `{"id":${i + 1},"service":"auth-gateway","status":"HEALTHY","latency_ms":${12 + i * 3},"region":"us-east-1"}`
+      ).join('\n'),
+    },
+    {
+      name: 'Repetitive log timestamp and status test',
+      text: Array.from({ length: 8 }, (_, i) =>
+        `2026-09-18T10:15:${String(i * 5).padStart(2, '0')}Z [INFO] worker-${i % 2} processed packet batch size=100 ok=true`
+      ).join('\n'),
+    },
+    {
+      name: 'CJK repetitive prose test',
+      text: '系统运行正常。数据包处理完成。系统运行正常。数据包处理完成。系统运行正常。数据包处理完成。',
+    },
+    {
+      name: 'Chaotic heterogeneous text test',
+      text: 'Summary: worker node restarted.\nservice,env,status\ningest,prod,ok\nquery,prod,ok\n{"event":"restart","count":1}\n注意: 系统加载完成。',
+    },
+  ];
+
+  for (const tc of testCases) {
+    try {
+      const res = lumenEncode(tc.text, enc);
+      const dec = lumenDecode(res.wire);
+      const pass = res.exact && dec === tc.text;
+      out.push({
+        name: tc.name,
+        pass,
+        details: `${res.mode} · ${res.inTokens}→${res.outTokens} tok (${res.savingsPct.toFixed(1)}%) · ${res.entries.length} entries`,
+      });
+    } catch (e) {
+      out.push({ name: tc.name, pass: false, details: (e as Error).message });
+    }
+  }
+
+  return out;
+}

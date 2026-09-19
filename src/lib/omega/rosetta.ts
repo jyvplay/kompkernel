@@ -937,7 +937,7 @@ function expandBody(
         }
       }
 
-      // K — Known-Form Frame Templates (K0, K1, K2, K3)
+      // K — Known-Form Frame Templates (K1, K2, K3)
       if (s[i + 1] === 'K') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
@@ -947,33 +947,6 @@ function expandBody(
             const formHead = payload.slice(0, col);
             const formId = Number(formHead);
             const rest = payload.slice(col + 1);
-            if (formId === 0) {
-              const nl = rest.indexOf('\n');
-              const count = Number(nl > 0 ? rest.slice(0, nl) : rest);
-              const specsStr = nl > 0 ? rest.slice(nl + 1) : '';
-              if (Number.isSafeInteger(count) && count >= 1 && count <= 1000) {
-                const specs = specsStr.split('\n').filter((x) => x !== '');
-                const fns = specs.map((sp) => parseK0Spec(sp));
-                if (!fns.some((f) => f === null)) {
-                  const cards: string[] = [];
-                  for (let r = 0; r < count; r++) {
-                    const idVal = fns[0]!(r);
-                    const evVal = fns[1]!(r);
-                    const acVal = fns[2]!(r);
-                    const ntVal = fns[3]!(r);
-                    cards.push(
-                      `### Incident review card ${idVal}\n` +
-                      `- Evidence retained exactly for model audit: ${evVal}\n` +
-                      `- Action selected by operator: ${acVal}\n` +
-                      `- 中文复核备注: ${ntVal}`
-                    );
-                  }
-                  out += cards.join('\n');
-                  i = payloadEnd + 1;
-                  continue;
-                }
-              }
-            }
             if (formId === 1) {
               const count = Number(rest);
               if (Number.isSafeInteger(count) && count >= 1 && count <= 1000) {
@@ -2258,7 +2231,6 @@ export function rosettaDecoderPrompt(): string {
     '3t. marker + K1:count + marker → canonical mixed triage digest with count cards.',
     '3u. marker + K2:count + marker → procedural scenario digest with count signal cards.',
     '3v. marker + K3:count + marker → procedural step chat transcript with count turns.',
-    '3w. marker + K4:1 + marker → chaotic heterogeneous protocol frame digest.',
     'W-wires: when the body is preceded by <flag>\\n right after the mark',
     '(the phrase flag, pool[k+1+RNS-1 size]), every Hangul syllable of the',
     'PHRASEBOOK-φ1 codebook (versioned in src/lib/omega/phrase.ts) in the body',
@@ -2831,19 +2803,6 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       details: `${rK3.member} ${rK3.inTokens}→${rK3.outTokens} (${rK3.savingsPct.toFixed(1)}%)`,
     });
 
-    // K0: Incident Review Cards parameterized form frame (K0)
-    const k0Text = Array.from({ length: 8 }, (_, i) =>
-      `### Incident review card ${String(i + 1).padStart(2, '0')}\n` +
-      `- Evidence retained exactly for model audit: ${['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'][i % 5]}\n` +
-      `- Action selected by operator: ${['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'][i % 5]}\n` +
-      `- 中文复核备注: ${['正常', '偏高', '回落', '待查', '完成'][i % 5]}`
-    ).join('\n');
-    const rK0 = await rosettaEncode(k0Text, enc);
-    out.push({
-      name: 'K0 incident review card parameterized form frame exact',
-      pass: rK0.exact && rosettaDecode(rK0.wire, enc) === k0Text && rK0.systems.includes('K'),
-      details: `${rK0.member} ${rK0.inTokens}→${rK0.outTokens} (${rK0.savingsPct.toFixed(1)}%)`,
-    });
   } catch (e) {
     out.push({ name: 'E1 signature family (inline digit slots)', pass: false, details: (e as Error).message });
   }

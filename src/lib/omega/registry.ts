@@ -52,6 +52,7 @@ import { rosettaEncode } from './rosetta';
 import { kappaEncode } from './kappa';
 import { phraseEncode } from './phrase';
 import { tauEncode } from './tau';
+import { lumenEncode } from './lumen';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -329,6 +330,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = tauEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'lumen',
+      label: '💡 LUMEN-L1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = lumenEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
