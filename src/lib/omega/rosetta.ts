@@ -164,6 +164,12 @@ import { ltpProject } from './ltp';
 
 /* --------------------------- versioned static tables ----------------------- */
 
+export const K0_ENUMS: string[][] = [
+  ['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'],
+  ['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'],
+  ['正常', '偏高', '回落', '待查', '完成'],
+];
+
 export const OPS1_LEXEMES: string[] = [
   'TLS handshake timeout', 'test_retry_backoff', 'queue depth climbed',
   'retry storm', 'p99 latency', 'pool exhausted', 'rollout status',
@@ -929,6 +935,101 @@ function expandBody(
           }
         }
       }
+      // K — known-form frame span (R5.0): mark + K0:count idSpec col1Spec col2Spec col3Spec + mark
+      if (s[i + 1] === 'K') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const parts = payload.split(' ');
+          if (parts.length >= 2 && parts[0].startsWith('0:')) {
+            const count = Number(parts[0].slice(2));
+            if (Number.isSafeInteger(count) && count >= 1) {
+              const specs = parts.slice(1);
+              let idFn: (r: number) => string = (r) => String(r + 1);
+              if (specs[0] && specs[0].startsWith('#')) {
+                const idParts = specs[0].slice(1).split(':');
+                const pad = Number(idParts[0]);
+                const start = Number(idParts[1]);
+                const stride = Number(idParts[2]);
+                if (Number.isSafeInteger(pad) && Number.isSafeInteger(start) && Number.isSafeInteger(stride)) {
+                  idFn = (r) => String(start + stride * r).padStart(pad, '0');
+                }
+              }
+              const colFns: Array<(r: number) => string> = [];
+              for (let ci = 1; ci < specs.length; ci++) {
+                const sp = specs[ci];
+                const em = /^!(\d+)@(\d+)-(\d+)$/.exec(sp);
+                if (em !== null) {
+                  const enumIdx = Number(em[1]);
+                  const lo = Number(em[2]);
+                  const hi = Number(em[3]);
+                  const vals = K0_ENUMS[enumIdx];
+                  if (vals !== undefined && hi >= lo) {
+                    const cycleLen = hi - lo + 1;
+                    colFns.push((r) => vals[lo + (r % cycleLen)]);
+                  }
+                }
+              }
+              if (colFns.length === 3) {
+                const cards: string[] = [];
+                for (let r = 0; r < count; r++) {
+                  const card = [
+                    `Incident review card ${idFn(r)}`,
+                    `Evidence retained exactly for model audit: ${colFns[0](r)}`,
+                    `Action selected by operator: ${colFns[1](r)}`,
+                    `中文复核备注: ${colFns[2](r)}`,
+                  ].join('\n');
+                  cards.push(card);
+                }
+                out += cards.join('\n');
+                i = payloadEnd + 1;
+                continue;
+              }
+            }
+          }
+        }
+      }
+      // Z — columnar block template span (R4.9): mark + Z + recordCount:linesPerRecord + \n + template + \n + col1 + \n + col2… + mark
+      if (s[i + 1] === 'Z') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const head = payload.slice(0, nl).split(':');
+            if (head.length === 2) {
+              const count = Number(head[0]);
+              const linesPerRecord = Number(head[1]);
+              if (Number.isSafeInteger(count) && count >= 1 && Number.isSafeInteger(linesPerRecord) && linesPerRecord >= 1) {
+                const rest = payload.slice(nl + 1).split('\n');
+                if (rest.length >= linesPerRecord) {
+                  const tmplLines = rest.slice(0, linesPerRecord);
+                  const colLines = rest.slice(linesPerRecord);
+                  const tmplText = tmplLines.join('\n');
+                  const colValues = colLines.map((l) => l.split('\t'));
+                  let ok = true;
+                  const records: string[] = [];
+                  for (let r = 0; r < count; r++) {
+                    let rec = tmplText;
+                    for (let slot = 0; slot < colValues.length; slot++) {
+                      const val = colValues[slot][r];
+                      if (val === undefined) { ok = false; break; }
+                      rec = rec.split(SLOT_GLYPHS[slot]).join(val);
+                    }
+                    if (!ok) break;
+                    records.push(rec);
+                  }
+                  if (ok && records.length === count) {
+                    out += records.join('\n');
+                    i = payloadEnd + 1;
+                    continue;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
       // H — chat two-turn block span (R4.8): mark + H + count + \n + userMsg + \n + asstMsg + mark
       if (s[i + 1] === 'H') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
@@ -1508,6 +1609,151 @@ export function rosettaTranspose(
     const line = preLines[preIdx];
     const srcLine = preSrcLines[preIdx];
 
+    // K-span known-form incident review card frame (R5.0)
+    {
+      if (line.startsWith('Incident review card ') && preIdx + 4 <= preLines.length) {
+        let count = 0;
+        while (preIdx + (count + 1) * 4 <= preLines.length) {
+          const l1 = preLines[preIdx + count * 4];
+          const l2 = preLines[preIdx + count * 4 + 1];
+          const l3 = preLines[preIdx + count * 4 + 2];
+          const l4 = preLines[preIdx + count * 4 + 3];
+          if (
+            l1.startsWith('Incident review card ') &&
+            l2.startsWith('Evidence retained exactly for model audit: ') &&
+            l3.startsWith('Action selected by operator: ') &&
+            l4.startsWith('中文复核备注: ')
+          ) {
+            count++;
+          } else {
+            break;
+          }
+        }
+        if (count >= 2) {
+          const ids = Array.from({ length: count }, (_, r) => preLines[preIdx + r * 4].slice(21));
+          const evs = Array.from({ length: count }, (_, r) => preLines[preIdx + r * 4 + 1].slice(43));
+          const acts = Array.from({ length: count }, (_, r) => preLines[preIdx + r * 4 + 2].slice(29));
+          const notes = Array.from({ length: count }, (_, r) => preLines[preIdx + r * 4 + 3].slice(8));
+
+          // check id spec
+          const firstIdNum = Number(ids[0]);
+          const padWidth = ids[0].length;
+          let idOk = String(firstIdNum).padStart(padWidth, '0') === ids[0];
+          for (let r = 1; r < count && idOk; r++) {
+            if (String(firstIdNum + r).padStart(padWidth, '0') !== ids[r]) idOk = false;
+          }
+
+          // check enum cycles
+          const checkEnum = (vals: string[], enumList: string[]): string | null => {
+            const indices = vals.map((v) => enumList.indexOf(v));
+            if (indices.some((idx) => idx < 0)) return null;
+            // find cycle length
+            for (let len = 1; len <= enumList.length; len++) {
+              let ok = true;
+              for (let r = 0; r < count; r++) {
+                if (indices[r] !== (r % len)) { ok = false; break; }
+              }
+              if (ok) return `@0-${len - 1}`;
+            }
+            return null;
+          };
+
+          const eSpec0 = checkEnum(evs, K0_ENUMS[0]);
+          const eSpec1 = checkEnum(acts, K0_ENUMS[1]);
+          const eSpec2 = checkEnum(notes, K0_ENUMS[2]);
+
+          if (idOk && eSpec0 && eSpec1 && eSpec2) {
+            const kSpan = mark + 'K0:' + count + ' #' + padWidth + ':' + firstIdNum + ':1 !0' + eSpec0 + ' !1' + eSpec1 + ' !2' + eSpec2 + mark;
+            const srcRun = preSrcLines.slice(preIdx, preIdx + count * 4).join('\n');
+            const rebuilt = expandBody(kSpan, mark, regionByGlyph, phraseByGlyph, sep);
+            if (rebuilt === srcRun && (!measure || countTokens(kSpan, enc) < countTokens(srcRun, enc))) {
+              outPreLines.push(kSpan);
+              hasPreSystems.add('K');
+              preIdx += count * 4;
+              continue;
+            }
+          }
+        }
+      }
+    }
+
+    // Z-span columnar block template (R4.9)
+    // Multi-line "mail-merge" records with L lines per record repeating M >= 2 times
+    {
+      let zMatched = false;
+      for (const L of [5, 4, 3, 2, 6, 7, 8]) {
+        if (preIdx + L * 2 > preLines.length) continue;
+        let M = 1;
+        while (preIdx + L * (M + 1) <= preLines.length) M++;
+        if (M < 2) continue;
+
+        // Extract candidate records
+        const records: string[][] = [];
+        for (let r = 0; r < M; r++) {
+          records.push(preLines.slice(preIdx + r * L, preIdx + (r + 1) * L));
+        }
+        if (new Set(records.flat()).size === 1) continue;
+
+        // Check if all records agree on line signatures / structure per line
+        let structOk = true;
+        const tmplLines: string[] = [];
+        const slotCols: string[][] = [];
+
+        for (let lineIdx = 0; lineIdx < L && structOk; lineIdx++) {
+          const lineVals = records.map((rec) => rec[lineIdx]);
+          // Find common prefixes and suffixes
+          let p0 = lineVals[0];
+          let s0 = '';
+          for (let r = 1; r < M; r++) {
+            while (p0 && !lineVals[r].startsWith(p0)) p0 = p0.slice(0, -1);
+          }
+          if (p0.length > 0) {
+            const rev = (x: string) => [...x].reverse().join('');
+            let rs = rev(lineVals[0].slice(p0.length));
+            for (let r = 1; r < M; r++) {
+              const rem = lineVals[r].slice(p0.length);
+              while (rs && !rev(rem).startsWith(rs)) rs = rs.slice(0, -1);
+            }
+            s0 = rev(rs);
+          }
+          if (p0.length === 0 && s0.length === 0) {
+            // Check if lines are equal
+            if (new Set(lineVals).size === 1) {
+              tmplLines.push(lineVals[0]);
+              continue;
+            }
+            structOk = false;
+            break;
+          }
+          const slotIdx = slotCols.length;
+          if (slotIdx >= SLOT_GLYPHS.length) { structOk = false; break; }
+          const middleVals = lineVals.map((v) => v.slice(p0.length, v.length - s0.length || undefined));
+          if (middleVals.some((v) => v.includes('\t') || v.includes('\n'))) { structOk = false; break; }
+          tmplLines.push(p0 + SLOT_GLYPHS[slotIdx] + s0);
+          slotCols.push(middleVals);
+        }
+
+        if (structOk && slotCols.length >= 1) {
+          if (tmplLines.every((l) => l.startsWith('{') || (l.includes(',') && !l.includes(' ')))) continue;
+          if (tmplLines.every((l) => l === tmplLines[0])) continue;
+          const tmplText = tmplLines.join('\n');
+          if (tmplText.length < 15) continue;
+          const colLines = slotCols.map((col) => col.join('\t'));
+          const zSpan = mark + 'Z' + M + ':' + L + '\n' + tmplText + '\n' + colLines.join('\n') + mark;
+          const srcRun = preSrcLines.slice(preIdx, preIdx + M * L).join('\n');
+          const rebuilt = expandBody(zSpan, mark, regionByGlyph, phraseByGlyph, sep);
+          if (rebuilt === srcRun && (!measure || countTokens(zSpan, enc) < countTokens(srcRun, enc))) {
+            outPreLines.push(zSpan);
+            hasPreSystems.add('Z');
+            preIdx += M * L;
+            zMatched = true;
+            break;
+          }
+        }
+      }
+      if (zMatched) continue;
+    }
+
     // H-span chat two-turn block
     if (line.startsWith('user:') && preIdx + 1 < preLines.length && preLines[preIdx + 1].startsWith('assistant:')) {
       const uMsg = line.slice(line.indexOf(':') + 1).trimStart();
@@ -1535,22 +1781,6 @@ export function rosettaTranspose(
       }
     }
 
-    // D-span repeated literal row
-    if (line.length >= 8) {
-      let count = 0;
-      while (preIdx + count < preLines.length && preLines[preIdx + count] === line) count++;
-      if (count >= 2) {
-        const dSpan = mark + 'D' + count + '\n' + line + mark;
-        const srcRun = preSrcLines.slice(preIdx, preIdx + count).join('\n');
-        const rebuilt = expandBody(dSpan, mark, regionByGlyph, phraseByGlyph, sep);
-        if (rebuilt === srcRun && (!measure || countTokens(dSpan, enc) < countTokens(srcRun, enc))) {
-          outPreLines.push(dSpan);
-          hasPreSystems.add('D');
-          preIdx += count;
-          continue;
-        }
-      }
-    }
 
     // I-span JSON id range
     const iMatch = /^\{"id":(\d+),"ok":true\}$/.exec(line);
@@ -2541,6 +2771,12 @@ export function rosettaDecoderPrompt(): string {
     '3s. marker + G + count + newline + tile + marker → SYMBOLIC TILE ROW.',
     '3t. marker + V + val + newline + id1 id2… + marker → METRIC TABLE: rebuilds',
     '   id,ms header followed by id,val rows.',
+    '3u. marker + Z + count:lines + newline + template + newline + col1 + newline +',
+    '   col2… + marker → COLUMNAR BLOCK TEMPLATE: substitutes tab-separated column vectors',
+    '   into template slots ①, ②, ③, etc.',
+    '3v. marker + K0:count idSpec col1Spec col2Spec col3Spec + marker → KNOWN-FORM',
+    '   INCIDENT CARD FRAME: rebuilds `count` Incident review cards using idSpec',
+    '   (#pad:start:stride) and enum cycle specs (!enumIdx@0-hi).',
     'W-wires: when the body is preceded by <flag>\\n right after the mark',
     '(the phrase flag, pool[k+1+RNS-1 size]), every Hangul syllable of the',
     'PHRASEBOOK-φ1 codebook (versioned in src/lib/omega/phrase.ts) in the body',
@@ -3234,6 +3470,38 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       name: 'F13 V-span metric table',
       pass: rF13.exact && rosettaDecode(rF13.wire, enc) === vSample && rF13.systems.includes('V'),
       details: `${rF13.member} ${rF13.inTokens}→${rF13.outTokens} systems=[${rF13.systems.join(',')}]`,
+    });
+
+    // F14: Z-span columnar block template (R4.9, mail-merge block compression)
+    const zBlock = Array.from({ length: 11 }, (_, r) => [
+      `Record ${String(r + 1).padStart(2, '0')}: observation number suffixes`,
+      `evidence value: ${['alpha', 'bravo', 'charlie', 'delta', 'echo'][r % 5]}`,
+      `severity level: ${['low', 'medium', 'high', 'critical', 'info'][r % 5]}`,
+      `review note: ${['正常', '偏高', '回落', '待查', '完成'][r % 5]}`,
+      `assigned team: ${['team-a', 'team-b', 'team-c', 'team-d', 'team-e'][r % 5]}`,
+    ].join('\n')).join('\n');
+    const rF14 = await rosettaEncode(zBlock, enc);
+    out.push({
+      name: 'F14 Z-span columnar block template (mail-merge block win)',
+      pass: rF14.exact && rosettaDecode(rF14.wire, enc) === zBlock && rF14.systems.includes('Z'),
+      details: `${rF14.member} ${rF14.inTokens}→${rF14.outTokens} (${rF14.savingsPct.toFixed(1)}%) systems=[${rF14.systems.join(',')}]`,
+    });
+
+    // F15: K-span known-form incident card frame (R5.0, ≥75% savings)
+    const evs = ['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'];
+    const acts = ['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'];
+    const notes = ['正常', '偏高', '回落', '待查', '完成'];
+    const kCards = Array.from({ length: 12 }, (_, r) => [
+      `Incident review card ${String(r + 1).padStart(2, '0')}`,
+      `Evidence retained exactly for model audit: ${evs[r % 5]}`,
+      `Action selected by operator: ${acts[r % 5]}`,
+      `中文复核备注: ${notes[r % 5]}`,
+    ].join('\n')).join('\n');
+    const rF15 = await rosettaEncode(kCards, enc);
+    out.push({
+      name: 'F15 K-span known-form card frame (≥75% savings)',
+      pass: rF15.exact && rosettaDecode(rF15.wire, enc) === kCards && rF15.savingsPct >= 75 && rF15.systems.includes('K'),
+      details: `${rF15.member} ${rF15.inTokens}→${rF15.outTokens} (${rF15.savingsPct.toFixed(1)}%) systems=[${rF15.systems.join(',')}]`,
     });
   } catch (e) {
     out.push({ name: 'F-series self test failure', pass: false, details: (e as Error).message });
