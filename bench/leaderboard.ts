@@ -82,7 +82,10 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('trie', () => trieEncode(text, enc));
   await run('repair', () => repairEncode(text, enc));
   await run('column', () => columnEncode(text, enc));
-  await run('prometheus', () => compressPrometheusICDM(text, enc));
+  await run('prometheus', async () => {
+    const p = await compressPrometheusICDM(text, enc);
+    return { wire: p.output, decoded: p.decoded, exact: p.exact };
+  });
   await run('eidolon', () => eidolonProject(text, enc));
   await run('nexus', async () => nexusEncode(text, enc));
   await run('veritas', () => veritasEncode(text, enc));
