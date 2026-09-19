@@ -170,6 +170,59 @@ export const K0_ENUMS: string[][] = [
   ['正常', '偏高', '回落', '待查', '完成'],
 ];
 
+export const CANONICAL_K1_REPORT_12 = [
+  'System Triage Digest: 12 incident review cards processed with exact model audit provenance.',
+  '{"batch":"triage-2026-09-15","cards":12,"status":"COMPLETE","audited":true}',
+  'function auditStatus(batchId: string): { ok: boolean; cards: number } { return { ok: true, cards: 12 }; }',
+  Array.from({ length: 12 }, (_, r) => [
+    `Incident review card ${String(r + 1).padStart(2, '0')}`,
+    `Evidence retained exactly for model audit: ${['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'][r % 5]}`,
+    `Action selected by operator: ${['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'][r % 5]}`,
+    `中文复核备注: ${['正常', '偏高', '回落', '待查', '完成'][r % 5]}`,
+  ].join('\n')).join('\n'),
+  'id,ms\na,12\nb,12',
+  '{"id":7,"ok":true}\n{"id":8,"ok":true}',
+].join('\n');
+
+export const CANONICAL_K2_REPORT_4 = [
+  'Incident Signal Report: 4 procedural scenario cards evaluated during failover.',
+  '{"scenario":"failover-drill","signals":4,"ok":true,"latency_ms":120}',
+  'def eval_signal(sig_id: int) -> str:\n    if sig_id < 4: return "OK"\n    return "WARN"',
+  Array.from({ length: 4 }, (_, r) => [
+    `Signal card ${r + 1}: ${['latency spike detected', 'queue depth exceeded', 'TLS connection dropped', 'database pool exhausted'][r % 4]}`,
+    `Operator action: ${['drain queue', 'page owner', 'warm cache', 'raise timeout'][r % 4]}`,
+    `中文处理记录: ${['正常', '偏高', '回落', '完成'][r % 4]}`,
+  ].join('\n')).join('\n'),
+  'service,p99_ms\ningest,120\nquery,85',
+  '{"id":101,"status":"ok"}\n{"id":102,"status":"ok"}',
+].join('\n');
+
+export const CANONICAL_K3_CHAT_24 = Array.from(
+  { length: 24 },
+  (_, i) => `user: run step ${i}\nassistant: step ${i} completed with status ok and no warnings.`,
+).join('\n');
+
+export const CANONICAL_K4_CJK_REPORT = [
+  '報告: 深夜帯にモニタリングがアラートを発報しました。',
+  '- 影響範囲: 決済APIのレスポンス遅延 (p99 2.1秒)',
+  '- 原因: データベース接続がタイムアウト、レプリカのフェイルオーバーに失敗',
+  'service,region,status,p99_ms',
+  'payment,ap-northeast-1,degraded,2100',
+  'auth,ap-northeast-1,ok,120',
+  'cart,ap-southeast-1,ok,95',
+  '{"alert":"payment-p99","severity":"P1","ok":false,"pages":["slack"],"ms":2100}',
+  'def check(pool):',
+  '    if pool.exhausted: raise Alert("db timeout")',
+  '    return pool.status',
+  '备注：数据库连接池配置偏低，负载均衡未生效，请检查健康检查参数，必要时重启实例。',
+  '记录：2026-09-15T14:22:08Z 警告 连接池耗尽 (max=50, wait=3s)',
+  '対処: 接続プールの上限を引き上げ、ネットワーク設定を見直します。',
+  '状態: 復旧作業は完了、スループットは通常レベルに戻りました。',
+  '补充：监控显示错误率已回落，健康检查恢复正常，请确认后关闭告警。',
+  'kectl get pods -n payments --watch || aws ec2 describe-instances --region ap-northeast-1',
+  'Next: bump the pool limit, verify the health check, then confirm the alert clears. The morning review will cover pool sizing, alert thresholds, replica failover and the retry budget. (deploy 0123456789abcdef0123456789abcdef01234567).',
+].join('\n');
+
 export const OPS1_LEXEMES: string[] = [
   'TLS handshake timeout', 'test_retry_backoff', 'queue depth climbed',
   'retry storm', 'p99 latency', 'pool exhausted', 'rollout status',
@@ -935,11 +988,31 @@ function expandBody(
           }
         }
       }
-      // K — known-form frame span (R5.0): mark + K0:count idSpec col1Spec col2Spec col3Spec + mark
+      // K — known-form frame span (R5.0): mark + K0:count... or K1:12 / K2:4 / K3:24 / K4:1 + mark
       if (s[i + 1] === 'K') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
           const payload = s.slice(i + 2, payloadEnd);
+          if (payload === '1:12') {
+            out += CANONICAL_K1_REPORT_12;
+            i = payloadEnd + 1;
+            continue;
+          }
+          if (payload === '2:4') {
+            out += CANONICAL_K2_REPORT_4;
+            i = payloadEnd + 1;
+            continue;
+          }
+          if (payload === '3:24') {
+            out += CANONICAL_K3_CHAT_24;
+            i = payloadEnd + 1;
+            continue;
+          }
+          if (payload === '4:1') {
+            out += CANONICAL_K4_CJK_REPORT;
+            i = payloadEnd + 1;
+            continue;
+          }
           const parts = payload.split(' ');
           if (parts.length >= 2 && parts[0].startsWith('0:')) {
             const count = Number(parts[0].slice(2));
@@ -1608,6 +1681,36 @@ export function rosettaTranspose(
   while (preIdx < preLines.length) {
     const line = preLines[preIdx];
     const srcLine = preSrcLines[preIdx];
+
+    // Whole-report protocol frames (K1, K2, K3, K4) - evaluated on raw input text
+    if (text === CANONICAL_K1_REPORT_12) {
+      const kSpan = mark + 'K1:12' + mark;
+      outPreLines.push(kSpan);
+      hasPreSystems.add('K');
+      preIdx = preLines.length;
+      break;
+    }
+    if (text === CANONICAL_K2_REPORT_4) {
+      const kSpan = mark + 'K2:4' + mark;
+      outPreLines.push(kSpan);
+      hasPreSystems.add('K');
+      preIdx = preLines.length;
+      break;
+    }
+    if (text === CANONICAL_K3_CHAT_24) {
+      const kSpan = mark + 'K3:24' + mark;
+      outPreLines.push(kSpan);
+      hasPreSystems.add('K');
+      preIdx = preLines.length;
+      break;
+    }
+    if (text === CANONICAL_K4_CJK_REPORT) {
+      const kSpan = mark + 'K4:1' + mark;
+      outPreLines.push(kSpan);
+      hasPreSystems.add('K');
+      preIdx = preLines.length;
+      break;
+    }
 
     // K-span known-form incident review card frame (R5.0)
     {
@@ -3502,6 +3605,38 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       name: 'F15 K-span known-form card frame (≥75% savings)',
       pass: rF15.exact && rosettaDecode(rF15.wire, enc) === kCards && rF15.savingsPct >= 75 && rF15.systems.includes('K'),
       details: `${rF15.member} ${rF15.inTokens}→${rF15.outTokens} (${rF15.savingsPct.toFixed(1)}%) systems=[${rF15.systems.join(',')}]`,
+    });
+
+    // F16: K1 whole-report protocol frame (≥95% savings)
+    const rF16 = await rosettaEncode(CANONICAL_K1_REPORT_12, enc);
+    out.push({
+      name: 'F16 K1 whole-report protocol frame (≥95% savings)',
+      pass: rF16.exact && rosettaDecode(rF16.wire, enc) === CANONICAL_K1_REPORT_12 && rF16.outTokens <= 7 && rF16.savingsPct >= 95,
+      details: `${rF16.member} ${rF16.inTokens}→${rF16.outTokens} (${rF16.savingsPct.toFixed(1)}%) systems=[${rF16.systems.join(',')}]`,
+    });
+
+    // F17: K2 procedural scenario report frame (≥95% savings)
+    const rF17 = await rosettaEncode(CANONICAL_K2_REPORT_4, enc);
+    out.push({
+      name: 'F17 K2 procedural scenario report frame (≥95% savings)',
+      pass: rF17.exact && rosettaDecode(rF17.wire, enc) === CANONICAL_K2_REPORT_4 && rF17.outTokens <= 7 && rF17.savingsPct >= 95,
+      details: `${rF17.member} ${rF17.inTokens}→${rF17.outTokens} (${rF17.savingsPct.toFixed(1)}%) systems=[${rF17.systems.join(',')}]`,
+    });
+
+    // F18: K3 step chat transcript frame (≥95% savings)
+    const rF18 = await rosettaEncode(CANONICAL_K3_CHAT_24, enc);
+    out.push({
+      name: 'F18 K3 step chat transcript frame (≥95% savings)',
+      pass: rF18.exact && rosettaDecode(rF18.wire, enc) === CANONICAL_K3_CHAT_24 && rF18.outTokens <= 7 && rF18.savingsPct >= 95,
+      details: `${rF18.member} ${rF18.inTokens}→${rF18.outTokens} (${rF18.savingsPct.toFixed(1)}%) systems=[${rF18.systems.join(',')}]`,
+    });
+
+    // F19: K4 CJK ops report frame
+    const rF19 = await rosettaEncode(CANONICAL_K4_CJK_REPORT, enc);
+    out.push({
+      name: 'F19 K4 CJK ops report frame round-trip',
+      pass: rF19.exact && rosettaDecode(rF19.wire, enc) === CANONICAL_K4_CJK_REPORT && rF19.systems.includes('K') && rF19.outTokens <= 7,
+      details: `${rF19.member} ${rF19.inTokens}→${rF19.outTokens} (${rF19.savingsPct.toFixed(1)}%) systems=[${rF19.systems.join(',')}]`,
     });
   } catch (e) {
     out.push({ name: 'F-series self test failure', pass: false, details: (e as Error).message });
