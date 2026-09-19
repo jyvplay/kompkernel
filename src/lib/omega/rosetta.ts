@@ -170,25 +170,6 @@ import { ltpProject } from './ltp';
  * AWS, Azure and GCP region identifiers are closed, published, versioned
  * enumerations; every entry is measured multi-token in o200k/cl100k.
  */
-export const ROSETTA_CHAOS_900 =
-  'Status: deploy finished, but two pods restart. Queue depth climbed while the retry storm was live; on-call was paged twice during the window.\n' +
-  '- queue depth 14, p99 latency 812ms (spike)\n' +
-  '- flaky test `test_retry_backoff` failed twice on shard 7\n' +
-  '- cache warmup aborted: TLS handshake timeout\n' +
-  'region,dc,hosts,errors\n' +
-  'us-east-1,iad-3,42,0\n' +
-  'eu-west-1,dub-1,17,2\n' +
-  'ap-south-1,bom-2,9,1\n' +
-  '{"job":"sync","retries":3,"ok":false,"warn":["timeout","auth"],"ms":812}\n' +
-  'def run(ctx):\n' +
-  '    for k, v in ctx.items():\n' +
-  '        if v is None: raise ValueError(k)\n' +
-  '    return sum(ctx.values())\n' +
-  '备注：数据库迁移已完成，但缓存预热失败，请检查连接池配置和超时参数，必要时重启实例后再观察。\n' +
-  '日志：2026-09-15T06:02:11Z WARN pool exhausted (max=20, wait=5s)\n' +
-  'kectl rollout status deploy/api --timeout=90s || kubectl get events --sort-by=.ts\n' +
-  'Next steps? Audit the pool config, bump the limits, then rerun. Watch pod memory and the retry budget closely; escalate if the error rate doubles.';
-
 export const RNS1_REGIONS: string[] = [
   // AWS
   'us-east-1', 'us-east-2', 'us-west-1', 'us-west-2',
@@ -936,44 +917,6 @@ function expandBody(
           }
         }
       }
-
-      // K — Known-Form Frame Templates (K1, K2, K3)
-      if (s[i + 1] === 'K') {
-        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
-        if (payloadEnd > 0) {
-          const payload = s.slice(i + 2, payloadEnd);
-          const col = payload.indexOf(':');
-          if (col > 0) {
-            const formHead = payload.slice(0, col);
-            const formId = Number(formHead);
-            const rest = payload.slice(col + 1);
-            if (formId === 1) {
-              const count = Number(rest);
-              if (Number.isSafeInteger(count) && count >= 1 && count <= 1000) {
-                out += generateK1TriageDigest(count);
-                i = payloadEnd + 1;
-                continue;
-              }
-            }
-            if (formId === 2) {
-              const count = Number(rest);
-              if (Number.isSafeInteger(count) && count >= 1 && count <= 1000) {
-                out += generateK2ScenarioDigest(count);
-                i = payloadEnd + 1;
-                continue;
-              }
-            }
-            if (formId === 3) {
-              const count = Number(rest);
-              if (Number.isSafeInteger(count) && count >= 1 && count <= 1000) {
-                out += generateK3StepChat(count);
-                i = payloadEnd + 1;
-                continue;
-              }
-            }
-          }
-        }
-      }
       if (s[i + 1] === 'C') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
@@ -1312,59 +1255,6 @@ function parseKvPayload(payload: string): RosettaKvPair[] | null {
 const MEASURE_CAP = 12_000; // per-span token measurement below this size
 const TRANSPOSE_CAP = 120_000;
 
-export function generateK1TriageDigest(count: number = 12): string {
-  const cards: string[] = [];
-  const evs = ['alpha', 'bravo', 'charlie', 'delta', 'echo'];
-  const acs = ['low', 'medium', 'high', 'critical', 'urgent'];
-  const nts = ['正常', '偏高', '回落', '待查', '完成'];
-  for (let r = 0; r < count; r++) {
-    cards.push(
-      `### Incident review card ${String(r + 1).padStart(2, '0')}\n` +
-      `- Evidence retained exactly for model audit: evidence_${evs[r % evs.length]}\n` +
-      `- Action selected by operator: action_${acs[r % acs.length]}\n` +
-      `- 中文复核备注: 状态${nts[r % nts.length]}`
-    );
-  }
-  return [
-    `Canonical triage digest: ${count} incident-review cards evaluated with zero metadata loss.`,
-    `{"audit":"k1-triage","version":"5.1","records":${count},"status":"verified"}`,
-    'function auditTriage(count: number): boolean {\n    return count === 12;\n}',
-    cards.join('\n'),
-    'id,ms\na,12\nb,12',
-    '{"id":7,"ok":true}\n{"id":8,"ok":true}',
-  ].join('\n');
-}
-
-export function generateK2ScenarioDigest(count: number = 4): string {
-  const cards: string[] = [];
-  const evs = ['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'];
-  const acs = ['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'];
-  const nts = ['正常', '偏高', '回落', '待查', '完成'];
-  for (let r = 0; r < count; r++) {
-    cards.push(
-      `### Signal card ${String(r + 1).padStart(2, '0')}\n` +
-      `- Evidence: ${evs[r % evs.length]}\n` +
-      `- Action: ${acs[r % acs.length]}\n` +
-      `- 中文备注: ${nts[r % nts.length]}`
-    );
-  }
-  return [
-    `Procedural scenario digest: ${count} signal cards extracted with byte-exact recovery.`,
-    `{"scenario":"k2-digest","count":${count},"ok":true}`,
-    'def verify_signals(n):\n    for i in range(n):\n        assert i >= 0',
-    cards.join('\n'),
-    'svc,env,status\ningest,prod,ok\nauth,staging,warn',
-    '{"event":"restart","count":2,"ok":true}',
-  ].join('\n');
-}
-
-export function generateK3StepChat(count: number = 24): string {
-  return Array.from(
-    { length: count },
-    (_, i) => `user: run step ${i}\nassistant: step ${i} completed with status ok and no warnings.`
-  ).join('\n');
-}
-
 /**
  * The transposition itself: region glyphs → JSON folds → comma-table folds →
  * timestamp folds. G1: every span is re-expanded and byte-compared before it
@@ -1391,37 +1281,6 @@ export function rosettaTranspose(
   const sep = pool[k + 2 + RNS1_REGIONS.length]; // Y-span pair separator (R2)
   const measure = text.length <= MEASURE_CAP;
   const phraseByGlyph = folded !== null ? phraseCodebook(enc).byGlyph : null;
-
-  // ---- Whole-Report Protocol Frame Check (K0, K1, K2, K3) -----------------
-  if (text.length >= 100) {
-    for (const count of [12, 10, 8, 6]) {
-      const k1Ref = generateK1TriageDigest(count);
-      if (text === k1Ref) {
-        const wire = mark + mark + 'K1:' + count + mark;
-        if (countTokens(wire, enc) < countTokens(text, enc)) {
-          return { wire, mark, windowStart: k, systems: ['K'] };
-        }
-      }
-    }
-    for (const count of [4, 6, 8, 2]) {
-      const k2Ref = generateK2ScenarioDigest(count);
-      if (text === k2Ref) {
-        const wire = mark + mark + 'K2:' + count + mark;
-        if (countTokens(wire, enc) < countTokens(text, enc)) {
-          return { wire, mark, windowStart: k, systems: ['K'] };
-        }
-      }
-    }
-    for (const count of [24, 16, 12, 8, 48]) {
-      const k3Ref = generateK3StepChat(count);
-      if (text === k3Ref) {
-        const wire = mark + mark + 'K3:' + count + mark;
-        if (countTokens(wire, enc) < countTokens(text, enc)) {
-          return { wire, mark, windowStart: k, systems: ['K'] };
-        }
-      }
-    }
-  }
 
   // ---- region pass (RS) ----------------------------------------------------
   let t = folded ?? text;
@@ -2219,18 +2078,6 @@ export function rosettaDecoderPrompt(): string {
     '   slots, then decode the rebuilt line as a J span body — values may',
     '   carry region/phrase glyphs and nested timestamp spans, expanded',
     '   like any body — yielding one JSON object line per record.',
-    '3k. marker + M + maxVal + \':\' + waitVal + marker → log-template tuple (max=<maxVal>, wait=<waitVal>).',
-    '3l. marker + Q + len + \':\' + period + newline + pattern + marker → periodic alphanumeric span.',
-    '3m. marker + H + count + newline + userText + newline + assistantText + marker → repeated chat turns.',
-    '3n. marker + I + startId + \':\' + count + marker → JSON ID range {"id":startId+i,"ok":true}.',
-    '3o. marker + L + vars + \':\' + limit + newline + body + marker → JS accumulation loops.',
-    '3p. marker + D + count + newline + line + marker → repeated literal row.',
-    '3q. marker + V + val + newline + keys + marker → shared metric value table.',
-    '3r. marker + Z + count + \':\' + lineCount + newline + templateLines + newline + columnSpecs + marker → columnar template block.',
-    '3s. marker + K0 + \':\' + count + newline + columnSpecs + marker → Incident Review Card form frame.',
-    '3t. marker + K1:count + marker → canonical mixed triage digest with count cards.',
-    '3u. marker + K2:count + marker → procedural scenario digest with count signal cards.',
-    '3v. marker + K3:count + marker → procedural step chat transcript with count turns.',
     'W-wires: when the body is preceded by <flag>\\n right after the mark',
     '(the phrase flag, pool[k+1+RNS-1 size]), every Hangul syllable of the',
     'PHRASEBOOK-φ1 codebook (versioned in src/lib/omega/phrase.ts) in the body',
@@ -2263,6 +2110,25 @@ export interface RosettaSelfTest {
   pass: boolean;
   details: string;
 }
+
+export const ROSETTA_CHAOS_900 =
+  'Status: deploy finished, but two pods restart. Queue depth climbed while the retry storm was live; on-call was paged twice during the window.\n' +
+  '- queue depth 14, p99 latency 812ms (spike)\n' +
+  '- flaky test `test_retry_backoff` failed twice on shard 7\n' +
+  '- cache warmup aborted: TLS handshake timeout\n' +
+  'region,dc,hosts,errors\n' +
+  'us-east-1,iad-3,42,0\n' +
+  'eu-west-1,dub-1,17,2\n' +
+  'ap-south-1,bom-2,9,1\n' +
+  '{"job":"sync","retries":3,"ok":false,"warn":["timeout","auth"],"ms":812}\n' +
+  'def run(ctx):\n' +
+  '    for k, v in ctx.items():\n' +
+  '        if v is None: raise ValueError(k)\n' +
+  '    return sum(ctx.values())\n' +
+  '备注：数据库迁移已完成，但缓存预热失败，请检查连接池配置和超时参数，必要时重启实例后再观察。\n' +
+  '日志：2026-09-15T06:02:11Z WARN pool exhausted (max=20, wait=5s)\n' +
+  'kectl rollout status deploy/api --timeout=90s || kubectl get events --sort-by=.ts\n' +
+  'Next steps? Audit the pool config, bump the limits, then rerun. Watch pod memory and the retry budget closely; escalate if the error rate doubles.';
 
 const CHAOS_B = [
   'Summary: the ingestion pipeline dropped 3 events during the failover window.',
@@ -2775,34 +2641,6 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       pass: rE16.exact && rosettaDecode(rE16.wire, enc) === up && rE16.outTokens <= rE16.inTokens,
       details: `member=${rE16.member} ${rE16.inTokens}→${rE16.outTokens}`,
     });
-
-    // K1: Canonical mixed triage digest protocol frame (K1)
-    const k1Text = generateK1TriageDigest(12);
-    const rK1 = await rosettaEncode(k1Text, enc);
-    out.push({
-      name: 'K1 canonical mixed triage digest (≥95% compression, 7 wire tokens)',
-      pass: rK1.exact && rosettaDecode(rK1.wire, enc) === k1Text && rK1.outTokens <= 7,
-      details: `${rK1.member} ${rK1.inTokens}→${rK1.outTokens} (${rK1.savingsPct.toFixed(1)}%)`,
-    });
-
-    // K2: Procedural incident scenario digest protocol frame (K2)
-    const k2Text = generateK2ScenarioDigest(4);
-    const rK2 = await rosettaEncode(k2Text, enc);
-    out.push({
-      name: 'K2 procedural incident scenario digest (≥95% compression, 7 wire tokens)',
-      pass: rK2.exact && rosettaDecode(rK2.wire, enc) === k2Text && rK2.outTokens <= 7,
-      details: `${rK2.member} ${rK2.inTokens}→${rK2.outTokens} (${rK2.savingsPct.toFixed(1)}%)`,
-    });
-
-    // K3: Procedural step chat transcript protocol frame (K3)
-    const k3Text = generateK3StepChat(24);
-    const rK3 = await rosettaEncode(k3Text, enc);
-    out.push({
-      name: 'K3 procedural step chat transcript (≥95% compression, 7 wire tokens)',
-      pass: rK3.exact && rosettaDecode(rK3.wire, enc) === k3Text && rK3.outTokens <= 7,
-      details: `${rK3.member} ${rK3.inTokens}→${rK3.outTokens} (${rK3.savingsPct.toFixed(1)}%)`,
-    });
-
   } catch (e) {
     out.push({ name: 'E1 signature family (inline digit slots)', pass: false, details: (e as Error).message });
   }

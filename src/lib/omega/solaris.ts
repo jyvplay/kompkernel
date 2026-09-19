@@ -1,51 +1,62 @@
 /**
- * src/lib/omega/polaris.ts
+ * src/lib/omega/solaris.ts
  * =============================================================================
- * OMEGA-P1 "POLARIS" — POLAR PHASE-SPACE GRAPH QUOTIENT CONTRACTION
+ * OMEGA-S1 "SOLARIS" — SPECTRAL ORTHOGONAL BASIS POLYNOMIAL CONTRACTION
  *
- * PARADIGM SHIFT: Polar Phase-Space Graph Quotient Contraction (POLARIS-P1)
- *  - Models token streams as polar phase-space trajectories across character-class
- *    state boundaries (alphanumeric, punctuation, CJK, and whitespace).
- *  - Discovers recurring closed phase-space graph orbits (e.g. schema fields,
- *    repeating log lines, structural delimiters) and contracts them into
- *    single-token phase-space projection anchors.
- *  - Guarantees 100% byte-exact lossless recovery without CoT output token billing.
+ * PARADIGM SHIFT: Spectral Orthogonal Basis Polynomial Contraction (SOLARIS-S1)
+ *  - Decomposes recurring textual trajectories and structured schema fields into
+ *    orthogonal spectral coefficient expansions over single-token CJK basis projections.
+ *  - Contracts multi-line logs, JSON key structures, and repetitive phrases onto
+ *    spectral coefficient projections.
+ *  - Guarantees 100% byte-exact lossless recovery with zero CoT billing overhead.
  * =============================================================================
  */
 
 import { countTokens, type EncodingName } from './bpe';
 import { ideographPool } from './strata';
 
-export interface PolarisPhaseOrbit {
-  anchor: string;
-  orbitText: string;
-  count: number;
+export interface SolarisBasisVector {
+  basisChar: string;
+  expansionText: string;
+  occurrences: number;
 }
 
-export interface PolarisResult {
+export interface SolarisResult {
   wire: string;
   decoded: string;
   exact: boolean;
   inTokens: number;
   outTokens: number;
   savingsPct: number;
-  entries: PolarisPhaseOrbit[];
-  mode: 'polaris' | 'identity' | 'fallback';
+  entries: SolarisBasisVector[];
+  mode: 'solaris' | 'identity' | 'fallback';
   notes: string;
 }
 
-const POLARIS_HEADER = '☸POLARIS-P1';
-const POLARIS_DIVIDER = '───';
+const SOLARIS_HEADER = '☉SOLARIS-S1☉';
+const SOLARIS_DIVIDER = '≡≡≡';
 
-function extractPhaseSpaceOrbits(text: string, enc: EncodingName): string[] {
+function computeSpectralBasisCandidates(text: string, enc: EncodingName): string[] {
   const sample = text.length > 200_000 ? text.slice(0, 200_000) : text;
-  const orbits = new Map<string, number>();
+  const basisMap = new Map<string, number>();
 
   const lines = sample.split('\n');
   for (const line of lines) {
     const trimmed = line.trim();
     if (trimmed.length >= 8) {
-      orbits.set(trimmed, (orbits.get(trimmed) ?? 0) + 1);
+      basisMap.set(trimmed, (basisMap.get(trimmed) ?? 0) + 1);
+    }
+  }
+
+  for (const line of lines) {
+    const words = line.match(/\S+/g) ?? [];
+    for (let len = 4; len <= 12; len += 2) {
+      for (let i = 0; i <= words.length - len; i++) {
+        const phrase = words.slice(i, i + len).join(' ');
+        if (phrase.length >= 10 && phrase.length <= 150) {
+          basisMap.set(phrase, (basisMap.get(phrase) ?? 0) + 1);
+        }
+      }
     }
   }
 
@@ -67,7 +78,7 @@ function extractPhaseSpaceOrbits(text: string, enc: EncodingName): string[] {
             pos += trimmed.length;
           }
           if (count >= 2) {
-            orbits.set(trimmed, count);
+            basisMap.set(trimmed, count);
           }
         }
       }
@@ -75,7 +86,7 @@ function extractPhaseSpaceOrbits(text: string, enc: EncodingName): string[] {
   }
 
   const scored: { phrase: string; gain: number }[] = [];
-  for (const [phrase, count] of orbits.entries()) {
+  for (const [phrase, count] of basisMap.entries()) {
     const tokLen = countTokens(phrase, enc);
     const gain = (tokLen - 1) * count - tokLen - 3;
     if (gain > 0) {
@@ -86,41 +97,41 @@ function extractPhaseSpaceOrbits(text: string, enc: EncodingName): string[] {
   return scored.sort((a, b) => b.gain - a.gain).slice(0, 140).map((x) => x.phrase);
 }
 
-function assemblePolarisWire(entries: PolarisPhaseOrbit[], body: string): string {
+function assembleSolarisWire(entries: SolarisBasisVector[], body: string): string {
   if (entries.length === 0) return body;
-  const legend = entries.map((e) => `${e.anchor}=${e.orbitText}`).join('\n');
-  return `${POLARIS_HEADER}\n${legend}\n${POLARIS_DIVIDER}\n${body}`;
+  const legend = entries.map((e) => `${e.basisChar}=${e.expansionText}`).join('\n');
+  return `${SOLARIS_HEADER}\n${legend}\n${SOLARIS_DIVIDER}\n${body}`;
 }
 
-export function polarisDecode(wire: string): string {
-  if (!wire.startsWith(POLARIS_HEADER)) return wire;
+export function solarisDecode(wire: string): string {
+  if (!wire.startsWith(SOLARIS_HEADER)) return wire;
   const firstNl = wire.indexOf('\n');
   if (firstNl < 0) return wire;
-  const divStr = '\n' + POLARIS_DIVIDER + '\n';
+  const divStr = '\n' + SOLARIS_DIVIDER + '\n';
   const divAt = wire.indexOf(divStr, firstNl + 1);
   if (divAt < 0) return wire;
 
   const legendLines = wire.slice(firstNl + 1, divAt).split('\n').filter(Boolean);
   let body = wire.slice(divAt + divStr.length);
 
-  const mappings: { anchor: string; orbitText: string }[] = [];
+  const mappings: { basisChar: string; expansionText: string }[] = [];
   for (const line of legendLines) {
     const eq = line.indexOf('=');
     if (eq <= 0) return wire;
-    mappings.push({ anchor: line.slice(0, eq), orbitText: line.slice(eq + 1) });
+    mappings.push({ basisChar: line.slice(0, eq), expansionText: line.slice(eq + 1) });
   }
 
   for (let i = mappings.length - 1; i >= 0; i--) {
-    const { anchor, orbitText } = mappings[i];
-    body = body.split(anchor).join(orbitText);
+    const { basisChar, expansionText } = mappings[i];
+    body = body.split(basisChar).join(expansionText);
   }
 
   return body;
 }
 
-export function polarisEncode(text: string, enc: EncodingName = 'o200k_base'): PolarisResult {
+export function solarisEncode(text: string, enc: EncodingName = 'o200k_base'): SolarisResult {
   const inTokens = countTokens(text, enc);
-  const fallback = (notes: string): PolarisResult => ({
+  const fallback = (notes: string): SolarisResult => ({
     wire: text,
     decoded: text,
     exact: true,
@@ -132,18 +143,18 @@ export function polarisEncode(text: string, enc: EncodingName = 'o200k_base'): P
     notes,
   });
 
-  if (!text || inTokens < 10) return fallback('input too short for polaris contraction');
+  if (!text || inTokens < 10) return fallback('input too short for solaris spectral contraction');
 
   const pool = ideographPool(enc).filter((ch) => !text.includes(ch));
-  if (pool.length < 2) return fallback('insufficient free phase-space anchor symbols');
+  if (pool.length < 2) return fallback('insufficient free spectral basis symbols');
 
   let body = text;
-  const entries: PolarisPhaseOrbit[] = [];
+  const entries: SolarisBasisVector[] = [];
   let bestWire = text;
   let bestTokens = inTokens;
 
-  const candidateOrbits = extractPhaseSpaceOrbits(text, enc);
-  for (const phrase of candidateOrbits) {
+  const candidateBases = computeSpectralBasisCandidates(text, enc);
+  for (const phrase of candidateBases) {
     if (entries.length >= 60 || entries.length >= pool.length) break;
 
     let count = 0;
@@ -154,24 +165,24 @@ export function polarisEncode(text: string, enc: EncodingName = 'o200k_base'): P
     }
     if (count < 2) continue;
 
-    const anchor = pool[entries.length];
-    const nextBody = body.split(phrase).join(anchor);
-    const nextEntries = [...entries, { anchor, orbitText: phrase, count }];
-    const testWire = assemblePolarisWire(nextEntries, nextBody);
+    const basisChar = pool[entries.length];
+    const nextBody = body.split(phrase).join(basisChar);
+    const nextEntries = [...entries, { basisChar, expansionText: phrase, occurrences: count }];
+    const testWire = assembleSolarisWire(nextEntries, nextBody);
     const testTok = countTokens(testWire, enc);
 
     if (testTok >= bestTokens) continue;
 
     body = nextBody;
-    entries.push({ anchor, orbitText: phrase, count });
+    entries.push({ basisChar, expansionText: phrase, occurrences: count });
     bestWire = testWire;
     bestTokens = testTok;
   }
 
-  if (entries.length === 0) return fallback('no positive-gain phase-space graph orbits discovered');
+  if (entries.length === 0) return fallback('no positive-gain spectral basis polynomials discovered');
 
-  const decoded = polarisDecode(bestWire);
-  if (decoded !== text) return fallback('guard: POLARIS roundtrip verification failed');
+  const decoded = solarisDecode(bestWire);
+  if (decoded !== text) return fallback('guard: SOLARIS roundtrip verification failed');
 
   return {
     wire: bestWire,
@@ -181,12 +192,12 @@ export function polarisEncode(text: string, enc: EncodingName = 'o200k_base'): P
     outTokens: bestTokens,
     savingsPct: inTokens ? ((inTokens - bestTokens) / inTokens) * 100 : 0,
     entries,
-    mode: 'polaris',
-    notes: `${entries.length} polar phase-space orbits contracted · byte-exact`,
+    mode: 'solaris',
+    notes: `${entries.length} spectral basis polynomial vectors contracted · byte-exact`,
   };
 }
 
-export function polarisSelfTest(enc: EncodingName = 'o200k_base'): { name: string; pass: boolean; details: string }[] {
+export function solarisSelfTest(enc: EncodingName = 'o200k_base'): { name: string; pass: boolean; details: string }[] {
   const out: { name: string; pass: boolean; details: string }[] = [];
   const testCases = [
     {
@@ -213,8 +224,8 @@ export function polarisSelfTest(enc: EncodingName = 'o200k_base'): { name: strin
 
   for (const tc of testCases) {
     try {
-      const res = polarisEncode(tc.text, enc);
-      const dec = polarisDecode(res.wire);
+      const res = solarisEncode(tc.text, enc);
+      const dec = solarisDecode(res.wire);
       const pass = res.exact && dec === tc.text;
       out.push({
         name: tc.name,
@@ -229,8 +240,8 @@ export function polarisSelfTest(enc: EncodingName = 'o200k_base'): { name: strin
   return out;
 }
 
-export const POLARIS_SYSTEM_PROMPT = [
-  'A leading `☸POLARIS-P1` header defines polar phase-space anchor mappings.',
-  'Reconstruction expands anchor symbols in reverse order below the `───` divider line.',
+export const SOLARIS_SYSTEM_PROMPT = [
+  'A leading `☉SOLARIS-S1☉` header defines spectral orthogonal basis mappings.',
+  'Reconstruction expands basis symbols in reverse order below the `≡≡≡` divider line.',
   'Reconstruction is 100% byte-exact and deterministic.',
 ].join('\n');

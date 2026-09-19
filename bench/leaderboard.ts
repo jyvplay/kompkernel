@@ -42,10 +42,7 @@ import { rosettaEncode } from '@/lib/omega/rosetta';
 import { kappaEncode } from '@/lib/omega/kappa';
 import { phraseEncode } from '@/lib/omega/phrase';
 import { tauEncode } from '@/lib/omega/tau';
-import { lumenEncode } from '@/lib/omega/lumen';
-import { astralEncode } from '@/lib/omega/astral';
-import { hyperionEncode } from '@/lib/omega/hyperion';
-import { polarisEncode } from '@/lib/omega/polaris';
+import { solarisEncode } from '@/lib/omega/solaris';
 
 export interface Row {
   key: string; wireTokens: number; deliveredTokens: number | null;
@@ -86,10 +83,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('trie', () => trieEncode(text, enc));
   await run('repair', () => repairEncode(text, enc));
   await run('column', () => columnEncode(text, enc));
-  await run('prometheus', async () => {
-    const p = await compressPrometheusICDM(text, enc);
-    return { wire: p.wire, decoded: p.decoded, exact: p.exact };
-  });
+  await run('prometheus', () => compressPrometheusICDM(text, enc));
   await run('eidolon', () => eidolonProject(text, enc));
   await run('nexus', async () => nexusEncode(text, enc));
   await run('veritas', () => veritasEncode(text, enc));
@@ -106,10 +100,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('kappa', () => kappaEncode(text, enc));
   await run('phrase', () => phraseEncode(text, enc));
   await run('tau', () => tauEncode(text, enc));
-  await run('lumen', () => lumenEncode(text, enc));
-  await run('astral', () => astralEncode(text, enc));
-  await run('hyperion', () => hyperionEncode(text, enc));
-  await run('polaris', () => polarisEncode(text, enc));
+  await run('solaris', () => solarisEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));
   await run('mosaic', () => mosaicEncode(text, enc));
   await run('orbit', async () => orbitEncode(text, enc));
