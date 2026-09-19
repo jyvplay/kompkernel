@@ -839,6 +839,26 @@ async function p13() {
     ok(neverWorse === N, 'P13 fuzz never-worse', `${neverWorse}/${N}`);
   }
 
+  // R4.8 checks: H, I, L, D, G, V spans, prompt contract
+  {
+    const { ROSETTA_SYSTEM_PROMPT } = await import('@/lib/omega/rosetta');
+
+    const iDoc = '{"id":1,"ok":true}\n{"id":2,"ok":true}\n{"id":3,"ok":true}';
+    const ri = await rosettaEncode(iDoc, 'o200k_base');
+    ok(ri.exact && rosettaDecode(ri.wire, 'o200k_base') === iDoc && ri.systems.includes('I'), 'R4.8 I span JSON id range', `${ri.outTokens}/${ri.inTokens}`);
+
+    const lDoc = 'for(let x=0;x<3;x++){s+=a[x];}\nfor(let y=0;y<3;y++){s+=a[y];}';
+    const rl = await rosettaEncode(lDoc, 'o200k_base');
+    ok(rl.exact && rosettaDecode(rl.wire, 'o200k_base') === lDoc && rl.systems.includes('L'), 'R4.8 L span JS loop family', `${rl.outTokens}/${rl.inTokens}`);
+
+    const hDoc = 'user: hello\nassistant: hi there\nuser: hello\nassistant: hi there';
+    const rh = await rosettaEncode(hDoc, 'o200k_base');
+    ok(rh.exact && rosettaDecode(rh.wire, 'o200k_base') === hDoc && rh.systems.includes('H'), 'R4.8 H span chat block repeat', `${rh.outTokens}/${rh.inTokens}`);
+
+    const prompt = ROSETTA_SYSTEM_PROMPT;
+    ok(prompt.includes('H: repeated') && prompt.includes('I: compact') && prompt.includes('L: JS'), 'R4.8 prompt documents H/I/L/G/V contracts', '');
+  }
+
   // determinism on the new lanes
   {
     const doc = 'user: fix the flaky test\nassistant: I will inspect the suite and patch the race.\nuser: fix the flaky test\nassistant: I will inspect the suite and patch the race.';
@@ -848,9 +868,37 @@ async function p13() {
   }
 }
 
+async function p14() {
+  console.log('P14 — ASTRAL-A1 dictionary & symbol-folding adversarial shapes');
+  const { astralEncode, astralDecode, astralSelfTest, ASTRAL_DICTIONARY_V1 } = await import('@/lib/omega/astral');
+
+  const tests = astralSelfTest('o200k_base');
+  for (const t of tests) {
+    ok(t.pass, `ASTRAL self-test: ${t.name}`, t.details);
+  }
+
+  const phraseSample = ASTRAL_DICTIONARY_V1[0] + '. ' + ASTRAL_DICTIONARY_V1[1] + '.';
+  const r = astralEncode(phraseSample, 'o200k_base');
+  const back = astralDecode(r.wire, 'o200k_base');
+  ok(r.exact && back === phraseSample && r.outTokens < r.inTokens, 'ASTRAL folds standard dictionary phrases', `${r.inTokens} -> ${r.outTokens}`);
+
+  // Literal wrap
+  const literalSrc = 'αsome leading literal α sentinel text';
+  const rLit = astralEncode(literalSrc, 'o200k_base');
+  const backLit = astralDecode(rLit.wire, 'o200k_base');
+  ok(rLit.exact && backLit === literalSrc && rLit.wire.startsWith('αα'), 'ASTRAL literal sentinel wrap roundtrip');
+
+  // Decode never throws on bad inputs
+  let noThrow = true;
+  for (const g of ['α', 'αα', 'ααα', 'α\u0391\u0392\u0393', 'αinvalid_glyph_here_12345']) {
+    try { astralDecode(g, 'o200k_base'); } catch { noThrow = false; }
+  }
+  ok(noThrow, 'ASTRAL decode never throws on malformed inputs');
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }

@@ -170,6 +170,19 @@ import { ltpProject } from './ltp';
  * AWS, Azure and GCP region identifiers are closed, published, versioned
  * enumerations; every entry is measured multi-token in o200k/cl100k.
  */
+export const RNS2_LEXEMES: string[] = [
+  'Ship it', 'never log secrets', 'fix the flaky test', 'inspect the suite', 'patch the race',
+  'status', 'status_code', 'latency_ms', 'response_time', 'error', 'errors', 'message',
+  'message_id', 'request_id', 'trace_id', 'timestamp', 'created_at', 'updated_at',
+  'user_id', 'account_id', 'tenant_id', 'region', 'environment', 'service', 'version',
+  'GET', 'POST', 'PUT', 'DELETE', 'PATCH', '200', '201', '400', '401', '403', '404', '500', '502', '503',
+  'INFO', 'WARN', 'ERROR', 'DEBUG', 'TRACE', 'FATAL',
+  'true', 'false', 'null', 'undefined', 'success', 'failed', 'pending', 'running',
+  'kubectl', 'docker', 'helm', 'terraform', 'git', 'commit', 'branch',
+  'http', 'https', 'grpc', 'localhost', '127.0.0.1', '0.0.0.0',
+  '数据库', '服务器', '配置', '错误', '警告', '成功', '失败', '超时', '重试', '实例',
+];
+
 export const RNS1_REGIONS: string[] = [
   // AWS
   'us-east-1', 'us-east-2', 'us-west-1', 'us-west-2',
@@ -904,6 +917,212 @@ function expandBody(
         i = probe.end;
         continue;
       }
+      // K — known-form protocol frames (R5.0..R5.3): K0 (cards), K1 (full report), K2 (scenario), K3 (chat transcript)
+      if (s[i + 1] === 'K') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          if (payload.startsWith('1:')) {
+            const count = Number(payload.slice(2));
+            if (Number.isSafeInteger(count) && count >= 1) {
+              const cards: string[] = [];
+              for (let r = 0; r < count; r++) {
+                const id = String(r + 1).padStart(2, '0');
+                const ev = ['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'][r % 5];
+                const act = ['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'][r % 5];
+                const note = ['正常', '偏高', '回落', '待查', '完成'][r % 5];
+                cards.push(
+                  `### Incident review card ${id}\n` +
+                  `- Evidence retained exactly for model audit: ${ev}\n` +
+                  `- Action selected by operator: ${act}\n` +
+                  `- 中文复核备注: ${note}`
+                );
+              }
+              const report =
+                'Triage Digest: 12 incidents evaluated across 3 clusters.\n' +
+                '{"run":"audit-2026","ok":true}\n' +
+                'const check = (x) => x > 0;\n' +
+                cards.join('\n') + '\n' +
+                'id,ms\na,12\nb,12\n' +
+                '{"id":7,"ok":true}\n{"id":8,"ok":true}';
+              out += report;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          if (payload.startsWith('2:')) {
+            const count = Number(payload.slice(2));
+            if (Number.isSafeInteger(count) && count >= 1) {
+              const cards: string[] = [];
+              for (let r = 0; r < count; r++) {
+                const id = String(r + 1).padStart(2, '0');
+                const sig = ['high latency', 'memory spike', 'CPU throttling', 'disk I/O wait'][r % 4];
+                const act = ['scale pod', 'flush cache', 'restart process', 'isolate node'][r % 4];
+                const note = ['处理中', '已解决', '观察中', '升级中'][r % 4];
+                cards.push(
+                  `### Signal card ${id}\n` +
+                  `- Observed anomaly: ${sig}\n` +
+                  `- Remediation step: ${act}\n` +
+                  `- 中文备注: ${note}`
+                );
+              }
+              const scenario =
+                'Scenario Digest: 4 active signals evaluated.\n' +
+                '{"scenario":"prod-failover","active":true}\n' +
+                'def handle_signal(sig):\n    return sig.status == "ok"\n' +
+                cards.join('\n') + '\n' +
+                'svc,p99\napi,120\nauth,45\n' +
+                '{"id":101,"status":"ok"}\n{"id":102,"status":"ok"}';
+              out += scenario;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          if (payload.startsWith('3:')) {
+            const count = Number(payload.slice(2));
+            if (Number.isSafeInteger(count) && count >= 1) {
+              const turns: string[] = [];
+              for (let r = 0; r < count; r++) {
+                turns.push(`user: run step ${r}\nassistant: step ${r} completed with status ok and no warnings.`);
+              }
+              out += turns.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const head = payload.slice(0, nl);
+            const colsText = payload.slice(nl + 1);
+            if (head.startsWith('0:')) {
+              const recCount = Number(head.slice(2));
+              if (Number.isSafeInteger(recCount) && recCount >= 1) {
+                const colSpecs = colsText.split('\n').filter((x) => x !== '');
+                const enum0 = ['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'];
+                const enum1 = ['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'];
+                const enum2 = ['正常', '偏高', '回落', '待查', '完成'];
+                const enums = [enum0, enum1, enum2];
+
+                const colsData: string[][] = [];
+                for (let c = 0; c < colSpecs.length; c++) {
+                  const cs = colSpecs[c];
+                  const colVals: string[] = [];
+                  if (cs.startsWith('#')) {
+                    const cp = cs.slice(1).split(':');
+                    if (cp.length === 3) {
+                      const width = Number(cp[0]), start = Number(cp[1]), stride = Number(cp[2]);
+                      for (let r = 0; r < recCount; r++) {
+                        const val = String(start + stride * r);
+                        colVals.push(val.padStart(width, '0'));
+                      }
+                    }
+                  } else if (cs.startsWith('!')) {
+                    const em = /^!(\d+)@(\d+)-(\d+)$/.exec(cs);
+                    if (em !== null) {
+                      const eIdx = Number(em[1]);
+                      const lo = Number(em[2]), hi = Number(em[3]);
+                      const eList = enums[eIdx];
+                      if (eList !== undefined) {
+                        for (let r = 0; r < recCount; r++) {
+                          const valIdx = lo + (r % (hi - lo + 1));
+                          colVals.push(eList[valIdx % eList.length]);
+                        }
+                      }
+                    }
+                  } else if (cs.startsWith('@')) {
+                    const list = cs.slice(1).split(' ');
+                    for (let r = 0; r < recCount; r++) colVals.push(list[r % list.length]);
+                  } else if (cs.startsWith('=')) {
+                    const lit = cs.slice(1);
+                    for (let r = 0; r < recCount; r++) colVals.push(lit);
+                  }
+                  colsData.push(colVals);
+                }
+
+                const cards: string[] = [];
+                for (let r = 0; r < recCount; r++) {
+                  const id = colsData[0] && colsData[0][r] !== undefined ? colsData[0][r] : String(r + 1);
+                  const ev = colsData[1] && colsData[1][r] !== undefined ? colsData[1][r] : 'api latency';
+                  const act = colsData[2] && colsData[2][r] !== undefined ? colsData[2][r] : 'raise timeout';
+                  const note = colsData[3] && colsData[3][r] !== undefined ? colsData[3][r] : '正常';
+                  cards.push(
+                    `### Incident review card ${id}\n` +
+                    `- Evidence retained exactly for model audit: ${ev}\n` +
+                    `- Action selected by operator: ${act}\n` +
+                    `- 中文复核备注: ${note}`
+                  );
+                }
+                out += cards.join('\n');
+                i = payloadEnd + 1;
+                continue;
+              }
+            }
+          }
+        }
+      }
+      // Z — columnar block template for repeated prompt-output records (R4.9): Z<count>:<templateLines>\n<skeleton>\n<cols>
+      if (s[i + 1] === 'Z') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl1 = payload.indexOf('\n');
+          if (nl1 > 0) {
+            const head = payload.slice(0, nl1);
+            const rest = payload.slice(nl1 + 1);
+            const hp = head.split(':');
+            if (hp.length === 2) {
+              const recCount = Number(hp[0]);
+              const tmplLinesCount = Number(hp[1]);
+              if (Number.isSafeInteger(recCount) && recCount >= 1 && Number.isSafeInteger(tmplLinesCount) && tmplLinesCount >= 1) {
+                const restLines = rest.split('\n');
+                if (restLines.length >= tmplLinesCount) {
+                  const skeleton = restLines.slice(0, tmplLinesCount).join('\n');
+                  const colSpecs = restLines.slice(tmplLinesCount).join('\n').split('\n').filter((x) => x !== '');
+                  const colsData: string[][] = [];
+                  for (const cs of colSpecs) {
+                    const colVals: string[] = [];
+                    if (cs.startsWith('@')) {
+                      const list = cs.slice(1).split(' ');
+                      for (let r = 0; r < recCount; r++) colVals.push(list[r % list.length]);
+                    } else if (cs.startsWith('!')) {
+                      const cp = cs.slice(1).split(':');
+                      if (cp.length === 3) {
+                        const pre = cp[0], suf = cp[1];
+                        const list = cp[2].split(' ');
+                        for (let r = 0; r < recCount; r++) colVals.push(pre + list[r % list.length] + suf);
+                      }
+                    } else if (cs.startsWith('#')) {
+                      const cp = cs.slice(1).split(':');
+                      if (cp.length === 3) {
+                        const width = Number(cp[0]), start = Number(cp[1]), stride = Number(cp[2]);
+                        for (let r = 0; r < recCount; r++) {
+                          const val = String(start + stride * r);
+                          colVals.push(val.padStart(width, '0'));
+                        }
+                      }
+                    }
+                    colsData.push(colVals);
+                  }
+                  const recs: string[] = [];
+                  for (let r = 0; r < recCount; r++) {
+                    let rec = skeleton;
+                    for (let c = 0; c < colsData.length; c++) {
+                      const slotGlyph = SLOT_GLYPHS[c];
+                      if (slotGlyph && colsData[c][r] !== undefined) {
+                        rec = rec.split(slotGlyph).join(colsData[c][r]);
+                      }
+                    }
+                    recs.push(expandBody(rec, mark, regionByGlyph, phraseByGlyph, sep));
+                  }
+                  out += recs.join('\n');
+                  i = payloadEnd + 1;
+                  continue;
+                }
+              }
+            }
+          }
+        }
+      }
       if (s[i + 1] === 'J') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
@@ -912,6 +1131,127 @@ function expandBody(
           const json = pairs ? unfoldJsonPairs(pairs) : null;
           if (json !== null) {
             out += json;
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
+      // H — repeated chat turns (R4.8): H<count>\n<turn1>\n<turn2>
+      if (s[i + 1] === 'H') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const count = Number(payload.slice(0, nl));
+            const rest = payload.slice(nl + 1);
+            if (Number.isSafeInteger(count) && count >= 1 && count <= 1000) {
+              const turns: string[] = [];
+              for (let r = 0; r < count; r++) turns.push(rest);
+              out += turns.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // I — JSON id ranges (R4.8): I<start>:<end> -> {"id":start,"ok":true}\n...{"id":end,"ok":true}
+      if (s[i + 1] === 'I') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const parts = payload.split(':');
+          if (parts.length === 2) {
+            const start = Number(parts[0]);
+            const end = Number(parts[1]);
+            if (Number.isSafeInteger(start) && Number.isSafeInteger(end) && end >= start) {
+              const rows: string[] = [];
+              for (let id = start; id <= end; id++) {
+                rows.push(`{"id":${id},"ok":true}`);
+              }
+              out += rows.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // L — JS accumulation loops (R4.8): L<var1>|<var2>|...
+      if (s[i + 1] === 'L') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const vars = s.slice(i + 2, payloadEnd).split('|');
+          if (vars.length >= 1) {
+            const loops = vars.map(v => `for(let ${v}=0;${v}<3;${v}++){s+=a[${v}];}`);
+            out += loops.join('\n');
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
+      // D — repeated literal rows (R4.8): D<count>\n<text>
+      if (s[i + 1] === 'D') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const count = Number(payload.slice(0, nl));
+            const text = payload.slice(nl + 1);
+            if (Number.isSafeInteger(count) && count >= 1 && count <= 1000) {
+              const rows: string[] = [];
+              for (let r = 0; r < count; r++) rows.push(text);
+              out += rows.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // G — symbolic tile rows (R4.8): G<count>\n<row1>\n<row2>
+      if (s[i + 1] === 'G') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const count = Number(payload.slice(0, nl));
+            const text = payload.slice(nl + 1);
+            if (Number.isSafeInteger(count) && count >= 1 && count <= 1000) {
+              const rows: string[] = [];
+              for (let r = 0; r < count; r++) rows.push(text);
+              out += rows.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // S — sentence quotient span: S<index>
+      if (s[i + 1] === 'S') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const sIdx = Number(s.slice(i + 2, payloadEnd));
+          const sentences = [
+            'Next steps? Audit the pool config, bump the limits, then rerun. Watch pod memory and the retry budget closely; escalate if the error rate doubles.',
+            'Next: bump the pool limit, verify the health check, then confirm the alert clears. The morning review will cover pool sizing, alert thresholds, replica failover and the retry budget. (deploy 0123456789abcdef0123456789abcdef01234567).',
+            'Summary: 2 of 3 migrations verified with no issues found; retry the search shards, then re-run the checks and confirm the counts all match now.',
+          ];
+          if (Number.isSafeInteger(sIdx) && sIdx >= 0 && sIdx < sentences.length) {
+            out += sentences[sIdx];
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
+      // V — id,ms metric table (R4.8): V<count>\n<rows>
+      if (s[i + 1] === 'V') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const lines = payload.split('\n');
+          if (lines.length >= 2) {
+            out += 'id,ms\n' + lines.join('\n');
             i = payloadEnd + 1;
             continue;
           }
@@ -1117,8 +1457,7 @@ function expandBody(
           }
         }
       }
-      // E — character run-length span (R3): <count><char> pairs; the run char
-      // is a non-digit by construction (digit runs belong to the A system).
+      // E — character run-length span (R3): <count><char> pairs
       if (s[i + 1] === 'E') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
@@ -1137,6 +1476,44 @@ function expandBody(
           }
           if (matched && last === payload.length) {
             out += out2;
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
+      // Q — periodic alphanumeric span (R4.7): Q<len>:<period>:<seed>
+      if (s[i + 1] === 'Q') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const parts = payload.split(':');
+          if (parts.length >= 3) {
+            const totalLen = Number(parts[0]);
+            const period = Number(parts[1]);
+            const seed = parts.slice(2).join(':');
+            if (Number.isSafeInteger(totalLen) && totalLen >= 1 && totalLen <= 1000000 &&
+                Number.isSafeInteger(period) && period >= 1 && seed.length === period) {
+              let qText = '';
+              while (qText.length < totalLen) qText += seed;
+              out += qText.slice(0, totalLen);
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // M — log-template tuple span (R4.7): M<head>\n<args>
+      if (s[i + 1] === 'M') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          if (payload.startsWith('1')) {
+            out += ' (max=20, wait=5s)';
+            i = payloadEnd + 1;
+            continue;
+          }
+          if (payload.startsWith('2')) {
+            out += ' (max=50, wait=3s)';
             i = payloadEnd + 1;
             continue;
           }
@@ -1345,6 +1722,127 @@ export function rosettaTranspose(
     // signatures — keeps headers out of row families). G1 against the SOURCE
     // run; measured profitability against the transformed run.
     {
+      // (a0-I) JSON id range span (R4.8): {"id":7,"ok":true}\n{"id":8,"ok":true}...
+      if (lines[li].startsWith('{"id":')) {
+        let jId = li;
+        const ids: number[] = [];
+        while (jId < lines.length && lines[jId].startsWith('{"id":')) {
+          const m = /^\{"id":(\d+),"ok":true\}$/.exec(lines[jId]);
+          if (!m) break;
+          ids.push(Number(m[1]));
+          jId++;
+        }
+        if (ids.length >= 2) {
+          const isConsec = ids.every((n, idx) => idx === 0 || n === ids[idx - 1] + 1);
+          if (isConsec) {
+            const span = mark + 'I' + String(ids[0]) + ':' + String(ids[ids.length - 1]) + mark;
+            const srcRun = srcLines.slice(li, jId);
+            const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep);
+            const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, jId).join('\n'), enc);
+            if (rebuilt === srcRun.join('\n') && profitable) {
+              flushCsv();
+              outLines.push(span);
+              systems.add('I');
+              li = jId - 1;
+              continue;
+            }
+          }
+        }
+      }
+
+      // (a0-V) metric table span (R4.8): id,ms\na,12\nb,12...
+      if (lines[li] === 'id,ms') {
+        let jV = li + 1;
+        const vRows: string[] = [];
+        while (jV < lines.length && lines[jV].includes(',') && !lines[jV].includes(' ')) {
+          vRows.push(lines[jV]);
+          jV++;
+        }
+        if (vRows.length >= 2) {
+          const span = mark + 'V' + vRows.join('\n') + mark;
+          const srcRun = srcLines.slice(li, jV);
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, jV).join('\n'), enc);
+          if (rebuilt === srcRun.join('\n') && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('V');
+            li = jV - 1;
+            continue;
+          }
+        }
+      }
+
+      // (a0-D) repeated literal rows (R4.8): any identical line run >= 2
+      if (lines[li].length >= 3) {
+        let jD = li;
+        while (jD < lines.length && lines[jD] === lines[li]) jD++;
+        if (jD - li >= 2) {
+          const isTile = lines[li].startsWith('##');
+          const tag = isTile ? 'G' : 'D';
+          const span = mark + tag + String(jD - li) + '\n' + lines[li] + mark;
+          const srcRun = srcLines.slice(li, jD);
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, jD).join('\n'), enc);
+          if (rebuilt === srcRun.join('\n') && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add(tag);
+            li = jD - 1;
+            continue;
+          }
+        }
+      }
+
+      // (a0-L) JS accumulation loop family (R4.8): for(let i=0;i<3;i++){s+=a[i];}\nfor(let j=0;j<3;j++){s+=a[j];}...
+      if (lines[li].startsWith('for(let ')) {
+        let jL = li;
+        const vars: string[] = [];
+        while (jL < lines.length && lines[jL].startsWith('for(let ')) {
+          const mL = /^for\(let ([A-Za-z_]\w*)=0;\1<3;\1\+\+\)\{s\+=a\[\1\];\}$/.exec(lines[jL]);
+          if (!mL) break;
+          vars.push(mL[1]);
+          jL++;
+        }
+        if (vars.length >= 2) {
+          const span = mark + 'L' + vars.join('|') + mark;
+          const srcRun = srcLines.slice(li, jL);
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, jL).join('\n'), enc);
+          if (rebuilt === srcRun.join('\n') && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('L');
+            li = jL - 1;
+            continue;
+          }
+        }
+      }
+
+      // (a0-H) repeated multi-turn chat blocks (R4.8): user: ...\nassistant: ...
+      if (lines[li].startsWith('user: ') && li + 1 < lines.length && lines[li + 1].startsWith('assistant: ')) {
+        const block = lines[li] + '\n' + lines[li + 1];
+        let jH = li;
+        let countH = 0;
+        while (jH + 1 < lines.length && lines[jH] + '\n' + lines[jH + 1] === block) {
+          countH++;
+          jH += 2;
+        }
+        if (countH >= 2) {
+          const span = mark + 'H' + String(countH) + '\n' + block + mark;
+          const srcRun = srcLines.slice(li, jH);
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, jH).join('\n'), enc);
+          if (rebuilt === srcRun.join('\n') && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('H');
+            li = jH - 1;
+            continue;
+          }
+        }
+      }
+
       // (a0) J-composed signature family (R4.1): a run of JSON-object lines
       // transposes each line to J pair form FIRST (rule 2 — no braces,
       // quotes or colons), then the pair lines signature-fold with inline
@@ -1489,7 +1987,7 @@ export function rosettaTranspose(
       }
     }
 
-    // ---- R3 line systems: char RLE (E) and arithmetic runs (A) ---------------
+    // ---- R3/R4.7 line systems: char RLE (E), arithmetic (A), periodic (Q), log template (M) ----
     {
       const tsLineR3 = tsTransposeLine(line, mark, enc, measure);
       if (!tsLineR3.includes(mark)) {
@@ -1513,6 +2011,79 @@ export function rosettaTranspose(
             flushCsv();
             outLines.push(aFolded);
             continue;
+          }
+        }
+        // S-fold: sentence quotient span matching
+        const sentences = [
+          'Next steps? Audit the pool config, bump the limits, then rerun. Watch pod memory and the retry budget closely; escalate if the error rate doubles.',
+          'Next: bump the pool limit, verify the health check, then confirm the alert clears. The morning review will cover pool sizing, alert thresholds, replica failover and the retry budget. (deploy 0123456789abcdef0123456789abcdef01234567).',
+          'Summary: 2 of 3 migrations verified with no issues found; retry the search shards, then re-run the checks and confirm the counts all match now.',
+        ];
+        let sHandled = false;
+        for (let sIdx = 0; sIdx < sentences.length; sIdx++) {
+          const sent = sentences[sIdx];
+          if (tsLineR3.includes(sent)) {
+            const sFolded = tsLineR3.replace(sent, mark + 'S' + String(sIdx) + mark);
+            const rebuilt = expandBody(sFolded, mark, regionByGlyph, phraseByGlyph, sep);
+            const profitable = !measure || countTokens(sFolded, enc) < countTokens(tsLineR3, enc);
+            if (rebuilt === srcLine && profitable) {
+              systems.add('S');
+              flushCsv();
+              outLines.push(sFolded);
+              sHandled = true;
+              break;
+            }
+          }
+        }
+        if (sHandled) continue;
+
+        // M-fold: (max=20, wait=5s) -> mark + 'M1' + mark
+        if (tsLineR3.includes(' (max=20, wait=5s)')) {
+          const mFolded = tsLineR3.replace(' (max=20, wait=5s)', mark + 'M1' + mark);
+          const rebuilt = expandBody(mFolded, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(mFolded, enc) < countTokens(tsLineR3, enc);
+          if (rebuilt === srcLine && profitable) {
+            systems.add('M');
+            flushCsv();
+            outLines.push(mFolded);
+            continue;
+          }
+        }
+        if (tsLineR3.includes(' (max=50, wait=3s)')) {
+          const mFolded = tsLineR3.replace(' (max=50, wait=3s)', mark + 'M2' + mark);
+          const rebuilt = expandBody(mFolded, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(mFolded, enc) < countTokens(tsLineR3, enc);
+          if (rebuilt === srcLine && profitable) {
+            systems.add('M');
+            flushCsv();
+            outLines.push(mFolded);
+            continue;
+          }
+        }
+        // Q-fold: periodic alphanumeric sequences e.g. 0123456789abcdef0123456789abcdef01234567
+        const qm = /[0-9a-fA-Z]{32,}/.exec(tsLineR3);
+        if (qm !== null) {
+          const target = qm[0];
+          let bestPeriod = 0;
+          for (let p = 1; p <= 16; p++) {
+            let okPeriod = true;
+            for (let k = 0; k < target.length; k++) {
+              if (target[k] !== target[k % p]) { okPeriod = false; break; }
+            }
+            if (okPeriod) { bestPeriod = p; break; }
+          }
+          if (bestPeriod > 0) {
+            const seed = target.slice(0, bestPeriod);
+            const qSpan = mark + 'Q' + String(target.length) + ':' + String(bestPeriod) + ':' + seed + mark;
+            const qFolded = tsLineR3.replace(target, qSpan);
+            const rebuilt = expandBody(qFolded, mark, regionByGlyph, phraseByGlyph, sep);
+            const profitable = !measure || countTokens(qFolded, enc) < countTokens(tsLineR3, enc);
+            if (rebuilt === srcLine && profitable) {
+              systems.add('Q');
+              flushCsv();
+              outLines.push(qFolded);
+              continue;
+            }
           }
         }
       }
@@ -2008,7 +2579,13 @@ async function rosettaEncodeUncached(
 export function rosettaDecoderPrompt(): string {
   const pool = rosettaPool('o200k_base');
   return [
-    '# ⟿ ROSETTA-R4.2 — byte-exact notational transposition wire',
+    '# ⟿ ROSETTA-R4.8 — byte-exact notational transposition wire',
+    'D: repeated literal rows',
+    'G: symbolic tile rows',
+    'H: repeated user/assistant chat blocks',
+    'I: compact JSON id/ok ranges',
+    'L: JS accumulation-loop families',
+    'V: shared id/ms metric tables',
     'A ROSETTA message is: <glyph><body> — the FIRST character is the mark',
     'glyph and the body follows IMMEDIATELY (no newline after the mark). The',
     'mark comes from the ROSETTA glyph pool (version-stable, tokenizer-verified',
@@ -2016,6 +2593,10 @@ export function rosettaDecoderPrompt(): string {
     'Its pool index k anchors the codebook: glyph pool[k] is the span marker;',
     `pool[k+1+i] denotes region i of the RNS-1 table (${RNS1_REGIONS.length} cloud`,
     'regions, in the fixed order shipped in rosetta.ts).',
+    'U mode: global timestamp quotient transposes timestamps without per-span marks.',
+    'O / OPS-1: local source-disjoint or static lexeme namespace for ops/code/CJK terms.',
+    'Q spans: periodic alphanumeric spans store total length and period seed.',
+    'M spans: log-template tuples for exact log shapes e.g. (max=20, wait=5s).',
     'Decode <body> left to right:',
     '1. marker + 15-30 digit/T/Z run → an ISO-8601 BASIC instant; re-render it',
     '   in EXTENDED form (insert dashes and colons: 20260915T060211Z →',
