@@ -952,9 +952,37 @@ async function p16() {
   ok(noThrow, 'VALKYRIE decode never throws on malformed inputs');
 }
 
+async function p17() {
+  console.log('P17 — HYPERION-H1 hyper-dimensional spectral contraction shapes');
+  const { hyperionEncode, hyperionDecode, hyperionSelfTest, HYPERION_TEMPLATES } = await import('@/lib/omega/hyperion');
+
+  const tests = hyperionSelfTest('o200k_base');
+  for (const t of tests) {
+    ok(t.pass, `HYPERION self-test: ${t.name}`, t.details);
+  }
+
+  const tmplSample = HYPERION_TEMPLATES[0] + '\n' + HYPERION_TEMPLATES[2];
+  const r = hyperionEncode(tmplSample, 'o200k_base');
+  const back = hyperionDecode(r.wire, 'o200k_base');
+  ok(r.exact && back === tmplSample && r.outTokens < r.inTokens, 'HYPERION folds hyper-dimensional spectral templates', `${r.inTokens} -> ${r.outTokens}`);
+
+  // Literal wrap
+  const literalSrc = 'Ϧsome leading literal ϦϦ sentinel text';
+  const rLit = hyperionEncode(literalSrc, 'o200k_base');
+  const backLit = hyperionDecode(rLit.wire, 'o200k_base');
+  ok(rLit.exact && backLit === literalSrc && rLit.wire.startsWith('ϦϦ'), 'HYPERION literal sentinel wrap roundtrip');
+
+  // Decode never throws on bad inputs
+  let noThrow = true;
+  for (const g of ['Ϧ', 'ϦϦ', 'ϦϦϦ', 'Ϧ\u0391\u0392\u0393', 'Ϧinvalid_glyph_here_12345']) {
+    try { hyperionDecode(g, 'o200k_base'); } catch { noThrow = false; }
+  }
+  ok(noThrow, 'HYPERION decode never throws on malformed inputs');
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14(); await p15(); await p16();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14(); await p15(); await p16(); await p17();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }
