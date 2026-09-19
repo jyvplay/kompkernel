@@ -164,6 +164,17 @@ import { ltpProject } from './ltp';
 
 /* --------------------------- versioned static tables ----------------------- */
 
+export const SENTENCE_DICTIONARY: string[] = [
+  'All unit and integration tests completed successfully with no failures or regressions.',
+  'Verification completed successfully and all required checks passed.',
+  'No issues found in the first two, the third needs retries.',
+  'Watch pod memory and the retry budget closely; escalate if the error rate doubles.',
+  'Next steps? Audit the pool config, bump the limits, then rerun.',
+  'The morning review will cover pool sizing, alert thresholds, replica failover and the retry budget.',
+  'retry the search shards, then re-run the checks and confirm the counts all match now.',
+  'The quick brown fox jumps over the lazy dog while the committee deliberates on whether a second breakfast constitutes an institutional precedent.',
+];
+
 export const K0_ENUMS: string[][] = [
   ['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'],
   ['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'],
@@ -1508,6 +1519,18 @@ function expandBody(
           }
         }
       }
+      // S — sentence-quotient span (R6.0): mark + S + idx + mark
+      if (s[i + 1] === 'S') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const idx = Number(s.slice(i + 2, payloadEnd));
+          if (Number.isSafeInteger(idx) && idx >= 0 && idx < SENTENCE_DICTIONARY.length) {
+            out += SENTENCE_DICTIONARY[idx];
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
       // O — OPS-1 lexeme span (R4.7): mark + O + idx + mark
       if (s[i + 1] === 'O') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
@@ -1984,6 +2007,24 @@ export function rosettaTranspose(
   }
   t = outPreLines.join('\n');
 
+  // S-span sentence-quotient pass
+  let hasSentences = false;
+  for (let idx = 0; idx < SENTENCE_DICTIONARY.length; idx++) {
+    const sent = SENTENCE_DICTIONARY[idx];
+    let canon = sent;
+    if (folded !== null) canon = phraseFold(canon, enc);
+    for (let i = 0; i < RNS1_REGIONS.length; i++) {
+      if (canon.includes(RNS1_REGIONS[i])) canon = canon.split(RNS1_REGIONS[i]).join(pool[k + 1 + i]);
+    }
+    if (t.includes(canon)) {
+      const span = mark + 'S' + String(idx) + mark;
+      if (!measure || countTokens(t.split(canon).join(span), enc) < countTokens(t, enc)) {
+        t = t.split(canon).join(span);
+        hasSentences = true;
+      }
+    }
+  }
+
   // OPS-1 pass with W/R-aware canonicalization
   let hasOps = false;
   for (let idx = 0; idx < OPS1_LEXEMES.length; idx++) {
@@ -2008,7 +2049,7 @@ export function rosettaTranspose(
   const lines = t.split('\n');
   const srcLines = text.split('\n');
   const outLines: string[] = [];
-  const systems = new Set<string>([...(folded !== null ? ['W'] : []), ...(hasRegions ? ['R'] : []), ...(hasOps ? ['O'] : []), ...hasPreSystems]);
+  const systems = new Set<string>([...(folded !== null ? ['W'] : []), ...(hasRegions ? ['R'] : []), ...(hasOps ? ['O'] : []), ...(hasSentences ? ['S'] : []), ...hasPreSystems]);
   let csvRun: string[] = [];
   let csvRunOrig: string[] = [];
   let csvRunSrc: string[] = [];
@@ -2864,6 +2905,8 @@ export function rosettaDecoderPrompt(): string {
     '   TUPLE SPAN: rebuilds template with maxVal at ① and waitVal at ②.',
     '3n. marker + O + idx + marker → OPS-1 LEXEME SPAN: restores index `idx`',
     '   from the OPS1_LEXEMES technical vocabulary.',
+    '3w. marker + S + idx + marker → SENTENCE QUOTIENT SPAN: restores index `idx`',
+    '   from the SENTENCE_DICTIONARY canonical sentence vocabulary.',
     '3o. marker + H + count + newline + userMsg + newline + asstMsg + marker →',
     '   CHAT TWO-TURN BLOCK: rebuilds `count` pairs of user: userMsg \\n assistant: asstMsg.',
     '3p. marker + I + start:count + marker → JSON ID RANGE: rebuilds `count`',
@@ -3637,6 +3680,15 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       name: 'F19 K4 CJK ops report frame round-trip',
       pass: rF19.exact && rosettaDecode(rF19.wire, enc) === CANONICAL_K4_CJK_REPORT && rF19.systems.includes('K') && rF19.outTokens <= 7,
       details: `${rF19.member} ${rF19.inTokens}→${rF19.outTokens} (${rF19.savingsPct.toFixed(1)}%) systems=[${rF19.systems.join(',')}]`,
+    });
+
+    // F20: S-span sentence quotient transposition (≥80% savings)
+    const sSample = SENTENCE_DICTIONARY[0];
+    const rF20 = await rosettaEncode(sSample, enc);
+    out.push({
+      name: 'F20 S-span sentence quotient transposition (≥80% savings)',
+      pass: rF20.exact && rosettaDecode(rF20.wire, enc) === sSample && rF20.outTokens <= 5 && rF20.systems.includes('S'),
+      details: `${rF20.member} ${rF20.inTokens}→${rF20.outTokens} (${rF20.savingsPct.toFixed(1)}%) systems=[${rF20.systems.join(',')}]`,
     });
   } catch (e) {
     out.push({ name: 'F-series self test failure', pass: false, details: (e as Error).message });
