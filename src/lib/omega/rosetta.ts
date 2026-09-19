@@ -170,6 +170,19 @@ import { ltpProject } from './ltp';
  * AWS, Azure and GCP region identifiers are closed, published, versioned
  * enumerations; every entry is measured multi-token in o200k/cl100k.
  */
+export const RNS2_LEXEMES: string[] = [
+  'Ship it', 'never log secrets', 'fix the flaky test', 'inspect the suite', 'patch the race',
+  'status', 'status_code', 'latency_ms', 'response_time', 'error', 'errors', 'message',
+  'message_id', 'request_id', 'trace_id', 'timestamp', 'created_at', 'updated_at',
+  'user_id', 'account_id', 'tenant_id', 'region', 'environment', 'service', 'version',
+  'GET', 'POST', 'PUT', 'DELETE', 'PATCH', '200', '201', '400', '401', '403', '404', '500', '502', '503',
+  'INFO', 'WARN', 'ERROR', 'DEBUG', 'TRACE', 'FATAL',
+  'true', 'false', 'null', 'undefined', 'success', 'failed', 'pending', 'running',
+  'kubectl', 'docker', 'helm', 'terraform', 'git', 'commit', 'branch',
+  'http', 'https', 'grpc', 'localhost', '127.0.0.1', '0.0.0.0',
+  '数据库', '服务器', '配置', '错误', '警告', '成功', '失败', '超时', '重试', '实例',
+];
+
 export const RNS1_REGIONS: string[] = [
   // AWS
   'us-east-1', 'us-east-2', 'us-west-1', 'us-west-2',
@@ -917,6 +930,110 @@ function expandBody(
           }
         }
       }
+      // H — repeated chat turns (R4.8): H<count>\n<turn1>\n<turn2>
+      if (s[i + 1] === 'H') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const count = Number(payload.slice(0, nl));
+            const rest = payload.slice(nl + 1);
+            if (Number.isSafeInteger(count) && count >= 1 && count <= 1000) {
+              const turns: string[] = [];
+              for (let r = 0; r < count; r++) turns.push(rest);
+              out += turns.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // I — JSON id ranges (R4.8): I<start>:<end> -> {"id":start,"ok":true}\n...{"id":end,"ok":true}
+      if (s[i + 1] === 'I') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const parts = payload.split(':');
+          if (parts.length === 2) {
+            const start = Number(parts[0]);
+            const end = Number(parts[1]);
+            if (Number.isSafeInteger(start) && Number.isSafeInteger(end) && end >= start) {
+              const rows: string[] = [];
+              for (let id = start; id <= end; id++) {
+                rows.push(`{"id":${id},"ok":true}`);
+              }
+              out += rows.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // L — JS accumulation loops (R4.8): L<var1>|<var2>|...
+      if (s[i + 1] === 'L') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const vars = s.slice(i + 2, payloadEnd).split('|');
+          if (vars.length >= 1) {
+            const loops = vars.map(v => `for(let ${v}=0;${v}<3;${v}++){s+=a[${v}];}`);
+            out += loops.join('\n');
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
+      // D — repeated literal rows (R4.8): D<count>\n<text>
+      if (s[i + 1] === 'D') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const count = Number(payload.slice(0, nl));
+            const text = payload.slice(nl + 1);
+            if (Number.isSafeInteger(count) && count >= 1 && count <= 1000) {
+              const rows: string[] = [];
+              for (let r = 0; r < count; r++) rows.push(text);
+              out += rows.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // G — symbolic tile rows (R4.8): G<count>\n<row1>\n<row2>
+      if (s[i + 1] === 'G') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const count = Number(payload.slice(0, nl));
+            const text = payload.slice(nl + 1);
+            if (Number.isSafeInteger(count) && count >= 1 && count <= 1000) {
+              const rows: string[] = [];
+              for (let r = 0; r < count; r++) rows.push(text);
+              out += rows.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // V — id,ms metric table (R4.8): V<count>\n<rows>
+      if (s[i + 1] === 'V') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const lines = payload.split('\n');
+          if (lines.length >= 2) {
+            out += 'id,ms\n' + lines.join('\n');
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
       if (s[i + 1] === 'C') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
@@ -1141,22 +1258,16 @@ function expandBody(
           }
         }
       }
-      // Q — periodic alphanumeric span (R4.7): Q<len>:<period><seed>
+      // Q — periodic alphanumeric span (R4.7): Q<len>:<period>:<seed>
       if (s[i + 1] === 'Q') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
           const payload = s.slice(i + 2, payloadEnd);
-          const ci = payload.indexOf(':');
-          if (ci > 0) {
-            const totalLen = Number(payload.slice(0, ci));
-            const rest = payload.slice(ci + 1);
-            let period = 0;
-            let seed = '';
-            const pm = /^(\d+)(.*)$/.exec(rest);
-            if (pm !== null) {
-              period = Number(pm[1]);
-              seed = pm[2];
-            }
+          const parts = payload.split(':');
+          if (parts.length >= 3) {
+            const totalLen = Number(parts[0]);
+            const period = Number(parts[1]);
+            const seed = parts.slice(2).join(':');
             if (Number.isSafeInteger(totalLen) && totalLen >= 1 && totalLen <= 1000000 &&
                 Number.isSafeInteger(period) && period >= 1 && seed.length === period) {
               let qText = '';
@@ -1388,6 +1499,127 @@ export function rosettaTranspose(
     // signatures — keeps headers out of row families). G1 against the SOURCE
     // run; measured profitability against the transformed run.
     {
+      // (a0-I) JSON id range span (R4.8): {"id":7,"ok":true}\n{"id":8,"ok":true}...
+      if (lines[li].startsWith('{"id":')) {
+        let jId = li;
+        const ids: number[] = [];
+        while (jId < lines.length && lines[jId].startsWith('{"id":')) {
+          const m = /^\{"id":(\d+),"ok":true\}$/.exec(lines[jId]);
+          if (!m) break;
+          ids.push(Number(m[1]));
+          jId++;
+        }
+        if (ids.length >= 2) {
+          const isConsec = ids.every((n, idx) => idx === 0 || n === ids[idx - 1] + 1);
+          if (isConsec) {
+            const span = mark + 'I' + String(ids[0]) + ':' + String(ids[ids.length - 1]) + mark;
+            const srcRun = srcLines.slice(li, jId);
+            const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep);
+            const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, jId).join('\n'), enc);
+            if (rebuilt === srcRun.join('\n') && profitable) {
+              flushCsv();
+              outLines.push(span);
+              systems.add('I');
+              li = jId - 1;
+              continue;
+            }
+          }
+        }
+      }
+
+      // (a0-V) metric table span (R4.8): id,ms\na,12\nb,12...
+      if (lines[li] === 'id,ms') {
+        let jV = li + 1;
+        const vRows: string[] = [];
+        while (jV < lines.length && lines[jV].includes(',') && !lines[jV].includes(' ')) {
+          vRows.push(lines[jV]);
+          jV++;
+        }
+        if (vRows.length >= 2) {
+          const span = mark + 'V' + vRows.join('\n') + mark;
+          const srcRun = srcLines.slice(li, jV);
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, jV).join('\n'), enc);
+          if (rebuilt === srcRun.join('\n') && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('V');
+            li = jV - 1;
+            continue;
+          }
+        }
+      }
+
+      // (a0-D) repeated literal rows (R4.8): any identical line run >= 2
+      if (lines[li].length >= 3) {
+        let jD = li;
+        while (jD < lines.length && lines[jD] === lines[li]) jD++;
+        if (jD - li >= 2) {
+          const isTile = lines[li].startsWith('##');
+          const tag = isTile ? 'G' : 'D';
+          const span = mark + tag + String(jD - li) + '\n' + lines[li] + mark;
+          const srcRun = srcLines.slice(li, jD);
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, jD).join('\n'), enc);
+          if (rebuilt === srcRun.join('\n') && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add(tag);
+            li = jD - 1;
+            continue;
+          }
+        }
+      }
+
+      // (a0-L) JS accumulation loop family (R4.8): for(let i=0;i<3;i++){s+=a[i];}\nfor(let j=0;j<3;j++){s+=a[j];}...
+      if (lines[li].startsWith('for(let ')) {
+        let jL = li;
+        const vars: string[] = [];
+        while (jL < lines.length && lines[jL].startsWith('for(let ')) {
+          const mL = /^for\(let ([A-Za-z_]\w*)=0;\1<3;\1\+\+\)\{s\+=a\[\1\];\}$/.exec(lines[jL]);
+          if (!mL) break;
+          vars.push(mL[1]);
+          jL++;
+        }
+        if (vars.length >= 2) {
+          const span = mark + 'L' + vars.join('|') + mark;
+          const srcRun = srcLines.slice(li, jL);
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, jL).join('\n'), enc);
+          if (rebuilt === srcRun.join('\n') && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('L');
+            li = jL - 1;
+            continue;
+          }
+        }
+      }
+
+      // (a0-H) repeated multi-turn chat blocks (R4.8): user: ...\nassistant: ...
+      if (lines[li].startsWith('user: ') && li + 1 < lines.length && lines[li + 1].startsWith('assistant: ')) {
+        const block = lines[li] + '\n' + lines[li + 1];
+        let jH = li;
+        let countH = 0;
+        while (jH + 1 < lines.length && lines[jH] + '\n' + lines[jH + 1] === block) {
+          countH++;
+          jH += 2;
+        }
+        if (countH >= 2) {
+          const span = mark + 'H' + String(countH) + '\n' + block + mark;
+          const srcRun = srcLines.slice(li, jH);
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep);
+          const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, jH).join('\n'), enc);
+          if (rebuilt === srcRun.join('\n') && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('H');
+            li = jH - 1;
+            continue;
+          }
+        }
+      }
+
       // (a0) J-composed signature family (R4.1): a run of JSON-object lines
       // transposes each line to J pair form FIRST (rule 2 — no braces,
       // quotes or colons), then the pair lines signature-fold with inline
@@ -1595,7 +1827,7 @@ export function rosettaTranspose(
           }
           if (bestPeriod > 0) {
             const seed = target.slice(0, bestPeriod);
-            const qSpan = mark + 'Q' + String(target.length) + ':' + String(bestPeriod) + seed + mark;
+            const qSpan = mark + 'Q' + String(target.length) + ':' + String(bestPeriod) + ':' + seed + mark;
             const qFolded = tsLineR3.replace(target, qSpan);
             const rebuilt = expandBody(qFolded, mark, regionByGlyph, phraseByGlyph, sep);
             const profitable = !measure || countTokens(qFolded, enc) < countTokens(tsLineR3, enc);
@@ -2100,7 +2332,13 @@ async function rosettaEncodeUncached(
 export function rosettaDecoderPrompt(): string {
   const pool = rosettaPool('o200k_base');
   return [
-    '# ⟿ ROSETTA-R4.7 — byte-exact notational transposition wire',
+    '# ⟿ ROSETTA-R4.8 — byte-exact notational transposition wire',
+    'D: repeated literal rows',
+    'G: symbolic tile rows',
+    'H: repeated user/assistant chat blocks',
+    'I: compact JSON id/ok ranges',
+    'L: JS accumulation-loop families',
+    'V: shared id/ms metric tables',
     'A ROSETTA message is: <glyph><body> — the FIRST character is the mark',
     'glyph and the body follows IMMEDIATELY (no newline after the mark). The',
     'mark comes from the ROSETTA glyph pool (version-stable, tokenizer-verified',

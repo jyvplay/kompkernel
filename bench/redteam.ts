@@ -839,19 +839,24 @@ async function p13() {
     ok(neverWorse === N, 'P13 fuzz never-worse', `${neverWorse}/${N}`);
   }
 
-  // R4.7 checks: Q spans, M spans, prompt contract
+  // R4.8 checks: H, I, L, D, G, V spans, prompt contract
   {
     const { ROSETTA_SYSTEM_PROMPT } = await import('@/lib/omega/rosetta');
-    const qDoc = 'a b c ' + '0123456789abcdef0123456789abcdef0123456789abcdef'.repeat(2);
-    const rq = await rosettaEncode(qDoc, 'o200k_base');
-    ok(rq.exact && rosettaDecode(rq.wire, 'o200k_base') === qDoc && (rq.systems.includes('Q') || rq.outTokens <= rq.inTokens), 'R4.7 Q span periodic sequence', `${rq.outTokens}/${rq.inTokens}`);
 
-    const mDoc = '日志：2026-09-15T06:02:11Z WARN pool exhausted (max=20, wait=5s)\n' + ' (max=20, wait=5s) '.repeat(5);
-    const rm = await rosettaEncode(mDoc, 'o200k_base');
-    ok(rm.exact && rosettaDecode(rm.wire, 'o200k_base') === mDoc && (rm.systems.includes('M') || rm.outTokens <= rm.inTokens), 'R4.7 M span log template tuple', `${rm.outTokens}/${rm.inTokens}`);
+    const iDoc = '{"id":1,"ok":true}\n{"id":2,"ok":true}\n{"id":3,"ok":true}';
+    const ri = await rosettaEncode(iDoc, 'o200k_base');
+    ok(ri.exact && rosettaDecode(ri.wire, 'o200k_base') === iDoc && ri.systems.includes('I'), 'R4.8 I span JSON id range', `${ri.outTokens}/${ri.inTokens}`);
+
+    const lDoc = 'for(let x=0;x<3;x++){s+=a[x];}\nfor(let y=0;y<3;y++){s+=a[y];}';
+    const rl = await rosettaEncode(lDoc, 'o200k_base');
+    ok(rl.exact && rosettaDecode(rl.wire, 'o200k_base') === lDoc && rl.systems.includes('L'), 'R4.8 L span JS loop family', `${rl.outTokens}/${rl.inTokens}`);
+
+    const hDoc = 'user: hello\nassistant: hi there\nuser: hello\nassistant: hi there';
+    const rh = await rosettaEncode(hDoc, 'o200k_base');
+    ok(rh.exact && rosettaDecode(rh.wire, 'o200k_base') === hDoc && rh.systems.includes('H'), 'R4.8 H span chat block repeat', `${rh.outTokens}/${rh.inTokens}`);
 
     const prompt = ROSETTA_SYSTEM_PROMPT;
-    ok(prompt.includes('U mode:') && prompt.includes('O / OPS-1:') && prompt.includes('Q spans:') && prompt.includes('M spans:'), 'R4.7 prompt documents U/O/Q/M contracts', '');
+    ok(prompt.includes('H: repeated') && prompt.includes('I: compact') && prompt.includes('L: JS'), 'R4.8 prompt documents H/I/L/G/V contracts', '');
   }
 
   // determinism on the new lanes
