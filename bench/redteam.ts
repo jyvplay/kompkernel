@@ -924,9 +924,37 @@ async function p15() {
   ok(noThrow, 'PHOENIX decode never throws on malformed inputs');
 }
 
+async function p16() {
+  console.log('P16 — VALKYRIE-V1 degenerate lattice subgraph contracting shapes');
+  const { valkyrieEncode, valkyrieDecode, valkyrieSelfTest, VALKYRIE_TEMPLATES } = await import('@/lib/omega/valkyrie');
+
+  const tests = valkyrieSelfTest('o200k_base');
+  for (const t of tests) {
+    ok(t.pass, `VALKYRIE self-test: ${t.name}`, t.details);
+  }
+
+  const tmplSample = VALKYRIE_TEMPLATES[0] + '\n' + VALKYRIE_TEMPLATES[2];
+  const r = valkyrieEncode(tmplSample, 'o200k_base');
+  const back = valkyrieDecode(r.wire, 'o200k_base');
+  ok(r.exact && back === tmplSample && r.outTokens < r.inTokens, 'VALKYRIE folds degenerate lattice subgraphs', `${r.inTokens} -> ${r.outTokens}`);
+
+  // Literal wrap
+  const literalSrc = 'Ѽsome leading literal ѼѼ sentinel text';
+  const rLit = valkyrieEncode(literalSrc, 'o200k_base');
+  const backLit = valkyrieDecode(rLit.wire, 'o200k_base');
+  ok(rLit.exact && backLit === literalSrc && rLit.wire.startsWith('ѼѼ'), 'VALKYRIE literal sentinel wrap roundtrip');
+
+  // Decode never throws on bad inputs
+  let noThrow = true;
+  for (const g of ['V', 'VV', 'VVV', 'V\u0391\u0392\u0393', 'Vinvalid_glyph_here_12345']) {
+    try { valkyrieDecode(g, 'o200k_base'); } catch { noThrow = false; }
+  }
+  ok(noThrow, 'VALKYRIE decode never throws on malformed inputs');
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14(); await p15();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14(); await p15(); await p16();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }
