@@ -45,6 +45,7 @@ import { tauEncode } from '@/lib/omega/tau';
 import { lumenEncode } from '@/lib/omega/lumen';
 import { astralEncode } from '@/lib/omega/astral';
 import { hyperionEncode } from '@/lib/omega/hyperion';
+import { polarisEncode } from '@/lib/omega/polaris';
 
 export interface Row {
   key: string; wireTokens: number; deliveredTokens: number | null;
@@ -108,6 +109,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('lumen', () => lumenEncode(text, enc));
   await run('astral', () => astralEncode(text, enc));
   await run('hyperion', () => hyperionEncode(text, enc));
+  await run('polaris', () => polarisEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));
   await run('mosaic', () => mosaicEncode(text, enc));
   await run('orbit', async () => orbitEncode(text, enc));
