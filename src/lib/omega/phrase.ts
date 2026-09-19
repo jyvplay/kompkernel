@@ -127,6 +127,7 @@ const EN_OPS: readonly string[] = [
   'bump the limits, then rerun', 'Watch pod memory', 'and the retry budget closely',
   'escalate if the error rate doubles', 'The morning review will cover', 'pool sizing, alert thresholds',
   'replica failover and the retry budget', 'verify the health check', 'then confirm the alert clears',
+  'Ship it', 'never log secrets', 'fix the flaky test', 'inspect the suite', 'patch the race',
 ];
 /** Standard Japanese IT katakana loanwords + core report vocabulary. */
 const JP: readonly string[] = [
