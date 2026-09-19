@@ -896,9 +896,37 @@ async function p14() {
   ok(noThrow, 'ASTRAL decode never throws on malformed inputs');
 }
 
+async function p15() {
+  console.log('P15 — PHOENIX-P1 topological fragment motif extraction shapes');
+  const { phoenixEncode, phoenixDecode, phoenixSelfTest, PHOENIX_TEMPLATES } = await import('@/lib/omega/phoenix');
+
+  const tests = phoenixSelfTest('o200k_base');
+  for (const t of tests) {
+    ok(t.pass, `PHOENIX self-test: ${t.name}`, t.details);
+  }
+
+  const tmplSample = PHOENIX_TEMPLATES[0] + '\n' + PHOENIX_TEMPLATES[2];
+  const r = phoenixEncode(tmplSample, 'o200k_base');
+  const back = phoenixDecode(r.wire, 'o200k_base');
+  ok(r.exact && back === tmplSample && r.outTokens < r.inTokens, 'PHOENIX folds topological frame motifs', `${r.inTokens} -> ${r.outTokens}`);
+
+  // Literal wrap
+  const literalSrc = 'Ψsome leading literal Ψ sentinel text';
+  const rLit = phoenixEncode(literalSrc, 'o200k_base');
+  const backLit = phoenixDecode(rLit.wire, 'o200k_base');
+  ok(rLit.exact && backLit === literalSrc && rLit.wire.startsWith('ΨΨ'), 'PHOENIX literal sentinel wrap roundtrip');
+
+  // Decode never throws on bad inputs
+  let noThrow = true;
+  for (const g of ['Ψ', 'ΨΨ', 'ΨΨΨ', 'Ψ\u0391\u0392\u0393', 'Ψinvalid_glyph_here_12345']) {
+    try { phoenixDecode(g, 'o200k_base'); } catch { noThrow = false; }
+  }
+  ok(noThrow, 'PHOENIX decode never throws on malformed inputs');
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14(); await p15();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }
