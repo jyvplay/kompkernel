@@ -246,6 +246,28 @@ export const OPS1_LEXEMES: string[] = [
   'Ship it', 'never log secrets', 'inspect the suite', 'patch the race',
 ];
 
+export const STRUCTURAL_X_LEXICON: string[] = [
+  '```typescript\n',
+  '```javascript\n',
+  '```python\n',
+  '```json\n',
+  '```bash\n',
+  '```yaml\n',
+  '```sql\n',
+  '```html\n',
+  '<!DOCTYPE html>',
+  '<meta charset="utf-8">',
+  'Content-Type: application/json',
+  'Authorization: Bearer ',
+  '<script type="text/javascript">',
+  '</script>',
+  'http://localhost:',
+  '127.0.0.1:',
+  '500 Internal Server Error',
+  '404 Not Found',
+  '200 OK',
+];
+
 /**
  * RNS-1 — enumerated cloud-region namespace (version 1).
  * Order is part of the wire contract: region i ↔ pool glyph pool[k+1+i].
@@ -1531,6 +1553,18 @@ function expandBody(
           }
         }
       }
+      // X — structural tag-quotient span (R7.0): mark + X + idx + mark
+      if (s[i + 1] === 'X') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const idx = Number(s.slice(i + 2, payloadEnd));
+          if (Number.isSafeInteger(idx) && idx >= 0 && idx < STRUCTURAL_X_LEXICON.length) {
+            out += STRUCTURAL_X_LEXICON[idx];
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
       // O — OPS-1 lexeme span (R4.7): mark + O + idx + mark
       if (s[i + 1] === 'O') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
@@ -2025,6 +2059,24 @@ export function rosettaTranspose(
     }
   }
 
+  // X-span structural tag-quotient pass
+  let hasXStruct = false;
+  for (let idx = 0; idx < STRUCTURAL_X_LEXICON.length; idx++) {
+    const lex = STRUCTURAL_X_LEXICON[idx];
+    let canon = lex;
+    if (folded !== null) canon = phraseFold(canon, enc);
+    for (let i = 0; i < RNS1_REGIONS.length; i++) {
+      if (canon.includes(RNS1_REGIONS[i])) canon = canon.split(RNS1_REGIONS[i]).join(pool[k + 1 + i]);
+    }
+    if (t.includes(canon)) {
+      const span = mark + 'X' + String(idx) + mark;
+      if (!measure || countTokens(t.split(canon).join(span), enc) < countTokens(t, enc)) {
+        t = t.split(canon).join(span);
+        hasXStruct = true;
+      }
+    }
+  }
+
   // OPS-1 pass with W/R-aware canonicalization
   let hasOps = false;
   for (let idx = 0; idx < OPS1_LEXEMES.length; idx++) {
@@ -2049,7 +2101,7 @@ export function rosettaTranspose(
   const lines = t.split('\n');
   const srcLines = text.split('\n');
   const outLines: string[] = [];
-  const systems = new Set<string>([...(folded !== null ? ['W'] : []), ...(hasRegions ? ['R'] : []), ...(hasOps ? ['O'] : []), ...(hasSentences ? ['S'] : []), ...hasPreSystems]);
+  const systems = new Set<string>([...(folded !== null ? ['W'] : []), ...(hasRegions ? ['R'] : []), ...(hasOps ? ['O'] : []), ...(hasSentences ? ['S'] : []), ...(hasXStruct ? ['X'] : []), ...hasPreSystems]);
   let csvRun: string[] = [];
   let csvRunOrig: string[] = [];
   let csvRunSrc: string[] = [];
@@ -2907,6 +2959,8 @@ export function rosettaDecoderPrompt(): string {
     '   from the OPS1_LEXEMES technical vocabulary.',
     '3w. marker + S + idx + marker → SENTENCE QUOTIENT SPAN: restores index `idx`',
     '   from the SENTENCE_DICTIONARY canonical sentence vocabulary.',
+    '3x. marker + X + idx + marker → STRUCTURAL TAG-QUOTIENT SPAN: restores index `idx`',
+    '   from the STRUCTURAL_X_LEXICON structural code fence / HTML / header vocabulary.',
     '3o. marker + H + count + newline + userMsg + newline + asstMsg + marker →',
     '   CHAT TWO-TURN BLOCK: rebuilds `count` pairs of user: userMsg \\n assistant: asstMsg.',
     '3p. marker + I + start:count + marker → JSON ID RANGE: rebuilds `count`',
@@ -3689,6 +3743,15 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       name: 'F20 S-span sentence quotient transposition (≥80% savings)',
       pass: rF20.exact && rosettaDecode(rF20.wire, enc) === sSample && rF20.outTokens <= 5 && rF20.systems.includes('S'),
       details: `${rF20.member} ${rF20.inTokens}→${rF20.outTokens} (${rF20.savingsPct.toFixed(1)}%) systems=[${rF20.systems.join(',')}]`,
+    });
+
+    // F21: X-span structural tag-quotient transposition
+    const xSample = '```typescript\nconst x = 1;\n```\nContent-Type: application/json\n<!DOCTYPE html>\n<meta charset="utf-8">';
+    const rF21 = await rosettaEncode(xSample, enc);
+    out.push({
+      name: 'F21 X-span structural tag-quotient transposition',
+      pass: rF21.exact && rosettaDecode(rF21.wire, enc) === xSample && rF21.systems.includes('X') && rF21.outTokens < rF21.inTokens,
+      details: `${rF21.member} ${rF21.inTokens}→${rF21.outTokens} (${rF21.savingsPct.toFixed(1)}%) systems=[${rF21.systems.join(',')}]`,
     });
   } catch (e) {
     out.push({ name: 'F-series self test failure', pass: false, details: (e as Error).message });
