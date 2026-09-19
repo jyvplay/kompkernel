@@ -115,19 +115,7 @@ const EN_FUNCTION: readonly string[] = [
 const EN_OPS: readonly string[] = [
   ' status ok', ' no issues', ' as expected', ' in progress', ' please note', ' make sure', ' next steps',
   ' follow up', ' let me', ' I will', ' we should', ' queue depth', ' on-call', ' error rate', ' root cause',
-  ' blast radius', ' deploy finished', ' retry storm', ' TLS handshake', ' handshake timeout', ' p99 latency',
-  ' pool exhausted', ' rollout status', ' describe-instances', ' describe-pods', ' health check', ' failover',
-  ' flaky test', ' retry budget', ' dead-letter queue', ' consumer lag', ' cert rotated', ' cert expired',
-  ' shards pending', ' retry scheduled', ' no issues found', 'Status: deploy finished', 'but two pods restart',
-  'Queue depth climbed', 'while the retry storm was live', 'on-call was paged twice', 'during the window',
-  'queue depth 14', 'p99 latency 812ms', 'flaky test `test_retry_backoff`', 'failed twice on shard 7',
-  'cache warmup aborted', 'TLS handshake timeout', 'def run(ctx):', 'if v is None: raise ValueError(k)',
-  'return sum(ctx.values())', 'pool exhausted (max=20, wait=5s)', 'kectl rollout status deploy/api',
-  '--timeout=90s || kubectl get events', '--sort-by=.ts', 'Next steps?', 'Audit the pool config',
-  'bump the limits, then rerun', 'Watch pod memory', 'and the retry budget closely',
-  'escalate if the error rate doubles', 'The morning review will cover', 'pool sizing, alert thresholds',
-  'replica failover and the retry budget', 'verify the health check', 'then confirm the alert clears',
-  'Ship it', 'never log secrets', 'fix the flaky test', 'inspect the suite', 'patch the race',
+  ' blast radius',
 ];
 /** Standard Japanese IT katakana loanwords + core report vocabulary. */
 const JP: readonly string[] = [
@@ -135,20 +123,12 @@ const JP: readonly string[] = [
   'インスタンス', 'クラスター', 'ネットワーク', 'セキュリティ', 'パフォーマンス', 'メンテナンス',
   'データベース', 'ステータス', 'デプロイ', 'ロールバック', 'バックアップ', 'レイテンシ', 'スループット',
   'します', 'ません', 'ください', '再起動', '復旧', '対応', '報告', '完了', '失敗', '警告', '監視',
-  '接続', '影響範囲', '注意', '深夜帯', 'レスポンス遅延', '接続がタイムアウト', 'フェイルオーバー',
-  '健康チェック', 'ネットワーク設定', '通常レベル', '復旧作業', 'アラート設定', '深夜帯にモニタリングが',
-  'アラートを発報しました', '影響範囲: 決済APIの', '原因: データベース接続が', 'レプリカのフェイルオーバーに失敗',
-  '接続プールの上限を引き上げ', 'ネットワーク設定を見直します', '復旧作業は完了',
-  'スループットは通常レベルに戻りました',
+  '接続', '影響範囲', '注意',
 ];
 /** Standard Chinese technical terms (≥3 chars; 2-char words are 1-token). */
 const CN: readonly string[] = [
   '必要时', '连接池', '负载均衡', '健康检查', '再平衡', '请检查', '请确认', '已完成', '进行中',
-  '滚动更新', '版本回滚', '自动恢复', '连接池配置', '超时参数', '健康检查参数', '索引重建',
-  '分片待处理', '连接池耗尽', '错误率已回落', '关闭告警', '自动轮换', '待处理', '数据库迁移已完成',
-  '但缓存预热失败', '请检查连接池配置和超时参数', '必要时重启实例后再观察', '数据库连接池配置偏低',
-  '负载均衡未生效', '请检查健康检查参数', '必要时重启实例', '警告 连接池耗尽', '监控显示错误率已回落',
-  '健康检查恢复正常', '请确认后关闭告警',
+  '滚动更新', '版本回滚', '自动恢复',
 ];
 
 /** PHRASEBOOK_V1 — order is part of the wire contract (phrase i ↔ glyph i). */
