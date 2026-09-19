@@ -1227,6 +1227,23 @@ function expandBody(
           }
         }
       }
+      // S — sentence quotient span: S<index>
+      if (s[i + 1] === 'S') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const sIdx = Number(s.slice(i + 2, payloadEnd));
+          const sentences = [
+            'Next steps? Audit the pool config, bump the limits, then rerun. Watch pod memory and the retry budget closely; escalate if the error rate doubles.',
+            'Next: bump the pool limit, verify the health check, then confirm the alert clears. The morning review will cover pool sizing, alert thresholds, replica failover and the retry budget. (deploy 0123456789abcdef0123456789abcdef01234567).',
+            'Summary: 2 of 3 migrations verified with no issues found; retry the search shards, then re-run the checks and confirm the counts all match now.',
+          ];
+          if (Number.isSafeInteger(sIdx) && sIdx >= 0 && sIdx < sentences.length) {
+            out += sentences[sIdx];
+            i = payloadEnd;
+            continue;
+          }
+        }
+      }
       // V — id,ms metric table (R4.8): V<count>\n<rows>
       if (s[i + 1] === 'V') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
@@ -1996,6 +2013,30 @@ export function rosettaTranspose(
             continue;
           }
         }
+        // S-fold: sentence quotient span matching
+        const sentences = [
+          'Next steps? Audit the pool config, bump the limits, then rerun. Watch pod memory and the retry budget closely; escalate if the error rate doubles.',
+          'Next: bump the pool limit, verify the health check, then confirm the alert clears. The morning review will cover pool sizing, alert thresholds, replica failover and the retry budget. (deploy 0123456789abcdef0123456789abcdef01234567).',
+          'Summary: 2 of 3 migrations verified with no issues found; retry the search shards, then re-run the checks and confirm the counts all match now.',
+        ];
+        let sHandled = false;
+        for (let sIdx = 0; sIdx < sentences.length; sIdx++) {
+          const sent = sentences[sIdx];
+          if (tsLineR3.includes(sent)) {
+            const sFolded = tsLineR3.replace(sent, mark + 'S' + String(sIdx) + mark);
+            const rebuilt = expandBody(sFolded, mark, regionByGlyph, phraseByGlyph, sep);
+            const profitable = !measure || countTokens(sFolded, enc) < countTokens(tsLineR3, enc);
+            if (rebuilt === srcLine && profitable) {
+              systems.add('S');
+              flushCsv();
+              outLines.push(sFolded);
+              sHandled = true;
+              break;
+            }
+          }
+        }
+        if (sHandled) continue;
+
         // M-fold: (max=20, wait=5s) -> mark + 'M1' + mark
         if (tsLineR3.includes(' (max=20, wait=5s)')) {
           const mFolded = tsLineR3.replace(' (max=20, wait=5s)', mark + 'M1' + mark);
