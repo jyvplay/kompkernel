@@ -751,6 +751,25 @@ async function p10() {
     ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === CHAOS_900 && r.systems.includes('K') && /K9:0/.test(r.wire) && r.savingsPct >= 90, 'P10 R5.3 K9 chaos-900 schema packet', `${r.member} ${r.outTokens}/${r.inTokens} (${r.savingsPct.toFixed(1)}%) [${r.systems.join(',')}] ${JSON.stringify(r.wire)}`);
   }
   {
+    const ev = ['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'];
+    const ac = ['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'];
+    const cn = ['正常', '偏高', '回落', '待查', '完成'];
+    const cards = Array.from({ length: 5 }, (_, i) => [
+      `### Incident review card ${String(i + 1).padStart(2, '0')}`,
+      `- Evidence retained exactly for model audit: ${ev[i]}`,
+      `- Action selected by operator: ${ac[i]}`,
+      `- 中文复核备注: ${cn[i]}`,
+    ].join('\n')).join('\n');
+    const r = await rosettaEncode(cards, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === cards && r.systems.includes('K') && /K0:5/.test(r.wire) && r.outTokens <= 32, 'P10 R5.5 K0 incident-card frame decodes once', `${r.member} ${r.outTokens}/${r.inTokens} [${r.systems.join(',')}] ${JSON.stringify(r.wire)}`);
+  }
+  {
+    const arr = '[' + Array.from({ length: 5 }, (_, i) => `{"observation_id":"obs-${i}","downstream_service":"svc-${i % 7}","latency_milliseconds":${100 + i * 17},"operator_decision":"${['hold', 'ship', 'page', 'retry', 'watch'][i % 5]}","region":"us-east-1"}`).join(',') + ']';
+    const r = await rosettaEncode(arr, 'o200k_base');
+    const bestNonRosetta = Math.min(...r.audit.filter((a) => a.exact && !a.member.startsWith('rosetta')).map((a) => a.tokens));
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === arr && r.systems.includes('B') && r.outTokens < bestNonRosetta && r.outTokens <= 106, 'P10 R5.5 B uniform JSON-array span beats non-Rosetta members', `${r.member} ${r.outTokens}/${r.inTokens} bestNonRosetta=${bestNonRosetta} [${r.systems.join(',')}]`);
+  }
+  {
     const prose = 'The quick brown fox jumps over the lazy dog while the committee deliberates on whether a second breakfast constitutes an institutional precedent.';
     const r = await rosettaEncode(prose, 'o200k_base');
     ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === prose && r.outTokens <= 12, 'P10 R5.4 prose static phrasebook gain', `${r.member} ${r.outTokens}/${r.inTokens} ${JSON.stringify(r.wire)}`);

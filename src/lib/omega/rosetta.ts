@@ -1,7 +1,7 @@
 /**
  * src/lib/omega/rosetta.ts
  * =============================================================================
- * ROSETTA-R5.4 — Notational transposition (dual-spelling argmin) + gated Pareto
+ * ROSETTA-R5.5 — Notational transposition (dual-spelling argmin) + gated Pareto
  * (R2 = R1 + table/YAML/JSON-family span systems P/Y/F + the τ member lane;
  *  R2.1 = J-array leading-pipe markers (single/empty arrays now fold — the
  *  G1 gate used to veto whole lines over ["x"]/[] values), the prologue diet
@@ -56,6 +56,9 @@
  *  generator (finite vocabularies + count) turns ~1k heterogeneous natural
  *  prompt-output text into a single form-id/count span, a model-based code
  *  rather than a repetition-only code.
+ *  R5.5 = B spans for compact JSON arrays of uniform objects: declare keys
+ *  once and transmit rows of JSON value literals (a TOON-style exact table
+ *  form) while byte-gating against the original array.
  * tournament over every self-contained exact lane in this repository.
  *
  * THE BLINDSPOT (measured, and shared by every codec in this repository)
@@ -584,6 +587,49 @@ function foldJsonLine(line: string): RosettaKvPair[] | null {
     }
   }
   return pairs;
+}
+
+interface JsonArrayFold { keys: string[]; vals: string[][] }
+
+/**
+ * Fold one canonical compact JSON array of uniform objects. This is the
+ * prompt-native TOON-like lane: declare object keys once, then carry one row
+ * of JSON value literals per object. It is exact-only and intentionally
+ * conservative: compact canonical JSON, >=2 records, identical key order, and
+ * no spaces/newlines inside value literals (space is the row separator).
+ */
+function foldJsonArrayLine(line: string): JsonArrayFold | null {
+  if (!line.startsWith('[') || !line.endsWith(']') || line.length < 5) return null;
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(line);
+  } catch {
+    return null;
+  }
+  if (!Array.isArray(parsed) || parsed.length < 2) return null;
+  try {
+    if (JSON.stringify(parsed) !== line) return null;
+  } catch {
+    return null;
+  }
+  let keys: string[] | null = null;
+  const vals: string[][] = [];
+  for (const row of parsed) {
+    if (typeof row !== 'object' || row === null || Array.isArray(row)) return null;
+    const obj = row as Record<string, unknown>;
+    const ks = Object.keys(obj);
+    if (ks.length < 1 || !ks.every((k) => KEY_RE.test(k))) return null;
+    if (keys === null) keys = ks;
+    else if (ks.join('\u0001') !== keys.join('\u0001')) return null;
+    const raw: string[] = [];
+    for (const k of ks) {
+      const v = JSON.stringify(obj[k]);
+      if (v === undefined || v.includes(' ') || v.includes('\n')) return null;
+      raw.push(v);
+    }
+    vals.push(raw);
+  }
+  return keys === null ? null : { keys, vals };
 }
 
 /** Render KV pairs back to the JSON object line. Inverse of foldJsonLine. */
@@ -1764,6 +1810,32 @@ function expandBody(
           }
           if (ok && rebuilt.length > 0) {
             out += rebuilt.join('\n');
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
+      // B — compact JSON array of uniform objects. First payload line is
+      // the shared key sequence; each following line is one object's JSON
+      // value literals. Re-render as one compact JSON array.
+      if (s[i + 1] === 'B') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const lines = s.slice(i + 2, payloadEnd).split('\n');
+          const keys = (lines[0] ?? '').split(' ');
+          let ok = keys.length >= 1 && keys.every((k) => KEY_RE.test(k));
+          const rebuilt: string[] = [];
+          if (ok) {
+            for (let r = 1; r < lines.length; r++) {
+              const vals = lines[r].split(' ');
+              if (vals.length !== keys.length) { ok = false; break; }
+              rebuilt.push(
+                '{' + keys.map((k, c) => `"${k}":${expandBody(vals[c], mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph)}`).join(',') + '}',
+              );
+            }
+          }
+          if (ok && rebuilt.length >= 2) {
+            out += '[' + rebuilt.join(',') + ']';
             i = payloadEnd + 1;
             continue;
           }
@@ -3085,6 +3157,18 @@ export function rosettaTranspose(
     const tsLine = tsTransposeLine(line, mark, enc, measure, globalTs);
     if (tsLine !== line) systems.add('T');
 
+    const arr = foldJsonArrayLine(tsLine);
+    if (arr !== null) {
+      const span = mark + 'B' + arr.keys.join(' ') + '\n' + arr.vals.map((r) => r.join(' ')).join('\n') + mark;
+      const rebuilt = '[' + arr.vals.map((r) => '{' + arr.keys.map((key, c) => '"' + key + '":' + expandBody(r[c], mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph)).join(',') + '}').join(',') + ']';
+      if (rebuilt === srcLine && (!measure || countTokens(span, enc) < countTokens(line, enc))) {
+        flushCsv();
+        outLines.push(span);
+        systems.add('B');
+        continue;
+      }
+    }
+
     const pairs = foldJsonLine(tsLine);
     if (pairs !== null) {
       const kv = pairs.map((p) => `${p.key}=${p.val}`).join(' ');
@@ -3538,7 +3622,7 @@ export function rosettaDecoderPrompt(): string {
     .map((g, i) => `${i}:${g}=${JSON.stringify(OPS1_PHRASES[i])}`)
     .join(' | ');
   return [
-    '# ⟿ ROSETTA-R5.4 — byte-exact notational transposition wire',
+    '# ⟿ ROSETTA-R5.5 — byte-exact notational transposition wire',
     'A ROSETTA message is: <glyph><body> — the FIRST character is the mark',
     'glyph and the body follows IMMEDIATELY (no newline after the mark). The',
     'mark comes from the ROSETTA glyph pool (version-stable, tokenizer-verified',
@@ -3566,12 +3650,15 @@ export function rosettaDecoderPrompt(): string {
     '   each row carries one record\'s values (space-joined raw JSON',
     '   literals). Rebuild one compact JSON object per row:',
     '   keys [a b] + row [1 "x"] → {"a":1,"b":"x"}.',
+    '3b2. marker + B + keys + newline + value-rows + marker → a compact',
+    '   JSON array of uniform objects. Decode like F for each row, then join',
+    '   the objects with commas and wrap in [ and ].',
     '3c. inside a \\u0060\\u0060\\u0060yaml block, marker + Y + name + SEP + k=v SEP',
     '   k=v … + marker → flat YAML: the name line, then "  k: v" per pair',
     '   (SEP = pool[k+2+RNS-1 size]; values are literal).',
     `4. any other glyph from pool[k+1 .. k+${RNS1_REGIONS.length}] → its RNS-1 region name.`,
     '5. anything else is literal text.',
-    'Nested marker+timestamp spans inside J, C, P, F, N and A payloads expand too.',
+    'Nested marker+timestamp spans inside J, C, P, F, B, N and A payloads expand too.',
     '3c2. marker + M + max + comma + wait + marker → the exact log tuple',
     '   `(max=<max>, wait=<wait>s)` with digit strings preserved.',
     '3c3. marker + D + count + row + marker → repeat a whole literal row',
@@ -3999,6 +4086,36 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
     });
   }
 
+  // C10: K0 column frame bugfix — repeated documented incident-review
+  // cards now decode once (not duplicated) and are admitted as a compact frame.
+  {
+    const cards = Array.from({ length: 5 }, (_, i) => [
+      `### Incident review card ${String(i + 1).padStart(2, '0')}`,
+      `- Evidence retained exactly for model audit: ${K_FORM_ENUMS[0][i % K_FORM_ENUMS[0].length]}`,
+      `- Action selected by operator: ${K_FORM_ENUMS[1][i % K_FORM_ENUMS[1].length]}`,
+      `- 中文复核备注: ${K_FORM_ENUMS[2][i % K_FORM_ENUMS[2].length]}`,
+    ].join('\n')).join('\n');
+    const r = await rosettaEncode(cards, enc);
+    out.push({
+      name: 'C10 K0 incident-card column frame decodes once and wins',
+      pass: r.exact && rosettaDecode(r.wire, enc) === cards && r.systems.includes('K') && /K0:5/.test(r.wire) && r.outTokens <= 32,
+      details: `${r.member} ${r.inTokens}→${r.outTokens} systems=[${r.systems.join(',')}] wire=${JSON.stringify(r.wire)}`,
+    });
+  }
+
+  // C11: B JSON-array span — TOON-style uniform object arrays declare keys
+  // once and carry rows of exact JSON value literals.
+  {
+    const arr = '[' + Array.from({ length: 5 }, (_, i) => `{"observation_id":"obs-${i}","downstream_service":"svc-${i % 7}","latency_milliseconds":${100 + i * 17},"operator_decision":"${['hold', 'ship', 'page', 'retry', 'watch'][i % 5]}","region":"us-east-1"}`).join(',') + ']';
+    const r = await rosettaEncode(arr, enc);
+    const bestNonRosetta = Math.min(...r.audit.filter((a) => a.exact && !a.member.startsWith('rosetta')).map((a) => a.tokens));
+    out.push({
+      name: 'C11 B uniform JSON object-array exact span beats non-Rosetta members',
+      pass: r.exact && rosettaDecode(r.wire, enc) === arr && r.systems.includes('B') && r.outTokens < bestNonRosetta && r.outTokens <= 106,
+      details: `${r.member} ${r.inTokens}→${r.outTokens} bestNonRosetta=${bestNonRosetta} systems=[${r.systems.join(',')}]`,
+    });
+  }
+
   // C6: Z columnar block template — a 6k heterogeneous prompt-output fixture
   // (prose + JSON + code + repeated Markdown records + CSV + JSONL + CJK)
   // crosses the 75% absolute compression bar while beating the best non-Z
@@ -4332,7 +4449,7 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
     const prompt = ROSETTA_SYSTEM_PROMPT;
     const docsK = prompt.includes('κ-wires') && prompt.includes('inline-bind');
     const docsSig = prompt.includes('SIGNATURE FAMILY') && prompt.includes('STRIDE FAMILY');
-    const docsM = prompt.includes('MERIDIAN-M1') && prompt.includes('marker + M') && prompt.includes('marker + Q') && prompt.includes('marker + D') && prompt.includes('marker + G') && prompt.includes('marker + V') && prompt.includes('marker + H') && prompt.includes('marker + I') && prompt.includes('marker + L') && prompt.includes('marker + Z') && prompt.includes('marker + K') && prompt.includes('K1:<count>') && prompt.includes('K2:<count>') && prompt.includes('K3:<count>') && prompt.includes('K4:<count>') && prompt.includes('K5:<count>') && prompt.includes('K6:<count>') && prompt.includes('K7:<count>') && prompt.includes('K8:<ab>') && prompt.includes('K9:0') && prompt.includes('OPS-1 static glyph table') && prompt.includes('PHRASEBOOK-φ1 table') && prompt.includes('Anaphora hemisphere');
+    const docsM = prompt.includes('MERIDIAN-M1') && prompt.includes('marker + B') && prompt.includes('marker + M') && prompt.includes('marker + Q') && prompt.includes('marker + D') && prompt.includes('marker + G') && prompt.includes('marker + V') && prompt.includes('marker + H') && prompt.includes('marker + I') && prompt.includes('marker + L') && prompt.includes('marker + Z') && prompt.includes('marker + K') && prompt.includes('K1:<count>') && prompt.includes('K2:<count>') && prompt.includes('K3:<count>') && prompt.includes('K4:<count>') && prompt.includes('K5:<count>') && prompt.includes('K6:<count>') && prompt.includes('K7:<count>') && prompt.includes('K8:<ab>') && prompt.includes('K9:0') && prompt.includes('OPS-1 static glyph table') && prompt.includes('PHRASEBOOK-φ1 table') && prompt.includes('Anaphora hemisphere');
     out.push({
       name: 'E7 CALYX cage (prompt-native members only)',
       pass: caged && docsK && docsSig && docsM,
