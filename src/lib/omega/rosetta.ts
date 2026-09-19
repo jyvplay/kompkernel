@@ -1,7 +1,7 @@
 /**
  * src/lib/omega/rosetta.ts
  * =============================================================================
- * ROSETTA-R5.5 — Notational transposition (dual-spelling argmin) + gated Pareto
+ * ROSETTA-R5.6 — Notational transposition (dual-spelling argmin) + gated Pareto
  * (R2 = R1 + table/YAML/JSON-family span systems P/Y/F + the τ member lane;
  *  R2.1 = J-array leading-pipe markers (single/empty arrays now fold — the
  *  G1 gate used to veto whole lines over ["x"]/[] values), the prologue diet
@@ -56,9 +56,9 @@
  *  generator (finite vocabularies + count) turns ~1k heterogeneous natural
  *  prompt-output text into a single form-id/count span, a model-based code
  *  rather than a repetition-only code.
- *  R5.5 = B spans for compact JSON arrays of uniform objects: declare keys
- *  once and transmit rows of JSON value literals (a TOON-style exact table
- *  form) while byte-gating against the original array.
+ *  R5.6 = B/X spans for compact JSON arrays of uniform objects: declare
+ *  keys once and either transmit rows of JSON value literals or typed value
+ *  columns (a TOON-style exact table form) while byte-gating the array.
  * tournament over every self-contained exact lane in this repository.
  *
  * THE BLINDSPOT (measured, and shared by every codec in this repository)
@@ -591,6 +591,15 @@ function foldJsonLine(line: string): RosettaKvPair[] | null {
 
 interface JsonArrayFold { keys: string[]; vals: string[][] }
 
+function canonicalJsonLiteral(v: string): boolean {
+  try {
+    const parsed = JSON.parse('[' + v + ']') as unknown[];
+    return parsed.length === 1 && JSON.stringify(parsed[0]) === v;
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Fold one canonical compact JSON array of uniform objects. This is the
  * prompt-native TOON-like lane: declare object keys once, then carry one row
@@ -756,23 +765,24 @@ function renderSpec(vals: string[], enc: EncodingName): string | null {
       arithSpec = '#' + segs.map((g) => `${g.start}:${g.stride}:${g.count}`).join(';');
     }
   }
-  // cycle with common prefix/suffix factoring
+  // cycle with common prefix/suffix factoring. Older R4 only used a
+  // suffix when there was no prefix; allowing both is strictly shorter for
+  // common structured literals such as "obs-17" and is already supported by
+  // parseSpec's ^prefix/$suffix grammar.
   let pre = vals[0];
-  let suf = '';
   for (let i = 1; i < vals.length; i++) {
     while (pre && !vals[i].startsWith(pre)) pre = pre.slice(0, -1);
   }
-  if (!pre) {
-    const rev = (x: string) => [...x].reverse().join('');
-    let rs = rev(vals[0]);
-    for (let i = 1; i < vals.length; i++) {
-      while (rs && !rev(vals[i]).startsWith(rs)) rs = rs.slice(0, -1);
-    }
-    suf = rev(rs);
+  const tails = vals.map((v) => v.slice(pre.length));
+  const rev = (x: string) => [...x].reverse().join('');
+  let rs = rev(tails[0] ?? '');
+  for (let i = 1; i < tails.length; i++) {
+    while (rs && !rev(tails[i]).startsWith(rs)) rs = rs.slice(0, -1);
   }
+  const suf = rev(rs);
   // cycle period: the shortest prefix of the value sequence that repeats to
   // reproduce it exactly (a 7-value name cycle lists 7, not m, entries)
-  const core = vals.map((v) => v.slice(pre.length, v.length - suf.length || undefined));
+  const core = tails.map((v) => v.slice(0, v.length - suf.length || undefined));
   let period = core.length;
   for (let p = 1; p < core.length; p++) {
     let cyc = true;
@@ -1366,6 +1376,10 @@ function renderKColumn(vals: string[], sep: string, enc: EncodingName): string |
     if (ok) { period = p; break; }
   }
   if (period < vals.length) cands.push('@' + String(period) + sep + vals.slice(0, period).join(sep));
+  const typed = renderSpec(vals, enc);
+  // K/X columns use their own leading #/@ syntax; only prefix/suffix slot
+  // specs are unambiguous here and catch common JSON literals like "obs-7".
+  if (typed !== null && (typed.startsWith('^') || typed.startsWith('$'))) cands.push(typed);
   return cands.reduce((a, b) => (countTokens(b, enc) < countTokens(a, enc) ? b : a));
 }
 
@@ -1382,6 +1396,10 @@ function expandKColumn(line: string, count: number, sep: string): string[] | nul
     const stride = Number(m[3]);
     if (!Number.isSafeInteger(width) || width < 1 || width > 32 || !Number.isSafeInteger(start) || !Number.isSafeInteger(stride)) return null;
     return Array.from({ length: count }, (_, i) => String(start + stride * i).padStart(width, '0'));
+  }
+  if (line.startsWith('^') || line.startsWith('$')) {
+    const f = parseSpec(line);
+    return f === null ? null : Array.from({ length: count }, (_, i) => f(i));
   }
   if (line.startsWith('!')) {
     const m = /^!(\d)([@=])(.+)$/.exec(line);
@@ -1442,6 +1460,15 @@ function knownFormFold(lines: string[], mark: string, sep: string, enc: Encoding
   return countTokens(span, enc) < countTokens(lines.slice(0, count * stride).join('\n'), enc)
     ? { span, end: count * stride }
     : null;
+}
+
+function jsonArrayColumnFold(arr: JsonArrayFold, mark: string, sep: string, enc: EncodingName): string | null {
+  const count = arr.vals.length;
+  if (count < 2 || arr.keys.length < 1) return null;
+  const cols = arr.keys.map((_, c) => arr.vals.map((r) => r[c]));
+  const specs = cols.map((c) => renderKColumn(c, sep, enc));
+  if (specs.some((sp) => sp === null)) return null;
+  return mark + 'X' + String(count) + '\n' + arr.keys.join(' ') + '\n' + (specs as string[]).join('\n') + mark;
 }
 
 /** Q-fold: replace a long periodic alphanumeric run with total length + period.
@@ -1838,6 +1865,39 @@ function expandBody(
             out += '[' + rebuilt.join(',') + ']';
             i = payloadEnd + 1;
             continue;
+          }
+        }
+      }
+      // X — columnar compact JSON array of uniform objects. First
+      // line is the record count, second line is the shared key sequence,
+      // following lines are K-column specs for exact JSON value literals.
+      if (s[i + 1] === 'X' && sep !== null) {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const parts = s.slice(i + 2, payloadEnd).split('\n');
+          const count = Number(parts[0]);
+          const keys = (parts[1] ?? '').split(' ');
+          if (Number.isSafeInteger(count) && count >= 2 && count <= 100000 && keys.length >= 1 && keys.every((k) => KEY_RE.test(k)) && parts.length === 2 + keys.length) {
+            const cols = parts.slice(2).map((sp) => expandKColumn(sp, count, sep));
+            if (cols.every((c) => c !== null)) {
+              let ok = true;
+              const rendered: string[] = [];
+              const fullCols = cols as string[][];
+              for (let r = 0; r < count && ok; r++) {
+                const fields: string[] = [];
+                for (let c = 0; c < keys.length; c++) {
+                  const v = expandBody(fullCols[c][r], mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+                  if (!canonicalJsonLiteral(v)) { ok = false; break; }
+                  fields.push(`\"${keys[c]}\":${v}`);
+                }
+                if (ok) rendered.push('{' + fields.join(',') + '}');
+              }
+              if (ok) {
+                out += '[' + rendered.join(',') + ']';
+                i = payloadEnd + 1;
+                continue;
+              }
+            }
           }
         }
       }
@@ -3159,12 +3219,21 @@ export function rosettaTranspose(
 
     const arr = foldJsonArrayLine(tsLine);
     if (arr !== null) {
-      const span = mark + 'B' + arr.keys.join(' ') + '\n' + arr.vals.map((r) => r.join(' ')).join('\n') + mark;
-      const rebuilt = '[' + arr.vals.map((r) => '{' + arr.keys.map((key, c) => '"' + key + '":' + expandBody(r[c], mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph)).join(',') + '}').join(',') + ']';
-      if (rebuilt === srcLine && (!measure || countTokens(span, enc) < countTokens(line, enc))) {
+      const spans: Array<[string, 'B' | 'X']> = [
+        [mark + 'B' + arr.keys.join(' ') + '\n' + arr.vals.map((r) => r.join(' ')).join('\n') + mark, 'B'],
+      ];
+      const xSpan = jsonArrayColumnFold(arr, mark, sep, enc);
+      if (xSpan !== null) spans.push([xSpan, 'X']);
+      let bestArray: { span: string; sys: 'B' | 'X'; tokens: number } | null = null;
+      for (const [span, sys] of spans) {
+        const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+        const tokens = countTokens(span, enc);
+        if (rebuilt === srcLine && (!measure || tokens < countTokens(line, enc)) && (bestArray === null || tokens < bestArray.tokens)) bestArray = { span, sys, tokens };
+      }
+      if (bestArray !== null) {
         flushCsv();
-        outLines.push(span);
-        systems.add('B');
+        outLines.push(bestArray.span);
+        systems.add(bestArray.sys);
         continue;
       }
     }
@@ -3622,7 +3691,7 @@ export function rosettaDecoderPrompt(): string {
     .map((g, i) => `${i}:${g}=${JSON.stringify(OPS1_PHRASES[i])}`)
     .join(' | ');
   return [
-    '# ⟿ ROSETTA-R5.5 — byte-exact notational transposition wire',
+    '# ⟿ ROSETTA-R5.6 — byte-exact notational transposition wire',
     'A ROSETTA message is: <glyph><body> — the FIRST character is the mark',
     'glyph and the body follows IMMEDIATELY (no newline after the mark). The',
     'mark comes from the ROSETTA glyph pool (version-stable, tokenizer-verified',
@@ -3653,12 +3722,17 @@ export function rosettaDecoderPrompt(): string {
     '3b2. marker + B + keys + newline + value-rows + marker → a compact',
     '   JSON array of uniform objects. Decode like F for each row, then join',
     '   the objects with commas and wrap in [ and ].',
+    '3b3. marker + X + count + newline + keys + newline + column-specs +',
+    '   marker → a columnar JSON array of uniform objects. Column specs use',
+    '   the K-column mini-language (= literal list, # padded arithmetic,',
+    '   @ cycle, ! enum, and ^prefix/$suffix slot specs); expand each column',
+    '   to count JSON value literals, then rebuild the compact object array.',
     '3c. inside a \\u0060\\u0060\\u0060yaml block, marker + Y + name + SEP + k=v SEP',
     '   k=v … + marker → flat YAML: the name line, then "  k: v" per pair',
     '   (SEP = pool[k+2+RNS-1 size]; values are literal).',
     `4. any other glyph from pool[k+1 .. k+${RNS1_REGIONS.length}] → its RNS-1 region name.`,
     '5. anything else is literal text.',
-    'Nested marker+timestamp spans inside J, C, P, F, B, N and A payloads expand too.',
+    'Nested marker+timestamp spans inside J, C, P, F, B, X, N and A payloads expand too.',
     '3c2. marker + M + max + comma + wait + marker → the exact log tuple',
     '   `(max=<max>, wait=<wait>s)` with digit strings preserved.',
     '3c3. marker + D + count + row + marker → repeat a whole literal row',
@@ -3681,7 +3755,7 @@ export function rosettaDecoderPrompt(): string {
     '   retained exactly for model audit: <evidence>; - Action selected by',
     '   operator: <action>; - 中文复核备注: <note>. Column specs are:',
     '   =v SEP v... literal values, #width:start:stride padded integers,',
-    '   @period SEP v... repeated literal cycles, and !enum@range or !enum=',
+    '   @period SEP v... repeated literal cycles, ^prefix/$suffix slot specs, and !enum@range or !enum=',
     '   digits for fixed K enums: enum0 api latency/queue depth/TLS retry/',
     '   db lock/cache miss; enum1 raise timeout/drain queue/retry 3x/warm',
     '   cache/page owner; enum2 正常/偏高/回落/待查/完成.',
@@ -4103,15 +4177,15 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
     });
   }
 
-  // C11: B JSON-array span — TOON-style uniform object arrays declare keys
-  // once and carry rows of exact JSON value literals.
+  // C11: X JSON-array column span — TOON-style uniform object arrays declare keys
+  // once and carry typed exact JSON value columns.
   {
     const arr = '[' + Array.from({ length: 5 }, (_, i) => `{"observation_id":"obs-${i}","downstream_service":"svc-${i % 7}","latency_milliseconds":${100 + i * 17},"operator_decision":"${['hold', 'ship', 'page', 'retry', 'watch'][i % 5]}","region":"us-east-1"}`).join(',') + ']';
     const r = await rosettaEncode(arr, enc);
     const bestNonRosetta = Math.min(...r.audit.filter((a) => a.exact && !a.member.startsWith('rosetta')).map((a) => a.tokens));
     out.push({
-      name: 'C11 B uniform JSON object-array exact span beats non-Rosetta members',
-      pass: r.exact && rosettaDecode(r.wire, enc) === arr && r.systems.includes('B') && r.outTokens < bestNonRosetta && r.outTokens <= 106,
+      name: 'C11 X columnar JSON object-array exact span beats non-Rosetta members',
+      pass: r.exact && rosettaDecode(r.wire, enc) === arr && r.systems.includes('X') && r.outTokens < bestNonRosetta && r.outTokens <= 65,
       details: `${r.member} ${r.inTokens}→${r.outTokens} bestNonRosetta=${bestNonRosetta} systems=[${r.systems.join(',')}]`,
     });
   }
@@ -4449,7 +4523,7 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
     const prompt = ROSETTA_SYSTEM_PROMPT;
     const docsK = prompt.includes('κ-wires') && prompt.includes('inline-bind');
     const docsSig = prompt.includes('SIGNATURE FAMILY') && prompt.includes('STRIDE FAMILY');
-    const docsM = prompt.includes('MERIDIAN-M1') && prompt.includes('marker + B') && prompt.includes('marker + M') && prompt.includes('marker + Q') && prompt.includes('marker + D') && prompt.includes('marker + G') && prompt.includes('marker + V') && prompt.includes('marker + H') && prompt.includes('marker + I') && prompt.includes('marker + L') && prompt.includes('marker + Z') && prompt.includes('marker + K') && prompt.includes('K1:<count>') && prompt.includes('K2:<count>') && prompt.includes('K3:<count>') && prompt.includes('K4:<count>') && prompt.includes('K5:<count>') && prompt.includes('K6:<count>') && prompt.includes('K7:<count>') && prompt.includes('K8:<ab>') && prompt.includes('K9:0') && prompt.includes('OPS-1 static glyph table') && prompt.includes('PHRASEBOOK-φ1 table') && prompt.includes('Anaphora hemisphere');
+    const docsM = prompt.includes('MERIDIAN-M1') && prompt.includes('marker + B') && prompt.includes('marker + X') && prompt.includes('marker + M') && prompt.includes('marker + Q') && prompt.includes('marker + D') && prompt.includes('marker + G') && prompt.includes('marker + V') && prompt.includes('marker + H') && prompt.includes('marker + I') && prompt.includes('marker + L') && prompt.includes('marker + Z') && prompt.includes('marker + K') && prompt.includes('K1:<count>') && prompt.includes('K2:<count>') && prompt.includes('K3:<count>') && prompt.includes('K4:<count>') && prompt.includes('K5:<count>') && prompt.includes('K6:<count>') && prompt.includes('K7:<count>') && prompt.includes('K8:<ab>') && prompt.includes('K9:0') && prompt.includes('OPS-1 static glyph table') && prompt.includes('PHRASEBOOK-φ1 table') && prompt.includes('Anaphora hemisphere');
     out.push({
       name: 'E7 CALYX cage (prompt-native members only)',
       pass: caged && docsK && docsSig && docsM,

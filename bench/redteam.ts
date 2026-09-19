@@ -767,7 +767,7 @@ async function p10() {
     const arr = '[' + Array.from({ length: 5 }, (_, i) => `{"observation_id":"obs-${i}","downstream_service":"svc-${i % 7}","latency_milliseconds":${100 + i * 17},"operator_decision":"${['hold', 'ship', 'page', 'retry', 'watch'][i % 5]}","region":"us-east-1"}`).join(',') + ']';
     const r = await rosettaEncode(arr, 'o200k_base');
     const bestNonRosetta = Math.min(...r.audit.filter((a) => a.exact && !a.member.startsWith('rosetta')).map((a) => a.tokens));
-    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === arr && r.systems.includes('B') && r.outTokens < bestNonRosetta && r.outTokens <= 106, 'P10 R5.5 B uniform JSON-array span beats non-Rosetta members', `${r.member} ${r.outTokens}/${r.inTokens} bestNonRosetta=${bestNonRosetta} [${r.systems.join(',')}]`);
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === arr && r.systems.includes('X') && r.outTokens < bestNonRosetta && r.outTokens <= 65, 'P10 R5.6 X columnar JSON-array span beats non-Rosetta members', `${r.member} ${r.outTokens}/${r.inTokens} bestNonRosetta=${bestNonRosetta} [${r.systems.join(',')}]`);
   }
   {
     const prose = 'The quick brown fox jumps over the lazy dog while the committee deliberates on whether a second breakfast constitutes an institutional precedent.';
