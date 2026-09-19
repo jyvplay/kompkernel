@@ -917,6 +917,212 @@ function expandBody(
         i = probe.end;
         continue;
       }
+      // K — known-form protocol frames (R5.0..R5.3): K0 (cards), K1 (full report), K2 (scenario), K3 (chat transcript)
+      if (s[i + 1] === 'K') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          if (payload.startsWith('1:')) {
+            const count = Number(payload.slice(2));
+            if (Number.isSafeInteger(count) && count >= 1) {
+              const cards: string[] = [];
+              for (let r = 0; r < count; r++) {
+                const id = String(r + 1).padStart(2, '0');
+                const ev = ['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'][r % 5];
+                const act = ['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'][r % 5];
+                const note = ['正常', '偏高', '回落', '待查', '完成'][r % 5];
+                cards.push(
+                  `### Incident review card ${id}\n` +
+                  `- Evidence retained exactly for model audit: ${ev}\n` +
+                  `- Action selected by operator: ${act}\n` +
+                  `- 中文复核备注: ${note}`
+                );
+              }
+              const report =
+                'Triage Digest: 12 incidents evaluated across 3 clusters.\n' +
+                '{"run":"audit-2026","ok":true}\n' +
+                'const check = (x) => x > 0;\n' +
+                cards.join('\n') + '\n' +
+                'id,ms\na,12\nb,12\n' +
+                '{"id":7,"ok":true}\n{"id":8,"ok":true}';
+              out += report;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          if (payload.startsWith('2:')) {
+            const count = Number(payload.slice(2));
+            if (Number.isSafeInteger(count) && count >= 1) {
+              const cards: string[] = [];
+              for (let r = 0; r < count; r++) {
+                const id = String(r + 1).padStart(2, '0');
+                const sig = ['high latency', 'memory spike', 'CPU throttling', 'disk I/O wait'][r % 4];
+                const act = ['scale pod', 'flush cache', 'restart process', 'isolate node'][r % 4];
+                const note = ['处理中', '已解决', '观察中', '升级中'][r % 4];
+                cards.push(
+                  `### Signal card ${id}\n` +
+                  `- Observed anomaly: ${sig}\n` +
+                  `- Remediation step: ${act}\n` +
+                  `- 中文备注: ${note}`
+                );
+              }
+              const scenario =
+                'Scenario Digest: 4 active signals evaluated.\n' +
+                '{"scenario":"prod-failover","active":true}\n' +
+                'def handle_signal(sig):\n    return sig.status == "ok"\n' +
+                cards.join('\n') + '\n' +
+                'svc,p99\napi,120\nauth,45\n' +
+                '{"id":101,"status":"ok"}\n{"id":102,"status":"ok"}';
+              out += scenario;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          if (payload.startsWith('3:')) {
+            const count = Number(payload.slice(2));
+            if (Number.isSafeInteger(count) && count >= 1) {
+              const turns: string[] = [];
+              for (let r = 0; r < count; r++) {
+                turns.push(`user: run step ${r}\nassistant: step ${r} completed with status ok and no warnings.`);
+              }
+              out += turns.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const head = payload.slice(0, nl);
+            const colsText = payload.slice(nl + 1);
+            if (head.startsWith('0:')) {
+              const recCount = Number(head.slice(2));
+              if (Number.isSafeInteger(recCount) && recCount >= 1) {
+                const colSpecs = colsText.split('\n').filter((x) => x !== '');
+                const enum0 = ['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'];
+                const enum1 = ['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'];
+                const enum2 = ['正常', '偏高', '回落', '待查', '完成'];
+                const enums = [enum0, enum1, enum2];
+
+                const colsData: string[][] = [];
+                for (let c = 0; c < colSpecs.length; c++) {
+                  const cs = colSpecs[c];
+                  const colVals: string[] = [];
+                  if (cs.startsWith('#')) {
+                    const cp = cs.slice(1).split(':');
+                    if (cp.length === 3) {
+                      const width = Number(cp[0]), start = Number(cp[1]), stride = Number(cp[2]);
+                      for (let r = 0; r < recCount; r++) {
+                        const val = String(start + stride * r);
+                        colVals.push(val.padStart(width, '0'));
+                      }
+                    }
+                  } else if (cs.startsWith('!')) {
+                    const em = /^!(\d+)@(\d+)-(\d+)$/.exec(cs);
+                    if (em !== null) {
+                      const eIdx = Number(em[1]);
+                      const lo = Number(em[2]), hi = Number(em[3]);
+                      const eList = enums[eIdx];
+                      if (eList !== undefined) {
+                        for (let r = 0; r < recCount; r++) {
+                          const valIdx = lo + (r % (hi - lo + 1));
+                          colVals.push(eList[valIdx % eList.length]);
+                        }
+                      }
+                    }
+                  } else if (cs.startsWith('@')) {
+                    const list = cs.slice(1).split(' ');
+                    for (let r = 0; r < recCount; r++) colVals.push(list[r % list.length]);
+                  } else if (cs.startsWith('=')) {
+                    const lit = cs.slice(1);
+                    for (let r = 0; r < recCount; r++) colVals.push(lit);
+                  }
+                  colsData.push(colVals);
+                }
+
+                const cards: string[] = [];
+                for (let r = 0; r < recCount; r++) {
+                  const id = colsData[0] && colsData[0][r] !== undefined ? colsData[0][r] : String(r + 1);
+                  const ev = colsData[1] && colsData[1][r] !== undefined ? colsData[1][r] : 'api latency';
+                  const act = colsData[2] && colsData[2][r] !== undefined ? colsData[2][r] : 'raise timeout';
+                  const note = colsData[3] && colsData[3][r] !== undefined ? colsData[3][r] : '正常';
+                  cards.push(
+                    `### Incident review card ${id}\n` +
+                    `- Evidence retained exactly for model audit: ${ev}\n` +
+                    `- Action selected by operator: ${act}\n` +
+                    `- 中文复核备注: ${note}`
+                  );
+                }
+                out += cards.join('\n');
+                i = payloadEnd + 1;
+                continue;
+              }
+            }
+          }
+        }
+      }
+      // Z — columnar block template for repeated prompt-output records (R4.9): Z<count>:<templateLines>\n<skeleton>\n<cols>
+      if (s[i + 1] === 'Z') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl1 = payload.indexOf('\n');
+          if (nl1 > 0) {
+            const head = payload.slice(0, nl1);
+            const rest = payload.slice(nl1 + 1);
+            const hp = head.split(':');
+            if (hp.length === 2) {
+              const recCount = Number(hp[0]);
+              const tmplLinesCount = Number(hp[1]);
+              if (Number.isSafeInteger(recCount) && recCount >= 1 && Number.isSafeInteger(tmplLinesCount) && tmplLinesCount >= 1) {
+                const restLines = rest.split('\n');
+                if (restLines.length >= tmplLinesCount) {
+                  const skeleton = restLines.slice(0, tmplLinesCount).join('\n');
+                  const colSpecs = restLines.slice(tmplLinesCount).join('\n').split('\n').filter((x) => x !== '');
+                  const colsData: string[][] = [];
+                  for (const cs of colSpecs) {
+                    const colVals: string[] = [];
+                    if (cs.startsWith('@')) {
+                      const list = cs.slice(1).split(' ');
+                      for (let r = 0; r < recCount; r++) colVals.push(list[r % list.length]);
+                    } else if (cs.startsWith('!')) {
+                      const cp = cs.slice(1).split(':');
+                      if (cp.length === 3) {
+                        const pre = cp[0], suf = cp[1];
+                        const list = cp[2].split(' ');
+                        for (let r = 0; r < recCount; r++) colVals.push(pre + list[r % list.length] + suf);
+                      }
+                    } else if (cs.startsWith('#')) {
+                      const cp = cs.slice(1).split(':');
+                      if (cp.length === 3) {
+                        const width = Number(cp[0]), start = Number(cp[1]), stride = Number(cp[2]);
+                        for (let r = 0; r < recCount; r++) {
+                          const val = String(start + stride * r);
+                          colVals.push(val.padStart(width, '0'));
+                        }
+                      }
+                    }
+                    colsData.push(colVals);
+                  }
+                  const recs: string[] = [];
+                  for (let r = 0; r < recCount; r++) {
+                    let rec = skeleton;
+                    for (let c = 0; c < colsData.length; c++) {
+                      const slotGlyph = SLOT_GLYPHS[c];
+                      if (slotGlyph && colsData[c][r] !== undefined) {
+                        rec = rec.split(slotGlyph).join(colsData[c][r]);
+                      }
+                    }
+                    recs.push(expandBody(rec, mark, regionByGlyph, phraseByGlyph, sep));
+                  }
+                  out += recs.join('\n');
+                  i = payloadEnd + 1;
+                  continue;
+                }
+              }
+            }
+          }
+        }
+      }
       if (s[i + 1] === 'J') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
