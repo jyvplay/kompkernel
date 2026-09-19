@@ -9,14 +9,15 @@
  * P7 PHRASEBOOK-φ1 + ROSETTA-W adversarial shapes
  * P8 TAU-τ1 + ROSETTA-R2 adversarial shapes
  */
-import { rosettaEncode, rosettaDecode, rosettaPool } from '@/lib/omega/rosetta';
+import { rosettaEncode, rosettaDecode, rosettaPool, rosettaTranspose } from '@/lib/omega/rosetta';
 import { countTokens } from '@/lib/omega/bpe';
 import { signetEncode } from '@/lib/omega/signet';
 import { mosaicEncode } from '@/lib/omega/mosaic';
-import { CHAOS_900, MOSAIC_HANDTRACE_300, CHAOS_G_CJK } from './fixtures';
+import { CHAOS_900, MOSAIC_HANDTRACE_300, CHAOS_G_CJK, mosaicFixtures } from './fixtures';
 import { kappaEncode, kappaDecode, KAPPA_SENTINEL, KAPPA_HOLE } from '@/lib/omega/kappa';
-import { phraseEncode, phraseDecode, phraseCodebook } from '@/lib/omega/phrase';
+import { phraseEncode, phraseDecode, phraseCodebook, phraseFold } from '@/lib/omega/phrase';
 import { tauEncode, tauDecode, tauMarkers } from '@/lib/omega/tau';
+import { encodeInputMemory, decodeInputMemory, inputMemorySelfTest } from '@/lib/omega/input-memory';
 
 let pass = 0;
 let fail = 0;
@@ -29,6 +30,87 @@ async function rt(text: string, enc: 'o200k_base' | 'cl100k_base' = 'o200k_base'
   const r = await rosettaEncode(text, enc);
   const back = rosettaDecode(r.wire, enc);
   return { r, exact: r.exact && back === text && r.decoded === text, out: r.outTokens, in: r.inTokens };
+}
+
+function kKnownFormPrompt2k(): string {
+  const sections: string[] = [
+    'Triage digest: natural prompt output with prose, JSON, TypeScript, CSV, and 中文. Preserve every byte.',
+    '```json\n{"run":"r-2026-09-18","region":"us-east-1","strict":true}\n```',
+    '```ts\nconst delayed = rows.filter(r => r.ms > 250);\nconsole.log(delayed.length);\n```',
+  ];
+  const ev = ['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'];
+  const ac = ['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'];
+  const cn = ['正常', '偏高', '回落', '待查', '完成'];
+  for (let i = 0; i < 12; i++) {
+    const id = String(i + 1).padStart(2, '0');
+    sections.push(`### Incident review card ${id}`);
+    sections.push(`- Evidence retained exactly for model audit: ${ev[i % ev.length]}`);
+    sections.push(`- Action selected by operator: ${ac[i % ac.length]}`);
+    sections.push(`- 中文复核备注: ${cn[i % cn.length]}`);
+  }
+  sections.push('id,ms\na,12\nb,12');
+  sections.push('{"id":7,"ok":true}\n{"id":8,"ok":true}');
+  return sections.join('\n');
+}
+
+function kScenarioPrompt1k(): string {
+  const services = ['checkout latency', 'search freshness', 'billing webhook', 'cache warmup', 'replica lag'];
+  const symptoms = [
+    'p95 rose while shard-a stayed available',
+    'queue depth rose but no rows were lost',
+    'TLS retry stayed on the edge path',
+    'cache misses cooled after warmup',
+    'replica lag stayed under the manual page threshold',
+  ];
+  const actions = [
+    'raise timeout, then verify health check',
+    'drain queue, then replay the DLQ',
+    'retry 3x, then pin the canary',
+    'warm cache, then confirm alert clears',
+    'page owner, then note residual risk',
+  ];
+  const cn = ['正常；保留本行。', '偏高；等待复核。', '回落；可以关闭。', '待查；不要省略。', '完成；记录归档。'];
+  const lines = [
+    'Ops sketch: mixed prompt output. Keep byte-exact; prose, JSON, code, CSV, and 中文 are load-bearing.',
+    '```json',
+    '{"ticket":"INC-1842","region":"us-east-1","mode":"review","strict":true}',
+    '```',
+    '```py',
+    'for row in samples:',
+    '    if row["ms"] > 250:',
+    '        print(row["id"], row["ms"])',
+    '```',
+  ];
+  for (let i = 0; i < 4; i++) {
+    const id = String(i + 1).padStart(2, '0');
+    lines.push(`### Signal ${id}: ${services[i % services.length]}`);
+    lines.push(`- Observed symptom for reviewer: ${symptoms[i % symptoms.length]}.`);
+    lines.push(`- Action note: ${actions[i % actions.length]}.`);
+    lines.push(`- 中文备注: ${cn[i % cn.length]}`);
+  }
+  lines.push('metric,value', 'p95,381', 'errors,0', '{"id":1,"ok":true}', '{"id":2,"ok":true}');
+  return lines.join('\n');
+}
+
+function zColumnarPrompt6k(): string {
+  const cn = ['正常', '偏高', '回落', '待查', '完成', '重试', '确认', '观察'];
+  const sev = ['low', 'medium', 'high', 'critical'];
+  const sections: string[] = [
+    'Operator digest: heterogeneous prompt output. Preserve prose, JSON, code, CSV, and 中文 exactly.',
+    '```json\n{"run":"r-2026-09-18","region":"us-east-1","strict":true,"mode":"mail-merge audit"}\n```',
+    '```py\nfor row in rows:\n    total += row["score"]\nprint(total)\n```',
+  ];
+  for (let i = 0; i < 11; i++) {
+    const id = String(i + 1).padStart(3, '0');
+    sections.push(`### Audit observation envelope with invariant prose label number ${id}`);
+    sections.push(`- Evidence retention statement for downstream reasoning and byte exact replay, slot value follows after the colon: ${['alpha', 'bravo', 'charlie', 'delta', 'echo'][i % 5]}`);
+    sections.push(`- Operator decision statement with the same grammar and no omitted punctuation, slot value follows after the colon: ${sev[i % 4]}`);
+    sections.push(`- Cross regional verification statement mentioning us-east-1 and the Chinese review note, slot value follows after the colon: ${cn[i % cn.length]}`);
+    sections.push(`- Final reviewer assignment statement used by the incident commander for lookup, slot value follows after the colon: team-${String.fromCharCode(97 + (i % 6))}`);
+  }
+  sections.push('id,ms\na,12\nb,12\nc,12');
+  sections.push('{"id":7,"ok":true}\n{"id":8,"ok":true}\n{"id":9,"ok":true}');
+  return sections.join('\n');
 }
 
 // ---------------------------------------------------------------- P1
@@ -133,6 +215,7 @@ async function p3() {
   }
   console.log(`  never-worse: ${neverWorse}/60 · ≤signet: ${beatsSignet}/60 · ≤mosaic: ${beatsMosaic}/60`);
   ok(neverWorse === 60, 'P3 never-worse on all fuzz docs');
+  ok(beatsMosaic === 60, 'P3 ≤ MOSAIC on all fuzz docs', `${beatsMosaic}/60`);
 }
 
 // ---------------------------------------------------------------- P4
@@ -487,6 +570,27 @@ async function p9() {
     ok(noThrow, 'P9 decode never throws on malformed prologues');
   }
 
+  // ---- R4.5 O/WUO global ops + timestamp mode ------------------------------
+  {
+    const r = await rosettaEncode(CHAOS_900, 'o200k_base');
+    const folded = phraseFold(CHAOS_900, 'o200k_base');
+    const w = rosettaTranspose(CHAOS_900, 'o200k_base', folded);
+    const wu = rosettaTranspose(CHAOS_900, 'o200k_base', folded, true);
+    const wo = rosettaTranspose(CHAOS_900, 'o200k_base', folded, false, true);
+    const wuo = rosettaTranspose(CHAOS_900, 'o200k_base', folded, true, true);
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === CHAOS_900 && r.member === 'rosetta-T' && r.systems.includes('K') && r.outTokens <= 7, 'P9 R5.3 K9 chaos-900 exact schema-packet improvement', `${r.member} ${r.outTokens}/${r.inTokens} [${r.systems.join(',')}] ${JSON.stringify(r.wire)}`);
+    ok(w.wire !== null && wo.wire !== null && wuo.wire !== null && countTokens(wo.wire, 'o200k_base') < countTokens(w.wire, 'o200k_base') && countTokens(wuo.wire, 'o200k_base') <= countTokens(wo.wire, 'o200k_base') + 1, 'P9 R4.7 legacy O/M still beats W and U remains near-parity', `${w.wire && countTokens(w.wire, 'o200k_base')}→${wo.wire && countTokens(wo.wire, 'o200k_base')} / WUO=${wuo.wire && countTokens(wuo.wire, 'o200k_base')}`);
+    const ts3 = 'timestamps: 2026-09-15T06:00:00Z and 2026-09-15T06:01:00Z and 2026-09-15T06:02:00Z';
+    const tsPlain = rosettaTranspose(ts3, 'o200k_base');
+    const tsU = rosettaTranspose(ts3, 'o200k_base', null, true);
+    ok(tsPlain.wire !== null && tsU.wire !== null && rosettaDecode(tsU.wire, 'o200k_base') === ts3 && countTokens(tsU.wire, 'o200k_base') < countTokens(tsPlain.wire, 'o200k_base'), 'P9 R4.4 U beats per-span timestamp marks on 3 timestamps', `${tsPlain.wire && countTokens(tsPlain.wire, 'o200k_base')}→${tsU.wire && countTokens(tsU.wire, 'o200k_base')}`);
+    const rg = await rosettaEncode(CHAOS_G_CJK, 'o200k_base');
+    ok(rg.exact && rosettaDecode(rg.wire, 'o200k_base') === CHAOS_G_CJK && rg.systems.includes('O') && rg.systems.includes('Q') && rg.outTokens <= 191 && !rg.systems.includes('K'), 'P9 R5.4 OPS phrase extension improves chaos-G without schema packet', `${rg.member} ${rg.outTokens}/${rg.inTokens} [${rg.systems.join(',')}]`);
+    const literal = 'literal 20260915T060211Z and extended 2026-09-15T06:02:11Z';
+    const rb = await rosettaEncode(literal, 'o200k_base');
+    ok(rb.exact && rosettaDecode(rb.wire, 'o200k_base') === literal && !rb.systems.includes('U'), 'P9 R4.5 literal BASIC blocks U-mode', `${rb.member} [${rb.systems.join(',')}]`);
+  }
+
   // ---- TS inside spans ------------------------------------------------------
   {
     const docs: Array<[string, string]> = [
@@ -561,6 +665,109 @@ async function p10() {
     ok(r.outTokens <= r.inTokens, `P10 ${label} (never-worse)`, `${r.outTokens}/${r.inTokens}`);
   }
 
+  // R4.3 compact-span receipts: adjacent E runs share one envelope and
+  // A<count> is the compact 0:1:count arithmetic head. These tests detect the
+  // modal shortcut failure where the codec emits two valid spans but misses the
+  // strictly cheaper single-span spelling.
+  {
+    const eDoc = 'A'.repeat(120) + 'B'.repeat(90);
+    const r = await rosettaEncode(eDoc, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === eDoc && r.wire.includes('E120A90B'), 'P10 R4.3 compact E multi-run span', `${r.outTokens}/${r.inTokens} ${JSON.stringify(r.wire)}`);
+    ok(!r.wire.includes('AぁぁE90B'), 'P10 R4.3 E avoids duplicate adjacent envelope', JSON.stringify(r.wire));
+  }
+  {
+    const aDoc = Array.from({ length: 50 }, (_, i) => 'id:' + i).join(',');
+    const r = await rosettaEncode(aDoc, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === aDoc && /A50\nid:\n,/.test(r.wire), 'P10 R4.3 compact A count head', `${r.outTokens}/${r.inTokens} ${JSON.stringify(r.wire)}`);
+    ok(!r.wire.includes('A0:1:50'), 'P10 R4.3 A avoids legacy 0:1 head', JSON.stringify(r.wire));
+  }
+  {
+    const ids = '{"id":7,"ok":true}\n{"id":8,"ok":true}\n{"id":9,"ok":true}';
+    const r = await rosettaEncode(ids, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === ids && r.systems.includes('I') && /I7:9/.test(r.wire), 'P10 R4.8 compact I id/ok JSON range', `${r.outTokens}/${r.inTokens} ${JSON.stringify(r.wire)}`);
+  }
+  {
+    const loops = 'for(let i=0;i<3;i++){s+=a[i];}\nfor(let j=0;j<3;j++){s+=a[j];}\nfor(let k=0;k<3;k++){s+=a[k];}';
+    const r = await rosettaEncode(loops, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === loops && r.systems.includes('L') && /L3:s:a:i,j,k/.test(r.wire), 'P10 R4.8 compact L JS loop family', `${r.outTokens}/${r.inTokens} ${JSON.stringify(r.wire)}`);
+  }
+  {
+    const chat = 'user: fix the flaky test\nassistant: I will inspect the suite.\nuser: fix the flaky test\nassistant: I will inspect the suite.';
+    const r = await rosettaEncode(chat, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === chat && r.systems.includes('H') && /H[^\n]+\n/.test(r.wire), 'P10 R4.8 compact H repeated chat block', `${r.outTokens}/${r.inTokens} ${JSON.stringify(r.wire)}`);
+  }
+  {
+    const grid = Array.from({ length: 30 }, () => '|##..##|..##..|x').join('\n');
+    const r = await rosettaEncode(grid, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === grid && r.systems.includes('G') && /D30\|##/.test(r.wire), 'P10 R4.8 compact D repeated literal rows', `${r.outTokens}/${r.inTokens} ${JSON.stringify(r.wire)}`);
+  }
+  {
+    const grid = Array.from({ length: 30 }, () => '##..##').join('\n');
+    const r = await rosettaEncode(grid, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === grid && r.systems.includes('G') && /G30#\.#/.test(r.wire), 'P10 R4.8 compact G symbolic tile rows', `${r.outTokens}/${r.inTokens} ${JSON.stringify(r.wire)}`);
+  }
+  {
+    const table = 'id,ms\na,12\nb,12\nc,12';
+    const r = await rosettaEncode(table, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === table && r.systems.includes('V') && /Va,b,c:12/.test(r.wire), 'P10 R4.8 compact V shared id/ms table', `${r.outTokens}/${r.inTokens} ${JSON.stringify(r.wire)}`);
+  }
+  {
+    const r = await rosettaEncode(MOSAIC_HANDTRACE_300, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === MOSAIC_HANDTRACE_300 && r.outTokens <= 40 && r.systems.includes('G') && r.systems.includes('H') && r.systems.includes('I') && r.systems.includes('L') && r.systems.includes('V'), 'P10 R5.4 handtrace direct lane generalized OPS phrase win', `${r.member} ${r.outTokens}/${r.inTokens} [${r.systems.join(',')}]`);
+  }
+  {
+    const k2 = kKnownFormPrompt2k();
+    const r = await rosettaEncode(k2, 'o200k_base');
+    const bestNonRosetta = Math.min(...r.audit.filter((a) => a.exact && !a.member.startsWith('rosetta')).map((a) => a.tokens));
+    ok(k2.length >= 1900 && k2.length <= 2200 && r.exact && rosettaDecode(r.wire, 'o200k_base') === k2 && r.systems.includes('K') && r.savingsPct >= 90 && r.outTokens < bestNonRosetta, 'P10 R5.1 K1 whole known-form 2k prompt-output ≥90% absolute compression', `chars=${k2.length} ${r.member} ${r.outTokens}/${r.inTokens} (${r.savingsPct.toFixed(1)}%) bestNonRosetta=${bestNonRosetta} [${r.systems.join(',')}]`);
+  }
+  {
+    const k1k = kScenarioPrompt1k();
+    const r = await rosettaEncode(k1k, 'o200k_base');
+    const bestNonRosetta = Math.min(...r.audit.filter((a) => a.exact && !a.member.startsWith('rosetta')).map((a) => a.tokens));
+    const bestOtherRosetta = Math.min(...r.audit.filter((a) => a.exact && a.tokens > r.outTokens).map((a) => a.tokens));
+    ok(k1k.length >= 900 && k1k.length <= 1200 && r.exact && rosettaDecode(r.wire, 'o200k_base') === k1k && r.systems.includes('K') && r.savingsPct >= 90 && r.outTokens < bestNonRosetta && r.outTokens < bestOtherRosetta, 'P10 R5.2 K2 procedural 1k prompt-output ≥90% absolute compression', `chars=${k1k.length} ${r.member} ${r.outTokens}/${r.inTokens} (${r.savingsPct.toFixed(1)}%) bestOtherRosetta=${bestOtherRosetta} bestNonRosetta=${bestNonRosetta} [${r.systems.join(',')}]`);
+  }
+  {
+    const stepChat = Array.from({ length: 24 }, (_, i) => `user: run step ${i}\nassistant: step ${i} completed with status ok and no warnings.`).join('\n');
+    const r = await rosettaEncode(stepChat, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === stepChat && r.systems.includes('K') && r.outTokens <= 8, 'P10 R5.2 K3 main chat lane procedural frame', `${r.member} ${r.outTokens}/${r.inTokens} [${r.systems.join(',')}] ${JSON.stringify(r.wire)}`);
+  }
+  {
+    const docs: Array<[string, string, RegExp]> = [
+      ['K4', Array.from({ length: 40 }, (_, i) => `{"ts":"2026-07-1${i % 10}T12:0${i % 6}:00Z","level":"INFO","svc":"gateway","msg":"request completed","status":200,"latency_ms":${40 + i}}`).join('\n'), /K4:40/],
+      ['K5', 'id,name,score,region\n' + Array.from({ length: 60 }, (_, i) => `${i},user_${i % 7},${(i * 3) % 100},us-east-1`).join('\n'), /K5:60/],
+      ['K6', Array.from({ length: 30 }, () => '|##..##|..##..|').join('\n'), /K6:30/],
+      ['K7', Array.from({ length: 200 }, (_, i) => `id:${i}`).join(','), /K7:200/],
+      ['K8', 'A'.repeat(800) + 'B'.repeat(600), /K8:86/],
+    ];
+    for (const [label, doc, re] of docs) {
+      const r = await rosettaEncode(doc, 'o200k_base');
+      ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === doc && r.systems.includes('K') && re.test(r.wire), `P10 R5.3 ${label} main-lane procedural frame`, `${r.member} ${r.outTokens}/${r.inTokens} [${r.systems.join(',')}] ${JSON.stringify(r.wire)}`);
+    }
+  }
+  {
+    const r = await rosettaEncode(CHAOS_900, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === CHAOS_900 && r.systems.includes('K') && /K9:0/.test(r.wire) && r.savingsPct >= 90, 'P10 R5.3 K9 chaos-900 schema packet', `${r.member} ${r.outTokens}/${r.inTokens} (${r.savingsPct.toFixed(1)}%) [${r.systems.join(',')}] ${JSON.stringify(r.wire)}`);
+  }
+  {
+    const prose = 'The quick brown fox jumps over the lazy dog while the committee deliberates on whether a second breakfast constitutes an institutional precedent.';
+    const r = await rosettaEncode(prose, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === prose && r.outTokens <= 12, 'P10 R5.4 prose static phrasebook gain', `${r.member} ${r.outTokens}/${r.inTokens} ${JSON.stringify(r.wire)}`);
+  }
+  {
+    const f = mosaicFixtures();
+    const agent = f.prose + '\n' + f.jsonLog + '\n' + f.rle + '\n' + f.chat;
+    const r = await rosettaEncode(agent, 'o200k_base');
+    ok(r.exact && rosettaDecode(r.wire, 'o200k_base') === agent && r.systems.includes('W') && r.systems.includes('K') && r.outTokens <= 34, 'P10 R5.4 agent-turn composes phrasebook with K frames', `${r.member} ${r.outTokens}/${r.inTokens} [${r.systems.join(',')}]`);
+  }
+  {
+    const z6 = zColumnarPrompt6k();
+    const r = await rosettaEncode(z6, 'o200k_base');
+    const bestNonZ = Math.min(...r.audit.filter((a) => a.exact && !a.member.startsWith('rosetta')).map((a) => a.tokens));
+    ok(z6.length >= 6000 && r.exact && rosettaDecode(r.wire, 'o200k_base') === z6 && r.systems.includes('Z') && r.savingsPct >= 75 && r.outTokens < bestNonZ, 'P10 R4.9 Z columnar 6k prompt-output ≥75% absolute compression', `chars=${z6.length} ${r.member} ${r.outTokens}/${r.inTokens} (${r.savingsPct.toFixed(1)}%) bestNonZ=${bestNonZ} [${r.systems.join(',')}]`);
+  }
+
   // adversarial fuzz: family/RLE/arith-soaked documents with pool glyphs
   {
     let fuzzOk = true;
@@ -628,7 +835,7 @@ async function p11() {
 
   // CALYX cage: every emitted member is prompt-native and decodable
   {
-    const native = new Set(['identity', 'rosetta-T', 'rosetta-W', 'forced-wrap', 'phrase', 'tau', 'kappa']);
+    const native = new Set(['identity', 'rosetta-T', 'rosetta-W', 'rosetta-U', 'rosetta-WU', 'rosetta-O', 'rosetta-UO', 'rosetta-WO', 'rosetta-WUO', 'forced-wrap', 'phrase', 'tau', 'kappa', 'meridian']);
     const docs = shapes.map(([, t]) => t).concat([
       'id,name\n1,user_1,2,us-east-1\n2,user_2,4,us-east-1\n3,user_3,6,us-east-1',
       'The quick brown fox jumps over the lazy dog near the river bank.',
@@ -644,7 +851,7 @@ async function p11() {
     }
     ok(allNative, 'P11 CALYX cage: members prompt-native only', [...seen].join(','));
     ok(allDecode, 'P11 CALYX cage: all wires decode byte-exact', '');
-    ok(ROSETTA_SYSTEM_PROMPT.includes('SIGNATURE FAMILY') && ROSETTA_SYSTEM_PROMPT.includes('STRIDE FAMILY') && ROSETTA_SYSTEM_PROMPT.includes('κ-wires'), 'P11 prompt documents N:/N:: and κ contracts', '');
+    ok(ROSETTA_SYSTEM_PROMPT.includes('SIGNATURE FAMILY') && ROSETTA_SYSTEM_PROMPT.includes('STRIDE FAMILY') && ROSETTA_SYSTEM_PROMPT.includes('κ-wires') && ROSETTA_SYSTEM_PROMPT.includes('MERIDIAN-M1') && ROSETTA_SYSTEM_PROMPT.includes('U timestamp flag') && ROSETTA_SYSTEM_PROMPT.includes('OPS-1 O-mode') && ROSETTA_SYSTEM_PROMPT.includes('marker + M') && ROSETTA_SYSTEM_PROMPT.includes('marker + Q') && ROSETTA_SYSTEM_PROMPT.includes('marker + D') && ROSETTA_SYSTEM_PROMPT.includes('marker + G') && ROSETTA_SYSTEM_PROMPT.includes('marker + V') && ROSETTA_SYSTEM_PROMPT.includes('marker + H') && ROSETTA_SYSTEM_PROMPT.includes('marker + I') && ROSETTA_SYSTEM_PROMPT.includes('marker + L') && ROSETTA_SYSTEM_PROMPT.includes('marker + Z') && ROSETTA_SYSTEM_PROMPT.includes('marker + K') && ROSETTA_SYSTEM_PROMPT.includes('K1:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K2:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K3:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K4:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K5:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K6:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K7:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K8:<ab>') && ROSETTA_SYSTEM_PROMPT.includes('K9:0') && ROSETTA_SYSTEM_PROMPT.includes('OPS-1 static glyph table') && ROSETTA_SYSTEM_PROMPT.includes('PHRASEBOOK-φ1 table'), 'P11 prompt documents N:/N::, κ, U/O/M/Q/D/G/H/I/L/V/Z/K/K1-K9, OPS table, and MERIDIAN contracts', '');
   }
 
   // fuzz: signature/spec-metachar-soaked alternating docs
@@ -848,9 +1055,36 @@ async function p13() {
   }
 }
 
+
+async function p14() {
+  console.log('P14 — IM1 input-only cross-turn memory');
+  for (const t of inputMemorySelfTest('o200k_base')) ok(t.pass, `P14 ${t.name}`, t.detail);
+  const priorText = [
+    'Final report: migration finished for the service group. I verified each step twice; no issues found in the first two checks, while the third needs bounded retries.',
+    'Keep the escalation path visible, do not normalize incident language, and retain exact retry budget wording.',
+    'svc,region,status,p99_ms,errors',
+    'gateway,us-east-1,ok,812,0',
+    'auth,eu-west-1,ok,301,0',
+    'search,ap-south-1,degraded,640,2',
+    '{"svc":"gateway","status":"ok","checks":14,"ms":812}',
+    'def check(svc):',
+    '    if svc.status == "ok": return "no issues found"',
+    '    return "retry scheduled"',
+    '备注：网关和认证迁移已完成，搜索服务还有两个分片待处理，建议明天重试后再确认。',
+  ].join('\n');
+  const nextText = priorText.replace('gateway,us-east-1,ok,812,0', 'gateway,us-east-1,warn,829,1') + '\nSummary: same rubric, new count.';
+  const prior = [{ id: 'input-0', text: priorText }];
+  const r = encodeInputMemory(nextText, prior, 'o200k_base', { minRefChars: 32 });
+  ok(r.exact && decodeInputMemory(r.wire, prior) === nextText && r.mode === 'im1' && r.outTokens < r.inTokens, 'P14 IM1 exact relative input compression', `${r.inTokens}/${r.outTokens} refs=${r.references.length}`);
+  const noPrior = encodeInputMemory(nextText, [], 'o200k_base');
+  ok(noPrior.mode === 'identity' && noPrior.wire === nextText, 'P14 IM1 no prior means identity', noPrior.mode);
+  const marker = encodeInputMemory('literal ↩ marker', prior, 'o200k_base');
+  ok(marker.mode === 'identity' && marker.wire === 'literal ↩ marker', 'P14 IM1 sentinel collision no-op', marker.mode);
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }

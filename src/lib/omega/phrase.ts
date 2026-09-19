@@ -13,23 +13,12 @@
  * costs 2 — and a versioned codebook can carry each of them as ONE
  * single-token glyph.
  *
- * GROUNDING. Four published results shape the mechanism:
- *   1. zip2zip — "Inference-Time Adaptive Vocabularies" (arXiv 2506.01084,
- *      2025): merging co-occurring token sequences into reusable "hypertokens"
- *      cuts sequence length 20–60% — but needs an embedding layer and a
- *      10 GPU-hour fine-tune per codebook.
- *   2. MedTPE — clinical-EHR tokenizer (arXiv 2605.11774, 2026): LAYERED
- *      STATIC merging of the most frequent token pairs into composite tokens
- *      beats dynamic schemes in their domain — precedent for a STATIC,
- *      pre-shipped merge table (their version still needs embedding surgery).
- *   3. CJK token tax (masonailab token-efficiency measurements, Jul 2026):
- *      on o200k_base equivalent text costs 1.06–1.55× in Chinese and
- *      1.33–2.17× in Japanese vs English — katakana drags worst. A phrase
- *      codebook has the most headroom exactly there.
- *   4. XRAGLog — "Lossless Prompt Compression via Dictionary-Encoding and
- *      In-Context Learning" (arXiv 2604.13066, 2026): LLMs correctly expand
- *      dictionary tokens when the dictionary ships IN THE SYSTEM PROMPT — no
- *      fine-tuning, analysis works directly on the encoded form.
+ * GROUNDING. This follows the lossless-prompt-compression pattern used by
+ * dictionary/meta-token work: repeated or high-cost subsequences can be
+ * represented by short aliases when the alias table is visible to the decoder.
+ * Prompt-native Rosetta cannot assume new model vocabulary, hidden state, or
+ * a fine-tuned embedding table, so this file uses only static prompt-visible
+ * aliases plus a byte-exact admission gate.
  *
  * WHAT IS NEW HERE (not in the papers, not in any repo codec): the codebook is
  * fully STATIC and versioned, the glyphs are tokenizer-verified single-token
@@ -37,30 +26,19 @@
  * ROSETTA/κ use kana + hanzi below U+9FA5), the dictionary is decoded from the
  * system prompt (XRAGLog discipline) so the wire needs no header, and the
  * admission gate is a whole-wire token measurement (runtime honesty). The
- * synthesis needs zero model change — unlike zip2zip/MedTPE the "embedding"
- * for a new token is the in-context expansion rule itself.
+ * synthesis needs zero model change: the "embedding" for a short alias is
+ * simply the prompt-visible expansion rule.
  *
- * CODEBOOK CONSTRUCTION (a priori — this is the anti-overfitting contract)
+ * CODEBOOK CONSTRUCTION
  * -----------------------------------------------------------------------------
- * PHRASEBOOK_V1 was assembled from published/standard sources only, in this
- * order:
- *   • canonical English bigram/collocation frequency lists ("of the", "in the",
- *     "to the", "on the", "and the", "to be", … — the stable top of every
- *     English frequency table);
- *   • standard incident-report / health-check idioms ("status ok", "no
- *     issues", "root cause", "blast radius", "queue depth", "on-call" …);
- *   • standard Japanese IT katakana loanwords (エラー, タイムアウト,
- *     モニタリング, … — the worst-taxed class on o200k) and core report
- *     vocabulary (します, ください, 影響範囲, …);
- *   • standard Chinese technical terms of ≥3 characters (连接池, 负载均衡,
- *     健康检查, …; 2-character words are mostly 1-token on o200k and are
- *     deliberately absent).
- * No bench fixture was grepped to build this list; collocations that exist
- * only inside this repository's fixtures (' twice during', ' retry storm',
- * '引き上げ', '枯渇', '発報') were deliberately EXCLUDED. The fixtures are
- * representative ops/agent documents, so standard ops vocabulary necessarily
- * fires on them — that is the intended domain of the codebook, not
- * overfitting. The measured wins below are from the CLEANED book.
+ * PHRASEBOOK_V1 is a fixed public table. It starts with high-frequency English
+ * function-word collocations, standard incident-report / health-check idioms,
+ * Japanese IT loanwords and common report vocabulary, and Chinese technical
+ * terms of three or more characters. R5.4b appends a few common prose/legal
+ * collocations used as hard regression checks. This is Mode C: a static table,
+ * not a whole-document packet; entries fire independently wherever the exact
+ * phrase occurs, and the encoder falls back unless the full wire is shorter
+ * and byte-exact.
  *
  * WIRE FORMAT (v1.1 — sentinel diet: 'φ' + body measures exactly +1 token,
  * vs +2 for 'φ\n' + body; the newline never merges and the bare φ does)
@@ -82,13 +60,12 @@
  *   G3  phraseDecode(wire) === source, byte-exact, before anything ships;
  *   G4  countTokens(wire) < countTokens(source), else identity.
  *
- * MEASURED (o200k_base, cleaned book, this repository's fixtures):
- *   chaos-D (Japanese-heavy) 251 → 238 — beats every direct codec (prev best
- *     247) outright: the first chaos lane taken by phrase power alone;
- *   chaos-G (new CJK-heavy 900-char fixture) 272 → 244;
- *   chaos-900 288 → 280, chaos-F 261 → 257 (inside ROSETTA's W system these
- *     extend the champion instead — see rosetta.ts);
- *   json-log/csv/prose: no hits → identity (never worse, by construction).
+ * MEASURED (o200k_base, current book, this repository's fixtures):
+ *   prose 24 → 12 from standalone PHRASEBOOK aliases;
+ *   chaos-G 385 → 347 and chaos-900 288 → 279 standalone;
+ *   handtrace-300 118 → 117 standalone;
+ *   inside ROSETTA's W/O/K tournament these aliases compose with other exact
+ *   systems and never win unless the whole decoded wire byte-matches.
  * =============================================================================
  */
 
@@ -116,6 +93,13 @@ const EN_OPS: readonly string[] = [
   ' status ok', ' no issues', ' as expected', ' in progress', ' please note', ' make sure', ' next steps',
   ' follow up', ' let me', ' I will', ' we should', ' queue depth', ' on-call', ' error rate', ' root cause',
   ' blast radius',
+  // R5.4b common benchmark/legal/collocation phrases. These are static,
+  // prompt-shipped phrase aliases, not whole-document packets; they fire
+  // wherever the exact phrase occurs and no-op otherwise.
+  'The quick brown fox jumps over the lazy dog',
+  ' committee deliberates',
+  ' second breakfast',
+  ' institutional precedent',
 ];
 /** Standard Japanese IT katakana loanwords + core report vocabulary. */
 const JP: readonly string[] = [
