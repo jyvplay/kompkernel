@@ -1,0 +1,394 @@
+/**
+ * The `node:util` module supports the needs of Node.js internal APIs. Many of the
+ * utilities are useful for application and module developers as well. To access
+ * it:
+ *
+ * ```js
+ * import util from 'node:util';
+ * ```
+ * @see [source](https://github.com/nodejs/node/blob/v22.x/lib/util.js)
+ */
+declare module "util" {
+    import * as types from "node:util/types";
+    export interface InspectOptions {
+        /**
+         * If `true`, object's non-enumerable symbols and properties are included in the formatted result.
+         * `WeakMap` and `WeakSet` entries are also included as well as user defined prototype properties (excluding method properties).
+         * @default false
+         */
+        showHidden?: boolean | undefined;
+        /**
+         * Specifies the number of times to recurse while formatting object.
+         * This is useful for inspecting large objects.
+         * To recurse up to the maximum call stack size pass `Infinity` or `null`.
+         * @default 2
+         */
+        depth?: number | null | undefined;
+        /**
+         * If `true`, the output is styled with ANSI color codes. Colors are customizable.
+         */
+        colors?: boolean | undefined;
+        /**
+         * If `false`, `[util.inspect.custom](depth, opts, inspect)` functions are not invoked.
+         * @default true
+         */
+        customInspect?: boolean | undefined;
+        /**
+         * If `true`, `Proxy` inspection includes the target and handler objects.
+         * @default false
+         */
+        showProxy?: boolean | undefined;
+        /**
+         * Specifies the maximum number of `Array`, `TypedArray`, `WeakMap`, and `WeakSet` elements
+         * to include when formatting. Set to `null` or `Infinity` to show all elements.
+         * Set to `0` or negative to show no elements.
+         * @default 100
+         */
+        maxArrayLength?: number | null | undefined;
+        /**
+         * Specifies the maximum number of characters to
+         * include when formatting. Set to `null` or `Infinity` to show all elements.
+         * Set to `0` or negative to show no characters.
+         * @default 10000
+         */
+        maxStringLength?: number | null | undefined;
+        /**
+         * The length at which input values are split across multiple lines.
+         * Set to `Infinity` to format the input as a single line
+         * (in combination with `compact` set to `true` or any number >= `1`).
+         * @default 80
+         */
+        breakLength?: number | undefined;
+        /**
+         * Setting this to `false` causes each object key
+         * to be displayed on a new line. It will also add new lines to text that is
+         * longer than `breakLength`. If set to a number, the most `n` inner elements
+         * are united on a single line as long as all properties fit into
+         * `breakLength`. Short array elements are also grouped together. Note that no
+         * text will be reduced below 16 characters, no matter the `breakLength` size.
+         * For more information, see the example below.
+         * @default true
+         */
+        compact?: boolean | number | undefined;
+        /**
+         * If set to `true` or a function, all properties of an object, and `Set` and `Map`
+         * entries are sorted in the resulting string.
+         * If set to `true` the default sort is used.
+         * If set to a function, it is used as a compare function.
+         */
+        sorted?: boolean | ((a: string, b: string) => number) | undefined;
+        /**
+         * If set to `true`, getters are going to be
+         * inspected as well. If set to `'get'` only getters without setter are going
+         * to be inspected. If set to `'set'` only getters having a corresponding
+         * setter are going to be inspected. This might cause side effects depending on
+         * the getter function.
+         * @default false
+         */
+        getters?: "get" | "set" | boolean | undefined;
+        /**
+         * If set to `true`, an underscore is used to separate every three digits in all bigints and numbers.
+         * @default false
+         */
+        numericSeparator?: boolean | undefined;
+    }
+    export type Style =
+        | "special"
+        | "number"
+        | "bigint"
+        | "boolean"
+        | "undefined"
+        | "null"
+        | "string"
+        | "symbol"
+        | "date"
+        | "regexp"
+        | "module";
+    export type CustomInspectFunction = (depth: number, options: InspectOptionsStylized) => any; // TODO: , inspect: inspect
+    export interface InspectOptionsStylized extends InspectOptions {
+        stylize(text: string, styleType: Style): string;
+    }
+    export interface CallSiteObject {
+        /**
+         * Returns the name of the function associated with this call site.
+         */
+        functionName: string;
+        /**
+         * Returns the name of the resource that contains the script for the
+         * function for this call site.
+         */
+        scriptName: string;
+        /**
+         * Returns the unique id of the script, as in Chrome DevTools protocol
+         * [`Runtime.ScriptId`](https://chromedevtools.github.io/devtools-protocol/1-3/Runtime/#type-ScriptId).
+         * @since v22.14.0
+         */
+        scriptId: string;
+        /**
+         * Returns the number, 1-based, of the line for the associate function call.
+         */
+        lineNumber: number;
+        /**
+         * Returns the 1-based column offset on the line for the associated function call.
+         */
+        columnNumber: number;
+    }
+    export type DiffEntry = [operation: -1 | 0 | 1, value: string];
+    /**
+     * `util.diff()` compares two string or array values and returns an array of difference entries.
+     * It uses the Myers diff algorithm to compute minimal differences, which is the same algorithm
+     * used internally by assertion error messages.
+     *
+     * If the values are equal, an empty array is returned.
+     *
+     * ```js
+     * const { diff } = require('node:util');
+     *
+     * // Comparing strings
+     * const actualString = '12345678';
+     * const expectedString = '12!!5!7!';
+     * console.log(diff(actualString, expectedString));
+     * // [
+     * //   [0, '1'],
+     * //   [0, '2'],
+     * //   [1, '3'],
+     * //   [1, '4'],
+     * //   [-1, '!'],
+     * //   [-1, '!'],
+     * //   [0, '5'],
+     * //   [1, '6'],
+     * //   [-1, '!'],
+     * //   [0, '7'],
+     * //   [1, '8'],
+     * //   [-1, '!'],
+     * // ]
+     * // Comparing arrays
+     * const actualArray = ['1', '2', '3'];
+     * const expectedArray = ['1', '3', '4'];
+     * console.log(diff(actualArray, expectedArray));
+     * // [
+     * //   [0, '1'],
+     * //   [1, '2'],
+     * //   [0, '3'],
+     * //   [-1, '4'],
+     * // ]
+     * // Equal values return empty array
+     * console.log(diff('same', 'same'));
+     * // []
+     * ```
+     * @since v22.15.0
+     * @experimental
+     * @param actual The first value to compare
+     * @param expected The second value to compare
+     * @returns An array of difference entries. Each entry is an array with two elements:
+     * * Index 0: `number` Operation code: `-1` for delete, `0` for no-op/unchanged, `1` for insert
+     * * Index 1: `string` The value associated with the operation
+     */
+    export function diff(actual: string | readonly string[], expected: string | readonly string[]): DiffEntry[];
+    /**
+     * The `util.format()` method returns a formatted string using the first argument
+     * as a `printf`-like format string which can contain zero or more format
+     * specifiers. Each specifier is replaced with the converted value from the
+     * corresponding argument. Supported specifiers are:
+     *
+     * If a specifier does not have a corresponding argument, it is not replaced:
+     *
+     * ```js
+     * util.format('%s:%s', 'foo');
+     * // Returns: 'foo:%s'
+     * ```
+     *
+     * Values that are not part of the format string are formatted using `util.inspect()` if their type is not `string`.
+     *
+     * If there are more arguments passed to the `util.format()` method than the
+     * number of specifiers, the extra arguments are concatenated to the returned
+     * string, separated by spaces:
+     *
+     * ```js
+     * util.format('%s:%s', 'foo', 'bar', 'baz');
+     * // Returns: 'foo:bar baz'
+     * ```
+     *
+     * If the first argument does not contain a valid format specifier, `util.format()` returns a string that is the concatenation of all arguments separated by spaces:
+     *
+     * ```js
+     * util.format(1, 2, 3);
+     * // Returns: '1 2 3'
+     * ```
+     *
+     * If only one argument is passed to `util.format()`, it is returned as it is
+     * without any formatting:
+     *
+     * ```js
+     * util.format('%% %s');
+     * // Returns: '%% %s'
+     * ```
+     *
+     * `util.format()` is a synchronous method that is intended as a debugging tool.
+     * Some input values can have a significant performance overhead that can block the
+     * event loop. Use this function with care and never in a hot code path.
+     * @since v0.5.3
+     * @param format A `printf`-like format string.
+     */
+    export function format(format?: any, ...param: any[]): string;
+    /**
+     * This function is identical to {@link format}, except in that it takes
+     * an `inspectOptions` argument which specifies options that are passed along to {@link inspect}.
+     *
+     * ```js
+     * util.formatWithOptions({ colors: true }, 'See object %O', { foo: 42 });
+     * // Returns 'See object { foo: 42 }', where `42` is colored as a number
+     * // when printed to a terminal.
+     * ```
+     * @since v10.0.0
+     */
+    export function formatWithOptions(inspectOptions: InspectOptions, format?: any, ...param: any[]): string;
+    interface GetCallSitesOptions {
+        /**
+         * Reconstruct the original location in the stacktrace from the source-map.
+         * Enabled by default with the flag `--enable-source-maps`.
+         */
+        sourceMap?: boolean | undefined;
+    }
+    /**
+     * Returns an array of call site objects containing the stack of
+     * the caller function.
+     *
+     * ```js
+     * import { getCallSites } from 'node:util';
+     *
+     * function exampleFunction() {
+     *   const callSites = getCallSites();
+     *
+     *   console.log('Call Sites:');
+     *   callSites.forEach((callSite, index) => {
+     *     console.log(`CallSite ${index + 1}:`);
+     *     console.log(`Function Name: ${callSite.functionName}`);
+     *     console.log(`Script Name: ${callSite.scriptName}`);
+     *     console.log(`Line Number: ${callSite.lineNumber}`);
+     *     console.log(`Column Number: ${callSite.column}`);
+     *   });
+     *   // CallSite 1:
+     *   // Function Name: exampleFunction
+     *   // Script Name: /home/example.js
+     *   // Line Number: 5
+     *   // Column Number: 26
+     *
+     *   // CallSite 2:
+     *   // Function Name: anotherFunction
+     *   // Script Name: /home/example.js
+     *   // Line Number: 22
+     *   // Column Number: 3
+     *
+     *   // ...
+     * }
+     *
+     * // A function to simulate another stack layer
+     * function anotherFunction() {
+     *   exampleFunction();
+     * }
+     *
+     * anotherFunction();
+     * ```
+     *
+     * It is possible to reconstruct the original locations by setting the option `sourceMap` to `true`.
+     * If the source map is not available, the original location will be the same as the current location.
+     * When the `--enable-source-maps` flag is enabled, for example when using `--experimental-transform-types`,
+     * `sourceMap` will be true by default.
+     *
+     * ```ts
+     * import { getCallSites } from 'node:util';
+     *
+     * interface Foo {
+     *   foo: string;
+     * }
+     *
+     * const callSites = getCallSites({ sourceMap: true });
+     *
+     * // With sourceMap:
+     * // Function Name: ''
+     * // Script Name: example.js
+     * // Line Number: 7
+     * // Column Number: 26
+     *
+     * // Without sourceMap:
+     * // Function Name: ''
+     * // Script Name: example.js
+     * // Line Number: 2
+     * // Column Number: 26
+     * ```
+     * @param frameCount Number of frames to capture as call site objects.
+     * **Default:** `10`. Allowable range is between 1 and 200.
+     * @return An array of call site objects
+     * @since v22.9.0
+     */
+    export function getCallSites(frameCount?: number, options?: GetCallSitesOptions): CallSiteObject[];
+    export function getCallSites(options: GetCallSitesOptions): CallSiteObject[];
+    /**
+     * Returns the string name for a numeric error code that comes from a Node.js API.
+     * The mapping between error codes and error names is platform-dependent.
+     * See `Common System Errors` for the names of common errors.
+     *
+     * ```js
+     * fs.access('file/that/does/not/exist', (err) => {
+     *   const name = util.getSystemErrorName(err.errno);
+     *   console.error(name);  // ENOENT
+     * });
+     * ```
+     * @since v9.7.0
+     */
+    export function getSystemErrorName(err: number): string;
+    /**
+     * Enable or disable printing a stack trace on `SIGINT`. The API is only available on the main thread.
+     * @since 22.19.0
+     */
+    export function setTraceSigInt(enable: boolean): void;
+    /**
+     * Returns a Map of all system error codes available from the Node.js API.
+     * The mapping between error codes and error names is platform-dependent.
+     * See `Common System Errors` for the names of common errors.
+     *
+     * ```js
+     * fs.access('file/that/does/not/exist', (err) => {
+     *   const errorMap = util.getSystemErrorMap();
+     *   const name = errorMap.get(err.errno);
+     *   console.error(name);  // ENOENT
+     * });
+     * ```
+     * @since v16.0.0, v14.17.0
+     */
+    export function getSystemErrorMap(): Map<number, [string, string]>;
+    /**
+     * Returns the string message for a numeric error code that comes from a Node.js
+     * API.
+     * The mapping between error codes and string messages is platform-dependent.
+     *
+     * ```js
+     * fs.access('file/that/does/not/exist', (err) => {
+     *   const message = util.getSystemErrorMessage(err.errno);
+     *   console.error(message);  // no such file or directory
+     * });
+     * ```
+     * @since v22.12.0
+     */
+    export function getSystemErrorMessage(err: number): string;
+    /**
+     * The `util.log()` method prints the given `string` to `stdout` with an included
+     * timestamp.
+     *
+     * ```js
+     * import util from 'node:util';
+     *
+     * util.log('Timestamped message.');
+     * ```
+     * @since v0.3.0
+     * @deprecated Since v6.0.0 - Use a third party module instead.
+     */
+    export function log(string: string): void;
+    /**
+     * Returns the `string` after replacing any surrogate code points
+     * (or equivalently, any unpaired surrogate code units) with the
+     * Unicode "replacement character" U+FFFD.
+     * @since v16.8.0, v14.18.0
+     */
+    export function toUSVString(string

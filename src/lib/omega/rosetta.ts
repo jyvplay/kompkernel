@@ -209,6 +209,7 @@ import { spliceDecode, type SpliceResult } from './splice';
 import { eidolonProject } from './eidolon';
 import { ltpProject } from './ltp';
 import { latticeEncode, latticeDecode, latticePool, LATTICE_SYSTEM_PROMPT } from './lattice';
+import { strandEncode, strandDecode, strandDynPool, STRAND_SYSTEM_PROMPT } from './strand';
 
 /* --------------------------- versioned static tables ----------------------- */
 
@@ -3359,6 +3360,9 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   // LATTICE-LT1 member lane: its pool is constructed disjoint from the
   // ROSETTA/φ1/CJK namespaces, so a leading LATTICE mark is unambiguous.
   if (wire.length >= 1 && wire[0] === latticePool(enc)[0]) return latticeDecode(wire, enc);
+  // STRAND-ST1 member lane. Its dynamic pool shares the high-Hangul block with
+  // LATTICE, so STRAND reserves a DISTINCT mark (checked before LATTICE's).
+  if (wire.length >= 1 && wire[0] === strandDynPool(enc)[0]) return strandDecode(wire, enc);
   if (wire.length >= 1) {
     const pool = rosettaPool(enc);
     const idx = pool.indexOf(wire[0]);
@@ -3636,6 +3640,17 @@ async function rosettaEncodeUncached(
     }
   }
 
+  // STRAND-ST1 member — hybrid static/dynamic dictionary under one optimal
+  // parse. The static book is frozen, prompt-shipped and mined from a corpus
+  // disjoint from every evaluation fixture, so its per-entry wire cost is zero
+  // and single-occurrence phrases become compressible.
+  {
+    const st = strandEncode(text, enc);
+    if (st.exact && st.decoded === text && st.mode === 'strand') {
+      admit('strand', st.wire, () => strandDecode(st.wire, enc), ['ST']);
+    }
+  }
+
   // ---- CALYX cage ------------------------------------------------------------
   // Every member admitted above has its decoder contract documented in
   // ROSETTA_SYSTEM_PROMPT (identity, the RNS-1 transposition lanes T/W with
@@ -3878,6 +3893,9 @@ export function rosettaDecoderPrompt(): string {
     'Wires starting τ\\n or ττ\\n are TAU-τ1 member wires: decode them with',
     'the τ table/YAML transposition rules (ττ\\n = forced literal wrap,',
     'strip 3).',
+    'Wires whose first character is the STRAND mark glyph are STRAND-ST1',
+    'member wires:',
+    STRAND_SYSTEM_PROMPT,
     'Wires whose first character is the LATTICE mark glyph are LATTICE-LT1',
     'member wires:',
     LATTICE_SYSTEM_PROMPT,
@@ -4528,7 +4546,7 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
     out.push({ name: 'E6 decode never throws on malformed N::/N: wires', pass: noThrow2, details: `${bads.length} shapes` });
 
     // E7: CALYX cage — every shippable member's contract is prompt-native
-    const nativeMembers = new Set(['identity', 'rosetta-T', 'rosetta-W', 'rosetta-U', 'rosetta-WU', 'rosetta-O', 'rosetta-UO', 'rosetta-WO', 'rosetta-WUO', 'forced-wrap', 'phrase', 'tau', 'kappa', 'meridian', 'lattice']);
+    const nativeMembers = new Set(['identity', 'rosetta-T', 'rosetta-W', 'rosetta-U', 'rosetta-WU', 'rosetta-O', 'rosetta-UO', 'rosetta-WO', 'rosetta-WUO', 'forced-wrap', 'phrase', 'tau', 'kappa', 'meridian', 'lattice', 'strand']);
     const corpus = [jl, chat, shared, glyphSrc, hostile, ROSETTA_CHAOS_900, 'id,name\n1,user_1,2,us-east-1\n2,user_2,4,us-east-1\n3,user_3,6,us-east-1'];
     let caged = true;
     const seen = new Set<string>();
