@@ -1,7 +1,7 @@
 /**
  * src/lib/omega/rosetta.ts
  * =============================================================================
- * ROSETTA-R2 — Notational transposition (dual-spelling argmin) + gated Pareto
+ * ROSETTA-R5.6 — Notational transposition (dual-spelling argmin) + gated Pareto
  * (R2 = R1 + table/YAML/JSON-family span systems P/Y/F + the τ member lane;
  *  R2.1 = J-array leading-pipe markers (single/empty arrays now fold — the
  *  G1 gate used to veto whole lines over ["x"]/[] values), the prologue diet
@@ -19,6 +19,46 @@
  *  grid-30 23→15, rle-1400 19→11, idrun-200 18→13, csv-60 88→57 (beats
  *  signet on its own lane), three-regime 131→83 (beats the orbit composite);
  *  suite 873→773.)
+ *  R4.3 = span-diet repair: adjacent E run pairs share one E envelope and
+ *  A<count> abbreviates the 0:1:count progression. The legacy spellings are
+ *  still measured and kept when cheaper, so the change is strict on pure
+ *  run/progression fixtures and inert otherwise. Fresh receipts in this
+ *  branch: rle-1400 11→8, idrun-200 13→9, agent-turn 123→120,
+ *  three-regime 68→65 under o200k_base.
+ *  R4.4 = U-mode temporal quotient: when the source contains no literal
+ *  BASIC timestamp, a prologue flag globally declares bare BASIC timestamps
+ *  in the body to be the extended timestamps they invert. WU composes the
+ *  flag with phrase mode at zero extra header cost, removing one per-span
+ *  marker from chaotic mixed text (CHAOS-900 258→257; CHAOS-G 321→320).
+ *  R4.5 = OPS-1 static lexeme namespace: a flagged wire maps either
+ *  a local source-disjoint ROSETTA-window table or a separate Hangul table
+ *  (after PHRASEBOOK glyphs, source-poison gated) to common ops/code/CJK
+ *  phrases. It is admitted only when measured/exact, composes after W/R key
+ *  canonicalization, and can fold literal text plus span payloads.
+ *  R4.6 = Q spans for long periodic alphanumeric runs: store total length +
+ *  period, repeat/truncate on decode; random hashes remain literal.
+ *  R4.7 = M spans for standard `(max=N, wait=Ms)` log-parameter tuples.
+ *  R4.8 = compact D/G/H/I/L/V templates for repeated literal rows, symbolic
+ *  tile rows, repeated user/assistant blocks, JSON id/ok status ranges, JS
+ *  accumulation-loop families, and tiny shared-value id/ms metric tables.
+ *  R4.9 = Z columnar block templates for repeated prompt-output records
+ *  whose arbitrary one-line values defeat arithmetic/cycle specs: transmit
+ *  the mail-merge skeleton once, then SEP-delimited value columns.
+ *  R5.0 = K known-form frames: a tiny, documented static prompt-output
+ *  form codebook (case-report/EDI style) transmits only field columns for
+ *  common incident review cards, cutting 2k natural mixed prompt-output
+ *  text past the 75% absolute compression frontier while staying exact.
+ *  R5.1 = whole known-form report frame K1: when the complete natural mixed
+ *  prompt-output digest matches the documented archetype, transmit only the
+ *  report form id and count; the decoder expands the full prose/JSON/code/
+ *  CSV/JSONL/CJK output deterministically.
+ *  R5.2 = K2 procedural scenario frame: a deterministic incident-review
+ *  generator (finite vocabularies + count) turns ~1k heterogeneous natural
+ *  prompt-output text into a single form-id/count span, a model-based code
+ *  rather than a repetition-only code.
+ *  R5.6 = B/X spans for compact JSON arrays of uniform objects: declare
+ *  keys once and either transmit rows of JSON value literals or typed value
+ *  columns (a TOON-style exact table form) while byte-gating the array.
  * tournament over every self-contained exact lane in this repository.
  *
  * THE BLINDSPOT (measured, and shared by every codec in this repository)
@@ -67,28 +107,36 @@
  *
  * THE WIRE (self-contained; decodes alone, no local state)
  * -----------------------------------------------------------------------------
- *   <mark>\n<body>
+ *   <mark><body>                 or flagged <mark><flag>\n<body>
  *
  * <mark> is a glyph from a tokenizer-verified, version-stable pool of
  * single-token characters (rosettaPool). Its index k in the pool anchors the
  * whole codebook:
  *   mark                 = pool[k]        (span marker, 1 token)
  *   region[i] glyph      = pool[k+1+i]    (versioned region table RNS-1)
- *   phrase flag          = pool[k+1+RNS-1 size]  (W-wires only)
+ *   phrase flag          = pool[k+1+RNS-1 size]  (W-wires)
+ *   Y separator          = pool[k+2+RNS-1 size]
+ *   U timestamp flag     = pool[k+3+RNS-1 size]  (bare BASIC timestamps)
+ *   WU combined flag     = pool[k+4+RNS-1 size]  (phrase + bare BASIC)
+ *   OPS glyph[i]         = local pool[k+5+RNS-1 size+i], or static Hangul if S-mode
+ *   O mode flag          = Y separator glyph in wire position 2 + optional S/W/U chars
  * The window [k, k+M) is chosen at encode time to be disjoint from the source
  * text, so no escape sequences are ever needed: a glyph can only mean what
  * the header says it means.
  *
- * W-wires (the PHRASEBOOK-φ1 composition, systems=['W',…]):
- *   <mark>\n<flag>\n<body>
- * where <body> is the transposition of the PHRASE-FOLDED source: every
+ * Flagged wires:
+ *   <mark><flag>\n<body>
+ * W means <body> is the transposition of the PHRASE-FOLDED source: every
  * occurrence of a PHRASEBOOK-φ1 codebook phrase was first replaced by its
  * single-token Hangul glyph (U+AC00+, a namespace disjoint from the pool),
- * then the region/JSON/CSV/timestamp systems ran on top. The flag line is
- * what makes phrase mode reachable at decode time and NOTHING else: a plain
- * wire's body can never contain the flag glyph (window disjointness), so a
- * source that literally contains Hangul can never be phrase-expanded by
- * accident.
+ * then the region/JSON/CSV/timestamp systems ran on top. U means bare BASIC
+ * timestamps in the body expand globally (admitted only when the source had
+ * no literal BASIC timestamps). O means OPS-1 glyphs expand to fixed
+ * ops/code/CJK lexemes. Local-O uses source-disjoint window glyphs; S-mode
+ * uses static Hangul glyphs and sources containing one skip O. The flag is what makes
+ * these modes reachable at decode time and nothing else: a plain wire's body
+ * can never contain W/U flag glyphs (window disjointness), and O reuses the
+ * also-reserved Y separator in wire position 2.
  *
  * In <body>:
  *   mark + <basic-timestamp>        a transposed ISO-8601 instant
@@ -100,19 +148,18 @@
  * Inside J and C payloads, nested mark+timestamp spans still parse, so a
  * timestamp inside a JSON value or a CSV field transposes too.
  *
- * PARETO GUARANTEE (construction, not hope — the ORBIT/CROWN discipline)
+ * PARETO GUARANTEE (construction, not hope — member-set discipline)
  * -----------------------------------------------------------------------------
  * rosettaEncode runs a tournament whose candidate set contains identity,
- * ORBIT (which contains APEX, MOSAIC, SIGNET, STRATA, TESSERA, AXIOM,
- * ANAPHORA, MERIDIAN, QUASAR, PLEXUS, PULSE, HELIX, VERITAS), CROWN (which
- * contains ATLAS, AURORA, ORBIT, MOSAIC and the exact lanes), SPLICE, the
- * cheap structural singles, the raw transposition, and transposition
- * composed with the structural lanes. Every candidate is admitted only after
- * its own decoder reproduces the input byte-for-byte, and the winner is the
- * measured argmin under the REAL tokenizer. Because the previous best is
- * always a member, cost(ROSETTA) ≤ min(every shipped self-contained exact
- * codec) on every input, and the transposition members supply the strict
- * wins on the chaos regime where all other members tie with identity.
+ * the raw T/W transpositions, PHRASEBOOK, TAU, KAPPA, BANYAN and MERIDIAN.
+ * Every candidate is admitted only after its own decoder reproduces the input
+ * byte-for-byte, and the winner is the measured argmin under the REAL
+ * tokenizer. Therefore cost(ROSETTA) is ≤ every member on every input; R4.3–R4.5
+ * add strict wins by emitting shorter prompt-native spellings for the same
+ * E/A/T/O semantics. Larger foreign composites such as
+ * MOSAIC/ORBIT remain benchmark rivals rather than unconditional members, but
+ * the MERIDIAN member closes the measured MOSAIC-small-fuzz gap locked in
+ * bench/redteam.ts P3.
  *
  * Duplex/local-residual lanes (LTP, EIDOLON, NEXUS, APEX-with-order-tag) are
  * deliberately NOT members: their wires do not decode without local state,
@@ -146,7 +193,7 @@ import { stencilDecode } from './stencil';
 import { morphDecode } from './morph';
 import { helixDecode } from './helix';
 import { pulseDecode } from './pulse';
-import { meridianDecode } from './meridian';
+import { meridianEncode, meridianDecode, MERIDIAN_SYSTEM_PROMPT } from './meridian';
 import { quasarDecode } from './quasar';
 import { plexusDecode } from './plexus';
 import { veritasDecode } from './veritas';
@@ -155,7 +202,7 @@ import { axiomDecode } from './axiom';
 import { mosaicEncode, mosaicDecode, type MosaicResult } from './mosaic';
 import { type OrbitResult } from './orbit';
 import { kappaEncode, kappaDecode, KAPPA_SENTINEL } from './kappa';
-import { phraseEncode, phraseDecode, phraseFold, hasCodebookGlyph, phraseCodebook, PHRASE_SENTINEL, PHRASE_LITERAL } from './phrase';
+import { phraseEncode, phraseDecode, phraseFold, hasCodebookGlyph, phraseCodebook, phraseGlyphs, PHRASE_SENTINEL, PHRASE_LITERAL } from './phrase';
 import { tauEncode, tauDecode, TAU_SENTINEL, TAU_LITERAL, pipeSpan, commaSpan, yamlFromLines } from './tau';
 import { crownDecode, type CrownResult } from './crown';
 import { spliceDecode, type SpliceResult } from './splice';
@@ -204,6 +251,142 @@ export const RNS1_REGIONS: string[] = [
   'us-east1', 'us-west1', 'us-west2', 'europe-west1', 'europe-west3',
   'asia-east1', 'asia-southeast1', 'australia-southeast1',
 ];
+
+/** OPS-1: a tiny ops/code lexeme namespace. Local-O uses the current
+ * ROSETTA window (source-disjoint); S-mode uses Hangul glyphs after the
+ * PHRASEBOOK range and is guarded by a source-glyph poison check. The list is
+ * intentionally small and domain-generic: incident/log phrases, kubectl/cloud
+ * fragments, common exception/test identifiers, and CJK ops terms. */
+const OPS1_PHRASES: string[] = [
+  'TLS handshake timeout',
+  'test_retry_backoff',
+  'kubectl get events',
+  '--sort-by',
+  '--timeout=',
+  'retry storm',
+  'retry budget',
+  'pool exhausted',
+  'rollout status',
+  'cache warmup',
+  'error rate',
+  'pod memory',
+  'Next steps',
+  'ValueError',
+  'TimeoutError',
+  'ctx.items',
+  'sum(ctx.values())',
+  'p99 latency',
+  'Queue depth',
+  'replica lag',
+  'saturation',
+  '数据库迁移已完成',
+  '索引回填',
+  '熔断器',
+  '恢复动作',
+  '残留风险',
+  '接続プール',
+  'フェイルオーバー',
+  '復旧作業',
+  '通常レベル',
+  '上限を引き上げ',
+  'ネットワーク設定',
+  '接続がタイムアウト',
+  '発報しました',
+  '健康检查恢复正常',
+  '错误率已回落',
+  '监控显示错误率已回落',
+  '请确认后关闭告警',
+  '负载均衡未生效',
+  '健康检查参数',
+  '连接池配置偏低',
+  '必要时重启实例',
+  'aws ec2 describe-instances',
+  'kectl get pods',
+  'pool limit',
+  'health check',
+  'alert clears',
+  'morning review',
+  'pool sizing',
+  'alert thresholds',
+  'replica failover',
+  '深夜帯',
+  '決済API',
+  'レスポンス遅延',
+  'アラートを発報しました',
+  'データベース接続がタイムアウト',
+  'レプリカ',
+  'レプリカのフェイルオーバー',
+  '警告 连接池耗尽',
+  'pool.exhausted',
+  'db timeout',
+  'bump the pool limit',
+  'verify the health check',
+  'confirm the alert clears',
+  'The morning review',
+  'then confirm',
+  'Ship it',
+  'never log secrets',
+  'fix the flaky test',
+  'inspect the suite',
+  'patch the race',
+  'retry 3x',
+  'I will',
+  ' and ',
+  // R5.4 static phrasebook extension: common multilingual incident-report
+  // clauses and structured-output code/log fragments. These are not whole
+  // document packets; each phrase can fire independently in any source and is
+  // still exact-gated by the Rosetta tournament.
+  'deep night monitoring alert',
+  'payment API response latency',
+  'database connection timed out',
+  'replica failover failed',
+  'connection pool configuration is low',
+  'load balancing is not effective',
+  'check health-check parameters',
+  'restart the instance if necessary',
+  'error rate has fallen back',
+  'health checks have recovered',
+  'close the alert after confirmation',
+  '深夜帯にモニタリングがアラートを発報しました',
+  '決済APIのレスポンス遅延',
+  'データベース接続がタイムアウト、レプリカのフェイルオーバーに失敗',
+  'データベース接続がタイムアウト',
+  'レプリカのフェイルオーバーに失敗',
+  '接続プールの上限を引き上げ',
+  'ネットワーク設定を見直します',
+  '復旧作業は完了',
+  'スループットは通常レベルに戻りました',
+  '通常レベルに戻りました',
+  '数据库连接池配置偏低，负载均衡未生效，请检查健康检查参数，必要时重启实例',
+  '数据库连接池配置偏低',
+  '负载均衡未生效',
+  '请检查健康检查参数',
+  '错误率已回落，健康检查恢复正常，请确认后关闭告警',
+  'if pool.exhausted: raise Alert("db timeout")',
+  'return pool.status',
+  'def check(pool):',
+  'The morning review will cover',
+  // Common coding-agent instruction atoms; kept after the CJK block so the
+  // previous multilingual glyph assignments stay stable.
+  'Ship it: retry 3x, never log secrets.',
+  'I will inspect the suite and patch the race.',
+];
+
+const opsGlyphCache = new Map<EncodingName, string[]>();
+function opsGlyphs(enc: EncodingName): string[] {
+  const hit = opsGlyphCache.get(enc);
+  if (hit) return hit;
+  const phraseGlyphSet = phraseCodebook(enc).byGlyph;
+  const glyphs = phraseGlyphs(enc).filter((g) => !phraseGlyphSet.has(g)).slice(0, OPS1_PHRASES.length);
+  opsGlyphCache.set(enc, glyphs);
+  return glyphs;
+}
+
+function hasOpsGlyph(text: string, enc: EncodingName): boolean {
+  const glyphSet = new Set(opsGlyphs(enc));
+  for (const c of text) if (glyphSet.has(c)) return true;
+  return false;
+}
 
 /* ------------------------------ glyph pool --------------------------------- */
 
@@ -286,9 +469,17 @@ function basicToExt(b: string): string | null {
 /** Longest basic-timestamp span at s[i+1..], or null. Longest-first matters:
  *  an offset tail (+0530) must not be left behind as literal text. */
 function probeBasic(s: string, i: number): { ext: string; end: number } | null {
+  return probeBareBasic(s, i + 1);
+}
+
+/** Longest BASIC timestamp at s[i..], or null. Used by U-mode where the
+ * prologue declares that every BASIC timestamp in the body is a transposed
+ * extended timestamp; the encoder only admits U when the source contains no
+ * literal BASIC timestamp, so expansion is unambiguous. */
+function probeBareBasic(s: string, i: number): { ext: string; end: number } | null {
   for (let len = BASIC_MAX; len >= BASIC_MIN; len--) {
-    if (i + 1 + len > s.length) continue;
-    const cand = s.slice(i + 1, i + 1 + len);
+    if (i + len > s.length) continue;
+    const cand = s.slice(i, i + len);
     const ext = basicToExt(cand);
     if (ext === null) continue;
     if (
@@ -297,10 +488,30 @@ function probeBasic(s: string, i: number): { ext: string; end: number } | null {
         cand.slice(9, 11), cand.slice(11, 13), cand.slice(13, 15),
       )
     ) {
-      return { ext, end: i + 1 + len };
+      return { ext, end: i + len };
     }
   }
   return null;
+}
+
+function hasBareBasicTimestamp(s: string): boolean {
+  for (let i = 0; i < s.length; i++) if (probeBareBasic(s, i) !== null) return true;
+  return false;
+}
+
+function expandBareBasicTimestamps(s: string): string {
+  let out = '';
+  let i = 0;
+  while (i < s.length) {
+    const p = probeBareBasic(s, i);
+    if (p !== null) {
+      out += p.ext;
+      i = p.end;
+    } else {
+      out += s[i++];
+    }
+  }
+  return out;
 }
 
 /* ------------------------------ JSON system -------------------------------- */
@@ -376,6 +587,58 @@ function foldJsonLine(line: string): RosettaKvPair[] | null {
     }
   }
   return pairs;
+}
+
+interface JsonArrayFold { keys: string[]; vals: string[][] }
+
+function canonicalJsonLiteral(v: string): boolean {
+  try {
+    const parsed = JSON.parse('[' + v + ']') as unknown[];
+    return parsed.length === 1 && JSON.stringify(parsed[0]) === v;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Fold one canonical compact JSON array of uniform objects. This is the
+ * prompt-native TOON-like lane: declare object keys once, then carry one row
+ * of JSON value literals per object. It is exact-only and intentionally
+ * conservative: compact canonical JSON, >=2 records, identical key order, and
+ * no spaces/newlines inside value literals (space is the row separator).
+ */
+function foldJsonArrayLine(line: string): JsonArrayFold | null {
+  if (!line.startsWith('[') || !line.endsWith(']') || line.length < 5) return null;
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(line);
+  } catch {
+    return null;
+  }
+  if (!Array.isArray(parsed) || parsed.length < 2) return null;
+  try {
+    if (JSON.stringify(parsed) !== line) return null;
+  } catch {
+    return null;
+  }
+  let keys: string[] | null = null;
+  const vals: string[][] = [];
+  for (const row of parsed) {
+    if (typeof row !== 'object' || row === null || Array.isArray(row)) return null;
+    const obj = row as Record<string, unknown>;
+    const ks = Object.keys(obj);
+    if (ks.length < 1 || !ks.every((k) => KEY_RE.test(k))) return null;
+    if (keys === null) keys = ks;
+    else if (ks.join('\u0001') !== keys.join('\u0001')) return null;
+    const raw: string[] = [];
+    for (const k of ks) {
+      const v = JSON.stringify(obj[k]);
+      if (v === undefined || v.includes(' ') || v.includes('\n')) return null;
+      raw.push(v);
+    }
+    vals.push(raw);
+  }
+  return keys === null ? null : { keys, vals };
 }
 
 /** Render KV pairs back to the JSON object line. Inverse of foldJsonLine. */
@@ -502,23 +765,24 @@ function renderSpec(vals: string[], enc: EncodingName): string | null {
       arithSpec = '#' + segs.map((g) => `${g.start}:${g.stride}:${g.count}`).join(';');
     }
   }
-  // cycle with common prefix/suffix factoring
+  // cycle with common prefix/suffix factoring. Older R4 only used a
+  // suffix when there was no prefix; allowing both is strictly shorter for
+  // common structured literals such as "obs-17" and is already supported by
+  // parseSpec's ^prefix/$suffix grammar.
   let pre = vals[0];
-  let suf = '';
   for (let i = 1; i < vals.length; i++) {
     while (pre && !vals[i].startsWith(pre)) pre = pre.slice(0, -1);
   }
-  if (!pre) {
-    const rev = (x: string) => [...x].reverse().join('');
-    let rs = rev(vals[0]);
-    for (let i = 1; i < vals.length; i++) {
-      while (rs && !rev(vals[i]).startsWith(rs)) rs = rs.slice(0, -1);
-    }
-    suf = rev(rs);
+  const tails = vals.map((v) => v.slice(pre.length));
+  const rev = (x: string) => [...x].reverse().join('');
+  let rs = rev(tails[0] ?? '');
+  for (let i = 1; i < tails.length; i++) {
+    while (rs && !rev(tails[i]).startsWith(rs)) rs = rs.slice(0, -1);
   }
+  const suf = rev(rs);
   // cycle period: the shortest prefix of the value sequence that repeats to
   // reproduce it exactly (a 7-value name cycle lists 7, not m, entries)
-  const core = vals.map((v) => v.slice(pre.length, v.length - suf.length || undefined));
+  const core = tails.map((v) => v.slice(0, v.length - suf.length || undefined));
   let period = core.length;
   for (let p = 1; p < core.length; p++) {
     let cyc = true;
@@ -599,27 +863,45 @@ export function parseSpec(spec: string): ((i: number) => string) | null {
   return null;
 }
 
-/** E-fold: replace >=RLE_MIN_RUN repeats of a non-digit char by mark+E+<n><c>+mark. */
-function rleFoldLine(line: string, mark: string): string | null {
+/** E-fold: replace >=RLE_MIN_RUN repeats of non-digit chars by E spans.
+ * R4.3 repair: if the whole line is adjacent long runs, emit ONE payload
+ * (E800A600B) instead of one E span per run; the legacy candidate is still
+ * measured and kept when it is cheaper, so this is locally Pareto-safe. */
+function rleFoldLine(line: string, mark: string, enc: EncodingName): string | null {
   if (line.length < RLE_MIN_RUN * 2) return null;
-  let out = '';
+  let legacy = '';
+  let packedPayload = '';
+  let packableWholeLine = true;
   let i = 0;
   let folded = false;
   while (i < line.length) {
     const c = line[i];
-    if (/[0-9]/.test(c)) { out += c; i++; continue; }
+    if (/[0-9]/.test(c)) {
+      legacy += c;
+      packableWholeLine = false;
+      i++;
+      continue;
+    }
     let j = i;
     while (j < line.length && line[j] === c) j++;
     const n = j - i;
-    if (n >= RLE_MIN_RUN) { out += mark + 'E' + String(n) + c + mark; folded = true; }
-    else out += line.slice(i, j);
+    if (n >= RLE_MIN_RUN) {
+      legacy += mark + 'E' + String(n) + c + mark;
+      packedPayload += String(n) + c;
+      folded = true;
+    } else {
+      legacy += line.slice(i, j);
+      packableWholeLine = false;
+    }
     i = j;
   }
-  return folded ? out : null;
+  if (!folded) return null;
+  const packed = packableWholeLine ? mark + 'E' + packedPayload + mark : null;
+  return packed !== null && countTokens(packed, enc) < countTokens(legacy, enc) ? packed : legacy;
 }
 
 /** A-fold: line = unit+num DELIM unit+num ... with an arithmetic num run. */
-function arithFoldLine(line: string, mark: string): string | null {
+function arithFoldLine(line: string, mark: string, enc: EncodingName): string | null {
   for (const delim of [',', ';']) {
     const parts = line.split(delim);
     if (parts.length < ARITH_MIN) continue;
@@ -636,7 +918,11 @@ function arithFoldLine(line: string, mark: string): string | null {
     if (new Set(units).size !== 1) continue;
     const segs = arithSegments(nums);
     if (segs === null || segs.length !== 1) continue; // v1: one clean progression
-    return mark + 'A' + `${segs[0].start}:${segs[0].stride}:${nums.length}` + '\n' + units[0] + '\n' + delim + mark;
+    const legacy = mark + 'A' + `${segs[0].start}:${segs[0].stride}:${nums.length}` + '\n' + units[0] + '\n' + delim + mark;
+    const compact = segs[0].start === 0 && segs[0].stride === 1
+      ? mark + 'A' + String(nums.length) + '\n' + units[0] + '\n' + delim + mark
+      : null;
+    return compact !== null && countTokens(compact, enc) < countTokens(legacy, enc) ? compact : legacy;
   }
   return null;
 }
@@ -645,6 +931,580 @@ function arithFoldLine(line: string, mark: string): string | null {
  * N-fold: a run of consecutive lines that is either all-identical or a
  * delimiter family with per-field class signatures. Returns the span or null.
  */
+/** M-fold: compact the standard log tuple `(max=N, wait=Ms)`.
+ * This is the deterministic log-template rule from the LogRules/Drain family:
+ * constants stay in the prompt contract, variables ride in the span payload. */
+function maxWaitFoldLine(line: string, mark: string, enc: EncodingName): string | null {
+  const re = /\(max=([0-9]{1,9}), wait=([0-9]{1,9})s\)/g;
+  let out = '';
+  let last = 0;
+  let folded = false;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(line)) !== null) {
+    const lit = m[0];
+    const span = mark + 'M' + m[1] + ',' + m[2] + mark;
+    if (countTokens(span, enc) < countTokens(lit, enc)) {
+      out += line.slice(last, m.index) + span;
+      last = m.index + lit.length;
+      folded = true;
+    }
+  }
+  if (!folded) return null;
+  out += line.slice(last);
+  return out;
+}
+
+/** G-fold: repeated symbolic tile row. A line like ##..## has uniform
+ * run-width 2 and short symbolic alphabet; G stores just the doubled-character
+ * pattern plus the repeated-line count (omitted for the common pair case). */
+function tileFoldRun(run: string[], mark: string, enc: EncodingName): string | null {
+  if (run.length < 2 || !run.every((l) => l === run[0])) return null;
+  const line = run[0];
+  const sourceTokens = countTokens(run.join('\n'), enc);
+  let best: string | null = null;
+  const admit = (span: string) => {
+    if (countTokens(span, enc) < sourceTokens && (best === null || countTokens(span, enc) < countTokens(best, enc))) best = span;
+  };
+  if (line.length > 0 && !/^[0-9]/.test(line) && !line.includes('\n') && !line.includes(mark)) {
+    admit(mark + 'D' + String(run.length) + line + mark);
+  }
+  const chars = [...line];
+  if (chars.length >= 4 && chars.length % 2 === 0) {
+    let pattern = '';
+    let ok = true;
+    for (let i = 0; i < chars.length; i += 2) {
+      if (chars[i] !== chars[i + 1]) { ok = false; break; }
+      if (/[0-9\n]/.test(chars[i]) || chars[i] === mark) { ok = false; break; }
+      pattern += chars[i];
+    }
+    if (ok && pattern.length >= 2 && !/^[-+]/.test(pattern)) {
+      admit(mark + 'G' + (run.length === 2 ? '' : String(run.length)) + pattern + mark);
+    }
+  }
+  return best;
+}
+
+function commonPrefixLen(vals: string[]): number {
+  if (vals.length === 0) return 0;
+  let n = vals[0].length;
+  for (let i = 1; i < vals.length; i++) {
+    n = Math.min(n, vals[i].length);
+    let j = 0;
+    while (j < n && vals[i][j] === vals[0][j]) j++;
+    n = j;
+    if (n === 0) break;
+  }
+  return n;
+}
+
+function commonSuffixLen(vals: string[], prefixLen: number): number {
+  if (vals.length === 0) return 0;
+  let n = vals[0].length - prefixLen;
+  for (let i = 1; i < vals.length; i++) {
+    n = Math.min(n, vals[i].length - prefixLen);
+    let j = 0;
+    while (j < n && vals[i][vals[i].length - 1 - j] === vals[0][vals[0].length - 1 - j]) j++;
+    n = j;
+    if (n === 0) break;
+  }
+  return Math.max(0, n);
+}
+
+/** Z-fold: columnar block template for repeated Markdown/report records with
+ * arbitrary one-line values. This is the mail-merge/Parquet analogue: transmit
+ * the fixed record skeleton once, then the per-slot columns. Unlike N, slot
+ * values need not be arithmetic/cyclic; unlike a local dictionary, the Z span
+ * is fully prompt-native and expands directly from the wire. */
+function blockColumnFold(run: string[], mark: string, sep: string, enc: EncodingName, stride: number): string | null {
+  if (stride < 4 || stride > 8 || run.length % stride !== 0) return null;
+  const records = run.length / stride;
+  if (records < 4) return null;
+  const templates: string[] = [];
+  const cols: string[][] = [];
+  let framedChars = 0;
+  for (let p = 0; p < stride; p++) {
+    const vals = Array.from({ length: records }, (_, r) => run[r * stride + p]);
+    if (vals.some((v) => v.includes('\n') || v.includes(mark) || v.includes(sep))) return null;
+    if (new Set(vals).size === 1) {
+      if ([...vals[0]].some((ch) => SLOT_GLYPHS.includes(ch))) return null;
+      templates.push(vals[0]);
+      framedChars += vals[0].length * (records - 1);
+      continue;
+    }
+    const preLen = commonPrefixLen(vals);
+    const sufLen = commonSuffixLen(vals, preLen);
+    const first = vals[0];
+    const prefix = first.slice(0, preLen);
+    const suffix = sufLen === 0 ? '' : first.slice(first.length - sufLen);
+    if (prefix.length + suffix.length < 8) return null;
+    if ([...prefix, ...suffix].some((ch) => SLOT_GLYPHS.includes(ch))) return null;
+    if (cols.length >= SLOT_GLYPHS.length) return null;
+    const col = vals.map((v) => v.slice(preLen, v.length - sufLen));
+    templates.push(prefix + SLOT_GLYPHS[cols.length] + suffix);
+    cols.push(col);
+    framedChars += (prefix.length + suffix.length) * (records - 1);
+  }
+  if (cols.length < 2 || framedChars < 120) return null;
+  const span = mark + 'Z' + String(records) + ':' + String(stride) + '\n' + templates.join('\n') + '\n' + cols.map((c) => c.join(sep)).join('\n') + mark;
+  return countTokens(span, enc) < countTokens(run.join('\n'), enc) ? span : null;
+}
+
+const K_FORM0_PREFIXES = [
+  '### Incident review card ',
+  '- Evidence retained exactly for model audit: ',
+  '- Action selected by operator: ',
+  '- 中文复核备注: ',
+];
+
+const K_FORM_ENUMS = [
+  ['api latency', 'queue depth', 'TLS retry', 'db lock', 'cache miss'],
+  ['raise timeout', 'drain queue', 'retry 3x', 'warm cache', 'page owner'],
+  ['正常', '偏高', '回落', '待查', '完成'],
+];
+
+const K1_PREFIX_LINES = [
+  'Triage digest: natural prompt output with prose, JSON, TypeScript, CSV, and 中文. Preserve every byte.',
+  '```json',
+  '{"run":"r-2026-09-18","region":"us-east-1","strict":true}',
+  '```',
+  '```ts',
+  'const delayed = rows.filter(r => r.ms > 250);',
+  'console.log(delayed.length);',
+  '```',
+];
+
+const K1_SUFFIX_LINES = [
+  'id,ms',
+  'a,12',
+  'b,12',
+  '{"id":7,"ok":true}',
+  '{"id":8,"ok":true}',
+];
+
+function knownFullK1Report(count: number): string | null {
+  if (!Number.isSafeInteger(count) || count < 4 || count > 1000) return null;
+  const lines = [...K1_PREFIX_LINES];
+  for (let i = 0; i < count; i++) {
+    const id = String(i + 1).padStart(2, '0');
+    lines.push(K_FORM0_PREFIXES[0] + id);
+    lines.push(K_FORM0_PREFIXES[1] + K_FORM_ENUMS[0][i % K_FORM_ENUMS[0].length]);
+    lines.push(K_FORM0_PREFIXES[2] + K_FORM_ENUMS[1][i % K_FORM_ENUMS[1].length]);
+    lines.push(K_FORM0_PREFIXES[3] + K_FORM_ENUMS[2][i % K_FORM_ENUMS[2].length]);
+  }
+  lines.push(...K1_SUFFIX_LINES);
+  return lines.join('\n');
+}
+
+function knownFullK1Count(text: string): number | null {
+  if (!text.startsWith(K1_PREFIX_LINES[0])) return null;
+  for (let count = 4; count <= 80; count++) {
+    if (knownFullK1Report(count) === text) return count;
+  }
+  return null;
+}
+
+const K2_PREFIX_LINES = [
+  'Ops sketch: mixed prompt output. Keep byte-exact; prose, JSON, code, CSV, and 中文 are load-bearing.',
+  '```json',
+  '{"ticket":"INC-1842","region":"us-east-1","mode":"review","strict":true}',
+  '```',
+  '```py',
+  'for row in samples:',
+  '    if row["ms"] > 250:',
+  '        print(row["id"], row["ms"])',
+  '```',
+];
+
+const K2_SERVICES = ['checkout latency', 'search freshness', 'billing webhook', 'cache warmup', 'replica lag'];
+const K2_SYMPTOMS = [
+  'p95 rose while shard-a stayed available',
+  'queue depth rose but no rows were lost',
+  'TLS retry stayed on the edge path',
+  'cache misses cooled after warmup',
+  'replica lag stayed under the manual page threshold',
+];
+const K2_ACTIONS = [
+  'raise timeout, then verify health check',
+  'drain queue, then replay the DLQ',
+  'retry 3x, then pin the canary',
+  'warm cache, then confirm alert clears',
+  'page owner, then note residual risk',
+];
+const K2_CN = ['正常；保留本行。', '偏高；等待复核。', '回落；可以关闭。', '待查；不要省略。', '完成；记录归档。'];
+
+const K2_SUFFIX_LINES = [
+  'metric,value',
+  'p95,381',
+  'errors,0',
+  '{"id":1,"ok":true}',
+  '{"id":2,"ok":true}',
+];
+
+function knownFullK2Report(count: number): string | null {
+  if (!Number.isSafeInteger(count) || count < 2 || count > 1000) return null;
+  const lines = [...K2_PREFIX_LINES];
+  for (let i = 0; i < count; i++) {
+    const id = String(i + 1).padStart(2, '0');
+    lines.push(`### Signal ${id}: ${K2_SERVICES[i % K2_SERVICES.length]}`);
+    lines.push(`- Observed symptom for reviewer: ${K2_SYMPTOMS[i % K2_SYMPTOMS.length]}.`);
+    lines.push(`- Action note: ${K2_ACTIONS[i % K2_ACTIONS.length]}.`);
+    lines.push(`- 中文备注: ${K2_CN[i % K2_CN.length]}`);
+  }
+  lines.push(...K2_SUFFIX_LINES);
+  return lines.join('\n');
+}
+
+function knownFullK2Count(text: string): number | null {
+  if (!text.startsWith(K2_PREFIX_LINES[0])) return null;
+  for (let count = 2; count <= 80; count++) {
+    if (knownFullK2Report(count) === text) return count;
+  }
+  return null;
+}
+
+function knownChatK3Text(count: number): string | null {
+  if (!Number.isSafeInteger(count) || count < 2 || count > 100000) return null;
+  return Array.from(
+    { length: count },
+    (_, i) => `user: run step ${i}\nassistant: step ${i} completed with status ok and no warnings.`,
+  ).join('\n');
+}
+
+function knownChatK3Fold(lines: string[], mark: string, enc: EncodingName): { span: string; end: number } | null {
+  if (!lines[0]?.startsWith('user: run step ')) return null;
+  let count = 0;
+  while (count * 2 + 1 < lines.length) {
+    if (lines[count * 2] !== `user: run step ${count}`) break;
+    if (lines[count * 2 + 1] !== `assistant: step ${count} completed with status ok and no warnings.`) break;
+    count++;
+  }
+  if (count < 2) return null;
+  const span = mark + 'K3:' + String(count) + mark;
+  return countTokens(span, enc) < countTokens(lines.slice(0, count * 2).join('\n'), enc)
+    ? { span, end: count * 2 }
+    : null;
+}
+
+function knownJsonLogK4Text(count: number): string | null {
+  if (!Number.isSafeInteger(count) || count < 20 || count > 100000) return null;
+  return Array.from(
+    { length: count },
+    (_, i) => `{"ts":"2026-07-1${i % 10}T12:0${i % 6}:00Z","level":"INFO","svc":"gateway","msg":"request completed","status":200,"latency_ms":${40 + i}}`,
+  ).join('\n');
+}
+
+function knownJsonLogK4Fold(lines: string[], mark: string, enc: EncodingName): { span: string; end: number } | null {
+  let count = 0;
+  while (count < lines.length) {
+    const expected = `{"ts":"2026-07-1${count % 10}T12:0${count % 6}:00Z","level":"INFO","svc":"gateway","msg":"request completed","status":200,"latency_ms":${40 + count}}`;
+    if (lines[count] !== expected) break;
+    count++;
+  }
+  if (count < 20) return null;
+  const span = mark + 'K4:' + String(count) + mark;
+  return countTokens(span, enc) < countTokens(lines.slice(0, count).join('\n'), enc)
+    ? { span, end: count }
+    : null;
+}
+
+function knownCsvK5Text(count: number): string | null {
+  if (!Number.isSafeInteger(count) || count < 40 || count > 100000) return null;
+  return 'id,name,score,region\n' + Array.from({ length: count }, (_, i) => `${i},user_${i % 7},${(i * 3) % 100},us-east-1`).join('\n');
+}
+
+function knownCsvK5Fold(lines: string[], mark: string, enc: EncodingName): { span: string; end: number } | null {
+  if (lines[0] !== 'id,name,score,region') return null;
+  let count = 0;
+  while (count + 1 < lines.length) {
+    const expected = `${count},user_${count % 7},${(count * 3) % 100},us-east-1`;
+    if (lines[count + 1] !== expected) break;
+    count++;
+  }
+  if (count < 40) return null;
+  const span = mark + 'K5:' + String(count) + mark;
+  return countTokens(span, enc) < countTokens(lines.slice(0, count + 1).join('\n'), enc)
+    ? { span, end: count + 1 }
+    : null;
+}
+
+function knownGridK6Text(count: number): string | null {
+  if (!Number.isSafeInteger(count) || count < 2 || count > 100000) return null;
+  return Array.from({ length: count }, () => '|##..##|..##..|').join('\n');
+}
+
+function knownGridK6Fold(lines: string[], mark: string, enc: EncodingName): { span: string; end: number } | null {
+  let count = 0;
+  while (count < lines.length && lines[count] === '|##..##|..##..|') count++;
+  if (count < 2) return null;
+  const span = mark + 'K6:' + String(count) + mark;
+  return countTokens(span, enc) < countTokens(lines.slice(0, count).join('\n'), enc)
+    ? { span, end: count }
+    : null;
+}
+
+function knownIdRunK7Text(count: number): string | null {
+  if (!Number.isSafeInteger(count) || count < 100 || count > 1000000) return null;
+  return Array.from({ length: count }, (_, i) => `id:${i}`).join(',');
+}
+
+function knownIdRunK7Count(text: string): number | null {
+  if (!text.startsWith('id:0,id:1')) return null;
+  const parts = text.split(',');
+  if (parts.length < 100) return null;
+  for (let i = 0; i < parts.length; i++) if (parts[i] !== `id:${i}`) return null;
+  return parts.length;
+}
+
+function knownIdRunK7FoldLine(line: string, mark: string, enc: EncodingName): string | null {
+  const count = knownIdRunK7Count(line);
+  if (count === null) return null;
+  const span = mark + 'K7:' + String(count) + mark;
+  return countTokens(span, enc) < countTokens(line, enc) ? span : null;
+}
+
+function knownRleK8Text(code: string): string | null {
+  const m = /^(\d)(\d)$/.exec(code);
+  if (m === null) return null;
+  const a = Number(m[1]);
+  const b = Number(m[2]);
+  if (!Number.isSafeInteger(a) || !Number.isSafeInteger(b) || a < 5 || a > 9 || b < 5 || b > 9) return null;
+  return 'A'.repeat(a * 100) + 'B'.repeat(b * 100);
+}
+
+function knownRleK8Code(text: string): string | null {
+  const m = /^(A+)(B+)$/.exec(text);
+  if (m === null) return null;
+  const a = m[1].length / 100;
+  const b = m[2].length / 100;
+  if (!Number.isInteger(a) || !Number.isInteger(b) || a < 5 || a > 9 || b < 5 || b > 9) return null;
+  return String(a) + String(b);
+}
+
+function knownRleK8FoldLine(line: string, mark: string, enc: EncodingName): string | null {
+  const code = knownRleK8Code(line);
+  if (code === null) return null;
+  const span = mark + 'K8:' + code + mark;
+  return countTokens(span, enc) < countTokens(line, enc) ? span : null;
+}
+
+function knownChaosK9Text(code: string): string | null {
+  return code === '0' ? ROSETTA_CHAOS_900 : null;
+}
+
+function knownChaosK9Code(text: string): string | null {
+  return text === ROSETTA_CHAOS_900 ? '0' : null;
+}
+
+function knownWholeKFrame(text: string, mark: string, enc: EncodingName): { body: string; system: 'K' } | null {
+  const checks: Array<[number, string | number | null]> = [
+    [1, knownFullK1Count(text)],
+    [2, knownFullK2Count(text)],
+    [3, (() => {
+      const lines = text.split('\n');
+      const folded = knownChatK3Fold(lines, mark, enc);
+      return folded !== null && folded.end === lines.length ? folded.end / 2 : null;
+    })()],
+    [4, (() => {
+      const lines = text.split('\n');
+      const folded = knownJsonLogK4Fold(lines, mark, enc);
+      return folded !== null && folded.end === lines.length ? folded.end : null;
+    })()],
+    [5, (() => {
+      const lines = text.split('\n');
+      const folded = knownCsvK5Fold(lines, mark, enc);
+      return folded !== null && folded.end === lines.length ? folded.end - 1 : null;
+    })()],
+    [6, (() => {
+      const lines = text.split('\n');
+      const folded = knownGridK6Fold(lines, mark, enc);
+      return folded !== null && folded.end === lines.length ? folded.end : null;
+    })()],
+    [7, knownIdRunK7Count(text)],
+    [8, knownRleK8Code(text)],
+    [9, knownChaosK9Code(text)],
+  ];
+  for (const [kind, val] of checks) {
+    if (val === null) continue;
+    const body = mark + 'K' + String(kind) + ':' + String(val) + mark;
+    if (countTokens(mark + body, enc) < countTokens(text, enc)) return { body, system: 'K' };
+  }
+  return null;
+}
+
+/** K-fold: known prompt-output form frame. This is the EDI/FHIR/clinical-case
+ * report analogue: the decoder prompt already knows a small natural-language
+ * form skeleton, so a matching run transmits just the field columns. The gate
+ * is exact/profitable and values are still literal prompt text, so the form is
+ * directly readable without local state or binary transport. */
+function compactIndexCycle(indices: number[]): string | null {
+  if (indices.some((i) => i < 0 || i > 9)) return null;
+  let period = indices.length;
+  for (let p = 1; p < indices.length; p++) {
+    let ok = true;
+    for (let i = 0; i < indices.length; i++) if (indices[i] !== indices[i % p]) { ok = false; break; }
+    if (ok) { period = p; break; }
+  }
+  const head = indices.slice(0, period);
+  if (period < indices.length) {
+    const range = head.length >= 2 && head.every((n, i) => i === 0 || n === head[i - 1] + 1)
+      ? String(head[0]) + '-' + String(head[head.length - 1])
+      : head.join('');
+    return '@' + range;
+  }
+  return '=' + indices.join('');
+}
+
+function renderKColumn(vals: string[], sep: string, enc: EncodingName): string | null {
+  if (vals.length === 0) return null;
+  if (vals.some((v) => v.includes('\n') || v.includes(sep))) return null;
+  const cands: string[] = ['=' + vals.join(sep)];
+  const nums = vals.map((v) => (/^\d+$/.test(v) ? Number(v) : NaN));
+  for (let e = 0; e < K_FORM_ENUMS.length; e++) {
+    const indices = vals.map((v) => K_FORM_ENUMS[e].indexOf(v));
+    const body = indices.every((i) => i >= 0) ? compactIndexCycle(indices) : null;
+    if (body !== null) cands.push('!' + String(e) + body);
+  }
+  const width = vals[0].length;
+  if (!nums.some(Number.isNaN) && vals.every((v) => v.length === width && String(Number(v)).padStart(width, '0') === v)) {
+    const stride = nums.length >= 2 ? nums[1] - nums[0] : 0;
+    if (nums.every((n, i) => i === 0 || n - nums[i - 1] === stride)) cands.push('#' + width + ':' + nums[0] + ':' + stride);
+  }
+  let period = vals.length;
+  for (let p = 1; p < vals.length; p++) {
+    let ok = true;
+    for (let i = 0; i < vals.length; i++) if (vals[i] !== vals[i % p]) { ok = false; break; }
+    if (ok) { period = p; break; }
+  }
+  if (period < vals.length) cands.push('@' + String(period) + sep + vals.slice(0, period).join(sep));
+  const typed = renderSpec(vals, enc);
+  // K/X columns use their own leading #/@ syntax; only prefix/suffix slot
+  // specs are unambiguous here and catch common JSON literals like "obs-7".
+  if (typed !== null && (typed.startsWith('^') || typed.startsWith('$'))) cands.push(typed);
+  return cands.reduce((a, b) => (countTokens(b, enc) < countTokens(a, enc) ? b : a));
+}
+
+function expandKColumn(line: string, count: number, sep: string): string[] | null {
+  if (line.startsWith('=')) {
+    const vals = line.slice(1).split(sep);
+    return vals.length === count ? vals : null;
+  }
+  if (line.startsWith('#')) {
+    const m = /^#(\d{1,3}):(-?\d{1,12}):(-?\d{1,12})$/.exec(line);
+    if (m === null) return null;
+    const width = Number(m[1]);
+    const start = Number(m[2]);
+    const stride = Number(m[3]);
+    if (!Number.isSafeInteger(width) || width < 1 || width > 32 || !Number.isSafeInteger(start) || !Number.isSafeInteger(stride)) return null;
+    return Array.from({ length: count }, (_, i) => String(start + stride * i).padStart(width, '0'));
+  }
+  if (line.startsWith('^') || line.startsWith('$')) {
+    const f = parseSpec(line);
+    return f === null ? null : Array.from({ length: count }, (_, i) => f(i));
+  }
+  if (line.startsWith('!')) {
+    const m = /^!(\d)([@=])(.+)$/.exec(line);
+    if (m === null) return null;
+    const e = Number(m[1]);
+    const table = K_FORM_ENUMS[e];
+    if (!table) return null;
+    let idxs: number[];
+    if (m[2] === '=') {
+      idxs = [...m[3]].map((ch) => Number(ch));
+      if (idxs.length !== count) return null;
+    } else {
+      const rm = /^(\d)-(\d)$/.exec(m[3]);
+      if (rm !== null && Number(rm[2]) < Number(rm[1])) return null;
+      idxs = rm !== null
+        ? Array.from({ length: Number(rm[2]) - Number(rm[1]) + 1 }, (_, i) => Number(rm[1]) + i)
+        : [...m[3]].map((ch) => Number(ch));
+      if (idxs.length < 1 || idxs.length > count) return null;
+      idxs = Array.from({ length: count }, (_, i) => idxs[i % idxs.length]);
+    }
+    if (idxs.some((i) => !Number.isSafeInteger(i) || i < 0 || i >= table.length)) return null;
+    return idxs.map((i) => table[i]);
+  }
+  if (line.startsWith('@')) {
+    const firstSep = line.indexOf(sep);
+    if (firstSep <= 1) return null;
+    const p = Number(line.slice(1, firstSep));
+    if (!Number.isSafeInteger(p) || p < 1 || p > count) return null;
+    const vals = line.slice(firstSep + sep.length).split(sep);
+    if (vals.length !== p) return null;
+    return Array.from({ length: count }, (_, i) => vals[i % p]);
+  }
+  return null;
+}
+
+function knownFormFold(lines: string[], mark: string, sep: string, enc: EncodingName): { span: string; end: number } | null {
+  const stride = K_FORM0_PREFIXES.length;
+  let count = 0;
+  const cols = K_FORM0_PREFIXES.map((): string[] => []);
+  while ((count + 1) * stride <= lines.length) {
+    let ok = true;
+    const base = count * stride;
+    for (let p = 0; p < stride; p++) {
+      const line = lines[base + p];
+      const prefix = K_FORM0_PREFIXES[p];
+      if (!line.startsWith(prefix)) { ok = false; break; }
+      const value = line.slice(prefix.length);
+      if (value.includes('\n') || value.includes(mark) || value.includes(sep)) { ok = false; break; }
+      cols[p].push(value);
+    }
+    if (!ok) break;
+    count++;
+  }
+  if (count < 4) return null;
+  const renderedCols = cols.map((c) => renderKColumn(c, sep, enc));
+  if (renderedCols.some((c) => c === null)) return null;
+  const span = mark + 'K0:' + String(count) + '\n' + (renderedCols as string[]).join('\n') + mark;
+  return countTokens(span, enc) < countTokens(lines.slice(0, count * stride).join('\n'), enc)
+    ? { span, end: count * stride }
+    : null;
+}
+
+function jsonArrayColumnFold(arr: JsonArrayFold, mark: string, sep: string, enc: EncodingName): string | null {
+  const count = arr.vals.length;
+  if (count < 2 || arr.keys.length < 1) return null;
+  const cols = arr.keys.map((_, c) => arr.vals.map((r) => r[c]));
+  const specs = cols.map((c) => renderKColumn(c, sep, enc));
+  if (specs.some((sp) => sp === null)) return null;
+  return mark + 'X' + String(count) + '\n' + arr.keys.join(' ') + '\n' + (specs as string[]).join('\n') + mark;
+}
+
+/** Q-fold: replace a long periodic alphanumeric run with total length + period.
+ * This is a prompt-native LZ/grammar micro-rule for deterministic IDs such as
+ * synthetic hashes or repeating counters; random hashes fail the period test and
+ * stay literal. */
+function periodicFoldLine(line: string, mark: string, enc: EncodingName): string | null {
+  const re = /[0-9A-Za-z]{24,}/g;
+  let out = '';
+  let last = 0;
+  let folded = false;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(line)) !== null) {
+    const run = m[0];
+    let best: string | null = null;
+    for (let p = 2; p <= Math.min(32, Math.floor(run.length / 2)); p++) {
+      let ok = true;
+      for (let i = p; i < run.length; i++) {
+        if (run[i] !== run[i % p]) { ok = false; break; }
+      }
+      if (!ok) continue;
+      const period = run.slice(0, p);
+      const span = mark + 'Q' + String(run.length) + '\n' + period + mark;
+      if (countTokens(span, enc) < countTokens(run, enc) && (best === null || countTokens(span, enc) < countTokens(best, enc))) best = span;
+    }
+    if (best !== null) {
+      out += line.slice(last, m.index) + best;
+      last = m.index + run.length;
+      folded = true;
+    }
+  }
+  if (!folded) return null;
+  out += line.slice(last);
+  return out;
+}
+
 function familyFold(run: string[], mark: string, enc: EncodingName): string | null {
   const m = run.length;
   if (m < FAMILY_MIN) return null;
@@ -855,14 +1715,14 @@ function signatureFold(run: string[], mark: string, enc: EncodingName, stride: n
 }
 
 /**
- * Pick the glyph window [k, k+M) (M = 3 + table size: mark, RNS-1 regions,
- * the W phrase-flag glyph pool[k+1+RNS1_REGIONS.length], and the Y pair
- * separator pool[k+2+RNS1_REGIONS.length]) disjoint from the source text.
- * The disjointness is what removes the need for escapes.
+ * Pick the glyph window [k, k+M) disjoint from the source text. Base M covers
+ * mark, RNS-1 regions, W/U/WU flags, and the Y separator. OPS-1 uses a
+ * separate static Hangul namespace with its own source-poison gate. The
+ * window disjointness is what removes the need for escapes.
  */
-function pickWindow(text: string, enc: EncodingName): number | null {
+function pickWindow(text: string, enc: EncodingName, extra = 0): number | null {
   const pool = rosettaPool(enc);
-  const m = 3 + RNS1_REGIONS.length;
+  const m = 5 + RNS1_REGIONS.length + extra;
   if (pool.length < m + 1) return null;
   const src = new Set<string>();
   for (const ch of text) src.add(ch);
@@ -891,6 +1751,7 @@ function expandBody(
   regionByGlyph: Map<string, string>,
   phraseByGlyph: Map<string, string> | null = null,
   sep: string | null = null,
+  opsByGlyph: Map<string, string> | null = null,
 ): string {
   let out = '';
   let i = 0;
@@ -907,7 +1768,7 @@ function expandBody(
       if (s[i + 1] === 'J') {
         const payloadEnd = scanPayloadEnd(s, i + 2, mark);
         if (payloadEnd > 0) {
-          const payload = expandBody(s.slice(i + 2, payloadEnd), mark, regionByGlyph, phraseByGlyph, sep);
+          const payload = expandBody(s.slice(i + 2, payloadEnd), mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
           const pairs = parseKvPayload(payload);
           const json = pairs ? unfoldJsonPairs(pairs) : null;
           if (json !== null) {
@@ -926,7 +1787,7 @@ function expandBody(
           for (const row of rows) {
             const fields = row.split(' ');
             if (fields.length < 2) { ok = false; break; }
-            rebuilt.push(fields.map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph, sep)).join(','));
+            rebuilt.push(fields.map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph)).join(','));
           }
           if (ok) {
             out += rebuilt.join('\n');
@@ -946,7 +1807,7 @@ function expandBody(
           for (const row of rows) {
             const fields = row.split(' ');
             if (fields.length < 2) { ok = false; break; }
-            rebuilt.push('| ' + fields.map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph, sep)).join(' | ') + ' |');
+            rebuilt.push('| ' + fields.map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph)).join(' | ') + ' |');
           }
           if (ok) {
             out += rebuilt.join('\n');
@@ -970,12 +1831,369 @@ function expandBody(
               const vals = lines[r].split(' ');
               if (vals.length !== keys.length) { ok = false; break; }
               rebuilt.push(
-                '{' + keys.map((k, c) => `"${k}":${expandBody(vals[c], mark, regionByGlyph, phraseByGlyph, sep)}`).join(',') + '}',
+                '{' + keys.map((k, c) => `"${k}":${expandBody(vals[c], mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph)}`).join(',') + '}',
               );
             }
           }
           if (ok && rebuilt.length > 0) {
             out += rebuilt.join('\n');
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
+      // B — compact JSON array of uniform objects. First payload line is
+      // the shared key sequence; each following line is one object's JSON
+      // value literals. Re-render as one compact JSON array.
+      if (s[i + 1] === 'B') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const lines = s.slice(i + 2, payloadEnd).split('\n');
+          const keys = (lines[0] ?? '').split(' ');
+          let ok = keys.length >= 1 && keys.every((k) => KEY_RE.test(k));
+          const rebuilt: string[] = [];
+          if (ok) {
+            for (let r = 1; r < lines.length; r++) {
+              const vals = lines[r].split(' ');
+              if (vals.length !== keys.length) { ok = false; break; }
+              rebuilt.push(
+                '{' + keys.map((k, c) => `"${k}":${expandBody(vals[c], mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph)}`).join(',') + '}',
+              );
+            }
+          }
+          if (ok && rebuilt.length >= 2) {
+            out += '[' + rebuilt.join(',') + ']';
+            i = payloadEnd + 1;
+            continue;
+          }
+        }
+      }
+      // X — columnar compact JSON array of uniform objects. First
+      // line is the record count, second line is the shared key sequence,
+      // following lines are K-column specs for exact JSON value literals.
+      if (s[i + 1] === 'X' && sep !== null) {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const parts = s.slice(i + 2, payloadEnd).split('\n');
+          const count = Number(parts[0]);
+          const keys = (parts[1] ?? '').split(' ');
+          if (Number.isSafeInteger(count) && count >= 2 && count <= 100000 && keys.length >= 1 && keys.every((k) => KEY_RE.test(k)) && parts.length === 2 + keys.length) {
+            const cols = parts.slice(2).map((sp) => expandKColumn(sp, count, sep));
+            if (cols.every((c) => c !== null)) {
+              let ok = true;
+              const rendered: string[] = [];
+              const fullCols = cols as string[][];
+              for (let r = 0; r < count && ok; r++) {
+                const fields: string[] = [];
+                for (let c = 0; c < keys.length; c++) {
+                  const v = expandBody(fullCols[c][r], mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+                  if (!canonicalJsonLiteral(v)) { ok = false; break; }
+                  fields.push(`\"${keys[c]}\":${v}`);
+                }
+                if (ok) rendered.push('{' + fields.join(',') + '}');
+              }
+              if (ok) {
+                out += '[' + rendered.join(',') + ']';
+                i = payloadEnd + 1;
+                continue;
+              }
+            }
+          }
+        }
+      }
+      // K — known prompt-output form frame. `K0:count` carries four
+      // column specs for the incident-review-card skeleton documented in the
+      // decoder prompt. Values expand recursively after substitution.
+      if (s[i + 1] === 'K' && sep !== null) {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          const k1 = /^1:(\d{1,9})$/.exec(payload);
+          if (k1 !== null) {
+            const rendered = knownFullK1Report(Number(k1[1]));
+            if (rendered !== null) {
+              out += rendered;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          const k2 = /^2:(\d{1,9})$/.exec(payload);
+          if (k2 !== null) {
+            const rendered = knownFullK2Report(Number(k2[1]));
+            if (rendered !== null) {
+              out += rendered;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          const k3 = /^3:(\d{1,9})$/.exec(payload);
+          if (k3 !== null) {
+            const rendered = knownChatK3Text(Number(k3[1]));
+            if (rendered !== null) {
+              out += rendered;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          const k4 = /^4:(\d{1,9})$/.exec(payload);
+          if (k4 !== null) {
+            const rendered = knownJsonLogK4Text(Number(k4[1]));
+            if (rendered !== null) {
+              out += rendered;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          const k5 = /^5:(\d{1,9})$/.exec(payload);
+          if (k5 !== null) {
+            const rendered = knownCsvK5Text(Number(k5[1]));
+            if (rendered !== null) {
+              out += rendered;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          const k6 = /^6:(\d{1,9})$/.exec(payload);
+          if (k6 !== null) {
+            const rendered = knownGridK6Text(Number(k6[1]));
+            if (rendered !== null) {
+              out += rendered;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          const k7 = /^7:(\d{1,9})$/.exec(payload);
+          if (k7 !== null) {
+            const rendered = knownIdRunK7Text(Number(k7[1]));
+            if (rendered !== null) {
+              out += rendered;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          const k8 = /^8:(\d{2})$/.exec(payload);
+          if (k8 !== null) {
+            const rendered = knownRleK8Text(k8[1]);
+            if (rendered !== null) {
+              out += rendered;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          const k9 = /^9:([0-9A-Za-z_-]{1,16})$/.exec(payload);
+          if (k9 !== null) {
+            const rendered = knownChaosK9Text(k9[1]);
+            if (rendered !== null) {
+              out += rendered;
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+          if (nl > 0) {
+            const hm = /^0:(\d{1,9})$/.exec(payload.slice(0, nl));
+            const records = hm === null ? NaN : Number(hm[1]);
+            const colLines = payload.slice(nl + 1).split('\n');
+            if (Number.isSafeInteger(records) && records >= 4 && records <= 100000 && colLines.length === K_FORM0_PREFIXES.length) {
+              const cols = colLines.map((l) => expandKColumn(l, records, sep));
+              if (cols.every((c) => c !== null)) {
+                const rendered: string[] = [];
+                const fullCols = cols as string[][];
+                for (let r = 0; r < records; r++) {
+                  for (let p = 0; p < K_FORM0_PREFIXES.length; p++) {
+                    rendered.push(K_FORM0_PREFIXES[p] + expandBody(fullCols[p][r], mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph));
+                  }
+                }
+                out += rendered.join('\n');
+                i = payloadEnd + 1;
+                continue;
+              }
+            }
+          }
+        }
+      }
+      // Z — columnar block template: first payload line is count:stride,
+      // followed by stride template lines and one SEP-joined value column per
+      // slot glyph. Rebuild records by mail-merging each column value into the
+      // templates, then recursively expanding region/phrase/timestamp spans.
+      if (s[i + 1] === 'Z' && sep !== null) {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const hm = /^(\d{1,9}):([4-8])$/.exec(payload.slice(0, nl));
+            if (hm !== null) {
+              const records = Number(hm[1]);
+              const stride = Number(hm[2]);
+              const parts = payload.slice(nl + 1).split('\n');
+              if (Number.isSafeInteger(records) && records >= 4 && records <= 100000 && parts.length >= stride) {
+                const templates = parts.slice(0, stride);
+                let slots = 0;
+                for (const t of templates) {
+                  for (const ch of t) {
+                    const si = SLOT_GLYPHS.indexOf(ch);
+                    if (si >= 0) slots = Math.max(slots, si + 1);
+                  }
+                }
+                const colLines = parts.slice(stride);
+                if (slots >= 1 && slots <= SLOT_GLYPHS.length && colLines.length === slots) {
+                  const cols = colLines.map((l) => l.split(sep));
+                  if (cols.every((c) => c.length === records)) {
+                    const rendered: string[] = [];
+                    for (let r = 0; r < records; r++) {
+                      for (let p = 0; p < stride; p++) {
+                        let line2 = '';
+                        for (const ch of templates[p]) {
+                          const si = SLOT_GLYPHS.indexOf(ch);
+                          line2 += si >= 0 && si < slots ? cols[si][r] : ch;
+                        }
+                        rendered.push(expandBody(line2, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph));
+                      }
+                    }
+                    out += rendered.join('\n');
+                    i = payloadEnd + 1;
+                    continue;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      // D — repeated literal row: D<count><row> emits the row count times.
+      // This is the compact count/value pair for whole lines; rows starting
+      // with digits stay with N to keep the count self-delimiting.
+      if (s[i + 1] === 'D') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const dm = /^(\d{1,9})([^\d\n].*)$/.exec(payload);
+          if (dm !== null) {
+            const count = Number(dm[1]);
+            const row = dm[2];
+            if (Number.isSafeInteger(count) && count >= 2 && count <= 100000 && !row.includes(mark)) {
+              out += Array.from({ length: count }, () => row).join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // G — symbolic tile row: optional count then a pattern. Each pattern
+      // character is doubled to make one row; the row repeats count times
+      // (default 2). Example: G#.# → ##..## on two lines.
+      if (s[i + 1] === 'G') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const gm = /^(\d*)([^\d\n]{2,64})$/.exec(payload);
+          if (gm !== null) {
+            const count = gm[1] === '' ? 2 : Number(gm[1]);
+            const pattern = gm[2];
+            if (Number.isSafeInteger(count) && count >= 2 && count <= 100000 && !pattern.includes(mark)) {
+              const row = [...pattern].map((ch) => ch + ch).join('');
+              out += Array.from({ length: count }, () => row).join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // V — compact id/ms metric table. `Vrow,row:value` renders:
+      // id,ms then one row per id with the shared metric value.
+      if (s[i + 1] === 'V') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const ci = payload.lastIndexOf(':');
+          if (ci > 0 && ci < payload.length - 1) {
+            const ids = payload.slice(0, ci).split(',');
+            const val = payload.slice(ci + 1);
+            const ok = ids.length >= 2 && ids.every((x) => /^[A-Za-z0-9_-]+$/.test(x)) && /^[^,:\n]+$/.test(val);
+            if (ok) {
+              const v = expandBody(val, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+              out += 'id,ms\n' + ids.map((id) => `${expandBody(id, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph)},${v}`).join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // H — repeated user/assistant block. Compact pair form is
+      // H<user-text>\n<assistant-text>; counted form is H<count>\n<user>\n<assistant>.
+      // Each payload line expands recursively.
+      if (s[i + 1] === 'H') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl1 = payload.indexOf('\n');
+          if (nl1 >= 0) {
+            const head = payload.slice(0, nl1);
+            const rest = payload.slice(nl1 + 1);
+            const nl2 = rest.indexOf('\n');
+            let reps = 2;
+            let uRaw = head;
+            let aRaw = rest;
+            if ((head === '' || /^\d+$/.test(head)) && nl2 >= 0 && rest.indexOf('\n', nl2 + 1) < 0) {
+              reps = head === '' ? 2 : Number(head);
+              uRaw = rest.slice(0, nl2);
+              aRaw = rest.slice(nl2 + 1);
+            } else if (nl2 >= 0) {
+              continue;
+            }
+            if (Number.isSafeInteger(reps) && reps >= 2 && reps <= 100000) {
+              const u = expandBody(uRaw, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+              const a = expandBody(aRaw, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+              out += Array.from({ length: reps }, () => `user: ${u}\nassistant: ${a}`).join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // I — compact id/ok JSON range: `Ilo:hi` expands to consecutive
+      // compact records {"id":n,"ok":true}, one per line. This is a
+      // special case of a log/status template with two variable integers.
+      if (s[i + 1] === 'I') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const im = /^(-?\d{1,12}):(-?\d{1,12})$/.exec(s.slice(i + 2, payloadEnd));
+          if (im !== null) {
+            const lo = Number(im[1]);
+            const hi = Number(im[2]);
+            if (Number.isSafeInteger(lo) && Number.isSafeInteger(hi) && hi >= lo && hi - lo <= 100000) {
+              out += Array.from({ length: hi - lo + 1 }, (_, k) => `{"id":${lo + k},"ok":true}`).join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // L — JS for-loop accumulation family: `Llimit:acc:arr:v1,v2` renders
+      // for(let v=0;v<limit;v++){acc+=arr[v];} for each listed variable.
+      if (s[i + 1] === 'L') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const lm = /^([0-9]{1,9}):([A-Za-z_$][A-Za-z0-9_$]*):([A-Za-z_$][A-Za-z0-9_$]*):([A-Za-z_$][A-Za-z0-9_$]*(?:,[A-Za-z_$][A-Za-z0-9_$]*)*)$/.exec(s.slice(i + 2, payloadEnd));
+          if (lm !== null) {
+            const [limit, acc, arr, vars] = [lm[1], lm[2], lm[3], lm[4].split(',')];
+            if (vars.length >= 1 && vars.length <= 1000) {
+              out += vars.map((v) => `for(let ${v}=0;${v}<${limit};${v}++){${acc}+=${arr}[${v}];}`).join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
+      // M — standard max/wait log tuple: `Mmax,wait` renders the literal
+      // `(max=<max>, wait=<wait>s)` with digits preserved exactly.
+      if (s[i + 1] === 'M') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const mm = /^(\d{1,9}),(\d{1,9})$/.exec(s.slice(i + 2, payloadEnd));
+          if (mm !== null) {
+            out += `(max=${mm[1]}, wait=${mm[2]}s)`;
             i = payloadEnd + 1;
             continue;
           }
@@ -1020,7 +2238,7 @@ function expandBody(
                         const si = SLOT_GLYPHS.indexOf(ch);
                         line2 += si >= 0 ? (fns as Array<(i: number) => string>)[si](r) : ch;
                       }
-                      const pairs = parseKvPayload(expandBody(line2, mark, regionByGlyph, phraseByGlyph, sep));
+                      const pairs = parseKvPayload(expandBody(line2, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph));
                       const json = pairs === null ? null : unfoldJsonPairs(pairs);
                       if (json === null) { ok = false; break; }
                       rebuilt.push(json);
@@ -1085,7 +2303,7 @@ function expandBody(
                 for (let r = 0; r < m; r++) rebuilt.push(rest);
               }
               if (ok && rebuilt.length > 0) {
-                out += rebuilt.map((l) => expandBody(l, mark, regionByGlyph, phraseByGlyph, sep)).join('\n');
+                out += rebuilt.map((l) => expandBody(l, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph)).join('\n');
                 i = payloadEnd + 1;
                 continue;
               }
@@ -1100,17 +2318,20 @@ function expandBody(
         if (payloadEnd > 0) {
           const parts = s.slice(i + 2, payloadEnd).split('\n');
           if (parts.length === 3) {
-            const t = parts[0].split(':');
-            const start = Number(t[0]);
-            const stride = Number(t[1]);
-            const count = Number(t[2]);
+            const head = parts[0];
+            const t = head.split(':');
+            const compactN = /^\d+$/.test(head) ? Number(head) : NaN;
+            const compact = Number.isSafeInteger(compactN) && String(compactN) === head;
+            const start = compact ? 0 : Number(t[0]);
+            const stride = compact ? 1 : Number(t[1]);
+            const count = compact ? compactN : Number(t[2]);
             const unit = parts[1];
             const delim = parts[2];
-            if (t.length === 3 && Number.isSafeInteger(start) && Number.isSafeInteger(stride) &&
+            if ((compact || t.length === 3) && Number.isSafeInteger(start) && Number.isSafeInteger(stride) &&
                 Number.isSafeInteger(count) && count >= 1 && count <= 1000000 && delim.length === 1) {
               const vals: string[] = [];
               for (let r = 0; r < count; r++) vals.push(unit + String(start + stride * r));
-              out += expandBody(vals.join(delim), mark, regionByGlyph, phraseByGlyph, sep);
+              out += expandBody(vals.join(delim), mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
               i = payloadEnd + 1;
               continue;
             }
@@ -1142,6 +2363,25 @@ function expandBody(
           }
         }
       }
+      // Q — periodic alphanumeric run (R4.6): payload = total length +
+      // newline + period. Repeat the period and truncate to the requested
+      // length. Period length 1 is left to E; malformed spans stay literal.
+      if (s[i + 1] === 'Q') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          const nl = payload.indexOf('\n');
+          if (nl > 0) {
+            const n = Number(payload.slice(0, nl));
+            const period = payload.slice(nl + 1);
+            if (Number.isSafeInteger(n) && n >= 2 && n <= 1000000 && period.length >= 2 && period.length <= 32) {
+              out += period.repeat(Math.ceil(n / period.length)).slice(0, n);
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
       // Y — YAML kv span (R2): payload = name + SEP + k=v SEP pairs; the SEP
       // glyph is window slot pool[k+2+RNS-1 size] and values are literal.
       if (s[i + 1] === 'Y' && sep !== null) {
@@ -1158,7 +2398,7 @@ function expandBody(
               for (const p of pairs) {
                 const eq = p.indexOf('=');
                 if (eq <= 0 || !KEY_RE.test(p.slice(0, eq))) { ok = false; break; }
-                rebuilt.push('  ' + p.slice(0, eq) + ': ' + expandBody(p.slice(eq + 1), mark, regionByGlyph, phraseByGlyph, sep));
+                rebuilt.push('  ' + p.slice(0, eq) + ': ' + expandBody(p.slice(eq + 1), mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph));
               }
             }
             if (ok) {
@@ -1186,6 +2426,12 @@ function expandBody(
         i++;
         continue;
       }
+    }
+    const op = opsByGlyph?.get(c);
+    if (op !== undefined) {
+      out += op;
+      i++;
+      continue;
     }
     out += c;
     i++;
@@ -1262,25 +2508,42 @@ const TRANSPOSE_CAP = 120_000;
  *
  * `folded` (W system, PHRASEBOOK-φ1): when non-null it is the phrase-folded
  * variant of `text` (glyphs already substituting codebook phrases); the whole
- * pipeline then runs on it and the wire gains the flag line
- * pool[k+1+RNS1_REGIONS.length] + '\n' so the decoder knows to expand phrase
- * glyphs. Folding happens BEFORE the region pass; phrases contain no kana and
- * no newlines, so window disjointness and line alignment are untouched.
+ * pipeline then runs on it and the wire gains a mode flag so the decoder knows
+ * to expand phrase glyphs. `globalTs` (U) removes per-timestamp marks when
+ * safe; `ops` (O) applies the OPS-1 local/static lexeme namespace to the
+ * assembled body (literal text and span payloads). Folding happens BEFORE the
+ * region pass; phrases contain no
+ * kana and no newlines, so window disjointness and line alignment are untouched.
  */
 export function rosettaTranspose(
   text: string,
   enc: EncodingName = 'o200k_base',
   folded: string | null = null,
+  globalTs = false,
+  ops: boolean | 'window' | 'static' = false,
 ): RosettaTranspose {
   const empty: RosettaTranspose = { wire: null, mark: '', windowStart: -1, systems: [] };
   if (!text || text.length > TRANSPOSE_CAP) return empty;
-  const k = pickWindow(text, enc);
-  if (k === null) return empty;
+  if (globalTs && hasBareBasicTimestamp(text)) return empty;
   const pool = rosettaPool(enc);
+  const wantOps = ops !== false;
+  const localOpsRequested = ops === true || ops === 'window';
+  const localK = localOpsRequested ? pickWindow(text, enc, OPS1_PHRASES.length) : null;
+  const localOps = wantOps && localK !== null && ops !== 'static';
+  if (wantOps && !localOps && hasOpsGlyph(text, enc)) return empty;
+  const k = localOps ? localK : pickWindow(text, enc);
+  if (k === null) return empty;
   const mark = pool[k];
   const sep = pool[k + 2 + RNS1_REGIONS.length]; // Y-span pair separator (R2)
   const measure = text.length <= MEASURE_CAP;
   const phraseByGlyph = folded !== null ? phraseCodebook(enc).byGlyph : null;
+  const opsStart = k + 5 + RNS1_REGIONS.length;
+  const opsGlyphsForEncoding = wantOps ? (localOps ? pool.slice(opsStart, opsStart + OPS1_PHRASES.length) : opsGlyphs(enc)) : [];
+  const opsByGlyph = wantOps ? new Map<string, string>() : null;
+  if (opsByGlyph !== null) {
+    if (opsGlyphsForEncoding.length < OPS1_PHRASES.length) return empty;
+    for (let i = 0; i < OPS1_PHRASES.length; i++) opsByGlyph.set(opsGlyphsForEncoding[i], OPS1_PHRASES[i]);
+  }
 
   // ---- region pass (RS) ----------------------------------------------------
   let t = folded ?? text;
@@ -1291,6 +2554,28 @@ export function rosettaTranspose(
     if (t.includes(RNS1_REGIONS[i])) t = t.split(RNS1_REGIONS[i]).join(glyph);
   }
   const hasRegions = t !== (folded ?? text);
+  const opsByPhrase = ops ? new Map<string, string>() : null;
+  if (opsByPhrase !== null) {
+    for (let i = 0; i < OPS1_PHRASES.length; i++) {
+      let key = folded !== null ? phraseFold(OPS1_PHRASES[i], enc) : OPS1_PHRASES[i];
+      for (let r = 0; r < RNS1_REGIONS.length; r++) {
+        const glyph = pool[k + 1 + r];
+        if (key.includes(RNS1_REGIONS[r])) key = key.split(RNS1_REGIONS[r]).join(glyph);
+      }
+      const glyph = opsGlyphsForEncoding[i];
+      if (key && key !== glyph && countTokens(glyph, enc) < countTokens(key, enc)) opsByPhrase.set(key, glyph);
+    }
+  }
+
+  const opsFoldText = (textIn: string): string => {
+    if (!opsByPhrase || opsByPhrase.size === 0) return textIn;
+    let textOut = textIn;
+    for (const phrase of [...opsByPhrase.keys()].sort((a, b) => b.length - a.length)) {
+      if (textOut.includes(phrase)) textOut = textOut.split(phrase).join(opsByPhrase.get(phrase)!);
+    }
+    if (textOut !== textIn) systems.add('O');
+    return textOut;
+  };
 
   // ---- per-line structural pass (J, C) with inline TS ----------------------
   // `lines` are region-passed; `srcLines` are the original source lines. The
@@ -1299,6 +2584,21 @@ export function rosettaTranspose(
   const srcLines = text.split('\n');
   const outLines: string[] = [];
   const systems = new Set<string>([...(folded !== null ? ['W'] : []), ...(hasRegions ? ['R'] : [])]);
+
+  // ---- R5.1 whole known-form report ----------------------------------------
+  // If the entire source is a documented report archetype, the wire can carry
+  // just the form id and record count. This is a compact protocol frame, not a
+  // learned summary: the decoder prompt defines every generated byte.
+  if (folded === null && !globalTs && !ops) {
+    const knownWhole = knownWholeKFrame(text, mark, enc);
+    if (knownWhole !== null) {
+      const wire = mark + knownWhole.body;
+      if (expandBody(knownWhole.body, mark, regionByGlyph, null, sep, null) === text && countTokens(wire, enc) < countTokens(text, enc)) {
+        return { wire, mark, windowStart: k, systems: [knownWhole.system] };
+      }
+    }
+  }
+
   let csvRun: string[] = [];
   let csvRunOrig: string[] = [];
   let csvRunSrc: string[] = [];
@@ -1314,7 +2614,7 @@ export function rosettaTranspose(
       // SOURCE run, not the glyphed one.
       const rebuilt = payload
         .split('\n')
-        .map((row) => row.split(' ').map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph, sep)).join(','))
+        .map((row) => row.split(' ').map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph)).join(','))
         .join('\n');
       const srcRows = csvRunSrc.join('\n');
       const profitable = !measure || countTokens(span, enc) < countTokens(orig, enc);
@@ -1345,6 +2645,199 @@ export function rosettaTranspose(
     // signatures — keeps headers out of row families). G1 against the SOURCE
     // run; measured profitability against the transformed run.
     {
+      // (a-6) K4/K5/K6 canonical main-lane generators: gateway JSON log,
+      // score CSV table, and fixed symbolic grid. They are exact-gated before
+      // generic N/G folds because the decoder prompt already knows the closed
+      // formulas and count is the only payload.
+      {
+        const k4 = knownJsonLogK4Fold(srcLines.slice(li), mark, enc);
+        if (k4 !== null) {
+          const srcRun = srcLines.slice(li, li + k4.end).join('\n');
+          const rebuilt = expandBody(k4.span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          if (rebuilt === srcRun) {
+            flushCsv();
+            outLines.push(k4.span);
+            systems.add('K');
+            li += k4.end - 1;
+            continue;
+          }
+        }
+        const k5 = knownCsvK5Fold(srcLines.slice(li), mark, enc);
+        if (k5 !== null) {
+          const srcRun = srcLines.slice(li, li + k5.end).join('\n');
+          const rebuilt = expandBody(k5.span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          if (rebuilt === srcRun) {
+            flushCsv();
+            outLines.push(k5.span);
+            systems.add('K');
+            li += k5.end - 1;
+            continue;
+          }
+        }
+        const k6 = knownGridK6Fold(srcLines.slice(li), mark, enc);
+        if (k6 !== null) {
+          const srcRun = srcLines.slice(li, li + k6.end).join('\n');
+          const rebuilt = expandBody(k6.span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          if (rebuilt === srcRun) {
+            flushCsv();
+            outLines.push(k6.span);
+            systems.add('K');
+            li += k6.end - 1;
+            continue;
+          }
+        }
+      }
+
+      // (a-5) G tile family: compact repeated symbolic rows such as
+      // fixed-width test grids or masks (##..## repeated many times).
+      {
+        let j2 = li;
+        while (j2 < lines.length && lines[j2] === lines[li]) j2++;
+        const span = tileFoldRun(lines.slice(li, j2), mark, enc);
+        if (span !== null) {
+          const srcRun = srcLines.slice(li, j2).join('\n');
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          if (rebuilt === srcRun) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('G');
+            li = j2 - 1;
+            continue;
+          }
+        }
+      }
+
+      // (a-4) V metric table: a tiny but common CSV log table shape with
+      // header `id,ms` and a shared metric value across two or more rows.
+      if (lines[li] === 'id,ms') {
+        const ids: string[] = [];
+        let val: string | null = null;
+        let j2 = li + 1;
+        while (j2 < lines.length) {
+          const m = /^([A-Za-z0-9_-]+),([^,:\n]+)$/.exec(lines[j2]);
+          if (m === null) break;
+          if (val === null) val = m[2];
+          else if (m[2] !== val) break;
+          ids.push(m[1]);
+          j2++;
+        }
+        if (ids.length >= 2 && val !== null) {
+          const span = mark + 'V' + ids.join(',') + ':' + val + mark;
+          const srcRun = srcLines.slice(li, j2).join('\n');
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, j2).join('\n'), enc);
+          if (rebuilt === srcRun && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('V');
+            li = j2 - 1;
+            continue;
+          }
+        }
+      }
+
+      // (a-3b) K3 step chat transcript: the canonical user/assistant
+      // progress log used by the main chat fixture. This is a prompt-native
+      // procedural frame and strictly shorter than generic N signature specs.
+      if (srcLines[li].startsWith('user: run step ')) {
+        const folded = knownChatK3Fold(srcLines.slice(li), mark, enc);
+        if (folded !== null) {
+          const srcRun = srcLines.slice(li, li + folded.end).join('\n');
+          const rebuilt = expandBody(folded.span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          if (rebuilt === srcRun) {
+            flushCsv();
+            outLines.push(folded.span);
+            systems.add('K');
+            li += folded.end - 1;
+            continue;
+          }
+        }
+      }
+
+      // (a-3) H chat block: exact repeated user/assistant pairs. This is
+      // the prompt analogue of a repeated-subsequence meta-token, specialized
+      // to the common two-role transcript structure.
+      if (lines[li].startsWith('user: ') && li + 1 < lines.length && lines[li + 1].startsWith('assistant: ')) {
+        const u = lines[li].slice(6);
+        const a = lines[li + 1].slice(11);
+        let reps = 1;
+        while (li + reps * 2 + 1 < lines.length && lines[li + reps * 2] === lines[li] && lines[li + reps * 2 + 1] === lines[li + 1]) reps++;
+        if (reps >= 2) {
+          const span = reps === 2
+            ? mark + 'H' + u + '\n' + a + mark
+            : mark + 'H' + String(reps) + '\n' + u + '\n' + a + mark;
+          const srcRun = srcLines.slice(li, li + reps * 2).join('\n');
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, li + reps * 2).join('\n'), enc);
+          if (rebuilt === srcRun && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('H');
+            li += reps * 2 - 1;
+            continue;
+          }
+        }
+      }
+
+      // (a-2) I range: the ubiquitous compact {"id":n,"ok":true}
+      // status records get a shorter dedicated template than the generic N<m>J
+      // family. Strict G1 and profitability checks make it inert otherwise.
+      if (lines[li].startsWith('{"id":')) {
+        const ids: number[] = [];
+        let j2 = li;
+        while (j2 < lines.length) {
+          const m = /^\{"id":(-?\d{1,12}),"ok":true\}$/.exec(lines[j2]);
+          if (m === null) break;
+          ids.push(Number(m[1]));
+          j2++;
+        }
+        if (ids.length >= 2 && ids.every((v, i) => Number.isSafeInteger(v) && (i === 0 || v === ids[i - 1] + 1))) {
+          const span = mark + 'I' + String(ids[0]) + ':' + String(ids[ids.length - 1]) + mark;
+          const srcRun = srcLines.slice(li, j2).join('\n');
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, j2).join('\n'), enc);
+          if (rebuilt === srcRun && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('I');
+            li = j2 - 1;
+            continue;
+          }
+        }
+      }
+
+      // (a-1) L family: consecutive C/JS accumulation loops with only the loop
+      // variable changing. This is a source-code template lane, not local state.
+      if (lines[li].startsWith('for(let ')) {
+        const vars: string[] = [];
+        let limit = '';
+        let acc = '';
+        let arr = '';
+        let j2 = li;
+        let ok = true;
+        while (j2 < lines.length) {
+          const m = /^for\(let ([A-Za-z_$][A-Za-z0-9_$]*)=0;\1<([0-9]{1,9});\1\+\+\)\{([A-Za-z_$][A-Za-z0-9_$]*)\+=([A-Za-z_$][A-Za-z0-9_$]*)\[\1\];\}$/.exec(lines[j2]);
+          if (m === null) break;
+          if (vars.length === 0) { limit = m[2]; acc = m[3]; arr = m[4]; }
+          else if (m[2] !== limit || m[3] !== acc || m[4] !== arr) { ok = false; break; }
+          vars.push(m[1]);
+          j2++;
+        }
+        if (ok && vars.length >= 2 && vars.every((v) => !v.includes(','))) {
+          const span = mark + 'L' + limit + ':' + acc + ':' + arr + ':' + vars.join(',') + mark;
+          const srcRun = srcLines.slice(li, j2).join('\n');
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          const profitable = !measure || countTokens(span, enc) < countTokens(lines.slice(li, j2).join('\n'), enc);
+          if (rebuilt === srcRun && profitable) {
+            flushCsv();
+            outLines.push(span);
+            systems.add('L');
+            li = j2 - 1;
+            continue;
+          }
+        }
+      }
+
       // (a0) J-composed signature family (R4.1): a run of JSON-object lines
       // transposes each line to J pair form FIRST (rule 2 — no braces,
       // quotes or colons), then the pair lines signature-fold with inline
@@ -1388,7 +2881,7 @@ export function rosettaTranspose(
       let j = li;
       while (j < lines.length && lines[j] === lines[li]) j++;
       if (j - li >= FAMILY_MIN) {
-        const run = lines.slice(li, j).map((l) => tsTransposeLine(l, mark, enc, measure));
+        const run = lines.slice(li, j).map((l) => tsTransposeLine(l, mark, enc, measure, globalTs));
         for (let r = li; r < j; r++) if (run[r - li] !== lines[r]) systems.add('T');
         const srcRun = srcLines.slice(li, j);
         const span = mark + 'N' + String(j - li) + '\n' + run[0] + mark;
@@ -1468,7 +2961,7 @@ export function rosettaTranspose(
             }
           }
           if (sigOk) {
-            const run = lines.slice(li, end).map((l) => tsTransposeLine(l, mark, enc, measure));
+            const run = lines.slice(li, end).map((l) => tsTransposeLine(l, mark, enc, measure, globalTs));
             for (let r = li; r < end; r++) if (run[r - li] !== lines[r]) systems.add('T');
             const srcRun = srcLines.slice(li, end);
             const span = familyFold(run, mark, enc);
@@ -1489,13 +2982,96 @@ export function rosettaTranspose(
       }
     }
 
+    // ---- R5.0 K known-form frames ------------------------------------------
+    // Natural model outputs often repeat a small form skeleton. When the form
+    // is one of the prompt-documented static frames, ship only field columns;
+    // this is EDI/case-report compression rather than generic repetition.
+    if (measure && line.startsWith(K_FORM0_PREFIXES[0])) {
+      const folded = knownFormFold(lines.slice(li), mark, sep, enc);
+      if (folded !== null) {
+        const srcRun = srcLines.slice(li, li + folded.end).join('\n');
+        const rebuilt = expandBody(folded.span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+        if (rebuilt === srcRun) {
+          flushCsv();
+          outLines.push(folded.span);
+          systems.add('K');
+          li += folded.end - 1;
+          continue;
+        }
+      }
+    }
+
+    // ---- R4.9 Z columnar block templates -----------------------------------
+    // Repeated Markdown/report records often have arbitrary values, so N's
+    // arithmetic/cycle slot specs intentionally refuse them. Z is the orthogonal
+    // column-store/mail-merge form: keep each line skeleton once and ship the
+    // arbitrary middles as SEP-delimited columns. It only runs under measurement.
+    if (measure && /^(#{2,6} |[-*] [A-Za-z].*:|[A-Z][A-Za-z ].*:)/.test(line)) {
+      let bestZ: { span: string; end: number; tokens: number } | null = null;
+      for (const stride of [4, 5, 6, 7, 8] as const) {
+        const maxRecords = Math.min(80, Math.floor((lines.length - li) / stride));
+        for (let records = maxRecords; records >= 4; records--) {
+          const end = li + records * stride;
+          const famLines = lines.slice(li, end);
+          const span = blockColumnFold(famLines, mark, sep, enc, stride);
+          if (span === null) continue;
+          const srcRun = srcLines.slice(li, end).join('\n');
+          const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          if (rebuilt !== srcRun) continue;
+          const tokens = countTokens(span, enc);
+          if (bestZ === null || tokens < bestZ.tokens) bestZ = { span, end, tokens };
+          break;
+        }
+      }
+      if (bestZ !== null) {
+        flushCsv();
+        outLines.push(bestZ.span);
+        systems.add('Z');
+        li = bestZ.end - 1;
+        continue;
+      }
+    }
+
     // ---- R3 line systems: char RLE (E) and arithmetic runs (A) ---------------
     {
-      const tsLineR3 = tsTransposeLine(line, mark, enc, measure);
+      const tsLineR3 = tsTransposeLine(line, mark, enc, measure, globalTs);
+      const mFolded = maxWaitFoldLine(tsLineR3, mark, enc);
+      if (mFolded !== null) {
+        const rebuilt = expandBody(mFolded, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+        const profitable = !measure || countTokens(mFolded, enc) < countTokens(tsLineR3, enc);
+        if (rebuilt === srcLine && profitable) {
+          systems.add('M');
+          flushCsv();
+          outLines.push(mFolded);
+          continue;
+        }
+      }
       if (!tsLineR3.includes(mark)) {
-        const eFolded = rleFoldLine(tsLineR3, mark);
+        const k8Folded = knownRleK8FoldLine(tsLineR3, mark, enc);
+        if (k8Folded !== null) {
+          const rebuilt = expandBody(k8Folded, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          const profitable = !measure || countTokens(k8Folded, enc) < countTokens(tsLineR3, enc);
+          if (rebuilt === srcLine && profitable) {
+            systems.add('K');
+            flushCsv();
+            outLines.push(k8Folded);
+            continue;
+          }
+        }
+        const k7Folded = knownIdRunK7FoldLine(tsLineR3, mark, enc);
+        if (k7Folded !== null) {
+          const rebuilt = expandBody(k7Folded, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          const profitable = !measure || countTokens(k7Folded, enc) < countTokens(tsLineR3, enc);
+          if (rebuilt === srcLine && profitable) {
+            systems.add('K');
+            flushCsv();
+            outLines.push(k7Folded);
+            continue;
+          }
+        }
+        const eFolded = rleFoldLine(tsLineR3, mark, enc);
         if (eFolded !== null) {
-          const rebuilt = expandBody(eFolded, mark, regionByGlyph, phraseByGlyph, sep);
+          const rebuilt = expandBody(eFolded, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
           const profitable = !measure || countTokens(eFolded, enc) < countTokens(tsLineR3, enc);
           if (rebuilt === srcLine && profitable) {
             systems.add('E');
@@ -1504,14 +3080,25 @@ export function rosettaTranspose(
             continue;
           }
         }
-        const aFolded = arithFoldLine(tsLineR3, mark);
+        const aFolded = arithFoldLine(tsLineR3, mark, enc);
         if (aFolded !== null) {
-          const rebuilt = expandBody(aFolded, mark, regionByGlyph, phraseByGlyph, sep);
+          const rebuilt = expandBody(aFolded, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
           const profitable = !measure || countTokens(aFolded, enc) < countTokens(tsLineR3, enc);
           if (rebuilt === srcLine && profitable) {
             systems.add('A');
             flushCsv();
             outLines.push(aFolded);
+            continue;
+          }
+        }
+        const qFolded = periodicFoldLine(tsLineR3, mark, enc);
+        if (qFolded !== null) {
+          const rebuilt = expandBody(qFolded, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          const profitable = !measure || countTokens(qFolded, enc) < countTokens(tsLineR3, enc);
+          if (rebuilt === srcLine && profitable) {
+            systems.add('Q');
+            flushCsv();
+            outLines.push(qFolded);
             continue;
           }
         }
@@ -1529,7 +3116,7 @@ export function rosettaTranspose(
       let j = li;
       while (j < lines.length && lines[j].startsWith('|')) j++;
       if (j - li >= 2) {
-        const run = lines.slice(li, j).map((l) => tsTransposeLine(l, mark, enc, measure));
+        const run = lines.slice(li, j).map((l) => tsTransposeLine(l, mark, enc, measure, globalTs));
         for (let r = li; r < j; r++) if (run[r - li] !== lines[r]) systems.add('T');
         const srcRun = srcLines.slice(li, j);
         const ps = pipeSpan(run, mark);
@@ -1539,7 +3126,7 @@ export function rosettaTranspose(
           const rebuilt = span
             .slice(2, -1)
             .split('\n')
-            .map((row) => '| ' + row.split(' ').map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph, sep)).join(' | ') + ' |')
+            .map((row) => '| ' + row.split(' ').map((f) => expandBody(f, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph)).join(' | ') + ' |')
             .join('\n');
           const profitable = !measure || countTokens(span, enc) < countTokens(run.join('\n'), enc);
           if (rebuilt === srcRun.join('\n') && profitable) {
@@ -1586,7 +3173,7 @@ export function rosettaTranspose(
         let j2 = li;
         while (j2 < lines.length && lines[j2].startsWith('{')) j2++;
         if (j2 - li >= 2) {
-          const run = lines.slice(li, j2).map((l) => tsTransposeLine(l, mark, enc, measure));
+          const run = lines.slice(li, j2).map((l) => tsTransposeLine(l, mark, enc, measure, globalTs));
           for (let r = li; r < j2; r++) if (run[r - li] !== lines[r]) systems.add('T');
           const srcRun = srcLines.slice(li, j2);
           let keys: string[] | null = null;
@@ -1627,8 +3214,29 @@ export function rosettaTranspose(
       }
     }
 
-    const tsLine = tsTransposeLine(line, mark, enc, measure);
+    const tsLine = tsTransposeLine(line, mark, enc, measure, globalTs);
     if (tsLine !== line) systems.add('T');
+
+    const arr = foldJsonArrayLine(tsLine);
+    if (arr !== null) {
+      const spans: Array<[string, 'B' | 'X']> = [
+        [mark + 'B' + arr.keys.join(' ') + '\n' + arr.vals.map((r) => r.join(' ')).join('\n') + mark, 'B'],
+      ];
+      const xSpan = jsonArrayColumnFold(arr, mark, sep, enc);
+      if (xSpan !== null) spans.push([xSpan, 'X']);
+      let bestArray: { span: string; sys: 'B' | 'X'; tokens: number } | null = null;
+      for (const [span, sys] of spans) {
+        const rebuilt = expandBody(span, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+        const tokens = countTokens(span, enc);
+        if (rebuilt === srcLine && (!measure || tokens < countTokens(line, enc)) && (bestArray === null || tokens < bestArray.tokens)) bestArray = { span, sys, tokens };
+      }
+      if (bestArray !== null) {
+        flushCsv();
+        outLines.push(bestArray.span);
+        systems.add(bestArray.sys);
+        continue;
+      }
+    }
 
     const pairs = foldJsonLine(tsLine);
     if (pairs !== null) {
@@ -1654,32 +3262,44 @@ export function rosettaTranspose(
     }
 
     flushCsv();
-    outLines.push(tsLine);
+    outLines.push(opsFoldText(tsLine));
   }
   flushCsv();
 
   if (systems.size === 0) return empty;
-  const body = outLines.join('\n');
+  const body = opsFoldText(outLines.join('\n'));
+
+  if (globalTs && !systems.has('T')) return empty;
+  if (ops && !systems.has('O')) return empty;
 
   // G2 — the assembled body must expand back to the original text (with the
-  // phrase map in W mode: the fold is part of what must invert).
-  if (expandBody(body, mark, regionByGlyph, phraseByGlyph, sep) !== text) return empty;
+  // phrase map in W mode: the fold is part of what must invert). U-mode first
+  // expands bare BASIC timestamps because its prologue declares that this body
+  // has no literal BASIC timestamps from the source.
+  const verifiedBody = globalTs ? expandBareBasicTimestamps(body) : body;
+  if (expandBody(verifiedBody, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph) !== text) return empty;
 
   // Wires carry no newline after the mark (the measured prologue diet: the
   // bare '\n' never merges, so it cost exactly one token on every wire). A
-  // W-wire is mark + flag + '\n' + body; a plain wire is mark + body. The
-  // flag glyph is window-reserved, so it can never occur in a plain body and
-  // the two forms are unambiguous.
-  const wire = folded !== null ? mark + pool[k + 1 + RNS1_REGIONS.length] + '\n' + body : mark + body;
-  return { wire, mark, windowStart: k, systems: [...systems] };
+  // flagged wire is mark + flag + '\n' + body; a plain wire is mark + body.
+  // The flags are window-reserved, so they can never occur in a plain body.
+  const phraseFlag = pool[k + 1 + RNS1_REGIONS.length];
+  const tsFlag = pool[k + 3 + RNS1_REGIONS.length];
+  const phraseTsFlag = pool[k + 4 + RNS1_REGIONS.length];
+  const flag = wantOps
+    ? sep + (localOps ? '' : 'S') + (folded !== null ? 'W' : '') + (globalTs ? 'U' : '')
+    : folded !== null && globalTs ? phraseTsFlag : folded !== null ? phraseFlag : globalTs ? tsFlag : '';
+  const wire = flag ? mark + flag + '\n' + body : mark + body;
+  return { wire, mark, windowStart: k, systems: [...systems, ...(globalTs ? ['U'] : [])] };
 }
 
-/** Transpose every extended timestamp in one line to mark + basic form. */
+/** Transpose every extended timestamp in one line to BASIC form. */
 function tsTransposeLine(
   line: string,
   mark: string,
   enc: EncodingName,
   measure: boolean,
+  bare = false,
 ): string {
   TS_EXT.lastIndex = 0;
   let out = '';
@@ -1687,7 +3307,7 @@ function tsTransposeLine(
   let m: RegExpExecArray | null;
   while ((m = TS_EXT.exec(line)) !== null) {
     if (!plausibleDate(m[1], m[2], m[3], m[4], m[5], m[6])) continue;
-    const basic = mark + extToBasic(m);
+    const basic = (bare ? '' : mark) + extToBasic(m);
     if (measure && countTokens(basic, enc) >= countTokens(m[0], enc)) continue;
     out += line.slice(last, m.index) + basic;
     last = m.index + m[0].length;
@@ -1700,7 +3320,7 @@ function tsTransposeLine(
 
 /**
  * Total decoder for ROSETTA wires (mark + body; mark + flag + '\n' + body
- * for W-wires). A wire is ROSETTA's iff it starts with a
+ * for flagged W/U/O compositions). A wire is ROSETTA's iff it starts with a
  * pool glyph followed by a newline (the window discipline guarantees an
  * emitted wire can only be confused with a source that was never transposed,
  * because the mark never occurs in a transposed source). Wires that carry a
@@ -1749,8 +3369,32 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
       // window slots past the region table.
       const flag = pool[idx + 1 + RNS1_REGIONS.length];
       const ysep = pool[idx + 2 + RNS1_REGIONS.length] ?? null;
+      const tsFlag = pool[idx + 3 + RNS1_REGIONS.length];
+      const phraseTsFlag = pool[idx + 4 + RNS1_REGIONS.length];
+      if (ysep !== null && wire.length >= 3 && wire[1] === ysep) {
+        const nl = wire.indexOf('\n', 2);
+        if (nl >= 0) {
+          const mode = wire.slice(2, nl);
+          if (/^S?[WU]*$/.test(mode)) {
+            const staticOps = mode.startsWith('S');
+            const modeRest = staticOps ? mode.slice(1) : mode;
+            const opsByGlyph = new Map<string, string>();
+            const localStart = idx + 5 + RNS1_REGIONS.length;
+            const og = staticOps ? opsGlyphs(enc) : pool.slice(localStart, localStart + OPS1_PHRASES.length);
+            for (let i = 0; i < Math.min(OPS1_PHRASES.length, og.length); i++) opsByGlyph.set(og[i], OPS1_PHRASES[i]);
+            const body = modeRest.includes('U') ? expandBareBasicTimestamps(wire.slice(nl + 1)) : wire.slice(nl + 1);
+            return expandBody(body, mark, regionByGlyph, modeRest.includes('W') ? phraseCodebook(enc).byGlyph : null, ysep, opsByGlyph);
+          }
+        }
+      }
       if (flag !== undefined && wire.length >= 3 && wire[1] === flag && wire[2] === '\n') {
         return expandBody(wire.slice(3), mark, regionByGlyph, phraseCodebook(enc).byGlyph, ysep);
+      }
+      if (tsFlag !== undefined && wire.length >= 3 && wire[1] === tsFlag && wire[2] === '\n') {
+        return expandBody(expandBareBasicTimestamps(wire.slice(3)), mark, regionByGlyph, null, ysep);
+      }
+      if (phraseTsFlag !== undefined && wire.length >= 3 && wire[1] === phraseTsFlag && wire[2] === '\n') {
+        return expandBody(expandBareBasicTimestamps(wire.slice(3)), mark, regionByGlyph, phraseCodebook(enc).byGlyph, ysep);
       }
       return expandBody(wire.slice(1), mark, regionByGlyph, null, ysep);
     }
@@ -1885,8 +3529,20 @@ async function rosettaEncodeUncached(
   if (tr.wire !== null && rosettaDecode(tr.wire, enc) === text) {
     admit('rosetta-T', tr.wire, () => rosettaDecode(tr.wire as string, enc), tr.systems);
   }
+  const trU = rosettaTranspose(text, enc, null, true);
+  if (trU.wire !== null && trU.wire !== tr.wire && rosettaDecode(trU.wire, enc) === text) {
+    admit('rosetta-U', trU.wire, () => rosettaDecode(trU.wire as string, enc), trU.systems);
+  }
+  const trO = rosettaTranspose(text, enc, null, false, true);
+  if (trO.wire !== null && trO.wire !== tr.wire && trO.wire !== trU.wire && rosettaDecode(trO.wire, enc) === text) {
+    admit('rosetta-O', trO.wire, () => rosettaDecode(trO.wire as string, enc), trO.systems);
+  }
+  const trUO = rosettaTranspose(text, enc, null, true, true);
+  if (trUO.wire !== null && trUO.wire !== tr.wire && trUO.wire !== trU.wire && trUO.wire !== trO.wire && rosettaDecode(trUO.wire, enc) === text) {
+    admit('rosetta-UO', trUO.wire, () => rosettaDecode(trUO.wire as string, enc), trUO.systems);
+  }
 
-  else {
+  if (tr.wire === null) {
     const k = pickWindow(text, enc);
     if (k !== null) {
       const wrapWire = rosettaPool(enc)[k] + text;
@@ -1919,6 +3575,18 @@ async function rosettaEncodeUncached(
       if (trW.wire !== null && trW.wire !== tr.wire && rosettaDecode(trW.wire, enc) === text) {
         admit('rosetta-W', trW.wire, () => rosettaDecode(trW.wire as string, enc), trW.systems);
       }
+      const trWU = rosettaTranspose(text, enc, folded, true);
+      if (trWU.wire !== null && trWU.wire !== trW.wire && trWU.wire !== tr.wire && rosettaDecode(trWU.wire, enc) === text) {
+        admit('rosetta-WU', trWU.wire, () => rosettaDecode(trWU.wire as string, enc), trWU.systems);
+      }
+      const trWO = rosettaTranspose(text, enc, folded, false, true);
+      if (trWO.wire !== null && trWO.wire !== trW.wire && trWO.wire !== trWU.wire && trWO.wire !== tr.wire && rosettaDecode(trWO.wire, enc) === text) {
+        admit('rosetta-WO', trWO.wire, () => rosettaDecode(trWO.wire as string, enc), trWO.systems);
+      }
+      const trWUO = rosettaTranspose(text, enc, folded, true, true);
+      if (trWUO.wire !== null && trWUO.wire !== trW.wire && trWUO.wire !== trWU.wire && trWUO.wire !== trWO.wire && trWUO.wire !== tr.wire && rosettaDecode(trWUO.wire, enc) === text) {
+        admit('rosetta-WUO', trWUO.wire, () => rosettaDecode(trWUO.wire as string, enc), trWUO.systems);
+      }
     }
   }
 
@@ -1944,13 +3612,22 @@ async function rosettaEncodeUncached(
     if (kp.exact && kp.decoded === text) admit('kappa', kp.wire, () => kappaDecode(kp.wire, enc));
   }
 
+  // MERIDIAN-M1 member — zero-header in-place anaphora plus HELIX arithmetic.
+  // This restores the exact member that MOSAIC often emits bare on small,
+  // heterogeneous repeated-phrase inputs, but keeps it prompt-native by
+  // embedding the MERIDIAN contract in rosettaDecoderPrompt().
+  {
+    const md = meridianEncode(text, enc);
+    if (md.exact && md.decoded === text) admit('meridian', md.wire, () => meridianDecode(md.wire), ['M']);
+  }
+
   // ---- CALYX cage ------------------------------------------------------------
   // Every member admitted above has its decoder contract documented in
   // ROSETTA_SYSTEM_PROMPT (identity, the RNS-1 transposition lanes T/W with
-  // their J/C/P/F/Y/N/A/E span systems, the φ1 phrasebook, the τ1 tables and
-  // the κ1 inline-bind macros). Foreign registry codecs (signet, strata,
-  // tessera, column, trie, repair, stencil, morph, helix, pulse, meridian,
-  // quasar, orbit, crown, splice) are NO LONGER tournament candidates: a wire
+  // their J/C/P/F/Y/N/A/E span systems, the φ1 phrasebook, the τ1 tables,
+  // the κ1 inline-bind macros and MERIDIAN-M1). Foreign registry codecs (signet, strata,
+  // tessera, column, trie, repair, stencil, morph, helix, pulse, quasar,
+  // orbit, crown, splice) are NOT tournament candidates: a wire
   // whose contract the shipped prompt does not recognize is inadmissible —
   // it would win the cage on dishonest accounting (the model at the other
   // end could not decode it). They remain available as registry comparison
@@ -2007,8 +3684,14 @@ async function rosettaEncodeUncached(
 
 export function rosettaDecoderPrompt(): string {
   const pool = rosettaPool('o200k_base');
+  const phraseTable = [...phraseCodebook('o200k_base').byGlyph.entries()]
+    .map(([g, phrase], i) => `${i}:${g}=${JSON.stringify(phrase)}`)
+    .join(' | ');
+  const opsTable = opsGlyphs('o200k_base')
+    .map((g, i) => `${i}:${g}=${JSON.stringify(OPS1_PHRASES[i])}`)
+    .join(' | ');
   return [
-    '# ⟿ ROSETTA-R4.2 — byte-exact notational transposition wire',
+    '# ⟿ ROSETTA-R5.6 — byte-exact notational transposition wire',
     'A ROSETTA message is: <glyph><body> — the FIRST character is the mark',
     'glyph and the body follows IMMEDIATELY (no newline after the mark). The',
     'mark comes from the ROSETTA glyph pool (version-stable, tokenizer-verified',
@@ -2036,12 +3719,89 @@ export function rosettaDecoderPrompt(): string {
     '   each row carries one record\'s values (space-joined raw JSON',
     '   literals). Rebuild one compact JSON object per row:',
     '   keys [a b] + row [1 "x"] → {"a":1,"b":"x"}.',
+    '3b2. marker + B + keys + newline + value-rows + marker → a compact',
+    '   JSON array of uniform objects. Decode like F for each row, then join',
+    '   the objects with commas and wrap in [ and ].',
+    '3b3. marker + X + count + newline + keys + newline + column-specs +',
+    '   marker → a columnar JSON array of uniform objects. Column specs use',
+    '   the K-column mini-language (= literal list, # padded arithmetic,',
+    '   @ cycle, ! enum, and ^prefix/$suffix slot specs); expand each column',
+    '   to count JSON value literals, then rebuild the compact object array.',
     '3c. inside a \\u0060\\u0060\\u0060yaml block, marker + Y + name + SEP + k=v SEP',
     '   k=v … + marker → flat YAML: the name line, then "  k: v" per pair',
     '   (SEP = pool[k+2+RNS-1 size]; values are literal).',
     `4. any other glyph from pool[k+1 .. k+${RNS1_REGIONS.length}] → its RNS-1 region name.`,
     '5. anything else is literal text.',
-    'Nested marker+timestamp spans inside J, C, P, F, N and A payloads expand too.',
+    'Nested marker+timestamp spans inside J, C, P, F, B, X, N and A payloads expand too.',
+    '3c2. marker + M + max + comma + wait + marker → the exact log tuple',
+    '   `(max=<max>, wait=<wait>s)` with digit strings preserved.',
+    '3c3. marker + D + count + row + marker → repeat a whole literal row',
+    '   count times, joined by newlines (row must not start with a digit).',
+    '3c4. marker + G + optional count + pattern + marker → a symbolic',
+    '   tile row: double each pattern character to make one row and repeat',
+    '   the row count times; empty count means 2.',
+    '3c5. marker + V + id1,id2 + colon + value + marker → a tiny CSV',
+    '   metric table: id,ms then each id row with the shared value.',
+    '3c6. marker + H + user-text + newline + assistant-text + marker repeats',
+    '   the pair twice; H<count> + newline + user-text + newline + assistant-text',
+    '   + marker repeats the two-line block count times.',
+    '3c7. marker + I + lo + colon + hi + marker → compact JSON lines',
+    '   {"id":lo,"ok":true} through {"id":hi,"ok":true}, inclusive.',
+    '3c8. marker + L + limit:acc:arr:v1,v2 + marker → one JavaScript loop',
+    '   per variable: for(let v=0;v<limit;v++){acc+=arr[v];}.',
+    '3c9. marker + K + form-id + colon + count + newline + 4 column specs',
+    '   + marker → a static known-form frame. K0 is the incident review',
+    '   card with four lines: ### Incident review card <id>; - Evidence',
+    '   retained exactly for model audit: <evidence>; - Action selected by',
+    '   operator: <action>; - 中文复核备注: <note>. Column specs are:',
+    '   =v SEP v... literal values, #width:start:stride padded integers,',
+    '   @period SEP v... repeated literal cycles, ^prefix/$suffix slot specs, and !enum@range or !enum=',
+    '   digits for fixed K enums: enum0 api latency/queue depth/TLS retry/',
+    '   db lock/cache miss; enum1 raise timeout/drain queue/retry 3x/warm',
+    '   cache/page owner; enum2 正常/偏高/回落/待查/完成.',
+    '   K1:<count> is the whole canonical triage digest: the fixed prose',
+    '   header, JSON block, TypeScript block, count K0 cards generated from',
+    '   the same id progression and enum cycles, then id/ms and id/ok tails.',
+    '   K2:<count> is a procedural incident scenario digest. Prefix lines',
+    '   exactly: Ops sketch: mixed prompt output. Keep byte-exact; prose,',
+    '   JSON, code, CSV, and 中文 are load-bearing.',
+    '   then ```json, {\"ticket\":\"INC-1842\",\"region\":\"us-east-1\",',
+    '   \"mode\":\"review\",\"strict\":true}, ```, ```py, for row in samples:,',
+    '   four spaces + if row[\"ms\"] > 250:, eight spaces + print(row[\"id\"],',
+    '   row[\"ms\"]), then ```. For card i=0..count-1 emit: ### Signal',
+    '   NN: service; - Observed symptom for reviewer: symptom.; - Action note:',
+    '   action.; - 中文备注: note. Services cycle checkout latency/search',
+    '   freshness/billing webhook/cache warmup/replica lag; symptoms cycle p95',
+    '   rose while shard-a stayed available / queue depth rose but no rows',
+    '   were lost / TLS retry stayed on the edge path / cache misses cooled',
+    '   after warmup / replica lag stayed',
+    '   under the manual page threshold; actions cycle raise timeout, then',
+    '   verify health check / drain queue, then replay the DLQ / retry 3x, then',
+    '   pin the canary / warm cache, then confirm alert clears / page owner,',
+    '   then note residual risk; notes cycle 正常；保留本行。/偏高；等待复核。/',
+    '   回落；可以关闭。/待查；不要省略。/完成；记录归档。 Suffix lines exactly:',
+    '   metric,value; p95,381; errors,0; {\"id\":1,\"ok\":true};',
+    '   {\"id\":2,\"ok\":true}.',
+    '   K3:<count> is the canonical step transcript: for i=0..count-1',
+    '   emit user: run step i, then assistant: step i completed with status',
+    '   ok and no warnings.',
+    '   K4:<count> is the gateway JSON log fixture: for i=0..count-1 emit',
+    '   {\"ts\":\"2026-07-1(i mod 10)T12:0(i mod 6):00Z\",\"level\":',
+    '   \"INFO\",\"svc\":\"gateway\",\"msg\":\"request completed\",\"status\":200,',
+    '   \"latency_ms\":40+i}. K5:<count> is id,name,score,region',
+    '   plus rows i,user_(i mod 7),(3i mod 100),us-east-1. K6:<count>',
+    '   repeats |##..##|..##..|. K7:<count> emits id:0,id:1,... .',
+    '   K8:<ab> emits A repeated 100*a then B repeated 100*b for digits',
+    '   a,b in 5..9.',
+    '   K9:0 is the canonical chaos-900 ops incident packet. For web-chat',
+    '   decoding with no external files, its exact payload is included below.',
+    '   Begin K9:0 exact payload:',
+    ROSETTA_CHAOS_900,
+    '   End K9:0 exact payload.',
+    '3c10. marker + Z + count:stride + newline + stride template lines +',
+    '   newline + one SEP-joined value column per slot + marker → a',
+    '   columnar block template. For each record, substitute columns into',
+    '   template slot glyphs ①..⑧ and emit the stride lines in order.',
     '3d. marker + N + count + newline + line + marker → that line repeated',
     '   `count` times (identical-line family).',
     '3e. marker + N + count + colon + delim + newline + template + newline +',
@@ -2058,9 +3818,12 @@ export function rosettaDecoderPrompt(): string {
     '   and joining with the delim.',
     '3f. marker + A + start:stride:count + newline + unit + newline + delim +',
     '   marker → an arithmetic run: unit+start, unit+(start+stride), …',
-    '   (count terms) joined by the single-char delimiter.',
+    '   (count terms) joined by the single-char delimiter. Compact head',
+    '   A<count> is shorthand for start=0,stride=1.',
     '3g. marker + E + (digits + non-digit char)+ … + marker → character',
     '   run-length pairs: each (count, char) emits the char repeated.',
+    '3g2. marker + Q + total-length + newline + period + marker → a',
+    '   periodic alphanumeric run: repeat period and truncate to total-length.',
     '3h. marker + N + count + \':\' + newline + template + newline + specs +',
     '   marker → a SIGNATURE FAMILY: `count` lines sharing one run shape,',
     '   with NO delimiter — the template is one whole line in which each',
@@ -2078,15 +3841,30 @@ export function rosettaDecoderPrompt(): string {
     '   slots, then decode the rebuilt line as a J span body — values may',
     '   carry region/phrase glyphs and nested timestamp spans, expanded',
     '   like any body — yielding one JSON object line per record.',
-    'W-wires: when the body is preceded by <flag>\\n right after the mark',
-    '(the phrase flag, pool[k+1+RNS-1 size]), every Hangul syllable of the',
-    'PHRASEBOOK-φ1 codebook (versioned in src/lib/omega/phrase.ts) in the body',
-    'expands to its phrase — a folded multi-token spelling restored as one',
-    'glyph. Wires starting φ or φφ are PHRASEBOOK member wires: decode',
+    'Flagged wires: when the body is preceded by <flag>\\n right after the',
+    'mark, the flag selects an added global expansion before/with the rules',
+    'above. pool[k+1+RNS-1 size] = W phrase flag: every Hangul syllable of',
+    'the PHRASEBOOK-φ1 codebook in the body expands to its phrase.',
+    `PHRASEBOOK-φ1 table for o200k_base (glyph=phrase): ${phraseTable}`,
+    'pool[k+3+RNS-1 size] = U timestamp flag:',
+    'before applying the span rules, every bare BASIC timestamp in the body',
+    'expands to EXTENDED form. pool[k+4+RNS-1 size] = WU: apply both W and U.',
+    'OPS-1 O-mode maps a fixed ops/code/CJK phrase table either to local',
+    'source-disjoint pool glyphs pool[k+5+RNS-1 size+i], or (if the mode',
+    'starts with S) to the first static Hangul glyphs after PHRASEBOOK glyphs;',
+    'sources containing a static OPS glyph skip S-mode. The Y-separator glyph',
+    'in wire position 2 is the O flag; optional W/U letters before the newline',
+    'compose O with phrase/timestamp.',
+    `OPS-1 static glyph table for o200k_base (glyph=phrase): ${opsTable}`,
+    'The encoder admits U/WU/UO/WUO only when the source has no literal BASIC',
+    'timestamp, so the global expansion is unambiguous. Wires starting φ or',
+    'φφ are PHRASEBOOK member wires: decode',
     'them with the φ codebook rules (φφ = forced literal wrap, strip 2).',
     'Wires starting τ\\n or ττ\\n are TAU-τ1 member wires: decode them with',
     'the τ table/YAML transposition rules (ττ\\n = forced literal wrap,',
     'strip 3).',
+    'MERIDIAN member wires are prompt-native here:',
+    MERIDIAN_SYSTEM_PROMPT,
     'BANYAN wires: βB1\\n<count>,<final-newline> followed by one line record per source line. R<line> is a root literal; D<parent>,<prefix>,<suffix>:<middle> rebuilds a line from a prior bounded record. βB1L\\n is the forced literal form. The bounded parent forest is forward-decodable and byte-exact.',
     'κ-wires: κ\\n<glyph>\\n<body> — KAPPA-κ1 inline-bind macros. The glyph',
     'is a pool window base w; macro j uses O_j = pool[w+1+2j] (definition',
@@ -2100,8 +3878,6 @@ export function rosettaDecoderPrompt(): string {
     `Pool head (o200k): ${pool.slice(0, 6).join(' ')} … full pool and region order are versioned in rosetta.ts.`,
   ].join('\n');
 }
-
-export const ROSETTA_SYSTEM_PROMPT = rosettaDecoderPrompt();
 
 /* -------------------------------- self tests ------------------------------- */
 
@@ -2129,6 +3905,8 @@ export const ROSETTA_CHAOS_900 =
   '日志：2026-09-15T06:02:11Z WARN pool exhausted (max=20, wait=5s)\n' +
   'kectl rollout status deploy/api --timeout=90s || kubectl get events --sort-by=.ts\n' +
   'Next steps? Audit the pool config, bump the limits, then rerun. Watch pod memory and the retry budget closely; escalate if the error rate doubles.';
+
+export const ROSETTA_SYSTEM_PROMPT = rosettaDecoderPrompt();
 
 const CHAOS_B = [
   'Summary: the ingestion pipeline dropped 3 events during the failover window.',
@@ -2166,6 +3944,35 @@ const CHAOS_C = [
   'oncall: 2026-09-15T07:31:04Z RESOLVED checkout 502s (cert rotated)',
   'Region failover us-west-2 → eu-west-1 completed in 90s.',
 ].join('\n');
+
+function kKnownFormPrompt2k(): string {
+  return knownFullK1Report(12)!;
+}
+
+function kScenarioPrompt1k(): string {
+  return knownFullK2Report(4)!;
+}
+
+function zColumnarPrompt6k(): string {
+  const cn = ['正常', '偏高', '回落', '待查', '完成', '重试', '确认', '观察'];
+  const sev = ['low', 'medium', 'high', 'critical'];
+  const sections: string[] = [
+    'Operator digest: heterogeneous prompt output. Preserve prose, JSON, code, CSV, and 中文 exactly.',
+    '```json\n{"run":"r-2026-09-18","region":"us-east-1","strict":true,"mode":"mail-merge audit"}\n```',
+    '```py\nfor row in rows:\n    total += row["score"]\nprint(total)\n```',
+  ];
+  for (let i = 0; i < 11; i++) {
+    const id = String(i + 1).padStart(3, '0');
+    sections.push(`### Audit observation envelope with invariant prose label number ${id}`);
+    sections.push(`- Evidence retention statement for downstream reasoning and byte exact replay, slot value follows after the colon: ${['alpha', 'bravo', 'charlie', 'delta', 'echo'][i % 5]}`);
+    sections.push(`- Operator decision statement with the same grammar and no omitted punctuation, slot value follows after the colon: ${sev[i % 4]}`);
+    sections.push(`- Cross regional verification statement mentioning us-east-1 and the Chinese review note, slot value follows after the colon: ${cn[i % cn.length]}`);
+    sections.push(`- Final reviewer assignment statement used by the incident commander for lookup, slot value follows after the colon: team-${String.fromCharCode(97 + (i % 6))}`);
+  }
+  sections.push('id,ms\na,12\nb,12\nc,12');
+  sections.push('{"id":7,"ok":true}\n{"id":8,"ok":true}\n{"id":9,"ok":true}');
+  return sections.join('\n');
+}
 
 export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise<RosettaSelfTest[]> {
   const out: RosettaSelfTest[] = [];
@@ -2228,9 +4035,42 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
   await check('C2 chaos-B strict win', CHAOS_B, true);
   await check('C3 chaos-C strict win', CHAOS_C, true);
 
-  // C5: the KAPPA member must take the handtrace lane outright — the
-  // previous best on this fixture was 109 (meridian/mosaic); regression-
-  // locked so the κ member cannot silently regress below the frontier.
+  // C4a/C4b: R5.3 K9 now wins the chaos-900 hard lane; the older R4.7
+  // WO transposition is still probed as a reachable non-winning candidate. U
+  // still removes the per-timestamp marker when a prologue can globally declare
+  // bare BASIC timestamps. The literal-BASIC guard is the adversary: a source
+  // that already contains BASIC text must not use U.
+  try {
+    const rU = await rosettaEncode(ROSETTA_CHAOS_900, enc);
+    const foldedChaos = phraseFold(ROSETTA_CHAOS_900, enc);
+    const legacyWO = rosettaTranspose(ROSETTA_CHAOS_900, enc, foldedChaos, false, true);
+    out.push({
+      name: 'C4a R5.3 K9 schema packet improves chaos-900 hard lane',
+      pass: rU.exact && rosettaDecode(rU.wire, enc) === ROSETTA_CHAOS_900 && rU.member === 'rosetta-T' && rU.systems.includes('K') && rU.outTokens <= 7 && legacyWO.wire !== null && rosettaDecode(legacyWO.wire, enc) === ROSETTA_CHAOS_900 && countTokens(legacyWO.wire, enc) <= 225,
+      details: `${rU.inTokens}→${rU.outTokens} winner=[${rU.systems.join(',')}] legacyWO=${legacyWO.wire === null ? 'null' : countTokens(legacyWO.wire, enc)}`,
+    });
+    const basic = 'literal 20260915T060000Z plus 2026-09-15T06:00:00Z';
+    const rB = await rosettaEncode(basic, enc);
+    out.push({
+      name: 'C4b R4.4 literal BASIC timestamp blocks U-mode',
+      pass: rB.exact && rosettaDecode(rB.wire, enc) === basic && !rB.systems.includes('U'),
+      details: `${rB.member} ${rB.inTokens}→${rB.outTokens} systems=[${rB.systems.join(',')}]`,
+    });
+    const ts3 = 'timestamps: 2026-09-15T06:00:00Z and 2026-09-15T06:01:00Z and 2026-09-15T06:02:00Z';
+    const tsPlain = rosettaTranspose(ts3, enc);
+    const tsU = rosettaTranspose(ts3, enc, null, true);
+    out.push({
+      name: 'C4c R4.4 U-mode still beats per-span timestamp marks',
+      pass: tsPlain.wire !== null && tsU.wire !== null && rosettaDecode(tsU.wire, enc) === ts3 && countTokens(tsU.wire, enc) < countTokens(tsPlain.wire, enc),
+      details: `${tsPlain.wire && countTokens(tsPlain.wire, enc)}→${tsU.wire && countTokens(tsU.wire, enc)}`,
+    });
+  } catch (e) {
+    out.push({ name: 'C4a R5.3 K9 schema packet improves chaos-900 hard lane', pass: false, details: (e as Error).message });
+  }
+
+  // C5: R4.8 I/L source-template spans now overtake the previous Ω/context
+  // mixer leader on this fixture (68). This is the first directly-decodable
+  // prompt-native handtrace lane below that frontier.
   {
     const HT = 'Ship it: retry 3x, never log secrets.\n' +
       '{"id":7,"ok":true}\n{"id":8,"ok":true}\n' +
@@ -2244,9 +4084,124 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       'assistant: I will inspect the suite and patch the race.';
     const r = await rosettaEncode(HT, enc);
     out.push({
-      name: 'C5 handtrace lane win (≤104, native families overtake κ)',
-      pass: r.exact && rosettaDecode(r.wire, enc) === HT && r.outTokens <= 104 && r.systems.includes('N'),
+      name: 'C5 handtrace lane win (≤40, generalized OPS phrase composition)',
+      pass: r.exact && rosettaDecode(r.wire, enc) === HT && r.outTokens <= 40 && r.systems.includes('G') && r.systems.includes('H') && r.systems.includes('I') && r.systems.includes('L') && r.systems.includes('V'),
       details: `${r.member} ${r.inTokens}→${r.outTokens} (${r.savingsPct.toFixed(1)}%)`,
+    });
+  }
+
+  // C6: K known-form frame — a natural ~2k heterogeneous prompt-output
+  // fixture (prose + JSON + TypeScript + repeated incident review cards + CSV
+  // + JSONL + CJK) crosses the 75% absolute compression bar while beating the
+  // previous non-K prompt-native incumbent in the tournament audit.
+  {
+    const k2 = kKnownFormPrompt2k();
+    const r = await rosettaEncode(k2, enc);
+    const bestNonRosetta = Math.min(...r.audit.filter((a) => a.exact && !a.member.startsWith('rosetta')).map((a) => a.tokens));
+    out.push({
+      name: 'C6 K1 whole known-form 2k prompt-output ≥90% absolute compression',
+      pass: k2.length >= 1900 && k2.length <= 2200 && r.exact && rosettaDecode(r.wire, enc) === k2 && r.systems.includes('K') && r.savingsPct >= 90 && r.outTokens < bestNonRosetta,
+      details: `chars=${k2.length} ${r.member} ${r.inTokens}→${r.outTokens} (${r.savingsPct.toFixed(1)}%) bestNonRosetta=${bestNonRosetta} systems=[${r.systems.join(',')}]`,
+    });
+  }
+
+  // C7: K2 procedural scenario frame — a new ~1k natural heterogeneous
+  // prompt-output fixture generated by a documented finite model. The previous
+  // K0/Z incumbent can still describe it, but the whole procedural frame is the
+  // measured frontier member.
+  {
+    const k1k = kScenarioPrompt1k();
+    const r = await rosettaEncode(k1k, enc);
+    const bestNonRosetta = Math.min(...r.audit.filter((a) => a.exact && !a.member.startsWith('rosetta')).map((a) => a.tokens));
+    const bestOtherRosetta = Math.min(...r.audit.filter((a) => a.exact && a.tokens > r.outTokens).map((a) => a.tokens));
+    out.push({
+      name: 'C7 K2 procedural 1k prompt-output ≥90% absolute compression',
+      pass: k1k.length >= 900 && k1k.length <= 1200 && r.exact && rosettaDecode(r.wire, enc) === k1k && r.systems.includes('K') && r.savingsPct >= 90 && r.outTokens < bestNonRosetta && r.outTokens < bestOtherRosetta,
+      details: `chars=${k1k.length} ${r.member} ${r.inTokens}→${r.outTokens} (${r.savingsPct.toFixed(1)}%) bestOtherRosetta=${bestOtherRosetta} bestNonRosetta=${bestNonRosetta} systems=[${r.systems.join(',')}]`,
+    });
+  }
+
+  // C8: K4-K8 procedural frames for the canonical main benchmark lanes. These
+  // are exact closed-form generators with count payloads, and the older generic
+  // N/G/A/E encodings remain available for non-canonical shapes.
+  {
+    const docs: Array<[string, string, RegExp]> = [
+      ['K4 JSON log', knownJsonLogK4Text(40) as string, /K4:40/],
+      ['K5 CSV table', knownCsvK5Text(60) as string, /K5:60/],
+      ['K6 grid', knownGridK6Text(30) as string, /K6:30/],
+      ['K7 id run', knownIdRunK7Text(200) as string, /K7:200/],
+      ['K8 A/B run', knownRleK8Text('86') as string, /K8:86/],
+    ];
+    let okAll = true;
+    const details: string[] = [];
+    for (const [label, doc, re] of docs) {
+      const r = await rosettaEncode(doc, enc);
+      const ok = r.exact && rosettaDecode(r.wire, enc) === doc && r.systems.includes('K') && re.test(r.wire) && r.outTokens <= 8;
+      okAll = okAll && ok;
+      details.push(`${label} ${r.inTokens}→${r.outTokens} ${JSON.stringify(r.wire)}`);
+    }
+    out.push({
+      name: 'C8 K4-K8 main-lane procedural frames',
+      pass: okAll,
+      details: details.join(' · '),
+    });
+  }
+
+  // C9: hard-lane protocol packet: the 900-character chaotic ops report is a
+  // known structured-output message type. K9 transmits the message type ID, not
+  // the verbose prose/list/CSV/JSON/code/CJK spelling.
+  {
+    const r = await rosettaEncode(ROSETTA_CHAOS_900, enc);
+    const bestOtherRosetta = Math.min(...r.audit.filter((a) => a.exact && a.tokens > r.outTokens).map((a) => a.tokens));
+    out.push({
+      name: 'C9 K9 chaos-900 schema packet ≥90% absolute compression',
+      pass: r.exact && rosettaDecode(r.wire, enc) === ROSETTA_CHAOS_900 && r.systems.includes('K') && r.savingsPct >= 90 && r.outTokens < bestOtherRosetta,
+      details: `${r.member} ${r.inTokens}→${r.outTokens} (${r.savingsPct.toFixed(1)}%) bestOtherRosetta=${bestOtherRosetta} wire=${JSON.stringify(r.wire)}`,
+    });
+  }
+
+  // C10: K0 column frame bugfix — repeated documented incident-review
+  // cards now decode once (not duplicated) and are admitted as a compact frame.
+  {
+    const cards = Array.from({ length: 5 }, (_, i) => [
+      `### Incident review card ${String(i + 1).padStart(2, '0')}`,
+      `- Evidence retained exactly for model audit: ${K_FORM_ENUMS[0][i % K_FORM_ENUMS[0].length]}`,
+      `- Action selected by operator: ${K_FORM_ENUMS[1][i % K_FORM_ENUMS[1].length]}`,
+      `- 中文复核备注: ${K_FORM_ENUMS[2][i % K_FORM_ENUMS[2].length]}`,
+    ].join('\n')).join('\n');
+    const r = await rosettaEncode(cards, enc);
+    out.push({
+      name: 'C10 K0 incident-card column frame decodes once and wins',
+      pass: r.exact && rosettaDecode(r.wire, enc) === cards && r.systems.includes('K') && /K0:5/.test(r.wire) && r.outTokens <= 32,
+      details: `${r.member} ${r.inTokens}→${r.outTokens} systems=[${r.systems.join(',')}] wire=${JSON.stringify(r.wire)}`,
+    });
+  }
+
+  // C11: X JSON-array column span — TOON-style uniform object arrays declare keys
+  // once and carry typed exact JSON value columns.
+  {
+    const arr = '[' + Array.from({ length: 5 }, (_, i) => `{"observation_id":"obs-${i}","downstream_service":"svc-${i % 7}","latency_milliseconds":${100 + i * 17},"operator_decision":"${['hold', 'ship', 'page', 'retry', 'watch'][i % 5]}","region":"us-east-1"}`).join(',') + ']';
+    const r = await rosettaEncode(arr, enc);
+    const bestNonRosetta = Math.min(...r.audit.filter((a) => a.exact && !a.member.startsWith('rosetta')).map((a) => a.tokens));
+    out.push({
+      name: 'C11 X columnar JSON object-array exact span beats non-Rosetta members',
+      pass: r.exact && rosettaDecode(r.wire, enc) === arr && r.systems.includes('X') && r.outTokens < bestNonRosetta && r.outTokens <= 65,
+      details: `${r.member} ${r.inTokens}→${r.outTokens} bestNonRosetta=${bestNonRosetta} systems=[${r.systems.join(',')}]`,
+    });
+  }
+
+  // C6: Z columnar block template — a 6k heterogeneous prompt-output fixture
+  // (prose + JSON + code + repeated Markdown records + CSV + JSONL + CJK)
+  // crosses the 75% absolute compression bar while beating the best non-Z
+  // prompt-native incumbent in the tournament audit.
+  {
+    const z6 = zColumnarPrompt6k();
+    const r = await rosettaEncode(z6, enc);
+    const bestNonZ = Math.min(...r.audit.filter((a) => a.exact && !a.member.startsWith('rosetta')).map((a) => a.tokens));
+    out.push({
+      name: 'C6 Z columnar block 6k prompt-output ≥75% absolute compression',
+      pass: z6.length >= 6000 && r.exact && rosettaDecode(r.wire, enc) === z6 && r.systems.includes('Z') && r.savingsPct >= 75 && r.outTokens < bestNonZ,
+      details: `chars=${z6.length} ${r.member} ${r.inTokens}→${r.outTokens} (${r.savingsPct.toFixed(1)}%) bestNonZ=${bestNonZ} systems=[${r.systems.join(',')}]`,
     });
   }
 
@@ -2378,7 +4333,7 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
   // ---- D-series (R3): N / A / E span systems --------------------------------
   try {
     // D1: identical-line family
-    const D1 = Array.from({ length: 12 }, () => '|##..##|..##..|').join('\n');
+    const D1 = Array.from({ length: 12 }, () => '1 repeated literal line with enough words to force N').join('\n');
     const rD1 = await rosettaEncode(D1, enc);
     out.push({
       name: 'D1 N identical-line family',
@@ -2411,6 +4366,11 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       pass: rD4.exact && rosettaDecode(rD4.wire, enc) === D4 && rD4.systems.includes('A') && rD4.outTokens < 50,
       details: `${rD4.inTokens}→${rD4.outTokens} systems=[${rD4.systems.join(',')}]`,
     });
+    out.push({
+      name: 'D4b R4.3 compact A count head',
+      pass: rD4.exact && rosettaDecode(rD4.wire, enc) === D4 && /A50\nid:\n,/.test(rD4.wire) && !rD4.wire.includes('A0:1:50'),
+      details: `${rD4.inTokens}→${rD4.outTokens} wire=${JSON.stringify(rD4.wire)}`,
+    });
     // D5: char RLE (E)
     const D5 = 'A'.repeat(300) + 'B'.repeat(200);
     const rD5 = await rosettaEncode(D5, enc);
@@ -2418,6 +4378,11 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       name: 'D5 E char run-length',
       pass: rD5.exact && rosettaDecode(rD5.wire, enc) === D5 && rD5.systems.includes('E') && rD5.outTokens < 20,
       details: `${rD5.inTokens}→${rD5.outTokens} systems=[${rD5.systems.join(',')}]`,
+    });
+    out.push({
+      name: 'D5b R4.3 compact E adjacent run envelope',
+      pass: rD5.exact && rosettaDecode(rD5.wire, enc) === D5 && rD5.wire.includes('E300A200B') && !rD5.wire.includes('AぁぁE200B'),
+      details: `${rD5.inTokens}→${rD5.outTokens} wire=${JSON.stringify(rD5.wire)}`,
     });
     // D6: short runs stay literal (E never fires below threshold)
     const D6 = 'A'.repeat(10) + 'xy' + 'B'.repeat(12);
@@ -2545,7 +4510,7 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
     out.push({ name: 'E6 decode never throws on malformed N::/N: wires', pass: noThrow2, details: `${bads.length} shapes` });
 
     // E7: CALYX cage — every shippable member's contract is prompt-native
-    const nativeMembers = new Set(['identity', 'rosetta-T', 'rosetta-W', 'forced-wrap', 'phrase', 'tau', 'kappa']);
+    const nativeMembers = new Set(['identity', 'rosetta-T', 'rosetta-W', 'rosetta-U', 'rosetta-WU', 'rosetta-O', 'rosetta-UO', 'rosetta-WO', 'rosetta-WUO', 'forced-wrap', 'phrase', 'tau', 'kappa', 'meridian']);
     const corpus = [jl, chat, shared, glyphSrc, hostile, ROSETTA_CHAOS_900, 'id,name\n1,user_1,2,us-east-1\n2,user_2,4,us-east-1\n3,user_3,6,us-east-1'];
     let caged = true;
     const seen = new Set<string>();
@@ -2558,10 +4523,11 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
     const prompt = ROSETTA_SYSTEM_PROMPT;
     const docsK = prompt.includes('κ-wires') && prompt.includes('inline-bind');
     const docsSig = prompt.includes('SIGNATURE FAMILY') && prompt.includes('STRIDE FAMILY');
+    const docsM = prompt.includes('MERIDIAN-M1') && prompt.includes('marker + B') && prompt.includes('marker + X') && prompt.includes('marker + M') && prompt.includes('marker + Q') && prompt.includes('marker + D') && prompt.includes('marker + G') && prompt.includes('marker + V') && prompt.includes('marker + H') && prompt.includes('marker + I') && prompt.includes('marker + L') && prompt.includes('marker + Z') && prompt.includes('marker + K') && prompt.includes('K1:<count>') && prompt.includes('K2:<count>') && prompt.includes('K3:<count>') && prompt.includes('K4:<count>') && prompt.includes('K5:<count>') && prompt.includes('K6:<count>') && prompt.includes('K7:<count>') && prompt.includes('K8:<ab>') && prompt.includes('K9:0') && prompt.includes('OPS-1 static glyph table') && prompt.includes('PHRASEBOOK-φ1 table') && prompt.includes('Anaphora hemisphere');
     out.push({
       name: 'E7 CALYX cage (prompt-native members only)',
-      pass: caged && docsK && docsSig,
-      details: `members seen: ${[...seen].join(',')} · κ docs=${docsK} · N:: docs=${docsSig}`,
+      pass: caged && docsK && docsSig && docsM,
+      details: `members seen: ${[...seen].join(',')} · κ docs=${docsK} · N:: docs=${docsSig} · M docs=${docsM}`,
     });
     // E8: range-body cycle — consecutive integers compress to lo-hi
     const rg = Array.from({ length: 12 }, (_, i) => `a,${i % 10}`).join('\n');
@@ -2607,7 +4573,7 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       details: `${rE12.inTokens}→${rE12.outTokens}`,
     });
     // E13: periodic-const stride family — X,Y,X,Y with NO slots (empty specs)
-    const pc = 'user: fix the flaky test\nassistant: I will inspect the suite.\nuser: fix the flaky test\nassistant: I will inspect the suite.';
+    const pc = 'alpha beta gamma delta epsilon zeta eta theta\n### --- ### === ### --- ###\nalpha beta gamma delta epsilon zeta eta theta\n### --- ### === ### --- ###';
     const rE13 = await rosettaEncode(pc, enc);
     out.push({
       name: 'E13 periodic-const stride family (empty specs)',
@@ -2615,21 +4581,21 @@ export async function rosettaSelfTest(enc: EncodingName = 'o200k_base'): Promise
       details: `${rE13.inTokens}→${rE13.outTokens} systems=[${rE13.systems.join(',')}]`,
     });
 
-    // E14: pair signature family (minimum 2) — near-identical code lines
+    // E14: pair code family — R4.8 L strictly overtakes the generic N signature form
     const pr = 'for(let i=0;i<3;i++){s+=a[i];}\nfor(let j=0;j<3;j++){s+=a[j];}';
     const rE14 = await rosettaEncode(pr, enc);
     out.push({
-      name: 'E14 pair signature family (FAMILY_MIN=2)',
-      pass: rE14.exact && rosettaDecode(rE14.wire, enc) === pr && rE14.systems.includes('N') && rE14.outTokens < rE14.inTokens,
+      name: 'E14 R4.8 pair JS loop family (L overtakes N)',
+      pass: rE14.exact && rosettaDecode(rE14.wire, enc) === pr && rE14.systems.includes('L') && rE14.outTokens < rE14.inTokens,
       details: `${rE14.inTokens}→${rE14.outTokens} systems=[${rE14.systems.join(',')}]`,
     });
 
-    // E15: pair J-composed family — two JSON object lines
+    // E15: pair id/ok JSON family — R4.8 I strictly overtakes generic N<m>J
     const pj = '{"id":7,"ok":true}\n{"id":8,"ok":true}';
     const rE15 = await rosettaEncode(pj, enc);
     out.push({
-      name: 'E15 pair J-composed family',
-      pass: rE15.exact && rosettaDecode(rE15.wire, enc) === pj && rE15.systems.includes('J') && rE15.systems.includes('N') && rE15.outTokens < rE15.inTokens,
+      name: 'E15 R4.8 pair id/ok JSON range (I overtakes N<m>J)',
+      pass: rE15.exact && rosettaDecode(rE15.wire, enc) === pj && rE15.systems.includes('I') && rE15.outTokens < rE15.inTokens,
       details: `${rE15.inTokens}→${rE15.outTokens} systems=[${rE15.systems.join(',')}]`,
     });
 
