@@ -202,6 +202,17 @@ export function strandStaticPool(enc: EncodingName): string[] {
     [0x0900, 0x097f],   // Devanagari
     [0x0e00, 0x0e7f],   // Thai
     [0x10a0, 0x10ff],   // Georgian
+    [0x0980, 0x09ff],   // Bengali
+    [0x0a80, 0x0aff],   // Gujarati
+    [0x0c80, 0x0cff],   // Kannada
+    [0x1000, 0x109f],   // Myanmar
+    [0x1780, 0x17ff],   // Khmer
+    [0x0d00, 0x0d7f],   // Malayalam
+    [0x0a00, 0x0a7f],   // Gurmukhi
+    [0x0c00, 0x0c7f],   // Telugu
+    [0x0d80, 0x0dff],   // Sinhala
+    [0x0b80, 0x0bff],   // Tamil
+    [0x0b00, 0x0b7f],   // Oriya
   ];
   for (const [a, b] of ranges) {
     for (let cp = a; cp <= b && out.length < ST_STATIC_POOL; cp++) {
