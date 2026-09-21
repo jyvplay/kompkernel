@@ -1,0 +1,154 @@
+build: port `make_temporal_zoneinfo_cpp` to GYP
+Refs: https://github.com/nodejs/node/issues/62676
+
+stream: speed up flowing pipe of buffers
+flow() for a synchronous byte-mode pipe spends most of its time in the general `read()` path: take one prefetched chunk out of a holey buffer, then call `_read()` for the next one. This keeps that prefetched chunk on the readable state for the flowing loop and emits it directly.
+
+`_read()` of the following chunk still runs before `'data'`. A nested `read()` puts the chunk back on the buffer. Object mode, decoders, and non-flowing `read()` stay on the existing path.
+
+Measured with `benchmark/compare.js`, 15 runs, two binaries built from the same tree:
+
+| benchmark | change |
+| --- | --- |
+| `streams/pipe.js` n=5e6 | **+77.25%** ±2.55% (***) |
+| `streams/pipe-object-mode.js` | +1.46% (noise) |
+| `streams/readable-readall.js` | +0.17% (noise) |
+| `streams/readable-bigread.js` | +0.24% (noise) |
+
+`tools/test.py` on `test/parallel/test-stream*`, `test/parallel/test-readable*`, `test/sequential/test-stream*`, and the fs read/write stream tests passed.
+
+A closed-source coding agent assisted with the implementation. The prefetch order was checked against `Readable.read()`, and the benchmark and tests above were run locally.
+
+
+doc: add return type to Blocklist.isBlocklist
+This adds missing return type for `Blocklist.isBlocklist`.
+
+According to what this function returns:
+https://github.com/nodejs/node/blob/2d32b18c556ffcaf4c23ba3f8aedbe64839f7975/lib/internal/blocklist.js#L79-L81
+
+Refs: nodejs/doc-kit#953
+
+deps: V8: cherry-pick def38dd3f872
+This upstream v8 commit fixes [a riscv64 bug I reported to V8](https://issues.chromium.org/issues/479892745) and [a riscv64 memory corruption security vulnerability (not public)](https://issues.chromium.org/issues/539663717).
+
+It also fixes some real-world wasm bugs for riscv64: https://github.com/felixonmars/archriscv-packages/pull/5700#issue-5400410220
+
+CC @nodejs/platform-riscv64 
+
+
+Original commit message:
+
+    [riscv] Replace JAL with AUIPC/JALR in lazy compile jump slots
+
+    The lazy compile jump slot previously emitted a single JAL instruction to
+    branch to the far jump table slot. For large Wasm modules, the target
+    offset can exceed the 21-bit signed range of JAL. In release builds, the
+    existing DCHECK was omitted, causing the offset to be silently truncated
+    modulo 0x200000. This could redirect execution to an unintended address,
+    skipping security checks and leading to memory corruption.
+
+    Fix this by emitting a checked AUIPC/JALR pair, which can reach any
+    32-bit offset. The CHECK(is_int32(target_offset)) ensures that
+    out-of-range displacements are caught rather than truncated.
+
+    The lazy compile table slot size is increased from 3 to 4 instructions
+    to accommodate the new sequence.
+
+    Fixed:539663717
+
+    Change-Id: If8088c6f33f84ba064d54536b3f6323b89a568eb
+    Reviewed-on: https://chromium-review.googlesource.com/c/v8/v8/+/8301500
+    Auto-Submit: Yahan Lu (LuYahan) <yahan@iscas.ac.cn>
+    Commit-Queue: Matthias Liedtke <mliedtke@chromium.org>
+    Reviewed-by: Matthias Liedtke <mliedtke@chromium.org>
+    Reviewed-by: Ji Qiu <qiuji@iscas.ac.cn>
+    Cr-Commit-Position: refs/heads/main@{#109580}
+
+Refs: https://github.com/v8/v8/commit/def38dd3f8726ed595932624ee5d681a3f02ed4a
+
+<!--
+If you are submitting a pull request for the first time,
+check out the guide for first-time contributors for tips and answers to FAQs:
+https://github.com/nodejs/node/blob/HEAD/doc/contributing/first-contributions.md
+
+Before submitting a pull request, please read:
+
+- the CONTRIBUTING guide at https://github.com/nodejs/node/blob/HEAD/CONTRIBUTING.md
+- the commit message formatting guidelines at
+  https://github.com/nodejs/node/blob/HEAD/doc/contributing/pull-requests.md#commit-message-guidelines
+
+For code changes:
+1. Include tests for any bug fixes or new features.
+2. Update documentation if relevant.
+3. Ensure that `make -j4 test` (UNIX), or `vcbuild test` (Windows) passes.
+
+If you believe this PR should be highlighted in the Node.js CHANGELOG
+please add the `notable-change` label.
+
+Developer's Certificate of Origin 1.1
+
+By making a contribution to this project, I certify that:
+
+(a) The contribution was created in whole or in part by me and I
+    have the right to submit it under the open source license
+    indicated in the file; or
+
+(b) The contribution is based upon previous work that, to the best
+    of my knowledge, is covered under an appropriate open source
+    license and I have the right under that license to submit that
+    work with modifications, whether created in whole or in part
+    by me, under the same open source license (unless I am
+    permitted to submit under a different license), as indicated
+    in the file; or
+
+(c) The contribution was provided directly to me by some other
+    person who certified (a), (b) or (c) and I have not modified
+    it.
+
+(d) I understand and agree that this project and the contribution
+    are public and that a record of the contribution (including all
+    personal information I submit with it, including my sign-off) is
+    maintained indefinitely and may be redistributed consistent with
+    this project or the open source license(s) involved.
+-->
+
+
+zlib: reject reset after gzip emitted incomplete output
+gzip writes a header on the first write. Calling reset after that starts a new member while that header is already in the output, so gunzip fails.
+
+Same idea as the zstd incomplete-frame case in #66088, but only for gzip. zlib deflate can still reset after a flush: the dictionary test throws the first output away and reuses the compressor. Raw deflate is unchanged.
+
+reset before any write still works. flush then end, without reset, still works.
+
+I ran the new gzip reset test, the dictionary test, the existing reset tests, test-zlib.js, and the flush tests on a Release build.
+
+ffi: allocate string argument storage lazily
+`InvokeFunction` reserves a temporary `std::vector<std::string>` on every call with arguments, even when none of the arguments are strings. Defer that reservation until the first string argument needs to be copied, avoiding an allocation and deallocation for calls without string arguments.
+
+The first string still reserves capacity for the full argument count before its pointer is saved. Subsequent strings therefore cannot reallocate the vector and invalidate pointers already prepared for the native call.
+
+Add a test that exercises native argument conversion with multiple strings, empty and long strings, Unicode, mixed string/Buffer arguments, and errors while converting a later argument.
+
+Local macOS ARM64 comparison using `benchmark/compare.js`, with 10 samples per binary and the default iteration counts across all 40 FFI benchmark configurations:
+
+```text
+                                                              confidence   improvement   accuracy (*)    (**)   (***)
+ffi/many-args.js n=10000000                                   ***             +5.97 %   ±2.33%  ±3.26%  ±4.60%
+ffi/sum-5-i32.js n=10000000                                   ***            +11.18 %   ±2.49%  ±3.42%  ±4.67%
+```
+
+Both improvements remained significant at the 5% level after the runner's Holm-Bonferroni correction. The other 38 configurations showed no statistically significant difference in this run.
+
+Validation:
+
+- Release build with Ninja (`--without-node-snapshot --without-node-code-cache`).
+- All 16 FFI test files passed, including the new test.
+- C++ lint, import checks, and ESLint for the new test passed.
+
+The full Node.js test suite and cross-platform CI have not been run.
+
+
+path: skip normalize for already-normalized paths
+If a posix path contains no `'.'` and no `'//'`, it has no `'.'`/`'..'` segments and no empty segments, so `path.posix.normalize()` can return the input without running `normalizeString()`.
+
+This change was
