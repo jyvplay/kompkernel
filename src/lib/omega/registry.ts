@@ -62,6 +62,7 @@ import { astralEncode } from './astral';
 import { solarisEncode } from './solaris';
 import { tensorEncode } from './tensor';
 import { lumenEncode } from './lumen';
+import { exodusEncode } from './exodus';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -129,6 +130,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = veritasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'exodus',
+      label: '⚡ EXODUS-E1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = exodusEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
