@@ -81,9 +81,11 @@ export function contractDecode(
     if (colon < 0) return wire;
     const len = Number(rest.slice(cursor + 1, colon));
     if (!Number.isSafeInteger(len) || len < 1) return wire;
-    const phrase = rest.slice(colon + 1, colon + 1 + len);
+    const phraseEnd = colon + 1 + len;
+    if (phraseEnd > rest.length || (phraseEnd < rest.length && rest[phraseEnd] !== '\n')) return wire;
+    const phrase = rest.slice(colon + 1, phraseEnd);
     rules.push({ glyph, phrase, hits: 0 });
-    cursor = colon + 1 + len + 1;
+    cursor = phraseEnd + 1;
   }
 
   let body = rest.slice(cursor);
@@ -186,8 +188,19 @@ export function contractEncode(
       '\n' +
       candidateBody;
     const candidateTok = countTokens(candidateWire, enc);
+    const currentTok = countTokens(
+      rules.length === 0
+        ? text
+        : options.sentinel +
+            rules.length +
+            '\n' +
+            rules.map((r) => r.glyph + r.phrase.length + ':' + r.phrase).join('\n') +
+            '\n' +
+            currentBody,
+      enc,
+    );
 
-    if (candidateTok < inTokens) {
+    if (candidateTok < currentTok) {
       currentBody = candidateBody;
       rules.push({ glyph, phrase, hits: occurrences });
     }

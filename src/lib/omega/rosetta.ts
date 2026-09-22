@@ -218,6 +218,8 @@ import { solarisEncode, solarisDecode } from './solaris';
 import { hyperionEncode, hyperionDecode } from './hyperion';
 import { valenceEncode, valenceDecode } from './valence';
 import { astraeaEncode, astraeaDecode } from './astraea';
+import { exodusEncode, exodusDecode } from './exodus';
+import { tensorEncode, tensorDecode } from './tensor';
 
 /* --------------------------- versioned static tables ----------------------- */
 
@@ -3352,12 +3354,24 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   if (wire.startsWith('[ST1]\n')) return strataDecode(wire);
   if (wire.startsWith('[RP1]\n')) return repairDecode(wire);
   if (wire.startsWith('[TR1]\n')) return trieDecode(wire);
+  if (wire.startsWith('[V1]\n') || wire.startsWith('[V1][V1]\n')) return valenceDecode(wire);
+  if (wire.startsWith('[T1]\n') || wire.startsWith('[T1][T1]\n')) return tensorDecode(wire);
   if (wire.startsWith('[CL1]\n')) return columnDecode(wire);
   if (wire.startsWith('[SP1]\n')) return spliceDecode(wire);
   if (wire.startsWith('[⌘STENCIL]')) return stencilDecode(wire);
   if (wire.startsWith('[Ϻ]')) return morphDecode(wire);
   if (wire.startsWith(KAPPA_SENTINEL)) return kappaDecode(wire, enc);
   // PHRASEBOOK-φ member lane: bare-φ / φφ sentinels dispatch to its decoder.
+  if (wire.startsWith('α') || wire.startsWith('αα')) return astralDecode(wire);
+  if (wire.startsWith('ϯ') || wire.startsWith('ϯϯ')) return aeonDecode(wire);
+  if (wire.startsWith('Ψ') || wire.startsWith('ΨΨ')) return phoenixDecode(wire);
+  if (wire.startsWith('⟁V') || wire.startsWith('⟁V⟁V')) return valkyrieDecode(wire);
+  if (wire.startsWith('☉') || wire.startsWith('☉☉')) return solarisDecode(wire);
+  if (wire.startsWith('Ϧ') || wire.startsWith('ϦϦ')) return hyperionDecode(wire);
+  if (wire.startsWith('[V1]\n')) return valenceDecode(wire);
+  if (wire.startsWith('Α') || wire.startsWith('ΑΑ')) return astraeaDecode(wire, enc);
+  if (wire.startsWith('Ξ') || wire.startsWith('ΞΞ')) return exodusDecode(wire);
+  if (wire.startsWith('[T1]\n')) return tensorDecode(wire);
   if (wire.startsWith(PHRASE_SENTINEL) || wire.startsWith(PHRASE_LITERAL)) return phraseDecode(wire, enc);
   // TAU member lane: τ\n / ττ\n sentinels dispatch to its decoder.
   if (wire.startsWith(TAU_SENTINEL) || wire.startsWith(TAU_LITERAL)) return tauDecode(wire, enc);
@@ -3662,7 +3676,7 @@ async function rosettaEncodeUncached(
   // ASTRAL-A1 member
   {
     const ast = astralEncode(text, enc);
-    if (ast.exact && ast.decoded === text && ast.mode === 'astral') {
+    if (ast.exact && ast.decoded === text && ast.mode === 'astral-a1') {
       admit('astral', ast.wire, () => astralDecode(ast.wire), ['ASTRAL']);
     }
   }
@@ -3670,7 +3684,7 @@ async function rosettaEncodeUncached(
   // AEON-A1 member
   {
     const ae = aeonEncode(text, enc);
-    if (ae.exact && ae.decoded === text && ae.mode === 'aeon') {
+    if (ae.exact && ae.decoded === text && ae.mode === 'aeon-a1') {
       admit('aeon', ae.wire, () => aeonDecode(ae.wire), ['AEON']);
     }
   }
@@ -3678,7 +3692,7 @@ async function rosettaEncodeUncached(
   // PHOENIX-P1 member
   {
     const ph = phoenixEncode(text, enc);
-    if (ph.exact && ph.decoded === text && ph.mode === 'phoenix') {
+    if (ph.exact && ph.decoded === text && ph.mode === 'phoenix-p1') {
       admit('phoenix', ph.wire, () => phoenixDecode(ph.wire), ['PHOENIX']);
     }
   }
@@ -3686,7 +3700,7 @@ async function rosettaEncodeUncached(
   // VALKYRIE-V1 member
   {
     const valk = valkyrieEncode(text, enc);
-    if (valk.exact && valk.decoded === text && valk.mode === 'valkyrie') {
+    if (valk.exact && valk.decoded === text && valk.mode === 'valkyrie-v1') {
       admit('valkyrie', valk.wire, () => valkyrieDecode(valk.wire), ['VALKYRIE']);
     }
   }
@@ -3694,7 +3708,7 @@ async function rosettaEncodeUncached(
   // SOLARIS-S1 member
   {
     const sol = solarisEncode(text, enc);
-    if (sol.exact && sol.decoded === text && sol.mode === 'solaris') {
+    if (sol.exact && sol.decoded === text && sol.mode === 'solaris-s1') {
       admit('solaris', sol.wire, () => solarisDecode(sol.wire), ['SOLARIS']);
     }
   }
@@ -3702,7 +3716,7 @@ async function rosettaEncodeUncached(
   // HYPERION-H1 member
   {
     const hyp = hyperionEncode(text, enc);
-    if (hyp.exact && hyp.decoded === text && hyp.mode === 'hyperion') {
+    if (hyp.exact && hyp.decoded === text && hyp.mode === 'hyperion-h1') {
       admit('hyperion', hyp.wire, () => hyperionDecode(hyp.wire), ['HYPERION']);
     }
   }
@@ -3720,6 +3734,22 @@ async function rosettaEncodeUncached(
     const ast2 = astraeaEncode(text, enc);
     if (ast2.exact && ast2.decoded === text && ast2.mode === 'astraea') {
       admit('astraea', ast2.wire, () => astraeaDecode(ast2.wire, enc), ['ASTRAEA']);
+    }
+  }
+
+  // EXODUS-E1 member
+  {
+    const ex = exodusEncode(text, enc);
+    if (ex.exact && ex.decoded === text && ex.mode === 'exodus-e1') {
+      admit('exodus', ex.wire, () => exodusDecode(ex.wire), ['EXODUS']);
+    }
+  }
+
+  // TENSOR-T1 member
+  {
+    const ten = tensorEncode(text, enc);
+    if (ten.exact && ten.decoded === text && (ten.mode === 'tensor' || ten.mode === 'tensor-t1')) {
+      admit('tensor', ten.wire, () => tensorDecode(ten.wire), ['TENSOR']);
     }
   }
 
