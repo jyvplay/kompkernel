@@ -854,7 +854,7 @@ async function p11() {
 
   // CALYX cage: every emitted member is prompt-native and decodable
   {
-    const native = new Set(['identity', 'rosetta-T', 'rosetta-W', 'rosetta-U', 'rosetta-WU', 'rosetta-O', 'rosetta-UO', 'rosetta-WO', 'rosetta-WUO', 'forced-wrap', 'phrase', 'tau', 'kappa', 'meridian']);
+    const native = new Set(['identity', 'rosetta-T', 'rosetta-W', 'rosetta-U', 'rosetta-WU', 'rosetta-O', 'rosetta-UO', 'rosetta-WO', 'rosetta-WUO', 'forced-wrap', 'phrase', 'tau', 'kappa', 'meridian', 'lattice']);
     const docs = shapes.map(([, t]) => t).concat([
       'id,name\n1,user_1,2,us-east-1\n2,user_2,4,us-east-1\n3,user_3,6,us-east-1',
       'The quick brown fox jumps over the lazy dog near the river bank.',
@@ -870,6 +870,7 @@ async function p11() {
     }
     ok(allNative, 'P11 CALYX cage: members prompt-native only', [...seen].join(','));
     ok(allDecode, 'P11 CALYX cage: all wires decode byte-exact', '');
+    ok(ROSETTA_SYSTEM_PROMPT.includes('LATTICE-LT1'), 'P11 prompt documents the LATTICE-LT1 member contract', '');
     ok(ROSETTA_SYSTEM_PROMPT.includes('SIGNATURE FAMILY') && ROSETTA_SYSTEM_PROMPT.includes('STRIDE FAMILY') && ROSETTA_SYSTEM_PROMPT.includes('κ-wires') && ROSETTA_SYSTEM_PROMPT.includes('MERIDIAN-M1') && ROSETTA_SYSTEM_PROMPT.includes('U timestamp flag') && ROSETTA_SYSTEM_PROMPT.includes('OPS-1 O-mode') && ROSETTA_SYSTEM_PROMPT.includes('marker + M') && ROSETTA_SYSTEM_PROMPT.includes('marker + Q') && ROSETTA_SYSTEM_PROMPT.includes('marker + D') && ROSETTA_SYSTEM_PROMPT.includes('marker + G') && ROSETTA_SYSTEM_PROMPT.includes('marker + V') && ROSETTA_SYSTEM_PROMPT.includes('marker + H') && ROSETTA_SYSTEM_PROMPT.includes('marker + I') && ROSETTA_SYSTEM_PROMPT.includes('marker + L') && ROSETTA_SYSTEM_PROMPT.includes('marker + Z') && ROSETTA_SYSTEM_PROMPT.includes('marker + K') && ROSETTA_SYSTEM_PROMPT.includes('K1:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K2:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K3:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K4:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K5:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K6:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K7:<count>') && ROSETTA_SYSTEM_PROMPT.includes('K8:<ab>') && ROSETTA_SYSTEM_PROMPT.includes('K9:0') && ROSETTA_SYSTEM_PROMPT.includes('OPS-1 static glyph table') && ROSETTA_SYSTEM_PROMPT.includes('PHRASEBOOK-φ1 table'), 'P11 prompt documents N:/N::, κ, U/O/M/Q/D/G/H/I/L/V/Z/K/K1-K9, OPS table, and MERIDIAN contracts', '');
   }
 

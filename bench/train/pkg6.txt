@@ -1,0 +1,946 @@
+{
+  "name": "drizzle-orm",
+  "version": "0.45.2",
+  "description": "Drizzle ORM package for SQL databases",
+  "type": "module",
+  "scripts": {
+    "p": "prisma generate --schema src/prisma/schema.prisma",
+    "build": "pnpm p && scripts/build.ts",
+    "b": "pnpm build",
+    "test:types": "cd type-tests && tsc",
+    "test": "vitest run",
+    "pack": "(cd dist && npm pack --pack-destination ..) && rm -f package.tgz && mv *.tgz package.tgz",
+    "publish": "npm publish package.tgz"
+  },
+  "main": "./index.cjs",
+  "module": "./index.js",
+  "types": "./index.d.ts",
+  "sideEffects": false,
+  "publishConfig": {
+    "provenance": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drizzle-team/drizzle-orm.git"
+  },
+  "homepage": "https://orm.drizzle.team",
+  "keywords": [
+    "drizzle",
+    "orm",
+    "pg",
+    "mysql",
+    "singlestore",
+    "postgresql",
+    "postgres",
+    "sqlite",
+    "database",
+    "sql",
+    "typescript",
+    "ts",
+    "drizzle-orm"
+  ],
+  "author": "Drizzle Team",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/drizzle-team/drizzle-orm/issues"
+  },
+  "peerDependencies": {
+    "@aws-sdk/client-rds-data": ">=3",
+    "@cloudflare/workers-types": ">=4",
+    "@electric-sql/pglite": ">=0.2.0",
+    "@libsql/client": ">=0.10.0",
+    "@libsql/client-wasm": ">=0.10.0",
+    "@neondatabase/serverless": ">=0.10.0",
+    "@op-engineering/op-sqlite": ">=2",
+    "@opentelemetry/api": "^1.4.1",
+    "@planetscale/database": ">=1.13",
+    "@prisma/client": "*",
+    "@tidbcloud/serverless": "*",
+    "@types/better-sqlite3": "*",
+    "@types/pg": "*",
+    "@types/sql.js": "*",
+    "@vercel/postgres": ">=0.8.0",
+    "@xata.io/client": "*",
+    "better-sqlite3": ">=7",
+    "bun-types": "*",
+    "expo-sqlite": ">=14.0.0",
+    "knex": "*",
+    "kysely": "*",
+    "mysql2": ">=2",
+    "pg": ">=8",
+    "postgres": ">=3",
+    "sql.js": ">=1",
+    "sqlite3": ">=5",
+    "gel": ">=2",
+    "@upstash/redis": ">=1.34.7"
+  },
+  "peerDependenciesMeta": {
+    "mysql2": {
+      "optional": true
+    },
+    "@vercel/postgres": {
+      "optional": true
+    },
+    "@xata.io/client": {
+      "optional": true
+    },
+    "better-sqlite3": {
+      "optional": true
+    },
+    "@types/better-sqlite3": {
+      "optional": true
+    },
+    "sqlite3": {
+      "optional": true
+    },
+    "sql.js": {
+      "optional": true
+    },
+    "@types/sql.js": {
+      "optional": true
+    },
+    "@cloudflare/workers-types": {
+      "optional": true
+    },
+    "pg": {
+      "optional": true
+    },
+    "@types/pg": {
+      "optional": true
+    },
+    "postgres": {
+      "optional": true
+    },
+    "@neondatabase/serverless": {
+      "optional": true
+    },
+    "bun-types": {
+      "optional": true
+    },
+    "@aws-sdk/client-rds-data": {
+      "optional": true
+    },
+    "@planetscale/database": {
+      "optional": true
+    },
+    "knex": {
+      "optional": true
+    },
+    "kysely": {
+      "optional": true
+    },
+    "@libsql/client": {
+      "optional": true
+    },
+    "@libsql/client-wasm": {
+      "optional": true
+    },
+    "@opentelemetry/api": {
+      "optional": true
+    },
+    "expo-sqlite": {
+      "optional": true
+    },
+    "gel": {
+      "optional": true
+    },
+    "@op-engineering/op-sqlite": {
+      "optional": true
+    },
+    "@electric-sql/pglite": {
+      "optional": true
+    },
+    "@tidbcloud/serverless": {
+      "optional": true
+    },
+    "prisma": {
+      "optional": true
+    },
+    "@prisma/client": {
+      "optional": true
+    },
+    "@upstash/redis": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@aws-sdk/client-rds-data": "^3.549.0",
+    "@cloudflare/workers-types": "^4.20241112.0",
+    "@electric-sql/pglite": "^0.2.12",
+    "@libsql/client": "^0.10.0",
+    "@libsql/client-wasm": "^0.10.0",
+    "@miniflare/d1": "^2.14.4",
+    "@neondatabase/serverless": "^0.10.0",
+    "@op-engineering/op-sqlite": "^2.0.16",
+    "@opentelemetry/api": "^1.4.1",
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@planetscale/database": "^1.16.0",
+    "@prisma/client": "5.14.0",
+    "@tidbcloud/serverless": "^0.1.1",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^20.2.5",
+    "@types/pg": "^8.10.1",
+    "@types/react": "^18.2.45",
+    "@types/sql.js": "^1.4.4",
+    "@upstash/redis": "^1.34.3",
+    "@vercel/postgres": "^0.8.0",
+    "@xata.io/client": "^0.29.3",
+    "better-sqlite3": "^11.9.1",
+    "bun-types": "^1.2.0",
+    "cpy": "^10.1.0",
+    "expo-sqlite": "^14.0.0",
+    "gel": "^2.0.0",
+    "glob": "^11.0.1",
+    "knex": "^2.4.2",
+    "kysely": "^0.25.0",
+    "mysql2": "^3.14.1",
+    "pg": "^8.11.0",
+    "postgres": "^3.3.5",
+    "prisma": "5.14.0",
+    "react": "^18.2.0",
+    "sql.js": "^1.8.0",
+    "sqlite3": "^5.1.2",
+    "ts-morph": "^25.0.1",
+    "tslib": "^2.5.2",
+    "tsx": "^3.12.7",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^3.1.3",
+    "zod": "^3.20.2",
+    "zx": "^7.2.2"
+  },
+  "exports": {
+    "./alias": {
+      "import": {
+        "types": "./alias.d.ts",
+        "default": "./alias.js"
+      },
+      "require": {
+        "types": "./alias.d.cts",
+        "default": "./alias.cjs"
+      },
+      "types": "./alias.d.ts",
+      "default": "./alias.js"
+    },
+    "./batch": {
+      "import": {
+        "types": "./batch.d.ts",
+        "default": "./batch.js"
+      },
+      "require": {
+        "types": "./batch.d.cts",
+        "default": "./batch.cjs"
+      },
+      "types": "./batch.d.ts",
+      "default": "./batch.js"
+    },
+    "./casing": {
+      "import": {
+        "types": "./casing.d.ts",
+        "default": "./casing.js"
+      },
+      "require": {
+        "types": "./casing.d.cts",
+        "default": "./casing.cjs"
+      },
+      "types": "./casing.d.ts",
+      "default": "./casing.js"
+    },
+    "./column-builder": {
+      "import": {
+        "types": "./column-builder.d.ts",
+        "default": "./column-builder.js"
+      },
+      "require": {
+        "types": "./column-builder.d.cts",
+        "default": "./column-builder.cjs"
+      },
+      "types": "./column-builder.d.ts",
+      "default": "./column-builder.js"
+    },
+    "./column": {
+      "import": {
+        "types": "./column.d.ts",
+        "default": "./column.js"
+      },
+      "require": {
+        "types": "./column.d.cts",
+        "default": "./column.cjs"
+      },
+      "types": "./column.d.ts",
+      "default": "./column.js"
+    },
+    "./entity": {
+      "import": {
+        "types": "./entity.d.ts",
+        "default": "./entity.js"
+      },
+      "require": {
+        "types": "./entity.d.cts",
+        "default": "./entity.cjs"
+      },
+      "types": "./entity.d.ts",
+      "default": "./entity.js"
+    },
+    "./errors": {
+      "import": {
+        "types": "./errors.d.ts",
+        "default": "./errors.js"
+      },
+      "require": {
+        "types": "./errors.d.cts",
+        "default": "./errors.cjs"
+      },
+      "types": "./errors.d.ts",
+      "default": "./errors.js"
+    },
+    ".": {
+      "import": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      },
+      "require": {
+        "types": "./index.d.cts",
+        "default": "./index.cjs"
+      },
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./logger": {
+      "import": {
+        "types": "./logger.d.ts",
+        "default": "./logger.js"
+      },
+      "require": {
+        "types": "./logger.d.cts",
+        "default": "./logger.cjs"
+      },
+      "types": "./logger.d.ts",
+      "default": "./logger.js"
+    },
+    "./migrator": {
+      "import": {
+        "types": "./migrator.d.ts",
+        "default": "./migrator.js"
+      },
+      "require": {
+        "types": "./migrator.d.cts",
+        "default": "./migrator.cjs"
+      },
+      "types": "./migrator.d.ts",
+      "default": "./migrator.js"
+    },
+    "./operations": {
+      "import": {
+        "types": "./operations.d.ts",
+        "default": "./operations.js"
+      },
+      "require": {
+        "types": "./operations.d.cts",
+        "default": "./operations.cjs"
+      },
+      "types": "./operations.d.ts",
+      "default": "./operations.js"
+    },
+    "./primary-key": {
+      "import": {
+        "types": "./primary-key.d.ts",
+        "default": "./primary-key.js"
+      },
+      "require": {
+        "types": "./primary-key.d.cts",
+        "default": "./primary-key.cjs"
+      },
+      "types": "./primary-key.d.ts",
+      "default": "./primary-key.js"
+    },
+    "./query-promise": {
+      "import": {
+        "types": "./query-promise.d.ts",
+        "default": "./query-promise.js"
+      },
+      "require": {
+        "types": "./query-promise.d.cts",
+        "default": "./query-promise.cjs"
+      },
+      "types": "./query-promise.d.ts",
+      "default": "./query-promise.js"
+    },
+    "./relations": {
+      "import": {
+        "types": "./relations.d.ts",
+        "default": "./relations.js"
+      },
+      "require": {
+        "types": "./relations.d.cts",
+        "default": "./relations.cjs"
+      },
+      "types": "./relations.d.ts",
+      "default": "./relations.js"
+    },
+    "./runnable-query": {
+      "import": {
+        "types": "./runnable-query.d.ts",
+        "default": "./runnable-query.js"
+      },
+      "require": {
+        "types": "./runnable-query.d.cts",
+        "default": "./runnable-query.cjs"
+      },
+      "types": "./runnable-query.d.ts",
+      "default": "./runnable-query.js"
+    },
+    "./selection-proxy": {
+      "import": {
+        "types": "./selection-proxy.d.ts",
+        "default": "./selection-proxy.js"
+      },
+      "require": {
+        "types": "./selection-proxy.d.cts",
+        "default": "./selection-proxy.cjs"
+      },
+      "types": "./selection-proxy.d.ts",
+      "default": "./selection-proxy.js"
+    },
+    "./session": {
+      "import": {
+        "types": "./session.d.ts",
+        "default": "./session.js"
+      },
+      "require": {
+        "types": "./session.d.cts",
+        "default": "./session.cjs"
+      },
+      "types": "./session.d.ts",
+      "default": "./session.js"
+    },
+    "./subquery": {
+      "import": {
+        "types": "./subquery.d.ts",
+        "default": "./subquery.js"
+      },
+      "require": {
+        "types": "./subquery.d.cts",
+        "default": "./subquery.cjs"
+      },
+      "types": "./subquery.d.ts",
+      "default": "./subquery.js"
+    },
+    "./table": {
+      "import": {
+        "types": "./table.d.ts",
+        "default": "./table.js"
+      },
+      "require": {
+        "types": "./table.d.cts",
+        "default": "./table.cjs"
+      },
+      "types": "./table.d.ts",
+      "default": "./table.js"
+    },
+    "./table.utils": {
+      "import": {
+        "types": "./table.utils.d.ts",
+        "default": "./table.utils.js"
+      },
+      "require": {
+        "types": "./table.utils.d.cts",
+        "default": "./table.utils.cjs"
+      },
+      "types": "./table.utils.d.ts",
+      "default": "./table.utils.js"
+    },
+    "./tracing-utils": {
+      "import": {
+        "types": "./tracing-utils.d.ts",
+        "default": "./tracing-utils.js"
+      },
+      "require": {
+        "types": "./tracing-utils.d.cts",
+        "default": "./tracing-utils.cjs"
+      },
+      "types": "./tracing-utils.d.ts",
+      "default": "./tracing-utils.js"
+    },
+    "./tracing": {
+      "import": {
+        "types": "./tracing.d.ts",
+        "default": "./tracing.js"
+      },
+      "require": {
+        "types": "./tracing.d.cts",
+        "default": "./tracing.cjs"
+      },
+      "types": "./tracing.d.ts",
+      "default": "./tracing.js"
+    },
+    "./utils": {
+      "import": {
+        "types": "./utils.d.ts",
+        "default": "./utils.js"
+      },
+      "require": {
+        "types": "./utils.d.cts",
+        "default": "./utils.cjs"
+      },
+      "types": "./utils.d.ts",
+      "default": "./utils.js"
+    },
+    "./version": {
+      "import": {
+        "types": "./version.d.ts",
+        "default": "./version.js"
+      },
+      "require": {
+        "types": "./version.d.cts",
+        "default": "./version.cjs"
+      },
+      "types": "./version.d.ts",
+      "default": "./version.js"
+    },
+    "./view-common": {
+      "import": {
+        "types": "./view-common.d.ts",
+        "default": "./view-common.js"
+      },
+      "require": {
+        "types": "./view-common.d.cts",
+        "default": "./view-common.cjs"
+      },
+      "types": "./view-common.d.ts",
+      "default": "./view-common.js"
+    },
+    "./better-sqlite3/driver": {
+      "import": {
+        "types": "./better-sqlite3/driver.d.ts",
+        "default": "./better-sqlite3/driver.js"
+      },
+      "require": {
+        "types": "./better-sqlite3/driver.d.cts",
+        "default": "./better-sqlite3/driver.cjs"
+      },
+      "types": "./better-sqlite3/driver.d.ts",
+      "default": "./better-sqlite3/driver.js"
+    },
+    "./better-sqlite3": {
+      "import": {
+        "types": "./better-sqlite3/index.d.ts",
+        "default": "./better-sqlite3/index.js"
+      },
+      "require": {
+        "types": "./better-sqlite3/index.d.cts",
+        "default": "./better-sqlite3/index.cjs"
+      },
+      "types": "./better-sqlite3/index.d.ts",
+      "default": "./better-sqlite3/index.js"
+    },
+    "./better-sqlite3/migrator": {
+      "import": {
+        "types": "./better-sqlite3/migrator.d.ts",
+        "default": "./better-sqlite3/migrator.js"
+      },
+      "require": {
+        "types": "./better-sqlite3/migrator.d.cts",
+        "default": "./better-sqlite3/migrator.cjs"
+      },
+      "types": "./better-sqlite3/migrator.d.ts",
+      "default": "./better-sqlite3/migrator.js"
+    },
+    "./better-sqlite3/session": {
+      "import": {
+        "types": "./better-sqlite3/session.d.ts",
+        "default": "./better-sqlite3/session.js"
+      },
+      "require": {
+        "types": "./better-sqlite3/session.d.cts",
+        "default": "./better-sqlite3/session.cjs"
+      },
+      "types": "./better-sqlite3/session.d.ts",
+      "default": "./better-sqlite3/session.js"
+    },
+    "./bun-sql/driver": {
+      "import": {
+        "types": "./bun-sql/driver.d.ts",
+        "default": "./bun-sql/driver.js"
+      },
+      "require": {
+        "types": "./bun-sql/driver.d.cts",
+        "default": "./bun-sql/driver.cjs"
+      },
+      "types": "./bun-sql/driver.d.ts",
+      "default": "./bun-sql/driver.js"
+    },
+    "./bun-sql": {
+      "import": {
+        "types": "./bun-sql/index.d.ts",
+        "default": "./bun-sql/index.js"
+      },
+      "require": {
+        "types": "./bun-sql/index.d.cts",
+        "default": "./bun-sql/index.cjs"
+      },
+      "types": "./bun-sql/index.d.ts",
+      "default": "./bun-sql/index.js"
+    },
+    "./bun-sql/migrator": {
+      "import": {
+        "types": "./bun-sql/migrator.d.ts",
+        "default": "./bun-sql/migrator.js"
+      },
+      "require": {
+        "types": "./bun-sql/migrator.d.cts",
+        "default": "./bun-sql/migrator.cjs"
+      },
+      "types": "./bun-sql/migrator.d.ts",
+      "default": "./bun-sql/migrator.js"
+    },
+    "./bun-sql/session": {
+      "import": {
+        "types": "./bun-sql/session.d.ts",
+        "default": "./bun-sql/session.js"
+      },
+      "require": {
+        "types": "./bun-sql/session.d.cts",
+        "default": "./bun-sql/session.cjs"
+      },
+      "types": "./bun-sql/session.d.ts",
+      "default": "./bun-sql/session.js"
+    },
+    "./bun-sqlite/driver": {
+      "import": {
+        "types": "./bun-sqlite/driver.d.ts",
+        "default": "./bun-sqlite/driver.js"
+      },
+      "require": {
+        "types": "./bun-sqlite/driver.d.cts",
+        "default": "./bun-sqlite/driver.cjs"
+      },
+      "types": "./bun-sqlite/driver.d.ts",
+      "default": "./bun-sqlite/driver.js"
+    },
+    "./bun-sqlite": {
+      "import": {
+        "types": "./bun-sqlite/index.d.ts",
+        "default": "./bun-sqlite/index.js"
+      },
+      "require": {
+        "types": "./bun-sqlite/index.d.cts",
+        "default": "./bun-sqlite/index.cjs"
+      },
+      "types": "./bun-sqlite/index.d.ts",
+      "default": "./bun-sqlite/index.js"
+    },
+    "./bun-sqlite/migrator": {
+      "import": {
+        "types": "./bun-sqlite/migrator.d.ts",
+        "default": "./bun-sqlite/migrator.js"
+      },
+      "require": {
+        "types": "./bun-sqlite/migrator.d.cts",
+        "default": "./bun-sqlite/migrator.cjs"
+      },
+      "types": "./bun-sqlite/migrator.d.ts",
+      "default": "./bun-sqlite/migrator.js"
+    },
+    "./bun-sqlite/session": {
+      "import": {
+        "types": "./bun-sqlite/session.d.ts",
+        "default": "./bun-sqlite/session.js"
+      },
+      "require": {
+        "types": "./bun-sqlite/session.d.cts",
+        "default": "./bun-sqlite/session.cjs"
+      },
+      "types": "./bun-sqlite/session.d.ts",
+      "default": "./bun-sqlite/session.js"
+    },
+    "./d1/driver": {
+      "import": {
+        "types": "./d1/driver.d.ts",
+        "default": "./d1/driver.js"
+      },
+      "require": {
+        "types": "./d1/driver.d.cts",
+        "default": "./d1/driver.cjs"
+      },
+      "types": "./d1/driver.d.ts",
+      "default": "./d1/driver.js"
+    },
+    "./d1": {
+      "import": {
+        "types": "./d1/index.d.ts",
+        "default": "./d1/index.js"
+      },
+      "require": {
+        "types": "./d1/index.d.cts",
+        "default": "./d1/index.cjs"
+      },
+      "types": "./d1/index.d.ts",
+      "default": "./d1/index.js"
+    },
+    "./d1/migrator": {
+      "import": {
+        "types": "./d1/migrator.d.ts",
+        "default": "./d1/migrator.js"
+      },
+      "require": {
+        "types": "./d1/migrator.d.cts",
+        "default": "./d1/migrator.cjs"
+      },
+      "types": "./d1/migrator.d.ts",
+      "default": "./d1/migrator.js"
+    },
+    "./d1/session": {
+      "import": {
+        "types": "./d1/session.d.ts",
+        "default": "./d1/session.js"
+      },
+      "require": {
+        "types": "./d1/session.d.cts",
+        "default": "./d1/session.cjs"
+      },
+      "types": "./d1/session.d.ts",
+      "default": "./d1/session.js"
+    },
+    "./durable-sqlite/driver": {
+      "import": {
+        "types": "./durable-sqlite/driver.d.ts",
+        "default": "./durable-sqlite/driver.js"
+      },
+      "require": {
+        "types": "./durable-sqlite/driver.d.cts",
+        "default": "./durable-sqlite/driver.cjs"
+      },
+      "types": "./durable-sqlite/driver.d.ts",
+      "default": "./durable-sqlite/driver.js"
+    },
+    "./durable-sqlite": {
+      "import": {
+        "types": "./durable-sqlite/index.d.ts",
+        "default": "./durable-sqlite/index.js"
+      },
+      "require": {
+        "types": "./durable-sqlite/index.d.cts",
+        "default": "./durable-sqlite/index.cjs"
+      },
+      "types": "./durable-sqlite/index.d.ts",
+      "default": "./durable-sqlite/index.js"
+    },
+    "./durable-sqlite/migrator": {
+      "import": {
+        "types": "./durable-sqlite/migrator.d.ts",
+        "default": "./durable-sqlite/migrator.js"
+      },
+      "require": {
+        "types": "./durable-sqlite/migrator.d.cts",
+        "default": "./durable-sqlite/migrator.cjs"
+      },
+      "types": "./durable-sqlite/migrator.d.ts",
+      "default": "./durable-sqlite/migrator.js"
+    },
+    "./durable-sqlite/session": {
+      "import": {
+        "types": "./durable-sqlite/session.d.ts",
+        "default": "./durable-sqlite/session.js"
+      },
+      "require": {
+        "types": "./durable-sqlite/session.d.cts",
+        "default": "./durable-sqlite/session.cjs"
+      },
+      "types": "./durable-sqlite/session.d.ts",
+      "default": "./durable-sqlite/session.js"
+    },
+    "./expo-sqlite/driver": {
+      "import": {
+        "types": "./expo-sqlite/driver.d.ts",
+        "default": "./expo-sqlite/driver.js"
+      },
+      "require": {
+        "types": "./expo-sqlite/driver.d.cts",
+        "default": "./expo-sqlite/driver.cjs"
+      },
+      "types": "./expo-sqlite/driver.d.ts",
+      "default": "./expo-sqlite/driver.js"
+    },
+    "./expo-sqlite": {
+      "import": {
+        "types": "./expo-sqlite/index.d.ts",
+        "default": "./expo-sqlite/index.js"
+      },
+      "require": {
+        "types": "./expo-sqlite/index.d.cts",
+        "default": "./expo-sqlite/index.cjs"
+      },
+      "types": "./expo-sqlite/index.d.ts",
+      "default": "./expo-sqlite/index.js"
+    },
+    "./expo-sqlite/migrator": {
+      "import": {
+        "types": "./expo-sqlite/migrator.d.ts",
+        "default": "./expo-sqlite/migrator.js"
+      },
+      "require": {
+        "types": "./expo-sqlite/migrator.d.cts",
+        "default": "./expo-sqlite/migrator.cjs"
+      },
+      "types": "./expo-sqlite/migrator.d.ts",
+      "default": "./expo-sqlite/migrator.js"
+    },
+    "./expo-sqlite/query": {
+      "import": {
+        "types": "./expo-sqlite/query.d.ts",
+        "default": "./expo-sqlite/query.js"
+      },
+      "require": {
+        "types": "./expo-sqlite/query.d.cts",
+        "default": "./expo-sqlite/query.cjs"
+      },
+      "types": "./expo-sqlite/query.d.ts",
+      "default": "./expo-sqlite/query.js"
+    },
+    "./expo-sqlite/session": {
+      "import": {
+        "types": "./expo-sqlite/session.d.ts",
+        "default": "./expo-sqlite/session.js"
+      },
+      "require": {
+        "types": "./expo-sqlite/session.d.cts",
+        "default": "./expo-sqlite/session.cjs"
+      },
+      "types": "./expo-sqlite/session.d.ts",
+      "default": "./expo-sqlite/session.js"
+    },
+    "./gel/driver": {
+      "import": {
+        "types": "./gel/driver.d.ts",
+        "default": "./gel/driver.js"
+      },
+      "require": {
+        "types": "./gel/driver.d.cts",
+        "default": "./gel/driver.cjs"
+      },
+      "types": "./gel/driver.d.ts",
+      "default": "./gel/driver.js"
+    },
+    "./gel": {
+      "import": {
+        "types": "./gel/index.d.ts",
+        "default": "./gel/index.js"
+      },
+      "require": {
+        "types": "./gel/index.d.cts",
+        "default": "./gel/index.cjs"
+      },
+      "types": "./gel/index.d.ts",
+      "default": "./gel/index.js"
+    },
+    "./gel/migrator": {
+      "import": {
+        "types": "./gel/migrator.d.ts",
+        "default": "./gel/migrator.js"
+      },
+      "require": {
+        "types": "./gel/migrator.d.cts",
+        "default": "./gel/migrator.cjs"
+      },
+      "types": "./gel/migrator.d.ts",
+      "default": "./gel/migrator.js"
+    },
+    "./gel/session": {
+      "import": {
+        "types": "./gel/session.d.ts",
+        "default": "./gel/session.js"
+      },
+      "require": {
+        "types": "./gel/session.d.cts",
+        "default": "./gel/session.cjs"
+      },
+      "types": "./gel/session.d.ts",
+      "default": "./gel/session.js"
+    },
+    "./gel-core/alias": {
+      "import": {
+        "types": "./gel-core/alias.d.ts",
+        "default": "./gel-core/alias.js"
+      },
+      "require": {
+        "types": "./gel-core/alias.d.cts",
+        "default": "./gel-core/alias.cjs"
+      },
+      "types": "./gel-core/alias.d.ts",
+      "default": "./gel-core/alias.js"
+    },
+    "./gel-core/checks": {
+      "import": {
+        "types": "./gel-core/checks.d.ts",
+        "default": "./gel-core/checks.js"
+      },
+      "require": {
+        "types": "./gel-core/checks.d.cts",
+        "default": "./gel-core/checks.cjs"
+      },
+      "types": "./gel-core/checks.d.ts",
+      "default": "./gel-core/checks.js"
+    },
+    "./gel-core/db": {
+      "import": {
+        "types": "./gel-core/db.d.ts",
+        "default": "./gel-core/db.js"
+      },
+      "require": {
+        "types": "./gel-core/db.d.cts",
+        "default": "./gel-core/db.cjs"
+      },
+      "types": "./gel-core/db.d.ts",
+      "default": "./gel-core/db.js"
+    },
+    "./gel-core/dialect": {
+      "import": {
+        "types": "./gel-core/dialect.d.ts",
+        "default": "./gel-core/dialect.js"
+      },
+      "require": {
+        "types": "./gel-core/dialect.d.cts",
+        "default": "./gel-core/dialect.cjs"
+      },
+      "types": "./gel-core/dialect.d.ts",
+      "default": "./gel-core/dialect.js"
+    },
+    "./gel-core/expressions": {
+      "import": {
+        "types": "./gel-core/expressions.d.ts",
+        "default": "./gel-core/expressions.js"
+      },
+      "require": {
+        "types": "./gel-core/expressions.d.cts",
+        "default": "./gel-core/expressions.cjs"
+      },
+      "types": "./gel-core/expressions.d.ts",
+      "default": "./gel-core/expressions.js"
+    },
+    "./gel-core/foreign-keys": {
+      "import": {
+        "types": "./gel-core/foreign-keys.d.ts",
+        "default": "./gel-core/foreign-keys.js"
+      },
+      "require": {
+        "types": "./gel-core/foreign-keys.d.cts",
+        "default": "./gel-core/foreign-keys.cjs"
+      },
+      "types": "./gel-core/foreign-keys.d.ts",
+      "default": "./gel-core/foreign-keys.js"
+    },
+    "./gel-core": {
+      "import": {
+        "types": "./gel-core/index.d.ts",
+        "default": "./gel-core/index.js"
+      },
+      "require": {
+        "types": "./gel-core/index.d.cts",
+        "default": "./gel-core/index.cjs"
+      },
+      "types": "./gel-core/index.d.ts",
+      "default": "./gel-core/index.js"
+    },
+    "./gel-core/indexes": {
+      "import": {
+        "types": "./gel-core/indexes.
