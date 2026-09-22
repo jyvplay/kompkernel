@@ -52,6 +52,16 @@ import { rosettaEncode } from './rosetta';
 import { kappaEncode } from './kappa';
 import { phraseEncode } from './phrase';
 import { tauEncode } from './tau';
+import { astraeaEncode } from './astraea';
+import { phoenixEncode } from './phoenix';
+import { valkyrieEncode } from './valkyrie';
+import { valenceEncode } from './valence';
+import { aeonEncode } from './aeon';
+import { hyperionEncode } from './hyperion';
+import { astralEncode } from './astral';
+import { solarisEncode } from './solaris';
+import { tensorEncode } from './tensor';
+import { lumenEncode } from './lumen';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -119,6 +129,106 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = veritasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'lumen',
+      label: '💡 LUMEN-L1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = lumenEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'tensor',
+      label: '📐 TENSOR-T1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = tensorEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'astral',
+      label: '🌌 ASTRAL-A1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = astralEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'solaris',
+      label: '☀️ SOLARIS-S1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = solarisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'aeon',
+      label: '♾ AEON-A1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = aeonEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'hyperion',
+      label: '☀ HYPERION-H1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = hyperionEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'phoenix',
+      label: '𓅂 PHOENIX-P1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = phoenixEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'valkyrie',
+      label: '🛡️ VALKYRIE-V1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = valkyrieEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'valence',
+      label: '⚛ VALENCE-V1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = valenceEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'astraea',
+      label: '🌌 ASTRAEA-A2',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = astraeaEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },

@@ -1,3 +1,6 @@
+/**
+ * LUMEN-L1 — Lossless In-Context Legend & Phrase Extraction Codec
+ */
 import { countTokens, type EncodingName } from './bpe';
 import { ideographPool } from './strata';
 

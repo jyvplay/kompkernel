@@ -100,6 +100,9 @@ const EN_OPS: readonly string[] = [
   ' committee deliberates',
   ' second breakfast',
   ' institutional precedent',
+  ' retry 3x, never log secrets.',
+  ' fix the flaky test',
+  ' inspect the suite and patch the race',
 ];
 /** Standard Japanese IT katakana loanwords + core report vocabulary. */
 const JP: readonly string[] = [
