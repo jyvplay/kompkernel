@@ -210,6 +210,13 @@ import { eidolonProject } from './eidolon';
 import { ltpProject } from './ltp';
 import { latticeEncode, latticeDecode, latticePool, LATTICE_SYSTEM_PROMPT } from './lattice';
 import { strandEncode, strandDecode, strandDynPool, STRAND_SYSTEM_PROMPT } from './strand';
+import { astralEncode, astralDecode, ASTRAL_SENTINEL, ASTRAL_LITERAL } from './astral';
+import { aeonEncode, aeonDecode, AEON_SENTINEL, AEON_LITERAL } from './aeon';
+import { phoenixEncode, phoenixDecode, PHOENIX_SENTINEL, PHOENIX_LITERAL } from './phoenix';
+import { valkyrieEncode, valkyrieDecode, VALKYRIE_SENTINEL, VALKYRIE_LITERAL } from './valkyrie';
+import { solarisEncode, solarisDecode, SOLARIS_SENTINEL, SOLARIS_LITERAL } from './solaris';
+import { hyperionEncode, hyperionDecode, HYPERION_SENTINEL, HYPERION_LITERAL } from './hyperion';
+import { valenceEncode, valenceDecode } from './valence';
 
 /* --------------------------- versioned static tables ----------------------- */
 
@@ -3419,6 +3426,13 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   // TAU member lane: τ\n / ττ\n sentinels dispatch to its decoder.
   if (wire.startsWith(TAU_SENTINEL) || wire.startsWith(TAU_LITERAL)) return tauDecode(wire, enc);
   if (wire.startsWith(BANYAN_SENTINEL) || wire.startsWith(BANYAN_LITERAL)) return banyanDecode(wire);
+  if (wire.startsWith(ASTRAL_SENTINEL + '\n') || wire.startsWith(ASTRAL_LITERAL)) return astralDecode(wire, enc);
+  if (wire.startsWith(AEON_SENTINEL + '\n') || wire.startsWith(AEON_LITERAL)) return aeonDecode(wire, enc);
+  if (wire.startsWith(PHOENIX_SENTINEL + '\n') || wire.startsWith(PHOENIX_LITERAL)) return phoenixDecode(wire, enc);
+  if (wire.startsWith(VALKYRIE_SENTINEL + '\n') || wire.startsWith(VALKYRIE_LITERAL)) return valkyrieDecode(wire, enc);
+  if (wire.startsWith(SOLARIS_SENTINEL + '\n') || wire.startsWith(SOLARIS_LITERAL)) return solarisDecode(wire, enc);
+  if (wire.startsWith(HYPERION_SENTINEL + '\n') || wire.startsWith(HYPERION_LITERAL)) return hyperionDecode(wire, enc);
+  if (wire.startsWith('[V1]\n') || wire.startsWith('[V1L]\n')) return valenceDecode(wire);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
   if (wire.includes('⟐')) return helixDecode(wire);
@@ -3713,6 +3727,62 @@ async function rosettaEncodeUncached(
     const st = strandEncode(text, enc);
     if (st.exact && st.decoded === text && st.mode === 'strand') {
       admit('strand', st.wire, () => strandDecode(st.wire, enc), ['ST']);
+    }
+  }
+
+  // ASTRAL-A1 member — dynamic structural collocation contraction
+  {
+    const ast = astralEncode(text, enc);
+    if (ast.exact && ast.decoded === text && ast.substitutions > 0) {
+      admit('astral', ast.wire, () => astralDecode(ast.wire, enc), ['AST']);
+    }
+  }
+
+  // AEON-A1 member — dynamic attractor frame delta quotient encoding
+  {
+    const ae = aeonEncode(text, enc);
+    if (ae.exact && ae.decoded === text && ae.attractors > 0) {
+      admit('aeon', ae.wire, () => aeonDecode(ae.wire, enc), ['AE']);
+    }
+  }
+
+  // PHOENIX-P1 member — poly-disjoint topological grammar motif extraction
+  {
+    const ph = phoenixEncode(text, enc);
+    if (ph.exact && ph.decoded === text && ph.motifs > 0) {
+      admit('phoenix', ph.wire, () => phoenixDecode(ph.wire, enc), ['PH']);
+    }
+  }
+
+  // VALKYRIE-V1 member — vectorized degenerate lattice subgraph contracting
+  {
+    const vk = valkyrieEncode(text, enc);
+    if (vk.exact && vk.decoded === text && vk.subgraphs > 0) {
+      admit('valkyrie', vk.wire, () => valkyrieDecode(vk.wire, enc), ['VK']);
+    }
+  }
+
+  // SOLARIS-S1 member — spectral orthogonal basis polynomial contraction
+  {
+    const sol = solarisEncode(text, enc);
+    if (sol.exact && sol.decoded === text && sol.projections > 0) {
+      admit('solaris', sol.wire, () => solarisDecode(sol.wire, enc), ['SOL']);
+    }
+  }
+
+  // HYPERION-H1 member — hyper-dimensional spectral context contraction
+  {
+    const hyp = hyperionEncode(text, enc);
+    if (hyp.exact && hyp.decoded === text && hyp.orbits > 0) {
+      admit('hyperion', hyp.wire, () => hyperionDecode(hyp.wire, enc), ['HYP']);
+    }
+  }
+
+  // VALENCE-V1 member — Factoradix permutation-rank encoding
+  {
+    const val = valenceEncode(text, enc);
+    if (val.exact && val.decoded === text && val.n >= 3) {
+      admit('valence', val.wire, () => valenceDecode(val.wire), ['VAL']);
     }
   }
 
