@@ -46,6 +46,7 @@ import { latticeEncode } from '@/lib/omega/lattice';
 import { strandEncode } from '@/lib/omega/strand';
 import { phoenixEncode } from '@/lib/omega/phoenix';
 import { valenceEncode } from '@/lib/omega/valence';
+import { astraeaEncode } from '@/lib/omega/astraea';
 
 export interface Row {
   key: string; wireTokens: number; deliveredTokens: number | null;
@@ -107,6 +108,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('strand', () => strandEncode(text, enc));
   await run('phoenix', () => phoenixEncode(text, enc));
   await run('valence', () => valenceEncode(text, enc));
+  await run('astraea', () => astraeaEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));
   await run('mosaic', () => mosaicEncode(text, enc));
   await run('orbit', async () => orbitEncode(text, enc));
