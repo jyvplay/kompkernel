@@ -48,6 +48,7 @@ import { phoenixEncode } from '@/lib/omega/phoenix';
 import { valenceEncode } from '@/lib/omega/valence';
 import { astraeaEncode } from '@/lib/omega/astraea';
 import { polarisEncode } from '@/lib/omega/polaris';
+import { hyperionEncode } from '@/lib/omega/hyperion';
 
 export interface Row {
   key: string; wireTokens: number; deliveredTokens: number | null;
@@ -111,6 +112,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('valence', () => valenceEncode(text, enc));
   await run('astraea', () => astraeaEncode(text, enc));
   await run('polaris', () => polarisEncode(text, enc));
+  await run('hyperion', () => hyperionEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));
   await run('mosaic', () => mosaicEncode(text, enc));
   await run('orbit', async () => orbitEncode(text, enc));
