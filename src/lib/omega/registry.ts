@@ -57,6 +57,7 @@ import { valenceEncode } from './valence';
 import { astraeaEncode } from './astraea';
 import { polarisEncode } from './polaris';
 import { hyperionEncode } from './hyperion';
+import { tensorEncode } from './tensor';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -124,6 +125,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = veritasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'tensor',
+      label: '⊗ TENSOR-T1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = tensorEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
