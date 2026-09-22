@@ -10,14 +10,15 @@
  *     - Multi-turn LLM contexts, logs, and structured prompt outputs frequently contain
  *       repeating multi-token collocations, structured schema fields, and idioms.
  *     - ASTRAEA-A2 induces a minimal Straight-Line Program (SLP) grammar over recurring
- *       character/token n-grams and substitutes them using a single-token Greek &
- *       Cyrillic symbol alphabet (U+0386..U+044F), which are verified 1-token BPE glyphs.
+ *       character/token n-grams (including multi-word phrases, line fragments, and idioms)
+ *       and substitutes them using a single-token Greek & Cyrillic symbol alphabet
+ *       (U+0386..U+044F), which are verified 1-token BPE glyphs.
  *     - Wire format: `Α<rule_count>\n<glyph><phrase>\n...\n<body>` (or `ΑΑ<body>` for literal wrap).
  *     - 100% byte-exact, deterministic, zero-CoT overhead, prompt-native decoding.
  * =============================================================================
  */
 
-import { countTokens, encodeIds, type EncodingName } from './bpe';
+import { countTokens, encodeIds, tokenStrings, type EncodingName } from './bpe';
 
 export const ASTRAEA_SENTINEL = 'Α';
 export const ASTRAEA_LITERAL = 'ΑΑ';
@@ -90,6 +91,44 @@ export function astraeaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   return body;
 }
 
+/**
+ * Mine candidate phrases including multi-word collocations, line fragments, and symbols.
+ */
+function mineCandidatePhrases(text: string, enc: EncodingName): string[] {
+  const candidates = new Set<string>();
+
+  // 1. Line-level phrases
+  const lines = text.split('\n');
+  const lineCounts = new Map<string, number>();
+  for (const line of lines) {
+    if (line.length >= 6) {
+      lineCounts.set(line, (lineCounts.get(line) ?? 0) + 1);
+    }
+  }
+  for (const [line, count] of lineCounts.entries()) {
+    if (count >= 2) candidates.add(line);
+  }
+
+  // 2. Token sliding-window n-grams (2 to 8 tokens)
+  const toks = tokenStrings(text, enc);
+  const n = toks.length;
+  for (let len = 8; len >= 2; len--) {
+    const ngramCounts = new Map<string, number>();
+    for (let i = 0; i + len <= n; i++) {
+      let phrase = '';
+      for (let j = 0; j < len; j++) phrase += toks[i + j].s;
+      if (phrase.length >= 6 && !phrase.includes('\n')) {
+        ngramCounts.set(phrase, (ngramCounts.get(phrase) ?? 0) + 1);
+      }
+    }
+    for (const [phrase, count] of ngramCounts.entries()) {
+      if (count >= 2) candidates.add(phrase);
+    }
+  }
+
+  return Array.from(candidates).sort((a, b) => b.length - a.length);
+}
+
 export function astraeaEncode(text: string, enc: EncodingName = 'o200k_base'): AstraeaResult {
   const inTokens = countTokens(text, enc);
   const identity = (notes: string): AstraeaResult => ({
@@ -127,41 +166,56 @@ export function astraeaEncode(text: string, enc: EncodingName = 'o200k_base'): A
   const freeGlyphs = glyphs.filter((g) => !text.includes(g));
   if (freeGlyphs.length === 0) return identity('no free single-token glyphs');
 
-  /* Mine frequent collocations/ngrams */
-  const matches = Array.from(text.matchAll(/[A-Za-z0-9_.$:/-]{4,}|[^A-Za-z0-9_\s]{2,}/g));
-  const counts = new Map<string, number>();
-  for (const m of matches) {
-    const phrase = m[0];
-    counts.set(phrase, (counts.get(phrase) ?? 0) + 1);
-  }
+  const candidates = mineCandidatePhrases(text, enc);
+  if (candidates.length === 0) return identity('no repeating candidate phrases found');
 
   const rules: AstraeaRule[] = [];
   let currentBody = text;
 
-  const candidatePhrases = Array.from(counts.entries())
-    .filter(([p, count]) => count >= 2 && countTokens(p, enc) >= 2 && !p.includes('\n'))
-    .sort((a, b) => b[0].length * b[1] - a[0].length * a[1]);
+  for (const phrase of candidates) {
+    if (rules.length >= freeGlyphs.length || rules.length >= 24) break;
+    if (!currentBody.includes(phrase)) continue;
 
-  for (const [phrase, count] of candidatePhrases) {
-    if (rules.length >= freeGlyphs.length || rules.length >= 16) break;
+    const occurrences = currentBody.split(phrase).length - 1;
+    if (occurrences < 2) continue;
+
     const glyph = freeGlyphs[rules.length];
     const candidateBody = currentBody.split(phrase).join(glyph);
-    const candidateRules = [...rules, { glyph, phrase, hits: count }];
+    const candidateRules = [...rules, { glyph, phrase, hits: occurrences }];
 
-    const candidateWire = ASTRAEA_SENTINEL + candidateRules.length + '\n' +
-      candidateRules.map((r) => r.glyph + r.phrase).join('\n') + '\n' + candidateBody;
+    const candidateWire =
+      ASTRAEA_SENTINEL +
+      candidateRules.length +
+      '\n' +
+      candidateRules.map((r) => r.glyph + r.phrase).join('\n') +
+      '\n' +
+      candidateBody;
     const candidateTok = countTokens(candidateWire, enc);
 
-    if (candidateTok < countTokens(ASTRAEA_SENTINEL + rules.length + '\n' + rules.map((r) => r.glyph + r.phrase).join('\n') + (rules.length ? '\n' : '') + currentBody, enc) && candidateTok < inTokens) {
+    const currentWire =
+      ASTRAEA_SENTINEL +
+      rules.length +
+      '\n' +
+      rules.map((r) => r.glyph + r.phrase).join('\n') +
+      (rules.length ? '\n' : '') +
+      currentBody;
+    const currentTok = rules.length ? countTokens(currentWire, enc) : inTokens;
+
+    if (candidateTok < currentTok && candidateTok < inTokens) {
       currentBody = candidateBody;
-      rules.push({ glyph, phrase, hits: count });
+      rules.push({ glyph, phrase, hits: occurrences });
     }
   }
 
   if (rules.length === 0) return identity('no positive-gain grammar rules induced');
 
-  const wire = ASTRAEA_SENTINEL + rules.length + '\n' +
-    rules.map((r) => r.glyph + r.phrase).join('\n') + '\n' + currentBody;
+  const wire =
+    ASTRAEA_SENTINEL +
+    rules.length +
+    '\n' +
+    rules.map((r) => r.glyph + r.phrase).join('\n') +
+    '\n' +
+    currentBody;
 
   const decoded = astraeaDecode(wire, enc);
   if (decoded !== text) return identity('guard: ASTRAEA failed byte-verify');
@@ -191,7 +245,10 @@ export const ASTRAEA_SYSTEM_PROMPT = [
 export function astraeaSelfTest(enc: EncodingName = 'o200k_base'): { name: string; pass: boolean; details: string }[] {
   const tests = [
     { name: 'A0 empty', text: '' },
-    { name: 'A1 simple repeat', text: 'user: run step 1 and verify the status ok\nuser: run step 2 and verify the status ok\nuser: run step 3 and verify the status ok\nuser: run step 4 and verify the status ok' },
+    {
+      name: 'A1 simple repeat',
+      text: 'user: run step 1 and verify the status ok\nuser: run step 2 and verify the status ok\nuser: run step 3 and verify the status ok\nuser: run step 4 and verify the status ok',
+    },
     { name: 'A2 sentinel adversary', text: 'ΑΑnot a wire' },
   ];
   return tests.map((t) => {
