@@ -225,6 +225,7 @@ import { valenceEncode, valenceDecode } from './valence';
 import { hypergraphEncode, hypergraphDecode, HYPERGRAPH_HEADER, HYPERGRAPH_LITERAL } from './hypergraph';
 import { synergyEncode, synergyDecode, SYNERGY_HEADER, SYNERGY_LITERAL } from './synergy';
 import { kineticEncode, kineticDecode, KINETIC_HEADER, KINETIC_LITERAL } from './kinetic';
+import { quantumEncode, quantumDecode, QUANTUM_HEADER, QUANTUM_LITERAL } from './quantum';
 
 /* --------------------------- versioned static tables ----------------------- */
 
@@ -3446,6 +3447,7 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   if (wire.startsWith(HYPERGRAPH_HEADER + '\n') || wire.startsWith(HYPERGRAPH_LITERAL)) return hypergraphDecode(wire, enc);
   if (wire.startsWith(SYNERGY_HEADER + '\n') || wire.startsWith(SYNERGY_LITERAL)) return synergyDecode(wire, enc);
   if (wire.startsWith(KINETIC_HEADER + '\n') || wire.startsWith(KINETIC_LITERAL)) return kineticDecode(wire, enc);
+  if (wire.startsWith(QUANTUM_HEADER + '\n') || wire.startsWith(QUANTUM_LITERAL)) return quantumDecode(wire, enc);
   if (wire.startsWith('[V1]\n') || wire.startsWith('[V1L]\n')) return valenceDecode(wire);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
@@ -3625,7 +3627,7 @@ async function rosettaEncodeUncached(
      'Ϧ\n', 'ϦϦ\n', '☀\n', '☀☀\n', '[VK1]\n', '[VK1L]\n', '[POL1]\n', '[POL1L]\n',
      '[POLARIS-P1]\n', '[POLARIS-P1-LITERAL]\n', '[ASTRAEA-A2]\n', '[ASTRAEA-A2-LITERAL]\n',
      '[CHRONOS-Ω]\n', '[CHRONOS-Ω-LITERAL]\n', '[T1]\n', '[T1L]\n', '[LUMEN-L1]\n', '[LUMEN-L1-LITERAL]\n',
-     '[HG2]\n', '[HG2L]\n', '[SYN2]\n', '[SYN2L]\n', '[V1]\n', '[V1L]\n']
+     '[HG2]\n', '[HG2L]\n', '[SYN2]\n', '[SYN2L]\n', '[KIN8]\n', '[KIN8L]\n', '[Q9]\n', '[Q9L]\n', '[V1]\n', '[V1L]\n']
       .some((s) => text.startsWith(s));
   if (!ambiguousIdentity) admit('identity', text, () => text);
 
@@ -3857,6 +3859,14 @@ async function rosettaEncodeUncached(
     const kin = kineticEncode(text, enc);
     if (kin.exact && kin.decoded === text && kin.flowsCount > 0) {
       admit('kinetic', kin.wire, () => kineticDecode(kin.wire, enc), ['KIN8']);
+    }
+  }
+
+  // QUANTUM-Q9 member — quantum subspace canonical decomposition & BPE-boundary realignment
+  {
+    const qua = quantumEncode(text, enc);
+    if (qua.exact && qua.decoded === text && qua.subspacesCount > 0) {
+      admit('quantum', qua.wire, () => quantumDecode(qua.wire, enc), ['Q9']);
     }
   }
 
