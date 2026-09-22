@@ -218,6 +218,7 @@ import { solarisEncode, solarisDecode, SOLARIS_SENTINEL, SOLARIS_LITERAL } from 
 import { hyperionEncode, hyperionDecode, HYPERION_SENTINEL, HYPERION_LITERAL } from './hyperion';
 import { polarisEncode, polarisDecode, POLARIS_HEADER, POLARIS_LITERAL } from './polaris';
 import { astraeaEncode, astraeaDecode, ASTRAEA_HEADER, ASTRAEA_LITERAL } from './astraea';
+import { chronosEncode, chronosDecode, CHRONOS_HEADER, CHRONOS_LITERAL } from './chronos';
 import { valenceEncode, valenceDecode } from './valence';
 
 /* --------------------------- versioned static tables ----------------------- */
@@ -2089,9 +2090,6 @@ function expandBody(
               continue;
             }
           }
-          out += s.slice(i, payloadEnd + 1);
-          i = payloadEnd + 1;
-          continue;
         }
       }
       // G — symbolic tile row: optional count then a pattern. Each pattern
@@ -3439,6 +3437,7 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   if (wire.startsWith(HYPERION_SENTINEL + '\n') || wire.startsWith(HYPERION_LITERAL)) return hyperionDecode(wire, enc);
   if (wire.startsWith(POLARIS_HEADER + '\n') || wire.startsWith(POLARIS_LITERAL)) return polarisDecode(wire, enc);
   if (wire.startsWith(ASTRAEA_HEADER + '\n') || wire.startsWith(ASTRAEA_LITERAL)) return astraeaDecode(wire, enc);
+  if (wire.startsWith(CHRONOS_HEADER + '\n') || wire.startsWith(CHRONOS_LITERAL)) return chronosDecode(wire, enc);
   if (wire.startsWith('[V1]\n') || wire.startsWith('[V1L]\n')) return valenceDecode(wire);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
@@ -3798,6 +3797,14 @@ async function rosettaEncodeUncached(
     const ast2 = astraeaEncode(text, enc);
     if (ast2.exact && ast2.decoded === text && ast2.rulesCount > 0) {
       admit('astraea', ast2.wire, () => astraeaDecode(ast2.wire, enc), ['AST2']);
+    }
+  }
+
+  // CHRONOS-Ω member — dynamic phase-space temporal difference delta quotient
+  {
+    const chr = chronosEncode(text, enc);
+    if (chr.exact && chr.decoded === text && chr.deltasCount > 0) {
+      admit('chronos', chr.wire, () => chronosDecode(chr.wire, enc), ['CHR']);
     }
   }
 

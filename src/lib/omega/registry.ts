@@ -61,6 +61,8 @@ import { solarisEncode } from './solaris';
 import { hyperionEncode } from './hyperion';
 import { polarisEncode } from './polaris';
 import { astraeaEncode } from './astraea';
+import { chronosEncode } from './chronos';
+export { evaluateAllCodecsDynamically, type SynthesisSummary, type CodecEvaluationRun } from './codec-synthesis';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -128,6 +130,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = veritasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'chronos',
+      label: '⏳ CHRONOS-Ω',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = chronosEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
