@@ -61,20 +61,28 @@ export function computeLehmerRank(perm: number[]): bigint {
   return rank;
 }
 
-/** Uncompute Factoradix rank R back into the permutation pi of length N. */
+/** Uncompute Factoradix rank R back into the permutation pi of length N. Safe bounds check included. */
 export function invertLehmerRank(n: number, rank: bigint): number[] {
   const factorials: bigint[] = [1n];
   for (let i = 1; i <= n; i++) {
     factorials.push(factorials[i - 1] * BigInt(i));
   }
 
+  const identityPerm = Array.from({ length: n }, (_, i) => i);
+  if (n < 1 || rank < 0n || rank >= factorials[n]) {
+    return identityPerm;
+  }
+
   const perm: number[] = [];
-  const items = Array.from({ length: n }, (_, i) => i);
+  const items = [...identityPerm];
   let rem = rank;
 
   for (let i = 0; i < n; i++) {
     const fact = factorials[n - 1 - i];
     const idx = Number(rem / fact);
+    if (!Number.isSafeInteger(idx) || idx < 0 || idx >= items.length) {
+      return identityPerm;
+    }
     rem = rem % fact;
     perm.push(items[idx]);
     items.splice(idx, 1);
