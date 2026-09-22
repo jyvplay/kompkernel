@@ -54,6 +54,8 @@ import { hyperionEncode } from '@/lib/omega/hyperion';
 import { polarisEncode } from '@/lib/omega/polaris';
 import { astraeaEncode } from '@/lib/omega/astraea';
 import { chronosEncode } from '@/lib/omega/chronos';
+import { tensorEncode } from '@/lib/omega/tensor';
+import { lumenEncode } from '@/lib/omega/lumen';
 
 export interface Row {
   key: string; wireTokens: number; deliveredTokens: number | null;
@@ -121,6 +123,8 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('polaris', () => polarisEncode(text, enc));
   await run('astraea', () => astraeaEncode(text, enc));
   await run('chronos', () => chronosEncode(text, enc));
+  await run('tensor', () => tensorEncode(text, enc));
+  await run('lumen', () => lumenEncode(text, enc));
   await run('lattice', () => latticeEncode(text, enc));
   await run('strand', () => strandEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));

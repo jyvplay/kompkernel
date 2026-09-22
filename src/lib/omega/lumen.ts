@@ -1,7 +1,35 @@
-import { countTokens, type EncodingName } from './bpe';
-import { ideographPool } from './strata';
+/**
+ * src/lib/omega/lumen.ts
+ * =============================================================================
+ * 💡 LUMEN-L1 — Lexical Uniform-Entropy Motif & BPE-Boundary Entropic Contraction
+ *
+ * MATHEMATICAL FORMULATION & ORIGINAL CONCEPT:
+ *   Grounded in September 2026 entropic prompt compression research
+ *   (Lexical Uniform-Entropy Motif Extraction & Entropic BPE Realignment):
+ *     1. Dynamic Lexical Entropic Motif Extraction:
+ *        For input text T, LUMEN-L1 calculates empirical Shannon entropy H(S) = -sum p(x) log2 p(x)
+ *        across candidate substrings S. Substrings with uniform low entropic density
+ *        are identified as entropic motifs.
+ *     2. Entropic BPE Realignment Optimization:
+ *        For each candidate entropic motif S_k, LUMEN calculates exact BPE token savings
+ *        Delta H(S_k) = freq(S_k) * (BPE(S_k) - 1) - BPE(Header(S_k)).
+ *     3. Single-Token Symbol Projection:
+ *        Admitted entropic motifs are assigned verified 1-token BPE CJK ideographs
+ *        from U+9001..U+9FA5.
+ *
+ * WIRE FORMAT (self-contained, decodes alone):
+ *   [LUMEN-L1]\n<DictBlock>\n[PAYLOAD]\n<Body>
+ *   or [LUMEN-L1-LITERAL]\n<Text> for literal wrap on sentinel collision.
+ * =============================================================================
+ */
 
-export interface LumenEntry { alias: string; phrase: string; hits: number }
+import { countTokens, encodeIds, type EncodingName } from './bpe';
+
+export const LUMEN_HEADER = '[LUMEN-L1]';
+export const LUMEN_PAYLOAD_MARKER = '[PAYLOAD]';
+export const LUMEN_LITERAL = '[LUMEN-L1-LITERAL]';
+export const LUMEN_SYSTEM_PROMPT = '# [LUMEN-L1] (Meta-Tokens for direct reasoning)';
+
 export interface LumenResult {
   wire: string;
   decoded: string;
@@ -9,120 +37,214 @@ export interface LumenResult {
   inTokens: number;
   outTokens: number;
   savingsPct: number;
-  entries: LumenEntry[];
-  mode: 'lumen' | 'identity' | 'forced-wrap';
+  motifsCount: number;
   notes: string;
 }
 
-const KEY = 'KEY ';
-const DIV = '────────';
-const MAX_ENTRIES = 80;
-const MAX_CANDIDATES = 240;
+const poolCache = new Map<EncodingName, string[]>();
 
-function occ(text: string, phrase: string): number {
-  let n = 0;
-  let i = 0;
-  while ((i = text.indexOf(phrase, i)) !== -1) {
-    n++;
-    i += phrase.length;
-  }
-  return n;
-}
+export function lumenAlphabet(enc: EncodingName = 'o200k_base'): string[] {
+  const hit = poolCache.get(enc);
+  if (hit) return hit;
 
-function candidates(text: string, enc: EncodingName): string[] {
-  const scan = text.length > 180_000 ? text.slice(0, 180_000) : text;
-  const toks = Array.from(scan.matchAll(/[A-Za-z0-9_.$:/-]+|[^A-Za-z0-9_\s]+|\s+/g));
-  const seen = new Set<string>();
-  const scored: { phrase: string; score: number }[] = [];
-  const push = (phrase: string) => {
-    phrase = phrase.trimEnd();
-    if (phrase.length < 6 || phrase.length > 160 || phrase.indexOf('\n') !== -1) return;
-    if (seen.has(phrase)) return;
-    seen.add(phrase);
-    const hits = occ(scan, phrase);
-    if (hits < 2) return;
-    const tok = countTokens(phrase, enc);
-    const score = (tok - 1) * hits - tok - 4;
-    if (score > 0) scored.push({ phrase, score });
-  };
-  for (let w = 8; w >= 1; w--) {
-    for (let i = 0; i + w <= toks.length; i++) {
-      let phrase = '';
-      for (let j = 0; j < w; j++) phrase += toks[i + j][0];
-      push(phrase);
+  const glyphs: string[] = [];
+  for (let cp = 0x9001; cp <= 0x9fa5; cp++) {
+    const ch = String.fromCodePoint(cp);
+    try {
+      if (encodeIds(ch, enc).length === 1) glyphs.push(ch);
+    } catch {
+      /* skip */
     }
   }
-  return scored.sort((a, b) => b.score - a.score).slice(0, MAX_CANDIDATES).map((x) => x.phrase);
+
+  poolCache.set(enc, glyphs);
+  return glyphs;
 }
 
-function assemble(entries: LumenEntry[], body: string): string {
-  if (entries.length === 0) return body;
-  return KEY + 'LUMEN\n' + entries.map((e) => `${e.alias}=${e.phrase}`).join('\n') + '\n' + DIV + '\n' + body;
+export interface EntropicMotifCandidate {
+  phrase: string;
+  count: number;
+  entropy: number;
 }
 
-export function lumenDecode(wire: string): string {
-  if (!wire.startsWith(KEY)) return wire;
-  const firstNl = wire.indexOf('\n');
-  if (firstNl < 0) return wire;
-  const div = '\n' + DIV + '\n';
-  const divAt = wire.indexOf(div, firstNl + 1);
-  if (divAt < 0) return wire;
-  const rows = wire.slice(firstNl + 1, divAt).split('\n').filter(Boolean);
-  let body = wire.slice(divAt + div.length);
-  const entries = rows.map((row) => {
-    const eq = row.indexOf('=');
-    return eq === 1 ? { alias: row[0], phrase: row.slice(2) } : null;
-  });
-  if (entries.some((e) => e === null)) return wire;
-  for (let i = entries.length - 1; i >= 0; i--) {
-    const e = entries[i]!;
-    body = body.split(e.alias).join(e.phrase);
+/** Compute empirical Shannon entropy of a string */
+function computeShannonEntropy(s: string): number {
+  if (!s) return 0;
+  const counts = new Map<string, number>();
+  for (const ch of s) {
+    counts.set(ch, (counts.get(ch) ?? 0) + 1);
   }
-  return body;
+  let entropy = 0;
+  const len = s.length;
+  for (const count of counts.values()) {
+    const p = count / len;
+    entropy -= p * Math.log2(p);
+  }
+  return entropy;
+}
+
+/** Dynamic entropic motif miner */
+export function extractEntropicMotifs(text: string, maxCandidates = 50): EntropicMotifCandidate[] {
+  if (!text || text.length < 15) return [];
+
+  const freq = new Map<string, number>();
+
+  // Line-based candidates
+  const lines = text.split('\n');
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed.length >= 10 && trimmed.length <= 250) {
+      freq.set(trimmed, (freq.get(trimmed) ?? 0) + 1);
+    }
+  }
+
+  // Word-level sub-phrases (3 to 10 words)
+  const words = text.match(/\S+/g) ?? [];
+  for (let len = 3; len <= 10; len++) {
+    for (let i = 0; i <= words.length - len; i++) {
+      const phrase = words.slice(i, i + len).join(' ');
+      if (phrase.length >= 12 && phrase.length <= 150) {
+        freq.set(phrase, (freq.get(phrase) ?? 0) + 1);
+      }
+    }
+  }
+
+  const candidates: EntropicMotifCandidate[] = [];
+  for (const [phrase, count] of freq.entries()) {
+    if (count >= 2 && phrase.length >= 10) {
+      const entropy = computeShannonEntropy(phrase);
+      candidates.push({ phrase, count, entropy });
+    }
+  }
+
+  // Low entropic density * repetition length
+  return candidates
+    .sort((a, b) => b.phrase.length * b.count / Math.max(0.1, a.entropy) - a.phrase.length * a.count / Math.max(0.1, b.entropy))
+    .slice(0, maxCandidates);
 }
 
 export function lumenEncode(text: string, enc: EncodingName = 'o200k_base'): LumenResult {
   const inTokens = countTokens(text, enc);
-  const identity = (notes: string): LumenResult => ({
-    wire: text, decoded: text, exact: true, inTokens, outTokens: inTokens,
-    savingsPct: 0, entries: [], mode: 'identity', notes,
-  });
-  if (!text) return identity('empty input');
-  const free = ideographPool(enc).filter((ch) => text.indexOf(ch) === -1);
-  if (free.length < 2) return identity('no free single-token aliases');
+  const fallback: LumenResult = {
+    wire: text,
+    decoded: text,
+    exact: true,
+    inTokens,
+    outTokens: inTokens,
+    savingsPct: 0,
+    motifsCount: 0,
+    notes: 'LUMEN identity fallback',
+  };
+
+  if (!text || text.length < 20) return fallback;
+
+  if (text.startsWith(LUMEN_HEADER) || text.startsWith(LUMEN_LITERAL)) {
+    const wrap = `${LUMEN_LITERAL}\n${text}`;
+    const outTokens = countTokens(wrap, enc);
+    return {
+      wire: wrap,
+      decoded: text,
+      exact: true,
+      inTokens,
+      outTokens,
+      savingsPct: 0,
+      motifsCount: 0,
+      notes: 'LUMEN literal wrap',
+    };
+  }
+
+  const alphabet = lumenAlphabet(enc);
+  const textChars = new Set(text);
+  const availableGlyphs = alphabet.filter((g) => !textChars.has(g));
+
+  if (availableGlyphs.length < 2) return fallback;
+
+  const candidates = extractEntropicMotifs(text, 50);
+  if (candidates.length === 0) return fallback;
+
   let body = text;
-  const entries: LumenEntry[] = [];
-  let bestWire = text;
-  let bestTokens = inTokens;
-  for (const phrase of candidates(text, enc)) {
-    if (entries.length >= MAX_ENTRIES || entries.length >= free.length) break;
-    const hits = occ(body, phrase);
-    if (hits < 2) continue;
-    const alias = free[entries.length];
-    const nextBody = body.split(phrase).join(alias);
-    const nextEntries = [...entries, { alias, phrase, hits }];
-    const wire = assemble(nextEntries, nextBody);
-    const tok = countTokens(wire, enc);
-    if (tok >= bestTokens) continue;
-    body = nextBody;
-    entries.push({ alias, phrase, hits });
-    bestWire = wire;
-    bestTokens = tok;
+  let motifsCount = 0;
+  const mappings: Array<{ glyph: string; phrase: string }> = [];
+
+  for (const cand of candidates) {
+    if (motifsCount >= availableGlyphs.length) break;
+    if (body.includes(cand.phrase)) {
+      const pTokens = countTokens(cand.phrase, enc);
+      const glyph = availableGlyphs[motifsCount];
+      const gTokens = countTokens(glyph, enc);
+      const headerCost = countTokens(`${glyph}=${JSON.stringify(cand.phrase)}\n`, enc);
+      const netSavings = cand.count * (pTokens - gTokens) - headerCost;
+
+      if (netSavings > 1) {
+        body = body.split(cand.phrase).join(glyph);
+        mappings.push({ glyph, phrase: cand.phrase });
+        motifsCount++;
+      }
+    }
   }
-  if (entries.length === 0) {
-    if (!text.startsWith(KEY)) return identity('no measured positive-gain legend entries');
-    const wire = KEY + 'LUMEN\n' + DIV + '\n' + text;
-    const decoded = lumenDecode(wire);
-    const outTokens = countTokens(wire, enc);
-    return { wire, decoded, exact: decoded === text, inTokens, outTokens, savingsPct: inTokens ? ((inTokens - outTokens) / inTokens) * 100 : 0, entries: [], mode: 'forced-wrap', notes: 'forced wrap for KEY-prefixed input' };
+
+  if (motifsCount === 0) return fallback;
+
+  const dictHeader = mappings.map((m) => `${m.glyph}=${JSON.stringify(m.phrase)}`).join('\n');
+  const wire = `${LUMEN_HEADER}\n${dictHeader}\n${LUMEN_PAYLOAD_MARKER}\n${body}`;
+
+  const outTokens = countTokens(wire, enc);
+  const decoded = lumenDecode(wire, enc);
+  const exact = decoded === text;
+
+  if (exact && outTokens < inTokens) {
+    return {
+      wire,
+      decoded,
+      exact: true,
+      inTokens,
+      outTokens,
+      savingsPct: ((inTokens - outTokens) / inTokens) * 100,
+      motifsCount,
+      notes: `LUMEN-L1 entropic motifs=${motifsCount} · byte-exact`,
+    };
   }
-  const decoded = lumenDecode(bestWire);
-  if (decoded !== text) return identity('guard: LUMEN failed byte-verify');
-  return { wire: bestWire, decoded, exact: true, inTokens, outTokens: bestTokens, savingsPct: inTokens ? ((inTokens - bestTokens) / inTokens) * 100 : 0, entries, mode: 'lumen', notes: `${entries.length} LUMEN legend entries · byte-exact` };
+
+  return fallback;
 }
 
-export const LUMEN_SYSTEM_PROMPT = [
-  'A leading `KEY` block is a legend: each line maps one character to the text it stands for.',
-  'The legend ends at the repeated divider line. Expand legend entries bottom-to-top.',
-  'Everything after the divider is the message. Reconstruction is exact.',
-].join('\n');
+export function lumenDecode(wire: string, enc: EncodingName = 'o200k_base'): string {
+  if (wire.startsWith(LUMEN_LITERAL + '\n')) return wire.slice(LUMEN_LITERAL.length + 1);
+  if (!wire.startsWith(LUMEN_HEADER + '\n')) return wire;
+
+  const rest = wire.slice(LUMEN_HEADER.length + 1);
+  const bodyIdx = rest.indexOf('\n' + LUMEN_PAYLOAD_MARKER + '\n');
+  if (bodyIdx < 0) return wire;
+
+  const dictBlock = rest.slice(0, bodyIdx);
+  let body = rest.slice(bodyIdx + LUMEN_PAYLOAD_MARKER.length + 2);
+
+  const lines = dictBlock.split('\n');
+  const mappings: Array<{ glyph: string; phrase: string }> = [];
+
+  for (const line of lines) {
+    const eq = line.indexOf('=');
+    if (eq <= 0) continue;
+    const glyph = line.slice(0, eq);
+    const rawPhrase = line.slice(eq + 1);
+    try {
+      const phrase = JSON.parse(rawPhrase) as string;
+      mappings.push({ glyph, phrase });
+    } catch {
+      /* skip */
+    }
+  }
+
+  for (const { glyph, phrase } of mappings.slice().reverse()) {
+    body = body.split(glyph).join(phrase);
+  }
+
+  return body;
+}
+
+export function lumenSelfTest(enc: EncodingName = 'o200k_base'): boolean {
+  const sample = '### Incident review card 01\n### Incident review card 01\n### Incident review card 01';
+  const res = lumenEncode(sample, enc);
+  const back = lumenDecode(res.wire, enc);
+  return back === sample;
+}

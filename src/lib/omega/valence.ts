@@ -5,7 +5,8 @@
  *
  * DYNAMIC ALGORITHM:
  *   - Identifies ordered or permuted sequences of N lines/items.
- *   - Factors common line prefixes and suffixes across palette items.
+ *   - Factors common line prefixes and suffixes across palette items using code-point
+ *     safe string operations.
  *   - Maps permutation pi in S_N to Factoradix Lehmer rank R in [0, N! - 1].
  *   - Evaluates exact BPE token savings: only emits when outTokens < inTokens.
  *   - 100% byte-exact, deterministic, zero-CoT overhead, prompt-native decoding.
@@ -69,30 +70,39 @@ export function lehmerRankToPermutation(n: number, rank: bigint): number[] {
   return pi;
 }
 
-/** Find common prefix across string list */
+/** Find common prefix across string list (code point safe) */
 function commonPrefix(strings: string[]): string {
   if (strings.length === 0) return '';
-  let pre = strings[0];
+  let preChars = Array.from(strings[0]);
   for (let i = 1; i < strings.length; i++) {
-    while (pre && !strings[i].startsWith(pre)) {
-      pre = pre.slice(0, -1);
+    const chars = Array.from(strings[i]);
+    let j = 0;
+    while (j < preChars.length && j < chars.length && preChars[j] === chars[j]) {
+      j++;
     }
+    preChars = preChars.slice(0, j);
+    if (preChars.length === 0) break;
   }
-  return pre;
+  return preChars.join('');
 }
 
-/** Find common suffix across string list */
+/** Find common suffix across string list (code point safe) */
 function commonSuffix(strings: string[], prefixLen: number): string {
   if (strings.length === 0) return '';
-  const rev = (s: string) => [...s].reverse().join('');
-  const tails = strings.map((s) => s.slice(prefixLen));
-  let suf = rev(tails[0] ?? '');
+  const tails = strings.map((s) => Array.from(s).slice(prefixLen));
+  if (tails.length === 0 || tails[0].length === 0) return '';
+
+  let sufChars = [...tails[0]].reverse();
   for (let i = 1; i < tails.length; i++) {
-    while (suf && !rev(tails[i]).startsWith(suf)) {
-      suf = suf.slice(0, -1);
+    const rev = [...tails[i]].reverse();
+    let j = 0;
+    while (j < sufChars.length && j < rev.length && sufChars[j] === rev[j]) {
+      j++;
     }
+    sufChars = sufChars.slice(0, j);
+    if (sufChars.length === 0) break;
   }
-  return rev(suf);
+  return sufChars.reverse().join('');
 }
 
 export function valenceEncode(text: string, enc: EncodingName = 'o200k_base'): ValenceResult {
@@ -111,7 +121,7 @@ export function valenceEncode(text: string, enc: EncodingName = 'o200k_base'): V
 
   if (!text || text.length < 15) return fallback;
 
-  if (text.startsWith('[V1]\n')) {
+  if (text.startsWith('[V1]\n') || text.startsWith('[V1L]\n')) {
     const wrap = '[V1L]\n' + text;
     const outTokens = countTokens(wrap, enc);
     return {
@@ -135,10 +145,17 @@ export function valenceEncode(text: string, enc: EncodingName = 'o200k_base'): V
 
   // Factor common prefix and suffix to compress the palette
   const pre = commonPrefix(lines);
-  const suf = commonSuffix(lines, pre.length);
+  const suf = commonSuffix(lines, Array.from(pre).length);
 
-  const endIdx = suf.length > 0 ? -suf.length : undefined;
-  const stripped = lines.map((l) => l.slice(pre.length, endIdx));
+  const preLen = Array.from(pre).length;
+  const sufLen = Array.from(suf).length;
+
+  const stripped = lines.map((l) => {
+    const chars = Array.from(l);
+    const end = sufLen > 0 ? chars.length - sufLen : undefined;
+    return chars.slice(preLen, end).join('');
+  });
+
   const palette = [...stripped].sort();
   const n = lines.length;
 
@@ -196,6 +213,9 @@ export function valenceDecode(wire: string): string {
   try {
     const rank = BigInt(rankStr);
     const pi = lehmerRankToPermutation(n, rank);
+    if (pi.some((idx) => !Number.isSafeInteger(idx) || idx < 0 || idx >= palette.length)) {
+      return wire;
+    }
     return pi.map((idx) => `${pre}${palette[idx]}${suf}`).join('\n');
   } catch {
     return wire;

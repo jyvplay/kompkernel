@@ -10,15 +10,18 @@
  *     skeletons) from input text.
  *   - Projects extracted subgraphs onto single-token BPE symbols from Greek/Cyrillic
  *     ranges (U+0386..U+044F).
- *   - Wire format: `V<body>` (or `VV<body>` for literal wrap).
+ *   - Wire format: `[VK1]\n<DictBlock>\n[PAYLOAD]\n<Body>`
+ *     (or `[VK1L]\n<Text>` for literal wrap on sentinel collision).
  *   - 100% byte-exact, deterministic, zero-CoT overhead, prompt-native decoding.
  * =============================================================================
  */
 
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 
-export const VALKYRIE_SENTINEL = 'V';
-export const VALKYRIE_LITERAL = 'VV';
+export const VALKYRIE_HEADER = '[VK1]';
+export const VALKYRIE_SENTINEL = VALKYRIE_HEADER;
+export const VALKYRIE_PAYLOAD_MARKER = '[PAYLOAD]';
+export const VALKYRIE_LITERAL = '[VK1L]';
 
 export interface ValkyrieResult {
   wire: string;
@@ -40,7 +43,6 @@ export function valkyrieAlphabet(enc: EncodingName = 'o200k_base'): string[] {
   const glyphs: string[] = [];
   for (let cp = 0x0386; cp <= 0x044f; cp++) {
     const ch = String.fromCodePoint(cp);
-    if (ch === VALKYRIE_SENTINEL) continue;
     try {
       if (encodeIds(ch, enc).length === 1) glyphs.push(ch);
     } catch {
@@ -91,8 +93,8 @@ export function valkyrieEncode(text: string, enc: EncodingName = 'o200k_base'): 
 
   if (!text || text.length < 20) return fallback;
 
-  if (text.startsWith(VALKYRIE_LITERAL) || text.startsWith(VALKYRIE_SENTINEL + '\n')) {
-    const wrap = VALKYRIE_LITERAL + '\n' + text;
+  if (text.startsWith(VALKYRIE_HEADER) || text.startsWith(VALKYRIE_LITERAL)) {
+    const wrap = `${VALKYRIE_LITERAL}\n${text}`;
     const outTokens = countTokens(wrap, enc);
     return {
       wire: wrap,
@@ -139,7 +141,7 @@ export function valkyrieEncode(text: string, enc: EncodingName = 'o200k_base'): 
   if (subs === 0) return fallback;
 
   const dictHeader = mappings.map((m) => `${m.glyph}=${JSON.stringify(m.subgraph)}`).join('\n');
-  const wire = `${VALKYRIE_SENTINEL}\n${dictHeader}\n${VALKYRIE_SENTINEL}\n${body}`;
+  const wire = `${VALKYRIE_HEADER}\n${dictHeader}\n${VALKYRIE_PAYLOAD_MARKER}\n${body}`;
 
   const outTokens = countTokens(wire, enc);
   const decoded = valkyrieDecode(wire, enc);
@@ -163,15 +165,14 @@ export function valkyrieEncode(text: string, enc: EncodingName = 'o200k_base'): 
 
 export function valkyrieDecode(wire: string, enc: EncodingName = 'o200k_base'): string {
   if (wire.startsWith(VALKYRIE_LITERAL + '\n')) return wire.slice(VALKYRIE_LITERAL.length + 1);
-  if (wire.startsWith(VALKYRIE_LITERAL)) return wire.slice(VALKYRIE_LITERAL.length);
-  if (!wire.startsWith(VALKYRIE_SENTINEL + '\n')) return wire;
+  if (!wire.startsWith(VALKYRIE_HEADER + '\n')) return wire;
 
-  const rest = wire.slice(1);
-  const secondSentinel = rest.indexOf('\n' + VALKYRIE_SENTINEL + '\n');
-  if (secondSentinel < 0) return wire;
+  const rest = wire.slice(VALKYRIE_HEADER.length + 1);
+  const bodyIdx = rest.indexOf('\n' + VALKYRIE_PAYLOAD_MARKER + '\n');
+  if (bodyIdx < 0) return wire;
 
-  const dictBlock = rest.slice(1, secondSentinel);
-  let body = rest.slice(secondSentinel + 3);
+  const dictBlock = rest.slice(0, bodyIdx);
+  let body = rest.slice(bodyIdx + VALKYRIE_PAYLOAD_MARKER.length + 2);
 
   const lines = dictBlock.split('\n');
   const mappings: Array<{ glyph: string; subgraph: string }> = [];
