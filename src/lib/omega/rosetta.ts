@@ -210,6 +210,14 @@ import { eidolonProject } from './eidolon';
 import { ltpProject } from './ltp';
 import { latticeEncode, latticeDecode, latticePool, LATTICE_SYSTEM_PROMPT } from './lattice';
 import { strandEncode, strandDecode, strandDynPool, STRAND_SYSTEM_PROMPT } from './strand';
+import { astralEncode, astralDecode } from './astral';
+import { aeonEncode, aeonDecode } from './aeon';
+import { phoenixEncode, phoenixDecode } from './phoenix';
+import { valkyrieEncode, valkyrieDecode } from './valkyrie';
+import { solarisEncode, solarisDecode } from './solaris';
+import { hyperionEncode, hyperionDecode } from './hyperion';
+import { valenceEncode, valenceDecode } from './valence';
+import { astraeaEncode, astraeaDecode } from './astraea';
 
 /* --------------------------- versioned static tables ----------------------- */
 
@@ -3648,6 +3656,70 @@ async function rosettaEncodeUncached(
     const st = strandEncode(text, enc);
     if (st.exact && st.decoded === text && st.mode === 'strand') {
       admit('strand', st.wire, () => strandDecode(st.wire, enc), ['ST']);
+    }
+  }
+
+  // ASTRAL-A1 member
+  {
+    const ast = astralEncode(text, enc);
+    if (ast.exact && ast.decoded === text && ast.mode === 'astral') {
+      admit('astral', ast.wire, () => astralDecode(ast.wire, enc), ['ASTRAL']);
+    }
+  }
+
+  // AEON-A1 member
+  {
+    const ae = aeonEncode(text, enc);
+    if (ae.exact && ae.decoded === text && ae.mode === 'aeon') {
+      admit('aeon', ae.wire, () => aeonDecode(ae.wire, enc), ['AEON']);
+    }
+  }
+
+  // PHOENIX-P1 member
+  {
+    const ph = phoenixEncode(text, enc);
+    if (ph.exact && ph.decoded === text && ph.mode === 'phoenix') {
+      admit('phoenix', ph.wire, () => phoenixDecode(ph.wire, enc), ['PHOENIX']);
+    }
+  }
+
+  // VALKYRIE-V1 member
+  {
+    const valk = valkyrieEncode(text, enc);
+    if (valk.exact && valk.decoded === text && valk.mode === 'valkyrie') {
+      admit('valkyrie', valk.wire, () => valkyrieDecode(valk.wire, enc), ['VALKYRIE']);
+    }
+  }
+
+  // SOLARIS-S1 member
+  {
+    const sol = solarisEncode(text, enc);
+    if (sol.exact && sol.decoded === text && sol.mode === 'solaris') {
+      admit('solaris', sol.wire, () => solarisDecode(sol.wire, enc), ['SOLARIS']);
+    }
+  }
+
+  // HYPERION-H1 member
+  {
+    const hyp = hyperionEncode(text, enc);
+    if (hyp.exact && hyp.decoded === text && hyp.mode === 'hyperion') {
+      admit('hyperion', hyp.wire, () => hyperionDecode(hyp.wire, enc), ['HYPERION']);
+    }
+  }
+
+  // VALENCE-V1 member
+  {
+    const val = valenceEncode(text, enc);
+    if (val.exact && val.decoded === text && val.mode === 'valence') {
+      admit('valence', val.wire, () => valenceDecode(val.wire), ['VALENCE']);
+    }
+  }
+
+  // ASTRAEA-A2 member
+  {
+    const ast2 = astraeaEncode(text, enc);
+    if (ast2.exact && ast2.decoded === text && ast2.mode === 'astraea') {
+      admit('astraea', ast2.wire, () => astraeaDecode(ast2.wire, enc), ['ASTRAEA']);
     }
   }
 
