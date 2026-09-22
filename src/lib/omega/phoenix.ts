@@ -189,7 +189,7 @@ export function phoenixDecode(wire: string, enc: EncodingName = 'o200k_base'): s
     }
   }
 
-  for (const { glyph, motif } of mappings) {
+  for (const { glyph, motif } of mappings.slice().reverse()) {
     body = body.split(glyph).join(motif);
   }
 

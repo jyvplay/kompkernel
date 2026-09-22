@@ -195,7 +195,7 @@ export function astralDecode(wire: string, enc: EncodingName = 'o200k_base'): st
     }
   }
 
-  for (const { glyph, phrase } of mappings) {
+  for (const { glyph, phrase } of mappings.slice().reverse()) {
     body = body.split(glyph).join(phrase);
   }
 

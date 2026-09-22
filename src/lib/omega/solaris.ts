@@ -190,7 +190,7 @@ export function solarisDecode(wire: string, enc: EncodingName = 'o200k_base'): s
     }
   }
 
-  for (const { basis, phrase } of mappings) {
+  for (const { basis, phrase } of mappings.slice().reverse()) {
     body = body.split(basis).join(phrase);
   }
 

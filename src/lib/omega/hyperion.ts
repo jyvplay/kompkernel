@@ -181,7 +181,7 @@ export function hyperionDecode(wire: string, enc: EncodingName = 'o200k_base'): 
     }
   }
 
-  for (const { glyph, orbit } of mappings) {
+  for (const { glyph, orbit } of mappings.slice().reverse()) {
     body = body.split(glyph).join(orbit);
   }
 

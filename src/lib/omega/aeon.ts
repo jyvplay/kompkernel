@@ -193,7 +193,7 @@ export function aeonDecode(wire: string, enc: EncodingName = 'o200k_base'): stri
     }
   }
 
-  for (const { glyph, frame } of mappings) {
+  for (const { glyph, frame } of mappings.slice().reverse()) {
     body = body.split(glyph).join(frame);
   }
 

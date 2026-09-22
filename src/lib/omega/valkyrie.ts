@@ -91,8 +91,8 @@ export function valkyrieEncode(text: string, enc: EncodingName = 'o200k_base'): 
 
   if (!text || text.length < 20) return fallback;
 
-  if (text.startsWith(VALKYRIE_SENTINEL)) {
-    const wrap = VALKYRIE_LITERAL + text;
+  if (text.startsWith(VALKYRIE_LITERAL) || text.startsWith(VALKYRIE_SENTINEL + '\n')) {
+    const wrap = VALKYRIE_LITERAL + '\n' + text;
     const outTokens = countTokens(wrap, enc);
     return {
       wire: wrap,
@@ -162,7 +162,8 @@ export function valkyrieEncode(text: string, enc: EncodingName = 'o200k_base'): 
 }
 
 export function valkyrieDecode(wire: string, enc: EncodingName = 'o200k_base'): string {
-  if (wire.startsWith(VALKYRIE_LITERAL)) return wire.slice(2);
+  if (wire.startsWith(VALKYRIE_LITERAL + '\n')) return wire.slice(VALKYRIE_LITERAL.length + 1);
+  if (wire.startsWith(VALKYRIE_LITERAL)) return wire.slice(VALKYRIE_LITERAL.length);
   if (!wire.startsWith(VALKYRIE_SENTINEL + '\n')) return wire;
 
   const rest = wire.slice(1);
@@ -188,7 +189,7 @@ export function valkyrieDecode(wire: string, enc: EncodingName = 'o200k_base'): 
     }
   }
 
-  for (const { glyph, subgraph } of mappings) {
+  for (const { glyph, subgraph } of mappings.slice().reverse()) {
     body = body.split(glyph).join(subgraph);
   }
 

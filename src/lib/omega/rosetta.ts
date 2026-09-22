@@ -2384,6 +2384,30 @@ function expandBody(
           }
         }
       }
+      // S — compound block-span envelope: S\n followed by newline-joined
+      // span payloads (without individual mark delimiters). Re-expand each
+      // payload sequentially.
+      if (s[i + 1] === 'S') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          if (payload.startsWith('\n')) {
+            const innerPayloads = payload.slice(1).split('\n');
+            let ok = true;
+            const rebuilt: string[] = [];
+            for (const p of innerPayloads) {
+              const res = expandBody(mark + p + mark, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+              if (res === mark + p + mark) { ok = false; break; }
+              rebuilt.push(res);
+            }
+            if (ok && rebuilt.length >= 2) {
+              out += rebuilt.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
       // Y — YAML kv span (R2): payload = name + SEP + k=v SEP pairs; the SEP
       // glyph is window slot pool[k+2+RNS-1 size] and values are literal.
       if (s[i + 1] === 'Y' && sep !== null) {
@@ -3269,7 +3293,48 @@ export function rosettaTranspose(
   flushCsv();
 
   if (systems.size === 0) return empty;
-  const body = opsFoldText(outLines.join('\n'));
+
+  // Post-processing pass: merge consecutive single-line spans into S compound block envelopes
+  const compactedLines: string[] = [];
+  let idx = 0;
+  while (idx < outLines.length) {
+    if (outLines[idx].startsWith(mark) && outLines[idx].endsWith(mark) && outLines[idx].length > 2 && !outLines[idx].includes('\n')) {
+      let runEnd = idx;
+      while (
+        runEnd + 1 < outLines.length &&
+        outLines[runEnd + 1].startsWith(mark) &&
+        outLines[runEnd + 1].endsWith(mark) &&
+        outLines[runEnd + 1].length > 2 &&
+        !outLines[runEnd + 1].includes('\n')
+      ) {
+        runEnd++;
+      }
+      if (runEnd - idx >= 1) {
+        const runSpans = outLines.slice(idx, runEnd + 1);
+        const innerPayloads = runSpans.map((sp) => sp.slice(1, -1));
+        const sSpan = mark + 'S\n' + innerPayloads.join('\n') + mark;
+        let ok = true;
+        const rebuiltParts: string[] = [];
+        for (const sp of runSpans) {
+          const r = expandBody(sp, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          if (r === sp) { ok = false; break; }
+          rebuiltParts.push(r);
+        }
+        const srcRun = rebuiltParts.join('\n');
+        const rebuilt = expandBody(sSpan, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+        if (ok && rebuilt === srcRun && (!measure || countTokens(sSpan, enc) < countTokens(runSpans.join('\n'), enc))) {
+          compactedLines.push(sSpan);
+          systems.add('S');
+          idx = runEnd + 1;
+          continue;
+        }
+      }
+    }
+    compactedLines.push(outLines[idx]);
+    idx++;
+  }
+
+  const body = opsFoldText(compactedLines.join('\n'));
 
   if (globalTs && !systems.has('T')) return empty;
   if (ops && !systems.has('O')) return empty;

@@ -111,6 +111,22 @@ export function valenceEncode(text: string, enc: EncodingName = 'o200k_base'): V
 
   if (!text || text.length < 15) return fallback;
 
+  if (text.startsWith('[V1]\n')) {
+    const wrap = '[V1L]\n' + text;
+    const outTokens = countTokens(wrap, enc);
+    return {
+      wire: wrap,
+      decoded: text,
+      exact: true,
+      inTokens,
+      outTokens,
+      savingsPct: 0,
+      n: 0,
+      rank: 0n,
+      notes: 'VALENCE literal wrap',
+    };
+  }
+
   const lines = text.split('\n');
   if (lines.length < 3) return fallback;
 
@@ -152,6 +168,7 @@ export function valenceEncode(text: string, enc: EncodingName = 'o200k_base'): V
 }
 
 export function valenceDecode(wire: string): string {
+  if (wire.startsWith('[V1L]\n')) return wire.slice(6);
   if (!wire.startsWith('[V1]\n')) return wire;
   const rest = wire.slice(5);
   const lines = rest.split('\n');
