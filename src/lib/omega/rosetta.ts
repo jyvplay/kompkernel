@@ -223,6 +223,7 @@ import { tensorEncode, tensorDecode, TENSOR_HEADER, TENSOR_LITERAL } from './ten
 import { lumenEncode, lumenDecode, LUMEN_HEADER, LUMEN_LITERAL } from './lumen';
 import { valenceEncode, valenceDecode } from './valence';
 import { hypergraphEncode, hypergraphDecode, HYPERGRAPH_HEADER, HYPERGRAPH_LITERAL } from './hypergraph';
+import { synergyEncode, synergyDecode, SYNERGY_HEADER, SYNERGY_LITERAL } from './synergy';
 
 /* --------------------------- versioned static tables ----------------------- */
 
@@ -2406,14 +2407,12 @@ function expandBody(
           const payload = s.slice(i + 2, payloadEnd);
           if (payload.startsWith('\n')) {
             const innerPayloads = payload.slice(1).split('\n');
-            let ok = true;
             const rebuilt: string[] = [];
             for (const p of innerPayloads) {
               const res = expandBody(mark + p + mark, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
-              if (res === mark + p + mark) { ok = false; break; }
               rebuilt.push(res);
             }
-            if (ok && rebuilt.length >= 2) {
+            if (rebuilt.length >= 2) {
               out += rebuilt.join('\n');
               i = payloadEnd + 1;
               continue;
@@ -3444,6 +3443,7 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   if (wire.startsWith(TENSOR_HEADER + '\n') || wire.startsWith(TENSOR_LITERAL)) return tensorDecode(wire);
   if (wire.startsWith(LUMEN_HEADER + '\n') || wire.startsWith(LUMEN_LITERAL)) return lumenDecode(wire, enc);
   if (wire.startsWith(HYPERGRAPH_HEADER + '\n') || wire.startsWith(HYPERGRAPH_LITERAL)) return hypergraphDecode(wire, enc);
+  if (wire.startsWith(SYNERGY_HEADER + '\n') || wire.startsWith(SYNERGY_LITERAL)) return synergyDecode(wire, enc);
   if (wire.startsWith('[V1]\n') || wire.startsWith('[V1L]\n')) return valenceDecode(wire);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
@@ -3621,8 +3621,9 @@ async function rosettaEncodeUncached(
      '[TS1]\n', '[ST1]\n', '[RP1]\n', '[TR1]\n', '[CL1]\n', '[SP1]\n', '[⌘STENCIL]', '[Ϻ]', 'κ\n',
      'φ', 'τ\n', 'ττ\n', 'βB1\n', 'βB1L\n', 'α\n', 'αα\n', 'ϯ\n', 'ϯϯ\n', 'Ψ\n', 'ΨΨ\n',
      'Ϧ\n', 'ϦϦ\n', '☀\n', '☀☀\n', '[VK1]\n', '[VK1L]\n', '[POL1]\n', '[POL1L]\n',
-     '[AST2]\n', '[AST2L]\n', '[CHR1]\n', '[CHR1L]\n', '[T1]\n', '[T1L]\n', '[LUM1]\n', '[LUM1L]\n',
-     '[HG2]\n', '[HG2L]\n']
+     '[POLARIS-P1]\n', '[POLARIS-P1-LITERAL]\n', '[ASTRAEA-A2]\n', '[ASTRAEA-A2-LITERAL]\n',
+     '[CHRONOS-Ω]\n', '[CHRONOS-Ω-LITERAL]\n', '[T1]\n', '[T1L]\n', '[LUMEN-L1]\n', '[LUMEN-L1-LITERAL]\n',
+     '[HG2]\n', '[HG2L]\n', '[SYN2]\n', '[SYN2L]\n', '[V1]\n', '[V1L]\n']
       .some((s) => text.startsWith(s));
   if (!ambiguousIdentity) admit('identity', text, () => text);
 
@@ -3838,6 +3839,14 @@ async function rosettaEncodeUncached(
     const hg = hypergraphEncode(text, enc);
     if (hg.exact && hg.decoded === text && hg.hyperedgesCount > 0) {
       admit('hypergraph', hg.wire, () => hypergraphDecode(hg.wire, enc), ['HG2']);
+    }
+  }
+
+  // SYNERGY-S2 member — cross-span structural collocation & entropy-optimal grammar factorization
+  {
+    const syn = synergyEncode(text, enc);
+    if (syn.exact && syn.decoded === text && syn.collocationsCount > 0) {
+      admit('synergy', syn.wire, () => synergyDecode(syn.wire, enc), ['SYN2']);
     }
   }
 

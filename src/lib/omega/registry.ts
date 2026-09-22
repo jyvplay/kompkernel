@@ -65,6 +65,7 @@ import { chronosEncode } from './chronos';
 import { tensorEncode } from './tensor';
 import { lumenEncode } from './lumen';
 import { hypergraphEncode } from './hypergraph';
+import { synergyEncode } from './synergy';
 export { evaluateAllCodecsDynamically, type SynthesisSummary, type CodecEvaluationRun } from './codec-synthesis';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
@@ -243,6 +244,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = solarisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'synergy',
+      label: '🌀 SYNERGY-S2',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = synergyEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
