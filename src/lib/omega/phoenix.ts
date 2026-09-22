@@ -235,7 +235,7 @@ export function phoenixDecode(wire: string, enc: EncodingName = 'o200k_base'): s
     let t = template;
     for (let s = 0; s < slotVals.length; s++) {
       if (s < SLOT_GLYPHS.length) {
-        t = t.replace(SLOT_GLYPHS[s], slotVals[s]);
+        t = t.replace(SLOT_GLYPHS[s], () => slotVals[s]);
       }
     }
     reconstructedLines.push(t);

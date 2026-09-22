@@ -49,6 +49,7 @@ import { valenceEncode } from '@/lib/omega/valence';
 import { astraeaEncode } from '@/lib/omega/astraea';
 import { polarisEncode } from '@/lib/omega/polaris';
 import { tensorEncode } from '@/lib/omega/tensor';
+import { hypergraphEncode } from '@/lib/omega/hypergraph';
 import { hyperionEncode } from '@/lib/omega/hyperion';
 
 export interface Row {
@@ -115,6 +116,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('polaris', () => polarisEncode(text, enc));
   await run('hyperion', () => hyperionEncode(text, enc));
   await run('tensor', () => tensorEncode(text, enc));
+  await run('hypergraph', () => hypergraphEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));
   await run('mosaic', () => mosaicEncode(text, enc));
   await run('orbit', async () => orbitEncode(text, enc));
