@@ -3663,7 +3663,7 @@ async function rosettaEncodeUncached(
   {
     const ast = astralEncode(text, enc);
     if (ast.exact && ast.decoded === text && ast.mode === 'astral') {
-      admit('astral', ast.wire, () => astralDecode(ast.wire, enc), ['ASTRAL']);
+      admit('astral', ast.wire, () => astralDecode(ast.wire), ['ASTRAL']);
     }
   }
 
@@ -3671,7 +3671,7 @@ async function rosettaEncodeUncached(
   {
     const ae = aeonEncode(text, enc);
     if (ae.exact && ae.decoded === text && ae.mode === 'aeon') {
-      admit('aeon', ae.wire, () => aeonDecode(ae.wire, enc), ['AEON']);
+      admit('aeon', ae.wire, () => aeonDecode(ae.wire), ['AEON']);
     }
   }
 
@@ -3679,7 +3679,7 @@ async function rosettaEncodeUncached(
   {
     const ph = phoenixEncode(text, enc);
     if (ph.exact && ph.decoded === text && ph.mode === 'phoenix') {
-      admit('phoenix', ph.wire, () => phoenixDecode(ph.wire, enc), ['PHOENIX']);
+      admit('phoenix', ph.wire, () => phoenixDecode(ph.wire), ['PHOENIX']);
     }
   }
 
@@ -3687,7 +3687,7 @@ async function rosettaEncodeUncached(
   {
     const valk = valkyrieEncode(text, enc);
     if (valk.exact && valk.decoded === text && valk.mode === 'valkyrie') {
-      admit('valkyrie', valk.wire, () => valkyrieDecode(valk.wire, enc), ['VALKYRIE']);
+      admit('valkyrie', valk.wire, () => valkyrieDecode(valk.wire), ['VALKYRIE']);
     }
   }
 
@@ -3695,7 +3695,7 @@ async function rosettaEncodeUncached(
   {
     const sol = solarisEncode(text, enc);
     if (sol.exact && sol.decoded === text && sol.mode === 'solaris') {
-      admit('solaris', sol.wire, () => solarisDecode(sol.wire, enc), ['SOLARIS']);
+      admit('solaris', sol.wire, () => solarisDecode(sol.wire), ['SOLARIS']);
     }
   }
 
@@ -3703,7 +3703,7 @@ async function rosettaEncodeUncached(
   {
     const hyp = hyperionEncode(text, enc);
     if (hyp.exact && hyp.decoded === text && hyp.mode === 'hyperion') {
-      admit('hyperion', hyp.wire, () => hyperionDecode(hyp.wire, enc), ['HYPERION']);
+      admit('hyperion', hyp.wire, () => hyperionDecode(hyp.wire), ['HYPERION']);
     }
   }
 
