@@ -55,6 +55,7 @@ import { tauEncode } from './tau';
 import { phoenixEncode } from './phoenix';
 import { valenceEncode } from './valence';
 import { astraeaEncode } from './astraea';
+import { polarisEncode } from './polaris';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -122,6 +123,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = veritasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'polaris',
+      label: '🌌 POLARIS-P1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = polarisEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
