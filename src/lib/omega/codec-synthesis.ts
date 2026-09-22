@@ -52,10 +52,10 @@ export async function evaluateAllCodecsDynamically(
 
   const evalCodec = async (
     key: string,
-    encodeFn: (t: string, e: EncodingName) => { wire: string; decoded: string; exact: boolean; outTokens: number },
+    encodeFn: (t: string, e: EncodingName) => Promise<{ wire: string; decoded: string; exact: boolean; outTokens: number }> | { wire: string; decoded: string; exact: boolean; outTokens: number },
   ) => {
     try {
-      const res = encodeFn(text, enc);
+      const res = await encodeFn(text, enc);
       const outTokens = res.outTokens;
       runs.push({
         key,
@@ -84,37 +84,37 @@ export async function evaluateAllCodecsDynamically(
     return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
   });
 
-  evalCodec('astral', (t, e) => {
+  await evalCodec('astral', (t, e) => {
     const r = astralEncode(t, e);
     return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
   });
 
-  evalCodec('aeon', (t, e) => {
+  await evalCodec('aeon', (t, e) => {
     const r = aeonEncode(t, e);
     return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
   });
 
-  evalCodec('phoenix', (t, e) => {
+  await evalCodec('phoenix', (t, e) => {
     const r = phoenixEncode(t, e);
     return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
   });
 
-  evalCodec('valkyrie', (t, e) => {
+  await evalCodec('valkyrie', (t, e) => {
     const r = valkyrieEncode(t, e);
     return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
   });
 
-  evalCodec('solaris', (t, e) => {
+  await evalCodec('solaris', (t, e) => {
     const r = solarisEncode(t, e);
     return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
   });
 
-  evalCodec('hyperion', (t, e) => {
+  await evalCodec('hyperion', (t, e) => {
     const r = hyperionEncode(t, e);
     return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
   });
 
-  evalCodec('valence', (t, e) => {
+  await evalCodec('valence', (t, e) => {
     const r = valenceEncode(t, e);
     return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
   });

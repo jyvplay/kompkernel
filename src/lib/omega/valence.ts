@@ -137,7 +137,8 @@ export function valenceEncode(text: string, enc: EncodingName = 'o200k_base'): V
   const pre = commonPrefix(lines);
   const suf = commonSuffix(lines, pre.length);
 
-  const stripped = lines.map((l) => l.slice(pre.length, l.length - suf.length || undefined));
+  const endIdx = suf.length > 0 ? -suf.length : undefined;
+  const stripped = lines.map((l) => l.slice(pre.length, endIdx));
   const palette = [...stripped].sort();
   const n = lines.length;
 
