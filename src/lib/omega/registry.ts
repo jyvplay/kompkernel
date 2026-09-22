@@ -70,6 +70,7 @@ import { kineticEncode } from './kinetic';
 import { quantumEncode } from './quantum';
 import { nebulaEncode } from './nebula';
 import { zeroEncode } from './zero';
+import { orionEncode } from './orion';
 export { evaluateAllCodecsDynamically, type SynthesisSummary, type CodecEvaluationRun } from './codec-synthesis';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
@@ -248,6 +249,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = solarisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'orion',
+      label: '🌌 ORION-O10',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = orionEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },

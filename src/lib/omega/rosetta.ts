@@ -228,6 +228,7 @@ import { kineticEncode, kineticDecode, KINETIC_HEADER, KINETIC_LITERAL } from '.
 import { quantumEncode, quantumDecode, QUANTUM_HEADER, QUANTUM_LITERAL } from './quantum';
 import { nebulaEncode, nebulaDecode, NEBULA_HEADER, NEBULA_LITERAL } from './nebula';
 import { zeroEncode, zeroDecode, ZERO_HEADER, ZERO_LITERAL } from './zero';
+import { orionEncode, orionDecode, ORION_HEADER, ORION_LITERAL } from './orion';
 
 /* --------------------------- versioned static tables ----------------------- */
 
@@ -3452,6 +3453,7 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   if (wire.startsWith(QUANTUM_HEADER + '\n') || wire.startsWith(QUANTUM_LITERAL)) return quantumDecode(wire, enc);
   if (wire.startsWith(NEBULA_HEADER + '\n') || wire.startsWith(NEBULA_LITERAL)) return nebulaDecode(wire, enc);
   if (wire.startsWith(ZERO_HEADER + '\n') || wire.startsWith(ZERO_LITERAL)) return zeroDecode(wire, enc);
+  if (wire.startsWith(ORION_HEADER + '\n') || wire.startsWith(ORION_LITERAL)) return orionDecode(wire, enc);
   if (wire.startsWith('[V1]\n') || wire.startsWith('[V1L]\n')) return valenceDecode(wire);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
@@ -3887,6 +3889,14 @@ async function rosettaEncodeUncached(
     const zr = zeroEncode(text, enc);
     if (zr.exact && zr.decoded === text && zr.latticesCount > 0) {
       admit('zero', zr.wire, () => zeroDecode(zr.wire, enc), ['Z10']);
+    }
+  }
+
+  // ORION-O10 member — celestial manifold trajectory realignment
+  {
+    const ori = orionEncode(text, enc);
+    if (ori.exact && ori.decoded === text && ori.trajectoriesCount > 0) {
+      admit('orion', ori.wire, () => orionDecode(ori.wire, enc), ['O10']);
     }
   }
 
