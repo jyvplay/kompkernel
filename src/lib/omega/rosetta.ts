@@ -229,6 +229,7 @@ import { quantumEncode, quantumDecode, QUANTUM_HEADER, QUANTUM_LITERAL } from '.
 import { nebulaEncode, nebulaDecode, NEBULA_HEADER, NEBULA_LITERAL } from './nebula';
 import { zeroEncode, zeroDecode, ZERO_HEADER, ZERO_LITERAL } from './zero';
 import { orionEncode, orionDecode, ORION_HEADER, ORION_LITERAL } from './orion';
+import { exodusEncode, exodusDecode } from './exodus';
 
 /* --------------------------- versioned static tables ----------------------- */
 
@@ -3454,6 +3455,7 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   if (wire.startsWith(NEBULA_HEADER + '\n') || wire.startsWith(NEBULA_LITERAL)) return nebulaDecode(wire, enc);
   if (wire.startsWith(ZERO_HEADER + '\n') || wire.startsWith(ZERO_LITERAL)) return zeroDecode(wire, enc);
   if (wire.startsWith(ORION_HEADER + '\n') || wire.startsWith(ORION_LITERAL)) return orionDecode(wire, enc);
+  if (wire.startsWith('Ξ') || wire.startsWith('ΞΞ')) return exodusDecode(wire);
   if (wire.startsWith('[V1]\n') || wire.startsWith('[V1L]\n')) return valenceDecode(wire);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
@@ -3633,7 +3635,8 @@ async function rosettaEncodeUncached(
      'Ϧ\n', 'ϦϦ\n', '☀\n', '☀☀\n', '[VK1]\n', '[VK1L]\n', '[POL1]\n', '[POL1L]\n',
      '[POLARIS-P1]\n', '[POLARIS-P1-LITERAL]\n', '[ASTRAEA-A2]\n', '[ASTRAEA-A2-LITERAL]\n',
      '[CHRONOS-Ω]\n', '[CHRONOS-Ω-LITERAL]\n', '[T1]\n', '[T1L]\n', '[LUMEN-L1]\n', '[LUMEN-L1-LITERAL]\n',
-     '[HG2]\n', '[HG2L]\n', '[SYN2]\n', '[SYN2L]\n', '[KIN8]\n', '[KIN8L]\n', '[Q9]\n', '[Q9L]\n', '[V1]\n', '[V1L]\n']
+     '[HG2]\n', '[HG2L]\n', '[SYN2]\n', '[SYN2L]\n', '[KIN8]\n', '[KIN8L]\n', '[Q9]\n', '[Q9L]\n', '[V1]\n', '[V1L]\n', 'Ξ\n', 'ΞΞ\n',
+     '[Z10]\n', '[Z10L]\n', '[N9]\n', '[N9L]\n', '[O10]\n', '[O10L]\n', '[EX]\n', '[EXL]\n']
       .some((s) => text.startsWith(s));
   if (!ambiguousIdentity) admit('identity', text, () => text);
 
@@ -3897,6 +3900,14 @@ async function rosettaEncodeUncached(
     const ori = orionEncode(text, enc);
     if (ori.exact && ori.decoded === text && ori.trajectoriesCount > 0) {
       admit('orion', ori.wire, () => orionDecode(ori.wire, enc), ['O10']);
+    }
+  }
+
+  // EXODUS-E1 member — dynamic sub-lexical phase space quotient contraction
+  {
+    const ex = exodusEncode(text, enc);
+    if (ex.exact && ex.decoded === text && ex.substitutions > 0) {
+      admit('exodus', ex.wire, () => exodusDecode(ex.wire), ['EX']);
     }
   }
 
