@@ -56,6 +56,7 @@ import { astralEncode } from './astral';
 import { phoenixEncode } from './phoenix';
 import { valkyrieEncode } from './valkyrie';
 import { hyperionEncode } from './hyperion';
+import { aeonEncode } from './aeon';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -333,6 +334,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = tauEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'aeon',
+      label: '♾ AEON-A1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = aeonEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },

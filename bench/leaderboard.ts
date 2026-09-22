@@ -45,6 +45,7 @@ import { tauEncode } from '@/lib/omega/tau';
 import { phoenixEncode } from '@/lib/omega/phoenix';
 import { valkyrieEncode } from '@/lib/omega/valkyrie';
 import { hyperionEncode } from '@/lib/omega/hyperion';
+import { aeonEncode } from '@/lib/omega/aeon';
 
 export interface Row {
   key: string; wireTokens: number; deliveredTokens: number | null;
@@ -105,6 +106,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('phoenix', () => phoenixEncode(text, enc));
   await run('valkyrie', () => valkyrieEncode(text, enc));
   await run('hyperion', () => hyperionEncode(text, enc));
+  await run('aeon', () => aeonEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));
   await run('mosaic', () => mosaicEncode(text, enc));
   await run('orbit', async () => orbitEncode(text, enc));

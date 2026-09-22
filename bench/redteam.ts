@@ -980,9 +980,37 @@ async function p17() {
   ok(noThrow, 'HYPERION decode never throws on malformed inputs');
 }
 
+async function p18() {
+  console.log('P18 — AEON-A1 dynamical attractor basin projection shapes');
+  const { aeonEncode, aeonDecode, aeonSelfTest, AEON_TEMPLATES } = await import('@/lib/omega/aeon');
+
+  const tests = aeonSelfTest('o200k_base');
+  for (const t of tests) {
+    ok(t.pass, `AEON self-test: ${t.name}`, t.details);
+  }
+
+  const tmplSample = AEON_TEMPLATES[0] + '\n' + AEON_TEMPLATES[2];
+  const r = aeonEncode(tmplSample, 'o200k_base');
+  const back = aeonDecode(r.wire, 'o200k_base');
+  ok(r.exact && back === tmplSample && r.outTokens < r.inTokens, 'AEON folds attractor frame templates', `${r.inTokens} -> ${r.outTokens}`);
+
+  // Literal wrap
+  const literalSrc = 'ϯsome leading literal ϯϯ sentinel text';
+  const rLit = aeonEncode(literalSrc, 'o200k_base');
+  const backLit = aeonDecode(rLit.wire, 'o200k_base');
+  ok(rLit.exact && backLit === literalSrc && rLit.wire.startsWith('ϯϯ'), 'AEON literal sentinel wrap roundtrip');
+
+  // Decode never throws on bad inputs
+  let noThrow = true;
+  for (const g of ['ϯ', 'ϯϯ', 'ϯϯϯ', 'ϯ\u0391\u0392\u0393', 'ϯinvalid_glyph_here_12345']) {
+    try { aeonDecode(g, 'o200k_base'); } catch { noThrow = false; }
+  }
+  ok(noThrow, 'AEON decode never throws on malformed inputs');
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14(); await p15(); await p16(); await p17();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14(); await p15(); await p16(); await p17(); await p18();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }
