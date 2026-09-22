@@ -69,6 +69,7 @@ import { synergyEncode } from './synergy';
 import { kineticEncode } from './kinetic';
 import { quantumEncode } from './quantum';
 import { nebulaEncode } from './nebula';
+import { zeroEncode } from './zero';
 export { evaluateAllCodecsDynamically, type SynthesisSummary, type CodecEvaluationRun } from './codec-synthesis';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
@@ -247,6 +248,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = solarisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'zero',
+      label: '⚡ ZERO-Z10',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = zeroEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },

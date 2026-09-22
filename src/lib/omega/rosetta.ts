@@ -227,6 +227,7 @@ import { synergyEncode, synergyDecode, SYNERGY_HEADER, SYNERGY_LITERAL } from '.
 import { kineticEncode, kineticDecode, KINETIC_HEADER, KINETIC_LITERAL } from './kinetic';
 import { quantumEncode, quantumDecode, QUANTUM_HEADER, QUANTUM_LITERAL } from './quantum';
 import { nebulaEncode, nebulaDecode, NEBULA_HEADER, NEBULA_LITERAL } from './nebula';
+import { zeroEncode, zeroDecode, ZERO_HEADER, ZERO_LITERAL } from './zero';
 
 /* --------------------------- versioned static tables ----------------------- */
 
@@ -3450,6 +3451,7 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   if (wire.startsWith(KINETIC_HEADER + '\n') || wire.startsWith(KINETIC_LITERAL)) return kineticDecode(wire, enc);
   if (wire.startsWith(QUANTUM_HEADER + '\n') || wire.startsWith(QUANTUM_LITERAL)) return quantumDecode(wire, enc);
   if (wire.startsWith(NEBULA_HEADER + '\n') || wire.startsWith(NEBULA_LITERAL)) return nebulaDecode(wire, enc);
+  if (wire.startsWith(ZERO_HEADER + '\n') || wire.startsWith(ZERO_LITERAL)) return zeroDecode(wire, enc);
   if (wire.startsWith('[V1]\n') || wire.startsWith('[V1L]\n')) return valenceDecode(wire);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
@@ -3877,6 +3879,14 @@ async function rosettaEncodeUncached(
     const neb = nebulaEncode(text, enc);
     if (neb.exact && neb.decoded === text && neb.constellationsCount > 0) {
       admit('nebula', neb.wire, () => nebulaDecode(neb.wire, enc), ['N9']);
+    }
+  }
+
+  // ZERO-Z10 member — zero-entropy morphic subsequence lattice contraction
+  {
+    const zr = zeroEncode(text, enc);
+    if (zr.exact && zr.decoded === text && zr.latticesCount > 0) {
+      admit('zero', zr.wire, () => zeroDecode(zr.wire, enc), ['Z10']);
     }
   }
 
