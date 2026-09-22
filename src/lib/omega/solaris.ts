@@ -16,7 +16,7 @@
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 
 export const SOLARIS_SENTINEL = '☀';
-export const SOLARIS_LITERAL = '☀☀';
+export const SOLARIS_LITERAL = '☀☀\n';
 
 export interface SolarisResult {
   wire: string;
@@ -164,7 +164,7 @@ export function solarisEncode(text: string, enc: EncodingName = 'o200k_base'): S
 }
 
 export function solarisDecode(wire: string, enc: EncodingName = 'o200k_base'): string {
-  if (wire.startsWith(SOLARIS_LITERAL)) return wire.slice(2);
+  if (wire.startsWith(SOLARIS_LITERAL)) return wire.slice(SOLARIS_LITERAL.length);
   if (!wire.startsWith(SOLARIS_SENTINEL + '\n')) return wire;
 
   const rest = wire.slice(2);

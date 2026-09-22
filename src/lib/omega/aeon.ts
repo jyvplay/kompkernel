@@ -16,7 +16,7 @@
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 
 export const AEON_SENTINEL = 'ϯ';
-export const AEON_LITERAL = 'ϯϯ';
+export const AEON_LITERAL = 'ϯϯ\n';
 
 export interface AeonResult {
   wire: string;
@@ -167,7 +167,7 @@ export function aeonEncode(text: string, enc: EncodingName = 'o200k_base'): Aeon
 }
 
 export function aeonDecode(wire: string, enc: EncodingName = 'o200k_base'): string {
-  if (wire.startsWith(AEON_LITERAL)) return wire.slice(2);
+  if (wire.startsWith(AEON_LITERAL)) return wire.slice(AEON_LITERAL.length);
   if (!wire.startsWith(AEON_SENTINEL + '\n')) return wire;
 
   const rest = wire.slice(2);

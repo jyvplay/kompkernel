@@ -16,7 +16,7 @@
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 
 export const ASTRAL_SENTINEL = 'α';
-export const ASTRAL_LITERAL = 'αα';
+export const ASTRAL_LITERAL = 'αα\n';
 
 export interface AstralResult {
   wire: string;
@@ -169,7 +169,7 @@ export function astralEncode(text: string, enc: EncodingName = 'o200k_base'): As
 }
 
 export function astralDecode(wire: string, enc: EncodingName = 'o200k_base'): string {
-  if (wire.startsWith(ASTRAL_LITERAL)) return wire.slice(2);
+  if (wire.startsWith(ASTRAL_LITERAL)) return wire.slice(ASTRAL_LITERAL.length);
   if (!wire.startsWith(ASTRAL_SENTINEL + '\n')) return wire;
 
   const rest = wire.slice(2);

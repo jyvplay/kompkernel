@@ -16,7 +16,7 @@
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 
 export const HYPERION_SENTINEL = 'Ϧ';
-export const HYPERION_LITERAL = 'ϦϦ';
+export const HYPERION_LITERAL = 'ϦϦ\n';
 
 export interface HyperionResult {
   wire: string;
@@ -155,7 +155,7 @@ export function hyperionEncode(text: string, enc: EncodingName = 'o200k_base'): 
 }
 
 export function hyperionDecode(wire: string, enc: EncodingName = 'o200k_base'): string {
-  if (wire.startsWith(HYPERION_LITERAL)) return wire.slice(2);
+  if (wire.startsWith(HYPERION_LITERAL)) return wire.slice(HYPERION_LITERAL.length);
   if (!wire.startsWith(HYPERION_SENTINEL + '\n')) return wire;
 
   const rest = wire.slice(2);

@@ -64,6 +64,7 @@ import { astraeaEncode } from './astraea';
 import { chronosEncode } from './chronos';
 import { tensorEncode } from './tensor';
 import { lumenEncode } from './lumen';
+import { hypergraphEncode } from './hypergraph';
 export { evaluateAllCodecsDynamically, type SynthesisSummary, type CodecEvaluationRun } from './codec-synthesis';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
@@ -242,6 +243,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = solarisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'hypergraph',
+      label: '🕸️ HYPERGRAPH-H2',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = hypergraphEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },

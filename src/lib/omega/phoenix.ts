@@ -16,7 +16,7 @@
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 
 export const PHOENIX_SENTINEL = 'Ψ';
-export const PHOENIX_LITERAL = 'ΨΨ';
+export const PHOENIX_LITERAL = 'ΨΨ\n';
 
 export interface PhoenixResult {
   wire: string;
@@ -163,7 +163,7 @@ export function phoenixEncode(text: string, enc: EncodingName = 'o200k_base'): P
 }
 
 export function phoenixDecode(wire: string, enc: EncodingName = 'o200k_base'): string {
-  if (wire.startsWith(PHOENIX_LITERAL)) return wire.slice(2);
+  if (wire.startsWith(PHOENIX_LITERAL)) return wire.slice(PHOENIX_LITERAL.length);
   if (!wire.startsWith(PHOENIX_SENTINEL + '\n')) return wire;
 
   const rest = wire.slice(2);

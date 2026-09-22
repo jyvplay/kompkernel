@@ -222,6 +222,7 @@ import { chronosEncode, chronosDecode, CHRONOS_HEADER, CHRONOS_LITERAL } from '.
 import { tensorEncode, tensorDecode, TENSOR_HEADER, TENSOR_LITERAL } from './tensor';
 import { lumenEncode, lumenDecode, LUMEN_HEADER, LUMEN_LITERAL } from './lumen';
 import { valenceEncode, valenceDecode } from './valence';
+import { hypergraphEncode, hypergraphDecode, HYPERGRAPH_HEADER, HYPERGRAPH_LITERAL } from './hypergraph';
 
 /* --------------------------- versioned static tables ----------------------- */
 
@@ -3442,6 +3443,7 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   if (wire.startsWith(CHRONOS_HEADER + '\n') || wire.startsWith(CHRONOS_LITERAL)) return chronosDecode(wire, enc);
   if (wire.startsWith(TENSOR_HEADER + '\n') || wire.startsWith(TENSOR_LITERAL)) return tensorDecode(wire);
   if (wire.startsWith(LUMEN_HEADER + '\n') || wire.startsWith(LUMEN_LITERAL)) return lumenDecode(wire, enc);
+  if (wire.startsWith(HYPERGRAPH_HEADER + '\n') || wire.startsWith(HYPERGRAPH_LITERAL)) return hypergraphDecode(wire, enc);
   if (wire.startsWith('[V1]\n') || wire.startsWith('[V1L]\n')) return valenceDecode(wire);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
@@ -3617,7 +3619,10 @@ async function rosettaEncodeUncached(
     text.includes('⟐') ||
     ['[MZ1]\n', '[SG1]\n', '[P1]\n', '[M1]\n', '⟨QSR⟩\n', '[PX]\n', '[[VX1\n', '[AX1]\n',
      '[TS1]\n', '[ST1]\n', '[RP1]\n', '[TR1]\n', '[CL1]\n', '[SP1]\n', '[⌘STENCIL]', '[Ϻ]', 'κ\n',
-     'φ', 'τ\n', 'ττ\n', 'βB1\n', 'βB1L\n']
+     'φ', 'τ\n', 'ττ\n', 'βB1\n', 'βB1L\n', 'α\n', 'αα\n', 'ϯ\n', 'ϯϯ\n', 'Ψ\n', 'ΨΨ\n',
+     'Ϧ\n', 'ϦϦ\n', '☀\n', '☀☀\n', '[VK1]\n', '[VK1L]\n', '[POL1]\n', '[POL1L]\n',
+     '[AST2]\n', '[AST2L]\n', '[CHR1]\n', '[CHR1L]\n', '[T1]\n', '[T1L]\n', '[LUM1]\n', '[LUM1L]\n',
+     '[HG2]\n', '[HG2L]\n']
       .some((s) => text.startsWith(s));
   if (!ambiguousIdentity) admit('identity', text, () => text);
 
@@ -3825,6 +3830,14 @@ async function rosettaEncodeUncached(
     const lum = lumenEncode(text, enc);
     if (lum.exact && lum.decoded === text && lum.motifsCount > 0) {
       admit('lumen', lum.wire, () => lumenDecode(lum.wire, enc), ['LUM']);
+    }
+  }
+
+  // HYPERGRAPH-H2 member — directed hypergraph non-contiguous grammar factorization
+  {
+    const hg = hypergraphEncode(text, enc);
+    if (hg.exact && hg.decoded === text && hg.hyperedgesCount > 0) {
+      admit('hypergraph', hg.wire, () => hypergraphDecode(hg.wire, enc), ['HG2']);
     }
   }
 
