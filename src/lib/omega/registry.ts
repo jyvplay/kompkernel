@@ -52,6 +52,16 @@ import { rosettaEncode } from './rosetta';
 import { kappaEncode } from './kappa';
 import { phraseEncode } from './phrase';
 import { tauEncode } from './tau';
+import { phoenixEncode } from './phoenix';
+import { valenceEncode } from './valence';
+import { astraeaEncode } from './astraea';
+import { polarisEncode } from './polaris';
+import { hyperionEncode } from './hyperion';
+import { tensorEncode } from './tensor';
+import { hypergraphEncode } from './hypergraph';
+import { kineticEncode } from './kinetic';
+import { synergyEncode } from './synergy';
+import { quantumEncode } from './quantum';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -119,6 +129,106 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = veritasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'quantum',
+      label: '⚛ QUANTUM-Q9',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = quantumEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'synergy',
+      label: '🌌 SYNERGY-S2',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = synergyEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'kinetic',
+      label: '⚡ KINETIC-K8',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = kineticEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'hypergraph',
+      label: '🕸 HYPERGRAPH-H2',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = hypergraphEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'tensor',
+      label: '⊗ TENSOR-T1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = tensorEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'hyperion',
+      label: '☀ HYPERION-H1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = hyperionEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'polaris',
+      label: '🌌 POLARIS-P1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = polarisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'astraea',
+      label: '🌌 ASTRAEA-A2',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = astraeaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'valence',
+      label: '⚛ VALENCE-V1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = valenceEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'phoenix',
+      label: '𓅂 PHOENIX-P1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = phoenixEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },

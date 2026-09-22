@@ -44,6 +44,16 @@ import { phraseEncode } from '@/lib/omega/phrase';
 import { tauEncode } from '@/lib/omega/tau';
 import { latticeEncode } from '@/lib/omega/lattice';
 import { strandEncode } from '@/lib/omega/strand';
+import { phoenixEncode } from '@/lib/omega/phoenix';
+import { valenceEncode } from '@/lib/omega/valence';
+import { astraeaEncode } from '@/lib/omega/astraea';
+import { polarisEncode } from '@/lib/omega/polaris';
+import { tensorEncode } from '@/lib/omega/tensor';
+import { hypergraphEncode } from '@/lib/omega/hypergraph';
+import { kineticEncode } from '@/lib/omega/kinetic';
+import { synergyEncode } from '@/lib/omega/synergy';
+import { quantumEncode } from '@/lib/omega/quantum';
+import { hyperionEncode } from '@/lib/omega/hyperion';
 
 export interface Row {
   key: string; wireTokens: number; deliveredTokens: number | null;
@@ -103,6 +113,16 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('tau', () => tauEncode(text, enc));
   await run('lattice', () => latticeEncode(text, enc));
   await run('strand', () => strandEncode(text, enc));
+  await run('phoenix', () => phoenixEncode(text, enc));
+  await run('valence', () => valenceEncode(text, enc));
+  await run('astraea', () => astraeaEncode(text, enc));
+  await run('polaris', () => polarisEncode(text, enc));
+  await run('hyperion', () => hyperionEncode(text, enc));
+  await run('tensor', () => tensorEncode(text, enc));
+  await run('hypergraph', () => hypergraphEncode(text, enc));
+  await run('kinetic', () => kineticEncode(text, enc));
+  await run('synergy', () => synergyEncode(text, enc));
+  await run('quantum', () => quantumEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));
   await run('mosaic', () => mosaicEncode(text, enc));
   await run('orbit', async () => orbitEncode(text, enc));
