@@ -44,6 +44,7 @@ import { phraseEncode } from '@/lib/omega/phrase';
 import { tauEncode } from '@/lib/omega/tau';
 import { solarisEncode } from '@/lib/omega/solaris';
 import { valkyrieEncode } from '@/lib/omega/valkyrie';
+import { valenceEncode } from '@/lib/omega/valence';
 
 export interface Row {
   key: string; wireTokens: number; deliveredTokens: number | null;
@@ -103,6 +104,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('tau', () => tauEncode(text, enc));
   await run('solaris', () => solarisEncode(text, enc));
   await run('valkyrie', () => valkyrieEncode(text, enc));
+  await run('valence', () => valenceEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));
   await run('mosaic', () => mosaicEncode(text, enc));
   await run('orbit', async () => orbitEncode(text, enc));
