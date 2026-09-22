@@ -52,6 +52,7 @@ import { tensorEncode } from '@/lib/omega/tensor';
 import { hypergraphEncode } from '@/lib/omega/hypergraph';
 import { kineticEncode } from '@/lib/omega/kinetic';
 import { synergyEncode } from '@/lib/omega/synergy';
+import { nebulaEncode } from '@/lib/omega/nebula';
 import { quantumEncode } from '@/lib/omega/quantum';
 import { hyperionEncode } from '@/lib/omega/hyperion';
 
@@ -122,6 +123,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('hypergraph', () => hypergraphEncode(text, enc));
   await run('kinetic', () => kineticEncode(text, enc));
   await run('synergy', () => synergyEncode(text, enc));
+  await run('nebula', () => nebulaEncode(text, enc));
   await run('quantum', () => quantumEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));
   await run('mosaic', () => mosaicEncode(text, enc));

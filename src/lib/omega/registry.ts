@@ -61,6 +61,7 @@ import { tensorEncode } from './tensor';
 import { hypergraphEncode } from './hypergraph';
 import { kineticEncode } from './kinetic';
 import { synergyEncode } from './synergy';
+import { nebulaEncode } from './nebula';
 import { quantumEncode } from './quantum';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
@@ -129,6 +130,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = veritasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'nebula',
+      label: '🌌 NEBULA-N9',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = nebulaEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
