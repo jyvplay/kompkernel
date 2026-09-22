@@ -210,6 +210,26 @@ import { eidolonProject } from './eidolon';
 import { ltpProject } from './ltp';
 import { latticeEncode, latticeDecode, latticePool, LATTICE_SYSTEM_PROMPT } from './lattice';
 import { strandEncode, strandDecode, strandDynPool, STRAND_SYSTEM_PROMPT } from './strand';
+import { astralEncode, astralDecode, ASTRAL_SENTINEL, ASTRAL_LITERAL } from './astral';
+import { aeonEncode, aeonDecode, AEON_SENTINEL, AEON_LITERAL } from './aeon';
+import { phoenixEncode, phoenixDecode, PHOENIX_SENTINEL, PHOENIX_LITERAL } from './phoenix';
+import { valkyrieEncode, valkyrieDecode, VALKYRIE_SENTINEL, VALKYRIE_LITERAL } from './valkyrie';
+import { solarisEncode, solarisDecode, SOLARIS_SENTINEL, SOLARIS_LITERAL } from './solaris';
+import { hyperionEncode, hyperionDecode, HYPERION_SENTINEL, HYPERION_LITERAL } from './hyperion';
+import { polarisEncode, polarisDecode, POLARIS_HEADER, POLARIS_LITERAL } from './polaris';
+import { astraeaEncode, astraeaDecode, ASTRAEA_HEADER, ASTRAEA_LITERAL } from './astraea';
+import { chronosEncode, chronosDecode, CHRONOS_HEADER, CHRONOS_LITERAL } from './chronos';
+import { tensorEncode, tensorDecode, TENSOR_HEADER, TENSOR_LITERAL } from './tensor';
+import { lumenEncode, lumenDecode, LUMEN_HEADER, LUMEN_LITERAL } from './lumen';
+import { valenceEncode, valenceDecode } from './valence';
+import { hypergraphEncode, hypergraphDecode, HYPERGRAPH_HEADER, HYPERGRAPH_LITERAL } from './hypergraph';
+import { synergyEncode, synergyDecode, SYNERGY_HEADER, SYNERGY_LITERAL } from './synergy';
+import { kineticEncode, kineticDecode, KINETIC_HEADER, KINETIC_LITERAL } from './kinetic';
+import { quantumEncode, quantumDecode, QUANTUM_HEADER, QUANTUM_LITERAL } from './quantum';
+import { nebulaEncode, nebulaDecode, NEBULA_HEADER, NEBULA_LITERAL } from './nebula';
+import { zeroEncode, zeroDecode, ZERO_HEADER, ZERO_LITERAL } from './zero';
+import { orionEncode, orionDecode, ORION_HEADER, ORION_LITERAL } from './orion';
+import { exodusEncode, exodusDecode } from './exodus';
 
 /* --------------------------- versioned static tables ----------------------- */
 
@@ -2384,6 +2404,28 @@ function expandBody(
           }
         }
       }
+      // S — compound block-span envelope: S\n followed by newline-joined
+      // span payloads (without individual mark delimiters). Re-expand each
+      // payload sequentially.
+      if (s[i + 1] === 'S') {
+        const payloadEnd = scanPayloadEnd(s, i + 2, mark);
+        if (payloadEnd > 0) {
+          const payload = s.slice(i + 2, payloadEnd);
+          if (payload.startsWith('\n')) {
+            const innerPayloads = payload.slice(1).split('\n');
+            const rebuilt: string[] = [];
+            for (const p of innerPayloads) {
+              const res = expandBody(mark + p + mark, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+              rebuilt.push(res);
+            }
+            if (rebuilt.length >= 2) {
+              out += rebuilt.join('\n');
+              i = payloadEnd + 1;
+              continue;
+            }
+          }
+        }
+      }
       // Y — YAML kv span (R2): payload = name + SEP + k=v SEP pairs; the SEP
       // glyph is window slot pool[k+2+RNS-1 size] and values are literal.
       if (s[i + 1] === 'Y' && sep !== null) {
@@ -3269,7 +3311,48 @@ export function rosettaTranspose(
   flushCsv();
 
   if (systems.size === 0) return empty;
-  const body = opsFoldText(outLines.join('\n'));
+
+  // Post-processing pass: merge consecutive single-line spans into S compound block envelopes
+  const compactedLines: string[] = [];
+  let idx = 0;
+  while (idx < outLines.length) {
+    if (outLines[idx].startsWith(mark) && outLines[idx].endsWith(mark) && outLines[idx].length > 2 && !outLines[idx].includes('\n')) {
+      let runEnd = idx;
+      while (
+        runEnd + 1 < outLines.length &&
+        outLines[runEnd + 1].startsWith(mark) &&
+        outLines[runEnd + 1].endsWith(mark) &&
+        outLines[runEnd + 1].length > 2 &&
+        !outLines[runEnd + 1].includes('\n')
+      ) {
+        runEnd++;
+      }
+      if (runEnd - idx >= 1) {
+        const runSpans = outLines.slice(idx, runEnd + 1);
+        const innerPayloads = runSpans.map((sp) => sp.slice(1, -1));
+        const sSpan = mark + 'S\n' + innerPayloads.join('\n') + mark;
+        let ok = true;
+        const rebuiltParts: string[] = [];
+        for (const sp of runSpans) {
+          const r = expandBody(sp, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+          if (r === sp) { ok = false; break; }
+          rebuiltParts.push(r);
+        }
+        const srcRun = rebuiltParts.join('\n');
+        const rebuilt = expandBody(sSpan, mark, regionByGlyph, phraseByGlyph, sep, opsByGlyph);
+        if (ok && rebuilt === srcRun && (!measure || countTokens(sSpan, enc) < countTokens(runSpans.join('\n'), enc))) {
+          compactedLines.push(sSpan);
+          systems.add('S');
+          idx = runEnd + 1;
+          continue;
+        }
+      }
+    }
+    compactedLines.push(outLines[idx]);
+    idx++;
+  }
+
+  const body = opsFoldText(compactedLines.join('\n'));
 
   if (globalTs && !systems.has('T')) return empty;
   if (ops && !systems.has('O')) return empty;
@@ -3354,6 +3437,26 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   // TAU member lane: τ\n / ττ\n sentinels dispatch to its decoder.
   if (wire.startsWith(TAU_SENTINEL) || wire.startsWith(TAU_LITERAL)) return tauDecode(wire, enc);
   if (wire.startsWith(BANYAN_SENTINEL) || wire.startsWith(BANYAN_LITERAL)) return banyanDecode(wire);
+  if (wire.startsWith(ASTRAL_SENTINEL + '\n') || wire.startsWith(ASTRAL_LITERAL)) return astralDecode(wire, enc);
+  if (wire.startsWith(AEON_SENTINEL + '\n') || wire.startsWith(AEON_LITERAL)) return aeonDecode(wire, enc);
+  if (wire.startsWith(PHOENIX_SENTINEL + '\n') || wire.startsWith(PHOENIX_LITERAL)) return phoenixDecode(wire, enc);
+  if (wire.startsWith(VALKYRIE_SENTINEL + '\n') || wire.startsWith(VALKYRIE_LITERAL)) return valkyrieDecode(wire, enc);
+  if (wire.startsWith(SOLARIS_SENTINEL + '\n') || wire.startsWith(SOLARIS_LITERAL)) return solarisDecode(wire, enc);
+  if (wire.startsWith(HYPERION_SENTINEL + '\n') || wire.startsWith(HYPERION_LITERAL)) return hyperionDecode(wire, enc);
+  if (wire.startsWith(POLARIS_HEADER + '\n') || wire.startsWith(POLARIS_LITERAL)) return polarisDecode(wire, enc);
+  if (wire.startsWith(ASTRAEA_HEADER + '\n') || wire.startsWith(ASTRAEA_LITERAL)) return astraeaDecode(wire, enc);
+  if (wire.startsWith(CHRONOS_HEADER + '\n') || wire.startsWith(CHRONOS_LITERAL)) return chronosDecode(wire, enc);
+  if (wire.startsWith(TENSOR_HEADER + '\n') || wire.startsWith(TENSOR_LITERAL)) return tensorDecode(wire);
+  if (wire.startsWith(LUMEN_HEADER + '\n') || wire.startsWith(LUMEN_LITERAL)) return lumenDecode(wire, enc);
+  if (wire.startsWith(HYPERGRAPH_HEADER + '\n') || wire.startsWith(HYPERGRAPH_LITERAL)) return hypergraphDecode(wire, enc);
+  if (wire.startsWith(SYNERGY_HEADER + '\n') || wire.startsWith(SYNERGY_LITERAL)) return synergyDecode(wire, enc);
+  if (wire.startsWith(KINETIC_HEADER + '\n') || wire.startsWith(KINETIC_LITERAL)) return kineticDecode(wire, enc);
+  if (wire.startsWith(QUANTUM_HEADER + '\n') || wire.startsWith(QUANTUM_LITERAL)) return quantumDecode(wire, enc);
+  if (wire.startsWith(NEBULA_HEADER + '\n') || wire.startsWith(NEBULA_LITERAL)) return nebulaDecode(wire, enc);
+  if (wire.startsWith(ZERO_HEADER + '\n') || wire.startsWith(ZERO_LITERAL)) return zeroDecode(wire, enc);
+  if (wire.startsWith(ORION_HEADER + '\n') || wire.startsWith(ORION_LITERAL)) return orionDecode(wire, enc);
+  if (wire.startsWith('Ξ') || wire.startsWith('ΞΞ')) return exodusDecode(wire);
+  if (wire.startsWith('[V1]\n') || wire.startsWith('[V1L]\n')) return valenceDecode(wire);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
   if (wire.includes('⟐')) return helixDecode(wire);
@@ -3528,7 +3631,12 @@ async function rosettaEncodeUncached(
     text.includes('⟐') ||
     ['[MZ1]\n', '[SG1]\n', '[P1]\n', '[M1]\n', '⟨QSR⟩\n', '[PX]\n', '[[VX1\n', '[AX1]\n',
      '[TS1]\n', '[ST1]\n', '[RP1]\n', '[TR1]\n', '[CL1]\n', '[SP1]\n', '[⌘STENCIL]', '[Ϻ]', 'κ\n',
-     'φ', 'τ\n', 'ττ\n', 'βB1\n', 'βB1L\n']
+     'φ', 'τ\n', 'ττ\n', 'βB1\n', 'βB1L\n', 'α\n', 'αα\n', 'ϯ\n', 'ϯϯ\n', 'Ψ\n', 'ΨΨ\n',
+     'Ϧ\n', 'ϦϦ\n', '☀\n', '☀☀\n', '[VK1]\n', '[VK1L]\n', '[POL1]\n', '[POL1L]\n',
+     '[POLARIS-P1]\n', '[POLARIS-P1-LITERAL]\n', '[ASTRAEA-A2]\n', '[ASTRAEA-A2-LITERAL]\n',
+     '[CHRONOS-Ω]\n', '[CHRONOS-Ω-LITERAL]\n', '[T1]\n', '[T1L]\n', '[LUMEN-L1]\n', '[LUMEN-L1-LITERAL]\n',
+     '[HG2]\n', '[HG2L]\n', '[SYN2]\n', '[SYN2L]\n', '[KIN8]\n', '[KIN8L]\n', '[Q9]\n', '[Q9L]\n', '[V1]\n', '[V1L]\n', 'Ξ\n', 'ΞΞ\n',
+     '[Z10]\n', '[Z10L]\n', '[N9]\n', '[N9L]\n', '[O10]\n', '[O10L]\n', '[EX]\n', '[EXL]\n']
       .some((s) => text.startsWith(s));
   if (!ambiguousIdentity) admit('identity', text, () => text);
 
@@ -3648,6 +3756,166 @@ async function rosettaEncodeUncached(
     const st = strandEncode(text, enc);
     if (st.exact && st.decoded === text && st.mode === 'strand') {
       admit('strand', st.wire, () => strandDecode(st.wire, enc), ['ST']);
+    }
+  }
+
+  // ASTRAL-A1 member — dynamic structural collocation contraction
+  {
+    const ast = astralEncode(text, enc);
+    if (ast.exact && ast.decoded === text && ast.substitutions > 0) {
+      admit('astral', ast.wire, () => astralDecode(ast.wire, enc), ['AST']);
+    }
+  }
+
+  // AEON-A1 member — dynamic attractor frame delta quotient encoding
+  {
+    const ae = aeonEncode(text, enc);
+    if (ae.exact && ae.decoded === text && ae.attractors > 0) {
+      admit('aeon', ae.wire, () => aeonDecode(ae.wire, enc), ['AE']);
+    }
+  }
+
+  // PHOENIX-P1 member — poly-disjoint topological grammar motif extraction
+  {
+    const ph = phoenixEncode(text, enc);
+    if (ph.exact && ph.decoded === text && ph.motifs > 0) {
+      admit('phoenix', ph.wire, () => phoenixDecode(ph.wire, enc), ['PH']);
+    }
+  }
+
+  // VALKYRIE-V1 member — vectorized degenerate lattice subgraph contracting
+  {
+    const vk = valkyrieEncode(text, enc);
+    if (vk.exact && vk.decoded === text && vk.subgraphs > 0) {
+      admit('valkyrie', vk.wire, () => valkyrieDecode(vk.wire, enc), ['VK']);
+    }
+  }
+
+  // SOLARIS-S1 member — spectral orthogonal basis polynomial contraction
+  {
+    const sol = solarisEncode(text, enc);
+    if (sol.exact && sol.decoded === text && sol.projections > 0) {
+      admit('solaris', sol.wire, () => solarisDecode(sol.wire, enc), ['SOL']);
+    }
+  }
+
+  // HYPERION-H1 member — hyper-dimensional spectral context contraction
+  {
+    const hyp = hyperionEncode(text, enc);
+    if (hyp.exact && hyp.decoded === text && hyp.orbits > 0) {
+      admit('hyperion', hyp.wire, () => hyperionDecode(hyp.wire, enc), ['HYP']);
+    }
+  }
+
+  // POLARIS-P1 member — polar phase-space graph quotient contraction
+  {
+    const pol = polarisEncode(text, enc);
+    if (pol.exact && pol.decoded === text && pol.orbitsCount > 0) {
+      admit('polaris', pol.wire, () => polarisDecode(pol.wire, enc), ['POL']);
+    }
+  }
+
+  // ASTRAEA-A2 member — adaptive contextual straight-line grammar induction
+  {
+    const ast2 = astraeaEncode(text, enc);
+    if (ast2.exact && ast2.decoded === text && ast2.rulesCount > 0) {
+      admit('astraea', ast2.wire, () => astraeaDecode(ast2.wire, enc), ['AST2']);
+    }
+  }
+
+  // CHRONOS-Ω member — dynamic phase-space temporal difference delta quotient
+  {
+    const chr = chronosEncode(text, enc);
+    if (chr.exact && chr.decoded === text && chr.deltasCount > 0) {
+      admit('chronos', chr.wire, () => chronosDecode(chr.wire, enc), ['CHR']);
+    }
+  }
+
+  // TENSOR-T1 member — multi-tensor canonical fiber-bundle contraction
+  {
+    const ten = tensorEncode(text, enc);
+    if (ten.exact && ten.decoded === text && ten.fibersCount >= 3) {
+      admit('tensor', ten.wire, () => tensorDecode(ten.wire), ['TEN']);
+    }
+  }
+
+  // LUMEN-L1 member — lexical uniform-entropy motif entropic contraction
+  {
+    const lum = lumenEncode(text, enc);
+    if (lum.exact && lum.decoded === text && lum.motifsCount > 0) {
+      admit('lumen', lum.wire, () => lumenDecode(lum.wire, enc), ['LUM']);
+    }
+  }
+
+  // HYPERGRAPH-H2 member — directed hypergraph non-contiguous grammar factorization
+  {
+    const hg = hypergraphEncode(text, enc);
+    if (hg.exact && hg.decoded === text && hg.hyperedgesCount > 0) {
+      admit('hypergraph', hg.wire, () => hypergraphDecode(hg.wire, enc), ['HG2']);
+    }
+  }
+
+  // SYNERGY-S2 member — cross-span structural collocation & entropy-optimal grammar factorization
+  {
+    const syn = synergyEncode(text, enc);
+    if (syn.exact && syn.decoded === text && syn.collocationsCount > 0) {
+      admit('synergy', syn.wire, () => synergyDecode(syn.wire, enc), ['SYN2']);
+    }
+  }
+
+  // KINETIC-K8 member — kinetic phase-space flow contraction & BPE-boundary realignment
+  {
+    const kin = kineticEncode(text, enc);
+    if (kin.exact && kin.decoded === text && kin.flowsCount > 0) {
+      admit('kinetic', kin.wire, () => kineticDecode(kin.wire, enc), ['KIN8']);
+    }
+  }
+
+  // QUANTUM-Q9 member — quantum subspace canonical decomposition & BPE-boundary realignment
+  {
+    const qua = quantumEncode(text, enc);
+    if (qua.exact && qua.decoded === text && qua.subspacesCount > 0) {
+      admit('quantum', qua.wire, () => quantumDecode(qua.wire, enc), ['Q9']);
+    }
+  }
+
+  // NEBULA-N9 member — spectral constellation grammar decomposition & BPE realignment
+  {
+    const neb = nebulaEncode(text, enc);
+    if (neb.exact && neb.decoded === text && neb.constellationsCount > 0) {
+      admit('nebula', neb.wire, () => nebulaDecode(neb.wire, enc), ['N9']);
+    }
+  }
+
+  // ZERO-Z10 member — zero-entropy morphic subsequence lattice contraction
+  {
+    const zr = zeroEncode(text, enc);
+    if (zr.exact && zr.decoded === text && zr.latticesCount > 0) {
+      admit('zero', zr.wire, () => zeroDecode(zr.wire, enc), ['Z10']);
+    }
+  }
+
+  // ORION-O10 member — celestial manifold trajectory realignment
+  {
+    const ori = orionEncode(text, enc);
+    if (ori.exact && ori.decoded === text && ori.trajectoriesCount > 0) {
+      admit('orion', ori.wire, () => orionDecode(ori.wire, enc), ['O10']);
+    }
+  }
+
+  // EXODUS-E1 member — dynamic sub-lexical phase space quotient contraction
+  {
+    const ex = exodusEncode(text, enc);
+    if (ex.exact && ex.decoded === text && ex.substitutions > 0) {
+      admit('exodus', ex.wire, () => exodusDecode(ex.wire), ['EX']);
+    }
+  }
+
+  // VALENCE-V1 member — Factoradix permutation-rank encoding
+  {
+    const val = valenceEncode(text, enc);
+    if (val.exact && val.decoded === text && val.n >= 3) {
+      admit('valence', val.wire, () => valenceDecode(val.wire), ['VAL']);
     }
   }
 
