@@ -24,6 +24,7 @@
 import { countTokens, type EncodingName } from './bpe';
 
 export const VALENCE_SENTINEL = '[V1]\n';
+export const VALENCE_LITERAL = '[V1][V1]\n';
 
 export interface ValenceResult {
   wire: string;
@@ -32,7 +33,7 @@ export interface ValenceResult {
   inTokens: number;
   outTokens: number;
   savingsPct: number;
-  mode: 'valence' | 'identity';
+  mode: 'valence' | 'identity' | 'forced-wrap';
   notes: string;
 }
 
@@ -62,7 +63,8 @@ export function computeLehmerRank(pi: number[]): bigint {
 }
 
 /** Invert Factoradix Lehmer Rank back to original permutation pi */
-export function invertLehmerRank(n: number, rank: bigint): number[] {
+export function invertLehmerRank(n: number, rank: bigint): number[] | null {
+  if (rank < 0n || rank >= factorial(n)) return null;
   const available = Array.from({ length: n }, (_, i) => i);
   const pi: number[] = [];
   let rem = rank;
@@ -71,12 +73,14 @@ export function invertLehmerRank(n: number, rank: bigint): number[] {
     const fact = factorial(n - 1 - i);
     const idx = Number(rem / fact);
     rem %= fact;
+    if (idx < 0 || idx >= available.length) return null;
     pi.push(available.splice(idx, 1)[0]);
   }
   return pi;
 }
 
 export function valenceDecode(wire: string): string {
+  if (wire.startsWith(VALENCE_LITERAL)) return wire.slice(VALENCE_LITERAL.length);
   if (!wire.startsWith(VALENCE_SENTINEL)) return wire;
   const rest = wire.slice(VALENCE_SENTINEL.length);
   const firstNl = rest.indexOf('\n');
@@ -88,7 +92,7 @@ export function valenceDecode(wire: string): string {
 
   const n = Number(meta.slice(0, colon));
   const rankStr = meta.slice(colon + 1);
-  if (!Number.isSafeInteger(n) || n < 2 || n > 20) return wire;
+  if (!Number.isSafeInteger(n) || n < 2 || n > 18) return wire;
 
   let rank: bigint;
   try {
@@ -101,6 +105,7 @@ export function valenceDecode(wire: string): string {
   if (palette.length !== n) return wire;
 
   const pi = invertLehmerRank(n, rank);
+  if (pi === null) return wire;
   return pi.map((idx) => palette[idx]).join('\n');
 }
 
@@ -112,6 +117,18 @@ export function valenceEncode(text: string, enc: EncodingName = 'o200k_base'): V
   });
 
   if (!text) return identity('empty input');
+
+  if (text.startsWith(VALENCE_SENTINEL)) {
+    const wire = VALENCE_LITERAL + text;
+    const decoded = valenceDecode(wire);
+    const outTokens = countTokens(wire, enc);
+    return {
+      wire, decoded, exact: decoded === text, inTokens, outTokens,
+      savingsPct: inTokens ? ((inTokens - outTokens) / inTokens) * 100 : 0,
+      mode: 'forced-wrap', notes: 'forced wrap (sentinel prefix adversary)',
+    };
+  }
+
   const lines = text.split('\n');
   const n = lines.length;
 
