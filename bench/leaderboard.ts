@@ -52,6 +52,7 @@ import { aeonEncode } from '@/lib/omega/aeon';
 import { hyperionEncode } from '@/lib/omega/hyperion';
 import { astralEncode } from '@/lib/omega/astral';
 import { solarisEncode } from '@/lib/omega/solaris';
+import { tensorEncode } from '@/lib/omega/tensor';
 
 export interface Row {
   key: string; wireTokens: number; deliveredTokens: number | null;
@@ -119,6 +120,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('hyperion', () => hyperionEncode(text, enc));
   await run('astral', () => astralEncode(text, enc));
   await run('solaris', () => solarisEncode(text, enc));
+  await run('tensor', () => tensorEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));
   await run('mosaic', () => mosaicEncode(text, enc));
   await run('orbit', async () => orbitEncode(text, enc));
