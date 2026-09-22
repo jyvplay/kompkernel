@@ -53,6 +53,7 @@ import { kappaEncode } from './kappa';
 import { phraseEncode } from './phrase';
 import { tauEncode } from './tau';
 import { phoenixEncode } from './phoenix';
+import { valenceEncode } from './valence';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -120,6 +121,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = veritasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'valence',
+      label: '⚛ VALENCE-V1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = valenceEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
