@@ -59,6 +59,7 @@ import { polarisEncode } from './polaris';
 import { hyperionEncode } from './hyperion';
 import { tensorEncode } from './tensor';
 import { hypergraphEncode } from './hypergraph';
+import { kineticEncode } from './kinetic';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -126,6 +127,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = veritasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'kinetic',
+      label: '⚡ KINETIC-K8',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = kineticEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
