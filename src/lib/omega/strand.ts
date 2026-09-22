@@ -133,7 +133,13 @@ const ST_MAX_ENTRIES = 220;
 const ST_MAX_PHRASE = 48;
 const ST_MIN_PHRASE = 2;
 const ST_MAX_CANDIDATES = 6_000;
-const ST_MAX_ORACLE = 1_400;
+// Raised from 1,400 after measuring that it BOUND on real inputs: on the
+// concatenated holdout corpus the selector exhausted its budget and returned
+// 23 dynamic entries where the same text scored separately yields 162. The
+// value saturates at 12,000 (24k and 48k are identical), so this is the cap
+// becoming non-binding rather than a tuned constant. Candidate cap left at
+// 6,000 - raising it alone measurably HURTS (AMBIENT 8251 -> 8430).
+const ST_MAX_ORACLE = 12_000;
 const ST_DYN_POOL = 512;
 const ST_STATIC_POOL = 820;
 

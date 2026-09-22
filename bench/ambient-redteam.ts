@@ -167,7 +167,10 @@ console.log('C9 compression floor (guards silent degradation)');
   // silently stops folding (e.g. dropping the static pool from the glyph
   // universe, or failing to unfold rejected entries) pushes this back toward
   // 9512/9947 and must fail loudly rather than just assert fewer times.
-  ok(amb <= 8400, `AMBIENT total regressed to ${amb} (expected <= 8400)`);
+  // Floor tracks the measured value (7971) with a small tolerance. A loose
+  // bound silently tolerates real regressions: at <= 8400 this suite failed to
+  // catch ST_MAX_ORACLE being reverted (8251 vs 7971), so it is tightened here.
+  ok(amb <= 8050, `AMBIENT total regressed to ${amb} (expected <= 8050)`);
   ok(amb < self - 1200, `AMBIENT gain collapsed: ${self - amb} (expected > 1200)`);
   ok(modes >= 6, `only ${modes} files reached ambient mode (expected >= 6)`);
 }
