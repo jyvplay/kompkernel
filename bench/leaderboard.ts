@@ -60,6 +60,7 @@ import { hypergraphEncode } from '@/lib/omega/hypergraph';
 import { synergyEncode } from '@/lib/omega/synergy';
 import { kineticEncode } from '@/lib/omega/kinetic';
 import { quantumEncode } from '@/lib/omega/quantum';
+import { nebulaEncode } from '@/lib/omega/nebula';
 
 export interface Row {
   key: string; wireTokens: number; deliveredTokens: number | null;
@@ -133,6 +134,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('synergy', () => synergyEncode(text, enc));
   await run('kinetic', () => kineticEncode(text, enc));
   await run('quantum', () => quantumEncode(text, enc));
+  await run('nebula', () => nebulaEncode(text, enc));
   await run('lattice', () => latticeEncode(text, enc));
   await run('strand', () => strandEncode(text, enc));
   await run('apex', () => apexEncode(text, enc));
