@@ -204,6 +204,8 @@ import { type OrbitResult } from './orbit';
 import { kappaEncode, kappaDecode, KAPPA_SENTINEL } from './kappa';
 import { phraseEncode, phraseDecode, phraseFold, hasCodebookGlyph, phraseCodebook, phraseGlyphs, PHRASE_SENTINEL, PHRASE_LITERAL } from './phrase';
 import { tauEncode, tauDecode, TAU_SENTINEL, TAU_LITERAL, pipeSpan, commaSpan, yamlFromLines } from './tau';
+import { valenceEncode, valenceDecode, VALENCE_SENTINEL } from './valence';
+import { tensorEncode, tensorDecode, TENSOR_SENTINEL } from './tensor';
 import { crownDecode, type CrownResult } from './crown';
 import { spliceDecode, type SpliceResult } from './splice';
 import { eidolonProject } from './eidolon';
@@ -3351,6 +3353,8 @@ export function rosettaDecode(wire: string, enc: EncodingName = 'o200k_base'): s
   if (wire.startsWith(PHRASE_SENTINEL) || wire.startsWith(PHRASE_LITERAL)) return phraseDecode(wire, enc);
   // TAU member lane: τ\n / ττ\n sentinels dispatch to its decoder.
   if (wire.startsWith(TAU_SENTINEL) || wire.startsWith(TAU_LITERAL)) return tauDecode(wire, enc);
+  if (wire.startsWith(VALENCE_SENTINEL)) return valenceDecode(wire);
+  if (wire.startsWith(TENSOR_SENTINEL)) return tensorDecode(wire);
   if (wire.startsWith(BANYAN_SENTINEL) || wire.startsWith(BANYAN_LITERAL)) return banyanDecode(wire);
     // HELIX is an inline-glyph lane (no line sentinel): a wire containing its
     // glyph is a helix wire — the same default mosaic's bareDecode applies.
@@ -3602,6 +3606,18 @@ async function rosettaEncodeUncached(
   {
     const tu = tauEncode(text, enc);
     if (tu.exact && tu.decoded === text) admit('tau', tu.wire, () => tauDecode(tu.wire, enc), tu.systems);
+  }
+
+  // VALENCE-V1 member — Factoradix permutation rank & token quorum codec
+  {
+    const va = valenceEncode(text, enc);
+    if (va.exact && va.decoded === text) admit('valence', va.wire, () => valenceDecode(va.wire), ['V']);
+  }
+
+  // TENSOR-T1 member — Fiber-bundle graph contraction
+  {
+    const te = tensorEncode(text, enc);
+    if (te.exact && te.decoded === text) admit('tensor', te.wire, () => tensorDecode(te.wire), ['T']);
   }
 
   // KAPPA-κ1 member — inline-bind token macros (parameterized repeats).
@@ -3866,6 +3882,8 @@ export function rosettaDecoderPrompt(): string {
     'MERIDIAN member wires are prompt-native here:',
     MERIDIAN_SYSTEM_PROMPT,
     'BANYAN wires: βB1\\n<count>,<final-newline> followed by one line record per source line. R<line> is a root literal; D<parent>,<prefix>,<suffix>:<middle> rebuilds a line from a prior bounded record. βB1L\\n is the forced literal form. The bounded parent forest is forward-decodable and byte-exact.',
+    'VALENCE wires: [V1]\\n<count>:<FactoradixRank>\\n<sorted_palette> — Factoradix (Lehmer code) permutation-rank re-ordering of canonical line sequences.',
+    'TENSOR wires: [T1]\\n<skeleton>\\n[FIBER]\\n<payloads> — Multi-tensor canonical fiber-bundle graph contraction.',
     'κ-wires: κ\\n<glyph>\\n<body> — KAPPA-κ1 inline-bind macros. The glyph',
     'is a pool window base w; macro j uses O_j = pool[w+1+2j] (definition',
     'delimiters) and U_j = pool[w+2+2j] (use site). Scan left to right:',
