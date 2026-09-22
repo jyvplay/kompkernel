@@ -56,6 +56,8 @@ import { astraeaEncode } from './astraea';
 import { phoenixEncode } from './phoenix';
 import { valkyrieEncode } from './valkyrie';
 import { valenceEncode } from './valence';
+import { aeonEncode } from './aeon';
+import { hyperionEncode } from './hyperion';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -123,6 +125,26 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = veritasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'aeon',
+      label: '♾ AEON-A1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = aeonEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'hyperion',
+      label: '☀ HYPERION-H1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = hyperionEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
