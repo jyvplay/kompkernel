@@ -60,6 +60,7 @@ import { hyperionEncode } from './hyperion';
 import { tensorEncode } from './tensor';
 import { hypergraphEncode } from './hypergraph';
 import { kineticEncode } from './kinetic';
+import { synergyEncode } from './synergy';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
 
@@ -127,6 +128,16 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = veritasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'synergy',
+      label: '🌌 SYNERGY-S2',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = synergyEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },
