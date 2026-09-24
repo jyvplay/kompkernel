@@ -71,6 +71,7 @@ import { eupraxiaEncode } from './eupraxia';
 import { metisEncode } from './metis';
 import { proteusEncode } from './proteus';
 import { logosEncode } from './logos';
+import { hermesEncode } from './hermes';
 import { kappaEncode } from './kappa';
 import { phraseEncode } from './phrase';
 import { tauEncode } from './tau';
@@ -587,6 +588,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'logos', label: 'Ω LOGOS-Ω (Self-Referential Lexicon Frontier)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = await logosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'hermes', label: '信 HERMES-Ω (Self-Carried Single-Message Codec)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await hermesEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
     },
     {
       key: 'metis', label: '⬤ METIS-Ω (Polymorphic Grammar Frontier)', family: 'exact', fidelity: 'exact',

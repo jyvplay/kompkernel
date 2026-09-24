@@ -40,6 +40,7 @@ import type { EupraxiaResult } from '../lib/omega/eupraxia';
 import type { MetisResult } from '../lib/omega/metis';
 import type { ProteusResult } from '../lib/omega/proteus';
 import type { LogosResult } from '../lib/omega/logos';
+import type { HermesResult } from '../lib/omega/hermes';
 import type { KappaResult } from '../lib/omega/kappa';
 import type { PhraseResult } from '../lib/omega/phrase';
 import type { TauResult } from '../lib/omega/tau';
@@ -102,6 +103,7 @@ export interface CodecWorkerResult {
   nemesis?: NemesisResult;
   proteus?: ProteusResult;
   logos?: LogosResult;
+  hermes?: HermesResult;
   metis?: MetisResult;
   eupraxia?: EupraxiaResult;
   dike?: DikeResult;

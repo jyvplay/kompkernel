@@ -49,6 +49,7 @@ import { eupraxiaEncode } from '../lib/omega/eupraxia';
 import { metisEncode } from '../lib/omega/metis';
 import { proteusEncode } from '../lib/omega/proteus';
 import { logosEncode } from '../lib/omega/logos';
+import { hermesEncode } from '../lib/omega/hermes';
 import { kappaEncode } from '../lib/omega/kappa';
 import { phraseEncode } from '../lib/omega/phrase';
 import { tauEncode } from '../lib/omega/tau';
@@ -139,6 +140,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const nemesis = await nemesisEncode(input, 'o200k_base');
       const proteus = await proteusEncode(input, 'o200k_base');
       const logos = await logosEncode(input, 'o200k_base');
+      const hermes = await hermesEncode(input, 'o200k_base');
       const metis = await metisEncode(input, 'o200k_base');
       const eupraxia = await eupraxiaEncode(input, 'o200k_base');
       const dike = await dikeEncode(input, 'o200k_base');
@@ -197,6 +199,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         nemesis,
         proteus,
         logos,
+        hermes,
         metis,
         eupraxia,
         dike,
