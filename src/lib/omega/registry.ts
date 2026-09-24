@@ -94,6 +94,7 @@ import { nebulaEncode } from './nebula';
 import { zeroEncode } from './zero';
 import { orionEncode } from './orion';
 import { exodusEncode } from './exodus';
+import { cadmusEncode } from './cadmus';
 export { evaluateAllCodecsDynamically, type SynthesisSummary, type CodecEvaluationRun } from './codec-synthesis';
 
 export type Fidelity = 'exact' | 'lossy' | 'unverified';
@@ -574,6 +575,10 @@ export function codecEntries(): Entry[] {
         const r = tauEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
+    },
+    {
+      key: 'cadmus', label: '⚔ CADMUS-Ω (Audited Portfolio)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await cadmusEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
     },
     {
       key: 'proteus', label: '⬥ PROTEUS-Ω (Adaptive Grammar Frontier)', family: 'exact', fidelity: 'exact',
