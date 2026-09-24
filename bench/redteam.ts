@@ -6,14 +6,31 @@
  * P3 grammar fuzz (random structured docs, exactness + never-worse)
  * P4 determinism & purity (cache, double-encode, wire-re-encode)
  * P5 cross-encoding (cl100k_base end-to-end)
+ * P6 KAPPA adversarial shapes
  * P7 PHRASEBOOK-φ1 + ROSETTA-W adversarial shapes
  * P8 TAU-τ1 + ROSETTA-R2 adversarial shapes
+ * P9 J-array markers, prologue diet, TS-in-span adversarial shapes
+ * P10 ROSETTA-R3 N/A/E span adversarial shapes
+ * P11 ROSETTA-R4 signature/stride families + CALYX cage
+ * P12 ROSETTA-R4.1 J-composed families + range bodies
+ * P13 ROSETTA-R4.2 pair families + periodic-const strides
+ * P14 IM1 input-only cross-turn memory
+ * P15 New categories red-team & boundary mutations
  */
 import { rosettaEncode, rosettaDecode, rosettaPool, rosettaTranspose } from '@/lib/omega/rosetta';
 import { countTokens } from '@/lib/omega/bpe';
 import { signetEncode } from '@/lib/omega/signet';
 import { mosaicEncode } from '@/lib/omega/mosaic';
-import { CHAOS_900, MOSAIC_HANDTRACE_300, CHAOS_G_CJK, mosaicFixtures } from './fixtures';
+import {
+  CHAOS_900,
+  MOSAIC_HANDTRACE_300,
+  CHAOS_G_CJK,
+  NATURAL_PROSE_1000,
+  HYBRID_PROSE_1200,
+  OUTPUT_PROMPT_LOG_2000,
+  CHAOS_1500,
+  mosaicFixtures,
+} from './fixtures';
 import { kappaEncode, kappaDecode, KAPPA_SENTINEL, KAPPA_HOLE } from '@/lib/omega/kappa';
 import { phraseEncode, phraseDecode, phraseCodebook, phraseFold } from '@/lib/omega/phrase';
 import { tauEncode, tauDecode, tauMarkers } from '@/lib/omega/tau';
@@ -93,7 +110,7 @@ function kScenarioPrompt1k(): string {
 }
 
 function zColumnarPrompt6k(): string {
-  const cn = ['正常', '偏高', '回落', '待查', '完成', '重试', '确认', '观察'];
+  const cn = ['正常', '偏高', '回落', '待查', '完成', '重试', '确认', '観察'];
   const sev = ['low', 'medium', 'high', 'critical'];
   const sections: string[] = [
     'Operator digest: heterogeneous prompt output. Preserve prose, JSON, code, CSV, and 中文 exactly.',
@@ -310,7 +327,7 @@ async function p7() {
     ['phrase inside JSON', '{"msg":"影響範囲 and the タイムアウト of the run","code":404}'],
     ['phrase inside CSV field', 'note,impact\nrow1,影響範囲\nrow2,タイムアウト'],
     ['phrase adjacent to timestamp', 'at 2026-09-15T06:02:11Z the 影響範囲 was measured'],
-    ['non-codebook hangul source', '한국어 텍스트가 여기에 있습니다 影響範囲 mixed'],
+    ['non-codebook hangul source', '한국어 텍스트가ここにあります 影響範囲 mixed'],
     ['chaos-G fixture', CHAOS_G_CJK],
     ['long phrase-dense', (jp + '\n' + cn + '\n').repeat(40)],
   ];
@@ -459,7 +476,7 @@ async function p8() {
   // ---- ROSETTA-R2 shapes -----------------------------------------------------
   {
     // chaos-E: P fires inside the transposition; round-trip + strict improvement
-    const E = 'Weekly report: search quality dipped after the sharding change.\n- p95 latency 480ms (was 210ms)\n- 3 regression bugs filed by QA\n| team | tickets | sla |\n| search | 14 | 97% |\n| infra | 8 | 99% |\n| data | 5 | 91% |\n```yaml\nserver:\n  port: 8080\n  regions: [us-east-1, eu-west-1]\n  timeout_ms: 3000\n```\n{"build":"2841","passed":812,"failed":3,"skipped":17,"flaky":["search-7"]}\nNote: 日文团队报告索引重建将在周五完成，请确认窗口。\naudit 2026-09-15T09:02:33Z deploy finished in 42s\nFollow-ups: revert the sharding flag, re-run the suite, page data-oncall.';
+    const E = 'Weekly report: search quality dipped after the sharding change.\n- p95 latency 480ms (was 210ms)\n- 3 regression bugs filed by QA\n| team | tickets | sla |\n| search | 14 | 97% |\n| infra | 8 | 99% |\n| data | 5 | 91% |\n```yaml\nserver:\n  port: 8080\n  regions: [us-east-1, eu-west-1]\n  timeout_ms: 3000\n```\n{"build":"2841","passed":812,"failed":3,"skipped":17,"flaky":["search-7"]}\nNote: 日文团队報告索引重建将在周五完成，請確認窗口。\naudit 2026-09-15T09:02:33Z deploy finished in 42s\nFollow-ups: revert the sharding flag, re-run the suite, page data-oncall.';
     const r = await rt(E);
     ok(r.exact, 'R2 chaos-E exact', `member=${r.r.member} ${r.out}/${r.in} systems=[${r.r.systems.join(',')}]`);
     ok(r.out < 184, 'R2 chaos-E improves on R1 champion (184)', `${r.out}`);
@@ -1102,9 +1119,59 @@ async function p14() {
   ok(marker.mode === 'identity' && marker.wire === 'literal ↩ marker', 'P14 IM1 sentinel collision no-op', marker.mode);
 }
 
+// ---------------------------------------------------------------- P15
+async function p15() {
+  console.log('P15 — new fixture categories red-team & boundary mutations');
+  const categories: Array<[string, string]> = [
+    ['NATURAL_PROSE_1000', NATURAL_PROSE_1000],
+    ['HYBRID_PROSE_1200', HYBRID_PROSE_1200],
+    ['OUTPUT_PROMPT_LOG_2000', OUTPUT_PROMPT_LOG_2000],
+    ['CHAOS_1500', CHAOS_1500],
+  ];
+
+  for (const [name, text] of categories) {
+    // 1. o200k_base roundtrip + contract check
+    const { r, exact } = await rt(text, 'o200k_base');
+    ok(exact, `P15 ${name} (o200k_base exact)`, `member=${r.member} out=${r.outTokens}/${r.in}`);
+    ok(r.outTokens <= r.inTokens, `P15 ${name} (o200k_base never-worse)`, `out=${r.outTokens} in=${r.in}`);
+
+    // 2. cl100k_base roundtrip + contract check
+    const cl = await rt(text, 'cl100k_base');
+    ok(cl.exact, `P15 ${name} (cl100k_base exact)`, `member=${cl.r.member} out=${cl.out}/${cl.in}`);
+    ok(cl.out <= cl.in, `P15 ${name} (cl100k_base never-worse)`, `out=${cl.out} in=${cl.in}`);
+
+    // 3. KAPPA verification
+    const kp = kappaEncode(text, 'o200k_base');
+    ok(kp.exact && kappaDecode(kp.wire) === text, `P15 ${name} (KAPPA exact)`, `applied=${kp.applied}`);
+
+    // 4. PHRASEBOOK verification
+    const ph = phraseEncode(text, 'o200k_base');
+    ok(ph.exact && phraseDecode(ph.wire, 'o200k_base') === text, `P15 ${name} (PHRASEBOOK exact)`, `applied=${ph.applied}`);
+
+    // 5. TAU verification
+    const tu = tauEncode(text, 'o200k_base');
+    ok(tu.exact && tauDecode(tu.wire, 'o200k_base') === text, `P15 ${name} (TAU exact)`, `systems=[${tu.systems.join(',')}]`);
+  }
+
+  // Boundary mutations on CHAOS_1500 and OUTPUT_PROMPT_LOG_2000
+  const pool = rosettaPool('o200k_base');
+  const mutations: Array<[string, string]> = [
+    ['CHAOS_1500 prefix pool glyph', pool[0] + CHAOS_1500],
+    ['CHAOS_1500 infix sentinel', CHAOS_1500.slice(0, 500) + 'ぁJjob=testぁ\n' + CHAOS_1500.slice(500)],
+    ['PROMPT_LOG_2000 prefix thought tag', '<thought>injected tag</thought>\n' + OUTPUT_PROMPT_LOG_2000],
+    ['PROMPT_LOG_2000 duplicate table', OUTPUT_PROMPT_LOG_2000 + '\n| LOG-999 | test | INFO | 1.0 | 99% | PASSED |'],
+  ];
+
+  for (const [lbl, mutDoc] of mutations) {
+    const { r, exact } = await rt(mutDoc, 'o200k_base');
+    ok(exact, `P15 mutation: ${lbl} (exact)`, `member=${r.member}`);
+    ok(r.outTokens <= r.inTokens || r.member === 'forced-wrap', `P15 mutation: ${lbl} (never-worse)`, `out=${r.outTokens}/${r.in}`);
+  }
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14(); await p15();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }
