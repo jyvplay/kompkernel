@@ -1,0 +1,25 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import { metisEncode, metisDecode, metisDecoderPrompt, METIS_START } from '@/lib/omega/metis';
+import { eupraxiaEncode } from '@/lib/omega/eupraxia';
+import { countTokens } from '@/lib/omega/bpe';
+import { THEMIS_IMPLICIT_GLYPHS } from '@/lib/omega/themis';
+const input=fs.readFileSync('bench/holdout/gh-prose.txt','utf8');
+const [base,r]=await Promise.all([eupraxiaEncode(input),metisEncode(input)]);let n=0;
+async function ok(name:string,f:()=>unknown|Promise<unknown>){await f();n++;console.log('✓',name)}
+await ok('byte-perfect prose reconstruction',()=>assert.equal(r.decoded,input));
+await ok('independent decoder reconstruction',async()=>assert.equal(await metisDecode(r.wire),input));
+await ok('advances EUPRAXIA by substantially more than a few',()=>assert.ok(base.outTokens-r.outTokens>=10));
+await ok('live tokenizer accounting',()=>assert.equal(r.outTokens,countTokens(r.wire,'o200k_base')));
+await ok('METIS envelope selected',()=>assert.ok(r.wire.startsWith(METIS_START)));
+await ok('multiple dynamic MOIRA rules closed',()=>assert.ok((r.polymorphicRules??0)>=5));
+await ok('accepted tape has exact rule cardinality',()=>assert.equal(r.wire.slice(1,r.wire.indexOf('乙')).split('?').length,r.polymorphicRules));
+await ok('question mark collision absent by admission',()=>assert.ok(!r.wire.slice(1,r.wire.indexOf('乙')).split('?').some(x=>x.includes('?'))));
+await ok('missing body boundary is inert',async()=>assert.equal(await metisDecode('⬤abc'),'⬤abc'));
+await ok('empty expansion tape is inert',async()=>assert.equal(await metisDecode('⬤乙x'),'⬤乙x'));
+await ok('ordinal reverse expansion is exact',async()=>assert.equal(await metisDecode(`⬤xyz乙${THEMIS_IMPLICIT_GLYPHS[0]}`),'xyz'));
+await ok('ordinary EUPRAXIA fallback delegates',async()=>assert.equal(await metisDecode(base.wire),input));
+await ok('same-chat access model explicit',()=>assert.ok(metisDecoderPrompt().includes('No system prompt')));
+await ok('both METIS delimiters specified',()=>assert.ok(metisDecoderPrompt().includes('separated by ?')&&metisDecoderPrompt().includes('Split once at 乙')));
+await ok('exact Pareto tournament',()=>assert.ok(r.outTokens<=base.outTokens));
+console.log(`\n${n}/15 METIS adversarial passes`);
