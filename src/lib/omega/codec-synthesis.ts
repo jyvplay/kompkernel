@@ -16,6 +16,27 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { telosEncode, telosDecode, type TelosResult } from './telos';
+import { archeEncode, archeDecode, type ArcheResult } from './arche';
+import { genesisEncode, genesisDecode, type GenesisResult } from './genesis';
+import { omniEncode, omniDecode, type OmniResult } from './omni';
+import { khorosEncode, khorosDecode, type KhorosResult } from './khoros';
+import { kairosEncode } from './kairos';
+import { anankeEncode } from './ananke';
+import { moiraEncode } from './moira';
+import { nemesisEncode } from './nemesis';
+import { themisEncode } from './themis';
+import { dikeEncode } from './dike';
+import { eupraxiaEncode } from './eupraxia';
+import { metisEncode } from './metis';
+import { proteusEncode } from './proteus';
+import { pantheonEncode, pantheonDecode, type PantheonResult } from './pantheon';
+import { apeironEncode, apeironDecode, type ApeironResult } from './apeiron';
+import { noesisEncode, noesisDecode, type NoesisResult } from './noesis';
+import { synapseEncode, synapseDecode, type SynapseResult } from './synapse';
+import { panaceaEncode, panaceaDecode, type PanaceaResult } from './panacea';
+import { aetherEncode, aetherDecode, type AetherResult } from './aether';
+import { harmoniaEncode, harmoniaDecode, type HarmoniaResult } from './harmonia';
 import { rosettaEncode, rosettaDecode, type RosettaResult } from './rosetta';
 import { astralEncode, astralDecode } from './astral';
 import { aeonEncode, aeonDecode } from './aeon';
@@ -78,6 +99,84 @@ export async function evaluateAllCodecsDynamically(
       });
     }
   };
+
+  await evalCodec('proteus', async (t, e) => { const r = await proteusEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });
+
+  await evalCodec('metis', async (t, e) => { const r = await metisEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });
+
+  await evalCodec('eupraxia', async (t, e) => { const r = await eupraxiaEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });
+
+  await evalCodec('dike', async (t, e) => { const r = await dikeEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });
+
+  await evalCodec('themis', async (t, e) => { const r = await themisEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });
+
+  await evalCodec('nemesis', async (t, e) => { const r = await nemesisEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });
+
+  await evalCodec('moira', async (t, e) => { const r = await moiraEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });
+
+  await evalCodec('ananke', async (t, e) => { const r = await anankeEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });
+
+  await evalCodec('kairos', async (t, e) => { const r = await kairosEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });
+
+  await evalCodec('khoros', async (t, e) => {
+    const r = await khorosEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
+  });
+
+  await evalCodec('omni', async (t, e) => {
+    const r = await omniEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
+  });
+
+  await evalCodec('genesis', async (t, e) => {
+    const r = await genesisEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
+  });
+
+  await evalCodec('arche', async (t, e) => {
+    const r = await archeEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
+  });
+
+  await evalCodec('telos', async (t, e) => {
+    const r = await telosEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
+  });
+
+  await evalCodec('pantheon', async (t, e) => {
+    const r = await pantheonEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
+  });
+
+  await evalCodec('apeiron', async (t, e) => {
+    const r = await apeironEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
+  });
+
+  await evalCodec('noesis', async (t, e) => {
+    const r = await noesisEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
+  });
+
+  await evalCodec('synapse', async (t, e) => {
+    const r = await synapseEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
+  });
+
+  await evalCodec('panacea', async (t, e) => {
+    const r = await panaceaEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
+  });
+
+  await evalCodec('aether', async (t, e) => {
+    const r = await aetherEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
+  });
+
+  await evalCodec('harmonia', async (t, e) => {
+    const r = await harmoniaEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
+  });
 
   await evalCodec('rosetta', async (t, e) => {
     const r = await rosettaEncode(t, e);

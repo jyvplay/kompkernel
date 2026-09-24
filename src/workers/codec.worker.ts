@@ -27,6 +27,27 @@ import { kernelEncodeFromCrown } from '../lib/omega/kernel';
 import { zenithEncodeFromKernel } from '../lib/omega/zenith';
 import { eclipseFromCandidates } from '../lib/omega/eclipse';
 import { rosettaEncode } from '../lib/omega/rosetta';
+import { harmoniaEncode } from '../lib/omega/harmonia';
+import { aetherEncode } from '../lib/omega/aether';
+import { panaceaEncode } from '../lib/omega/panacea';
+import { synapseEncode } from '../lib/omega/synapse';
+import { noesisEncode } from '../lib/omega/noesis';
+import { apeironEncode } from '../lib/omega/apeiron';
+import { pantheonEncode } from '../lib/omega/pantheon';
+import { telosEncode } from '../lib/omega/telos';
+import { archeEncode } from '../lib/omega/arche';
+import { genesisEncode } from '../lib/omega/genesis';
+import { omniEncode } from '../lib/omega/omni';
+import { khorosEncode } from '../lib/omega/khoros';
+import { kairosEncode } from '../lib/omega/kairos';
+import { anankeEncode } from '../lib/omega/ananke';
+import { moiraEncode } from '../lib/omega/moira';
+import { nemesisEncode } from '../lib/omega/nemesis';
+import { themisEncode } from '../lib/omega/themis';
+import { dikeEncode } from '../lib/omega/dike';
+import { eupraxiaEncode } from '../lib/omega/eupraxia';
+import { metisEncode } from '../lib/omega/metis';
+import { proteusEncode } from '../lib/omega/proteus';
 import { kappaEncode } from '../lib/omega/kappa';
 import { phraseEncode } from '../lib/omega/phrase';
 import { tauEncode } from '../lib/omega/tau';
@@ -99,6 +120,27 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const splice = spliceEncode(input, 'o200k_base');
       const eclipse = eclipseFromCandidates(input, zenith, splice, 'o200k_base');
       const rosetta = await rosettaEncode(input, 'o200k_base', { orbit, crown, mosaic, splice });
+      const harmonia = await harmoniaEncode(input, 'o200k_base');
+      const aether = await aetherEncode(input, 'o200k_base');
+      const panacea = await panaceaEncode(input, 'o200k_base');
+      const synapse = await synapseEncode(input, 'o200k_base');
+      const noesis = await noesisEncode(input, 'o200k_base');
+      const apeiron = await apeironEncode(input, 'o200k_base');
+      const pantheon = await pantheonEncode(input, 'o200k_base');
+      const telos = await telosEncode(input, 'o200k_base');
+      const arche = await archeEncode(input, 'o200k_base');
+      const genesis = await genesisEncode(input, 'o200k_base');
+      const omni = await omniEncode(input, 'o200k_base');
+      const khoros = await khorosEncode(input, 'o200k_base');
+      const kairos = await kairosEncode(input, 'o200k_base');
+      const ananke = await anankeEncode(input, 'o200k_base');
+      const moira = await moiraEncode(input, 'o200k_base');
+      const nemesis = await nemesisEncode(input, 'o200k_base');
+      const proteus = await proteusEncode(input, 'o200k_base');
+      const metis = await metisEncode(input, 'o200k_base');
+      const eupraxia = await eupraxiaEncode(input, 'o200k_base');
+      const dike = await dikeEncode(input, 'o200k_base');
+      const themis = await themisEncode(input, 'o200k_base');
       const kappa = kappaEncode(input, 'o200k_base');
       const phrase = phraseEncode(input, 'o200k_base');
       const tau = tauEncode(input, 'o200k_base');
@@ -135,6 +177,27 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         zenith,
         eclipse,
         rosetta,
+        harmonia,
+        aether,
+        panacea,
+        synapse,
+        noesis,
+        apeiron,
+        pantheon,
+        telos,
+        arche,
+        genesis,
+        omni,
+        khoros,
+        kairos,
+        ananke,
+        moira,
+        nemesis,
+        proteus,
+        metis,
+        eupraxia,
+        dike,
+        themis,
         kappa,
         phrase,
         tau,

@@ -49,6 +49,27 @@ import { kernelEncode } from './kernel';
 import { zenithEncode } from './zenith';
 import { eclipseEncode } from './eclipse';
 import { rosettaEncode } from './rosetta';
+import { harmoniaEncode } from './harmonia';
+import { aetherEncode, aetherDecode, aetherDecoderPrompt, AETHER_SYSTEM_PROMPT } from './aether';
+import { panaceaEncode, panaceaDecode, panaceaDecoderPrompt, PANACEA_SYSTEM_PROMPT } from './panacea';
+import { synapseEncode, synapseDecode, synapseDecoderPrompt, SYNAPSE_SYSTEM_PROMPT } from './synapse';
+import { noesisEncode, noesisDecode, noesisDecoderPrompt, NOESIS_SYSTEM_PROMPT } from './noesis';
+import { apeironEncode, apeironDecode, apeironDecoderPrompt, APEIRON_SYSTEM_PROMPT } from './apeiron';
+import { pantheonEncode, pantheonDecode, pantheonDecoderPrompt, PANTHEON_SYSTEM_PROMPT } from './pantheon';
+import { telosEncode, telosDecode, telosDecoderPrompt, TELOS_SYSTEM_PROMPT } from './telos';
+import { archeEncode, archeDecode, archeDecoderPrompt, ARCHE_SYSTEM_PROMPT } from './arche';
+import { genesisEncode, genesisDecode, genesisDecoderPrompt, GENESIS_SYSTEM_PROMPT } from './genesis';
+import { omniEncode, omniDecode, omniDecoderPrompt, OMNI_SYSTEM_PROMPT } from './omni';
+import { khorosEncode, khorosDecode, khorosDecoderPrompt, KHOROS_SYSTEM_PROMPT } from './khoros';
+import { kairosEncode, kairosDecode, kairosDecoderPrompt, KAIROS_SYSTEM_PROMPT } from './kairos';
+import { anankeEncode, anankeDecode, anankeDecoderPrompt } from './ananke';
+import { moiraEncode, moiraDecode, moiraDecoderPrompt } from './moira';
+import { nemesisEncode, nemesisDecode, nemesisDecoderPrompt } from './nemesis';
+import { themisEncode, themisDecode, themisDecoderPrompt } from './themis';
+import { dikeEncode } from './dike';
+import { eupraxiaEncode } from './eupraxia';
+import { metisEncode } from './metis';
+import { proteusEncode } from './proteus';
 import { kappaEncode } from './kappa';
 import { phraseEncode } from './phrase';
 import { tauEncode } from './tau';
@@ -554,8 +575,164 @@ export function codecEntries(): Entry[] {
       },
     },
     {
+      key: 'proteus', label: '⬥ PROTEUS-Ω (Adaptive Grammar Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await proteusEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'metis', label: '⬤ METIS-Ω (Polymorphic Grammar Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await metisEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'eupraxia', label: '⬣ EUPRAXIA-Ω (Boundary-Superoptimized Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await eupraxiaEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'dike', label: '⬢ DIKE-Ω (Escape-Free Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await dikeEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'themis', label: '⬡ THEMIS-Ω (Succinct SLP Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await themisEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'nemesis', label: '◆ NEMESIS-Ω (Grammar-of-Grammar Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await nemesisEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'moira', label: '◇ MOIRA-Ω (Constituent Lattice Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await moiraEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'ananke', label: '◊ ANANKE-Ω (Residual Grammar Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await anankeEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'kairos', label: '⧖ KAIROS-Ω (Residual Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await kairosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'khoros',
+      label: '⟁ KHOROS-Ω (Terminal Sovereign Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await khorosEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'omni',
+      label: '⟁ OMNI-Ω (Terminal Sovereign)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await omniEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'genesis',
+      label: '⟁ GENESIS-Ω (Terminal Sovereign)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await genesisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'arche',
+      label: '⟁ ARCHE-Ω (Terminal Sovereign)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await archeEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'telos',
+      label: '⟁ TELOS-Ω (Terminal Sovereign)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await telosEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'pantheon',
+      label: '⟁ PANTHEON-Ω (Terminal Sovereign Non-Rosetta Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await pantheonEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'apeiron',
+      label: '⟁ APEIRON-Ω (Terminal Boundless Non-Rosetta Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await apeironEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'noesis',
+      label: '⟁ NOESIS-Ω (Terminal Non-Rosetta Absolute Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await noesisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'synapse',
+      label: '⟁ SYNAPSE-Ω (Terminal Non-Rosetta Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await synapseEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'panacea',
+      label: '⟁ PANACEA-Ω (Terminal Codec)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await panaceaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'aether',
+      label: '⟁ AETHER-A1 (General Prose Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await aetherEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'harmonia',
+      label: '⧢ HARMONIA-H1 (Pareto Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await harmoniaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
       key: 'rosetta',
-      label: '𓋹 ROSETTA-R4.2',
+      label: '𓋹 ROSETTA-R5.6',
       family: 'exact',
       fidelity: 'exact',
       run: async (t, enc) => {

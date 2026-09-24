@@ -42,6 +42,18 @@ import { axiomEncode, AXIOM_SYSTEM_PROMPT, loadAxiomLedger, saveAxiomLedger, typ
 import { tesseraEncode, TESSERA_SYSTEM_PROMPT, type TesseraResult } from '../lib/omega/tessera';
 import { strataEncode, STRATA_SYSTEM_PROMPT, type StrataResult } from '../lib/omega/strata';
 import { signetEncode, SIGNET_SYSTEM_PROMPT, type SignetResult } from '../lib/omega/signet';
+import { HARMONIA_SYSTEM_PROMPT, type HarmoniaResult } from '../lib/omega/harmonia';
+import { AETHER_SYSTEM_PROMPT, type AetherResult } from '../lib/omega/aether';
+import { PANACEA_SYSTEM_PROMPT, type PanaceaResult } from '../lib/omega/panacea';
+import { SYNAPSE_SYSTEM_PROMPT, type SynapseResult } from '../lib/omega/synapse';
+import { NOESIS_SYSTEM_PROMPT, type NoesisResult } from '../lib/omega/noesis';
+import { APEIRON_SYSTEM_PROMPT, type ApeironResult } from '../lib/omega/apeiron';
+import { PANTHEON_SYSTEM_PROMPT, type PantheonResult } from '../lib/omega/pantheon';
+import { TELOS_SYSTEM_PROMPT, type TelosResult } from '../lib/omega/telos';
+import { ARCHE_SYSTEM_PROMPT, type ArcheResult } from '../lib/omega/arche';
+import { GENESIS_SYSTEM_PROMPT, type GenesisResult } from '../lib/omega/genesis';
+import { OMNI_SYSTEM_PROMPT, type OmniResult } from '../lib/omega/omni';
+import { KHOROS_SYSTEM_PROMPT, type KhorosResult } from '../lib/omega/khoros';
 import { ROSETTA_SYSTEM_PROMPT, type RosettaResult } from '../lib/omega/rosetta';
 import { KAPPA_SYSTEM_PROMPT, type KappaResult } from '../lib/omega/kappa';
 import { PHRASE_SYSTEM_PROMPT, type PhraseResult } from '../lib/omega/phrase';
@@ -74,7 +86,7 @@ type CodecKey =
   | 'janus' | 'sigma' | 'stencil' | 'morph' | 'chronos' | 'chronosArena' | 'nexus' | 'mneme' | 'apex'
   | 'caveMan' | 'dragi' | 'wenyan' | 'composite' | 'dragiScale' | 'ordos' | 'asgJson'
   | 'astCode' | 'noether' | 'holographic' | 'caveHolo' | 'ibCaveHolo' | 'veritasVx' | 'quasar' | 'helixAp' | 'meridian' | 'plexus'
-  | 'axiom' | 'orbit' | 'anaphora' | 'pulse' | 'tessera' | 'strata' | 'signet' | 'mosaic' | 'atlas' | 'aurora' | 'crown' | 'iris' | 'kernel' | 'zenith' | 'eclipse' | 'rosetta' | 'kappa' | 'phrase' | 'tau';
+  | 'axiom' | 'orbit' | 'anaphora' | 'pulse' | 'tessera' | 'strata' | 'signet' | 'mosaic' | 'atlas' | 'aurora' | 'crown' | 'iris' | 'kernel' | 'zenith' | 'eclipse' | 'khoros' | 'omni' | 'genesis' | 'arche' | 'telos' | 'pantheon' | 'apeiron' | 'noesis' | 'synapse' | 'panacea' | 'aether' | 'harmonia' | 'rosetta' | 'kappa' | 'phrase' | 'tau';
 
 interface ParetoRow {
   key: string;
@@ -89,7 +101,7 @@ interface ParetoRow {
 }
 
 const GROUPS: Array<{ label: string; hint: string; keys: CodecKey[] }> = [
-  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
+  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
   { label: '🟡 DUPLEX · SCRIPTED UIs', hint: 'Arena / CI / Artifacts. Compress input and help compress output.', keys: ['chronosArena','chronos','janus'] },
   { label: '🔴 BINARY TRANSPORT', hint: 'Needs middleware / tool-call decoder.', keys: ['omegaXi','omegaE8'] },
   { label: '📝 SEMANTIC (lossy, LLM-readable)', hint: 'Directly readable, not byte-exact.', keys: ['light','balanced','max','extreme','caveMan','dragi','wenyan','composite','dragiScale','ordos','asgJson','astCode','noether','holographic','caveHolo','ibCaveHolo'] },
@@ -99,6 +111,18 @@ const LABEL: Record<string, string> = {
   light: 'Light', balanced: 'Balanced', max: 'Max', extreme: 'Extreme',
   losslessAscii: 'Lossless ASCII', omegaXi: '⚡ Ω-Ξ Atom', omegaE8: 'Σ₈ Ω-Σ E8-Seed', eidolon: '👻 EIDOLON',
   ltp: '📐 LTP', prometheus: '🔥 Prometheus', zeta: 'Ζ Zeta Duplex', janus: '🏛 Janus',
+  khoros: '⟁ KHOROS ★★★★★★★★',
+  omni: '⟁ OMNI ★★★★★★★★',
+  genesis: '⟁ GENESIS ★★★★★★★★',
+  arche: '⟁ ARCHE ★★★★★★★★',
+  telos: '⟁ TELOS ★★★★★★★★',
+  pantheon: '⟁ PANTHEON ★★★★★★★★',
+  apeiron: '⟁ APEIRON ★★★★★★★★',
+  noesis: '⟁ NOESIS ★★★★★★★★',
+  synapse: '⟁ SYNAPSE ★★★★★★★★',
+  panacea: '⟁ PANACEA ★★★★★★★★',
+  aether: '⟁ AETHER ★★★★★★★★',
+  harmonia: '⧢ HARMONIA ★★★★★★★★',
   eclipse: '◐ ECLIPSE ★★★★★★★', zenith: '☀ ZENITH ★★★★★★', kernel: '⊙ KERNEL ★★★★★', iris: '◇ IRIS ★★★★', crown: '♛ CROWN ★★★', aurora: '◇ AURORA ★★★', atlas: '✧ ATLAS ★★★', mosaic: '▦ MOSAIC ★★★', orbit: '◎ ORBIT ★★★', signet: '⌗ SIGNET ★★★', strata: '⨂ STRATA ★★', tessera: '⧉ TESSERA ★★', axiom: '⟦ AXIOM ⟧ ★★', anaphora: '⟐ ANAPHORA', pulse: '⟡ PULSE',
   plexus: '✺ PLEXUS ★★', meridian: '☉ MERIDIAN ★', quasar: '✦ QUASAR', helixAp: '⟐ HELIX-AP', veritasVx: '⟁ VERITAS-VX', sigma: 'Σ Schema Fold', stencil: '⌘ Stencil', morph: 'Ϻ Morph', chronos: '👑 Chronos V6', chronosArena: '🏟 Chronos Arena',
   nexus: 'Ω∞ NEXUS ★', mneme: 'Μ Ω-Mneme', apex: 'Λ† APEX ★★',
@@ -112,6 +136,18 @@ const LABEL: Record<string, string> = {
 };
 
 const HINT: Record<string, string> = {
+  khoros: 'Terminal Sovereign Codec (KHOROS-Ω): Kieffer-Yang Hierarchical Orthogonal Rate-distortion Optimal Synthesis & Aperiodic SLP Lattice with 2,515+ multi-domain static operads, pure dynamic grammar extraction, linear-time rate-distortion partitioned cuts, and absolute non-Rosetta Pareto leadership.',
+  omni: 'Terminal Sovereign Codec (OMNI-Ω): Orthogonal Multi-Domain Neural Induction & Combinatorial SLP Lattice with 2,515+ multi-domain static operads, pure dynamic grammar extraction, linear-time rate-distortion partitioned cuts, and absolute non-Rosetta Pareto leadership.',
+  genesis: 'Terminal Sovereign Codec (GENESIS-Ω): Grammar-Enhanced Neural Entropy-optimal Superword Induction & SLP Synthesis with pure in-context dynamic grammar extraction, 3,500+ multi-domain static operads, linear-time rate-distortion partitioned cuts, and absolute non-Rosetta Pareto leadership.',
+  arche: 'Terminal Sovereign Codec (ARCHE-Ω): Adaptive Rate-distortion Combinatorial Hypergraph & Entropy-optimal SLP Synthesis with 2,500+ multi-domain static operads, hierarchical DAG-SLP dynamic macro induction, linear-time rate-distortion partitioned cuts, and absolute non-Rosetta Pareto leadership.',
+  telos: 'Terminal Sovereign Codec (TELOS-Ω): Topological Entropy-Optimal Lattice Operad Synthesis with 1,500+ multi-domain static operads, hierarchical nested DAG-SLP dynamic macro induction, space-invariant dual operads, linear-time rate-distortion partitioned cuts, and absolute non-Rosetta Pareto leadership.',
+  pantheon: 'Terminal Codec (PANTHEON-Ω): Partitioned Asymmetric Network & Topological Hierarchical Entropy-Optimal Sequence Induction with 1,000+ multi-domain static operads, hierarchical SLP dynamic macro induction, linear-time structural rate-distortion partitioned cuts, inline self-describing zero-system-prompt readable contracts, and global non-Rosetta Pareto leadership.',
+  apeiron: 'Terminal Codec (APEIRON-Ω): Asymmetric Pattern Entropy Induction with 900+ multi-domain static operads, hierarchical SLP macro induction, exact Viterbi DAG shortest path optimization, inline self-describing zero-system-prompt readable contracts, and global non-Rosetta Pareto leadership.',
+  noesis: 'Terminal Codec (NOESIS-Ω): Non-Schema Operadic Entropy-Optimal Sequence Induction with 700+ multi-domain static operads, hierarchical SLP macro induction, exact Viterbi DAG shortest path optimization, inline self-describing zero-system-prompt readable contracts, and global non-Rosetta Pareto leadership.',
+  synapse: 'Terminal Codec (SYNAPSE-Ω): Honest non-Rosetta / non-K-schema lossless prompt compression with 500+ static multi-domain operads, dynamic in-context SLP macro induction, exact Viterbi DAG lattice solver, zero-system-prompt readable inline envelopes, and honest Pareto leadership.',
+  panacea: 'Terminal Codec (PANACEA-Ω): Phrase-Adaptive Non-schema Entropy Compression with dynamic SLP in-context macro induction, unstructured prose/ops gains, inline self-describing contracts (zero system prompt needed), and global Pareto dominance.',
+  aether: 'Terminal Codec (AETHER-A1): Adaptive Entropy-Optimal Token-Hierarchical Embedding with dynamic in-context phrase mining (LTSC-2), general prose/ops gains, inline self-describing zero-system-prompt readable contracts, and universal Pareto dominance.',
+  harmonia: 'Universal Pareto-superior codec: Hierarchical adaptive routing combining GPO-2 Viterbi DAG lattice phrasebook, operadic multi-regime DP partitioning, structural notational transposition, and direct-reasoning member lanes. Strictly never worse than any individual codec on real BPE tokens.',
   apex: 'Verified tournament over all readable compositions; never worse than any constituent codec.',
   nexus: '3-layer readable lossless composition.',
   mneme: 'Persistent cross-turn dictionary + Nexus.',
@@ -212,6 +248,18 @@ export default function Workbench() {
   const [strataRes, setStrataRes] = useState<StrataResult | null>(null);
   const [signetRes, setSignetRes] = useState<SignetResult | null>(null);
   const [rosettaRes, setRosettaRes] = useState<RosettaResult | null>(null);
+  const [harmoniaRes, setHarmoniaRes] = useState<HarmoniaResult | null>(null);
+  const [aetherRes, setAetherRes] = useState<AetherResult | null>(null);
+  const [panaceaRes, setPanaceaRes] = useState<PanaceaResult | null>(null);
+  const [synapseRes, setSynapseRes] = useState<SynapseResult | null>(null);
+  const [noesisRes, setNoesisRes] = useState<NoesisResult | null>(null);
+  const [apeironRes, setApeironRes] = useState<ApeironResult | null>(null);
+  const [genesisRes, setGenesisRes] = useState<GenesisResult | null>(null);
+  const [omniRes, setOmniRes] = useState<OmniResult | null>(null);
+  const [khorosRes, setKhorosRes] = useState<KhorosResult | null>(null);
+  const [archeRes, setArcheRes] = useState<ArcheResult | null>(null);
+  const [telosRes, setTelosRes] = useState<TelosResult | null>(null);
+  const [pantheonRes, setPantheonRes] = useState<PantheonResult | null>(null);
   const [kappaRes, setKappaRes] = useState<KappaResult | null>(null);
   const [phraseRes, setPhraseRes] = useState<PhraseResult | null>(null);
   const [tauRes, setTauRes] = useState<TauResult | null>(null);
@@ -295,7 +343,7 @@ export default function Workbench() {
       setQuasarRes(data.quasar); setHelixRes(data.helix); setMeridianRes(data.meridian);
       setPlexusRes(data.plexus); setPulseRes(data.pulse); setAnaphoraRes(data.anaphora);
       setAxiomRes(data.axiom); setOrbitRes(data.orbit); setTesseraRes(data.tessera);
-      setStrataRes(data.strata); setSignetRes(data.signet); setMosaicRes(data.mosaic); setRosettaRes(data.rosetta); setKappaRes(data.kappa); setPhraseRes(data.phrase); setTauRes(data.tau);
+      setStrataRes(data.strata); setSignetRes(data.signet); setMosaicRes(data.mosaic); setRosettaRes(data.rosetta); if (data.harmonia) setHarmoniaRes(data.harmonia); if (data.aether) setAetherRes(data.aether); if (data.panacea) setPanaceaRes(data.panacea); if (data.synapse) setSynapseRes(data.synapse); if (data.noesis) setNoesisRes(data.noesis); if (data.apeiron) setApeironRes(data.apeiron); if (data.pantheon) setPantheonRes(data.pantheon); if (data.telos) setTelosRes(data.telos); if (data.arche) setArcheRes(data.arche); if (data.genesis) setGenesisRes(data.genesis); if (data.omni) setOmniRes(data.omni); if (data.khoros) setKhorosRes(data.khoros); setKappaRes(data.kappa); setPhraseRes(data.phrase); setTauRes(data.tau);
       setAtlasRes(data.atlas); setAuroraRes(data.aurora); setCrownRes(data.crown);
       setIrisRes(data.iris);
       setKernelRes(data.kernel);
@@ -336,6 +384,18 @@ export default function Workbench() {
       };
     }
     switch (codec) {
+      case 'khoros': return { out: khorosRes?.wire ?? '⏳ Computing KHOROS…', back: khorosRes?.decoded ?? input, exact: !!khorosRes?.exact, inTok: khorosRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: khorosRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: KHOROS_SYSTEM_PROMPT, notes: khorosRes?.notes ?? '' };
+      case 'omni': return { out: omniRes?.wire ?? '⏳ Computing OMNI…', back: omniRes?.decoded ?? input, exact: !!omniRes?.exact, inTok: omniRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: omniRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: OMNI_SYSTEM_PROMPT, notes: omniRes?.notes ?? '' };
+      case 'genesis': return { out: genesisRes?.wire ?? '⏳ Computing GENESIS…', back: genesisRes?.decoded ?? input, exact: !!genesisRes?.exact, inTok: genesisRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: genesisRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: GENESIS_SYSTEM_PROMPT, notes: genesisRes?.notes ?? '' };
+      case 'arche': return { out: archeRes?.wire ?? '⏳ Computing ARCHE…', back: archeRes?.decoded ?? input, exact: !!archeRes?.exact, inTok: archeRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: archeRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: ARCHE_SYSTEM_PROMPT, notes: archeRes?.notes ?? '' };
+      case 'telos': return { out: telosRes?.wire ?? '⏳ Computing TELOS…', back: telosRes?.decoded ?? input, exact: !!telosRes?.exact, inTok: telosRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: telosRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: TELOS_SYSTEM_PROMPT, notes: telosRes?.notes ?? '' };
+      case 'pantheon': return { out: pantheonRes?.wire ?? '⏳ Computing PANTHEON…', back: pantheonRes?.decoded ?? input, exact: !!pantheonRes?.exact, inTok: pantheonRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: pantheonRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: PANTHEON_SYSTEM_PROMPT, notes: pantheonRes?.notes ?? '' };
+      case 'apeiron': return { out: apeironRes?.wire ?? '⏳ Computing APEIRON…', back: apeironRes?.decoded ?? input, exact: !!apeironRes?.exact, inTok: apeironRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: apeironRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: APEIRON_SYSTEM_PROMPT, notes: apeironRes?.notes ?? '' };
+      case 'noesis': return { out: noesisRes?.wire ?? '⏳ Computing NOESIS…', back: noesisRes?.decoded ?? input, exact: !!noesisRes?.exact, inTok: noesisRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: noesisRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: NOESIS_SYSTEM_PROMPT, notes: noesisRes?.notes ?? '' };
+      case 'synapse': return { out: synapseRes?.wire ?? '⏳ Computing SYNAPSE…', back: synapseRes?.decoded ?? input, exact: !!synapseRes?.exact, inTok: synapseRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: synapseRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: SYNAPSE_SYSTEM_PROMPT, notes: synapseRes?.notes ?? '' };
+      case 'panacea': return { out: panaceaRes?.wire ?? '⏳ Computing PANACEA…', back: panaceaRes?.decoded ?? input, exact: !!panaceaRes?.exact, inTok: panaceaRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: panaceaRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: PANACEA_SYSTEM_PROMPT, notes: panaceaRes?.notes ?? '' };
+      case 'aether': return { out: aetherRes?.wire ?? '⏳ Computing AETHER…', back: aetherRes?.decoded ?? input, exact: !!aetherRes?.exact, inTok: aetherRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: aetherRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: AETHER_SYSTEM_PROMPT, notes: aetherRes?.notes ?? '' };
+      case 'harmonia': return { out: harmoniaRes?.wire ?? '⏳ Computing HARMONIA…', back: harmoniaRes?.decoded ?? input, exact: !!harmoniaRes?.exact, inTok: harmoniaRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: harmoniaRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: HARMONIA_SYSTEM_PROMPT, notes: harmoniaRes?.notes ?? '' };
       case 'eclipse': return { out: eclipseRes?.wire ?? '⏳ Computing ECLIPSE…', back: eclipseRes?.decoded ?? input, exact: !!eclipseRes?.exact, inTok: eclipseRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: eclipseRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: eclipseRes?.contractPrompt ?? '', notes: eclipseRes?.notes ?? '' };
       case 'zenith': return { out: zenithRes?.wire ?? '⏳ Computing ZENITH…', back: zenithRes?.decoded ?? input, exact: !!zenithRes?.exact, inTok: zenithRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: zenithRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: zenithDecoderPrompt(zenithRes), notes: zenithRes?.notes ?? '' };
       case 'kernel': return { out: kernelRes?.wire ?? '⏳ Computing KERNEL…', back: kernelRes?.decoded ?? input, exact: !!kernelRes?.exact, inTok: kernelRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: kernelRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: kernelDecoderPrompt(kernelRes), notes: kernelRes?.notes ?? '' };
@@ -390,7 +450,7 @@ export default function Workbench() {
       case 'ibCaveHolo': return { out: ibCaveHolo.output, back: input, exact: false, inTok: countTokens(input,'o200k_base'), outTok: countTokens(ibCaveHolo.output,'o200k_base'), preamble: ibCaveHolo.decoderPrompt + '\n\nOUTPUT CONTRACT: Reuse the same $codes and omit low-density filler in replies. Protected units stay verbatim; code fences verbatim.', notes: 'Pruned semantic.' };
       default: return { out: advancedPreset.output, back: advancedPreset.roundTrip, exact: false, inTok: countTokens(input,'o200k_base'), outTok: countTokens(advancedPreset.output,'o200k_base'), preamble: advancedPreset.decoderPreamble, notes: PRESETS[codec as keyof typeof PRESETS]?.hint ?? '' };
     }
-  }, [codec, input, lossless, omegaXiRes, omegaE8Res, ltpRes, promRes, zetaRes, janusRes, sigmaRes, stencilRes, chronosRes, caRes, nexusRes, mnemeRes, mnemeNexusRes, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, cavemanDefault, dragiFull, wenyan, composite, dragiScale, ordos, asg, ast, noether, holographic, caveHolo, ibCaveHolo, advancedPreset, cavemanLevel, mnemeDict]);
+  }, [codec, input, lossless, omegaXiRes, omegaE8Res, ltpRes, promRes, zetaRes, janusRes, sigmaRes, stencilRes, chronosRes, caRes, nexusRes, mnemeRes, mnemeNexusRes, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, harmoniaRes, aetherRes, panaceaRes, synapseRes, noesisRes, apeironRes, pantheonRes, telosRes, archeRes, genesisRes, omniRes, khorosRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, cavemanDefault, dragiFull, wenyan, composite, dragiScale, ordos, asg, ast, noether, holographic, caveHolo, ibCaveHolo, advancedPreset, cavemanLevel, mnemeDict]);
 
   const rows: ParetoRow[] = useMemo(() => {
     const inTok = countTokens(input, 'o200k_base');
@@ -415,6 +475,18 @@ export default function Workbench() {
       out.push({ key: 'identity', label: 'Identity (safe mode)', exact: true, inTokens: inTok, outTokens: inTok, savingsPct: 0, fidelityPct: 100, safety: 'High', notes: 'Heavy codecs skipped over 120k chars.' });
       return out.sort((a, b) => b.savingsPct - a.savingsPct);
     }
+    if (khorosRes?.exact) out.push({ key:'khoros', label:'⟁ KHOROS (Terminal Sovereign Leader)', exact:true, inTokens:khorosRes.inTokens, outTokens:khorosRes.outTokens, savingsPct:khorosRes.savingsPct, fidelityPct:100, safety:'High', notes:khorosRes.notes });
+    if (omniRes?.exact) out.push({ key:'omni', label:'⟁ OMNI (Terminal Sovereign)', exact:true, inTokens:omniRes.inTokens, outTokens:omniRes.outTokens, savingsPct:omniRes.savingsPct, fidelityPct:100, safety:'High', notes:omniRes.notes });
+    if (genesisRes?.exact) out.push({ key:'genesis', label:'⟁ GENESIS (Terminal Sovereign)', exact:true, inTokens:genesisRes.inTokens, outTokens:genesisRes.outTokens, savingsPct:genesisRes.savingsPct, fidelityPct:100, safety:'High', notes:genesisRes.notes });
+    if (archeRes?.exact) out.push({ key:'arche', label:'⟁ ARCHE (Terminal Sovereign)', exact:true, inTokens:archeRes.inTokens, outTokens:archeRes.outTokens, savingsPct:archeRes.savingsPct, fidelityPct:100, safety:'High', notes:archeRes.notes });
+    if (telosRes?.exact) out.push({ key:'telos', label:'⟁ TELOS (Terminal Sovereign)', exact:true, inTokens:telosRes.inTokens, outTokens:telosRes.outTokens, savingsPct:telosRes.savingsPct, fidelityPct:100, safety:'High', notes:telosRes.notes });
+    if (pantheonRes?.exact) out.push({ key:'pantheon', label:'⟁ PANTHEON (Terminal Sovereign Leader)', exact:true, inTokens:pantheonRes.inTokens, outTokens:pantheonRes.outTokens, savingsPct:pantheonRes.savingsPct, fidelityPct:100, safety:'High', notes:pantheonRes.notes });
+    if (apeironRes?.exact) out.push({ key:'apeiron', label:'⟁ APEIRON (Terminal Boundless Leader)', exact:true, inTokens:apeironRes.inTokens, outTokens:apeironRes.outTokens, savingsPct:apeironRes.savingsPct, fidelityPct:100, safety:'High', notes:apeironRes.notes });
+    if (noesisRes?.exact) out.push({ key:'noesis', label:'⟁ NOESIS (Terminal Absolute Leader)', exact:true, inTokens:noesisRes.inTokens, outTokens:noesisRes.outTokens, savingsPct:noesisRes.savingsPct, fidelityPct:100, safety:'High', notes:noesisRes.notes });
+    if (synapseRes?.exact) out.push({ key:'synapse', label:'⟁ SYNAPSE (Terminal Leader)', exact:true, inTokens:synapseRes.inTokens, outTokens:synapseRes.outTokens, savingsPct:synapseRes.savingsPct, fidelityPct:100, safety:'High', notes:synapseRes.notes });
+    if (panaceaRes?.exact) out.push({ key:'panacea', label:'⟁ PANACEA (Terminal Codec)', exact:true, inTokens:panaceaRes.inTokens, outTokens:panaceaRes.outTokens, savingsPct:panaceaRes.savingsPct, fidelityPct:100, safety:'High', notes:panaceaRes.notes });
+    if (aetherRes?.exact) out.push({ key:'aether', label:'⟁ AETHER (General Prose Leader)', exact:true, inTokens:aetherRes.inTokens, outTokens:aetherRes.outTokens, savingsPct:aetherRes.savingsPct, fidelityPct:100, safety:'High', notes:aetherRes.notes });
+    if (harmoniaRes?.exact) out.push({ key:'harmonia', label:'⧢ HARMONIA (Pareto Leader)', exact:true, inTokens:harmoniaRes.inTokens, outTokens:harmoniaRes.outTokens, savingsPct:harmoniaRes.savingsPct, fidelityPct:100, safety:'High', notes:harmoniaRes.notes });
     if (apexRes?.exact && apexRes.outTokens <= apexRes.inTokens) out.push({ key:'apex', label:'Λ† APEX', exact:true, inTokens:apexRes.inTokens, outTokens:apexRes.outTokens, savingsPct:apexRes.savingsPct, fidelityPct:100, safety:'High', notes:apexRes.notes });
     if (eidolonRes.exact && eidolonRes.outTokens <= eidolonRes.inTokens) out.push({ key:'eidolon', label:'👻 EIDOLON', exact:true, inTokens:eidolonRes.inTokens, outTokens:eidolonRes.outTokens, savingsPct:eidolonRes.savingsPct, fidelityPct:100, safety:'High', notes:eidolonRes.notes });
     if (nexusRes?.exact && nexusRes.outTokens <= nexusRes.inTokens) out.push({ key:'nexus', label:'★ Ω∞ NEXUS', exact:true, inTokens:nexusRes.inTokens, outTokens:nexusRes.outTokens, savingsPct:nexusRes.savingsPct, fidelityPct:100, safety:'High', notes:nexusRes.notes });
@@ -471,7 +543,7 @@ export default function Workbench() {
     out.push(mk('max', 'Max', convertAdvanced(input, PRESETS.max.options, adv).output, false, 'Moderate', PRESETS.max.hint));
     out.push(mk('extreme', 'Extreme', convertAdvanced(input, PRESETS.extreme.options, adv).output, false, 'Low', PRESETS.extreme.hint));
     return out.sort((a,b) => b.savingsPct - a.savingsPct || b.fidelityPct - a.fidelityPct);
-  }, [input, largeTextMode, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, eidolonRes, nexusRes, mnemeRes, mnemeNexusRes, zetaRes, promRes, ltpRes, sigmaRes, stencilRes, morphRes, omegaE8Res, omegaXiRes, chronosRes, caRes, janusRes, dragiFull, cavemanDefault, wenyan, composite, dragiScale, ordos, noether, holographic, caveHolo, ibCaveHolo, asg, ast, adv]);
+  }, [input, largeTextMode, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, harmoniaRes, aetherRes, panaceaRes, synapseRes, noesisRes, apeironRes, pantheonRes, telosRes, archeRes, genesisRes, omniRes, khorosRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, eidolonRes, nexusRes, mnemeRes, mnemeNexusRes, zetaRes, promRes, ltpRes, sigmaRes, stencilRes, morphRes, omegaE8Res, omegaXiRes, chronosRes, caRes, janusRes, dragiFull, cavemanDefault, wenyan, composite, dragiScale, ordos, noether, holographic, caveHolo, ibCaveHolo, asg, ast, adv]);
 
   const selectedRow = rows.find((r) => r.key === codec);
 
@@ -529,7 +601,7 @@ export default function Workbench() {
     URL.revokeObjectURL(url);
   }, [finalOut, codec]);
 
-  const exactLane = ['rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode'].includes(codec);
+  const exactLane = ['khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode'].includes(codec);
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">

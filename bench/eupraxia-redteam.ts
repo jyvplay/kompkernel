@@ -1,0 +1,23 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+import { eupraxiaEncode, eupraxiaDecode, eupraxiaDecoderPrompt, EUPRAXIA_START } from '@/lib/omega/eupraxia';
+import { dikeEncode } from '@/lib/omega/dike';
+import { countTokens } from '@/lib/omega/bpe';
+const input=fs.readFileSync('bench/holdout/gh-api.json.txt','utf8');
+const [base,r]=await Promise.all([dikeEncode(input),eupraxiaEncode(input)]);let n=0;
+async function ok(name:string,f:()=>unknown|Promise<unknown>){await f();n++;console.log('✓',name)}
+await ok('byte exact',()=>assert.equal(r.decoded,input));
+await ok('independent decoder exact',async()=>assert.equal(await eupraxiaDecode(r.wire),input));
+await ok('strictly advances DIKE by > few',()=>assert.ok(base.outTokens-r.outTokens>=5));
+await ok('live BPE accounting',()=>assert.equal(r.outTokens,countTokens(r.wire,'o200k_base')));
+await ok('new envelope selected',()=>assert.ok(r.wire.startsWith(EUPRAXIA_START)));
+await ok('multiple dynamic rules',()=>assert.ok((r.boundaryOptimizedRules??0)>=5));
+await ok('separator absent from expansions by admission',()=>assert.equal(r.wire.slice(1,r.wire.indexOf('乙')).split('(').length,r.boundaryOptimizedRules));
+await ok('missing boundary inert',async()=>assert.equal(await eupraxiaDecode('⬣abc'),'⬣abc'));
+await ok('empty tape inert',async()=>assert.equal(await eupraxiaDecode('⬣乙x'),'⬣乙x'));
+await ok('large malformed tape remains deterministic',async()=>{const x='⬣'+Array(100).fill('x').join('(')+'乙x';assert.equal(await eupraxiaDecode(x),'x')});
+await ok('ordinary DIKE fallback delegated',async()=>assert.equal(await eupraxiaDecode(base.wire),input));
+await ok('prompt states same-chat access model',()=>assert.ok(eupraxiaDecoderPrompt().includes('No system prompt')));
+await ok('prompt defines both delimiters',()=>assert.ok(eupraxiaDecoderPrompt().includes('Split once at 乙')&&eupraxiaDecoderPrompt().includes('each (')));
+await ok('Pareto tournament nonexpansive',()=>assert.ok(r.outTokens<=base.outTokens));
+console.log(`\n${n}/14 EUPRAXIA adversarial passes`);
