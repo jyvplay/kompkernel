@@ -110,3 +110,86 @@ export const CHAOS_G_CJK: string = [
   'kectl get pods -n payments --watch || aws ec2 describe-instances --region ap-northeast-1',
   'Next: bump the pool limit, verify the health check, then confirm the alert clears. The morning review will cover pool sizing, alert thresholds, replica failover and the retry budget. (deploy 0123456789abcdef0123456789abcdef01234567).',
 ].join('\n');
+
+/** Pure technical/philosophical natural prose fixture. */
+export const NATURAL_PROSE =
+  'The challenge of distributed consensus lies in reconciling independent node states under the threat of arbitrary network partitions and message delays. In classical state machine replication, each participating replica applies an ordered sequence of state transitions to maintain consistency with its peers. When network partitions isolate a minority partition, consensus algorithms such as Paxos and Raft guarantee safety by refusing to commit transactions without a quorum majority. However, this safety property inherently trades off availability during prolonged network degradation. Modern high-throughput storage engines leverage vector clocks and Directed Acyclic Graph (DAG) structures to establish causal relationships between concurrent writes, deferring conflict resolution to read-time or deterministic merge functions. Consequently, system architects must balance the trade-offs between linearizable consistency models and eventual consistency paradigms based on the specific latency tolerances and durability guarantees demanded by the application domain.';
+
+/** Hybrid prose combining narrative, markdown syntax, equations, code, tables, and links. */
+export const HYBRID_PROSE = [
+  '### Distributed Indexing & Query Optimizations',
+  '',
+  'When evaluating query performance over high-cardinality partitions, the overall execution cost is bounded by $O(K \\log N)$ where $K$ represents the number of active shards and $N$ denotes the index depth. Refer to the formal spec at https://specs.internal/v2/indexing-guidelines.md for complete details.',
+  '',
+  '#### Key Architectural Invariants',
+  '- **Write Amplification:** Bounded to $\\le 2.4\\times$ under burst workload scenarios.',
+  '- **Read Latency:** p99 latency target remains $\\le 12\\text{ms}$ across all operational regions.',
+  '- **Compaction Strategy:** Tiered LSM-tree merge with bloom filter evaluation.',
+  '',
+  '```ts',
+  'function calculateShardingFactor(key: string, numShards: number): number {',
+  '  const hash = fnv1a32(key);',
+  '  return (hash >>> 0) % numShards;',
+  '}',
+  '```',
+  '',
+  '| Parameter | Baseline | Target | Status |',
+  '| :--- | :--- | :--- | :--- |',
+  '| Queue Depth | 142 items | < 50 items | Degrading |',
+  '| Cache Hit Ratio | 88.4% | > 95.0% | On Track |',
+  '| Lock Contention | 14.2ms | < 2.0ms | Action Required |',
+  '',
+  '> *Note:* Ensure all edge proxies enforce rate limits before propagating requests to downstream worker pools. Footnote [^1]: Verified during Q3 disaster recovery drill.',
+].join('\n');
+
+/** Real LLM interaction prompt log text with user input, system prompt, tool calls, and agent responses. */
+export const OUTPUT_PROMPT_LOG = [
+  '[SYSTEM PROMPT: AGENCY_ORCHESTRATOR_V4]',
+  'You are an autonomous site reliability engineer tasked with diagnosing production incidents and producing byte-exact triage logs.',
+  '',
+  '[USER]',
+  'Inspect the gateway latency spike in us-east-1 and propose corrective action.',
+  '',
+  '[ASSISTANT - THINKING]',
+  'Analyzing metrics from us-east-1... Gateway p99 latency increased to 812ms. Retries are spiking on auth-service endpoints. Connection pool exhaustion detected in postgres-primary.',
+  '',
+  '[TOOL_CALL: execute_query]',
+  '{"query":"SELECT count(*), state FROM pg_stat_activity GROUP BY state","db":"prod-iad-01"}',
+  '',
+  '[TOOL_RESPONSE]',
+  '{"status":"success","data":[{"count":48,"state":"active"},{"count":2,"state":"idle"}]}',
+  '',
+  '[ASSISTANT]',
+  '### Incident Summary & Triage Actions',
+  '1. **Root Cause:** Postgres connection pool exhausted (48/50 active connections held in long-standing transactions).',
+  '2. **Mitigation:** Executed connection drain on orphaned sessions and bumped pool limit from 50 to 100.',
+  '3. **Verification:** Gateway p99 latency stabilized at 42ms; error rate returned to 0.00%.',
+].join('\n');
+
+/**
+ * CHAOS_1500 — Exactly 1500 characters of heterogeneous chaotic benchmark data:
+ * technical prose, incident report, markdown list, CSV data, JSON payloads, Python code,
+ * Japanese incident notes, Chinese ops log, shell command, and summary.
+ */
+export const CHAOS_1500: string = [
+  'System Architecture Review & Incident Triage Digest (2026-09-18T14:30:00Z)',
+  'The distribution of memory allocations during peak request throughput exhibits non-linear tail latency spikes when garbage collection pauses coincide with cross-region database locks.',
+  '- queue depth climbed from 12 to 840 items during the retry storm',
+  '- cache invalidation sequence aborted due to TLS handshake timeout (max_retries=3)',
+  '- replica lag on primary database node db-replica-02 exceeded SLA threshold (p99 > 1200ms)',
+  'service,region,dc,instances,p99_ms,error_rate',
+  'auth-gateway,us-east-1,iad-1,64,142,0.0001',
+  'billing-service,eu-west-1,dub-3,32,812,0.0240',
+  'search-index,ap-northeast-1,hnd-2,16,1950,0.0815',
+  '{"event":"circuit_breaker_opened","service":"search-index","threshold":0.05,"ms":1950,"retries":3,"ok":false}',
+  '{"event":"fallback_cache_hit","service":"billing-service","ttl_sec":300,"cached_keys":1420,"ok":true}',
+  'def evaluate_cluster_health(nodes):',
+  '    for node in nodes:',
+  '        if node.latency > 1000 or node.errors > 0.05: yield ("degraded", node.id)',
+  '    return ("nominal", None)',
+  '障害報告: 深夜帯にデータベース接続プールが枯渇し、レプリカのフェイルオーバーが遅延しました。',
+  '対処手順: 接続プール上限を50から120に拡大し、ヘルスチェック間隔を調整してアラートを解除。',
+  '备注：网关和认证服务已恢复正常，搜索服务索引分片重建中，建议密切关注流量波动。',
+  'kectl rollout status deploy/search-api -n prod --timeout=120s || kubectl get events --sort-by=.ts',
+  'Summary: Ensure database connection pools match peak thread concurrency. Re-evaluate jitter parameters across upstream clients and verify circuit breakers trip before queue overflow occurs right now..',
+].join('\n');
