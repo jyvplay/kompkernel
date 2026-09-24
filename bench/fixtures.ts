@@ -110,3 +110,124 @@ export const CHAOS_G_CJK: string = [
   'kectl get pods -n payments --watch || aws ec2 describe-instances --region ap-northeast-1',
   'Next: bump the pool limit, verify the health check, then confirm the alert clears. The morning review will cover pool sizing, alert thresholds, replica failover and the retry budget. (deploy 0123456789abcdef0123456789abcdef01234567).',
 ].join('\n');
+
+/**
+ * CHAOS_1500 — 1500-character heterogeneous chaotic fixture:
+ * Combines incident executive summary, markdown checklist, CSV, JSON, code,
+ * CJK notes (Japanese + Chinese), stack traces, and CLI commands.
+ */
+export const CHAOS_1500 = [
+  'Incident Brief: P0 database connection pool degradation impacted payment gateway during flash traffic peak.',
+  'Root cause analysis indicated thread starvation on worker pool iad-42, triggering retry cascade across regional endpoints.',
+  '- queue depth peak: 4,210 messages (threshold 500)',
+  '- p99 latency spike: 2,840ms on /v2/checkout/charge',
+  '- circuit breaker state: OPEN for 142s on us-east-1',
+  'region,dc,total_pods,healthy,error_rate,p99_ms',
+  'us-east-1,iad-3,64,48,0.142,2840',
+  'eu-west-1,dub-1,32,32,0.001,118',
+  'ap-northeast-1,nrt-2,24,20,0.038,640',
+  '{"event":"pool_exhausted","svc":"checkout","max_conn":100,"active":100,"wait_ms":5000,"ts":"2026-09-15T14:30:00Z"}',
+  '{"event":"circuit_open","svc":"payment","threshold":0.05,"measured":0.142,"ts":"2026-09-15T14:30:12Z"}',
+  'def handle_failover(ctx, max_retries=3):',
+  '    for attempt in range(max_retries):',
+  '        try: return ctx.execute_transaction(timeout=2.5)',
+  '        except PoolExhaustedError as err:',
+  '            log.warning("retry attempt %d failed: %s", attempt, err)',
+  '            time.sleep(2 ** attempt)',
+  '    raise EscalationRequired("all retries exhausted")',
+  '障害報告: データベースの接続プール上限到達に伴い、決済APIでレスポンス遅延およびエラーが発生しました。',
+  '备注：已临时将连接池上限由100提升至250，负载均衡与健康检查恢复正常，待明天晨会评估长远扩容方案。',
+  'kubectl logs -n prod deploy/payment-gateway --tail=100 | grep -E "ERROR|WARN|PoolExhausted"',
+  'Action required: Verify retry budget allocation, drain degraded pods in iad-3, then confirm alert auto-resolution before sign-off.',
+].join('\n');
+
+/** Natural prose benchmarks across literary, technical, and analytical essay domains. */
+export const NATURAL_PROSE_SUITE = {
+  literary: [
+    'The evening sun cast long, amber shadows across the cobblestone courtyard as quiet whispers of autumn air rustled through the canopy of ancient oaks.',
+    'For decades, the solitary library on the hill had preserved manuscripts whose parchment smelled faintly of cedar and dry tea leaves.',
+    'Scholars travelled from distant valleys not merely to consult the ancient maps, but to experience the profound stillness that inhabited every corridor.',
+    'Here, time seemed to slow down, measured not by the ticking of pendulum clocks, but by the gradual shifting of sunlight across worn wooden oak tables.',
+  ].join(' '),
+
+  technical: [
+    'The consensus engine implements a multi-version concurrency control mechanism to ensure strict serializability across distributed state machines.',
+    'When a leader replica receives a write proposal, it appends the transaction record to its local write-ahead log before broadcasting append entries to quorum peers.',
+    'Each peer validates the term index and commit sequence prior to issuing an acknowledgment message over the secure TLS socket layer.',
+    'Once a majority quorum confirms persistence, the state machine applies the log entry deterministically and returns the executed result to the client.',
+  ].join(' '),
+
+  essay: [
+    'Information density in natural language compression depends fundamentally upon the structural invariants embedded within BPE vocabulary spaces.',
+    'Standard byte-pair encoding schemes assign short integer tokens to high-frequency character substrings, thereby creating localized non-uniformity in token entropy.',
+    'By exploiting higher-order syntactic patterns and context-free grammar factorizations, specialized neuralese codecs achieve compression ratios far surpassing raw string representations.',
+    'This dual perspective bridges discrete algorithmic formalisms with empirical statistical language modeling.',
+  ].join(' '),
+};
+
+/** Hybrid prose benchmarks interleaving natural language prose with code, tables, and structured data. */
+export const HYBRID_PROSE_SUITE = {
+  markdownDoc: [
+    '# Architecture Specification: Distributed Event Router',
+    'The distributed event router manages high-throughput asynchronous message delivery with bounded memory overhead.',
+    '## System Metrics',
+    '| Component | Throughput (msg/s) | p99 Latency (ms) | Target Availability |',
+    '| Ingress Gateway | 125,000 | 4.2 | 99.99% |',
+    '| Stream Parser | 98,000 | 1.8 | 99.95% |',
+    '| Persistence Store | 45,000 | 12.5 | 99.99% |',
+    '## Configuration Example',
+    '```json',
+    '{"router_id":"r-7814","max_buffer_mb":512,"flush_interval_ms":50,"enable_metrics":true}',
+    '```',
+    'Ensure that the `max_buffer_mb` setting does not exceed 75% of available container cgroup RAM limits.',
+  ].join('\n'),
+
+  apiSpec: [
+    'API Specification for `/v1/telemetry/ingest` Endpoint.',
+    'Accepts batch telemetry events submitted via HTTPS POST using application/json payload encoding.',
+    'Request Payload:',
+    '```ts',
+    'interface TelemetryPayload {',
+    '  tenant_id: string;',
+    '  batch_size: number;',
+    '  events: Array<{ id: string; timestamp: string; level: "INFO" | "WARN" | "ERROR"; msg: string }>;',
+    '}',
+    '```',
+    'Example Curl Request:',
+    'curl -X POST https://api.internal/v1/telemetry/ingest -H "Content-Type: application/json" -d \'{"tenant_id":"t-42","batch_size":1,"events":[{"id":"e-1","timestamp":"2026-09-15T12:00:00Z","level":"INFO","msg":"heartbeat ok"}]}\'',
+    'Response Status Codes:',
+    '200 OK: Batch accepted and queued for asynchronous ingestion.',
+    '429 Too Many Requests: Rate limit exceeded; apply exponential backoff before retrying.',
+  ].join('\n'),
+};
+
+/** Output prompt log text benchmarks representing real LLM trajectories and reasoning traces. */
+export const PROMPT_LOG_OUTPUT_SUITE = {
+  agentTrajectory: [
+    'Thought: The user requested a database connection pool audit and error analysis for service checkout-api.',
+    'Action: execute_shell',
+    'Action Input: kubectl logs -n prod deploy/checkout-api --tail=50 --selector=app=checkout',
+    'Observation:',
+    '2026-09-15T14:22:01Z ERROR [pool] timeout waiting for connection from pool (max=50, active=50, waiting=12)',
+    '2026-09-15T14:22:05Z WARN [http] POST /v2/charge status=504 latency=5002ms client_ip=10.240.12.8',
+    'Thought: The logs confirm connection pool exhaustion causing downstream HTTP 504 gateway timeouts.',
+    'Action: update_config',
+    'Action Input: {"service":"checkout-api","config":{"max_connections":100,"idle_timeout_s":30}}',
+    'Observation: Config updated successfully. Rollout restart triggered for deploy/checkout-api.',
+    'Final Answer: Connection pool limit increased from 50 to 100. All 4 pods completed rolling update and health checks passed.',
+  ].join('\n'),
+
+  reasoningTrace: [
+    'Reasoning Step 1: Evaluating memory footprint and BPE token bounds for payload size = 12,480 bytes.',
+    'Step 2: Checking candidate grammar induction rules using straight-line grammar factorization.',
+    'Step 3: Found 14 repeated structural patterns across JSON log records.',
+    'Code execution trace:',
+    '```py',
+    'def evaluate_gain(raw_tokens, compressed_tokens):',
+    '    savings = (raw_tokens - compressed_tokens) / raw_tokens',
+    '    return {"savings_pct": savings * 100, "optimal": savings >= 0.85}',
+    '```',
+    'Execution Result: {"savings_pct": 88.4, "optimal": true}',
+    'Conclusion: BPE boundary realignment achieved 88.4% token compression while maintaining 100% losslessness.',
+  ].join('\n'),
+};
