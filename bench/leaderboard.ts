@@ -61,6 +61,7 @@ import { eupraxiaEncode } from '@/lib/omega/eupraxia';
 import { metisEncode } from '@/lib/omega/metis';
 import { proteusEncode } from '@/lib/omega/proteus';
 import { logosEncode } from '@/lib/omega/logos';
+import { hermesEncode } from '@/lib/omega/hermes';
 import { kappaEncode } from '@/lib/omega/kappa';
 import { phraseEncode } from '@/lib/omega/phrase';
 import { tauEncode } from '@/lib/omega/tau';
@@ -196,6 +197,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('nemesis', async () => nemesisEncode(text, enc));
   await run('proteus', async () => proteusEncode(text, enc));
   await run('logos', async () => logosEncode(text, enc));
+  await run('hermes', async () => hermesEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('metis', async () => metisEncode(text, enc));
   await run('eupraxia', async () => eupraxiaEncode(text, enc));
   await run('dike', async () => dikeEncode(text, enc));
