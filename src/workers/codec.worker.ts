@@ -50,6 +50,7 @@ import { metisEncode } from '../lib/omega/metis';
 import { proteusEncode } from '../lib/omega/proteus';
 import { logosEncode } from '../lib/omega/logos';
 import { hermesEncode } from '../lib/omega/hermes';
+import { hermesContractEncode } from '../lib/omega/hermes-contract';
 import { kappaEncode } from '../lib/omega/kappa';
 import { phraseEncode } from '../lib/omega/phrase';
 import { tauEncode } from '../lib/omega/tau';
@@ -148,6 +149,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const kappa = kappaEncode(input, 'o200k_base');
       const phrase = phraseEncode(input, 'o200k_base');
       const tau = tauEncode(input, 'o200k_base');
+      const hermesContract = hermesContractEncode(input, 'o200k_base');
 
       const response: CodecWorkerResponse = {
         id,
@@ -180,6 +182,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         kernel,
         zenith,
         eclipse,
+        hermesContract,
         rosetta,
         harmonia,
         aether,

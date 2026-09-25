@@ -16,7 +16,7 @@ import { compressHolographic } from '@/lib/neuralese-holographic';
 import { compressCaveHolo } from '@/lib/neuralese-caveholo';
 import { compressIbCaveHolo } from '@/lib/neuralese-ib';
 import { countTokens } from '../lib/omega/bpe';
-import { hermesContractEncode, type HermesContractResult } from '../lib/omega/hermes-contract';
+import type { HermesContractResult } from '../lib/omega/hermes-contract';
 import { omegaXiCompress, OMEGA_XI_SYSTEM_PROMPT, type OmegaXiResult } from '../lib/omega/atom-codec';
 import { ltpProject, type LtpResult } from '../lib/omega/ltp';
 import { compressPrometheusICDM, type PrometheusResult } from '../lib/omega/prometheus-icdm';
@@ -274,6 +274,7 @@ export default function Workbench() {
   const [kernelRes, setKernelRes] = useState<KernelResult | null>(null);
   const [zenithRes, setZenithRes] = useState<ZenithResult | null>(null);
   const [eclipseRes, setEclipseRes] = useState<EclipseResult | null>(null);
+  const [hermesContractRes, setHermesContractRes] = useState<HermesContractResult | null>(null);
   const [axiomLedger, setAxiomLedger] = useState<AxiomLedgerEntry[]>([]);
   const [includeDecoder, setIncludeDecoder] = useState(false);
   const [asyncBusy, setAsyncBusy] = useState(false);
@@ -297,7 +298,6 @@ export default function Workbench() {
   const omegaE8Res = useMemo(() => e8Encode(safeCodecInput, 'o200k_base'), [safeCodecInput]);
   const eidolonRes = useMemo(() => eidolonProject(safeCodecInput, 'o200k_base'), [safeCodecInput]);
   const mnemeRes = useMemo(() => mnemeApply(heavyInput, 'o200k_base', mnemeDict), [heavyInput, mnemeDict]);
-  const hermesContractRes = useMemo<HermesContractResult>(() => hermesContractEncode(safeCodecInput, 'o200k_base'), [safeCodecInput]);
 
   const cavemanDefault = useMemo(() => cavemanCompress(heavyInput, cavemanLevel), [heavyInput, cavemanLevel]);
   const dragiFull = useMemo(() => compressDragiFull(heavyInput, 'o200k_base'), [heavyInput]);
@@ -318,17 +318,17 @@ export default function Workbench() {
 
   useEffect(() => {
     if (hardTextMode) {
-      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null); setZenithRes(null); setEclipseRes(null);
+      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null); setZenithRes(null); setEclipseRes(null); setHermesContractRes(null);
       setAsyncBusy(false);
       return;
     }
     const id = ++runId.current;
     setAsyncBusy(!largeTextMode);
     if (largeTextMode) {
-      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null); setZenithRes(null); setEclipseRes(null);
+      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null); setZenithRes(null); setEclipseRes(null); setHermesContractRes(null);
       return;
     }
-      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null); setZenithRes(null); setEclipseRes(null);
+      setOmegaXiRes(null); setPromRes(null); setZetaRes(null); setChronosRes(null); setCaRes(null); setNexusRes(null); setMnemeNexusRes(null); setApexRes(null); setVeritasRes(null); setQuasarRes(null); setHelixRes(null); setMeridianRes(null); setPlexusRes(null); setPulseRes(null); setAnaphoraRes(null); setAxiomRes(null); setOrbitRes(null); setTesseraRes(null); setStrataRes(null); setSignetRes(null); setMosaicRes(null); setAtlasRes(null); setAuroraRes(null); setCrownRes(null); setIrisRes(null); setKernelRes(null); setZenithRes(null); setEclipseRes(null); setHermesContractRes(null);
     // The complete tournament runs in an inline module worker. Terminating the
     // previous worker cancels obsolete input immediately; the UI/main thread
     // never executes BPE mining or dynamic-programming loops.
@@ -353,6 +353,7 @@ export default function Workbench() {
       setKernelRes(data.kernel);
       setZenithRes(data.zenith);
       setEclipseRes(data.eclipse);
+      setHermesContractRes(data.hermesContract);
       setAsyncBusy(false);
     };
     worker.onerror = (event) => {
@@ -388,7 +389,7 @@ export default function Workbench() {
       };
     }
     switch (codec) {
-      case 'hermesContract': return { out: hermesContractRes.wire, back: hermesContractRes.decoded, exact: hermesContractRes.exact, inTok: hermesContractRes.inTokens, outTok: hermesContractRes.outTokens, preamble: hermesContractRes.decoderPrompt, notes: `${hermesContractRes.notes}; one-chat cost=${hermesContractRes.oneChatTokens} tokens` };
+      case 'hermesContract': return { out: hermesContractRes?.wire ?? '⏳ Computing HERMES-C…', back: hermesContractRes?.decoded ?? input, exact: !!hermesContractRes?.exact, inTok: hermesContractRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: hermesContractRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: hermesContractRes?.decoderPrompt ?? '', notes: hermesContractRes ? `${hermesContractRes.notes}; one-chat cost=${hermesContractRes.oneChatTokens} tokens` : 'Computing in codec worker…' };
       case 'khoros': return { out: khorosRes?.wire ?? '⏳ Computing KHOROS…', back: khorosRes?.decoded ?? input, exact: !!khorosRes?.exact, inTok: khorosRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: khorosRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: KHOROS_SYSTEM_PROMPT, notes: khorosRes?.notes ?? '' };
       case 'omni': return { out: omniRes?.wire ?? '⏳ Computing OMNI…', back: omniRes?.decoded ?? input, exact: !!omniRes?.exact, inTok: omniRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: omniRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: OMNI_SYSTEM_PROMPT, notes: omniRes?.notes ?? '' };
       case 'genesis': return { out: genesisRes?.wire ?? '⏳ Computing GENESIS…', back: genesisRes?.decoded ?? input, exact: !!genesisRes?.exact, inTok: genesisRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: genesisRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: GENESIS_SYSTEM_PROMPT, notes: genesisRes?.notes ?? '' };
@@ -493,7 +494,7 @@ export default function Workbench() {
     if (aetherRes?.exact) out.push({ key:'aether', label:'⟁ AETHER (General Prose Leader)', exact:true, inTokens:aetherRes.inTokens, outTokens:aetherRes.outTokens, savingsPct:aetherRes.savingsPct, fidelityPct:100, safety:'High', notes:aetherRes.notes });
     if (harmoniaRes?.exact) out.push({ key:'harmonia', label:'⧢ HARMONIA (Pareto Leader)', exact:true, inTokens:harmoniaRes.inTokens, outTokens:harmoniaRes.outTokens, savingsPct:harmoniaRes.savingsPct, fidelityPct:100, safety:'High', notes:harmoniaRes.notes });
     if (apexRes?.exact && apexRes.outTokens <= apexRes.inTokens) out.push({ key:'apex', label:'Λ† APEX', exact:true, inTokens:apexRes.inTokens, outTokens:apexRes.outTokens, savingsPct:apexRes.savingsPct, fidelityPct:100, safety:'High', notes:apexRes.notes });
-    if (hermesContractRes.exact) out.push({ key:'hermesContract', label:LABEL.hermesContract, exact:true, inTokens:hermesContractRes.inTokens, outTokens:hermesContractRes.oneChatTokens, savingsPct:hermesContractRes.inTokens ? ((hermesContractRes.inTokens-hermesContractRes.oneChatTokens)/hermesContractRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${hermesContractRes.outTokens}; contract=${hermesContractRes.contractTokens}; ops=${hermesContractRes.operations.join(',') || 'identity'}` });
+    if (hermesContractRes?.exact) out.push({ key:'hermesContract', label:LABEL.hermesContract, exact:true, inTokens:hermesContractRes.inTokens, outTokens:hermesContractRes.oneChatTokens, savingsPct:hermesContractRes.inTokens ? ((hermesContractRes.inTokens-hermesContractRes.oneChatTokens)/hermesContractRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${hermesContractRes.outTokens}; contract=${hermesContractRes.contractTokens}; ops=${hermesContractRes.operations.join(',') || 'identity'}` });
     if (eidolonRes.exact && eidolonRes.outTokens <= eidolonRes.inTokens) out.push({ key:'eidolon', label:'👻 EIDOLON', exact:true, inTokens:eidolonRes.inTokens, outTokens:eidolonRes.outTokens, savingsPct:eidolonRes.savingsPct, fidelityPct:100, safety:'High', notes:eidolonRes.notes });
     if (nexusRes?.exact && nexusRes.outTokens <= nexusRes.inTokens) out.push({ key:'nexus', label:'★ Ω∞ NEXUS', exact:true, inTokens:nexusRes.inTokens, outTokens:nexusRes.outTokens, savingsPct:nexusRes.savingsPct, fidelityPct:100, safety:'High', notes:nexusRes.notes });
     if (mnemeNexusRes?.exact && mnemeNexusRes.outTokens < mnemeRes.inTokens) out.push({ key:'mneme', label:'Μ Ω-Mneme', exact:true, inTokens:mnemeRes.inTokens, outTokens:mnemeNexusRes.outTokens, savingsPct:((mnemeRes.inTokens-mnemeNexusRes.outTokens)/mnemeRes.inTokens)*100, fidelityPct:100, safety:'High', notes:`${mnemeRes.usedEntries.length} persistent entries used.` });

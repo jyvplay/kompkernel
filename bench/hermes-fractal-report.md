@@ -11,6 +11,7 @@ Actually used in this turn:
 - the repository's live `gpt-tokenizer` `o200k_base` implementation (and the code supports `cl100k_base`);
 - the repository fixtures and independent TypeScript test benches;
 - the Workbench production build with HERMES-C selected by default;
+- the inline codec worker path, which now computes and returns HERMES-C off the UI thread;
 - web search and page retrieval for literature.
 
 No independent agent, LLM inference API, simulator, Lean/Coq theorem prover, database, GPU, or external compression executable was used. The independent decoder in the red-team is a second TypeScript implementation, not a theorem prover and not a real second LLM.
@@ -124,7 +125,7 @@ The open interface is now precise: HERMES-Ω's token-aligned SLP is better on lo
 
 The strongest structure-specific attacker is a near-duplicate corpus with one adversarial outlier per block, alternating unit widths, delimiter-heavy JSON, unsafe integers, Unicode, frame-looking raw text, and short blocks just below the admission threshold. The red-team includes these cases, 250 structured fuzz inputs, malformed frames, 15 regimes, independent prompt-literal decoding, and an 8 KB speed test.
 
-After the HERMES-C contract patch and parser repair, the complete red-team was rerun: **11/11 gates passed**. It includes the original independent prompt-literal decoder, 15 regimes, constant/affine/cycle/literal/variable-width lanes, hostile delimiters and Unicode, malformed frames, a contract-specialization comparison, metadata/adversarial mutation repair, adaptive Pareto checks, identity accounting, 250 fuzz cases, and an 8 KB speed gate. `npx tsc --noEmit` passed, and `npm run build` passed with Vite 7.3.6 (173 modules transformed). No target-LLM behavioral decode was run, so that remains explicitly unverified.
+After the HERMES-C contract patch and parser repair, the complete red-team was rerun: **11/11 gates passed**. It includes the original independent prompt-literal decoder, 15 regimes, constant/affine/cycle/literal/variable-width lanes, hostile delimiters and Unicode, malformed frames, a contract-specialization comparison, metadata/adversarial mutation repair, adaptive Pareto checks, identity accounting, 250 fuzz cases, and an 8 KB speed gate. `npx tsc --noEmit` passed, and `npm run build` passed with Vite 7.3.6 (171 modules transformed on the final worker-integrated build). No target-LLM behavioral decode was run, so that remains explicitly unverified.
 
 ## J. Stop condition
 
