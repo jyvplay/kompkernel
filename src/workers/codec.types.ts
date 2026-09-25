@@ -52,6 +52,7 @@ import type { IrisResult } from '../lib/omega/iris';
 import type { KernelResult } from '../lib/omega/kernel';
 import type { ZenithResult } from '../lib/omega/zenith';
 import type { EclipseResult } from '../lib/omega/eclipse';
+import type { HermesContractResult } from '../lib/omega/hermes-contract';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -119,6 +120,7 @@ export interface CodecWorkerResult {
   kernel: KernelResult;
   zenith: ZenithResult;
   eclipse: EclipseResult;
+  hermesContract: HermesContractResult;
 }
 
 export interface CodecWorkerFailure {
