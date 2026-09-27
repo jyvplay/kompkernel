@@ -17,6 +17,13 @@ import { compressCaveHolo } from '@/lib/neuralese-caveholo';
 import { compressIbCaveHolo } from '@/lib/neuralese-ib';
 import { countTokens } from '../lib/omega/bpe';
 import type { HermesContractResult } from '../lib/omega/hermes-contract';
+import type { ChironResult } from '../lib/omega/chiron';
+import type { AriadneResult } from '../lib/omega/ariadne';
+import type { SibylResult } from '../lib/omega/sibyl';
+import type { SequoyahResult } from '../lib/omega/sequoyah';
+import type { ThothResult } from '../lib/omega/thoth';
+import type { PalimpsestResult } from '../lib/omega/palimpsest';
+import type { DaedalusResult } from '../lib/omega/daedalus';
 import { omegaXiCompress, OMEGA_XI_SYSTEM_PROMPT, type OmegaXiResult } from '../lib/omega/atom-codec';
 import { ltpProject, type LtpResult } from '../lib/omega/ltp';
 import { compressPrometheusICDM, type PrometheusResult } from '../lib/omega/prometheus-icdm';
@@ -86,7 +93,7 @@ type CodecKey =
   | 'losslessAscii' | 'omegaXi' | 'omegaE8' | 'eidolon' | 'ltp' | 'prometheus' | 'zeta'
   | 'janus' | 'sigma' | 'stencil' | 'morph' | 'chronos' | 'chronosArena' | 'nexus' | 'mneme' | 'apex'
   | 'caveMan' | 'dragi' | 'wenyan' | 'composite' | 'dragiScale' | 'ordos' | 'asgJson'
-  | 'astCode' | 'hermesContract' | 'noether' | 'holographic' | 'caveHolo' | 'ibCaveHolo' | 'veritasVx' | 'quasar' | 'helixAp' | 'meridian' | 'plexus'
+  | 'astCode' | 'hermesContract' | 'chiron' | 'ariadne' | 'sibyl' | 'sequoyah' | 'thoth' | 'palimpsest' | 'daedalus' | 'noether' | 'holographic' | 'caveHolo' | 'ibCaveHolo' | 'veritasVx' | 'quasar' | 'helixAp' | 'meridian' | 'plexus'
   | 'axiom' | 'orbit' | 'anaphora' | 'pulse' | 'tessera' | 'strata' | 'signet' | 'mosaic' | 'atlas' | 'aurora' | 'crown' | 'iris' | 'kernel' | 'zenith' | 'eclipse' | 'khoros' | 'omni' | 'genesis' | 'arche' | 'telos' | 'pantheon' | 'apeiron' | 'noesis' | 'synapse' | 'panacea' | 'aether' | 'harmonia' | 'rosetta' | 'kappa' | 'phrase' | 'tau';
 
 interface ParetoRow {
@@ -102,7 +109,7 @@ interface ParetoRow {
 }
 
 const GROUPS: Array<{ label: string; hint: string; keys: CodecKey[] }> = [
-  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['hermesContract','khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
+  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['daedalus','palimpsest','sibyl','thoth','sequoyah','ariadne','chiron','hermesContract','khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
   { label: '🟡 DUPLEX · SCRIPTED UIs', hint: 'Arena / CI / Artifacts. Compress input and help compress output.', keys: ['chronosArena','chronos','janus'] },
   { label: '🔴 BINARY TRANSPORT', hint: 'Needs middleware / tool-call decoder.', keys: ['omegaXi','omegaE8'] },
   { label: '📝 SEMANTIC (lossy, LLM-readable)', hint: 'Directly readable, not byte-exact.', keys: ['light','balanced','max','extreme','caveMan','dragi','wenyan','composite','dragiScale','ordos','asgJson','astCode','noether','holographic','caveHolo','ibCaveHolo'] },
@@ -110,6 +117,13 @@ const GROUPS: Array<{ label: string; hint: string; keys: CodecKey[] }> = [
 
 const LABEL: Record<string, string> = {
   hermesContract: '⟡ HERMES-C · Contract Sliced',
+  chiron: '⟐ CHIRON · Two-Part-MDL Program',
+  ariadne: '⟁ ARIADNE · Symbol-Space Optimal Parse',
+  sibyl: '☘ SIBYL · Single-Token Rules',
+  sequoyah: '𐌔 SEQUOYAH · Deterministic Assignment',
+  thoth: '𓅜 THOTH · Suffix-Automaton Mining',
+  palimpsest: '⎈ PALIMPSEST · Configuration Portfolio',
+  daedalus: '⧗ DAEDALUS · Predicted-Arm Portfolio',
   light: 'Light', balanced: 'Balanced', max: 'Max', extreme: 'Extreme',
   losslessAscii: 'Lossless ASCII', omegaXi: '⚡ Ω-Ξ Atom', omegaE8: 'Σ₈ Ω-Σ E8-Seed', eidolon: '👻 EIDOLON',
   ltp: '📐 LTP', prometheus: '🔥 Prometheus', zeta: 'Ζ Zeta Duplex', janus: '🏛 Janus',
@@ -138,6 +152,13 @@ const LABEL: Record<string, string> = {
 };
 
 const HINT: Record<string, string> = {
+  daedalus: "DAEDALUS: PALIMPSEST proved there is no single good search configuration, only a good one per input - but it found it by running every arm. DAEDALUS predicts the winner from an O(n) feature the encoder computes anyway: punctuation density above ~18% picks the short-span arm, below it the short-span arm with single-token rules, and very small inputs the plain default. Measured 13/14 prediction hits. Running ONE predicted arm beats the full PALIMPSEST portfolio on tokens while being 1.6x faster; two arms beat it by 41 tokens at 1.4x faster. It still contains the incumbent arm, so it cannot lose to it.",
+  palimpsest: "PALIMPSEST: the search hyperparameters are themselves decision variables. Measured by ablation, the shipped default is beaten on every lane tested, by a DIFFERENT setting on each: maxSpan=12 gives gh-api -18 and doc11 -10, levels=1 gives gh-prose -2. PALIMPSEST is an anytime portfolio that scores complete configurations on the whole one-chat message and keeps the shortest. Arm zero is the incumbent encoder itself, so it can only tie or beat it - measured: beats ARIADNE on 10 of 13 lanes, loses on 0. The cost is wall-clock.",
+  thoth: "THOTH: candidate generation by suffix automaton instead of an O(n*maxSpan) sweep over every (position,length) pair, and occurrence indexing by Aho-Corasick instead of string-key lookup. Measured 38-43x faster candidate generation with an identical best candidate, and only MAXIMAL repeats survive. Those two algorithms live in the shared pipeline, so ARIADNE and SIBYL inherit them. THOTH itself is clock-free: every loop is bounded by an iteration count, never by Date.now(), so the emitted wire is a pure function of the input.",
+  sequoyah: "SEQUOYAH: the same mechanism class as SIBYL, with every loop bounded by an iteration count instead of by the clock, so the emitted wire is a pure function of the input. SIBYL fails the determinism gate because its search is wall-clock bounded; SEQUOYAH does not. It also evaluates the assignment objective over DEDUPLICATED reference-run patterns, which is exact and strictly cheaper. It is not uniformly better on tokens than SIBYL - it wins some lanes and loses others - and the frontier takes the minimum across codecs.",
+  sibyl: "SIBYL: admits rules whose expansion is a SINGLE token — which every grammar compressor proves worthless, because the reference and the token both cost one. That proof assumes a reference costs one token, and it does not: a run of adjacent references is one pre-tokenizer chunk, so BPE merges inside it. The frequent single tokens of English are the function words, and function words cluster, so the adjacency merging needs is exactly where prose keeps its mass. SIBYL also pools fourteen scripts into one 802-character alphabet carrying 3420 two-character and 3119 three-character single tokens. Same wire language, same contract, same three readers.",
+  ariadne: "ARIADNE: the same wire language and the same reader contract as CHIRON, with a new encoder. It tokenises once and then optimises in SYMBOL space, where every symbol costs exactly one token, so the two-part objective is integer arithmetic and the search never calls the tokenizer; the parse is a shortest path (overlapping phrases can coexist, which greedy replace-all can never do); and the rule->glyph assignment is optimised against the o200k vocabulary, because a run of adjacent references is one pre-tokenizer chunk and multi-character single tokens make some of those references free. That last gain costs ZERO contract tokens. Exact UTF-16 round-trip, verified by the same three independent readers including CPython.",
+  chiron: "CHIRON: a text program for one chat message, scored as a two-part MDL code — the decoder contract is prose billed in the SAME tokenizer units as the wire, so an operator ships only when it saves more tokens than its own sentence costs. One wire composes three mechanisms: a delimiter-free macro tape (token-aligned SLP), a repeat/fill block over discovered line units with per-column lists, and integer ranges. Raw regions stay verbatim: no JSON escape, no per-line prefix. Exact UTF-16 round-trip, verified by three independent readers including CPython.",
   hermesContract: 'HERMES-C: HERMES-F with a wire-specialized, self-carried decoder contract. It describes only T/B/R and the slot generators present in this wire, then charges the complete one-chat token count. Exact UTF-16 round-trip; no prior state, tools, system prompt, or fixed schema.',
   khoros: 'Terminal Sovereign Codec (KHOROS-Ω): Kieffer-Yang Hierarchical Orthogonal Rate-distortion Optimal Synthesis & Aperiodic SLP Lattice with 2,515+ multi-domain static operads, pure dynamic grammar extraction, linear-time rate-distortion partitioned cuts, and absolute non-Rosetta Pareto leadership.',
   omni: 'Terminal Sovereign Codec (OMNI-Ω): Orthogonal Multi-Domain Neural Induction & Combinatorial SLP Lattice with 2,515+ multi-domain static operads, pure dynamic grammar extraction, linear-time rate-distortion partitioned cuts, and absolute non-Rosetta Pareto leadership.',
@@ -219,7 +240,7 @@ function Stat({ label, value, good }: { label: string; value: string; good?: boo
 
 export default function Workbench() {
   const [input, setInput] = useState(SAMPLE_TEXT);
-  const [codec, setCodec] = useState<CodecKey>('hermesContract');
+  const [codec, setCodec] = useState<CodecKey>('sibyl');
   const [copied, setCopied] = useState(false);
   const [saving, setSaving] = useState(false);
   const [showPreamble, setShowPreamble] = useState(false);
@@ -275,6 +296,13 @@ export default function Workbench() {
   const [zenithRes, setZenithRes] = useState<ZenithResult | null>(null);
   const [eclipseRes, setEclipseRes] = useState<EclipseResult | null>(null);
   const [hermesContractRes, setHermesContractRes] = useState<HermesContractResult | null>(null);
+  const [chironRes, setChironRes] = useState<ChironResult | null>(null);
+  const [ariadneRes, setAriadneRes] = useState<AriadneResult | null>(null);
+  const [sibylRes, setSibylRes] = useState<SibylResult | null>(null);
+  const [sequoyahRes, setSequoyahRes] = useState<SequoyahResult | null>(null);
+  const [thothRes, setThothRes] = useState<ThothResult | null>(null);
+  const [palimpsestRes, setPalimpsestRes] = useState<PalimpsestResult | null>(null);
+  const [daedalusRes, setDaedalusRes] = useState<DaedalusResult | null>(null);
   const [axiomLedger, setAxiomLedger] = useState<AxiomLedgerEntry[]>([]);
   const [includeDecoder, setIncludeDecoder] = useState(false);
   const [asyncBusy, setAsyncBusy] = useState(false);
@@ -354,6 +382,13 @@ export default function Workbench() {
       setZenithRes(data.zenith);
       setEclipseRes(data.eclipse);
       setHermesContractRes(data.hermesContract);
+      setChironRes(data.chiron);
+      setAriadneRes(data.ariadne);
+      setSibylRes(data.sibyl);
+      setSequoyahRes(data.sequoyah);
+      setThothRes(data.thoth);
+      setPalimpsestRes(data.palimpsest);
+      setDaedalusRes(data.daedalus);
       setAsyncBusy(false);
     };
     worker.onerror = (event) => {
@@ -389,6 +424,13 @@ export default function Workbench() {
       };
     }
     switch (codec) {
+      case 'daedalus': return { out: daedalusRes?.wire ?? '⏳ Computing DAEDALUS…', back: daedalusRes?.decoded ?? input, exact: !!daedalusRes?.exact, inTok: daedalusRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: daedalusRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: daedalusRes?.decoderPrompt ?? '', notes: daedalusRes ? `${daedalusRes.notes}; one-chat cost=${daedalusRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'palimpsest': return { out: palimpsestRes?.wire ?? '⏳ Computing PALIMPSEST…', back: palimpsestRes?.decoded ?? input, exact: !!palimpsestRes?.exact, inTok: palimpsestRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: palimpsestRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: palimpsestRes?.decoderPrompt ?? '', notes: palimpsestRes ? `${palimpsestRes.notes}; one-chat cost=${palimpsestRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'thoth': return { out: thothRes?.wire ?? '⏳ Computing THOTH…', back: thothRes?.decoded ?? input, exact: !!thothRes?.exact, inTok: thothRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: thothRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: thothRes?.decoderPrompt ?? '', notes: thothRes ? `${thothRes.notes}; one-chat cost=${thothRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'sequoyah': return { out: sequoyahRes?.wire ?? '⏳ Computing SEQUOYAH…', back: sequoyahRes?.decoded ?? input, exact: !!sequoyahRes?.exact, inTok: sequoyahRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: sequoyahRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: sequoyahRes?.decoderPrompt ?? '', notes: sequoyahRes ? `${sequoyahRes.notes}; one-chat cost=${sequoyahRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'sibyl': return { out: sibylRes?.wire ?? '⏳ Computing SIBYL…', back: sibylRes?.decoded ?? input, exact: !!sibylRes?.exact, inTok: sibylRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: sibylRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: sibylRes?.decoderPrompt ?? '', notes: sibylRes ? `${sibylRes.notes}; one-chat cost=${sibylRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'ariadne': return { out: ariadneRes?.wire ?? '⏳ Computing ARIADNE…', back: ariadneRes?.decoded ?? input, exact: !!ariadneRes?.exact, inTok: ariadneRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: ariadneRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: ariadneRes?.decoderPrompt ?? '', notes: ariadneRes ? `${ariadneRes.notes}; one-chat cost=${ariadneRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'chiron': return { out: chironRes?.wire ?? '⏳ Computing CHIRON…', back: chironRes?.decoded ?? input, exact: !!chironRes?.exact, inTok: chironRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: chironRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: chironRes?.decoderPrompt ?? '', notes: chironRes ? `${chironRes.notes}; one-chat cost=${chironRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'hermesContract': return { out: hermesContractRes?.wire ?? '⏳ Computing HERMES-C…', back: hermesContractRes?.decoded ?? input, exact: !!hermesContractRes?.exact, inTok: hermesContractRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: hermesContractRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: hermesContractRes?.decoderPrompt ?? '', notes: hermesContractRes ? `${hermesContractRes.notes}; one-chat cost=${hermesContractRes.oneChatTokens} tokens` : 'Computing in codec worker…' };
       case 'khoros': return { out: khorosRes?.wire ?? '⏳ Computing KHOROS…', back: khorosRes?.decoded ?? input, exact: !!khorosRes?.exact, inTok: khorosRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: khorosRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: KHOROS_SYSTEM_PROMPT, notes: khorosRes?.notes ?? '' };
       case 'omni': return { out: omniRes?.wire ?? '⏳ Computing OMNI…', back: omniRes?.decoded ?? input, exact: !!omniRes?.exact, inTok: omniRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: omniRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: OMNI_SYSTEM_PROMPT, notes: omniRes?.notes ?? '' };
@@ -456,7 +498,7 @@ export default function Workbench() {
       case 'ibCaveHolo': return { out: ibCaveHolo.output, back: input, exact: false, inTok: countTokens(input,'o200k_base'), outTok: countTokens(ibCaveHolo.output,'o200k_base'), preamble: ibCaveHolo.decoderPrompt + '\n\nOUTPUT CONTRACT: Reuse the same $codes and omit low-density filler in replies. Protected units stay verbatim; code fences verbatim.', notes: 'Pruned semantic.' };
       default: return { out: advancedPreset.output, back: advancedPreset.roundTrip, exact: false, inTok: countTokens(input,'o200k_base'), outTok: countTokens(advancedPreset.output,'o200k_base'), preamble: advancedPreset.decoderPreamble, notes: PRESETS[codec as keyof typeof PRESETS]?.hint ?? '' };
     }
-  }, [codec, input, lossless, omegaXiRes, omegaE8Res, ltpRes, promRes, zetaRes, janusRes, sigmaRes, stencilRes, chronosRes, caRes, nexusRes, mnemeRes, mnemeNexusRes, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, harmoniaRes, aetherRes, panaceaRes, synapseRes, noesisRes, apeironRes, pantheonRes, telosRes, archeRes, genesisRes, omniRes, khorosRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, cavemanDefault, dragiFull, wenyan, composite, dragiScale, ordos, asg, ast, noether, holographic, caveHolo, ibCaveHolo, advancedPreset, cavemanLevel, mnemeDict, hermesContractRes]);
+  }, [codec, input, lossless, omegaXiRes, omegaE8Res, ltpRes, promRes, zetaRes, janusRes, sigmaRes, stencilRes, chronosRes, caRes, nexusRes, mnemeRes, mnemeNexusRes, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, harmoniaRes, aetherRes, panaceaRes, synapseRes, noesisRes, apeironRes, pantheonRes, telosRes, archeRes, genesisRes, omniRes, khorosRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, cavemanDefault, dragiFull, wenyan, composite, dragiScale, ordos, asg, ast, noether, holographic, caveHolo, ibCaveHolo, advancedPreset, cavemanLevel, mnemeDict, hermesContractRes, chironRes, ariadneRes, sibylRes, sequoyahRes, thothRes, palimpsestRes, daedalusRes]);
 
   const rows: ParetoRow[] = useMemo(() => {
     const inTok = countTokens(input, 'o200k_base');
@@ -494,6 +536,13 @@ export default function Workbench() {
     if (aetherRes?.exact) out.push({ key:'aether', label:'⟁ AETHER (General Prose Leader)', exact:true, inTokens:aetherRes.inTokens, outTokens:aetherRes.outTokens, savingsPct:aetherRes.savingsPct, fidelityPct:100, safety:'High', notes:aetherRes.notes });
     if (harmoniaRes?.exact) out.push({ key:'harmonia', label:'⧢ HARMONIA (Pareto Leader)', exact:true, inTokens:harmoniaRes.inTokens, outTokens:harmoniaRes.outTokens, savingsPct:harmoniaRes.savingsPct, fidelityPct:100, safety:'High', notes:harmoniaRes.notes });
     if (apexRes?.exact && apexRes.outTokens <= apexRes.inTokens) out.push({ key:'apex', label:'Λ† APEX', exact:true, inTokens:apexRes.inTokens, outTokens:apexRes.outTokens, savingsPct:apexRes.savingsPct, fidelityPct:100, safety:'High', notes:apexRes.notes });
+    if (daedalusRes?.exact) out.push({ key:'daedalus', label:LABEL.daedalus, exact:true, inTokens:daedalusRes.inTokens, outTokens:daedalusRes.messageTokens, savingsPct:daedalusRes.inTokens ? ((daedalusRes.inTokens-daedalusRes.messageTokens)/daedalusRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${daedalusRes.outTokens}; contract=${daedalusRes.contractTokens}; predicted ${daedalusRes.predictedArm}${daedalusRes.predictionHit?' (hit)':' (miss)'}; ${daedalusRes.armsRun} arm(s)` });
+    if (palimpsestRes?.exact) out.push({ key:'palimpsest', label:LABEL.palimpsest, exact:true, inTokens:palimpsestRes.inTokens, outTokens:palimpsestRes.messageTokens, savingsPct:palimpsestRes.inTokens ? ((palimpsestRes.inTokens-palimpsestRes.messageTokens)/palimpsestRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${palimpsestRes.outTokens}; contract=${palimpsestRes.contractTokens}; ${palimpsestRes.armsRun} arms, winner ${palimpsestRes.winningArm}; beat default by ${palimpsestRes.defaultM-palimpsestRes.messageTokens}` });
+    if (thothRes?.exact) out.push({ key:'thoth', label:LABEL.thoth, exact:true, inTokens:thothRes.inTokens, outTokens:thothRes.messageTokens, savingsPct:thothRes.inTokens ? ((thothRes.inTokens-thothRes.messageTokens)/thothRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${thothRes.outTokens}; contract=${thothRes.contractTokens}; deterministic; ${thothRes.arms} arms; script=${thothRes.script}` });
+    if (sequoyahRes?.exact) out.push({ key:'sequoyah', label:LABEL.sequoyah, exact:true, inTokens:sequoyahRes.inTokens, outTokens:sequoyahRes.messageTokens, savingsPct:sequoyahRes.inTokens ? ((sequoyahRes.inTokens-sequoyahRes.messageTokens)/sequoyahRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${sequoyahRes.outTokens}; contract=${sequoyahRes.contractTokens}; deterministic; script=${sequoyahRes.script}` });
+    if (sibylRes?.exact) out.push({ key:'sibyl', label:LABEL.sibyl, exact:true, inTokens:sibylRes.inTokens, outTokens:sibylRes.messageTokens, savingsPct:sibylRes.inTokens ? ((sibylRes.inTokens-sibylRes.messageTokens)/sibylRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${sibylRes.outTokens}; contract=${sibylRes.contractTokens}; ${sibylRes.phraseRules} phrase + ${sibylRes.wordRules} single-token rules; script=${sibylRes.script}` });
+    if (ariadneRes?.exact) out.push({ key:'ariadne', label:LABEL.ariadne, exact:true, inTokens:ariadneRes.inTokens, outTokens:ariadneRes.messageTokens, savingsPct:ariadneRes.inTokens ? ((ariadneRes.inTokens-ariadneRes.messageTokens)/ariadneRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${ariadneRes.outTokens}; contract=${ariadneRes.contractTokens}; script=${ariadneRes.script}; glyph-assignment saved ${ariadneRes.assignmentGain}` });
+    if (chironRes?.exact) out.push({ key:'chiron', label:LABEL.chiron, exact:true, inTokens:chironRes.inTokens, outTokens:chironRes.messageTokens, savingsPct:chironRes.inTokens ? ((chironRes.inTokens-chironRes.messageTokens)/chironRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${chironRes.outTokens}; contract=${chironRes.contractTokens}; ops=${chironRes.ops.join(',') || 'identity'}; ${chironRes.rules} macros/${chironRes.blocks} blocks/${chironRes.lists} lists` });
     if (hermesContractRes?.exact) out.push({ key:'hermesContract', label:LABEL.hermesContract, exact:true, inTokens:hermesContractRes.inTokens, outTokens:hermesContractRes.oneChatTokens, savingsPct:hermesContractRes.inTokens ? ((hermesContractRes.inTokens-hermesContractRes.oneChatTokens)/hermesContractRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${hermesContractRes.outTokens}; contract=${hermesContractRes.contractTokens}; ops=${hermesContractRes.operations.join(',') || 'identity'}` });
     if (eidolonRes.exact && eidolonRes.outTokens <= eidolonRes.inTokens) out.push({ key:'eidolon', label:'👻 EIDOLON', exact:true, inTokens:eidolonRes.inTokens, outTokens:eidolonRes.outTokens, savingsPct:eidolonRes.savingsPct, fidelityPct:100, safety:'High', notes:eidolonRes.notes });
     if (nexusRes?.exact && nexusRes.outTokens <= nexusRes.inTokens) out.push({ key:'nexus', label:'★ Ω∞ NEXUS', exact:true, inTokens:nexusRes.inTokens, outTokens:nexusRes.outTokens, savingsPct:nexusRes.savingsPct, fidelityPct:100, safety:'High', notes:nexusRes.notes });
@@ -550,7 +599,7 @@ export default function Workbench() {
     out.push(mk('max', 'Max', convertAdvanced(input, PRESETS.max.options, adv).output, false, 'Moderate', PRESETS.max.hint));
     out.push(mk('extreme', 'Extreme', convertAdvanced(input, PRESETS.extreme.options, adv).output, false, 'Low', PRESETS.extreme.hint));
     return out.sort((a,b) => b.savingsPct - a.savingsPct || b.fidelityPct - a.fidelityPct);
-  }, [input, largeTextMode, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, harmoniaRes, aetherRes, panaceaRes, synapseRes, noesisRes, apeironRes, pantheonRes, telosRes, archeRes, genesisRes, omniRes, khorosRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, eidolonRes, nexusRes, mnemeRes, mnemeNexusRes, zetaRes, promRes, ltpRes, sigmaRes, stencilRes, morphRes, omegaE8Res, omegaXiRes, chronosRes, caRes, janusRes, dragiFull, cavemanDefault, wenyan, composite, dragiScale, ordos, noether, holographic, caveHolo, ibCaveHolo, asg, ast, adv, hermesContractRes]);
+  }, [input, largeTextMode, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, harmoniaRes, aetherRes, panaceaRes, synapseRes, noesisRes, apeironRes, pantheonRes, telosRes, archeRes, genesisRes, omniRes, khorosRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, eidolonRes, nexusRes, mnemeRes, mnemeNexusRes, zetaRes, promRes, ltpRes, sigmaRes, stencilRes, morphRes, omegaE8Res, omegaXiRes, chronosRes, caRes, janusRes, dragiFull, cavemanDefault, wenyan, composite, dragiScale, ordos, noether, holographic, caveHolo, ibCaveHolo, asg, ast, adv, hermesContractRes, chironRes, ariadneRes, sibylRes]);
 
   const selectedRow = rows.find((r) => r.key === codec);
 
@@ -574,7 +623,7 @@ export default function Workbench() {
     setMnemeDict([]);
   }, []);
 
-  const decoderIsInline = codec === 'hermesContract';
+  const decoderIsInline = codec === 'hermesContract' || codec === 'chiron' || codec === 'ariadne' || codec === 'sibyl' || codec === 'sequoyah' || codec === 'thoth' || codec === 'palimpsest' || codec === 'daedalus';
   const finalOut = includeDecoder ? (decoderIsInline ? selected.preamble : selected.preamble + '\n\n' + selected.out) : selected.out;
   const finalOutTokens = includeDecoder ? countTokens(finalOut, 'o200k_base') : selected.outTok;
 
@@ -609,7 +658,7 @@ export default function Workbench() {
     URL.revokeObjectURL(url);
   }, [finalOut, codec]);
 
-  const exactLane = ['khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode','hermesContract'].includes(codec);
+  const exactLane = ['khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode','hermesContract','chiron','ariadne','sibyl','sequoyah','thoth','palimpsest','daedalus'].includes(codec);
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">

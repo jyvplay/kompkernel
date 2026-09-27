@@ -53,6 +53,13 @@ import type { KernelResult } from '../lib/omega/kernel';
 import type { ZenithResult } from '../lib/omega/zenith';
 import type { EclipseResult } from '../lib/omega/eclipse';
 import type { HermesContractResult } from '../lib/omega/hermes-contract';
+import type { ChironResult } from '../lib/omega/chiron';
+import type { AriadneResult } from '../lib/omega/ariadne';
+import type { SibylResult } from '../lib/omega/sibyl';
+import type { SequoyahResult } from '../lib/omega/sequoyah';
+import type { ThothResult } from '../lib/omega/thoth';
+import type { PalimpsestResult } from '../lib/omega/palimpsest';
+import type { DaedalusResult } from '../lib/omega/daedalus';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -121,6 +128,13 @@ export interface CodecWorkerResult {
   zenith: ZenithResult;
   eclipse: EclipseResult;
   hermesContract: HermesContractResult;
+  chiron: ChironResult;
+  ariadne: AriadneResult;
+  sibyl: SibylResult;
+  sequoyah: SequoyahResult;
+  thoth: ThothResult;
+  palimpsest: PalimpsestResult;
+  daedalus: DaedalusResult;
 }
 
 export interface CodecWorkerFailure {
