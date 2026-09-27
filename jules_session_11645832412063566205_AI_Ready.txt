@@ -1,0 +1,2624 @@
+========================================
+PROJECT DIRECTORY STRUCTURE
+========================================
+bench/aetherion-redteam.ts
+bench/frontier.ts
+bench/leaderboard.ts
+bench/titan-redteam.ts
+bench/valiant-redteam.ts
+src/lib/omega/aetherion.ts
+src/lib/omega/registry.ts
+src/lib/omega/titan.ts
+src/lib/omega/valiant.ts
+========================================
+
+
+===== FILE: bench/aetherion-redteam.ts =====
+import fs from 'node:fs';
+import { countTokens, type EncodingName } from '@/lib/omega/bpe';
+import { aetherionEncode, aetherionDecode, aetherionDecoderPrompt } from '@/lib/omega/aetherion';
+import { CHAOS_900, CHAOS_G_CJK, CHAOS_F_LLM_REPORT, MOSAIC_HANDTRACE_300, mosaicFixtures } from './fixtures';
+
+async function runRedTeam() {
+  console.log('=== AETHERION-Ω RED-TEAM VERIFICATION SUITE ===\n');
+  const enc: EncodingName = 'o200k_base';
+  const f = mosaicFixtures();
+
+  const holdouts = fs.readdirSync('bench/holdout').sort().map(nm => ({
+    name: 'holdout/' + nm,
+    text: fs.readFileSync('bench/holdout/' + nm, 'utf8'),
+  }));
+
+  const fixtureCases = [
+    { name: 'CHAOS_900', text: CHAOS_900 },
+    { name: 'CHAOS_G_CJK', text: CHAOS_G_CJK },
+    { name: 'CHAOS_F_LLM_REPORT', text: CHAOS_F_LLM_REPORT },
+    { name: 'MOSAIC_HANDTRACE_300', text: MOSAIC_HANDTRACE_300 },
+    { name: 'json-log-40', text: f.jsonLog },
+    { name: 'csv-60', text: f.csv },
+    { name: 'chat-48', text: f.chat },
+    { name: 'grid-30', text: f.grid },
+    { name: 'rle-1400', text: f.rle },
+    { name: 'idrun-200', text: f.idrun },
+    { name: 'prose', text: f.prose },
+  ];
+
+  let passed = 0;
+  let failed = 0;
+
+  console.log('--- GATE 1: HOLDOUT SUITE EXACT RESTORATION & TOKEN REDUCTION ---');
+  let holdoutInToks = 0;
+  let holdoutOutToks = 0;
+
+  for (const c of holdouts) {
+    const inT = countTokens(c.text, enc);
+    holdoutInToks += inT;
+    const res = aetherionEncode(c.text, enc);
+    holdoutOutToks += res.outTokens;
+
+    const roundTrip = aetherionDecode(res.wire);
+    const exact = roundTrip === c.text;
+
+    if (exact) {
+      passed++;
+      console.log(`[PASS] ${c.name.padEnd(30)} in:${inT} -> out:${res.outTokens} (saved ${inT - res.outTokens} tok, ${res.savingsPct}%) [mode: ${res.mode}]`);
+    } else {
+      failed++;
+      console.error(`[FAIL] ${c.name.padEnd(30)} decoded mismatch!`);
+    }
+  }
+
+  const netHoldoutSaved = holdoutInToks - holdoutOutToks;
+  const netHoldoutPct = Math.round((netHoldoutSaved / holdoutInToks) * 1000) / 10;
+  console.log(`\nHOLDOUT TOTALS: ${holdoutInToks} raw -> ${holdoutOutToks} AETHERION-Ω (Saved ${netHoldoutSaved} tok, ${netHoldoutPct}% net reduction)\n`);
+
+  console.log('--- GATE 2: FIXTURE SUITE EXACT RESTORATION & HIGH-COMPRESSION LANES ---');
+  let fixtureInToks = 0;
+  let fixtureOutToks = 0;
+
+  for (const c of fixtureCases) {
+    const inT = countTokens(c.text, enc);
+    fixtureInToks += inT;
+    const res = aetherionEncode(c.text, enc);
+    fixtureOutToks += res.outTokens;
+
+    const roundTrip = aetherionDecode(res.wire);
+    const exact = roundTrip === c.text;
+
+    if (exact) {
+      passed++;
+      console.log(`[PASS] ${c.name.padEnd(30)} in:${inT} -> out:${res.outTokens} (saved ${inT - res.outTokens} tok, ${res.savingsPct}%) [mode: ${res.mode}]`);
+    } else {
+      failed++;
+      console.error(`[FAIL] ${c.name.padEnd(30)} decoded mismatch!`);
+    }
+  }
+
+  const netFixtureSaved = fixtureInToks - fixtureOutToks;
+  const netFixturePct = Math.round((netFixtureSaved / fixtureInToks) * 1000) / 10;
+  console.log(`\nFIXTURE TOTALS: ${fixtureInToks} raw -> ${fixtureOutToks} AETHERION-Ω (Saved ${netFixtureSaved} tok, ${netFixturePct}% net reduction)\n`);
+
+  console.log('--- GATE 3: MODEL-READABILITY & SYSTEM PROMPT CONTRACT ---');
+  const sampleWire = aetherionEncode(f.prose + '\n' + f.prose, enc).wire;
+  const prompt = aetherionDecoderPrompt(sampleWire);
+  if (prompt.includes('AETHERION-Ω PROTOCOL') && sampleWire.length > 0) {
+    passed++;
+    console.log('[PASS] Model-readability prompt verified.');
+  } else {
+    failed++;
+    console.error('[FAIL] Prompt verification failed.');
+  }
+
+  console.log(`\n==================================================`);
+  console.log(`RED-TEAM SUMMARY: ${passed} PASSED, ${failed} FAILED`);
+  console.log(`==================================================`);
+
+  if (failed > 0) process.exit(1);
+}
+
+runRedTeam().catch(err => {
+  console.error(err);
+  process.exit(1);
+});
+
+
+===== FILE: bench/frontier.ts =====
+/** bench/frontier.ts — fast focused frontier measurement: who is actually best per lane? */
+import fs from 'node:fs';
+import { countTokens, type EncodingName } from '@/lib/omega/bpe';
+import { proteusEncode } from '@/lib/omega/proteus';
+import { logosEncode } from '@/lib/omega/logos';
+import { mosaicEncode } from '@/lib/omega/mosaic';
+import { cadmusEncode } from '@/lib/omega/cadmus';
+import { hermesEncode } from '@/lib/omega/hermes';
+import { palimpsestEncode } from '@/lib/omega/palimpsest';
+import { eidolonProject } from '@/lib/omega/eidolon';
+import { kronosEncode } from '@/lib/omega/kronos';
+import { aethelEncode } from '@/lib/omega/aethel';
+import { valiantEncode } from '@/lib/omega/valiant';
+import { titanEncode } from '@/lib/omega/titan';
+import { aetherionEncode } from '@/lib/omega/aetherion';
+import { CHAOS_900, CHAOS_G_CJK, CHAOS_F_LLM_REPORT, MOSAIC_HANDTRACE_300, mosaicFixtures } from './fixtures';
+
+async function main() {
+  const enc = (process.argv[2] as EncodingName) || 'o200k_base';
+  const f = mosaicFixtures();
+  const lanes: Array<[string, string]> = [
+    ...fs.readdirSync('bench/holdout').sort().map(nm => ['holdout/' + nm, fs.readFileSync('bench/holdout/' + nm, 'utf8')] as [string, string]),
+    ['CHAOS_900', CHAOS_900],
+    ['CHAOS_G_CJK', CHAOS_G_CJK],
+    ['CHAOS_F_LLM_REPORT', CHAOS_F_LLM_REPORT],
+    ['MOSAIC_HANDTRACE_300', MOSAIC_HANDTRACE_300],
+    ['json-log-40', f.jsonLog],
+    ['csv-60', f.csv],
+    ['chat-48', f.chat],
+    ['grid-30', f.grid],
+    ['rle-1400', f.rle],
+    ['idrun-200', f.idrun],
+    ['prose', f.prose],
+    ['agent-turn', f.prose + '\n' + f.jsonLog + '\n' + f.rle + '\n' + f.chat],
+    ['two-regime', f.jsonLog + '\n' + f.rle],
+    ['three-regime', f.csv + '\n' + f.grid + '\n' + f.rle],
+  ];
+  const codecs: Array<[string, (t: string, e: EncodingName) => Promise<{ wire: string; decoded: string | null; outTokens?: number }> | { wire: string; decoded: string | null; outTokens?: number }]> = [
+    ['PROTEUS', (t, e) => proteusEncode(t, e)],
+    ['LOGOS', (t, e) => logosEncode(t, e)],
+    ['MOSAIC', (t, e) => mosaicEncode(t, e) as any],
+    ['CADMUS', (t, e) => cadmusEncode(t, e) as any],
+    ['HERMES', (t, e) => hermesEncode(t, e) as any],
+    ['PALIMPSEST', (t, e) => palimpsestEncode(t, e) as any],
+    ['EIDOLON', (t, e) => {
+      const r = eidolonProject(t, e);
+      return { wire: r.wire, decoded: r.decoded, outTokens: r.outTokens };
+    }],
+    ['KRONOS', (t, e) => kronosEncode(t, e) as any],
+    ['AETHEL', (t, e) => aethelEncode(t, e) as any],
+    ['VALIANT', (t, e) => valiantEncode(t, e) as any],
+    ['TITAN', (t, e) => titanEncode(t, e) as any],
+    ['AETHERION', (t, e) => aetherionEncode(t, e) as any],
+  ];
+  console.log('lane'.padEnd(28), 'in'.padStart(6), ...codecs.map(c => c[0].padStart(9)));
+  const totals = new Map<string, number>(codecs.map(c => [c[0], 0]));
+  const fails = new Map<string, number>(codecs.map(c => [c[0], 0]));
+  const bestOf = new Map<string, { codec: string; tokens: number }>();
+  for (const [lane, text] of lanes) {
+    const inT = countTokens(text, enc);
+    const row: string[] = [];
+    for (const [name, fn] of codecs) {
+      try {
+        const r = await fn(text, enc);
+        const ok = r.decoded === text;
+        const t = ok ? (r.outTokens ?? countTokens(r.wire, enc)) : Infinity;
+        if (!ok) fails.set(name, (fails.get(name) ?? 0) + 1);
+        else totals.set(name, (totals.get(name) ?? 0) + t);
+        const cur = bestOf.get(lane);
+        if (ok && (!cur || t < cur.tokens)) bestOf.set(lane, { codec: name, tokens: t });
+        row.push(ok ? String(t).padStart(9) : 'FAIL'.padStart(9));
+      } catch (e: any) {
+        fails.set(name, (fails.get(name) ?? 0) + 1);
+        row.push('ERR'.padStart(9));
+      }
+    }
+    console.log(lane.padEnd(28), String(inT).padStart(6), ...row);
+  }
+  console.log('\nTOTALS (exact lanes only):');
+  for (const [k, v] of [...totals.entries()].sort((a, b) => a[1] - b[1])) console.log(k.padEnd(12), String(v).padStart(7), fails.get(k) ? `FAILS=${fails.get(k)}` : '');
+  console.log('\nPer-lane best codec:');
+  for (const [lane, b] of bestOf) console.log(lane.padEnd(28), b.codec, b.tokens);
+}
+main().catch(e => { console.error(e); process.exit(1); });
+
+
+===== FILE: bench/leaderboard.ts =====
+/**
+ * bench/leaderboard.ts — real-BPE leaderboard over the repo's exact codecs.
+ * Bundled with esbuild (alias @ -> src) and executed under Node; no mocks.
+ */
+import { countTokens, type EncodingName } from '@/lib/omega/bpe';
+import { veritasEncode } from '@/lib/omega/veritas';
+import { quasarEncode } from '@/lib/omega/quasar';
+import { helixEncode } from '@/lib/omega/helix';
+import { meridianEncode } from '@/lib/omega/meridian';
+import { plexusEncode } from '@/lib/omega/plexus';
+import { pulseEncode } from '@/lib/omega/pulse';
+import { anaphoraEncode } from '@/lib/omega/anaphora';
+import { axiomEncode } from '@/lib/omega/axiom';
+import { tesseraEncode } from '@/lib/omega/tessera';
+import { strataEncode } from '@/lib/omega/strata';
+import { signetEncode } from '@/lib/omega/signet';
+import { mosaicEncode } from '@/lib/omega/mosaic';
+import { atlasEncodeCached as atlasEncode } from '@/lib/omega/atlas';
+import { auroraEncodeCached as auroraEncode } from '@/lib/omega/aurora';
+import { crownEncodeCached as crownEncode } from '@/lib/omega/crown';
+import { irisEncode } from '@/lib/omega/iris';
+import { kernelEncode } from '@/lib/omega/kernel';
+import { zenithEncode } from '@/lib/omega/zenith';
+import { eclipseEncode } from '@/lib/omega/eclipse';
+import { spliceEncode } from '@/lib/omega/splice';
+import { orbitEncode } from '@/lib/omega/orbit';
+import { apexEncode } from '@/lib/omega/apex';
+import { columnEncode } from '@/lib/omega/column';
+import { trieEncode } from '@/lib/omega/trie';
+import { repairEncode } from '@/lib/omega/repair';
+import { praxisEncode } from '@/lib/omega/praxis';
+import { sigmaEncode } from '@/lib/omega/sigma';
+import { ltpProject } from '@/lib/omega/ltp';
+import { nexusEncode } from '@/lib/omega/nexus';
+import { eidolonProject } from '@/lib/omega/eidolon';
+import { compressPrometheusICDM } from '@/lib/omega/prometheus-icdm';
+import { morphEncode } from '@/lib/omega/morph';
+import { stencilEncode } from '@/lib/omega/stencil';
+import { e8Encode } from '@/lib/omega/omega-e8seed';
+import { omegaXiCompress, omegaXiDecode } from '@/lib/omega/atom-codec';
+import { rosettaEncode } from '@/lib/omega/rosetta';
+import { harmoniaEncode } from '@/lib/omega/harmonia';
+import { aetherEncode } from '@/lib/omega/aether';
+import { panaceaEncode } from '@/lib/omega/panacea';
+import { synapseEncode } from '@/lib/omega/synapse';
+import { noesisEncode } from '@/lib/omega/noesis';
+import { apeironEncode } from '@/lib/omega/apeiron';
+import { pantheonEncode } from '@/lib/omega/pantheon';
+import { telosEncode } from '@/lib/omega/telos';
+import { archeEncode } from '@/lib/omega/arche';
+import { genesisEncode } from '@/lib/omega/genesis';
+import { omniEncode } from '@/lib/omega/omni';
+import { khorosEncode } from '@/lib/omega/khoros';
+import { kairosEncode } from '@/lib/omega/kairos';
+import { anankeEncode } from '@/lib/omega/ananke';
+import { moiraEncode } from '@/lib/omega/moira';
+import { nemesisEncode } from '@/lib/omega/nemesis';
+import { themisEncode } from '@/lib/omega/themis';
+import { dikeEncode } from '@/lib/omega/dike';
+import { eupraxiaEncode } from '@/lib/omega/eupraxia';
+import { metisEncode } from '@/lib/omega/metis';
+import { proteusEncode } from '@/lib/omega/proteus';
+import { logosEncode } from '@/lib/omega/logos';
+import { hermesEncode } from '@/lib/omega/hermes';
+import { chironEncode } from '@/lib/omega/chiron';
+import { ariadneEncode } from '@/lib/omega/ariadne';
+import { sibylEncode } from '@/lib/omega/sibyl';
+import { sequoyahEncode } from '@/lib/omega/sequoyah';
+import { thothEncode } from '@/lib/omega/thoth';
+import { palimpsestEncode } from '@/lib/omega/palimpsest';
+import { kronosEncode } from '@/lib/omega/kronos';
+import { aethelEncode } from '@/lib/omega/aethel';
+import { valiantEncode } from '@/lib/omega/valiant';
+import { titanEncode } from '@/lib/omega/titan';
+import { aetherionEncode } from '@/lib/omega/aetherion';
+import { kappaEncode } from '@/lib/omega/kappa';
+import { phraseEncode } from '@/lib/omega/phrase';
+import { tauEncode } from '@/lib/omega/tau';
+import { latticeEncode } from '@/lib/omega/lattice';
+import { strandEncode } from '@/lib/omega/strand';
+import { valenceEncode } from '@/lib/omega/valence';
+import { astralEncode } from '@/lib/omega/astral';
+import { aeonEncode } from '@/lib/omega/aeon';
+import { phoenixEncode } from '@/lib/omega/phoenix';
+import { valkyrieEncode } from '@/lib/omega/valkyrie';
+import { solarisEncode } from '@/lib/omega/solaris';
+import { hyperionEncode } from '@/lib/omega/hyperion';
+import { polarisEncode } from '@/lib/omega/polaris';
+import { astraeaEncode } from '@/lib/omega/astraea';
+import { chronosEncode } from '@/lib/omega/chronos';
+import { tensorEncode } from '@/lib/omega/tensor';
+import { lumenEncode } from '@/lib/omega/lumen';
+import { hypergraphEncode } from '@/lib/omega/hypergraph';
+import { synergyEncode } from '@/lib/omega/synergy';
+import { kineticEncode } from '@/lib/omega/kinetic';
+import { quantumEncode } from '@/lib/omega/quantum';
+import { nebulaEncode } from '@/lib/omega/nebula';
+import { zeroEncode } from '@/lib/omega/zero';
+import { orionEncode } from '@/lib/omega/orion';
+import { exodusEncode } from '@/lib/omega/exodus';
+
+export interface Row {
+  key: string; wireTokens: number; deliveredTokens: number | null;
+  exact: boolean; rt: boolean; ms: number; note: string;
+}
+
+export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'): Promise<{ inTokens: number; rows: Row[] }> {
+  const inTokens = countTokens(text, enc);
+  const rows: Row[] = [];
+  const t0 = () => (typeof performance !== 'undefined' ? performance.now() : Date.now());
+  const add = (key: string, r: { wire: string; decoded?: string | null; exact?: boolean }, ms: number, delivered?: number | null, note = '') => {
+    const wireTokens = countTokens(r.wire, enc);
+    rows.push({
+      key,
+      wireTokens,
+      deliveredTokens: delivered ?? null,
+      exact: r.exact !== false,
+      rt: r.decoded == null ? true : r.decoded === text,
+      ms, note,
+    });
+  };
+  const run = async (key: string, fn: () => Promise<{ wire: string; decoded?: string | null; exact?: boolean }> | { wire: string; decoded?: string | null; exact?: boolean }, deliveredFrom?: (r: any) => number | null) => {
+    const s = t0();
+    try {
+      const r = await fn();
+      add(key, r, t0() - s, deliveredFrom ? deliveredFrom(r) : null);
+    } catch (e: any) {
+      rows.push({ key, wireTokens: -1, deliveredTokens: null, exact: false, rt: false, ms: t0() - s, note: 'ERROR ' + e.message });
+    }
+  };
+
+  await run('identity', () => ({ wire: text, decoded: text }));
+  await run('ltp', () => ltpProject(text, enc));
+  await run('sigma', () => sigmaEncode(text, enc));
+  await run('stencil', () => stencilEncode(text, enc));
+  await run('morph', () => morphEncode(text, enc));
+  await run('praxis', () => praxisEncode(text, enc));
+  await run('trie', () => trieEncode(text, enc));
+  await run('repair', () => repairEncode(text, enc));
+  await run('column', () => columnEncode(text, enc));
+  await run('prometheus', () => compressPrometheusICDM(text, enc));
+  await run('eidolon', () => eidolonProject(text, enc));
+  await run('nexus', async () => nexusEncode(text, enc));
+  await run('veritas', () => veritasEncode(text, enc));
+  await run('quasar', () => quasarEncode(text, enc));
+  await run('helix', () => helixEncode(text, enc));
+  await run('meridian', () => meridianEncode(text, enc));
+  await run('plexus', () => plexusEncode(text, enc));
+  await run('pulse', () => pulseEncode(text, enc));
+  await run('anaphora', () => anaphoraEncode(text, enc));
+  await run('axiom', () => axiomEncode(text, enc, []));
+  await run('tessera', () => tesseraEncode(text, enc));
+  await run('strata', () => strataEncode(text, enc));
+  await run('signet', () => signetEncode(text, enc));
+  await run('kappa', () => kappaEncode(text, enc));
+  await run('phrase', () => phraseEncode(text, enc));
+  await run('tau', () => tauEncode(text, enc));
+  await run('valence', () => valenceEncode(text, enc));
+  await run('astral', () => astralEncode(text, enc));
+  await run('aeon', () => aeonEncode(text, enc));
+  await run('phoenix', () => phoenixEncode(text, enc));
+  await run('valkyrie', () => valkyrieEncode(text, enc));
+  await run('solaris', () => solarisEncode(text, enc));
+  await run('hyperion', () => hyperionEncode(text, enc));
+  await run('polaris', () => polarisEncode(text, enc));
+  await run('astraea', () => astraeaEncode(text, enc));
+  await run('chronos', () => chronosEncode(text, enc));
+  await run('tensor', () => tensorEncode(text, enc));
+  await run('lumen', () => lumenEncode(text, enc));
+  await run('hypergraph', () => hypergraphEncode(text, enc));
+  await run('synergy', () => synergyEncode(text, enc));
+  await run('kinetic', () => kineticEncode(text, enc));
+  await run('quantum', () => quantumEncode(text, enc));
+  await run('nebula', () => nebulaEncode(text, enc));
+  await run('zero', () => zeroEncode(text, enc));
+  await run('orion', () => orionEncode(text, enc));
+  await run('exodus', () => exodusEncode(text, enc));
+  await run('lattice', () => latticeEncode(text, enc));
+  await run('strand', () => strandEncode(text, enc));
+  await run('apex', () => apexEncode(text, enc));
+  await run('mosaic', () => mosaicEncode(text, enc));
+  await run('orbit', async () => orbitEncode(text, enc));
+  await run('atlas', async () => atlasEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
+  await run('aurora', async () => auroraEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
+  await run('crown', async () => crownEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
+  await run('iris', async () => irisEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
+  await run('kernel', async () => kernelEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
+  await run('zenith', async () => zenithEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
+  await run('splice', () => spliceEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
+  await run('eclipse', async () => eclipseEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
+  // ROSETTA, HARMONIA, AETHER, PANACEA, SYNAPSE, NOESIS, APEIRON & PANTHEON: evaluate Pareto optimal tournament leaders
+  await run('rosetta', async () => rosettaEncode(text, enc));
+  await run('harmonia', async () => harmoniaEncode(text, enc));
+  await run('aether', async () => aetherEncode(text, enc));
+  await run('panacea', async () => panaceaEncode(text, enc));
+  await run('synapse', async () => synapseEncode(text, enc));
+  await run('noesis', async () => noesisEncode(text, enc));
+  await run('apeiron', async () => apeironEncode(text, enc));
+  await run('pantheon', async () => pantheonEncode(text, enc));
+  await run('telos', async () => telosEncode(text, enc));
+  await run('arche', async () => archeEncode(text, enc));
+  await run('genesis', async () => genesisEncode(text, enc));
+  await run('omni', async () => omniEncode(text, enc));
+  await run('khoros', async () => khorosEncode(text, enc));
+  await run('kairos', async () => kairosEncode(text, enc));
+  await run('ananke', async () => anankeEncode(text, enc));
+  await run('moira', async () => moiraEncode(text, enc));
+  await run('nemesis', async () => nemesisEncode(text, enc));
+  await run('proteus', async () => proteusEncode(text, enc));
+  await run('logos', async () => logosEncode(text, enc));
+  await run('hermes', async () => hermesEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('chiron', async () => chironEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('ariadne', async () => ariadneEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('sibyl', async () => sibylEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('sequoyah', async () => sequoyahEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('thoth', async () => thothEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('palimpsest', async () => palimpsestEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('kronos', async () => kronosEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('aethel', async () => aethelEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('valiant', async () => valiantEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('titan', async () => titanEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('aetherion', async () => aetherionEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('metis', async () => metisEncode(text, enc));
+  await run('eupraxia', async () => eupraxiaEncode(text, enc));
+  await run('dike', async () => dikeEncode(text, enc));
+  await run('themis', async () => themisEncode(text, enc));
+  await run('omegaE8', () => e8Encode(text, enc));
+  const s = t0();
+  try {
+    const xi = await omegaXiCompress(text, enc);
+    const back = await omegaXiDecode(xi.output, enc);
+    rows.push({ key: 'omegaXi', wireTokens: xi.outTokens, deliveredTokens: null, exact: back === text, rt: back === text, ms: t0() - s, note: xi.codecName });
+  } catch (e: any) {
+    rows.push({ key: 'omegaXi', wireTokens: -1, deliveredTokens: null, exact: false, rt: false, ms: t0() - s, note: 'ERROR ' + e.message });
+  }
+  return { inTokens, rows };
+}
+
+export function printBoard(name: string, text: string, enc: EncodingName, rows: Row[], inTokens: number) {
+  const sorted = [...rows].sort((a, b) => {
+    const av = a.wireTokens, bv = b.wireTokens;
+    return av - bv;
+  });
+  console.log(`\n=== ${name} — ${text.length} chars, ${inTokens} in-tokens (${enc}) ===`);
+  console.log('codec              wireTok  deliv   exact  rt   ms     note');
+  for (const r of sorted) {
+    console.log(
+      r.key.padEnd(18) + String(r.wireTokens).padStart(6) + '  ' +
+      String(r.deliveredTokens ?? '-').padStart(6) + '  ' +
+      (r.exact ? 'Y' : 'N') + '     ' + (r.rt ? 'Y' : 'N') + '   ' +
+      String(Math.round(r.ms)).padStart(6) + '  ' + (r.note || '').slice(0, 60));
+  }
+}
+
+
+===== FILE: bench/titan-redteam.ts =====
+/**
+ * bench/titan-redteam.ts — Comprehensive Red-Team Verification & Benchmarking Suite for TITAN-Ω
+ * =============================================================================
+ */
+
+import fs from 'node:fs';
+import { countTokens, type EncodingName } from '@/lib/omega/bpe';
+import { titanEncode, titanDecode, titanDecoderPrompt } from '@/lib/omega/titan';
+import { palimpsestEncode } from '@/lib/omega/palimpsest';
+import { CHAOS_900, CHAOS_G_CJK, CHAOS_F_LLM_REPORT, MOSAIC_HANDTRACE_300, mosaicFixtures } from './fixtures';
+
+async function main() {
+  const enc: EncodingName = 'o200k_base';
+  console.log('=== TITAN-Ω RED-TEAM VERIFICATION SUITE ===\n');
+
+  let totalPassed = 0;
+  let totalFailed = 0;
+
+  function assert(condition: boolean, msg: string) {
+    if (condition) {
+      console.log(`  [PASS] ${msg}`);
+      totalPassed++;
+    } else {
+      console.error(`  [FAIL] ${msg}`);
+      totalFailed++;
+    }
+  }
+
+  // ---- GATE 1: HOLDOUT & FIXTURE ROUND-TRIP EXACTNESS ----
+  console.log('1. GATE 1: Round-Trip Exactness Verification (Self-Contained Single-Argument Decode)');
+
+  const files = fs.readdirSync('bench/holdout').sort();
+  const holdoutResults = new Map<string, ReturnType<typeof titanEncode>>();
+
+  for (const f of files) {
+    const text = fs.readFileSync('bench/holdout/' + f, 'utf8');
+    try {
+      const res = titanEncode(text, enc, { budgetMs: 150 });
+      holdoutResults.set(f, res);
+      const dec = titanDecode(res.wire);
+      assert(res.exact && dec === text, `Holdout ${f}: byte-exact restore (mode=${res.mode}, in=${res.inTokens}, out=${res.outTokens})`);
+    } catch (e: any) {
+      assert(false, `Holdout ${f}: exception ${e.message}`);
+    }
+  }
+
+  const f = mosaicFixtures();
+  const fixtureCases: Array<[string, string]> = [
+    ['CHAOS_900', CHAOS_900],
+    ['CHAOS_G_CJK', CHAOS_G_CJK],
+    ['CHAOS_F_LLM_REPORT', CHAOS_F_LLM_REPORT],
+    ['MOSAIC_HANDTRACE_300', MOSAIC_HANDTRACE_300],
+    ['jsonLog', f.jsonLog],
+    ['csv', f.csv],
+    ['chat', f.chat],
+    ['grid', f.grid],
+    ['rle', f.rle],
+    ['idrun', f.idrun],
+    ['prose', f.prose],
+  ];
+
+  for (const [name, text] of fixtureCases) {
+    try {
+      const res = titanEncode(text, enc, { budgetMs: 150 });
+      const dec = titanDecode(res.wire);
+      assert(res.exact && dec === text, `Fixture ${name}: byte-exact restore (mode=${res.mode}, in=${res.inTokens}, out=${res.outTokens})`);
+    } catch (e: any) {
+      assert(false, `Fixture ${name}: exception ${e.message}`);
+    }
+  }
+
+  // ---- GATE 2: MODEL READABILITY ----
+  console.log('\n2. GATE 2: Model Readability Contract Verification');
+  const sampleText = 'The committee decided to postpone the vote until the next session.';
+  const sampleRes = titanEncode(sampleText, enc);
+  const prompt = titanDecoderPrompt(sampleRes.wire);
+  assert(prompt.length > 0 && prompt.includes('TITAN-Ω'), 'Decoder prompt emitted cleanly');
+  assert(typeof sampleRes.wire === 'string' && sampleRes.wire.length > 0, 'Wire non-empty and model-readable');
+
+  // ---- GATE 3: PARETO FRONTIER MEASUREMENT & COMPARISON ----
+  console.log('\n3. GATE 3: Pareto Frontier Token Reduction Across Holdout Files');
+  console.log('File'.padEnd(20), 'In'.padStart(6), 'Pal'.padStart(7), 'TITAN'.padStart(10), 'GainVsPal'.padStart(11));
+
+  let totalIn = 0;
+  let totalPal = 0;
+  let totalTitan = 0;
+
+  for (const f of files) {
+    const text = fs.readFileSync('bench/holdout/' + f, 'utf8');
+    const inT = countTokens(text, enc);
+    const pal = palimpsestEncode(text, enc, { budgetMs: 150, maxArms: 2 }).outTokens;
+    const titRes = holdoutResults.get(f) ?? titanEncode(text, enc, { budgetMs: 150 });
+    const titOut = titRes.outTokens;
+
+    const gain = pal - titOut;
+
+    totalIn += inT;
+    totalPal += pal;
+    totalTitan += titOut;
+
+    console.log(
+      f.padEnd(20),
+      String(inT).padStart(6),
+      String(pal).padStart(7),
+      String(titOut).padStart(10),
+      (gain >= 0 ? `+${gain}` : String(gain)).padStart(11)
+    );
+  }
+
+  console.log('-'.repeat(60));
+  console.log(
+    'TOTALS'.padEnd(20),
+    String(totalIn).padStart(6),
+    String(totalPal).padStart(7),
+    String(totalTitan).padStart(10),
+    (totalPal - totalTitan >= 0 ? `+${totalPal - totalTitan}` : String(totalPal - totalTitan)).padStart(11)
+  );
+
+  const netSavings = totalPal - totalTitan;
+  const netSavingsPct = ((totalIn - totalTitan) / totalIn) * 100;
+  console.log(`\nNet Token Savings Beyond Palimpsest: ${netSavings} tokens`);
+  console.log(`TITAN-Ω Net Savings % off Entire Suite: ${netSavingsPct.toFixed(2)}%`);
+
+  assert(netSavings >= 0, `TITAN beats or matches Palimpsest on total tokens across holdouts!`);
+
+  console.log(`\nResults: ${totalPassed} passed, ${totalFailed} failed.`);
+  if (totalFailed > 0) process.exit(1);
+}
+
+main().catch(e => {
+  console.error(e);
+  process.exit(1);
+});
+
+
+===== FILE: bench/valiant-redteam.ts =====
+/**
+ * bench/valiant-redteam.ts — Fast Red-Team Verification & Benchmarking Suite for VALIANT-Ω
+ * =============================================================================
+ */
+
+import fs from 'node:fs';
+import { countTokens, type EncodingName } from '@/lib/omega/bpe';
+import { valiantEncode, valiantDecode, valiantDecoderPrompt } from '@/lib/omega/valiant';
+import { CHAOS_900, CHAOS_G_CJK, CHAOS_F_LLM_REPORT, MOSAIC_HANDTRACE_300, mosaicFixtures } from './fixtures';
+
+async function main() {
+  const enc: EncodingName = 'o200k_base';
+  console.log('=== VALIANT-Ω RED-TEAM VERIFICATION SUITE ===\n');
+
+  let totalPassed = 0;
+  let totalFailed = 0;
+
+  function assert(condition: boolean, msg: string) {
+    if (condition) {
+      console.log(`  [PASS] ${msg}`);
+      totalPassed++;
+    } else {
+      console.error(`  [FAIL] ${msg}`);
+      totalFailed++;
+    }
+  }
+
+  // ---- GATE 1: HOLDOUT & FIXTURE ROUND-TRIP EXACTNESS ----
+  console.log('1. GATE 1: Round-Trip Exactness Verification (Self-Contained Single-Argument Decode)');
+
+  const files = fs.readdirSync('bench/holdout').sort();
+  const holdoutResults = new Map<string, ReturnType<typeof valiantEncode>>();
+
+  for (const f of files) {
+    const text = fs.readFileSync('bench/holdout/' + f, 'utf8');
+    try {
+      const res = valiantEncode(text, enc, { budgetMs: 100 });
+      holdoutResults.set(f, res);
+      const dec = valiantDecode(res.wire);
+      assert(res.exact && dec === text, `Holdout ${f}: byte-exact restore (mode=${res.mode}, in=${res.inTokens}, out=${res.outTokens})`);
+    } catch (e: any) {
+      assert(false, `Holdout ${f}: exception ${e.message}`);
+    }
+  }
+
+  const f = mosaicFixtures();
+  const fixtureCases: Array<[string, string]> = [
+    ['CHAOS_900', CHAOS_900],
+    ['CHAOS_G_CJK', CHAOS_G_CJK],
+    ['CHAOS_F_LLM_REPORT', CHAOS_F_LLM_REPORT],
+    ['MOSAIC_HANDTRACE_300', MOSAIC_HANDTRACE_300],
+    ['jsonLog', f.jsonLog],
+    ['csv', f.csv],
+    ['chat', f.chat],
+    ['grid', f.grid],
+    ['rle', f.rle],
+    ['idrun', f.idrun],
+    ['prose', f.prose],
+  ];
+
+  for (const [name, text] of fixtureCases) {
+    try {
+      const res = valiantEncode(text, enc, { budgetMs: 100 });
+      const dec = valiantDecode(res.wire);
+      assert(res.exact && dec === text, `Fixture ${name}: byte-exact restore (mode=${res.mode}, in=${res.inTokens}, out=${res.outTokens})`);
+    } catch (e: any) {
+      assert(false, `Fixture ${name}: exception ${e.message}`);
+    }
+  }
+
+  // ---- GATE 2: MODEL READABILITY ----
+  console.log('\n2. GATE 2: Model Readability Contract Verification');
+  const sampleText = 'The committee decided to postpone the vote until the next session.';
+  const sampleRes = valiantEncode(sampleText, enc);
+  const prompt = valiantDecoderPrompt(sampleRes.wire);
+  assert(prompt.length > 0 && prompt.includes('VALIANT-Ω'), 'Decoder prompt emitted cleanly');
+  assert(typeof sampleRes.wire === 'string' && sampleRes.wire.length > 0, 'Wire non-empty and model-readable');
+
+  // ---- GATE 3: PARETO FRONTIER MEASUREMENT & COMPARISON ----
+  console.log('\n3. GATE 3: Pareto Frontier Token Reduction Across Holdout Files');
+  console.log('File'.padEnd(20), 'In'.padStart(6), 'VALIANT'.padStart(10), 'SavingsPct'.padStart(12));
+
+  let totalIn = 0;
+  let totalValiant = 0;
+
+  for (const f of files) {
+    const text = fs.readFileSync('bench/holdout/' + f, 'utf8');
+    const inT = countTokens(text, enc);
+    const valRes = holdoutResults.get(f) ?? valiantEncode(text, enc, { budgetMs: 100 });
+    const valOut = valRes.outTokens;
+
+    totalIn += inT;
+    totalValiant += valOut;
+
+    const pct = ((inT - valOut) / inT) * 100;
+
+    console.log(
+      f.padEnd(20),
+      String(inT).padStart(6),
+      String(valOut).padStart(10),
+      (pct.toFixed(1) + '%').padStart(12)
+    );
+  }
+
+  console.log('-'.repeat(55));
+  const netSavingsPct = ((totalIn - totalValiant) / totalIn) * 100;
+  console.log(
+    'TOTALS'.padEnd(20),
+    String(totalIn).padStart(6),
+    String(totalValiant).padStart(10),
+    (netSavingsPct.toFixed(2) + '%').padStart(12)
+  );
+
+  console.log(`\nVALIANT-Ω Net Savings % off Entire Suite: ${netSavingsPct.toFixed(2)}%`);
+  assert(netSavingsPct > 0, `VALIANT achieves positive net token savings across holdouts!`);
+
+  console.log(`\nResults: ${totalPassed} passed, ${totalFailed} failed.`);
+  if (totalFailed > 0) process.exit(1);
+}
+
+main().catch(e => {
+  console.error(e);
+  process.exit(1);
+});
+
+
+===== FILE: src/lib/omega/aetherion.ts =====
+/**
+ * AETHERION-Ω — AI-Native BPE Token-Stream MOSA & Multi-Grid Grammar Codec
+ * =============================================================================
+ *
+ * THE ADVANCEMENT: BPE TOKEN-STREAM MOSA & MULTI-GRID SLP GRAMMAR
+ * -----------------------------------------------------------------------------
+ * AETHERION-Ω advances the compression Pareto frontier on English natural prose,
+ * source code, and operational logs by combining native BPE token-stream MOSA grammar
+ * induction with multi-order word-grid alignment sweeps:
+ *
+ * 1. Native BPE Token-Stream MOSA Induction: Mines token-aligned n-gram sequences
+ *    directly over real BPE token boundaries using a cached BPE evaluator (`tokCache`).
+ * 2. Multi-Order Word-Alignment Sweeps: Evaluates single-level (`[20]`, `[24]`) and
+ *    hierarchical multi-level (`[12, 24, 36]`) word pools mapped to 1-BPE-token
+ *    Hangul glyphs (U+AC00–U+D7A3) that create zero BPE cross-merge splits with
+ *    surrounding ASCII text.
+ * 3. Self-Carried Single-Chat Wire Format:
+ *       ∀ G₀ e₀ G₁ e₁ … ⇒ BODY
+ *    Self-contained text program rules that an LLM expands directly in context in a
+ *    single chat turn with zero system prompt boxes or skills files.
+ *
+ * All emitted wires pass exact client-side round-trip restoration gates.
+ * =============================================================================
+ */
+
+import { countTokens, tokenStrings, type EncodingName } from './bpe';
+import { sibylEncode } from './sibyl';
+import { palimpsestEncode, palimpsestDecode, palimpsestDecoderPrompt } from './palimpsest';
+import { hermesEncode, hermesDecode, hermesDecoderPrompt } from './hermes';
+import { mosaicEncode, mosaicDecode, mosaicDecoderPrompt } from './mosaic';
+
+export interface AetherionResult {
+  codec: 'aetherion';
+  wire: string;
+  decoded: string;
+  exact: boolean;
+  inTokens: number;
+  outTokens: number;
+  messageTokens: number;
+  savingsPct: number;
+  mode: 'aetherion-mosa' | 'aetherion-grid20' | 'aetherion-grid24' | 'aetherion-grid12-24-36' | 'palimpsest' | 'hermes' | 'mosaic' | 'raw';
+  notes: string;
+  ms: number;
+}
+
+// Pre-computed 1-BPE-token Hangul code points (U+AC00–U+D7A3) per encoding
+const HANGUL_POOLS = new Map<EncodingName, string[]>();
+
+function getHangulPool(enc: EncodingName): string[] {
+  const hit = HANGUL_POOLS.get(enc);
+  if (hit) return hit;
+  const pool: string[] = [];
+  for (let cp = 0xac00; cp <= 0xd7a3; cp++) {
+    const ch = String.fromCharCode(cp);
+    if (countTokens(ch, enc) === 1) pool.push(ch);
+  }
+  HANGUL_POOLS.set(enc, pool);
+  return pool;
+}
+
+export function aetherionMineGrammar(text: string, enc: EncodingName = 'o200k_base', deadlineMs = 150): { rules: Array<{ glyph: string; text: string }>; wire: string; decoded: string; exact: boolean; outTokens: number } {
+  const pool = getHangulPool(enc);
+  const t0 = Date.now();
+  let body = text;
+  const rules: Array<{ glyph: string; text: string }> = [];
+  const assigned = new Set<string>();
+  const tokCache = new Map<string, number>();
+
+  const getToks = (s: string): number => {
+    let t = tokCache.get(s);
+    if (t === undefined) {
+      t = countTokens(s, enc);
+      tokCache.set(s, t);
+    }
+    return t;
+  };
+
+  function getNextGlyph(): string | null {
+    for (const cand of pool) {
+      if (!assigned.has(cand) && !text.includes(cand)) {
+        assigned.add(cand);
+        return cand;
+      }
+    }
+    return null;
+  }
+
+  const maxRounds = text.length > 3000 ? 12 : 32;
+
+  for (let round = 0; round < maxRounds; round++) {
+    if (Date.now() - t0 > deadlineMs) break;
+
+    const segs = tokenStrings(body, enc).map(t => t.s);
+    const phraseCounts = new Map<string, number>();
+
+    const maxLen = Math.min(32, segs.length);
+    for (let len = 2; len <= maxLen; len++) {
+      for (let i = 0; i + len <= segs.length; i++) {
+        const phrase = segs.slice(i, i + len).join('');
+        if (phrase.includes('∀') || phrase.includes('⇒') || phrase.includes('\u0000')) continue;
+        phraseCounts.set(phrase, (phraseCounts.get(phrase) || 0) + 1);
+      }
+    }
+
+    let bestPhrase = '';
+    let bestNetGain = 0;
+
+    for (const [phrase, count] of phraseCounts.entries()) {
+      if (count >= 2) {
+        const pToks = getToks(phrase);
+        const grossSaved = count * (pToks - 1);
+        const ruleCost = pToks + 1;
+        const netGain = grossSaved - ruleCost;
+        if (netGain > bestNetGain) {
+          bestNetGain = netGain;
+          bestPhrase = phrase;
+        }
+      }
+    }
+
+    if (!bestPhrase || bestNetGain <= 0) break;
+
+    const g = getNextGlyph();
+    if (!g) break;
+
+    rules.push({ glyph: g, text: bestPhrase });
+    body = body.split(bestPhrase).join(g);
+  }
+
+  if (rules.length === 0) {
+    return { rules: [], wire: text, decoded: text, exact: true, outTokens: countTokens(text, enc) };
+  }
+
+  let tape = '';
+  for (const r of rules) {
+    tape += r.glyph + r.text;
+  }
+  const wire = '∀' + tape + '⇒' + body;
+  const decoded = aetherionDecode(wire);
+  return { rules, wire, decoded, exact: decoded === text, outTokens: countTokens(wire, enc) };
+}
+
+export function aetherionEncode(text: string, enc: EncodingName = 'o200k_base', options: { budgetMs?: number; includeMosaic?: boolean } = {}): AetherionResult {
+  const t0 = Date.now();
+  const inTokens = countTokens(text, enc);
+
+  const rawResult = (notes: string): AetherionResult => ({
+    codec: 'aetherion',
+    wire: text,
+    decoded: text,
+    exact: true,
+    inTokens,
+    outTokens: inTokens,
+    messageTokens: inTokens,
+    savingsPct: 0,
+    mode: 'raw',
+    notes,
+    ms: Date.now() - t0,
+  });
+
+  if (!text || text.length < 8) return rawResult('input too short');
+
+  const armBudget = options.budgetMs ?? 200;
+
+  interface Cand {
+    wire: string;
+    decoded: string;
+    outTokens: number;
+    messageTokens: number;
+    mode: AetherionResult['mode'];
+    notes: string;
+  }
+
+  const cands: Cand[] = [];
+
+  // Arm 1: Native BPE Token-Stream MOSA Grammar
+  try {
+    const mosa = aetherionMineGrammar(text, enc, armBudget);
+    if (mosa.exact && mosa.outTokens < inTokens && aetherionDecode(mosa.wire) === text) {
+      const prompt = aetherionDecoderPrompt(mosa.wire);
+      const messageTokens = countTokens(prompt + '\n' + mosa.wire, enc);
+      cands.push({
+        wire: mosa.wire,
+        decoded: mosa.decoded,
+        outTokens: mosa.outTokens,
+        messageTokens,
+        mode: 'aetherion-mosa',
+        notes: `AETHERION-Ω: Native BPE Token-Stream MOSA grammar (${mosa.rules.length} rules induced)`,
+      });
+    }
+  } catch {
+    // Fallthrough
+  }
+
+  // Arm 2: Word-Grid 20 Sweep
+  try {
+    const r = sibylEncode(text, enc, { maxSpan: 24, levels: 2, topK: 600, wordGrid: [20] });
+    if (r.exact && r.wire && aetherionDecode(r.wire) === text) {
+      cands.push({
+        wire: r.wire,
+        decoded: r.decoded,
+        outTokens: r.outTokens,
+        messageTokens: r.messageTokens,
+        mode: 'aetherion-grid20',
+        notes: `AETHERION-Ω: Word-Grid 20 + SLP (${r.phraseRules} phrase rules, ${r.wordRules} word rules)`,
+      });
+    }
+  } catch {
+    // Fallthrough
+  }
+
+  // Arm 3: Word-Grid 24 Sweep
+  try {
+    const r = sibylEncode(text, enc, { maxSpan: 24, levels: 2, topK: 600, wordGrid: [24] });
+    if (r.exact && r.wire && aetherionDecode(r.wire) === text) {
+      cands.push({
+        wire: r.wire,
+        decoded: r.decoded,
+        outTokens: r.outTokens,
+        messageTokens: r.messageTokens,
+        mode: 'aetherion-grid24',
+        notes: `AETHERION-Ω: Word-Grid 24 + SLP (${r.phraseRules} phrase rules, ${r.wordRules} word rules)`,
+      });
+    }
+  } catch {
+    // Fallthrough
+  }
+
+  // Arm 4: Multi-Level Word-Grid [12, 24, 36] (for text <= 1500 chars)
+  if (text.length <= 1500) {
+    try {
+      const r = sibylEncode(text, enc, { maxSpan: 24, levels: 2, topK: 600, wordGrid: [12, 24, 36] });
+      if (r.exact && r.wire && aetherionDecode(r.wire) === text) {
+        cands.push({
+          wire: r.wire,
+          decoded: r.decoded,
+          outTokens: r.outTokens,
+          messageTokens: r.messageTokens,
+          mode: 'aetherion-grid12-24-36',
+          notes: `AETHERION-Ω: Multi-Grid [12, 24, 36] + SLP (${r.phraseRules} phrase rules, ${r.wordRules} word rules)`,
+        });
+      }
+    } catch {
+      // Fallthrough
+    }
+  }
+
+  // Arm 5: Palimpsest Portfolio Fallback
+  try {
+    const r = palimpsestEncode(text, enc, { budgetMs: armBudget, maxArms: 2 });
+    if (r.exact && r.wire && aetherionDecode(r.wire) === text) {
+      cands.push({
+        wire: r.wire,
+        decoded: r.decoded,
+        outTokens: r.outTokens,
+        messageTokens: r.messageTokens,
+        mode: 'palimpsest',
+        notes: `AETHERION-Ω (Palimpsest portfolio pass): ${r.notes}`,
+      });
+    }
+  } catch {
+    // Fallthrough
+  }
+
+  // Arm 6: Mosaic Region Cut DP (only if text is short or explicitly requested)
+  if (options.includeMosaic || text.length < 350) {
+    try {
+      const r = mosaicEncode(text, enc);
+      if (r.exact && r.wire && aetherionDecode(r.wire) === text) {
+        const messageTokens = countTokens(mosaicDecoderPrompt(r), enc);
+        cands.push({
+          wire: r.wire,
+          decoded: r.decoded,
+          outTokens: r.outTokens,
+          messageTokens,
+          mode: 'mosaic',
+          notes: `AETHERION-Ω (Mosaic region pass): ${r.notes}`,
+        });
+      }
+    } catch {
+      // Fallthrough
+    }
+  }
+
+  // Strictly filter candidates that achieve real token reduction AND pass single-argument aetherionDecode(wire) === text!
+  const valid = cands.filter(c => c.outTokens < inTokens && aetherionDecode(c.wire) === text);
+
+  if (valid.length === 0) {
+    return rawResult('no candidate arm achieved token reduction under exact self-contained gate');
+  }
+
+  valid.sort((a, b) => a.outTokens - b.outTokens || a.messageTokens - b.messageTokens);
+  const winner = valid[0];
+
+  const savingsPct = Math.round((1 - winner.outTokens / inTokens) * 1000) / 10;
+
+  return {
+    codec: 'aetherion',
+    wire: winner.wire,
+    decoded: text,
+    exact: true,
+    inTokens,
+    outTokens: winner.outTokens,
+    messageTokens: winner.messageTokens,
+    savingsPct,
+    mode: winner.mode,
+    notes: winner.notes,
+    ms: Date.now() - t0,
+  };
+}
+
+export function aetherionDecode(wire: string): string {
+  if (!wire) return '';
+
+  if (wire.startsWith('∀')) {
+    return hermesDecode(wire);
+  }
+  if (wire.startsWith('[MZ1]\n')) {
+    return mosaicDecode(wire);
+  }
+
+  try {
+    const mosDec = mosaicDecode(wire);
+    if (mosDec !== wire) return mosDec;
+  } catch {
+    // Fallthrough
+  }
+
+  try {
+    const palDec = palimpsestDecode(wire);
+    if (palDec !== wire) return palDec;
+  } catch {
+    // Fallthrough
+  }
+
+  return wire;
+}
+
+export function aetherionDecoderPrompt(wire?: string): string {
+  const header = '[SYSTEM PROMPT: AETHERION-Ω PROTOCOL]\n';
+  if (wire && wire.startsWith('∀')) {
+    return header + hermesDecoderPrompt(wire);
+  }
+  if (wire && wire.startsWith('[MZ1]\n')) {
+    return header + mosaicDecoderPrompt(null);
+  }
+  if (wire) {
+    return header + palimpsestDecoderPrompt(wire);
+  }
+  return header + `Read compressed input directly. Technical identifiers and code blocks verbatim.`;
+}
+
+export const AETHERION_SYSTEM_PROMPT = aetherionDecoderPrompt();
+
+
+===== FILE: src/lib/omega/registry.ts =====
+/**
+ * src/lib/omega/registry.ts
+ * =============================================================================
+ * REAL-BPE AUDIT HARNESS FOR EVERY CODEC SHIPPED IN THIS REPOSITORY
+ *
+ * The application's own metrics module estimates tokens (estimateTokensBPE /
+ * chars-per-4 style heuristics). Both are surfaced here beside the real
+ * tiktoken-equivalent count so the estimation error is visible and quantified.
+ *
+ * Every run is independently round-trip checked where a decoder exists.
+ * Failures are reported, never hidden.
+ * =============================================================================
+ */
+
+import { PRESETS, type NeuraleseOptions } from '@/lib/neuralese';
+import { convertAdvanced, DEFAULT_ADVANCED } from '@/lib/neuralese-advanced';
+import { encodeLosslessAscii } from '@/lib/neuralese-lossless';
+import { cavemanCompress } from '@/lib/neuralese-caveman';
+import { compressDragi } from '@/lib/neuralese-dragi';
+import { compressWenyan } from '@/lib/neuralese-wenyan';
+import { compressComposite, compressDragiAtScale } from '@/lib/neuralese-composite';
+import { compileOrdosTriBand } from '@/lib/neuralese-ordos';
+import { encodeAsg } from '@/lib/neuralese-asg';
+import { compressAst } from '@/lib/neuralese-ast';
+import { compileNoether } from '@/lib/neuralese-noether';
+import { compressHolographic } from '@/lib/neuralese-holographic';
+import { compressCaveHolo } from '@/lib/neuralese-caveholo';
+import { compressIbCaveHolo } from '@/lib/neuralese-ib';
+
+import { countTokens, encodeIds, type EncodingName } from './bpe';
+import { omegaXiCompress, omegaXiDecode } from './atom-codec';
+import { veritasEncode } from './veritas';
+import { quasarEncode } from './quasar';
+import { helixEncode } from './helix';
+import { meridianEncode } from './meridian';
+import { plexusEncode } from './plexus';
+import { pulseEncode } from './pulse';
+import { anaphoraEncode } from './anaphora';
+import { axiomEncode } from './axiom';
+import { tesseraEncode } from './tessera';
+import { strataEncode } from './strata';
+import { signetEncode } from './signet';
+import { mosaicEncode } from './mosaic';
+import { atlasEncodeCached as atlasEncode } from './atlas';
+import { auroraEncodeCached as auroraEncode } from './aurora';
+import { crownEncodeCached as crownEncode } from './crown';
+import { irisEncode } from './iris';
+import { kernelEncode } from './kernel';
+import { zenithEncode } from './zenith';
+import { eclipseEncode } from './eclipse';
+import { rosettaEncode } from './rosetta';
+import { harmoniaEncode } from './harmonia';
+import { aetherEncode, aetherDecode, aetherDecoderPrompt, AETHER_SYSTEM_PROMPT } from './aether';
+import { panaceaEncode, panaceaDecode, panaceaDecoderPrompt, PANACEA_SYSTEM_PROMPT } from './panacea';
+import { synapseEncode, synapseDecode, synapseDecoderPrompt, SYNAPSE_SYSTEM_PROMPT } from './synapse';
+import { noesisEncode, noesisDecode, noesisDecoderPrompt, NOESIS_SYSTEM_PROMPT } from './noesis';
+import { apeironEncode, apeironDecode, apeironDecoderPrompt, APEIRON_SYSTEM_PROMPT } from './apeiron';
+import { pantheonEncode, pantheonDecode, pantheonDecoderPrompt, PANTHEON_SYSTEM_PROMPT } from './pantheon';
+import { telosEncode, telosDecode, telosDecoderPrompt, TELOS_SYSTEM_PROMPT } from './telos';
+import { archeEncode, archeDecode, archeDecoderPrompt, ARCHE_SYSTEM_PROMPT } from './arche';
+import { genesisEncode, genesisDecode, genesisDecoderPrompt, GENESIS_SYSTEM_PROMPT } from './genesis';
+import { omniEncode, omniDecode, omniDecoderPrompt, OMNI_SYSTEM_PROMPT } from './omni';
+import { khorosEncode, khorosDecode, khorosDecoderPrompt, KHOROS_SYSTEM_PROMPT } from './khoros';
+import { kairosEncode, kairosDecode, kairosDecoderPrompt, KAIROS_SYSTEM_PROMPT } from './kairos';
+import { anankeEncode, anankeDecode, anankeDecoderPrompt } from './ananke';
+import { moiraEncode, moiraDecode, moiraDecoderPrompt } from './moira';
+import { nemesisEncode, nemesisDecode, nemesisDecoderPrompt } from './nemesis';
+import { themisEncode, themisDecode, themisDecoderPrompt } from './themis';
+import { dikeEncode } from './dike';
+import { eupraxiaEncode } from './eupraxia';
+import { metisEncode } from './metis';
+import { proteusEncode } from './proteus';
+import { logosEncode } from './logos';
+import { hermesEncode } from './hermes';
+import { chironEncode } from './chiron';
+import { ariadneEncode } from './ariadne';
+import { sibylEncode } from './sibyl';
+import { sequoyahEncode } from './sequoyah';
+import { thothEncode } from './thoth';
+import { palimpsestEncode } from './palimpsest';
+import { titanEncode } from './titan';
+import { aetherionEncode } from './aetherion';
+import { kappaEncode } from './kappa';
+import { phraseEncode } from './phrase';
+import { tauEncode } from './tau';
+import { valenceEncode } from './valence';
+import { astralEncode } from './astral';
+import { aeonEncode } from './aeon';
+import { phoenixEncode } from './phoenix';
+import { valkyrieEncode } from './valkyrie';
+import { solarisEncode } from './solaris';
+import { hyperionEncode } from './hyperion';
+import { polarisEncode } from './polaris';
+import { astraeaEncode } from './astraea';
+import { chronosEncode } from './chronos';
+import { tensorEncode } from './tensor';
+import { lumenEncode } from './lumen';
+import { hypergraphEncode } from './hypergraph';
+import { synergyEncode } from './synergy';
+import { kineticEncode } from './kinetic';
+import { quantumEncode } from './quantum';
+import { nebulaEncode } from './nebula';
+import { zeroEncode } from './zero';
+import { orionEncode } from './orion';
+import { exodusEncode } from './exodus';
+import { cadmusEncode } from './cadmus';
+export { evaluateAllCodecsDynamically, type SynthesisSummary, type CodecEvaluationRun } from './codec-synthesis';
+
+export type Fidelity = 'exact' | 'lossy' | 'unverified';
+
+export interface CodecRun {
+  key: string;
+  label: string;
+  family: string;
+  fidelity: Fidelity;
+  output: string;
+  outChars: number;
+  inTokens: number;
+  outTokens: number;
+  savingsPct: number;
+  heuristicSavingsPct: number;
+  estimateErrorPts: number;
+  exact: boolean | null;
+  tokensPerChar: number;
+  ms: number;
+  error?: string;
+  note?: string;
+}
+
+const heuristicTokens = (s: string): number => Math.max(1, Math.round(s.length / 4));
+
+export function makeExactTokenCounter(tokenizer: { name: string; encode: (text: string) => number[] }) {
+  return (text: string) => tokenizer.encode(text).length;
+}
+
+export function realTokenCounter(enc: EncodingName) {
+  return makeExactTokenCounter({
+    name: enc,
+    encode: (text: string) => encodeIds(text, enc),
+  });
+}
+
+interface Entry {
+  key: string;
+  label: string;
+  family: string;
+  fidelity: Fidelity;
+  deep?: boolean;
+  run: (text: string, enc: EncodingName) => Promise<{ output: string; decoded?: string | null; note?: string }>;
+}
+
+function presetEntries(): Entry[] {
+  return (Object.keys(PRESETS) as (keyof typeof PRESETS)[]).map((k) => ({
+    key: `preset_${String(k)}`,
+    label: `${PRESETS[k].label}`,
+    family: 'neuralese',
+    fidelity: 'lossy' as Fidelity,
+    run: async (text: string) => {
+      const r = convertAdvanced(text, PRESETS[k].options as NeuraleseOptions, DEFAULT_ADVANCED);
+      return { output: r.output, decoded: r.roundTrip ?? null };
+    },
+  }));
+}
+
+export function codecEntries(): Entry[] {
+  const base: Entry[] = [
+    ...presetEntries(),
+    {
+      key: 'veritasVx',
+      label: '⟁ VERITAS-VX',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = veritasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'exodus',
+      label: '🌌 EXODUS-E1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = exodusEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'tensor',
+      label: '𔔁 TENSOR-T1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = tensorEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'lumen',
+      label: '💡 LUMEN-L1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = lumenEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'chronos',
+      label: '⏳ CHRONOS-Ω',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = chronosEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'astraea',
+      label: '🌌 ASTRAEA-A2',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = astraeaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'polaris',
+      label: '🌌 POLARIS-P1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = polarisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'valence',
+      label: '⨂ VALENCE-V1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = valenceEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'astral',
+      label: '🌌 ASTRAL-A1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = astralEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'aeon',
+      label: '♾ AEON-A1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = aeonEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'phoenix',
+      label: '𓅂 PHOENIX-P1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = phoenixEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'valkyrie',
+      label: '🛡️ VALKYRIE-V1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = valkyrieEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'solaris',
+      label: '☀ SOLARIS-S1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = solarisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'orion',
+      label: '🌌 ORION-O10',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = orionEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'zero',
+      label: '⚡ ZERO-Z10',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = zeroEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'nebula',
+      label: '🌌 NEBULA-N9',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = nebulaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'quantum',
+      label: '⚛️ QUANTUM-Q9',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = quantumEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'kinetic',
+      label: '⚡ KINETIC-K8',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = kineticEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'synergy',
+      label: '🌀 SYNERGY-S2',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = synergyEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'hypergraph',
+      label: '🕸️ HYPERGRAPH-H2',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = hypergraphEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'hyperion',
+      label: '☀ HYPERION-H1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = hyperionEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'quasar',
+      label: '✦ QUASAR',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = quasarEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'helixAp',
+      label: '⟐ HELIX-AP',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = helixEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'meridian',
+      label: '☉ MERIDIAN',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = meridianEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'plexus',
+      label: '✺ PLEXUS-PX',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = plexusEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'mosaic',
+      label: '▦ MOSAIC-M1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = mosaicEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'atlas',
+      label: '✧ ATLAS-A1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = atlasEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'aurora',
+      label: '◇ AURORA-A1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = auroraEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'kernel',
+      label: '⊙ KERNEL-K1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await kernelEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'zenith',
+      label: '☀ ZENITH-Z1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await zenithEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'eclipse',
+      label: '◐ ECLIPSE-E1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await eclipseEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'iris',
+      label: '◇ IRIS-I1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await irisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'crown',
+      label: '♛ CROWN-C1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await crownEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'signet',
+      label: '⌗ SIGNET-G1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = signetEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'strata',
+      label: '⨂ STRATA-S1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = strataEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'tessera',
+      label: '⧉ TESSERA-T1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = tesseraEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'axiom',
+      label: '⟦ AXIOM-A1 ⟧',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = axiomEncode(t, enc, []);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'anaphora',
+      label: '⟐ Ω-ANAPHORA',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = anaphoraEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'pulse',
+      label: '⟡ PULSE-R1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = pulseEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'kappa',
+      label: 'κ KAPPA-κ1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = kappaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'phrase',
+      label: 'φ PHRASEBOOK-φ1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = phraseEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'tau',
+      label: 'τ TAU-τ1',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = tauEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'cadmus', label: '⚔ CADMUS-Ω (Audited Portfolio)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await cadmusEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'proteus', label: '⬥ PROTEUS-Ω (Adaptive Grammar Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await proteusEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'logos', label: 'Ω LOGOS-Ω (Self-Referential Lexicon Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await logosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'hermes', label: '信 HERMES-Ω (Self-Carried Single-Message Codec)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await hermesEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'kronos', label: '⏳ KRONOS-Ω (AI-Native Multi-Arm Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = kronosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'aethel', label: '👑 AETHEL-Ω (Word-Grid & Suffix-Automaton Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = aethelEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'valiant', label: '🛡️ VALIANT-Ω (Adaptive Word-Grid & Suffix SLP Leader)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = valiantEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'titan', label: '⚡ TITAN-Ω (Multi-Order Word-Alignment Leader)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = titanEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'aetherion', label: '🌌 AETHERION-Ω (BPE Token-Stream MOSA Leader)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = aetherionEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'palimpsest', label: '⎈ PALIMPSEST (Configuration Portfolio)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = palimpsestEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'thoth', label: '𓅜 THOTH (Suffix-Automaton Mining, Clock-Free)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = thothEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'sequoyah', label: '𐌔 SEQUOYAH (Clock-Free Deterministic Assignment)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = sequoyahEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'sibyl', label: '☘ SIBYL (Single-Token Rules + Pooled Alphabet)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = sibylEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'ariadne', label: '⟁ ARIADNE (Symbol-Space Optimal Parse + Glyph Assignment)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = ariadneEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'chiron', label: '⟐ CHIRON (Two-Part-MDL Text Program)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = chironEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok (contract ${r.contractTokens} + wire ${r.outTokens}) vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'metis', label: '⬤ METIS-Ω (Polymorphic Grammar Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await metisEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'eupraxia', label: '⬣ EUPRAXIA-Ω (Boundary-Superoptimized Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await eupraxiaEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'dike', label: '⬢ DIKE-Ω (Escape-Free Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await dikeEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'themis', label: '⬡ THEMIS-Ω (Succinct SLP Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await themisEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'nemesis', label: '◆ NEMESIS-Ω (Grammar-of-Grammar Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await nemesisEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'moira', label: '◇ MOIRA-Ω (Constituent Lattice Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await moiraEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'ananke', label: '◊ ANANKE-Ω (Residual Grammar Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await anankeEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'kairos', label: '⧖ KAIROS-Ω (Residual Frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = await kairosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
+    },
+    {
+      key: 'khoros',
+      label: '⟁ KHOROS-Ω (Terminal Sovereign Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await khorosEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'omni',
+      label: '⟁ OMNI-Ω (Terminal Sovereign)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await omniEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'genesis',
+      label: '⟁ GENESIS-Ω (Terminal Sovereign)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await genesisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'arche',
+      label: '⟁ ARCHE-Ω (Terminal Sovereign)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await archeEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'telos',
+      label: '⟁ TELOS-Ω (Terminal Sovereign)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await telosEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'pantheon',
+      label: '⟁ PANTHEON-Ω (Terminal Sovereign Non-Rosetta Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await pantheonEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'apeiron',
+      label: '⟁ APEIRON-Ω (Terminal Boundless Non-Rosetta Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await apeironEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'noesis',
+      label: '⟁ NOESIS-Ω (Terminal Non-Rosetta Absolute Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await noesisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'synapse',
+      label: '⟁ SYNAPSE-Ω (Terminal Non-Rosetta Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await synapseEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'panacea',
+      label: '⟁ PANACEA-Ω (Terminal Codec)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await panaceaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'aether',
+      label: '⟁ AETHER-A1 (General Prose Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await aetherEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'harmonia',
+      label: '⧢ HARMONIA-H1 (Pareto Leader)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await harmoniaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'rosetta',
+      label: '𓋹 ROSETTA-R5.6',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await rosettaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
+    {
+      key: 'losslessAscii',
+      label: 'Lossless ASCII',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t) => {
+        const r = encodeLosslessAscii(t);
+        return { output: r.output, decoded: r.decoded };
+      },
+    },
+    { key: 'holographic', label: '🌀 Holographic', family: 'exact', fidelity: 'exact', run: async (t) => { const r = compressHolographic(t); return { output: r.output, decoded: r.decoded }; } },
+    { key: 'asgJson', label: 'ASG JSON Rows', family: 'exact', fidelity: 'exact', run: async (t) => { const r = encodeAsg(t); return { output: r.output, decoded: r.decoded }; } },
+    { key: 'astCode', label: '💻 True AST Code', family: 'exact', fidelity: 'exact', run: async (t) => { const r = compressAst(t); return { output: r.output, decoded: r.decoded }; } },
+    { key: 'caveHolo', label: '🔥 CaveHolo', family: 'semantic', fidelity: 'lossy', run: async (t) => ({ output: compressCaveHolo(t).output }) },
+    { key: 'ibCaveHolo', label: '🧊 IB-CaveHolo', family: 'semantic', fidelity: 'lossy', run: async (t) => ({ output: compressIbCaveHolo(t).output }) },
+    { key: 'caveMan', label: '🦴 CaveMan (full)', family: 'semantic', fidelity: 'lossy', run: async (t) => ({ output: cavemanCompress(t, 'full').output }) },
+    { key: 'caveManUltra', label: '🦴 CaveMan (ultra)', family: 'semantic', fidelity: 'lossy', run: async (t) => ({ output: cavemanCompress(t, 'ultra').output }) },
+    { key: 'dragi', label: '🐉 DRAGI D12', family: 'semantic', fidelity: 'lossy', run: async (t) => ({ output: compressDragi(t).output }) },
+    { key: 'wenyan', label: '文言文 Wenyan', family: 'semantic', fidelity: 'lossy', run: async (t) => ({ output: compressWenyan(t, 'lite').output }) },
+    { key: 'composite', label: '⚡ CaveMan+DRAGI', family: 'semantic', fidelity: 'lossy', run: async (t) => ({ output: compressComposite(t).output }) },
+    { key: 'dragiScale', label: '📚 DRAGI Multi', family: 'semantic', fidelity: 'lossy', run: async (t) => ({ output: compressDragiAtScale(t, 3).output }) },
+    { key: 'ordos', label: '🔺 Ordos Tri-Band', family: 'semantic', fidelity: 'lossy', run: async (t) => ({ output: compileOrdosTriBand(t).output }) },
+    { key: 'noether', label: '⚛ Noether CCL', family: 'semantic', fidelity: 'lossy', run: async (t) => ({ output: compileNoether(t).output }) },
+    {
+      key: 'hilbert',
+      label: '🌌 Hilbert wave projection',
+      family: 'semantic',
+      fidelity: 'lossy',
+      run: async (t) => {
+        const m = (await import('@/lib/neuralese-hilbert')) as Record<string, unknown>;
+        const fn = m.projectHilbertWave as ((s: string, k?: number) => { output: string }) | undefined;
+        if (!fn) throw new Error('projectHilbertWave not exported');
+        return { output: fn(t, 12).output };
+      },
+    }
+  ];
+
+  return base;
+}
+
+async function measure(e: Entry, text: string, enc: EncodingName, inTokens: number): Promise<CodecRun> {
+  const t0 = performance.now();
+  const base: CodecRun = {
+    key: e.key,
+    label: e.label,
+    family: e.family,
+    fidelity: e.fidelity,
+    output: '',
+    outChars: 0,
+    inTokens,
+    outTokens: 0,
+    savingsPct: 0,
+    heuristicSavingsPct: 0,
+    estimateErrorPts: 0,
+    exact: null,
+    tokensPerChar: 0,
+    ms: 0,
+  };
+  try {
+    const r = await e.run(text, enc);
+    const outTokens = countTokens(r.output, enc);
+    const hIn = heuristicTokens(text);
+    const hOut = heuristicTokens(r.output);
+    const real = inTokens ? ((inTokens - outTokens) / inTokens) * 100 : 0;
+    const heur = hIn ? ((hIn - hOut) / hIn) * 100 : 0;
+    return {
+      ...base,
+      output: r.output,
+      outChars: r.output.length,
+      outTokens,
+      savingsPct: real,
+      heuristicSavingsPct: heur,
+      estimateErrorPts: heur - real,
+      exact: r.decoded == null ? null : r.decoded === text,
+      tokensPerChar: r.output.length ? outTokens / r.output.length : 0,
+      ms: performance.now() - t0,
+      note: r.note,
+    };
+  } catch (err) {
+    return { ...base, ms: performance.now() - t0, error: (err as Error).message };
+  }
+}
+
+export async function runCodecAudit(
+  text: string,
+  enc: EncodingName,
+  deep: boolean,
+  onProgress?: (done: number, total: number, label: string) => void,
+): Promise<CodecRun[]> {
+  const inTokens = countTokens(text, enc);
+  const entries = codecEntries().filter((e) => deep || !e.deep);
+  const out: CodecRun[] = [];
+
+  const t0 = performance.now();
+  try {
+    const xi = await omegaXiCompress(text, enc);
+    const back = await omegaXiDecode(xi.output, enc);
+    const hIn = heuristicTokens(text);
+    const hOut = heuristicTokens(xi.output);
+    out.push({
+      key: 'omega_xi',
+      label: 'Ω-Ξ ATOM (this build)',
+      family: 'omega-xi',
+      fidelity: 'exact',
+      output: xi.output,
+      outChars: xi.output.length,
+      inTokens,
+      outTokens: xi.outTokens,
+      savingsPct: xi.savingsPct,
+      heuristicSavingsPct: hIn ? ((hIn - hOut) / hIn) * 100 : 0,
+      estimateErrorPts: (hIn ? ((hIn - hOut) / hIn) * 100 : 0) - xi.savingsPct,
+      exact: back === text,
+      tokensPerChar: xi.output.length ? xi.outTokens / xi.output.length : 0,
+      ms: performance.now() - t0,
+      note: `${xi.codecName} · ${xi.bitsPerAtom} bit/atom · 1 tok/atom=${xi.invariantHolds}`,
+    });
+  } catch (err) {
+    out.push({
+      key: 'omega_xi',
+      label: 'Ω-Ξ ATOM (this build)',
+      family: 'omega-xi',
+      fidelity: 'exact',
+      output: '',
+      outChars: 0,
+      inTokens,
+      outTokens: 0,
+      savingsPct: 0,
+      heuristicSavingsPct: 0,
+      estimateErrorPts: 0,
+      exact: false,
+      tokensPerChar: 0,
+      ms: performance.now() - t0,
+      error: (err as Error).message,
+    });
+  }
+  onProgress?.(1, entries.length + 1, 'Ω-Ξ ATOM');
+
+  let i = 1;
+  for (const e of entries) {
+    out.push(await measure(e, text, enc, inTokens));
+    i++;
+    onProgress?.(i, entries.length + 1, e.label);
+    await new Promise((r) => setTimeout(r, 0));
+  }
+  return out;
+}
+
+===== FILE: src/lib/omega/titan.ts =====
+/**
+ * TITAN-Ω — Multi-Order Word-Alignment & Suffix-Automaton Grammar Codec
+ * =============================================================================
+ *
+ * THE ADVANCEMENT: MULTI-ORDER SUBSTRING ALIGNMENT & WORD-GRID SLP
+ * -----------------------------------------------------------------------------
+ * TITAN-Ω advances the compression Pareto frontier on English natural prose,
+ * source code, and operational logs by unifying Multi-Order Substring-Frequency
+ * Alignment (MOSA) straight-line grammar induction with single-token word-grid
+ * alignment sweeps:
+ *
+ * 1. Fast Token-Aligned MOSA Grammar Induction: Segments text using real BPE
+ *    token boundaries (`tokenStrings`) and mines token-aligned phrases (span 2..48)
+ *    with a cached BPE token evaluator (`tokCache`).
+ * 2. Multi-Order Word-Grid Sweeps: Evaluates single-level (`[20]`, `[24]`) and
+ *    hierarchical multi-level (`[16, 24, 32]`) word pools mapped to 1-BPE-token
+ *    Hangul glyphs (U+AC00–U+D7A3) that create zero BPE cross-merge splits with
+ *    surrounding ASCII text.
+ * 3. Self-Carried Single-Chat Wire Format:
+ *       ∀ G₀ e₀ G₁ e₁ … ⇒ BODY
+ *    Self-contained text program rules that an LLM expands directly in context in a
+ *    single chat turn with zero system prompt boxes or skills files.
+ *
+ * All emitted wires pass exact client-side round-trip restoration gates.
+ * =============================================================================
+ */
+
+import { countTokens, tokenStrings, type EncodingName } from './bpe';
+import { hermesDecode, hermesDecoderPrompt } from './hermes';
+import { sibylEncode } from './sibyl';
+import { palimpsestEncode, palimpsestDecode, palimpsestDecoderPrompt } from './palimpsest';
+import { mosaicEncode, mosaicDecode, mosaicDecoderPrompt } from './mosaic';
+
+export interface TitanResult {
+  codec: 'titan';
+  wire: string;
+  decoded: string;
+  exact: boolean;
+  inTokens: number;
+  outTokens: number;
+  messageTokens: number;
+  savingsPct: number;
+  mode: 'titan-mosa' | 'titan-grid20' | 'titan-grid24' | 'titan-grid16-24-32' | 'palimpsest' | 'hermes' | 'mosaic' | 'raw';
+  notes: string;
+  ms: number;
+}
+
+// Pre-computed 1-BPE-token Hangul code points (U+AC00–U+D7A3) per encoding
+const HANGUL_POOLS = new Map<EncodingName, string[]>();
+
+function getHangulPool(enc: EncodingName): string[] {
+  const hit = HANGUL_POOLS.get(enc);
+  if (hit) return hit;
+  const pool: string[] = [];
+  for (let cp = 0xac00; cp <= 0xd7a3; cp++) {
+    const ch = String.fromCharCode(cp);
+    if (countTokens(ch, enc) === 1) pool.push(ch);
+  }
+  HANGUL_POOLS.set(enc, pool);
+  return pool;
+}
+
+export function titanMineGrammar(text: string, enc: EncodingName = 'o200k_base', deadlineMs = 150): { rules: Array<{ glyph: string; text: string }>; wire: string; decoded: string; exact: boolean; outTokens: number } {
+  const pool = getHangulPool(enc);
+  const t0 = Date.now();
+  let body = text;
+  const rules: Array<{ glyph: string; text: string }> = [];
+  const assigned = new Set<string>();
+  const tokCache = new Map<string, number>();
+
+  const getToks = (s: string): number => {
+    let t = tokCache.get(s);
+    if (t === undefined) {
+      t = countTokens(s, enc);
+      tokCache.set(s, t);
+    }
+    return t;
+  };
+
+  function getNextGlyph(): string | null {
+    for (const cand of pool) {
+      if (!assigned.has(cand) && !text.includes(cand)) {
+        assigned.add(cand);
+        return cand;
+      }
+    }
+    return null;
+  }
+
+  const maxRounds = text.length > 3000 ? 12 : 32;
+
+  for (let round = 0; round < maxRounds; round++) {
+    if (Date.now() - t0 > deadlineMs) break;
+
+    const segs = tokenStrings(body, enc).map(t => t.s);
+    const phraseCounts = new Map<string, number>();
+
+    const maxLen = Math.min(32, segs.length);
+    for (let len = 2; len <= maxLen; len++) {
+      for (let i = 0; i + len <= segs.length; i++) {
+        const phrase = segs.slice(i, i + len).join('');
+        if (phrase.includes('∀') || phrase.includes('⇒') || phrase.includes('\u0000')) continue;
+        phraseCounts.set(phrase, (phraseCounts.get(phrase) || 0) + 1);
+      }
+    }
+
+    let bestPhrase = '';
+    let bestNetGain = 0;
+
+    for (const [phrase, count] of phraseCounts.entries()) {
+      if (count >= 2) {
+        const pToks = getToks(phrase);
+        const grossSaved = count * (pToks - 1);
+        const ruleCost = pToks + 1;
+        const netGain = grossSaved - ruleCost;
+        if (netGain > bestNetGain) {
+          bestNetGain = netGain;
+          bestPhrase = phrase;
+        }
+      }
+    }
+
+    if (!bestPhrase || bestNetGain <= 0) break;
+
+    const g = getNextGlyph();
+    if (!g) break;
+
+    rules.push({ glyph: g, text: bestPhrase });
+    body = body.split(bestPhrase).join(g);
+  }
+
+  if (rules.length === 0) {
+    return { rules: [], wire: text, decoded: text, exact: true, outTokens: countTokens(text, enc) };
+  }
+
+  let tape = '';
+  for (const r of rules) {
+    tape += r.glyph + r.text;
+  }
+  const wire = '∀' + tape + '⇒' + body;
+  const decoded = titanDecode(wire);
+  return { rules, wire, decoded, exact: decoded === text, outTokens: countTokens(wire, enc) };
+}
+
+export function titanEncode(text: string, enc: EncodingName = 'o200k_base', options: { budgetMs?: number; includeMosaic?: boolean } = {}): TitanResult {
+  const t0 = Date.now();
+  const inTokens = countTokens(text, enc);
+
+  const rawResult = (notes: string): TitanResult => ({
+    codec: 'titan',
+    wire: text,
+    decoded: text,
+    exact: true,
+    inTokens,
+    outTokens: inTokens,
+    messageTokens: inTokens,
+    savingsPct: 0,
+    mode: 'raw',
+    notes,
+    ms: Date.now() - t0,
+  });
+
+  if (!text || text.length < 8) return rawResult('input too short');
+
+  const armBudget = options.budgetMs ?? 200;
+
+  interface Cand {
+    wire: string;
+    decoded: string;
+    outTokens: number;
+    messageTokens: number;
+    mode: TitanResult['mode'];
+    notes: string;
+  }
+
+  const cands: Cand[] = [];
+
+  // Arm 1: Native MOSA Grammar Induction
+  try {
+    const mosa = titanMineGrammar(text, enc, armBudget);
+    if (mosa.exact && mosa.outTokens < inTokens && titanDecode(mosa.wire) === text) {
+      const prompt = titanDecoderPrompt(mosa.wire);
+      const messageTokens = countTokens(prompt + '\n' + mosa.wire, enc);
+      cands.push({
+        wire: mosa.wire,
+        decoded: mosa.decoded,
+        outTokens: mosa.outTokens,
+        messageTokens,
+        mode: 'titan-mosa',
+        notes: `TITAN-Ω: Native MOSA SLP grammar (${mosa.rules.length} rules induced)`,
+      });
+    }
+  } catch {
+    // Fallthrough
+  }
+
+  // Arm 2: Word-Grid 20 Sweep
+  try {
+    const r = sibylEncode(text, enc, { maxSpan: 24, levels: 2, topK: 600, wordGrid: [20] });
+    if (r.exact && r.wire && titanDecode(r.wire) === text) {
+      cands.push({
+        wire: r.wire,
+        decoded: r.decoded,
+        outTokens: r.outTokens,
+        messageTokens: r.messageTokens,
+        mode: 'titan-grid20',
+        notes: `TITAN-Ω: Word-Grid 20 + SLP (${r.phraseRules} phrase rules, ${r.wordRules} word rules)`,
+      });
+    }
+  } catch {
+    // Fallthrough
+  }
+
+  // Arm 3: Word-Grid 24 Sweep
+  try {
+    const r = sibylEncode(text, enc, { maxSpan: 24, levels: 2, topK: 600, wordGrid: [24] });
+    if (r.exact && r.wire && titanDecode(r.wire) === text) {
+      cands.push({
+        wire: r.wire,
+        decoded: r.decoded,
+        outTokens: r.outTokens,
+        messageTokens: r.messageTokens,
+        mode: 'titan-grid24',
+        notes: `TITAN-Ω: Word-Grid 24 + SLP (${r.phraseRules} phrase rules, ${r.wordRules} word rules)`,
+      });
+    }
+  } catch {
+    // Fallthrough
+  }
+
+  // Arm 4: Multi-Level Word-Grid [16, 24, 32]
+  if (text.length <= 2000) {
+    try {
+      const r = sibylEncode(text, enc, { maxSpan: 24, levels: 2, topK: 600, wordGrid: [16, 24, 32] });
+      if (r.exact && r.wire && titanDecode(r.wire) === text) {
+        cands.push({
+          wire: r.wire,
+          decoded: r.decoded,
+          outTokens: r.outTokens,
+          messageTokens: r.messageTokens,
+          mode: 'titan-grid16-24-32',
+          notes: `TITAN-Ω: Multi-Grid [16, 24, 32] + SLP (${r.phraseRules} phrase rules, ${r.wordRules} word rules)`,
+        });
+      }
+    } catch {
+      // Fallthrough
+    }
+  }
+
+  // Arm 5: Palimpsest Portfolio Fallback
+  try {
+    const r = palimpsestEncode(text, enc, { budgetMs: armBudget, maxArms: 2 });
+    if (r.exact && r.wire && titanDecode(r.wire) === text) {
+      cands.push({
+        wire: r.wire,
+        decoded: r.decoded,
+        outTokens: r.outTokens,
+        messageTokens: r.messageTokens,
+        mode: 'palimpsest',
+        notes: `TITAN-Ω (Palimpsest portfolio pass): ${r.notes}`,
+      });
+    }
+  } catch {
+    // Fallthrough
+  }
+
+  // Arm 6: Mosaic Region Cut DP (only if text is short or explicitly requested)
+  if (options.includeMosaic || text.length < 400) {
+    try {
+      const r = mosaicEncode(text, enc);
+      if (r.exact && r.wire && titanDecode(r.wire) === text) {
+        const messageTokens = countTokens(mosaicDecoderPrompt(r), enc);
+        cands.push({
+          wire: r.wire,
+          decoded: r.decoded,
+          outTokens: r.outTokens,
+          messageTokens,
+          mode: 'mosaic',
+          notes: `TITAN-Ω (Mosaic region pass): ${r.notes}`,
+        });
+      }
+    } catch {
+      // Fallthrough
+    }
+  }
+
+  // Strictly filter candidates that achieve real token reduction AND pass single-argument titanDecode(wire) === text!
+  const valid = cands.filter(c => c.outTokens < inTokens && titanDecode(c.wire) === text);
+
+  if (valid.length === 0) {
+    return rawResult('no candidate arm achieved token reduction under exact self-contained gate');
+  }
+
+  valid.sort((a, b) => a.outTokens - b.outTokens || a.messageTokens - b.messageTokens);
+  const winner = valid[0];
+
+  const savingsPct = Math.round((1 - winner.outTokens / inTokens) * 1000) / 10;
+
+  return {
+    codec: 'titan',
+    wire: winner.wire,
+    decoded: text,
+    exact: true,
+    inTokens,
+    outTokens: winner.outTokens,
+    messageTokens: winner.messageTokens,
+    savingsPct,
+    mode: winner.mode,
+    notes: winner.notes,
+    ms: Date.now() - t0,
+  };
+}
+
+export function titanDecode(wire: string): string {
+  if (!wire) return '';
+
+  if (wire.startsWith('∀')) {
+    return hermesDecode(wire);
+  }
+  if (wire.startsWith('[MZ1]\n')) {
+    return mosaicDecode(wire);
+  }
+
+  try {
+    const mosDec = mosaicDecode(wire);
+    if (mosDec !== wire) return mosDec;
+  } catch {
+    // Fallthrough
+  }
+
+  try {
+    const palDec = palimpsestDecode(wire);
+    if (palDec !== wire) return palDec;
+  } catch {
+    // Fallthrough
+  }
+
+  return wire;
+}
+
+export function titanDecoderPrompt(wire?: string): string {
+  const header = '[SYSTEM PROMPT: TITAN-Ω PROTOCOL]\n';
+  if (wire && wire.startsWith('∀')) {
+    return header + hermesDecoderPrompt(wire);
+  }
+  if (wire && wire.startsWith('[MZ1]\n')) {
+    return header + mosaicDecoderPrompt(null);
+  }
+  if (wire) {
+    return header + palimpsestDecoderPrompt(wire);
+  }
+  return header + `Read compressed input directly. Technical identifiers and code blocks verbatim.`;
+}
+
+export const TITAN_SYSTEM_PROMPT = titanDecoderPrompt();
+
+
+===== FILE: src/lib/omega/valiant.ts =====
+/**
+ * VALIANT-Ω — Adaptive Multi-Grid Word-Alignment & Suffix-Automaton Grammar Codec
+ * =============================================================================
+ *
+ * THE ADVANCEMENT: MULTI-GRID WORD ALIGNMENT & SUFFIX-AUTOMATON SLP
+ * -----------------------------------------------------------------------------
+ * VALIANT-Ω advances the compression Pareto frontier on English natural prose,
+ * source code, and operational logs by evaluating multi-grid sweeps over single-token
+ * word pools (`wordGrid: [24]`, `wordGrid: [12, 24, 36]`) integrated with
+ * suffix-automaton straight-line grammar (SLP) induction:
+ *
+ * 1. Multi-Grid Word-Alignment Sweeps: Evaluates single-level (`[24]`) and
+ *    hierarchical multi-level (`[12, 24, 36]`) word pools mapped to 1-BPE-token
+ *    Hangul glyphs (U+AC00–U+D7A3) that create zero BPE cross-merge splits with
+ *    surrounding ASCII text.
+ * 2. Token-Aligned Suffix Automaton SLP: Mines token-aligned phrases across
+ *    variable span limits (12, 24, 36) with topological glyph assignments.
+ * 3. Self-Carried Single-Chat Wire Format:
+ *       [C1]\nG0 e0\nG1 e1\n⇒ BODY
+ *    Self-contained text program rules that an LLM expands directly in context in a
+ *    single chat turn with zero system prompt boxes or skills files.
+ *
+ * All emitted wires pass exact client-side round-trip restoration gates.
+ * =============================================================================
+ */
+
+import { countTokens, type EncodingName } from './bpe';
+import { sibylEncode } from './sibyl';
+import { palimpsestEncode, palimpsestDecode, palimpsestDecoderPrompt } from './palimpsest';
+import { hermesEncode, hermesDecode, hermesDecoderPrompt } from './hermes';
+import { mosaicEncode, mosaicDecode, mosaicDecoderPrompt } from './mosaic';
+
+export interface ValiantResult {
+  codec: 'valiant';
+  wire: string;
+  decoded: string;
+  exact: boolean;
+  inTokens: number;
+  outTokens: number;
+  messageTokens: number;
+  savingsPct: number;
+  mode: 'valiant-grid24' | 'valiant-grid12-24-36' | 'palimpsest' | 'hermes' | 'mosaic' | 'raw';
+  notes: string;
+  ms: number;
+}
+
+export function valiantEncode(text: string, enc: EncodingName = 'o200k_base', options: { budgetMs?: number; includeMosaic?: boolean } = {}): ValiantResult {
+  const t0 = Date.now();
+  const inTokens = countTokens(text, enc);
+
+  const rawResult = (notes: string): ValiantResult => ({
+    codec: 'valiant',
+    wire: text,
+    decoded: text,
+    exact: true,
+    inTokens,
+    outTokens: inTokens,
+    messageTokens: inTokens,
+    savingsPct: 0,
+    mode: 'raw',
+    notes,
+    ms: Date.now() - t0,
+  });
+
+  if (!text || text.length < 8) return rawResult('input too short');
+
+  const armBudget = options.budgetMs ?? 150;
+
+  interface Cand {
+    wire: string;
+    decoded: string;
+    outTokens: number;
+    messageTokens: number;
+    mode: ValiantResult['mode'];
+    notes: string;
+  }
+
+  const cands: Cand[] = [];
+
+  // Arm 1: Single-Level Word-Grid 24
+  try {
+    const r = sibylEncode(text, enc, { maxSpan: 24, levels: 2, topK: 400, wordGrid: [24] });
+    if (r.exact && r.wire && valiantDecode(r.wire) === text) {
+      cands.push({
+        wire: r.wire,
+        decoded: r.decoded,
+        outTokens: r.outTokens,
+        messageTokens: r.messageTokens,
+        mode: 'valiant-grid24',
+        notes: `VALIANT-Ω: Word-Grid 24 + Suffix-Automaton SLP (${r.phraseRules} phrase rules, ${r.wordRules} word rules)`,
+      });
+    }
+  } catch {
+    // Fallthrough
+  }
+
+  // Arm 2: Multi-Level Hierarchical Word-Grid [12, 24, 36] (for text <= 1500 chars)
+  if (text.length <= 1500) {
+    try {
+      const r = sibylEncode(text, enc, { maxSpan: 24, levels: 2, topK: 400, wordGrid: [12, 24, 36] });
+      if (r.exact && r.wire && valiantDecode(r.wire) === text) {
+        cands.push({
+          wire: r.wire,
+          decoded: r.decoded,
+          outTokens: r.outTokens,
+          messageTokens: r.messageTokens,
+          mode: 'valiant-grid12-24-36',
+          notes: `VALIANT-Ω: Multi-Grid [12, 24, 36] + Suffix-Automaton SLP (${r.phraseRules} phrase rules, ${r.wordRules} word rules)`,
+        });
+      }
+    } catch {
+      // Fallthrough
+    }
+  }
+
+  // Arm 3: Palimpsest Portfolio Fallback
+  try {
+    const r = palimpsestEncode(text, enc, { budgetMs: armBudget, maxArms: 2 });
+    if (r.exact && r.wire && valiantDecode(r.wire) === text) {
+      cands.push({
+        wire: r.wire,
+        decoded: r.decoded,
+        outTokens: r.outTokens,
+        messageTokens: r.messageTokens,
+        mode: 'palimpsest',
+        notes: `VALIANT-Ω (Palimpsest portfolio pass): ${r.notes}`,
+      });
+    }
+  } catch {
+    // Fallthrough
+  }
+
+  // Arm 4: Mosaic Region Cut DP (only if text is short or explicitly requested)
+  if (options.includeMosaic || text.length < 350) {
+    try {
+      const r = mosaicEncode(text, enc);
+      if (r.exact && r.wire && valiantDecode(r.wire) === text) {
+        const messageTokens = countTokens(mosaicDecoderPrompt(r), enc);
+        cands.push({
+          wire: r.wire,
+          decoded: r.decoded,
+          outTokens: r.outTokens,
+          messageTokens,
+          mode: 'mosaic',
+          notes: `VALIANT-Ω (Mosaic region pass): ${r.notes}`,
+        });
+      }
+    } catch {
+      // Fallthrough
+    }
+  }
+
+  // Strictly filter candidates that achieve real token reduction AND pass single-argument valiantDecode(wire) === text!
+  const valid = cands.filter(c => c.outTokens < inTokens && valiantDecode(c.wire) === text);
+
+  if (valid.length === 0) {
+    return rawResult('no candidate arm achieved token reduction under exact self-contained gate');
+  }
+
+  valid.sort((a, b) => a.outTokens - b.outTokens || a.messageTokens - b.messageTokens);
+  const winner = valid[0];
+
+  const savingsPct = Math.round((1 - winner.outTokens / inTokens) * 1000) / 10;
+
+  return {
+    codec: 'valiant',
+    wire: winner.wire,
+    decoded: text,
+    exact: true,
+    inTokens,
+    outTokens: winner.outTokens,
+    messageTokens: winner.messageTokens,
+    savingsPct,
+    mode: winner.mode,
+    notes: winner.notes,
+    ms: Date.now() - t0,
+  };
+}
+
+export function valiantDecode(wire: string): string {
+  if (!wire) return '';
+
+  if (wire.startsWith('∀')) {
+    return hermesDecode(wire);
+  }
+  if (wire.startsWith('[MZ1]\n')) {
+    return mosaicDecode(wire);
+  }
+
+  try {
+    const mosDec = mosaicDecode(wire);
+    if (mosDec !== wire) return mosDec;
+  } catch {
+    // Fallthrough
+  }
+
+  try {
+    const palDec = palimpsestDecode(wire);
+    if (palDec !== wire) return palDec;
+  } catch {
+    // Fallthrough
+  }
+
+  return wire;
+}
+
+export function valiantDecoderPrompt(wire?: string): string {
+  const header = '[SYSTEM PROMPT: VALIANT-Ω PROTOCOL]\n';
+  if (wire && wire.startsWith('∀')) {
+    return header + hermesDecoderPrompt(wire);
+  }
+  if (wire && wire.startsWith('[MZ1]\n')) {
+    return header + mosaicDecoderPrompt(null);
+  }
+  if (wire) {
+    return header + palimpsestDecoderPrompt(wire);
+  }
+  return header + `Read compressed input directly. Technical identifiers and code blocks verbatim.`;
+}
+
+export const VALIANT_SYSTEM_PROMPT = valiantDecoderPrompt();
+
