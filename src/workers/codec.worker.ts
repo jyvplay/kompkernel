@@ -59,6 +59,7 @@ import { thothEncode } from '../lib/omega/thoth';
 import { palimpsestEncode } from '../lib/omega/palimpsest';
 import { daedalusEncode } from '../lib/omega/daedalus';
 import { orthosEncode } from '../lib/omega/orthos';
+import { stentorEncode } from '../lib/omega/stentor';
 import { kappaEncode } from '../lib/omega/kappa';
 import { phraseEncode } from '../lib/omega/phrase';
 import { tauEncode } from '../lib/omega/tau';
@@ -166,6 +167,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const palimpsest = palimpsestEncode(input, 'o200k_base', { budgetMs: 6000, maxArms: 3 });
       const daedalus = daedalusEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
       const orthos = orthosEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const stentor = stentorEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
 
       const response: CodecWorkerResponse = {
         id,
@@ -207,6 +209,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         palimpsest,
         daedalus,
         orthos,
+        stentor,
         rosetta,
         harmonia,
         aether,

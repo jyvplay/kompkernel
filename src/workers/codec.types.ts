@@ -61,6 +61,7 @@ import type { ThothResult } from '../lib/omega/thoth';
 import type { PalimpsestResult } from '../lib/omega/palimpsest';
 import type { DaedalusResult } from '../lib/omega/daedalus';
 import type { OrthosResult } from '../lib/omega/orthos';
+import type { StentorResult } from '../lib/omega/stentor';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -137,6 +138,7 @@ export interface CodecWorkerResult {
   palimpsest: PalimpsestResult;
   daedalus: DaedalusResult;
   orthos: OrthosResult;
+  stentor: StentorResult;
 }
 
 export interface CodecWorkerFailure {

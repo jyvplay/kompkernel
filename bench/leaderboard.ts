@@ -70,6 +70,7 @@ import { thothEncode } from '@/lib/omega/thoth';
 import { palimpsestEncode } from '@/lib/omega/palimpsest';
 import { daedalusEncode } from '@/lib/omega/daedalus';
 import { orthosEncode } from '@/lib/omega/orthos';
+import { stentorEncode } from '@/lib/omega/stentor';
 import { kappaEncode } from '@/lib/omega/kappa';
 import { phraseEncode } from '@/lib/omega/phrase';
 import { tauEncode } from '@/lib/omega/tau';
@@ -214,6 +215,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('palimpsest', async () => palimpsestEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('daedalus', async () => daedalusEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('orthos', async () => orthosEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('stentor', async () => stentorEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('metis', async () => metisEncode(text, enc));
   await run('eupraxia', async () => eupraxiaEncode(text, enc));
   await run('dike', async () => dikeEncode(text, enc));
