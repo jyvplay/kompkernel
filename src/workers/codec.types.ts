@@ -66,6 +66,7 @@ import type { AbacusResult } from '../lib/omega/abacus';
 import type { ProcrustesResult } from '../lib/omega/procrustes';
 import type { CirceResult } from '../lib/omega/circe';
 import type { ChimeraResult } from '../lib/omega/chimera';
+import type { CaesuraResult } from '../lib/omega/caesura';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -147,6 +148,7 @@ export interface CodecWorkerResult {
   procrustes: ProcrustesResult;
   circe: CirceResult;
   chimera: ChimeraResult;
+  caesura: CaesuraResult;
 }
 
 export interface CodecWorkerFailure {
