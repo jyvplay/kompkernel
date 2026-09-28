@@ -83,6 +83,7 @@ import { orthosEncode } from './orthos';
 import { stentorEncode } from './stentor';
 import { abacusEncode } from './abacus';
 import { procrustesEncode } from './procrustes';
+import { circeEncode } from './circe';
 import { kappaEncode } from './kappa';
 import { phraseEncode } from './phrase';
 import { tauEncode } from './tau';
@@ -623,6 +624,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'procrustes', label: '★ PROCRUSTES (Kerning/Fullwidth Canonicalization Pre-Pass)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = procrustesEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'circe', label: '▶ CIRCE (Encoded/Injected-Artifact Restoration Pre-Pass)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = circeEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'palimpsest', label: '⎈ PALIMPSEST (Configuration Portfolio)', family: 'exact', fidelity: 'exact',

@@ -62,6 +62,7 @@ import { orthosEncode } from '../lib/omega/orthos';
 import { stentorEncode } from '../lib/omega/stentor';
 import { abacusEncode } from '../lib/omega/abacus';
 import { procrustesEncode } from '../lib/omega/procrustes';
+import { circeEncode } from '../lib/omega/circe';
 import { kappaEncode } from '../lib/omega/kappa';
 import { phraseEncode } from '../lib/omega/phrase';
 import { tauEncode } from '../lib/omega/tau';
@@ -172,6 +173,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const stentor = stentorEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
       const abacus = abacusEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
       const procrustes = procrustesEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const circe = circeEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
 
       const response: CodecWorkerResponse = {
         id,
@@ -216,6 +218,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         stentor,
         abacus,
         procrustes,
+        circe,
         rosetta,
         harmonia,
         aether,
