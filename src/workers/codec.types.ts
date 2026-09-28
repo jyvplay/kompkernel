@@ -63,6 +63,7 @@ import type { DaedalusResult } from '../lib/omega/daedalus';
 import type { OrthosResult } from '../lib/omega/orthos';
 import type { StentorResult } from '../lib/omega/stentor';
 import type { AbacusResult } from '../lib/omega/abacus';
+import type { ProcrustesResult } from '../lib/omega/procrustes';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -141,6 +142,7 @@ export interface CodecWorkerResult {
   orthos: OrthosResult;
   stentor: StentorResult;
   abacus: AbacusResult;
+  procrustes: ProcrustesResult;
 }
 
 export interface CodecWorkerFailure {
