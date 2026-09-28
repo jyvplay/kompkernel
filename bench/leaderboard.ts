@@ -74,6 +74,7 @@ import { stentorEncode } from '@/lib/omega/stentor';
 import { abacusEncode } from '@/lib/omega/abacus';
 import { procrustesEncode } from '@/lib/omega/procrustes';
 import { circeEncode } from '@/lib/omega/circe';
+import { chimeraEncode } from '@/lib/omega/chimera';
 import { kappaEncode } from '@/lib/omega/kappa';
 import { phraseEncode } from '@/lib/omega/phrase';
 import { tauEncode } from '@/lib/omega/tau';
@@ -222,6 +223,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('abacus', async () => abacusEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('procrustes', async () => procrustesEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('circe', async () => circeEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('chimera', async () => chimeraEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('metis', async () => metisEncode(text, enc));
   await run('eupraxia', async () => eupraxiaEncode(text, enc));
   await run('dike', async () => dikeEncode(text, enc));

@@ -65,6 +65,7 @@ import type { StentorResult } from '../lib/omega/stentor';
 import type { AbacusResult } from '../lib/omega/abacus';
 import type { ProcrustesResult } from '../lib/omega/procrustes';
 import type { CirceResult } from '../lib/omega/circe';
+import type { ChimeraResult } from '../lib/omega/chimera';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -145,6 +146,7 @@ export interface CodecWorkerResult {
   abacus: AbacusResult;
   procrustes: ProcrustesResult;
   circe: CirceResult;
+  chimera: ChimeraResult;
 }
 
 export interface CodecWorkerFailure {

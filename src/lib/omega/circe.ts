@@ -764,7 +764,7 @@ export function circeEncode(text: string, enc: EncodingName = 'o200k_base', opti
  *  treated as "no prefix" and left as ordinary text for downstream
  *  decoding, exactly the same non-throwing discipline as every other
  *  parse in this file. */
-function parseInvisiblePrefix(wire: string): { cp: number; direction: 'before' | 'after'; rest: string } | null {
+export function parseInvisiblePrefix(wire: string): { cp: number; direction: 'before' | 'after'; rest: string } | null {
   if (wire.length < 6 || wire[0] !== INV_MARK) return null;
   const dch = wire[1];
   if (dch !== 'b' && dch !== 'a') return null;
