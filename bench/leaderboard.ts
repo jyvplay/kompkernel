@@ -78,6 +78,7 @@ import { chimeraEncode } from '@/lib/omega/chimera';
 import { caesuraEncode } from '@/lib/omega/caesura';
 import { syntagmaEncode } from '@/lib/omega/syntagma';
 import { prosoponEncode } from '@/lib/omega/prosopon';
+import { epistleEncode } from '@/lib/omega/epistle';
 import { kappaEncode } from '@/lib/omega/kappa';
 import { phraseEncode } from '@/lib/omega/phrase';
 import { tauEncode } from '@/lib/omega/tau';
@@ -230,6 +231,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('caesura', async () => caesuraEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('syntagma', async () => syntagmaEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('prosopon', async () => prosoponEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('epistle', async () => epistleEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('metis', async () => metisEncode(text, enc));
   await run('eupraxia', async () => eupraxiaEncode(text, enc));
   await run('dike', async () => dikeEncode(text, enc));

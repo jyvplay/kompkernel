@@ -69,6 +69,7 @@ import type { ChimeraResult } from '../lib/omega/chimera';
 import type { CaesuraResult } from '../lib/omega/caesura';
 import type { SyntagmaResult } from '../lib/omega/syntagma';
 import type { ProsoponResult } from '../lib/omega/prosopon';
+import type { EpistleResult } from '../lib/omega/epistle';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -153,6 +154,7 @@ export interface CodecWorkerResult {
   caesura: CaesuraResult;
   syntagma: SyntagmaResult;
   prosopon: ProsoponResult;
+  epistle: EpistleResult;
 }
 
 export interface CodecWorkerFailure {

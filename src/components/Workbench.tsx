@@ -33,6 +33,7 @@ import type { ChimeraResult } from '../lib/omega/chimera';
 import type { CaesuraResult } from '../lib/omega/caesura';
 import type { SyntagmaResult } from '../lib/omega/syntagma';
 import type { ProsoponResult } from '../lib/omega/prosopon';
+import type { EpistleResult } from '../lib/omega/epistle';
 import { omegaXiCompress, OMEGA_XI_SYSTEM_PROMPT, type OmegaXiResult } from '../lib/omega/atom-codec';
 import { ltpProject, type LtpResult } from '../lib/omega/ltp';
 import { compressPrometheusICDM, type PrometheusResult } from '../lib/omega/prometheus-icdm';
@@ -102,7 +103,7 @@ type CodecKey =
   | 'losslessAscii' | 'omegaXi' | 'omegaE8' | 'eidolon' | 'ltp' | 'prometheus' | 'zeta'
   | 'janus' | 'sigma' | 'stencil' | 'morph' | 'chronos' | 'chronosArena' | 'nexus' | 'mneme' | 'apex'
   | 'caveMan' | 'dragi' | 'wenyan' | 'composite' | 'dragiScale' | 'ordos' | 'asgJson'
-  | 'astCode' | 'hermesContract' | 'chiron' | 'ariadne' | 'sibyl' | 'sequoyah' | 'thoth' | 'palimpsest' | 'daedalus' | 'orthos' | 'stentor' | 'abacus' | 'procrustes' | 'circe' | 'chimera' | 'caesura' | 'syntagma' | 'prosopon' | 'noether' | 'holographic' | 'caveHolo' | 'ibCaveHolo' | 'veritasVx' | 'quasar' | 'helixAp' | 'meridian' | 'plexus'
+  | 'astCode' | 'hermesContract' | 'chiron' | 'ariadne' | 'sibyl' | 'sequoyah' | 'thoth' | 'palimpsest' | 'daedalus' | 'orthos' | 'stentor' | 'abacus' | 'procrustes' | 'circe' | 'chimera' | 'caesura' | 'syntagma' | 'prosopon' | 'epistle' | 'noether' | 'holographic' | 'caveHolo' | 'ibCaveHolo' | 'veritasVx' | 'quasar' | 'helixAp' | 'meridian' | 'plexus'
   | 'axiom' | 'orbit' | 'anaphora' | 'pulse' | 'tessera' | 'strata' | 'signet' | 'mosaic' | 'atlas' | 'aurora' | 'crown' | 'iris' | 'kernel' | 'zenith' | 'eclipse' | 'khoros' | 'omni' | 'genesis' | 'arche' | 'telos' | 'pantheon' | 'apeiron' | 'noesis' | 'synapse' | 'panacea' | 'aether' | 'harmonia' | 'rosetta' | 'kappa' | 'phrase' | 'tau';
 
 interface ParetoRow {
@@ -118,7 +119,7 @@ interface ParetoRow {
 }
 
 const GROUPS: Array<{ label: string; hint: string; keys: CodecKey[] }> = [
-  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['orthos','stentor','abacus','procrustes','circe','chimera','caesura','syntagma','prosopon','daedalus','palimpsest','sibyl','thoth','sequoyah','ariadne','chiron','hermesContract','khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
+  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['orthos','stentor','abacus','procrustes','circe','chimera','caesura','syntagma','prosopon','epistle','daedalus','palimpsest','sibyl','thoth','sequoyah','ariadne','chiron','hermesContract','khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
   { label: '🟡 DUPLEX · SCRIPTED UIs', hint: 'Arena / CI / Artifacts. Compress input and help compress output.', keys: ['chronosArena','chronos','janus'] },
   { label: '🔴 BINARY TRANSPORT', hint: 'Needs middleware / tool-call decoder.', keys: ['omegaXi','omegaE8'] },
   { label: '📝 SEMANTIC (lossy, LLM-readable)', hint: 'Directly readable, not byte-exact.', keys: ['light','balanced','max','extreme','caveMan','dragi','wenyan','composite','dragiScale','ordos','asgJson','astCode','noether','holographic','caveHolo','ibCaveHolo'] },
@@ -142,6 +143,7 @@ const LABEL: Record<string, string> = {
   caesura: '═ CAESURA · Whitespace-Convention Canonicalization Pre-Pass',
   syntagma: '➡ SYNTAGMA · Hangul Canonical-Decomposition Restoration Pre-Pass',
   prosopon: '₪ PROSOPON · Mojibake Wrong-Codepage Restoration Pre-Pass',
+  epistle: '℃ EPISTLE · Quoted-Printable MIME Restoration Pre-Pass',
   light: 'Light', balanced: 'Balanced', max: 'Max', extreme: 'Extreme',
   losslessAscii: 'Lossless ASCII', omegaXi: '⚡ Ω-Ξ Atom', omegaE8: 'Σ₈ Ω-Σ E8-Seed', eidolon: '👻 EIDOLON',
   ltp: '📐 LTP', prometheus: '🔥 Prometheus', zeta: 'Ζ Zeta Duplex', janus: '🏛 Janus',
@@ -334,6 +336,7 @@ export default function Workbench() {
   const [caesuraRes, setCaesuraRes] = useState<CaesuraResult | null>(null);
   const [syntagmaRes, setSyntagmaRes] = useState<SyntagmaResult | null>(null);
   const [prosoponRes, setProsoponRes] = useState<ProsoponResult | null>(null);
+  const [epistleRes, setEpistleRes] = useState<EpistleResult | null>(null);
   const [axiomLedger, setAxiomLedger] = useState<AxiomLedgerEntry[]>([]);
   const [includeDecoder, setIncludeDecoder] = useState(false);
   const [asyncBusy, setAsyncBusy] = useState(false);
@@ -429,6 +432,7 @@ export default function Workbench() {
       setCaesuraRes(data.caesura);
       setSyntagmaRes(data.syntagma);
       setProsoponRes(data.prosopon);
+      setEpistleRes(data.epistle);
       setAsyncBusy(false);
     };
     worker.onerror = (event) => {
@@ -474,6 +478,7 @@ export default function Workbench() {
       case 'caesura': return { out: caesuraRes?.wire ?? '⏳ Computing CAESURA…', back: caesuraRes?.decoded ?? input, exact: !!caesuraRes?.exact, inTok: caesuraRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: caesuraRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: caesuraRes?.decoderPrompt ?? '', notes: caesuraRes ? `${caesuraRes.notes}; one-chat cost=${caesuraRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'syntagma': return { out: syntagmaRes?.wire ?? '⏳ Computing SYNTAGMA…', back: syntagmaRes?.decoded ?? input, exact: !!syntagmaRes?.exact, inTok: syntagmaRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: syntagmaRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: syntagmaRes?.decoderPrompt ?? '', notes: syntagmaRes ? `${syntagmaRes.notes}; one-chat cost=${syntagmaRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'prosopon': return { out: prosoponRes?.wire ?? '⏳ Computing PROSOPON…', back: prosoponRes?.decoded ?? input, exact: !!prosoponRes?.exact, inTok: prosoponRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: prosoponRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: prosoponRes?.decoderPrompt ?? '', notes: prosoponRes ? `${prosoponRes.notes}; one-chat cost=${prosoponRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'epistle': return { out: epistleRes?.wire ?? '⏳ Computing EPISTLE…', back: epistleRes?.decoded ?? input, exact: !!epistleRes?.exact, inTok: epistleRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: epistleRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: epistleRes?.decoderPrompt ?? '', notes: epistleRes ? `${epistleRes.notes}; one-chat cost=${epistleRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'palimpsest': return { out: palimpsestRes?.wire ?? '⏳ Computing PALIMPSEST…', back: palimpsestRes?.decoded ?? input, exact: !!palimpsestRes?.exact, inTok: palimpsestRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: palimpsestRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: palimpsestRes?.decoderPrompt ?? '', notes: palimpsestRes ? `${palimpsestRes.notes}; one-chat cost=${palimpsestRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'thoth': return { out: thothRes?.wire ?? '⏳ Computing THOTH…', back: thothRes?.decoded ?? input, exact: !!thothRes?.exact, inTok: thothRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: thothRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: thothRes?.decoderPrompt ?? '', notes: thothRes ? `${thothRes.notes}; one-chat cost=${thothRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'sequoyah': return { out: sequoyahRes?.wire ?? '⏳ Computing SEQUOYAH…', back: sequoyahRes?.decoded ?? input, exact: !!sequoyahRes?.exact, inTok: sequoyahRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: sequoyahRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: sequoyahRes?.decoderPrompt ?? '', notes: sequoyahRes ? `${sequoyahRes.notes}; one-chat cost=${sequoyahRes.messageTokens} tokens` : 'Computing in codec worker…' };
@@ -547,7 +552,7 @@ export default function Workbench() {
       case 'ibCaveHolo': return { out: ibCaveHolo.output, back: input, exact: false, inTok: countTokens(input,'o200k_base'), outTok: countTokens(ibCaveHolo.output,'o200k_base'), preamble: ibCaveHolo.decoderPrompt + '\n\nOUTPUT CONTRACT: Reuse the same $codes and omit low-density filler in replies. Protected units stay verbatim; code fences verbatim.', notes: 'Pruned semantic.' };
       default: return { out: advancedPreset.output, back: advancedPreset.roundTrip, exact: false, inTok: countTokens(input,'o200k_base'), outTok: countTokens(advancedPreset.output,'o200k_base'), preamble: advancedPreset.decoderPreamble, notes: PRESETS[codec as keyof typeof PRESETS]?.hint ?? '' };
     }
-  }, [codec, input, lossless, omegaXiRes, omegaE8Res, ltpRes, promRes, zetaRes, janusRes, sigmaRes, stencilRes, chronosRes, caRes, nexusRes, mnemeRes, mnemeNexusRes, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, harmoniaRes, aetherRes, panaceaRes, synapseRes, noesisRes, apeironRes, pantheonRes, telosRes, archeRes, genesisRes, omniRes, khorosRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, cavemanDefault, dragiFull, wenyan, composite, dragiScale, ordos, asg, ast, noether, holographic, caveHolo, ibCaveHolo, advancedPreset, cavemanLevel, mnemeDict, hermesContractRes, chironRes, ariadneRes, sibylRes, sequoyahRes, thothRes, palimpsestRes, daedalusRes, orthosRes, stentorRes, abacusRes, procrustesRes, circeRes, chimeraRes, caesuraRes, syntagmaRes, prosoponRes]);
+  }, [codec, input, lossless, omegaXiRes, omegaE8Res, ltpRes, promRes, zetaRes, janusRes, sigmaRes, stencilRes, chronosRes, caRes, nexusRes, mnemeRes, mnemeNexusRes, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, harmoniaRes, aetherRes, panaceaRes, synapseRes, noesisRes, apeironRes, pantheonRes, telosRes, archeRes, genesisRes, omniRes, khorosRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, cavemanDefault, dragiFull, wenyan, composite, dragiScale, ordos, asg, ast, noether, holographic, caveHolo, ibCaveHolo, advancedPreset, cavemanLevel, mnemeDict, hermesContractRes, chironRes, ariadneRes, sibylRes, sequoyahRes, thothRes, palimpsestRes, daedalusRes, orthosRes, stentorRes, abacusRes, procrustesRes, circeRes, chimeraRes, caesuraRes, syntagmaRes, prosoponRes, epistleRes]);
 
   const rows: ParetoRow[] = useMemo(() => {
     const inTok = countTokens(input, 'o200k_base');
@@ -595,6 +600,7 @@ export default function Workbench() {
     if (caesuraRes?.exact) out.push({ key:'caesura', label:LABEL.caesura, exact:true, inTokens:caesuraRes.inTokens, outTokens:caesuraRes.messageTokens, savingsPct:caesuraRes.inTokens ? ((caesuraRes.inTokens-caesuraRes.messageTokens)/caesuraRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`applied=${caesuraRes.caesuraApplied}; nbsp=${caesuraRes.caesuraNbspSpans}/narrow=${caesuraRes.caesuraNarrowSpans} span(s); dblSpace=${caesuraRes.caesuraDoubleSpace}` });
     if (syntagmaRes?.exact) out.push({ key:'syntagma', label:LABEL.syntagma, exact:true, inTokens:syntagmaRes.inTokens, outTokens:syntagmaRes.messageTokens, savingsPct:syntagmaRes.inTokens ? ((syntagmaRes.inTokens-syntagmaRes.messageTokens)/syntagmaRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`applied=${syntagmaRes.syntagmaApplied}; ${syntagmaRes.syntagmaSpans} span(s)/${syntagmaRes.syntagmaSyllables} syllable(s) recomposed` });
     if (prosoponRes?.exact) out.push({ key:'prosopon', label:LABEL.prosopon, exact:true, inTokens:prosoponRes.inTokens, outTokens:prosoponRes.messageTokens, savingsPct:prosoponRes.inTokens ? ((prosoponRes.inTokens-prosoponRes.messageTokens)/prosoponRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`applied=${prosoponRes.prosoponApplied}; ${prosoponRes.prosoponSpans} mojibake span(s) restored` });
+    if (epistleRes?.exact) out.push({ key:'epistle', label:LABEL.epistle, exact:true, inTokens:epistleRes.inTokens, outTokens:epistleRes.messageTokens, savingsPct:epistleRes.inTokens ? ((epistleRes.inTokens-epistleRes.messageTokens)/epistleRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`applied=${epistleRes.epistleApplied}; ${epistleRes.epistleSpans} quoted-printable span(s) restored` });
     if (palimpsestRes?.exact) out.push({ key:'palimpsest', label:LABEL.palimpsest, exact:true, inTokens:palimpsestRes.inTokens, outTokens:palimpsestRes.messageTokens, savingsPct:palimpsestRes.inTokens ? ((palimpsestRes.inTokens-palimpsestRes.messageTokens)/palimpsestRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${palimpsestRes.outTokens}; contract=${palimpsestRes.contractTokens}; ${palimpsestRes.armsRun} arms, winner ${palimpsestRes.winningArm}; beat default by ${palimpsestRes.defaultM-palimpsestRes.messageTokens}` });
     if (thothRes?.exact) out.push({ key:'thoth', label:LABEL.thoth, exact:true, inTokens:thothRes.inTokens, outTokens:thothRes.messageTokens, savingsPct:thothRes.inTokens ? ((thothRes.inTokens-thothRes.messageTokens)/thothRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${thothRes.outTokens}; contract=${thothRes.contractTokens}; deterministic; ${thothRes.arms} arms; script=${thothRes.script}` });
     if (sequoyahRes?.exact) out.push({ key:'sequoyah', label:LABEL.sequoyah, exact:true, inTokens:sequoyahRes.inTokens, outTokens:sequoyahRes.messageTokens, savingsPct:sequoyahRes.inTokens ? ((sequoyahRes.inTokens-sequoyahRes.messageTokens)/sequoyahRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${sequoyahRes.outTokens}; contract=${sequoyahRes.contractTokens}; deterministic; script=${sequoyahRes.script}` });
@@ -681,7 +687,7 @@ export default function Workbench() {
     setMnemeDict([]);
   }, []);
 
-  const decoderIsInline = codec === 'hermesContract' || codec === 'chiron' || codec === 'ariadne' || codec === 'sibyl' || codec === 'sequoyah' || codec === 'thoth' || codec === 'palimpsest' || codec === 'daedalus' || codec === 'orthos' || codec === 'stentor' || codec === 'abacus' || codec === 'procrustes' || codec === 'circe' || codec === 'chimera' || codec === 'caesura' || codec === 'syntagma' || codec === 'prosopon';
+  const decoderIsInline = codec === 'hermesContract' || codec === 'chiron' || codec === 'ariadne' || codec === 'sibyl' || codec === 'sequoyah' || codec === 'thoth' || codec === 'palimpsest' || codec === 'daedalus' || codec === 'orthos' || codec === 'stentor' || codec === 'abacus' || codec === 'procrustes' || codec === 'circe' || codec === 'chimera' || codec === 'caesura' || codec === 'syntagma' || codec === 'prosopon' || codec === 'epistle';
   const finalOut = includeDecoder ? (decoderIsInline ? selected.preamble : selected.preamble + '\n\n' + selected.out) : selected.out;
   const finalOutTokens = includeDecoder ? countTokens(finalOut, 'o200k_base') : selected.outTok;
 
@@ -716,7 +722,7 @@ export default function Workbench() {
     URL.revokeObjectURL(url);
   }, [finalOut, codec]);
 
-  const exactLane = ['khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode','hermesContract','chiron','ariadne','sibyl','sequoyah','thoth','palimpsest','daedalus','orthos','stentor','abacus','procrustes','circe','chimera','caesura','syntagma','prosopon'].includes(codec);
+  const exactLane = ['khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode','hermesContract','chiron','ariadne','sibyl','sequoyah','thoth','palimpsest','daedalus','orthos','stentor','abacus','procrustes','circe','chimera','caesura','syntagma','prosopon','epistle'].includes(codec);
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
