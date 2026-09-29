@@ -66,6 +66,7 @@ import { circeEncode } from '../lib/omega/circe';
 import { chimeraEncode } from '../lib/omega/chimera';
 import { caesuraEncode } from '../lib/omega/caesura';
 import { syntagmaEncode } from '../lib/omega/syntagma';
+import { prosoponEncode } from '../lib/omega/prosopon';
 import { kappaEncode } from '../lib/omega/kappa';
 import { phraseEncode } from '../lib/omega/phrase';
 import { tauEncode } from '../lib/omega/tau';
@@ -180,6 +181,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const chimera = chimeraEncode(input, 'o200k_base', { budgetMs: 6000, maxArms: 1 });
       const caesura = caesuraEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
       const syntagma = syntagmaEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const prosopon = prosoponEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
 
       const response: CodecWorkerResponse = {
         id,
@@ -228,6 +230,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         chimera,
         caesura,
         syntagma,
+        prosopon,
         rosetta,
         harmonia,
         aether,
