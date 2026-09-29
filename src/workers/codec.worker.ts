@@ -51,6 +51,23 @@ import { proteusEncode } from '../lib/omega/proteus';
 import { logosEncode } from '../lib/omega/logos';
 import { hermesEncode } from '../lib/omega/hermes';
 import { hermesContractEncode } from '../lib/omega/hermes-contract';
+import { chironEncode } from '../lib/omega/chiron';
+import { ariadneEncode } from '../lib/omega/ariadne';
+import { sibylEncode } from '../lib/omega/sibyl';
+import { sequoyahEncode } from '../lib/omega/sequoyah';
+import { thothEncode } from '../lib/omega/thoth';
+import { palimpsestEncode } from '../lib/omega/palimpsest';
+import { daedalusEncode } from '../lib/omega/daedalus';
+import { orthosEncode } from '../lib/omega/orthos';
+import { stentorEncode } from '../lib/omega/stentor';
+import { abacusEncode } from '../lib/omega/abacus';
+import { procrustesEncode } from '../lib/omega/procrustes';
+import { circeEncode } from '../lib/omega/circe';
+import { chimeraEncode } from '../lib/omega/chimera';
+import { caesuraEncode } from '../lib/omega/caesura';
+import { syntagmaEncode } from '../lib/omega/syntagma';
+import { prosoponEncode } from '../lib/omega/prosopon';
+import { epistleEncode } from '../lib/omega/epistle';
 import { kappaEncode } from '../lib/omega/kappa';
 import { phraseEncode } from '../lib/omega/phrase';
 import { tauEncode } from '../lib/omega/tau';
@@ -150,6 +167,23 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const phrase = phraseEncode(input, 'o200k_base');
       const tau = tauEncode(input, 'o200k_base');
       const hermesContract = hermesContractEncode(input, 'o200k_base');
+      const chiron = chironEncode(input, 'o200k_base');
+      const ariadne = ariadneEncode(input, 'o200k_base');
+      const sibyl = sibylEncode(input, 'o200k_base', { budgetMs: 4000 });
+      const sequoyah = sequoyahEncode(input, 'o200k_base', { probeScale: 0.5, wordGrid: [0, 20] });
+      const thoth = thothEncode(input, 'o200k_base', { probeScale: 0.2, wordGrid: [0, 24] });
+      const palimpsest = palimpsestEncode(input, 'o200k_base', { budgetMs: 6000, maxArms: 3 });
+      const daedalus = daedalusEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const orthos = orthosEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const stentor = stentorEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const abacus = abacusEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const procrustes = procrustesEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const circe = circeEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const chimera = chimeraEncode(input, 'o200k_base', { budgetMs: 6000, maxArms: 1 });
+      const caesura = caesuraEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const syntagma = syntagmaEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const prosopon = prosoponEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const epistle = epistleEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
 
       const response: CodecWorkerResponse = {
         id,
@@ -183,6 +217,23 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         zenith,
         eclipse,
         hermesContract,
+        chiron,
+        ariadne,
+        sibyl,
+        sequoyah,
+        thoth,
+        palimpsest,
+        daedalus,
+        orthos,
+        stentor,
+        abacus,
+        procrustes,
+        circe,
+        chimera,
+        caesura,
+        syntagma,
+        prosopon,
+        epistle,
         rosetta,
         harmonia,
         aether,

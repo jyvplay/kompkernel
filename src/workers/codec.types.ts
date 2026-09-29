@@ -53,6 +53,23 @@ import type { KernelResult } from '../lib/omega/kernel';
 import type { ZenithResult } from '../lib/omega/zenith';
 import type { EclipseResult } from '../lib/omega/eclipse';
 import type { HermesContractResult } from '../lib/omega/hermes-contract';
+import type { ChironResult } from '../lib/omega/chiron';
+import type { AriadneResult } from '../lib/omega/ariadne';
+import type { SibylResult } from '../lib/omega/sibyl';
+import type { SequoyahResult } from '../lib/omega/sequoyah';
+import type { ThothResult } from '../lib/omega/thoth';
+import type { PalimpsestResult } from '../lib/omega/palimpsest';
+import type { DaedalusResult } from '../lib/omega/daedalus';
+import type { OrthosResult } from '../lib/omega/orthos';
+import type { StentorResult } from '../lib/omega/stentor';
+import type { AbacusResult } from '../lib/omega/abacus';
+import type { ProcrustesResult } from '../lib/omega/procrustes';
+import type { CirceResult } from '../lib/omega/circe';
+import type { ChimeraResult } from '../lib/omega/chimera';
+import type { CaesuraResult } from '../lib/omega/caesura';
+import type { SyntagmaResult } from '../lib/omega/syntagma';
+import type { ProsoponResult } from '../lib/omega/prosopon';
+import type { EpistleResult } from '../lib/omega/epistle';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -121,6 +138,23 @@ export interface CodecWorkerResult {
   zenith: ZenithResult;
   eclipse: EclipseResult;
   hermesContract: HermesContractResult;
+  chiron: ChironResult;
+  ariadne: AriadneResult;
+  sibyl: SibylResult;
+  sequoyah: SequoyahResult;
+  thoth: ThothResult;
+  palimpsest: PalimpsestResult;
+  daedalus: DaedalusResult;
+  orthos: OrthosResult;
+  stentor: StentorResult;
+  abacus: AbacusResult;
+  procrustes: ProcrustesResult;
+  circe: CirceResult;
+  chimera: ChimeraResult;
+  caesura: CaesuraResult;
+  syntagma: SyntagmaResult;
+  prosopon: ProsoponResult;
+  epistle: EpistleResult;
 }
 
 export interface CodecWorkerFailure {
