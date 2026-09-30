@@ -50,6 +50,7 @@ import { panoptesEncode } from './panoptes';
 import { epistemeEncode } from './episteme';
 import { metatronEncode } from './metatron';
 import { stoicheiaEncode, stoicheiaDecode } from './stoicheia';
+import { vexillaEncode, vexillaDecode } from './vexilla';
 import { valenceEncode, valenceDecode } from './valence';
 
 export interface CodecEvaluationRun {
@@ -134,6 +135,11 @@ export async function evaluateAllCodecsDynamically(
   await evalCodec('stoicheia', (t, e) => {
     const r = stoicheiaEncode(t, e);
     return { wire: r.wire, decoded: stoicheiaDecode(r.wire), exact: r.exact, outTokens: r.messageTokens };
+  });
+
+  await evalCodec('vexilla', (t, e) => {
+    const r = vexillaEncode(t, e);
+    return { wire: r.wire, decoded: vexillaDecode(r.wire), exact: r.exact, outTokens: r.messageTokens };
   });
 
   await evalCodec('proteus', async (t, e) => { const r = await proteusEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });

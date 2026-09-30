@@ -95,6 +95,7 @@ import { panoptesEncode } from './panoptes';
 import { epistemeEncode } from './episteme';
 import { metatronEncode } from './metatron';
 import { stoicheiaEncode, stoicheiaDecode } from './stoicheia';
+import { vexillaEncode, vexillaDecode } from './vexilla';
 import { kappaEncode } from './kappa';
 import { phraseEncode } from './phrase';
 import { tauEncode } from './tau';
@@ -683,6 +684,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'stoicheia', label: 'Σ STOICHEIA (Universal Unicode Styled-Alphabet Restoration Codec)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = stoicheiaEncode(t, enc); return { output: r.wire, decoded: stoicheiaDecode(r.wire), note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'vexilla', label: '⚑ VEXILLA (Rule-Based Emoji Flag Restoration Codec)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = vexillaEncode(t, enc); return { output: r.wire, decoded: vexillaDecode(r.wire), note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'palimpsest', label: '⎈ PALIMPSEST (Configuration Portfolio)', family: 'exact', fidelity: 'exact',

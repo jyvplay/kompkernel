@@ -74,6 +74,7 @@ import { panoptesEncode } from '../lib/omega/panoptes';
 import { epistemeEncode } from '../lib/omega/episteme';
 import { metatronEncode } from '../lib/omega/metatron';
 import { stoicheiaEncode } from '../lib/omega/stoicheia';
+import { vexillaEncode } from '../lib/omega/vexilla';
 import { kappaEncode } from '../lib/omega/kappa';
 import { phraseEncode } from '../lib/omega/phrase';
 import { tauEncode } from '../lib/omega/tau';
@@ -196,6 +197,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const episteme = epistemeEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
       const metatron = metatronEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
       const stoicheia = stoicheiaEncode(input, 'o200k_base');
+      const vexilla = vexillaEncode(input, 'o200k_base');
 
       const response: CodecWorkerResponse = {
         id,
@@ -252,6 +254,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         episteme,
         metatron,
         stoicheia,
+        vexilla,
         rosetta,
         harmonia,
         aether,
