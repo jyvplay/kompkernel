@@ -53,6 +53,7 @@ import { stoicheiaEncode, stoicheiaDecode } from './stoicheia';
 import { vexillaEncode, vexillaDecode } from './vexilla';
 import { lysisEncode, lysisDecode } from './lysis';
 import { krasisEncode, krasisDecode } from './krasis';
+import { pinaxEncode, pinaxDecode } from './pinax';
 import { valenceEncode, valenceDecode } from './valence';
 
 export interface CodecEvaluationRun {
@@ -152,6 +153,11 @@ export async function evaluateAllCodecsDynamically(
   await evalCodec('krasis', (t, e) => {
     const r = krasisEncode(t, e);
     return { wire: r.wire, decoded: krasisDecode(r.wire), exact: r.exact, outTokens: r.messageTokens };
+  });
+
+  await evalCodec('pinax', (t, e) => {
+    const r = pinaxEncode(t, e);
+    return { wire: r.wire, decoded: pinaxDecode(r.wire), exact: r.exact, outTokens: r.messageTokens };
   });
 
   await evalCodec('proteus', async (t, e) => { const r = await proteusEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });

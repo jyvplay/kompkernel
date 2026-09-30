@@ -79,6 +79,7 @@ import type { StoicheiaResult } from '../lib/omega/stoicheia';
 import type { VexillaResult } from '../lib/omega/vexilla';
 import type { LysisResult } from '../lib/omega/lysis';
 import type { KrasisResult } from '../lib/omega/krasis';
+import type { PinaxResult } from '../lib/omega/pinax';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -173,6 +174,7 @@ export interface CodecWorkerResult {
   vexilla: VexillaResult;
   lysis: LysisResult;
   krasis: KrasisResult;
+  pinax: PinaxResult;
 }
 
 export interface CodecWorkerFailure {

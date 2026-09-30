@@ -77,6 +77,7 @@ import { stoicheiaEncode } from '../lib/omega/stoicheia';
 import { vexillaEncode } from '../lib/omega/vexilla';
 import { lysisEncode } from '../lib/omega/lysis';
 import { krasisEncode } from '../lib/omega/krasis';
+import { pinaxEncode } from '../lib/omega/pinax';
 import { kappaEncode } from '../lib/omega/kappa';
 import { phraseEncode } from '../lib/omega/phrase';
 import { tauEncode } from '../lib/omega/tau';
@@ -202,6 +203,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const vexilla = vexillaEncode(input, 'o200k_base');
       const lysis = lysisEncode(input, 'o200k_base');
       const krasis = krasisEncode(input, 'o200k_base');
+      const pinax = pinaxEncode(input, 'o200k_base');
 
       const response: CodecWorkerResponse = {
         id,
@@ -261,6 +263,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         vexilla,
         lysis,
         krasis,
+        pinax,
         rosetta,
         harmonia,
         aether,

@@ -47,6 +47,7 @@ import { stoicheiaEncode, stoicheiaDecode } from './stoicheia';
 import { vexillaEncode, vexillaDecode, VEXILLA_MARK } from './vexilla';
 import { lysisEncode, lysisDecode, LYSIS_MARK } from './lysis';
 import { krasisEncode, krasisDecode, KRASIS_MARK } from './krasis';
+import { pinaxEncode, pinaxDecode, PINAX_MARK } from './pinax';
 
 /* ---------------------------------------------------------------------------
  * 0. WIRE TAG CONTRACTS & ENVELOPE PREFIXES
@@ -476,6 +477,9 @@ export function metatronEncode(
   // --- CANDIDATE 10: KRASIS-⊕ Unicode Canonical-Composition (NFD→NFC) ---
   const krasisRes = krasisEncode(text, enc);
 
+  // --- CANDIDATE 11: PINAX-▦ Byte-Exact Columnar Record-Projection ---
+  const pinaxRes = pinaxEncode(text, enc);
+
   // --- TOURNAMENT ARBITRATION ---
   interface Candidate {
     name: string;
@@ -576,6 +580,14 @@ export function metatronEncode(
       prompt: krasisRes.decoderPrompt,
     },
     {
+      name: 'pinax',
+      wire: pinaxRes.wire,
+      decoded: pinaxDecode(pinaxRes.wire),
+      tokens: pinaxRes.messageTokens,
+      notes: pinaxRes.notes,
+      prompt: pinaxRes.decoderPrompt,
+    },
+    {
       name: 'identity',
       wire: text,
       decoded: text,
@@ -619,6 +631,7 @@ export function metatronDecode(wire: string): string {
   if (wire.startsWith(VEXILLA_MARK)) return vexillaDecode(wire); // VEXILLA-⚑ MARK °
   if (wire.startsWith(LYSIS_MARK)) return lysisDecode(wire); // LYSIS-λ MARK ª
   if (wire.startsWith(KRASIS_MARK)) return krasisDecode(wire); // KRASIS-⊕ MARK ¨
+  if (wire.startsWith(PINAX_MARK)) return pinaxDecode(wire); // PINAX-▦ MARK ▦
   if (wire.startsWith(METATRON_INLINE_START)) {
     const inDec = metatronDecodeInline(wire);
     return metatronRestoreStructure(inDec);
