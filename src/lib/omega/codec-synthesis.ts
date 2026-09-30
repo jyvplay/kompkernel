@@ -44,6 +44,11 @@ import { phoenixEncode, phoenixDecode } from './phoenix';
 import { valkyrieEncode, valkyrieDecode } from './valkyrie';
 import { solarisEncode, solarisDecode } from './solaris';
 import { hyperionEncode, hyperionDecode } from './hyperion';
+import { arithmosEncode } from './arithmos';
+import { kallosEncode } from './kallos';
+import { panoptesEncode } from './panoptes';
+import { epistemeEncode } from './episteme';
+import { metatronEncode } from './metatron';
 import { valenceEncode, valenceDecode } from './valence';
 
 export interface CodecEvaluationRun {
@@ -99,6 +104,31 @@ export async function evaluateAllCodecsDynamically(
       });
     }
   };
+
+  await evalCodec('arithmos', (t, e) => {
+    const r = arithmosEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.messageTokens };
+  });
+
+  await evalCodec('kallos', (t, e) => {
+    const r = kallosEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.messageTokens };
+  });
+
+  await evalCodec('panoptes', (t, e) => {
+    const r = panoptesEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.messageTokens };
+  });
+
+  await evalCodec('episteme', (t, e) => {
+    const r = epistemeEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.messageTokens };
+  });
+
+  await evalCodec('metatron', (t, e) => {
+    const r = metatronEncode(t, e);
+    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.messageTokens };
+  });
 
   await evalCodec('proteus', async (t, e) => { const r = await proteusEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });
 
