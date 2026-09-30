@@ -52,6 +52,7 @@ import { metatronEncode } from './metatron';
 import { stoicheiaEncode, stoicheiaDecode } from './stoicheia';
 import { vexillaEncode, vexillaDecode } from './vexilla';
 import { lysisEncode, lysisDecode } from './lysis';
+import { krasisEncode, krasisDecode } from './krasis';
 import { valenceEncode, valenceDecode } from './valence';
 
 export interface CodecEvaluationRun {
@@ -146,6 +147,11 @@ export async function evaluateAllCodecsDynamically(
   await evalCodec('lysis', (t, e) => {
     const r = lysisEncode(t, e);
     return { wire: r.wire, decoded: lysisDecode(r.wire), exact: r.exact, outTokens: r.messageTokens };
+  });
+
+  await evalCodec('krasis', (t, e) => {
+    const r = krasisEncode(t, e);
+    return { wire: r.wire, decoded: krasisDecode(r.wire), exact: r.exact, outTokens: r.messageTokens };
   });
 
   await evalCodec('proteus', async (t, e) => { const r = await proteusEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });

@@ -97,6 +97,7 @@ import { metatronEncode } from './metatron';
 import { stoicheiaEncode, stoicheiaDecode } from './stoicheia';
 import { vexillaEncode, vexillaDecode } from './vexilla';
 import { lysisEncode, lysisDecode } from './lysis';
+import { krasisEncode, krasisDecode } from './krasis';
 import { kappaEncode } from './kappa';
 import { phraseEncode } from './phrase';
 import { tauEncode } from './tau';
@@ -693,6 +694,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'lysis', label: 'λ LYSIS (Escape-Sequence / Character-Reference Resolution Codec)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = lysisEncode(t, enc); return { output: r.wire, decoded: lysisDecode(r.wire), note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'krasis', label: '⊕ KRASIS (Unicode Canonical-Composition NFD→NFC Restoration Codec)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = krasisEncode(t, enc); return { output: r.wire, decoded: krasisDecode(r.wire), note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'palimpsest', label: '⎈ PALIMPSEST (Configuration Portfolio)', family: 'exact', fidelity: 'exact',
