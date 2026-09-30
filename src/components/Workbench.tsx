@@ -41,6 +41,7 @@ import type { EpistemeResult } from '../lib/omega/episteme';
 import type { MetatronResult } from '../lib/omega/metatron';
 import type { StoicheiaResult } from '../lib/omega/stoicheia';
 import type { VexillaResult } from '../lib/omega/vexilla';
+import type { LysisResult } from '../lib/omega/lysis';
 import { omegaXiCompress, OMEGA_XI_SYSTEM_PROMPT, type OmegaXiResult } from '../lib/omega/atom-codec';
 import { ltpProject, type LtpResult } from '../lib/omega/ltp';
 import { compressPrometheusICDM, type PrometheusResult } from '../lib/omega/prometheus-icdm';
@@ -109,7 +110,7 @@ type CodecKey =
   | keyof typeof PRESETS
   | 'losslessAscii' | 'omegaXi' | 'omegaE8' | 'eidolon' | 'ltp' | 'prometheus' | 'zeta'
   | 'janus' | 'sigma' | 'stencil' | 'morph' | 'chronos' | 'chronosArena' | 'nexus' | 'mneme' | 'apex'
-  | 'arithmos' | 'kallos' | 'panoptes' | 'episteme' | 'metatron' | 'stoicheia' | 'vexilla'
+  | 'arithmos' | 'kallos' | 'panoptes' | 'episteme' | 'metatron' | 'stoicheia' | 'vexilla' | 'lysis'
   | 'caveMan' | 'dragi' | 'wenyan' | 'composite' | 'dragiScale' | 'ordos' | 'asgJson'
   | 'astCode' | 'hermesContract' | 'chiron' | 'ariadne' | 'sibyl' | 'sequoyah' | 'thoth' | 'palimpsest' | 'daedalus' | 'orthos' | 'stentor' | 'abacus' | 'procrustes' | 'circe' | 'chimera' | 'caesura' | 'syntagma' | 'prosopon' | 'epistle' | 'noether' | 'holographic' | 'caveHolo' | 'ibCaveHolo' | 'veritasVx' | 'quasar' | 'helixAp' | 'meridian' | 'plexus'
   | 'axiom' | 'orbit' | 'anaphora' | 'pulse' | 'tessera' | 'strata' | 'signet' | 'mosaic' | 'atlas' | 'aurora' | 'crown' | 'iris' | 'kernel' | 'zenith' | 'eclipse' | 'khoros' | 'omni' | 'genesis' | 'arche' | 'telos' | 'pantheon' | 'apeiron' | 'noesis' | 'synapse' | 'panacea' | 'aether' | 'harmonia' | 'rosetta' | 'kappa' | 'phrase' | 'tau';
@@ -127,7 +128,7 @@ interface ParetoRow {
 }
 
 const GROUPS: Array<{ label: string; hint: string; keys: CodecKey[] }> = [
-  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['metatron','stoicheia','vexilla','episteme','panoptes','kallos','arithmos','orthos','stentor','abacus','procrustes','circe','chimera','caesura','syntagma','prosopon','epistle','daedalus','palimpsest','sibyl','thoth','sequoyah','ariadne','chiron','hermesContract','khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
+  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['metatron','stoicheia','vexilla','lysis','episteme','panoptes','kallos','arithmos','orthos','stentor','abacus','procrustes','circe','chimera','caesura','syntagma','prosopon','epistle','daedalus','palimpsest','sibyl','thoth','sequoyah','ariadne','chiron','hermesContract','khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
   { label: '🟡 DUPLEX · SCRIPTED UIs', hint: 'Arena / CI / Artifacts. Compress input and help compress output.', keys: ['chronosArena','chronos','janus'] },
   { label: '🔴 BINARY TRANSPORT', hint: 'Needs middleware / tool-call decoder.', keys: ['omegaXi','omegaE8'] },
   { label: '📝 SEMANTIC (lossy, LLM-readable)', hint: 'Directly readable, not byte-exact.', keys: ['light','balanced','max','extreme','caveMan','dragi','wenyan','composite','dragiScale','ordos','asgJson','astCode','noether','holographic','caveHolo','ibCaveHolo'] },
@@ -137,6 +138,7 @@ const LABEL: Record<string, string> = {
   metatron: '⟁ METATRON · Structural & Morphological Dual-Lattice',
   stoicheia: 'Σ STOICHEIA · Unicode Styled-Alphabet Restoration',
   vexilla: '⚑ VEXILLA · Emoji Flag Restoration',
+  lysis: 'λ LYSIS · Escape-Sequence Resolution',
   episteme: '◈ EPISTEME · Morphological Transduction & Dual Lattice',
   panoptes: '👁 PANOPTES · Sovereign Composed Pre-Pass',
   kallos: '✧ KALLOS · Mathematical & Typography Restoration',
@@ -188,6 +190,7 @@ const LABEL: Record<string, string> = {
 
 const HINT: Record<string, string> = {
   metatron: "METATRON: Sovereign Universal Morphological, Structural & Dual-Lattice Lossless Codec. Canonicalizes Markdown headers (###, ##, ####), task checklists (- [x], - [ ]), table dividers, code fences, and typographic ligatures into 1-token geometric glyphs with 768+ tri-domain static operads and sovereign tournament selection.",
+  lysis: "LYSIS-λ: Resolves ASCII ESCAPE SEQUENCES back to their characters — the massive, uncaptured token cost of real ops/i18n payloads. JSON \\uXXXX (json.dumps ensure_ascii=True, Python's DEFAULT) and HTML &#N; numeric refs bloat non-English text 5–15x (field-reported 2026: a 7,800-char Chinese payload = 5,847 tok as UTF-8 vs 31,515 as \\uXXXX). LYSIS folds \\u00e9→é / &#8217;→’ by the exact json.dumps rule (no dictionary), self-verified byte-exact; the wire is shorter AND more readable. 14–74% on escaped payloads where the whole stack sits at 0%.",
   vexilla: "VEXILLA-⚑: Rule-based restoration of emoji FLAGS — the most token-expensive characters in ordinary chat/i18n/social copy that NO other codec touches. A single regional flag 🇺🇸 costs 4 tokens, a 15-flag locale list 60, a subdivision tag flag 🏴\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F} (Scotland) 26 — all rule-decomposable to 2-letter ISO codes / tag-latin with no dictionary. Self-verified byte-exact; tiny inline single-chat contract; up to ~64% on flag-dense text where the whole stack sits at 0%.",
   stoicheia: "STOICHEIA-Σ: Universal Unicode Mathematical-Alphanumeric & styled-script restoration. Recovers all 13 styled alphabet families (double-struck ℝℤ, script, fraktur, bold-italic, bold-script, sans variants, mono, bold, italic) plus the letterlike-symbol holes (ℝ ℂ ℕ ℤ ℚ ℍ 𝔽 ℬ ℱ) that KALLOS's four families miss — the exact output of fancy-text generators and math PDFs. Self-verified byte-exact; inline single-chat contract; large wins where the whole current stack sits at 0%.",
   episteme: "EPISTEME: Universal Epistemic Morphological Transduction & Dual-Lattice Lossless Codec. Restores Latin typographic ligatures (ff, fi, fl, ffi, ffl, st: U+FB00..U+FB06) and Roman numerals (U+2160..U+217B) to ASCII, saving 20-50% on academic papers & PDFs, combined with 640+ multi-domain static operads and sovereign composed multi-band fallbacks.",
@@ -366,6 +369,7 @@ export default function Workbench() {
   const [metatronRes, setMetatronRes] = useState<MetatronResult | null>(null);
   const [stoicheiaRes, setStoicheiaRes] = useState<StoicheiaResult | null>(null);
   const [vexillaRes, setVexillaRes] = useState<VexillaResult | null>(null);
+  const [lysisRes, setLysisRes] = useState<LysisResult | null>(null);
   const [axiomLedger, setAxiomLedger] = useState<AxiomLedgerEntry[]>([]);
   const [includeDecoder, setIncludeDecoder] = useState(false);
   const [asyncBusy, setAsyncBusy] = useState(false);
@@ -469,6 +473,7 @@ export default function Workbench() {
       setMetatronRes(data.metatron);
       setStoicheiaRes(data.stoicheia);
       setVexillaRes(data.vexilla);
+      setLysisRes(data.lysis);
       setAsyncBusy(false);
     };
     worker.onerror = (event) => {
@@ -507,6 +512,7 @@ export default function Workbench() {
       case 'metatron': return { out: metatronRes?.wire ?? '⏳ Computing METATRON…', back: metatronRes?.decoded ?? input, exact: !!metatronRes?.exact, inTok: metatronRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: metatronRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: metatronRes?.decoderPrompt ?? '', notes: metatronRes ? `${metatronRes.notes}; one-chat cost=${metatronRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'stoicheia': return { out: stoicheiaRes?.wire ?? '⏳ Computing STOICHEIA…', back: stoicheiaRes?.decoded ?? input, exact: !!stoicheiaRes?.exact, inTok: stoicheiaRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: stoicheiaRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: stoicheiaRes?.decoderPrompt ?? '', notes: stoicheiaRes ? `${stoicheiaRes.notes}; one-chat cost=${stoicheiaRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'vexilla': return { out: vexillaRes?.wire ?? '⏳ Computing VEXILLA…', back: vexillaRes?.decoded ?? input, exact: !!vexillaRes?.exact, inTok: vexillaRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: vexillaRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: vexillaRes?.decoderPrompt ?? '', notes: vexillaRes ? `${vexillaRes.notes}; one-chat cost=${vexillaRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'lysis': return { out: lysisRes?.wire ?? '⏳ Computing LYSIS…', back: lysisRes?.decoded ?? input, exact: !!lysisRes?.exact, inTok: lysisRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: lysisRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: lysisRes?.decoderPrompt ?? '', notes: lysisRes ? `${lysisRes.notes}; one-chat cost=${lysisRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'episteme': return { out: epistemeRes?.wire ?? '⏳ Computing EPISTEME…', back: epistemeRes?.decoded ?? input, exact: !!epistemeRes?.exact, inTok: epistemeRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: epistemeRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: epistemeRes?.decoderPrompt ?? '', notes: epistemeRes ? `${epistemeRes.notes}; one-chat cost=${epistemeRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'panoptes': return { out: panoptesRes?.wire ?? '⏳ Computing PANOPTES…', back: panoptesRes?.decoded ?? input, exact: !!panoptesRes?.exact, inTok: panoptesRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: panoptesRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: panoptesRes?.decoderPrompt ?? '', notes: panoptesRes ? `${panoptesRes.notes}; one-chat cost=${panoptesRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'kallos': return { out: kallosRes?.wire ?? '⏳ Computing KALLOS…', back: kallosRes?.decoded ?? input, exact: !!kallosRes?.exact, inTok: kallosRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: kallosRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: kallosRes?.decoderPrompt ?? '', notes: kallosRes ? `${kallosRes.notes}; one-chat cost=${kallosRes.messageTokens} tokens` : 'Computing in codec worker…' };
@@ -623,6 +629,7 @@ export default function Workbench() {
     if (metatronRes?.exact) out.push({ key:'metatron', label:LABEL.metatron, exact:true, inTokens:metatronRes.inTokens, outTokens:metatronRes.messageTokens, savingsPct:metatronRes.inTokens ? ((metatronRes.inTokens-metatronRes.messageTokens)/metatronRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${metatronRes.winner}; ${metatronRes.notes}` });
     if (stoicheiaRes?.exact && stoicheiaRes.applied) out.push({ key:'stoicheia', label:LABEL.stoicheia, exact:true, inTokens:stoicheiaRes.inTokens, outTokens:stoicheiaRes.messageTokens, savingsPct:stoicheiaRes.inTokens ? ((stoicheiaRes.inTokens-stoicheiaRes.messageTokens)/stoicheiaRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${stoicheiaRes.outTokens}; applied=${stoicheiaRes.applied}; ${stoicheiaRes.spans} styled span(s) restored across ${Object.keys(stoicheiaRes.familyCounts).length} alphabet family(ies)` });
     if (vexillaRes?.exact && vexillaRes.applied) out.push({ key:'vexilla', label:LABEL.vexilla, exact:true, inTokens:vexillaRes.inTokens, outTokens:vexillaRes.messageTokens, savingsPct:vexillaRes.inTokens ? ((vexillaRes.inTokens-vexillaRes.messageTokens)/vexillaRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${vexillaRes.outTokens}; applied=${vexillaRes.applied}; ${vexillaRes.regionSpans} regional-flag run(s) + ${vexillaRes.tagSpans} tag flag(s) restored` });
+    if (lysisRes?.exact && lysisRes.applied) out.push({ key:'lysis', label:LABEL.lysis, exact:true, inTokens:lysisRes.inTokens, outTokens:lysisRes.messageTokens, savingsPct:lysisRes.inTokens ? ((lysisRes.inTokens-lysisRes.messageTokens)/lysisRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${lysisRes.outTokens}; applied=${lysisRes.applied}; ${lysisRes.escapesFolded} escape(s) resolved across ${lysisRes.jsonRegions} JSON + ${lysisRes.htmlRegions} HTML region(s)` });
     if (epistemeRes?.exact) out.push({ key:'episteme', label:LABEL.episteme, exact:true, inTokens:epistemeRes.inTokens, outTokens:epistemeRes.messageTokens, savingsPct:epistemeRes.inTokens ? ((epistemeRes.inTokens-epistemeRes.messageTokens)/epistemeRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${epistemeRes.winner}; ${epistemeRes.notes}` });
     if (panoptesRes?.exact) out.push({ key:'panoptes', label:LABEL.panoptes, exact:true, inTokens:panoptesRes.inTokens, outTokens:panoptesRes.messageTokens, savingsPct:panoptesRes.inTokens ? ((panoptesRes.inTokens-panoptesRes.messageTokens)/panoptesRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${panoptesRes.panoptesWinner}; applied=${panoptesRes.panoptesApplied}; stages=${panoptesRes.panoptesStagesFired}; ${panoptesRes.notes}` });
     if (kallosRes?.exact) out.push({ key:'kallos', label:LABEL.kallos, exact:true, inTokens:kallosRes.inTokens, outTokens:kallosRes.messageTokens, savingsPct:kallosRes.inTokens ? ((kallosRes.inTokens-kallosRes.messageTokens)/kallosRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`wire=${kallosRes.outTokens}; applied=${kallosRes.kallosApplied}; ${kallosRes.kallosSpans} math/styled span(s) canonicalized` });
@@ -713,7 +720,7 @@ export default function Workbench() {
     out.push(mk('max', 'Max', convertAdvanced(input, PRESETS.max.options, adv).output, false, 'Moderate', PRESETS.max.hint));
     out.push(mk('extreme', 'Extreme', convertAdvanced(input, PRESETS.extreme.options, adv).output, false, 'Low', PRESETS.extreme.hint));
     return out.sort((a,b) => b.savingsPct - a.savingsPct || b.fidelityPct - a.fidelityPct);
-  }, [input, largeTextMode, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, harmoniaRes, aetherRes, panaceaRes, synapseRes, noesisRes, apeironRes, pantheonRes, telosRes, archeRes, genesisRes, omniRes, khorosRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, eidolonRes, nexusRes, mnemeRes, mnemeNexusRes, zetaRes, promRes, ltpRes, sigmaRes, stencilRes, morphRes, omegaE8Res, omegaXiRes, chronosRes, caRes, janusRes, dragiFull, cavemanDefault, wenyan, composite, dragiScale, ordos, noether, holographic, caveHolo, ibCaveHolo, asg, ast, adv, hermesContractRes, chironRes, ariadneRes, sibylRes, sequoyahRes, thothRes, palimpsestRes, daedalusRes, orthosRes, stentorRes, abacusRes, procrustesRes, circeRes, chimeraRes, caesuraRes, syntagmaRes, prosoponRes, epistleRes, arithmosRes, kallosRes, panoptesRes, epistemeRes, metatronRes, stoicheiaRes, vexillaRes]);
+  }, [input, largeTextMode, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, harmoniaRes, aetherRes, panaceaRes, synapseRes, noesisRes, apeironRes, pantheonRes, telosRes, archeRes, genesisRes, omniRes, khorosRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, eidolonRes, nexusRes, mnemeRes, mnemeNexusRes, zetaRes, promRes, ltpRes, sigmaRes, stencilRes, morphRes, omegaE8Res, omegaXiRes, chronosRes, caRes, janusRes, dragiFull, cavemanDefault, wenyan, composite, dragiScale, ordos, noether, holographic, caveHolo, ibCaveHolo, asg, ast, adv, hermesContractRes, chironRes, ariadneRes, sibylRes, sequoyahRes, thothRes, palimpsestRes, daedalusRes, orthosRes, stentorRes, abacusRes, procrustesRes, circeRes, chimeraRes, caesuraRes, syntagmaRes, prosoponRes, epistleRes, arithmosRes, kallosRes, panoptesRes, epistemeRes, metatronRes, stoicheiaRes, vexillaRes, lysisRes]);
 
   const selectedRow = rows.find((r) => r.key === codec);
 
@@ -764,7 +771,7 @@ export default function Workbench() {
     setMnemeDict([]);
   }, []);
 
-  const decoderIsInline = codec === 'hermesContract' || codec === 'chiron' || codec === 'ariadne' || codec === 'sibyl' || codec === 'sequoyah' || codec === 'thoth' || codec === 'palimpsest' || codec === 'daedalus' || codec === 'orthos' || codec === 'stentor' || codec === 'abacus' || codec === 'procrustes' || codec === 'circe' || codec === 'chimera' || codec === 'caesura' || codec === 'syntagma' || codec === 'prosopon' || codec === 'epistle' || codec === 'arithmos' || codec === 'kallos' || codec === 'panoptes' || codec === 'episteme' || codec === 'metatron' || codec === 'stoicheia' || codec === 'vexilla';
+  const decoderIsInline = codec === 'hermesContract' || codec === 'chiron' || codec === 'ariadne' || codec === 'sibyl' || codec === 'sequoyah' || codec === 'thoth' || codec === 'palimpsest' || codec === 'daedalus' || codec === 'orthos' || codec === 'stentor' || codec === 'abacus' || codec === 'procrustes' || codec === 'circe' || codec === 'chimera' || codec === 'caesura' || codec === 'syntagma' || codec === 'prosopon' || codec === 'epistle' || codec === 'arithmos' || codec === 'kallos' || codec === 'panoptes' || codec === 'episteme' || codec === 'metatron' || codec === 'stoicheia' || codec === 'vexilla' || codec === 'lysis';
   const finalOut = includeDecoder ? (decoderIsInline ? selected.preamble : selected.preamble + '\n\n' + selected.out) : selected.out;
   const finalOutTokens = includeDecoder ? countTokens(finalOut, 'o200k_base') : selected.outTok;
 
@@ -799,7 +806,7 @@ export default function Workbench() {
     URL.revokeObjectURL(url);
   }, [finalOut, codec]);
 
-  const exactLane = ['metatron','stoicheia','vexilla','episteme','panoptes','kallos','arithmos','khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode','hermesContract','chiron','ariadne','sibyl','sequoyah','thoth','palimpsest','daedalus','orthos','stentor','abacus','procrustes','circe','chimera','caesura','syntagma','prosopon','epistle'].includes(codec);
+  const exactLane = ['metatron','stoicheia','vexilla','lysis','episteme','panoptes','kallos','arithmos','khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode','hermesContract','chiron','ariadne','sibyl','sequoyah','thoth','palimpsest','daedalus','orthos','stentor','abacus','procrustes','circe','chimera','caesura','syntagma','prosopon','epistle'].includes(codec);
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">

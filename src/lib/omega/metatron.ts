@@ -45,6 +45,7 @@ import { kallosEncode, kallosDecode } from './kallos';
 import { arithmosEncode, arithmosDecode } from './arithmos';
 import { stoicheiaEncode, stoicheiaDecode } from './stoicheia';
 import { vexillaEncode, vexillaDecode, VEXILLA_MARK } from './vexilla';
+import { lysisEncode, lysisDecode, LYSIS_MARK } from './lysis';
 
 /* ---------------------------------------------------------------------------
  * 0. WIRE TAG CONTRACTS & ENVELOPE PREFIXES
@@ -468,6 +469,9 @@ export function metatronEncode(
   // --- CANDIDATE 8: VEXILLA-⚑ Rule-Based Emoji Flag Restoration ---
   const vexillaRes = vexillaEncode(text, enc);
 
+  // --- CANDIDATE 9: LYSIS-λ Escape-Sequence / Character-Reference Resolution ---
+  const lysisRes = lysisEncode(text, enc);
+
   // --- TOURNAMENT ARBITRATION ---
   interface Candidate {
     name: string;
@@ -552,6 +556,14 @@ export function metatronEncode(
       prompt: vexillaRes.decoderPrompt,
     },
     {
+      name: 'lysis',
+      wire: lysisRes.wire,
+      decoded: lysisDecode(lysisRes.wire),
+      tokens: lysisRes.messageTokens,
+      notes: lysisRes.notes,
+      prompt: lysisRes.decoderPrompt,
+    },
+    {
       name: 'identity',
       wire: text,
       decoded: text,
@@ -593,6 +605,7 @@ export function metatronEncode(
 export function metatronDecode(wire: string): string {
   if (wire.startsWith('\u203B')) return stoicheiaDecode(wire); // STOICHEIA-Σ MARK ※
   if (wire.startsWith(VEXILLA_MARK)) return vexillaDecode(wire); // VEXILLA-⚑ MARK °
+  if (wire.startsWith(LYSIS_MARK)) return lysisDecode(wire); // LYSIS-λ MARK ª
   if (wire.startsWith(METATRON_INLINE_START)) {
     const inDec = metatronDecodeInline(wire);
     return metatronRestoreStructure(inDec);
