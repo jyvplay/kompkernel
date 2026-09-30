@@ -49,6 +49,7 @@ import { kallosEncode } from './kallos';
 import { panoptesEncode } from './panoptes';
 import { epistemeEncode } from './episteme';
 import { metatronEncode } from './metatron';
+import { stoicheiaEncode, stoicheiaDecode } from './stoicheia';
 import { valenceEncode, valenceDecode } from './valence';
 
 export interface CodecEvaluationRun {
@@ -128,6 +129,11 @@ export async function evaluateAllCodecsDynamically(
   await evalCodec('metatron', (t, e) => {
     const r = metatronEncode(t, e);
     return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.messageTokens };
+  });
+
+  await evalCodec('stoicheia', (t, e) => {
+    const r = stoicheiaEncode(t, e);
+    return { wire: r.wire, decoded: stoicheiaDecode(r.wire), exact: r.exact, outTokens: r.messageTokens };
   });
 
   await evalCodec('proteus', async (t, e) => { const r = await proteusEncode(t, e); return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens }; });

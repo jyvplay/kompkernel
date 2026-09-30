@@ -43,6 +43,7 @@ import { aetherEncode, aetherDecode } from './aether';
 import { harmoniaEncode, harmoniaDecode } from './harmonia';
 import { kallosEncode, kallosDecode } from './kallos';
 import { arithmosEncode, arithmosDecode } from './arithmos';
+import { stoicheiaEncode, stoicheiaDecode } from './stoicheia';
 
 /* ---------------------------------------------------------------------------
  * 0. WIRE TAG CONTRACTS & ENVELOPE PREFIXES
@@ -460,6 +461,9 @@ export function metatronEncode(
   // --- CANDIDATE 6: Inline Operad Lattice ---
   const inlineRes = buildMetatronInlineWire(structRes.applied ? structWire : text, enc);
 
+  // --- CANDIDATE 7: STOICHEIA-Σ Extended Styled-Alphabet Restoration ---
+  const stoicheiaRes = stoicheiaEncode(text, enc);
+
   // --- TOURNAMENT ARBITRATION ---
   interface Candidate {
     name: string;
@@ -528,6 +532,14 @@ export function metatronEncode(
       prompt: METATRON_SYSTEM_PROMPT,
     },
     {
+      name: 'stoicheia',
+      wire: stoicheiaRes.wire,
+      decoded: stoicheiaDecode(stoicheiaRes.wire),
+      tokens: stoicheiaRes.messageTokens,
+      notes: stoicheiaRes.notes,
+      prompt: stoicheiaRes.decoderPrompt,
+    },
+    {
       name: 'identity',
       wire: text,
       decoded: text,
@@ -567,6 +579,7 @@ export function metatronEncode(
 }
 
 export function metatronDecode(wire: string): string {
+  if (wire.startsWith('\u203B')) return stoicheiaDecode(wire); // STOICHEIA-Σ MARK ※
   if (wire.startsWith(METATRON_INLINE_START)) {
     const inDec = metatronDecodeInline(wire);
     return metatronRestoreStructure(inDec);

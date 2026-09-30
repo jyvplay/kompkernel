@@ -75,6 +75,7 @@ import type { KallosResult } from '../lib/omega/kallos';
 import type { PanoptesResult } from '../lib/omega/panoptes';
 import type { EpistemeResult } from '../lib/omega/episteme';
 import type { MetatronResult } from '../lib/omega/metatron';
+import type { StoicheiaResult } from '../lib/omega/stoicheia';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -165,6 +166,7 @@ export interface CodecWorkerResult {
   panoptes: PanoptesResult;
   episteme: EpistemeResult;
   metatron: MetatronResult;
+  stoicheia: StoicheiaResult;
 }
 
 export interface CodecWorkerFailure {

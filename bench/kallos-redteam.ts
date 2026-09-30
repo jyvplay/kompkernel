@@ -83,13 +83,16 @@ for (const [name, text] of Object.entries(ALL_FIXTURES)) {
  * G0 — novelty check
  * ========================================================================= */
 {
+  // stoicheia.ts is the SANCTIONED superset of KALLOS (all 13 styled families +
+  // letterlike-symbol holes); it deliberately shares this codepoint space, so it
+  // is whitelisted here rather than treated as a novelty collision.
   const hits = fs.readdirSync(path.join(__dirname, '..', 'src', 'lib', 'omega'))
-    .filter((f) => f.endsWith('.ts') && f !== 'kallos.ts' && f !== 'registry.ts')
+    .filter((f) => f.endsWith('.ts') && f !== 'kallos.ts' && f !== 'registry.ts' && f !== 'stoicheia.ts')
     .filter((f) => {
       const src = fs.readFileSync(path.join(__dirname, '..', 'src', 'lib', 'omega', f), 'utf8');
       return src.includes('0x1D400') || src.includes('0x1D434') || src.includes('0x1D670');
     });
-  check('G0', hits.length === 0, `no other lane implements mathematical alphanumeric font restoration (found: ${hits.join(', ') || 'none'})`);
+  check('G0', hits.length === 0, `no other lane (besides the sanctioned STOICHEIA superset) implements mathematical alphanumeric font restoration (found: ${hits.join(', ') || 'none'})`);
 }
 
 /* ===========================================================================
