@@ -38,7 +38,6 @@ import { morphEncode } from '@/lib/omega/morph';
 import { stencilEncode } from '@/lib/omega/stencil';
 import { e8Encode } from '@/lib/omega/omega-e8seed';
 import { omegaXiCompress, omegaXiDecode } from '@/lib/omega/atom-codec';
-import { rosettaEncode } from '@/lib/omega/rosetta';
 import { harmoniaEncode } from '@/lib/omega/harmonia';
 import { aetherEncode } from '@/lib/omega/aether';
 import { panaceaEncode } from '@/lib/omega/panacea';
@@ -79,6 +78,8 @@ import { caesuraEncode } from '@/lib/omega/caesura';
 import { syntagmaEncode } from '@/lib/omega/syntagma';
 import { prosoponEncode } from '@/lib/omega/prosopon';
 import { epistleEncode } from '@/lib/omega/epistle';
+import { arithmosEncode } from '@/lib/omega/arithmos';
+import { kalligraphosEncode } from '@/lib/omega/kalligraphos';
 import { kappaEncode } from '@/lib/omega/kappa';
 import { phraseEncode } from '@/lib/omega/phrase';
 import { tauEncode } from '@/lib/omega/tau';
@@ -194,8 +195,7 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('zenith', async () => zenithEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
   await run('splice', () => spliceEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
   await run('eclipse', async () => eclipseEncode(text, enc), (r: any) => r.deliveredTokens ?? null);
-  // ROSETTA, HARMONIA, AETHER, PANACEA, SYNAPSE, NOESIS, APEIRON & PANTHEON: evaluate Pareto optimal tournament leaders
-  await run('rosetta', async () => rosettaEncode(text, enc));
+  // Historical Rosetta execution is deliberately excluded. Evaluate remaining exact lanes.
   await run('harmonia', async () => harmoniaEncode(text, enc));
   await run('aether', async () => aetherEncode(text, enc));
   await run('panacea', async () => panaceaEncode(text, enc));
@@ -232,6 +232,8 @@ export async function leaderboard(text: string, enc: EncodingName = 'o200k_base'
   await run('syntagma', async () => syntagmaEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('prosopon', async () => prosoponEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('epistle', async () => epistleEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('arithmos', async () => arithmosEncode(text, enc), (r: any) => r.messageTokens ?? null);
+  await run('kalligraphos', async () => kalligraphosEncode(text, enc), (r: any) => r.messageTokens ?? null);
   await run('metis', async () => metisEncode(text, enc));
   await run('eupraxia', async () => eupraxiaEncode(text, enc));
   await run('dike', async () => dikeEncode(text, enc));

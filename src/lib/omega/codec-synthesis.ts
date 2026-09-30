@@ -37,7 +37,6 @@ import { synapseEncode, synapseDecode, type SynapseResult } from './synapse';
 import { panaceaEncode, panaceaDecode, type PanaceaResult } from './panacea';
 import { aetherEncode, aetherDecode, type AetherResult } from './aether';
 import { harmoniaEncode, harmoniaDecode, type HarmoniaResult } from './harmonia';
-import { rosettaEncode, rosettaDecode, type RosettaResult } from './rosetta';
 import { astralEncode, astralDecode } from './astral';
 import { aeonEncode, aeonDecode } from './aeon';
 import { phoenixEncode, phoenixDecode } from './phoenix';
@@ -175,11 +174,6 @@ export async function evaluateAllCodecsDynamically(
 
   await evalCodec('harmonia', async (t, e) => {
     const r = await harmoniaEncode(t, e);
-    return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
-  });
-
-  await evalCodec('rosetta', async (t, e) => {
-    const r = await rosettaEncode(t, e);
     return { wire: r.wire, decoded: r.decoded, exact: r.exact, outTokens: r.outTokens };
   });
 

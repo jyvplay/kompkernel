@@ -17,7 +17,6 @@ import type { OrbitResult } from '../lib/omega/orbit';
 import type { TesseraResult } from '../lib/omega/tessera';
 import type { StrataResult } from '../lib/omega/strata';
 import type { SignetResult } from '../lib/omega/signet';
-import type { RosettaResult } from '../lib/omega/rosetta';
 import type { HarmoniaResult } from '../lib/omega/harmonia';
 import type { AetherResult } from '../lib/omega/aether';
 import type { PanaceaResult } from '../lib/omega/panacea';
@@ -70,6 +69,9 @@ import type { CaesuraResult } from '../lib/omega/caesura';
 import type { SyntagmaResult } from '../lib/omega/syntagma';
 import type { ProsoponResult } from '../lib/omega/prosopon';
 import type { EpistleResult } from '../lib/omega/epistle';
+import type { ArithmosResult } from '../lib/omega/arithmos';
+import type { KalligraphosResult } from '../lib/omega/kalligraphos';
+import type { OptimalResult } from '../lib/omega/optimal';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -102,7 +104,6 @@ export interface CodecWorkerResult {
   tessera: TesseraResult;
   strata: StrataResult;
   signet: SignetResult;
-  rosetta: RosettaResult;
   harmonia?: HarmoniaResult;
   aether?: AetherResult;
   panacea?: PanaceaResult;
@@ -155,6 +156,9 @@ export interface CodecWorkerResult {
   syntagma: SyntagmaResult;
   prosopon: ProsoponResult;
   epistle: EpistleResult;
+  arithmos: ArithmosResult;
+  kalligraphos: KalligraphosResult;
+  optimal: OptimalResult;
 }
 
 export interface CodecWorkerFailure {

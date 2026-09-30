@@ -48,7 +48,6 @@ import { irisEncode } from './iris';
 import { kernelEncode } from './kernel';
 import { zenithEncode } from './zenith';
 import { eclipseEncode } from './eclipse';
-import { rosettaEncode } from './rosetta';
 import { harmoniaEncode } from './harmonia';
 import { aetherEncode, aetherDecode, aetherDecoderPrompt, AETHER_SYSTEM_PROMPT } from './aether';
 import { panaceaEncode, panaceaDecode, panaceaDecoderPrompt, PANACEA_SYSTEM_PROMPT } from './panacea';
@@ -89,6 +88,8 @@ import { caesuraEncode } from './caesura';
 import { syntagmaEncode } from './syntagma';
 import { prosoponEncode } from './prosopon';
 import { epistleEncode } from './epistle';
+import { arithmosEncode } from './arithmos';
+import { kalligraphosEncode } from './kalligraphos';
 import { kappaEncode } from './kappa';
 import { phraseEncode } from './phrase';
 import { tauEncode } from './tau';
@@ -655,6 +656,14 @@ export function codecEntries(): Entry[] {
       run: async (t, enc) => { const r = epistleEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
+      key: 'arithmos', label: '☎ ARITHMOS (Native-Script Decimal Restoration Pre-Pass)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = arithmosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'kalligraphos', label: '✅ KALLIGRAPHOS (Mathematical-Alphabet Restoration Pre-Pass)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = kalligraphosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
       key: 'palimpsest', label: '⎈ PALIMPSEST (Configuration Portfolio)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = palimpsestEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
@@ -827,16 +836,6 @@ export function codecEntries(): Entry[] {
       fidelity: 'exact',
       run: async (t, enc) => {
         const r = await harmoniaEncode(t, enc);
-        return { output: r.wire, decoded: r.decoded, note: r.notes };
-      },
-    },
-    {
-      key: 'rosetta',
-      label: '𓋹 ROSETTA-R5.6',
-      family: 'exact',
-      fidelity: 'exact',
-      run: async (t, enc) => {
-        const r = await rosettaEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
     },

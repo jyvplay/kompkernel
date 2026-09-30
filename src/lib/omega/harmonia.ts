@@ -42,7 +42,7 @@
  */
 
 import { countTokens, encodeIds, type EncodingName } from './bpe';
-import { rosettaEncode, rosettaDecode, type RosettaResult } from './rosetta';
+import { rosettaDecode } from './rosetta';
 import { strandEncode, strandDecode, type StrandResult } from './strand';
 import { latticeEncode, latticeDecode, type LatticeResult } from './lattice';
 import { phraseEncode, phraseDecode, phraseCodebook, type PhraseResult } from './phrase';
@@ -557,13 +557,7 @@ async function harmoniaEncodeUncached(
 
   // --- 1. Evaluate Whole-Document High-Performance Lanes ---
 
-  // Rosetta-R5.6
-  try {
-    const rRosetta = await rosettaEncode(text, enc);
-    if (rRosetta.exact && rRosetta.decoded === text) {
-      admit(`rosetta:${rRosetta.member}`, rRosetta.wire, rRosetta.decoded, 1, 0);
-    }
-  } catch {}
+  // Historical Rosetta encoding is intentionally not evaluated here.
 
   // GPO-2 Viterbi DAG Lattice Fold
   try {

@@ -27,7 +27,7 @@
 
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 import { harmoniaEncode, harmoniaDecode, type HarmoniaResult } from './harmonia';
-import { rosettaEncode, rosettaDecode } from './rosetta';
+import { rosettaDecode } from './rosetta';
 import { strandEncode, strandDecode } from './strand';
 import { latticeEncode, latticeDecode } from './lattice';
 import { phraseEncode, phraseDecode } from './phrase';
@@ -510,15 +510,8 @@ async function aetherEncodeUncached(
     }
   } catch {}
 
-  // --- Step 4: Evaluate Standalone Fast Rosetta / Strand / Lattice ---
+  // --- Step 4: Evaluate standalone Strand / Lattice lanes ---
   if (bestTok > 20) {
-    try {
-      const rRosetta = await rosettaEncode(text, enc);
-      if (rRosetta.exact && rRosetta.decoded === text) {
-        admit(`rosetta:${rRosetta.member}`, rRosetta.wire, rRosetta.decoded, 0, false);
-      }
-    } catch {}
-
     try {
       const rStrand = strandEncode(text, enc);
       if (rStrand.exact && rStrand.decoded === text && rStrand.mode === 'strand') {
