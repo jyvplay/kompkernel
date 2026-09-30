@@ -29,7 +29,7 @@
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 import { aetherEncode, aetherDecode, type AetherResult } from './aether';
 import { harmoniaEncode, harmoniaDecode } from './harmonia';
-import { rosettaEncode, rosettaDecode } from './rosetta';
+import { rosettaDecode } from './rosetta';
 import { strandEncode, strandDecode } from './strand';
 import { latticeEncode, latticeDecode } from './lattice';
 import { phraseEncode, phraseDecode } from './phrase';
@@ -543,15 +543,8 @@ async function panaceaEncodeUncached(
     }
   } catch {}
 
-  // --- Step 5: Evaluate Standalone Structural Lanes ---
+  // --- Step 5: Evaluate standalone structural lanes (historical Rosetta excluded) ---
   if (bestTok > 20) {
-    try {
-      const rRosetta = await rosettaEncode(text, enc);
-      if (rRosetta.exact && rRosetta.decoded === text) {
-        admit(`rosetta:${rRosetta.member}`, rRosetta.wire, rRosetta.decoded, 0, false);
-      }
-    } catch {}
-
     try {
       const rStrand = strandEncode(text, enc);
       if (rStrand.exact && rStrand.decoded === text && rStrand.mode === 'strand') {

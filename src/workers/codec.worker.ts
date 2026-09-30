@@ -26,7 +26,6 @@ import { irisEncodeFromCrown } from '../lib/omega/iris';
 import { kernelEncodeFromCrown } from '../lib/omega/kernel';
 import { zenithEncodeFromKernel } from '../lib/omega/zenith';
 import { eclipseFromCandidates } from '../lib/omega/eclipse';
-import { rosettaEncode } from '../lib/omega/rosetta';
 import { harmoniaEncode } from '../lib/omega/harmonia';
 import { aetherEncode } from '../lib/omega/aether';
 import { panaceaEncode } from '../lib/omega/panacea';
@@ -68,6 +67,9 @@ import { caesuraEncode } from '../lib/omega/caesura';
 import { syntagmaEncode } from '../lib/omega/syntagma';
 import { prosoponEncode } from '../lib/omega/prosopon';
 import { epistleEncode } from '../lib/omega/epistle';
+import { arithmosEncode } from '../lib/omega/arithmos';
+import { kalligraphosEncode } from '../lib/omega/kalligraphos';
+import { chooseOptimalDirect, type DirectOneChatKey, type DirectPathLike } from '../lib/omega/optimal';
 import { kappaEncode } from '../lib/omega/kappa';
 import { phraseEncode } from '../lib/omega/phrase';
 import { tauEncode } from '../lib/omega/tau';
@@ -139,7 +141,6 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const zenith = zenithEncodeFromKernel(input, kernel, 'o200k_base');
       const splice = spliceEncode(input, 'o200k_base');
       const eclipse = eclipseFromCandidates(input, zenith, splice, 'o200k_base');
-      const rosetta = await rosettaEncode(input, 'o200k_base', { orbit, crown, mosaic, splice });
       const harmonia = await harmoniaEncode(input, 'o200k_base');
       const aether = await aetherEncode(input, 'o200k_base');
       const panacea = await panaceaEncode(input, 'o200k_base');
@@ -184,6 +185,19 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const syntagma = syntagmaEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
       const prosopon = prosoponEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
       const epistle = epistleEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const arithmos = arithmosEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const kalligraphos = kalligraphosEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+
+      // These are every worker-computed lane with an inline, self-contained
+      // decoder contract. Do not add binary, lossy, persistent-memory,
+      // system-prompt-dependent, or Rosetta paths here: this button promises
+      // a single ordinary chat message, not an environment with hidden state.
+      const directPaths: Record<DirectOneChatKey, DirectPathLike> = {
+        hermesContract, chiron, ariadne, sibyl, sequoyah, thoth, palimpsest,
+        daedalus, orthos, stentor, abacus, procrustes, circe, chimera, caesura,
+        syntagma, prosopon, epistle, arithmos, kalligraphos,
+      };
+      const optimal = chooseOptimalDirect(input, directPaths, 'o200k_base');
 
       const response: CodecWorkerResponse = {
         id,
@@ -234,7 +248,9 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         syntagma,
         prosopon,
         epistle,
-        rosetta,
+        arithmos,
+        kalligraphos,
+        optimal,
         harmonia,
         aether,
         panacea,
