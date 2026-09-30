@@ -70,6 +70,11 @@ import type { CaesuraResult } from '../lib/omega/caesura';
 import type { SyntagmaResult } from '../lib/omega/syntagma';
 import type { ProsoponResult } from '../lib/omega/prosopon';
 import type { EpistleResult } from '../lib/omega/epistle';
+import type { ArithmosResult } from '../lib/omega/arithmos';
+import type { KallosResult } from '../lib/omega/kallos';
+import type { PanoptesResult } from '../lib/omega/panoptes';
+import type { EpistemeResult } from '../lib/omega/episteme';
+import type { MetatronResult } from '../lib/omega/metatron';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -155,6 +160,11 @@ export interface CodecWorkerResult {
   syntagma: SyntagmaResult;
   prosopon: ProsoponResult;
   epistle: EpistleResult;
+  arithmos: ArithmosResult;
+  kallos: KallosResult;
+  panoptes: PanoptesResult;
+  episteme: EpistemeResult;
+  metatron: MetatronResult;
 }
 
 export interface CodecWorkerFailure {

@@ -1,4 +1,4 @@
-﻿node_modules/
+node_modules/
 dist/
 build/
 .next/
@@ -8,3 +8,5 @@ npm-debug.log*
 .DS_Store
 bench/*.mjs
 bench/tmp/
+__pycache__/
+*.pyc
