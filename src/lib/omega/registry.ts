@@ -74,6 +74,7 @@ import { logosEncode } from './logos';
 import { hermesEncode } from './hermes';
 import { chironEncode } from './chiron';
 import { tachysEncode } from './tachys';
+import { hydraEncode } from './hydra';
 import { ariadneEncode } from './ariadne';
 import { sibylEncode } from './sibyl';
 import { sequoyahEncode } from './sequoyah';
@@ -757,6 +758,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'tachys', label: '⚡ TACHYS (Incompressibility-Certified Latency Lane)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = tachysEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'hydra', label: '🐉 HYDRA (Portfolio-Frontier Closure: TACHYS × KIONES)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = hydraEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'metis', label: '⬤ METIS-Ω (Polymorphic Grammar Frontier)', family: 'exact', fidelity: 'exact',
