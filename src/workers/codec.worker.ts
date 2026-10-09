@@ -55,6 +55,7 @@ import { chironEncode } from '../lib/omega/chiron';
 import { tachysEncode } from '../lib/omega/tachys';
 import { hydraEncode } from '../lib/omega/hydra';
 import { glossiaEncode } from '../lib/omega/glossia';
+import { eidosEncode } from '../lib/omega/eidos';
 import { ariadneEncode } from '../lib/omega/ariadne';
 import { sibylEncode } from '../lib/omega/sibyl';
 import { sequoyahEncode } from '../lib/omega/sequoyah';
@@ -189,6 +190,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const tachys = tachysEncode(input, 'o200k_base');
       const hydra = hydraEncode(input, 'o200k_base');
       const glossia = glossiaEncode(input, 'o200k_base');
+      const eidos = eidosEncode(input, 'o200k_base');
       const ariadne = ariadneEncode(input, 'o200k_base');
       const sibyl = sibylEncode(input, 'o200k_base', { budgetMs: 4000 });
       const sequoyah = sequoyahEncode(input, 'o200k_base', { probeScale: 0.5, wordGrid: [0, 20] });
@@ -257,6 +259,7 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         tachys,
         hydra,
         glossia,
+        eidos,
         ariadne,
         sibyl,
         sequoyah,
