@@ -73,12 +73,14 @@ import { proteusEncode } from './proteus';
 import { logosEncode } from './logos';
 import { hermesEncode } from './hermes';
 import { chironEncode } from './chiron';
+import { tachysEncode } from './tachys';
 import { ariadneEncode } from './ariadne';
 import { sibylEncode } from './sibyl';
 import { sequoyahEncode } from './sequoyah';
 import { thothEncode } from './thoth';
 import { palimpsestEncode } from './palimpsest';
 import { daedalusEncode } from './daedalus';
+import { icarusEncode } from './icarus';
 import { orthosEncode } from './orthos';
 import { stentorEncode } from './stentor';
 import { abacusEncode } from './abacus';
@@ -94,6 +96,15 @@ import { kallosEncode } from './kallos';
 import { panoptesEncode } from './panoptes';
 import { epistemeEncode } from './episteme';
 import { metatronEncode } from './metatron';
+import { synizesisEncode } from './synizesis';
+import { syntomiaEncode } from './syntomia';
+import { eustochiaEncode } from './eustochia';
+import { akribeiaEncode } from './akribeia';
+import { logistikeEncode } from './logistike';
+import { polytroposEncode } from './polytropos';
+import { kionesEncode } from './kiones';
+import { plinthosEncode } from './plinthos';
+import { anastropheEncode } from './anastrophe';
 import { kappaEncode } from './kappa';
 import { phraseEncode } from './phrase';
 import { tauEncode } from './tau';
@@ -616,6 +627,10 @@ export function codecEntries(): Entry[] {
       run: async (t, enc) => { const r = await hermesEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
     },
     {
+      key: 'icarus', label: '翼 ICARUS (Deterministic Latency Lane)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = icarusEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
       key: 'daedalus', label: '⧗ DAEDALUS (Predicted-Arm Portfolio)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = daedalusEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
@@ -676,6 +691,42 @@ export function codecEntries(): Entry[] {
       run: async (t, enc) => { const r = epistemeEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
+      key: 'anastrophe', label: '↻ ANASTROPHE (Gated Permutation Family + Closure Result)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = anastropheEncode(t, enc, { maxConfigs: 3, configBudgetMs: 55, armBudgetMs: 3000 }); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'plinthos', label: '▥ PLINTHOS (Multi-Block Column-Major Transpose)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = plinthosEncode(t, enc, { maxConfigs: 3, configBudgetMs: 55 }); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'kiones', label: '▦ KIONES (Column-Major Block Transpose + Stack)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = kionesEncode(t, enc, { maxConfigs: 4, configBudgetMs: 60 }); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'polytropos', label: '⟡ POLYTROPOS (Exact-Priced Engine Configuration Space)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = polytroposEncode(t, enc, { maxConfigs: 5, configBudgetMs: 70 }); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'logistike', label: '⊿ LOGISTIKE (Exact Chunk-Additive Cost Algebra + Wide Portfolio)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = logistikeEncode(t, enc, { maxArms: 4, armBudgetMs: 80 }); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'akribeia', label: '∴ AKRIBEIA (Exact-Measurement Portfolio + Drop-Polish)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = akribeiaEncode(t, enc, { maxArms: 3, armBudgetMs: 80 }); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'eustochia', label: '◎ EUSTOCHIA (Aimed Arm Portfolio + Minimal Contract)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = eustochiaEncode(t, enc, { maxArms: 2, armBudgetMs: 80 }); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'syntomia', label: '⌁ SYNTOMIA (Minimal-Sufficient Decode Contract + Gate Re-Run)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = syntomiaEncode(t, enc, { budgetMs: 1500 }); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'synizesis', label: '⇒ SYNIZESIS (Pre-Tokenizer Boundary Collapse by Shape-Template Factoring)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = synizesisEncode(t, enc, { budgetMs: 1500 }); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
       key: 'metatron', label: '⟁ METATRON (Sovereign Morphological, Structural & Dual-Lattice Lossless Codec)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = metatronEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
@@ -702,6 +753,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'chiron', label: '⟐ CHIRON (Two-Part-MDL Text Program)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = chironEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok (contract ${r.contractTokens} + wire ${r.outTokens}) vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'tachys', label: '⚡ TACHYS (Incompressibility-Certified Latency Lane)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = tachysEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'metis', label: '⬤ METIS-Ω (Polymorphic Grammar Frontier)', family: 'exact', fidelity: 'exact',

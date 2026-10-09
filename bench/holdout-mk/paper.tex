@@ -1,0 +1,34 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,booktabs}
+\title{Token Economics of Retention Policies}
+\begin{document}
+\maketitle
+\section{Introduction}
+Let $R$ denote the retention horizon and $D$ the disposition date. We write $\mathcal{P}$ for the set of policies and $\pi(d)$ for the policy resolved at document $d$.
+\begin{equation}
+  \pi(d) = \begin{cases} p_d & \text{if } p_d \neq \emptyset \\ \pi(\mathrm{parent}(d)) & \text{otherwise} \end{cases}
+\end{equation}
+\section{Cost model}
+The expected storage cost is
+\begin{align}
+  C(\mathcal{P}) &= \sum_{d \in \mathcal{D}} \int_{t_0}^{t_0 + R(\pi(d))} c(t)\,\mathrm{d}t \\
+                 &\leq |\mathcal{D}| \cdot \bar{c} \cdot \max_{p \in \mathcal{P}} R(p).
+\end{align}
+\begin{table}[h]
+  \centering
+  \begin{tabular}{lrr}
+    \toprule
+    Policy & Horizon (days) & Documents \\
+    \midrule
+    Default & 365 & 124000 \\
+    Finance & 2555 & 18400 \\
+    Legal & 3650 & 9100 \\
+    Ephemeral & 30 & 412000 \\
+    Audit & 1825 & 22300 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Retention horizons by policy.}
+\end{table}
+\section{Conclusion}
+We have shown that $C(\mathcal{P})$ is minimised when $R$ is resolved at creation time rather than retroactively.
+\end{document}

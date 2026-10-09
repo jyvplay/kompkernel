@@ -39,6 +39,15 @@ import type { KallosResult } from '../lib/omega/kallos';
 import type { PanoptesResult } from '../lib/omega/panoptes';
 import type { EpistemeResult } from '../lib/omega/episteme';
 import type { MetatronResult } from '../lib/omega/metatron';
+import type { SynizesisResult } from '../lib/omega/synizesis';
+import type { SyntomiaResult } from '../lib/omega/syntomia';
+import type { EustochiaResult } from '../lib/omega/eustochia';
+import type { AkribeiaResult } from '../lib/omega/akribeia';
+import type { LogistikeResult } from '../lib/omega/logistike';
+import type { PolytroposResult } from '../lib/omega/polytropos';
+import type { KionesResult } from '../lib/omega/kiones';
+import type { PlinthosResult } from '../lib/omega/plinthos';
+import type { AnastropheResult } from '../lib/omega/anastrophe';
 import { omegaXiCompress, OMEGA_XI_SYSTEM_PROMPT, type OmegaXiResult } from '../lib/omega/atom-codec';
 import { ltpProject, type LtpResult } from '../lib/omega/ltp';
 import { compressPrometheusICDM, type PrometheusResult } from '../lib/omega/prometheus-icdm';
@@ -107,7 +116,7 @@ type CodecKey =
   | keyof typeof PRESETS
   | 'losslessAscii' | 'omegaXi' | 'omegaE8' | 'eidolon' | 'ltp' | 'prometheus' | 'zeta'
   | 'janus' | 'sigma' | 'stencil' | 'morph' | 'chronos' | 'chronosArena' | 'nexus' | 'mneme' | 'apex'
-  | 'arithmos' | 'kallos' | 'panoptes' | 'episteme' | 'metatron'
+  | 'arithmos' | 'kallos' | 'panoptes' | 'episteme' | 'metatron' | 'synizesis' | 'syntomia' | 'eustochia' | 'akribeia' | 'logistike' | 'polytropos' | 'kiones' | 'plinthos' | 'anastrophe'
   | 'caveMan' | 'dragi' | 'wenyan' | 'composite' | 'dragiScale' | 'ordos' | 'asgJson'
   | 'astCode' | 'hermesContract' | 'chiron' | 'ariadne' | 'sibyl' | 'sequoyah' | 'thoth' | 'palimpsest' | 'daedalus' | 'orthos' | 'stentor' | 'abacus' | 'procrustes' | 'circe' | 'chimera' | 'caesura' | 'syntagma' | 'prosopon' | 'epistle' | 'noether' | 'holographic' | 'caveHolo' | 'ibCaveHolo' | 'veritasVx' | 'quasar' | 'helixAp' | 'meridian' | 'plexus'
   | 'axiom' | 'orbit' | 'anaphora' | 'pulse' | 'tessera' | 'strata' | 'signet' | 'mosaic' | 'atlas' | 'aurora' | 'crown' | 'iris' | 'kernel' | 'zenith' | 'eclipse' | 'khoros' | 'omni' | 'genesis' | 'arche' | 'telos' | 'pantheon' | 'apeiron' | 'noesis' | 'synapse' | 'panacea' | 'aether' | 'harmonia' | 'rosetta' | 'kappa' | 'phrase' | 'tau';
@@ -124,8 +133,37 @@ interface ParetoRow {
   notes: string;
 }
 
+/**
+ * DECODE-CONTRACT TAX (red-team fix, W13).
+ *
+ * `ParetoRow.outTokens` is NOT the same quantity for every lane.  The lanes
+ * that report `messageTokens` (METATRON, EPISTEME, PANOPTES, KALLOS, ARITHMOS,
+ * DAEDALUS, SYNIZESIS, the CHIRON family, …) already include their inline
+ * decode contract.  The older lanes report WIRE TOKENS ONLY and decode only if
+ * the user also pastes an out-of-band `*_SYSTEM_PROMPT`.
+ *
+ * Ranking those two groups against each other on `outTokens` is not a like-for-
+ * like comparison, and it produced real misroutes.  MEASURED (bench/w13-flip.ts,
+ * o200k_base, bench/holdout/md-vite.txt): the button picked PLEXUS at a wire
+ * cost of 258 tokens against a 274-token document, but PLEXUS needs a 149-token
+ * system prompt, so the true one-chat cost was 598 tokens — 118% WORSE than
+ * sending the document untouched.
+ *
+ * The table below is the measured token cost of each such prompt
+ * (bench/router-redteam.ts, o200k_base).  The router now ranks on
+ * outTokens + this tax, and refuses to route to anything that costs more than
+ * the raw input.
+ */
+const DECODE_CONTRACT_TAX: Record<string, number> = {
+  signet: 435, strata: 371, tessera: 262, axiom: 218, quasar: 185, plexus: 149,
+  meridian: 145, eidolon: 108, atlas: 99, khoros: 74, omni: 70, pulse: 53,
+  crown: 28, iris: 19, kernel: 19,
+};
+/** never the router's answer (operator directive, W13) */
+const ROUTER_EXCLUDED = new Set<string>(['rosetta']);
+
 const GROUPS: Array<{ label: string; hint: string; keys: CodecKey[] }> = [
-  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['metatron','episteme','panoptes','kallos','arithmos','orthos','stentor','abacus','procrustes','circe','chimera','caesura','syntagma','prosopon','epistle','daedalus','palimpsest','sibyl','thoth','sequoyah','ariadne','chiron','hermesContract','khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
+  { label: '🟢 LOSSLESS · WEB UI SAFE', hint: 'Readable in any chat UI. Zero decode tokens.', keys: ['anastrophe','plinthos','kiones','polytropos','logistike','akribeia','eustochia','syntomia','synizesis','metatron','episteme','panoptes','kallos','arithmos','orthos','stentor','abacus','procrustes','circe','chimera','caesura','syntagma','prosopon','epistle','daedalus','palimpsest','sibyl','thoth','sequoyah','ariadne','chiron','hermesContract','khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','orbit','signet','strata','tessera','axiom','plexus','anaphora','meridian','quasar','helixAp','pulse','veritasVx','apex','eidolon','nexus','mneme','zeta','prometheus','ltp','sigma','stencil','morph','losslessAscii'] },
   { label: '🟡 DUPLEX · SCRIPTED UIs', hint: 'Arena / CI / Artifacts. Compress input and help compress output.', keys: ['chronosArena','chronos','janus'] },
   { label: '🔴 BINARY TRANSPORT', hint: 'Needs middleware / tool-call decoder.', keys: ['omegaXi','omegaE8'] },
   { label: '📝 SEMANTIC (lossy, LLM-readable)', hint: 'Directly readable, not byte-exact.', keys: ['light','balanced','max','extreme','caveMan','dragi','wenyan','composite','dragiScale','ordos','asgJson','astCode','noether','holographic','caveHolo','ibCaveHolo'] },
@@ -133,6 +171,15 @@ const GROUPS: Array<{ label: string; hint: string; keys: CodecKey[] }> = [
 
 const LABEL: Record<string, string> = {
   metatron: '⟁ METATRON · Structural & Morphological Dual-Lattice',
+  synizesis: '⇒ SYNIZESIS · Pre-Tokenizer Boundary Collapse',
+  syntomia: '⌁ SYNTOMIA · Minimal-Sufficient Decode Contract',
+  eustochia: '◎ EUSTOCHIA · Aimed Arm Portfolio',
+  akribeia: '∴ AKRIBEIA · Exact-Measurement Portfolio',
+  logistike: '⊿ LOGISTIKE · Exact Chunk-Additive Cost Algebra',
+  polytropos: '⟡ POLYTROPOS · Exact-Priced Configuration Space',
+  kiones: '▦ KIONES · Column-Major Block Transpose',
+  plinthos: '▥ PLINTHOS · Multi-Block Column-Major Transpose',
+  anastrophe: '↻ ANASTROPHE · Gated Permutation Family',
   episteme: '◈ EPISTEME · Morphological Transduction & Dual Lattice',
   panoptes: '👁 PANOPTES · Sovereign Composed Pre-Pass',
   kallos: '✧ KALLOS · Mathematical & Typography Restoration',
@@ -183,6 +230,15 @@ const LABEL: Record<string, string> = {
 };
 
 const HINT: Record<string, string> = {
+  anastrophe: "ANASTROPHE: The Turning. KIONES showed reading order is a free parameter and won 466 tokens on one CSV; PLINTHOS measured a fixed-width variant, found it loses, and extracted the law - transposition pays iff it creates LONG byte-identical runs, not merely by grouping short repeats. This lane finishes the family and reports the closure. MEASURED this turn: record-periodic striding (group line p of every P-line record, P = 2..48 across 6 alignments, 40 documents) improves NOT ONE FILE even at the raw token level - zero; and the total tokens sitting in duplicate columns across the entire corpus, the only structure transposition has ever been shown to pay on, is 92. The reordering frontier is one lane wide and this is the measurement that says so. What ships is the law as an O(n) GATE that refuses to pay for compression unless a permutation would create a long duplicate run, a hard per-arm wall-clock slice so the lane always returns, and the predecessor competing unconditionally so the gate - which is only an optimisation - can never cost tokens.",
+  plinthos: "PLINTHOS: The Course of Bricks. KIONES showed that reading order is a free parameter - transposing a tabular block moves redundancy into reach of mechanisms that are otherwise exhausted - and its report named four gaps. PLINTHOS closes two and kills a third with a measurement. GAP 4 (only one block per document) is CLOSED: every disjoint profitable block is now transposed, each bracketed independently, and the inverse is asserted on multi-block documents. GAP 2 (the transpose clause had never been checked by an independent reader - the weakest link in that lane) is CLOSED: bench/plinthos_decode.py is a from-scratch CPython reader written from the two contract sentences, EXACT on 26/26 transposed wires. GAP 3 (whitespace-aligned ops tables) is MEASURED AND REJECTED: a fixed-width transpose cutting at whitespace columns inverts exactly but costs MORE - kubectl 1006 to 1186 raw, ls-full-iso 1175 to 1413, df-h 570 to 646 - and zero after compression, because transposition pays only when it creates LONG identical runs, not when it merely groups short repeats the dictionary already has at 0.4 tokens a reference.",
+  kiones: "KIONES: The Columns. Every lane in this repo reads a document in ROW-MAJOR order, because that is the order the bytes arrive in - dictionary mining, block detection, template induction and the pre-tokenizer all run along the line. But tabular data is only incidentally row-major: its redundancy lives DOWN the columns, where a date column is 240 near-identical strings and a status column is three words repeated. Row-major, each value is separated from its nearest relative by a whole row of unrelated bytes, so neither BPE nor a span miner can reach it. KIONES finds a maximal run of lines that all split into the same number of fields, transposes it, brackets it as the open marker plus separator then the columns then the close marker, and hands the result to the existing stack. MEASURED on vix-daily-1990.csv: raw 3412, METATRON 1394 (59.1%), POLYTROPOS 1304, column-major 928 - a 466-token cut, 33.4% below the incumbent and the largest single-lane gain in five turns. The transform is its own witness: the encoder applies the inverse and refuses unless it reproduces the input byte for byte.",
+  polytropos: "POLYTROPOS: The Many-Wayed. ARIADNE and SIBYL are not single codecs, they are a CONFIGURATION SPACE - maxSpan, levels, topK, wordGrid, capGrid, sep. DAEDALUS exposes six hand-written arms varying three of those and then runs TWO of them. Three dimensions are never varied by anything in the repo: capGrid is hard-coded to [Infinity] (sibyl.ts L353), sep defaults to newline although chironSeparators computes candidates, and levels is 6 in five of the six arms. MEASURED one dimension at a time against a baseline that already runs four aimed arms with the minimal contract and the exact drop-polish: 104 tokens of unswept headroom, attributed capGrid 79 / levels 25 / topK 0, with kubectl 415 to 372; and separately the sep dimension is worth another 70 tokens including component.jsx 296 to 278 on a lane where METATRON returns the document unchanged. POLYTROPOS treats each point of the space as a codec, aims the order with four O(n) features, prices every point with a real countTokens, and keeps a tournament containing the incumbent so it cannot be worse.",
+  logistike: "LOGISTIKE: The Reckoning. tiktoken applies a regex pre-tokenizer BEFORE any BPE merge and merges never cross a chunk, so |encode(s)| equals the SUM of |encode(chunk)| exactly. MEASURED over 43 documents spanning 7 languages, HTML, XML, SVG, JSX, LaTeX, SQL, CSV, logs, markdown and code: exact 43/43 for o200k_base with the o200k pattern and 43/43 for cl100k_base with the cl100k pattern - the two encodings need DIFFERENT patterns, which is why the previous lane had to ship this model as ranking-only. Chunks repeat 1.4x-5.5x inside a document and almost totally across documents, so a global per-chunk cache amortises the BPE work across a whole session: 318 million cache hits against 159 thousand misses on a 42-document run, 1.90x faster whole-document counting, zero fallbacks. That acceleration is wired into countTokens itself, so the ENTIRE stack is faster, and LOGISTIKE spends the savings on a six-arm portfolio instead of two.",
+  akribeia: "AKRIBEIA: Exact Measurement. Every dictionary engine here optimises against an ESTIMATE and only measures exactly at the end - ARIADNE says so in its own notes (est=462 exact=458). Three measured consequences: SIBYL's wordGrid is an internal sweep whose winner is picked by estimate (one wide call is 2.28x faster and 233 tokens WORSE than sweeping the same grid points externally and taking the exact minimum); DAEDALUS caps the portfolio at two arms; and rules survive into the final wire whose exact marginal contribution is negative. AKRIBEIA sweeps the grid externally with real token counts, aims the arm order with four O(n) document features, costs every CHIRON wire against SYNTOMIA's 24-token contract, and then runs an exact drop-polish that removes any rule which does not pay. Affordable because the pre-tokenizer makes token count additive over chunks, so a replacement's delta is confined to the chunks it touches - measured exact on 33/36 documents and used for RANKING only, never for an accept.",
+  eustochia: "EUSTOCHIA: Aimed Arm Portfolio. ARIADNE and SIBYL are parameterised engines - span width, nesting levels, top-K, and SIBYL's wordGrid - and each parameterisation finds a different rule set. DAEDALUS turns a few into arms and then runs only two of them (maxArms default 2), chosen by a feature heuristic tuned on this repo's English fixtures. MEASURED over 26 documents and 12 arms: the heuristic's two picks leave 575 tokens (3.74%) on the table, and on Japanese the entire stack returns the document unchanged (0.0%) while an arm it never reaches cuts 19.7%. EUSTOCHIA orders the full portfolio by cheap document features (non-Latin fraction, space density, 2+ space column runs, punctuation density), runs the aimed arms against a wall-clock budget, and costs every CHIRON wire against SYNTOMIA's 24-token contract so the economic gate sees the real price. Arm ranking is nearly budget-independent (130 tokens of regret at 60ms vs 4000ms), which is why aiming beats deliberating.",
+  syntomia: "SYNTOMIA: Minimal-Sufficient Decode Contract. Because no system prompt is allowed, every lossless lane ships its decode rule inside the message - a flat 38-49 tokens (mean 40.6 measured over 16 documents). Nobody had ever optimised that constant. SYNTOMIA restates the CHIRON contract clause by clause at 24 tokens instead of 38-48 (the polyglot script label alone cost 12), folds a composed arm's trailing legend into the rule tape, and then RE-RUNS the economic gate against its own cheaper contract - which re-admits documents the whole stack currently refuses to compress because their wire gain sat in the 24..48 band. Every wire it emits is a CHIRON wire decoded by the already red-teamed chironDecode.",
+  synizesis: "SYNIZESIS: Pre-Tokenizer Boundary Collapse. The tiktoken pre-tokenizer cuts a chunk at every letter/digit/punctuation transition and every 3 digits, and BPE merges never cross those cuts — so timestamps, clock times, dotted quads, ids, versions and hex digests are shattered into 1-2 character chunks (measured 1.6-1.7 chars/token against ~4.1 for prose). SYNIZESIS mines a shape template per literal (position-induced, Drain-style but lossless), writes each skeleton once in a legend, and leaves the variable characters as one dense same-class run. Templates whose payload is a fixed-length digit run are promoted to MARKER-FREE — no sigil at all, identified by run length alone, verified by exact round trip — which breaks the one-token-per-occurrence floor every dictionary codec is stuck behind.",
   metatron: "METATRON: Sovereign Universal Morphological, Structural & Dual-Lattice Lossless Codec. Canonicalizes Markdown headers (###, ##, ####), task checklists (- [x], - [ ]), table dividers, code fences, and typographic ligatures into 1-token geometric glyphs with 768+ tri-domain static operads and sovereign tournament selection.",
   episteme: "EPISTEME: Universal Epistemic Morphological Transduction & Dual-Lattice Lossless Codec. Restores Latin typographic ligatures (ff, fi, fl, ffi, ffl, st: U+FB00..U+FB06) and Roman numerals (U+2160..U+217B) to ASCII, saving 20-50% on academic papers & PDFs, combined with 640+ multi-domain static operads and sovereign composed multi-band fallbacks.",
   panoptes: "PANOPTES: Sovereign Composed Canonicalization Pre-Pass combining all 11 typography, numeral, whitespace, and script passes (ORTHOS, STENTOR, ABACUS, PROCRUSTES, CIRCE, CAESURA, SYNTAGMA, PROSOPON, EPISTLE, ARITHMOS, KALLOS) with zero-loss fallback and independent CPython 3 verification.",
@@ -358,6 +414,15 @@ export default function Workbench() {
   const [panoptesRes, setPanoptesRes] = useState<PanoptesResult | null>(null);
   const [epistemeRes, setEpistemeRes] = useState<EpistemeResult | null>(null);
   const [metatronRes, setMetatronRes] = useState<MetatronResult | null>(null);
+  const [synizesisRes, setSynizesisRes] = useState<SynizesisResult | null>(null);
+  const [syntomiaRes, setSyntomiaRes] = useState<SyntomiaResult | null>(null);
+  const [eustochiaRes, setEustochiaRes] = useState<EustochiaResult | null>(null);
+  const [akribeiaRes, setAkribeiaRes] = useState<AkribeiaResult | null>(null);
+  const [logistikeRes, setLogistikeRes] = useState<LogistikeResult | null>(null);
+  const [polytroposRes, setPolytroposRes] = useState<PolytroposResult | null>(null);
+  const [kionesRes, setKionesRes] = useState<KionesResult | null>(null);
+  const [plinthosRes, setPlinthosRes] = useState<PlinthosResult | null>(null);
+  const [anastropheRes, setAnastropheRes] = useState<AnastropheResult | null>(null);
   const [axiomLedger, setAxiomLedger] = useState<AxiomLedgerEntry[]>([]);
   const [includeDecoder, setIncludeDecoder] = useState(false);
   const [asyncBusy, setAsyncBusy] = useState(false);
@@ -459,6 +524,15 @@ export default function Workbench() {
       setPanoptesRes(data.panoptes);
       setEpistemeRes(data.episteme);
       setMetatronRes(data.metatron);
+      setSynizesisRes(data.synizesis);
+      setSyntomiaRes(data.syntomia);
+      setEustochiaRes(data.eustochia);
+      setAkribeiaRes(data.akribeia);
+      setLogistikeRes(data.logistike);
+      setPolytroposRes(data.polytropos);
+      setKionesRes(data.kiones);
+      setPlinthosRes(data.plinthos);
+      setAnastropheRes(data.anastrophe);
       setAsyncBusy(false);
     };
     worker.onerror = (event) => {
@@ -494,6 +568,15 @@ export default function Workbench() {
       };
     }
     switch (codec) {
+      case 'anastrophe': return { out: anastropheRes?.wire ?? '⏳ Computing ANASTROPHE…', back: anastropheRes?.decoded ?? input, exact: !!anastropheRes?.exact, inTok: anastropheRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: anastropheRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: anastropheRes?.decoderPrompt ?? '', notes: anastropheRes ? `${anastropheRes.notes}; one-chat cost=${anastropheRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'plinthos': return { out: plinthosRes?.wire ?? '⏳ Computing PLINTHOS…', back: plinthosRes?.decoded ?? input, exact: !!plinthosRes?.exact, inTok: plinthosRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: plinthosRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: plinthosRes?.decoderPrompt ?? '', notes: plinthosRes ? `${plinthosRes.notes}; one-chat cost=${plinthosRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'kiones': return { out: kionesRes?.wire ?? '⏳ Computing KIONES…', back: kionesRes?.decoded ?? input, exact: !!kionesRes?.exact, inTok: kionesRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: kionesRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: kionesRes?.decoderPrompt ?? '', notes: kionesRes ? `${kionesRes.notes}; one-chat cost=${kionesRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'polytropos': return { out: polytroposRes?.wire ?? '⏳ Computing POLYTROPOS…', back: polytroposRes?.decoded ?? input, exact: !!polytroposRes?.exact, inTok: polytroposRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: polytroposRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: polytroposRes?.decoderPrompt ?? '', notes: polytroposRes ? `${polytroposRes.notes}; one-chat cost=${polytroposRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'logistike': return { out: logistikeRes?.wire ?? '⏳ Computing LOGISTIKE…', back: logistikeRes?.decoded ?? input, exact: !!logistikeRes?.exact, inTok: logistikeRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: logistikeRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: logistikeRes?.decoderPrompt ?? '', notes: logistikeRes ? `${logistikeRes.notes}; one-chat cost=${logistikeRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'akribeia': return { out: akribeiaRes?.wire ?? '⏳ Computing AKRIBEIA…', back: akribeiaRes?.decoded ?? input, exact: !!akribeiaRes?.exact, inTok: akribeiaRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: akribeiaRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: akribeiaRes?.decoderPrompt ?? '', notes: akribeiaRes ? `${akribeiaRes.notes}; one-chat cost=${akribeiaRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'eustochia': return { out: eustochiaRes?.wire ?? '⏳ Computing EUSTOCHIA…', back: eustochiaRes?.decoded ?? input, exact: !!eustochiaRes?.exact, inTok: eustochiaRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: eustochiaRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: eustochiaRes?.decoderPrompt ?? '', notes: eustochiaRes ? `${eustochiaRes.notes}; one-chat cost=${eustochiaRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'syntomia': return { out: syntomiaRes?.wire ?? '⏳ Computing SYNTOMIA…', back: syntomiaRes?.decoded ?? input, exact: !!syntomiaRes?.exact, inTok: syntomiaRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: syntomiaRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: syntomiaRes?.decoderPrompt ?? '', notes: syntomiaRes ? `${syntomiaRes.notes}; one-chat cost=${syntomiaRes.messageTokens} tokens` : 'Computing in codec worker…' };
+      case 'synizesis': return { out: synizesisRes?.wire ?? '⏳ Computing SYNIZESIS…', back: synizesisRes?.decoded ?? input, exact: !!synizesisRes?.exact, inTok: synizesisRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: synizesisRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: synizesisRes?.decoderPrompt ?? '', notes: synizesisRes ? `${synizesisRes.notes}; one-chat cost=${synizesisRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'metatron': return { out: metatronRes?.wire ?? '⏳ Computing METATRON…', back: metatronRes?.decoded ?? input, exact: !!metatronRes?.exact, inTok: metatronRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: metatronRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: metatronRes?.decoderPrompt ?? '', notes: metatronRes ? `${metatronRes.notes}; one-chat cost=${metatronRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'episteme': return { out: epistemeRes?.wire ?? '⏳ Computing EPISTEME…', back: epistemeRes?.decoded ?? input, exact: !!epistemeRes?.exact, inTok: epistemeRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: epistemeRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: epistemeRes?.decoderPrompt ?? '', notes: epistemeRes ? `${epistemeRes.notes}; one-chat cost=${epistemeRes.messageTokens} tokens` : 'Computing in codec worker…' };
       case 'panoptes': return { out: panoptesRes?.wire ?? '⏳ Computing PANOPTES…', back: panoptesRes?.decoded ?? input, exact: !!panoptesRes?.exact, inTok: panoptesRes?.inTokens ?? countTokens(input, 'o200k_base'), outTok: panoptesRes?.outTokens ?? countTokens(input, 'o200k_base'), preamble: panoptesRes?.decoderPrompt ?? '', notes: panoptesRes ? `${panoptesRes.notes}; one-chat cost=${panoptesRes.messageTokens} tokens` : 'Computing in codec worker…' };
@@ -608,6 +691,15 @@ export default function Workbench() {
       out.push({ key: 'identity', label: 'Identity (safe mode)', exact: true, inTokens: inTok, outTokens: inTok, savingsPct: 0, fidelityPct: 100, safety: 'High', notes: 'Heavy codecs skipped over 120k chars.' });
       return out.sort((a, b) => b.savingsPct - a.savingsPct);
     }
+    if (anastropheRes?.exact && anastropheRes.decoded === input) out.push({ key:'anastrophe', label:LABEL.anastrophe, exact:true, inTokens:anastropheRes.inTokens, outTokens:anastropheRes.messageTokens, savingsPct:anastropheRes.inTokens ? ((anastropheRes.inTokens-anastropheRes.messageTokens)/anastropheRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${anastropheRes.winner}; gate admitted=${anastropheRes.gate.admitted}; run=${anastropheRes.gate.bestRun}; incumbent ${anastropheRes.incumbentTokens}` });
+    if (plinthosRes?.exact && plinthosRes.decoded === input) out.push({ key:'plinthos', label:LABEL.plinthos, exact:true, inTokens:plinthosRes.inTokens, outTokens:plinthosRes.messageTokens, savingsPct:plinthosRes.inTokens ? ((plinthosRes.inTokens-plinthosRes.messageTokens)/plinthosRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${plinthosRes.winner}; blocks=${plinthosRes.blocks}; rows=${plinthosRes.blockRows}; incumbent ${plinthosRes.incumbentTokens}` });
+    if (kionesRes?.exact && kionesRes.decoded === input) out.push({ key:'kiones', label:LABEL.kiones, exact:true, inTokens:kionesRes.inTokens, outTokens:kionesRes.messageTokens, savingsPct:kionesRes.inTokens ? ((kionesRes.inTokens-kionesRes.messageTokens)/kionesRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${kionesRes.winner}; transposed=${kionesRes.transposed}; block ${kionesRes.blockLines}x${kionesRes.blockCols}; incumbent ${kionesRes.incumbentTokens}` });
+    if (polytroposRes?.exact && polytroposRes.decoded === input) out.push({ key:'polytropos', label:LABEL.polytropos, exact:true, inTokens:polytroposRes.inTokens, outTokens:polytroposRes.messageTokens, savingsPct:polytroposRes.inTokens ? ((polytroposRes.inTokens-polytroposRes.messageTokens)/polytroposRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${polytroposRes.winner}; configs=${polytroposRes.configsRun}; dropped=${polytroposRes.rulesDropped}; incumbent ${polytroposRes.incumbentTokens}; ${polytroposRes.notes}` });
+    if (logistikeRes?.exact && logistikeRes.decoded === input) out.push({ key:'logistike', label:LABEL.logistike, exact:true, inTokens:logistikeRes.inTokens, outTokens:logistikeRes.messageTokens, savingsPct:logistikeRes.inTokens ? ((logistikeRes.inTokens-logistikeRes.messageTokens)/logistikeRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${logistikeRes.winner}; arms=${logistikeRes.armsRun}; algebra=${logistikeRes.algebraExact?'exact':'fallback'}; incumbent ${logistikeRes.incumbentTokens}; ${logistikeRes.notes}` });
+    if (akribeiaRes?.exact && akribeiaRes.decoded === input) out.push({ key:'akribeia', label:LABEL.akribeia, exact:true, inTokens:akribeiaRes.inTokens, outTokens:akribeiaRes.messageTokens, savingsPct:akribeiaRes.inTokens ? ((akribeiaRes.inTokens-akribeiaRes.messageTokens)/akribeiaRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${akribeiaRes.winner}; arms=${akribeiaRes.armsRun}; dropped=${akribeiaRes.rulesDropped}; incumbent ${akribeiaRes.incumbentTokens}; ${akribeiaRes.notes}` });
+    if (eustochiaRes?.exact && eustochiaRes.decoded === input) out.push({ key:'eustochia', label:LABEL.eustochia, exact:true, inTokens:eustochiaRes.inTokens, outTokens:eustochiaRes.messageTokens, savingsPct:eustochiaRes.inTokens ? ((eustochiaRes.inTokens-eustochiaRes.messageTokens)/eustochiaRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${eustochiaRes.winner}; armsRun=${eustochiaRes.armsRun}; incumbent ${eustochiaRes.incumbentTokens}; ${eustochiaRes.notes}` });
+    if (syntomiaRes?.exact && syntomiaRes.decoded === input) out.push({ key:'syntomia', label:LABEL.syntomia, exact:true, inTokens:syntomiaRes.inTokens, outTokens:syntomiaRes.messageTokens, savingsPct:syntomiaRes.inTokens ? ((syntomiaRes.inTokens-syntomiaRes.messageTokens)/syntomiaRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${syntomiaRes.winner}; contract ${syntomiaRes.contractTokens} vs incumbent ${syntomiaRes.incumbentContract}; ${syntomiaRes.notes}` });
+    if (synizesisRes?.exact && synizesisRes.decoded === input) out.push({ key:'synizesis', label:LABEL.synizesis, exact:true, inTokens:synizesisRes.inTokens, outTokens:synizesisRes.messageTokens, savingsPct:synizesisRes.inTokens ? ((synizesisRes.inTokens-synizesisRes.messageTokens)/synizesisRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${synizesisRes.winner}; ${synizesisRes.notes}` });
     if (metatronRes?.exact) out.push({ key:'metatron', label:LABEL.metatron, exact:true, inTokens:metatronRes.inTokens, outTokens:metatronRes.messageTokens, savingsPct:metatronRes.inTokens ? ((metatronRes.inTokens-metatronRes.messageTokens)/metatronRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${metatronRes.winner}; ${metatronRes.notes}` });
     if (epistemeRes?.exact) out.push({ key:'episteme', label:LABEL.episteme, exact:true, inTokens:epistemeRes.inTokens, outTokens:epistemeRes.messageTokens, savingsPct:epistemeRes.inTokens ? ((epistemeRes.inTokens-epistemeRes.messageTokens)/epistemeRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${epistemeRes.winner}; ${epistemeRes.notes}` });
     if (panoptesRes?.exact) out.push({ key:'panoptes', label:LABEL.panoptes, exact:true, inTokens:panoptesRes.inTokens, outTokens:panoptesRes.messageTokens, savingsPct:panoptesRes.inTokens ? ((panoptesRes.inTokens-panoptesRes.messageTokens)/panoptesRes.inTokens)*100 : 0, fidelityPct:100, safety:'High', notes:`winner=${panoptesRes.panoptesWinner}; applied=${panoptesRes.panoptesApplied}; stages=${panoptesRes.panoptesStagesFired}; ${panoptesRes.notes}` });
@@ -699,20 +791,33 @@ export default function Workbench() {
     out.push(mk('max', 'Max', convertAdvanced(input, PRESETS.max.options, adv).output, false, 'Moderate', PRESETS.max.hint));
     out.push(mk('extreme', 'Extreme', convertAdvanced(input, PRESETS.extreme.options, adv).output, false, 'Low', PRESETS.extreme.hint));
     return out.sort((a,b) => b.savingsPct - a.savingsPct || b.fidelityPct - a.fidelityPct);
-  }, [input, largeTextMode, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, harmoniaRes, aetherRes, panaceaRes, synapseRes, noesisRes, apeironRes, pantheonRes, telosRes, archeRes, genesisRes, omniRes, khorosRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, eidolonRes, nexusRes, mnemeRes, mnemeNexusRes, zetaRes, promRes, ltpRes, sigmaRes, stencilRes, morphRes, omegaE8Res, omegaXiRes, chronosRes, caRes, janusRes, dragiFull, cavemanDefault, wenyan, composite, dragiScale, ordos, noether, holographic, caveHolo, ibCaveHolo, asg, ast, adv, hermesContractRes, chironRes, ariadneRes, sibylRes, sequoyahRes, thothRes, palimpsestRes, daedalusRes, orthosRes, stentorRes, abacusRes, procrustesRes, circeRes, chimeraRes, caesuraRes, syntagmaRes, prosoponRes, epistleRes, arithmosRes, kallosRes, panoptesRes, epistemeRes, metatronRes]);
+  }, [input, largeTextMode, apexRes, veritasRes, quasarRes, helixRes, meridianRes, plexusRes, pulseRes, anaphoraRes, axiomRes, orbitRes, tesseraRes, strataRes, signetRes, harmoniaRes, aetherRes, panaceaRes, synapseRes, noesisRes, apeironRes, pantheonRes, telosRes, archeRes, genesisRes, omniRes, khorosRes, rosettaRes, kappaRes, phraseRes, tauRes, mosaicRes, atlasRes, auroraRes, crownRes, irisRes, kernelRes, zenithRes, eclipseRes, eidolonRes, nexusRes, mnemeRes, mnemeNexusRes, zetaRes, promRes, ltpRes, sigmaRes, stencilRes, morphRes, omegaE8Res, omegaXiRes, chronosRes, caRes, janusRes, dragiFull, cavemanDefault, wenyan, composite, dragiScale, ordos, noether, holographic, caveHolo, ibCaveHolo, asg, ast, adv, hermesContractRes, chironRes, ariadneRes, sibylRes, sequoyahRes, thothRes, palimpsestRes, daedalusRes, orthosRes, stentorRes, abacusRes, procrustesRes, circeRes, chimeraRes, caesuraRes, syntagmaRes, prosoponRes, epistleRes, arithmosRes, kallosRes, panoptesRes, epistemeRes, metatronRes, synizesisRes, syntomiaRes, eustochiaRes, akribeiaRes, logistikeRes, polytroposRes, kionesRes, plinthosRes, anastropheRes]);
 
   const selectedRow = rows.find((r) => r.key === codec);
 
   const exactRows = useMemo(() => rows.filter((r) => r.exact), [rows]);
+  /**
+   * Honest one-chat cost of a row: what the user actually has to paste into a
+   * bare chat box.  For lanes that report `messageTokens` this is already the
+   * whole message; for the older wire-only lanes the out-of-band system prompt
+   * is added back from DECODE_CONTRACT_TAX.  See the comment on that table for
+   * the measured misroute this repairs.
+   */
+  const oneChatCost = useCallback((r: ParetoRow) => r.outTokens + (DECODE_CONTRACT_TAX[r.key] ?? 0), []);
+
   const optimalExactCodec = useMemo(() => {
-    if (exactRows.length === 0) return null;
-    // Sort by lowest wire/message outTokens (highest absolute compression)
-    const sorted = [...exactRows].sort((a, b) => {
-      if (a.outTokens !== b.outTokens) return a.outTokens - b.outTokens;
+    const identityCost = countTokens(input, 'o200k_base');
+    const eligible = exactRows.filter((r) => !ROUTER_EXCLUDED.has(r.key) && oneChatCost(r) <= identityCost);
+    if (eligible.length === 0) return null;
+    const sorted = [...eligible].sort((a, b) => {
+      const ca = oneChatCost(a), cb = oneChatCost(b);
+      if (ca !== cb) return ca - cb;
       return b.savingsPct - a.savingsPct;
     });
     return sorted[0];
-  }, [exactRows]);
+  }, [exactRows, input, oneChatCost]);
+
+  const optimalOneChat = optimalExactCodec ? oneChatCost(optimalExactCodec) : null;
 
   const isOptimal = optimalExactCodec ? codec === optimalExactCodec.key : false;
 
@@ -742,7 +847,7 @@ export default function Workbench() {
     setMnemeDict([]);
   }, []);
 
-  const decoderIsInline = codec === 'hermesContract' || codec === 'chiron' || codec === 'ariadne' || codec === 'sibyl' || codec === 'sequoyah' || codec === 'thoth' || codec === 'palimpsest' || codec === 'daedalus' || codec === 'orthos' || codec === 'stentor' || codec === 'abacus' || codec === 'procrustes' || codec === 'circe' || codec === 'chimera' || codec === 'caesura' || codec === 'syntagma' || codec === 'prosopon' || codec === 'epistle' || codec === 'arithmos' || codec === 'kallos' || codec === 'panoptes' || codec === 'episteme' || codec === 'metatron';
+  const decoderIsInline = codec === 'hermesContract' || codec === 'chiron' || codec === 'ariadne' || codec === 'sibyl' || codec === 'sequoyah' || codec === 'thoth' || codec === 'palimpsest' || codec === 'daedalus' || codec === 'orthos' || codec === 'stentor' || codec === 'abacus' || codec === 'procrustes' || codec === 'circe' || codec === 'chimera' || codec === 'caesura' || codec === 'syntagma' || codec === 'prosopon' || codec === 'epistle' || codec === 'arithmos' || codec === 'kallos' || codec === 'panoptes' || codec === 'episteme' || codec === 'metatron' || codec === 'synizesis' || codec === 'syntomia' || codec === 'eustochia' || codec === 'akribeia' || codec === 'logistike' || codec === 'polytropos' || codec === 'kiones' || codec === 'plinthos' || codec === 'anastrophe';
   const finalOut = includeDecoder ? (decoderIsInline ? selected.preamble : selected.preamble + '\n\n' + selected.out) : selected.out;
   const finalOutTokens = includeDecoder ? countTokens(finalOut, 'o200k_base') : selected.outTok;
 
@@ -777,7 +882,7 @@ export default function Workbench() {
     URL.revokeObjectURL(url);
   }, [finalOut, codec]);
 
-  const exactLane = ['metatron','episteme','panoptes','kallos','arithmos','khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode','hermesContract','chiron','ariadne','sibyl','sequoyah','thoth','palimpsest','daedalus','orthos','stentor','abacus','procrustes','circe','chimera','caesura','syntagma','prosopon','epistle'].includes(codec);
+  const exactLane = ['anastrophe','plinthos','kiones','polytropos','logistike','akribeia','eustochia','syntomia','synizesis','metatron','episteme','panoptes','kallos','arithmos','khoros','omni','genesis','arche','telos','pantheon','apeiron','noesis','synapse','panacea','aether','harmonia','rosetta','kappa','phrase','tau','eclipse','zenith','kernel','iris','crown','aurora','atlas','mosaic','signet','strata','tessera','axiom','orbit','anaphora','pulse','plexus','meridian','quasar','helixAp','veritasVx','apex','eidolon','nexus','mneme','losslessAscii','omegaXi','omegaE8','ltp','prometheus','zeta','janus','sigma','stencil','chronos','chronosArena','asgJson','astCode','hermesContract','chiron','ariadne','sibyl','sequoyah','thoth','palimpsest','daedalus','orthos','stentor','abacus','procrustes','circe','chimera','caesura','syntagma','prosopon','epistle'].includes(codec);
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
@@ -800,7 +905,7 @@ export default function Workbench() {
               Optimal Exact Route: <span className="text-indigo-400 font-mono">{optimalExactCodec ? (LABEL[optimalExactCodec.key] || optimalExactCodec.label) : 'Evaluating…'}</span>
             </div>
             <div className="text-[11px] text-slate-400">
-              {optimalExactCodec ? `${optimalExactCodec.outTokens} tok (${optimalExactCodec.savingsPct > 0 ? `+${optimalExactCodec.savingsPct.toFixed(1)}% savings` : '0% overhead'}) · byte-perfect lossless · zero decode tokens` : 'Analyzing token economics across all lanes…'}
+              {optimalExactCodec && optimalOneChat !== null ? `${optimalOneChat} tok one-chat cost (wire ${optimalExactCodec.outTokens}${DECODE_CONTRACT_TAX[optimalExactCodec.key] ? ` + ${DECODE_CONTRACT_TAX[optimalExactCodec.key]} tok decode contract` : ''}) · byte-perfect lossless · never worse than sending the raw text` : 'Analyzing token economics across all lanes…'}
             </div>
           </div>
         </div>

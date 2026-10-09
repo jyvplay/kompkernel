@@ -52,12 +52,14 @@ import { logosEncode } from '../lib/omega/logos';
 import { hermesEncode } from '../lib/omega/hermes';
 import { hermesContractEncode } from '../lib/omega/hermes-contract';
 import { chironEncode } from '../lib/omega/chiron';
+import { tachysEncode } from '../lib/omega/tachys';
 import { ariadneEncode } from '../lib/omega/ariadne';
 import { sibylEncode } from '../lib/omega/sibyl';
 import { sequoyahEncode } from '../lib/omega/sequoyah';
 import { thothEncode } from '../lib/omega/thoth';
 import { palimpsestEncode } from '../lib/omega/palimpsest';
 import { daedalusEncode } from '../lib/omega/daedalus';
+import { icarusEncode } from '../lib/omega/icarus';
 import { orthosEncode } from '../lib/omega/orthos';
 import { stentorEncode } from '../lib/omega/stentor';
 import { abacusEncode } from '../lib/omega/abacus';
@@ -73,6 +75,15 @@ import { kallosEncode } from '../lib/omega/kallos';
 import { panoptesEncode } from '../lib/omega/panoptes';
 import { epistemeEncode } from '../lib/omega/episteme';
 import { metatronEncode } from '../lib/omega/metatron';
+import { synizesisEncode } from '../lib/omega/synizesis';
+import { syntomiaEncode } from '../lib/omega/syntomia';
+import { eustochiaEncode } from '../lib/omega/eustochia';
+import { akribeiaEncode } from '../lib/omega/akribeia';
+import { logistikeEncode } from '../lib/omega/logistike';
+import { polytroposEncode } from '../lib/omega/polytropos';
+import { kionesEncode } from '../lib/omega/kiones';
+import { plinthosEncode } from '../lib/omega/plinthos';
+import { anastropheEncode } from '../lib/omega/anastrophe';
 import { kappaEncode } from '../lib/omega/kappa';
 import { phraseEncode } from '../lib/omega/phrase';
 import { tauEncode } from '../lib/omega/tau';
@@ -173,12 +184,14 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const tau = tauEncode(input, 'o200k_base');
       const hermesContract = hermesContractEncode(input, 'o200k_base');
       const chiron = chironEncode(input, 'o200k_base');
+      const tachys = tachysEncode(input, 'o200k_base');
       const ariadne = ariadneEncode(input, 'o200k_base');
       const sibyl = sibylEncode(input, 'o200k_base', { budgetMs: 4000 });
       const sequoyah = sequoyahEncode(input, 'o200k_base', { probeScale: 0.5, wordGrid: [0, 20] });
       const thoth = thothEncode(input, 'o200k_base', { probeScale: 0.2, wordGrid: [0, 24] });
       const palimpsest = palimpsestEncode(input, 'o200k_base', { budgetMs: 6000, maxArms: 3 });
       const daedalus = daedalusEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const icarus = icarusEncode(input, 'o200k_base');
       const orthos = orthosEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
       const stentor = stentorEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
       const abacus = abacusEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
@@ -194,6 +207,15 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
       const panoptes = panoptesEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
       const episteme = epistemeEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
       const metatron = metatronEncode(input, 'o200k_base', { budgetMs: 8000, maxArms: 2 });
+      const synizesis = synizesisEncode(input, 'o200k_base', { budgetMs: 2500 });
+      const syntomia = syntomiaEncode(input, 'o200k_base', { budgetMs: 2500, incumbent: metatron });
+      const eustochia = eustochiaEncode(input, 'o200k_base', { maxArms: 2, armBudgetMs: 80, incumbent: metatron });
+      const akribeia = akribeiaEncode(input, 'o200k_base', { maxArms: 3, armBudgetMs: 80, incumbent: metatron });
+      const logistike = logistikeEncode(input, 'o200k_base', { maxArms: 4, armBudgetMs: 80, incumbent: metatron });
+      const polytropos = polytroposEncode(input, 'o200k_base', { maxConfigs: 5, configBudgetMs: 70, incumbent: metatron });
+      const kiones = kionesEncode(input, 'o200k_base', { maxConfigs: 4, configBudgetMs: 60, incumbent: metatron });
+      const plinthos = plinthosEncode(input, 'o200k_base', { maxConfigs: 3, configBudgetMs: 55, incumbent: metatron });
+      const anastrophe = anastropheEncode(input, 'o200k_base', { maxConfigs: 3, configBudgetMs: 55, armBudgetMs: 3000, incumbent: metatron });
 
       const response: CodecWorkerResponse = {
         id,
@@ -228,12 +250,14 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         eclipse,
         hermesContract,
         chiron,
+        tachys,
         ariadne,
         sibyl,
         sequoyah,
         thoth,
         palimpsest,
         daedalus,
+        icarus,
         orthos,
         stentor,
         abacus,
@@ -249,6 +273,15 @@ ctx.onmessage = (event: MessageEvent<CodecWorkerRequest>) => {
         panoptes,
         episteme,
         metatron,
+        synizesis,
+        syntomia,
+        eustochia,
+        akribeia,
+        logistike,
+        polytropos,
+        kiones,
+        plinthos,
+        anastrophe,
         rosetta,
         harmonia,
         aether,
