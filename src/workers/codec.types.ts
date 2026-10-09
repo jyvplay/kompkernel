@@ -56,6 +56,7 @@ import type { HermesContractResult } from '../lib/omega/hermes-contract';
 import type { ChironResult } from '../lib/omega/chiron';
 import type { TachysResult } from '../lib/omega/tachys';
 import type { HydraResult } from '../lib/omega/hydra';
+import type { GlossiaResult } from '../lib/omega/glossia';
 import type { AriadneResult } from '../lib/omega/ariadne';
 import type { SibylResult } from '../lib/omega/sibyl';
 import type { SequoyahResult } from '../lib/omega/sequoyah';
@@ -158,6 +159,7 @@ export interface CodecWorkerResult {
   chiron: ChironResult;
   tachys: TachysResult;
   hydra: HydraResult;
+  glossia: GlossiaResult;
   ariadne: AriadneResult;
   sibyl: SibylResult;
   sequoyah: SequoyahResult;
