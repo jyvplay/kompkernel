@@ -970,7 +970,38 @@ const LMAX_TOKENS = 26;
 const PREFILTER = 1600;
 const EPOCH_APPLY = 12;
 
-function enumerateTokenSpans(parts: string[], enc: EncodingName): Map<string, number> {
+export function enumerateTokenSpans(parts: string[], enc: EncodingName): Map<string, number> {
+  // Same map as the reference (enumerateTokenSpansRef): every token-aligned phrase
+  // of 2..LMAX_TOKENS tokens, counted per part. A phrase is a substring of its part
+  // (the exact-join precondition is checked), so it is taken by offset instead of
+  // re-joining an array per window. Identical keys and counts; the equivalence is
+  // tested on the corpus (bench/chiron-kairos-equiv.ts).
+  const counts = new Map<string, number>();
+  for (const part of parts) {
+    if (part.length < 2) continue;
+    const toks = tokenStrings(part, enc);
+    const n = toks.length;
+    const offs = new Int32Array(n + 1);
+    let pos = 0, ok = true;
+    for (let i = 0; i < n; i++) {
+      const s = toks[i].s;
+      if (part.startsWith(s, pos)) { pos += s.length; offs[i + 1] = pos; }
+      else { ok = false; break; }
+    }
+    if (!ok || pos !== part.length) continue;
+    const lim = Math.min(LMAX_TOKENS, n);
+    for (let len = 2; len <= lim; len++) {
+      for (let at = 0; at + len <= n; at++) {
+        const phrase = part.slice(offs[at], offs[at + len]);
+        counts.set(phrase, (counts.get(phrase) ?? 0) + 1);
+      }
+    }
+  }
+  return counts;
+}
+
+/** Reference implementation (slow). Used only by the equivalence test. */
+export function enumerateTokenSpansRef(parts: string[], enc: EncodingName): Map<string, number> {
   const counts = new Map<string, number>();
   for (const part of parts) {
     if (part.length < 2) continue;
@@ -991,6 +1022,13 @@ function enumerateTokenSpans(parts: string[], enc: EncodingName): Map<string, nu
  * 8. ENCODER
  * ------------------------------------------------------------------------- */
 
+/**
+ * KAIROS default work budget (units; see ChironOptions.workUnits). Measured on
+ * filelock/nose/greenlet/gpl: 32M units reproduces CHIRON's 26 s timed result on
+ * all four lanes (bench/kairos-report.md). Same wire and decoder as CHIRON.
+ */
+export const KAIROS_WORK_UNITS = 32_000_000;
+
 export interface ChironOptions {
   /** wall-clock budget for the search, in ms */
   budgetMs?: number;
@@ -1002,6 +1040,14 @@ export interface ChironOptions {
   maxRules?: number;
   /** unit separator for the block pass */
   sep?: string;
+  /**
+   * KAIROS deterministic budget. When set, the macro search and the variant
+   * sweep stop after this many work units (1 unit = 1 character enumerated or
+   * 1 character tokenised in the search loop) instead of at wall-clock deadlines,
+   * so the output is a pure function of (text, enc, workUnits). The block pass
+   * keeps its wall-clock safety cap (see chironFindBlocks).
+   */
+  workUnits?: number;
 }
 
 function rawResult(text: string, enc: EncodingName, started: number, forced: boolean): ChironResult {
@@ -1029,10 +1075,14 @@ interface BuildOutcome {
   blocks: number;
   lists: number;
   ops: string[];
+  work: number;
 }
 
-function buildCandidate(text: string, enc: EncodingName, script: ChironScript, opts: Required<ChironOptions>): BuildOutcome | null {
+function buildCandidate(text: string, enc: EncodingName, script: ChironScript, opts: Required<Omit<ChironOptions, 'workUnits'>> & { workUnits?: number }): BuildOutcome | null {
   const deadline = Date.now() + opts.budgetMs;
+  const det = opts.workUnits !== undefined;
+  const work = { n: 0 };
+  const spent = (): boolean => (det ? work.n >= (opts.workUnits as number) : Date.now() >= deadline);
   const payloadChars = new Set(text);
   const pool = scriptPool(script, enc).filter(g => !payloadChars.has(g));
   if (!pool.length) return null;
@@ -1157,8 +1207,9 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
   if (!opts.noMacros) {
     let stalled = false;
     let offset = 0;
-    while (!stalled && rules.length < opts.maxRules && Date.now() < deadline) {
+    while (!stalled && rules.length < opts.maxRules && !spent()) {
       const parts = [body, ...rules.filter(r => r.kind === 'lit').map(r => r.text)];
+      for (const q of parts) work.n += q.length;
       const counts = enumerateTokenSpans(parts, enc);
       // Rank cheaply by characters saved, then pay for exact token bounds only
       // on the short list. (Slicing the raw map in insertion order, as an
@@ -1170,13 +1221,13 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
         .sort((a, b) => b.rough - a.rough)
         .slice(0, PREFILTER);
       const cands = rough
-        .map(({ p, c }) => { const t = countTokens(p, enc); return { p, bound: c * (t - 1) - t - 1 }; })
+        .map(({ p, c }) => { work.n += p.length; const t = countTokens(p, enc); return { p, bound: c * (t - 1) - t - 1 }; })
         .filter(x => x.bound > 0)
         .sort((a, b) => b.bound - a.bound);
       const window = cands.slice(offset, offset + EPOCH_APPLY * 5);
       let applied = 0;
       for (const { p } of window) {
-        if (applied >= EPOCH_APPLY || rules.length >= opts.maxRules || Date.now() >= deadline) break;
+        if (applied >= EPOCH_APPLY || rules.length >= opts.maxRules || spent()) break;
         if (!body.includes(p) && !rules.some(r => r.kind === 'lit' && r.text.includes(p))) continue;
         const snapshotRules = rules.map(r => ({ ...r }));
         const snapshotBody = body;
@@ -1186,7 +1237,9 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
         const gl = glyphOf.get(created.id)!;
         for (const r of rules) if (r.kind === 'lit' && r.id !== created.id) r.text = r.text.split(p).join(gl);
         body = body.split(p).join(gl);
-        const t = countTokens(provisionalWire(rules, body, glyphOf), enc);
+        const pw = provisionalWire(rules, body, glyphOf);
+        work.n += pw.length;
+        const t = countTokens(pw, enc);
         if (t < probe) {
           probe = t;
           bestRules = rules.map(r => ({ ...r }));
@@ -1217,17 +1270,19 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
     body = bestBody;
     let trials = 0;
     let changed = true;
-    while (changed && Date.now() < deadline && trials < 400) {
+    while (changed && !spent() && trials < 400) {
       changed = false;
       for (let i = rules.length - 1; i >= 0; i--) {
-        if (trials++ >= 400 || Date.now() >= deadline) break;
+        if (trials++ >= 400 || spent()) break;
         const r = rules[i];
         if (r.kind !== 'lit') continue;
         const g = glyphOf.get(r.id)!;
         if (rules.some(o => o.kind === 'rep' && o.tplRule === r.id)) continue;
         const rest = rules.filter((_, j) => j !== i).map(o => (o.kind === 'lit' ? { ...o, text: o.text.split(g).join(r.text) } : { ...o }));
         const b2 = body.split(g).join(r.text);
-        const t = countTokens(provisionalWire(rest, b2, glyphOf), enc);
+        const pw2 = provisionalWire(rest, b2, glyphOf);
+        work.n += pw2.length;
+        const t = countTokens(pw2, enc);
         if (t < probe) {
           probe = t;
           rules.length = 0; rules.push(...rest);
@@ -1263,7 +1318,7 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
     rules: bestRules.filter(r => r.kind === 'lit').length,
     blocks: bestRules.filter(r => r.kind === 'rep').length,
     lists: bestRules.filter(r => r.kind === 'list').length,
-    ops,
+    ops, work: work.n,
   };
 }
 
@@ -1296,7 +1351,7 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
   const seps = options.sep !== undefined ? [options.sep] : chironSeparators(text);
   const forcedBlocks = options.noBlocks;
   const forcedMacros = options.noMacros;
-  const variants: Array<{ tag: string; o: Required<ChironOptions> }> = [];
+  const variants: Array<{ tag: string; o: Required<Omit<ChironOptions, 'workUnits'>> }> = [];
   if (forcedBlocks !== undefined || forcedMacros !== undefined) {
     for (const sep of seps) {
       variants.push({ tag: `forced/${JSON.stringify(sep)}`, o: { noBlocks: !!forcedBlocks, noMacros: !!forcedMacros, maxRules, budgetMs, sep } });
@@ -1317,7 +1372,35 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
   let bestTag = '';
   // One wall-clock envelope for the whole variant sweep, not per variant.
   const overallDeadline = started + Math.min(26_000, Math.round(budgetMs * 2.1));
+  const workUnits = options.workUnits;
+  // Same 2.1x envelope as the timed sweep: workUnits is one full variant's budget.
+  let workLeft = workUnits !== undefined ? Math.round(workUnits * 2.1) : 0;
   for (const v of variants) {
+    if (workUnits !== undefined) {
+      // Deterministic sweep: each variant gets its share of the unit budget.
+      // Its share is the variant's wall-clock share, so the relative weights
+      // of the four variants match the timed path.
+      if (workLeft < 1) break;
+      const share = Math.round(workUnits * (v.o.budgetMs / budgetMs));
+      const grant = Math.min(share, workLeft);
+      let out: BuildOutcome | null = null;
+      try {
+        out = buildCandidate(text, enc, script, { ...v.o, budgetMs: 20_000, workUnits: grant });
+      } catch { out = null; }
+      workLeft -= out ? out.work : grant;
+      if (!out) continue;
+      if (out.decoded !== text) continue;
+      if (!bestOutcome || out.messageTokens < bestOutcome.messageTokens ||
+        (out.messageTokens === bestOutcome.messageTokens && out.outTokens < bestOutcome.outTokens)) {
+        bestOutcome = out;
+        bestTag = v.tag;
+      }
+      if (v.tag === variants[0].tag && out.blocks === 0 && seps.length === 1) {
+        bestTag = v.tag;
+        break;
+      }
+      continue;
+    }
     const left = overallDeadline - Date.now();
     if (left < 300) break;
     let out: BuildOutcome | null = null;
@@ -1362,7 +1445,7 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
     ops: bestOutcome.ops,
     ms: Date.now() - started,
     mode: 'chiron',
-    notes: `variant=${bestTag}; ${bestOutcome.rules} macro rules, ${bestOutcome.blocks} blocks, ${bestOutcome.lists} lists; script=${script.name}; contract=${bestOutcome.messageTokens - bestOutcome.outTokens} tok for ops [${bestOutcome.ops.join(',')}]; whole-wire decode + message gate verified`,
+    notes: `${workUnits !== undefined ? `kairos work=${bestOutcome.work}/${workUnits}; ` : ''}variant=${bestTag}; ${bestOutcome.rules} macro rules, ${bestOutcome.blocks} blocks, ${bestOutcome.lists} lists; script=${script.name}; contract=${bestOutcome.messageTokens - bestOutcome.outTokens} tok for ops [${bestOutcome.ops.join(',')}]; whole-wire decode + message gate verified`,
   };
 }
 

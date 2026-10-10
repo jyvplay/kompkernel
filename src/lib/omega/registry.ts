@@ -72,7 +72,7 @@ import { metisEncode } from './metis';
 import { proteusEncode } from './proteus';
 import { logosEncode } from './logos';
 import { hermesEncode } from './hermes';
-import { chironEncode } from './chiron';
+import { chironEncode, KAIROS_WORK_UNITS } from './chiron';
 import { tachysEncode } from './tachys';
 import { hydraEncode } from './hydra';
 import { glossiaEncode } from './glossia';
@@ -760,6 +760,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'ariadne', label: '⟁ ARIADNE (Symbol-Space Optimal Parse + Glyph Assignment)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = ariadneEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'kairos', label: '⟐ KAIROS (CHIRON search, deterministic work-unit budget: same wire and decoder, reproducible output)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = chironEncode(t, enc, { workUnits: KAIROS_WORK_UNITS }); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok (contract ${r.contractTokens} + wire ${r.outTokens}) vs identity ${r.inTokens}` }; },
     },
     {
       key: 'chiron', label: '⟐ CHIRON (Two-Part-MDL Text Program)', family: 'exact', fidelity: 'exact',
