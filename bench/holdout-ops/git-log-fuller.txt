@@ -1,0 +1,9 @@
+commit 119721e70465a22feea664ab88963885928970c2
+Author:     jyvplay <jyvplay@gmail.com>
+AuthorDate: 2026-09-30 03:57:16 -0400
+Commit:     GitHub <noreply@github.com>
+CommitDate: 2026-09-30 03:57:16 -0400
+
+    Merge pull request #24 from jyvplay/arena/01a0f0e7-kompkernel
+    
+    feat(omega): Add METATRON, EPISTEME, PANOPTES, KALLOS, ARITHMOS codecs & Optimal Router

@@ -1,0 +1,45 @@
+diff --git a/src/lib/omega/chiron.ts b/src/lib/omega/chiron.ts
+index 3f8a1c2..9d4e7b0 100644
+--- a/src/lib/omega/chiron.ts
++++ b/src/lib/omega/chiron.ts
+@@ -140,6 +140,7 @@ export interface ChironScript {
+   label: string;
+   lo: number;
+   hi: number;
++  ranges?: Array<[number, number]>;
+ }
+ 
+ export const CHIRON_SCRIPTS: ChironScript[] = [
+@@ -152,6 +153,18 @@ export const CHIRON_SCRIPTS: ChironScript[] = [
+   { name: 'khmer', label: 'Khmer letter', lo: 0x1780, hi: 0x1800 },
+   { name: 'cjk', label: 'Chinese character', lo: 0x4e00, hi: 0xa000 },
++  {
++    name: 'polyglot',
++    label: 'Greek, Hebrew, Armenian, Georgian, Thai or Indic letter',
++    lo: 0x0370,
++    hi: 0x0370,
++    ranges: [
++      [0x0370, 0x0400], [0x0530, 0x0590], [0x0590, 0x0600], [0x0900, 0x0980],
++      [0x0980, 0x0a00], [0x0a00, 0x0a80], [0x0a80, 0x0b00], [0x0b80, 0x0c00],
++    ],
++  },
+ ];
+ 
+ const poolCache = new Map<string, string[]>();
+diff --git a/src/lib/omega/ariadne.ts b/src/lib/omega/ariadne.ts
+index 1a2b3c4..5e6f7a8 100644
+--- a/src/lib/omega/ariadne.ts
++++ b/src/lib/omega/ariadne.ts
+@@ -848,10 +848,14 @@ function assignmentGain(rules: Rule[], pool: string[]): number {
+-  let total = 0;
+-  for (const r of rules) total += r.count;
+-  return total;
++  let total = 0;
++  for (const r of rules) {
++    total += r.count;
++    if (r.adjacent) total += r.adjacent * 0.5;
++  }
++  return Math.round(total);
+ }
+ 
+ function searchGain(rules: Rule[], pool: string[], budgetMs: number): number {

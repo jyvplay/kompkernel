@@ -1,0 +1,53 @@
+From: Dana Whitfield <dana.whitfield@northgate-analytics.com>
+Date: Tue, 23 Sep 2026 14:08:11 -0400
+To: Marcus Oyelaran <m.oyelaran@northgate-analytics.com>
+Cc: Priya Raghunathan <priya.r@northgate-analytics.com>, Tom Beckett <tbeckett@northgate-analytics.com>
+Subject: Re: Q3 reconciliation variance - need a decision by Thursday
+
+Marcus,
+
+I pulled the ledger again this morning and the variance is still there. It is 18,442.17 on the
+consolidated view and 18,442.17 on the subsidiary view, so at least it is consistent now.
+
+My read is that we booked the Halstead refund twice: once on 2026-08-14 against cost center 4120
+and once on 2026-08-29 against cost center 4180. If that is right, the fix is a single reversing
+entry and we are done.
+
+Can you confirm with the AP team before Thursday?
+
+Dana
+
+> On Tue, 23 Sep 2026 at 11:42, Marcus Oyelaran <m.oyelaran@northgate-analytics.com> wrote:
+>
+> Dana,
+>
+> Agreed that the number is stable. I am less sure about the double-booking theory. The 08-29
+> entry has a different vendor reference (HAL-2026-0881 vs HAL-2026-0774) which suggests two
+> separate credits rather than one duplicated credit.
+>
+> I would rather we pull the original remittance advice before we reverse anything. Priya, do you
+> still have the August remittance PDFs?
+>
+> Marcus
+>
+> > On Mon, 22 Sep 2026 at 17:03, Priya Raghunathan <priya.r@northgate-analytics.com> wrote:
+> >
+> > Both,
+> >
+> > I have the remittance advice for 08-14 but not for 08-29. I have asked Halstead AR for a
+> > copy and they said 2 business days, so Wednesday at the earliest.
+> >
+> > One more thing: the 4180 cost center was only opened on 2026-08-25, so any entry against it
+> > before that date would have failed validation. That makes a genuine second credit more
+> > likely than a duplicate.
+> >
+> > Priya
+> >
+> > > On Mon, 22 Sep 2026 at 09:15, Tom Beckett <tbeckett@northgate-analytics.com> wrote:
+> > >
+> > > Team,
+> > >
+> > > Flagging that audit wants the Q3 reconciliation closed by 2026-09-30. If the variance is
+> > > unresolved we have to disclose it as a known item, which I would prefer to avoid.
+> > >
+> > > Tom

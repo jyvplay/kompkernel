@@ -54,12 +54,17 @@ import type { ZenithResult } from '../lib/omega/zenith';
 import type { EclipseResult } from '../lib/omega/eclipse';
 import type { HermesContractResult } from '../lib/omega/hermes-contract';
 import type { ChironResult } from '../lib/omega/chiron';
+import type { TachysResult } from '../lib/omega/tachys';
+import type { HydraResult } from '../lib/omega/hydra';
+import type { GlossiaResult } from '../lib/omega/glossia';
+import type { EidosResult } from '../lib/omega/eidos';
 import type { AriadneResult } from '../lib/omega/ariadne';
 import type { SibylResult } from '../lib/omega/sibyl';
 import type { SequoyahResult } from '../lib/omega/sequoyah';
 import type { ThothResult } from '../lib/omega/thoth';
 import type { PalimpsestResult } from '../lib/omega/palimpsest';
 import type { DaedalusResult } from '../lib/omega/daedalus';
+import type { IcarusResult } from '../lib/omega/icarus';
 import type { OrthosResult } from '../lib/omega/orthos';
 import type { StentorResult } from '../lib/omega/stentor';
 import type { AbacusResult } from '../lib/omega/abacus';
@@ -75,6 +80,15 @@ import type { KallosResult } from '../lib/omega/kallos';
 import type { PanoptesResult } from '../lib/omega/panoptes';
 import type { EpistemeResult } from '../lib/omega/episteme';
 import type { MetatronResult } from '../lib/omega/metatron';
+import type { SynizesisResult } from '../lib/omega/synizesis';
+import type { SyntomiaResult } from '../lib/omega/syntomia';
+import type { EustochiaResult } from '../lib/omega/eustochia';
+import type { AkribeiaResult } from '../lib/omega/akribeia';
+import type { LogistikeResult } from '../lib/omega/logistike';
+import type { PolytroposResult } from '../lib/omega/polytropos';
+import type { KionesResult } from '../lib/omega/kiones';
+import type { PlinthosResult } from '../lib/omega/plinthos';
+import type { AnastropheResult } from '../lib/omega/anastrophe';
 import type { PersistentDictEntry } from '../lib/omega/persistent-dict';
 
 export interface CodecWorkerRequest {
@@ -144,12 +158,17 @@ export interface CodecWorkerResult {
   eclipse: EclipseResult;
   hermesContract: HermesContractResult;
   chiron: ChironResult;
+  tachys: TachysResult;
+  hydra: HydraResult;
+  glossia: GlossiaResult;
+  eidos: EidosResult;
   ariadne: AriadneResult;
   sibyl: SibylResult;
   sequoyah: SequoyahResult;
   thoth: ThothResult;
   palimpsest: PalimpsestResult;
   daedalus: DaedalusResult;
+  icarus: IcarusResult;
   orthos: OrthosResult;
   stentor: StentorResult;
   abacus: AbacusResult;
@@ -165,6 +184,15 @@ export interface CodecWorkerResult {
   panoptes: PanoptesResult;
   episteme: EpistemeResult;
   metatron: MetatronResult;
+  synizesis: SynizesisResult;
+  syntomia: SyntomiaResult;
+  eustochia: EustochiaResult;
+  akribeia: AkribeiaResult;
+  logistike: LogistikeResult;
+  polytropos: PolytroposResult;
+  kiones: KionesResult;
+  plinthos: PlinthosResult;
+  anastrophe: AnastropheResult;
 }
 
 export interface CodecWorkerFailure {
