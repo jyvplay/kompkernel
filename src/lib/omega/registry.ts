@@ -83,6 +83,7 @@ import { nyxEncode } from './nyx';
 import { echoEncode } from './echo';
 import { letheEncode } from './lethe';
 import { oracleEncode } from './oracle';
+import { hyleEncode } from './hyle';
 import { ariadneEncode } from './ariadne';
 import { sibylEncode } from './sibyl';
 import { sequoyahEncode } from './sequoyah';
@@ -802,6 +803,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'oracle', label: '🔮 ORACLE (Knowledge Fold: firstAuthorYear → parametric memory ∇ pages)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = oracleEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'hyle', label: '🪨 HYLE (Matter Fold: canonical regeneration ∇ derived-column elision + slot alignment + depth indent)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = hyleEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok (wire ${r.outTokens} + contract ${r.contractTokens}) vs identity ${r.inTokens}; folds=${r.folds.join('+') || 'none'}; exact=${r.exact}` }; },
     },
     {
       key: 'metis', label: '⬤ METIS-Ω (Polymorphic Grammar Frontier)', family: 'exact', fidelity: 'exact',

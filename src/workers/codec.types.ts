@@ -28,6 +28,7 @@ import type { PantheonResult } from '../lib/omega/pantheon';
 import type { TelosResult } from '../lib/omega/telos';
 import type { ArcheResult } from '../lib/omega/arche';
 import type { GenesisResult } from '../lib/omega/genesis';
+import type { HyleResult } from '../lib/omega/hyle';
 import type { OmniResult } from '../lib/omega/omni';
 import type { KhorosResult } from '../lib/omega/khoros';
 import type { KairosResult } from '../lib/omega/kairos';
@@ -132,6 +133,8 @@ export interface CodecWorkerResult {
   telos?: TelosResult;
   arche?: ArcheResult;
   genesis?: GenesisResult;
+  /** HYLE — matter fold: canonical regeneration of derived table columns. */
+  hyle?: HyleResult;
   omni?: OmniResult;
   khoros?: KhorosResult;
   kairos?: KairosResult;
