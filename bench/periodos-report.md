@@ -62,8 +62,40 @@ the codec returns the CHIRON wire, so it is never worse than the incumbent.
 
 ## Subset run (reproducible selection: documents where PERIODOS wraps ≥ 3 paragraphs)
 
-See the section *Subset results* at the end (filled from `bench/tmp/subset-s*.out` once the run
-finished; numbers are copied verbatim from the run output).
+Command: `SUBSET=wrapped SHARD=0/2|1/2 node bench/tmp/periodos-bench.mjs <corpus dirs> bench/holdout*`.
+Selection is a pure function of the text (`periodosBuild(text).wrapped ≥ 3`), so the **set** is
+reproducible. The **numbers** were produced with two processes sharing 2 cores, so each CHIRON
+result carries load noise (measured ±0.5% on GPL-3.0: quiet 6684 vs loaded 6728 for CHIRON alone).
+Rows: `bench/tmp/subset-s0.out`, `bench/tmp/subset-s1.out` (not committed; regenerable).
+
+| measure (84 documents) | tokens | note |
+|---|---:|---|
+| Σ raw | 284 184 | |
+| Σ CHIRON alone | 222 798 | |
+| Σ incumbent = min(raw, CHIRON, STICHOS-family) | 220 263 | the current frontier on this subset |
+| Σ min(incumbent, PERIODOS) | 219 599 | **PERIODOS adds 664 tokens (0.30%)** |
+| PERIODOS applied (wins its own arm) | 27 of 84 documents | |
+| PERIODOS better than STICHOS by ≥ 4 tokens | 10 documents | |
+| PERIODOS worse than STICHOS by ≥ 1 token | 14 documents | STICHOS's single width is cheaper on uniform documents |
+| "PERIODOS > CHIRON" (noise indicator) | 3 documents | all within ±0.5%, i.e., load noise |
+
+Largest per-document gains against CHIRON alone (tokens, contract included):
+
+| document | raw | CHIRON | STICHOS-family | PERIODOS-family | Δ vs CHIRON |
+|---|---:|---:|---:|---:|---:|
+| licenses/gpl-3.0.txt | 7737 | 6728 | 6546 | 6430 | −298 (−4.4%) |
+| licenses/cecill-2.1.txt | 5762 | 4831 | 4522 | 4551 | −280 (−5.8%) |
+| licenses/agpl-3.0.txt | 7593 | 6533 | 6499 | 6259 | −274 (−4.2%) |
+| licenses/lgpl-2.1.txt | 5912 | 5119 | 4869 | 4849 | −270 (−5.3%) |
+| licenses/gfdl-1.3.txt | 5134 | 4506 | 4277 | 4282 | −224 (−5.0%) |
+| licenses/odbl-1.0.txt | 5718 | 4559 | 4360 | 4384 | −175 (−3.8%) |
+| licenses/gpl-2.0.txt | 4165 | 3739 | 3664 | 3614 | −125 (−3.3%) |
+| licenses/ecl-2.0.txt | 2516 | 2226 | 2105 | 2107 | −119 (−5.3%) |
+
+Reading: the lane where PERIODOS pays is **long, tool-wrapped legal/plain prose** (licences, GFDL,
+ODbL). Elsewhere the gain is ≤ 90 tokens and often negative, and the min over arms keeps the
+incumbent. Across the whole 84-document subset the aggregate is small (0.30%), which is the honest
+size of this lane on this corpus.
 
 ## Runtime (honest disclosure)
 
