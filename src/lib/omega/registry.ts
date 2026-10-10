@@ -91,6 +91,7 @@ import { sequoyahEncode } from './sequoyah';
 import { thothEncode } from './thoth';
 import { palimpsestEncode } from './palimpsest';
 import { daedalusEncode } from './daedalus';
+import { lakonikosEncode } from './lakonikos';
 import { icarusEncode } from './icarus';
 import { orthosEncode } from './orthos';
 import { stentorEncode } from './stentor';
@@ -644,6 +645,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'daedalus', label: '⧗ DAEDALUS (Predicted-Arm Portfolio)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = daedalusEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'lakonikos', label: '⟡ LAKONIKOS (DAEDALUS wire, terse decoder contract: same wire and decoder, fewer contract tokens)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = lakonikosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok (DAEDALUS ${r.messageTokensOld}) vs identity ${r.inTokens}` }; },
     },
     {
       key: 'orthos', label: '♦ ORTHOS (Typographic Canonicalization Pre-Pass)', family: 'exact', fidelity: 'exact',
