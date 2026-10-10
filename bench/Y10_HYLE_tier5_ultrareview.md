@@ -140,8 +140,11 @@ unexecuted LLM decode, or a leaked corpus-specific table is H⁻ regardless of t
 **H⁻ (failed, stated plainly):**
 1. `markdown-table.md`: fast 219 vs best prior 203 → **loses 16**. Full mode 205 →
    **still loses 2** ⇒ tie/H⁻, not a win. Do not claim this file.
-2. `vix-daily-1990.csv`: HYLE fast 2682 vs AION honest 704 → loses by ~2000. The CRLF +
-   126-row date column does not amortise; AION's Δ model is simply better here.
+2. `vix-daily-1990.csv`: fast 2682, **full mode 822** (fold `T,0-126h1+G0` × KIONES) vs
+   AION's honest **704** → still loses, by 118. It does beat raw (3412), CHIRON (1312
+   composed / 1438 alone) and honest GLOSSIA=EIDOS (2013), so it is second best on the
+   file — but second best is not H⁺. AION's Δ model on a 126-row CRLF date column is
+   simply better than a stated calendar here.
 3. `git-numstat.txt`: fast 3948, **full mode 2235** (fold `T\t8-399+G1` × CHIRON) vs the
    prior best 2146 — composition gained 1713 tokens and *still* loses by 89. `json-pkg` 1108 vs 794; `gh-api.json` 2348 vs 1198 — HYLE loses the JSON
    comparisons (brace/quote-dominated, no index-derived column). **`dump.sql` was expected
@@ -231,6 +234,26 @@ Third receipt, and a **win in a non-tabular lane** — `bench/holdout-mk/dump.sq
          G3= created_at;G4= content_hash) VALUES ({100+1m7};G5= {2000+1};G6= {1+1m5};
          G7= '2026-{1+1m9z2}-{1+1z2} {0+1m10z2}:{0+7m60z2}:00+00';Bk"
 ```
+
+Fourth receipt, a **loss that composition nearly closed** — `bench/holdout-tab/vix-daily-1990.csv`:
+
+```
+  raw=3412 M=822 (wire=648 contract=174) exact=true ms=243607
+  winner=hyle:T,0-126h1+G0:k
+  tried=raw/b=3415  raw+Th1+G0/b=2682  raw+Th2+G0/b=2689  raw+Th1+G0/c=1312
+        raw+Th1+G0/g=1546(lanes:anaphora+tessera-local)  raw+Th1+G0/e=1546
+        raw+Th1+G0/a=1546  raw+Th1+G0/k=822  raw+Th2+G0/c=1319
+  wire0="¦T,0-126h1;G0=@1990-01-02+178w-48,101,146;Bk"
+```
+
+raw 3415 → date fold alone 2682 → × CHIRON 1312 → × KIONES **822**, against AION's 704.
+Composition bought 1860 tokens and still fell 118 short. Note the `g/e/a` arms here are
+re-billed with *two* lanes (`anaphora+tessera-local`, 1546) — the honest accounting is
+what makes the comparison meaningful at all, since billed they would have read 952.
+
+The composition sweep over all four files it was run on is now **complete**: 2 wins
+(aapl +13, dump.sql +82) and 2 losses (git-numstat −89, vix −118), all `exact = true`,
+all margins measured against honest prior numbers.
 
 raw 1798 → fold alone 824 → × KIONES **650**, against `raw/c` 816 and the prior best 732.
 Two things to notice: `nHead=0` wins here (the statement block has no header row), and
@@ -721,9 +744,12 @@ died with a sandbox timeout, which is why every long sweep is now redirected to 
 and polled — that is a real constraint of this environment, not a modelling choice.
 
 **Not finished, and not claimed as finished:**
-1. `dump.sql` and `vix-daily-1990.csv` full-mode composition numbers are still being
-   computed (git-numstat has landed: 3948 → 2235, still a loss by 89, §C2). The prior for
-   the remaining two is that composition narrows but does not close the gap.
+1. ~~Full-mode composition numbers still being computed~~ — **now complete** for all four
+   files (`bench/tmp/compose.txt`, `DONE`): aapl 1264 **win +13**, dump.sql 650 **win
+   +82**, git-numstat 2235 loss −89, vix 822 loss −118. Wall-clock: 278 s + 256 s +
+   390 s + 244 s = **1168 s** on 2 cores at a 180 s/file nominal budget (the budget is
+   per-variant-pass, not a hard cap, which is why the runs overran it — recorded as an
+   encoder defect to fix, not as a measurement error).
 2. The **Python-f-string column spec** (`P<c>=<fstring>`, contract ≈24 tok vs ≈112 for
    the current generator grammar) is the largest remaining token win and was **deferred
    by decision**, not attempted. It would extend E1 from a fixed grammar to arbitrary
@@ -917,7 +943,7 @@ lossy or requires a bilingual dictionary larger than the contract budget allows
 | tbl | psql-output.txt | 675 | 364 (KIONES) | **268** | **H⁺ +96** (fast, 20 ms) |
 | tbl | markdown-table.md | 330 | 203 (KIONES) | 219 fast / 205 full | H⁻ −16 / −2 |
 | tab | aapl-2014.csv | 3108 | 1277 (AION) | **1264** | **H⁺ +13** (full, 278 s) |
-| tab | vix-daily-1990.csv | 3412 | 704 (AION) | 2682 | H⁻ |
+| tab | vix-daily-1990.csv | 3412 | 704 (AION) | 2682 fast / **822 full** | H⁻ −118 (2nd best) |
 | mk | dump.sql | 1795 | 732 (KIONES) | 824 fast / **650 full** | **H⁺ +82** (full, 256 s) |
 | ops | git-numstat.txt | 4632 | 2146 | 3948 fast / **2235 full** | H⁻ −89 (composition gained 1713) |
 | ops | package-lock-head.json | 15009 | not re-measured | 13678 (8.9%) | H∂ (no prior receipt this session) |
