@@ -1,0 +1,18 @@
+Text in ⟦a…b⟧ is copied from the earlier text in this chat: start at the first a after the previous copy, and copy through the next b.
+import time
+import types
+
+from typing_extensions import Self⟦
+
+from…re
+from ._re⟧quest import Request
+from ._response import Response
+from ._urls import URL⟦
+
+__al…rigin,⟧ hostname=request.headers["Host"],⟦ backend=…f) -> None:
+        ⟧⟦time.m…s(self) -> ⟧list["Connection"⟦]:
+        r…nings
+⟧
+⟦            w…er__(self) -> ⟧Self⟦:
+        return s…f.close()
+⟧
