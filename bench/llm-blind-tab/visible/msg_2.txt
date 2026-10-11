@@ -1,0 +1,8 @@
+Table in column-major form: each line below is one column; row i is cell i of every line, joined by commas.
+§я,General Motorsляяяяях.2,ҵ.6,А.7,ҟ.8,м.1,д,193ѕ,194¶invest,317ҵ391ҟ410ҵ257А330ҟ461х512,448,499ҵ547.5
+value,3078.5,4661А5387м2792х4313х4643.9,4551х3244м4053А4379.3
+capital,2ҟ52ҵ156.9,209х203.4,207х255х303А264м201.6
+firmлл
+yearд5д6д7д8д9ѕ0ѕ1ѕ2ѕ3ѕ4
+
+New Cyrillic before ¶ starts a rule to the next new Cyrillic or ¶. After ¶, expand rules recursively; print only the result.

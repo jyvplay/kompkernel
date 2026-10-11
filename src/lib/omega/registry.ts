@@ -72,7 +72,7 @@ import { metisEncode } from './metis';
 import { proteusEncode } from './proteus';
 import { logosEncode } from './logos';
 import { hermesEncode } from './hermes';
-import { chironEncode } from './chiron';
+import { chironEncode, KAIROS_WORK_UNITS } from './chiron';
 import { tachysEncode } from './tachys';
 import { hydraEncode } from './hydra';
 import { glossiaEncode } from './glossia';
@@ -83,12 +83,15 @@ import { nyxEncode } from './nyx';
 import { echoEncode } from './echo';
 import { letheEncode } from './lethe';
 import { oracleEncode } from './oracle';
+import { stichosEncode, stichosMetatronEncode } from './stichos';
+import { periodosEncode } from './periodos';
 import { ariadneEncode } from './ariadne';
 import { sibylEncode } from './sibyl';
 import { sequoyahEncode } from './sequoyah';
 import { thothEncode } from './thoth';
 import { palimpsestEncode } from './palimpsest';
 import { daedalusEncode } from './daedalus';
+import { lakonikosEncode } from './lakonikos';
 import { icarusEncode } from './icarus';
 import { orthosEncode } from './orthos';
 import { stentorEncode } from './stentor';
@@ -644,6 +647,10 @@ export function codecEntries(): Entry[] {
       run: async (t, enc) => { const r = daedalusEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
+      key: 'lakonikos', label: '⟡ LAKONIKOS (DAEDALUS wire, terse decoder contract: same wire and decoder, fewer contract tokens)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = lakonikosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok (DAEDALUS ${r.messageTokensOld}) vs identity ${r.inTokens}` }; },
+    },
+    {
       key: 'orthos', label: '♦ ORTHOS (Typographic Canonicalization Pre-Pass)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = orthosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
@@ -760,6 +767,10 @@ export function codecEntries(): Entry[] {
       run: async (t, enc) => { const r = ariadneEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
+      key: 'kairos', label: '⟐ KAIROS (CHIRON search, deterministic work-unit budget: same wire and decoder, reproducible output)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = chironEncode(t, enc, { workUnits: KAIROS_WORK_UNITS }); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok (contract ${r.contractTokens} + wire ${r.outTokens}) vs identity ${r.inTokens}` }; },
+    },
+    {
       key: 'chiron', label: '⟐ CHIRON (Two-Part-MDL Text Program)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = chironEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok (contract ${r.contractTokens} + wire ${r.outTokens}) vs identity ${r.inTokens}` }; },
     },
@@ -802,6 +813,18 @@ export function codecEntries(): Entry[] {
     {
       key: 'oracle', label: '🔮 ORACLE (Knowledge Fold: firstAuthorYear → parametric memory ∇ pages)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = oracleEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'stichos', label: '📜 STICHOS (Verse-Line Fold: greedy-refill layout ∇ + CHIRON stack)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = stichosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'periodos', label: '¶ PERIODOS (per-paragraph measure: greedy-refill layout ∇ + CHIRON stack; reader must count columns — LLM decode unverified)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = periodosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'stichos-metatron', label: '📜⟁ STICHOS∘METATRON (verse-line layout under METATRON)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = stichosMetatronEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'metis', label: '⬤ METIS-Ω (Polymorphic Grammar Frontier)', family: 'exact', fidelity: 'exact',

@@ -1,0 +1,8 @@
+-22	18041	7	bench/tmp/csvcorpus/statsmodels__statsmodels-0.15.0__statsmodels__datasets__co2__co2.csv
+-4	14072	1	bench/tmp/csvcorpus/statsmodels__statsmodels-0.15.0__statsmodels__tsa__statespace__tests__results__results_varmax_stata.csv
+-2	1813	2	bench/tmp/csvcorpus/statsmodels__statsmodels-0.15.0__statsmodels__tsa__tests__results__DUN.csv
+14	751	5	bench/tmp/csvcorpus/statsmodels__statsmodels-0.15.0__statsmodels__discrete__tests__results__ships.csv
+25	20837	8	bench/tmp/csvcorpus/statsmodels__statsmodels-0.15.0__statsmodels__datasets__anes96__src__anes96.csv
+32	18973	8	bench/tmp/csvcorpus/statsmodels__statsmodels-0.15.0__statsmodels__datasets__anes96__anes96.csv
+144	5400	36	bench/tmp/csvcorpus/statsmodels__statsmodels-0.15.0__statsmodels__nonparametric__tests__results__results_kde.csv
+{"minN":4,"filesWithRuns":7,"filesSmaller":3,"totIn":79887,"totOut":80074,"delta":187,"pct":0.234}
