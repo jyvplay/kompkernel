@@ -1,0 +1,92 @@
+ bench/klimax/numlist-probe.ts                      |  45 ++++++
+ bench/klimax/probe.ts                              |  52 +++++++
+ bench/klimax/receipts/klimax-runs-probe.txt        |   8 +
+ bench/klimax/receipts/numlist-probe.txt            |   2 +
+ bench/llm-blind-tab/decode/dec_1.csv               |  11 ++
+ bench/llm-blind-tab/decode/dec_1_columns.txt       |   5 +
+ bench/llm-blind-tab/decode/dec_1_rebuilt.csv       |  11 ++
+ bench/llm-blind-tab/decode/dec_2.csv               |  11 ++
+ bench/llm-blind-tab/decode/dec_2_columns.txt       |  17 +++
+ bench/llm-blind-tab/decode/dec_3_columns.txt       |  16 ++
+ bench/llm-blind-tab/decode/dec_3_corrected.csv     |  12 ++
+ bench/llm-blind-tab/decode/dec_3_firstpass.csv     |  12 ++
+ bench/llm-blind-tab/decode/dec_3_mechanical.csv    |  12 ++
+ bench/llm-blind-tab/decode/mdecode.py              |  34 +++++
+ bench/llm-blind-tab/decode/mdecode_transpose.py    |   8 +
+ bench/llm-blind-tab/decode2/dec_4.csv              |  12 ++
+ bench/llm-blind-tab/decode2/dec_4_columns.txt      |  11 ++
+ bench/llm-blind-tab/decode2/dec_5.csv              |  12 ++
+ bench/llm-blind-tab/decode2/dec_5_columns.txt      |  12 ++
+ bench/llm-blind-tab/gen.ts                         |  18 +++
+ bench/llm-blind-tab/gen2.ts                        |  18 +++
+ bench/llm-blind-tab/hidden/colTT_1.txt             |   5 +
+ bench/llm-blind-tab/hidden/colTT_2.txt             |   5 +
+ bench/llm-blind-tab/hidden/colTT_3.txt             |   9 ++
+ bench/llm-blind-tab/hidden/table_1.csv             |  11 ++
+ bench/llm-blind-tab/hidden/table_2.csv             |  11 ++
+ bench/llm-blind-tab/hidden/table_3.csv             |  12 ++
+ bench/llm-blind-tab/hidden/wire_1.txt              |   5 +
+ bench/llm-blind-tab/hidden/wire_2.txt              |   5 +
+ bench/llm-blind-tab/hidden/wire_3.txt              |   2 +
+ bench/llm-blind-tab/hidden2/colTT_4.txt            |   9 ++
+ bench/llm-blind-tab/hidden2/colTT_5.txt            |   9 ++
+ bench/llm-blind-tab/hidden2/table_4.csv            |  12 ++
+ bench/llm-blind-tab/hidden2/table_5.csv            |  12 ++
+ bench/llm-blind-tab/hidden2/wire_4.txt             |   9 ++
+ bench/llm-blind-tab/hidden2/wire_5.txt             |   6 +
+ bench/llm-blind-tab/receipts-z8.json               |  59 +++++++
+ .../llm-blind-tab/receipts-z9-tabmin-roundtrip.txt | 100 ++++++++++++
+ bench/llm-blind-tab/score.py                       |  26 ++++
+ bench/llm-blind-tab/tabmin-roundtrip.ts            |  21 +++
+ bench/llm-blind-tab/visible/msg_1.txt              |   8 +
+ bench/llm-blind-tab/visible/msg_2.txt              |   8 +
+ bench/llm-blind-tab/visible/msg_3.txt              |   5 +
+ bench/llm-blind-tab/visible2/msg_4.txt             |  12 ++
+ bench/llm-blind-tab/visible2/msg_5.txt             |   9 ++
+ bench/tabmin-bench.ts                              |  13 ++
+ bench/tabmin-receipts/REPORT.md                    |  25 +++
+ bench/tabmin-receipts/files-169.txt                | 169 +++++++++++++++++++++
+ bench/tabmin-receipts/tabmin-bench-169.jsonl       | 169 +++++++++++++++++++++
+ bench/tabmin-roundtrip.ts                          |  27 ++++
+ bench/z10-report-2026-10-10.md                     | 134 ++++++++++++++++
+ bench/z10/amphora-0.err                            |   0
+ bench/z10/amphora-0.jsonl                          |  25 +++
+ bench/z10/amphora-1.err                            |   0
+ bench/z10/amphora-1.jsonl                          |  24 +++
+ bench/z10/amphora-long-0.err                       |   0
+ bench/z10/amphora-long-0.jsonl                     |   5 +
+ bench/z10/amphora-long-1.err                       |   0
+ bench/z10/amphora-long-1.jsonl                     |   5 +
+ bench/z10/amphora-verify-47.jsonl                  |  49 ++++++
+ bench/z10/amphora-verify-long8.jsonl               |  10 ++
+ bench/z10/amphora-verify.ts                        |  13 ++
+ bench/z10/amphora-wires-cases.json                 |   1 +
+ bench/z10/amphora-wires-independent-decode.json    |   1 +
+ bench/z10/ariadne-micromatch.err                   |   0
+ bench/z10/ariadne-micromatch.jsonl                 |   3 +
+ bench/z10/ariadne-probe.ts                         |  10 ++
+ bench/z10/budget-A.err                             |   0
+ bench/z10/budget-A.jsonl                           |  13 ++
+ bench/z10/budget-probe.ts                          |  15 ++
+ bench/z10/chiron-vs-daedalus.ts                    |  15 ++
+ bench/z10/cvd.err                                  |   0
+ bench/z10/cvd.jsonl                                |   5 +
+ bench/z10/hcvd-0.err                               |   0
+ bench/z10/hcvd-0.jsonl                             |  23 +++
+ bench/z10/hcvd-1.err                               |   0
+ bench/z10/hcvd-1.jsonl                             |  22 +++
+ bench/z10/holdout-cvd.ts                           |  14 ++
+ bench/z10/holdout43.txt                            |  43 ++++++
+ bench/z10/leaders-micromatch.err                   |   0
+ bench/z10/leaders-micromatch.jsonl                 |   4 +
+ bench/z10/leaders.ts                               |  20 +++
+ bench/z10/long-prose-files.txt                     |   8 +
+ bench/z10/translit-probe.ts                        |  24 +++
+ bench/z10/verify-files.txt                         |   8 +
+ bench/z7-report-2026-10-10.md                      |  92 +++++++++++
+ bench/z8-report-2026-10-10.md                      | 111 ++++++++++++++
+ bench/z9-report-2026-10-10.md                      | 109 +++++++++++++
+ src/lib/omega/amphora.ts                           | 100 ++++++++++++
+ src/lib/omega/registry.ts                          |  10 ++
+ src/lib/omega/tabmin.ts                            | 132 ++++++++++++++++
+ 91 files changed, 2160 insertions(+)

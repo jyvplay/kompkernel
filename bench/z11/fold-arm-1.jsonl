@@ -1,0 +1,7 @@
+{"f":"bench/holdout/json-pkg.txt","in":1152,"folds":["Ib4"],"bodyTok":1042,"dae":{"msg":804,"ok":true,"arm":"","ms":1174},"chiron":{"msg":846,"ok":true}}
+{"f":"bench/holdout-ops/git-numstat.txt","in":4632,"folds":["T\t8-399","G1"],"bodyTok":3848,"dae":{"msg":2121,"ok":true,"arm":"","ms":41972},"chiron":{"msg":2238,"ok":true}}
+{"f":"bench/holdout-tbl/markdown-table.md","in":330,"folds":["T|0-11h2","G023456"],"bodyTok":60,"dae":{"msg":221,"ok":true,"arm":"","ms":0},"chiron":{"msg":221,"ok":true}}
+{"f":"bench/holdout-ops/package-lock-head.json","in":15009,"folds":["Ib2"],"bodyTok":13612,"dae":{"msg":5585,"ok":true,"arm":"","ms":20860},"chiron":{"msg":5744,"ok":true}}
+{"f":"bench/holdout-tab/aapl-2014.csv","in":3108,"folds":["T,0-240h1","G0"],"bodyTok":1428,"dae":{"msg":1295,"ok":true,"arm":"","ms":8583},"chiron":{"msg":1319,"ok":true}}
+{"f":"bench/holdout-tbl/kubectl-get-pods.txt","in":1006,"folds":["T_0-22h1","G0123456","A7"],"bodyTok":11,"dae":{"msg":354,"ok":true,"arm":"","ms":1},"chiron":{"msg":354,"ok":true}}
+{"f":"bench/holdout-mk/dump.sql","in":1795,"folds":["T,11-36","G01234567"],"bodyTok":599,"dae":{"msg":678,"ok":true,"arm":"","ms":6012},"chiron":{"msg":679,"ok":true}}

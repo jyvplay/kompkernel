@@ -94,6 +94,7 @@ import { daedalusEncode } from './daedalus';
 import { lakonikosEncode } from './lakonikos';
 import { tabminEncode } from './tabmin';
 import { amphoraEncode } from './amphora';
+import { kanonEncode } from './kanon';
 import { icarusEncode } from './icarus';
 import { orthosEncode } from './orthos';
 import { stentorEncode } from './stentor';
@@ -659,6 +660,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'amphora', label: '⚱ AMPHORA (DAEDALUS ∥ CHIRON exact-gated minimum: adds the full-span CHIRON arm where DAEDALUS falls back to identity on long prose; two-arm tournament)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = amphoraEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'kanon', label: '⚖ KANON (HYLE table-fold gate → DAEDALUS on the folded body; AMPHORA otherwise: generated-column + aligned-table folds, no indentation folds, fixed arm)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = kanonEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}; gate=${r.gate}` }; },
     },
     {
       key: 'orthos', label: '♦ ORTHOS (Typographic Canonicalization Pre-Pass)', family: 'exact', fidelity: 'exact',

@@ -1,0 +1,76 @@
+    PID    PPID USER     %CPU %MEM     ELAPSED STAT CMD
+      1       0 root      0.0  0.2    03:31:27 Ss   /sbin/init
+      2       0 root      0.0  0.0    03:31:27 S    [kthreadd]
+      3       2 root      0.0  0.0    03:31:27 I<   [rcu_gp]
+      4       2 root      0.0  0.0    03:31:27 I<   [rcu_par_gp]
+      5       2 root      0.0  0.0    03:31:27 I<   [slub_flushwq]
+      6       2 root      0.0  0.0    03:31:27 I<   [netns]
+      8       2 root      0.0  0.0    03:31:27 I<   [kworker/0:0H-events_highpri]
+     10       2 root      0.0  0.0    03:31:27 I<   [mm_percpu_wq]
+     11       2 root      0.0  0.0    03:31:27 I    [rcu_tasks_kthread]
+     12       2 root      0.0  0.0    03:31:27 I    [rcu_tasks_trace_kthread]
+     13       2 root      0.0  0.0    03:31:27 S    [ksoftirqd/0]
+     14       2 root      0.0  0.0    03:31:27 I    [rcu_preempt]
+     15       2 root      0.0  0.0    03:31:27 S    [migration/0]
+     16       2 root      0.0  0.0    03:31:27 I    [kworker/0:1-events]
+     17       2 root      0.0  0.0    03:31:27 S    [cpuhp/0]
+     18       2 root      0.0  0.0    03:31:27 S    [cpuhp/1]
+     19       2 root      0.0  0.0    03:31:27 S    [migration/1]
+     20       2 root      0.0  0.0    03:31:27 S    [ksoftirqd/1]
+     22       2 root      0.0  0.0    03:31:27 I<   [kworker/1:0H-events_highpri]
+     25       2 root      0.0  0.0    03:31:27 S    [kdevtmpfs]
+     26       2 root      0.0  0.0    03:31:27 I<   [inet_frag_wq]
+     27       2 root      0.0  0.0    03:31:27 S    [kauditd]
+     29       2 root      0.0  0.0    03:31:27 S    [khungtaskd]
+     30       2 root      0.0  0.0    03:31:27 S    [oom_reaper]
+     31       2 root      0.0  0.0    03:31:27 I<   [writeback]
+     32       2 root      0.0  0.0    03:31:27 S    [kcompactd0]
+     33       2 root      0.0  0.0    03:31:27 SN   [ksmd]
+     34       2 root      0.0  0.0    03:31:27 SN   [khugepaged]
+     35       2 root      0.0  0.0    03:31:27 I<   [kintegrityd]
+     36       2 root      0.0  0.0    03:31:27 I<   [kblockd]
+     37       2 root      0.0  0.0    03:31:27 I<   [blkcg_punt_bio]
+     38       2 root      0.0  0.0    03:31:27 S    [watchdogd]
+     39       2 root      0.0  0.0    03:31:27 I<   [rpciod]
+     40       2 root      0.0  0.0    03:31:27 I<   [kworker/1:1H-kblockd]
+     41       2 root      0.0  0.0    03:31:27 I<   [xprtiod]
+     61       2 root      0.0  0.0    03:31:27 S    [kswapd0]
+     65       2 root      0.0  0.0    03:31:27 I<   [nfsiod]
+     67       2 root      0.0  0.0    03:31:27 I<   [kworker/0:1H-kblockd]
+     70       2 root      0.0  0.0    03:31:27 I<   [xfsalloc]
+     71       2 root      0.0  0.0    03:31:27 I<   [xfs_mru_cache]
+     73       2 root      0.0  0.0    03:31:27 I<   [kthrotld]
+     79       2 root      0.0  0.0    03:31:27 S    [irq/24-ACPI:Ged]
+    112       2 root      0.0  0.0    03:31:27 S    [hwrng]
+    144       2 root      0.0  0.0    03:31:27 I<   [iscsi_conn_clea]
+    159       2 root      0.0  0.0    03:31:27 I<   [mld]
+    160       2 root      0.0  0.0    03:31:27 I<   [ipv6_addrconf]
+    167       2 root      0.0  0.0    03:31:27 S    bpfilter_umh
+    168       2 root      0.0  0.0    03:31:27 I<   [kstrp]
+    173       2 root      0.0  0.0    03:31:27 I<   [zswap-shrink]
+    174       2 root      0.0  0.0    03:31:27 I<   [kworker/u5:0]
+    252       2 root      0.0  0.0    03:31:26 S    [jbd2/vda-8]
+    253       2 root      0.0  0.0    03:31:26 I<   [ext4-rsv-conver]
+    284       1 root      0.0  0.2    03:31:26 Ss   /lib/systemd/systemd-journald
+    304       1 _rpc      0.0  0.0    03:31:26 Ss   /sbin/rpcbind -f -w
+    306       1 systemd+  0.0  0.2    03:31:26 Ss   /lib/systemd/systemd-networkd
+    318       1 root      0.0  0.2    03:31:26 Ss   sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+    320       1 _chrony   0.0  0.0    03:31:26 S    /usr/sbin/chronyd -F 1
+    322     320 _chrony   0.0  0.0    03:31:26 S    /usr/sbin/chronyd -F 1
+    327       1 root      0.0  0.0    03:31:25 Ss+  /sbin/agetty -o -p -- \u --noclear - linux
+    329       1 root      0.0  0.0    03:31:25 Ss+  /sbin/agetty -o -p -- \u --noclear - linux
+    330       1 root      0.0  0.0    03:31:25 Ss+  /sbin/agetty -o -p -- \u --noclear - linux
+    331       1 root      0.0  0.0    03:31:25 Ss+  /sbin/agetty -o -p -- \u --noclear - linux
+    332       1 root      0.0  0.0    03:31:25 Ss+  /sbin/agetty -o -p -- \u --noclear - linux
+    348       1 root      0.0  0.0    03:31:20 Ss+  /sbin/agetty -o -p -- \u --noclear - linux
+   1229       1 root      1.0  1.1    03:31:17 S<Lsl /usr/bin/envd
+   3286       2 root      0.0  0.0    02:13:34 I    [kworker/1:1-mm_percpu_wq]
+   3963       2 root      0.0  0.0    01:58:13 I    [kworker/0:2-cgroup_free]
+  56332       2 root      0.0  0.0       41:02 I    [kworker/u4:3-events_unbound]
+  65265       2 root      0.0  0.0       31:41 I    [kworker/u4:1-ext4-rsv-conversion]
+  91817       2 root      0.0  0.0       14:03 I    [kworker/u4:0-events_unbound]
+ 102929       2 root      0.0  0.0       07:35 I    [kworker/1:2-events]
+ 103554       2 root      0.0  0.0       03:10 I    [kworker/u4:2]
+ 103675    1229 user      0.0  0.0       00:00 S    /bin/bash -l -c cd /home/user/kompkernel && { ls -l /usr/bin | head -400; } > bench/z11/fresh/ops-ls-usr-bin.txt 2>&1; { ps -eo pid,ppid,user,pcpu,pmem,etime,stat,cmd | head -200; } > bench/z11/fresh/ops-ps-eo.txt 2>&1; { dpkg-query -W -f='${Package}\t${Version}\t${Architecture}\n' 2>/dev/null | head -400; } > bench/z11/fresh/ops-dpkg-tsv.txt; { git log --pretty=format:'%h\t%an\t%ad\t%s' --date=short -n 200; echo; } > bench/z11/fresh/ops-git-log-tsv.txt; i=0; for f in $(cd bench/tmp/csvcorpus && ls -S | tac | awk 'NR%9==0' | head -30); do s=$(stat -c %s "bench/tmp/csvcorpus/$f"); if [ $s -ge 1000 ] && [ $s -le 15000 ]; then i=$((i+1)); cp "bench/tmp/csvcorpus/$f" "bench/z11/fresh/csv-$i.csv"; fi; [ $i -ge 12 ] && break; done; wc -c bench/z11/fresh/* | tail -30; file bench/z11/fresh/csv-1.csv; head -3 bench/z11/fresh/csv-1.csv | cut -c1-120; ls bench/z11/fresh | wc -l
+ 103679  103675 user      0.0  0.1       00:00 R    ps -eo pid,ppid,user,pcpu,pmem,etime,stat,cmd
+ 103680  103675 user      0.0  0.0       00:00 S    head -200
