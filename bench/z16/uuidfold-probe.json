@@ -1,0 +1,15 @@
+[
+ {
+  "f": "bench/holdout-ops/openstack-loghub-26.log",
+  "uuids": 36,
+  "mode": "uuidfold",
+  "identity": 4028,
+  "uuidfold": 3900,
+  "amphora": 998,
+  "uuidfold_plus_amphora": 957,
+  "exact_uuidfold": true,
+  "exact_amphora": true,
+  "exact_uf_amph": true,
+  "decodeCheck": true
+ }
+]
