@@ -1,0 +1,59 @@
+[
+ {
+  "table": 1,
+  "decode": "decode/dec_1_rebuilt.csv",
+  "status": "blind (from visible only, earlier turn)",
+  "shape": "11x5",
+  "shape_ok": true,
+  "cells": 55,
+  "wrong_cells": 0,
+  "wrong_cell_list": [],
+  "rows_exact": 11,
+  "byte_exact": true
+ },
+ {
+  "table": 2,
+  "decode": "decode/dec_2.csv",
+  "status": "blind (written before hidden/ opened)",
+  "shape": "11x5",
+  "shape_ok": true,
+  "cells": 55,
+  "wrong_cells": 0,
+  "wrong_cell_list": [],
+  "rows_exact": 11,
+  "byte_exact": true
+ },
+ {
+  "table": 3,
+  "decode": "decode/dec_3_firstpass.csv",
+  "status": "blind (first pass, written before hidden/ opened)",
+  "shape": "12x9",
+  "shape_ok": true,
+  "cells": 108,
+  "wrong_cells": 2,
+  "wrong_cell_list": [
+   [
+    4,
+    1
+   ],
+   [
+    11,
+    2
+   ]
+  ],
+  "rows_exact": 10,
+  "byte_exact": false
+ },
+ {
+  "table": 3,
+  "decode": "decode/dec_3_corrected.csv",
+  "status": "post-hoc (2 slips corrected after cmp; NOT blind)",
+  "shape": "12x9",
+  "shape_ok": true,
+  "cells": 108,
+  "wrong_cells": 0,
+  "wrong_cell_list": [],
+  "rows_exact": 12,
+  "byte_exact": true
+ }
+]
