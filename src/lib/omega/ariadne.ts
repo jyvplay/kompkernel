@@ -1,3 +1,4 @@
+import { now } from './clock';
 /**
  * ARIADNE — grammar induction in symbol space, with the thread that finds the
  * shortest path through it.
@@ -625,7 +626,7 @@ function rawResult(text: string, enc: EncodingName, started: number): AriadneRes
     inTokens, outTokens: forced ? countTokens(wire, enc) : inTokens, messageTokens,
     contractTokens: messageTokens - (forced ? countTokens(wire, enc) : inTokens),
     decoderPrompt: prompt, savingsPct: 0, rules: 0, blocks: 0, lists: 0, script: 'none', ops: [],
-    ms: Date.now() - started, mode: forced ? 'forced-wrap' : 'raw',
+    ms: now() - started, mode: forced ? 'forced-wrap' : 'raw',
     notes: forced ? 'payload is itself a decodable program; exact 2-token wrapper' : 'identity: no framing pays here',
     estimate: inTokens, assignmentGain: 0, searchGain: 0,
   };
@@ -653,7 +654,7 @@ export function buildOn(text: string, enc: EncodingName, sep: string, opts: Requ
 
   const chunks: Array<{ kind: 'text'; s: string } | { kind: 'sym'; id: number }> = [];
   let nBlocks = 0;
-  const chosen: BlockCandidate[] = (!opts.noBlocks && blank) ? chironFindBlocks(text, blank, sep, enc, Math.min(deadline, Date.now() + Math.max(400, opts.budgetMs * 0.2))) : [];
+  const chosen: BlockCandidate[] = (!opts.noBlocks && blank) ? chironFindBlocks(text, blank, sep, enc, Math.min(deadline, now() + Math.max(400, opts.budgetMs * 0.2))) : [];
   if (chosen.length) {
     const lines = text.split(sep);
     const tplBySig = new Map<string, number>();
@@ -736,7 +737,7 @@ export function buildOn(text: string, enc: EncodingName, sep: string, opts: Requ
   };
   const estBefore = grammarCost(g, enc);
 
-  for (let level = 0; level < opts.levels && Date.now() < deadline; level++) {
+  for (let level = 0; level < opts.levels && now() < deadline; level++) {
     const { seqs, owners } = mineable();
     const keep = mineSpans(seqs, { maxSpan: opts.maxSpan, topK: opts.topK, priceIters: opts.levels, fixIters: 6 });
     if (!keep.length) break;
@@ -746,7 +747,7 @@ export function buildOn(text: string, enc: EncodingName, sep: string, opts: Requ
     // search outright — measured: 45 rules instead of 136 on dts0)
     let uses = new Float64Array(keep.length);
     keep.forEach((c, i) => { uses[i] = c.c; });
-    for (let it = 0; it < 6 && Date.now() < deadline; it++) {
+    for (let it = 0; it < 6 && now() < deadline; it++) {
       const price = new Float64Array(keep.length);
       for (let i = 0; i < keep.length; i++) price[i] = (1 + keep[i].ids.length) / Math.max(0.5, uses[i]);
       uses = parseAll(seqs, idx, price, null).uses;
@@ -812,7 +813,7 @@ export function buildOn(text: string, enc: EncodingName, sep: string, opts: Requ
 
   /* ---- 5f. greedy-add refinement, optimal re-parse, local search ---- */
   let searchGain = 0;
-  if (!opts.noSearch && Date.now() < deadline) {
+  if (!opts.noSearch && now() < deadline) {
     const before = grammarCost(g, enc);
     greedyAdd(g, enc, opts.maxSpan, opts.topK, deadline);
     reparse(g, enc, opts.maxSpan, deadline);
@@ -898,7 +899,7 @@ export function renderBest(
 
   let best: BuildOut | null = null;
   for (const cand of cands) {
-    if (Date.now() >= deadline) break;
+    if (now() >= deadline) break;
     const chars = cand.chars;
     const mkMap = (arr: string[]) => { const m = new Map<number, string>(); refList.forEach((r, i) => m.set(r, arr[i])); return m; };
 
@@ -1020,7 +1021,7 @@ export function renderBest(
       const pos = new Map<number, number>();
       refList.forEach((r, i) => pos.set(r, i));
       void hotN;
-      // DETERMINISM. This loop used to carry `&& Date.now() < deadline`, which
+      // DETERMINISM. This loop used to carry `&& now() < deadline`, which
       // makes the emitted wire a function of machine load — caught by red-team
       // gate G10 on SIBYL (holdout/gh-api.json.txt and holdout/json-pkg.txt
       // encoded twice gave different wires). The probe count is already bounded,
@@ -1146,11 +1147,11 @@ function listPayload(values: string[], enc: EncodingName): string | null {
 function localSearch(g: Grammar, enc: EncodingName, opts: { maxSpan: number }, deadline: number) {
   const cost = () => grammarCost(g, enc);
   let cur = cost();
-  for (let sweep = 0; sweep < 4 && Date.now() < deadline; sweep++) {
+  for (let sweep = 0; sweep < 4 && now() < deadline; sweep++) {
     let improved = false;
     // (i) drop-and-inline any macro rule whose removal helps
     for (const [sid, si] of [...g.seqOf]) {
-      if (Date.now() >= deadline) break;
+      if (now() >= deadline) break;
       if (g.seq[si].kind === 'template') continue;
       const repl = g.seq[si].body;
       if (!repl.length) continue;
@@ -1178,7 +1179,7 @@ function localSearch(g: Grammar, enc: EncodingName, opts: { maxSpan: number }, d
     scan(g.main); for (const r of g.seq) scan(r.body);
     const hot = [...adj.entries()].filter(([, c]) => c >= 3).sort((a, b) => b[1] - a[1]).slice(0, 24);
     for (const [k] of hot) {
-      if (Date.now() >= deadline) break;
+      if (now() >= deadline) break;
       const [a, b] = k.split(',').map(Number);
       const snapMain = g.main;
       const snapBodies = g.seq.map(r => r.body);
@@ -1238,7 +1239,7 @@ export function replaceAll(seq: number[], pat: number[], sid: number): { out: nu
 function greedyAdd(g: Grammar, enc: EncodingName, maxSpan: number, topK: number, deadline: number): number {
   let cur = grammarCost(g, enc);
   const start = cur;
-  for (let round = 0; round < 24 && Date.now() < deadline; round++) {
+  for (let round = 0; round < 24 && now() < deadline; round++) {
     const seqs: number[][] = [g.main];
     const owners: number[] = [-1];
     for (let i = 0; i < g.seq.length; i++) if (g.seq[i].body.length) { seqs.push(g.seq[i].body); owners.push(i); }
@@ -1246,7 +1247,7 @@ function greedyAdd(g: Grammar, enc: EncodingName, maxSpan: number, topK: number,
     if (!cands.length) break;
     let applied = 0;
     for (const c of cands.slice(0, 48)) {
-      if (Date.now() >= deadline) break;
+      if (now() >= deadline) break;
       const snapMain = g.main;
       const snapBodies = g.seq.map(r => r.body);
       const sid = g.symText.length;
@@ -1284,7 +1285,7 @@ const owners0 = 0;
  */
 function reparse(g: Grammar, enc: EncodingName, maxSpan: number, deadline: number): number {
   const before = grammarCost(g, enc);
-  for (let it = 0; it < 3 && Date.now() < deadline; it++) {
+  for (let it = 0; it < 3 && now() < deadline; it++) {
     const ruleIds = [...g.seqOf.entries()].filter(([, si]) => g.seq[si].body.length >= 2);
     if (!ruleIds.length) break;
     const keep = ruleIds.map(([sid, si]) => ({ key: g.seq[si].body.join(',') + ',', ids: g.seq[si].body, sid }));
@@ -1334,7 +1335,7 @@ function reparse(g: Grammar, enc: EncodingName, maxSpan: number, deadline: numbe
 }
 
 export function ariadneEncode(text: string, enc: EncodingName = 'o200k_base', options: AriadneOptions = {}): AriadneResult {
-  const started = Date.now();
+  const started = now();
   const inTokens = countTokens(text, enc);
   const raw = rawResult(text, enc, started);
   if (text.length < 16) return raw;
@@ -1383,7 +1384,7 @@ export function ariadneEncode(text: string, enc: EncodingName = 'o200k_base', op
       let bestGain = -1;
       for (const cand of seps) {
         let gain = 0;
-        try { for (const b of chironFindBlocks(text, blank, cand, enc, Date.now() + 1200)) gain += b.gain; } catch { gain = -1; }
+        try { for (const b of chironFindBlocks(text, blank, cand, enc, now() + 1200)) gain += b.gain; } catch { gain = -1; }
         if (gain > bestGain) { bestGain = gain; sep = cand; }
       }
     }
@@ -1394,13 +1395,13 @@ export function ariadneEncode(text: string, enc: EncodingName = 'o200k_base', op
   // 843 instead of 684, whenever the block pre-pass ranked '\n' first.)
   const order = [sep, ...seps.filter(x => x !== sep)];
   for (const trySep of order) {
-    if (Date.now() > overall - 200) break;
+    if (now() > overall - 200) break;
     let o1: BuildOut | null = null;
-    try { o1 = buildOn(text, enc, trySep, full, Math.min(overall, Date.now() + budgetMs)); } catch { o1 = null; }
+    try { o1 = buildOn(text, enc, trySep, full, Math.min(overall, now() + budgetMs)); } catch { o1 = null; }
     const got = consider(o1, `full/${JSON.stringify(trySep)}`);
-    if (o1 && o1.g.blocks.length && !options.noBlocks && Date.now() < overall - 200) {
+    if (o1 && o1.g.blocks.length && !options.noBlocks && now() < overall - 200) {
       let o2: BuildOut | null = null;
-      try { o2 = buildOn(text, enc, trySep, { ...full, noBlocks: true }, Math.min(overall, Date.now() + budgetMs)); } catch { o2 = null; }
+      try { o2 = buildOn(text, enc, trySep, { ...full, noBlocks: true }, Math.min(overall, now() + budgetMs)); } catch { o2 = null; }
       consider(o2, 'macros-only');
     }
     if (got) break;
@@ -1438,7 +1439,7 @@ export function ariadneEncode(text: string, enc: EncodingName = 'o200k_base', op
     lists: best.g.lists.length,
     script: best.scriptName,
     ops,
-    ms: Date.now() - started,
+    ms: now() - started,
     mode: 'ariadne',
     notes: `${chosenTag}; symbol-space DP; ${best.plan.order.length - best.g.blocks.length} macros, ${best.g.blocks.length} blocks, ${best.g.lists.length} lists; script=${best.scriptName}; est=${best.estimate} exact=${best.tokens}; assignment -${best.assignmentGain}, local search -${best.searchGain}; contract=${messageTokens - best.tokens} for [${ops.join(',')}]`,
     estimate: best.estimate,

@@ -1,3 +1,4 @@
+import { now } from './clock';
 /**
  * CHIRON — a two-part-MDL text program for one ordinary chat message.
  * =============================================================================
@@ -920,13 +921,13 @@ function blockCandidateAt(lines: string[], start: number, width: number, blank: 
   };
 }
 
-export function chironFindBlocks(text: string, blank: string, sep: string, enc: EncodingName = 'o200k_base', deadline = Date.now() + 10_000): BlockCandidate[] {
+export function chironFindBlocks(text: string, blank: string, sep: string, enc: EncodingName = 'o200k_base', deadline = now() + 10_000): BlockCandidate[] {
   const lines = text.split(sep);
   if (lines.length < 5) return [];
   const cands: BlockCandidate[] = [];
   for (let width = 1; width <= MAX_UNIT_WIDTH; width++) {
     for (let start = 0; start + width * 3 < lines.length; start++) {
-      if (Date.now() > deadline) break;
+      if (now() > deadline) break;
       const c = blockCandidateAt(lines, start, width, blank, sep, enc);
       if (c) {
         cands.push(c);
@@ -1061,7 +1062,7 @@ function rawResult(text: string, enc: EncodingName, started: number, forced: boo
     codec: 'chiron', wire, decoded, exact: decoded === text, inTokens, outTokens,
     messageTokens, contractTokens: messageTokens - outTokens, decoderPrompt: prompt,
     savingsPct: 0, rules: 0, blocks: 0, lists: 0, script: 'none', ops: [],
-    ms: Date.now() - started, mode: forced ? 'forced-wrap' : 'raw',
+    ms: now() - started, mode: forced ? 'forced-wrap' : 'raw',
     notes: forced ? 'payload begins with the frame character; exact 2-token wrapper' : 'identity: no framing pays here',
   };
 }
@@ -1079,10 +1080,10 @@ interface BuildOutcome {
 }
 
 function buildCandidate(text: string, enc: EncodingName, script: ChironScript, opts: Required<Omit<ChironOptions, 'workUnits'>> & { workUnits?: number }): BuildOutcome | null {
-  const deadline = Date.now() + opts.budgetMs;
+  const deadline = now() + opts.budgetMs;
   const det = opts.workUnits !== undefined;
   const work = { n: 0 };
-  const spent = (): boolean => (det ? work.n >= (opts.workUnits as number) : Date.now() >= deadline);
+  const spent = (): boolean => (det ? work.n >= (opts.workUnits as number) : now() >= deadline);
   const payloadChars = new Set(text);
   const pool = scriptPool(script, enc).filter(g => !payloadChars.has(g));
   if (!pool.length) return null;
@@ -1114,7 +1115,7 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
   let blocks = 0;
   let lists = 0;
   const sep = opts.sep;
-  const blockDeadline = Math.min(deadline, Date.now() + Math.max(600, Math.round(opts.budgetMs * 0.22)));
+  const blockDeadline = Math.min(deadline, now() + Math.max(600, Math.round(opts.budgetMs * 0.22)));
   const chosen = (!opts.noBlocks && blank) ? chironFindBlocks(text, blank, sep, enc, blockDeadline) : [];
   if (chosen.length) {
     const lines = text.split(sep);
@@ -1329,7 +1330,7 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
  * saves therefore never ships.
  */
 export function chironEncode(text: string, enc: EncodingName = 'o200k_base', options: ChironOptions = {}): ChironResult {
-  const started = Date.now();
+  const started = now();
   const inTokens = countTokens(text, enc);
   // A payload beginning with § only needs the 2-token wrapper when it would
   // otherwise decode into something else; a malformed frame is already inert.
@@ -1401,7 +1402,7 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
       }
       continue;
     }
-    const left = overallDeadline - Date.now();
+    const left = overallDeadline - now();
     if (left < 300) break;
     let out: BuildOutcome | null = null;
     try {
@@ -1443,7 +1444,7 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
     lists: bestOutcome.lists,
     script: script.name,
     ops: bestOutcome.ops,
-    ms: Date.now() - started,
+    ms: now() - started,
     mode: 'chiron',
     notes: `${workUnits !== undefined ? `kairos work=${bestOutcome.work}/${workUnits}; ` : ''}variant=${bestTag}; ${bestOutcome.rules} macro rules, ${bestOutcome.blocks} blocks, ${bestOutcome.lists} lists; script=${script.name}; contract=${bestOutcome.messageTokens - bestOutcome.outTokens} tok for ops [${bestOutcome.ops.join(',')}]; whole-wire decode + message gate verified`,
   };
