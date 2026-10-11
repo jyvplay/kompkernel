@@ -1,0 +1,7 @@
+{"f":"find-listing.txt","identity":3997,"dirfold":"dirfold","folded":90,"dirfold_tok":3358,"dirfold_exact":true,"amphora_tok":1287,"amphora_exact":true,"dirfold_then_amphora_tok":1250,"stacked_exact":true,"amphora_ms":43621}
+{"f":"ls-full-iso.txt","identity":1175,"dirfold":"identity","folded":0,"dirfold_tok":1175,"dirfold_exact":true,"amphora_tok":368,"amphora_exact":true,"dirfold_then_amphora_tok":368,"stacked_exact":true,"amphora_ms":13606}
+{"f":"git-numstat.txt","identity":4632,"dirfold":"dirfold","folded":364,"dirfold_tok":4125,"dirfold_exact":true,"amphora_tok":1996,"amphora_exact":true,"dirfold_then_amphora_tok":1912,"stacked_exact":true,"amphora_ms":64014}
+{"f":"npm-ls.txt","identity":2747,"dirfold":"dirfold","folded":59,"dirfold_tok":2634,"dirfold_exact":true,"amphora_tok":988,"amphora_exact":true,"dirfold_then_amphora_tok":970,"stacked_exact":true,"amphora_ms":22892}
+{"f":"node-stacktraces.txt","identity":568,"dirfold":"dirfold","folded":9,"dirfold_tok":532,"dirfold_exact":true,"amphora_tok":305,"amphora_exact":true,"dirfold_then_amphora_tok":334,"stacked_exact":true,"amphora_ms":3837}
+{"f":"openstack-loghub-26.log","identity":4028,"dirfold":"identity","folded":0,"dirfold_tok":4028,"dirfold_exact":true,"amphora_tok":998,"amphora_exact":true,"dirfold_then_amphora_tok":998,"stacked_exact":true,"amphora_ms":32464}
+{"f":"git-log-fuller.txt","identity":143,"dirfold":"identity","folded":0,"dirfold_tok":143,"dirfold_exact":true,"amphora_tok":143,"amphora_exact":true,"dirfold_then_amphora_tok":143,"stacked_exact":true,"amphora_ms":49}

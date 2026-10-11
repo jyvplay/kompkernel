@@ -1,0 +1,25 @@
+PASS  empty                                mode=identity folded=0 in=0 out=0
+PASS  single line                          mode=identity folded=0 in=4 out=4
+PASS  root-level files only                mode=identity folded=0 in=8 out=8
+PASS  same dir run                         mode=identity folded=0 in=23 out=23
+PASS  first line has no previous           mode=identity folded=0 in=9 out=9
+PASS  trailing slash dir line              mode=identity folded=0 in=16 out=16
+PASS  path with spaces                     mode=identity folded=0 in=13 out=13
+PASS  tab separated                        mode=identity folded=0 in=34 out=34
+PASS  absolute paths                       mode=identity folded=0 in=14 out=14
+PASS  short dir below threshold            mode=identity folded=0 in=8 out=8
+PASS  CRLF input (identity)                mode=identity folded=0 in=14 out=14
+PASS  contains marker char (identity)      mode=identity folded=0 in=16 out=16
+PASS  empty lines in run                   mode=identity folded=0 in=14 out=14
+PASS  trailing newline                     mode=identity folded=0 in=10 out=10
+PASS  double slash                         mode=identity folded=0 in=17 out=17
+PASS  dir then deeper dir                  mode=identity folded=0 in=18 out=18
+PASS  prev line ends with slash-only       mode=identity folded=0 in=7 out=7
+PASS  name equal to dir                    mode=identity folded=0 in=7 out=7
+PASS  only slashes                         mode=identity folded=0 in=3 out=3
+PASS  unicode names                        mode=identity folded=0 in=20 out=20
+PASS  trailing space line                  mode=identity folded=0 in=10 out=10
+PASS  header-like input                    mode=identity folded=0 in=23 out=29
+PASS  header-like input without marker     mode=identity folded=0 in=20 out=20
+fuzz: 3000 listings, decode fails=0, listings that folded=468
+ALL EXACT

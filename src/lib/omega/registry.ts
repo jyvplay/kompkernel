@@ -94,6 +94,7 @@ import { daedalusEncode } from './daedalus';
 import { lakonikosEncode } from './lakonikos';
 import { tabminEncode } from './tabmin';
 import { uuidfoldEncode } from './uuidfold';
+import { dirfoldEncode } from './dirfold';
 import { amphoraEncode } from './amphora';
 import { kanonEncode } from './kanon';
 import { icarusEncode } from './icarus';
@@ -657,6 +658,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'lakonikos', label: '⟡ LAKONIKOS (DAEDALUS wire, terse decoder contract: same wire and decoder, fewer contract tokens)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = lakonikosEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok (DAEDALUS ${r.messageTokensOld}) vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'dirfold', label: '▤ DIRFOLD (same-directory path folding: ↑ = the directory of the line above; one-line rule; identity unless it pays)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = dirfoldEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `${r.mode}; folded=${r.folded} lines; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'uuidfold', label: '▦ UUIDFOLD (canonical lowercase UUIDs as 32 uppercase digits, one-line restore rule; identity unless it pays)', family: 'exact', fidelity: 'exact',
