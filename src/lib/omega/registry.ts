@@ -93,6 +93,7 @@ import { palimpsestEncode } from './palimpsest';
 import { daedalusEncode } from './daedalus';
 import { lakonikosEncode } from './lakonikos';
 import { tabminEncode } from './tabmin';
+import { amphoraEncode } from './amphora';
 import { icarusEncode } from './icarus';
 import { orthosEncode } from './orthos';
 import { stentorEncode } from './stentor';
@@ -654,6 +655,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'tabmin', label: '▦ TABMIN (rectangular tables: row arm or column-major arm, whichever is cheaper; column arm carries a one-line reader note)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = tabminEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.arm} arm; ${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'amphora', label: '⚱ AMPHORA (DAEDALUS ∥ CHIRON exact-gated minimum: adds the full-span CHIRON arm where DAEDALUS falls back to identity on long prose; two-arm tournament)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = amphoraEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'orthos', label: '♦ ORTHOS (Typographic Canonicalization Pre-Pass)', family: 'exact', fidelity: 'exact',

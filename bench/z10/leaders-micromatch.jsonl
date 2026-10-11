@@ -1,0 +1,4 @@
+{"f":"node_modules/micromatch/README.md","codec":"aether","in":10846,"msg":null,"exact":true,"ms":12901,"notes":"AETHER-A1 · mode=harmonia:rosetta:strand · hits=0 · 7350/10846 tok · Pareto-optimal"}
+{"f":"node_modules/micromatch/README.md","codec":"harmonia","in":10846,"msg":null,"exact":true,"ms":2,"notes":"HARMONIA-H1 · mode=rosetta:strand · regions=1 · 7350/10846 tok · Pareto-optimal"}
+{"f":"node_modules/micromatch/README.md","codec":"panacea","in":10846,"msg":null,"exact":true,"ms":3478,"notes":"PANACEA-Ω · mode=aether:harmonia:rosetta:strand · hits=0 · 7350/10846 tok · Pareto-optimal"}
+done
