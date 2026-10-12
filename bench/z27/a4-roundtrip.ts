@@ -37,6 +37,7 @@ const edge: [string, string][] = [
   ['empty', ''], ['newline only', '\n'], ['prefixed', '[[TPL\n1 2 3\n'], ['prefixed-plain', '[[TPL\nhello'],
   ['tab lines', 'a\t1\nb 22\t33\n'], ['placeholder char', 'x\u0001 7\n8\n'], ['digits only', '1\n2\n3\n'],
   ['crlf logs', 'INFO 12:00:01 a=1\r\nINFO 12:00:02 a=2\r\n'], ['at-sign line', '@\n5\n@\n'],
+  ['all placeholders present', '¤ § ¦ » ◊ • ∎ ¬ 1\n2\n3\n'],
   ['vxa prefixed', '[[VXA\nfoo\n]]\nbar 1'], ['a3 prefixed', 'PHALANX-A3 json indent=2 newline=0: {"a":1}'],
   ['repeated shapes', Array.from({ length: 200 }, (_, i) => `2026-10-11 12:00:${String(i % 60).padStart(2, '0')} req-${i} took ${i * 3}ms`).join('\n') + '\n'],
 ];
