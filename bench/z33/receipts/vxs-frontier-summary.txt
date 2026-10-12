@@ -1,0 +1,19 @@
+Z33 VERITAS-S receipts (o200k_base, one-chat wire tokens; DAEDALUS = messageTokens incl. its contract)
+Corpus: 151 files = 40 lane group files (bench/z33/receipts/a10-groups.jsonl) + 111 fresh (daedalus-151.jsonl).
+VERITAS-S round trip: 151/151 byte-exact through veritasADecode (bench/z33/vxs-eval.ts).
+Edge + fuzz: bench/z33/vxs-edge.ts, 420 cases, 0 failures.
+Frontier = min(DAEDALUS, A10) per file (A10 receipts exist for the 40 group files only).
+
+lane          n    VXS      DAE      A10     frontier  VXS/front  VXS/A10
+code          4    3591     3065     3910    3065      +17.16%    -8.16%
+ops           11   18710    16689    21309   16689     +12.11%   -12.20%
+ops_real      10   12590    10860    14637   10860     +15.93%   -13.99%
+prose         6    4564     4234     4609    4234      +7.79%    -0.98%
+realjson      3    3895     3395     3776    3395      +14.73%    +3.15%
+wrapped_docs  6    38636    35324    38187   35324      +9.38%    +1.18%
+ALL groups    40   81986    73567    86428   73567     +11.44%    -5.14%
+fresh         111  260548   231785   -       231785    +12.41%     -
+ALL 151              342534   305352                     +12.18%
+
+Per file: VXS smaller than DAEDALUS on 1 of 151 files; DAEDALUS smaller on 150.
+Result: VXS is NOT Pareto-superior to the frontier in any lane. Its best lane is still +7.8% above DAEDALUS.
