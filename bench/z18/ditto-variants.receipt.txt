@@ -1,0 +1,6 @@
+{"f":"openstack-loghub-26.log","identity":4028,"ditto_unicode":2193,"okU":true,"ditto_ascii":2192,"okA":true,"uuidfold":"uuidfold","uuidfold_tok":3900,"uuidfold_then_ditto_ascii":2103,"okStack":true,"marks":244}
+{"f":"ls-full-iso.txt","identity":1175,"ditto_unicode":780,"okU":true,"ditto_ascii":780,"okA":true,"uuidfold":"identity","uuidfold_tok":1175,"uuidfold_then_ditto_ascii":780,"okStack":true,"marks":132}
+{"f":"npm-ls.txt","identity":2747,"ditto_unicode":2483,"okU":true,"ditto_ascii":2479,"okA":true,"uuidfold":"identity","uuidfold_tok":2747,"uuidfold_then_ditto_ascii":2479,"okStack":true,"marks":284}
+{"f":"find-listing.txt","identity":3997,"ditto_unicode":4021,"okU":true,"ditto_ascii":4021,"okA":true,"uuidfold":"identity","uuidfold_tok":3997,"uuidfold_then_ditto_ascii":4021,"okStack":true,"marks":0}
+{"f":"git-numstat.txt","identity":4632,"ditto_unicode":4656,"okU":true,"ditto_ascii":4656,"okA":true,"uuidfold":"identity","uuidfold_tok":4632,"uuidfold_then_ditto_ascii":4656,"okStack":true,"marks":0}
+{"f":"node-stacktraces.txt","identity":568,"ditto_unicode":592,"okU":true,"ditto_ascii":592,"okA":false,"uuidfold":"identity","uuidfold_tok":568,"uuidfold_then_ditto_ascii":592,"okStack":false,"marks":0}

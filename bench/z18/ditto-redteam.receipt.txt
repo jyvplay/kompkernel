@@ -1,0 +1,25 @@
+PASS  empty                                          mode=identity marked=0 in=0 out=0
+PASS  single line                                    mode=identity marked=0 in=4 out=4
+PASS  no repeats                                     mode=identity marked=0 in=9 out=9
+PASS  same record repeated                           mode=identity marked=0 in=11 out=11
+PASS  literal caret in input (escaped)               mode=identity marked=0 in=6 out=6
+PASS  literal lone caret fields                      mode=identity marked=0 in=11 out=11
+PASS  caret-leading repeated field (escaped and marked) mode=identity marked=0 in=9 out=9
+PASS  semver ranges (npm-like)                       mode=identity marked=0 in=24 out=24
+PASS  header-like input                              mode=identity marked=0 in=45 out=50
+PASS  header-like without caret                      mode=identity marked=0 in=12 out=12
+PASS  escape header input                            mode=identity marked=0 in=12 out=17
+PASS  CRLF                                           mode=identity marked=0 in=8 out=8
+PASS  double spaces (empty fields)                   mode=identity marked=0 in=15 out=15
+PASS  leading and trailing spaces                    mode=identity marked=0 in=10 out=10
+PASS  tabs are not separators                        mode=identity marked=0 in=11 out=11
+PASS  min length boundary (len 2 unmarked, len 3 marked) mode=identity marked=0 in=9 out=9
+PASS  trailing newline                               mode=identity marked=0 in=8 out=8
+PASS  empty lines between                            mode=identity marked=0 in=7 out=7
+PASS  field shift changes positions                  mode=identity marked=0 in=14 out=14
+PASS  unicode fields                                 mode=identity marked=0 in=13 out=13
+PASS  first line only has repeats of nothing         mode=identity marked=0 in=5 out=5
+PASS  very long repeated field                       mode=ditto    marked=2 in=2003 out=1042
+PASS  all-empty lines                                mode=identity marked=0 in=1 out=1
+fuzz: 3000 record sets, decode fails=0, sets that used the ditto path=1153
+ALL EXACT

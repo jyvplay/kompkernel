@@ -1,0 +1,19 @@
+file=bench/z18/sweep-ls-full-iso.jsonl entries_with_output=138 errors=0 complete=True
+declared exact=123 declared lossy=15
+declared exact but decode FAILED: [('losslessAscii', 1138), ('astCode', 1144)]
+ASCII-clean, declared exact, decode OK (smallest first):
+  holographic       876
+  veritasVx        1175
+  exodus           1175
+  tensor           1175
+  valence          1175
+  phoenix          1175
+  valkyrie         1175
+  helixAp          1175
+all declared-exact, decode OK (smallest first):
+  plinthos          383 nonAscii=166
+  kiones            383 nonAscii=166
+  hermes            386 nonAscii=130
+  anastrophe        393 nonAscii=126
+  cadmus            395 nonAscii=136
+  logos             395 nonAscii=136

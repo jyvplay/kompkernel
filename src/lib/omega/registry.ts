@@ -95,6 +95,7 @@ import { lakonikosEncode } from './lakonikos';
 import { tabminEncode } from './tabmin';
 import { uuidfoldEncode } from './uuidfold';
 import { dirfoldEncode } from './dirfold';
+import { dittoEncode } from './ditto';
 import { amphoraEncode } from './amphora';
 import { kanonEncode } from './kanon';
 import { icarusEncode } from './icarus';
@@ -662,6 +663,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'dirfold', label: '▤ DIRFOLD (same-directory path folding: ↑ = the directory of the line above; one-line rule; identity unless it pays)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = dirfoldEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `${r.mode}; folded=${r.folded} lines; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'ditto', label: '⋮ DITTO (per-field same-as-above marks ^, ASCII-only wire; one-line rule; identity unless it pays)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = dittoEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `${r.mode}; marked=${r.marked} fields; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'uuidfold', label: '▦ UUIDFOLD (canonical lowercase UUIDs as 32 uppercase digits, one-line restore rule; identity unless it pays)', family: 'exact', fidelity: 'exact',

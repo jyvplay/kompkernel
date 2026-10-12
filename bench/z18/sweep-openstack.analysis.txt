@@ -1,0 +1,19 @@
+file=bench/z18/sweep-openstack.jsonl entries_with_output=138 errors=0 complete=True
+declared exact=123 declared lossy=15
+declared exact but decode FAILED: [('losslessAscii', 4011), ('astCode', 4126)]
+ASCII-clean, declared exact, decode OK (smallest first):
+  veritasVx        1841
+  holographic      2108
+  uuidfold         3900
+  exodus           4028
+  tensor           4028
+  valence          4028
+  aeon             4028
+  phoenix          4028
+all declared-exact, decode OK (smallest first):
+  anastrophe       1031 nonAscii=629
+  plinthos         1031 nonAscii=629
+  kiones           1031 nonAscii=629
+  polytropos       1031 nonAscii=629
+  syntomia         1033 nonAscii=632
+  lakonikos        1046 nonAscii=632

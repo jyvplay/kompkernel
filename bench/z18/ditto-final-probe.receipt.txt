@@ -1,0 +1,7 @@
+{"f":"find-listing.txt","identity":3997,"ditto":3997,"ditto_mode":"identity","marked":0,"ditto_exact":true,"veritas":2817,"veritas_mode":"dict","veritas_exact":true,"ditto_ascii":true}
+{"f":"ls-full-iso.txt","identity":1175,"ditto":794,"ditto_mode":"ditto","marked":132,"ditto_exact":true,"veritas":1175,"veritas_mode":"identity","veritas_exact":true,"ditto_ascii":true}
+{"f":"git-numstat.txt","identity":4632,"ditto":4632,"ditto_mode":"identity","marked":0,"ditto_exact":true,"veritas":3786,"veritas_mode":"dict","veritas_exact":true,"ditto_ascii":true}
+{"f":"npm-ls.txt","identity":2747,"ditto":2493,"ditto_mode":"ditto","marked":284,"ditto_exact":true,"veritas":1931,"veritas_mode":"dict","veritas_exact":true,"ditto_ascii":true}
+{"f":"node-stacktraces.txt","identity":568,"ditto":568,"ditto_mode":"identity","marked":0,"ditto_exact":true,"veritas":568,"veritas_mode":"identity","veritas_exact":true,"ditto_ascii":true}
+{"f":"openstack-loghub-26.log","identity":4028,"ditto":2206,"ditto_mode":"ditto","marked":244,"ditto_exact":true,"veritas":1841,"veritas_mode":"dict","veritas_exact":true,"ditto_ascii":true}
+{"f":"git-log-fuller.txt","identity":143,"ditto":143,"ditto_mode":"identity","marked":0,"ditto_exact":true,"veritas":138,"veritas_mode":"dict","veritas_exact":true,"ditto_ascii":true}
