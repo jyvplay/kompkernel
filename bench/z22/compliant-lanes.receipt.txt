@@ -1,0 +1,5 @@
+prose: identity=4692 P3-legend=4673 P4-legend=4653 (P4-P3=-20) VX-M[3,2]-legend=4652 VX-M[3]-legend=4652
+code: identity=5255 P3-legend=4703 P4-legend=4690 (P4-P3=-13) VX-M[3,2]-legend=4742 VX-M[3]-legend=4747
+ops: identity=50165 P3-legend=27495 P4-legend=27419 (P4-P3=-76) VX-M[3,2]-legend=33163 VX-M[3]-legend=33083
+ALL: identity=60112 P3-legend=36871 P4-legend=36762 VX-M[3,2]-legend=42557 VX-M[3]-legend=42482
+decode failures (P3-legend, P4-legend, VX-M legend): 0

@@ -99,6 +99,8 @@ import { dittoEncode } from './ditto';
 import { phalanxEncode } from './phalanx';
 import { phalanx2Encode } from './phalanx2';
 import { phalanx3Encode } from './phalanx3';
+import { phalanx4Encode } from './phalanx4';
+import { veritasEncodeMulti, withVxLegend, veritasDecodeL } from './veritas-w';
 import { amphoraEncode } from './amphora';
 import { kanonEncode } from './kanon';
 import { icarusEncode } from './icarus';
@@ -678,6 +680,14 @@ export function codecEntries(): Entry[] {
     {
       key: 'phalanx3', label: '▥ PHALANX-P3 (ASCII-only fixed pipeline: UUIDFOLD -> DIRFOLD-A -> DITTO -> KOINE-K1 -> RECALL-R1 (both gated on VERITAS) -> VERITAS-VX; identity unless exact and cheaper)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = phalanx3Encode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `${r.mode}; koine=${r.koineKept ? 'kept' : 'off'}; recall=${r.recallKept ? 'kept' : 'off'}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'phalanx4', label: '▦ PHALANX-P4 (KOINE and RECALL headers folded into one legend line; DITTO, DIRFOLD-A, UUIDFOLD inline; identity unless exact and cheaper)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = phalanx4Encode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `${r.mode}; stages=[${r.applied.join(',')}]; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'veritas-m', label: '⟁ VERITAS-VX multi-window (trigram+bigram candidates, real-token gate; same VX1 wire and decoder)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = veritasEncodeMulti(t, enc); const w = withVxLegend(r.wire); return { output: w, decoded: veritasDecodeL(w), oneChat: countTokens(w, enc), note: `${r.mode}; ${r.entries.length} entries; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'ditto', label: '⋮ DITTO (per-field same-as-above marks ^, ASCII-only wire; one-line rule; identity unless it pays)', family: 'exact', fidelity: 'exact',

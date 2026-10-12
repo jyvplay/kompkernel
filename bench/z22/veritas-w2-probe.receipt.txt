@@ -1,0 +1,27 @@
+prose bench/holdout/gh-prose.txt: id=1934 VX1=1918 VX2gate=1920 (+2) W3gate=1914 entries2=7 mode=dict
+prose bench/holdout/readme.txt: id=843 VX1=776 VX2gate=779 (+3) W3gate=775 entries2=5 mode=dict
+prose bench/holdout/license.txt: id=1166 VX1=1122 VX2gate=1122 (+0) W3gate=1122 entries2=7 mode=dict
+prose bench/holdout/lic-mit.txt: id=223 VX1=223 VX2gate=223 (+0) W3gate=223 entries2=0 mode=identity
+prose bench/holdout/md-react.txt: id=252 VX1=252 VX2gate=252 (+0) W3gate=252 entries2=0 mode=identity
+prose bench/holdout/md-vite.txt: id=274 VX1=274 VX2gate=274 (+0) W3gate=274 entries2=0 mode=identity
+code bench/holdout/code-ts.txt: id=1422 VX1=1395 VX2gate=1389 (-6) W3gate=1376 entries2=9 mode=dict
+code bench/holdout/code-dts.txt: id=162 VX1=99 VX2gate=99 (+0) W3gate=99 entries2=1 mode=dict
+code bench/holdout/json-pkg.txt: id=1152 VX1=1036 VX2gate=1068 (+32) W3gate=1034 entries2=10 mode=dict
+code bench/holdout/gh-api.json.txt: id=2519 VX1=2059 VX2gate=2123 (+64) W3gate=2047 entries2=33 mode=dict
+ops bench/holdout-ops/find-listing.txt: id=3997 VX1=2817 VX2gate=3086 (+269) W3gate=2697 entries2=15 mode=dict
+ops bench/holdout-ops/git-log-fuller.txt: id=143 VX1=138 VX2gate=138 (+0) W3gate=138 entries2=1 mode=dict
+ops bench/holdout-ops/git-numstat.txt: id=4632 VX1=3786 VX2gate=4165 (+379) W3gate=3784 entries2=23 mode=dict
+ops bench/holdout-ops/ls-full-iso.txt: id=1175 VX1=1175 VX2gate=660 (-515) W3gate=1175 entries2=11 mode=dict
+ops bench/holdout-ops/node-stacktraces.txt: id=568 VX1=568 VX2gate=456 (-112) W3gate=568 entries2=6 mode=dict
+ops bench/holdout-ops/npm-ls.txt: id=2747 VX1=1931 VX2gate=2747 (+816) W3gate=1927 entries2=0 mode=identity
+ops bench/holdout-ops/openstack-loghub-26.log: id=4028 VX1=1841 VX2gate=2171 (+330) W3gate=1836 entries2=14 mode=dict
+ops bench/holdout-ops/package-lock-head.json: id=15009 VX1=10325 VX2gate=11004 (+679) W3gate=10336 entries2=62 mode=dict
+ops bench/z20/samples/find-printf-src.txt: id=8493 VX1=6444 VX2gate=7154 (+710) W3gate=5837 entries2=44 mode=dict
+ops bench/z20/samples/git-log-iso.txt: id=1947 VX1=1799 VX2gate=1868 (+69) W3gate=1797 entries2=10 mode=dict
+ops bench/z20/samples/ls-omega-full-iso.txt: id=7426 VX1=2997 VX2gate=3121 (+124) W3gate=2970 entries2=8 mode=dict
+prose_repo bench/z20/NOTES.md: id=1218 VX1=1213 VX2gate=1218 (+5) W3gate=1218 entries2=0 mode=identity
+TOTAL prose: VXM(3+2 real)=4652 ms=212 VX1+realGate(W3)=4560 VX2-estimated=4575 TOTAL prose: n=6 identity=4692 VX1=4565 VX2=4570 (5, 0.11%) VX2 better on 0, worse on 2
+TOTAL code: VXM(3+2 real)=4742 ms=222 VX1+realGate(W3)=4556 VX2-estimated=4726 TOTAL code: n=4 identity=5255 VX1=4589 VX2=4679 (90, 1.96%) VX2 better on 1, worse on 2
+TOTAL ops: VXM(3+2 real)=33163 ms=853 VX1+realGate(W3)=33065 VX2-estimated=37615 TOTAL ops: n=11 identity=50165 VX1=33821 VX2=36570 (2749, 8.13%) VX2 better on 2, worse on 8
+TOTAL prose_repo: VXM(3+2 real)=1218 ms=128 VX1+realGate(W3)=1218 VX2-estimated=1215 TOTAL prose_repo: n=1 identity=1218 VX1=1213 VX2=1218 (5, 0.41%) VX2 better on 0, worse on 1
+W=3 byte-identity mismatches vs veritas.ts: 0; decode failures: 0

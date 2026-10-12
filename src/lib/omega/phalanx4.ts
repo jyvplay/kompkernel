@@ -23,13 +23,14 @@
  *   Read the legend line. Undo [vx], then [rc], [ko], [dt], [da], [uu] in that order.
  * =============================================================================
  */
-import { countTokens, type EncodingName } from '@/lib/omega/bpe';
-import { uuidfoldEncode, uuidfoldDecode, UUIDFOLD_RULE, OFF as UUIDFOLD_OFF } from '@/lib/omega/uuidfold';
-import { dirfoldAEncode, dirfoldADecode, DIRFOLD_A_RULE, DIRFOLD_A_ESC } from '@/lib/omega/dirfold-a';
-import { dittoEncode, dittoDecode, DITTO_RULE, DITTO_ESC } from '@/lib/omega/ditto';
-import { veritasEncode, veritasDecode } from '@/lib/omega/veritas';
-import { koineEncode, koineDecode, KOINE_HEADER, KOINE_ESC, KOINE_MIN_K } from '@/lib/omega/koine';
-import { recallEncode, recallDecode, RECALL_HEADER, RECALL_ESC } from '@/lib/omega/recall';
+import { countTokens, type EncodingName } from './bpe';
+import { uuidfoldEncode, uuidfoldDecode, UUIDFOLD_RULE, OFF as UUIDFOLD_OFF } from './uuidfold';
+import { dirfoldAEncode, dirfoldADecode, DIRFOLD_A_RULE, DIRFOLD_A_ESC } from './dirfold-a';
+import { dittoEncode, dittoDecode, DITTO_RULE, DITTO_ESC } from './ditto';
+import { veritasEncode } from './veritas';
+import { withVxLegend, veritasDecodeL } from './veritas-w';
+import { koineEncode, koineDecode, KOINE_HEADER, KOINE_ESC, KOINE_MIN_K } from './koine';
+import { recallEncode, recallDecode, RECALL_HEADER, RECALL_ESC } from './recall';
 
 export const PHALANX4_ESC = 'PHALANX-P4: identity';
 const LEGEND_PREFIX = 'PHALANX-P4 legend: ';
@@ -100,7 +101,7 @@ export function phalanx4Decode(wire: string): string {
     legend = wire.slice(0, nl);
     rest = wire.slice(nl + 1);
   }
-  let t = veritasDecode(rest);
+  let t = veritasDecodeL(rest);
   for (const tag of LEGEND_TAGS) {
     if (!legend.includes('[' + tag + '] ')) continue;
     t = DECODE[tag](HEAD[tag].rule + '\n' + t);
@@ -171,10 +172,13 @@ export function phalanx4Encode(text: string, enc: EncodingName = 'o200k_base', m
   }
 
   // VX: outermost body transform; it is kept iff it changes the body.
-  const vxWire = veritasEncode(body, enc).wire;
-  const vxKept = vxWire.startsWith(VX_SENTINEL);
+  // VX gate (real tokens, legend included): keep the dictionary only if the legend-carrying VX wire is smaller.
   const legend = legendFor(applied);
-  const v = (legend ? legend + '\n' : '') + vxWire;
+  const vxWire = veritasEncode(body, enc).wire;
+  const withVx = (legend ? legend + '\n' : '') + withVxLegend(vxWire);
+  const noVx = (legend ? legend + '\n' : '') + body;
+  const vxKept = vxWire.startsWith(VX_SENTINEL) && countTokens(withVx, enc) < countTokens(noVx, enc);
+  const v = vxKept ? withVx : noVx;
 
   const decoded = safeDecode(v);
   const outTokens = countTokens(v, enc);

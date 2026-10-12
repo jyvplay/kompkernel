@@ -1,0 +1,28 @@
+prose bench/holdout/gh-prose.txt: id=1934 P3=1918 P4=1918 P5=1914 (P5-P3=-4) mode5=phalanx4
+prose bench/holdout/readme.txt: id=843 P3=776 P4=776 P5=775 (P5-P3=-1) mode5=phalanx4
+prose bench/holdout/license.txt: id=1166 P3=1122 P4=1122 P5=1122 (P5-P3=0) mode5=phalanx4
+prose bench/holdout/lic-mit.txt: id=223 P3=223 P4=223 P5=223 (P5-P3=0) mode5=identity
+prose bench/holdout/md-react.txt: id=252 P3=252 P4=252 P5=252 (P5-P3=0) mode5=identity
+prose bench/holdout/md-vite.txt: id=274 P3=274 P4=274 P5=274 (P5-P3=0) mode5=identity
+code bench/holdout/code-ts.txt: id=1422 P3=1395 P4=1395 P5=1376 (P5-P3=-19) mode5=phalanx4
+code bench/holdout/code-dts.txt: id=162 P3=99 P4=99 P5=99 (P5-P3=0) mode5=phalanx4
+code bench/holdout/json-pkg.txt: id=1152 P3=1036 P4=1036 P5=1025 (P5-P3=-11) mode5=phalanx4
+code bench/holdout/gh-api.json.txt: id=2519 P3=2029 P4=2025 P5=2032 (P5-P3=3) mode5=phalanx4
+ops bench/holdout-ops/find-listing.txt: id=3997 P3=1678 P4=1671 P5=1766 (P5-P3=88) mode5=phalanx4
+ops bench/holdout-ops/git-log-fuller.txt: id=143 P3=138 P4=138 P5=138 (P5-P3=0) mode5=phalanx4
+ops bench/holdout-ops/git-numstat.txt: id=4632 P3=3535 P4=3535 P5=3525 (P5-P3=-10) mode5=phalanx4
+ops bench/holdout-ops/ls-full-iso.txt: id=1175 P3=677 P4=677 P5=675 (P5-P3=-2) mode5=phalanx4
+ops bench/holdout-ops/node-stacktraces.txt: id=568 P3=461 P4=461 P5=454 (P5-P3=-7) mode5=phalanx4
+ops bench/holdout-ops/npm-ls.txt: id=2747 P3=1970 P4=1970 P5=1995 (P5-P3=25) mode5=phalanx4
+ops bench/holdout-ops/openstack-loghub-26.log: id=4028 P3=1397 P4=1390 P5=1404 (P5-P3=7) mode5=phalanx4
+ops bench/holdout-ops/package-lock-head.json: id=15009 P3=10289 P4=10282 P5=10416 (P5-P3=127) mode5=phalanx4
+ops bench/z20/samples/find-printf-src.txt: id=8493 P3=2816 P4=2809 P5=2965 (P5-P3=149) mode5=phalanx4
+ops bench/z20/samples/git-log-iso.txt: id=1947 P3=1783 P4=1776 P5=1767 (P5-P3=-16) mode5=phalanx4
+ops bench/z20/samples/ls-omega-full-iso.txt: id=7426 P3=2355 P4=2345 P5=2256 (P5-P3=-99) mode5=phalanx4
+TOTAL prose: identity=4692 P3=4565 P4=4565 P5=4560 P6=4560 | P6 vs P4 -5 (-0.11%) | P6 vs P3 -5
+TOTAL code: identity=5255 P3=4559 P4=4555 P5=4532 P6=4516 | P6 vs P4 -39 (-0.86%) | P6 vs P3 -43
+TOTAL ops: identity=50165 P3=27099 P4=27054 P5=27361 P6=27241 | P6 vs P4 187 (0.69%) | P6 vs P3 142
+ALL: P3=36223 P4=36174 P5=36453 P6=36317 (P6-P4=143, 0.40%)
+P5 encode ms: median=77 max=436 over 21 files
+edge cases 15; fuzz exact 3000/3000; decode failures total 0
+ALL EXACT

@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { countTokens } from '@/lib/omega/bpe';
 import { phalanx3Encode, phalanx3Decode } from '@/lib/omega/phalanx3';
-import { phalanx4Encode, phalanx4Decode } from './experiments/phalanx4';
+import { phalanx4Encode, phalanx4Decode } from '@/lib/omega/phalanx4';
 
 const dirs = ['bench/holdout-ops', 'bench/holdout', 'bench/z20/samples'];
 const files = dirs.flatMap((d) => fs.readdirSync(d).filter((f) => fs.statSync(path.join(d, f)).isFile()).map((f) => path.join(d, f)));

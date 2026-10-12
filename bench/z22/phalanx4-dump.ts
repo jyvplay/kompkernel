@@ -1,7 +1,7 @@
 // Dumps P4 wires for the blind (independent, legend-only) decoder check.
 import fs from 'node:fs';
 import path from 'node:path';
-import { phalanx4Encode } from './experiments/phalanx4';
+import { phalanx4Encode } from '@/lib/omega/phalanx4';
 const dirs = ['bench/holdout-ops', 'bench/holdout', 'bench/z20/samples'];
 const items: { name: string; text: string }[] = [];
 for (const d of dirs) for (const f of fs.readdirSync(d)) {
