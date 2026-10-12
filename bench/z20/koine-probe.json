@@ -1,0 +1,1046 @@
+[
+ {
+  "f": "holdout-ops/find-listing.txt",
+  "identity": 3997,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 2427,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 3364,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 2125,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 2427,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 2427,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 2174,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 1678,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 1678,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 1678,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 2125,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 2125,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 2427,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 2174,
+   "mode": "koine",
+   "folded": 238,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout-ops/ls-full-iso.txt",
+  "identity": 1175,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 677,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 794,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 924,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 1175,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 677,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 924,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 725,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 677,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 678,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 794,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 806,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 677,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 924,
+   "mode": "koine",
+   "folded": 76,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout-ops/git-numstat.txt",
+  "identity": 4632,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 3535,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 4079,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 3990,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 3535,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 3526,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 4263,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 3990,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 3990,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 3990,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 3990,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 3990,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 3535,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 4263,
+   "mode": "koine",
+   "folded": 245,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout-ops/npm-ls.txt",
+  "identity": 2747,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 1970,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 2386,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 2640,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 1926,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 1970,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 2696,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 1926,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 1970,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 1970,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 2386,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 2386,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 1970,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 2696,
+   "mode": "koine",
+   "folded": 36,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout-ops/node-stacktraces.txt",
+  "identity": 568,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 461,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 538,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 538,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 461,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 461,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 568,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 461,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 461,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 461,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 538,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 538,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 461,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 568,
+   "mode": "identity",
+   "folded": 0,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout-ops/openstack-loghub-26.log",
+  "identity": 4028,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 1526,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 2117,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 2434,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 1715,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 1526,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 2523,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 1725,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 1590,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 1765,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 2093,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 2163,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 1526,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 2523,
+   "mode": "koine",
+   "folded": 152,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout-ops/git-log-fuller.txt",
+  "identity": 143,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 138,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 143,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 143,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 138,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 138,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 143,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 138,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 138,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 138,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 143,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 143,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 138,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 143,
+   "mode": "identity",
+   "folded": 0,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout-ops/package-lock-head.json",
+  "identity": 15009,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 10359,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 14969,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 14973,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 10325,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 10176,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 14973,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 10413,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 10359,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 10413,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 14969,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 14973,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 10359,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 14973,
+   "mode": "koine",
+   "folded": 30,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout/code-dts.txt",
+  "identity": 162,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 99,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 162,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 162,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 99,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 99,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 162,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 99,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 99,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 99,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 162,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 162,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 99,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 162,
+   "mode": "identity",
+   "folded": 0,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout/code-ts.txt",
+  "identity": 1422,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 1395,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 1422,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 1422,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 1395,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 1395,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 1422,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 1395,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 1395,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 1395,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 1422,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 1422,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 1395,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 1422,
+   "mode": "identity",
+   "folded": 0,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout/gh-api.json.txt",
+  "identity": 2519,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 2029,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 2442,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 2358,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 2029,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 2029,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 2331,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 2032,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 2032,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 2032,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 2358,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 2358,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 2029,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 2331,
+   "mode": "koine",
+   "folded": 30,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout/gh-prose.txt",
+  "identity": 1934,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 1918,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 1934,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 1934,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 1918,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 1918,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 1934,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 1918,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 1918,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 1918,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 1934,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 1934,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 1918,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 1934,
+   "mode": "identity",
+   "folded": 0,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout/json-pkg.txt",
+  "identity": 1152,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 1036,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 1152,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 1152,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 1036,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 1036,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 1152,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 1036,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 1036,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 1036,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 1152,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 1152,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 1036,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 1152,
+   "mode": "identity",
+   "folded": 0,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout/lic-mit.txt",
+  "identity": 223,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 223,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 223,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 223,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 223,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 223,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 223,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 223,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 223,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 223,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 223,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 223,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 223,
+   "mode": "identity"
+  },
+  "koine_module": {
+   "tok": 223,
+   "mode": "identity",
+   "folded": 0,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout/license.txt",
+  "identity": 1166,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 1122,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 1166,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 1166,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 1122,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 1122,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 1166,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 1122,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 1122,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 1122,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 1166,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 1166,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 1122,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 1166,
+   "mode": "identity",
+   "folded": 0,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout/md-react.txt",
+  "identity": 252,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 252,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 252,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 252,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 252,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 252,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 252,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 252,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 252,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 252,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 252,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 252,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 252,
+   "mode": "identity"
+  },
+  "koine_module": {
+   "tok": 252,
+   "mode": "identity",
+   "folded": 0,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout/md-vite.txt",
+  "identity": 274,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 274,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 274,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 274,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 274,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 274,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 274,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 274,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 274,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 274,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 274,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 274,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 274,
+   "mode": "identity"
+  },
+  "koine_module": {
+   "tok": 274,
+   "mode": "identity",
+   "folded": 0,
+   "exact": true
+  }
+ },
+ {
+  "f": "holdout/readme.txt",
+  "identity": 843,
+  "PHALANX-P1 (U,DA,T,V)": {
+   "tok": 776,
+   "exact": true
+  },
+  "U,DA,T": {
+   "tok": 843,
+   "exact": true
+  },
+  "U,DA,K": {
+   "tok": 843,
+   "exact": true
+  },
+  "U,DA,V": {
+   "tok": 776,
+   "exact": true
+  },
+  "U,DA,T,V,K": {
+   "tok": 776,
+   "exact": true
+  },
+  "K alone": {
+   "tok": 843,
+   "exact": true
+  },
+  "U,DA,K,V": {
+   "tok": 776,
+   "exact": true
+  },
+  "U,DA,T,K,V": {
+   "tok": 776,
+   "exact": true
+  },
+  "U,DA,K,T,V": {
+   "tok": 776,
+   "exact": true
+  },
+  "U,DA,T,K": {
+   "tok": 843,
+   "exact": true
+  },
+  "U,DA,K,T": {
+   "tok": 843,
+   "exact": true
+  },
+  "phalanx_module": {
+   "tok": 776,
+   "mode": "phalanx"
+  },
+  "koine_module": {
+   "tok": 843,
+   "mode": "identity",
+   "folded": 0,
+   "exact": true
+  }
+ }
+]

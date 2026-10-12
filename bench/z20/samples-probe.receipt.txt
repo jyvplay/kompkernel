@@ -1,0 +1,3 @@
+find-printf-src.txt | 8493 | 2879 | 2816 | phalanx2 | kept | exact=true,true | -66.8% vs identity
+git-log-iso.txt | 1947 | 1804 | 1783 | phalanx2 | kept | exact=true,true | -8.4% vs identity
+ls-omega-full-iso.txt | 7426 | 2573 | 2463 | phalanx2 | kept | exact=true,true | -66.8% vs identity

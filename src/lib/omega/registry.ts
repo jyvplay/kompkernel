@@ -97,6 +97,7 @@ import { uuidfoldEncode } from './uuidfold';
 import { dirfoldEncode } from './dirfold';
 import { dittoEncode } from './ditto';
 import { phalanxEncode } from './phalanx';
+import { phalanx2Encode } from './phalanx2';
 import { amphoraEncode } from './amphora';
 import { kanonEncode } from './kanon';
 import { icarusEncode } from './icarus';
@@ -668,6 +669,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'phalanx', label: '▥ PHALANX (ASCII-only fixed pipeline: UUIDFOLD -> DIRFOLD-A -> DITTO -> VERITAS-VX; each stage gated; identity unless exact and cheaper)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = phalanxEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `${r.mode}; stages=${r.stageTokens.join('/')}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'phalanx2', label: '▥ PHALANX-P2 (ASCII-only fixed pipeline: UUIDFOLD -> DIRFOLD-A -> DITTO -> KOINE-K1 (gated on the VERITAS output) -> VERITAS-VX; identity unless exact and cheaper)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = phalanx2Encode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `${r.mode}; koine=${r.koineKept ? 'kept' : 'off'}; stages=${r.stageTokens.join('/')}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'ditto', label: '⋮ DITTO (per-field same-as-above marks ^, ASCII-only wire; one-line rule; identity unless it pays)', family: 'exact', fidelity: 'exact',
