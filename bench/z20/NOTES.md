@@ -34,3 +34,19 @@ Readability caveats (NOT verified with an LLM; no LLM access in this sandbox)
   dense part; KOINE itself is positional (reference = the line above, decoded).
 - KOINE-only chains (no VERITAS) are a possible readability-first lane: U,DA,T,K gives find-listing 2125 and
   ls-full-iso 794 (see koine-sweep). Not adopted; no readability metric is available here.
+
+Prior art (checked this turn; KOINE is NOT a new concept in the literature)
+- Kundi et al., IEEE TSE 2021 (ece.uwaterloo.ca/~wshang/pubs/Kundi_TSE_2021.pdf): "extract a common prefix string" on
+  log columns; reports up to 9.7% ratio gain on some logs. Our contribution is the in-context, LLM-readable form,
+  the per-line token gate, and the downstream VERITAS gate.
+- arXiv 2602.13266 (LoPace, Feb 2026): lossless prompt compression via zstd + BPE binary packing. Byte-packed output,
+  not readable by a model in one chat. Not adopted.
+- ClickHouse docs (delta / delta-of-delta for timestamps): column-store encodings, not readable text. Context only.
+
+PR review decisions (open PRs, excluding rosetta #6/#7/#8)
+- #26 (this session's PR), #23, #20, #18, #17, #13, #11, #4, #3, #2: most codec files are already on this branch.
+- #23: kalligraphos (math-alphabet restore) and arithmos (native digit restore) are real exact codecs but niche lanes;
+  optimal.ts is a selector over candidate messages (a tournament pattern); not ported.
+- #17: codec-map.ts is a taxonomy document, not a codec; not ported.
+- #2: chronos-x1, oblivion, pallas, starlight-prime, terminus, yggdrasil are NOT on this branch. Their PR text claims
+  "strictly dominate" without a receipt in the PR; they are variants of the CJK-contractor family. Not measured here; not ported.
