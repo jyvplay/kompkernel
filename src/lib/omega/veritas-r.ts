@@ -30,6 +30,12 @@ export interface VxrSearchOptions {
   maxTrials: number;
   /** Exact-count budget for refinement (prune and key-reassignment evaluations). */
   refineBudget: number;
+  /** Look-past: after the greedy has no improving step, take up to this many best non-improving steps and keep the lowest-count state. 0 = off. */
+  forceSteps?: number;
+  /** Key pool order: 'codepoint' (default) or 'cyrillic' (single-token Cyrillic keys first, so adjacent keys can merge). */
+  pool?: 'codepoint' | 'cyrillic';
+  /** Key-swap hill-climb after refinement: exchange keys of two used entries, keep on exact count drop, decode-gated. */
+  swapPass?: boolean;
 }
 export const DEFAULT_VXR_OPTS: VxrSearchOptions = { poolMax: 240, kImprove: 10, maxTrials: 300, refineBudget: 4000 };
 
@@ -65,15 +71,20 @@ export function veritasREncodeWith(text: string, enc: EncodingName, opts: VxrSea
   const wrap = text.startsWith(VXA_SENTINEL) || text.startsWith(VXN_SENTINEL) || text.startsWith(VXC_SENTINEL) || text.startsWith(VXS_SENTINEL) || text.startsWith(VXR_SENTINEL);
   const raw = () => finish(wrap ? wireR([], escBody(text)) : text, 0, 0, { prunes: 0, rekeys: 0 });
   if (text.length === 0) return finish(text, 0, 0, { prunes: 0, rekeys: 0 });
-  const pool = aliasPool(enc).filter((c) => !text.includes(c)).slice(0, opts.poolMax);
+  const basePool = aliasPool(enc).filter((c) => !text.includes(c));
+  const cyrFirst = (c: string) => { const k = c.codePointAt(0)!; return k >= 0x400 && k <= 0x4ff; };
+  const pool = (opts.pool === 'cyrillic' ? [...basePool.filter(cyrFirst), ...basePool.filter((c) => !cyrFirst(c))] : basePool).slice(0, opts.poolMax);
   let st = { entries: [] as VeritasSEntry[], body: escBody(text) };
   let cur = countTokens(wireR([], st.body), enc);
   let trialsTot = 0;
+  const forceSteps = opts.forceSteps ?? 0;
+  let forced = 0, bestCount = Infinity, bestState: typeof st | null = null;
   // Greedy: best improving candidate per step, scanning the ranked list until kImprove improve or maxTrials are tried.
   while (st.entries.length < pool.length) {
     const ranked = rankedCandidatesS(st.body, enc);
     const key = pool[st.entries.length];
     const improving: { phrase: string; body: string; t: number }[] = [];
+    const allTrials: { phrase: string; body: string; t: number }[] = [];
     let trials = 0;
     for (const c of ranked) {
       if (improving.length >= opts.kImprove || trials >= opts.maxTrials) break;
@@ -83,13 +94,19 @@ export function veritasREncodeWith(text: string, enc: EncodingName, opts: VxrSea
       const cb = parts.join(key);
       const t = countTokens(wireR([...st.entries, { key, phrase: c.phrase }], cb), enc);
       if (t < cur) improving.push({ phrase: c.phrase, body: cb, t });
+      allTrials.push({ phrase: c.phrase, body: cb, t });
     }
     trialsTot += trials;
-    if (improving.length === 0) break;
-    const best = improving.reduce((a, b) => (b.t < a.t ? b : a));
-    cur = best.t;
-    st = { entries: [...st.entries, { key, phrase: best.phrase }], body: best.body };
+    let pick: { phrase: string; body: string; t: number } | null = null;
+    if (improving.length > 0) pick = improving.reduce((a, b) => (b.t < a.t ? b : a));
+    else if (forced < forceSteps && allTrials.length > 0) { pick = allTrials.reduce((a, b) => (b.t < a.t ? b : a)); forced++; }
+    if (!pick) break;
+    cur = pick.t;
+    st = { entries: [...st.entries, { key, phrase: pick.phrase }], body: pick.body };
+    if (cur < bestCount) { bestCount = cur; bestState = st; }
   }
+  // Look-past returns the lowest-count state seen on the trajectory (identical to the final state when forceSteps = 0).
+  if (bestState) st = bestState;
   if (st.entries.length === 0) return raw();
   // Refinement: prune entries and reassign keys while the exact wire count improves.
   // Deterministic budget: at most opts.refineBudget exact counts, so the output does not depend on machine speed.
@@ -111,6 +128,28 @@ export function veritasREncodeWith(text: string, enc: EncodingName, opts: VxrSea
         if (t < c0) { st = c; c0 = t; rekeys++; improved = true; break; }
       }
     }
+  }
+  if (opts.swapPass) {
+    // Key-swap hill-climb: exchange the keys of two used entries (and their body occurrences). Keep only swaps that
+    // lower the exact count AND decode back to the input, because header nesting depends on key order.
+    let ents = st.entries.map((e) => ({ ...e }));
+    let body = st.body;
+    let c = countTokens(wireR(ents, body), enc);
+    let improvedSw = true, passes = 0;
+    while (improvedSw && passes < 6) {
+      improvedSw = false; passes++;
+      for (let i = 0; i < ents.length; i++) for (let j = i + 1; j < ents.length; j++) {
+        const ka = ents[i].key, kb = ents[j].key;
+        const nb = Array.from(body, (ch) => (ch === ka ? kb : ch === kb ? ka : ch)).join('');
+        const ne = ents.map((e, k) => (k === i ? { ...e, key: kb } : k === j ? { ...e, key: ka } : e));
+        const t = countTokens(wireR(ne, nb), enc);
+        if (t >= c) continue;
+        let okDec = false;
+        try { okDec = veritasADecode(wireR(ne, nb)) === text; } catch { okDec = false; }
+        if (okDec) { ents = ne; body = nb; c = t; improvedSw = true; }
+      }
+    }
+    st = { entries: ents, body };
   }
   const wire = wireR(st.entries, st.body);
   // Final gate: the whole wire must beat the raw input, otherwise emit the input verbatim.

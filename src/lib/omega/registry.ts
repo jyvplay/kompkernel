@@ -112,6 +112,7 @@ import { phalanxA9Encode } from './phalanx-a9';
 import { veritasNEncode } from './veritas-n';
 import { veritasREncode } from './veritas-r';
 import { veritasKEncode } from './veritas-k';
+import { veritasMEncode } from './veritas-m';
 import { phalanxA10Encode } from './phalanx-a10';
 import { veritasCEncode } from './veritas-c';
 import { veritasUEncode } from './veritas-u';
@@ -755,6 +756,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'veritas-k', label: '⟁ VERITAS-K (VERITAS-R with wide greedy search for inputs up to 16000 chars; same VXR wire and decoder; standard budget above 16000 chars; identity-guarded)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = veritasKEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `mode=${r.mode}; entries=${r.entries}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'veritas-m', label: '⟁ VERITAS-M (VERITAS-R with look-past, Cyrillic key pool and decode-gated key-swap hill-climb; full search up to 10000 chars; same VXR wire and decoder; identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = veritasMEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `mode=${r.mode}; entries=${r.entries}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'phalanx-a8', label: '▣ PHALANX-A8 (PHALANX-A7 with the VERITAS-U single-pass union dictionary as its VX stage; same wire and decoder as A7; identity-guarded)', family: 'exact', fidelity: 'exact',
