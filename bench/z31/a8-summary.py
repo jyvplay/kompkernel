@@ -30,3 +30,7 @@ a7s = sum(F7[f] for f in ov); a8s = sum(F8[f]['a8'] for f in ov)
 better = sum(F8[f]['a8'] < F7[f] for f in ov); worse = sum(F8[f]['a8'] > F7[f] for f in ov)
 print(f"overlap docs {len(ov)} of A8 run {len(F8)} / A7 run {len(F7)}; A7 {a7s}  A8 {a8s}  diff {a8s-a7s:+d} ({(a8s-a7s)/a7s*100:+.2f}%)  A8 better {better}, worse {worse}, equal {len(ov)-better-worse}")
 print('exact A8 on all fresh docs run:', all(F8[f]['a8_exact'] for f in F8), ' docs run:', len(F8))
+print(f"A8 total over all {len(F8)} fresh docs: {sum(r['a8'] for r in F8.values())} tokens; exact {sum(r['a8_exact'] for r in F8.values())}/{len(F8)}")
+# Fresh overlap: how much of the gain is the VX stage alone (VXA best-of-3 at VX level, from vx.jsonl)?
+VXL = {json.loads(l)['file']: json.loads(l)['best_T'] for l in open('/home/user/z31/vx.jsonl')}
+print(f"overlap {len(ov)} docs: VXA best-of-3 VX-level {sum(VXL[f] for f in ov)}  A7 stack {a7s}  A8 stack {a8s}  (stack layers above VX on A7: {a7s - sum(VXL[f] for f in ov):+d})")
