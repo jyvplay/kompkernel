@@ -1,0 +1,24 @@
+prose: identity=4692 A5=4532 A6=4532 (A6-A5=0)
+wrapped_docs: identity=41988 A5=39153 A6=39153 (A6-A5=0)
+code: identity=5255 A5=4097 A6=4097 (A6-A5=0)
+  table layer used: ls-omega-full-iso.txt A5=1897 A6=1586
+ops: identity=50165 A5=23157 A6=22846 (A6-A5=-311)
+  table layer used: ls-usr-bin.txt A5=7710 A6=7607
+  table layer used: ps-eo.txt A5=1410 A6=1226
+ops_real: identity=32204 A5=17772 A6=17485 (A6-A5=-287)
+realjson: identity=5498 A5=3886 A6=3886 (A6-A5=0)
+ALL: identity=139802 A5=92597 A6=91999 (A6-A5=-598, -0.65%)
+edge empty: layer=a5 A5=0 A6=0 exact=true
+edge one table: layer=a5 A5=13 A6=13 exact=true
+edge ragged: layer=a5 A5=11 A6=11 exact=true
+edge leading pad right: layer=a5 A5=14 A6=14 exact=true
+edge trailing spaces: layer=a5 A5=8 A6=8 exact=true
+edge tabs: layer=a5 A5=8 A6=8 exact=true
+edge marker in input: layer=a5 A5=16 A6=16 exact=true
+edge prefixed: layer=pad A5=17 A6=86 exact=true
+edge numeric mix: layer=a5 A5=17 A6=17 exact=true
+edge one-space columns: layer=a5 A5=6 A6=6 exact=true
+edge overflow push: layer=a5 A5=25 A6=25 exact=true
+edge header differs: layer=a5 A5=14 A6=14 exact=true
+edge ls-like: layer=a5 A5=45 A6=45 exact=true
+round-trip checks run: 53; failures: 0

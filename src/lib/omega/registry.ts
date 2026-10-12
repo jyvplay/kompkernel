@@ -105,6 +105,7 @@ import { phalanxA2Encode } from './phalanx-a2';
 import { phalanxA3Encode } from './phalanx-a3';
 import { phalanxA4Encode } from './phalanx-a4';
 import { phalanxA5Encode } from './phalanx-a5';
+import { phalanxA6Encode } from './phalanx-a6';
 import { veritasEncodeMulti, withVxLegend, veritasDecodeL } from './veritas-w';
 import { amphoraEncode } from './amphora';
 import { kanonEncode } from './kanon';
@@ -709,6 +710,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'phalanx-a5', label: '▣ PHALANX-A5 (PHALANX-A4 plus a gated lossless hard-wrap layer: paragraphs that are exactly greedy-wrapped prose are carried unwrapped and re-wrapped by the decoder; identity-guarded)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = phalanxA5Encode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `layer=${r.layer} width=${r.width}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'phalanx-a6', label: '▣ PHALANX-A6 (PHALANX-A5 plus a gated lossless table layer: column-aligned ops tables (ps, ls -l, df) are carried space-separated and re-padded by the decoder; identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = phalanxA6Encode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `layer=${r.layer}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'veritas-m', label: '⟁ VERITAS-VX multi-window (trigram+bigram candidates, real-token gate; same VX1 wire and decoder)', family: 'exact', fidelity: 'exact',

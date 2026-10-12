@@ -1,0 +1,39 @@
+total 64
+drwxr-xr-x 35 root root  4096 Jun 15 16:59 .
+drwxr-xr-x 12 root root  4096 Jun 15 16:59 ..
+drwxr-xr-x  3 root root    60 Jun 15 16:59 NetworkManager
+drwxr-xr-x  5 root root   128 Jun 15 16:59 apt
+drwxr-xr-x  2 root root   128 Jun 15 16:59 bfd-plugins
+drwxr-xr-x  2 root root    60 Jun 15 16:59 binfmt.d
+drwxr-xr-x  2 root root    60 Jun 15 16:59 compat-ld
+lrwxrwxrwx  1 root root    21 Jan  8  2023 cpp -> /etc/alternatives/cpp
+drwxr-xr-x  3 root root    60 May 25  2023 dpkg
+drwxr-xr-x  2 root root   128 Jun 15 16:59 environment.d
+drwxr-xr-x  3 root root   128 Jun 15 16:59 gcc
+drwxr-xr-x  3 root root  8192 Jun 15 16:59 git-core
+drwxr-xr-x  2 root root    60 Jun 15 16:59 gold-ld
+drwxr-xr-x  2 root root    60 Jun 10 00:00 init
+drwxr-xr-x  3 root root   128 Jun 15 16:59 kernel
+drwxr-xr-x  3 root root    60 Apr 27 20:14 locale
+drwxr-xr-x  3 root root    60 Jun 10 00:00 lsb
+drwxr-xr-x  3 root root    60 Jan 20  2024 mime
+drwxr-xr-x  2 root root    60 Jun 15 16:59 modprobe.d
+drwxr-xr-x  2 root root    60 Apr 27 19:48 modules-load.d
+drwxr-xr-x  4 root root   128 Jun 15 16:59 networkd-dispatcher
+drwxr-xr-x  2 root root  4096 Jun 15 16:59 openssh
+-rw-r--r--  1 root root   267 May  8 16:15 os-release
+drwxr-xr-x  2 root root    60 Jun 15 16:59 pam.d
+drwxr-xr-x  3 root root    60 Jun 15 16:59 python3
+drwxr-xr-x 34 root root  8192 Jun 15 16:59 python3.11
+drwxr-xr-x  2 root root    60 Jun 15 16:59 runit-helper
+drwxr-xr-x  2 root root    60 Nov 22  2022 sasl2
+lrwxrwxrwx  1 root root    19 May  5 10:26 sftp-server -> openssh/sftp-server
+drwxr-xr-x  3 root root  4096 Jun 15 16:59 ssl
+drwxr-xr-x  2 root root   128 Jun 15 16:59 sysctl.d
+drwxr-xr-x 15 root root  4096 Jun 15 16:59 systemd
+drwxr-xr-x  2 root root  4096 Jun 15 16:59 sysusers.d
+drwxr-xr-x 16 root root  4096 Jun 15 16:59 terminfo
+drwxr-xr-x  2 root root  4096 Jun 15 16:59 tmpfiles.d
+drwxr-xr-x  3 root root    60 Jun 10 00:00 udev
+drwxr-xr-x  2 root root    60 Jun 15 16:59 valgrind
+drwxr-xr-x 24 root root 12288 Jun 15 16:59 x86_64-linux-gnu

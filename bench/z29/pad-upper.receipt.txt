@@ -1,0 +1,23 @@
+# Receipt for bench/z29/pad-upper.ts (UPPER BOUND, lossy). Captured verbatim from that script's stdout in this turn.
+df-h.txt: A5=131 collapsed-spaces(lossy)=109 (-16.79%) whitespace-only input tokens=47/131
+dpkg-l.txt: A5=6501 collapsed-spaces(lossy)=5643 (-13.20%) whitespace-only input tokens=1670/8975
+du-usr-share.txt: A5=1151 collapsed-spaces(lossy)=1151 (0.00%) whitespace-only input tokens=299/1634
+free-h.txt: A5=64 collapsed-spaces(lossy)=49 (-23.44%) whitespace-only input tokens=27/64
+ls-usr-bin.txt: A5=7710 collapsed-spaces(lossy)=6263 (-18.77%) whitespace-only input tokens=4517/17146
+ls-usr-lib.txt: A5=586 collapsed-spaces(lossy)=531 (-9.39%) whitespace-only input tokens=266/949
+os-release.txt: A5=79 collapsed-spaces(lossy)=79 (0.00%) whitespace-only input tokens=3/79
+ps-eo.txt: A5=1410 collapsed-spaces(lossy)=1202 (-14.75%) whitespace-only input tokens=1164/3086
+ss-tln.txt: A5=100 collapsed-spaces(lossy)=86 (-14.00%) whitespace-only input tokens=29/100
+uname.txt: A5=40 collapsed-spaces(lossy)=40 (0.00%) whitespace-only input tokens=5/40
+find-listing.txt: A5=1588 collapsed-spaces(lossy)=1594 (0.38%) whitespace-only input tokens=360/3997
+git-log-fuller.txt: A5=143 collapsed-spaces(lossy)=139 (-2.80%) whitespace-only input tokens=14/143
+git-numstat.txt: A5=2704 collapsed-spaces(lossy)=2703 (-0.04%) whitespace-only input tokens=956/4632
+ls-full-iso.txt: A5=653 collapsed-spaces(lossy)=588 (-9.95%) whitespace-only input tokens=185/1175
+node-stacktraces.txt: A5=457 collapsed-spaces(lossy)=424 (-7.22%) whitespace-only input tokens=55/568
+npm-ls.txt: A5=1693 collapsed-spaces(lossy)=1704 (0.65%) whitespace-only input tokens=146/2747
+openstack-loghub-26.log: A5=1335 collapsed-spaces(lossy)=1335 (0.00%) whitespace-only input tokens=192/4028
+package-lock-head.json: A5=8492 collapsed-spaces(lossy)=8297 (-2.30%) whitespace-only input tokens=1357/15009
+find-printf-src.txt: A5=2442 collapsed-spaces(lossy)=2408 (-1.39%) whitespace-only input tokens=861/8493
+git-log-iso.txt: A5=1753 collapsed-spaces(lossy)=1753 (0.00%) whitespace-only input tokens=84/1947
+ls-omega-full-iso.txt: A5=1897 collapsed-spaces(lossy)=1491 (-21.40%) whitespace-only input tokens=1162/7426
+ALL A5=40929 collapsed=37589 (-8.16%) whitespace-only input tokens 13399/82369
