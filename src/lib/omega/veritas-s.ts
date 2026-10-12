@@ -1,20 +1,23 @@
 /**
- * VERITAS-S (Z33): VERITAS-C wire under the VXS sentinel, with a different greedy search.
+ * VERITAS-S (Z33, gate fixed in Z34): VERITAS-C wire under the VXS sentinel, with a different greedy search.
  *
  * Wire: `[[VXS` line, legend line, header lines `X<escaped T>` (nested: a header phrase may use
  * earlier keys), `]]`, body. The decoder is the existing VXC path (veritasADecode), so no new reader is needed.
  *
- * Encoder (a search, not a proof of optimality): each step builds one candidate pool from
- *   - token-window phrases (windows 2..4 tokens, anchor cap 240, position cap 64, extension cap 32),
- *   - character substrings of length 4..80 (charCandidates from VERITAS-C),
- *   - non-aligned strings of length 1..3 that occur at least 4 times (top 300 by frequency),
- * ranks them, and exactly re-counts the wire tokens for each candidate in rank order. The scan stops after
- * K_IMPROVE improving candidates or MAX_TRIALS trials. The best improving candidate is applied. Repeat until no
- * candidate improves or the key pool is exhausted. The encoder decodes its own wire and falls back to the
- * input verbatim if the check fails and no wrapper is needed.
+ * Encoder (a search, not a proof of optimality):
+ *   1. Greedy. Each step builds one candidate pool from
+ *        - token-window phrases (windows 2..4 tokens, anchor cap 240, position cap 64, extension cap 32),
+ *        - character substrings of length 4..80 (charCandidates from VERITAS-C),
+ *        - non-aligned strings of length 1..3 that occur at least 4 times (top 300 by frequency),
+ *      ranks them, and exactly re-counts the full wire (legend included) for each candidate in rank order.
+ *      The scan stops after K_IMPROVE improving candidates or MAX_TRIALS trials. The best improving candidate is applied.
+ *   2. Refinement (key reassignment). Each entry may move to another unused pool key when that lowers the exact count.
+ *      Pruning (removing an entry) is also tried. Repeat until no move improves.
+ *   3. Final gate. The wire is emitted only if it is smaller than the raw input (exact one-chat tokens). Otherwise the input is emitted verbatim.
+ * The encoder decodes its own output and reports exactness.
  */
 import { countTokens, tokenStrings, type EncodingName } from './bpe';
-import { aliasPool, escBody, escHeader, veritasADecode, VXA_SENTINEL, VXC_SENTINEL, VXN_SENTINEL, VXS_SENTINEL } from './veritas-a';
+import { aliasPool, escBody, escHeader, veritasADecode, VXA_SENTINEL, VXC_SENTINEL, VXN_SENTINEL, VXR_SENTINEL, VXS_SENTINEL } from './veritas-a';
 import { TERMINATOR, type Cand } from './veritas-u';
 import { charCandidates } from './veritas-c';
 import { nestedHeaderPhrases } from './veritas-n';
@@ -30,8 +33,9 @@ const MINE_CAP = 220000;
 const K_RADIX = 200100;
 const SHORT_N = 300;
 const SHORT_MIN_COUNT = 4;
-const K_IMPROVE = 10;
-const MAX_TRIALS = 300;
+
+export interface SearchOptions { kImprove?: number; maxTrials?: number; refine?: boolean }
+const DEFAULTS: Required<SearchOptions> = { kImprove: 10, maxTrials: 300, refine: true };
 
 export interface VeritasSEntry { key: string; phrase: string }
 export interface VeritasSResult {
@@ -43,6 +47,7 @@ export interface VeritasSResult {
   outTokens: number;
   trials: number;
 }
+export interface SearchState { entries: VeritasSEntry[]; body: string; trials: number; refineMoves: { prunes: number; rekeys: number } }
 
 /** VXS wire for a given entry list and body (body already escaped by escBody). */
 export function wireS(entries: VeritasSEntry[], body: string): string {
@@ -111,37 +116,74 @@ function shortCands(body: string): Cand[] {
     .map(([phrase, c]) => ({ phrase, win: 1, anchorHits: c }));
 }
 
-export function veritasSEncode(text: string, enc: EncodingName = 'o200k_base'): VeritasSResult {
-  const inTokens = countTokens(text, enc);
-  const finish = (wire: string, entries: number, trials: number): VeritasSResult => {
-    const decoded = veritasADecode(wire);
-    const exact = decoded === text;
-    return { wire, decoded, exact, entries, inTokens, outTokens: countTokens(wire, enc), trials };
-  };
-  if (text.length === 0) return finish(text, 0, 0);
+/** Ranked candidate phrases for one greedy step (the search and the diagnostics share this). */
+export function rankedCandidatesS(body: string, enc: EncodingName = 'o200k_base'): Cand[] {
+  const toks = tokenStrings(body, enc);
+  const tm = new Map<string, Cand>();
+  for (const W of WINDOWS) collectWindowCands(toks, W, tm);
+  const list = [...tm.values(), ...charCandidates(body, enc), ...shortCands(body)];
+  const seen = new Set<string>();
+  const score = (c: Cand) => c.anchorHits * (c.win - 1) - (c.win + 1);
+  return list
+    .filter((c) => (seen.has(c.phrase) ? false : (seen.add(c.phrase), true)))
+    .filter((c) => c.anchorHits >= 2)
+    .sort((x, y) => score(y) - score(x));
+}
+
+/** Remove entry i: its key is replaced by its phrase everywhere it occurs (body and later phrases). */
+export function removeEntryS(st: { entries: VeritasSEntry[]; body: string }, i: number): { entries: VeritasSEntry[]; body: string } {
+  const K = st.entries[i].key, P = st.entries[i].phrase;
+  const entries = st.entries.filter((_, j) => j !== i).map((e, j) => (j >= i ? { key: e.key, phrase: e.phrase.split(K).join(P) } : e));
+  return { entries, body: st.body.split(K).join(escBody(P)) };
+}
+
+/** Reassign entry i to key nk: rename its key in the body and in every later phrase. */
+export function rekeyEntryS(st: { entries: VeritasSEntry[]; body: string }, i: number, nk: string): { entries: VeritasSEntry[]; body: string } {
+  const K = st.entries[i].key;
+  const entries = st.entries.map((e, j) => (j === i ? { key: nk, phrase: e.phrase } : j > i ? { key: e.key, phrase: e.phrase.split(K).join(nk) } : e));
+  return { entries, body: st.body.split(K).join(nk) };
+}
+
+/** Local refinement: prune entries and reassign keys while the exact wire count improves. */
+export function refineS(text: string, st0: { entries: VeritasSEntry[]; body: string }, enc: EncodingName = 'o200k_base'): { entries: VeritasSEntry[]; body: string; prunes: number; rekeys: number } {
+  const pool = aliasPool(enc).filter((c) => !text.includes(c)).slice(0, POOL_MAX);
+  const cost = (s: { entries: VeritasSEntry[]; body: string }) => countTokens(wireS(s.entries, s.body), enc);
+  let st = st0, cur = cost(st), prunes = 0, rekeys = 0, improved = true;
+  while (improved) {
+    improved = false;
+    for (let i = 0; i < st.entries.length; i++) {
+      const c = removeEntryS(st, i); const t = cost(c);
+      if (t < cur) { st = c; cur = t; prunes++; improved = true; i--; }
+    }
+    for (let i = 0; i < st.entries.length && !improved; i++) {
+      const used = new Set(st.entries.map((e) => e.key));
+      for (const k of pool) {
+        if (used.has(k)) continue;
+        const c = rekeyEntryS(st, i, k); const t = cost(c);
+        if (t < cur) { st = c; cur = t; rekeys++; improved = true; break; }
+      }
+    }
+  }
+  return { entries: st.entries, body: st.body, prunes, rekeys };
+}
+
+/** Greedy search (plus refinement unless disabled). Returns entries in application order and the escaped body. */
+export function searchS(text: string, enc: EncodingName = 'o200k_base', options: SearchOptions = {}): SearchState {
+  const o = { ...DEFAULTS, ...options };
   const pool = aliasPool(enc).filter((c) => !text.includes(c)).slice(0, POOL_MAX);
   let body = escBody(text);
   const entries: VeritasSEntry[] = [];
-  let cur = countTokens(body, enc);
+  // Baseline counts the same wire as the trials (legend included). A bare-body baseline gave a false +33 gate.
+  let cur = countTokens(wireS([], body), enc);
   let trialsTot = 0;
-  const score = (c: Cand) => c.anchorHits * (c.win - 1) - (c.win + 1);
   while (entries.length < pool.length) {
-    const toks = tokenStrings(body, enc);
-    const tm = new Map<string, Cand>();
-    for (const W of WINDOWS) collectWindowCands(toks, W, tm);
-    const list = [...tm.values(), ...charCandidates(body, enc), ...shortCands(body)];
-    const seen = new Set<string>();
-    const ranked = list
-      .filter((c) => (seen.has(c.phrase) ? false : (seen.add(c.phrase), true)))
-      .filter((c) => c.anchorHits >= 2)
-      .sort((x, y) => score(y) - score(x));
+    const ranked = rankedCandidatesS(body, enc);
     const key = pool[entries.length];
     const improving: { phrase: string; body: string; t: number }[] = [];
     let trials = 0;
     for (const c of ranked) {
-      if (improving.length >= K_IMPROVE || trials >= MAX_TRIALS) break;
-      const esc = escBody(c.phrase);
-      const parts = body.split(esc);
+      if (improving.length >= o.kImprove || trials >= o.maxTrials) break;
+      const parts = body.split(escBody(c.phrase));
       if (parts.length - 1 < 2) continue;
       trials++;
       const cb = parts.join(key);
@@ -155,12 +197,29 @@ export function veritasSEncode(text: string, enc: EncodingName = 'o200k_base'): 
     body = best.body;
     entries.push({ key, phrase: best.phrase });
   }
-  if (entries.length === 0) {
+  if (!o.refine || entries.length === 0) return { entries, body, trials: trialsTot, refineMoves: { prunes: 0, rekeys: 0 } };
+  const r = refineS(text, { entries, body }, enc);
+  return { entries: r.entries, body: r.body, trials: trialsTot, refineMoves: { prunes: r.prunes, rekeys: r.rekeys } };
+}
+
+export function veritasSEncode(text: string, enc: EncodingName = 'o200k_base', options: SearchOptions = {}): VeritasSResult {
+  const inTokens = countTokens(text, enc);
+  const finish = (wire: string, entries: number, trials: number): VeritasSResult => {
+    const decoded = veritasADecode(wire);
+    const exact = decoded === text;
+    return { wire, decoded, exact, entries, inTokens, outTokens: countTokens(wire, enc), trials };
+  };
+  if (text.length === 0) return finish(text, 0, 0);
+  const st = searchS(text, enc, options);
+  const wrap = text.startsWith(VXA_SENTINEL) || text.startsWith(VXN_SENTINEL) || text.startsWith(VXC_SENTINEL) || text.startsWith(VXS_SENTINEL) || text.startsWith(VXR_SENTINEL);
+  if (st.entries.length === 0) {
     // Nothing helped. Return the input verbatim unless it starts with a sentinel (then it must be wrapped).
-    const wrap = text.startsWith(VXA_SENTINEL) || text.startsWith(VXN_SENTINEL) || text.startsWith(VXC_SENTINEL) || text.startsWith(VXS_SENTINEL);
-    return finish(wrap ? wireS([], escBody(text)) : text, 0, trialsTot);
+    return finish(wrap ? wireS([], escBody(text)) : text, 0, st.trials);
   }
-  return finish(wireS(entries, body), entries.length, trialsTot);
+  const wire = wireS(st.entries, st.body);
+  // Final gate: the wire must beat the raw input (legend and header included); otherwise emit the input verbatim.
+  if (countTokens(wire, enc) >= inTokens) return finish(wrap ? wireS([], escBody(text)) : text, 0, st.trials);
+  return finish(wire, st.entries.length, st.trials);
 }
 
 /** Decode a VXS wire (or any wire VERITAS-A accepts). */

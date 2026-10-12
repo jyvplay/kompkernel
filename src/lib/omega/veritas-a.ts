@@ -81,7 +81,7 @@ export function veritasAEncode(text: string, enc: EncodingName, W = 3, legend: s
     wire: text, decoded: text, exact: true, mode: 'identity', entries: [], inTokens, outTokens: inTokens,
   });
   if (text.length === 0) return identity();
-  const mustWrap = text.startsWith(VXA_SENTINEL) || text.startsWith(VXN_SENTINEL) || text.startsWith(VXC_SENTINEL) || text.startsWith(VXS_SENTINEL);
+  const mustWrap = text.startsWith(VXA_SENTINEL) || text.startsWith(VXN_SENTINEL) || text.startsWith(VXC_SENTINEL) || text.startsWith(VXS_SENTINEL) || text.startsWith(VXR_SENTINEL);
   const pool = aliasPool(enc).filter((c) => !text.includes(c));
   const keys = pool.slice(0, POOL_SIZE);
 
@@ -177,12 +177,14 @@ export const VXN_SENTINEL = '[[VXN\n';
 export const VXC_SENTINEL = '[[VXC\n';
 /** VXS: the VXC wire under its own sentinel (VERITAS-S encoder). Same header and body; decoded by the VXC path. */
 export const VXS_SENTINEL = '[[VXS\n';
+/** VXR: the VXC wire under its own sentinel (VERITAS-R encoder, Z34). Same header and body; decoded by the VXC path. */
+export const VXR_SENTINEL = '[[VXR\n';
 const VXA_NEST_MAX_DEPTH = 64;
 
 export function flattenNestedHeader(wire: string): string {
-  const eqFree = wire.startsWith(VXC_SENTINEL) || wire.startsWith(VXS_SENTINEL);
+  const eqFree = wire.startsWith(VXC_SENTINEL) || wire.startsWith(VXS_SENTINEL) || wire.startsWith(VXR_SENTINEL);
   if (!eqFree && !wire.startsWith(VXN_SENTINEL)) return wire;
-  const pre = !eqFree ? VXN_SENTINEL : wire.startsWith(VXS_SENTINEL) ? VXS_SENTINEL : VXC_SENTINEL;
+  const pre = !eqFree ? VXN_SENTINEL : wire.startsWith(VXS_SENTINEL) ? VXS_SENTINEL : wire.startsWith(VXR_SENTINEL) ? VXR_SENTINEL : VXC_SENTINEL;
   const lines = wire.slice(pre.length).split('\n');
   let i = 0;
   if (i < lines.length && lines[i].startsWith('# ')) i++;
@@ -228,7 +230,7 @@ export function flattenNestedHeader(wire: string): string {
 }
 
 export function veritasADecode(wire: string): string {
-  if (wire.startsWith(VXN_SENTINEL) || wire.startsWith(VXC_SENTINEL) || wire.startsWith(VXS_SENTINEL)) return veritasADecode(flattenNestedHeader(wire));
+  if (wire.startsWith(VXN_SENTINEL) || wire.startsWith(VXC_SENTINEL) || wire.startsWith(VXS_SENTINEL) || wire.startsWith(VXR_SENTINEL)) return veritasADecode(flattenNestedHeader(wire));
   if (!wire.startsWith(VXA_SENTINEL)) return wire;
   const lines = wire.slice(VXA_SENTINEL.length).split('\n');
   let i = 0;

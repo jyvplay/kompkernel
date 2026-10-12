@@ -1,0 +1,109 @@
+/**
+ * VERITAS-R (Z34): new codec. Its own sentinel `[[VXR`, a 28-token legend, and the VERITAS-S search
+ * with two additions measured in Z34: (a) key reassignment and entry pruning after the greedy pass,
+ * (b) a final gate against the raw input that counts the whole wire (legend and header included).
+ *
+ * Wire: `[[VXR` line, legend line, header lines `X<escaped T>` (nested), `]]`, body.
+ * Decoder: the shared VXC/VXS/VXR nested-header path (veritasADecode). Encoder self-checks exactness.
+ *
+ * This is a search, not an optimum: greedy by exact token count, then local refinement. It is not a tournament
+ * over codecs or arms.
+ */
+import { countTokens, type EncodingName } from './bpe';
+import { aliasPool, escBody, escHeader, veritasADecode, VXA_SENTINEL, VXC_SENTINEL, VXN_SENTINEL, VXR_SENTINEL, VXS_SENTINEL } from './veritas-a';
+import { TERMINATOR } from './veritas-u';
+import { nestedHeaderPhrases } from './veritas-n';
+import { rankedCandidatesS, removeEntryS, rekeyEntryS, type VeritasSEntry } from './veritas-s';
+
+export const VXR_LEGEND = '# VXR: X=T in header; X in text means T; ~~ ~, ~N nl, ~R cr; ]] ends';
+
+const POOL_MAX = 240;
+const K_IMPROVE = 10;
+const MAX_TRIALS = 300;
+/** Exact-count budget for refinement (prune and key-reassignment evaluations). Deterministic by construction. */
+const REFINE_BUDGET = 4000;
+
+export interface VeritasRResult {
+  wire: string;
+  decoded: string;
+  exact: boolean;
+  entries: number;
+  inTokens: number;
+  outTokens: number;
+  trials: number;
+  refine: { prunes: number; rekeys: number };
+}
+
+/** VXR wire for an entry list and an escaped body. */
+export function wireR(entries: VeritasSEntry[], body: string): string {
+  const nh = nestedHeaderPhrases(entries);
+  const head = entries.length ? entries.map((e) => e.key + escHeader(nh.get(e.key)!)).join('\n') + '\n' : '';
+  return VXR_SENTINEL + VXR_LEGEND + '\n' + head + TERMINATOR + '\n' + body;
+}
+
+export function veritasREncode(text: string, enc: EncodingName = 'o200k_base'): VeritasRResult {
+  const inTokens = countTokens(text, enc);
+  const finish = (wire: string, entries: number, trials: number, refine: { prunes: number; rekeys: number }): VeritasRResult => {
+    const decoded = veritasADecode(wire);
+    return { wire, decoded, exact: decoded === text, entries, inTokens, outTokens: countTokens(wire, enc), trials, refine };
+  };
+  const wrap = text.startsWith(VXA_SENTINEL) || text.startsWith(VXN_SENTINEL) || text.startsWith(VXC_SENTINEL) || text.startsWith(VXS_SENTINEL) || text.startsWith(VXR_SENTINEL);
+  const raw = () => finish(wrap ? wireR([], escBody(text)) : text, 0, 0, { prunes: 0, rekeys: 0 });
+  if (text.length === 0) return finish(text, 0, 0, { prunes: 0, rekeys: 0 });
+  const pool = aliasPool(enc).filter((c) => !text.includes(c)).slice(0, POOL_MAX);
+  let st = { entries: [] as VeritasSEntry[], body: escBody(text) };
+  let cur = countTokens(wireR([], st.body), enc);
+  let trialsTot = 0;
+  // Greedy: best improving candidate per step, scanning the ranked list until K_IMPROVE improve or MAX_TRIALS are tried.
+  while (st.entries.length < pool.length) {
+    const ranked = rankedCandidatesS(st.body, enc);
+    const key = pool[st.entries.length];
+    const improving: { phrase: string; body: string; t: number }[] = [];
+    let trials = 0;
+    for (const c of ranked) {
+      if (improving.length >= K_IMPROVE || trials >= MAX_TRIALS) break;
+      const parts = st.body.split(escBody(c.phrase));
+      if (parts.length - 1 < 2) continue;
+      trials++;
+      const cb = parts.join(key);
+      const t = countTokens(wireR([...st.entries, { key, phrase: c.phrase }], cb), enc);
+      if (t < cur) improving.push({ phrase: c.phrase, body: cb, t });
+    }
+    trialsTot += trials;
+    if (improving.length === 0) break;
+    const best = improving.reduce((a, b) => (b.t < a.t ? b : a));
+    cur = best.t;
+    st = { entries: [...st.entries, { key, phrase: best.phrase }], body: best.body };
+  }
+  if (st.entries.length === 0) return raw();
+  // Refinement: prune entries and reassign keys while the exact wire count improves.
+  // Deterministic budget: at most REFINE_BUDGET exact counts, so the output does not depend on machine speed.
+  let evals = 0;
+  const cost = (s: { entries: VeritasSEntry[]; body: string }) => { evals++; return countTokens(wireR(s.entries, s.body), enc); };
+  let c0 = cost(st), prunes = 0, rekeys = 0, improved = true;
+  while (improved && evals < REFINE_BUDGET) {
+    improved = false;
+    for (let i = 0; i < st.entries.length && evals < REFINE_BUDGET; i++) {
+      const c = removeEntryS(st, i); const t = cost(c);
+      if (t < c0) { st = c; c0 = t; prunes++; improved = true; i--; }
+    }
+    for (let i = 0; i < st.entries.length && !improved && evals < REFINE_BUDGET; i++) {
+      const used = new Set(st.entries.map((e) => e.key));
+      for (const k of pool) {
+        if (used.has(k)) continue;
+        if (evals >= REFINE_BUDGET) break;
+        const c = rekeyEntryS(st, i, k); const t = cost(c);
+        if (t < c0) { st = c; c0 = t; rekeys++; improved = true; break; }
+      }
+    }
+  }
+  const wire = wireR(st.entries, st.body);
+  // Final gate: the whole wire must beat the raw input, otherwise emit the input verbatim.
+  if (countTokens(wire, enc) >= inTokens) return raw();
+  return finish(wire, st.entries.length, trialsTot, { prunes, rekeys });
+}
+
+/** Decode a VXR wire (or any wire VERITAS-A accepts). */
+export function veritasRDecode(wire: string): string {
+  return veritasADecode(wire);
+}
