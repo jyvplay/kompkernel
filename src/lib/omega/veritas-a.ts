@@ -81,7 +81,7 @@ export function veritasAEncode(text: string, enc: EncodingName, W = 3, legend: s
     wire: text, decoded: text, exact: true, mode: 'identity', entries: [], inTokens, outTokens: inTokens,
   });
   if (text.length === 0) return identity();
-  const mustWrap = text.startsWith(VXA_SENTINEL);
+  const mustWrap = text.startsWith(VXA_SENTINEL) || text.startsWith(VXN_SENTINEL) || text.startsWith(VXC_SENTINEL);
   const pool = aliasPool(enc).filter((c) => !text.includes(c));
   const keys = pool.slice(0, POOL_SIZE);
 
@@ -170,7 +170,62 @@ export function veritasAEncode(text: string, enc: EncodingName, W = 3, legend: s
 }
 
 /** Undo VERITAS-A. Input without the sentinel is returned verbatim. */
+/** VXN: same wire as VXA, but a header phrase may use the alias characters of SHORTER entries (a nested header).
+ *  Decoding flattens the header into an ordinary VXA wire (every alias expanded), then runs the VXA decoder. */
+export const VXN_SENTINEL = '[[VXN\n';
+/** VXC: nested header with an equals-free line format ("X" then the escaped phrase). Same body and decoder path. */
+export const VXC_SENTINEL = '[[VXC\n';
+const VXA_NEST_MAX_DEPTH = 64;
+
+export function flattenNestedHeader(wire: string): string {
+  const eqFree = wire.startsWith(VXC_SENTINEL);
+  if (!eqFree && !wire.startsWith(VXN_SENTINEL)) return wire;
+  const lines = wire.slice((eqFree ? VXC_SENTINEL : VXN_SENTINEL).length).split('\n');
+  let i = 0;
+  if (i < lines.length && lines[i].startsWith('# ')) i++;
+  const raw = new Map<string, string>();
+  const keys: string[] = [];
+  while (i < lines.length && lines[i] !== TERMINATOR) {
+    const ln = lines[i];
+    if (eqFree ? ln.length < 2 : (ln.length < 2 || ln[1] !== '=')) throw new Error('VXN: bad entry line');
+    const phrase: string[] = [];
+    const p = eqFree ? ln.slice(1) : ln.slice(2);
+    for (let j = 0; j < p.length; ) {
+      const c = p[j];
+      if (c !== '~') { phrase.push(c); j++; continue; }
+      const n = p[j + 1];
+      if (n === '~') phrase.push('~');
+      else if (n === 'N') phrase.push('\n');
+      else if (n === 'R') phrase.push('\r');
+      else throw new Error('VXN: bad header escape');
+      j += 2;
+    }
+    if (raw.has(ln[0])) throw new Error('VXN: duplicate key');
+    raw.set(ln[0], phrase.join(''));
+    keys.push(ln[0]);
+    i++;
+  }
+  if (i >= lines.length) throw new Error('VXN: missing terminator');
+  const full = new Map<string, string>();
+  const expand = (k: string, depth: number): string => {
+    const hit = full.get(k);
+    if (hit !== undefined) return hit;
+    if (depth > VXA_NEST_MAX_DEPTH) throw new Error('VXN: alias cycle');
+    const src = raw.get(k)!;
+    let out = '';
+    for (const c of src) out += raw.has(c) ? expand(c, depth + 1) : c;
+    full.set(k, out);
+    return out;
+  };
+  for (const k of keys) expand(k, 0);
+  const body = lines.slice(i + 1).join('\n');
+  const flatLines = keys.map((k) => k + '=' + escHeader(full.get(k)!));
+  const head = flatLines.length ? flatLines.join('\n') + '\n' : '';
+  return VXA_SENTINEL + VXA_LEGEND_V2 + '\n' + head + TERMINATOR + '\n' + body;
+}
+
 export function veritasADecode(wire: string): string {
+  if (wire.startsWith(VXN_SENTINEL) || wire.startsWith(VXC_SENTINEL)) return veritasADecode(flattenNestedHeader(wire));
   if (!wire.startsWith(VXA_SENTINEL)) return wire;
   const lines = wire.slice(VXA_SENTINEL.length).split('\n');
   let i = 0;

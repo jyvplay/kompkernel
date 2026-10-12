@@ -1,0 +1,47 @@
+  prose gh-prose.txt first=1934 best=1934
+  prose readme.txt first=760 best=719
+  prose license.txt first=1166 best=1166
+  prose lic-mit.txt first=223 best=223
+  prose md-react.txt first=252 best=252
+  prose md-vite.txt first=274 best=274
+prose         docs   6 first 4609 best(min-guard) 4568 -0.89% 2s
+  wrapped_docs git-manual.adoc first=10047 best=11030
+  wrapped_docs git-readme.md first=874 best=874
+  wrapped_docs linux-changes.rst first=3454 best=3668
+  wrapped_docs linux-coding-style.rst first=9860 best=10292
+  wrapped_docs linux-howto.rst first=5528 best=5949
+  wrapped_docs linux-submitting-patches.rst first=8635 best=9443
+wrapped_docs  docs   6 first 38398 best(min-guard) 38398 0.00% 23s
+  code code-ts.txt first=1334 best=1377
+  code code-dts.txt first=112 best=112
+  code json-pkg.txt first=859 best=884
+  code gh-api.json.txt first=1628 best=1382
+code          docs   4 first 3933 best(min-guard) 3687 -6.25% 4s
+  ops find-listing.txt first=1949 best=1412
+  ops git-log-fuller.txt first=143 best=143
+  ops git-numstat.txt first=2681 best=2252
+  ops ls-full-iso.txt first=543 best=468
+  ops node-stacktraces.txt first=411 best=385
+  ops npm-ls.txt first=1524 best=1255
+  ops openstack-loghub-26.log first=1651 best=1269
+  ops package-lock-head.json first=7606 best=6647
+  ops find-printf-src.txt first=3615 best=2248
+  ops git-log-iso.txt first=1672 best=1618
+  ops ls-omega-full-iso.txt first=2081 best=1428
+ops           docs  11 first 23876 best(min-guard) 19125 -19.90% 38s
+  ops_real df-h.txt first=131 best=131
+  ops_real dpkg-l.txt first=6339 best=6263
+  ops_real du-usr-share.txt first=1097 best=926
+  ops_real free-h.txt first=64 best=64
+  ops_real ls-usr-bin.txt first=6790 best=4649
+  ops_real ls-usr-lib.txt first=504 best=394
+  ops_real os-release.txt first=79 best=79
+  ops_real ps-eo.txt first=1307 best=962
+  ops_real ss-tln.txt first=100 best=100
+  ops_real uname.txt first=40 best=40
+ops_real      docs  10 first 16451 best(min-guard) 13608 -17.28% 40s
+  realjson react-latest.json first=1010 best=1010
+  realjson typescript-latest.json first=1354 best=1115
+  realjson vite-latest.json first=1832 best=1861
+realjson      docs   3 first 4196 best(min-guard) 3957 -5.70% 3s
+total secs 110

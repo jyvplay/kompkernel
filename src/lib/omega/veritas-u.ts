@@ -23,7 +23,7 @@
  * =============================================================================
  */
 import { countTokens, tokenStrings, type EncodingName } from './bpe';
-import { aliasPool, escBody, escHeader, veritasADecode, VXA_LEGEND_V2, VXA_SENTINEL } from './veritas-a';
+import { aliasPool, escBody, escHeader, veritasADecode, VXA_LEGEND_V2, VXA_SENTINEL, VXN_SENTINEL, VXC_SENTINEL } from './veritas-a';
 
 const K_RADIX = 200_100;
 const MAX_MINE_TOKENS = 220_000;
@@ -32,7 +32,7 @@ const MAX_EXT = 32;
 const MAX_POS = 8;
 const POOL_SIZE = 240;
 const WINDOWS = [2, 3, 4] as const;
-const TERMINATOR = ']]';
+export const TERMINATOR = ']]';
 
 export interface VeritasUEntry { key: string; phrase: string; hits: number; winTokens: number }
 export interface VeritasUResult {
@@ -45,10 +45,10 @@ export interface VeritasUResult {
   outTokens: number;
 }
 
-interface Cand { phrase: string; win: number; anchorHits: number }
+export interface Cand { phrase: string; win: number; anchorHits: number }
 
 /** Token-aligned candidate phrases for one window W, keyed by phrase (the best anchor count is kept). */
-function collectCandidates(toks: { id: number; s: string }[], W: number, out: Map<string, Cand>): void {
+export function collectCandidates(toks: { id: number; s: string }[], W: number, out: Map<string, Cand>): void {
   const T = Math.min(toks.length, MAX_MINE_TOKENS);
   const anchors = new Map<number, { c: number; pos: number[] }>();
   if (T >= W) {
@@ -98,7 +98,7 @@ export type VeritasUOrder = 'old' | 'net' | 'cw';
 export interface VeritasUOptions { order?: VeritasUOrder }
 
 /** Candidate order. 'old' (default, chosen on the fresh 111-doc corpus): anchorHits*(win-2) desc, then win desc. */
-function orderCands(list: Cand[], order: VeritasUOrder): void {
+export function orderCands(list: Cand[], order: VeritasUOrder): void {
   if (order === 'net') list.sort((x, y) => (y.anchorHits * (y.win - 1) - (y.win + 2)) - (x.anchorHits * (x.win - 1) - (x.win + 2)) || y.win - x.win);
   else if (order === 'cw') list.sort((x, y) => y.anchorHits * y.win - x.anchorHits * x.win || y.win - x.win);
   else list.sort((x, y) => y.anchorHits * (y.win - 2) - x.anchorHits * (x.win - 2) || y.win - x.win);
@@ -108,7 +108,7 @@ export function veritasUEncode(text: string, enc: EncodingName = 'o200k_base', o
   const inTokens = countTokens(text, enc);
   const identity = (): VeritasUResult => ({ wire: text, decoded: text, exact: true, mode: 'identity', entries: [], inTokens, outTokens: inTokens });
   if (text.length === 0) return identity();
-  const mustWrap = text.startsWith(VXA_SENTINEL);
+  const mustWrap = text.startsWith(VXA_SENTINEL) || text.startsWith(VXN_SENTINEL) || text.startsWith(VXC_SENTINEL);
   const pool = aliasPool(enc).filter((c) => !text.includes(c)).slice(0, POOL_SIZE);
 
   const toks = tokenStrings(text, enc);

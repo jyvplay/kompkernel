@@ -1,0 +1,10 @@
+group          docs identity VXU VXN VXN-VXU pct better worse equal
+fresh           111   337142   278798   273924    -4874   -1.75%     61      6     44
+prose             6     4692     4620     4620        0    0.00%      0      0      6
+wrapped_docs      6    41988    39014    38897     -117   -0.30%      4      1      1
+code              4     5255     4145     4090      -55   -1.33%      2      2      0
+ops              11    50165    24958    24208     -750   -3.01%     10      0      1
+ops_real         10    32204    16902    16669     -233   -1.38%      5      0      5
+realjson          3     5498     4356     4256     -100   -2.30%      2      0      1
+ALL 151 docs: VXU 372793 VXN 366664 diff -6129 -1.64%
+cases 157 failures 0

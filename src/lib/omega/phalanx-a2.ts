@@ -27,7 +27,7 @@ import { countTokens, type EncodingName } from './bpe';
 import { uuidfoldEncode, uuidfoldDecode, UUIDFOLD_RULE, OFF as UUIDFOLD_OFF } from './uuidfold';
 import { dirfoldAEncode, dirfoldADecode, DIRFOLD_A_RULE, DIRFOLD_A_ESC } from './dirfold-a';
 import { dittoEncode, dittoDecode, DITTO_RULE, DITTO_ESC } from './ditto';
-import { veritasABest, veritasADecode, VXA_SENTINEL } from './veritas-a';
+import { veritasABest, veritasADecode, VXA_SENTINEL, VXN_SENTINEL, VXC_SENTINEL } from './veritas-a';
 import { koineEncode, koineDecode, KOINE_HEADER, KOINE_ESC, KOINE_MIN_K } from './koine';
 import { recallEncode, recallDecode, RECALL_HEADER, RECALL_ESC } from './recall';
 
@@ -179,7 +179,7 @@ export function phalanxA2Encode(text: string, enc: EncodingName = 'o200k_base', 
   const vxWire = vx(body, enc).wire;
   const withVx = (legend ? legend + '\n' : '') + vxWire;
   const noVx = (legend ? legend + '\n' : '') + body;
-  const vxKept = vxWire.startsWith(VXA_SENTINEL) && countTokens(withVx, enc) < countTokens(noVx, enc);
+  const vxKept = (vxWire.startsWith(VXA_SENTINEL) || vxWire.startsWith(VXN_SENTINEL) || vxWire.startsWith(VXC_SENTINEL)) && countTokens(withVx, enc) < countTokens(noVx, enc);
   const v = vxKept ? withVx : noVx;
 
   const decoded = safeDecode(v);

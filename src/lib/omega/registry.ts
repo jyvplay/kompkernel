@@ -108,6 +108,10 @@ import { phalanxA5Encode } from './phalanx-a5';
 import { phalanxA6Encode } from './phalanx-a6';
 import { phalanxA7Encode } from './phalanx-a7';
 import { phalanxA8Encode } from './phalanx-a8';
+import { phalanxA9Encode } from './phalanx-a9';
+import { veritasNEncode } from './veritas-n';
+import { phalanxA10Encode } from './phalanx-a10';
+import { veritasCEncode } from './veritas-c';
 import { veritasUEncode } from './veritas-u';
 import { veritasEncodeMulti, withVxLegend, veritasDecodeL } from './veritas-w';
 import { amphoraEncode } from './amphora';
@@ -725,6 +729,22 @@ export function codecEntries(): Entry[] {
     {
       key: 'veritas-u', label: '⟁ VERITAS-U single-pass union dictionary (VXA wire and decoder; candidates of windows 2,3,4 in one greedy pass, no window tournament; exact whole-wire gate; identity-guarded)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = veritasUEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `mode=${r.mode}; entries=${r.entries.length}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'phalanx-a10', label: '▣ PHALANX-A10 (PHALANX-A7 with VERITAS-C: token-window and character-substring dictionary, nested equals-free header, one greedy pass; same A7 layers; identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = phalanxA10Encode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `layer=${r.layer}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'veritas-c', label: '⟁ VERITAS-C dictionary (token-window and character-substring candidates; nested equals-free header; VXC wire; identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = veritasCEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `mode=${r.mode}; entries=${r.entries.length}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'phalanx-a9', label: '▣ PHALANX-A9 (PHALANX-A7 with VERITAS-N: the VERITAS-U dictionary whose header phrases may use shorter entries\' aliases; same A7 layers; identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = phalanxA9Encode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `layer=${r.layer}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'veritas-n', label: '⟁ VERITAS-N nested-header dictionary (VERITAS-U selection; header phrases may refer to shorter entries; VXN wire; identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = veritasNEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `mode=${r.mode}; entries=${r.entries.length}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'phalanx-a8', label: '▣ PHALANX-A8 (PHALANX-A7 with the VERITAS-U single-pass union dictionary as its VX stage; same wire and decoder as A7; identity-guarded)', family: 'exact', fidelity: 'exact',
