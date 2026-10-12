@@ -22,7 +22,7 @@
  * =============================================================================
  */
 import { countTokens, type EncodingName } from './bpe';
-import { phalanxA2Encode, phalanxA2Decode, PHALANX_A2_ESC } from './phalanx-a2';
+import { phalanxA2Encode, phalanxA2Decode, PHALANX_A2_ESC, defaultVx, type VxEncode } from './phalanx-a2';
 
 const PREFIX = 'PHALANX-A3 json indent=';
 
@@ -52,14 +52,14 @@ export interface PhalanxA3Result {
   outTokens: number;
 }
 
-export function phalanxA3Encode(text: string, enc: EncodingName = 'o200k_base'): PhalanxA3Result {
+export function phalanxA3Encode(text: string, enc: EncodingName = 'o200k_base', vx: VxEncode = defaultVx): PhalanxA3Result {
   const inTokens = countTokens(text, enc);
-  const a2 = phalanxA2Encode(text, enc);
+  const a2 = phalanxA2Encode(text, enc, undefined, vx);
   const canon = canonicalLayout(text);
   let wire = a2.wire;
   let layer = false;
   if (canon !== null && !text.startsWith(PREFIX)) {
-    const body = phalanxA2Encode(canon.mini, enc).wire;
+    const body = phalanxA2Encode(canon.mini, enc, undefined, vx).wire;
     const legend = `${PREFIX}${canon.ind} newline=${canon.nl}: body is minified JSON; output JSON.stringify(value, null, ${canon.ind === 'tab' ? 'tab' : canon.ind}) and a final newline if newline=1`;
     const candidate = legend + '\n' + body;
     if (countTokens(candidate, enc) < a2.outTokens) { wire = candidate; layer = true; }

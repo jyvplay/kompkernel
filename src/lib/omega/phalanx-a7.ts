@@ -15,6 +15,7 @@
  */
 import { countTokens, type EncodingName } from './bpe';
 import { phalanxA5Encode, phalanxA5Decode } from './phalanx-a5';
+import { defaultVx, type VxEncode } from './phalanx-a2';
 import { padEncode2, padDecode2, padPickMark2 } from './padtab2';
 
 export const PHALANX_A7_COL = '[[COL\n';
@@ -36,8 +37,8 @@ export function phalanxA7Decode(wire: string): string {
   return padDecode2(phalanxA5Decode(rest.slice(nl + 1)), m[1]);
 }
 
-export function phalanxA7Encode(text: string, enc: EncodingName = 'o200k_base'): PhalanxA7Result {
-  const a5 = phalanxA5Encode(text, enc);
+export function phalanxA7Encode(text: string, enc: EncodingName = 'o200k_base', vx: VxEncode = defaultVx): PhalanxA7Result {
+  const a5 = phalanxA5Encode(text, enc, vx);
   const inTokens = countTokens(text, enc);
   let wire = a5.wire;
   let layer: 'a5' | 'col' = 'a5';
@@ -45,7 +46,7 @@ export function phalanxA7Encode(text: string, enc: EncodingName = 'o200k_base'):
   if (mark !== null) {
     const body = padEncode2(text, mark);
     if (body !== text) {
-      const w = PHALANX_A7_COL + legendFor(mark) + '\n' + phalanxA5Encode(body, enc).wire;
+      const w = PHALANX_A7_COL + legendFor(mark) + '\n' + phalanxA5Encode(body, enc, vx).wire;
       if (countTokens(w, enc) < countTokens(a5.wire, enc)) { wire = w; layer = 'col'; }
     }
   }

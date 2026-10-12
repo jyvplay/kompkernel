@@ -1,0 +1,7 @@
+prose         identity=4692 VXA-best3=4550 VERITAS-U=4620 delta=70 (1.54%) files better=2 worse=2 equal=2
+wrapped_docs  identity=41988 VXA-best3=39423 VERITAS-U=39014 delta=-409 (-1.04%) files better=5 worse=1 equal=0
+code          identity=5255 VXA-best3=4188 VERITAS-U=4145 delta=-43 (-1.03%) files better=2 worse=1 equal=1
+ops           identity=50165 VXA-best3=26674 VERITAS-U=24958 delta=-1716 (-6.43%) files better=9 worse=2 equal=0
+ops_real      identity=32204 VXA-best3=17068 VERITAS-U=16902 delta=-166 (-0.97%) files better=4 worse=3 equal=3
+realjson      identity=5498 VXA-best3=4336 VERITAS-U=4356 delta=20 (0.46%) files better=1 worse=2 equal=0
+round-trip checks 40, failures 0

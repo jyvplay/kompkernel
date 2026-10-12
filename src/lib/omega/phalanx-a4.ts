@@ -17,6 +17,7 @@
  */
 import { countTokens, type EncodingName } from './bpe';
 import { phalanxA3Encode, phalanxA3Decode } from './phalanx-a3';
+import { defaultVx, type VxEncode } from './phalanx-a2';
 import { logTplFold, logTplUnfold, logTplPickPh } from './logtpl';
 
 export const PHALANX_A4_TPL = '[[TPL\n';
@@ -39,15 +40,15 @@ export function phalanxA4Decode(wire: string): string {
   return logTplUnfold(phalanxA3Decode(rest.slice(nl + 1)), chars[0]);
 }
 
-export function phalanxA4Encode(text: string, enc: EncodingName = 'o200k_base'): PhalanxA4Result {
-  const a3 = phalanxA3Encode(text, enc);
+export function phalanxA4Encode(text: string, enc: EncodingName = 'o200k_base', vx: VxEncode = defaultVx): PhalanxA4Result {
+  const a3 = phalanxA3Encode(text, enc, vx);
   const inTokens = countTokens(text, enc);
   let fold: string | null = null;
   const ph = logTplPickPh(text);
   if (ph !== null) {
     try {
       const folded = logTplFold(text, ph);
-      if (logTplUnfold(folded, ph) === text) fold = PHALANX_A4_TPL + legendFor(ph) + '\n' + phalanxA3Encode(folded, enc).wire;
+      if (logTplUnfold(folded, ph) === text) fold = PHALANX_A4_TPL + legendFor(ph) + '\n' + phalanxA3Encode(folded, enc, vx).wire;
     } catch { fold = null; }
   }
   let wire = a3.wire;

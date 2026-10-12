@@ -127,7 +127,11 @@ export interface PhalanxA2Result {
   outTokens: number;
 }
 
-export function phalanxA2Encode(text: string, enc: EncodingName = 'o200k_base', minK = KOINE_MIN_K): PhalanxA2Result {
+/** VX stage encoder. The default is the VERITAS-A best-of-3 (the decoder is the VXA decoder for any VX encoder that emits the VXA wire). */
+export type VxEncode = (text: string, enc: EncodingName) => { wire: string };
+export const defaultVx: VxEncode = (t, e) => veritasABest(t, e);
+
+export function phalanxA2Encode(text: string, enc: EncodingName = 'o200k_base', minK = KOINE_MIN_K, vx: VxEncode = defaultVx): PhalanxA2Result {
   const inTokens = countTokens(text, enc);
   const applied = new Set<Tag>();
 
@@ -149,7 +153,7 @@ export function phalanxA2Encode(text: string, enc: EncodingName = 'o200k_base', 
 
   // Tokens of the final VERITAS form plus the legend clauses that the candidate set implies.
   const cost = (b: string, set: Set<Tag>) =>
-    countTokens(veritasABest(b, enc).wire, enc) + countTokens(legendFor(set), enc);
+    countTokens(vx(b, enc).wire, enc) + countTokens(legendFor(set), enc);
 
   // K gate (downstream = VERITAS + legend clause).
   const beforeK = body;
@@ -172,7 +176,7 @@ export function phalanxA2Encode(text: string, enc: EncodingName = 'o200k_base', 
   // VX: outermost body transform; it is kept iff it changes the body.
   // VX gate (real tokens, legend included): keep the dictionary only if the legend-carrying VX wire is smaller.
   const legend = legendFor(applied);
-  const vxWire = veritasABest(body, enc).wire;
+  const vxWire = vx(body, enc).wire;
   const withVx = (legend ? legend + '\n' : '') + vxWire;
   const noVx = (legend ? legend + '\n' : '') + body;
   const vxKept = vxWire.startsWith(VXA_SENTINEL) && countTokens(withVx, enc) < countTokens(noVx, enc);

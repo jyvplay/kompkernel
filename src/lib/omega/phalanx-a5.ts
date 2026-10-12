@@ -16,6 +16,7 @@
  */
 import { countTokens, type EncodingName } from './bpe';
 import { phalanxA4Encode, phalanxA4Decode } from './phalanx-a4';
+import { defaultVx, type VxEncode } from './phalanx-a2';
 import { wrapEncode, wrapDecode, wrapPickKeep } from './wrapcanon';
 
 export const PHALANX_A5_WRP = '[[WRP\n';
@@ -36,8 +37,8 @@ export function phalanxA5Decode(wire: string): string {
   return wrapDecode(phalanxA4Decode(rest.slice(nl + 1)), Number(m[1]), m[2]);
 }
 
-export function phalanxA5Encode(text: string, enc: EncodingName = 'o200k_base'): PhalanxA5Result {
-  const a4 = phalanxA4Encode(text, enc);
+export function phalanxA5Encode(text: string, enc: EncodingName = 'o200k_base', vx: VxEncode = defaultVx): PhalanxA5Result {
+  const a4 = phalanxA4Encode(text, enc, vx);
   const inTokens = countTokens(text, enc);
   const keep = wrapPickKeep(text);
   let wire = a4.wire;
@@ -48,7 +49,7 @@ export function phalanxA5Encode(text: string, enc: EncodingName = 'o200k_base'):
     for (const W of [60, 64, 68, 72, 76, 80]) {
       const e = wrapEncode(text, W, keep);
       if (e === null) continue;
-      const w = PHALANX_A5_WRP + legendFor(W, keep) + '\n' + phalanxA4Encode(e, enc).wire;
+      const w = PHALANX_A5_WRP + legendFor(W, keep) + '\n' + phalanxA4Encode(e, enc, vx).wire;
       const tok = countTokens(w, enc);
       if (tok < bestTok) { bestTok = tok; wire = w; layer = 'wrp'; width = W; }
     }
