@@ -172,10 +172,10 @@ def uu_decode(text, boundary):
 def blind(wire, reading, boundary):
     t = wire
     legend = None
-    ESC = 'PHALANX-A1: identity, text follows verbatim'
-    if t.startswith(ESC + '\n'):
-        return t[len(ESC) + 1:]
-    if t.startswith('PHALANX-P4 legend: ') or t.startswith('PHALANX-A1 legend: '):
+    for ESC in ('PHALANX-A1: identity, text follows verbatim', 'PHALANX-A2: identity, text follows verbatim'):
+        if t.startswith(ESC + '\n'):
+            return t[len(ESC) + 1:]
+    if t.startswith('PHALANX-P4 legend: ') or t.startswith('PHALANX-A1 legend: ') or t.startswith('PHALANX-A2 legend: '):
         legend, t = t.split('\n', 1)
     t = vx_decode(t)
     if legend:

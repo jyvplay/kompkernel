@@ -1,0 +1,5 @@
+bench/holdout/json-pkg.txt blind exact
+bench/z25/json-real/react-latest.json blind exact
+bench/z25/json-real/typescript-latest.json blind exact
+bench/z25/json-real/vite-latest.json blind exact
+blind A3 exact 4/4

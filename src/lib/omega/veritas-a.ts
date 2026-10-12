@@ -25,6 +25,8 @@ import { countTokens, tokenStrings, type EncodingName } from './bpe';
 
 export const VXA_SENTINEL = '[[VXA\n';
 export const VXA_LEGEND = '# VXA: X=T defines alias X; bare X in body or T stands for T; ~~ = ~; in T ~N = newline, ~R = CR; header ends at ]]';
+/** Shorter legend (28 o200k tokens vs 40); states the same rules. Decoder ignores any "# " legend line. */
+export const VXA_LEGEND_V2 = '# VXA: X=T, bare X means T; ~~ is ~; in T ~N newline ~R CR; header ends ]]';
 const TERMINATOR = ']]';
 const K_RADIX = 200_100;
 const MAX_MINE_TOKENS = 220_000;
@@ -67,13 +69,13 @@ export interface VxaResult {
 
 interface Anchor { c: number; pos: number[] }
 
-function wireOf(entries: VxaEntry[], body: string, legend: boolean): string {
+function wireOf(entries: VxaEntry[], body: string, legend: string): string {
   if (entries.length === 0) return body;
   const lines = entries.map((e) => e.key + '=' + escHeader(e.phrase)).join('\n');
-  return VXA_SENTINEL + (legend ? VXA_LEGEND + '\n' : '') + lines + '\n' + TERMINATOR + '\n' + body;
+  return VXA_SENTINEL + (legend ? legend + '\n' : '') + lines + '\n' + TERMINATOR + '\n' + body;
 }
 
-export function veritasAEncode(text: string, enc: EncodingName, W = 3): VxaResult {
+export function veritasAEncode(text: string, enc: EncodingName, W = 3, legend: string = VXA_LEGEND): VxaResult {
   const inTokens = countTokens(text, enc);
   const identity = (): VxaResult => ({
     wire: text, decoded: text, exact: true, mode: 'identity', entries: [], inTokens, outTokens: inTokens,
@@ -142,7 +144,7 @@ export function veritasAEncode(text: string, enc: EncodingName, W = 3): VxaResul
     if (hits < 2) continue;
     const candBody = parts.join(key);
     const newEntries = [...entries, { key, phrase: cand.phrase, hits, winTokens: cand.win }];
-    const candTok = countTokens(wireOf(newEntries, candBody, false), enc);
+    const candTok = countTokens(wireOf(newEntries, candBody, ''), enc);
     if (candTok >= curTok) continue;
     curTok = candTok;
     body = candBody;
@@ -152,10 +154,10 @@ export function veritasAEncode(text: string, enc: EncodingName, W = 3): VxaResul
   let wire: string;
   let mode: VxaResult['mode'];
   if (entries.length > 0) {
-    wire = VXA_SENTINEL + VXA_LEGEND + '\n' + entries.map((e) => e.key + '=' + escHeader(e.phrase)).join('\n') + '\n' + TERMINATOR + '\n' + body;
+    wire = VXA_SENTINEL + legend + '\n' + entries.map((e) => e.key + '=' + escHeader(e.phrase)).join('\n') + '\n' + TERMINATOR + '\n' + body;
     mode = 'dict';
   } else if (mustWrap) {
-    wire = VXA_SENTINEL + VXA_LEGEND + '\n' + TERMINATOR + '\n' + escBody(text);
+    wire = VXA_SENTINEL + legend + '\n' + TERMINATOR + '\n' + escBody(text);
     mode = 'forced-wrap';
   } else {
     return identity();
@@ -206,4 +208,17 @@ export function veritasADecode(wire: string): string {
     j++;
   }
   return out.join('');
+}
+
+/**
+ * Encoder-side choice only: the minimum-token VXA wire over window W in {3, 2, 4} (ties -> earlier W).
+ * The wire format is identical for every W, so the decoder is unchanged and no flag is needed.
+ */
+export function veritasABest(text: string, enc: EncodingName, legend: string = VXA_LEGEND_V2): VxaResult {
+  let best: VxaResult | null = null;
+  for (const W of [3, 2, 4]) {
+    const r = veritasAEncode(text, enc, W, legend);
+    if (best === null || r.outTokens < best.outTokens) best = r;
+  }
+  return best as VxaResult;
 }

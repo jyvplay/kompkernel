@@ -101,6 +101,8 @@ import { phalanx2Encode } from './phalanx2';
 import { phalanx3Encode } from './phalanx3';
 import { phalanx4Encode } from './phalanx4';
 import { phalanxA1Encode } from './phalanx-a1';
+import { phalanxA2Encode } from './phalanx-a2';
+import { phalanxA3Encode } from './phalanx-a3';
 import { veritasEncodeMulti, withVxLegend, veritasDecodeL } from './veritas-w';
 import { amphoraEncode } from './amphora';
 import { kanonEncode } from './kanon';
@@ -689,6 +691,14 @@ export function codecEntries(): Entry[] {
     {
       key: 'phalanx-a1', label: '▣ PHALANX-A1 (PHALANX-P4 with VERITAS-A: one-token alias characters for VX references; all stages named in the in-message legend; identity unless exact and cheaper)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = phalanxA1Encode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `${r.mode}; vx=${r.vxKept}; stages=[${r.applied.join(',')}]; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'phalanx-a2', label: '▣ PHALANX-A2 (PHALANX-A1 with a shorter VXA legend and the per-file minimum over VX window W in {3,2,4}; decoder unchanged; identity unless exact and cheaper)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = phalanxA2Encode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `${r.mode}; vx=${r.vxKept}; stages=[${r.applied.join(',')}]; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'phalanx-a3', label: '▣ PHALANX-A3 (PHALANX-A2 plus a canonical-JSON layer: a document that is exactly JSON.stringify(v, null, N) is carried minified and re-indented by the decoder; identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = phalanxA3Encode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `layer=${r.layer}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'veritas-m', label: '⟁ VERITAS-VX multi-window (trigram+bigram candidates, real-token gate; same VX1 wire and decoder)', family: 'exact', fidelity: 'exact',

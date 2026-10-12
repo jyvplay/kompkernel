@@ -1,0 +1,28 @@
+bench/holdout/gh-prose.txt: id=1934 A2=1911 A3=1911 (0) layer=false
+bench/holdout/readme.txt: id=843 A2=776 A3=776 (0) layer=false
+bench/holdout/license.txt: id=1166 A2=1096 A3=1096 (0) layer=false
+bench/holdout/lic-mit.txt: id=223 A2=223 A3=223 (0) layer=false
+bench/holdout/md-react.txt: id=252 A2=252 A3=252 (0) layer=false
+bench/holdout/md-vite.txt: id=274 A2=274 A3=274 (0) layer=false
+bench/holdout/code-ts.txt: id=1422 A2=1311 A3=1311 (0) layer=false
+bench/holdout/code-dts.txt: id=162 A2=106 A3=106 (0) layer=false
+bench/holdout/json-pkg.txt: id=1152 A2=919 A3=853 (-66) layer=true
+bench/holdout/gh-api.json.txt: id=2519 A2=1827 A3=1827 (0) layer=false
+bench/holdout-ops/find-listing.txt: id=3997 A2=1588 A3=1588 (0) layer=false
+bench/holdout-ops/git-log-fuller.txt: id=143 A2=143 A3=143 (0) layer=false
+bench/holdout-ops/git-numstat.txt: id=4632 A2=2811 A3=2811 (0) layer=false
+bench/holdout-ops/ls-full-iso.txt: id=1175 A2=653 A3=653 (0) layer=false
+bench/holdout-ops/node-stacktraces.txt: id=568 A2=457 A3=457 (0) layer=false
+bench/holdout-ops/npm-ls.txt: id=2747 A2=1693 A3=1693 (0) layer=false
+bench/holdout-ops/openstack-loghub-26.log: id=4028 A2=1335 A3=1335 (0) layer=false
+bench/holdout-ops/package-lock-head.json: id=15009 A2=8634 A3=8634 (0) layer=false
+bench/z20/samples/find-printf-src.txt: id=8493 A2=2442 A3=2442 (0) layer=false
+bench/z20/samples/git-log-iso.txt: id=1947 A2=1753 A3=1753 (0) layer=false
+bench/z20/samples/ls-omega-full-iso.txt: id=7426 A2=1897 A3=1897 (0) layer=false
+bench/z25/json-real/react-latest.json: id=1010 A2=931 A3=825 (-106) layer=true
+bench/z25/json-real/typescript-latest.json: id=2004 A2=1387 A3=1296 (-91) layer=true
+bench/z25/json-real/vite-latest.json: id=2484 A2=1969 A3=1765 (-204) layer=true
+CORPUS+REAL (24 files): identity=65610 A2=36388 A3=35921 (A3-A2=-467, -1.28%)
+files where the canonical layer applies: 4; on those, A2=5206 A3=4739 (-8.97%)
+edge cases 17; fuzz exact 1000/1000 (canonical layer used on 144); decode failures total 0
+ALL EXACT
