@@ -1,0 +1,17 @@
+{"f":"bench/holdout-ops/find-listing.txt","veritas":2817,"minLen3":{"tok":2427,"exact":true},"minLen4":{"tok":2427,"exact":true},"minLen6":{"tok":2427,"exact":true},"minLen8":{"tok":2427,"exact":true}}
+{"f":"bench/holdout-ops/ls-full-iso.txt","veritas":1175,"minLen3":{"tok":677,"exact":true},"minLen4":{"tok":665,"exact":true},"minLen6":{"tok":672,"exact":true},"minLen8":{"tok":672,"exact":true}}
+{"f":"bench/holdout-ops/git-numstat.txt","veritas":3786,"minLen3":{"tok":3535,"exact":true},"minLen4":{"tok":3535,"exact":true},"minLen6":{"tok":3535,"exact":true},"minLen8":{"tok":3535,"exact":true}}
+{"f":"bench/holdout-ops/npm-ls.txt","veritas":1931,"minLen3":{"tok":1970,"exact":true},"minLen4":{"tok":1994,"exact":true},"minLen6":{"tok":2018,"exact":true},"minLen8":{"tok":2029,"exact":true}}
+{"f":"bench/holdout-ops/node-stacktraces.txt","veritas":568,"minLen3":{"tok":461,"exact":true},"minLen4":{"tok":461,"exact":true},"minLen6":{"tok":461,"exact":true},"minLen8":{"tok":461,"exact":true}}
+{"f":"bench/holdout-ops/openstack-loghub-26.log","veritas":1841,"minLen3":{"tok":1526,"exact":true},"minLen4":{"tok":1530,"exact":true},"minLen6":{"tok":1584,"exact":true},"minLen8":{"tok":1582,"exact":true}}
+{"f":"bench/holdout-ops/git-log-fuller.txt","veritas":138,"minLen3":{"tok":138,"exact":true},"minLen4":{"tok":138,"exact":true},"minLen6":{"tok":138,"exact":true},"minLen8":{"tok":138,"exact":true}}
+{"f":"bench/holdout/code-dts.txt","veritas":99,"minLen3":{"tok":99,"exact":true},"minLen4":{"tok":99,"exact":true},"minLen6":{"tok":99,"exact":true},"minLen8":{"tok":99,"exact":true}}
+{"f":"bench/holdout/code-ts.txt","veritas":1395,"minLen3":{"tok":1395,"exact":true},"minLen4":{"tok":1395,"exact":true},"minLen6":{"tok":1395,"exact":true},"minLen8":{"tok":1395,"exact":true}}
+{"f":"bench/holdout/gh-api.json.txt","veritas":2059,"minLen3":{"tok":2029,"exact":true},"minLen4":{"tok":2029,"exact":true},"minLen6":{"tok":2029,"exact":true},"minLen8":{"tok":2029,"exact":true}}
+{"f":"bench/holdout/gh-prose.txt","veritas":1918,"minLen3":{"tok":1918,"exact":true},"minLen4":{"tok":1918,"exact":true},"minLen6":{"tok":1918,"exact":true},"minLen8":{"tok":1918,"exact":true}}
+{"f":"bench/holdout/json-pkg.txt","veritas":1036,"minLen3":{"tok":1036,"exact":true},"minLen4":{"tok":1036,"exact":true},"minLen6":{"tok":1036,"exact":true},"minLen8":{"tok":1036,"exact":true}}
+{"f":"bench/holdout/lic-mit.txt","veritas":223,"minLen3":{"tok":223,"exact":true},"minLen4":{"tok":223,"exact":true},"minLen6":{"tok":223,"exact":true},"minLen8":{"tok":223,"exact":true}}
+{"f":"bench/holdout/license.txt","veritas":1122,"minLen3":{"tok":1122,"exact":true},"minLen4":{"tok":1122,"exact":true},"minLen6":{"tok":1122,"exact":true},"minLen8":{"tok":1122,"exact":true}}
+{"f":"bench/holdout/md-react.txt","veritas":252,"minLen3":{"tok":252,"exact":true},"minLen4":{"tok":252,"exact":true},"minLen6":{"tok":252,"exact":true},"minLen8":{"tok":252,"exact":true}}
+{"f":"bench/holdout/md-vite.txt","veritas":274,"minLen3":{"tok":274,"exact":true},"minLen4":{"tok":274,"exact":true},"minLen6":{"tok":274,"exact":true},"minLen8":{"tok":274,"exact":true}}
+{"f":"bench/holdout/readme.txt","veritas":776,"minLen3":{"tok":776,"exact":true},"minLen4":{"tok":776,"exact":true},"minLen6":{"tok":776,"exact":true},"minLen8":{"tok":776,"exact":true}}
