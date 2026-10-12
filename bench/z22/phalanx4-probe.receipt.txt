@@ -1,0 +1,29 @@
+== corpus (o200k tokens) ==
+bench/holdout-ops/find-listing.txt: identity=3997 P3=1678 P4=1671 stages=[ko,da] vx mode=phalanx4
+bench/holdout-ops/git-log-fuller.txt: identity=143 P3=138 P4=138 stages=[] vx mode=phalanx4
+bench/holdout-ops/git-numstat.txt: identity=4632 P3=3535 P4=3535 stages=[da] vx mode=phalanx4
+bench/holdout-ops/ls-full-iso.txt: identity=1175 P3=677 P4=677 stages=[dt] vx mode=phalanx4
+bench/holdout-ops/node-stacktraces.txt: identity=568 P3=461 P4=461 stages=[da] vx mode=phalanx4
+bench/holdout-ops/npm-ls.txt: identity=2747 P3=1970 P4=1970 stages=[dt,da] vx mode=phalanx4
+bench/holdout-ops/openstack-loghub-26.log: identity=4028 P3=1397 P4=1390 stages=[rc,dt,uu] vx mode=phalanx4
+bench/holdout-ops/package-lock-head.json: identity=15009 P3=10289 P4=10282 stages=[rc,dt] vx mode=phalanx4
+bench/holdout/code-dts.txt: identity=162 P3=99 P4=99 stages=[] vx mode=phalanx4
+bench/holdout/code-ts.txt: identity=1422 P3=1395 P4=1395 stages=[] vx mode=phalanx4
+bench/holdout/gh-api.json.txt: identity=2519 P3=2029 P4=2025 stages=[ko,da] vx mode=phalanx4
+bench/holdout/gh-prose.txt: identity=1934 P3=1918 P4=1918 stages=[] vx mode=phalanx4
+bench/holdout/json-pkg.txt: identity=1152 P3=1036 P4=1036 stages=[] vx mode=phalanx4
+bench/holdout/lic-mit.txt: identity=223 P3=223 P4=223 stages=[] mode=identity
+bench/holdout/license.txt: identity=1166 P3=1122 P4=1122 stages=[] vx mode=phalanx4
+bench/holdout/md-react.txt: identity=252 P3=252 P4=252 stages=[] mode=identity
+bench/holdout/md-vite.txt: identity=274 P3=274 P4=274 stages=[] mode=identity
+bench/holdout/readme.txt: identity=843 P3=776 P4=776 stages=[] vx mode=phalanx4
+bench/z20/samples/find-printf-src.txt: identity=8493 P3=2816 P4=2809 stages=[ko,dt,da] vx mode=phalanx4
+bench/z20/samples/git-log-iso.txt: identity=1947 P3=1783 P4=1776 stages=[ko,dt] vx mode=phalanx4
+bench/z20/samples/ls-omega-full-iso.txt: identity=7426 P3=2355 P4=2345 stages=[rc,ko,dt] vx mode=phalanx4
+TOTAL identity=60112 P3=36223 P4=36174 (P4-P3=-49, -0.14%)
+== edge cases ==
+edge cases checked: 20
+== fuzz (3000 structured texts) ==
+fuzz exact 3000/3000
+ALL EXACT
+uuidfold-off-prefix phalanx4  exact true

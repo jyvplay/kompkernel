@@ -72,7 +72,6 @@ export function phalanx3Encode(text: string, enc: EncodingName = 'o200k_base', m
   // R gate (downstream = VERITAS)
   const r = recallEncode(kIn, enc);
   const rKept = r.mode === 'recall' && countTokens(veritasEncode(r.wire, enc).wire, enc) < countTokens(vK, enc);
-  const rIn = rKept ? r.wire : recallIdentityWire(kIn);
   const v = rKept ? veritasEncode(r.wire, enc).wire : vK;
 
   const decoded = safeDecode(v);
@@ -83,6 +82,5 @@ export function phalanx3Encode(text: string, enc: EncodingName = 'o200k_base', m
     const idTok = needsEsc ? countTokens(idWire, enc) : inTokens;
     return { wire: idWire, decoded: text, exact: true, mode: 'identity', koineKept: false, recallKept: false, inTokens, outTokens: idTok };
   }
-  void rIn;
   return { wire: v, decoded: decoded as string, exact: true, mode: 'phalanx3', koineKept: kKept, recallKept: rKept, inTokens, outTokens };
 }

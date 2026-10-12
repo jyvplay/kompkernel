@@ -41,7 +41,7 @@
 import { countTokens, type EncodingName } from './bpe';
 
 export const UUIDFOLD_RULE = 'UUIDFOLD: 32 uppercase hex digits with a letter A-F = lowercase UUID; dashes after digits 8 12 16 20';
-const OFF = 'UUIDFOLD: off';
+export const OFF = 'UUIDFOLD: off';
 
 // canonical lowercase dashed UUID, not glued to an alphanumeric neighbour
 const UUID_RE = /(?<![0-9A-Za-z])([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})(?![0-9A-Za-z])/g;
