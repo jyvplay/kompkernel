@@ -1,0 +1,18 @@
+prose: identity=4692 A4=4532 A5=4532 (A5-A4=0)
+  wrap layer used: git-manual.adoc W=72 A4=10396 A5=10303
+  wrap layer used: linux-coding-style.rst W=76 A4=10104 A5=10042
+  wrap layer used: linux-howto.rst W=72 A4=5644 A5=5538
+  wrap layer used: linux-submitting-patches.rst W=72 A4=8886 A5=8845
+wrapped_docs: identity=41988 A4=39455 A5=39153 (A5-A4=-302)
+code: identity=5255 A4=4097 A5=4097 (A5-A4=0)
+ops: identity=50165 A4=23157 A5=23157 (A5-A4=0)
+realjson: identity=5498 A4=3886 A5=3886 (A5-A4=0)
+ALL: identity=107598 A4=75127 A5=74825 (A5-A4=-302, -0.40%)
+edge empty: layer=a4 W=0 A4=0 A5=0 exact=true
+edge prefixed-wrp: layer=wrp W=0 A4=6 A5=60 exact=true
+edge keep char present: layer=a4 W=0 A4=37 A5=37 exact=true
+edge long single line: layer=a4 W=0 A4=54 A5=54 exact=true
+edge wrapped para: layer=a4 W=0 A4=78 A5=78 exact=true
+edge blank lines: layer=a4 W=0 A4=10 A5=10 exact=true
+edge tabs: layer=a4 W=0 A4=9 A5=9 exact=true
+round-trip checks run: 37; failures: 0

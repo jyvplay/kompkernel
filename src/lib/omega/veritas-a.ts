@@ -75,7 +75,7 @@ function wireOf(entries: VxaEntry[], body: string, legend: string): string {
   return VXA_SENTINEL + (legend ? legend + '\n' : '') + lines + '\n' + TERMINATOR + '\n' + body;
 }
 
-export function veritasAEncode(text: string, enc: EncodingName, W = 3, legend: string = VXA_LEGEND): VxaResult {
+export function veritasAEncode(text: string, enc: EncodingName, W = 3, legend: string = VXA_LEGEND, maxExt: number = MAX_EXT): VxaResult {
   const inTokens = countTokens(text, enc);
   const identity = (): VxaResult => ({
     wire: text, decoded: text, exact: true, mode: 'identity', entries: [], inTokens, outTokens: inTokens,
@@ -108,7 +108,7 @@ export function veritasAEncode(text: string, enc: EncodingName, W = 3, legend: s
   for (const a of hot) {
     const p0 = a.pos[0];
     let bestLen = W;
-    for (let len = W + 1; len <= MAX_EXT && p0 + len <= T; len++) {
+    for (let len = W + 1; len <= maxExt && p0 + len <= T; len++) {
       let share = 1;
       for (let j = 1; j < a.pos.length; j++) {
         const pj = a.pos[j];
