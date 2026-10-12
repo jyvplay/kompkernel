@@ -100,6 +100,7 @@ import { phalanxEncode } from './phalanx';
 import { phalanx2Encode } from './phalanx2';
 import { phalanx3Encode } from './phalanx3';
 import { phalanx4Encode } from './phalanx4';
+import { phalanxA1Encode } from './phalanx-a1';
 import { veritasEncodeMulti, withVxLegend, veritasDecodeL } from './veritas-w';
 import { amphoraEncode } from './amphora';
 import { kanonEncode } from './kanon';
@@ -684,6 +685,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'phalanx4', label: '▦ PHALANX-P4 (KOINE and RECALL headers folded into one legend line; DITTO, DIRFOLD-A, UUIDFOLD inline; identity unless exact and cheaper)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = phalanx4Encode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `${r.mode}; stages=[${r.applied.join(',')}]; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'phalanx-a1', label: '▣ PHALANX-A1 (PHALANX-P4 with VERITAS-A: one-token alias characters for VX references; all stages named in the in-message legend; identity unless exact and cheaper)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = phalanxA1Encode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `${r.mode}; vx=${r.vxKept}; stages=[${r.applied.join(',')}]; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'veritas-m', label: '⟁ VERITAS-VX multi-window (trigram+bigram candidates, real-token gate; same VX1 wire and decoder)', family: 'exact', fidelity: 'exact',

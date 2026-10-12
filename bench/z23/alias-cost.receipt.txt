@@ -1,0 +1,19 @@
+gh-prose.txt: refs=11 keys=4 body=1853 aliasBody=1850 saved=3 freeAliasChars=399
+readme.txt: refs=26 keys=5 body=721 aliasBody=712 saved=9 freeAliasChars=400
+license.txt: refs=29 keys=7 body=1017 aliasBody=988 saved=29 freeAliasChars=400
+code-ts.txt: refs=105 keys=14 body=1237 aliasBody=1138 saved=99 freeAliasChars=400
+code-dts.txt: refs=20 keys=1 body=82 aliasBody=62 saved=20 freeAliasChars=400
+json-pkg.txt: refs=126 keys=9 body=950 aliasBody=842 saved=108 freeAliasChars=400
+gh-api.json.txt: refs=238 keys=33 body=1446 aliasBody=1240 saved=206 freeAliasChars=399
+find-listing.txt: refs=789 keys=19 body=2667 aliasBody=2004 saved=663 freeAliasChars=400
+git-log-fuller.txt: refs=2 keys=1 body=111 aliasBody=109 saved=2 freeAliasChars=400
+git-numstat.txt: refs=616 keys=18 body=3644 aliasBody=3181 saved=463 freeAliasChars=400
+npm-ls.txt: refs=288 keys=27 body=1643 aliasBody=1386 saved=257 freeAliasChars=400
+openstack-loghub-26.log: refs=141 keys=15 body=1391 aliasBody=1332 saved=59 freeAliasChars=400
+package-lock-head.json: refs=1419 keys=62 body=9384 aliasBody=8076 saved=1308 freeAliasChars=400
+find-printf-src.txt: refs=1927 keys=40 body=6040 aliasBody=4229 saved=1811 freeAliasChars=400
+git-log-iso.txt: refs=113 keys=10 body=1715 aliasBody=1660 saved=55 freeAliasChars=400
+ls-omega-full-iso.txt: refs=981 keys=16 body=2858 aliasBody=2071 saved=787 freeAliasChars=400
+TOTAL refs=6831 body tokens=36759 alias-body tokens=30880 saved=5879
+one-token alias pool size (non-space, non-ASCII-letter, single token): 400
+sample candidates: ¡ ¢ £ ¤ ¥ ¦ § ¨ © ª « ¬ ­ ® ¯ ° ± ² ³ ´ µ ¶ · ¸ ¹ º » ¼ ½ ¾ ¿ À Á Â Ã Ä Å Æ Ç È

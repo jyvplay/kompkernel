@@ -1,0 +1,28 @@
+prose gh-prose.txt: id=1934 P4=1934 A1=1932 (-2) mode=phalanx-a1 vxKept=true
+prose readme.txt: id=843 P4=812 A1=795 (-17) mode=phalanx-a1 vxKept=true
+prose license.txt: id=1166 P4=1158 A1=1117 (-41) mode=phalanx-a1 vxKept=true
+prose lic-mit.txt: id=223 P4=223 A1=223 (0) mode=identity vxKept=false
+prose md-react.txt: id=252 P4=252 A1=252 (0) mode=identity vxKept=false
+prose md-vite.txt: id=274 P4=274 A1=274 (0) mode=identity vxKept=false
+code code-ts.txt: id=1422 P4=1422 A1=1323 (-99) mode=phalanx-a1 vxKept=true
+code code-dts.txt: id=162 P4=135 A1=118 (-17) mode=phalanx-a1 vxKept=true
+code json-pkg.txt: id=1152 P4=1072 A1=931 (-141) mode=phalanx-a1 vxKept=true
+code gh-api.json.txt: id=2519 P4=2061 A1=1839 (-222) mode=phalanx-a1 vxKept=true
+ops find-listing.txt: id=3997 P4=1707 A1=1654 (-53) mode=phalanx-a1 vxKept=true
+ops git-log-fuller.txt: id=143 P4=143 A1=143 (0) mode=identity vxKept=false
+ops git-numstat.txt: id=4632 P4=3571 A1=3173 (-398) mode=phalanx-a1 vxKept=true
+ops ls-full-iso.txt: id=1175 P4=713 A1=665 (-48) mode=phalanx-a1 vxKept=true
+ops node-stacktraces.txt: id=568 P4=497 A1=469 (-28) mode=phalanx-a1 vxKept=true
+ops npm-ls.txt: id=2747 P4=2006 A1=1737 (-269) mode=phalanx-a1 vxKept=true
+ops openstack-loghub-26.log: id=4028 P4=1426 A1=1347 (-79) mode=phalanx-a1 vxKept=true
+ops package-lock-head.json: id=15009 P4=10318 A1=8707 (-1611) mode=phalanx-a1 vxKept=true
+ops find-printf-src.txt: id=8493 P4=2845 A1=2605 (-240) mode=phalanx-a1 vxKept=true
+ops git-log-iso.txt: id=1947 P4=1812 A1=1766 (-46) mode=phalanx-a1 vxKept=true
+ops ls-omega-full-iso.txt: id=7426 P4=2381 A1=1909 (-472) mode=phalanx-a1 vxKept=true
+TOTAL prose: n=6 identity=4692 P4=4653 A1=4593 (A1-P4=-60, -1.29%) A1 wins 3, P4 wins 0
+TOTAL code: n=4 identity=5255 P4=4690 A1=4211 (A1-P4=-479, -10.21%) A1 wins 4, P4 wins 0
+TOTAL ops: n=11 identity=50165 P4=27419 A1=24175 (A1-P4=-3244, -11.83%) A1 wins 10, P4 wins 0
+ALL: identity=60112 P4=36762 A1=32979 (A1-P4=-3783, -10.29%)
+A1 encode ms: median=29 max=428
+edge cases 18; fuzz exact 1500/1500; decode failures total 0
+ALL EXACT

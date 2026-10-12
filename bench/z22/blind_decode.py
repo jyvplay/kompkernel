@@ -17,8 +17,35 @@ def unesc_header(s):
         out.append(c); i += 1
     return ''.join(out)
 
+def vxa_decode(wire):
+    # VXA (VERITAS-A) as its legend states: "X=T" entries (X one character), T escapes ~~ ~N ~R,
+    # ]] ends the header, the body escapes ~~ only, and a bare X in the body expands to T.
+    lines = wire[len('[[VXA\n'):].split('\n')
+    i = 1 if lines and lines[0].startswith('# ') else 0
+    d = {}
+    while i < len(lines) and lines[i] != ']]':
+        ln = lines[i]
+        if len(ln) < 2 or ln[1] != '=':
+            raise ValueError('VXA: bad entry line')
+        d[ln[0]] = unesc_header(ln[2:])
+        i += 1
+    if i >= len(lines):
+        raise ValueError('VXA: no terminator')
+    body = '\n'.join(lines[i + 1:])
+    out, j = [], 0
+    while j < len(body):
+        c = body[j]
+        if c == '~':
+            if body[j + 1:j + 2] != '~':
+                raise ValueError('VXA: bad body escape')
+            out.append('~'); j += 2; continue
+        out.append(d.get(c, c)); j += 1
+    return ''.join(out)
+
 def vx_decode(wire, legend_ok=True):
-    # "[[VX1" line, optional "# ..." legend line, "~k=T" lines, "]]" terminator, then body.
+    if wire.startswith('[[VXA\n'):
+        return vxa_decode(wire)
+    # [[VX1" line, optional "# ..." legend line, "~k=T" lines, "]]" terminator, then body.
     if not wire.startswith('[[VX1\n'):
         return wire
     lines = wire[len('[[VX1\n'):].split('\n')
@@ -145,7 +172,10 @@ def uu_decode(text, boundary):
 def blind(wire, reading, boundary):
     t = wire
     legend = None
-    if t.startswith('PHALANX-P4 legend: '):
+    ESC = 'PHALANX-A1: identity, text follows verbatim'
+    if t.startswith(ESC + '\n'):
+        return t[len(ESC) + 1:]
+    if t.startswith('PHALANX-P4 legend: ') or t.startswith('PHALANX-A1 legend: '):
         legend, t = t.split('\n', 1)
     t = vx_decode(t)
     if legend:
