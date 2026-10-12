@@ -1,0 +1,19 @@
+Z35 global-selection ILP (negative result). All out-token counts: o200k one-chat, exact round-trip checked.
+VXR greedy (committed, verified 1e64863): readme 706, find-listing 1360.
+
+A. Token-aligned flat ILP (ilp_select.py, phrases >=2 occ, <=240 keys, W = max window tokens):
+   W=12 find-listing: optimal, est saving 2425, exact wire 1633 tokens (VXR 1360).
+   W=12 readme:       optimal, est saving 144,  exact wire 745 tokens (VXR 706).
+   Earlier W=12 builds failed round-trip because build-ilp.ts used one token length per phrase;
+   fixed by storing a token length per occurrence (wspan). Round-trip now exact.
+
+B. Character-level ILP (char_cands.py UTF-16 units, char_ilp.py, build-char.ts), readme:
+   key cost 1 token, min phrase tokens 2: optimal, est 298, 239 occurrences, exact wire 1003 tokens.
+   Body 805 + header ~198 (32 entries).
+   key cost 2, min 4 tokens:  est 136, exact wire 807.
+   key cost 2, min 6 tokens:  est 132, exact wire 805.
+   key cost 3, min 4 tokens:  est 100, exact wire 799.
+Interpretation: the additive per-occurrence model over-credits replacements (keys are ~2 tokens and
+re-merge neighbours). Exact-count greedy with recounting (VXR) beats every calibrated global optimum tested.
+Verdict for additive global selection over token-aligned and char-level candidates: H- (negative).
+Caveat: only readme measured for char-level; find-listing char-level not run.
