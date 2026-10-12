@@ -904,10 +904,6 @@ export function codecEntries(): Entry[] {
       run: async (t, enc) => { const r = await anankeEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
     },
     {
-      key: 'kairos', label: '⧖ KAIROS-Ω (Residual Frontier)', family: 'exact', fidelity: 'exact',
-      run: async (t, enc) => { const r = await kairosEncode(t, enc); return { output: r.wire, decoded: r.decoded, note: r.notes }; },
-    },
-    {
       key: 'khoros',
       label: '⟁ KHOROS-Ω (Terminal Sovereign Leader)',
       family: 'exact',
