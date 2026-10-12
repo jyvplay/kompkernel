@@ -29,6 +29,7 @@ import { compressIbCaveHolo } from '@/lib/neuralese-ib';
 
 import { countTokens, encodeIds, type EncodingName } from './bpe';
 import { omegaXiCompress, omegaXiDecode } from './atom-codec';
+import { astraeaEncode } from './astraea';
 import { veritasEncode } from './veritas';
 import { quasarEncode } from './quasar';
 import { helixEncode } from './helix';
@@ -112,6 +113,16 @@ function presetEntries(): Entry[] {
 export function codecEntries(): Entry[] {
   const base: Entry[] = [
     ...presetEntries(),
+    {
+      key: 'astraea',
+      label: '⟿ ASTRAEA-A2',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r = await astraeaEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, note: r.notes };
+      },
+    },
     {
       key: 'veritasVx',
       label: '⟁ VERITAS-VX',
