@@ -1,0 +1,23 @@
+file | identity | P2 | P3 | P3-P2 | P3 mode | K | R | exact
+holdout-ops/find-listing.txt | 3997 | 1678 | 1678 | +0 | phalanx3 | on | off | true,true
+holdout-ops/ls-full-iso.txt | 1175 | 677 | 677 | +0 | phalanx3 | off | off | true,true
+holdout-ops/git-numstat.txt | 4632 | 3535 | 3535 | +0 | phalanx3 | off | off | true,true
+holdout-ops/npm-ls.txt | 2747 | 1970 | 1970 | +0 | phalanx3 | off | off | true,true
+holdout-ops/node-stacktraces.txt | 568 | 461 | 461 | +0 | phalanx3 | off | off | true,true
+holdout-ops/openstack-loghub-26.log | 4028 | 1526 | 1397 | -129 | phalanx3 | off | on | true,true
+holdout-ops/git-log-fuller.txt | 143 | 138 | 138 | +0 | phalanx3 | off | off | true,true
+holdout-ops/package-lock-head.json | 15009 | 10359 | 10289 | -70 | phalanx3 | off | on | true,true
+holdout/code-dts.txt | 162 | 99 | 99 | +0 | phalanx3 | off | off | true,true
+holdout/code-ts.txt | 1422 | 1395 | 1395 | +0 | phalanx3 | off | off | true,true
+holdout/gh-api.json.txt | 2519 | 2029 | 2029 | +0 | phalanx3 | off | off | true,true
+holdout/gh-prose.txt | 1934 | 1918 | 1918 | +0 | phalanx3 | off | off | true,true
+holdout/json-pkg.txt | 1152 | 1036 | 1036 | +0 | phalanx3 | off | off | true,true
+holdout/lic-mit.txt | 223 | 223 | 223 | +0 | identity | off | off | true,true
+holdout/license.txt | 1166 | 1122 | 1122 | +0 | phalanx3 | off | off | true,true
+holdout/md-react.txt | 252 | 252 | 252 | +0 | identity | off | off | true,true
+holdout/md-vite.txt | 274 | 274 | 274 | +0 | identity | off | off | true,true
+holdout/readme.txt | 843 | 776 | 776 | +0 | phalanx3 | off | off | true,true
+z20/samples/find-printf-src.txt | 8493 | 2816 | 2816 | +0 | phalanx3 | on | off | true,true
+z20/samples/git-log-iso.txt | 1947 | 1783 | 1783 | +0 | phalanx3 | on | off | true,true
+z20/samples/ls-omega-full-iso.txt | 7426 | 2463 | 2355 | -108 | phalanx3 | on | on | true,true
+TOTAL identity=60112 P2=36530 P3=36223 (P3-P2=-307) files_P3_larger=0 exact_failures=0
