@@ -1,0 +1,12 @@
+      0 A6=  1588 A7=  1588 layer6=a5 layer7=a5 bench/holdout-ops/find-listing.txt
+      0 A6=   143 A7=   143 layer6=a5 layer7=a5 bench/holdout-ops/git-log-fuller.txt
+      0 A6=  2704 A7=  2704 layer6=a5 layer7=a5 bench/holdout-ops/git-numstat.txt
+      0 A6=   653 A7=   653 layer6=a5 layer7=a5 bench/holdout-ops/ls-full-iso.txt
+      0 A6=   457 A7=   457 layer6=a5 layer7=a5 bench/holdout-ops/node-stacktraces.txt
+      0 A6=  1693 A7=  1693 layer6=a5 layer7=a5 bench/holdout-ops/npm-ls.txt
+      0 A6=  1335 A7=  1335 layer6=a5 layer7=a5 bench/holdout-ops/openstack-loghub-26.log
+      0 A6=  8492 A7=  8492 layer6=a5 layer7=a5 bench/holdout-ops/package-lock-head.json
+      0 A6=  2442 A7=  2442 layer6=a5 layer7=a5 bench/z20/samples/find-printf-src.txt
+      0 A6=  1753 A7=  1753 layer6=a5 layer7=a5 bench/z20/samples/git-log-iso.txt
++    13 A6=  1586 A7=  1599 layer6=pad layer7=col bench/z20/samples/ls-omega-full-iso.txt
+      0 A6=   131 A7=   131 layer6=a5 layer7=a5 bench/z29/ops-real/df-h.txt
