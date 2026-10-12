@@ -1,0 +1,25 @@
+bench/holdout/code-dts.txt: entries=1 header=44 body=62 header-share=41.5%
+bench/holdout/code-ts.txt: entries=28 header=286 body=1024 header-share=21.8%
+bench/holdout/gh-api.json.txt: entries=46 header=698 body=1154 header-share=37.7%
+bench/holdout/gh-prose.txt: entries=16 header=175 body=1736 header-share=9.2%
+bench/holdout/json-pkg.txt: entries=19 header=172 body=747 header-share=18.7%
+bench/holdout/lic-mit.txt: identity
+bench/holdout/license.txt: entries=20 header=205 body=891 header-share=18.7%
+bench/holdout/md-react.txt: identity
+bench/holdout/md-vite.txt: entries=2 header=44 body=248 header-share=15.1%
+bench/holdout/readme.txt: entries=12 header=124 body=652 header-share=16.0%
+bench/holdout-ops/find-listing.txt: entries=28 header=219 body=1922 header-share=10.2%
+bench/holdout-ops/git-log-fuller.txt: entries=1 header=54 body=109 header-share=33.1%
+bench/holdout-ops/git-numstat.txt: entries=24 header=224 body=2949 header-share=7.1%
+bench/holdout-ops/ls-full-iso.txt: entries=14 header=191 body=416 header-share=31.5%
+bench/holdout-ops/node-stacktraces.txt: entries=10 header=198 body=250 header-share=44.2%
+bench/holdout-ops/npm-ls.txt: entries=44 header=400 body=1250 header-share=24.2%
+bench/holdout-ops/openstack-loghub-26.log: entries=30 header=506 body=1242 header-share=28.9%
+bench/holdout-ops/package-lock-head.json: entries=73 header=1036 body=7587 header-share=12.0%
+bench/z20/samples/find-printf-src.txt: entries=47 header=493 body=3839 header-share=11.4%
+bench/z20/samples/git-log-iso.txt: entries=19 header=173 body=1581 header-share=9.9%
+bench/z20/samples/ls-omega-full-iso.txt: entries=16 header=185 body=1850 header-share=9.1%
+bench/z25/json-real/react-latest.json: entries=18 header=211 body=720 header-share=22.7%
+bench/z25/json-real/typescript-latest.json: entries=26 header=408 body=1028 header-share=28.4%
+bench/z25/json-real/vite-latest.json: entries=37 header=344 body=1625 header-share=17.5%
+ALL entries=531 header=6390 body=32882 header-share=16.3%

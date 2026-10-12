@@ -1,0 +1,4 @@
+hex (4 bit/char): chars=40000 tokens=22783 bits/token=7.02 chars/token=1.76
+base32 (5 bit/char): chars=32000 tokens=20554 bits/token=7.78 chars/token=1.56
+base58 (~5.86 bit/char): chars=27314 tokens=18564 bits/token=8.62 chars/token=1.47
+base64 (6 bit/char): chars=26667 tokens=18220 bits/token=8.78 chars/token=1.46

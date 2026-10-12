@@ -1,0 +1,20 @@
+prose: identity=4692 A3=4532 A4=4532 (A4-A3=0)
+code: identity=5255 A3=4097 A4=4097 (A4-A3=0)
+  tpl layer used: bench/holdout-ops/git-numstat.txt A3=2811 A4=2663
+  tpl layer used: bench/holdout-ops/package-lock-head.json A3=8634 A4=8439
+ops: identity=50165 A3=23406 A4=23063 (A4-A3=-343)
+realjson: identity=5498 A3=3886 A4=3886 (A4-A3=0)
+ALL: identity=65610 A3=35921 A4=35578 (A4-A3=-343, -0.95%)
+edge empty: layer=a3 A3=0 A4=0 exact=true
+edge newline only: layer=a3 A3=1 A4=1 exact=true
+edge prefixed: layer=tpl A3=9 A4=33 exact=true
+edge prefixed-plain: layer=tpl A3=4 A4=18 exact=true
+edge tab lines: layer=a3 A3=10 A4=10 exact=true
+edge placeholder char: layer=a3 A3=7 A4=7 exact=true
+edge digits only: layer=a3 A3=6 A4=6 exact=true
+edge crlf logs: layer=a3 A3=22 A4=22 exact=true
+edge at-sign line: layer=a3 A3=4 A4=4 exact=true
+edge vxa prefixed: layer=a3 A3=24 A4=24 exact=true
+edge a3 prefixed: layer=a3 A3=33 A4=33 exact=true
+edge repeated shapes: layer=tpl A3=1528 A4=1319 exact=true
+decode/round-trip checks run: 36; failures: 0
