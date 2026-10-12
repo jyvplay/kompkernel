@@ -23,3 +23,10 @@ Measured on the same 24 files (exact on all 421 corpus+fuzz wires, 20 edge cases
 - Variant B, same, with accurate clauses: +45 tokens (+0.12%) vs P3. Legend text costs as much as the original headers.
 - Variant C (chosen as best): KOINE and RECALL in the legend; DITTO, DIRFOLD-A, UUIDFOLD keep inline P3 headers: -49 tokens (-0.14%).
 Conclusion: exact, legend-decodable descriptions cost about as much as the headers they replace. Legend unification is not a real gain. Not adopted. Code kept in `experiments/phalanx4.ts`.
+
+## Review and searches (this turn)
+- Registry: duplicate `kairos` key (commit b7f55c4, PR #26 branch). Both entries ran `kairosEncode`; the second (KAIROS-Ω label) was removed. No duplicate keys remain.
+- Open PRs (gh, metadata only): #26 (this branch), #23, #20, #18, #17, #13, #11, #4, #3, #2 are open and not draft. mergeStateStatus is UNKNOWN for all of them. Rosetta PRs (#7, #8) and #6 are excluded by request. Code not reviewed beyond metadata.
+- Math: openai/math local clone is depth-1 at fd4aeeb. 749 preprint dirs; 3 carry withdrawal notices (Kuga-Satake, Weil-classes-eightfolds, rational Hodge K3 products), matching history.md. 749 - 3 = 746 is still not 719; unresolved. README table has 10 family rows (007, 017, 087, 102, 159, 197, 221, 271, 287, 362), each with a reasoning-trace PDF present. Family 128 (Superstring 2-approx) is not in the README at all. PDFs not read.
+- Search: arXiv 2601.13398 "Can LLMs Compress (and Decompress)?" (RTCE, Jan 2026): round-trip exact-match tests show current code LLMs lack the coherence for reliable bidirectional lossless transformations. Caution for the single-chat readability claim; not tested here.
+- Search: Lacuna summary of an ICML 2026 paper on axiom-audited Lean formalization (secondary; not verified).
