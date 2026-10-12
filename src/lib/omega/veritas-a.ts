@@ -35,9 +35,9 @@ const MAX_EXT = 32;
 const MAX_POS = 8;
 const POOL_SIZE = 240;
 
-const poolCache = new Map<EncodingName, string[]>();
+export const poolCache = new Map<EncodingName, string[]>();
 /** Single-token BMP non-ASCII characters, in codepoint order. The alias pool is this minus the input's characters. */
-function aliasPool(enc: EncodingName): string[] {
+export function aliasPool(enc: EncodingName): string[] {
   const hit = poolCache.get(enc);
   if (hit) return hit;
   const out: string[] = [];
@@ -51,8 +51,8 @@ function aliasPool(enc: EncodingName): string[] {
   return out;
 }
 
-function escBody(s: string): string { return s.split('~').join('~~'); }
-function escHeader(s: string): string {
+export function escBody(s: string): string { return s.split('~').join('~~'); }
+export function escHeader(s: string): string {
   return s.split('~').join('~~').split('\n').join('~N').split('\r').join('~R');
 }
 

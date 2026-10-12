@@ -1,0 +1,30 @@
+prose gh-prose.txt: id=1934 VXA=1911 CH=1934 (23) entries=1
+prose readme.txt: id=843 VXA=776 CH=789 (13) entries=5
+prose license.txt: id=1166 VXA=1096 CH=1151 (55) entries=7
+prose lic-mit.txt: id=223 VXA=223 CH=223 (0) entries=0
+prose md-react.txt: id=252 VXA=252 CH=252 (0) entries=0
+prose md-vite.txt: id=274 VXA=274 CH=274 (0) entries=1
+code code-ts.txt: id=1422 VXA=1311 CH=1340 (29) entries=14
+code code-dts.txt: id=162 VXA=106 CH=145 (39) entries=2
+code json-pkg.txt: id=1152 VXA=919 CH=1000 (81) entries=9
+code gh-api.json.txt: id=2519 VXA=1852 CH=1927 (75) entries=26
+ops find-listing.txt: id=3997 VXA=2141 CH=2421 (280) entries=22
+ops git-log-fuller.txt: id=143 VXA=143 CH=143 (0) entries=0
+ops git-numstat.txt: id=4632 VXA=3173 CH=3220 (47) entries=26
+ops ls-full-iso.txt: id=1175 VXA=607 CH=600 (-7) entries=8
+ops node-stacktraces.txt: id=568 VXA=448 CH=492 (44) entries=5
+ops npm-ls.txt: id=2747 VXA=1650 CH=1782 (132) entries=17
+ops openstack-loghub-26.log: id=4028 VXA=1748 CH=1810 (62) entries=26
+ops package-lock-head.json: id=15009 VXA=8623 CH=10268 (1645) entries=71
+ops find-printf-src.txt: id=8493 VXA=4332 CH=3949 (-383) entries=22
+ops git-log-iso.txt: id=1947 VXA=1754 CH=1779 (25) entries=5
+ops ls-omega-full-iso.txt: id=7426 VXA=2035 CH=2630 (595) entries=14
+realjson react-latest.json: id=1010 VXA=931 CH=976 (45) entries=8
+realjson typescript-latest.json: id=2004 VXA=1436 CH=1484 (48) entries=17
+realjson vite-latest.json: id=2484 VXA=1969 CH=2113 (144) entries=14
+TOTAL prose: identity=4692 VXA-best=4532 CH=4623 (CH-VXA=91, 2.01%) CH wins 0, VXA wins 3, CH encode ms 87
+TOTAL code: identity=5255 VXA-best=4188 CH=4412 (CH-VXA=224, 5.35%) CH wins 0, VXA wins 4, CH encode ms 85
+TOTAL ops: identity=50165 VXA-best=26654 CH=29094 (CH-VXA=2440, 9.15%) CH wins 2, VXA wins 8, CH encode ms 660
+TOTAL realjson: identity=5498 VXA-best=4336 CH=4573 (CH-VXA=237, 5.47%) CH wins 0, VXA wins 3, CH encode ms 53
+ALL: identity=65610 VXA-best=39710 CH=42702 (CH-VXA=2992)
+decode failures: 0

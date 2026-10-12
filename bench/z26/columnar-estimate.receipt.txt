@@ -1,0 +1,1 @@
+bench/z26/json-real/gh-commits-30.json: identity=81759 A3(pretty)=57591 A2(minified)=57552 A2(columnar)=57532 columnar-vs-A3=-59 (-0.1%) columnar round trip=true

@@ -1,0 +1,6 @@
+prose: identity=4692 VXA-best=4532 VXA-P=4532 (P-A=0) P wins 0, A wins 0
+code: identity=5255 VXA-best=4188 VXA-P=4188 (P-A=0) P wins 0, A wins 0
+ops: identity=50165 VXA-best=26654 VXA-P=26654 (P-A=0) P wins 0, A wins 0
+realjson: identity=5498 VXA-best=4336 VXA-P=4336 (P-A=0) P wins 0, A wins 0
+ALL: identity=65610 VXA-best=39710 VXA-P=39710 (P-A=0, 0.00%)
+decode failures: 0
