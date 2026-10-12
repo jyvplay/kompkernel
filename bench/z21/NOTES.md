@@ -52,9 +52,9 @@
 
 ## D. NEGATIVE SPACE (result shapes that look like solutions but fail the contract)
 Each row: shape | why it fails | test that detects it | status.
-1. Ungated KOINE before VERITAS | looks -31% on find-listing alone, regresses openstack/numstat after VERITAS | koine-sweep, P2 gate | tested.
+1. Ungated KOINE before VERITAS (in the P1 chain, after DITTO) | find-listing -31% vs P1, but ungated it regresses openstack (+2.7%) and git-numstat (+12.9%) | koine-sweep (TKV columns), P2 gate | tested.
 2. KOINE scored per-field in isolation | o200k cost of a field in isolation != cost in line/wire | per-line greedy vs per-field | tested.
-3. Modal shortcut: "fold whenever the field is cheaper alone" | the modal (most common) answer is not the right one: 3 of 8 ops files regress | phalanx2-probe vs P1 | tested.
+3. Modal shortcut: replace DITTO with KOINE (fold instead of mark, the obvious simplification) | it wins find-listing and npm-ls but regresses openstack +13%, ls-full-iso +7%, git-numstat +13% vs P1 (3 of 8 ops files) | koine-probe 'U,DA,K,V' column vs P1 | tested.
 4. Column-free recall (value anywhere in last 16 lines) | adds ~30-200 tokens over same-column; breaks the column reading rule | anycol-measure | tested, negative.
 5. Recall window 17+ | distance 17 repeat is not referenced (by design) | p3-attack A3 | tested.
 6. '@'-literal field collides with reference marker | must escape; '@3' literal would decode as reference | recall-redteam "literal @3 field" | tested.
