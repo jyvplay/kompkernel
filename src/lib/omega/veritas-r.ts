@@ -17,11 +17,21 @@ import { rankedCandidatesS, removeEntryS, rekeyEntryS, type VeritasSEntry } from
 
 export const VXR_LEGEND = '# VXR: X=T in header; X in text means T; ~~ ~, ~N nl, ~R cr; ]] ends';
 
-const POOL_MAX = 240;
-const K_IMPROVE = 10;
-const MAX_TRIALS = 300;
-/** Exact-count budget for refinement (prune and key-reassignment evaluations). Deterministic by construction. */
-const REFINE_BUDGET = 4000;
+/**
+ * Search knobs for the VXR greedy and refinement. All are deterministic budgets (counts, never wall-clock).
+ * DEFAULT_VXR_OPTS is the shipped VERITAS-R search; the decoder is identical for every setting.
+ */
+export interface VxrSearchOptions {
+  /** Alias keys offered to the greedy. */
+  poolMax: number;
+  /** Greedy step stops scanning after this many improving candidates; the best of them is taken. */
+  kImprove: number;
+  /** Greedy step stops after this many candidate trials. */
+  maxTrials: number;
+  /** Exact-count budget for refinement (prune and key-reassignment evaluations). */
+  refineBudget: number;
+}
+export const DEFAULT_VXR_OPTS: VxrSearchOptions = { poolMax: 240, kImprove: 10, maxTrials: 300, refineBudget: 4000 };
 
 export interface VeritasRResult {
   wire: string;
@@ -42,6 +52,11 @@ export function wireR(entries: VeritasSEntry[], body: string): string {
 }
 
 export function veritasREncode(text: string, enc: EncodingName = 'o200k_base'): VeritasRResult {
+  return veritasREncodeWith(text, enc, DEFAULT_VXR_OPTS);
+}
+
+/** VXR encoder with explicit search budgets. Same wire and decoder for every setting; exact whole-wire gate. */
+export function veritasREncodeWith(text: string, enc: EncodingName, opts: VxrSearchOptions): VeritasRResult {
   const inTokens = countTokens(text, enc);
   const finish = (wire: string, entries: number, trials: number, refine: { prunes: number; rekeys: number }): VeritasRResult => {
     const decoded = veritasADecode(wire);
@@ -50,18 +65,18 @@ export function veritasREncode(text: string, enc: EncodingName = 'o200k_base'): 
   const wrap = text.startsWith(VXA_SENTINEL) || text.startsWith(VXN_SENTINEL) || text.startsWith(VXC_SENTINEL) || text.startsWith(VXS_SENTINEL) || text.startsWith(VXR_SENTINEL);
   const raw = () => finish(wrap ? wireR([], escBody(text)) : text, 0, 0, { prunes: 0, rekeys: 0 });
   if (text.length === 0) return finish(text, 0, 0, { prunes: 0, rekeys: 0 });
-  const pool = aliasPool(enc).filter((c) => !text.includes(c)).slice(0, POOL_MAX);
+  const pool = aliasPool(enc).filter((c) => !text.includes(c)).slice(0, opts.poolMax);
   let st = { entries: [] as VeritasSEntry[], body: escBody(text) };
   let cur = countTokens(wireR([], st.body), enc);
   let trialsTot = 0;
-  // Greedy: best improving candidate per step, scanning the ranked list until K_IMPROVE improve or MAX_TRIALS are tried.
+  // Greedy: best improving candidate per step, scanning the ranked list until kImprove improve or maxTrials are tried.
   while (st.entries.length < pool.length) {
     const ranked = rankedCandidatesS(st.body, enc);
     const key = pool[st.entries.length];
     const improving: { phrase: string; body: string; t: number }[] = [];
     let trials = 0;
     for (const c of ranked) {
-      if (improving.length >= K_IMPROVE || trials >= MAX_TRIALS) break;
+      if (improving.length >= opts.kImprove || trials >= opts.maxTrials) break;
       const parts = st.body.split(escBody(c.phrase));
       if (parts.length - 1 < 2) continue;
       trials++;
@@ -77,21 +92,21 @@ export function veritasREncode(text: string, enc: EncodingName = 'o200k_base'): 
   }
   if (st.entries.length === 0) return raw();
   // Refinement: prune entries and reassign keys while the exact wire count improves.
-  // Deterministic budget: at most REFINE_BUDGET exact counts, so the output does not depend on machine speed.
+  // Deterministic budget: at most opts.refineBudget exact counts, so the output does not depend on machine speed.
   let evals = 0;
   const cost = (s: { entries: VeritasSEntry[]; body: string }) => { evals++; return countTokens(wireR(s.entries, s.body), enc); };
   let c0 = cost(st), prunes = 0, rekeys = 0, improved = true;
-  while (improved && evals < REFINE_BUDGET) {
+  while (improved && evals < opts.refineBudget) {
     improved = false;
-    for (let i = 0; i < st.entries.length && evals < REFINE_BUDGET; i++) {
+    for (let i = 0; i < st.entries.length && evals < opts.refineBudget; i++) {
       const c = removeEntryS(st, i); const t = cost(c);
       if (t < c0) { st = c; c0 = t; prunes++; improved = true; i--; }
     }
-    for (let i = 0; i < st.entries.length && !improved && evals < REFINE_BUDGET; i++) {
+    for (let i = 0; i < st.entries.length && !improved && evals < opts.refineBudget; i++) {
       const used = new Set(st.entries.map((e) => e.key));
       for (const k of pool) {
         if (used.has(k)) continue;
-        if (evals >= REFINE_BUDGET) break;
+        if (evals >= opts.refineBudget) break;
         const c = rekeyEntryS(st, i, k); const t = cost(c);
         if (t < c0) { st = c; c0 = t; rekeys++; improved = true; break; }
       }

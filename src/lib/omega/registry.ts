@@ -110,6 +110,8 @@ import { phalanxA7Encode } from './phalanx-a7';
 import { phalanxA8Encode } from './phalanx-a8';
 import { phalanxA9Encode } from './phalanx-a9';
 import { veritasNEncode } from './veritas-n';
+import { veritasREncode } from './veritas-r';
+import { veritasKEncode } from './veritas-k';
 import { phalanxA10Encode } from './phalanx-a10';
 import { veritasCEncode } from './veritas-c';
 import { veritasUEncode } from './veritas-u';
@@ -745,6 +747,14 @@ export function codecEntries(): Entry[] {
     {
       key: 'veritas-n', label: '⟁ VERITAS-N nested-header dictionary (VERITAS-U selection; header phrases may refer to shorter entries; VXN wire; identity-guarded)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = veritasNEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `mode=${r.mode}; entries=${r.entries.length}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'veritas-r', label: '⟁ VERITAS-R (VXR: greedy phrase dictionary with exact-count key reassignment and pruning; standard search budget; VXR wire; identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = veritasREncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `entries=${r.entries}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'veritas-k', label: '⟁ VERITAS-K (VERITAS-R with wide greedy search for inputs up to 16000 chars; same VXR wire and decoder; standard budget above 16000 chars; identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = veritasKEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `mode=${r.mode}; entries=${r.entries}; one-chat=${r.outTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'phalanx-a8', label: '▣ PHALANX-A8 (PHALANX-A7 with the VERITAS-U single-pass union dictionary as its VX stage; same wire and decoder as A7; identity-guarded)', family: 'exact', fidelity: 'exact',
