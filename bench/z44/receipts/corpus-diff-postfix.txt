@@ -1,0 +1,51 @@
+file                              raw dae_old dae_new     d    ana ana_ms dae_ms
+de-kb.txt                         525     495     495    +0    510     17   1066
+es-kb.txt                         457     435     435    +0    457      8   1213
+ja-kb.txt                         655     655     526  -129    655      8   1624
+pl-kb.txt                         623     623     623    +0    623      6   1657
+ru-kb.txt                         478     478     478    +0    478      5   1438
+tr-kb.txt                         554     549     549    +0    554      6    849
+agent-history.md                 1156     295     295    +0    325      4   1803
+chart.svg                        1331     465     465    +0    496      4    590
+component.jsx                     296     296     296    +0    296      3   2200
+dump.sql                         1795     728     728    +0    833      7   6872
+page.html                        3220     610     610    +0    680      6   5132
+paper.tex                         429     407     407    +0    429      3    977
+pom.xml                           544     283     283    +0    324      3   1700
+find-listing.txt                 3997    1326    1326    +0   1423     15  11050
+git-log-fuller.txt                143     143     143    +0    143      8   1149
+git-numstat.txt                  4632    2036    2036    +0   2169     38  19374
+ls-full-iso.txt                  1175     407     407    +0    485      9   4999
+node-stacktraces.txt              568     339     339    +0    376      6   1409
+npm-ls.txt                       2747     983     983    +0   1155     28   5605
+openstack-loghub-26.log          4028    1008    1008    +0   1196     15  13407
+package-lock-head.json          15009    5523    5523    +0   5893    130  96627
+aapl-2014.csv                    3108    1490    1490    +0   1807     21  10137
+vix-daily-1990.csv               3412    1394    1394    +0   1569     29    496
+df-h.txt                          570     281     281    +0    294      1    932
+kubectl-get-pods.txt             1006     386     386    +0    491      4   7940
+markdown-table.md                 330     228     228    +0    251      4    106
+psql-output.txt                   675     397     397    +0    416      2    451
+bibliography.txt                  896     711     711    +0    779      7   2125
+email-thread.txt                  629     525     525    +0    558      4   1688
+kb-article.txt                    656     651     651    +0    656      2    863
+llm-answer.md                     733     707     707    +0    733      3   1164
+meeting-transcript.txt            472     420     420    +0    423      3    596
+unified-diff.patch                578     475     475    +0    492     12    461
+code-dts.txt                      162     108     108    +0    109      2     17
+code-ts.txt                      1422    1028    1028    +0   1151     26   9317
+gh-api.json.txt                  2519    1153    1153    +0   1279     24   4093
+gh-prose.txt                     1934    1782    1782    +0   1847      9   3024
+json-pkg.txt                     1152     743     743    +0    801     10   1893
+lic-mit.txt                       223     223     223    +0    223      1    759
+license.txt                      1166     968     968    +0   1043      9   3078
+md-react.txt                      252     252     252    +0    252      1    747
+md-vite.txt                       274     274     274    +0    274      2    974
+readme.txt                        843     688     688    +0    719      5   1285
+
+TOTALS over 43 files: raw=67374  DAEDALUS before fix=32968  after fix=32839  delta=-129
+ANAMNESIS core (single message) = 35667  (vs DAEDALUS 32839, +2828 = +8.6%)
+encode ms: anamnesis=510  daedalus=232887  ratio=457x faster
+files changed by the DAEDALUS classifier fix / sound escalation:
+   ('bench/holdout-lang/ja-kb.txt', 655, 655, 526, -129)
+all exact: True

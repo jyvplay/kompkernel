@@ -1,0 +1,97 @@
+ANAMNESIS single-message exactness
+  ok   npm-ls.txt gate=false byte-exact
+  ok   npm-ls.txt gate=false M >= wire
+  ok   npm-ls.txt gate=false contract paid once
+  ok   npm-ls.txt gate=true byte-exact
+  ok   npm-ls.txt gate=true M >= wire
+  ok   npm-ls.txt gate=true contract paid once
+  ok   npm-ls.txt gate never loses to DAEDALUS
+  ok   openstack-loghub-26.log gate=false byte-exact
+  ok   openstack-loghub-26.log gate=false M >= wire
+  ok   openstack-loghub-26.log gate=false contract paid once
+  ok   openstack-loghub-26.log gate=true byte-exact
+  ok   openstack-loghub-26.log gate=true M >= wire
+  ok   openstack-loghub-26.log gate=true contract paid once
+  ok   openstack-loghub-26.log gate never loses to DAEDALUS
+  ok   dump.sql gate=false byte-exact
+  ok   dump.sql gate=false M >= wire
+  ok   dump.sql gate=false contract paid once
+  ok   dump.sql gate=true byte-exact
+  ok   dump.sql gate=true M >= wire
+  ok   dump.sql gate=true contract paid once
+  ok   dump.sql gate never loses to DAEDALUS
+  ok   vix-daily-1990.csv gate=false byte-exact
+  ok   vix-daily-1990.csv gate=false M >= wire
+  ok   vix-daily-1990.csv gate=false contract paid once
+  ok   vix-daily-1990.csv gate=true byte-exact
+  ok   vix-daily-1990.csv gate=true M >= wire
+  ok   vix-daily-1990.csv gate=true contract paid once
+  ok   vix-daily-1990.csv gate never loses to DAEDALUS
+  ok   code-ts.txt gate=false byte-exact
+  ok   code-ts.txt gate=false M >= wire
+  ok   code-ts.txt gate=false contract paid once
+  ok   code-ts.txt gate=true byte-exact
+  ok   code-ts.txt gate=true M >= wire
+  ok   code-ts.txt gate=true contract paid once
+  ok   code-ts.txt gate never loses to DAEDALUS
+  ok   meeting-transcript.txt gate=false byte-exact
+  ok   meeting-transcript.txt gate=false M >= wire
+  ok   meeting-transcript.txt gate=false contract paid once
+  ok   meeting-transcript.txt gate=true byte-exact
+  ok   meeting-transcript.txt gate=true M >= wire
+  ok   meeting-transcript.txt gate=true contract paid once
+  ok   meeting-transcript.txt gate never loses to DAEDALUS
+ANAMNESIS determinism (two runs, identical wires)
+  ok   same input -> same wire
+ANAMNESIS session exactness + independent re-decode
+  ok   ops-log-tails encoder-side exact
+  ok   ops-log-tails re-decode from wires alone
+  ok   ops-log-tails session total < raw
+       ops-log-tails: raw=4029 session=1708 (57.6%)
+  ok   vix-monthly encoder-side exact
+  ok   vix-monthly re-decode from wires alone
+  ok   vix-monthly session total < raw
+       vix-monthly: raw=3412 session=1674 (50.9%)
+  ok   pkglock-chunks encoder-side exact
+  ok   pkglock-chunks re-decode from wires alone
+  ok   pkglock-chunks session total < raw
+       pkglock-chunks: raw=15009 session=7001 (53.4%)
+  ok   agent-history encoder-side exact
+  ok   agent-history re-decode from wires alone
+  ok   agent-history session total < raw
+       agent-history: raw=1156 session=687 (40.6%)
+  ok   kb-translations encoder-side exact
+  ok   kb-translations re-decode from wires alone
+  ok   kb-translations session total < raw
+       kb-translations: raw=3292 session=3185 (3.3%)
+  ok   ops-mixed encoder-side exact
+  ok   ops-mixed re-decode from wires alone
+  ok   ops-mixed session total < raw
+       ops-mixed: raw=10599 session=4337 (59.1%)
+  ok   prose-study encoder-side exact
+  ok   prose-study re-decode from wires alone
+  ok   prose-study session total < raw
+       prose-study: raw=4229 session=3685 (12.9%)
+  ok   repo-review encoder-side exact
+  ok   repo-review re-decode from wires alone
+  ok   repo-review session total < raw
+       repo-review: raw=11586 session=9168 (20.9%)
+ANAMNESIS adversarial and edge inputs
+  ok   single empty byte-exact
+  ok   session empty byte-exact
+  ok   single one char byte-exact
+  ok   session one char byte-exact
+  ok   single whitespace only byte-exact
+  ok   session whitespace only byte-exact
+  ok   single markers present in text byte-exact
+  ok   session markers present in text byte-exact
+  ok   single chiron delimiters in text byte-exact
+  ok   session chiron delimiters in text byte-exact
+  ok   single cjk only byte-exact
+  ok   session cjk only byte-exact
+  ok   single repeated long line byte-exact
+  ok   session repeated long line byte-exact
+  ok   single single long token run byte-exact
+  ok   session single long token run byte-exact
+
+ALL CHECKS PASSED (83 checks)
