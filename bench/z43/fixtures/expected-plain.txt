@@ -1,0 +1,1 @@
+Please keep the build green before you merge the branch into main today. The release notes list every change that the team shipped this quarter.
