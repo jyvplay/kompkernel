@@ -138,19 +138,31 @@ function vocabByScript(enc: EncodingName): Map<string, string[]> {
   return out;
 }
 
-export function scriptPool(script: ChironScript, enc: EncodingName, dual = false): ScriptPool {
-  const key = `${script.name}:${enc}:${dual ? 'dual' : 'single'}`;
+/** Z41 pool modes. false: o200k pool. true: every glyph (single or merged) must be one cl100k token too.
+ *  'first': same set as false, but dual-safe single characters come first in pool order (fallback = o200k-only).
+ *  'pairs': all single characters as false; only merged (multi-character) glyphs must be dual-safe. */
+export type DualMode = boolean | 'first' | 'pairs';
+export function scriptPool(script: ChironScript, enc: EncodingName, dual: DualMode = false): ScriptPool {
+  const key = `${script.name}:${enc}:${String(dual)}`;
   const hit = poolCache.get(key);
   if (hit) return hit;
   const all0 = vocabByScript(enc).get(script.name) ?? [];
   // Z40: a glyph that is one token in o200k can cost 2 in cl100k; the dual pool keeps only strings that are one token in both.
-  const all = dual ? all0.filter(s => countTokens(s, 'cl100k_base') === 1) : all0;
+  const isDual = (s: string) => countTokens(s, 'cl100k_base') === 1;
+  const singles0 = all0.filter(s => [...s].length === 1);
+  const multi0 = all0.filter(s => [...s].length > 1);
+  let singles = singles0;
+  let multi = multi0;
+  if (dual === true) { singles = singles0.filter(isDual); multi = multi0.filter(isDual); }
+  if (dual === 'first') singles = [...singles0.filter(isDual), ...singles0.filter(s => !isDual(s))];
+  if (dual === 'pairs') multi = multi0.filter(isDual);
+  const all = [...singles, ...multi];
   const chars: string[] = [];
   const oneSet = new Set<string>();
-  for (const s of all) if ([...s].length === 1) { chars.push(s); oneSet.add(s); }
+  for (const s of singles) { chars.push(s); oneSet.add(s); }
   const pairs = new Set<string>();
   const degree = new Map<string, number>();
-  for (const s of all) {
+  for (const s of multi) {
     const a = [...s];
     if (a.length !== 2) continue;
     if (!oneSet.has(a[0]) || !oneSet.has(a[1])) continue;
@@ -159,7 +171,7 @@ export function scriptPool(script: ChironScript, enc: EncodingName, dual = false
     degree.set(a[1], (degree.get(a[1]) ?? 0) + 1);
   }
   const ngrams = new Map<number, string[]>();
-  for (const s2 of all) {
+  for (const s2 of multi) {
     const a = [...s2];
     if (a.length < 2 || a.length > 6) continue;
     if (!a.every(c => oneSet.has(c))) continue;
@@ -609,7 +621,7 @@ export interface AriadneOptions {
   /** allow the pooled 14-script alphabet (SIBYL uses it; ARIADNE stays fixed) */
   allowPolyglot?: boolean;
   /** Z40: glyphs must be ONE token under o200k_base AND cl100k_base (encoder-only; decoder unchanged) */
-  dualTokenizer?: boolean;
+  dualTokenizer?: DualMode;
   /** disable the rule-set local search (ablation) */
   noSearch?: boolean;
   /** disable the CHIRON structural block pass (ablation) */
@@ -830,7 +842,7 @@ export function buildOn(text: string, enc: EncodingName, sep: string, opts: Requ
   return renderBest(g, text, enc, { script: opts.script, noAssign: opts.noAssign, budgetMs: opts.budgetMs, allowPolyglot: opts.allowPolyglot, dualTokenizer: opts.dualTokenizer }, deadline, estAfterGrammar, searchGain, estBefore);
 }
 
-export interface AssignOpts { script?: string; noAssign: boolean; budgetMs: number; scriptTries?: number; probeScale?: number; allowPolyglot?: boolean; dualTokenizer?: boolean }
+export interface AssignOpts { script?: string; noAssign: boolean; budgetMs: number; scriptTries?: number; probeScale?: number; allowPolyglot?: boolean; dualTokenizer?: DualMode }
 
 /**
  * Render a finished grammar and choose the rule->glyph assignment.
@@ -893,7 +905,7 @@ export function renderBest(
   const allowed = o.script ? CHIRON_SCRIPTS.filter(s2 => s2.name === o.script)
     : CHIRON_SCRIPTS.filter(s2 => (o.allowPolyglot ? true : s2.name !== 'polyglot'));
   const cands = allowed
-    .map(s2 => ({ s: s2, pool: scriptPool(s2, enc, !!o.dualTokenizer) }))
+    .map(s2 => ({ s: s2, pool: scriptPool(s2, enc, o.dualTokenizer ?? false) }))
     .map(({ s: s2, pool }) => ({ s: s2, pool, chars: pool.chars.filter(c => !payload.has(c)) }))
     .filter(x => x.chars.length >= needed)
     // more usable merge edges first; ties by alphabet size (headroom)

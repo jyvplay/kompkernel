@@ -208,7 +208,7 @@ export function daedalusEncode(text: string, enc: EncodingName = 'o200k_base', o
     if (!arm) return;
     let r: any = null;
     try {
-      const shared = { maxSpan: arm.maxSpan, levels: arm.levels, topK: arm.topK, noBlocks: !!options.noBlocks, sep: options.sep, dualTokenizer: !!options.dualTokenizer };
+      const shared = { maxSpan: arm.maxSpan, levels: arm.levels, topK: arm.topK, noBlocks: !!options.noBlocks, sep: options.sep, dualTokenizer: options.dualTokenizer ?? false };
       r = arm.words > 0
         ? sibylEncode(text, enc, { ...shared, wordGrid: [arm.words] })
         : ariadneEncode(text, enc, shared);
