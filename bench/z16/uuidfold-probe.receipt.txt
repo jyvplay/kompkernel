@@ -1,0 +1,3 @@
+{"f":"bench/holdout-ops/openstack-loghub-26.log","uuids":36,"mode":"uuidfold","identity":4028,"uuidfold":3900,"amphora":998,"uuidfold_plus_amphora":957,"exact_uuidfold":true,"exact_amphora":true,"exact_uf_amph":true,"decodeCheck":true}
+{"f":"bench/z11/fold-chiron-55.jsonl","chars":340391,"uuids":1,"mode":"identity","identityTok":102685,"uuidfoldTok":102685,"exact":true}
+{"f":"bench/z11/hyle-fast-55.jsonl","chars":617592,"uuids":39,"mode":"uuidfold","identityTok":175172,"uuidfoldTok":175029,"exact":true}

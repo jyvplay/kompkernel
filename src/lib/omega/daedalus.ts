@@ -1,3 +1,4 @@
+import { now } from './clock';
 /**
  * DAEDALUS — read the grain of the material before you cut it.
  * =============================================================================
@@ -173,7 +174,7 @@ function rawResult(text: string, enc: EncodingName, started: number, f: Features
     codec: 'daedalus', wire, decoded: chironDecode(wire), exact: chironDecode(wire) === text,
     inTokens, outTokens: out, messageTokens, contractTokens: messageTokens - out,
     decoderPrompt: prompt, savingsPct: 0, phraseRules: 0, wordRules: 0, blocks: 0, lists: 0,
-    script: 'none', ops: [], ms: Date.now() - started, mode: forced ? 'forced-wrap' : 'raw',
+    script: 'none', ops: [], ms: now() - started, mode: forced ? 'forced-wrap' : 'raw',
     notes: forced ? 'payload is itself a decodable program; exact 2-token wrapper' : 'identity: no framing pays here',
     assignmentGain: 0, armsRun: 0, defaultM: messageTokens, winningArm: 'none', predictedArm: 'none',
     predictionHit: false, features: f,
@@ -183,7 +184,7 @@ function rawResult(text: string, enc: EncodingName, started: number, f: Features
 interface Cand { wire: string; tokens: number; M: number; tag: string; gain: number; phrase: number; words: number; blocks: number; lists: number; script: string }
 
 export function daedalusEncode(text: string, enc: EncodingName = 'o200k_base', options: DaedalusOptions = {}): DaedalusResult {
-  const started = Date.now();
+  const started = now();
   const inTokens = countTokens(text, enc);
   const f = daedalusFeatures(text, enc);
   const raw = rawResult(text, enc, started, f);
@@ -207,7 +208,7 @@ export function daedalusEncode(text: string, enc: EncodingName = 'o200k_base', o
     if (!arm) return;
     let r: any = null;
     try {
-      const shared = { maxSpan: arm.maxSpan, levels: arm.levels, topK: arm.topK, noBlocks: !!options.noBlocks, sep: options.sep };
+      const shared = { maxSpan: arm.maxSpan, levels: arm.levels, topK: arm.topK, noBlocks: !!options.noBlocks, sep: options.sep, dualTokenizer: options.dualTokenizer ?? false };
       r = arm.words > 0
         ? sibylEncode(text, enc, { ...shared, wordGrid: [arm.words] })
         : ariadneEncode(text, enc, shared);
@@ -223,7 +224,7 @@ export function daedalusEncode(text: string, enc: EncodingName = 'o200k_base', o
   };
 
   for (let i = 0; i < maxArms; i++) {
-    if (i > 0 && Date.now() > deadline) break;
+    if (i > 0 && now() > deadline) break;
     runArm(order[i]);
   }
   if (!cands.length) return raw;
@@ -258,7 +259,7 @@ export function daedalusEncode(text: string, enc: EncodingName = 'o200k_base', o
     lists: best.lists,
     script: best.script,
     ops,
-    ms: Date.now() - started,
+    ms: now() - started,
     mode: 'daedalus',
     notes: `predicted "${predicted}" from punct=${f.punctPct.toFixed(1)}% tokens=${f.tokens}; ran ${armsRun} arm(s); winner "${best.tag}"${best.tag === predicted ? ' (prediction hit)' : ' (prediction miss)'}; ${best.phrase} phrase + ${best.words} single-token rules, ${best.blocks} blocks, ${best.lists} lists; script=${best.script}; beat the plain default arm by ${(def ? def.M : best.M) - best.M}; contract=${best.M - best.tokens}`,
     assignmentGain: best.gain,

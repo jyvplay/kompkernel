@@ -1,0 +1,9 @@
+bench/holdout-ops/openstack-loghub-26.log: identity=4028 A3=1335 A3(fold)=1592 (19.25%)
+bench/holdout-ops/node-stacktraces.txt: identity=568 A3=457 A3(fold)=619 (35.45%)
+bench/holdout-ops/git-numstat.txt: identity=4632 A3=2811 A3(fold)=2660 (-5.37%)
+bench/holdout-ops/find-listing.txt: identity=3997 A3=1588 A3(fold)=2225 (40.11%)
+bench/holdout-ops/ls-full-iso.txt: identity=1175 A3=653 A3(fold)=813 (24.50%)
+bench/holdout-ops/npm-ls.txt: identity=2747 A3=1693 A3(fold)=1767 (4.37%)
+bench/holdout-ops/git-log-fuller.txt: identity=143 A3=143 A3(fold)=209 (46.15%)
+bench/z20/samples/git-log-iso.txt: identity=1947 A3=1753 A3(fold)=2095 (19.51%)
+ALL identity=19237 A3=10433 A3(fold)=11980 (14.83%) fold roundtrip failures=0

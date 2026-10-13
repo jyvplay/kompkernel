@@ -1,0 +1,7 @@
+prose         VXA-best3 4550 old=70 net=67 cw=67
+wrapped_docs  VXA-best3 39423 old=-409 net=-418 cw=-355
+code          VXA-best3 4188 old=-43 net=57 cw=136
+ops           VXA-best3 26674 old=-1716 net=80 cw=462
+ops_real      VXA-best3 17068 old=-166 net=643 cw=1015
+realjson      VXA-best3 4336 old=20 net=93 cw=57
+round-trip failures 0

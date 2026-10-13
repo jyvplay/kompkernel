@@ -1,0 +1,46 @@
+prose gh-prose.txt wide=1934 dae=1782
+prose readme.txt wide=843 dae=688
+prose license.txt wide=1166 dae=1015
+prose lic-mit.txt wide=223 dae=223
+prose md-react.txt wide=252 dae=252
+prose md-vite.txt wide=274 dae=274
+wrapped_docs git-manual.adoc wide=11438 dae=8800
+wrapped_docs git-readme.md wide=874 dae=824
+wrapped_docs linux-changes.rst wide=3742 dae=3188
+wrapped_docs linux-coding-style.rst wide=10346 dae=9229
+wrapped_docs linux-howto.rst wide=5949 dae=5194
+wrapped_docs linux-submitting-patches.rst wide=9443 dae=8089
+code code-ts.txt wide=1422 dae=1061
+code code-dts.txt wide=112 dae=108
+code json-pkg.txt wide=1078 dae=743
+code gh-api.json.txt wide=2070 dae=1153
+ops find-listing.txt wide=2621 dae=1326
+ops git-log-fuller.txt wide=143 dae=143
+ops git-numstat.txt wide=4632 dae=2036
+ops ls-full-iso.txt wide=541 dae=413
+ops node-stacktraces.txt wide=409 dae=348
+ops npm-ls.txt wide=1960 dae=1001
+ops openstack-loghub-26.log wide=1318 dae=1047
+ops package-lock-head.json wide=11540 dae=5523
+ops find-printf-src.txt wide=3606 dae=2011
+ops git-log-iso.txt wide=1947 dae=1560
+ops ls-omega-full-iso.txt wide=2602 dae=1281
+ops_real df-h.txt wide=131 dae=131
+ops_real dpkg-l.txt wide=8975 dae=4669
+ops_real du-usr-share.txt wide=1114 dae=794
+ops_real free-h.txt wide=64 dae=64
+ops_real ls-usr-bin.txt wide=9488 dae=3785
+ops_real ls-usr-lib.txt wide=625 dae=346
+ops_real os-release.txt wide=79 dae=79
+ops_real ps-eo.txt wide=1504 dae=852
+ops_real ss-tln.txt wide=100 dae=100
+ops_real uname.txt wide=40 dae=40
+realjson react-latest.json wide=1010 dae=821
+realjson typescript-latest.json wide=1486 dae=1001
+realjson vite-latest.json wide=2355 dae=1573
+SUM prose         n 6 wide 4692 dae 4234 10.82%
+SUM wrapped_docs  n 6 wide 41792 dae 35324 18.31%
+SUM code          n 4 wide 4682 dae 3065 52.76%
+SUM ops           n 11 wide 31319 dae 16689 87.66%
+SUM ops_real      n 10 wide 22120 dae 10860 103.68%
+SUM realjson      n 3 wide 4851 dae 3395 42.89%

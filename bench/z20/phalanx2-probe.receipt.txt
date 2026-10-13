@@ -1,0 +1,20 @@
+file | identity | VERITAS-VX | PHALANX-P1 | PHALANX-P2 | P2-vs-P1 | P2 mode | KOINE | exact(P1,P2)
+holdout-ops/find-listing.txt | 3997 | 2817 | 2427 | 1678 | -749 | phalanx2 | kept | true,true
+holdout-ops/ls-full-iso.txt | 1175 | 1175 | 677 | 677 | +0 | phalanx2 | off | true,true
+holdout-ops/git-numstat.txt | 4632 | 3786 | 3535 | 3535 | +0 | phalanx2 | off | true,true
+holdout-ops/npm-ls.txt | 2747 | 1931 | 1970 | 1970 | +0 | phalanx2 | off | true,true
+holdout-ops/node-stacktraces.txt | 568 | 568 | 461 | 461 | +0 | phalanx2 | off | true,true
+holdout-ops/openstack-loghub-26.log | 4028 | 1841 | 1526 | 1526 | +0 | phalanx2 | off | true,true
+holdout-ops/git-log-fuller.txt | 143 | 138 | 138 | 138 | +0 | phalanx2 | off | true,true
+holdout-ops/package-lock-head.json | 15009 | 10325 | 10359 | 10359 | +0 | phalanx2 | off | true,true
+holdout/code-dts.txt | 162 | 99 | 99 | 99 | +0 | phalanx2 | off | true,true
+holdout/code-ts.txt | 1422 | 1395 | 1395 | 1395 | +0 | phalanx2 | off | true,true
+holdout/gh-api.json.txt | 2519 | 2059 | 2029 | 2029 | +0 | phalanx2 | off | true,true
+holdout/gh-prose.txt | 1934 | 1918 | 1918 | 1918 | +0 | phalanx2 | off | true,true
+holdout/json-pkg.txt | 1152 | 1036 | 1036 | 1036 | +0 | phalanx2 | off | true,true
+holdout/lic-mit.txt | 223 | 223 | 223 | 223 | +0 | identity | off | true,true
+holdout/license.txt | 1166 | 1122 | 1122 | 1122 | +0 | phalanx2 | off | true,true
+holdout/md-react.txt | 252 | 252 | 252 | 252 | +0 | identity | off | true,true
+holdout/md-vite.txt | 274 | 274 | 274 | 274 | +0 | identity | off | true,true
+holdout/readme.txt | 843 | 776 | 776 | 776 | +0 | phalanx2 | off | true,true
+TOTAL identity=42246 P1=30217 P2=29468 (P2-P1=-749) files_where_P2_larger_than_P1=0 any_exact_fail=false

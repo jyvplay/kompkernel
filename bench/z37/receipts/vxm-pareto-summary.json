@@ -1,0 +1,74 @@
+{
+ "lanes": {
+  "code": {
+   "n": 4,
+   "a10_measured": 4,
+   "vxm": 3153,
+   "frontier": 3065,
+   "dae": 3065,
+   "vxm_vs_frontier_pct": 2.87,
+   "files_vxm_smaller": 1
+  },
+  "fresh": {
+   "n": 111,
+   "a10_measured": 0,
+   "vxm": 254521,
+   "frontier": 231785,
+   "dae": 231785,
+   "vxm_vs_frontier_pct": 9.81,
+   "files_vxm_smaller": 15
+  },
+  "ops": {
+   "n": 11,
+   "a10_measured": 11,
+   "vxm": 18166,
+   "frontier": 16689,
+   "dae": 16689,
+   "vxm_vs_frontier_pct": 8.85,
+   "files_vxm_smaller": 0
+  },
+  "ops_real": {
+   "n": 10,
+   "a10_measured": 10,
+   "vxm": 12339,
+   "frontier": 10860,
+   "dae": 10860,
+   "vxm_vs_frontier_pct": 13.62,
+   "files_vxm_smaller": 0
+  },
+  "prose": {
+   "n": 6,
+   "a10_measured": 6,
+   "vxm": 4309,
+   "frontier": 4234,
+   "dae": 4234,
+   "vxm_vs_frontier_pct": 1.77,
+   "files_vxm_smaller": 0
+  },
+  "realjson": {
+   "n": 3,
+   "a10_measured": 3,
+   "vxm": 3462,
+   "frontier": 3395,
+   "dae": 3395,
+   "vxm_vs_frontier_pct": 1.97,
+   "files_vxm_smaller": 0
+  },
+  "wrapped_docs": {
+   "n": 6,
+   "a10_measured": 6,
+   "vxm": 38542,
+   "frontier": 35324,
+   "dae": 35324,
+   "vxm_vs_frontier_pct": 9.11,
+   "files_vxm_smaller": 0
+  }
+ },
+ "total": {
+  "n": 151,
+  "exact": 151,
+  "vxm": 334492,
+  "frontier": 305352,
+  "files_vxm_smaller": 16
+ }
+}

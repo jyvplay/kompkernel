@@ -512,6 +512,7 @@ export function sequoyahEncode(text: string, enc: EncodingName = 'o200k_base', o
     noSearch: options.noSearch ?? false,
     noBlocks: options.noBlocks ?? false,
     allowPolyglot: true,
+    dualTokenizer: false,
     script: options.script,
   };
 

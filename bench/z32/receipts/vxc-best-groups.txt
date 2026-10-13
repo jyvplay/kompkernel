@@ -1,0 +1,7 @@
+prose         docs   6 first 4609 best(min-guard) 4565 -0.95% 5s
+wrapped_docs  docs   6 first 38398 best(min-guard) 38398 0.00% 57s
+code          docs   4 first 3933 best(min-guard) 3610 -8.21% 10s
+ops           docs  11 first 23876 best(min-guard) 18740 -21.51% 85s
+ops_real      docs  10 first 16451 best(min-guard) 13315 -19.06% 104s
+realjson      docs   3 first 4196 best(min-guard) 3934 -6.24% 7s
+total secs 268

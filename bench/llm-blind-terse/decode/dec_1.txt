@@ -1,0 +1,14 @@
+[node-0] service checkout-service health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for checkout-service.
+[node-1] service payments-gateway health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for payments-gateway.
+[node-2] service inventory-sync health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for inventory-sync.
+[node-0] service notification-worker health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for notification-worker.
+[node-1] service checkout-service health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for checkout-service.
+[node-2] service payments-gateway health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for payments-gateway.
+[node-0] service inventory-sync health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for inventory-sync.
+[node-1] service notification-worker health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for notification-worker.
+[node-2] service checkout-service health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for checkout-service.
+[node-0] service payments-gateway health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for payments-gateway.
+[node-1] service inventory-sync health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for inventory-sync.
+[node-2] service notification-worker health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for notification-worker.
+[node-0] service checkout-service health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for checkout-service.
+[node-1] service payments-gateway health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open for payments-gateway.

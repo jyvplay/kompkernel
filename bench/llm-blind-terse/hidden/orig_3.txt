@@ -1,0 +1,16 @@
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 00).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 01).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 02).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 03).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 04).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 05).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 06).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 07).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 08).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 09).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 10).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 11).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 12).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 13).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 14).
+export bucket for the customer export job is set to s3://exports-prod/customer-export/ and region us-east-1 (job 15).

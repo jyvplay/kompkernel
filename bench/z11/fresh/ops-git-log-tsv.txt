@@ -1,0 +1,18 @@
+4092a63\tjyvplay\t2026-10-11\tZ10: AMPHORA (DAEDALUS || CHIRON exact-gated min): exact 55/55, gains on 2 of 55 docs (micromatch -36.8%, ja-kb -12.2%), independent reader 38/38; honest narrow result; tsc exit 0
+34d4290\tjyvplay\t2026-10-11\tZ9: register TABMIN (fresh blind fixtures 2/2 first-pass exact; round-trip 96/96 rectangular exact; tsc exit 0); report corrected
+c94d64f\tjyvplay\t2026-10-11\tZ9: table 3 diagnosis: hand-expansion error; mechanical decode matches fixture (contaminated, disclosed); no registration
+57511f2\tjyvplay\t2026-10-11\tZ9: correct report to verified facts only (README fetched; unverified TABMIN cell counts removed)
+373e4ce\tjyvplay\t2026-10-11\tZ9: status record; openai/math count verified against primary README; readability-policy decision recorded
+3ca89f8\tjyvplay\t2026-10-11\tZ8: readability gate for TABMIN column arm (pre-registered); table 2/3 self-decodes with receipts; TABMIN stays unregistered
+84bd67d\tjyvplay\t2026-10-11\tZ7: KLIMAX and NUMLIST negative probes, frontier audit, new-source record (no codec registered)
+f069676\tjyvplay\t2026-10-11\tTABMIN experiment (unregistered): per-table row/column arm over LAKONIKOS
+93c9cd6\tjyvplay\t2026-10-10\tCTXCOPY: copy-from-earlier-chat-text codec (conditional lane) with receipts
+6fc569a\tjyvplay\t2026-10-10\tLAKONIKOS: DAEDALUS wire with terse decoder contract (same wire and decoder; -10 tokens per rule-based message, 43/43 exact, never worse than DAEDALUS). Negative: line-prefix elision (no reliable gate). Readability: 3/3 self-decodes byte-exact (n=3, self-review only).
+3e3ef75\tjyvplay\t2026-10-10\tPR frontier review (2026-10-10): DAEDALUS is the real frontier reference; PR #2 starlight family negative (system prompt, +wire); PR #23 kalligraphos no Pareto gain (email -13 only, nondeterministic)
+6999ebc\tjyvplay\t2026-10-10\tANTIPHON (negative, not registered): line copy-with-edits over KAIROS, 0/49 wins; blind LLM-decode harness 3/3 self-decodes
+b7f55c4\tjyvplay\t2026-10-10\tKAIROS: CHIRON search with exact faster span enumeration and deterministic work-unit budget
+6d21368\tArena Agent\t2026-10-10\tPERIODOS: wrapped-subset results (84 docs, +664 tok aggregate, GPL/CECILL/AGPL −270..−300), CHIRON wall-clock budget finding, codebase/PR/openai-math review
+b32556c\tArena Agent\t2026-10-10\tPERIODOS: per-paragraph measure codec for hard-wrapped prose (exact decode-gated arms; red-team 311/0; corpus bench; CHIRON budget finding)
+10e16b2\tarena-agent\t2026-10-10\tSTICHOS report: honest measured results (CHIRON + METATRON incumbents, GPL-3 second corpus), negative space, verification gates
+32155ac\tarena-agent\t2026-10-10\tSTICHOS: verse-line layout codec (greedy-refill of hard-wrapped paragraphs), stacked over CHIRON and METATRON; decode-verified arms, registry entries, benches
+594b8a5\tjyvplay\t2026-10-09\tMerge pull request #25 from jyvplay/arena/e58fbcaa-kompkernel

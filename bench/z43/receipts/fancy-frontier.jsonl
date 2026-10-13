@@ -1,0 +1,12 @@
+{"file":"fancy-plain-post.txt","enc":"o200k_base","dual":false,"inTokens":2015,"messageTokens":1193,"mode":"daedalus","exact":true}
+{"file":"fancy-plain-post.txt","enc":"o200k_base","dual":true,"inTokens":2015,"messageTokens":1253,"mode":"daedalus","exact":true}
+{"file":"fancy-plain-post.txt","enc":"cl100k_base","dual":false,"inTokens":2343,"messageTokens":1561,"mode":"daedalus","exact":true}
+{"file":"fancy-plain-post.txt","enc":"cl100k_base","dual":true,"inTokens":2343,"messageTokens":1561,"mode":"daedalus","exact":true}
+{"file":"fancy-families.txt","enc":"o200k_base","dual":false,"inTokens":626,"messageTokens":626,"mode":"raw","exact":true}
+{"file":"fancy-families.txt","enc":"o200k_base","dual":true,"inTokens":626,"messageTokens":626,"mode":"raw","exact":true}
+{"file":"fancy-families.txt","enc":"cl100k_base","dual":false,"inTokens":658,"messageTokens":658,"mode":"raw","exact":true}
+{"file":"fancy-families.txt","enc":"cl100k_base","dual":true,"inTokens":658,"messageTokens":658,"mode":"raw","exact":true}
+{"file":"fancy-digits.txt","enc":"o200k_base","dual":false,"inTokens":90,"messageTokens":90,"mode":"raw","exact":true}
+{"file":"fancy-digits.txt","enc":"o200k_base","dual":true,"inTokens":90,"messageTokens":90,"mode":"raw","exact":true}
+{"file":"fancy-digits.txt","enc":"cl100k_base","dual":false,"inTokens":110,"messageTokens":110,"mode":"raw","exact":true}
+{"file":"fancy-digits.txt","enc":"cl100k_base","dual":true,"inTokens":110,"messageTokens":110,"mode":"raw","exact":true}

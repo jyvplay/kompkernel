@@ -1,3 +1,4 @@
+import { now } from './clock';
 /**
  * SIBYL — the leaves of the Cumaean Sibyl: the message is written in a script
  * the tokenizer itself reads more cheaply than the language it encodes.
@@ -255,7 +256,7 @@ function rawResult(text: string, enc: EncodingName, started: number): SibylResul
     codec: 'sibyl', wire, decoded: chironDecode(wire), exact: chironDecode(wire) === text,
     inTokens, outTokens: out, messageTokens, contractTokens: messageTokens - out,
     decoderPrompt: prompt, savingsPct: 0, phraseRules: 0, wordRules: 0, blocks: 0, lists: 0,
-    script: 'none', ops: [], ms: Date.now() - started, mode: forced ? 'forced-wrap' : 'raw',
+    script: 'none', ops: [], ms: now() - started, mode: forced ? 'forced-wrap' : 'raw',
     notes: forced ? 'payload is itself a decodable program; exact 2-token wrapper' : 'identity: no framing pays here',
     baselineM: messageTokens, assignmentGain: 0,
   };
@@ -268,7 +269,7 @@ function rawResult(text: string, enc: EncodingName, started: number): SibylResul
 interface Cand { out: BuildOut; M: number; words: number; cap: number; blocks: boolean }
 
 export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', options: SibylOptions = {}): SibylResult {
-  const started = Date.now();
+  const started = now();
   const inTokens = countTokens(text, enc);
   const raw = rawResult(text, enc, started);
   if (text.length < 16) return raw;
@@ -288,6 +289,7 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
     levels: options.levels ?? 6,
     noAssign: true,           // the grammar phase never needs the expensive step
     allowPolyglot: true,      // SIBYL is the codec that uses the pooled alphabet
+    dualTokenizer: options.dualTokenizer ?? false,   // Z40: glyphs one token under o200k AND cl100k
     noSearch: options.noSearch ?? false,
     noBlocks: options.noBlocks ?? false,
     script: options.script,
@@ -303,7 +305,7 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
       let bestGain = -1;
       for (const cand of seps) {
         let gain = 0;
-        try { for (const b of chironFindBlocks(text, blank, cand, enc, Date.now() + 1000)) gain += b.gain; } catch { gain = -1; }
+        try { for (const b of chironFindBlocks(text, blank, cand, enc, now() + 1000)) gain += b.gain; } catch { gain = -1; }
         if (gain > bestGain) { bestGain = gain; sep = cand; }
       }
     }
@@ -313,12 +315,12 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
   const grammars: Array<{ g: Grammar; blocks: boolean }> = [];
   for (const trySep of [sep, ...seps.filter(x => x !== sep)]) {
     let g0: BuildOut | null = null;
-    try { g0 = buildOn(text, enc, trySep, base, Math.min(overall, Date.now() + budgetMs)); } catch { g0 = null; }
+    try { g0 = buildOn(text, enc, trySep, base, Math.min(overall, now() + budgetMs)); } catch { g0 = null; }
     if (!g0) continue;                       // never give up on one separator
     grammars.push({ g: g0.g, blocks: g0.g.blocks.length > 0 });
-    if (g0.g.blocks.length && !options.noBlocks && Date.now() < overall - 500) {
+    if (g0.g.blocks.length && !options.noBlocks && now() < overall - 500) {
       let g1: BuildOut | null = null;
-      try { g1 = buildOn(text, enc, trySep, { ...base, noBlocks: true }, Math.min(overall, Date.now() + budgetMs)); } catch { g1 = null; }
+      try { g1 = buildOn(text, enc, trySep, { ...base, noBlocks: true }, Math.min(overall, now() + budgetMs)); } catch { g1 = null; }
       if (g1) grammars.push({ g: g1.g, blocks: false });
     }
     break;
@@ -331,8 +333,8 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
     if (!plan) return null;
     let out: BuildOut | null = null;
     try {
-      out = renderBest(g, text, enc, { script: options.script, noAssign: false, budgetMs, probeScale, scriptTries: tries, allowPolyglot: poly },
-        Math.min(overall, Date.now() + Math.max(500, budgetMs)), grammarCost(g, enc), 0);
+      out = renderBest(g, text, enc, { script: options.script, noAssign: false, budgetMs, probeScale, scriptTries: tries, allowPolyglot: poly, dualTokenizer: options.dualTokenizer ?? false },
+        Math.min(overall, now() + Math.max(500, budgetMs)), grammarCost(g, enc), 0);
     } catch { out = null; }
     if (!out) return null;
     if (chironDecode(out.wire) !== text) return null;
@@ -400,7 +402,7 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
       contractTokens: fromAriadne.contractTokens, decoderPrompt: fromAriadne.decoderPrompt,
       savingsPct: fromAriadne.savingsPct, phraseRules: fromAriadne.rules, wordRules: 0,
       blocks: fromAriadne.blocks, lists: fromAriadne.lists, script: fromAriadne.script,
-      ops: fromAriadne.ops, ms: Date.now() - started, mode: 'sibyl',
+      ops: fromAriadne.ops, ms: now() - started, mode: 'sibyl',
       notes: `no admissible single-token rule set beat the plain grammar here; fell back to the ARIADNE arm (${fromAriadne.notes})`,
       baselineM: fromAriadne.messageTokens, assignmentGain: fromAriadne.assignmentGain,
     };
@@ -440,7 +442,7 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
     lists: g.lists.length,
     script: best.out.scriptName,
     ops,
-    ms: Date.now() - started,
+    ms: now() - started,
     mode: 'sibyl',
     notes: `${phraseCount} phrase rules + ${wordCount} single-token rules (cap=${best.cap < 0 ? 'none' : best.cap}), ${g.blocks.length} blocks, ${g.lists.length} lists; script=${best.out.scriptName}; assignment -${best.out.assignmentGain}; word rules -${(zeroWord ? zeroWord.M : best.M) - best.M} tokens vs the same search with none; contract=${best.M - best.out.tokens}`,
     baselineM: zeroWord ? zeroWord.M : best.M,

@@ -1,0 +1,129 @@
+{
+ "exact": 151,
+ "n": 151,
+ "legend": {
+  "escape": 125,
+  "none": 19,
+  "minimal": 7
+ },
+ "all": {
+  "lanes": {
+   "code": {
+    "n": 4,
+    "vxq": 3113,
+    "frontier": 3065,
+    "pct": 1.57,
+    "filesSmaller": 1
+   },
+   "fresh": {
+    "n": 111,
+    "vxq": 253463,
+    "frontier": 231785,
+    "pct": 9.35,
+    "filesSmaller": 22
+   },
+   "ops": {
+    "n": 11,
+    "vxq": 18066,
+    "frontier": 16689,
+    "pct": 8.25,
+    "filesSmaller": 0
+   },
+   "ops_real": {
+    "n": 10,
+    "vxq": 12289,
+    "frontier": 10860,
+    "pct": 13.16,
+    "filesSmaller": 1
+   },
+   "prose": {
+    "n": 6,
+    "vxq": 4271,
+    "frontier": 4234,
+    "pct": 0.87,
+    "filesSmaller": 1
+   },
+   "realjson": {
+    "n": 3,
+    "vxq": 3432,
+    "frontier": 3395,
+    "pct": 1.09,
+    "filesSmaller": 0
+   },
+   "wrapped_docs": {
+    "n": 6,
+    "vxq": 38482,
+    "frontier": 35324,
+    "pct": 8.94,
+    "filesSmaller": 1
+   }
+  },
+  "total": {
+   "n": 151,
+   "vxq": 333116,
+   "frontier": 305352,
+   "pct": 9.09,
+   "filesSmaller": 26
+  }
+ },
+ "excludingDaeIdentity": {
+  "lanes": {
+   "code": {
+    "n": 4,
+    "vxq": 3113,
+    "frontier": 3065,
+    "pct": 1.57,
+    "filesSmaller": 1
+   },
+   "fresh": {
+    "n": 100,
+    "vxq": 243860,
+    "frontier": 220746,
+    "pct": 10.47,
+    "filesSmaller": 20
+   },
+   "ops": {
+    "n": 10,
+    "vxq": 17923,
+    "frontier": 16546,
+    "pct": 8.32,
+    "filesSmaller": 0
+   },
+   "ops_real": {
+    "n": 5,
+    "vxq": 11875,
+    "frontier": 10446,
+    "pct": 13.68,
+    "filesSmaller": 1
+   },
+   "prose": {
+    "n": 3,
+    "vxq": 3522,
+    "frontier": 3485,
+    "pct": 1.06,
+    "filesSmaller": 1
+   },
+   "realjson": {
+    "n": 3,
+    "vxq": 3432,
+    "frontier": 3395,
+    "pct": 1.09,
+    "filesSmaller": 0
+   },
+   "wrapped_docs": {
+    "n": 6,
+    "vxq": 38482,
+    "frontier": 35324,
+    "pct": 8.94,
+    "filesSmaller": 1
+   }
+  },
+  "total": {
+   "n": 131,
+   "vxq": 322207,
+   "frontier": 293007,
+   "pct": 9.97,
+   "filesSmaller": 24
+  }
+ }
+}

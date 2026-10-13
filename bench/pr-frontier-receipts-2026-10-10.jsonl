@@ -1,0 +1,12 @@
+{"file":"bench/holdout/readme.txt","codec":"kairos","raw":843,"msg":704,"exact":true,"systemPromptTok":0}
+{"file":"bench/holdout/readme.txt","codec":"starlight","raw":843,"msg":911,"wireTok":737,"exact":true,"systemPromptTok":174,"mode":"starlight"}
+{"file":"bench/holdout/readme.txt","codec":"kalligraphos","raw":843,"msg":688,"exact":true,"mode":"daedalus"}
+{"file":"bench/holdout-work/email-thread.txt","codec":"kairos","raw":629,"msg":558,"exact":true,"systemPromptTok":0}
+{"file":"bench/holdout-work/email-thread.txt","codec":"starlight","raw":629,"msg":761,"wireTok":587,"exact":true,"systemPromptTok":174,"mode":"starlight"}
+{"file":"bench/holdout-work/email-thread.txt","codec":"kalligraphos","raw":629,"msg":525,"exact":true,"mode":"daedalus"}
+{"file":"/home/user/corpus/licenses/gpl-3.0.txt","codec":"kairos","raw":7737,"msg":6673,"exact":true,"systemPromptTok":0}
+{"file":"/home/user/corpus/licenses/gpl-3.0.txt","codec":"starlight","raw":7737,"msg":7615,"wireTok":7441,"exact":true,"systemPromptTok":174,"mode":"starlight"}
+{"file":"/home/user/corpus/licenses/gpl-3.0.txt","codec":"kalligraphos","raw":7737,"msg":6468,"exact":true,"mode":"daedalus"}
+{"file":"bench/holdout-ops/find-listing.txt","codec":"kairos","raw":3997,"msg":1382,"exact":true,"systemPromptTok":0}
+{"file":"bench/holdout-ops/find-listing.txt","codec":"starlight","raw":3997,"msg":1736,"wireTok":1562,"exact":true,"systemPromptTok":174,"mode":"starlight"}
+{"file":"bench/holdout-ops/find-listing.txt","codec":"kalligraphos","raw":3997,"msg":1326,"exact":true,"mode":"daedalus"}

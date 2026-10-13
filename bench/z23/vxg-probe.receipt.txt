@@ -1,0 +1,27 @@
+prose gh-prose.txt: id=1934 VX1=1954 VXG=1934 (-20) rules=0
+prose readme.txt: id=843 VX1=812 VXG=843 (31) rules=0
+prose license.txt: id=1166 VX1=1158 VXG=1166 (8) rules=0
+prose lic-mit.txt: id=223 VX1=223 VXG=223 (0) rules=0
+prose md-react.txt: id=252 VX1=252 VXG=252 (0) rules=0
+prose md-vite.txt: id=274 VX1=274 VXG=274 (0) rules=0
+code code-ts.txt: id=1422 VX1=1431 VXG=1422 (-9) rules=0
+code code-dts.txt: id=162 VX1=135 VXG=162 (27) rules=0
+code json-pkg.txt: id=1152 VX1=1072 VXG=1137 (65) rules=5
+code gh-api.json.txt: id=2519 VX1=2095 VXG=2255 (160) rules=18
+ops find-listing.txt: id=3997 VX1=2853 VXG=3020 (167) rules=10
+ops git-log-fuller.txt: id=143 VX1=174 VXG=143 (-31) rules=0
+ops git-numstat.txt: id=4632 VX1=3822 VXG=4435 (613) rules=6
+ops ls-full-iso.txt: id=1175 VX1=1175 VXG=1012 (-163) rules=10
+ops node-stacktraces.txt: id=568 VX1=568 VXG=592 (24) rules=3
+ops npm-ls.txt: id=2747 VX1=1967 VXG=2705 (738) rules=3
+ops openstack-loghub-26.log: id=4028 VX1=1877 VXG=3344 (1467) rules=23
+ops package-lock-head.json: id=15009 VX1=10361 VXG=13468 (3107) rules=23
+ops find-printf-src.txt: id=8493 VX1=6480 VXG=5846 (-634) rules=10
+ops git-log-iso.txt: id=1947 VX1=1835 VXG=1858 (23) rules=7
+ops ls-omega-full-iso.txt: id=7426 VX1=3033 VXG=5418 (2385) rules=10
+TOTAL prose: n=6 identity=4692 VX1+legend=4653 VXG+legend=4692 (VXG-VX1=39, 0.84%) VXG wins 1, VX1 wins 2
+TOTAL code: n=4 identity=5255 VX1+legend=4724 VXG+legend=4976 (VXG-VX1=252, 5.33%) VXG wins 1, VX1 wins 3
+TOTAL ops: n=11 identity=50165 VX1+legend=34114 VXG+legend=41817 (VXG-VX1=7703, 22.58%) VXG wins 3, VX1 wins 8
+ALL: identity=60112 VX1=43491 VXG=51485 (VXG-VX1=7994)
+decode failures: 0; elapsed ms 3261
+ALL EXACT

@@ -1,0 +1,4 @@
+EDGE: 25/25 PASS
+FUZZ: 3000/3000 PASS (structured, shared prefixes, & : digits tabs CR nbsp unicode)
+BYTES: 500/500 PASS (random ASCII incl. escape-prefixed inputs)
+ALL EXACT

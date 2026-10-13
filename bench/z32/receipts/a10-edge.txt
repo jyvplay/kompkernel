@@ -1,0 +1,15 @@
+PASS  empty                  layer=a5 in=0 out=0
+PASS  one char               layer=a5 in=1 out=1
+PASS  VXA sentinel prefix    layer=a5 in=12 out=26
+PASS  VXN sentinel prefix    layer=a5 in=14 out=28
+PASS  VXC sentinel prefix    layer=a5 in=10 out=24
+PASS  VXC sentinel alone     layer=a5 in=4 out=18
+PASS  repeated phrase        layer=a5 in=161 out=66
+PASS  tilde and escapes      layer=a5 in=300 out=132
+PASS  CRLF text              layer=a5 in=150 out=87
+PASS  alias-like chars       layer=a5 in=421 out=105
+PASS  nested phrases         layer=a5 in=301 out=109
+PASS  json lines             layer=a5 in=900 out=302
+PASS  cjk and emoji          layer=a5 in=271 out=90
+PASS  long char repeats      layer=a5 in=150 out=78
+cases 14 failures 0

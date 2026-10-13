@@ -1,0 +1,23 @@
+// Z31 per-layer wall time on one real doc: which layer of the A7 stack costs the seconds?
+import fs from 'node:fs';
+import { phalanxA2Encode } from '@/lib/omega/phalanx-a2';
+import { phalanxA3Encode } from '@/lib/omega/phalanx-a3';
+import { phalanxA4Encode } from '@/lib/omega/phalanx-a4';
+import { phalanxA5Encode } from '@/lib/omega/phalanx-a5';
+import { phalanxA6Encode } from '@/lib/omega/phalanx-a6';
+import { phalanxA7Encode } from '@/lib/omega/phalanx-a7';
+import { koineEncode } from '@/lib/omega/koine';
+import { recallEncode } from '@/lib/omega/recall';
+import { veritasABest } from '@/lib/omega/veritas-a';
+const f = process.argv[2];
+const t = fs.readFileSync(f, 'utf8');
+const time = (name: string, fn: () => unknown) => { const t0 = performance.now(); const r = fn() as any; console.log(name.padEnd(12), Math.round(performance.now() - t0), 'ms', r?.outTokens ?? ''); };
+time('koine', () => koineEncode(t));
+time('recall', () => recallEncode(t as any) as any);
+time('A2', () => phalanxA2Encode(t));
+time('A3', () => phalanxA3Encode(t));
+time('A4', () => phalanxA4Encode(t));
+time('A5', () => phalanxA5Encode(t));
+time('A6', () => phalanxA6Encode(t));
+time('A7', () => phalanxA7Encode(t));
+time('VXbest', () => veritasABest(t, 'o200k_base'));

@@ -1,0 +1,6 @@
+A1 KOINE header + repeated columns: mode=phalanx3 koine=true recall=true in=779 out=276 exact=true notLarger=true
+A2 RECALL header + &-lookalikes: mode=phalanx3 koine=false recall=false in=539 out=257 exact=true notLarger=true
+A3 distance 16 and 17 repeats: mode=identity koine=false recall=false in=299 out=299 exact=true notLarger=true
+A4 3000-line CRLF listing: mode=phalanx3 koine=false recall=true in=113999 out=18259 exact=true notLarger=true
+A5 P3 escape + both headers: mode=phalanx3 koine=false recall=false in=228 out=173 exact=true notLarger=true
+P3 ATTACKS: ALL EXACT, NOT LARGER THAN IDENTITY

@@ -1,0 +1,8 @@
+Table in column-major form: each line below is one column; row i is cell i of every line, joined by commas.
+§я,0ияяяяяля.ул2л2ы,1.ны4ыц,3.ӡ,4.д,5.ьӡ6д0¶150д1ӡ9ӡ7ьд4ьӡ4ӡ9
+4ц5ц0ц2ц1ц6ц9ц4ц4,2.9ц1
+setosaы4н3ы5н7н5н5
+versicolorл2уул4л3ул1
+virginicaии
+
+New Cyrillic before ¶ starts a rule to the next new Cyrillic or ¶. After ¶, expand rules recursively; print only the result.

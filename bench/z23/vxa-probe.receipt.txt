@@ -1,0 +1,27 @@
+prose gh-prose.txt: id=1934 VX1=1954 VXA=1932 (-22) entries=14
+prose readme.txt: id=843 VX1=812 VXA=795 (-17) entries=7
+prose license.txt: id=1166 VX1=1158 VXA=1117 (-41) entries=16
+prose lic-mit.txt: id=223 VX1=223 VXA=223 (0) entries=0
+prose md-react.txt: id=252 VX1=252 VXA=252 (0) entries=0
+prose md-vite.txt: id=274 VX1=274 VXA=304 (30) entries=2
+code code-ts.txt: id=1422 VX1=1431 VXA=1323 (-108) entries=28
+code code-dts.txt: id=162 VX1=135 VXA=118 (-17) entries=1
+code json-pkg.txt: id=1152 VX1=1072 VXA=931 (-141) entries=19
+code gh-api.json.txt: id=2519 VX1=2095 VXA=1864 (-231) entries=46
+ops find-listing.txt: id=3997 VX1=2853 VXA=2153 (-700) entries=28
+ops git-log-fuller.txt: id=143 VX1=174 VXA=175 (1) entries=1
+ops git-numstat.txt: id=4632 VX1=3822 VXA=3317 (-505) entries=31
+ops ls-full-iso.txt: id=1175 VX1=1175 VXA=623 (-552) entries=14
+ops node-stacktraces.txt: id=568 VX1=568 VXA=460 (-108) entries=10
+ops npm-ls.txt: id=2747 VX1=1967 VXA=1662 (-305) entries=44
+ops openstack-loghub-26.log: id=4028 VX1=1877 VXA=1776 (-101) entries=26
+ops package-lock-head.json: id=15009 VX1=10361 VXA=8664 (-1697) entries=97
+ops find-printf-src.txt: id=8493 VX1=6480 VXA=4642 (-1838) entries=53
+ops git-log-iso.txt: id=1947 VX1=1835 VXA=1766 (-69) entries=19
+ops ls-omega-full-iso.txt: id=7426 VX1=3033 VXA=2218 (-815) entries=23
+TOTAL prose: n=6 identity=4692 VX1+legend=4653 VXA+legend=4593 (VXA-VX1=-60, -1.29%) VXA wins 3, VX1 wins 1
+TOTAL code: n=4 identity=5255 VX1+legend=4724 VXA+legend=4236 (VXA-VX1=-488, -10.33%) VXA wins 4, VX1 wins 0
+TOTAL ops: n=11 identity=50165 VX1+legend=34114 VXA+legend=27424 (VXA-VX1=-6690, -19.61%) VXA wins 10, VX1 wins 1
+ALL: identity=60112 VX1=43491 VXA=36253 (VXA-VX1=-7238)
+decode failures: 0; elapsed ms 674
+ALL EXACT

@@ -1,0 +1,8 @@
+{"vxr_rows": 151, "daedalus_rows": 151, "joined": 151, "missing_in_daedalus": 0, "zero_denominator_skipped": 0}
+{"group": "code", "n": 4, "vxr_sum": 3487, "dae_sum": 3065, "vxr_over_dae": 1.1377}
+{"group": "fresh", "n": 111, "vxr_sum": 256544, "dae_sum": 231785, "vxr_over_dae": 1.1068}
+{"group": "ops", "n": 11, "vxr_sum": 18423, "dae_sum": 16689, "vxr_over_dae": 1.1039}
+{"group": "ops_real", "n": 10, "vxr_sum": 12429, "dae_sum": 10860, "vxr_over_dae": 1.1445}
+{"group": "prose", "n": 6, "vxr_sum": 4367, "dae_sum": 4234, "vxr_over_dae": 1.0314}
+{"group": "realjson", "n": 3, "vxr_sum": 3790, "dae_sum": 3395, "vxr_over_dae": 1.1163}
+{"group": "wrapped_docs", "n": 6, "vxr_sum": 38556, "dae_sum": 35324, "vxr_over_dae": 1.0915}

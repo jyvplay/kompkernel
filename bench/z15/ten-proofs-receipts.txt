@@ -1,0 +1,40 @@
+== solution files (top level): hatches / lines / bytes
+0 10 242 All.lean
+0 18588 721769 CompactnessAndDegeneracy.lean
+0 37374 1449151 ConnesRigidity.lean
+0 55755 2163484 EhrhartVolumeInequality.lean
+0 130430 5335203 GapCVP.lean
+0 114406 4531268 MetricCodes.lean
+0 3053 125769 MulticolorTriangleRamsey.lean
+0 34440 1343031 NonSoficGroup.lean
+0 27563 1131535 Permanent.lean
+0 70980 2683872 QuantumParallelRepetition.lean
+0 55616 2096663 SpherePacking.lean
+== challenge files: sorry sites (expected: statement stubs only)
+4 A_SpherePacking.lean
+6 B_BinaryCodes.lean
+4 B_SphericalCodes.lean
+2 C_PermanentFormulaLowerBound.lean
+1 D_NonSoficGroup.lean
+2 E_ConnesRigidity.lean
+4 F_EhrhartVolumeInequality.lean
+2 G_QuantumParallelRepetition.lean
+8 H_GapCVP.lean
+4 I_MulticolorTriangleRamsey.lean
+3 J_CompactnessConjecture.lean
+2 J_TwoDegenerateGraphs.lean
+== permitted_axioms per Comparator config
+A_SpherePacking.json: "permitted_axioms":["propext","Quot.sound","Classical.choice"]
+B_BinaryCodes.json: "permitted_axioms":["propext","Quot.sound","Classical.choice"]
+B_SphericalCodes.json: "permitted_axioms":["propext","Quot.sound","Classical.choice"]
+C_PermanentFormulaLowerBound.json: "permitted_axioms":["propext","Quot.sound","Classical.choice"]
+D_NonSoficGroup.json: "permitted_axioms":["propext","Quot.sound","Classical.choice"]
+E_ConnesRigidity.json: "permitted_axioms":["propext","Quot.sound","Classical.choice"]
+F_EhrhartVolumeInequality.json: "permitted_axioms":["propext","Quot.sound","Classical.choice"]
+G_QuantumParallelRepetition.json: "permitted_axioms":["propext","Quot.sound","Classical.choice"]
+H_GapCVP.json: "permitted_axioms":["propext","Quot.sound","Classical.choice"]
+I_MulticolorTriangleRamsey.json: "permitted_axioms":["propext","Quot.sound","Classical.choice"]
+J_CompactnessConjecture.json: "permitted_axioms":["propext","Quot.sound","Classical.choice"]
+J_TwoDegenerateGraphs.json: "permitted_axioms":["propext","Quot.sound","Classical.choice"]
+== toolchain
+leanprover/lean4:v4.32.0

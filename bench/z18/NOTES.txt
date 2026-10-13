@@ -1,0 +1,19 @@
+z18 receipts and the module version each was produced by.
+
+DITTO-F1 final (src/lib/omega/ditto.ts, ASCII '^' mark with leading-caret escape):
+  ditto-final-probe.receipt.txt   module output, 7 holdout-ops files, identity vs DITTO vs VERITAS-VX
+  ditto-redteam.receipt.txt       23 edge cases + 3000 fuzzed record sets; ALL EXACT
+  sweep-openstack.jsonl           full registry sweep, openstack-loghub-26.log (138 entries)
+  sweep-ls-full-iso.jsonl         full registry sweep, ls-full-iso.txt (138 entries)
+  sweep-*.analysis.txt            corrected analysis (sweep-analysis.py); see its header for the
+                                  lossy-entry flaw in the sweep's own decodedOk flag
+
+Pre-codec or superseded receipts (produced by earlier module versions; NOT the committed codec):
+  ditto-measure.receipt.txt       first mark test with the unicode mark (U+2033), no escape
+  ditto-variants.receipt.txt      unicode vs ASCII mark, DITTO on UUIDFOLD; no caret gate
+  ditto-on-veritas.receipt.txt    DITTO applied after VERITAS-VX (stacking test)
+  ditto-probe.receipt.txt         DITTO (unicode-era) vs AMPHORA/CHIRON stacks; SUPERSEDED
+  textnative-probe.receipt.txt    LAKONIKOS/DAEDALUS vs DITTO (unicode-era DITTO wire)
+
+Caveat for all sweep rows: 'decoded' is supplied by each registry entry, not by re-decoding the
+wire independently. DITTO's row was verified by re-decoding its own wire.

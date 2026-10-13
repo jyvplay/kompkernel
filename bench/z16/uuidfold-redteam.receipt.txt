@@ -1,0 +1,24 @@
+PASS empty              mode=identity  uuids=0 in=0 out=0
+PASS noUuid             mode=identity  uuids=0 in=2 out=2
+PASS oneUuid            mode=identity  uuids=1 in=20 out=20
+PASS manyUuid           mode=identity  uuids=12 in=263 out=263
+PASS bareHexRun         mode=identity  uuids=1 in=39 out=39
+PASS bareUpperRun       mode=identity  uuids=1 in=39 out=39
+PASS nativeLowerIds     mode=identity  uuids=1 in=59 out=59
+PASS upperDashed        mode=identity  uuids=1 in=40 out=40
+PASS digitOnlyUuid      mode=identity  uuids=2 in=39 out=39
+PASS digitOnlyBare      mode=identity  uuids=1 in=46 out=46
+PASS letterUuidAndDigitBare mode=identity  uuids=1 in=46 out=46
+PASS uuidGlued          mode=identity  uuids=0 in=19 out=19
+PASS uuidGluedAfter     mode=identity  uuids=0 in=19 out=19
+PASS uuidInsideWord     mode=identity  uuids=0 in=19 out=19
+PASS upperUuid          mode=identity  uuids=1 in=40 out=40
+PASS ruleSpoof          mode=identity  uuids=1 in=49 out=55
+PASS offSpoof           mode=identity  uuids=1 in=24 out=30
+PASS startsWithTag      mode=identity  uuids=1 in=25 out=31
+PASS crlf               mode=identity  uuids=2 in=42 out=42
+PASS dashNeighbour      mode=identity  uuids=2 in=41 out=41
+PASS multiBlank         mode=identity  uuids=2 in=38 out=38
+PASS sixtyFourHexSplit  mode=identity  uuids=0 in=32 out=32
+PASS unicode            mode=identity  uuids=1 in=25 out=25
+ALL PASS

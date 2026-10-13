@@ -1,0 +1,5 @@
+invest,317.6,391.8,410.6,257.7,330.8,461.2,512,448,499.6,547.5
+value,3078.5,4661.7,5387.1,2792.2,4313.2,4643.9,4551.2,3244.1,4053.7,4379.3
+capital,2.8,52.6,156.9,209.2,203.4,207.2,255.2,303.7,264.1,201.6
+firm,General Motors,General Motors,General Motors,General Motors,General Motors,General Motors,General Motors,General Motors,General Motors,General Motors
+year,1935,1936,1937,1938,1939,1940,1941,1942,1943,1944

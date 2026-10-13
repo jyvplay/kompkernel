@@ -1,0 +1,6 @@
+{"f":"openstack-loghub-26.log","identity":4028,"veritas":1841,"veritas_exact":true,"veritas_mode":"dict","ditto_on_veritas":1861,"marks":3,"exact":true,"hasMarkInInput":false}
+{"f":"ls-full-iso.txt","identity":1175,"veritas":1175,"veritas_exact":true,"veritas_mode":"identity","ditto_on_veritas":780,"marks":132,"exact":true,"hasMarkInInput":false}
+{"f":"npm-ls.txt","identity":2747,"veritas":1931,"veritas_exact":true,"veritas_mode":"dict","ditto_on_veritas":null,"marks":0,"exact":null,"hasMarkInInput":true}
+{"f":"find-listing.txt","identity":3997,"veritas":2817,"veritas_exact":true,"veritas_mode":"dict","ditto_on_veritas":2841,"marks":0,"exact":true,"hasMarkInInput":false}
+{"f":"git-numstat.txt","identity":4632,"veritas":3786,"veritas_exact":true,"veritas_mode":"dict","ditto_on_veritas":3810,"marks":0,"exact":true,"hasMarkInInput":false}
+{"f":"node-stacktraces.txt","identity":568,"veritas":568,"veritas_exact":true,"veritas_mode":"identity","ditto_on_veritas":null,"marks":0,"exact":null,"hasMarkInInput":true}

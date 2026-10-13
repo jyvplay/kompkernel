@@ -1,0 +1,4 @@
+{"f":"bench/holdout-tbl/psql-output.txt","in":675,"folds":["T|3-26","G0123456"],"bodyTok":53,"dae":{"msg":270,"ok":true,"arm":"","ms":1},"chiron":{"msg":270,"ok":true}}
+{"f":"bench/holdout/gh-api.json.txt","in":2519,"folds":["Ib1"],"bodyTok":2282,"dae":{"msg":1163,"ok":true,"arm":"","ms":5746},"chiron":{"msg":1229,"ok":true}}
+{"f":"bench/holdout-tbl/df-h.txt","in":570,"folds":["T_1-18","G01234","A5"],"bodyTok":13,"dae":{"msg":239,"ok":true,"arm":"","ms":0},"chiron":{"msg":239,"ok":true}}
+{"f":"bench/holdout-tab/vix-daily-1990.csv","in":3412,"folds":["T,0-126h1","G0"],"bodyTok":2530,"dae":{"msg":1190,"ok":true,"arm":"","ms":18442},"chiron":{"msg":1314,"ok":true}}

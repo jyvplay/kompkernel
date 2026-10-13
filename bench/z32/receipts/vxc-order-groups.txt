@@ -1,0 +1,6 @@
+prose         docs   6 tokfirst 4609 union 4610 (+1) charfirst 4619 (+10)
+wrapped_docs  docs   6 tokfirst 38398 union 38684 (+286) charfirst 38842 (+444)
+code          docs   4 tokfirst 3933 union 4123 (+190) charfirst 4183 (+250)
+ops           docs  11 tokfirst 23876 union 25938 (+2062) charfirst 26683 (+2807)
+ops_real      docs  10 tokfirst 16451 union 18007 (+1556) charfirst 17424 (+973)
+realjson      docs   3 tokfirst 4196 union 4434 (+238) charfirst 4373 (+177)

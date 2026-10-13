@@ -1,0 +1,4 @@
+§а.
+[node-1] serviceи.
+[node-2] serviceо[node-0] serviceс.
+ое health check failed: upstream connection timed out after 30 seconds; retrying in 5 seconds; circuit breaker remains open forв checkout-serviceе checkout-serviceн payments-gatewayе payments-gatewayя inventory-syncе inventory-syncт notification-workerе notification-worker¶ованияставинсяативснаяитсван.

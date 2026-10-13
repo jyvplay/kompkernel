@@ -1,0 +1,17 @@
+== A10 vs A8 (groups, 40 files) ==
+code          n= 4 exact=4/4 A7=4097 A8=4152 A10=3910 A10-A8=-242 (-5.83%) b/w/e=2/2/0
+ops           n=11 exact=11/11 A7=22844 A8=22146 A10=21309 A10-A8=-837 (-3.78%) b/w/e=10/0/1
+ops_real      n=10 exact=10/10 A7=15473 A8=14995 A10=14637 A10-A8=-358 (-2.39%) b/w/e=5/0/5
+prose         n= 6 exact=6/6 A7=4532 A8=4620 A10=4609 A10-A8=-11 (-0.24%) b/w/e=1/0/5
+realjson      n= 3 exact=3/3 A7=3886 A8=3864 A10=3776 A10-A8=-88 (-2.28%) b/w/e=2/0/1
+wrapped_docs  n= 6 exact=6/6 A7=39153 A8=38822 A10=38187 A10-A8=-635 (-1.64%) b/w/e=5/0/1
+ALL A7=89985 A8=88599 A10=86428 vsA8 -2.45% vsA7 -3.95%
+== VERITAS-C and DAEDALUS (registry, one-chat messageTokens; DAEDALUS includes its contract) ==
+code          n=  4 exact=4/4 DAE=3065 VXC=3687 VXC-DAE=+20.29% VXC-smaller-docs=0
+fresh         n=111 exact=111/111 DAE=231785 VXC=266141 VXC-DAE=+14.82% VXC-smaller-docs=1
+ops           n= 11 exact=11/11 DAE=16689 VXC=19125 VXC-DAE=+14.60% VXC-smaller-docs=0
+ops_real      n= 10 exact=10/10 DAE=10860 VXC=13608 VXC-DAE=+25.30% VXC-smaller-docs=0
+prose         n=  6 exact=6/6 DAE=4234 VXC=4568 VXC-DAE=+7.89% VXC-smaller-docs=0
+realjson      n=  3 exact=3/3 DAE=3395 VXC=3957 VXC-DAE=+16.55% VXC-smaller-docs=0
+wrapped_docs  n=  6 exact=6/6 DAE=35324 VXC=38398 VXC-DAE=+8.70% VXC-smaller-docs=0
+ALL DAE=305352 VXC=349484 +14.45%

@@ -1,0 +1,22 @@
+// Diagnostic: A6 (PAD) vs A7 (COL) wires for one file: legend cost, body cost, first differing line.
+import fs from 'node:fs';
+import { countTokens } from '@/lib/omega/bpe';
+import { phalanxA6Encode } from '@/lib/omega/phalanx-a6';
+import { phalanxA7Encode } from '@/lib/omega/phalanx-a7';
+import { phalanxA5Encode } from '@/lib/omega/phalanx-a5';
+const f = process.argv[2];
+const t = fs.readFileSync(f, 'utf8');
+const enc = 'o200k_base' as const;
+const a6 = phalanxA6Encode(t, enc), a7 = phalanxA7Encode(t, enc);
+const a5 = phalanxA5Encode(t, enc);
+console.log('input tokens', countTokens(t, enc), 'A5', a5.outTokens, 'A6', a6.outTokens, 'A7', a7.outTokens);
+const legend6 = a6.wire.split('\n')[1] ?? '', legend7 = a7.wire.split('\n')[1] ?? '';
+console.log('legend6 tokens', countTokens(legend6, enc), 'legend7 tokens', countTokens(legend7, enc));
+const l6 = a6.wire.split('\n'), l7 = a7.wire.split('\n');
+let i = 0; while (i < Math.min(l6.length, l7.length) && l6[i] === l7[i]) i++;
+console.log('first diff line', i, 'of', l6.length, l7.length);
+console.log('A6 near:', JSON.stringify(l6.slice(i, i + 4)));
+console.log('A7 near:', JSON.stringify(l7.slice(i, i + 4)));
+console.log('A6 head:', JSON.stringify(l6.slice(0, 2)).slice(0, 400));
+console.log('A7 head:', JSON.stringify(l7.slice(0, 3)).slice(0, 400));
+console.log('A6 blocks:', l6.filter((x) => /^[▤-◿]?T\s/.test(x)).length, 'A7 blocks lines matching /T \\d+ \\d+/:', l7.filter((x) => /\bT \d+ \d+/.test(x)).length);

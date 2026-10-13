@@ -1,0 +1,25 @@
+lane            n      VXR      DAE      A10    front  VXR/front  win/lose vs frontier
+code            4     3487     3065     3910     3065    +13.77%  1/3
+fresh         111   256544   231785        0   231785    +10.68%  9/93
+ops            11    18423    16689    21309    16689    +10.39%  0/10
+ops_real       10    12429    10860    14637    10860    +14.45%  0/5
+prose           6     4367     4234     4609     4234     +3.14%  0/3
+realjson        3     3790     3395     3776     3395    +11.63%  0/3
+wrapped_docs    6    38556    35324    38187    35324     +9.15%  0/6
+ALL           151   337596   305352            305352    +10.56%  10/123
+
+VERITAS-R (Z34, [[VXR]] sentinel). o200k one-chat wire tokens. 151/151 byte-exact through veritasRDecode.
+Edge + fuzz: bench/z34/vxr-edge.ts, 421 cases, 0 failures.
+Frontier = min(DAEDALUS messageTokens, A10) where A10 has a receipt (40 group files). DAE alone on fresh.
+Result: NOT Pareto-superior in any lane. Lane sums above frontier in all 7 lanes. 10 individual files beat the frontier.
+
+Components measured on 4 reference files (find-listing, readme, gh-prose, license), in order:
+  VXS committed (44db125, gate bug): prose gh-prose 1934 raw, search found 0 entries (bug: +33 legend gate).
+  VXS fixed gate, no refine:      gh-prose 1862, license 1069, readme 715, find-listing 1369.
+  + key reassignment (unbudgeted): gh-prose 1853, license 1058, readme 700, find-listing 1350.
+  VXR (budget 4000, legend 28 tok): see vxr-eval-151.jsonl (readme 706, find-listing 1360).
+
+Negative results on the same files (not codecs):
+  - Stacking VXS on the DAEDALUS wire: 0 to 1 entries, no gain (DAE output is saturated for our candidate set).
+  - EIDOLON-style deletion of function words, upper bound before residual: gh-prose 5.4%, license 14.0%, readme 2.4%, find-listing 0%. Each deletion needs an exact residual; a 1-token key for ' the' saves nothing.
+  - Selected header phrases overlapping (suffix = prefix): 0 to 1 pair per file. Superstring-style header sharing has no headroom here.

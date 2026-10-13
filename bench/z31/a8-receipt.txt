@@ -1,0 +1,57 @@
+== Lane groups, o200k tokens, PHALANX-A7 vs PHALANX-A8 (same run, both decoded and checked)
+group          files       A7       A8   A8-A7     pct A8 better A8 worse  equal  exact
+prose              6     4532     4620     +88  +1.94%         1        2      3  True
+wrapped_docs       6    39153    38822    -331  -0.85%         5        1      0  True
+code               4     4097     4152     +55  +1.34%         1        2      1  True
+ops               11    22844    22146    -698  -3.06%         7        3      1  True
+ops_real          10    15473    14995    -478  -3.09%         4        1      5  True
+realjson           3     3886     3864     -22  -0.57%         2        1      0  True
+ALL GROUPS        40    89985    88599   -1386  -1.54%
+
+== Per-file, lane groups (A8 - A7 tokens; negative is better for A8)
+prose            +23    1911 ->   1934  bench/holdout/gh-prose.txt
+prose             -5     776 ->    771  bench/holdout/readme.txt
+prose            +70    1096 ->   1166  bench/holdout/license.txt
+prose             +0     223 ->    223  bench/holdout/lic-mit.txt
+prose             +0     252 ->    252  bench/holdout/md-react.txt
+prose             +0     274 ->    274  bench/holdout/md-vite.txt
+wrapped_docs     -85   10303 ->  10218  bench/z28/wrapped-real/git-manual.adoc
+wrapped_docs      +6     868 ->    874  bench/z28/wrapped-real/git-readme.md
+wrapped_docs     -48    3557 ->   3509  bench/z28/wrapped-real/linux-changes.rst
+wrapped_docs    -109   10042 ->   9933  bench/z28/wrapped-real/linux-coding-style.rst
+wrapped_docs     -26    5538 ->   5512  bench/z28/wrapped-real/linux-howto.rst
+wrapped_docs     -69    8845 ->   8776  bench/z28/wrapped-real/linux-submitting-patches.rst
+code             +21    1311 ->   1332  bench/holdout/code-ts.txt
+code              +0     106 ->    106  bench/holdout/code-dts.txt
+code             +52     853 ->    905  bench/holdout/json-pkg.txt
+code             -18    1827 ->   1809  bench/holdout/gh-api.json.txt
+ops              +47    1588 ->   1635  bench/holdout-ops/find-listing.txt
+ops               +0     143 ->    143  bench/holdout-ops/git-log-fuller.txt
+ops             -245    2704 ->   2459  bench/holdout-ops/git-numstat.txt
+ops              -40     653 ->    613  bench/holdout-ops/ls-full-iso.txt
+ops               +2     457 ->    459  bench/holdout-ops/node-stacktraces.txt
+ops              -49    1693 ->   1644  bench/holdout-ops/npm-ls.txt
+ops              +25    1335 ->   1360  bench/holdout-ops/openstack-loghub-26.log
+ops             -313    8492 ->   8179  bench/holdout-ops/package-lock-head.json
+ops              -74    2442 ->   2368  bench/z20/samples/find-printf-src.txt
+ops              -38    1753 ->   1715  bench/z20/samples/git-log-iso.txt
+ops              -13    1584 ->   1571  bench/z20/samples/ls-omega-full-iso.txt
+ops_real          +0     131 ->    131  bench/z29/ops-real/df-h.txt
+ops_real        -262    5742 ->   5480  bench/z29/ops-real/dpkg-l.txt
+ops_real         -16    1151 ->   1135  bench/z29/ops-real/du-usr-share.txt
+ops_real          +0      64 ->     64  bench/z29/ops-real/free-h.txt
+ops_real        -257    6356 ->   6099  bench/z29/ops-real/ls-usr-bin.txt
+ops_real          -4     586 ->    582  bench/z29/ops-real/ls-usr-lib.txt
+ops_real          +0      79 ->     79  bench/z29/ops-real/os-release.txt
+ops_real         +61    1224 ->   1285  bench/z29/ops-real/ps-eo.txt
+ops_real          +0     100 ->    100  bench/z29/ops-real/ss-tln.txt
+ops_real          +0      40 ->     40  bench/z29/ops-real/uname.txt
+realjson         +20     825 ->    845  bench/z25/json-real/react-latest.json
+realjson         -26    1296 ->   1270  bench/z25/json-real/typescript-latest.json
+realjson         -16    1765 ->   1749  bench/z25/json-real/vite-latest.json
+
+== Fresh corpus (111 real docs, o200k): A8 vs A7 on the documents where both ran
+overlap docs 33 of A8 run 111 / A7 run 33; A7 92016  A8 90293  diff -1723 (-1.87%)  A8 better 20, worse 8, equal 5
+exact A8 on all fresh docs run: True  docs run: 111
+A8 total over all 111 fresh docs: 278825 tokens; exact 111/111
+overlap 33 docs: VXA best-of-3 VX-level 92139  A7 stack 92016  A8 stack 90293  (stack layers above VX on A7: -123)

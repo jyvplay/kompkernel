@@ -1,0 +1,36 @@
+Z38 probe outputs (o200k one-chat tokens; bench-only scripts in bench/z38)
+
+[legend cost, legend-probe.ts / legend-probe2.ts]
+  current full VXR legend (no instruction) ........ 33
+  minimal "# X=T; ]]" (no instruction) ............. 9
+  minimal with instruction ......................... 15   <- VXQ minimal (instruction counted)
+  escape legend with instruction ................... 23   <- VXQ escape
+
+[header vs body split, split.ts; readme / gh-prose]
+  readme:   preamble 33, header 77 (13 entries), body 582, total 693
+  gh-prose: preamble 33, header 182 (28 entries), body 1615, total 1831
+  header separators (newline vs space vs none): ~0.5 token per entry (sep-probe.ts) -> not a lever
+
+[whitespace share, markup-share.ts, 151-file corpus]
+  ws-only tokens of the raw input: prose 4.1%, wrapped 7.8%, code 9.3%, ops 10.7%, ops_real 24.9%, realjson 9.2%, fresh 5.7%
+[whitespace in the compressed wire body, wire-pad.ts]
+  ops_real: ws-only share of wire body 5.9%; collapsing runs saves 2.3% of wire output BEFORE paying for width models
+  ops:      ws-only share of wire body 1.4%; saves 0.2%
+[markdown table separator rows, sep-bound.ts]
+  0.1% of tokens in fresh and prose lanes; 0 elsewhere -> markup elision bound is negligible
+
+[pad-bound.ts: collapse all runs of >=2 spaces on the RAW text (upper bound, not a codec)]
+  prose 1.4%, wrapped 1.9%, code 8.0%, ops 4.1%, ops_real 9.9%, realjson 8.8%, fresh 2.2%
+
+[word-arm.ts: DAEDALUS-style whole-word candidates first, exact recount]
+  readme:   with words 704 / without 704 (entries 13 / 13)
+  gh-prose: with words 1846 / without 1846 (entries 28 / 28)
+  -> whole-word candidates are not the missing piece for VXR on these files
+
+[PR modules absent from this tree, measured]
+  terminus.ts (PR #2 TERMINUS-T1): gh-prose 1910 (VXM 1831), readme 730 (693), license 1090 (1036) -> dominated, exact
+  oblivion.ts (PR #2): decode rules live in OBLIVION_SYSTEM_PROMPT -> violates the no-system-prompt constraint; not measured
+  chronos-x1, pallas, starlight-prime, yggdrasil: same CJK-alias micro-header family as TERMINUS; not measured individually
+  codec-map.ts (PR #17): taxonomy file, not a codec
+  kalligraphos.ts (PR #23): restores Unicode mathematical alphanumerics; niche class
+  optimal.ts (PR #23): min over verified candidate codecs; tournament wrapper, adds no codec surface

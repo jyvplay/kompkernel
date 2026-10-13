@@ -1,0 +1,17 @@
+# Blind decode of visible/msg_2.txt (reader = this model; hidden/ NOT opened before this file was written)
+# Rule expansion (tape before ¶; each new Cyrillic letter starts a rule that runs to the next NEW letter or ¶):
+я = ",General Motors"
+л = я я я я я                       (5 copies of я)
+х = ".2,"
+ҵ = ".6,"
+А = ".7,"
+ҟ = ".8,"
+м = ".1,"
+д = ",193"
+ѕ = ",194"
+# Column lines after expansion (line order as in the message):
+invest  : invest,317.6,391.8,410.6,257.7,330.8,461.2,512,448,499.6,547.5
+value   : value,3078.5,4661.7,5387.1,2792.2,4313.2,4643.9,4551.2,3244.1,4053.7,4379.3
+capital : capital,2.8,52.6,156.9,209.2,203.4,207.2,255.2,303.7,264.1,201.6
+firm    : firm + 10 x ",General Motors"   (лл)
+year    : year,1935,1936,1937,1938,1939,1940,1941,1942,1943,1944   (д5д6д7д8д9 ѕ0ѕ1ѕ2ѕ3ѕ4)

@@ -1,0 +1,6 @@
+prose: cap32=4532 cap64=4531 cap128=4531 cap256=4531
+code: cap32=4188 cap64=4174 cap128=4169 cap256=4169
+ops: cap32=26654 cap64=26640 cap128=26687 cap256=26687
+realjson: cap32=4336 cap64=4358 cap128=4356 cap256=4358
+ALL identity=65610 cap32=39710 (0.00% vs cap32) cap64=39703 (-0.02% vs cap32) cap128=39743 (0.08% vs cap32) cap256=39745 (0.09% vs cap32)
+decode failures: 0

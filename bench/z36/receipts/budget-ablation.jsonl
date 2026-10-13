@@ -1,0 +1,16 @@
+{"f":"readme.txt","cfg":{},"out":706,"ent":13,"exact":true,"trials":1787,"ms":1289}
+{"f":"npm-ls.txt","cfg":{},"out":1232,"ent":74,"exact":true,"trials":5452,"ms":4571}
+{"f":"gh-api.json.txt","cfg":{},"out":1384,"ent":55,"exact":true,"trials":4408,"ms":5170}
+{"f":"ls-full-iso.txt","cfg":{},"out":472,"ent":16,"exact":true,"trials":1340,"ms":607}
+{"f":"readme.txt","cfg":{"kImprove":30},"out":705,"ent":13,"exact":true,"trials":3000,"ms":1374}
+{"f":"npm-ls.txt","cfg":{"kImprove":30},"out":1152,"ent":62,"exact":true,"trials":9162,"ms":3811}
+{"f":"gh-api.json.txt","cfg":{"kImprove":30},"out":1326,"ent":54,"exact":true,"trials":6407,"ms":4565}
+{"f":"ls-full-iso.txt","cfg":{"kImprove":30},"out":448,"ent":15,"exact":true,"trials":2369,"ms":609}
+{"f":"readme.txt","cfg":{"maxTrials":3000},"out":706,"ent":13,"exact":true,"trials":2176,"ms":1210}
+{"f":"npm-ls.txt","cfg":{"maxTrials":3000},"out":1232,"ent":74,"exact":true,"trials":5477,"ms":4425}
+{"f":"gh-api.json.txt","cfg":{"maxTrials":3000},"out":1383,"ent":55,"exact":true,"trials":6092,"ms":5514}
+{"f":"ls-full-iso.txt","cfg":{"maxTrials":3000},"out":472,"ent":16,"exact":true,"trials":1340,"ms":652}
+{"f":"readme.txt","cfg":{"kImprove":100,"maxTrials":3000,"refineBudget":40000},"out":696,"ent":13,"exact":true,"trials":5771,"ms":4079}
+{"f":"npm-ls.txt","cfg":{"kImprove":100,"maxTrials":3000,"refineBudget":40000},"out":1129,"ent":60,"exact":true,"trials":18537,"ms":14472}
+{"f":"gh-api.json.txt","cfg":{"kImprove":100,"maxTrials":3000,"refineBudget":40000},"out":1238,"ent":52,"exact":true,"trials":16681,"ms":18116}
+{"f":"ls-full-iso.txt","cfg":{"kImprove":100,"maxTrials":3000,"refineBudget":40000},"out":440,"ent":15,"exact":true,"trials":3146,"ms":2479}

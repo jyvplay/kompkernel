@@ -1,0 +1,22 @@
+holdout-ops/find-listing.txt wire=1678 hex16=0/0tok url=0/0tok dupLine=0/0tok indentRuns=0/0tok numRun9=117/352tok
+holdout-ops/ls-full-iso.txt wire=677 hex16=0/0tok url=0/0tok dupLine=0/0tok indentRuns=0/0tok numRun9=12/40tok
+holdout-ops/git-numstat.txt wire=3535 hex16=1/18tok url=0/0tok dupLine=0/0tok indentRuns=3/6tok numRun9=1/5tok
+holdout-ops/npm-ls.txt wire=1970 hex16=0/0tok url=0/0tok dupLine=0/0tok indentRuns=0/0tok numRun9=0/0tok
+holdout-ops/node-stacktraces.txt wire=461 hex16=0/0tok url=0/0tok dupLine=1/32tok indentRuns=5/10tok numRun9=0/0tok
+holdout-ops/openstack-loghub-26.log wire=1397 hex16=27/524tok url=0/0tok dupLine=0/0tok indentRuns=0/0tok numRun9=5/18tok
+holdout-ops/git-log-fuller.txt wire=138 hex16=1/18tok url=0/0tok dupLine=0/0tok indentRuns=3/6tok numRun9=1/5tok
+holdout-ops/package-lock-head.json wire=10289 hex16=0/0tok url=3/29tok dupLine=43/478tok indentRuns=86/172tok numRun9=0/0tok
+holdout/code-dts.txt wire=99 hex16=0/0tok url=0/0tok dupLine=0/0tok indentRuns=0/0tok numRun9=0/0tok
+holdout/code-ts.txt wire=1395 hex16=0/0tok url=0/0tok dupLine=0/0tok indentRuns=42/84tok numRun9=0/0tok
+holdout/gh-api.json.txt wire=2029 hex16=0/0tok url=7/76tok dupLine=1/26tok indentRuns=15/30tok numRun9=7/26tok
+holdout/gh-prose.txt wire=1918 hex16=2/45tok url=4/88tok dupLine=0/0tok indentRuns=34/68tok numRun9=5/18tok
+holdout/json-pkg.txt wire=1036 hex16=1/21tok url=2/19tok dupLine=0/0tok indentRuns=9/18tok numRun9=1/5tok
+holdout/lic-mit.txt wire=223 hex16=0/0tok url=0/0tok dupLine=0/0tok indentRuns=0/0tok numRun9=0/0tok
+holdout/license.txt wire=1122 hex16=0/0tok url=1/7tok dupLine=0/0tok indentRuns=0/0tok numRun9=0/0tok
+holdout/md-react.txt wire=252 hex16=0/0tok url=3/27tok dupLine=0/0tok indentRuns=9/18tok numRun9=0/0tok
+holdout/md-vite.txt wire=274 hex16=0/0tok url=8/74tok dupLine=0/0tok indentRuns=0/0tok numRun9=0/0tok
+holdout/readme.txt wire=776 hex16=0/0tok url=6/51tok dupLine=1/5tok indentRuns=5/10tok numRun9=0/0tok
+z20/samples/find-printf-src.txt wire=2816 hex16=0/0tok url=0/0tok dupLine=0/0tok indentRuns=0/0tok numRun9=18/62tok
+z20/samples/git-log-iso.txt wire=1783 hex16=0/0tok url=0/0tok dupLine=0/0tok indentRuns=0/0tok numRun9=0/0tok
+z20/samples/ls-omega-full-iso.txt wire=2355 hex16=0/0tok url=0/0tok dupLine=0/0tok indentRuns=0/0tok numRun9=13/43tok
+TOTAL {"wire":36223,"hex16":626,"hex16n":32,"url":371,"urln":34,"dupLine":541,"dupLineN":46,"indent":422,"mdTableRule":5,"emailPath":0,"numberRun":574}
