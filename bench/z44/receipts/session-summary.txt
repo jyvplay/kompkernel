@@ -1,0 +1,12 @@
+session          msgs    raw   sess    iso    dae   vsRaw   vsIso  vsDae exact reDec
+ops-log-tails       6   4029   1708   3491   1887   57.6%   51.1%   -179 True True
+vix-monthly         6   3412   1674   3424   1761   50.9%   51.1%    -87 True True
+pkglock-chunks      6  15009   7001  14079   6477   53.4%   50.3%    524 True True
+agent-history       5   1156    687   1303    956   40.6%   47.3%   -269 True True
+kb-translations     6   3292   3185   5342   3235    3.3%   40.4%    -50 True True
+ops-mixed           6  10599   4337   8752   4057   59.1%   50.4%    280 True True
+prose-study         6   4229   3685   6904   3702   12.9%   46.6%    -17 True True
+repo-review         6  11586   9168  18412   9417   20.9%   50.2%   -249 True True
+
+TOTAL raw 53312 session 31445 isolated 61707
+DAEDALUS per-message total over the 8 sessions that measured it = 31492

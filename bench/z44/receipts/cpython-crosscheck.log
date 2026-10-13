@@ -1,0 +1,19 @@
+anamnesis_decode.py selftest OK (nested rule, recollected rule, anchored copy, 2 refusals)
+ops-log-tails: 6 wires written (encoder-side exact=true)
+vix-monthly: 6 wires written (encoder-side exact=true)
+pkglock-chunks: 6 wires written (encoder-side exact=true)
+agent-history: 5 wires written (encoder-side exact=true)
+kb-translations: 6 wires written (encoder-side exact=true)
+ops-mixed: 6 wires written (encoder-side exact=true)
+prose-study: 6 wires written (encoder-side exact=true)
+repo-review: 6 wires written (encoder-side exact=true)
+ALL ENCODER-SIDE EXACT
+decoded 5 message(s), 16 rule(s) in the cumulative table
+decoded 6 message(s), 36 rule(s) in the cumulative table
+decoded 6 message(s), 54 rule(s) in the cumulative table
+decoded 6 message(s), 207 rule(s) in the cumulative table
+decoded 6 message(s), 228 rule(s) in the cumulative table
+decoded 6 message(s), 82 rule(s) in the cumulative table
+decoded 6 message(s), 269 rule(s) in the cumulative table
+decoded 6 message(s), 85 rule(s) in the cumulative table
+CPython cross-decode BYTE-EXACT on 47 messages across 8 sessions
