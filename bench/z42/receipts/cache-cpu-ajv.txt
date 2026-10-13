@@ -1,0 +1,4 @@
+ajv-8.20.0 README, bench/z42/profile-cache.ts, maxArms 1, serial
+CACHE=default  ms=41504  o200k=2154  wireHash=5a61762635b53648
+CACHE=5000     ms=11145  o200k=2154  wireHash=5a61762635b53648
+CACHE=0        ms=9034   o200k=2154  wireHash=5a61762635b53648

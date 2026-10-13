@@ -1,0 +1,10 @@
+{"f":"holdout/code-ts.txt","budgetMs":60000,"o":1068,"c":1197,"arm":"span12+words","exact":true,"ms":19788}
+{"f":"holdout/code-ts.txt","budgetMs":4000,"o":1083,"c":1199,"arm":"span12+words","exact":true,"ms":21798}
+{"f":"holdout/gh-prose.txt","budgetMs":60000,"o":1822,"c":1884,"arm":"span12+words","exact":true,"ms":10469}
+{"f":"holdout/gh-prose.txt","budgetMs":4000,"o":1822,"c":1884,"arm":"span12+words","exact":true,"ms":1840}
+{"f":"package/README.md","budgetMs":60000,"o":2154,"c":2284,"arm":"span12+words","exact":true,"ms":43258}
+{"f":"package/README.md","budgetMs":4000,"o":2154,"c":2284,"arm":"span12+words","exact":true,"ms":37112}
+{"f":"package/README.md","budgetMs":60000,"o":4282,"c":4344,"arm":"span12+words","exact":true,"ms":31231}
+{"f":"package/README.md","budgetMs":4000,"o":4282,"c":4344,"arm":"span12+words","exact":true,"ms":22518}
+{"f":"ops-real/dpkg-l.txt","budgetMs":60000,"o":4697,"c":5651,"arm":"span12+words","exact":true,"ms":61338}
+{"f":"ops-real/dpkg-l.txt","budgetMs":4000,"o":4697,"c":5651,"arm":"span12+words","exact":true,"ms":61666}

@@ -34,11 +34,32 @@
 import {
   encode as encO200k,
   decode as decO200k,
+  setMergeCacheSize as setO200kMergeCacheSize,
 } from 'gpt-tokenizer/encoding/o200k_base';
 import {
   encode as encCl100k,
   decode as decCl100k,
+  setMergeCacheSize as setCl100kMergeCacheSize,
 } from 'gpt-tokenizer/encoding/cl100k_base';
+
+/* ---------------------------------------------------------------------------
+ * MERGE-CACHE OFF  (Z42)
+ *
+ * gpt-tokenizer memoises BPE merges in a 100 000-entry LRU whose eviction is
+ * `mergeCache.keys().next()` + delete. On a long run of evictions that scan is
+ * the hot spot: 65.6% of CPU on one 2 KB README encode (node --cpu-prof).
+ * The cache is a pure memo of a deterministic function, so turning it off
+ * changes no token id.
+ *
+ * MEASURED (bench/z42/cache-identity.ts, 14-file sample, serial, maxArms 1):
+ *   total encode time 256 s (default cache) -> 81 s (cache off), 0.32x.
+ *   Prompt identical on 13/14 files. The 14th (dpkg-l) differs only because
+ *   wall-clock gates in sub-searches open further on a faster run; under
+ *   OMEGA_DET=1 cache-on and cache-off give the same wire hash (bcd1de9b5a12a0e2).
+ *   Round-trip decode is exact on all 14 files in both modes.
+ * ------------------------------------------------------------------------- */
+setO200kMergeCacheSize(0);
+setCl100kMergeCacheSize(0);
 
 export type EncodingName = 'o200k_base' | 'cl100k_base';
 

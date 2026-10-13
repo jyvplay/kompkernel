@@ -1,0 +1,7 @@
+bench/z29/ops-real/dpkg-l.txt (wall-clock mode, OMEGA_DET unset)
+CACHE=default  ms=68490  o200k=4690  wireHash=b227cbe0263b0577
+CACHE=0        ms=26204  o200k=4664  wireHash=bcd1de9b5a12a0e2
+CACHE=default  ms=68493  o200k=4690  wireHash=b227cbe0263b0577
+OMEGA_DET=1 (deterministic clock, see src/lib/omega/clock.ts)
+CACHE=default  ms=255431 o200k=4664  wireHash=bcd1de9b5a12a0e2
+CACHE=0        ms=164294 o200k=4664  wireHash=bcd1de9b5a12a0e2
