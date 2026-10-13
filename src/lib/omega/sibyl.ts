@@ -289,6 +289,7 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
     levels: options.levels ?? 6,
     noAssign: true,           // the grammar phase never needs the expensive step
     allowPolyglot: true,      // SIBYL is the codec that uses the pooled alphabet
+    dualTokenizer: !!options.dualTokenizer,   // Z40: glyphs one token under o200k AND cl100k
     noSearch: options.noSearch ?? false,
     noBlocks: options.noBlocks ?? false,
     script: options.script,
@@ -332,7 +333,7 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
     if (!plan) return null;
     let out: BuildOut | null = null;
     try {
-      out = renderBest(g, text, enc, { script: options.script, noAssign: false, budgetMs, probeScale, scriptTries: tries, allowPolyglot: poly },
+      out = renderBest(g, text, enc, { script: options.script, noAssign: false, budgetMs, probeScale, scriptTries: tries, allowPolyglot: poly, dualTokenizer: !!options.dualTokenizer },
         Math.min(overall, now() + Math.max(500, budgetMs)), grammarCost(g, enc), 0);
     } catch { out = null; }
     if (!out) return null;

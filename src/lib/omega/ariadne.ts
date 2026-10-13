@@ -138,11 +138,13 @@ function vocabByScript(enc: EncodingName): Map<string, string[]> {
   return out;
 }
 
-export function scriptPool(script: ChironScript, enc: EncodingName): ScriptPool {
-  const key = `${script.name}:${enc}`;
+export function scriptPool(script: ChironScript, enc: EncodingName, dual = false): ScriptPool {
+  const key = `${script.name}:${enc}:${dual ? 'dual' : 'single'}`;
   const hit = poolCache.get(key);
   if (hit) return hit;
-  const all = vocabByScript(enc).get(script.name) ?? [];
+  const all0 = vocabByScript(enc).get(script.name) ?? [];
+  // Z40: a glyph that is one token in o200k can cost 2 in cl100k; the dual pool keeps only strings that are one token in both.
+  const all = dual ? all0.filter(s => countTokens(s, 'cl100k_base') === 1) : all0;
   const chars: string[] = [];
   const oneSet = new Set<string>();
   for (const s of all) if ([...s].length === 1) { chars.push(s); oneSet.add(s); }
@@ -606,6 +608,8 @@ export interface AriadneOptions {
   noAssign?: boolean;
   /** allow the pooled 14-script alphabet (SIBYL uses it; ARIADNE stays fixed) */
   allowPolyglot?: boolean;
+  /** Z40: glyphs must be ONE token under o200k_base AND cl100k_base (encoder-only; decoder unchanged) */
+  dualTokenizer?: boolean;
   /** disable the rule-set local search (ablation) */
   noSearch?: boolean;
   /** disable the CHIRON structural block pass (ablation) */
@@ -823,10 +827,10 @@ export function buildOn(text: string, enc: EncodingName, sep: string, opts: Requ
   }
 
   /* ---- 5g. render, then optimise the glyph assignment ---- */
-  return renderBest(g, text, enc, { script: opts.script, noAssign: opts.noAssign, budgetMs: opts.budgetMs, allowPolyglot: opts.allowPolyglot }, deadline, estAfterGrammar, searchGain, estBefore);
+  return renderBest(g, text, enc, { script: opts.script, noAssign: opts.noAssign, budgetMs: opts.budgetMs, allowPolyglot: opts.allowPolyglot, dualTokenizer: opts.dualTokenizer }, deadline, estAfterGrammar, searchGain, estBefore);
 }
 
-export interface AssignOpts { script?: string; noAssign: boolean; budgetMs: number; scriptTries?: number; probeScale?: number; allowPolyglot?: boolean }
+export interface AssignOpts { script?: string; noAssign: boolean; budgetMs: number; scriptTries?: number; probeScale?: number; allowPolyglot?: boolean; dualTokenizer?: boolean }
 
 /**
  * Render a finished grammar and choose the rule->glyph assignment.
@@ -889,7 +893,7 @@ export function renderBest(
   const allowed = o.script ? CHIRON_SCRIPTS.filter(s2 => s2.name === o.script)
     : CHIRON_SCRIPTS.filter(s2 => (o.allowPolyglot ? true : s2.name !== 'polyglot'));
   const cands = allowed
-    .map(s2 => ({ s: s2, pool: scriptPool(s2, enc) }))
+    .map(s2 => ({ s: s2, pool: scriptPool(s2, enc, !!o.dualTokenizer) }))
     .map(({ s: s2, pool }) => ({ s: s2, pool, chars: pool.chars.filter(c => !payload.has(c)) }))
     .filter(x => x.chars.length >= needed)
     // more usable merge edges first; ties by alphabet size (headroom)
@@ -1348,6 +1352,7 @@ export function ariadneEncode(text: string, enc: EncodingName = 'o200k_base', op
     levels: options.levels ?? 6,
     noAssign: options.noAssign ?? false,
     allowPolyglot: options.allowPolyglot ?? false,
+    dualTokenizer: options.dualTokenizer ?? false,
     noSearch: options.noSearch ?? false,
     noBlocks: options.noBlocks ?? false,
     script: options.script,

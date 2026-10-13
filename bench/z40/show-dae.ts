@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import { daedalusEncode } from '@/lib/omega/daedalus';
+const f = process.argv[2];
+const t = fs.readFileSync(f, 'utf8');
+const r = daedalusEncode(t);
+console.log('IN', r.inTokens, 'OUT', r.outTokens, 'M', r.messageTokens, 'CONTRACT', r.contractTokens, 'ARM', r.winningArm, 'exact', r.exact);
+console.log('----PROMPT----');
+console.log(r.decoderPrompt.slice(0, 1500));
+console.log('----WIRE head----');
+console.log(r.wire.slice(0, 700));
