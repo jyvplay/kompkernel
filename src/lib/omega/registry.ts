@@ -114,6 +114,7 @@ import { veritasREncode } from './veritas-r';
 import { veritasKEncode } from './veritas-k';
 import { veritasMEncode } from './veritas-m';
 import { veritasQEncode } from './veritas-q';
+import { veritasPEncode } from './veritas-p';
 import { phalanxA10Encode } from './phalanx-a10';
 import { veritasCEncode } from './veritas-c';
 import { veritasUEncode } from './veritas-u';
@@ -769,6 +770,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'veritas-q', label: '⟁ VERITAS-Q (VERITAS-M search; legend carries the decode instruction: minimal legend without escapes, escape legend with them; decoder unchanged; identity-guarded; NOT Pareto-superior on the 151-file corpus)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = veritasQEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `legend=${r.legend}; entries=${r.entries}; one-chat=${r.outTokens} tok (instruction counted) vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'veritas-p', label: '⟁ VERITAS-P (VERITAS-R wire with the VERITAS-Q legend; line-level exact-delta search with look-past, exact whole-wire acceptance in refinement; decode-gated; identity-guarded; NOT Pareto-superior on the 151-file corpus: +8.6% vs DAEDALUS/A10 frontier, -0.4% vs VERITAS-Q)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = veritasPEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.outTokens, note: `legend=${r.legend}; entries=${r.entries}; trials=${r.trials}; one-chat=${r.outTokens} tok (instruction counted) vs identity ${r.inTokens}` }; },
     },
     {
       key: 'veritas-vx-multi', label: '⟁ VERITAS-VX multi-window (trigram+bigram candidates, real-token gate; same VX1 wire and decoder)', family: 'exact', fidelity: 'exact',
