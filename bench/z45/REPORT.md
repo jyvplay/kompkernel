@@ -20,7 +20,7 @@ was written to disk *before* the canonical file was read and then diffed by tool
 | Tokenizers | `gpt-tokenizer` o200k_base / cl100k_base, live counts (`src/lib/omega/bpe.ts`) |
 | Frontier encoder | `daedalusEncode` with `OMEGA_DET=1` (deterministic budget), same as z43 receipts |
 | Canon sources | `gh api` → github/choosealicense.com `_licenses/*.txt` @ `f717b235` (2026-10-02) and spdx/license-list-data `json/details/*.json` @ `31ba1a50` (2026-09-16); `COMMIT.txt` in each directory |
-| Fresh corpus | 88 real `LICENSE` files + 44 real headered source files fetched live from 90+ repositories (`bench/z45/corpus/*/INDEX.txt`, fetcher `bench/z45/fetch-canon-corpus.sh`) |
+| Fresh corpus | 87 real `LICENSE` files + 43 real headered source files fetched live from 90 repositories (`bench/z45/corpus/*/INDEX.txt`, fetcher `bench/z45/fetch-canon-corpus.sh`) |
 | Blind decode | done in-context by the model writing this report; from-memory artefacts on disk, diffed by tool |
 | Independent reader | `bench/anagnorisis_decode.py` (CPython, shares no code with the TS encoder; reuses the existing `bench/chiron_decode.py` for the inner DAEDALUS wire) |
 | Not available | any external LLM call; wall-clock-stable timings (the sandbox has 2 vCPUs and ran three evaluations concurrently) |
@@ -61,7 +61,7 @@ ANAGNORISIS is the first lane that uses the open-world floor, with three honesty
    `memorized` tier (reproduced byte-exactly from memory) from a `catalog` tier (readable
    natively, reproducible by the library decoder, not claimed reproducible from memory);
 3. the whitespace the reader does *not* know (prefix, re-wrap width, URL scheme, indentation,
-   CRLF) is carried explicitly as modifiers, and the encoder verifies the full round trip before
+   tabs, a dropped appendix, CRLF) is carried explicitly as modifiers, and the encoder verifies the full round trip before
    emitting anything; otherwise the plain frontier message is emitted unchanged.
 
 ---
@@ -138,50 +138,77 @@ dictionary is near identity. It is registered (`crasis`, guarded, exact on every
 guard makes it free and because the negative result is the receipt that the sub-token direction
 is exhausted — not because it moves the frontier.
 
-### D.3 ANAGNORISIS on the fresh corpus (88 LICENSE files, 44 headered sources)
+### D.3 ANAGNORISIS on the fresh corpus (87 LICENSE files, 43 headered sources)
 
-Recognition (`bench/z45/canon-try.ts`, all 132 files, no size filter):
+Recognition (`bench/z45/receipts/recognise-all.txt`, all 130 files, no size filter):
 
 | corpus | recognised | not recognised |
 |---|---:|---|
-| LICENSE files (88) | **55** | 22 `NOASSERTION`/custom texts (Elastic, Redis, SQLite blessing, Ruby, PHP-style hybrids…), BSD-3 with an organisation *and* a hand re-wrap (django, numpy, go, pytorch), old Vim/BSL variants |
-| headered sources (44) | **20** | project-specific notices (Chromium/Go "BSD-style" 3-liners, LLVM, Swift, OpenSSL, Netty, .NET, VS Code), FFmpeg's renamed LGPL notice whose last line was also re-joined, VLC's notice with trailing spaces |
+| LICENSE files (87) | **63 (72%)** | `NOASSERTION`/custom texts (Elastic, Redis, SQLite blessing, Ruby, Rust's dual notice, WordPress, Blender, Bun, Strapi…), BSD-3 with hanging-indent list items or an organisation *plus* a hand re-wrap (flask, httpie, django, numpy, go, pandas, pytorch, postgres), the real zlib text (see below), Vim/curl/Linux notices |
+| headered sources (43) | **20 (47%)** | project-specific notices (Chromium/Go "BSD-style" 3-liners, LLVM, Swift, OpenSSL, Netty, .NET, VS Code, Elastic, Redis), the ASF notice with two spaces after full stops (Spark), FFmpeg's renamed LGPL notice whose last line was also re-joined, VLC's notice with trailing spaces, files with no notice at all (pytorch, grafana, openai) |
 
-Of the 55 LICENSE recognitions, 12 are the GitHub template byte-for-byte, 8 are the same words
-re-flowed (`unwrapped`, `wrap 76/80`), 13 use one of the three named MIT renderings added from
-the corpus itself (`classic` — vue/eslint/angular/fastapi/three.js/bootstrap; `npm` —
-express/nest/webpack/commander; `jquery` — jquery/babel/lodash), 2 use `url https`, 2 fill the
-Apache appendix slot (`【Apache-2.0: 2026 OpenAI】`, `【Apache-2.0: 2024 Supabase】`), and 7 are a
-notice found inside a non-matching LICENSE file. **The three named renderings were added after
-looking at this corpus**, so their 13 hits are in-sample; the choosealicense-only catalogue
-recognises 36/88 (receipt: the run before the renderings were added printed `recognised=36`).
+How the 63 LICENSE recognitions were reached (each step is a modifier the reader can see):
+GitHub template byte-for-byte (`【MIT】`, `【Apache-2.0】`, `【GPL-3.0】`, `【BSL-1.0】`, `【0BSD】`,
+`【BlueOak-1.0.0】`…); the same words re-flowed (`【MIT; unwrapped】`, `【MIT; wrap 80】`,
+`【ISC; wrap 80】`); a dropped appendix (`【Apache-2.0; ending "END OF TERMS AND CONDITIONS"】`
+— requests, pdf.js, openssl, neovim); the FSF's tab-indented rendering (`【GPL-2.0; tabs】` — git);
+`url https` (netty, openssl, neovim); the Apache appendix slot filled (`【Apache-2.0: 2026 OpenAI】`,
+`【Apache-2.0: 2024 Supabase】`); and three named MIT renderings that are byte-identical across
+independent projects (`classic` — vue/eslint/angular/fastapi/three.js/bootstrap; `npm` —
+express/nest/webpack/commander; `jquery` — jquery/babel/lodash). **The three named renderings
+were added after looking at this corpus**, so their 13 hits are in-sample; the
+choosealicense-only catalogue, before any corpus-driven addition, recognised 36/87 (the run
+printed `recognised=36`), and the modifiers `ending`/`tabs` were likewise motivated by corpus
+files (7 hits). Out-of-sample recognition is therefore best stated as 36–43 of 87, in-sample as
+63 of 87.
 
-End-to-end message cost (`bench/z45/receipts/eval-canon.jsonl`, 126 files ≤ 80 KB; the
-four larger files were skipped for runtime only). Full table in the receipt; representative rows:
+A finding on the way: the real zlib licence (madler/zlib) has two spaces after `warranty.`;
+GitHub's template has one. The from-memory Zlib in §H, scored as a one-space failure against
+the template, matches the upstream text — the catalogue deliberately follows what GitHub writes
+into repositories, so upstream zlib files are an honest miss.
+
+End-to-end message cost (`bench/z45/receipts/eval-canon.jsonl`; files > 24 KB were skipped
+after the first pass because DAEDALUS alone needs 3–16 minutes per such file on this 2-vCPU
+sandbox — the skipped files' recognitions are in `recognise-all.txt`). Representative rows:
 
 | file | raw | DAEDALUS | ANAGNORISIS | Δ | reference emitted |
 |---|---:|---:|---:|---:|---|
 | licenses/google_guava.txt | 2262 | 1787 | **30** | −1757 | `【Apache-2.0】` |
-| licenses/openai_openai-python.txt | 2258 | ≈1790 | **46** | | `【Apache-2.0: 2026 OpenAI】` |
-| licenses/ansible_ansible.txt (GPL-3.0) | 7446 | | | | `【GPL-3.0】` |
+| licenses/openai_openai-python.txt | 2258 | 1778 | **46** | −1732 | `【Apache-2.0: 2026 OpenAI】` |
+| licenses/kubernetes_kubernetes.txt | 2262 | 1787 | **30** | −1757 | `【Apache-2.0】` |
+| licenses/netty_netty.txt | 2262 | 1787 | **42** | −1745 | `【Apache-2.0; url https】` |
+| licenses/obsproject_obs-studio.txt | 3886 | 3323 | **30** | −3293 | `【GPL-2.0】` |
 | licenses/facebook_react.txt | 223 | 223 | **41** | −182 | `【MIT】` |
-| licenses/vuejs_core.txt | 234 | 234 | | | `【MIT; layout classic】` |
-| licenses/d3_d3.txt | 156 | 156 | | | `【ISC; wrap 80】` |
+| licenses/eslint_eslint.txt | 222 | 222 | **56** | −166 | `【MIT; layout classic】` |
+| licenses/d3_d3.txt | 156 | 156 | **59** | −97 | `【ISC; wrap 80】` |
+| licenses/isaacs_node-glob.txt | 387 | 387 | **79** | −308 | `【BlueOak-1.0.0】` |
+| licenses/python_cpython.txt | 3164 | 2292 | 2223 | −69 | `【0BSD】` inside the PSF stack |
 | licenses/ReactiveX_rxjs.txt | 2271 | 1802 | 1763 | −39 | notice inside a non-matching Apache rendering |
 | headers/tensorflow_tensorflow_app.py | 296 | 296 | **225** | −71 | `【Apache-2.0 header; prefix "# "】` |
+| headers/kubernetes_kubernetes_hash.go | 214 | 214 | **127** | −87 | `【Apache-2.0 header】` |
 | headers/coreutils_coreutils_true.c | 542 | 542 | **453** | −89 | `【GPL-3.0 header; prefix "   "】` |
-| headers/google_guava_Strings.java | 3186 | | | | `【Apache-2.0 header; prefix " * "; wrap 100】` |
-| headers/apache_kafka_Utils.java | 15560 | | | | `【ASF header; prefix " * "】` |
-| headers/spring-framework_Assert.java | 6301 | | | | `【Apache-2.0 header; prefix " * "; url https; indent 5】` |
+| headers/servo_servo_lib.rs | 1754 | 1434 | 1434 | 0 | MPL notice (45 tokens) does not repay its clause → plain |
 
-(The rows left blank above are filled in §D.4 from the finished receipt; the receipt is the
-source of truth.)
+The complete per-file table, totals and the tier/mode split are in §D.4.
 
-### D.4 Receipt summary
+### D.4 Receipt summary (`bench/z45/receipts/SUMMARY.md`, generated by `bench/z45/summarise.py`)
 
-See `bench/z45/receipts/SUMMARY.md` (generated by `bench/z45/summarise.py` from the two
-`eval-*.jsonl` files once the runs finished): per-file table, totals per corpus, exactness count,
-and the split by catalogue tier (`memorized` / `catalog`) and by layout mode (exact / reflow).
+End-to-end, 106 of the 130 corpus files (all files ≤ 24 KB plus the first-pass files up to
+80 KB; the 24 larger ones were skipped because DAEDALUS alone needs 3–16 minutes per file here):
+
+| group | files | applied | raw Σ | DAEDALUS Σ | ANAGNORISIS Σ | Δ vs DAEDALUS | worse anywhere? |
+|---|---:|---:|---:|---:|---:|---:|---|
+| LICENSE files | 85 | 59 | 114,365 | 94,839 | **45,358** | **−52.2%** | no |
+| LICENSE files, applied only | 59 | 59 | — | 59,846 | **10,365** | **−82.7%** | no |
+| headered sources | 21 | 10 | 57,273 | 36,665 | 35,949 | −2.0% | no |
+| headered sources, applied only | 10 | 10 | — | 13,858 | 13,142 | −5.2% (−44…−89 tokens per file) | no |
+| shipped lanes (§D.1) | 22 | 1 | 42,810 | 20,329 | 20,147 | −0.9% (all of it lic-mit) | no |
+
+Every row of every run is `exact=true`. References by tier over the 69 applied corpus files:
+33 `memorized`, 34 `catalog`; by layout mode: 59 exact, 10 reflow. Largest single gains:
+ansible (GPL-3.0) −6151, obs-studio and vlc (GPL-2.0) −3293 each, every Apache LICENSE ≈ −1750;
+smallest accepted gains: rxjs −39 (a notice inside a non-matching rendering), guava
+Optional.java −44.
 
 ---
 
@@ -215,7 +242,7 @@ and the split by catalogue tier (`memorized` / `catalog`) and by layout mode (ex
 | 2 | Public-canon recognition (ANAGNORISIS) | yes, registered | −81.6% lic-mit; −98% Apache LICENSE; −70…−180 tokens per headered source |
 | 3 | Named alternative renderings of a canonical text | yes (3 MIT renderings) | +13 hits on 88; in-sample, flagged |
 | 4 | Greedy re-flow recovery (`wrap N`, `unwrapped`) | yes | +8 LICENSE hits, +2 header hits; exact by construction, reader-side counting flagged |
-| 5 | Variant recovery (url scheme, indentation, CRLF, slot defaults) | yes | Spring/Android/Netty/OpenAI/Supabase hits; adversarial inputs fall back to plain (§H) |
+| 5 | Variant recovery (url scheme, indentation, tabs, dropped appendix, CRLF, slot defaults) | yes | Spring/Android/Netty/OpenAI/Supabase/requests/pdf.js/openssl/neovim/git hits; adversarial inputs fall back to plain (§H) |
 | 6 | Zero-contract defined-terms dictionary | reasoned, not built | contract cost moves into quotes; no gain |
 | 7 | Static session codebook | reasoned, not built | not one-chat |
 | 8 | World-knowledge derivations | reasoned, probed | residue already minimal |
@@ -228,7 +255,7 @@ and the split by catalogue tier (`memorized` / `catalog`) and by layout mode (ex
 | path | what |
 |---|---|
 | `src/lib/omega/anagnorisis.ts` | the codec: recognition, notation, contract compiler, encoder, decoder, prompt |
-| `src/lib/omega/canon-catalog.ts` | generated catalogue (57 entries: 47 GitHub templates with slots, 3 named MIT renderings, 7 per-file notices), provenance in the header |
+| `src/lib/omega/canon-catalog.ts` | generated catalogue (57 entries: 47 GitHub template bodies with slots, 3 named MIT renderings, 7 per-file notices), provenance in the header |
 | `src/lib/omega/crasis.ts` | CRASIS codec |
 | `src/lib/omega/registry.ts` | `crasis` and `anagnorisis` registered (family `exact`) |
 | `bench/z45/build-canon.py` | regenerates the catalogue (+ `bench/z45/canon/catalog.json` for the Python reader) from the fetched sources |
@@ -237,7 +264,7 @@ and the split by catalogue tier (`memorized` / `catalog`) and by layout mode (ex
 | `bench/z45/canon/memory/` | from-memory reproductions used in the self-test |
 | `bench/z45/corpus/licenses/`, `bench/z45/corpus/headers/` | fresh corpus + `INDEX.txt` |
 | `bench/anagnorisis_decode.py` | independent CPython reader |
-| `bench/z45/receipts/` | `eval-lanes.jsonl/.log`, `eval-canon.jsonl/.log`, `xcheck-*.json`, `xcheck-summary.txt`, `SUMMARY.md` |
+| `bench/z45/receipts/` | `eval-lanes.jsonl/.log`, `eval-canon.jsonl/.log`, `recognise-all.txt`, `xcheck-*.json`, `xcheck-summary.txt`, `SUMMARY.md` |
 | `bench/z45/canon-try.ts`, `canon-dbg*.ts`, `clause-tokens.ts`, `crlf-test.ts`, `crosscheck-emit.ts` | probes used for the numbers above |
 | `bench/z45/*.ts` (fuse*, exc-probe, seam-probe, …) | the CRASIS probes from the first half of the turn |
 
@@ -255,7 +282,7 @@ choosealicense bodies:
 | BSD-2-Clause, BSD-3-Clause, Unlicense, WTFPL, 0BSD | byte-exact |
 | Apache-2.0 notice, GPL-3.0 notice | byte-exact modulo indentation |
 | ISC | every word right, wrapped at a different column |
-| Zlib | one extra space after `warranty.` |
+| Zlib | one extra space after `warranty.` — which turned out to be the *upstream* zlib text; GitHub's template is the odd one out (§D.3) |
 | MPL-2.0 notice | `http` written, canon has `https` |
 
 Consequence, built into the codec: tier `memorized` = {MIT, BSD-2, BSD-3, Unlicense, WTFPL,
@@ -330,10 +357,11 @@ Not repaired, by decision: hand re-wraps that are not greedy at any width (FFmpe
 django/numpy BSD), trailing-space notices (VLC), project-specific notices (Chromium/Go/LLVM/Swift
 three-liners: 20–30 tokens each, below the clause cost), SPDX renderings.
 
-Stopping rule: the codec is a no-op on every non-canonical lane file (Δ = 0, 21/22 lane files),
-wins by −182 tokens on the one canonical lane file, and is exact on every file of a 126-file fresh
-corpus; the two mechanisms left (word-level slots under reflow, project notices) are each worth
-≤ 2 corpus files. CRASIS is stopped as a negative result with receipts.
+Stopping rule: the codec is a no-op on every non-canonical lane file (Δ = 0 on 21 of 22 lane
+files), wins by −182 tokens on the one canonical lane file, and is exact on every file of the
+fresh corpus it was run on; the mechanisms left (word-level slots under reflow, hanging-indent
+lists, project notices) are each worth ≤ 2–4 corpus files. CRASIS is stopped as a negative
+result with receipts.
 
 **On ROSETTA's question** ("can the known-form idea be applied much more broadly to random /
 hybrid prose?"): no, and the self-test is the reason — a model's verbatim memory of even the most

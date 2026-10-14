@@ -38,3 +38,8 @@ o200k_base daedalus ops-real/du-usr-share.txt in=1634 oneChat=766 exact=true  32
 o200k_base anagnorisis ops-real/du-usr-share.txt in=1634 oneChat=766 exact=true  30196ms
 o200k_base daedalus ops-real/free-h.txt in=64 oneChat=64 exact=true  2570ms
 o200k_base anagnorisis ops-real/free-h.txt in=64 oneChat=64 exact=true  1212ms
+o200k_base daedalus ops-real/ls-usr-bin.txt in=17146 oneChat=3746 exact=true  232003ms
+o200k_base anagnorisis ops-real/ls-usr-bin.txt in=17146 oneChat=3746 exact=true  213001ms
+o200k_base daedalus ops-real/ls-usr-lib.txt in=949 oneChat=342 exact=true  4521ms
+o200k_base anagnorisis ops-real/ls-usr-lib.txt in=949 oneChat=342 exact=true  3669ms
+done

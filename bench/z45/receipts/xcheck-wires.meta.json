@@ -144,6 +144,33 @@
   "raw": 317
  },
  {
+  "file": "bench/z45/corpus/licenses/psf_requests.txt",
+  "applied": true,
+  "refs": [
+   "【Apache-2.0; ending \"of your accepting any such warranty or additional liability.\"】"
+  ],
+  "M": 55,
+  "raw": 2011
+ },
+ {
+  "file": "bench/z45/corpus/licenses/openssl_openssl.txt",
+  "applied": true,
+  "refs": [
+   "【Apache-2.0; url https; ending \"END OF TERMS AND CONDITIONS\"】"
+  ],
+  "M": 63,
+  "raw": 2018
+ },
+ {
+  "file": "bench/z45/corpus/licenses/git_git.txt",
+  "applied": true,
+  "refs": [
+   "【GPL-2.0; tabs】"
+  ],
+  "M": 216,
+  "raw": 4059
+ },
+ {
   "file": "bench/z45/corpus/headers/tensorflow_tensorflow_app.py",
   "applied": true,
   "refs": [
@@ -194,22 +221,6 @@
   ],
   "M": 2745,
   "raw": 5225
- },
- {
-  "file": "bench/z45/corpus/headers/spring-projects_spring-framework_Assert.java",
-  "applied": true,
-  "refs": [
-   "【Apache-2.0 header; prefix \" * \"; url https; indent 5】"
-  ],
-  "M": 2334,
-  "raw": 6301
- },
- {
-  "file": "bench/z45/corpus/headers/mozilla_gecko-dev_nsCOMPtr.h",
-  "applied": false,
-  "refs": [],
-  "M": 4687,
-  "raw": 10139
  },
  {
   "file": "bench/z45/corpus/headers/coreutils_coreutils_yes.c",

@@ -10,7 +10,8 @@ Written from the in-band contract line alone, e.g.
     without trailing spaces); layout = a named alternative line-breaking of the same
     words; wrap N = its paragraphs re-flowed greedily to N columns, prefix included;
     unwrapped = each paragraph on one line; url S = its URL with scheme S;
-    indent N = its indented line(s) indented by N spaces; CRLF = \\r\\n line ends.
+    indent N = its indented line(s) indented by N spaces; ending "s" = it stops after
+    the line s; tabs = its leading indentation uses tabs of 8 columns; CRLF = \\r\\n line ends.
 
 plus the public catalogue (bench/z45/canon/catalog.json, generated from
 github/choosealicense.com by bench/z45/build-canon.py).  The inner message is a
@@ -33,7 +34,7 @@ CATALOG = json.load(open(os.path.join(HERE, 'z45', 'canon', 'catalog.json'), enc
 SLOT = '\u0001'
 BY_KEY = {(e['id'], e['kind'], e.get('layout')): e for e in CATALOG}
 
-REF = re.compile(r'【([A-Za-z0-9.+-]+)( header)?((?:; (?:layout [a-z]+|prefix "(?:[^"\\]|\\.)*"|wrap \d+|unwrapped|url https?|indent \d+|CRLF))*)(?:: ([\s\S]*?))?】')
+REF = re.compile(r'【([A-Za-z0-9.+-]+)( header)?((?:; (?:layout [a-z]+|prefix "(?:[^"\\]|\\.)*"|wrap \d+|unwrapped|url https?|indent \d+|ending "(?:[^"\\]|\\.)*"|tabs|CRLF))*)(?:: ([\s\S]*?))?】')
 
 
 def resolve_slots(e, given):
@@ -90,6 +91,8 @@ def render(m):
     wrap = None
     url = None
     indent = None
+    ending = None
+    tabs = False
     crlf = False
     for mod in [x for x in mods.split('; ') if x]:
         if mod.startswith('layout '):
@@ -104,6 +107,10 @@ def render(m):
             url = mod[4:]
         elif mod.startswith('indent '):
             indent = int(mod[7:])
+        elif mod.startswith('ending '):
+            ending = json.loads(mod[7:])
+        elif mod == 'tabs':
+            tabs = True
         elif mod == 'CRLF':
             crlf = True
         else:
@@ -121,6 +128,14 @@ def render(m):
         body = body.replace('https://', 'http://')
     if indent is not None:
         body = re.sub(r'^ +(?=\S)', ' ' * indent, body, flags=re.M)
+    if tabs:
+        body = re.sub(r'^ {8,}', lambda m: '\t' * (len(m.group(0)) // 8) + ' ' * (len(m.group(0)) % 8), body, flags=re.M)
+    if ending is not None:
+        ls = body.split('\n')
+        k = next((i for i, l in enumerate(ls) if l.strip() == ending), -1)
+        if k < 0:
+            return None
+        body = '\n'.join(ls[:k + 1])
     if wrap is not None:
         s = reflow(body, prefix, wrap)
     else:

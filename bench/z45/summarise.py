@@ -23,7 +23,7 @@ def tiers_of(note):
     return m.group(1) if m else '-'
 
 out = ['# Z45 receipts summary (o200k_base, OMEGA_DET=1, one-chat cost = contract + wire)', '']
-for title, name in [('Shipped lanes (must be a no-op without canonical text)', 'eval-lanes.jsonl'), ('Fresh canon corpus (88 LICENSE files + 44 headered sources, files ≤ 80 KB)', 'eval-canon.jsonl')]:
+for title, name in [('Shipped lanes (must be a no-op without canonical text)', 'eval-lanes.jsonl'), ('Fresh canon corpus — end-to-end on 106 of the 130 files (87 LICENSE + 43 headered sources; files > 24 KB skipped for DAEDALUS runtime, their recognitions are in recognise-all.txt)', 'eval-canon.jsonl')]:
     rows = pair(load(name))
     if not rows: continue
     out += [f'## {title}', '', f'`{name}` — {len(rows)} files', '', '| file | raw | DAEDALUS | ANAGNORISIS | Δ | Δ% of raw | exact | reference(s) | tier |', '|---|---:|---:|---:|---:|---:|---|---|---|']

@@ -131,6 +131,10 @@ export interface CanonRef {
   url?: 'http' | 'https';
   /** indented lines of the text re-indented to this many spaces */
   indent?: number;
+  /** the text stops after the first line whose trimmed content equals this (files that drop an appendix) */
+  ending?: string;
+  /** leading indentation written with tabs of 8 columns (the FSF's own COPYING files) */
+  tabs?: boolean;
   crlf: boolean;
 }
 
@@ -159,6 +163,7 @@ function applyVariants(body: string, ref: CanonRef): string {
   if (ref.url === 'https') b = b.replace(/http:\/\//g, 'https://');
   else if (ref.url === 'http') b = b.replace(/https:\/\//g, 'http://');
   if (ref.indent !== undefined) b = b.replace(/^ +(?=\S)/gm, ' '.repeat(ref.indent));
+  if (ref.tabs) b = b.replace(/^ {8,}/gm, m => '\t'.repeat(m.length >> 3) + ' '.repeat(m.length & 7));
   return b;
 }
 
@@ -188,7 +193,13 @@ export function renderCanon(ref: CanonRef): string | null {
   if (!e) return null;
   const slots = resolveSlots(e, ref.slots);
   if (!slots) return null;
-  const filled = applyVariants(fillSlots(e.body, slots), ref);
+  let filled = applyVariants(fillSlots(e.body, slots), ref);
+  if (ref.ending !== undefined) {
+    const ls = filled.split('\n');
+    const k = ls.findIndex(l => l.trim() === ref.ending);
+    if (k < 0) return null;
+    filled = ls.slice(0, k + 1).join('\n');
+  }
   let s: string;
   if (ref.wrap !== undefined) s = reflow(filled, ref.prefix, ref.wrap);
   else s = filled.split('\n').map((l, i) => (i === 0 ? l : l === '' ? ref.prefix.trimEnd() : ref.prefix + l)).join('\n');
@@ -196,7 +207,7 @@ export function renderCanon(ref: CanonRef): string | null {
 }
 
 /* ---------------------------------------------------------------------------
- * 2. NOTATION — 【ID[ header][; layout name][; prefix "p"][; wrap N | unwrapped][; url https][; indent N][; CRLF][: slots | …]】
+ * 2. NOTATION — 【ID[ header][; layout name][; prefix "p"][; wrap N | unwrapped][; url https][; indent N][; ending "s"][; tabs][; CRLF][: slots | …]】
  * ------------------------------------------------------------------------- */
 
 export function formatRef(ref: CanonRef): string {
@@ -206,12 +217,14 @@ export function formatRef(ref: CanonRef): string {
   if (ref.wrap !== undefined) s += ref.wrap === Infinity ? '; unwrapped' : `; wrap ${ref.wrap}`;
   if (ref.url) s += `; url ${ref.url}`;
   if (ref.indent !== undefined) s += `; indent ${ref.indent}`;
+  if (ref.ending !== undefined) s += `; ending ${JSON.stringify(ref.ending)}`;
+  if (ref.tabs) s += '; tabs';
   if (ref.crlf) s += '; CRLF';
   if (ref.slots.length) s += ': ' + ref.slots.join(' | ');
   return s + CANON_CLOSE;
 }
 
-const REF_RE = /【([A-Za-z0-9.+-]+)( header)?((?:; (?:layout [a-z]+|prefix "(?:[^"\\]|\\.)*"|wrap \d+|unwrapped|url https?|indent \d+|CRLF))*)(?:: ([\s\S]*?))?】/g;
+const REF_RE = /【([A-Za-z0-9.+-]+)( header)?((?:; (?:layout [a-z]+|prefix "(?:[^"\\]|\\.)*"|wrap \d+|unwrapped|url https?|indent \d+|ending "(?:[^"\\]|\\.)*"|tabs|CRLF))*)(?:: ([\s\S]*?))?】/g;
 
 export function parseRef(inner: RegExpExecArray): CanonRef | null {
   const [, id, header, mods, slotText] = inner;
@@ -226,6 +239,8 @@ export function parseRef(inner: RegExpExecArray): CanonRef | null {
       else if (m === 'url https') ref.url = 'https';
       else if (m === 'url http') ref.url = 'http';
       else if (m.startsWith('indent ')) ref.indent = parseInt(m.slice(7), 10);
+      else if (m.startsWith('ending ')) { try { ref.ending = JSON.parse(m.slice(7)); } catch { return null; } }
+      else if (m === 'tabs') ref.tabs = true;
       else if (m === 'CRLF') ref.crlf = true;
       else return null;
     }
@@ -286,8 +301,8 @@ function matchExact(body: string, joined: string): { len: number; slots: string[
 }
 
 /** the search anchor: the first line's text after its first slot (whole first line when it has none) */
-function anchorOf(e: CanonEntry): string {
-  const first = e.body.split('\n')[0];
+function anchorOf(body: string): string {
+  const first = body.split('\n')[0];
   const k = first.lastIndexOf(CANON_SLOT);
   return (k < 0 ? first : first.slice(k + 1)).trimEnd().slice(0, 56);
 }
@@ -333,8 +348,9 @@ function variants(e: CanonEntry, wordsOnly = false): { body: string; ref: Partia
   else if (/http:\/\//.test(e.body)) urls.push({ url: 'https' });
   const indents: Partial<CanonRef>[] = [{}];
   if (!wordsOnly && /^ +\S/m.test(e.body)) for (let n = 0; n <= 8; n++) indents.push({ indent: n });
+  if (!wordsOnly && /^ {8,}\S/m.test(e.body)) indents.push({ tabs: true });
   for (const u of urls) for (const d of indents) {
-    if (!u.url && d.indent === undefined) continue;
+    if (!u.url && d.indent === undefined && !d.tabs) continue;
     const ref = { ...u, ...d };
     out.push({ body: applyVariants(e.body, { id: e.id, kind: e.kind, slots: [], prefix: '', crlf: false, ...ref }), ref });
   }
@@ -354,14 +370,12 @@ export function recogniseCanon(text: string, tiers: ReadonlySet<CanonTier> = new
   const found: Found[] = [];
   for (const e of CANON) {
     if (!tiers.has(canonTier(e))) continue;
-    const anchor = anchorOf(e);
-    if (anchor.trim().length < 8) continue;
     const nLines = e.body.split('\n').length;
-    let from = 0;
-    while (from < text.length) {
-      const hitAt = text.indexOf(anchor, from);
-      if (hitAt < 0) break;
-      from = hitAt + 1;
+    // one anchor per distinct first line among the entry's variants (tabs / url may change it)
+    const anchors = Array.from(new Set(variants(e).map(v => anchorOf(v.body)))).filter(a => a.trim().length >= 8);
+    const hits: number[] = [];
+    for (const anchor of anchors) { let from = 0, k: number; while ((k = text.indexOf(anchor, from)) >= 0) { hits.push(k); from = k + 1; } }
+    for (const hitAt of Array.from(new Set(hits)).sort((x, y) => x - y)) {
       const ls = text.lastIndexOf('\n', hitAt - 1) + 1;
       const lead = LEAD_RE.exec(text.slice(ls, hitAt))![0];
       const at = ls + lead.length;             // the region starts after the first line's own prefix
@@ -384,10 +398,25 @@ export function recogniseCanon(text: string, tiers: ReadonlySet<CanonTier> = new
           const start = at, end = origOffset(lines, m.len);
           if (renderCanon(ref) === text.slice(start, end)) { found.push({ start, end, ref, entry: e }); done = true; break; }
         }
-        if (done || e.slots !== 0) continue;
-        // REFLOW (slot-free entries): the same words, one paragraph per line or greedily re-wrapped at some width
+        // TRUNCATED: the file stops partway through the template, at a line end (e.g. Apache text without its appendix)
+        for (const v of variants(e)) {
+          const body = fillSlots(v.body, e.defaults ?? Array(e.slots).fill(''));
+          if (e.slots && !e.defaults) break;
+          let c = 0; const n = Math.min(body.length, joined.length);
+          while (c < n && body.charCodeAt(c) === joined.charCodeAt(c)) c++;
+          if (c >= body.length || c < body.length * 0.5) continue;
+          let cut = body.lastIndexOf('\n', c);
+          while (cut > 0 && body.slice(body.lastIndexOf('\n', cut - 1) + 1, cut).trim() === '') cut = body.lastIndexOf('\n', cut - 1);
+          if (cut <= 0 || cut < body.length * 0.5) continue;
+          const ending = body.slice(body.lastIndexOf('\n', cut - 1) + 1, cut).trim();
+          const ref: CanonRef = { ...base, ...v.ref, ending };
+          const start = at, end = origOffset(lines, cut);
+          if (renderCanon(ref) === text.slice(start, end)) { found.push({ start, end, ref, entry: e }); done = true; break; }
+        }
+        if (done || (e.slots !== 0 && !e.defaults)) continue;
+        // REFLOW (slot-free entries, or slots left at their default words): the same words, one paragraph per line or greedily re-wrapped at some width
         for (const v of variants(e, true)) {
-          const tw = words(v.body);
+          const tw = words(e.slots ? fillSlots(v.body, e.defaults!) : v.body);
           const rw: { w: string; end: number }[] = [];
           const re = /\S+/g; let mm: RegExpExecArray | null;
           while ((mm = re.exec(joined)) && rw.length < tw.length) rw.push({ w: mm[0], end: mm.index + mm[0].length });
@@ -431,6 +460,8 @@ export function canonClause(refs: readonly CanonRef[]): string {
   if (refs.some(r => r.wrap === Infinity)) parts.push('unwrapped = each paragraph on one line');
   if (refs.some(r => r.url)) parts.push('url S = its URL with scheme S');
   if (refs.some(r => r.indent !== undefined)) parts.push('indent N = its indented line(s) indented by N spaces');
+  if (refs.some(r => r.ending !== undefined)) parts.push('ending "s" = it stops after the line s');
+  if (refs.some(r => r.tabs)) parts.push('tabs = its leading indentation uses tabs of 8 columns');
   if (refs.some(r => r.crlf)) parts.push('CRLF = \\r\\n line ends');
   return parts.join('; ') + '.';
 }
