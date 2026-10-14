@@ -1,0 +1,38 @@
+# z51 probe outputs, copied verbatim from the terminal runs of this turn (OMEGA_DET=1, o200k, M = tokens(contract + wire)).
+# Each line is the JSON row printed by the probe script named in the header of the line.
+
+## bench/z51/brace-probe.ts (naive brace rewrite, paths only, NO sentence cost; upper bound)
+{"f":"bench/holdout-ops/find-listing.txt","paths":120,"rawPlain":1515,"M_plain":503,"rawBrace":588,"M_brace":473,"exactBrace":true,"delta":-30}
+
+## bench/z51/brace-probe2.ts (naive brace rewrite + 27-token sentence; before DEN_RULE existed; whole-file trailing newline counted as "")
+{"f":"bench/z51/corpus/find-omega.txt","n":233,"rawPlain":2132,"M_plain":767,"M_brace_body":787,"sentTok":27,"M_brace_total":814,"net":47,"exact":true}
+{"f":"bench/z51/corpus/find-holdouts.txt","n":43,"rawPlain":448,"M_plain":262,"M_brace_body":233,"sentTok":27,"M_brace_total":260,"net":-2,"exact":true}
+{"f":"bench/z51/corpus/find-bench-md.txt","n":169,"rawPlain":2308,"M_plain":1099,"M_brace_body":1036,"sentTok":27,"M_brace_total":1063,"net":-36,"exact":true}
+{"f":"bench/z51/corpus/git-ls-files-400.txt","n":400,"rawPlain":3951,"M_plain":1563,"M_brace_body":1426,"sentTok":27,"M_brace_total":1453,"net":-110,"exact":true}
+
+## bench/z51/brace-probe3.ts (URL list, naive brace rewrite + 27-token sentence)
+{"f":"bench/z51/corpus/urls-unique.txt","n":450,"rawPlain":7545,"M_plain":4058,"M_brace_body":3874,"sentTok":27,"net":-157,"exact":true}
+
+## bench/z51/brace-generic.ts (whole-line trie, timestamps in find-listing; NOT adopted)
+{"f":"bench/holdout-ops/find-listing.txt","seps":"/","n":120,"M_plain":1326,"M_brace_body":1326,"net":27,"pct":2.04,"exact":true}
+{"f":"bench/holdout-ops/find-listing.txt","seps":"/.:-T ","n":120,"M_plain":1326,"M_brace_body":1302,"net":3,"pct":0.23,"exact":true}
+
+## bench/z51/hunk-mass.ts (unified-diff hunk header share of tokens, real patches from this repo's git log)
+{"f":"/tmp/real-diffs.patch","total":125215,"hunks":42,"hdrTok":470,"hdrShare":0.38,"countTok":199,"countShare":0.16}
+{"f":"bench/holdout-work/unified-diff.patch","total":578,"hunks":3,"hdrTok":64,"hdrShare":11.07,"countTok":14,"countShare":2.42}
+
+## bench/z51/contract-count.ts (contract sentence variants, o200k tokens)
+shipped_clause 39 / V1 39 / V2 35 / V3 33 / V4 28 / V5 30 / V6 31   (DAEDALUS contract wording; NOT adopted)
+
+## bench/z51/rule-count.ts (DEN_RULE candidate wordings)
+shipped(first DEN_RULE) 39 / R1 41 / R2 35 / R3 33 / R4 23 / ESC 7
+R5 36 / R6 35 (ADOPTED) / R7 38
+
+## bench/z51/size-probe.ts (git-ls-files prefix of N lines, final DENDRON code)
+{"n":24,"frontier":168,"dendron":168,"delta":0,"applied":false,"treeLines":6}
+{"n":40,"frontier":222,"dendron":222,"delta":0,"applied":false,"treeLines":6}
+{"n":80,"frontier":359,"dendron":359,"delta":0,"applied":false,"treeLines":6}
+{"n":160,"frontier":695,"dendron":682,"delta":-13,"applied":true,"treeLines":6}
+
+## bench/z51/receipts/blind (in-context decode; see REPORT §5)
+expected-original.txt = 40 lines; message.txt = DEN_RULE + tree (916 chars); decoded-by-hand.txt cmp: BYTE-IDENTICAL.

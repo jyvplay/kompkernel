@@ -1,0 +1,17 @@
+{"name":"url-host-run","raw":21,"frontier":21,"dendron":21,"delta":0,"applied":false,"treeLines":1,"notes":"frontier wins: tree arm 46 >= 21","tsExact":true,"pyExact":true}
+{"name":"deep-300","raw":3899,"frontier":319,"dendron":319,"delta":0,"applied":false,"treeLines":1,"notes":"frontier wins: tree arm 371 >= 319","tsExact":true,"pyExact":true}
+{"name":"dup-lines","raw":12,"frontier":12,"dendron":12,"delta":0,"applied":false,"treeLines":1,"notes":"frontier wins: tree arm 43 >= 12","tsExact":true,"pyExact":true}
+{"name":"empty-item","raw":7,"frontier":7,"dendron":7,"delta":0,"applied":false,"treeLines":1,"notes":"frontier wins: tree arm 41 >= 7","tsExact":true,"pyExact":true}
+{"name":"prefix-equal","raw":13,"frontier":13,"dendron":13,"delta":0,"applied":false,"treeLines":1,"notes":"frontier wins: tree arm 45 >= 13","tsExact":true,"pyExact":true}
+{"name":"abs-and-dot","raw":15,"frontier":15,"dendron":15,"delta":0,"applied":false,"treeLines":2,"notes":"frontier wins: tree arm 47 >= 15","tsExact":true,"pyExact":true}
+{"name":"unicode-paths","raw":20,"frontier":20,"dendron":20,"delta":0,"applied":false,"treeLines":1,"notes":"frontier wins: tree arm 48 >= 20","tsExact":true,"pyExact":true}
+{"name":"trailing-newline-refused","raw":9,"frontier":9,"dendron":9,"delta":0,"applied":false,"treeLines":2,"notes":"frontier wins: tree arm 41 >= 9","tsExact":true,"pyExact":true}
+{"name":"space-in-path-refused","raw":11,"frontier":11,"dendron":11,"delta":0,"applied":false,"treeLines":1,"notes":"frontier wins: tree arm 42 >= 11","tsExact":true,"pyExact":true}
+{"name":"brace-in-path-refused","raw":9,"frontier":9,"dendron":9,"delta":0,"applied":false,"treeLines":0,"notes":"not applicable: lines must be non-empty single tokens with at least 2 containing \"/\"","tsExact":true,"pyExact":true}
+{"name":"comma-in-path-refused","raw":9,"frontier":9,"dendron":9,"delta":0,"applied":false,"treeLines":0,"notes":"not applicable: lines must be non-empty single tokens with at least 2 containing \"/\"","tsExact":true,"pyExact":true}
+{"name":"prose-no-slash","raw":17,"frontier":17,"dendron":17,"delta":0,"applied":false,"treeLines":0,"notes":"not applicable: lines must be non-empty single tokens with at least 2 containing \"/\"","tsExact":true,"pyExact":true}
+{"name":"payload-starts-with-rule","raw":43,"frontier":43,"dendron":51,"delta":8,"applied":false,"treeLines":0,"notes":"escape: payload carries a dispatch line (or the plain arm did not dispatch)","tsExact":true,"pyExact":true}
+{"name":"payload-starts-with-escape","raw":16,"frontier":16,"dendron":24,"delta":8,"applied":false,"treeLines":0,"notes":"escape: payload carries a dispatch line (or the plain arm did not dispatch)","tsExact":true,"pyExact":true}
+{"name":"rule-line-in-middle","raw":43,"frontier":43,"dendron":51,"delta":8,"applied":false,"treeLines":0,"notes":"escape: payload carries a dispatch line (or the plain arm did not dispatch)","tsExact":true,"pyExact":true}
+{"name":"section-sign-first","raw":13,"frontier":13,"dendron":13,"delta":0,"applied":false,"treeLines":2,"notes":"frontier wins: tree arm 46 >= 13","tsExact":true,"pyExact":true}
+RED-TEAM: 16/16 byte-identical under native (TS) and CPython readers

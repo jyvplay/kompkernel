@@ -101,6 +101,7 @@ import { epagogeEncode } from './epagoge';
 import { elleipsisEncode } from './elleipsis';
 import { paradeigmaEncode } from './paradeigma';
 import { synartesisEncode } from './synartesis';
+import { denEncode } from './dendron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
 import { tabminEncode } from './tabmin';
@@ -721,6 +722,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'synartesis', label: '⊢ SYNARTESIS (Entailment from an enclosing key: in an npm lockfile the "resolved" URL of an entry (key node_modules/NAME, version V) is the registry tarball URL built from NAME and V — a function the dictionary cannot see, because its name and version recur inside it. The entry\'s "resolved" line is removed where the rule rebuilds it exactly, one 72-token sentence states the convention and the insertion point, and the reduced JSON is coded by PARADEIGMA (its clause and DAEDALUS). Guards: PARADEIGMA result when the reduced arm does not pay or fails the round trip, so M ≤ PARADEIGMA ≤ DAEDALUS; escape line for payloads that begin with the rule prefix. Measured: 117 of 117 resolved lines in the repository lockfile)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = synartesisEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `reducedArm=${r.reducedArm}; elidedResolved=${r.elidedResolved}; paradeigmaM=${r.paradeigmaM}; reducedM=${r.reducedM ?? '-'}; one-chat=${r.messageTokens} tok (contract counted); ${r.synNotes}` }; },
+    },
+    {
+      key: 'dendron', label: '⊢ ΔΕΝΔΡΟΝ (Brace-tree notation for path and URL lists: a run of lines that share a first segment is written once as a bash brace group, `dir/{a,b/{c,d}}`, which the reader expands in order; the tree wire is used only when it is strictly cheaper than the DAEDALUS frontier, and the dispatch line is escaped for payloads that carry it. Measured: git ls-files (400 files) −102 (−6.5%), markdown paths −19 (−1.7%), 160-line git listing −13; everything else, including timestamped listings, prose and JSON, ties the frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = denEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.applied}; frontierM=${r.frontierM}; treeM=${r.treeM ?? '-'}; treeLines=${r.treeLines}; one-chat=${r.messageTokens} tok (contract counted); ${r.notes}` }; },
     },
     {
       key: 'elleipsis', label: '○ ELLEIPSIS (Positional ellipsis: a constant that sits at a fixed field position in every record of a stated class — a shared path prefix on the last field of a listing, a constant column — is removed with no marker and restored by one sentence naming the position, the constant and the lines that keep it literally; then DAEDALUS; exact, identity-guarded. Measured: constants already folded by the dictionary are free (newline/padding/",," residue), so only prefix-before-word removals pay)', family: 'exact', fidelity: 'exact',

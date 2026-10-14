@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import { daedalusEncode } from '@/lib/omega/daedalus';
+import { countTokens } from '@/lib/omega/bpe';
+const f = process.argv[2];
+const text = fs.readFileSync(f, 'utf8');
+const d = daedalusEncode(text, 'o200k_base', {});
+console.log('M', d.messageTokens, 'wire', d.outTokens, 'contract', d.contractTokens);
+console.log('--- prompt tail (contract) ---');
+const p = d.decoderPrompt; const idx = p.indexOf('\n');
+console.log(JSON.stringify(p.slice(p.length - 600)));
+console.log('contract tokens', countTokens(p.slice(p.length - 600), 'o200k_base'));
+console.log('--- wire head ---');
+console.log(JSON.stringify(d.wire.slice(0, 500)));
+console.log('rules count', d.phraseRules, 'words', d.wordRules);
