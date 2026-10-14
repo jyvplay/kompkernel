@@ -1,0 +1,15 @@
+o200k_base daedalus traces/net_anegostudios_VintageStory-Issues_9850.md in=1474 oneChat=970 exact=true  4926ms
+o200k_base enthymeme traces/net_anegostudios_VintageStory-Issues_9850.md in=1474 oneChat=970 exact=true  4408ms
+o200k_base daedalus traces/net_artempyanykh_marksman_408.md in=938 oneChat=607 exact=true  5179ms
+o200k_base enthymeme traces/net_artempyanykh_marksman_408.md in=938 oneChat=607 exact=true  5132ms
+o200k_base daedalus traces/net_dafny-lang_dafny_6503.md in=4487 oneChat=1475 exact=true  23888ms
+o200k_base enthymeme traces/net_dafny-lang_dafny_6503.md in=4487 oneChat=1475 exact=true  24844ms
+o200k_base daedalus traces/net_decentraland_unity-explorer_10430.md in=2458 oneChat=615 exact=true  9236ms
+o200k_base enthymeme traces/net_decentraland_unity-explorer_10430.md in=2458 oneChat=615 exact=true  9229ms
+o200k_base daedalus traces/net_jellyfin_jellyfin_18053.md in=6802 oneChat=2339 exact=true  35454ms
+o200k_base enthymeme traces/net_jellyfin_jellyfin_18053.md in=6802 oneChat=2339 exact=true  35271ms
+o200k_base daedalus traces/net_sonicretro_SonLVL_223.md in=1249 oneChat=579 exact=true  10073ms
+o200k_base enthymeme traces/net_sonicretro_SonLVL_223.md in=1249 oneChat=579 exact=true  10328ms
+o200k_base daedalus traces/php_Formation-Media_glowt-4-aegis-module_234.md in=3633 oneChat=1077 exact=true  20480ms
+o200k_base enthymeme traces/php_Formation-Media_glowt-4-aegis-module_234.md in=3633 oneChat=1077 exact=true  22282ms
+o200k_base daedalus traces/php_firefly-iii_firefly-iii_12958.md in=4254 oneChat=1016 exact=true  24356ms

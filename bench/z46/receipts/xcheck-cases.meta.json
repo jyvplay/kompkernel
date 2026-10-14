@@ -1,0 +1,210 @@
+[
+ {
+  "file": "bench/z46/corpus/traces/alibaba_druid_6414.md",
+  "applied": true,
+  "rules": [
+   "frames"
+  ],
+  "elided": 35,
+  "M": 852,
+  "plainM": 867,
+  "raw": 1477
+ },
+ {
+  "file": "bench/z46/corpus/traces/buttasam_cms-boot_3.md",
+  "applied": true,
+  "rules": [
+   "frames"
+  ],
+  "elided": 50,
+  "M": 944,
+  "plainM": 2354,
+  "raw": 2354
+ },
+ {
+  "file": "bench/z46/corpus/traces/couchbase_CouchbaseMock_11.md",
+  "applied": true,
+  "rules": [
+   "frames"
+  ],
+  "elided": 16,
+  "M": 676,
+  "plainM": 678,
+  "raw": 868
+ },
+ {
+  "file": "bench/z46/corpus/traces/getsentry_sentry-java_1863.md",
+  "applied": true,
+  "rules": [
+   "frames"
+  ],
+  "elided": 112,
+  "M": 1061,
+  "plainM": 2800,
+  "raw": 2800
+ },
+ {
+  "file": "bench/z46/corpus/traces/getsentry_sentry-java_980.md",
+  "applied": true,
+  "rules": [
+   "frames"
+  ],
+  "elided": 103,
+  "M": 2003,
+  "plainM": 3974,
+  "raw": 3974
+ },
+ {
+  "file": "bench/z46/corpus/traces/netty_netty_16626.md",
+  "applied": true,
+  "rules": [
+   "frames"
+  ],
+  "elided": 61,
+  "M": 1692,
+  "plainM": 3106,
+  "raw": 3106
+ },
+ {
+  "file": "bench/z46/corpus/traces/oracle_graal_12109.md",
+  "applied": true,
+  "rules": [
+   "frames"
+  ],
+  "elided": 35,
+  "M": 1739,
+  "plainM": 1750,
+  "raw": 2596
+ },
+ {
+  "file": "bench/z46/corpus/traces/spring-projects_spring-framework_35118.md",
+  "applied": true,
+  "rules": [
+   "frames"
+  ],
+  "elided": 37,
+  "M": 930,
+  "plainM": 963,
+  "raw": 1895
+ },
+ {
+  "file": "bench/z46/corpus/traces/spring-projects_spring-loaded_102.md",
+  "applied": false,
+  "rules": [],
+  "elided": 0,
+  "M": 153,
+  "plainM": 153,
+  "raw": 1360
+ },
+ {
+  "file": "bench/z46/corpus/traces/spring-projects_spring-loaded_138.md",
+  "applied": true,
+  "rules": [
+   "frames"
+  ],
+  "elided": 79,
+  "M": 658,
+  "plainM": 1989,
+  "raw": 1989
+ },
+ {
+  "file": "bench/z46/corpus/toc/axios_axios.md",
+  "applied": true,
+  "rules": [
+   "anchors"
+  ],
+  "elided": 43,
+  "M": 2167,
+  "plainM": 5585,
+  "raw": 5585
+ },
+ {
+  "file": "bench/z46/corpus/toc/donnemartin_system-design-primer.md",
+  "applied": true,
+  "rules": [
+   "anchors"
+  ],
+  "elided": 99,
+  "M": 3476,
+  "plainM": 5765,
+  "raw": 5765
+ },
+ {
+  "file": "bench/z46/corpus/toc/goldbergyoni_nodebestpractices.md",
+  "applied": false,
+  "rules": [],
+  "elided": 0,
+  "M": 4442,
+  "plainM": 4442,
+  "raw": 6777
+ },
+ {
+  "file": "bench/z46/corpus/toc/jwasham_coding-interview-university.md",
+  "applied": true,
+  "rules": [
+   "anchors"
+  ],
+  "elided": 84,
+  "M": 4277,
+  "plainM": 5972,
+  "raw": 5972
+ },
+ {
+  "file": "bench/z46/corpus/toc/ohmyzsh_ohmyzsh.md",
+  "applied": true,
+  "rules": [
+   "anchors"
+  ],
+  "elided": 35,
+  "M": 4562,
+  "plainM": 6132,
+  "raw": 6132
+ },
+ {
+  "file": "bench/z46/corpus/toc/vinta_awesome-python.md",
+  "applied": true,
+  "rules": [
+   "anchors"
+  ],
+  "elided": 75,
+  "M": 3982,
+  "plainM": 5983,
+  "raw": 5983
+ },
+ {
+  "file": "bench/holdout-work/email-thread.txt",
+  "applied": false,
+  "rules": [],
+  "elided": 0,
+  "M": 525,
+  "plainM": 525,
+  "raw": 629
+ },
+ {
+  "file": "bench/holdout/readme.txt",
+  "applied": false,
+  "rules": [],
+  "elided": 0,
+  "M": 688,
+  "plainM": 688,
+  "raw": 843
+ },
+ {
+  "file": "bench/holdout/lic-mit.txt",
+  "applied": false,
+  "rules": [],
+  "elided": 0,
+  "M": 223,
+  "plainM": 223,
+  "raw": 223
+ },
+ {
+  "file": "bench/holdout-ops/node-stacktraces.txt",
+  "applied": false,
+  "rules": [],
+  "elided": 0,
+  "M": 339,
+  "plainM": 339,
+  "raw": 568
+ }
+]

@@ -1,0 +1,6 @@
+∴ Stack frames: "at C.m(:N)" = "at C.m(S.java:N)", S = C after its last ".", cut at the first "$".
+§қ        at org.gradleн)
+қь.api.internal.tasks.executionаньүExecuter.executeеү(:вTaskеин.internal.operations.DefaultBuildOperationExecutorун.execution.taskgraph.DefaultTaskшуPlanExecutor$TaskExecutorWorkerо.execute(:њуExecutionGraph$ExecuteTaskActionози$RunnableBuildOperationWorkerоса.Skipъа.EventFiringӯш$1о¶java.lang.IllegalStateException: boom
+қь.ExecuteActionsTaskүActions(:110а.ExecuteActionsв77а.OutputDirectoryCreatingв51сUpToDateв59а.ResolveTaskOutputCachingStateе54а.Validatingв59сEmptySourceFilesв101а.FinalizeInputFilePropertiesв44а.CleanupStaleOutputsе91а.ResolveTaskArtifactStateв62сTaskWithNoActionsе59сOnlyIfв54а.ExecuteAtMostOnceв43а.CatchExceptionв34ъTaskExecuter$1.run(:51з317з309ио185и.run(:97н.internal.operations.DelegatingBuildOperationExecutor.run(:31ъв46њ262њ246ӯ136ӯ130шо201)
+
+Every new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result.

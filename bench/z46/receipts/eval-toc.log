@@ -1,0 +1,13 @@
+o200k_base daedalus toc/axios_axios.md in=5585 oneChat=2281 exact=true  162454ms
+o200k_base enthymeme toc/axios_axios.md in=5585 oneChat=2167 exact=true  128199ms
+o200k_base daedalus toc/donnemartin_system-design-primer.md in=5765 oneChat=3825 exact=true  55489ms
+o200k_base enthymeme toc/donnemartin_system-design-primer.md in=5765 oneChat=3476 exact=true  53577ms
+o200k_base daedalus toc/goldbergyoni_nodebestpractices.md in=6777 oneChat=4442 exact=true  20269ms
+o200k_base enthymeme toc/goldbergyoni_nodebestpractices.md in=6777 oneChat=4442 exact=true  21770ms
+o200k_base daedalus toc/jwasham_coding-interview-university.md in=5972 oneChat=4642 exact=true  48359ms
+o200k_base enthymeme toc/jwasham_coding-interview-university.md in=5972 oneChat=4277 exact=true  46511ms
+o200k_base daedalus toc/ohmyzsh_ohmyzsh.md in=6132 oneChat=4685 exact=true  36550ms
+o200k_base enthymeme toc/ohmyzsh_ohmyzsh.md in=6132 oneChat=4562 exact=true  34886ms
+o200k_base daedalus toc/vinta_awesome-python.md in=5983 oneChat=4202 exact=true  21720ms
+o200k_base enthymeme toc/vinta_awesome-python.md in=5983 oneChat=3982 exact=true  30549ms
+done
