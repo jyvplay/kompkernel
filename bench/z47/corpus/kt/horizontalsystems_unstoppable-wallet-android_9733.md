@@ -1,0 +1,12 @@
+Exception java.util.NoSuchElementException: Collection contains no element matching the predicate.
+  at io.horizontalsystems.bitcoincore.storage.Storage.getFullTransactionInfo (Storage.kt:582)
+  at io.horizontalsystems.bitcoincore.storage.Storage.getFullTransactionInfo (Storage.kt:250)
+  at io.horizontalsystems.bitcoincore.core.DataProvider$transactions$2.invokeSuspend (DataProvider.kt:101)
+  at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith (ContinuationImpl.kt:34)
+  at kotlinx.coroutines.DispatchedTask.run (DispatchedTask.kt:100)
+  at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run (LimitedDispatcher.kt:124)
+  at kotlinx.coroutines.scheduling.TaskImpl.run (Tasks.kt:89)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely (CoroutineScheduler.kt:586)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask (CoroutineScheduler.kt:798)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker (CoroutineScheduler.kt:717)
+  at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run (CoroutineScheduler.kt:704)

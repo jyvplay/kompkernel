@@ -1,0 +1,8 @@
+bench/z47/corpus/changelog/Esri_esri-leaflet.md
+bench/z47/corpus/changelog/MarvinJWendt_testza.md
+bench/z47/corpus/changelog/MetaMask_eth-json-rpc-infura.md
+bench/z47/corpus/changelog/jaredhanson_passport-openidconnect.md
+bench/z47/corpus/changelog/mikaelmello_inquire.md
+bench/z47/corpus/changelog/svenstaro_miniserve.md
+bench/z47/corpus/changelog/thoughtbot_clearance.md
+bench/z47/corpus/changelog/ucfopen_canvasapi.md

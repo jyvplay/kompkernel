@@ -1,0 +1,17 @@
+o200k_base epagoge traces/alibaba_druid_6414.md in=1477 oneChat=852 exact=true  22788ms
+o200k_base epagoge traces/buttasam_cms-boot_3.md in=2354 oneChat=944 exact=true  11581ms
+o200k_base epagoge traces/couchbase_CouchbaseMock_11.md in=868 oneChat=676 exact=true  4817ms
+o200k_base epagoge traces/getsentry_sentry-java_1863.md in=2800 oneChat=1061 exact=true  9158ms
+o200k_base epagoge traces/getsentry_sentry-java_980.md in=3974 oneChat=2003 exact=true  16250ms
+o200k_base epagoge traces/netty_netty_16626.md in=3106 oneChat=1692 exact=true  15351ms
+o200k_base epagoge traces/oracle_graal_12109.md in=2596 oneChat=1739 exact=true  32376ms
+o200k_base epagoge traces/spring-projects_spring-framework_35118.md in=1895 oneChat=930 exact=true  15398ms
+o200k_base epagoge traces/spring-projects_spring-loaded_102.md in=1360 oneChat=153 exact=true  1421ms
+o200k_base epagoge traces/spring-projects_spring-loaded_138.md in=1989 oneChat=671 exact=true  6674ms
+o200k_base epagoge toc/axios_axios.md in=5585 oneChat=2167 exact=true  86760ms
+o200k_base epagoge toc/donnemartin_system-design-primer.md in=5765 oneChat=3476 exact=true  47255ms
+o200k_base epagoge toc/goldbergyoni_nodebestpractices.md in=6777 oneChat=4442 exact=true  12542ms
+o200k_base epagoge toc/jwasham_coding-interview-university.md in=5972 oneChat=4277 exact=true  35321ms
+o200k_base epagoge toc/ohmyzsh_ohmyzsh.md in=6132 oneChat=4562 exact=true  26464ms
+o200k_base epagoge toc/vinta_awesome-python.md in=5983 oneChat=3982 exact=true  23646ms
+done

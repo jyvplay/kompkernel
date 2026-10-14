@@ -1,0 +1,43 @@
+∴ Release links: "[V]:" alone on a line = "[V]: https://github.com/MetaMask/eth-json-rpc-infura/compare/vP...vV", P = the V of the next "[P]:" line.
+§Т://github.com/MetaMaskн](httpsТС-rpcьeth-jsonС-infuraа/ьвна/pull/л.0яллу]:
+[хлуқ.1лйллуж] - 202елж0-09-әeth-jsonС-middlewareо.1Ұ))
+  -Ў ([#ҙ### Changed
+-т))
+  - `с/blob/main/CHANGELOG.md#ӨSA-r683-j2x4-v87gг- **BREAKING:**му8.1рmetamaskэ TypeScript type definitions ([#58иethС-errorsк` ([#ӡ## [Ґ### Added
+- Addы ([changelogҗ:
+    ```
+    importң `node-fetch`дв28))
+- Use `ётjsonС-engineө.3ї]: httpsТа¶ӡ7я]
+Ґ loggingЎ63в63Ұ You will not be able to see log messages by default, but you can turn them on for this library by setting the `DEBUG` environment variable to `р:ь:*` or `р:*`.
+
+### Changed
+г Require Node >= 14Ў62в62))
+
+ӡ6яж2-05-04
+Ґэв58))
+
+ҙ Rename package to `@рак61в61ть` is deprecated and future releases will no longer occur under this name.
+- Upgrade dependencies to make use of newэв58тә`: ^6я -> ^8қын/әс810ти`: ^3я -> ^4лөын/ис403---2021-03-10ё`: ^5өл -> ^6қын/jsonС-engineс610---2020-11-20))
+г Simplify exportsЎ58в58Ұ All existing exports are now available under the package entrypoint. For instance, instead ofҗ createProvider from 'ь/src/createProvider';
+    ```
+    you must now sayҗ { createProvider } from '@ра';
+    ```
+г Add required Node version of >= 12Ў44в44))
+
+### Security
+- Upgradeң to ^2.6.7Ў42в42), [#53в53Ұ This addresses [GHӨ](https://github.com/advisories/GHӨ).
+
+ӡ5ое22
+ҙ Update RPC packagesЎ40в40ё@5өл`
+  - `ә@6я`
+
+ӡ5ле08
+ҙ Use Infura API v3Ў32в32))
+
+ӡ4ое03
+ҙ Useң in place of `cross-fetchк29ди@3як28дә@4.4ок15в15))
+
+[Unreleasedї/compare/v10өл...HEAD
+[10өх10.2х10ооу10ох10й9ох9ям.2момх8й7й6й5ох5й4қї/releases/tag/v4қ
+
+Every new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result.

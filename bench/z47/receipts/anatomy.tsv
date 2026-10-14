@@ -1,0 +1,20 @@
+file	raw	M	contract	header	rules	bodyGlyph	bodyLit	lit_word	lit_Word	lit_num	lit_punct	lit_ws	lit_alnum	lit_mixed	litRepeated2+	litHapax	rawCopyable
+bench/holdout/readme.txt	843	688	39	101	23	61	486	260	75	8	81	13	0	49	257	229	278
+bench/holdout/gh-prose.txt	1934	1782	40	235	60	338	1169	705	117	91	141	29	6	80	628	541	344
+bench/holdout-work/kb-article.txt	656	651	39	59	27	165	388	333	34	2	13	2	0	4	177	211	66
+bench/holdout-work/llm-answer.md	733	707	39	91	35	150	427	210	64	23	81	7	2	40	171	256	133
+bench/holdout-work/email-thread.txt	629	525	40	133	42	103	249	158	45	23	19	2	0	2	110	139	200
+bench/holdout-work/meeting-transcript.txt	472	420	38	36	6	32	314	214	33	33	34	0	0	0	168	146	118
+bench/holdout-work/bibliography.txt	896	711	39	126	46	198	348	145	89	75	26	3	0	10	144	204	316
+bench/holdout-work/unified-diff.patch	578	475	39	122	22	52	262	82	15	60	85	15	0	5	204	58	265
+bench/holdout/code-ts.txt	1422	1028	40	264	81	325	399	181	71	3	104	6	2	32	255	144	713
+bench/holdout/json-pkg.txt	1152	743	39	149	39	175	380	194	21	60	46	3	1	55	183	197	629
+bench/holdout/gh-api.json.txt	2519	1153	40	544	82	125	444	207	43	82	74	2	7	29	254	190	1691
+bench/holdout/license.txt	1166	968	40	182	54	281	465	340	52	11	46	11	0	5	244	221	354
+bench/z29/ops-real/ls-usr-lib.txt	949	342	39	80	19	56	167	69	8	40	18	12	0	20	81	86	713
+bench/z29/ops-real/du-usr-share.txt	1634	766	40	231	77	244	251	141	7	38	2	0	0	63	105	146	1091
+bench/z29/ops-real/ps-eo.txt	3086	847	40	240	81	282	285	105	17	115	9	2	22	15	80	205	2487
+bench/holdout-ops/git-log-fuller.txt	143	143	0	0	0	0	143	identity
+bench/holdout-ops/npm-ls.txt	2747	983	39	338	78	238	368	147	0	70	51	3	0	97	212	156	2201
+bench/holdout-ops/package-lock-head.json	15009	5523	39	855	214	763	3866	1323	1509	701	121	7	0	205	3045	821	10981
+bench/holdout-ops/openstack-loghub-26.log	4028	1008	40	439	74	239	290	75	12	165	10	0	2	26	124	166	3193

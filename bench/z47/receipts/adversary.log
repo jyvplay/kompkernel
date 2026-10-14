@@ -1,0 +1,23 @@
+OK   mixed java+kt, facade on (>=4 FooKt frames), one FooKt.kt impostor must stay literal
+      raw 270 M 155 applied=false - elided=0; candidates: frames[:=kt] folded=7
+OK   payload already contains an elided form (;N): frames schema must refuse, anchors may still fire
+      raw 264 M 173 applied=false - elided=0; candidates: frames[:=java] folded=8 | anchors[github] folded=12
+OK   payload already contains a bare "[x]:" line: release schema must refuse
+      raw 243 M 126 applied=false - elided=0; candidates: -
+OK   scala frames (ext induced, not assumed)
+      raw 172 M 106 applied=false - elided=0; candidates: frames[:=scala] folded=10
+OK   release links with a skipped version and a foreign link line in between
+      raw 209 M 126 applied=false - elided=0; candidates: release-links[stem=https://github.com/o/r/compare/ prefix="v"] folded=5
+OK   release links without a tag prefix and with the Unreleased line
+      raw 257 M 122 applied=false - elided=0; candidates: release-links[stem=https://gitlab.com/g/p/-/compare/ prefix=""] folded=7
+OK   percent-encoded anchors (Obsidian-style) chosen over github flavour
+      raw 222 M 116 applied=true anchors[percent] elided=14; candidates: anchors[percent] folded=14
+OK   CRLF changelog: zipper stays inactive, everything exact
+      raw 232 M 116 applied=false - elided=0; candidates: -
+OK   frames with module prefixes and Native/Unknown Source frames
+      raw 146 M 101 applied=false - elided=0; candidates: frames[:=java] folded=7
+OK   label already lowercase and without spaces: both flavours match, github wins deterministically
+      raw 90 M 90 applied=false - elided=0; candidates: anchors[github] folded=10
+OK   text starts with the rule mark: refused entirely
+      raw 115 M 98 applied=false - elided=0; candidates: frames[:=java] folded=9
+11/11 exact

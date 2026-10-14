@@ -1,0 +1,10 @@
+∴ Stack frames: whatever
+	at a.b.C0.m(C0.java:1)
+	at a.b.C1.m(C1.java:1)
+	at a.b.C2.m(C2.java:1)
+	at a.b.C3.m(C3.java:1)
+	at a.b.C4.m(C4.java:1)
+	at a.b.C5.m(C5.java:1)
+	at a.b.C6.m(C6.java:1)
+	at a.b.C7.m(C7.java:1)
+	at a.b.C8.m(C8.java:1)
