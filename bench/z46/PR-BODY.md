@@ -11,14 +11,14 @@ Rule line (counted in M): `∴ Stack frames: "at C.m(:N)" = "at C.m(S.java:N)", 
 
 **Why it is below the dictionary's floor.** `bench/z46/floor.ts` measures the LZ77 phrase count of each file's o200k token stream; DAEDALUS's M is 1.09–1.20× that count on prose, i.e. the copy mechanism is at its bound. ENTHYMEME removes positions whose content is *not a copy* of anything in the message.
 
-**Receipts** (`bench/z46/receipts/SUMMARY.md`, o200k, `OMEGA_DET=1`, every row round-trip checked):
+**Receipts** (`bench/z46/receipts/SUMMARY.md`, o200k, `OMEGA_DET=1`, every row round-trip checked — 76/76 byte-exact):
 
 | lane | files | raw | DAEDALUS | ENTHYMEME | Δ |
 |---|---:|---:|---:|---:|---:|
 | JVM traces (real GitHub issue bodies) | 10 | 22 419 | 11 283 | 10 708 | **−575 (−5.1 %)**, 9 wins / 1 tie / 0 losses; best −150 (−9.8 %) |
 | READMEs with heading links (first 24 KB) | 6 | 36 214 | 24 077 | 22 906 | **−1 171 (−4.9 %)**, 5 wins / 1 tie / 0 losses; best −365 (−9.1 %) |
-| shipped lanes (prose/code/JSON/licence/ops) | 22 | | | | ties (identity guard) — see SUMMARY |
-| PHP / .NET traces (negative space) | 11 | | | | ties — rules do not fire |
+| shipped lanes (prose/code/JSON/licence/ops) | 22 | 42 810 | 20 329 | 20 329 | 22 ties (identity guard) |
+| PHP / .NET traces (negative space) | 11 | 35 689 | 12 337 | 12 337 | 11 ties — rules do not fire |
 
 Measured and **rejected** (artifacts kept): PHP PSR-4 paths (+13…+47: the trace prints the caller's file, not the class's), .NET frames (free file names), quote-block references (0 foldable blocks in a top-posted thread), same-URL links (10 in 150 files).
 

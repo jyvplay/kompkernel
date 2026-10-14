@@ -64,7 +64,14 @@
 | net_artempyanykh_marksman_408.md | 938 | 607 | 607 | +0 | +0.0% | yes | applied=false rules=- |
 | net_dafny-lang_dafny_6503.md | 4487 | 1475 | 1475 | +0 | +0.0% | yes | applied=false rules=- |
 | net_decentraland_unity-explorer_10430.md | 2458 | 615 | 615 | +0 | +0.0% | yes | applied=false rules=- |
-| **total (4 files)** | **9357** | **3667** | **3667** | **+0** | **+0.0%** | | wins 0 / ties 4 / losses 0 |
+| net_jellyfin_jellyfin_18053.md | 6802 | 2339 | 2339 | +0 | +0.0% | yes | applied=false rules=- |
+| net_sonicretro_SonLVL_223.md | 1249 | 579 | 579 | +0 | +0.0% | yes | applied=false rules=- |
+| php_Formation-Media_glowt-4-aegis-module_234.md | 3633 | 1077 | 1077 | +0 | +0.0% | yes | applied=false rules=- |
+| php_firefly-iii_firefly-iii_12958.md | 4254 | 1016 | 1016 | +0 | +0.0% | yes | applied=false rules=- |
+| php_grokability_snipe-it_19624.md | 6270 | 1670 | 1670 | +0 | +0.0% | yes | applied=false rules=- |
+| php_koel_koel_2649.md | 3273 | 1463 | 1463 | +0 | +0.0% | yes | applied=false rules=- |
+| php_pkp_pkp-lib_11900.md | 851 | 526 | 526 | +0 | +0.0% | yes | applied=false rules=- |
+| **total (11 files)** | **35689** | **12337** | **12337** | **+0** | **+0.0%** | | wins 0 / ties 11 / losses 0 |
 
 ### Exactness
-62 of 62 rows byte-exact; 0 errors.
+76 of 76 rows byte-exact; 0 errors.

@@ -13,3 +13,11 @@ o200k_base enthymeme traces/net_sonicretro_SonLVL_223.md in=1249 oneChat=579 exa
 o200k_base daedalus traces/php_Formation-Media_glowt-4-aegis-module_234.md in=3633 oneChat=1077 exact=true  20480ms
 o200k_base enthymeme traces/php_Formation-Media_glowt-4-aegis-module_234.md in=3633 oneChat=1077 exact=true  22282ms
 o200k_base daedalus traces/php_firefly-iii_firefly-iii_12958.md in=4254 oneChat=1016 exact=true  24356ms
+o200k_base enthymeme traces/php_firefly-iii_firefly-iii_12958.md in=4254 oneChat=1016 exact=true  21310ms
+o200k_base daedalus traces/php_grokability_snipe-it_19624.md in=6270 oneChat=1670 exact=true  23067ms
+o200k_base enthymeme traces/php_grokability_snipe-it_19624.md in=6270 oneChat=1670 exact=true  23328ms
+o200k_base daedalus traces/php_koel_koel_2649.md in=3273 oneChat=1463 exact=true  19113ms
+o200k_base enthymeme traces/php_koel_koel_2649.md in=3273 oneChat=1463 exact=true  18836ms
+o200k_base daedalus traces/php_pkp_pkp-lib_11900.md in=851 oneChat=526 exact=true  5490ms
+o200k_base enthymeme traces/php_pkp_pkp-lib_11900.md in=851 oneChat=526 exact=true  5422ms
+done

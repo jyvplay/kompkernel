@@ -141,10 +141,10 @@ The 22 shipped lanes (prose, code, JSON, licence, real ops): ENTHYMEME ties DAED
 22 (raw 42 810 → 20 329 = 20 329; 0 wins / 22 ties / 0 losses; `applied=false` on every row, i.e. no
 entailed field was found or the gate declined) — `receipts/eval-lanes.jsonl`, rows in `SUMMARY.md`.
 `holdout-ops/node-stacktraces.txt` (V8 frames, `(file.js:L:C)`): 339 = 339, not applied. PHP/.NET
-negative lanes (`receipts/eval-negative.jsonl`, DAEDALUS and ENTHYMEME run side by side): ties on
-every finished row (4 .NET files at the time of writing, 3 667 = 3 667; the remaining 7 rows were
-still running when this report was frozen and are appended to the same file — any non-tie would
-show in `SUMMARY.md`).
+negative lanes (`receipts/eval-negative.jsonl`, DAEDALUS and ENTHYMEME run side by side on the same
+process): 11 files (6 .NET, 5 PHP), raw 35 689 → 12 337 = 12 337, 0 wins / 11 ties / 0 losses,
+`applied=false` everywhere. Harness total: 76 rows (20 traces + 12 READMEs + 22 lanes + 22 negatives),
+76 byte-exact, 0 errors.
 
 The per-file gains are 2–10 % of a WHOLE issue body or README; on the trace or table-of-contents
 region alone they are 15–30 %. They are smaller than ANAGNORISIS's −82 % on licence files because a
