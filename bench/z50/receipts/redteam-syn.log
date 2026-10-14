@@ -1,0 +1,18 @@
+{"name":"slice (real, 260 lines)","bytes":3674,"reducedArm":false,"elided":8,"M":770,"paradeigmaM":770,"native":true,"sha":"b72baa37d239","cpython":true}
+{"name":"integrity without resolved (one line deleted)","bytes":3589,"reducedArm":false,"elided":0,"M":763,"paradeigmaM":763,"native":true,"sha":"9122e9fc2867","cpython":true}
+{"name":"one non-standard resolved URL","bytes":3646,"reducedArm":false,"elided":7,"M":777,"paradeigmaM":777,"native":true,"sha":"e57b25d5cfd7","cpython":true}
+{"name":"resolved before version (swapped)","bytes":3674,"reducedArm":false,"elided":7,"M":773,"paradeigmaM":773,"native":true,"sha":"5948a3f17930","cpython":true}
+{"name":"payload begins with the rule prefix","bytes":3691,"reducedArm":false,"elided":8,"M":777,"paradeigmaM":777,"native":true,"sha":"214753182237","cpython":true}
+{"name":"payload carries the exact rule line (escape path)","bytes":3932,"reducedArm":false,"elided":0,"M":842,"paradeigmaM":833,"native":true,"sha":"ddd9808b28cd","cpython":true}
+{"name":"payload carries the exact escape line (escape path)","bytes":3712,"reducedArm":false,"elided":0,"M":790,"paradeigmaM":781,"native":true,"sha":"c5239ae80034","cpython":true}
+{"name":"CRLF line endings","bytes":3800,"reducedArm":false,"elided":0,"M":771,"paradeigmaM":771,"native":true,"sha":"bde97069f761","cpython":true}
+{"name":"truncated mid-entry","bytes":168,"reducedArm":false,"elided":0,"M":55,"paradeigmaM":55,"native":true,"sha":"4b32d66f87a2","cpython":true}
+{"name":"prerelease+build version on one entry","bytes":3700,"reducedArm":true,"elided":8,"M":779,"paradeigmaM":780,"native":true,"sha":"3a264c7596ed","cpython":true}
+{"name":"resolved without trailing comma","bytes":3673,"reducedArm":false,"elided":7,"M":773,"paradeigmaM":773,"native":true,"sha":"e506ab47b897","cpython":true}
+{"name":"version line removed from one entry","bytes":3647,"reducedArm":false,"elided":7,"M":767,"paradeigmaM":767,"native":true,"sha":"d8c34df43b81","cpython":true}
+{"name":"empty input","bytes":0,"reducedArm":false,"elided":0,"M":0,"paradeigmaM":0,"native":true,"sha":"e3b0c44298fc","cpython":true}
+{"name":"single newline","bytes":1,"reducedArm":false,"elided":0,"M":1,"paradeigmaM":1,"native":true,"sha":"01ba4719c80b","cpython":true}
+{"name":"not JSON (prose)","bytes":83,"reducedArm":false,"elided":0,"M":17,"paradeigmaM":17,"native":true,"sha":"11003e6a4cf4","cpython":true}
+{"name":"nested node_modules key (renamed one entry)","bytes":3692,"reducedArm":false,"elided":7,"M":776,"paradeigmaM":776,"native":true,"sha":"045fbf267ff8","cpython":true}
+16/16 byte-identical under both readers
+python RULE equals TS SYN_RULE: true

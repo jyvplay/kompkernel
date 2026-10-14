@@ -1,0 +1,2 @@
+{"file":"bench/holdout/gh-api.json.txt","raw":2519,"DAEDALUS":1153,"PARADEIGMA":1153,"SYNARTESIS":1153,"dSYN_vs_PAR":0,"dSYN_vs_DAE":0,"pctSYN_vs_DAE":0,"elided":0,"reducedArm":false,"exact_syn":true,"exact_dae":true,"exact_par":true,"ms":17611}
+{"file":"bench/holdout/json-pkg.txt","raw":1152,"DAEDALUS":743,"PARADEIGMA":743,"SYNARTESIS":743,"dSYN_vs_PAR":0,"dSYN_vs_DAE":0,"pctSYN_vs_DAE":0,"elided":0,"reducedArm":false,"exact_syn":true,"exact_dae":true,"exact_par":true,"ms":8563}
