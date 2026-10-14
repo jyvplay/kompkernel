@@ -1,0 +1,23 @@
+OK 	payload starts with the mark	applied=false	not applied (payload starts with the rule mark); predicted "default" 
+OK 	remainder equals an exception value	applied=false	not applied (no positionally fixed constant field pays for its senten
+OK 	prefix equals the whole field on some lines	applied=true	Each line lost "src/" from the start of its last space-separated field, except lines whose last field is "src/"; put it back.
+OK 	literal line whose field is exactly the prefix	applied=true	Each line lost "src/" from the start of its last space-separated field, except lines whose last field is "src/"; put it back.
+OK 	quote inside a field	applied=true	Each line lost "src/" from the start of its last space-separated field; put it back.
+OK 	backslash inside a field	applied=false	not applied (no positionally fixed constant field pays for its senten
+OK 	CR line endings	applied=false	not applied (CR in payload); predicted "span12+words" from punct=9.8%
+OK 	lines with fewer fields	applied=true	Each line lost "src/" from the start of its last space-separated field, except lines whose last field starts with a digit; put it back.
+OK 	field k is the last field on some lines (whole-field form)	applied=true	Each line lost its 5th space-separated field, "desc" followed by a space; put it back.
+OK 	exception value appears as an elided remainder	applied=false	not applied (no positionally fixed constant field pays for its senten
+OK 	CSV with a quoted delimiter BEFORE the constant column	applied=false	not applied (no positionally fixed constant field pays for its senten
+OK 	CSV with duplicate header names	applied=true	Empty cells (comma-separated) hold the column's default: 3rd column = "active".
+OK 	CSV with an empty cell in the constant column	applied=false	not applied (no positionally fixed constant field pays for its senten
+OK 	TSV constant column, no header	applied=true	Empty cells (tab-separated) hold the column's default: 3rd column = "HTTP/1.1", 4th column = "200".
+OK 	sentence-like value	applied=true	Each line lost its 2nd space-separated field, "line" followed by a space; put it back. | Each line lost its 2nd space-separated field, "Each" followed
+OK 	mixed tab and space padding	applied=true	Each line lost "src/" from the start of its last space-separated field; put it back.
+OK 	empty document	applied=false	not applied (no positionally fixed constant field pays for its senten
+OK 	single line	applied=false	not applied (no positionally fixed constant field pays for its senten
+OK 	prefix on every field position	applied=true	Each line lost "src/" from the start of its 3rd space-separated field; put it back. | Each line lost "src/" from the start of its 2nd space-separated 
+OK 	value collides with scope word	applied=true	Each line lost its 2nd space-separated field, "ii" followed by a space; put it back. | Each line lost its 2nd space-separated field, "ii" followed by 
+OK 	prefix with exception "starts"	folded 6
+OK 	field with digit exception	folded 5
+22/22 adversarial cases exact-or-refused

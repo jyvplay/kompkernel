@@ -1,0 +1,24 @@
+o200k_base elleipsis holdout-work/bibliography.txt in=896 oneChat=711 exact=true  2757ms
+o200k_base elleipsis holdout-work/email-thread.txt in=629 oneChat=525 exact=true  2052ms
+o200k_base elleipsis holdout-work/kb-article.txt in=656 oneChat=651 exact=true  1051ms
+o200k_base elleipsis holdout-work/llm-answer.md in=733 oneChat=707 exact=true  1543ms
+o200k_base elleipsis holdout-work/meeting-transcript.txt in=472 oneChat=420 exact=true  730ms
+o200k_base elleipsis holdout-work/unified-diff.patch in=578 oneChat=475 exact=true  461ms
+o200k_base elleipsis holdout/code-dts.txt in=162 oneChat=108 exact=true  22ms
+o200k_base elleipsis holdout/code-ts.txt in=1422 oneChat=1028 exact=true  10690ms
+o200k_base elleipsis holdout/gh-api.json.txt in=2519 oneChat=1153 exact=true  4156ms
+o200k_base elleipsis holdout/gh-prose.txt in=1934 oneChat=1782 exact=true  3484ms
+o200k_base elleipsis holdout/json-pkg.txt in=1152 oneChat=743 exact=true  2314ms
+o200k_base elleipsis holdout/lic-mit.txt in=223 oneChat=223 exact=true  1056ms
+o200k_base elleipsis holdout/license.txt in=1166 oneChat=968 exact=true  4085ms
+o200k_base elleipsis holdout/md-react.txt in=252 oneChat=252 exact=true  974ms
+o200k_base elleipsis holdout/md-vite.txt in=274 oneChat=274 exact=true  1243ms
+o200k_base elleipsis holdout/readme.txt in=843 oneChat=688 exact=true  1520ms
+o200k_base elleipsis ops-real/df-h.txt in=131 oneChat=131 exact=true  2601ms
+o200k_base elleipsis ops-real/dpkg-l.txt in=8975 oneChat=4572 exact=true  287424ms
+o200k_base elleipsis ops-real/du-usr-share.txt in=1634 oneChat=766 exact=true  23661ms
+o200k_base elleipsis ops-real/free-h.txt in=64 oneChat=64 exact=true  1147ms
+o200k_base elleipsis ops-real/ls-usr-bin.txt in=17146 oneChat=3746 exact=true  159668ms
+o200k_base elleipsis ops-real/ls-usr-lib.txt in=949 oneChat=342 exact=true  3090ms
+done
+LANES_DONE

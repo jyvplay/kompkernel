@@ -1,0 +1,239 @@
+### Pre-submission Checklist
+
+- [ ] I am using the latest GPU driver version ([releases](https://github.com/intel/compute-runtime/releases))
+- [x] I have searched for similar issues and found none
+
+### GPU Hardware
+
+Intel Panther Lake integrated GPU (Xe3), PCI 8086:b0a0 rev 00, subsystem 1462:b211 (MSI), GT0 IP 30.1.0
+
+### DRI Devices Information
+
+~~~
+$ ls -l /dev/dri
+crw-rw---- 1 root video 226,   0 card0
+crw-rw---- 1 root 991   226, 128 renderD128
+
+$ ls -l /dev/dri/by-path/
+pci-0000:00:02.0-card
+pci-0000:00:02.0-render
+~~~
+
+Single integrated GPU at 0000:00:02.0, no other GPUs in the machine.
+
+### GPU Detailed Information (lspci output)
+
+The node is a headless k3s node and only busybox `lspci` was at hand, so this is the busybox output plus sysfs and xe debugfs. Full `lspci -vvv` available on request.
+
+~~~
+$ lspci -mk | grep 00:02.0
+00:02.0 "Class 0300" "8086" "b0a0" "1462" "b211" "xe"
+
+$ cat /sys/bus/pci/devices/0000:00:02.0/{vendor,device,subsystem_vendor,subsystem_device,revision,class}
+0x8086  0xb0a0  0x1462  0xb211  0x00  0x030000
+
+$ cat /sys/kernel/debug/dri/0/info
+graphics_verx100 3001
+media_verx100 3000
+stepping G:A0 M:B0 B:**
+is_dgfx no
+platform 12
+subplatform 0
+devid 0xb0a0
+revid 0
+tile_count 1
+vm_max_level 4
+force_execlist no
+has_flat_ccs yes
+has_usm yes
+gt0 engine_mask 0x400203
+gt1 engine_mask 0x4040400
+
+$ cat /sys/kernel/debug/dri/0/gt0/uc/guc_info
+GuC firmware: xe/ptl_guc_70.bin
+	status: RUNNING
+	wanted release version 70.54.0
+	found release version 70.58.0
+	found compatibility version 1.30.1
+~~~
+
+### Driver Version
+
+26.22.38646.4
+
+### Installed GPU Driver Packages
+
+Inside the application container (Debian 13 trixie):
+
+~~~
+$ dpkg -l | grep -iE "opencl|igc|gmm|level-zero|libze|intel-"
+ii  intel-igc-core           1.0.17537.24      amd64  Intel(R) Graphics Compiler for OpenCL(TM)
+ii  intel-igc-core-2         2.36.3            amd64  Intel(R) Graphics Compiler for OpenCL(TM)
+ii  intel-igc-opencl         1.0.17537.24      amd64  Intel(R) Graphics Compiler for OpenCL(TM)
+ii  intel-igc-opencl-2       2.36.3            amd64  Intel(R) Graphics Compiler for OpenCL(TM)
+ii  intel-opencl-icd         26.22.38646.4-0   amd64  Intel graphics compute runtime for OpenCL
+ii  intel-opencl-icd-legacy1 24.35.30872.36    amd64  Intel graphics compute runtime for OpenCL
+ii  libdrm-intel1:amd64      2.4.124-2         amd64  Userspace interface to intel-specific kernel DRM services
+ii  libigdgmm12:amd64        22.10.0           amd64  Intel Graphics Memory Management Library
+ii  ocl-icd-libopencl1:amd64 2.3.3-1           amd64  Generic OpenCL ICD Loader
+~~~
+
+On top of that: OpenVINO 2025.4.1 via onnxruntime-openvino 1.24.1 (OpenCL path, not Level Zero).
+
+### Driver Installation Details
+
+- Installation method: **Docker / container image.** The compute runtime ships inside the upstream Immich image `ghcr.io/immich-app/immich-machine-learning:v3.2.2-openvino` (Debian 13 base); I did not install it separately.
+- The container runs on k3s (containerd 2.3.2) with `/dev/dri` passed through.
+- Host: Ubuntu 26.04 LTS, stock kernel and stock `xe` driver, no custom kernel parameters.
+
+### Linux Distribution
+
+Other (please specify below)
+
+### Other Linux Distribution
+
+Host: Ubuntu 26.04 LTS (kernel 7.0.0-22-generic). Userspace: Debian 13 (trixie) container
+
+### Kernel Version & Boot Parameters
+
+~~~
+$ uname -r
+7.0.0-22-generic   (#22-Ubuntu SMP PREEMPT_DYNAMIC Mon May 25 15:54:34 UTC 2026)
+
+$ cat /proc/cmdline
+BOOT_IMAGE=/boot/vmlinuz-7.0.0-22-generic root=UUID=... ro crashkernel=2G-4G:320M,4G-32G:512M,32G-64G:1024M,64G-128G:2048M,128G-:4096M
+
+$ grep -E "^(xe|i915|drm_gpuvm|gpu_sched|ttm|drm_exec)" /proc/modules
+xe         4415488 2 -
+gpu_sched    69632 1 xe
+drm_gpuvm    57344 1 xe
+ttm         135168 2 xe,drm_ttm_helper
+drm_exec     12288 2 xe,drm_gpuvm
+~~~
+
+i915 is not loaded; the GPU is driven by xe.
+
+### Actual Behavior
+
+On a Panther Lake iGPU, through onnxruntime's OpenVINO execution provider (GPU, OpenCL), the **first inference** of InsightFace `buffalo_l` recognition (`w600k_r50`) faults the GPU **whenever PP-OCRv5 mobile recognition was loaded or run directly before it** in the same process.
+
+The kernel logs a CCS page fault on an unbound user VA, then a CAT error, an engine reset and a job timeout. OpenVINO then returns `CL_OUT_OF_RESOURCES`, and the context stays dead (every later call returns `CL_INVALID_EVENT`).
+
+It is deterministic in a single-threaded script, and swapping the last two inferences makes it pass every time. There is no memory pressure: 9–20 GB `MemAvailable`, sampled every 5 s.
+
+| Sequence | Trials | Faults |
+|---|---|---|
+| reproduction sequence below | 2 | 2, both at the first face-recognition run |
+| same, last two runs swapped | 6 | 0 |
+| 27 other orderings without "OCR rec immediately before face rec's first run" | 27 | 0 |
+| any order, once every model has run at least once | 20+ | 0 |
+
+Production traces show the same pattern: every one of ~20 faults had OCR recognition (load or run) directly before face recognition's first inference. Threading and concurrency make no difference (tested). Holding the GT awake with debugfs `forcewake_all` doesn't change it either, so it is not RC6.
+
+Things that hold across all ~20 faults:
+- **Fault fields:** FaultType 0, AccessType 0, FaultLevel 0, CCS instance 0.
+- **Address:** always within `0x0000d556a270b000`–`0x0000d556a5aeb000`, across different processes and ASIDs. That suggests one specific runtime allocation at a predictable VA.
+- **Kernel response:** `Fault response: Unsuccessful -EINVAL`. The address was never bound, so this looks like an allocation the runtime submitted work against but did not make resident.
+- **Devcoredump:** `VM state` shows `[0].error: -19`, so there is no VM snapshot.
+
+### Expected Behavior
+
+The first inference of a freshly compiled model completes normally, whatever other model ran last in the same process or context. No GPU page fault, no engine reset, and the OpenCL context stays usable.
+
+### Reproduction Rate
+
+Always reproduces - 100%
+
+### Steps to Reproduce
+
+The models are from Hugging Face: `immich-app/PP-OCRv5_mobile` (detection + recognition), `immich-app/buffalo_l` (detection + recognition), `immich-app/ViT-B-32__openai` (visual).
+
+Each one is an onnxruntime session on the OpenVINO EP (`device_type=GPU.0`, FP32, OpenVINO model cache dir set), compiled on first use. One process, one thread, calls strictly sequential:
+
+1. Load OCR detection, face detection, CLIP visual.
+2. Run OCR detection, face detection, CLIP visual once each.
+3. Load OCR recognition, face recognition.
+4. Run OCR recognition.
+5. Run face recognition. **This first inference of the model faults the GPU.**
+
+Swap steps 4 and 5 and it passes 6/6.
+
+### Is this a regression?
+
+- [ ] Yes, this is a regression - functionality that previously worked is now broken
+
+### Last Known Working Driver Version
+
+_No response_
+
+### First Known Failing Driver Version
+
+_No response_
+
+### API Call Logs
+
+_No response_
+
+### strace Logs
+
+_No response_
+
+### System Logs / dmesg Output
+
+Kernel log at the fault:
+
+~~~
+xe 0000:00:02.0: [drm] Tile0: GT0:
+	ASID: 408
+	Faulted Address: 0x0000d556a270b000
+	FaultType: 0
+	AccessType: 0
+	FaultLevel: 0
+	EngineClass: 5 ccs
+	EngineInstance: 0
+xe 0000:00:02.0: [drm] Tile0: GT0: Fault response: Unsuccessful -EINVAL
+xe 0000:00:02.0: [drm] Tile0: GT0: Engine memory CAT error [18]: class=ccs, logical_mask: 0x1, guc_id=2
+xe 0000:00:02.0: [drm] Tile0: GT0: Engine reset: engine_class=ccs, logical_mask: 0x1, guc_id=2, state=0x249
+xe 0000:00:02.0: [drm] Tile0: GT0: Timedout job: seqno=4294967182, lrc_seqno=4294967182, guc_id=2, flags=0x20 in python [3274244]
+~~~
+
+OpenVINO / onnxruntime then reports:
+
+~~~
+[GPU] clFinish, error code: -5 CL_OUT_OF_RESOURCES
+[GPU] clWaitForEvents, error code: -58 CL_INVALID_EVENT     (every later call)
+~~~
+
+**Knock-on:** several times, minutes after such a fault, a later job hung without any page fault (`Timedout job`, then `trying reset from guc_exec_queue_timedout_job`). The resulting full GT reset killed a healthy inference process in another container.
+
+Attached: three distinct devcoredumps and the matching full-day xe kernel logs (one per fault, 2026-10-05):
+
+[ptl-igpu-fault-logs.zip](https://github.com/user-attachments/files/33121198/ptl-igpu-fault-logs.zip)
+
+
+### Backtrace (if crash or hang occurred)
+
+No userspace crash: the process survives but its OpenCL context is dead. The xe devcoredumps for three separate faults are attached under System Logs.
+
+### Source Code / Reproducer
+
+_No response_
+
+### Command Line / Application Details
+
+Immich machine-learning service (`ghcr.io/immich-app/immich-machine-learning:v3.2.2-openvino`) with OpenVINO on GPU.0. The sequence under Steps to Reproduce is a single-threaded script against the same image and models. I can turn it into a standalone onnxruntime script on request.
+
+### oneAPI Version (if applicable)
+
+_No response_
+
+### Screenshots / Video
+
+_No response_
+
+### Additional Notes
+
+- **Possibly related:** #1010. It has the same `Engine memory CAT error [18]: class=ccs` with a fixed-VA fault on a kernel private surface left unbound after `evictUnusedAllocations()`. The trigger differs: no userptr failure or memory pressure here.
+- **Workaround in use:** run each model once right after compiling it (load → run, load → run …), so no model's first inference follows another model's work. It has been fault-free since 2026-10-05 21:38 UTC.
+- **Possible second suspect:** the trigger depends on which *other* compiled model ran last. OpenVINO's GPU plugin shares one OpenCL context and memory pool across compiled models, so its buffer reuse could be involved. Happy to cross-file with openvino if you think it belongs there.
+

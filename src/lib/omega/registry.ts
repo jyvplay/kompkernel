@@ -98,6 +98,7 @@ import { crasisEncode } from './crasis';
 import { anagnorisisEncode } from './anagnorisis';
 import { enthymemeEncode } from './enthymeme';
 import { epagogeEncode } from './epagoge';
+import { elleipsisEncode } from './elleipsis';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
 import { tabminEncode } from './tabmin';
@@ -710,6 +711,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'anagnorisis', label: 'ἀ ANAGNORISIS (Public-canon recognition pre-pass: standard open-source license texts and per-file notices (GitHub/choosealicense templates, versioned catalogue) are recognised byte-exactly — any per-line comment prefix, re-wrap width, url scheme, indentation — and replaced by 【SPDX-ID; layout…: blanks】 references the reader already knows; then DAEDALUS; one-line contract compiled from the features used; exact, identity-guarded)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = anagnorisisEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.canonApplied}; refs=${r.canonRefs.map(x => x.replace(/\n/g, '⏎')).join(' ') || '-'}; tiers=${r.canonTiers.join(',') || '-'}; regions=${r.canonRegionTokens}->${r.canonRefTokens} tok; plainM=${r.plainMessageTokens}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'elleipsis', label: '○ ELLEIPSIS (Positional ellipsis: a constant that sits at a fixed field position in every record of a stated class — a shared path prefix on the last field of a listing, a constant column — is removed with no marker and restored by one sentence naming the position, the constant and the lines that keep it literally; then DAEDALUS; exact, identity-guarded. Measured: constants already folded by the dictionary are free (newline/padding/",," residue), so only prefix-before-word removals pay)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = elleipsisEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.applied}; rules=${r.rules.map(x => `${x.form}@${x.k}[${x.form === 'cells' ? (x.pairs ?? []).map(p => p.column ?? p.k).join('/') : JSON.stringify(x.value)}]`).join('+') || '-'}; elidedLines=${r.elidedLines}; sentence=${r.clauseTokens} tok; plainM=${r.plainMessageTokens}; one-chat=${r.messageTokens} tok (contract counted)` }; },
     },
     {
       key: 'epagoge', label: '∴ EPAGOGE (Induced entailment: rule schemas with free parameters — which source-file extensions a trace uses (Java + Kotlin at once, Kotlin file facades), which heading-slug flavour a document uses, which compare-URL stem and tag prefix a changelog uses — are instantiated from the document, verified on every candidate field, stated in one sentence, and the fields are removed; inter-record "zipper" rules included; then DAEDALUS; exact, identity-guarded; ties ENTHYMEME where its fixed rules apply)', family: 'exact', fidelity: 'exact',

@@ -1,0 +1,4 @@
+○ Each line lost "src/lib/omega/" from the start of its last space-separated field; put it back.
+§н.ts
+ан    ен     к atom-codecие38к-v3ра441 aleph¶    497 abacusа208 aeonа649 aetherа381 aionа428 akribeiaр.origра267 ambientа100 amphoraа578 anagnorisisа961 anamnesisа135 anankeа386 anaphoraа321 anastropheа262 antiphonа826 apeironа274 apex.origа274 apexа864 archeн   1470 ariadneа373 arithmosа226 astraeaа210 astralа228 atlasи.origиа787к.origа792ка305 auroraа804 axiomе70 banyanе40 bpe-auditа236 bpe.origа327 bpeе55 cadmusа429 caesuraн
+Every new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result.
