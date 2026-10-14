@@ -110,3 +110,83 @@ export const CHAOS_G_CJK: string = [
   'kectl get pods -n payments --watch || aws ec2 describe-instances --region ap-northeast-1',
   'Next: bump the pool limit, verify the health check, then confirm the alert clears. The morning review will cover pool sizing, alert thresholds, replica failover and the retry budget. (deploy 0123456789abcdef0123456789abcdef01234567).',
 ].join('\n');
+
+/** Pure formal natural prose (exactly 1000 chars). */
+export const NATURAL_PROSE_1000: string = [
+  'The fundamental challenge of context-window optimization in large language models lies in reconciling token-budget constraints with strict information preservation. As sequence lengths expand, the attention mechanism exhibits quadratic time and memory complexity relative to the prompt dimension, necessitating contractive representations that preserve semantic fidelity without sacrificing deterministic decodability.',
+  'Structural redundancy within natural prose operates across multiple syntactic strata: lexical collocations, discourse markers, and recurring sub-grammatical patterns. By mapping high-frequency phrasal motifs into succinct codebook entry identifiers, an entropy-optimal compressor can achieve significant context reduction prior to tokenization.',
+  'Furthermore, subword boundary realignment guarantees exact lossless reconstruction while maximizing overall compression throughput across diverse natural language paradigms and highly demanding, advanced technical application domains.'
+].join('\n\n');
+
+/** Technical hybrid prose (exactly 1200 chars): narrative, inline table, LaTeX/math, python snippet. */
+export const HYBRID_PROSE_1200: string = [
+  'Technical Report: Hybrid Grammar & Tensor Factorization in BPE Realignment.',
+  'We evaluate structural contractive mappings over heterogeneous token streams, bridging formal prose, mathematical specifications, and executable code modules.',
+  '| Module | Compression | Latency | Exact | Status |',
+  '| :--- | :---: | :---: | :---: | :---: |',
+  '| ROSETTA-R5.6 | 91.2% | 0.8ms | YES | VERIFIED |',
+  '| MOSAIC-M1 | 88.4% | 1.1ms | YES | VERIFIED |',
+  '| KAPPA-κ1 | 74.5% | 0.4ms | YES | VERIFIED |',
+  'Mathematical Formulation: Let $S \\in \\Sigma^*$ be an admissible sequence with empirical entropy $H(S) = -\\sum p_i \\log_2 p_i$. The optimal code length satisfies $|T_{\\text{BPE}}(E(S))| \\le K(S) + O(1)$, where $K(S)$ denotes the Kolmogorov complexity under universal grammar induction. For any partitioned sub-span $A \\subseteq S$, the canonical fiber bundle transform yields \\Phi(A) \\cong \\bigoplus_{k=1}^m \\mathcal{V}_k.',
+  '```python',
+  'def factorize(span: str) -> dict:',
+  '    tokens = encode_bpe(span)',
+  '    return {"wire_tokens": len(tokens), "exact": True}',
+  '```',
+  'Summary: The hybrid architecture achieves strictly superior token density while guaranteeing byte-exact round-trip fidelity across evaluated target benchmark test suites now.'
+].join('\n');
+
+/** Output prompt log text (exactly 2000 chars): system prompt, reasoning trace <thought>, tool calls, JSON, code, tables. */
+export const OUTPUT_PROMPT_LOG_2000: string = [
+  'SYSTEM_PROMPT: You are a high-performance compression research agent. Verify all structural transforms and output exact JSON payloads.',
+  '<thought>',
+  'The user requested an evaluation of the Pareto frontier across heterogeneous prompt log traces.',
+  'I will first inspect the execution graph, identify repeating grammar fragments, and run the benchmark suite.',
+  'Step 1: Parse input tokens and verify BPE subword boundaries across o200k_base and cl100k_base vocabularies.',
+  'Step 2: Construct directed hypergraph quotient for non-contiguous collocations and token quorums.',
+  'Step 3: Execute tournament dispatch across active candidate codecs in the ensemble matrix.',
+  'Step 4: Audit deterministic round-trip fidelity, verifying zero bytes dropped.',
+  'All safety constraints and runtime invariants satisfied. Proceeding to invoke tool call.',
+  '</thought>',
+  'call:default_api:run_benchmark{"suite":"full_pareto","encoding":"o200k_base","strict_lossless":true}',
+  'RESPONSE: {"status":"success","evaluated_codecs":72,"pareto_leaders":["ROSETTA-R5.6","HARMONIA-H1","AETHER-A1"],"metrics":{"in_tokens":1852,"out_tokens":154,"compression_ratio":12.02,"exact_lossless":true}}',
+  '```typescript',
+  'export async function verifyLogTrace(wire: string, enc: EncodingName): Promise<boolean> {',
+  '  const decoded = rosettaDecode(wire, enc);',
+  '  return decoded === getOriginalFixture(wire);',
+  '}',
+  '```',
+  '| Log ID | Service | Level | Latency (ms) | Compression | Status | Notes |',
+  '| :--- | :--- | :--- | :---: | :---: | :---: | :--- |',
+  '| LOG-101 | gateway | INFO | 14.2 | 91.8% | PASSED | nominal execution path |',
+  '| LOG-102 | auth-svc | WARN | 32.1 | 88.4% | PASSED | token cache refreshed |',
+  '| LOG-103 | db-proxy | ERROR | 112.5 | 85.2% | RETRIED | connection pool drained |',
+  'Final Assessment: The output prompt log trace demonstrates high structural repetition across system prompt headers, inner reasoning blocks, and tool invocation payloads. Context compression reduces prompt cost by 91.8% while preserving 100% byte-perfect exactness across all benchmark suite runs.'
+].join('\n');
+
+/** Heterogeneous chaotic payload (exactly 1500 chars): prose, checklist, CSV, JSON, Python, CJK notes, stacktrace, shell, grid. */
+export const CHAOS_1500: string = [
+  'Status: multi-region cluster migration completed, 3 microservices reported warnings during the canary window; on-call paged twice.',
+  '- service gateway: 24 instances online, error_rate=0.01% (nominal baseline)',
+  '- service auth: secret key rotation verified on all 12 edge nodes without downtime',
+  '- service telemetry: buffer overflow on shard-9, retry storm active under load',
+  'service,region,dc,instances,p99_latency_ms,status',
+  'gateway,us-east-1,iad-3,24,18.4,HEALTHY',
+  'auth-api,eu-west-1,dub-1,12,24.1,HEALTHY',
+  'telemetry,ap-south-1,bom-2,8,342.0,DEGRADED',
+  '{"job":"flush_buffer","shard":9,"retries":5,"ok":false,"errors":["timeout","connection_reset"],"ms":342}',
+  '{"job":"audit_log","shard":12,"retries":0,"ok":true,"errors":[],"ms":14}',
+  'def reconcile_nodes(cluster, dry_run=False):',
+  '    for node in cluster.active_nodes():',
+  '        if not node.is_healthy():',
+  '            logger.warning(f"Draining node {node.id}")',
+  '            if not dry_run: node.drain()',
+  '報告: アラートが発生しました。データベースの接続プールが枯渇し、応答遅延が上昇しています。',
+  '备注：网关和认证服务迁移正常，日志缓冲区碎片过多，请检查内存配额并安排重试。',
+  '记录：2026-09-15T18:42:01Z 警告 内存耗尽 (max=64GB, wait=5s)',
+  'ERROR 2026-09-15T18:42:01Z [pool-worker-7] ConnectionPoolTimeoutException: Timeout waiting for idle connection (wait=5000ms)',
+  'kubectl rollout status deployment/telemetry-processor --timeout=120s -n production || kubectl get pods -l app=telemetry',
+  '|##..##|..##..|##..##|',
+  '|..##..|##..##|..##..|',
+  'Summary: 2 of 3 regions healthy; telemetry shard-9 requires memory limit escalation. Monitor queue depth and retry budget closely now.'
+].join('\n');
