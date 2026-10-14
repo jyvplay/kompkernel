@@ -134,7 +134,7 @@ deterministic settings); EPAGOGE (P) numbers from `bench/z47/receipts/eval-*.jso
 
 | file | raw | D | E | P | note |
 |---|---:|---:|---:|---:|---|
-| GrapheneOS_os-issue-tracker_8922 | 2480 | 911 | 895 | **882** | `:=kt(Kt), ;=java`, 110 frames, 89 elided; sentence 63 tok |
+| GrapheneOS_os-issue-tracker_8922 | 2480 | 911 | 895 | **882** | `:=kt(Kt), ;=java`, 110 frames, 89 elided; sentence 63 tok (`receipts/eval-kt-final.log`) |
 | curbox-app_curbox-android_446 | 11441 | 562 | 562 | 562 | 351 mostly repeated frames; composed arm loses, plain arm wins (was 582 before the always-run arm) |
 | Kotlin_kotlinx.serialization_3277 | 1791 | 465 | 465 | 465 | 44/73 derivable, repeated traces → plain arm |
 | nextcloud_android_12945 | 977 | 381 | 381 | 381 | 28 frames on 6 distinct files: predicted 29 < sentence 51 |
@@ -173,9 +173,10 @@ Sentence costs (o200k, incl. newline): frames java 34 · kt+java 51 · kt(Kt)+ja
 github 40 · anchors percent 26 · release links 49–52 (stem-dependent).
 
 Runtime: on files where no schema instantiates, EPAGOGE = one DAEDALUS run (identical to D). On
-applied files it is two runs (composed + plain): GrapheneOS 19 s vs 11 s, svenstaro 59 s vs 31 s,
-thoughtbot 76 s vs 65 s (`eval-*.log`). The arm is kept because the gate's prediction was wrong
-on curbox_446 and the user's constraint is "never worse".
+applied files it is two runs (composed + plain): GrapheneOS 18 s vs 11 s, svenstaro 59 s vs 31 s,
+thoughtbot 76 s vs 65 s, axios TOC 198 s vs ≈ 100 s (`eval-*.log`). The arm is kept because the
+gate's prediction was wrong on curbox_446 and the user's constraint is "never worse"; callers who
+prefer speed can pass `guardBelow: 60` to get ENTHYMEME's behaviour.
 
 ## G. Second-order adversary (`adversary.ts` → `receipts/adversary.log`, 11/11 exact)
 
@@ -196,7 +197,7 @@ starts with the rule mark (refused). Every candidate instance is also folded/unf
   was written from the sentence grammar, not from the TypeScript. It decodes 14/14 forced
   adversary wires (`receipts/wires-adv.jsonl`) and the real shipped wires of
   `receipts/wires-real.jsonl` (GrapheneOS, the two self-test slices, five changelogs, two Java
-  traces, two TOC READMEs) byte-exactly — see `receipts/xcheck-real.txt`.
+  traces, two TOC READMEs): 12/12 byte-exact — `receipts/xcheck-real.txt`.
 * **Blind in-context decode 1 (real wire, zipper).** `corpus/selftest-changelog.txt` = MetaMask
   CHANGELOG lines 91–157 (1 538 raw tokens). EPAGOGE message M = 662 (plain 687). Decoded by this
   agent from the wire alone into `receipts/selftest-changelog.decoded.txt`; `cmp` byte-identical,
