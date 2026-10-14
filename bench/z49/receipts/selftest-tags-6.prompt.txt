@@ -1,0 +1,17 @@
+≡ After expanding, the ≡ line lists fields removed from the JSON objects under it. Print only the JSON with them put back: in each object having the named field(s), insert the listed fields after the named field ("first" = at the top), in order, same indent, comma unless } or ] follows. <k> = that object's value of k, quotes dropped. Fields already present stay.
+§票MDM6UmVmMjcxOTM3Nzk6cmVmcy90YWdzL3YyNi看 "sha":整",
+    "commit": {
+     看 "高 "name":分  {
+   高 "v26.试  },
+分彩",
+    },
+    "node_id": "主": "https://api.github.com/repos/nodejs/node图ball/refs/tags/<name的彩票4x影.0整个4w"
+试玩="
+试8.购彩票44Lj¶≡ objects having高 after高 "zipball_url主/zip图>", "tarball_url主/tar图>" | objects having看 after看 "url主/commits/<sha>"
+[
+分11.1整364593d0631def13e3043dd84f77ebca2c767ce5的MS4x"
+试11影49072a0be4c7410982557aebf5b5c924fe7db597的MS个10影151845ab90d3926ceb36eedf1eade09619c3adc9的MC个9影b469d3fd9401ecbd5de334f4b7043dd0286e4a7b彩票45LjA玩2整f2f2c2f246c36bd74f082cb43ecfe830657d81c9购I玩1整7be6d3af31a65adea57c94c41e50c2b071ed0b3a购E="
+  }
+]
+
+Every new Chinese character before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result.

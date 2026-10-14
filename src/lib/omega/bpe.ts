@@ -41,6 +41,31 @@ import {
   decode as decCl100k,
   setMergeCacheSize as setCl100kMergeCacheSize,
 } from 'gpt-tokenizer/encoding/cl100k_base';
+import { decoder as GPT_TEXT_DECODER } from 'gpt-tokenizer/BytePairEncodingCore';
+
+/* ---------------------------------------------------------------------------
+ * DECODER STATE LEAK  (Z49)
+ *
+ * gpt-tokenizer decodes every token list through ONE module-global
+ * TextDecoder in streaming mode and never flushes it. The trailing bytes of
+ * an incomplete UTF-8 sequence — the first token of a two-token character such
+ * as "≡", or the last id of a vocabulary scan — stay buffered and are silently
+ * PREPENDED to the next, unrelated decode call, which then yields "\uFFFD…".
+ * ARIADNE's grammar builder checks that per-token strings re-join to the chunk
+ * and returns null when they do not, so whether a search arm ran at all
+ * depended on what had been decoded earlier in the process. MEASURED
+ * (bench/z49/receipts/det-leak.log, OMEGA_DET=1, same input): DAEDALUS gave
+ * 787, then 706 on the next call, and 869 after a plain run on another text.
+ * Every public decode below therefore starts with a flush and APPENDS the
+ * final flush to its own result, which is exactly non-streaming semantics:
+ * a token whose bytes end in an incomplete sequence (o200k id 439 = "о" + a
+ * dangling 0xD0) decodes to "о\uFFFD" instead of to a counterfeit "о" that
+ * the glyph pools would mistake for a one-token character. The per-token
+ * walk in tokenStrings keeps the stream open across ITS tokens (so a
+ * two-token character still lands, whole, on its second token) and flushes
+ * once before and once after.
+ * ------------------------------------------------------------------------- */
+const flushDecoder = (): string => { try { return GPT_TEXT_DECODER.decode(); } catch { return ''; } };
 
 /* ---------------------------------------------------------------------------
  * MERGE-CACHE OFF  (Z42)
@@ -74,15 +99,20 @@ interface EncApi {
   scanLimit: number;
 }
 
+const RAW: Record<EncodingName, { encode: (s: string) => number[]; decode: (ids: number[]) => string }> = {
+  o200k_base: { encode: (s) => encO200k(s), decode: (ids) => decO200k(ids) },
+  cl100k_base: { encode: (s) => encCl100k(s), decode: (ids) => decCl100k(ids) },
+};
+
 const API: Record<EncodingName, EncApi> = {
   o200k_base: {
     encode: (s) => encO200k(s),
-    decode: (ids) => decO200k(ids),
+    decode: (ids) => { flushDecoder(); return decO200k(ids) + flushDecoder(); },
     scanLimit: 200_000,
   },
   cl100k_base: {
     encode: (s) => encCl100k(s),
-    decode: (ids) => decCl100k(ids),
+    decode: (ids) => { flushDecoder(); return decCl100k(ids) + flushDecoder(); },
     scanLimit: 100_256,
   },
 };
@@ -177,15 +207,18 @@ export function decodeIds(ids: number[], enc: EncodingName): string {
 export function tokenStrings(text: string, enc: EncodingName): { id: number; s: string }[] {
   const ids = encodeIds(text, enc);
   const out: { id: number; s: string }[] = [];
+  flushDecoder();
   for (const id of ids) {
     let s: string;
     try {
-      s = API[enc].decode([id]);
+      s = RAW[enc].decode([id]);   // stream kept open across this text's tokens: a 2-token character lands on its 2nd token
     } catch {
       s = '\uFFFD';
     }
     out.push({ id, s });
   }
+  const tail = flushDecoder();   // an incomplete sequence at the very end (never in valid text) stays visible
+  if (tail && out.length) out[out.length - 1].s += tail;
   return out;
 }
 

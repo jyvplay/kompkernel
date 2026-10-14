@@ -1,0 +1,87 @@
+
+== ops-log-tails  (6 messages)
+   bench/holdout-ops/openstack-loghub-26.log split into 6 consecutive line ranges: an operator pasting successive log tails into one chat.
+   raw=4029  session=1708  isolated(contract every msg)=3491  saving vs isolated=1783 (51.1%)  exact=true reDecode=true 171ms
+   DAEDALUS per-message total=1887  ANAMNESIS 1708  delta=-179
+     m0 raw=889 msg=389 mode=anamnesis-first new=14 recollected=0 copies=0
+     m1 raw=689 msg=279 mode=anamnesis-session new=10 recollected=5 copies=5
+     m2 raw=757 msg=319 mode=anamnesis-session new=11 recollected=8 copies=8
+     m3 raw=891 msg=296 mode=anamnesis-session new=10 recollected=11 copies=6
+     m4 raw=685 msg=355 mode=anamnesis-session new=8 recollected=7 copies=10
+     m5 raw=118 msg=70 mode=anamnesis-session new=1 recollected=3 copies=1
+
+== vix-monthly  (6 messages)
+   bench/holdout-tab/vix-daily-1990.csv split into 6 consecutive line ranges: an analyst pasting successive data pulls into one chat.
+   raw=3412  session=1674  isolated(contract every msg)=3424  saving vs isolated=1750 (51.1%)  exact=true reDecode=true 20ms
+   DAEDALUS per-message total=1761  ANAMNESIS 1674  delta=-87
+     m0 raw=577 msg=377 mode=anamnesis-first new=22 recollected=0 copies=0
+     m1 raw=594 msg=276 mode=anamnesis-session new=16 recollected=5 copies=0
+     m2 raw=594 msg=275 mode=anamnesis-session new=13 recollected=4 copies=0
+     m3 raw=594 msg=278 mode=anamnesis-session new=15 recollected=8 copies=1
+     m4 raw=594 msg=250 mode=anamnesis-session new=8 recollected=6 copies=0
+     m5 raw=459 msg=218 mode=anamnesis-session new=11 recollected=5 copies=1
+
+== pkglock-chunks  (6 messages)
+   bench/holdout-ops/package-lock-head.json split into 6 consecutive line ranges: dependency data pasted in pieces.
+   raw=15009  session=7001  isolated(contract every msg)=14079  saving vs isolated=7078 (50.3%)  exact=true reDecode=true 132ms
+   DAEDALUS per-message total=6477  ANAMNESIS 7001  delta=524
+     m0 raw=1874 msg=839 mode=anamnesis-first new=57 recollected=0 copies=0
+     m1 raw=2479 msg=1129 mode=anamnesis-session new=29 recollected=23 copies=1
+     m2 raw=2592 msg=1253 mode=anamnesis-session new=31 recollected=11 copies=7
+     m3 raw=2786 msg=1331 mode=anamnesis-session new=39 recollected=25 copies=4
+     m4 raw=2622 msg=1084 mode=anamnesis-session new=27 recollected=26 copies=5
+     m5 raw=2656 msg=1365 mode=anamnesis-session new=45 recollected=31 copies=11
+
+== agent-history  (5 messages)
+   bench/holdout-mk/agent-history.md split into 5 consecutive line ranges: successive turns of one agent transcript.
+   raw=1156  session=687  isolated(contract every msg)=1303  saving vs isolated=616 (47.3%)  exact=true reDecode=true 12ms
+   DAEDALUS per-message total=956  ANAMNESIS 687  delta=-269
+     m0 raw=223 msg=223 mode=raw new=0 recollected=0 copies=0
+     m1 raw=242 msg=184 mode=anamnesis-session new=8 recollected=0 copies=4
+     m2 raw=222 msg=117 mode=anamnesis-session new=3 recollected=7 copies=5
+     m3 raw=244 msg=85 mode=anamnesis-session new=3 recollected=7 copies=7
+     m4 raw=225 msg=78 mode=anamnesis-session new=2 recollected=7 copies=7
+
+== kb-translations  (6 messages)
+   The six real translations of the same KB article in bench/holdout-lang (de, es, ja, pl, ru, tr): a localisation workflow in one chat.
+   raw=3292  session=3185  isolated(contract every msg)=5342  saving vs isolated=2157 (40.4%)  exact=true reDecode=true 43ms
+   DAEDALUS per-message total=3235  ANAMNESIS 3185  delta=-50
+     m0 raw=525 msg=525 mode=raw new=0 recollected=0 copies=0
+     m1 raw=457 msg=419 mode=anamnesis-session new=8 recollected=0 copies=0
+     m2 raw=655 msg=655 mode=raw new=0 recollected=0 copies=0
+     m3 raw=623 msg=600 mode=anamnesis-session new=9 recollected=0 copies=0
+     m4 raw=478 msg=463 mode=anamnesis-session new=7 recollected=0 copies=0
+     m5 raw=554 msg=523 mode=anamnesis-session new=12 recollected=0 copies=0
+
+== ops-mixed  (6 messages)
+   Six different real ops artifacts pasted into one chat: find-listing, ls-full-iso, npm-ls, node-stacktraces, git-numstat (first third), df-h.
+   raw=10599  session=4337  isolated(contract every msg)=8752  saving vs isolated=4415 (50.4%)  exact=true reDecode=true 67ms
+   DAEDALUS per-message total=4057  ANAMNESIS 4337  delta=280
+     m0 raw=3997 msg=1461 mode=anamnesis-first new=41 recollected=0 copies=0
+     m1 raw=1175 msg=434 mode=anamnesis-session new=22 recollected=1 copies=0
+     m2 raw=2747 msg=1104 mode=anamnesis-session new=88 recollected=0 copies=0
+     m3 raw=568 msg=329 mode=anamnesis-session new=19 recollected=1 copies=0
+     m4 raw=1542 msg=753 mode=anamnesis-session new=31 recollected=1 copies=0
+     m5 raw=570 msg=256 mode=anamnesis-session new=6 recollected=0 copies=0
+
+== prose-study  (6 messages)
+   Six real prose/work documents pasted into one study chat: kb-article, llm-answer, email-thread, meeting-transcript, readme, bibliography.
+   raw=4229  session=3685  isolated(contract every msg)=6904  saving vs isolated=3219 (46.6%)  exact=true reDecode=true 33ms
+   DAEDALUS per-message total=3702  ANAMNESIS 3685  delta=-17
+     m0 raw=656 msg=656 mode=raw new=0 recollected=0 copies=0
+     m1 raw=733 msg=710 mode=anamnesis-session new=9 recollected=0 copies=0
+     m2 raw=629 msg=518 mode=anamnesis-session new=20 recollected=0 copies=0
+     m3 raw=472 msg=384 mode=anamnesis-session new=6 recollected=0 copies=1
+     m4 raw=843 msg=675 mode=anamnesis-session new=21 recollected=0 copies=0
+     m5 raw=896 msg=742 mode=anamnesis-session new=26 recollected=0 copies=0
+
+== repo-review  (6 messages)
+   Six real sibling modules from src/lib/omega reviewed in one chat: veritas-r, veritas-k, veritas-m, veritas-n, veritas-p, veritas-q.
+   raw=11586  session=9168  isolated(contract every msg)=18412  saving vs isolated=9244 (50.2%)  exact=true reDecode=true 140ms
+   DAEDALUS per-message total=9417  ANAMNESIS 9168  delta=-249
+     m0 raw=2558 msg=2183 mode=anamnesis-first new=91 recollected=0 copies=0
+     m1 raw=484 msg=398 mode=anamnesis-session new=4 recollected=10 copies=4
+     m2 raw=745 msg=571 mode=anamnesis-session new=9 recollected=10 copies=12
+     m3 raw=1594 msg=1296 mode=anamnesis-session new=22 recollected=31 copies=13
+     m4 raw=5334 msg=4034 mode=anamnesis-session new=128 recollected=62 copies=4
+     m5 raw=871 msg=686 mode=anamnesis-session new=15 recollected=26 copies=6

@@ -1,0 +1,81 @@
+Desired=Unknown/Install/Remove/Purge/Hold
+| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
+|/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
+||/ Name                 Version          Architecture Description
++++-====================-================-============-=================================
+ii  adduser              8.20.2-9         all          add and remove users and groups
+ii  apt                  8.19.8-4         amd64        commandline package manager
+ii  base-files           6.10.2-11        all          Debian base system miscellaneous files
+ii  bash                 1.31.3-4         amd64        GNU Bourne Again SHell
+ii  bsdutils             8.35.8-3         amd64        basic utilities from 4.4BSD-Lite
+rc  coreutils            7.13.0-2         amd64        GNU core utilities
+ii  curl                 6.4.2-8          amd64        command line tool for transferring data with URL syntax
+ii  dash                 2.8.0-12         amd64        POSIX-compliant shell
+ii  debconf              8.18.5-12        all          Debian configuration management system
+ii  dpkg                 5.6.3-5          amd64        Debian package management system
+ii  e2fsprogs            4.0.9-5          amd64        add and remove users and groups
+ii  findutils            2.22.6-3         amd64        commandline package manager
+ii  gcc-12-base          3.25.9-5         amd64        Debian base system miscellaneous files
+ii  grep                 0.23.1-5         amd64        GNU Bourne Again SHell
+ii  gzip                 9.18.9-8         amd64        basic utilities from 4.4BSD-Lite
+ii  hostname             1.7.3-3          amd64        GNU core utilities
+ii  init-system-helpers  5.30.8-11        all          command line tool for transferring data with URL syntax
+ii  libacl1              5.27.1-1         amd64        POSIX-compliant shell
+ii  libattr1             5.27.6-6         amd64        Debian configuration management system
+ii  libaudit1            0.37.6-8         amd64        Debian package management system
+ii  libblkid1            6.38.4-3         amd64        add and remove users and groups
+ii  libbz2-1.0           5.12.7-10        amd64        commandline package manager
+ii  libc-bin             3.40.9-3         amd64        Debian base system miscellaneous files
+ii  libc6                3.9.2-5          amd64        GNU Bourne Again SHell
+ii  libcap2              9.27.9-9         amd64        basic utilities from 4.4BSD-Lite
+ii  libcom-err2          8.25.9-7         amd64        GNU core utilities
+ii  libcrypt1            0.29.8-5         amd64        command line tool for transferring data with URL syntax
+ii  libdb5.3             0.40.1-1         amd64        POSIX-compliant shell
+rc  libdebconfclient0    0.0.5-6          amd64        Debian configuration management system
+ii  libext2fs2           1.38.7-9         amd64        Debian package management system
+ii  libffi8              7.6.7-10         amd64        add and remove users and groups
+ii  libgcc-s1            1.30.2-4         amd64        commandline package manager
+ii  libgcrypt20          1.38.3-4         amd64        Debian base system miscellaneous files
+ii  libgmp10             5.2.6-9          amd64        GNU Bourne Again SHell
+ii  libgnutls30          6.2.4-10         amd64        basic utilities from 4.4BSD-Lite
+ii  libgpg-error0        0.20.6-11        amd64        GNU core utilities
+ii  libidn2-0            6.5.3-8          amd64        command line tool for transferring data with URL syntax
+ii  liblz4-1             5.7.0-2          amd64        POSIX-compliant shell
+ii  liblzma5             3.8.3-10         amd64        Debian configuration management system
+ii  libmount1            1.8.3-5          amd64        Debian package management system
+ii  libncursesw6         5.12.2-10        amd64        add and remove users and groups
+ii  libnettle8           6.2.1-10         amd64        commandline package manager
+ii  libp11-kit0          9.5.6-9          amd64        Debian base system miscellaneous files
+ii  libpam0g             0.17.9-3         amd64        GNU Bourne Again SHell
+ii  libpcre2-8-0         1.8.1-2          amd64        basic utilities from 4.4BSD-Lite
+ii  libseccomp2          6.34.8-8         amd64        GNU core utilities
+ii  libselinux1          9.21.7-7         amd64        command line tool for transferring data with URL syntax
+ii  libsemanage2         4.18.7-4         amd64        POSIX-compliant shell
+ii  libsepol2            2.0.7-7          amd64        Debian configuration management system
+ii  libsmartcols1        3.37.4-2         amd64        Debian package management system
+ii  libss2               3.2.2-7          amd64        add and remove users and groups
+rc  libssl3              1.21.6-1         amd64        commandline package manager
+ii  libstdc++6           5.34.9-3         amd64        Debian base system miscellaneous files
+ii  libsystemd0          3.21.8-3         amd64        GNU Bourne Again SHell
+ii  libtasn1-6           8.35.3-11        amd64        basic utilities from 4.4BSD-Lite
+ii  libtinfo6            0.3.7-3          amd64        GNU core utilities
+ii  libudev1             9.31.5-2         amd64        command line tool for transferring data with URL syntax
+ii  libunistring2        0.14.0-2         amd64        POSIX-compliant shell
+ii  libuuid1             0.9.3-7          amd64        Debian configuration management system
+ii  libxxhash0           1.2.7-8          amd64        Debian package management system
+ii  libzstd1             2.7.1-11         amd64        add and remove users and groups
+ii  login                4.4.8-4          amd64        commandline package manager
+ii  logsave              6.16.5-11        amd64        Debian base system miscellaneous files
+ii  mawk                 1.36.8-5         amd64        GNU Bourne Again SHell
+ii  mount                2.15.5-7         amd64        basic utilities from 4.4BSD-Lite
+ii  ncurses-base         6.37.8-9         all          GNU core utilities
+ii  ncurses-bin          5.22.5-4         amd64        command line tool for transferring data with URL syntax
+ii  passwd               9.10.7-9         amd64        POSIX-compliant shell
+ii  perl-base            1.14.9-3         amd64        Debian configuration management system
+ii  sed                  4.27.1-4         amd64        Debian package management system
+ii  sensible-utils       4.36.7-7         all          add and remove users and groups
+ii  sysvinit-utils       8.16.7-2         amd64        commandline package manager
+ii  tar                  6.7.4-10         amd64        Debian base system miscellaneous files
+ii  tzdata               4.3.6-12         all          GNU Bourne Again SHell
+rc  util-linux           5.26.2-5         amd64        basic utilities from 4.4BSD-Lite
+ii  zlib1g               5.40.2-9         amd64        GNU core utilities

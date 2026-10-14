@@ -1,0 +1,7 @@
+gh-api.json.txt	raw=2519	plainM=1153	M=1153	applied=false	exact=true	templates=0	lines=0	clause=0	6.6s
+gh-releases-1.json	raw=894	plainM=544	M=544	applied=false	exact=true	templates=0	lines=0	clause=0	0.9s
+gh-comments-10.json	raw=6053	plainM=1127	M=1059	applied=true	exact=true	templates=16	lines=160	clause=256	30.8s
+gh-repos-3.json	raw=5155	plainM=1210	M=1210	applied=false	exact=true	templates=0	lines=0	clause=0	15.1s
+gh-commits-4.json	raw=8544	plainM=3704	M=3704	applied=false	exact=true	templates=0	lines=0	clause=0	90.5s
+gh-pulls-1.json	raw=5660	plainM=2246	M=2246	applied=false	exact=true	templates=0	lines=0	clause=0	38.0s
+json-pkg.txt	raw=1152	plainM=743	M=743	applied=false	exact=true	templates=0	lines=0	clause=0	2.3s

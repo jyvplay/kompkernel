@@ -1,0 +1,27 @@
+OK  lic-mit.txt                                  raw=  223 M=   41 【MIT】
+OK  lic-isc.txt                                  raw=  156 M=   39 【ISC】
+OK  lic-bsd-3-clause.txt                         raw=  295 M=   45 【BSD-3-Clause】
+OK  facebook_react.txt                           raw=  223 M=   41 【MIT】
+OK  vuejs_core.txt                               raw=  234 M=   68 【MIT; layout classic】
+OK  openai_openai-python.txt                     raw= 2258 M=   46 【Apache-2.0: 2026 OpenAI】
+OK  d3_d3.txt                                    raw=  156 M=   59 【ISC; wrap 80】
+OK  boostorg_boost.txt                           raw=  282 M=   31 【BSL-1.0】
+OK  angular_angular.txt                          raw=  230 M=   64 【MIT; layout classic】
+OK  expressjs_express.txt                        raw=  281 M=  116 【MIT; layout npm】
+OK  netty_netty.txt                              raw= 2262 M=   42 【Apache-2.0; url https】
+OK  prettier_prettier.txt                        raw=  199 M=   45 【MIT; unwrapped】
+OK  ansible_ansible.txt                          raw= 7446 M=   30 【GPL-3.0】
+OK  denoland_deno.txt                            raw=  220 M=   62 【MIT; wrap 80】
+OK  babel_babel.txt                              raw=  225 M=   59 【MIT; layout jquery】
+OK  php_php-src.txt                              raw=  317 M=   67 【BSD-3-Clause】
+OK  psf_requests.txt                             raw= 2011 M=   55 【Apache-2.0; ending "of your accepting any such warranty or additional liability."】
+OK  openssl_openssl.txt                          raw= 2018 M=   63 【Apache-2.0; url https; ending "END OF TERMS AND CONDITIONS"】
+OK  git_git.txt                                  raw= 4059 M=  216 【GPL-2.0; tabs】
+OK  tensorflow_tensorflow_app.py                 raw=  296 M=  225 【Apache-2.0 header; prefix "# "】
+OK  kubernetes_kubernetes_hash.go                raw=  214 M=  127 【Apache-2.0 header】
+OK  coreutils_coreutils_true.c                   raw=  542 M=  453 【GPL-3.0 header; prefix "   "】
+OK  google_guava_Strings.java                    raw= 3186 M= 2227 【Apache-2.0 header; prefix " * "; wrap 100】
+OK  servo_servo_lib.rs                           raw= 1754 M= 1434 
+OK  android_platform_frameworks_base_Log.java    raw= 5225 M= 2745 【Apache-2.0 header; prefix " * "; indent 5】
+OK  coreutils_coreutils_yes.c                    raw= 2077 M= 1686 【GPL-3.0 header; prefix "   "】
+python cross-decode: 26/26 byte-identical

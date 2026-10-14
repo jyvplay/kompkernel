@@ -1,0 +1,7 @@
+decoded 5 case(s)
+dpkg-like.txt	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=d191ae408e6875ab	Each line lost its 4th space-separated field, "amd64" followed by 8 spaces, except lines whose 4th field is "uppercase=bad)" or "Architecture" or "all"; put it 
+kubectl-like.txt	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=967543d387a36d8f	Each line lost its 2nd space-separated field, "Running" followed by 12 spaces, except lines whose 2nd field is "READY" or "0/1"; put it back. | Each line lost i
+orders.csv	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=daf2c1cfebac4f98	Each line lost its 2nd space-separated field, "comma" followed by a space; put it back. | Each line lost its 2nd space-separated field, "with" followed by a spa
+access.tsv	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=de5e1f51d509d574	Each line lost "/api/v1/" from the start of its 3rd space-separated field; put it back. | Empty cells (tab-separated) hold the column's default: 3rd column = "H
+ls-l-omega.txt	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=2b75bc14f302a9a1	Each line lost "src/lib/omega/" from the start of its 7th space-separated field, except lines whose 7th field is "/etc/hosts"; put it back. | Each line lost its
+5/5 byte-identical under both readers (forced+optimistic mode)

@@ -1,0 +1,23 @@
+file	raw	lz77 phrases	literals	copies	D	D/phrases
+bibliography.txt	896	608	467	141	711	1.17
+email-thread.txt	629	440	379	61	525	1.19
+kb-article.txt	656	595	539	56	651	1.09
+llm-answer.md	733	613	536	77	707	1.15
+meeting-transcript.txt	472	357	319	38	420	1.18
+unified-diff.patch	578	339	259	80	475	1.40
+code-dts.txt	162	57	36	21	108	1.89
+code-ts.txt	1422	803	540	263	1028	1.28
+gh-api.json.txt	2519	893	652	241	1153	1.29
+gh-prose.txt	1934	1607	1437	170	1782	1.11
+json-pkg.txt	1152	596	370	226	743	1.25
+lic-mit.txt	223	215	208	7	223	1.04
+license.txt	1166	838	680	158	968	1.16
+md-react.txt	252	230	216	14	252	1.10
+md-vite.txt	274	225	206	19	274	1.22
+readme.txt	843	571	490	81	688	1.20
+df-h.txt	131	78	60	18	131	1.68
+dpkg-l.txt	8975	3540	2110	1430	4572	1.29
+du-usr-share.txt	1634	608	390	218	766	1.26
+free-h.txt	64	49	42	7	64	1.31
+ls-usr-bin.txt	17146	2821	1312	1509	3746	1.33
+ls-usr-lib.txt	949	260	179	81	342	1.32

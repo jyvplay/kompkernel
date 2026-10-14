@@ -1,0 +1,12 @@
+bench/z47/corpus/kt/GrapheneOS_os-issue-tracker_8922.md clauses=1 folded=89 nativeExact=true 18062ms
+bench/z47/corpus/selftest-mixed.txt clauses=1 folded=89 nativeExact=true 18525ms
+bench/z47/corpus/selftest-changelog.txt clauses=1 folded=15 nativeExact=true 3105ms
+bench/z47/corpus/changelog/MetaMask_eth-json-rpc-infura.md clauses=1 folded=15 nativeExact=true 9756ms
+bench/z47/corpus/changelog/MarvinJWendt_testza.md clauses=1 folded=26 nativeExact=true 8655ms
+bench/z47/corpus/changelog/svenstaro_miniserve.md clauses=1 folded=43 nativeExact=true 46765ms
+bench/z47/corpus/changelog/mikaelmello_inquire.md clauses=1 folded=32 nativeExact=true 62682ms
+bench/z47/corpus/changelog/thoughtbot_clearance.md clauses=1 folded=45 nativeExact=true 70676ms
+bench/z46/corpus/traces/buttasam_cms-boot_3.md clauses=1 folded=50 nativeExact=true 24632ms
+bench/z46/corpus/traces/getsentry_sentry-java_980.md clauses=1 folded=103 nativeExact=true 33557ms
+bench/z46/corpus/toc/axios_axios.md clauses=1 folded=43 nativeExact=true 159649ms
+bench/z46/corpus/toc/vinta_awesome-python.md clauses=1 folded=75 nativeExact=true 38016ms

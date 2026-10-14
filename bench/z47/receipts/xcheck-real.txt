@@ -1,0 +1,13 @@
+OK   bench/z47/corpus/kt/GrapheneOS_os-issue-tracker_8922.md | sentence: ∴ Stack frames: "at C.m(:N)" = "at C.m(S.kt:N)" and "at C.m(;N)" = "at C.m(S.java:N)", S = C after i
+OK   bench/z47/corpus/selftest-mixed.txt | sentence: ∴ Stack frames: "at C.m(:N)" = "at C.m(S.kt:N)" and "at C.m(;N)" = "at C.m(S.java:N)", S = C after i
+OK   bench/z47/corpus/selftest-changelog.txt | sentence: ∴ Release links: "[V]:" alone on a line = "[V]: https://github.com/MetaMask/eth-json-rpc-infura/comp
+OK   bench/z47/corpus/changelog/MetaMask_eth-json-rpc-infura.md | sentence: ∴ Release links: "[V]:" alone on a line = "[V]: https://github.com/MetaMask/eth-json-rpc-infura/comp
+OK   bench/z47/corpus/changelog/MarvinJWendt_testza.md | sentence: ∴ Release links: "[V]:" alone on a line = "[V]: https://github.com/MarvinJWendt/testza/compare/P...V
+OK   bench/z47/corpus/changelog/svenstaro_miniserve.md | sentence: ∴ Release links: "[V]:" alone on a line = "[V]: https://github.com/svenstaro/miniserve/compare/vP...
+OK   bench/z47/corpus/changelog/mikaelmello_inquire.md | sentence: ∴ Release links: "[V]:" alone on a line = "[V]: https://github.com/mikaelmello/inquire/compare/vP...
+OK   bench/z47/corpus/changelog/thoughtbot_clearance.md | sentence: ∴ Release links: "[V]:" alone on a line = "[V]: https://github.com/thoughtbot/clearance/compare/vP..
+OK   bench/z46/corpus/traces/buttasam_cms-boot_3.md | sentence: ∴ Stack frames: "at C.m(:N)" = "at C.m(S.java:N)", S = C after its last ".", cut at the first "$".
+OK   bench/z46/corpus/traces/getsentry_sentry-java_980.md | sentence: ∴ Stack frames: "at C.m(:N)" = "at C.m(S.java:N)", S = C after its last ".", cut at the first "$".
+OK   bench/z46/corpus/toc/axios_axios.md | sentence: ∴ Links: "[t](#)" = "[t](#s)", s = t lowercased, keeping only letters, digits, spaces, "-" and "_", 
+OK   bench/z46/corpus/toc/vinta_awesome-python.md | sentence: ∴ Links: "[t](#)" = "[t](#s)", s = t lowercased, keeping only letters, digits, spaces, "-" and "_", 
+12/12 real shipped wires decoded byte-exactly by bench/epagoge_decode.py (CPython, independent of the TypeScript)

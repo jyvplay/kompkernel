@@ -1,0 +1,11 @@
+o200k_base epagoge traces/alibaba_druid_6414.md in=1477 oneChat=852 exact=true  21917ms
+o200k_base epagoge traces/buttasam_cms-boot_3.md in=2354 oneChat=944 exact=true  23927ms
+o200k_base epagoge traces/couchbase_CouchbaseMock_11.md in=868 oneChat=676 exact=true  4340ms
+o200k_base epagoge traces/getsentry_sentry-java_1863.md in=2800 oneChat=1061 exact=true  22330ms
+o200k_base epagoge traces/getsentry_sentry-java_980.md in=3974 oneChat=2003 exact=true  36956ms
+o200k_base epagoge traces/netty_netty_16626.md in=3106 oneChat=1692 exact=true  26952ms
+o200k_base epagoge traces/oracle_graal_12109.md in=2596 oneChat=1739 exact=true  28625ms
+o200k_base epagoge traces/spring-projects_spring-framework_35118.md in=1895 oneChat=930 exact=true  14974ms
+o200k_base epagoge traces/spring-projects_spring-loaded_102.md in=1360 oneChat=153 exact=true  1275ms
+o200k_base epagoge traces/spring-projects_spring-loaded_138.md in=1989 oneChat=658 exact=true  13154ms
+done

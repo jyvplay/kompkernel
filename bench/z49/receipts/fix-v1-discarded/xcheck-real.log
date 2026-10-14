@@ -1,0 +1,15 @@
+gh-branches-20.json	not applied (paradeigma: not applied (composed M 775 >= plain M 739); predicted "span12+words" from pun)
+npm-left-pad.json	not applied (paradeigma: not applied (composed M 2974 >= plain M 2847); predicted "span12" from punct=1)
+gh-runs-1.json	not applied (paradeigma: not applied (composed M 2186 >= plain M 2178); predicted "span12" from punct=1)
+gh-releases-1.json	not applied (paradeigma: not applied (no template over sibling fields pays for its sentence); predicted)
+gh-api.json.txt	not applied (paradeigma: not applied (templates found (2) but the estimated gain 8 cannot pay the contr)
+json-pkg.txt	not applied (paradeigma: not applied (no template over sibling fields pays for its sentence); predicted)
+gh-followers-20.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=3ef7c5fe76bccc89	12 templates, 240 lines, M 557 vs plain 922
+gh-tags-20.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=467e065c71b2ad11	3 templates, 60 lines, M 788 vs plain 951
+gh-contents-lib-25.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=394577c45a1dfb17	5 templates, 116 lines, M 1269 vs plain 1411
+gh-comments-10.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=aa97ec0ef2017ae1	15 templates, 147 lines, M 1017 vs plain 1127
+gh-repos-3.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=b715b2b9adb11332	54 templates, 162 lines, M 1135 vs plain 1210
+gh-pulls-1.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=bc8856948b3d34fc	13 templates, 62 lines, M 2185 vs plain 2251
+gh-commits-4.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=9e1f75aebcd552a5	14 templates, 104 lines, M 3661 vs plain 3708
+7/7 byte-identical under both readers (real mode)
+XCHECK_REAL_DONE

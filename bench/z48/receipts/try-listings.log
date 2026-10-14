@@ -1,0 +1,38 @@
+ls-l-dts.txt	raw=6689	M=1316	plain=1316	applied=false	exact=true/true	48856ms
+  notes: elleipsis: not applied (composed M 1329 >= plain M 1316); predicted "span12+words" from punct=16.9% tokens=6689; ran 2 arm(s); winner "default" (prediction miss); 54 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 0; contract=39
+du-a-src.txt	raw=2182	M=901	plain=901	applied=false	exact=true/true	25825ms
+  notes: elleipsis: not applied (composed M 913 >= plain M 901); predicted "span12+words" from punct=14.8% tokens=2182; ran 2 arm(s); winner "span12+words" (prediction hit); 56 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 21; contract=40
+wc-l-omega.txt	raw=1834	M=695	plain=789	applied=true	exact=true/true	14453ms
+  Each line lost "src/lib/omega/" from the start of its last space-separated field; put it back.
+  notes: elleipsis: prefix@-1["src/lib/omega/"]×150; sentence 24 tok; M 695 vs plain 789; predicted "span12+words" from punct=6.7% tokens=1131; ran 2 arm(s); winner "span12+words" (prediction hit); 16 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 0; contrac
+wc-c-gitfiles.txt	raw=3656	M=1616	plain=1617	applied=true	exact=true/true	50746ms
+  Each line after the first lost "bench/" from the start of its last space-separated field, except lines whose last field is "CHIRON.patch" or "ICARUS.patch" or "KIONES.patch"; put it back.
+  notes: elleipsis: prefix@-1["bench/"]×246; sentence 48 tok; M 1616 vs plain 1617; predicted "span12+words" from punct=11.2% tokens=3209; ran 2 arm(s); winner "span12+words" (prediction hit); 91 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 0; contract=39
+ls-l-pkgjson.txt	raw=2145	M=520	plain=528	applied=true	exact=true/true	13799ms
+  Each line lost "node_modules/" from the start of its last space-separated field; put it back.
+  notes: elleipsis: prefix@-1["node_modules/"]×74; sentence 22 tok; M 520 vs plain 528; predicted "span12+words" from punct=14.4% tokens=1942; ran 2 arm(s); winner "span12+words" (prediction hit); 16 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 6; contract
+find-listing.txt	raw=3997	M=1326	plain=1326	applied=false	exact=true/true	18217ms
+  notes: elleipsis: not applied (composed M 1335 >= plain M 1326); predicted "span12+words" from punct=13.8% tokens=3997; ran 2 arm(s); winner "span12+words" (prediction hit); 42 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 17; contract=39
+sp500-200.csv	raw=6662	M=4275	plain=4275	applied=false	exact=true/true	24729ms
+  notes: elleipsis: not applied (no positionally fixed constant field pays for its sentence); predicted "span12+words" from punct=12.5% tokens=6662; ran 2 arm(s); winner "span12+words" (prediction hit); 224 phrase + 24 single-token rules, 0 blocks, 0 lists; script=polyglot; beat the plain default arm by 77; 
+kubectl-pods-2.txt	raw=1998	M=1089	plain=1089	applied=false	exact=true/true	19843ms
+  notes: elleipsis: not applied (no positionally fixed constant field pays for its sentence); predicted "span12+words" from punct=6.5% tokens=1998; ran 2 arm(s); winner "span12+words" (prediction hit); 66 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 1; con
+dpkg-l-2.txt	raw=2930	M=2401	plain=2401	applied=false	exact=true/true	10283ms
+  notes: elleipsis: not applied (no positionally fixed constant field pays for its sentence); predicted "span12+words" from punct=10.2% tokens=2930; ran 2 arm(s); winner "span12+words" (prediction hit); 83 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 46; c
+ps-aux-sandbox.txt	raw=3643	M=1185	plain=1185	applied=false	exact=true/true	28281ms
+  notes: elleipsis: not applied (no positionally fixed constant field pays for its sentence); predicted "span12+words" from punct=11.9% tokens=3643; ran 2 arm(s); winner "span12+words" (prediction hit); 73 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 7; co
+systemctl-1.txt	raw=1283	M=932	plain=932	applied=false	exact=true/true	7941ms
+  notes: elleipsis: not applied (no positionally fixed constant field pays for its sentence); predicted "span12+words" from punct=3.2% tokens=1283; ran 2 arm(s); winner "span12+words" (prediction hit); 25 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 24; co
+etc-passwd.txt	raw=508	M=362	plain=362	applied=false	exact=true/true	143ms
+  notes: elleipsis: not applied (no positionally fixed constant field pays for its sentence); predicted "span12" from punct=23.3% tokens=508; ran 2 arm(s); winner "span12" (prediction hit); 10 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 0; contract=40
+mount.txt	raw=721	M=406	plain=406	applied=false	exact=true/true	4655ms
+  notes: elleipsis: not applied (no positionally fixed constant field pays for its sentence); predicted "span12+words" from punct=13.1% tokens=721; ran 2 arm(s); winner "span12+words" (prediction hit); 22 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 6; con
+etc-group.txt	raw=245	M=244	plain=244	applied=false	exact=true/true	24ms
+  notes: elleipsis: not applied (no positionally fixed constant field pays for its sentence); predicted "default" from punct=25.3% tokens=245; ran 2 arm(s); winner "default" (prediction hit); 1 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cjk; beat the plain default arm by 0; contract=38
+apt-list-installed.txt	raw=6607	M=2117	plain=2117	applied=false	exact=true/true	34372ms
+  notes: elleipsis: not applied (no positionally fixed constant field pays for its sentence); predicted "span12+words" from punct=15.6% tokens=6607; ran 2 arm(s); winner "span12+words" (prediction hit); 144 phrase + 24 single-token rules, 0 blocks, 0 lists; script=polyglot; beat the plain default arm by 47; 
+du-usr-share.txt	raw=1634	M=766	plain=766	applied=false	exact=true/true	23468ms
+  notes: elleipsis: not applied (composed M 813 >= plain M 766); predicted "span12+words" from punct=15.1% tokens=1634; ran 2 arm(s); winner "span12+words" (prediction hit); 53 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 28; contract=40
+ls-usr-lib.txt	raw=949	M=342	plain=342	applied=false	exact=true/true	3129ms
+  notes: elleipsis: not applied (no positionally fixed constant field pays for its sentence); predicted "span12+words" from punct=7.1% tokens=949; ran 2 arm(s); winner "default" (prediction miss); 19 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 0; contract=
+TRY_DONE

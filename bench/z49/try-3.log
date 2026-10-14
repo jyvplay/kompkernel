@@ -1,0 +1,13 @@
+gh-followers-20.json	raw=6041	plainM=840	M=566	applied=true	exact=true	templates=16	lines=320	clause=256	32.4s
+gh-comments-10.json	raw=6053	plainM=1127	M=1034	applied=true	exact=true	templates=30	lines=288	clause=440	32.5s
+gh-repos-3.json	raw=5155	plainM=1210	M=1133	applied=true	exact=true	templates=55	lines=165	clause=783	15.9s
+gh-contents-lib-25.json	raw=6705	plainM=1411	M=1304	applied=true	exact=true	templates=6	lines=138	clause=179	28.6s
+gh-tags-20.json	raw=3792	plainM=951	M=807	applied=true	exact=true	templates=3	lines=60	clause=164	13.8s
+gh-branches-20.json	raw=1980	plainM=739	M=739	applied=false	exact=true	templates=0	lines=0	clause=0	16.2s
+npm-left-pad.json	raw=8034	plainM=2844	M=2844	applied=false	exact=true	templates=0	lines=0	clause=0	59.5s
+gh-runs-1.json	raw=7166	plainM=2176	M=2176	applied=false	exact=true	templates=0	lines=0	clause=0	106.3s
+gh-pulls-1.json	raw=5660	plainM=2246	M=2178	applied=true	exact=true	templates=16	lines=77	clause=286	48.8s
+gh-commits-4.json	raw=8544	plainM=3704	M=3656	applied=true	exact=true	templates=18	lines=136	clause=299	95.2s
+gh-api.json.txt	raw=2519	plainM=1153	M=1153	applied=false	exact=true	templates=0	lines=0	clause=0	4.9s
+json-pkg.txt	raw=1152	plainM=743	M=743	applied=false	exact=true	templates=0	lines=0	clause=0	2.4s
+package-lock-head.json	raw=15009	plainM=5523	M=5523	applied=false	exact=true	templates=0	lines=0	clause=0	353.2s

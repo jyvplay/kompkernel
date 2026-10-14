@@ -1,0 +1,330 @@
+[
+  {
+    "sha": "87db28b6bac0bb3e2919a7843c02ff798a31cd1f",
+    "node_id": "C_kwDOAZ7xs9oAKDg3ZGIyOGI2YmFjMGJiM2UyOTE5YTc4NDNjMDJmZjc5OGEzMWNkMWY",
+    "commit": {
+      "author": {
+        "name": "Jiawen Geng",
+        "email": "technicalcute@gmail.com",
+        "date": "2026-10-14T05:35:27Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-14T05:35:27Z"
+      },
+      "message": "build: remove nonexistent header from abseil.gyp\n\nThis header was removed in the V8 15.2 update, but its entry was left\nbehind in the gyp source list.\n\nSigned-off-by: Jiawen Geng <technicalcute@gmail.com>\nAssisted-by: claude:opus-5.5\nPR-URL: https://github.com/nodejs/node/pull/66583\nReviewed-By: Richard Lau <richard.lau@ibm.com>\nReviewed-By: Chengzhong Wu <legendecas@gmail.com>",
+      "tree": {
+        "sha": "1a300617bb1caeee4087d4402ebc05b1e7a2f1ad",
+        "url": "https://api.github.com/repos/nodejs/node/git/trees/1a300617bb1caeee4087d4402ebc05b1e7a2f1ad"
+      },
+      "url": "https://api.github.com/repos/nodejs/node/git/commits/87db28b6bac0bb3e2919a7843c02ff798a31cd1f",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqzxSfCRC1aQ7uu5UhlAAAbbQQAGh768KfYYKTxUsfgrjQ68gD\n+TS+SR9+TVxY+u4/0WRoOZYfib9HXZFUOg/s3TCFC+mhmQknf9ysUliqPXC2xWbh\nNnWixR4R3p0EtMAdssMVsr+mMzRsi3kJyt2NnQODeohD2avTFZw1NA9fkkG81qgR\nsUpOgYeImhmc4HlGUlnevAUp+CbQSwqOwdAN55I5Nxneo6P1AY8mIwA9lgfjrJrD\nZthNI9HOCFIDRcM44FiDYLkoFuWerRBbS0Hov6UO0Tu/ZsWu8yKqG7GiXc8wdcJZ\na+H/5nVuF30vWHhzpGGFt+P6j/ZcU/AGWaAxd9jASJjGJA5a6uuaVu8ydEXKQc8E\nJ20todOI+Q+GuYi+6VM3lfyZlWVke2xkcS3SHeuOrMjVnrPmB/MeXskpfVUXSSty\nKStJVgxC82PZYP+TFoJ/9VWGyNzAp5Wn/B59ogrmXFIIqwewHBWLb6T+Zm5vE9OU\nmlntAMVjNhbMw0iElczO47LyiZlVbjW7BLDap413+IQmioHWnlcWOUf22P07pRhK\ncelNlqXnDzZDqrnv2j+rg6GOj8W7NlK+Xfreq0gKZmcmZQQMf/9w4WpAlpI0X1f5\nEaE/SWTO2EFYGZOTKwUv09+GTYY9FeuCQGV6oGLbxFlc3hKimrCAN5fLV4s11Ygp\nEJSpGCtVLYZbugTZDCWI\n=pFNB\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 1a300617bb1caeee4087d4402ebc05b1e7a2f1ad\nparent a0ce8f152bb1536b2c06dcfcc69db080bcdb6cd5\nauthor Jiawen Geng <technicalcute@gmail.com> 1791956127 +0800\ncommitter GitHub <noreply@github.com> 1791956127 +0000\n\nbuild: remove nonexistent header from abseil.gyp\n\nThis header was removed in the V8 15.2 update, but its entry was left\nbehind in the gyp source list.\n\nSigned-off-by: Jiawen Geng <technicalcute@gmail.com>\nAssisted-by: claude:opus-5.5\nPR-URL: https://github.com/nodejs/node/pull/66583\nReviewed-By: Richard Lau <richard.lau@ibm.com>\nReviewed-By: Chengzhong Wu <legendecas@gmail.com>",
+        "verified_at": "2026-10-14T05:35:27Z"
+      }
+    },
+    "url": "https://api.github.com/repos/nodejs/node/commits/87db28b6bac0bb3e2919a7843c02ff798a31cd1f",
+    "html_url": "https://github.com/nodejs/node/commit/87db28b6bac0bb3e2919a7843c02ff798a31cd1f",
+    "comments_url": "https://api.github.com/repos/nodejs/node/commits/87db28b6bac0bb3e2919a7843c02ff798a31cd1f/comments",
+    "author": {
+      "login": "gengjiawen",
+      "id": 3759816,
+      "node_id": "MDQ6VXNlcjM3NTk4MTY=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3759816?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/gengjiawen",
+      "html_url": "https://github.com/gengjiawen",
+      "followers_url": "https://api.github.com/users/gengjiawen/followers",
+      "following_url": "https://api.github.com/users/gengjiawen/following{/other_user}",
+      "gists_url": "https://api.github.com/users/gengjiawen/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/gengjiawen/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/gengjiawen/subscriptions",
+      "organizations_url": "https://api.github.com/users/gengjiawen/orgs",
+      "repos_url": "https://api.github.com/users/gengjiawen/repos",
+      "events_url": "https://api.github.com/users/gengjiawen/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/gengjiawen/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "a0ce8f152bb1536b2c06dcfcc69db080bcdb6cd5",
+        "url": "https://api.github.com/repos/nodejs/node/commits/a0ce8f152bb1536b2c06dcfcc69db080bcdb6cd5",
+        "html_url": "https://github.com/nodejs/node/commit/a0ce8f152bb1536b2c06dcfcc69db080bcdb6cd5"
+      }
+    ]
+  },
+  {
+    "sha": "a0ce8f152bb1536b2c06dcfcc69db080bcdb6cd5",
+    "node_id": "C_kwDOAZ7xs9oAKGEwY2U4ZjE1MmJiMTUzNmIyYzA2ZGNmY2M2OWRiMDgwYmNkYjZjZDU",
+    "commit": {
+      "author": {
+        "name": "Nigro Simone",
+        "email": "nigro.simone@gmail.com",
+        "date": "2026-10-14T01:57:03Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-14T01:57:03Z"
+      },
+      "message": "src: keep ALS store in AsyncResource::MakeCallback\n\nAsyncResource saves the async context frame when it is created, and\nMakeCallback() enters it with async_context_frame::Scope. Then\nnode::MakeCallback() opens the callback scope with an undefined frame,\nso the callback never runs in the saved one. Since AsyncContextFrame is\nthe default, AsyncLocalStorage loses its store in these callbacks.\n\nPass the saved frame to InternalMakeCallback(), as the Node-API\nAsyncContext already does. This also removes the Scope from every call,\nwith its two Environment lookups and its global handle.\n\nRefs: https://github.com/nodejs/node/pull/66316\nRefs: https://github.com/nodejs/node/issues/43038\nRefs: https://github.com/nodejs/performance/issues/24\nSigned-off-by: Nigro Simone <nigro.simone@gmail.com>\nPR-URL: https://github.com/nodejs/node/pull/66326\nReviewed-By: Yagiz Nizipli <yagiz@nizipli.com>\nReviewed-By: Chengzhong Wu <legendecas@gmail.com>",
+      "tree": {
+        "sha": "3d20fda742e27c297a2fec2c397eaa166e62d89c",
+        "url": "https://api.github.com/repos/nodejs/node/git/trees/3d20fda742e27c297a2fec2c397eaa166e62d89c"
+      },
+      "url": "https://api.github.com/repos/nodejs/node/git/commits/a0ce8f152bb1536b2c06dcfcc69db080bcdb6cd5",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqzuFvCRC1aQ7uu5UhlAAAVcAQAG+fZvLG/ndBrSHMddB52A+U\nmG7iTp3F9YolMrvbLQn3z2YQ0xIO3venggXQF4ekfvUAs4XBT2Iypsjf7wFbjBAd\nyMKAr/Dxk23thoeuzeeQ7Ow7GRWTjlkq4EPlkgx0Vx54FWxh9b6ozvlI4ftiVeh5\nfbhwiYNMAlrE8ITciLeNr+ugxrTpw7nNWXuN/6EsbcckPqixheNEk9eiz4Aiy3qk\nbrjBfsz6/a+MqIvujMKYblcpRYpu6DqySNHW4t4v9XzMZGHEocxkGmNkSdu3rfqt\npjauwkC3VqsVr395GkniZnFVZ9H9cGw2E3gZoUruma3SgmECIYnhPbc/tbqXVwiR\n8owAUH70Ch20BPKA60rYbQRFq3gaEclkH/o+9HTdU5lOITUd5PlKPueqpoPP3tPh\npqotzJUftb4ItJPdw80+uJ6ul958IS09cbGBsrytkFP5Jk++KDUf0x8odP8LK0LZ\ntDGYscvnIc8E1buLlqjLQotD9jHY2RZmfGP0QHDKcNZ9fvAmqupAKh55ZI6LgHqt\nS7xrjTFUJjtEvUKAFeQTSZUQvTFNL+I660XscQzhQSF5hGvDzcFI1/XeVwrR7na0\nwf/WEnZ8pj4XcBKuSQ9fcgrtx4MprLneMri3HPEB1oWK/ioea04kLdIqUOFvALay\nY2c+oq6UFRP16QdwOQJN\n=IJhS\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 3d20fda742e27c297a2fec2c397eaa166e62d89c\nparent 04fb145b6a3d0dc3cf06fcbcd1d3c0414fdc193c\nauthor Nigro Simone <nigro.simone@gmail.com> 1791943023 +0200\ncommitter GitHub <noreply@github.com> 1791943023 +0000\n\nsrc: keep ALS store in AsyncResource::MakeCallback\n\nAsyncResource saves the async context frame when it is created, and\nMakeCallback() enters it with async_context_frame::Scope. Then\nnode::MakeCallback() opens the callback scope with an undefined frame,\nso the callback never runs in the saved one. Since AsyncContextFrame is\nthe default, AsyncLocalStorage loses its store in these callbacks.\n\nPass the saved frame to InternalMakeCallback(), as the Node-API\nAsyncContext already does. This also removes the Scope from every call,\nwith its two Environment lookups and its global handle.\n\nRefs: https://github.com/nodejs/node/pull/66316\nRefs: https://github.com/nodejs/node/issues/43038\nRefs: https://github.com/nodejs/performance/issues/24\nSigned-off-by: Nigro Simone <nigro.simone@gmail.com>\nPR-URL: https://github.com/nodejs/node/pull/66326\nReviewed-By: Yagiz Nizipli <yagiz@nizipli.com>\nReviewed-By: Chengzhong Wu <legendecas@gmail.com>",
+        "verified_at": "2026-10-14T01:57:04Z"
+      }
+    },
+    "url": "https://api.github.com/repos/nodejs/node/commits/a0ce8f152bb1536b2c06dcfcc69db080bcdb6cd5",
+    "html_url": "https://github.com/nodejs/node/commit/a0ce8f152bb1536b2c06dcfcc69db080bcdb6cd5",
+    "comments_url": "https://api.github.com/repos/nodejs/node/commits/a0ce8f152bb1536b2c06dcfcc69db080bcdb6cd5/comments",
+    "author": {
+      "login": "nigrosimone",
+      "id": 310077,
+      "node_id": "MDQ6VXNlcjMxMDA3Nw==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/310077?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nigrosimone",
+      "html_url": "https://github.com/nigrosimone",
+      "followers_url": "https://api.github.com/users/nigrosimone/followers",
+      "following_url": "https://api.github.com/users/nigrosimone/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nigrosimone/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nigrosimone/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nigrosimone/subscriptions",
+      "organizations_url": "https://api.github.com/users/nigrosimone/orgs",
+      "repos_url": "https://api.github.com/users/nigrosimone/repos",
+      "events_url": "https://api.github.com/users/nigrosimone/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nigrosimone/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "04fb145b6a3d0dc3cf06fcbcd1d3c0414fdc193c",
+        "url": "https://api.github.com/repos/nodejs/node/commits/04fb145b6a3d0dc3cf06fcbcd1d3c0414fdc193c",
+        "html_url": "https://github.com/nodejs/node/commit/04fb145b6a3d0dc3cf06fcbcd1d3c0414fdc193c"
+      }
+    ]
+  },
+  {
+    "sha": "04fb145b6a3d0dc3cf06fcbcd1d3c0414fdc193c",
+    "node_id": "C_kwDOAZ7xs9oAKDA0ZmIxNDViNmEzZDBkYzNjZjA2ZmNiY2QxZDNjMDQxNGZkYzE5M2M",
+    "commit": {
+      "author": {
+        "name": "Chris Swithinbank",
+        "email": "swithinbank@gmail.com",
+        "date": "2026-10-13T20:17:24Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-13T20:17:24Z"
+      },
+      "message": "doc: clarify hex code usage in styleText docs\n\nSigned-off-by: Chris Swithinbank <swithinbank@gmail.com>\nPR-URL: https://github.com/nodejs/node/pull/66539\nReviewed-By: James M Snell <jasnell@gmail.com>\nReviewed-By: Moshe Atlow <moshe@atlow.co.il>",
+      "tree": {
+        "sha": "e843d382e2d506c89547f5225969c6dd9e5e1153",
+        "url": "https://api.github.com/repos/nodejs/node/git/trees/e843d382e2d506c89547f5225969c6dd9e5e1153"
+      },
+      "url": "https://api.github.com/repos/nodejs/node/git/commits/04fb145b6a3d0dc3cf06fcbcd1d3c0414fdc193c",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqzpHUCRC1aQ7uu5UhlAAAQRsQAAoJZ9LfLoVBOxNXpYAD1w0N\ntKeO4moXC4jN6RoElFi01GJg4iV1hJ0h2KfdaYgfH902+e4zI0gY3wzuud2XFCMA\n3RJF7F+Gp2f/7yZcttGtihpu2EHUQ5A0CdjfqHOHrCbkZtE7qFLd883L5KUnAoT8\nBAaEq0Clg5oT0SevO8X44YW7GljDd1xvL5ZqHwurXP+56Pt/t18Amyv3lnfqrIgj\n79aJHWbDbA0rdDd4BF5xNomBtH9MTWA6tl46f0teSIK22IaMibSlpktEiZcHsnC+\nwBGd7cfJaIVVaW3e4eA2UT2Iu+Sx2BBIieFcZY8OPU2uDtR8VvjpTVvkfkPulJSy\nwVE9aRGL40Rgyj6GU2c26pADAjdPEXyUIJugW1UCrsLBl+F+0BYvYcy7shSy26e2\nTMZzc/4sbe1TqsMYhODsNTjdrK71jYBI4TSYJFeE3wHt2upuBL20asq/RC8bMv/N\nSR93q3FkhHIwsqSiW9OYNomEOk7nZxOBxVC5y2euhPSgSr+fgQcRgGYmTluc2Tv2\nfizapSR97k4RASE1JDhifo6L13k3bXjAvHFq5PsMCdnHRgg2B5bGW+PnAtOu4ElA\nNcyI4QqktA8jBs7bO1t+sqCvbZo/dxmtIsShzzDLdQ/fzHFCAtUfetqIrMG6Oz8D\nFe5MT6AGMA7wwVgp/HBF\n=5dSq\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree e843d382e2d506c89547f5225969c6dd9e5e1153\nparent 4599b6a0f27fa6a0bc49f93f2bc211ae7c61acf2\nauthor Chris Swithinbank <swithinbank@gmail.com> 1791922644 +0200\ncommitter GitHub <noreply@github.com> 1791922644 +0000\n\ndoc: clarify hex code usage in styleText docs\n\nSigned-off-by: Chris Swithinbank <swithinbank@gmail.com>\nPR-URL: https://github.com/nodejs/node/pull/66539\nReviewed-By: James M Snell <jasnell@gmail.com>\nReviewed-By: Moshe Atlow <moshe@atlow.co.il>",
+        "verified_at": "2026-10-13T20:17:24Z"
+      }
+    },
+    "url": "https://api.github.com/repos/nodejs/node/commits/04fb145b6a3d0dc3cf06fcbcd1d3c0414fdc193c",
+    "html_url": "https://github.com/nodejs/node/commit/04fb145b6a3d0dc3cf06fcbcd1d3c0414fdc193c",
+    "comments_url": "https://api.github.com/repos/nodejs/node/commits/04fb145b6a3d0dc3cf06fcbcd1d3c0414fdc193c/comments",
+    "author": {
+      "login": "delucis",
+      "id": 357379,
+      "node_id": "MDQ6VXNlcjM1NzM3OQ==",
+      "avatar_url": "https://avatars.githubusercontent.com/u/357379?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/delucis",
+      "html_url": "https://github.com/delucis",
+      "followers_url": "https://api.github.com/users/delucis/followers",
+      "following_url": "https://api.github.com/users/delucis/following{/other_user}",
+      "gists_url": "https://api.github.com/users/delucis/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/delucis/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/delucis/subscriptions",
+      "organizations_url": "https://api.github.com/users/delucis/orgs",
+      "repos_url": "https://api.github.com/users/delucis/repos",
+      "events_url": "https://api.github.com/users/delucis/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/delucis/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "4599b6a0f27fa6a0bc49f93f2bc211ae7c61acf2",
+        "url": "https://api.github.com/repos/nodejs/node/commits/4599b6a0f27fa6a0bc49f93f2bc211ae7c61acf2",
+        "html_url": "https://github.com/nodejs/node/commit/4599b6a0f27fa6a0bc49f93f2bc211ae7c61acf2"
+      }
+    ]
+  },
+  {
+    "sha": "4599b6a0f27fa6a0bc49f93f2bc211ae7c61acf2",
+    "node_id": "C_kwDOAZ7xs9oAKDQ1OTliNmEwZjI3ZmE2YTBiYzQ5ZjkzZjJiYzIxMWFlN2M2MWFjZjI",
+    "commit": {
+      "author": {
+        "name": "Livia Medeiros",
+        "email": "livia@cirno.name",
+        "date": "2026-10-13T18:55:52Z"
+      },
+      "committer": {
+        "name": "GitHub",
+        "email": "noreply@github.com",
+        "date": "2026-10-13T18:55:52Z"
+      },
+      "message": "test: skip test failing when run under root\n\nSigned-off-by: LiviaMedeiros <livia@cirno.name>\nPR-URL: https://github.com/nodejs/node/pull/66666\nReviewed-By: Xuguang Mei <meixuguang@gmail.com>\nReviewed-By: Antoine du Hamel <duhamelantoine1995@gmail.com>\nReviewed-By: Luigi Pinca <luigipinca@gmail.com>",
+      "tree": {
+        "sha": "681534d559b047750657483848b56c700dd5a004",
+        "url": "https://api.github.com/repos/nodejs/node/git/trees/681534d559b047750657483848b56c700dd5a004"
+      },
+      "url": "https://api.github.com/repos/nodejs/node/git/commits/4599b6a0f27fa6a0bc49f93f2bc211ae7c61acf2",
+      "comment_count": 0,
+      "verification": {
+        "verified": true,
+        "reason": "valid",
+        "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqzn64CRC1aQ7uu5UhlAAA9yUQAFlxvoFSEcsaw73mSX5Ai9RW\n2YjhB9qjslMzx/9g2FmXLdQvIw68smqT8re23VRCcHBfJ0pjzNlIMiQm70Wk1fED\nNdSgLz7KG96HKecGnc6u04e/LhIe2sYIzD+Kb5gsnVWpVHG/DH7swaipfatScFNQ\nt9kXi7gq4YbdyUD0wXKHXnD4nQDen3DhnToRGSRK9ylT/lhCStkkvgwz+Hs3nrJH\nBsAWuthLslGvgsxKO1llbC8n6i+n3B7PkfmuINkairOqadeV23+hXqyyKnCy0QWb\ncsEFxaOvVbi5uZeiIZbdLtBtm3M9x1+nURz+PdiDMq5IPHnXzt5BRuMFD7pI585w\n5ZjdhZ5Xqphz2HP0oawtFKFhierD1GR/FzjPxAN0Rs5lf+0ftHXGD8PhqDKwwFHe\nE0cyhM9RlAwFtrCBvzw9f5OmaYOLzlrTOV0SOcG7aqB7BtlWkc1i69iHBvm2PGa2\nZHu7x81iyuVusscXf+H8hSljY9Pm8PN/1qHcF5/O7ebJOiLDRYBHCx+FiKnvIFVB\nnosLSau8fFCM92VuqFwvO0jVAIe0vio2DObyO76rLOdPglTKiXSu7PuMOb7xkAEf\ndpMUg9OjkdLS9Lll0xh0349KPE2FhxHuGG+tHEP+71vpQeLn2NXxJUsgpLjQ0psH\nskeryVzCoUyUrRU6eTta\n=GrHl\n-----END PGP SIGNATURE-----\n",
+        "payload": "tree 681534d559b047750657483848b56c700dd5a004\nparent ea6ec93b2f6504a757660891402872897a2db81a\nauthor Livia Medeiros <livia@cirno.name> 1791917752 +0800\ncommitter GitHub <noreply@github.com> 1791917752 +0000\n\ntest: skip test failing when run under root\n\nSigned-off-by: LiviaMedeiros <livia@cirno.name>\nPR-URL: https://github.com/nodejs/node/pull/66666\nReviewed-By: Xuguang Mei <meixuguang@gmail.com>\nReviewed-By: Antoine du Hamel <duhamelantoine1995@gmail.com>\nReviewed-By: Luigi Pinca <luigipinca@gmail.com>",
+        "verified_at": "2026-10-13T18:55:53Z"
+      }
+    },
+    "url": "https://api.github.com/repos/nodejs/node/commits/4599b6a0f27fa6a0bc49f93f2bc211ae7c61acf2",
+    "html_url": "https://github.com/nodejs/node/commit/4599b6a0f27fa6a0bc49f93f2bc211ae7c61acf2",
+    "comments_url": "https://api.github.com/repos/nodejs/node/commits/4599b6a0f27fa6a0bc49f93f2bc211ae7c61acf2/comments",
+    "author": {
+      "login": "LiviaMedeiros",
+      "id": 74449973,
+      "node_id": "MDQ6VXNlcjc0NDQ5OTcz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74449973?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/LiviaMedeiros",
+      "html_url": "https://github.com/LiviaMedeiros",
+      "followers_url": "https://api.github.com/users/LiviaMedeiros/followers",
+      "following_url": "https://api.github.com/users/LiviaMedeiros/following{/other_user}",
+      "gists_url": "https://api.github.com/users/LiviaMedeiros/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/LiviaMedeiros/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/LiviaMedeiros/subscriptions",
+      "organizations_url": "https://api.github.com/users/LiviaMedeiros/orgs",
+      "repos_url": "https://api.github.com/users/LiviaMedeiros/repos",
+      "events_url": "https://api.github.com/users/LiviaMedeiros/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/LiviaMedeiros/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "web-flow",
+      "id": 19864447,
+      "node_id": "MDQ6VXNlcjE5ODY0NDQ3",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19864447?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/web-flow",
+      "html_url": "https://github.com/web-flow",
+      "followers_url": "https://api.github.com/users/web-flow/followers",
+      "following_url": "https://api.github.com/users/web-flow/following{/other_user}",
+      "gists_url": "https://api.github.com/users/web-flow/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/web-flow/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/web-flow/subscriptions",
+      "organizations_url": "https://api.github.com/users/web-flow/orgs",
+      "repos_url": "https://api.github.com/users/web-flow/repos",
+      "events_url": "https://api.github.com/users/web-flow/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/web-flow/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "ea6ec93b2f6504a757660891402872897a2db81a",
+        "url": "https://api.github.com/repos/nodejs/node/commits/ea6ec93b2f6504a757660891402872897a2db81a",
+        "html_url": "https://github.com/nodejs/node/commit/ea6ec93b2f6504a757660891402872897a2db81a"
+      }
+    ]
+  }
+]

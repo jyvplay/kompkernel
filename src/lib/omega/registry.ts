@@ -85,13 +85,21 @@ import { letheEncode } from './lethe';
 import { oracleEncode } from './oracle';
 import { stichosEncode, stichosMetatronEncode } from './stichos';
 import { periodosEncode } from './periodos';
+import { anamnesisEncode } from './anamnesis';
 import { ariadneEncode } from './ariadne';
 import { sibylEncode } from './sibyl';
 import { sequoyahEncode } from './sequoyah';
 import { thothEncode } from './thoth';
 import { palimpsestEncode } from './palimpsest';
 import { daedalusEncode } from './daedalus';
+import { grammaEncode } from './gramma';
 import { kalligraphosEncode } from './kalligraphos';
+import { crasisEncode } from './crasis';
+import { anagnorisisEncode } from './anagnorisis';
+import { enthymemeEncode } from './enthymeme';
+import { epagogeEncode } from './epagoge';
+import { elleipsisEncode } from './elleipsis';
+import { paradeigmaEncode } from './paradeigma';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
 import { tabminEncode } from './tabmin';
@@ -682,6 +690,10 @@ export function codecEntries(): Entry[] {
       run: async (t, enc) => { const r = daedalusEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
+      key: 'gramma', label: '⟐ GRAMMA-Ω (Notation-Dialect Menu: the layout is not shipped, it is regenerated from the reader\'s own formatting priors — JSON.stringify(v,null,N) re-print or bracket-depth re-indent; every dialect gated byte-exact on the text AND through the library CHIRON reader; plain DAEDALUS is a candidate, so it cannot lose on M)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = grammaEncode(t, enc); return { output: r.decoderPrompt, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; exact=${r.exact}; in=${r.inTokens}` }; },
+    },
+    {
       key: 'daedalus-dual', label: '⧗ DAEDALUS-D (DAEDALUS wire with a dual-tokenizer glyph pool: every glyph is one token under o200k_base AND cl100k_base; same decoder; decode-gated, identity fallback)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = daedalusDualEncode(t, enc); return { output: r.wire, decoded: r.exact ? t : r.wire, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `mode=${r.mode}; arm=${r.winningArm}; o200k=${r.messageTokens.o200k_base}; cl100k=${r.messageTokens.cl100k_base} (raw o200k=${r.inTokens.o200k_base}, cl100k=${r.inTokens.cl100k_base})` }; },
     },
@@ -692,6 +704,38 @@ export function codecEntries(): Entry[] {
     {
       key: 'kalligraphos', label: '✅ KALLIGRAPHOS (Unicode mathematical-alphabet restoration: styled decorative prose -> ASCII + style opcode; otherwise DAEDALUS unchanged; exact)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = kalligraphosEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.kalligraphosApplied}; spans=${r.kalligraphosSpans}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'crasis', label: 'κ CRASIS (Punctuation-boundary fusion pre-pass: the single space after . ! ? , and before ( " is removed where the live tokenizer shows a compound token, then DAEDALUS; one-line context contract; per-message gated, identity-guarded; exact)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = crasisEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.crasisApplied}; rules=${r.crasisRules.join('') || '-'}${r.crasisFenced ? '/fenced' : ''}; fusion=${r.crasisGain}; plainM=${r.plainMessageTokens}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'anagnorisis', label: 'ἀ ANAGNORISIS (Public-canon recognition pre-pass: standard open-source license texts and per-file notices (GitHub/choosealicense templates, versioned catalogue) are recognised byte-exactly — any per-line comment prefix, re-wrap width, url scheme, indentation — and replaced by 【SPDX-ID; layout…: blanks】 references the reader already knows; then DAEDALUS; one-line contract compiled from the features used; exact, identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = anagnorisisEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.canonApplied}; refs=${r.canonRefs.map(x => x.replace(/\n/g, '⏎')).join(' ') || '-'}; tiers=${r.canonTiers.join(',') || '-'}; regions=${r.canonRegionTokens}->${r.canonRefTokens} tok; plainM=${r.plainMessageTokens}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'paradeigma', label: '≡ PARADEIGMA (Template entailment for JSON records: a field whose value is, in every object of a shape, the same concatenation of constants and sibling values — "followers_url" = <url>/followers, "avatar_url" = https://…/u/<id>?v=4, "full_name" = nodejs/<name>, "site_admin" = false — is removed from those objects and restored by the reader from one template line per shape ("objects having \"login\": after \"node_id\": …"); templates are induced from the document, verified on every object, chained in field order; the clause is compressed with the JSON; then DAEDALUS; exact, identity-guarded. Measured: GitHub API lists −7…−15 %, user lists −14 %)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = paradeigmaEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.applied}; templates=${r.templates} in ${r.templateBlocks.length} block(s); elidedLines=${r.elidedLines}; clause=${r.clauseTokens} tok; plainM=${r.plainMessageTokens}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'elleipsis', label: '○ ELLEIPSIS (Positional ellipsis: a constant that sits at a fixed field position in every record of a stated class — a shared path prefix on the last field of a listing, a constant column — is removed with no marker and restored by one sentence naming the position, the constant and the lines that keep it literally; then DAEDALUS; exact, identity-guarded. Measured: constants already folded by the dictionary are free (newline/padding/",," residue), so only prefix-before-word removals pay)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = elleipsisEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.applied}; rules=${r.rules.map(x => `${x.form}@${x.k}[${x.form === 'cells' ? (x.pairs ?? []).map(p => p.column ?? p.k).join('/') : JSON.stringify(x.value)}]`).join('+') || '-'}; elidedLines=${r.elidedLines}; sentence=${r.clauseTokens} tok; plainM=${r.plainMessageTokens}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'epagoge', label: '∴ EPAGOGE (Induced entailment: rule schemas with free parameters — which source-file extensions a trace uses (Java + Kotlin at once, Kotlin file facades), which heading-slug flavour a document uses, which compare-URL stem and tag prefix a changelog uses — are instantiated from the document, verified on every candidate field, stated in one sentence, and the fields are removed; inter-record "zipper" rules included; then DAEDALUS; exact, identity-guarded; ties ENTHYMEME where its fixed rules apply)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = epagogeEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.applied}; schemas=${r.schemas.map((s, i) => `${s}[${r.params[i]}]`).join('+') || '-'}; elided=${r.elided} fields (${r.elidedTokens} raw tok); sentence=${r.clauseTokens} tok; plainM=${r.plainMessageTokens}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'enthymeme', label: '∴ ENTHYMEME (Entailment elision: fields fixed by a public convention given their neighbours — the source file of a JVM stack frame, the GitHub slug of a Markdown heading link — are removed and restored by the reader from a one-sentence rule; then DAEDALUS; exact, identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = enthymemeEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.applied}; rules=${r.rules.join('+') || '-'}; elided=${r.elided} fields (${r.elidedTokens} raw tok); rule=${r.clauseTokens} tok; plainM=${r.plainMessageTokens}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'anamnesis', label: 'ἀ ANAMNESIS (deterministic maximal-repeat core: no wall clock, work-bounded, CHIRON wire; single message, contract in band)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = anamnesisEncode(t, enc, { gate: false }); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'anamnesis-gated', label: 'ἀ ANAMNESIS-G (same core, plus a one-call gate against the shipped frontier encoder so it cannot lose on token count)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = anamnesisEncode(t, enc, { gate: true }); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.delegated ? 'frontier arm kept' : 'core kept'}; ${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
     },
     {
       key: 'dirfold', label: '▤ DIRFOLD (same-directory path folding: ↑ = the directory of the line above; one-line rule; identity unless it pays)', family: 'exact', fidelity: 'exact',

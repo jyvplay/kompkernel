@@ -1,0 +1,27 @@
+PASS payload already uses the elided form: applied=false rules=- elided=0 M=119 plainM=119 raw=490
+PASS kotlin + generated + unknown-source frames mixed: applied=false rules=- elided=0 M=185 plainM=185 raw=527
+PASS module prefix + inner + lambda + <init>: applied=false rules=- elided=0 M=168 plainM=168 raw=553
+PASS CRLF trace: applied=false rules=- elided=0 M=109 plainM=109 raw=390
+PASS toc with duplicate headings (-1 suffix) and punctuation: applied=true rules=anchors elided=35 M=189 plainM=645 raw=645
+PASS toc with the elided form present: applied=false rules=- elided=0 M=120 plainM=120 raw=345
+PASS payload that starts with the rule mark: applied=false rules=- elided=0 M=126 plainM=126 raw=398
+PASS prose mentioning at com.x.Y.z(Y.java:1) inside a sentence: applied=false rules=- elided=0 M=167 plainM=167 raw=419
+  rule frames on "payload already uses the elided form": declined
+  rule anchors on "payload already uses the elided form": declined
+  rule frames on "kotlin + generated + unknown-source frames mixed": folded 30 (distinct 30, est 60) round-trip=true
+  rule anchors on "kotlin + generated + unknown-source frames mixed": declined
+  rule frames on "module prefix + inner + lambda + <init>": folded 27 (distinct 2, est 17) round-trip=true
+  rule anchors on "module prefix + inner + lambda + <init>": declined
+  rule frames on "CRLF trace": folded 30 (distinct 30, est 60) round-trip=true
+  rule anchors on "CRLF trace": declined
+  rule frames on "toc with duplicate headings (-1 suffix) and punctuation": declined
+  rule anchors on "toc with duplicate headings (-1 suffix) and punctuation": folded 35 (distinct 35, est 196) round-trip=true
+  rule frames on "toc with the elided form present": declined
+  rule anchors on "toc with the elided form present": declined
+  rule frames on "payload that starts with the rule mark": folded 30 (distinct 30, est 60) round-trip=true
+  rule anchors on "payload that starts with the rule mark": declined
+  rule frames on "prose mentioning at com.x.Y.z(Y.java:1) inside a sentence": folded 32 (distinct 32, est 62) round-trip=true
+  rule anchors on "prose mentioning at com.x.Y.z(Y.java:1) inside a sentence": declined
+slug checks: step-3-install--run | c--c | code-em | emoji--launch
+source checks: ThreadPoolExecutor Outer Lib
+8/8 adversarial cases exact

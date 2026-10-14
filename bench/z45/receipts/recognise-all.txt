@@ -1,0 +1,133 @@
+INDEX.txt                                      1087 -
+ReactiveX_rxjs.txt                             2271 【Apache-2.0 header; prefix " "】[531ch]
+WordPress_WordPress.txt                        4203 -
+angular_angular.txt                             230 【MIT; layout classic】[1022ch]
+ansible_ansible.txt                            7446 【GPL-3.0】[35148ch]
+anthropics_anthropic-sdk-python.txt             202 【MIT; unwrapped】[1022ch]
+apache_kafka.txt                               2262 【Apache-2.0】[11356ch]
+apache_spark.txt                               2765 【Apache-2.0】[11356ch]
+axios_axios.txt                                 210 【MIT; unwrapped】[1022ch]
+babel_babel.txt                                 225 【MIT; layout jquery】[1022ch]
+blender_blender.txt                              64 -
+boostorg_boost.txt                              282 【BSL-1.0】[1337ch]
+chalk_chalk.txt                                 222 【MIT; unwrapped】[1022ch]
+colinhacks_zod.txt                              222 【MIT】[1022ch]
+curl_curl.txt                                   230 -
+d3_d3.txt                                       156 【ISC; wrap 80】[696ch]
+denoland_deno.txt                               220 【MIT; wrap 80】[1022ch]
+django_django.txt                               296 -
+elastic_elasticsearch.txt                       174 -
+eslint_eslint.txt                               222 【MIT; layout classic】[1022ch]
+expressjs_express.txt                           281 【MIT; layout npm】[1022ch]
+facebook_react.txt                              223 【MIT】[1022ch]
+fastapi_fastapi.txt                             225 【MIT; layout classic】[1022ch]
+fastify_fastify.txt                             237 【MIT】[1022ch]
+ggerganov_llama.cpp.txt                         226 【MIT】[1022ch]
+git_git.txt                                    4059 【GPL-2.0; tabs】[17986ch]
+godotengine_godot.txt                           244 【MIT】[1022ch]
+golang_go.txt                                   282 -
+google_guava.txt                               2262 【Apache-2.0】[11356ch]
+grafana_grafana.txt                            7275 【AGPL-3.0; ending "it under the terms of the GNU Affero General Public License as published"】[33212ch]
+hashicorp_terraform.txt                         906 -
+home-assistant_core.txt                        2261 【Apache-2.0】[11356ch]
+httpie_cli.txt                                  309 -
+huggingface_transformers.txt                   2276 【Apache-2.0】[11356ch]
+isaacs_node-glob.txt                            387 【BlueOak-1.0.0】[1551ch]
+jquery_jquery.txt                               222 【MIT; layout jquery】[1022ch]
+kubernetes_kubernetes.txt                      2262 【Apache-2.0】[11356ch]
+langchain-ai_langchain.txt                      220 【MIT】[1022ch]
+lodash_lodash.txt                               400 【MIT; layout jquery】[1022ch]
+madler_zlib.txt                                 225 -
+mastodon_mastodon.txt                          7275 【AGPL-3.0; url http; ending "it under the terms of the GNU Affero General Public License as published"】[33211ch]
+microsoft_TypeScript.txt                       1755 -
+mozilla_pdf.js.txt                             2018 【Apache-2.0; ending "END OF TERMS AND CONDITIONS"】[10172ch]
+mrdoob_three.js.txt                             223 【MIT; layout classic】[1022ch]
+n8n-io_n8n.txt                                  916 -
+neovim_neovim.txt                              3438 【Apache-2.0; url https; ending "of your accepting any such warranty or additional liability."】[10141ch]
+nestjs_nest.txt                                 235 【MIT; layout npm】[1022ch]
+netty_netty.txt                                2262 【Apache-2.0; url https】[11358ch]
+nextcloud_server.txt                           7275 【AGPL-3.0; url http; ending "it under the terms of the GNU Affero General Public License as published"】[33211ch]
+nodejs_node.txt                               31000 【MIT; wrap 76】[1022ch] 【MIT; wrap 76】[1022ch] 【MIT; layout classic; prefix "    "】[1078ch] 【MIT; prefix "    "; wrap 84】[1074ch] 【MIT; prefix "    "】[1078ch] 【Apache-2.0; prefix " "; ending "identification within third-party archives."】[10915ch] 【MIT; prefix "    "】[1078ch] 【MIT; prefix "    "; wrap 80】[1078ch] 【MIT; prefix "    "; wrap 80】[1078ch] 【Apache-2.0; prefix "    "; ending "To apply the Apache License to your work, attach the following"】[10906ch] 【Apache-2.0 header; prefix "       "】[579ch] 【MIT; prefix "    "; wrap 77】[1082ch] 【MIT; prefix "    "; unwrapped】[1030ch] 【MIT; prefix "    "】[1078ch] 【MIT; prefix "    "】[1078ch] 【Apache-2.0; prefix "        "; ending "To apply the Apache License to your work, attach the following"】[11510ch] 【Apache-2.0 header; prefix "           "】[611ch] 【Apache-2.0; prefix "    "; url https; ending "END OF TERMS AND CONDITIONS"】[10769ch] 【MIT; layout jquery; prefix "    "】[1082ch] 【Apache-2.0; prefix "    "; ending "To apply the Apache License to your work, attach the following"】[10906ch] 【Apache-2.0 header; prefix "       "】[579ch] 【MIT; prefix "    "; wrap 84】[1074ch] 【MIT; prefix "    "; wrap 84】[1074ch] 【MIT; layout jquery; prefix "    "】[1082ch] 【Apache-2.0 header; prefix "     "; indent 0】[559ch] 【MIT; layout classic; prefix "    "; ending "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,"】[745ch] 【ISC; prefix "    "; wrap 76】[732ch] 【ISC; prefix "    "; wrap 76】[732ch] 【ISC; prefix "    "; wrap 78】[732ch] 【MIT; prefix "    "】[1078ch] 【MIT; layout jquery; prefix "    "】[1082ch] 【MIT; layout jquery; prefix "    "】[1082ch] 【MIT; prefix "    "】[1078ch] 【MIT; prefix "    "】[1078ch]
+numpy_numpy.txt                                 301 -
+obsproject_obs-studio.txt                      3886 【GPL-2.0】[18091ch]
+ohmyzsh_ohmyzsh.txt                             242 【MIT】[1022ch]
+ollama_ollama.txt                               218 【MIT】[1022ch]
+openai_openai-python.txt                       2258 【Apache-2.0: 2026 OpenAI】[11335ch]
+openssl_openssl.txt                            2018 【Apache-2.0; url https; ending "END OF TERMS AND CONDITIONS"】[10173ch]
+oven-sh_bun.txt                                4015 -
+pallets_flask.txt                               296 -
+pandas-dev_pandas.txt                           331 -
+php_php-src.txt                                 317 【BSD-3-Clause】[1442ch]
+pnpm_pnpm.txt                                   251 【MIT】[1022ch]
+postgres_postgres.txt                           272 -
+prettier_prettier.txt                           199 【MIT; unwrapped】[1022ch]
+psf_requests.txt                               2011 【Apache-2.0; ending "of your accepting any such warranty or additional liability."】[10140ch]
+python_cpython.txt                             3164 【0BSD】[606ch]
+pytorch_pytorch.txt                             804 -
+redis_redis.txt                               15259 -
+ruby_ruby.txt                                   514 -
+rust-lang_rust.txt                             1998 -
+servo_servo.txt                                3274 【MPL-2.0; indent 0; ending "************************************************************************"】[10710ch] 【MPL-2.0 header】[193ch]
+sindresorhus_got.txt                            222 【MIT; unwrapped】[1022ch]
+spring-projects_spring-framework.txt           2261 【Apache-2.0; url https; ending "To apply the Apache License to your work, attach the following"】[10303ch] 【Apache-2.0 header; prefix "   "; url https】[548ch]
+sqlite_sqlite.txt                               861 -
+strapi_strapi.txt                               499 -
+supabase_supabase.txt                          2258 【Apache-2.0: 2024 Supabase】[11337ch]
+sveltejs_svelte.txt                             221 【MIT; unwrapped】[1022ch]
+tailwindlabs_tailwindcss.txt                    221 【MIT】[1022ch]
+tensorflow_tensorflow.txt                      2696 【Apache-2.0】[11356ch]
+tj_commander.js.txt                             230 【MIT; layout npm】[1022ch]
+torvalds_linux.txt                              114 -
+twbs_bootstrap.txt                              227 【MIT; layout classic】[1022ch]
+vercel_next.js.txt                              227 【MIT】[1022ch]
+videolan_vlc.txt                               3886 【GPL-2.0】[18091ch]
+vim_vim.txt                                    1059 -
+vitejs_vite.txt                                 229 【MIT】[1022ch]
+vuejs_core.txt                                  234 【MIT; layout classic】[1022ch]
+webpack_webpack.txt                             213 【MIT; layout npm】[1022ch]
+ytdl-org_youtube-dl.txt                         257 【Unlicense; ending "OTHER DEALINGS IN THE SOFTWARE."】[1147ch]
+FFmpeg_FFmpeg_base64.c                         2090 -
+FFmpeg_FFmpeg_utils.c                          9859 -
+INDEX.txt                                       648 -
+LLVM_llvm-project_StringRef.cpp                5109 -
+android_platform_frameworks_base_Log.java      5225 【Apache-2.0 header; prefix " * "; indent 5】[552ch]
+ansible_ansible___init__.py                    5973 -
+apache_kafka_Utils.java                       15560 【ASF header; prefix " * "】[788ch]
+apache_spark_SparkConf.scala                   8824 -
+apple_swift_Optional.swift                     8428 -
+chromium_chromium_logging.h                    6506 -
+chromium_chromium_string_util.h                6739 -
+coreutils_coreutils_cat.c                      7089 【GPL-3.0 header; prefix "   "】[639ch]
+coreutils_coreutils_true.c                      542 【GPL-3.0 header; prefix "   "】[639ch]
+coreutils_coreutils_yes.c                      2077 【GPL-3.0 header; prefix "   "】[639ch]
+dotnet_runtime_String.cs                       5982 -
+elastic_elasticsearch_Version.java             9111 -
+golang_go_print.go                             9882 -
+golang_go_strings.go                           9999 -
+google_guava_Optional.java                     3821 【Apache-2.0 header; prefix " * "; wrap 100】[541ch]
+google_guava_Strings.java                      3186 【Apache-2.0 header; prefix " * "; wrap 100】[541ch]
+grafana_grafana_strings.go                     2146 -
+hashicorp_terraform_apply.go                   3489 -
+hashicorp_vault_json.go                        4341 -
+kubernetes_kubernetes_hash.go                   214 【Apache-2.0 header】[523ch]
+kubernetes_kubernetes_kubectl.go                347 【Apache-2.0 header】[523ch]
+kubernetes_kubernetes_util.go                  4554 【Apache-2.0 header】[523ch]
+llvm_llvm-project_StringRef.cpp                5109 -
+microsoft_vscode_strings.ts                   38803 -
+mozilla_gecko-dev_Element.cpp                 48131 【MPL-2.0 header; prefix " * "; url http】[198ch]
+mozilla_gecko-dev_nsCOMPtr.h                  10139 【MPL-2.0 header; prefix " * "; url http】[198ch]
+mozilla_pdf.js_document.js                    16178 【Apache-2.0 header; prefix " * "】[551ch]
+mozilla_pdf.js_util.js                         9859 【Apache-2.0 header; prefix " * "】[551ch]
+netty_netty_NetUtil.java                      10891 -
+openai_openai-python__client.py               19733 -
+openssl_openssl_sha256.c                       5427 -
+pytorch_pytorch_linear.py                      3060 -
+redis_redis_adlist.c                           2727 -
+servo_servo_lib.rs                             1754 【MPL-2.0 header; prefix " * "】[199ch]
+spring-projects_spring-framework_Assert.java   6301 【Apache-2.0 header; prefix " * "; url https; indent 5】[553ch]
+spring-projects_spring-framework_StringUtils.java  13112 【Apache-2.0 header; prefix " * "; url https; indent 5】[553ch]
+tensorflow_tensorflow_app.py                    296 【Apache-2.0 header; prefix "# "】[541ch]
+tensorflow_tensorflow_env.h                     430 【Apache-2.0 header】[523ch]
+tensorflow_tensorflow_nest.py                 12963 【Apache-2.0 header; prefix "# "】[541ch]
+videolan_vlc_mtime.c                           1329 -
+files=132 recognised=83

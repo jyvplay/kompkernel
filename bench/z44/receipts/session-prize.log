@@ -1,0 +1,79 @@
+
+== ops-log-tails  messages=6
+   how: bench/holdout-ops/openstack-loghub-26.log split into 6 consecutive line ranges: an operator pasting successive log tails into one chat.
+   m0 raw=889 (first: no earlier context)
+   m1 raw=689 ctxWire=513 (25.5%) copies=2 copiedChars=365 exact=true
+   m2 raw=757 ctxWire=579 (23.5%) copies=2 copiedChars=369 exact=true
+   m3 raw=891 ctxWire=714 (19.9%) copies=2 copiedChars=368 exact=true
+   m4 raw=685 ctxWire=574 (16.2%) copies=3 copiedChars=290 exact=true
+   m5 raw=118 ctxWire=68 (42.4%) copies=1 copiedChars=135 exact=true
+   TOTAL raw=4029 ctx=3337 saving=17.2% exact=5/5 refused=0
+
+== vix-monthly  messages=6
+   how: bench/holdout-tab/vix-daily-1990.csv split into 6 consecutive line ranges: an analyst pasting successive data pulls into one chat.
+   m0 raw=577 (first: no earlier context)
+   m1 raw=594 ctxWire=594 (0.0%) copies=0 copiedChars=0 exact=true
+   m2 raw=594 ctxWire=594 (0.0%) copies=0 copiedChars=0 exact=true
+   m3 raw=594 ctxWire=594 (0.0%) copies=0 copiedChars=0 exact=true
+   m4 raw=594 ctxWire=594 (0.0%) copies=0 copiedChars=0 exact=true
+   m5 raw=459 ctxWire=459 (0.0%) copies=0 copiedChars=0 exact=true
+   TOTAL raw=3412 ctx=3412 saving=0.0% exact=5/5 refused=0
+
+== pkglock-chunks  messages=6
+   how: bench/holdout-ops/package-lock-head.json split into 6 consecutive line ranges: dependency data pasted in pieces.
+   m0 raw=1874 (first: no earlier context)
+   m1 raw=2479 ctxWire=2416 (2.5%) copies=2 copiedChars=312 exact=true
+   m2 raw=2592 ctxWire=2494 (3.8%) copies=4 copiedChars=566 exact=true
+   m3 raw=2786 ctxWire=2745 (1.5%) copies=2 copiedChars=279 exact=true
+   m4 raw=2622 ctxWire=2501 (4.6%) copies=4 copiedChars=602 exact=true
+   m5 raw=2656 ctxWire=2491 (6.2%) copies=7 copiedChars=844 exact=true
+   TOTAL raw=15009 ctx=14521 saving=3.3% exact=5/5 refused=0
+
+== agent-history  messages=5
+   how: bench/holdout-mk/agent-history.md split into 5 consecutive line ranges: successive turns of one agent transcript.
+   m0 raw=223 (first: no earlier context)
+   m1 raw=242 ctxWire=192 (20.7%) copies=4 copiedChars=378 exact=true
+   m2 raw=222 ctxWire=130 (41.4%) copies=6 copiedChars=686 exact=true
+   m3 raw=244 ctxWire=135 (44.7%) copies=7 copiedChars=774 exact=true
+   m4 raw=225 ctxWire=124 (44.9%) copies=6 copiedChars=705 exact=true
+   TOTAL raw=1156 ctx=804 saving=30.4% exact=4/4 refused=0
+
+== kb-translations  messages=6
+   how: The six real translations of the same KB article in bench/holdout-lang (de, es, ja, pl, ru, tr): a localisation workflow in one chat.
+   m0 raw=525 (first: no earlier context)
+   m1 raw=457 ctxWire=457 (0.0%) copies=0 copiedChars=0 exact=true
+   m2 raw=655 ctxWire=655 (0.0%) copies=0 copiedChars=0 exact=true
+   m3 raw=623 ctxWire=623 (0.0%) copies=0 copiedChars=0 exact=true
+   m4 raw=478 ctxWire=478 (0.0%) copies=0 copiedChars=0 exact=true
+   m5 raw=554 ctxWire=554 (0.0%) copies=0 copiedChars=0 exact=true
+   TOTAL raw=3292 ctx=3292 saving=0.0% exact=5/5 refused=0
+
+== ops-mixed  messages=6
+   how: Six different real ops artifacts pasted into one chat: find-listing, ls-full-iso, npm-ls, node-stacktraces, git-numstat (first third), df-h.
+   m0 raw=3997 (first: no earlier context)
+   m1 raw=1175 ctxWire=1175 (0.0%) copies=0 copiedChars=0 exact=true
+   m2 raw=2747 ctxWire=2747 (0.0%) copies=0 copiedChars=0 exact=true
+   m3 raw=568 ctxWire=568 (0.0%) copies=0 copiedChars=0 exact=true
+   m4 raw=1542 ctxWire=1542 (0.0%) copies=0 copiedChars=0 exact=true
+   m5 raw=570 ctxWire=570 (0.0%) copies=0 copiedChars=0 exact=true
+   TOTAL raw=10599 ctx=10599 saving=0.0% exact=5/5 refused=0
+
+== prose-study  messages=6
+   how: Six real prose/work documents pasted into one study chat: kb-article, llm-answer, email-thread, meeting-transcript, readme, bibliography.
+   m0 raw=656 (first: no earlier context)
+   m1 raw=733 ctxWire=733 (0.0%) copies=0 copiedChars=0 exact=true
+   m2 raw=629 ctxWire=629 (0.0%) copies=0 copiedChars=0 exact=true
+   m3 raw=472 ctxWire=472 (0.0%) copies=0 copiedChars=0 exact=true
+   m4 raw=843 ctxWire=843 (0.0%) copies=0 copiedChars=0 exact=true
+   m5 raw=896 ctxWire=896 (0.0%) copies=0 copiedChars=0 exact=true
+   TOTAL raw=4229 ctx=4229 saving=0.0% exact=5/5 refused=0
+
+== repo-review  messages=6
+   how: Six real sibling modules from src/lib/omega reviewed in one chat: veritas-r, veritas-k, veritas-m, veritas-n, veritas-p, veritas-q.
+   m0 raw=2558 (first: no earlier context)
+   m1 raw=484 ctxWire=477 (1.4%) copies=1 copiedChars=63 exact=true
+   m2 raw=745 ctxWire=655 (12.1%) copies=9 copiedChars=805 exact=true
+   m3 raw=1594 ctxWire=1600 (-0.4%) copies=3 copiedChars=242 exact=true
+   m4 raw=5334 ctxWire=5319 (0.3%) copies=5 copiedChars=402 exact=true
+   m5 raw=871 ctxWire=863 (0.9%) copies=2 copiedChars=216 exact=true
+   TOTAL raw=11586 ctx=11472 saving=1.0% exact=5/5 refused=0

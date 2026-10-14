@@ -1,0 +1,3 @@
+hand bytes      : 428
+expected bytes  : 428
+BYTE-IDENTICAL  : True

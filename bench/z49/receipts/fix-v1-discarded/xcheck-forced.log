@@ -1,0 +1,13 @@
+gh-followers-20.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=3ef7c5fe76bccc89	12 templates, 240 lines, M 557 vs plain 922
+gh-tags-20.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=467e065c71b2ad11	3 templates, 60 lines, M 788 vs plain 951
+gh-contents-lib-25.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=394577c45a1dfb17	5 templates, 116 lines, M 1269 vs plain 1411
+gh-comments-10.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=aa97ec0ef2017ae1	15 templates, 147 lines, M 1017 vs plain 1127
+gh-repos-3.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=b715b2b9adb11332	54 templates, 162 lines, M 1135 vs plain 1210
+gh-branches-20.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=8f901fc7bd7b4489	1 templates, 20 lines, M 775 vs plain 739
+npm-left-pad.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=98f2526e0cdf8a5b	4 templates, 20 lines, M 2974 vs plain 2847
+gh-pulls-1.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=bc8856948b3d34fc	13 templates, 62 lines, M 2185 vs plain 2251
+gh-runs-1.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=6030ecd09f4bb5c2	13 templates, 64 lines, M 2186 vs plain 2178
+gh-commits-4.json	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=9e1f75aebcd552a5	14 templates, 104 lines, M 3661 vs plain 3708
+gh-api.json.txt	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=99a670ba9edb8b17	2 templates, 6 lines, M 1270 vs plain 1153
+11/11 byte-identical under both readers (forced mode)
+XCHECK_FORCED_DONE

@@ -1,0 +1,21 @@
+msg_1: raw=1402 sent=572 mode=anamnesis-first new=24 recollected=0 copies=0
+--- what the user pastes ---
+§彩54fadb412c4e40cdbaed9335e4c35a9e发nova-api.log.1.2017-05-16_13:53:08 2017-05-网 113d3a99c3da401fbd62cc2caa5b96d2 一.log.1.2017-05-16_13:年 2017-05-16 00:00:线 25746 INFO nova.osapi_compute.wsgi.server [req乐1 INFO nova.compute.manager [req-3ea4052c-895d-4b64-9e2时-04d64c4d94ab - - - - -] [instance: b9000564-fe1人 - - -分00:00京.1开: 国10.天 (Lifecycle Event)
+nova-compute中1
+佂a-在.10京 "GET /v2/彩/servers/detail HTTP/1京" status开200 len开189车 293乐d时佂409b-b8cc-1e88b294cd1d]日网彩人] 国11的发16 分:大一55:31年04.月线-是日在3 time开0.三中的01.¶的00.008月38101a0b-2096-447d-96ea-a692162415ae是2477829
+的00.272月9bc36dd9-91c5-4314-898佂47625eb93b09是257718三551月55db2d8d-cdb7-4b4b-993b-429be84c0c3e是273163三813月2a3dc421-6604-42a7-9390-a18dc824d5d6是2580249
+的03.091月939eb332-c1c1-4e67-99b8-8695f8f1980a是272793中的03.358线-b6a4fa91-7414-432a-b725-52b5613d3ca3是264213中nova-compute大500车 VM Started天大562车 VM Paused天大693车 During sync_power_state the instance has a pending task (spawning). Skip.
+Every new Chinese character before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result. Rule letters defined in an earlier message of this chat stay in force. «a·b» copies the earlier decoded text from the first a to the end of the first b after it.
+§彩54fadb412c4e40cdbaed9335e4c35a9e发nova-api.log.1.2017-05-16_13:53:08 2017-05-网 113d3a99c3da401fbd62cc2caa5b96d2 一.log.1.2017-05-16_13:年 2017-05-16 00:00:线 25746 INFO nova.osapi_compute.wsgi.server [req乐1 INFO nova.compute.manager [req-3ea4052c-895d-4b64-9e2时-04d64c4d94ab - - - - -] [instance: b9000564-fe1人 - - -分00:00京.1开: 国10.天 (Lifecycle Event)
+nova-compute中1
+佂a-在.10京 "GET /v2/彩/servers/detail HTTP/1京" status开200 len开189车 293乐d时佂409b-b8cc-1e88b294cd1d]日网彩人] 国11的发16 分:大一55:31年04.月线-是日在3 time开0.三中的01.¶的00.008月38101a0b-2096-447d-96ea-a692162415ae是2477829
+的00.272月9bc36dd9-91c5-4314-898佂47625eb93b09是257718三551月55db2d8d-cdb7-4b4b-993b-429be84c0c3e是273163三813月2a3dc421-6604-42a7-9390-a18dc824d5d6是2580249
+的03.091月939eb332-c1c1-4e67-99b8-8695f8f1980a是272793中的03.358线-b6a4fa91-7414-432a-b725-52b5613d3ca3是264213中nova-compute大500车 VM Started天大562车 VM Paused天大693车 During sync_power_state the instance has a pending task (spawning). Skip.
+--- end ---
+msg_2: raw=1470 sent=455 mode=anamnesis-session new=14 recollected=11 copies=6
+--- what the user pastes ---
+§快 国11.10京 "GET /v2/彩/servers/detail HTTP/1京" status开200赛 2931 INFO nova.virt.libvirt.imagecache [req-addc1839-2ed5-4778平var/lib/nova/instances/_base/a489c868f0c37da93b76227c91视·-16 分:0»5.争16 分:有 0673dd71-34c5-4fbb-86c4-40623fbe45b最网彩人]频«
+nova-comp霸e-新最快 len开1893 time开0.娱赛-b57霸5854eb7b8b09人 - -]不平bb03908ac0e742久
+发争06.台娱 image有4 at (/不):¶«nova-api.l·争0»4.789线-bbfc3fb8-7cb3-4ac8-801e-c893d1082762« 113d3a99c3da401fbd62cc2caa5b96d2·1" status开200 len开1893 time开0.»425697«中nova-api视060线-31826992-8435-4e03-bc09-ba9cca2d8ef9新2661140频视185台 checking频视186台 in use: on this node 1 local, 0 on other nodes sharing this instance storage频视367娱 Active base files: /不久321线-7160b3e7-676b-498f-b147-7759d8eaea76新2563808久584线-e46f1fc1-61ce-4673-b3c7-f8bd94554273新258089中发争07.864线-546e2e6a-b85霸434佂91dc-53a0a9124a4f新2733629
+发争08.137线-e2c35e53-06d3-4feb-84b9-705c94d40e5b新2694771
+--- end ---

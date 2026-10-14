@@ -1,0 +1,15 @@
+/bin/bash: line 24: bench/tmp/run.sh: No such file or directory
+/bin/bash: line 24: bench/tmp/run.sh: No such file or directory
+ls-usr-lib.txt raw=949 M=342 (3478ms) | reduced raw=640 M=314 (1998ms) | changed=35 | gross saving=28
+D notes: predicted "span12+words" from punct=7.1% tokens=949; ran 2 arm(s); winner "default" (prediction miss); 19 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm 
+du-usr-share.txt raw=1634 M=766 (13383ms) | reduced raw=1140 M=605 (6677ms) | changed=149 | gross saving=161
+D notes: predicted "span12+words" from punct=15.1% tokens=1634; ran 2 arm(s); winner "span12+words" (prediction hit); 53 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain defau
+ls-usr-bin.txt raw=17146 M=3746 (158916ms) | reduced raw=12546 M=3708 (131422ms) | changed=460 | gross saving=38
+D notes: predicted "span12+words" from punct=7.5% tokens=17146; ran 2 arm(s); winner "default" (prediction miss); 246 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cjk; beat the plain default arm by
+ls-usr-bin.txt raw=17146 M=3746 (160347ms) | reduced raw=11046 M=3647 (119380ms) | changed=610 | gross saving=99
+D notes: predicted "span12+words" from punct=7.5% tokens=17146; ran 2 arm(s); winner "default" (prediction miss); 246 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cjk; beat the plain default arm by
+dpkg-l.txt raw=8975 M=4572 (283442ms) | reduced raw=8416 M=4540 (281474ms) | changed=283 | gross saving=32
+D notes: predicted "span12+words" from punct=5.4% tokens=8975; ran 2 arm(s); winner "span12+words" (prediction hit); 243 phrase + 24 single-token rules, 0 blocks, 0 lists; script=polyglot; beat the plain defau
+dpkg-l.txt raw=8975 M=4572 (284143ms) | reduced raw=7358 M=4510 (225449ms) | changed=682 | gross saving=62
+D notes: predicted "span12+words" from punct=5.4% tokens=8975; ran 2 arm(s); winner "span12+words" (prediction hit); 243 phrase + 24 single-token rules, 0 blocks, 0 lists; script=polyglot; beat the plain defau
+PROBES_DONE

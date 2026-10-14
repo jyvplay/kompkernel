@@ -315,12 +315,12 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
   const grammars: Array<{ g: Grammar; blocks: boolean }> = [];
   for (const trySep of [sep, ...seps.filter(x => x !== sep)]) {
     let g0: BuildOut | null = null;
-    try { g0 = buildOn(text, enc, trySep, base, Math.min(overall, now() + budgetMs)); } catch { g0 = null; }
+    try { g0 = buildOn(text, enc, trySep, base, Math.min(overall, now() + budgetMs)); } catch (e) { g0 = null; if (process.env.OMEGA_TRACE) console.error('sibyl g0', e); }
     if (!g0) continue;                       // never give up on one separator
     grammars.push({ g: g0.g, blocks: g0.g.blocks.length > 0 });
     if (g0.g.blocks.length && !options.noBlocks && now() < overall - 500) {
       let g1: BuildOut | null = null;
-      try { g1 = buildOn(text, enc, trySep, { ...base, noBlocks: true }, Math.min(overall, now() + budgetMs)); } catch { g1 = null; }
+      try { g1 = buildOn(text, enc, trySep, { ...base, noBlocks: true }, Math.min(overall, now() + budgetMs)); } catch (e) { g1 = null; if (process.env.OMEGA_TRACE) console.error('sibyl g1', e); }
       if (g1) grammars.push({ g: g1.g, blocks: false });
     }
     break;
@@ -335,10 +335,11 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
     try {
       out = renderBest(g, text, enc, { script: options.script, noAssign: false, budgetMs, probeScale, scriptTries: tries, allowPolyglot: poly, dualTokenizer: options.dualTokenizer ?? false },
         Math.min(overall, now() + Math.max(500, budgetMs)), grammarCost(g, enc), 0);
-    } catch { out = null; }
+    } catch (e) { out = null; if (process.env.OMEGA_TRACE) console.error('sibyl renderBest', e); }
     if (!out) return null;
-    if (chironDecode(out.wire) !== text) return null;
+    if (chironDecode(out.wire) !== text) { if (process.env.OMEGA_TRACE) console.error('sibyl renderBest: decode mismatch'); return null; }
     const M = countTokens(chironDecoderPrompt(out.wire), enc);
+    if (process.env.OMEGA_TRACE) console.error(`sibyl eval words=${words} cap=${cap} blocks=${blocks} probeScale=${probeScale} tries=${tries} -> M=${M} wire=${out.tokens} ranked=${prepared.map(p => p.ranked.length).join('/')}`);
     const c: Cand = { out, M, words, cap, blocks };
     cands.push(c);
     return c;

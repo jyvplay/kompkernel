@@ -1,0 +1,25 @@
+PASS	user-list-20	applied=true (expected true)	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=403 plain=480	paradeigma: 4 templates in 1 block(s), 80 lines removed; clause 70 tok; M 403 vs plain 480; predicted "span12"
+PASS	user-list-6-forced [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=291 plain=253	paradeigma: 4 templates in 1 block(s), 24 lines removed; clause 70 tok; M 291 vs plain 253; predicted "span12"
+PASS	minority-literal [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=302 plain=252	paradeigma: 4 templates in 1 block(s), 23 lines removed; clause 70 tok; M 302 vs plain 252; predicted "span12"
+PASS	optional-field [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=309 plain=249	paradeigma: 3 templates in 1 block(s), 18 lines removed; clause 61 tok; M 309 vs plain 249; predicted "span12"
+PASS	angle-brackets [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=301 plain=265	paradeigma: 4 templates in 1 block(s), 24 lines removed; clause 70 tok; M 301 vs plain 265; predicted "span12"
+PASS	odd-keys	applied=false	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=258 plain=258	paradeigma: not applied (composed M 330 >= plain M 258); predicted "span12" from punct=24.5% tokens=905; ran 2
+PASS	forward-ref [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=313 plain=242	paradeigma: 4 templates in 1 block(s), 24 lines removed; clause 66 tok; M 313 vs plain 242; predicted "span12"
+PASS	mutual-ref [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=330 plain=299	paradeigma: 5 templates in 1 block(s), 30 lines removed; clause 78 tok; M 330 vs plain 299; predicted "span12"
+PASS	nested-shapes [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=300 plain=238	paradeigma: 2 templates in 1 block(s), 10 lines removed; clause 36 tok; M 300 vs plain 238; predicted "span12"
+PASS	starts-with-mark	applied=false (expected false)	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=268 plain=268	paradeigma: not applied (payload starts with the clause mark); predicted "span12" from punct=23.2% tokens=740;
+PASS	compact	applied=false (expected false)	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=244 plain=244	paradeigma: not applied (no template over sibling fields pays for its sentence); predicted "span12" from punct
+PASS	jsonl	applied=false (expected false)	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=243 plain=243	paradeigma: not applied (no template over sibling fields pays for its sentence); predicted "span12" from punct
+PASS	trailing-noise [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=297 plain=259	paradeigma: 4 templates in 1 block(s), 24 lines removed; clause 70 tok; M 297 vs plain 259; predicted "span12"
+PASS	truncated [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=290 plain=254	paradeigma: 4 templates in 1 block(s), 24 lines removed; clause 70 tok; M 290 vs plain 254; predicted "span12"
+PASS	numeric-copy [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=299 plain=238	paradeigma: 5 templates in 1 block(s), 30 lines removed; clause 78 tok; M 299 vs plain 238; predicted "span12"
+PASS	crlf	applied=false (expected false)	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=255 plain=255	paradeigma: not applied (CR in payload); predicted "span12" from punct=22.5% tokens=726; ran 2 arm(s); winner 
+PASS	two-objects	applied=false	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=168 plain=168	paradeigma: not applied (no template over sibling fields pays for its sentence); predicted "default" from punc
+PASS	two-objects-forced [forced]	applied=false	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=168 plain=168	paradeigma: not applied (no template over sibling fields pays for its sentence); predicted "default" from punc
+PASS	first-before-container [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=199 plain=116	paradeigma: 1 templates in 1 block(s), 6 lines removed; clause 20 tok; M 199 vs plain 116; predicted "default"
+PASS	inline-containers [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=302 plain=268	paradeigma: 4 templates in 1 block(s), 24 lines removed; clause 68 tok; M 302 vs plain 268; predicted "span12"
+PASS	duplicate-keys [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=290 plain=256	paradeigma: 4 templates in 1 block(s), 24 lines removed; clause 70 tok; M 290 vs plain 256; predicted "span12"
+PASS	substring-sibling [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=196 plain=124	paradeigma: 2 templates in 1 block(s), 10 lines removed; clause 38 tok; M 196 vs plain 124; predicted "default
+PASS	anchor-after-array [forced]	applied=true	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	M=211 plain=128	paradeigma: 1 templates in 1 block(s), 6 lines removed; clause 24 tok; M 211 vs plain 128; predicted "default"
+23/23 pass, 0 fail
+ADVERSARY_DONE

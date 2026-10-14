@@ -1,0 +1,12 @@
+ALL ENCODER-SIDE EXACT
+decoded 5 message(s), 16 rule(s) in the cumulative table
+decoded 6 message(s), 36 rule(s) in the cumulative table
+decoded 6 message(s), 54 rule(s) in the cumulative table
+decoded 6 message(s), 207 rule(s) in the cumulative table
+decoded 6 message(s), 228 rule(s) in the cumulative table
+decoded 6 message(s), 82 rule(s) in the cumulative table
+decoded 6 message(s), 269 rule(s) in the cumulative table
+decoded 6 message(s), 85 rule(s) in the cumulative table
+CPython cross-decode BYTE-EXACT on 47 messages across 8 sessions
+
+ANAMNESIS: typecheck + 83 in-process checks + CPython cross-decode all green

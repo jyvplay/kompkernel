@@ -1,0 +1,14 @@
+airport-codes-300.csv	raw=13720	M=8172	plain=8172	applied=false	exact=true/true	45704ms
+  notes: elleipsis: not applied (composed M 8197 >= plain M 8172); predicted "span12" from punct=18.1% tokens=13720; ran 2 arm(s); winner "span12" (prediction hit); 222 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cjk; beat the plain default arm by 0; contract=38
+sp500-200.csv	raw=6662	M=4271	plain=4275	applied=true	exact=true/true	51906ms
+  In each line an empty 3rd comma-separated field stands for "Financials".
+  notes: elleipsis: cell@3["Financials"]×33; sentence 18 tok; M 4271 vs plain 4275; predicted "span12+words" from punct=12.7% tokens=6565; ran 2 arm(s); winner "span12+words" (prediction hit); 225 phrase + 24 single-token rules, 0 blocks, 0 lists; script=polyglot; beat the plain default arm by 94; contract=4
+systemctl-1.txt	raw=1283	M=932	plain=932	applied=false	exact=true/true	9559ms
+  notes: elleipsis: not applied (no positionally fixed constant field pays for its sentence); predicted "span12+words" from punct=3.2% tokens=1283; ran 2 arm(s); winner "span12+words" (prediction hit); 25 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 24; co
+ls-l-pkgjson.txt	raw=2145	M=506	plain=528	applied=true	exact=true/true	10686ms
+  Each line lost "node_modules/" from the start of its 6th space-separated field; put it back.
+  Each line lost its 6th space-separated field, "Oct 14 07:30" followed by a space; put it back.
+  notes: elleipsis: field@6["Oct 14 07:30"+a space]×74 + prefix@6["node_modules/"]×74; sentence 53 tok; M 506 vs plain 528; predicted "span12+words" from punct=16.0% tokens=1424; ran 2 arm(s); winner "span12+words" (prediction hit); 6 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat t
+ps-aux-sandbox.txt	raw=3643	M=1185	plain=1185	applied=false	exact=true/true	29868ms
+  notes: elleipsis: not applied (no positionally fixed constant field pays for its sentence); predicted "span12+words" from punct=11.9% tokens=3643; ran 2 arm(s); winner "span12+words" (prediction hit); 73 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 7; co
+TRY_DONE

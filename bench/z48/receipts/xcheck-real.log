@@ -1,0 +1,7 @@
+decoded 4 case(s)
+wc-l-omega.txt	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=22ef4edb01dadf86	Each line lost "src/lib/omega/" from the start of its last space-separated field; put it back.
+ls-l-pkgjson.txt	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=b90d4d9735a04acc	Each line lost "node_modules/" from the start of its last space-separated field; put it back.
+wc-c-gitfiles.txt	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=06cd61e3f3e91235	Each line after the first lost "bench/" from the start of its last space-separated field, except lines whose last field is "CHIRON.patch" or "ICARUS.patch" or "
+wc-l-omega-ac.txt	native=BYTE_IDENTICAL	cpython=BYTE_IDENTICAL	sha256(text)=d2626aa5a0b3e5a6	Each line lost "src/lib/omega/" from the start of its last space-separated field; put it back.
+4/4 byte-identical under both readers (real mode)
+XCHECK_DONE

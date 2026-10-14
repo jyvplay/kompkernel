@@ -1,0 +1,129 @@
+I have deployed kebrnetes kluster without efk enabled:
+kubectl get node
+NAME      STATUS    ROLES         AGE       VERSION
+node1     Ready     master,node   5d        v1.9.2+coreos.0
+node2     Ready     master,node   5d        v1.9.2+coreos.0
+node3     Ready     node          5d        v1.9.2+coreos.0
+node4     Ready     node          5d        v1.9.2+coreos.0
+
+Then, I installed efk (kubectl apply -f logging)
+Problem with ES I solved as described [here](https://github.com/gregbkr/kubernetes-kargo-logging-monitoring/issues/5#issuecomment-319111137)
+But still have problem with fluentd pods. 
+They have status "CrashLoopBackOff", "Running" or "Completed" depending on I don't know what:
+`[root@tdmkube-kube-master logging]# kubectl get pods -n logging|grep fluentd`
+fluentd-dwx7q                    0/1       CrashLoopBackOff   4          2m
+fluentd-qt9r7                    0/1       CrashLoopBackOff   4          2m
+fluentd-wfp56                    0/1       CrashLoopBackOff   4          2m
+fluentd-wj8wg                    0/1       CrashLoopBackOff   3          1m
+`[root@tdmkube-kube-master logging]# kubectl get pods -n logging|grep fluentd`
+fluentd-dwx7q                    0/1       CrashLoopBackOff   4          2m
+fluentd-qt9r7                    0/1       CrashLoopBackOff   4          2m
+fluentd-wfp56                    0/1       CrashLoopBackOff   4          2m
+fluentd-wj8wg                    0/1       CrashLoopBackOff   3          1m
+`[root@tdmkube-kube-master logging]# kubectl get pods -n logging|grep fluentd`
+fluentd-dwx7q                    0/1       CrashLoopBackOff   4          2m
+fluentd-qt9r7                    0/1       CrashLoopBackOff   4          2m
+fluentd-wfp56                    0/1       CrashLoopBackOff   4          2m
+fluentd-wj8wg                    0/1       Completed          4          1m
+`[root@tdmkube-kube-master logging]# kubectl get pods -n logging|grep fluentd`
+fluentd-dwx7q                    0/1       CrashLoopBackOff   4          2m
+fluentd-qt9r7                    0/1       CrashLoopBackOff   4          2m
+fluentd-wfp56                    0/1       Completed          5          3m
+fluentd-wj8wg                    0/1       Completed          4          1m
+`[root@tdmkube-kube-master logging]# kubectl get pods -n logging|grep fluentd`
+fluentd-dwx7q                    0/1       CrashLoopBackOff   4          3m
+fluentd-qt9r7                    0/1       CrashLoopBackOff   4          2m
+fluentd-wfp56                    0/1       Completed          5          3m
+fluentd-wj8wg                    0/1       CrashLoopBackOff   4          2m
+`[root@tdmkube-kube-master logging]# kubectl get pods -n logging|grep fluentd`
+fluentd-dwx7q                    0/1       CrashLoopBackOff   5          3m
+fluentd-qt9r7                    0/1       CrashLoopBackOff   5          3m
+fluentd-wfp56                    0/1       CrashLoopBackOff   5          4m
+fluentd-wj8wg                    0/1       CrashLoopBackOff   4          2m
+
+They restarted continiusly, and change status.
+`kubectl logs fluentd-wj8wg` shows nothing (empty output)
+
+`[root@tdmkube-kube-master logging]# kubectl describe pod fluentd-wj8wg -n logging` shows this:
+Name:           fluentd-wj8wg
+Namespace:      logging
+Node:           node2/10.28.79.148
+Start Time:     Wed, 07 Feb 2018 15:46:08 +0300
+Labels:         app=fluentd
+                controller-revision-hash=1676977040
+                pod-template-generation=1
+Annotations:    <none>
+Status:         Running
+IP:             10.233.75.36
+Controlled By:  DaemonSet/fluentd
+Containers:
+  fluentd:
+    Container ID:  docker://5788e95d64c8f02f5ebfca9d69d27c357e79b44c1fb03757cf89042f63ddd51f
+    Image:         gcr.io/google_containers/fluentd-elasticsearch:1.20
+    Image ID:      docker-pullable://gcr.io/google_containers/fluentd-elasticsearch@sha256:de60e9048b3b79c4e53e66dc3b8ee58b4be2a88395a4b33407f8bbadc9548dfb
+    Port:          <none>
+    Command:
+      /bin/sh
+      -c
+      /usr/sbin/td-agent -vv 2>&1 >>/var/log/fluentd.log
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Wed, 07 Feb 2018 15:52:14 +0300
+      Finished:     Wed, 07 Feb 2018 15:52:16 +0300
+    Ready:          False
+    Restart Count:  6
+    Limits:
+      memory:  200Mi
+    Requests:
+      cpu:        100m
+      memory:     200Mi
+    Environment:  <none>
+    Mounts:
+      /etc/td-agent from fluentd-conf (rw)
+      /var/lib/docker/containers from varlibdockercontainers (ro)
+      /var/log from varlog (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-j2sfr (ro)
+Conditions:
+  Type           Status
+  Initialized    True
+  Ready          False
+  PodScheduled   True
+Volumes:
+  varlog:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/log
+    HostPathType:
+  varlibdockercontainers:
+    Type:          HostPath (bare host directory volume)
+    Path:          /var/lib/docker/containers
+    HostPathType:
+  fluentd-conf:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      fluentd-conf
+    Optional:  false
+  default-token-j2sfr:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-j2sfr
+    Optional:    false
+QoS Class:       Burstable
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/disk-pressure:NoSchedule
+                 node.kubernetes.io/memory-pressure:NoSchedule
+                 node.kubernetes.io/not-ready:NoExecute
+                 node.kubernetes.io/unreachable:NoExecute
+Events:
+  Type     Reason                 Age               From            Message
+  ----     ------                 ----              ----            -------
+  Normal   SuccessfulMountVolume  7m                kubelet, node2  MountVolume.SetUp succeeded for volume "varlibdockercontainers"
+  Normal   SuccessfulMountVolume  7m                kubelet, node2  MountVolume.SetUp succeeded for volume "varlog"
+  Normal   SuccessfulMountVolume  7m                kubelet, node2  MountVolume.SetUp succeeded for volume "fluentd-conf"
+  Normal   SuccessfulMountVolume  7m                kubelet, node2  MountVolume.SetUp succeeded for volume "default-token-j2sfr"
+  Normal   Created                6m (x4 over 7m)   kubelet, node2  Created container
+  Normal   Started                6m (x4 over 7m)   kubelet, node2  Started container
+  Normal   Pulled                 5m (x5 over 7m)   kubelet, node2  Container image "gcr.io/google_containers/fluentd-elasticsearch:1.20" already present on machine
+  Warning  BackOff                1m (x24 over 7m)  kubelet, node2  Back-off restarting failed container
+
+Whats is problem here?

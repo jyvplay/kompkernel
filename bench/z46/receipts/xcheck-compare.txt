@@ -1,0 +1,25 @@
+Independent CPython reader (bench/enthymeme_decode.py) vs original bytes
+| file | applied | rules | elided | M | plain-arm M (= raw when the plain arm was skipped) | raw | identical |
+|---|:--:|---|---:|---:|---:|---:|:--:|
+| alibaba_druid_6414.md | yes | frames | 35 | 852 | 867 | 1477 | yes |
+| buttasam_cms-boot_3.md | yes | frames | 50 | 944 | 2354 | 2354 | yes |
+| couchbase_CouchbaseMock_11.md | yes | frames | 16 | 676 | 678 | 868 | yes |
+| getsentry_sentry-java_1863.md | yes | frames | 112 | 1061 | 2800 | 2800 | yes |
+| getsentry_sentry-java_980.md | yes | frames | 103 | 2003 | 3974 | 3974 | yes |
+| netty_netty_16626.md | yes | frames | 61 | 1692 | 3106 | 3106 | yes |
+| oracle_graal_12109.md | yes | frames | 35 | 1739 | 1750 | 2596 | yes |
+| spring-projects_spring-framework_35118.md | yes | frames | 37 | 930 | 963 | 1895 | yes |
+| spring-projects_spring-loaded_102.md | no | - | 0 | 153 | 153 | 1360 | yes |
+| spring-projects_spring-loaded_138.md | yes | frames | 79 | 658 | 1989 | 1989 | yes |
+| axios_axios.md | yes | anchors | 43 | 2167 | 5585 | 5585 | yes |
+| donnemartin_system-design-primer.md | yes | anchors | 99 | 3476 | 5765 | 5765 | yes |
+| goldbergyoni_nodebestpractices.md | no | - | 0 | 4442 | 4442 | 6777 | yes |
+| jwasham_coding-interview-university.md | yes | anchors | 84 | 4277 | 5972 | 5972 | yes |
+| ohmyzsh_ohmyzsh.md | yes | anchors | 35 | 4562 | 6132 | 6132 | yes |
+| vinta_awesome-python.md | yes | anchors | 75 | 3982 | 5983 | 5983 | yes |
+| email-thread.txt | no | - | 0 | 525 | 525 | 629 | yes |
+| readme.txt | no | - | 0 | 688 | 688 | 843 | yes |
+| lic-mit.txt | no | - | 0 | 223 | 223 | 223 | yes |
+| node-stacktraces.txt | no | - | 0 | 339 | 339 | 568 | yes |
+
+20/20 byte-identical; 14 wires with rules applied, 864 elided fields total.

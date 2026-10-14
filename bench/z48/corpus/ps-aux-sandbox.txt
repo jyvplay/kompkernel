@@ -1,0 +1,79 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.2 167228 11708 ?        Ss   07:28   0:00 /sbin/init
+root           2  0.0  0.0      0     0 ?        S    07:28   0:00 [kthreadd]
+root           3  0.0  0.0      0     0 ?        I<   07:28   0:00 [rcu_gp]
+root           4  0.0  0.0      0     0 ?        I<   07:28   0:00 [rcu_par_gp]
+root           5  0.0  0.0      0     0 ?        I<   07:28   0:00 [slub_flushwq]
+root           6  0.0  0.0      0     0 ?        I<   07:28   0:00 [netns]
+root           8  0.0  0.0      0     0 ?        I<   07:28   0:00 [kworker/0:0H-events_highpri]
+root           9  0.0  0.0      0     0 ?        I    07:28   0:00 [kworker/u4:0-events_unbound]
+root          10  0.0  0.0      0     0 ?        I<   07:28   0:00 [mm_percpu_wq]
+root          11  0.0  0.0      0     0 ?        I    07:28   0:00 [rcu_tasks_kthread]
+root          12  0.0  0.0      0     0 ?        I    07:28   0:00 [rcu_tasks_trace_kthread]
+root          13  0.0  0.0      0     0 ?        S    07:28   0:00 [ksoftirqd/0]
+root          14  0.0  0.0      0     0 ?        I    07:28   0:00 [rcu_preempt]
+root          15  0.0  0.0      0     0 ?        S    07:28   0:00 [migration/0]
+root          16  0.0  0.0      0     0 ?        I    07:28   0:00 [kworker/0:1-events]
+root          17  0.0  0.0      0     0 ?        S    07:28   0:00 [cpuhp/0]
+root          18  0.0  0.0      0     0 ?        S    07:28   0:00 [cpuhp/1]
+root          19  0.0  0.0      0     0 ?        S    07:28   0:00 [migration/1]
+root          20  0.0  0.0      0     0 ?        S    07:28   0:00 [ksoftirqd/1]
+root          21  0.0  0.0      0     0 ?        I    07:28   0:00 [kworker/1:0-cgroup_bpf_destroy]
+root          22  0.0  0.0      0     0 ?        I<   07:28   0:00 [kworker/1:0H-events_highpri]
+root          24  0.0  0.0      0     0 ?        I    07:28   0:00 [kworker/u4:1-events_unbound]
+root          25  0.0  0.0      0     0 ?        S    07:28   0:00 [kdevtmpfs]
+root          26  0.0  0.0      0     0 ?        I<   07:28   0:00 [inet_frag_wq]
+root          27  0.0  0.0      0     0 ?        S    07:28   0:00 [kauditd]
+root          28  0.0  0.0      0     0 ?        I    07:28   0:00 [kworker/1:1-inet_frag_wq]
+root          29  0.0  0.0      0     0 ?        S    07:28   0:00 [khungtaskd]
+root          30  0.0  0.0      0     0 ?        S    07:28   0:00 [oom_reaper]
+root          31  0.0  0.0      0     0 ?        I<   07:28   0:00 [writeback]
+root          32  0.0  0.0      0     0 ?        S    07:28   0:00 [kcompactd0]
+root          33  0.0  0.0      0     0 ?        SN   07:28   0:00 [ksmd]
+root          34  0.0  0.0      0     0 ?        SN   07:28   0:00 [khugepaged]
+root          35  0.0  0.0      0     0 ?        I<   07:28   0:00 [kintegrityd]
+root          36  0.0  0.0      0     0 ?        I<   07:28   0:00 [kblockd]
+root          37  0.0  0.0      0     0 ?        I<   07:28   0:00 [blkcg_punt_bio]
+root          38  0.0  0.0      0     0 ?        S    07:28   0:00 [watchdogd]
+root          39  0.0  0.0      0     0 ?        I<   07:28   0:00 [rpciod]
+root          40  0.0  0.0      0     0 ?        I<   07:28   0:00 [kworker/1:1H-kblockd]
+root          41  0.0  0.0      0     0 ?        I<   07:28   0:00 [xprtiod]
+root          61  0.0  0.0      0     0 ?        S    07:28   0:00 [kswapd0]
+root          65  0.0  0.0      0     0 ?        I<   07:28   0:00 [nfsiod]
+root          67  0.0  0.0      0     0 ?        I<   07:28   0:00 [kworker/0:1H-kblockd]
+root          70  0.0  0.0      0     0 ?        I<   07:28   0:00 [xfsalloc]
+root          71  0.0  0.0      0     0 ?        I<   07:28   0:00 [xfs_mru_cache]
+root          73  0.0  0.0      0     0 ?        I<   07:28   0:00 [kthrotld]
+root          79  0.0  0.0      0     0 ?        S    07:28   0:00 [irq/24-ACPI:Ged]
+root         112  0.0  0.0      0     0 ?        S    07:28   0:00 [hwrng]
+root         144  0.0  0.0      0     0 ?        I<   07:28   0:00 [iscsi_conn_clea]
+root         159  0.0  0.0      0     0 ?        I<   07:28   0:00 [mld]
+root         160  0.0  0.0      0     0 ?        I<   07:28   0:00 [ipv6_addrconf]
+root         167  0.0  0.0   1004     4 ?        S    07:28   0:00 bpfilter_umh
+root         168  0.0  0.0      0     0 ?        I<   07:28   0:00 [kstrp]
+root         173  0.0  0.0      0     0 ?        I<   07:28   0:00 [zswap-shrink]
+root         174  0.0  0.0      0     0 ?        I<   07:28   0:00 [kworker/u5:0]
+root         252  0.0  0.0      0     0 ?        S    07:28   0:00 [jbd2/vda-8]
+root         253  0.0  0.0      0     0 ?        I<   07:28   0:00 [ext4-rsv-conver]
+root         284  0.0  0.2  35072  8120 ?        Ss   07:28   0:00 /lib/systemd/systemd-journald
+_rpc         304  0.0  0.0   7888  3968 ?        Ss   07:28   0:00 /sbin/rpcbind -f -w
+systemd+     306  0.0  0.2  17916  8764 ?        Ss   07:28   0:00 /lib/systemd/systemd-networkd
+root         318  0.0  0.2  15452  8980 ?        Ss   07:28   0:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+_chrony      320  0.0  0.0  10700  3048 ?        S    07:28   0:00 /usr/sbin/chronyd -F 1
+_chrony      322  0.0  0.0  10568   544 ?        S    07:28   0:00 /usr/sbin/chronyd -F 1
+root         327  0.0  0.0   2900  1036 tty1     Ss+  07:28   0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root         329  0.0  0.0   2900  1020 tty3     Ss+  07:28   0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root         330  0.0  0.0   2900  1020 tty4     Ss+  07:28   0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root         331  0.0  0.0   2900  1024 tty5     Ss+  07:28   0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root         332  0.0  0.0   2900  1012 tty6     Ss+  07:28   0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root         348  0.0  0.0   2900  1040 tty2     Ss+  07:28   0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root        1229  0.3  0.4 1338128 18460 ?       S<Lsl 07:28   0:04 /usr/bin/envd
+user        1610  0.0  0.0   3932  2912 ?        Ss   07:31   0:00 bash -c bash -l "$0/run.cmd" > "$0/out.log" 2>&1; echo $? > "$0/exit" /tmp/arena-workspace/procs/elision-probes-ls-usr-bin-dpkg-l-fe4a61d8
+user        1611  0.0  0.0   3932  2860 ?        S    07:31   0:00 bash -l /tmp/arena-workspace/procs/elision-probes-ls-usr-bin-dpkg-l-fe4a61d8/run.cmd
+root        1744  0.0  0.0      0     0 ?        I    07:36   0:00 [kworker/0:0]
+user        1807  0.0  0.0   3932  2916 ?        S    07:40   0:00 bash bench/tmp/run.sh bench/z48/probe-elide.ts bench/z29/ops-real/dpkg-l.txt [["^ii  ", ""]]
+user        1827  100  6.1 1158556 247108 ?      Rl   07:40   6:20 node bench/tmp/probe-elide.mjs bench/z29/ops-real/dpkg-l.txt [["^ii  ", ""]]
+root        1877  0.0  0.0      0     0 ?        I    07:44   0:00 [kworker/1:2-events_power_efficient]
+root        1878  0.0  0.0      0     0 ?        I    07:44   0:00 [kworker/1:3-inet_frag_wq]
+user        2300  0.0  0.0   3932  3004 ?        S    07:47   0:00 /bin/bash -l -c cd /home/user/kompkernel/bench/z48/corpus && rm -f docker-ps-1.txt pip-list-1.txt && ps aux > ps-aux-sandbox.txt; apt list --installed 2>/dev/null | head -400 > apt-list-installed.txt; cat /etc/passwd > etc-passwd.txt; mount > mount.txt; pip list 2>/dev/null > pip-list-sandbox.txt; (cd /home/user/kompkernel && find node_modules -maxdepth 2 -name package.json | head -300 | xargs ls -l 2>/dev/null) > ls-l-pkgjson.txt; getent group > etc-group.txt; wc -l *.txt; head -3 apt-list-installed.txt ps-aux-sandbox.txt mount.txt ls-l-pkgjson.txt | cut -c1-160
+user        2303  0.0  0.0   8108  3996 ?        R    07:47   0:00 ps aux

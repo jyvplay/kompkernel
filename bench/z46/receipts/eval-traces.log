@@ -1,0 +1,21 @@
+o200k_base daedalus traces/alibaba_druid_6414.md in=1477 oneChat=867 exact=true  16723ms
+o200k_base enthymeme traces/alibaba_druid_6414.md in=1477 oneChat=852 exact=true  29044ms
+o200k_base daedalus traces/buttasam_cms-boot_3.md in=2354 oneChat=1046 exact=true  17787ms
+o200k_base enthymeme traces/buttasam_cms-boot_3.md in=2354 oneChat=944 exact=true  16120ms
+o200k_base daedalus traces/couchbase_CouchbaseMock_11.md in=868 oneChat=678 exact=true  3636ms
+o200k_base enthymeme traces/couchbase_CouchbaseMock_11.md in=868 oneChat=676 exact=true  6454ms
+o200k_base daedalus traces/getsentry_sentry-java_1863.md in=2800 oneChat=1163 exact=true  16694ms
+o200k_base enthymeme traces/getsentry_sentry-java_1863.md in=2800 oneChat=1061 exact=true  13306ms
+o200k_base daedalus traces/getsentry_sentry-java_980.md in=3974 oneChat=2153 exact=true  31466ms
+o200k_base enthymeme traces/getsentry_sentry-java_980.md in=3974 oneChat=2003 exact=true  27518ms
+o200k_base daedalus traces/netty_netty_16626.md in=3106 oneChat=1787 exact=true  23371ms
+o200k_base enthymeme traces/netty_netty_16626.md in=3106 oneChat=1692 exact=true  21317ms
+o200k_base daedalus traces/oracle_graal_12109.md in=2596 oneChat=1750 exact=true  22024ms
+o200k_base enthymeme traces/oracle_graal_12109.md in=2596 oneChat=1739 exact=true  40674ms
+o200k_base daedalus traces/spring-projects_spring-framework_35118.md in=1895 oneChat=963 exact=true  14283ms
+o200k_base enthymeme traces/spring-projects_spring-framework_35118.md in=1895 oneChat=930 exact=true  21144ms
+o200k_base daedalus traces/spring-projects_spring-loaded_102.md in=1360 oneChat=153 exact=true  1994ms
+o200k_base enthymeme traces/spring-projects_spring-loaded_102.md in=1360 oneChat=153 exact=true  1795ms
+o200k_base daedalus traces/spring-projects_spring-loaded_138.md in=1989 oneChat=723 exact=true  9937ms
+o200k_base enthymeme traces/spring-projects_spring-loaded_138.md in=1989 oneChat=658 exact=true  8078ms
+done

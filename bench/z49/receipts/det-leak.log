@@ -1,0 +1,49 @@
+# gpt-tokenizer decoder-state leak — evidence (OMEGA_DET=1, o200k_base, node v22.22.3, 2026-10-14)
+# Input: the PARADEIGMA composed text for bench/z49/corpus/gh-tags-20.json (3795 chars), DAEDALUS run 3x in ONE process.
+
+## BEFORE the fix (bench/tmp/det2.ts; chunk cache kept between runs)
+run 0 M 787 wire 748 winner default cache 0->10712 hits+10196263 misses+10712
+run 1 M 706 wire 667 winner span12+words cache 10712->11866 hits+10217980 misses+1154
+run 2 M 706 wire 667 winner span12+words cache 11866->11866 hits+10219134 misses+0
+## BEFORE the fix, chunk cache CLEARED before every run (so the cache is not the carrier)
+run 0 M 787 wire 748 winner default cache 0->10712 hits+10196263 misses+10712
+run 1 M 706 wire 667 winner span12+words cache 0->11866 hits+10207268 misses+11866
+run 2 M 706 wire 667 winner span12+words cache 0->11866 hits+10207268 misses+11866
+## BEFORE the fix, same text, single-file process with the PLAIN arm run first (bench/z49/try.ts): composed M 869 (xcheck-real.log, 5th file of a multi-file process: 788)
+
+## SIBYL trace (OMEGA_TRACE=1), BEFORE the fix — the no-blocks grammar is missing on the first call:
+sibyl eval words=0 cap=-1 blocks=true probeScale=0.8 tries=3 -> M=1797 wire=1706 ranked=24
+sibyl eval words=24 cap=-1 blocks=true probeScale=0.2 tries=2 -> M=1816 wire=1725 ranked=24
+sibyl eval words=24 cap=-1 blocks=true probeScale=1 tries=3 -> M=1801 wire=1719 ranked=24
+sibyl run 0 mode=sibyl M=805 wire=766 notes=no admissible single-token rule set beat the plain grammar here; fell back to the ARIADNE arm (...)
+sibyl eval words=0 cap=-1 blocks=true probeScale=0.8 tries=3 -> M=1797 wire=1706 ranked=24/24
+sibyl eval words=0 cap=-1 blocks=false probeScale=0.8 tries=3 -> M=805 wire=766 ranked=24/24
+sibyl eval words=24 cap=-1 blocks=true probeScale=0.2 tries=2 -> M=1816 wire=1725 ranked=24/24
+sibyl eval words=24 cap=-1 blocks=false probeScale=0.2 tries=2 -> M=799 wire=751 ranked=24/24
+sibyl eval words=24 cap=-1 blocks=false probeScale=1 tries=3 -> M=725 wire=686 ranked=24/24
+sibyl eval words=24 cap=-1 blocks=true probeScale=1 tries=3 -> M=1801 wire=1719 ranked=24/24
+sibyl run 1 mode=sibyl M=725 wire=686 notes=25 phrase rules + 24 single-token rules (cap=none) ...
+# Cause: ariadne.buildOn(noBlocks) -> bpe.tokenStrings -> gpt-tokenizer decode([id]) per token through the library's
+# module-global TextDecoder in streaming mode, never flushed (node_modules/gpt-tokenizer/esm/BytePairEncodingCore.js:6,203,216).
+# The vocabulary scan (ariadne.vocabByScript, first renderBest of the process) leaves an incomplete UTF-8 sequence buffered;
+# the next tokenStrings() gets "\uFFFD" prepended, segs.join('') !== chunk -> buildOn returns null -> the arm is skipped.
+# bench/tmp/det4.ts: encode('≡') = [35726, 94]; decode([35726]) = "" (buffered), decode([94]) = "≡" (completed from the buffer).
+
+## AFTER the fix (bpe.ts: flush around every public decode, once before/after the per-token walk):
+run 0 M 706 wire 667 winner span12+words cache 0->11760 hits+10207582 misses+11760
+run 1 M 706 wire 667 winner span12+words cache 11760->11760 hits+10219342 misses+0
+run 2 M 706 wire 667 winner span12+words cache 11760->11760 hits+10219342 misses+0
+
+## Fix v1 (flush and DISCARD the tail) — rejected, receipts in bench/z49/receipts/fix-v1-discarded/
+# Discarding the tail turns a token whose bytes end in an incomplete sequence into a counterfeit character:
+#   o200k id 439 = bytes d0 be d0 ("о" + dangling lead byte)  -> decoded as "о"   (encode("о") = [317])
+#   id 671 = e1 83 90 e1 83 -> "ა";  id 1049 = e5 bd a9 e7 a5 -> "彩";  id 5198 -> "្"
+# The glyph pools then held duplicates ("о" twice in cyrillic, "彩" twice in cjk), their order shifted, and the
+# ARIADNE default arm on gh-followers-20 (plain, all-ASCII) went from 840 to 1054 (DAEDALUS 840 -> 922).
+
+## Fix v2 (final): flush before, and APPEND the final flush to the result = non-streaming semantics
+#   decodeIds([439]) = "о\uFFFD" (excluded from every script pool, as it should be)
+#   pools: identical to the leaky pools minus the counterfeit glyphs (hangul 679->677, cjk 2517->2515, polyglot 802->799, khmer 67->66), no duplicates, same order
+#   gh-followers-20 plain: 840 / 840 (two calls, one process)     — reference unchanged
+#   gh-tags-20 composed:   706 / 706 / 706                          — was 787 / 706 / 706 (and 869 after a plain run)
+# Regression probe: OMEGA_DET=1 bench/tmp/run.sh bench/z49/det-leak.ts  -> bench/z49/receipts/fixed/det-leak-after.log

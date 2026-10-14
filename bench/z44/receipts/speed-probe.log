@@ -1,0 +1,45 @@
+
+== bench/holdout-ops/package-lock-head.json raw=15009
+   ariadne default          mode=ariadne   M=  5523  47218ms
+   ariadne levels1          mode=ariadne   M=  5501  47651ms
+   ariadne span12 L2        mode=ariadne   M=  5623  48607ms
+   ariadne topK500 L1       mode=ariadne   M=  5610  46485ms
+   sibyl span12+words       mode=sibyl     M=  5536  111632ms
+   sibyl L1+words           mode=sibyl     M=  5594  105822ms
+   veritas-c                mode=dict      M=  6647  19588ms
+
+== bench/holdout-ops/git-numstat.txt raw=4632
+   ariadne default          mode=ariadne   M=  2036  2660ms
+   ariadne levels1          mode=ariadne   M=  2033  3135ms
+   ariadne span12 L2        mode=ariadne   M=  2036  2408ms
+   ariadne topK500 L1       mode=ariadne   M=  2036  2682ms
+   sibyl span12+words       mode=sibyl     M=  2036  15050ms
+   sibyl L1+words           mode=sibyl     M=  2030  16467ms
+   veritas-c                mode=dict      M=  2252  3216ms
+
+== bench/holdout/gh-prose.txt raw=1934
+   ariadne default          mode=ariadne   M=  1827  552ms
+   ariadne levels1          mode=ariadne   M=  1825  550ms
+   ariadne span12 L2        mode=ariadne   M=  1827  545ms
+   ariadne topK500 L1       mode=ariadne   M=  1826  554ms
+   sibyl span12+words       mode=sibyl     M=  1782  2203ms
+   sibyl L1+words           mode=sibyl     M=  1787  2215ms
+   veritas-c                mode=identity  M=  1934  645ms
+
+== bench/holdout-work/kb-article.txt raw=656
+   ariadne default          mode=raw       M=   656  54ms
+   ariadne levels1          mode=raw       M=   656  53ms
+   ariadne span12 L2        mode=raw       M=   656  52ms
+   ariadne topK500 L1       mode=raw       M=   656  51ms
+   sibyl span12+words       mode=sibyl     M=   651  781ms
+   sibyl L1+words           mode=sibyl     M=   651  741ms
+   veritas-c                mode=identity  M=   656  68ms
+
+== bench/holdout-lang/ja-kb.txt raw=655
+   ariadne default          mode=raw       M=   655  30ms
+   ariadne levels1          mode=raw       M=   655  27ms
+   ariadne span12 L2        mode=raw       M=   655  26ms
+   ariadne topK500 L1       mode=raw       M=   655  27ms
+   sibyl span12+words       mode=sibyl     M=   526  1612ms
+   sibyl L1+words           mode=sibyl     M=   521  1478ms
+   veritas-c                mode=dict      M=   592  85ms

@@ -1,0 +1,13 @@
+ps-aux-sandbox.txt raw=3643 M=1185 (31596ms) | reduced raw=3503 M=1186 (23702ms) | changed=70 | gross saving=-1
+D notes: predicted "span12+words" from punct=11.9% tokens=3643; ran 2 arm(s); winner "span12+words" (prediction hit); 73 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain defau
+systemctl-1.txt raw=1283 M=932 (8988ms) | reduced raw=1149 M=929 (10781ms) | changed=67 | gross saving=3
+D notes: predicted "span12+words" from punct=3.2% tokens=1283; ran 2 arm(s); winner "span12+words" (prediction hit); 25 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain defaul
+ls-l-pkgjson.txt raw=2145 M=528 (7756ms) | reduced raw=1424 M=453 (3275ms) | changed=74 | gross saving=75
+D notes: predicted "span12+words" from punct=14.5% tokens=2145; ran 2 arm(s); winner "span12+words" (prediction hit); 16 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain defau
+ls-l-pkgjson.txt raw=2145 M=528 (7332ms) | reduced raw=1627 M=528 (5443ms) | changed=74 | gross saving=0
+D notes: predicted "span12+words" from punct=14.5% tokens=2145; ran 2 arm(s); winner "span12+words" (prediction hit); 16 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain defau
+kubectl-pods-2.txt raw=1998 M=1089 (21332ms) | reduced raw=1998 M=1089 (19554ms) | changed=0 | gross saving=0
+D notes: predicted "span12+words" from punct=6.5% tokens=1998; ran 2 arm(s); winner "span12+words" (prediction hit); 66 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain defaul
+find-listing.txt raw=3997 M=1326 (12602ms) | reduced raw=3757 M=1318 (10687ms) | changed=120 | gross saving=8
+D notes: predicted "span12+words" from punct=13.8% tokens=3997; ran 2 arm(s); winner "span12+words" (prediction hit); 42 phrase + 24 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain defau
+PROBES3_DONE

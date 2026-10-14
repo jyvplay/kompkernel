@@ -1,0 +1,11 @@
+import { buildSessions } from './sessions';
+import { createSession, anamnesisEncodeMessage } from '@/lib/omega/anamnesis';
+import { tokenStrings } from '@/lib/omega/bpe';
+const s = buildSessions().find(x => x.name === 'ops-log-tails')!;
+const sess = createSession('o200k_base');
+anamnesisEncodeMessage(s.messages[0], sess, {});
+console.log('rules after m0:');
+for (const r of sess.rules) console.log(`  ${r.glyph} = ${JSON.stringify(r.text.slice(0,30))} toks=${r.toks.length} ${JSON.stringify(r.toks.slice(0,4))}`);
+console.log('m1 first tokens:', JSON.stringify(tokenStrings(s.messages[1], 'o200k_base').slice(0,6).map(x=>x.s)));
+const m = anamnesisEncodeMessage(s.messages[1], sess, {});
+console.log('m1 =>', m.mode, '|', m.notes);

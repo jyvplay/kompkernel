@@ -1,0 +1,10 @@
+alibaba_druid_6414.md: raw=1477 frames=35 derivable=35 fileNameTok=143 | D=867 D(folded)=818 Δ=-49 (-5.7%) ms=30616
+buttasam_cms-boot_3.md: raw=2354 frames=50 derivable=50 fileNameTok=273 | D=1046 D(folded)=912 Δ=-134 (-12.8%) ms=32699
+couchbase_CouchbaseMock_11.md: raw=868 frames=16 derivable=16 fileNameTok=73 | D=678 D(folded)=642 Δ=-36 (-5.3%) ms=6665
+getsentry_sentry-java_1863.md: raw=2800 frames=112 derivable=112 fileNameTok=466 | D=1163 D(folded)=1025 Δ=-138 (-11.9%) ms=28796
+getsentry_sentry-java_980.md: raw=3974 frames=103 derivable=103 fileNameTok=439 | D=2153 D(folded)=1981 Δ=-172 (-8.0%) ms=47143
+netty_netty_16626.md: raw=3106 frames=61 derivable=61 fileNameTok=260 | D=1787 D(folded)=1658 Δ=-129 (-7.2%) ms=35685
+oracle_graal_12109.md: raw=2596 frames=35 derivable=35 fileNameTok=117 | D=1750 D(folded)=1705 Δ=-45 (-2.6%) ms=39697
+spring-projects_spring-framework_35118.md: raw=1895 frames=37 derivable=37 fileNameTok=200 | D=963 D(folded)=896 Δ=-67 (-7.0%) ms=20001
+spring-projects_spring-loaded_102.md: raw=1360 frames=48 derivable=48 fileNameTok=216 | D=153 D(folded)=141 Δ=-12 (-7.8%) ms=4156
+spring-projects_spring-loaded_138.md: raw=1989 frames=83 derivable=83 fileNameTok=470 | D=723 D(folded)=618 Δ=-105 (-14.5%) ms=18046

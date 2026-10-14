@@ -1,0 +1,24 @@
+o200k_base paradeigma holdout-work/bibliography.txt in=896 oneChat=711 exact=true  2663ms
+o200k_base paradeigma holdout-work/email-thread.txt in=629 oneChat=525 exact=true  1964ms
+o200k_base paradeigma holdout-work/kb-article.txt in=656 oneChat=651 exact=true  977ms
+o200k_base paradeigma holdout-work/llm-answer.md in=733 oneChat=707 exact=true  1507ms
+o200k_base paradeigma holdout-work/meeting-transcript.txt in=472 oneChat=420 exact=true  735ms
+o200k_base paradeigma holdout-work/unified-diff.patch in=578 oneChat=475 exact=true  442ms
+o200k_base paradeigma holdout/code-dts.txt in=162 oneChat=108 exact=true  22ms
+o200k_base paradeigma holdout/code-ts.txt in=1422 oneChat=1028 exact=true  10312ms
+o200k_base paradeigma holdout/gh-api.json.txt in=2519 oneChat=1153 exact=true  4147ms
+o200k_base paradeigma holdout/gh-prose.txt in=1934 oneChat=1782 exact=true  3600ms
+o200k_base paradeigma holdout/json-pkg.txt in=1152 oneChat=743 exact=true  2341ms
+o200k_base paradeigma holdout/lic-mit.txt in=223 oneChat=223 exact=true  1270ms
+o200k_base paradeigma holdout/license.txt in=1166 oneChat=968 exact=true  4222ms
+o200k_base paradeigma holdout/md-react.txt in=252 oneChat=252 exact=true  1371ms
+o200k_base paradeigma holdout/md-vite.txt in=274 oneChat=274 exact=true  1330ms
+o200k_base paradeigma holdout/readme.txt in=843 oneChat=688 exact=true  1563ms
+o200k_base paradeigma ops-real/df-h.txt in=131 oneChat=131 exact=true  2602ms
+o200k_base paradeigma ops-real/dpkg-l.txt in=8975 oneChat=4572 exact=true  281099ms
+o200k_base paradeigma ops-real/du-usr-share.txt in=1634 oneChat=766 exact=true  12516ms
+o200k_base paradeigma ops-real/free-h.txt in=64 oneChat=64 exact=true  1283ms
+o200k_base paradeigma ops-real/ls-usr-bin.txt in=17146 oneChat=3746 exact=true  162755ms
+o200k_base paradeigma ops-real/ls-usr-lib.txt in=949 oneChat=342 exact=true  3358ms
+done
+LANES_DONE
