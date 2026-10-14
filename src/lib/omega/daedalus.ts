@@ -139,8 +139,20 @@ export function daedalusFeatures(text: string, enc: EncodingName = 'o200k_base')
   for (let i = 0; i + 2 <= n; i++) { const k = segs[i] + '\u0000' + segs[i + 1]; cnt.set(k, (cnt.get(k) ?? 0) + 1); }
   let rep = 0;
   for (let i = 0; i + 2 <= n; i++) if ((cnt.get(segs[i] + '\u0000' + segs[i + 1]) ?? 0) >= 2) rep++;
+  /* Z44 BUG FIX. `\w` is ASCII-only, so `/[^\w\s]/` counted every non-ASCII
+   * LETTER as punctuation. Measured consequence on the shipped frontier:
+   *
+   *     file            punctPct (old)  punctPct (new)  routed to
+   *     ja-kb.txt              99.0            0.9      "bracket-dense" -> span12,default
+   *     ru-kb.txt              87.1            5.5      "bracket-dense" -> span12,default
+   *
+   * Both are prose. Because DAEDALUS runs only `maxArms` arms (default 2) and the
+   * winning arm for these files is `span12+words`, the misrouting cost the whole
+   * win: ja-kb came back at 655 (identity) while the arm it never ran produces
+   * 526 — 129 tokens, 19.7% of the file (bench/z44/receipts/classifier-fix.jsonl).
+   * Punctuation is now the Unicode Punctuation + Symbol categories. */
   let punct = 0;
-  for (const ch of text) if (!/[\w\s]/.test(ch)) punct++;
+  for (const ch of text) if (/[\p{P}\p{S}]/u.test(ch)) punct++;
   return {
     tokens: n,
     distinct: new Set(segs).size,
@@ -226,6 +238,19 @@ export function daedalusEncode(text: string, enc: EncodingName = 'o200k_base', o
   for (let i = 0; i < maxArms; i++) {
     if (i > 0 && now() > deadline) break;
     runArm(order[i]);
+  }
+  /* Z44: SOUND ESCALATION. The `maxArms` cut-off is an optimisation whose
+   * premise is "we already hold the incumbent". When every arm run so far fell
+   * back to identity there is no incumbent to protect, so stopping can only
+   * lose: the remaining arms are run as well. Still deadline-bounded, so the
+   * anytime property is unchanged, and the result is still a minimum over a set
+   * that contains the shipped default arm. This is what recovers the non-Latin
+   * lanes the classifier used to misroute. */
+  if (!cands.length) {
+    for (let i = maxArms; i < order.length; i++) {
+      if (now() > deadline) break;
+      runArm(order[i]);
+    }
   }
   if (!cands.length) return raw;
 

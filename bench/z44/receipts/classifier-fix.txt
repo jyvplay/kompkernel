@@ -1,0 +1,12 @@
+ja-kb.txt              raw=   655 punct=4.2% order=span12+words,default,span12
+   -> M=526 mode=daedalus arm=span12+words exact=true 0ms
+ru-kb.txt              raw=   478 punct=2.2% order=span12+words,default,span12
+   -> M=478 mode=raw arm=none exact=true 0ms
+pl-kb.txt              raw=   623 punct=2.0% order=span12+words,default,span12
+   -> M=623 mode=raw arm=none exact=true 0ms
+de-kb.txt              raw=   525 punct=1.8% order=span12+words,default,span12
+   -> M=495 mode=daedalus arm=span12+words exact=true 0ms
+es-kb.txt              raw=   457 punct=1.4% order=span12+words,default,span12
+   -> M=435 mode=daedalus arm=span12+words exact=true 0ms
+tr-kb.txt              raw=   554 punct=1.3% order=span12+words,default,span12
+   -> M=549 mode=daedalus arm=span12+words exact=true 0ms

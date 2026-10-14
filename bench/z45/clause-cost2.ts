@@ -1,0 +1,28 @@
+import { countTokens } from '../../src/lib/omega/bpe';
+const cs = [
+  'Add a space when printing: after . ! ? before a capital letter; after , before a lowercase letter.',
+  'Add a space: after . ! ? before a capital letter; after , before a lowercase letter.',
+  'Add a space: after .!? before a capital letter; after , before a lowercase letter.',
+  'Add a space: after .!? before a capital; after , before a lowercase letter.',
+  'Insert a space after .!? before a capital and after , before a lowercase letter.',
+  'Space after .!? before a capital, and after , before a lowercase letter.',
+  'Restore spaces: .!? before a capital; , before a lowercase letter.',
+  'Missing spaces: after .!? before capitals; after , before lowercase letters.',
+  'Spaces were dropped after .!? before capitals and after , before lowercase letters; restore them.',
+  'When printing, re-insert the space after .!? before a capital and after , before a lowercase letter.',
+  'Add a space after .!? before a capital, after , before a lowercase letter.',
+  'Add a space after .!? before a capital letter.',
+  'Add a space after , before a lowercase letter.',
+  'Add a space after a letter or digit before (.',
+  'Add a space after , . ; : before ".',
+  'Add a space after .!? before a capital letter, after , before a lowercase letter, after a letter or digit before (.',
+  'Outside ``` blocks, add a space after .!? before a capital letter, after , before a lowercase letter.',
+  'Add the missing space after .!? before a capital and after , before a lowercase letter.',
+  'Un-fuse: ".A"→". A", ",a"→", a".',
+  '".A" means ". A"; ",a" means ", a".',
+  'Read ".A" as ". A" and ",a" as ", a".',
+  'Print ".A" as ". A" and ",a" as ", a".',
+  'Print .A as . A and ,a as , a (any capital A, any lowercase a).',
+  'Print .A as . A, ,a as , a, x( as x (.',
+];
+for (const c of cs) console.log(String(countTokens(c + '\n', 'o200k_base')).padStart(3), String(countTokens(c + '\n', 'cl100k_base')).padStart(3), c);

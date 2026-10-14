@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import { crasisPlan, crasisHeader } from '../../src/lib/omega/crasis';
+import { daedalusEncode } from '../../src/lib/omega/daedalus';
+import { countTokens } from '../../src/lib/omega/bpe';
+const t = fs.readFileSync(process.argv[2], 'utf8');
+const p = crasisPlan(t, 'o200k_base', false)!;
+console.log('plan', p.rules, 'gain', p.gain, 'fusedTok', countTokens(p.fused, 'o200k_base'), 'raw', countTokens(t, 'o200k_base'));
+const a = daedalusEncode(t, 'o200k_base');
+const b = daedalusEncode(p.fused, 'o200k_base');
+console.log('plain  M', a.messageTokens, 'out', a.outTokens, 'mode', a.mode, a.winningArm, 'phrase', a.phraseRules, 'words', a.wordRules);
+console.log('fused  M', b.messageTokens, 'out', b.outTokens, 'mode', b.mode, b.winningArm, 'phrase', b.phraseRules, 'words', b.wordRules);
+const h = crasisHeader(p.rules, false);
+console.log('header', countTokens(h + '\n', 'o200k_base'), 'composed M', countTokens(h + '\n' + b.decoderPrompt, 'o200k_base'), 'identity-composed', countTokens(h + '\n' + p.fused, 'o200k_base'));

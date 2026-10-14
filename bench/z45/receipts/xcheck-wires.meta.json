@@ -1,0 +1,223 @@
+[
+ {
+  "file": "bench/holdout/lic-mit.txt",
+  "applied": true,
+  "refs": [
+   "【MIT】"
+  ],
+  "M": 41,
+  "raw": 223
+ },
+ {
+  "file": "bench/train/lic-isc.txt",
+  "applied": true,
+  "refs": [
+   "【ISC】"
+  ],
+  "M": 39,
+  "raw": 156
+ },
+ {
+  "file": "bench/train/lic-bsd-3-clause.txt",
+  "applied": true,
+  "refs": [
+   "【BSD-3-Clause】"
+  ],
+  "M": 45,
+  "raw": 295
+ },
+ {
+  "file": "bench/z45/corpus/licenses/facebook_react.txt",
+  "applied": true,
+  "refs": [
+   "【MIT】"
+  ],
+  "M": 41,
+  "raw": 223
+ },
+ {
+  "file": "bench/z45/corpus/licenses/vuejs_core.txt",
+  "applied": true,
+  "refs": [
+   "【MIT; layout classic】"
+  ],
+  "M": 68,
+  "raw": 234
+ },
+ {
+  "file": "bench/z45/corpus/licenses/openai_openai-python.txt",
+  "applied": true,
+  "refs": [
+   "【Apache-2.0: 2026 OpenAI】"
+  ],
+  "M": 46,
+  "raw": 2258
+ },
+ {
+  "file": "bench/z45/corpus/licenses/d3_d3.txt",
+  "applied": true,
+  "refs": [
+   "【ISC; wrap 80】"
+  ],
+  "M": 59,
+  "raw": 156
+ },
+ {
+  "file": "bench/z45/corpus/licenses/boostorg_boost.txt",
+  "applied": true,
+  "refs": [
+   "【BSL-1.0】"
+  ],
+  "M": 31,
+  "raw": 282
+ },
+ {
+  "file": "bench/z45/corpus/licenses/angular_angular.txt",
+  "applied": true,
+  "refs": [
+   "【MIT; layout classic】"
+  ],
+  "M": 64,
+  "raw": 230
+ },
+ {
+  "file": "bench/z45/corpus/licenses/expressjs_express.txt",
+  "applied": true,
+  "refs": [
+   "【MIT; layout npm】"
+  ],
+  "M": 116,
+  "raw": 281
+ },
+ {
+  "file": "bench/z45/corpus/licenses/netty_netty.txt",
+  "applied": true,
+  "refs": [
+   "【Apache-2.0; url https】"
+  ],
+  "M": 42,
+  "raw": 2262
+ },
+ {
+  "file": "bench/z45/corpus/licenses/prettier_prettier.txt",
+  "applied": true,
+  "refs": [
+   "【MIT; unwrapped】"
+  ],
+  "M": 45,
+  "raw": 199
+ },
+ {
+  "file": "bench/z45/corpus/licenses/ansible_ansible.txt",
+  "applied": true,
+  "refs": [
+   "【GPL-3.0】"
+  ],
+  "M": 30,
+  "raw": 7446
+ },
+ {
+  "file": "bench/z45/corpus/licenses/denoland_deno.txt",
+  "applied": true,
+  "refs": [
+   "【MIT; wrap 80】"
+  ],
+  "M": 62,
+  "raw": 220
+ },
+ {
+  "file": "bench/z45/corpus/licenses/babel_babel.txt",
+  "applied": true,
+  "refs": [
+   "【MIT; layout jquery】"
+  ],
+  "M": 59,
+  "raw": 225
+ },
+ {
+  "file": "bench/z45/corpus/licenses/php_php-src.txt",
+  "applied": true,
+  "refs": [
+   "【BSD-3-Clause】"
+  ],
+  "M": 67,
+  "raw": 317
+ },
+ {
+  "file": "bench/z45/corpus/headers/tensorflow_tensorflow_app.py",
+  "applied": true,
+  "refs": [
+   "【Apache-2.0 header; prefix \"# \"】"
+  ],
+  "M": 225,
+  "raw": 296
+ },
+ {
+  "file": "bench/z45/corpus/headers/kubernetes_kubernetes_hash.go",
+  "applied": true,
+  "refs": [
+   "【Apache-2.0 header】"
+  ],
+  "M": 127,
+  "raw": 214
+ },
+ {
+  "file": "bench/z45/corpus/headers/coreutils_coreutils_true.c",
+  "applied": true,
+  "refs": [
+   "【GPL-3.0 header; prefix \"   \"】"
+  ],
+  "M": 453,
+  "raw": 542
+ },
+ {
+  "file": "bench/z45/corpus/headers/google_guava_Strings.java",
+  "applied": true,
+  "refs": [
+   "【Apache-2.0 header; prefix \" * \"; wrap 100】"
+  ],
+  "M": 2227,
+  "raw": 3186
+ },
+ {
+  "file": "bench/z45/corpus/headers/servo_servo_lib.rs",
+  "applied": false,
+  "refs": [],
+  "M": 1434,
+  "raw": 1754
+ },
+ {
+  "file": "bench/z45/corpus/headers/android_platform_frameworks_base_Log.java",
+  "applied": true,
+  "refs": [
+   "【Apache-2.0 header; prefix \" * \"; indent 5】"
+  ],
+  "M": 2745,
+  "raw": 5225
+ },
+ {
+  "file": "bench/z45/corpus/headers/spring-projects_spring-framework_Assert.java",
+  "applied": true,
+  "refs": [
+   "【Apache-2.0 header; prefix \" * \"; url https; indent 5】"
+  ],
+  "M": 2334,
+  "raw": 6301
+ },
+ {
+  "file": "bench/z45/corpus/headers/mozilla_gecko-dev_nsCOMPtr.h",
+  "applied": false,
+  "refs": [],
+  "M": 4687,
+  "raw": 10139
+ },
+ {
+  "file": "bench/z45/corpus/headers/coreutils_coreutils_yes.c",
+  "applied": true,
+  "refs": [
+   "【GPL-3.0 header; prefix \"   \"】"
+  ],
+  "M": 1686,
+  "raw": 2077
+ }
+]
