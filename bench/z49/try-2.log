@@ -1,0 +1,14 @@
+paradeigma: 29 templates in 3 block(s), 281 lines removed; clause 404 tok; M 1049 vs plain 1127; predicted "span12" from punct=20.8% tokens=2555; ran 2 arm(s); winner "default" (prediction miss); 55 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 0; c
+gh-comments-10.json	raw=6053	plainM=1127	M=1049	applied=true	exact=true	templates=29	lines=281	clause=404	26.9s
+paradeigma: 55 templates in 2 block(s), 165 lines removed; clause 783 tok; M 1133 vs plain 1210; predicted "span12" from punct=22.8% tokens=2251; ran 2 arm(s); winner "span12" (prediction hit); 57 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 3; con
+gh-repos-3.json	raw=5155	plainM=1210	M=1133	applied=true	exact=true	templates=55	lines=165	clause=783	16.3s
+paradeigma: not applied (composed M 9094 >= plain M 9009); predicted "span12" from punct=22.3% tokens=26186; ran 2 arm(s); winner "default" (prediction miss); 681 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cjk; beat the plain default arm by 0; contract=38
+gh-releases-3.json	raw=26186	plainM=9009	M=9009	applied=false	exact=true	templates=0	lines=0	clause=0	105.8s
+paradeigma: 16 templates in 2 block(s), 77 lines removed; clause 286 tok; M 2178 vs plain 2246; predicted "span12" from punct=20.1% tokens=4626; ran 2 arm(s); winner "default" (prediction miss); 148 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cjk; beat the plain default arm by 0; contra
+gh-pulls-1.json	raw=5660	plainM=2246	M=2178	applied=true	exact=true	templates=16	lines=77	clause=286	61.6s
+paradeigma: 18 templates in 2 block(s), 136 lines removed; clause 299 tok; M 3656 vs plain 3704; predicted "span12+words" from punct=13.6% tokens=6403; ran 2 arm(s); winner "span12+words" (prediction hit); 111 phrase + 24 single-token rules, 0 blocks, 0 lists; script=polyglot; beat the plain default
+gh-commits-4.json	raw=8544	plainM=3704	M=3656	applied=true	exact=true	templates=18	lines=136	clause=299	96.0s
+paradeigma: not applied (templates found (5) but the estimated gain 9 cannot pay the contract); predicted "span12" from punct=21.7% tokens=2519; ran 2 arm(s); winner "span12" (prediction hit); 82 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 18; con
+gh-api.json.txt	raw=2519	plainM=1153	M=1153	applied=false	exact=true	templates=0	lines=0	clause=0	4.7s
+paradeigma: not applied (no template over sibling fields pays for its sentence); predicted "span12" from punct=23.6% tokens=1152; ran 2 arm(s); winner "span12" (prediction hit); 39 phrase + 0 single-token rules, 0 blocks, 0 lists; script=cyrillic; beat the plain default arm by 1; contract=39
+json-pkg.txt	raw=1152	plainM=743	M=743	applied=false	exact=true	templates=0	lines=0	clause=0	2.4s

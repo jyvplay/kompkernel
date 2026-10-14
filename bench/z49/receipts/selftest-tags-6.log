@@ -1,0 +1,7 @@
+PARADEIGMA blind self-decode receipt (2026-10-14T09:22:21Z)
+input : bench/z49/receipts/selftest-tags-6.input.json (first 6 objects of bench/z49/corpus/gh-tags-20.json, indent 2)
+prompt: bench/z49/receipts/selftest-tags-6.prompt.txt (forced PARADEIGMA wire; 3 templates / 18 lines; composed M=449 vs plain DAEDALUS 387 -> real mode would fall back; used only as a readability receipt)
+method: the model read the prompt text only, expanded the 14 DAEDALUS rules by hand, applied the ≡ clause (2 blocks), and wrote bench/z49/receipts/selftest-tags-6.decoded.json
+sha256(input)  =4e7676c6703e1c164b3aab7aeb1429e506a1b2ad62f57950b9a1b70df243992a
+sha256(decoded)=4e7676c6703e1c164b3aab7aeb1429e506a1b2ad62f57950b9a1b70df243992a
+cmp: BYTE_IDENTICAL

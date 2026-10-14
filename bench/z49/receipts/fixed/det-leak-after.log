@@ -1,0 +1,8 @@
+encode("≡ objects having") = [35726,94,11736,4566]
+tokenStrings #0 ["","≡"," objects"," having"] rejoins: true
+tokenStrings #1 ["","≡"," objects"," having"] rejoins: true
+after a 5000-id scan, decode(" objects") = " objects"
+daedalus run 0: M 706 wire 667 winner span12+words chunk-cache 0->11799
+daedalus run 1: M 706 wire 667 winner span12+words chunk-cache 11799->11799
+daedalus run 2: M 706 wire 667 winner span12+words chunk-cache 11799->11799
+PASS: deterministic across calls

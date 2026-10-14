@@ -1,0 +1,162 @@
+[
+  {
+    "name": "actions/tools-update-amaro",
+    "commit": {
+      "sha": "9abe6155c38f000951fd6853e2d02e990cdab7cb",
+      "url": "https://api.github.com/repos/nodejs/node/commits/9abe6155c38f000951fd6853e2d02e990cdab7cb"
+    },
+    "protected": false
+  },
+  {
+    "name": "actions/tools-update-doc-kit",
+    "commit": {
+      "sha": "4099582bd69fca4f22bfdbb114082111d2e63449",
+      "url": "https://api.github.com/repos/nodejs/node/commits/4099582bd69fca4f22bfdbb114082111d2e63449"
+    },
+    "protected": false
+  },
+  {
+    "name": "actions/tools-update-inspector_protocol",
+    "commit": {
+      "sha": "d759606c83bde22da278173a91914c0d398cc219",
+      "url": "https://api.github.com/repos/nodejs/node/commits/d759606c83bde22da278173a91914c0d398cc219"
+    },
+    "protected": false
+  },
+  {
+    "name": "actions/tools-update-libuv",
+    "commit": {
+      "sha": "7953577905d36fd831b071eab69aff018de8838a",
+      "url": "https://api.github.com/repos/nodejs/node/commits/7953577905d36fd831b071eab69aff018de8838a"
+    },
+    "protected": false
+  },
+  {
+    "name": "actions/tools-update-openssl",
+    "commit": {
+      "sha": "8e34d17a3d0b6e93d89d62d300f968612b68eed4",
+      "url": "https://api.github.com/repos/nodejs/node/commits/8e34d17a3d0b6e93d89d62d300f968612b68eed4"
+    },
+    "protected": false
+  },
+  {
+    "name": "actions/update-WebCryptoAPI-wpt",
+    "commit": {
+      "sha": "6886497901df90361c367291ae4f3f473cd22467",
+      "url": "https://api.github.com/repos/nodejs/node/commits/6886497901df90361c367291ae4f3f473cd22467"
+    },
+    "protected": false
+  },
+  {
+    "name": "actions/update-url-wpt",
+    "commit": {
+      "sha": "f875281961b6263f308c6c28bedc87bbac77b1ce",
+      "url": "https://api.github.com/repos/nodejs/node/commits/f875281961b6263f308c6c28bedc87bbac77b1ce"
+    },
+    "protected": false
+  },
+  {
+    "name": "archived-io.js-v0.10",
+    "commit": {
+      "sha": "e7dec60a63b9171465fd4037a04aeb709198aea2",
+      "url": "https://api.github.com/repos/nodejs/node/commits/e7dec60a63b9171465fd4037a04aeb709198aea2"
+    },
+    "protected": true
+  },
+  {
+    "name": "archived-io.js-v0.12",
+    "commit": {
+      "sha": "b42c0853ae3c41f88959168c5124af4f68059cbf",
+      "url": "https://api.github.com/repos/nodejs/node/commits/b42c0853ae3c41f88959168c5124af4f68059cbf"
+    },
+    "protected": true
+  },
+  {
+    "name": "canary-base",
+    "commit": {
+      "sha": "c2c42d62fb6d652ccbce74e46fbebd86d7c8a3d9",
+      "url": "https://api.github.com/repos/nodejs/node/commits/c2c42d62fb6d652ccbce74e46fbebd86d7c8a3d9"
+    },
+    "protected": true
+  },
+  {
+    "name": "lemire/compile-cache-dict-reproducible",
+    "commit": {
+      "sha": "9f3e25689aca46e2477c95ac36297d4ebc666b32",
+      "url": "https://api.github.com/repos/nodejs/node/commits/9f3e25689aca46e2477c95ac36297d4ebc666b32"
+    },
+    "protected": false
+  },
+  {
+    "name": "main",
+    "commit": {
+      "sha": "dd7235cb6a55e9987551719ee57de9c3ff59d115",
+      "url": "https://api.github.com/repos/nodejs/node/commits/dd7235cb6a55e9987551719ee57de9c3ff59d115"
+    },
+    "protected": true
+  },
+  {
+    "name": "test-tracing-channel",
+    "commit": {
+      "sha": "c05515399d7ca9a26afcfb00f4a0a8dbeb3cafda",
+      "url": "https://api.github.com/repos/nodejs/node/commits/c05515399d7ca9a26afcfb00f4a0a8dbeb3cafda"
+    },
+    "protected": true
+  },
+  {
+    "name": "v0.7.4-release",
+    "commit": {
+      "sha": "f5ab8a7141ddc843d0a4e39cb6e7b1e87dbb6235",
+      "url": "https://api.github.com/repos/nodejs/node/commits/f5ab8a7141ddc843d0a4e39cb6e7b1e87dbb6235"
+    },
+    "protected": true
+  },
+  {
+    "name": "v0.8.16-release",
+    "commit": {
+      "sha": "ea355b6af7bb8f00e1cd7d8340a8056591c09f10",
+      "url": "https://api.github.com/repos/nodejs/node/commits/ea355b6af7bb8f00e1cd7d8340a8056591c09f10"
+    },
+    "protected": true
+  },
+  {
+    "name": "v0.10",
+    "commit": {
+      "sha": "e5eec71b2c26a6e426225747a4f13e6ca34b3877",
+      "url": "https://api.github.com/repos/nodejs/node/commits/e5eec71b2c26a6e426225747a4f13e6ca34b3877"
+    },
+    "protected": true
+  },
+  {
+    "name": "v0.12",
+    "commit": {
+      "sha": "2332fc944581689ef9fb93a899093827133e5f5b",
+      "url": "https://api.github.com/repos/nodejs/node/commits/2332fc944581689ef9fb93a899093827133e5f5b"
+    },
+    "protected": true
+  },
+  {
+    "name": "v1.x",
+    "commit": {
+      "sha": "a464ccf64187e3218d0b8db4cf379bd38dbe23d4",
+      "url": "https://api.github.com/repos/nodejs/node/commits/a464ccf64187e3218d0b8db4cf379bd38dbe23d4"
+    },
+    "protected": true
+  },
+  {
+    "name": "v3.x",
+    "commit": {
+      "sha": "d6a6ec235ac9d33fe37622bdb654ca477b5b84b6",
+      "url": "https://api.github.com/repos/nodejs/node/commits/d6a6ec235ac9d33fe37622bdb654ca477b5b84b6"
+    },
+    "protected": true
+  },
+  {
+    "name": "v4.x",
+    "commit": {
+      "sha": "9e5fe8eebd31c3998702f3b174058b6cd3154970",
+      "url": "https://api.github.com/repos/nodejs/node/commits/9e5fe8eebd31c3998702f3b174058b6cd3154970"
+    },
+    "protected": true
+  }
+]

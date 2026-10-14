@@ -99,6 +99,7 @@ import { anagnorisisEncode } from './anagnorisis';
 import { enthymemeEncode } from './enthymeme';
 import { epagogeEncode } from './epagoge';
 import { elleipsisEncode } from './elleipsis';
+import { paradeigmaEncode } from './paradeigma';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
 import { tabminEncode } from './tabmin';
@@ -711,6 +712,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'anagnorisis', label: 'ἀ ANAGNORISIS (Public-canon recognition pre-pass: standard open-source license texts and per-file notices (GitHub/choosealicense templates, versioned catalogue) are recognised byte-exactly — any per-line comment prefix, re-wrap width, url scheme, indentation — and replaced by 【SPDX-ID; layout…: blanks】 references the reader already knows; then DAEDALUS; one-line contract compiled from the features used; exact, identity-guarded)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = anagnorisisEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.canonApplied}; refs=${r.canonRefs.map(x => x.replace(/\n/g, '⏎')).join(' ') || '-'}; tiers=${r.canonTiers.join(',') || '-'}; regions=${r.canonRegionTokens}->${r.canonRefTokens} tok; plainM=${r.plainMessageTokens}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'paradeigma', label: '≡ PARADEIGMA (Template entailment for JSON records: a field whose value is, in every object of a shape, the same concatenation of constants and sibling values — "followers_url" = <url>/followers, "avatar_url" = https://…/u/<id>?v=4, "full_name" = nodejs/<name>, "site_admin" = false — is removed from those objects and restored by the reader from one template line per shape ("objects having \"login\": after \"node_id\": …"); templates are induced from the document, verified on every object, chained in field order; the clause is compressed with the JSON; then DAEDALUS; exact, identity-guarded. Measured: GitHub API lists −7…−15 %, user lists −14 %)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = paradeigmaEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.applied}; templates=${r.templates} in ${r.templateBlocks.length} block(s); elidedLines=${r.elidedLines}; clause=${r.clauseTokens} tok; plainM=${r.plainMessageTokens}; one-chat=${r.messageTokens} tok (contract counted)` }; },
     },
     {
       key: 'elleipsis', label: '○ ELLEIPSIS (Positional ellipsis: a constant that sits at a fixed field position in every record of a stated class — a shared path prefix on the last field of a listing, a constant column — is removed with no marker and restored by one sentence naming the position, the constant and the lines that keep it literally; then DAEDALUS; exact, identity-guarded. Measured: constants already folded by the dictionary are free (newline/padding/",," residue), so only prefix-before-word removals pay)', family: 'exact', fidelity: 'exact',

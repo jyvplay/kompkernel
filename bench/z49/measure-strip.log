@@ -1,0 +1,8 @@
+gh-api.json.txt	raw=2519	D=1153	exact=true	4.7s
+gh-api.STRIP.txt	raw=1430	D=830	exact=true	1.7s
+gh-releases-1.json	raw=894	D=544	exact=true	1.0s
+gh-releases-1.STRIP.txt	raw=472	D=362	exact=true	0.4s
+gh-repos-3.json	raw=5155	D=1210	exact=true	13.8s
+gh-repos-3.STRIP.txt	raw=1399	D=595	exact=true	1.9s
+gh-comments-10.json	raw=6053	D=1127	exact=true	22.0s
+gh-comments-10.STRIP.txt	raw=2563	D=675	exact=true	5.1s
