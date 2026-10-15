@@ -92,7 +92,7 @@ The registry's other candidates were run on each applied lane (`bench/z52/fronti
 
 - dotted identifiers: daedalus 2898, daedalus-dual 2926, paradeigma 2898, phalanx-a10 3337, gramma 2898, dendron 2898, elleipsis 2898. Stack minimum (excluding DENS) = **2898**. DENS = 2437 → **−461 (−15.9%)** against the stack.
 - git-numstat: daedalus 2036, daedalus-dual 2036, paradeigma 2036, phalanx-a10 2214, gramma 2036, dendron 2036, elleipsis 2036. Stack minimum (excluding DENS) = **2036**. DENS = 1930 → **−106 (−5.2%)**.
-- sysctl-proc: run with 7 candidates (phalanx-a10 excluded because it did not finish in the budget; it was worse on the other two lanes). Result: see `bench/z52/receipts/frontier-min-sysctl.jsonl` and §8.
+- sysctl-proc: daedalus 4820, daedalus-dual 4892, paradeigma 4820, gramma 4820, dendron 4820, elleipsis 4820 (`bench/z52/receipts/frontier-min-sysctl.jsonl`). Stack minimum (excluding DENS and phalanx-a10) = **4820**. DENS = 3862 → **−958 (−19.9%)**. phalanx-a10 was not run on this lane (the run was stopped; it was worse on the other two lanes). If phalanx-a10 is smaller than 4820 here, the stack gain is smaller than −958, so −958 is an upper bound on the gain against the full stack.
 
 ## 5. LLM-native decode (what is and is not confirmed)
 
@@ -114,6 +114,6 @@ The registry's other candidates were run on each applied lane (`bench/z52/fronti
 
 ## 8. What is still open
 
-- The sysctl stack-minimum number is pending in `bench/z52/receipts/frontier-min-sysctl.jsonl`. If it is not complete, the sysctl claim is against plain DAEDALUS only.
+- phalanx-a10 on the sysctl lane was not measured (the run exceeded the budget and was stopped). The sysctl stack comparison therefore excludes that one candidate.
 - Not run: an openai/math per-proof review (required by earlier turns); a fresh-model decode test; a full 14-PR code review.
 - Possible next step: compose DENS with GRAMMA (layout) on the same payload, since both are one-chat rules. Not built.
