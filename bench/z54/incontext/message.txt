@@ -1,0 +1,24 @@
+{
+ "url": "https://api.example.org/repos/acme/tool/issues/418",
+ "comments_url": "~",
+ "events_url": "~",
+ "html_url": "https://example.org/acme/tool/pull/418",
+ "packages": {
+  "node_modules/@acme/core": {
+   "version": "2.4.1",
+   "resolved": "~",
+   "integrity": "sha512-QmFjbWU="
+  },
+  "node_modules/left-pad": {
+   "version": "1.3.0",
+   "resolved": "~"
+  },
+  "node_modules/a/node_modules/b": {
+   "version": "0.9.0-rc.2",
+   "resolved": "~"
+  }
+ }
+}
+
+Resolved ~ = https://registry.npmjs.org/NAME/-/BASE-VERSION.tgz, NAME = the package path after node_modules/, BASE = its last segment, VERSION = the entry version.
+~ in a "_url" value = the object url + "/" + the key without "_url"; ~k+x = link k of the object (0 = url, then earlier links in order) + x.
