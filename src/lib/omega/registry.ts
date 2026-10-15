@@ -104,6 +104,7 @@ import { synartesisEncode } from './synartesis';
 import { denEncode } from './dendron';
 import { densEncode } from './dendrons';
 import { gnomonEncode } from './gnomon';
+import { akolouthiaEncode, akolouthiaDecode } from './akolouthia';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
 import { tabminEncode } from './tabmin';
@@ -736,6 +737,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'gnomon', label: '∴ ΓΝΩΜΩΝ (GNOMON: fields a public convention fixes from their siblings are not sent. REST link fields (`*_url`) of one JSON object are the object url plus "/"+key stem, or a prefix of an earlier link plus a remainder; npm lockfile `resolved` values are the registry tarball URL of the entry name and version. The reader gets one sentence per rule used, then DAEDALUS; exact, guarded by the plain arm, so never above the frontier)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = gnomonEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `rules=${r.rules.join('+') || 'plain'}; fields rest=${r.fields.rest} npm=${r.fields.npm}; frontierM=${r.frontierM}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'akolouthia', label: '⁺ AKOLOUTHIA (Arithmetic-progression elision: a number that continues the number at the same position in the line above, by the same step as the line two above, is written as one marker; the reader computes it)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = akolouthiaEncode(t, enc); const decoded = akolouthiaDecode(r.wire, r.arm); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; marks=${r.marks}; ${r.notes}` }; },
     },
     {
       key: 'elleipsis', label: '○ ELLEIPSIS (Positional ellipsis: a constant that sits at a fixed field position in every record of a stated class — a shared path prefix on the last field of a listing, a constant column — is removed with no marker and restored by one sentence naming the position, the constant and the lines that keep it literally; then DAEDALUS; exact, identity-guarded. Measured: constants already folded by the dictionary are free (newline/padding/",," residue), so only prefix-before-word removals pay)', family: 'exact', fidelity: 'exact',
