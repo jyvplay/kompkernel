@@ -1,0 +1,33 @@
+{"lane":"de-kb.txt","raw":2432,"arm":"identity","marks":0,"exact":true,"onomasia":495,"plain":495,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"es-kb.txt","raw":2367,"arm":"identity","marks":0,"exact":true,"onomasia":435,"plain":435,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"ja-kb.txt","raw":901,"arm":"identity","marks":0,"exact":true,"onomasia":526,"plain":526,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"pl-kb.txt","raw":2096,"arm":"identity","marks":0,"exact":true,"onomasia":623,"plain":623,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"ru-kb.txt","raw":2171,"arm":"identity","marks":0,"exact":true,"onomasia":478,"plain":478,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"tr-kb.txt","raw":2123,"arm":"identity","marks":0,"exact":true,"onomasia":549,"plain":549,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"agent-history.md","raw":4539,"arm":"identity","marks":0,"exact":true,"onomasia":295,"plain":295,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"chart.svg","raw":3446,"arm":"keyed","marks":86,"exact":true,"onomasia":358,"plain":465,"notes":"marks=86; keyed M=358 vs identity 465"}
+{"lane":"component.jsx","raw":1194,"arm":"identity","marks":0,"exact":true,"onomasia":296,"plain":296,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"dump.sql","raw":5159,"arm":"identity","marks":0,"exact":true,"onomasia":728,"plain":728,"notes":"identity: keyed arm 729 >= identity 728"}
+{"lane":"page.html","raw":10145,"arm":"identity","marks":0,"exact":true,"onomasia":610,"plain":610,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"paper.tex","raw":1247,"arm":"identity","marks":0,"exact":true,"onomasia":407,"plain":407,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"pom.xml","raw":1797,"arm":"identity","marks":0,"exact":true,"onomasia":283,"plain":283,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"df-h.txt","raw":939,"arm":"keyed","marks":90,"exact":true,"onomasia":195,"plain":281,"notes":"marks=90; keyed M=195 vs identity 281"}
+{"lane":"kubectl-get-pods.txt","raw":2649,"arm":"keyed","marks":92,"exact":true,"onomasia":372,"plain":386,"notes":"marks=92; keyed M=372 vs identity 386"}
+{"lane":"markdown-table.md","raw":635,"arm":"identity","marks":0,"exact":true,"onomasia":228,"plain":228,"notes":"identity: keyed arm 261 >= identity 228"}
+{"lane":"psql-output.txt","raw":1578,"arm":"keyed","marks":36,"exact":true,"onomasia":394,"plain":397,"notes":"marks=36; keyed M=394 vs identity 397"}
+{"lane":"bibliography.txt","raw":2759,"arm":"identity","marks":0,"exact":true,"onomasia":711,"plain":711,"notes":"identity: keyed arm 728 >= identity 711"}
+{"lane":"email-thread.txt","raw":2126,"arm":"identity","marks":0,"exact":true,"onomasia":525,"plain":525,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"kb-article.txt","raw":3385,"arm":"identity","marks":0,"exact":true,"onomasia":651,"plain":651,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"llm-answer.md","raw":2542,"arm":"identity","marks":0,"exact":true,"onomasia":707,"plain":707,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"meeting-transcript.txt","raw":1746,"arm":"identity","marks":0,"exact":true,"onomasia":420,"plain":420,"notes":"identity: keyed arm 445 >= identity 420"}
+{"lane":"unified-diff.patch","raw":1487,"arm":"identity","marks":0,"exact":true,"onomasia":475,"plain":475,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"find-listing.txt","raw":11789,"arm":"identity","marks":0,"exact":true,"onomasia":1326,"plain":1326,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"git-log-fuller.txt","raw":368,"arm":"identity","marks":0,"exact":true,"onomasia":143,"plain":143,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"git-numstat.txt","raw":12306,"arm":"identity","marks":0,"exact":true,"onomasia":2036,"plain":2036,"notes":"identity: keyed arm 2070 >= identity 2036"}
+{"lane":"ls-full-iso.txt","raw":2549,"arm":"identity","marks":0,"exact":true,"onomasia":407,"plain":407,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"node-stacktraces.txt","raw":1848,"arm":"identity","marks":0,"exact":true,"onomasia":339,"plain":339,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"npm-ls.txt","raw":6688,"arm":"identity","marks":0,"exact":true,"onomasia":983,"plain":983,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"openstack-loghub-26.log","raw":7969,"arm":"identity","marks":0,"exact":true,"onomasia":1008,"plain":1008,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"package-lock-head.json","raw":40000,"arm":"identity","marks":0,"exact":true,"onomasia":5523,"plain":5523,"notes":"identity arm (DAEDALUS plain)"}
+{"lane":"aapl-2014.csv","raw":5488,"arm":"identity","marks":0,"exact":true,"onomasia":1490,"plain":1490,"notes":"identity: keyed arm 1654 >= identity 1490"}
+{"lane":"vix-daily-1990.csv","raw":6578,"arm":"identity","marks":0,"exact":true,"onomasia":1394,"plain":1394,"notes":"identity: keyed arm 1397 >= identity 1394"}
