@@ -1,0 +1,6 @@
+∴ paths: bash brace expressions ({a,b} = text before it + a, and + b; groups nest). Expand after other rules; one path per line.
+.gitignore
+CHIRON.patch
+ICARUS.patch
+KIONES.patch
+bench/{Y7_ECHO_tier5_ultrareview.md,Y8_LETHE_tier5_ultrareview.md,Y9_ORACLE_tier5_ultrareview.md,abacus-fixtures.ts,abacus-redteam.ts,abacus-report.md,abacus_decode.py,aether-redteam.ts,akribeia-bench.ts,akribeia-crosscheck.sh,akribeia-emit.ts,akribeia-redteam.ts,akribeia-report.md,ambient-redteam.ts,anagnorisis_decode.py,anamnesis-check.sh,anamnesis-crosscheck.sh,anamnesis_decode.py,ananke-redteam.ts,anastrophe-bench.ts,anastrophe-report.md,anatomy.ts,anatomy2.ts,antiphon-bench-receipts.jsonl,antiphon-bench.ts,antiphon-report.md,antiphon-scan-receipts.jsonl,apeiron-redteam.ts,arche-redteam.ts,ariadne-report.md,arithmos-fixtures.ts,arithmos-redteam.ts,arithmos-report.md,arithmos_decode.py,cadmus-redteam.ts,caesura-fixtures.ts}

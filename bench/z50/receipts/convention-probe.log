@@ -1,0 +1,2 @@
+{"file": "package-lock.json", "lockfileVersion": 3, "entries": 234, "resolved_matching_convention": 117, "resolved_not_matching": 0, "integrity_without_resolved": 0, "examples_not_matching": []}
+{"file": "bench/holdout-ops/package-lock-head.json", "valid_json": false, "error": "Unterminated string starting at: line 1352 column 20 (char 39920)"}

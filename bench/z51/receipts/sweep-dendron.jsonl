@@ -1,0 +1,14 @@
+{"file":"bench/z51/corpus/git-ls-files-400.txt","raw":3952,"frontier":1563,"dendron":1461,"delta":-102,"pct":-6.53,"applied":true,"treeLines":6,"exact":true,"ms":62640}
+{"file":"bench/z51/corpus/find-omega.txt","raw":2133,"frontier":767,"dendron":767,"delta":0,"pct":0,"applied":false,"treeLines":2,"exact":true,"ms":3703}
+{"file":"bench/z51/corpus/find-bench-md.txt","raw":2309,"frontier":1099,"dendron":1080,"delta":-19,"pct":-1.73,"applied":true,"treeLines":2,"exact":true,"ms":11707}
+{"file":"bench/z51/corpus/find-holdouts.txt","raw":449,"frontier":262,"dendron":262,"delta":0,"pct":0,"applied":false,"treeLines":2,"exact":true,"ms":4181}
+{"file":"bench/z51/corpus/urls-unique.txt","raw":7545,"frontier":4058,"dendron":4058,"delta":0,"pct":0,"applied":false,"treeLines":0,"exact":true,"ms":10879}
+{"file":"bench/holdout-ops/find-listing.txt","raw":3997,"frontier":1326,"dendron":1326,"delta":0,"pct":0,"applied":false,"treeLines":121,"exact":true,"ms":29754}
+{"file":"bench/holdout/gh-api.json.txt","raw":2519,"frontier":1153,"dendron":1153,"delta":0,"pct":0,"applied":false,"treeLines":0,"exact":true,"ms":5380}
+{"file":"bench/holdout/readme.txt","raw":843,"frontier":688,"dendron":688,"delta":0,"pct":0,"applied":false,"treeLines":0,"exact":true,"ms":1833}
+{"file":"bench/holdout-lang/de-kb.txt","raw":525,"frontier":495,"dendron":495,"delta":0,"pct":0,"applied":false,"treeLines":0,"exact":true,"ms":1051}
+{"file":"bench/holdout-ops/ls-full-iso.txt","raw":1175,"frontier":407,"dendron":407,"delta":0,"pct":0,"applied":false,"treeLines":34,"exact":true,"ms":13639}
+{"file":"bench/holdout-ops/npm-ls.txt","raw":2747,"frontier":983,"dendron":983,"delta":0,"pct":0,"applied":false,"treeLines":105,"exact":true,"ms":13726}
+{"file":"bench/holdout-work/unified-diff.patch","raw":578,"frontier":475,"dendron":475,"delta":0,"pct":0,"applied":false,"treeLines":0,"exact":true,"ms":514}
+{"file":"bench/holdout-ops/git-numstat.txt","raw":4632,"frontier":2036,"dendron":2036,"delta":0,"pct":0,"applied":false,"treeLines":0,"exact":true,"ms":26277}
+{"file":"bench/holdout-tbl/df-h.txt","raw":570,"frontier":281,"dendron":281,"delta":0,"pct":0,"applied":false,"treeLines":3,"exact":true,"ms":3251}

@@ -1,0 +1,23 @@
+∴ npm lock: each node_modules/ entry with "integrity" but no "resolved" gets, after its "version" line, "resolved": "https://registry.npmjs.org/NAME/-/BASE-VERSION.tgz", (NAME = key after last node_modules/; BASE = NAME after last /; VERSION = its version).
+§р      "ә": "й": {
+рversionәб",
+рintegrityәsha512ой0.28.2ба"
+      ],
+     ӯрlicenseәMIT",
+рoptional": true,
+ры"
+      }
+   ӡ    "node_modules/@ты },
+ӡesbuildң": {
+        "с "enginesңnodeә>=18Ҷасти": [
+        "ласт/darwinе-x64оу==",
+рcpuиц"
+      ],
+ӯosивуx64ця-arm64омуarm64ц¶{
+  "packages": {
+ӡemnapi/runtimeй1.11.3б-Xz4Tpyki7XyrpbUK1jR1AhdAdaXyhhY4lZ3neLodmhpuWfy2PAQN5B46sAiU4liOXGLkHypn/qU+jvfWSCYYLA==",
+ӯdependenciesңtslib": "^2.4.0т/aix-ppc64о-XExcO+dvLKvVtNTibSTBej1NCAbaGhWn9Ww1ZPx80qsahhPFe/8jgWP0IchNe0F3HwkU7n8ejhH8bjonqht8mQуppc64цaixҶ/android-armо-kXXoiPVVGQcnIYGOeaovwOURpniDBpSq4A03qkQ+BMQqtGG6HYap3xne9C1O1yo4TR3qxlCX5IqqmX6fFo2LqgуarmцandroidҶ/androidя-5YfKeeI8qWfBZIX+u2xZC3Zlb3Os/gLS2sbEKM+I4ZOcsWmHS2WLysCcQZDAFRslDUU5Oiq44gf6PYN1vGwG5AмandroidҶ/androidе-O387ite7SzUyCcy3JQX4P4bLtEA7bLLkx+esve5JHnyYfNTxcVpXZo9jhdB0lTKN44gztELTdU7nS8Nr16Fs1Qвandroidля-n4KqkOQrraxHJcgjM1RvwbigfQKIKJVpM7xp+KsxiyUSrRdIXnt73VhrPAx0fV44hgfmIVKjxMN9J1t5jySVkwмdarwinле-uq6suIWYP37qzGddBKPw5QEQPi6HiLGsO7UmkpfyaYNQ3D+rN6w6WfwH+nuqcGXWvawGwxOEroO4YGnFh95azwвdarwinҶ/freebsdя-n+I0BTSRIoy+d6RPKnEVwql5UwBJolytvY4mAOIEJorKlqgPII8ix6slVVrfZ5Tnj7glIZvloylbB/EJPMWEXwмfreebsdҶ/freebsdе-78XJTJkvPs0kz2w61301PJjXl4g7q3JqiYMZ/M/yVI73EHBrCRTgkhu9oqG7vPqq+a/yadEW8aD+agKlk5xrmgвfreebsdҶ/linux-armо-XlDnu2q5yoqems+xay6wSAcg9DDD7K9RLKZEBOMZm3ckNpJBvOX20tSfby8KfrrhINDyv9V2YVZKY/SpoGJI8wуarmцlinuxҶ/linuxя-pW4AC0P3it8c7do9MVM4p51FzHzdM/TZrerurgRcHJ2WTa1VQ1CIq18xncfpBJw4ojkiZZrKW2yIBWBP92j6UgмlinuxҶ/linux-ia32о-CYbnj78HsIeA+DhgUKgFCfvNsTHFhMMrinUrMZpDXJXKN8T3XViTZ/+wtHeVxEWY8ewSzTFN+nRmSwO2tZaLUQуia32цlinuxасы }
+  }
+}
+
+Every new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result.

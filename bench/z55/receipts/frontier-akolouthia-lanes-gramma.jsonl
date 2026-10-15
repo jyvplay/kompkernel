@@ -1,0 +1,6 @@
+{"file":"bench/holdout-tbl/df-h.txt","raw":939,"gramma":281,"dendron":281,"gnomon":281,"frontierMin":281}
+{"file":"bench/holdout-tbl/psql-output.txt","raw":1578,"gramma":397,"dendron":397,"gnomon":397,"frontierMin":397}
+{"file":"bench/holdout-tbl/kubectl-get-pods.txt","raw":2649,"gramma":386,"dendron":386,"gnomon":386,"frontierMin":386}
+{"file":"bench/holdout-mk/chart.svg","raw":3446,"gramma":465,"dendron":465,"gnomon":465,"frontierMin":465}
+{"file":"bench/holdout-mk/dump.sql","raw":5159,"gramma":728,"dendron":728,"gnomon":728,"frontierMin":728}
+{"file":"bench/holdout-tab/vix-daily-1990.csv","raw":6578,"gramma":1394,"dendron":1394,"gnomon":1394,"frontierMin":1394}

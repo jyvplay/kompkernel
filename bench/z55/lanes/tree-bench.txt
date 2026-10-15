@@ -1,0 +1,62 @@
+bench/z54
+├── REPORT.md
+├── blank-probe.ts
+├── contract-count.ts
+├── dbg-front.ts
+├── front-probe.ts
+├── gnomon-bench.ts
+├── incontext
+│   ├── decoded-trial2-json2.txt
+│   ├── make.ts
+│   ├── make2.ts
+│   ├── message.txt
+│   ├── message2.txt
+│   ├── sample.json
+│   └── sample2.json
+├── receipts
+│   ├── redteam-gnomon.expected.json
+│   ├── redteam-gnomon.messages.json
+│   ├── redteam-gnomon.py.json
+│   ├── redteam-gnomon.ts.jsonl
+│   ├── sweep-gnomon-daedalus-base.err
+│   ├── sweep-gnomon-daedalus-base.jsonl
+│   ├── sweep-gnomon.err
+│   └── sweep-gnomon.jsonl
+├── redteam-gnomon.ts
+├── sent2.ts
+├── sentence-count.ts
+├── split.ts
+└── wire-peek.ts
+bench/z53
+├── REPORT.md
+├── merge-count.ts
+├── merge-probe.ts
+├── receipts
+│   ├── merge-sysctl.jsonl
+│   └── sweep-dens2.jsonl
+└── rule-count.ts
+bench/z52
+├── REPORT.md
+├── bench-dens.ts
+├── frontier-min.ts
+├── lanes
+│   ├── dotted-idents.txt
+│   └── sysctl-proc.txt
+├── mk-handdecode.ts
+├── receipts
+│   ├── frontier-min-dotted.jsonl
+│   ├── frontier-min-numstat.jsonl
+│   ├── frontier-min-sysctl.jsonl
+│   ├── handdecode
+│   │   ├── sample-expected.txt
+│   │   ├── sample-handdecoded.txt
+│   │   └── sample-tree.txt
+│   ├── redteam-dens.expected.json
+│   ├── redteam-dens.py.json
+│   ├── redteam-dens.ts.jsonl
+│   ├── redteam-dens.wires.json
+│   ├── sweep-dens.jsonl
+│   └── sweep-sysctl-dens.jsonl
+└── redteam-dens.ts
+
+9 directories, 51 files

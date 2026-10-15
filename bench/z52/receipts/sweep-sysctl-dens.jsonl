@@ -1,0 +1,1 @@
+{"file":"bench/z52/lanes/sysctl-proc.txt","frontierM":4820,"densM":3862,"delta":-958,"pct":-19.88,"applied":true,"sep":".","treeM":{".":3862,"/":4874},"treeLines":12,"exact":true,"ms":464648,"notes":"tree arm sep=\".\": 12 wire lines; M 3862 vs frontier 4820 (-958)"}

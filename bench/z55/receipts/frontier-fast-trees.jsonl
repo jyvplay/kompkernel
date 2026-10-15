@@ -1,0 +1,4 @@
+{"file":"bench/z55/lanes/npm-ls-repo.txt","raw":14539,"daedalus":1913,"daedalus-dual":1948,"dendron":1913,"dendrons":1913,"gramma":1913,"frontierMin":1913}
+{"file":"bench/z55/lanes/tree-src.txt","raw":7733,"daedalus":1040,"daedalus-dual":1039,"dendron":1040,"dendrons":970,"gramma":1040,"frontierMin":970}
+{"file":"bench/z55/lanes/tree-bench.txt","raw":1399,"daedalus":282,"daedalus-dual":282,"dendron":282,"dendrons":282,"gramma":282,"frontierMin":282}
+exit=0

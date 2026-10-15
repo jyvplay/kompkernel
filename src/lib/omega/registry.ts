@@ -100,6 +100,12 @@ import { enthymemeEncode } from './enthymeme';
 import { epagogeEncode } from './epagoge';
 import { elleipsisEncode } from './elleipsis';
 import { paradeigmaEncode } from './paradeigma';
+import { synartesisEncode } from './synartesis';
+import { denEncode } from './dendron';
+import { densEncode } from './dendrons';
+import { gnomonEncode } from './gnomon';
+import { akolouthiaEncode, akolouthiaDecode } from './akolouthia';
+import { akolouthia2Encode, akolouthia2Decode } from './akolouthia2';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
 import { tabminEncode } from './tabmin';
@@ -716,6 +722,30 @@ export function codecEntries(): Entry[] {
     {
       key: 'paradeigma', label: '≡ PARADEIGMA (Template entailment for JSON records: a field whose value is, in every object of a shape, the same concatenation of constants and sibling values — "followers_url" = <url>/followers, "avatar_url" = https://…/u/<id>?v=4, "full_name" = nodejs/<name>, "site_admin" = false — is removed from those objects and restored by the reader from one template line per shape ("objects having \"login\": after \"node_id\": …"); templates are induced from the document, verified on every object, chained in field order; the clause is compressed with the JSON; then DAEDALUS; exact, identity-guarded. Measured: GitHub API lists −7…−15 %, user lists −14 %)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = paradeigmaEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.applied}; templates=${r.templates} in ${r.templateBlocks.length} block(s); elidedLines=${r.elidedLines}; clause=${r.clauseTokens} tok; plainM=${r.plainMessageTokens}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'synartesis', label: '⊢ SYNARTESIS (Entailment from an enclosing key: in an npm lockfile the "resolved" URL of an entry (key node_modules/NAME, version V) is the registry tarball URL built from NAME and V — a function the dictionary cannot see, because its name and version recur inside it. The entry\'s "resolved" line is removed where the rule rebuilds it exactly, one 72-token sentence states the convention and the insertion point, and the reduced JSON is coded by PARADEIGMA (its clause and DAEDALUS). Guards: PARADEIGMA result when the reduced arm does not pay or fails the round trip, so M ≤ PARADEIGMA ≤ DAEDALUS; escape line for payloads that begin with the rule prefix. Measured: 117 of 117 resolved lines in the repository lockfile)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = synartesisEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `reducedArm=${r.reducedArm}; elidedResolved=${r.elidedResolved}; paradeigmaM=${r.paradeigmaM}; reducedM=${r.reducedM ?? '-'}; one-chat=${r.messageTokens} tok (contract counted); ${r.synNotes}` }; },
+    },
+    {
+      key: 'dendron', label: '⊢ ΔΕΝΔΡΟΝ (Brace-tree notation for path and URL lists: a run of lines that share a first segment is written once as a bash brace group, `dir/{a,b/{c,d}}`, which the reader expands in order; the tree wire is used only when it is strictly cheaper than the DAEDALUS frontier, and the dispatch line is escaped for payloads that carry it. Measured: git ls-files (400 files) −102 (−6.5%), markdown paths −19 (−1.7%), 160-line git listing −13; everything else, including timestamped listings, prose and JSON, ties the frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = denEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.applied}; frontierM=${r.frontierM}; treeM=${r.treeM ?? '-'}; treeLines=${r.treeLines}; one-chat=${r.messageTokens} tok (contract counted); ${r.notes}` }; },
+    },
+    {
+      key: 'dendrons', label: '⊢ ΔΕΝΔΡΟΝ-Σ (DENDRON-S: the brace tree on any separator. The encoder factors dotted identifiers on "." or paths on "/", whichever is cheaper by one-chat M; lines with { } , or a leading ! are written verbatim behind a "!" marker instead of refusing the whole list; the reader needs no separator; tree arm only when strictly cheaper and round-trip exact; frontier otherwise)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = densEncode(t, enc, {}); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.applied}; sep=${JSON.stringify(r.sep)}; frontierM=${r.frontierM}; treeM=${JSON.stringify(r.treeM)}; treeLines=${r.treeLines}; one-chat=${r.messageTokens} tok (contract counted); ${r.notes}` }; },
+    },
+    {
+      key: 'gnomon', label: '∴ ΓΝΩΜΩΝ (GNOMON: fields a public convention fixes from their siblings are not sent. REST link fields (`*_url`) of one JSON object are the object url plus "/"+key stem, or a prefix of an earlier link plus a remainder; npm lockfile `resolved` values are the registry tarball URL of the entry name and version. The reader gets one sentence per rule used, then DAEDALUS; exact, guarded by the plain arm, so never above the frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = gnomonEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `rules=${r.rules.join('+') || 'plain'}; fields rest=${r.fields.rest} npm=${r.fields.npm}; frontierM=${r.frontierM}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'akolouthia2', label: '⁺ AKOLOUTHIA-2 (Arithmetic-progression elision, two-term eligibility: a number that continues the number at the same position in the line above, by the step between the two lines above, is written as one marker; the reader computes it; identity unless it pays)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = akolouthia2Encode(t, enc); const decoded = akolouthia2Decode(r.wire, r.arm); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; marks=${r.marks}; ${r.notes}` }; },
+    },
+    {
+      key: 'akolouthia', label: '⁺ AKOLOUTHIA (Arithmetic-progression elision: a number that continues the number at the same position in the line above, by the same step as the line two above, is written as one marker; the reader computes it)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = akolouthiaEncode(t, enc); const decoded = akolouthiaDecode(r.wire, r.arm); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; marks=${r.marks}; ${r.notes}` }; },
     },
     {
       key: 'elleipsis', label: '○ ELLEIPSIS (Positional ellipsis: a constant that sits at a fixed field position in every record of a stated class — a shared path prefix on the last field of a listing, a constant column — is removed with no marker and restored by one sentence naming the position, the constant and the lines that keep it literally; then DAEDALUS; exact, identity-guarded. Measured: constants already folded by the dictionary are free (newline/padding/",," residue), so only prefix-before-word removals pay)', family: 'exact', fidelity: 'exact',

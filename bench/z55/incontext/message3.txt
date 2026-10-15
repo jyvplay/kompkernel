@@ -1,0 +1,7 @@
+⁺ = the number at the same position in the line above, plus the change from the line two above.
+§彩  y=395  id=天
+W⁺  x=⁺彩⁺中  x=¶W1中35彩100
+W2中77彩107
+W3中119彩114天天天天天
+
+Every new Chinese character before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result.

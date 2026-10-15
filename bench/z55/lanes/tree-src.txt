@@ -1,0 +1,322 @@
+src
+├── App.orig.tsx
+├── App.tsx
+├── PERSIST_CANARY.orig.txt
+├── PERSIST_CANARY.txt
+├── app
+│   ├── api
+│   │   ├── conversions
+│   │   │   ├── route.orig.ts
+│   │   │   └── route.ts
+│   │   └── health
+│   │       ├── route.orig.ts
+│   │       └── route.ts
+│   ├── globals.css
+│   ├── globals.orig.css
+│   ├── layout.orig.tsx
+│   ├── layout.tsx
+│   ├── page.orig.tsx
+│   ├── page.tsx
+│   ├── service-worker.orig.tsx
+│   └── service-worker.tsx
+├── components
+│   ├── OmegaLab.orig.tsx
+│   ├── OmegaLab.tsx
+│   ├── Workbench.orig.tsx
+│   └── Workbench.tsx
+├── db
+│   ├── index.orig.ts
+│   ├── index.ts
+│   ├── schema.orig.ts
+│   └── schema.ts
+├── index.css
+├── index.orig.css
+├── lib
+│   ├── api-mock.orig.ts
+│   ├── api-mock.ts
+│   ├── neuralese-advanced.orig.ts
+│   ├── neuralese-advanced.ts
+│   ├── neuralese-asg.orig.ts
+│   ├── neuralese-asg.ts
+│   ├── neuralese-ast.orig.ts
+│   ├── neuralese-ast.ts
+│   ├── neuralese-caveholo.orig.ts
+│   ├── neuralese-caveholo.ts
+│   ├── neuralese-caveman.orig.ts
+│   ├── neuralese-caveman.ts
+│   ├── neuralese-composite.orig.ts
+│   ├── neuralese-composite.ts
+│   ├── neuralese-dragi.orig.ts
+│   ├── neuralese-dragi.ts
+│   ├── neuralese-fetch-loop.orig.ts
+│   ├── neuralese-fetch-loop.ts
+│   ├── neuralese-hilbert.orig.ts
+│   ├── neuralese-hilbert.ts
+│   ├── neuralese-holographic.orig.ts
+│   ├── neuralese-holographic.ts
+│   ├── neuralese-ib.orig.ts
+│   ├── neuralese-ib.ts
+│   ├── neuralese-lossless.orig.ts
+│   ├── neuralese-lossless.ts
+│   ├── neuralese-metrics.orig.ts
+│   ├── neuralese-metrics.ts
+│   ├── neuralese-noether.orig.ts
+│   ├── neuralese-noether.ts
+│   ├── neuralese-ordos.orig.ts
+│   ├── neuralese-ordos.ts
+│   ├── neuralese-pareto.orig.ts
+│   ├── neuralese-pareto.ts
+│   ├── neuralese-wenyan.orig.ts
+│   ├── neuralese-wenyan.ts
+│   ├── neuralese.orig.ts
+│   ├── neuralese.ts
+│   ├── omega
+│   │   ├── abacus.ts
+│   │   ├── aeon.ts
+│   │   ├── aether.ts
+│   │   ├── aion.ts
+│   │   ├── akribeia.ts
+│   │   ├── aleph.orig.ts
+│   │   ├── aleph.ts
+│   │   ├── ambient.ts
+│   │   ├── amphora.ts
+│   │   ├── anagnorisis.ts
+│   │   ├── anamnesis.ts
+│   │   ├── ananke.ts
+│   │   ├── anaphora.ts
+│   │   ├── anastrophe.ts
+│   │   ├── antiphon.ts
+│   │   ├── apeiron.ts
+│   │   ├── apex.orig.ts
+│   │   ├── apex.ts
+│   │   ├── arche.ts
+│   │   ├── ariadne.ts
+│   │   ├── arithmos.ts
+│   │   ├── astraea.ts
+│   │   ├── astral.ts
+│   │   ├── atlas.ts
+│   │   ├── atom-codec-v3.orig.ts
+│   │   ├── atom-codec-v3.ts
+│   │   ├── atom-codec.orig.ts
+│   │   ├── atom-codec.ts
+│   │   ├── aurora.ts
+│   │   ├── axiom.ts
+│   │   ├── banyan.ts
+│   │   ├── bpe-audit.ts
+│   │   ├── bpe.orig.ts
+│   │   ├── bpe.ts
+│   │   ├── cadmus.ts
+│   │   ├── caesura.ts
+│   │   ├── canon-catalog.ts
+│   │   ├── chimera.ts
+│   │   ├── chiron.ts
+│   │   ├── chronos-arena.orig.ts
+│   │   ├── chronos-arena.ts
+│   │   ├── chronos-v6.orig.ts
+│   │   ├── chronos-v6.ts
+│   │   ├── chronos.ts
+│   │   ├── circe.ts
+│   │   ├── cjk-contractor.ts
+│   │   ├── clock.ts
+│   │   ├── cm.orig.ts
+│   │   ├── cm.ts
+│   │   ├── codec-synthesis.ts
+│   │   ├── column.ts
+│   │   ├── crasis.ts
+│   │   ├── crown.ts
+│   │   ├── ctxcopy.ts
+│   │   ├── daedalus-dual.ts
+│   │   ├── daedalus.ts
+│   │   ├── dendron.ts
+│   │   ├── dendrons.ts
+│   │   ├── dike.ts
+│   │   ├── dirfold-a.ts
+│   │   ├── dirfold.ts
+│   │   ├── ditto.ts
+│   │   ├── dragi-full.orig.ts
+│   │   ├── dragi-full.ts
+│   │   ├── echo.ts
+│   │   ├── eclipse.ts
+│   │   ├── eidolon.orig.ts
+│   │   ├── eidolon.ts
+│   │   ├── eidos.ts
+│   │   ├── elleipsis.ts
+│   │   ├── enthymeme.ts
+│   │   ├── epagoge.ts
+│   │   ├── episteme.ts
+│   │   ├── epistle.ts
+│   │   ├── eupraxia.ts
+│   │   ├── eustochia.ts
+│   │   ├── exodus.ts
+│   │   ├── genesis.ts
+│   │   ├── glossia.ts
+│   │   ├── gnomon.ts
+│   │   ├── gramma.ts
+│   │   ├── harmonia.ts
+│   │   ├── helix.ts
+│   │   ├── hermes-contract.ts
+│   │   ├── hermes-fractal.ts
+│   │   ├── hermes.ts
+│   │   ├── hydra.ts
+│   │   ├── hyle.ts
+│   │   ├── hypercube-v5.orig.ts
+│   │   ├── hypercube-v5.ts
+│   │   ├── hypergraph.ts
+│   │   ├── hyperion.ts
+│   │   ├── icarus.ts
+│   │   ├── input-memory.ts
+│   │   ├── iris.ts
+│   │   ├── janus.orig.ts
+│   │   ├── janus.ts
+│   │   ├── kairos.ts
+│   │   ├── kalligraphos.ts
+│   │   ├── kallos.ts
+│   │   ├── kanon.ts
+│   │   ├── kappa.ts
+│   │   ├── kernel.ts
+│   │   ├── khoros-operads.ts
+│   │   ├── khoros.ts
+│   │   ├── kinetic.ts
+│   │   ├── kiones.ts
+│   │   ├── koine.ts
+│   │   ├── lakonikos.ts
+│   │   ├── lattice.ts
+│   │   ├── lethe.ts
+│   │   ├── logistike.ts
+│   │   ├── logos.ts
+│   │   ├── logtpl.ts
+│   │   ├── ltp.orig.ts
+│   │   ├── ltp.ts
+│   │   ├── lumen.ts
+│   │   ├── meridian.ts
+│   │   ├── metatron.ts
+│   │   ├── metis.ts
+│   │   ├── mnemosyne.ts
+│   │   ├── moira.ts
+│   │   ├── morph.orig.ts
+│   │   ├── morph.ts
+│   │   ├── mosaic.ts
+│   │   ├── nebula.ts
+│   │   ├── nemesis.ts
+│   │   ├── nexus.orig.ts
+│   │   ├── nexus.ts
+│   │   ├── noesis.ts
+│   │   ├── nyx.ts
+│   │   ├── omega-e8seed.orig.ts
+│   │   ├── omega-e8seed.ts
+│   │   ├── omni-operads.ts
+│   │   ├── omni.ts
+│   │   ├── oracle.ts
+│   │   ├── orbit.ts
+│   │   ├── orion.ts
+│   │   ├── orthos.ts
+│   │   ├── padtab.ts
+│   │   ├── padtab2.ts
+│   │   ├── palimpsest.ts
+│   │   ├── panacea.ts
+│   │   ├── panoptes.ts
+│   │   ├── pantheon.ts
+│   │   ├── paradeigma.ts
+│   │   ├── periodos.ts
+│   │   ├── persistent-dict.orig.ts
+│   │   ├── persistent-dict.ts
+│   │   ├── phalanx-a1.ts
+│   │   ├── phalanx-a10.ts
+│   │   ├── phalanx-a2.ts
+│   │   ├── phalanx-a3.ts
+│   │   ├── phalanx-a4.ts
+│   │   ├── phalanx-a5.ts
+│   │   ├── phalanx-a6.ts
+│   │   ├── phalanx-a7.ts
+│   │   ├── phalanx-a8.ts
+│   │   ├── phalanx-a9.ts
+│   │   ├── phalanx.ts
+│   │   ├── phalanx2.ts
+│   │   ├── phalanx3.ts
+│   │   ├── phalanx4.ts
+│   │   ├── phoenix.ts
+│   │   ├── phrase.ts
+│   │   ├── plexus.ts
+│   │   ├── plinthos.ts
+│   │   ├── polaris.ts
+│   │   ├── polytropos.ts
+│   │   ├── praxis.ts
+│   │   ├── procrustes.ts
+│   │   ├── prometheus-icdm.orig.ts
+│   │   ├── prometheus-icdm.ts
+│   │   ├── pronoia.ts
+│   │   ├── prosopon.ts
+│   │   ├── proteus.ts
+│   │   ├── pulse.ts
+│   │   ├── quantum.ts
+│   │   ├── quasar.ts
+│   │   ├── recall.ts
+│   │   ├── registry.orig.ts
+│   │   ├── registry.ts
+│   │   ├── repair.ts
+│   │   ├── rosetta.ts
+│   │   ├── sequoyah.ts
+│   │   ├── sibyl.ts
+│   │   ├── sigma.orig.ts
+│   │   ├── sigma.ts
+│   │   ├── signet.ts
+│   │   ├── solaris.ts
+│   │   ├── splice.ts
+│   │   ├── starlight-inline.ts
+│   │   ├── starlight.ts
+│   │   ├── stencil.orig.ts
+│   │   ├── stencil.ts
+│   │   ├── stentor.ts
+│   │   ├── stichos.ts
+│   │   ├── strand-book.ts
+│   │   ├── strand.ts
+│   │   ├── strata.ts
+│   │   ├── synapse.ts
+│   │   ├── synartesis.ts
+│   │   ├── synergy.ts
+│   │   ├── synizesis.ts
+│   │   ├── syntagma.ts
+│   │   ├── syntomia.ts
+│   │   ├── tabmin.ts
+│   │   ├── tachys.ts
+│   │   ├── tau.ts
+│   │   ├── telos.ts
+│   │   ├── tensor.ts
+│   │   ├── tessera.ts
+│   │   ├── themis.ts
+│   │   ├── thoth.ts
+│   │   ├── trie.ts
+│   │   ├── uuidfold.ts
+│   │   ├── valence.ts
+│   │   ├── valkyrie.ts
+│   │   ├── veritas-a.ts
+│   │   ├── veritas-c.ts
+│   │   ├── veritas-g.ts
+│   │   ├── veritas-k.ts
+│   │   ├── veritas-m.ts
+│   │   ├── veritas-n.ts
+│   │   ├── veritas-p.ts
+│   │   ├── veritas-q.ts
+│   │   ├── veritas-r.ts
+│   │   ├── veritas-s.ts
+│   │   ├── veritas-u.ts
+│   │   ├── veritas-w.ts
+│   │   ├── veritas.ts
+│   │   ├── wrapcanon.ts
+│   │   ├── zenith.ts
+│   │   ├── zero.ts
+│   │   ├── zeta.orig.ts
+│   │   └── zeta.ts
+│   ├── package-shim.orig.ts
+│   └── package-shim.ts
+├── main.orig.tsx
+├── main.tsx
+├── utils
+│   ├── cn.orig.ts
+│   └── cn.ts
+├── vite-env.d.ts
+└── workers
+    ├── codec.types.ts
+    └── codec.worker.ts
+
+11 directories, 309 files
