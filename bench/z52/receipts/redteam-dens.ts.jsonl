@@ -73,6 +73,15 @@
 {"case":"escape-line-as-payload","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"escape: plain wire carries a dispatch line (or the plain arm did not dispatch)"}
 {"case":"escape-line-as-payload","arm":"forced:.","expandOk":true,"tsExact":true}
 {"case":"escape-line-as-payload","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"dens2-rule-as-payload","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"escape: plain wire carries a dispatch line (or the plain arm did not dispatch)"}
+{"case":"dens2-rule-as-payload","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"dens2-rule-as-payload","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"dens2-vrule-as-payload","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"escape: plain wire carries a dispatch line (or the plain arm did not dispatch)"}
+{"case":"dens2-vrule-as-payload","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"dens2-vrule-as-payload","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"dens2-rule-then-bang","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"escape: plain wire carries a dispatch line (or the plain arm did not dispatch)"}
+{"case":"dens2-rule-then-bang","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"dens2-rule-then-bang","arm":"forced:/","expandOk":true,"tsExact":true}
 {"case":"deep-nesting","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 31)"}
 {"case":"deep-nesting","arm":"forced:.","expandOk":true,"tsExact":true}
 {"case":"deep-nesting","arm":"forced:/","expandOk":true,"tsExact":true}

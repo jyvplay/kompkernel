@@ -61,8 +61,15 @@ import { daedalusEncode, type DaedalusOptions } from './daedalus';
 export const DENS_RULE = '∴ lines: bash brace expressions ({a,b} = text before it + a, and + b; groups nest). Expand after other rules; one line per result.';
 /** Line 1 of a tree wire that carries verbatim lines ("!" prefix). Only paid when used. */
 export const DENS_RULE_V = DENS_RULE + ' A line starting with ! is literal: drop that !, keep the rest.';
-/** Line 1 when the payload's plain wire would itself dispatch as DENS_RULE / DENS_RULE_V. */
+/** DENS-2 dispatch lines (the encoder always writes these). A reader-level bash rule instead of a spelled-out
+ *  one: the reader already knows bash brace expansion, so the contract is 13 o200k tokens (was 35). */
+export const DENS2_RULE = '∴ lines: bash brace expansion; one result per line.';
+export const DENS2_RULE_V = '∴ lines: bash brace expansion; one result per line. A line starting with ! is literal: drop the !.';
+/** Line 1 when the payload's plain wire would itself dispatch as one of the DENS rules. */
 export const DENS_ESCAPE = '∴ lines: literal payload follows';
+
+/** Every first line the reader dispatches on (escape needed if a plain wire starts with one of them). */
+export const DENS_DISPATCH: string[] = [DENS_RULE, DENS_RULE_V, DENS2_RULE, DENS2_RULE_V, DENS_ESCAPE];
 
 /** Separators the encoder may factor on, in tie-break order. */
 export const DENS_SEPARATORS = ['.', '/'] as const;
@@ -72,7 +79,7 @@ export const DENS_SEPARATORS = ['.', '/'] as const;
  *    Consecutive lines of one run that share their first segment (up to and
  *    including the first `sep`) form one group. A one-item group is bare.
  * ------------------------------------------------------------------------- */
-export function densTree(lines: string[], sep: string): string[] {
+export function densTree(lines: string[], sep: string, merge = false): string[] {
   const rec = (xs: string[]): string[] => {
     const out: string[] = [];
     let i = 0;
@@ -87,9 +94,47 @@ export function densTree(lines: string[], sep: string): string[] {
       out.push(items.length === 1 ? head + items[0] : head + '{' + items.join(',') + '}');
       i = j;
     }
-    return out;
+    return merge ? densMergeTails(out) : out;
   };
   return rec(lines);
+}
+
+/** Split an item into its literal part X and one trailing brace group T (X + T), or null. */
+export function densSplitTail(s: string): { x: string; tail: string } | null {
+  const k = s.indexOf('{');
+  if (k < 0) return null;
+  let depth = 0;
+  for (let i = k; i < s.length; i++) {
+    if (s[i] === '{') depth++;
+    else if (s[i] === '}') { depth--; if (depth === 0) return i === s.length - 1 ? { x: s.slice(0, k), tail: s.slice(k) } : null; }
+  }
+  return null;
+}
+
+/**
+ * Subtree merge (Cartesian factoring). Consecutive items X1+T, X2+T, ... that end in the SAME
+ * brace group T are written once as {X1,X2,...}T. The expansion is the same: for each X in order,
+ * every alternative of T in order, so the output order is unchanged.
+ */
+export function densMergeTails(items: string[]): string[] {
+  const out: string[] = [];
+  let i = 0;
+  while (i < items.length) {
+    const a = densSplitTail(items[i]);
+    if (!a) { out.push(items[i]); i++; continue; }
+    let j = i + 1;
+    while (j < items.length) {
+      const b = densSplitTail(items[j]);
+      if (!b || b.tail !== a.tail) break;
+      j++;
+    }
+    if (j - i < 2) { out.push(items[i]); i++; continue; }
+    const xs: string[] = [];
+    for (let t = i; t < j; t++) xs.push(densSplitTail(items[t])!.x);
+    out.push('{' + xs.join(',') + '}' + a.tail);
+    i = j;
+  }
+  return out;
 }
 
 /** A line must be written verbatim (escaped with "!") if it starts with "!" or holds a brace/comma. */
@@ -98,10 +143,10 @@ export function densNeedsVerbatim(line: string): boolean {
 }
 
 /** The wire lines for a payload: verbatim lines as "!"+line, eligible runs as trees on `sep`. */
-export function densWireLines(text: string, sep: string): string[] {
+export function densWireLines(text: string, sep: string, merge = false): string[] {
   const out: string[] = [];
   let run: string[] = [];
-  const flush = () => { if (run.length) { out.push(...densTree(run, sep)); run = []; } };
+  const flush = () => { if (run.length) { out.push(...densTree(run, sep, merge)); run = []; } };
   for (const l of text.split('\n')) {
     if (densNeedsVerbatim(l)) { flush(); out.push('!' + l); } else run.push(l);
   }
@@ -157,7 +202,7 @@ export function densDecode(wire: string): string {
   const nl = wire.indexOf('\n');
   const first = nl < 0 ? wire : wire.slice(0, nl);
   const rest = nl < 0 ? '' : wire.slice(nl + 1);
-  if (first === DENS_RULE || first === DENS_RULE_V) return densExpand(chironDecode(rest));
+  if (first === DENS_RULE || first === DENS_RULE_V || first === DENS2_RULE || first === DENS2_RULE_V) return densExpand(chironDecode(rest));
   if (first === DENS_ESCAPE) return chironDecode(rest);
   return chironDecode(wire);
 }
@@ -204,7 +249,7 @@ export function densEncode(text: string, enc: EncodingName = 'o200k_base', optio
 
   // The plain arm must dispatch to itself; a payload whose wire starts with a dispatch line is escaped.
   const plainFirst = plain.wire.split('\n')[0];
-  if (plainFirst === DENS_RULE || plainFirst === DENS_RULE_V || plainFirst === DENS_ESCAPE || denSafePlain(plain.wire, text) === false) {
+  if (DENS_DISPATCH.includes(plainFirst) || denSafePlain(plain.wire, text) === false) {
     const wire = DENS_ESCAPE + '\n' + plain.wire;
     const prompt = DENS_ESCAPE + '\n' + plain.decoderPrompt;
     const M = countTokens(prompt, enc);
@@ -224,7 +269,7 @@ export function densEncode(text: string, enc: EncodingName = 'o200k_base', optio
     // Only a tree that actually groups something can beat the frontier.
     if (densExpand(treeText) !== text) { bestNote += ` ${sep}:refused(expand)`; continue; }
     const td = daedalusEncode(treeText, enc, options);
-    const rule = wl.some(l => l.startsWith('!')) ? DENS_RULE_V : DENS_RULE;
+    const rule = wl.some(l => l.startsWith('!')) ? DENS2_RULE_V : DENS2_RULE;
     const wire = rule + '\n' + td.wire;
     const prompt = rule + '\n' + td.decoderPrompt;
     const M = countTokens(prompt, enc);

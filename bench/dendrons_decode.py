@@ -28,6 +28,8 @@ from chiron_decode import decode as chiron_decode  # noqa: E402
 DENS_RULE = ('∴ lines: bash brace expressions ({a,b} = text before it + a, and + b; groups nest). Expand after other rules; one line per result.')
 DENS_RULE_V = DENS_RULE + ' A line starting with ! is literal: drop that !, keep the rest.'
 DENS_ESCAPE = '∴ lines: literal payload follows'
+DENS2_RULE = '∴ lines: bash brace expansion; one result per line.'
+DENS2_RULE_V = '∴ lines: bash brace expansion; one result per line. A line starting with ! is literal: drop the !.'
 
 
 def _seq(s, p):
@@ -74,7 +76,7 @@ def decode(wire):
     nl = wire.find('\n')
     first = wire if nl < 0 else wire[:nl]
     rest = '' if nl < 0 else wire[nl + 1:]
-    if first in (DENS_RULE, DENS_RULE_V):
+    if first in (DENS_RULE, DENS_RULE_V, DENS2_RULE, DENS2_RULE_V):
         return expand_tree(chiron_decode(rest))
     if first == DENS_ESCAPE:
         return chiron_decode(rest)

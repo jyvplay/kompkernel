@@ -2,7 +2,7 @@
 // (sep '.' and '/', rule chosen as the encoder would). All wires are decoded by the TS reader and by the
 // independent CPython reader (bench/dendrons_decode.py); both must equal the input byte for byte.
 import fs from 'node:fs';
-import { densEncode, densDecode, densWireLines, densExpand, DENS_RULE, DENS_RULE_V, DENS_ESCAPE, DENS_SEPARATORS } from '@/lib/omega/dendrons';
+import { densEncode, densDecode, densWireLines, densExpand, DENS_RULE, DENS_RULE_V, DENS2_RULE, DENS2_RULE_V, DENS_ESCAPE, DENS_SEPARATORS } from '@/lib/omega/dendrons';
 import { daedalusEncode } from '@/lib/omega/daedalus';
 const enc = 'o200k_base' as const;
 const cases: { name: string; text: string }[] = [
@@ -31,6 +31,9 @@ const cases: { name: string; text: string }[] = [
   { name: 'dispatch-line-as-payload', text: DENS_RULE + '\nx.a\nx.b' },
   { name: 'dispatch-vline-as-payload', text: DENS_RULE_V + '\nx.a\nx.b' },
   { name: 'escape-line-as-payload', text: DENS_ESCAPE + '\nx.a\nx.b' },
+  { name: 'dens2-rule-as-payload', text: DENS2_RULE + '\nx.a\nx.b' },
+  { name: 'dens2-vrule-as-payload', text: DENS2_RULE_V + '\nx.a\nx.b' },
+  { name: 'dens2-rule-then-bang', text: DENS2_RULE + '\n!x.a\nx.b\nx.c' },
   { name: 'deep-nesting', text: 'a.b.c.d.e.f\na.b.c.d.e.g\na.b.c.d.h\na.b.c.i\na.b.j\na.k' },
   { name: 'long-line', text: 'z.' + 'q'.repeat(3000) + '\nz.' + 'q'.repeat(2999) + 'r\nz.s' },
   { name: 'single-char-lines', text: 'a\nb\nc' },
@@ -48,7 +51,7 @@ for (const c of cases) {
     const wl = densWireLines(c.text, sep);
     const treeText = wl.join('\n');
     const expandOk = densExpand(treeText) === c.text;
-    const rule = wl.some(l => l.startsWith('!')) ? DENS_RULE_V : DENS_RULE;
+    const rule = wl.some(l => l.startsWith('!')) ? DENS2_RULE_V : DENS2_RULE;
     const td = daedalusEncode(treeText, enc, {});
     const wire = rule + '\n' + td.wire;
     const tsOk = densDecode(wire) === c.text;
