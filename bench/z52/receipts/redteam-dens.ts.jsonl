@@ -1,0 +1,87 @@
+{"case":"empty","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 0)"}
+{"case":"empty","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"empty","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"one-line","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 3)"}
+{"case":"one-line","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"one-line","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"two-lines-share-head","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 5)"}
+{"case":"two-lines-share-head","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"two-lines-share-head","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"three-dotted","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 17)"}
+{"case":"three-dotted","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"three-dotted","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"trailing-newline","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 9)"}
+{"case":"trailing-newline","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"trailing-newline","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"leading-newlines","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 9)"}
+{"case":"leading-newlines","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"leading-newlines","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"interior-empty","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 8)"}
+{"case":"interior-empty","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"interior-empty","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"only-empty-lines","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 1)"}
+{"case":"only-empty-lines","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"only-empty-lines","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"bang-lines","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 9)"}
+{"case":"bang-lines","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"bang-lines","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"bang-inside-group","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 9)"}
+{"case":"bang-inside-group","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"bang-inside-group","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"braces-in-line","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 9)"}
+{"case":"braces-in-line","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"braces-in-line","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"comma-values","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 21)"}
+{"case":"comma-values","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"comma-values","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"stray-close","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 8)"}
+{"case":"stray-close","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"stray-close","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"stray-comma-top","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 8)"}
+{"case":"stray-comma-top","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"stray-comma-top","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"empty-items","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 7)"}
+{"case":"empty-items","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"empty-items","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"separator-only","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 4)"}
+{"case":"separator-only","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"separator-only","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"dup-lines","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 8)"}
+{"case":"dup-lines","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"dup-lines","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"unicode","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 19)"}
+{"case":"unicode","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"unicode","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"nul-char","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 12)"}
+{"case":"nul-char","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"nul-char","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"crlf","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 9)"}
+{"case":"crlf","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"crlf","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"tabs-spaces","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 12)"}
+{"case":"tabs-spaces","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"tabs-spaces","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"bash-specials","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 18)"}
+{"case":"bash-specials","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"bash-specials","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"dispatch-line-as-payload","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"escape: plain wire carries a dispatch line (or the plain arm did not dispatch)"}
+{"case":"dispatch-line-as-payload","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"dispatch-line-as-payload","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"dispatch-vline-as-payload","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"escape: plain wire carries a dispatch line (or the plain arm did not dispatch)"}
+{"case":"dispatch-vline-as-payload","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"dispatch-vline-as-payload","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"escape-line-as-payload","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"escape: plain wire carries a dispatch line (or the plain arm did not dispatch)"}
+{"case":"escape-line-as-payload","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"escape-line-as-payload","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"deep-nesting","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 31)"}
+{"case":"deep-nesting","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"deep-nesting","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"long-line","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 72)"}
+{"case":"long-line","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"long-line","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"single-char-lines","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 5)"}
+{"case":"single-char-lines","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"single-char-lines","arm":"forced:/","expandOk":true,"tsExact":true}
+{"case":"prose-with-commas","arm":"encoder","applied":false,"sep":"","tsExact":true,"notes":"frontier wins: no separator produced a cheaper tree (frontier 15)"}
+{"case":"prose-with-commas","arm":"forced:.","expandOk":true,"tsExact":true}
+{"case":"prose-with-commas","arm":"forced:/","expandOk":true,"tsExact":true}
