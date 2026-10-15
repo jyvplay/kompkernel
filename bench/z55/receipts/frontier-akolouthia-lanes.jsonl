@@ -1,0 +1,6 @@
+{"file":"bench/holdout-tbl/df-h.txt","raw":939,"daedalus":281,"phalanx-a10":414,"dendrons":281,"akolouthia":179,"frontierMin":179}
+{"file":"bench/holdout-tbl/psql-output.txt","raw":1578,"daedalus":397,"phalanx-a10":437,"dendrons":397,"akolouthia":378,"frontierMin":378}
+{"file":"bench/holdout-tbl/kubectl-get-pods.txt","raw":2649,"daedalus":386,"phalanx-a10":547,"dendrons":386,"akolouthia":356,"frontierMin":356}
+{"file":"bench/holdout-mk/chart.svg","raw":3446,"daedalus":465,"phalanx-a10":539,"dendrons":465,"akolouthia":342,"frontierMin":342}
+{"file":"bench/holdout-mk/dump.sql","raw":5159,"daedalus":728,"phalanx-a10":876,"dendrons":728,"akolouthia":713,"frontierMin":713}
+{"file":"bench/holdout-tab/vix-daily-1990.csv","raw":6578,"daedalus":1394,"phalanx-a10":1589,"dendrons":1394,"akolouthia":1381,"frontierMin":1381}
