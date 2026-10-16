@@ -209,7 +209,15 @@ the untouched original.
   (above − above2) = 56`) and discovered a real wire trick: **the row-terminating period is absorbed
   into the following row's prefix rule**, so the period belongs to the previous row's text. After that
   correction the file is md5-identical to the original (`57858922e42ccb7ace68c4bacc2ed88f`).
-- **G3 `bench/holdout-ops/node-stacktraces.txt`, 1848 B — NOT completed.** The wire (319 tokens, plain
+- **G4 `bench/holdout-tbl/df-h.txt`, 939 B, 19 lines — completed, md5-identical
+  (`73f2fb8704bcf104c2514780a61213c9`), an *arithmetic* arm.** The answer needs the 16-rule nested
+  expansion, then the `⁺` rule (`value = the number above + its change from two above`) applied to six
+  positions across fourteen rows, plus a second-order column. Method disclosed because it is weaker than
+  a tool-free read: I expanded the tape by hand but cross-checked my *intermediate* substituted text
+  against the library's intermediate output (`sub.ts` prints the post-expansion text with the markers
+  still in place — it is not the answer); the arithmetic itself was done by hand with no tool, and the
+  zero self-corrections there are the meaningful part of this receipt.
+- **G3 `bench/holdout-ops/node-stacktraces.txt`, 1848 B — NOT completed by hand.** The wire (319 tokens, plain
   grammar arm) has 38 rules over a 371-character tape. My first hand parse of the tape was wrong: I
   read a rule's text as ending *before* an already-defined glyph, when the convention (and the
   implementation) is that the text simply runs to the next **new** glyph and therefore *contains*
