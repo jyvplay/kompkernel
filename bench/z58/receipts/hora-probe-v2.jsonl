@@ -1,0 +1,3 @@
+{"lane":"bench/holdout-ops/openstack-loghub-26.log","arm":"delta","marks":25,"plainM":964,"horaM":987,"identityM":964,"inTokens":4028,"exact":true,"note":"marks=25; delta M=987 vs identity 1008"}
+{"lane":"bench/z45/corpus/gh-issues/ollama_ollama_2453.md","arm":"identity","marks":16,"plainM":6116,"horaM":6116,"identityM":6116,"inTokens":12452,"exact":true,"note":"identity: delta arm 6169 >= identity 6116"}
+{"lane":"bench/z46/corpus/traces/spring-projects_spring-framework_35118.md","arm":"identity","marks":9,"plainM":963,"horaM":963,"identityM":963,"inTokens":1895,"exact":true,"note":"identity: delta arm 982 >= identity 963"}

@@ -1,0 +1,17 @@
+§р,ар andк forо aт policyщ looksкот attachedу.ыу Theн
+е theю itь isи toг documentш sweepд thatз inй workspaceл holdя retentionм withс dispositionі documentsв orderх firstъdocumentц created¶Understanding Retention Policiesз Northgate Vault
+
+Aят determines how long Northgate Vault keepsог beforeю becomesнeligibleк permanent deletionу Everyг inherits exactly oneятаднpolicyь resolved atе momentегьцу Changingот later affects onlyнdocumentsц afterе change;ю never retroactively altersес date ofонъд already existsу This behaviourь deliberateр because retroactive changes wouldнmakeю impossibleи proveи an auditor whatес schedule was at any given pointнinе past.
+
+Policies are evaluatedзо fixedвы systemхщ directlyинtheгу If none existsрющие folderд containsенър thenид folder's parentа so on upией rootу If noть foundнanywhere onд pathрей default appliesый default cannot be removed,
+only changedр which guaranteesд everyг always resolvesи someт.
+
+There are three kinds ofсу Soft deletion movesегио recycle bin whereюнremains visibleи administratorsко further thirty daysу Hard deletion removesегнcontent but keeps an immutable audit stub recordingдог existedр whoцюанwhenю was disposedу Purge removes everythingр includingе audit stubаь only availableнto workspaces operating underо legal regimeд requiresю; most customers should never enableнpurgeр becauseю destroysе evidenceдеят was followed.
+
+A legalл suspends allскеію coversу Holds take precedence overнeveryтр including purgeа they cannot be overridden by an administratorу Onlyо userмнthe Legal Hold Officer role may place or releaseола every placement and releaseьнwrittenие audit logме reason supplied byд userу Whenоль releasedренaffectedі returnи their normal schedule; if theirс date has already passed,
+they become eligible immediately and will be processedзе next nightlyш.
+
+The nightlyш runs at 02:00зей's configured timezoneу It processesізнcreationвр oldestха stops after four hours regardless of how much work remains.
+Anything not processedь picked up byе nextшу Becauseешь time-bounded ratherнthan work-boundedроймо very large backlog may take several nightsи catch upанadministrators sometimes mistake thisко failureыш reportр available under Reports andнAuditр shows exactly how manyі were consideredр how many were disposedа how manyнremainedзе queue whenеш stopped.
+
+Two questions come up repeatedlyз support ticketsыхь whyогм an expiredнdisposition dateь still visibleу Almost alwaysе answerь either an active legalл orонbackloggedшр both of whichеш report will showы secondь whetherоянpolicy can be shortenedу It canр but onlyк futureіае interface deliberatelyнmakes this awkwardзви prevent an administrator from accidentally believingд existingнdocuments have been reshuffled ontoе shorter schedule.

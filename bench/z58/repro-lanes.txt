@@ -1,0 +1,6 @@
+bench/holdout-ops/openstack-loghub-26.log
+bench/holdout-tbl/psql-output.txt
+bench/holdout-tbl/df-h.txt
+bench/holdout-mk/chart.svg
+bench/holdout-lang/de-kb.txt
+bench/holdout-work/llm-answer.md

@@ -1,0 +1,7 @@
+{"file":"bench/holdout-work/kb-article.txt","raw":3385,"dendrons":651,"dendron":651,"daedalus":651,"daedalus-dual":650,"phalanx-a10":656,"akolouthia2":651,"hora":651,"hemera":651,"frontierMin":650}
+{"file":"bench/holdout-work/llm-answer.md","raw":2542,"dendrons":707,"dendron":707,"daedalus":707,"daedalus-dual":706,"phalanx-a10":733,"akolouthia2":707,"hora":707,"hemera":707,"frontierMin":706}
+{"file":"bench/holdout-work/meeting-transcript.txt","raw":1746,"dendrons":420,"dendron":420,"daedalus":420,"daedalus-dual":420,"phalanx-a10":472,"akolouthia2":420,"hora":420,"hemera":420,"frontierMin":420}
+{"file":"bench/holdout/readme.txt","raw":3242,"dendrons":688,"dendron":688,"daedalus":688,"daedalus-dual":688,"phalanx-a10":719,"akolouthia2":688,"hora":688,"hemera":688,"frontierMin":688}
+{"file":"bench/z11/fresh/csv-8.csv","raw":7432,"dendrons":1695,"dendron":1695,"daedalus":1695,"daedalus-dual":1709,"phalanx-a10":1880,"akolouthia2":1695,"hora":1695,"hemera":1695,"frontierMin":1695}
+{"file":"bench/z57/lanes/ops-ls-l-bin.txt","raw":1162,"dendrons":247,"dendron":247,"daedalus":247,"daedalus-dual":248,"phalanx-a10":304,"akolouthia2":247,"hora":247,"hemera":247,"frontierMin":247}
+{"file":"bench/z57/lanes/ops-ls-l-omega.txt","raw":8760,"dendrons":954,"dendron":971,"daedalus":971,"daedalus-dual":965,"phalanx-a10":1168,"akolouthia2":971,"hora":971,"hemera":971,"frontierMin":954}

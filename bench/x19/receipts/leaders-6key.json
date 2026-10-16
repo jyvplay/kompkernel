@@ -1,0 +1,336 @@
+{
+ "bench/holdout-lang/de-kb.txt": [
+  492,
+  "daedalus-dual",
+  {
+   "daedalus-dual": 492,
+   "akolouthia2": 495,
+   "daedalus": 495,
+   "dendron": 495,
+   "dendrons": 495,
+   "phalanx-a10": 505
+  }
+ ],
+ "bench/holdout-mk/chart.svg": [
+  330,
+  "akolouthia2",
+  {
+   "akolouthia2": 330,
+   "daedalus": 465,
+   "daedalus-dual": 465,
+   "dendron": 465,
+   "dendrons": 465,
+   "phalanx-a10": 539
+  }
+ ],
+ "bench/holdout-mk/dump.sql": [
+  703,
+  "akolouthia2",
+  {
+   "akolouthia2": 703,
+   "daedalus-dual": 725,
+   "daedalus": 728,
+   "dendron": 728,
+   "dendrons": 728,
+   "phalanx-a10": 876
+  }
+ ],
+ "bench/holdout-ops/find-listing.txt": [
+  1318,
+  "dendrons",
+  {
+   "dendrons": 1318,
+   "akolouthia2": 1326,
+   "daedalus": 1326,
+   "dendron": 1326,
+   "daedalus-dual": 1342,
+   "phalanx-a10": 1415
+  }
+ ],
+ "bench/holdout-ops/git-numstat.txt": [
+  1904,
+  "dendrons",
+  {
+   "dendrons": 1904,
+   "akolouthia2": 2036,
+   "daedalus": 2036,
+   "daedalus-dual": 2036,
+   "dendron": 2036,
+   "phalanx-a10": 2214
+  }
+ ],
+ "bench/holdout-ops/node-stacktraces.txt": [
+  339,
+  "akolouthia2",
+  {
+   "akolouthia2": 339,
+   "daedalus": 339,
+   "dendron": 339,
+   "dendrons": 339,
+   "daedalus-dual": 342,
+   "phalanx-a10": 410
+  }
+ ],
+ "bench/holdout-ops/openstack-loghub-26.log": [
+  1008,
+  "akolouthia2",
+  {
+   "akolouthia2": 1008,
+   "daedalus": 1008,
+   "dendron": 1008,
+   "dendrons": 1008,
+   "daedalus-dual": 1053,
+   "phalanx-a10": 1247
+  }
+ ],
+ "bench/holdout-tab/aapl-2014.csv": [
+  1490,
+  "akolouthia2",
+  {
+   "akolouthia2": 1490,
+   "daedalus": 1490,
+   "dendron": 1490,
+   "dendrons": 1490,
+   "daedalus-dual": 1588,
+   "phalanx-a10": 1766
+  }
+ ],
+ "bench/holdout-tab/vix-daily-1990.csv": [
+  1369,
+  "akolouthia2",
+  {
+   "akolouthia2": 1369,
+   "daedalus-dual": 1390,
+   "daedalus": 1394,
+   "dendron": 1394,
+   "dendrons": 1394,
+   "phalanx-a10": 1589
+  }
+ ],
+ "bench/holdout-tbl/df-h.txt": [
+  171,
+  "akolouthia2",
+  {
+   "akolouthia2": 171,
+   "daedalus-dual": 279,
+   "daedalus": 281,
+   "dendron": 281,
+   "dendrons": 281,
+   "phalanx-a10": 414
+  }
+ ],
+ "bench/holdout-tbl/kubectl-get-pods.txt": [
+  326,
+  "akolouthia2",
+  {
+   "akolouthia2": 326,
+   "daedalus": 386,
+   "dendron": 386,
+   "dendrons": 386,
+   "daedalus-dual": 390,
+   "phalanx-a10": 547
+  }
+ ],
+ "bench/holdout-tbl/psql-output.txt": [
+  355,
+  "akolouthia2",
+  {
+   "akolouthia2": 355,
+   "daedalus": 397,
+   "daedalus-dual": 397,
+   "dendron": 397,
+   "dendrons": 397,
+   "phalanx-a10": 437
+  }
+ ],
+ "bench/holdout-work/bibliography.txt": [
+  709,
+  "akolouthia2",
+  {
+   "akolouthia2": 709,
+   "daedalus-dual": 709,
+   "daedalus": 711,
+   "dendron": 711,
+   "dendrons": 711,
+   "phalanx-a10": 896
+  }
+ ],
+ "bench/holdout-work/email-thread.txt": [
+  525,
+  "akolouthia2",
+  {
+   "akolouthia2": 525,
+   "daedalus": 525,
+   "dendron": 525,
+   "dendrons": 525,
+   "daedalus-dual": 530,
+   "phalanx-a10": 629
+  }
+ ],
+ "bench/holdout-work/kb-article.txt": [
+  650,
+  "daedalus-dual",
+  {
+   "daedalus-dual": 650,
+   "akolouthia2": 651,
+   "daedalus": 651,
+   "dendron": 651,
+   "dendrons": 651,
+   "phalanx-a10": 656
+  }
+ ],
+ "bench/holdout-work/llm-answer.md": [
+  706,
+  "daedalus-dual",
+  {
+   "daedalus-dual": 706,
+   "akolouthia2": 707,
+   "daedalus": 707,
+   "dendron": 707,
+   "dendrons": 707,
+   "phalanx-a10": 733
+  }
+ ],
+ "bench/holdout-work/meeting-transcript.txt": [
+  420,
+  "akolouthia2",
+  {
+   "akolouthia2": 420,
+   "daedalus": 420,
+   "daedalus-dual": 420,
+   "dendron": 420,
+   "dendrons": 420,
+   "phalanx-a10": 472
+  }
+ ],
+ "bench/holdout/readme.txt": [
+  688,
+  "akolouthia2",
+  {
+   "akolouthia2": 688,
+   "daedalus": 688,
+   "daedalus-dual": 688,
+   "dendron": 688,
+   "dendrons": 688,
+   "phalanx-a10": 719
+  }
+ ],
+ "bench/z11/fresh/csv-8.csv": [
+  1695,
+  "akolouthia2",
+  {
+   "akolouthia2": 1695,
+   "daedalus": 1695,
+   "dendron": 1695,
+   "dendrons": 1695,
+   "daedalus-dual": 1709,
+   "phalanx-a10": 1880
+  }
+ ],
+ "bench/z57/lanes/ops-ls-l-bin.txt": [
+  247,
+  "akolouthia2",
+  {
+   "akolouthia2": 247,
+   "daedalus": 247,
+   "dendron": 247,
+   "dendrons": 247,
+   "daedalus-dual": 248,
+   "phalanx-a10": 304
+  }
+ ],
+ "bench/z57/lanes/ops-ls-l-omega.txt": [
+  954,
+  "dendrons",
+  {
+   "dendrons": 954,
+   "daedalus-dual": 965,
+   "akolouthia2": 971,
+   "daedalus": 971,
+   "dendron": 971,
+   "phalanx-a10": 1168
+  }
+ ],
+ "bench/z48/corpus/sp500-200.csv": [
+  null,
+  null,
+  {
+   "akolouthia2": 4262,
+   "daedalus": 4262,
+   "daedalus-dual": 4352,
+   "dendron": 4262,
+   "dendrons": 4262
+  }
+ ],
+ "bench/holdout-ops/ls-full-iso.txt": [
+  405,
+  "daedalus-dual",
+  {
+   "daedalus-dual": 405,
+   "akolouthia2": 407,
+   "daedalus": 407,
+   "dendron": 407,
+   "dendrons": 407,
+   "phalanx-a10": 521
+  }
+ ],
+ "bench/z20/samples/git-log-iso.txt": [
+  1530,
+  "daedalus-dual",
+  {
+   "daedalus-dual": 1530,
+   "akolouthia2": 1531,
+   "daedalus": 1531,
+   "dendron": 1531,
+   "dendrons": 1531,
+   "phalanx-a10": 1653
+  }
+ ],
+ "bench/z11/fresh/ops-git-log-stat.txt": [
+  null,
+  null,
+  {
+   "akolouthia2": 3463,
+   "daedalus": 3463,
+   "daedalus-dual": 3493,
+   "dendron": 3463,
+   "dendrons": 3458
+  }
+ ],
+ "bench/z46/corpus/traces/spring-projects_spring-framework_35118.md": [
+  963,
+  "akolouthia2",
+  {
+   "akolouthia2": 963,
+   "daedalus": 963,
+   "dendron": 963,
+   "dendrons": 963,
+   "daedalus-dual": 976,
+   "phalanx-a10": 1264
+  }
+ ],
+ "bench/z47/corpus/changelog/svenstaro_miniserve.md": [
+  2989,
+  "akolouthia2",
+  {
+   "akolouthia2": 2989,
+   "daedalus": 3030,
+   "dendron": 3030,
+   "dendrons": 3030,
+   "daedalus-dual": 3052,
+   "phalanx-a10": 3555
+  }
+ ],
+ "bench/holdout-ops/git-log-fuller.txt": [
+  143,
+  "akolouthia2",
+  {
+   "akolouthia2": 143,
+   "daedalus": 143,
+   "daedalus-dual": 143,
+   "dendron": 143,
+   "dendrons": 143,
+   "phalanx-a10": 143
+  }
+ ]
+}

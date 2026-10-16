@@ -108,6 +108,13 @@ import { akolouthiaEncode, akolouthiaDecode } from './akolouthia';
 import { akolouthia2Encode, akolouthia2Decode } from './akolouthia2';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
+import { lakonikosDualEncode } from './lakonikos-d';
+import { stathmosEncode } from './stathmos';
+import { hemeraEncode } from './hemera';
+import { horaEncode, horaDecode } from './hora';
+import { stigmeEncode } from './stigme';
+import { ankyraEncode, ankyraDecode } from './ankyra';
+import { metathesisEncode, metathesisDecode } from './metathesis';
 import { tabminEncode } from './tabmin';
 import { uuidfoldEncode } from './uuidfold';
 import { dirfoldEncode } from './dirfold';
@@ -706,6 +713,34 @@ export function codecEntries(): Entry[] {
     {
       key: 'lakonikos', label: '⟡ LAKONIKOS (DAEDALUS wire, terse decoder contract: same wire and decoder, fewer contract tokens)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = lakonikosEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok (DAEDALUS ${r.messageTokensOld}) vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'lakonikos-d', label: '⟡⟡ LAKONIKOS-D (DAEDALUS-D wire with a terse decoder contract: same wire and decoder as DAEDALUS-D, fewer contract tokens; decode-gated, identity fallback)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = lakonikosDualEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `${r.notes}; one-chat=${r.messageTokens.o200k_base} tok vs identity ${r.inTokens.o200k_base}` }; },
+    },
+    {
+      key: 'stathmos', label: '⚖ STATHMOS (Fixed-width decimal trailing-zero stripping: a column that always carries the same number of decimals drops its trailing zeros and is re-padded by one sentence stating the width; then LAKONIKOS-D; exact, identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = stathmosEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `mode=${r.mode}; dp=${r.dp.join(',') || '-'}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens.o200k_base}` }; },
+    },
+    {
+      key: 'hemera', label: '⛅ HEMERA (Calendar-date entailment: consecutive civil dates and trailing millisecond fields are replaced by one marker and re-derived by the reader from the previous date; then DAEDALUS; exact, identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = hemeraEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; days=${r.days}; ms=${r.ms}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'hora', label: '⌚ HORA (Clock-time entailment: an HH:MM(:SS) timestamp that continues the previous one by a constant step is replaced by one marker and re-derived; then DAEDALUS; exact, identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = horaEncode(t, enc); const dec = horaDecode(r.wire, r.arm); return { output: r.wire, decoded: dec, oneChat: r.messageTokens, note: `arm=${r.arm}; marks=${r.marks}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'stigme', label: '· ΣΤΙΓΜΗ (Digit-cluster punctuation elision: the separator inside a digit cluster is positional, so it is deleted and one sentence names the cluster shape and the separator; then the best of LAKONIKOS-D / DENDRON-S / AKOLOUTHIA-2; exact, identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = stigmeEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `mode=${r.mode}; arm=${r.arm}; ${r.notes}` }; },
+    },
+    {
+      key: 'ankyra', label: '⚓ ΑΓΚΥΡΑ (Class-anchored constant elision: a constant that sits at a computable position — immediately after or before every run of digits, or at the start of every line — is deleted and re-inserted by one sentence naming the anchor class and the constant; sites where it does not occur take a one-token exception marker; then the best of LAKONIKOS-D / DENDRON-S / AKOLOUTHIA-2; exact, identity-guarded)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = ankyraEncode(t, enc); const dec = ankyraDecode(r.wire, r.arm, r.rule, r.armState); return { output: r.wire, decoded: dec, oneChat: r.messageTokens, note: `mode=${r.mode}; arm=${r.arm}; ${r.notes}` }; },
+    },
+    {
+      key: 'metathesis', label: '⇄ ΜΕΤΑΘΕΣΙΣ (Column-major transposition: a rectangular table — same cell count on every line, split on , tab | ; or on column-aligned whitespace — is listed column by column instead of row by row, which turns same-distribution neighbours into repeatable blocks the grammar can fold; one sentence gives the reader the row count, the column count and the join, and is applied AFTER the arm\'s own decode; then the best of LAKONIKOS-D / DENDRON-S / AKOLOUTHIA-2; the transpose is verified a byte-exact bijection and gated on measured one-chat M, so it can never lose)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = metathesisEncode(t, enc); const dec = metathesisDecode(r.wire, r.arm, r.plan, r.armState); return { output: r.wire, decoded: dec, oneChat: r.messageTokens, note: `mode=${r.mode}; arm=${r.arm}; ${r.notes}` }; },
     },
     {
       key: 'kalligraphos', label: '✅ KALLIGRAPHOS (Unicode mathematical-alphabet restoration: styled decorative prose -> ASCII + style opcode; otherwise DAEDALUS unchanged; exact)', family: 'exact', fidelity: 'exact',

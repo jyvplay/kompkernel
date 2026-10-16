@@ -1,0 +1,33 @@
+node_modules/.bin:
+total 8
+drwxr-xr-x  2 user user 4096 2026-09-30 08:00:03.676449622 +0000 .
+drwxr-xr-x 90 user user 4096 2026-09-30 08:00:03.900450754 +0000 ..
+lrwxrwxrwx  1 user user   40 2026-09-30 08:00:03.676449622 +0000 baseline-browser-mapping -> ../baseline-browser-mapping/dist/cli.cjs
+lrwxrwxrwx  1 user user   22 2026-09-30 08:00:03.676449622 +0000 browserslist -> ../browserslist/cli.js
+lrwxrwxrwx  1 user user   22 2026-09-30 08:00:03.676449622 +0000 esbuild -> ../esbuild/bin/esbuild
+lrwxrwxrwx  1 user user   24 2026-09-30 08:00:03.676449622 +0000 jiti -> ../jiti/lib/jiti-cli.mjs
+lrwxrwxrwx  1 user user   18 2026-09-30 08:00:03.676449622 +0000 jsesc -> ../jsesc/bin/jsesc
+lrwxrwxrwx  1 user user   19 2026-09-30 08:00:03.676449622 +0000 json5 -> ../json5/lib/cli.js
+lrwxrwxrwx  1 user user   24 2026-09-30 08:00:03.676449622 +0000 nanoid -> ../nanoid/bin/nanoid.cjs
+lrwxrwxrwx  1 user user   21 2026-09-30 08:00:03.676449622 +0000 next -> ../next/dist/bin/next
+lrwxrwxrwx  1 user user   36 2026-09-30 08:00:03.676449622 +0000 parser -> ../@babel/parser/bin/babel-parser.js
+lrwxrwxrwx  1 user user   25 2026-09-30 08:00:03.676449622 +0000 rollup -> ../rollup/dist/bin/rollup
+lrwxrwxrwx  1 user user   23 2026-09-30 08:00:03.676449622 +0000 semver -> ../semver/bin/semver.js
+lrwxrwxrwx  1 user user   21 2026-09-30 08:00:03.676449622 +0000 tsc -> ../typescript/bin/tsc
+lrwxrwxrwx  1 user user   26 2026-09-30 08:00:03.676449622 +0000 tsserver -> ../typescript/bin/tsserver
+lrwxrwxrwx  1 user user   32 2026-09-30 08:00:03.676449622 +0000 update-browserslist-db -> ../update-browserslist-db/cli.js
+lrwxrwxrwx  1 user user   19 2026-09-30 08:00:03.676449622 +0000 vite -> ../vite/bin/vite.js
+
+node_modules/@types:
+total 20
+drwxr-xr-x 11 user user 4096 2026-09-30 07:59:50.564383395 +0000 .
+drwxr-xr-x 90 user user 4096 2026-09-30 08:00:03.900450754 +0000 ..
+drwxr-xr-x  2 user user  128 2026-09-30 07:59:52.464392992 +0000 babel__core
+drwxr-xr-x  2 user user  128 2026-09-30 07:59:52.276392041 +0000 babel__generator
+drwxr-xr-x  2 user user  128 2026-09-30 07:59:52.164391476 +0000 babel__template
+drwxr-xr-x  2 user user  128 2026-09-30 07:59:52.600393678 +0000 babel__traverse
+drwxr-xr-x  2 user user  128 2026-09-30 07:59:52.440392871 +0000 estree
+drwxr-xr-x 11 user user 4096 2026-09-30 07:59:54.328402406 +0000 node
+drwxr-xr-x  3 user user  128 2026-09-30 07:59:52.464392992 +0000 pg
+drwxr-xr-x  3 user user 4096 2026-09-30 07:59:53.152396466 +0000 react
+drwxr-xr-x  3 user user 4096 2026-09-30 07:59:52.812394749 +0000 react-dom

@@ -1,0 +1,36 @@
+X19 METATHESIS — authoritative one-chat M per lane (o200k_base, OMEGA_DET=1).
+base = min(LAKONIKOS-D, DENDRON-S, AKOLOUTHIA-2) on the untouched text.
+M    = METATHESIS one-chat M (arm contract + wire + the METATHESIS sentence).
+All rows exact: metathesisDecode(wire, arm, plan, armState) === input.
+
+lane                                    base      M   delta   form/table/contract
+vix-daily-1990.csv                      1369    871    -498   perCell 127x5 delim ct26   (perColumn 954, rejected)
+find-listing.txt                        1318   1288     -30   perCell 120x3 fixed ct40
+aapl-2014.csv                           1490   1490       0   perCell 1518, perColumn 1683 -> identity
+csv-8.csv                               1695   1695       0   perCell 1775, perColumn 1757 -> identity
+kubectl-get-pods.txt                     326    326       0   perCell 350 -> identity
+(other 24 lanes)                           -      -       0   no rectangular table detected
+
+TOTAL over 28 lanes: 30,048 -> 29,520 (-528). Exact 28/28. Never worse than its own arm.
+
+Machine: 2 cores, 3 GB. ~30-60 s per lane (3 arms x up to 2 forms x 5 join models, all gated).
+
+Independent-reader check (bench/x19/metathesis_decode.py), given ONLY the printed sentence
+and the arm's decoded text:
+  vix-daily-1990.csv   OK rows=127 cols=5 delim=','
+  find-listing.txt     OK rows=120 cols=3 widths=[34, 6]
+
+Head-to-head against the X19 patch's own transposition codecs (same lanes, OMEGA_DET=1):
+  lane                METATHESIS  PLINTHOS  KIONES  ANASTROPHE  TABMIN
+  vix-daily-1990.csv       871        897      897       930      1384
+  find-listing.txt        1288       1286     1286      1298      1316
+  aapl-2014.csv           1490       1476     1476      1476      1480
+  kubectl-get-pods.txt     326        366      366       362       376
+  sum of these four       3975      4025     4025      4066      4556
+
+Receipt files:
+  metathesis-lanes-A.jsonl, -B.jsonl  perCell-only build, 28 lanes (2 x 14)
+  metathesis-lanes-C.jsonl            two-form build, csv-8 + kubectl
+  ankyra-lanes.jsonl                  ANKYRA over all 28 lanes (28/28 identity)
+  frontier-A.jsonl, frontier-B.jsonl  six registered codecs x 28 lanes
+  holdout-*_*.message.txt(.arm)       the two shipped METATHESIS messages + arm output
