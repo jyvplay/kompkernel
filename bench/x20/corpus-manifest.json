@@ -1,0 +1,258 @@
+[
+ {
+  "path": "node_modules/@img/colour/LICENSE.md",
+  "bytes": 4433,
+  "sha256": "e2eaa4603c14cb26",
+  "lines": 82,
+  "crlf": 0,
+  "wrapped": 46
+ },
+ {
+  "path": "node_modules/@img/sharp-libvips-linuxmusl-x64/README.md",
+  "bytes": 4334,
+  "sha256": "2948195d2a4f5bb3",
+  "lines": 46,
+  "crlf": 0,
+  "wrapped": 32
+ },
+ {
+  "path": "node_modules/@img/sharp-linuxmusl-x64/LICENSE",
+  "bytes": 10273,
+  "sha256": "73ba74dfaa520b49",
+  "lines": 191,
+  "crlf": 0,
+  "wrapped": 119
+ },
+ {
+  "path": "node_modules/@img/sharp-wasm32/README.md",
+  "bytes": 3740,
+  "sha256": "9d7a84ade91e8e50",
+  "lines": 50,
+  "crlf": 0,
+  "wrapped": 29
+ },
+ {
+  "path": "node_modules/@jridgewell/remapping/README.md",
+  "bytes": 7304,
+  "sha256": "48d450ec7cf8c712",
+  "lines": 218,
+  "crlf": 0,
+  "wrapped": 48
+ },
+ {
+  "path": "node_modules/@jridgewell/sourcemap-codec/README.md",
+  "bytes": 10051,
+  "sha256": "50e5282b46bafe5e",
+  "lines": 264,
+  "crlf": 0,
+  "wrapped": 54
+ },
+ {
+  "path": "node_modules/@swc/helpers/LICENSE",
+  "bytes": 10836,
+  "sha256": "d96eba1f1881334d",
+  "lines": 200,
+  "crlf": 0,
+  "wrapped": 139
+ },
+ {
+  "path": "node_modules/@vitejs/plugin-react/README.md",
+  "bytes": 4892,
+  "sha256": "f3f2bcacc687daa5",
+  "lines": 143,
+  "crlf": 0,
+  "wrapped": 22
+ },
+ {
+  "path": "node_modules/clsx/readme.md",
+  "bytes": 4003,
+  "sha256": "6c0057ca6bc7cc39",
+  "lines": 154,
+  "crlf": 0,
+  "wrapped": 18
+ },
+ {
+  "path": "node_modules/csstype/README.md",
+  "bytes": 10887,
+  "sha256": "25ad18f891049305",
+  "lines": 291,
+  "crlf": 0,
+  "wrapped": 46
+ },
+ {
+  "path": "node_modules/detect-libc/README.md",
+  "bytes": 3215,
+  "sha256": "51a97449c4438891",
+  "lines": 163,
+  "crlf": 0,
+  "wrapped": 9
+ },
+ {
+  "path": "node_modules/electron-to-chromium/README.md",
+  "bytes": 6327,
+  "sha256": "feeb1f76eff5ad7d",
+  "lines": 186,
+  "crlf": 0,
+  "wrapped": 36
+ },
+ {
+  "path": "node_modules/fdir/README.md",
+  "bytes": 3851,
+  "sha256": "99ba9a269bf78c24",
+  "lines": 91,
+  "crlf": 0,
+  "wrapped": 28
+ },
+ {
+  "path": "node_modules/gensync/README.md",
+  "bytes": 5350,
+  "sha256": "099a826a3857b43a",
+  "lines": 196,
+  "crlf": 0,
+  "wrapped": 35
+ },
+ {
+  "path": "node_modules/is-number/README.md",
+  "bytes": 6514,
+  "sha256": "8e676a0587ba3508",
+  "lines": 186,
+  "crlf": 0,
+  "wrapped": 17
+ },
+ {
+  "path": "node_modules/js-tokens/CHANGELOG.md",
+  "bytes": 4481,
+  "sha256": "79291b8c48329385",
+  "lines": 151,
+  "crlf": 0,
+  "wrapped": 35
+ },
+ {
+  "path": "node_modules/jsesc/README.md",
+  "bytes": 14215,
+  "sha256": "e0411816f6d5f1fd",
+  "lines": 422,
+  "crlf": 0,
+  "wrapped": 54
+ },
+ {
+  "path": "node_modules/lightningcss-linux-x64-gnu/LICENSE",
+  "bytes": 15648,
+  "sha256": "5eba353fe5076ac3",
+  "lines": 373,
+  "crlf": 0,
+  "wrapped": 179
+ },
+ {
+  "path": "node_modules/lightningcss/LICENSE",
+  "bytes": 15648,
+  "sha256": "5eba353fe5076ac3",
+  "lines": 373,
+  "crlf": 0,
+  "wrapped": 179
+ },
+ {
+  "path": "node_modules/lru-cache/README.md",
+  "bytes": 5987,
+  "sha256": "981a9b1f5cffb2d7",
+  "lines": 166,
+  "crlf": 0,
+  "wrapped": 53
+ },
+ {
+  "path": "node_modules/next/README.md",
+  "bytes": 3212,
+  "sha256": "4d9da0db1d2883ae",
+  "lines": 49,
+  "crlf": 0,
+  "wrapped": 17
+ },
+ {
+  "path": "node_modules/next/dist/bundle-analyzer/_not-found.txt",
+  "bytes": 5559,
+  "sha256": "0ab3e3bfee65106a",
+  "lines": 15,
+  "crlf": 0,
+  "wrapped": 9
+ },
+ {
+  "path": "node_modules/next/dist/bundle-analyzer/index.txt",
+  "bytes": 4488,
+  "sha256": "1b1079eff381a47e",
+  "lines": 17,
+  "crlf": 0,
+  "wrapped": 12
+ },
+ {
+  "path": "node_modules/next/dist/compiled/native-url/LICENSE",
+  "bytes": 11358,
+  "sha256": "cfc7749b96f63bd3",
+  "lines": 202,
+  "crlf": 0,
+  "wrapped": 141
+ },
+ {
+  "path": "node_modules/next/dist/compiled/timers-browserify/LICENSE",
+  "bytes": 2505,
+  "sha256": "d5f14c3258420dfe",
+  "lines": 46,
+  "crlf": 0,
+  "wrapped": 29
+ },
+ {
+  "path": "node_modules/next/dist/compiled/web-vitals/LICENSE",
+  "bytes": 11342,
+  "sha256": "bfdeded4040e05da",
+  "lines": 202,
+  "crlf": 0,
+  "wrapped": 141
+ },
+ {
+  "path": "node_modules/pg-connection-string/README.md",
+  "bytes": 4932,
+  "sha256": "c2cba494f78d950f",
+  "lines": 105,
+  "crlf": 0,
+  "wrapped": 37
+ },
+ {
+  "path": "node_modules/pg-types/README.md",
+  "bytes": 3831,
+  "sha256": "ecda9bca71d3f0ce",
+  "lines": 75,
+  "crlf": 0,
+  "wrapped": 21
+ },
+ {
+  "path": "node_modules/pgpass/README.md",
+  "bytes": 3294,
+  "sha256": "62549909404b5a0d",
+  "lines": 74,
+  "crlf": 0,
+  "wrapped": 13
+ },
+ {
+  "path": "node_modules/sharp/LICENSE",
+  "bytes": 10273,
+  "sha256": "73ba74dfaa520b49",
+  "lines": 191,
+  "crlf": 0,
+  "wrapped": 119
+ },
+ {
+  "path": "node_modules/split2/README.md",
+  "bytes": 3381,
+  "sha256": "7369c93bb01adc34",
+  "lines": 85,
+  "crlf": 0,
+  "wrapped": 27
+ },
+ {
+  "path": "node_modules/tslib/README.md",
+  "bytes": 4033,
+  "sha256": "d2e199aa7eafd807",
+  "lines": 164,
+  "crlf": 164,
+  "wrapped": 20
+ }
+]

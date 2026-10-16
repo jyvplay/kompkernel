@@ -108,6 +108,9 @@ import { akolouthiaEncode, akolouthiaDecode } from './akolouthia';
 import { akolouthia2Encode, akolouthia2Decode } from './akolouthia2';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
+import { lakonikosDualEncode } from './lakonikos-d';
+import { stathmosEncode } from './stathmos';
+import { anadesmosEncode } from './anadesmos';
 import { tabminEncode } from './tabmin';
 import { uuidfoldEncode } from './uuidfold';
 import { dirfoldEncode } from './dirfold';
@@ -706,6 +709,18 @@ export function codecEntries(): Entry[] {
     {
       key: 'lakonikos', label: '⟡ LAKONIKOS (DAEDALUS wire, terse decoder contract: same wire and decoder, fewer contract tokens)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = lakonikosEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok (DAEDALUS ${r.messageTokensOld}) vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'lakonikos-d', label: '⟡ LAKONIKOS-D (the DAEDALUS-D wire with the LAKONIKOS terse contract; composition only, same decoder, identity if the wire does not round trip)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = lakonikosDualEncode(t, enc); return { output: r.wire, decoded: r.exact ? t : r.wire, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `arm=${r.winningArm}; o200k=${r.messageTokens.o200k_base}; cl100k=${r.messageTokens.cl100k_base}; DAEDALUS-D o200k=${r.messageTokensDualOld.o200k_base}` }; },
+    },
+    {
+      key: 'stathmos', label: '⟟ STATHMOS (fixed-decimal CSV columns carried without their trailing zeros; one @dp line gives the scale per column; LAKONIKOS-D wire; identity unless it pays)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = stathmosEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `transformed=${r.transformed}; dp=${r.dp.join(',') || '-'}; LAKONIKOS-D ${r.baseTokens.o200k_base} -> ${r.messageTokens.o200k_base}` }; },
+    },
+    {
+      key: 'anadesmos', label: '⟠ ANADESMOS (the binding is not sent: one discovered prose @nd line restores decimal scale, zero padding, whitespace-table column padding, row numbers, line cuts and CRLF; LAKONIKOS-D wire; every family gated on exactness and on measured one-chat M; identity unless it pays; X20)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = anadesmosEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `families=${r.applied.join('+') || '-'}; LAKONIKOS-D ${r.baseTokens.o200k_base} -> ${r.messageTokens.o200k_base}; ${r.notes}` }; },
     },
     {
       key: 'kalligraphos', label: '✅ KALLIGRAPHOS (Unicode mathematical-alphabet restoration: styled decorative prose -> ASCII + style opcode; otherwise DAEDALUS unchanged; exact)', family: 'exact', fidelity: 'exact',
