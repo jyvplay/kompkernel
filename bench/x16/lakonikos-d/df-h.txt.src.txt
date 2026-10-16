@@ -1,0 +1,19 @@
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p0   100G   40G   50G  30% /mnt/vol0
+/dev/nvme0n1p1   137G   51G   59G  33% /mnt/vol1
+/dev/nvme0n1p2   174G   62G   68G  36% /mnt/vol2
+/dev/nvme0n1p3   211G   73G   77G  39% /mnt/vol3
+/dev/nvme0n1p4   248G   84G   86G  42% /mnt/vol4
+/dev/nvme0n1p5   285G   95G   95G  45% /mnt/vol5
+/dev/nvme0n1p6   322G  106G  104G  48% /mnt/vol6
+/dev/nvme0n1p7   359G  117G  113G  51% /mnt/vol7
+/dev/nvme0n1p8   396G  128G  122G  54% /mnt/vol8
+/dev/nvme0n1p9   433G  139G  131G  57% /mnt/vol9
+/dev/nvme0n1p10  470G  150G  140G  60% /mnt/vol10
+/dev/nvme0n1p11  507G  161G  149G  63% /mnt/vol11
+/dev/nvme0n1p12  544G  172G  158G  66% /mnt/vol12
+/dev/nvme0n1p13  581G  183G  167G  69% /mnt/vol13
+/dev/nvme0n1p14  618G  194G  176G  72% /mnt/vol14
+/dev/nvme0n1p15  655G  205G  185G  75% /mnt/vol15
+/dev/nvme0n1p16  692G  216G  194G  78% /mnt/vol16
+/dev/nvme0n1p17  729G  227G  203G  81% /mnt/vol17

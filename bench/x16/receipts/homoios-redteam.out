@@ -1,0 +1,148 @@
+PASS empty arm=identity subs=0 M=0
+PASS whitespace only arm=identity subs=0 M=2
+PASS single block arm=identity subs=0 M=12
+PASS two identical blocks arm=edits subs=1 M=44
+PASS eight near-duplicate blocks arm=identity subs=0 M=149
+PASS trailing newline arm=edits subs=1 M=44
+PASS leading blank lines arm=edits subs=1 M=44
+PASS many blank lines between blocks arm=edits subs=2 M=44
+PASS CRLF line endings arm=identity subs=0 M=83
+PASS block that looks like a wire block arm=identity subs=0 M=44
+PASS block [2|a=b] arm=identity subs=0 M=47
+PASS input with = and | in text arm=identity subs=0 M=17
+PASS input with ] and [ arm=identity subs=0 M=21
+PASS insert at start of block arm=identity subs=0 M=21
+PASS insert at end of block arm=identity subs=0 M=21
+PASS delete a middle word arm=identity subs=0 M=23
+PASS replace first and last word arm=identity subs=0 M=22
+PASS repeated words, ambiguous anchors arm=identity subs=0 M=30
+PASS unicode blocks arm=identity subs=0 M=28
+PASS long repetitive block arm=identity subs=0 M=1216
+PASS whitespace-only edit arm=identity subs=0 M=28
+PASS blocks that are only numbers arm=identity subs=0 M=7
+PASS tabs and columns arm=identity subs=0 M=29
+PASS code block with blank lines arm=identity subs=0 M=33
+PASS marker-like unicode elsewhere arm=identity subs=0 M=53
+PASS fuzz 0 arm=identity subs=0 M=219
+PASS fuzz 1 arm=identity subs=0 M=241
+PASS fuzz 2 arm=identity subs=0 M=254
+PASS fuzz 3 arm=identity subs=0 M=218
+PASS fuzz 4 arm=identity subs=0 M=189
+PASS fuzz 5 arm=identity subs=0 M=156
+PASS fuzz 6 arm=identity subs=0 M=223
+PASS fuzz 7 arm=identity subs=0 M=145
+PASS fuzz 8 arm=identity subs=0 M=208
+PASS fuzz 9 arm=identity subs=0 M=234
+PASS fuzz 10 arm=identity subs=0 M=199
+PASS fuzz 11 arm=identity subs=0 M=165
+PASS fuzz 12 arm=edits subs=2 M=44
+PASS fuzz 13 arm=identity subs=0 M=192
+PASS fuzz 14 arm=identity subs=0 M=211
+PASS fuzz 15 arm=edits subs=1 M=44
+PASS fuzz 16 arm=identity subs=0 M=209
+PASS fuzz 17 arm=identity subs=0 M=223
+PASS fuzz 18 arm=identity subs=0 M=242
+PASS fuzz 19 arm=identity subs=0 M=185
+PASS fuzz 20 arm=identity subs=0 M=190
+PASS fuzz 21 arm=identity subs=0 M=234
+PASS fuzz 22 arm=identity subs=0 M=187
+PASS fuzz 23 arm=identity subs=0 M=283
+PASS fuzz 24 arm=identity subs=0 M=170
+PASS fuzz 25 arm=identity subs=0 M=184
+PASS fuzz 26 arm=identity subs=0 M=231
+PASS fuzz 27 arm=identity subs=0 M=193
+PASS fuzz 28 arm=identity subs=0 M=212
+PASS fuzz 29 arm=identity subs=0 M=238
+PASS fuzz 30 arm=identity subs=0 M=172
+PASS fuzz 31 arm=identity subs=0 M=208
+PASS fuzz 32 arm=identity subs=0 M=222
+PASS fuzz 33 arm=identity subs=0 M=186
+PASS fuzz 34 arm=identity subs=0 M=241
+PASS fuzz 35 arm=identity subs=0 M=226
+PASS fuzz 36 arm=identity subs=0 M=164
+PASS fuzz 37 arm=identity subs=0 M=209
+PASS fuzz 38 arm=identity subs=0 M=163
+PASS fuzz 39 arm=identity subs=0 M=229
+PASS fuzz 40 arm=identity subs=0 M=174
+PASS fuzz 41 arm=identity subs=0 M=188
+PASS fuzz 42 arm=identity subs=0 M=202
+PASS fuzz 43 arm=identity subs=0 M=172
+PASS fuzz 44 arm=identity subs=0 M=157
+PASS fuzz 45 arm=identity subs=0 M=158
+PASS fuzz 46 arm=identity subs=0 M=172
+PASS fuzz 47 arm=identity subs=0 M=183
+PASS fuzz 48 arm=identity subs=0 M=167
+PASS fuzz 49 arm=identity subs=0 M=212
+PASS fuzz 50 arm=identity subs=0 M=202
+PASS fuzz 51 arm=identity subs=0 M=172
+PASS fuzz 52 arm=identity subs=0 M=157
+PASS fuzz 53 arm=identity subs=0 M=158
+PASS fuzz 54 arm=identity subs=0 M=172
+PASS fuzz 55 arm=identity subs=0 M=183
+PASS fuzz 56 arm=identity subs=0 M=167
+PASS fuzz 57 arm=identity subs=0 M=212
+PASS fuzz 58 arm=identity subs=0 M=202
+PASS fuzz 59 arm=identity subs=0 M=172
+PASS fuzz 60 arm=identity subs=0 M=157
+PASS fuzz 61 arm=identity subs=0 M=158
+PASS fuzz 62 arm=identity subs=0 M=172
+PASS fuzz 63 arm=identity subs=0 M=183
+PASS fuzz 64 arm=identity subs=0 M=167
+PASS fuzz 65 arm=identity subs=0 M=212
+PASS fuzz 66 arm=identity subs=0 M=202
+PASS fuzz 67 arm=identity subs=0 M=172
+PASS fuzz 68 arm=identity subs=0 M=157
+PASS fuzz 69 arm=identity subs=0 M=158
+PASS fuzz 70 arm=identity subs=0 M=172
+PASS fuzz 71 arm=identity subs=0 M=183
+PASS fuzz 72 arm=identity subs=0 M=167
+PASS fuzz 73 arm=identity subs=0 M=212
+PASS fuzz 74 arm=identity subs=0 M=202
+PASS fuzz 75 arm=identity subs=0 M=172
+PASS fuzz 76 arm=identity subs=0 M=157
+PASS fuzz 77 arm=identity subs=0 M=158
+PASS fuzz 78 arm=identity subs=0 M=172
+PASS fuzz 79 arm=identity subs=0 M=183
+PASS fuzz 80 arm=identity subs=0 M=167
+PASS fuzz 81 arm=identity subs=0 M=212
+PASS fuzz 82 arm=identity subs=0 M=202
+PASS fuzz 83 arm=identity subs=0 M=172
+PASS fuzz 84 arm=identity subs=0 M=157
+PASS fuzz 85 arm=identity subs=0 M=158
+PASS fuzz 86 arm=identity subs=0 M=172
+PASS fuzz 87 arm=identity subs=0 M=183
+PASS fuzz 88 arm=identity subs=0 M=167
+PASS fuzz 89 arm=identity subs=0 M=212
+PASS fuzz 90 arm=identity subs=0 M=202
+PASS fuzz 91 arm=identity subs=0 M=172
+PASS fuzz 92 arm=identity subs=0 M=157
+PASS fuzz 93 arm=identity subs=0 M=158
+PASS fuzz 94 arm=identity subs=0 M=172
+PASS fuzz 95 arm=identity subs=0 M=183
+PASS fuzz 96 arm=identity subs=0 M=167
+PASS fuzz 97 arm=identity subs=0 M=212
+PASS fuzz 98 arm=identity subs=0 M=202
+PASS fuzz 99 arm=identity subs=0 M=172
+PASS fuzz 100 arm=identity subs=0 M=157
+PASS fuzz 101 arm=identity subs=0 M=158
+PASS fuzz 102 arm=identity subs=0 M=172
+PASS fuzz 103 arm=identity subs=0 M=183
+PASS fuzz 104 arm=identity subs=0 M=167
+PASS fuzz 105 arm=identity subs=0 M=212
+PASS fuzz 106 arm=identity subs=0 M=202
+PASS fuzz 107 arm=identity subs=0 M=172
+PASS fuzz 108 arm=identity subs=0 M=157
+PASS fuzz 109 arm=identity subs=0 M=158
+PASS fuzz 110 arm=identity subs=0 M=172
+PASS fuzz 111 arm=identity subs=0 M=183
+PASS fuzz 112 arm=identity subs=0 M=167
+PASS fuzz 113 arm=identity subs=0 M=212
+PASS fuzz 114 arm=identity subs=0 M=202
+PASS fuzz 115 arm=identity subs=0 M=172
+PASS fuzz 116 arm=identity subs=0 M=157
+PASS fuzz 117 arm=identity subs=0 M=158
+PASS fuzz 118 arm=identity subs=0 M=172
+PASS fuzz 119 arm=identity subs=0 M=183
+diff property: exact=1 null=199 BAD=0
+
+RED TEAM: 145 pass, 0 fail (of 145; fuzz docs 120)

@@ -1,0 +1,9 @@
+bench/holdout-lang/de-kb.txt
+bench/holdout/readme.txt
+bench/holdout-work/kb-article.txt
+bench/holdout-work/email-thread.txt
+bench/holdout-work/llm-answer.md
+bench/holdout-work/bibliography.txt
+bench/holdout-work/meeting-transcript.txt
+bench/holdout-tbl/df-h.txt
+bench/holdout-tbl/psql-output.txt

@@ -106,8 +106,12 @@ import { densEncode } from './dendrons';
 import { gnomonEncode } from './gnomon';
 import { akolouthiaEncode, akolouthiaDecode } from './akolouthia';
 import { akolouthia2Encode, akolouthia2Decode } from './akolouthia2';
+import { horaEncode, horaDecode } from './hora';
+import { hemeraEncode, hemeraDecode } from './hemera';
+import { stigmeEncode, stigmeDecode } from './stigme';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
+import { lakonikosDualEncode } from './lakonikos-d';
 import { tabminEncode } from './tabmin';
 import { uuidfoldEncode } from './uuidfold';
 import { dirfoldEncode } from './dirfold';
@@ -290,6 +294,14 @@ export function codecEntries(): Entry[] {
         const r = lumenEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
+    },
+    {
+      key: 'hemera', label: '☀ HEMERA (Calendar-day deltas: a date 1–31 days from the previous date is written as ※dN; a same-date ms timestamp as HORA’s ※N; identity unless it pays)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = hemeraEncode(t, enc); const decoded = hemeraDecode(r.wire, r.arm); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; days=${r.days}; ms=${r.ms}; ${r.notes}` }; },
+    },
+    {
+      key: 'stigme', label: '· ΣΤΙΓΜΗ (Separator elision for tokens whose punctuation the reader recomputes: an ISO date YYYY-MM-DD becomes its 8 digits, THH:MM:SS becomes THHMMSS, and a clock after a date and a space loses its colons; one clause per shape restores them. Every elision is verified by a full restore round trip before it is kept, so a digit run that would be mis-read costs one date, not the whole arm. Wire = the cheapest of LAKONIKOS, LAKONIKOS-D and AKOLOUTHIA-2 on the elided text; identity arm = the cheapest of the three on the original text, so M never exceeds min(LAKONIKOS, LAKONIKOS-D, AKOLOUTHIA-2))', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = stigmeEncode(t, enc); const decoded = stigmeDecode(r.wire, r.clauses, r.sep, r.armTag); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; clauses=${r.clauses.join('+') || '-'} (${r.clauseTokens} tok); dates=${r.dates}; T-times=${r.times}; after=${r.afters}; dropped=${r.dropped}; wire=${r.armTag}; M=${r.messageTokens} vs identity ${r.identityTokens}` }; },
     },
     {
       key: 'chronos',
@@ -704,6 +716,10 @@ export function codecEntries(): Entry[] {
       run: async (t, enc) => { const r = daedalusDualEncode(t, enc); return { output: r.wire, decoded: r.exact ? t : r.wire, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `mode=${r.mode}; arm=${r.winningArm}; o200k=${r.messageTokens.o200k_base}; cl100k=${r.messageTokens.cl100k_base} (raw o200k=${r.inTokens.o200k_base}, cl100k=${r.inTokens.cl100k_base})` }; },
     },
     {
+      key: 'lakonikos-d', label: '⟡ LAKONIKOS-D (DAEDALUS-D wire with the terse decoder contract: same dual-tokenizer wire and decoder as DAEDALUS-D, the rules sentence shortened; identity unless the chironDecode round trip is exact)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = lakonikosDualEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `mode=${r.mode}; arm=${r.winningArm}; o200k=${r.messageTokens.o200k_base} (DAEDALUS-D ${r.messageTokensDualOld.o200k_base}); cl100k=${r.messageTokens.cl100k_base}` }; },
+    },
+    {
       key: 'lakonikos', label: '⟡ LAKONIKOS (DAEDALUS wire, terse decoder contract: same wire and decoder, fewer contract tokens)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = lakonikosEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok (DAEDALUS ${r.messageTokensOld}) vs identity ${r.inTokens}` }; },
     },
@@ -738,6 +754,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'gnomon', label: '∴ ΓΝΩΜΩΝ (GNOMON: fields a public convention fixes from their siblings are not sent. REST link fields (`*_url`) of one JSON object are the object url plus "/"+key stem, or a prefix of an earlier link plus a remainder; npm lockfile `resolved` values are the registry tarball URL of the entry name and version. The reader gets one sentence per rule used, then DAEDALUS; exact, guarded by the plain arm, so never above the frontier)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = gnomonEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `rules=${r.rules.join('+') || 'plain'}; fields rest=${r.fields.rest} npm=${r.fields.npm}; frontierM=${r.frontierM}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'hora', label: '⏱ HORA (Timestamp deltas: a full YYYY-MM-DD HH:MM:SS.mmm that follows a same-date timestamp is written as ※N, N = milliseconds from the previous one; the reader adds N back; identity unless it pays)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = horaEncode(t, enc); const decoded = horaDecode(r.wire, r.arm); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; marks=${r.marks}; ${r.notes}` }; },
     },
     {
       key: 'akolouthia2', label: '⁺ AKOLOUTHIA-2 (Arithmetic-progression elision, two-term eligibility: a number that continues the number at the same position in the line above, by the step between the two lines above, is written as one marker; the reader computes it; identity unless it pays)', family: 'exact', fidelity: 'exact',

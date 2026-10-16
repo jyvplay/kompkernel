@@ -1,0 +1,160 @@
+-rwxr-xr-x 1 root root      68496 2022-09-20 15:27:27.000000000 +0000 [
+-rwxr-xr-x 1 root root      31040 2024-11-21 20:01:54.000000000 +0000 addpart
+lrwxrwxrwx 1 root root         26 2023-01-14 17:24:22.000000000 +0000 addr2line -> x86_64-linux-gnu-addr2line
+lrwxrwxrwx 1 root root         25 2026-05-27 20:36:03.000000000 +0000 animate -> /etc/alternatives/animate
+lrwxrwxrwx 1 root root         29 2026-05-27 20:36:03.000000000 +0000 animate-im6 -> /etc/alternatives/animate-im6
+-rwxr-xr-x 1 root root      14544 2026-05-27 20:36:03.000000000 +0000 animate-im6.q16
+-rwxr-xr-x 1 root root      18752 2023-05-25 14:11:37.000000000 +0000 apt
+-rwxr-xr-x 1 root root      88456 2023-05-25 14:11:37.000000000 +0000 apt-cache
+-rwxr-xr-x 1 root root      22920 2023-05-25 14:11:37.000000000 +0000 apt-cdrom
+-rwxr-xr-x 1 root root      26944 2023-05-25 14:11:37.000000000 +0000 apt-config
+-rwxr-xr-x 1 root root      51592 2023-05-25 14:11:37.000000000 +0000 apt-get
+-rwxr-xr-x 1 root root      27972 2023-05-25 14:11:37.000000000 +0000 apt-key
+-rwxr-xr-x 1 root root      59784 2023-05-25 14:11:37.000000000 +0000 apt-mark
+lrwxrwxrwx 1 root root         19 2023-01-14 17:24:22.000000000 +0000 ar -> x86_64-linux-gnu-ar
+-rwxr-xr-x 1 root root      43888 2022-09-20 15:27:27.000000000 +0000 arch
+lrwxrwxrwx 1 root root         19 2023-01-14 17:24:22.000000000 +0000 as -> x86_64-linux-gnu-as
+lrwxrwxrwx 1 root root         21 2022-06-17 15:35:26.000000000 +0000 awk -> /etc/alternatives/awk
+-rwxr-xr-x 1 root root      60400 2022-09-20 15:27:27.000000000 +0000 b2sum
+-rwxr-xr-x 1 root root      48016 2022-09-20 15:27:27.000000000 +0000 base32
+-rwxr-xr-x 1 root root      48016 2022-09-20 15:27:27.000000000 +0000 base64
+-rwxr-xr-x 1 root root      43856 2022-09-20 15:27:27.000000000 +0000 basename
+-rwxr-xr-x 1 root root      56208 2022-09-20 15:27:27.000000000 +0000 basenc
+-rwxr-xr-x 1 root root    1265648 2026-05-07 20:33:02.000000000 +0000 bash
+-rwxr-xr-x 1 root root       6865 2026-05-07 20:33:02.000000000 +0000 bashbug
+-rwxr-xr-x 3 root root      39224 2022-09-19 02:54:09.000000000 +0000 bunzip2
+-rwxr-xr-x 1 root root      92672 2026-04-27 19:48:55.000000000 +0000 busctl
+-rwxr-xr-x 1 root root    1210176 1970-01-01 00:00:00.000000000 +0000 busybox
+-rwxr-xr-x 3 root root      39224 2022-09-19 02:54:09.000000000 +0000 bzcat
+lrwxrwxrwx 1 root root          6 2022-09-19 02:54:09.000000000 +0000 bzcmp -> bzdiff
+-rwxr-xr-x 1 root root       2225 2022-09-19 02:54:09.000000000 +0000 bzdiff
+lrwxrwxrwx 1 root root          6 2022-09-19 02:54:09.000000000 +0000 bzegrep -> bzgrep
+-rwxr-xr-x 1 root root       4893 2021-11-27 12:25:05.000000000 +0000 bzexe
+lrwxrwxrwx 1 root root          6 2022-09-19 02:54:09.000000000 +0000 bzfgrep -> bzgrep
+-rwxr-xr-x 1 root root       3775 2022-09-19 02:54:09.000000000 +0000 bzgrep
+-rwxr-xr-x 3 root root      39224 2022-09-19 02:54:09.000000000 +0000 bzip2
+-rwxr-xr-x 1 root root      14568 2022-09-19 02:54:09.000000000 +0000 bzip2recover
+lrwxrwxrwx 1 root root          6 2022-09-19 02:54:09.000000000 +0000 bzless -> bzmore
+-rwxr-xr-x 1 root root       1297 2022-09-19 02:54:09.000000000 +0000 bzmore
+lrwxrwxrwx 1 root root         21 2023-01-08 09:05:59.000000000 +0000 c++ -> /etc/alternatives/c++
+lrwxrwxrwx 1 root root         24 2023-01-14 17:24:22.000000000 +0000 c++filt -> x86_64-linux-gnu-c++filt
+lrwxrwxrwx 1 root root         21 2020-11-17 18:53:07.000000000 +0000 c89 -> /etc/alternatives/c89
+-rwxr-xr-x 1 root root        428 2020-11-17 18:53:07.000000000 +0000 c89-gcc
+lrwxrwxrwx 1 root root         21 2020-11-17 18:53:07.000000000 +0000 c99 -> /etc/alternatives/c99
+-rwxr-xr-x 1 root root        454 2020-11-17 18:53:07.000000000 +0000 c99-gcc
+-rwxr-xr-x 1 root root       6925 2026-06-06 19:56:20.000000000 +0000 c_rehash
+lrwxrwxrwx 1 root root          3 2023-05-07 14:33:47.000000000 +0000 captoinfo -> tic
+-rwxr-xr-x 1 root root      44016 2022-09-20 15:27:27.000000000 +0000 cat
+lrwxrwxrwx 1 root root         20 2023-01-08 09:05:59.000000000 +0000 cc -> /etc/alternatives/cc
+-rwxr-sr-x 1 root shadow    80376 2025-12-14 14:00:01.000000000 +0000 chage
+-rwxr-xr-x 1 root root      14584 2025-06-06 17:12:48.000000000 +0000 chattr
+-rwxr-xr-x 1 root root      68720 2022-09-20 15:27:27.000000000 +0000 chcon
+-rwsr-xr-x 1 root root      62672 2025-12-14 14:00:01.000000000 +0000 chfn
+-rwxr-xr-x 1 root root      68656 2022-09-20 15:27:27.000000000 +0000 chgrp
+-rwxr-xr-x 1 root root      64496 2022-09-20 15:27:27.000000000 +0000 chmod
+-rwxr-xr-x 1 root root      55616 2024-11-21 20:01:54.000000000 +0000 choom
+-rwxr-xr-x 1 root root      72752 2022-09-20 15:27:27.000000000 +0000 chown
+-rwxr-xr-x 1 root root     109672 2026-02-17 15:40:15.000000000 +0000 chronyc
+-rwxr-xr-x 1 root root      67904 2024-11-21 20:01:54.000000000 +0000 chrt
+-rwsr-xr-x 1 root root      52880 2025-12-14 14:00:01.000000000 +0000 chsh
+-rwxr-xr-x 1 root root     142384 2022-09-20 15:27:27.000000000 +0000 cksum
+-rwxr-xr-x 1 root root      14584 2023-05-07 14:33:47.000000000 +0000 clear
+-rwxr-xr-x 1 root root      14488 2026-05-07 20:33:02.000000000 +0000 clear_console
+-rwxr-xr-x 1 root root      52176 2023-02-03 19:00:00.000000000 +0000 cmp
+-rwxr-xr-x 1 root root      48048 2022-09-20 15:27:27.000000000 +0000 comm
+lrwxrwxrwx 1 root root         25 2026-05-27 20:36:03.000000000 +0000 compare -> /etc/alternatives/compare
+lrwxrwxrwx 1 root root         29 2026-05-27 20:36:03.000000000 +0000 compare-im6 -> /etc/alternatives/compare-im6
+-rwxr-xr-x 1 root root      14576 2026-05-27 20:36:03.000000000 +0000 compare-im6.q16
+lrwxrwxrwx 1 root root         27 2026-05-27 20:36:03.000000000 +0000 composite -> /etc/alternatives/composite
+lrwxrwxrwx 1 root root         31 2026-05-27 20:36:03.000000000 +0000 composite-im6 -> /etc/alternatives/composite-im6
+-rwxr-xr-x 1 root root      14544 2026-05-27 20:36:03.000000000 +0000 composite-im6.q16
+lrwxrwxrwx 1 root root         25 2026-05-27 20:36:03.000000000 +0000 conjure -> /etc/alternatives/conjure
+lrwxrwxrwx 1 root root         29 2026-05-27 20:36:03.000000000 +0000 conjure-im6 -> /etc/alternatives/conjure-im6
+-rwxr-xr-x 1 root root      14544 2026-05-27 20:36:03.000000000 +0000 conjure-im6.q16
+lrwxrwxrwx 1 root root         25 2026-05-27 20:36:03.000000000 +0000 convert -> /etc/alternatives/convert
+lrwxrwxrwx 1 root root         29 2026-05-27 20:36:03.000000000 +0000 convert-im6 -> /etc/alternatives/convert-im6
+-rwxr-xr-x 1 root root      14544 2026-05-27 20:36:03.000000000 +0000 convert-im6.q16
+-rwxr-xr-x 1 root root      15375 2025-08-29 12:09:36.000000000 +0000 corelist
+-rwxr-xr-x 1 root root     151152 2022-09-20 15:27:27.000000000 +0000 cp
+-rwxr-xr-x 1 root root       8360 2025-08-29 12:09:36.000000000 +0000 cpan
+-rwxr-xr-x 1 root root       8381 2025-08-29 12:09:36.000000000 +0000 cpan5.36-x86_64-linux-gnu
+lrwxrwxrwx 1 root root          6 2023-01-08 09:05:59.000000000 +0000 cpp -> cpp-12
+lrwxrwxrwx 1 root root         23 2025-04-07 11:26:17.000000000 +0000 cpp-12 -> x86_64-linux-gnu-cpp-12
+-rwxr-xr-x 1 root root     122032 2022-09-20 15:27:27.000000000 +0000 csplit
+lrwxrwxrwx 1 root root          6 2023-05-22 13:19:52.000000000 +0000 ctstat -> lnstat
+-rwxr-xr-x 1 root root     280800 2025-07-19 19:04:59.000000000 +0000 curl
+-rwxr-xr-x 1 root root      48112 2022-09-20 15:27:27.000000000 +0000 cut
+-rwxr-xr-x 1 root root     345280 2026-04-11 12:01:23.000000000 +0000 cvtsudoers
+-rwxr-xr-x 1 root root     125640 2023-01-05 13:20:48.000000000 +0000 dash
+-rwxr-xr-x 1 root root     121904 2022-09-20 15:27:27.000000000 +0000 date
+-rwxr-xr-x 1 root root      89240 2022-09-20 15:27:27.000000000 +0000 dd
+-rwxr-xr-x 1 root root      24358 2022-07-13 19:55:56.000000000 +0000 deb-systemd-helper
+-rwxr-xr-x 1 root root       6241 2025-08-20 18:56:49.000000000 +0000 deb-systemd-invoke
+-rwxr-xr-x 1 root root       2859 2023-01-08 21:50:51.000000000 +0000 debconf
+-rwxr-xr-x 1 root root      11541 2023-01-08 21:50:51.000000000 +0000 debconf-apt-progress
+-rwxr-xr-x 1 root root        608 2023-01-08 21:50:51.000000000 +0000 debconf-communicate
+-rwxr-xr-x 1 root root       1719 2023-01-08 21:50:51.000000000 +0000 debconf-copydb
+-rwxr-xr-x 1 root root        647 2023-01-08 21:50:51.000000000 +0000 debconf-escape
+-rwxr-xr-x 1 root root       2995 2023-01-08 21:50:51.000000000 +0000 debconf-set-selections
+-rwxr-xr-x 1 root root       1827 2023-01-08 21:50:51.000000000 +0000 debconf-show
+-rwxr-xr-x 1 root root      31040 2024-11-21 20:01:54.000000000 +0000 delpart
+-rwxr-xr-x 1 root root     102200 2022-09-20 15:27:27.000000000 +0000 df
+-rwxr-xr-x 1 root root     155216 2023-02-03 19:00:00.000000000 +0000 diff
+-rwxr-xr-x 1 root root      68752 2023-02-03 19:00:00.000000000 +0000 diff3
+-rwxr-xr-x 1 root root     151344 2022-09-20 15:27:27.000000000 +0000 dir
+-rwxr-xr-x 1 root root      52144 2022-09-20 15:27:27.000000000 +0000 dircolors
+-rwxr-xr-x 1 root root      39760 2022-09-20 15:27:27.000000000 +0000 dirname
+lrwxrwxrwx 1 root root         25 2026-05-27 20:36:03.000000000 +0000 display -> /etc/alternatives/display
+lrwxrwxrwx 1 root root         29 2026-05-27 20:36:03.000000000 +0000 display-im6 -> /etc/alternatives/display-im6
+-rwxr-xr-x 1 root root      14544 2026-05-27 20:36:03.000000000 +0000 display-im6.q16
+-rwxr-xr-x 1 root root      88656 2024-11-21 20:01:54.000000000 +0000 dmesg
+lrwxrwxrwx 1 root root          8 2022-12-19 13:33:11.000000000 +0000 dnsdomainname -> hostname
+lrwxrwxrwx 1 root root          8 2022-12-19 13:33:11.000000000 +0000 domainname -> hostname
+-rwxr-xr-x 1 root root     318096 2026-03-07 12:15:41.000000000 +0000 dpkg
+-rwxr-xr-x 1 root root      15202 2026-03-07 12:15:41.000000000 +0000 dpkg-architecture
+-rwxr-xr-x 1 root root       8335 2026-03-07 12:15:41.000000000 +0000 dpkg-buildflags
+-rwxr-xr-x 1 root root      33436 2026-03-07 12:15:41.000000000 +0000 dpkg-buildpackage
+-rwxr-xr-x 1 root root       7624 2026-03-07 12:15:41.000000000 +0000 dpkg-checkbuilddeps
+-rwxr-xr-x 1 root root     170512 2026-03-07 12:15:41.000000000 +0000 dpkg-deb
+-rwxr-xr-x 1 root root       2783 2026-03-07 12:15:41.000000000 +0000 dpkg-distaddfile
+-rwxr-xr-x 1 root root     158264 2026-03-07 12:15:41.000000000 +0000 dpkg-divert
+-rwxr-xr-x 1 root root      18921 2026-03-07 12:15:41.000000000 +0000 dpkg-genbuildinfo
+-rwxr-xr-x 1 root root      17809 2026-03-07 12:15:41.000000000 +0000 dpkg-genchanges
+-rwxr-xr-x 1 root root      14538 2026-03-07 12:15:41.000000000 +0000 dpkg-gencontrol
+-rwxr-xr-x 1 root root      10906 2026-03-07 12:15:41.000000000 +0000 dpkg-gensymbols
+-rwxr-xr-x 1 root root      21206 2026-03-07 12:15:41.000000000 +0000 dpkg-maintscript-helper
+-rwxr-xr-x 1 root root       9095 2026-03-07 12:15:41.000000000 +0000 dpkg-mergechangelogs
+-rwxr-xr-x 1 root root       6776 2026-03-07 12:15:41.000000000 +0000 dpkg-name
+-rwxr-xr-x 1 root root       4947 2026-03-07 12:15:41.000000000 +0000 dpkg-parsechangelog
+-rwxr-xr-x 1 root root     162384 2026-03-07 12:15:41.000000000 +0000 dpkg-query
+-rwxr-xr-x 1 root root       4186 2026-03-07 12:15:41.000000000 +0000 dpkg-realpath
+-rwxr-xr-x 1 root root       8669 2026-03-07 12:15:41.000000000 +0000 dpkg-scanpackages
+-rwxr-xr-x 1 root root       9200 2026-03-07 12:15:41.000000000 +0000 dpkg-scansources
+-rwxr-xr-x 1 root root      31914 2026-03-07 12:15:41.000000000 +0000 dpkg-shlibdeps
+-rwxr-xr-x 1 root root      23457 2026-03-07 12:15:41.000000000 +0000 dpkg-source
+-rwxr-xr-x 1 root root     129520 2026-03-07 12:15:41.000000000 +0000 dpkg-split
+-rwxr-xr-x 1 root root      63824 2026-03-07 12:15:41.000000000 +0000 dpkg-statoverride
+-rwxr-xr-x 1 root root      88560 2026-03-07 12:15:41.000000000 +0000 dpkg-trigger
+-rwxr-xr-x 1 root root       3256 2026-03-07 12:15:41.000000000 +0000 dpkg-vendor
+-rwxr-xr-x 1 root root     175440 2022-09-20 15:27:27.000000000 +0000 du
+lrwxrwxrwx 1 root root         20 2023-01-14 17:24:22.000000000 +0000 dwp -> x86_64-linux-gnu-dwp
+-rwxr-xr-x 1 root root      43856 2022-09-20 15:27:27.000000000 +0000 echo
+-rwxr-xr-x 1 root root         41 2023-01-24 14:43:00.000000000 +0000 egrep
+lrwxrwxrwx 1 root root         24 2023-01-14 17:24:22.000000000 +0000 elfedit -> x86_64-linux-gnu-elfedit
+-rwxr-xr-x 1 root root      41947 2025-08-29 12:09:36.000000000 +0000 enc2xs
+-rwxr-xr-x 1 root root       3069 2025-08-29 12:09:36.000000000 +0000 encguess
+-rwxr-xr-x 1 root root      48536 2022-09-20 15:27:27.000000000 +0000 env
+-rwxrwxrwx 1 root root   12771454 1970-01-01 00:00:00.000000000 +0000 envd
+-rwxr-xr-x 1 root root      43952 2022-09-20 15:27:27.000000000 +0000 expand
+-rwxr-sr-x 1 root shadow    31184 2025-12-14 14:00:01.000000000 +0000 expiry
+-rwxr-xr-x 1 root root     117808 2022-09-20 15:27:27.000000000 +0000 expr
+-rwxr-xr-x 1 root root      85200 2022-09-20 15:27:27.000000000 +0000 factor
+-rwxr-xr-x 1 root root      23072 2025-12-14 14:00:01.000000000 +0000 faillog
+-rwxr-xr-x 1 root root      35136 2024-11-21 20:01:54.000000000 +0000 fallocate
+-rwxr-xr-x 1 root root      35664 2022-09-20 15:27:27.000000000 +0000 false
+-rwxr-xr-x 1 root root         41 2023-01-24 14:43:00.000000000 +0000 fgrep
+-rwxr-xr-x 1 root root      98320 2022-11-06 08:15:51.000000000 +0000 filan
+-rwxr-xr-x 1 root root      35184 2024-11-21 20:01:54.000000000 +0000 fincore
+-rwxr-xr-x 1 root root     224848 2023-01-08 18:07:53.000000000 +0000 find
+-rwxr-xr-x 1 root root      85600 2024-11-21 20:01:54.000000000 +0000 findmnt
+-rwxr-xr-x 1 root root      35216 2024-11-21 20:01:54.000000000 +0000 flock

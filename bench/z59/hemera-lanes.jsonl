@@ -1,0 +1,25 @@
+{"file":"bench/holdout-tab/aapl-2014.csv","raw":5488,"arm":"days","days":239,"ms":0,"M":1252,"identityM":1490,"delta":-238,"exact":true,"ms_wall":17643,"notes":"days=239; ms=0; M=1252 vs identity 1490"}
+{"file":"bench/holdout-tab/vix-daily-1990.csv","raw":6578,"arm":"days","days":125,"ms":0,"M":1199,"identityM":1394,"delta":-195,"exact":true,"ms_wall":2966,"notes":"days=125; ms=0; M=1199 vs identity 1394"}
+{"file":"bench/z11/fresh/csv-8.csv","raw":7432,"arm":"identity","days":0,"ms":0,"M":1695,"identityM":1695,"delta":0,"exact":true,"ms_wall":25266,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/z48/corpus/sp500-200.csv","raw":20987,"arm":"identity","days":0,"ms":0,"M":4262,"identityM":4262,"delta":0,"exact":true,"ms_wall":88984,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-ops/ls-full-iso.txt","raw":2549,"arm":"identity","days":0,"ms":0,"M":407,"identityM":407,"delta":0,"exact":true,"ms_wall":6587,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/z20/samples/git-log-iso.txt","raw":5811,"arm":"identity","days":0,"ms":0,"M":1531,"identityM":1531,"delta":0,"exact":true,"ms_wall":12426,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/z11/fresh/ops-git-log-stat.txt","raw":21021,"arm":"identity","days":0,"ms":0,"M":3463,"identityM":3463,"delta":0,"exact":true,"ms_wall":101030,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-ops/find-listing.txt","raw":11789,"arm":"identity","days":0,"ms":0,"M":1326,"identityM":1326,"delta":0,"exact":true,"ms_wall":14495,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-ops/openstack-loghub-26.log","raw":7969,"arm":"ms","days":0,"ms":25,"M":987,"identityM":1008,"delta":-21,"exact":true,"ms_wall":32842,"notes":"days=0; ms=25; M=987 vs identity 1008"}
+{"file":"bench/z46/corpus/traces/spring-projects_spring-framework_35118.md","raw":8513,"arm":"identity","days":0,"ms":0,"M":963,"identityM":963,"delta":0,"exact":true,"ms_wall":43088,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-mk/dump.sql","raw":5159,"arm":"identity","days":0,"ms":0,"M":728,"identityM":728,"delta":0,"exact":true,"ms_wall":25759,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout/readme.txt","raw":3242,"arm":"identity","days":0,"ms":0,"M":688,"identityM":688,"delta":0,"exact":true,"ms_wall":2169,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-lang/de-kb.txt","raw":2432,"arm":"identity","days":0,"ms":0,"M":495,"identityM":495,"delta":0,"exact":true,"ms_wall":957,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-work/llm-answer.md","raw":2542,"arm":"identity","days":0,"ms":0,"M":707,"identityM":707,"delta":0,"exact":true,"ms_wall":1750,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-work/meeting-transcript.txt","raw":1746,"arm":"identity","days":0,"ms":0,"M":420,"identityM":420,"delta":0,"exact":true,"ms_wall":887,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-tbl/psql-output.txt","raw":1578,"arm":"days","days":10,"ms":0,"M":391,"identityM":397,"delta":-6,"exact":true,"ms_wall":2203,"notes":"days=10; ms=0; M=391 vs identity 397"}
+{"file":"bench/holdout-tbl/df-h.txt","raw":939,"arm":"identity","days":0,"ms":0,"M":281,"identityM":281,"delta":0,"exact":true,"ms_wall":1380,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-mk/chart.svg","raw":3446,"arm":"identity","days":0,"ms":0,"M":465,"identityM":465,"delta":0,"exact":true,"ms_wall":718,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-ops/node-stacktraces.txt","raw":1848,"arm":"identity","days":0,"ms":0,"M":339,"identityM":339,"delta":0,"exact":true,"ms_wall":2091,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/z47/corpus/changelog/svenstaro_miniserve.md","raw":21112,"arm":"identity","days":0,"ms":0,"M":3030,"identityM":3030,"delta":0,"exact":true,"ms_wall":107182,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-work/kb-article.txt","raw":3385,"arm":"identity","days":0,"ms":0,"M":651,"identityM":651,"delta":0,"exact":true,"ms_wall":1230,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-work/email-thread.txt","raw":2126,"arm":"identity","days":0,"ms":0,"M":525,"identityM":525,"delta":0,"exact":true,"ms_wall":7183,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-tbl/kubectl-get-pods.txt","raw":2649,"arm":"identity","days":0,"ms":0,"M":386,"identityM":386,"delta":0,"exact":true,"ms_wall":12817,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-ops/git-numstat.txt","raw":12306,"arm":"identity","days":0,"ms":0,"M":2036,"identityM":2036,"delta":0,"exact":true,"ms_wall":25270,"notes":"identity arm (DAEDALUS plain)"}
+{"file":"bench/holdout-ops/git-log-fuller.txt","raw":368,"arm":"identity","days":0,"ms":0,"M":143,"identityM":143,"delta":0,"exact":true,"ms_wall":1330,"notes":"identity arm (DAEDALUS plain)"}

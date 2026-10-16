@@ -1,0 +1,10 @@
+{"file":"dump.sql","rawTok":1795,"ident":703,"M":665,"arm":"elided","clauseTok":12,"dates":26,"exact":true,"ms":12211}
+{"file":"find-listing.txt","rawTok":3997,"ident":1326,"M":1326,"arm":"identity","clauseTok":0,"dates":0,"exact":true,"ms":36885}
+{"file":"vix-daily-1990.csv","rawTok":3412,"ident":1369,"M":1267,"arm":"elided","clauseTok":12,"dates":126,"exact":true,"ms":7826}
+{"file":"df-h.txt","rawTok":570,"ident":171,"M":171,"arm":"identity","clauseTok":0,"dates":0,"exact":true,"ms":1576}
+{"file":"kubectl-get-pods.txt","rawTok":1006,"ident":326,"M":326,"arm":"identity","clauseTok":0,"dates":0,"exact":true,"ms":13405}
+{"file":"psql-output.txt","rawTok":675,"ident":355,"M":318,"arm":"elided","clauseTok":12,"dates":24,"exact":true,"ms":1854}
+{"file":"svenstaro_miniserve.md","rawTok":7209,"ident":2989,"M":2947,"arm":"elided","clauseTok":12,"dates":44,"exact":true,"ms":100292}
+{"file":"git-log-iso.txt","rawTok":1947,"ident":1531,"M":1498,"arm":"elided","clauseTok":12,"dates":28,"exact":true,"ms":10635}
+{"file":"ls-full-iso.txt","rawTok":1175,"ident":407,"M":407,"arm":"identity","clauseTok":0,"dates":0,"exact":true,"ms":17229}
+{"file":"openstack-loghub-26.log","rawTok":4028,"ident":1008,"M":1008,"arm":"identity","clauseTok":0,"dates":0,"exact":true,"ms":17289}

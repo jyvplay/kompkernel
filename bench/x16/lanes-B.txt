@@ -1,0 +1,14 @@
+bench/holdout-work/kb-article.txt
+bench/holdout-work/llm-answer.md
+bench/holdout-work/meeting-transcript.txt
+bench/holdout/readme.txt
+bench/z11/fresh/csv-8.csv
+bench/z57/lanes/ops-ls-l-bin.txt
+bench/z57/lanes/ops-ls-l-omega.txt
+bench/z48/corpus/sp500-200.csv
+bench/holdout-ops/ls-full-iso.txt
+bench/z20/samples/git-log-iso.txt
+bench/z11/fresh/ops-git-log-stat.txt
+bench/z46/corpus/traces/spring-projects_spring-framework_35118.md
+bench/z47/corpus/changelog/svenstaro_miniserve.md
+bench/holdout-ops/git-log-fuller.txt
