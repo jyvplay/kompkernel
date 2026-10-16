@@ -1,0 +1,16 @@
+[00:02:05] Dana Whitfield: Okay, let us start with the reconciliation item because that is the one with a deadline.
+[00:05:22] Marcus Oyelaran: Right. The variance is eighteen thousand four hundred and forty two dollars and seventeen cents.
+[00:08:39] Priya Raghunathan: And that number has been stable across three pulls now, so it is not a timing issue.
+[00:11:56] Tom Beckett: Audit wants this closed by the thirtieth, so we have about a week.
+[00:14:13] Dana Whitfield: My theory is still that we booked the Halstead refund twice.
+[00:17:30] Marcus Oyelaran: I do not think so. The vendor references are different, which points to two separate credits.
+[00:20:47] Priya Raghunathan: There is also the cost center timing. Four one eight zero only opened on the twenty fifth.
+[00:23:04] Tom Beckett: That is a good point. An entry before that date would have failed validation outright.
+[00:26:21] Dana Whitfield: So we need the remittance advice for the twenty ninth before we can decide anything.
+[00:29:38] Marcus Oyelaran: Halstead said two business days. That puts us at Wednesday, which is tight but workable.
+[00:32:55] Priya Raghunathan: If it does not arrive by Wednesday afternoon, what is the fallback?
+[00:35:12] Tom Beckett: We disclose it as a known item and resolve it in Q4. Not ideal but not fatal.
+[00:38:29] Dana Whitfield: Let us set a hard checkpoint for Wednesday at four. I will send the invite.
+[00:41:46] Marcus Oyelaran: Works for me. I will also pull the full vendor ledger for Halstead going back to January.
+[00:44:03] Priya Raghunathan: Please include the credit memos. Those are what the auditors will ask for first.
+[00:47:20] Tom Beckett: Noted. Anything else on this item before we move to the headcount plan?

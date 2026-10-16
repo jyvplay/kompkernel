@@ -1,0 +1,4 @@
+§О userа
+lrwxrwxrwx 1ОО и Oct 15 06:33у -> ../ә/binшә/ч -> ../typescriptшtsТcliР.jsн/ТРүersдlistщ-browsүд-dbрjsт22ф24м19ц21ңnextъserverө/distкescжverбbuildгupо.cеrollёsemлappingз40в browsers¶total 0ази baseline-browser-mлуbaseline-browser-mлө/Торативдуbrowsүднати esбуesбә/esбафи jitiуjiti/lib/jiti-cli.mра18и jsкуркә/jsками json5уjson5/libнафи nanoidуnanoidә/nanoidораци nextуңөшңа36и parserу@babel/parserә/babel-parserРа25и rollгуегөшега23и semжуёжшёжРаци tscчcа26и tsъчъа32и updateщуupdateщнами viteуviteә/viteР
+
+New Cyrillic letter = rule to next new Cyrillic letter or ¶; after ¶ expand recursively; print the expansion.

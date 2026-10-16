@@ -106,8 +106,13 @@ import { densEncode } from './dendrons';
 import { gnomonEncode } from './gnomon';
 import { akolouthiaEncode, akolouthiaDecode } from './akolouthia';
 import { akolouthia2Encode, akolouthia2Decode } from './akolouthia2';
+import { horaEncode, horaDecode } from './hora';
+import { hemeraEncode, hemeraDecode } from './hemera';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
+import { lakonikosDualEncode } from './lakonikos-d';
+import { sigeEncode } from './sige';
+import { henosisEncode } from './henosis';
 import { tabminEncode } from './tabmin';
 import { uuidfoldEncode } from './uuidfold';
 import { dirfoldEncode } from './dirfold';
@@ -290,6 +295,10 @@ export function codecEntries(): Entry[] {
         const r = lumenEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, note: r.notes };
       },
+    },
+    {
+      key: 'hemera', label: '☀ HEMERA (Calendar-day deltas: a date 1–31 days from the previous date is written as ※dN; a same-date ms timestamp as HORA’s ※N; identity unless it pays)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = hemeraEncode(t, enc); const decoded = hemeraDecode(r.wire, r.arm); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; days=${r.days}; ms=${r.ms}; ${r.notes}` }; },
     },
     {
       key: 'chronos',
@@ -704,6 +713,18 @@ export function codecEntries(): Entry[] {
       run: async (t, enc) => { const r = daedalusDualEncode(t, enc); return { output: r.wire, decoded: r.exact ? t : r.wire, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `mode=${r.mode}; arm=${r.winningArm}; o200k=${r.messageTokens.o200k_base}; cl100k=${r.messageTokens.cl100k_base} (raw o200k=${r.inTokens.o200k_base}, cl100k=${r.inTokens.cl100k_base})` }; },
     },
     {
+      key: 'henosis', label: '⟕ HENOSIS (the frontier as one codec: DAEDALUS-D, DENDRON-S, AKOLOUTHIA-2, HEMERA and HORA are all run, each arm exactness-gated by its own reader, and the message of the cheapest arm is the ship; every arm\'s rule sentence is reduced by SIGE, and no selector is needed because only one contract is present)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = henosisEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `arm=${r.arm} M=${r.messageTokens} (arm alone ${r.armTokens}); arms=${r.arms.map(a => `${a.arm}:${a.messageTokens}${a.exact && a.applied ? '' : '!'}`).join(',')}; ${r.notes}` }; },
+    },
+    {
+      key: 'sige', label: '⟡ SIGE (DAEDALUS-D wire with the reduced decoder contract: every clause re-worded to its shortest tested form and chosen by counting the live tokenizer; the wire is untouched, so the DAEDALUS-D reader reads it unchanged; identity unless the chironDecode round trip is exact)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = sigeEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat ${r.messageTokensByEnc.o200k_base} o200k / ${r.messageTokensByEnc.cl100k_base} cl100k` }; },
+    },
+    {
+      key: 'lakonikos-d', label: '⟡ LAKONIKOS-D (DAEDALUS-D wire with the terse decoder contract: same dual-tokenizer wire and decoder as DAEDALUS-D, the rules sentence shortened; identity unless the chironDecode round trip is exact)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = lakonikosDualEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `mode=${r.mode}; arm=${r.winningArm}; o200k=${r.messageTokens.o200k_base} (DAEDALUS-D ${r.messageTokensDualOld.o200k_base}); cl100k=${r.messageTokens.cl100k_base}` }; },
+    },
+    {
       key: 'lakonikos', label: '⟡ LAKONIKOS (DAEDALUS wire, terse decoder contract: same wire and decoder, fewer contract tokens)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = lakonikosEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok (DAEDALUS ${r.messageTokensOld}) vs identity ${r.inTokens}` }; },
     },
@@ -742,6 +763,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'akolouthia2', label: '⁺ AKOLOUTHIA-2 (Arithmetic-progression elision, two-term eligibility: a number that continues the number at the same position in the line above, by the step between the two lines above, is written as one marker; the reader computes it; identity unless it pays)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = akolouthia2Encode(t, enc); const decoded = akolouthia2Decode(r.wire, r.arm); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; marks=${r.marks}; ${r.notes}` }; },
+    },
+    {
+      key: 'hora', label: '⏱ HORA (Timestamp deltas: a full YYYY-MM-DD HH:MM:SS.mmm that follows a same-date timestamp is written as ※N, N = milliseconds from the previous one; the reader adds N back; identity unless it pays)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = horaEncode(t, enc); const decoded = horaDecode(r.wire, r.arm); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; marks=${r.marks}; ${r.notes}` }; },
     },
     {
       key: 'akolouthia', label: '⁺ AKOLOUTHIA (Arithmetic-progression elision: a number that continues the number at the same position in the line above, by the same step as the line two above, is written as one marker; the reader computes it)', family: 'exact', fidelity: 'exact',

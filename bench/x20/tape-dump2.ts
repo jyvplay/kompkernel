@@ -1,0 +1,15 @@
+import fs from 'node:fs';
+import { chironParseTape, chironDecode } from '@/lib/omega/chiron';
+import { CHIRON_SCRIPTS } from '@/lib/omega/chiron';
+const s = fs.readFileSync(process.argv[2], 'utf8');
+const i = s.indexOf('¶');
+const wire = s.slice(s.indexOf('§'), i) + '¶' + (s.slice(i + 1).split('\n\n')[0]);
+const tape = wire.slice(1, wire.indexOf('¶'));
+const body = wire.slice(wire.indexOf('¶') + 1);
+const script = CHIRON_SCRIPTS.find(x => x.name === 'cyrillic')!;
+const rules = chironParseTape(tape, script);
+console.log('rules:', rules?.length);
+rules?.forEach((r, k) => console.log(String(k).padStart(3), JSON.stringify(r.glyph), JSON.stringify(r.raw.slice(0, 90))));
+console.log('body len', body.length);
+console.log('decoded len', chironDecode(wire).length, 'identity?', chironDecode(wire) === wire);
+console.log('first 200 of decode:', JSON.stringify(chironDecode(wire).slice(0, 200)));

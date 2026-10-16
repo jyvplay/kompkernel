@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import { chironDecode } from '@/lib/omega/chiron';
+import { henosisDecode } from '@/lib/omega/henosis';
+const msg = fs.readFileSync('bench/x20/llm/ls-bin.msg.txt','utf8');
+const wire = msg.slice(0, msg.indexOf('\n\nNew Cyrillic'));
+const orig = fs.readFileSync('bench/z57/lanes/ops-ls-l-bin.txt','utf8');
+const m = henosisDecode(wire,'daedalus');
+console.log('machine==orig:', m===orig, 'len', m.length, orig.length);
+console.log('chiron==orig:', chironDecode(wire)===orig);
+fs.writeFileSync('/tmp/machine-decoded.txt', m);

@@ -1,0 +1,12 @@
+done bench/holdout-lang/de-kb.txt 7s
+done bench/holdout/readme.txt 12s
+done bench/holdout-work/llm-answer.md 11s
+done bench/holdout-work/bibliography.txt 23s
+done bench/holdout-tbl/psql-output.txt 6s
+done bench/holdout-tbl/df-h.txt 11s
+done bench/holdout-tbl/kubectl-get-pods.txt 82s
+done bench/holdout-mk/chart.svg 7s
+done bench/holdout-ops/find-listing.txt 98s
+done bench/holdout-ops/git-numstat.txt 134s
+done bench/holdout-tab/vix-daily-1990.csv 10s
+done bench/holdout-tab/aapl-2014.csv 59s

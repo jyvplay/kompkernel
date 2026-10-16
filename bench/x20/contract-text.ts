@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import { sigeEncode } from '@/lib/omega/sige';
+import { henosisEncode } from '@/lib/omega/henosis';
+const enc = 'o200k_base' as const;
+const t = fs.readFileSync(process.argv[2] ?? 'bench/holdout-lang/de-kb.txt', 'utf8');
+const s = sigeEncode(t, enc);
+const p = s.decoderPrompt;
+const i = p.indexOf('¶', 8);
+console.log('contract text:', JSON.stringify(p.slice(Math.max(0, p.lastIndexOf('\n', p.length - 1))).trim() || p.slice(-260)));
+console.log('---sige M', s.messageTokens, 'contractTokens', s.contractTokens, 'old', s.contractTokensOld);
+const h = henosisEncode(t, enc);
+console.log('henosis arm', h.arm, 'M', h.messageTokens);
+const hp = h.decoderPrompt;
+console.log('henosis contract tail:', JSON.stringify(hp.slice(-260)));

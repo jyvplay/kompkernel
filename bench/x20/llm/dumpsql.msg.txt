@@ -1,0 +1,13 @@
+⁺ = the number above it, plus its change from the line above that.
+§і, policy_id, created_at,ъ content_hash) VALUES (міъв','hex'));
+еINSERT INTO documents (рworkspace_id, folder_idоверс⁺и:00+00', decode('000000О:сия, ⁺, а, '2026-ыя⁺ау000000Н-с Зade68b100000000075bcdМ(id),
+ У timestamptzжeb79a2фd6f345Помсылверіъсяэл1ак, ёл2атом101А_id     bigint REFERENCESч0423a35д00b09bном100¶-- Northgate Vault schema dump
+CREATE TABLE documents (
+  id            bigserial PRIMARY KEY,
+  workspace_id  bigint NOT NULL REFERENCES workspacesМ folderА foldersМ policyА retention_policiesМ created_at   У NOT NULL DEFAULT now(),
+  disposed_at  У,
+  content_hash  bytea NOT NULL
+);
+
+ерм100к2000к1а01-01 00:00иуууу00тк2001к2а02-02 01:07и003З15П03-03 02:14и0075bcd162000ужaП04-04 03:21ид3a130у01613673fП05-05 04О00жc400у1ф4э06-06 05О0126580b750у024cb0169ё07-07 06О016136742600у2c26ce7eны08-08 07О019c14dcd700у33829b93ты09-09 08О01ф880у03ade68a8П01-10 09:03и0211d1ae390учbdэ02-11 00:10и024cb016eaу00499602dсё03Н01:17и02878e7f9bу0050f1cfe7П04Н02О02c26ce84cу00584d9cfcП05Н03О02fd4b50fdу005fa96a11ны06Н04О033829b9aeу0067053726тя1а07Н05О037308225fу006e61043bё08Н06О03З150П09Н07О03e8c4f3c100у7d189e65П01Н08:06ичc720у084746b7aП02Н09:13и045e81c523у008bd0388fэ03Н00:20и0499602dd400у932c05a4ня2а04Н01О04d43e968500у9a87d2b9ты05Н02О050f1cff360у0a1e39fceП06Н03О0549fb67e700уa93f6ce3П07Н04О0584d9d098уд39f8э08Н05О05bfb839490у0b7f7070dв
+New Cyrillic letter = rule to next new Cyrillic letter or ¶; after ¶ expand recursively; print the expansion.

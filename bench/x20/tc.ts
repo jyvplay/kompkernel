@@ -1,0 +1,18 @@
+import { encodeIds } from '@/lib/omega/bpe';
+const cands: [string,string][] = [];
+const C = (n: string, s: string) => cands.push([n, s]);
+C('C1 DD long','Every new Arabic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result.');
+C('C2 LKD','New Arabic letter = rule to next new Arabic letter or ¶; after ¶ expand; print the expansion.');
+C('C3 X19 SIGE','New Arabic letter = rule to next new Arabic letter or ¶; after ¶ expand recursively; print the expansion.');
+C('F','New Arabic letter = rule to next new Arabic letter or ¶; expand after ¶; print the expansion.');
+C('H','New Arabic letters are rules running to the next new one or ¶; expand the text after ¶.');
+C('I','New Arabic letter = a rule up to the next new one or ¶; expand after ¶.');
+C('J','Letter rules: a new Arabic letter = text to the next new one or ¶; expand after ¶; print that.');
+C('K','Each new Arabic letter = rule to next new letter or ¶; after ¶ expand; print expansion.');
+C('L','New Arabic letter = rule to next new one or ¶; expand after ¶.');
+C('M','New Arabic letter defines a rule to the next new one or ¶; expand after ¶.');
+C('N','New Arabic letter = rule to next new Arabic letter or ¶; after ¶ expand.');
+C('O','Arabic: new letter = rule to next new letter or ¶; expand after ¶.');
+C('P','New Arabic letter = rule to next new letter or ¶; expand after ¶.');
+C('Q','New Arabic letter = rule to next new Arabic letter or ¶; expand after ¶.');
+for (const [n,s] of cands) console.log(String(encodeIds(s,'o200k_base').length).padStart(3), n, '|', s);

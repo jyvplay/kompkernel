@@ -1,0 +1,18 @@
+§Ҡ (рnodeн:инinternalври/modules/cjs/loaderньҠву
+к    atКук runScriptInо22ғ.л3ӷNode.js vоғоғлуг [шevalе]:м1АкгшемнПhome/user/kompkernel/[шыҠридContextх/process/executionню)
+    atщ nodeт
+
+СКдых444н60ю evalFunctionых279н30ю evalTypeScriptҠрих291нлющи/main/eval_stringн74нлтӷә6я12үКThisды/vmн209н10ющих446няМАәүукгш]-wrapperнән24і ц19ҮErrorа143ч requireс ^э Cannotө Function¶валуі throw err;
+істҮнэ find module './nope.js'
+Require stack:
+- /П]
+кө._resolveFilenameьа0н15ю defaultResolveImplь1040нцю resolveForCJSWithHooksь1045ноюө._loadь121ән25ю wrapModuleLoadь254нцю Module.requireь1527няючы/modules/helpersн147н16)
+Амү {
+і codeн 'MODULE_NOT_FOUND',
+ічStackнг '/П]' ]
+}
+
+ӷ<anonymous_script>:му{badустSyntaxҮн Expected property name or '}' in JSON at positionімҠlineім columnі2ю JSON.parse (<anonymous>)
+МС[шемуnull.xу    стTypeҮнэ read properties of nullҠreading 'x')
+МС
+New Cyrillic letter = rule to next new letter or ¶; expand after ¶ and print.

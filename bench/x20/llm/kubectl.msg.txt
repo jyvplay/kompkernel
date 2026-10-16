@@ -1,0 +1,5 @@
+⁺ = the number above it, plus its change from the line above that.
+§ъ
+api-server-7d9f8bа.internalъд⁺ы node-д.clusterхы.internalър          ⁺dдhА 10.244.тр Ав.детдв   н.internalъд-яр   Адв    у            1/1    пу Running     эп⁺с node-0.clusterм node-1.clusterзеыншу Pending     иш⁺ляхәп0оп1кеснb¶NAME                                 READY   STATUS      RESTARTS   AGE     IP              NODEъ00-a0000ә          2d0h   А0.0     са01-b0003о          3d1h   А1.11    ма02-c0006ил03-d0009эл04-e0012әл05-a0015ш1яса06-b0018эяма07-c0021эл08-d0024ш0р  А0в    х09-e0027ор  А1в    х10-a0030эеса11-b0033иемнc0036әзd0039озe0042изa0045эк0048әт0в   мнc0051ш1т1в   ынd0054эзe0057эзa0060ш0к0063оем.internal
+
+New Cyrillic letter = rule to next new Cyrillic letter or ¶; after ¶ expand recursively; print the expansion.

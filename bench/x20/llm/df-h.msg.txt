@@ -1,0 +1,7 @@
+⁺ = the number above it, plus its change from the line above that.
+§ө ⁺Gгө агги  ө  өр% /mnt/volт⁺ш ⁺рт
+йш/devн  гоG   с/nvme0n1pдагшуд/devст ейственаекстине¶Filesystem      Size  Used Avail Use% Mounted on
+/devс0   100о40о50G  30р0
+/devс1   137о51о59G  33р1
+/devкинйкинвнавнае уууууууд
+New Cyrillic letter = rule to next new Cyrillic letter or ¶; after ¶ expand recursively; print the expansion.
