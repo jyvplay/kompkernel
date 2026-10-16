@@ -12,9 +12,11 @@ string in `src/lib/omega/registry.ts` and nothing else. Do not cite those as ver
   prompt and no skills file. `countTokens(..., 'o200k_base')` on the exact string that would be sent.
 - Every reported lane is byte-exact: `decode(encode(x)) === x`, checked in TypeScript, and for
   ANADESMOS additionally through a second, independently written CPython reader
-  (`bench/x20/anadesmos_decode.py`) driven by `bench/x20/xcheck.py`: 62/62 messages exact, where 62 =
-  the 57 shipped messages over both lane sets plus 5 note-layer cases in which the cascade had fired but
-  the `M` gate had refused the arm (so every family is exercised, not only the profitable ones).
+  (`bench/x20/anadesmos_decode.py`, written from the note prose alone) driven by `bench/x20/xcheck.py`:
+  **70/70 messages exact** - 62 over the 57-lane union of both lane sets plus the 5 note-layer cases in
+  which the cascade had fired but the `M` gate refused the arm (so every family is exercised, not only the
+  profitable subset), and 8 through the full layer, where the note sits on top of a real CHIRON rule tape
+  including vix's shipped `crlf+dp` arm.
 - Lane set (26 files, `bench/x20/lanes.txt`): prose/KB/email/meeting/bibliography/readme, ops tables
   (df, kubectl, psql, ls, find listing, git numstat, git log), logs and stack traces, CSV
   (aapl, vix, sp500, csv-8), SVG, SQL, and two changelog markdown files.
@@ -139,18 +141,18 @@ Three shapes appear in this stack and must not be confused.
 - **Greedy or not.** No choice at all: if every data row of a column carries the same decimal scale,
   strip; else refuse. A header or one ragged row vetoes the column, which is why it finds nothing on
   files whose columns are not globally uniform.
-- **Measured (X20).** Best-or-tied on 11 of 22 lanes in `frontier-x20.jsonl`; total 21,838 vs
-  DAEDALUS 21,942 (−104). vix 1380 → 1212. It is subsumed by ANADESMOS's `dp` family, which generalises
+- **Measured (X20).** Best-or-tied on 12 of the 25 scored lanes in `frontier-x20.jsonl`; total 25,989 vs
+  DAEDALUS 26,078 (−89). vix 1380 → 1212. It is subsumed by ANADESMOS's `dp` family, which generalises
   the same mechanism to regions and to CRLF, and beat it by 1 token on the only lane where both fire.
 
 ### LAKONIKOS (`lakonikos`) and LAKONIKOS-D (`lakonikos-d`)
 
 - **Name.** Λακωνικός, "Laconian", i.e. laconic: the same wire and decoder as DAEDALUS with a shorter
   contract. LAKONIKOS-D pairs that contract with the DAEDALUS-D dual-tokenizer glyph pool.
-- **Measured (X20, 22 lanes).** Best-or-tied on 10 lanes; **total 22,006 vs DAEDALUS 21,942, i.e. +64
-  worse in sum**: it wins 1–10 tokens on prose/KB/email/meeting/bibliography/readme lanes (e.g.
-  de-kb 481) and loses on CSV and table lanes (aapl 1587 vs DENS-2 1490) because the D wire pays more
-  than the shorter contract saves there. It is nevertheless the correct base for ANADESMOS: the arm
+- **Measured (X20, 25 scored lanes).** Best-or-tied on 11 lanes; **total 26,157 vs DAEDALUS 26,078, i.e. +79
+  worse in sum**: it wins 1-10 tokens on prose/KB/email/meeting/bibliography/readme/ls lanes (de-kb 481,
+  kb-article 640, meeting 411, ls-full-iso 395) and loses on CSV and table lanes (aapl 1587 vs DENS-2 1490,
+  kubectl 380 vs AKOLOUTHIA-2 326) because the D wire pays more than the terse contract saves there. It is nevertheless the correct base for ANADESMOS: the arm
   gate is per message, so a base that is better on prose and worse on tables is compared on the lane,
   never in the aggregate.
 - **label-only** for LAKONIKOS v1 (non-D): not re-measured in X20.
@@ -163,8 +165,8 @@ Three shapes appear in this stack and must not be confused.
   instead of three.
 - **Greedy or not.** Greedy left to right over every eligible position, then a whole-message gate
   `M(marked) < M(identity)`. No search over which positions to mark.
-- **Measured (X11 + X20).** X20 sum over 22 lanes: 21,543, **−399 vs DAEDALUS — the best total of any
-  single key measured**, best-or-tied on 9 lanes (chart.svg 330, dump.sql 703, df-h 171, kubectl 326,
+- **Measured (X11 + X20).** X20 sum over 25 scored lanes: 25,638, **−440 vs DAEDALUS — the best total of any
+  single key measured**, best-or-tied on 12 lanes (chart.svg 330, dump.sql 703, df-h 171, kubectl 326,
   psql 355). X11: 43/43 lanes exact, 32,839 → 32,426 (−1.26%), CPython reader (`bench/akolouthia_decode.py`)
   32 messages, 0 mismatches, 40 red-team cases 0 failures.
 - **Time/CPU.** 2–3× plain DAEDALUS, dominated by BPE counting in the gates, not by the substitution
@@ -181,8 +183,8 @@ Three shapes appear in this stack and must not be confused.
   a glyph pool where every glyph is one token under both o200k_base and cl100k_base.
 - **Greedy or not.** Aliasing is applied by rule; the *arm choice* is a predicted portfolio, i.e.
   tournament-shaped inside the codec.
-- **Measured (X20, 22 lanes).** DAEDALUS 21,942 (the reference). DAEDALUS-D 22,198, **+256 worse**, and
-  best-or-tied on 0 of 22 lanes. X11 found the same shape (D below DAEDALUS by 1–3 tokens on six prose
+- **Measured (X20, 25 scored lanes).** DAEDALUS 26,078 (the reference). DAEDALUS-D 26,369, **+291 worse**,
+  best-or-tied on 1 of 25 lanes (git-log-fuller, a tie). X11 found the same shape (D below DAEDALUS by 1–3 tokens on six prose
   lanes, above it on email-thread, kubectl, find-listing). **The claim that DAEDALUS-D is a frontier
   leader is false as stated**; it is a tokenizer-robustness variant, and its only measured role is as
   the wire inside LAKONIKOS-D and ANADESMOS.
@@ -195,7 +197,7 @@ Three shapes appear in this stack and must not be confused.
   key; there is no separate DENS codec.
 - **Greedy or not.** Deterministic factoring by shared first segment, gated against identity; the only
   search is the two-way separator choice.
-- **Measured (X20, 22 lanes).** Sum 21,802 (−140 vs DAEDALUS); best-or-tied on 6 lanes; it is the
+- **Measured (X20, 25 scored lanes).** Sum 25,938 (−140 vs DAEDALUS); best-or-tied on 8 lanes; it is the
   outright leader on the two long path-list lanes: find-listing 1318 and git-numstat 1904 (vs AKOLOUTHIA-2
   +132 worse there). Note `dendron` (the `/`-only variant) never beat `dendrons`, consistent with the
   separator choice mattering.
@@ -204,7 +206,7 @@ Three shapes appear in this stack and must not be confused.
 
 - **Name.** γραμμα, "a letter, a small sign": notation-dialect menu, the layout regenerated from the
   reader's formatting priors, each dialect gated byte-exact.
-- **Measured (X20).** Sum 21,942 = DAEDALUS exactly; it is identity on all 22 lanes. Not a source of
+- **Measured (X20).** Sum 26,078 = DAEDALUS exactly; identity on all 25 scored lanes. Not a source of
   gains on this set. Label-only otherwise; the internal dialect search was not re-read.
 
 ### PHALANX-A5 / A6 / A7 / A10 (`phalanx-a5`, `-a6`, `-a7`, `-phalanx-a10`)
@@ -272,39 +274,48 @@ Net loss; not adopted; bench files deliberately not committed.
 - Whole-file `dp` uniformity (STATHMOS's admission test): one header row vetoes a column; region-based
   discovery is the fix.
 
-## Leaders by category (X20: 22 lanes with numbers in `frontier-x20.jsonl`)
+## Leaders by category (X20: `frontier-x20.jsonl`, 26 lanes run, 25 with numbers)
 
-Best `M` per lane among the measured keys, then grouped. "tie" means equal `M`, same arm quality.
+`ops-git-log-stat.txt` (6.6 KB) exceeded the harness's 600 s per-key timeout on every key and is excluded.
+"best-or-tied" counts lanes where the key attains the minimum `M` among the nine measured keys.
 
-| Category | Lanes | Leader (M) | Runner-up / note |
+| category | lanes | leader (`M`) | what that means |
 |---|---|---|---|
-| Prose, KB, email, meeting, readme | de-kb 481, node-stacktraces 332, bibliography 699, email-thread 520, kb-article 640, llm-answer 696, meeting 411, readme 678, ls-full-iso 395, git-log-iso 1520 | **LAKONIKOS-D** (= STATHMOS = ANADESMOS, all identity on these lanes) | DAEDALUS is 1–10 tokens above on each; no measured codec beats LAKONIKOS-D on prose |
-| Ops tables | df-h 171, kubectl 326, psql 355 | **AKOLOUTHIA-2** | LAKONIKOS-D/ANADESMOS 269/380/387 — a 60–100 token gap that no X20 arm closed |
-| Path and URL listings | find-listing 1318, git-numstat 1904 | **DENS-2 (`dendrons`)** | AKOLOUTHIA-2 +132 worse on numstat |
-| Structured numeric | chart.svg 330, dump.sql 703 | **AKOLOUTHIA-2** | |
-| CSV | vix 1211, aapl 1490, csv-8 1695, sp500 4262 | vix: **ANADESMOS** 1211 (STATHMOS 1212); aapl/csv-8/sp500: **DAEDALUS = DENDRON = DENS-2 = GRAMMA** 1490/1695/4262 | LAKONIKOS-D is 97/13/81 tokens worse on those three CSVs: the D glyph pool costs more than the terse contract saves there |
-| Logs | openstack-loghub-26 1008 | **DENS-2/DENDRON/DAEDALUS** tie | LAKONIKOS-D 1052 |
-| Long changelog/trace markdown | spring-framework trace, miniserve changelog | not in the frontier receipt (still running); ANADESMOS = LAKONIKOS-D exactly, identity | |
-| General corpus, 32 README/CHANGELOG/LICENSE files | all 32 | **no codec separates**: ANADESMOS = LAKONIKOS-D on 32/32, all exact | the honest generality statement for X20 is "never worse, occasionally better", not "broadly better" |
+| prose / KB / email / meeting / readme / bibliography / stack traces | de-kb 481, node-stacktraces 332, bibliography 699, email-thread 520, kb-article 640, llm-answer 696, meeting 411, readme 678 | **LAKONIKOS-D** (= STATHMOS = ANADESMOS, identity on these) | the contract-size win survives only on prose; DAEDALUS is 1-10 tokens above on each lane |
+| prose tables from `ls`, `git log` | ls-full-iso 395, git-log-iso 1520, git-log-fuller 143 | LAKONIKOS-D on the first two, **DAEDALUS = DENDRON = DENS-2 = AKOLOUTHIA-2** on git-log-fuller (143) | short inputs: no arm pays for its description |
+| ops tables | df-h 171, kubectl 326, psql 355 | **AKOLOUTHIA-2** | a 60-100 token gap no X20 arm closed; `ral`/`cols` are the mechanism that should attack it and did not pay yet |
+| path & URL listings | find-listing 1318, git-numstat 1904 | **DENS-2** | AKOLOUTHIA-2 is +132 worse on numstat |
+| structured numeric | chart.svg 330, dump.sql 703, miniserve changelog 2989 | **AKOLOUTHIA-2** | miniserve is a 21 KB changelog: progression marks still win, 53 tokens under LAKONIKOS-D |
+| CSV | vix **1211**, aapl 1490, csv-8 1695, sp500 4262, spring trace 963 | vix: **ANADESMOS** (`crlf+dp`; STATHMOS 1212); the rest: **DAEDALUS = DENDRON = DENS-2 = GRAMMA = AKOLOUTHIA-2** | LAKONIKOS-D is 97/13/81/3 tokens *worse* on aapl/csv-8/sp500/spring: the D wire costs more than the terse contract saves on numeric data |
+| logs | openstack-loghub-26 1008 | DENS-2 = DENDRON = DAEDALUS = AKOLOUTHIA-2 | LAKONIKOS-D 1052 |
+| 32-file general corpus (real README/CHANGELOG/LICENSE) | all | no separation: ANADESMOS = LAKONIKOS-D on 32/32 | the generality limit, stated rather than hidden |
+
+Totals over the 25 scored lanes (`M` sum, nine keys): AKOLOUTHIA-2 25,638 (-440 vs DAEDALUS);
+DENS-2 25,938 (-140); STATHMOS 25,989 (-89); **ANADESMOS 25,988 as measured in `nd-lanes.jsonl`**
+(the frontier file's own `anadesmos` column predates the last edits, so it shows LAKONIKOS-D's 26,157);
+DAEDALUS / DENDRON / GRAMMA 26,078; LAKONIKOS-D 26,157 (+79); DAEDALUS-D 26,369 (+291).
+Best-or-tied lanes: STATHMOS 12, AKOLOUTHIA-2 12, LAKONIKOS-D 11, DENS-2 8, DENDRON 6, DAEDALUS 6,
+GRAMMA 6, DAEDALUS-D 1.
 
 ## Frontier restatement (X20)
 
-The X11 claim was: the frontier is DENS-2, AKOLOUTHIA-2, DAEDALUS-D, A10. Re-measured on 22 of the 26
+The X11 claim was: the frontier is DENS-2, AKOLOUTHIA-2, DAEDALUS-D, A10. Re-measured on 25 of the 26
 lanes with `bench/x20/frontier.sh` (nine keys, `M` = one-chat o200k tokens):
 
-- **AKOLOUTHIA-2 is a leader and the best single key in total** (21,543; −399 vs DAEDALUS; 9/22 lanes best-or-tied).
-- **DENS-2 is a leader on path/URL listings** (find-listing, git-numstat) and ties on four CSV/log lanes; total 21,802.
-- **DAEDALUS-D is not a leader**: +256 tokens vs DAEDALUS in total, 0 of 22 lanes won. Its only role is
-  as the wire under LAKONIKOS-D and ANADESMOS.
-- **A10 is not a leader**: worse on every X11 lane it completed and it timed out on a 40 KB input; it was
-  not even run in X20 for that reason.
-- Two names must be **added** to the frontier: **STATHMOS** (11/22 best-or-tied, −104 total, the only key
-  that beat DAEDALUS on CSV) and **ANADESMOS** (never worse than LAKONIKOS-D on any of 58 measured lanes,
-  −169 on vix, and the only key that beats STATHMOS where both fire).
-- Restated: the per-lane frontier on this lane set is `min(AKOLOUTHIA-2, DENS-2, STATHMOS→ANADESMOS,
-  DAEDALUS)`; LAKONIKOS-D is the contract-cost leader on prose but loses on tables and CSV, and neither
-  DAEDALUS-D nor A10 is on the frontier. `frontierMin` in the receipt is a tournament minimum over those
-  keys and is reported as an upper bound, not as a shippable codec.
+- **AKOLOUTHIA-2 holds**, and is the best single key in total: -440 tokens, best-or-tied on 12 of 25 lanes.
+- **DENS-2 holds** on path/URL listings (find-listing 1318, git-numstat 1904) and ties on five CSV/log
+  lanes; total -140. `dendron` (slash-only) never beat `dendrons`: the separator choice is what pays.
+- **DAEDALUS-D does not hold**: +291 tokens vs DAEDALUS in total, best-or-tied on 1 of 25 lanes. It is a
+  tokenizer-robustness variant, and its measured role here is as the wire under LAKONIKOS-D and ANADESMOS.
+- **A10 does not hold**: worse than DAEDALUS on every X11 lane it completed (+10 to +239) and it timed out
+  on a 40 KB lockfile after >30 min, so X20 did not even schedule it.
+- Two names must be **added**: **STATHMOS** (12/25 best-or-tied, -89, the only prior key that beat DAEDALUS
+  on CSV) and **ANADESMOS** (subsumes STATHMOS, -169 on vix to 1211 which is the outright leader there, and
+  never worse than LAKONIKOS-D on any of the 58 lanes measured across both lane sets).
+- Restated: the per-lane frontier on this set is `min(AKOLOUTHIA-2, DENS-2, ANADESMOS, DAEDALUS)`.
+  LAKONIKOS-D leads on prose but loses on tables and CSV, and neither DAEDALUS-D nor A10 belongs on the
+  frontier at all. `frontierMin` in the receipt is a tournament minimum over those keys: an upper bound on
+  what a selector byte plus four contracts could reach, not a shippable codec.
 
 ## AI-native moves a human researcher tends to miss (X20, with the evidence for each)
 

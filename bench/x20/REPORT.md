@@ -32,7 +32,7 @@ deletes the line.
 |---|---|
 | Gate 1, cascade + fuzz (`nd-cascade-test.ts`) | **PASS 27 FAIL 0**; 18 synthetic edge cases (CRLF, empty, one char, no-newline, ragged, tabs, NBSP, 400-char line, sparse arrays, header-only tables), 26 real-lane properties, 400 fuzz cases from 4 generators, 0 exactness failures |
 | Byte-exactness on lanes | 26/26 lanes: `decode(encode(x)) === x`; 32/32 corpus files: same |
-| Second reader, independent implementation | `bench/x20/xcheck.py` + `bench/x20/anadesmos_decode.py` (CPython, written from the note prose only, shares no code with the TS encoder; the CHIRON layer is re-checked with `bench/chiron_decode.py` from X11): **62/62 messages exact** — 57 shipped wires + 5 note-layer cases where the one-chat gate had refused the arm, so every fired family is exercised |
+| Second reader, independent implementation | `bench/x20/xcheck.py` + `bench/x20/anadesmos_decode.py` (CPython, written from the note prose only, shares no code with the TS encoder; the CHIRON layer is re-checked with `bench/chiron_decode.py` from X11): **70/70 messages exact** = 62 (57 shipped wires over both lane sets + 5 note-layer cases whose arm the `M` gate had refused, so every fired family is exercised) + 8 through the full contract+tape+note stack (`receipts/wires-full.json`), which includes vix's shipped `crlf+dp` wire |
 | Model readability, hands-on | one real, previously unseen slice (`vix-daily-1990.csv` lines 21-40) was encoded, and the note was applied by an LLM in one turn with no skills file: **byte-identical** to the original (1,019 chars, 20 lines, 100 numeric fields restored). Caveat: the decoder model is the codec's author and had seen this corpus in-session — it is a readability smoke test, not an independent user study |
 | One false alarm, recorded | a `ral` note typed by hand for the same test (`1 space apart, widths 6,4,4`) did not reproduce the file. That note was wrong-by-construction (the real gap is 2); the encoder-emitted `ral` notes reconstruct exactly in both implementations. Kept here because it is the failure mode the design is meant to catch: a mis-read note does not silently corrupt, it changes bytes |
 
@@ -83,27 +83,28 @@ lanes) and why the whitespace families keep coming up empty.
 
 ## 4. Frontier, restated (item 2 of the brief)
 
-`frontier-x20.jsonl`, 22 lanes with numbers, nine keys, `M` per message. Totals vs DAEDALUS 21,942:
+`frontier-x20.jsonl`: 26 lanes scheduled, 25 scored (`ops-git-log-stat.txt` exceeded the 600 s per-key
+timeout on every key), nine registry keys, `M` per message. Totals vs DAEDALUS 26,078:
 
-    AKOLOUTHIA-2 21,543 (-399)   DENS-2 21,802 (-140)   STATHMOS 21,838 (-104)
-    DAEDALUS 21,942 (0)          DENDRON 21,942 (0)     GRAMMA 21,942 (0)
-    LAKONIKOS-D 22,006 (+64)     ANADESMOS 22,006 (+64 in that file; see §3 for the final-codec numbers)
-    DAEDALUS-D 22,198 (+256)
+    AKOLOUTHIA-2 25,638 (-440)   DENS-2 25,938 (-140)   STATHMOS 25,989 (-89)   ANADESMOS 25,988*
+    DAEDALUS 26,078 (0)          DENDRON 26,078 (0)     GRAMMA 26,078 (0)
+    LAKONIKOS-D 26,157 (+79)     DAEDALUS-D 26,369 (+291)
 
-Best-or-tied lane counts: STATHMOS 11, ANADESMOS 10, LAKONIKOS-D 10, AKOLOUTHIA-2 9, DENS-2 6, DAEDALUS 4.
+\* from `nd-lanes.jsonl` with the shipped codec; the frontier file's own `anadesmos` column predates the
+last edits, so there it reads as LAKONIKOS-D. Best-or-tied lane counts: STATHMOS 12, AKOLOUTHIA-2 12,
+LAKONIKOS-D 11, ANADESMOS 12, DENS-2 8, DAEDALUS/DENDRON/GRAMMA 6, DAEDALUS-D 1.
 
 So the proposed frontier "DENS-2, AKOLOUTHIA-2, DAEDALUS-D, A10" is **partly false**:
 
 * AKOLOUTHIA-2 ✓ holds, and is the best total.
-* DENS-2 ✓ holds on path/URL listings (find-listing 1318, git-numstat 1904) and ties on 4 CSV/log lanes.
-* DAEDALUS-D ✗ — 0 lanes won, +256 in total. It is a tokenizer-robustness variant, not a leader.
-* A10 ✗ — not run in X20: it was +10…+239 on every X11 lane and timed out >30 min on a 40 KB lockfile.
-* Missing from the claim: STATHMOS (and now ANADESMOS, which subsumes it), and the fact that LAKONIKOS-D
-  is *worse in sum* than DAEDALUS while being better on prose — the contract-size win does not survive
-  the CSV/table lanes on its own.
+* DENS-2 ✓ holds on path/URL listings (find-listing 1318, git-numstat 1904) and ties on five CSV/log lanes.
+* DAEDALUS-D ✗ — 1 lane best-or-tied (a tie), +291 in total. It is a tokenizer-robustness variant, not a leader.
+* A10 ✗ — not run in X20: +10...+239 on every X11 lane it completed and >30 min timeout on a 40 KB lockfile.
+* Missing from the claim: STATHMOS, and now ANADESMOS which subsumes it (vix 1211 is the outright minimum on
+  that lane); and the fact that LAKONIKOS-D is *worse in sum* than DAEDALUS while leading every prose lane.
 
 Restated: the per-lane frontier here is `min(AKOLOUTHIA-2, DENS-2, ANADESMOS, DAEDALUS)`, with
-ANADESMOS = LAKONIKOS-D + numeric-format arms, never worse than LAKONIKOS-D on 58 lanes.
+ANADESMOS = LAKONIKOS-D + numeric-format arms and never worse than LAKONIKOS-D on 58 measured lanes.
 
 ## 5. Local leaders by category (22 measured lanes; details in `docs/codecs.md`)
 
