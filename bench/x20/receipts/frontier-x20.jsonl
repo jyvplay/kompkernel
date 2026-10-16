@@ -22,3 +22,5 @@
 {"wall_s":49,"row":{"file":"bench/z20/samples/git-log-iso.txt","raw":5811,"dendrons":1531,"dendron":1531,"daedalus":1531,"daedalus-dual":1530,"akolouthia2":1531,"gramma":1531,"lakonikos-d":1520,"stathmos":1520,"anadesmos":1520,"frontierMin":1520}}
 {"wall_s":600,"row":{"file":"bench/z11/fresh/ops-git-log-stat.txt","status":"TIMEOUT_OR_ERROR","wall_s":600}}
 {"wall_s":188,"row":{"file":"bench/z46/corpus/traces/spring-projects_spring-framework_35118.md","raw":8513,"dendrons":963,"dendron":963,"daedalus":963,"daedalus-dual":976,"akolouthia2":963,"gramma":963,"lakonikos-d":966,"stathmos":966,"anadesmos":966,"frontierMin":963}}
+{"wall_s":379,"row":{"file":"bench/z47/corpus/changelog/svenstaro_miniserve.md","raw":21112,"dendrons":3030,"dendron":3030,"daedalus":3030,"daedalus-dual":3052,"akolouthia2":2989,"gramma":3030,"lakonikos-d":3042,"stathmos":3042,"anadesmos":3042,"frontierMin":2989}}
+{"wall_s":14,"row":{"file":"bench/holdout-ops/git-log-fuller.txt","raw":368,"dendrons":143,"dendron":143,"daedalus":143,"daedalus-dual":143,"akolouthia2":143,"gramma":143,"lakonikos-d":143,"stathmos":143,"anadesmos":143,"frontierMin":143}}

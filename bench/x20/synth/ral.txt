@@ -1,0 +1,5 @@
+NAME   SIZE  USED
+foo      4     1
+barbaz  22     2
+q        9     3
+hello   17     4

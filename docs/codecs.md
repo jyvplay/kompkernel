@@ -12,7 +12,9 @@ string in `src/lib/omega/registry.ts` and nothing else. Do not cite those as ver
   prompt and no skills file. `countTokens(..., 'o200k_base')` on the exact string that would be sent.
 - Every reported lane is byte-exact: `decode(encode(x)) === x`, checked in TypeScript, and for
   ANADESMOS additionally through a second, independently written CPython reader
-  (`bench/x20/anadesmos_decode.py`) driven by `bench/x20/xcheck.py`.
+  (`bench/x20/anadesmos_decode.py`) driven by `bench/x20/xcheck.py`: 62/62 messages exact, where 62 =
+  the 57 shipped messages over both lane sets plus 5 note-layer cases in which the cascade had fired but
+  the `M` gate had refused the arm (so every family is exercised, not only the profitable ones).
 - Lane set (26 files, `bench/x20/lanes.txt`): prose/KB/email/meeting/bibliography/readme, ops tables
   (df, kubectl, psql, ls, find listing, git numstat, git log), logs and stack traces, CSV
   (aapl, vix, sp500, csv-8), SVG, SQL, and two changelog markdown files.
@@ -38,7 +40,9 @@ Three shapes appear in this stack and must not be confused.
 2. **Gated greedy cascade (ANADESMOS, X20).** Families are tried in a fixed dependency order; each
    is kept only if its own inverse reproduces the previous text byte for byte *and* the tokens it
    removes exceed the marginal tokens its note sentence costs. Order makes it deterministic; the
-   accept/reject test is per family, and a final whole-message gate compares against the base codec.
+   accept/reject test is per family, and a final whole-message gate compares against the base codec. The
+  note is part of the body the contract describes (it is the first line of the expanded text), not a
+  separate header, so `decode` sees exactly what a chat reader sees.
    Still not optimal: a family that is only useful together with a later one can be rejected.
 3. **Per-input minimum over several codecs (tournament).** Several full codecs are run on the same
    input and the shortest wins: DAEDALUS's predicted-arm portfolio, AMPHORA, KANON, CADMUS, and the
@@ -83,7 +87,8 @@ Three shapes appear in this stack and must not be confused.
 - **Measured (X20, this session).** 26 lanes: 1 lane improved (vix CSV 1380 → **1211**, −169,
   families `crlf+dp`), 25 unchanged, 0 worse, 26/26 exact. STATHMOS on the same lane reaches 1212,
   so the same mechanism is 1 token cheaper here while also covering CRLF. 32-file general corpus:
-  0 lanes improved, 0 worse, all exact. Two arms were screened in the cascade and then rejected by
+  0 lanes improved, 0 worse, 32/32 exact. `ral`, `cols`, `seq`, `dp`, `iw` fire on none of them: README
+  and LICENSE text has no fixed-scale numeric column, which is the only thing `dp`-class families can buy. Two arms were screened in the cascade and then rejected by
   the wire gate, which is the intended behaviour: `nlm` on aapl-2014 (372 tokens saved in the raw
   text, but `M` rose 1587 → 1761 because the rule tape stops being able to bind line structure) and
   `ral` on ops-git-log-stat (32 tokens saved raw, `M` 3484 → 3523). Gate 1 (`bench/x20
@@ -116,6 +121,13 @@ Three shapes appear in this stack and must not be confused.
   counter-argument to `dp`/`iw`/`grp`: the reader restores the digits before any arithmetic, so the
   restoration must be exact, and the gate makes it so. LogShrink (DOI 10.1145/3597503.3608129) and
   LeCo (arXiv 2306.15374) compress log/integer-column *values*, not the LLM-readable binding.
+- **Model-readability probe (`bench/x20/blind-prep.ts`, `bench/x20/blind-check.py`).** A 20-line slice of
+  `vix-daily-1990.csv` that had not been inspected in this session was encoded; a reader given the note and
+  the body alone - no contract, no skills file, one turn - restored all 100 numeric fields and its output is
+  byte-identical to the original (`bench/x20/blind/vix.*`, `python3 bench/x20/blind-check.py vix`). The
+  reader was the model writing this codec, so this is a smoke test of sufficiency, not an independent study;
+  and one hand-typed `ral` note that did not match the encoder's own spacing produced a real mismatch, which
+  is the honest shape of the risk: a mis-read note changes bytes rather than silently degrading.
 - **Status.** Registered. Not a tournament member. `ral`, `cols`, `nl`, `nlm`, `wrap` are kept
   measured-negative-but-gated on purpose: they cost nothing where they do not pay and they are the
   arms a future change can improve without re-deriving the safety argument.
@@ -273,7 +285,7 @@ Best `M` per lane among the measured keys, then grouped. "tie" means equal `M`, 
 | CSV | vix 1211, aapl 1490, csv-8 1695, sp500 4262 | vix: **ANADESMOS** 1211 (STATHMOS 1212); aapl/csv-8/sp500: **DAEDALUS = DENDRON = DENS-2 = GRAMMA** 1490/1695/4262 | LAKONIKOS-D is 97/13/81 tokens worse on those three CSVs: the D glyph pool costs more than the terse contract saves there |
 | Logs | openstack-loghub-26 1008 | **DENS-2/DENDRON/DAEDALUS** tie | LAKONIKOS-D 1052 |
 | Long changelog/trace markdown | spring-framework trace, miniserve changelog | not in the frontier receipt (still running); ANADESMOS = LAKONIKOS-D exactly, identity | |
-| General corpus, 32 README/CHANGELOG/LICENSE files | all 32 | **no codec separates**: ANADESMOS = LAKONIKOS-D on every lane measured so far (15 of 32 at the time of writing), all exact | the honest generality statement for X20 is "never worse, occasionally better", not "broadly better" |
+| General corpus, 32 README/CHANGELOG/LICENSE files | all 32 | **no codec separates**: ANADESMOS = LAKONIKOS-D on 32/32, all exact | the honest generality statement for X20 is "never worse, occasionally better", not "broadly better" |
 
 ## Frontier restatement (X20)
 
@@ -332,10 +344,11 @@ adopted, and no Lean check was run (no Lean toolchain in this sandbox).
   LAKONIKOS-D-vs-ANADESMOS runs, a nine-key frontier run over 26 lanes (23 rows written; the last
   rows were still being produced when this file was written, and its `anadesmos` column is stale —
   use `nd-lanes.jsonl` for ANADESMOS numbers).
-- **Not** measured, and therefore not claimed: any LLM decoding the wire. No model endpoint exists in
-  this sandbox for that purpose, so "readable without a skills file" is a *design* property (strict
-  one-sentence templates, every sentence parseable) and a byte-level self-check, not an LLM
-  evaluation. A human or model reader study is the obvious next experiment and is not reported here.
+- Partially measured: **one** model decode was performed - by this agent, in context, from the note and
+  body of an un-inspected vix slice, with no contract text and no skills file, checked by
+  `bench/x20/blind-check.py` (byte-identical). It is disclosed as the author model reading its own format,
+  which is the weakest possible reader study; no *independent* model or human study was run, and the
+  general claim "an LLM can decode these notes" rests on 1 probe plus 62 second-implementation decodes.
 - No Lean/Coq proof was checked; no FliPpr-style inversion proof was written — the guarantee is
   empirical (encode→decode equality on every lane plus 400 fuzz cases), not proved.
 - Corpus files live in `node_modules`, which is git-ignored, so the corpus is reproducible only via

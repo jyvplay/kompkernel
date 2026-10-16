@@ -1,0 +1,11 @@
+bench/x20/synth/dp.csv
+bench/x20/synth/dp-crlf.csv
+bench/x20/synth/iw.csv
+bench/x20/synth/seq.txt
+bench/x20/synth/seq-pad.txt
+bench/x20/synth/ral.txt
+bench/x20/synth/nl.txt
+bench/x20/synth/nlm.txt
+bench/x20/synth/wrap.txt
+bench/x20/synth/sep.csv
+bench/holdout-tab/vix-daily-1990.csv
