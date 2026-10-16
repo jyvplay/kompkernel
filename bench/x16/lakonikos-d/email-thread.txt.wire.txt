@@ -1,0 +1,20 @@
+§й-ж@northgateйanalytics.comд>іжд wrote:
+э >
+у >рдупдэри ш2026йн08Ц onишнйс,Ђ Sepи2026ч atМу On Monси22Ђчихрэруб Marcus Oyelaran <m.oyelaranю Priya Raghunathan <priya.rл theщи18с442.17 onле
+верк Tom Beckett <tbeckettь>
+РьдТ against cost centerиз Tueси23ЂИинйо:О.
+Б29т isЕ14я aё soы,
+а varianceъ thatГ forУ Danaм11¶FromоУ Whitfield <dana.whitfieldжьDateозиЕоном -0400еToобжьCcоюж>,кжьSubjectо Reо Q3 reconciliationа - needя decision by Thursday
+
+Marcus,
+
+I pulledл ledger again this morning andлат still there. Itтщеconsolidated view andщ subsidiary viewсёч least itт consistent now.
+
+My readтъ we bookedл Halstead refund twiceо onceЦЕТ4120еand onceЦБТ4180. Ifът rightсл fixтя single reversingеentry and we are done.
+
+Can you confirm withл AP team before Thursday?
+
+Dana
+
+д Onзчимо42сбіРУыР Agreedъл numberт stable. I am less sure aboutл double-booking theory. TheИБед entry hasя different vendor reference (HALйш0881 vs HALйш0774) which suggests twoед separate credits rather than one duplicated creditОР I would rather we pullл original remittance advice before we reverse anything. Priyaс do youед still haveл August remittance PDFs?
+Р MarcusеРМ17о03сюіп Bothып I haveл remittance adviceГИЕ but notГИБ. I have asked Halstead ARГяв copy and they saidи2 business daysсё Wednesdayчл earliestОп One more thingоли4180 cost center was only openedЦ25сё any entry against itв beforeъ date would have failed validation. That makesя genuine second credit moreв likely thanя duplicateОп PriyaепМ09о15скіх Teamых Flaggingъ audit wantsл Q3 reconciliation closed byиш09й30. Ifлатву unresolved we have to disclose it asя known itemс which I would prefer to avoidОх Tomе

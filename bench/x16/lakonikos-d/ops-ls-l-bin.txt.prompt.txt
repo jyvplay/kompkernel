@@ -1,0 +1,4 @@
+§и
+lrwxrwxrwx 1 user user М Oct 15 06:33б -> ../с/bin/п -> ../typescriptсtsт/cli.jsо-browserslist-db¶total 0и40М baseline-browser-mappingбbaseline-browser-mapping/dist/cli.cjsи22М browserslistбbrowserslistти22М esbuildбesbuild/bin/esbuildи24М jitiбjiti/lib/jiti-cli.mjsи18М jsescбjsesc/bin/jsescи19М json5бjson5/libти24М nanoidбnanoid/bin/nanoid.cjsи21М nextбnext/distсnextи36М parserб@babel/parser/bin/babel-parser.jsи25М rollupбrollup/distсrollupи23М semverбsemverсsemver.jsи21М tscпcи26М tsserverпserverи32М updateобupdateоти19М viteбvite/bin/vite.js
+
+New Cyrillic before ¶ starts a rule to the next new Cyrillic or ¶. After ¶, expand rules recursively; print only the result.

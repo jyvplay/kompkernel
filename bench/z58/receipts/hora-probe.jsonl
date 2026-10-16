@@ -1,0 +1,4 @@
+{"lane":"bench/holdout-ops/openstack-loghub-26.log","arm":"identity","marks":25,"plainM":1008,"horaM":1008,"identityM":1008,"inTokens":4028,"exact":true,"note":"identity: delta arm 1014 >= identity 1008"}
+{"lane":"bench/z46/corpus/traces/net_jellyfin_jellyfin_18053.md","arm":"identity","marks":0,"plainM":2335,"horaM":2335,"identityM":2335,"inTokens":6802,"exact":true,"note":"identity arm (DAEDALUS plain)"}
+{"lane":"bench/z46/corpus/traces/spring-projects_spring-framework_35118.md","arm":"identity","marks":0,"plainM":963,"horaM":963,"identityM":963,"inTokens":1895,"exact":true,"note":"identity arm (DAEDALUS plain)"}
+{"lane":"bench/z45/corpus/gh-issues/ollama_ollama_2453.md","arm":"identity","marks":0,"plainM":6116,"horaM":6116,"identityM":6116,"inTokens":12452,"exact":true,"note":"identity arm (DAEDALUS plain)"}

@@ -1,0 +1,18 @@
+§с (оnodeа:наinternalбон/modules/cjs/loaderазсби
+м    atжим runScriptInя22ч.щ3ДNode.js vячячщие [рevalю]:в1ЯмерюваУhome/user/kompkernel/[рысонтContextп/process/executionах)
+    atэ nodeО
+
+ужтып444а60х evalFunctionып279а30х evalTypeScriptсонп291ащхэн/main/eval_stringа74ащОДк6г12іжThisты/vmа209а10хэнп446агцЯкіимер]-wrapperака24С ш19дErrorЕ143Т requireК ^л Cannotь Function¶бЕщиС throw err;
+СКОдал find module './nope.js'
+Require stack:
+- /У]
+мь._resolveFilenameзЕ0а15х defaultResolveImplз1040ашх resolveForCJSWithHooksз1045аяхь._loadз121ка25х wrapModuleLoadз254ашх Module.requireз1527агхТы/modules/helpersа147а16)
+Яві {
+С codeа 'MODULE_NOT_FOUND',
+СТStackае '/У]' ]
+}
+
+Д<anonymous_script>:ви{badиКОSyntaxда Expected property name or '}' in JSON at positionСвсlineСв columnС2х JSON.parse (<anonymous>)
+цу[рювиnull.xи    КОTypeдал read properties of nullсreading 'x')
+цу
+New Cyrillic before ¶ starts a rule to the next new Cyrillic or ¶. After ¶, expand rules recursively; print only the result.

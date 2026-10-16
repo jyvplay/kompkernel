@@ -1,0 +1,16 @@
+total 0
+lrwxrwxrwx 1 user user 40 Oct 15 06:33 baseline-browser-mapping -> ../baseline-browser-mapping/dist/cli.cjs
+lrwxrwxrwx 1 user user 22 Oct 15 06:33 browserslist -> ../browserslist/cli.js
+lrwxrwxrwx 1 user user 22 Oct 15 06:33 esbuild -> ../esbuild/bin/esbuild
+lrwxrwxrwx 1 user user 24 Oct 15 06:33 jiti -> ../jiti/lib/jiti-cli.mjs
+lrwxrwxrwx 1 user user 18 Oct 15 06:33 jsesc -> ../jsesc/bin/jsesc
+lrwxrwxrwx 1 user user 19 Oct 15 06:33 json5 -> ../json5/lib/cli.js
+lrwxrwxrwx 1 user user 24 Oct 15 06:33 nanoid -> ../nanoid/bin/nanoid.cjs
+lrwxrwxrwx 1 user user 21 Oct 15 06:33 next -> ../next/dist/bin/next
+lrwxrwxrwx 1 user user 36 Oct 15 06:33 parser -> ../@babel/parser/bin/babel-parser.js
+lrwxrwxrwx 1 user user 25 Oct 15 06:33 rollup -> ../rollup/dist/bin/rollup
+lrwxrwxrwx 1 user user 23 Oct 15 06:33 semver -> ../semver/bin/semver.js
+lrwxrwxrwx 1 user user 21 Oct 15 06:33 tsc -> ../typescript/bin/tsc
+lrwxrwxrwx 1 user user 26 Oct 15 06:33 tsserver -> ../typescript/bin/tsserver
+lrwxrwxrwx 1 user user 32 Oct 15 06:33 update-browserslist-db -> ../update-browserslist-db/cli.js
+lrwxrwxrwx 1 user user 19 Oct 15 06:33 vite -> ../vite/bin/vite.js

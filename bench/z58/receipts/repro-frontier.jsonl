@@ -1,0 +1,6 @@
+{"file":"bench/holdout-ops/openstack-loghub-26.log","raw":7969,"daedalus":1008,"daedalus-dual":1053,"phalanx-a10":1247,"dendrons":1008,"akolouthia2":1008,"frontierMin":1008}
+{"file":"bench/holdout-tbl/psql-output.txt","raw":1578,"daedalus":397,"daedalus-dual":397,"phalanx-a10":437,"dendrons":397,"akolouthia2":355,"frontierMin":355}
+{"file":"bench/holdout-tbl/df-h.txt","raw":939,"daedalus":281,"daedalus-dual":279,"phalanx-a10":414,"dendrons":281,"akolouthia2":171,"frontierMin":171}
+{"file":"bench/holdout-mk/chart.svg","raw":3446,"daedalus":465,"daedalus-dual":465,"phalanx-a10":539,"dendrons":465,"akolouthia2":330,"frontierMin":330}
+{"file":"bench/holdout-lang/de-kb.txt","raw":2432,"daedalus":495,"daedalus-dual":492,"phalanx-a10":505,"dendrons":495,"akolouthia2":495,"frontierMin":492}
+{"file":"bench/holdout-work/llm-answer.md","raw":2542,"daedalus":707,"daedalus-dual":706,"phalanx-a10":733,"dendrons":707,"akolouthia2":707,"frontierMin":706}

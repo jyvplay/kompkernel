@@ -1,0 +1,300 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.9.8
+2 info using node@v22.22.3
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/home/user/kompkernel/.npmrc
+5 silly config load:file:/home/user/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm ci
+8 verbose argv "ci" "--no-audit" "--no-fund"
+9 verbose logfile logs-max:10 dir:/home/user/.npm/_logs/2026-10-15T06_32_47_992Z-
+10 verbose logfile /home/user/.npm/_logs/2026-10-15T06_32_47_992Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:2048917504 maxSize:512229376 maxEntrySize:256114688
+13 silly idealTree buildDeps
+14 silly reify moves {}
+15 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi
+16 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi' ]
+17 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/core
+18 silly reify mark deleted [
+18 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/core'
+18 silly reify ]
+19 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/runtime
+20 silly reify mark deleted [
+20 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/runtime'
+20 silly reify ]
+21 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/wasi-threads
+22 silly reify mark deleted [
+22 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/wasi-threads'
+22 silly reify ]
+23 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@napi-rs/wasm-runtime
+24 silly reify mark deleted [
+24 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@napi-rs/wasm-runtime'
+24 silly reify ]
+25 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@tybys/wasm-util
+26 silly reify mark deleted [
+26 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@tybys/wasm-util'
+26 silly reify ]
+27 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/tslib
+28 silly reify mark deleted [
+28 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/tslib'
+28 silly reify ]
+29 verbose reify failed optional dependency /home/user/kompkernel/node_modules/lightningcss-win32-x64-msvc
+30 silly reify mark deleted [ '/home/user/kompkernel/node_modules/lightningcss-win32-x64-msvc' ]
+31 verbose reify failed optional dependency /home/user/kompkernel/node_modules/lightningcss-win32-arm64-msvc
+32 silly reify mark deleted [ '/home/user/kompkernel/node_modules/lightningcss-win32-arm64-msvc' ]
+33 verbose reify failed optional dependency /home/user/kompkernel/node_modules/lightningcss-linux-arm64-musl
+34 silly reify mark deleted [ '/home/user/kompkernel/node_modules/lightningcss-linux-arm64-musl' ]
+35 verbose reify failed optional dependency /home/user/kompkernel/node_modules/lightningcss-linux-arm64-gnu
+36 silly reify mark deleted [ '/home/user/kompkernel/node_modules/lightningcss-linux-arm64-gnu' ]
+37 verbose reify failed optional dependency /home/user/kompkernel/node_modules/lightningcss-linux-arm-gnueabihf
+38 silly reify mark deleted [
+38 silly reify   '/home/user/kompkernel/node_modules/lightningcss-linux-arm-gnueabihf'
+38 silly reify ]
+39 verbose reify failed optional dependency /home/user/kompkernel/node_modules/lightningcss-freebsd-x64
+40 silly reify mark deleted [ '/home/user/kompkernel/node_modules/lightningcss-freebsd-x64' ]
+41 verbose reify failed optional dependency /home/user/kompkernel/node_modules/lightningcss-darwin-x64
+42 silly reify mark deleted [ '/home/user/kompkernel/node_modules/lightningcss-darwin-x64' ]
+43 verbose reify failed optional dependency /home/user/kompkernel/node_modules/lightningcss-darwin-arm64
+44 silly reify mark deleted [ '/home/user/kompkernel/node_modules/lightningcss-darwin-arm64' ]
+45 verbose reify failed optional dependency /home/user/kompkernel/node_modules/lightningcss-android-arm64
+46 silly reify mark deleted [ '/home/user/kompkernel/node_modules/lightningcss-android-arm64' ]
+47 verbose reify failed optional dependency /home/user/kompkernel/node_modules/fsevents
+48 silly reify mark deleted [ '/home/user/kompkernel/node_modules/fsevents' ]
+49 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-win32-x64-msvc
+50 silly reify mark deleted [
+50 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-win32-x64-msvc'
+50 silly reify ]
+51 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-win32-arm64-msvc
+52 silly reify mark deleted [
+52 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-win32-arm64-msvc'
+52 silly reify ]
+53 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-linux-arm64-musl
+54 silly reify mark deleted [
+54 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-linux-arm64-musl'
+54 silly reify ]
+55 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-linux-arm64-gnu
+56 silly reify mark deleted [
+56 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-linux-arm64-gnu'
+56 silly reify ]
+57 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-linux-arm-gnueabihf
+58 silly reify mark deleted [
+58 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-linux-arm-gnueabihf'
+58 silly reify ]
+59 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-freebsd-x64
+60 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@tailwindcss/oxide-freebsd-x64' ]
+61 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-darwin-x64
+62 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@tailwindcss/oxide-darwin-x64' ]
+63 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-darwin-arm64
+64 silly reify mark deleted [
+64 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-darwin-arm64'
+64 silly reify ]
+65 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@tailwindcss/oxide-android-arm64
+66 silly reify mark deleted [
+66 silly reify   '/home/user/kompkernel/node_modules/@tailwindcss/oxide-android-arm64'
+66 silly reify ]
+67 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-win32-x64-msvc
+68 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@rollup/rollup-win32-x64-msvc' ]
+69 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-win32-x64-gnu
+70 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@rollup/rollup-win32-x64-gnu' ]
+71 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-win32-ia32-msvc
+72 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@rollup/rollup-win32-ia32-msvc' ]
+73 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-win32-arm64-msvc
+74 silly reify mark deleted [
+74 silly reify   '/home/user/kompkernel/node_modules/@rollup/rollup-win32-arm64-msvc'
+74 silly reify ]
+75 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-openharmony-arm64
+76 silly reify mark deleted [
+76 silly reify   '/home/user/kompkernel/node_modules/@rollup/rollup-openharmony-arm64'
+76 silly reify ]
+77 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-openbsd-x64
+78 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@rollup/rollup-openbsd-x64' ]
+79 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-linux-s390x-gnu
+80 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@rollup/rollup-linux-s390x-gnu' ]
+81 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-linux-riscv64-musl
+82 silly reify mark deleted [
+82 silly reify   '/home/user/kompkernel/node_modules/@rollup/rollup-linux-riscv64-musl'
+82 silly reify ]
+83 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-linux-riscv64-gnu
+84 silly reify mark deleted [
+84 silly reify   '/home/user/kompkernel/node_modules/@rollup/rollup-linux-riscv64-gnu'
+84 silly reify ]
+85 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-linux-ppc64-musl
+86 silly reify mark deleted [
+86 silly reify   '/home/user/kompkernel/node_modules/@rollup/rollup-linux-ppc64-musl'
+86 silly reify ]
+87 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-linux-ppc64-gnu
+88 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@rollup/rollup-linux-ppc64-gnu' ]
+89 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-linux-loong64-musl
+90 silly reify mark deleted [
+90 silly reify   '/home/user/kompkernel/node_modules/@rollup/rollup-linux-loong64-musl'
+90 silly reify ]
+91 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-linux-loong64-gnu
+92 silly reify mark deleted [
+92 silly reify   '/home/user/kompkernel/node_modules/@rollup/rollup-linux-loong64-gnu'
+92 silly reify ]
+93 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-linux-arm64-musl
+94 silly reify mark deleted [
+94 silly reify   '/home/user/kompkernel/node_modules/@rollup/rollup-linux-arm64-musl'
+94 silly reify ]
+95 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-linux-arm64-gnu
+96 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@rollup/rollup-linux-arm64-gnu' ]
+97 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-linux-arm-musleabihf
+98 silly reify mark deleted [
+98 silly reify   '/home/user/kompkernel/node_modules/@rollup/rollup-linux-arm-musleabihf'
+98 silly reify ]
+99 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-linux-arm-gnueabihf
+100 silly reify mark deleted [
+100 silly reify   '/home/user/kompkernel/node_modules/@rollup/rollup-linux-arm-gnueabihf'
+100 silly reify ]
+101 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-freebsd-x64
+102 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@rollup/rollup-freebsd-x64' ]
+103 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-freebsd-arm64
+104 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@rollup/rollup-freebsd-arm64' ]
+105 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-darwin-x64
+106 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@rollup/rollup-darwin-x64' ]
+107 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-darwin-arm64
+108 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@rollup/rollup-darwin-arm64' ]
+109 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-android-arm64
+110 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@rollup/rollup-android-arm64' ]
+111 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@rollup/rollup-android-arm-eabi
+112 silly reify mark deleted [
+112 silly reify   '/home/user/kompkernel/node_modules/@rollup/rollup-android-arm-eabi'
+112 silly reify ]
+113 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@next/swc-win32-x64-msvc
+114 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@next/swc-win32-x64-msvc' ]
+115 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@next/swc-win32-arm64-msvc
+116 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@next/swc-win32-arm64-msvc' ]
+117 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@next/swc-linux-arm64-musl
+118 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@next/swc-linux-arm64-musl' ]
+119 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@next/swc-linux-arm64-gnu
+120 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@next/swc-linux-arm64-gnu' ]
+121 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@next/swc-darwin-x64
+122 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@next/swc-darwin-x64' ]
+123 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@next/swc-darwin-arm64
+124 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@next/swc-darwin-arm64' ]
+125 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-win32-x64
+126 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-win32-x64' ]
+127 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-win32-ia32
+128 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-win32-ia32' ]
+129 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-win32-arm64
+130 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-win32-arm64' ]
+131 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-webcontainers-wasm32
+132 silly reify mark deleted [
+132 silly reify   '/home/user/kompkernel/node_modules/@img/sharp-webcontainers-wasm32'
+132 silly reify ]
+133 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-linuxmusl-arm64
+134 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-linuxmusl-arm64' ]
+135 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-linux-s390x
+136 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-linux-s390x' ]
+137 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-linux-riscv64
+138 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-linux-riscv64' ]
+139 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-linux-ppc64
+140 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-linux-ppc64' ]
+141 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-linux-arm64
+142 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-linux-arm64' ]
+143 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-linux-arm
+144 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-linux-arm' ]
+145 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-libvips-linuxmusl-arm64
+146 silly reify mark deleted [
+146 silly reify   '/home/user/kompkernel/node_modules/@img/sharp-libvips-linuxmusl-arm64'
+146 silly reify ]
+147 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-libvips-linux-s390x
+148 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-libvips-linux-s390x' ]
+149 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-libvips-linux-riscv64
+150 silly reify mark deleted [
+150 silly reify   '/home/user/kompkernel/node_modules/@img/sharp-libvips-linux-riscv64'
+150 silly reify ]
+151 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-libvips-linux-ppc64
+152 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-libvips-linux-ppc64' ]
+153 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-libvips-linux-arm64
+154 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-libvips-linux-arm64' ]
+155 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-libvips-linux-arm
+156 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-libvips-linux-arm' ]
+157 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-libvips-darwin-x64
+158 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-libvips-darwin-x64' ]
+159 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-libvips-darwin-arm64
+160 silly reify mark deleted [
+160 silly reify   '/home/user/kompkernel/node_modules/@img/sharp-libvips-darwin-arm64'
+160 silly reify ]
+161 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-freebsd-wasm32
+162 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-freebsd-wasm32' ]
+163 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-darwin-x64
+164 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-darwin-x64' ]
+165 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@img/sharp-darwin-arm64
+166 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@img/sharp-darwin-arm64' ]
+167 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/win32-x64
+168 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/win32-x64' ]
+169 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/win32-ia32
+170 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/win32-ia32' ]
+171 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/win32-arm64
+172 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/win32-arm64' ]
+173 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/sunos-x64
+174 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/sunos-x64' ]
+175 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/openharmony-arm64
+176 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/openharmony-arm64' ]
+177 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/openbsd-x64
+178 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/openbsd-x64' ]
+179 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/openbsd-arm64
+180 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/openbsd-arm64' ]
+181 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/netbsd-x64
+182 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/netbsd-x64' ]
+183 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/netbsd-arm64
+184 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/netbsd-arm64' ]
+185 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/linux-s390x
+186 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/linux-s390x' ]
+187 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/linux-riscv64
+188 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/linux-riscv64' ]
+189 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/linux-ppc64
+190 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/linux-ppc64' ]
+191 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/linux-mips64el
+192 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/linux-mips64el' ]
+193 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/linux-loong64
+194 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/linux-loong64' ]
+195 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/linux-ia32
+196 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/linux-ia32' ]
+197 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/linux-arm64
+198 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/linux-arm64' ]
+199 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/linux-arm
+200 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/linux-arm' ]
+201 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/freebsd-x64
+202 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/freebsd-x64' ]
+203 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/freebsd-arm64
+204 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/freebsd-arm64' ]
+205 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/darwin-x64
+206 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/darwin-x64' ]
+207 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/darwin-arm64
+208 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/darwin-arm64' ]
+209 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/android-x64
+210 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/android-x64' ]
+211 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/android-arm64
+212 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/android-arm64' ]
+213 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/android-arm
+214 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/android-arm' ]
+215 verbose reify failed optional dependency /home/user/kompkernel/node_modules/@esbuild/aix-ppc64
+216 silly reify mark deleted [ '/home/user/kompkernel/node_modules/@esbuild/aix-ppc64' ]
+217 http fetch GET 200 https://registry.npmjs.org/npm 211ms
+218 silly packumentCache corgi:https://registry.npmjs.org/yallist cache-miss
+219 silly packumentCache corgi:https://registry.npmjs.org/xtend cache-miss
+220 silly packumentCache corgi:https://registry.npmjs.org/vite-plugin-singlefile cache-miss
+221 silly packumentCache corgi:https://registry.npmjs.org/update-browserslist-db cache-miss
+222 silly packumentCache corgi:https://registry.npmjs.org/undici-types cache-miss
+223 http cache vite@https://registry.npmjs.org/vite/-/vite-7.3.6.tgz 0ms (cache hit)
+224 silly packumentCache corgi:https://registry.npmjs.org/typescript cache-miss
+225 silly packumentCache corgi:https://registry.npmjs.org/tslib cache-miss
+226 silly packumentCache corgi:https://registry.npmjs.org/to-regex-range cache-miss
+227 silly packumentCache corgi:https://registry.npmjs.org/tinyglobby cache-miss
+228 silly packumentCache corgi:https://registry.npmjs.org/tapable cache-miss
+229 silly packumentCache corgi:https://registry.npmjs.org/tailwindcss cache-miss
+230 silly packumentCache corgi:https://registry.npmjs.org/tailwind-merge cache-miss
+231 silly packumentCache corgi:https://registry.npmjs.org/styled-jsx cache-miss
+232 silly packumentCache corgi:https://registry.npmjs.org/split2 cache-miss
+233 silly packumentCache corgi:https://registry.npmjs.org/source-map-js cache-miss
+234 http cache sharp@https://registry.npmjs.org/sharp/-/sharp-0.35.4.tgz 0ms (cache hit)
+235 silly packumentCache corgi:https://registry.npmjs.org/semver cache-miss
+236 silly packumentCache corgi:https://registry.npmjs.org/scheduler cache-miss
+237 silly packumentCache corgi:https://registry.npmjs.org/rollup cache-miss
+238 silly packumentCache corgi:https://registry.npmjs.org/react-refresh cache-miss
+239 silly packumentCache corgi:https://registry.npmjs.org/react-dom cache-miss
+240 silly packumentCache corgi:https://registry.npmjs.org/react cache-miss
+241 silly packumentCache corgi:https://registry.npmjs.org/postgres-interval cache-miss
