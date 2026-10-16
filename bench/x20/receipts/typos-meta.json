@@ -1,0 +1,71 @@
+[
+ {
+  "lane": "bench/holdout-tab/aapl-2014.csv",
+  "rule": "strict",
+  "chained": false,
+  "shapes": [
+   "9999-99-99",
+   "99.99999999",
+   "99.9999999"
+  ],
+  "marks": [],
+  "M": 1485,
+  "base": 1587
+ },
+ {
+  "lane": "bench/z48/corpus/sp500-200.csv",
+  "rule": "strict",
+  "chained": false,
+  "shapes": [
+   "9999-99-99"
+  ],
+  "marks": [],
+  "M": 4177,
+  "base": 4343
+ },
+ {
+  "lane": "bench/holdout-tbl/psql-output.txt",
+  "rule": "strict",
+  "chained": false,
+  "shapes": [
+   "9999-99-99",
+   "999.99"
+  ],
+  "marks": [],
+  "M": 366,
+  "base": 387
+ },
+ {
+  "lane": "bench/z20/samples/git-log-iso.txt",
+  "rule": "strict",
+  "chained": false,
+  "shapes": [
+   "9999-99-99T99:99:99"
+  ],
+  "marks": [],
+  "M": 1488,
+  "base": 1520
+ },
+ {
+  "lane": "bench/z11/fresh/ops-git-log-stat.txt",
+  "rule": "isolated",
+  "chained": false,
+  "shapes": [
+   "99:99:99"
+  ],
+  "marks": [],
+  "M": 3483,
+  "base": 3484
+ },
+ {
+  "lane": "bench/z47/corpus/changelog/svenstaro_miniserve.md",
+  "rule": "strict",
+  "chained": false,
+  "shapes": [
+   "9999-99-99"
+  ],
+  "marks": [],
+  "M": 3018,
+  "base": 3042
+ }
+]

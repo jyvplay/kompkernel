@@ -108,6 +108,9 @@ import { akolouthiaEncode, akolouthiaDecode } from './akolouthia';
 import { akolouthia2Encode, akolouthia2Decode } from './akolouthia2';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
+import { lakonikosDualEncode } from './lakonikos-d';
+import { stathmosEncode, stathmosDecode } from './stathmos';
+import { typosEncode, typosDecode } from './typos';
 import { tabminEncode } from './tabmin';
 import { uuidfoldEncode } from './uuidfold';
 import { dirfoldEncode } from './dirfold';
@@ -706,6 +709,18 @@ export function codecEntries(): Entry[] {
     {
       key: 'lakonikos', label: '⟡ LAKONIKOS (DAEDALUS wire, terse decoder contract: same wire and decoder, fewer contract tokens)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = lakonikosEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok (DAEDALUS ${r.messageTokensOld}) vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'lakonikos-d', label: '⟡ LAKONIKOS-D (DAEDALUS-D wire with the terse decoder contract: same dual-tokenizer wire and decoder as DAEDALUS-D, the rules sentence shortened; identity unless the chironDecode round trip is exact)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = lakonikosDualEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `mode=${r.mode}; arm=${r.winningArm}; o200k=${r.messageTokens.o200k_base} (DAEDALUS-D ${r.messageTokensDualOld.o200k_base}); cl100k=${r.messageTokens.cl100k_base}` }; },
+    },
+    {
+      key: 'typos', label: '⊙ TYPOS (Shape-stated separator elision: every numeric run whose shape recurs (9999-99-99, 99:99:99.999999999, 9.999999, ...) loses its separators and the shapes are stated once in one sentence; the reader splits each digit run by digit count; provably invertible under the stated conditions and byte-checked anyway; gated against LAKONIKOS-D, so it never costs more)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = typosEncode(t, enc); return { output: r.wire, decoded: r.rule === 'none' ? r.decoded : typosDecode(r.wire, r.shapes, r.rule, r.marks, r.chained), oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `mode=${r.mode}/${r.rule}; occ=${r.occurrences}; shapes=${r.shapes.map((x,i)=>(r.marks[i]??'')+x).join('|') || '-'}; o200k=${r.messageTokens.o200k_base} (base ${r.baseTokens.o200k_base})` }; },
+    },
+    {
+      key: 'stathmos', label: '⟟ STATHMOS (Fixed-width decimal columns: trailing zeros stripped, restored from a one-line @dp header; gated against LAKONIKOS-D on the raw text, so it never costs more)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = stathmosEncode(t, enc); return { output: r.wire, decoded: stathmosDecode(r.wire), oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `mode=${r.mode}; transformed=${r.transformed}; dp=${r.dp.join(',') || '-'}; o200k=${r.messageTokens.o200k_base} (base ${r.baseTokens.o200k_base})` }; },
     },
     {
       key: 'kalligraphos', label: '✅ KALLIGRAPHOS (Unicode mathematical-alphabet restoration: styled decorative prose -> ASCII + style opcode; otherwise DAEDALUS unchanged; exact)', family: 'exact', fidelity: 'exact',

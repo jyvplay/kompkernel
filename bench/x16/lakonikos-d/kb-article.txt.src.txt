@@ -1,0 +1,44 @@
+Understanding Retention Policies in Northgate Vault
+
+A retention policy determines how long Northgate Vault keeps a document before it becomes
+eligible for permanent deletion. Every document inherits exactly one retention policy, and that
+policy is resolved at the moment the document is created. Changing a policy later affects only
+documents created after the change; it never retroactively alters the disposition date of a
+document that already exists. This behaviour is deliberate, because retroactive changes would
+make it impossible to prove to an auditor what the disposition schedule was at any given point
+in the past.
+
+Policies are evaluated in a fixed order. The system first looks for a policy attached directly to
+the document. If none exists, it looks for a policy attached to the folder that contains the
+document, then to that folder's parent, and so on up to the workspace root. If no policy is found
+anywhere on that path, the workspace default applies. The workspace default cannot be removed,
+only changed, which guarantees that every document always resolves to some policy.
+
+There are three kinds of disposition. Soft deletion moves the document to a recycle bin where it
+remains visible to administrators for a further thirty days. Hard deletion removes the document
+content but keeps an immutable audit stub recording that a document existed, who created it, and
+when it was disposed. Purge removes everything, including the audit stub, and is only available
+to workspaces operating under a legal regime that requires it; most customers should never enable
+purge, because it destroys the evidence that the retention policy was followed.
+
+A legal hold suspends all disposition for the documents it covers. Holds take precedence over
+every policy, including purge, and they cannot be overridden by an administrator. Only a user with
+the Legal Hold Officer role may place or release a hold, and every placement and release is
+written to the audit log with the reason supplied by that user. When a hold is released, the
+affected documents return to their normal schedule; if their disposition date has already passed,
+they become eligible immediately and will be processed in the next nightly sweep.
+
+The nightly sweep runs at 02:00 in the workspace's configured timezone. It processes documents in
+creation order, oldest first, and stops after four hours regardless of how much work remains.
+Anything not processed is picked up by the next sweep. Because the sweep is time-bounded rather
+than work-bounded, a workspace with a very large backlog may take several nights to catch up, and
+administrators sometimes mistake this for a failure. The sweep report, available under Reports and
+Audit, shows exactly how many documents were considered, how many were disposed, and how many
+remained in the queue when the sweep stopped.
+
+Two questions come up repeatedly in support tickets. The first is why a document with an expired
+disposition date is still visible. Almost always the answer is either an active legal hold or a
+backlogged sweep, both of which the sweep report will show. The second is whether a retention
+policy can be shortened. It can, but only for future documents, and the interface deliberately
+makes this awkward in order to prevent an administrator from accidentally believing that existing
+documents have been reshuffled onto the shorter schedule.

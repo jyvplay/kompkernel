@@ -1,0 +1,12 @@
+§т 2026-09-30 рт08:00:03.е +0000ыр676449622емlrwxrwxrwx  1 user user   п
+мит07:59:о user user  128и52.д user user 4096я -> ../ье babel__Т/bin/У -> ../typescriptТtsс/cli.jsа-browserslist-dbуdrwxr-xr-x к .
+у90др900450754е ..
+И
+у11див
+у ів2ого464392992Ав3ди¶node_modules/.bin:
+total 8в2дыкм40ы baseline-browser-mappingяbaseline-browser-mapping/dist/cli.cjsп22ы browserslistяbrowserslistсп22ы esbuildяesbuild/bin/esbuildп24ы jitiяjiti/lib/jiti-cli.mjsп18ы jsescяjsesc/bin/jsescп19ы json5яjson5/libсп24ы nanoidяnanoid/bin/nanoid.cjsп21ы nextяnext/distТnextп36ы parserя@babel/parser/bin/babel-parser.jsп25ы rollupяrollup/distТrollupп23ы semverяsemverТsemver.jsп21ы tscУcп26ы tsserverУserverп32ы updateаяupdateасп19ы viteяvite/bin/vite.js
+
+node_modules/@types:
+total 20И50.564383395еку 2гьcoreі276392041ьgeneratorі164391476ьtemplateі600393678ьtraverseі440392871е estreeИ54.328402406е nodeв3ге pgА53.152396466е reactА52.812394749е react-dom
+
+New Cyrillic before ¶ starts a rule to the next new Cyrillic or ¶. After ¶, expand rules recursively; print only the result.

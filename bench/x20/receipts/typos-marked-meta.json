@@ -1,0 +1,32 @@
+[
+ {
+  "lane": "bench/z48/corpus/sp500-200.csv",
+  "rule": "marked",
+  "chained": false,
+  "shapes": [
+   "9999-99-99"
+  ],
+  "marks": [
+   "†"
+  ],
+  "M": 4173,
+  "base": 4343
+ },
+ {
+  "lane": "bench/z20/samples/git-log-iso.txt",
+  "rule": "marked",
+  "chained": false,
+  "shapes": [
+   "9999-99-99T99:99:99",
+   "99.9",
+   "9/9"
+  ],
+  "marks": [
+   "†",
+   "‡",
+   "◆"
+  ],
+  "M": 1512,
+  "base": 1520
+ }
+]

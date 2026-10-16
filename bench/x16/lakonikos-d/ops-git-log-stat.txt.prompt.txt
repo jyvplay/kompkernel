@@ -1,0 +1,95 @@
+§技/llm-blind然 bench技天然-tab演 +
+然个 | 省然-tab/decode驾/hidden赛然-tab驾驶然-ctx大然-terse请@users.noreply.github得741+arena-agent请.com>
+
+开 +
+然-ctx情2026-10-10无-情.md字-report无码>
+Date:  限码 Sat Oct 10 产 bench/z国产10中国/amphora神 +++
+在神 bench年 |   今年5 +
+网 |  全网12神久 insertions(+)
+
+commit永久 合-receipts多合-情.jsonl委/dec_册 files changed, 款+++
+ bench之年0
+韩/wire奖驾韩载 src/lib/omega转载/registry.ts件 2026 +0000
+
+   软件 Z微软9:展_1.txt布_2.txt分 bench/terse比分/prefix最年1 +
+小_3.txt出年6加年9 ++
+发/decode/dec堂发_1视 ++++
+票 ++
+工/ctx关 bench工工牌.jsonl费+++
+学/visible/msg局           网当年4 +
+讯国/美国/hcvd-彩网11结/antiphon消 +++++站 insertions(+), 男 deletions(-)
+
+commit六合.jsonl戏网13神器/tabmin無 bench器合法 +
+ bench/ctx方法工资网14神的驾/orig机 +++++++++++++++++手机++++++++供 +++++++++提供++++联-bench.ts尤 +++++
+代.ts                    网免机++++草 3下    -設.json年1线/periodos期 <agent@arena.ai注 2用 1 file changed, 挂-micromatch选 CHIRON县供+++++
+成国/budget我国/leaders第供
+自 ++++++
+重/klimax事/colTT接 LAKONIKOS高 self-decodes意/3高清
+    -格/chiron-kairos务_tier5_ultrareview.md行 DAEDALUS钟/lakonikos收 +++++++++++++++++++++++++++++++++群 KAIROS上-report.md容 bench/stichos针 0于; tsc exit针对 TABMIN空器-roundtrip.ts钱 ANTIPHON游/e58fbcaa添.txt            午 enumerateTokenSpans台码 Sun Oct 11 址
+Author:名vplay地址 jy名 <服93+jy名请基地150225服.com台00:所    Co-authored-by: arena-agent <297053明    
+所得严)
+明 bench内
+    
+所得打开/visible/earlier平地150225服.com近平限定演驾/check_網址 Arena Agent期限06:庆/receipts车/table_里.csv      彩票赛车场开驾/new版址 arena-agent期限香中-long-更.err                   之香体省2委到.csv             全体英年8票源       英天学官.ts                     其中-登.err                        之其他讯ariadne性网15在/z10后_columns.txt部赛2記.txt           加部日.csv           全部少天/visible2/msg_长-probe安/numlist长院      网人网16视频比-sweep助手++++
+面  出演主 bench/kairos上海.err                           之美元挂.err               之一.ts                       万产9字幕天发_3發      今赛事財       今天奖励个169手++
+等奖展姐          年来学展投布           |   宣布        最大球分/公网43第比如转                      今 載 bench结果  当然奖特  今然学条件 PERIODOS:附件 STICHOS表展           年99力   出演发本网18¶commit 4092a638a8fe455456e664196fa182ff0e4e8ff4平台02:21:26软10: AMPHORA (DAEDALUS ||选 exact-gated min): exact 55/55, gains on注 of 55 docs (micromatch -36.8%, ja-kb -12.2%), independent reader 38/38; honest narrow result于内国字                 个134免费其0登0牌                      网25尤其1登1牌                      网24尤香0更0牌                 今香1更1牌                 今其verify-47牌              网49第其verify-long8牌局10票其verify.ts                    戏中-wires-cases.json             最中-wires-independent-decode.json最他元他挂牌             年3 +
+他长官网10票成-A.err                         之成-A牌                       戏成长.ts                      性/chiron-vs-daedalus.ts                性/cvd.err                              之国/cvd牌                            今美0海0牌                         网23视美1海1牌                         网22视讯holdout-cvd一资讯holdout43.txt                        网43消费我元我挂牌             当我.ts                           网20视讯long-prose-files.txt                 英国/translit长代24尤讯verify-files.txt                     英载/amphora一个100机+
+如37册599永34d4290259069c00086b5e56149b022ee4d970cb平台01:40:54微 register对 (fresh blind fixtures注/2 first-pass exact; round-trip 96/96 rectangular exact于); report corrected内体4到4后     彩神体5到5后     全天/gen2一本视部事_4記事_5記车4日车5日韩_4添加部韩_5添出票 ...技-tab庆-z9-tabmin-roundtrip.txt个100免
+天空局21尤少4添全少5添加万                     网36消++-
+转                         年5票 17册302站3男 c94d64fdeda3e0e8d94c7695d2f726f36fda5494基32:47微 table草 diagnosis: hand-expansion error; mechanical decode matches fixture (contaminated, disclosed); no registration内幕_mechanical.csv个12第省/mdecode.py          个34手
+省/mdecode_transpose.py网8自万                  个13消++---
+ 4册64站3男 57511f2b08721e1c35c258401f315ffcfd501c06基31:29微 correct report to verified facts only (README fetched; unverified对 cell counts removed)
+明万个66免+---------------------
+用34站32男 373e4ce9a77c81a3c7331f5421681ea52457924e基31:14微 status record; openai/math count verified against primary README; readability-policy decision recorded内万个70收++++++++++
+用70久草ca89f8bf5603213003b6f8654000d2cc802465f基28:58软8: readability gate for对 column arm (pre-registered); table注意 with receipts;对 stays unregistered内省委2.csv          彩神省委2后  网17视幕后  人幕_corrected.csv全幕_firstpass.csv全天庆-z8.json          网59提
+天/score.py                  网26自产8字                 个111手
+ 8册264永84bd67d69d4aa858b8726a37ac8495bdf7a063b7基23:36软7: KLIMAX and NUMLIST negative probes, frontier audit, new-source record (no codec registered严重安.ts              个45县 bench重/probe.ts                      个52提款重庆重-runs长.txt网8在重庆安.txt    个注 +
+产7字              个92助 5册199久 f0696760290dbd22d85b87e032ac2bcbea2edb17基16:27件对 experiment (unregistered): per-table row/column arm over接
+    
+    Measured on 169 files (167 CSV corpus +注 holdouts): 169/169 exact round-trip;
+    rectangular tables -4.0% tokens, corpus-wide -2.2%; column arm wins 35/92.
+    Not registered in the codec registry: gain is small and concentrated, and
+    column-only serialization has readability risk. Receipts in無/.
+明天堂.csv        彩票天堂后今天堂_rebuilt.csv彩票天/gen.ts                  本神赛事展發布發小      加赛车1里2里3.csv院12票天等財布財小       年2 +
+天来源布源小       今 bench器联                       戏無/REPORT.md             网25视無/files-169.txt         励無器-bench-169牌励 bench空                   网27尤载器官个132免
+ 22册666永93c9cd6e0fe2c58cea09a27c5e15d0f2a3e34191近20:49:44件 CTXCOPY: copy-from-earlier-chat-text codec (conditional lane) with receipts
+    
+下载工copy.ts: ⟦a…b⟧ copy spans from earlier text C; unique anchors by default; encoder self-verifies by simulating the decoder; refuses ⟦ ⟧ … in T or C.
+下 bench工: PyPI adjacent-release pair harvest (326 pairs, sha256-verified), 81-pair sample (-75.7% vs接, exact 81/81), held-out 245 pairs (rule picks CTX 241; exact), 60 unrelated controls (zero copy coverage).
+下驶: two高 exact (case草 not decoded).
+下 Scope: conditional lane gain only, applies when the earlier text is in the same chat. Report:关copy字.
+明关联                         年57方-control多年60方-holdout多网245票关-holdout一年53方-pairs多  年81方copy字         年60法/harvest_pairs.py                     年77法/pairs-manifest.json                  个4240免++
+驶发表开发布局101开/gen官年20场表场布局101场小局236票驶等姐17开奖投注开奖小姐11打展院100打布院102打小院227票驶来姐18开学投草开学小姐12 +
+载工copy一网137 +
+ 24册6158永6fc569a942e6fc2861502f94a01639a21d03a597近19:26:39件接:行 wire with terse decoder contract (same wire and decoder; -10 tokens per rule-based message, 43/43 exact, never worse than行). Negative: line-prefix elision (no reliable gate). Readability:草意 byte-exact (n=3, self-review only).
+明 bench钟字           个121免费大/check.ts                 彩神大发展         资大发布         最大发小         人大/gen.ts                   全大的展        资大的宣的小        人大等        当大奖宣奖小        年2 +
+大来        出票大学布        年3 +
+大学小        当分/breakdown一本视球compact-candidates.ts              戏球compact2.ts                        网10票球contract-lanes.ts                  全球contract-tokens.ts                 网15神分钟联                 网20视分钟多公-elide代42消费比-eval官资比-gate六         公-gate官全频-dev六    网22尤频-test六   网21视频代28自分韩head.ts                        出票载钟官网75提++
+如32册625久草e3ef75da456adffe45baf31869eff046fa9c51e近19:07:47件 PR frontier review (情):行 is the real frontier reference; PR #2 starlight family negative (system prompt, +wire); PR #23 kalligraphos no Pareto gain (email -13 only, nondeterministic严/pr-frontier多个12尤 bench/pr-frontier-review无     个78助注册90永6999ebcc97352d02be74c581a12c3d04d8c305ad近18:23:06件钱 (negative, not registered): line copy-with-edits over群,针/49 wins; blind LLM-decode harness草意
+    
+下载结.ts: decode-gated copy stage, min over群 and钱∘KAIROS on message tokens清 measured: copy stage removes 272 tok before选 on aleph.ts but选 wire grows 3179->3440;钱 wins针/49, all decodes exact, inverse 49/49清然-*: blind decode protocol (originals hidden, decoder sees only the chat message),草/3 byte-exact高 (self-test, not independent)
+下載上: verdict, receipts, negative space, sources, openai/math grounding, next tests内載-bench六网50消++
+載联            本在结上           个121机
+載-scan六 个102县然-check.ts局24视然-gen.ts             网44自然发展力布力小   出定1設定2設定3設演的展面的布面的小面等果布果小  年3演来特布特小  当载结.ts          个262收费 22册685久 b7f55c455783448215bc9faca572ac9b4967421d近17:31:11件群:选 search with exact faster span enumeration and deterministic work-unit budget
+    
+    Same wire format and decoder as选 (search-engine change, not a new wire).
+下午 by offset;午Ref kept; equivalence 645 cases,针 mismatches (bench格-equiv.ts)
+下 ChironOptions.workUnits: deterministic budget for macro search and variant sweep清群_WORK_UNITS=32M reproduces选 26 s on filelock/nose/greenlet/gpl; repeat-identical 4/4清 registry key kairos; tsc针; chiron selftest 11/11清主 (receipts; block pass keeps a wall-clock cap, disclosed严格联网31提
+ bench格-equiv.ts网55免+
+主院73助载/chiron.ts     个107收+++++-----
+转   出 ++-
+ 5册259站13男 6d213683c5cef2519cfce270ef0f274199096ac0網58:56条 wrapped-subset results (84 docs, +664 tok aggregate, GPL/CECILL/AGPL −270..−300),选 wall-clock budget finding, codebase/PR/openai-math review内 bench线上  网36供++-
+ bench/review无个136收++++++++++++
+注册170站2男 b32556cb5c5fec19f689e3ca42db6e7b46390efe網43:23条 per-paragraph measure codec for hard-wrapped prose (exact decode-gated arms; red-team 311/0; corpus bench;选 budget finding严线联            网70在线-corpus-manifest.json个936收款线-fetch.py            网58在线-redteam.ts          网59在线上           个140自载线.ts          个259供+
+转          今 7册1527永10e16b258ee167399a4cb214cc451b170cd7ff00版04:29:51附 report: honest measured results (CHIRON + METATRON incumbents, GPL-3 second corpus), negative space, verification gates内容上个263收++++++++++++费用263永32155ac8ebb2a824108156efa53e8e603fd8151b版03:33:44附: verse-line layout codec (greedy-refill of hard-wrapped paragraphs), stacked over选 and METATRON; decode-verified arms, registry entries, benches内容联         网68第容-metatron联网55消++
+转      加载/stichos.ts       个320收++++费 4册452永594b8a52aff26c59cb7776cae48ce72691c00301地jy名@gmail.com码 Fri Oct 9 20:18:49 2026 -0400
+
+    Merge pull request #25 from jy名/arena游-kompkernel
+    
+    Arena游 kompkernel
+
+ .gitignore                                |    13 +
+选.patch                             网8839县 ICARUS.patch                             网8948县 KIONES.patch                             个17603手款/Y7_ECHO务       年280 +
+ bench/Y8_LETHE务      年323 +
+
+New Chinese character before ¶ starts a rule to the next new Chinese character or ¶. After ¶, expand rules recursively; print only the result.

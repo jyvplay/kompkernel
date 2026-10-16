@@ -1,0 +1,12 @@
+bench/holdout/readme.txt
+bench/holdout-work/kb-article.txt
+bench/holdout-work/llm-answer.md
+bench/holdout-work/meeting-transcript.txt
+bench/holdout-work/email-thread.txt
+bench/holdout-work/bibliography.txt
+bench/holdout-lang/de-kb.txt
+bench/z57/lanes/prose-readme-1.md
+bench/z57/lanes/prose-readme-2.md
+bench/z57/lanes/prose-readme-3.md
+bench/z57/lanes/prose-changelog.md
+bench/z57/lanes/hybrid-codecs-spec.md

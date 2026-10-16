@@ -1,0 +1,11 @@
+import { lakonikosDualEncode } from '@/lib/omega/lakonikos-d';
+import { chironDecode } from '@/lib/omega/chiron';
+const t = '§¶' + '2024-01-05 2024-01-06 2024-01-07 2024-01-08';
+const r = lakonikosDualEncode(t);
+console.log('mode', r.mode, 'exact-flag', r.exact);
+console.log('wire', JSON.stringify(r.wire.slice(0, 60)));
+console.log('chironDecode(wire) === text ?', chironDecode(r.wire) === t);
+console.log('decoded field === text ?', r.decoded === t);
+const t2 = 'plain text without frame '.repeat(3);
+const r2 = lakonikosDualEncode(t2);
+console.log('plain: mode', r2.mode, 'exact', chironDecode(r2.wire) === t2);
