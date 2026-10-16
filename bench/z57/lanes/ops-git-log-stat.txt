@@ -1,0 +1,300 @@
+commit 47bbca95a0e95f78dcea106e14c5429de3d31b2b
+Merge: 7c7da87 85fcb9c
+Author: jyvplay <jyvplay@gmail.com>
+Date:   Thu Oct 15 02:25:54 2026 -0400
+
+    Merge pull request #30 from jyvplay/arena/95aaefc1-kompkernel
+    
+    SYNARTESIS + DENDRON: lockfile entailment and brace-tree path lists (both guarded vs DAEDALUS)
+
+commit 85fcb9c898c9071c21a57c86946c21d36d9e1014
+Author: arena-agent <agent@arena.ai>
+Date:   Thu Oct 15 06:22:56 2026 +0000
+
+    X11: AKOLOUTHIA-2 (two-term eligibility, same contract and reader as AKOLOUTHIA v1), registered; 43/43 exact, -413 tokens total vs DAEDALUS; wins on chart/df-h/kubectl/psql/vix/dump, zero prose gain; red team 40 TS cases 0 failures, CPython reader 32 msgs 0 mismatches. Negatives committed: ONOMASIA (unregistered), two-term keyed probe, marker and token-priced selection probes, induction/template/horizontal probes. Frontier re-run 17 lanes (bench/z56/receipts/frontier-v2-lanes.jsonl; package-lock timed out, stopped). docs/codecs.md spec page; bench/z56/REPORT.md with A-J coverage.
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/onomasia_decode.py                           |  93 ++++++++++
+ bench/z56/REPORT.md                                | 105 +++++++++++
+ bench/z56/akolouthia2-bench.ts                     |  10 ++
+ bench/z56/contract-words.ts                        |  12 ++
+ bench/z56/horiz-probe.err                          |   0
+ bench/z56/horiz-probe.jsonl                        |  33 ++++
+ bench/z56/horiz-probe.ts                           |  42 +++++
+ bench/z56/induct-probe.ts                          |  35 ++++
+ bench/z56/keyed-probe.err                          |   0
+ bench/z56/keyed-probe.jsonl                        |  33 ++++
+ bench/z56/keyed-probe.ts                           |  48 +++++
+ bench/z56/keyed2-probe.ts                          |  41 +++++
+ bench/z56/marker-cost.ts                           |   6 +
+ bench/z56/marker-probe.ts                          |  26 +++
+ bench/z56/onomasia-bench.ts                        |  10 ++
+ bench/z56/receipts/akolouthia2-43.count            |   1 +
+ bench/z56/receipts/akolouthia2-43.err              |   1 +
+ bench/z56/receipts/akolouthia2-43.jsonl            |  43 +++++
+ bench/z56/receipts/frontier-v2-lanes.err           |   0
+ bench/z56/receipts/frontier-v2-lanes.jsonl         |  17 ++
+ bench/z56/receipts/onomasia-43.err                 |   1 +
+ bench/z56/receipts/onomasia-43.jsonl               |  33 ++++
+ bench/z56/receipts/onomasia-holdout-rest.err       |  18 ++
+ bench/z56/receipts/onomasia-holdout-rest.jsonl     |  10 ++
+ .../z56/receipts/redteam-akolouthia2.expected.json |   1 +
+ .../z56/receipts/redteam-akolouthia2.messages.json |   1 +
+ bench/z56/receipts/redteam-akolouthia2.py.json     |   1 +
+ bench/z56/receipts/redteam-akolouthia2.ts.jsonl    |  71 ++++++++
+ bench/z56/receipts/redteam-onomasia.expected.json  |   1 +
+ bench/z56/receipts/redteam-onomasia.messages.json  |   1 +
+ bench/z56/receipts/redteam-onomasia.py.json        |   1 +
+ bench/z56/receipts/redteam-onomasia.ts.jsonl       |  52 ++++++
+ bench/z56/redteam-akolouthia2.ts                   |  65 +++++++
+ bench/z56/redteam-onomasia.ts                      |  63 +++++++
+ bench/z56/select-probe.ts                          |  65 +++++++
+ bench/z56/template-probe.ts                        |  33 ++++
+ bench/z56/twoterm-probe.ts                         |  36 ++++
+ docs/codecs.md                                     | 103 +++++++++++
+ src/lib/omega/akolouthia2.ts                       | 119 ++++++++++++
+ src/lib/omega/onomasia.ts                          | 199 +++++++++++++++++++++
+ src/lib/omega/registry.ts                          |   5 +
+ 41 files changed, 1435 insertions(+)
+
+commit d422359a48025a130b6ac89caafe751a0a37a30b
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Thu Oct 15 04:52:43 2026 +0000
+
+    X10: AKOLOUTHIA attack 2 (non-ASCII digits, decimals, NBSP), CPython 0 mismatches; token-count cross-check (fast==exact); GRAMMA/DENDRON/GNOMON on the six gain lanes (all = DAEDALUS); REPORT.md with formal model, portfolio, negative space, downgrades
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/z55/REPORT.md                                | 166 +++++++++++++++++++++
+ bench/z55/attack2-akolouthia.ts                    |  31 ++++
+ .../z55/receipts/attack2-akolouthia.expected.json  |   1 +
+ .../attack2-akolouthia.forced.expected.json        |   1 +
+ .../attack2-akolouthia.forced.messages.json        |   1 +
+ .../z55/receipts/attack2-akolouthia.forced.py.json |   1 +
+ .../z55/receipts/attack2-akolouthia.messages.json  |   1 +
+ bench/z55/receipts/attack2-akolouthia.py.json      |   1 +
+ .../frontier-akolouthia-lanes-gramma.jsonl         |   6 +
+ bench/z55/tokcheck.ts                              |   8 +
+ 10 files changed, 217 insertions(+)
+
+commit 2c0ba001822f7ac26b45b55a6896fc2d528dd14b
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Thu Oct 15 04:49:28 2026 +0000
+
+    X10: frontier-min receipts for AKOLOUTHIA lanes (DAEDALUS, A10, DENS-2, AKOLOUTHIA; A10 worse than DAEDALUS on all six)
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/z55/receipts/frontier-akolouthia-lanes.err   | 1 +
+ bench/z55/receipts/frontier-akolouthia-lanes.jsonl | 6 ++++++
+ 2 files changed, 7 insertions(+)
+
+commit 099412b2bcf344c640919b490318a4b1ffaa9491
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Thu Oct 15 04:46:57 2026 +0000
+
+    X10: AKOLOUTHIA, arithmetic-progression elision across lines (LLM-decoded, one-sentence rule, identity arm guarded by exact round trip and DAEDALUS gate). 43-lane bench: 6 lanes improved (chart.svg -123, df-h -102, kubectl -30, psql -19, dump.sql -15, vix -13), total frontier(min DAEDALUS,DENS-2) 32699 -> 32397 (-302, -0.92%), prose 0; red team 40 TS cases, 33 CPython messages 0 mismatches; in-context hand decode (same session) cmp equal. Probe receipts (arith-probe-43) and frontier-min tree lanes committed.
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/akolouthia_decode.py                         |  88 ++++++
+ bench/z55/akolouthia-bench.ts                      |   9 +
+ bench/z55/arith-probe.ts                           |  54 ++++
+ bench/z55/case-probe.ts                            |  11 +
+ bench/z55/contract-count.ts                        |  11 +
+ bench/z55/incontext/decoded3.txt                   |   8 +
+ bench/z55/incontext/make3.ts                       |  12 +
+ bench/z55/incontext/message3.txt                   |   7 +
+ bench/z55/incontext/sample3.txt                    |   8 +
+ bench/z55/lanes/npm-ls-holdout.txt                 | 150 ++++++++++
+ bench/z55/lanes/npm-ls-repo.txt                    | 326 +++++++++++++++++++++
+ bench/z55/lanes/tree-bench.txt                     |  62 ++++
+ bench/z55/lanes/tree-src.txt                       | 322 ++++++++++++++++++++
+ bench/z55/receipts/akolouthia-43.err               |   1 +
+ bench/z55/receipts/akolouthia-43.jsonl             |  43 +++
+ bench/z55/receipts/arith-probe-43.err              |   1 +
+ bench/z55/receipts/arith-probe-43.jsonl            |  43 +++
+ bench/z55/receipts/frontier-baseline-trees.jsonl   |   1 +
+ bench/z55/receipts/frontier-fast-trees.jsonl       |   4 +
+ .../z55/receipts/redteam-akolouthia.expected.json  |   1 +
+ .../z55/receipts/redteam-akolouthia.messages.json  |   1 +
+ bench/z55/receipts/redteam-akolouthia.py.json      |   1 +
+ bench/z55/receipts/redteam-akolouthia.ts.jsonl     |  70 +++++
+ bench/z55/redteam-akolouthia.ts                    |  79 +++++
+ bench/z55/wire-count.ts                            |  16 +
+ src/lib/omega/akolouthia.ts                        | 180 ++++++++++++
+ src/lib/omega/registry.ts                          |   5 +
+ 27 files changed, 1514 insertions(+)
+
+commit 08ce6497e485dcd9271cda11f0ce494fd0376145
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Thu Oct 15 03:36:30 2026 +0000
+
+    GNOMON: 43-lane exact sweep (package-lock -336, gh-api -3, rest tie), in-context trials, REPORT with downgrades and the not-done list
+    
+    - sweep-gnomon.jsonl: 43 lanes, all exact, total 32717 -> 32378 (-339); 41 lanes tie the frontier minimum.
+    - in-context trial 1 output was overwritten by trial 2; trial 2 output kept as decoded-trial2-json2.txt (cmp rc 0).
+    - REPORT.md: verdict (literal lane bar met on package-lock only; general bar not met; readability downgraded;
+      frontier downgraded), measurements, verification, bugs fixed, and the required items NOT done this turn.
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/z54/REPORT.md                                | 95 ++++++++++++++++++++++
+ .../{decoded2.txt => decoded-trial2-json2.txt}     |  0
+ bench/z54/receipts/sweep-gnomon.err                |  1 +
+ bench/z54/receipts/sweep-gnomon.jsonl              | 43 ++++++++++
+ 4 files changed, 139 insertions(+)
+
+commit 9ceb7e30a8c91d9a84d5fc6e6afa9c2b904dcc16
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Thu Oct 15 03:21:03 2026 +0000
+
+    GNOMON: exact REST-link and npm-tarball elision on DAEDALUS and GRAMMA bases
+    
+    - src/lib/omega/gnomon.ts: rules R1 (REST *_url front-coding against the object url) and R2 (npm
+      lockfile resolved URLs from entry key + version). Candidates on DAEDALUS and GRAMMA JSON dialects;
+      plain DAEDALUS and plain GRAMMA always candidates, so never above that stack minimum.
+    - registry: gnomon entry.
+    - bench/gnomon_decode.py: CPython reader (DAEDALUS and GRAMMA JSON-dialect bases).
+    - bench/z54: measurement and red-team scripts; receipts for the red team (147 CPython-checked messages, 0 mismatches)
+      and the in-context tests (bench/z54/incontext: one raw-form and one json2-clause message, both decoded byte-identical).
+    - Measured (o200k, exact): package-lock-head 5463 (GRAMMA) -> 5127 (-336, -6.2%); gh-api 1091 -> 1088 (-3).
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/gnomon_decode.py                             | 231 +++++++++++++++
+ bench/z54/blank-probe.ts                           |  16 +
+ bench/z54/contract-count.ts                        |  27 ++
+ bench/z54/dbg-front.ts                             |  12 +
+ bench/z54/front-probe.ts                           |  76 +++++
+ bench/z54/gnomon-bench.ts                          |   8 +
+ bench/z54/incontext/decoded2.txt                   |  21 ++
+ bench/z54/incontext/make.ts                        |  12 +
+ bench/z54/incontext/make2.ts                       |  14 +
+ bench/z54/incontext/message.txt                    |  24 ++
+ bench/z54/incontext/message2.txt                   |   4 +
+ bench/z54/incontext/sample.json                    |  21 ++
+ bench/z54/incontext/sample2.json                   |  21 ++
+ bench/z54/receipts/redteam-gnomon.expected.json    |   1 +
+ bench/z54/receipts/redteam-gnomon.messages.json    |   1 +
+ bench/z54/receipts/redteam-gnomon.py.json          |   1 +
+ bench/z54/receipts/redteam-gnomon.ts.jsonl         | 223 ++++++++++++++
+ bench/z54/receipts/sweep-gnomon-daedalus-base.err  |   1 +
+ .../z54/receipts/sweep-gnomon-daedalus-base.jsonl  |  43 +++
+ bench/z54/redteam-gnomon.ts                        | 156 ++++++++++
+ bench/z54/sent2.ts                                 |   3 +
+ bench/z54/sentence-count.ts                        |  17 ++
+ bench/z54/split.ts                                 |  10 +
+ bench/z54/wire-peek.ts                             |   8 +
+ src/lib/omega/gnomon.ts                            | 329 +++++++++++++++++++++
+ src/lib/omega/registry.ts                          |   5 +
+ 26 files changed, 1285 insertions(+)
+
+commit b60db78625d40bee86c87ce09d8ff4134270a647
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Thu Oct 15 02:09:53 2026 +0000
+
+    X9: DENS-2, the brace-tree codec with a bash-named dispatch rule (contract 35->13 tokens); sweep 43 lanes exact; sysctl -20.4%, dotted -16.7%, numstat -6.5%, git-ls -7.9%, find -0.6% vs DAEDALUS; subtree merge measured negative; red team 96/96 TS and CPython
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/dendrons_decode.py                      |  4 +-
+ bench/z52/receipts/redteam-dens.expected.json |  2 +-
+ bench/z52/receipts/redteam-dens.py.json       |  2 +-
+ bench/z52/receipts/redteam-dens.ts.jsonl      |  9 +++
+ bench/z52/receipts/redteam-dens.wires.json    |  2 +-
+ bench/z52/redteam-dens.ts                     |  7 ++-
+ bench/z53/REPORT.md                           | 84 +++++++++++++++++++++++++++
+ bench/z53/merge-count.ts                      | 11 ++++
+ bench/z53/merge-probe.ts                      | 21 +++++++
+ bench/z53/receipts/merge-sysctl.jsonl         |  4 ++
+ bench/z53/receipts/sweep-dens2.jsonl          | 43 ++++++++++++++
+ bench/z53/rule-count.ts                       | 12 ++++
+ src/lib/omega/dendrons.ts                     | 61 ++++++++++++++++---
+ 13 files changed, 248 insertions(+), 14 deletions(-)
+
+commit 030d254e20bca941d5419a60e14c257be77163b5
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Thu Oct 15 01:21:36 2026 +0000
+
+    X10: sysctl stack minimum (7 candidates; phalanx-a10 not run) = 4820; DENS 3862 (-19.9%); report updated
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/z52/REPORT.md                          | 4 ++--
+ bench/z52/receipts/frontier-min-sysctl.jsonl | 1 +
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+commit a6e285f463224387a4054e68cdb200d1b1d07076
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Thu Oct 15 01:06:27 2026 +0000
+
+    X10: DENDRON-S, the brace tree on any separator (dotted keys + paths) with verbatim lines; sysctl -19.9%, dotted identifiers -15.9%, numstat -5.2% vs DAEDALUS; red team 87/87 TS and CPython; prose lanes unchanged
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/dendrons_decode.py                           |   93 ++
+ bench/z52/REPORT.md                                |  119 +++
+ bench/z52/bench-dens.ts                            |   12 +
+ bench/z52/frontier-min.ts                          |   22 +
+ bench/z52/lanes/dotted-idents.txt                  |  813 ++++++++++++++++
+ bench/z52/lanes/sysctl-proc.txt                    | 1020 ++++++++++++++++++++
+ bench/z52/mk-handdecode.ts                         |    7 +
+ bench/z52/receipts/frontier-min-dotted.jsonl       |    1 +
+ bench/z52/receipts/frontier-min-numstat.jsonl      |    1 +
+ bench/z52/receipts/handdecode/sample-expected.txt  |   24 +
+ .../z52/receipts/handdecode/sample-handdecoded.txt |   24 +
+ bench/z52/receipts/handdecode/sample-tree.txt      |    1 +
+ bench/z52/receipts/redteam-dens.expected.json      |    1 +
+ bench/z52/receipts/redteam-dens.py.json            |    1 +
+ bench/z52/receipts/redteam-dens.ts.jsonl           |   87 ++
+ bench/z52/receipts/redteam-dens.wires.json         |    1 +
+ bench/z52/receipts/sweep-dens.jsonl                |   42 +
+ bench/z52/receipts/sweep-sysctl-dens.jsonl         |    1 +
+ bench/z52/redteam-dens.ts                          |   65 ++
+ src/lib/omega/dendrons.ts                          |  257 +++++
+ src/lib/omega/registry.ts                          |    5 +
+ 21 files changed, 2597 insertions(+)
+
+commit 543b14b52bff0d1e83cfea8160c6e1787d27f1d7
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Wed Oct 14 23:52:50 2026 +0000
+
+    X9: contract-language probe (o200k); Chinese compact contract saves 3 tokens, below gate; report
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/x9/REPORT.md                | 33 +++++++++++++++++++++++++++++++++
+ bench/x9/lang-count.ts            | 16 ++++++++++++++++
+ bench/x9/receipt-lang-count.jsonl | 10 ++++++++++
+ 3 files changed, 59 insertions(+)
+
+commit e45c73e1f6f774f38e15763c2f0cb5ff33df7b45
+Author: arena-agent <agent@arena.ai>
+Date:   Wed Oct 14 23:08:23 2026 +0000
+
+    DENDRON: path and URL lists as a tree of bash brace groups (guarded, exact)
+    
+    New codec src/lib/omega/dendron.ts (registry key 'dendron'). A run of lines that
+    share a first segment is written once as a brace group, dir/{a,b/{c,d}}, which the
+    reader expands in order (bash brace-expansion grammar). The tree arm is used only
+    when it is strictly cheaper than the DAEDALUS frontier and round-trips exactly.
+    
+    Measured (o200k, OMEGA_DET=1, one-chat M): git ls-files 400 files 1563 -> 1461
+    (-6.5%), markdown paths 169 1099 -> 1080 (-1.7%), 160-line git listing -13;
+    all other measured lanes tie the frontier.
+    
+    Independent CPython reader bench/dendron_decode.py; red team 16/16 under both
+    readers; in-context decode of a 40-path tree byte-identical (author caveat).
+    Receipts and report: bench/z51/.
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/dendron_decode.py                          |  99 +++++
+ bench/z51/REPORT.md                              | 198 ++++++++++
+ bench/z51/bench-dendron.ts                       |  16 +
+ bench/z51/brace-generic.ts                       |  37 ++
+ bench/z51/brace-lib.ts                           |  20 +
+ bench/z51/brace-probe.ts                         |  31 ++
+ bench/z51/brace-probe2.ts                        |  15 +

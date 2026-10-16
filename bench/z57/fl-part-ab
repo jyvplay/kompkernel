@@ -1,0 +1,8 @@
+bench/holdout-tbl/kubectl-get-pods.txt
+bench/holdout-ops/node-stacktraces.txt
+bench/holdout-ops/openstack-loghub-26.log
+bench/holdout-ops/git-numstat.txt
+bench/holdout-ops/find-listing.txt
+bench/holdout-mk/chart.svg
+bench/holdout-mk/dump.sql
+bench/holdout-tab/vix-daily-1990.csv

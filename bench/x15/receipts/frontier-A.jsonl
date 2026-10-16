@@ -1,0 +1,4 @@
+{"file":"bench/holdout-lang/de-kb.txt","raw":2432,"dendrons":495,"dendron":495,"daedalus":495,"daedalus-dual":492,"phalanx-a10":505,"akolouthia2":495,"hora":495,"hemera":495,"frontierMin":492}
+{"file":"bench/holdout-mk/chart.svg","raw":3446,"dendrons":465,"dendron":465,"daedalus":465,"daedalus-dual":465,"phalanx-a10":539,"akolouthia2":330,"hora":465,"hemera":465,"frontierMin":330}
+{"file":"bench/holdout-mk/dump.sql","raw":5159,"dendrons":728,"dendron":728,"daedalus":728,"daedalus-dual":725,"phalanx-a10":876,"akolouthia2":703,"hora":728,"hemera":728,"frontierMin":703}
+{"file":"bench/holdout-ops/find-listing.txt","raw":11789,"dendrons":1318,"dendron":1326,"daedalus":1326,"daedalus-dual":1342,"phalanx-a10":1415,"akolouthia2":1326,"hora":1326,"hemera":1326,"frontierMin":1318}

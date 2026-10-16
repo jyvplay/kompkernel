@@ -106,8 +106,13 @@ import { densEncode } from './dendrons';
 import { gnomonEncode } from './gnomon';
 import { akolouthiaEncode, akolouthiaDecode } from './akolouthia';
 import { akolouthia2Encode, akolouthia2Decode } from './akolouthia2';
+import { horaEncode, horaDecode } from './hora';
+import { hemeraEncode, hemeraDecode } from './hemera';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
+import { lakonikosDualEncode } from './lakonikos-d';
+import { stathmosEncode } from './stathmos';
+import { polychronEncode } from './polychron';
 import { tabminEncode } from './tabmin';
 import { uuidfoldEncode } from './uuidfold';
 import { dirfoldEncode } from './dirfold';
@@ -702,6 +707,22 @@ export function codecEntries(): Entry[] {
     {
       key: 'daedalus-dual', label: '⧗ DAEDALUS-D (DAEDALUS wire with a dual-tokenizer glyph pool: every glyph is one token under o200k_base AND cl100k_base; same decoder; decode-gated, identity fallback)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = daedalusDualEncode(t, enc); return { output: r.wire, decoded: r.exact ? t : r.wire, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `mode=${r.mode}; arm=${r.winningArm}; o200k=${r.messageTokens.o200k_base}; cl100k=${r.messageTokens.cl100k_base} (raw o200k=${r.inTokens.o200k_base}, cl100k=${r.inTokens.cl100k_base})` }; },
+    },
+    {
+      key: 'hemera', label: '☀ HEMERA (Calendar-day deltas: a date 1–31 days from the previous date is written as ※dN; a same-date ms timestamp as HORA’s ※N; identity unless it pays)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = hemeraEncode(t, enc); const decoded = hemeraDecode(r.wire, r.arm); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; days=${r.days}; ms=${r.ms}; ${r.notes}` }; },
+    },
+    {
+      key: 'stathmos', label: '⟟ STATHMOS (Fixed-width decimal columns: remove trailing fractional zeros behind an @dp schema, restore exact precision; identity unless the full one-chat message pays)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = stathmosEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `arm=${r.mode}; dp=${r.dp.join(',')}; ${r.notes}` }; },
+    },
+    {
+      key: 'polychron', label: '⧖ POLYCHRON (Joint typed-column schema: one @dp header carries fixed decimal widths while ※dN carries calendar-day deltas in the same table; one contract and one DAEDALUS-D wire; exact and identity-gated)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = polychronEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `${r.arm}; days=${r.days}; dp=${r.dp.join(',')}; ${r.notes}` }; },
+    },
+    {
+      key: 'lakonikos-d', label: '⟡ LAKONIKOS-D (DAEDALUS-D wire with the terse decoder contract: same dual-tokenizer wire and decoder as DAEDALUS-D, the rules sentence shortened; identity unless the chironDecode round trip is exact)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = lakonikosDualEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens[enc === 'cl100k_base' ? 'cl100k_base' : 'o200k_base'], note: `mode=${r.mode}; arm=${r.winningArm}; o200k=${r.messageTokens.o200k_base} (DAEDALUS-D ${r.messageTokensDualOld.o200k_base}); cl100k=${r.messageTokens.cl100k_base}` }; },
     },
     {
       key: 'lakonikos', label: '⟡ LAKONIKOS (DAEDALUS wire, terse decoder contract: same wire and decoder, fewer contract tokens)', family: 'exact', fidelity: 'exact',

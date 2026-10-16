@@ -1,0 +1,34 @@
+§Э5-06-27T16:31:07.ы)
+	at org.springframeworkх.beans.factory.supportдых.AbstractӨ	at java.base@21.0с)
+Өш)
+	at orgиш.hibernateХOS-UserИХ-HikariPoolҟ : ChainИ -іAutowireCapableBeanFactoryл.java:ЩBean(Abstractілҿ.BytecodeProviderВ org.hibernate.bytecode.spiҿ: Providerо org.hibernateмы.boot.SpringApplicationС(SpringApplicationлүм.runСп.7/javaәп.util.ServiceLoaderтә$LazyClassPathLookupIteratorҮBeanFactoryлчы.orm.jpaеServiceRegistryImplҧш.hibernate.service.internal.Abstractеб: undefined/unknown
+яBeanFactoryгImplлу(ServiceLoaderлөManagerFactoryОш.hibernate.boot.registry.classloadingҚService(AbstractелъEntityManagerFactoryBeanұContainerъз.bytecode.internal.bytebuddyҿImpl not found
+н.boot.internalйн.SessionFactoryBuilderImpl.<init>(SessionFactoryBuilderЬSessionFactoryBuilderь encountered during context initialization - cancelling refresh attempt: orgЙ : HHH000Е 6.6.15.FinalЦWebServerApplicationContextЅambdaForm$DMHҒAll(AggregatedServiceАChainOsUserApplicationв.hasNextэHibernateJpaPersistenceProviderю.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityө':Возӣ202Эк+08:00 ак INFO 334қ17 --- [ChainХ] [           main]рақ com.zaxxer.hikari.HikariDataSource      ҟРӣ587р Shutdownң.initiateServiceћи.bytecode.internalҿInitiatorң(BytecodeProviderInitiatorлщақҩы.context.support.AbstractApplicationContextБО.internal.AggregatedServiceLoader$ClassPathAndModulePathAggregatedServiceLoaderЛ
+202Эжі.initializeЩ182Ә(AbstractApplicationContextл¶SpringBoot version: 3.5.0
+Hibernate Version:Е
+
+When i use native image to package my project.I compile successed.
+But when i run it.
+Give this fail message:
+```plaintext
+Exceptionью```
+
+more logs:
+```plaintextЛ413щ o.hibernate.jpa.internal.util.LogHelper Й204: Processing PersistenceUnitInfo [name: default]
+ӣ414що.Version                   Й412: Hibernate ORM core versionЕЛ416щ o.h.c.internal.RegionFactoryInitiator   Й026: Second-level cache disabledЛ419р Starting...
+ӣ547щ com.zaxxer.hikari.pool.HikariPool       ҟ Added connection org.postgresql.jdbc.PgConnection@41b49605Л547р Start completed.
+ӣ576що.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (ChainИ)']
+	Database driverб	Database version: 17.4
+	Autocommit modeб	Isolation levelб	Minimum pool sizeб	Maximum pool sizeбӣ587к WARN 334қ w.s.c.ServletЦ : ExceptionьюР initiated...
+Р completed.
+Application run failed
+orgю	at org.springframeworkх.Abstractж6ді.doCreateЩ607ді.createЩ529дя.lambda$doGetBean$0(AbstractҮ339ых.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistryл373дя.doGetBean(AbstractҮ337дя.getBean(AbstractҮ207ҩ.finishяInitializationӘ970ҩ.refreshӘ627ы.boot.web.servlet.context.ServletЦ.refresh(ServletЦл146м.refreshС753м.refreshContextС439ү318ү1362ү1351)
+	at cn.trendai.chain.os.user.interfaces.А.main(Ал26сп.lang.invoke.LЅ/sa346b79c.invokeStaticInit(LЅ)
+Caused by: java.util.ServiceConfigurationError:ВозӨә.failу593ст.nextProviderClassу1219ствServiceу1228ству1273сә$2ву1309сә$ProviderSpliterator.tryAdvanceу1491сп.util.Spliterators$1Adapterв(Spliteratorsл681Б.loadҒLoaderл123Б.getҒLoaderл112О.internal.ClassLoaderServiceImpl.loadJavaServices(ClassLoaderServiceг241ћ51ћ22и.boot.registry.internal.Standardең(StandardServiceRegistryг130ҧ.createҚ263ҧ.initializeҚ238ҧ.getҚ215ийг70ийг47ин.DefaultЬService.createЬ(DefaultЬServiceл26ин.MetadataImpl.getЬ(Metadataг175и.jpaн.EntityөBuilderImpl.build(EntityөBuilderг1513ч.vendor.Springэ.createContainerEntityө(Springэл66ч.Localұ.createNativeEntityө(Localұл390ч.Abstractъ.buildNativeEntityө(Abstractъл419ч.Abstractъ.afterPropertiesSet(Abstractъл400ч.Localұ.afterPropertiesSet(Localұл366ді.invokeInitMethods(Abstractіл1873дж2)
+	... 16 more
+```
+
+
+
+New Cyrillic before ¶ starts a rule to the next new Cyrillic or ¶. After ¶, expand rules recursively; print only the result.

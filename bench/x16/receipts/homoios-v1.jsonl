@@ -1,0 +1,30 @@
+{"file":"bench/holdout-lang/de-kb.txt","raw":2432,"arm":"identity","subs":0,"M":492,"identityM":492,"exact":true,"notes":"identity: 0 block(s) substituted","ms":2446}
+{"file":"bench/holdout-mk/chart.svg","raw":3446,"arm":"identity","subs":0,"M":465,"identityM":465,"exact":true,"notes":"identity: 0 block(s) substituted","ms":1766}
+{"file":"bench/holdout-mk/dump.sql","raw":5159,"arm":"identity","subs":0,"M":725,"identityM":725,"exact":true,"notes":"identity: 0 block(s) substituted","ms":16284}
+{"file":"bench/holdout-ops/find-listing.txt","raw":11789,"arm":"identity","subs":0,"M":1342,"identityM":1342,"exact":true,"notes":"identity: 0 block(s) substituted","ms":26355}
+{"file":"bench/holdout-ops/git-numstat.txt","raw":12306,"arm":"identity","subs":0,"M":2036,"identityM":2036,"exact":true,"notes":"identity: 0 block(s) substituted","ms":32011}
+{"file":"bench/holdout-ops/node-stacktraces.txt","raw":1848,"arm":"identity","subs":0,"M":342,"identityM":342,"exact":true,"notes":"identity: edits arm 419 >= identity 342","ms":5849}
+{"file":"bench/holdout-ops/openstack-loghub-26.log","raw":7969,"arm":"identity","subs":0,"M":1053,"identityM":1053,"exact":true,"notes":"identity: 0 block(s) substituted","ms":23959}
+{"file":"bench/holdout-tab/aapl-2014.csv","raw":5488,"arm":"identity","subs":0,"M":1588,"identityM":1588,"exact":true,"notes":"identity: 0 block(s) substituted","ms":24540}
+{"file":"bench/holdout-tab/vix-daily-1990.csv","raw":6578,"arm":"identity","subs":0,"M":1390,"identityM":1390,"exact":true,"notes":"identity: 0 block(s) substituted","ms":1411}
+{"file":"bench/holdout-tbl/df-h.txt","raw":939,"arm":"identity","subs":0,"M":279,"identityM":279,"exact":true,"notes":"identity: 0 block(s) substituted","ms":2499}
+{"file":"bench/holdout-tbl/kubectl-get-pods.txt","raw":2649,"arm":"identity","subs":0,"M":390,"identityM":390,"exact":true,"notes":"identity: 0 block(s) substituted","ms":20822}
+{"file":"bench/holdout-tbl/psql-output.txt","raw":1578,"arm":"identity","subs":0,"M":397,"identityM":397,"exact":true,"notes":"identity: 0 block(s) substituted","ms":1183}
+{"file":"bench/holdout-work/bibliography.txt","raw":2759,"arm":"identity","subs":0,"M":709,"identityM":709,"exact":true,"notes":"identity: 0 block(s) substituted","ms":4898}
+{"file":"bench/holdout-work/email-thread.txt","raw":2126,"arm":"identity","subs":0,"M":530,"identityM":530,"exact":true,"notes":"identity: 0 block(s) substituted","ms":3775}
+{"file":"bench/holdout-work/kb-article.txt","raw":3385,"arm":"identity","subs":0,"M":650,"identityM":650,"exact":true,"notes":"identity: 0 block(s) substituted","ms":1943}
+{"file":"bench/holdout-work/llm-answer.md","raw":2542,"arm":"identity","subs":0,"M":706,"identityM":706,"exact":true,"notes":"identity: 0 block(s) substituted","ms":2696}
+{"file":"bench/holdout-work/meeting-transcript.txt","raw":1746,"arm":"identity","subs":0,"M":420,"identityM":420,"exact":true,"notes":"identity: 0 block(s) substituted","ms":1286}
+{"file":"bench/holdout/readme.txt","raw":3242,"arm":"identity","subs":0,"M":688,"identityM":688,"exact":true,"notes":"identity: 0 block(s) substituted","ms":3240}
+{"file":"bench/z11/fresh/csv-8.csv","raw":7432,"arm":"identity","subs":0,"M":1709,"identityM":1709,"exact":true,"notes":"identity: 0 block(s) substituted","ms":14812}
+{"file":"bench/z57/lanes/ops-ls-l-bin.txt","raw":1162,"arm":"identity","subs":0,"M":248,"identityM":248,"exact":true,"notes":"identity: 0 block(s) substituted","ms":2119}
+{"file":"bench/z57/lanes/ops-ls-l-omega.txt","raw":8760,"arm":"identity","subs":0,"M":965,"identityM":965,"exact":true,"notes":"identity: 0 block(s) substituted","ms":27402}
+{"file":"bench/z48/corpus/sp500-200.csv","raw":20987,"arm":"identity","subs":0,"M":4352,"identityM":4352,"exact":true,"notes":"identity: 0 block(s) substituted","ms":28128}
+{"file":"bench/holdout-ops/ls-full-iso.txt","raw":2549,"arm":"identity","subs":0,"M":405,"identityM":405,"exact":true,"notes":"identity: 0 block(s) substituted","ms":10075}
+{"file":"bench/z20/samples/git-log-iso.txt","raw":5811,"arm":"identity","subs":0,"M":1530,"identityM":1530,"exact":true,"notes":"identity: 0 block(s) substituted","ms":6598}
+{"file":"bench/z11/fresh/ops-git-log-stat.txt","raw":21021,"arm":"identity","subs":0,"M":3493,"identityM":3493,"exact":true,"notes":"identity: edits arm 3608 >= identity 3493","ms":292807}
+{"file":"bench/z46/corpus/traces/spring-projects_spring-framework_35118.md","raw":8513,"arm":"identity","subs":0,"M":976,"identityM":976,"exact":true,"notes":"identity: 0 block(s) substituted","ms":19250}
+{"file":"bench/z47/corpus/changelog/svenstaro_miniserve.md","raw":21112,"arm":"identity","subs":0,"M":3052,"identityM":3052,"exact":true,"notes":"identity: 0 block(s) substituted","ms":34480}
+{"file":"bench/holdout-ops/git-log-fuller.txt","raw":368,"arm":"identity","subs":0,"M":143,"identityM":143,"exact":true,"notes":"identity: 0 block(s) substituted","ms":1356}
+{"file":"bench/x16/lane-agent-history.md","raw":4539,"arm":"identity","subs":0,"M":293,"identityM":293,"exact":true,"notes":"identity: edits arm 393 >= identity 293","ms":3089}
+{"file":"bench/x16/lane-rollup-license.md","raw":35220,"arm":"identity","subs":0,"M":1398,"identityM":1398,"exact":true,"notes":"identity: edits arm 1557 >= identity 1398","ms":87386}

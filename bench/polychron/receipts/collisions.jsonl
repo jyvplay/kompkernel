@@ -1,0 +1,6 @@
+{"name":"valid-chiron-program","ok":true,"arm":"identity","exact":true,"wirePrefix":"@raw\n§家foo¶家家家"}
+{"name":"malformed-chiron-prefix","ok":true,"arm":"identity","exact":true,"wirePrefix":"§Afoo¶AAA"}
+{"name":"valid-dp-looking-identity","ok":true,"arm":"identity","exact":true,"wirePrefix":"@raw\n@dp 0,6\nDAT"}
+{"name":"raw-prefix-identity","ok":true,"arm":"identity","exact":true,"wirePrefix":"@raw\n@raw\nDATE,O"}
+{"name":"literal-date-marker","ok":true,"arm":"identity","exact":true,"wirePrefix":"@raw\nDATE,OPEN\n1"}
+{"name":"crlf-identity","ok":true,"arm":"identity","exact":true,"wirePrefix":"DATE,OPEN\r\n1990-"}

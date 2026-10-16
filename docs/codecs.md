@@ -1,12 +1,20 @@
 # Codec abbreviations: spec page
 
-Status: written in X11 (branch `arena/95aaefc1-kompkernel`). Each entry states what the code does, whether the encoder is greedy, how it was measured, and its time/CPU bound. Entries marked **label-only** were not re-read or re-measured in X11. Their description comes from the `label` in `src/lib/omega/registry.ts`.
+Status: historical X11/X12 material plus an X18 addendum. Each entry states what the code does, whether the encoder is greedy, how it was measured, and its time/CPU bound. For the current typed-table codec, see the POLYCHRON section below and the full design page `docs/codec-abbreviations.md`.
 
 ## Measurement contract (applies to every entry)
 
 - Metric: `M` = o200k_base tokens of the **contract plus wire**, in one chat message, with no system prompt and no skills file.
 - Every reported lane is byte-exact. Round trip is checked in TypeScript, and where a CPython reader exists it is also checked on the messages.
 - Identity arm = plain DAEDALUS. Any codec that fails a gate returns identity, so its `M` is never worse than DAEDALUS, except where the reported `M` includes an extra arm.
+
+## X18: POLYCHRON and current frontier note
+
+**POLYCHRON** (`src/lib/omega/polychron.ts`, registry key `polychron`) is a new exact, identity-gated codec beyond STATHMOS. It performs one typed-table pass that combines HEMERA calendar-day deltas (`※dN`) with STATHMOS fixed decimal widths in one `@dp D1,...,Dk [crlf]` schema, then uses one LAKONIKOS-D/DAEDALUS-D wire and one in-band restore contract. It is greedy only inside its deterministic date/column scans; the transformed-vs-identity decision is a two-candidate message-cost gate, not a tournament. The exact reader rejects malformed headers, preserves literal reserved-prefix inputs with `@raw`, restores decimal widths before dates, and requires the final wire to round trip.
+
+The complete encoder's typed portion is O(n) time and O(n) space. Its two DAEDALUS-D candidates inherit the normal production wall budget `min(20,000, 1,200 + 1.1·len)` ms each; `OMEGA_DET=1` intentionally disables time expiry for deterministic natural-end measurements, so it is not a CPU bound. Fresh receipts: `bench/polychron/receipts/redteam.jsonl` is 265/265 exact with zero failures; `collisions.jsonl` is 6/6 after repairing a valid-CHIRON identity collision; `lanes.jsonl` is 28/28 exact and transforms only VIX (`1138` vs LAKONIKOS-D `1380`); `polychron_decode.py` independently decodes all 28 exported wires exactly. The direct-LLM-readability claim remains unverified because no LLM was run.
+
+The pre-POLYCHRON frontier was rechecked under keys DENS-2, AKOLOUTHIA-2, DAEDALUS-D, and A10; its receipt is `bench/polychron/receipts/frontier-recheck.jsonl`. The 112-cell, 90-second-cap run completed 96 cells and recorded 16 timeouts; first-key tie counts among available cells were DENS-2 13, AKOLOUTHIA-2 8, DAEDALUS-D 7, with no unique A10 win. The old global label remains honest: DENS-2, AKOLOUTHIA-2, and DAEDALUS-D trade local wins; A10 is not a robust minimum. POLYCHRON is a niche new leader for typed dated-decimal lanes, not a replacement universal frontier. See `docs/codec-abbreviations.md` for citations, category table, false-solution tests, and the live-search record.
 
 ## Selection: greedy or not, tournament or not
 
@@ -79,22 +87,44 @@ Two different selection shapes appear in this stack. They must not be confused.
 
 - Net loss; not adopted. Its bench files are intentionally not committed.
 
-## Leaders by category (17 measured lanes, X11)
+### HORA (X13, `src/lib/omega/hora.ts`, registry key `hora`, exact)
 
-Frontier-min here = min(DAEDALUS, DAEDALUS-D, A10, DENDRON, DENS-2, GRAMMA), excluding AKOLOUTHIA-2 and PARADEIGMA, which was not run.
+- Timestamp deltas. A full `YYYY-MM-DD<sep>HH:MM:SS.mmm` that follows a same-date timestamp is written as `※N` (N = signed ms from the previous timestamp). Reader: DAEDALUS decode, then add N back. Contract 23 tokens.
+- Measured, one-chat M, o200k, `OMEGA_DET=1`: openstack-loghub-26.log identity 1008, HORA 987 (−21, exact). Red team 46/46 transform round trips. CPython reader 3/3. Receipts: `bench/z58/receipts/`.
+- Scope: logs with millisecond ISO timestamps. Identity elsewhere (the other real lanes in the probe, see REPORT §5).
+- Prior art: differential timestamp coding (Gorilla, VLDB 2015; LogReducer, FAST 2021; DeLog, arXiv 2601.15084). Novelty is only the one-chat wire on top of DAEDALUS.
+
+### Alias tier (negative, X13, `bench/z58/alias-test.ts`, not registered)
+
+- The user's language-tier idea, tested end to end with DAEDALUS on the substituted text. Best lane de-kb −4 (491 against 495); other lanes +10 to +15. The shortcut fails: DAEDALUS already captures frequent words, and the alias table costs more than the saving.
+
+### ANAPHORA-FOLD (negative, X12, `src/lib/omega/anaphora-fold.ts`, unregistered)
+
+- Two-sided field anchoring against the best of the K previous lines (header `@k,n,m|X`). Byte-exact (TS round trip; CPython reader `bench/anaphora_fold_decode.py`, 15/15 forced folds). Fails G3 on every lane that has folds: DAEDALUS already encodes the repeated heads and tails as glyphs. Forced-fold M: openstack +72, ls-l-omega +92, psql +60. Window sweep K ∈ {1,4,16} on 2 lanes and K=16 on 28 lanes: all identity. Raw-token ceilings (up to 42%) are not realised savings. Receipts: `bench/z57/receipts/anaphora-lanes.jsonl`, `anaphora-k-sweep.jsonl`, `redteam-anaphora.*`. Report: `bench/z57/REPORT.md`.
+- NOT the shipped ANAPHORA (AN1, `src/lib/omega/anaphora.ts`), which is unchanged.
+
+## Leaders by category (17 measured lanes, X12 re-run, `OMEGA_DET=1`)
+
+Frontier-min here = min(DAEDALUS, DAEDALUS-D, A10, DENDRON, DENS-2, GRAMMA, AKOLOUTHIA-2). PARADEIGMA was not run in X12. Full table: `bench/z57/REPORT.md` §3, generated by `bench/z57/summarize.py` from `bench/z57/receipts/frontier-fl-part-*.jsonl`.
 
 | Category | Lanes | Leader (M) | Note |
 |---|---|---|---|
 | Prose / KB / email / meeting | de-kb, kb-article, llm-answer, email-thread, meeting, readme | DAEDALUS-D on 3 lanes (−1 to −3); DAEDALUS on email-thread (+5 for D); tie on meeting and readme | AKOLOUTHIA-2 = identity; no prose gain |
 | Bibliography | bibliography.txt | AKOLOUTHIA-2 (709), −2 vs DAEDALUS | essentially tie |
-| Logs / stack traces | node-stacktraces, openstack-loghub-26 | DAEDALUS = DENDRON = DENS = GRAMMA = AKOLOUTHIA-2 | identity everywhere |
-| Directory listings | find-listing | DENS-2 (1318) | −8 vs frontier-min-without-A2 |
+| Logs / stack traces | node-stacktraces, openstack-loghub-26 | DAEDALUS = DENDRON = DENS = GRAMMA = AKOLOUTHIA-2 | identity everywhere (ANAPHORA-FOLD: no gate-passing fold) |
+| Directory listings | find-listing, ops-ls-l-omega | DENS-2 (1318; 954) | −8 and −17 vs DAEDALUS |
+| ls -l (node_modules/.bin) | ops-ls-l-bin | tie, all arms 247 | 0 |
 | Git numstat table | git-numstat | DENS-2 (1904) | AKOLOUTHIA-2 is +132 worse here |
 | Ops tables | psql, kubectl, df-h | AKOLOUTHIA-2 (355, 326, 171) | −42, −60, −108 vs frontier |
 | Structured numeric (SVG, SQL, CSV) | chart.svg, dump.sql, vix | AKOLOUTHIA-2 (330, 703, 1369) | −135, −22, −21 vs frontier |
 | JSON lockfile | package-lock-head (40 KB) | not measured (A10 timed out); AKOLOUTHIA-2 identity (5523) | open |
 
 ## Runtime honesty
+
+- X18: POLYCHRON red-team ran about 11 minutes for 265 cases; the 28-lane POLYCHRON run ran about 4.3 minutes. Its independent CPython reader completed 28 cases with one transformed lane and zero mismatches. The frontier recheck is sequential and records per-cell timeouts instead of turning them into scores.
+- X12: `OMEGA_DET=1` pins the clock to 0, so every deadline gate stays open and each search runs to its natural end. Deterministic, but unbounded on large inputs: `prose-readme-2..6` and the ANAPHORA bench did not finish in 20+ minutes and were stopped. Production runs (no `OMEGA_DET`) use `min(20000, 1200 + len*1.1)` ms. Measured numbers are natural-end values.
+- X12 incident: a new fold codec overwrote the shipped `src/lib/omega/anaphora.ts` (AN1). Restored from HEAD; fold codec moved to `anaphora-fold.ts`. `tsc --noEmit` exits 0.
+- X12 tools: bash, esbuild/node (`bench/tmp/run.sh`), python3, `npx tsc`, `web_search`, `fetch_page`. No LLM run, no Lean, no GitHub calls (session closed).
 
 - Tools used this session: `bash`, `git` and `gh` (authenticated), `esbuild` and `node` (bench runner `bench/tmp/run.sh`), `python3` (CPython readers), `gh api` for `openai/math`, `fetch_page`, `web_search`, No image search.
 - No Lean toolchain is installed. No Lean proof was checked by me.
