@@ -111,6 +111,8 @@ import { hemeraEncode, hemeraDecode } from './hemera';
 import { stigmeEncode, stigmeDecode } from './stigme';
 import { morpheEncode, morpheDecode } from './morphe';
 import { syzeuxisEncode, syzeuxisDecode } from './syzeuxis';
+import { lexisEncode, lexisDecode, lexisFold, lexisUnfold } from './lexis';
+import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
 import { lakonikosDualEncode } from './lakonikos-d';
@@ -312,6 +314,21 @@ export function codecEntries(): Entry[] {
     {
       key: 'syzeuxis', label: '⋈ ΣΥΖΕΥΞΙΣ (Column-major conjunction: KIONES proved tabular redundancy lives down the columns and MORPHE proved shape rules should fit themselves to the payload, but the two were never combined — KIONES transposes and then runs the pre-MORPHE stack, while MORPHE fits rules in row-major order where a value column is never contiguous. Because MORPHE’s rules carry uniformity preconditions, row-major scope means one stray year vetoes a rule for every value that would have benefited; column-major makes that precondition local. Measured arms: row-morphe, row-eidos, row-aion, col-bare, col-morphe, col-eidos, col-aion; cheapest byte-exact arm wins and every arm is exposed in `armTokens`.)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = syzeuxisEncode(t, enc); const decoded = syzeuxisDecode(r.wire, { arm: r.arm, rules: r.rules, sep: r.sep, after: r.after, tag: r.tag }); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; rules=[${r.rules.join('+')}]; transpose=${r.transpose.applied ? r.transpose.rows + 'x' + r.transpose.cols : 'no'}; arms=${JSON.stringify(r.armTokens)}; M=${r.messageTokens} vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'lexis', label: 'λεξις ΛΕΞΙΣ (Junction refolding: English orthography contains derivable junctions — after a sentence mark in { . , ; : } the next thing is essentially always one space and a new word, so that space carries almost no information and can be deleted, then restored by a stated rule. What makes this a codec rather than a trick is the derivable/danger partition: any occurrence of a sentence mark immediately followed by a non-space character with NO space is NOT derivable, and would be corrupted by the inverse rule, so the encoder detects those and rewrites them with an adaptive single-token sentinel chosen per text from a pool of marks that do not occur in the wire. The fold is tried in BOTH composition orders — outside the parent (fold the parent’s wire) and inside it (fold the text, then let the parent encode) — because folding changes token boundaries and can therefore help or hurt the parent’s span discovery; the same lesson SYZEUXIS taught about row-major vs column-major. Ships only when the round trip is byte exact AND the measured message strictly beats the parent alone.)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => {
+        const cut = (r: any) => { const dp: string = r.decoderPrompt; return { wire: String(r.wire), contract: dp.slice(String(r.wire).length + 1) }; };
+        const parents = [
+          { name: 'identity', run: (x: string) => ({ wire: x, contract: 'Print the text exactly as given.' }), undo: (w: string) => w },
+          { name: 'lakonikos', run: (x: string) => cut(lakonikosEncode(x, enc)), undo: (w: string) => chironDecode(w) },
+          { name: 'daedalus', run: (x: string) => cut(daedalusEncode(x, enc)), undo: (w: string) => chironDecode(w) },
+          { name: 'polytropos', run: (x: string) => cut(polytroposEncode(x, enc)), undo: (w: string) => chironDecode(w) },
+        ];
+        const r = lexisEncode(t, enc, parents as any);
+        const decoded = lexisDecode(r.wire, r.decodeConfig);
+        return { output: r.wire, decoded, oneChat: r.messageTokens, note: `parent=${r.parent}; order=${r.order}; folds=${r.folds}; dangers=${r.dangers}; sentinels=[${r.sentinels.join('')}]; M=${r.messageTokens} vs identity ${r.inTokens}; ${r.notes}` };
+      },
     },
     {
       key: 'chronos',

@@ -95,6 +95,48 @@ Conventions:
 - **Time/CPU bound.** Linear pass over the table, plus two LAKONIKOS-D encodes (DAEDALUS-D wire, wall-clock budget unless `OMEGA_DET=1`).
 - **Measured (X17, 28 lanes, o200k M).** Exact 28/28. The transform fired on one lane only (`vix-daily-1990.csv`: 1380 → 1212 against LAKONIKOS-D, and 1369 is the frontier minimum). It did not fire on `aapl-2014.csv` or `csv-8.csv`: their decimal columns have mixed widths (for example 8, 7, and 6 digits in aapl), so the fixed-width rule rejects them, and the files appear to have had trailing zeros stripped upstream, and the original width cannot be recovered from the cell (an inference from the widths, not checked against the source). It did not fire on `sp500-200.csv`, which has no decimal columns (the numbers are integers). Earlier probe numbers that showed a gain on aapl were invalid (round trip failed) and are superseded. Verdict: niche, not a broad win.
 
+### LEXIS (`lexis`, X22, shipped)
+
+- **What it is:** reversible junction refolding. Deletes the space after
+  `. , ; :` when the next character is not whitespace, because that space is
+  derivable; restores it by rule. Non-derivable occurrences (sentence mark
+  immediately followed by non-whitespace with no space: `J. L.,`, `3.14`,
+  `file.ts`) are rewritten with an adaptive single-token sentinel named in the
+  contract.
+- **Greedy?** No. The fold is a *total, deterministic* rewrite of every
+  derivable junction — there is no selection, no tournament and no scoring
+  among junctions. The only search is over (i) which parent codec to wrap and
+  (ii) which composition order (`out` vs `in`) — both enumerated exhaustively
+  and compared by measured message cost.
+- **Honest source-article citation:** none. There is no paper behind this. The
+  observation that orthographic junctions are redundant is folklore; the
+  derivable/danger partition, the adaptive sentinel, the order-aware contract
+  and the completeness gate are original to this repository. The nearest
+  literatures are *adjacent but different* and are **not** sources:
+  - **Inverse Text Normalization / punctuation restoration** (ASR) — model
+    based, therefore *not* byte exact; see the Soniox/NVIDIA/NeMo ITN write-ups
+    and arXiv:2102.06380, arXiv:2210.15063.
+  - **LLM + arithmetic coding** (Delétang et al., ICLR 2024, "Language Modeling
+    Is Compression"; arXiv:2505.06297; arXiv:2604.02343; PMATIC
+    arXiv:2601.10678) — genuinely lossless, but requires bit-identical
+    conditional distributions at encode and decode. Kipf et al. (CIDR 2026,
+    "Waiting to Decompress") state it plainly: deterministic decompression
+    requires the exact same weights, tokenizer and preprocessing, and any
+    change "even in floating-point arithmetic or token handling" breaks
+    lossless reconstruction. A bare chat-message reader cannot supply that, so
+    this whole family is **out of contract** for us.
+- **Time- or CPU-bound?** CPU-bound and cheap. Per lane it runs the parent
+  codec twice (once per composition order) plus O(n) character scans; no
+  search, no deadline, no budget stop. It inherits any budget its parent has.
+- **Composition:** wraps identity / LAKONIKOS / DAEDALUS / POLYTROPOS. It is a
+  *wrapper*, not a replacement: `lexisDecode = parentUndo ∘ unfold` (order
+  `out`) or `unfold ∘ parentUndo` (order `in`), and plain `parentUndo` when the
+  fold does not ship.
+- **Failure mode it is designed to avoid:** deleting all spaces. Measured, that
+  *loses* 103 tokens on kb-article because it fragments survivors into
+  byte-level tokens (the "tokens-per-byte trap"). LEXIS only ever deletes a
+  space that the contract's rule puts back.
+
 ## Negative or unregistered codecs
 
 ### ANAPHORA-FOLD (`src/lib/omega/anaphora-fold.ts`, X12, unregistered)

