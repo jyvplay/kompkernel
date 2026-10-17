@@ -208,3 +208,23 @@ The user proposed a second tier of single-number aliases for near-duplicate word
 ## Not decoded in this turn
 
 The registry has 177 keys. This page decodes the frontier codecs, the codecs that appear in `docs/codecs.md`, and HORA. The remaining keys were not read in X13, so I make no claim about their greedy or search status or their bounds.
+
+## MORPHE (`morphe`, X20, exact, **shipped this turn**)
+
+Per-payload auto-fitted shape-rule layer — the generalization of STIGME from a fixed clause menu to
+a rule library that fits itself to the payload. See `docs/codecs.md` for the measurement tables and
+`src/lib/omega/morphe.ts`.
+
+- **Greedy?** No. Rule admission is greedy, but set **selection is backward elimination** over the
+  admitted set. Load-bearing: on `git-log-iso.txt`, `tz+00:00` passes every gate alone and in the
+  full set, yet the set is 5 tokens cheaper without it (greedy 1493, eliminated 1488). Rules
+  interact through the grammar by partial double ownership; admission cannot see that, elimination
+  can.
+- **Citation.** Delétang et al., *Language Modeling Is Compression*, ICLR 2024
+  (arXiv:2309.10668). Nearest competitor: *Autocompleting Tokenizers* (arXiv:2608.15080), which
+  needs a neural model and a sentinel per removal; MORPHE needs neither.
+- **Time- or CPU-bound?** **CPU-bound.** One fit pass, ≤ 3 extra encodes for elimination, 3 wire
+  tournaments, 1 verify. No clock.
+- **The invariant that makes it safe.** A shape rule is a total function the reader applies
+  everywhere, so it is admissible only when the payload is **uniform** under it — enforced by a
+  per-rule precondition, not by sampling.

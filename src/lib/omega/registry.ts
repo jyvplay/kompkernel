@@ -109,6 +109,7 @@ import { akolouthia2Encode, akolouthia2Decode } from './akolouthia2';
 import { horaEncode, horaDecode } from './hora';
 import { hemeraEncode, hemeraDecode } from './hemera';
 import { stigmeEncode, stigmeDecode } from './stigme';
+import { morpheEncode, morpheDecode } from './morphe';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
 import { lakonikosDualEncode } from './lakonikos-d';
@@ -302,6 +303,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'stigme', label: '· ΣΤΙΓΜΗ (Separator elision for tokens whose punctuation the reader recomputes: an ISO date YYYY-MM-DD becomes its 8 digits, THH:MM:SS becomes THHMMSS, and a clock after a date and a space loses its colons; one clause per shape restores them. Every elision is verified by a full restore round trip before it is kept, so a digit run that would be mis-read costs one date, not the whole arm. Wire = the cheapest of LAKONIKOS, LAKONIKOS-D and AKOLOUTHIA-2 on the elided text; identity arm = the cheapest of the three on the original text, so M never exceeds min(LAKONIKOS, LAKONIKOS-D, AKOLOUTHIA-2))', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = stigmeEncode(t, enc); const decoded = stigmeDecode(r.wire, r.clauses, r.sep, r.armTag); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; clauses=${r.clauses.join('+') || '-'} (${r.clauseTokens} tok); dates=${r.dates}; T-times=${r.times}; after=${r.afters}; dropped=${r.dropped}; wire=${r.armTag}; M=${r.messageTokens} vs identity ${r.identityTokens}` }; },
+    },
+    {
+      key: 'morphe', label: '◈ ΜΟΡΦΗ (Auto-fitted shape-rule layer: instead of three hard-coded clauses, a rule library is fitted to the payload -- decimal precision, dominant timezone offset, integer grouping, URL scheme, UUID dashes, hex colours, XML entities -- and each rule is accepted only if (P1) the payload is uniform under it, (P2) the reader’s rule is total, and (P3) the wire plus clause beats the identity arm. Rule sets are then pruned by backward elimination, because rules interact through the grammar. Wire = cheapest of LAKONIKOS, LAKONIKOS-D, AKOLOUTHIA-2 on the transformed text; identity arm = cheapest on the original.)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = morpheEncode(t, enc); const decoded = morpheDecode(r.wire, { rules: r.rules, sep: r.sep, after: r.after, tag: r.armTag }); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `rules=${r.rules.join('+') || '-'} (${r.clauseTokens} tok); rejected=[${r.rejected.join(',')}]; hits=${JSON.stringify(r.hits)}; wire=${r.armTag}; M=${r.messageTokens} vs identity ${r.identityTokens}` }; },
     },
     {
       key: 'chronos',

@@ -1,0 +1,4 @@
+§а
+199001ә,20.хә11ә11гә26ә26и,22.ти2и2қи44и44бә05ә05я,24.ія64я64д,26.ьд34д34ъя18я18ля16я16оя34я34ци5и5өд7д7ф,17.24ү,18.19Д,19.22¶DATE,OPEN,HIGH,LOW,CLOSEа02ффффа03үүүүа04ДДДДа05хха08гга09тта10ққа11бба12ііа15ььа16ъъа17лла18ооа19цца22өө
+
+New Cyrillic before ¶ starts a rule to the next new Cyrillic or ¶. After ¶, expand rules recursively; print only the result. 8-digit runs starting 19 or 20 that are valid dates become YYYY-MM-DD. Pad numbers to 6 decimals with zeros.

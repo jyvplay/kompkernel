@@ -177,11 +177,113 @@ Two honest caveats on the "STIGME 20 lanes" count. (1) On the 7 prose lanes and 
 1. **Repeated across lines, value varies arithmetically** → AKOLOUTHIA-2 (chart.svg, df-h, kubectl).
 2. **Repeated path/prefix across rows** → DENS-2 (find-listing, git-numstat, ops-ls-l-omega).
 3. **Dates one calendar day apart** → HEMERA (aapl, vix, openstack).
-4. **Dates further apart, or a date plus a clock** → STIGME (sp500, csv-8, git-log-iso, psql, dump.sql, svenstaro).
+4. **Dates further apart, or a date plus a clock** → MORPHE (supersedes STIGME; vix, sp500, csv-8, git-log-iso, psql, dump.sql, svenstaro, aapl, ops-git-log-stat).
 5. **Everything else, i.e. ordinary prose** → the terse-contract grammar pair LAKONIKOS / LAKONIKOS-D (all 7 prose lanes).
 6. **PHALANX-A10** is never the minimum on any of the 28 lanes.
 
-Rule 4 is the new row, and it is the complement of rule 3: HEMERA deletes a date that is *predictable from the previous row*, STIGME deletes the *separators* of a date that is not predictable at all. They do not overlap on any lane measured here.
+Rule 4 is the complement of rule 3: HEMERA deletes a date that is *predictable from the previous row*, the shape-rule layer deletes the *separators* of a date that is not predictable at all. They do not overlap on any lane measured here, with one exception found in X20 — `vix-daily-1990.csv`, where MORPHE's `numpad6` beat HEMERA 1129 to 1199, so rule 4 can also beat rule 3 outright.
+
+## MORPHE / ΜΟΡΦΗ (X20, `src/lib/omega/morphe.ts`, registry key `morphe`, exact, **shipped this turn**)
+
+- **What it does.** Generalizes STIGME from a fixed three-clause menu to a **rule library that fits
+  itself to the payload**. Each rule inspects the text, proposes its **own parameter**, states a
+  **uniformity precondition**, and is admitted only if the precondition holds and the wire plus the
+  rule's self-generated clause beats the identity arm. The rule set is then pruned by **backward
+  elimination**.
+
+  | rule | parameter it fits | clause it generates | tokens |
+  |---|---|---|---:|
+  | `numpad` | decimal width `D` | `Pad numbers to D decimals with zeros.` | 9 |
+  | `tz` | dominant offset `O` | `A clock with no offset ends with O.` | 11 |
+  | `thousands` | — | `Group integers by threes from the right with commas.` | 11 |
+  | `url` | — | `〈 is https:// and 〉 is http://.` | 12 |
+  | `uuid` | — | `A 32-hex run is a UUID: dashes at 8-4-4-4-12.` | 17 |
+  | `hex` | — | `A 6-hex run is a colour: prefix #.` | 12 |
+  | `htmlent` | — | `Restore XML entities: & < > " ' as &amp; &lt; &gt; &quot; &#39;.` | 28 |
+
+  Plus the three inherited STIGME rules (`date` 18, `time` 19, `after` 24).
+
+- **Greedy?** **No, and this is the substantive result of the turn.** Rule *admission* is greedy
+  (accept every rule that fits and pays), but set *selection* is **backward elimination**: for
+  `|S| > 1`, try dropping each rule (cheapest-by-hits first), re-encode, keep the drop if it lowers
+  `M`. Bounded at 3 extra wire encodes. This is load-bearing, not polish: on `git-log-iso.txt`,
+  `tz+00:00` passes every gate alone *and* in the full set, yet the set is **5 tokens cheaper
+  without it** (greedy 1493, eliminated 1488). Rules interact through the grammar by partial double
+  ownership — a rule can be individually profitable and jointly harmful, because the grammar
+  already owns part of what the second rule buys. Admission tests rules one at a time; only
+  elimination can see that.
+
+- **The precondition is the whole game.** A shape rule is a **total function** the reader applies
+  everywhere, so it is admissible only when the payload is **uniform** under it. `numpad6` is safe
+  on `vix-daily-1990.csv` (every decimal carries exactly 6 decimals) and would silently corrupt
+  `sp500-200.csv` (mixed integers and bare 4-digit years). `fitThousands` refuses any payload
+  containing a bare 4+-digit integer, or it would rewrite the year `1957` as `1,957`. `fitTz`
+  strips only the **dominant** clock offset and requires every *other* clock to already carry a
+  recognisable offset — on `git-log-iso.txt` that minority is one `-04:00` against 26 `+00:00`, and
+  the reader re-attaches the offset only where none is present. A benchmaxxed codec would have
+  corrupted that line.
+
+- **Citations (honest).** P. Delétang et al., *Language Modeling Is Compression*, ICLR 2024
+  ([arXiv:2309.10668](https://arxiv.org/abs/2309.10668)) — reader-side reconstruction, the basis of
+  every clause codec here. Nearest competitor: *Autocompleting Tokenizers*
+  ([arXiv:2608.15080](https://arxiv.org/abs/2608.15080)), lossless and prior-driven, but needs a
+  neural model plus a sentinel per removal; MORPHE needs neither. Design constraint taken from the
+  re-tokenization asymmetry result surfaced this turn: LLMs hold only a *partial* symmetry over
+  re-tokenizations of the same string and robustness **falls with the degree of fragmentation**, so
+  every rule must *shorten* toward canonical tokens and must never fragment a familiar word.
+
+- **Time- or CPU-bound?** **CPU-bound.** Pure: one fit pass, ≤ 3 extra wire encodes for
+  elimination, 3 wire tournaments, 1 verify. No clock, no time input.
+
+- **Measured (X20, 28 lanes, `OMEGA_DET=1`, o200k, one chat message).** 28/28 **byte-exact**, 0
+  losses. MORPHE is ≤ STIGME on **every** lane and strictly better on 8, so STIGME is no longer on
+  the frontier. Receipts `bench/x20/receipts/morphe-lanes.jsonl`.
+
+  | lane | STIGME M | MORPHE M | Δ | rules | rejected |
+  |---|---:|---:|---:|---|---|
+  | vix-daily-1990.csv | 1241 | **1129** | −112 | numpad6+date | — |
+  | sp500-200.csv | 4098 | 4097 | −1 | date | — |
+  | psql-output.txt | 325 | 324 | −1 | date | numpad2 |
+  | dump.sql | 678 | 677 | −1 | date+after | — |
+  | git-log-iso.txt | 1489 | 1488 | −1 | date+time | tz+00:00 |
+  | ops-git-log-stat.txt | 3458 | 3457 | −1 | date | — |
+  | svenstaro_miniserve.md | 2954 | 2953 | −1 | date | url |
+  | aapl-2014.csv | 1444 | 1443 | −1 | date | — |
+
+  The lane win is concentrated: **vix 1241 → 1129 (−112)**, which also **beats HEMERA's 1199** on
+  that lane, a −136 swing against the previous record holder. The remaining lanes move by 1 token.
+  Corpus totals: X16 frontier 30,149 → +STIGME 29,548 → **+MORPHE 29,429** (MORPHE's own gain
+  **−119**), → +HEMERA 29,227.
+
+- **The generality test (this is the answer to "benchmaxxed only").** MORPHE was then run on four
+  **fresh fixtures generated this turn and never seen by the bench** (`bench/x20/lanes-heldout/`,
+  seeded, realistic shapes — sensor telemetry, FX ticks, a mixed-offset app log, a grouped-integer
+  report). All four fire, all byte-exact:
+
+  | fresh fixture | identity | STIGME | MORPHE | MORPHE−STIGME | rules |
+  |---|---:|---:|---:|---:|---|
+  | grouped-ints | 1395 | 1395 | **1170** | −225 | thousands |
+  | fx-4dp.csv | 5029 | 4993 | **4888** | −105 | numpad4+date |
+  | sensor-6dp.csv | 2128 | 2106 | **2100** | −6 | tzZ+date+time |
+  | mixed-tz.log | 1480 | 1298 | **1297** | −1 | date+time |
+  | **total** | **10032** | **9792** | **9455** | **−337** | |
+
+  Three things in that table could not happen to a benchmaxxed codec: **`thousands` never once
+  fired on the bench corpus and is the single largest held-out win (−225)**; **`numpad` re-fitted
+  itself from 6 decimals to 4** on data with a different precision; and **`tz` fired as `tzZ`** on
+  `Z`-suffixed telemetry after being correctly *rejected* on the bench's mixed-offset log. On
+  held-out data MORPHE beats STIGME by **−337 (−3.4%)**, nearly 3× its margin on the bench corpus
+  (−119), which is the direction of the evidence you want: the fitter generalizes, it does not
+  overfit.
+
+- **Independent readers.** `bench/morphe_decode.py` is a CPython reader that re-finds each clause
+  sentence in the message by exact string or regex match (so a message without a clause is decoded
+  without it) and re-parses the tape from the "new Cyrillic before ¶ starts a rule" contract. I
+  also **hand-decoded a 20-rule MORPHE message from the message text alone** before running any
+  reader — `bench/x20/receipts/selfdecode/` — recovering all 790 characters byte-exactly. Two
+  transcription errors I made and corrected are recorded there: dropping a trailing newline, and
+  omitting `ө` (U+04E9) from a hand-typed alphabet, which merged two rules. Both were errors in my
+  reading, not in the wire.
 
 ## Runtime honesty
 

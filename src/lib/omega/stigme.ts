@@ -261,7 +261,7 @@ export function stigmeElide(text: string, opts: { time?: boolean; after?: boolea
  * 3. Wire arms: min(LAKONIKOS, LAKONIKOS-D) — the terse contract, both pools
  * ------------------------------------------------------------------------- */
 
-interface Arm {
+export interface Arm {
   tag: 'lakonikos' | 'lakonikos-d' | 'akolouthia2';
   wire: string;
   prompt: string;
@@ -269,7 +269,8 @@ interface Arm {
   decoded: string;
 }
 
-function bestArm(text: string, enc: EncodingName): Arm {
+/** The three-arm wire tournament, exported so MORPHE can reuse it. */
+export function bestArm(text: string, enc: EncodingName): Arm {
   const a = lakonikosEncode(text, enc);
   const aOk = a.mode === 'daedalus' && a.wire !== text && a.decoded === text && a.messageTokens < countTokens(text, enc);
   const b = lakonikosDualEncode(text, enc);
@@ -378,7 +379,7 @@ export function stigmeEncode(text: string, enc: EncodingName = 'o200k_base'): St
 }
 
 /** Expand a wire produced by any of the three arms back to the text it encodes. */
-function stigmeWireToText(arm: Arm): string {
+export function stigmeWireToText(arm: Arm): string {
   return arm.tag === 'akolouthia2' ? akolouthia2Decode(arm.wire, 'progression') : chironDecode(arm.wire);
 }
 
