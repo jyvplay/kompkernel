@@ -1,0 +1,8 @@
+find-listing.txt             ident= 3997 M= 1316 exact=true  row-morphe  [row-morphe=1316 row-eidos=1382 row-aion=1382 col-bare=4022 col-morphe=1355 col-eidos=1425 col-aion=1425]  306767ms
+git-numstat.txt              ident= 4632 M= 2026 exact=true  row-morphe  [row-morphe=2026 row-eidos=2146 row-aion=2146 col-bare=4654 col-morphe=2171 col-eidos=2279 col-aion=2279]  517868ms
+ops-ls-l-omega.txt           ident= 4063 M=  954 exact=true  row-morphe  [row-morphe=954 row-eidos=1022 row-aion=1022 col-bare=4084 col-morphe=1023 col-eidos=1076 col-aion=1076]  188272ms
+openstack-loghub-26.log      ident= 4028 M=  998 exact=true  row-morphe  [row-morphe=998 row-eidos=1106 row-aion=1106]  89637ms
+ls-full-iso.txt              ident= 1175 M=  395 exact=true  row-morphe  [row-morphe=395 row-eidos=423 row-aion=423 col-bare=1195 col-morphe=432 col-eidos=470 col-aion=470]  232053ms
+spring-projects_spring-framework_35118.md ident= 1895 M=  953 exact=true  row-morphe  [row-morphe=953 row-eidos=1006 row-aion=1006 col-bare=1912 col-morphe=969 col-eidos=1027 col-aion=1027]  431122ms
+node-stacktraces.txt         ident=  568 M=  329 exact=true  row-morphe  [row-morphe=329 row-eidos=367 row-aion=367 col-bare=587 col-morphe=376 col-eidos=416 col-aion=416]  67274ms
+chart.svg                    ident= 1331 M=  306 exact=true  row-eidos   [row-morphe=330 row-eidos=306 row-aion=306 col-bare=1356 col-morphe=462 col-eidos=446 col-aion=446]  75350ms

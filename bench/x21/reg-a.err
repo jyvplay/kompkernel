@@ -1,0 +1,10 @@
+BUDGET-STOP dump.sql after 10 codecs
+BUDGET-STOP find-listing.txt after 8 codecs
+BUDGET-STOP git-log-iso.txt after 26 codecs
+BUDGET-STOP git-numstat.txt after 4 codecs
+BUDGET-STOP ls-full-iso.txt after 22 codecs
+BUDGET-STOP node-stacktraces.txt after 88 codecs
+BUDGET-STOP ops-git-log-stat.txt after 1 codecs
+BUDGET-STOP ops-ls-l-omega.txt after 8 codecs
+BUDGET-STOP openstack-loghub-26.log after 19 codecs
+BUDGET-STOP kubectl-get-pods.txt after 19 codecs

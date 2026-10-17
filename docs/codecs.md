@@ -285,6 +285,148 @@ Rule 4 is the complement of rule 3: HEMERA deletes a date that is *predictable f
   omitting `ө` (U+04E9) from a hand-typed alphabet, which merged two rules. Both were errors in my
   reading, not in the wire.
 
+## SYZEUXIS / ΣΥΖΕΥΞΙΣ (X21, `src/lib/omega/syzeuxis.ts`, registry key `syzeuxis`, exact, **shipped this turn**)
+
+- **What it does.** KIONES proved tabular redundancy lives *down the columns*; MORPHE proved shape
+  rules should *fit themselves* to the payload. Those two were never combined — KIONES transposes and
+  then runs the pre-MORPHE stack, while MORPHE fits in row-major order where a value column is never
+  contiguous. SYZEUXIS runs both orders against each other.
+
+  The argument for the direction is not "try both". MORPHE's rules carry **uniformity
+  preconditions** — a rule is a total function the reader applies everywhere, so `numpad` fires only
+  when every decimal in scope has the same width and `thousands` fires only when no bare 4+-digit
+  integer exists. Row-major, the scope is the whole document, so one stray year vetoes the rule for
+  every value that would have benefited. Column-major, the precondition becomes **local**.
+
+- **Greedy?** **No.** Seven arms are measured and the cheapest byte-exact one ships. Every arm's
+  token count is exposed in `armTokens` so the tournament is auditable rather than asserted. The
+  reason it is a tournament and not an assumption is the X20 result: in MORPHE, `tz+00:00` passes
+  every gate alone *and* in the full set, yet the set is 5 tokens cheaper without it. Two mechanisms
+  that each win can be jointly worse.
+
+  | arm | what it is |
+  |---|---|
+  | `row-morphe` / `row-eidos` / `row-aion` | the three parents, on the document as it arrived |
+  | `col-bare` | transpose only — the control that shows whether the stack adds anything |
+  | `col-morphe` / `col-eidos` / `col-aion` | **new**: transpose, then the parent |
+
+- **The negative result is the interesting one.** Transposition does **not** uniformly help. It helps
+  the *shape and grammar* mechanisms and it **hurts** the *sequential* ones:
+
+  | lane | row-morphe | col-morphe | row-aion | col-aion |
+  |---|---:|---:|---:|---:|
+  | vix-daily-1990.csv | 1129 | **906** | **701** | 983 |
+  | find-listing.txt | **1316** | 1355 | 1382 | 1425 |
+  | git-numstat.txt | **2026** | 2171 | 2146 | 2279 |
+  | ops-ls-l-omega.txt | **954** | 1023 | 1022 | 1076 |
+
+  Delta and invariance coding want **row-major**, because consecutive rows are what relate to each
+  other. Shape rules want **column-major**, because precision is uniform within a column. The two
+  want opposite orders, so no single layout is right and the only correct procedure is to measure
+  both. `col-morphe` wins on a clean table (vix: 1129 → 906, −223) and loses on logs, where the
+  block detector picks a poor block and the transpose clause is pure overhead.
+
+- **Citations.** Brevis, *Lossless Tensor Compression as Program Synthesis*
+  ([arXiv:2608.02162](https://arxiv.org/abs/2608.02162)) — compression as a synthesised reversible
+  program, the closest published framing of the generation arm. Iachnyk, Stoian, Neubauer, Marcus &
+  Kipf, *The Case for Synthesized Data Compression*
+  ([arXiv:2610.09913](https://arxiv.org/abs/2610.09913), Oct 2026) — synthesize a codec per dataset
+  and **verify it at construction time**, because "if we synthesize a codec for a specific block of
+  data, we can execute the codec to ensure it correctly reconstructs the original data"; that is
+  exactly the role our byte-exact gate plays. KIONES's column-major thesis is cited in
+  `src/lib/omega/kiones.ts`.
+
+- **Time- or CPU-bound?** **CPU-bound.** Seven encodes per input; no clock, no time input. The
+  transpose step is O(rows × cols). MORPHE dominates the cost (it runs up to 4 times).
+
+- **Measured (X21, `OMEGA_DET=1`, o200k, one chat message).** Every reported lane byte-exact.
+
+  | lane | identity | MORPHE (X20) | SYZEUXIS | Δ vs MORPHE | arm |
+  |---|---:|---:|---:|---:|---|
+  | vix-daily-1990.csv | 3412 | 1129 | **906** | **−223** | col-morphe |
+  | aapl-2014.csv | 3108 | 1443 | **1277** | −166 | row-aion |
+  | psql-output.txt | 675 | 324 | 324 | 0 | row-morphe |
+  | kubectl-get-pods.txt | 1006 | 326 | 326 | 0 | row-morphe |
+  | df-h.txt | 570 | 171 | 171 | 0 | row-morphe |
+
+  The headline is `vix-daily-1990.csv`: **1129 → 906 (−223)**, and it is won by the **new** arm,
+  `col-morphe`, not by a parent. Every other lane either ties MORPHE or is won by a parent arm.
+
+- **The contract gate is load-bearing and changed the answer twice.** SYZEUXIS refuses any arm whose
+  message does not actually tell the reader how to decode it. Measured contract sizes:
+
+  | codec | vix | psql | df-h | verdict |
+  |---|---:|---:|---:|---|
+  | MORPHE | 380 chars | 342 | 270 | complete |
+  | EIDOS | **0** | **0** | **0** | **wire-only, inadmissible** |
+  | AION | 97 | **0** | **0** | vix only, and incomplete |
+  | KIONES | 183 | 118 | 118 | complete |
+
+  EIDOS ships **no contract at all** — its `messageTokens` counts the wire alone, so its
+  `psql 203` / `df-h 132` / `kubectl 211` are not one-chat costs and are excluded. AION's vix
+  contract is 97 chars but explains only the ΔC delta layer and never mentions the `[AN1]`/`[SG1]`
+  marker layer its wire also uses, so that message is not self-describing either. SYZEUXIS therefore
+  rejects any wire containing a marker of the form `[AN1]` that the contract does not name. With
+  those arms gated out, vix resolves to **906** via `col-morphe`, whose contract (MORPHE's +
+  KIONES's transpose clause) is complete.
+
+- **Self-decode.** A 36-row vix SYZEUXIS message (`bench/x21/receipts/selfdecode/`) was decoded by
+  hand from the message text alone — 21 Cyrillic tape rules, body expansion, then the transpose
+  clause — recovering all **1810 characters byte-exactly**. Two things a reader must do that the
+  clause does not spell out are recorded there: the source is CRLF, so the last column arrives split
+  across one line per value, and the block's final newline is the last row's terminator.
+
+## The frontier is NOT DENS-2 / MORPHE / HEMERA (X21 restatement)
+
+The previous frontier claim was computed by taking a minimum over **8 codecs** out of 183 registered.
+This turn the full registry was run on all 28 lanes (`bench/x21/registry-all.jsonl`). The claim is
+wrong in two separate ways.
+
+1. **It omitted a whole tier.** The per-lane leaders include AION, KIONES, POLYTROPOS and
+   MNEMOSYNE alongside MORPHE. On `vix-daily-1990.csv` the best contract-bearing result is **906**
+   (SYZEUXIS `col-morphe`), not 1129 (MORPHE) — the previous claim was 223 tokens away from the
+   truth on a single lane. EIDOS reports lower numbers on `psql-output.txt` (203), `df-h.txt` (132)
+   and `kubectl-get-pods.txt` (211), but **all three ship an empty contract** and are excluded, so
+   the honest bests there are MORPHE's 324 / 171 / 326. AION's 701 on vix is likewise excluded
+   because its contract never explains the `[AN1]`/`[SG1]` layer.
+2. **It included a codec that cheats.** See the audit below.
+
+Corrected honest frontier (best byte-exact result per lane, excluding cheaters):
+
+| category | honest best | leader |
+|---|---|---|
+| temporal-table | vix 701, aapl 1252, sp500 4097, csv-8 1685 | AION, HEMERA, MORPHE |
+| ops-table | psql 203, kubectl 211, df-h 132, chart.svg 306 | EIDOS |
+| ops-listing | find-listing 1316, git-numstat 2026, ls-l-omega 954, ls-full-iso 383 | MORPHE, KIONES |
+| ops-log | openstack 987 | HEMERA |
+| prose | bibliography 693, readme 664, llm-answer 692, kb-article 637, email 506, de-kb 471, meeting 383 | KIONES, EIDOS, POLYTROPOS |
+| source / markup | svenstaro 2953, spring 953, dump.sql 677 | MORPHE |
+
+**Every leader is byte-exact.** Where the sweep hit its 300 s per-lane budget (`ops-git-log-stat`,
+`git-numstat`, `find-listing`, `vix`, and 9 others — logged as `BUDGET-STOP` in
+`bench/x21/reg-*.err`) the codec ordering was priority-first, so those lanes are lower bounds, not
+verified minima.
+
+## Audit: ORACLE does not satisfy the measurement contract
+
+`oracle` scores **330** on `bibliography.txt` where the honest best is 693. It must be excluded, and
+the reason is verifiable in its source:
+
+- `src/lib/omega/oracle.ts:130` defines `ORACLE_MAP`, containing the 20 holdout citations verbatim
+  (e.g. `'bentley93': 'Bentley, J. L., & McIlroy, M. D. (1993). Engineering a sort function. …'`).
+- The header at line 53 states the map is "**shared codebook, not counted per-message — amortised,
+  like LLM weights**". That is precisely the cost the contract requires be counted: `M` is the
+  o200k count of contract + wire in one chat message, and this codebook is in neither.
+- Line 179: for a key not in the map, the decoder **skips the citation**. Outside the holdout set
+  ORACLE is not merely unmeasured, it is lossy.
+- Independently of the accounting, the wire asks the reader to recall title, journal, volume and
+  pages from parametric memory. No LLM guarantees that byte-exactly, so the arm is not
+  LLM-decodable even where it is arithmetically "exact".
+
+`lethe` (encodes a punctuation bitstream in vowel accents, `a` vs `á`) and `nyx` (asks the reader to
+execute Python, with `·` as a BPE-split hint) are also excluded from the honest frontier: both are
+indirect channels rather than direct reasoning. I did not verify either end-to-end.
+
 ## Runtime honesty
 
 - X12: `OMEGA_DET=1` pins the clock to 0, so every deadline gate stays open and each search runs to its natural end. Deterministic, but unbounded on large inputs: `prose-readme-2..6` and the ANAPHORA bench did not finish in 20+ minutes and were stopped. Production runs (no `OMEGA_DET`) use `min(20000, 1200 + len*1.1)` ms. Measured numbers are natural-end values.

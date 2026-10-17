@@ -1,0 +1,1 @@
+./bench/tmp/run.sh: line 10:  1924 Killed                  OMEGA_DET=1 node "$d/bundle.mjs" "$@"

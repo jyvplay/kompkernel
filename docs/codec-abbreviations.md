@@ -228,3 +228,31 @@ a rule library that fits itself to the payload. See `docs/codecs.md` for the mea
 - **The invariant that makes it safe.** A shape rule is a total function the reader applies
   everywhere, so it is admissible only when the payload is **uniform** under it — enforced by a
   per-rule precondition, not by sampling.
+
+## SYZEUXIS (`syzeuxis`, X21, exact, **shipped this turn**)
+
+The column-major conjunction — KIONES's transposition × MORPHE's auto-fitted shape rules, measured
+against each other instead of assumed. See `docs/codecs.md` for the measurement tables and
+`src/lib/omega/syzeuxis.ts`.
+
+- **Greedy?** No — a seven-arm tournament (`row-morphe`, `row-eidos`, `row-aion`, `col-bare`,
+  `col-morphe`, `col-eidos`, `col-aion`), cheapest byte-exact arm ships, all arm token counts
+  exposed in `armTokens`. Forced to be a tournament by the X20 result that `tz+00:00` passes every
+  gate in the full set yet costs +5.
+- **Citation.** Iachnyk et al., *The Case for Synthesized Data Compression* (arXiv:2610.09913,
+  Oct 2026) — synthesize a codec per dataset and verify it at construction time; that is what our
+  byte-exact gate does. Brevis (arXiv:2608.02162) for compression-as-program-synthesis.
+- **Time- or CPU-bound?** **CPU-bound.** Seven encodes, no clock. MORPHE dominates the cost.
+- **Honest negative.** The transposition helps shape/grammar mechanisms and hurts sequential ones
+  (delta, invariance), because the two want opposite column orders. `col-morphe` wins on a clean
+  table (vix 1129 → 906) and loses on logs.
+
+## Codecs that do not satisfy the measurement contract (X21 audit)
+
+- **`oracle`** — hardcodes the 20 holdout citations in `ORACLE_MAP` and declares it "not counted
+  per-message"; silently skips unknown citations. Uncounted cost and lossy off-benchmark.
+- **`lethe`** — hides a punctuation bitstream in vowel accents (`a` vs `á`); an indirect channel,
+  not direct reasoning.
+- **`nyx`** — asks the reader to execute Python and uses `·` as a BPE-split hint.
+
+All three are excluded from every honest frontier table in `docs/codecs.md`.

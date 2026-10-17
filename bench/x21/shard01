@@ -1,0 +1,13 @@
+bench/holdout-work/bibliography.txt
+bench/holdout-lang/de-kb.txt
+bench/holdout-work/email-thread.txt
+bench/holdout-work/kb-article.txt
+bench/holdout-work/llm-answer.md
+bench/holdout-work/meeting-transcript.txt
+bench/holdout/readme.txt
+bench/z46/corpus/traces/spring-projects_spring-framework_35118.md
+bench/z47/corpus/changelog/svenstaro_miniserve.md
+bench/holdout-tab/aapl-2014.csv
+bench/z11/fresh/csv-8.csv
+bench/z48/corpus/sp500-200.csv
+bench/holdout-tab/vix-daily-1990.csv

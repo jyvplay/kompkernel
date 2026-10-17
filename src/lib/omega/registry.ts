@@ -110,6 +110,7 @@ import { horaEncode, horaDecode } from './hora';
 import { hemeraEncode, hemeraDecode } from './hemera';
 import { stigmeEncode, stigmeDecode } from './stigme';
 import { morpheEncode, morpheDecode } from './morphe';
+import { syzeuxisEncode, syzeuxisDecode } from './syzeuxis';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
 import { lakonikosDualEncode } from './lakonikos-d';
@@ -307,6 +308,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'morphe', label: '◈ ΜΟΡΦΗ (Auto-fitted shape-rule layer: instead of three hard-coded clauses, a rule library is fitted to the payload -- decimal precision, dominant timezone offset, integer grouping, URL scheme, UUID dashes, hex colours, XML entities -- and each rule is accepted only if (P1) the payload is uniform under it, (P2) the reader’s rule is total, and (P3) the wire plus clause beats the identity arm. Rule sets are then pruned by backward elimination, because rules interact through the grammar. Wire = cheapest of LAKONIKOS, LAKONIKOS-D, AKOLOUTHIA-2 on the transformed text; identity arm = cheapest on the original.)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = morpheEncode(t, enc); const decoded = morpheDecode(r.wire, { rules: r.rules, sep: r.sep, after: r.after, tag: r.armTag }); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `rules=${r.rules.join('+') || '-'} (${r.clauseTokens} tok); rejected=[${r.rejected.join(',')}]; hits=${JSON.stringify(r.hits)}; wire=${r.armTag}; M=${r.messageTokens} vs identity ${r.identityTokens}` }; },
+    },
+    {
+      key: 'syzeuxis', label: '⋈ ΣΥΖΕΥΞΙΣ (Column-major conjunction: KIONES proved tabular redundancy lives down the columns and MORPHE proved shape rules should fit themselves to the payload, but the two were never combined — KIONES transposes and then runs the pre-MORPHE stack, while MORPHE fits rules in row-major order where a value column is never contiguous. Because MORPHE’s rules carry uniformity preconditions, row-major scope means one stray year vetoes a rule for every value that would have benefited; column-major makes that precondition local. Measured arms: row-morphe, row-eidos, row-aion, col-bare, col-morphe, col-eidos, col-aion; cheapest byte-exact arm wins and every arm is exposed in `armTokens`.)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = syzeuxisEncode(t, enc); const decoded = syzeuxisDecode(r.wire, { arm: r.arm, rules: r.rules, sep: r.sep, after: r.after, tag: r.tag }); return { output: r.wire, decoded, oneChat: r.messageTokens, note: `arm=${r.arm}; rules=[${r.rules.join('+')}]; transpose=${r.transpose.applied ? r.transpose.rows + 'x' + r.transpose.cols : 'no'}; arms=${JSON.stringify(r.armTokens)}; M=${r.messageTokens} vs identity ${r.inTokens}` }; },
     },
     {
       key: 'chronos',

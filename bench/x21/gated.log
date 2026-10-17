@@ -1,0 +1,5 @@
+vix-daily-1990.csv         ident= 3412 M=  701 exact=true row-aion    arm=row-aion; contractless-rejected=[row-eidos]; transpose=false; rules=[]; M=701 vs identity 3412
+df-h.txt                   ident=  570 M=  171 exact=true row-morphe  arm=row-morphe; contractless-rejected=[row-eidos,row-aion]; transpose=false; rules=[]; M=171 vs identity 570
+psql-output.txt            ident=  675 M=  324 exact=true row-morphe  arm=row-morphe; contractless-rejected=[row-eidos,row-aion]; transpose=false; rules=[date]; M=324 vs identity 675
+kubectl-get-pods.txt       ident= 1006 M=  326 exact=true row-morphe  arm=row-morphe; contractless-rejected=[row-eidos,row-aion]; transpose=false; rules=[]; M=326 vs identity 1006
+aapl-2014.csv              ident= 3108 M= 1277 exact=true row-aion    arm=row-aion; contractless-rejected=[]; transpose=false; rules=[]; M=1277 vs identity 3108

@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import { glossiaEncode } from '@/lib/omega/glossia';
+import { eidosEncode } from '@/lib/omega/eidos';
+const t = fs.readFileSync(process.argv[2], 'utf8');
+const g: any = glossiaEncode(t, 'o200k_base' as any);
+console.log('--- GLOSSIA ---');
+console.log('winner', g.winner, 'msgTokens', g.messageTokens, 'outTokens', g.outTokens);
+console.log('decoderPrompt len', g.decoderPrompt?.length, 'wire len', g.wire?.length);
+const extra = (g.decoderPrompt ?? '').slice(g.wire.length);
+console.log('CONTRACT PART (prompt minus wire):', JSON.stringify(extra.slice(0, 300)));
+const e: any = eidosEncode(t, 'o200k_base' as any);
+console.log('--- EIDOS --- winner', e.winner, 'M', e.messageTokens, 'contractTokens', e.contractTokens);
+console.log('EIDOS contract part:', JSON.stringify((e.decoderPrompt ?? '').slice(e.wire.length).slice(0, 300)));
