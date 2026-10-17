@@ -501,6 +501,74 @@ What actually ran, this turn, on this machine:
 Not claimed: no multi-agent search, no distributed run, no proof assistant, no
 verification that did not happen.
 
+## STOICHOS / ΣΤΟΙΧΟΣ (X23, `src/lib/omega/stoichos.ts`, registry key `stoichos`, exact, **shipped this turn**)
+
+**The mechanism: derivable-character elimination, generalized from one rule to a searched rule family.**
+
+LEXIS established one instance: after a sentence mark in `. , ; :` the next thing is
+essentially always exactly one space, so that space is *derivable* — delete it, restore
+it by a stated rule. STOICHOS keeps that and adds the two structural junctions that
+carry hybrid prose:
+
+| rule | junction | example |
+|---|---|---|
+| R1 | after a sentence mark | `. Next` → `.Next` |
+| R2 | after a line-initial run of `# * + - >` (markdown headings, bullets, email quoting) | `- item` → `-item` |
+| R3 | after a line-initial number plus `.` or `)` (numbered lists) | `1. item` → `1.item` |
+
+Every junction site is either **derivable** (a space is present, so delete it) or
+**danger** (no space is present, so the inverse rule would INSERT one that was never
+there — `J. L.,`, `3.14`, `file.ts`, `#include`). Dangers are neutralised by a sentinel.
+
+**The intended contribution was the search, not the list:** because one sentence can
+describe both families, the ~20-token contract fee is paid once while the gains
+accumulate. STOICHOS therefore tries the mark fold, the structural fold, and the two
+together, in both composition orders, and ships the cheapest that is byte exact.
+
+### Measured result: it ties. This is the finding.
+
+28 lanes, o200k, one chat message, `OMEGA_DET=1`, `bench/x23/stoichos-{0,1}.jsonl`:
+
+- **STOICHOS 62954 → 30028 (52.3%), 0 inexact, 28/28 byte exact.**
+- **STOICHOS ties LEXIS on all 28 lanes. It beats LEXIS on none.**
+
+That is not a bug and it is not a tuning failure — it is a measurement, and it is the
+most useful thing this turn produced. Three independent reasons, each measured:
+
+1. **The wire has no junctions left.** Folding the parent's wire (`order 'out'`)
+   finds 0–20 sites per lane, because the grammar has already absorbed the spaces
+   into glyph-bearing rules. Measured in `bench/x23/diag1.ts`: `Mout − polyM` is
+   positive (+12 to +45) on **every** lane.
+2. **Folding the text first breaks the grammar.** On kb-article, POLYTROPOS shipped
+   `identity` on the folded text — the fold moved the token boundaries the grammar's
+   span discovery depends on, costing more than the deleted spaces saved.
+3. **The clause costs more than the structural junctions deliver.** Line-marker
+   folding saves 21 tokens on email-thread against a 27-token clause. Sharing the
+   clause with the mark fold (`tag: 'both'`) was built specifically to fix this and
+   still did not win.
+
+### Negative results collected this turn (all reproduced, in `bench/x23/`)
+
+- **Hard-wrap elision, revisited with sentinels.** kb-article's 6 multi-line
+  paragraphs *are* exactly greedy-wrappable — but at **different widths**
+  (95, 96, 97, 98, 97, 98). No single `W` reproduces the file, so the exceptions
+  would need sentinelising, and the rule would require the reader to perform greedy
+  word-wrap at a stated width. −34 tokens available, rejected as too fragile for a
+  byte-exact direct-reasoning decode. `bench/x23/wrap3.ts`.
+- **R3 (numbered-list markers):** 0 derivable sites on every lane. Dead.
+- **Generalised in-file mark fold:** re-implementing LEXIS's mark fold in the unified
+  site scanner folded 25 more sites on bibliography and **lost 12 tokens** *and*
+  corrupted `J. L., &`. It was therefore deleted and the mark fold now delegates to
+  LEXIS's implementation verbatim. Re-implementing a verified component in order to
+  unify it is how verified components become unverified ones.
+
+### Self-decode receipt
+
+`bench/x23/receipts/selfdecode/` and `bench/x23/selfdecode.py` — an independent Python
+decoder written from the contract text alone, importing nothing from `src/lib/omega`.
+Result on bibliography.txt: **2759 / 2759 characters, byte exact.**
+
+
 ## The frontier is NOT DENS-2 / MORPHE / HEMERA (X21 restatement)
 
 The previous frontier claim was computed by taking a minimum over **8 codecs** out of 183 registered.

@@ -1,0 +1,14 @@
+dump.sql                           raw= 1795 STO=  712 LEX=  712 ord=none kind=none   folds=  0 exact=true
+git-log-fuller.txt                 raw=  143 STO=  143 LEX=  143 ord=none kind=none   folds=  0 exact=true
+git-numstat.txt                    raw= 4632 STO= 2020 LEX= 2020 ord=none kind=none   folds=  0 exact=true
+node-stacktraces.txt               raw=  568 STO=  316 LEX=  316 ord=none kind=none   folds=  0 exact=true
+ops-ls-l-bin.txt                   raw=  465 STO=  224 LEX=  224 ord=none kind=none   folds=  0 exact=true
+openstack-loghub-26.log            raw= 4028 STO=  989 LEX=  989 ord=none kind=none   folds=  0 exact=true
+df-h.txt                           raw=  570 STO=  265 LEX=  265 ord=none kind=none   folds=  0 exact=true
+psql-output.txt                    raw=  675 STO=  355 LEX=  355 ord=none kind=none   folds=  0 exact=true
+de-kb.txt                          raw=  525 STO=  471 LEX=  471 ord=none kind=none   folds=  0 exact=true
+kb-article.txt                     raw=  656 STO=  637 LEX=  637 ord=none kind=none   folds=  0 exact=true
+meeting-transcript.txt             raw=  472 STO=  400 LEX=  400 ord=none kind=none   folds=  0 exact=true
+spring-projects_spring-framework_35118.md raw= 1895 STO=  948 LEX=  948 ord=none kind=none   folds=  0 exact=true
+aapl-2014.csv                      raw= 3108 STO= 1476 LEX= 1476 ord=none kind=none   folds=  0 exact=true
+sp500-200.csv                      raw= 6662 STO= 4247 LEX= 4247 ord=none kind=none   folds=  0 exact=true

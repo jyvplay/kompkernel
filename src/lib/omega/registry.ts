@@ -112,6 +112,7 @@ import { stigmeEncode, stigmeDecode } from './stigme';
 import { morpheEncode, morpheDecode } from './morphe';
 import { syzeuxisEncode, syzeuxisDecode } from './syzeuxis';
 import { lexisEncode, lexisDecode, lexisFold, lexisUnfold } from './lexis';
+import { stoichosEncode, stoichosDecode } from './stoichos';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -328,6 +329,21 @@ export function codecEntries(): Entry[] {
         const r = lexisEncode(t, enc, parents as any);
         const decoded = lexisDecode(r.wire, r.decodeConfig);
         return { output: r.wire, decoded, oneChat: r.messageTokens, note: `parent=${r.parent}; order=${r.order}; folds=${r.folds}; dangers=${r.dangers}; sentinels=[${r.sentinels.join('')}]; M=${r.messageTokens} vs identity ${r.inTokens}; ${r.notes}` };
+      },
+    },
+    {
+      key: 'stoichos', label: 'στοιχεῖον ΣΤΟΙΧΟΣ (Derivable-character elimination, generalized from one rule to a searched rule family. LEXIS established one instance — after a sentence mark in { . , ; : } the next thing is essentially always exactly one space, so that space is derivable and can be deleted then restored by a stated rule. STOICHOS keeps that instance and adds the two structural junctions that carry hybrid prose: after a line-initial run of # * + - > (markdown headings, bullets, email quoting), and after a line-initial number plus . or ) (numbered lists). The contribution is the search, not the list: every junction site is either derivable (a space is present, delete it) or danger (no space is present, and the inverse rule would INSERT one that was never there — J. L., / 3.14 / file.ts / #include), and each mark has its own folds-versus-dangers economics, so the two folds are tried separately in both composition orders and the cheaper one ships. Mark dangers are neutralised by REPLACING the mark with a per-mark sentinel, so they cost nothing; structural dangers have no single character to replace and pay one token.)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => {
+        const cut = (r: any) => { const dp: string = r.decoderPrompt; return { wire: String(r.wire), contract: dp.slice(String(r.wire).length + 1) }; };
+        const parents = [
+          { name: 'identity', run: (x: string) => ({ wire: x, contract: 'Print the text exactly as given.' }), undo: (w: string) => w },
+          { name: 'lakonikos', run: (x: string) => cut(lakonikosEncode(x, enc)), undo: (w: string) => chironDecode(w) },
+          { name: 'daedalus', run: (x: string) => cut(daedalusEncode(x, enc)), undo: (w: string) => chironDecode(w) },
+          { name: 'polytropos', run: (x: string) => cut(polytroposEncode(x, enc)), undo: (w: string) => chironDecode(w) },
+        ];
+        const r = stoichosEncode(t, enc, parents as any);
+        const decoded = stoichosDecode(r.wire, r.decodeConfig);
+        return { output: r.wire, decoded, oneChat: r.messageTokens, note: `parent=${r.parent}; order=${r.order}; kind=${r.decodeConfig.kind}; folds=${r.folds}; dangers=${r.dangers}; sentinel=${r.sentinel ?? 'none'}; M=${r.messageTokens} vs identity ${r.inTokens}; ${r.notes}` };
       },
     },
     {

@@ -137,6 +137,31 @@ Conventions:
   byte-level tokens (the "tokens-per-byte trap"). LEXIS only ever deletes a
   space that the contract's rule puts back.
 
+### STOICHOS (`stoichos`, X23, shipped)
+
+- **What it is:** derivable-character elimination generalized to a rule family.
+  Deletes the space after `. , ; :` (R1), after a line-initial run of `# * + - >`
+  (R2), and after a line-initial number plus `.` or `)` (R3), restoring them by a
+  single stated rule. Non-derivable sites (`J. L.,`, `3.14`, `#include`) are
+  sentinelised.
+- **Greedy?** No. The fold is a *total, deterministic* rewrite of every derivable
+  site — there is no selection among junctions. The search is over (i) which rule
+  family ships (mark / structural / both), (ii) which parent to wrap, and (iii)
+  which composition order (`in` / `out`). All are enumerated and compared by
+  measured message cost.
+- **Honest source-article citation:** **none.** No paper stands behind this; the
+  derivability observation is folklore. The danger partition, the shared-clause
+  family design, the "mark danger replaces the mark so it is free" encoding, and
+  the order-aware contract are original to this repo.
+- **Time- or CPU-bound?** CPU-bound. Each candidate runs the parent at most once
+  per composition order plus O(n) character scans; no deadline, no budget stop.
+  It inherits any budget its parent has.
+- **Delegation, deliberately:** the mark fold calls LEXIS's `lexisFold` /
+  `lexisUnfold` verbatim rather than a unified re-implementation, because LEXIS's
+  has an independent hand-written decoder and a 2759/2759 receipt.
+- **Measured outcome:** 28/28 byte exact, **ties LEXIS on all 28 lanes**. See
+  `docs/codecs.md` for why — it is a measured negative, not a defect.
+
 ## Negative or unregistered codecs
 
 ### ANAPHORA-FOLD (`src/lib/omega/anaphora-fold.ts`, X12, unregistered)
