@@ -1,0 +1,16 @@
+ 1 find-listing.txt                         in  3997 aetos  1298 psephos  1298 delta     0 exact true polytropos/out -
+ 3 git-log-iso.txt                          in  1947 aetos  1465 psephos  1485 delta   -20 exact true polytropos/in dtT:plain×27
+ 5 ls-full-iso.txt                          in  1175 aetos   393 psephos   393 delta     0 exact true polytropos/out -
+ 7 ops-git-log-stat.txt                     in  6649 aetos  3413 psephos  3425 delta   -12 exact true polytropos/in date8:mark^×18 time6:mark^×18
+ 9 ops-ls-l-omega.txt                       in  4063 aetos   956 psephos   956 delta     0 exact true polytropos/out -
+11 chart.svg                                in  1331 aetos   431 psephos   431 delta     0 exact true polytropos/out -
+13 kubectl-get-pods.txt                     in  1006 aetos   362 psephos   362 delta     0 exact true polytropos/out -
+15 bibliography.txt                         in   896 aetos   693 psephos   693 delta     0 exact true polytropos/out -
+17 email-thread.txt                         in   629 aetos   506 psephos   506 delta     0 exact true polytropos/out -
+19 llm-answer.md                            in   733 aetos   692 psephos   692 delta     0 exact true polytropos/out -
+21 readme.txt                               in   843 aetos   664 psephos   664 delta     0 exact true polytropos/out -
+23 svenstaro_miniserve.md                   in  7209 aetos  2942 psephos  2942 delta     0 exact true polytropos/in date8:plain×44
+25 csv-8.csv                                in  2870 aetos  1656 psephos  1656 delta     0 exact true polytropos/out -
+27 vix-daily-1990.csv                       in  3412 aetos  1229 psephos  1229 delta     0 exact true polytropos/in date8:plain×126
+DONE
+EXIT=0

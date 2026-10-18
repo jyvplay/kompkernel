@@ -1,0 +1,64 @@
+§ა benchव/თवllm-blindυათ्υ-tabο +
+րουি | ിυ-tab/decodeरवhiddenுυ-tabरդυ-ctxיυ-terseা@users.noreরply.github.com่741+arena-agentার>
+
+ाου-ctxರ:ु  ವ>
+Dateರुի10ണವ Sat Oct ի ^ცა/zωცիดω/amphoraկ +++
+లկაς-^202610իզς.mdೋ-reportզी |ु सी5οય |  मય12կא insertions(+)
+
+commitשא ი_ലवdecიു,տ files changedു վ+++
+აე0ত
+पीეতো-receiptsলোς.jsonlტ/wireबरტన src/libवomega್.tsునवregistry್ಲ 2026 +000ე
+
+   έಲ Zπέ9ರო1גიო.txtί2עიί.txtಿაवterseತಿ/prefixנीოοल3וიल.txtবც9-reportզեी6பी9 ++তת/decodeवdecयתიოα ++++
+ն ++তმवctxೂამმბ.jsonlজ+++
+טवvisible/msgק           યս4दीսονωवεdρω/hcvε-աય11ిवantiphonু +++++ो insertions(+), न deletions(-)
+
+commitটো.jsonlएય13կდ/tabminხადোগοაवctxআগმતય14կןर/origষ +++++++++++++++++ৃষ++++++++য় +++++++++ীয়++++ර-bench್δ +++++তম್                    ય্ষ++++్    -ુ.jsonीოోवperiodosവ <agent@arena.aiζ ო file changedു უ-micromatchύ CHIRONნয়+++++
+चω/budgetλω/leadersಂয়তৰ ++++++
+ాवklimaxனवcolTTம LAKONIKOSร self-decodesടवलรีত    -क/chiron-kairosহ_tier5_ultrareview.mdश DAEDALUSದ/lakonikosಸ +++++++++++++++++++++++++++++++++พ KAIROSโ-report.mdηა/stichosვ;ം ესვ tsc exitംೇ TABMINषდ-roundtrip್ನ ANTIPHONಳ/e58fbcaaत.txt            క enumerateTokenSpans്তAuthorರന jyvplayര്ന <15022593+jyvplayারণരವ Sun Oct 11 ^ญ    Co-authored-byರ arena-agent <297053ლ    
+ญ่ड)
+ლაτ
+    
+ญ่หावvisibleवearlierકրर/checkიరवreceiptsக/tableიძ.csv      անுகहार/newഗ് Arena Agentവണૈ് arena-agentവണได-long-ზ.err                   पไമിίലയ.csv             मമგ8නीგնח       න्ט્್                     อด-ქ.err                        पอยνariadneσ_columns.txtெுίκ.txt           பெல.csv           मெՈ्वvisibleί/msgიჩ-probeಮवnumlistჩז      યרય16αιತ-sweepైৃ++++তבुերջა/kairosโკ.err                           पρόუ.err               पથ್                       ά्תიलצ      सுனד       स्बদি169ৃ++
+जबגם          ीכע           |   ה        βעהניോಿवજય43ಂತೆు                      स լაియुदυबמुसυטלಲ PERIODOSರುಲ STICHOSटג           ी99ס   երתીય18რeಜ                 િ         ¶commit 409ίa638aგfe455456რ664196fa182ffერսრგffսণ022126έիರ AMPHORA (DAEDALUS ||ύ exact-gated min): exact 55व55ു gains on ί of 55 docs (micromatch -36.გ%, ja-kb -12.ί%), independent reader 38व38ვ honest narrow resultსτωೋಜি134্জอექებ                      ય25δอოქობ                      ય24δไეზებಜसไოზობಜसอverify-47ბ              ય49ಂอverify-longგბקինอverify್                    एด-wires-cases.json             נด-wires-independent-decode.jsonנยόยუბ             ीलοยჩ્યինच-A.err                         पच-Aბ                       एचჩ್                      ય15ల/zի/chiron-vs-daedalus್                ય15ల/zի/cvd.err                              पω/cvdბ                            सρეკებ                         ય23αρოკობ                         ય22ανholdout-cvdથતνholdout43.txt                        ય43ুজλόλუბ             दλ್                           ય20ανlong-prose-files.txtಜනω/translitჩম24δνverify-files.txt                     නన/amphoraથি100ষ+
+ೆ37տ599ש34ε4290259069c00086b5რ56149b022eeսε970cbণ014054π registerೇ (fresh blind fixtures ίवί first-pass exactვ round-trip 96व96 rectangular exactს); report correctedτമսയսσ     ակമ5യ5σ     म्/genίથીαெனიսκனი5κகսலக5லტიսतபெტი5तեն ...თ-tabర-z9-tabmin-roundtrip.txtি100্ত्षק21δՈսतमՈ5तபব                     ય36ু++-
+ు                         ी5ն 17տ302ोलन c94ε64fdedaलრერგε94c7695είf726f36fda549սণ003247π table ल diagnosisರ hand-expansion errorვ mechanical decode matches fixture (contaminatedു disclosed); no registrationτά_mechanical.csvি12ಂി/mdecode.py          ি34ৃতി/mdecode_transpose.pyયგৰব                  ি13ু++---
+ ստ64ोलन 57511fίb08721როc35c258401f315ffcfd501c06ণ003129π correct report to verified facts only (README fetchedვ unverifiedೇ cell counts removed)
+ლবি66্+---------------------
+ζ34ो32न 373რսce9a77c81aलc733ოf542168ოea52457924რণ003114π status recordვ openai/math count verified against primary READMEვ readability-policy decision recordedτবি70ಸ++++++++++
+ζ70א लca89fგbf560321300लb6f865400ეείcc802465fণ002858έგರ readability gate forೇ column arm (pre-registered); table ίട with receiptsვೇ stays unregisteredτിലί.csv          ակിലίσुય17αάσुרά_corrected.csvमά_firstpass.csvम्ర-zგ.json          ય59ীত्वscore.py                  ય26ৰცგೋಜি111ৃত გտ264ש84bd67ε69εսaa858b8726a37ac8495bdf7a063b7ণ002336έ7ರ KLIMAX and NUMLIST negative probesു frontier auditു new-source record (no codec registeredडాಮ್              ি45ნაా/probe್                      ি52ীվారా-runsჩ.txtયგలారಮ.txt    ি ίοც7ೋ              ি92ై 5տ199א f069676029ეdbε22ε85b87რ032acίbcbeaίedb17ণ001627ಲೇ experiment (unregistered): per-table rowवcolumn arm overம
+    
+    Measured on 169 files (167 CSV corpus + ί holdouts): 169व169 exact round-trip;
+    rectangular tables -ս.ე% tokensു corpus-wide -ί.ί%; column arm wins 35व92.
+    Not registered in the codec registryರ gain is small and concentratedു andত    column-only serialization has readability risk. Receipts inხ/.
+ლ्य.csvהան्यσस्य_rebuilt.csvան्/gen್                  ીկுனגצעצו      புகოძίძल.csvז12ն्जדעדו       ीίο्טגחעחו       सადර                       एხवREPORT.md             ય25αხ/files-169.txtિদხდ-bench-169ბদაष                   ય27δనდ્ি132্ত 22տ666ש93c9cd6რეfeίc58cea09a27c5რ15εეfίaलრ34191രണ204944ಲ CTXCOPYರ copy-from-earlier-chat-text codec (conditional lane) with receipts
+    
+్నმcopy್ರ ⟦a…b⟧ copy spans from earlier text Cვ unique anchors by defaultვ encoder self-verifies by simulating the decoderვ refuses ⟦ ⟧ … in T or C.
+్ამರ PyPI adjacent-release pair harvest (326 pairsു sha256-verified), 81-pair sample (-75.7% vsமു exact 81व81), held-out 245 pairs (rule picks CTX 241ვ exact), 60 unrelated controls (zero copy coverage).
+్դರ twoร exact (case ल not decoded).
+్ Scopeರ conditional lane gain onlyു applies when the earlier text is in the same chat. Reportರೂcopyೋ.
+ლೂර                         ी57আ-controlলी60আ-holdoutলય245նೂ-holdoutથी53আ-pairsলुी81আcopyೋિी60গवharvest_pairs.py                     ी77গ/pairs-manifest.json                  ি424ე্++
+դתटाתעק101ा/gen્ी20हटहעק101हוק236նդजם17ाबכ ίाबום11หגז100หעז102หוז227նդטגם18ाטכ लाטום12οనმcopyથય137ο 24տ615გש6fc569a942რ6fc286150ίf94a01639a21ε03a597രണ192639ಲமರश wire with terse decoder contract (same wire and decoderვ -ի tokens per rule-based messageു 43व43 exactു never worse thanश). Negativeರ line-prefix elision (no reliable gate). Readabilityರ लട byte-exact (n=लു self-review only).
+ლაದೋ           ি121্জי/check್ಜակיתגિતיתעિניתוિרי/gen್                   मיןגהતיןβןוהריजהदיबβबוהीίοיטגהենיטעהीलοיטוהदಿ/breakdownથીαോcompact-candidates್              एോcompactί್                        યինോcontract-lanes್                  मോcontract-tokens್ಜય15կಿದරಜય20αಿದলજ-elideম42ুজತ-eval્તತ-gateটિજ-gate્मι-devট    ય22δι-testট   ય21αιম28ৰಿტhead್                        ենనದ્ય75ী++
+ೆ32տ625א लრलef75da456adffe45baf31869eff046fa9c51რരണ190747ಲ PR frontier review (^202610ի):श is the real frontier referenceვ PR #ί starlight family negative (system promptു +wire); PR #23 kalligraphos no Pareto gain (email -13 onlyു nondeterministicड/pr-frontierলি12δა/pr-frontier-reviewզ     ি78ై ίտ90ש6999ebcc97352ε02be74c581a12cलε04εგc305adരണ182306ಲನ (negativeു not registered): line copy-with-edits overพുംव49 winsვ blind LLM-decode harness लട
+    
+్ని್ರ decode-gated copy stageു min overพ andನ∘KAIROS on message tokensี measuredರ copy stage removes 272 tok beforeύ on aleph್ butύ wire grows 3179->344ევನ winsംव49ു all decodes exactു inverse 49व49ีυ-*: blind decode protocol (originals hiddenു decoder sees only the chat message), लवल byte-exactร (self-testു not independent)
+్լโರ verdictു receiptsു negative spaceു sourcesു openai/math groundingു next testsτլ-benchটય50ু++
+լර            ીలిโ           ি121ষতլ-scanট ি102ნυ-check್ק24αυ-gen್             ય44ৰυתגסעסו   եકოુકίુકलુրןגבןעבןובजయעయוुीलրטגמעמוुदని್          ি262ಸজ 22տ685א b7f55c455783448215bc9faca572ac9b496742ოεരണ173111ಲพರύ search with exact faster span enumeration and deterministic work-unit budget
+    
+    Same wire format and decoder asύ (search-engine changeു not a new wire).
+్క by offsetვకRef keptვ equivalence 645 casesും mismatches (benchक-equiv್)
+్ ChironOptions.workUnitsರ deterministic budget for macro search and variant sweepีพ_WORK_UNITS=32M reproducesύ 26 s on filelock/noseवgreenlet/gplვ repeat-identical սवսี registry key kairosვ tscംვ chiron selftest 11व11ีջ (receiptsვ block pass keeps a wall-clock capു disclosedडकරય31ীতაक-equiv್ય55্+
+ջז73ైన/chiron್     ি107ಸ+++++-----
+ు   ե ++-
+ 5տ259ो13न 6ε213683c5cef2519cfce270efეf274199096acეഗ065856ל wrapped-subset results (84 docsു +664 tok aggregateു GPLवCECILLवAGPL −270..−300),ύ wall-clock budget findingു codebaseवPR/openai-math reviewτაోโुય36য়++-
+ა/reviewզি136ಸ++++++++++++ত ίտ170ोίन b32556cb5c5fec19f689რलca42db6რ7b46390efeഗ064323ל per-paragraph measure codec for hard-wrapped prose (exact decode-gated armsვ red-team 311वევ corpusავύ budget findingडోර            ય70లో-corpus-manifest.jsonি936ಸվో-fetch.py            ય58లో-redteam್          ય59లోโ           ি140ৰనో್          ি259য়+
+ు          स 7տ1527שիრ16b258ee167399aսcb214cc451b170cd7ff00ૈ042951ು reportರ honest measured results (CHIRON + METATRON incumbentsു GPL-ल second corpus), negative spaceു verification gatesτηโি263ಸ++++++++++++জζ263ש32155acგebbίa824108156efa53რგრ603fd815ოbૈ033344ುರ verse-line layout codec (greedy-refill of hard-wrapped paragraphs), stacked overύ and METATRONვ decode-verified armsു registry entriesു benchesτηරિય68ಂη-metatronරય55ু++
+ు      பన/stichos್       ি320ಸ++++জ ստ452ש594bგa52aff26c59cb7776caრ48ce72691c00301്ന <jyvplay@gmail.comವ Fri Oct 9 ^201849 2026 -040ე
+
+    Merge pull request #25 fromനवarenaಳ-kompkernel
+    
+    Arenaಳ kompkernel
+
+ .gitignore                                |    13ού.patch                             ય8839ნ ICARUS.patch                             ય894გნ KIONES.patch                             ি17603ৃվ/Y7_ECHOহ       ी280οა/Yგ_LETHEহ      ी323ο
+Before ¶ a new Greek, Hebrew, Armenian, Georgian, Thai or Indic letter labels text up to the next new letter. After ¶ expand all repeatedly; print result only. Numbers: expand 8 digits to YYYY-MM-DD, 6 digits to HH:MM:SS. A ^ before digits means expand them; drop the ^.

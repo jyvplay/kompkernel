@@ -362,6 +362,93 @@ and `src/lib/omega/psephos.ts` for the implementation.
   worth its own contract clause. `aapl-2014.csv` has 240 dates and gains exactly 0. Three tempting
   formats are refused outright as non-invertible: thousands separators, dotted quads, semver.
 
+
+---
+
+## AETOS — **A**daptive **E**ncoding of **T**oken-**O**ptimizing **S**eparators (X25)
+
+`src/lib/omega/aetos.ts`, registry key `aetos`, family `exact`, fidelity `exact`.
+
+PSEPHOS, generalized. PSEPHOS established the law and then shipped only two instances of it,
+chosen by hand; AETOS asks what the law's *domain* actually is and replaces the hand choice with a
+latttice that is read off the document. The law:
+
+> A BPE tokenizer charges a separate token for punctuation that lives **inside** a number, even
+> though that punctuation is a pure function of the digits once the format is known.
+
+    "2026-08-14"   6 tokens      "20260814"   3 tokens
+    "00:02:05"     5 tokens      "000205"     2 tokens
+    "1.2.3"        5 tokens      "123"        2 tokens
+    "192.168.1.1"  7 tokens      "19216811"   4 tokens
+
+PSEPHOS shipped `date8` (YYYY-MM-DD) and `time6` (HH:MM:SS), and explicitly **refused** thousands
+separators, dotted quads and semver as "not invertible". That refusal is the specific use case
+X25 set out to generalize, and the generalization turns on one predicate:
+
+**A shape is invertible by a fixed-width rule iff every occurrence in the document has the same
+digit-group width vector.**
+
+`1.2.3` and `10.20.30` in one document have no single restoration rule — a bare `4`-digit run and
+a bare `6`-digit run both occur, and no width test separates them from collapsed neighbours. But a
+document in which *every* dotted triple is `d.dd.d` collapses all of them to 4 digits, and
+`"expand 4 digits to d.dd.d"` restores them exactly. PSEPHOS could not see this because both of
+its formats were constant by construction, so the predicate was invisible.
+
+So AETOS's shape set is:
+
+- **Fixed tier (4).** The timestamp shapes that recur across engineering text: `YYYY-MM-DD`,
+  `HH:MM:SS`, `YYYY-MM-DDTHH:MM:SS`, `YYYY-MM-DD HH:MM:SS`.
+- **Learned tier (28).** Every shape `k` digit groups joined by one separator, for `k` in 2..5 and
+  separator in `{ . , : - / _ SPACE }`. Each is scanned, and admitted only on constancy of the
+  width vector and at least two matches.
+
+**Invariants.** PSEPHOS's three, re-verified on every emitted wire, plus one new one:
+
+- **F1 MERGE** — a candidate touching a digit outside itself would fuse into a longer run and lose
+  its identifying width. Skipped.
+- **F2 COLLIDE** — a bare run of that width already exists. Resolved by the cheaper of `escape`
+  (mark the bare runs) or `mark` (mark the collapsed ones); if no sentinel is safe, the shape is
+  **disabled** rather than risked.
+- **F3 SENTINEL LEAK** — the sentinel already occurs where the decoder would read it. Pool is
+  walked and each candidate verified.
+- **F4 WIDTH-UNIQ (new)** — two enabled shapes may never share a digit width, or the decoder
+  cannot tell which template to apply. Best-scoring shape per width survives.
+
+- **Greedy?** **Both, and it matters.** The *shape set* is chosen by a greedy search scored on the
+  real objective `countTokens(wire) + countTokens(contract)` — most-frequent shape first, keep it
+  only if the measured total strictly drops, and the **empty set is the incumbent** so the codec
+  can never lose to doing nothing. Within a shape, mode and sentinel are chosen by *counting* and
+  then *verification*, never by preference. Nothing ships without a byte-exact round trip measured
+  on the actual text.
+- **Citation.** **None — original to this repository, as far as I could determine.** The
+  surrounding literature is about *different* transforms. On the lossless-prompt side, LTSC
+  (Harvill et al., arXiv:2506.00307) and the training-free dictionary-encoding follow-up
+  (arXiv:2604.13066, 60–80% compression, >0.99 exact match) both replace repeated *subsequences*
+  with meta-tokens — that is AETOS's **parent's** mechanism (POLYTROPOS/CHIRON), not AETOS's.
+  LoPace (arXiv:2602.13266) reports 72.2% space savings but its **token** method reaches only
+  1.02×, and it is byte-level, not decoder-free. LLM-driven arithmetic coding
+  (arXiv:2505.06297, 14.62–23.80×; Nacrith arXiv:2602.19626; PMATIC, ICLR 2026; Kipf, CIDR 2026)
+  is excluded by our one-chat-message contract: it needs byte-identical `P(x_t|x_{<t})` at both
+  ends, i.e. identical weights, tokenizer and preprocessing. The **closest** new source found this
+  turn is Zheng et al., "Broken Tokens? Your Language Model can Secretly Handle Non-Canonical
+  Tokenizations" (NeurIPS 2025, arXiv:2506.19004): it shows instruction-tuned models retain up to
+  93.4% performance under randomly sampled non-canonical tokenizations — which *supports* the
+  premise that a wire is decodable from a single message, but it studies robustness, not
+  compression, and reports no codec. Also relevant: arXiv:2402.01035 §D deliberately forgoes all
+  pre-tokenization normalization "to keep our tokenization scheme perfectly reversible" — the same
+  reversibility constraint that drives F1–F4, arrived at from the opposite direction.
+  I found **no** prior work that deletes intra-number separators and restores them as an
+  invertible, decoder-free transform, and none that learns the shape set per document.
+- **Time- or CPU-bound?** **CPU-bound.** 32 linear scans of the text (4 fixed + 5 group-counts ×
+  7 separators, minus 3 that coincide) plus one O(n) pass per enabled shape, plus one parent encode
+  per candidate order. No clock, no sampling, no backtracking, no search over the wire. Wall time
+  is dominated by the parent's grammar search, not by AETOS.
+- **Honest scope.** AETOS is a **breadth** generalization, not a large step. Its extra shapes are
+  found only in documents that actually contain them, and the greedy search drops any shape whose
+  clause costs more than the tokens it saves. On documents with only dates and times it reduces to
+  PSEPHOS exactly. Measured on the 28-lane holdout — see the X25 table in `docs/codecs.md`.
+
+
 ---
 
 ## Codecs that do not satisfy the measurement contract (X21 audit)

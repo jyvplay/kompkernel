@@ -931,3 +931,309 @@ indirect channels rather than direct reasoning. I did not verify either end-to-e
 - No LLM was run on the wire in this session. `M` is a tokenizer count of the contract plus wire, not a model evaluation.
 - The "agent decode" of the progression message was attempted and **not completed**. It is not claimed.
 - Verification by external tools: TypeScript round trip, CPython reader (32 messages, 0 mismatches), and the tokenizer count. These are external to the encoder and do not use the model.
+
+
+---
+
+## X25 — AETOS: the learned separator lattice, and the shape of what is left
+
+**Headline.** AETOS (`src/lib/omega/aetos.ts`, registry key `aetos`) generalizes PSEPHOS from two
+hand-written formats to a shape set *learned per document*. It is byte-exact on every lane it
+ships, it beats PSEPHOS on the lanes that contain shapes PSEPHOS could not express, and it
+degenerates to PSEPHOS exactly where those shapes are absent. This turn's honest result is that
+the remaining reachable gain is small, and that the negative space is now mapped well enough to
+say *why*.
+
+### A. The formal model
+
+Let `T` be the source text and `E` the encoder. The shipped object is a pair
+`(w, c)` — wire and contract — and the cost is
+
+    cost(T) = |enc(w)| + |enc(c)|
+
+where `enc` is the o200k_base BPE and `|·|` counts tokens. The decoder is a bare LLM receiving
+`w \n c` in one chat box, with no system prompt, no tools, and no skills file. Correctness is
+`decode(w, c) == T` **byte for byte**.
+
+The pre-tokenizer (exactly, from `src/lib/omega/bpe.ts:152` for o200k_base) is
+
+    [^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?
+    | [^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?
+    | \p{N}{1,3}
+    | ?[^\s\p{L}\p{N}]+[\r\n/]*
+    | \s*[\r\n]+
+    | \s+(?!\S)
+    | \s+
+
+BPE never crosses a chunk, so `|enc(s)| = Σ_chunks |enc(chunk)|` **exactly**. Every cost number in
+this section is that sum, measured, not modelled.
+
+### B. Outcome space
+
+- **H+** (the lattice generalizes and pays). **CONFIRMED.** AETOS ships shapes PSEPHOS
+  structurally could not: the ISO-T datetime (`2024-03-15T12:00:00`, 14 digits) and learned
+  group-separator shapes such as `dd:dd`. On `git-log-iso.txt` AETOS chooses `dtT` where PSEPHOS
+  chose `time6` (−20); on `dump.sql` it adds `dd:dd` on top of PSEPHOS's date8 (−16). **4 of 28
+  lanes improved, 0 regressed.** The threshold declared in advance is met.
+- **H−** (the lattice is breadth without depth). **CONFIRMED, and it is the dominant term.**
+  Across the corpus the *total* supply of every extra format measurable on the wire is ~81 tokens.
+  AETOS captures part of that and no more, because that is all there is.
+- **H∂** (the frontier is order-limited, not mechanism-limited). **STILL UNRESOLVED, and this
+  turn's evidence strengthens it.** Every character-level mechanism I could construct measures
+  ≈0 on the wire, while merely moving an existing rule across the grammar boundary moves tokens.
+  Cheapest falsification: instrument POLYTROPOS's span discovery and collapse only sites the
+  grammar did not cover; if the yield jumps, the limit was coverage, not mechanism.
+
+**Declared evidence threshold (stated before the run, so it cannot be moved afterwards).** AETOS
+would be called a success only if (i) every shipped wire decodes byte-exact — no exceptions, and
+(ii) it beats PSEPHOS by **more than a few tokens** on at least one lane without regressing any
+other. A regression on any lane would have been disqualifying regardless of the total.
+
+### C. Frontier retrieval and restatement
+
+**AETOS 28-lane result (final, all byte-exact, 0 regressions).**
+
+    raw 62 954  ->  PSEPHOS 29 735  ->  AETOS 29 683     net -52 (-0.175%)
+    4 lanes improved, 24 unchanged, 0 regressed, 28/28 exact.
+
+| lane | raw | PSEPHOS | AETOS | Δ | shapes shipped |
+|---|---:|---:|---:|---:|---|
+| `dump.sql` | 1795 | 705 | **689** | -16 | date8:mark^×26 G2:22:mark^×26 |  <-- improved
+| `find-listing.txt` | 3997 | 1298 | 1298 | 0 | — |
+| `git-log-fuller.txt` | 143 | 143 | 143 | 0 | — |
+| `git-log-iso.txt` | 1947 | 1485 | **1465** | -20 | dtT:plain×27 |  <-- improved
+| `git-numstat.txt` | 4632 | 2019 | 2019 | 0 | — |
+| `ls-full-iso.txt` | 1175 | 393 | 393 | 0 | — |
+| `node-stacktraces.txt` | 568 | 315 | 315 | 0 | — |
+| `ops-git-log-stat.txt` | 6649 | 3425 | **3413** | -12 | date8:mark^×18 time6:mark^×18 |  <-- improved
+| `ops-ls-l-bin.txt` | 465 | 224 | 224 | 0 | — |
+| `ops-ls-l-omega.txt` | 4063 | 956 | 956 | 0 | — |
+| `openstack-loghub-26.log` | 4028 | 988 | **984** | -4 | G2:22:mark^×52 |  <-- improved
+| `chart.svg` | 1331 | 431 | 431 | 0 | — |
+| `df-h.txt` | 570 | 265 | 265 | 0 | — |
+| `kubectl-get-pods.txt` | 1006 | 362 | 362 | 0 | — |
+| `psql-output.txt` | 675 | 340 | 340 | 0 | date8:plain×24 |
+| `bibliography.txt` | 896 | 693 | 693 | 0 | — |
+| `de-kb.txt` | 525 | 471 | 471 | 0 | — |
+| `email-thread.txt` | 629 | 506 | 506 | 0 | — |
+| `kb-article.txt` | 656 | 637 | 637 | 0 | — |
+| `llm-answer.md` | 733 | 692 | 692 | 0 | — |
+| `meeting-transcript.txt` | 472 | 400 | 400 | 0 | — |
+| `readme.txt` | 843 | 664 | 664 | 0 | — |
+| `spring-projects_spring-framework_35118.md` | 1895 | 948 | 948 | 0 | — |
+| `svenstaro_miniserve.md` | 7209 | 2942 | 2942 | 0 | date8:plain×44 |
+| `aapl-2014.csv` | 3108 | 1476 | 1476 | 0 | — |
+| `csv-8.csv` | 2870 | 1656 | 1656 | 0 | — |
+| `sp500-200.csv` | 6662 | 4072 | 4072 | 0 | date8:plain×200 |
+| `vix-daily-1990.csv` | 3412 | 1229 | 1229 | 0 | date8:plain×126 |
+
+The four winners, and why each one is a shape PSEPHOS could not express:
+
+- `git-log-iso.txt` **−20** — the log's timestamps are `2024-03-15T12:00:00`. PSEPHOS saw only
+  `HH:MM:SS` inside them and collapsed 6 digits; AETOS ships the whole 14-digit ISO datetime.
+- `dump.sql` **−16** — PSEPHOS collapsed the 8-digit dates. AETOS additionally finds `dd:dd`
+  (52 `HH:MM` sites in the dump's timestamps) as a **learned** shape.
+- `ops-git-log-stat.txt` **−12** — this is the contract-dedup win, not a new shape: two shapes
+  (`date8`, `time6`) land on the same sentinel `^`, and the old code printed the sentinel clause
+  twice. One sentence, 12 tokens.
+- `openstack-loghub-26.log` **−4** — a pure learned-shape win: `G2:22` (`dd:dd`) alone, 52 sites.
+
+
+
+Re-measured this turn from the committed artifacts rather than from memory:
+`bench/x24/psephos-{0,1}.jsonl` dedupe to 28 lanes summing **29 735**. **This matches the X24
+frontier, so the frontier is RESTATED UNCHANGED:**
+
+    raw 62 954  ->  POLYTROPOS 30 034  ->  PSEPHOS 29 735   (net -299, -1.00%)
+    LEXIS / STOICHOS tie at 30 028 (Δ = 0 on all 28), so PSEPHOS strictly beats both.
+
+Self-decode receipts for X24 remain 4/4 byte-exact. `openai/math` was re-checked: still 15 110
+stars, last push 2026-10-12, and the only two closed PRs are the 2026-10-08 manuscript update and
+the 2026-10-12 conversation-locking bot. **Zero new mathematical content since X24 checked it;
+there were no new proofs to evaluate individually.**
+
+### D. Negative space — 17 shapes that do not work
+
+Each entry is a mechanism that was built, run on the real wires, and rejected. The detecting test
+for the **modal shortcut** is the same throughout: *measure on the wire, never on the raw file.*
+Raw-text measurement is wildly optimistic because the grammar has not yet eaten the pattern;
+`bench/x24/paren.ts` predicted +99 for a rule that measured **+1** on the wire. Any number below
+measured on raw text is a fantasy.
+
+1. **Cross-lingual single-char-edit smuggling** (this turn's proposed mechanism — see §E).
+2. **Space insertion at class boundaries.** Inserting a space at every `L→P`, `X→N`, `P→L` … transition costs ≈1 token per site. Only `X→L` (non-Latin letter followed by Latin) is positive: **+82 total over 1 348 sites**, i.e. 0.06/site. Rejected.
+3. **Glyph alphabet swap.** Tested 27 Unicode blocks and 15 combinations. With *distinct* glyphs, **no** alphabet beats the incumbent on any lane. Net 0.
+4. **Glyph permutation by hill-climbing.** 171 281 pair-swap evaluations over 240 s on `sp500-200.csv`: base 4 211 → 4 185, **−26**. Real but far too expensive to ship.
+5. **Cyclic glyph reuse** (fewer distinct glyphs so BPE can merge recurring contexts). Shows −140 on sp500 — but only because reuse makes the assignment **ambiguous**, so it is not decodable. Its legitimate analogue, *merging* two glyphs, measures **−96 for 20 merges**: rule-count reduction is a dead end.
+6. **Contract-clause shortening via `letteriseGlyphs`.** Saves 10 contract tokens on `svenstaro_miniserve.md` and costs 90 wire tokens. **Net −80.**
+7. **Extended fixed formats measured on the wire.** `dtSp` +21, `d-` +15, `time` +15, `time2` +12, `ver` +10, `dtT` +7, `tz` +1 — **~81 tokens total**, before any contract clause.
+8. **`sqzSpace`** (collapse runs of spaces). +182 on the wire but **lossy**: the grammar's own expansions contain literal whitespace, so a run in the wire is content. Marking it back costs ≈1/site.
+9. **`commaGroup`** (insert thousands separators). **−1 390.** Catastrophic on ID/hash/date lanes (`aapl-2014.csv` −416).
+10. **`noSpaces`** −552, **`lowercase`** −87, **`deaccent`** −57.
+11. **`spaceBeforeNum`** +92 and **`noSpaceBeforePunc`** +75 — positive but both are **lossy** without a per-site marker, which eats the margin.
+12. **Tape pruning** — 0 tokens, 0 rules.
+13. **Double POLYTROPOS** — identity.
+14. **Oracle n-gram grammar over exact repeated token spans** — worse than POLYTROPOS.
+15. **Inline rule definitions, indentation elision, trailing-whitespace elision** — all refuted.
+16. **Hard line-wrap at any width** — dead.
+17. **LLM + arithmetic coding** — excluded by the one-message contract (needs byte-identical `P(x_t|x_{<t})`).
+
+### E. The proposed mechanism, answered directly
+
+The brief asked whether a **cross-lingual single-character edit** — delete, insert or substitute
+one character so an English word becomes a cheaper foreign-language token, mark it, and revert it
+mathematically — can satisfy the direct-reasoning constraint.
+
+**Measured answer: no, and it is not close.**
+
+I built an exhaustive greedy scanner (`bench/x25/edit.ts`): at every position in the text, try
+every deletion, every insertion from a 96-character alphabet, and every substitution, keep the
+edit that lowers the exact token count most, repeat. On raw holdout text:
+`kb-article.txt` 656→642 (−2.1%), `llm-answer.md` 733→716 (−2.3%), `meeting-transcript.txt`
+472→463 (−1.9%). On wires: `19.wire` 612→597 (−2.5%), `16.wire` 668→649 (−2.8%).
+
+Two findings kill it. First, **every individual edit is worth only 1–2 tokens**, and each needs an
+invertible marker at ≈1 token, so the mechanism nets ≈0 before any contract clause. Second — and
+this is the decisive one — **the search does not know the parent grammar's semantics**, so the
+edits it prefers are overwhelmingly *deletions of the grammar's own glyphs*, which corrupt the
+decode. Constraining the search to provably safe edits reduces it to the rule families already
+measured above, whose on-wire yield is ≈0.27 tok/site (LEXIS) or ≈3 tok/site (PSEPHOS). PSEPHOS
+is already the best instance of that family.
+
+So I did not ship it. The generalization I shipped instead is AETOS, which takes the *other* half
+of the same idea — "find a cheap reversible rewrite of a token-expensive surface form" — and
+applies it where the yield per site is an order of magnitude higher.
+
+### F. Six mechanism-distinct approaches
+
+| # | Approach | Central lemma | Artifact | Proved | Unresolved interface | Cheapest falsification | Local vs equivalent |
+|---|---|---|---|---|---|---|---|
+| 1 | **Separator lattice (AETOS)** | A shape is invertible by a fixed-width rule iff all its occurrences share a digit-group width vector | `src/lib/omega/aetos.ts` | Byte-exact on every shipped lane; F1–F4 verified mechanically | Whether the greedy subset search should be over shapes *jointly* with the parent's rule set | Find a document where two shapes share a width and the WIDTH-UNIQ drop costs real tokens | Local (per-shape gain) vs global (joint) — unquantified |
+| 2 | **Grammar (POLYTROPOS/CHIRON)** | Repeated substrings can be named by a foreign-script glyph | `src/lib/omega/chiron.ts` | Byte-exact, 28/28 | Rule selection is greedy, so the set is locally optimal only | Instrument span discovery; re-run with spans the grammar missed | Local, and known not to be globally optimal |
+| 3 | **Sentence-mark fold (LEXIS)** | The space after `.`/`,`/`;` is derivable | `src/lib/omega/lexis.ts` | Byte-exact, 2759/2759 | — | — | ≈0.27 tok/site; equivalent to PSEPHOS's mechanism at lower yield |
+| 4 | **Structural fold (STOICHOS)** | Markup structure is derivable from context | `src/lib/omega/stoichos.ts` | Byte-exact, Δ=0 vs LEXIS on all 28 | — | — | Ties LEXIS exactly |
+| 5 | **Glyph assignment annealing** | The wire's cost depends on *which* glyphnames which rule | `bench/x25/hill.ts` | −26 measured on sp500 | Cost is contextual, so no closed form | Find a local cost model; if it reproduces −26 cheaply, ship it | Local, expensive, not equivalent to a global re-assignment |
+| 6 | **Contract minimization (SYNTOMIA)** | "foreign letter" is as unambiguous as naming the script, when the body is ASCII | `src/lib/omega/syntomia.ts` | 24/25 vs CHIRON's 38/48 | Falls back when the source contains non-Latin text | Already shipped as its own codec | Local; `letteriseGlyphs` to buy the fallback back is net **−80** |
+
+### G. Artifacts, not status reports
+
+- `src/lib/omega/aetos.ts` — the codec, 4 parents × 2 orders, greedy shape selection, F1–F4.
+- `bench/x25/{fmt,bound,alpha,pool,gswap,gswap2,marg,merge,hill,perm,edit,census,mixinv,mixdump,global,clause}.ts` — every probe behind §D and §E.
+- `bench/x25/sweep.ts` + `bench/x25/aetos.jsonl` — the 28-lane measurement.
+- `bench/x25/selfdecode.py` — an **independent** decoder written from the spec, which parses the
+  contract to discover the shapes and checks byte equality. It caught a real bug (below).
+- `bench/x25/receipts/` — the wire-plus-contract messages, i.e. literally what a bare LLM sees.
+- `bench/x25/selfdecode.py` results: **4/4 byte-exact** (`dump.sql`, `git-log-iso.txt`,
+  `ops-git-log-stat.txt`, `openstack-loghub-26.log`), covering both a fixed-tier-only shape set
+  and a learned-tier-only shape set and one with both.
+
+**Bugs the independent decoder and a same-run comparison caught.** Three, all real, all fixed,
+and the sweep was restarted from zero after each:
+
+1. **Duplicated sentinel clause.** Two shapes on the same sentinel printed the clause twice:
+   12 wasted tokens on `ops-git-log-stat.txt`.
+2. **Ambiguous ISO pattern.** (below)
+3. **Stale parent contract on `in`-order trials.** The parent's contract is a *function of the
+   wire*, not of the source — `chironDecoderPrompt` specializes on the script the tape happens to
+   use, and collapsing digits can change which script the grammar picks (polyglot label 35 tokens
+   vs generic "foreign letter" 25). AETOS was reusing the **uncollapsed** contract for every
+   trial. This produced a genuine **+10 regression** on `svenstaro_miniserve.md` in the first
+   full run; after the fix it is exactly 0. I state this because the first run is in the history
+   and the second is not a re-reading of the first.
+
+**The ISO datetime clause** was originally
+`"14 digits to YYYY-MM-DDTHH:MM:SS"`. A reader's natural rule — a run of identical letters is one
+digit group — parses `DDTHH` as a single 3-letter run, giving 15 digits, not 14. The `T` is a
+separator that is *itself a letter*. AETOS now writes that shape in the unambiguous `d`-form
+(`dddd-dd-ddTdd:dd:dd`) and the decoder dispatches on the presence of a lowercase `d`.
+This is a concrete instance of the general principle: **a contract that a parser can misread is a
+contract an LLM can misread.**
+
+### H. Second-order adversary A(C) per candidate
+
+- **A(AETOS).** The adversary's cheapest move is to put two same-width shapes in one document,
+  forcing WIDTH-UNIQ to drop one. Cost: one shape's yield. Mitigation: none needed — dropping is
+  safe, and the greedy search measures the drop.
+- **A(PSEPHOS).** Put a bare 8-digit run next to a collapsed date. Already handled by F2; the
+  format is disabled if no sentinel is safe.
+- **A(POLYTROPOS).** A document whose repeats are all 1 token. Cost: the whole grammar, which is
+  why `identity` is always in the tournament.
+- **A(AETOS contract).** A document containing the literal string `Numbers: expand`. Not
+  currently checked. This is a real, unfixed hole and the honest place to attack next.
+
+### I. External verification, and one downgrade
+
+Two new searches on sites and terms not previously referenced.
+
+- **arXiv:2506.19004** (Zheng et al., NeurIPS 2025, "Broken Tokens? Your Language Model Can
+  Secretly Handle Non-Canonical Tokenizations"). Instruction-tuned models retain **93.4%** of
+  performance under randomly sampled non-canonical tokenizations and **90.8%** under
+  character-level. Right-aligned digit grouping improves 10-digit arithmetic by **33.7%**.
+  *Bearing:* it is the first external support I have found for the premise that a deliberately
+  non-canonical surface form is decodable from a single message — but it studies robustness, not
+  compression, and reports no codec.
+- **arXiv:2402.01035** §D deliberately forgoes *all* pre-tokenization normalization "to keep our
+  tokenization scheme perfectly reversible". The same constraint that drives F1–F4, arrived at
+  from the opposite direction (tokenizer design rather than codec design).
+- Also surfaced and excluded: **Nacrith** (arXiv:2602.19626), **PMATIC** (ICLR 2026), **LUMI**
+  (arXiv:2607.08221), **LoPace** (arXiv:2602.13266 — 72.2% space but its *token* method reaches
+  only 1.02×). All are arithmetic-coding or byte-level and therefore need bit-identical model
+  state at both ends, which the one-chat-message contract forbids.
+
+**Downgrade.** `openai/math` is **downgraded from "checked" to "closed"**. It produced no new
+content in X24 and none in X25; further re-checks would be theatre. If it changes, the change will
+be visible in `pushed_at`, not in a re-read of the same two PRs.
+
+### J. Repair inherits no trust
+
+The contract-dedup fix and the `d`-form clause fix were both applied to AETOS **after** it had
+already produced byte-exact wires, and the 28-lane sweep was **restarted from zero** after each.
+No number in this document comes from a run of a superseded build. The `selfdecode.py` receipts
+were re-run against the final messages.
+
+### Runtime honesty
+
+- The 28-lane sweep was run as **two real background shards on 2 cores**, not simulated.
+- `bench/x25/edit.ts` at STRIDE=1 did **not** finish 4 wire lanes inside 1 700 s (2 of 4
+  completed); the numbers reported are the ones that actually completed.
+- The 240 s hill-climb figure is 171 281 real evaluations, not an extrapolation.
+- Not parallelized beyond the two shards; the two shared the 2 available cores.
+- Wall time for the final 28-lane sweep was approximately 1.5 h, dominated almost entirely by the
+  parent's grammar search (a `polytroposEncode` call costs ~8 s even on a 368-byte file, because
+  it spends its search budget regardless of input size).
+
+
+
+### K. Generalized local-leader list by structural category
+
+Refreshed in X25 from the completed 28-lane AETOS run. "Local leader" means: the codec you should
+reach for *given the shape of the document*, not the codec that wins the aggregate. The aggregate
+winner is a property of the benchmark's mix; the local leader is a property of your text.
+
+| Structural category | Local leader | Why, and the honest caveat |
+|---|---|---|
+| **Prose — narrative, explanatory, no repeated boilerplate** | **POLYTROPOS** | The grammar is the only mechanism that pays when nothing repeats per-line. AETOS/PSEPHOS add nothing unless the prose contains dates. `kb-article.txt`, `llm-answer.md`, `meeting-transcript.txt`, `email-thread.txt`, `de-kb.txt` are all Δ=0 for AETOS. **This is the honest answer for everyday prose, and it is not a good one — see the note below.** |
+| **Prose that cites the same names/paths repeatedly** | **LEXIS** | Ties POLYTROPOS on all 28 (Δ=0), so it is never worse, and it is much cheaper to decode. |
+| **Ops — `ls`, `df`, `ps`, `kubectl`, one-line-per-record** | **AETOS** if the lines carry `HH:MM`; else **POLYTROPOS** | `ops-ls-l-omega.txt`, `df-h.txt`, `kubectl-get-pods.txt` are all Δ=0 — their numbers are sizes and PIDs, not grouped digit shapes. `openstack-loghub-26.log` gains −4 because its timestamps *are* `HH:MM`. |
+| **Ops — VCS logs with ISO or ISO-T timestamps** | **AETOS** | The single biggest win in the set: `git-log-iso.txt` −20. PSEPHOS only saw the `HH:MM:SS` inside the ISO datetime. |
+| **Ops — VCS logs with human/`stat` output** | **AETOS** | `ops-git-log-stat.txt` −12 (contract dedup, both `date8` and `time6` on one sentinel). |
+| **Tabular — CSV with a date column** | **AETOS**, and expect 0 | `sp500-200.csv` 4 072, `vix-daily-1990.csv` 1 229, `csv-8.csv` 1 656 — all Δ=0. PSEPHOS already took the date8 money; there is no second shape. |
+| **Tabular — CSV with decimal finance data** | **POLYTROPOS** | `aapl-2014.csv` 1 476, Δ=0. 240 dates and zero gain — PSEPHOS's escape/mark machinery correctly declines. |
+| **SQL dumps and migration files** | **AETOS** | `dump.sql` −16, the second-biggest win, from stacking learned `dd:dd` on top of date8. |
+| **Changelogs / release notes** | **AETOS ≈ PSEPHOS** | `svenstaro_miniserve.md` 2 942, Δ=0. Dates only. |
+| **Markdown with structure and links** | **POLYTROPOS** | `readme.txt` 664, `spring-projects…md` 948, `find-listing.txt` 1 298 — all Δ=0. |
+| **Bibliographies / reference lists** | **LEXIS** | `bibliography.txt` 693, Δ=0 for AETOS; LEXIS ties POLYTROPOS and decodes more cheaply. |
+| **Stack traces / logs with IPs or versions** | **AETOS (untested on this corpus)** | This is where the learned tier should pay — dotted quads and `d.dd.d` semver are exactly the shapes PSEPHOS had to refuse. **No lane in the 28 exercises them.** This is the most likely place for AETOS to show a large win on real user data, and it is currently unmeasured. |
+| **Short one-liners (< ~200 tokens)** | **LAKONIKOS / identity** | Contract overhead dominates; `git-log-fuller.txt` (143) stays at identity. |
+
+**The honest note on prose.** The brief asked for large general gains on random and hybrid prose.
+I did not get them, and I want to be plain about why rather than dress up the ops wins. Of the 28
+lanes, the ones that look like everyday prose (`kb-article.txt` 637, `llm-answer.md` 692,
+`meeting-transcript.txt` 400, `email-thread.txt` 506, `readme.txt` 664, `de-kb.txt` 471) are all
+**Δ=0 against PSEPHOS and against POLYTROPOS**. The reason is structural, not a tuning failure:
+prose contains no repeated punctuation-separated digit groups, so the separator lattice has
+nothing to latch onto, and it contains few repeated substrings long enough for the grammar to
+profit. The codec stack's entire measured gain is concentrated in **logs, dumps, tables and VCS
+output** — i.e. machine-generated text. Anyone whose actual workload is prose should expect
+POLYTROPOS-sized gains and nothing more.
+

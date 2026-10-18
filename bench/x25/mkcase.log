@@ -1,0 +1,11 @@
+dump                           in  1795 -> msg   689 | polytropos/in | date8:mark^×26 G2:22:mark^×26
+   CONTRACT: "Before ¶ a new foreign letter labels text up to the next new letter. After ¶ expand all repeatedly; print result only. Numbers: expand 8 digits to YYYY-MM-DD, 4 digits to dd:dd. A ^ before digits means expand them; drop the ^."
+git-log-iso                    in  1947 -> msg  1465 | polytropos/in | dtT:plain×27
+   CONTRACT: "Before ¶ a new Cyrillic letter labels text up to the next new letter. After ¶ expand all repeatedly; print result only. Numbers: expand 14 digits to dddd-dd-ddTdd:dd:dd."
+ops-git-log-stat               in  6649 -> msg  3413 | polytropos/in | date8:mark^×18 time6:mark^×18
+   CONTRACT: "Before ¶ a new Greek, Hebrew, Armenian, Georgian, Thai or Indic letter labels text up to the next new letter. After ¶ expand all repeatedly; print result only. Numbers: expand 8 digits to YYYY-MM-DD, 6 digits to HH:MM:SS. A ^ before digits means expand them; drop the ^."
+openstack-loghub-26            in  4028 -> msg   984 | polytropos/in | G2:22:mark^×52
+   CONTRACT: "Before ¶ a new foreign letter labels text up to the next new letter. After ¶ expand all repeatedly; print result only. Numbers: expand 4 digits to dd:dd. A ^ before digits means expand them; drop the ^."
+
+wrote 4 cases
+EXIT=0

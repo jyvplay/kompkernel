@@ -114,6 +114,7 @@ import { syzeuxisEncode, syzeuxisDecode } from './syzeuxis';
 import { lexisEncode, lexisDecode, lexisFold, lexisUnfold } from './lexis';
 import { stoichosEncode, stoichosDecode } from './stoichos';
 import { psephosEncode, psephosDecode } from './psephos';
+import { aetosEncode, aetosDecode } from './aetos';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -360,6 +361,14 @@ export function codecEntries(): Entry[] {
         const r = psephosEncode(t, enc, parents as any);
         const decoded = psephosDecode(r.wire, r.decodeConfig);
         return { output: r.wire, decoded, oneChat: r.messageTokens, note: `parent=${r.parent}; collapsed=${r.stats.totalCollapsed}; bare=${r.stats.totalBare}; modes=[${r.stats.formats.map((f: any) => f.name + ':' + f.mode + (f.sentinel || '')).join(' ')}]; M=${r.messageTokens} vs identity ${r.inTokens}; ${r.notes}` };
+      },
+    },
+    {
+      key: 'aetos', label: 'ἀετός AETOS (Learned separator lattice — PSEPHOS generalized from two hard-coded formats to a shape set read off the document. PSEPHOS proved the law: a BPE tokenizer charges a separate token for punctuation living INSIDE a number, even though that punctuation is a pure function of the digits once the format is known ("2026-08-14" 6 tokens vs "20260814" 3; "1.2.3" 5 vs "123" 2). But PSEPHOS shipped exactly two formats, date8 and time6, chosen by hand, and explicitly excluded thousands separators, dotted quads and semver as not invertible. AETOS replaces the hand choice with a LATTICE. Fixed tier: the four timestamp shapes that recur across engineering text (YYYY-MM-DD, HH:MM:SS, ISO-T datetime, space-separated datetime). Learned tier: every shape of the form "k digit groups joined by one separator", for k in 2..5 and separator in { . , : - / _ space }. A learned shape is admitted only if EVERY match in the document has the SAME digit-group width vector. Constant width is exactly the condition under which the inverse is statable in one clause ("expand 4 digits to d.dd.d"); a document mixing 1.2.3 with 10.20.30 has no fixed-width inverse and is rejected. That single predicate converts PSEPHOS two hand-picked exceptions into a general rule, and it is why AETOS can collapse dotted quads and semver safely where PSEPHOS could not. A fourth invariant, WIDTH-UNIQ, joins PSEPHOS three: two enabled shapes may never share a digit width or the decoder cannot tell which template to apply, so the best-scoring shape per width survives. PSEPHOS other guards carry over unchanged and are re-verified on every emitted wire — MERGE (a candidate touching a digit outside itself would fuse and lose its width), COLLIDE (a bare run of the same width already exists; resolved by the cheaper of ESCAPE and MARK with a sentinel, and the shape is DISABLED if no sentinel is safe), SENTINEL LEAK. The second change is that the shape subset is chosen by a GREEDY SEARCH scored on the real objective, countTokens(wire) + countTokens(contract), rather than being a constant: a shape saving three tokens is a net loss if it is the only reason the "Numbers: expand ..." sentence exists, and with a learned shape set that trade-off can no longer be decided once at design time. Both composition orders are tried against all four parents. Ships only when the full decode is byte exact.)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => {
+        const r2 = aetosEncode(t, enc);
+        const decoded2 = aetosDecode(r2.wire, { stats: r2.stats, order: r2.order, undo: r2.parent === 'identity' ? (w: string) => w : chironDecode });
+        return { output: r2.wire, decoded: decoded2, oneChat: r2.messageTokens, note: `parent=${r2.parent}; order=${r2.order}; shapes=[${r2.shapes.join(' ')}]; collapsed=${r2.stats.totalCollapsed}; bare=${r2.stats.totalBare}; M=${r2.messageTokens} vs identity ${r2.inTokens}; ${r2.notes}` };
       },
     },
     {

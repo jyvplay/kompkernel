@@ -1,0 +1,52 @@
+[
+  {
+    "name": "dump",
+    "file": "bench/holdout-mk/dump.sql",
+    "message": "bench/x25/receipts/dump.message.txt",
+    "aetos": 689,
+    "inTokens": 1795,
+    "parent": "polytropos",
+    "order": "in",
+    "shapes": [
+      "date8:mark^×26",
+      "G2:22:mark^×26"
+    ]
+  },
+  {
+    "name": "git-log-iso",
+    "file": "bench/z20/samples/git-log-iso.txt",
+    "message": "bench/x25/receipts/git-log-iso.message.txt",
+    "aetos": 1465,
+    "inTokens": 1947,
+    "parent": "polytropos",
+    "order": "in",
+    "shapes": [
+      "dtT:plain×27"
+    ]
+  },
+  {
+    "name": "ops-git-log-stat",
+    "file": "bench/z11/fresh/ops-git-log-stat.txt",
+    "message": "bench/x25/receipts/ops-git-log-stat.message.txt",
+    "aetos": 3413,
+    "inTokens": 6649,
+    "parent": "polytropos",
+    "order": "in",
+    "shapes": [
+      "date8:mark^×18",
+      "time6:mark^×18"
+    ]
+  },
+  {
+    "name": "openstack-loghub-26",
+    "file": "bench/holdout-ops/openstack-loghub-26.log",
+    "message": "bench/x25/receipts/openstack-loghub-26.message.txt",
+    "aetos": 984,
+    "inTokens": 4028,
+    "parent": "polytropos",
+    "order": "in",
+    "shapes": [
+      "G2:22:mark^×52"
+    ]
+  }
+]
