@@ -1,0 +1,1 @@
+Before ¶ a new foreign letter labels text up to the next new letter. After ¶ expand all repeatedly; print result only. Numbers: expand 8 digits to YYYY-MM-DD and 6 digits to HH:MM:SS. A ^ before digits means expand them; drop the ^.

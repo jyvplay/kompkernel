@@ -314,6 +314,56 @@ against each other instead of assumed. See `docs/codecs.md` for the measurement 
   (delta, invariance), because the two want opposite column orders. `col-morphe` wins on a clean
   table (vix 1129 → 906) and loses on logs.
 
+## PSEPHOS (`psephos`, X24, exact, **shipped this turn**)
+
+Digit-lattice collapse — the observation that a BPE tokenizer charges a **separate token** for
+punctuation living *inside* a number, and that such punctuation is a pure function of the digits.
+`"2026-08-14"` costs 6 tokens, `"20260814"` costs 3. That is ~3 tokens per site, against LEXIS's
+~0.27, because the space LEXIS deletes is normally absorbed into the following word token whereas
+an intra-number hyphen or colon is a token of its own. See `docs/codecs.md` for the 28-lane table
+and `src/lib/omega/psephos.ts` for the implementation.
+
+- **Greedy?** No — a tournament over **4 parents × 2 composition orders × 3 ambiguity modes**, and
+  crucially the **uncollapsed parent is always a candidate**, so the arena includes "do nothing".
+  Within a format the mode is chosen by *counting* (`escape` costs one sentinel per bare run,
+  `mark` costs one per collapsed number) and the sentinel is chosen by *verification*, not by
+  preference: the pool is walked and each candidate is checked against the finished text for
+  SENTINEL LEAK; if none is safe, the format is **skipped entirely**. Nothing ships without a
+  byte-exact round trip measured on the actual text.
+- **Citation.** **None — original to this repository, as far as I could determine.** I searched
+  specifically for prior art on number tokenization cost and on reversible number reformatting and
+  found the *cost* well documented but the *codec* not. The nearest published neighbours are
+  different in kind: Harvill et al. / LTSC (arXiv:2506.00307) and the dictionary-encoding follow-up
+  (arXiv:2604.13066) replace repeated *subsequences* with meta-tokens and prepend a dictionary —
+  that is our parent's mechanism, not this one; CompactPrompt (arXiv:2510.18043) has a "Numeric
+  Quantization" stage but it is **lossy** by design (user-specified error tolerance); the
+  text-skeleton work (arXiv:2605.29000) is likewise explicitly lossy. The general fact that
+  tokenizers split numbers expensively is documented in tokenizer primers (e.g. theneuralbase.com
+  and zeroentropy.dev tokenization pages) and in the number-representation literature (xVal;
+  BitTokens, "Efficient numeracy in language models through single-token number embeddings"), but
+  none of those proposes or evaluates deleting and restoring the separators as an **invertible**
+  transform. If PSEPHOS turns out to be a rediscovery, the novelty claim collapses to the
+  ambiguity guard (F1/F2/F3 below), which I have not seen stated anywhere.
+- **Time- or CPU-bound?** **CPU-bound.** Two linear passes per format (match, then collapse), plus
+  one parent encode per candidate order. No clock, no search, no sampling, no backtracking. Wall
+  time on the 28-lane sweep was ~2.5 h on 2 cores, essentially all of it inside the parent's
+  grammar search.
+- **The contribution is the guard, not the two formats.** Collapsing is only valid if the reader
+  can distinguish a collapsed number from one that was always bare:
+  - **F1 MERGE** — a candidate whose neighbour is a digit would fuse into a longer run and lose
+    its identifying width. Skipped.
+  - **F2 COLLIDE** — the text already has a bare run of that width (in `aapl-2014.csv` the
+    fractional part of `77.44539475` is exactly 8 digits). Resolved by the cheaper of `escape`
+    (mark the bare runs) or `mark` (mark the collapsed ones).
+  - **F3 SENTINEL LEAK** — the sentinel, or a sentinel+run pair, already occurs where the decoder
+    would read it. Resolved by walking the pool and verifying; else the format is dropped.
+- **Honest negatives.** 21 of 28 lanes gain nothing — 8 because the source has no
+  `YYYY-MM-DD`/`HH:MM:SS` at all, 13 because the collapse was measured and **rejected** as not
+  worth its own contract clause. `aapl-2014.csv` has 240 dates and gains exactly 0. Three tempting
+  formats are refused outright as non-invertible: thousands separators, dotted quads, semver.
+
+---
+
 ## Codecs that do not satisfy the measurement contract (X21 audit)
 
 - **`oracle`** — hardcodes the 20 holdout citations in `ORACLE_MAP` and declares it "not counted

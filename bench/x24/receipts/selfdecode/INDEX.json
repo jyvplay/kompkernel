@@ -1,0 +1,78 @@
+[
+  {
+    "name": "dump",
+    "order": "in",
+    "formats": [
+      {
+        "name": "date8",
+        "mode": "mark",
+        "sentinel": "^",
+        "enabled": true
+      },
+      {
+        "name": "time6",
+        "mode": "plain",
+        "sentinel": "",
+        "enabled": true
+      }
+    ],
+    "wire_chars": 1957
+  },
+  {
+    "name": "git-log-iso",
+    "order": "in",
+    "formats": [
+      {
+        "name": "date8",
+        "mode": "plain",
+        "sentinel": "",
+        "enabled": true
+      },
+      {
+        "name": "time6",
+        "mode": "mark",
+        "sentinel": "^",
+        "enabled": true
+      }
+    ],
+    "wire_chars": 5270
+  },
+  {
+    "name": "psql-output",
+    "order": "in",
+    "formats": [
+      {
+        "name": "date8",
+        "mode": "plain",
+        "sentinel": "",
+        "enabled": true
+      },
+      {
+        "name": "time6",
+        "mode": "plain",
+        "sentinel": "",
+        "enabled": false
+      }
+    ],
+    "wire_chars": 856
+  },
+  {
+    "name": "vix-daily-1990",
+    "order": "in",
+    "formats": [
+      {
+        "name": "date8",
+        "mode": "plain",
+        "sentinel": "",
+        "enabled": true
+      },
+      {
+        "name": "time6",
+        "mode": "plain",
+        "sentinel": "",
+        "enabled": false
+      }
+    ],
+    "wire_chars": 3094
+  }
+]

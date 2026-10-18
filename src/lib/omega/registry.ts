@@ -113,6 +113,7 @@ import { morpheEncode, morpheDecode } from './morphe';
 import { syzeuxisEncode, syzeuxisDecode } from './syzeuxis';
 import { lexisEncode, lexisDecode, lexisFold, lexisUnfold } from './lexis';
 import { stoichosEncode, stoichosDecode } from './stoichos';
+import { psephosEncode, psephosDecode } from './psephos';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -344,6 +345,21 @@ export function codecEntries(): Entry[] {
         const r = stoichosEncode(t, enc, parents as any);
         const decoded = stoichosDecode(r.wire, r.decodeConfig);
         return { output: r.wire, decoded, oneChat: r.messageTokens, note: `parent=${r.parent}; order=${r.order}; kind=${r.decodeConfig.kind}; folds=${r.folds}; dangers=${r.dangers}; sentinel=${r.sentinel ?? 'none'}; M=${r.messageTokens} vs identity ${r.inTokens}; ${r.notes}` };
+      },
+    },
+    {
+      key: 'psephos', label: 'ψῆφος PSEPHOS (Digit-lattice collapse. A BPE tokenizer charges a separate token for the punctuation that lives INSIDE a number, and that punctuation is a pure function of the digits — so it is derivable in exactly the sense LEXIS established for the space after a sentence mark, but worth far more per site because the space LEXIS deletes is usually absorbed into the following word token whereas an intra-number hyphen or colon is a token of its own. Measured on o200k_base: "2026-08-14" costs 6 tokens and "20260814" costs 3; "00:02:05" costs 5 and "000205" costs 2. Two formats ship, chosen because their inverse is a FUNCTION: date8 (YYYY-MM-DD to 8 digits) and time6 (HH:MM:SS to 6 digits). Deliberately excluded as not invertible: thousands separators ("18442" cannot be told from a collapsed "18,442"), dotted quads and semver (a collapsed run cannot be re-split). The contribution is the ambiguity guard, not the two formats. Collapsing is only valid if the reader can distinguish a collapsed number from one that was always bare, and three failure modes are checked mechanically at encode time: MERGE (a candidate whose neighbour is a digit would fuse into a longer run and lose its identifying width, so it is skipped), COLLIDE (the text already contains a bare run of the same width — the fractional part of "77.44539475" is exactly 8 digits — resolved by picking the cheaper of two modes, ESCAPE which marks the few bare runs with a trailing sentinel or MARK which marks the collapsed numbers with a leading sentinel, each sentinel costing one token), and SENTINEL LEAK (the sentinel, or a sentinel-plus-run pair, already occurs where the decoder would read it, resolved by walking a sentinel pool and verifying each candidate; if none is safe the format is skipped entirely rather than risking corruption). Like LEXIS the fold is tried in BOTH composition orders, and the ordering here is forced by measurement: collapsing BEFORE the parent lets the grammar of the parent see collapsed digits and destroys rules it would otherwise have spent tape on, while collapsing AFTER the parent is nearly free of material because the grammar has already replaced the dates with glyphs — collapsing before POLYTROPOS recovered 185 tokens on sp500-200.csv where collapsing after recovered 0. Ships only when the full decode is byte exact.)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => {
+        const cut = (r: any) => { const dp: string = r.decoderPrompt; return { wire: String(r.wire), contract: dp.slice(String(r.wire).length + 1) }; };
+        const parents = [
+          { name: 'identity', run: (x: string) => ({ wire: x, contract: 'Print the text exactly as given.' }), undo: (w: string) => w },
+          { name: 'lakonikos', run: (x: string) => cut(lakonikosEncode(x, enc)), undo: (w: string) => chironDecode(w) },
+          { name: 'daedalus', run: (x: string) => cut(daedalusEncode(x, enc)), undo: (w: string) => chironDecode(w) },
+          { name: 'polytropos', run: (x: string) => cut(polytroposEncode(x, enc)), undo: (w: string) => chironDecode(w) },
+        ];
+        const r = psephosEncode(t, enc, parents as any);
+        const decoded = psephosDecode(r.wire, r.decodeConfig);
+        return { output: r.wire, decoded, oneChat: r.messageTokens, note: `parent=${r.parent}; collapsed=${r.stats.totalCollapsed}; bare=${r.stats.totalBare}; modes=[${r.stats.formats.map((f: any) => f.name + ':' + f.mode + (f.sentinel || '')).join(' ')}]; M=${r.messageTokens} vs identity ${r.inTokens}; ${r.notes}` };
       },
     },
     {

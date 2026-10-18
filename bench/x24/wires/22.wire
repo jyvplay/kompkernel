@@ -1,0 +1,36 @@
+§зhttps://ә](зіorm.drizzle.teamсәіт/docsестаст/get-startedДа-postgresql#р  <a href="зв</a> •
+рю  <img src="./misc/readme/logo-github-sqб [қ),бу**ыуDrizzleл align="center">
+хбуд</div>
+
+<br/>
+н-mode-only" />
+Ь/drizzleң DrizzleҺ out of the boxА) andи/киoverviewња-sqlite#о<div¶олю-dark.svg#gh-darkню-light.svg#gh-lightндол  <h3>Headless ORM for NodeJS, TypeScript and JavaScript 🚀</h3>
+рі">Websiteвітк">Documentationвx.comЬorm">Twitterвdriz.linkиdiscord">Discord</a>
+д<br/>
+
+### What'sң?
+Drizzle is a modern TypeScript ORM developersбwanna use in their next projectәstateofdb.com/toolsЬ). 
+It isбlightweightәbundlephobia.com/packageЬ-orm) at only ~7.4kb minified+gzipped, and it's tree shakeable with exactly 0 dependencies. 
+
+ы supports every PostgreSQL, MySQL and SQLite database**, including serverless ones likeбTursoњtursoқNeonДneonқXataе/connect-xataқPlanetScaleа-mysql#planetscaleқCloudflare D1њcloudflare-d1қFlyIO LiteFSәfly.ioт/litefsиқVercel PostgresДvercel-postgresқSupabaseДsupabaseАбAWS Data APIДaws-data-api). No bells and whistles, no Rust binaries, no serverless adapters, everything just worksҺ.
+
+ы is serverless-ready by designу. It works in every major JavaScript runtime like NodeJS, Bun, Deno, Cloudflare Workers, Supabase functions, any Edge runtime, and even in browsers.  
+Withң you can beхfastҺусиbenchmarksА save time and costs while never introducing any data proxies into your infrastructure. 
+
+While you can useң as a JavaScript library, it shines with TypeScript. It lets youхdeclare SQL schemasуе/sql-schema-declarationА build bothхrelationalуе/rqbАхSQL-like queriesуе/select), while keeping the balance between type-safety and extensibility for toolmakers to build on top.  
+
+### Ecosystem
+Whileң ORM remains a thin typed layer on top of SQL, we made a set of tools for people to have best possible developer experience.  
+  
+Drizzle comes with a powerfulбы Kitусиkit-docsк) CLI companion for you to have hassle-free migrations. It can generate SQL migration files for you or apply schema changes directly to the database.  
+  
+We also haveбы StudioусЬ-studioк) for you to effortlessly browse and manipulate data in your database of choice.
+
+### Documentation
+Check out the full documentation onбthe websiteек).
+
+### Our sponsors ❤️
+<pл<a href="зdrizzle.team" target="_blank">
+<img src='зapi.drizzle.team/v2/sponsors/svg'/>
+</a>
+</p>

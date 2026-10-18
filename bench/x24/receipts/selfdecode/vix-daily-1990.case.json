@@ -1,0 +1,20 @@
+{
+  "name": "vix-daily-1990",
+  "order": "in",
+  "wire_path": "bench/x24/receipts/selfdecode/vix-daily-1990.wire",
+  "original_path": "bench/x24/receipts/selfdecode/vix-daily-1990.original",
+  "formats": [
+    {
+      "name": "date8",
+      "mode": "plain",
+      "sentinel": "",
+      "enabled": true
+    },
+    {
+      "name": "time6",
+      "mode": "plain",
+      "sentinel": "",
+      "enabled": false
+    }
+  ]
+}
