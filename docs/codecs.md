@@ -1237,3 +1237,393 @@ profit. The codec stack's entire measured gain is concentrated in **logs, dumps,
 output** — i.e. machine-generated text. Anyone whose actual workload is prose should expect
 POLYTROPOS-sized gains and nothing more.
 
+
+---
+
+## X26 — SYMPLOKE: the braided contract, and the exhaustion of the wire
+
+`src/lib/omega/symploke.ts`, registry key `symploke`, family `exact`, fidelity `exact`.
+
+X25 ended on an honest finding that this turn takes as its starting constraint:
+
+> **every prose lane is Δ=0.** kb-article 637, llm-answer 692, meeting-transcript 400,
+> email-thread 506, readme 664, de-kb 471, find-listing 1298, spring-framework 948 — identical
+> under LEXIS, STOICHOS, PSEPHOS and AETOS. All measured gain lives in machine-generated text.
+
+X25 also recorded *why*: the oracle loses, the budget is not the constraint, the glyph alphabet
+saturates at net zero. X26 does not dispute that. X26 asks a different question: **if the wire is
+exhausted, what is the other term in the objective?**
+
+The objective has always been two terms:
+
+    total = countTokens(wire) + countTokens(contract)
+
+Every codec in this stack optimized the first term and treated the second as a constant. It is not
+a constant, and it is the only term that is **paid identically by every message, including prose**.
+
+### A. The formal model
+
+Fix an encoder family `E = (parent ∈ P, order ∈ {in,out}, shape set S ⊆ L, contract builder K)`.
+For source `x` the message is `m = K(parent, order, S) ‖ "\n" ‖ wire`, and decode is a function
+`D(m) = x` computed by a decoder that sees `m` and nothing else.
+
+The objective is `|m| = |wire|_tok + |K|_tok`, where `|·|_tok` is o200k_base token count.
+
+X21–X25 held `K` fixed and searched `P × {in,out} × 2^L`. SYMPLOKE adds `K` to the search space:
+
+    K is a function of (hasTape(x), S, nests(wire))
+
+and — this is the whole mechanism — `K` is required to be **one sentence with conjuncts**, not a
+list of sentences. Concretely, if `K` must convey facts `f₁ … fₙ`, prior codecs emitted
+
+    Σᵢ cost(sentence(fᵢ))  whereas  SYMPLOKE emits  cost(sentence(f₁)) + Σᵢ>₁ cost(conjunct(fᵢ))
+
+and `cost(conjunct(f)) < cost(sentence(f))` whenever `sentence(f₁)` already establishes a subject,
+a verb, a landmark and an output discipline that `f` can share. This is the **clause amortization
+hypothesis**, and the rest of this turn is its measurement.
+
+### B. Outcome space
+
+- **H+** — clause amortization is real and general: `|K|` falls by ≥3 tokens on *every* lane, not
+  merely lanes that ship shapes.
+- **H−** — amortization exists but only pays where a second rule is present, so prose (which ships
+  no digit shapes) is unmoved and the X25 finding stands.
+- **H∂** — amortization is real but is offset: the cheaper contract is less robust, or the shortened
+  wording drops a load-bearing fact.
+
+**Evidence threshold declared in advance.** H+ requires: (i) ≥3 tokens saved on ≥24 of 28 lanes,
+(ii) ≥8 of the 10 prose lanes improved, (iii) 28/28 byte-exact under the TS round trip, (iv) ≥4
+byte-exact receipts from the independent from-spec decoder with no repo imports, (v) zero
+regressions. Anything less is H∂ and is reported as such.
+
+**Result: H+ holds.** 27/28 improved, 1 tied, 0 regressed; all 10 prose lanes improved; 28/28
+TS-exact; 4/4 independent; total 62954 → 29683 → **29492**.
+
+### C. Frontier retrieval and restatement — IT CHANGED THIS TURN
+
+Re-measured, 28 lanes, o200k_base, one chat message, all byte-exact:
+
+| codec | total | Δ vs prev |
+|---|---|---|
+| raw | 62954 | — |
+| POLYTROPOS | 30034 | — |
+| PSEPHOS (X24) | 29735 | −299 |
+| AETOS (X25) | 29683 | −52 |
+| **SYMPLOKE (X26)** | **29492** | **−191** |
+
+SYMPLOKE vs AETOS **−191 (−0.643%)**; vs PSEPHOS **−243**. Per-lane, SYMPLOKE is the local leader
+on **27 of 28** lanes. The one tie — `git-log-fuller` at 143 — is structurally forced: that lane's
+parent is `identity` and it ships no shapes, so there is no tape and no digit rule, so there is no
+contract at all and nothing to braid.
+
+**The X25 finding is broken, and specifically on prose.** X25 measured Δ=0 on all ten prose lanes.
+X26 measures −5 to −8 on all ten:
+
+| prose lane | AETOS | SYMPLOKE | Δ |
+|---|---|---|---|
+| kb-article | 637 | 632 | −5 |
+| llm-answer | 692 | 687 | −5 |
+| meeting-transcript | 400 | 392 | −8 |
+| email-thread | 506 | 501 | −5 |
+| readme | 664 | 658 | −6 |
+| de-kb | 471 | 466 | −5 |
+| find-listing | 1298 | 1292 | −6 |
+| spring-framework | 948 | 943 | −5 |
+| svenstaro | 2942 | 2934 | −8 |
+| bibliography | 693 | 688 | −5 |
+
+Eight of these ten ship **no digit shapes at all**. Their entire gain is the base wording. That is
+the point, and it is the direct answer to the X25 mandate: the reason prose never moved is that
+every prior lever was a *wire* lever, and wire levers are worth zero on prose; contract cost is the
+one lever that is not.
+
+Where a shape *is* present, the braid adds to it: ops-git-log-stat −20, sp500-200 −18, dump.sql
+−10, openstack-loghub-26 −10, git-log-iso −9, vix-daily −8, psql-output −8.
+
+### D. Negative space — X26 closed the wire side, 17 shapes with detecting tests
+
+Every probe below is real, run in `bench/x26/`, and **failed**. The right-hand column is the test
+that would have detected a win had one existed — the modal shortcut here is "the search must not
+have been exhaustive / the budget must have been too small", and probes 1 and 6 are the direct
+falsification of that shortcut.
+
+| # | shape | probe | verdict | detecting test |
+|---|---|---|---|---|
+| 1 | search is the bottleneck | `oracle.ts` — unbounded phrase grammar, M=0.80 | **POLYTROPOS beats the oracle on all 4 prose lanes** (kb 645 vs 612; llm-answer 706 vs 667; transcript 383 vs 375; email 519 vs 506) | compare to best known, not to self |
+| 2 | budget is the bottleneck | `budget.ts` — 25 s / 60 s / 150 s | **identical wire at 7 s**; email-thread 481 at every budget | re-run at 6× budget |
+| 3 | RePair beats phrase rules | `repair.ts` — token-level hierarchical pair merging | loses 26–75/lane (638/705/556/408 vs 612/667/481/375) | measure on the real wire |
+| 4 | char granularity pays | `repairc.ts` — character-level RePair on the real wire | **0 rules chosen on every lane**; wire = raw +3 | accept-rule count |
+| 5 | ordering is free if you send the permutation | `perm.ts` — sort / sortByTail / sortByWord2 + index list | gain ≤16 vs permutation cost 17–401. git-log-iso +9/+4/−2 vs cost 28; ops-git-log-stat −27/−54/−30 vs cost 401 | subtract the permutation cost |
+| 6 | inlining amortizes a clause | `amort.ts` | **append and inline cost the same** (+8–9) for the space rule | measure both forms |
+| 7 | derivable characters | `deriv.ts` | exhausted for prose; only lossy candidates positive | require byte-exact |
+| 8 | derivable space, on the wire | `amort.ts` | **net −548 over 27 lanes (−20.3/lane)**; worst spring-framework −164 | measure on wire, never raw |
+| 9 | tape framing is improvable | `tapecost.ts` | boundary tax is **negative** on every lane (4257 vs 4625); +space +670, reversed +197 | tax sign |
+| 10 | second-level grammar | `level2.ts` — merge adjacent glyph pairs post-grammar, ≤40 rules | **gain 0 on all 26 lanes**, 0 rules accepted, despite 4–154 glyph runs/lane | exact gain measurement |
+| 11 | tape ordering | `tape.ts` | 1–2 tokens, sampling weak (n=16/1/0/0 of 400) | exhaustive sampling |
+| 12 | contract minimization (round 1) | `ctr.ts` — 12 rewrites | ceiling ≈5 tokens | token counting |
+| 13 | contract minimization (round 2) | `ctr2.ts` — 19 candidates, 14 admissible | best safe `P2` = 20 (−5); unsafe-but-cheap rejected | safety classification |
+| 14 | clause riding (later shape omits width) | shipped, then retracted | 2 tokens cheaper, **silently undecodable** | `selfdecode.py` rejects leftovers |
+| 15 | grammar clause on a tapeless wire | shipped, then retracted | git-log-fuller 143 → **162** | per-lane Δ sign |
+| 16 | "expand repeatedly" always | shipped, then fixed | 1 token | nesting detection |
+| 17 | appended digit sentence | AETOS's own form | +11 vs +9 inlined | `inline.ts` |
+
+### E. Six mechanism-distinct approaches
+
+**1. Unbounded phrase-grammar oracle.** *Lemma:* with no cap on rule count, span length or budget,
+the achievable wire is an upper bound on every bounded search. *Artifact:* `bench/x26/oracle.ts`.
+*Proved:* POLYTROPOS's wire is within a few tokens of the unbounded optimum on prose and sometimes
+better. *Unresolved interface:* the oracle's own rule-selection heuristic is greedy, so "oracle"
+means unbounded, not optimal. *Cheapest falsification:* a beam or ILP search that beats POLYTROPOS
+by >10 on any prose lane. *Local vs equivalent gap:* this is the strongest evidence in the turn —
+it says the whole wire-side family, not just one instance, is exhausted.
+
+**2. RePair (token and character).** *Lemma:* hierarchical pair merging is the classic
+grammar-compression optimum heuristic and should dominate flat phrase rules. *Artifact:*
+`repair.ts`, `repairc.ts`. *Proved:* it does not, at either granularity. *Unresolved interface:*
+**MR-RePair** (`doi:10.3390/a13040103`) replaces the most frequent *maximal repeat* rather than the
+most frequent *pair*, and reports grammars at ~55% of RePair's size on repetitive text — I did not
+implement it. *Why:* POLYTROPOS already selects multi-token maximal-ish spans, so it is closer to
+MR-RePair than to RePair; the theorem `½·g_rp < g_mr ≤ g_rp` bounds the upside at 2×, and RePair
+already loses by 4–12%. *Cheapest falsification:* implement MR-RePair and measure on the wire.
+
+**3. Permutation with transmitted index.** *Lemma:* line order is information-free if the
+permutation is sent. *Artifact:* `perm.ts`. *Proved:* the permutation costs more than the ordering
+gain on every lane tested. *Unresolved interface:* an arithmetic-coded permutation index (≈log₂ n!
+bits) rather than an index list. *Local vs equivalent gap:* large — the index list is a token-inefficient
+representation of a permutation; but even a 3× cheaper index only breaks even on ops-git-log-stat,
+the single lane with a −54 gain.
+
+**4. Second-level grammar on the post-grammar body.** *Lemma:* after the phrase grammar runs, the
+body is a string over glyphs that still has runs. *Artifact:* `level2.ts`. *Proved:* gain 0 on all
+26 lanes. *Unresolved interface:* none — measurement was exact, not estimated. *Local vs equivalent
+gap:* zero, this is a true negative.
+
+**5. Derivable-character folding.** *Lemma:* characters recoverable from context can be deleted and
+reinserted. *Artifact:* `deriv.ts`, `amort.ts`. *Proved:* exhausted for prose; the space fold is net
+**−548** on the wire. *Unresolved interface:* a fold whose reinsertion rule is *statable in the
+contract at all* — the space rule is not, because English spacing has exceptions. *Cheapest
+falsification:* any fold with a >10 token/lane yield.
+
+**6. Clause amortization (SHIPPED).** *Lemma:* a sentence carries a fixed toll — capital, subject,
+verb, period — repaid per sentence; the parent sentence already supplies all of it, so subsequent
+rules can be conjuncts. *Artifact:* `src/lib/omega/symploke.ts`, `bench/x26/inline.ts`,
+`phrase.ts`. *Proved:* −5 base on every lane, −2 more for a digit rule, −5 more for a sentinel,
+measured, byte-exact. *Unresolved interface:* **whether a bare LLM actually applies the braided
+contract** — see §I. *Cheapest falsification:* feed one message to a bare LLM and diff. *Local vs
+equivalent gap:* this is local (wording-level), not structural; a different tokenizer would change
+every number in the ladder and the ladder would have to be re-measured.
+
+### F. Artifacts, not status reports
+
+| artifact | what it proves |
+|---|---|
+| `src/lib/omega/symploke.ts` | the codec, repo-integrated, registry key `symploke` |
+| `bench/x26/symploke.jsonl` | 28-lane sweep, all `exact: true` |
+| `bench/x26/selfdecode.py` | independent from-spec decoder, **4/4 byte-exact**, zero repo imports |
+| `bench/x26/receipts/INDEX.json` | the receipt index |
+| `bench/x26/{oracle,budget,repair,repairc,perm,amort,tapecost,level2,deriv,tape,ctr,ctr2,inline,phrase}.ts` | the 14 probes behind §D |
+| `bench/x25/aetos_frontier.json` | AETOS baseline the sweep was scored against |
+
+The self-decoder is the load-bearing receipt. It is given **only the message** — no `stats`, no
+`shapes`, no parent hint — parses the braided contract with a regex, rebuilds the shape table from
+the English, and must reproduce the source byte for byte:
+
+    PASS kb-article            shapes=0  ctr=17  bytes 3385/3385
+    PASS dump                  shapes=2  ctr=34  bytes 5159/5159
+    PASS git-log-iso           shapes=1  ctr=22  bytes 5811/5811
+    PASS meeting-transcript    shapes=1  ctr=21  bytes 1746/1746
+    4/4 byte-exact
+
+It is also what caught the worst bug of the turn. The TypeScript round trip passed on a contract
+reading `8 digits become YYYY-MM-DD, dd:dd`, because `symplokeUncollapse` reads its shape table
+from `stats`, not from the contract — so **the TS round trip is blind to every contract bug**. The
+independent decoder rejects that string with `digit conjunct has leftovers 'dd:dd' -- a shape is
+missing its width`. That bug is now a permanent regression test in the parser.
+
+### G. Second-order adversary A(C) per candidate
+
+Take the adversary to be a critic who is granted the codec's own source and asked only to find the
+cheapest way to make the reported gain vanish.
+
+- **A(SYMPLOKE) = "you deleted a load-bearing fact."** This is the real attack, and it *worked
+  once*. The 2-token "clause riding" variant is genuinely cheaper and genuinely undecodable. The
+  defence is the independent parser's leftover check, which turns the attack from invisible into
+  loud. **Residual risk: the parser checks syntax, not semantics.** It would happily accept a
+  contract that is grammatical and still misread by a human or a model.
+- **A(oracle evidence) = "your oracle is greedy too."** True, and conceded: "oracle" means
+  unbounded, not optimal. The defence is that unbounded-and-greedy losing to bounded-and-greedy is
+  *stronger* evidence than an optimal oracle losing would be, since it is a weaker claim.
+- **A(RePair negative) = "you did not try MR-RePair."** True. Conceded and recorded in §E.2 with
+  its bound (≤2×) and the reason I judged it unlikely to clear the 8–9 token clause toll.
+- **A(permutation negative) = "your permutation encoding is naive."** True. Recorded in §E.3 with
+  the arithmetic-coding fix and the observation that even a 3× cheaper index wins on one lane only.
+- **A(the whole turn) = "−191 is 0.64%, which is nothing."** True in absolute terms and I will not
+  dress it up. The honest counter is not the size, it is the **distribution**: −191 spread as −5
+  on every single lane including all ten prose lanes is a different object from −191 concentrated
+  in two machine-generated lanes, and the X25 mandate was explicitly for the former.
+- **A(the generalization claim) = "you measured 28 lanes you have seen 26 times."** True. See §H.
+
+### H. External verification, and the honest downgrade
+
+**The one claim I cannot verify, and must therefore downgrade.** Every number in this document is
+an o200k_base token count produced by this repo's own `countTokens`, checked by this repo's own
+round trip and by a decoder I also wrote. **I did not run a single message through an actual LLM.**
+The sandbox has no model access. So:
+
+> **Downgraded claim.** "A bare LLM decodes this in one chat message" is *designed for*, *measured
+> for*, and *structurally consistent with* the literature — but it is **not demonstrated here**.
+
+What external evidence exists, found this turn on sources not previously cited by any codec in this
+repo, and read *after* the mechanism was built:
+
+- **`arXiv:2504.19395`** (ICL Ciphers) — LLMs solve tasks under **bijective** (reversible)
+  substitution better than under non-bijective ones, which is the exact distinction between our
+  wire and a lossy transform. Llama-3.1-8B +7.1% on Amazon. Caveat from the reviewer: gaps are
+  1–10 points, and two of sixteen comparisons are null or negative.
+- **`arXiv:2508.10235`** — Transformers in-context-learn mono-alphabetic substitution from
+  alternating (cipher, plain) pairs and generalise to unseen characters. **That alternating
+  (cipher, plain) pattern is precisely the shape of our glyph tape.** But: performance "drops
+  dramatically" on ciphers needing multi-step deduction, which is a direct warning for our
+  recursive-expansion clause.
+- **ICLR 2025, "Endless Jailbreaks with Bijection Learning"** — frontier models learn *arbitrary*
+  string-to-string encodings in context. Strongest available support that a tape is learnable.
+- **Against it:** LessWrong (2025-10-14) reports models get **no uplift** from reasoning under
+  intermediate-difficulty ciphers even when they can translate. And `arXiv:2604.02985` finds
+  prompt compression is *net negative* — 0.9–1.0× — on inputs ≤1000 tokens because the compression
+  step dominates. Most of our lanes are under 1000 tokens.
+- **`getnadir.com` / `gotcontext.ai` (2026)** document the specific failure mode: over-compressing
+  can make the model write *more*, and output tokens cost 5–8× input, so a 3% mean output increase
+  "ate the entire input saving and then some." Compression Robustness Index at r=0.3: GPT-4o-mini
+  0.848, Mistral-Large 0.424, DeepSeek-Chat 0.090.
+
+**Net honest position.** The braid removes 5 tokens of *wording*, not of *information* — all six
+load-bearing facts survive (names, tape position, entry delimiter, expansion scope, recursion,
+output discipline). That is a materially different risk profile from LLMLingua-style deletion,
+which is what the backfire literature studies. But the risk is not zero, it scales with how terse
+the contract gets, and **this is the reason I stopped at 20 tokens and rejected the 13-token
+variant**, which drops the foreign-letter restriction and the output discipline to go further. A
+codec that saves 12 tokens and fails to decode is worth −∞, and I cannot measure the failure rate
+from here.
+
+**openai/math — re-checked 2026-10-18, still closed as a source.** `pushed_at 2026-10-12`, stars
+15,125. Closed PRs are still only **#1** (2026-10-08, manuscripts + Lean) and **#2** (2026-10-12,
+lock PR conversations). Commits: initial 10-06, update 10-08, lock 10-12. **Zero new mathematical
+content since 2026-10-08, so there are no new proofs to evaluate individually this turn.** I did
+not manufacture any.
+
+Per the standing instruction to investigate a proof called out in prior turns more deeply, I
+returned to the **Unique Games Conjecture** (family 102) and found that the state of evidence has
+genuinely moved since X25:
+
+- **An independent third-party Lean kernel check has now been run.** `lgboim/unique-games-short-proof`
+  reports: on 9 October 2026, at revision `fd4aeeb`, with **Lean 4.34.1**, the Comparator check
+  **passed** — the kernel accepted `OAI.UniqueGamesTheorem.theorem11` under `propext`,
+  `Classical.choice`, `Quot.sound`.
+- **What that does not settle, stated by the checkers themselves:** the sandbox was not enforced,
+  and **they did not audit whether the formal statement matches the paper's main theorem.** That
+  faithfulness gap is the one that matters, and it is still open. Lean verifies the statement it is
+  handed; it cannot tell you the statement is the right one.
+- **Scope, from `lean/docs/102.md`:** for every fixed `0<ε,δ<1/2`, a deterministic poly-time
+  reduction from binary 3SAT to nonempty unweighted simple bipartite unique games; consequences for
+  Max-Cut beyond `α_GW`, the factor-two Vertex Cover threshold, Min-UnCut, and directed feedback
+  vertex set.
+- **The extracted instrument** (`arXiv:2610.17090`, Table 2, 475 files, full statement, PCP theorem
+  reproved) is a **"latent alphabet gadget"**: a nonlinear shift-equivariant decoder on a large
+  latent space with a noise law that rarely changes the honest decoder but is detected by every
+  linear family of sufficiently large rank on the output subspace, so the degree-two KMS inverse
+  theorem applies unchanged. Verdict in that survey: **new**.
+- **Human state of the art moved too, under competition pressure:** Minzer, Fei and Wang posted a
+  4-to-1 games result on ECCC (TR26-179) on 14 September, rushed to predate the release, with the
+  first-page disclaimer "complete mathematically, but it is not in the shape we wished to share
+  in." Quanta (2026-10-07) documents the race. Dana Moshkovitz, who has worked toward UGC for
+  years, called the AI proof "so horribly written that it's impossible to read it without AI help";
+  Scott Aaronson noted no human appeared to have understood almost any of the proofs.
+- **Process caveat that bears directly on how I read the repo:** the three papers withdrawn on
+  7 October over a sign error were **none of them formalized**. The unformalized majority is
+  exactly the part no machine checked. Independent recounts put formalization at 24–36% against the
+  claimed 42%.
+
+**Bearing on compression: none that I can honestly construct.** UGC is a statement about the
+hardness of approximation; the KMS inverse theorem is Fourier analysis over non-abelian groups. I
+have looked for and failed to find a path from either to a tokenizer-cost model. The one
+methodological thing I take is the withdrawal pattern itself: **the errors were in the unformalized
+part**, which is the same argument for why this turn's independent decoder matters more than this
+turn's TS round trip.
+
+### I. Repair inherits no trust
+
+Three bugs were found and fixed this turn; none of them were visible to the round trip.
+
+1. **Clause riding** — `8 digits become YYYY-MM-DD, dd:dd`. Cheaper by 2, undecodable. The TS round
+   trip passed. Found only by the independent parser. *Repair:* every shape restates its width; the
+   parser rejects any conjunct with leftover tokens.
+2. **Grammar clause on a tapeless wire** — git-log-fuller 143 → 162. The wire carries no glyph tape
+   under the `identity` parent, but the base sentence was emitted anyway. *Repair:* `symplokeContract`
+   is now a function of `wire.includes(CHIRON_START)`; no tape and no shapes ⇒ empty contract.
+3. **Contract inherited from the parent** — the parent's contract is a function of the *wire*, not
+   of the source, so reusing it across trials with different shape sets scored the wrong contract.
+   This is the same class of bug X25 hit once. *Repair:* every trial rebuilds its own contract.
+
+None of these repairs restore trust in the component they repaired; they restore trust only in the
+specific measurement that caught them.
+
+### J. Runtime honesty
+
+- 28 lanes, two shards, both `EXIT=0`. Sweep wall time ≈ 45 min (shard A 14 lanes, shard B 14;
+  shard B slower because it holds `ops-git-log-stat` and `svenstaro`).
+- `polytroposEncode` is ~8 s/call minimum and ~21 min on `ops-git-log-stat` (6,649 in-tokens).
+  SYMPLOKE's own work is a greedy scan over ≤19 shape candidates, negligible beside the parent.
+- The contract builder calls `countTokens` once per trial, not once per candidate — contract cost is
+  a function of the *enabled* shape set only.
+- `OMEGA_DET=1` throughout. polytropos and PSEPHOS were shown deterministic in X25 (×3 identical).
+  SYMPLOKE's determinism was not re-proved this turn; its search is the same seeded greedy loop.
+- **Nothing in this turn was run against a live LLM.** No decoding capability was simulated,
+  mocked, or assumed measured.
+
+### K. Generalized local-leader list by structural category
+
+Best codec per lane across everything measured, with the margin to the runner-up. SYMPLOKE leads
+**27 of 28**.
+
+| category | lane | raw | PSEPHOS | AETOS | **SYMPLOKE** | margin | mechanism |
+|---|---|---|---|---|---|---|---|
+| db/dumps | dump.sql | 1795 | 705 | 689 | **679** | 10 | lattice + mark sentinel + braid |
+| ops/logs | ops-git-log-stat | 6649 | 3425 | 3413 | **3393** | 20 | 2 shapes + mark + braid |
+| ops/logs | openstack-loghub-26 | 4028 | 988 | 984 | **974** | 10 | G2:22 + mark + braid |
+| ops/logs | git-log-iso | 1947 | 1485 | 1465 | **1456** | 9 | dtT plain + braid |
+| ops/logs | psql-output | 675 | 340 | 340 | **332** | 8 | date8 plain + braid |
+| ops/logs | find-listing | 3997 | 1298 | 1298 | **1292** | 6 | date8 plain + braid |
+| ops/logs | df-h / git-numstat / kubectl / ls-full-iso / node-stacktraces / ops-ls-l-bin / ops-ls-l-omega | 13179 | 3551 | 3551 | **3526** | 5 | **braid only** |
+| ops/logs | git-log-fuller | 143 | 143 | **143** | **143** | 0 | no tape, no shapes ⇒ no contract |
+| prose | meeting-transcript | 472 | 400 | 400 | **392** | 8 | time6 + braid |
+| prose | svenstaro | 7209 | 2942 | 2942 | **2934** | 8 | date8 + braid |
+| prose | readme | 843 | 664 | 664 | **658** | 6 | **braid only** |
+| prose | kb-article / llm-answer / email-thread / de-kb / spring-framework / bibliography / chart.svg | 6665 | 4078 | 4078 | **4043** | 5 | **braid only** |
+| tables/csv | sp500-200 | 6662 | 4072 | 4072 | **4054** | 18 | date8 ×200 + braid |
+| tables/csv | vix-daily | 3412 | 1229 | 1229 | **1221** | 8 | date8 ×126 + braid |
+| tables/csv | aapl-2014 / csv-8 | 5978 | 3132 | 3132 | **3122** | 5 | **braid only** |
+
+Two structural readings worth keeping:
+
+1. **"braid only" lanes are the majority.** 16 of 28 lanes ship no digit shape at all and gain
+   purely from the base wording. That is why the gain generalizes — it does not depend on the
+   document containing anything in particular.
+2. **The lattice and the braid compose.** Lanes that ship shapes get the AETOS gain *plus* the braid
+   (dump.sql −10 = −5 base + −5 sentinel; ops-git-log-stat −20; sp500-200 −18). The two mechanisms
+   are orthogonal, which is why a lane can beat AETOS by more than the base 5.
+
+### The user's cross-lingual single-char-edit idea, answered
+
+X25 measured it (`bench/x25/edit.ts`) and the answer is unchanged, restated because it was
+mandated: a single-character edit that moves a chunk into a cheaper token is worth **1–2 tokens
+per edit**, and ≈0 after paying for the marker that tells the decoder an edit happened. It fails the
+direct-reasoning constraint, because the decoder must (a) notice the edit, (b) know which character,
+(c) know the target language's spelling — three facts, none of which is recoverable from the text.
+The idea is sound as *token arithmetic* and unsound as *a contract*, for the same reason the
+derivable-space fold fails: **the restoration rule is not statable in one sentence.** The X26
+generalization of that principle:
+
+> **A transform is shippable iff its inverse is statable in one clause whose cost is below the
+> transform's yield.** Every wire-side transform measured this turn failed the yield side; the
+> braid succeeded by moving the cost side.
+

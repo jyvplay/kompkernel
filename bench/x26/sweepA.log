@@ -1,0 +1,16 @@
+ 0 dump.sql                                 in  1795 symploke   679 aetos   689 delta   -10 exact true polytropos/in    date8:mark^×26 G2:22:mark^×26
+ 2 git-log-fuller.txt                       in   143 symploke   143 aetos   143 delta     0 exact true identity/out     -
+ 4 git-numstat.txt                          in  4632 symploke  2014 aetos  2019 delta    -5 exact true polytropos/out   -
+ 6 node-stacktraces.txt                     in   568 symploke   310 aetos   315 delta    -5 exact true polytropos/out   -
+ 8 ops-ls-l-bin.txt                         in   465 symploke   219 aetos   224 delta    -5 exact true polytropos/out   -
+10 openstack-loghub-26.log                  in  4028 symploke   974 aetos   984 delta   -10 exact true polytropos/in    G2:22:mark^×52
+12 df-h.txt                                 in   570 symploke   260 aetos   265 delta    -5 exact true polytropos/out   -
+14 psql-output.txt                          in   675 symploke   332 aetos   340 delta    -8 exact true polytropos/in    date8:plain×24
+16 de-kb.txt                                in   525 symploke   466 aetos   471 delta    -5 exact true polytropos/out   -
+18 kb-article.txt                           in   656 symploke   632 aetos   637 delta    -5 exact true lakonikos/out    -
+20 meeting-transcript.txt                   in   472 symploke   392 aetos   400 delta    -8 exact true polytropos/in    time6:plain×16
+22 spring-projects_spring-framework_35118.md in  1895 symploke   943 aetos   948 delta    -5 exact true polytropos/out   -
+24 aapl-2014.csv                            in  3108 symploke  1471 aetos  1476 delta    -5 exact true lakonikos/out    -
+26 sp500-200.csv                            in  6662 symploke  4054 aetos  4072 delta   -18 exact true polytropos/in    date8:plain×200
+DONE
+EXIT=0

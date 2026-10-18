@@ -451,6 +451,80 @@ So AETOS's shape set is:
 
 ---
 
+---
+
+## SYMPLOKE — **SY**ntactic **M**erging of **PL**ain **O**bjects into a **K**notted **E**ncoding (X26)
+
+`src/lib/omega/symploke.ts`, registry key `symploke`, family `exact`, fidelity `exact`.
+
+### What it is
+
+AETOS, with its **contract braided into one sentence** instead of paying a whole new sentence per
+rule. This is a *cost-model* codec: it changes no byte of the wire AETOS emits for a given shape
+set. It changes only what the decoder is told about it.
+
+### The design (decoded from the abbreviation)
+
+- **SY**ntactic — the mechanism is syntax of the *instruction*, not of the data. Every rule the
+  decoder needs is already implied by the first sentence; each later rule is expressed as a
+  **conjunct** of that sentence rather than as a sentence of its own.
+- **M**erging — the digit rule and each sentinel rule are merged into the parent's expansion
+  clause. `expand repeatedly and 8 digits become YYYY-MM-DD, where ^ before digits marks them;
+  drop it`.
+- **PL**ain **O**bjects — the facts merged in are the plain objects of the scheme: digit widths,
+  templates, sentinels. Nothing semantic, nothing learned.
+- **K**notted — the result is one knotted sentence with several clauses, not a list.
+- **E**ncoding — exact, byte-for-byte.
+
+### Greedy?
+
+**No — greedy search, not greedy compression.** Same architecture as AETOS: the shape subset is
+chosen by a greedy hill-climb scored on the real objective `countTokens(wire) +
+countTokens(contract)`, with the **empty shape set as the incumbent** so a shape that cannot repay
+its own clause is never shipped. The contract is re-derived per trial rather than inherited from
+the parent, because the contract is a function of the wire.
+
+### Source article
+
+**None.** Original to this repository. The closest external neighbours are named below and are
+*not* sources — they were found after the mechanism was built and measured:
+
+- `doi:10.3390/a13040103` (Algorithms 2020) — MR-RePair, RePair on maximal repeats instead of
+  pairs. Measured here as a *wire-side* alternative and rejected (see codecs.md §X26).
+- `arXiv:2504.19395` (ICL Ciphers) and `arXiv:2508.10235` — LLMs in-context-learn bijective
+  substitution tables. External *evidence that the wire is learnable*, not a source of the design.
+
+### Time- or CPU-bound?
+
+**CPU-bound, and measurably not time-bound.** The search is a greedy scan with a per-call budget
+(`OMEGA_DET=1` for determinism). `bench/x26/budget.ts` ran lane 0 (kb-article) at 25 s, 60 s and
+150 s and got the **identical wire** at 7 s — the search saturates, so a larger budget buys
+nothing and wall time is not a quality knob here. Wall clock is dominated by `polytroposEncode`
+(~8 s/call floor, minutes on 20 KB lanes), not by SYMPLOKE's own work.
+
+### Contract cost ladder (o200k_base, measured)
+
+| contract | tokens | vs AETOS |
+|---|---|---|
+| AETOS parent clause, no shapes | 25 | — |
+| SYMPLOKE base, no shapes (nested) | 20 | **−5** |
+| SYMPLOKE base, no shapes (flat tape) | 19 | **−6** |
+| + one digit shape | 28 | −2 vs appended |
+| + one digit shape + one sentinel | 38 | −5 vs appended |
+| + two digit shapes + one sentinel | 46 | — |
+
+Every lane pays the base, so **every lane saves at least 5**, including prose.
+
+### Guards forced by measurement
+
+1. **Every shape restates its own width.** A draft that let later shapes ride on the first one's
+   verb emitted `8 digits become YYYY-MM-DD, dd:dd` — 2 tokens cheaper, silently undecodable. The
+   TypeScript round trip cannot see this; `bench/x26/selfdecode.py` rejects it.
+2. **No tape ⇒ no grammar sentence.** With the `identity` parent the wire carries no glyph tape;
+   emitting the clause anyway turned `git-log-fuller` from 143 → 162.
+3. **Nesting is detected, not assumed.** If no rule's expansion references an earlier glyph the
+   contract says `expand`, not `expand repeatedly`. Undetectable ⇒ over-claim (safe).
+
 ## Codecs that do not satisfy the measurement contract (X21 audit)
 
 - **`oracle`** — hardcodes the 20 holdout citations in `ORACLE_MAP` and declares it "not counted

@@ -1,0 +1,49 @@
+[
+  {
+    "name": "kb-article",
+    "file": "bench/holdout-work/kb-article.txt",
+    "message": "bench/x26/receipts/kb-article.message.txt",
+    "symploke": 632,
+    "inTokens": 656,
+    "parent": "lakonikos",
+    "order": "out",
+    "shapes": []
+  },
+  {
+    "name": "dump",
+    "file": "bench/holdout-mk/dump.sql",
+    "message": "bench/x26/receipts/dump.message.txt",
+    "symploke": 679,
+    "inTokens": 1795,
+    "parent": "polytropos",
+    "order": "in",
+    "shapes": [
+      "date8:mark^×26",
+      "G2:22:mark^×26"
+    ]
+  },
+  {
+    "name": "git-log-iso",
+    "file": "bench/z20/samples/git-log-iso.txt",
+    "message": "bench/x26/receipts/git-log-iso.message.txt",
+    "symploke": 1456,
+    "inTokens": 1947,
+    "parent": "polytropos",
+    "order": "in",
+    "shapes": [
+      "dtT:plain×27"
+    ]
+  },
+  {
+    "name": "meeting-transcript",
+    "file": "bench/holdout-work/meeting-transcript.txt",
+    "message": "bench/x26/receipts/meeting-transcript.message.txt",
+    "symploke": 392,
+    "inTokens": 472,
+    "parent": "polytropos",
+    "order": "in",
+    "shapes": [
+      "time6:plain×16"
+    ]
+  }
+]
