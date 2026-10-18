@@ -1,0 +1,57 @@
+ 0 dump.sql                                 in  1795 symploke   679 aetos   689 delta   -10 exact true polytropos/in    date8:mark^×26 G2:22:mark^×26
+DONE
+ 1 find-listing.txt                         in  3997 symploke  1292 aetos  1298 delta    -6 exact true polytropos/in    date8:plain×120
+DONE
+ 2 git-log-fuller.txt                       in   143 symploke   143 aetos   143 delta     0 exact true identity/out     -
+DONE
+ 3 git-log-iso.txt                          in  1947 symploke  1456 aetos  1465 delta    -9 exact true polytropos/in    dtT:plain×27
+DONE
+ 4 git-numstat.txt                          in  4632 symploke  2014 aetos  2019 delta    -5 exact true polytropos/out   -
+DONE
+ 5 ls-full-iso.txt                          in  1175 symploke   388 aetos   393 delta    -5 exact true lakonikos/out    -
+DONE
+ 6 node-stacktraces.txt                     in   568 symploke   310 aetos   315 delta    -5 exact true polytropos/out   -
+DONE
+ 7 ops-git-log-stat.txt                     in  6649 symploke  3393 aetos  3413 delta   -20 exact true polytropos/in    date8:mark^×18 time6:mark^×18
+DONE
+ 8 ops-ls-l-bin.txt                         in   465 symploke   219 aetos   224 delta    -5 exact true polytropos/out   -
+DONE
+ 9 ops-ls-l-omega.txt                       in  4063 symploke   951 aetos   956 delta    -5 exact true lakonikos/out    -
+DONE
+10 openstack-loghub-26.log                  in  4028 symploke   974 aetos   984 delta   -10 exact true polytropos/in    G2:22:mark^×52
+DONE
+11 chart.svg                                in  1331 symploke   426 aetos   431 delta    -5 exact true polytropos/out   -
+DONE
+12 df-h.txt                                 in   570 symploke   260 aetos   265 delta    -5 exact true polytropos/out   -
+DONE
+13 kubectl-get-pods.txt                     in  1006 symploke   357 aetos   362 delta    -5 exact true polytropos/out   -
+DONE
+14 psql-output.txt                          in   675 symploke   332 aetos   340 delta    -8 exact true polytropos/in    date8:plain×24
+DONE
+15 bibliography.txt                         in   896 symploke   688 aetos   693 delta    -5 exact true polytropos/out   -
+DONE
+16 de-kb.txt                                in   525 symploke   466 aetos   471 delta    -5 exact true polytropos/out   -
+DONE
+17 email-thread.txt                         in   629 symploke   501 aetos   506 delta    -5 exact true polytropos/out   -
+DONE
+18 kb-article.txt                           in   656 symploke   632 aetos   637 delta    -5 exact true lakonikos/out    -
+DONE
+19 llm-answer.md                            in   733 symploke   687 aetos   692 delta    -5 exact true polytropos/out   -
+DONE
+20 meeting-transcript.txt                   in   472 symploke   392 aetos   400 delta    -8 exact true polytropos/in    time6:plain×16
+DONE
+21 readme.txt                               in   843 symploke   658 aetos   664 delta    -6 exact true polytropos/out   -
+DONE
+22 spring-projects_spring-framework_35118.md in  1895 symploke   943 aetos   948 delta    -5 exact true polytropos/out   -
+DONE
+23 svenstaro_miniserve.md                   in  7209 symploke  2934 aetos  2942 delta    -8 exact true polytropos/in    date8:plain×44
+DONE
+24 aapl-2014.csv                            in  3108 symploke  1471 aetos  1476 delta    -5 exact true lakonikos/out    -
+DONE
+25 csv-8.csv                                in  2870 symploke  1651 aetos  1656 delta    -5 exact true polytropos/out   -
+DONE
+26 sp500-200.csv                            in  6662 symploke  4054 aetos  4072 delta   -18 exact true polytropos/in    date8:plain×200
+DONE
+27 vix-daily-1990.csv                       in  3412 symploke  1221 aetos  1229 delta    -8 exact true polytropos/in    date8:plain×126
+DONE
+ALLDONE

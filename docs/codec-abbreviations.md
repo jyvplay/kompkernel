@@ -525,6 +525,135 @@ Every lane pays the base, so **every lane saves at least 5**, including prose.
 3. **Nesting is detected, not assumed.** If no rule's expansion references an earlier glyph the
    contract says `expand`, not `expand repeatedly`. Undetectable ⇒ over-claim (safe).
 
+---
+
+## METATHESIS — **MET**hodic **A**lphabet **T**ransposition for **H**ierarchical **E**ncoded **S**ymbol **I**nternal **S**ubstitution (X27)
+
+`src/lib/omega/metathesis.ts`, registry key `metathesis`, family `exact`, fidelity `exact`.
+
+### What it is
+
+SYMPLOKE, followed by a **relabelling of the glyph alphabet**. It does not add,
+remove or change a single rule. It only changes *which pool character stands for
+which phrase*.
+
+### The mechanism (decoded from the abbreviation)
+
+- **MET**hodical — the search is a systematic hill-climb, not a heuristic guess.
+- **A**lphabet **T**ransposition — the object being searched is the bijection
+  `rule -> pool character`, i.e. a permutation/transposition of the alphabet.
+- **H**ierarchical **E**ncoded — it operates on the output of an existing
+  hierarchical (nested) grammar, preserving all nesting.
+- **S**ymbol **I**nternal **S**ubstitution — the substitution rewrites tape
+  heads, nested references inside other rules' payloads, *and* body occurrences
+  consistently.
+
+### Why it works — the run-level cost model
+
+Every earlier codec priced a glyph at a flat ~0.801 tokens per body occurrence.
+That figure is the **mean of a bimodal distribution**, and the bimodality is the
+whole opportunity (measured, `bench/x27/econ.ts`):
+
+    T("ених") == 1 token      three glyphs, ONE token
+    T("әм")   == 1 token      two glyphs,  ONE token
+    T("е")    == 1 token      one glyph,   ONE token
+
+A run of *k* adjacent glyphs costs about the same as one glyph, because
+o200k_base carries vocabulary entries for word-like sequences inside a script.
+**The unit of cost is the RUN, not the glyph.** Which character represents which
+phrase decides which glyphs end up adjacent, and therefore how many runs the
+tokenizer can swallow.
+
+Magnitude of the effect, on kb-article (27 rules, wire 612):
+
+| assignment | wire tokens |
+|---|---|
+| parent's (relayout-refined) | 611 |
+| best of 300 random permutations | 665 |
+| contiguous prefix of the pool | 682 |
+
+### Greedy?
+
+**Greedy hill-climb with random restarts, not greedy compression.** Morphology:
+
+1. **Pairwise SWAPS.** Once every good character is taken, the only improving
+   move is an EXCHANGE between two rules. A reassign-to-free-character search
+   cannot express that and finds almost nothing (measured: 0 on readme).
+2. **Reassign to an unused pool character.**
+3. **Random-restart perturbation** of a third of the assignment, then re-descend.
+
+The search never ships a regression: if it finds nothing better than the
+parent's own wire, it returns that wire unchanged.
+
+### Determinism
+
+**Deterministic.** `clock.ts` holds `now()` at 0 under `OMEGA_DET=1` so searches
+run to their natural end; a wall-clock deadline can therefore never fire. So the
+budget is counted in **tokenizer evaluations** (`maxEvals`), which is
+machine-independent, and the restart randomness comes from a **seeded mulberry32
+PRNG** keyed on the wire rather than from `Math.random`. Verified: three
+consecutive runs on llm-answer / openstack / dump.sql produced byte-identical
+wires (`bench/x27/det.ts`).
+
+### Source article
+
+**None — original to this repository.** The closest external neighbours were
+found *after* the mechanism was built and measured, and are evidence, not
+sources:
+
+- `arXiv:2610.01984` (2026-10-02) — "Universal Byte-Level Encoding: UTF-8/UTF-16
+  Routing". Defines the **encoding floor**: "when no learned merges can be
+  applied, a multibyte character requires multiple byte-derived symbols." This is
+  the formal statement of why some pool characters are cheap and others dear.
+- Kozma & Voderholzer, "Byte-pair encoding can lose more than half of the
+  optimal compression" (`alphaxiv.org/abs/2610`) — BPE achieves between 1/3 and
+  0.4323 of optimal compression utility in the worst case. Bounds any approach
+  that, like ours, is ultimately priced by a BPE vocabulary.
+- `arXiv:2306.16837` — "A Formal Perspective on Byte-Pair Encoding", lower bound
+  on greedy BPE compression utility `1 - e^(-σ(μ*))`.
+
+### Time- or CPU-bound?
+
+**Bound by a deterministic evaluation budget (`maxEvals`), not by wall-clock
+time**, because the repo freezes the clock for reproducibility. The budget is
+`min(400_000, 40_000 + rules² × 12)` tokenizer calls. Cost concentrates on
+lanes with many rules, which is also where the gain is. **Final 28-lane sweep —
+28/28 byte-exact, 23 improved, 5 tied, 0 regressed, net −309 (−1.048%).**
+Full frontier: raw 62954 → AETOS 29683 → SYMPLOKE 29492 → **METATHESIS 29183.**
+
+| lane | rules | gain | lane | rules | gain |
+|---|---|---|---|---|---|
+| ops-git-log-stat | 203 | **−87** | csv-8 | 81 | −21 |
+| sp500-200 | 212 | **−54** | vix-daily | 63 | −17 |
+| svenstaro | 110 | −31 | openstack | 65 | −18 |
+| git-numstat | 105 | −13 | aapl-2014 | 67 | −10 |
+| find-listing | 59 | −8 | bibliography | 44 | −8 |
+| kubectl-get-pods | 41 | −8 | dump.sql | 47 | −6 |
+| git-log-iso | 51 | −9 | email-thread | 39 | −4 |
+
+Against the X27 prediction (made before the sweep finished) that the effect is
+"ops-leaning, not prose, scaling with rule count": the rule-count scaling held
+(r = clear monotone trend, 212 rules → −54, 203 → −87, 110 → −31, 27 → −1,
+6 → 0), but the category prediction was **wrong — it is not category-specific
+at all.** csv-8, aapl-2014, sp500-200 and vix-daily are pure CSV tables and
+four of the eleven largest wins. The true predictor is **rule count**, which
+is a proxy for how much of the text the grammar captured, not what kind of text
+it is. Prose lanes are simply the low-rule-count ones (meeting-transcript 6,
+de-kb 21, readme 27, kb-article 27 → all ≤ −1).
+
+Wall-clock: dominated by the parent on prose; the relayout search itself is
+superlinear and varies wildly at equal rule count (dump.sql, 47 rules, took
+~4 min; csv-8, 81 rules, finished in under a minute). Bounded by `maxEvals`,
+not by time.
+
+### What is provably preserved
+
+For any injective map `A` from the parent's glyphs to distinct same-script
+characters absent from the payload, `decode(relabel(wire)) === decode(wire)`.
+Correctness is therefore **independent of the search**: a search bug can only
+cost tokens, never corrupt a message. Confirmed empirically — the X26
+independent from-spec decoder runs against METATHESIS wires **unchanged**.
+
 ## Codecs that do not satisfy the measurement contract (X21 audit)
 
 - **`oracle`** — hardcodes the 20 holdout citations in `ORACLE_MAP` and declares it "not counted

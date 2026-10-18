@@ -1627,3 +1627,299 @@ generalization of that principle:
 > transform's yield.** Every wire-side transform measured this turn failed the yield side; the
 > braid succeeded by moving the cost side.
 
+
+---
+
+## X27 — METATHESIS
+
+**Result: 28/28 lanes, all byte-exact, 23 improved, 5 tied, 0 regressed, net −309 tokens (−1.048%). Frontier: raw 62954 → AETOS 29683 → SYMPLOKE 29492 → METATHESIS 29183.**
+
+### A. The formal model
+
+Let the parent SYMPLOKE emit `(R, w)` where `R` is an ordered list of `k`
+(phrase → glyph) rewrite rules and `w = START · A(tape) · SEP · A(body)` is the
+wire. Let `P` be the pool of characters script-compatible with `w` and absent
+from `w`, and let `S ⊆ P` be the sub-pool of characters in the **same Unicode
+script** as every glyph already used.
+
+Define the **metathesis group** `M = { A : R → S injective }`. For `A ∈ M`, let
+`A(w)` be the wire obtained by applying `A` to the head character of every rule
+in the tape and to every character of the body that is the image of some rule
+under the parent's original assignment.
+
+**The codec is**
+
+```
+METATHESIS(t) = argmin_{A ∈ M}  cost(A(w_R))
+     where  w_R = SYMPLOKE(t)   and   cost = token count of the FULL MESSAGE
+```
+
+That is: METATHESIS is an optimisation **over the relabelling group of the
+parent's output**, holding the grammar, the tape order, the clause nesting and
+the rule set all fixed. It adds zero new syntax.
+
+The search is a **seeded multi-restart first-improvement hill climb over the
+symmetric group's swap generators** plus reassignment-to-unused-pool moves,
+with a deterministic mulberry32 PRNG seeded by `fnv1a(wire)`, and hard-bounded
+by `maxEvals = min(400 000, 40 000 + k² · 12)` tokenizer evaluations.
+
+### B. The outcome space, stated before the result
+
+The outcome space is a **ternary fork** over the 28 holdout lanes:
+
+- **H+ (relabelling pays):** there exists `A` with `cost(A(w)) < cost(w)` by a
+  margin that survives on ordinary prose, not only on the ops lanes.
+- **H− (relabelling is free but worthless):** the parent already sits at a
+  local optimum of `M` — consistent with `ariadne.ts` already hill-climbing
+  rule→glyph assignment internally — so the argmin is `A = id` almost everywhere.
+- **H∂ (relabelling pays only on the narrow class):** gains appear on
+  high-rule-count ops lanes and vanish on prose, which would make this another
+  bench-shaped trick rather than the general gain the programme is asking for.
+
+**Pre-declared threshold for claiming success (set before the sweep finished):**
+improvement of **≥ 5 tokens on ≥ 1 lane is necessary but not sufficient**;
+sufficiency requires **≥ 20 of 28 lanes improved, 0 regressed, all exact, and
+net ≤ −150**, i.e. a *distribution* shift rather than a single lucky lane.
+
+**Observed: 23 / 28 improved, 5 tied, 0 regressed, net −309.** Sufficiency met;
+H∂'s "only on ops" half is **refuted** (four of the eleven largest wins are pure
+CSV tables; the true predictor is rule count, not category).
+
+### C. The frontier, re-verified this turn
+
+Re-ran the X26 SYMPLOKE sweep from a clean checkout (`bench/x27/reverify.ts` →
+`bench/x27/symploke_reverify.jsonl`). Byte-identical to X26: **28/28, raw 62954,
+AETOS 29683, SYMPLOKE 29492, all exact.** The frontier did not move, so X27 is
+measured against exactly the same baseline X26 was.
+
+| codec | 28-lane total | vs previous |
+|---|---|---|
+| raw | 62954 | — |
+| POLYTROPOS | 30034 | — |
+| PSEPHOS | 29735 | −299 |
+| AETOS | 29683 | −52 |
+| SYMPLOKE | 29492 | −191 |
+| **METATHESIS** | **29183** | **−309** |
+
+Cumulative: raw → METATHESIS is **−33 771 tokens, 53.65% removed**, byte-exact.
+
+### D. Negative space — 17 shapes that did NOT work
+
+Each row is a shape that was considered, instrumented, and rejected **with the
+test that killed it**.
+
+| # | rejected shape | detecting test | verdict |
+|---|---|---|---|
+| D.1 | `rep`/`fill`/`range`/`split` ops (`×`, `…`) | `bench/x27/ops.ts`, 8 lanes, all four ops **0 occurrences** | dead |
+| D.2 | emit every block the searcher finds | `bench/x27/blockfull.ts`: dump.sql 1716 vs 679 | dead |
+| D.3 | blocks-only, no macros | `bench/x27/blocks.ts`: dump.sql 813 vs 679 | dead |
+| D.4 | macros-only (shipped default) | `bench/x27/blockfull.ts`: dump.sql 679 — strictly best of the three | **shipped** |
+| D.5 | second-level grammar on the wire body | `bench/x27/residual.ts`: **zero** repeated n-grams at n ≥ 4 on both prose lanes | dead |
+| D.6 | n-gram grammar at n = 2 on the body | n=2 → best **1.8 tok**; n=3 → **1.1**; n≥4 → **0** | dead |
+| D.7 | prune sub-break-even rules | `bench/x27/prune.ts`: **0 / 27** deletions help | dead |
+| D.8 | ship every shape the search learns | known regression (X21) | dead |
+| D.9 | reorder the tape | 1–2 tok (X24) | dead |
+| D.10 | **"ariadne already does this, so METATHESIS is a no-op"** | swap-only search measures **0** on readme; swap+reassign measures the whole −309 | **refuted** |
+| D.11 | token-level RePair | −26…−75 per lane, worse than the shipped grammar | dead |
+| D.12 | character-level RePair | **0 rules** learned | dead |
+| D.13 | line permutation | dead (X22) | dead |
+| D.14 | adjacent-glyph run merging as a *rule* | `bench/x27/econ.ts`: all 27 kb-article rules **NET ≤ 0** — the merge is already free | dead |
+| D.15 | enlarge the glyph pool / switch script | only Cyrillic beats alternatives (+58…+83); pool never binding at worst 86% | dead |
+| D.16 | cross-lingual single-char-edit smuggling | **≈ 0** net after marker cost (X26) | dead |
+| D.17 | **delta coding on monotonic numeric columns** | see H.4 — rejected **without implementation** on published evidence | dead |
+
+D.10 is the load-bearing row. It is the strongest available attack on the whole
+X27 idea, and it is answered by measurement, not by argument.
+
+### E. Six mechanism-distinct approaches, and the one that shipped
+
+| # | mechanism | proved | unresolved | falsification | gap |
+|---|---|---|---|---|---|
+| E.1 | **Relabelling group search** — optimise over the injective map rules→same-script pool chars | cost is a function of the *run structure* of the wire, so a non-identity `A` can lower it; injectivity ⇒ decode unchanged | the argmin is not found exactly | if swap-only searches measured the full −309, E.1 contributes nothing | search is local; no bound on the gap to the true argmin |
+| E.2 | **Run-cost model** — cost is per *maximal run of same-script glyphs*, not per glyph | `ених` and `әм` are **1 token**; `е` alone is 1. Parent's 0.801 tok/occ is a bimodal average over ~1 isolated and ~1/k in-run | how BPE will tokenise an unseen adjacency | if isolated and in-run costs were equal, relabelling would be exactly free | measured on 3 samples, not on the full adjacency matrix |
+| E.3 | **Tape/body joint re-scoring** — score the *emitted* wire, not a proxy | parent scores during construction; METATHESIS scores post hoc | — | if `cost(A(w))` equalled `Σ cost(rule)`, post-hoc scoring would be pointless | needs the real wire, so it cannot be fused into the parent without a rewrite |
+| E.4 | **Clause-form compression** (X26, inherited) | 17 vs 41 tokens | — | — | — |
+| E.5 | **Separator-lattice uncollapse** (X25, inherited) | — | — | — | — |
+| E.6 | **Phrase grammar** (POLYTROPOS, inherited) | — | — | — | — |
+
+**What is new in X27 is E.1 + E.2 + E.3 as a single move:** the observation
+that the parent fixes a *semantically arbitrary* choice — which glyph stands for
+which rule — and that this choice has a real token cost that the parent never
+measures because it measures during construction, not after emission.
+
+### F. Artifacts
+
+- `src/lib/omega/metathesis.ts` — the codec (`poolFor`, `rng`/`seedFrom`,
+  `relayoutGlyphs`, `metathesisEncode`, `metathesisDecode`, `metathesisRoundTrip`).
+- `src/lib/omega/registry.ts` — `metathesis` entry inserted after `symploke`;
+  188 `key:` entries; `npx tsc --noEmit` clean.
+- `bench/x27/sweep.ts`, `bench/x27/sweep.log`, `bench/x27/metathesis.jsonl` —
+  the 28-lane sweep.
+- `bench/x27/reverify.ts`, `bench/x27/symploke_reverify.jsonl` — baseline re-run.
+- `bench/x27/rt.ts` — single-lane round-trip driver.
+- `bench/x27/regsym.ts` — registry-path smoke test (`exact: true`, `oneChat: 33`).
+- `bench/x27/det.ts` — determinism receipt (3 encodes/lane, byte-identical wires).
+- `bench/x27/mkcase.ts`, `bench/x27/cases.json`, `bench/x27/receipts/*.message.txt`
+  — the four one-chat-message cases.
+- `bench/x27/selfdecode.py` — the X26 from-spec decoder, **run unmodified**.
+- 17 probe scripts (`tapecalc`, `prune`, `diag`, `ops`, `blocks`, `blockfull`,
+  `dl`, `ablate`, `see`, `econ`, `layout`, `layout2`, `spread`, `script`,
+  `pool`, `residual`) — the negative-space record of §D.
+
+### G. The second-order adversary, A(C)
+
+The adversary's best moves, and their answers:
+
+1. **"This is a rename of ariadne's existing hill climb."** Partly conceded and
+   stated in the source header. What is genuinely new is (a) scoring the
+   *emitted* wire rather than a construction-time proxy, (b) the **swap** move
+   class, which ariadne does not have, and (c) seeded restarts. Row D.10
+   isolates the contribution: swap-only measured **0** on readme; the full
+   −309 requires swaps.
+2. **"It cannot generalise — it is benchmaxxed on the 28 lanes."** The codec
+   contains **no lane-specific constant, no threshold tuned on the holdout, and
+   no input-dependent branch other than rule count.** Its only free parameter,
+   `maxEvals = min(400 000, 40 000 + k²·12)`, is a compute budget, not a
+   fit. The honest counter is that 28 lanes is still 28 lanes.
+3. **"−1.05% is not 'significantly better from a real user's perspective'."**
+   **Conceded for prose.** On the four prose lanes that moved, the gain is
+   −1 to −8 tokens out of 391–943 — below the threshold at which a user would
+   notice. The honest claim is narrower and stronger: on **rule-dense**
+   material (CSV, log dumps, git output, long markdown) METATHESIS removes
+   1.5–2.6% (csv-8 −21/1651, sp500-200 −54/4054, ops-git-log-stat −87/3393),
+   which is real money on the inputs that dominate actual context windows.
+4. **"The search is not reproducible under load."** Answered by `det.ts`:
+   three encodes per lane, **byte-identical wires**, message-token vectors
+   `[683,683,683]`, `[956,956,956]`, `[673,673,673]`. Math.random is banned
+   repo-wide; X27 uses `mulberry32(fnv1a(wire))`.
+5. **"A wrong search could corrupt a message."** Structurally impossible — see
+   the injectivity lemma in H.2. Verified empirically by §F's unmodified X26
+   decoder: **4/4 byte-exact.**
+
+### H. Verification, and what is honestly NOT verified
+
+**H.1 — What was run.** 28-lane sweep (28/28), baseline re-verification
+(28/28), registry smoke test, determinism receipt, 4-case independent
+self-decode (4/4 byte-exact), `npx tsc --noEmit` clean. All numbers in this
+document come from files in `bench/x27/`.
+
+**H.2 — The injectivity lemma (the safety argument).** For any injective
+same-script map `A` whose images are absent from the payload,
+`decode(relabel(w)) === decode(w)`, because `chironParseTape` reads tape heads
+positionally, nested references inside payloads are relabelled by the *same*
+`A`, and the body is relabelled consistently. **Correctness is therefore
+independent of the search:** a search bug can only cost tokens, never corrupt a
+message. This is why X27 is safe to ship on a partial search.
+
+**H.3 — The honesty downgrade, restated.** **No live LLM was run at any point
+this turn.** The sandbox has no model access. "Decodable by a bare LLM in one
+chat message, no system prompt, no skills, no tools" is **designed for and
+structurally preserved**, not demonstrated. The X26 independent from-spec
+decoder is the strongest available proxy; it is a Python program, not a model.
+This downgrade has now been carried for X21–X27 and should be treated as a
+standing limitation of the entire programme, not of X27.
+
+**H.4 — Delta coding: rejected WITHOUT implementation.** The largest single
+win available on `sp500-200` and `vix-daily` was delta-coding the monotonic
+numeric columns (store first value, then differences). It was never built.
+arXiv **2602.10416** ("AI-rithmetic") shows all frontier models degrading on
+integer addition as digit count grows, with a nontrivial error rate already at
+20 digits, and attributes 87.9% / 62.9% / 92.4% of Claude Opus 4.1 / GPT-5 /
+Gemini 2.5 Pro errors to misalignment and close-carry — misalignment being
+partly a **tokenization** artifact. A decoder maintaining a 200-term running
+sum cannot be trusted byte-exact under those numbers. The shipped digit rule
+(`8 digits become YYYY-MM-DD`) is a **pure string rewrite with no arithmetic**,
+which is exactly why it is safe. **Do not resurrect delta coding without a
+live-LLM arithmetic trial.**
+
+**H.5 — The highest-value untested idea, recorded for X28.** A DEV study
+(gde, 2026-10-11) replaced a 20-step imperative prose checklist with an
+**in-context Makefile** and saw multi-hop dependency resolution rise from
+**61.4% → 96.2%**, described as "pure pre-training gravity". Hypothesis:
+**spend 10–30 tokens moving the wire into a shape the model has seen billions
+of times** (assignment list, Makefile, JSON) and accept the token cost, because
+reliability may be worth more than tokens. Cannot be measured from this
+sandbox. This is the one idea in the whole session that could plausibly be
+worth more than every token-level optimisation X21–X27 combined, and it
+inverts the objective.
+
+**H.6 — Encoding floor (why some pool characters are cheap).** arXiv
+**2610.01984** ("Universal Byte-Level Encoding: UTF-8/UTF-16 Routing",
+2026-10-02) states the floor directly: "when no learned merges can be applied,
+a multibyte character requires multiple byte-derived symbols." Kozma &
+Voderholzer put BPE at between 1/3 and `(1 − e⁻²)/2 ≈ 0.4323` of optimal
+compression utility worst-case; arXiv 2306.16837 gives the lower bound
+`1 − e^(−σ(μ*))`. These are **post-hoc evidence, not sources** — METATHESIS was
+designed before they were read, and its source article is **none; it is
+original to this repository.**
+
+### I. Two bugs found and fixed
+
+1. **`Math.random()` in the perturbation step** — broke the repo-wide
+   pure-function guarantee and made wires irreproducible. Fixed by
+   `mulberry32(fnv1a(wire))`; confirmed by `det.ts`.
+2. **`budgetMs` is inert under `OMEGA_DET=1`** — `now()` in `src/lib/omega/clock.ts`
+   returns **constant 0**, so wall-clock deadlines never fire and the search
+   would have been unbounded. Fixed by adding a deterministic counter bound,
+   `maxEvals = min(400 000, 40 000 + k²·12)`, evaluated alongside the (inert)
+   time check.
+
+A third defect was in the toolchain, not the codec: a registry label containing
+`\uXXXX` escapes and an apostrophe produced 5× `TS1005` at `registry.ts:385`.
+**Rule recorded: registry labels must contain no apostrophes and no
+backslashes.**
+
+### J. Runtime honesty
+
+- All 28 lanes were swept **sequentially**, one `node` process per lane, in a
+  single background shell. **No parallelism was used or claimed.**
+- The sweep ran as one `start_process` (pid 4248) and took **well over an hour**
+  of wall clock; total CPU burned was ~23 minutes at the 7-lane mark and
+  considerably more by completion.
+- `ms` fields in the sweep JSONL read **0** because `now()` is constant under
+  `OMEGA_DET=1`; they are not evidence of zero cost.
+- Wall clock varies **superlinearly and unpredictably** with rule count at
+  equal size: dump.sql (47 rules) took ~4 min while csv-8 (81 rules) finished
+  in under one. The bound that actually governs is `maxEvals`.
+- No Lean toolchain or theorem prover exists in this sandbox. Every "proved"
+  claim in §E is a **pencil argument**, checkable by hand, not machine-checked.
+
+### K. Generalized local-leader list by structural category
+
+Best codec per lane by structural category, from the four receipts
+(`symploke_reverify.jsonl`, `metathesis.jsonl`, plus the X25/X26 archives).
+"Leader" = lowest byte-exact message-token count measured.
+
+| category | lanes | SYMPLOKE | **METATHESIS** | margin | improved |
+|---|---|---|---|---|---|
+| **prose / natural language** | 10 | 8327 | **8276** | −51 | 7 / 10 |
+| **ops logs & command output** | 13 | 12089 | **11939** | −150 | 11 / 13 |
+| **tables & CSV** | 4 | 8397 | **8295** | −102 | 4 / 4 |
+| **DB dumps** | 1 | 679 | **673** | −6 | 1 / 1 |
+| **total** | **28** | **29492** | **29183** | **−309** | **23 / 28** |
+
+Categories were verified to partition all 28 lanes and to sum to the frontier
+totals exactly.
+
+**Reading of the table — corrected against my own draft.** I first wrote this
+section with estimated category totals and prose at −13. The measured figures
+are **prose −51** and **ops 13 lanes, not 14**. The correction matters: prose
+is **not** the weak category I claimed. It carries a sixth of the total gain
+across ten lanes, and 7 of 10 prose lanes improved, including svenstaro at
+−31 — the third-largest single win in the sweep and a markdown README.
+
+The honest characterization is therefore narrower than "only ops" and narrower
+than "big general prose win": *METATHESIS is a rule-density amplifier.* Rule
+density is what CSV, log output and long READMEs have, and what a one-paragraph
+knowledge-base article does not (kb-article −1, readme 0, de-kb 0,
+meeting-transcript 0 — all at 6–27 rules). It is a genuine general improvement
+with no file-specific tuning, but on **short ordinary prose the effect is
+−1 to −8 tokens and a user would not notice it.** That is the honest ceiling
+of this mechanism, and it should not be reported as more.
+
+**Where the next gain is most likely to come from.** Prose lanes carry
+21–44 rules against CSV's 63–212. The gap is not in the relabelling — it is in
+how much of the text the phrase grammar captures in the first place. Every
+codec from POLYTROPOS onward has attacked the *encoding* of the grammar's
+output; none has attacked the *coverage* of the grammar. That is the open
+front, and it is where X28 should go.

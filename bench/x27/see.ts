@@ -1,0 +1,16 @@
+import fs from 'node:fs';
+import { symplokeEncode } from '@/lib/omega/symploke';
+import { CHIRON_START, CHIRON_SEP } from '@/lib/omega/chiron';
+const enc='o200k_base' as any;
+const f=process.env.F!;
+const t=fs.readFileSync(f,'utf8');
+const r=symplokeEncode(t,enc);
+const cut=r.wire.indexOf(CHIRON_SEP, CHIRON_START.length);
+const tape=r.wire.slice(CHIRON_START.length,cut);
+const body=r.wire.slice(cut+CHIRON_SEP.length);
+console.log('=== TAPE (raw) ===');
+console.log(JSON.stringify(tape));
+console.log('\n=== BODY first 1400 chars ===');
+console.log(JSON.stringify(body.slice(0,1400)));
+console.log('\n=== ORIGINAL first 700 chars ===');
+console.log(JSON.stringify(t.slice(0,700)));
