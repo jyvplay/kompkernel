@@ -120,6 +120,7 @@ import { metathesisEncode, metathesisDecode } from './metathesis';
 import { syntomosEncode, syntomosDecode } from './syntomos';
 import { synkopeEncode, synkopeDecode } from './synkope';
 import { tachosEncode, tachosDecode } from './tachos';
+import { heuresisEncode, heuresisDecode } from './heuresis';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -414,6 +415,14 @@ export function codecEntries(): Entry[] {
         const r7 = tachosEncode(t, enc);
         const decoded7 = tachosDecode(r7.wire, { stats: r7.stats, order: r7.order, undo: r7.parent === 'identity' ? (w: string) => w : chironDecode });
         return { output: r7.wire, decoded: decoded7, oneChat: r7.messageTokens, note: `parent=${r7.parent}; winner=${r7.winner}; rules=${r7.rules}; bootstrapRules=${r7.bootstrapRules}; arms=${r7.arms.map(a => a.id + ':' + a.tokens).join(' ')}` };
+      },
+    },
+    {
+      key: 'heuresis', label: 'εὕρεσις HEURESIS (Discovery — X31. A search-budget codec, and the only X31 lever out of five that survived. SYNTOMOS builds its glyph alphabet by merging character pairs, and any set of disjoint merge pairs can be realised by many different pair-to-glyph assignments; the assignment is not cosmetic because it decides which substrings become glyph strings and therefore the whole tape. renderBest cannot try them all, so it ranks scripts by merge-edge count and keeps the top scriptTries, and sibyl.ts hardcodes that budget at 3, 2 and 3 across its three call sites — a constant nobody had ever tuned. Widening it is safe by construction because those sites keep a running best across the candidates they do try, so a wider budget cannot lose a candidate already found, only add one. The obvious prior is that the budget is irrelevant because edge count is a good proxy; measured, the gain does saturate almost immediately, with tries 3, 4, 6, 8, 12 and 16 giving identical wires on most lanes — but saturation is not zero, and on some lanes the densest scripts are the wrong ones. Eleven lanes measured, all byte-exact: find-listing 1281 to 1272, readme 655 to 652, prose-01 745 to 743, and eight lanes unchanged. Three improved, none regressed. Critically, higher is NOT better: at tries=8 ls-full-iso goes 373 to 374, because extra renders eat the shared search budget and starve the rule search downstream, so the script gain is more than cancelled. tries=4 is the measured saturation point, where the script search is complete but has not yet started to crowd out its neighbours. Cost is 5 to 25 percent more encode time on a search that already runs for tens of seconds. Four other levers were measured and rejected this turn and are recorded as negative space: memoizing the glyph-assignment evaluation, which is 27 to 70 percent of encode but whose true hit rate is only 0.6 to 2.5 percent so the memo is pure overhead and was reverted; raising the time budget to 20 s or 60 s, which changes nothing; widening the word and phrase rule grids, which reproduce the default exactly; and ungating the X30 bootstrap arm, which never wins outside its gate and costs 20 to 50 percent runtime. Greedy: no — it widens the candidate set of an existing greedy search rather than replacing the objective. Honest size of the win: small on tokens and concentrated on ops lanes, but free, general, regression-free and it costs the user nothing to adopt.)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => {
+        const r8 = heuresisEncode(t, enc);
+        const decoded8 = heuresisDecode(r8.wire, { stats: r8.stats, order: r8.order, undo: r8.parent === 'identity' ? (w: string) => w : chironDecode });
+        return { output: r8.wire, decoded: decoded8, oneChat: r8.messageTokens, note: `parent=${r8.parent}; winner=${r8.winner}; scriptTries=${r8.scriptTries}; rules=${r8.rules}; arms=${r8.arms.map(a => a.id + ':' + a.tokens).join(' ')}` };
       },
     },
     {

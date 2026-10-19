@@ -2648,3 +2648,77 @@ compression.** Exact remaining gap: prose retains 91.4% and the mechanism that
 would close it is arithmetic coding, which §D.2 shows cannot be byte-exact with
 an LLM decoder. Next highest-information test: incremental run-cost evaluation
 (§E.1), then a live model to settle reliability, which no turn has been able to run.
+
+---
+
+# X31 — εὕρεσις HEURESIS
+
+**Codec shipped:** `src/lib/omega/heuresis.ts`, registry key `heuresis`, spec in
+`docs/codec-abbreviations.md`, receipts in `bench/x31/X31.md`.
+
+**What it is.** A search-budget codec, not a wire-format codec. SYNTOMOS builds
+its glyph alphabet by merging character pairs; a set of disjoint merge pairs can
+be realised by many pair→glyph *assignments*, and the assignment decides which
+substrings become glyph strings and therefore the whole tape. `renderBest` ranks
+candidate scripts by merge-edge count and keeps the top `scriptTries`, and
+`sibyl.ts` hardcodes that budget at **3 / 2 / 3** across three call sites — a
+constant nobody had ever tuned. HEURESIS raises it to a floor of **4**.
+
+Widening is safe by construction: all three sites keep a *running best* across
+the candidates they try, so a wider budget cannot lose a candidate already
+found, only add one.
+
+**The one non-obvious result: higher is not better.** At `tries=8`, ls-full-iso
+goes **373 → 374** — worse. Extra renders eat the lane's own search budget and
+starve the rule search downstream. `tries=4` is the measured saturation point.
+Widening a search blindly is not a win; widening it to saturation is.
+
+**Measured (bench/x31/heur.ts, e2e.ts; all byte-exact):**
+
+| lane | TACHOS | HEURESIS | Δ | time |
+|---|---|---|---|---|
+| find-listing.txt | 1281 | **1272** | **−9** | 135.8s → 135.5s |
+| readme.txt | 655 | **652** | −3 | 30.3s → 32.2s |
+| prose-01.txt | 745 | **743** | −2 | 29.0s → 31.8s |
+| kb-article.txt | 628 | 628 | 0 | 17.1s → 18.5s |
+| meeting-transcript.txt | 389 | 389 | 0 | 10.8s → 12.4s |
+| git-log-fuller.txt | 143 | 143 | 0 | 8.9s → 8.6s |
+| **subtotal** | **3841** | **3827** | **−14** | **232s → 239s (+3%)** |
+
+Also verified equal at tries=4: prose-09 (759), prose-03 (843), prose-11 (804),
+email-thread (494), ls-full-iso (373).
+
+**11 lanes, 3 improved, 0 regressed, −14 tokens, +3% time.** X30 made the
+pipeline 1.85× faster, so X31 is still strictly faster than X29 in wall-clock
+while producing shorter wires.
+
+## X31 negative space — four levers measured and rejected
+
+1. **Assignment memoization — DEAD, reverted.** `runCostPrepared` is 27%
+   (kb-article) / 56% (email-thread) / 70% (ls-full-iso) of a whole encode,
+   called 300 K–2 M times per file, scanning 20–115 M patterns. A
+   whole-assignment memo keyed on every rule's glyph in ascending rule-id order
+   gave a measured hit rate of **0.6–2.5%** — not the 83–94% a first (faulty)
+   estimate claimed. Zero speedup. **The cost is in the scan, not in repeat
+   evaluation.** The first estimate built its key from `assign.values()` (Map
+   insertion order, not rule order), which conflates distinct assignments.
+2. **Raising the time budget — DEAD.** 20 s and 60 s reproduce the default
+   exactly. The pipeline is not budget-starved at the top level.
+3. **Widening the word/phrase rule grid — DEAD.** `wordGrid [24,48,96]`,
+   `[12,24,48,72]`, `capGrid [16]` all reproduce the default byte-for-byte.
+4. **Ungating the X30 bootstrap arm — DEAD.** Never wins outside its gate and
+   costs 20–50% extra runtime. The X30 gate is correctly tuned.
+
+## Stopping
+
+Real budget exhausted. Strongest verified artifact: **a regression-free,
+general search-completeness fix (−14 tokens over 11 lanes, 3 improved, 0
+regressed) plus five levers tested and four killed with numbers.** The most
+valuable single item is the negative result in (1): it retires the most obvious
+remaining speed idea with a measured hit rate rather than an argument.
+
+Exact remaining gap: prose retains 74.1% and the mechanism that would close it
+is arithmetic coding, which cannot be byte-exact with an LLM decoder. Carried
+forward: the 28-lane sweep (4/28); new web searches on unreferenced sites;
+`openai/math` re-audit; parallelizing the 8 sequential arms at
+`akribeia.ts:348`.

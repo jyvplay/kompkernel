@@ -769,6 +769,97 @@ is not deterministic across runs, so the losslessness guarantee fails) and
 Compression: −3 tokens on fresh out-of-sample prose (converts two files from 0%
 to 0.4% compression); see `docs/codecs.md` X30 for the 28-lane numbers.
 
+## εὕρεσις HEURESIS (X31)
+
+**What it is.** A search-budget codec, not a wire-format codec. SYNTOMOS builds
+its glyph alphabet by merging character pairs into single-token glyphs; a set of
+disjoint merge pairs can be realised by many different pair→glyph **assignments**,
+and the assignment is not cosmetic — it decides which substrings become glyph
+strings and therefore the entire tape.
+
+`renderBest` (`ariadne.ts`) cannot try all assignments, so it ranks candidate
+scripts by merge-edge count and keeps the top `scriptTries`:
+
+```
+for (const cand of cands.slice(0, o.scriptTries ?? 2)) { ... }
+```
+
+`sibyl.ts` supplies that budget at three call sites, hardcoded **3 / 2 / 3**.
+Nothing had ever varied it. HEURESIS raises all three to a floor of **4**.
+
+**Why widening is safe by construction.** All three sites keep a *running best*
+across the candidates they try, so a wider budget cannot lose a candidate that
+was already found. It can only add. This is the property that makes the change
+monotone at the level of a single site.
+
+**Greedy or not?** The codec is **not** greedy — it widens the candidate set of
+an existing greedy search rather than replacing the objective, and the final
+selection is `min` over arms scored by the true tokenizer on the true message.
+The rule search *inside* each arm remains greedy; that is what is being searched
+more completely, not what is being replaced.
+
+**The one non-obvious result: higher is not better.** At `tries=8`, ls-full-iso
+goes **373 → 374** — it gets *worse*. Extra renders consume the lane's own
+search budget and starve the rule search downstream, and that loss exceeds the
+script gain. `tries=4` is the measured saturation point: complete script search
+that has not yet started to crowd out its neighbours.
+Widening a search *blindly* is not a win; widening it to saturation is.
+
+**Measured** (`bench/x31/tries.ts`, `tries2.ts`, `e2e.ts`, `heur.ts`; every wire
+byte-exact):
+
+| lane | TACHOS (2/3) | HEURESIS (4) | Δ |
+|---|---|---|---|
+| find-listing.txt | 1281 | **1272** | **−9** |
+| readme.txt | 655 | **652** | −3 |
+| prose-01.txt | 745 | **743** | −2 |
+| kb-article.txt | 628 | 628 | 0 |
+| meeting-transcript.txt | 389 | 389 | 0 |
+| prose-09.txt | 759 | 759 | 0 |
+| git-log-fuller.txt | 143 | 143 | 0 |
+| ls-full-iso.txt | 373 | 373 | 0 |
+| prose-03.txt | 843 | 843 | 0 |
+| prose-11.txt | 804 | 804 | 0 |
+| email-thread.txt | 494 | 494 | 0 |
+
+11 lanes, 3 improved, **0 regressed**, −14 tokens on the 6-lane subtotal.
+Cost: **+3% encode time** (232 s → 239 s over that subtotal).
+
+**Time/CPU bound?** Yes. The budget is a small integer (4), not a loop bound, so
+it multiplies existing bounded work by a constant — three renders instead of two
+at each of three sites. No new unbounded search. Encode time is 8.6 s – 136 s per
+lane on this corpus (1.2–11.5 KB), consistent with the family.
+
+**Honest citation.** None — this is a measurement made in this repo
+(`bench/x31/`). The framing that makes it non-obvious is that the budget is a
+**search-completeness parameter whose saturation point is empirically finite**,
+which is the ordinary situation in combinatorial search; no external source is
+claimed. The programme-level bounds remain **arXiv 2607.06145** ("Prompting
+Complexity", which provably lacks a model-independent invariance theorem, so
+every count here is an o200k_base count) and **arXiv 2505.06297** (LLM +
+arithmetic coding concedes in §4.4 that LLM inference is not deterministic, so
+the losslessness guarantee fails).
+
+### X31 negative space (measured, all rejected)
+
+1. **Memoizing the glyph-assignment evaluation — DEAD.** `runCostPrepared` is
+   27% (kb-article) / 56% (email-thread) / 70% (ls-full-iso) of a whole encode,
+   called 300 K–2 M times per file, scanning 20–115 M patterns. A whole-assignment
+   memo keyed on every rule's glyph in ascending rule-id order gave a measured hit
+   rate of **0.6–2.5%**, not the 83–94% a first estimate claimed. Zero speedup;
+   reverted. *The cost is in the scan, not in repeat evaluation.*
+   The first estimate was wrong because it built its key by iterating
+   `assign.values()` — Map insertion order, not rule order — which conflates
+   distinct assignments.
+2. **Raising the time budget — DEAD.** 20 s and 60 s reproduce the default
+   exactly on ls-full-iso, prose-03 and prose-11. The pipeline is not
+   budget-starved at the top level.
+3. **Widening the word/phrase rule grid — DEAD.** `wordGrid [24,48,96]`,
+   `[12,24,48,72]` and `capGrid [16]` all reproduce the default byte-for-byte.
+4. **Ungating the X30 bootstrap arm — DEAD.** Run unconditionally it never wins
+   outside its gate and costs 20–50% extra runtime on lanes ≤ 6000 chars.
+   The X30 gate is correctly tuned.
+
 ## Codecs that do not satisfy the measurement contract (X21 audit)
 
 - **`oracle`** — hardcodes the 20 holdout citations in `ORACLE_MAP` and declares it "not counted

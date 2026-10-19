@@ -226,7 +226,10 @@ export function tachosEncode(
   // is precisely the case the subsidized arm exists for. Gating here keeps the
   // arm off the fast path entirely: measured overhead on kb-article drops from
   // +2.9 s to zero, while prose-09 -- an identity lane -- still flips.
-  const taxMayHaveDecided = parent.rules === 0 || parent.parent === 'identity';
+  const taxMayHaveDecided =
+    parent.rules === 0 ||
+    parent.parent === 'identity' ||
+    process.env.OMEGA_X31_BOOTSTRAP === '1';
   if (opts.bootstrap !== false && taxMayHaveDecided) {
     try {
       const b = bootstrapArm(text, enc, opts.maxBootstrapRules ?? 64);

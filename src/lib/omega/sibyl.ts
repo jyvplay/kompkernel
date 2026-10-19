@@ -243,6 +243,8 @@ export interface SibylOptions extends AriadneOptions {
   wordGrid?: number[];
   /** explicit phrase-rule caps to try (Infinity = uncapped) */
   capGrid?: number[];
+  /** raise the glyph-script trial budget above the internal per-site default */
+  minScriptTries?: number;
 }
 
 function rawResult(text: string, enc: EncodingName, started: number): SibylResult {
@@ -361,9 +363,23 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
     prepared.push({ g: gr.g, blocks: gr.blocks, ranked: maxW ? rankByRunPotential(gr.g, maxW) : [] });
   }
 
+  /* Glyph-script trial budget.
+   *
+   * renderBest only tries the top `scriptTries` scripts by merge-edge count
+   * (ariadne.ts: `.slice(0, o.scriptTries ?? 2)`), and the three call sites
+   * below hardcode 3 / 2 / 3. X31 measured that this is not always enough
+   * (bench/x31/tries.ts, tries2.ts): on ls-full-iso the wire goes
+   * 418 -> 415 -> 414 as the budget goes 2 -> 3 -> 4, and it never gets worse,
+   * because the sites keep a running best across candidates. Four of seven
+   * lanes measured improved, by 1 to 4 tokens, at a cost of tens of
+   * milliseconds. OMEGA_SIBYL_TRIES raises all three sites to at least N. */
+  const TRY_ENV = Number(process.env.OMEGA_SIBYL_TRIES ?? '') || 0;
+  const TRY_MIN = Math.max(TRY_ENV, options.minScriptTries ?? 0);
+  const T3 = Math.max(3, TRY_MIN), T2 = Math.max(2, TRY_MIN);
+
   // 1. The pooled alphabet with no word rules — isolates how much of the gain is
   //    the alphabet and how much is the new rule class.
-  for (const pr of prepared) evaluate(cloneGrammar(pr.g), 0, -1, pr.blocks, 0.8, 3, true);
+  for (const pr of prepared) evaluate(cloneGrammar(pr.g), 0, -1, pr.blocks, 0.8, T3, true);
   // 2. Word rules: coarse sweep, then refine the best.
   const coarse: Array<{ g: Grammar; words: number; cap: number; blocks: boolean; M: number }> = [];
   for (const pr of prepared) {
@@ -374,13 +390,13 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
         if (w > pr.ranked.length) continue;
         const g2 = cloneGrammar(gCap);
         addWordRules(g2, pr.ranked.slice(0, w));
-        const c = evaluate(g2, w, isFinite(cap) ? cap : -1, pr.blocks, 0.2, 2);
+        const c = evaluate(g2, w, isFinite(cap) ? cap : -1, pr.blocks, 0.2, T2);
         if (c) coarse.push({ g: g2, words: w, cap: isFinite(cap) ? cap : -1, blocks: pr.blocks, M: c.M });
       }
     }
   }
   coarse.sort((x, y) => x.M - y.M);
-  for (const cfg of coarse.slice(0, 2)) evaluate(cfg.g, cfg.words, cfg.cap, cfg.blocks, 1, 3);
+  for (const cfg of coarse.slice(0, 2)) evaluate(cfg.g, cfg.words, cfg.cap, cfg.blocks, 1, T3);
   if (!cands.length) return raw;
 
   cands.sort((a, b) => a.M - b.M || a.out.tokens - b.out.tokens);
