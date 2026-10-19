@@ -1,0 +1,20 @@
+| KIONES transpose | Craft `x` where `findBlocks` finds a `4×6` run that is *not* a table (e.g. bibliography citations share `", "` 4 times by accident) → `M_trans = wire+19 < M_T` apparent win but `decode` is *not* byte-identical (field counts differ by 1 on one line due to `", "` inside a field) | `findBlocks` requires *exact* field-count equality, but `", "` inside a quoted field would still split, creating a spurious block | Witness `kionesDecodeText(kionesEncodeText(x))==x` catches it (bibliography `4×6` correctly declined `818>785`). Attack fails. |
+| Dictionary depth | Claim hierarchical `c=a·b` saves 10 tok but `a` and `b` not counted — `M` appears smaller | Tape double counts | `countTokens` on `§…¶` measures `a` and `b` explicitly; `bench/kiones-report.md` D shows zero gain, not claimed. |
+| Time gate | Flood with `HYDRA_LARGE+1` char `,`-dense text to force `+1200 ms` and breach worker 26 s | `text.length>HYDRA_LARGE` gate skips transpose; `remaining<600` gate skips | Measured `package-lock 5694 tok` never transposes, `T_H≈T_T`. |
+| Lean gap | Ship unformalized `kiones` arm and claim 455 tok win without witness | 42% Lean formalized, 58% could have issues (`revolutioninAI` 2026-10-08) | We run `decode(encode)==x` on the *exact* input (witness), not a Lean proof of a *different* input. |
+
+### H. External verification preference (over self-report)
+
+* `tsc 5.9.3` type system, `vite 7.3.6` bundler (205 modules), `esbuild` redteams (25/25), `countTokens` live `o200k_base` (not estimated `l/4`), `kionesDecodeText` witness, `chironDecode` total decoder — all run in CI via `npm run build` + `bench/tmp/*.mjs`, not by the encoder's own assertion. The 722-manuscript Lean gap (42% formalized) is external evidence that *self-report without witness is insufficient*; HYDRA's witness is the external verifier.
+
+### I. Repair re-gates
+
+If `hydra-redteam` fails on `vix win` (e.g. tokenizer drift changes `M_trans` to `983→986` making `diff=2` not `>3`), the *repair* is to re-run `bench/test-hydra.ts` to re-measure `M_T−M_H`, and if `diff∈[1,3]` keep `M_T` (still Pareto, report as marginal) rather than ship a `>few` claim. The gate `M_H+3<M_T` is re-checked on every `hydraEncode` call, not cached. If `findBlocks` regresses (e.g. new `sep` added), `kiones-redteam`'s 9/9 block census fails first.
+
+### J. Stopping rule — when to stop searching
+
+Stop when the portfolio's *marginal* gain `ΔM` per additional arm ` <3` tokens on the 43-holdout corpus. HYDRA adds one arm (transpose) for `+458 ms` and `ΔM=455` on `vix` (152 tok/s), far above `3`. A third arm (e.g. hierarchical depth 2, `BoundlessBPE` across whitespace, `MorphBPE`) would need its own `>few` win on the *same* corpus *after* HYDRA, with its own `ΔT` billed. Until then the frontier is `HYDRA` — the next codec must beat `min(HYDRA, …)` by `>3` on prose *or* tabular, not by `1`.
+
+---
+
+## 12. References (new, past 5 years, not previously cited by the repo, 2026-10-09 live search)

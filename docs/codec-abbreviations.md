@@ -728,6 +728,47 @@ o200k_base counts, not universal ones.
 **Result.** −2 tokens on dump.sql, 0 on the other 27 lanes. Does not meet the standing bar.
 See `docs/codecs.md` X29 for the eight null results that are the turn's real content.
 
+## τάχος TACHOS (X30)
+
+**What it is.** Two things, only one of which is compression.
+
+1. **A tokenizer memo (the real contribution).** `countTokens` had a chunk cache
+   but the `text.length < 24` early return bypassed it. Instrumented on a 3.4 KB
+   prose encode: 2,240,610 calls, 2,190,308 of them short, only 98,806 distinct
+   — 95.5% redundant. The memo is keyed by encoding + the entire string, so it is
+   exact by construction and can only change timing, never a number. Measured:
+   countTokens 18.9 s -> 5.6 s (3.4x), whole encode 25.6 s -> 13.8 s (1.85x),
+   message byte-identical.
+2. **A second selection arm.** The contract is a fixed tax paid once, so a greedy
+   scoring each candidate against the current total demands that the *first* rule
+   retire the whole tax. Measured on two fresh prose files: with the tax charged
+   the search accepts 0 rules and ships identity; with it waived the same search
+   finds 10 and 8 rules. TACHOS runs the waived objective as an extra arm and
+   keeps the shorter message, retaining identity and the parent as candidates so
+   it is monotone against SYNKOPE.
+
+**Greedy?** The tournament is an exact minimum over {identity, SYNKOPE,
+bootstrap} scored by the true tokenizer on the true message — not greedy. The
+rule search inside each arm is greedy; that is what is being compared, not what
+is being fixed.
+
+**Time/CPU bound?** Yes, doubly: the memo is bounded at 2M entries and cleared on
+overflow; the bootstrap arm is capped at 64 rules. The parent encode is
+budget-bounded by POLYTROPOS.
+
+**Honest citation.** None — both parts are measurements made in this repo
+(`bench/x30/prof3.ts`, `bench/x30/micro.ts`). The closest external framing for
+what the contract *is* remains **arXiv 2607.06145** ("Prompting Complexity"),
+which provably has no model-independent invariance theorem, so every token count
+here is an o200k_base count. The two results that bound the whole programme:
+**arXiv 2505.06297** (LLM+arithmetic coding concedes in §4.4 that LLM inference
+is not deterministic across runs, so the losslessness guarantee fails) and
+**arXiv 2601.10678** (PMATIC exists to tolerate exactly that mismatch).
+
+**Result.** Speed: 1.85x end-to-end, 3.4x tokenizer, exact by construction.
+Compression: −3 tokens on fresh out-of-sample prose (converts two files from 0%
+to 0.4% compression); see `docs/codecs.md` X30 for the 28-lane numbers.
+
 ## Codecs that do not satisfy the measurement contract (X21 audit)
 
 - **`oracle`** — hardcodes the 20 holdout citations in `ORACLE_MAP` and declares it "not counted

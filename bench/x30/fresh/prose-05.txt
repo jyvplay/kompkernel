@@ -1,0 +1,54 @@
+
+Compiler receipts: `npx tsc --noEmit -p tsconfig.json` clean;
+`npm run build` → `✓ built in 11.10s`, `dist/index.html 8,618.11 kB`.
+
+**Claims deliberately downgraded for lack of a verifier:** that a language model
+executes the contract correctly (no LLM available — see §D.9, §D.12); that the
+few-shot contract is as reliable as the prose one; that the QAP heuristic is near
+optimal.
+
+---
+
+## I. REPAIR — every patch re-gated, plus a new attack per patch
+
+| defect | how found | repair | re-measured | new attack added |
+|---|---|---|---|---|
+| Lagrangian cold start collapses the search | 45 rules on `dts0` vs CHIRON's 136 | initialise usage at the observed count | `dts0` 2925 → 2260 | G14 (estimate drift) |
+| DP alone loses hierarchy | `bench/tmp/ariadne1.ts` vs CHIRON | level loop + greedy-add + re-parse | `dts0` 2260 → 2195 | `searchGain` reported per lane |
+| Assignment probing re-tokenised the whole wire | ARIADNE slower than CHIRON (108 s vs 63 s) | atom/run decomposition; probe scores only the runs | 108 s → 31 s, gain *up* (−203 → −335) | G13 (assignment never harmful) |
+| Pair graph sampled at 200 characters | Hangul assignment gain stuck at 15 | derive the graph from the **whole** 200 006-entry vocabulary | `dts0` assignment −15 → −47 | — |
+| Alphabet too small / too sparse | CJK absent from the script table | add CJK (2517 chars, 2403 edges) to all **three** readers | `dts0` −47 → −100 | G7 across all scripts |
+| Random swaps waste probes | assignment plateaued | targeted move: force a hot pair onto a real merge edge | total −335 → −391 | — |
+| **Selection minimised the wire, not the message** | ARIADNE lost `code-dts` (162 vs 109) and `three-regime` (231 vs 214) | score every variant on `M`; re-run with blocks disabled whenever they fired | both lanes recovered; 0 lanes lost | frontier `Δari` column is now an explicit per-lane gate |
+| Separator loop re-ran the whole pipeline per separator | 70 s | separator chosen by a cheap block-finder pre-pass | 70 s → 50 s | `idrun` regression caught (445 → 101) and fixed |
+| **G7 became vacuous** when the second encoder changed the name format | reading the printed count (`0 payloads`) | match on the suffix and assert the expected count | 80/80 | the assertion itself |
+
+No repaired candidate inherited trust: the full 14-gate suite and the full 37-lane
+frontier were re-run after the last change.
+
+---
+
+## J. RESULT AND STOPPING
+
+### The frontier (37 lanes, `bench/chiron-frontier.ts`)
+
+`bestOld = min(identity, HERMES-Ω, HERMES-F, HERMES-C)`.
+
+```
+CHIRON  total M 31624   wall 132.6s
+ARIADNE total M 30824   wall  97.7s   (2.53% fewer tokens, 1.36x the speed)
+ARIADNE beats CHIRON on 29/37 lanes, loses on 0
+frontier total  35755 -> 30824   (13.79% off the previous best-of-stack)
+lanes strictly improved vs the previous stack: 29/37,  regressions: 0
+```
+
+| lane | bestOld | CHIRON | **ARIADNE** | Δ vs stack | Δ vs CHIRON |
+|---|---|---|---|---|---|
+| BANYAN_INTERLEAVED | 1233 | 734 | **690** | −543 | −44 |
+| tr/dts0 | 2675 | 2233 | **2176** | −499 | −57 |
+| tr/dts4 | 2680 | 2339 | **2290** | −390 | −49 |
+| tr/doc11 | 3013 | 2723 | **2661** | −352 | −62 |
+| tr/dts3 | 2574 | 2296 | **2232** | −342 | −64 |
+| tr/dts2 | 2388 | 2240 | **2183** | −205 | −57 |
+| tr/dts5 | 2602 | 2483 | **2416** | −186 | −67 |
+| tr/dts1 | 1884 | 1779 | **1702** | −182 | −77 |

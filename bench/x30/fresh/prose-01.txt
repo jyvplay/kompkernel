@@ -1,0 +1,51 @@
+   (~44) than describing a bracketed region (~37-39). Rejected with
+   receipts, not by argument — this became the explicit design principle
+   (measure marker cost per-mechanism, section A) rather than a one-off
+   fix.
+4. **CRLF→LF / trailing-whitespace normalization**, evaluated by analogy
+   to ABACUS's own already-killed candidate of the same shape (see ABACUS
+   report, mechanism 8) and re-tested here for a fullwidth-adjacent variant
+   (IDEOGRAPHIC SPACE used as ordinary paragraph indentation, not part of
+   a fullwidth-Latin run). Measured near-zero standalone gain and already
+   covered structurally by DEWIDE's own IDEOGRAPHIC SPACE handling when it
+   does co-occur with a real span; not a separate mechanism worth shipping.
+5. **Full-string "if input looks CJK-input-contaminated, DEWIDE the whole
+   document unconditionally" (no per-span gate).** Considered and
+   explicitly rejected: this is exactly the naive-but-tempting shortcut
+   the second-order adversary in section G is built to catch — it would
+   corrupt legitimate CJK punctuation and genuinely CJK-dominant documents
+   with an accidental short fullwidth fragment (D5). The per-span,
+   per-instance economic and exactness gate is non-negotiable, not an
+   optimization.
+6. **Halfwidth-katakana normalization (treating halfwidth katakana as a
+   third "width" mechanism, symmetric to DEWIDE).** Investigated and
+   explicitly scoped out: halfwidth katakana is a genuinely distinct
+   legitimate character set used in real Japanese input (not a font-width
+   accident of anything), so there is no "natural width" to restore it to
+   — unlike fullwidth Latin, which has an unambiguous ASCII original.
+   Different mechanism shape entirely (not a canonicalization target),
+   correctly excluded rather than half-implemented.
+7. **Marker-wording via natural prose vs. placeholder-variable phrasing.**
+   Directly measured (this session): a prose description of DESTRETCH's
+   self-terminating boundary rule cost 21 tokens standalone; an equivalent
+   placeholder-variable phrasing (`『X: space out X's letters, drop 『`)
+   cost 10-12 tokens — chosen not by taste but by literal `countTokens`
+   comparison of candidate decode clauses, following the pattern
+   discovered as a lesson from this same mechanism's own development (see
+   Errors & Dead Ends).
+
+## F. Artifact Requirement — the discovered DAEDALUS wall-clock sensitivity (deeper than ABACUS's own finding)
+
+ABACUS's report already documented that DAEDALUS's search is genuinely
+wall-clock-time-sensitive under a *fixed* `budgetMs`, and fixed its own
+headline measurements at a generous, non-inflating `budgetMs: 15000` as a
+result. This session's own red-team run surfaced a sharper version of the
+same underlying fact: it is not merely that *different* budget values give
+different results — **two separate calls with the identical budget value
+can converge to different results depending on real elapsed CPU
+contention from unrelated prior work in the same process**, evidenced
+directly by the abacus-combo divergence (1164 in an isolated two-call
+script; 1125 inside the full 22-fixture red-team run) documented in RUNTIME
+HONESTY above. This is a genuine, reproducible characteristic of the
+shared DAEDALUS engine that every downstream pre-pass lane (ORTHOS,
+STENTOR, ABACUS, PROCRUSTES) inherits and must design its own test

@@ -1,0 +1,49 @@
+**A4.** ∀x : `D(E(x)) = x` ∧ `M(x) ≤ M_DAEDALUS(x)` (structural
+non-regression, enforced by construction: ORTHOS only emits its own wire
+when it has already verified it is strictly cheaper — see §2); ∃x :
+`M(x) < M_DAEDALUS(x) − k` for a genuinely realistic x (proved in §H, k=43
+on the headline fixture).
+**A5.** Domain: UTF-16 text 0–10,000 tokens tested directly (500-case fuzz
+corpus + 17 named fixtures + adversarial edge cases); byte/code-unit
+equality; integer tokens; zero tolerance.
+**A6. Not to be substituted:** byte compression, lossy compression,
+dictionary-in-system-prompt, fine-tuned tokenizer/embeddings, anything
+requiring model-weight access, wire-length in place of message-minimization,
+and — the near-miss this turn actually walked into — **"more fixture data
+automatically means a bigger win."** It doesn't; see D-14.
+
+---
+
+## B. OUTCOME SPACE
+
+* **H+** further typographic/orthographic normalization classes remain to be
+  found beyond the apostrophe (curly double-quotes, ellipsis, em/en-dash,
+  non-breaking space, ligatures, full-width punctuation).
+* **H−** the repetition-based mechanism class (ARIADNE/SIBYL/SEQUOYAH/THOTH/
+  PALIMPSEST/DAEDALUS) is exhausted for hapax text, independently reconfirmed
+  by every one of those lanes' own reports.
+* **H∂** whether a given document benefits from ORTHOS depends entirely on
+  (a) whether its literal text is internally-consistent "smart punctuation"
+  and (b) whether the raw canonicalization gap it produces exceeds the fixed
+  message-format overhead of the pre-pass.
+
+**Resolved this turn:** H+ is **partially realized** — the apostrophe
+transform is real, measured, and ships; curly double-quotes and the
+ellipsis were tried and killed in an earlier draft (see code header) because
+their measured net contribution, once DAEDALUS's grammar layer runs on top,
+was statistically indistinguishable from zero or negative. H∂ is now
+**precisely characterized, not just acknowledged**: the deciding factor is
+the raw gap-vs-overhead race (§D-14), not document length alone, and it can
+go against you as content grows if the added content lets DAEDALUS's own
+mechanism absorb more of the redundancy on its own.
+
+---
+
+## C. FRONTIER AND THE OPEN INTERFACE
+
+New sources this turn (searched under new phrasing, on sites not already
+cited by any report in this repo):
+
+| imported result | claim | use here |
+|---|---|---|
+| de Campos et al., **"Lossless Prompt Compression via Dictionary-Encoding and In-Context Learning"**, arXiv:2604.13066 (re-read this turn under the specific token-savings inequality `(1+f)·n(M) + n(S) < f·n(S)`) | a substitution dictionary pays off only once its own token cost is amortized across enough repeated hits `f` | formalizes exactly *why* growing the combo fixture backfired: ORTHOS's fixed ~86-token decoder-prompt tail is the `n(S)` term, and the 7-fixture combo's raw savings-per-application shrank below what pays for that tail |

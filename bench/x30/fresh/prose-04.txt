@@ -1,0 +1,66 @@
+| RULES | delimiter-free tape. Each rule is **one new letter of a declared one-token script** followed by its text, which runs to the next new letter of that script or to `¶`. No separators, no numbering, no length prefix. |
+| BODY | the payload with admitted phrases replaced by their letters. |
+
+A rule's text is literal unless it begins with one of exactly two operators:
+
+| form | meaning |
+|---|---|
+| `×btnL…` | **repeat / fill.** Write `t`'s text (or `t` itself if it has no rule) `n` times. In copy *i*, the *k*-th occurrence of the character `b` becomes item *i* of list *k*; the lists are the letters after `n`, in order, cycling if short. |
+| `…a..b` | the integers `a` through `b`. |
+| `…cX` | the items of `X` separated by the character `c` that sits right after `…`. |
+
+`b` (the blank) and `c` (the list separator) are **declared inside the wire**,
+one character each. A payload containing any particular blank or separator can
+therefore never force a decline — the self-declaration costs 1 token and buys
+collision-freedom that a fixed choice cannot have.
+
+Rules only reference rules defined earlier (enforced by topological rendering),
+so expansion terminates with no cycle check, and `chironDecode` is **total**:
+every malformed frame returns its input unchanged.
+
+### The generated contract (this is the entire reader instruction)
+
+Base form, 33 tokens of prose:
+
+> Every new Hangul letter before ¶ starts a rule whose text runs to the next new
+> letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print
+> only the result.
+
+plus, **only when the wire uses them**:
+
+> `×btn`: t written n times. Any letters after n are lists; in copy i the k-th b
+> is item i of list k, cycling. `…a..b` = integers a to b. Otherwise the
+> character after `…` separates the items.
+
+Measured contract cost in the shipped encoder: **39–41 tokens** for macro-only
+wires, **48–50** with plain repeat, **83–92** with fill blocks and lists.
+HERMES-Ω pays **128 flat** (184 with counters) and HERMES-F **70–130 plus the
+JSON-escape tax**.
+
+---
+
+## B. OUTCOME SPACE
+
+**H+ (what would count as success)** — a wire+contract that beats
+`min(identity, HERMES-Ω, HERMES-F, HERMES-C)` by more than a handful of tokens
+on at least one lane, with exact round-trip and no lane made worse.
+
+**H− (what would count as failure)** — any of: gains only from a fixed phrase
+table; gains that vanish once the contract is billed; a mechanism the prose
+cannot describe in fewer tokens than it saves; a decoder that can invent text;
+a wire that only the encoder's own decoder can read.
+
+**H∂ (the boundary, i.e. what is genuinely uncertain)** — whether a *real* LLM
+executes the contract reliably. That is a behavioural question about models,
+not about this code, and **it was not run here**; see §I "what is not claimed".
+The nearest external evidence is de Campos et al. (arXiv:2604.13066), who
+measure **exact-match > 0.99** for template-based in-context dictionary
+decompression with Claude 3.7 Sonnet on LogHub 2.0 — but with the dictionary in
+the *system prompt*, which this contract forbids.
+
+---
+
+## C. FRONTIER — measured, 37 lanes
+
+`./bench/tmp/build.sh bench/chiron-frontier.ts`
+`I` identity · `Wo/Mo` HERMES-Ω wire/message · `Wf/Mf` HERMES-F · `Mc` HERMES-C ·

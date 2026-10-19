@@ -1,0 +1,16 @@
+* Incremental BPE is now `O(log² t)` per byte (`Jiang & Gong, ICML 2026 Spotlight, arXiv:2605.30813`).
+
+**Consequence:** For 99.99% of natural English prose the *information-theoretic* saving of any whole-document token-aligned dictionary is `<24` tokens. The remaining headroom is *not* in the wire but in *avoiding* the wire (TACHYS), *reordering* the wire where order is waste (HYDRA), and *splitting* the wire where grammar is waste (GLOSSIA). This is the "different grammars as unifying glyph point, fold with grammar-ignorant stack" — Latin prose grammar (SVO) has no column to transpose, no code to split, so TACHYS fires; CSV grammar (field-consistent) has columns, so HYDRA fires; hybrid grammar (code+prose) has lanes, so GLOSSIA fires; the *single-token glyph point* (pooled 802) is where all three are *columns* (prose has zero, code has one, table has five).
+
+---
+
+## 8. New mathematics since August 2026 (700+ proofs)
+
+Live `web_search depth 3` 2026-10-09 on unreferenced sites/terms:
+
+* **Fermat's Last Theorem — Lean formalization (Anthropic, 2026-09-04).** Claude (`~Fable 5.1`) produced **13 M lines, 29 511–30 300 theorems, 60 475 modules, 6 B output tokens, 11 days**, Lean`+nanoda`+Mathlib comparator, axioms `propext+Classical.choice+Quot.sound` [5](https://explainx.ai/blog/anthropic-claude-fermats-last-theorem-lean-proof-2026).
+* **Riemann zeta critical-line bound (Anthropic, 2026-08-10).** Unreleased Claude raised proven zeros on critical line **41.6%→67.2%** (31 M tokens, 650 ideas, 60 subagents), Lean-verified [6](https://www.revolutioninai.com/2026/10/lean-verification-openai-722-math-papers.html).
+* **OpenAI — 722 manuscripts, 372 families (2026-10-06).** GitHub `openai/math`, **~4000 problems posed, ~3 h ChatGPT Pro per kept result, 42% (300/719) Lean-formalized**, 235/372 families with Lean page, 3 withdrawn after sign error (2026-10-07), 19 Jul 2026 Jacobian counterexample (Alpöge+Fable 5) [6](https://www.revolutioninai.com/2026/10/lean-verification-openai-722-math-papers.html) [7](https://interestingengineering.com/ai-robotics/openai-largest-math-release-lean-proofs) [8](https://www.dongascience.com/en/news/80240).
+* **LZ77 1977 / LZ78 1978 (Lempel–Ziv).** Sliding window `(offset,length,next)` 1977 and explicit dictionary `(index,symbol)` 1978, universality `R_n→H_∞` [2]; CHIRON is explicit, HYDRA is order, GLOSSIA is grammar — the 50-year trichotomy.
+* **SuperBPE 2025 (Liu et al., COLM 2025 [3]) + Faster Superword 2026 [4](https://arxiv.org/abs/2504.00178)** — 27–33% inference saving, superwords bridging whitespace, GLOSSIA's `LMAX:10` captures ` className="`.
+* **MorphBPE 2025 (Asgari et al. [9](https://arxiv.org/html/2502.00894)) + EMNLP/ACL morphology** — fertility unreliable, same superword insight.

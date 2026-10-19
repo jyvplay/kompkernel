@@ -156,10 +156,37 @@ const PRETOK: Record<EncodingName, RegExp> = {
 const CHUNK_CACHE = new Map<string, number>();
 let chunkHits = 0, chunkMisses = 0, chunkFallbacks = 0;
 
+/* ---------------------------------------------------------------------------
+ * SHORT-STRING MEMO  (X30)
+ *
+ * Measured on bench/holdout-work/kb-article.txt (bench/x30/prof3.ts, X30):
+ * a single 3.4 KB encode made 2,240,610 countTokens calls, of which 2,190,308
+ * (97.8%) were for strings shorter than 24 characters and therefore took the
+ * `text.length < 24` early return that bypasses the chunk cache entirely.
+ * Those short calls cost 14.8 s of a 28.8 s encode, i.e. 51% of the whole
+ * encoder. Of the 2.19M short calls only 98,806 were DISTINCT strings, so the
+ * short path is 95.5% redundant work.
+ *
+ * The memo is exact, not approximate: it is keyed by the full string (and the
+ * encoding), so two different strings can never collide. It can therefore only
+ * change timing, never a number. `verifyChunkAlgebra` and the byte-exact round
+ * trip remain the authority on correctness.
+ *
+ * Bounded: the map is cleared if it exceeds SHORT_CACHE_MAX entries, so a
+ * pathological input cannot grow it without limit.
+ * ------------------------------------------------------------------------- */
+const SHORT_CACHE = new Map<string, number>();
+const SHORT_CACHE_MAX = 2_000_000;
+let shortHits = 0, shortMisses = 0;
+
 export function chunkCacheStats() {
-  return { size: CHUNK_CACHE.size, hits: chunkHits, misses: chunkMisses, fallbacks: chunkFallbacks };
+  return { size: CHUNK_CACHE.size, hits: chunkHits, misses: chunkMisses, fallbacks: chunkFallbacks,
+           shortSize: SHORT_CACHE.size, shortHits, shortMisses };
 }
-export function chunkCacheClear() { CHUNK_CACHE.clear(); chunkHits = 0; chunkMisses = 0; chunkFallbacks = 0; }
+export function chunkCacheClear() {
+  CHUNK_CACHE.clear(); chunkHits = 0; chunkMisses = 0; chunkFallbacks = 0;
+  SHORT_CACHE.clear(); shortHits = 0; shortMisses = 0;
+}
 
 /** the unaccelerated reference implementation */
 export function countTokensExact(text: string, enc: EncodingName): number {
@@ -170,7 +197,16 @@ export function countTokensExact(text: string, enc: EncodingName): number {
 export function countTokens(text: string, enc: EncodingName): number {
   if (text === '') return 0;
   // very short strings are not worth the regex
-  if (text.length < 24) return countTokensExact(text, enc);
+  if (text.length < 24) {
+    const k = enc + '\u0000' + text;
+    const v = SHORT_CACHE.get(k);
+    if (v !== undefined) { shortHits++; return v; }
+    shortMisses++;
+    const t = countTokensExact(text, enc);
+    if (SHORT_CACHE.size >= SHORT_CACHE_MAX) SHORT_CACHE.clear();
+    SHORT_CACHE.set(k, t);
+    return t;
+  }
   const re = PRETOK[enc];
   re.lastIndex = 0;
   const cs = text.match(re);

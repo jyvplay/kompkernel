@@ -1,0 +1,3 @@
+{"lane":"dump.sql","raw":1795,"synkope":668,"tachos":668,"delta":0,"winner":"parent","rules":47,"ms":88430,"exact":true}
+{"lane":"find-listing.txt","raw":3997,"synkope":1281,"tachos":1281,"delta":0,"winner":"parent","rules":59,"ms":104886,"exact":true}
+{"lane":"git-log-fuller.txt","raw":143,"synkope":143,"tachos":143,"delta":0,"winner":"parent","rules":0,"ms":4080,"exact":true}

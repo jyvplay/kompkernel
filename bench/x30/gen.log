@@ -1,0 +1,14 @@
+prose-01.txt   bytes  3370 raw  785 msg  745 ret 94.9% rules  31 ms  23894 parent polytropos
+prose-02.txt   bytes  2766 raw  879 msg  795 ret 90.4% rules  36 ms  24748 parent polytropos
+prose-03.txt   bytes  3299 raw 1003 msg  843 ret 84.0% rules  41 ms  48532 parent polytropos
+prose-04.txt   bytes  3263 raw  877 msg  840 ret 95.8% rules  30 ms  21488 parent polytropos
+prose-05.txt   bytes  3347 raw 1070 msg  926 ret 86.5% rules  38 ms  80521 parent polytropos
+prose-06.txt   bytes  2975 raw  926 msg  854 ret 92.2% rules  27 ms  26334 parent polytropos
+prose-07.txt   bytes  3357 raw  861 msg  819 ret 95.1% rules  34 ms  25958 parent polytropos
+prose-08.txt   bytes  3301 raw  953 msg  889 ret 93.3% rules  39 ms  41707 parent lakonikos
+prose-09.txt   bytes  2936 raw  762 msg  762 ret 100.0% rules   0 ms  24378 parent identity
+prose-10.txt   bytes  3256 raw 1128 msg  990 ret 87.8% rules  32 ms  29726 parent polytropos
+prose-11.txt   bytes  3333 raw  962 msg  804 ret 83.6% rules  39 ms  63107 parent polytropos
+prose-12.txt   bytes  3267 raw  761 msg  761 ret 100.0% rules   0 ms  25569 parent identity
+TOTAL raw 10967 msg 10028 retention 91.44%
+ALLDONE

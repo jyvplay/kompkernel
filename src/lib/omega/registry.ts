@@ -119,6 +119,7 @@ import { symplokeEncode, symplokeDecode } from './symploke';
 import { metathesisEncode, metathesisDecode } from './metathesis';
 import { syntomosEncode, syntomosDecode } from './syntomos';
 import { synkopeEncode, synkopeDecode } from './synkope';
+import { tachosEncode, tachosDecode } from './tachos';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -405,6 +406,14 @@ export function codecEntries(): Entry[] {
         const r6 = synkopeEncode(t, enc);
         const decoded6 = synkopeDecode(r6.wire, { stats: r6.stats, order: r6.order, undo: r6.parent === 'identity' ? (w: string) => w : chironDecode });
         return { output: r6.wire, decoded: decoded6, oneChat: r6.messageTokens, note: `parent=${r6.parent}; rungs=[${r6.rungs.join(' ')}]; rules=${r6.rules}; contract ${r6.parentContractTokens}->${r6.messageTokens - r6.wireTokens} tok; msg ${r6.metathesisMessageTokens}->${r6.messageTokens}` };
+      },
+    },
+    {
+      key: 'tachos', label: 'τάχος TACHOS (Speed is the missing metric, and the fixed-cost threshold fallacy is the missing selection rule — X30. Two independent contributions. FIRST, speed. Instrumenting the tokenizer on a 3.4 KB prose encode showed 2,240,610 countTokens calls of which 2,190,308 were for strings under 24 characters and therefore took the early return that bypasses the chunk cache entirely; those short calls were 14.8 s of a 28.8 s encode, and only 98,806 of them were distinct, so the fast path was 95.5 percent redundant work. An exact memo keyed by the full string plus the encoding, which can only change timing and never a number, takes countTokens from 18.9 s to 5.6 s and the whole encode from 25.6 s to 13.8 s with a byte-identical message. A 25 second encode is not usable in everyday work and a 14 second one is merely slow, so this is the part of X30 that is a large win for a real user. SECOND, selection. The contract is a fixed tax of about 17 tokens paid once per message no matter how many rules the tape holds, so a greedy that tests each candidate against the current total demands that the FIRST rule alone retire the whole tax, and if the best single rule saves 5 tokens while five rules would save 25 it rejects rule one and never reaches the rest. This is measured, not hypothetical: on two fresh out-of-sample prose samples the priced greedy accepts zero rules and ships identity at 100 percent retention, while the same search with the tax waived finds 10 and 8 rules and 15 to 19 tokens of real redundancy. TACHOS therefore runs a second arm under a different objective, accepting any rule whose marginal wire gain is positive and only pricing the finished message at the end, and keeps whichever message is shortest. The arm is built from raw text with its own flat shape-free contract, because the parent contract describes the parent digit-shaped wire and borrowing it would state digit rules that do not apply, which is the same failure class as the X28 shape-clause deletion. Identity and the parent are both retained as candidates so TACHOS is monotone against SYNKOPE by construction. Verified byte-exact on all 12 fresh prose samples and it converts the two zero-compression lanes from no compression to some, which is the honest size of the win: the compression is small and the speed is the headline.)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => {
+        const r7 = tachosEncode(t, enc);
+        const decoded7 = tachosDecode(r7.wire, { stats: r7.stats, order: r7.order, undo: r7.parent === 'identity' ? (w: string) => w : chironDecode });
+        return { output: r7.wire, decoded: decoded7, oneChat: r7.messageTokens, note: `parent=${r7.parent}; winner=${r7.winner}; rules=${r7.rules}; bootstrapRules=${r7.bootstrapRules}; arms=${r7.arms.map(a => a.id + ':' + a.tokens).join(' ')}` };
       },
     },
     {

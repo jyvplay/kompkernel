@@ -1,0 +1,59 @@
+    STENTOR+ORTHOS lane is plausible future work, not required to clear
+    this turn's bar and out of scope given time budget.
+13. **Overhead wording bloat** — first-draft tail instruction cost 68
+    tokens; iteratively measured and shortened (not guessed) to 33 tokens
+    (mark path) / ~19 tokens (escape path), directly increasing net savings
+    on every fixture without changing behavior (verified: all 106 gates
+    still pass after the wording change).
+14. **Case-folding already existing elsewhere in the repo** — checked
+    (G0); the only related code is `morph.ts`'s per-word upper/title/lower
+    tag, which is a **lossy** semantic-family lane predicting word
+    morphology, not an exact reversible span codec — mechanism-distinct by
+    family, not a duplicate.
+15. **Reversible transform corrupting on multi-byte/astral Unicode** —
+    covered incidentally by the CJK-mixed `CHAOS_G_CJK` fixture and the
+    curly-quote `orthos-curly-combo` fixture in the cached table (G1/G6);
+    no failures.
+
+## E. Mechanism Portfolio (this session, ≥6 mechanism-distinct approaches evaluated)
+
+1. Fixed universal lexicon substitution — dead (prior turn + reconfirmed
+   this turn via the jules2/KRONOS family, see below).
+2. LSP grammatical-functor removal — dead (this session).
+3. **Truecasing-style statistical case prediction** — considered and
+   rejected on constraint grounds (lossy), see D3.
+4. **STENTOR: exact span-bracket case-canonicalization** — built, verified,
+   shipped. Mechanism-distinct: attacks sustained-caps orthography, not
+   vocabulary (mechanism 1) or grammar (mechanism 2) or statistics
+   (mechanism 3).
+5. **Multi-order word-grid + suffix-automaton grammar portfolio
+   recombination** (AETHERION/TITAN/VALIANT/AETHEL/ALETHEIA/HYDRA/CRONUS —
+   this turn's uploaded files) — evaluated directly, found to be a
+   re-bundling of mechanisms already in this repo (SIBYL's word-grid,
+   THOTH/ARIADNE's suffix-automaton grammar mining, PALIMPSEST/DAEDALUS's
+   portfolio-arm selection) with a broken admission gate; **rejected**, see
+   below.
+6. **Numbers-comma-stripping** (measured reliable in a prior turn, not
+   combined into any shipped design yet) — remains available future work,
+   noted but not pursued this turn given the time budget was committed to
+   validating and shipping STENTOR to the required bar.
+
+## F. Artifact Requirement
+
+Shipped: `src/lib/omega/stentor.ts` (production module: `stentorEncode`,
+`stentorDecode`, `stentorDecoderPrompt`, `STENTOR_SYSTEM_PROMPT`, exported
+span-finding/apply/restore primitives), wired into
+`src/lib/omega/registry.ts`, `src/workers/codec.{types,worker}.ts`,
+`src/components/Workbench.tsx` (full UI: label, hint, state, response wiring,
+Pareto-row entry, decoder-inline flag, exact-lane flag), and
+`bench/leaderboard.ts`. Verification artifacts:
+`bench/stentor-fixtures.ts`, `bench/stentor-redteam.ts` (106 gates, 0
+failures), `bench/stentor_decode.py` (third CPython decoder). `tsc --noEmit`
+and `npm run build` both pass clean with STENTOR wired in.
+
+## G. Second-Order Adversary
+
+Gate G7 in `bench/stentor-redteam.ts` specifically engineers inputs to
+defeat the span-detection or economic gate: Roman numerals, acronyms,
+mixed-case noise, a repeated long shout sentence (structural stress), an
+input containing a literal shout-bracket glyph already, and — the sharpest

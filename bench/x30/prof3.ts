@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import { synkopeEncode } from '@/lib/omega/synkope';
+import { CT_STATS, chunkCacheStats, shortDistinct } from '@/lib/omega/bpe';
+const enc='o200k_base' as any;
+const t=fs.readFileSync('bench/holdout-work/kb-article.txt','utf8');
+const t0=Date.now(); const r:any=synkopeEncode(t,enc); const ms=Date.now()-t0;
+console.log('msg',r.messageTokens,'total ms',ms);
+console.log('countTokens calls', CT_STATS.calls, '| total chars fed', CT_STATS.chars, '| ms in countTokens', CT_STATS.ms.toFixed(0), '('+(100*CT_STATS.ms/ms).toFixed(1)+'% of encode)');
+console.log('  short(<24) calls', CT_STATS.short, 'ms', CT_STATS.shortMs.toFixed(0));
+console.log('  fallback calls', CT_STATS.fb, 'ms', CT_STATS.fbMs.toFixed(0));
+console.log('  chunk cache', JSON.stringify(chunkCacheStats()));
+console.log('  DISTINCT short strings', shortDistinct(), '=> memo hit rate would be', (100*(1-shortDistinct()/CT_STATS.short)).toFixed(2)+'%');
+const outside = ms - CT_STATS.ms;
+console.log('ms OUTSIDE countTokens', outside.toFixed(0), '('+(100*outside/ms).toFixed(1)+'%)');

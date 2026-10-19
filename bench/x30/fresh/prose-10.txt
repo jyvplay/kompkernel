@@ -1,0 +1,26 @@
+10. **Free-dictionary win (as before).** Claim `Σ top5` win without `t+1` — false positive.
+11. **Deadline-ignoring Δ.** Run `glossia(deltaText)` 3 s without budget — `meeting` worker would blow 26 s if every file ran delta; `remaining<800` gate skips.
+12. **Short-text Δ.** `|x|<120` — `findBlocks` ∅, correctly declines.
+13. **Few-shot contract.** Put Δ contract in system prompt — violates single-chat, not billed.
+14. **Overlap-ignoring delta.** Count `+0.07` delta as 2 tok but `0.07` 4 tok vs `74.13` 3 tok loss — per-value worse, need whole-tape win.
+15. **Hierarchical delta.** Claim `ΔΔ` (delta-of-delta) saves without billing second Δ — `0.07` delta-of-delta not counted.
+
+All 15 caught by `eidos-redteam.ts` (witness, totality, `M` gate, contract billing, deadline, `avgAbs`/`|{Δ}|` gates) and §5.
+
+### E. Mechanism portfolio — 6+ genuinely mechanism-distinct branches
+
+*Construction / artifact / proved / gap / falsification / local-equiv* per Tier 5.
+
+| # | Branch (distinct mechanism) | Construction | Artifact | Proved | Gap bridged | Falsification | Local equiv |
+|---|-----------------------------|--------------|----------|--------|-------------|---------------|-------------|
+| 1 | **TACHYS fast cert** `Σ top5<24` | `tachys.ts:42–118` | `tachys-report.md` §3, 11/11 | 0 FP on 43 holdout, <2 ms | latency 47–127× | synthetic overlap fails → stalled | `M_T=M_C` when cert fails |
+| 2 | **KIONES transpose** `◆…◇` | `kiones.ts:24–147` + `hydra.ts:56–143` | `kiones-report.md`, `hydra 455` | witness every block | `vix 389 below best` | `aapl` declines 1713>1690 | `M_H=M_T` when no block |
+| 3 | **MOSAIC grammar-aware split** `S<tag><region>` 802 | `mosaic.ts:24–863` | `glossia win 23/26/15` | `mosaicDecode==x` every region | `component 23`, `paper 26`, `pl-kb 15` hybrid | prose-only no lane → declines | `M_G=M_H` when `M_M≥M_H` |
+| 4 | **Two-part MDL with time Lagrangian (grammar)** | `glossia.ts:94–210` `min(M_T,M_H,M_M)` | `glossia-redteam 37/37` | `M_G≤M_H≤M_T` by inclusion | frontier connected (time×tokens×grammar) | `MOSAIC_MAX` gate skips | `raw` when all `M≥|x|` |
+| 5 | **EIDOS delta-timestamp** `ΔT` `t_n=t_{n-1}+Δ` pooled `+N` | `eidos.ts:89–163` `ΔT\n+glossia(deltaText)` | `meeting 15`, `eidos-redteam 34/34` | `eidosDecode==x` via cumulative add, `avgAbs<600` `|{Δ}|≤10` | meeting 15 ops temporal, Gorilla 100× backdrop | random timestamps `|{Δ}|>10` → declines to `M_G` | `M_E=M_G` when no `ΔT` |
+| 6 | **EIDOS delta-CSV** `ΔC` `v_n=v_{n-1}+Δ` | `eidos.ts:168–235` `ΔC<sep>\nbase\ndeltas\n∇` | `eidos.ts` ΔC arm (not `>few` on current holdout, correctly declines) | `reconstructDeltaCSV` exact, witness | Pcodec/Gorilla backdrop, `aapl` per-value worse but whole-tape | `avgAbs>1000` or `|{Δ}|>20` → declines | `M_E=M_G` when no `ΔC` |
+| 7 | **Lean-witnessed exactness (700+ proofs backdrop)** | `eidosDecode∘glossiaDecode∘…` total decoders | `eidos-redteam` G, `tsc` 5.9.3, `vite` 207 | `decode(encode)==x` on 34/34 + 43 holdout; 42% Lean gap cited | 0 silent corruptions | malformed `§`/`◆`/`S`/`Δ` → identity | `raw` identity witness |
+
+Branch-local proof sketches in `src/lib/omega/*` headers; per-branch artifacts committed under `src/lib/omega/` + `bench/`.
+
+### F. Per-branch artifact (this repo, committed)
