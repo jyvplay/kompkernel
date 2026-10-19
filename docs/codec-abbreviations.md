@@ -840,6 +840,27 @@ every count here is an o200k_base count) and **arXiv 2505.06297** (LLM +
 arithmetic coding concedes in §4.4 that LLM inference is not deterministic, so
 the losslessness guarantee fails).
 
+**External corroboration — first out-of-repo evidence at our ratios.**
+**arXiv 2604.13066** [1](https://arxiv.org/abs/2604.13066) (Amazon, 2026-03-19)
+is the first external paper found that does what this programme does: replace
+repeated subsequences with meta-tokens, ship the dictionary in the prompt, and
+rely on in-context learning alone. Measured on LogHub 2.0 with Claude 3.7
+Sonnet: **exact match > 0.99 (template-based) and Levenshtein similarity > 0.91
+(algorithmic) at 60-80% compression**. Our LogHub-family lane
+(`openstack-loghub-26.log`) retains 23.7%, i.e. **76.3% compression — inside
+their validated band**. Caveat that matters: their "lossless" is exact-match on a
+decompression proxy, not byte-identical round trip, and their algorithmic track
+is ~9% of characters wrong. It corroborates **feasibility at our ratios**, not
+the correctness of our wires.
+
+Also new and previously uncited here: **arXiv 2601.17684** (Huffman-like
+mismatch-tolerant coder, relaxes PMATIC), **arXiv 2607.24192** (thresholded
+symbol ranking; requires a deterministic predictor), **arXiv 2608.11249**
+(diffusion LMs — the encoded-position set becomes a design choice; the most
+structurally novel mechanism found this turn but unusable with a frozen chat
+decoder), **arXiv 2601.17768** and **arXiv 2609.25624** (attack LLM inference
+non-determinism directly).
+
 ### X31 negative space (measured, all rejected)
 
 1. **Memoizing the glyph-assignment evaluation — DEAD.** `runCostPrepared` is
