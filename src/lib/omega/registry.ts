@@ -118,6 +118,7 @@ import { aetosEncode, aetosDecode } from './aetos';
 import { symplokeEncode, symplokeDecode } from './symploke';
 import { metathesisEncode, metathesisDecode } from './metathesis';
 import { syntomosEncode, syntomosDecode } from './syntomos';
+import { synkopeEncode, synkopeDecode } from './synkope';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -396,6 +397,14 @@ export function codecEntries(): Entry[] {
         const r5 = syntomosEncode(t, enc);
         const decoded5 = syntomosDecode(r5.wire, { stats: r5.stats, order: r5.order, undo: r5.parent === 'identity' ? (w: string) => w : chironDecode });
         return { output: r5.wire, decoded: decoded5, oneChat: r5.messageTokens, note: `parent=${r5.parent}; rung=${r5.rung}; nested=${r5.nested}; denested=${r5.denested}; rules=${r5.rules}; msg ${r5.altMessageTokens}->${r5.messageTokens}` };
+      },
+    },
+    {
+      key: 'synkope', label: 'συγκοπή SYNKOPE (Overhead is the binding term, and the shape clause is the only part of it the tokenizer charges for — X29. X29 opened by attacking the one-token barrier five separate ways and every one of them came back empty: inter-glyph gap rules found 135 distinct gaps with a single repeat and a best delta of plus 2; injecting candidate rules scored against the true tokenizer found zero improving candidates on any lane; format-native references that lean on pretraining gravity, the Makefile and LaTeX idea, cost plus 1.00 token for every wrapper and blow a 3-glyph run up from about 1.75 tokens to 6.00; glyph-script choice turned out to be driven by pool size rather than by script, since Hebrew only wins because it has 22 characters and not 212; and glyph reassignment hill-climbing over 2862 swaps bought exactly 1 token. The wire is therefore exhausted and the only term left is the contract, which is paid once per message and decides whether a short message can be compressed at all. That is not a figure of speech: with the contract removed a naive extractor gets git-log-fuller from 143 to 130 and meeting-transcript from 472 to 385, which beats the full stack, and with the contract restored every one of those gains is eaten and the lane reverts to identity. The fixed cost is the binding constraint, not the grammar. The obvious move is then to shorten the instruction, and that is where the second negative lives: seven different contract heads measured against the four real tails the parent emits all cost the same number of tokens, because BPE merges put the instruct wording on a flat plateau. Rephrasing buys nothing. The one place that is NOT on that plateau is the shape clause, since it is the only stretch built from low-frequency material such as digit templates and the sentinel rule, and compressing it is worth 2 tokens on dump.sql. A cheaper 8-token variant exists and is deliberately NOT shipped, because it drops the fact that only caret-marked digit runs are reformatted, which is precisely the bug class that made X28 forbid re-synthesising the clause. SYNKOPE therefore applies literal substring rewrites one at a time, keeps each only if it strictly lowers the whole message, and fails safe by skipping any rung whose target text is absent. Decode is unchanged SYMPLOKE and the wire is byte-identical to SYNTOMOS, so the change is monotone against SYNTOMOS by construction and introduces no new syntax.)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => {
+        const r6 = synkopeEncode(t, enc);
+        const decoded6 = synkopeDecode(r6.wire, { stats: r6.stats, order: r6.order, undo: r6.parent === 'identity' ? (w: string) => w : chironDecode });
+        return { output: r6.wire, decoded: decoded6, oneChat: r6.messageTokens, note: `parent=${r6.parent}; rungs=[${r6.rungs.join(' ')}]; rules=${r6.rules}; contract ${r6.parentContractTokens}->${r6.messageTokens - r6.wireTokens} tok; msg ${r6.metathesisMessageTokens}->${r6.messageTokens}` };
       },
     },
     {

@@ -2306,3 +2306,85 @@ and ops logs compress far better than prose, and the reason is now explained by
 this turn's sweep, so the two right-hand columns are directly comparable; the
 SYMPLOKE column is carried over from X25/X26 archives and is subject to the
 load drift of I.1.
+
+# X29 — SYNKOPE
+
+**Result: the frontier did not move materially. SYNKOPE is −2 tokens on one lane and
+0 on the other 27. This section is primarily a record of what was tried and rejected.**
+
+X29 is the first turn in this programme that failed to move the frontier by more than a
+rounding error. That is itself a measurement, and it is reported as such. Nine independent
+attacks were run; eight returned a null and one returned −2 on a single lane.
+
+## A. Frontier restated
+
+    raw 62954 -> SYMPLOKE 29492 -> METATHESIS 29172 -> SYNTOMOS 29091 -> SYNKOPE 29089
+
+SYNKOPE 29089 vs SYNTOMOS 29091: **−2 total**, on 1 of 28 lanes, 0 regressions, byte-exact
+everywhere. This does **not** meet the standing bar ("pareto-superior by more than a few
+tokens"), and is reported as a failure to meet it rather than as a win.
+
+## B. The eight nulls (all with receipts)
+
+| # | Attack | Probe | Result |
+|---|--------|-------|--------|
+| B.1 | Inter-glyph gap rules — exploit the loophole that a 1-token gap rule merges two isolated glyphs into a run | `bench/x29/gaps.ts` | kb-article: 135 distinct gaps, **1** repeat ≥2, best delta **+2**. ls-full-iso: 60 gaps, 2 repeats, **+2**. Gaps are essentially all unique — the constraint is repeat scarcity, not cost. |
+| B.2 | Rule injection scored against the **true** tokenizer (not a cost model), iterating to a fixed point | `bench/x29/inject.ts` | **Zero improving candidates** on kb-article and ls-full-iso at round 0. The residual is genuinely exhausted. |
+| B.3 | Format-native references — lean on pretraining gravity (Makefile `$(x)`, LaTeX `\x`, shell `$x`) so the format carries the semantics and the contract can shrink | `bench/x29/wrap.ts` | Every wrapper costs **+1.00** token on every script tested. A 3-glyph run goes **1.75 → 6.00** tokens. **Decisively dead**: bare glyphs are optimal. |
+| B.4 | Glyph-script choice — find a script whose runs tokenize cheaper | `bench/x29/script.ts` | Hebrew is best (3-gram 2.201 vs Cyrillic 2.371) **only because its pool is 22 glyphs**. Run quality is driven by **pool size**, not script. sp500's 212-glyph pool is what costs it (2.7% of bigrams are 1 token, vs 45% at 27 glyphs). |
+| B.5 | Glyph reassignment hill-climb | `bench/x29/reassign.ts` | 2862 swaps over 27 glyphs: **−1 token** on kb-article and ls-full-iso. Saturated. |
+| B.6 | Rule selection on the compressed body | `bench/x29/anatomy.ts` | kb-article's literal remainder is 2343 chars → 391 tokens = **6.0 chars/token**, denser than English baseline (~4.0). Everything removable has been removed. |
+| B.7 | Contract rephrasing | `bench/x29/ctok.ts`, `ctok2.ts`, `ctok3.ts`, `ctok4.ts` | **All 7 candidate heads cost the same** against all 4 real tails (17/17/17, 25/25/25, 43/43/43). BPE merges put instruct wording on a **flat plateau**. Rephrasing buys nothing. |
+| B.8 | Short-message micro arm | `bench/x29/micro.ts` | With the contract removed the extractor gets git-log-fuller 143→130 and meeting-transcript 472→**385** (beating the full stack's 389). With the contract restored **every gain is eaten** and the lane reverts to identity. The fixed cost, not the grammar, is the binding constraint — and the contract cannot be lowered (B.7). |
+
+## C. The one real finding
+
+**The contract is the binding term on short messages, and it is not compressible.**
+
+B.8 is the important negative. It says the stack's two worst lanes (git-log-fuller 100%
+retention, llm-answer 93%) are not failing because the grammar is weak. They are failing
+because a **fixed ~17-token tax** exceeds everything a dictionary can recover from a short
+input. And B.7 says that tax sits on a BPE plateau, so it cannot be paraphrased away.
+
+Together these close the short-message regime for this architecture. That is the honest
+headline of X29.
+
+## D. What SYNKOPE does ship
+
+The shape clause is the **only** stretch of the contract that is not on the BPE plateau,
+because it is the only part built from low-frequency material (digit templates, the sentinel
+rule). SYNKOPE applies literal substring rewrites to it, one at a time, keeping each only if
+it strictly lowers the whole message.
+
+    OLD  ...and 8 digits become YYYY-MM-DD, 4 digits become dd:dd, where ^ before digits
+         marks them; drop it; print result only.                              (43 tokens)
+    NEW  ...and 8 digits become YYYY-MM-DD, 4 digits become dd:dd, ^ marks those digits
+         so drop it; print result only.                                       (41 tokens)
+
+**A cheaper variant is deliberately not shipped.** `SYNKOPE_UNSAFE_LADDER` contains
+`dropSentinel`, which deletes the clause entire and reaches **35 tokens (−8)**. It is not in
+the default ladder because it removes the fact that only `^`-marked digit runs are
+reformatted — a reader that expands every 8-digit run produces the wrong bytes. This is
+exactly the bug class X28 documented (the shape-clause deletion that reported a fake −28).
+It is kept in the source so the measurement is reproducible and so nobody re-derives it.
+
+## E. Verification
+
+- `npx tsc --noEmit` — clean.
+- Registered in `registry.ts` immediately after `syntomos`; 178+ entries.
+- **Independent from-spec decoder** `bench/x28/selfdecode.py`, handed nothing but the
+  message: **4/4 byte-exact** — kb-article (shapes=0), dump.sql (shapes=**2**), git-log-iso
+  (shapes=1), csv-8 (shapes=0). The `shapes=2` on dump.sql is the load-bearing receipt: it
+  proves the compacted clause still states the digit rules.
+- Per-lane: dump.sql **−2**, kb-article 0, git-log-iso 0, csv-8 0, ls-full-iso 0,
+  meeting-transcript 0, vix-daily-1990 0.
+
+## F. Honest assessment
+
+SYNKOPE is a real, shipped, byte-exact, repo-integrated codec, but its gain is 2 tokens on
+one lane and it **does not** meet the bar the user set. X29's actual contribution is the map
+of the nine nulls: the wire is exhausted, the contract is on a plateau, and the short-message
+regime is closed for this architecture. Any further gain has to come from a mechanism that is
+not dictionary-on-phrases and not instruct-wording — and the only candidate identified is
+predictive (model-knows-English) coding, which cannot be made byte-exact without running the
+model, which no turn in this programme has ever been able to do.

@@ -705,6 +705,29 @@ multi-token candidates on kb-article, and why all 27 of that lane's rules have
 this stack retains 76–96%) without contradicting it: the redundancy is real, but
 an LLM-executable *dictionary* cannot reach it.
 
+## συγκοπή SYNKOPE (X29)
+
+**What it is.** SYNTOMOS with the shape clause of the contract compacted. The wire is
+byte-identical to SYNTOMOS; only the instruction text changes.
+
+**Greedy?** No. Rungs are applied one at a time and each is kept only if it strictly lowers
+the token count of the whole message, so the result is monotone against SYNTOMOS by
+construction.
+
+**Time/CPU bound?** The rewrite is O(len(contract)) with no search of its own. The encode is
+SYNTOMOS's, which is budget-bounded by POLYTROPOS. SYNKOPE adds no search and therefore
+cannot change the wire or the encode time.
+
+**Honest citation.** None. The substring contractions are plain English editing. The finding
+that the contract is the binding term on short messages is ours (`bench/x29/micro.ts`). The
+nearest external framing is arXiv 2607.06145 ("Prompting Complexity", the shortest plausible
+prompt s.t. f deterministically outputs t), which is the right yardstick for this object and
+which provably has no model-independent invariance theorem — so the token counts are
+o200k_base counts, not universal ones.
+
+**Result.** −2 tokens on dump.sql, 0 on the other 27 lanes. Does not meet the standing bar.
+See `docs/codecs.md` X29 for the eight null results that are the turn's real content.
+
 ## Codecs that do not satisfy the measurement contract (X21 audit)
 
 - **`oracle`** — hardcodes the 20 holdout citations in `ORACLE_MAP` and declares it "not counted
