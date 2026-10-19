@@ -245,6 +245,21 @@ export interface SibylOptions extends AriadneOptions {
   capGrid?: number[];
   /** raise the glyph-script trial budget above the internal per-site default */
   minScriptTries?: number;
+  /**
+   * Contract tokens the rule search should assume it must retire.
+   *
+   * PRICING CONTRACT (X32). sibyl prices every candidate grammar as
+   * `countTokens(chironDecoderPrompt(wire))`, i.e. the CHIRON decoder prompt,
+   * because at this depth that is the only contract that exists. But the
+   * message that is actually SHIPPED carries the SYNTOMOS/SYMPLOKE contract,
+   * which is far cheaper. Measured on four lanes (bench/x32/tax.ts) the search
+   * pays 38-40 tokens while the shipped contract costs 17: a gap of 21-23
+   * tokens on every lane. The greedy therefore rejects every rule set whose
+   * saving lies in that 22-token band, which is precisely the band that
+   * decides short and medium messages. Passing the realized value makes the
+   * search price what it will actually pay.
+   */
+  contractTax?: number;
 }
 
 function rawResult(text: string, enc: EncodingName, started: number): SibylResult {
@@ -340,7 +355,11 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
     } catch (e) { out = null; if (process.env.OMEGA_TRACE) console.error('sibyl renderBest', e); }
     if (!out) return null;
     if (chironDecode(out.wire) !== text) { if (process.env.OMEGA_TRACE) console.error('sibyl renderBest: decode mismatch'); return null; }
-    const M = countTokens(chironDecoderPrompt(out.wire), enc);
+    const CT = process.env.OMEGA_CONTRACT_TAX ?? '';
+    const ct = options.contractTax ?? (CT === '' ? undefined : Number(CT));
+    const M = ct !== undefined && Number.isFinite(ct)
+      ? out.tokens + ct
+      : countTokens(chironDecoderPrompt(out.wire), enc);
     if (process.env.OMEGA_TRACE) console.error(`sibyl eval words=${words} cap=${cap} blocks=${blocks} probeScale=${probeScale} tries=${tries} -> M=${M} wire=${out.tokens} ranked=${prepared.map(p => p.ranked.length).join('/')}`);
     const c: Cand = { out, M, words, cap, blocks };
     cands.push(c);

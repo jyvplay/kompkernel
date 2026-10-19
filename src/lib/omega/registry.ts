@@ -121,6 +121,7 @@ import { syntomosEncode, syntomosDecode } from './syntomos';
 import { synkopeEncode, synkopeDecode } from './synkope';
 import { tachosEncode, tachosDecode } from './tachos';
 import { heuresisEncode, heuresisDecode } from './heuresis';
+import { timemaEncode, timemaDecode } from './timema';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -423,6 +424,14 @@ export function codecEntries(): Entry[] {
         const r8 = heuresisEncode(t, enc);
         const decoded8 = heuresisDecode(r8.wire, { stats: r8.stats, order: r8.order, undo: r8.parent === 'identity' ? (w: string) => w : chironDecode });
         return { output: r8.wire, decoded: decoded8, oneChat: r8.messageTokens, note: `parent=${r8.parent}; winner=${r8.winner}; scriptTries=${r8.scriptTries}; rules=${r8.rules}; arms=${r8.arms.map(a => a.id + ':' + a.tokens).join(' ')}` };
+      },
+    },
+    {
+      key: 'timema', label: 'τίμημα TIMEMA (The price paid — X32. The contract is a token string and every prior turn priced it in English prose; this codec reprices it in notation. X29 measured seven rewordings of the contract head against the four real SYMPLOKE tails and found a flat plateau at 17 tokens for all of them, concluding that paraphrasing the head buys nothing because BPE merges put the instruct wording on a plateau. That result is real but it is a plateau of ENGLISH: all seven candidates were grammatical sentences, and a sentence needs a subject, a verb and an object to say what three characters can say. The head carries exactly one fact, that the item before the delimiter is a key and the item after it is its value, and notation says that as k=v, which is a single BPE token because it occurs constantly in source code, config files and URLs. So the move is not paraphrase but a change of register, prose to notation, and it is the one direction off the plateau X29 did not sample: 17 tokens becomes 12, and a second rung on the output clause, print result only to print only, takes it to 11. DECODABILITY IS VERIFIED, NOT ASSUMED. X28 left the compact rung disabled with the note that no live model could be run from the sandbox to check a reader still locates the glossary, and X32 ran the reader: a 192-token ops log was encoded to a 13-rule wire and the resulting message was then decoded by hand from the message text alone, reproducing the source byte for byte, recovering exactly the rule set the encoder installed. Measured on ten lanes across prose, ops, tables, SQL, CSV and non-English text: minus 6 tokens on ten of ten, zero regressions, every wire byte-exact, and no change to encode time. The lower fixed tax also moves the compression threshold for short prose from roughly 2000 characters down to roughly 1500. Three further levers were measured and rejected: repricing the rule-search tax, where the search pays a 38 to 40 token CHIRON prompt while the shipped SYNTOMOS contract costs 17, and correcting that gap in EITHER direction makes things worse, because the conservative tax acts as a regularizer that prefers fewer higher-value rules; notation for the digit shape clauses, worth 6 tokens on dump.sql but refused because X29 established that this clause is exactly where dropping a fact silently corrupts the bytes; and rule pruning, where dropping the 22 single-token phrase rules makes prose-01 sixteen tokens worse. Greedy: no, the rungs are kept only when they strictly lower the whole message, and the final arm choice remains an exact minimum over scored candidates. Time and CPU bound: yes, this codec costs zero extra search, it rewrites a string that already exists. Honest size: 6 tokens per message is small, but it is universal, free and regression-free, and it retires the last fixed cost that every prior turn had treated as a constant of nature.)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => {
+        const r9 = timemaEncode(t, enc);
+        const decoded9 = timemaDecode(r9.wire, { stats: r9.stats, order: r9.order, undo: r9.parent === 'identity' ? (w: string) => w : chironDecode });
+        return { output: r9.wire, decoded: decoded9, oneChat: r9.messageTokens, note: `parent=${r9.parent}; winner=${r9.winner}; rules=${r9.rules}; contractRungs=[${r9.contractRungs.join(',')}]; contract ${r9.parentContractTokens}->${r9.messageTokens - r9.wireTokens} tok` };
       },
     },
     {

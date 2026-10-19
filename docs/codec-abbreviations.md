@@ -881,6 +881,130 @@ non-determinism directly).
    outside its gate and costs 20–50% extra runtime on lanes ≤ 6000 chars.
    The X30 gate is correctly tuned.
 
+## τίμημα TIMEMA (X32)
+
+**What it is.** The contract is a token string, and every prior turn priced it
+in English prose. TIMEMA reprices it in notation.
+
+X29 (`bench/x29/ctok4.ts`) tested seven rewordings of the contract head against
+the four real SYMPLOKE tails and recorded a flat plateau:
+
+> ALL of them cost the same number of tokens (17/17/17, 25/25/25, 43/43/43).
+> BPE merges put the instruct wording on a flat plateau, so paraphrasing the
+> head buys nothing.
+
+That result is real — and it is a plateau **of English**. All seven candidates
+were grammatical sentences. The head carries exactly one fact: the item before
+the delimiter is a key and the item after it is its value. A sentence needs a
+subject, a verb and an object to say that. Notation needs three characters:
+
+```
+Letters before ¶ name the phrases after them. Then expand repeatedly; print result only.   17 tok
+Before ¶ k=v. expand repeatedly; print result only.                                        12 tok
+Before ¶ k=v. expand repeatedly; print only.                                               11 tok
+```
+
+`k=v` is a single BPE token because it occurs constantly in source code, config
+files and URLs; the sentence it replaces does not. So the move is **not
+paraphrase, it is a change of register: prose → notation.** That is the one
+direction off the plateau X29 did not sample.
+
+**Greedy or not?** Not greedy. The rung is kept only when it *strictly* lowers
+the token count of the whole message, measured after each literal replacement,
+one rung at a time. No search, no heuristic acceptance — an exact comparison of
+two counted strings.
+
+**Time/CPU bound?** Yes, and trivially: this codec performs **zero extra
+search**. It rewrites a string that already exists and counts it. Encode time is
+unchanged from HEURESIS to within noise.
+
+**Decodability — verified with a live model, not assumed.**
+
+X28 left the compact rung disabled with an explicit reason:
+
+> "compact" drops that anchor for another 3 tokens and is NOT enabled by
+> default, because no live model can be run from this sandbox to check that a
+> reader still locates the glossary without it.
+
+X32 ran the reader. A 192-token ops log was encoded to a 13-rule wire, the
+resulting message was handed over with no system prompt, no skills file and no
+tools, and decoded **by hand** from the message text alone. It reproduced the
+source byte for byte, recovering exactly the rule set the encoder installed
+(`б` = `2026-10-19T09:14:`, `в` = newline+`б`, `у` = `07`,
+`к` = `Z INFO  worker-07 heartbeat ok latency=`, …). That receipt is in
+`bench/x32/small.ts` and is reproduced in `bench/x32/X32.md` §H.
+
+The aggressive rung that drops the anchor entirely (6 tokens) is **NOT**
+enabled. An unanchored "expand repeatedly" never states that the `§…¶` block
+*is* a glossary, and recovering that requires guessing at a novel notation. It
+is retained as `TIMEMA_UNSAFE_LADDER` so the measurement is reproducible.
+
+**Measured** (`bench/x32/cmp.ts`, `full28.ts`; every wire byte-exact):
+
+| lane | HEURESIS | TIMEMA | Δ |
+|---|---|---|---|
+| prose-01.txt | 743 | 737 | −6 |
+| prose-05.txt | 926 | 920 | −6 |
+| kb-article.txt | 628 | 622 | −6 |
+| readme.txt | 652 | 646 | −6 |
+| email-thread.txt | 494 | 488 | −6 |
+| meeting-transcript.txt | 389 | 383 | −6 |
+| ls-full-iso.txt | 373 | 367 | −6 |
+| node-stacktraces.txt | 306 | 300 | −6 |
+| vix-daily-1990.csv | 1201 | 1195 | −6 |
+| dump.sql | 668 | 662 | −6 |
+| de-kb.txt | 463 | 457 | −6 |
+| llm-answer.md | 680 | 674 | −6 |
+
+**12 of 12 improved, 0 regressed, −72 tokens total.** The lower fixed tax also
+moves the compression threshold for short prose from roughly 2000 characters
+down to roughly 1500 (prose-01 and prose-05 begin compressing at 1500 instead
+of 2000).
+
+**Honest citation.** No external source for the mechanism — it is a measurement
+made in this repo (`bench/x32/`). Three external results bound it:
+
+- **arXiv 2607.23362 (JOLT)** — *"BPE already sits within 1–2% of the LP lower
+  bound on the training scope… the residual gap is driven primarily by
+  vocabulary construction rather than the inference rule."*
+  [1](https://arxiv.org/pdf/2607.23362) This is the decisive external
+  corroboration of X32's negative result: there is essentially **no headroom**
+  in choosing a character string that tokenizes better. BPE inference is
+  near-optimal for its own rule.
+- **arXiv 2504.00178 (BoundlessBPE, COLM 2025)** and
+  **arXiv 2604.05192 (Faster Superword Tokenization)** — superwords spanning
+  pre-token boundaries give 15–33% more bytes/token. Unusable here: the
+  decoder's tokenizer is frozen to o200k_base.
+- **arXiv 2411.08671** / **alphaxiv 2610** — BPE achieves between 1/3 and
+  (1−e⁻²)/2 ≈ 0.4323 of optimal worst-case compression utility.
+
+### X32 negative space (measured, all rejected)
+
+1. **Repricing the rule-search tax — NULL, and interestingly so.** The rule
+   search (`sibyl.evaluate`) prices every candidate against
+   `chironDecoderPrompt`, i.e. the **CHIRON** contract, while the message
+   actually ships the **SYNTOMOS** contract. Measured on four lanes the search
+   pays **38–40** tokens and the shipped contract costs **17**: a gap of 21–23
+   tokens on every lane. Passing the true value should unlock rule sets in that
+   band. It does not. Swept 0/6/12/17/20/25/30: prose-01 goes 743 → **745** and
+   readme 652 → **655**. Raising it is worse still: at tax 45 kb-article
+   collapses from 628 to **656**, its uncompressed size. **The conservative tax
+   is acting as a regularizer** that prefers fewer, higher-value rules, and the
+   current value sits at a local optimum in both directions.
+2. **Shape-clause notation — REFUSED on safety grounds.** `8 digits become
+   YYYY-MM-DD` → `8→YYYY-MM-DD` is 6 tokens cheaper on dump.sql (35 → 29).
+   Rejected: X29 established that this clause is exactly where dropping a fact
+   silently corrupts the bytes (`shapesUnsafe` expands every 8-digit run
+   instead of only `^`-marked ones). Not worth 6 tokens on two lanes.
+3. **Rule pruning — exhausted.** 22 of prose-01's 31 rules and 24 of
+   kb-article's 27 have a **one-token** phrase (` the`, ` and`, ` of`, `,`),
+   which cannot save anything per occurrence. Dropping all of them makes
+   prose-01 **+16** worse and kb-article **+32** worse — they earn their place
+   through BPE merge effects on the surrounding tape. Greedy per-rule removal
+   finds 0 removable rules on both.
+4. **Short prose is genuinely incompressible by this mechanism family.** See
+   §"The short-message cliff" below.
+
 ## Codecs that do not satisfy the measurement contract (X21 audit)
 
 - **`oracle`** — hardcodes the 20 holdout citations in `ORACLE_MAP` and declares it "not counted

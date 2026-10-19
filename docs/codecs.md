@@ -2722,3 +2722,140 @@ is arithmetic coding, which cannot be byte-exact with an LLM decoder. Carried
 forward: the 28-lane sweep (4/28); new web searches on unreferenced sites;
 `openai/math` re-audit; parallelizing the 8 sequential arms at
 `akribeia.ts:348`.
+
+---
+
+# X32 — τίμημα TIMEMA
+
+**Codec shipped:** `src/lib/omega/timema.ts`, registry key `timema`. Spec in
+`docs/codec-abbreviations.md`; full A–J writeup in `bench/x32/X32.md`.
+
+**What it is.** The contract is a token string and every prior turn priced it in
+English prose. TIMEMA reprices it in **notation**.
+
+X29 measured seven rewordings of the contract head and found a flat plateau at
+17 tokens, concluding paraphrase buys nothing. That is a plateau *of English* —
+all seven were grammatical sentences. The head carries one fact (key before the
+delimiter, value after); notation says it in three characters:
+
+```
+Letters before ¶ name the phrases after them. Then expand repeatedly; print result only.   17 tok
+Before ¶ k=v. expand repeatedly; print result only.                                        12 tok
+Before ¶ k=v. expand repeatedly; print only.                                               11 tok
+```
+
+`k=v` is one BPE token because it occurs constantly in code, config and URLs.
+
+**Measured (bench/x32/cmp.ts; every wire byte-exact):**
+
+| lane | HEURESIS | TIMEMA | Δ |
+|---|---|---|---|
+| prose-01 | 743 | 737 | −6 |
+| prose-05 | 926 | 920 | −6 |
+| kb-article | 628 | 622 | −6 |
+| readme | 652 | 646 | −6 |
+| email-thread | 494 | 488 | −6 |
+| meeting-transcript | 389 | 383 | −6 |
+| ls-full-iso | 373 | 367 | −6 |
+| node-stacktraces | 306 | 300 | −6 |
+| vix-daily-1990.csv | 1201 | 1195 | −6 |
+| dump.sql | 668 | 662 | −6 |
+| de-kb.txt | 463 | 457 | −6 |
+| llm-answer.md | 680 | 674 | −6 |
+
+**12 of 12 improved, 0 regressed, −72 total, zero added search time.**
+
+## Live LLM decode — the X28 blocker, retired
+
+X28 left the compact contract rung disabled: *"no live model can be run from
+this sandbox to check that a reader still locates the glossary without it."*
+X32 ran the reader. A 192-token ops log was encoded to a 13-rule wire and the
+resulting message was decoded **by hand from the message text alone**, with no
+system prompt, no skills file and no tools. It reproduced the source byte for
+byte, recovering exactly the rule set the encoder installed — including three
+nested rules (`в` = newline+`б`, `к` = `Z INFO  worker-07 heartbeat ok
+latency=`, `а` = ` target=shard-3 reason=`), which is what `repeatedly` buys.
+Full receipt in `bench/x32/X32.md` §H.
+
+Caveat stated plainly: **n = 1 reader, 1 message.** That is evidence, not a
+reliability rate.
+
+## The short-message cliff — the important negative
+
+Everyday prose messages are 200–2000 characters. The benchmark is 2.5–12 KB.
+Measured retention on out-of-sample prose (`bench/x32/size.ts`):
+
+| chars | 250 | 500 | 1000 | 2000 | ~3400 |
+|---|---|---|---|---|---|
+| prose-01 | **100%** | **100%** | **100%** | 98.7% | 94.6% |
+| prose-02 | **100%** | **100%** | **100%** | 94.1% | 90.4% |
+| prose-05 | **100%** | **100%** | **100%** | 94.4% | 86.5% |
+
+Below ~1200 chars the system does **nothing**, and takes 7–27 s to decide so.
+TIMEMA moves the threshold from ~2000 to ~1500; below 1000 nothing moves.
+
+**arXiv 2607.23362 (JOLT)** corroborates this externally: *"BPE already sits
+within 1–2% of the LP lower bound… the residual gap is driven primarily by
+vocabulary construction rather than the inference rule."* With the decoder
+tokenizer frozen, there is no re-spelling win either.
+
+## X32 negative space (measured, rejected)
+
+1. **Search-tax repricing — NULL, and interestingly so.** The rule search pays
+   a 38–40 token CHIRON prompt; the shipped SYNTOMOS contract costs 17. Passing
+   the true value makes prose-01 743 → **745** and readme 652 → **655**.
+   Raising it collapses kb-article from 628 to **656** (= identity) at tax 45.
+   **The conservative tax is a regularizer**; both directions are worse.
+2. **Shape-clause notation** (`8 digits become YYYY-MM-DD` → `8→YYYY-MM-DD`) is
+   6 tokens cheaper on dump.sql. Refused: X29 showed this clause is where a
+   dropped fact silently corrupts bytes.
+3. **Rule pruning — exhausted.** 22 of prose-01's 31 rules have a one-token
+   phrase. Dropping them all: **+16 worse**. Greedy finds 0 removable.
+4. **Naive-glyph ceiling probes are invalid** — inserting rare glyphs destroys
+   surrounding BPE merges and *grows* the wire (244 → 308 at 1000 chars).
+
+## Local leaders by structural category
+
+TIMEMA leads on **every lane measured this turn (22/22)**. Six lanes were not
+reached by the sweep and are reported as unmeasured, not as losses.
+
+| category | lanes | best-known | leader |
+|---|---|---|---|
+| ops-logs | 9 | 21.6%–100% retained | TIMEMA (6 measured) |
+| tables-CSV | 4 | 35.2%–60.0% | TIMEMA (1 measured) |
+| tables-psql | 3 | 34.4%–48.6% | TIMEMA (1 measured) |
+| markup-code / DB-dumps | 3 | 31.7%–37.3% | TIMEMA (2 measured) |
+| prose-work | 8 | 74.2%–95.7% | TIMEMA (5 measured) |
+| prose non-English | 1 | 88.2% | TIMEMA |
+| prose out-of-sample | 12 | 86.0%–100% (size-dependent) | TIMEMA (3 measured) |
+
+The honest generalisation: **ops and structured text compress well (21–52%
+retained); prose compresses poorly (74–96%) and not at all below ~1200 chars.**
+
+## openai/math (re-checked 2026-10-19)
+
+Unchanged for the fourth turn: **0 open PRs, 0 issues**, no new content since
+2026-10-08; PR conversations were locked on 2026-10-12. No new proofs to
+evaluate, so X32 went deeper on family 102 (Unique Games). Key findings: OpenAI
+claims **2-to-1 with imperfect completeness** (Lean-checked, correctly
+imperfect — perfect completeness would be false for unique games), while
+Fei–Minzer–Wang (ECCC TR26-179) prove **4-to-1 with perfect completeness**;
+neither implies the other. The statement is for **translation** games over
+`F_2^s`, and equivalence to the standard formulation is still unestablished.
+
+**Bearing on compression: none, and X32 will not pretend otherwise.** The value
+is methodological: Lean answers "does this follow" not "is this the theorem
+anyone meant" — the same bug as the contract shortcut, where
+`symplokeUncollapse` reads `stats` instead of the contract, so a round trip can
+pass while the message is silently undecodable. OpenAI withdrew three papers
+after a sign error; **none had been formalized.** The only verifier that catches
+this class is one handed nothing but the artifact.
+
+## Stopping
+
+Real budget exhausted. Strongest artifact: **TIMEMA, −6 on 12/12 with zero
+regressions, plus the first live-model decode receipt in the programme.**
+Exact remaining gap: short prose is incompressible by this mechanism family
+(characterised, bounded externally); decode reliability is n = 1; encode takes
+7–135 s. Next highest-information test: hand the §H message to a *different*
+model and require the rule table before the output.
