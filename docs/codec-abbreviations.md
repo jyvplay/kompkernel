@@ -654,6 +654,57 @@ Correctness is therefore **independent of the search**: a search bug can only
 cost tokens, never corrupt a message. Confirmed empirically — the X26
 independent from-spec decoder runs against METATHESIS wires **unchanged**.
 
+## SYNTOMOS (σύντομος, "abridged, cut short") — X28
+
+The abbreviation decodes as: **SYN**tactic **T**rimming **O**f **M**essage
+**O**verhead **S**pecifications. The mechanism is *feature-matched minimal
+instruction*: the contract is not a constant, it is the cheapest wording that
+covers the features a given wire actually needs.
+
+**Is it greedy?** The contract choice is **not** greedy and not approximate — it
+is an exact minimum over a finite enumerated ladder, scored with the real
+tokenizer. The de-nesting decision is a two-arm tournament on a measured
+objective. The inherited layers differ: POLYTROPOS's rule search is greedy,
+SYMPLOKE's shape selection is explicitly greedy (documented in its source), and
+METATHESIS's relabelling is a hill climb.
+
+**Time- or CPU-bound?** **CPU-bound.** Every step is a finite enumeration; the
+codec consults no wall clock. *(Caveat: the parents it calls DO consult
+`Date.now()` internally, and `OMEGA_DET` does not stub it — see I.1 in
+`docs/codecs.md` X28. That is a pre-existing defect, not a property of SYNTOMOS.)*
+
+**Source article: none — original to this repository.** The feature
+decomposition of the instruction clause, the nesting-gated REPEAT, and the
+prefix-rewrite splicing rule are all new here. Published work is *motivation*
+rather than source:
+- **arXiv 2107.00446**, "Compression by Contracting Straight-Line Programs"
+  (2021) — an SLP of size `g` can be rebalanced to derivation height `O(log N)`
+  at size `O(g)`. This is why derivation depth was measured; it turned out to be
+  already 1–5, so no balancing was needed.
+- **Maruyama et al., SPIRE 2013** (via "A Succinct Grammar Compression") — an
+  SLP with `n` symbols needs at least `2n + log₂(n!)` bits. A real floor for the
+  tape, and unreachable by an LLM because it is bit-level.
+- **arXiv 2605.22705**, "Tokenization with Split Trees" (2026) and **arXiv
+  2603.25340**, "LLM as Token Compressor and Decompressor" (2026) — the two
+  AI-native routes we deliberately do NOT take (we cannot change the decoder's
+  tokenizer, and we may not train a compressor).
+
+**Result: 28/28 byte-exact, 27 improved, 1 tied, 0 regressed, net −81 tokens
+(−0.278%).** raw 62954 → SYMPLOKE 29492 → METATHESIS 29172 → **SYNTOMOS 29091**
+(53.79% removed). The gain is a *constant 3 tokens per message*, so it is worth
+proportionally most on the shortest inputs — the opposite of X27, whose gain
+scaled with rule count.
+
+**The one-token barrier (the theoretical result).** For any string `W` with
+`T(W) = 1`, introducing a glyph costs ≥ 2 tape tokens and saves `T(W) − 1 = 0`
+per occurrence, so `net = −2` for every occurrence count. **No single-token
+string can ever be profitably dictionary-coded.** English prose is mostly
+single-token words, which is why the coverage probe found zero profitable
+multi-token candidates on kb-article, and why all 27 of that lane's rules have
+`T(W) = 1`. This explains the gap to gzip (which reaches 43–56% on prose where
+this stack retains 76–96%) without contradicting it: the redundancy is real, but
+an LLM-executable *dictionary* cannot reach it.
+
 ## Codecs that do not satisfy the measurement contract (X21 audit)
 
 - **`oracle`** — hardcodes the 20 holdout citations in `ORACLE_MAP` and declares it "not counted

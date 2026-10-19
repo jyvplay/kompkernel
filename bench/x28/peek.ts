@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import { metathesisEncode } from '@/lib/omega/metathesis';
+const enc = 'o200k_base' as any;
+const f = process.env.F!;
+const t = fs.readFileSync(f, 'utf8');
+const r: any = metathesisEncode(t, enc);
+console.log('=== SOURCE (first 300) ==='); console.log(JSON.stringify(t.slice(0, 300)));
+console.log('=== CONTRACT ==='); console.log(r.contract);
+const si = r.wire.indexOf('¶');
+console.log('=== TAPE (first 400) ==='); console.log(JSON.stringify(r.wire.slice(1, si).slice(0, 400)));
+console.log('=== BODY (first 500) ==='); console.log(JSON.stringify(r.wire.slice(si+1, si+501)));

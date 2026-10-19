@@ -1923,3 +1923,386 @@ how much of the text the phrase grammar captures in the first place. Every
 codec from POLYTROPOS onward has attacked the *encoding* of the grammar's
 output; none has attacked the *coverage* of the grammar. That is the open
 front, and it is where X28 should go.
+
+---
+
+## X28 — SYNTOMOS
+
+### A. The formal model
+
+**1. Admissible objects.** A message is a pair `M = (w, c)` where `w` is a *wire*
+(a string) and `c` is a *contract* (an English instruction). The pair is
+admissible iff a competent reader, given `M` alone in one chat turn, produces a
+unique string `decode(M)`. The codec is a map `E: Σ* → M` with
+`decode(E(x)) = x` for all `x` (byte-perfect, exact lossless).
+
+The wire is `§ · tape · ¶ · body`, where `tape = g₁P₁ g₂P₂ … gₖPₖ` is a
+**straight-line program** (SLP): each glyph `gᵢ` is a variable defined as the
+string `Pᵢ`, and `Pᵢ` may contain glyphs `gⱼ` with `j < i`. The body is the text
+with occurrences of the defined strings replaced by their glyphs.
+
+**2. Information/access model.** The encoder knows the source text and the
+tokenizer. The decoder is **one chat message**: no system prompt, no skills.md,
+no tools, no prior context, no shared codebook. It has only its pretraining plus
+`M`. In particular the encoder may NOT assume any state carried between messages.
+
+**3. The resource counted.** `cost(M) = tokens(w) + tokens(c)` under o200k_base.
+Both terms are counted; a wire-only count would be dishonest.
+
+**4. Success and failure — quantifier order.** Let `B` be the incumbent
+(METATHESIS). SYNTOMOS succeeds iff:
+
+> **∀** lanes `L` in the 28-lane holdout: `∃` an admissible `(w,c)` produced by
+> SYNTOMOS with `decode(w,c) = L` exactly **and** `cost(w,c) ≤ cost(B(L))`,
+> **and** **∃** at least one lane with `cost < cost(B(L))`.
+
+Note the order: exactness is a **universal** requirement checked *before* any
+cost comparison, and the improvement is **existential**. A single regression
+falsifies the claim regardless of the total. Pre-declared threshold: the
+improvement must hold on **all 28 lanes** (it is a per-message overhead change,
+so a lane-specific win would indicate a bug, not a mechanism).
+
+**5. Parameter regime, units, tolerances.** 28 held-out lanes, 368–21 112 bytes,
+143–7 209 input tokens. Token counts are integers measured by the repo's own BPE
+(`countTokens`), not estimated. Tolerance is zero: any inequality in the round
+trip is a failure. Time is bounded by `budgetMs = min(11 000, 800 + 1.1·len)`
+inherited from the parent.
+
+**6. Adjacent problems that must not be substituted.**
+- *Summarisation / paraphrase* — not byte-perfect; excluded.
+- *Learned compression* (e.g. arXiv 2603.25340, an autoencoder mapping text to
+  compressed Z-tokens) — requires training a compressor; our decoder is frozen
+  and untrained, and no model is available in this sandbox.
+- *Better tokenizers* (ToaST, arXiv 2605.22705, −11% vs BPE) — we cannot change
+  the decoder's tokenizer; it is fixed to o200k_base.
+- *Bit-level entropy coding* — an LLM cannot execute arithmetic decoding; the
+  SLP information-theoretic floor (2n + log₂ n! bits, Maruyama et al. SPIRE'13)
+  is therefore an unreachable bound, not a target.
+- *Prompt compaction by deletion* — lossy.
+
+### B. The outcome space
+
+- **H+**: the instruction overhead is not a constant but a function of the
+  features a given wire needs, so a per-message choice strictly beats the fixed
+  contract on every lane.
+- **H−**: the fixed contract is already minimal, and no admissible per-message
+  variant is cheaper.
+- **H∂**: some savings exist but only for a subset (e.g. only untaped messages,
+  or only non-nested tapes), and the general claim fails.
+
+**Declared evidence threshold, set before the sweep:** report success only if
+**28/28 exact**, **zero regressions**, and **net ≤ −50** across the suite; and
+report H∂ explicitly if the per-lane deltas are not uniform. **Observed: 28/28
+exact, 0 regressions, net −81, uniform −3 on every taped lane.** H+ confirmed on
+the overhead question; and — importantly — H∂ is confirmed for the *original*
+research question, see §D.
+
+### C. The frontier
+
+Re-verified this turn by re-running the full X27 sweep from a clean checkout
+(`bench/x28/reverify.ts` → `bench/x28/metathesis_reverify.jsonl`):
+
+| codec | 28-lane total |
+|---|---|
+| raw | 62954 |
+| AETOS | 29683 |
+| SYMPLOKE | 29492 |
+| METATHESIS | 29172 |
+
+**This is NOT the number X27 reported.** X27 reported 29183. The re-run gives
+29172, an 11-token difference, and the difference is **not** a coding error —
+see §I.1: the parents gate their search on raw `Date.now()`, which the repo's
+`OMEGA_DET` flag does *not* stub, so results drift with machine load. The
+re-run is the more trustworthy number (it ran on an otherwise idle machine), and
+it is the one SYNTOMOS is measured against *inside the same process* so that
+drift cannot contaminate the comparison.
+
+**Restated imported results, with hypotheses.**
+- *SYMPLOKE clause braiding* (X26): holds only when the tape is present; X26
+  itself records the correctness fix for the no-tape case.
+- *METATHESIS relabelling transparency* (X27): for any injective same-script
+  map `A`, `decode(relabel(w)) = decode(w)`. Requires the map's images to be
+  absent from the payload. SYNTOMOS relies on this because it re-uses the
+  relabelled wire untouched.
+- *SLP derivation depth* (arXiv 2107.00446): an SLP of size `g` can be
+  transformed in linear time into an equivalent SLP of size `O(g)` whose
+  derivation tree has height `O(log N)`. Imported because "expand repeatedly"
+  recursion depth is exactly derivation-tree height.
+
+**The exact open interface.** Between the token-floor of the *dictionary* side
+(measured: exhausted, §D) and the token-floor of the *instruction* side
+(measured: 3 tokens of slack, §E). Nothing connects them — no mechanism found
+this turn moves mass from one to the other.
+
+### D. Negative space — 17 shapes that do NOT work
+
+Every row was implemented and measured this turn. "Test" names the detecting
+experiment in `bench/x28/`.
+
+| # | rejected shape | detecting test | verdict |
+|---|---|---|---|
+| D.1 | better rule coverage (more grammar) | `coverage.ts`: all repeated substrings, len 4–40, count ≥3 — **0** with positive net | dead |
+| D.2 | better relabelling by more search | `budget.ts`: 50× maxEvals and 20× restarts, kb-article and vix-daily **byte-identical** | saturated |
+| D.3 | bigram-locked glyph assignment | `probe_blga.ts`: graph labelling into the 805 one-token Cyrillic bigrams → **+108** | dead |
+| D.4 | tape-side factoring of shared substrings | `tapegram.ts` / `tape2.ts` / `tape3.ts`: **0** profitable candidates; rebuild costs **+25** | dead |
+| D.5 | zero-margin attachable glyphs | `margin.ts`: every ASCII/punctuation candidate costs **+1.00** trailing | dead |
+| D.6 | merge glyph into preceding word | `merge.ts`: best Latin letter 0.87, but Latin glyphs are unusable (payload collisions) | dead |
+| D.7 | ordinal / canonical glyph ordering | `ordinal.ts`: Cyrillic 0.87 ratio at N=60, already inside METATHESIS's search | dead |
+| D.8 | occurrence-selective substitution | `select.ts`: **0** occurrences where reverting helps (148 where it hurts) | dead |
+| D.9 | glyph-sequence composition in the body | `comp.ts`: **0** profitable repeated run-sequences or sub-sequences | dead |
+| D.10 | rule pruning with the true tokenizer | `prune2.ts`: **0** removable rules with gain | dead |
+| D.11 | raise `maxRules` above 220 | `mr.ts`: sp500-200 emits 212 rules at caps 220/400/700 — cap not binding | dead |
+| D.12 | SLP balancing to cut derivation depth | `depth.ts`: measured depth is already **1–5** | dead |
+| D.13 | hardened (non-expiring) parent budget | `harden.ts`: identical wire at `budgetMs = 1e9` | dead |
+| D.14 | shorter shape clause ("drop any ^") | `shape.ts`: −6 tokens but **omits that ^-marked digits are exempt** | rejected |
+| D.15 | explicit-delimiter tape + minimal contract | arithmetic: costs 1 tok/rule, saves ≤15 → only pays below ~13 rules (2 lanes) | dead |
+| D.16 | de-nesting for its own sake | `denest.ts`: costs 187 (ls-full-iso), 61 (readme), 39 (email-thread) | dead |
+| D.17 | **the modal shortcut: "just shorten the contract"** | see below | **fails, detected** |
+
+**D.17, the modal shortcut, in detail.** The tempting move is: *the contract is
+20 tokens, so rewrite it to be shorter.* The failure mode is that "shorter" and
+"still says the necessary thing" are not the same, and — crucially — **the
+TypeScript round trip cannot tell them apart**, because `symplokeUncollapse`
+reads its shape table from `stats`, not from the contract text. An early draft of
+this very codec did exactly this, re-synthesised the shape clause with a regex,
+and on `dump.sql` reported a **−28 token gain while having silently deleted the
+entire digit rule** from the message an LLM would actually read. The contract
+still said "print result only"; it no longer said what the digits meant.
+
+*The detecting test* is `bench/x26/selfdecode.py` (copied and extended in
+`bench/x28/`): a from-spec Python decoder that is handed nothing but the message
+and re-derives the shape table **by parsing the contract text**. It refuses to
+guess a width and refuses to proceed if the number of parsed widths does not
+equal the number of parsed patterns. It is the only gate in this repository that
+sees that bug class, and it is why the shipped implementation performs a strict
+**prefix rewrite** of the parent contract and never a reconstruction.
+
+This is the same failure mode as the disputed Unique Games formalisation (§H.6):
+a verifier checking an internal representation rather than the artifact the
+consumer actually reads.
+
+### E. Mechanism portfolio — six genuinely distinct approaches
+
+Preserved independent: each was built and measured before the next was begun,
+and none of them shares a construction with another.
+
+| # | central construction | artifact | proved | unresolved interface | cheapest falsification | gap local or equivalent? |
+|---|---|---|---|---|---|---|
+| E.1 | **Feature-decomposed instruction.** The contract is not a constant; it is the cheapest cover of the feature set {MAP, SPLIT, REPEAT, OUTPUT} the wire needs. | `SYNTOMOS_LADDER`, `cheapestHead` | the cover is an exact minimum over a finite ladder (no approximation) | whether a *shorter* wording still covers a feature is a judgement, not a proof | `selfdecode.py` on the emitted message | **local** |
+| E.2 | **Nesting-gated REPEAT.** `expand repeatedly` ⟺ some tape rule references another; detected by counting glyph chars inside rule bodies. | `countNestedRefs` | exact: the SLP is acyclic and ordered, so it is a fixed point iff it is non-trivial | — | construct a nested tape and confirm the flag is 1 | **local, closed** |
+| E.3 | **De-nesting arm.** Flatten the SLP when it costs ≤ slack, retiring REPEAT and making decode single-pass. | arm B in `syntomosEncode` | correctness gated by an explicit round-trip check before the arm is accepted | the slack constant (2) is a policy choice | set `denestSlack = 0` and re-measure | **local** |
+| E.4 | **Prefix-rewrite contract splicing.** Touch the head, never the tail. | `syntomosContract` | if the parent's head is absent, the parent contract is returned unchanged (fail-safe) | — | mutate the parent wording, confirm no crash and no semantic loss | **local, closed** |
+| E.5 | **Run-cost relabelling** (inherited, X27). | METATHESIS | `decode(relabel(w)) = decode(w)` for injective same-script `A` | gap to the true argmin | measured saturated at 50× budget | equivalent to QAP in general |
+| E.6 | **SLP derivation-depth balancing** (imported, not used). | `depth.ts` | height `O(log N)` at size `O(g)` is a theorem | — | measured depth already 1–5 | **local, closed (no headroom)** |
+
+### F. Artifacts
+
+- `src/lib/omega/syntomos.ts` — the codec. `SYNTOMOS_LADDER`, `syntomosContract`,
+  `expandRules`, `countNestedRefs`, `syntomosEncode`, `syntomosDecode`, `syntomosRoundTrip`.
+- `src/lib/omega/registry.ts` — `syntomos` entry after `metathesis`; 189 entries; tsc clean.
+- `bench/x28/sweep.ts` + `sweep.log` + `syntomos.jsonl` — the 28-lane sweep.
+- `bench/x28/reverify.ts` + `metathesis_reverify.jsonl` — the baseline re-run.
+- `bench/x28/selfdecode.py`, `mkcase.ts`, `cases.json`, `receipts/` — independent verification.
+- 20 probe scripts, each the negative-space record of §D: `ordinal`, `tokprobe`,
+  `margin`, `merge`, `contract`, `contract2`, `contract3`, `heads`, `shape`,
+  `pairs`, `anatomy`, `rules`, `runs`, `runs2`, `tapegram`, `tape2`, `tape3`,
+  `coverage`, `select`, `comp`, `prune2`, `denest`, `depth`, `budget`, `mr`,
+  `harden`, `peek`, `hello`.
+
+### G. The second-order adversary, A(C)
+
+1. **"It is a 3-token shave dressed up as a codec."** Conceded in magnitude, and
+   stated plainly: the gain is **−3 tokens on every taped lane, −81 total,
+   0.28%**. What is *not* a shave is the finding that forced it: every
+   dictionary-side lever measured zero (§D.1–D.13). A correct negative result
+   that redirects the whole stack is worth more than an optimistic positive one,
+   and the size of the honest win is itself evidence about the architecture.
+2. **"The tournament could pick a contract that is shorter but wrong."** Answered
+   by construction (E.4 prefix rewrite + fail-safe) and by the gate that caught
+   the actual instance of this bug (D.17).
+3. **"De-nesting changes the wire, so the decode path differs."** True, and it is
+   gated: the arm is accepted only if `symplokeDecode(flat) === text`.
+4. **"The baseline moved, so the −3 is noise."** The baseline did move (11
+   tokens, §C) — which is exactly why the delta is measured **inside a single
+   encode** against `metathesisMessageTokens` computed from the same parent
+   wire. Load drift cannot enter the comparison.
+5. **"You never ran a model."** Correct, and it is the standing limitation of the
+   whole programme (§H.1). The contract change is the single riskiest part of
+   this turn for that reason, and the conservative rung was chosen deliberately.
+
+### H. Verification
+
+**H.1 — the honesty downgrade, restated.** **No live LLM was run at any point.**
+The sandbox has no model access and no theorem prover. "Decodable by a bare LLM
+in one chat message" is **designed for and structurally preserved**, not
+demonstrated. This has now been carried for X21–X28 and should be read as a
+property of the programme, not of this turn.
+
+**H.2 — what was actually verified.** 28/28 lanes byte-exact (TS round trip);
+independent from-spec Python decoder given nothing but the message; `npx tsc
+--noEmit` clean; registry entry executes. All numbers come from files in
+`bench/x28/`.
+
+**H.3 — openai/math, checked live 2026-10-18.** `pushed_at` unchanged at
+2026-10-12, `open_issues_count = 0`, and the all-states PR list still contains
+exactly two entries: #1 (2026-10-08, "Update manuscripts and Lean
+formalizations") and #2 (2026-10-12, "Automatically lock new PR conversations").
+**There are zero new proofs to evaluate individually this turn.**
+
+**H.4 — the called-out proof, investigated deeper (Unique Games, family 102).**
+New facts since X27. (a) The competing *human* result is now published: **ECCC
+TR26-179, Fei–Minzer–Wang, "On the Hardness of 4-to-1 Games with Perfect
+Completeness"**, revision 2 of 8 Oct 2026 — it proves Khot's **4-to-1** Games
+Conjecture, with the stated consequences of NP-hardness of k-colouring a
+3-colourable graph for every constant k. Quanta (7 Oct 2026) reports the group
+rushed a 95-page draft to ECCC on 14 Sep after rumours of the OpenAI result
+reached Minzer on 11 Sep. This is a strictly weaker statement than full UGC
+(different completeness regime), so it neither confirms nor displaces the
+OpenAI claim. (b) The third-party Lean check (revision `fd4aeeb`, Lean 4.34.1,
+9 Oct 2026) accepted `OAI.UniqueGamesTheorem.theorem11` under `propext`,
+`Classical.choice`, `Quot.sound`, but the checkers state the **sandbox was not
+enforced** and that they **did not audit whether the formal statement matches
+the paper's main theorem**. (c) The faithfulness gap is corroborated
+independently: Tao is quoted that "the proof verifies the formal statement
+itself, not whether this statement matches the intended meaning"; *Science*
+(14 Oct) reports formalised statements can be "something weaker" than the main
+theorem. (d) Independent recounts still put formalisation at 24–36% against a
+claimed 42%. **Net: the status of the UGC claim is unchanged — formally checked,
+not faithful-audited, not refereed.**
+
+**H.5 — bearing on compression: none constructible, and one methodological
+transfer.** UGC is hardness of approximation; its gadgets (Grassmann expansion,
+degree-two KMS inverse theorem) yield no token-cost model. The transferable
+lesson is H.6.
+
+**H.6 — the methodological transfer, which is the real finding.** The disputed
+UGC formalisation and the X28 shape-clause bug are **the same failure mode**: a
+verifier checks an internal representation (the Lean statement / the `stats`
+object) while the consumer reads a different artifact (the English theorem / the
+contract text). Lean passing is to the UGC paper exactly as `exact: true` was to
+my dropped shape clause. The transfer is concrete and it changed the code: any
+verifier in this repo must parse **the text the model reads**, not the struct the
+decoder uses.
+
+**H.7 — new sources consulted (none previously referenced by any codec here).**
+- **arXiv 2605.22705** "Tokenization with Split Trees" (2026-05-21): >11% fewer
+  tokens than BPE at vocab ≥ 40 960, via an integer program over split trees.
+  Confirms token count is a tokenizer property — and is unusable here because we
+  cannot change the decoder's tokenizer.
+- **arXiv 2603.25340** "Large Language Model as Token Compressor and
+  Decompressor" (2026): autoencoding into discrete Z-tokens. The AI-native
+  alternative we explicitly do **not** take, because it needs a trained
+  compressor and our decoder is frozen.
+- **arXiv 2107.00446** "Compression by Contracting Straight-Line Programs"
+  (2021): SLP height `O(log N)` at size `O(g)`. Tested; no headroom (D.12).
+- **Maruyama et al., SPIRE 2013** (via "A Succinct Grammar Compression"): an SLP
+  with `n` symbols needs ≥ `2n + log₂(n!)` bits. For kb-article's 27 rules that
+  is ~148 bits ≈ 32 tokens against our 56-token tape — a real floor, and
+  unreachable by an LLM because it is bit-level.
+- **arXiv 2608.14673** "A Human Audit of OpenAI's AI-Generated Mathematical
+  Proofs" (v3, 2026).
+
+### I. Repair — two defects found this turn
+
+**I.1 — the pipeline is not deterministic (pre-existing, not introduced by X28).**
+Many modules call raw `Date.now()` in control flow (`polytropos.ts` lines 310,
+332, 355, 358; also `akribeia.ts`, `aion.ts`, `abacus.ts`, `amphora.ts`).
+`OMEGA_DET=1` stubs only `clock.now()`, so **wall-clock budgets still fire and
+the search is truncated by machine load.** Consequence: the same input produced
+387 tokens for `ls-full-iso` under CPU contention and 356 when idle — a
+31-token swing — and the whole-suite baseline moved by 11. *Not repaired:* fixing
+it means either stubbing globals or threading a clock through ~10 modules, both
+of which change every historical frontier number. It is recorded here as a
+known-correctness gap, and X28 works around it by measuring deltas inside one
+encode.
+
+**I.2 — the dropped shape clause (introduced by X28, caught, repaired).** The
+first draft of `syntomos.ts` re-synthesised the shape clause with a regex and
+silently deleted it on `dump.sql` while reporting −28. Repaired by replacing
+reconstruction with a strict prefix rewrite (`syntomosContract`) that fails safe
+to the parent contract. **New attack added against the patch, per the repair
+rule:** the extended from-spec decoder now parses the *new* head as well as the
+old one, so a future wording change cannot silently un-parse; and the ladder
+rung that drops the ¶ anchor was measured (14 vs 17 tokens) but deliberately
+**not** enabled by default.
+
+### J. Stopping
+
+The real budget was spent on 26 distinct experiments. The dictionary-side
+question is answered in the negative with evidence, not with exhaustion: rule
+coverage, relabelling, tape factoring, adjacency, and composition were each
+measured and each returned zero or negative. The instruction-side question is
+answered in the affirmative at −3 tokens/lane, uniformly, with zero regressions.
+
+**The strongest verified artifact is the codec plus the negative-space map.**
+**The exact remaining gap** is stated in one sentence: *the stack compresses
+prose to 76–96% of its original tokens while gzip reaches 43–56%, and the
+difference is not reachable by any mechanism a language model can execute
+losslessly* — which is X28's central theoretical result, below.
+
+**Next highest-information test:** the one-token barrier lemma predicts that
+*any* text whose high-frequency words are single tokens is incompressible by
+dictionary means. Test it directly on a corpus of short ordinary prose
+(emails, chat) and confirm the measured floor tracks the count of tokens not
+coverable by profitable multi-token rules.
+
+### K. The one-token barrier (the theoretical result of X28)
+
+**Lemma.** Let `W` be a string with `T(W) = 1`. Introducing a glyph `g` for `W`
+costs ≥ 2 tokens in the tape (one for `g`, one for the literal `W`) and saves
+`T(W) − 1 = 0` tokens per body occurrence. Hence for every occurrence count
+`n`, `net(n) = n·0 − 2 ≤ −2 < 0`. **No single-token string can ever be
+profitably dictionary-coded**, and no choice of glyph, ordering or search
+changes this.
+
+**Corollary (why prose is at its floor).** English prose consists predominantly
+of single-token words. On `kb-article`, all 27 rules the grammar found have
+`T(W) = 1`; the coverage probe (D.1) found **zero** substrings with `T(W) ≥ 2`
+and positive net. Therefore that lane's entire 25-token gain comes from
+*run-merging* glyphs (X27's mechanism), not from dictionary savings, and its
+residual 391 tokens of uncovered text are exactly the tokens the lemma protects.
+
+**This explains the gzip gap without contradicting it.** The redundancy gzip
+captures is real; the barrier says an LLM-executable *dictionary* cannot reach
+it. Reaching it requires either arithmetic coding (an LLM cannot execute it) or
+a trained compressor (forbidden by the one-chat-message contract). **The
+terminal codec for this constraint set is a dictionary codec whose ceiling is
+the one-token barrier, and this stack is close to that ceiling.**
+
+### L. Generalized local leaders by structural category
+
+Measured this turn, all byte-exact. "Leader" = lowest message-token count.
+
+| category | lanes | raw | SYMPLOKE | METATHESIS | **SYNTOMOS** | Δ vs METATHESIS | improved |
+|---|---|---|---|---|---|---|---|
+| prose / natural language | 10 | 16089 | 8327 | 8276 | **8246** | −30 | 10 / 10 |
+| ops logs & command output | 13 | 29870 | 12089 | 11928 | **11892** | −36 | 12 / 13 |
+| tables & CSV | 4 | 16052 | 8397 | 8295 | **8283** | −12 | 4 / 4 |
+| DB dumps | 1 | 1795 | 679 | 673 | **670** | −3 | 1 / 1 |
+| **total** | **28** | **62954** | **29492** | **29172** | **29091** | **−81** | **27 / 28** |
+
+*Correction recorded against my own draft:* I first wrote this table estimating
+prose at −10 and ops at −11, on the assumption that several lanes would tie. Every
+taped lane improved by exactly 3, so the true figures are prose −30 and ops −36.
+The only tie in the entire sweep is `git-log-fuller.txt` (143 → 143), whose parent
+is `identity` and which therefore ships no contract at all — there is no overhead
+to recover. Categories were verified to partition all 28 lanes and to sum to the
+totals above.
+
+**Reading.** SYNTOMOS leads every category by a *constant* per-message amount,
+which is the signature of an overhead change rather than a content-dependent
+one — and that is exactly what it is. Note the consequence for the programme's
+stated priority: because the gain is constant per message, it is worth
+proportionally **most on the shortest inputs**, which is the opposite of X27's
+rule-count-scaled gain. kb-article goes 631 → 628; de-kb 466 → 463;
+meeting-transcript 392 → 389. Small in absolute terms, but these are the
+everyday-sized messages.
+
+The category ranking of *depth* of compression is unchanged from X27: tables/CSV
+and ops logs compress far better than prose, and the reason is now explained by
+§K rather than merely observed.
+
+*Caveat inherited from §C:* the METATHESIS column is the same-process value from
+this turn's sweep, so the two right-hand columns are directly comparable; the
+SYMPLOKE column is carried over from X25/X26 archives and is subject to the
+load drift of I.1.

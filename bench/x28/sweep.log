@@ -1,0 +1,85 @@
+ 0 dump.sql                                 in  1795 metath   673 syntomos   670 delta   -3 nested   42 denest . exact true
+DONE
+DONE 0
+ 1 find-listing.txt                         in  3997 metath  1284 syntomos  1281 delta   -3 nested   51 denest . exact true
+DONE
+DONE 1
+ 2 git-log-fuller.txt                       in   143 metath   143 syntomos   143 delta    0 nested    0 denest . exact true
+DONE
+DONE 2
+ 3 git-log-iso.txt                          in  1947 metath  1447 syntomos  1444 delta   -3 nested   32 denest . exact true
+DONE
+DONE 3
+ 4 git-numstat.txt                          in  4632 metath  2001 syntomos  1998 delta   -3 nested   90 denest . exact true
+DONE
+DONE 4
+ 5 ls-full-iso.txt                          in  1175 metath   376 syntomos   373 delta   -3 nested   36 denest . exact true
+DONE
+DONE 5
+ 6 node-stacktraces.txt                     in   568 metath   309 syntomos   306 delta   -3 nested   55 denest . exact true
+DONE
+DONE 6
+ 7 ops-git-log-stat.txt                     in  6649 metath  3306 syntomos  3303 delta   -3 nested  262 denest . exact true
+DONE
+DONE 7
+ 8 ops-ls-l-bin.txt                         in   465 metath   219 syntomos   216 delta   -3 nested    1 denest . exact true
+DONE
+DONE 8
+ 9 ops-ls-l-omega.txt                       in  4063 metath   948 syntomos   945 delta   -3 nested   50 denest . exact true
+DONE
+DONE 9
+10 openstack-loghub-26.log                  in  4028 metath   956 syntomos   953 delta   -3 nested  214 denest . exact true
+DONE
+DONE 10
+11 chart.svg                                in  1331 metath   425 syntomos   422 delta   -3 nested   33 denest . exact true
+DONE
+DONE 11
+12 df-h.txt                                 in   570 metath   259 syntomos   256 delta   -3 nested   10 denest . exact true
+DONE
+DONE 12
+13 kubectl-get-pods.txt                     in  1006 metath   349 syntomos   346 delta   -3 nested   41 denest . exact true
+DONE
+DONE 13
+14 psql-output.txt                          in   675 metath   331 syntomos   328 delta   -3 nested    7 denest . exact true
+DONE
+DONE 14
+15 bibliography.txt                         in   896 metath   680 syntomos   677 delta   -3 nested   38 denest . exact true
+DONE
+DONE 15
+16 de-kb.txt                                in   525 metath   466 syntomos   463 delta   -3 nested    5 denest . exact true
+DONE
+DONE 16
+17 email-thread.txt                         in   629 metath   497 syntomos   494 delta   -3 nested   38 denest . exact true
+DONE
+DONE 17
+18 kb-article.txt                           in   656 metath   631 syntomos   628 delta   -3 nested    5 denest . exact true
+DONE
+DONE 18
+19 llm-answer.md                            in   733 metath   683 syntomos   680 delta   -3 nested   16 denest . exact true
+DONE
+DONE 19
+20 meeting-transcript.txt                   in   472 metath   392 syntomos   389 delta   -3 nested    0 denest . exact true
+DONE
+DONE 20
+21 readme.txt                               in   843 metath   658 syntomos   655 delta   -3 nested   16 denest . exact true
+DONE
+DONE 21
+22 spring-projects_spring-framework_35118.md in  1895 metath   941 syntomos   938 delta   -3 nested   56 denest . exact true
+DONE
+DONE 22
+23 svenstaro_miniserve.md                   in  7209 metath  2903 syntomos  2900 delta   -3 nested  100 denest . exact true
+DONE
+DONE 23
+24 aapl-2014.csv                            in  3108 metath  1461 syntomos  1458 delta   -3 nested   54 denest . exact true
+DONE
+DONE 24
+25 csv-8.csv                                in  2870 metath  1630 syntomos  1627 delta   -3 nested   82 denest . exact true
+DONE
+DONE 25
+26 sp500-200.csv                            in  6662 metath  4000 syntomos  3997 delta   -3 nested  316 denest . exact true
+DONE
+DONE 26
+27 vix-daily-1990.csv                       in  3412 metath  1204 syntomos  1201 delta   -3 nested   47 denest . exact true
+DONE
+DONE 27
+ALLDONE

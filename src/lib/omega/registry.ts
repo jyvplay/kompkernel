@@ -117,6 +117,7 @@ import { psephosEncode, psephosDecode } from './psephos';
 import { aetosEncode, aetosDecode } from './aetos';
 import { symplokeEncode, symplokeDecode } from './symploke';
 import { metathesisEncode, metathesisDecode } from './metathesis';
+import { syntomosEncode, syntomosDecode } from './syntomos';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -387,6 +388,14 @@ export function codecEntries(): Entry[] {
         const r4 = metathesisEncode(t, enc);
         const decoded4 = metathesisDecode(r4.wire, { stats: r4.stats, order: r4.order, undo: r4.parent === 'identity' ? (w: string) => w : chironDecode });
         return { output: r4.wire, decoded: decoded4, oneChat: r4.messageTokens, note: `parent=${r4.parent}; order=${r4.order}; rules=${r4.rules}; wire ${r4.parentWireTokens}->${r4.wireTokens} (search ${r4.searchMs}ms); shapes=[${r4.shapes.join(' ')}]` };
+      },
+    },
+    {
+      key: 'syntomos', label: 'σύντομος SYNTOMOS (Feature-matched minimal instruction — X28. Every codec in this stack ships one fixed English contract, and on 20 of the 28 holdout lanes that contract is a constant 20 tokens: 12 percent of a short message and 3 percent of a long one. X28 measured every other lever and found it exhausted, which is what forced the attention onto the overhead. The coverage probe enumerated every repeated substring of kb-article and found ZERO with positive net profit. The relayout search was given 50 times the evaluation budget and returned a byte-identical wire. Tape-side factoring found zero profitable shared substrings. Reverting any single substituted occurrence never helped. Composing repeated glyph sequences found zero candidates. So the remaining slack is not in the dictionary at all, it is in the instruction, and the instruction is not a constant: it is a function of which features a given wire actually needs. SYNTOMOS therefore ships a LADDER of contract heads and selects the cheapest that covers the features present. The load-bearing feature is REPEAT. Expansion must be iterated to a fixed point if and only if some tape rule references another rule, and that is exactly detectable by counting glyph characters inside rule bodies, so SYNTOMOS detects it and drops the clause when it is absent. It also runs a DE-NESTING arm that flattens the tape when flattening costs no more than it retires, which turns a fixed-point expansion into a single pass; that is worth having independently of tokens, because transformers are known to degrade under deep in-context recursion. The head is spliced as a strict PREFIX REWRITE in front of the parent contract, never a reconstruction. An earlier draft re-synthesised the shape clause with a regex and silently DELETED the entire digit rule from dump.sql while still reporting a 28 token gain; the TypeScript round trip could not see it because the uncollapser reads its shape table from stats rather than from the contract text. Only the independent from-spec decoder, which is handed nothing but the message, catches that class of bug, and it is the reason the prefix rewrite is now the only permitted transformation. If the parent wording ever changes the code fails safe and keeps the parent contract intact. Result: a flat 3 tokens better than METATHESIS on every lane that has a tape, byte-exact, and monotone against METATHESIS by construction because the parent arm is always retained as a candidate in the tournament. Decode is unchanged SYMPLOKE, so no new syntax is introduced.)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => {
+        const r5 = syntomosEncode(t, enc);
+        const decoded5 = syntomosDecode(r5.wire, { stats: r5.stats, order: r5.order, undo: r5.parent === 'identity' ? (w: string) => w : chironDecode });
+        return { output: r5.wire, decoded: decoded5, oneChat: r5.messageTokens, note: `parent=${r5.parent}; rung=${r5.rung}; nested=${r5.nested}; denested=${r5.denested}; rules=${r5.rules}; msg ${r5.altMessageTokens}->${r5.messageTokens}` };
       },
     },
     {

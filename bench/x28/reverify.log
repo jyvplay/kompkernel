@@ -1,0 +1,85 @@
+ 0 dump.sql                                 in  1795 symploke   679 metath   673 delta   -6 rules   47 exact true
+DONE
+DONE 0
+ 1 find-listing.txt                         in  3997 symploke  1292 metath  1284 delta   -8 rules   59 exact true
+DONE
+DONE 1
+ 2 git-log-fuller.txt                       in   143 symploke   143 metath   143 delta    0 rules    0 exact true
+DONE
+DONE 2
+ 3 git-log-iso.txt                          in  1947 symploke  1456 metath  1447 delta   -9 rules   51 exact true
+DONE
+DONE 3
+ 4 git-numstat.txt                          in  4632 symploke  2014 metath  2001 delta  -13 rules  105 exact true
+DONE
+DONE 4
+ 5 ls-full-iso.txt                          in  1175 symploke   388 metath   376 delta  -12 rules   27 exact true
+DONE
+DONE 5
+ 6 node-stacktraces.txt                     in   568 symploke   310 metath   309 delta   -1 rules   24 exact true
+DONE
+DONE 6
+ 7 ops-git-log-stat.txt                     in  6649 symploke  3393 metath  3306 delta  -87 rules  203 exact true
+DONE
+DONE 7
+ 8 ops-ls-l-bin.txt                         in   465 symploke   219 metath   219 delta    0 rules   13 exact true
+DONE
+DONE 8
+ 9 ops-ls-l-omega.txt                       in  4063 symploke   951 metath   948 delta   -3 rules   36 exact true
+DONE
+DONE 9
+10 openstack-loghub-26.log                  in  4028 symploke   974 metath   956 delta  -18 rules   65 exact true
+DONE
+DONE 10
+11 chart.svg                                in  1331 symploke   426 metath   425 delta   -1 rules   27 exact true
+DONE
+DONE 11
+12 df-h.txt                                 in   570 symploke   260 metath   259 delta   -1 rules   28 exact true
+DONE
+DONE 12
+13 kubectl-get-pods.txt                     in  1006 symploke   357 metath   349 delta   -8 rules   41 exact true
+DONE
+DONE 13
+14 psql-output.txt                          in   675 symploke   332 metath   331 delta   -1 rules   24 exact true
+DONE
+DONE 14
+15 bibliography.txt                         in   896 symploke   688 metath   680 delta   -8 rules   44 exact true
+DONE
+DONE 15
+16 de-kb.txt                                in   525 symploke   466 metath   466 delta    0 rules   21 exact true
+DONE
+DONE 16
+17 email-thread.txt                         in   629 symploke   501 metath   497 delta   -4 rules   39 exact true
+DONE
+DONE 17
+18 kb-article.txt                           in   656 symploke   632 metath   631 delta   -1 rules   27 exact true
+DONE
+DONE 18
+19 llm-answer.md                            in   733 symploke   687 metath   683 delta   -4 rules   34 exact true
+DONE
+DONE 19
+20 meeting-transcript.txt                   in   472 symploke   392 metath   392 delta    0 rules    6 exact true
+DONE
+DONE 20
+21 readme.txt                               in   843 symploke   658 metath   658 delta    0 rules   27 exact true
+DONE
+DONE 21
+22 spring-projects_spring-framework_35118.md in  1895 symploke   943 metath   941 delta   -2 rules   62 exact true
+DONE
+DONE 22
+23 svenstaro_miniserve.md                   in  7209 symploke  2934 metath  2903 delta  -31 rules  110 exact true
+DONE
+DONE 23
+24 aapl-2014.csv                            in  3108 symploke  1471 metath  1461 delta  -10 rules   67 exact true
+DONE
+DONE 24
+25 csv-8.csv                                in  2870 symploke  1651 metath  1630 delta  -21 rules   81 exact true
+DONE
+DONE 25
+26 sp500-200.csv                            in  6662 symploke  4054 metath  4000 delta  -54 rules  212 exact true
+DONE
+DONE 26
+27 vix-daily-1990.csv                       in  3412 symploke  1221 metath  1204 delta  -17 rules   63 exact true
+DONE
+DONE 27
+ALLDONE
