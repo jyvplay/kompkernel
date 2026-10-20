@@ -2859,3 +2859,61 @@ Exact remaining gap: short prose is incompressible by this mechanism family
 (characterised, bounded externally); decode reliability is n = 1; encode takes
 7–135 s. Next highest-information test: hand the §H message to a *different*
 model and require the rule table before the output.
+
+---
+
+## X33 — οἰκονομία OIKONOMIA: the allocation
+
+**New codec.** `src/lib/omega/oikonomia.ts`, registry key `oikonomia`.
+
+X32's own stopping note named the defect: encode takes 7–135 s, and below ~1200
+characters it returns the input unchanged after all of that work. X33 attacks
+that, on the reasoning that arXiv 2607.23362 (BPE within 1–2 % of the LP lower
+bound) leaves almost no headroom in *choosing a better string*, so the unoptimised
+axis is the cost of finding one.
+
+**Result, 38 lanes, all byte-exact:**
+
+```
+TOTAL tokens   TIMEMA 23,610   OIKONOMIA 23,625   delta  +15  (+0.064%)
+TOTAL encode   TIMEMA 2,242,016 ms   OIKONOMIA 1,126,530 ms     1.99x
+per-lane speedup   median 2.19x   min 1.14x   max 3.22x
+token loss on      2 lanes (find-listing +13, meeting-transcript +2)
+```
+
+Pareto superior on time; equal-or-slightly-worse on tokens, disclosed.
+
+**Three findings.**
+
+1. **countTokens was pushing 113 M characters through a regex on a 3 370-char
+   input.** X30 memoised strings under 24 chars and never measured the other side
+   of the split: 65,364 long calls averaging 1,738 chars each, **94.9 % redundant
+   (3,312 distinct)**. Now memoised; both caches are one Map per encoding.
+2. **Options never reached the code.** `syntomosEncode` called
+   `metathesisEncode(text, enc)` with no options object, so `budgetMs`,
+   `maxEvals`, `restarts`, `wordGrid` and `capGrid` had gone into a void since
+   X28 — making the X28/X31 budget nulls and the X32 grid null vacuous. Forwarded
+   now. Re-asked properly: the search budget is confirmed slack, but the **config
+   count** is load-bearing and was never tested.
+3. **polytropos runs four times: 18.5 s of a 22.3 s encode (83 %).** Caused by
+   the `'in'` shape order, which owes a full parent re-run to every trial because
+   each trial hands the parent a genuinely different input. X24 set the cap to 4
+   and nobody measured it.
+
+**The mechanism.** Prediction was tried and failed (collapse count does not
+separate: find-listing collapses 240 items and needs `'in'`, aapl-2014.csv
+collapses 240 and must not have it). So OIKONOMIA buys one `'in'` trial at a time
+and purchases the next only when the previous one paid — the right shape here
+because trials are greedy and ranked by hit frequency.
+
+**Decodability unchanged.** Same wire, glossary, tape and contract as TIMEMA; only
+the number of times the encoder re-runs its own search differs. X32's live
+hand-decode receipt carries forward.
+
+**Limits.** The pipeline is not deterministic, so these are single measurements,
+not distributions (npm-ls measured 901 in one run and 940 in another). Part of the
+`'in'` benefit is best-of-*k* sampling of a stochastic search rather than a shape
+effect. This is a **speed codec, not a compression codec** — the +15 tokens is a
+cost.
+
+Full writeup: `bench/x33/X33.md`.

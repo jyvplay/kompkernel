@@ -297,7 +297,15 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
   // grammar phase runs to its own natural stopping point; the assignment phase
   // above is already bounded by a probe count rather than by the clock.
   const floor = Math.min(4500, 400 + text.length * 0.35);
-  const budgetMs = Math.max(options.budgetMs ?? Math.min(9000, 600 + text.length * 0.7), floor);
+  /* X33: OMEGA_SIBYL_BUDGET_MS. polytropos calls sibyl once per config and
+   * passes ONLY { budgetMs } (polytropos.ts runConfig), so the budget a caller
+   * hands to any codec above SYMPLOKE reaches this line and nowhere else.
+   * Everything downstream -- metathesis, symploke, polytropos -- then discards
+   * it. This override exists so the per-config budget can be swept at all. */
+  const budgetEnv = Number(process.env.OMEGA_SIBYL_BUDGET_MS ?? '') || 0;
+  const budgetMs = budgetEnv > 0
+    ? Math.max(budgetEnv, floor)
+    : Math.max(options.budgetMs ?? Math.min(9000, 600 + text.length * 0.7), floor);
   const overall = started + Math.min(30_000, Math.round(budgetMs * 3.2));
   const base: Required<Omit<AriadneOptions, 'script' | 'sep'>> & { script?: string } = {
     budgetMs,

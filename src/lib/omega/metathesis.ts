@@ -84,6 +84,10 @@ export interface MetathesisOptions {
   noRelayout?: boolean;
   /** cap on tokenizer evaluations; the deterministic substitute for a deadline */
   maxEvals?: number;
+  /** X33: forwarded to SYMPLOKE (see SymplokeOptions). */
+  inCap?: number;
+  /** X33: forwarded to SYMPLOKE (see SymplokeOptions). */
+  inGate?: number;
 }
 
 export interface MetathesisResult {
@@ -271,7 +275,7 @@ export function metathesisEncode(
   enc: EncodingName = 'o200k_base',
   options: MetathesisOptions = {},
 ): MetathesisResult {
-  const r = symplokeEncode(text, enc);
+  const r = symplokeEncode(text, enc, undefined, { inCap: options.inCap, inGate: options.inGate });
   const out = relayoutGlyphs(r.wire, text, enc, options);
   const wireTok = countTokens(out.wire, enc);
   return {

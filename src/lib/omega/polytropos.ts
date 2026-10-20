@@ -250,9 +250,25 @@ export function polytroposEncode(
   const t0 = Date.now();
   const T = (s: string) => countTokens(s, enc);
   const inTokens = T(text);
-  const budgetMs = options.budgetMs ?? 25000;
+  /* X33: OMEGA_POLYTROPOS_BUDGET_MS.
+   *
+   * PROPAGATION GAP. syntomosEncode calls metathesisEncode(text, enc) with NO
+   * options object, metathesisEncode calls symplokeEncode(text, enc) with none,
+   * and symploke calls polytroposEncode(x, enc) with none. So `budgetMs`,
+   * `maxEvals`, `restarts`, `wordGrid` and `capGrid` passed to any codec above
+   * SYMPLOKE never reach this function. X28 and X31 both concluded "the budget
+   * is not binding" and X32 concluded "the grid is saturated"; all three
+   * measurements were made with a knob that was disconnected here. This env
+   * override reaches the actual budget so the question can be asked properly. */
+  const budgetMs = options.budgetMs ?? (Number(process.env.OMEGA_POLYTROPOS_BUDGET_MS) || 25000);
   const cfgBudget = options.configBudgetMs ?? 80;
-  const maxConfigs = Math.max(1, options.maxConfigs ?? 6);
+  /* X33: OMEGA_POLYTROPOS_CONFIGS.
+   * Each config runs a full sibyl search, and the profile (bench/x33) shows the
+   * sibyl layer -- countTokens 29%, runCostPrepared 12%, one regex 9% -- is the
+   * floor that survives even a 500 ms polytropos budget. Cutting the BUDGET
+   * shortens each config; cutting the COUNT removes configs. These are
+   * different levers and only the second one moves the floor. */
+  const maxConfigs = Math.max(1, options.maxConfigs ?? (Number(process.env.OMEGA_POLYTROPOS_CONFIGS) || 6));
   const doPolish = options.polish !== false;
   const sweepSep = options.sweepSeparators !== false;
   const f = polyFeatures(text);

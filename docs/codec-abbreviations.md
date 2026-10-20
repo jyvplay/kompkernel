@@ -1005,6 +1005,145 @@ made in this repo (`bench/x32/`). Three external results bound it:
 4. **Short prose is genuinely incompressible by this mechanism family.** See
    §"The short-message cliff" below.
 
+## οἰκονομία OIKONOMIA (X33)
+
+**What it is.** A codec about **where the encoder spends its search budget**,
+not about what the wire says. It adds no wire format, no rule class and no
+contract: a wire OIKONOMIA emits is a wire TIMEMA could have emitted. What
+changes is how many times the encoder is willing to re-run its own search to
+choose it.
+
+**Greedy or not?** Not greedy. Every shape trial is scored against the real
+objective (`countTokens(wire) + countTokens(contract)`) and kept only when it
+strictly lowers the whole message; the final arm choice remains an exact minimum
+over scored candidates. The gate does not accept a worse candidate — it decides
+whether to *keep looking*.
+
+**Time/CPU bound?** Yes. Bounding encoder effort is the entire content of the
+codec.
+
+**Decodability — unchanged.** Same glossary, same tape, same contract, same
+`chironDecode`/`symplokeDecode` reader as TIMEMA. X32's live hand-decode receipt
+carries forward untouched. Verified this turn: `bench/x33/verify.ts`, 5 lanes,
+all `oikonomiaRoundTrip` true.
+
+**Why this axis.** arXiv 2607.23362 (JOLT) puts BPE within 1–2 % of the LP lower
+bound, so there is almost no headroom left in *choosing a better character
+string*. The unoptimised axis is the cost of finding one.
+
+### Three measurements
+
+**1. The long-string token-count memo.** X30 memoised `countTokens` for strings
+under 24 characters and never measured the other side of the split — invisible
+by call count, dominant by work. On `prose-01`:
+
+```
+short calls (< 24 chars)     2,384,798     distinct ~98,000
+long  calls (>= 24 chars)       65,364     distinct   3,312     94.9% redundant
+mean length of a long call      1,738 characters
+chars pushed through the pretokenise regex   113,629,256
+```
+
+113 M characters through a regex on a 3 370-character input, 94.9 % repeated.
+`bpe.ts` now memoises the long path too, keyed on the whole string (exact — same
+string, same encoding, same count). Both caches are now one Map per encoding,
+removing 2.4 M key-string allocations per encode.
+
+**2. The propagation gap.** `syntomosEncode` called `metathesisEncode(text, enc)`
+with no options object, and metathesis called `symplokeEncode(text, enc)` with
+none. So `budgetMs`, `maxEvals`, `restarts`, `wordGrid` and `capGrid` had been
+passed by callers since X28 into a void — making the X28 and X31 budget nulls
+and the X32 grid null **vacuous**. Options are forwarded now. Re-asked with a
+knob that reaches the code: the **search budget is confirmed slack** (sibyl at
+300 ms and 12 000 ms give identical output), but the **config count is
+load-bearing** (3, 2, 1 all lose tokens) and was never the thing under test.
+
+**3. Eighty-three percent of the encode is one parent run four times.** Timing
+SYMPLOKE's parents on prose-01: `polytropos` runs **four** times, 18.5 s of 22.3 s.
+The cause is the `'in'` shape order, which collapses shapes *before* the grammar
+runs and therefore owes a full parent re-run to every trial — the trials hand the
+parent genuinely different inputs, so they cannot be cached. X24 set the cap to
+4; nobody measured it.
+
+### The mechanism: buy the next trial only when the last one paid
+
+Prediction was tried first and failed. Total shape-collapse count does not
+separate the classes: **find-listing collapses 240 items and needs `'in'`;
+aapl-2014.csv collapses 240 items and must not have it.** Size, category and
+shape count also fail to separate.
+
+So OIKONOMIA buys one trial at a time and purchases the next only when the
+previous one paid. That is the right shape here because the trials are greedy and
+ranked by hit frequency: a failing trial is the **most frequent remaining**
+candidate failing.
+
+One trial already reaches the four-trial answer on **six of the eight** lanes
+where the question arises, and the gate stays open on `dump.sql` — whose first
+trial *does* improve (707 → 686) — all the way to 662, which a flat cap of 2
+does not achieve.
+
+### Measured: OIKONOMIA vs TIMEMA, 38 lanes
+
+```
+lanes                    38        all byte-exact          38/38
+TOTAL tokens   TIMEMA 23,610   OIKONOMIA 23,625   delta  +15  (+0.064%)
+TOTAL encode   TIMEMA 2,242,016 ms   OIKONOMIA 1,126,530 ms     1.99x
+per-lane speedup   median 2.19x   min 1.14x   max 3.22x
+token loss on      2 lanes (find-listing +13, meeting-transcript +2)
+token gain on      0 lanes
+```
+
+Full per-lane table in `bench/x33/X33.md` §G. **Pareto superior on time,
+equal-or-slightly-worse on tokens, with both regressions disclosed rather than
+averaged away.**
+
+### Honest citation
+
+- **arXiv 2604.02985 (Prompt Compression in the Wild, Apr 2026)**, >30 000
+  end-to-end runs: *"for short inputs (≤1 000 tokens), compression caused
+  overhead, reducing speed-ups to 0.9–1.0×"* and *"in all other settings …
+  the compression overhead outweighs any benefits."* Also: *"model inference
+  accounts for only about 5 % of total latency"* in LLMLingua — the compressor's
+  own algorithm dominates. This is the premise of X33, stated independently.
+- **arXiv 2609.32961 (Sep 2026)**, ~35 000 agent runs: *"fewer tokens need not
+  mean faster or cheaper execution"* — a needed corrective to reading any token
+  count as a win.
+- **arXiv 2602.13266 (LoPace, Feb 2026)**: lossless prompt *storage* at
+  **3.3–10.7 MB/s**. Our encoder runs at roughly **0.0002–0.0005 MB/s**. The gap
+  is the honest measure of how far this axis still has to go; a 2× win does not
+  close it.
+- **arXiv 2506.00307 (Meta-Tokens, Jun 2025)**: the closest published relative —
+  *"a repeated subsequence of length L occurring n times costs L·n tokens versus
+  L + n with a dictionary entry"* is our mechanism stated explicitly. It requires
+  **fine-tuning the model** to read the format; ours does not.
+
+### X33 negative space
+
+1. **Predicting `'in'` from the document** — rejected, does not separate (above).
+2. **Flat trial cap of 1** — 2.09× faster but loses 52 tokens over 33 lanes
+   including +24 on dump.sql; the gate recovers dump.sql entirely.
+3. **Cutting the polytropos config count** — 3, 2, 1 all lose tokens.
+4. **Lowering the sibyl budget** — identical output from 300 ms to 60 000 ms.
+5. **Lowering the polytropos budget** — token-neutral to 8000 ms and ~13 %
+   faster, but subsumed by the cap gate.
+6. **Caching the `'in'` parent runs** — impossible; each trial runs the parent on
+   a different collapsed input.
+7. **Grammar transfer** (build the dictionary once, apply it to every collapsed
+   variant) — the attractive version of #6 and the clearest next lever. Not
+   implemented: it needs sibyl's search internals, and rules found on `text` are
+   not sound for `collapse(text, shapes)`.
+
+### Limits
+
+* **Single measurements, not distributions.** The pipeline is not deterministic
+  (`Date.now()` inside control flow in `polytropos.ts`, `akribeia.ts`, `aion.ts`,
+  `abacus.ts`, `amphora.ts`; `OMEGA_DET=1` stubs only `clock.now()`). `npm-ls.txt`
+  measured 901 in one run and 940 in another.
+* **Part of the `'in'` benefit is best-of-*k* sampling, not a shape effect.**
+  Some `'in'` winners (npm-ls, kubectl-get-pods) win with **zero** recorded
+  collapses — they are drawing a second sample from a stochastic search.
+* **This is a speed codec, not a compression codec.** +15 tokens is a cost.
+
 ## Codecs that do not satisfy the measurement contract (X21 audit)
 
 - **`oracle`** — hardcodes the 20 holdout citations in `ORACLE_MAP` and declares it "not counted

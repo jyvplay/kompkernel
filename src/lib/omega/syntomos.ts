@@ -93,6 +93,10 @@ export interface SyntomosOptions {
   allowDenest?: boolean;
   /** cap on the extra tape tokens de-nesting may cost (default 2) */
   denestSlack?: number;
+  /** X33: forwarded to SYMPLOKE (see SymplokeOptions). */
+  inCap?: number;
+  /** X33: forwarded to SYMPLOKE (see SymplokeOptions). */
+  inGate?: number;
 }
 
 export interface SyntomosResult extends Omit<MetathesisResult, 'contract'> {
@@ -159,7 +163,12 @@ export function syntomosEncode(
   const slack = options.denestSlack ?? 2;
   const rung = cheapestHead(ladder)!;
 
-  const r: any = metathesisEncode(text, enc);
+  // X33: PROPAGATION GAP. This call used to drop `options` on the floor, so
+  // `inCap`/`inGate` (and anything else a caller passed to a codec above
+  // SYNTOMOS) never reached SYMPLOKE. Forwarded now.
+  const r: any = metathesisEncode(text, enc, {
+    inCap: options.inCap, inGate: options.inGate,
+  });
   const undo = (w: string) => (r.parent === 'identity' ? w : chironDecode(w));
 
   // No tape (identity parent): there is no glossary, so no contract at all.

@@ -579,11 +579,17 @@ export function symplokeParents(enc: any): SymplokeParent[] {
     const dp: string = r.decoderPrompt;
     return { wire: String(r.wire), contract: dp.slice(String(r.wire).length + 1) };
   };
+  const T = process.env.OMEGA_PARENT_TIMING === '1';
+  const timed = (name: string, run: (x: string) => { wire: string; contract: string }) =>
+    T ? { name, run: (x: string) => { const t = Date.now(); const o = run(x);
+          process.stderr.write(`  parent ${name.padEnd(11)} ${String(Date.now()-t).padStart(7)} ms  wire ${String(o.wire.length).padStart(7)} ch\n`);
+          return o; }, undo: (w: string) => chironDecode(w) }
+      : { name, run, undo: (w: string) => chironDecode(w) };
   return [
     IDENTITY_PARENT,
-    { name: 'lakonikos', run: (x: string) => cut(lakonikosEncode(x, enc)), undo: (w: string) => chironDecode(w) },
-    { name: 'daedalus', run: (x: string) => cut(daedalusEncode(x, enc)), undo: (w: string) => chironDecode(w) },
-    { name: 'polytropos', run: (x: string) => cut(polytroposEncode(x, enc)), undo: (w: string) => chironDecode(w) },
+    timed('lakonikos', (x: string) => cut(lakonikosEncode(x, enc))),
+    timed('daedalus', (x: string) => cut(daedalusEncode(x, enc))),
+    timed('polytropos', (x: string) => cut(polytroposEncode(x, enc))),
   ];
 }
 
@@ -603,6 +609,23 @@ export function symplokeParents(enc: any): SymplokeParent[] {
  * enough to guarantee SYMPLOKE never loses to the empty set, and it is cheap
  * because each evaluation is one O(n) collapse plus one exact token count.
  */
+/**
+ * X33: how many 'in' trials to spend, and when to stop spending them.
+ *
+ *   inCap  -- hard ceiling on 'in' trials (default 4, the X24 value).
+ *   inGate -- abandonment rule. 0 (default) = always spend the full cap, the
+ *             pre-X33 behaviour. >0 = buy trial k+1 only if trial k improved on
+ *             the incumbent; abandon the 'in' order at the first trial that
+ *             does not pay for the parent run it cost. Shapes are ranked by hit
+ *             count, so a failing trial is the most frequent REMAINING
+ *             candidate failing, which is the strongest evidence available that
+ *             the rest will not pay either.
+ */
+export interface SymplokeOptions {
+  inCap?: number;
+  inGate?: number;
+}
+
 function greedyShapes(
   base: string,
   order: 'out' | 'in',
@@ -612,6 +635,7 @@ function greedyShapes(
   text: string,
   enc: any,
   trialCap: number,
+  gate: number = 0,
 ): { stats: SymplokeStats; wire: string; contract: string; messageTokens: number; trials: number } | null {
   const hits = new Map<string, number>();
   for (const f of cands) {
@@ -662,6 +686,12 @@ function greedyShapes(
     if (trials >= trialCap) break;
     const trial = evaluate([...acc, f]);
     trials++;
+    if (gate > 0 && trial.messageTokens >= cur.messageTokens) {
+      // X33 gate: this trial did not pay for the parent run it cost, so stop
+      // buying them. Shapes are ranked by hit frequency, so a trial that fails
+      // here is the most frequent remaining candidate failing.
+      return { ...cur, trials };
+    }
     if (trial.messageTokens < cur.messageTokens) {
       // EXACTNESS GATE: never ship a shape set that does not round trip.
       let ok = false;
@@ -677,7 +707,12 @@ function greedyShapes(
   return { ...cur, trials };
 }
 
-export function symplokeEncode(text: string, enc: any, parents?: SymplokeParent[]): SymplokeResult {
+export function symplokeEncode(
+  text: string,
+  enc: any,
+  parents?: SymplokeParent[],
+  opts: SymplokeOptions = {},
+): SymplokeResult {
   const inTokens = countTokens(text, enc);
   const list = parents ?? symplokeParents(enc);
   const cands = symplokeCandidates(text);
@@ -697,8 +732,17 @@ export function symplokeEncode(text: string, enc: any, parents?: SymplokeParent[
 
     for (const order of orders) {
       // 'in' must re-run the parent for every trial, so it gets a small cap.
-      const cap = order === 'in' ? 4 : cands.length + 1;
-      const g = greedyShapes(parentWire, order, p, parentContract, cands, text, enc, cap);
+      /* X33: OMEGA_IN_CAP.
+       * For order 'in' every shape trial re-runs the parent on a DIFFERENT
+       * input (the source collapsed with that shape set), so the result cannot
+       * be cached -- the runs are genuinely distinct work. Measured on
+       * prose-01, polytropos is 18.5 s of the 22.3 s encode (83%) and runs
+       * exactly (in-cap) times. This cap is therefore the largest single
+       * handle on encode time in the whole pipeline. X24 set it to 4. */
+      const cap = order === 'in'
+        ? (opts.inCap ?? (Number(process.env.OMEGA_IN_CAP) || 4))
+        : cands.length + 1;
+      const g = greedyShapes(parentWire, order, p, parentContract, cands, text, enc, cap, opts.inGate ?? 0);
       if (!g) continue;
 
       let ok = false;
@@ -715,6 +759,12 @@ export function symplokeEncode(text: string, enc: any, parents?: SymplokeParent[
         notes: `${cands.length} candidate shapes, ${g.trials} trials, ${g.stats.totalCollapsed} collapsed, ${g.stats.totalBare} bare; one-chat=${g.messageTokens} tok vs identity ${inTokens}`,
       };
       if (!best || cand.messageTokens < best.messageTokens) best = cand;
+      if ((globalThis as any).__OMEGA_TRACE) (globalThis as any).__OMEGA_TRACE.push({
+        parent: p.name, order, msg: cand.messageTokens, parentTok: inTokens,
+        wireLen: g.wire.length, trials: g.trials,
+        shapes: cand.shapes, collapsed: g.stats.totalCollapsed, bare: g.stats.totalBare,
+        rules: (String(g.wire).match(/[\u0400-\u04FF\u0370-\u03FF\u0500-\u052F\u2C00-\u2C5F\uA640-\uA69F]/g)||[]).length,
+      });
     }
   }
   return best as SymplokeResult;

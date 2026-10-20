@@ -102,6 +102,10 @@ export interface TachosOptions extends Omit<SynkopeOptions, 'ladder'> {
   maxBootstrapRules?: number;
   /** run the subsidized arm at all (default true) */
   bootstrap?: boolean;
+  /** X33: hard ceiling on SYMPLOKE 'in' shape trials (see SymplokeOptions). */
+  inCap?: number;
+  /** X33: abandonment gate for 'in' shape trials (see SymplokeOptions). */
+  inGate?: number;
 }
 
 export interface TachosResult extends SynkopeResult {
