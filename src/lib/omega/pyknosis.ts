@@ -192,8 +192,14 @@ export const PYKNOSIS_MIN_RUN = 12;
  * PESSIMISTIC, not optimistic, because it cannot see that a uniformly
  * re-spelled document lets the grammar search find better rules. Measured, that
  * gate rejected a real -44 token win (estimated 29 against a threshold of 34).
- * The isolated estimate is therefore used only to reject documents where it is
- * negative or negligible.
+ *
+ * The isolated estimate is now not used to decide at all, and that is measured
+ * rather than assumed. With the alphabet first measured, dump.sql estimated 29
+ * and delivered -54. With the shipped alphabet it estimates **2** and still
+ * delivers -54. An estimate that moves by a factor of fourteen while the
+ * outcome does not move at all is not a signal, and gating on `estimated > 0`
+ * left the real -54 one bad measurement away from being silently skipped. So
+ * the gate is a character count and nothing else.
  */
 export const PYKNOSIS_MIN_HEX_CHARS = 150;
 
@@ -336,7 +342,8 @@ export function pyknosisPlan(
   const clause = `Then ${marker}: ${alphabet} mean ${PYKNOSIS_HEX}.`;
   const clauseTok = countTokens(' ' + clause, enc) - countTokens(' ', enc);
 
-  // Isolated estimate, marker cost included.
+  // Isolated estimate, marker cost included. Reported for diagnosis only; see
+  // PYKNOSIS_MIN_HEX_CHARS for why it is deliberately NOT used to decide.
   let estimated = 0;
   let chars = 0;
   for (const r of runs) {
@@ -349,7 +356,6 @@ export function pyknosisPlan(
   estimated -= clauseTok;
 
   if (chars < (opts.minHexChars ?? PYKNOSIS_MIN_HEX_CHARS)) return null;
-  if (estimated <= 0) return null;
 
   let out = '';
   let prev = 0;

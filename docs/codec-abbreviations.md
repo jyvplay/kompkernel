@@ -1144,6 +1144,170 @@ averaged away.**
   collapses — they are drawing a second sample from a stochastic search.
 * **This is a speed codec, not a compression codec.** +15 tokens is a cost.
 
+## πύκνωσις PYKNOSIS (X34)
+
+**New codec.** `src/lib/omega/pyknosis.ts`, registry key `pyknosis`, family
+`exact`, after `oikonomia`, before `chronos`.
+
+**One-line claim:** every codec before this one compressed the same resource —
+the fact that some span of the text occurs more than once. PYKNOSIS compresses a
+different resource, the one thing left once the repetition is gone: **the
+decoder's tokenizer charges different prices for different characters, and that
+price list can be arbitraged.**
+
+### The opening measurement: the residual is repetition-free
+
+X34 began on the exact-repeat family and that family is **refuted**. The tape
+residual (`bench/x34/resid.ts`):
+
+| lane | raw repeat coverage | tape repeat coverage |
+|---|---|---|
+| openstack-loghub-26.log | 76.3 % | **0.0 %** |
+| git-numstat.txt | 61.5 % | **0.4 %** |
+
+Re-encoding the tape gains **exactly 0** (648→648, 509→509, 1511→1511). Glossary
+entry order is forced by the dependency DAG (300 random permutations → 0/300
+valid); topological orders move the wire ±2 tokens. Glossary-of-glossary has
+0–17 % LZ redundancy.
+
+So the wire's density is not a search failure:
+
+| lane | raw tokens | wire | tape chars | chars/token |
+|---|---|---|---|---|
+| openstack-loghub-26.log | 4028 | 945 | 1272 | 2.50 |
+| git-numstat.txt | 4632 | 1992 | 3331 | 2.20 |
+
+English prose is ~4.3. The 2.2–2.5 **is the price of the alphabet**.
+
+### The mechanism: alphabet arbitrage
+
+Scanning for spans below 3.0 chars/token locates the badly-priced content
+(`bench/x34/dense.ts`) — hexadecimal, versus nothing at all in kb-article or
+prose:
+
+| lane | chars | tokens | chars/token | census |
+|---|---|---|---|---|
+| openstack-loghub-26.log | 4068 | 2420 | 1.68 | digit 2122, a-f 1330 |
+| dump.sql | 1114 | 552 | 2.02 | digit 900, a-f 144 |
+| find-listing.txt | 2760 | 1440 | 1.92 | digit 2400 |
+| vix-daily-1990.csv | 1260 | 756 | 1.67 | digit 1008 |
+| kb-article.txt | **0** | **0** | — | — |
+
+```
+random hex, as-is            1.740 chars/token
+same info, re-spelled        2.201 (random corpus)   -20.9 %
+same info, re-spelled        2.460 (real corpus)     -28.8 %
+```
+
+Shipped mapping: **`0123456789abcdef → etaoinsrhldcumyp`** (17-token clause).
+
+**Digit runs are explicitly NOT re-spelled** (`bench/x34/dig.ts`) — bare digits
+already run 2.16–2.80 chars/token, so remapping *loses*: +19 on find-listing,
+**+152** on vix-daily.
+
+### Choosing the alphabet: two searches that disagree
+
+| evaluation set | best alphabet | ch/tok | saving |
+|---|---|---|---|
+| 900 random hex strings (`opt.ts`) | `etaoinsrkldcumyp` | 2.201 | −20.9 % |
+| 663 real corpus runs, 9472 ch (`opt2.ts`) | `keaoinstrldcumzp` | 2.460 | −28.8 % |
+
+End-to-end settles it in favour of **neither**:
+
+| alphabet | dump.sql | openstack | total |
+|---|---|---|---|
+| `keaoinstrldcumzp` (better in isolation) | −52 | −14 | −66 |
+| **`etaoinsrhldcumyp` (better end to end)** | **−54** | **−17** | **−71** |
+
+### Two soundness conditions, verified per run
+
+1. **Self-delimiting.** A closing delimiter costs ~1 token/run — 176 against a
+   398-token saving at 88 runs. Instead the encoder *verifies* every run is
+   followed by a character outside the target alphabet (`bound.ts`): all 88 on
+   openstack (`' '`×62, `'/'`×15, `']'`×7, `')'`×2, CR×2) and all 26 on dump.sql
+   (`"'"`×26).
+2. **Marker absent** from the source; else another is chosen, else skip.
+
+### Uniform, not selective — the counterintuitive result
+
+```
+dump.sql   uniform remap (all runs >= 12)       -44 tokens
+dump.sql   per-run remap (only runs that pay)   +37 tokens
+```
+
+Selective remapping leaves the document half in each alphabet and destroys the
+regularity the grammar search needs; a *uniformly* re-spelled document is **more**
+regular and the search finds better rules in it. The per-run estimate is
+therefore only a **weak gate**, and the real decision is a measured end-to-end
+comparison that never ships a regression. The first gate (`est >= 2 x clause`)
+was too strong and **rejected a real −44** (estimated 29 vs threshold 34) — the
+isolated estimate is *pessimistic* there, precisely because of this effect. The
+estimate is now **not used to decide at all**: with the first alphabet it
+estimated 29 and delivered −54; with the shipped alphabet it estimates **2** and
+still delivers −54. An estimate that moves 14× while the outcome does not move
+is not a signal, so the gate is a character count (`hexChars >= 150`) only.
+
+### Measured: PYKNOSIS vs OIKONOMIA, 31 lanes
+
+```
+dump.sql                  662 -> 608   -54   byte-exact ✅
+openstack-loghub-26.log   945 -> 928   -17   byte-exact ✅
+29 further lanes          unchanged          byte-exact ✅
+```
+
+**No lane regresses by mechanism.** Two rows read with care:
+
+* **gh-api.json.txt +3 with `fired: false`** — the transform did not fire, so
+  both numbers come from the same `oikonomiaEncode` path; the +3 is run-to-run
+  variance in a stochastic search, reported rather than hidden.
+* **package-lock-head.json OOMs** — `pyknosisPlan` returns **null** there, and
+  `oikonomiaEncode` alone OOMs at 1.9 GB on its 40 000 chars. **Pre-existing in
+  OIKONOMIA; PYKNOSIS is not implicated.**
+
+### Honest citation
+
+* **arXiv 2610.01127, "Counting and Min-Cost Encoding" (2026-10-01)** — closest
+  published statement of the mechanism. Given a **fixed** vocabulary, MCE picks
+  a segmentation by globally minimising an encoding cost and beats BPE. Our
+  decoder's vocabulary is **frozen** at o200k_base, so the only free variable is
+  the character string — and choosing it well is a real optimisation. They change
+  the vocabulary; we hold it fixed and change the text. Same objective, opposite
+  side of the interface, and ours needs no cooperation from the model.
+* **"The tokens-per-byte trap" (DEV, 2026-05-23)** — the failure mode one wrong
+  decision away: deleting 25 % of characters makes prompts **23–66 % larger in
+  tokens**, because corrupted prose falls through to byte-level fallback (up to
+  4 tokens/glyph). Its prescription is our guard: *"run your input through the
+  actual tokenizer before AND after any compression scheme."* PYKNOSIS perturbs
+  characters **into** the vocabulary's sweet spot, not out of it.
+* **arXiv 2511.20849, "Length-MAX Tokenizer" (2025-11-25)** — 14–18 % fewer
+  tokens than BPE by selecting longer tokens; requires building a new tokenizer,
+  which the one-chat constraint forbids. Reinforces X32: with the decoder's
+  tokenizer frozen there is no headroom in the merge rule, only in what string
+  we feed it.
+
+### X34 negative space (measured, all rejected)
+
+1. **Glossary entry order** — forced by the dependency DAG; ±2 tokens.
+2. **Glossary-of-glossary** — 0–17 % LZ redundancy.
+3. **Tape re-encoding** — exactly 0 on every lane.
+4. **Digit-run remapping** — +19 find-listing, +152 vix-daily.
+5. **Per-run (selective) remapping** — +37 on dump.sql where uniform is −44.
+6. **Delimiter pairs** for the hex runs — cost ~2 tokens/run and turn dump.sql
+   and find-listing into net losses.
+7. **The `est >= 2 x clause` gate** — rejected a real −44.
+8. **Base64 as the target encoding** — token-comparable but needs +33 % chars.
+
+### Limits
+
+* **Not a general-purpose compressor.** Two of 31 lanes moved; a no-op elsewhere
+  at one regex scan.
+* **Cost on firing lanes:** a second full encode (dump.sql 97 s → 189 s;
+  openstack 102 s → 164 s).
+* **Single measurements, not distributions** — the pipeline is not deterministic.
+* **The alphabet was selected on two lanes' end-to-end results** — the weakest
+  part of the work, stated as such. A per-position change was worth up to ~54
+  tokens, so a third hex-heavy lane could prefer a different letter.
+
 ## Codecs that do not satisfy the measurement contract (X21 audit)
 
 - **`oracle`** — hardcodes the 20 holdout citations in `ORACLE_MAP` and declares it "not counted

@@ -2917,3 +2917,79 @@ effect. This is a **speed codec, not a compression codec** — the +15 tokens is
 cost.
 
 Full writeup: `bench/x33/X33.md`.
+
+---
+
+## X34 — πύκνωσις PYKNOSIS: the condensation
+
+**New codec.** `src/lib/omega/pyknosis.ts`, registry key `pyknosis`.
+
+**One-line claim:** every codec before this one compressed the same resource —
+the fact that some span of the text occurs more than once. PYKNOSIS compresses a
+different resource, the one thing left once the repetition is gone: **the
+decoder's tokenizer charges different prices for different characters, and that
+price list can be arbitraged.**
+
+**The opening measurement.** X34 began on the exact-repeat family, and that
+family is refuted. The tape residual is 0.0 % on openstack and 0.4 % on
+git-numstat (from 76.3 % and 61.5 % raw), and re-encoding the tape gains
+**exactly 0**. Glossary order is forced by the dependency DAG (0/300 random
+permutations valid); topological orders move the wire ±2 tokens.
+
+So the wire's density of 2.20–2.50 chars/token, against ~4.3 for prose, is not a
+search failure. **It is the price of the alphabet.**
+
+**The mechanism.** Scanning for spans below 3.0 chars/token locates hexadecimal
+payloads — openstack 1.68, dump.sql 2.02 — and *nothing at all* in kb-article or
+prose. o200k charges ~1 token per character for random hex; the same information
+spelled with the 16 most mergeable letters costs 2.201 (random corpus) to 2.460
+(real corpus). A fixed 16-character substitution is information-preserving, so
+this is pure arbitrage between two price lists for identical information — and it
+is orthogonal to every dictionary mechanism, because it works on content with
+**zero repetition**, which is precisely the content no rule can fire on twice.
+
+Shipped: `0123456789abcdef → etaoinsrhldcumyp`, clause `Then ~: etaoinsrhldcumyp
+mean 0123456789abcdef.` (17 tokens).
+
+**Result, 31 lanes, every lane byte-exact:**
+
+```
+dump.sql                  662 -> 608   -54   byte-exact ✅
+openstack-loghub-26.log   945 -> 928   -17   byte-exact ✅
+29 further lanes          unchanged          byte-exact ✅
+```
+
+**No lane regresses by mechanism** — the transform is accepted only when the
+measured full message is strictly smaller than the parent's.
+
+**Two rows read with care.** `gh-api.json.txt` shows +3 with `fired: false`: the
+transform did not fire, so both numbers come from the same `oikonomiaEncode`
+path and the +3 is run-to-run variance in a stochastic search. Reported, not
+hidden. `package-lock-head.json` OOMs — measured in isolation, `pyknosisPlan`
+returns **null** there and `oikonomiaEncode` alone OOMs at 1.9 GB on its 40 000
+characters. **Pre-existing in OIKONOMIA; PYKNOSIS is not implicated.**
+
+**Digit runs are explicitly NOT re-spelled.** Bare digits already run 2.16–2.80
+chars/token, above what any letter alphabet achieves, so remapping loses: +19 on
+find-listing, **+152** on vix-daily.
+
+**Uniform, not selective — the counterintuitive result.** `dump.sql` is −44 with
+uniform remapping and **+37** with per-run remapping, because selective
+remapping leaves the document half in each alphabet and destroys the regularity
+the grammar search depends on; a uniformly re-spelled document is *more* regular
+and the search finds better rules in it. The per-run estimate is therefore only a
+weak gate, and the real decision is the measured end-to-end comparison.
+
+**Decodability.** The re-spelling sits *under* the dictionary: the wire expands
+first and the alphabet is undone last, so the undo is a flat character operation
+over text in which every run still appears in its original surroundings. Every
+run is verified at encode time to be followed by a character outside the target
+alphabet (all 88 on openstack, all 26 on dump.sql), which is what makes the runs
+self-delimiting without a closing delimiter.
+
+**Limits.** Not a general-purpose compressor — two of 31 lanes moved. The
+transform costs a second full encode on firing lanes (dump.sql 97 s → 189 s).
+Single measurements, not distributions. **The alphabet was selected on two lanes'
+end-to-end results**, the weakest part of this work, stated as such.
+
+Full writeup: `bench/x34/X34.md`.
