@@ -2993,3 +2993,114 @@ Single measurements, not distributions. **The alphabet was selected on two lanes
 end-to-end results**, the weakest part of this work, stated as such.
 
 Full writeup: `bench/x34/X34.md`.
+
+---
+
+## συγκοπή SYNCOPE (X35) — separator elision in grouped hex identifiers
+
+**Registry key:** `syncope` (position 25, immediately after `pyknosis`).
+**Implementation:** `src/lib/omega/syncope.ts`.
+**Parent:** OIKONOMIA, layered on PYKNOSIS. **Fidelity:** exact (byte-perfect).
+**Greedy:** no — the grouping is chosen by maximising measured saving over all
+candidate shapes, and the transform is accepted only when the measured full
+message is strictly smaller than the parent's.
+**Time/CPU bound:** yes — the transform runs after PYKNOSIS's cheap
+≥150-character gate, so the extra scan is confined to documents that already
+carry re-spellable hex.
+
+### The resource it compresses
+
+PYKNOSIS arbitrages the tokenizer's character price list by re-spelling hex into
+the sixteen most mergeable letters, but it deliberately **preserves** punctuation
+inside a run (`KEEP = {'-','_'}`), because in general the encoder cannot know
+whether a dash belongs to the identifier or to the surrounding text. SYNCOPE
+measures what that caution costs and reclaims it where the caution is
+unnecessary.
+
+On the 36 request UUIDs of `openstack-loghub-26.log`, `bench/x35/syn3.ts` prices
+the same 32 hex digits two ways:
+
+| encoding of the 32 hex digits | tokens |
+|---|---|
+| PYKNOSIS style, dashes kept | **663** |
+| dashes elided | **546** |
+| saving | **117** |
+
+The dashes cost twice over. **Directly:** each is its own pretoken under the
+o200k pretokenizer (` ?[^\s\p{L}\p{N}]+`), four tokens per identifier.
+**Indirectly and worse:** they fragment the re-spelled run, so instead of one
+32-letter run BPE can merge across, the encoder faces five runs of 8/4/4/4/12
+letters, and short runs merge badly.
+
+### Why a dash inside hex is affordable to drop
+
+It is **format, not information**. The 8-4-4-4-12 grouping is fixed by
+convention, so the 32 payload characters determine the four dash positions
+exactly. Restoring them is a positional operation — the reader counts and
+inserts — with no base conversion and no carries. This is the same discipline
+that keeps TIMEMA safe: only operations a reader can do by position and copy are
+ever placed in a contract.
+
+### Where it does NOT apply — the `hexish` guard
+
+The obvious generalisation (elide separators from *any* dashed token) is wrong.
+`bench/x35/syn2.ts` scans every lane for `[0-9a-f]{2,}([-_][0-9a-f]{2,})+` and
+counts how many matches contain at least one of `a-f`, i.e. are genuinely
+hexadecimal rather than merely numeric:
+
+| lane | shape | n | hexish |
+|---|---|---|---|
+| openstack-loghub-26.log | 8-4-4-4-12 | 36 | **36** |
+| openstack-loghub-26.log | 4-2-2-2 | 26 | 0 |
+| dump.sql | 4-2-2 | 26 | 0 |
+| find-listing.txt | 4-2 | 120 | 0 |
+| vix-daily-1990.csv | 4-2-2 | 126 | 0 |
+| bibliography.txt | 3-3 | 12 | 0 |
+
+Every date and every page range scores **zero**. Those separators are not
+elidable: TIMEMA and the shape system already compress dates far better than any
+re-spelling could, and deleting their dashes would destroy that. The transform
+therefore requires a real hex letter before it will touch a run. That
+restriction is what keeps this honest rather than benchmaxxed — the rule is not
+"dashes are free on this corpus" but "dashes inside a hexadecimal identifier
+carry no information", which holds for UUIDs, trace ids and content hashes in
+text this encoder has never seen.
+
+### Disambiguation: a dedicated marker, not a length rule
+
+Only runs of one shape are shortened, so the reader must be told which. A length
+rule was tried first and **fails in practice**: openstack carries 32-character
+request UUIDs alongside 32-character *un-separated* tenant ids, so a reader
+could not tell them apart. Elided payloads therefore get their own second
+marker, and the contract grows by one sentence:
+
+> Then ~: etaoinsrhldcumyp mean 0123456789abcdef. Payloads after ^ use the same
+> letters and take dashes after 8,12,16,20.
+
+### Soundness
+
+Mirrors PYKNOSIS exactly. The marker must be absent from the source. Every
+elided payload must be followed by a character outside the target alphabet, so
+that "consume letters until a non-letter" lands precisely on the true end. The
+gate is the measured end-to-end comparison: the full message is encoded both
+ways and the shorter ships, so if the grammar reacts badly the wire is
+byte-identical to the parent's.
+
+### Measured result (byte-exact, through the registry `run` path)
+
+| lane | OIKONOMIA | PYKNOSIS | SYNCOPE | vs OIKONOMIA | vs PYKNOSIS |
+|---|---|---|---|---|---|
+| openstack-loghub-26.log | 945 | 928 | **898** | **−47** | **−30** |
+| dump.sql | 662 | 608 | 608 | −54 | 0 |
+| kb-article.txt | 622 | 622 | 622 | 0 | 0 |
+
+`syncope=true, syncopeRuns=36, syncopeSeps=144`, `DECODED-EXACT`.
+
+**Limits.** The isolated estimate (117) is far larger than the delivered end-to-end
+gain (−30), for the reason PYKNOSIS's own doc records: the grammar search reacts
+to the changed text and reclaims part of the arbitrage. It fires on **one** lane
+of the corpus — documents carrying grouped hexadecimal identifiers — and is a
+no-op everywhere else, at the cost of one regex scan behind a gate already paid
+for. Single measurements, not distributions.
+
+Full writeup: `bench/x35/X35.md`.

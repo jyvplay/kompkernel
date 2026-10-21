@@ -70,7 +70,7 @@
  * and stays valid, because the braided SYMPLOKE contract names no glyph.
  */
 import { symplokeEncode, symplokeDecode, type SymplokeStats } from './symploke';
-import { chironParseTape, chironDecode, CHIRON_START, CHIRON_SEP } from './chiron';
+import { chironParseTape, chironDecode, CHIRON_START, CHIRON_SEP , CHIRON_SCRIPTS} from './chiron';
 import { scriptOfChar } from './syntomia';
 import { countTokens, type EncodingName } from './bpe';
 import { now, DET_MODE as DET } from './clock';
@@ -88,6 +88,12 @@ export interface MetathesisOptions {
   inCap?: number;
   /** X33: forwarded to SYMPLOKE (see SymplokeOptions). */
   inGate?: number;
+  /**
+   * X35: force the relayout pool to a named CHIRON script instead of inheriting
+   * the script of the parent's first glyph. Lets a caller search the ALPHABET,
+   * not just the assignment inside a fixed alphabet.
+   */
+  forceScript?: string;
 }
 
 export interface MetathesisResult {
@@ -179,6 +185,9 @@ export function relayoutGlyphs(
 
   const tape = wire.slice(CHIRON_START.length, cut);
   const body = wire.slice(cut + CHIRON_SEP.length);
+  // Parse with the script the glyphs are ACTUALLY written in; forceScript only
+  // redirects which POOL we relabel into. (Parsing with a foreign script can
+  // never succeed: tape[0] would not be in it.)
   const sc = scriptOfChar(tape[0]);
   if (!sc) return identity;
   const rules = chironParseTape(tape, sc);
@@ -186,7 +195,10 @@ export function relayoutGlyphs(
 
   const orig = rules.map((r) => r.glyph);
   const payload = new Set(text);
-  const pool = poolFor(sc, payload, enc);
+  const poolSc = opts.forceScript
+    ? (CHIRON_SCRIPTS.find((x) => x.name === opts.forceScript) ?? sc)
+    : sc;
+  const pool = poolFor(poolSc, payload, enc);
   if (pool.length < orig.length + 2) return identity;
 
   // The renderer: substitute symbolically, so nested references inside other
