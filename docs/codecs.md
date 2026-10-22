@@ -3241,3 +3241,128 @@ data.** No lane regresses: the transform is accepted only when the measured full
 message is strictly smaller.
 
 Full writeup: `bench/x36/X36.md`.
+
+---
+
+## X37 — EUTELEIA (εὐτέλεια, "cheapness")
+
+**Registry key:** `euteleia` (index 27) · **Implementation:** `src/lib/omega/euteleia.ts`
+**Sits on:** ANADIPLOSIS → SYNCOPE → PYKNOSIS → OIKONOMIA · **Fidelity:** exact, byte-for-byte
+**Greedy?** No. Every candidate is scored on the exact wire or contract it produces, and the
+whole transform ships only when the measured full message is strictly smaller than the parent's.
+**Bound:** CPU-bound (one extra span scan plus one token count per candidate framing; only the
+winner is carried through the dictionary search).
+
+### The finding
+
+Every codec in this stack injects symbols into the wire that carry **no information from the
+source**. Each was chosen once, at authoring time, by a **collision** argument: pick something
+that cannot occur in real text, so the reader can never mistake it for payload.
+
+That argument is about **safety**. The symbols were then priced as though choosing them were
+**free**. It is not free. The decoder tokenizer is byte-level BPE: a code point that never
+earned a merge falls back to its raw UTF-8 bytes and costs roughly one token per byte.
+
+Measured on `o200k_base` in this repository (`bench/x37/frame.ts`, `bench/x37/mk.ts`,
+`bench/x37/fr2.ts`), tokens added by the framing around one run-length span:
+
+| framing | tokens | why |
+|---|---|---|
+| `(N~X)` | **3.0** | ASCII, 1 byte each, 1 token each |
+| `[N~X]` | 3.3 | |
+| `«N~X»` | 3.5 | 2-byte chars |
+| `{N~X}` | 3.8 | |
+| `⌈N~X⌉` | 6.0 | 3-byte chars |
+| `⟦N⇤X⟧` | **8.8** | ← the X36 choice |
+
+ANADIPLOSIS shipped `⟦ ⟧ ⇤` precisely because they are vanishingly rare and can therefore
+never collide. **The rarity that buys the collision guarantee is exactly the property the
+tokenizer charges for, and the two were never compared.** Three bytes, no merges, three
+tokens apiece. On `vix-daily-1990.csv`, which carries 126 spans, that was 8.8 tokens of
+framing per span where 3.0 would do.
+
+### What the codec does
+
+EUTELEIA replaces convention with measurement, in two places, always against the exact
+objective.
+
+1. **A framing auction.** ANADIPLOSIS takes the first collision-free framing from a
+   statically ordered list. EUTELEIA tries every collision-free framing, tokenizes the wire
+   each one actually produces, and keeps the cheapest. Safety is preserved exactly — a framing
+   is a candidate only if none of its three characters occur in the source. What changes is
+   that among the *safe* choices the *cheap* one wins, measured rather than assumed.
+   Emitted framings are ordered cheapest first with a documented collision fallback:
+   `()~`, `()#`, `[]~`, `<>~`, `[]#`, `[]@`, `[]*`, `«»~`, `{}~`, `‹›~`.
+
+2. **A clause auction.** The contract clause is spliced in front of a sentence that already
+   exists, so its price is the price of the **junction**, not of the clause alone. Measured:
+   the X36 clause is **10** tokens and `(N~X)=X*N.` is **7**, and both state the same fact.
+   EUTELEIA scores every wording by measuring the exact contract string it produces.
+
+Both are gated on the measured full message, so EUTELEIA can never be worse than ANADIPLOSIS.
+It is a strict superset: **ANADIPLOSIS is EUTELEIA with the auctions disabled.**
+
+### Decodability — one chat input box
+
+Identical obligation to ANADIPLOSIS, one appended sentence, with the framing named by the
+wire itself:
+
+> (N~X)=X*N.
+
+Expanding a span is a copy with a stated count — no arithmetic, no base conversion, no
+alphabet table, and no second message. Verified `DECODED-EXACT` through the registry `run`
+path on every lane measured.
+
+### Measured (byte-exact, through the registry)
+
+| lane | ANADIPLOSIS (X36) | **EUTELEIA (X37)** | Δ |
+|---|---|---|---|
+| vix-daily-1990.csv | 594 | **579** | **−15 (−2.5%)** |
+| all 15 other lanes | unchanged | unchanged | 0 |
+
+Split: **−12 from the framing auction** (594 → 582, `⟦N⇤X⟧` → `(N~X)`) and **−3 from the
+clause auction** (582 → 579, `⟦N⇤X⟧ means X written N times.` → `(N~X)=X*N.`, 10 tokens → 7).
+Encode time is unchanged or better (165 s on vix against ~200 s for the parent alone, because
+the auction only carries one framing through the dictionary search). **17 of 17 lanes
+round-trip byte-exact** with the new framing (`bench/x37/rt.ts`); vix additionally verified
+through `euteleiaRoundTrip`.
+
+### The negative space — what was measured and refused
+
+The obvious generalisation, "reprice every control symbol in the stack", was run and is a
+**null result**. Recorded here so nobody reruns it.
+
+* **`bench/x37/delim.ts`** substitutes cheaper candidates for the CHIRON tape markers `§`
+  (U+00A7) and `¶` (U+00B6) across ten lanes: **0 on eight lanes, 1 token on two.** Those two
+  characters *are* single tokens in `o200k_base`. They were chosen well.
+* **`bench/x37/situ.ts`** substitutes each tape glyph for sixty unused pool glyphs and
+  measures the whole wire: the token count is **invariant**. The CHIRON claim that every pool
+  glyph costs one token in situ holds; there is nothing to win by reassigning them.
+* **`bench/x37/fr2.ts`** tests seven framing shapes in situ (`~N~X~`, `~NX~`, `N~X~`, `{N~X}`,
+  `[N|X]`): `(N~X)` is the cheapest at 21 tokens against 22–23 for the rest. Three markers
+  with a count written first is the floor — dropping any one of them makes the count
+  ambiguous in a numeric corpus.
+
+So the overcharge was real, but **local to genuinely rare multi-byte symbols, and the shipped
+stack contained exactly one.**
+
+### Honest scope
+
+A small, universal, regression-free reduction on the lanes where ANADIPLOSIS fires, and
+**exactly zero everywhere else**. It does not move prose and does not claim to. The −12 is
+smaller than the 5.8 tokens-per-span × 126 spans that the isolated measurement predicts,
+because in the real wire the framing characters merge with neighbouring digits; the honest
+number is the measured one, not the predicted one.
+
+### Citation
+
+The byte-fallback floor that makes a rare code point cost roughly one token per byte is
+standard and documented (Hugging Face, *Tokenizer summary*), and is named the **encoding
+floor** by **arXiv 2610.01984** (*Universal Byte-Level Encoding: UTF-8/UTF-16 Routing*,
+October 2026), which measures underrepresented spans sitting at three tokens per character
+even at a 64K vocabulary. That is the mechanism. The application — that a lossless encoder
+which chooses its own control symbols must auction them against that floor rather than
+select them by a collision argument — and both auctions here, are original to this
+repository.
+
+Full writeup: `bench/x37/X37.md`.

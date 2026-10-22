@@ -156,15 +156,43 @@ import {
  * message is strictly smaller than the parent's.
  */
 
-/** Opens a run-length span. */
-export const ANADIPLOSIS_OPEN = '\u27e6';
-/** Closes a run-length span. */
-export const ANADIPLOSIS_CLOSE = '\u27e7';
-/** Separates the count from the unit. */
-export const ANADIPLOSIS_MARK = '\u21e4';
+/**
+ * Candidate framings, cheapest first. Measured (bench/x37/frame.ts) as the
+ * tokens added by `OPEN count MARK unit CLOSE` over the bare unit, averaged
+ * over four representative units:
+ *
+ *     (N~X)   3.0        {N~X}   3.8
+ *     [N~X]   3.3        ‹N~X›   3.8
+ *     <N~X>   3.3        ⌈N~X⌉   6.0
+ *     «N~X»   3.5        ⟦N⇤X⟧   8.8   <- the X36 choice
+ *
+ * The first implementation used the rare mathematical brackets on the theory
+ * that rarity avoids collision with the source. The measurement says rarity is
+ * paid for at the till: those characters cost three tokens each where ASCII
+ * costs one, so the framing was ~5.8 tokens per span more expensive than it
+ * needed to be. Collision is instead handled by trying these in order and
+ * falling back to the next candidate when a character occurs in the source.
+ */
+export const ANADIPLOSIS_FRAMINGS: ReadonlyArray<readonly [string, string, string]> = [
+  ['(', ')', '~'],
+  ['[', ']', '~'],
+  ['<', '>', '~'],
+  ['{', '}', '~'],
+  ['\u00ab', '\u00bb', '~'],
+  ['[', ']', '#'],
+  ['[', ']', '@'],
+  ['[', ']', '*'],
+  ['\u27e6', '\u27e7', '\u21e4'],
+];
+/** Opens a run-length span (default framing). */
+export const ANADIPLOSIS_OPEN = ANADIPLOSIS_FRAMINGS[0][0];
+/** Closes a run-length span (default framing). */
+export const ANADIPLOSIS_CLOSE = ANADIPLOSIS_FRAMINGS[0][1];
+/** Separates the count from the unit (default framing). */
+export const ANADIPLOSIS_MARK = ANADIPLOSIS_FRAMINGS[0][2];
 
 /** Tokens charged for the three framing characters plus the count. */
-export const ANADIPLOSIS_OVERHEAD = 5;
+export const ANADIPLOSIS_OVERHEAD = 4;
 /** Minimum net token saving for a span to be accepted. */
 export const ANADIPLOSIS_MIN_GAIN = 3;
 /** A unit costing fewer tokens than this can never pay for its own framing. */
@@ -182,6 +210,15 @@ export const ANADIPLOSIS_MAX_SPANS = 4096;
 
 export interface AnadiplosisOptions extends SyncopeOptions {
   anadiplosis?: boolean;
+  /** Force a framing. Must still be collision-free or the plan is refused. */
+  framing?: Framing;
+  /**
+   * Candidate wordings for the contract clause. When more than one is given
+   * they are scored by MEASURING the exact contract each produces, not by
+   * counting the clause alone, because the clause is spliced in front of an
+   * existing sentence and the tokenizer merges across the junction.
+   */
+  clauseLadder?: string[];
 }
 
 export interface AnadiplosisResult extends SyncopeResult {
@@ -192,13 +229,16 @@ export interface AnadiplosisResult extends SyncopeResult {
   anadiplosisChars: number;
   /** the contract clause, '' when the transform did not fire */
   anadiplosisClause: string;
+  /** the framing actually used, needed to decode */
+  framing: Framing;
 }
 
 interface Cand { s: number; p: number; k: number; gain: number; ut: number }
 
 /** The contract sentence the receiving model is asked to honour. */
-export function anadiplosisClauseFor(): string {
-  return `${ANADIPLOSIS_OPEN}N${ANADIPLOSIS_MARK}X${ANADIPLOSIS_CLOSE} means X written N times.`;
+export function anadiplosisClauseFor(framing: Framing = ANADIPLOSIS_DEFAULT_FRAMING): string {
+  const [o, c, m] = framing;
+  return `${o}N${m}X${c} means X written N times.`;
 }
 
 /**
@@ -262,12 +302,13 @@ function select(text: string, cands: Cand[], maxSpans: number): Cand[] {
  * Build the output in ONE pass over the ORIGINAL text, so that a unit can never
  * contain a framing character emitted for some other span.
  */
-function applyAll(text: string, chosen: Cand[]): string {
+function applyAll(text: string, chosen: Cand[], framing: Framing): string {
+  const [OPEN, CLOSE, MARK] = framing;
   let out = '';
   let i = 0;
   for (const c of chosen) {
     out += text.slice(i, c.s);
-    out += ANADIPLOSIS_OPEN + c.k + ANADIPLOSIS_MARK + text.slice(c.s, c.s + c.p) + ANADIPLOSIS_CLOSE;
+    out += OPEN + c.k + MARK + text.slice(c.s, c.s + c.p) + CLOSE;
     i = c.s + c.p * c.k;
   }
   out += text.slice(i);
@@ -278,19 +319,35 @@ function applyAll(text: string, chosen: Cand[]): string {
  * The reference decoder. This is exactly what the receiving model is asked to
  * do, written down: replace `⟦N⇤X⟧` with X written N times.
  */
-export function anadiplosisUndo(text: string): string {
-  if (!text.includes(ANADIPLOSIS_OPEN)) return text;
+/** A chosen framing: [open, close, mark]. */
+export type Framing = readonly [string, string, string];
+
+export const ANADIPLOSIS_DEFAULT_FRAMING: Framing =
+  [ANADIPLOSIS_OPEN, ANADIPLOSIS_CLOSE, ANADIPLOSIS_MARK];
+
+/** Pick the cheapest framing none of whose characters occur in the source. */
+export function anadiplosisPickFraming(text: string): Framing | null {
+  for (const f of ANADIPLOSIS_FRAMINGS) {
+    if (!text.includes(f[0]) && !text.includes(f[1]) && !text.includes(f[2])) return f;
+  }
+  return null;
+}
+
+export function anadiplosisUndo(text: string, framing: Framing = ANADIPLOSIS_DEFAULT_FRAMING): string {
+  const [OPEN, CLOSE, MARK] = framing;
+  if (!text.includes(OPEN)) return text;
+  const markRe = new RegExp('^(\\d{1,7})' + MARK.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
   let out = '';
   let i = 0;
   while (i < text.length) {
-    const a = text.indexOf(ANADIPLOSIS_OPEN, i);
+    const a = text.indexOf(OPEN, i);
     if (a < 0) { out += text.slice(i); break; }
     out += text.slice(i, a);
-    const m = /^(\d{1,7})\u21e4/.exec(text.slice(a + 1));
-    if (!m) { out += ANADIPLOSIS_OPEN; i = a + 1; continue; }
+    const m = markRe.exec(text.slice(a + 1));
+    if (!m) { out += OPEN; i = a + 1; continue; }
     const k = parseInt(m[1], 10);
     const uStart = a + 1 + m[0].length;
-    const b = text.indexOf(ANADIPLOSIS_CLOSE, uStart);
+    const b = text.indexOf(CLOSE, uStart);
     if (b < 0) { out += text.slice(a); break; }
     const unit = text.slice(uStart, b);
     if (!(k >= 2 && k <= ANADIPLOSIS_MAX_COUNT)) { out += text.slice(a, b + 1); i = b + 1; continue; }
@@ -302,6 +359,7 @@ export function anadiplosisUndo(text: string): string {
 
 interface Plan {
   text: string;
+  framing: Framing;
   spans: number;
   chars: number;
   clause: string;
@@ -321,20 +379,26 @@ export function anadiplosisPlan(
   if (text.length > ANADIPLOSIS_MAX_CHARS) return null;
   // the framing characters must not occur in the source, or the reader cannot
   // tell an emitted span from ordinary text
-  if (text.includes(ANADIPLOSIS_OPEN)) return null;
-  if (text.includes(ANADIPLOSIS_CLOSE)) return null;
-  if (text.includes(ANADIPLOSIS_MARK)) return null;
   if (!text.length) return null;
+  let framing: Framing | null = null;
+  if (opts.framing) {
+    const f = opts.framing;
+    if (!text.includes(f[0]) && !text.includes(f[1]) && !text.includes(f[2])) framing = f;
+  } else {
+    framing = anadiplosisPickFraming(text);
+  }
+  if (!framing) return null;
+  const [OPEN, CLOSE, MARK] = framing;
 
   const cands = findCandidates(text, enc, ANADIPLOSIS_MAX_SPANS);
   if (!cands.length) return null;
   const chosen = select(text, cands, ANADIPLOSIS_MAX_SPANS);
   if (!chosen.length) return null;
 
-  const out = applyAll(text, chosen);
+  const out = applyAll(text, chosen, framing);
   if (out === text) return null;
   // soundness: the transform must be exactly invertible before anything else
-  if (anadiplosisUndo(out) !== text) return null;
+  if (anadiplosisUndo(out, framing) !== text) return null;
 
   let estimated = 0;
   let chars = 0;
@@ -345,9 +409,10 @@ export function anadiplosisPlan(
 
   return {
     text: out,
+    framing,
     spans: chosen.length,
     chars,
-    clause: anadiplosisClauseFor(),
+    clause: anadiplosisClauseFor(framing),
     estimated,
   };
 }
@@ -361,6 +426,7 @@ export function anadiplosisEncode(
   const base = syncopeEncode(text, enc, opts);
   const plain: AnadiplosisResult = {
     ...base, anadiplosis: false, anadiplosisSpans: 0, anadiplosisChars: 0, anadiplosisClause: '',
+    framing: ANADIPLOSIS_DEFAULT_FRAMING,
   };
   const plan = anadiplosisPlan(text, enc, opts);
   if (!plan || plan.estimated <= 0) return plain;
@@ -372,20 +438,32 @@ export function anadiplosisEncode(
   } catch {
     return plain;
   }
-  const clauseTok = countTokens(' ' + plan.clause, enc) - countTokens(' ', enc);
-  const altTotal = alt.messageTokens + clauseTok;
-  if (altTotal >= base.messageTokens) return plain;
+  // The clause ladder: score each wording against the EXACT contract text it
+  // produces, not against the clause in isolation.
+  const ladder = (opts.clauseLadder && opts.clauseLadder.length)
+    ? opts.clauseLadder : [plan.clause];
+  let bestTotal = Infinity;
+  let bestContract = '';
+  let bestClause = '';
+  for (const c of ladder) {
+    const contract = alt.contract
+      ? alt.contract.replace(/; print only\.$/, ` ${c} print only.`)
+      : c;
+    const delta = countTokens(contract, enc) - countTokens(alt.contract, enc);
+    const total = alt.messageTokens + delta;
+    if (total < bestTotal) { bestTotal = total; bestContract = contract; bestClause = c; }
+  }
+  if (bestTotal >= base.messageTokens) return plain;
 
   return {
     ...alt,
-    contract: alt.contract
-      ? alt.contract.replace(/; print only\.$/, ` ${plan.clause} print only.`)
-      : plan.clause,
-    messageTokens: altTotal,
+    contract: bestContract,
+    messageTokens: bestTotal,
     anadiplosis: true,
     anadiplosisSpans: plan.spans,
     anadiplosisChars: plan.chars,
-    anadiplosisClause: plan.clause,
+    anadiplosisClause: bestClause,
+    framing: plan.framing,
   };
 }
 
@@ -393,10 +471,10 @@ export function anadiplosisEncode(
 export function anadiplosisDecode(
   wire: string,
   cfg: { stats?: any; order?: 'in' | 'out'; undo: (w: string) => string },
-  opts: { alphabet?: string; marker?: string; marker2?: string; group?: any } = {},
+  opts: { alphabet?: string; marker?: string; marker2?: string; group?: any; framing?: Framing } = {},
 ): string {
   const expanded = syncopeDecode(wire, cfg, opts);
-  return anadiplosisUndo(expanded);
+  return anadiplosisUndo(expanded, opts.framing ?? ANADIPLOSIS_DEFAULT_FRAMING);
 }
 
 /** Convenience: encode, decode, verify byte-exactness. */
@@ -409,11 +487,11 @@ export function anadiplosisRoundTrip(
   if (!r.anadiplosis) return true; // byte-identical to the parent wire
   if (r.winner === 'bootstrap') {
     const mid = symplokeDecode(r.wire, { stats: undefined as any, undo: (w: string) => chironDecode(w) });
-    return anadiplosisUndo(mid) === text;
+    return anadiplosisUndo(mid, r.framing) === text;
   }
   const mid = syncopeDecode(r.wire, {
     stats: r.stats, order: r.order,
     undo: r.parent === 'identity' ? (w: string) => w : chironDecode,
-  });
-  return anadiplosisUndo(mid) === text;
+  }, { alphabet: r.alphabet, marker: r.marker, marker2: r.marker2, group: r.syncopeGroup });
+  return anadiplosisUndo(mid, r.framing) === text;
 }
