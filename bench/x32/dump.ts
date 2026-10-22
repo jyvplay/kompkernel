@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import { heuresisEncode } from '@/lib/omega/heuresis';
+import { countTokens } from '@/lib/omega/bpe';
+const enc='o200k_base' as any;
+const t=fs.readFileSync('bench/x30/fresh/prose-01.txt','utf8');
+const r:any=heuresisEncode(t,enc);
+const w:string=r.wire;
+const i=w.indexOf('¶');
+const dict=w.slice(0,i), tape=w.slice(i+1);
+console.log('raw',countTokens(t,enc),'wire',r.wireTokens,'dict tokens',countTokens(dict,enc),'tape tokens',countTokens(tape,enc));
+console.log('--- DICT ('+dict.length+' chars, '+countTokens(dict,enc)+' tok) ---');
+console.log(JSON.stringify(dict.slice(0,700)));
+console.log('--- TAPE head ('+countTokens(tape,enc)+' tok) ---');
+console.log(JSON.stringify(tape.slice(0,500)));

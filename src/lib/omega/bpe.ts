@@ -156,10 +156,79 @@ const PRETOK: Record<EncodingName, RegExp> = {
 const CHUNK_CACHE = new Map<string, number>();
 let chunkHits = 0, chunkMisses = 0, chunkFallbacks = 0;
 
+/* ---------------------------------------------------------------------------
+ * SHORT-STRING MEMO  (X30)
+ *
+ * Measured on bench/holdout-work/kb-article.txt (bench/x30/prof3.ts, X30):
+ * a single 3.4 KB encode made 2,240,610 countTokens calls, of which 2,190,308
+ * (97.8%) were for strings shorter than 24 characters and therefore took the
+ * `text.length < 24` early return that bypasses the chunk cache entirely.
+ * Those short calls cost 14.8 s of a 28.8 s encode, i.e. 51% of the whole
+ * encoder. Of the 2.19M short calls only 98,806 were DISTINCT strings, so the
+ * short path is 95.5% redundant work.
+ *
+ * The memo is exact, not approximate: it is keyed by the full string (and the
+ * encoding), so two different strings can never collide. It can therefore only
+ * change timing, never a number. `verifyChunkAlgebra` and the byte-exact round
+ * trip remain the authority on correctness.
+ *
+ * Bounded: the map is cleared if it exceeds SHORT_CACHE_MAX entries, so a
+ * pathological input cannot grow it without limit.
+ * ------------------------------------------------------------------------- */
+/* X33: the short-string cache is now split PER ENCODING.
+ *
+ * The original key was `enc + '\\u0000' + text`, which allocates a fresh string
+ * on every single call. At 2,384,798 short calls per prose-01 encode that is
+ * 2.4 M allocations whose entire purpose is to distinguish two encodings, a
+ * fact already known statically. Nesting one Map per encoding makes the key
+ * just `text` and removes the allocation. */
+const SHORT_CACHE = new Map<EncodingName, Map<string, number>>();
+const SHORT_CACHE_MAX = 2_000_000;
+let shortHits = 0, shortMisses = 0;
+
+/* -------------------------------------------------------------------------
+ * X33: the long-string memo.
+ *
+ * X30 found that 2,240,610 countTokens calls on a 3.4 KB prose encode were for
+ * strings under 24 characters and fixed that with SHORT_CACHE. What it did not
+ * measure is the OTHER side of the split. Measured on prose-01
+ * (bench/x33/ct.ts, polytropos configs = 1):
+ *
+ *     short calls (< 24 chars)     2,384,798     distinct ~98k   (X30 fixed)
+ *     long  calls (>= 24 chars)       65,364     distinct 3,312  <-- 94.9% redundant
+ *     mean length of a long call      1,738 chars
+ *     total chars pushed through the pretokenise regex   113,629,256
+ *
+ * The long calls are three orders of magnitude FEWER than the short ones and
+ * therefore looked negligible in a call-count profile, but each one is ~1.7 KB,
+ * so they dominate the actual work: 113 M characters through a regex on a
+ * 3.4 KB input. And 94.9% of them are repeats of 3,312 distinct strings.
+ *
+ * So the memo here is keyed on the whole string. It is exact: the same string
+ * and the same encoding always produce the same token count, so this can change
+ * timing and never a number. Bounded per encoding, cleared on overflow.
+ *
+ * The key is the string itself rather than `enc + '\\u0000' + text`, because
+ * building that concatenation would allocate another ~1.7 KB on every call --
+ * exactly the cost being removed.
+ * ------------------------------------------------------------------------- */
+const LONG_CACHE = new Map<EncodingName, Map<string, number>>();
+const LONG_CACHE_MAX = 200_000;
+let longHits = 0, longMisses = 0;
+
 export function chunkCacheStats() {
-  return { size: CHUNK_CACHE.size, hits: chunkHits, misses: chunkMisses, fallbacks: chunkFallbacks };
+  let longSize = 0, shortSize = 0;
+  for (const m of LONG_CACHE.values()) longSize += m.size;
+  for (const m of SHORT_CACHE.values()) shortSize += m.size;
+  return { size: CHUNK_CACHE.size, hits: chunkHits, misses: chunkMisses, fallbacks: chunkFallbacks,
+           shortSize, shortHits, shortMisses,
+           longSize, longHits, longMisses };
 }
-export function chunkCacheClear() { CHUNK_CACHE.clear(); chunkHits = 0; chunkMisses = 0; chunkFallbacks = 0; }
+export function chunkCacheClear() {
+  CHUNK_CACHE.clear(); chunkHits = 0; chunkMisses = 0; chunkFallbacks = 0;
+  SHORT_CACHE.clear(); shortHits = 0; shortMisses = 0;
+  LONG_CACHE.clear(); longHits = 0; longMisses = 0;
+}
 
 /** the unaccelerated reference implementation */
 export function countTokensExact(text: string, enc: EncodingName): number {
@@ -170,7 +239,23 @@ export function countTokensExact(text: string, enc: EncodingName): number {
 export function countTokens(text: string, enc: EncodingName): number {
   if (text === '') return 0;
   // very short strings are not worth the regex
-  if (text.length < 24) return countTokensExact(text, enc);
+  if (text.length < 24) {
+    let sc = SHORT_CACHE.get(enc);
+    if (sc === undefined) { sc = new Map<string, number>(); SHORT_CACHE.set(enc, sc); }
+    const v = sc.get(text);
+    if (v !== undefined) { shortHits++; return v; }
+    shortMisses++;
+    const t = countTokensExact(text, enc);
+    if (sc.size >= SHORT_CACHE_MAX) sc.clear();
+    sc.set(text, t);
+    return t;
+  }
+  let lc = LONG_CACHE.get(enc);
+  if (lc === undefined) { lc = new Map<string, number>(); LONG_CACHE.set(enc, lc); }
+  const memo = lc.get(text);
+  if (memo !== undefined) { longHits++; return memo; }
+  longMisses++;
+
   const re = PRETOK[enc];
   re.lastIndex = 0;
   const cs = text.match(re);
@@ -191,6 +276,8 @@ export function countTokens(text: string, enc: EncodingName): number {
       n += t;
     } else { chunkHits++; n += v; }
   }
+  if (lc.size >= LONG_CACHE_MAX) lc.clear();
+  lc.set(text, n);
   return n;
 }
 

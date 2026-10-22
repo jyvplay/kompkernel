@@ -1,0 +1,3 @@
+{"csv":"bench/holdout-tab/aapl-2014.csv","csvChars":5488,"identityM":1490,"toonM":3633,"toonDaedalusM":1712,"toonDaedalusExact":true}
+{"csv":"bench/holdout-tab/vix-daily-1990.csv","csvChars":6578,"identityM":1394,"toonM":3709,"toonDaedalusM":1440,"toonDaedalusExact":true}
+{"csv":"bench/z11/fresh/csv-8.csv","csvChars":7432,"identityM":1695,"toonM":3026,"toonDaedalusM":1755,"toonDaedalusExact":true}

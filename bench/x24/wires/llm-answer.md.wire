@@ -1,0 +1,45 @@
+§л.е5д)
+г-эг [ ]Қ` (0ле dayдэ Updateр |т С|---|---в sи **нвригу**ж%у |
+|Т.
+
+###тівртӘ Viteа `ц Migrateаpackagesә1ҷ` (ә dayз theч toк:я
+ө4љ inм  о2ё3ъ andү serverх isю The¶## Summary
+
+The migration fromиWebpackтөучиViteтеу reduces cold-start time by roughlyи85%у onзя`packages/web` workspaceл Below areз concrete steps,з measured numbers,ъз twoяregressions we foundТәл What actually changed
+
+гиDevүукаwebpack-dev-server`х replaced byӘ's native ESMүл No bundlingят happensљ development, soз cold start no longer scales with module count.
+гиBuildук production builds still bundle, but throughиRollupу rather than Webpackлюят outputхаdist/assets/*.js` with content hashes instead ofаbuild/static/js/*.chunk.js`.
+гиTransformsукаbabel-loader`х goneлиesbuildу handles TypeScript strippingъятиSWCух no longer requiredТол Measured results
+
+| Metricр WebpackтөрӘтер Change |
+СС|
+| Cold startрт42л8і6лән85л7ж Hot reload (p50)ртәл9і0л09н95лёж Production buildрт188і71н62лож Bundle size (gzip)рт412 kBрт389 kBригел6%у |
+
+###тёл Required code changes
+
+```tsя// vite.config.tsяimport { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+т pluginsк [react()],
+т resolveк {
+    aliasк { '@': '/src' },
+т },
+түк { portкт3000, strictPortк true },
+});
+```
+
+You must also rename everyаprocess.env.REACT_APP_*` referenceчаimport.meta.env.VITE_*`.
+There areи47у such referencesљаpackages/web`ъи11уљаpackages/admin`.
+
+###төл Regressions found
+
+әлиCommonJS interopлу Three dependencies (`lodash.debounce`,аqs`,аreact-copy-toгclipboard`)
+м ship only CJSлӘ handles thisљ dev via pre-bundling, butз SSR build failsлю fixхямч add themчаssr.noExternal`.
+олиDynamicаrequire()`љ testsлуаjest`х still used for unit testsъ does not understandямаimport.meta`. Either migrateчиVitestу or add aаjest.config.js` transformл We choseямиVitest**, which sharesзӘ configъ cut test wall-clock fromи94вучи23вуТел Recommendation
+
+Shipз migration behindзаVITE_MIGRATION` flag for one release, then removeз Webpackяconfig entirelyлю remaining workх approximatelyиё engineer-daysу:
+
+эц/adminҷдг [x]ц/web` (doneдэ Removeаwebpack.config.js`ъаbabel.config.jsҚ CI cache keysљ `.github/workflows/ci.ymlҚз contributor docsљаCONTRIBUTING.mdҷ)
+
+Let me know if you wantз SSR fix broken out into its own PR.

@@ -1,0 +1,8 @@
+WROTE dump.sql 678 date+after akolouthia2
+WROTE aapl-2014.csv 1444 date akolouthia2
+WROTE vix-daily-1990.csv 1241 date lakonikos
+WROTE psql-output.txt 325 date akolouthia2
+WROTE sp500-200.csv 4098 date lakonikos
+WROTE git-log-iso.txt 1489 date+time lakonikos-d
+WROTE ops-git-log-stat.txt 3458 date lakonikos
+WROTE svenstaro_miniserve.md 2954 date akolouthia2

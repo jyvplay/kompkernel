@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import { oikonomiaEncode } from '@/lib/omega/oikonomia';
+import { CHIRON_START, CHIRON_SEP } from '@/lib/omega/chiron';
+const enc='o200k_base' as any;
+const t=fs.readFileSync(process.env.LANE!,'utf8');
+const r:any=oikonomiaEncode(t,enc);
+const w:String=r.wire; const cut=w.indexOf(CHIRON_SEP);
+console.log('=== GLOSSARY ===');
+console.log(w.slice(CHIRON_START.length,cut));
+console.log('=== TAPE (full) ===');
+console.log(w.slice(cut+1));

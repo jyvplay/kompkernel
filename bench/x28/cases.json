@@ -1,0 +1,46 @@
+[
+  {
+    "name": "kb-article",
+    "file": "bench/holdout-work/kb-article.txt",
+    "message": "bench/x28/receipts/kb-article.message.txt",
+    "syntomos": 628,
+    "metathesis": 631,
+    "rung": "safe",
+    "nested": 5,
+    "denested": false,
+    "rules": 27
+  },
+  {
+    "name": "dump",
+    "file": "bench/holdout-mk/dump.sql",
+    "message": "bench/x28/receipts/dump.message.txt",
+    "syntomos": 670,
+    "metathesis": 673,
+    "rung": "safe",
+    "nested": 42,
+    "denested": false,
+    "rules": 47
+  },
+  {
+    "name": "git-log-iso",
+    "file": "bench/z20/samples/git-log-iso.txt",
+    "message": "bench/x28/receipts/git-log-iso.message.txt",
+    "syntomos": 1444,
+    "metathesis": 1447,
+    "rung": "safe",
+    "nested": 32,
+    "denested": false,
+    "rules": 51
+  },
+  {
+    "name": "csv-8",
+    "file": "bench/z11/fresh/csv-8.csv",
+    "message": "bench/x28/receipts/csv-8.message.txt",
+    "syntomos": 1627,
+    "metathesis": 1630,
+    "rung": "safe",
+    "nested": 82,
+    "denested": false,
+    "rules": 81
+  }
+]

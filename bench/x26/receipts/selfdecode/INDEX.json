@@ -1,0 +1,26 @@
+{
+  "cases": [
+    {
+      "name": "kb-article",
+      "exact": true,
+      "shapes": 0
+    },
+    {
+      "name": "dump",
+      "exact": true,
+      "shapes": 2
+    },
+    {
+      "name": "git-log-iso",
+      "exact": true,
+      "shapes": 1
+    },
+    {
+      "name": "meeting-transcript",
+      "exact": true,
+      "shapes": 1
+    }
+  ],
+  "exact": 4,
+  "total": 4
+}

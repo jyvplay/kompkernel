@@ -1,0 +1,14 @@
+bench/holdout-lang/de-kb.txt
+bench/holdout-mk/chart.svg
+bench/holdout-mk/dump.sql
+bench/holdout-ops/find-listing.txt
+bench/holdout-ops/git-numstat.txt
+bench/holdout-ops/node-stacktraces.txt
+bench/holdout-ops/openstack-loghub-26.log
+bench/holdout-tab/aapl-2014.csv
+bench/holdout-tab/vix-daily-1990.csv
+bench/holdout-tbl/df-h.txt
+bench/holdout-tbl/kubectl-get-pods.txt
+bench/holdout-tbl/psql-output.txt
+bench/holdout-work/bibliography.txt
+bench/holdout-work/email-thread.txt

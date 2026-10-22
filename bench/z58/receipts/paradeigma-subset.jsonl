@@ -1,0 +1,6 @@
+{"file":"bench/holdout-ops/openstack-loghub-26.log","raw":7969,"daedalus":1008,"daedalus-dual":1053,"paradeigma":1008,"phalanx-a10":1247,"frontierMin":1008}
+{"file":"bench/holdout-tbl/psql-output.txt","raw":1578,"daedalus":397,"daedalus-dual":397,"paradeigma":397,"phalanx-a10":437,"frontierMin":397}
+{"file":"bench/holdout-tbl/df-h.txt","raw":939,"daedalus":281,"daedalus-dual":279,"paradeigma":281,"phalanx-a10":414,"frontierMin":279}
+{"file":"bench/holdout-mk/chart.svg","raw":3446,"daedalus":465,"daedalus-dual":465,"paradeigma":465,"phalanx-a10":539,"frontierMin":465}
+{"file":"bench/holdout-lang/de-kb.txt","raw":2432,"daedalus":495,"daedalus-dual":492,"paradeigma":495,"phalanx-a10":505,"frontierMin":492}
+{"file":"bench/holdout-work/llm-answer.md","raw":2542,"daedalus":707,"daedalus-dual":706,"paradeigma":707,"phalanx-a10":733,"frontierMin":706}

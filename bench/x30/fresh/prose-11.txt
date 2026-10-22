@@ -1,0 +1,67 @@
+    configurations at 7% probe budget and then refined only the top two —
+    and shipped a wire 21 tokens worse than ARIADNE on `gh-api.json`. §I.
+
+---
+
+## E. MECHANISM PORTFOLIO
+
+### E1. Single-token rule admission ← the new idea
+* **Lemma it violates.** "A rule whose expansion is one token costs 1 + 1 and
+  saves 0 per use." True iff a reference costs one token. A maximal run of
+  adjacent references is one pre-tokenizer chunk, so BPE merges inside it;
+  therefore false.
+* **Artifact.** `addWordRules` + the exact-render selection; `bench/tmp/word.ts`.
+* **Proved portion.** These rules raise the symbol-space cost by exactly +2 each
+  and lower it by exactly 0, so they can only ever be admitted by measurement —
+  which is why no symbol-space search can find them.
+* **Standalone evidence** (no grammar at all, top-K single tokens only):
+
+  | lane | identity | K | script | total | vs identity |
+  |---|---|---|---|---|---|
+  | dts0 | 3991 | 110 | cyrillic | 3103 | **−888** |
+  | doc11 | 3677 | 64 | cyrillic | 3250 | **−427** |
+  | license | 1166 | 32 | cyrillic | 1017 | **−149** |
+  | gh-prose | 1934 | 64 | cyrillic | 1870 | −64 |
+
+* **Unresolved interface.** On top of a strong phrase grammar most of the
+  frequency mass is already absorbed, so the marginal value falls to 24–48 rules
+  worth 385 tokens across 14 lanes. **Gap: local.**
+* **Cheapest falsification.** `noWords: true` reduces SIBYL to ARIADNE; the
+  frontier `Δsib` column is the difference.
+
+### E2. Adjacency ranking for word rules
+* **Construction.** Score a literal symbol by how many of its positions sit
+  beside something already a reference (or beside another copy of itself),
+  re-scored greedily in batches of 8.
+* **Artifact.** `rankByRunPotential`. **Falsification:** swap back to frequency
+  ranking. **Gap: local.**
+
+### E3. The pooled ("polyglot") alphabet
+* **Construction.** Fourteen scripts — Greek, Hebrew, Armenian, Georgian, Thai
+  and nine Indic — whose Unicode ranges are **disjoint from every single-script
+  entry already in the wire language**, pooled into one alphabet. The first tape
+  character therefore still identifies the alphabet unambiguously and no
+  existing wire changes meaning.
+* **Measured** (`bench/tmp/poly.ts`, full-vocabulary scan):
+
+  | alphabet | 1-char | 2-char | 3-char | 4-char | 5-char |
+  |---|---|---|---|---|---|
+  | hangul | 679 | 389 | 41 | 12 | 2 |
+  | cyrillic | 122 | 823 | 1733 | 935 | 422 |
+  | cjk | 2517 | 2403 | 354 | 298 | 43 |
+  | **polyglot** | **802** | **3419** | **3119** | **1439** | **404** |
+
+  Both large and dense — the combination no single script offers.
+* **Effect.** `dts0` assignment gain 98 (hangul) → 131 (polyglot) with no other
+  change; with word rules, 218. **Gap: local.**
+
+### E4. Run-spelling construction
+* **Construction.** Place a whole run of 2–6 references onto one multi-character
+  vocabulary token, most-valuable-pattern first, conflict-free by construction.
+* **Artifact.** the run-spelling block in `renderBest`.
+* **Result: NEGATIVE on ARIADNE-sized grammars** — identical output, because the
+  targeted hill-climb already reaches at least as good a solution when reference
+  density is low. Kept because it is free and becomes active at SIBYL's higher
+  densities. Reported as a null result, not as a feature.
+
+### E5. n-gram targeted assignment move

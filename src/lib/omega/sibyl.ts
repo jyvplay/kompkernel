@@ -243,6 +243,23 @@ export interface SibylOptions extends AriadneOptions {
   wordGrid?: number[];
   /** explicit phrase-rule caps to try (Infinity = uncapped) */
   capGrid?: number[];
+  /** raise the glyph-script trial budget above the internal per-site default */
+  minScriptTries?: number;
+  /**
+   * Contract tokens the rule search should assume it must retire.
+   *
+   * PRICING CONTRACT (X32). sibyl prices every candidate grammar as
+   * `countTokens(chironDecoderPrompt(wire))`, i.e. the CHIRON decoder prompt,
+   * because at this depth that is the only contract that exists. But the
+   * message that is actually SHIPPED carries the SYNTOMOS/SYMPLOKE contract,
+   * which is far cheaper. Measured on four lanes (bench/x32/tax.ts) the search
+   * pays 38-40 tokens while the shipped contract costs 17: a gap of 21-23
+   * tokens on every lane. The greedy therefore rejects every rule set whose
+   * saving lies in that 22-token band, which is precisely the band that
+   * decides short and medium messages. Passing the realized value makes the
+   * search price what it will actually pay.
+   */
+  contractTax?: number;
 }
 
 function rawResult(text: string, enc: EncodingName, started: number): SibylResult {
@@ -280,7 +297,15 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
   // grammar phase runs to its own natural stopping point; the assignment phase
   // above is already bounded by a probe count rather than by the clock.
   const floor = Math.min(4500, 400 + text.length * 0.35);
-  const budgetMs = Math.max(options.budgetMs ?? Math.min(9000, 600 + text.length * 0.7), floor);
+  /* X33: OMEGA_SIBYL_BUDGET_MS. polytropos calls sibyl once per config and
+   * passes ONLY { budgetMs } (polytropos.ts runConfig), so the budget a caller
+   * hands to any codec above SYMPLOKE reaches this line and nowhere else.
+   * Everything downstream -- metathesis, symploke, polytropos -- then discards
+   * it. This override exists so the per-config budget can be swept at all. */
+  const budgetEnv = Number(process.env.OMEGA_SIBYL_BUDGET_MS ?? '') || 0;
+  const budgetMs = budgetEnv > 0
+    ? Math.max(budgetEnv, floor)
+    : Math.max(options.budgetMs ?? Math.min(9000, 600 + text.length * 0.7), floor);
   const overall = started + Math.min(30_000, Math.round(budgetMs * 3.2));
   const base: Required<Omit<AriadneOptions, 'script' | 'sep'>> & { script?: string } = {
     budgetMs,
@@ -338,7 +363,11 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
     } catch (e) { out = null; if (process.env.OMEGA_TRACE) console.error('sibyl renderBest', e); }
     if (!out) return null;
     if (chironDecode(out.wire) !== text) { if (process.env.OMEGA_TRACE) console.error('sibyl renderBest: decode mismatch'); return null; }
-    const M = countTokens(chironDecoderPrompt(out.wire), enc);
+    const CT = process.env.OMEGA_CONTRACT_TAX ?? '';
+    const ct = options.contractTax ?? (CT === '' ? undefined : Number(CT));
+    const M = ct !== undefined && Number.isFinite(ct)
+      ? out.tokens + ct
+      : countTokens(chironDecoderPrompt(out.wire), enc);
     if (process.env.OMEGA_TRACE) console.error(`sibyl eval words=${words} cap=${cap} blocks=${blocks} probeScale=${probeScale} tries=${tries} -> M=${M} wire=${out.tokens} ranked=${prepared.map(p => p.ranked.length).join('/')}`);
     const c: Cand = { out, M, words, cap, blocks };
     cands.push(c);
@@ -361,9 +390,23 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
     prepared.push({ g: gr.g, blocks: gr.blocks, ranked: maxW ? rankByRunPotential(gr.g, maxW) : [] });
   }
 
+  /* Glyph-script trial budget.
+   *
+   * renderBest only tries the top `scriptTries` scripts by merge-edge count
+   * (ariadne.ts: `.slice(0, o.scriptTries ?? 2)`), and the three call sites
+   * below hardcode 3 / 2 / 3. X31 measured that this is not always enough
+   * (bench/x31/tries.ts, tries2.ts): on ls-full-iso the wire goes
+   * 418 -> 415 -> 414 as the budget goes 2 -> 3 -> 4, and it never gets worse,
+   * because the sites keep a running best across candidates. Four of seven
+   * lanes measured improved, by 1 to 4 tokens, at a cost of tens of
+   * milliseconds. OMEGA_SIBYL_TRIES raises all three sites to at least N. */
+  const TRY_ENV = Number(process.env.OMEGA_SIBYL_TRIES ?? '') || 0;
+  const TRY_MIN = Math.max(TRY_ENV, options.minScriptTries ?? 0);
+  const T3 = Math.max(3, TRY_MIN), T2 = Math.max(2, TRY_MIN);
+
   // 1. The pooled alphabet with no word rules — isolates how much of the gain is
   //    the alphabet and how much is the new rule class.
-  for (const pr of prepared) evaluate(cloneGrammar(pr.g), 0, -1, pr.blocks, 0.8, 3, true);
+  for (const pr of prepared) evaluate(cloneGrammar(pr.g), 0, -1, pr.blocks, 0.8, T3, true);
   // 2. Word rules: coarse sweep, then refine the best.
   const coarse: Array<{ g: Grammar; words: number; cap: number; blocks: boolean; M: number }> = [];
   for (const pr of prepared) {
@@ -374,13 +417,13 @@ export function sibylEncode(text: string, enc: EncodingName = 'o200k_base', opti
         if (w > pr.ranked.length) continue;
         const g2 = cloneGrammar(gCap);
         addWordRules(g2, pr.ranked.slice(0, w));
-        const c = evaluate(g2, w, isFinite(cap) ? cap : -1, pr.blocks, 0.2, 2);
+        const c = evaluate(g2, w, isFinite(cap) ? cap : -1, pr.blocks, 0.2, T2);
         if (c) coarse.push({ g: g2, words: w, cap: isFinite(cap) ? cap : -1, blocks: pr.blocks, M: c.M });
       }
     }
   }
   coarse.sort((x, y) => x.M - y.M);
-  for (const cfg of coarse.slice(0, 2)) evaluate(cfg.g, cfg.words, cfg.cap, cfg.blocks, 1, 3);
+  for (const cfg of coarse.slice(0, 2)) evaluate(cfg.g, cfg.words, cfg.cap, cfg.blocks, 1, T3);
   if (!cands.length) return raw;
 
   cands.sort((a, b) => a.M - b.M || a.out.tokens - b.out.tokens);

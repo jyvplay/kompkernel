@@ -1,0 +1,4 @@
+dump.sql                   raw  1795 syn   668 tac   668 d    0 parent    ms   88430 exact true
+find-listing.txt           raw  3997 syn  1281 tac  1281 d    0 parent    ms  104886 exact true
+git-log-fuller.txt         raw   143 syn   143 tac   143 d    0 parent    ms    4080 exact true
+git-log-iso.txt            raw  1947 syn  1444 tac  1444 d    0 parent    ms   67650 exact true

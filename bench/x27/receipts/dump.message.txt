@@ -1,0 +1,13 @@
+§П, policy_id, created_at, content_hash) VALUES (с000р:00+00', decode('сслссы, О1м, '^202чыОму2пыумА3тыАмэ4зыэмю5цыюмгы200ны201йы202кbо100Уade68косс075кcdЪ(id),
+ Ж timestamptzвaїeb79вушdә6жfЛшәж345СINSERT INTO documents (workspace_id, folder_idд','hex'));
+СПңд101үд102ғд103өд104Ҡ_id     bigint REFERENCESМ042Ав35ь00к09кі0е9а7ё8бcя105и106х03¶-- Northgate Vault schema dump
+CREATE TABLE documents (
+  id            bigserial PRIMARY KEY,
+  workspace_id  bigint NOT NULL REFERENCES workspacesЪ folderҠ foldersЪ policyҠ retention_policiesЪ created_at   Ж NOT NULL DEFAULT now(),
+  disposed_at  Ж,
+  content_hash  byteв NOT NULL
+);
+
+СПогіч60101 ^сірлллл00ңгОп60202 ^010ар003У15үгут603х ^021эр007юкcd162слївғгАз60404 ^032ОрьАв130л01613673жөгэц60505 ^042ёр00їб400лОЛэдягюч60606 ^053юр012658ік750л024cb016едигәп60707 ^064ур016136742600луб26ceаeдогат60808 ^074ер019б14шcd700л33829к93ңгёз60909 ^085әр01Л880лхade68вёүгец60110 ^090Ар021ОшОae390лМbdғніч60211 ^001ір024cb016eaл00499602шуөнОп60312 ^011ар02878eажекл005іжОбfeадянут60413 ^022эр02б26ce84бл00584шебfcдинАз60514 ^033Ор02fdэк50fdл005fa96в11донэц60615 ^043ёр033829кеaeл006705372әңнюч60716 ^054юр037308225жл006e61043күнәп60817 ^065урхУ150ғнат60918 ^075ерхeёбэжАболаш189e65өнёз60119 ^080әрМб720л084746кавдянец60220 ^091Ар045e81б523л008bd038ёждийіч60321 ^002ір049960уdd400л932б05вэдойОп60422 ^012ар04ш43e968500лев87шукеңйут60523 ^023эр050жОcff360лівОe39жceүйАз60624 ^034Ор054еfb67e700лв93жәceАғйэц60725 ^044ёр058эшеш098ль39жёөйюч60826 ^055юр05кfb839490лікаж707іш','hex'));
+
+Before ¶ new foreign letters name text to the next. After ¶ expand repeatedly and 8 digits become YYYY-MM-DD, 4 digits become dd:dd, where ^ before digits marks them; drop it; print result only.

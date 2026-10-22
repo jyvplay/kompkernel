@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import { synkopeEncode } from '@/lib/omega/synkope';
+import { CT_STATS, chunkCacheStats } from '@/lib/omega/bpe';
+const enc='o200k_base' as any;
+const t=fs.readFileSync(process.env.F||'bench/holdout-work/kb-article.txt','utf8');
+const t0=Date.now(); const r:any=synkopeEncode(t,enc); const ms=Date.now()-t0;
+console.log('msg',r.messageTokens,'total ms',ms);
+console.log('calls',CT_STATS.calls,'chars',CT_STATS.chars,'msTok',CT_STATS.ms.toFixed(0),'('+(100*CT_STATS.ms/ms).toFixed(0)+'%)');
+console.log('outside ms',(ms-CT_STATS.ms).toFixed(0),'('+(100*(ms-CT_STATS.ms)/ms).toFixed(0)+'%)');
+console.log('cache',JSON.stringify(chunkCacheStats()));

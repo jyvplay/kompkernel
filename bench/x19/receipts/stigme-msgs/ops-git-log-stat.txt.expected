@@ -1,0 +1,400 @@
+commit 4092a638a8fe455456e664196fa182ff0e4e8ff4
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sun Oct 11 02:21:26 2026 +0000
+
+    Z10: AMPHORA (DAEDALUS || CHIRON exact-gated min): exact 55/55, gains on 2 of 55 docs (micromatch -36.8%, ja-kb -12.2%), independent reader 38/38; honest narrow result; tsc exit 0
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/z10-report-2026-10-10.md                  | 134 ++++++++++++++++++++++++
+ bench/z10/amphora-0.err                         |   0
+ bench/z10/amphora-0.jsonl                       |  25 +++++
+ bench/z10/amphora-1.err                         |   0
+ bench/z10/amphora-1.jsonl                       |  24 +++++
+ bench/z10/amphora-long-0.err                    |   0
+ bench/z10/amphora-long-0.jsonl                  |   5 +
+ bench/z10/amphora-long-1.err                    |   0
+ bench/z10/amphora-long-1.jsonl                  |   5 +
+ bench/z10/amphora-verify-47.jsonl               |  49 +++++++++
+ bench/z10/amphora-verify-long8.jsonl            |  10 ++
+ bench/z10/amphora-verify.ts                     |  13 +++
+ bench/z10/amphora-wires-cases.json              |   1 +
+ bench/z10/amphora-wires-independent-decode.json |   1 +
+ bench/z10/ariadne-micromatch.err                |   0
+ bench/z10/ariadne-micromatch.jsonl              |   3 +
+ bench/z10/ariadne-probe.ts                      |  10 ++
+ bench/z10/budget-A.err                          |   0
+ bench/z10/budget-A.jsonl                        |  13 +++
+ bench/z10/budget-probe.ts                       |  15 +++
+ bench/z10/chiron-vs-daedalus.ts                 |  15 +++
+ bench/z10/cvd.err                               |   0
+ bench/z10/cvd.jsonl                             |   5 +
+ bench/z10/hcvd-0.err                            |   0
+ bench/z10/hcvd-0.jsonl                          |  23 ++++
+ bench/z10/hcvd-1.err                            |   0
+ bench/z10/hcvd-1.jsonl                          |  22 ++++
+ bench/z10/holdout-cvd.ts                        |  14 +++
+ bench/z10/holdout43.txt                         |  43 ++++++++
+ bench/z10/leaders-micromatch.err                |   0
+ bench/z10/leaders-micromatch.jsonl              |   4 +
+ bench/z10/leaders.ts                            |  20 ++++
+ bench/z10/long-prose-files.txt                  |   8 ++
+ bench/z10/translit-probe.ts                     |  24 +++++
+ bench/z10/verify-files.txt                      |   8 ++
+ src/lib/omega/amphora.ts                        | 100 ++++++++++++++++++
+ src/lib/omega/registry.ts                       |   5 +
+ 37 files changed, 599 insertions(+)
+
+commit 34d4290259069c00086b5e56149b022ee4d970cb
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sun Oct 11 01:40:54 2026 +0000
+
+    Z9: register TABMIN (fresh blind fixtures 2/2 first-pass exact; round-trip 96/96 rectangular exact; tsc exit 0); report corrected
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/llm-blind-tab/decode2/dec_4.csv              |  12 +++
+ bench/llm-blind-tab/decode2/dec_4_columns.txt      |  11 +++
+ bench/llm-blind-tab/decode2/dec_5.csv              |  12 +++
+ bench/llm-blind-tab/decode2/dec_5_columns.txt      |  12 +++
+ bench/llm-blind-tab/gen2.ts                        |  18 ++++
+ bench/llm-blind-tab/hidden2/colTT_4.txt            |   9 ++
+ bench/llm-blind-tab/hidden2/colTT_5.txt            |   9 ++
+ bench/llm-blind-tab/hidden2/table_4.csv            |  12 +++
+ bench/llm-blind-tab/hidden2/table_5.csv            |  12 +++
+ bench/llm-blind-tab/hidden2/wire_4.txt             |   9 ++
+ bench/llm-blind-tab/hidden2/wire_5.txt             |   6 ++
+ .../llm-blind-tab/receipts-z9-tabmin-roundtrip.txt | 100 +++++++++++++++++++++
+ bench/llm-blind-tab/tabmin-roundtrip.ts            |  21 +++++
+ bench/llm-blind-tab/visible2/msg_4.txt             |  12 +++
+ bench/llm-blind-tab/visible2/msg_5.txt             |   9 ++
+ bench/z9-report-2026-10-10.md                      |  36 +++++++-
+ src/lib/omega/registry.ts                          |   5 ++
+ 17 files changed, 302 insertions(+), 3 deletions(-)
+
+commit c94d64fdeda3e0e8d94c7695d2f726f36fda5494
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sun Oct 11 00:32:47 2026 +0000
+
+    Z9: table 3 diagnosis: hand-expansion error; mechanical decode matches fixture (contaminated, disclosed); no registration
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/llm-blind-tab/decode/dec_3_mechanical.csv | 12 +++++++++
+ bench/llm-blind-tab/decode/mdecode.py           | 34 +++++++++++++++++++++++++
+ bench/llm-blind-tab/decode/mdecode_transpose.py |  8 ++++++
+ bench/z9-report-2026-10-10.md                   | 13 +++++++---
+ 4 files changed, 64 insertions(+), 3 deletions(-)
+
+commit 57511f2b08721e1c35c258401f315ffcfd501c06
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sun Oct 11 00:31:29 2026 +0000
+
+    Z9: correct report to verified facts only (README fetched; unverified TABMIN cell counts removed)
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/z9-report-2026-10-10.md | 66 ++++++++++++++++++++++---------------------
+ 1 file changed, 34 insertions(+), 32 deletions(-)
+
+commit 373e4ce9a77c81a3c7331f5421681ea52457924e
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sun Oct 11 00:31:14 2026 +0000
+
+    Z9: status record; openai/math count verified against primary README; readability-policy decision recorded
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/z9-report-2026-10-10.md | 70 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 70 insertions(+)
+
+commit 3ca89f8bf5603213003b6f8654000d2cc802465f
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sun Oct 11 00:28:58 2026 +0000
+
+    Z8: readability gate for TABMIN column arm (pre-registered); table 2/3 self-decodes with receipts; TABMIN stays unregistered
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/llm-blind-tab/decode/dec_2.csv           |  11 +++
+ bench/llm-blind-tab/decode/dec_2_columns.txt   |  17 ++++
+ bench/llm-blind-tab/decode/dec_3_columns.txt   |  16 ++++
+ bench/llm-blind-tab/decode/dec_3_corrected.csv |  12 +++
+ bench/llm-blind-tab/decode/dec_3_firstpass.csv |  12 +++
+ bench/llm-blind-tab/receipts-z8.json           |  59 +++++++++++++
+ bench/llm-blind-tab/score.py                   |  26 ++++++
+ bench/z8-report-2026-10-10.md                  | 111 +++++++++++++++++++++++++
+ 8 files changed, 264 insertions(+)
+
+commit 84bd67d69d4aa858b8726a37ac8495bdf7a063b7
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sun Oct 11 00:23:36 2026 +0000
+
+    Z7: KLIMAX and NUMLIST negative probes, frontier audit, new-source record (no codec registered)
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/klimax/numlist-probe.ts               | 45 ++++++++++++++
+ bench/klimax/probe.ts                       | 52 ++++++++++++++++
+ bench/klimax/receipts/klimax-runs-probe.txt |  8 +++
+ bench/klimax/receipts/numlist-probe.txt     |  2 +
+ bench/z7-report-2026-10-10.md               | 92 +++++++++++++++++++++++++++++
+ 5 files changed, 199 insertions(+)
+
+commit f0696760290dbd22d85b87e032ac2bcbea2edb17
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sun Oct 11 00:16:27 2026 +0000
+
+    TABMIN experiment (unregistered): per-table row/column arm over LAKONIKOS
+    
+    Measured on 169 files (167 CSV corpus + 2 holdouts): 169/169 exact round-trip;
+    rectangular tables -4.0% tokens, corpus-wide -2.2%; column arm wins 35/92.
+    Not registered in the codec registry: gain is small and concentrated, and
+    column-only serialization has readability risk. Receipts in bench/tabmin-receipts/.
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/llm-blind-tab/decode/dec_1.csv         |  11 ++
+ bench/llm-blind-tab/decode/dec_1_columns.txt |   5 +
+ bench/llm-blind-tab/decode/dec_1_rebuilt.csv |  11 ++
+ bench/llm-blind-tab/gen.ts                   |  18 +++
+ bench/llm-blind-tab/hidden/colTT_1.txt       |   5 +
+ bench/llm-blind-tab/hidden/colTT_2.txt       |   5 +
+ bench/llm-blind-tab/hidden/colTT_3.txt       |   9 ++
+ bench/llm-blind-tab/hidden/table_1.csv       |  11 ++
+ bench/llm-blind-tab/hidden/table_2.csv       |  11 ++
+ bench/llm-blind-tab/hidden/table_3.csv       |  12 ++
+ bench/llm-blind-tab/hidden/wire_1.txt        |   5 +
+ bench/llm-blind-tab/hidden/wire_2.txt        |   5 +
+ bench/llm-blind-tab/hidden/wire_3.txt        |   2 +
+ bench/llm-blind-tab/visible/msg_1.txt        |   8 ++
+ bench/llm-blind-tab/visible/msg_2.txt        |   8 ++
+ bench/llm-blind-tab/visible/msg_3.txt        |   5 +
+ bench/tabmin-bench.ts                        |  13 +++
+ bench/tabmin-receipts/REPORT.md              |  25 ++++
+ bench/tabmin-receipts/files-169.txt          | 169 +++++++++++++++++++++++++++
+ bench/tabmin-receipts/tabmin-bench-169.jsonl | 169 +++++++++++++++++++++++++++
+ bench/tabmin-roundtrip.ts                    |  27 +++++
+ src/lib/omega/tabmin.ts                      | 132 +++++++++++++++++++++
+ 22 files changed, 666 insertions(+)
+
+commit 93c9cd6e0fe2c58cea09a27c5e15d0f2a3e34191
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sat Oct 10 20:49:44 2026 +0000
+
+    CTXCOPY: copy-from-earlier-chat-text codec (conditional lane) with receipts
+    
+    - src/lib/omega/ctxcopy.ts: ⟦a…b⟧ copy spans from earlier text C; unique anchors by default; encoder self-verifies by simulating the decoder; refuses ⟦ ⟧ … in T or C.
+    - bench/ctx: PyPI adjacent-release pair harvest (326 pairs, sha256-verified), 81-pair sample (-75.7% vs LAKONIKOS, exact 81/81), held-out 245 pairs (rule picks CTX 241; exact), 60 unrelated controls (zero copy coverage).
+    - bench/llm-blind-ctx: two self-decodes exact (case 3 not decoded).
+    - Scope: conditional lane gain only, applies when the earlier text is in the same chat. Report: bench/ctx/ctxcopy-report-2026-10-10.md.
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/ctx/ctx-bench.ts                          |   57 +
+ bench/ctx/ctx-control-receipts-2026-10-10.jsonl |   60 +
+ bench/ctx/ctx-holdout-receipts-2026-10-10.jsonl |  245 ++
+ bench/ctx/ctx-holdout.ts                        |   53 +
+ bench/ctx/ctx-pairs-receipts-2026-10-10.jsonl   |   81 +
+ bench/ctx/ctxcopy-report-2026-10-10.md          |   60 +
+ bench/ctx/harvest_pairs.py                      |   77 +
+ bench/ctx/pairs-manifest.json                   | 4240 +++++++++++++++++++++++
+ bench/llm-blind-ctx/decode/dec_1.txt            |   99 +
+ bench/llm-blind-ctx/decode/dec_2.txt            |  101 +
+ bench/llm-blind-ctx/gen.ts                      |   20 +
+ bench/llm-blind-ctx/hidden/new_1.txt            |   99 +
+ bench/llm-blind-ctx/hidden/new_2.txt            |  101 +
+ bench/llm-blind-ctx/hidden/new_3.txt            |  236 ++
+ bench/llm-blind-ctx/hidden/wire_1.txt           |   17 +
+ bench/llm-blind-ctx/hidden/wire_2.txt           |    2 +
+ bench/llm-blind-ctx/hidden/wire_3.txt           |   11 +
+ bench/llm-blind-ctx/visible/earlier_1.txt       |  100 +
+ bench/llm-blind-ctx/visible/earlier_2.txt       |  102 +
+ bench/llm-blind-ctx/visible/earlier_3.txt       |  227 ++
+ bench/llm-blind-ctx/visible/msg_1.txt           |   18 +
+ bench/llm-blind-ctx/visible/msg_2.txt           |    3 +
+ bench/llm-blind-ctx/visible/msg_3.txt           |   12 +
+ src/lib/omega/ctxcopy.ts                        |  137 +
+ 24 files changed, 6158 insertions(+)
+
+commit 6fc569a942e6fc2861502f94a01639a21d03a597
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sat Oct 10 19:26:39 2026 +0000
+
+    LAKONIKOS: DAEDALUS wire with terse decoder contract (same wire and decoder; -10 tokens per rule-based message, 43/43 exact, never worse than DAEDALUS). Negative: line-prefix elision (no reliable gate). Readability: 3/3 self-decodes byte-exact (n=3, self-review only).
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/lakonikos-report-2026-10-10.md            | 121 ++++++++++++++++++++++++
+ bench/llm-blind-terse/check.ts                  |  11 +++
+ bench/llm-blind-terse/decode/dec_1.txt          |  14 +++
+ bench/llm-blind-terse/decode/dec_2.txt          |   1 +
+ bench/llm-blind-terse/decode/dec_3.txt          |  16 ++++
+ bench/llm-blind-terse/gen.ts                    |  12 +++
+ bench/llm-blind-terse/hidden/orig_1.txt         |  14 +++
+ bench/llm-blind-terse/hidden/orig_2.txt         |   1 +
+ bench/llm-blind-terse/hidden/orig_3.txt         |  16 ++++
+ bench/llm-blind-terse/hidden/wire_1.txt         |   4 +
+ bench/llm-blind-terse/hidden/wire_2.txt         |   1 +
+ bench/llm-blind-terse/hidden/wire_3.txt         |   2 +
+ bench/llm-blind-terse/visible/msg_1.txt         |   6 ++
+ bench/llm-blind-terse/visible/msg_2.txt         |   3 +
+ bench/llm-blind-terse/visible/msg_3.txt         |   4 +
+ bench/terse/breakdown.ts                        |  18 ++++
+ bench/terse/compact-candidates.ts               |  13 +++
+ bench/terse/compact2.ts                         |  10 ++
+ bench/terse/contract-lanes.ts                   |  12 +++
+ bench/terse/contract-tokens.ts                  |  15 +++
+ bench/terse/lakonikos-bench.ts                  |  20 ++++
+ bench/terse/lakonikos-receipts-2026-10-10.jsonl |  43 +++++++++
+ bench/terse/prefix-elide.ts                     |  42 ++++++++
+ bench/terse/prefix-eval.ts                      |  14 +++
+ bench/terse/prefix-gate-receipts.jsonl          |  43 +++++++++
+ bench/terse/prefix-gate.ts                      |  12 +++
+ bench/terse/prefix-sweep-dev-receipts.jsonl     |  22 +++++
+ bench/terse/prefix-sweep-test-receipts.jsonl    |  21 ++++
+ bench/terse/prefix-sweep.ts                     |  28 ++++++
+ bench/terse/wirehead.ts                         |   6 ++
+ src/lib/omega/lakonikos.ts                      |  75 +++++++++++++++
+ src/lib/omega/registry.ts                       |   5 +
+ 32 files changed, 625 insertions(+)
+
+commit 3e3ef75da456adffe45baf31869eff046fa9c51e
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sat Oct 10 19:07:47 2026 +0000
+
+    PR frontier review (2026-10-10): DAEDALUS is the real frontier reference; PR #2 starlight family negative (system prompt, +wire); PR #23 kalligraphos no Pareto gain (email -13 only, nondeterministic)
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/pr-frontier-receipts-2026-10-10.jsonl | 12 +++++
+ bench/pr-frontier-review-2026-10-10.md      | 78 +++++++++++++++++++++++++++++
+ 2 files changed, 90 insertions(+)
+
+commit 6999ebcc97352d02be74c581a12c3d04d8c305ad
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sat Oct 10 18:23:06 2026 +0000
+
+    ANTIPHON (negative, not registered): line copy-with-edits over KAIROS, 0/49 wins; blind LLM-decode harness 3/3 self-decodes
+    
+    - src/lib/omega/antiphon.ts: decode-gated copy stage, min over KAIROS and ANTIPHON∘KAIROS on message tokens
+    - measured: copy stage removes 272 tok before CHIRON on aleph.ts but CHIRON wire grows 3179->3440; ANTIPHON wins 0/49, all decodes exact, inverse 49/49
+    - bench/llm-blind-*: blind decode protocol (originals hidden, decoder sees only the chat message), 3/3 byte-exact self-decodes (self-test, not independent)
+    - bench/antiphon-report.md: verdict, receipts, negative space, sources, openai/math grounding, next tests
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/antiphon-bench-receipts.jsonl |  50 +++++++
+ bench/antiphon-bench.ts             |  18 +++
+ bench/antiphon-report.md            | 121 +++++++++++++++++
+ bench/antiphon-scan-receipts.jsonl  | 102 ++++++++++++++
+ bench/llm-blind-check.ts            |  24 ++++
+ bench/llm-blind-gen.ts              |  44 ++++++
+ bench/llm-blind/decode/dec_1.txt    |   6 +
+ bench/llm-blind/decode/dec_2.txt    |   6 +
+ bench/llm-blind/decode/dec_3.txt    |   6 +
+ bench/llm-blind/hidden/check_1.json |   1 +
+ bench/llm-blind/hidden/check_2.json |   1 +
+ bench/llm-blind/hidden/check_3.json |   1 +
+ bench/llm-blind/hidden/orig_1.txt   |   6 +
+ bench/llm-blind/hidden/orig_2.txt   |   6 +
+ bench/llm-blind/hidden/orig_3.txt   |   6 +
+ bench/llm-blind/hidden/wire_1.txt   |   4 +
+ bench/llm-blind/hidden/wire_2.txt   |   4 +
+ bench/llm-blind/hidden/wire_3.txt   |   3 +
+ bench/llm-blind/visible/msg_1.txt   |   5 +
+ bench/llm-blind/visible/msg_2.txt   |   5 +
+ bench/llm-blind/visible/msg_3.txt   |   4 +
+ src/lib/omega/antiphon.ts           | 262 ++++++++++++++++++++++++++++++++++++
+ 22 files changed, 685 insertions(+)
+
+commit b7f55c455783448215bc9faca572ac9b4967421d
+Author: jyvplay <15022593+jyvplay@users.noreply.github.com>
+Date:   Sat Oct 10 17:31:11 2026 +0000
+
+    KAIROS: CHIRON search with exact faster span enumeration and deterministic work-unit budget
+    
+    Same wire format and decoder as CHIRON (search-engine change, not a new wire).
+    - enumerateTokenSpans by offset; enumerateTokenSpansRef kept; equivalence 645 cases, 0 mismatches (bench/chiron-kairos-equiv.ts)
+    - ChironOptions.workUnits: deterministic budget for macro search and variant sweep
+    - KAIROS_WORK_UNITS=32M reproduces CHIRON 26 s on filelock/nose/greenlet/gpl; repeat-identical 4/4
+    - registry key kairos; tsc 0; chiron selftest 11/11
+    - bench/kairos-report.md (receipts; block pass keeps a wall-clock cap, disclosed)
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/chiron-kairos-bench.ts |  31 +++++++++++++
+ bench/chiron-kairos-equiv.ts |  55 ++++++++++++++++++++++
+ bench/kairos-report.md       |  73 +++++++++++++++++++++++++++++
+ src/lib/omega/chiron.ts      | 107 ++++++++++++++++++++++++++++++++++++++-----
+ src/lib/omega/registry.ts    |   6 ++-
+ 5 files changed, 259 insertions(+), 13 deletions(-)
+
+commit 6d213683c5cef2519cfce270ef0f274199096ac0
+Author: Arena Agent <agent@arena.ai>
+Date:   Sat Oct 10 06:58:56 2026 +0000
+
+    PERIODOS: wrapped-subset results (84 docs, +664 tok aggregate, GPL/CECILL/AGPL −270..−300), CHIRON wall-clock budget finding, codebase/PR/openai-math review
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/periodos-report.md   |  36 +++++++++++-
+ bench/review-2026-10-10.md | 136 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 170 insertions(+), 2 deletions(-)
+
+commit b32556cb5c5fec19f689e3ca42db6e7b46390efe
+Author: Arena Agent <agent@arena.ai>
+Date:   Sat Oct 10 06:43:23 2026 +0000
+
+    PERIODOS: per-paragraph measure codec for hard-wrapped prose (exact decode-gated arms; red-team 311/0; corpus bench; CHIRON budget finding)
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/periodos-bench.ts             |  70 +++
+ bench/periodos-corpus-manifest.json | 936 ++++++++++++++++++++++++++++++++++++
+ bench/periodos-fetch.py             |  58 +++
+ bench/periodos-redteam.ts           |  59 +++
+ bench/periodos-report.md            | 140 ++++++
+ src/lib/omega/periodos.ts           | 259 ++++++++++
+ src/lib/omega/registry.ts           |   5 +
+ 7 files changed, 1527 insertions(+)
+
+commit 10e16b258ee167399a4cb214cc451b170cd7ff00
+Author: arena-agent <agent@arena.ai>
+Date:   Sat Oct 10 04:29:51 2026 +0000
+
+    STICHOS report: honest measured results (CHIRON + METATRON incumbents, GPL-3 second corpus), negative space, verification gates
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/stichos-report.md | 263 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 263 insertions(+)
+
+commit 32155ac8ebb2a824108156efa53e8e603fd8151b
+Author: arena-agent <agent@arena.ai>
+Date:   Sat Oct 10 03:33:44 2026 +0000
+
+    STICHOS: verse-line layout codec (greedy-refill of hard-wrapped paragraphs), stacked over CHIRON and METATRON; decode-verified arms, registry entries, benches
+    
+    Co-authored-by: arena-agent <297053741+arena-agent@users.noreply.github.com>
+
+ bench/stichos-bench.ts          |  68 +++++++++
+ bench/stichos-metatron-bench.ts |  55 +++++++
+ src/lib/omega/registry.ts       |   9 ++
+ src/lib/omega/stichos.ts        | 320 ++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 452 insertions(+)
+
+commit 594b8a52aff26c59cb7776cae48ce72691c00301
+Author: jyvplay <jyvplay@gmail.com>
+Date:   Fri Oct 9 20:18:49 2026 -0400
+
+    Merge pull request #25 from jyvplay/arena/e58fbcaa-kompkernel
+    
+    Arena/e58fbcaa kompkernel
+
+ .gitignore                                |    13 +
+ CHIRON.patch                              |  8839 ++++++++++++++
+ ICARUS.patch                              |  8948 ++++++++++++++
+ KIONES.patch                              | 17603 ++++++++++++++++++++++++++++
+ bench/Y7_ECHO_tier5_ultrareview.md        |   280 +
+ bench/Y8_LETHE_tier5_ultrareview.md       |   323 +

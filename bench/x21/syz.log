@@ -1,0 +1,7 @@
+vix-daily-1990.csv           ident= 3412 M=  701 exact=true  row-aion    [row-morphe=1129 row-eidos=952 row-aion=701 col-bare=3561 col-morphe=906 col-eidos=983 col-aion=983]  149274ms
+aapl-2014.csv                ident= 3108 M= 1277 exact=true  row-aion    [row-morphe=1443 row-eidos=1690 row-aion=1277 col-bare=3131 col-morphe=1516 col-eidos=1713 col-aion=1713]  124754ms
+psql-output.txt              ident=  675 M=  203 exact=true  row-eidos   [row-morphe=324 row-eidos=203 row-aion=203 col-bare=685 col-morphe=406 col-eidos=343 col-aion=343]  55302ms
+kubectl-get-pods.txt         ident= 1006 M=  211 exact=true  row-eidos   [row-morphe=326 row-eidos=211 row-aion=211 col-bare=1029 col-morphe=431 col-eidos=479 col-aion=479]  100131ms
+df-h.txt                     ident=  570 M=  132 exact=true  row-eidos   [row-morphe=171 row-eidos=132 row-aion=132 col-bare=612 col-morphe=287 col-eidos=237 col-aion=237]  11114ms
+ls-full-iso.txt              ident= 1175 M=  395 exact=true  row-morphe  [row-morphe=395 row-eidos=423 row-aion=423 col-bare=1195 col-morphe=432 col-eidos=470 col-aion=470]  149526ms
+csv-8.csv                    ident= 2870 M= 1685 exact=true  row-morphe  [row-morphe=1685 row-eidos=1781 row-aion=1781 col-bare=2877 col-morphe=1753 col-eidos=1899 col-aion=1899]  288484ms

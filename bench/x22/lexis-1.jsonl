@@ -1,0 +1,14 @@
+{"file":"bench/holdout-ops/find-listing.txt","raw":3997,"lexisM":1298,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":1273,"contractTok":25,"exact":true,"ms":70945}
+{"file":"bench/z20/samples/git-log-iso.txt","raw":1947,"lexisM":1508,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":1482,"contractTok":26,"exact":true,"ms":51689}
+{"file":"bench/holdout-ops/ls-full-iso.txt","raw":1175,"lexisM":393,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":368,"contractTok":25,"exact":true,"ms":30719}
+{"file":"bench/z11/fresh/ops-git-log-stat.txt","raw":6649,"lexisM":3430,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":3394,"contractTok":36,"exact":true,"ms":920671}
+{"file":"bench/z57/lanes/ops-ls-l-omega.txt","raw":4063,"lexisM":957,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":931,"contractTok":26,"exact":true,"ms":81543}
+{"file":"bench/holdout-mk/chart.svg","raw":1331,"lexisM":431,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":406,"contractTok":25,"exact":true,"ms":18599}
+{"file":"bench/holdout-tbl/kubectl-get-pods.txt","raw":1006,"lexisM":362,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":337,"contractTok":25,"exact":true,"ms":55187}
+{"file":"bench/holdout-work/bibliography.txt","raw":896,"lexisM":679,"parent":"polytropos","order":"in","folds":169,"dangers":25,"wireTok":623,"contractTok":56,"exact":true,"ms":43565}
+{"file":"bench/holdout-work/email-thread.txt","raw":629,"lexisM":507,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":481,"contractTok":26,"exact":true,"ms":39692}
+{"file":"bench/holdout-work/llm-answer.md","raw":733,"lexisM":692,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":667,"contractTok":25,"exact":true,"ms":28074}
+{"file":"bench/holdout/readme.txt","raw":843,"lexisM":664,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":638,"contractTok":26,"exact":true,"ms":35577}
+{"file":"bench/z47/corpus/changelog/svenstaro_miniserve.md","raw":7209,"lexisM":3007,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":2972,"contractTok":35,"exact":true,"ms":311381}
+{"file":"bench/z11/fresh/csv-8.csv","raw":2870,"lexisM":1657,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":1631,"contractTok":26,"exact":true,"ms":83303}
+{"file":"bench/holdout-tab/vix-daily-1990.csv","raw":3412,"lexisM":1240,"parent":"polytropos","order":"none","folds":0,"dangers":0,"wireTok":1215,"contractTok":25,"exact":true,"ms":20020}

@@ -1,0 +1,17 @@
+import fs from 'node:fs';
+import { countTokens } from '@/lib/omega/bpe';
+import { aetosCandidates, aetosCollapse } from '@/lib/omega/aetos';
+import { polytroposEncode } from '@/lib/omega/polytropos';
+const enc = 'o200k_base' as any;
+const f = process.env.F || 'bench/holdout-ops/git-log-fuller.txt';
+const t = fs.readFileSync(f, 'utf8');
+console.log('file', f, 'bytes', t.length);
+let t0 = Date.now();
+const c = aetosCandidates(t);
+console.log('aetosCandidates', c.length, 'in', Date.now() - t0, 'ms:', c.map((x) => x.name + ':' + x.widths.join('')).join(' '));
+t0 = Date.now();
+const col = aetosCollapse(t, c);
+console.log('collapse all', Date.now() - t0, 'ms');
+t0 = Date.now();
+const p = polytroposEncode(t, enc);
+console.log('polytropos', Date.now() - t0, 'ms; wire', countTokens(String(p.wire), enc));

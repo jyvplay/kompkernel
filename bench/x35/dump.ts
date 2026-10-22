@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import { oikonomiaEncode } from '@/lib/omega/oikonomia';
+import { countTokens } from '@/lib/omega/bpe';
+import { CHIRON_START, CHIRON_SEP } from '@/lib/omega/chiron';
+const enc='o200k_base' as any;
+const f=process.env.LANE!;
+const t=fs.readFileSync(f,'utf8');
+const r:any=oikonomiaEncode(t,enc);
+const w:String=r.wire;
+console.log('FILE',f,'rawChars',t.length,'rawTok',countTokens(t,enc),'wireTok',r.messageTokens);
+console.log('CONTRACT:',JSON.stringify(r.contract));
+const cut=w.indexOf(CHIRON_SEP);
+const rules=w.slice(CHIRON_START.length,cut);
+const tape=w.slice(cut+1);
+console.log('--- RULES (before ¶) ---',rules.length,'ch',countTokens(rules,enc),'tok');
+console.log(rules.slice(0,1200));
+console.log('--- TAPE (after ¶) ---',tape.length,'ch',countTokens(tape,enc),'tok');
+console.log(tape.slice(0,1500));

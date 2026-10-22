@@ -1,0 +1,23 @@
+§и:киinternalөnodeк/modules/cjs/loaderид (өр    atя [в1бряeval]:виТhome/user/kompkernel/[evalқ6а
+нар runScriptInНContextе (nodeо)
+рш nodeтк/process/executionиынThisНек/vmи209и10ошт446и12м3әNode.js v22.22.маӡбқыаряeval]-wrapperиқи24нНет444и60о evalFunctionет279и30о evalTypeScriptет291имошк/main/eval_stringи74им
+
+әү143л19щError¶өүма  throw err;
+  ^
+
+щи Cannot find module './nope.js'
+Require stack:
+- /Т]
+р Function._resolveFilenameдү0и15о defaultResolveImplд1040ило resolveForCJSWithHooksд1045и22о Function._loadд121қи25о wrapModuleLoadд254ило Module.requireд1527и12о requireек/modules/helpersи147и16)
+бвы {
+  codeи 'MODULE_NOT_FOUND',
+  requireStackия '/Т]' ]
+}
+
+ә<anonymous_script>:ва{badа ^
+
+Syntaxщи Expected property name or '}' in JSON at position в (line в column 2о JSON.parse (<anonymous>)
+ӡ[eval]:ваnull.xа     ^
+
+Typeщи Cannot read properties of null (reading 'x')
+ӡ

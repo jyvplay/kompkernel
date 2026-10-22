@@ -1,0 +1,14 @@
+dump.sql                           raw= 1795 lexis=  712 par=polytropos ord=none folds=  0 exact=true
+git-log-fuller.txt                 raw=  143 lexis=  143 par=lakonikos  ord=none folds=  0 exact=true
+git-numstat.txt                    raw= 4632 lexis= 2020 par=polytropos ord=none folds=  0 exact=true
+node-stacktraces.txt               raw=  568 lexis=  316 par=polytropos ord=none folds=  0 exact=true
+ops-ls-l-bin.txt                   raw=  465 lexis=  224 par=polytropos ord=none folds=  0 exact=true
+openstack-loghub-26.log            raw= 4028 lexis=  989 par=polytropos ord=none folds=  0 exact=true
+df-h.txt                           raw=  570 lexis=  265 par=polytropos ord=none folds=  0 exact=true
+psql-output.txt                    raw=  675 lexis=  355 par=polytropos ord=none folds=  0 exact=true
+de-kb.txt                          raw=  525 lexis=  471 par=polytropos ord=none folds=  0 exact=true
+kb-article.txt                     raw=  656 lexis=  637 par=polytropos ord=none folds=  0 exact=true
+meeting-transcript.txt             raw=  472 lexis=  400 par=polytropos ord=none folds=  0 exact=true
+spring-projects_spring-framework_35118.md raw= 1895 lexis=  948 par=polytropos ord=none folds=  0 exact=true
+aapl-2014.csv                      raw= 3108 lexis= 1476 par=polytropos ord=none folds=  0 exact=true
+sp500-200.csv                      raw= 6662 lexis= 4247 par=polytropos ord=none folds=  0 exact=true

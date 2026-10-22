@@ -1,0 +1,22 @@
+References
+
+[1] Bentley, J. L., & McIlroy, M. D. (1993). Engineering a sort function. Software: Practice and Experience, 23(11), 1249-1265.
+[2] Burrows, M., & Wheeler, D. J. (1994). A block-sorting lossless data compression algorithm. Digital SRC Research Report 124.
+[3] Charikar, M., Lehman, E., Liu, D., Panigrahy, R., Prabhakaran, M., Sahai, A., & Shelat, A. (2005). The smallest grammar problem. IEEE Transactions on Information Theory, 51(7), 2554-2576.
+[4] Cleary, J. G., & Witten, I. H. (1984). Data compression using adaptive coding and partial string matching. IEEE Transactions on Communications, 32(4), 396-402.
+[5] Ferragina, P., & Manzini, G. (2005). Indexing compressed text. Journal of the ACM, 52(4), 552-581.
+[6] Gage, P. (1994). A new algorithm for data compression. The C Users Journal, 12(2), 23-38.
+[7] Howard, P. G., & Vitter, J. S. (1994). Arithmetic coding for data compression. Proceedings of the IEEE, 82(6), 857-865.
+[8] Kieffer, J. C., & Yang, E. H. (2000). Grammar-based codes: a new class of universal lossless source codes. IEEE Transactions on Information Theory, 46(3), 737-754.
+[9] Larsson, N. J., & Moffat, A. (2000). Offline dictionary-based compression. Proceedings of the IEEE, 88(11), 1722-1732.
+[10] Manber, U., & Myers, G. (1993). Suffix arrays: a new method for on-line string searches. SIAM Journal on Computing, 22(5), 935-948.
+[11] Moffat, A., Neal, R. M., & Witten, I. H. (1998). Arithmetic coding revisited. ACM Transactions on Information Systems, 16(3), 256-294.
+[12] Nevill-Manning, C. G., & Witten, I. H. (1997). Identifying hierarchical structure in sequences: a linear-time algorithm. Journal of Artificial Intelligence Research, 7, 67-82.
+[13] Rissanen, J., & Langdon, G. G. (1979). Arithmetic coding. IBM Journal of Research and Development, 23(2), 149-162.
+[14] Sennrich, R., Haddow, B., & Birch, A. (2016). Neural machine translation of rare words with subword units. Proceedings of ACL 2016, 1715-1725.
+[15] Storer, J. A., & Szymanski, T. G. (1982). Data compression via textual substitution. Journal of the ACM, 29(4), 928-951.
+[16] Ukkonen, E. (1995). On-line construction of suffix trees. Algorithmica, 14(3), 249-260.
+[17] Welch, T. A. (1984). A technique for high-performance data compression. Computer, 17(6), 8-19.
+[18] Willems, F. M. J., Shtarkov, Y. M., & Tjalkens, T. J. (1995). The context-tree weighting method: basic properties. IEEE Transactions on Information Theory, 41(3), 653-664.
+[19] Ziv, J., & Lempel, A. (1977). A universal algorithm for sequential data compression. IEEE Transactions on Information Theory, 23(3), 337-343.
+[20] Ziv, J., & Lempel, A. (1978). Compression of individual sequences via variable-rate coding. IEEE Transactions on Information Theory, 24(5), 530-536.

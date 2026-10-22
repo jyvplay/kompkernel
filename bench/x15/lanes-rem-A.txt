@@ -1,0 +1,8 @@
+bench/holdout-ops/git-numstat.txt
+bench/holdout-ops/node-stacktraces.txt
+bench/holdout-ops/openstack-loghub-26.log
+bench/holdout-tab/aapl-2014.csv
+bench/holdout-tab/vix-daily-1990.csv
+bench/holdout-tbl/df-h.txt
+bench/holdout-tbl/kubectl-get-pods.txt
+bench/holdout-tbl/psql-output.txt

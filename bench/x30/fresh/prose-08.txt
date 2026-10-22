@@ -1,0 +1,82 @@
+  member exactly.
+* Contract sufficiency: three hand-built wires assert the decoder implements
+  exactly the three rules the contract states and no fourth rule.
+
+**Cross-decoder:** `bench/synizesis-crosscheck.sh` → *"CPython cross-decode
+EXACT on 25 wires"*. Two independent implementations, one contract.
+
+---
+
+## H. EXTERNAL VERIFICATION
+
+* `tsc --noEmit` clean; `next build` clean (`✓ Generating static pages (3/3)`).
+* Real tokenizer (`gpt-tokenizer`) for every count — no heuristics.
+* Independent CPython decoder: exact on 25/25 wires.
+* Real public data, not only synthetic (§6).
+* **Downgrade applied:** no LLM API exists in this sandbox, so the
+  "readable by a bare chat turn" claim is *not* machine-verified. It is
+  supported by the CPython reader and by the agent-in-the-loop decode in §7,
+  and is stated as evidence rather than proof.
+
+---
+
+## I. REPAIRED CANDIDATES INHERIT NO TRUST
+
+The codec was repaired four times (sigil dedup, position induction, marker-free
+promotion, scanner relaxation). After the last repair the **entire** red-team
+suite, the fuzz, the CPython cross-check and the full bench were re-run from
+scratch; no result in this report predates the final source.
+
+---
+
+## 1. THE MECHANISM
+
+```
+2026-09-10T08:34:56.789Z   15 tokens   (1.60 chars/token)
+20260910083456789           6 tokens   (2.83 chars/token)
+08:34:56                    5 tokens  →  083456          2 tokens
+192.168.100.254             7 tokens  →  192168100254    4 tokens
+2026-09-10                  6 tokens  →  20260910        3 tokens
+```
+(`bench/w13-mark.ts`, `o200k_base`.)
+
+1. **Scan** maximal class-alternating literals.
+2. **Mask** them (`digit→0`, `letter→a`, punctuation literal) and group.
+3. **Induce** the template: a position is variable iff two members of the group
+   disagree there. Constants — including shared date prefixes — stay in the
+   skeleton and are written **once**.
+4. **Emit** `legend` + `⇒` + body; each occurrence is `sigil + payload`, and the
+   payload is now a single same-class run the pre-tokenizer stops cutting.
+5. **Promote to marker-free** every template whose payload is a fixed-length
+   digit run, when the round trip still verifies: the sigil disappears and the
+   rule is "expand every digit run of that length". **Zero tokens per
+   occurrence.**
+6. **Hex-shift** long lowercase-hex runs (`0-9 → g-p`), making them pure-letter.
+7. **Tournament** over `{identity, synizesis, daedalus, daedalus∘synizesis,
+   synizesis∘daedalus}`; every arm is decoded and byte-compared; cheapest wins.
+   SYNIZESIS therefore **cannot be worse** than the incumbent arm it contains.
+
+Example wire (real output):
+
+```
+2026-03-0#T##:##:##.###Z
+⇒
+4091502118 INFO order 10021 shipped
+4091744907 WARN order 10022 delayed
+```
+
+No sigil anywhere. One bare pattern with ten `#`, so ten-digit runs expand and
+the five-digit order numbers do not.
+
+---
+
+## 2. HEADLINE RESULT
+
+`bench/synizesis-bench.ts`, `o200k_base`, 29 documents, DAEDALUS baseline at
+`budgetMs = 2500`. Every arm decoded and byte-compared; the run throws on any
+inexactness.
+
+| group | raw | DAEDALUS | SYNIZESIS | Δ | Δ % of incumbent |
+|---|---|---|---|---|---|
+| **real public tabular** | 6 520 | 2 984 | **2 446** | **538** | **18.0 %** |
+| synthetic ops | 10 400 | 4 099 | **3 569** | **530** | **12.9 %** |

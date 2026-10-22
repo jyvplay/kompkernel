@@ -1,0 +1,54 @@
+Any French business email, report, or chat message pasted into an
+English-UI tool routinely carries these ([1](https://mytexttool.com/blog/posts/french-typography-rules.html),
+[2](https://www.supermemo.com/en/blog/punctuation-in-french-rules-worth-knowing),
+[3](https://forum.wordreference.com/threads/fr-space-before-a-colon-semicolon-question-mark-or-exclamation-point.54376/)).
+
+This is not a contrived adversary: it is two independently-documented,
+still-live, real causes with a combined multi-decade paper trail.
+
+## D. The two mechanisms
+
+### D.1 Space-lookalike span clustering (primary, large-gain mechanism)
+
+`findNbspSpans` finds maximal contiguous runs of text where words are
+separated ONLY by a single lookalike codepoint (NBSP or narrow-NBSP, never
+mixed, never a genuine ASCII space) and wraps each run in a bracket pair
+identifying the target codepoint (`▀...█` for NBSP, `▄...█` for narrow-NBSP).
+This is a maximal self-terminating run, structurally the same discipline
+PROCRUSTES's own DESTRETCH/DEWIDE mechanisms already use for letter-spaced
+and fullwidth runs, applied to a different character class. A single
+bracket pair amortizes across however many words the run contains — one
+long NBSP-corrupted paragraph pays a fixed ~2-token bracket cost regardless
+of whether it has 5 or 50 word gaps inside it.
+
+**This is deliberately NOT a rename of CIRCE's invisible-character guard.**
+CIRCE's own mechanism targets characters with zero rendering footprint,
+used almost exclusively for steganography/watermarking/SEO-stuffing —
+content-free noise a human cannot see at all — and requires a single,
+whole-document, all-or-nothing boolean flag (every space in the entire
+message, or none). CAESURA's target is a VISIBLE, FUNCTIONAL Unicode
+primitive (a non-breaking space is a genuine typographic signal, "do not
+line-break here") whose failure mode is an editor bug or an overapplied
+foreign-language convention, not an adversarial payload — and its
+detection algorithm supports MULTIPLE independent spans anywhere in a
+document (a single pasted French paragraph embedded in an otherwise-
+ordinary English message still qualifies), which CIRCE's single
+whole-document flag structurally cannot do.
+
+### D.2 Uniform double-space-after-sentence flag (secondary mechanism)
+
+A whole-document, zero-per-instance-cost rule with the identical proof
+shape as CIRCE's own invisible-character guard: verify that EVERY
+occurrence of `[.!?]` followed by whitespace uses EXACTLY two space
+characters, with zero exceptions anywhere in the document; if so, collapse
+every instance to one space and record a single flag bit; restore
+re-doubles every instance by the same mechanical rule. A single
+non-conforming sentence boundary (even one single- or triple-spaced
+instance) safely and correctly declines the entire mechanism — verified
+directly in the red team (`G7-doublespace-declined`), never assumed. This
+mechanism's real-world magnitude is honestly smaller than D.1 (roughly 1
+token per sentence boundary, versus ~1.13 tokens per WORD GAP for the NBSP
+mechanism), so it typically needs a longer document to clear its own fixed
+overhead — reported honestly, not oversold.
+
+## E. Measured results (live, `bench/caesura-fixtures.ts` / `bench/caesura-redteam.ts`)
