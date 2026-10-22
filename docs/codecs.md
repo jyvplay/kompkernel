@@ -3779,3 +3779,126 @@ measured**. npm-ls is reported as *not measured*: `ouraEncode` alone costs **992
 Prose still does not move, and X40 refuted the one new route to it that was left.
 
 Full writeup: `bench/x40/X40.md`.
+
+---
+
+## X41 — SYSTOLE (συστολή, “a drawing together, a contraction”) — index 31
+
+`src/lib/omega/systole.ts`. Wraps PERITROPE (30). Removes the **separators inside
+structured numbers** and restores them by template — the first mechanism here that pays
+for a removal **without repetition**.
+
+### Why this one, and what measurement chose it
+
+`bench/x41/diag.ts` did a pre-tokeniser accounting before anything was built. On the two
+CSV lanes **37–38 % of raw tokens** live in digit runs longer than three digits, and
+**vix has 3,408 pre-tokens and 3,412 tokens** — one token per pre-token. BPE merges buy
+nothing. That is a floor, and the floor is `\p{N}{1,3}`, which cuts every digit run
+every three characters. Merges never cross a pre-token boundary, so `2026` is
+irreducibly two tokens however often it occurs.
+
+```
+"2026-09-30T07:59:52.6403938810"  ->  17 pre-tokens
+"20260930T0759526403938810"       ->  10 pre-tokens
+```
+
+Only five of the seven saved are the removed characters; **the other two are the digit
+runs regrouping** (`2026|09|30` is four pre-tokens as three runs, three as one).
+
+Raw saving measured per lane (`bench/x41/screen2.ts`): aapl **974**, vix **882**,
+find-listing **720**, openstack 524, ls-full-iso 168, dump.sql 156 — and **prose-01: 2,
+kb-article: 1**.
+
+`LCP gain = −14` on **every** lane (the clause cost alone): line-prefix elision is dead
+in this corpus.
+
+### Three constraints, all for the reader
+
+1. **Width cap ≤ 14 digits.** Restoring means counting. **arXiv 2605.02028** queried
+   **126 model variants** and found **every one** has a finite counting capacity far
+   below its nominal context, failures clustering on round numbers. This is why the
+   single largest measurement of the turn is refused: treating `,` as a separator merges
+   a CSV row into one template and shows **−1,512 raw on vix**, but the stripped form is
+   a forty-digit blob.
+   **CharBench (arXiv 2508.02591)** measures the same tradeoff from the other side —
+   accuracy at locating a character declines as the containing token grows, *a tradeoff
+   between token-level compression and the ability to reason about character-level
+   structure*.
+2. **One template per digit count.** The reader identifies a stripped run by its length.
+   On vix, dates and prices both strip to eight digits; only the prices ship (504
+   occurrences vs 126), forgoing 378 **to keep the instruction unambiguous**.
+3. **Mechanical invertibility + unambiguity.** Both caught real failures: find-listing's
+   size column `113525` → `11:35:25`; dump.sql's hex `00000000b09b…` → `0000-00-00`;
+   chart.svg `800 400` → `8.00 4.00`; email-thread `2026` → `20:26`.
+
+### Two corrections to selection, both found by losing most of the gain
+
+* **Ambiguity is not monotone.** On aapl, `4-2-2` is ambiguous *alone* (the decimal part
+  of `77.44539475` survives as a native 8-digit run) but readable *once `2.8` ships too*.
+  One pass: **201 of 915**. Fixed point: **915**.
+* **A weak template must not claim a slot a stronger one is still reaching for** — `2.6`
+  (6 raw) took the 8-digit slot while `4-2-2` (720 raw) waited its second chance.
+
+### Result — byte-exact, independent reference decoder
+
+| lane | PERITROPE | **SYSTOLE** | templates | |
+|---|---|---|---|---|
+| aapl | 1450 | **1407** | `10:2.8` `9:2.7` `8:4-2-2` | EXACT |
+| vix | 579 | **550** | `8:2.6` | EXACT |
+| bibliography | 671 | **667** | `6:3-3` `8:4-4` | EXACT |
+| meeting-transcript | 385 | **384** | `6:2:2:2` | EXACT |
+
+Every other lane EXACT with SYSTOLE off (find-listing, ls-full-iso, dump.sql, pom.xml,
+page.html, chart.svg, email-thread all re-measured this turn at their prior values).
+
+**Honest gap:** aapl 915 raw → 43 delivered (4.7 %); vix 504 → 29 (5.8 %). **Twelve
+further lanes with measurable raw separators delivered zero**, because the dictionary and
+shape rules already capture separator structure wherever numbers repeat. What survives is
+exactly the **high-entropy** case.
+
+**Independent reference decode:** `bench/x41/handcheck.py` re-implements the inverse from
+the clause text alone, in Python, not importing `systole.ts` —
+**md5 `d23206346603f7eed8815e6432956f71` on both sides, all 241 lines.** The full wire is
+not hand-decoded here; that proof is X39's (ls-full-iso, md5 `b55a95c2…`).
+
+### Honest citation — the part that cuts against this
+
+The rule it exploits is documented elsewhere **in the opposite direction**. A 2026
+analysis (dev.to, ji_ai) confirms `\p{N}{1,3}` in cl100k/o200k and shows chunking runs
+**left to right**, so boundaries depend on total length, not place value, and a thousands
+separator is a hard boundary forcing right-to-left alignment. **Singh & Strouse,
+arXiv 2402.14903**: comma-separating at inference materially improves arithmetic; under
+length mismatch, left-to-right tokenization collapses to **8.25 %**.
+
+Both argue for **adding** separators so a model can compute. SYSTOLE removes them,
+because the objective is the token count of the message, not downstream arithmetic.
+**Those objectives conflict: a wire from this codec is a worse substrate for downstream
+mental arithmetic than the original.** That is a real cost the token count does not see.
+
+* **Arcee Trinity Large, arXiv 2602.17004 §2.1.1**: the natural zero-width lookahead
+  `(\d{3})+(?!\d)` suffers **catastrophic backtracking** on long digit runs, spiking
+  tokenization to minutes — why the run scanner here trims and resumes.
+* **arXiv 2601.14658**: tokenizers produce **non-unique encodings** — several token-id
+  sequences detokenize to the same string.
+* **arXiv 2510.06824**, **2502.09741 (FoNE)**, **2601.09706**: numeracy work on the same
+  bottleneck. **arXiv 2605.00817**: accuracy 63 % at 5 procedural steps → 20 % at 95.
+
+### Greedy / bound
+
+* **Greedy: NO** for selection (every template priced on real token counts, every set
+  re-verified for invertibility and unambiguity) and **NO** for the gate (encoded twice,
+  worse discarded). Greedy set cover in one respect: ordered by measured saving, fixed
+  point by repeated passes, not exhaustive subset search.
+* **Time/CPU bound: YES.** The gate needs a second full PERITROPE encode: **289 s aapl,
+  705 s vix**. A raw-saving pre-filter (`SYSTOLE_MIN_RAW = 20`) skips it where it cannot
+  pay — most lanes.
+
+### Honest size
+
+43 tokens on aapl (3.0 %), 29 on vix (5.0 %), 4 on bibliography (0.6 %), 1 on
+meeting-transcript (0.3 %), zero on the thirteen other lanes. Narrow: for high-entropy
+numeric columns. **Barely touches prose — bibliography and meeting-transcript are the only
+prose-adjacent lanes that move, by four tokens and one; kb-article has one structured
+numeric run in the whole file, prose-01 two, together worth three tokens.**
+
+Full writeup: `bench/x41/X41.md`.
