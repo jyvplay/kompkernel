@@ -3640,3 +3640,142 @@ already tokenizes English prose near-optimally, so there is no separator waste l
 reprice. The waste lives in structural characters, and prose has almost none.
 
 Full writeup: `bench/x39/X39.md` (§A–O).
+
+---
+
+## X40 — PERITROPE (περιτροπή, “a turning round / cycle”) — index 30
+
+Generalising ANTISTROPHE from **one** character exchange to a **set** of pairwise-disjoint
+exchanges, chosen by beam search. Registered at registry index **30**,
+`src/lib/omega/peritrope.ts`. Superset of ANTISTROPHE (29).
+
+### The question, and the measurement that answered it first
+
+ANTISTROPHE stops at one pair. Screen 1 (`bench/x40/screen1.ts`, 18 lanes, 15 s) asked
+whether more is worth anything, by applying the best pair, re-pricing, and repeating:
+
+| lane | 1st | 2nd | 3rd |
+|---|---|---|---|
+| git-numstat | −408 | −421 | **−425** |
+| find-listing | −166 | −249 | **−264** |
+| npm-ls | −131 | −180 | **−200** |
+| pom.xml | −18 | −32 | **−33** |
+| openstack | −33 | −44 | **−49** |
+| readme | −13 | −20 | −27 |
+
+**Returns are not diminishing.** On `pom.xml` the third exchange alone beats the first two
+combined. Stopping at one pair leaves most of the mechanism unharvested.
+
+### Why a set, not a sequence
+
+Two exchanges collide: swapping `␠↔/` and then `/↔.` sends spaces to dots, and the reader
+must know the order. PERITROPE searches over sets of **pairwise-disjoint** exchanges, so no
+character appears twice. Disjointness restores what a single swap had for free — **order of
+application does not matter** — so the reader gets a list, not a program.
+
+Screen 2 measured the cost of that constraint (greedy, k ≤ 4): **identical totals on 12 of
+18 lanes**. The only lane where disjointness really binds is find-listing, −181 disjoint vs
+−264 free.
+
+### Why beam search, not greedy
+
+The best *first* pair is not the best *first move*. Screen 3 (WIDTH=8, DEPTH=5, CAP=10):
+
+| lane | beam | greedy disjoint |
+|---|---|---|
+| find-listing | **−238** | −181 |
+| pom.xml | **−49** | −33 |
+| ls-full-iso | **−36** | −11 |
+| git-numstat | −421 (k=2) | −421 (tie) |
+
+Depth is chosen by `rawDelta(k) + clauseTokens(k)`, both **measured** — not by encoding every
+prefix, which would cost one full stack encode per candidate depth.
+
+### A bug worth recording
+
+The pool was originally filtered by a minimum count of 20, inherited from ANTISTROPHE. On the
+same beam that turns git-numstat from **k=2 / −421** into **k=1 / −408**, and npm-ls from
+**k=5 / −229** into **k=1 / −11**. A character that occurs eleven times can still be the
+expensive half of a very cheap pair. The filter is now **presence + a cap on pool size**
+(`PERITROPE_MIN_COUNT = 1`, `PERITROPE_POOL_CAP = 22`).
+
+### Refuted this turn
+
+* **Delta encoding of monotone integer runs** — dead. The longest monotone run in any of these
+  documents is 4–7 values (dump.sql 7, openstack 5, prose-01 5, chart.svg 5). Gain 0 on every
+  lane.
+* **Widening the pool to typographic Unicode** (`bench/x40/screen4.ts`). The theory was that
+  published English earns BPE merges for curly apostrophes, em dashes and ellipses that
+  plain-text documents never use. 27 extra characters tested across 18 lanes: **improvement of
+  exactly zero on all 18**. The typographic-substitution route to prose is refuted.
+
+### Result (byte-exact, independent reference decoder, same process)
+
+| lane | OURA | ANTISTROPHE | **PERITROPE** | pairs |
+|---|---|---|---|---|
+| find-listing | 1279 | 1242 | **1218** | `␠↔-`, `.↔/` |
+| git-numstat | 1992 | 1923 | **1906** | `/↔␠`, `-↔(` |
+| openstack | 945 | 898 | **894** | `]↔"`, `.↔_` |
+
+−24, −17 and −4 (2393 s — this lane costs 40 minutes to encode). **Honest gap between probe and codec:** pom.xml (−30 raw),
+chart.svg (−36) and ls-full-iso (−36) all price well in isolation and **none survives the
+stack** — the clause plus the interaction with the parent grammar eats the raw delta.
+
+### Honest citation — the literature running the other way
+
+This is the closest thing to prior art found for this whole family, and it is *adversarial*:
+
+* **SilverSpeak**, arXiv **2406.11239**: substituting 10 % of characters with homoglyphs makes
+  **70 % of resulting tokens differ** in the OpenAI BPE tokenizer.
+* **arXiv 2508.14070** (2,800+ instances, 7 models): cross-script homoglyph substitution is the
+  most effective technique at **58.7 %** guardrail bypass, 10 % (GPT-OSS 20B) to 92 % (Mistral 7B).
+* **paultendo.github.io** (Feb 2026; 130 API calls, 8 attack types, 4 models, 3 document types):
+  GPT-5.2 and Claude Sonnet 4.6 **correctly interpreted every substitution in every run**, with
+  57 % of characters replaced — zero meaning flips, zero clause omissions — while that same 57 %
+  took a 95-line contract from 881 tokens to **4,567 (5.2×)**. *“The comprehension attack fails.
+  The billing attack succeeds.”*
+* **arXiv 2610.03110**: homoglyph substitution evaded a RoBERTa detector in 41 % of cases;
+  mapping confusables back to Latin before tokenization cut that to **2 %**.
+* **arXiv 2604.10271**: ~37.5 % word-level replacement breaks authorship verification.
+
+**Two ways this cuts, both load-bearing.** In favour: it is the strongest independent
+confirmation available that character exchange is transparent to a frontier reader while being
+extremely expensive to the tokenizer — the entire premise of X39 and X40. Against: homoglyph
+work substitutes *toward* rare multi-byte characters to inflate; PERITROPE substitutes *toward*
+cheap ones to deflate. Both ride the same cliff. The only difference is that PERITROPE never
+ships a direction it has not measured on the actual document, whereas a fixed format convention
+does — and McMillan's 9,649-experiment study measured that class of claim reversing to **38 %
+MORE** tokens across 11 models (χ² = 2.45, p = 0.484, no accuracy effect).
+
+**Deployment caveat the same literature supplies:** a preprocessing layer that maps confusables
+back to Latin skeletons neutralises the effect to 1.0×. Any pipeline normalising confusables at
+ingest would undo this transform. Here the exchange is applied by the encoder and read by the
+model, not passed through a sanitizer — but it is a real boundary.
+
+Adjacent work this stack **cannot** use, because the decoder's tokenizer is frozen:
+**arXiv 2601.13260** (retokenization/vocab expansion/merge refinement are offline interventions
+that repay their cost), **arXiv 2512.03989** (EACL 2026): continued BPE training beats naive
+extension by up to **9.6 %** tokenization efficiency, 72.9–100 % of 70 languages, and
+leaf-based pruning removes up to **62.5 %** (80k/128k) of vocabulary tokens without noticeable
+deterioration; **TokEval**, arXiv **2608.18062** (COLM 2026). All require changing the tokenizer.
+PERITROPE is that same offline intervention achieved by rewriting the **text** instead.
+
+### Greedy / non-greedy status, and the bound
+
+* **Greedy: NO.** Every candidate pair is scored on the real token count of the text it
+  produces; the beam keeps 8 competing partial permutations so a locally best pair cannot lock
+  out a better set; depth is chosen by measured raw delta + measured clause cost; and the
+  transform ships only when the full message **including the clause** is strictly smaller than
+  the parent.
+* **Time / CPU bound: YES.** One tokenization per candidate pair per node, bounded by
+  22 pool chars × 8 beam states × 10 extensions × 5 depths. Measured **165 s** for find-listing,
+  **305 s** for git-numstat — roughly double ANTISTROPHE.
+
+### Honest size
+
+24 tokens on find-listing, 17 on git-numstat, 4 on openstack, **zero on the other thirteen lanes
+measured**. npm-ls is reported as *not measured*: `ouraEncode` alone costs **992.5 s** on its
+6,688 characters, so the lane is a parent-stack pathology inherited from X39, not a zero.
+Prose still does not move, and X40 refuted the one new route to it that was left.
+
+Full writeup: `bench/x40/X40.md`.

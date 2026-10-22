@@ -1,0 +1,14 @@
+import * as fs from 'node:fs';
+import { peritropeEncode } from '@/lib/omega/peritrope';
+const enc: any = 'o200k_base';
+const t = fs.readFileSync(process.env.F!, 'utf8');
+const r: any = peritropeEncode(t, enc);
+console.log('alphabet      ', JSON.stringify(r.alphabet));
+console.log('marker        ', JSON.stringify(r.marker), 'marker2', JSON.stringify(r.marker2));
+console.log('framing       ', JSON.stringify(r.framing));
+console.log('ouraShape     ', JSON.stringify(r.ouraShape), 'mode', r.ouraMode, 'sentinel', JSON.stringify(r.ouraSentinel));
+console.log('peritropePairs', JSON.stringify(r.peritropePairs));
+const st = r.stats;
+console.log('stats keys    ', st ? Object.keys(st).slice(0, 20).join(',') : 'none');
+if (st && st.rules) console.log('rules         ', JSON.stringify(st.rules).slice(0, 1500));
+else if (st) console.log('stats sample  ', JSON.stringify(st).slice(0, 1500));

@@ -1,0 +1,15 @@
+import * as fs from 'node:fs';
+import { peritropeEncode, peritropeApply } from '@/lib/omega/peritrope';
+import { countTokens } from '@/lib/omega/bpe';
+const enc: any = 'o200k_base';
+const t = fs.readFileSync('bench/holdout-ops/find-listing.txt', 'utf8');
+const r: any = peritropeEncode(t, enc);
+const swapped = peritropeApply(t, r.peritropePairs);
+console.log('raw chars      ', t.length, 'tok', countTokens(t, enc));
+console.log('swapped chars  ', swapped.length, 'tok', countTokens(swapped, enc));
+console.log('wire chars     ', r.wire.length, 'tok', countTokens(r.wire, enc));
+console.log('src first 120  ', JSON.stringify(t.slice(0, 120)));
+console.log('swp first 120  ', JSON.stringify(swapped.slice(0, 120)));
+console.log('wire first 120 ', JSON.stringify(r.wire.slice(0, 120)));
+console.log('wire == swapped?', r.wire === swapped);
+console.log('wire has §     ', r.wire.indexOf('§'));
