@@ -212,6 +212,8 @@ export interface AnadiplosisOptions extends SyncopeOptions {
   anadiplosis?: boolean;
   /** Force a framing. Must still be collision-free or the plan is refused. */
   framing?: Framing;
+  /** Override the per-span acceptance threshold (auctionable). */
+  minGainOverride?: number;
   /**
    * Candidate wordings for the contract clause. When more than one is given
    * they are scored by MEASURING the exact contract each produces, not by
@@ -234,6 +236,7 @@ export interface AnadiplosisResult extends SyncopeResult {
 }
 
 interface Cand { s: number; p: number; k: number; gain: number; ut: number }
+
 
 /** The contract sentence the receiving model is asked to honour. */
 export function anadiplosisClauseFor(framing: Framing = ANADIPLOSIS_DEFAULT_FRAMING): string {
@@ -277,11 +280,11 @@ function findCandidates(
 }
 
 /** Greedy non-overlapping selection, best gain first. */
-function select(text: string, cands: Cand[], maxSpans: number): Cand[] {
+function select(text: string, cands: Cand[], maxSpans: number, minGain: number = ANADIPLOSIS_MIN_GAIN): Cand[] {
   const used = new Uint8Array(text.length);
   const scored = cands
     .map((c) => ({ ...c, gain: c.gain - ANADIPLOSIS_OVERHEAD }))
-    .filter((c) => c.gain >= ANADIPLOSIS_MIN_GAIN && c.ut >= ANADIPLOSIS_MIN_UNIT_TOKENS)
+    .filter((c) => c.gain >= minGain && c.ut >= ANADIPLOSIS_MIN_UNIT_TOKENS)
     .sort((a, b) => b.gain - a.gain);
   const picked: Cand[] = [];
   for (const c of scored) {
@@ -392,7 +395,8 @@ export function anadiplosisPlan(
 
   const cands = findCandidates(text, enc, ANADIPLOSIS_MAX_SPANS);
   if (!cands.length) return null;
-  const chosen = select(text, cands, ANADIPLOSIS_MAX_SPANS);
+  const minGain = opts.minGainOverride ?? ANADIPLOSIS_MIN_GAIN;
+  const chosen = select(text, cands, ANADIPLOSIS_MAX_SPANS, minGain);
   if (!chosen.length) return null;
 
   const out = applyAll(text, chosen, framing);

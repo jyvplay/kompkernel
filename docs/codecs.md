@@ -3366,3 +3366,158 @@ select them by a collision argument — and both auctions here, are original to 
 repository.
 
 Full writeup: `bench/x37/X37.md`.
+
+---
+
+## X38 — OURA (οὐρά, "tail")
+
+**Registry key:** `oura` (index 28) · **Implementation:** `src/lib/omega/oura.ts`
+**Sits on:** EUTELEIA → ANADIPLOSIS → SYNCOPE → PYKNOSIS → OIKONOMIA
+**Fidelity:** exact, byte-for-byte
+**Greedy?** No. Every candidate shape and every mode is scored on the real token count of the
+message it produces, and the transform ships only when the measured full message is strictly
+smaller than the parent's.
+**Bound:** CPU-bound (linear scan per separator and k over 7 separators, k in 2..5; only the
+top four candidates by estimate are carried through the stack).
+
+### The finding
+
+Every numeric shape in this stack — SYMPLOKE's four fixed shapes (`date8`, `time6`, `dtT`,
+`dtSp`) and the whole learned lattice — rests on **one hypothesis**: that the digit groups of a
+pattern have a **constant width vector**. The learner scans
+
+```
+\d+ (sep \d+){k-1}
+```
+
+and rejects the shape outright the moment two matches disagree on any width. That rejection is
+what makes the collapse self-identifying: a collapse is recognised by the **length of its digit
+run**, a constant vector gives a constant collapsed length, and so "a run of exactly eight
+digits is a date" is a decidable rule that needs no per-run marker.
+
+The hypothesis is also **false for a large and completely ordinary family of real numbers**.
+A semantic version has three groups whose widths vary:
+
+```
+1.0.0      22.1.1      0.35.4      4.1.17
+```
+
+Two groups are one digit in some matches and not in others, every shape is rejected, and every
+dot is paid for at full price. The same holds for fixed-precision decimals with a varying
+integer part (`77.44539475`, `100.62342100`), for times carrying fractional seconds, and for any
+field where the trailing precision is fixed by convention and only the head grows.
+
+**What is constant in all of them is not the vector — it is the tail.**
+
+### The construction
+
+OURA relaxes the hypothesis from *"the whole width vector is constant"* to *"the width vector
+excluding the first group is constant"*, and pays for the relaxation by reading from the right:
+
+```
+collapse:  1 . 0 . 0  ->  100
+restore:   take the last 1 digit, then the last 1 digit before it,
+           then everything that remains; join with '.'
+           100 -> 1 | 0 | 0 -> 1.0.0
+```
+
+Splitting from the tail is exact and total: the suffix widths consume a fixed number of digits
+from the right, so whatever survives at the left is the head **whatever its length**. No carry,
+no base conversion, no arithmetic. The reader counts characters off the right-hand end, which is
+the easiest direction to count in precisely because the suffix is fixed.
+
+### The price of the relaxation, and three ways to pay it
+
+A constant-width collapse is recognised by length and needs no marker. A tail-anchored one has a
+**variable** collapsed length, so length alone no longer identifies it. OURA closes the ambiguity
+three ways and measures all three.
+
+| mode | how the run is marked | cost per run | when it is available |
+|---|---|---|---|
+| `plain` | nothing — proved unambiguous | 0 | only when no digit run outside the spans is long enough to be misread |
+| `lead` | the **head's own separator survives** | 0 | only when no *other* `<digits><sep><digits{sufSum}>` exists in the emitted text |
+| `mark` | a sentinel immediately before the run | 1 token | whenever a sentinel is collision-free |
+
+The `lead` mode is the interesting one and it is new: keep the head **and its separator**, drop
+the rest, and the surviving separator becomes the marker at zero cost. `1.0.0` → `1.00`.
+
+### Two guards for the layer below
+
+OURA runs *before* SYMPLOKE's shape collapse, and a collapse here changes digit-run lengths
+there.
+
+1. **Non-interference.** A candidate is only considered where the constant-width learner has
+   already refused — if the head width is constant, SYMPLOKE owns the pattern and OURA keeps its
+   hands off, so the two never claim the same span.
+2. **Fixed-shape immunity.** No match may overlap `date8`, `time6`, `dtT` or `dtSp`, which are
+   matched by literal regex and would otherwise be cut in half.
+
+Soundness is checked **before** anything is measured: `ouraUndo(rewritten) === text` must hold on
+the rewrite alone.
+
+### Decodability — one chat input box
+
+One appended sentence, with the shape named by the wire:
+
+> A digit group after .: the last 1, 1 digits each follow a .
+
+or, in `mark` mode, the same fact with the sentinel named. The reader takes digits off the
+right-hand end and puts separators back. No arithmetic, no alphabet table, no second message.
+
+### Measured
+
+**OURA is byte-exact and non-regressing on all seventeen lanes, and it does not fire on any of
+them.** That is the honest result and it is the point of this section.
+
+| lane | shapes found | mode attempted | result |
+|---|---|---|---|
+| npm-ls.txt | 3 | lead, plain, mark | no fire |
+| pom.xml | 2 | lead, plain, mark | no fire |
+| aapl-2014.csv | 2 | lead, plain, mark | no fire |
+| openstack-loghub-26.log | 6 | lead, plain, mark | no fire |
+| vix-daily-1990.csv | 0 | — | no-op by construction |
+| the other 12 lanes | 0 | — | no-op by construction |
+
+Why each mode fails, measured rather than argued:
+
+* **`mark`** costs one sentinel token per run. A `k=2` shape removes one separator, so the
+  sentinel exactly cancels the gain; a `k=3` shape removes two and nets one. npm-ls carries 45
+  three-group version strings, so `mark` should net 45 tokens — but the measured full message
+  came out **no smaller**, because collapsing `1.0.0` to `100` also destroys the redundancy the
+  dictionary was already harvesting from version-shaped text. The dictionary had got there
+  first.
+* **`plain`** is blocked by the soundness proof: on every lane that has a shape at all, some
+  digit run outside the spans reaches the shape's minimum length. On aapl the 8-digit volume
+  column kills a `minLen=8` shape; on npm-ls the bare sizes do the same.
+* **`lead`** is blocked by ordinary two-decimal numbers. On npm-ls the soundness scan finds
+  87 occurrences of `<digits>.<2 digits>` that are **not** version tails — `0.35`, `28.4` and
+  friends. Collapsing the 45 real ones would silently rewrite those 87 into three-group numbers.
+  A direct unit test confirms the round trip genuinely fails (`roundtrip=FAIL, matches=132,
+  stray=87`), which is exactly the failure the guard exists to prevent. Escaping the strays
+  would cost 87 tokens to save 45.
+
+So the constant-width hypothesis turns out to be **almost exactly as strong as the data
+permits**. It looks arbitrary and it is not: relaxing it costs a marker, and the marker is what
+the saving was.
+
+### What this codec is for
+
+Documents whose numeric fields are dominated by version strings, fixed-precision decimals or
+sub-second times **and** which contain no ordinary two-decimal numbers that could be confused
+with a version tail — package manifests, changelogs, telemetry with fixed trailing precision.
+The mechanism is implemented, gated, and waiting; on this corpus the corpus refuses it.
+
+### Honest scope
+
+Non-regressing on all seventeen lanes, byte-exact, zero regressions. **Zero gain.** The value
+delivered this turn is the proof that the constant-width hypothesis is near-tight, plus the three
+refused alternatives recorded so nobody rebuilds them.
+
+### Citation
+
+None. The four fixed shapes and the constant-width lattice are original to this repository
+(X25, X32). The observation that the constant-width hypothesis is strictly stronger than the
+data requires, the tail-anchored relaxation, the `lead`/`plain`/`mark` ambiguity resolution, and
+both guards are original here.
+
+Full writeup: `bench/x38/X38.md`.
