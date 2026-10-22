@@ -3104,3 +3104,140 @@ no-op everywhere else, at the cost of one regex scan behind a gate already paid
 for. Single measurements, not distributions.
 
 Full writeup: `bench/x35/X35.md`.
+
+---
+
+## ἀναδίπλωσις ANADIPLOSIS (X36) — run-length elision of adjacent repeated spans
+
+**Registry key:** `anadiplosis` (position 26, immediately after `syncope`).
+**Implementation:** `src/lib/omega/anadiplosis.ts`.
+**Parent:** SYNCOPE (hence PYKNOSIS, hence OIKONOMIA). **Fidelity:** exact.
+**Greedy:** no — spans are scored against the true objective, chosen by best gain
+among non-overlapping candidates, and the whole transform is accepted only when
+the measured full message is strictly smaller than the parent's.
+**Time/CPU bound:** yes — period capped at 64 chars, document at 60 000, span
+count at 4096.
+
+### The resource it compresses
+
+Every dictionary codec here — sibyl, chiron, ariadne, symploke — compresses the
+same thing: some span occurs more than once. All are indifferent to **where** the
+second occurrence sits. That indifference is their strength and their cost: every
+rule must be *defined* in a glossary before it can be *used*, and the definition
+is charged against the saving.
+
+ANADIPLOSIS compresses the case the dictionary is worst at: a span that repeats
+**immediately**. Such a span needs no glossary entry, only a count.
+
+```
+dictionary:   §α=17.240000,¶  … α α α α        (1 definition + 4 uses)
+anadiplosis:  ⟦4⇤17.240000,⟧                   (1 copy + 1 count)
+```
+
+The mechanism is run-length coding at the **span** level rather than the
+character level, which is what makes it pay on text where no single character
+ever repeats.
+
+### Orthogonality — the arithmetic
+
+Let `u` be the token cost of the unit and `k` the number of adjacent copies.
+
+| scheme | cost | saving |
+|---|---|---|
+| dictionary rule | `u + k` | `(k-1)·u - k` |
+| run-length span | `u + OV` | `(k-1)·u - OV` |
+
+They are equal at `k = OV + 1`, and for any unit worth naming (`u ≥ 2`) the
+run-length form wins whenever the copy is **short-lived**: a phrase that appears
+four times in a row and never again is exactly the case where a glossary entry is
+pure overhead. The dictionary pays a definition to buy reuse; here there is no
+reuse to buy.
+
+This is confirmed by the parent, which has already run its full dictionary search
+and still leaves the four copies of the price field standing in the tape — not
+because the search failed to notice them, but because noticing them *through a
+glossary* is the wrong instrument.
+
+The same distinction is standard outside this repo: RLE targets **local**
+repetition, dictionary coding targets **global** repetition
+([learnlyai.co.uk](https://learnlyai.co.uk/en/high-school/a-level/ocr/computer-science/3-exchanging-data/run-length-encoding-and-dictionary-coding)),
+and columnar-database work notes explicitly that dictionary encoding "can't do
+anything about runs of that same ID repeating across many consecutive rows"
+([CedarDB](https://cedardb.com/blog/encoding_vs_compression/)).
+
+### Wire form — and why the count comes first
+
+The first implementation wrote the count **after** the unit (`⟦X⟧⇤k`). It
+round-tripped on toy input and then failed on real text with
+`RangeError: Invalid string length`, because in a numeric corpus the digits of `k`
+run into the digits that follow and the parser reads `12345` where `12` was meant.
+
+Shipped form — count first, unit last:
+
+```
+OPEN <count> MARK <unit> CLOSE        ⟦4⇤17.240000,⟧
+```
+
+The parser reads a bounded digit run up to the first MARK, then takes everything
+to the next CLOSE as the unit. No unit can contain a framing character, because
+the encoder always slices from the **original** text (`applyAll`) rather than from
+a string it has already rewritten.
+
+### Selection — the threshold must be in tokens
+
+The first rule accepted any span whose elision exceeded 6 **characters**. That is
+a character-space estimate of a token-space cost, and it erred where it matters:
+
+| threshold | dump.sql | find-listing | npm-ls |
+|---|---|---|---|
+| in characters | **+73** | **+35** | **+24** |
+| in tokens | **0** | **0** | −15 |
+
+A span is accepted only when
+
+```
+(k - 1)·tokens(unit) - OVERHEAD ≥ MIN_GAIN     and     tokens(unit) ≥ 2
+```
+
+with `OVERHEAD = 5`, `MIN_GAIN = 3`. The second condition is the load-bearing
+one: **a unit costing a single token can never pay for its own framing**, however
+many times it repeats.
+
+### Decodability — one chat input box
+
+The transform sits **under** the dictionary, like PYKNOSIS's re-spelling and
+SYNCOPE's separator elision: the wire expands first, spans are undone last, as a
+flat textual operation. The reader's entire obligation is one appended sentence:
+
+> ⟦N⇤X⟧ means X written N times.
+
+Expanding a span is a copy with a stated count — no arithmetic, no base
+conversion, no alphabet table. Verified `DECODED-EXACT` through the registry
+`run` path.
+
+### Measured (byte-exact, through the registry)
+
+| lane | OIKONOMIA | SYNCOPE | **ANADIPLOSIS** | Δ |
+|---|---|---|---|---|
+| vix-daily-1990.csv | 1195 | 1195 | **594** | **−601 (−50.3%)** |
+| openstack-loghub-26.log | 945 | 898 | 898 | −47 (SYNCOPE) |
+| dump.sql | 662 | 608 | 608 | −54 (PYKNOSIS) |
+
+All three layers compose: PYKNOSIS fires on dump.sql, SYNCOPE on openstack,
+ANADIPLOSIS on vix, and each is a no-op where it does not pay.
+
+### Honest scope
+
+**Two of twenty measured lanes move, and the large one is a synthetic artefact.**
+vix-daily-1990.csv has OPEN, HIGH, LOW and CLOSE identical on every row — a
+property of that export, not of financial data. The sibling lane
+`aapl-2014.csv`, with genuinely distinct OHLC values, is **untouched** (0).
+npm-ls shows the mechanism firing on ordinary material (two long repeated spans
+inside otherwise unique text) but falls below threshold once the contract clause
+is charged.
+
+**The headline number on vix should not be read as a claim about real market
+data.** No lane regresses: the transform is accepted only when the measured full
+message is strictly smaller.
+
+Full writeup: `bench/x36/X36.md`.
