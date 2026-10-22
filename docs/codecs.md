@@ -3521,3 +3521,122 @@ data requires, the tail-anchored relaxation, the `lead`/`plain`/`mark` ambiguity
 both guards are original here.
 
 Full writeup: `bench/x38/X38.md`.
+
+---
+
+## X39 — ἀντιστροφή ANTISTROPHE (index 29) — *the turning back*
+
+**Repo:** `src/lib/omega/antistrophe.ts` · registry key `antistrophe` · parent OURA (28).
+**Greedy: NO.** Every pair in the pool is scored on the real token count of the text it
+produces, and every clause on the real contract it splices into; the transform ships only
+when the measured full message is strictly smaller than the parent's.
+**Time / CPU bound: YES.** One tokenization per candidate pair — 2 s measured on the 46 KB
+git-numstat lane — and only the winning pair is carried through the stack. It does roughly
+double encode time on lanes where it fires, and adds pressure to the stack's per-encoding
+memo caches, so a multi-lane sweep must be chunked across processes.
+
+### The gap it attacks
+
+Every other codec in this stack harvests **redundancy**, which means every one of them
+requires the thing being compressed to *occur more than once*. X38 §N measured the residue:
+74–88 % of prose wire-body words are distinct, and `nearDup = 0`. That mass is unreachable.
+
+But *occurring once* is not the same as *costing what it must*. Measured on o200k_base:
+
+```
+src/omega/anadiplosis.ts                    8 tokens
+src omega anadiplosis.ts                    7 tokens     <- slashes written as spaces
+bench/holdout-ops/git-numstat.txt          10 tokens
+bench holdout-ops git-numstat.txt           9 tokens
+```
+
+A space **merges forward into the next token and disappears**; a slash stands alone and is
+charged for. That is *tokenization waste*, orthogonal to redundancy, and invisible to a
+dictionary because the path occurs once so no glossary entry can ever pay for itself.
+
+### Construction
+
+```
+encode:  wire = STACK( swap(text) )
+decode:  text = swap( STACK⁻¹(wire) )
+```
+
+A swap of two characters is an **involution and a bijection on the character set**, so it
+needs no sentinel, no escape and no absence requirement.
+
+### Result (17 lanes, all EXACT against an independent reference decoder)
+
+| lane | OURA | ANTISTROPHE | Δ | pair |
+|---|---|---|---|---|
+| git-numstat.txt | 1992 | **1923** | **−69** | `␠ ↔ /` |
+| find-listing.txt | 1279 | **1242** | **−37** | `␠ ↔ /` |
+| ls-full-iso.txt | 367 | **366** | **−1** | `. ↔ /` |
+| other 13 lanes | — | unchanged | 0 | — |
+| npm-ls.txt | 901 | *unmeasured* | — | — |
+
+git-numstat decomposes as −74 exchange, +5 clause. `npm-ls.txt` did not finish in budget in
+three attempts and is reported unmeasured, not as a loss; its screen prices `" ↔ +` at −131.
+
+### Negative space — what was measured and refused
+
+* **Substitution to an absent target.** Also unambiguous ("every `=` is a `/`") and the
+  obvious first move. It loses on every lane: git-numstat pays **+370** for the absent-target
+  substitution the swap delivers at −408. A character absent from the document is, by the
+  same rarity argument, one BPE never learned a merge for.
+* **Swapping with newline.** `0 ↔ \n` prices at −503 on git-numstat and is the best pair on
+  most lanes. Refused: it destroys line structure, breaking every downstream structural
+  codec, and makes the tape unreadable.
+* **Swapping a digit for punctuation.** `0 ↔ ,` prices at −442 on vix. Refused: every number
+  becomes garbage.
+
+Both are lossless. Both are refused, because a bare LLM must decode the message from one
+chat box. The pool is punctuation, symbols, space and tab.
+
+### The clause, and why the cheap one is refused
+
+The winning pair is **space and slash**, and the cheapest clause that emits the characters
+literally is `Then swap ␠ /.` (4 tokens) — in which one operand is an **invisible space**.
+A reader cannot see the character it is told to swap, so that wording is refused and the
+space is **named**: `Then swap space and /.` (5 tokens). Full contract:
+
+```
+Before ¶ k=v. expand repeatedly; Then swap space and /. print only.
+```
+
+### Decodability — checked by hand
+
+The `ls-full-iso.txt` message (366 tokens) was decoded by hand from the message text alone:
+no system prompt, no skills file, no tools. 29 rules recovered (the glyph alphabet is
+self-identifying — it is the script of the first character after `§`). Lines 1–6 of the
+decoded output are **byte-identical** to the source, `md5 b55a95c2…`, including the `../` ↦
+`//.` round trip. **n = 1 reader, 6 of 30 lines** — partial coverage, reported as partial.
+
+### Honest citation, including the part that cuts against this
+
+* **TOON** (`toon-format/toon`) claims 30–60 % fewer tokens than JSON; **arXiv 2603.03306**
+  (Feb 2026) benchmarks it and finds the advantage "often reduced by the prompt tax of
+  instructional overhead in shorter contexts."
+* **The counter-evidence, recorded rather than omitted:** Damon McMillan's 9,649-experiment
+  study across 11 models, four formats and schemas from 10 to 10,000 tables (Feb 2026,
+  reported at `usewire.io`) found TOON costing **38 % MORE** tokens, with **no statistically
+  significant effect of format on aggregate accuracy** (χ² = 2.45, p = 0.484), attributed to
+  tokenizer merge tables and model fluency. Format-level token savings measured on fixed
+  datasets are exactly the class of result that reverses under distribution shift. The
+  distinction: ANTISTROPHE holds no fixed opinion and ships nothing when measurement says no.
+* **R-BPE** (EMNLP 2025, `aclanthology.org/2025.emnlp-main.1169`): BPE produces
+  "non-deterministic, and thus impractical, behavior with arbitrary token substitutions" — a
+  fair description of what this relies on, and why every decision here measures rather than
+  predicts.
+* On the same substrate: **arXiv 2608.00582** (merge-ordering problem, ill-tokenization),
+  **arXiv 2504.00178** (Rényi efficiency falls 9 % train→held-out), **arXiv 2608.02376**
+  (frequency-ordering BPE ids), **arXiv 2608.00837** (Pruned BPE); NeurIPS 2024 **LM-GC**
+  finds "the precise serialization … substantially improves" LLM-prior modelling.
+
+### Honest size
+
+A real 3.5 % reduction on git-numstat, 2.9 % on find-listing, 1 token on ls-full-iso, and
+**exactly zero on the other fourteen lanes**. It does not move prose and says so: `o200k_base`
+already tokenizes English prose near-optimally, so there is no separator waste left to
+reprice. The waste lives in structural characters, and prose has almost none.
+
+Full writeup: `bench/x39/X39.md` (§A–O).
