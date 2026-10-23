@@ -1,13 +1,27 @@
-# Session memory — X43
+# Session memory — X44
 
 # Current State
 
-**X43 KRISIS is COMPLETE, committed and pushed.** Branch `arena/695387ad-kompkernel`
-= **`3a14916`** ("X43 KRISIS: clause-cost admissibility gating of the stack trial
-tree"), preceded by `c24c454`/`e2633aa` (X42), `f99c97a`/`bee4117` (X41),
-`b5a990c` (X40). **PR #33** now covers X40+X41+X42+X43. `main` = `666f509`.
-**A second commit with the search supplement + this memory was still to be made at
-the point this file was written** — check `git log --oneline -3` first.
+**X44 ANALEPSIS is COMPLETE, committed and pushed.** Branch
+`arena/695387ad-kompkernel` = **`4cd2286`** ("X44 ANALEPSIS: post-hoc
+maximal-repeat gleaning of the finished wire"), preceded by `2c66b58` (X43
+supplement+memory), `3a14916` (X43 KRISIS), `c24c454`/`e2633aa` (X42),
+`f99c97a`/`bee4117` (X41), `b5a990c` (X40). **PR #33** covers X40–X44.
+`main` = `666f509`. **No reset occurred at the start of X44** — the workspace was
+intact at `2c66b58` with `node_modules` present. Still run
+`git ls-remote --heads origin | grep 695387ad` first; the branch name has now been
+stable for two consecutive sessions.
+
+**X44 HEADLINE: THE FRONTIER MOVED FOR THE FIRST TIME SINCE X41 — ls-full-iso
+366 → 364.** prose-01 also moved, 737 → 736. 13 lanes tested, **13/13 byte-exact,
+zero regressions**. Total gain **3 tokens** — reported as 3 tokens, not dressed up.
+ANALEPSIS is registered at **index 34** (207 codecs total).
+
+**The larger value of X44 is four definitive negative results plus one structural
+localization** (see Key Results). In particular the whole stack's cost is now
+localized to a SINGLE layer: **ANADIPLOSIS/SYNCOPE — 86,703 ms and 15.83M
+countTokens calls on ls-full-iso vs chiron's 542 ms and 0.04M. A 160× jump at one
+layer.** That is the precise target for any future speed work.
 
 The per-turn reset **did** recur at the start of X43 (HEAD `666f509`, empty
 `node_modules`, no `/tmp` files) and was recovered from the remote in three
