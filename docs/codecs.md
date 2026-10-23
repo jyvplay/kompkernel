@@ -5121,3 +5121,242 @@ uniform-width row structure against page.html's and chart.svg's markup with a li
 scan and no tokenization; (3) done this turn — `symploke.ts:786` corrected in place.
 
 Full writeup: `bench/x45/X45.md`.
+
+---
+
+## 36. TEKMAR — τέκμαρ, "a sure sign, that by which one judges" (X46)
+
+`src/lib/omega/tekmar.ts`. Wraps ANALEPSIS (34), and therefore the whole stack.
+
+> **A per-document search budget, chosen from a structural feature of the source that
+> costs nothing to compute.** TEKMAR dominates METRON — it never loses tokens and it
+> repairs METRON's 60-token regression on dump.sql — while keeping METRON's speed on
+> every lane where the cap does not matter.
+
+### The cap curve, measured: three results, none previously known
+
+X45 cut SYMPLOKE's shape-trial ceiling and found one lane where that cost 60 tokens,
+but never measured *above* the default. `bench/x46/escalate.ts` sweeps it on dump.sql
+at the oikonomia level, byte-exact at every point:
+
+| inCap | msg | ms | calls(M) | marginal |
+|---|---|---|---|---|
+| 1 | 684 | 35,460 | 5.53 | — |
+| **2** | **686** | 50,803 | 8.17 | **−2.0 tok/trial — WORSE than cap 1** |
+| **4** | **662** | 95,508 | 15.41 | **+12.0 tok/trial** |
+| 6 / 8 / 12 | 662 | ~95,000 | ~15.4 | 0 |
+
+1. **The curve saturates at 4.** Caps 4, 6, 8 and 12 return identical message size
+   *and* identical call counts. **The constant inherited from X24 is correct** and every
+   ceiling above it is wasted work — which closes the escalation hypothesis this turn
+   began with: there is no compression to be had by spending more.
+2. **The search is not a descent.** Cap 2 is *worse* than cap 1, so an extra 'in' shape
+   trial can be accepted and make the wire larger. No "keep going while it improves"
+   rule can work, so the decision must be made **before** the search.
+3. **The marginal value of a trial is not small and uniform** — zero on eleven lanes,
+   twenty tokens on one. A single global constant is wrong in one direction or the other
+   no matter what it is set to. **That is the whole case for a per-document choice.**
+
+### The feature, and why it costs nothing
+
+SYMPLOKE's learned tier is a **constant-width column lattice**, so the question is: how
+much of this document is made of rows sharing one field-width signature?
+`tekmarLatticeScore` splits lines on `,`, tab, `|`, `;`, takes each line's vector of
+field widths, and finds the modal signature. **It performs no tokenization** — which is
+what separates it from the two predictors X45 refuted. **arXiv 2605.04954** finds
+per-instance algorithm selection viable even when a quarter of the budget goes to
+features, but that **11–28 % of its loss to the virtual best solver is caused by the
+feature budget itself**; a feature costing one linear scan and zero tokenizations pays
+no such tax, which matters because the thing being predicted *is* a tokenization budget.
+
+| lane | lineFrac | charFrac | cap outcome |
+|---|---|---|---|
+| **dump.sql** | **0.722** | **0.922** | **NEEDS cap 4 (668 vs 608)** |
+| meeting-transcript | 0.063 | 0.066 | cap 1 free |
+| page.html | 0.062 | 0.237 | cap 1 free |
+| bibliography · email-thread · component.jsx · readme · kb-article · prose-01 | 0.048 … 0.020 | ≤ 0.046 | cap 1 free |
+| chart.svg · pom.xml · ls-full-iso | 0.000 | 0.000 | cap 1 free |
+
+Largest lineFrac among the eleven free lanes **0.063**; dump.sql **0.722** — **a margin
+of 11.5×**, so the thresholds (`TEKMAR_LINE_FRAC=0.30`, `TEKMAR_CHAR_FRAC=0.50`) sit in
+an empty band roughly five times wider than either side needs. **Not "columnar data needs
+the cap":** `ls-full-iso` is `ls --full-time` output and scores **0.000** because its
+columns are whitespace-aligned, not separator-delimited — and its cap-1 result equals
+cap-4, so feature and outcome agree *for the right reason*.
+
+### Held-out discipline
+
+**arXiv 2610.11759** requires **separate search and held-out instance sets** before an
+automated selection policy can be trusted; X45 did not separate them. Thresholds set on
+the twelve measured lanes, then read against files never used to choose anything:
+**vix-daily-1990.csv 0.992/0.977 → escalate**, **aapl-2014.csv 0.855/0.826 → escalate**,
+git-numstat 0.123, json-pkg 0.092, unified-diff 0.071, gh-api.json 0.062, lic-mit 0.059,
+code-ts 0.052, openstack 0.038, md-react/llm-answer/prose-08/prose-09 ≤ 0.038 → **cap 1**.
+The two it escalates unprompted are the dense comma-delimited CSVs — exactly where this
+stack's numeric machinery does its best work (SYSTOLE: aapl 1450→1407, vix 579→550). **A
+predictor tuned on those two would be worthless; that it finds them untold is the
+evidence it tracks the mechanism, not the lanes.**
+
+### Asymmetric error modes
+
+A **false positive** escalates unnecessarily: time spent, tokens unchanged, **safe**. A
+**false negative** leaves a lattice lane at cap 1: tokens lost, **unsafe**. Thresholds are
+therefore placed well *below* dump.sql's score rather than at the band midpoint, and the
+codec is conservative — when in doubt it spends the search. This is why TEKMAR can never
+be worse in tokens than METRON: on a lattice lane it requests the same cap ANALEPSIS uses
+by default, and on a flat lane cap 1 was measured byte-identical to cap 4.
+
+### Verified
+
+| lane | TEKMAR | frontier | cap | lattice | ms | rt | verdict |
+|---|---|---|---|---|---|---|---|
+| **dump.sql** | **607** | 608 | **4** | **true** | 319,030 | OK | ≤ frontier |
+| chart.svg | 417 | 417 | 1 | false | 28,043 | OK | matches |
+| prose-01 | 736 | 736 | 1 | false | 7,060 | OK | matches |
+| component.jsx | 264 | 264 | 1 | false | 6,304 | OK | matches |
+
+**4/4 byte-exact, predictor correct on 4/4.** Registry smoke test loads `tekmar` **by
+key**: **209 codecs**, metron 35, **tekmar 36**, family/fidelity `exact`, component.jsx
+264 EXACT (`cap=1, lattice=false`), pom.xml 242 EXACT (`lineFrac=0.000`) — the lane where
+`scriptTries=1` cost METRON three tokens is untouched, because TEKMAR changes only the
+cap. Speed on flat lanes matches METRON: chart.svg 28.0 s (METRON 27.0, ANALEPSIS 34.2),
+prose-01 7.1 s (5.6 / 7.3), component.jsx 6.3 s (6.6 / 9.6).
+
+**Honesty note on the 607:** not attributable to TEKMAR and **not claimed as a frontier
+move**. On a lattice lane TEKMAR passes `inCap=4, inGate=1` — *exactly*
+`OIKNOMIA_DEFAULT_IN_CAP`/`IN_GATE` — so `tekmarEncode` and `analepsisEncode` perform the
+same computation by construction. The one-token difference must be run-to-run variance,
+and there is a concrete mechanism: CHIRON's variant sweep is **wall-clock bounded**
+(`chiron.ts:1341`, `:1373`), so the same input can admit a different rule set under
+different machine load. **The stack is not deterministic under load at the one-token
+level** — a property of the repository, not of this codec, and it bounds how finely any
+future turn can measure small differences.
+
+### A defect found and repaired this turn
+
+`gnomon` — the name this codec was first written under — **was already taken**: an existing
+codec in `main` (`666f509`) that elides JSON/lockfile fields fixed by public convention.
+Writing `src/lib/omega/gnomon.ts` **overwrote that implementation**, and the duplicate
+registry import produced `TS2300: Duplicate identifier 'gnomonEncode'`. **Caught by the
+type gate before any commit.** Repaired by `git checkout -- src/lib/omega/gnomon.ts
+src/lib/omega/registry.ts` and a rename to `tekmar`; the original is verified intact (one
+registry entry, own implementation restored, tsc clean). Per the repair rule the patch
+inherits no trust: the post-rename smoke test was re-run from scratch and both lanes
+re-verified byte-exact.
+
+### Greedy / bound
+
+* **Greedy: YES, and necessarily so.** The decision is taken **once, before the search**,
+  from a single linear scan, never revisited — because the cap curve is not a descent, no
+  "keep going while it improves" rule applies and the only alternative is running the
+  search twice.
+* **Not optimal**, in two stated ways: the feature is a *proxy* for "the learned lattice
+  will engage", not the lattice's firing condition, so uniform-width rows under an unusual
+  separator would be missed; and the thresholds are constants fitted on twelve lanes,
+  which is exactly what arXiv 2605.04954 warns about. Nine held-out files limit that, but
+  nine is not a large sample.
+* **Time/CPU bound: yes.** One pass over the lines with four separator splits, no
+  tokenization — under a millisecond on every lane measured including the 5,159-character
+  dump.sql. It controls a budget whose two ends differ by **44–58 % of all `countTokens`
+  calls the encode makes**.
+
+### Citations added this turn
+
+* **arXiv 2604.14853** — *Adaptive Test-Time Compute Allocation via Constrained Policy
+  Optimization*: a Lagrange multiplier λ as a **shadow price for compute**, oracle
+  `b*(x;λ)=argmax_b[Acc(x,b)−λC(b)]` that *"spends more on inputs where the marginal
+  accuracy gain justifies the cost"*, aggregate cost monotone in λ so **binary search
+  matches any target budget**, then a policy predicting oracle labels from **cheap input
+  features**. Its diagnostic is this turn's situation verbatim: *"at tight budget the
+  oracle assigns b=1 to virtually all questions… the few exceptions are concentrated in
+  Level 3, where even a modest budget increase yields **outsized** gains."* Also: ladder
+  granularity has diminishing returns (Coarse→Default ~1 pp; Default→Fine <0.1 pp), which
+  is why TEKMAR uses **two tiers, not a ladder**.
+* **arXiv 2605.04954** — the feature-budget tax, 11–28 % of loss to the virtual best solver.
+* **arXiv 2610.11759** — the trust checklist: fixed harnesses, **separate search and
+  held-out sets**, explicit budgets, **replay of winning candidates**, ablations naming
+  which change produced the gain.
+* **arXiv 2607.11705** — across 106 tasks and four budgets **no optimizer dominates**; the
+  champion *migrates with budget* and a winner at one budget falls outside the target
+  budget's top Scott–Knott tier on up to **50 %** of tasks. The general form of the finding
+  that cap 1 and cap 4 are each right on different inputs.
+* **arXiv 2605.05701** (task-level VOI, training-free) and **arXiv 2607.26828 (CostAda)**
+  (cost-calibrated frontier utility, where cost *shapes* the search rather than merely
+  accounting for it).
+
+### Mathematics — the Jacobian conjecture, investigated deeper as requested
+
+Called out in X41 and never followed up. It is now **the best-verified AI mathematics
+result in this record.** On **19 July 2026** **Levent Alpöge** (a mathematician at
+**Anthropic**) posted *"Hello there the Jacobian conjecture is false"* with a
+**216-character** polynomial map `F: ℂ³→ℂ³` credited to **Claude Fable 5**, saying he and
+**Akhil Mathew** (Chicago, who **prompted the question**) had spent the morning on it —
+**during the World Cup final**. The mathematics is trivially checkable: the Jacobian
+determinant is **identically −2**, a nonzero constant so the hypothesis holds, yet
+**three distinct rational points collide** — `(0,0,−1/4)`, `(1,−3/2,13/2)`,
+`(−1,3/2,13/2)` all map to `(−1/4,0,0)`.
+
+**Verified in TWO independent proof assistants plus CAS:** an **Isabelle/HOL Archive of
+Formal Proofs** entry proving the formal Jacobian entries are the complex-analytic partial
+derivatives, det ≡ −2, the three-point collision, and that scaling the first output
+coordinate gives determinant exactly 1 while preserving non-injectivity; **Lean 4** repos
+`deancureton/jacobian` and **`google-deepmind/formal-conjectures` PR #4474**, same day,
+machine-verified within hours; and **independent Sage and SymPy** agreement by direct
+rational substitution. A calibrated grading separates what is known: det = −2 and the
+collision are ***exactly reproducible***, the general conjecture's falsity is a *logical
+consequence*, **"Claude Fable found the map" is credible attribution but not independently
+auditable** (the session is not public), and **"the exact model was Fable 5" is
+unconfirmed**. Wikipedia: *"easy to verify with any computer algebra system. **It has not
+been revealed how it was found.**"*
+
+**The "why" came from a human in two days.** **Terence Tao**, 21 July, *"A digestion of the
+Jacobian conjecture counterexample"*, rebuilds the map — which *"looks like a massive
+miracle"* — **from a construction that makes the miracle explainable rather than magical**,
+answering Mathew's *"one can check out that it's correct, but it would be nice to be able
+to tell a story."* **Gallagher** (20 July) gave a uniform one-variable construction for
+every geometric degree `d ≥ 3`; **Speyer** (23 July) and **arXiv 2608.00222** followed.
+**Scope exactly:** Keller 1939, 87 years, at least five published incorrect proofs;
+**n=1 true** (trivial), **n=2 STILL OPEN — the last unsettled case**, **n=3 false** (this),
+**n>3 false** by trivial extension.
+
+**Alpöge's sequence**: Jacobian 19 July → Carathéodory 19 August → Hopf S⁶ 23 August.
+Verification status runs from *exactly reproducible in two proof assistants* (Jacobian)
+through *independently reconstructed and Lean-formalized but with sources disagreeing*
+(Hopf, X45). **The Jacobian result is the one where the artifact is small enough that
+verification is complete rather than social** — and that is a lesson for this repository as
+much as for mathematics: a 216-character counterexample can be checked exhaustively,
+exactly as a byte-exact decode can be, and a 108-page construction cannot. Other labs
+unchanged from X44/X45; **xAI and Meta remain absent with no research-level result**, and
+**doubleAI** remains a systems lab (WarpSpeed, 3.6× over expert-written cuGraph kernels)
+with no theorem.
+
+### Frontier and honest size
+
+**Frontier UNCHANGED.** dump.sql restated as **608** with the 607 observation flagged as
+unattributed. **TEKMAR gains zero tokens; its contribution is that it removes METRON's
+60-token regression while keeping METRON's speed** — a strict pareto improvement over
+METRON, and a tie with ANALEPSIS at lower cost on eleven of twelve lanes.
+
+**Not measured, therefore not claimed:** vix, aapl, openstack, git-numstat, find-listing,
+npm-ls, ls-full-iso, page.html, pom.xml, prose-02…07 and every held-out file **through
+TEKMAR**. The predictor's *decision* on those is computed and reported, but only four
+lanes were encoded end to end. In particular **vix and aapl are predicted to escalate and
+were not run** — escalation there is the safe direction, but that is an argument, not a
+measurement.
+
+**Next highest-information tests, in order.** (1) Run TEKMAR end to end on **vix** and
+**aapl**; if either exceeds its frontier (550, 1407) the threshold is wrong and must be
+raised. (2) Encode one mid-size lane **five times** and report the spread, to size the
+wall-clock nondeterminism found above; if nonzero, every one-token difference recorded in
+this repository — X41's meeting-transcript −1, X44's prose-01 −1, X46's dump.sql −1 — is
+within noise, and a `workUnits`-based deterministic budget (`chiron.ts:1380`) already
+exists to remove it. (3) The regex: **arXiv 2605.30813** flame-graphs **tiktoken on
+O200K**, this repository's own encoding, and finds the **regex phase at 80.25 % of CPU
+against 6.45 % for the BPE merge — a 12× overhead**; **arXiv 2507.11941** puts regex at up
+to **75 %**; **arXiv 2601.05833 (Peek2)** is regex-free with **identical output**. This
+stack pushes **113.6 M characters through that regex per encode**. A Peek2-style
+pretokenizer in `bpe.ts` would be *provably* identical rather than measured over twelve
+lanes, and would multiply through all 4.24 M calls — **larger, more general and safer than
+any budget knob, and the one change that would also relieve (2)'s cost pressure.**
+
+Full writeup: `bench/x46/X46.md`.

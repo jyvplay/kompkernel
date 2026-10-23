@@ -1,6 +1,48 @@
-# Session memory — X45
+# Session memory — X46
 
 # Current State
+
+**X46 TEKMAR is COMPLETE.** Registry index **36**, `src/lib/omega/tekmar.ts`, 209
+codecs. A per-document SYMPLOKE shape-trial cap chosen from a tokenization-free
+row-lattice feature. Verified 4/4 byte-exact, predictor correct 4/4, and it removes
+METRON's 60-token dump.sql regression while keeping METRON's speed on flat lanes.
+**Frontier UNCHANGED** (dump.sql's 607 observation is NOT attributable — see below).
+Check `git log --oneline -3` for the tip.
+
+**X46's three new facts about the cap curve** (bench/x46/escalate.ts, dump.sql,
+oikonomia level): (1) it **SATURATES AT 4** — caps 4/6/8/12 all give 662 tokens and
+~15.4M calls, so the X24 constant was right and caps above it are pure waste;
+(2) **the search is NOT a descent** — cap 2 gives 686, WORSE than cap 1's 684, so no
+"keep going while it improves" rule can work and the decision must precede the
+search; (3) a trial's marginal value is **zero on eleven lanes and twenty tokens on
+one**, so no global constant is right.
+
+**The feature and its separation** (bench/x46/feature.ts): fraction of lines sharing
+the modal field-width signature under `,`/tab/`|`/`;`. dump.sql **0.722 lineFrac /
+0.922 charFrac**; the eleven cap-1-free lanes max out at **0.063 / 0.237** — an
+**11.5x margin**, thresholds set at 0.30/0.50 in an empty band. ls-full-iso scores
+**0.000** (whitespace-aligned, not separator-delimited) and indeed does not need the
+cap, so feature and outcome agree for the right reason. Held-out files never used to
+choose anything: **vix 0.992/0.977 and aapl 0.855/0.826 escalate** (exactly the dense
+CSVs where SYSTOLE wins biggest), everything else ≤0.123 stays at cap 1.
+
+**TWO THINGS X46 FOUND THAT CHANGE HOW FUTURE TURNS MUST MEASURE.**
+(a) **THE STACK IS NOT DETERMINISTIC UNDER LOAD.** dump.sql returned **607** through
+TEKMAR and **608** through ANALEPSIS in X45, but on a lattice lane TEKMAR passes
+`inCap=4, inGate=1` which are EXACTLY the OIKONOMIA defaults — the same computation by
+construction. The difference is CHIRON's **wall-clock-bounded** variant sweep
+(`chiron.ts:1341` `budgetMs=min(11_000, 800+1.1*len)`, `:1373` deadline
+`min(26_000, 2.1*budgetMs)`). So every one-token result ever recorded here — X41's
+meeting-transcript -1, X44's prose-01 -1, X46's dump.sql -1 — may be within noise. A
+deterministic `workUnits` budget already exists at `chiron.ts:1380`.
+(b) **A NAME COLLISION OVERWROTE A LIVE CODEC AND WAS CAUGHT ONLY BY tsc.** `gnomon`
+already existed in `main` (`666f509`, JSON/lockfile field elision). Writing
+`src/lib/omega/gnomon.ts` destroyed it and produced
+`TS2300: Duplicate identifier 'gnomonEncode'`. Repaired via
+`git checkout -- src/lib/omega/gnomon.ts src/lib/omega/registry.ts` + rename to
+`tekmar`; original verified intact. **ALWAYS grep `key: '<name>'` in registry.ts AND
+check `src/lib/omega/<name>.ts` BEFORE writing a new codec file** — X43's name check
+only tested a handful of candidates and this one was not among them.
 
 **X45 METRON is COMPLETE, committed and pushed.** See `git log --oneline -3`; the
 X45 tip carries METRON (index 35) plus a corrected `symploke.ts` budget note.
