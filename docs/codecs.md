@@ -5360,3 +5360,237 @@ lanes, and would multiply through all 4.24 M calls — **larger, more general an
 any budget knob, and the one change that would also relieve (2)'s cost pressure.**
 
 Full writeup: `bench/x46/X46.md`.
+
+---
+
+## 37. EMPEDOS — ἔμπεδος, "firm, steadfast, immovable" (X47)
+
+`src/lib/omega/empedos.ts`. Wraps TEKMAR (36), and therefore the whole stack.
+
+> **EMPEDOS replaces CHIRON's wall-clock search bound with a counted one, so a wire
+> depends on its input and not on how busy the machine was.** Verified 4/4 lanes match
+> the frontier, byte-exact, **and identical across repeated runs** — zero token cost,
+> zero measured time cost.
+
+### Why
+
+`chiron.ts:1341` sets `budgetMs = min(11_000, 800 + 1.1·len)` and `:1373` caps the sweep
+at `min(26_000, 2.1·budgetMs)`. A sweep that runs out of clock stops where it happens to
+be, so on any input large enough to exhaust the allowance the admitted rule set — hence
+the wire, hence the token count — is a function of **machine load**. X46 hit this: TEKMAR
+returned **607** on dump.sql where X45's parent returned **608** through what is by
+construction the same computation. **If one token can move between runs then X41's
+meeting-transcript −1, X44's prose-01 −1 and X46's dump.sql −1 are all inside the
+noise**, and no future turn can claim a one-token gain without repeated runs.
+
+### The cliff — measured before shipping anything
+
+`chiron.ts:1380` already implements the deterministic alternative, so this changes a
+*stopping rule*, not a search. But a counted budget does not degrade gracefully
+(`bench/x47/det.ts`, pom.xml):
+
+| workUnits | msg | rules | note |
+|---|---|---|---|
+| 5,000 | **544** | **0** | **RAW FALLBACK — finds nothing at all** |
+| 50,000 | 312 | 8 | truncated grammar, 7 tokens short |
+| **500,000** | **305** | **13** | **converged — equals the wall-clock default** |
+| 5,000,000 | 305 | 13 | converged |
+
+**This is why EMPEDOS pins a constant instead of scaling to the document: the failure
+mode of guessing low is not a slightly worse wire, it is the raw fallback.** The constant
+is stored next to the cliff it was measured against (`EMPEDOS_TRUNCATES_AT = 50_000`,
+`EMPEDOS_RAW_FALLBACK_AT = 5_000`). The same screen found **CHIRON deterministic on
+pom.xml** — five runs, all 305/13 rules/hangul — because the clock allowance is 2,777 ms
+and the sweep finishes in **66 ms**. **The clock only bites on inputs large enough to
+exhaust it, which are exactly the inputs too expensive to re-run, which is why this was
+never measured before.** No larger budget helps: `budgetMs` 11,000/26,000/120,000 and
+`maxRules=1000` all return 305.
+
+### Equivalence and repeatability
+
+`bench/x47/wu.ts`, pom.xml at oikonomia level, three repetitions × three budgets, every
+wire decoded byte-exact: **all nine runs return 242 tokens and 2.98 M `countTokens`
+calls.** The counted budget reproduces the wall-clock result exactly and the timing
+distributions **overlap** (9,132–10,149 ms vs 9,495–10,246 ms), so determinism is not
+bought with wall clock.
+
+### What it does
+
+TEKMAR plus three explicit settings: **`workUnits = 500_000`** (the measured floor,
+replacing the clock); **`inGate = 1` stated explicitly** — which matters more than it
+looks, because **`symploke.ts:745` defaults it with `opts.inGate ?? 0` while
+`oikonomia.ts` defaults it to `1`**, so any path reaching SYMPLOKE without threading the
+gate gets 0, and X45 measured that as **5.60 M calls / 19,618 ms for gate 0 against
+2.98 M / 11,716 ms for gate 1 — 1.88× the work for the identical 242-token message**
+(which also explains the negative self-times in X45's attribution table); and **`inCap`**
+from TEKMAR's row-lattice feature. No wire format change, no clause, no marker.
+
+### Verified
+
+| lane | frontier | cap | runs (msg / time) | repeatable | rt |
+|---|---|---|---|---|---|
+| component.jsx | 264 | 1 | 264 / 6.7 s · 264 / 4.5 s | **YES** | OK |
+| kb-article | 622 | 1 | 622 / 4.8 s · 622 / 3.6 s | **YES** | OK |
+| prose-01 | 736 | 1 | 736 / 6.2 s · 736 / 4.9 s | **YES** | OK |
+| meeting-transcript | 384 | 1 | 384 / 5.6 s · 384 / 4.8 s | **YES** | OK |
+
+**4/4 non-regressing, byte-exact and repeatable.** Registry smoke test loads `empedos`
+**by key**: **210 codecs**, tekmar 36, **empedos 37**, family/fidelity `exact`,
+component.jsx 264 EXACT and prose-01 736 EXACT with `workUnits=500000; cap=1; inGate=1`.
+
+**Honest limit:** the eleven other frontier lanes were not run, and in particular
+**dump.sql and git-numstat — the lanes large enough for the clock to bind, and therefore
+the only lanes where EMPEDOS can differ from its parent at all.** On every lane tested the
+clock was never binding, so EMPEDOS and TEKMAR are the same computation there. The
+mechanism is verified *costless and repeatable*; its *effect* is unmeasured because the
+lanes where it would bite are the expensive ones.
+
+### The attenuation law — a whole mechanism family, closed quantitatively
+
+`bench/x47/anatomy.ts` classified git-numstat's source rather than guessing at a
+mechanism. git-numstat is the **weakest ops lane in the suite** (4,632 raw → 1,906, 2.4×
+against vix's 6.2×) and its structure is extreme:
+
+```
+dels : 1 distinct of 392   most common: 0x392   ← the delete column is CONSTANT ZERO
+paths: 392 distinct (ALL unique), 3,167 tokens
+dirs : 15 distinct — "src/lib/omega"×152, "bench"×115  (267 of 392 rows)
+```
+
+`bench/x47/cut.ts` then applied X42's decisive pattern — cut the redundancy out of the
+source by hand and compare compressed sizes: SOURCE 12,306 ch / 4,632 raw / chiron 2,146
+/ **oikonomia 1,992**; CUT A (drop the constant `0` column) 11,522 ch / 3,848 raw /
+2,136 / **1,976**; CUT B (also factor the two directory prefixes) 8,761 ch / 3,367 raw /
+2,124 / **1,945**.
+
+> **784 raw tokens of pure redundancy → 16 compressed tokens. 49× attenuation.**
+> **481 raw tokens of repeated prefix → 31 compressed tokens. 15.5× attenuation.**
+
+**This generalizes X42's APOCOPE zero into a quantitative law.** A redundancy-removal
+mechanism must state its restoration rule, and every clause shipped here costs 5–20
+tokens. At 15–49× attenuation a mechanism needs **75–980 raw tokens of pure, un-captured
+redundancy** to repay a 5-token clause — and the dictionary has already taken anything
+that repetitive. That is why APOCOPE delivered zero, why X44's exact greedy rule pruning
+delivered zero, why residual maximal-repeat mass measured −9 … +1, and why
+constant-column elision — the most obviously "free" idea in tabular text — is worth 16
+tokens on the one lane in the suite with the most extreme case of it. **Not built, and the
+measurement is the reason.** What survives the law is exactly what X42 concluded:
+mechanisms that change **tokenization boundaries** rather than remove content, because
+those do not have to beat an attenuation factor at all.
+
+Also recorded: `oikonomiaEncode` on git-numstat takes **85,698 ms** against
+`chironEncode`'s **1,246 ms** (69×), and the *cuts* took **longer** than the source
+(91,476 / 93,976 ms) despite being smaller — so search cost is not proportional to input
+size.
+
+### Greedy / bound
+
+* **Greedy: YES, and inherited** — EMPEDOS performs no search of its own; the cap is
+  decided once, before the search, from one linear scan, and the work budget is a constant.
+* **Not optimal, specifically:** 500,000 units is a floor measured on **one** input of
+  1,797 characters. A much larger document could converge only above it, and because the
+  cliff is a *collapse* rather than a slope, under-setting shows up as the raw fallback
+  and not as a slightly worse wire. Stated as a gap: re-measure the floor on the largest
+  lane before trusting it there.
+* **Time/CPU bound: yes — and the bound is now COUNTED rather than elapsed**, which is the
+  whole point. The sweep does at most the work 500,000 units buys, on any machine, under
+  any load.
+
+### Citations added this turn
+
+**Determinism, from outside this repository.** **arXiv 2601.15322** (*Replayable
+Financial Agents*), across **4,700+ runs** at T=0.0, finds determinism and accuracy **not
+detectably correlated** (r=−0.11, p=0.63) and makes the exact argument for this codec:
+**"Determinism defines the *feasible region* in which accuracy improvements are
+meaningful"** — *"an agent producing 75 % accuracy with 50 % determinism yields
+statistically unreliable validation."* Substituting "one token" for "accuracy" is
+precisely X46's problem. **arXiv 2608.13867** (*Engineering Reliable Coding Agents*):
+across **60,000 SWE-bench-Verified trajectories** single-run pass@1 varied **2.2–6.0 pp**,
+and **at temperature 0 the standard deviation still exceeded 1.5 pp because of
+infrastructure nondeterminism**. **arXiv 2408.04667** (Eval4NLP): accuracy variations up
+to **15 %** across runs, gap up to **70 %** best-to-worst, *"no LLM consistently delivers
+the same outputs or accuracies"*; introduces **TARr@N / TARa@N**, total agreement rate at
+N runs — the metric shape `verify.ts` uses when it reports a `repeatable` column instead
+of a single number. **arXiv 2601.19934**: drift persists at temperature 0.0 with
+unique-output fractions **0.09–0.57**, framed as a **variance budget** analogous to an SRE
+error budget, concluding *"relying on a single run can obscure variability and worst-case
+performance."* **arXiv 2605.23955** surveys the same failure from parallelism rather than
+timing (**tensor-parallel-induced output divergence**). **"Setting the Optimizer Time
+Budget"** (usersolutions.com, Aug 2026) is an industrial query optimizer that validates
+both halves of this design: *"the search is interruptible and always returns a valid plan,
+**clamped never worse than your baseline**"* (this repository's registry best-of-all-codecs
+structure) and *"**because the search is deterministic and seeded, a run with a given
+budget and seed reproduces the same plan every time**… this is what lets you reproduce a
+support case or trust that a scheduled rerun will not quietly drift."* And **Pith's desk
+verdict on arXiv 2602.09574** states the critique that applies to this repository's own
+history: *"the 'consistent outperformance' claim outruns the statistics… several reported
+margins are 1–3 problems… with three trials averaged and no standard deviations, those
+differences are within binomial sampling noise."* **Every one-token result in X41, X44 and
+X46 is subject to exactly that critique**, and a pinned budget plus a `repeatable` column
+is the minimum response.
+
+**Mathematics — the Carathéodory claim, investigated for the first time.** Alpöge's
+**third** 2026 claim, named in X41 and never followed up. On **19 August 2026** he
+announced an explicit **C^∞ counterexample** to the **Carathéodory conjecture** (posed
+**1922**, open **104 years**), **checked with John-Paul Smith and Anthropic's Claude**: a
+family `g_k` in which **`g_2` is the support function of a smooth convex body with exactly
+one umbilic point, of index 2**, against Carathéodory's conjecture that every smooth
+closed convex surface carries at least two; the related **Loewner index conjecture** falls
+with it. His own account: *"i literally wanted to just read about it but i did see the
+complicated literature situation and so in hopes i could help asked him if it was ok to
+look at with a model."* The audit (VibeMathed, 21 Aug 2026, commit **7aa855b** of
+`google-deepmind/formal-conjectures`; model **Claude and Codex**, vendors **Anthropic and
+OpenAI**, status **"Lean-checked, statement unaudited"**, significance 55/100) finds
+**"two distinct roles, neither of them the discovery"** — the model *checked a human
+construction*, and the Lean development was *"developed with Codex and parallel
+proof-review agents"*, a formalization of a human result. The formalized hypothesis **is**
+the classical statement, not a weakened one; the pinned line is
+`not_caratheodoryConjectureOfClass_infty`; the proof tree is **8,013 lines with zero
+`sorry`, zero declared axioms and no `native_decide`**. **But it is NOT Lean-verified,
+because that commit is NOT MERGED** — diverged from main by 11 commits, behind by 26, with
+**both upstream pull requests in draft**, #5070 reading *"I'm currently checking this…"*.
+**A proof tree with zero `sorry` on an unmerged draft branch is not a verified theorem** —
+the sharpest available example of the gap this repository's `handcheck` decoders exist to
+close.
+
+**Jacobian, deeper still.** The Lean formalization is by **Paul Lezeau (Imperial College
+London), hand-written**, submitted 20 July 2026 06:16 UTC; CI passed in **1 h 39 m**;
+review **APPROVED but the PR is NOT MERGED**; a separate independent Lean development
+exists at `deancureton/jacobian`; **no arXiv preprint was found and there is no peer
+review** — in Tao's own 179-comment thread it is tracked as *"pending peer review, not
+fully verified."* So the mathematics is exactly reproducible in Sage, SymPy, Isabelle/HOL
+and two Lean developments while the publication status is still a preprint-less
+announcement. **Timothy Gowers** called it the first time an LLM solved a well-known
+problem he had heard of outside his area. An agent exploration (`dasjoms/…`, 23 lab notes,
+~130 scripts, a seed-family atlas) released a **further theorem on 4 Aug 2026: Alpöge's map
+is *not surjective*, and surjectivity turns on at n = 5**, machine-verified by two engines
+with expert review pending. **arXiv 2608.28997**, *Verification abundance, adjudication
+scarcity: what happens to mathematical knowledge when proof checking becomes free*, is the
+conceptual paper for this situation and reports **"at least three mutually independent
+machine generated counterexamples to the same conjecture now in circulation from different
+laboratories."** **Conjectures.io**: on 6 Aug 2026 a problem from **Ben Green's** list was
+settled by counterexample, **Lean-verified in about 90 seconds**, passing human review for
+a **four-figure bounty** — a working market where machine verification is cheap and human
+adjudication is the priced scarce good. The same asymmetry EMPEDOS answers at small scale:
+checking is cheap, so check repeatedly. Other labs as recorded in X44–X46; **xAI and Meta
+remain absent with no research-level result**; **doubleAI** remains a systems lab with no
+theorem.
+
+### Frontier and honest size
+
+**Frontier UNCHANGED; zero tokens gained.** EMPEDOS's contribution is **reproducibility
+at zero measured cost** — a third axis alongside tokens and time, and the one that decides
+whether the other two can be measured at all.
+
+**Next tests, in order.** (1) **Does the clock ever bind?** Instrument `chironEncode` to
+report whether its sweep hit `overallDeadline`, then run the four largest lanes; if it
+never binds, the 607-vs-608 discrepancy has another cause and EMPEDOS is prophylactic
+rather than corrective, which must be said. (2) Re-measure the 500,000-unit floor on the
+largest lane, since the cliff is a collapse. (3) X46's untested held-out prediction: run
+TEKMAR end to end on **vix** (0.992) and **aapl** (0.855); if either exceeds 550 or 1,407
+the threshold is wrong. (4) The regex — **arXiv 2605.30813** flame-graphs **tiktoken on
+O200K, this repository's own encoding**, at **80.25 % regex vs 6.45 % BPE merge (12×
+overhead)**, and **Peek2 (arXiv 2601.05833)** is regex-free with **identical output**;
+this stack pushes **113.6 M characters through that regex per encode**.
+
+Full writeup: `bench/x47/X47.md`.

@@ -1,6 +1,49 @@
-# Session memory — X46
+# Session memory — X47
 
 # Current State
+
+**X47 EMPEDOS is COMPLETE.** Registry index **37**, `src/lib/omega/empedos.ts`,
+**210 codecs**. Wraps TEKMAR and pins three things: `workUnits=500_000` (replacing
+CHIRON's wall-clock bound), `inGate=1` stated explicitly, and TEKMAR's lattice-derived
+`inCap`. Verified 4/4 lanes match the frontier, byte-exact, **and identical across two
+runs each** — zero token cost, zero measured time cost. **Frontier UNCHANGED, zero
+tokens gained**; the contribution is REPRODUCIBILITY, a third axis.
+
+**THREE NEW RESULTS THIS TURN.**
+(1) **THE WORKUNITS CLIFF** (bench/x47/det.ts, pom.xml): 5,000 units -> **544 tokens,
+rules=0, THE RAW FALLBACK**; 50,000 -> 312, 8 rules; **500,000 -> 305, 13 rules,
+equals the wall-clock default**; 5,000,000 -> 305. So a deterministic budget does not
+degrade gracefully, it COLLAPSES. That is why EMPEDOS pins a constant instead of
+scaling, and the constant is stored next to its measured cliff
+(`EMPEDOS_TRUNCATES_AT=50_000`, `EMPEDOS_RAW_FALLBACK_AT=5_000`). Also: CHIRON is
+DETERMINISTIC on pom.xml (5 runs, all 305/13/hangul) because the clock allowance is
+2,777 ms and the sweep finishes in 66 ms — **the clock only bites on inputs large
+enough to exhaust it, which are exactly the inputs too expensive to re-run.** And no
+larger budget helps: budgetMs 11,000/26,000/120,000 and maxRules=1000 all give 305.
+Nine oikonomia-level runs across three budgets ALL gave 242 tokens and 2.98M calls,
+with overlapping timings (9,132-10,149 ms vs 9,495-10,246 ms), so determinism is free.
+(2) **THE ATTENUATION LAW** (bench/x47/cut.ts, git-numstat): cutting the constant `0`
+delete column removes **784 raw tokens and yields 16 compressed** — **49x attenuation**;
+cutting the two dominant directory prefixes removes **481 raw and yields 31** — **15.5x**.
+Since every clause costs 5-20 tokens, a redundancy-removal mechanism needs **75-980 raw
+tokens of pure un-captured redundancy** to repay a 5-token clause, and the dictionary has
+already taken anything that repetitive. **This generalizes X42's APOCOPE zero into a
+quantitative law and kills constant-column elision, the most obviously "free" idea in
+tabular text — NOT BUILT, and the measurement is the reason.** What survives is exactly
+X42's conclusion: only mechanisms that change TOKENIZATION BOUNDARIES pay.
+(3) **A REAL DEFAULT INCONSISTENCY**: `symploke.ts:745` defaults `opts.inGate ?? 0` while
+`oikonomia.ts` defaults it to **1**, so any path reaching SYMPLOKE without threading the
+gate gets 0 — which X45 measured as **5.60M calls / 19,618 ms vs 2.98M / 11,716 ms, 1.88x
+the work for the identical 242-token message**. This also explains the negative self-times
+in X45's attribution table (bare timemaEncode runs at gate 0, oikonomiaEncode at gate 1).
+EMPEDOS pins it.
+
+**git-numstat anatomy** (bench/x47/anatomy.ts, weakest ops lane at 2.4x): **the delete
+column is CONSTANT ZERO in all 392 rows** (1 distinct value); 392 paths ALL unique at
+3,167 tokens; adds 253 distinct at 799; only **15 distinct directories**, "src/lib/omega"
+x152 and "bench" x115 covering 267 of 392 rows. oikonomiaEncode takes 85,698 ms vs
+chironEncode's 1,246 ms (69x), and the CUT files took LONGER (91,476 / 93,976 ms) than the
+source despite being smaller — search cost is not proportional to input size.
 
 **X46 TEKMAR is COMPLETE.** Registry index **36**, `src/lib/omega/tekmar.ts`, 209
 codecs. A per-document SYMPLOKE shape-trial cap chosen from a tokenization-free
