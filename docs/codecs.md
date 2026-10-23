@@ -4650,3 +4650,231 @@ verifier-first architecture already recorded.
 appears anywhere on the ProofBench leaderboard above. The absence is reported, not
 filled in.
 
+
+---
+
+## 34. ANALEPSIS — ἀνάληψις, "a taking up again, a resumption" (X44)
+
+`src/lib/omega/analepsis.ts`. Wraps KRISIS (33), and therefore the whole stack.
+
+> **The pareto frontier moved for the first time since X41: ls-full-iso 366 → 364.**
+> prose-01 also moved, 737 → 736. Thirteen lanes tested, **13/13 byte-exact, zero
+> regressions.** The gain is three tokens and is reported as three tokens.
+
+Every codec from CHIRON to KRISIS decides what to compress *while* it is
+compressing. ANALEPSIS is the only one that looks at the **finished wire** and asks
+whether anything worth a rule was left behind.
+
+### Mechanism
+
+Enumerate **maximal repeated substrings** of the body, longest first, suppressing
+any candidate contained in an accepted longer one (so `administ`/`dministr`/
+`ministra`/`inistrat` count as one find, not four). For each, build the wire with
+that phrase appended as **one new rule** and measure `countTokens` of the **entire
+frame**. Keep the single best **iff it strictly reduces** that count. Then **decode
+through the full chain and keep only if byte-identical to the source**. Repeat until
+nothing helps or `ANALEPSIS_MAX_ADDED=12` is spent.
+
+The new rule is appended **last**, so it may reference any earlier rule and no
+earlier rule can reference it — CHIRON's topological guarantee and its decoder are
+untouched. The glyph is the first one-token character of the tape's own declared
+script occurring nowhere in the frame, so `chiron.ts:144`'s self-declaration still
+identifies the alphabet and **nothing about it is transmitted**.
+
+**Why maximal repeats:** CHIRON's search is frequency-driven, i.e. Re-Pair.
+**MR-RePair** (Nakashima, *Algorithms* 13(4):103, 2020) replaces the most frequent
+**maximal repeat** instead, reports grammars **~55 % the size of Re-Pair's** on
+highly repetitive text, and proves that under a stated condition the maximal-repeat
+grammar is no larger. Maximal repeats are exactly what a first pass leaves behind: a
+frequent short substring is consumed early and the longer repeat containing it is
+never reconsidered as a unit.
+
+**The tape/body split is attempted unconditionally**, not only when no upper layer
+fired — `bench/x44/resid.ts` showed the `§ tape ¶ body` structure survives the upper
+layers. That is safe only because the decode check is load-bearing, and **relaxing
+it is what unlocked ls-full-iso**: the stricter first version found only prose-01's
+single token.
+
+### Measured
+
+| lane | ANALEPSIS | frontier | Δ | round-trip | rules added |
+|---|---|---|---|---|---|
+| **ls-full-iso** | **364** | 366 | **−2** | OK | `baseline-browser-mapping`, `дtypescript.bin.ts` |
+| **prose-01** | **736** | 737 | **−1** | OK | `IDEOGRAPHIC SPACE ` |
+| prose-02 · kb-article · readme · component.jsx · email-thread · prose-05 · page.html · chart.svg · meeting-transcript · bibliography · pom.xml | 789 · 622 · 646 · 264 · 488 · 920 · 547 · 417 · 384 · 667 · 242 | *same* | **0** | OK | — |
+
+**13/13 byte-exact, zero regressions.** Registry smoke test loads `analepsis` **by
+key**: **207 codecs**, krisis 33, **analepsis 34**, family/fidelity `exact`,
+ls-full-iso 364 EXACT, prose-01 736 EXACT. Cost: no lower-stack encode is ever run,
+so the pass adds under a second of tokenization to a stack that takes seconds to
+minutes.
+
+### Greedy / bound
+
+* **Greedy: YES.** One best addition per round, measured exactly, never revisited.
+  **Not optimal** — two additions that only pay *jointly* would both be refused,
+  since each is judged alone.
+* **Time bound: yes** — at most `MAX_CANDS=24` tokenizations plus one full decode
+  per round, for at most 12 rounds; `MIN_LEN=6`, `MAX_LEN=64`.
+
+### Four negative results, with receipts
+
+**1. Exact greedy rule pruning gains ZERO.** `bench/x44/greedy.ts` removed one rule
+at a time, whichever *actually* reduced `countTokens` of the whole frame:
+prose-01 31 rules → **0** prunable, 726→726; kb-article 27 → 0, 611→611;
+email-thread 39 → 0, 477→477; prose-02 36 → 0, 770→770. **Not one rule can be
+deleted** — CHIRON's rule set is already optimal under removal. This corrects an
+earlier reading that 22 of 31 rules on prose-01 had negative marginal value, which
+was an artifact of pricing phrases **in isolation**. The reason is itself the
+finding: rule references cost about **0.6 tokens each** in situ, not 1.0, because
+**adjacent glyphs merge** — prose-01's body has runs like `كي` and `ارس` pricing as
+one or two tokens rather than two or three. Pruning by the naive criterion instead
+**loses 19–36 tokens per lane** (`bench/x44/prune.ts`).
+
+**2. Residual repeat mass is ~zero.** After a 2-token definition: chart.svg **−1**,
+page.html **0**, readme **−9**, ls-full-iso **+1**. This is why the harvest is small,
+and it reconfirms X42's saturation finding measured on the **wire body** rather than
+the source. It also prices a cost nobody had measured: **the tape is 9–36 % of every
+message** (page.html 196/547 = 36 %, ls-full-iso 109/366 = 30 %, email-thread
+125/488 = 26 %, chart.svg 99/417 = 24 %) — and §1 proves it cannot be shrunk by
+removing rules.
+
+**3. The alphabet has no better setting.** `bench/x44/script.ts` applied a consistent
+bijection onto each CHIRON script's pool **in tape order**, preserving the glyph
+*sequence* so only the script changes (X43's `screen1` reordered by frequency, which
+destroys the adjacency structure that result 1 shows is what matters): prose-01
+arabic 725 → best alternative cyrillic 787 (**−62**), worst 794 (**−69**); kb-article
+cyrillic 610 → arabic 670 (**−60**), worst 695 (**−85**); email-thread cyrillic 476 →
+arabic 541 (**−65**), worst 560 (**−84**). **Every permutation of every script is
+worse by 53–85 tokens.** The collision-ordered choice at `chiron.ts:1344` — picked
+once, by minimum collision count, never by cost — has nothing to find. *Caveat:
+recorded honestly:* the reconstruction also failed to decode, for two harness bugs
+(`chironDecode` requires the leading `§`, which was stripped; and the pool filter
+excluded only *body* literals while rule texts in the *tape* are literals too). The
+token deltas are unaffected and agree in sign and magnitude with X43's independent
+measurement.
+
+**4. Cheap surrogates for trials are refuted.** X43 recorded this as the
+highest-information test available: can `chironEncode` (203 ms on pom.xml) stand in
+for the 36,505 ms `ouraEncode` trial? On ls-full-iso, for the swap `"."↔"/"` —
+**the one that wins**:
+
+| surrogate | text | swapped | verdict | truth |
+|---|---|---|---|---|
+| **chironEncode** | 423 | 422 | **lose** | **WRONG** |
+| anadiplosisEncode | 367 | **361** | **WIN** | right |
+| euteleiaEncode | 367 | **361** | **WIN** | right |
+| ouraEncode | 367 | **361** | **WIN** | right |
+
+A one-token difference at chiron level is swallowed by the five-token clause. On
+pom.xml, where ANTISTROPHE genuinely loses, chiron agreed with the truth on **all
+three** candidates — **the surrogate is right exactly where it does not matter and
+wrong exactly where it does.** `bench/x44/depth.ts` localized it: the benefit is
+**created at ANADIPLOSIS**, the first layer below chiron, and is **invariant above
+it**. The mechanism is plain once stated: a character swap changes **punctuation**,
+and punctuation is what the framing and run-length layers key on. **No surrogate
+shallower than ANADIPLOSIS can be predictive.**
+
+### And ANADIPLOSIS is not cheap — it is the whole cost
+
+| layer | ls-full-iso | pom.xml |
+|---|---|---|
+| chironEncode | 542 ms / **0.04M** calls | 266 ms |
+| **anadiplosisEncode** | **86,703 ms / 15.83M calls** | **9,865 ms** |
+| euteleiaEncode | 83,659 ms | 6,659 ms |
+| ouraEncode | 85,512 ms | 33,424 ms |
+
+**A 160-fold jump at a single layer** — ~43 s per call on a 2,549-character file,
+~**8 million `countTokens` calls**. Reading `bpe.ts`'s own exported counters
+(`chunkCacheStats`) over a full encode: pom.xml **40,666,051** calls at **92.0 %**
+hit rate (37,769 distinct long strings, 1,202,237 distinct short); ls-full-iso
+**18,596,983** at **76.3 %**. **Forty million tokenizer calls for a 1,797-character
+file** — but the hit rate is 92 %, so memoization is already doing its job and the
+cost is **search breadth**, not repeated tokenization. That closes memoization as a
+speed lever and names the real one.
+
+**Open, and now precisely localized:** ANADIPLOSIS/SYNCOPE costs 43 s and 8 M
+tokenizer calls on a 2.5 KB file, a 160× jump over chiron, and it dominates the
+entire stack. It is also the layer that *creates* most of the compression on ops
+lanes (ls-full-iso 423 → 367, a 13 % win) and the layer at which swap benefits
+become visible. **Speed and accuracy both live there.** `anadiplosis.ts:271`'s
+`findCandidates` scan is O(n × 64) with a `countTokens` per repeat found, but the
+measured 8 M calls say the bulk is below it, in SYNCOPE.
+
+### Citations added this turn
+
+* **MR-RePair** — Nakashima, *Algorithms* **13**(4):103, 2020. **The direct basis
+  for ANALEPSIS's candidate rule**: maximal repeats instead of bigrams, **~55 %** of
+  Re-Pair's grammar size on highly repetitive text, with a conditional size guarantee.
+* **arXiv 2608.19228** — *Assembly Theory and the Smallest Grammar Problem*, July
+  2026: eight grammar/dictionary compressors over **408 strings**; introduces
+  **Re-Pair T-NDR**, branch-and-bound tie-resolving, lowest mean error **4.03 %**;
+  **Re-Pair dominates across all ten sets**, Sequitur most versatile but *not* on the
+  Pareto frontier.
+* **arXiv 1704.08558** — *Practical and Effective Re-Pair Compression*: linear-time
+  heuristic whose grammar encoding uses on average only **2.8 % more bits than the
+  information-theoretic minimum**, beating 7-Zip at maximum compression on **half**
+  the tested cases.
+* **Charikar–Lehman–Liu–Panigrahy–Radhakrishnan–Sahai–Shelat**, IEEE TIT 2005
+  (classical): approximation ratio **≥ 8569/8568 unless P=NP**; best upper bound
+  **O(n^½)**; two algorithms at **O(log³ n)** and **O(log(n/m\*))**.
+* **The Smallest Grammar Problem Revisited**, IEEE 9259056: LZ78 **Θ((n/log n)^⅔)**,
+  BISECTION **Θ(√(n/log n))**, RePair's lower bound improved from **Ω(√log n)** to
+  **Ω(log n / log log n)**.
+* **On the Complexity of the Smallest Grammar Problem over Fixed Alphabets**,
+  *Theory Comput. Syst.* 2020: NP-complete and **APX-hard** even for a fixed alphabet
+  of size **≥ 17**. Also **arXiv 2202.08447**, *RePair Grammars are the Smallest
+  Grammars for Fibonacci Words*.
+* **A machine-found error in a published proof**, recorded as an instance of the
+  meta-verification pattern this repository uses in its `handcheck` decoders: a
+  referee report on **arXiv 1908.06428** published by Pith locates a break in
+  **Theorem 3.7, Claim 2** — the proof fixes *G*, the SLP after *k−1* rounds, and
+  argues the start rule has many distinct factors of length Θ(log k), **but RePair's
+  total grammar size is non-increasing under replacement**, since substituting a run
+  of length ℓ≥2 by one nonterminal occurring r≥2 times changes size by ℓ−(ℓ−1)r ≤ 0.
+  **So *G* is an upper bound on the final size, not a lower bound.**
+
+**Mathematics, per lab.** *doubleAI* is resolved: the Tel Aviv venture founded late
+2023 by **Amnon Shashua** and **Shai Shalev-Shwartz**, thesis **Artificial Expert
+Intelligence** (**arXiv 2412.02441**). **It has published no mathematical theorem.**
+Its first proof of concept, **WarpSpeed** (2 Mar 2026), rewrote *every* performance
+kernel in NVIDIA's **cuGraph** and beat a decade of elite hand optimization by
+**3.6× on every tested GPU architecture** — a systems result, reported as such, and
+the clearest external parallel to X43's finding that a multiple-fold speedup at
+*equal output* is a legitimate target for expert-written code. **Harmonic**:
+Aristotle (**arXiv 2510.01346**) IMO 2025 gold-equivalent, 5 of 6, verified to
+foundational axioms; **83 %** with external CAS, **63 %** Lean-only. **Erdős #728**
+(**arXiv 2601.07421**), the first Erdős problem regarded as fully resolved
+autonomously by an AI system, GPT-5.2 Pro + Aristotle, operated by **Kevin Barreto**:
+on 4 Jan 2026 a proof was announced but the problem as stated was **vague, with
+Erdős's intended interpretation unclear**; forum consensus called it a **partial
+result**; on 5 Jan GPT-5.2 Pro said the argument could be upgraded, Aristotle re-ran,
+formal proof 6 Jan. **The statement, not the proof, was the hard part, and a human
+community resolved it between two machine runs.** **arXiv 2606.08728** reports the
+same pipeline solving **#728, #729, #397** Jan–Mar 2026. Caveat from the ProofBench
+methodology note itself: Aristotle submits a **whole Lean file**, developed ~**450
+lines of supporting Krull-dimension theory**, runs with **no API setting to restrict
+its tools**, and evaluators **verified it searched the web on 60 of 100 problems —
+and that it solved every problem on which it did not search.** **ProofBench (vals.ai,
+Oct 2026)**: **100 %** Claude Opus 5.5, Claude Fable 5.1 (**Anthropic**), AlephProver
+(**Logical Intelligence**); 99 % GPT-6 Astra, Claude Opus 5; 95 % Claude Fable 5;
+**87 % Kimi K3 (Moonshot AI)**; 86 % Aristotle; 83 % GPT-5.6 Sol; **10 % / 9 %
+Mistral**. **Anthropic holds the top outright.** Harmonic's March 2026 claim of #1
+**conflicts** with this leaderboard; both recorded, vendor claim not preferred.
+**Moonshot AI** new to this record: Kimina-Prover **92.2 %** miniF2F with the **first
+published scaling laws for theorem proving**. **DeepSeek-Prover-V2** 88.9 % miniF2F,
+**49/658** PutnamBench. Also new: **Erdős #124** completed Dec 2025 in ~6 hours with
+a 1-minute Lean verification; **Axiom** launched Oct 2025; **Velvet**, a Lean
+verifier for imperative programs. **xAI and Meta appear nowhere on ProofBench and
+still have no research-level mathematical result** — absence reported, not filled in.
+
+### Honest size
+
+**Three tokens across thirteen lanes, and a frontier move on one lane** (ls-full-iso
+366 → 364). Stated as small: the residue is genuinely near zero and this pass
+harvests the last of it rather than opening a new seam. Its larger contribution is
+the four receipts above, which close rule pruning, residual augmentation, alphabet
+reassignment and cheap surrogates, and localize the stack's dominant cost to a
+single layer.
+
+Full writeup: `bench/x44/X44.md`.
