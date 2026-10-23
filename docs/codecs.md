@@ -3521,3 +3521,2076 @@ data requires, the tail-anchored relaxation, the `lead`/`plain`/`mark` ambiguity
 both guards are original here.
 
 Full writeup: `bench/x38/X38.md`.
+
+---
+
+## X39 — ἀντιστροφή ANTISTROPHE (index 29) — *the turning back*
+
+**Repo:** `src/lib/omega/antistrophe.ts` · registry key `antistrophe` · parent OURA (28).
+**Greedy: NO.** Every pair in the pool is scored on the real token count of the text it
+produces, and every clause on the real contract it splices into; the transform ships only
+when the measured full message is strictly smaller than the parent's.
+**Time / CPU bound: YES.** One tokenization per candidate pair — 2 s measured on the 46 KB
+git-numstat lane — and only the winning pair is carried through the stack. It does roughly
+double encode time on lanes where it fires, and adds pressure to the stack's per-encoding
+memo caches, so a multi-lane sweep must be chunked across processes.
+
+### The gap it attacks
+
+Every other codec in this stack harvests **redundancy**, which means every one of them
+requires the thing being compressed to *occur more than once*. X38 §N measured the residue:
+74–88 % of prose wire-body words are distinct, and `nearDup = 0`. That mass is unreachable.
+
+But *occurring once* is not the same as *costing what it must*. Measured on o200k_base:
+
+```
+src/omega/anadiplosis.ts                    8 tokens
+src omega anadiplosis.ts                    7 tokens     <- slashes written as spaces
+bench/holdout-ops/git-numstat.txt          10 tokens
+bench holdout-ops git-numstat.txt           9 tokens
+```
+
+A space **merges forward into the next token and disappears**; a slash stands alone and is
+charged for. That is *tokenization waste*, orthogonal to redundancy, and invisible to a
+dictionary because the path occurs once so no glossary entry can ever pay for itself.
+
+### Construction
+
+```
+encode:  wire = STACK( swap(text) )
+decode:  text = swap( STACK⁻¹(wire) )
+```
+
+A swap of two characters is an **involution and a bijection on the character set**, so it
+needs no sentinel, no escape and no absence requirement.
+
+### Result (17 lanes, all EXACT against an independent reference decoder)
+
+| lane | OURA | ANTISTROPHE | Δ | pair |
+|---|---|---|---|---|
+| git-numstat.txt | 1992 | **1923** | **−69** | `␠ ↔ /` |
+| find-listing.txt | 1279 | **1242** | **−37** | `␠ ↔ /` |
+| ls-full-iso.txt | 367 | **366** | **−1** | `. ↔ /` |
+| other 13 lanes | — | unchanged | 0 | — |
+| npm-ls.txt | 901 | *unmeasured* | — | — |
+
+git-numstat decomposes as −74 exchange, +5 clause. `npm-ls.txt` did not finish in budget in
+three attempts and is reported unmeasured, not as a loss; its screen prices `" ↔ +` at −131.
+
+### Negative space — what was measured and refused
+
+* **Substitution to an absent target.** Also unambiguous ("every `=` is a `/`") and the
+  obvious first move. It loses on every lane: git-numstat pays **+370** for the absent-target
+  substitution the swap delivers at −408. A character absent from the document is, by the
+  same rarity argument, one BPE never learned a merge for.
+* **Swapping with newline.** `0 ↔ \n` prices at −503 on git-numstat and is the best pair on
+  most lanes. Refused: it destroys line structure, breaking every downstream structural
+  codec, and makes the tape unreadable.
+* **Swapping a digit for punctuation.** `0 ↔ ,` prices at −442 on vix. Refused: every number
+  becomes garbage.
+
+Both are lossless. Both are refused, because a bare LLM must decode the message from one
+chat box. The pool is punctuation, symbols, space and tab.
+
+### The clause, and why the cheap one is refused
+
+The winning pair is **space and slash**, and the cheapest clause that emits the characters
+literally is `Then swap ␠ /.` (4 tokens) — in which one operand is an **invisible space**.
+A reader cannot see the character it is told to swap, so that wording is refused and the
+space is **named**: `Then swap space and /.` (5 tokens). Full contract:
+
+```
+Before ¶ k=v. expand repeatedly; Then swap space and /. print only.
+```
+
+### Decodability — checked by hand
+
+The `ls-full-iso.txt` message (366 tokens) was decoded by hand from the message text alone:
+no system prompt, no skills file, no tools. 29 rules recovered (the glyph alphabet is
+self-identifying — it is the script of the first character after `§`). Lines 1–6 of the
+decoded output are **byte-identical** to the source, `md5 b55a95c2…`, including the `../` ↦
+`//.` round trip. **n = 1 reader, 6 of 30 lines** — partial coverage, reported as partial.
+
+### Honest citation, including the part that cuts against this
+
+* **TOON** (`toon-format/toon`) claims 30–60 % fewer tokens than JSON; **arXiv 2603.03306**
+  (Feb 2026) benchmarks it and finds the advantage "often reduced by the prompt tax of
+  instructional overhead in shorter contexts."
+* **The counter-evidence, recorded rather than omitted:** Damon McMillan's 9,649-experiment
+  study across 11 models, four formats and schemas from 10 to 10,000 tables (Feb 2026,
+  reported at `usewire.io`) found TOON costing **38 % MORE** tokens, with **no statistically
+  significant effect of format on aggregate accuracy** (χ² = 2.45, p = 0.484), attributed to
+  tokenizer merge tables and model fluency. Format-level token savings measured on fixed
+  datasets are exactly the class of result that reverses under distribution shift. The
+  distinction: ANTISTROPHE holds no fixed opinion and ships nothing when measurement says no.
+* **R-BPE** (EMNLP 2025, `aclanthology.org/2025.emnlp-main.1169`): BPE produces
+  "non-deterministic, and thus impractical, behavior with arbitrary token substitutions" — a
+  fair description of what this relies on, and why every decision here measures rather than
+  predicts.
+* On the same substrate: **arXiv 2608.00582** (merge-ordering problem, ill-tokenization),
+  **arXiv 2504.00178** (Rényi efficiency falls 9 % train→held-out), **arXiv 2608.02376**
+  (frequency-ordering BPE ids), **arXiv 2608.00837** (Pruned BPE); NeurIPS 2024 **LM-GC**
+  finds "the precise serialization … substantially improves" LLM-prior modelling.
+
+### Honest size
+
+A real 3.5 % reduction on git-numstat, 2.9 % on find-listing, 1 token on ls-full-iso, and
+**exactly zero on the other fourteen lanes**. It does not move prose and says so: `o200k_base`
+already tokenizes English prose near-optimally, so there is no separator waste left to
+reprice. The waste lives in structural characters, and prose has almost none.
+
+Full writeup: `bench/x39/X39.md` (§A–O).
+
+---
+
+## X40 — PERITROPE (περιτροπή, “a turning round / cycle”) — index 30
+
+Generalising ANTISTROPHE from **one** character exchange to a **set** of pairwise-disjoint
+exchanges, chosen by beam search. Registered at registry index **30**,
+`src/lib/omega/peritrope.ts`. Superset of ANTISTROPHE (29).
+
+### The question, and the measurement that answered it first
+
+ANTISTROPHE stops at one pair. Screen 1 (`bench/x40/screen1.ts`, 18 lanes, 15 s) asked
+whether more is worth anything, by applying the best pair, re-pricing, and repeating:
+
+| lane | 1st | 2nd | 3rd |
+|---|---|---|---|
+| git-numstat | −408 | −421 | **−425** |
+| find-listing | −166 | −249 | **−264** |
+| npm-ls | −131 | −180 | **−200** |
+| pom.xml | −18 | −32 | **−33** |
+| openstack | −33 | −44 | **−49** |
+| readme | −13 | −20 | −27 |
+
+**Returns are not diminishing.** On `pom.xml` the third exchange alone beats the first two
+combined. Stopping at one pair leaves most of the mechanism unharvested.
+
+### Why a set, not a sequence
+
+Two exchanges collide: swapping `␠↔/` and then `/↔.` sends spaces to dots, and the reader
+must know the order. PERITROPE searches over sets of **pairwise-disjoint** exchanges, so no
+character appears twice. Disjointness restores what a single swap had for free — **order of
+application does not matter** — so the reader gets a list, not a program.
+
+Screen 2 measured the cost of that constraint (greedy, k ≤ 4): **identical totals on 12 of
+18 lanes**. The only lane where disjointness really binds is find-listing, −181 disjoint vs
+−264 free.
+
+### Why beam search, not greedy
+
+The best *first* pair is not the best *first move*. Screen 3 (WIDTH=8, DEPTH=5, CAP=10):
+
+| lane | beam | greedy disjoint |
+|---|---|---|
+| find-listing | **−238** | −181 |
+| pom.xml | **−49** | −33 |
+| ls-full-iso | **−36** | −11 |
+| git-numstat | −421 (k=2) | −421 (tie) |
+
+Depth is chosen by `rawDelta(k) + clauseTokens(k)`, both **measured** — not by encoding every
+prefix, which would cost one full stack encode per candidate depth.
+
+### A bug worth recording
+
+The pool was originally filtered by a minimum count of 20, inherited from ANTISTROPHE. On the
+same beam that turns git-numstat from **k=2 / −421** into **k=1 / −408**, and npm-ls from
+**k=5 / −229** into **k=1 / −11**. A character that occurs eleven times can still be the
+expensive half of a very cheap pair. The filter is now **presence + a cap on pool size**
+(`PERITROPE_MIN_COUNT = 1`, `PERITROPE_POOL_CAP = 22`).
+
+### Refuted this turn
+
+* **Delta encoding of monotone integer runs** — dead. The longest monotone run in any of these
+  documents is 4–7 values (dump.sql 7, openstack 5, prose-01 5, chart.svg 5). Gain 0 on every
+  lane.
+* **Widening the pool to typographic Unicode** (`bench/x40/screen4.ts`). The theory was that
+  published English earns BPE merges for curly apostrophes, em dashes and ellipses that
+  plain-text documents never use. 27 extra characters tested across 18 lanes: **improvement of
+  exactly zero on all 18**. The typographic-substitution route to prose is refuted.
+
+### Result (byte-exact, independent reference decoder, same process)
+
+| lane | OURA | ANTISTROPHE | **PERITROPE** | pairs |
+|---|---|---|---|---|
+| find-listing | 1279 | 1242 | **1218** | `␠↔-`, `.↔/` |
+| git-numstat | 1992 | 1923 | **1906** | `/↔␠`, `-↔(` |
+| openstack | 945 | 898 | **894** | `]↔"`, `.↔_` |
+
+−24, −17 and −4 (2393 s — this lane costs 40 minutes to encode). **Honest gap between probe and codec:** pom.xml (−30 raw),
+chart.svg (−36) and ls-full-iso (−36) all price well in isolation and **none survives the
+stack** — the clause plus the interaction with the parent grammar eats the raw delta.
+
+### Honest citation — the literature running the other way
+
+This is the closest thing to prior art found for this whole family, and it is *adversarial*:
+
+* **SilverSpeak**, arXiv **2406.11239**: substituting 10 % of characters with homoglyphs makes
+  **70 % of resulting tokens differ** in the OpenAI BPE tokenizer.
+* **arXiv 2508.14070** (2,800+ instances, 7 models): cross-script homoglyph substitution is the
+  most effective technique at **58.7 %** guardrail bypass, 10 % (GPT-OSS 20B) to 92 % (Mistral 7B).
+* **paultendo.github.io** (Feb 2026; 130 API calls, 8 attack types, 4 models, 3 document types):
+  GPT-5.2 and Claude Sonnet 4.6 **correctly interpreted every substitution in every run**, with
+  57 % of characters replaced — zero meaning flips, zero clause omissions — while that same 57 %
+  took a 95-line contract from 881 tokens to **4,567 (5.2×)**. *“The comprehension attack fails.
+  The billing attack succeeds.”*
+* **arXiv 2610.03110**: homoglyph substitution evaded a RoBERTa detector in 41 % of cases;
+  mapping confusables back to Latin before tokenization cut that to **2 %**.
+* **arXiv 2604.10271**: ~37.5 % word-level replacement breaks authorship verification.
+
+**Two ways this cuts, both load-bearing.** In favour: it is the strongest independent
+confirmation available that character exchange is transparent to a frontier reader while being
+extremely expensive to the tokenizer — the entire premise of X39 and X40. Against: homoglyph
+work substitutes *toward* rare multi-byte characters to inflate; PERITROPE substitutes *toward*
+cheap ones to deflate. Both ride the same cliff. The only difference is that PERITROPE never
+ships a direction it has not measured on the actual document, whereas a fixed format convention
+does — and McMillan's 9,649-experiment study measured that class of claim reversing to **38 %
+MORE** tokens across 11 models (χ² = 2.45, p = 0.484, no accuracy effect).
+
+**Deployment caveat the same literature supplies:** a preprocessing layer that maps confusables
+back to Latin skeletons neutralises the effect to 1.0×. Any pipeline normalising confusables at
+ingest would undo this transform. Here the exchange is applied by the encoder and read by the
+model, not passed through a sanitizer — but it is a real boundary.
+
+Adjacent work this stack **cannot** use, because the decoder's tokenizer is frozen:
+**arXiv 2601.13260** (retokenization/vocab expansion/merge refinement are offline interventions
+that repay their cost), **arXiv 2512.03989** (EACL 2026): continued BPE training beats naive
+extension by up to **9.6 %** tokenization efficiency, 72.9–100 % of 70 languages, and
+leaf-based pruning removes up to **62.5 %** (80k/128k) of vocabulary tokens without noticeable
+deterioration; **TokEval**, arXiv **2608.18062** (COLM 2026). All require changing the tokenizer.
+PERITROPE is that same offline intervention achieved by rewriting the **text** instead.
+
+### Greedy / non-greedy status, and the bound
+
+* **Greedy: NO.** Every candidate pair is scored on the real token count of the text it
+  produces; the beam keeps 8 competing partial permutations so a locally best pair cannot lock
+  out a better set; depth is chosen by measured raw delta + measured clause cost; and the
+  transform ships only when the full message **including the clause** is strictly smaller than
+  the parent.
+* **Time / CPU bound: YES.** One tokenization per candidate pair per node, bounded by
+  22 pool chars × 8 beam states × 10 extensions × 5 depths. Measured **165 s** for find-listing,
+  **305 s** for git-numstat — roughly double ANTISTROPHE.
+
+### Honest size
+
+24 tokens on find-listing, 17 on git-numstat, 4 on openstack, **zero on the other thirteen lanes
+measured**. npm-ls is reported as *not measured*: `ouraEncode` alone costs **992.5 s** on its
+6,688 characters, so the lane is a parent-stack pathology inherited from X39, not a zero.
+Prose still does not move, and X40 refuted the one new route to it that was left.
+
+Full writeup: `bench/x40/X40.md`.
+
+---
+
+## X41 — SYSTOLE (συστολή, “a drawing together, a contraction”) — index 31
+
+`src/lib/omega/systole.ts`. Wraps PERITROPE (30). Removes the **separators inside
+structured numbers** and restores them by template — the first mechanism here that pays
+for a removal **without repetition**.
+
+### Why this one, and what measurement chose it
+
+`bench/x41/diag.ts` did a pre-tokeniser accounting before anything was built. On the two
+CSV lanes **37–38 % of raw tokens** live in digit runs longer than three digits, and
+**vix has 3,408 pre-tokens and 3,412 tokens** — one token per pre-token. BPE merges buy
+nothing. That is a floor, and the floor is `\p{N}{1,3}`, which cuts every digit run
+every three characters. Merges never cross a pre-token boundary, so `2026` is
+irreducibly two tokens however often it occurs.
+
+```
+"2026-09-30T07:59:52.6403938810"  ->  17 pre-tokens
+"20260930T0759526403938810"       ->  10 pre-tokens
+```
+
+Only five of the seven saved are the removed characters; **the other two are the digit
+runs regrouping** (`2026|09|30` is four pre-tokens as three runs, three as one).
+
+Raw saving measured per lane (`bench/x41/screen2.ts`): aapl **974**, vix **882**,
+find-listing **720**, openstack 524, ls-full-iso 168, dump.sql 156 — and **prose-01: 2,
+kb-article: 1**.
+
+`LCP gain = −14` on **every** lane (the clause cost alone): line-prefix elision is dead
+in this corpus.
+
+### Three constraints, all for the reader
+
+1. **Width cap ≤ 14 digits.** Restoring means counting. **arXiv 2605.02028** queried
+   **126 model variants** and found **every one** has a finite counting capacity far
+   below its nominal context, failures clustering on round numbers. This is why the
+   single largest measurement of the turn is refused: treating `,` as a separator merges
+   a CSV row into one template and shows **−1,512 raw on vix**, but the stripped form is
+   a forty-digit blob.
+   **CharBench (arXiv 2508.02591)** measures the same tradeoff from the other side —
+   accuracy at locating a character declines as the containing token grows, *a tradeoff
+   between token-level compression and the ability to reason about character-level
+   structure*.
+2. **One template per digit count.** The reader identifies a stripped run by its length.
+   On vix, dates and prices both strip to eight digits; only the prices ship (504
+   occurrences vs 126), forgoing 378 **to keep the instruction unambiguous**.
+3. **Mechanical invertibility + unambiguity.** Both caught real failures: find-listing's
+   size column `113525` → `11:35:25`; dump.sql's hex `00000000b09b…` → `0000-00-00`;
+   chart.svg `800 400` → `8.00 4.00`; email-thread `2026` → `20:26`.
+
+### Two corrections to selection, both found by losing most of the gain
+
+* **Ambiguity is not monotone.** On aapl, `4-2-2` is ambiguous *alone* (the decimal part
+  of `77.44539475` survives as a native 8-digit run) but readable *once `2.8` ships too*.
+  One pass: **201 of 915**. Fixed point: **915**.
+* **A weak template must not claim a slot a stronger one is still reaching for** — `2.6`
+  (6 raw) took the 8-digit slot while `4-2-2` (720 raw) waited its second chance.
+
+### Result — byte-exact, independent reference decoder
+
+| lane | PERITROPE | **SYSTOLE** | templates | |
+|---|---|---|---|---|
+| aapl | 1450 | **1407** | `10:2.8` `9:2.7` `8:4-2-2` | EXACT |
+| vix | 579 | **550** | `8:2.6` | EXACT |
+| bibliography | 671 | **667** | `6:3-3` `8:4-4` | EXACT |
+| meeting-transcript | 385 | **384** | `6:2:2:2` | EXACT |
+
+Every other lane EXACT with SYSTOLE off (find-listing, ls-full-iso, dump.sql, pom.xml,
+page.html, chart.svg, email-thread all re-measured this turn at their prior values).
+
+**Honest gap:** aapl 915 raw → 43 delivered (4.7 %); vix 504 → 29 (5.8 %). **Twelve
+further lanes with measurable raw separators delivered zero**, because the dictionary and
+shape rules already capture separator structure wherever numbers repeat. What survives is
+exactly the **high-entropy** case.
+
+**Independent reference decode:** `bench/x41/handcheck.py` re-implements the inverse from
+the clause text alone, in Python, not importing `systole.ts` —
+**md5 `d23206346603f7eed8815e6432956f71` on both sides, all 241 lines.** The full wire is
+not hand-decoded here; that proof is X39's (ls-full-iso, md5 `b55a95c2…`).
+
+### Honest citation — the part that cuts against this
+
+The rule it exploits is documented elsewhere **in the opposite direction**. A 2026
+analysis (dev.to, ji_ai) confirms `\p{N}{1,3}` in cl100k/o200k and shows chunking runs
+**left to right**, so boundaries depend on total length, not place value, and a thousands
+separator is a hard boundary forcing right-to-left alignment. **Singh & Strouse,
+arXiv 2402.14903**: comma-separating at inference materially improves arithmetic; under
+length mismatch, left-to-right tokenization collapses to **8.25 %**.
+
+Both argue for **adding** separators so a model can compute. SYSTOLE removes them,
+because the objective is the token count of the message, not downstream arithmetic.
+**Those objectives conflict: a wire from this codec is a worse substrate for downstream
+mental arithmetic than the original.** That is a real cost the token count does not see.
+
+* **Arcee Trinity Large, arXiv 2602.17004 §2.1.1**: the natural zero-width lookahead
+  `(\d{3})+(?!\d)` suffers **catastrophic backtracking** on long digit runs, spiking
+  tokenization to minutes — why the run scanner here trims and resumes.
+* **arXiv 2601.14658**: tokenizers produce **non-unique encodings** — several token-id
+  sequences detokenize to the same string.
+* **arXiv 2510.06824**, **2502.09741 (FoNE)**, **2601.09706**: numeracy work on the same
+  bottleneck. **arXiv 2605.00817**: accuracy 63 % at 5 procedural steps → 20 % at 95.
+
+### Greedy / bound
+
+* **Greedy: NO** for selection (every template priced on real token counts, every set
+  re-verified for invertibility and unambiguity) and **NO** for the gate (encoded twice,
+  worse discarded). Greedy set cover in one respect: ordered by measured saving, fixed
+  point by repeated passes, not exhaustive subset search.
+* **Time/CPU bound: YES.** The gate needs a second full PERITROPE encode: **289 s aapl,
+  705 s vix**. A raw-saving pre-filter (`SYSTOLE_MIN_RAW = 20`) skips it where it cannot
+  pay — most lanes.
+
+### Honest size
+
+43 tokens on aapl (3.0 %), 29 on vix (5.0 %), 4 on bibliography (0.6 %), 1 on
+meeting-transcript (0.3 %), zero on the thirteen other lanes. Narrow: for high-entropy
+numeric columns. **Barely touches prose — bibliography and meeting-transcript are the only
+prose-adjacent lanes that move, by four tokens and one; kb-article has one structured
+numeric run in the whole file, prose-01 two, together worth three tokens.**
+
+Full writeup: `bench/x41/X41.md`.
+
+---
+
+## 32. APOCOPE — ἀποκοπή, "a cutting off" (X42)
+
+`src/lib/omega/apocope.ts`. Wraps SYSTOLE (31). Deletes **constant digits at the
+edges of a numeric template**, restoring them from the template.
+
+> **THE MEASURED GAIN IS ZERO ON EVERY LANE.** APOCOPE is registered, byte-exact
+> and independently verifiable, and it is recorded here because a frontier needs
+> its negative results in the same place as its positive ones. It is **not** an
+> improvement, and on the two lanes that trigger it, it is **slower**. The durable
+> output of X42 is the three floors in §"Why zero" below, which close off the
+> whole numeric direction rather than just this codec.
+
+### Mechanism
+
+SYSTOLE established that a **separator** can be deleted because its *position* is
+implied by the shape of the number. APOCOPE pushes the same argument onto the
+**digits**: if every occurrence of a template carries the same digit at the same
+position, that digit carries no information and can be deleted and stated once.
+
+| lane | observation |
+|---|---|
+| `vix-daily-1990.csv` | all 504 prices end `0000` — a **fixed precision** |
+| `vix-daily-1990.csv` | all 126 dates begin `19900` — a **fixed period** |
+| `aapl-2014.csv` | all 240 dates begin `2014` |
+
+A fixed precision and a fixed period are the same observation in different
+clothes, and both are ubiquitous in operational data: every price in one currency
+and precision, every record from one day, every build id from one release train.
+
+**Only a prefix and a suffix — never an interior position.** A reader-capacity
+limit, not an encoder convenience: `prepend 2014` and `append 0000` are single
+local edits, whereas an interior deletion forces the reader to interleave two
+digit strings by counting into both — the procedural task **arXiv 2605.02028**
+shows models fail at across 126 model variants.
+
+**Only when 100 % constant.** One exception turns the affix into an exception
+list, which is a second conditional rule; that is where silent corruption starts.
+
+**Versus a mechanism already in the dead list.** "Fixed-precision trailing zeros"
+is dead *without the template framing*: a global trailing-zero strip is not
+invertible because the reader cannot know how many zeros to restore. Inside a
+template the width is fixed, so the restored count is determined. APOCOPE is the
+invertible version of that idea — which is why it was worth building.
+
+**Composition.** Separators are removed first, then the affix is cut from the
+resulting digit string; decoding restores the affix first, separators second. The
+reader keys a run by the width surviving *both* steps, so SYSTOLE's
+one-template-per-width rule is inherited on the surviving width.
+
+**Clause, priced before chosen** (`bench/x42/clause.ts`, six wordings):
+
+```
+Restore 4:2014-##-##, 9:1##.#######.
+Restore 3:1990-0#-##, 4:##.##0000.
+```
+
+**+1 token on aapl, +3 on vix** over the SYSTOLE clause it replaces. A bare form
+without the surviving width is ~4 tokens cheaper and was **rejected**: the width
+is the key the reader matches runs against, and dropping it converts a lookup
+into a count (CharBench, arXiv 2508.02591).
+
+### Result — zero, with a real time cost
+
+All lanes **EXACT** byte-round-trip; all ship the parent unchanged because the
+gate rejects APOCOPE.
+
+| lane | SYSTOLE | APOCOPE | raw priced | time |
+|---|---|---|---|---|
+| vix-daily-1990.csv | 550 | **550** | 756 | 705 → **814 s** |
+| aapl-2014.csv | 1407 | **1407** | 283 | 289 → **418 s** |
+| other 14 lanes | unchanged | unchanged | 0 | unchanged |
+
+Eleven further held-out files never used in any prior turn (`code-dts`, `code-ts`,
+`gh-api.json`, `gh-prose`, `json-pkg`, `lic-mit`, `license`, `md-react`,
+`md-vite`, `llm-answer.md`, `unified-diff.patch`) produced **zero candidate
+templates at all**. The gate costs a **third** full stack encode (+15 % vix,
++45 % aapl); `APOCOPE_MIN_RAW = 20` makes it free on the other fifteen.
+
+### Why zero — three floors
+
+**(1) The cut text is HALF the size raw and compresses to the same thing.**
+`bench/x42/screen10.ts`:
+
+| lane | source raw | cut raw | source → stack | cut → stack |
+|---|---|---|---|---|
+| vix | 3412 | **1774** (−48 %) | 550 | ~530–550, rejected |
+| aapl | 3108 | **2062** (−34 %) | 1407 | ≥1387, rejected |
+
+Removing **1,638 raw tokens** from vix moved the compressed size by **zero**. The
+stack's output is pinned to the *information content*, not the raw size — the
+strongest evidence in this repository that the stack is at its ceiling. (The
+screen's own prediction of 756 under-measured by >2×, having priced digits in
+isolation and missed boundary effects; the full raw delta is the honest number.)
+
+**(2) `ceil(W/3)` is a HARD floor for digit runs — proven exhaustively, not
+estimated.** `bench/x42/digittok.ts` tokenized **all 1,110,000 digit strings of
+length 1–6**: lengths 1/2/3 are single tokens **100 %** of the time; lengths
+4/5/6 are single tokens **0.00 %** of 10,000 / 100,000 / 1,000,000. `1990`,
+`2024`, `2026`, `1000`, `0000`, `1024`, `4096` are all **2 tokens**. Inserting
+`.` `,` `-` ` ` or nothing at any interior position of a real 9- or 10-digit price
+**never beat the bare run**. On the shipped aapl message the 364 digit runs hold
+2,300 digits and cost **823 tokens**; `sum(ceil(W/3))` over the same runs is
+**also 823** — **headroom exactly zero**. Reducing a digit run's token count
+therefore requires reducing the *number of digits*, and there is no other route.
+
+**(3) The non-digit layer is also at its floor.** `bench/x42/glyph.ts` on the same
+payload: 786 non-digit characters, 76 distinct, 535 tokens, per-character entropy
+**5.89 bits** → **8.66 bits/token** — *above* the 8-bit byte ceiling and ~2× below
+the `log2(200000) = 17.6`-bit vocabulary limit; at the usual 6-bits/token rule of
+thumb it would cost 772 tokens instead of 535. Raising bits/token by reassigning
+the glyph alphabet is blocked by a general argument, not a measurement: the
+decoder is a bare LLM in one chat box, so any mapping must be **stated in the
+message**, and 76 mappings cost more than the ~142 tokens they could save. This
+independently explains why "in-situ CHIRON glyph reassignment" is dead.
+
+**(4) The dictionary already hoists constants.** APOCOPE deletes redundancy; the
+stack's dictionary *is* a redundancy engine; the dictionary wins on its own
+ground. Visible in the wire — the aapl message opens `201412Отөк8...` with the
+year `2014` emitted **exactly once**. The transform APOCOPE proposes has already
+been performed before APOCOPE sees the text.
+
+> **General lesson, refining X41's:** what survives the stack is
+> tokenization-**boundary** change, not redundancy removal. SYSTOLE and PERITROPE
+> pay because removing a separator or swapping a character changes *where the
+> tokenizer can cut*, which no dictionary can do. APOCOPE only removes redundancy,
+> which the dictionary already eats for free.
+
+### Independent reference decode of the clause
+
+The mechanism never ships, but it still meets the contract every codec here must:
+**a bare reader given only the clause text can restore the data.**
+`bench/x42/handcheck.py` is an independently written Python decoder that parses
+`Restore 3:1990-0#-##, 4:##.##0000.` with a regex and rebuilds the vix head from
+the cut text. It does **not** import `apocope.ts`.
+
+```
+cut      : 102,1724,1724,1724,1724
+restored : 1990-01-02,17.240000,17.240000,17.240000,17.240000
+md5(source) == md5(restored) == 10481361b3b879c04d1f3037de9dfcb3
+```
+
+A receipt that the layer is **sound and literally readable** — not a receipt for a
+win. Artifacts: `bench/x42/vix-{SOURCE,CUT,RESTORED}-head.txt`, `hand.ts`.
+
+### Two further mechanisms refuted before being built
+
+`bench/x42/diag.ts`, all 17 lanes.
+
+**Case folding is dead.** **7 of 17 lanes negative** — capitalised word-initials
+often tokenize *cheaper* than lowercase: bibliography −20, page.html −15,
+email-thread −10, meeting-transcript −8, kb-article −4, openstack −3,
+component.jsx −2. Best positive: dump.sql +29 on 13 cased words, which does not
+survive a clause.
+
+**Phrase-level n-gram dictionaries are exhausted on prose.** Every prose lane has
+a **saturation ratio above 1** — the stack already removes *more* than the entire
+phrase-repeat budget: bibliography **4.40**, git-numstat 2.37, ls-full-iso 2.02,
+pom.xml 1.85, prose-01 1.66, component.jsx 1.60, meeting-transcript 1.60,
+email-thread 1.41, readme 1.08. Phrase repeats *are* far larger than word repeats
+(page.html: 105 word vs **3,384** phrase-4), which is why this was worth
+measuring — but an overspent budget cannot be harvested twice.
+
+### The prose gap, closed with numbers
+
+Twelve fresh prose holdouts in `bench/x30/fresh`, **ten never used in any prior
+turn**, encoded through the full stack (`bench/x42/prose.ts`), all **EXACT**:
+
+| lane | src | msg | instr | payload | c/tok |
+|---|---|---|---|---|---|
+| prose-01 | 785 | 737 | 11 | 726 | **4.12** |
+| prose-02 | 879 | 789 | 19 | 770 | 3.17 |
+| prose-03 | 1003 | 837 | 11 | 826 | 3.53 |
+| prose-04 | 877 | 836 | 11 | 825 | 3.50 |
+| prose-05 | 1070 | 920 | 11 | 909 | 3.16 |
+| prose-06 | 926 | 840 | 11 | 829 | 3.22 |
+| prose-07 | 861 | 809 | 16 | 793 | 3.86 |
+
+Raw English sits near 3.8–4.5 chars/token, so these payloads are at or **above**
+natural English density; on prose-02 the compressed stream is 3.17 c/tok against
+the source's own density, i.e. the stack is measurably *worse per character* than
+the untouched text there. Instruction overhead is **11 tokens** on every clean
+prose lane (1.4 %) — no overhead to reclaim.
+
+`bench/x42/screen9.ts` also closed an untested gap: prose-02..12 had **never**
+been passed through SYSTOLE. Their structured-numeric raw savings are 0–27
+tokens against a clause costing 15–19 — below threshold, and the ~20× attenuation
+through the stack makes them worthless. **Prose is now confirmed saturated by a
+fourth independent route.**
+
+### Citations — including those that cut against this codec
+
+* **arXiv 2402.14903** (Singh & Strouse) and the 2026 dev.to/ji_ai analysis both
+  argue for **adding** structure to numbers so a model can compute with them.
+  APOCOPE removes digits outright — a strictly larger step in the direction they
+  measure as harmful. A wire from this family is a worse substrate for downstream
+  arithmetic, and the token count does not see that cost.
+* **arXiv 2602.17004** §2.1.1 (Arcee Trinity Large): catastrophic backtracking in
+  digit-run regexes. APOCOPE reuses SYSTOLE's trimmed-and-resumed scanner and
+  never a nested lookahead.
+* **arXiv 2601.14658**: tokenizers admit **non-unique encodings** — a standing
+  caution for accounting done in tokens.
+
+Newly cited, on this codec's own substrate:
+
+* **arXiv 2604.13066** — *Lossless Prompt Compression via Dictionary-Encoding and
+  In-Context Learning*. The closest published analogue of this entire stack:
+  frequent subsequences become meta-tokens the model substitutes back, governed by
+  a token-savings condition `(1+f)·n_token(M) + n_token(S)`. It relies on a
+  **system prompt** for the dictionary, which this repository's one-chat-box
+  constraint forbids.
+* **arXiv 2605.29000** — strategic deletion with LLM reconstruction: at high
+  retention a **regular** deletion pattern beats random; under heavy compression a
+  Gaussian schedule overtakes it.
+* **arXiv 2609.35475** — *Spontaneous Context Restoration*: in attention-only
+  transformers, recovery from deleted/corrupted tokens **emerges despite training
+  exclusively on clean sequences**, with no denoising objective. The closest thing
+  to a theoretical licence for the restore-by-rule family SYSTOLE and APOCOPE
+  belong to.
+* **arXiv 2604.13006** — one instruction, *"don't use commas"*, shrinks responses
+  by up to **48 %**; GPT-4o-mini falls 472→216 words and loses 31 % coverage. A
+  formatting constraint is never free even when cheap to state.
+
+### Mathematics review — new sources
+
+**Leiden Declaration on Artificial Intelligence and Mathematics**, published
+**2 June 2026** by 16 mathematicians from 15 universities after a September 2025
+Lorentz Center workshop; endorsed by the **International Mathematical Union**;
+**arXiv 2609.35334**; August 2026 *Notices of the AMS*; **23 recommendations** at
+four levels. **1,854 signatures within a week**, ~2,000 by mid-June, including
+Fields Medalists **Tao, Scholze, Lindenstrauss, Hairer, Duminil-Copin, Maynard,
+Viazovska**. Five threats, first among them that automated techniques "can produce
+plausible but unreliable (or even incorrect) arguments which are difficult to
+distinguish from correct mathematical proofs."
+
+**"A Severe Misalignment of AI in Mathematics"**, **11 September 2026**,
+mathandai.org, signed by **25 Fields Medalists** (Tao, Scholze, Viazovska, Birkar,
+June Huh, Hairer, Kontsevich, Maynard, Bhargava, 2026 medallist **Yu Deng**),
+medal classes 1978–2026; **7,200 signatories by 16 September**. Scholze: *"I am
+pondering my mathematical ideas without use of AI, and generally avoid reading
+AI-generated text as best as I can."*
+
+These are a direct institutional verdict on X41's per-lab record: the Leiden
+threat list maps one-to-one onto OpenAI's 6 October 2026 release (722 manuscripts,
+372 families, unreleased model, three withdrawn within a day over a **sign error**,
+~58 % unchecked prose). The disclosure demanded is exactly what that release
+omitted — compute published, **no prompts, no model**.
+
+Labs not previously covered, graded individually:
+
+* **DeepSeek** — different in kind. **DeepSeekMath-V2** (27 Nov 2025,
+  **arXiv 2511.22570**), **685B** parameters, built **verifier-first**: a trained
+  verifier emits a natural-language analysis plus a score in {0, 0.5, 1} with
+  reward weights **α = 0.76** on proof score and **β = 0.24** on self-analysis,
+  and a **meta-verifier** reviews the verifier's own analysis. Gold-level IMO 2025
+  and CMO 2024, **118/120 Putnam 2024**, ~99 % IMO-ProofBench Basic (behind Gemini
+  Deep Think on Advanced). The meta-verifier is load-bearing: without it a learned
+  verifier can score correctly while **hallucinating the issues it claims to
+  find**; quality of verifier analyses rose **0.85 → 0.96** with score accuracy
+  held. This is a verification *architecture*, not a solved open problem — and the
+  most transferable idea here, because **`bench/x41/handcheck.py` is exactly a
+  meta-verifier**: an independently written decoder reviewing the encoder's claim
+  rather than trusting it.
+* **xAI** — **no research-level mathematical result found.** Grok 4.7 shipped
+  21 Sep 2026 (500K context) with benchmark scores only; Grok 4.20's four-agent
+  cross-verification (coordinator / research / logic-math / contrarian) is an
+  architecture claim, not a theorem. The absence is reported, not filled in.
+* **Meta** — **no research-level mathematical result found.** Muse Spark 1.2 ships
+  vendor-run numbers (82.9 % Terminal-Bench 2.1) explicitly not independently
+  verified.
+* **Google DeepMind** — unchanged and still the only lab with a *completed*
+  review: AlphaProof Nexus, 9 of 353 open Erdős problems (two open 56 years),
+  peer reviewed in **Science**, October 2026.
+
+Calibration still stands: of 700 open Erdős problems surveyed January 2026, **13
+addressed, 5 seemingly new, 8 already in the literature**.
+
+### Greedy / bound
+
+* **Greedy: NO** for affix selection (each priced on the real token count of the
+  text it produces; every surviving set re-verified for exact invertibility and
+  reader-unambiguity; fixed point because ambiguity is not monotone in the
+  template set) and **NO** for the parent gate (parent encoded, worse discarded).
+  Greedy in exactly one respect: templates considered in order of measured saving.
+* **Time/CPU bound: YES** for detection — one regex pass plus a
+  longest-common-prefix and longest-common-suffix over occurrences, both linear.
+  The gate costs a **third** full stack encode where the mechanism looks viable
+  (**814 s vix**, **418 s aapl**) and nothing where it cannot pay.
+
+### Honest size
+
+**Zero tokens on every lane measured.** Recorded as a shipped codec rather than an
+analysis note because the mechanism is real, general, byte-exact and independently
+verifiable — but it must not be counted as an improvement, and the two lanes it
+slows are a cost with no offsetting gain.
+
+Full writeup: `bench/x42/X42.md`.
+
+---
+
+## 33. KRISIS — κρίσις, "a judging, a decision" (X43)
+
+`src/lib/omega/krisis.ts`. Wraps APOCOPE (32), and therefore the whole stack.
+
+> Every codec in this repository so far has tried to make the **wire** smaller.
+> KRISIS tries to make the **decision** cheaper. It returns the **identical token
+> count on every lane tested**, byte-exact, at up to **2.5× lower wall clock**.
+> It adds no clause, no marker and no alphabet — it changes no wire at all. Its
+> contribution is on the **time** axis, which this repository made first-class in
+> X30 and X41 and had never optimized.
+
+### The measurement that produced it
+
+`bench/x43/screen3.ts`, layer by layer, on `pom.xml` — a **1,797-character** file:
+
+| layer | time | msg |
+|---|---|---|
+| chiron | 203 ms | 305 |
+| anadiplosis | 9,865 ms | **242** |
+| euteleia | 6,659 ms | 242 |
+| oura | 33,424 ms | 242 |
+| antistrophe | 94,988 ms | 242 |
+| peritrope | 100,517 ms | 242 |
+| systole | 140,598 ms | 242 |
+| apocope | 138,127 ms | 242 |
+
+**Six layers spend 138 seconds and every one returns 242** — the value ANADIPLOSIS
+reached in 9.8 s. The upper stack buys nothing and costs **93 %** of the wall
+clock. At real sizes: **814 s** for a 6.5 KB CSV, **609 s** for an `ls` listing,
+**2,393 s** for a log file, and — for the standing priority on everyday prose —
+**328 s for prose-03** and **261 s for prose-05** against **8.8 s** for prose-01.
+
+Where it goes (`bench/x43/screen4.ts`, pom.xml):
+
+```
+ouraEncode(text) x1      :  36,505 ms   msg=242
+auction (10 pairs)       :       2 ms   (0.2 ms/pair)  5 negative
+one TRIAL ouraEncode     :  12,036 ms   msg=242
+```
+
+**The auction costs 2 ms; one trial costs 12,036 ms.** Each layer computes its
+parent on the unmodified text and then runs trials on transformed text, each trial
+a full recursive lower-stack encode, so depth *d* with *t* trials is **O(t^d)**
+lower-stack encodes. The decisions are badly informed: ANTISTROPHE found **5 of
+10** pairs with a negative raw delta, ran two 36-second encodes, and **both
+returned no gain** — the redundancy a swap removes is redundancy ANADIPLOSIS had
+already removed. OURA is worse, ranking by `est = spans.length * (k - 1)`, a count
+of **characters** rather than tokens, then running up to **2 shapes × 3 modes = 6**
+full lower-stack encodes on that heuristic.
+
+### Mechanism
+
+Price every layer's best candidate **once**, one tokenization each, against the
+clause that layer would add:
+
+> **skip layer L  iff  bestRawDelta(L) + clauseCost(L) ≥ 0**
+
+This is the reasoning PERITROPE already uses to choose its **depth** — *"a pair
+that saves three tokens raw may cost two to state"* — applied as an
+**admissibility gate on the trial itself**. Nothing in the stack did that before.
+
+**Sound in the direction that matters.** `bestRawDelta` is measured on the
+**source**, before the lower stack runs, and X42 established that raw savings
+attenuate ~**20×** through this stack (aapl 915→43, vix 504→29). The raw delta is
+therefore an **optimistic bound**: if the optimistic bound cannot repay the
+clause, the realistic value certainly cannot. **The gate can only skip a layer
+that was going to lose.** It is *not* a lower bound on the final message — no
+cheap rigorous lower bound exists, since X42 proved `sum(ceil(W/3))` tight for
+bare digit runs but the dictionary beats it by mapping digit strings to single
+glyphs. KRISIS claims **admissibility pruning, not optimality**.
+
+**Adaptive in both directions.** The same measurement *spends more* where evidence
+is strongly positive: ANTISTROPHE's trial count rises above its default of 2 when
+the best raw delta is large relative to the clause (`KRISIS_DEEPEN_RATIO = 4`,
+capped at `KRISIS_MAX_TRIALS = 4`). Fired on chart.svg (trials 2→3).
+
+**Cost to the wire: nothing.** A gated lane emits exactly the wire the surviving
+layers would have emitted anyway; the contract is unchanged and the reader gets
+the same single-chat-box instruction.
+
+### Measured — identical tokens, lower wall clock
+
+`bench/x43/verify.ts`, same process, byte-compared against the X42 frontier.
+
+| lane | KRISIS | frontier | match | rt | time | X42 | speedup | gated off |
+|---|---|---|---|---|---|---|---|---|
+| prose-04 | 836 | 836 | **YES** | OK | **15.2 s** | 37.7 s | **2.5×** | oura, anti, syst, apoc |
+| prose-07 | 809 | 809 | **YES** | OK | **17.6 s** | 34.7 s | **2.0×** | oura, anti, syst, apoc |
+| prose-05 | 920 | 920 | **YES** | OK | **159.2 s** | 261 s | **1.6×** | all five |
+| email-thread | 488 | 488 | **YES** | OK | 48.5 s | 73 s | **1.5×** | oura, apoc |
+| prose-03 | 837 | 837 | **YES** | OK | **246.6 s** | 328 s | **1.3×** | anti, syst, apoc |
+| component.jsx | 264 | 264 | **YES** | OK | 8.9 s | 8 s | 0.9× | all five |
+| kb-article | 622 | 622 | **YES** | OK | 6.7 s | 7 s | 1.0× | all five |
+| prose-01 | 737 | 737 | **YES** | OK | 8.5 s | 8.8 s | 1.0× | all five |
+| meeting-transcript | 384 | 384 | **YES** | OK | 8.1 s | 8 s | 1.0× | oura, anti, peri, apoc |
+| bibliography | 667 | 667 | **YES** | OK | 41.3 s | 42 s | 1.0× | oura, anti, peri, apoc |
+| readme | 646 | 646 | **YES** | OK | 37.9 s | 36 s | 1.0× | oura, syst, apoc |
+| page.html | 547 | 547 | **YES** | OK | 83.8 s | 81 s | 1.0× | oura, anti, peri, apoc |
+| prose-03 | 837 | 837 | **YES** | OK | **246.6 s** | 328 s | **1.3×** | anti, syst, apoc |
+| prose-05 | 920 | 920 | **YES** | OK | **159.2 s** | 261 s | **1.6×** | all five |
+| page.html | 547 | 547 | **YES** | OK | 83.8 s | 81 s | 1.0× | oura, anti, peri, apoc |
+| dump.sql | 608 | 608 | **YES** | OK | 294.4 s | 292 s | 1.0× | oura, anti, peri, apoc |
+| find-listing | 1218 | 1218 | **YES** | OK | 294.7 s | 299 s | 1.0× | oura, apoc (trials 4) |
+| ls-full-iso | 366 | 366 | **YES** | OK | **214.5 s** | 609 s | **2.8×** | oura, apoc |
+| pom.xml | 242 | 242 | **YES** | OK | 135.7 s | 129 s | 1.0× | apoc |
+| chart.svg | 417 | 417 | **YES** | OK | 42.3 s | 35 s | 0.8× | oura, syst, apoc (trials 3) |
+| chart.svg | 417 | 417 | **YES** | OK | 42.3 s | 35 s | 0.8× | oura, syst, apoc (trials 3) |
+
+**17 of 17 exact token matches, 17 of 17 byte-exact round trips, zero
+regressions.** Mean speedup **1.3×**, best **2.8×** on ls-full-iso — 609 s down to
+214.5 s — which is the important case: ANTISTROPHE *is* the winner there, and
+KRISIS kept it while gating off OURA and APOCOPE around it. Gate cost **12–761 ms**. Registry smoke test loads `krisis` **by
+key**: 206 codecs, apocope 32, **krisis 33**, family/fidelity `exact`,
+`gatedOff=oura+antistrophe+peritrope+systole+apocope`, `gateMs=17`.
+
+### The stronger receipt: the wire is not merely equal in size, it is identical
+
+A token-count match could in principle hide a different wire that happens to cost
+the same. `bench/x43/wireq.ts` runs `krisisEncode` and the ungated `apocopeEncode`
+in the same process and byte-compares:
+
+```
+component.jsx         krisis=  264 ungated=  264  WIRE IDENTICAL  len 886 vs 886
+kb-article.txt        krisis=  622 ungated=  622  WIRE IDENTICAL  len 2777 vs 2777
+meeting-transcript    krisis=  384 ungated=  384  WIRE IDENTICAL  len 1500 vs 1500
+bibliography.txt      krisis=  667 ungated=  667  WIRE IDENTICAL  len 2158 vs 2158
+```
+
+Four of four **byte-identical**, not just equal in token count. This is the
+receipt that matters for the single-chat-box requirement: KRISIS does not produce
+a *different* message that happens to decode, it produces **the same message**, so
+bare-LLM decodability is inherited from the parent unchanged and needs no new
+argument. The gate's effect is confined entirely to which searches are run.
+
+### The honest limit — the most interesting result of the turn
+
+**The gate only fires where a mechanism is entirely ABSENT**, because source-raw
+evidence does not discriminate winners from losers once the lower stack is in the
+way:
+
+| lane | antistrophe raw Δ | clause | gate | actual |
+|---|---|---|---|---|
+| pom.xml | **−16** | 6 | KEEP | **no gain** |
+| ls-full-iso | **−9** | 5 | KEEP | **is the winner** |
+
+A **−16 that loses** and a **−9 that wins** cannot be separated by any test
+computed on the source text alone. That is a property of the stack, not a defect
+in the gate — and it independently explains X42's central puzzle, why APOCOPE
+priced 756 raw tokens on vix and delivered zero. Likewise page.html keeps systole
+on a raw saving of 27 and systole delivers nothing.
+
+So: where the gate fires it removes whole layers (**2.5×, 2.0×, 1.6×, 1.5×,
+1.3×**); where cost sits in the **lower** stack it changes nothing (component.jsx,
+kb-article, prose-01 run 7–9 s either way); where raw deltas look promising but
+the layers lose anyway it cannot help. chart.svg at **0.8×** is the bounded cost
+of adaptive deepening on a lane where the extra trial did not pay — the only lane
+measured slower.
+
+### Two further measurements, both negative
+
+**Glyph reassignment is dead — now by measurement, not argument.** X42's Floor 2
+killed it claiming the alphabet mapping must be stated in-message. **That argument
+was wrong**: `chiron.ts:144` says the first letter of the tape declares the
+script, so *nothing about the alphabet is transmitted* — the mapping is free. So
+`bench/x43/screen1.ts` measured it on the real aapl payload (65 rule letters, 697
+occurrences, 463 tokens):
+
+| target pool | usable | remapped | tokens | delta |
+|---|---|---|---|---|
+| current Cyrillic/polyglot | 65 | — | **1370** | — |
+| latin-letters | 47 | 47/65 | 1413 | **−43** |
+| latin+punct | 75 | 65/65 | 1390 | **−20** |
+| latin+digits | 57 | 57/65 | 1387 | **−17** |
+
+**Every alternative is worse.** The intrinsic pair-merge test that motivated it
+(Latin **1.02–1.04** tok/pair vs Cyrillic 1.71, Greek 1.83, CJK 1.85, box-drawing
+3.17, dingbats 3.86) was the **wrong measure**: rule glyphs sit next to *digits*,
+not each other, and Latin-next-to-digit tokenizes worse than
+Cyrillic-next-to-digit. Also confirmed: `chiron.ts:1344` picks the script **once**,
+by minimum collision count, and the whole variant sweep reuses it — a real
+unexploited degree of freedom that turns out to have no value. **Do not retry.**
+
+**Budget-limited search is not the bottleneck.** CHIRON stops on a wall clock
+(`min(11_000, 800 + 1.1·len)`, sweep capped at 26 s), which invited the hypothesis
+that it is merely out of time. Refuted: on kb-article and component.jsx it returns
+the **raw fallback with zero rules in 29–185 ms** at every budget from default to
+26,000 ms and at 20,000 and 200,000 work units. Not out of time — nothing to find.
+The smallest-grammar machinery contributes **nothing** on prose or code.
+
+### Citations, newly added, directly on this mechanism
+
+* **arXiv 2607.27871** — *Search as Computation Allocation*. Formalizes exactly
+  this class: *"Many algorithms spend an internal resource before returning a
+  decision and are evaluated only by the quality of that terminal output."* Names
+  it a **terminal computation-allocation problem**, gives Bellman equations for
+  fixed budgets, priced computation and exact certification, and derives weighted
+  A\* from maximizing expected incumbent improvement (recovering A\* at *w*=1,
+  GBFS as *w*→∞).
+* **arXiv 2610.22858** — *Uncertainty-Aware Budget Allocation for Efficient LLM
+  Tree Search*. Closest published analogue of the adaptive half: **training-free**,
+  decoupling value from uncertainty so *"values determine which candidates are
+  promising, while uncertainty determines how many merit expansion"*, reducing
+  token usage and inference time while maintaining accuracy across beam search and
+  MCTS.
+* **Weighted-admissible lineage** — *Anytime-WA\** (arXiv 1110.2737) uses an
+  admissible *h* plus an incumbent upper bound to prune and detect convergence,
+  bounding suboptimality by *w*; **ARA\*** tunes its bound to available time;
+  **Rectangle Search** (arXiv 2312.12554) is an anytime beam search with a
+  completeness proof under an admissible heuristic. KRISIS is a deliberately crude
+  instance: it has **no incumbent to tighten against**, because it never runs the
+  search it prunes, so it substitutes an optimistic raw-token estimate plus a
+  measured clause cost and accepts that the bound is loose.
+* **arXiv 2601.11038** — the **Anytime Index**, quantifying quality-per-token
+  across budgets rather than final accuracy alone: the right metric shape for a
+  codec whose contribution is time, not size.
+* **arXiv 2609.00813 (AnySearch)** — a policy trained under *fixed* budgets fails
+  to adapt when constraints vary at deployment; the failure mode a per-document
+  gate avoids by measuring the document. **arXiv 2602.09574 (BG-MCTS)** conditions
+  search on remaining budget.
+* **The strongest confirmation of this axis is not from compression:** Google
+  DeepMind report (arXiv 2602.10177, *Aletheia*) that the January 2026 advanced
+  Gemini Deep Think cut the compute for equivalent IMO-ProofBench performance by
+  **~100×, two orders of magnitude, at equal graded quality** — the same pareto
+  move KRISIS makes here, by training there and by pruning here.
+
+### Mathematics review — new sources, labs graded individually
+
+**Google / Gemini — a genuinely novel theorem, with the caveat in the paper.** On
+**13–14 January 2026** a Google DeepMind team (**Freddie Manners**, **Georgios
+Salafatinos**, Blueshift) with **Jim Bryan** and **Balázs Szendrői** proved a
+**novel theorem in algebraic geometry** with *"very substantial input"* from
+**Gemini 2.5 Deep Think** and an **unpublished internal system called FullProof**.
+**arXiv 2601.22401**, *Semi-Autonomous Mathematics Discovery with Gemini*, states
+the solution was not in the training data. **Ravi Vakil**: *"rigorous, correct,
+and elegant"*, its exposition *"revealed a latent structure the mathematicians
+hadn't previously foreseen."* The **AMS president**: *"the kind of insight I'd be
+proud to produce myself."*
+
+**The qualification must not be skipped:** the proof came from *"an iterative
+human/AI interaction"* in which the systems solved special cases but **could not
+generalize them to the full problem even given those solutions as context**; a
+hinted approach was then enough. Humans directed the argument. The paper's
+**Appendix A** carries a case study on whether a *formally verified* proof
+addresses the **intended mathematical meaning** — the sharpest statement I have
+found of the gap between machine-checked and machine-understood.
+
+**Aletheia** (arXiv 2602.10177): DeepMind math research agent on Gemini Deep
+Think, deployed **2–9 December 2025**, generating, verifying and revising
+**end-to-end in natural language** under a novel inference-time scaling law, all
+results human-graded. Also: **IMO gold officially certified July 2025**, 35/42,
+confirmed by IMO president **Gregor Dolinar**; **Gemini 3 Deep Think** leads
+IMO-Bench Advanced ProofBench at **76.7 %** (4 Feb 2026); **AlphaProof Nexus**
+proved not only **9 of 353** Erdős problems but **44 of 492** open **OEIS**
+conjectures, a few hundred dollars per problem, Lean-verified, with **Hassabis**
+framing it as *"still not AGI"*; **AlphaEvolve** (arXiv 2511.02864, with Tao)
+reports 67 problems — **23 improved, 36 matched, 8 not matched**, calibrated
+because it reports its own failures.
+
+**Other labs.** **Shanghai AI Laboratory** (new to this record): **16 October
+2026**, its **Shusheng-S2** helped close a **31-year-old conjecture** with an
+**independent machine-verified Lean proof**. **OpenAI/Harmonic**: **January 2026**,
+Erdős **#728 fully resolved autonomously and Lean-verified** by **GPT-5.2 Pro**
+with Harmonic's **Aristotle**, operated by **Kevin Barreto**. **DeepSeek**: still
+an architecture, not a theorem. **xAI** and **Meta**: **no research-level
+mathematical result found** — reported as an absence, not filled in. The **Leiden
+Declaration** (arXiv 2609.35334) and **"A Severe Misalignment of AI in
+Mathematics"** (25 Fields Medalists) stand over all of it; calibration remains the
+January 2026 DeepMind survey — of 700 open Erdős problems, **13 addressed, 5
+seemingly new, 8 already in the literature**.
+
+### Greedy / bound
+
+* **Greedy: YES, and that is the point.** A one-pass greedy admissibility filter
+  with **no backtracking**: each layer priced once on the source text, never
+  revisited — which is exactly why it is cheap. **Not optimal**: a combination
+  that only pays *jointly* would be missed, since layers are judged alone, and the
+  residual risk is bounded only by the optimism of the estimates, not by a proof.
+* **Time/CPU bound: yes, explicitly and by construction** — the time bound *is*
+  this codec's subject. Gate cost **12–761 ms** across seventeen lanes; what it
+  removes is full recursive lower-stack encodes costing **tens of seconds each**.
+
+### Honest size
+
+**Zero tokens, by design and by verification, on all seventeen lanes measured.**
+The gain is **wall clock**: up to **2.5×**, mean **1.3×**, best **2.8×** on ls-full-iso, with one lane at 0.8×
+from adaptive deepening. Recorded as a shipped codec because encode time is a
+first-class metric in this repository and because the profile that produced it —
+138 seconds for a 1,797-character file, six layers returning a value the second
+layer reached in 9.8 s — is a defect worth fixing on its own terms.
+
+**Exact remaining gap:** the gate cannot separate a promising-looking layer that
+loses (pom.xml, −16 raw) from a modest-looking one that wins (ls-full-iso, −9
+raw), because both are judged on the source before the lower stack runs.
+**Next highest-information test:** price the same auctions against `chironEncode`'s
+output — 203 ms on pom.xml, **178× cheaper** than the 36.5 s trial it would
+replace — and measure whether post-chiron delta separates the losers from the
+winners.
+
+Full writeup: `bench/x43/X43.md`.
+
+---
+
+### X43 supplement, added after the second pair of searches
+
+#### A published reconciliation of the glyph result
+
+`bench/x43/screen1.ts` found that remapping the rule alphabet onto Latin makes the
+aapl payload **worse** (−43 / −20 / −17 tokens), even though Latin pairs merge
+intrinsically at 1.02–1.04 tokens/pair against Cyrillic's 1.71. Published
+per-script densities look like they contradict that, and it is worth stating why
+they do not.
+
+**arXiv 2505.24689**, *Structured Encoding for Robust Multilingual Pretokenization*,
+tabulates tokens-per-character under `o200k_base` on natural text: English (Latin)
+**0.2152**, German **0.2128**, Vietnamese **0.2688**, Russian (Cyrillic)
+**0.2314**, Arabic **0.2976**, Hebrew **0.4163**, Thai **0.3160**, Hindi
+**0.3245**, Punjabi **0.4979**, Korean (Hangul) **0.5827**, Japanese **0.5268**,
+Chinese (Han) **0.6260**. On that measure Latin *is* the densest script and
+Hangul and Han the worst — the opposite ordering to what a rule alphabet wants.
+
+The two results are consistent once the context is separated. Those densities are
+measured on **natural text written in that script**, where within-script merging is
+high because the tokenizer was trained on exactly those sequences. A rule alphabet
+is the opposite case: an **arbitrary, information-dense sequence** of glyphs drawn
+from one script and embedded in a **foreign context** — in aapl's payload, 697
+glyph occurrences interleaved with digits and ASCII punctuation. There, adjacent
+glyph-glyph pairs are rare, so what decides the cost is the glyph-to-digit and
+glyph-to-punctuation boundary, and the existing Cyrillic/polyglot choice wins it.
+**The published numbers do not transfer, and any future attempt at alphabet
+reassignment should be priced in-situ, not from a per-script table.**
+
+Related and newly cited: **arXiv 2602.11174**, *The Script Tax*, measures
+tokenization-driven efficiency and latency disparities across scripts and reports
+a substantial information-cost increase of **+19.7 %** for mBERT (8.06 → 9.65) and
+**+47.1 %** for XLM-R (12.19 → 17.94) in bits per character, using BPC precisely
+to avoid the "NLL paradox" from subword fragmentation. **arXiv 2610.01984**,
+*Universal Byte-Level Encoding*, routes between UTF-8 and UTF-16 to reduce
+cross-script token-budget disparities, and its tables make the same point from the
+other side: at a 16K budget Greek costs **90.5** tokens against English **34.7**
+and Cyrillic **75.4** — Greek is *worse* than Cyrillic on natural text, which
+matches this repository's intrinsic pair test (Greek 1.83 vs Cyrillic 1.71) rather
+than the naive expectation. **arXiv 2603.25309**, *Separate Before You Compress:
+the WWHO Tokenization Architecture*, reports 61.7–77.2 % token reductions for
+Sinhala and Hindi against o200k, Llama 4 Scout and DeepSeek V3 — evidence that
+script choice is worth tens of percent when the corpus is one script, and therefore
+that this repository's finding (no gain, because the payload is mixed and the
+glyphs are already near their floor) is a statement about *this* payload and not
+about scripts in general.
+
+#### Mathematics — per-lab record, materially upgraded
+
+**A per-lab ProofBench ranking I did not previously have** (vals.ai, leaderboard
+queried October 2026, with costs and durations):
+
+| system | lab | ProofBench |
+|---|---|---|
+| Claude Opus 5.5 | **Anthropic** | **100 %** |
+| Claude Fable 5.1 | **Anthropic** | **100 %** |
+| AlephProver | **Logical Intelligence** | **100 %** |
+| GPT-6 Astra | OpenAI | 99 % |
+| Claude Opus 5 | Anthropic | 99 % |
+| Claude Fable 5 | Anthropic | 95 % |
+| Kimi K3 | **Moonshot AI** | 87 % |
+| Aristotle | **Harmonic** | 86 % |
+| GPT-5.6 Sol | OpenAI | 83 % |
+| Mistral Large 4 | **Mistral** | **10 %** |
+| Mistral Medium 3.5 | Mistral | 9 % |
+
+This reorders the picture recorded in X41 and X42. **Anthropic now holds the top
+of the formal-proof leaderboard outright, with two systems at 100 %**, which is
+consistent with the Alpöge chain (Jacobian, Carathéodory, Hopf on S⁶) already
+recorded as the strongest per-claim verification sequence. **Moonshot AI's Kimi K3
+at 87 %** is a lab absent from every prior turn here; Moonshot's **Kimina-Prover**
+reported 92.2 % on miniF2F and the first scaling laws for theorem proving in
+April/July 2025. **Logical Intelligence's AlephProver** is a new entrant at 100 %.
+**Mistral at 9–10 %** is now measured rather than merely "no result found": it is
+not absent from formal mathematics, it is at the bottom of it.
+
+**Harmonic / Aristotle, with the caveat that matters.** *Aristotle: IMO-level
+Automated Theorem Proving*, **arXiv 2510.01346**: a Lean proof-search system plus
+an informal reasoning system that generates and formalizes lemmas plus a dedicated
+geometry solver, gold-medal-equivalent on IMO 2025 with **5 of 6** problems solved
+and **formally verified down to foundational axioms with no human checking**.
+Harmonic's own numbers are **83 %** with external computer-algebra systems
+permitted and **63 %** restricted to Lean.
+
+The **Erdős #728** resolution has its own writeup, **arXiv 2601.07421**, described
+as *"the first Erdős problem regarded as fully resolved autonomously by an AI
+system"*, produced by **GPT-5.2 Pro (OpenAI) plus Aristotle (Harmonic), operated by
+Kevin Barreto**. Its appendix is the most instructive document found this turn, and
+it should be read against the Leiden Declaration:
+
+> On Jan 4, 2026, Barreto announced a proof from Aristotle, based on an informal
+> argument from GPT-5.2 Pro. But the problem as stated on the website was **vague,
+> with the intended interpretation from Erdős unclear**. Forum participants
+> commented on this vagueness; **a consensus then emerged that this should be
+> regarded as a partial result, which did not yet fully resolve the problem.** On
+> Jan 5 Barreto again asked GPT-5.2 Pro whether its argument could be upgraded to
+> tackle the version participants had now identified as *the* problem; it answered
+> affirmatively, Aristotle was re-run, and it produced a formal proof on Jan 6.
+
+So the *statement* of the problem, not the proof, was the hard part, and it was
+resolved by a human community between two machine runs. The Lean kernel certified
+the proof on both days; only the mathematicians could tell that the first one
+answered a different question. That is exactly the gap Gemini's **arXiv
+2601.22401** Appendix A raises about whether a formally verified proof addresses
+the **intended mathematical meaning**, and exactly the Leiden Declaration's first
+threat — plausible arguments difficult to distinguish from correct ones — with the
+distinction here being about the *question* rather than the *answer*.
+
+The same pipeline is reported by the survey **arXiv 2606.08728** as having solved
+Erdős **#728, #729 and #397** between January and March 2026, with GPT-5.2 Pro
+generating informal strategies, Aristotle formalizing into Lean, and **human experts
+orchestrating the translation and lemma decomposition**.
+
+**A second caveat on Aristotle's 86 %**, from the leaderboard's own methodology
+note, which is a model of the disclosure the Leiden Declaration demands: Aristotle
+submits a whole Lean file rather than a proof body, so it may use auxiliary lemmas
+inline where other models cannot; it developed roughly **450 lines of supporting
+Krull-dimension theory** for the benchmark statement; it runs on Harmonic's own
+infrastructure with no API setting to restrict tools; and the evaluators **verified
+that Aristotle searched the web on 60 of 100 problems — and that it solved every
+problem on which it did not search the web.** A headline score of 86 % therefore
+coexists with the finding that the unaided subset was perfect and the aided subset
+carried the failures.
+
+Harmonic also shipped an **Aristotle Agent** in March 2026, claiming the first
+fully autonomous operation for up to 24 hours without human intervention and **#1
+on ProofBench**; that claim **conflicts with the vals.ai leaderboard above**, which
+puts Aristotle at 86 % behind three systems at 100 %. Both are recorded, and the
+vendor claim is not preferred. Separately, **Erdős #124** was completed in December
+2025 in about **6 hours** with claimed full autonomy and a **1-minute** Lean
+verification. Also new to the record: **Axiom** launched in October 2025 with the
+stated goal of a quantitative super-intelligence, and **Velvet** was released as a
+Lean verifier for imperative programs.
+
+**Moonshot AI** is the largest addition to the per-lab record: Kimi K3 at 87 % on
+ProofBench, and Kimina-Prover at 92.2 % on miniF2F with the first published scaling
+laws for theorem proving. **DeepSeek-Prover-V2** is reported at 88.9 % on miniF2F
+(671B) and **49/658** on PutnamBench, which sits alongside the DeepSeekMath-V2
+verifier-first architecture already recorded.
+
+**xAI and Meta remain without any research-level mathematical result**, and neither
+appears anywhere on the ProofBench leaderboard above. The absence is reported, not
+filled in.
+
+
+---
+
+## 34. ANALEPSIS — ἀνάληψις, "a taking up again, a resumption" (X44)
+
+`src/lib/omega/analepsis.ts`. Wraps KRISIS (33), and therefore the whole stack.
+
+> **The pareto frontier moved for the first time since X41: ls-full-iso 366 → 364.**
+> prose-01 also moved, 737 → 736. Thirteen lanes tested, **13/13 byte-exact, zero
+> regressions.** The gain is three tokens and is reported as three tokens.
+
+Every codec from CHIRON to KRISIS decides what to compress *while* it is
+compressing. ANALEPSIS is the only one that looks at the **finished wire** and asks
+whether anything worth a rule was left behind.
+
+### Mechanism
+
+Enumerate **maximal repeated substrings** of the body, longest first, suppressing
+any candidate contained in an accepted longer one (so `administ`/`dministr`/
+`ministra`/`inistrat` count as one find, not four). For each, build the wire with
+that phrase appended as **one new rule** and measure `countTokens` of the **entire
+frame**. Keep the single best **iff it strictly reduces** that count. Then **decode
+through the full chain and keep only if byte-identical to the source**. Repeat until
+nothing helps or `ANALEPSIS_MAX_ADDED=12` is spent.
+
+The new rule is appended **last**, so it may reference any earlier rule and no
+earlier rule can reference it — CHIRON's topological guarantee and its decoder are
+untouched. The glyph is the first one-token character of the tape's own declared
+script occurring nowhere in the frame, so `chiron.ts:144`'s self-declaration still
+identifies the alphabet and **nothing about it is transmitted**.
+
+**Why maximal repeats:** CHIRON's search is frequency-driven, i.e. Re-Pair.
+**MR-RePair** (Nakashima, *Algorithms* 13(4):103, 2020) replaces the most frequent
+**maximal repeat** instead, reports grammars **~55 % the size of Re-Pair's** on
+highly repetitive text, and proves that under a stated condition the maximal-repeat
+grammar is no larger. Maximal repeats are exactly what a first pass leaves behind: a
+frequent short substring is consumed early and the longer repeat containing it is
+never reconsidered as a unit.
+
+**The tape/body split is attempted unconditionally**, not only when no upper layer
+fired — `bench/x44/resid.ts` showed the `§ tape ¶ body` structure survives the upper
+layers. That is safe only because the decode check is load-bearing, and **relaxing
+it is what unlocked ls-full-iso**: the stricter first version found only prose-01's
+single token.
+
+### Measured
+
+| lane | ANALEPSIS | frontier | Δ | round-trip | rules added |
+|---|---|---|---|---|---|
+| **ls-full-iso** | **364** | 366 | **−2** | OK | `baseline-browser-mapping`, `дtypescript.bin.ts` |
+| **prose-01** | **736** | 737 | **−1** | OK | `IDEOGRAPHIC SPACE ` |
+| prose-02 · kb-article · readme · component.jsx · email-thread · prose-05 · page.html · chart.svg · meeting-transcript · bibliography · pom.xml | 789 · 622 · 646 · 264 · 488 · 920 · 547 · 417 · 384 · 667 · 242 | *same* | **0** | OK | — |
+
+**13/13 byte-exact, zero regressions.** Registry smoke test loads `analepsis` **by
+key**: **207 codecs**, krisis 33, **analepsis 34**, family/fidelity `exact`,
+ls-full-iso 364 EXACT, prose-01 736 EXACT. Cost: no lower-stack encode is ever run,
+so the pass adds under a second of tokenization to a stack that takes seconds to
+minutes.
+
+### Greedy / bound
+
+* **Greedy: YES.** One best addition per round, measured exactly, never revisited.
+  **Not optimal** — two additions that only pay *jointly* would both be refused,
+  since each is judged alone.
+* **Time bound: yes** — at most `MAX_CANDS=24` tokenizations plus one full decode
+  per round, for at most 12 rounds; `MIN_LEN=6`, `MAX_LEN=64`.
+
+### Four negative results, with receipts
+
+**1. Exact greedy rule pruning gains ZERO.** `bench/x44/greedy.ts` removed one rule
+at a time, whichever *actually* reduced `countTokens` of the whole frame:
+prose-01 31 rules → **0** prunable, 726→726; kb-article 27 → 0, 611→611;
+email-thread 39 → 0, 477→477; prose-02 36 → 0, 770→770. **Not one rule can be
+deleted** — CHIRON's rule set is already optimal under removal. This corrects an
+earlier reading that 22 of 31 rules on prose-01 had negative marginal value, which
+was an artifact of pricing phrases **in isolation**. The reason is itself the
+finding: rule references cost about **0.6 tokens each** in situ, not 1.0, because
+**adjacent glyphs merge** — prose-01's body has runs like `كي` and `ارس` pricing as
+one or two tokens rather than two or three. Pruning by the naive criterion instead
+**loses 19–36 tokens per lane** (`bench/x44/prune.ts`).
+
+**2. Residual repeat mass is ~zero.** After a 2-token definition: chart.svg **−1**,
+page.html **0**, readme **−9**, ls-full-iso **+1**. This is why the harvest is small,
+and it reconfirms X42's saturation finding measured on the **wire body** rather than
+the source. It also prices a cost nobody had measured: **the tape is 9–36 % of every
+message** (page.html 196/547 = 36 %, ls-full-iso 109/366 = 30 %, email-thread
+125/488 = 26 %, chart.svg 99/417 = 24 %) — and §1 proves it cannot be shrunk by
+removing rules.
+
+**3. The alphabet has no better setting.** `bench/x44/script.ts` applied a consistent
+bijection onto each CHIRON script's pool **in tape order**, preserving the glyph
+*sequence* so only the script changes (X43's `screen1` reordered by frequency, which
+destroys the adjacency structure that result 1 shows is what matters): prose-01
+arabic 725 → best alternative cyrillic 787 (**−62**), worst 794 (**−69**); kb-article
+cyrillic 610 → arabic 670 (**−60**), worst 695 (**−85**); email-thread cyrillic 476 →
+arabic 541 (**−65**), worst 560 (**−84**). **Every permutation of every script is
+worse by 53–85 tokens.** The collision-ordered choice at `chiron.ts:1344` — picked
+once, by minimum collision count, never by cost — has nothing to find. *Caveat:
+recorded honestly:* the reconstruction also failed to decode, for two harness bugs
+(`chironDecode` requires the leading `§`, which was stripped; and the pool filter
+excluded only *body* literals while rule texts in the *tape* are literals too). The
+token deltas are unaffected and agree in sign and magnitude with X43's independent
+measurement.
+
+**4. Cheap surrogates for trials are refuted.** X43 recorded this as the
+highest-information test available: can `chironEncode` (203 ms on pom.xml) stand in
+for the 36,505 ms `ouraEncode` trial? On ls-full-iso, for the swap `"."↔"/"` —
+**the one that wins**:
+
+| surrogate | text | swapped | verdict | truth |
+|---|---|---|---|---|
+| **chironEncode** | 423 | 422 | **lose** | **WRONG** |
+| anadiplosisEncode | 367 | **361** | **WIN** | right |
+| euteleiaEncode | 367 | **361** | **WIN** | right |
+| ouraEncode | 367 | **361** | **WIN** | right |
+
+A one-token difference at chiron level is swallowed by the five-token clause. On
+pom.xml, where ANTISTROPHE genuinely loses, chiron agreed with the truth on **all
+three** candidates — **the surrogate is right exactly where it does not matter and
+wrong exactly where it does.** `bench/x44/depth.ts` localized it: the benefit is
+**created at ANADIPLOSIS**, the first layer below chiron, and is **invariant above
+it**. The mechanism is plain once stated: a character swap changes **punctuation**,
+and punctuation is what the framing and run-length layers key on. **No surrogate
+shallower than ANADIPLOSIS can be predictive.**
+
+### And ANADIPLOSIS is not cheap — it is the whole cost
+
+| layer | ls-full-iso | pom.xml |
+|---|---|---|
+| chironEncode | 542 ms / **0.04M** calls | 266 ms |
+| **anadiplosisEncode** | **86,703 ms / 15.83M calls** | **9,865 ms** |
+| euteleiaEncode | 83,659 ms | 6,659 ms |
+| ouraEncode | 85,512 ms | 33,424 ms |
+
+**A 160-fold jump at a single layer** — ~43 s per call on a 2,549-character file,
+~**8 million `countTokens` calls**. Reading `bpe.ts`'s own exported counters
+(`chunkCacheStats`) over a full encode: pom.xml **40,666,051** calls at **92.0 %**
+hit rate (37,769 distinct long strings, 1,202,237 distinct short); ls-full-iso
+**18,596,983** at **76.3 %**. **Forty million tokenizer calls for a 1,797-character
+file** — but the hit rate is 92 %, so memoization is already doing its job and the
+cost is **search breadth**, not repeated tokenization. That closes memoization as a
+speed lever and names the real one.
+
+**Open, and now precisely localized:** ANADIPLOSIS/SYNCOPE costs 43 s and 8 M
+tokenizer calls on a 2.5 KB file, a 160× jump over chiron, and it dominates the
+entire stack. It is also the layer that *creates* most of the compression on ops
+lanes (ls-full-iso 423 → 367, a 13 % win) and the layer at which swap benefits
+become visible. **Speed and accuracy both live there.** `anadiplosis.ts:271`'s
+`findCandidates` scan is O(n × 64) with a `countTokens` per repeat found, but the
+measured 8 M calls say the bulk is below it, in SYNCOPE.
+
+### Citations added this turn
+
+* **MR-RePair** — Nakashima, *Algorithms* **13**(4):103, 2020. **The direct basis
+  for ANALEPSIS's candidate rule**: maximal repeats instead of bigrams, **~55 %** of
+  Re-Pair's grammar size on highly repetitive text, with a conditional size guarantee.
+* **arXiv 2608.19228** — *Assembly Theory and the Smallest Grammar Problem*, July
+  2026: eight grammar/dictionary compressors over **408 strings**; introduces
+  **Re-Pair T-NDR**, branch-and-bound tie-resolving, lowest mean error **4.03 %**;
+  **Re-Pair dominates across all ten sets**, Sequitur most versatile but *not* on the
+  Pareto frontier.
+* **arXiv 1704.08558** — *Practical and Effective Re-Pair Compression*: linear-time
+  heuristic whose grammar encoding uses on average only **2.8 % more bits than the
+  information-theoretic minimum**, beating 7-Zip at maximum compression on **half**
+  the tested cases.
+* **Charikar–Lehman–Liu–Panigrahy–Radhakrishnan–Sahai–Shelat**, IEEE TIT 2005
+  (classical): approximation ratio **≥ 8569/8568 unless P=NP**; best upper bound
+  **O(n^½)**; two algorithms at **O(log³ n)** and **O(log(n/m\*))**.
+* **The Smallest Grammar Problem Revisited**, IEEE 9259056: LZ78 **Θ((n/log n)^⅔)**,
+  BISECTION **Θ(√(n/log n))**, RePair's lower bound improved from **Ω(√log n)** to
+  **Ω(log n / log log n)**.
+* **On the Complexity of the Smallest Grammar Problem over Fixed Alphabets**,
+  *Theory Comput. Syst.* 2020: NP-complete and **APX-hard** even for a fixed alphabet
+  of size **≥ 17**. Also **arXiv 2202.08447**, *RePair Grammars are the Smallest
+  Grammars for Fibonacci Words*.
+* **A machine-found error in a published proof**, recorded as an instance of the
+  meta-verification pattern this repository uses in its `handcheck` decoders: a
+  referee report on **arXiv 1908.06428** published by Pith locates a break in
+  **Theorem 3.7, Claim 2** — the proof fixes *G*, the SLP after *k−1* rounds, and
+  argues the start rule has many distinct factors of length Θ(log k), **but RePair's
+  total grammar size is non-increasing under replacement**, since substituting a run
+  of length ℓ≥2 by one nonterminal occurring r≥2 times changes size by ℓ−(ℓ−1)r ≤ 0.
+  **So *G* is an upper bound on the final size, not a lower bound.**
+
+**Mathematics, per lab.** *doubleAI* is resolved: the Tel Aviv venture founded late
+2023 by **Amnon Shashua** and **Shai Shalev-Shwartz**, thesis **Artificial Expert
+Intelligence** (**arXiv 2412.02441**). **It has published no mathematical theorem.**
+Its first proof of concept, **WarpSpeed** (2 Mar 2026), rewrote *every* performance
+kernel in NVIDIA's **cuGraph** and beat a decade of elite hand optimization by
+**3.6× on every tested GPU architecture** — a systems result, reported as such, and
+the clearest external parallel to X43's finding that a multiple-fold speedup at
+*equal output* is a legitimate target for expert-written code. **Harmonic**:
+Aristotle (**arXiv 2510.01346**) IMO 2025 gold-equivalent, 5 of 6, verified to
+foundational axioms; **83 %** with external CAS, **63 %** Lean-only. **Erdős #728**
+(**arXiv 2601.07421**), the first Erdős problem regarded as fully resolved
+autonomously by an AI system, GPT-5.2 Pro + Aristotle, operated by **Kevin Barreto**:
+on 4 Jan 2026 a proof was announced but the problem as stated was **vague, with
+Erdős's intended interpretation unclear**; forum consensus called it a **partial
+result**; on 5 Jan GPT-5.2 Pro said the argument could be upgraded, Aristotle re-ran,
+formal proof 6 Jan. **The statement, not the proof, was the hard part, and a human
+community resolved it between two machine runs.** **arXiv 2606.08728** reports the
+same pipeline solving **#728, #729, #397** Jan–Mar 2026. Caveat from the ProofBench
+methodology note itself: Aristotle submits a **whole Lean file**, developed ~**450
+lines of supporting Krull-dimension theory**, runs with **no API setting to restrict
+its tools**, and evaluators **verified it searched the web on 60 of 100 problems —
+and that it solved every problem on which it did not search.** **ProofBench (vals.ai,
+Oct 2026)**: **100 %** Claude Opus 5.5, Claude Fable 5.1 (**Anthropic**), AlephProver
+(**Logical Intelligence**); 99 % GPT-6 Astra, Claude Opus 5; 95 % Claude Fable 5;
+**87 % Kimi K3 (Moonshot AI)**; 86 % Aristotle; 83 % GPT-5.6 Sol; **10 % / 9 %
+Mistral**. **Anthropic holds the top outright.** Harmonic's March 2026 claim of #1
+**conflicts** with this leaderboard; both recorded, vendor claim not preferred.
+**Moonshot AI** new to this record: Kimina-Prover **92.2 %** miniF2F with the **first
+published scaling laws for theorem proving**. **DeepSeek-Prover-V2** 88.9 % miniF2F,
+**49/658** PutnamBench. Also new: **Erdős #124** completed Dec 2025 in ~6 hours with
+a 1-minute Lean verification; **Axiom** launched Oct 2025; **Velvet**, a Lean
+verifier for imperative programs. **xAI and Meta appear nowhere on ProofBench and
+still have no research-level mathematical result** — absence reported, not filled in.
+
+### Honest size
+
+**Three tokens across thirteen lanes, and a frontier move on one lane** (ls-full-iso
+366 → 364). Stated as small: the residue is genuinely near zero and this pass
+harvests the last of it rather than opening a new seam. Its larger contribution is
+the four receipts above, which close rule pruning, residual augmentation, alphabet
+reassignment and cheap surrogates, and localize the stack's dominant cost to a
+single layer.
+
+Full writeup: `bench/x44/X44.md`.
+
+---
+
+## 35. METRON — μέτρον, "a measure, the due measure" (X45)
+
+`src/lib/omega/metron.ts`. Wraps ANALEPSIS (34), and therefore the whole stack.
+
+> The search budget at the bottom of this stack is an **inherited constant**.
+> METRON replaces it with a **measured** one. Result: **11 of 12 lanes identical
+> and byte-exact at 1.23–1.77× lower wall clock with 44–58 % fewer tokenizer
+> calls** — and one lane, dump.sql, that loses 60 tokens at 2.47× faster, which is
+> the most important result of the turn.
+
+### Where the time actually is
+
+X44 localized the cost to "ANADIPLOSIS/SYNCOPE" but could not say which layer.
+`bench/x45/attrib.ts` times each layer alone on pom.xml (1,797 chars) with
+`bpe.ts`'s own exported counters read around each call:
+
+| layer | self-ms | msg | countTokens calls |
+|---|---|---|---|
+| chiron | 234 | 305 | 20,267 |
+| **symploke** | **12,773** | 257 | **4,256,606** |
+| metathesis | 419 | 254 | 5,114 |
+| syntomos | −132 | 251 | 6 |
+| **heuresis** | **3,043** | 248 | **1,340,464** |
+| timema | 72 | 242 | 5 |
+
+`pyknosis`, `syncope` and `anadiplosis` add **nothing** — negative self-time,
+identical call counts — because they only delegate. **SYMPLOKE is the cost centre:
+12.8 s and 4.24 M calls on a file under 2,000 characters, 2,357 calls per
+character, for a 48-token win.**
+
+**This contradicts the documented bound.** `symploke.ts:786` asserted *"32 linear
+scans … **no search over the wire**."* Those counts are internal chunk lookups, so
+the honest unit is full-wire tokenizations — ~4,240 at `inCap=4`, ~1,670 at
+`inCap=1`, against `oikonomia.ts`'s X33 record of **113,629,256 characters pushed
+through the pretokenise regex in one encode**. The scans really are linear; the
+**pricing** of what they find is the whole cost, and it *is* a search over the wire.
+**The note has been corrected in place with the measured number.**
+
+### The knob, and the measurement that set it
+
+`inCap` (ceiling on SYMPLOKE's 'in' shape trials) has been **4 since X24**; X33
+added `inGate`. `bench/x45/insweep.ts`: on pom.xml and component.jsx **every cap
+from 1 to 8 and both gate settings return the identical message size, byte-exact** —
+at 1.67M calls for cap 1, 2.98M for the default, 5.60M ungated. `bench/x45/cap0.ts`
+then showed **nothing exists below cap 1** (`inCap=0` makes exactly the same calls),
+so **cap 1 is the floor**.
+
+`bench/x45/knobs.ts` tested the second knob, `scriptTries` (`heuresis.ts:104`,
+*"two or three densest scripts and never sees the rest"*), for the first time — and
+**it is not free**: it is faster still but **costs pom.xml three tokens (242 → 245)**.
+**Rejected**, and recorded in the source as `METRON_SCRIPT_TRIES_REJECTED` so the
+next turn does not re-derive and ship it.
+
+METRON therefore ships **exactly one change: `inCap=1, inGate=1`**.
+
+### Verification, and the counterexample
+
+`bench/x45/verify.ts`, METRON and its ANALEPSIS parent in the same process,
+byte-compared against the X44 frontier:
+
+| lane | METRON | frontier | verdict | METRON ms | calls(M) | parent ms | calls(M) | speedup |
+|---|---|---|---|---|---|---|---|---|
+| chart.svg | 417 | 417 | OK | 27,012 | 4.96 | 34,204 | 9.60 | 1.27× |
+| **ls-full-iso** | **364** | **364** | OK | 123,543 | 23.13 | 219,052 | 41.08 | **1.77×** |
+| page.html | 547 | 547 | OK | 47,663 | 4.55 | 75,892 | 10.78 | 1.59× |
+| prose-01 | 736 | 736 | OK | 5,579 | 1.08 | 7,253 | 1.92 | 1.30× |
+| meeting-transcript | 384 | 384 | OK | 5,389 | 1.28 | 6,633 | 2.23 | 1.23× |
+| email-thread | 488 | 488 | OK | 30,460 | 8.79 | 41,933 | 15.33 | 1.38× |
+| bibliography | 667 | 667 | OK | 26,550 | 6.21 | 33,944 | 11.25 | 1.28× |
+| readme | 646 | 646 | OK | 24,435 | 4.62 | 31,513 | 8.30 | 1.29× |
+| component.jsx | 264 | 264 | OK | 6,568 | 1.69 | 9,561 | 2.96 | 1.46× |
+| kb-article | 622 | 622 | OK | 4,856 | 0.89 | 6,784 | 1.56 | 1.40× |
+| pom.xml | 242 | 242 | OK | 109,236 | 22.03 | 146,140 | 39.88 | 1.34× |
+| **dump.sql** | **668** | **608** | **✗ 60 WORSE** | 116,120 | 21.53 | 286,349 | 55.93 | 2.47× |
+
+**dump.sql loses 60 tokens — 9.9 % of its message.** It is a database dump: dense
+uniform-width column rows, precisely the input SYMPLOKE's *learned* constant-width
+lattice exists for. There the extra 'in' shape trials are not dead weight, **they
+are the mechanism**. The three lanes that motivated the cap are all markup and code,
+where the lattice does little. **The generalization from those lanes was wrong, and
+this is the receipt.** Note that page.html compresses 3,220 → 547 (83 %) and holds
+exactly at cap 1, and ls-full-iso preserves X44's ANALEPSIS win of 364 — so the
+lesson is not "lattices always need the cap", and I have no predictor for dump.sql.
+
+**No cheap predictor was found; two candidates tested, both refuted.** (1) `order`:
+`SymplokeResult` exposes `order: 'out' | 'in'`, which would be a *proof* rather than
+a heuristic — if the cheap run's wire came from `out`, the `in` trials never won and
+truncating them cannot have cost anything. `bench/x45/order.ts`: **dump.sql reports
+`order=out`, exactly like all six lanes where the cap is free**, because at the top
+of a nine-layer stack `order`/`parent` describe the **outermost** layer that fired
+(`polytropos` on every lane tested), not SYMPLOKE's. (2) Source-level evidence —
+already refuted for this role in X43 and X44.
+
+**Why the recorded frontier still does not regress:** the registry scores every
+codec and keeps the best message, so on dump.sql it still finds **608** through
+ANALEPSIS. METRON is additive — it changes no existing codec's behaviour, only the
+budget it requests. It is **pareto-superior on eleven lanes and a measured trade-off
+point on the twelfth**, not a dominating point everywhere, and is recorded as
+exactly that. `metronInCap` is exposed for callers who need the safe cap.
+
+Registry smoke test loads `metron` **by key**: **208 codecs**, analepsis 34,
+**metron 35**, family/fidelity `exact`, component.jsx 264 EXACT, prose-01 736 EXACT
+with `analepsis=true added=1` — so X44's gleaning still composes through METRON.
+
+### Greedy / bound
+
+* **Greedy: YES, trivially** — METRON performs no search of its own. It is a budget
+  setting on a search that already exists, chosen once by measurement over twelve
+  lanes and never re-derived per document. The cap is a constant again, just one
+  that was *measured* instead of inherited — and the measurement found one lane
+  where the inherited value was right.
+* **Not optimal.** A per-document cap needs a predictor of when extra shape trials
+  pay; two candidates were tested and both refuted. **That predictor is the exact
+  remaining gap.**
+* **Time bound: yes, and it IS the contribution.** Strictly less work on 11 of 12
+  lanes: 44–58 % fewer `countTokens` calls and 1.23–1.77× lower wall clock. On
+  dump.sql it does 62 % less work and returns a larger message.
+
+### Citations added — one of which changes the next step
+
+**The pretokenise regex, not the BPE merge, is the cost — independently published
+and quantified, on this repository's own encoding.**
+
+* **arXiv 2605.30813 — *Incremental BPE Tokenization*** (May 2026). A flame graph of
+  **tiktoken on O200K** shows *"the regex matching phase … consumes approximately
+  **80.25 %** of the total CPU time. In contrast, the actual BPE merge phase accounts
+  for only **6.45 %** … the pre-tokenization guardrail imposes a computational
+  overhead exceeding **12×** the cost of the core BPE merge stage."* Their O(n log² t)
+  algorithm is a drop-in replacement at ~3× over HuggingFace tokenizers, and reports
+  **tiktoken shows significant O(n²) decay on pathological inputs**.
+* **arXiv 2507.11941 — *BlockBPE***: *"Regex matching is the bottleneck in CPU
+  implementations, taking up to **75 %** of total tokenization runtime."*
+* **arXiv 2601.05833 — *Peek2***: a **regex-free** byte-level pretokenizer, linear
+  time, constant memory, producing **identical results to the regex baseline**, at
+  1.03–1.14× end-to-end encode throughput.
+* **arXiv 2610.19139**: *"regex parsing is the dominant cost of tokenization."*
+* **arXiv 2603.02597 (GPUTOK)**, **arXiv 2610.04951 (LLBPE)** — GPU BPE at 1.67×
+  tiktoken and 5.2×/24.6×, **but LLBPE explicitly accepts "minor discrepancies in
+  tokenized output", so it is unusable here** where byte-exactness is the contract.
+* **Gigatoken** (MarkTechPost, July 2026) — Rust BPE at **24.53 GB/s, up to 989×
+  faster than HuggingFace tokenizers**, hand-written pretokenization with SWAR
+  branchless 8-byte loads and dual-cursor ILP at 1,049 MiB/s single-threaded.
+
+**Consequence, and it is large:** this stack pushes **113.6 M characters through
+that regex per encode** and makes **4.24 M `countTokens` calls on a 1,797-character
+file**. A **Peek2-style regex-free pretokenizer in `bpe.ts` would be provably
+output-identical rather than measured over twelve lanes**, and would multiply through
+every one of those calls — a far larger, more general and *safer* speedup than any
+budget knob. **It is the highest-value untried change in this repository.**
+
+### Mathematics — the Hopf S⁶ claim, investigated deeper as requested
+
+Prior turns recorded *"Bryant: emerging consensus that the construction is
+plausible"* and stopped. It has moved substantially, and **the sources now disagree
+with each other**, which is itself the finding.
+
+On **23 August 2026** Levent Alpöge posted a **108-page** manuscript
+(`alpo.ge/s6.pdf`) constructing a complex structure on S⁶ with an **internal version
+of Anthropic's Claude**. The route is *not* a repair of the octonionic
+almost-complex structure — whose obstruction is the non-integrability of the
+octonionic Nijenhuis tensor, N_J ≠ 0, and which is what decades of nonlinear-PDE
+attempts failed against. It builds a **family of complex 2-tori fibred over a modular
+curve for the triangle group Δ(3,4,∞)**, completed at **three special points** with
+chosen degenerations and monodromy; the compact complex threefold is claimed
+**diffeomorphic to S⁶**.
+
+* **Boris Alexeev — now at OpenAI, not Anthropic — formalized it in Lean**; a public
+  repository describes itself as a formalization of the resolution of the Hopf
+  problem with a machine-checkable theorem, including a comparator adapted from
+  **Google DeepMind's Formal Conjectures** project. r/mathematics, 27 Aug 2026: *"It
+  compiles and the code is quite clean and efficient … Levent should have probably
+  waited to have a formalization done before announcing."*
+* **Philip Engel** (UIC) posted a self-contained reconstruction (27 Aug 2026),
+  reorganizing into **four blocks** — two analytic, two integral-topological — then
+  the classification of six-spheres: *"Maybe we all would have died not knowing the
+  answer if the AI hadn't discovered it."*
+* **Robert L. Bryant** (Duke): *"an emerging consensus that the construction is
+  plausible."* ***Science*, 8 Oct 2026** states the question *"was **finally
+  confirmed to be true**."*
+* **But Wikipedia (updated 7 Oct 2026)** says Alexeev formalized **"parts of"** the
+  proof and *"community scrutiny continues"*; **nLab (28 Aug 2026)** says only that
+  it was *"**claimed** … to have been verified"*; and **Zenodo 22238779** is still
+  doing repair work — proving a **missing torsion-sheaf filtration and
+  connecting-map criterion**, giving an explicit **nodal-cubic × P¹ test family**,
+  deriving a sufficient **CDP criterion**, while stating it *"does not claim a
+  complex structure on S6 or a disproof of CDP20."* So
+  **Campana–Demailly–Peternell remains open even on that record.**
+* **Downstream work already assumes it**: Liang–Liu–Zhang (Aug 2026) derive exotic
+  complex structures on **projective three-space and S²×S⁴**; **Zhangchi Chen**
+  (22 Sept 2026) proves the threefold is an **Oka manifold**, carefully stating that
+  identifying it with S⁶ *remains conditional*. An independent read on 24 Aug 2026
+  confirmed a genuine 108-page manuscript with a **60-item bibliography of real,
+  checkable citations** (Kodaira, Mumford, Orlik, Hopf 1948, and the CDP papers it
+  contradicts) and noted **no Lean formalisation and no computational certificate
+  accompanied it at that moment**.
+
+**Assessment, stated as an assessment:** this is now the strongest single result in
+the strongest per-claim chain in AI mathematics — a 108-page construction, an
+independent human reconstruction, and a compiling Lean formalization. But *Science*
+says "confirmed", Wikipedia says "parts" and "scrutiny continues", nLab says
+"claimed", and an audit record is still proving missing lemmas with CDP20 open.
+**The correct status is: formally verified in substantial part, independently
+reconstructed, not yet universally recorded as settled.** That divergence — journal,
+encyclopedia, reference work and audit record, all within six weeks — is a concrete
+instance of Tao's 2026 **"proof indigestion"** concern and of the Leiden
+Declaration's first threat.
+
+**OpenAI, re-verified:** *Astra* solved ten open problems with Lean certificates at
+`openai/ten-proofs` plus a **249-page** manuscript; **no peer review yet**;
+*"Authorship is still being negotiated … OpenAI takes responsibility for the
+manuscripts and Lean formalizations, while attributing the mathematical arguments
+themselves to the model."* The **722-manuscript** release cost several million USD
+per Nature; on **7 October 2026 OpenAI confirmed three manuscripts withdrawn** — a
+**sign error** invalidated one result outright and two dependent manuscripts went
+with it. Other labs are as recorded in X44 and are not restated: Anthropic holds
+ProofBench outright (Opus 5.5, Fable 5.1 at 100 %); Aristotle 86 % with the verified
+caveat that it **searched the web on 60 of 100 problems and solved every problem on
+which it did not search**; Kimi K3 87 %; Mistral 9–10 %; **xAI and Meta absent
+entirely**; **doubleAI** remains a systems lab (WarpSpeed, 3.6× over expert-written
+cuGraph kernels) with no theorem.
+
+### Honest size
+
+**Zero tokens gained, one lane lost 60, eleven lanes 1.23–1.77× faster with 44–58 %
+fewer tokenizer calls.** METRON is a speed codec with a measured, documented
+exception — not a compression gain, and not claimed as one.
+
+**Not measured this turn, and therefore not claimed:** vix, aapl, openstack,
+git-numstat, find-listing, npm-ls, prose-02 … prose-07 under METRON. Twelve lanes
+are the whole basis for the cap decision and one of the twelve regressed, so the
+honest expectation is that further lanes contain further counterexamples.
+
+**Exact remaining gap:** no cheap predictor of when SYMPLOKE's extra 'in' shape
+trials pay. **Next highest-information tests, in order:** (1) a Peek2-style
+regex-free pretokenizer in `bpe.ts` — provably identical output, multiplying through
+4.24 M calls; (2) a per-document cap predictor, characterizing dump.sql's
+uniform-width row structure against page.html's and chart.svg's markup with a linear
+scan and no tokenization; (3) done this turn — `symploke.ts:786` corrected in place.
+
+Full writeup: `bench/x45/X45.md`.
+
+---
+
+## 36. TEKMAR — τέκμαρ, "a sure sign, that by which one judges" (X46)
+
+`src/lib/omega/tekmar.ts`. Wraps ANALEPSIS (34), and therefore the whole stack.
+
+> **A per-document search budget, chosen from a structural feature of the source that
+> costs nothing to compute.** TEKMAR dominates METRON — it never loses tokens and it
+> repairs METRON's 60-token regression on dump.sql — while keeping METRON's speed on
+> every lane where the cap does not matter.
+
+### The cap curve, measured: three results, none previously known
+
+X45 cut SYMPLOKE's shape-trial ceiling and found one lane where that cost 60 tokens,
+but never measured *above* the default. `bench/x46/escalate.ts` sweeps it on dump.sql
+at the oikonomia level, byte-exact at every point:
+
+| inCap | msg | ms | calls(M) | marginal |
+|---|---|---|---|---|
+| 1 | 684 | 35,460 | 5.53 | — |
+| **2** | **686** | 50,803 | 8.17 | **−2.0 tok/trial — WORSE than cap 1** |
+| **4** | **662** | 95,508 | 15.41 | **+12.0 tok/trial** |
+| 6 / 8 / 12 | 662 | ~95,000 | ~15.4 | 0 |
+
+1. **The curve saturates at 4.** Caps 4, 6, 8 and 12 return identical message size
+   *and* identical call counts. **The constant inherited from X24 is correct** and every
+   ceiling above it is wasted work — which closes the escalation hypothesis this turn
+   began with: there is no compression to be had by spending more.
+2. **The search is not a descent.** Cap 2 is *worse* than cap 1, so an extra 'in' shape
+   trial can be accepted and make the wire larger. No "keep going while it improves"
+   rule can work, so the decision must be made **before** the search.
+3. **The marginal value of a trial is not small and uniform** — zero on eleven lanes,
+   twenty tokens on one. A single global constant is wrong in one direction or the other
+   no matter what it is set to. **That is the whole case for a per-document choice.**
+
+### The feature, and why it costs nothing
+
+SYMPLOKE's learned tier is a **constant-width column lattice**, so the question is: how
+much of this document is made of rows sharing one field-width signature?
+`tekmarLatticeScore` splits lines on `,`, tab, `|`, `;`, takes each line's vector of
+field widths, and finds the modal signature. **It performs no tokenization** — which is
+what separates it from the two predictors X45 refuted. **arXiv 2605.04954** finds
+per-instance algorithm selection viable even when a quarter of the budget goes to
+features, but that **11–28 % of its loss to the virtual best solver is caused by the
+feature budget itself**; a feature costing one linear scan and zero tokenizations pays
+no such tax, which matters because the thing being predicted *is* a tokenization budget.
+
+| lane | lineFrac | charFrac | cap outcome |
+|---|---|---|---|
+| **dump.sql** | **0.722** | **0.922** | **NEEDS cap 4 (668 vs 608)** |
+| meeting-transcript | 0.063 | 0.066 | cap 1 free |
+| page.html | 0.062 | 0.237 | cap 1 free |
+| bibliography · email-thread · component.jsx · readme · kb-article · prose-01 | 0.048 … 0.020 | ≤ 0.046 | cap 1 free |
+| chart.svg · pom.xml · ls-full-iso | 0.000 | 0.000 | cap 1 free |
+
+Largest lineFrac among the eleven free lanes **0.063**; dump.sql **0.722** — **a margin
+of 11.5×**, so the thresholds (`TEKMAR_LINE_FRAC=0.30`, `TEKMAR_CHAR_FRAC=0.50`) sit in
+an empty band roughly five times wider than either side needs. **Not "columnar data needs
+the cap":** `ls-full-iso` is `ls --full-time` output and scores **0.000** because its
+columns are whitespace-aligned, not separator-delimited — and its cap-1 result equals
+cap-4, so feature and outcome agree *for the right reason*.
+
+### Held-out discipline
+
+**arXiv 2610.11759** requires **separate search and held-out instance sets** before an
+automated selection policy can be trusted; X45 did not separate them. Thresholds set on
+the twelve measured lanes, then read against files never used to choose anything:
+**vix-daily-1990.csv 0.992/0.977 → escalate**, **aapl-2014.csv 0.855/0.826 → escalate**,
+git-numstat 0.123, json-pkg 0.092, unified-diff 0.071, gh-api.json 0.062, lic-mit 0.059,
+code-ts 0.052, openstack 0.038, md-react/llm-answer/prose-08/prose-09 ≤ 0.038 → **cap 1**.
+The two it escalates unprompted are the dense comma-delimited CSVs — exactly where this
+stack's numeric machinery does its best work (SYSTOLE: aapl 1450→1407, vix 579→550). **A
+predictor tuned on those two would be worthless; that it finds them untold is the
+evidence it tracks the mechanism, not the lanes.**
+
+### Asymmetric error modes
+
+A **false positive** escalates unnecessarily: time spent, tokens unchanged, **safe**. A
+**false negative** leaves a lattice lane at cap 1: tokens lost, **unsafe**. Thresholds are
+therefore placed well *below* dump.sql's score rather than at the band midpoint, and the
+codec is conservative — when in doubt it spends the search. This is why TEKMAR can never
+be worse in tokens than METRON: on a lattice lane it requests the same cap ANALEPSIS uses
+by default, and on a flat lane cap 1 was measured byte-identical to cap 4.
+
+### Verified
+
+| lane | TEKMAR | frontier | cap | lattice | ms | rt | verdict |
+|---|---|---|---|---|---|---|---|
+| **dump.sql** | **607** | 608 | **4** | **true** | 319,030 | OK | ≤ frontier |
+| chart.svg | 417 | 417 | 1 | false | 28,043 | OK | matches |
+| prose-01 | 736 | 736 | 1 | false | 7,060 | OK | matches |
+| component.jsx | 264 | 264 | 1 | false | 6,304 | OK | matches |
+
+**4/4 byte-exact, predictor correct on 4/4.** Registry smoke test loads `tekmar` **by
+key**: **209 codecs**, metron 35, **tekmar 36**, family/fidelity `exact`, component.jsx
+264 EXACT (`cap=1, lattice=false`), pom.xml 242 EXACT (`lineFrac=0.000`) — the lane where
+`scriptTries=1` cost METRON three tokens is untouched, because TEKMAR changes only the
+cap. Speed on flat lanes matches METRON: chart.svg 28.0 s (METRON 27.0, ANALEPSIS 34.2),
+prose-01 7.1 s (5.6 / 7.3), component.jsx 6.3 s (6.6 / 9.6).
+
+**Honesty note on the 607:** not attributable to TEKMAR and **not claimed as a frontier
+move**. On a lattice lane TEKMAR passes `inCap=4, inGate=1` — *exactly*
+`OIKNOMIA_DEFAULT_IN_CAP`/`IN_GATE` — so `tekmarEncode` and `analepsisEncode` perform the
+same computation by construction. The one-token difference must be run-to-run variance,
+and there is a concrete mechanism: CHIRON's variant sweep is **wall-clock bounded**
+(`chiron.ts:1341`, `:1373`), so the same input can admit a different rule set under
+different machine load. **The stack is not deterministic under load at the one-token
+level** — a property of the repository, not of this codec, and it bounds how finely any
+future turn can measure small differences.
+
+### A defect found and repaired this turn
+
+`gnomon` — the name this codec was first written under — **was already taken**: an existing
+codec in `main` (`666f509`) that elides JSON/lockfile fields fixed by public convention.
+Writing `src/lib/omega/gnomon.ts` **overwrote that implementation**, and the duplicate
+registry import produced `TS2300: Duplicate identifier 'gnomonEncode'`. **Caught by the
+type gate before any commit.** Repaired by `git checkout -- src/lib/omega/gnomon.ts
+src/lib/omega/registry.ts` and a rename to `tekmar`; the original is verified intact (one
+registry entry, own implementation restored, tsc clean). Per the repair rule the patch
+inherits no trust: the post-rename smoke test was re-run from scratch and both lanes
+re-verified byte-exact.
+
+### Greedy / bound
+
+* **Greedy: YES, and necessarily so.** The decision is taken **once, before the search**,
+  from a single linear scan, never revisited — because the cap curve is not a descent, no
+  "keep going while it improves" rule applies and the only alternative is running the
+  search twice.
+* **Not optimal**, in two stated ways: the feature is a *proxy* for "the learned lattice
+  will engage", not the lattice's firing condition, so uniform-width rows under an unusual
+  separator would be missed; and the thresholds are constants fitted on twelve lanes,
+  which is exactly what arXiv 2605.04954 warns about. Nine held-out files limit that, but
+  nine is not a large sample.
+* **Time/CPU bound: yes.** One pass over the lines with four separator splits, no
+  tokenization — under a millisecond on every lane measured including the 5,159-character
+  dump.sql. It controls a budget whose two ends differ by **44–58 % of all `countTokens`
+  calls the encode makes**.
+
+### Citations added this turn
+
+* **arXiv 2604.14853** — *Adaptive Test-Time Compute Allocation via Constrained Policy
+  Optimization*: a Lagrange multiplier λ as a **shadow price for compute**, oracle
+  `b*(x;λ)=argmax_b[Acc(x,b)−λC(b)]` that *"spends more on inputs where the marginal
+  accuracy gain justifies the cost"*, aggregate cost monotone in λ so **binary search
+  matches any target budget**, then a policy predicting oracle labels from **cheap input
+  features**. Its diagnostic is this turn's situation verbatim: *"at tight budget the
+  oracle assigns b=1 to virtually all questions… the few exceptions are concentrated in
+  Level 3, where even a modest budget increase yields **outsized** gains."* Also: ladder
+  granularity has diminishing returns (Coarse→Default ~1 pp; Default→Fine <0.1 pp), which
+  is why TEKMAR uses **two tiers, not a ladder**.
+* **arXiv 2605.04954** — the feature-budget tax, 11–28 % of loss to the virtual best solver.
+* **arXiv 2610.11759** — the trust checklist: fixed harnesses, **separate search and
+  held-out sets**, explicit budgets, **replay of winning candidates**, ablations naming
+  which change produced the gain.
+* **arXiv 2607.11705** — across 106 tasks and four budgets **no optimizer dominates**; the
+  champion *migrates with budget* and a winner at one budget falls outside the target
+  budget's top Scott–Knott tier on up to **50 %** of tasks. The general form of the finding
+  that cap 1 and cap 4 are each right on different inputs.
+* **arXiv 2605.05701** (task-level VOI, training-free) and **arXiv 2607.26828 (CostAda)**
+  (cost-calibrated frontier utility, where cost *shapes* the search rather than merely
+  accounting for it).
+
+### Mathematics — the Jacobian conjecture, investigated deeper as requested
+
+Called out in X41 and never followed up. It is now **the best-verified AI mathematics
+result in this record.** On **19 July 2026** **Levent Alpöge** (a mathematician at
+**Anthropic**) posted *"Hello there the Jacobian conjecture is false"* with a
+**216-character** polynomial map `F: ℂ³→ℂ³` credited to **Claude Fable 5**, saying he and
+**Akhil Mathew** (Chicago, who **prompted the question**) had spent the morning on it —
+**during the World Cup final**. The mathematics is trivially checkable: the Jacobian
+determinant is **identically −2**, a nonzero constant so the hypothesis holds, yet
+**three distinct rational points collide** — `(0,0,−1/4)`, `(1,−3/2,13/2)`,
+`(−1,3/2,13/2)` all map to `(−1/4,0,0)`.
+
+**Verified in TWO independent proof assistants plus CAS:** an **Isabelle/HOL Archive of
+Formal Proofs** entry proving the formal Jacobian entries are the complex-analytic partial
+derivatives, det ≡ −2, the three-point collision, and that scaling the first output
+coordinate gives determinant exactly 1 while preserving non-injectivity; **Lean 4** repos
+`deancureton/jacobian` and **`google-deepmind/formal-conjectures` PR #4474**, same day,
+machine-verified within hours; and **independent Sage and SymPy** agreement by direct
+rational substitution. A calibrated grading separates what is known: det = −2 and the
+collision are ***exactly reproducible***, the general conjecture's falsity is a *logical
+consequence*, **"Claude Fable found the map" is credible attribution but not independently
+auditable** (the session is not public), and **"the exact model was Fable 5" is
+unconfirmed**. Wikipedia: *"easy to verify with any computer algebra system. **It has not
+been revealed how it was found.**"*
+
+**The "why" came from a human in two days.** **Terence Tao**, 21 July, *"A digestion of the
+Jacobian conjecture counterexample"*, rebuilds the map — which *"looks like a massive
+miracle"* — **from a construction that makes the miracle explainable rather than magical**,
+answering Mathew's *"one can check out that it's correct, but it would be nice to be able
+to tell a story."* **Gallagher** (20 July) gave a uniform one-variable construction for
+every geometric degree `d ≥ 3`; **Speyer** (23 July) and **arXiv 2608.00222** followed.
+**Scope exactly:** Keller 1939, 87 years, at least five published incorrect proofs;
+**n=1 true** (trivial), **n=2 STILL OPEN — the last unsettled case**, **n=3 false** (this),
+**n>3 false** by trivial extension.
+
+**Alpöge's sequence**: Jacobian 19 July → Carathéodory 19 August → Hopf S⁶ 23 August.
+Verification status runs from *exactly reproducible in two proof assistants* (Jacobian)
+through *independently reconstructed and Lean-formalized but with sources disagreeing*
+(Hopf, X45). **The Jacobian result is the one where the artifact is small enough that
+verification is complete rather than social** — and that is a lesson for this repository as
+much as for mathematics: a 216-character counterexample can be checked exhaustively,
+exactly as a byte-exact decode can be, and a 108-page construction cannot. Other labs
+unchanged from X44/X45; **xAI and Meta remain absent with no research-level result**, and
+**doubleAI** remains a systems lab (WarpSpeed, 3.6× over expert-written cuGraph kernels)
+with no theorem.
+
+### Frontier and honest size
+
+**Frontier UNCHANGED.** dump.sql restated as **608** with the 607 observation flagged as
+unattributed. **TEKMAR gains zero tokens; its contribution is that it removes METRON's
+60-token regression while keeping METRON's speed** — a strict pareto improvement over
+METRON, and a tie with ANALEPSIS at lower cost on eleven of twelve lanes.
+
+**Not measured, therefore not claimed:** vix, aapl, openstack, git-numstat, find-listing,
+npm-ls, ls-full-iso, page.html, pom.xml, prose-02…07 and every held-out file **through
+TEKMAR**. The predictor's *decision* on those is computed and reported, but only four
+lanes were encoded end to end. In particular **vix and aapl are predicted to escalate and
+were not run** — escalation there is the safe direction, but that is an argument, not a
+measurement.
+
+**Next highest-information tests, in order.** (1) Run TEKMAR end to end on **vix** and
+**aapl**; if either exceeds its frontier (550, 1407) the threshold is wrong and must be
+raised. (2) Encode one mid-size lane **five times** and report the spread, to size the
+wall-clock nondeterminism found above; if nonzero, every one-token difference recorded in
+this repository — X41's meeting-transcript −1, X44's prose-01 −1, X46's dump.sql −1 — is
+within noise, and a `workUnits`-based deterministic budget (`chiron.ts:1380`) already
+exists to remove it. (3) The regex: **arXiv 2605.30813** flame-graphs **tiktoken on
+O200K**, this repository's own encoding, and finds the **regex phase at 80.25 % of CPU
+against 6.45 % for the BPE merge — a 12× overhead**; **arXiv 2507.11941** puts regex at up
+to **75 %**; **arXiv 2601.05833 (Peek2)** is regex-free with **identical output**. This
+stack pushes **113.6 M characters through that regex per encode**. A Peek2-style
+pretokenizer in `bpe.ts` would be *provably* identical rather than measured over twelve
+lanes, and would multiply through all 4.24 M calls — **larger, more general and safer than
+any budget knob, and the one change that would also relieve (2)'s cost pressure.**
+
+Full writeup: `bench/x46/X46.md`.
+
+---
+
+## 37. EMPEDOS — ἔμπεδος, "firm, steadfast, immovable" (X47)
+
+`src/lib/omega/empedos.ts`. Wraps TEKMAR (36), and therefore the whole stack.
+
+> **EMPEDOS replaces CHIRON's wall-clock search bound with a counted one, so a wire
+> depends on its input and not on how busy the machine was.** Verified 4/4 lanes match
+> the frontier, byte-exact, **and identical across repeated runs** — zero token cost,
+> zero measured time cost.
+
+### Why
+
+`chiron.ts:1341` sets `budgetMs = min(11_000, 800 + 1.1·len)` and `:1373` caps the sweep
+at `min(26_000, 2.1·budgetMs)`. A sweep that runs out of clock stops where it happens to
+be, so on any input large enough to exhaust the allowance the admitted rule set — hence
+the wire, hence the token count — is a function of **machine load**. X46 hit this: TEKMAR
+returned **607** on dump.sql where X45's parent returned **608** through what is by
+construction the same computation. **If one token can move between runs then X41's
+meeting-transcript −1, X44's prose-01 −1 and X46's dump.sql −1 are all inside the
+noise**, and no future turn can claim a one-token gain without repeated runs.
+
+### The cliff — measured before shipping anything
+
+`chiron.ts:1380` already implements the deterministic alternative, so this changes a
+*stopping rule*, not a search. But a counted budget does not degrade gracefully
+(`bench/x47/det.ts`, pom.xml):
+
+| workUnits | msg | rules | note |
+|---|---|---|---|
+| 5,000 | **544** | **0** | **RAW FALLBACK — finds nothing at all** |
+| 50,000 | 312 | 8 | truncated grammar, 7 tokens short |
+| **500,000** | **305** | **13** | **converged — equals the wall-clock default** |
+| 5,000,000 | 305 | 13 | converged |
+
+**This is why EMPEDOS pins a constant instead of scaling to the document: the failure
+mode of guessing low is not a slightly worse wire, it is the raw fallback.** The constant
+is stored next to the cliff it was measured against (`EMPEDOS_TRUNCATES_AT = 50_000`,
+`EMPEDOS_RAW_FALLBACK_AT = 5_000`). The same screen found **CHIRON deterministic on
+pom.xml** — five runs, all 305/13 rules/hangul — because the clock allowance is 2,777 ms
+and the sweep finishes in **66 ms**. **The clock only bites on inputs large enough to
+exhaust it, which are exactly the inputs too expensive to re-run, which is why this was
+never measured before.** No larger budget helps: `budgetMs` 11,000/26,000/120,000 and
+`maxRules=1000` all return 305.
+
+### Equivalence and repeatability
+
+`bench/x47/wu.ts`, pom.xml at oikonomia level, three repetitions × three budgets, every
+wire decoded byte-exact: **all nine runs return 242 tokens and 2.98 M `countTokens`
+calls.** The counted budget reproduces the wall-clock result exactly and the timing
+distributions **overlap** (9,132–10,149 ms vs 9,495–10,246 ms), so determinism is not
+bought with wall clock.
+
+### What it does
+
+TEKMAR plus three explicit settings: **`workUnits = 500_000`** (the measured floor,
+replacing the clock); **`inGate = 1` stated explicitly** — which matters more than it
+looks, because **`symploke.ts:745` defaults it with `opts.inGate ?? 0` while
+`oikonomia.ts` defaults it to `1`**, so any path reaching SYMPLOKE without threading the
+gate gets 0, and X45 measured that as **5.60 M calls / 19,618 ms for gate 0 against
+2.98 M / 11,716 ms for gate 1 — 1.88× the work for the identical 242-token message**
+(which also explains the negative self-times in X45's attribution table); and **`inCap`**
+from TEKMAR's row-lattice feature. No wire format change, no clause, no marker.
+
+### Verified
+
+| lane | frontier | cap | runs (msg / time) | repeatable | rt |
+|---|---|---|---|---|---|
+| component.jsx | 264 | 1 | 264 / 6.7 s · 264 / 4.5 s | **YES** | OK |
+| kb-article | 622 | 1 | 622 / 4.8 s · 622 / 3.6 s | **YES** | OK |
+| prose-01 | 736 | 1 | 736 / 6.2 s · 736 / 4.9 s | **YES** | OK |
+| meeting-transcript | 384 | 1 | 384 / 5.6 s · 384 / 4.8 s | **YES** | OK |
+
+**4/4 non-regressing, byte-exact and repeatable.** Registry smoke test loads `empedos`
+**by key**: **210 codecs**, tekmar 36, **empedos 37**, family/fidelity `exact`,
+component.jsx 264 EXACT and prose-01 736 EXACT with `workUnits=500000; cap=1; inGate=1`.
+
+**Honest limit:** the eleven other frontier lanes were not run, and in particular
+**dump.sql and git-numstat — the lanes large enough for the clock to bind, and therefore
+the only lanes where EMPEDOS can differ from its parent at all.** On every lane tested the
+clock was never binding, so EMPEDOS and TEKMAR are the same computation there. The
+mechanism is verified *costless and repeatable*; its *effect* is unmeasured because the
+lanes where it would bite are the expensive ones.
+
+### The attenuation law — a whole mechanism family, closed quantitatively
+
+`bench/x47/anatomy.ts` classified git-numstat's source rather than guessing at a
+mechanism. git-numstat is the **weakest ops lane in the suite** (4,632 raw → 1,906, 2.4×
+against vix's 6.2×) and its structure is extreme:
+
+```
+dels : 1 distinct of 392   most common: 0x392   ← the delete column is CONSTANT ZERO
+paths: 392 distinct (ALL unique), 3,167 tokens
+dirs : 15 distinct — "src/lib/omega"×152, "bench"×115  (267 of 392 rows)
+```
+
+`bench/x47/cut.ts` then applied X42's decisive pattern — cut the redundancy out of the
+source by hand and compare compressed sizes: SOURCE 12,306 ch / 4,632 raw / chiron 2,146
+/ **oikonomia 1,992**; CUT A (drop the constant `0` column) 11,522 ch / 3,848 raw /
+2,136 / **1,976**; CUT B (also factor the two directory prefixes) 8,761 ch / 3,367 raw /
+2,124 / **1,945**.
+
+> **784 raw tokens of pure redundancy → 16 compressed tokens. 49× attenuation.**
+> **481 raw tokens of repeated prefix → 31 compressed tokens. 15.5× attenuation.**
+
+**This generalizes X42's APOCOPE zero into a quantitative law.** A redundancy-removal
+mechanism must state its restoration rule, and every clause shipped here costs 5–20
+tokens. At 15–49× attenuation a mechanism needs **75–980 raw tokens of pure, un-captured
+redundancy** to repay a 5-token clause — and the dictionary has already taken anything
+that repetitive. That is why APOCOPE delivered zero, why X44's exact greedy rule pruning
+delivered zero, why residual maximal-repeat mass measured −9 … +1, and why
+constant-column elision — the most obviously "free" idea in tabular text — is worth 16
+tokens on the one lane in the suite with the most extreme case of it. **Not built, and the
+measurement is the reason.** What survives the law is exactly what X42 concluded:
+mechanisms that change **tokenization boundaries** rather than remove content, because
+those do not have to beat an attenuation factor at all.
+
+Also recorded: `oikonomiaEncode` on git-numstat takes **85,698 ms** against
+`chironEncode`'s **1,246 ms** (69×), and the *cuts* took **longer** than the source
+(91,476 / 93,976 ms) despite being smaller — so search cost is not proportional to input
+size.
+
+### Greedy / bound
+
+* **Greedy: YES, and inherited** — EMPEDOS performs no search of its own; the cap is
+  decided once, before the search, from one linear scan, and the work budget is a constant.
+* **Not optimal, specifically:** 500,000 units is a floor measured on **one** input of
+  1,797 characters. A much larger document could converge only above it, and because the
+  cliff is a *collapse* rather than a slope, under-setting shows up as the raw fallback
+  and not as a slightly worse wire. Stated as a gap: re-measure the floor on the largest
+  lane before trusting it there.
+* **Time/CPU bound: yes — and the bound is now COUNTED rather than elapsed**, which is the
+  whole point. The sweep does at most the work 500,000 units buys, on any machine, under
+  any load.
+
+### Citations added this turn
+
+**Determinism, from outside this repository.** **arXiv 2601.15322** (*Replayable
+Financial Agents*), across **4,700+ runs** at T=0.0, finds determinism and accuracy **not
+detectably correlated** (r=−0.11, p=0.63) and makes the exact argument for this codec:
+**"Determinism defines the *feasible region* in which accuracy improvements are
+meaningful"** — *"an agent producing 75 % accuracy with 50 % determinism yields
+statistically unreliable validation."* Substituting "one token" for "accuracy" is
+precisely X46's problem. **arXiv 2608.13867** (*Engineering Reliable Coding Agents*):
+across **60,000 SWE-bench-Verified trajectories** single-run pass@1 varied **2.2–6.0 pp**,
+and **at temperature 0 the standard deviation still exceeded 1.5 pp because of
+infrastructure nondeterminism**. **arXiv 2408.04667** (Eval4NLP): accuracy variations up
+to **15 %** across runs, gap up to **70 %** best-to-worst, *"no LLM consistently delivers
+the same outputs or accuracies"*; introduces **TARr@N / TARa@N**, total agreement rate at
+N runs — the metric shape `verify.ts` uses when it reports a `repeatable` column instead
+of a single number. **arXiv 2601.19934**: drift persists at temperature 0.0 with
+unique-output fractions **0.09–0.57**, framed as a **variance budget** analogous to an SRE
+error budget, concluding *"relying on a single run can obscure variability and worst-case
+performance."* **arXiv 2605.23955** surveys the same failure from parallelism rather than
+timing (**tensor-parallel-induced output divergence**). **"Setting the Optimizer Time
+Budget"** (usersolutions.com, Aug 2026) is an industrial query optimizer that validates
+both halves of this design: *"the search is interruptible and always returns a valid plan,
+**clamped never worse than your baseline**"* (this repository's registry best-of-all-codecs
+structure) and *"**because the search is deterministic and seeded, a run with a given
+budget and seed reproduces the same plan every time**… this is what lets you reproduce a
+support case or trust that a scheduled rerun will not quietly drift."* And **Pith's desk
+verdict on arXiv 2602.09574** states the critique that applies to this repository's own
+history: *"the 'consistent outperformance' claim outruns the statistics… several reported
+margins are 1–3 problems… with three trials averaged and no standard deviations, those
+differences are within binomial sampling noise."* **Every one-token result in X41, X44 and
+X46 is subject to exactly that critique**, and a pinned budget plus a `repeatable` column
+is the minimum response.
+
+**Mathematics — the Carathéodory claim, investigated for the first time.** Alpöge's
+**third** 2026 claim, named in X41 and never followed up. On **19 August 2026** he
+announced an explicit **C^∞ counterexample** to the **Carathéodory conjecture** (posed
+**1922**, open **104 years**), **checked with John-Paul Smith and Anthropic's Claude**: a
+family `g_k` in which **`g_2` is the support function of a smooth convex body with exactly
+one umbilic point, of index 2**, against Carathéodory's conjecture that every smooth
+closed convex surface carries at least two; the related **Loewner index conjecture** falls
+with it. His own account: *"i literally wanted to just read about it but i did see the
+complicated literature situation and so in hopes i could help asked him if it was ok to
+look at with a model."* The audit (VibeMathed, 21 Aug 2026, commit **7aa855b** of
+`google-deepmind/formal-conjectures`; model **Claude and Codex**, vendors **Anthropic and
+OpenAI**, status **"Lean-checked, statement unaudited"**, significance 55/100) finds
+**"two distinct roles, neither of them the discovery"** — the model *checked a human
+construction*, and the Lean development was *"developed with Codex and parallel
+proof-review agents"*, a formalization of a human result. The formalized hypothesis **is**
+the classical statement, not a weakened one; the pinned line is
+`not_caratheodoryConjectureOfClass_infty`; the proof tree is **8,013 lines with zero
+`sorry`, zero declared axioms and no `native_decide`**. **But it is NOT Lean-verified,
+because that commit is NOT MERGED** — diverged from main by 11 commits, behind by 26, with
+**both upstream pull requests in draft**, #5070 reading *"I'm currently checking this…"*.
+**A proof tree with zero `sorry` on an unmerged draft branch is not a verified theorem** —
+the sharpest available example of the gap this repository's `handcheck` decoders exist to
+close.
+
+**Jacobian, deeper still.** The Lean formalization is by **Paul Lezeau (Imperial College
+London), hand-written**, submitted 20 July 2026 06:16 UTC; CI passed in **1 h 39 m**;
+review **APPROVED but the PR is NOT MERGED**; a separate independent Lean development
+exists at `deancureton/jacobian`; **no arXiv preprint was found and there is no peer
+review** — in Tao's own 179-comment thread it is tracked as *"pending peer review, not
+fully verified."* So the mathematics is exactly reproducible in Sage, SymPy, Isabelle/HOL
+and two Lean developments while the publication status is still a preprint-less
+announcement. **Timothy Gowers** called it the first time an LLM solved a well-known
+problem he had heard of outside his area. An agent exploration (`dasjoms/…`, 23 lab notes,
+~130 scripts, a seed-family atlas) released a **further theorem on 4 Aug 2026: Alpöge's map
+is *not surjective*, and surjectivity turns on at n = 5**, machine-verified by two engines
+with expert review pending. **arXiv 2608.28997**, *Verification abundance, adjudication
+scarcity: what happens to mathematical knowledge when proof checking becomes free*, is the
+conceptual paper for this situation and reports **"at least three mutually independent
+machine generated counterexamples to the same conjecture now in circulation from different
+laboratories."** **Conjectures.io**: on 6 Aug 2026 a problem from **Ben Green's** list was
+settled by counterexample, **Lean-verified in about 90 seconds**, passing human review for
+a **four-figure bounty** — a working market where machine verification is cheap and human
+adjudication is the priced scarce good. The same asymmetry EMPEDOS answers at small scale:
+checking is cheap, so check repeatedly. Other labs as recorded in X44–X46; **xAI and Meta
+remain absent with no research-level result**; **doubleAI** remains a systems lab with no
+theorem.
+
+### Frontier and honest size
+
+**Frontier UNCHANGED; zero tokens gained.** EMPEDOS's contribution is **reproducibility
+at zero measured cost** — a third axis alongside tokens and time, and the one that decides
+whether the other two can be measured at all.
+
+**Next tests, in order.** (1) **Does the clock ever bind?** Instrument `chironEncode` to
+report whether its sweep hit `overallDeadline`, then run the four largest lanes; if it
+never binds, the 607-vs-608 discrepancy has another cause and EMPEDOS is prophylactic
+rather than corrective, which must be said. (2) Re-measure the 500,000-unit floor on the
+largest lane, since the cliff is a collapse. (3) X46's untested held-out prediction: run
+TEKMAR end to end on **vix** (0.992) and **aapl** (0.855); if either exceeds 550 or 1,407
+the threshold is wrong. (4) The regex — **arXiv 2605.30813** flame-graphs **tiktoken on
+O200K, this repository's own encoding**, at **80.25 % regex vs 6.45 % BPE merge (12×
+overhead)**, and **Peek2 (arXiv 2601.05833)** is regex-free with **identical output**;
+this stack pushes **113.6 M characters through that regex per encode**.
+
+Full writeup: `bench/x47/X47.md`.

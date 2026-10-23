@@ -1,0 +1,25 @@
+// X41 hand-decode artifact: the FULL message as a bare LLM receives it.
+import * as fs from 'node:fs';
+import { systoleEncode, systoleApply, systoleUndo } from '@/lib/omega/systole';
+import { countTokens } from '@/lib/omega/bpe';
+const enc: any = 'o200k_base';
+const p = process.env.F!;
+const t = fs.readFileSync(p, 'utf8');
+const r: any = systoleEncode(t, enc);
+const contract: string = r.contract ?? '';
+const wire: string = r.wire;
+console.log('systole         ', r.systole, JSON.stringify(r.systoleTemplates));
+console.log('messageTokens   ', r.messageTokens, '= contract', countTokens(contract, enc), '+ wire', countTokens(wire, enc));
+console.log('gain            ', r.systoleGain, 'raw', r.systoleRawSave);
+console.log('--- CONTRACT ---');
+console.log(contract);
+fs.mkdirSync('/tmp/x41', { recursive: true });
+fs.writeFileSync('/tmp/x41/msg.txt', contract + '\n' + wire);
+fs.writeFileSync('/tmp/x41/src.txt', t);
+console.log('--- first 260 chars of message ---');
+console.log((contract + '\n' + wire).slice(0, 260));
+console.log('--- round trip of the contraction alone ---');
+const app = systoleApply(t, r.systoleTemplates);
+console.log('contracted first line:', JSON.stringify(app.split('\n')[1] ?? app.split('\n')[0]));
+console.log('restored  first line:', JSON.stringify(systoleUndo(app, r.systoleTemplates).split('\n')[1] ?? ''));
+console.log('identical            :', systoleUndo(app, r.systoleTemplates) === t);

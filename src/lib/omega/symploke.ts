@@ -784,4 +784,14 @@ export function symplokeDecode(wire: string, opts: SymplokeDecodeOpts = {}): str
 }
 
 export const SYMPLOKE_BUDGET_NOTE =
-  'time-bound: 32 linear scans (4 fixed shapes + 5 group-counts x 7 separators) plus one O(n) pass per enabled shape; no sampling, no backtracking, no search over the wire.';
+  'time-bound: 32 linear scans (4 fixed shapes + 5 group-counts x 7 separators) plus one O(n) pass per enabled shape; no sampling, no backtracking. ' +
+  // X45 CORRECTION. The sentence this note used to end with was "no search over
+  // the wire", and bench/x45/attrib.ts measured that to be wrong about what
+  // dominates: on pom.xml (1,797 chars) SYMPLOKE alone takes 12,773 ms and makes
+  // 4,236,339 countTokens calls, 2,357 per character, against chiron's 234 ms and
+  // 20,267. Those are internal chunk lookups, so the honest unit is full-wire
+  // tokenizations -- about 4,240 at inCap=4 and about 1,670 at inCap=1, per
+  // oikonomia.ts's X33 record of 113,629,256 characters pushed through the
+  // pretokenise regex in one encode. The scans really are linear and bounded; the
+  // PRICING of what they find is the whole cost, and it is a search over the wire.
+  'priced by full-wire tokenization: measured ~4,240 wire tokenizations at inCap=4 and ~1,670 at inCap=1 on a 1,797-char input (X45).';

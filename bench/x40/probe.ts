@@ -1,0 +1,12 @@
+import * as fs from 'node:fs';
+import { peritropeEncode } from '@/lib/omega/peritrope';
+const enc: any = 'o200k_base';
+const t = fs.readFileSync('bench/holdout-ops/find-listing.txt', 'utf8');
+const r: any = peritropeEncode(t, enc);
+console.log('r.contract        =', JSON.stringify(r.contract));
+const w: string = r.wire;
+console.log('indexOf("Before") =', w.indexOf('Before'));
+console.log('indexOf("swap")   =', w.indexOf('swap'));
+console.log('indexOf("expand") =', w.indexOf('expand'));
+console.log('first 200 chars   =', JSON.stringify(w.slice(0, 200)));
+console.log('last 200 chars    =', JSON.stringify(w.slice(-200)));

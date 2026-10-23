@@ -1,0 +1,12 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { apocopeChoose, apocopeApply, apocopeClauseFor } from '@/lib/omega/apocope';
+const t = readFileSync('bench/holdout-tab/vix-daily-1990.csv', 'utf8').replace(/\r/g, '');
+const lines = t.split('\n');
+const head = lines.slice(0, 4).join('\n') + '\n';
+const ch = apocopeChoose(t, 'o200k_base' as any);
+const cutAll = apocopeApply(t, ch);
+const cutHead = cutAll.split('\n').slice(0, 4).join('\n') + '\n';
+writeFileSync('/tmp/x42-src-head.txt', head);
+writeFileSync('/tmp/x42-cut-head.txt', cutHead);
+console.log('CLAUSE:', apocopeClauseFor(ch));
+console.log('CUT HEAD:'); console.log(cutHead);
