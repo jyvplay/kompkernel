@@ -3902,3 +3902,302 @@ prose-adjacent lanes that move, by four tokens and one; kb-article has one struc
 numeric run in the whole file, prose-01 two, together worth three tokens.**
 
 Full writeup: `bench/x41/X41.md`.
+
+---
+
+## 32. APOCOPE — ἀποκοπή, "a cutting off" (X42)
+
+`src/lib/omega/apocope.ts`. Wraps SYSTOLE (31). Deletes **constant digits at the
+edges of a numeric template**, restoring them from the template.
+
+> **THE MEASURED GAIN IS ZERO ON EVERY LANE.** APOCOPE is registered, byte-exact
+> and independently verifiable, and it is recorded here because a frontier needs
+> its negative results in the same place as its positive ones. It is **not** an
+> improvement, and on the two lanes that trigger it, it is **slower**. The durable
+> output of X42 is the three floors in §"Why zero" below, which close off the
+> whole numeric direction rather than just this codec.
+
+### Mechanism
+
+SYSTOLE established that a **separator** can be deleted because its *position* is
+implied by the shape of the number. APOCOPE pushes the same argument onto the
+**digits**: if every occurrence of a template carries the same digit at the same
+position, that digit carries no information and can be deleted and stated once.
+
+| lane | observation |
+|---|---|
+| `vix-daily-1990.csv` | all 504 prices end `0000` — a **fixed precision** |
+| `vix-daily-1990.csv` | all 126 dates begin `19900` — a **fixed period** |
+| `aapl-2014.csv` | all 240 dates begin `2014` |
+
+A fixed precision and a fixed period are the same observation in different
+clothes, and both are ubiquitous in operational data: every price in one currency
+and precision, every record from one day, every build id from one release train.
+
+**Only a prefix and a suffix — never an interior position.** A reader-capacity
+limit, not an encoder convenience: `prepend 2014` and `append 0000` are single
+local edits, whereas an interior deletion forces the reader to interleave two
+digit strings by counting into both — the procedural task **arXiv 2605.02028**
+shows models fail at across 126 model variants.
+
+**Only when 100 % constant.** One exception turns the affix into an exception
+list, which is a second conditional rule; that is where silent corruption starts.
+
+**Versus a mechanism already in the dead list.** "Fixed-precision trailing zeros"
+is dead *without the template framing*: a global trailing-zero strip is not
+invertible because the reader cannot know how many zeros to restore. Inside a
+template the width is fixed, so the restored count is determined. APOCOPE is the
+invertible version of that idea — which is why it was worth building.
+
+**Composition.** Separators are removed first, then the affix is cut from the
+resulting digit string; decoding restores the affix first, separators second. The
+reader keys a run by the width surviving *both* steps, so SYSTOLE's
+one-template-per-width rule is inherited on the surviving width.
+
+**Clause, priced before chosen** (`bench/x42/clause.ts`, six wordings):
+
+```
+Restore 4:2014-##-##, 9:1##.#######.
+Restore 3:1990-0#-##, 4:##.##0000.
+```
+
+**+1 token on aapl, +3 on vix** over the SYSTOLE clause it replaces. A bare form
+without the surviving width is ~4 tokens cheaper and was **rejected**: the width
+is the key the reader matches runs against, and dropping it converts a lookup
+into a count (CharBench, arXiv 2508.02591).
+
+### Result — zero, with a real time cost
+
+All lanes **EXACT** byte-round-trip; all ship the parent unchanged because the
+gate rejects APOCOPE.
+
+| lane | SYSTOLE | APOCOPE | raw priced | time |
+|---|---|---|---|---|
+| vix-daily-1990.csv | 550 | **550** | 756 | 705 → **814 s** |
+| aapl-2014.csv | 1407 | **1407** | 283 | 289 → **418 s** |
+| other 14 lanes | unchanged | unchanged | 0 | unchanged |
+
+Eleven further held-out files never used in any prior turn (`code-dts`, `code-ts`,
+`gh-api.json`, `gh-prose`, `json-pkg`, `lic-mit`, `license`, `md-react`,
+`md-vite`, `llm-answer.md`, `unified-diff.patch`) produced **zero candidate
+templates at all**. The gate costs a **third** full stack encode (+15 % vix,
++45 % aapl); `APOCOPE_MIN_RAW = 20` makes it free on the other fifteen.
+
+### Why zero — three floors
+
+**(1) The cut text is HALF the size raw and compresses to the same thing.**
+`bench/x42/screen10.ts`:
+
+| lane | source raw | cut raw | source → stack | cut → stack |
+|---|---|---|---|---|
+| vix | 3412 | **1774** (−48 %) | 550 | ~530–550, rejected |
+| aapl | 3108 | **2062** (−34 %) | 1407 | ≥1387, rejected |
+
+Removing **1,638 raw tokens** from vix moved the compressed size by **zero**. The
+stack's output is pinned to the *information content*, not the raw size — the
+strongest evidence in this repository that the stack is at its ceiling. (The
+screen's own prediction of 756 under-measured by >2×, having priced digits in
+isolation and missed boundary effects; the full raw delta is the honest number.)
+
+**(2) `ceil(W/3)` is a HARD floor for digit runs — proven exhaustively, not
+estimated.** `bench/x42/digittok.ts` tokenized **all 1,110,000 digit strings of
+length 1–6**: lengths 1/2/3 are single tokens **100 %** of the time; lengths
+4/5/6 are single tokens **0.00 %** of 10,000 / 100,000 / 1,000,000. `1990`,
+`2024`, `2026`, `1000`, `0000`, `1024`, `4096` are all **2 tokens**. Inserting
+`.` `,` `-` ` ` or nothing at any interior position of a real 9- or 10-digit price
+**never beat the bare run**. On the shipped aapl message the 364 digit runs hold
+2,300 digits and cost **823 tokens**; `sum(ceil(W/3))` over the same runs is
+**also 823** — **headroom exactly zero**. Reducing a digit run's token count
+therefore requires reducing the *number of digits*, and there is no other route.
+
+**(3) The non-digit layer is also at its floor.** `bench/x42/glyph.ts` on the same
+payload: 786 non-digit characters, 76 distinct, 535 tokens, per-character entropy
+**5.89 bits** → **8.66 bits/token** — *above* the 8-bit byte ceiling and ~2× below
+the `log2(200000) = 17.6`-bit vocabulary limit; at the usual 6-bits/token rule of
+thumb it would cost 772 tokens instead of 535. Raising bits/token by reassigning
+the glyph alphabet is blocked by a general argument, not a measurement: the
+decoder is a bare LLM in one chat box, so any mapping must be **stated in the
+message**, and 76 mappings cost more than the ~142 tokens they could save. This
+independently explains why "in-situ CHIRON glyph reassignment" is dead.
+
+**(4) The dictionary already hoists constants.** APOCOPE deletes redundancy; the
+stack's dictionary *is* a redundancy engine; the dictionary wins on its own
+ground. Visible in the wire — the aapl message opens `201412Отөк8...` with the
+year `2014` emitted **exactly once**. The transform APOCOPE proposes has already
+been performed before APOCOPE sees the text.
+
+> **General lesson, refining X41's:** what survives the stack is
+> tokenization-**boundary** change, not redundancy removal. SYSTOLE and PERITROPE
+> pay because removing a separator or swapping a character changes *where the
+> tokenizer can cut*, which no dictionary can do. APOCOPE only removes redundancy,
+> which the dictionary already eats for free.
+
+### Independent reference decode of the clause
+
+The mechanism never ships, but it still meets the contract every codec here must:
+**a bare reader given only the clause text can restore the data.**
+`bench/x42/handcheck.py` is an independently written Python decoder that parses
+`Restore 3:1990-0#-##, 4:##.##0000.` with a regex and rebuilds the vix head from
+the cut text. It does **not** import `apocope.ts`.
+
+```
+cut      : 102,1724,1724,1724,1724
+restored : 1990-01-02,17.240000,17.240000,17.240000,17.240000
+md5(source) == md5(restored) == 10481361b3b879c04d1f3037de9dfcb3
+```
+
+A receipt that the layer is **sound and literally readable** — not a receipt for a
+win. Artifacts: `bench/x42/vix-{SOURCE,CUT,RESTORED}-head.txt`, `hand.ts`.
+
+### Two further mechanisms refuted before being built
+
+`bench/x42/diag.ts`, all 17 lanes.
+
+**Case folding is dead.** **7 of 17 lanes negative** — capitalised word-initials
+often tokenize *cheaper* than lowercase: bibliography −20, page.html −15,
+email-thread −10, meeting-transcript −8, kb-article −4, openstack −3,
+component.jsx −2. Best positive: dump.sql +29 on 13 cased words, which does not
+survive a clause.
+
+**Phrase-level n-gram dictionaries are exhausted on prose.** Every prose lane has
+a **saturation ratio above 1** — the stack already removes *more* than the entire
+phrase-repeat budget: bibliography **4.40**, git-numstat 2.37, ls-full-iso 2.02,
+pom.xml 1.85, prose-01 1.66, component.jsx 1.60, meeting-transcript 1.60,
+email-thread 1.41, readme 1.08. Phrase repeats *are* far larger than word repeats
+(page.html: 105 word vs **3,384** phrase-4), which is why this was worth
+measuring — but an overspent budget cannot be harvested twice.
+
+### The prose gap, closed with numbers
+
+Twelve fresh prose holdouts in `bench/x30/fresh`, **ten never used in any prior
+turn**, encoded through the full stack (`bench/x42/prose.ts`), all **EXACT**:
+
+| lane | src | msg | instr | payload | c/tok |
+|---|---|---|---|---|---|
+| prose-01 | 785 | 737 | 11 | 726 | **4.12** |
+| prose-02 | 879 | 789 | 19 | 770 | 3.17 |
+| prose-03 | 1003 | 837 | 11 | 826 | 3.53 |
+| prose-04 | 877 | 836 | 11 | 825 | 3.50 |
+| prose-05 | 1070 | 920 | 11 | 909 | 3.16 |
+| prose-06 | 926 | 840 | 11 | 829 | 3.22 |
+| prose-07 | 861 | 809 | 16 | 793 | 3.86 |
+
+Raw English sits near 3.8–4.5 chars/token, so these payloads are at or **above**
+natural English density; on prose-02 the compressed stream is 3.17 c/tok against
+the source's own density, i.e. the stack is measurably *worse per character* than
+the untouched text there. Instruction overhead is **11 tokens** on every clean
+prose lane (1.4 %) — no overhead to reclaim.
+
+`bench/x42/screen9.ts` also closed an untested gap: prose-02..12 had **never**
+been passed through SYSTOLE. Their structured-numeric raw savings are 0–27
+tokens against a clause costing 15–19 — below threshold, and the ~20× attenuation
+through the stack makes them worthless. **Prose is now confirmed saturated by a
+fourth independent route.**
+
+### Citations — including those that cut against this codec
+
+* **arXiv 2402.14903** (Singh & Strouse) and the 2026 dev.to/ji_ai analysis both
+  argue for **adding** structure to numbers so a model can compute with them.
+  APOCOPE removes digits outright — a strictly larger step in the direction they
+  measure as harmful. A wire from this family is a worse substrate for downstream
+  arithmetic, and the token count does not see that cost.
+* **arXiv 2602.17004** §2.1.1 (Arcee Trinity Large): catastrophic backtracking in
+  digit-run regexes. APOCOPE reuses SYSTOLE's trimmed-and-resumed scanner and
+  never a nested lookahead.
+* **arXiv 2601.14658**: tokenizers admit **non-unique encodings** — a standing
+  caution for accounting done in tokens.
+
+Newly cited, on this codec's own substrate:
+
+* **arXiv 2604.13066** — *Lossless Prompt Compression via Dictionary-Encoding and
+  In-Context Learning*. The closest published analogue of this entire stack:
+  frequent subsequences become meta-tokens the model substitutes back, governed by
+  a token-savings condition `(1+f)·n_token(M) + n_token(S)`. It relies on a
+  **system prompt** for the dictionary, which this repository's one-chat-box
+  constraint forbids.
+* **arXiv 2605.29000** — strategic deletion with LLM reconstruction: at high
+  retention a **regular** deletion pattern beats random; under heavy compression a
+  Gaussian schedule overtakes it.
+* **arXiv 2609.35475** — *Spontaneous Context Restoration*: in attention-only
+  transformers, recovery from deleted/corrupted tokens **emerges despite training
+  exclusively on clean sequences**, with no denoising objective. The closest thing
+  to a theoretical licence for the restore-by-rule family SYSTOLE and APOCOPE
+  belong to.
+* **arXiv 2604.13006** — one instruction, *"don't use commas"*, shrinks responses
+  by up to **48 %**; GPT-4o-mini falls 472→216 words and loses 31 % coverage. A
+  formatting constraint is never free even when cheap to state.
+
+### Mathematics review — new sources
+
+**Leiden Declaration on Artificial Intelligence and Mathematics**, published
+**2 June 2026** by 16 mathematicians from 15 universities after a September 2025
+Lorentz Center workshop; endorsed by the **International Mathematical Union**;
+**arXiv 2609.35334**; August 2026 *Notices of the AMS*; **23 recommendations** at
+four levels. **1,854 signatures within a week**, ~2,000 by mid-June, including
+Fields Medalists **Tao, Scholze, Lindenstrauss, Hairer, Duminil-Copin, Maynard,
+Viazovska**. Five threats, first among them that automated techniques "can produce
+plausible but unreliable (or even incorrect) arguments which are difficult to
+distinguish from correct mathematical proofs."
+
+**"A Severe Misalignment of AI in Mathematics"**, **11 September 2026**,
+mathandai.org, signed by **25 Fields Medalists** (Tao, Scholze, Viazovska, Birkar,
+June Huh, Hairer, Kontsevich, Maynard, Bhargava, 2026 medallist **Yu Deng**),
+medal classes 1978–2026; **7,200 signatories by 16 September**. Scholze: *"I am
+pondering my mathematical ideas without use of AI, and generally avoid reading
+AI-generated text as best as I can."*
+
+These are a direct institutional verdict on X41's per-lab record: the Leiden
+threat list maps one-to-one onto OpenAI's 6 October 2026 release (722 manuscripts,
+372 families, unreleased model, three withdrawn within a day over a **sign error**,
+~58 % unchecked prose). The disclosure demanded is exactly what that release
+omitted — compute published, **no prompts, no model**.
+
+Labs not previously covered, graded individually:
+
+* **DeepSeek** — different in kind. **DeepSeekMath-V2** (27 Nov 2025,
+  **arXiv 2511.22570**), **685B** parameters, built **verifier-first**: a trained
+  verifier emits a natural-language analysis plus a score in {0, 0.5, 1} with
+  reward weights **α = 0.76** on proof score and **β = 0.24** on self-analysis,
+  and a **meta-verifier** reviews the verifier's own analysis. Gold-level IMO 2025
+  and CMO 2024, **118/120 Putnam 2024**, ~99 % IMO-ProofBench Basic (behind Gemini
+  Deep Think on Advanced). The meta-verifier is load-bearing: without it a learned
+  verifier can score correctly while **hallucinating the issues it claims to
+  find**; quality of verifier analyses rose **0.85 → 0.96** with score accuracy
+  held. This is a verification *architecture*, not a solved open problem — and the
+  most transferable idea here, because **`bench/x41/handcheck.py` is exactly a
+  meta-verifier**: an independently written decoder reviewing the encoder's claim
+  rather than trusting it.
+* **xAI** — **no research-level mathematical result found.** Grok 4.7 shipped
+  21 Sep 2026 (500K context) with benchmark scores only; Grok 4.20's four-agent
+  cross-verification (coordinator / research / logic-math / contrarian) is an
+  architecture claim, not a theorem. The absence is reported, not filled in.
+* **Meta** — **no research-level mathematical result found.** Muse Spark 1.2 ships
+  vendor-run numbers (82.9 % Terminal-Bench 2.1) explicitly not independently
+  verified.
+* **Google DeepMind** — unchanged and still the only lab with a *completed*
+  review: AlphaProof Nexus, 9 of 353 open Erdős problems (two open 56 years),
+  peer reviewed in **Science**, October 2026.
+
+Calibration still stands: of 700 open Erdős problems surveyed January 2026, **13
+addressed, 5 seemingly new, 8 already in the literature**.
+
+### Greedy / bound
+
+* **Greedy: NO** for affix selection (each priced on the real token count of the
+  text it produces; every surviving set re-verified for exact invertibility and
+  reader-unambiguity; fixed point because ambiguity is not monotone in the
+  template set) and **NO** for the parent gate (parent encoded, worse discarded).
+  Greedy in exactly one respect: templates considered in order of measured saving.
+* **Time/CPU bound: YES** for detection — one regex pass plus a
+  longest-common-prefix and longest-common-suffix over occurrences, both linear.
+  The gate costs a **third** full stack encode where the mechanism looks viable
+  (**814 s vix**, **418 s aapl**) and nothing where it cannot pay.
+
+### Honest size
+
+**Zero tokens on every lane measured.** Recorded as a shipped codec rather than an
+analysis note because the mechanism is real, general, byte-exact and independently
+verifiable — but it must not be counted as an improvement, and the two lanes it
+slows are a cost with no offsetting gain.
+
+Full writeup: `bench/x42/X42.md`.
