@@ -1,9 +1,10 @@
-# Session memory — X44
+# Session memory — X45
 
 # Current State
 
-**X44 ANALEPSIS is COMPLETE, committed and pushed.** Branch
-`arena/695387ad-kompkernel` = **`4cd2286`** ("X44 ANALEPSIS: post-hoc
+**X45 METRON is COMPLETE, committed and pushed.** See `git log --oneline -3`; the
+X45 tip carries METRON (index 35) plus a corrected `symploke.ts` budget note.
+Prior: **`71d7f9e`**/`4cd2286` (X44 ANALEPSIS, index 34) ("X44 ANALEPSIS: post-hoc
 maximal-repeat gleaning of the finished wire"), preceded by `2c66b58` (X43
 supplement+memory), `3a14916` (X43 KRISIS), `c24c454`/`e2633aa` (X42),
 `f99c97a`/`bee4117` (X41), `b5a990c` (X40). **PR #33** covers X40–X44.
@@ -12,8 +13,18 @@ intact at `2c66b58` with `node_modules` present. Still run
 `git ls-remote --heads origin | grep 695387ad` first; the branch name has now been
 stable for two consecutive sessions.
 
-**X44 HEADLINE: THE FRONTIER MOVED FOR THE FIRST TIME SINCE X41 — ls-full-iso
-366 → 364.** prose-01 also moved, 737 → 736. 13 lanes tested, **13/13 byte-exact,
+**X45 HEADLINE: SYMPLOKE IS THE STACK'S COST CENTRE, AND ITS SHAPE-TRIAL CAP IS
+DEAD WEIGHT ON 11 OF 12 LANES BUT WORTH 60 TOKENS ON THE TWELFTH.** METRON ships
+`inCap=1, inGate=1`: identical tokens and byte-exact on 11 lanes at **1.23-1.77x**
+lower wall clock with **44-58% fewer tokenizer calls** — and **dump.sql regresses
+608 -> 668 at 2.47x faster**, because a DB dump of uniform-width rows is exactly
+what SYMPLOKE's *learned* constant-width lattice exists for. No cheap predictor of
+which is which was found (two candidates tested, both refuted). The registry keeps
+the best across all 208 codecs, so the recorded frontier does NOT regress.
+**208 codecs total; analepsis 34, metron 35.**
+
+**X44 HEADLINE (still current): THE FRONTIER MOVED FOR THE FIRST TIME SINCE X41 —
+ls-full-iso 366 → 364.** prose-01 also moved, 737 → 736. 13 lanes tested, **13/13 byte-exact,
 zero regressions**. Total gain **3 tokens** — reported as 3 tokens, not dressed up.
 ANALEPSIS is registered at **index 34** (207 codecs total).
 

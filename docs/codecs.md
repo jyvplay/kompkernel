@@ -4878,3 +4878,246 @@ reassignment and cheap surrogates, and localize the stack's dominant cost to a
 single layer.
 
 Full writeup: `bench/x44/X44.md`.
+
+---
+
+## 35. METRON — μέτρον, "a measure, the due measure" (X45)
+
+`src/lib/omega/metron.ts`. Wraps ANALEPSIS (34), and therefore the whole stack.
+
+> The search budget at the bottom of this stack is an **inherited constant**.
+> METRON replaces it with a **measured** one. Result: **11 of 12 lanes identical
+> and byte-exact at 1.23–1.77× lower wall clock with 44–58 % fewer tokenizer
+> calls** — and one lane, dump.sql, that loses 60 tokens at 2.47× faster, which is
+> the most important result of the turn.
+
+### Where the time actually is
+
+X44 localized the cost to "ANADIPLOSIS/SYNCOPE" but could not say which layer.
+`bench/x45/attrib.ts` times each layer alone on pom.xml (1,797 chars) with
+`bpe.ts`'s own exported counters read around each call:
+
+| layer | self-ms | msg | countTokens calls |
+|---|---|---|---|
+| chiron | 234 | 305 | 20,267 |
+| **symploke** | **12,773** | 257 | **4,256,606** |
+| metathesis | 419 | 254 | 5,114 |
+| syntomos | −132 | 251 | 6 |
+| **heuresis** | **3,043** | 248 | **1,340,464** |
+| timema | 72 | 242 | 5 |
+
+`pyknosis`, `syncope` and `anadiplosis` add **nothing** — negative self-time,
+identical call counts — because they only delegate. **SYMPLOKE is the cost centre:
+12.8 s and 4.24 M calls on a file under 2,000 characters, 2,357 calls per
+character, for a 48-token win.**
+
+**This contradicts the documented bound.** `symploke.ts:786` asserted *"32 linear
+scans … **no search over the wire**."* Those counts are internal chunk lookups, so
+the honest unit is full-wire tokenizations — ~4,240 at `inCap=4`, ~1,670 at
+`inCap=1`, against `oikonomia.ts`'s X33 record of **113,629,256 characters pushed
+through the pretokenise regex in one encode**. The scans really are linear; the
+**pricing** of what they find is the whole cost, and it *is* a search over the wire.
+**The note has been corrected in place with the measured number.**
+
+### The knob, and the measurement that set it
+
+`inCap` (ceiling on SYMPLOKE's 'in' shape trials) has been **4 since X24**; X33
+added `inGate`. `bench/x45/insweep.ts`: on pom.xml and component.jsx **every cap
+from 1 to 8 and both gate settings return the identical message size, byte-exact** —
+at 1.67M calls for cap 1, 2.98M for the default, 5.60M ungated. `bench/x45/cap0.ts`
+then showed **nothing exists below cap 1** (`inCap=0` makes exactly the same calls),
+so **cap 1 is the floor**.
+
+`bench/x45/knobs.ts` tested the second knob, `scriptTries` (`heuresis.ts:104`,
+*"two or three densest scripts and never sees the rest"*), for the first time — and
+**it is not free**: it is faster still but **costs pom.xml three tokens (242 → 245)**.
+**Rejected**, and recorded in the source as `METRON_SCRIPT_TRIES_REJECTED` so the
+next turn does not re-derive and ship it.
+
+METRON therefore ships **exactly one change: `inCap=1, inGate=1`**.
+
+### Verification, and the counterexample
+
+`bench/x45/verify.ts`, METRON and its ANALEPSIS parent in the same process,
+byte-compared against the X44 frontier:
+
+| lane | METRON | frontier | verdict | METRON ms | calls(M) | parent ms | calls(M) | speedup |
+|---|---|---|---|---|---|---|---|---|
+| chart.svg | 417 | 417 | OK | 27,012 | 4.96 | 34,204 | 9.60 | 1.27× |
+| **ls-full-iso** | **364** | **364** | OK | 123,543 | 23.13 | 219,052 | 41.08 | **1.77×** |
+| page.html | 547 | 547 | OK | 47,663 | 4.55 | 75,892 | 10.78 | 1.59× |
+| prose-01 | 736 | 736 | OK | 5,579 | 1.08 | 7,253 | 1.92 | 1.30× |
+| meeting-transcript | 384 | 384 | OK | 5,389 | 1.28 | 6,633 | 2.23 | 1.23× |
+| email-thread | 488 | 488 | OK | 30,460 | 8.79 | 41,933 | 15.33 | 1.38× |
+| bibliography | 667 | 667 | OK | 26,550 | 6.21 | 33,944 | 11.25 | 1.28× |
+| readme | 646 | 646 | OK | 24,435 | 4.62 | 31,513 | 8.30 | 1.29× |
+| component.jsx | 264 | 264 | OK | 6,568 | 1.69 | 9,561 | 2.96 | 1.46× |
+| kb-article | 622 | 622 | OK | 4,856 | 0.89 | 6,784 | 1.56 | 1.40× |
+| pom.xml | 242 | 242 | OK | 109,236 | 22.03 | 146,140 | 39.88 | 1.34× |
+| **dump.sql** | **668** | **608** | **✗ 60 WORSE** | 116,120 | 21.53 | 286,349 | 55.93 | 2.47× |
+
+**dump.sql loses 60 tokens — 9.9 % of its message.** It is a database dump: dense
+uniform-width column rows, precisely the input SYMPLOKE's *learned* constant-width
+lattice exists for. There the extra 'in' shape trials are not dead weight, **they
+are the mechanism**. The three lanes that motivated the cap are all markup and code,
+where the lattice does little. **The generalization from those lanes was wrong, and
+this is the receipt.** Note that page.html compresses 3,220 → 547 (83 %) and holds
+exactly at cap 1, and ls-full-iso preserves X44's ANALEPSIS win of 364 — so the
+lesson is not "lattices always need the cap", and I have no predictor for dump.sql.
+
+**No cheap predictor was found; two candidates tested, both refuted.** (1) `order`:
+`SymplokeResult` exposes `order: 'out' | 'in'`, which would be a *proof* rather than
+a heuristic — if the cheap run's wire came from `out`, the `in` trials never won and
+truncating them cannot have cost anything. `bench/x45/order.ts`: **dump.sql reports
+`order=out`, exactly like all six lanes where the cap is free**, because at the top
+of a nine-layer stack `order`/`parent` describe the **outermost** layer that fired
+(`polytropos` on every lane tested), not SYMPLOKE's. (2) Source-level evidence —
+already refuted for this role in X43 and X44.
+
+**Why the recorded frontier still does not regress:** the registry scores every
+codec and keeps the best message, so on dump.sql it still finds **608** through
+ANALEPSIS. METRON is additive — it changes no existing codec's behaviour, only the
+budget it requests. It is **pareto-superior on eleven lanes and a measured trade-off
+point on the twelfth**, not a dominating point everywhere, and is recorded as
+exactly that. `metronInCap` is exposed for callers who need the safe cap.
+
+Registry smoke test loads `metron` **by key**: **208 codecs**, analepsis 34,
+**metron 35**, family/fidelity `exact`, component.jsx 264 EXACT, prose-01 736 EXACT
+with `analepsis=true added=1` — so X44's gleaning still composes through METRON.
+
+### Greedy / bound
+
+* **Greedy: YES, trivially** — METRON performs no search of its own. It is a budget
+  setting on a search that already exists, chosen once by measurement over twelve
+  lanes and never re-derived per document. The cap is a constant again, just one
+  that was *measured* instead of inherited — and the measurement found one lane
+  where the inherited value was right.
+* **Not optimal.** A per-document cap needs a predictor of when extra shape trials
+  pay; two candidates were tested and both refuted. **That predictor is the exact
+  remaining gap.**
+* **Time bound: yes, and it IS the contribution.** Strictly less work on 11 of 12
+  lanes: 44–58 % fewer `countTokens` calls and 1.23–1.77× lower wall clock. On
+  dump.sql it does 62 % less work and returns a larger message.
+
+### Citations added — one of which changes the next step
+
+**The pretokenise regex, not the BPE merge, is the cost — independently published
+and quantified, on this repository's own encoding.**
+
+* **arXiv 2605.30813 — *Incremental BPE Tokenization*** (May 2026). A flame graph of
+  **tiktoken on O200K** shows *"the regex matching phase … consumes approximately
+  **80.25 %** of the total CPU time. In contrast, the actual BPE merge phase accounts
+  for only **6.45 %** … the pre-tokenization guardrail imposes a computational
+  overhead exceeding **12×** the cost of the core BPE merge stage."* Their O(n log² t)
+  algorithm is a drop-in replacement at ~3× over HuggingFace tokenizers, and reports
+  **tiktoken shows significant O(n²) decay on pathological inputs**.
+* **arXiv 2507.11941 — *BlockBPE***: *"Regex matching is the bottleneck in CPU
+  implementations, taking up to **75 %** of total tokenization runtime."*
+* **arXiv 2601.05833 — *Peek2***: a **regex-free** byte-level pretokenizer, linear
+  time, constant memory, producing **identical results to the regex baseline**, at
+  1.03–1.14× end-to-end encode throughput.
+* **arXiv 2610.19139**: *"regex parsing is the dominant cost of tokenization."*
+* **arXiv 2603.02597 (GPUTOK)**, **arXiv 2610.04951 (LLBPE)** — GPU BPE at 1.67×
+  tiktoken and 5.2×/24.6×, **but LLBPE explicitly accepts "minor discrepancies in
+  tokenized output", so it is unusable here** where byte-exactness is the contract.
+* **Gigatoken** (MarkTechPost, July 2026) — Rust BPE at **24.53 GB/s, up to 989×
+  faster than HuggingFace tokenizers**, hand-written pretokenization with SWAR
+  branchless 8-byte loads and dual-cursor ILP at 1,049 MiB/s single-threaded.
+
+**Consequence, and it is large:** this stack pushes **113.6 M characters through
+that regex per encode** and makes **4.24 M `countTokens` calls on a 1,797-character
+file**. A **Peek2-style regex-free pretokenizer in `bpe.ts` would be provably
+output-identical rather than measured over twelve lanes**, and would multiply through
+every one of those calls — a far larger, more general and *safer* speedup than any
+budget knob. **It is the highest-value untried change in this repository.**
+
+### Mathematics — the Hopf S⁶ claim, investigated deeper as requested
+
+Prior turns recorded *"Bryant: emerging consensus that the construction is
+plausible"* and stopped. It has moved substantially, and **the sources now disagree
+with each other**, which is itself the finding.
+
+On **23 August 2026** Levent Alpöge posted a **108-page** manuscript
+(`alpo.ge/s6.pdf`) constructing a complex structure on S⁶ with an **internal version
+of Anthropic's Claude**. The route is *not* a repair of the octonionic
+almost-complex structure — whose obstruction is the non-integrability of the
+octonionic Nijenhuis tensor, N_J ≠ 0, and which is what decades of nonlinear-PDE
+attempts failed against. It builds a **family of complex 2-tori fibred over a modular
+curve for the triangle group Δ(3,4,∞)**, completed at **three special points** with
+chosen degenerations and monodromy; the compact complex threefold is claimed
+**diffeomorphic to S⁶**.
+
+* **Boris Alexeev — now at OpenAI, not Anthropic — formalized it in Lean**; a public
+  repository describes itself as a formalization of the resolution of the Hopf
+  problem with a machine-checkable theorem, including a comparator adapted from
+  **Google DeepMind's Formal Conjectures** project. r/mathematics, 27 Aug 2026: *"It
+  compiles and the code is quite clean and efficient … Levent should have probably
+  waited to have a formalization done before announcing."*
+* **Philip Engel** (UIC) posted a self-contained reconstruction (27 Aug 2026),
+  reorganizing into **four blocks** — two analytic, two integral-topological — then
+  the classification of six-spheres: *"Maybe we all would have died not knowing the
+  answer if the AI hadn't discovered it."*
+* **Robert L. Bryant** (Duke): *"an emerging consensus that the construction is
+  plausible."* ***Science*, 8 Oct 2026** states the question *"was **finally
+  confirmed to be true**."*
+* **But Wikipedia (updated 7 Oct 2026)** says Alexeev formalized **"parts of"** the
+  proof and *"community scrutiny continues"*; **nLab (28 Aug 2026)** says only that
+  it was *"**claimed** … to have been verified"*; and **Zenodo 22238779** is still
+  doing repair work — proving a **missing torsion-sheaf filtration and
+  connecting-map criterion**, giving an explicit **nodal-cubic × P¹ test family**,
+  deriving a sufficient **CDP criterion**, while stating it *"does not claim a
+  complex structure on S6 or a disproof of CDP20."* So
+  **Campana–Demailly–Peternell remains open even on that record.**
+* **Downstream work already assumes it**: Liang–Liu–Zhang (Aug 2026) derive exotic
+  complex structures on **projective three-space and S²×S⁴**; **Zhangchi Chen**
+  (22 Sept 2026) proves the threefold is an **Oka manifold**, carefully stating that
+  identifying it with S⁶ *remains conditional*. An independent read on 24 Aug 2026
+  confirmed a genuine 108-page manuscript with a **60-item bibliography of real,
+  checkable citations** (Kodaira, Mumford, Orlik, Hopf 1948, and the CDP papers it
+  contradicts) and noted **no Lean formalisation and no computational certificate
+  accompanied it at that moment**.
+
+**Assessment, stated as an assessment:** this is now the strongest single result in
+the strongest per-claim chain in AI mathematics — a 108-page construction, an
+independent human reconstruction, and a compiling Lean formalization. But *Science*
+says "confirmed", Wikipedia says "parts" and "scrutiny continues", nLab says
+"claimed", and an audit record is still proving missing lemmas with CDP20 open.
+**The correct status is: formally verified in substantial part, independently
+reconstructed, not yet universally recorded as settled.** That divergence — journal,
+encyclopedia, reference work and audit record, all within six weeks — is a concrete
+instance of Tao's 2026 **"proof indigestion"** concern and of the Leiden
+Declaration's first threat.
+
+**OpenAI, re-verified:** *Astra* solved ten open problems with Lean certificates at
+`openai/ten-proofs` plus a **249-page** manuscript; **no peer review yet**;
+*"Authorship is still being negotiated … OpenAI takes responsibility for the
+manuscripts and Lean formalizations, while attributing the mathematical arguments
+themselves to the model."* The **722-manuscript** release cost several million USD
+per Nature; on **7 October 2026 OpenAI confirmed three manuscripts withdrawn** — a
+**sign error** invalidated one result outright and two dependent manuscripts went
+with it. Other labs are as recorded in X44 and are not restated: Anthropic holds
+ProofBench outright (Opus 5.5, Fable 5.1 at 100 %); Aristotle 86 % with the verified
+caveat that it **searched the web on 60 of 100 problems and solved every problem on
+which it did not search**; Kimi K3 87 %; Mistral 9–10 %; **xAI and Meta absent
+entirely**; **doubleAI** remains a systems lab (WarpSpeed, 3.6× over expert-written
+cuGraph kernels) with no theorem.
+
+### Honest size
+
+**Zero tokens gained, one lane lost 60, eleven lanes 1.23–1.77× faster with 44–58 %
+fewer tokenizer calls.** METRON is a speed codec with a measured, documented
+exception — not a compression gain, and not claimed as one.
+
+**Not measured this turn, and therefore not claimed:** vix, aapl, openstack,
+git-numstat, find-listing, npm-ls, prose-02 … prose-07 under METRON. Twelve lanes
+are the whole basis for the cap decision and one of the twelve regressed, so the
+honest expectation is that further lanes contain further counterexamples.
+
+**Exact remaining gap:** no cheap predictor of when SYMPLOKE's extra 'in' shape
+trials pay. **Next highest-information tests, in order:** (1) a Peek2-style
+regex-free pretokenizer in `bpe.ts` — provably identical output, multiplying through
+4.24 M calls; (2) a per-document cap predictor, characterizing dump.sql's
+uniform-width row structure against page.html's and chart.svg's markup with a linear
+scan and no tokenization; (3) done this turn — `symploke.ts:786` corrected in place.
+
+Full writeup: `bench/x45/X45.md`.
