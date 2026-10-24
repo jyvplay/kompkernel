@@ -174,6 +174,74 @@ def split_lines(text):
     return out
 
 
+NUMT = re.compile(r'^(\D*?)(-?)(\d+)(?:\.(\d+))?(\D*)$')
+CLKT = re.compile(r'^(\D*)(\d{1,2}):(\d{2})(?::(\d{2}))?(\D*)$')
+
+
+def parse_generator(spec):
+    """`lin:V/i,S` or `clock:V/i,S` -> ('lin'|'clock', (pre, suf, dec, width|fields, v, at, step)).
+
+    Read from the spec alone, exactly as the clause describes it: the sample V is
+    written in the column's own format, /i is the line it sits on, and S is the
+    step per line.
+    """
+    kind = 'clock' if spec.startswith('clock:') else 'lin'
+    rest = spec[len(kind) + 1:]
+    cut = rest.rfind(',')
+    if cut <= 0:
+        return None
+    slash = rest.rfind('/', 0, cut)
+    if slash <= 0:
+        return None
+    sample, at, step = rest[:slash], rest[slash + 1:cut], rest[cut + 1:]
+    try:
+        at, step = int(at), int(step)
+    except ValueError:
+        return None
+    if at < 0:
+        return None
+    if kind == 'lin':
+        m = NUMT.match(sample)
+        if not m:
+            return None
+        dec = len(m.group(4) or '')
+        v = int(m.group(3) + (m.group(4) or ''))
+        if m.group(2) == '-':
+            v = -v
+        fmt = (m.group(1), m.group(5), dec, len(m.group(3)))
+    else:
+        m = CLKT.match(sample)
+        if not m:
+            return None
+        fields = 3 if m.group(4) is not None else 2
+        v = (int(m.group(2)) * 3600 + int(m.group(3)) * 60 + int(m.group(4))
+             if fields == 3 else int(m.group(2)) * 60 + int(m.group(3)))
+        fmt = (m.group(1), m.group(5), fields)
+    return (kind, (fmt, v, at, step))
+
+
+def render_generator(model, i):
+    kind, (fmt, v, at, step) = model
+    x = v + step * (i - at)
+    if kind == 'lin':
+        pre, suf, dec, width = fmt
+        mag = abs(x)
+        unit = 10 ** dec
+        ip = str(mag // unit)
+        if len(ip) > width:
+            return None
+        fp = ('.' + str(mag % unit).rjust(dec, '0')) if dec else ''
+        return pre + ('-' if x < 0 else '') + ip.rjust(width, '0') + fp + suf
+    pre, suf, fields = fmt
+    if x < 0:
+        return None
+    if fields == 2:
+        if x >= 3600:
+            return None
+        return pre + '%02d:%02d' % (x // 60, x % 60) + suf
+    return pre + '%02d:%02d:%02d' % (x // 3600, (x // 60) % 60, x % 60) + suf
+
+
 def parse_header(line):
     for op, cl in OPENERS:
         if not (line.startswith(op) and line.endswith(cl)):
@@ -218,6 +286,12 @@ def parse_header(line):
                     lifts.append((col, ('col', src)))
                 elif re.match(r'^[+-]\d{1,15}$', spec):
                     lifts.append((col, ('int', int(spec))))
+                elif spec.startswith('lin:') or spec.startswith('clock:'):
+                    got = parse_generator(spec)
+                    if got is None:
+                        ok = False
+                        break
+                    lifts.append((col, got))
                 else:
                     ok = False
                     break
@@ -226,7 +300,7 @@ def parse_header(line):
     return None
 
 
-def predict(model, state, row):
+def predict(model, state, row, i=-1):
     kind, arg = model
     if kind == 'above':
         return state
@@ -247,6 +321,8 @@ def predict(model, state, row):
             while d.weekday() >= 5:                      # Sat = 5, Sun = 6
                 d = d + datetime.timedelta(days=1)
         return '%04d-%02d-%02d' % (d.year, d.month, d.day)
+    if kind in ('lin', 'clock'):
+        return render_generator(model, i)
     if kind == 'int':
         if state is None:
             return None
@@ -274,7 +350,7 @@ def apographe_undo(text):
     pred_cols = {c for c, _ in lifts}
     state = {}
     out = []
-    for body, eol in lines[1:]:
+    for lineno, (body, eol) in enumerate(lines[1:]):
         fields = body.split(sep)
         if len(fields) == n:
             out.append((body, eol))
@@ -293,7 +369,7 @@ def apographe_undo(text):
                 rebuilt.append(fields[k])
                 k += 1
                 continue
-            v = predict(dict(lifts)[c], state.get(c), row)
+            v = predict(dict(lifts)[c], state.get(c), row, lineno)
             if v is None:
                 return None
             row[c] = v

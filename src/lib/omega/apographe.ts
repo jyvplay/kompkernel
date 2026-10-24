@@ -176,6 +176,7 @@ import {
 // Gating against the inner layer would let APOGRAPHE "win" a comparison nobody
 // asked it to win, so the gate runs against the codec the repo actually ships.
 import { ouraEncode, ouraDecode } from './oura';
+import { chironDecode } from './chiron';
 
 /** Line ending kept verbatim, so the transform never has to re-join. */
 interface Line { text: string; eol: string }
@@ -186,7 +187,14 @@ export type ApographeModel =
   | { kind: 'col'; src: number }
   | { kind: 'days' }
   | { kind: 'workdays' }
-  | { kind: 'int'; step: number };
+  | { kind: 'int'; step: number }
+  // ---- METRON families (X40). Absolute: the value is a function of the line's
+  // OWN index, not of its predecessor, so a literal line never shifts any other
+  // line and nothing accumulates. The render template travels in the header as a
+  // sample value, so decimals, zero padding and unit suffixes are all preserved
+  // by construction rather than by a separate width rule.
+  | { kind: 'lin'; t: NumTemplate; v: number; at: number; s: number }
+  | { kind: 'clock'; t: ClockTemplate; v: number; at: number; s: number };
 
 export interface ApographeLift {
   /** 0-based column index */
@@ -353,11 +361,129 @@ function renderNumber(pre: string, value: number, width: number, suf: string): s
 }
 
 // ---------------------------------------------------------------------------
+// X40 METRON: render templates and absolute generators
+// ---------------------------------------------------------------------------
+
+/**
+ * A number field split into everything that is NOT the value: leading text,
+ * trailing text, decimal places and the width of the integer part. The value is
+ * the integer obtained by deleting the point (`100.00` -> 10000, dec = 2).
+ */
+export interface NumTemplate { pre: string; suf: string; dec: number; width: number }
+
+export function parseNumTemplate(field: string): { t: NumTemplate; v: number } | null {
+  // the trailing text may be non-empty, so split it off first
+  // `\D*?` is lazy so a leading '-' lands in the SIGN group, not in the prefix:
+  // otherwise a mixed-sign column would have the minus baked into its template
+  const m = /^(\D*?)(-?)(\d+)(?:\.(\d+))?(\D*)$/.exec(field);
+  if (!m) return null;
+  const dec = m[4] ? m[4].length : 0;
+  const mag = Number(m[3] + (m[4] ?? ''));
+  if (!Number.isSafeInteger(mag)) return null;
+  const v = m[2] === '-' ? -mag : mag;
+  return { t: { pre: m[1], suf: m[5], dec, width: m[3].length }, v };
+}
+
+export function sameNumTemplate(a: NumTemplate, b: NumTemplate): boolean {
+  return a.pre === b.pre && a.suf === b.suf && a.dec === b.dec && a.width === b.width;
+}
+
+export function renderNumTemplate(t: NumTemplate, v: number): string | null {
+  if (!Number.isSafeInteger(v)) return null;
+  const neg = v < 0;
+  const av = Math.abs(v);
+  const unit = 10 ** t.dec;
+  const ip = String(Math.floor(av / unit));
+  if (ip.length > t.width) return null;            // the column would change width
+  const fp = t.dec ? '.' + String(av % unit).padStart(t.dec, '0') : '';
+  return t.pre + (neg ? '-' : '') + ip.padStart(t.width, '0') + fp + t.suf;
+}
+
+/** A clock field: `[00:02:05]`, `02:05`, `1:02:05.250`. Value = seconds. */
+export interface ClockTemplate { pre: string; suf: string; fields: 2 | 3 }
+
+export function parseClockTemplate(field: string): { t: ClockTemplate; v: number } | null {
+  const m = /^(\D*)(\d{1,2}):(\d{2})(?::(\d{2}))?(\D*)$/.exec(field);
+  if (!m) return null;
+  const fields = (m[4] !== undefined ? 3 : 2) as 2 | 3;
+  const v = fields === 3
+    ? Number(m[2]) * 3600 + Number(m[3]) * 60 + Number(m[4])
+    : Number(m[2]) * 60 + Number(m[3]);
+  return { t: { pre: m[1], suf: m[5], fields }, v };
+}
+
+export function sameClockTemplate(a: ClockTemplate, b: ClockTemplate): boolean {
+  return a.pre === b.pre && a.suf === b.suf && a.fields === b.fields;
+}
+
+export function renderClockTemplate(t: ClockTemplate, v: number): string | null {
+  if (!Number.isSafeInteger(v) || v < 0) return null;
+  const p = (x: number) => String(x).padStart(2, '0');
+  if (t.fields === 2) {
+    if (v >= 3600) return null;
+    return t.pre + p(Math.floor(v / 60)) + ':' + p(v % 60) + t.suf;
+  }
+  return t.pre + p(Math.floor(v / 3600)) + ':' + p(Math.floor(v / 60) % 60) + ':' + p(v % 60) + t.suf;
+}
+
+/**
+ * Exact absolute fit: is there (a, s) with value(line i) = a + s*i for every
+ * line that parses? Returns null unless every parsing line agrees EXACTLY and at
+ * least APOGRAPHE_MIN_ROWS lines parse. `s` must be an integer, which is what
+ * makes the header cheap (no rationals) and the reader's arithmetic trivial.
+ */
+function fitAbsolute<T>(
+  samples: Array<{ i: number; field: string }>,
+  parse: (f: string) => { t: T; v: number } | null,
+  same: (a: T, b: T) => boolean,
+): { t: T; a: number; s: number } | null {
+  let t: T | null = null;
+  const pts: Array<{ i: number; v: number }> = [];
+  for (const s of samples) {
+    const p = parse(s.field);
+    if (!p) continue;
+    if (t === null) t = p.t;
+    else if (!same(t, p.t)) return null;
+    pts.push({ i: s.i, v: p.v });
+  }
+  if (t === null || pts.length < APOGRAPHE_MIN_ROWS) return null;
+  const [p0, p1] = [pts[0], pts[1]];
+  const den = p1.i - p0.i;
+  if (!den) return null;
+  const num = p1.v - p0.v;
+  if (num % den !== 0) return null;
+  const s = num / den;
+  if (!Number.isSafeInteger(s)) return null;
+  for (const p of pts) if (p0.v + s * (p.i - p0.i) !== p.v) return null;
+  // the anchor is a REAL source value and its line index, never a projection to
+  // line 0: a projection can be negative (a table whose first data row is line 1
+  // with a negative step), and a clock cannot render a negative reading
+  return { t, a: p0.v, at: p0.i, s } as any;
+}
+
+function fitLin(samples: Array<{ i: number; field: string }>): ApographeModel | null {
+  const f: any = fitAbsolute(samples, parseNumTemplate, sameNumTemplate);
+  if (!f) return null;
+  if (renderNumTemplate(f.t, f.a) === null) return null;
+  // a constant column is cheaper as `above`; a step of 1 on a width-1 integer is
+  // cheaper as `+1`. Both are already in the portfolio; do not duplicate them.
+  if (f.s === 0) return null;
+  return { kind: 'lin', t: f.t, v: f.a, at: f.at, s: f.s };
+}
+
+function fitClock(samples: Array<{ i: number; field: string }>): ApographeModel | null {
+  const f: any = fitAbsolute(samples, parseClockTemplate, sameClockTemplate);
+  if (!f || f.s === 0) return null;
+  if (renderClockTemplate(f.t, f.a) === null) return null;
+  return { kind: 'clock', t: f.t, v: f.a, at: f.at, s: f.s };
+}
+
+// ---------------------------------------------------------------------------
 // the predictors
 // ---------------------------------------------------------------------------
 
 /** A predictor's answer, or null when it refuses (which forces a literal line). */
-type Predict = (state: string | undefined, row: Map<number, string>) => string | null;
+type Predict = (state: string | undefined, row: Map<number, string>, i: number) => string | null;
 
 function makePredict(model: ApographeModel): Predict {
   switch (model.kind) {
@@ -386,6 +512,11 @@ function makePredict(model: ApographeModel): Predict {
         if (!Number.isSafeInteger(v)) return null;
         return renderNumber(p.pre, v, p.digits.length, p.suf);
       };
+    // absolute generators: the answer depends only on the line's own index
+    case 'lin':
+      return (_state, _row, i) => renderNumTemplate(model.t, model.v + model.s * (i - model.at));
+    case 'clock':
+      return (_state, _row, i) => renderClockTemplate(model.t, model.v + model.s * (i - model.at));
   }
 }
 
@@ -402,6 +533,14 @@ function renderHeader(cfg: ApographeConfig): string {
       case 'days': return `${c}=days`;
       case 'workdays': return `${c}=workdays`;
       case 'int': return `${c}=${l.model.step >= 0 ? '+' : ''}${l.model.step}`;
+      case 'lin': {
+        const sample = renderNumTemplate(l.model.t, l.model.v);
+        return `${c}=lin:${sample}/${l.model.at},${l.model.s}`;
+      }
+      case 'clock': {
+        const sample = renderClockTemplate(l.model.t, l.model.v);
+        return `${c}=clock:${sample}/${l.model.at},${l.model.s}`;
+      }
     }
   });
   return cfg.open + [String(cfg.n), cfg.sep, ...items].join(cfg.headerSep) + cfg.close;
@@ -434,6 +573,32 @@ export function apographeParseHeader(line: string, open: string, close: string):
         if (src >= 0 && src < col) model = { kind: 'col', src };
       } else if (/^[+-]\d{1,15}$/.test(spec)) {
         model = { kind: 'int', step: Number(spec) };
+      } else if (spec.startsWith('lin:') || spec.startsWith('clock:')) {
+        const isClock = spec.startsWith('clock:');
+        const rest = spec.slice(isClock ? 6 : 4);
+        const cut = rest.lastIndexOf(',');
+        const slash = cut > 0 ? rest.lastIndexOf('/', cut) : -1;
+        if (cut > 0 && slash > 0) {
+          const sample = rest.slice(0, slash);
+          const at = Number(rest.slice(slash + 1, cut));
+          const step = Number(rest.slice(cut + 1));
+          if (Number.isSafeInteger(step) && Number.isInteger(at) && at >= 0
+              && !sample.includes(headerSep) && !sample.includes('/')) {
+            const p = isClock ? parseClockTemplate(sample) : parseNumTemplate(sample);
+            // the sample must render back to itself, or the reader would build a
+            // different column than the writer measured
+            if (p) {
+              const back = isClock
+                ? renderClockTemplate(p.t as ClockTemplate, p.v)
+                : renderNumTemplate(p.t as NumTemplate, p.v);
+              if (back === sample) {
+                model = isClock
+                  ? { kind: 'clock', t: p.t as ClockTemplate, v: p.v, at, s: step }
+                  : { kind: 'lin', t: p.t as NumTemplate, v: p.v, at, s: step };
+              }
+            }
+          }
+        }
       }
       if (!model || spec.includes(headerSep)) { ok = false; break; }
       if (lifts.some((l) => l.col === col)) { ok = false; break; }
@@ -470,7 +635,9 @@ export function apographeApply(
 
   let literalRows = 0;
   let modelledRows = 0;
+  let rowIndex = -1;
   for (const ln of lines) {
+    rowIndex++;
     const f = splitFields(ln.text, cfg.sep);
     if (f.length !== cfg.n) {
       // already short (or not a record line): copied verbatim; the reader does
@@ -484,7 +651,7 @@ export function apographeApply(
     let ok = true;
     for (let c = 0; c < cfg.n; c++) {
       if (!preds.has(c)) { row.set(c, f[c]); continue; }
-      const v = preds.get(c)!(state.get(c), row);
+      const v = preds.get(c)!(state.get(c), row, rowIndex);
       if (v === null || v !== f[c]) { ok = false; break; }
       row.set(c, v);
     }
@@ -536,7 +703,7 @@ export function apographeUndo(text: string): string | null {
     let k = 0;
     for (let c = 0; c < cfg.n; c++) {
       if (!predCols.has(c)) { row.set(c, f[k]); rebuilt.push(f[k]); k++; continue; }
-      const v = preds.get(c)!(state.get(c), row);
+      const v = preds.get(c)!(state.get(c), row, i - 1);
       if (v === null) return null;
       row.set(c, v);
       rebuilt.push(v);
@@ -570,7 +737,7 @@ function modalStep(values: string[]): number | null {
 
 /** Candidate predictors for each column, cheapest-to-explain first. */
 function candidatesFor(
-  col: number, values: string[], n: number,
+  col: number, values: string[], n: number, rowIndex: number[] = [], kanon = false,
 ): ApographeModel[] {
   const out: ApographeModel[] = [];
   const nonEmpty = values.filter((v) => v.length > 0);
@@ -592,6 +759,15 @@ function candidatesFor(
   if (dateCount * 2 >= nonEmpty.length) out.push({ kind: 'workdays' }, { kind: 'days' });
   const step = modalStep(values);
   if (step !== null) out.push({ kind: 'int', step });
+  if (kanon && rowIndex.length === values.length) {
+    // absolute generators see (line index, field) pairs, so a title row or a
+    // holiday does not move the fit for any other line
+    const samples = values.map((field, k) => ({ i: rowIndex[k], field }));
+    const lin = fitLin(samples);
+    if (lin) out.push(lin);
+    const clk = fitClock(samples);
+    if (clk) out.push(clk);
+  }
   return out;
 }
 
@@ -603,6 +779,10 @@ function liftsEqual(a: ApographeLift[], b: ApographeLift[]): boolean {
     if (x.kind !== y.kind) return false;
     if (x.kind === 'col' && y.kind === 'col' && x.src !== y.src) return false;
     if (x.kind === 'int' && y.kind === 'int' && x.step !== y.step) return false;
+    if (x.kind === 'lin' && y.kind === 'lin'
+      && (x.v !== y.v || x.at !== y.at || x.s !== y.s || !sameNumTemplate(x.t, y.t))) return false;
+    if (x.kind === 'clock' && y.kind === 'clock'
+      && (x.v !== y.v || x.at !== y.at || x.s !== y.s || !sameClockTemplate(x.t, y.t))) return false;
   }
   return true;
 }
@@ -637,6 +817,14 @@ export const APOGRAPHE_CLAUSE: Record<string, string[]> = {
     'colN=+b: that column is the number above plus b, same digit count.',
     'colN=+b: number above + b, same width.',
   ],
+  lin: [
+    'colN=lin:V/i,S: V is line i; every line j has V+(j-i)*S in V\'s exact format.',
+    'colN=lin:V/i,S: line i is V, each line j is V+(j-i)*S, written like V.',
+  ],
+  clock: [
+    'colN=clock:V/i,S: line i reads V; line j reads V+(j-i)*S seconds, same clock format.',
+    'colN=clock:V/i,S: V at line i, plus S seconds per line after, same shape.',
+  ],
   setup: [
     'Line 1 is a header: n, sep, then col=model. Each named column is deleted from the lines and rebuilt at its place; a line with n fields is literal and resets. Drop line 1.',
     'Header line = n, sep, col=model; named columns are dropped from lines and rebuilt; a full n-field line is literal and resets. Drop it.',
@@ -644,6 +832,9 @@ export const APOGRAPHE_CLAUSE: Record<string, string[]> = {
   ],
   combined: [
     'above=line above, colM=column M of the same line, days/workdays=next date/weekday, +b=number above+b same width',
+  ],
+  combined2: [
+    'above=line above, colM=column M of its own line, days/workdays=next date/weekday, +b=number above+b, lin:V/i,S=line i is V and line j is V+(j-i)*S',
   ],
 };
 
@@ -656,7 +847,7 @@ export const APOGRAPHE_CLAUSE: Record<string, string[]> = {
  */
 export function apographeClauseSets(lifts: ApographeLift[]): string[] {
   const kinds: string[] = [];
-  for (const k of ['above', 'col', 'days', 'workdays', 'int']) {
+  for (const k of ['above', 'col', 'days', 'workdays', 'int', 'lin', 'clock']) {
     if (lifts.some((l) => l.model.kind === k)) kinds.push(k);
   }
   const out: string[] = [];
@@ -674,6 +865,11 @@ export function apographeClauseSets(lifts: ApographeLift[]): string[] {
   // (b) the combined wording, which is cheaper as soon as two families are used
   if (kinds.length >= 2) {
     for (const setup of setups) out.push([setup, APOGRAPHE_CLAUSE.combined[0]].join(' '));
+    // the two-family combined wording is ambiguous about lin/clock, so it is only
+    // offered when neither is in play; otherwise a longer wording names them
+    if (kinds.includes('lin') || kinds.includes('clock')) {
+      for (const setup of setups) out.push([setup, APOGRAPHE_CLAUSE.combined2[0]].join(' '));
+    }
   }
   return out;
 }
@@ -684,6 +880,8 @@ export function apographeClauseSets(lifts: ApographeLift[]): string[] {
 
 export interface ApographeOptions extends AnadiplosisOptions {
   apographe?: boolean;
+  /** enable the METRON absolute-generator families (X40) */
+  kanon?: boolean;
   /** force a plan (tests and the ablation benches) */
   forceLifts?: ApographeLift[];
   forceSep?: string;
@@ -742,18 +940,19 @@ export function apographePlan(
   const n = detected.n;
 
   const rowValues: string[][] = [];
-  for (const l of lines) {
+  const rowIndex: number[] = [];
+  lines.forEach((l, i) => {
     const f = splitFields(l.text, sep);
-    if (f.length === n) rowValues.push(f);
-  }
+    if (f.length === n) { rowValues.push(f); rowIndex.push(i); }
+  });
   if (rowValues.length < APOGRAPHE_MIN_ROWS) return null;
 
   const [open, close] = APOGRAPHE_OPENERS[0];
   const headerSep = HEADER_SEPS.find((h) => h !== sep) ?? '|';
 
   const baseTokens = countTokens(text, enc);
-  const score = (lifts: ApographeLift[]): { tokens: number; clause: string; text: string } | null => {
-    if (!lifts.length) return { tokens: baseTokens, clause: '', text };
+  const score = (lifts: ApographeLift[]): { tokens: number; wire: number; clause: string; text: string } | null => {
+    if (!lifts.length) return { tokens: baseTokens, wire: baseTokens, clause: '', text };
     const cfg: ApographeConfig = { n, sep, headerSep, open, close, lifts };
     const applied = apographeApply(lines, cfg);
     if (!applied) return null;
@@ -767,7 +966,7 @@ export function apographePlan(
       const total = countTokens(applied.text, enc) + c;
       if (total < bestTotal) { bestTotal = total; bestClause = clause; }
     }
-    return { tokens: bestTotal, clause: bestClause, text: applied.text };
+    return { tokens: bestTotal, wire: countTokens(applied.text, enc), clause: bestClause, text: applied.text };
   };
 
   if (opts.forceLifts) {
@@ -784,33 +983,55 @@ export function apographePlan(
     };
   }
 
-  // greedy forward addition, one (column, predictor) at a time
-  let best = score([]);
-  if (!best) return null;
-  const chosen: ApographeLift[] = [];
-  let improved = true;
-  while (improved) {
-    improved = false;
-    let bestAdd: { lift: ApographeLift; s: NonNullable<ReturnType<typeof score>> } | null = null;
-    for (let c = 0; c < n; c++) {
-      if (chosen.some((l) => l.col === c)) continue;
-      const colValues = rowValues.map((r) => r[c]);
-      for (const model of candidatesFor(c, colValues, n)) {
-        const trial = [...chosen, { col: c, model }];
-        const s = score(trial);
-        if (!s) continue;
-        if (s.tokens < best!.tokens - 0 && (!bestAdd || s.tokens < bestAdd.s.tokens)) {
-          bestAdd = { lift: { col: c, model }, s };
+  // Greedy forward addition, one (column, predictor) at a time. `by` is the
+  // quantity the step must improve:
+  //   'total' — the measured one-chat total (wire + clause). This is the X39
+  //             search and is left byte-for-byte as it was.
+  //   'wire'  — the wire alone. The clause is a FIXED cost paid once per plan,
+  //             so charging it to the FIRST lift hides every plan whose win is
+  //             spread over several columns: a table of four 2.5-second ramps
+  //             saves ~41 tokens per column but the clause costs ~60, so no
+  //             single lift clears the barrier and the total-greedy stops at
+  //             zero lifts. Scoring the wire removes that artefact; the fixed
+  //             cost is then paid once, at the gate, where it belongs.
+  const greedy = (by: 'total' | 'wire'): { chosen: ApographeLift[]; s: NonNullable<ReturnType<typeof score>> } | null => {
+    let best = score([]);
+    if (!best) return null;
+    const chosen: ApographeLift[] = [];
+    for (;;) {
+      let bestAdd: { lift: ApographeLift; s: NonNullable<ReturnType<typeof score>> } | null = null;
+      for (let c = 0; c < n; c++) {
+        if (chosen.some((l) => l.col === c)) continue;
+        const colValues = rowValues.map((r) => r[c]);
+        for (const model of candidatesFor(c, colValues, n, rowIndex, !!opts.kanon)) {
+          const trial = [...chosen, { col: c, model }];
+          const s = score(trial);
+          if (!s) continue;
+          const mine = by === 'total' ? s.tokens : s.wire;
+          const curb = by === 'total' ? best!.tokens : best!.wire;
+          if (mine < curb && (!bestAdd || mine < (by === 'total' ? bestAdd.s.tokens : bestAdd.s.wire))) {
+            bestAdd = { lift: { col: c, model }, s };
+          }
         }
       }
-    }
-    if (bestAdd) {
+      if (!bestAdd) break;
       chosen.push(bestAdd.lift);
       best = bestAdd.s;
-      improved = true;
     }
+    return { chosen, s: best! };
+  };
+
+  let run = greedy('total');
+  // METRON only: if the total-greedy found nothing (or found a set that still
+  // loses), look for a plan whose win only appears once several lifts share the
+  // clause. The better of the two measured totals wins; a plan that does not
+  // beat the parent is refused below, exactly as before.
+  if (opts.kanon && (!run || run.s.tokens >= baseTokens)) {
+    const alt = greedy('wire');
+    if (alt && alt.chosen.length && (!run || alt.s.tokens < run.s.tokens)) run = alt;
   }
-  if (!chosen.length) return null;
+  if (!run || !run.chosen.length) return null;
+  const chosen = run.chosen, best = run.s;
   const cfg: ApographeConfig = {
     n, sep, headerSep, open, close, lifts: chosen.sort((a, b) => a.col - b.col),
   };
@@ -901,6 +1122,30 @@ export function apographeDecode(
   const expanded = ouraDecode(wire, cfg, opts);
   const back = apographeUndo(expanded);
   return back === null ? expanded : back;
+}
+
+/**
+ * Decode a result the codec itself produced, without the caller having to know
+ * which optional arms fired.
+ *
+ * This exists because of a real defect found in X40: the arm that undoes OURA's
+ * tail-anchored numeric collapse needs `ouraShape`/`ouraMode`/`ouraSentinel`, and
+ * a call site that passed only the five base options round-tripped fine on the
+ * source (`40.0 s`) but silently produced `~400 s` once the transform pushed the
+ * parent into OURA's mark mode. A decoder whose correctness depends on the caller
+ * remembering an option list is not a decoder. The rule is now: the result object
+ * carries everything, and the wire decides the arm.
+ */
+export function apographeDecodeResult(r: ApographeResult): string {
+  return apographeDecode(r.wire, {
+    stats: r.stats, order: r.order,
+    undo: apographeArmOf(r.wire) === 'tape' ? chironDecode : (w: string) => w,
+  }, {
+    alphabet: r.alphabet, marker: r.marker, marker2: r.marker2,
+    group: r.syncopeGroup, framing: r.framing,
+    ouraShape: (r as any).ouraShape, ouraMode: (r as any).ouraMode,
+    ouraSentinel: (r as any).ouraSentinel,
+  } as any);
 }
 
 /** Convenience: encode, decode, compare. */

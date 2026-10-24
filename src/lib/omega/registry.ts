@@ -129,6 +129,7 @@ import { anadiplosisEncode, anadiplosisDecode } from './anadiplosis';
 import { euteleiaEncode, euteleiaDecode } from './euteleia';
 import { ouraEncode, ouraDecode } from './oura';
 import { apographeEncode, apographeDecode, apographeArmOf } from './apographe';
+import { metronEncode, metronDecodeResult } from './metron';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -513,6 +514,17 @@ export function codecEntries(): Entry[] {
         const r = apographeEncode(t, enc);
         const decoded = apographeDecode(r.wire, { stats: r.stats, order: r.order, undo: apographeArmOf(r.wire) === 'tape' ? chironDecode : (w: string) => w }, { alphabet: r.alphabet, marker: r.marker, marker2: r.marker2, group: r.syncopeGroup, framing: r.framing });
         return { output: r.wire, decoded, oneChat: r.messageTokens, note: `parent=${r.apographeParentTokens}; apographe=${r.apographe}; lifts=${r.apographeLifts.map(l => (l.col + 1) + ':' + l.model.kind).join(',') || '-'}; header=${r.apographeHeader || '-'}; modelled=${r.apographeModelled}; literal=${r.apographeLiteral}; delta=${r.messageTokens - r.apographeParentTokens}` };
+      },
+    },
+    {
+      key: 'metron',
+      label: 'μέτρον METRON (The measure — X40. Every predictor APOGRAPHE inherited is RELATIVE: `above`, `colM`, `days`, `workdays` and `+b` all read the line above, and each one therefore pays a state, a reset, and a format rule. METRON replaces the relative predictor with an ABSOLUTE one: `colN=lin:V/i,S` says the field on source line j is V + (j − i)·S rendered in V\'s exact format, and `colN=clock:V/i,S` says the same for a wall-clock reading in seconds. Nothing is carried from line to line, so a literal line changes nothing for any other line, an error cannot propagate, and there is no state to reset. The header carries a SAMPLE value, not a format: the reader parses V with the same rule it applies to every other field (optional sign, digits, optional decimal point, leading and trailing non-digit text) and recovers the decimal count, the zero padding, the leading spaces and the unit suffix for free, which is exactly what `+b` cannot express and why `40.0 s `, `**-12.5%**` and `[00:02:05]` are now liftable at all. The renderer REFUSES when a value would widen the integer field, so a column can never silently change shape; refusal means the line goes literal. Two header specs and two clause families are added; the line/arity state machine, the header grammar and the self-synchronising literal rule are APOGRAPHE\'s, imported rather than re-implemented, which is why the APOGRAPHE red team is re-run in the same turn (43/43, plus a new 39-test METRON suite with a 200-table seeded fuzz). New measurements are byte-exact and inside the same process as the parent: psql-output.txt 322 → 245 (−77, −23.9%), cue-sheet.md 184 → 164 (−20) on the clock family, prices.csv 226 → 214 (−12), every other lane unchanged. It also fixes a planner artefact that the fixed clause cost created: greedy on the measured total cannot cross a clause that costs more than one column is worth, so METRON additionally re-runs the same greedy scoring the WIRE alone and keeps the better measured total — the plan for markdown-table.md (four 2.5 s ramps) existed all along and the old search could not see it. Related work is real and old: frame-of-reference and delta coding with exceptions (Abadi, Madden and Ferreira, SIGMOD 2006), ALP\'s decimal scaling and exception vectors (SIGMOD 2024), BtrBlocks — all block-relative and all needing a schema; the honest new part is the sample-as-format declaration, the absolute generator in a self-describing one-message wire, and the clock unit implied by the format. Greedy: yes, forward addition, now with a wire-scored second pass, every candidate scored on the real token count and the whole message gated against the parent. Time and CPU bound: one extra template fit per column per round, no extra parent encode. Honest limits: prose does not move; a column whose values are not an arithmetic progression in a single fixed format is refused; the clause costs ~55–60 tokens, so small tables cannot pay for it.)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r: any = metronEncode(t, enc);
+        const decoded = metronDecodeResult(r);
+        return { output: r.wire, decoded, oneChat: r.messageTokens, note: `parent=${r.apographeParentTokens}; metron=${r.apographe}; lifts=${r.metronModels.join(',') || '-'}; header=${r.apographeHeader || '-'}; modelled=${r.apographeModelled}; literal=${r.apographeLiteral}; delta=${r.messageTokens - r.apographeParentTokens}` };
       },
     },
     {
