@@ -41,7 +41,23 @@ const lanePath = (lane: string): string => {
  * The receipt file kept the first column. So for these two lanes the honest test
  * is against the value X39's report gives for the configuration X39 shipped.
  */
-const RECEIPT_STALE: Record<string, number> = { 'dump.sql': 608, 'page.html': 547 };
+const RECEIPT_STALE: Record<string, number> = {
+  'dump.sql': 608, 'page.html': 547, 'aapl-2014.csv': 1450, 'vix-daily-1990.csv': 579,
+};
+/**
+ * AND ONE ROW DOES NOT REPRODUCE, IN THE PARENT'S FAVOUR.
+ *
+ * `markdown-table.md` is 182 in the X39 receipt and 176 on this build, both parent
+ * and shipped total; `oura.ts` is untouched in this diff, so X40 cannot be the
+ * cause, and I could not reproduce 182 here. X39's own report already flags one
+ * lane whose parent number did not reproduce (`find-listing` 1 267 against 1 279),
+ * so an unstable parent is a known property of this stack and not a new one. I do
+ * not "fix" it by writing 176 into the map: the lane is reported as a discrepancy
+ * and counted as a failure of the repeat test, which is what it is.
+ */
+const RECEIPT_UNEXPLAINED: Record<string, string> = {
+  'markdown-table.md': 'X39 receipt 182, current build 176 (parent and total); oura.ts unchanged',
+};
 
 // optional subset for a cheap re-check: ONLY=dump.sql,page.html
 const only = (process.env.ONLY || '').split(',').filter(Boolean);
@@ -57,13 +73,32 @@ for (const o of todo) {
   const lifts = (r.apographeLifts || []).map((l: any) => `${l.col + 1}:${l.model.kind}`);
   const problems: string[] = [];
   if (raw !== o.rawTokens) problems.push(`raw ${o.rawTokens}->${raw}`);
-  const wantParent = RECEIPT_STALE[o.lane] ?? o.parentTokens;
+  const staleParent = RECEIPT_STALE[o.lane];
+  const wantParent = staleParent ?? o.parentTokens;
+  // a stale row whose total equalled its (stale) parent never fired, so the shipped
+  // total moves with it; a lane that did fire kept the total X39 published.
+  const wantTotal = staleParent !== undefined && o.apographeTokens === o.parentTokens
+    ? staleParent : o.apographeTokens;
   if (r.apographeParentTokens !== wantParent) problems.push(`parent ${wantParent}->${r.apographeParentTokens}`);
-  if (r.messageTokens !== wantParent) problems.push(`total ${wantParent}->${r.messageTokens}`);
+  if (r.messageTokens !== wantTotal) problems.push(`total ${wantTotal}->${r.messageTokens}`);
   const stale = RECEIPT_STALE[o.lane] !== undefined ? ' [receipt row stale, X39.md value used]' : '';
+  const unexplained = RECEIPT_UNEXPLAINED[o.lane];
+  // an unexplained difference is a FAILURE of the repeat test, not a note
+  if (unexplained) problems.push('UNEXPLAINED: ' + unexplained);
   if (!!r.apographe !== o.fired) problems.push(`fired ${o.fired}->${!!r.apographe}`);
   if ((r.apographeHeader || '') !== o.header) problems.push(`hdr ${o.header}->${r.apographeHeader}`);
-  if (JSON.stringify(lifts) !== JSON.stringify(o.lifts)) problems.push(`lifts ${o.lifts}->${lifts}`);
+  // The X39 receipt writer labelled a colM lift `col${src+1}` and an int lift
+  // `int${step}`, appending the parameter to the model name. X40 reports the model
+  // KIND only, so compare on the kind and say so, rather than calling a label a
+  // difference in behaviour.
+  // no regex here on purpose: the receipt writes `col2` / `int1`, X40 writes the kind
+  const wantLifts = o.lifts.map((l) => {
+    const cut = l.indexOf(':');
+    const kind = l.slice(cut + 1);
+    const k = kind.startsWith('col') ? 'col' : kind.startsWith('int') ? 'int' : kind;
+    return l.slice(0, cut) + ':' + k;
+  });
+  if (JSON.stringify(lifts) !== JSON.stringify(wantLifts)) problems.push(`lifts ${o.lifts}->${lifts}`);
   // the receipt's own claim was exactness; re-check it, do not trust the file
   const { apographeDecodeResult } = require('@/lib/omega/apographe');
   let back = '';

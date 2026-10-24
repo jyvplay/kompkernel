@@ -1,0 +1,11 @@
+same  dump.sql                   raw= 1795 parent=  608 total=  608  [receipt row stale, X39.md value used]
+same  page.html                  raw= 3220 parent=  547 total=  547  [receipt row stale, X39.md value used]
+DIFF  aapl-2014.csv              raw= 3108 parent= 1450 total= 1151 total 1450->1151 [receipt row stale, X39.md value used]
+DIFF  vix-daily-1990.csv         raw= 3412 parent=  579 total=  409 total 579->409; lifts 1:workdays,3:col2,4:col2,5:col2->1:workdays,3:col,4:col,5:col [receipt row stale, X39.md value used]
+DIFF  psql-output.txt            raw=  675 parent=  322 total=  289 total 322->289; lifts 2:int1,3:int1->2:int,3:int
+
+FRONTIER REPEAT: 2/5 lanes bit-identical to the X39 configuration, 3 differ; 864 s wall
+DIFFS:
+  aapl-2014.csv: total 1450->1151
+  vix-daily-1990.csv: total 579->409; lifts 1:workdays,3:col2,4:col2,5:col2->1:workdays,3:col,4:col,5:col
+  psql-output.txt: total 322->289; lifts 2:int1,3:int1->2:int,3:int

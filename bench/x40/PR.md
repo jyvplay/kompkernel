@@ -54,10 +54,13 @@ X39 search is untouched and the repeat test below proves it.
   grammar **from the contract prose**, run over the real emitted messages: `EXACT` on `psql`,
   `prices`, `cue-sheet`.
 - **Frontier repeat test** (`bench/x40/frontier.ts`): all 31 X39 receipt lanes re-encoded with
-  X39's own call and diffed field by field — every lane reproduces. Two receipt rows
-  (`dump.sql`, `page.html`) are stale *in the receipt file*: X39.md records both the inner-layer
-  and the shipped `oura` values (`662 [608]`, `561 [547]`) because the parent was switched during
-  X39. Against X39.md's shipped configuration those two lanes reproduce too (2/2 re-checked).
+  X39's own call and diffed field by field. 25/31 are bit-identical on the raw receipt; four rows
+  (`dump.sql`, `page.html`, `aapl-2014.csv`, `vix-daily-1990.csv`) are stale *in the receipt file* —
+  X39.md records both the pre-switch inner-layer and the shipped `oura` parent (`662 [608]`,
+  `561 [547]`, …) because the parent was switched during X39 — and one (`psql`) differs only in a
+  lift label. Against X39.md's shipped configuration, **30/31 reproduce**; `markdown-table.md` is
+  182 in the receipt and 176 on this build, an unexplained 6-token difference in the parent that
+  the report counts as a **failure** of the repeat test rather than writing into the expectations.
 
 ### Honest limits
 

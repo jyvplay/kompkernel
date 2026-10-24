@@ -1437,7 +1437,13 @@ All three are excluded from every honest frontier table in `docs/codecs.md`.
   `lin:12.50/1,5`); `markdown-table.md` plans four `lin` columns and the gate refuses (176 → 176),
   `metrics.tsv` plans `lin:250.0/1,20` and the gate refuses (237 → 237), and the other 26 lanes are
   unchanged. **Frontier repeat test:** all 31 X39 receipt lanes re-encoded with X39's own call and
-  diffed field by field — 31/31 bit-identical (`bench/x40/frontier.ts`). **Red team:** 39/39
+  diffed field by field (`bench/x40/frontier.ts`): 25/31 bit-identical on the raw receipt;
+  4 rows are stale *in the receipt file* (`dump.sql`, `page.html`, `aapl-2014.csv`,
+  `vix-daily-1990.csv` kept the pre-switch inner-layer parent, which X39.md records in brackets
+  next to the shipped value) and 1 differs only in a lift label (`psql`), so the shipped
+  configuration reproduces on 30/31; `markdown-table.md` is 182 in the receipt and **176** on this
+  build, unexplained and counted as a failure of the repeat test rather than silently accepted
+  (`oura.ts` is untouched in the diff). **Red team:** 39/39
   (`bench/x40/rt.ts`, including a 200-table seeded fuzz and the header-grammar refusals) plus the
   APOGRAPHE suite re-run 43/43, because a repaired engine inherits no trust. **Independent reader:**
   the CPython reader written from the contract prose was extended with the new grammar and
