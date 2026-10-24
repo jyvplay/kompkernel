@@ -1525,3 +1525,99 @@ column's own units with the width unchanged (`+b`, `days`); METRON accepts any i
 single format, so decimals, percentages, zero-padded identifiers, unit-suffixed durations and clock
 readings all qualify. Condition (iv) is the codec's honest floor and the reason two lanes that plan
 still measure zero.
+
+## τύπος TYPOS (X41) — the impress: a self-inferred record mask
+
+**What it is.** Every codec in the chain up to X40 reads a *line* and asks what its **fields**
+contain: APOGRAPHE lifts a neighbour, METRON lifts a column of an arithmetic ramp, the substitution
+chain lifts a word. TYPOS reads a **population** of lines and asks what the lines do **not**
+contain. A record set — `apt list --installed`, `ps aux`, `ls -l`, a `find` listing, an application
+log — is a small alphabet of separator-free literal strings interleaved with narrow value slots,
+repeated on line after line. TYPOS infers that alphabet from the text itself (longest-common-
+interior-block induction over the lines, then exact skeleton clustering by `cellSignature`), picks
+a separator that occurs in **no** line at all, and emits
+
+```
+⟨lit0¦lit1¦…¦litk⟩¦ s␟ ¦ pR6L3R2L3R6L1R1L5
+```
+
+— the mask as a delimiter-separated literal list, the declared separator, and an RLE of the
+row/literal pattern of the source. The body that follows is **columnar, not row-major**: each of
+the (k − L) unlifted slots becomes **one line** whose values are joined by the declared separator,
+and every literal line follows in source order. The reader re-splits each column by that separator,
+checks each column's value count against the row count taken from the run pattern, re-interleaves,
+and refuses (returns the wire untouched) on any inconsistency. Nothing is carried between lines:
+there is no state, so a literal line changes nothing for any other line and an error cannot
+propagate. Boundary bytes are preserved exactly, including `\r\n` and the presence or absence of a
+final newline.
+
+**Greedy or not.** Greedy — the mask is grown by forward addition one literal at a time (up to 64
+literals, 14 induction levels, minimum literal length 3), and each candidate growth is kept only if
+the exact skeleton-clustered row count rises. But the *decision to ship* is not greedy and not a
+proxy: `typosEncode` transforms the text, decodes the transform **in the same process** and
+requires byte equality, then runs the **parent** (OURA) on the transformed text and compares the
+real one-message token count against the parent on the source. A wire that is not exact, or not
+cheaper after the parent re-encode, is discarded, and the codec reports `typos: false`.
+
+**Measured (this turn, one process, `OMEGA_DET=1`, o200k, real material, every wire decoded
+EXACT).** `raw` = the slice with no codec; `wire` = the TYPOS text; `M_src` = OURA on the slice;
+`M_typ` = OURA on the TYPOS wire — the only comparison that matters, because the wire is what a
+reader actually receives.
+
+| real slice | raw | TYPOS wire | M_src (time) | M_typ (time) | Δ before clause |
+|---|---|---|---|---|---|
+| `apt list --installed`, 30 rows | 608 | 574 (−6 %) | **275** (73 s) | 315 (75 s) | **+40** |
+| `find` listing, 30 rows | 1 005 | 741 (−26 %) | **367** (20 s) | 387 (14 s) | **+20** |
+| `ls -l` + npm tree, 87 rows | 2 136 | 1 489 (−30 %) | **408** (201 s) | 474 (111 s) | **+66** |
+| nginx/openstack log, 15 lines | 2 511 | 1 286 (−49 %) | **605** (214 s) | 619 (237 s) | **+14** |
+| `ps aux`, 24 rows | 688 | 569 (−17 %) | **316** (128 s) | 352 (294 s) | **+36** |
+| (earlier, row-major body) find-files, full | 1 669 | — | 635 | 730 | +95 |
+| (earlier, row-major body) ls-l-nm, full | 2 160 | — | 466 | 539 | +73 |
+
+The clause adds ≈ +28 tokens on top, so the honest range is **+42 … +94 in favour of the parent (five of five lanes),**
+i.e. TYPOS is a **refusal on every lane measured**, and the shipped frontier is unchanged. That is
+the result, and it is worth stating exactly *why*, because it is a fact about the parent, not about
+the mask: the mask shrinks the text by 6–49 %, but the parent compresses the **original** by
+2.2–4.2× and the wire by only 1.4–2.1×. The parent's repetition model already charges a repeated
+line skeleton roughly once — that is why `openstack` at 2 511 raw tokens is 605 tokens of message.
+De-interleaving takes values that the parent saw *in place* and re-presents them as one long
+homogeneous run; a byte-level matcher gets less from that run than from the interleaved original,
+because adjacent values differ in exactly the bytes a matcher would hope to reuse.
+
+The mask therefore has one measured niche and no more: **as a standalone wire with no repetition-
+coding parent**, where it is 6–26 % below raw tokens on the two lanes above. Against this repo's
+parent it loses, and the gate says so.
+
+**Time and CPU bound.** Plan induction is 0.05–0.2 s for 0.5–5 k-token lanes (one LCS induction
+pass per lane plus one skeleton-clustering pass over the row population). The cost is entirely in
+the gate: one parent encode of the source plus one parent encode of the transform, 15–240 s per
+k-token lane, and the full `apt-real` lane (119 rows, 2 739 tokens) did not complete in 14.5 min
+before it was killed — a 119-value single line is expensive for the parent's matcher. This is the
+honest price of not trusting a proxy; `typosPlan().proxyGain` (which counts the transformed text
+alone) over-predicted by **+62** and **+82** tokens on the two full lanes it was compared against,
+and is now used only as a *pre-filter*, never as a score.
+
+**Related work, real.** The mask is the `printf`-style log-template idea: Drain (He, Zhu, He, Lyu,
+*Drain: An Online Log Parsing Approach with Fixed Depth Tree*, ICSE 2017) and the survey of
+Landauer et al. (2023). De-interleaving for compression is the column store (Abadi, Madden,
+Ferreira, SIGMOD 2006). Exact pattern discovery against a small literal alphabet is LZ77 (Ziv,
+Lempel, 1977). The new part is narrow and worth naming honestly: the template is inferred with no
+schema, no training corpus and no separate dictionary, and it is **emitted into the same chat
+message as data**, so the reader needs nothing but the message — every log-template system in that
+line of work stores its templates in a separate state, a system prompt, or a fine-tuned model.
+
+**Red team.** `bench/x41/rt.ts` — 49/49: nine grammar refusals, ten boundary deformations (CRLF,
+no trailing newline, empty file, single line, blank lines, mixed arity), seven adversarial sources
+that contain the header glyphs, the separator, *every* delimiter candidate, a mask literal, a
+20 kB line, and non-ASCII rows, a 200-shape seeded fuzz, an idempotence pair, and eight
+split/signature algebra tests. Two of those tests found real bugs during this turn: the decoder was
+guessing the delimiter as "the first candidate that appears anywhere in the mask" (a mask literal
+may legitimately contain `␟`), now fixed to "the first character after the closing bracket"; and the
+run pattern needed an explicit RLE expansion with a malformed-run refusal.
+
+**Local leader (refresh).** TYPOS is the local leader on **zero** lanes. The generalized local
+leaders of X40 stand unchanged: prose → frontier chain; delimited tables with a ramp or calendar
+column → METRON; bordered DB output with a price column → METRON; space-aligned CLI tables,
+path listings, dumps, markup, diffs → frontier chain. TYPOS's refusal is recorded alongside
+METRON's two gate refusals, and the reason is now measured rather than assumed: against a parent
+whose repetition block is already near-optimal, de-interleaving is a loss.

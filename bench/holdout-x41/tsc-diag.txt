@@ -1,0 +1,9 @@
+# source: tsc diagnostics (real compiler output)
+a.ts(1,7): error TS2322: Type 'string' is not assignable to type 'number'.
+a.ts(1,7): error TS2451: Cannot redeclare block-scoped variable 'a'.
+a.ts(2,10): error TS2393: Duplicate function implementation.
+a.ts(2,34): error TS2339: Property 'nope' does not exist on type 'string'.
+b.ts(1,7): error TS2322: Type 'string' is not assignable to type 'number'.
+b.ts(1,7): error TS2451: Cannot redeclare block-scoped variable 'a'.
+b.ts(2,10): error TS2393: Duplicate function implementation.
+b.ts(2,34): error TS2339: Property 'nope' does not exist on type 'string'.

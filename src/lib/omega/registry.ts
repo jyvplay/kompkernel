@@ -130,6 +130,7 @@ import { euteleiaEncode, euteleiaDecode } from './euteleia';
 import { ouraEncode, ouraDecode } from './oura';
 import { apographeEncode, apographeDecode, apographeArmOf } from './apographe';
 import { metronEncode, metronDecodeResult } from './metron';
+import { typosEncode, typosDecode } from './typos';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -525,6 +526,17 @@ export function codecEntries(): Entry[] {
         const r: any = metronEncode(t, enc);
         const decoded = metronDecodeResult(r);
         return { output: r.wire, decoded, oneChat: r.messageTokens, note: `parent=${r.apographeParentTokens}; metron=${r.apographe}; lifts=${r.metronModels.join(',') || '-'}; header=${r.apographeHeader || '-'}; modelled=${r.apographeModelled}; literal=${r.apographeLiteral}; delta=${r.messageTokens - r.apographeParentTokens}` };
+      },
+    },
+    {
+      key: 'typos',
+      label: 'τύπος TYPOS (The impress — X41. Every codec in the chain before this one reads a line and asks what its FIELDS contain: METRON lifts a column, APOGRAPHE lifts a neighbour, the substitution chain lifts a word. TYPOS reads a POPULATION of lines and asks what its lines do NOT contain. A record set — `apt list --installed`, `ps aux`, `ls -l`, a find listing, an application log — is a small alphabet of separator-free literal strings interleaved with narrow value slots, repeated on line after line. TYPOS infers that alphabet itself, with a longest-common-interior-block search over the lines plus exact skeleton clustering (`cellSignature`), picks a separator that occurs in NO line at all, and emits `⟨lit0<d>lit1<d>…litk⟩<d>s<sep><d>pR6L3R2…` where the mask is the literals and the runs are the row/literal pattern. The body is then COLUMNAR, not row-major: each of the (k − L) unlifted slots becomes ONE line of its values joined by a single separator character, followed by every literal line in source order. De-interleaving is the mechanism — the values of one mask slot across 120 rows are a homogeneous sequence, which is the shape a tokeniser\'s dictionary and repetition block were built for, whereas the same 120 values interleaved with skeleton text on every line are not. The reader re-splits by the declared separator, re-interleaves by the run pattern, and verifies the value count against the row count on every column, so a wrong mask cannot decode to a plausible line; anything it cannot re-parse it returns untouched. Exactness is checked on the real wire inside `typosEncode` before the parent is allowed to see it, and the whole message is then gated against the parent encode of the source. Greedy: yes — forward addition of one literal at a time, then a real parent encode of the transformed text decides. Time/CPU: one LCS induction pass per lane (O(lines × depth)), and exactly ONE extra parent encode; a 3 000-token lane costs 0.2 s for the plan and ~200 s for that encode, which is the honest cost of not trusting a proxy. Related work, real: the mask is the `printf`-format / log-template idea measured at scale by Drain (He, Zhu, He, Lyu, ICSE 2017) and surveyed by Landauer et al. (2023); the de-interleaving is a column store (Abadi, Madden, Ferreira, SIGMOD 2006); exact pattern discovery is LZ77 (Ziv, Lempel, 1977) restricted to a small literal alphabet — and, unlike every log-template system in that line, the template here is emitted into the same message, not stored in a separate schema or system prompt. Honest limits: it fires only on repeated record sets; prose has no repeated skeleton and never fires; a lane whose lines share no separator-free literal of length ≥ 3 is refused; and on lane sets that the parent\'s own column and dictionary codecs already handle, the measured gain after the parent re-encode is small or zero.)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r: any = typosEncode(t, enc);
+        const decoded = r.typos ? typosDecode(r.wire) : t;
+        return { output: r.wire, decoded, oneChat: r.messageTokens, note: `in=${r.inTokens}; out=${r.messageTokens}; typos=${r.typos}; rows=${r.typosRows}; literals=${r.typosLiterals}; header=${r.typosHeader || '-'}; models=${r.typosModels || '-'}` };
       },
     },
     {
