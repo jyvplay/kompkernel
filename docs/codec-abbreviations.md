@@ -1739,3 +1739,42 @@ about the wire, not about the inference.
 loses the gate. (iii) Periodicity is per field with a fixed period list; a column whose period is
 prime and larger than 256, or whose step changes, falls back to `x`/`r`. (iv) The clause costs
 53–72 tokens, which is the whole reason `ss -tan` and `ls -l /usr/bin` refuse.
+
+## Generalized local leaders by structural category (X42 refresh, o200k, one chat message, `OMEGA_DET=1`)
+
+`M` is the shipped one-chat message, `raw` the same text tokenised with no codec. "Leader" is the
+codec with the smallest measured M on that lane. X42 adds one module (`kannabos.ts`) and one
+registry entry; `git diff --stat 0ff0675..HEAD -- src/` shows **no line** of APOGRAPHE, METRON,
+OURA, EUTELEIA, BPE or TYPOS changed, and the 31-lane frontier repeat (`bench/x40/frontier.ts`) was
+re-run to check it: **29/31 lanes bit-identical**, 3 213 s wall. The two that differ are both the
+*parent's* numbers, not the codec's: `markdown-table.md` 182 → 176 (the discrepancy X40 already
+reported and could not reproduce) and `npm-ls.txt` 901 → **904** (+3 in both parent and total, a new
+instance of the same instability — the two files are byte-identical to the ones the X39 receipt
+measured, `chars` 635 and 6 688, and no parent file changed in this diff). Neither lane is an X42
+lane, and no X42 number below rests on either.
+
+| structural category | lanes (raw → M) | local leader | note |
+|---|---|---|---|
+| **Space-aligned CLI tables, generative columns** | df-h 570 → **146**, kubectl 1 006 → **301** | **KANNABOS (new)** | −104 (−41.6 %) and −39 (−11.5 %) against the X40 frontier; both exact |
+| Space-aligned CLI tables, unstructured cells | ps-ef 1 144 → **315**, ss-tan 843 → **209**, ls-usr-bin 1 029 → **375** | frontier chain | KANNABOS plans on all three and **refuses**: 414 ≥ 315, 319 ≥ 209, 510 ≥ 375 (both numbers printed by the gate). `findmnt` plans too, but its whole grid gain is 65 tokens against a ~55-token clause, so it was **not** worth a 4-minute gate run and is not claimed |
+| **Prose, English, non-repetitive** | kb-article 656 → **622**, llm-answer 733 → **674**, email-thread 629 → **488**, meeting-transcript 472 → **385**, bibliography 896 → **671** | frontier chain | KANNABOS no-op: no repeated column geometry |
+| **Prose, non-English** | de 525 → **457**, es 457 → **403**, ja 655 → **492**, pl 623 → **602**, ru 478 → **478**, tr 554 → **516** | frontier chain | no-op |
+| **Delimited tables with a calendar column** | aapl 3 108 → **1 151**, vix 3 412 → **409** | APOGRAPHE | comma-delimited: the grid is not the schema there |
+| **Rendered/bordered DB output** | psql 675 → **245** | METRON | `lin` on a two-decimal price column |
+| **Tables with a wall-clock column** | cue-sheet 513 → **164** | METRON | `clock: 00:00:02 /1,3` |
+| **Markdown tables with a ramp + unit suffix** | markdown-table 330 → **176** | frontier (gate) | plan exists, refused on the clause floor |
+| **TSV metrics with a decimal ramp** | metrics 811 → **237** | frontier (gate) | planned, refused |
+| **Application logs** | openstack 4 028 → **898** | frontier chain | no column geometry |
+| **Path listings and trees** | npm-ls 2 747 → **901**, find-listing 3 997 → **1 279**, git-numstat 4 632 → **1 992**, ls-iso 1 175 → **367** | frontier chain | `ls -l` *does* plan (9 cols) but loses the gate — see above |
+| **DB dumps / build output** | dump.sql 1 795 → **608** | frontier chain | — |
+| **Markup (HTML/SVG/JSX/XML/TeX)** | page 3 220 → **547**, chart.svg 1 331 → **417**, component.jsx 296 → **264**, pom 544 → **242**, paper.tex 429 → **370** | frontier chain | indentation is not a grid: the columns do not repeat per row |
+| **Diffs and stack traces** | unified-diff 578 → **419**, node-stacktraces 568 → **300** | frontier chain | — |
+
+**The generalized rule (X42).** KANNABOS is the local leader exactly when (i) the text has ≥4 lines
+with ≥3 space-aligned cells, (ii) **at least one column is generative** — a law over ≥3 values, a run,
+or a dictionary amortised over many rows — and (iii) the grid wire plus a 53–72-token clause still
+beats the parent's own one-chat total. Condition (ii) is the one that separates the wins from the
+refusals, and it is measured, not assumed: `df -h` wins because its size/percent/device columns are
+laws, `kubectl` wins because its IPs and ages are laws, and `ps -ef` loses because PID, TIME and CMD
+are distinct-per-row values that no law and no run covers. This is the opposite of TYPOS's failure
+mode: TYPOS lost on redundant cells, KANNABOS loses on *irreducible* ones.
