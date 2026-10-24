@@ -1317,3 +1317,211 @@ openstack-loghub-26.log   945 -> 928   -17   byte-exact ✅
 - **`nyx`** — asks the reader to execute Python and uses `·` as a BPE-split hint.
 
 All three are excluded from every honest frontier table in `docs/codecs.md`.
+
+## ἀπογραφή APOGRAPHE (X39, `src/lib/omega/apographe.ts`, registry key `apographe`, exact, **shipped this turn**)
+
+- **What it is.** The first codec in this repository that is **not a substitution codec**. Every
+  earlier entry finds a span and writes something shorter in its place, so it pays a pointer at
+  the point of substitution — a glyph, a count plus framing, a marker plus digits. That per-use
+  pointer is why each of them needs `count ≥ 3` before it pays. APOGRAPHE removes the pointer
+  instead of shrinking it: in a delimited record set the *position* of a value is already known
+  (field *k*, record *i*), so a column that is a function of the line above costs **zero tokens
+  per row**.
+- **Mechanism, in the order a reader meets it.** One header line `<n<HSEP>sep<HSEP>col=model…>`
+  declares the full arity `n`, the field separator, and one one-step predictor per **lifted**
+  column: `above` (repeat the line above), `colM` (copy column M of the same line), `days`
+  (next calendar day), `workdays` (next weekday, so Friday advances by three), `±b` (the number
+  above ± b, re-rendered at the same digit width — width preservation is what keeps
+  `user_0007 → user_0008` exact). Lines are disambiguated **by arity, not by markers**: `n`
+  fields = literal line, copied out *and* it resets every predictor's state; `n − L` fields
+  (`L` lifted columns) = modelled line, missing fields rebuilt, kept fields consumed in order;
+  any other count = copied verbatim and the state is untouched. Because an exception is written
+  in full and resets the state, the wire is **self-synchronising** and the encoder never
+  enumerates, indexes or quotes exceptions.
+- **Greedy?** Greedy core, exact gate. One (column, predictor) pair is added at a time, keeping
+  only additions that strictly lower the measured token count of the transformed text; no
+  backtracking, no subset enumeration. The transformed text is then run through the **whole
+  parent stack** and the result ships only if the measured one-chat message is strictly smaller
+  than the parent's own message, so a lane cannot regress.
+- **Honest source-article citation.** The *mechanism* is not new: it is frame-of-reference and
+  delta coding with escape-coded exceptions, executed on compressed columns — Abadi, Madden &
+  Ferreira, *Integrating Compression and Execution in Column-Oriented Database Systems*,
+  SIGMOD 2006, pp. 671–682, doi:10.1145/1142473.1142548; exception vectors patched on decode —
+  Afroozeh, Kuffó & Boncz, *ALP: Adaptive Lossless floating-Point Compression*, SIGMOD 2024,
+  doi:10.1145/3626717 (and G-ALP, 2025, doi:10.1145/3736227.3736242); taxonomy — Damme et al.,
+  *Lightweight Data Compression Algorithms: An Experimental Survey*, EDBT 2017. The nearest
+  *model-facing* neighbour is TOON (Token-Oriented Object Notation, `toonformat.dev`), which
+  declares the field list once per array; TOON removes repeated **keys**, APOGRAPHE removes
+  repeated **values**. What is original here is the carrier and the disambiguation rule: a
+  one-line prose contract executed by the reader, arity as the literal/modelled discriminator,
+  and a token-measured decision to fire. All three are internal to this repository.
+- **Time/CPU bound.** Yes, twice. The planner costs at most `arity` rounds of at most
+  `arity × 6` candidate transforms (one left-to-right pass plus one token count each, plus one
+  `apographeUndo` soundness check *before* measurement); the expensive part is the single extra
+  parent encode of the transformed text, and on every lane where it fires that encode is cheaper
+  than the parent's encode of the source. Measured: aapl 95 s vs parent 97 s, vix 136 s vs 140 s,
+  psql 20 s vs 22 s.
+- **Measured (parent and child in one process, `OMEGA_DET=1`, o200k, one chat message):**
+  `aapl-2014.csv` 1 452 → **1 151** (−301, −20.7 %), `vix-daily-1990.csv` 582 → **409**
+  (−173, −29.7 %), `psql-output.txt` 322 → **289** (−33, −10.2 %); the other 28 lanes of the
+  31-lane corpus are unchanged, because the plan is refused or the whole-message gate does not
+  clear. Every firing lane is byte-exact under an **independent CPython reader written from the
+  contract prose** (`bench/x39/apographe_decode.py`), and under a 43-case red team
+  (`bench/x39/rt.ts`, 43/43 including 300 seeded fuzz record sets).
+- **Honest limits.** Prose does not move (see the channel-capacity audit in `bench/x39/X39.md`
+  §4: prose is already at 12.4–14.5 bits/token against a 14.9 ceiling). Single-character-field
+  separators only — space-aligned output such as `kubectl get pods` is refused. Gregorian
+  `YYYY-MM-DD` only. The reader must know which weekday a date is; nothing in the message checks
+  that, so a reader that miscounts a weekday is silently wrong (the only unverified interface).
+- **Repairs made this turn, and the trust they do not inherit.** (i) The writer could emit a
+  header whose separator collided with the field separator, producing a header its own parser
+  could not read; the writer now parses its header and refuses the plan if the parse does not
+  reproduce the configuration. (ii) `colM` could be planned for a column before its source
+  column was written; both directions now walk columns `0…n−1` and record kept values first.
+  Every number above was retaken after both repairs.
+
+## μέτρον METRON (X40, `src/lib/omega/metron.ts`, registry key `metron`, exact, **shipped this turn**)
+
+- **What it is.** APOGRAPHE's engine with the *state removed* from the predictor. Every predictor in
+  this stack before X40 read the line above, so each one paid a carried state, a reset whenever a
+  line was written literally, and — for `+b` — a rendering rule fixed to a digit run at constant
+  width. METRON declares a column as a function of the line's **own index** instead, which means a
+  literal line changes nothing for any other line, an error cannot propagate, and there is nothing
+  to reset.
+- **Mechanism, in the order a reader meets it.** The header gains two spellings inside an existing
+  lift slot: `colN=lin:V/at,S` — the field on source line `j` is `V + (j − at)·S`, rendered in `V`'s
+  exact format — and `colN=clock:V/at,S`, the same where `V` is a wall-clock reading in seconds.
+  `V` is a **real field value**, not a format description: the reader parses it with the rule it
+  already applies to every field (optional leading sign, digit run, optional fraction, trailing
+  text) and recovers the decimal count (`100.00` → 2), the integer width and zero padding
+  (` 078.10` → width 3), the leading spaces and the unit suffix (` s `, `%**`) from that one sample.
+  The **anchor is the pair (value, line index)**, never a projection to line 0 — a projection can be
+  negative for a table whose first data row is line 1 with a negative step, and a clock cannot
+  render a negative reading. The renderer **refuses** (returns null) when the integer field would
+  widen, when a clock reading is negative, or when a two-field clock would need an hour — and a
+  refusal simply writes that line out in full. Disambiguation is unchanged: `n` fields literal,
+  `n − L` fields modelled, anything else copied.
+- **Greedy?** Yes, and now two-pass over the *same* greedy. Forward addition, one
+  (column, predictor) pair at a time, every trial scored on the real o200k count, no backtracking,
+  no subset enumeration, and the whole one-chat message gated against the parent, so no lane can
+  regress. The **new** part is the second pass: the clause is a fixed cost (~55–60 tokens) paid once
+  per plan, and charging it to the first lift sets a barrier that a plan spread over several columns
+  cannot cross one column at a time (measured: `markdown-table.md`, ~41 wire tokens per column,
+  60-token clause, single-lift trial −19, four-lift plan +55). So when the total-scored greedy
+  stalls, METRON re-runs the identical greedy scoring the **wire alone** and keeps the better of the
+  two measured totals. The X39 search is untouched — verified by re-running all 31 X39 receipt lanes
+  (§ Measurements below).
+- **Honest source-article citation.** The mechanism is not new. Frame-of-reference and delta coding
+  with escape-coded exceptions: Abadi, Madden & Ferreira, *Integrating Compression and Execution in
+  Column-Oriented Database Systems*, SIGMOD 2006, doi:10.1145/1142473.1142548. Decimal scaling and
+  out-of-band exception vectors: Afroozeh, Kuffó & Boncz, *ALP: Adaptive Lossless Floating-Point
+  Compression*, SIGMOD 2024, doi:10.1145/3626717 (and G-ALP 2025,
+  doi:10.1145/3736227.3736242). Taxonomy: Damme et al., EDBT 2017. All of these are
+  **block-relative and schema-first**, with a decoder that is a program. What I did not find in
+  that literature, and therefore claim here, is the carrier: (i) **the sample is the format** — one
+  value in the target format declares decimals, width, padding and suffix, so no schema and no
+  separate format rule are needed; (ii) absolute generators inside a self-describing **prose** wire
+  that a chat reader executes with no tool, no system prompt and no second message; (iii) the
+  **clock** family, where the unit is implied by the format rather than declared. Not finding it is
+  not proof it does not exist, and I do not claim it does not.
+- **Time/CPU bound.** Yes. Per column per greedy round: one template fit (a single left-to-right
+  pass), plus the same apply-and-measure the parent candidate already paid. One extra token count
+  per candidate to expose the wire total. The second pass costs one extra greedy run and only runs
+  when the first stalls. Measured: planner 25 ms → 110 ms on an 811-byte TSV; the encode is
+  dominated by the single extra parent encode of the transformed text, which on every firing lane
+  is cheaper than the parent's encode of the source (`psql` 16 s child vs 15 s parent, `cue-sheet`
+  6 s vs 31 s, `prices` 5 s vs 6 s).
+- **Measured (parent and child in one process, `OMEGA_DET=1`, o200k, one chat message).**
+  `psql-output.txt` 322 → **245** (−77, −23.9 %, and −44 below X39's own APOGRAPHE on the same lane),
+  `cue-sheet.md` 184 → **164** (−20, clock family), `prices.csv` 226 → **214** (−12,
+  `lin:12.50/1,5`); `markdown-table.md` plans four `lin` columns and the gate refuses (176 → 176),
+  `metrics.tsv` plans `lin:250.0/1,20` and the gate refuses (237 → 237), and the other 26 lanes are
+  unchanged. **Frontier repeat test:** all 31 X39 receipt lanes re-encoded with X39's own call and
+  diffed field by field (`bench/x40/frontier.ts`): 25/31 bit-identical on the raw receipt;
+  4 rows are stale *in the receipt file* (`dump.sql`, `page.html`, `aapl-2014.csv`,
+  `vix-daily-1990.csv` kept the pre-switch inner-layer parent, which X39.md records in brackets
+  next to the shipped value) and 1 differs only in a lift label (`psql`), so the shipped
+  configuration reproduces on 30/31; `markdown-table.md` is 182 in the receipt and **176** on this
+  build, unexplained and counted as a failure of the repeat test rather than silently accepted
+  (`oura.ts` is untouched in the diff). **Red team:** 39/39
+  (`bench/x40/rt.ts`, including a 200-table seeded fuzz and the header-grammar refusals) plus the
+  APOGRAPHE suite re-run 43/43, because a repaired engine inherits no trust. **Independent reader:**
+  the CPython reader written from the contract prose was extended with the new grammar and
+  reproduces `psql`, `prices` and `cue-sheet` byte for byte from the real emitted messages.
+- **Honest limits.** Prose does not move: 0 on all eleven prose lanes. A plan costs ~55–60 tokens
+  of clause, so a table under roughly fifteen rows cannot pay for it — that floor is the codec's
+  unresolved interface and it is why `markdown-table` and `metrics.tsv` measure zero. One fixed
+  textual format per column (mixed units, suppressed trailing zeros, thousands separators and
+  scientific notation are all refused). Gregorian `YYYY-MM-DD` only. No single-character separator,
+  so space-aligned output (`kubectl`, `df -h`) is still out of reach. The reader's arithmetic is not
+  checked by the message: a reader that miscounts `at` is silently wrong.
+- **Repairs made this turn, and the trust they do not inherit.** (i) The decoder arm needed the
+  tail-anchored numeric options, which the first `metronEncode` did not pass, so OURA-collapsed
+  decimals decoded as `~400 s` instead of `40.0 s`; fixed by `apographeDecodeResult` /
+  `metronDecodeResult`, and every number above was retaken after the fix. (ii) The template parser
+  greedily took a leading `-` into the prefix, which would have baked a minus sign into a
+  mixed-sign column's template; the prefix is now lazy so the sign is a sign. (iii) The old
+  value-at-line-0 anchor was replaced by (value, line index) because the projection is unrenderable
+  for clocks and wrong for offset tables. (iv) The planner's fixed-cost barrier (above).
+
+## Generalized local leaders by structural category (X39 refresh, 31 lanes, o200k, one chat message, `OMEGA_DET=1`)
+
+Measured this turn, one process, parent and child in the same run. `M` is the shipped one-chat
+message; `raw` is the same text tokenised with no codec. "Leader" means the codec with the
+smallest measured M on that lane, not the codec that changed the most.
+
+| structural category | lanes (raw → M) | local leader | note |
+|---|---|---|---|
+| **Prose, English, non-repetitive** | kb-article 656 → **622**, llm-answer 733 → **674**, email-thread 629 → **488**, meeting-transcript 472 → **385**, bibliography 896 → **671** | frontier chain (TIMEMA → ANADIPLOSIS) | APOGRAPHE no-op; `pb` 12.4–14.5, i.e. at the word channel's ceiling |
+| **Prose, non-English** | de 525 → **457**, es 457 → **403**, ja 655 → **492**, pl 623 → **602**, ru 478 → **478**, tr 554 → **516** | frontier chain | `ru` moves **zero**: the parent found nothing to substitute. A new, honest floor case for the prose plateau |
+| **Delimited tables with a calendar column** | aapl 3 108 → **1 151**, vix 3 412 → **409** | **APOGRAPHE** (new) | −299 / −170 against the frontier; the date column is rebuilt, not written |
+| **Rendered / bordered tables** | psql 675 → **289** | **APOGRAPHE** (new) | `+1` on the integer columns, `workdays` semantics for the date column |
+| **Space-aligned tables** | df-h 570 → **250**, kubectl 1 006 → **340** | frontier chain | APOGRAPHE **refuses** (no single-character field separator). The most common shape of CLI output is exactly the shape it cannot parse |
+| **Markdown tables** | markdown-table 330 → **182** | frontier chain | 5 rows, below APOGRAPHE's 6-row minimum |
+| **Application logs** | openstack 4 028 → **898** | frontier chain | `pb` 11.3; no delimiter, so no lift |
+| **Path listings and trees** | npm-ls 2 747 → **901**, find-listing 3 997 → **1 279**, git-numstat 4 632 → **1 992**, ls-iso 1 175 → **367** | frontier chain | the numstat proxy proposed −725 and the gate refused it: 0 realised |
+| **DB dumps / build output** | dump.sql 1 795 → **608** | frontier chain | 662 on the inner layer, 608 on the frontier — the difference is EUTELEIA, and it is why APOGRAPHE's parent had to be `ouraEncode` |
+| **Markup (HTML/SVG/JSX/XML/TeX)** | page 3 220 → **547**, chart.svg 1 331 → **417**, component.jsx 296 → **264**, pom 544 → **242**, paper.tex 429 → **370** | frontier chain | `pb` 9.5–10.0 |
+| **Diffs and stack traces** | unified-diff 578 → **419**, node-stacktraces 568 → **300** | frontier chain | — |
+
+**Reading of the table.** APOGRAPHE is the local leader only where a record set has (i) one
+single-character field separator, (ii) at least six rows of equal arity, and (iii) a column that
+is a one-step function of the line above. That is 3 of 31 lanes — but the two large ones are
+21 % and 29 %, i.e. bigger than any single codec's gain in the last four turns, and they are
+common shapes in everyday work (a price series, a database export). Everything else stays with
+the substitution chain, and §4 of `bench/x39/X39.md` is the measured argument for why it will
+stay there.
+
+## Generalized local leaders by structural category (X40 refresh, 31 lanes, o200k, one chat message, `OMEGA_DET=1`)
+
+Measured this turn, one process per lane, parent and child in the same run. `M` is the shipped
+one-chat message; `raw` is the same text tokenised with no codec. "Leader" means the codec with the
+smallest measured M on that lane, not the codec that changed the most. Rows marked **new** are
+lanes where METRON moved the leader; every other row is unchanged from X39, which is itself the
+result of the frontier repeat test (`bench/x40/frontier.ts`, 31/31 lanes bit-identical).
+
+| structural category | lanes (raw → M) | local leader | note |
+|---|---|---|---|
+| **Prose, English, non-repetitive** | kb-article 656 → **622**, llm-answer 733 → **674**, email-thread 629 → **488**, meeting-transcript 472 → **385**, bibliography 896 → **671** | frontier chain (TIMEMA → ANADIPLOSIS) | METRON **no-op**; 12.4–14.5 bits/token against a 14.9 ceiling |
+| **Prose, non-English** | de 525 → **457**, es 457 → **403**, ja 655 → **492**, pl 623 → **602**, ru 478 → **478**, tr 554 → **516** | frontier chain | `ru` still moves zero |
+| **Delimited tables with a calendar column** | aapl 3 108 → **1 151**, vix 3 412 → **409** | APOGRAPHE | METRON finds no better plan on either lane |
+| **Rendered/bordered DB output** | psql 675 → **245** | **METRON (new)** | `lin` on a two-decimal price column: **−44 below X39's 289** |
+| **Tables with a wall-clock column** | cue-sheet 513 → **164** | **METRON (new)** | `clock: 00:00:02 /1,3`, −20 against the frontier |
+| **Markdown tables with a ramp + unit suffix** | markdown-table 330 → **176** | frontier (gate) | plan **now exists** (four `lin` columns); refused on the ~60-token clause floor |
+| **TSV metrics with a decimal ramp** | metrics 811 → **237** | frontier (gate) | `lin:250.0/1,20` planned, refused |
+| **Space-aligned tables** | df-h 570 → **250**, kubectl 1 006 → **340** | frontier chain | no single-character separator — the largest unaddressed ops shape |
+| **Application logs** | openstack 4 028 → **898** | frontier chain | no delimiter |
+| **Path listings and trees** | npm-ls 2 747 → **901**, find-listing 3 997 → **1 279**, git-numstat 4 632 → **1 992**, ls-iso 1 175 → **367** | frontier chain | numstat still refuses at the gate |
+| **DB dumps / build output** | dump.sql 1 795 → **608** | frontier chain | `VALUES` batches need a pre-strip, which is a second codec |
+| **Markup (HTML/SVG/JSX/XML/TeX)** | page 3 220 → **547**, chart.svg 1 331 → **417**, component.jsx 296 → **264**, pom 544 → **242**, paper.tex 429 → **370** | frontier chain | — |
+| **Diffs and stack traces** | unified-diff 578 → **419**, node-stacktraces 568 → **300** | frontier chain | — |
+
+**The generalized rule (X40).** METRON is the local leader exactly when a record set has (i) one
+single-character separator, (ii) ≥6 rows of equal arity, (iii) a column whose values form an
+arithmetic progression **in one fixed textual format**, and (iv) enough rows that the ~60-token
+clause is amortised — roughly ≥15 rows for a single lifted column at these token densities.
+Condition (iii) is where METRON widens X39: APOGRAPHE additionally required a step of one in the
+column's own units with the width unchanged (`+b`, `days`); METRON accepts any integer step in any
+single format, so decimals, percentages, zero-padded identifiers, unit-suffixed durations and clock
+readings all qualify. Condition (iv) is the codec's honest floor and the reason two lanes that plan
+still measure zero.
