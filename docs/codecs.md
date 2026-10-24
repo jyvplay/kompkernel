@@ -3521,3 +3521,79 @@ data requires, the tail-anchored relaxation, the `lead`/`plain`/`mark` ambiguity
 both guards are original here.
 
 Full writeup: `bench/x38/X38.md`.
+
+---
+
+## X39 — ἀπογραφή APOGRAPHE: the first non-substitution codec in the stack
+
+Full report: `bench/x39/X39.md`. Source: `src/lib/omega/apographe.ts`, registry key `apographe`.
+
+### The mechanism in one paragraph
+
+Every codec before this one is a **substitution** codec: it finds a span and writes something
+shorter where the span was, so it pays a pointer (a glyph, a count, a mark) at the point of
+substitution and only pays off when a span occurs three or more times. APOGRAPHE removes the
+pointer instead of shrinking it. A delimited record set is a matrix; the arity of a line says
+which columns are present; a one-line header `<n|sep|col=model…>` names a one-step predictor per
+**lifted** column (`above`, `colM`, `days`, `workdays`, `±b` width-preserving). A line with `n`
+fields is literal — copied out, and it **resets** every predictor; a line with `n − L` fields is
+modelled and its missing fields are rebuilt; anything else is copied verbatim. Because the
+exception *is* the full line, the wire is self-synchronising, and the encoder never enumerates,
+indexes or quotes exceptions.
+
+### Measured (this turn, parent and child in one process, `OMEGA_DET=1`, o200k, one chat message)
+
+| lane | frontier parent | **APOGRAPHE** | Δ | % | exact |
+|---|---|---|---|---|---|
+| `aapl-2014.csv` | 1 450 | **1 151** | **−299** | −20.6 % | yes |
+| `vix-daily-1990.csv` | 579 | **409** | **−170** | −29.4 % | yes |
+| `psql-output.txt` | 322 | **289** | **−33** | −10.2 % | yes |
+| the other 28 lanes of a 31-lane corpus | — | unchanged | 0 | — | yes |
+
+Every firing lane is byte-exact under an independent CPython reader written from the contract
+prose (`bench/x39/apographe_decode.py`, no shared code) and under a 43-case red team
+(`bench/x39/rt.ts`, 43/43, including 300 seeded fuzz record sets). No lane regressed: the codec
+ships only when the whole one-chat message is strictly smaller than the frontier's own.
+
+### What it does not do
+
+* Prose: no-op, and §4 of the report shows there is nothing left there (12.4–14.5 bits/token
+  against a 14.9 ceiling).
+* Space-aligned CLI output (`kubectl get pods`, `df-h`): **refused**, because there is no
+  single-character field separator to key the arity on. That is 2 of the 5 table-like lanes in
+  the corpus and the most common shape of pretty-printed terminal output.
+* Non-Gregorian or non-`YYYY-MM-DD` dates.
+* The reader must know which weekday a date is; nothing in the message verifies it.
+
+### The refusal that calibrates the method
+
+On `git-numstat.txt` the planner's proxy proposed a lifted column and predicted **−725 tokens**
+on raw text (3 859 → 725). The frontier's encode of the transformed text came back at **1 992,
+unchanged** — the parent was already harvesting that column more cheaply — and the whole-message
+gate refused. Proxy gains on raw text are not wins.
+
+### Frontier restatement (the repeat test)
+
+`ouraEncode`, one process per lane, `OMEGA_DET=1`. **14 of 16 re-measured lanes reproduce the
+X38 table exactly.** Two do not: `aapl-2014.csv` is **1 450**, not 1 452, and OURA now *fires*
+there (X38 recorded `oura=n` on every lane); `find-listing.txt` is **1 279**, not 1 267. The
+frontier is therefore restated here as measured, not inherited.
+
+### A falsification of the harness, found by a new lane
+
+`bench/holdout-lang/pl-kb.txt` fails the repo's own round-trip check under the decode call used
+by `bench/x38/verify.ts`, because that call selects the parent's arm from a **label**
+(`parent === 'identity'`) that is not part of the message. On `pl-kb` the label says `identity`
+while the wire opens with a CHIRON tape; decoding with `chironDecode` is exact, decoding with the
+label-selected arm is not. APOGRAPHE now decides the arm **from the wire**
+(`apographeArmOf`), and `pl-kb` round-trips byte-exact in the corrected build. The parent's
+harness still has the label-based rule.
+
+### The instrument this turn added
+
+`pb = 8 · brotli-11(source) / wire tokens` — bits of a strong general compressor's output per
+wire token — plus two measured channel ceilings: **9.97 bits/token for a decimal-digit stream**
+(3.000 digits per o200k token at 300 / 3 000 / 30 000 digits) and **≤ 6.57 bits/token for any
+printable single-character alphabet**. Prose lanes sit at 12.4–14.5 `pb` (at the word channel's
+ceiling); table lanes at 5.9–10.5 (below the digit ceiling). That is where the remaining work is,
+and it is *structure*, not alphabet.

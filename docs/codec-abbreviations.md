@@ -1317,3 +1317,93 @@ openstack-loghub-26.log   945 -> 928   -17   byte-exact ✅
 - **`nyx`** — asks the reader to execute Python and uses `·` as a BPE-split hint.
 
 All three are excluded from every honest frontier table in `docs/codecs.md`.
+
+## ἀπογραφή APOGRAPHE (X39, `src/lib/omega/apographe.ts`, registry key `apographe`, exact, **shipped this turn**)
+
+- **What it is.** The first codec in this repository that is **not a substitution codec**. Every
+  earlier entry finds a span and writes something shorter in its place, so it pays a pointer at
+  the point of substitution — a glyph, a count plus framing, a marker plus digits. That per-use
+  pointer is why each of them needs `count ≥ 3` before it pays. APOGRAPHE removes the pointer
+  instead of shrinking it: in a delimited record set the *position* of a value is already known
+  (field *k*, record *i*), so a column that is a function of the line above costs **zero tokens
+  per row**.
+- **Mechanism, in the order a reader meets it.** One header line `<n<HSEP>sep<HSEP>col=model…>`
+  declares the full arity `n`, the field separator, and one one-step predictor per **lifted**
+  column: `above` (repeat the line above), `colM` (copy column M of the same line), `days`
+  (next calendar day), `workdays` (next weekday, so Friday advances by three), `±b` (the number
+  above ± b, re-rendered at the same digit width — width preservation is what keeps
+  `user_0007 → user_0008` exact). Lines are disambiguated **by arity, not by markers**: `n`
+  fields = literal line, copied out *and* it resets every predictor's state; `n − L` fields
+  (`L` lifted columns) = modelled line, missing fields rebuilt, kept fields consumed in order;
+  any other count = copied verbatim and the state is untouched. Because an exception is written
+  in full and resets the state, the wire is **self-synchronising** and the encoder never
+  enumerates, indexes or quotes exceptions.
+- **Greedy?** Greedy core, exact gate. One (column, predictor) pair is added at a time, keeping
+  only additions that strictly lower the measured token count of the transformed text; no
+  backtracking, no subset enumeration. The transformed text is then run through the **whole
+  parent stack** and the result ships only if the measured one-chat message is strictly smaller
+  than the parent's own message, so a lane cannot regress.
+- **Honest source-article citation.** The *mechanism* is not new: it is frame-of-reference and
+  delta coding with escape-coded exceptions, executed on compressed columns — Abadi, Madden &
+  Ferreira, *Integrating Compression and Execution in Column-Oriented Database Systems*,
+  SIGMOD 2006, pp. 671–682, doi:10.1145/1142473.1142548; exception vectors patched on decode —
+  Afroozeh, Kuffó & Boncz, *ALP: Adaptive Lossless floating-Point Compression*, SIGMOD 2024,
+  doi:10.1145/3626717 (and G-ALP, 2025, doi:10.1145/3736227.3736242); taxonomy — Damme et al.,
+  *Lightweight Data Compression Algorithms: An Experimental Survey*, EDBT 2017. The nearest
+  *model-facing* neighbour is TOON (Token-Oriented Object Notation, `toonformat.dev`), which
+  declares the field list once per array; TOON removes repeated **keys**, APOGRAPHE removes
+  repeated **values**. What is original here is the carrier and the disambiguation rule: a
+  one-line prose contract executed by the reader, arity as the literal/modelled discriminator,
+  and a token-measured decision to fire. All three are internal to this repository.
+- **Time/CPU bound.** Yes, twice. The planner costs at most `arity` rounds of at most
+  `arity × 6` candidate transforms (one left-to-right pass plus one token count each, plus one
+  `apographeUndo` soundness check *before* measurement); the expensive part is the single extra
+  parent encode of the transformed text, and on every lane where it fires that encode is cheaper
+  than the parent's encode of the source. Measured: aapl 95 s vs parent 97 s, vix 136 s vs 140 s,
+  psql 20 s vs 22 s.
+- **Measured (parent and child in one process, `OMEGA_DET=1`, o200k, one chat message):**
+  `aapl-2014.csv` 1 452 → **1 151** (−301, −20.7 %), `vix-daily-1990.csv` 582 → **409**
+  (−173, −29.7 %), `psql-output.txt` 322 → **289** (−33, −10.2 %); the other 28 lanes of the
+  31-lane corpus are unchanged, because the plan is refused or the whole-message gate does not
+  clear. Every firing lane is byte-exact under an **independent CPython reader written from the
+  contract prose** (`bench/x39/apographe_decode.py`), and under a 43-case red team
+  (`bench/x39/rt.ts`, 43/43 including 300 seeded fuzz record sets).
+- **Honest limits.** Prose does not move (see the channel-capacity audit in `bench/x39/X39.md`
+  §4: prose is already at 12.4–14.5 bits/token against a 14.9 ceiling). Single-character-field
+  separators only — space-aligned output such as `kubectl get pods` is refused. Gregorian
+  `YYYY-MM-DD` only. The reader must know which weekday a date is; nothing in the message checks
+  that, so a reader that miscounts a weekday is silently wrong (the only unverified interface).
+- **Repairs made this turn, and the trust they do not inherit.** (i) The writer could emit a
+  header whose separator collided with the field separator, producing a header its own parser
+  could not read; the writer now parses its header and refuses the plan if the parse does not
+  reproduce the configuration. (ii) `colM` could be planned for a column before its source
+  column was written; both directions now walk columns `0…n−1` and record kept values first.
+  Every number above was retaken after both repairs.
+
+## Generalized local leaders by structural category (X39 refresh, 31 lanes, o200k, one chat message, `OMEGA_DET=1`)
+
+Measured this turn, one process, parent and child in the same run. `M` is the shipped one-chat
+message; `raw` is the same text tokenised with no codec. "Leader" means the codec with the
+smallest measured M on that lane, not the codec that changed the most.
+
+| structural category | lanes (raw → M) | local leader | note |
+|---|---|---|---|
+| **Prose, English, non-repetitive** | kb-article 656 → **622**, llm-answer 733 → **674**, email-thread 629 → **488**, meeting-transcript 472 → **385**, bibliography 896 → **671** | frontier chain (TIMEMA → ANADIPLOSIS) | APOGRAPHE no-op; `pb` 12.4–14.5, i.e. at the word channel's ceiling |
+| **Prose, non-English** | de 525 → **457**, es 457 → **403**, ja 655 → **492**, pl 623 → **602**, ru 478 → **478**, tr 554 → **516** | frontier chain | `ru` moves **zero**: the parent found nothing to substitute. A new, honest floor case for the prose plateau |
+| **Delimited tables with a calendar column** | aapl 3 108 → **1 151**, vix 3 412 → **409** | **APOGRAPHE** (new) | −299 / −170 against the frontier; the date column is rebuilt, not written |
+| **Rendered / bordered tables** | psql 675 → **289** | **APOGRAPHE** (new) | `+1` on the integer columns, `workdays` semantics for the date column |
+| **Space-aligned tables** | df-h 570 → **250**, kubectl 1 006 → **340** | frontier chain | APOGRAPHE **refuses** (no single-character field separator). The most common shape of CLI output is exactly the shape it cannot parse |
+| **Markdown tables** | markdown-table 330 → **182** | frontier chain | 5 rows, below APOGRAPHE's 6-row minimum |
+| **Application logs** | openstack 4 028 → **898** | frontier chain | `pb` 11.3; no delimiter, so no lift |
+| **Path listings and trees** | npm-ls 2 747 → **901**, find-listing 3 997 → **1 279**, git-numstat 4 632 → **1 992**, ls-iso 1 175 → **367** | frontier chain | the numstat proxy proposed −725 and the gate refused it: 0 realised |
+| **DB dumps / build output** | dump.sql 1 795 → **608** | frontier chain | 662 on the inner layer, 608 on the frontier — the difference is EUTELEIA, and it is why APOGRAPHE's parent had to be `ouraEncode` |
+| **Markup (HTML/SVG/JSX/XML/TeX)** | page 3 220 → **547**, chart.svg 1 331 → **417**, component.jsx 296 → **264**, pom 544 → **242**, paper.tex 429 → **370** | frontier chain | `pb` 9.5–10.0 |
+| **Diffs and stack traces** | unified-diff 578 → **419**, node-stacktraces 568 → **300** | frontier chain | — |
+
+**Reading of the table.** APOGRAPHE is the local leader only where a record set has (i) one
+single-character field separator, (ii) at least six rows of equal arity, and (iii) a column that
+is a one-step function of the line above. That is 3 of 31 lanes — but the two large ones are
+21 % and 29 %, i.e. bigger than any single codec's gain in the last four turns, and they are
+common shapes in everyday work (a price series, a database export). Everything else stays with
+the substitution chain, and §4 of `bench/x39/X39.md` is the measured argument for why it will
+stay there.
