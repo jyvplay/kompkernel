@@ -1,0 +1,11 @@
+# source: ss -s (real, captured 2026-10-24T23:21:28Z)
+Total: 50
+TCP:   35 (estab 2, closed 30, orphaned 0, timewait 29)
+
+Transport Total     IP        IPv6
+RAW	  0         0         0        
+UDP	  4         2         2        
+TCP	  5         1         4        
+INET	  9         3         6        
+FRAG	  0         0         0        
+

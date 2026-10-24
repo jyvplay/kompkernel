@@ -1691,6 +1691,7 @@ round trips checked through the stack's own decoder):
 | `ps -ef` (8 cols, 39 rows) | 1 144 | 315 | — | 414 ≥ 315 | **refused** |
 | `ss -tan` (5 cols, 17 rows) | 843 | 209 | — | 319 ≥ 209 | **refused** |
 | `ls -l /usr/bin` (9 cols, 39 rows) | 1 029 | 375 | — | 510 ≥ 375 | **refused** |
+| `ps -eo pid,ppid,pcpu,pmem,etimes,comm --sort=-pcpu` (6 cols, 39 rows) | 1 087 | 389 | — | 479 ≥ 389 | **refused** |
 
 Three of five real lanes lose, and the report says so. The pattern is measurable: the parent is
 already good at these tables (it charges a repeated line skeleton once), and KANNABOS only wins when
@@ -1756,7 +1757,7 @@ lane, and no X42 number below rests on either.
 | structural category | lanes (raw → M) | local leader | note |
 |---|---|---|---|
 | **Space-aligned CLI tables, generative columns** | df-h 570 → **146**, kubectl 1 006 → **301** | **KANNABOS (new)** | −104 (−41.6 %) and −39 (−11.5 %) against the X40 frontier; both exact |
-| Space-aligned CLI tables, unstructured cells | ps-ef 1 144 → **315**, ss-tan 843 → **209**, ls-usr-bin 1 029 → **375** | frontier chain | KANNABOS plans on all three and **refuses**: 414 ≥ 315, 319 ≥ 209, 510 ≥ 375 (both numbers printed by the gate). `findmnt` plans too, but its whole grid gain is 65 tokens against a ~55-token clause, so it was **not** worth a 4-minute gate run and is not claimed |
+| Space-aligned CLI tables, unstructured cells | ps-ef 1 144 → **315**, ss-tan 843 → **209**, ls-usr-bin 1 029 → **375**, ps-eo-cpu 1 087 → **389** | frontier chain | KANNABOS plans on all four and **refuses**: 414 ≥ 315, 319 ≥ 209, 510 ≥ 375, 479 ≥ 389 (both numbers printed by the gate, grid wire 448/519/540/532 against a 55-72-token clause). `findmnt` plans too, but its whole grid gain is 65 tokens against a ~55-token clause, so it was **not** worth a gate run and is not claimed |
 | **Prose, English, non-repetitive** | kb-article 656 → **622**, llm-answer 733 → **674**, email-thread 629 → **488**, meeting-transcript 472 → **385**, bibliography 896 → **671** | frontier chain | KANNABOS no-op: no repeated column geometry |
 | **Prose, non-English** | de 525 → **457**, es 457 → **403**, ja 655 → **492**, pl 623 → **602**, ru 478 → **478**, tr 554 → **516** | frontier chain | no-op |
 | **Delimited tables with a calendar column** | aapl 3 108 → **1 151**, vix 3 412 → **409** | APOGRAPHE | comma-delimited: the grid is not the schema there |
