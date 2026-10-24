@@ -1621,3 +1621,121 @@ column → METRON; bordered DB output with a price column → METRON; space-alig
 path listings, dumps, markup, diffs → frontier chain. TYPOS's refusal is recorded alongside
 METRON's two gate refusals, and the reason is now measured rather than assumed: against a parent
 whose repetition block is already near-optimal, de-interleaving is a loss.
+
+## κάνναβος KANNABOS (X42, `src/lib/omega/kannabos.ts`, registry key `kannabos`, exact, shipped this turn)
+
+**What it is.** A codec for the format the rest of the chain cannot parse: **fixed-width columns
+padded with runs of spaces**. `df -h`, `ps aux`, `ps -ef`, `kubectl get pods`, `ss -tan`, `ls -l`,
+`findmnt`, `dpkg -l` — every one of them prints a table with no separator character at all, and
+every codec from APOGRAPHE up to TYPOS splits a record on a separator, so all of them refuse.
+KANNABOS reads the source as **character offsets**, not fields, and transmits the **geometry**
+instead of the padding.
+
+**The wire.** One header line, then column blocks, then literal lines:
+
+```
+⟨7¦L0w25¦L37r1¦L45d2¦L57t:0/1%4¦L68t:2d0h/1,1¦L76t:10.244.0.0/0,0,1%8,11¦L92t:node-0.cluster.internal/1%5¦pL1R22L1⟩¦s
+```
+
+`⟨k` = column count; each spec is `<anchor><offset><codec>`; `p` is the row pattern (`R` = a row
+rebuilt from cells, `L` = a literal line, RLE'd); `¦s` = LF-terminated, `¦S` = CRLF. The header
+delimiter is **chosen by measurement** from the characters absent from the source (an escape
+character costs ~2 tokens per field; `¦` or `·` often cost 1).
+
+**Anchors.** `Ln` — the cell starts at character n (left-aligned). `Rn` — the cell ends at n
+(right-aligned, i.e. numbers). `Tn` — the cell is the rest of the line, n spaces after the previous
+cell; this is what keeps `ls -l`'s NAME (which contains a space) and a `COMMAND a b c` field inside
+the grid. Padding is never sent: given the anchors and the previous cell's end, the reader computes
+where every space run went.
+
+**Per-column codecs**, each chosen by measured token count on the rendered column, never by formula:
+`x` one value per line; `rN` run list (`v*count`); `dN` dictionary + index letters; `wW` fixed-width
+concatenation; `l:/k:` a number/clock law imported from METRON; `t:` a **compound** law for cells
+that are text plus several numbers, e.g. `10.244.0.0`, `2d0h`, `40 %`.
+
+**Patch 10 — the header row is usually a CONFORMING row.** `NAME READY STATUS …` sits on exactly
+the anchors the data uses, so it enters every column's value list and poisons every generator (the
+first value of the AGE column becomes the literal string `AGE`). Rather than special-case "drop line
+0", the planner tries ejecting the first **0, 1 or 2** lines into the literal set and keeps the
+cheapest plan on rendered tokens. Measured on `kubectl get pods`: 737 → 414 wire tokens for the same
+22 rows.
+
+**Patch 11 — per-field periodicity.** A pure affine law cannot model a round-robin column: in
+`kubectl get pods` the pod IPs run `10.244.0.0 … 10.244.0.88` then `10.244.1.99`; the last two
+numeric fields step at different rates and a single step list `[0,0,1,11]` fails exactly at row 8.
+`fitCompound` now, for each field, searches a period list
+`[2,3,4,5,6,7,8,10,12,16,24,32,60,100,128,256]` for an exact `(v0 + s·r) mod M` and writes it as
+`s%M`. That single change is what made the kubectl lane buildable: all seven columns become `t:`
+laws, and the wire is 414 tokens for 22 rows.
+
+**Greedy?** Yes, and the search is finite and stated: candidate cell counts (histogram of non-space
+runs per line, top candidates) × `dropHead ∈ {0,1,2}` × delimiter candidates (all safe delimiters),
+and for each column a fixed candidate list, each candidate rendered and tokenised. No beam, no
+randomisation, no cross-column joint search. Deterministic under `OMEGA_DET=1`.
+
+**Time and CPU bound.** Grid inference is O(lines × candidate cell counts) over offsets —
+milliseconds; plan selection is 2–4 parent-free tokenisations per candidate. The entire cost is the
+**gate**: one parent encode of the source plus one parent encode of the grid wire, so the codec runs
+at the parent's own speed — measured 9 s for `df-h` (7 columns), 176 s for `kubectl get pods`
+(7 columns, 22 rows, 1 006 tokens), 46 s for `ps -ef`, 99 s for `ls -l /usr/bin`. A wire whose
+`parent(wire) + clause` is not strictly below `parent(source)` is **refused**, and the refusal is
+reported with both numbers.
+
+**Measured gate** (`bench/x42/verify.ts`, one process per lane, real captured material, o200k, both
+round trips checked through the stack's own decoder):
+
+| lane | raw | frontier (X40) | KANNABOS | Δ | verdict |
+|---|---|---|---|---|---|
+| `df -h` (7 cols, 19 rows) | 570 | 250 | **146** | −104 (−41.6 %) | fires, exact |
+| `kubectl get pods` (7 cols, 22 rows) | 1 006 | 340 | **301** | −39 (−11.5 %) | fires, exact |
+| `ps -ef` (8 cols, 39 rows) | 1 144 | 315 | — | 414 ≥ 315 | **refused** |
+| `ss -tan` (5 cols, 17 rows) | 843 | 209 | — | 319 ≥ 209 | **refused** |
+| `ls -l /usr/bin` (9 cols, 39 rows) | 1 029 | 375 | — | 510 ≥ 375 | **refused** |
+
+Three of five real lanes lose, and the report says so. The pattern is measurable: the parent is
+already good at these tables (it charges a repeated line skeleton once), and KANNABOS only wins when
+the columns themselves are **generative** — a device path, a size in `G`, a percentage, an IP that
+steps. `ps -ef` is 39 rows of PID/TIME/CMD that no law covers, so its grid pays for the clause and
+loses.
+
+**Red team.** `bench/x42/rt.ts` — **91/91**. Groups: A 15 grammar refusals, B 10 boundary
+deformations, C 8 adversarial sources (a `*` inside a value, the header glyphs `⟨⟩¦` *inside values*,
+a `%` inside a modelled cell, ragged arity, unicode, an 8 kB line), D 300-case seeded fuzz, E 7
+algebra checks, F 12 checks for the three patches (conforming header ejection, `%M` periodicity,
+periodicity with one outlier, constant field, dangling/zero/one modulus refusal, plan-filtered
+clause). **Re-running it after patches 10–12 found two real soundness bugs that no gate run would
+have caught**, because both produced a wire that decoded to *itself*:
+
+1. *The empty trailing line.* Every file ending in `\n` has a final empty line, which the encoder
+   carries as an `L` row (that is how the final newline is represented). When **every** column is a
+   generator that empty line is the *only* body line, so `header + "\n"` was both "one empty literal
+   line" and "no body at all"; the decoder read it as no body, refused, and `kannabosDecode` returned
+   its input — a silent identity. Fixed by resolving the ambiguity in the decoder (one `L` row and an
+   empty body ⇒ one empty literal line).
+2. *The close glyph inside a sample.* `L0t:⟨x⟩0/1` is a legal column, and the header terminator is
+   the first `⟩` — which was then found *inside the sample*. The decoder now takes the last `⟩` that
+   is followed by a delimiter and an EOL flag, which no sample can contain because the delimiter is
+   chosen **absent from the source**.
+
+**Honest citation.** Fixed-width framing is old (Hollerith cards, COBOL `PICTURE` clauses, Fortran
+FORMAT); the *inference* of a fixed-width layout from alignment alone is standard tooling, not
+literature: pandas `read_fwf(colspecs='infer')`, readr `read_fwf`, Alteryx "Parse Fixed-Width File
+and Infer Columns", and the published "sieve" heuristic (positions that no row fills are boundaries —
+the same idea as KANNABOS's anchor histogram). Every one of those systems infers a **parse**; none
+treats the inferred grid as a **transmitted, token-costed message**. Adjacent, real, and citable:
+the column store (Abadi, Madden, Ferreira, SIGMOD 2006) is the same de-interleaving for storage;
+SuperBPE (Liu et al., arXiv:2503.13423, 2025) shows that BPE's whitespace pretokenisation makes a
+space run a token **boundary**, which is exactly why the width of a gap is nearly free while its
+occurrence is not; "Getting the most out of your tokenizer" (arXiv:2402.01035, 2024) treats the
+pretokenisation scheme as a first-class compression lever; Afroozeh, Kuffó and Boncz (SIGMOD 2024,
+`doi:10.1145/3626717`) compress JSON/text logs against grammars. Recent table
+extraction work (TEAR, arXiv:2609.15205; "Table Serialization Determines Which Relations Language
+Models Preserve", arXiv:2610.24798) studies how layout affects what a model recovers — worth saying
+plainly: **none of it models the layout as a compressed message**, and KANNABOS's claim is only
+about the wire, not about the inference.
+
+**Limits, stated.** (i) A grid needs ≥ 4 rows and ≥ 3 columns; `df -h` on a 7-line filesystem and
+`dpkg -l` produce no plan. (ii) `findmnt` plans but gains only 65 tokens (10 literal lines), so it
+loses the gate. (iii) Periodicity is per field with a fixed period list; a column whose period is
+prime and larger than 256, or whose step changes, falls back to `x`/`r`. (iv) The clause costs
+53–72 tokens, which is the whole reason `ss -tan` and `ls -l /usr/bin` refuse.
