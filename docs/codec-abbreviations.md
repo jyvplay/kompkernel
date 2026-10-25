@@ -1674,12 +1674,16 @@ and for each column a fixed candidate list, each candidate rendered and tokenise
 randomisation, no cross-column joint search. Deterministic under `OMEGA_DET=1`.
 
 **Time and CPU bound.** Grid inference is O(lines × candidate cell counts) over offsets —
-milliseconds; plan selection is 2–4 parent-free tokenisations per candidate. The entire cost is the
-**gate**: one parent encode of the source plus one parent encode of the grid wire, so the codec runs
-at the parent's own speed — measured 9 s for `df-h` (7 columns), 176 s for `kubectl get pods`
-(7 columns, 22 rows, 1 006 tokens), 46 s for `ps -ef`, 99 s for `ls -l /usr/bin`. A wire whose
-`parent(wire) + clause` is not strictly below `parent(source)` is **refused**, and the refusal is
-reported with both numbers.
+milliseconds; plan selection is a bounded number of parent-free tokenisations (candidate cell counts
+× `dropHead` × delimiters, and ~8 rendered candidates per column). The entire cost is the **gate**:
+one parent encode of the source plus one parent encode of the grid wire, so the codec runs at the
+parent's own speed — measured 9 s for `df-h` (7 columns), 176 s for `kubectl get pods` (7 columns,
+22 rows, 1 006 tokens), 46 s for `ps -ef`, 99 s for `ls -l /usr/bin`, 183 s for a 41-row `ps aux`.
+That cost grows faster than the text: the 151-line `ls -l` lane (5 194 raw tokens) did **not**
+finish its gate in 57 minutes on a 2-core box and was killed, so its gate is unmeasured and
+unclaimed (its census is 5 194 → 2 842 and the parent's own total on that lane is 1 476). A wire
+whose `parent(wire) + clause` is not strictly below `parent(source)` is **refused**, and the refusal
+is reported with both numbers.
 
 **Measured gate** (`bench/x42/verify.ts`, one process per lane, real captured material, o200k, both
 round trips checked through the stack's own decoder):
@@ -1692,8 +1696,10 @@ round trips checked through the stack's own decoder):
 | `ss -tan` (5 cols, 17 rows) | 843 | 209 | — | 319 ≥ 209 | **refused** |
 | `ls -l /usr/bin` (9 cols, 39 rows) | 1 029 | 375 | — | 510 ≥ 375 | **refused** |
 | `ps -eo pid,ppid,pcpu,pmem,etimes,comm --sort=-pcpu` (6 cols, 39 rows) | 1 087 | 389 | — | 479 ≥ 389 | **refused** |
+| `ps aux --sort=-%mem`, 41 real rows (6 cols, 39 rows) | 1 106 | 397 | — | 505 ≥ 397 | **refused** |
+| `ls -l`, 151 real lines (9 cols, 143 rows) | 5 194 | 1 476 | — | wire 2 842 | **gate not measured** — 57 min on 2 cores, killed |
 
-Three of five real lanes lose, and the report says so. The pattern is measurable: the parent is
+Five of seven measured real lanes lose, and the report says so. The pattern is measurable: the parent is
 already good at these tables (it charges a repeated line skeleton once), and KANNABOS only wins when
 the columns themselves are **generative** — a device path, a size in `G`, a percentage, an IP that
 steps. `ps -ef` is 39 rows of PID/TIME/CMD that no law covers, so its grid pays for the clause and
@@ -1757,7 +1763,7 @@ lane, and no X42 number below rests on either.
 | structural category | lanes (raw → M) | local leader | note |
 |---|---|---|---|
 | **Space-aligned CLI tables, generative columns** | df-h 570 → **146**, kubectl 1 006 → **301** | **KANNABOS (new)** | −104 (−41.6 %) and −39 (−11.5 %) against the X40 frontier; both exact |
-| Space-aligned CLI tables, unstructured cells | ps-ef 1 144 → **315**, ss-tan 843 → **209**, ls-usr-bin 1 029 → **375**, ps-eo-cpu 1 087 → **389** | frontier chain | KANNABOS plans on all four and **refuses**: 414 ≥ 315, 319 ≥ 209, 510 ≥ 375, 479 ≥ 389 (both numbers printed by the gate, grid wire 448/519/540/532 against a 55-72-token clause). `findmnt` plans too, but its whole grid gain is 65 tokens against a ~55-token clause, so it was **not** worth a gate run and is not claimed |
+| Space-aligned CLI tables, unstructured cells | ps-ef 1 144 → **315**, ss-tan 843 → **209**, ls-usr-bin 1 029 → **375**, ps-eo-cpu 1 087 → **389**, ps-aux 1 106 → **397** | frontier chain | KANNABOS plans on all five and **refuses**: 414 ≥ 315, 319 ≥ 209, 510 ≥ 375, 479 ≥ 389, 505 ≥ 397 — the wire is 448/519/540/532/565 against a 55–72-token clause, i.e. the values the grid cannot model (PIDs, commands, filenames) are what the parent is already good at. `findmnt` plans too, but its whole grid gain is 65 tokens against a ~55-token clause, so it was **not** worth a gate run; the 151-line `ls -l` lane is unmeasured because its gate did not finish in 57 minutes |
 | **Prose, English, non-repetitive** | kb-article 656 → **622**, llm-answer 733 → **674**, email-thread 629 → **488**, meeting-transcript 472 → **385**, bibliography 896 → **671** | frontier chain | KANNABOS no-op: no repeated column geometry |
 | **Prose, non-English** | de 525 → **457**, es 457 → **403**, ja 655 → **492**, pl 623 → **602**, ru 478 → **478**, tr 554 → **516** | frontier chain | no-op |
 | **Delimited tables with a calendar column** | aapl 3 108 → **1 151**, vix 3 412 → **409** | APOGRAPHE | comma-delimited: the grid is not the schema there |
