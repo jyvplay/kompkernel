@@ -1767,10 +1767,10 @@ lane, and no X42 number below rests on either.
 | **Prose, English, non-repetitive** | kb-article 656 → **622**, llm-answer 733 → **674**, email-thread 629 → **488**, meeting-transcript 472 → **385**, bibliography 896 → **671** | frontier chain | KANNABOS no-op: no repeated column geometry |
 | **Prose, non-English** | de 525 → **457**, es 457 → **403**, ja 655 → **492**, pl 623 → **602**, ru 478 → **478**, tr 554 → **516** | frontier chain | no-op |
 | **Delimited tables with a calendar column** | aapl 3 108 → **1 151**, vix 3 412 → **409** | APOGRAPHE | comma-delimited: the grid is not the schema there |
-| **Rendered/bordered DB output** | psql 675 → **245** | METRON | `lin` on a two-decimal price column |
-| **Tables with a wall-clock column** | cue-sheet 513 → **164** | METRON | `clock: 00:00:02 /1,3` |
+| **Rendered/bordered DB output** | psql 675 → **289** (APOGRAPHE chain; **245** with METRON) | METRON | `lin` on a two-decimal price column |
+| **Tables with a wall-clock column** | cue-sheet 513 → **164** (X40 value, not re-measured this turn) | METRON | `clock: 00:00:02 /1,3` |
 | **Markdown tables with a ramp + unit suffix** | markdown-table 330 → **176** | frontier (gate) | plan exists, refused on the clause floor |
-| **TSV metrics with a decimal ramp** | metrics 811 → **237** | frontier (gate) | planned, refused |
+| **TSV metrics with a decimal ramp** | metrics 811 → **237** (X42 value; lane is not in the 31-lane receipt) | frontier (gate) | planned, refused |
 | **Application logs** | openstack 4 028 → **898** | frontier chain | no column geometry |
 | **Path listings and trees** | npm-ls 2 747 → **901**, find-listing 3 997 → **1 279**, git-numstat 4 632 → **1 992**, ls-iso 1 175 → **367** | frontier chain | `ls -l` *does* plan (9 cols) but loses the gate — see above |
 | **DB dumps / build output** | dump.sql 1 795 → **608** | frontier chain | — |
@@ -1785,3 +1785,287 @@ refusals, and it is measured, not assumed: `df -h` wins because its size/percent
 laws, `kubectl` wins because its IPs and ages are laws, and `ps -ef` loses because PID, TIME and CMD
 are distinct-per-row values that no law and no run covers. This is the opposite of TYPOS's failure
 mode: TYPOS lost on redundant cells, KANNABOS loses on *irreducible* ones.
+
+## ΔΙΆΣΤΗΜΑ DIASTEMA (X43, `src/lib/omega/diastema.ts`, registry key `diastema`, exact, shipped this turn)
+
+**What it is.** A codec for the **wide numeric token that repeats down a column and barely changes**:
+a `find -printf` timestamp with ten fractional digits, an `ls --full-iso` clock, a `tar -tv` stamp,
+a `stat` mtime, a CSV date plus price, an epoch column. It is the last remaining residual on the
+path-listing category: after the whole frontier chain has run on `bench/holdout-ops/find-listing.txt`
+the wire is still **40 % digit tokens** (`bench/x43/residual.ts`), and the column costs 2 159 o200k
+tokens in place while the same values as signed decimal intervals cost **505** (`bench/x43/enc.ts`).
+
+**The mechanism: intervals over a SHAPE, not values.** A shaped value is split into its **digit mask**
+— every digit run replaced by `#` of the same length, literals verbatim — and one arbitrary-precision
+integer formed by concatenating the digit runs:
+
+```
+2026-09-30T07:59:52.6403938810   →   ####-##-##T##:##:##.##########
+                                      integer 202609300759526403938810
+```
+
+The mask is sent **once**. Each participating line then carries only the **signed decimal interval**
+from the previous participant. The reader keeps a running total, adds the interval, writes the
+decimal expansion **left-padded with `0` to the mask's total digit count**, and fills the `#` runs
+left to right. Nothing is interpreted: no calendar, no time zone, no rounding, no field-validity
+test — so ten-digit nanosecond fractions, four-digit years, one-digit counters and nineteen-digit
+epoch stamps are the same case, and a 30-digit value is as exact as a 6-digit one (BigInt).
+
+**Wire.** One self-describing header line, then the source with the shaped token replaced in place:
+
+```
+Δ ¦ <mask> ¦ <j> ¦ <eol> ¦ <pattern>
+<body: every source line in order, the j-th space-token of a RECORD line = its interval>
+```
+
+`<j>` = 0-based ordinal of the shaped token among the line's non-space runs; `<eol>` = `s` (LF) or
+`S` (CRLF); `<pattern>` = run-length line pattern, `R120L1` = 120 interval lines then 1 literal. The
+header delimiter is chosen from characters absent from the source. A marker glyph would cost one
+token **per line** (that is HORA's shape); a run pattern costs six characters once. CRLF is settled
+once, globally; **mixed** end-of-lines are refused rather than normalised.
+
+**Decimal, by measurement.** The same interval stream costs 505 o200k tokens as signed decimals, 626
+as base-36 and 563 as base-62. BPE packs digit runs densely and letters sparsely, so the "obvious"
+wide alphabet loses. Nothing about the envelope is conventional; it is the cheapest of the three
+candidates that were measured.
+
+**Greedy?** Yes, and the search is finite and stated: token ordinals 0…7, grouped by mask; each
+candidate mask/ordinal pair is scored on its own **rendered** tokens (column cost − interval cost −
+mask cost), the best-paying column wins, and no beam, no randomisation and no joint search over two
+columns happens. Deterministic under `OMEGA_DET=1`.
+
+**Four gates, all on the identity arm.** G1 `diastemaDecode(wire) === source` **before** any
+measurement; G2 the parent (OURA) round-trips the transform through the stack's own decoder; G3
+`|parent(transform)| + |clause| < |parent(source)|` on rendered tokens; G4 the emitted wire decodes
+to the source through the reader's path. A failure returns the parent's own wire and a note with
+**both numbers** — a refusal is printed, never hidden.
+
+**The clause is measured, not guessed.** Five phrasings of the same rule were tokenised
+(`bench/x43/cl.ts`, `cl2.ts`, `cl3.ts`) and differed by up to 2× (99, 78, 67, 60, 45) with no change
+in meaning. The shipped clause is **46 o200k tokens**:
+
+```
+Δ: mask = value shape with # per digit. R: add the first space-token (signed int) to a sum
+from 0 and print it into the #s, zero-padded; L: verbatim. Print.
+```
+
+(for `j ≠ 0`: `space-token <j> (0-based)`, which costs more and is only paid when the shaped token is
+not the leading one).
+
+**Time and CPU bound.** Planning is one pass per candidate ordinal (≤ 8) with BigInt chaining —
+13 ms on a 122-line lane, and the whole plan is bounded by the line count × 8. The cost is the gate,
+exactly as for every codec in this stack: one parent encode of the source plus one of the transform
+— measured 107 s + 96 s on the 4 k-token `find-listing` lane (2 cores, deterministic tokenizer).
+Those parent encodes dominate and are text-dependent: the 2 739-token `apt-real` lane took **289 s
+for the single parent encode of its transform**, which is why that lane's gate was not run.
+
+**Measured gate** (`bench/x43/verify.ts`, one process per lane, same clock; `parent` = OURA, the
+direct parent; `chain` = `apographeEncode` = the shipped frontier's one-chat total):
+
+| lane | raw | parent (OURA) | chain (APOGRAPHE) | DIASTEMA | Δ vs chain | verdict |
+|---|---|---|---|---|---|---|
+| `holdout-ops/find-listing.txt` (real, 120 rows) | 3 997 | 1 279 | 1 279 | **1 140** | **−139 (−10.9 %)** | fires, exact |
+| `holdout-x40/prices.csv` (synthetic holdout, 30 rows) | 582 | 226 | 209 | **133** | **−76 (−36.4 %)** | fires, exact |
+| `holdout-tab/aapl-2014.csv` (real market data, 163 rows) | 3 108 | 1 450 | 1 151 | 1 336 | +185 vs the chain | fires, then **loses**: APOGRAPHE already models the date column |
+| `holdout-x40/metrics.tsv` (synthetic holdout) | 811 | 237 | 237 | 237 | 0 | refused: wire+clause 247 ≥ 237 |
+| `holdout-ops/ls-full-iso.txt` (real) | 1 175 | 367 | 367 | 367 | 0 | refused: wire+clause 447 ≥ 367 |
+| `holdout-ops/openstack-loghub-26.log` (real) | 4 028 | 898 | 898 | 898 | 0 | refused: wire+clause 982 ≥ 898 — `proxyGain` was +271 in favour and the measurement disagreed |
+
+Every lane, fired or refused, round-trips **EXACT** through `apographeDecodeResult` followed by
+`diastemaDecode` — the reader's own path, not the encoder's copy of its input.
+
+**Refusals with a stated reason.** `git-numstat`, `git-log-stat`, `git-log-fuller`,
+`node-stacktraces`, `ps-real`, `ls-l-real`, `du-real`, `tsc-diag`, `node-versions` contain **no
+column of ≥6 shaped values with ≥6 digits sharing one mask**. That is the honest boundary: three
+independent counters per line, or sizes and PIDs sitting in different columns on different lines,
+are not an interval column. `apt-real` does plan (10 rows, column gain 60 tokens) and is reported as
+**ungated**: one parent encode of its transform took 289 s on this box, and 60 tokens cannot pay a
+46-token clause on top of that.
+
+**Red team.** `bench/x43/rt.ts`, **50/50**: 18 header-field refusals (missing/extra delimiter, empty
+mask, mask without `#`, mask over 64 characters, ordinal out of range, non-integer interval, bad eol
+flag, bad pattern letter, pattern/body length mismatch, interval that would overflow the mask — each
+returns the input **unchanged**); 10 boundary cases (30-line listing, CRLF, no final newline,
+negative steps, one row below the minimum, mixed EOLs, blank line, mask ending in a literal,
+decreasing values); 6 adversarial shapes (source starting with `Δ`, a source containing every
+candidate delimiter, a body line shaped like a header, a widening column, a 30-digit delta, a shaped
+token at end of line); 200 seeded random listings (199 plans, **0 bad round trips**); and 14 algebra
+cases including the clause's own token budget. Two real bugs were found this way: **CR is a token**
+(the ordinal pointed at `\r` and the chain diverged — fixed by settling EOL once), and the first mask
+grammar (`^#+([^#]+#+)*$`) refused masks that **start or end with a literal** (`id-###.bak`) — the
+rule is now any mask containing a `#`, ≤ 64 characters.
+
+**Honest ancestry and citation.** HORA (`hora.ts`, X13) is the ancestor and is cited as such: it
+replaces a `YYYY-MM-DD HH:MM:SS.mmm` on the **same date** with a millisecond offset, and its own
+boundary list says what it cannot do (date changes stay literal, 6- and 9-digit fractions unmatched,
+timezone suffixes untouched, DAEDALUS parent). DIASTEMA is that idea generalised until the format
+stops mattering — any mask, any widths, any separators, any position, any digit count, no magnitude
+or calendar restriction — plus the run pattern and the decimal envelope, gated against the current
+parent. The interval-coding idea itself is old and external: delta/delta-of-delta timestamp coding in
+the Gorilla TSDB (Pelkonen et al., *Proc. VLDB* 8(12):1816–1827, 2015, doi:10.14778/2824032.2824078)
+and PForDelta-style integer-delta coding (Zukowski et al., ICDE 2006, doi:10.1109/ICDE.2006.150;
+Lemire & Boytsov, *Software: Practice and Experience* 45(1):1–29, 2015, doi:10.1002/spe.2203,
+arXiv:1209.2137) both compress a *column of integers* by differencing. What is new here is not the
+delta: it is (a) the **mask carried once as text** so the value never has to be parsed as a date, a
+float or an integer field, (b) the **run pattern instead of a per-line marker** inside a chat message,
+(c) the **decimal envelope chosen by measured BPE cost over base-36/base-62**, and (d) gating the
+transform against the *shipped* parent on rendered tokens. Adjacent and **not** substituted:
+arithmetic-progression generation (METRON `lin`, KANNABOS `t:`) needs a law that holds — here the
+interval only has to be cheaper than the value; run-length coding of equal values does not apply
+(every value is distinct); a dictionary costs an index letter per line; nothing is sorted, bucketed
+or rounded.
+
+## κάνναβος KANNABOS (X42, `src/lib/omega/kannabos.ts`, registry key `kannabos`, exact, shipped this turn)
+
+**What it is.** A codec for the most common shape of CLI output and the one no earlier codec could
+parse: **space-padded fixed-width columns** — `df -h`, `ps aux`, `kubectl get pods`, `docker ps`,
+`ss -tan`, `ls -l`, `dpkg -l`. Every codec before it splits a record on a **separator character**, and
+these commands print no separator at all. KANNABOS reads the source as **character offsets**, infers
+the grid, and transmits the **geometry**: the padding is never sent, it is regenerated.
+
+**The mechanism.** A header line names, for each column, its **anchor** and its **codec**; then one
+block per column; then the literal lines:
+
+```
+⟨7¦L0w25¦L37r1¦L45d2¦L57t:0/1%4¦L68t:2d0h/1,1¦L76t:10.244.0.0/0,0,1%8,11¦pL1R22L1⟩¦s
+```
+
+- `L<n>` — the cell starts at character `n` (left-aligned); `R<n>` — the cell ends at `n`
+  (right-aligned, numbers); `T<n>` — the cell is the rest of the line, `n` spaces after the previous
+  cell (this is what keeps `ls -l`'s name with a space in it inside the grid).
+- Column codecs, each chosen by its own **rendered token count**: `w` fixed-width concatenation
+  (the padding is free), `r` run list (`v*count`), `d` dictionary + index letters, `x` one value per
+  line, `l:`/`k:` a METRON number or clock law, and `t:` a **compound law** — text plus several
+  integer fields, each with its own affine step and optionally its own period (`s%M`, i.e.
+  `(v0 + s·row) mod M`).
+- `pL1R22L1` — run-length row pattern: `L` = literal line, `R` = row rebuilt from cells.
+
+**Two fixes that made it work.** *Header ejection*: in a CLI table the header row is usually a
+**conforming** row (`NAME READY STATUS …` sits on the same anchors as the data), so it enters every
+column's value list and poisons every generator — the planner ejects the first 0, 1 or 2 lines into
+the literal set and keeps the cheaper plan. *Per-field periods*: a round-robin column such as a pod
+IP `10.244.0.0 … 10.244.0.88, 10.244.1.99` has fields stepping at different rates and no single
+affine step list fits it; each field now searches a period list and may write `s%M` — without that,
+`kubectl` (737 → 414 wire tokens) does not plan at all.
+
+**Greedy?** Yes, and finite: cell-count candidates (histogram of non-space runs per line) ×
+`dropHead ∈ {0,1,2}` × delimiter candidates, and for each column a fixed candidate list, each one
+rendered and tokenised. No beam, no randomisation, no joint search across columns. Deterministic
+under `OMEGA_DET=1`.
+
+**Time and CPU bound.** Grid inference is milliseconds; the cost is the gate — two parent encodes.
+Measured: 9 s for `df -h`, 176 s for the 22-row `kubectl get pods`. The 151-line `ls -l /usr/bin`
+lane (5 194 raw tokens) did **not** finish its gate in 57 minutes on 2 cores and was killed, so its
+gate is unmeasured and unclaimed.
+
+**Measured gate** (`bench/x42/verify.ts`, one process per lane, same clock):
+
+| lane | raw | frontier | KANNABOS | Δ | verdict |
+|---|---|---|---|---|---|
+| `df -h` (19 rows, 6 cols) | 570 | 250 | **146** | −104 (−41.6 %) | fires, exact |
+| `kubectl get pods` (22 rows, 7 cols) | 1 006 | 340 | **301** | −39 (−11.5 %) | fires, exact |
+| `ps -ef` (39 rows) | 1 144 | 315 | 414 | +99 | refused |
+| `ss -tan` (17 rows) | 843 | 209 | 319 | +110 | refused |
+| `ls -l /usr/bin` (39 rows) | 1 029 | 375 | 510 | +135 | refused |
+| `ps -eo …` (39 rows) | 1 087 | 389 | 479 | +90 | refused |
+| `ps aux` (41 real rows) | 1 106 | 397 | 505 | +108 | refused |
+| `findmnt` | — | — | plan | — | not gated: whole gain ≈ clause cost |
+
+**Red team.** `bench/x42/rt.ts`, **91/91**. It found two real soundness bugs, both fixed: a header
+that passes the grammar but whose column blocks do not add up (now rejected by a full structural
+check), and a row-pattern/body length mismatch (now the plan is refused rather than decoded
+optimistically). The decoder is total: every malformed wire returns the input **unchanged**.
+
+**Honest ancestry.** Fixed-width framing is as old as punched cards (Hollerith, COBOL `PIC`), and
+fixed-width *parsing* is standard tooling (`pandas.read_fwf(colspecs='infer')`, `readr::read_fwf`,
+Alteryx "Parse Fixed-Width File"). What is not standard is treating the **grid as the message**: the
+layout is inferred at runtime, costed on rendered tokens, and the padding — usually 30–50 % of the
+characters — is never transmitted. Whitespace as a token boundary is well documented in the
+tokenizer literature (SuperBPE, arXiv:2503.13423; "Getting the most out of your tokenizer",
+arXiv:2402.01035; Jurafsky & Martin §2.6.9), and column-wise storage is the classic column store
+(Abadi, Madden, Ferreira, SIGMOD 2006, doi:10.1145/1142473.1142548). Compressing log *templates* is
+Drain (ICSE 2017) and LogZip; compressing *grammar* is Afroozeh/Kuffó/Boncz (SIGMOD 2024,
+doi:10.1145/3626717). None of them sends an inferred space-grid as the schema of a chat message, and
+none of them gates the result on measured BPE cost.
+
+**Adjacent and not substituted.** Not APOGRAPHE (which needs a single-character separator, and which
+is exactly what refuses these lanes); not TYPOS (which masks characters *within* a token, not
+geometry *across* a line); not METRON (a law for one numeric column, which KANNABOS calls as `l:`/`t:`
+rather than re-implementing). The measured rule is stated at the end of this document.
+
+## Generalized local leaders by structural category (X42 refresh, o200k, one chat message, `OMEGA_DET=1`)
+
+`M` is the shipped one-chat message, `raw` the same text tokenised with no codec. "Leader" is the
+codec with the smallest **measured** M on that lane. X42 adds one module (`kannabos.ts`) and one
+registry entry (204 → 205); `git diff --stat 0ff0675..HEAD -- src/` shows **no line** of APOGRAPHE,
+METRON, OURA, EUTELEIA, BPE or TYPOS changed, and the 31-lane frontier repeat (`bench/x40/frontier.ts`)
+was re-run to check it: **29/31 lanes bit-identical**, 3 223 s wall. The two that differ are the two
+X40 already reported and could not reproduce — `npm-ls.txt` 901 → **904** and `markdown-table.md`
+182 → **176** — both in the *parent's* number, on lanes X42 does not touch, with `oura.ts` unchanged.
+No X42 number rests on either.
+
+| structural category | lanes (raw → M) | local leader | note |
+|---|---|---|---|
+| **Space-aligned CLI tables with generative columns** | df-h 570 → **146**, kubectl 1 006 → **301** | **KANNABOS (new)** | −41.6 % and −11.5 % against the frontier; both exact; 53- and 72-token clauses |
+| Space-aligned CLI tables with irreducible cells | ps-ef 1 144 → **315**, ss-tan 843 → **209**, ls-usr-bin 1 029 → **375**, ps-eo 1 087 → **389**, ps-aux 1 106 → **397** | frontier chain | KANNABOS plans every one and **refuses** at the gate (414 ≥ 315, 319 ≥ 209, 510 ≥ 375, 479 ≥ 389, 505 ≥ 397): PIDs, socket pairs and command lines are distinct per row and the parent already handles them |
+| **Path listings and trees** | npm-ls 2 747 → **904**, find-listing 3 997 → **1 279**, git-numstat 4 632 → **1 992**, ls-iso 1 175 → **367** | frontier chain | `find -printf` is the hill the next test should take: 40 % of the shipped wire is digits |
+| **Prose, English, non-repetitive** | kb-article 656 → **622**, llm-answer 733 → **674**, email-thread 629 → **488**, meeting-transcript 472 → **385**, bibliography 896 → **671** | frontier chain | no repeated column geometry |
+| **Prose, non-English** | de 525 → **457**, es 457 → **403**, ja 655 → **492**, pl 623 → **602**, ru 478 → **478**, tr 554 → **516** | frontier chain | no-op |
+| **Delimited tables with a calendar column** | aapl 3 108 → **1 151**, vix 3 412 → **409** | APOGRAPHE | comma-delimited: the grid is not the schema there |
+| **Rendered/bordered DB output** | psql 675 → **289** (APOGRAPHE chain; **245** with METRON) | METRON | `lin` on a two-decimal price column |
+| **Tables with a wall-clock column** | cue-sheet 513 → **164** (X40 value, not re-measured this turn) | METRON | `clock: 00:00:02 /1,3` |
+| **Markdown tables with a ramp + unit suffix** | markdown-table 330 → **176** | frontier (gate) | plan exists, refused on the clause floor |
+| **TSV metrics with a decimal ramp** | metrics 811 → **237** (X42 value; lane is not in the 31-lane receipt) | frontier (gate) | planned, refused |
+| **Application logs** | openstack 4 028 → **898** | frontier chain | no column geometry |
+| **DB dumps / build output** | dump.sql 1 795 → **608** | frontier chain | — |
+| **Markup (HTML/SVG/JSX/XML/TeX)** | page 3 220 → **547**, chart.svg 1 331 → **417**, component.jsx 296 → **264**, pom 544 → **242**, paper.tex 429 → **370** | frontier chain | indentation is not a grid |
+| **Diffs and stack traces** | unified-diff 578 → **419**, node-stacktraces 568 → **300** | frontier chain | — |
+
+**The generalized rule (X42).** KANNABOS is the local leader exactly when (i) the text has ≥4 lines
+with ≥3 space-aligned cells, (ii) **at least one column is generative** — a law over ≥3 values, a run,
+or a dictionary amortised over many rows — and (iii) the grid wire plus a 53–72-token clause still
+beats the parent's own one-chat total. Condition (ii) separates the wins from the refusals and it is
+measured, not assumed: `df -h` wins because its size/percent/device columns are laws, `kubectl` wins
+because its pod IPs and ages are laws (with a per-field period), and `ps -ef` loses because PID, TIME
+and CMD are distinct per row and no law or run covers them. That is the opposite of TYPOS's failure
+mode: TYPOS lost on redundant cells, KANNABOS loses on *irreducible* ones.
+
+## Generalized local leaders by structural category (X43 refresh, o200k, one chat message, `OMEGA_DET=1`)
+
+X43 adds one module (`src/lib/omega/diastema.ts`) and one registry entry (205 → **206**). `git diff
+--stat` over `src/` for this turn is `registry.ts | 11 ++` plus the new file: **no line** of
+APOGRAPHE, METRON, OURA, KANNABOS, EUTELEIA, BPE or TYPOS changed. The 31-lane frontier repeat
+(`bench/x40/frontier.ts`) was re-run: **29/31 lanes bit-identical, 3 223 s wall**, with the same two
+parent-number differences as X42 (`npm-ls` 904, `markdown-table` 176) — no X43 number rests on
+either.
+
+| structural category | lanes (raw → shipped one-chat total) | local leader | note |
+|---|---|---|---|
+| **Path listings with a wide timestamp column** | find-listing 3 997 → **1 140** (chain 1 279), npm-ls 2 747 → **904**, git-numstat 4 632 → **1 992** | **DIASTEMA (new)** on find-listing; chain elsewhere | −139 (−10.9 %) on a real 120-row `find -printf` listing, exact |
+| Path listings whose clock column is short | ls-iso 1 175 → **367**, ls-l-real, ls-l-nm, du-real, du-ak | chain | DIASTEMA plans on `ls --full-iso` (28 rows × 6-digit µs) and **refuses**: wire+clause 447 ≥ 367 — 28 rows cannot amortise a 30-character mask |
+| **Application logs with a clock column** | openstack 4 028 → **898** | chain | DIASTEMA plans and **refuses**: 982 ≥ 898. `proxyGain` said +271 in favour — the parent models the repeated request line and intervalising the clock breaks its alignments |
+| **Delimited tables with a calendar column** | aapl 3 108 → **1 151**, vix 3 412 → **409** | APOGRAPHE | DIASTEMA *fires* on aapl (1 336) and **loses** the chain by 185, and on vix its wire is 1 565 — a delimiter grid plus a column law already models the date |
+| **Synthetic quote tables (masked SKU + date + price)** | prices 582 → **133** (chain 209) | **DIASTEMA (new)** | −76 (−36.4 %), exact; synthetic holdout, labelled as such |
+| **TSV metrics with a decimal ramp** | metrics 811 → **237** (X42 value; lane not in the 31-lane receipt) | chain | DIASTEMA plans (19 rows, five masked columns) and refuses: 247 ≥ 237 — one mask spanning five columns costs more than the ramp |
+| **Space-aligned CLI tables with generative columns** | df-h 570 → **146**, kubectl 1 006 → **301** | **KANNABOS** (X42) | unchanged this turn (frontier 250 / 340) |
+| Space-aligned CLI tables with irreducible cells | ps-ef 1 144 → **315**, ss-tan 843 → **209**, ls-usr-bin 1 029 → **375**, ps-aux 1 106 → **397** | chain | unchanged: KANNABOS plans and refuses on all of them |
+| **Rendered/bordered DB output** | psql 675 → **245** (METRON; APOGRAPHE chain 289) | METRON | DIASTEMA plans on the bare date column (24 rows, ord 5) with a wire of 577 — no gate spent, it cannot pay |
+| **Tables with a wall clock** | cue-sheet 513 → **164** (X40 value, not re-measured) | METRON | DIASTEMA plans (28 rows, `##:##:##`) and has a wire of 420 — it cannot pay |
+| **Prose, English** | kb-article 656 → **622**, llm-answer 733 → **674**, email-thread 629 → **488**, meeting-transcript 472 → **385**, bibliography 896 → **671** | chain | DIASTEMA is a no-op by construction: no ≥6 lines share one digit mask |
+| **Prose, non-English** | de 525 → **457**, es 457 → **403**, ja 655 → **492**, pl 623 → **602**, ru 478 → **478**, tr 554 → **516** | chain | no-op |
+| **Markup (HTML/SVG/JSX/XML/TeX)** | page 3 220 → **547**, chart.svg 1 331 → **417**, component.jsx 296 → **264**, pom 544 → **242**, paper.tex 429 → **370** | chain | no-op; refused for want of an interval column |
+| **Diffs, stack traces, dumps** | unified-diff 578 → **419**, node-stacktraces 568 → **300**, dump.sql 1 795 → **608** | chain | no interval column |
+
+**The generalized rule (X43).** DIASTEMA is the local leader exactly when (i) **≥6 lines carry one
+token of ≥6 digits sharing a single digit mask**, (ii) the intervals are small enough that
+`|intervals| + |mask| + 46` is **strictly** below what the parent already spends on that column, and
+(iii) **no earlier codec already models the column** — measured on `aapl-2014.csv`, where APOGRAPHE's
+comma grid plus a column law reaches 1 151 and DIASTEMA reaches only 1 336. Each condition is
+falsified by a lane above: `git-numstat` fails (i), `ls-iso`/`metrics`/`openstack` fail (ii),
+`aapl`/`vix` fail (iii). The mask is the term that decides: a 30-character timestamp mask amortises
+over 120 rows and not over 28.
+
+**How the three column codecs divide the work.** METRON fits a **law** to one numeric column (`lin`,
+`clock`, `%M`); KANNABOS fits **geometry** to a whole space-aligned table; DIASTEMA fits **intervals
+over a shape** when neither a law nor a grid exists but the numbers still march. Each refuses the
+others' lanes, and every refusal is printed with both numbers instead of being hidden.
