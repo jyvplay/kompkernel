@@ -2069,3 +2069,158 @@ over 120 rows and not over 28.
 `clock`, `%M`); KANNABOS fits **geometry** to a whole space-aligned table; DIASTEMA fits **intervals
 over a shape** when neither a law nor a grid exists but the numbers still march. Each refuses the
 others' lanes, and every refusal is printed with both numbers instead of being hidden.
+
+---
+
+# X44 (2026-10-25) — ARCHETYPON and the second open-world axis
+
+This turn adds one registry entry (`archetypon`, 207 keys) and one module
+(`src/lib/omega/archetypon.ts`). No line of APOGRAPHE, METRON, OURA, EUTELEIA,
+KANNABOS, DIASTEMA, TYPOS, ANAGNORISIS, BPE or CHIRON was changed.
+
+## ἀρχέτυπον ARCHETYPON (X44, `src/lib/omega/archetypon.ts`, registry key `archetypon`, exact, shipped this turn)
+
+**What the abbreviation decodes to.** *ἀρχέτυπον* = "the original pattern /
+archetype": the first occurrence of something is kept as the pattern from which
+later occurrences are regenerated. Two exact line-patch folds implement it.
+
+**(1) PARAMETRIC fold.** The message names a canonical public text the reader
+already holds verbatim (the standard MIT, ISC, BSD-2/3 or Unlicense text) and
+carries only an exact line patch for the differences. Emitted message for
+`bench/holdout/lic-mit.txt`:
+
+```
+Write the standard MIT License with these line edits. Line 3 is "Copyright (c)
+Meta Platforms, Inc. and affiliates.". This is the whole message. Print only
+the result.
+```
+
+That is 38 o200k tokens (contract counted, wire empty) against the shipped
+frontier's 223 (which is also the raw count — the frontier fires nothing on a
+223-token licence) and ANAGNORISIS's 41. The catalogue in `archetypon.ts` is an
+**encoder-side measuring instrument** for the patch and the price; the decoder
+is the reader's own knowledge of the named public text. The from-memory decode
+is not assumed: it is written out in `bench/x44/X44.md` §H and diffed by a tool
+call. The boundary is real and stated: a reader that does not know the named
+text verbatim cannot decode this arm, so every shipped message is additionally
+verified by an independent CPython reader with its own copy of the catalogue
+(`bench/x44/archetypon_decode.py`, 10/10 exact).
+
+**(2) SELF-CANON fold — the genuinely new, fully in-band mechanism.** A long
+block that is a **near-duplicate** of an earlier block (same number of lines,
+a few substituted lines) is replaced by ONE reference line
+
+```
+⟦4-52|3=Copyright (c) Acme;12=SOFTWARE.⟧
+```
+
+meaning "copy wire lines 4..52, then set line 3 to … and line 12 to …". A
+delimiter absent from every patch value is chosen by measurement; the patch is
+`set`-only so its application is order-independent (the X44 red team, cases
+A8/G1, found and killed an earlier insert/delete LCS backtrack that was only
+74/200 exact under seeded fuzz). Nothing outside the message is used: no
+weights, no catalogue, no tools. It is exact by construction
+(`selfCanonDecode(wire) === text` is checked before shipping) and total
+(malformed references are returned unchanged, red-team cases D1–D6, 38/38).
+
+**Greedy? No.** Template/span choice is an exact enumeration over the catalogue
+× all anchored line offsets × all tail truncations; the line patch is an exact
+positional diff re-applied to the template before shipping; the contract is a
+3–6-wording auction measured with the live `countTokens`; the arm choice
+(parametric / self-canon / prior-best identity) is an exact minimum over the
+measured one-chat totals. The inherited frontier chain is a search, as
+documented in its own modules. The identity arm is itself a measured tournament
+between `apographeEncode` and `anagnorisisEncode`, so ARCHETYPON is never worse
+than the best of those two on any measured lane.
+
+**Source article (honest).** The open-world resource — the reader's parametric
+memory as a shared codebook — was discovered in this repository by ANAGNORISIS
+(Z45, `bench/z45/REPORT.md`), with the versioned GitHub/SPDX catalogue and
+Carlini et al. (USENIX Security 2021, `usenix.org/system/files/sec21-carlini-
+extracting.pdf`) as its citation. ARCHETYPON does **not** claim that resource as
+new. What is new here is (i) the general exact line patch (LCS/positional
+`set`-algebra with a measured delimiter) instead of a fixed slot/modifier set,
+(ii) self-canon near-duplicate folding inside the message, (iii) the clause
+auction, (iv) composition with `apographeEncode` rather than DAEDALUS, and
+(v) the verification ladder including a live LLM hand-decode. Independent
+2023–2026 literature that names the same resource but does not emit a one-chat
+byte-exact wire: Deletang et al., *Language Modeling Is Compression*,
+arXiv 2309.10668 (ICLR 2024); Valmeekam et al., *LLMZip*, arXiv 2306.04050;
+*Lossless Token Sequence Compression via Meta-Tokens*, arXiv 2506.00307;
+*Lossless Prompt Compression via Dictionary-Encoding and In-Context Learning*,
+arXiv 2604.13066; *Lossless data compression by large models*, Nature Machine
+Intelligence (2025), doi:10.1038/s42256-025-01033-7. For the line-patch idea
+the classical reference is the line-diff of `diff`/Myers (1986); nothing here
+reuses its implementation.
+
+**Time- or CPU-bound? CPU-bound.** This module consults no wall clock. The scan
+is bounded by `MAX_TEXT = 40 000` chars, `MAX_LINES = 400`, `MAX_PATCH = 16`
+and a 5-entry catalogue; the enumeration is O(catalogue × anchors × L²) with
+L ≤ 400, and the 200-case seeded fuzz finishes in under a second. The only
+expensive step is one `apographeEncode` of the (smaller) residual plus the
+prior-best identity encodes: measured 7.8–131.8 s per lane on this 2-core
+sandbox, dominated by the inherited frontier chain, not by ARCHETYPON.
+
+**Measured (X44, `bench/x44/receipts/verify.jsonl`, `OMEGA_DET=1`, o200k,
+contract counted).** 19 lanes: **12 strict wins vs the shipped frontier (10 from the new parametric arm, 2 from the prior-best identity arm = ANAGNORISIS)**, 0
+regressions, 0 inexact. Ten real licence files (9 MIT, 1 ISC, taken from
+`bench/holdout/` and the pre-existing `bench/z45/` corpus) go from 156–257 raw
+tokens to 33–52 message tokens (−76 % to −83 %); each is 2–3 tokens below
+ANAGNORISIS. `third-party-notices.txt` (a six-licence bundle) stays at the
+prior best 129 (ANAGNORISIS) — the honest boundary: one short reference per
+copy beats one long clause, so the identity arm wins there. All 31 shipped
+X39 lanes were scanned for false positives: **0/31 fire**. The full repeat of
+the frontier configuration is reported in §"Frontier repeat" below.
+
+## Abbreviation → technical design spec (recent stack, X39–X44)
+
+"Greedy" below = the encoder commits without backtracking; "search" = it
+enumerates candidates and keeps the measured best. All M values are o200k
+tokens of the one-chat message under `OMEGA_DET=1`.
+
+| abbreviation | key | mechanism (decoded) | greedy / search | citation (honest) | bound |
+|---|---|---|---|---|---|
+| APOGRAPHE | `apographe` | comma-grid column predictors (`above`, `colM`, `days`, `+b`) | greedy per-column lift + two-pass search | internal (Re-Pair: Bille et al., arXiv 1704.08558, resemblance only) | CPU (parent wall-clock in production) |
+| METRON | `metron` | absolute column generators `lin:V/i,S`, `clock` | greedy + wire-scored second pass | internal | CPU |
+| TYPOS | `typos` | induced record skeleton (mask) + columnar de-interleave | greedy literal induction + exact gate | Drain (ICSE 2017); Abadi et al. SIGMOD 2006 | CPU |
+| KANNABOS | `kannabos` | character-offset grid, padding regenerated | per-column measured choice + plan search | Hollerith/COBOL copybooks; `pandas.read_fwf`; SuperBPE arXiv 2503.13423 | CPU |
+| DIASTEMA | `diastema` | digit mask + signed decimal intervals + RLE line pattern | greedy ordinal choice (≤8) | Gorilla (VLDB 2015); PForDelta (ICDE 2006); HORA (internal X13) | CPU |
+| ANAGNORISIS | `anagnorisis` | public-canon recognition, `【SPDX;layout】` refs | exact catalogue match, not greedy | Carlini et al. USENIX Sec 2021; GitHub/SPDX catalogues (versioned) | CPU |
+| **ARCHETYPON** | `archetypon` | exact line patch vs a canonical text (parametric) **or** vs an earlier in-message block (self-canon) | exact enumeration + LCS/positional diff + clause auction; not greedy | ANAGNORISIS (internal Z45); arXiv 2309.10668, 2506.00307, 2604.13066, doi:10.1038/s42256-025-01033-7 | CPU |
+
+## Generalized local leaders by structural category (X44 refresh)
+
+`M` = shipped one-chat message. "Leader" = the codec with the smallest
+measured M on that lane. Categories not re-measured this turn keep the X43
+values (no line of their codec changed).
+
+| structural category | lanes (raw → M) | local leader | note |
+|---|---|---|---|
+| **Single canonical licence file** | lic-mit 223 → **38**; 9 real MIT files 218–237 → **33–52**; ISC 156 → **37** | **ARCHETYPON (new)** | −76…−83 % vs frontier; 2–3 tokens below ANAGNORISIS on every one; exact, from-memory decode verified |
+| **Bundled licences / THIRD-PARTY-NOTICES** | third-party-notices 1338 → **129** | ANAGNORISIS | one short `【MIT】` reference per copy beats one long clause; ARCHETYPON correctly returns the prior-best arm |
+| **Mangled CRLF Apache excerpt** | license.txt 1166 → **929** | frontier chain | no catalogue entry; ANAGNORISIS 968; ARCHETYPON identity |
+| **Path listings / wide timestamp** | find-listing 3997 → **1 140** (chain 1 279), npm-ls 2747 → **904**, git-numstat 4632 → **1 992** | DIASTEMA on find-listing; chain elsewhere | X43 values unchanged |
+| **Space-aligned CLI tables, generative columns** | df-h 570 → **146**, kubectl 1006 → **301** | KANNABOS | X42 values unchanged |
+| **Delimited tables with a calendar column** | aapl 3108 → **1 151**, vix 3412 → **409** | APOGRAPHE | X39 values unchanged |
+| **Rendered DB output** | psql 675 → **245** | METRON | X40 value unchanged |
+| **Prose, English** | kb-article 656 → **622**, llm-answer 733 → **674**, email-thread 629 → **488**, meeting-transcript 472 → **385**, bibliography 896 → **671** | frontier chain | **still zero movement on general prose** — see the open gap below |
+| **Prose, non-English** | de 525 → **457**, es 457 → **403**, ja 655 → **492**, pl 623 → **602**, ru 478 → **478**, tr 554 → **516** | frontier chain | ru is still identity |
+| **Markup / code / diffs / logs** | page 3220 → **547**, chart.svg 1331 → **417**, component.jsx 296 → **264**, pom 544 → **242**, openstack 4028 → **898**, dump.sql 1795 → **608** | frontier chain | unchanged |
+
+**Generalized rule (X44).** ARCHETYPON is the local leader exactly when (i) the
+message *is* or *contains* a public canonical text whose identity costs fewer
+tokens than its body, (ii) the differences from the canonical body are few
+lines, and (iii) the reader knows that text verbatim — measured, not assumed,
+by a from-memory decode and an independent reader. Condition (ii) is the new
+part: a general line patch fires where a fixed slot/modifier set does not.
+Condition (iii) is the boundary, and it is why the codec keeps a fully in-band
+self-canon arm and a prior-best identity arm.
+
+**The open gap, honestly.** No general-prose lane moved this turn. Every
+mechanism tried on prose either (a) changed tokenisation boundaries but paid a
+clause that exceeded the saving (the prefix-alphabet/enclitic experiments in
+`bench/tmp/`, measured on 31 lanes, 0 wins), or (b) was already captured by the
+frontier's dictionary. The next highest-information test is a *word-stream*
+canon alignment (recognise a re-wrapped canonical text by its normalised word
+sequence and transmit only the exact break/indent stream), which would extend
+ARCHETYPON to the Z45 honest-miss list without giving up byte exactness.

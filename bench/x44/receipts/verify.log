@@ -1,0 +1,22 @@
+lic-mit.txt                        raw=  223 front=  223 anag=   41 ARCH=   38 Δfront=  -185 Δanag=    -3 arm=parametric exact=true 10385ms
+license.txt                        raw= 1166 front=  929 anag=  968 ARCH=  929 Δfront=     0 Δanag=   -39 arm=identity   exact=true 66336ms
+readme.txt                         raw=  843 front=  646 anag=  688 ARCH=  646 Δfront=     0 Δanag=   -42 arm=identity   exact=true 30793ms
+code-ts.txt                        raw= 1422 front=  969 anag= 1028 ARCH=  969 Δfront=     0 Δanag=   -59 arm=identity   exact=true 117046ms
+md-react.txt                       raw=  252 front=  252 anag=  252 ARCH=  252 Δfront=     0 Δanag=     0 arm=identity   exact=true 11946ms
+facebook_react.txt                 raw=  223 front=  223 anag=   41 ARCH=   38 Δfront=  -185 Δanag=    -3 arm=parametric exact=true 10880ms
+colinhacks_zod.txt                 raw=  222 front=  222 anag=   40 ARCH=   37 Δfront=  -185 Δanag=    -3 arm=parametric exact=true 10351ms
+ollama_ollama.txt                  raw=  218 front=  218 anag=   36 ARCH=   33 Δfront=  -185 Δanag=    -3 arm=parametric exact=true 9328ms
+tailwindlabs_tailwindcss.txt       raw=  221 front=  221 anag=   39 ARCH=   36 Δfront=  -185 Δanag=    -3 arm=parametric exact=true 9777ms
+vitejs_vite.txt                    raw=  229 front=  229 anag=   47 ARCH=   44 Δfront=  -185 Δanag=    -3 arm=parametric exact=true 10174ms
+langchain-ai_langchain.txt         raw=  220 front=  220 anag=   38 ARCH=   35 Δfront=  -185 Δanag=    -3 arm=parametric exact=true 9315ms
+ggerganov_llama.cpp.txt            raw=  226 front=  226 anag=   44 ARCH=   41 Δfront=  -185 Δanag=    -3 arm=parametric exact=true 9442ms
+fastify_fastify.txt                raw=  237 front=  237 anag=   55 ARCH=   52 Δfront=  -185 Δanag=    -3 arm=parametric exact=true 10025ms
+ytdl-org_youtube-dl.txt            raw=  257 front=  257 anag=   62 ARCH=   62 Δfront=  -195 Δanag=     0 arm=identity   exact=true 16589ms
+lic-isc.txt                        raw=  156 front=  156 anag=   39 ARCH=   37 Δfront=  -119 Δanag=    -2 arm=parametric exact=true 7762ms
+kb-article.txt                     raw=  656 front=  622 anag=  651 ARCH=  622 Δfront=     0 Δanag=   -29 arm=identity   exact=true 15979ms
+find-listing.txt                   raw= 3997 front= 1279 anag= 1326 ARCH= 1279 Δfront=     0 Δanag=   -47 arm=identity   exact=true 118500ms
+ru-kb.txt                          raw=  478 front=  478 anag=  478 ARCH=  478 Δfront=     0 Δanag=     0 arm=identity   exact=true 39265ms
+third-party-notices.txt            raw= 1338 front=  278 anag=  129 ARCH=  129 Δfront=  -149 Δanag=     0 arm=identity   exact=true 30698ms
+
+VERDICT: 19 lanes, 12 strict wins vs frontier, 15 strict wins vs ANAGNORISIS, 0 inexact, 0 regressions.
+identity arms: 9 parametric: 10 selfcanon: 0

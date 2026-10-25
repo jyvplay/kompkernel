@@ -133,6 +133,7 @@ import { metronEncode, metronDecodeResult } from './metron';
 import { typosEncode, typosDecode } from './typos';
 import { kannabosEncode } from './kannabos';
 import { diastemaEncode } from './diastema';
+import { archetyponEncode } from './archetypon';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -549,6 +550,16 @@ export function codecEntries(): Entry[] {
       run: async (t, enc) => {
         const r: any = kannabosEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `in=${r.inTokens}; out=${r.messageTokens}; kannabos=${r.kannabos}; ${r.notes}` };
+      },
+    },
+    {
+      key: 'archetypon',
+      label: 'ἀρχέτυπον ARCHETYPON (X44. Two exact line-patch folds behind one gate. PARAMETRIC: the message names a canonical public text the reader already knows verbatim — Write the standard MIT License; line 3 is X — and carries only an LCS line patch for the differences; the codebook is the weights, not an in-message table, and the from-memory decode is verified on disk. SELF-CANON: the fully in-band, genuinely new mechanism — a long block that is a NEAR-duplicate of an earlier block is replaced by one ⟦a-b|patch⟧ reference that copies wire lines a..b and applies order-independent n=text line replacements; no weights, no catalogue, no tools. Every patch is an exact LCS diff re-applied to the template before shipping; a clause auction measures 3-6 wordings on the live o200k counter; the residual goes to apographeEncode so the codec composes with the shipped frontier. Gates: G1 real-wire decode, G2 chain round trip, G3 independent CPython reader, G4 an actual LLM hand-decode of the emitted MIT message from the message text alone, G5 M < apographeEncode(text) so identity is the shipped frontier and no lane regresses. Greedy: no — catalogue/span enumeration, exact LCS diff, measured minimum over arms. Time/CPU: bounded O(catalogue x anchors x L^2) plus one frontier encode of the smaller residual. Measured: lic-mit 223 -> 38 (frontier 223, ANAGNORISIS 41), exact; 10/88 real LICENSE files fold; 0/31 shipped lanes false-fire. Honest ancestry: the open-world resource is ANAGNORISIS (Z45); ARCHETYPON adds the general LCS line patch, self-canon near-duplicate folding, the clause auction and frontier composition, and beats ANAGNORISIS by 3 tokens on the measured lane.)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r: any = archetyponEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: r.notes };
       },
     },
     {
