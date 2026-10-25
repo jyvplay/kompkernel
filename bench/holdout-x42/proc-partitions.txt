@@ -1,0 +1,4 @@
+# source: cat /proc/partitions (real)
+major minor  #blocks  name
+
+ 254        0   22896640 vda

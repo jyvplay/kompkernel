@@ -1,0 +1,93 @@
+de-kb.txt                raw=525 
+    apo   none 
+    metron none
+es-kb.txt                raw=457 
+    apo   none 
+    metron none
+ja-kb.txt                raw=655 
+    apo   none 
+    metron none
+pl-kb.txt                raw=623 
+    apo   none 
+    metron none
+ru-kb.txt                raw=478 
+    apo   none 
+    metron none
+tr-kb.txt                raw=554 
+    apo   none 
+    metron none
+chart.svg                raw=1331 
+    apo   none 
+    metron none
+component.jsx            raw=296 
+    apo   none 
+    metron none
+dump.sql                 raw=1795 
+    apo   none 
+    metron none
+page.html                raw=3220 
+    apo   none 
+    metron none
+paper.tex                raw=429 
+    apo   none 
+    metron none
+pom.xml                  raw=544 
+    apo   none 
+    metron none
+find-listing.txt         raw=3997 
+    apo   none 
+    metron none
+git-log-fuller.txt       raw=143 
+    apo   none 
+    metron none
+git-numstat.txt          raw=4632 
+    apo   hdr=<3|	|2=above> gain=731 lit=1 mod=391 
+    metron hdr=<3|	|2=above> gain=731 lit=1 mod=391
+ls-full-iso.txt          raw=1175 
+    apo   none 
+    metron none
+node-stacktraces.txt     raw=568 
+    apo   none 
+    metron none
+npm-ls.txt               raw=2747 
+    apo   none 
+    metron none
+openstack-loghub-26.log  raw=4028 
+    apo   none 
+    metron none
+aapl-2014.csv            raw=3108 
+    apo   hdr=<2|,|1=workdays> gain=1570 lit=9 mod=232 
+    metron hdr=<2|,|1=workdays> gain=1570 lit=9 mod=232
+vix-daily-1990.csv       raw=3412 
+    apo   hdr=<5|,|1=workdays|3=col2|4=col2|5=col2> gain=2603 lit=5 mod=122 
+    metron hdr=<5|,|1=workdays|3=col2|4=col2|5=col2> gain=2603 lit=5 mod=122
+df-h.txt                 raw=570 
+    apo   none 
+    metron none
+kubectl-get-pods.txt     raw=1006 
+    apo   none 
+    metron none
+markdown-table.md        raw=330 
+    apo   none 
+    metron hdr=<7;|;3=lin: 40.0 s /2,-25;4=lin: 30.0 s /2,-20;6=lin: **-12.5%** /2,-17> gain=91 lit=2 mod=10
+psql-output.txt          raw=675 
+    apo   hdr=<7;|;2=+1;3=+1> gain=147 lit=2 mod=23 
+    metron hdr=<7;|;2=+1;3=+1;5=lin: 100.00 /3,730> gain=231 lit=2 mod=23
+bibliography.txt         raw=896 
+    apo   none 
+    metron none
+email-thread.txt         raw=629 
+    apo   none 
+    metron none
+kb-article.txt           raw=656 
+    apo   none 
+    metron none
+llm-answer.md            raw=733 
+    apo   none 
+    metron none
+meeting-transcript.txt   raw=472 
+    apo   none 
+    metron none
+unified-diff.patch       raw=578 
+    apo   none 
+    metron none

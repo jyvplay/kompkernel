@@ -1,0 +1,151 @@
+# source: ls -l /usr/lib/x86_64-linux-gnu (real)
+total 167495
+drwxr-xr-x  4 root root      128 Jun 15 16:59 ImageMagick-6.9.11
+-rw-r--r--  1 root root      496 Apr 27 20:14 Mcrt1.o
+-rw-r--r--  1 root root     1632 Apr 27 20:14 Scrt1.o
+drwxr-xr-x  2 root root       60 Jun 15 16:59 audit
+drwxr-xr-x  2 root root       60 Jun 15 16:59 bfd-plugins
+-rw-r--r--  1 root root     1768 Apr 27 20:14 crt1.o
+-rw-r--r--  1 root root     1072 Apr 27 20:14 crti.o
+-rw-r--r--  1 root root      648 Apr 27 20:14 crtn.o
+drwxr-xr-x  2 root root     4096 Jun 15 16:59 cryptsetup
+drwxr-xr-x  2 root root       60 Jun 10 00:00 e2fsprogs
+drwxr-xr-x  2 root root      128 Jun 15 16:59 engines-3
+drwxr-xr-x  3 root root     8192 Jun 15 16:59 gconv
+-rw-r--r--  1 root root     2520 Apr 27 20:14 gcrt1.o
+drwxr-xr-x  3 root root       60 Jun 15 16:59 gio
+drwxr-xr-x  2 root root     4096 Jun 15 16:59 glib-2.0
+drwxr-xr-x  2 root root     4096 Jun 15 16:59 gprofng
+-rw-r--r--  1 root root     2232 Apr 27 20:14 grcrt1.o
+drwxr-xr-x  3 root root       60 Jun 15 16:59 krb5
+-rwxr-xr-x  1 root root   215000 Apr 27 20:14 ld-linux-x86-64.so.2
+drwxr-xr-x  2 root root     4096 Jun 15 16:59 ldscripts
+-rw-r--r--  1 root root     1790 Apr 27 20:14 libBrokenLocale.a
+lrwxrwxrwx  1 root root       42 Apr 27 20:14 libBrokenLocale.so -> /lib/x86_64-linux-gnu/libBrokenLocale.so.1
+-rw-r--r--  1 root root    14640 Apr 27 20:14 libBrokenLocale.so.1
+-rw-r--r--  1 root root   616464 Oct 15  2022 libLerc.so.4
+lrwxrwxrwx  1 root root       28 May 27 20:36 libMagickCore-6.Q16.so.6 -> libMagickCore-6.Q16.so.6.0.0
+-rw-r--r--  1 root root  2848744 May 27 20:36 libMagickCore-6.Q16.so.6.0.0
+lrwxrwxrwx  1 root root       28 May 27 20:36 libMagickWand-6.Q16.so.6 -> libMagickWand-6.Q16.so.6.0.0
+-rw-r--r--  1 root root  1203192 May 27 20:36 libMagickWand-6.Q16.so.6.0.0
+lrwxrwxrwx  1 root root       15 Oct  3  2023 libX11.so.6 -> libX11.so.6.4.0
+-rw-r--r--  1 root root  1318408 Oct  3  2023 libX11.so.6.4.0
+lrwxrwxrwx  1 root root       15 Jan 28  2021 libXau.so.6 -> libXau.so.6.0.0
+-rw-r--r--  1 root root    14496 Jan 28  2021 libXau.so.6.0.0
+lrwxrwxrwx  1 root root       17 Mar  2  2017 libXdmcp.so.6 -> libXdmcp.so.6.0.0
+-rw-r--r--  1 root root    22728 Mar  2  2017 libXdmcp.so.6.0.0
+lrwxrwxrwx  1 root root       16 Sep 18  2022 libXext.so.6 -> libXext.so.6.4.0
+-rw-r--r--  1 root root    81568 Sep 18  2022 libXext.so.6.4.0
+lrwxrwxrwx  1 root root       18 Jan 17  2023 libacl.so.1 -> libacl.so.1.1.2301
+-rw-r--r--  1 root root    38832 Jan 17  2023 libacl.so.1.1.2301
+-rw-r--r--  1 root root        8 Apr 27 20:14 libanl.a
+lrwxrwxrwx  1 root root       33 Apr 27 20:14 libanl.so -> /lib/x86_64-linux-gnu/libanl.so.1
+-rw-r--r--  1 root root    14480 Apr 27 20:14 libanl.so.1
+lrwxrwxrwx  1 root root       15 Jun  1  2025 libaom.so.3 -> libaom.so.3.6.0
+-rw-r--r--  1 root root  5639576 Jun  1  2025 libaom.so.3.6.0
+lrwxrwxrwx  1 root root       20 Feb 14  2023 libapparmor.so.1 -> libapparmor.so.1.8.4
+-rw-r--r--  1 root root    80600 Feb 14  2023 libapparmor.so.1.8.4
+lrwxrwxrwx  1 root root       19 May 25  2023 libapt-pkg.so.6.0 -> libapt-pkg.so.6.0.0
+-rw-r--r--  1 root root  2067760 May 25  2023 libapt-pkg.so.6.0.0
+lrwxrwxrwx  1 root root       23 May 25  2023 libapt-private.so.0.0 -> libapt-private.so.0.0.0
+-rw-r--r--  1 root root   497904 May 25  2023 libapt-private.so.0.0.0
+-rw-r--r--  1 root root    34880 Apr 21  2023 libargon2.so.1
+lrwxrwxrwx  1 root root       16 Apr  7  2025 libasan.so.8 -> libasan.so.8.0.0
+-rw-r--r--  1 root root  8198800 Apr  7  2025 libasan.so.8.0.0
+lrwxrwxrwx  1 root root       18 Apr  7  2025 libatomic.so.1 -> libatomic.so.1.2.0
+-rw-r--r--  1 root root    30776 Apr  7  2025 libatomic.so.1.2.0
+lrwxrwxrwx  1 root root       19 Jan 17  2023 libattr.so.1 -> libattr.so.1.1.2501
+-rw-r--r--  1 root root    26544 Jan 17  2023 libattr.so.1.1.2501
+lrwxrwxrwx  1 root root       17 Feb  9  2023 libaudit.so.1 -> libaudit.so.1.0.0
+-rw-r--r--  1 root root   128952 Feb  9  2023 libaudit.so.1.0.0
+-rw-r--r--  1 root root  1514448 Jan 14  2023 libbfd-2.40-system.so
+lrwxrwxrwx  1 root root       17 Nov 21  2024 libblkid.so.1 -> libblkid.so.1.1.0
+-rw-r--r--  1 root root   355328 Nov 21  2024 libblkid.so.1.1.0
+lrwxrwxrwx  1 root root       15 May 12  2025 libbpf.so.1 -> libbpf.so.1.1.2
+-rw-r--r--  1 root root   358880 May 12  2025 libbpf.so.1.1.2
+lrwxrwxrwx  1 root root       24 Jan 31  2023 libbrotlicommon.so.1 -> libbrotlicommon.so.1.0.9
+-rw-r--r--  1 root root   137376 Jan 31  2023 libbrotlicommon.so.1.0.9
+lrwxrwxrwx  1 root root       21 Jan 31  2023 libbrotlidec.so.1 -> libbrotlidec.so.1.0.9
+-rw-r--r--  1 root root    47264 Jan 31  2023 libbrotlidec.so.1.0.9
+lrwxrwxrwx  1 root root       21 Jan 31  2023 libbrotlienc.so.1 -> libbrotlienc.so.1.0.9
+-rw-r--r--  1 root root   591920 Jan 31  2023 libbrotlienc.so.1.0.9
+lrwxrwxrwx  1 root root       16 Jan 29  2023 libbsd.so.0 -> libbsd.so.0.11.7
+-rw-r--r--  1 root root    84840 Jan 29  2023 libbsd.so.0.11.7
+lrwxrwxrwx  1 root root       15 Sep 19  2022 libbz2.so.1 -> libbz2.so.1.0.4
+lrwxrwxrwx  1 root root       15 Sep 19  2022 libbz2.so.1.0 -> libbz2.so.1.0.4
+-rw-r--r--  1 root root    74688 Sep 19  2022 libbz2.so.1.0.4
+-rw-r--r--  1 root root  5452590 Apr 27 20:14 libc.a
+-rw-r--r--  1 root root      283 Apr 27 20:14 libc.so
+-rwxr-xr-x  1 root root  1926232 Apr 27 20:14 libc.so.6
+lrwxrwxrwx  1 root root       44 Apr 27 20:14 libc_malloc_debug.so -> /lib/x86_64-linux-gnu/libc_malloc_debug.so.0
+-rw-r--r--  1 root root    50200 Apr 27 20:14 libc_malloc_debug.so.0
+-rw-r--r--  1 root root     5098 Apr 27 20:14 libc_nonshared.a
+lrwxrwxrwx  1 root root       18 Jan 31  2023 libcap-ng.so.0 -> libcap-ng.so.0.0.0
+-rw-r--r--  1 root root    30704 Jan 31  2023 libcap-ng.so.0.0.0
+lrwxrwxrwx  1 root root       14 May  7 21:10 libcap.so.2 -> libcap.so.2.66
+-rw-r--r--  1 root root    47128 May  7 21:10 libcap.so.2.66
+lrwxrwxrwx  1 root root       16 Sep 19  2022 libcbor.so.0.8 -> libcbor.so.0.8.0
+-rw-r--r--  1 root root    69192 Sep 19  2022 libcbor.so.0.8.0
+lrwxrwxrwx  1 root root       15 Apr  7  2025 libcc1.so.0 -> libcc1.so.0.0.0
+-rw-r--r--  1 root root   126464 Apr  7  2025 libcc1.so.0.0.0
+lrwxrwxrwx  1 root root       17 Jun  6  2025 libcom_err.so.2 -> libcom_err.so.2.1
+-rw-r--r--  1 root root    18344 Jun  6  2025 libcom_err.so.2.1
+-rw-r--r--  1 root root   269124 Jan  6  2023 libcrypt.a
+lrwxrwxrwx  1 root root       35 Jan  6  2023 libcrypt.so -> /lib/x86_64-linux-gnu/libcrypt.so.1
+lrwxrwxrwx  1 root root       17 Jan  6  2023 libcrypt.so.1 -> libcrypt.so.1.1.0
+-rw-r--r--  1 root root   206776 Jan  6  2023 libcrypt.so.1.1.0
+-rw-r--r--  1 root root  4734232 Jun  6 19:56 libcrypto.so.3
+lrwxrwxrwx  1 root root       23 Dec 18  2023 libcryptsetup.so.12 -> libcryptsetup.so.12.9.0
+-rw-r--r--  1 root root   525488 Dec 18  2023 libcryptsetup.so.12.9.0
+lrwxrwxrwx  1 root root       21 Jan 14  2023 libctf-nobfd.so.0 -> libctf-nobfd.so.0.0.0
+-rw-r--r--  1 root root   228184 Jan 14  2023 libctf-nobfd.so.0.0.0
+lrwxrwxrwx  1 root root       15 Jan 14  2023 libctf.so.0 -> libctf.so.0.0.0
+-rw-r--r--  1 root root   220192 Jan 14  2023 libctf.so.0.0.0
+lrwxrwxrwx  1 root root       19 Jul 19  2025 libcurl-gnutls.so.3 -> libcurl-gnutls.so.4
+lrwxrwxrwx  1 root root       23 Jul 19  2025 libcurl-gnutls.so.4 -> libcurl-gnutls.so.4.8.0
+-rw-r--r--  1 root root   695736 Jul 19  2025 libcurl-gnutls.so.4.8.0
+lrwxrwxrwx  1 root root       16 Jul 19  2025 libcurl.so.4 -> libcurl.so.4.8.0
+-rw-r--r--  1 root root   712120 Jul 19  2025 libcurl.so.4.8.0
+lrwxrwxrwx  1 root root       17 Apr 25  2024 libdav1d.so.6 -> libdav1d.so.6.6.0
+-rw-r--r--  1 root root  1630208 Apr 25  2024 libdav1d.so.6.6.0
+-rw-r--r--  1 root root  1843792 Jan 16  2023 libdb-5.3.so
+lrwxrwxrwx  1 root root       17 Dec 29  2023 libde265.so.0 -> libde265.so.0.1.4
+-rw-r--r--  1 root root   452776 Dec 29  2023 libde265.so.0.1.4
+lrwxrwxrwx  1 root root       25 May 23  2023 libdebconfclient.so.0 -> libdebconfclient.so.0.0.0
+-rw-r--r--  1 root root    14376 May 23  2023 libdebconfclient.so.0.0.0
+-rw-r--r--  1 root root   149384 Oct  3  2022 libdeflate.so.0
+-rw-r--r--  1 root root   442696 Oct 19  2022 libdevmapper.so.1.02.1
+-rw-r--r--  1 root root        8 Apr 27 20:14 libdl.a
+-rw-r--r--  1 root root    14480 Apr 27 20:14 libdl.so.2
+lrwxrwxrwx  1 root root       24 Jan 31  2023 libdrop_ambient.so.0 -> libdrop_ambient.so.0.0.0
+-rw-r--r--  1 root root    14256 Jan 31  2023 libdrop_ambient.so.0.0.0
+lrwxrwxrwx  1 root root       13 Jun  6  2025 libe2p.so.2 -> libe2p.so.2.3
+-rw-r--r--  1 root root    45008 Jun  6  2025 libe2p.so.2.3
+lrwxrwxrwx  1 root root       17 Nov 21  2022 libedit.so.2 -> libedit.so.2.0.70
+-rw-r--r--  1 root root   216640 Nov 21  2022 libedit.so.2.0.70
+-rw-r--r--  1 root root   109088 Jan 14  2023 libelf-0.188.so
+lrwxrwxrwx  1 root root       15 Jan 14  2023 libelf.so.1 -> libelf-0.188.so
+lrwxrwxrwx  1 root root       26 Jan  4  2023 libevent_core-2.1.so.7 -> libevent_core-2.1.so.7.0.1
+-rw-r--r--  1 root root   219152 Jan  4  2023 libevent_core-2.1.so.7.0.1
+lrwxrwxrwx  1 root root       18 Apr  5  2025 libexpat.so.1 -> libexpat.so.1.8.10
+-rw-r--r--  1 root root   174184 Apr  5  2025 libexpat.so.1.8.10
+lrwxrwxrwx  1 root root       19 Apr  5  2025 libexpatw.so.1 -> libexpatw.so.1.8.10
+-rw-r--r--  1 root root   174176 Apr  5  2025 libexpatw.so.1.8.10
+lrwxrwxrwx  1 root root       16 Jun  6  2025 libext2fs.so.2 -> libext2fs.so.2.4
+-rw-r--r--  1 root root   438608 Jun  6  2025 libext2fs.so.2.4
+lrwxrwxrwx  1 root root       17 Nov 21  2024 libfdisk.so.1 -> libfdisk.so.1.1.0
+-rw-r--r--  1 root root   484640 Nov 21  2024 libfdisk.so.1.1.0
+lrwxrwxrwx  1 root root       15 Oct 24  2022 libffi.so.8 -> libffi.so.8.1.2
+-rw-r--r--  1 root root    43480 Oct 24  2022 libffi.so.8.1.2
+lrwxrwxrwx  1 root root       18 Nov 30  2022 libfftw3.so.3 -> libfftw3.so.3.6.10
+-rw-r--r--  1 root root  2213808 Nov 30  2022 libfftw3.so.3.6.10
+lrwxrwxrwx  1 root root       22 Nov 30  2022 libfftw3_omp.so.3 -> libfftw3_omp.so.3.6.10
+-rw-r--r--  1 root root    30632 Nov 30  2022 libfftw3_omp.so.3.6.10
+lrwxrwxrwx  1 root root       26 Nov 30  2022 libfftw3_threads.so.3 -> libfftw3_threads.so.3.6.10
+-rw-r--r--  1 root root    34728 Nov 30  2022 libfftw3_threads.so.3.6.10
+lrwxrwxrwx  1 root root       18 Mar 23  2023 libfido2.so.1 -> libfido2.so.1.12.0
+-rw-r--r--  1 root root   219040 Mar 23  2023 libfido2.so.1.12.0
+lrwxrwxrwx  1 root root       23 Jan 31  2023 libfontconfig.so.1 -> libfontconfig.so.1.12.0
+-rw-r--r--  1 root root   306112 Jan 31  2023 libfontconfig.so.1.12.0
+lrwxrwxrwx  1 root root       15 May  7  2023 libformw.so.6 -> libformw.so.6.4
+-rw-r--r--  1 root root    77200 May  7  2023 libformw.so.6.4
