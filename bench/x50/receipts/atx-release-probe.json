@@ -1,0 +1,32 @@
+{
+  "scope": "exploratory raw/DAEDALUS candidate-cost probe plus AKOLOUTHIA-2 parent check; not the complete TAGSTACK/SIBLING-TEMPLATE frontier tournament",
+  "lane": "bench/z57/lanes/prose-changelog.md",
+  "sourceSha256": "e7c7856ef0f982e21ae0b650e257ad2907db4ad3d0b3966cbd138289962d492d",
+  "sourceChars": 38227,
+  "encoding": "o200k_base",
+  "runtime": {
+    "node": "v22.22.3",
+    "OMEGA_DET": null
+  },
+  "rows": 34,
+  "transformExact": true,
+  "rawTokens": {
+    "source": 10906,
+    "transformed": 10846,
+    "delta": -60
+  },
+  "daedalus": {
+    "sourceMessageTokens": 6655,
+    "transformedMessageTokens": 6648,
+    "withAtxContract": 6696,
+    "deltaVsSource": 41
+  },
+  "measuredFrontierMember": {
+    "codec": "akolouthia2",
+    "arm": "identity",
+    "messageTokens": 6655,
+    "equalsDaedalus": true,
+    "exact": true,
+    "notes": "identity: progression arm 6684 >= identity 6655"
+  }
+}

@@ -2452,3 +2452,70 @@ wrapper-wide CPU/time cap and dominates cost; the current metrics run took
 local oracle and red team. KOLUMN has no checksum or authentication: a
 syntactically valid tampered delta may decode to different bytes. It makes no
 corruption-detection claim.
+
+---
+
+# X50 (2026-10-27) — ATX-RELEASE: exact dated-heading fold, no strict win
+
+**Registry key:** `atx-release` (`src/lib/omega/atx-release.ts`, deep audit).
+Full protocol, admissible domain, measured gate, prior art, category leaders,
+research notes, and checkout provenance: [`bench/x50/X50.md`](../bench/x50/X50.md).
+
+ATX-RELEASE maps `## TITLE (YYYY-MM-DD)` to `TITLE YYYY-MM-DD` and restores
+matching lines after the parent decoder using a short in-band regex rule. It
+uses no per-row marker. To keep that inverse injective, the encoder refuses if
+any untouched line already matches the collapsed shape; it also refuses fewer
+than three target headings, over-cap or ill-formed Unicode, and lone-CR line
+endings. LF/CRLF and final-EOL state are preserved. The accepted inputs are
+valid UTF-8 strings of at most 100,000 UTF-16 code units with only LF/CRLF, at
+least three exact level-two dated headings, and no collision lines.
+
+The candidate is the in-band ATX rule plus DAEDALUS on the transformed body.
+It first compares the complete candidate against complete AKOLOUTHIA-2 on the
+source, which is a named member of the X49 TAGSTACK runtime parent set. A
+candidate that does not strictly beat that member cannot beat the set minimum,
+so it falls back to AKOLOUTHIA-2 without running the expensive full tournament.
+Only a candidate below AKOLOUTHIA-2 proceeds to the full TAGSTACK runtime
+parents plus SIBLING-TEMPLATE; emission then still requires exact reconstruction
+and a strict full-message win. A completed rejection returns the measured best
+parent; if that full gate throws or does not complete, it fails closed to the
+exact AKOLOUTHIA-2 fallback. This is not a registry-wide Pareto guarantee.
+
+**Fresh X50 result.** On `bench/z57/lanes/prose-changelog.md` (34 headings,
+raw 10,906 tokens), the transform-only raw text is 10,846 (−60), while the
+complete candidate is **6,696** versus AKOLOUTHIA-2 **6,655** (+41). The
+candidate is exact and rejected; emitted fallback is the 6,655-token parent.
+Because it already loses to a measured member, the full TAGSTACK/SIBLING gate
+was correctly skipped. No prose/ops Pareto win is claimed. Red team: 619
+checks, 200 seeded generated cases, zero failures; TypeScript passed. No
+external LLM was asked to decode it.
+
+**X49 repeat.** The `metrics.tsv` TAGSTACK+SIBLING frontier still measures
+**210** exactly (previous 210), with AKOLOUTHIA-2 winning; Node v22.22.3,
+`OMEGA_DET` unset, `o200k_base`, source SHA-256
+`b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70`. The
+fresh receipt and preserved pre-run receipt are under `bench/x50/receipts/`.
+This reruns the frontier, not KOLUMN's 209-token candidate gate.
+
+### Generalized local-leader snapshot
+
+These are best-known **local** results from the named historical fixtures, not
+one fresh registry-wide competition. The complete per-suite values and
+source-scope warnings are in [`bench/x50/X50.md`](../bench/x50/X50.md).
+
+| category | representative leader(s) | X50 status |
+|---|---|---|
+| English prose / KB / email / meeting / bibliography | existing frontier chain (X45 M: 622 / 674 / 488 / 385 / 671); DAEDALUS-D wins only small margins in the separate z57 suite | no X50 movement; ATX candidate loses +41 to AKOLOUTHIA-2 |
+| Ops / path listings | DIASTEMA `find-listing` 1,140; KANNABOS space-aligned tables; DENS-2 on z57 listing/git-numstat fixtures | historical, different suites; no new ops win |
+| Delimited data | KOLUMN `metrics.tsv` 209 vs the repeated 210 frontier; APOGRAPHE AAPL 1,151 / VIX 409 | frontier repeat is fresh; KOLUMN 209 is historical |
+| Rendered DB / SQL | METRON `psql-output` 245; SYNKOPE `dump.sql` 608 | historical specialist lanes |
+| Canonical notices | ARCHETYPON single MIT 38; SYNKRISIS six-MIT bundle 80 | narrow public-canon wins |
+| Markup / code | TAGSTACK `pom.xml` 240 against a 242 parent | one historical markup fixture |
+
+**Prior art.** Markdown whitespace/punctuation optimization is documented by
+[`mdziper`](https://github.com/shenyizg/mdziper); that is close format-aware
+preprocessing, not evidence for this exact byte-perfect one-chat transform.
+[`ContextCompressionEngine`](https://github.com/SimplyLiz/ContextCompressionEngine)
+uses a separate `verbatim` store for lossless restoration, outside this
+one-message constraint. No compression-theory novelty is claimed. Native LLM
+decoding remains unverified.

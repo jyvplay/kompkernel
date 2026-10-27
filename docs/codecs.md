@@ -3838,3 +3838,59 @@ one strict complete-message win on one structured metrics table. It is not
 shown to improve everyday prose, broad ops output, all tables, markup, or the
 registry-wide Pareto frontier. A strict one-token local win is recorded without
 being inflated into a category claim.
+
+---
+
+## X50 — ATX-RELEASE: exact dated-heading transform, no strict win
+
+Implementation: `src/lib/omega/atx-release.ts`; registry key `atx-release`.
+The full contract, admissible domain, formal gate, 619-check red team, X49
+repeat, prior-art review, category leaders and receipts are in
+[`bench/x50/X50.md`](../bench/x50/X50.md).
+
+ATX-RELEASE rewrites each exact `## TITLE (YYYY-MM-DD)` line to
+`TITLE YYYY-MM-DD`; its in-band regex rule restores the ATX prefix and date
+parentheses after parent decoding. It is marker-free, so any untouched line
+that already matches the collapsed shape makes the transform refuse. It
+preserves LF/CRLF and final-EOL state and uses AKOLOUTHIA-2 as the exact early
+fallback. A candidate not strictly below AKOLOUTHIA-2 is known not to beat the
+full TAGSTACK parent minimum that includes it; only a candidate that clears
+that necessary condition runs the full TAGSTACK + SIBLING-TEMPLATE gate. A
+completed rejection returns the measured best parent; an incomplete gate fails
+closed to AKOLOUTHIA-2.
+
+### X50 measured result
+
+| lane | raw tokens | candidate M | measured parent member | emitted M | exact | result |
+|---|---:|---:|---:|---:|---|---|
+| `prose-changelog.md` (SHA-256 `e7c7856ef0f982e21ae0b650e257ad2907db4ad3d0b3966cbd138289962d492d`) | 10,906 | 6,696 | AKOLOUTHIA-2 6,655 | 6,655 | yes | refused; candidate is +41; full tournament safely skipped |
+
+The raw transform alone is 10,846 tokens (−60), but that is not a complete
+message. DAEDALUS on the transformed body saves only seven tokens before the
+ATX contract, so the full candidate loses by 41 to an actual parent member.
+No X50 strict win or general prose/ops gain is claimed. Native LLM decoding
+was not tested.
+
+### X49 frontier repeat and generalized local leaders
+
+X50 reran the X49 `metrics.tsv` frontier configuration: it still measures 210
+exactly (previous 210), with AKOLOUTHIA-2 winning; Node v22.22.3, `o200k_base`,
+`OMEGA_DET` unset. The separate historical KOLUMN candidate 209 was not rerun.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General English prose | X45 frontier values: KB 622, LLM answer 674, email 488, meeting 385, bibliography 671; no X50 movement | Historical lane-specific values; no universal prose leader claim |
+| Prose / email / meeting in z57's 17-lane suite | DAEDALUS-D at 492/650/706; DAEDALUS/DAEDALUS-D tie at 688 on README; DAEDALUS=DENDRON=DENS-2 at 525/420 on email/meeting | `bench/z57/REPORT.md`, `OMEGA_DET=1`; separate comparator vintage |
+| Ops tables in z57's 17-lane suite | AKOLOUTHIA-2: df-h 171, psql 355, kubectl 326 | Historical per-fixture leaders |
+| Ops listings / git-numstat in z57's 17-lane suite | DENS-2: find-listing 1,318; git-numstat 1,904 | Different suite from later DIASTEMA runs |
+| Dated path listings | DIASTEMA: find-listing 1,140 | X43/X44 local gate; not merged with z57's listing result |
+| Space-aligned CLI tables | KANNABOS: df-h 146, kubectl 301 | X42–X44 specialist evidence |
+| Delimited tables | APOGRAPHE: AAPL 1,151, VIX 409; KOLUMN: metrics 209 vs the fresh 210 frontier | Only the 210 frontier was freshly rerun in X50 |
+| Rendered DB / SQL | METRON: psql-output 245; SYNKOPE: dump.sql 608 | Separate X40/X34 fixtures |
+| Canonical notices | ARCHETYPON: single MIT 38; SYNKRISIS: six-MIT notice 80 | Narrow public-canon lanes |
+| New changelog probe | ATX-RELEASE 6,696 rejected against AKOLOUTHIA-2 6,655 | Exact candidate, 41-token loss; no full tournament needed |
+
+These are local leaders from their cited fixtures and comparator sets, not one
+fresh cross-stack tournament. In particular, the older z57 OpenStack value
+(1,008) and later X44 value (898) are kept separate rather than averaged or
+combined. The detailed table and receipts are in `bench/x50/X50.md`.

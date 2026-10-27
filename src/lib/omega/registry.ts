@@ -140,6 +140,7 @@ import { tagstackEncode } from './tagstack';
 import { siblingTemplateEncode } from './sibling-template';
 import { nestEncode } from './nest';
 import { kolumnEncode } from './kolumn';
+import { atxReleaseEncode } from './atx-release';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -620,6 +621,18 @@ export function codecEntries(): Entry[] {
         const r: any = nestEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; parent=${r.parentCodec}:${r.parentTokens}; records=${r.records}; slots=${r.slots}; depth=${r.depth}; exact=${r.exact}` };
+      },
+    },
+    {
+      key: 'atx-release',
+      label: 'ATX-RELEASE (X50: on valid UTF-8/LF-or-CRLF text up to 100,000 code units, if at least three level-two ATX headings end in ` (YYYY-MM-DD)` and no other line would collide with the marker-free inverse, replace `## TITLE (YYYY-MM-DD)` by `TITLE YYYY-MM-DD`. The one-chat contract restores the omitted frame after parent decode. It first prices the complete DAEDALUS-transformed candidate against complete AKOLOUTHIA-2 on the source; if it fails, return that exact AKOLOUTHIA-2 message because AKOLOUTHIA-2 is a member of the X49 TAGSTACK parent set. Only a candidate below AKOLOUTHIA-2 runs the full same-source TAGSTACK runtime-parent set plus SIBLING-TEMPLATE, and it emits only on a strict exact win; a completed rejection returns the measured best parent, while an incomplete full gate fails closed to AKOLOUTHIA-2. This is a local Markdown transform, not a registry-wide tournament or a new compression-theory claim; adjacent prior art includes parser-aware/format-aware compression and this repository’s EPAGOGE/STIGME. Greedy/search: deterministic line scan, global collision refusal, exact complete-message gates. Time/CPU: one AKOLOUTHIA-2 source parent plus one transformed DAEDALUS candidate normally; full frontier only after the necessary-condition precheck; capped at 100,000 UTF-16 code units; deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = atxReleaseEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rows=${r.rows}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
       },
     },
     {
