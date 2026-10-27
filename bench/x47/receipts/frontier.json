@@ -1,0 +1,216 @@
+{
+  "summary": {
+    "encoding": "o200k_base",
+    "lanes": 7,
+    "exact": true,
+    "failures": 0,
+    "currentFrontierScope": "same-source tests of registered exact, in-band structured specialists AKOLOUTHIA-2, METRON, HEMERA, DIASTEMA; SYNKRISIS and KANON are in verify.json; not a registry-wide tournament",
+    "sourceFiles": [
+      {
+        "lane": "page.html",
+        "path": "bench/holdout-mk/page.html"
+      },
+      {
+        "lane": "chart.svg",
+        "path": "bench/holdout-mk/chart.svg"
+      },
+      {
+        "lane": "pom.xml",
+        "path": "bench/holdout-mk/pom.xml"
+      },
+      {
+        "lane": "component.jsx",
+        "path": "bench/holdout-mk/component.jsx"
+      },
+      {
+        "lane": "dump.sql",
+        "path": "bench/holdout-mk/dump.sql"
+      },
+      {
+        "lane": "paper.tex",
+        "path": "bench/holdout-mk/paper.tex"
+      },
+      {
+        "lane": "agent-history.md",
+        "path": "bench/holdout-mk/agent-history.md"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "lane": "page.html",
+      "path": "bench/holdout-mk/page.html",
+      "sourceSha256": "e16eae36e431c7be499e879a818cf8fd30a1d9325101f27147137bee9531c547",
+      "chars": 10145,
+      "rawTokens": 3220,
+      "akolouthia2": {
+        "messageTokens": 596,
+        "arm": "progression",
+        "marks": 42,
+        "exact": true,
+        "notes": "marks=42; progression M=596 vs identity 610"
+      },
+      "metronPlan": null,
+      "metron": null,
+      "hemeraPlan": {
+        "days": 0,
+        "ms": 0
+      },
+      "hemera": null,
+      "diastemaPlan": {
+        "rows": 42,
+        "proxyGain": 761,
+        "ord": 0
+      },
+      "diastema": {
+        "messageTokens": 516,
+        "applied": true,
+        "exact": true,
+        "notes": "rows=42 proxy=761 parent=547 diastema=516"
+      }
+    },
+    {
+      "lane": "chart.svg",
+      "path": "bench/holdout-mk/chart.svg",
+      "sourceSha256": "9585a93c5c78580a8e34b9a51a05e5e3b7b4216c4b992eb89be17d6fa9c8806f",
+      "chars": 3446,
+      "rawTokens": 1331,
+      "akolouthia2": {
+        "messageTokens": 330,
+        "arm": "progression",
+        "marks": 92,
+        "exact": true,
+        "notes": "marks=92; progression M=330 vs identity 465"
+      },
+      "metronPlan": null,
+      "metron": null,
+      "hemeraPlan": {
+        "days": 0,
+        "ms": 0
+      },
+      "hemera": null,
+      "diastemaPlan": null,
+      "diastema": null
+    },
+    {
+      "lane": "pom.xml",
+      "path": "bench/holdout-mk/pom.xml",
+      "sourceSha256": "ec213f92d73993d3a92920b21166c9918b6c4ebecc89c258d08e86f37b765cbf",
+      "chars": 1797,
+      "rawTokens": 544,
+      "akolouthia2": {
+        "messageTokens": 283,
+        "arm": "identity",
+        "marks": 0,
+        "exact": true,
+        "notes": "identity arm (DAEDALUS plain)"
+      },
+      "metronPlan": null,
+      "metron": null,
+      "hemeraPlan": {
+        "days": 0,
+        "ms": 0
+      },
+      "hemera": null,
+      "diastemaPlan": null,
+      "diastema": null
+    },
+    {
+      "lane": "component.jsx",
+      "path": "bench/holdout-mk/component.jsx",
+      "sourceSha256": "71f7bb7b830f0aeccf5185cbdb41fe0270b4b455615795a84c838df3479bb1df",
+      "chars": 1194,
+      "rawTokens": 296,
+      "akolouthia2": {
+        "messageTokens": 296,
+        "arm": "identity",
+        "marks": 0,
+        "exact": true,
+        "notes": "identity arm (DAEDALUS plain)"
+      },
+      "metronPlan": null,
+      "metron": null,
+      "hemeraPlan": {
+        "days": 0,
+        "ms": 0
+      },
+      "hemera": null,
+      "diastemaPlan": null,
+      "diastema": null
+    },
+    {
+      "lane": "dump.sql",
+      "path": "bench/holdout-mk/dump.sql",
+      "sourceSha256": "e7d38230f855aa242add88d153923b71b7e466e89f2ca00a62a2400be980f044",
+      "chars": 5159,
+      "rawTokens": 1795,
+      "akolouthia2": {
+        "messageTokens": 703,
+        "arm": "progression",
+        "marks": 89,
+        "exact": true,
+        "notes": "marks=89; progression M=703 vs identity 728"
+      },
+      "metronPlan": null,
+      "metron": null,
+      "hemeraPlan": {
+        "days": 9,
+        "ms": 0
+      },
+      "hemera": {
+        "messageTokens": 728,
+        "arm": "identity",
+        "exact": true,
+        "notes": "identity arm (DAEDALUS plain)"
+      },
+      "diastemaPlan": null,
+      "diastema": null
+    },
+    {
+      "lane": "paper.tex",
+      "path": "bench/holdout-mk/paper.tex",
+      "sourceSha256": "7b901e7ecce1035316ac8758ab00df62803e25768d0320e49872479ffa235166",
+      "chars": 1247,
+      "rawTokens": 429,
+      "akolouthia2": {
+        "messageTokens": 407,
+        "arm": "identity",
+        "marks": 0,
+        "exact": true,
+        "notes": "identity arm (DAEDALUS plain)"
+      },
+      "metronPlan": null,
+      "metron": null,
+      "hemeraPlan": {
+        "days": 0,
+        "ms": 0
+      },
+      "hemera": null,
+      "diastemaPlan": null,
+      "diastema": null
+    },
+    {
+      "lane": "agent-history.md",
+      "path": "bench/holdout-mk/agent-history.md",
+      "sourceSha256": "1ed9eb762d88f533669add872eb4c084d6ecec8907509c64a3d9779861237026",
+      "chars": 4539,
+      "rawTokens": 1156,
+      "akolouthia2": {
+        "messageTokens": 295,
+        "arm": "identity",
+        "marks": 0,
+        "exact": true,
+        "notes": "identity arm (DAEDALUS plain)"
+      },
+      "metronPlan": null,
+      "metron": null,
+      "hemeraPlan": {
+        "days": 0,
+        "ms": 0
+      },
+      "hemera": null,
+      "diastemaPlan": null,
+      "diastema": null
+    }
+  ]
+}

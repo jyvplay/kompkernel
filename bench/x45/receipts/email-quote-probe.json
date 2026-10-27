@@ -1,0 +1,31 @@
+{
+  "lane": "email-thread",
+  "source": "bench/holdout-work/email-thread.txt",
+  "rawTokens": 629,
+  "parentBestTokens": 488,
+  "candidateM": 636,
+  "deltaVsParent": 148,
+  "contractTokens": 43,
+  "quoteDepthRuns": [
+    [
+      19,
+      0
+    ],
+    [
+      13,
+      1
+    ],
+    [
+      13,
+      2
+    ],
+    [
+      8,
+      3
+    ]
+  ],
+  "lineCount": 53,
+  "exact": true,
+  "gatePass": false,
+  "rejected": true
+}

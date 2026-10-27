@@ -1,0 +1,97 @@
+{
+  "summary": {
+    "codec": "NEST",
+    "encoding": "o200k_base",
+    "lanes": 1,
+    "failures": 0,
+    "measuredFrontier": "The runtime TAGSTACK same-source parent set (SYNKRISIS, eligible BIFRONT, KANON, AKOLOUTHIA-2, APOGRAPHE, DIASTEMA, eligible METRON/HEMERA) plus SIBLING-TEMPLATE; not a registry-wide tournament.",
+    "strictWins": 0,
+    "exact": 1,
+    "noRegression": 1,
+    "sourceFiles": [
+      {
+        "lane": "pom.xml",
+        "path": "bench/holdout-mk/pom.xml"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "lane": "pom.xml",
+      "path": "bench/holdout-mk/pom.xml",
+      "sourceSha256": "ec213f92d73993d3a92920b21166c9918b6c4ebecc89c258d08e86f37b765cbf",
+      "chars": 1797,
+      "rawTokens": 544,
+      "TAGSTACK": {
+        "M": 242,
+        "parent": "synkrisis",
+        "parentM": 242,
+        "exact": true,
+        "frontierComplete": true,
+        "frontierCosts": {
+          "synkrisis": 242,
+          "kanon": 525,
+          "akolouthia2": 283,
+          "apographe": 242,
+          "diastema": 242
+        },
+        "candidateM": 276,
+        "applied": false,
+        "ms": 149008
+      },
+      "SIBLING_TEMPLATE": {
+        "M": 242,
+        "parent": "synkrisis",
+        "parentM": 242,
+        "exact": true,
+        "candidateM": 298,
+        "applied": false,
+        "records": 0,
+        "slots": 0,
+        "ms": 39353
+      },
+      "NEST": {
+        "M": 242,
+        "parent": "synkrisis",
+        "parentM": 242,
+        "exact": true,
+        "applied": false,
+        "candidateM": 310,
+        "candidateExact": true,
+        "records": 0,
+        "slots": 0,
+        "depth": 2,
+        "elementName": "dependency",
+        "proxyGain": 259,
+        "ms": 32279,
+        "notes": "candidate M=310 not below measured synkrisis floor M=242"
+      },
+      "currentFrontier": {
+        "M": 242,
+        "winner": "synkrisis",
+        "costs": {
+          "synkrisis": 242,
+          "kanon": 525,
+          "akolouthia2": 283,
+          "apographe": 242,
+          "diastema": 242
+        }
+      },
+      "deltas": {
+        "nestToFrontier": 0,
+        "candidateToFrontier": 68
+      },
+      "checks": {
+        "frontierComplete": true,
+        "exact": true,
+        "tagExact": true,
+        "siblingExact": true,
+        "countConsistent": true,
+        "strictWin": false,
+        "gateConsistent": true,
+        "noRegression": true
+      },
+      "totalMs": 220652
+    }
+  ]
+}

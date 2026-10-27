@@ -1,0 +1,13 @@
+PASS real BSD-3 word-canon exact · M=228 prior=296
+PASS real six-MIT multi-copy exact · M=80 prior=129
+PASS malformed word payload fails closed
+PASS over-limit layout fails closed
+PASS over-limit indentation fails closed
+PASS non-matching phrase fails closed
+PASS too-few repeat slots fail closed
+PASS too-many repeat slots fail closed
+PASS oversize message is not parsed
+PASS unsupported double-space variant is identity · M=296 prior=296
+PASS mixed-EOL canonical text declines word-canon
+PASS ordinary prose remains exact and gated
+RED TEAM: all cases passed.

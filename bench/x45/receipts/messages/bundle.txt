@@ -1,0 +1,7 @@
+Repeat standard MIT once per following value; set line 3 to "Copyright (c) " plus that value. Join copies with "\n\n-----\n\n"; finish with LF.
+Meta Platforms, Inc. and affiliates.
+2025 Colin McDonnell
+Ollama
+Tailwind Labs, Inc.
+2019-present, VoidZero Inc. and Vite contributors
+LangChain, Inc.

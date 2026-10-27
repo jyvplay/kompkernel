@@ -1,0 +1,20 @@
+{
+  "lane": "find-listing",
+  "path": "bench/holdout-ops/find-listing.txt",
+  "sourceSha256": "8b445fd0443c98821b9858ec0a16f3a620c62fa68b870638a01667e05a6964c6",
+  "chars": 11789,
+  "inputTokens": 3997,
+  "parent": "SYNKRISIS (X45)",
+  "parentTokens": 1267,
+  "candidateMessageTokens": 1267,
+  "delta": 0,
+  "applied": false,
+  "exact": true,
+  "suffix": ".js",
+  "pathCount": 120,
+  "parentArm": "identity",
+  "notes": "exact suffix fold refused: candidate M=1281 >= SYNKRISIS M=1267",
+  "elapsedMs": 117699,
+  "encoding": "o200k_base",
+  "measure": "countTokens(complete contract + wire)"
+}

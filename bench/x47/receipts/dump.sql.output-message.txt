@@ -1,0 +1,12 @@
+Before ¶ k=v. expand repeatedly and 14 digits become dddd-dd-dd dd:dd:dd Then ~: etaoinsrhldcumyp mean 0123456789abcdef. print only.
+§НINSERT INTO documents (workspace_id, folder_id, policy_id, created_at, content_hash) VALUES (и','hex'));
+Неeeeeс00+00', decode('~еэсeeeүсeeв, ә1р, '202Авәрјеeeeуеeeо2қворУ3ївУрю4СвюрИ5щвИрыв200ав201ів202леекodmyshctлerncumЧ(id),
+ ғ timestamptzЫ_id     bigint REFERENCESзи101шetmspoinди102би103жи104т100Р0ц105н106мen¶-- Northgate Vault schema dump
+CREATE TABLE documents (
+  id            bigserial PRIMARY KEY,
+  workspace_id  bigint NOT NULL REFERENCES workspacesЧ folderЫ foldersЧ policyЫ retention_policiesЧ created_at   ғ NOT NULL DEFAULT now(),
+  disposed_at  ғ,
+  content_hash  bytea NOT NULL
+);
+
+НтыРА601010000селллзыәқ602020107секtnдыої603030214эerncumtsaлeycrldadбыУС604040321эecelcodtoјetstosropжыющ605050428эeycrldauieушiицыИА606060535үetasnhecrneјaiucetslины6қ607070642үetstosriaseјauasuyryиты7ї608080749үetlutimumreeуoohalcloзы8С609090856үшhheјodmyshdhды9щ601т903эattmtdyoleјiaodoncmбаРА602110010эaiucetsydeјillseamaжаәқ603120117эahrhyrplceуeneptupyrицаої604130224эauasuyhiueумhimlupuинаУС605140331эapmicnepmeумpdlsdttитающ606150438үeoohalcldyeуesrenorasзаИА607160545эoroehaanpeуesysteiocда6қ608170652экtneба7ї609180759эoyhuipouteуermthlysnжа8С601190806эiaodonuraлhiriscrdица9щ602200913эinyhtunaoлhcmeohhpиніРА603210020эillseammieуeloauendiитіәқ604220127эimioylshneуeldhrmaclзіої605230234үeneptupposeуedtyolpuyдіУС606240341үмilpcsryreeеeedlopsuyoбіющ607250448үмhimlmelheуecelcolphжіИА608260555үencpcholileјcrprerem','hex'));

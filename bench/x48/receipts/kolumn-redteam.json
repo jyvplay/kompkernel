@@ -1,0 +1,387 @@
+{
+  "summary": {
+    "codec": "KOLUMN",
+    "tests": 234,
+    "authoredChecks": 34,
+    "fuzzCases": 200,
+    "fuzzPlansExact": 200,
+    "failures": 0,
+    "exactScope": "parser, per-column transform, and inverse only; complete-message frontier gate is measured in verify.ts"
+  },
+  "rows": [
+    {
+      "name": "fixed-decimal deltas and duplicate columns",
+      "pass": true,
+      "planned": true,
+      "exact": true,
+      "rows": 9,
+      "cols": 4,
+      "modes": [
+        "T",
+        "P2",
+        "R1",
+        "R1"
+      ]
+    },
+    {
+      "name": "CRLF and no trailing newline",
+      "pass": true,
+      "planned": true,
+      "exact": true,
+      "rows": 8,
+      "cols": 2,
+      "modes": [
+        "P0",
+        "P0"
+      ]
+    },
+    {
+      "name": "quoted CSV refused",
+      "pass": true,
+      "planned": false,
+      "exact": null,
+      "rows": 0,
+      "cols": 0,
+      "modes": []
+    },
+    {
+      "name": "ragged rows refused",
+      "pass": true,
+      "planned": false,
+      "exact": null,
+      "rows": 0,
+      "cols": 0,
+      "modes": []
+    },
+    {
+      "name": "precision mismatch refuses delta but literal remains exact",
+      "pass": true,
+      "planned": true,
+      "exact": true,
+      "rows": 8,
+      "cols": 2,
+      "modes": [
+        "P0",
+        "L"
+      ]
+    },
+    {
+      "name": "leading zeroes refuse delta but remain literal",
+      "pass": true,
+      "planned": true,
+      "exact": true,
+      "rows": 8,
+      "cols": 2,
+      "modes": [
+        "P0",
+        "L"
+      ]
+    },
+    {
+      "name": "negative zero remains literal",
+      "pass": true,
+      "planned": true,
+      "exact": true,
+      "rows": 8,
+      "cols": 2,
+      "modes": [
+        "P0",
+        "L"
+      ]
+    },
+    {
+      "name": "exponent values remain literal",
+      "pass": true,
+      "planned": true,
+      "exact": true,
+      "rows": 8,
+      "cols": 2,
+      "modes": [
+        "P0",
+        "L"
+      ]
+    },
+    {
+      "name": "small table below row threshold",
+      "pass": true,
+      "planned": false,
+      "exact": null,
+      "rows": 0,
+      "cols": 0,
+      "modes": []
+    },
+    {
+      "name": "ordinary prose refused",
+      "pass": true,
+      "planned": false,
+      "exact": null,
+      "rows": 0,
+      "cols": 0,
+      "modes": []
+    },
+    {
+      "name": "periodic signed-delta cycle",
+      "pass": true,
+      "planned": true,
+      "exact": true,
+      "rows": 8,
+      "cols": 2,
+      "modes": [
+        "L",
+        "G0x2"
+      ]
+    },
+    {
+      "name": "ISO date arithmetic progression",
+      "pass": true,
+      "planned": true,
+      "exact": true,
+      "rows": 8,
+      "cols": 2,
+      "modes": [
+        "T",
+        "P0"
+      ]
+    },
+    {
+      "name": "UTC seconds cross leap day",
+      "pass": true,
+      "planned": true,
+      "exact": true,
+      "rows": 9,
+      "cols": 2,
+      "modes": [
+        "T",
+        "P0"
+      ]
+    },
+    {
+      "name": "file-bench/holdout-tab/aapl-2014.csv",
+      "pass": true,
+      "path": "bench/holdout-tab/aapl-2014.csv",
+      "sha256": "c79621f01a1c68006e3f697b35114eff7ae813aea425ef297097c277251a9a9e",
+      "chars": 5488,
+      "sourceTokens": 3108,
+      "plan": true,
+      "rows": 240,
+      "cols": 2,
+      "modes": [
+        "L",
+        "L"
+      ],
+      "transformedTokens": 3118,
+      "proxyTokens": -10,
+      "exact": true
+    },
+    {
+      "name": "file-bench/holdout-tab/vix-daily-1990.csv",
+      "pass": true,
+      "path": "bench/holdout-tab/vix-daily-1990.csv",
+      "sha256": "5903c319e7d50338345994c1c7c5034f6ed7134de624296d988162040328253a",
+      "chars": 6578,
+      "sourceTokens": 3412,
+      "plan": true,
+      "rows": 126,
+      "cols": 5,
+      "modes": [
+        "L",
+        "D6",
+        "R1",
+        "R1",
+        "R1"
+      ],
+      "transformedTokens": 1410,
+      "proxyTokens": 2002,
+      "exact": true
+    },
+    {
+      "name": "file-bench/holdout-tbl/markdown-table.md",
+      "pass": true,
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "sha256": "043e61c99c48b9d1baf8f6e64d8a0d5188446be39606d0cfae15dd902586acca",
+      "chars": 635,
+      "sourceTokens": 330,
+      "plan": true,
+      "rows": 11,
+      "cols": 7,
+      "modes": [
+        "C",
+        "L",
+        "L",
+        "L",
+        "L",
+        "L",
+        "C"
+      ],
+      "transformedTokens": 341,
+      "proxyTokens": -11,
+      "exact": true
+    },
+    {
+      "name": "file-bench/holdout-ops/find-listing.txt",
+      "pass": true,
+      "path": "bench/holdout-ops/find-listing.txt",
+      "sha256": "8b445fd0443c98821b9858ec0a16f3a620c62fa68b870638a01667e05a6964c6",
+      "chars": 11789,
+      "sourceTokens": 3997,
+      "plan": false,
+      "rows": 0,
+      "cols": 0,
+      "modes": [],
+      "transformedTokens": null,
+      "proxyTokens": null,
+      "exact": null
+    },
+    {
+      "name": "file-bench/holdout-ops/ls-full-iso.txt",
+      "pass": true,
+      "path": "bench/holdout-ops/ls-full-iso.txt",
+      "sha256": "7ee8289b0d4773cf434c700572c315550f2825867c13e4295e673b8b5118a8c1",
+      "chars": 2549,
+      "sourceTokens": 1175,
+      "plan": false,
+      "rows": 0,
+      "cols": 0,
+      "modes": [],
+      "transformedTokens": null,
+      "proxyTokens": null,
+      "exact": null
+    },
+    {
+      "name": "file-bench/holdout-x40/metrics.tsv",
+      "pass": true,
+      "path": "bench/holdout-x40/metrics.tsv",
+      "sha256": "b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70",
+      "chars": 1203,
+      "sourceTokens": 811,
+      "plan": true,
+      "rows": 24,
+      "cols": 6,
+      "modes": [
+        "T",
+        "Q3",
+        "G1x10",
+        "P1",
+        "G1x7",
+        "Q5"
+      ],
+      "transformedTokens": 131,
+      "proxyTokens": 680,
+      "exact": true
+    },
+    {
+      "name": "file-bench/holdout-x40/prices.csv",
+      "pass": true,
+      "path": "bench/holdout-x40/prices.csv",
+      "sha256": "3508328c11635ad0816cb2c6298cef6d040a57d854bef8e942fd12ebf6d8fa22",
+      "chars": 993,
+      "sourceTokens": 582,
+      "plan": true,
+      "rows": 30,
+      "cols": 5,
+      "modes": [
+        "Q7",
+        "L",
+        "P2",
+        "P0",
+        "C"
+      ],
+      "transformedTokens": 279,
+      "proxyTokens": 303,
+      "exact": true
+    },
+    {
+      "name": "attack-missing-close",
+      "pass": true,
+      "rejected": true,
+      "exact": false
+    },
+    {
+      "name": "attack-column-delimiter-collision",
+      "pass": true,
+      "rejected": true,
+      "exact": false
+    },
+    {
+      "name": "attack-scale-overflow",
+      "pass": true,
+      "rejected": true,
+      "exact": false
+    },
+    {
+      "name": "attack-delta-tamper",
+      "pass": true,
+      "deltaIndex": 1,
+      "rejected": false,
+      "exact": false
+    },
+    {
+      "name": "attack-T-invalid-calendar",
+      "pass": true,
+      "tIndex": 0,
+      "rejected": true
+    },
+    {
+      "name": "attack-T-fractional-step",
+      "pass": true,
+      "tIndex": 0,
+      "rejected": true
+    },
+    {
+      "name": "modal-shortcut-delimiter",
+      "pass": true,
+      "correctExact": true,
+      "wrongDelimiterRejected": true,
+      "wrongDelimiterExact": false
+    },
+    {
+      "name": "modal-shortcut-CRLF",
+      "pass": true,
+      "correctExact": true,
+      "wrongEolChangesBytes": true
+    },
+    {
+      "name": "modal-shortcut-trailing-EOL",
+      "pass": true,
+      "correctExact": true,
+      "wrongTrailingEolChangesBytes": true
+    },
+    {
+      "name": "attack-colliding-marker-alphabet",
+      "pass": true
+    },
+    {
+      "name": "attack-over-size-limit",
+      "pass": true
+    },
+    {
+      "name": "generated-bigint-exact",
+      "pass": true,
+      "planned": true,
+      "rows": 12,
+      "modes": [
+        "L",
+        "P0"
+      ]
+    },
+    {
+      "name": "generated-unicode-exact",
+      "pass": true,
+      "planned": true,
+      "rows": 10,
+      "modes": [
+        "P0",
+        "L",
+        "P0"
+      ]
+    },
+    {
+      "name": "seeded-fuzz-summary",
+      "pass": true,
+      "cases": 200,
+      "plansExact": 200,
+      "fuzzFailures": 0,
+      "kind": "generated table inputs, not real corpus"
+    }
+  ]
+}

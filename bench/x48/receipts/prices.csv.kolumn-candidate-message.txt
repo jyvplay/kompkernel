@@ -1,0 +1,4 @@
+After parent decode, parse §sep,eol‡rows‡trail‡header°columns¤. Columns split on µ; L lists values split on ◆, C repeats one value, R copies an earlier column, Dscale sums fixed-point integer deltas, Pscale emits base+i*step. Rebuild rows with sep/eol; trail=1 appends eol.
+Before ¶ k=v. expand repeatedly; print only.
+§л09а◆2026-л-р◆SKU-за01а02ур003р004р005р006р007тр001р002итутуыµеL¶§,
+‡30‡1‡sku,asof,unit_price,qty,currency°еиитыеза03а04а05а06а07а08ала10а11а12а13а14а15а16а17а18а19а20а21а22а23а24а25а26а27а28зыP2◆1250◆5ыP0◆10◆3ыC◆USD¤

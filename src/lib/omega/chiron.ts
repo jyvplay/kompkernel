@@ -622,8 +622,53 @@ const MAX_UNIT_WIDTH = 3;
 const MAX_ANCHORS = 20;
 const MAX_BLOCK_UNITS = 200_000;
 
-function longestCommonSubstring(a: string, b: string): { ai: number; bi: number; len: number } {
+/** Deterministic safety envelope for one complete CHIRON encode/search sweep. */
+export const CHIRON_MAX_TOTAL_WORK_UNITS = 64_000_000;
+export const CHIRON_MAX_BLOCK_WORK_UNITS = 24_000_000;
+export const CHIRON_MAX_BLOCK_LCS_CELLS = 20_000_000;
+export const CHIRON_MAX_BLOCK_CANDIDATES = 2_048;
+export const CHIRON_MAX_BLOCK_UNIT_STEPS = 200_000;
+export const CHIRON_MAX_BLOCK_SCORE_CALLS = 2_048;
+
+interface ChironWorkMeter { n: number; max: number }
+interface BlockSearchBudget {
+  meter: ChironWorkMeter;
+  deadline: number;
+  lcsCells: number;
+  candidates: number;
+  unitSteps: number;
+  scoreCalls: number;
+  exhausted: boolean;
+}
+function blockBudgetSpent(b: BlockSearchBudget): boolean {
+  return b.exhausted || b.meter.n >= b.meter.max || b.meter.n >= CHIRON_MAX_BLOCK_WORK_UNITS
+    || now() >= b.deadline || b.lcsCells >= CHIRON_MAX_BLOCK_LCS_CELLS
+    || b.candidates >= CHIRON_MAX_BLOCK_CANDIDATES
+    || b.unitSteps >= CHIRON_MAX_BLOCK_UNIT_STEPS
+    || b.scoreCalls >= CHIRON_MAX_BLOCK_SCORE_CALLS;
+}
+function chargeBlock(b: BlockSearchBudget, amount: number): boolean {
+  if (amount <= 0) return !blockBudgetSpent(b);
+  if (b.meter.n + amount > b.meter.max || b.meter.n + amount > CHIRON_MAX_BLOCK_WORK_UNITS) {
+    b.exhausted = true;
+    return false;
+  }
+  b.meter.n += amount;
+  if (b.meter.n >= b.meter.max || b.meter.n >= CHIRON_MAX_BLOCK_WORK_UNITS) {
+    b.exhausted = true;
+    return false;
+  }
+  return !blockBudgetSpent(b);
+}
+
+function longestCommonSubstring(a: string, b: string, budget: BlockSearchBudget): { ai: number; bi: number; len: number } {
   if (!a || !b || a.length > 1500 || b.length > 1500) return { ai: 0, bi: 0, len: 0 };
+  const cells = a.length * b.length;
+  if (budget.lcsCells + cells > CHIRON_MAX_BLOCK_LCS_CELLS || !chargeBlock(budget, cells)) {
+    budget.exhausted = true;
+    return { ai: 0, bi: 0, len: 0 };
+  }
+  budget.lcsCells += cells;
   let prev = new Int32Array(b.length + 1);
   let curr = new Int32Array(b.length + 1);
   let best = { ai: 0, bi: 0, len: 0 };
@@ -640,14 +685,15 @@ function longestCommonSubstring(a: string, b: string): { ai: number; bi: number;
 }
 
 /** Anchors common to two units; interior anchors must be non-empty to delimit. */
-function deriveAnchors(a: string, b: string, depth = 0): string[] {
+function deriveAnchors(a: string, b: string, budget: BlockSearchBudget, depth = 0): string[] {
   if (a === b) return [a];
-  if (depth >= 10) return ['', ''];
-  const c = longestCommonSubstring(a, b);
-  if (c.len < 1) return ['', ''];
+  if (depth >= 10 || blockBudgetSpent(budget)) return ['', ''];
+  const c = longestCommonSubstring(a, b, budget);
+  if (budget.exhausted || c.len < 1) return ['', ''];
   const anchor = a.slice(c.ai, c.ai + c.len);
-  const left = deriveAnchors(a.slice(0, c.ai), b.slice(0, c.bi), depth + 1);
-  const right = deriveAnchors(a.slice(c.ai + c.len), b.slice(c.bi + c.len), depth + 1);
+  const left = deriveAnchors(a.slice(0, c.ai), b.slice(0, c.bi), budget, depth + 1);
+  if (budget.exhausted) return ['', ''];
+  const right = deriveAnchors(a.slice(c.ai + c.len), b.slice(c.bi + c.len), budget, depth + 1);
   const merged = left[left.length - 1] + anchor + right[0];
   const out = [...left.slice(0, -1), merged, ...right.slice(1)];
   return out.length <= MAX_ANCHORS ? out : ['', ''];
@@ -819,8 +865,8 @@ function splitColumns(anchors: string[], columns: string[][], enc: EncodingName)
  * therefore never be swallowed by a block, and the body reconstruction is
  * byte-identical by construction (and re-verified anyway).
  */
-function blockCandidateAt(lines: string[], start: number, width: number, blank: string, sep: string, enc: EncodingName): BlockCandidate | null {
-  if (start + width * 3 >= lines.length) return null;
+function blockCandidateAt(lines: string[], start: number, width: number, blank: string, sep: string, enc: EncodingName, budget: BlockSearchBudget): BlockCandidate | null {
+  if (blockBudgetSpent(budget) || start + width * 3 >= lines.length) return null;
   const unitAt = (u: number): string | null => {
     const s = start + u * width;
     if (s + width >= lines.length) return null;
@@ -831,15 +877,18 @@ function blockCandidateAt(lines: string[], start: number, width: number, blank: 
   if (u0 === null || u1 === null) return null;
   if (u0.includes(blank) || u1.includes(blank)) return null;
   // cheap rejection: two units with little in common cannot template usefully
-  const seedLcs = longestCommonSubstring(u0, u1);
-  if (seedLcs.len * 3 < Math.min(u0.length, u1.length)) return null;
+  const seedLcs = longestCommonSubstring(u0, u1, budget);
+  if (budget.exhausted || seedLcs.len * 3 < Math.min(u0.length, u1.length)) return null;
 
   const runUnder = (anc: string[]): { units: number; columns: string[][] } => {
     const cols: string[][] = Array.from({ length: anc.length - 1 }, () => []);
     let n = 0;
     for (;;) {
+      if (blockBudgetSpent(budget)) break;
       const u = unitAt(n);
       if (u === null || u.includes(blank)) break;
+      budget.unitSteps++;
+      if (!chargeBlock(budget, u.length + 1)) break;
       const slots = matchAnchors(u, anc);
       if (!slots || slots.length !== cols.length) break;
       slots.forEach((v, i) => cols[i].push(v));
@@ -850,9 +899,11 @@ function blockCandidateAt(lines: string[], start: number, width: number, blank: 
   };
 
   const score = (anc0: string[]): Scored | null => {
-    if (anc0.length < 1 || anc0.length - 1 > MAX_ANCHORS) return null;
+    if (blockBudgetSpent(budget) || anc0.length < 1 || anc0.length - 1 > MAX_ANCHORS) return null;
+    budget.scoreCalls++;
+    if (!chargeBlock(budget, 1)) return null;
     const r = runUnder(anc0);
-    if (r.units < 3) return null;
+    if (budget.exhausted || r.units < 3) return null;
     let anchors = anc0;
     let columns = r.columns;
     // fold constant columns back into the template
@@ -871,6 +922,8 @@ function blockCandidateAt(lines: string[], start: number, width: number, blank: 
     const raw = lines.slice(start, endLine).join(sep) + sep;
     const tpl = anchors.join(blank);
     if (tpl.includes(CHIRON_SEP)) return null;
+    const scanChars = raw.length + tpl.length + columns.reduce((n, col) => n + col.reduce((m, v) => m + v.length, 0), 0);
+    if (!chargeBlock(budget, scanChars)) return null;
     let cost = countTokens(tpl, enc) + 1;
     cost += countTokens(CHIRON_REP + blank + 'x' + String(r.units), enc) + 1 + columns.length;
     const seen = new Set<string>();
@@ -885,13 +938,14 @@ function blockCandidateAt(lines: string[], start: number, width: number, blank: 
     return { anchors, columns, units: r.units, cost, gain: countTokens(raw, enc) - cost };
   };
 
-  const seeds: string[][] = [deriveAnchors(u0, u1)];
+  const seeds: string[][] = [deriveAnchors(u0, u1, budget)];
+  if (budget.exhausted) return null;
   let best: Scored | null = score(seeds[0]);
   // greedy per-slot digit widening on the best seed so far
-  for (let pass = 0; pass < 2; pass++) {
+  for (let pass = 0; pass < 2 && !blockBudgetSpent(budget); pass++) {
     const base = best ? best.anchors : seeds[0];
     let improved = false;
-    for (let j = 0; j + 1 < base.length; j++) {
+    for (let j = 0; j + 1 < base.length && !blockBudgetSpent(budget); j++) {
       const w = widenSlot(best ? best.anchors : base, j);
       if (!w) continue;
       const sc = score(w);
@@ -900,12 +954,12 @@ function blockCandidateAt(lines: string[], start: number, width: number, blank: 
     if (!improved) break;
   }
   // an alternative seed taken from the unit that ended the run
-  if (best) {
+  if (best && !blockBudgetSpent(budget)) {
     const nextUnit = unitAt(best.units);
     if (nextUnit !== null && !nextUnit.includes(blank)) {
-      const alt = deriveAnchors(u0, nextUnit);
-      let altScored = score(alt);
-      for (let j = 0; altScored && j + 1 < altScored.anchors.length; j++) {
+      const alt = deriveAnchors(u0, nextUnit, budget);
+      let altScored = budget.exhausted ? null : score(alt);
+      for (let j = 0; altScored && !blockBudgetSpent(budget) && j + 1 < altScored.anchors.length; j++) {
         const w = widenSlot(altScored.anchors, j);
         if (!w) continue;
         const sc = score(w);
@@ -921,14 +975,24 @@ function blockCandidateAt(lines: string[], start: number, width: number, blank: 
   };
 }
 
-export function chironFindBlocks(text: string, blank: string, sep: string, enc: EncodingName = 'o200k_base', deadline = now() + 10_000): BlockCandidate[] {
+export function chironFindBlocks(
+  text: string,
+  blank: string,
+  sep: string,
+  enc: EncodingName = 'o200k_base',
+  deadline = now() + 10_000,
+  meter: ChironWorkMeter = { n: 0, max: CHIRON_MAX_TOTAL_WORK_UNITS },
+): BlockCandidate[] {
   const lines = text.split(sep);
   if (lines.length < 5) return [];
+  const budget: BlockSearchBudget = { meter, deadline, lcsCells: 0, candidates: 0,
+    unitSteps: 0, scoreCalls: 0, exhausted: false };
   const cands: BlockCandidate[] = [];
-  for (let width = 1; width <= MAX_UNIT_WIDTH; width++) {
-    for (let start = 0; start + width * 3 < lines.length; start++) {
-      if (now() > deadline) break;
-      const c = blockCandidateAt(lines, start, width, blank, sep, enc);
+  for (let width = 1; width <= MAX_UNIT_WIDTH && !blockBudgetSpent(budget); width++) {
+    for (let start = 0; start + width * 3 < lines.length && !blockBudgetSpent(budget); start++) {
+      budget.candidates++;
+      if (!chargeBlock(budget, 1)) break;
+      const c = blockCandidateAt(lines, start, width, blank, sep, enc, budget);
       if (c) {
         cands.push(c);
         start += Math.max(0, c.units * width - 1);
@@ -970,8 +1034,9 @@ export function chironSeparators(text: string): string[] {
 const LMAX_TOKENS = 26;
 const PREFILTER = 1600;
 const EPOCH_APPLY = 12;
+export const CHIRON_MAX_TOKEN_SPAN_ENTRIES = 400_000;
 
-export function enumerateTokenSpans(parts: string[], enc: EncodingName): Map<string, number> {
+export function enumerateTokenSpans(parts: string[], enc: EncodingName, meter?: ChironWorkMeter): Map<string, number> {
   // Same map as the reference (enumerateTokenSpansRef): every token-aligned phrase
   // of 2..LMAX_TOKENS tokens, counted per part. A phrase is a substring of its part
   // (the exact-join precondition is checked), so it is taken by offset instead of
@@ -993,7 +1058,13 @@ export function enumerateTokenSpans(parts: string[], enc: EncodingName): Map<str
     const lim = Math.min(LMAX_TOKENS, n);
     for (let len = 2; len <= lim; len++) {
       for (let at = 0; at + len <= n; at++) {
+        const spanChars = offs[at + len] - offs[at];
+        if (meter) {
+          if (meter.n + spanChars + 1 > meter.max) { meter.n = meter.max; return counts; }
+          meter.n += spanChars + 1;
+        }
         const phrase = part.slice(offs[at], offs[at + len]);
+        if (!counts.has(phrase) && counts.size >= CHIRON_MAX_TOKEN_SPAN_ENTRIES) return counts;
         counts.set(phrase, (counts.get(phrase) ?? 0) + 1);
       }
     }
@@ -1045,8 +1116,10 @@ export interface ChironOptions {
    * KAIROS deterministic budget. When set, the macro search and the variant
    * sweep stop after this many work units (1 unit = 1 character enumerated or
    * 1 character tokenised in the search loop) instead of at wall-clock deadlines,
-   * so the output is a pure function of (text, enc, workUnits). The block pass
-   * keeps its wall-clock safety cap (see chironFindBlocks).
+   * so the output is a pure function of (text, enc, workUnits). The same meter
+   * now charges block-search LCS cells, candidate starts, unit scans and macro
+   * enumeration; a hard 64M-unit envelope remains even when OMEGA_DET freezes
+   * the clock.
    */
   workUnits?: number;
 }
@@ -1079,11 +1152,14 @@ interface BuildOutcome {
   work: number;
 }
 
-function buildCandidate(text: string, enc: EncodingName, script: ChironScript, opts: Required<Omit<ChironOptions, 'workUnits'>> & { workUnits?: number }): BuildOutcome | null {
+type BuildOptions = Required<Omit<ChironOptions, 'workUnits'>> & { workUnits?: number; hardWorkUnits?: number };
+
+function buildCandidate(text: string, enc: EncodingName, script: ChironScript, opts: BuildOptions): BuildOutcome | null {
   const deadline = now() + opts.budgetMs;
   const det = opts.workUnits !== undefined;
-  const work = { n: 0 };
-  const spent = (): boolean => (det ? work.n >= (opts.workUnits as number) : now() >= deadline);
+  const work: ChironWorkMeter = { n: 0, max: Math.min(opts.workUnits ?? CHIRON_MAX_TOTAL_WORK_UNITS,
+    opts.hardWorkUnits ?? CHIRON_MAX_TOTAL_WORK_UNITS) };
+  const spent = (): boolean => work.n >= work.max || (!det && now() >= deadline);
   const payloadChars = new Set(text);
   const pool = scriptPool(script, enc).filter(g => !payloadChars.has(g));
   if (!pool.length) return null;
@@ -1115,8 +1191,9 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
   let blocks = 0;
   let lists = 0;
   const sep = opts.sep;
-  const blockDeadline = Math.min(deadline, now() + Math.max(600, Math.round(opts.budgetMs * 0.22)));
-  const chosen = (!opts.noBlocks && blank) ? chironFindBlocks(text, blank, sep, enc, blockDeadline) : [];
+  const blockDeadline = det ? Number.POSITIVE_INFINITY
+    : Math.min(deadline, now() + Math.max(600, Math.round(opts.budgetMs * 0.22)));
+  const chosen = (!opts.noBlocks && blank && !spent()) ? chironFindBlocks(text, blank, sep, enc, blockDeadline, work) : [];
   if (chosen.length) {
     const lines = text.split(sep);
     const tplBySig = new Map<string, Rule>();
@@ -1210,8 +1287,10 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
     let offset = 0;
     while (!stalled && rules.length < opts.maxRules && !spent()) {
       const parts = [body, ...rules.filter(r => r.kind === 'lit').map(r => r.text)];
-      for (const q of parts) work.n += q.length;
-      const counts = enumerateTokenSpans(parts, enc);
+      for (const q of parts) work.n = Math.min(work.max, work.n + q.length);
+      if (spent()) { stalled = true; break; }
+      const counts = enumerateTokenSpans(parts, enc, work);
+      if (spent()) { stalled = true; break; }
       // Rank cheaply by characters saved, then pay for exact token bounds only
       // on the short list. (Slicing the raw map in insertion order, as an
       // earlier revision did, silently discarded most of the search space.)
@@ -1221,10 +1300,16 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
         .filter(x => x.rough > 0)
         .sort((a, b) => b.rough - a.rough)
         .slice(0, PREFILTER);
-      const cands = rough
-        .map(({ p, c }) => { work.n += p.length; const t = countTokens(p, enc); return { p, bound: c * (t - 1) - t - 1 }; })
-        .filter(x => x.bound > 0)
-        .sort((a, b) => b.bound - a.bound);
+      const cands: Array<{ p: string; bound: number }> = [];
+      for (const { p, c } of rough) {
+        if (spent()) break;
+        work.n = Math.min(work.max, work.n + p.length);
+        const t = countTokens(p, enc);
+        const bound = c * (t - 1) - t - 1;
+        if (bound > 0) cands.push({ p, bound });
+      }
+      cands.sort((a, b) => b.bound - a.bound);
+      if (spent()) { stalled = true; break; }
       const window = cands.slice(offset, offset + EPOCH_APPLY * 5);
       let applied = 0;
       for (const { p } of window) {
@@ -1239,7 +1324,7 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
         for (const r of rules) if (r.kind === 'lit' && r.id !== created.id) r.text = r.text.split(p).join(gl);
         body = body.split(p).join(gl);
         const pw = provisionalWire(rules, body, glyphOf);
-        work.n += pw.length;
+        work.n = Math.min(work.max, work.n + pw.length);
         const t = countTokens(pw, enc);
         if (t < probe) {
           probe = t;
@@ -1282,7 +1367,7 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
         const rest = rules.filter((_, j) => j !== i).map(o => (o.kind === 'lit' ? { ...o, text: o.text.split(g).join(r.text) } : { ...o }));
         const b2 = body.split(g).join(r.text);
         const pw2 = provisionalWire(rest, b2, glyphOf);
-        work.n += pw2.length;
+        work.n = Math.min(work.max, work.n + pw2.length);
         const t = countTokens(pw2, enc);
         if (t < probe) {
           probe = t;
@@ -1374,19 +1459,21 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
   // One wall-clock envelope for the whole variant sweep, not per variant.
   const overallDeadline = started + Math.min(26_000, Math.round(budgetMs * 2.1));
   const workUnits = options.workUnits;
-  // Same 2.1x envelope as the timed sweep: workUnits is one full variant's budget.
-  let workLeft = workUnits !== undefined ? Math.round(workUnits * 2.1) : 0;
+  // One deterministic total work envelope is shared by every variant. In
+  // KAIROS mode each variant keeps the historic relative share, but block LCS
+  // cells and macro enumeration now spend from the same grant.
+  let workLeft = workUnits !== undefined ? Math.round(workUnits * 2.1) : CHIRON_MAX_TOTAL_WORK_UNITS;
+  const initialWorkBudget = workLeft;
+  const totalVariantBudget = variants.reduce((n, v) => n + v.o.budgetMs, 0) || 1;
   for (const v of variants) {
     if (workUnits !== undefined) {
-      // Deterministic sweep: each variant gets its share of the unit budget.
-      // Its share is the variant's wall-clock share, so the relative weights
-      // of the four variants match the timed path.
+      // Deterministic sweep: each variant gets its share of the total unit cap.
       if (workLeft < 1) break;
       const share = Math.round(workUnits * (v.o.budgetMs / budgetMs));
       const grant = Math.min(share, workLeft);
       let out: BuildOutcome | null = null;
       try {
-        out = buildCandidate(text, enc, script, { ...v.o, budgetMs: 20_000, workUnits: grant });
+        out = buildCandidate(text, enc, script, { ...v.o, budgetMs: 20_000, workUnits: grant, hardWorkUnits: grant });
       } catch { out = null; }
       workLeft -= out ? out.work : grant;
       if (!out) continue;
@@ -1403,11 +1490,14 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
       continue;
     }
     const left = overallDeadline - now();
-    if (left < 300) break;
+    if (left < 300 || workLeft < 1) break;
+    const share = Math.max(1, Math.round(CHIRON_MAX_TOTAL_WORK_UNITS * (v.o.budgetMs / totalVariantBudget)));
+    const grant = Math.min(share, workLeft);
     let out: BuildOutcome | null = null;
     try {
-      out = buildCandidate(text, enc, script, { ...v.o, budgetMs: Math.min(v.o.budgetMs, left) });
+      out = buildCandidate(text, enc, script, { ...v.o, budgetMs: Math.min(v.o.budgetMs, left), hardWorkUnits: grant });
     } catch { out = null; }
+    workLeft -= out ? out.work : grant;
     if (!out) continue;
     if (out.decoded !== text) continue;
     if (!bestOutcome || out.messageTokens < bestOutcome.messageTokens ||
@@ -1423,9 +1513,11 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
     }
   }
 
-  if (!bestOutcome) return raw;
+  const sweepWork = initialWorkBudget - workLeft;
+  const sweepWorkNote = `sweep work budget charged=${sweepWork}/${initialWorkBudget}; LCS cells, block scans and macro spans share this deterministic cap`;
+  if (!bestOutcome) return { ...raw, notes: `${raw.notes}; ${sweepWorkNote}` };
   if (bestOutcome.messageTokens >= inTokens) {
-    return { ...raw, notes: `${raw.notes}; message gate: framed ${bestOutcome.messageTokens} >= raw ${inTokens} (wire ${bestOutcome.outTokens})` };
+    return { ...raw, notes: `${raw.notes}; message gate: framed ${bestOutcome.messageTokens} >= raw ${inTokens} (wire ${bestOutcome.outTokens}); ${sweepWorkNote}` };
   }
   const prompt = chironDecoderPrompt(bestOutcome.wire);
   return {
@@ -1446,7 +1538,7 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
     ops: bestOutcome.ops,
     ms: now() - started,
     mode: 'chiron',
-    notes: `${workUnits !== undefined ? `kairos work=${bestOutcome.work}/${workUnits}; ` : ''}variant=${bestTag}; ${bestOutcome.rules} macro rules, ${bestOutcome.blocks} blocks, ${bestOutcome.lists} lists; script=${script.name}; contract=${bestOutcome.messageTokens - bestOutcome.outTokens} tok for ops [${bestOutcome.ops.join(',')}]; whole-wire decode + message gate verified`,
+    notes: `${workUnits !== undefined ? `kairos work=${bestOutcome.work}/${workUnits}; ` : ''}variant=${bestTag}; ${bestOutcome.rules} macro rules, ${bestOutcome.blocks} blocks, ${bestOutcome.lists} lists; script=${script.name}; contract=${bestOutcome.messageTokens - bestOutcome.outTokens} tok for ops [${bestOutcome.ops.join(',')}]; whole-wire decode + message gate verified; ${sweepWorkNote}`,
   };
 }
 

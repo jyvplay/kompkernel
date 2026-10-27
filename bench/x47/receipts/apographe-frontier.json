@@ -1,0 +1,88 @@
+{
+  "summary": {
+    "encoding": "o200k_base",
+    "lanes": 7,
+    "exact": 7,
+    "failures": 0,
+    "scope": "registered APOGRAPHE X39 full-message baseline, same holdouts"
+  },
+  "rows": [
+    {
+      "lane": "page.html",
+      "path": "bench/holdout-mk/page.html",
+      "sourceSha256": "e16eae36e431c7be499e879a818cf8fd30a1d9325101f27147137bee9531c547",
+      "chars": 10145,
+      "rawTokens": 3220,
+      "messageTokens": 547,
+      "exact": true,
+      "applied": false,
+      "lifts": 0
+    },
+    {
+      "lane": "chart.svg",
+      "path": "bench/holdout-mk/chart.svg",
+      "sourceSha256": "9585a93c5c78580a8e34b9a51a05e5e3b7b4216c4b992eb89be17d6fa9c8806f",
+      "chars": 3446,
+      "rawTokens": 1331,
+      "messageTokens": 417,
+      "exact": true,
+      "applied": false,
+      "lifts": 0
+    },
+    {
+      "lane": "pom.xml",
+      "path": "bench/holdout-mk/pom.xml",
+      "sourceSha256": "ec213f92d73993d3a92920b21166c9918b6c4ebecc89c258d08e86f37b765cbf",
+      "chars": 1797,
+      "rawTokens": 544,
+      "messageTokens": 242,
+      "exact": true,
+      "applied": false,
+      "lifts": 0
+    },
+    {
+      "lane": "component.jsx",
+      "path": "bench/holdout-mk/component.jsx",
+      "sourceSha256": "71f7bb7b830f0aeccf5185cbdb41fe0270b4b455615795a84c838df3479bb1df",
+      "chars": 1194,
+      "rawTokens": 296,
+      "messageTokens": 264,
+      "exact": true,
+      "applied": false,
+      "lifts": 0
+    },
+    {
+      "lane": "dump.sql",
+      "path": "bench/holdout-mk/dump.sql",
+      "sourceSha256": "e7d38230f855aa242add88d153923b71b7e466e89f2ca00a62a2400be980f044",
+      "chars": 5159,
+      "rawTokens": 1795,
+      "messageTokens": 608,
+      "exact": true,
+      "applied": false,
+      "lifts": 0
+    },
+    {
+      "lane": "paper.tex",
+      "path": "bench/holdout-mk/paper.tex",
+      "sourceSha256": "7b901e7ecce1035316ac8758ab00df62803e25768d0320e49872479ffa235166",
+      "chars": 1247,
+      "rawTokens": 429,
+      "messageTokens": 370,
+      "exact": true,
+      "applied": false,
+      "lifts": 0
+    },
+    {
+      "lane": "agent-history.md",
+      "path": "bench/holdout-mk/agent-history.md",
+      "sourceSha256": "1ed9eb762d88f533669add872eb4c084d6ecec8907509c64a3d9779861237026",
+      "chars": 4539,
+      "rawTokens": 1156,
+      "messageTokens": 250,
+      "exact": true,
+      "applied": false,
+      "lifts": 0
+    }
+  ]
+}

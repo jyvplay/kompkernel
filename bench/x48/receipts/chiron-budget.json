@@ -1,0 +1,45 @@
+{
+  "test": "CHIRON deterministic total work budget",
+  "mode": "OMEGA_DET=1",
+  "input": {
+    "stressChars": 66379,
+    "stressLines": 900,
+    "testedChars": 12000
+  },
+  "blockSearch": {
+    "deterministic": true,
+    "candidatesA": 0,
+    "candidatesB": 0,
+    "workA": 29407,
+    "workB": 29407,
+    "cap": 30000,
+    "passed": true
+  },
+  "macroEnumeration": {
+    "work": 2000,
+    "cap": 2000,
+    "entries": 152,
+    "passed": true
+  },
+  "fixedWorkEncode": {
+    "deterministic": true,
+    "workUnits": 18000,
+    "first": {
+      "exact": true,
+      "messageTokens": 5121,
+      "mode": "raw",
+      "ms": 0,
+      "notes": "identity: no framing pays here; message gate: framed 5131 >= raw 5121 (wire 5123)"
+    },
+    "second": {
+      "exact": true,
+      "messageTokens": 5121,
+      "mode": "raw",
+      "ms": 0,
+      "notes": "identity: no framing pays here; message gate: framed 5131 >= raw 5121 (wire 5123)"
+    },
+    "sourceTokens": 5121,
+    "passed": true
+  },
+  "failures": []
+}

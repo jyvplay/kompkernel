@@ -1,0 +1,12 @@
+{
+  "cases": 16,
+  "exact": 16,
+  "gatePass": 16,
+  "wordCanon": 5,
+  "multiCopy": 1,
+  "strictWins": 6,
+  "noGainOrIdentity": 10,
+  "failures": 0,
+  "sumPrior": 7077,
+  "sumSynkrisis": 6740
+}

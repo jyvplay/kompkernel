@@ -1,0 +1,3 @@
+For JSON below, start from the standard body named by id, collapse it to single-space words, and apply each [old,new] phrase replacement once. Consume layout as words per line (0=blank); indent is [1-based line, spaces]. Join with eol, append it iff final, then wrap with prefix and suffix. JSON strings are literal.
+SYNKRISIS/WORD
+{"id":"BSD-3-Clause","prefix":"Copyright (c) 2005-2025, NumPy Developers.\nAll rights reserved.\n\n","edits":[["1.","*"],["2.","*"],["3.","*"],["copyright holder","NumPy Developers"],["its","any"],["HOLDER","OWNER"]],"layout":[11,9,1,0,10,9,0,9,9,8,3,0,13,10,8,0,10,11,10,11,10,8,11,11,10,12,12],"indents":[[5,4],[6,7],[8,4],[9,7],[10,7],[11,7],[13,4],[14,7],[15,7]],"eol":"\n","final":true,"suffix":""}

@@ -1,0 +1,551 @@
+[
+  {
+    "file": "bench/holdout-ops/find-listing.txt",
+    "chars": 11789,
+    "raw": 3997,
+    "parent": 1267,
+    "candidates": {
+      "suffix:.js": {
+        "hits": 120,
+        "m": 3899,
+        "exact": false
+      },
+      "common-ends": {
+        "p": "node_modules/@babel/",
+        "s": ".js",
+        "m": 4127
+      },
+      "freq-word-alias": {
+        "hits": [
+          {
+            "word": "T07",
+            "n": 120,
+            "tokens": 2
+          },
+          {
+            "word": "node_modules",
+            "n": 120,
+            "tokens": 2
+          },
+          {
+            "word": "generators",
+            "n": 13,
+            "tokens": 2
+          },
+          {
+            "word": "transformation",
+            "n": 11,
+            "tokens": 2
+          },
+          {
+            "word": "helper-module-imports",
+            "n": 4,
+            "tokens": 4
+          },
+          {
+            "word": "helper-validator-identifier",
+            "n": 3,
+            "tokens": 4
+          },
+          {
+            "word": "compat-data",
+            "n": 6,
+            "tokens": 2
+          },
+          {
+            "word": "gensync-utils",
+            "n": 3,
+            "tokens": 3
+          }
+        ],
+        "m": 3905,
+        "exact": true
+      }
+    }
+  },
+  {
+    "file": "bench/holdout-ops/npm-ls.txt",
+    "chars": 6688,
+    "raw": 2747,
+    "parent": null,
+    "candidates": {
+      "freq-word-alias": {
+        "hits": [
+          {
+            "word": "UNMET",
+            "n": 70,
+            "tokens": 2
+          },
+          {
+            "word": "OPTIONAL",
+            "n": 70,
+            "tokens": 2
+          },
+          {
+            "word": "DEPENDENCY",
+            "n": 70,
+            "tokens": 2
+          },
+          {
+            "word": "deduped",
+            "n": 18,
+            "tokens": 3
+          },
+          {
+            "word": "tailwindcss",
+            "n": 17,
+            "tokens": 3
+          },
+          {
+            "word": "esbuild",
+            "n": 27,
+            "tokens": 2
+          }
+        ],
+        "m": 2496,
+        "exact": true
+      }
+    }
+  },
+  {
+    "file": "bench/holdout-ops/node-stacktraces.txt",
+    "chars": 1848,
+    "raw": 568,
+    "parent": null,
+    "candidates": {
+      "freq-word-alias": {
+        "hits": [
+          {
+            "word": "runScriptInThisContext",
+            "n": 3,
+            "tokens": 5
+          },
+          {
+            "word": "cjs",
+            "n": 7,
+            "tokens": 2
+          },
+          {
+            "word": "v22",
+            "n": 3,
+            "tokens": 2
+          }
+        ],
+        "m": 593,
+        "exact": true
+      }
+    }
+  },
+  {
+    "file": "bench/holdout-work/kb-article.txt",
+    "chars": 3385,
+    "raw": 656,
+    "parent": 622,
+    "candidates": {
+      "wrap-map": {
+        "paragraphs": 7,
+        "breaks": 26,
+        "metadata": [
+          null,
+          [
+            14,
+            13,
+            16,
+            14,
+            12,
+            17,
+            3
+          ],
+          [
+            17,
+            17,
+            19,
+            14,
+            12
+          ],
+          [
+            17,
+            14,
+            16,
+            15,
+            15,
+            12
+          ],
+          [
+            15,
+            16,
+            17,
+            18,
+            14,
+            13
+          ],
+          [
+            15,
+            15,
+            16,
+            17,
+            14,
+            15,
+            8
+          ],
+          null
+        ],
+        "exact": true,
+        "m": 744
+      },
+      "freq-word-alias": {
+        "hits": [
+          {
+            "word": "sweep",
+            "n": 8,
+            "tokens": 2
+          },
+          {
+            "word": "disposition",
+            "n": 6,
+            "tokens": 2
+          },
+          {
+            "word": "retention",
+            "n": 4,
+            "tokens": 2
+          },
+          {
+            "word": "deletion",
+            "n": 3,
+            "tokens": 2
+          }
+        ],
+        "m": 698,
+        "exact": true
+      }
+    }
+  },
+  {
+    "file": "bench/holdout-work/llm-answer.md",
+    "chars": 2542,
+    "raw": 733,
+    "parent": 674,
+    "candidates": {
+      "wrap-map": {
+        "paragraphs": 16,
+        "breaks": 8,
+        "metadata": [
+          null,
+          [
+            16,
+            13,
+            3
+          ],
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          [
+            9,
+            11
+          ],
+          null,
+          null,
+          null,
+          [
+            14,
+            9
+          ],
+          [
+            7,
+            5,
+            9,
+            11,
+            11
+          ],
+          null
+        ],
+        "exact": true,
+        "m": 817
+      },
+      "freq-word-alias": {
+        "hits": [
+          {
+            "word": "Vite",
+            "n": 5,
+            "tokens": 2
+          }
+        ],
+        "m": 757,
+        "exact": true
+      }
+    }
+  },
+  {
+    "file": "bench/holdout-work/email-thread.txt",
+    "chars": 2126,
+    "raw": 629,
+    "parent": 488,
+    "candidates": {
+      "wrap-map": {
+        "paragraphs": 7,
+        "breaks": 7,
+        "metadata": [
+          [
+            4,
+            7,
+            4,
+            7,
+            11
+          ],
+          null,
+          [
+            18,
+            15
+          ],
+          [
+            17,
+            18,
+            5
+          ],
+          null,
+          null,
+          null
+        ],
+        "exact": true,
+        "m": 699
+      },
+      "freq-word-alias": {
+        "hits": [
+          {
+            "word": "northgate-analytics",
+            "n": 7,
+            "tokens": 4
+          },
+          {
+            "word": "Priya",
+            "n": 4,
+            "tokens": 2
+          },
+          {
+            "word": "wrote",
+            "n": 3,
+            "tokens": 2
+          },
+          {
+            "word": "remittance",
+            "n": 3,
+            "tokens": 2
+          }
+        ],
+        "m": 646,
+        "exact": true
+      }
+    }
+  },
+  {
+    "file": "bench/holdout-work/meeting-transcript.txt",
+    "chars": 1746,
+    "raw": 472,
+    "parent": 385,
+    "candidates": {
+      "freq-word-alias": {
+        "hits": [
+          {
+            "word": "Raghunathan",
+            "n": 4,
+            "tokens": 4
+          },
+          {
+            "word": "Oyelaran",
+            "n": 4,
+            "tokens": 3
+          },
+          {
+            "word": "Beckett",
+            "n": 4,
+            "tokens": 3
+          },
+          {
+            "word": "Whitfield",
+            "n": 4,
+            "tokens": 2
+          },
+          {
+            "word": "Priya",
+            "n": 4,
+            "tokens": 2
+          },
+          {
+            "word": "Halstead",
+            "n": 3,
+            "tokens": 2
+          }
+        ],
+        "m": 495,
+        "exact": true
+      }
+    }
+  },
+  {
+    "file": "bench/holdout-work/bibliography.txt",
+    "chars": 2759,
+    "raw": 896,
+    "parent": 671,
+    "candidates": {
+      "freq-word-alias": {
+        "hits": [
+          {
+            "word": "Witten",
+            "n": 3,
+            "tokens": 2
+          },
+          {
+            "word": "ACM",
+            "n": 3,
+            "tokens": 2
+          },
+          {
+            "word": "Proceedings",
+            "n": 3,
+            "tokens": 2
+          }
+        ],
+        "m": 931,
+        "exact": true
+      }
+    }
+  },
+  {
+    "file": "bench/holdout/gh-prose.txt",
+    "chars": 8000,
+    "raw": 1934,
+    "parent": null,
+    "candidates": {
+      "wrap-map": {
+        "paragraphs": 24,
+        "breaks": 12,
+        "metadata": [
+          [
+            5,
+            2
+          ],
+          [
+            7,
+            49
+          ],
+          null,
+          null,
+          [
+            5,
+            5,
+            8,
+            6,
+            6,
+            6
+          ],
+          null,
+          null,
+          null,
+          null,
+          [
+            8,
+            27
+          ],
+          null,
+          null,
+          null,
+          [
+            6,
+            40
+          ],
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          [
+            7,
+            11,
+            12
+          ],
+          null,
+          [
+            6,
+            28
+          ],
+          null
+        ],
+        "exact": true,
+        "m": 2035
+      },
+      "freq-word-alias": {
+        "hits": [
+          {
+            "word": "nodejs",
+            "n": 7,
+            "tokens": 2
+          },
+          {
+            "word": "riscv64",
+            "n": 3,
+            "tokens": 4
+          },
+          {
+            "word": "contribution",
+            "n": 6,
+            "tokens": 2
+          },
+          {
+            "word": "v8",
+            "n": 5,
+            "tokens": 2
+          },
+          {
+            "word": "chromium",
+            "n": 4,
+            "tokens": 2
+          },
+          {
+            "word": "fixes",
+            "n": 3,
+            "tokens": 2
+          },
+          {
+            "word": "JAL",
+            "n": 3,
+            "tokens": 2
+          }
+        ],
+        "m": 1975,
+        "exact": true
+      }
+    }
+  },
+  {
+    "file": "bench/holdout-x42/ps-ef.txt",
+    "chars": 2669,
+    "raw": 1144,
+    "parent": null,
+    "candidates": {
+      "freq-word-alias": {
+        "hits": [
+          {
+            "word": "kworker",
+            "n": 5,
+            "tokens": 2
+          }
+        ],
+        "m": 1167,
+        "exact": true
+      }
+    }
+  },
+  {
+    "file": "bench/holdout-tbl/markdown-table.md",
+    "chars": 635,
+    "raw": 330,
+    "parent": null,
+    "candidates": {}
+  }
+]

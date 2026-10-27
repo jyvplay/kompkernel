@@ -1,0 +1,2298 @@
+{
+  "summary": {
+    "cases": 285,
+    "handCases": 34,
+    "seededFuzz": 200,
+    "wireAdversaries": 16,
+    "failures": 0,
+    "passed": 285,
+    "source": "TAGSTACK and SIBLING-TEMPLATE exact transform/restore red-team; parent frontier tested separately; no external LLM reader"
+  },
+  "rows": [
+    {
+      "name": "nested XML",
+      "expected": "fold",
+      "folded": true,
+      "mode": "xml",
+      "pairs": 4,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "quoted greater-than and self-close",
+      "expected": "fold",
+      "folded": true,
+      "mode": "xml",
+      "pairs": 2,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "comment fake close",
+      "expected": "fold",
+      "folded": true,
+      "mode": "xml",
+      "pairs": 2,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "CDATA fake close",
+      "expected": "fold",
+      "folded": true,
+      "mode": "xml",
+      "pairs": 2,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "PI and internal-subset doctype",
+      "expected": "fold",
+      "folded": true,
+      "mode": "xml",
+      "pairs": 3,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "namespace names",
+      "expected": "fold",
+      "folded": true,
+      "mode": "xml",
+      "pairs": 2,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "mixed EOL preservation",
+      "expected": "fold",
+      "folded": true,
+      "mode": "xml",
+      "pairs": 3,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "HTML void elements",
+      "expected": "fold",
+      "folded": true,
+      "mode": "html",
+      "pairs": 4,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "HTML comment and quoted attributes",
+      "expected": "fold",
+      "folded": true,
+      "mode": "html",
+      "pairs": 4,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "HTML script raw text",
+      "expected": "fold",
+      "folded": true,
+      "mode": "html",
+      "pairs": 4,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "HTML fake raw close prefix",
+      "expected": "fold",
+      "folded": true,
+      "mode": "html",
+      "pairs": 2,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "HTML textarea raw text",
+      "expected": "fold",
+      "folded": true,
+      "mode": "html",
+      "pairs": 4,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "marker collision across full marker pool",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "marker pool glyphs are one token",
+      "expected": "fold",
+      "folded": true,
+      "mode": "xml",
+      "pairs": 3,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "SVG self-closing children",
+      "expected": "fold",
+      "folded": true,
+      "mode": "xml",
+      "pairs": 3,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "literal less-than text",
+      "expected": "fold",
+      "folded": true,
+      "mode": "xml",
+      "pairs": 3,
+      "pureInverseExact": true,
+      "contractBound": true,
+      "pass": true
+    },
+    {
+      "name": "plain prose",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "JSX with fragment marker",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "single closer below minimum",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "mismatched nesting",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "unclosed element",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "case mismatch in XML",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "case mismatch in HTML lexical form",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "whitespace in closing tag",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "pre-existing empty end marker",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "malformed quoted attribute",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "malformed comment",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "malformed apparent end",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "unsupported Unicode end name",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "HTML optional li closers",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "HTML raw-text close absent",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "HTML void end tag refused",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "oversize guard",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "empty input",
+      "expected": "refuse",
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "pureInverseExact": null,
+      "contractBound": false,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-0",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-1",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-2",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-3",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-4",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-5",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-6",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-7",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-8",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-9",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-10",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-11",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-12",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-13",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-14",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-15",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-16",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-17",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-18",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-19",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-20",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-21",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-22",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-23",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-24",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-25",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-26",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-27",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-28",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-29",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-30",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-31",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-32",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-33",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-34",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-35",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-36",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-37",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-38",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-39",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-40",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-41",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-42",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-43",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-44",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-45",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-46",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-47",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-48",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-49",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-50",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-51",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-52",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-53",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-54",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-55",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-56",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-57",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-58",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-59",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-60",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-61",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-62",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-63",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-64",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-65",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-66",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-67",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-68",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-69",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-70",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-71",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-72",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-73",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-74",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-75",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-76",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-77",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-78",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-79",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-80",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-81",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-82",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-83",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-84",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-85",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-86",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-87",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-88",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-89",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-90",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-91",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-92",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-93",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-94",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-95",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-96",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-97",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-98",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-99",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-100",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-101",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-102",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-103",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-104",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-105",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-106",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-107",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-108",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-109",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-110",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-111",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-112",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-113",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-114",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-115",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-116",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-117",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-118",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-119",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-120",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-121",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-122",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-123",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-124",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-125",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-126",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-127",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-128",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-129",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-130",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-131",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-132",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-133",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-134",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-135",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-136",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-137",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-138",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-139",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-140",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-141",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-142",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-143",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-144",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-145",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-146",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-147",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-148",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-149",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-150",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-151",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-152",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-153",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-154",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-155",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-156",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-157",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-158",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-159",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-160",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-161",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-162",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-163",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-164",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-165",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-166",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-167",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-168",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-169",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-170",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-171",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-172",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-173",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-174",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-175",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-176",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-177",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-178",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-179",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-180",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-181",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-182",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-183",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-184",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 4,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-185",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-186",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-187",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-188",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-189",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-190",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-191",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-192",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-193",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 5,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-194",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-195",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-196",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 2,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-197",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-198",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 3,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "seeded-valid-199",
+      "expected": "fold",
+      "folded": true,
+      "pairs": 6,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-0",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-1",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-2",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-3",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-4",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-5",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-6",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-7",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-8",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-9",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-10",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-11",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-12",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": false,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-13",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": false,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-14",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": true,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "wire-adversary-15",
+      "expected": "reject-or-decode-different-source",
+      "decodedNull": false,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "holdout-page.html",
+      "path": "bench/holdout-mk/page.html",
+      "chars": 10145,
+      "folded": true,
+      "mode": "html",
+      "pairs": 371,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "holdout-chart.svg",
+      "path": "bench/holdout-mk/chart.svg",
+      "chars": 3446,
+      "folded": true,
+      "mode": "xml",
+      "pairs": 23,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "holdout-pom.xml",
+      "path": "bench/holdout-mk/pom.xml",
+      "chars": 1797,
+      "folded": true,
+      "mode": "xml",
+      "pairs": 46,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "holdout-component.jsx",
+      "path": "bench/holdout-mk/component.jsx",
+      "chars": 1194,
+      "folded": false,
+      "mode": null,
+      "pairs": 0,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "sibling-template-real-pom.xml",
+      "expected": "fold-10-records-3-slots",
+      "folded": true,
+      "records": 10,
+      "slots": 3,
+      "proxyGain": 259,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "sibling-template-all-marker-pool-collides",
+      "pass": true
+    },
+    {
+      "name": "sibling-template-refuses-plain-prose",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-two-record-minimum",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-one-slot-only",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-outer-name-mismatch",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-outer-attribute-mismatch",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-child-order-mismatch",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-child-name-mismatch",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-template-whitespace-mismatch",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-different-record-separators",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-non-whitespace-record-separator",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-nested-slot-element",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-self-closing-slot-element",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-mismatched-close",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-unclosed-element",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-closing-tag-attributes",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-preexisting-slot-syntax",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-refuses-over-text-limit",
+      "pass": true,
+      "refused": true
+    },
+    {
+      "name": "sibling-template-shape-work-budget",
+      "pass": true,
+      "refused": true,
+      "sourceChars": 15029
+    },
+    {
+      "name": "sibling-template-holdout-chart.svg",
+      "folded": false,
+      "records": 0,
+      "slots": 0,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "sibling-template-holdout-page.html",
+      "folded": false,
+      "records": 0,
+      "slots": 0,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "sibling-template-holdout-component.jsx",
+      "folded": false,
+      "records": 0,
+      "slots": 0,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "sibling-template-holdout-dump.sql",
+      "folded": false,
+      "records": 0,
+      "slots": 0,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "sibling-template-holdout-paper.tex",
+      "folded": false,
+      "records": 0,
+      "slots": 0,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "sibling-template-holdout-agent-history.md",
+      "folded": false,
+      "records": 0,
+      "slots": 0,
+      "exact": null,
+      "pass": true
+    },
+    {
+      "name": "sibling-template-external-apache-maven.pom.xml",
+      "sha256": "71de467a75c788ae84112998b3c9ec5995e0f4774152d0b538a2f3a0e3a63c89",
+      "folded": true,
+      "records": 32,
+      "slots": 3,
+      "proxyGain": 855,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "sibling-template-external-commons-lang.pom.xml",
+      "sha256": "697fe496836585f1f1719375eb53861dc42887cffd3d6256a4f11a5eadbc6993",
+      "folded": true,
+      "records": 3,
+      "slots": 4,
+      "proxyGain": 53,
+      "exact": true,
+      "pass": true
+    },
+    {
+      "name": "sibling-template-corrupt-field-delimiter",
+      "pass": true,
+      "rejected": true
+    },
+    {
+      "name": "sibling-template-corrupt-close-marker",
+      "pass": true,
+      "rejected": true
+    },
+    {
+      "name": "large-token-count-memo-bound",
+      "smallChars": 4096,
+      "largeChars": 4097,
+      "smallExact": true,
+      "largeExact": true,
+      "retainedLongEntries": 1,
+      "retainedLongChars": 4096,
+      "pass": true
+    }
+  ]
+}

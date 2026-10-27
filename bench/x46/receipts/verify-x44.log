@@ -1,0 +1,20 @@
+PASS bench/holdout/lic-mit.txt                                              parent=38 M=38 Δ=0 parentSame=true applied=false ms=4612
+PASS bench/holdout/license.txt                                              parent=929 M=929 Δ=0 parentSame=true applied=false ms=30390
+PASS bench/holdout/readme.txt                                               parent=646 M=646 Δ=0 parentSame=true applied=false ms=13690
+PASS bench/holdout/code-ts.txt                                              parent=969 M=969 Δ=0 parentSame=true applied=false ms=55879
+PASS bench/holdout/md-react.txt                                             parent=252 M=252 Δ=0 parentSame=true applied=false ms=5278
+PASS bench/z45/corpus/licenses/facebook_react.txt                           parent=38 M=38 Δ=0 parentSame=true applied=false ms=4393
+PASS bench/z45/corpus/licenses/colinhacks_zod.txt                           parent=37 M=37 Δ=0 parentSame=true applied=false ms=4959
+PASS bench/z45/corpus/licenses/ollama_ollama.txt                            parent=33 M=33 Δ=0 parentSame=true applied=false ms=3615
+PASS bench/z45/corpus/licenses/tailwindlabs_tailwindcss.txt                 parent=36 M=36 Δ=0 parentSame=true applied=false ms=4179
+PASS bench/z45/corpus/licenses/vitejs_vite.txt                              parent=44 M=44 Δ=0 parentSame=true applied=false ms=4341
+PASS bench/z45/corpus/licenses/langchain-ai_langchain.txt                   parent=35 M=35 Δ=0 parentSame=true applied=false ms=3676
+PASS bench/z45/corpus/licenses/ggerganov_llama.cpp.txt                      parent=41 M=41 Δ=0 parentSame=true applied=false ms=3846
+PASS bench/z45/corpus/licenses/fastify_fastify.txt                          parent=52 M=52 Δ=0 parentSame=true applied=false ms=3939
+PASS bench/z45/corpus/licenses/ytdl-org_youtube-dl.txt                      parent=62 M=62 Δ=0 parentSame=true applied=false ms=8879
+PASS bench/train/lic-isc.txt                                                parent=37 M=37 Δ=0 parentSame=true applied=false ms=3113
+PASS bench/holdout-work/kb-article.txt                                      parent=622 M=622 Δ=0 parentSame=true applied=false ms=7299
+PASS bench/holdout-ops/find-listing.txt                                     parent=1267 M=1267 Δ=0 parentSame=true applied=false ms=118730
+PASS bench/holdout-lang/ru-kb.txt                                           parent=478 M=478 Δ=0 parentSame=true applied=false ms=17578
+PASS bench/x44/lanes/third-party-notices.txt                                parent=80 M=80 Δ=0 parentSame=true applied=false ms=16447
+SUMMARY {"parent":"SYNKRISIS X45","encoding":"o200k_base","cases":19,"exact":19,"noRegression":19,"parentSame":19,"strictWins":0,"ties":19,"rejectedCandidates":1,"failures":0,"x45SynkrisisSum":5696,"currentParentSum":5696,"bifrontSum":5696,"seconds":314.852}

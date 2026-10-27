@@ -1,0 +1,4 @@
+PASS word-canon CPython: bytes=1552 sha256=b846415d1b514e9c1dff14a22deb906d794bc546ca6129f950a18cd091e2a669 source=bench/z45/corpus/licenses/django_django.txt
+PASS multi-copy CPython: bytes=6497 sha256=8a50b476df5ddfd5a67f6c4c4a3a0127ce4e6160675dd8e7da76fc3f353b759e source=bench/x44/lanes/third-party-notices.txt
+PASS LLM hand decode word-canon: bytes=1552 sha256=b846415d1b514e9c1dff14a22deb906d794bc546ca6129f950a18cd091e2a669 source=bench/z45/corpus/licenses/django_django.txt
+PASS LLM hand decode multi-copy: bytes=6497 sha256=8a50b476df5ddfd5a67f6c4c4a3a0127ce4e6160675dd8e7da76fc3f353b759e source=bench/x44/lanes/third-party-notices.txt

@@ -1,0 +1,10 @@
+Before ¶ k=v. expand repeatedly; print only.
+§о \р   хо\
+ряmathcal{ляPн & и}
+с\әистbegin{йсsection{ш оң &оtext{доcdotомend{а
+кdocumentы365пinу0¶скclass[11pt]{articleәusepackage{amsmath,amssymb,booktabsәtitle{Token Economics of Retention PoliciesәткәmaketitleайIntroductionиLet $R$ denote the retention horizon and $D$ the disposition date. We write $\л}$ for the set of policies and $\pi(d)$ for the policy resolved at document $d$.
+стequationишpi(d) =отcases} p_dңif } p_dоneqоemptyset \\оpi(\mathrm{parent}(d))ңotherwise}омcasesәмequationийCost modelиThe expected storage cost isастalignи  C(\л}) &=оsum_{dопояD}}оint_{t_у}^{t_у + R(\pi(d))} c(t)\,\mathrm{d}tо\
+                 &сleq |\яD}|дbar{c}дmax_{pопол}} R(p).
+смalignәтtable}[h]
+шcenteringаштtabular}{lrrироtopruleар Policy & Horizon (days) & Documentsхоmidruleар Defaultнын124000х Financeн2555н18400х Legalныун910ух Ephemeralн30н412000х Auditн1825н22300хоbottomruleашмtabularишcaption{Retention horizons by policy.әмtableийConclusionиWe have shown that $C(\л})$ is minimised when $R$ is resolved at creation time rather than retroactively.
+смки

@@ -1,0 +1,14 @@
+Before ¶ k=v. expand; print only.
+§т
+
+**User:** Can you check why the `retention-sweep` job failed on shard в and tell me whether the backlog cleared?
+
+**Assistant:** I looked at the sweep report for shard м more nights.
+
+### Turn Ү documents and disposed ң.
+- р.
+
+- The job started at 02:00 and stopped at 06:00 after the four-hour cap.
+- It considered к documents remained in the queue when the sweep stopped.
+
+That is a time-bounded stop, not a failure. The backlog has **not** cleared; at the current rate it will take about і3а4и5е6ә8о1¶### Turn отовор12000Ү800ң11200кім2т2в2р12731Ү843ң11888камітівір13462Ү886ң12576киматавар14193Ү929ң13264кемитивир14924Ү972ң13952кіметевер15655Ү101иң14640кам7т7в7р16386Ү105әң15328кимәтәвәр17117Ү110оң16016кем9т9в9р17848Ү114аң16704кі more nights.
