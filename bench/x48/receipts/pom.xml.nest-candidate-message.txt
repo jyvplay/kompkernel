@@ -1,0 +1,12 @@
+After parent decode, §template‡separator°rows¤ is a recursive sibling macro: each {{i}} in the literal template receives field i from each ◆-separated row; split fields on µ. Expand records in row order, join them with the exact separator, and preserve all bytes outside the macro.
+Before ¶ k=v. expand repeatedly; print only.
+§р.үр0с>
+  <ч>
+      <к◆orgдµДд5рыgroupIdеartifactIdКдpostgresqlдо1л</іversionи2н>у4а3ц>{{м}}</зj¶<?xml version="оү" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/уүү">
+  <modelVersionнуүүлmodelVersionсынcom.northgate.vaultлысенvault-coreлесінар14рилісdependencies>
+    §<dependencyчыцомычецимечіцамі>
+    </dependencyн‡
+    °org.slfуздslfуз-apiдиүр13◆com.fasterxml.jackson.coreдjackson-databindдир17рок.apache.commonsдcommons-langадар14ү◆io.micrometerдmicrometer-coreдор13рок.postgresqlК42р7ра◆com.zaxxerдHikariCPДоүк.junit.jupiterдзunit-jupiterД10рик.mockitoдmockito-coreД12үк.testcontainersКор19р8◆com.google.guavaдguavaд33риро-jre¤
+  </dependencies>
+лproject>

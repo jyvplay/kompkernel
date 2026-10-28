@@ -1,0 +1,8 @@
+{
+  "codec": "ATX-RELEASE",
+  "checks": 619,
+  "generatedCases": 200,
+  "failures": 0,
+  "seed": "0x50a7c",
+  "sourceHash": "9d059f2251ade653f49071d4d3193c78398cf38311d2a46855287a16d8410387"
+}

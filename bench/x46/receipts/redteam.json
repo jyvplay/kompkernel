@@ -1,0 +1,183 @@
+{
+  "total": 29,
+  "pass": 29,
+  "fail": 0,
+  "negativeCases": 16,
+  "modalShortcutPass": true,
+  "checks": [
+    {
+      "name": "01 homogeneous extension control",
+      "pass": true,
+      "kind": "positive-control",
+      "detail": "expected=fold; actual=fold; exact=true; suffix=.ts"
+    },
+    {
+      "name": "02 only three rows",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "03 one-character common suffix",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "04 mixed .ts and .js (only one-character common suffix)",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "05 shared partial suffix js across .cjs and .mjs is exact",
+      "pass": true,
+      "kind": "positive-control",
+      "detail": "expected=fold; actual=fold; exact=true; suffix=js"
+    },
+    {
+      "name": "06 one ordinary non-path row",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "07 final field is not a path although an earlier field is",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "08 bare filenames without slash or backslash",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "09 every path equals the common suffix; empty residual forbidden",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "10 blank line and blank-paragraph preservation",
+      "pass": true,
+      "kind": "positive-control",
+      "detail": "expected=fold; actual=fold; exact=true; suffix=.ts"
+    },
+    {
+      "name": "11 CRLF byte preservation",
+      "pass": true,
+      "kind": "positive-control",
+      "detail": "expected=fold; actual=fold; exact=true; suffix=.ts"
+    },
+    {
+      "name": "12 final LF preservation",
+      "pass": true,
+      "kind": "positive-control",
+      "detail": "expected=fold; actual=fold; exact=true; suffix=.ts"
+    },
+    {
+      "name": "13 trailing spaces preserved",
+      "pass": true,
+      "kind": "positive-control",
+      "detail": "expected=fold; actual=fold; exact=true; suffix=.ts"
+    },
+    {
+      "name": "14 tab-delimited prefix preserved",
+      "pass": true,
+      "kind": "positive-control",
+      "detail": "expected=fold; actual=fold; exact=true; suffix=.ts"
+    },
+    {
+      "name": "15 Windows backslash paths",
+      "pass": true,
+      "kind": "positive-control",
+      "detail": "expected=fold; actual=fold; exact=true; suffix=.ts"
+    },
+    {
+      "name": "16 Unicode path fields",
+      "pass": true,
+      "kind": "positive-control",
+      "detail": "expected=fold; actual=fold; exact=true; suffix=.ts"
+    },
+    {
+      "name": "17 punctuation and quote characters remain in suffix",
+      "pass": true,
+      "kind": "positive-control",
+      "detail": "expected=fold; actual=fold; exact=true; suffix=\"x]"
+    },
+    {
+      "name": "18 suffix of 65 code points is outside bound",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "19 over line bound",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "20 empty input",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "21 over character bound",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "22 mixed path and URL-only suffix rows",
+      "pass": true,
+      "kind": "positive-control",
+      "detail": "expected=fold; actual=fold; exact=true; suffix=.ts"
+    },
+    {
+      "name": "23 shared suffix but a path would be emptied",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "24 no common terminal suffix",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "25 one suffix-outlier row prevents universal rule",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "26 final fields are ordinary words, not path fields",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "expected=identity; actual=identity; exact=true; suffix=-"
+    },
+    {
+      "name": "27 malformed transformed input fails closed",
+      "pass": true,
+      "kind": "negative-space",
+      "detail": "unchanged=true"
+    },
+    {
+      "name": "28 long divergent prefix with short shared suffix (quadratic-scan stress)",
+      "pass": true,
+      "kind": "positive-control",
+      "detail": "expected=fold; actual=fold; exact=true; suffix=.ts"
+    },
+    {
+      "name": "29 MODAL-SHORTCUT FALSIFICATION: familiar .js must not be guessed for .jsx",
+      "pass": true,
+      "kind": "modal-shortcut-falsification",
+      "detail": "sameBody=true; params=.js vs .jsx; wrongParameterRejected=true"
+    }
+  ]
+}

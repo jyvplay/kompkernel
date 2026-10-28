@@ -1,0 +1,17 @@
+PASS third-party-notices       X45=80 currentParent=80 BIFRONT=80 Δ=0 applied=false ms=17102
+PASS flask-bsd3-double-space   X45=296 currentParent=296 BIFRONT=296 Δ=0 applied=false ms=6602
+PASS django-bsd3               X45=228 currentParent=228 BIFRONT=228 Δ=0 applied=false ms=8019
+PASS numpy-bsd3                X45=262 currentParent=262 BIFRONT=262 Δ=0 applied=false ms=8772
+PASS golang-bsd3               X45=217 currentParent=217 BIFRONT=217 Δ=0 applied=false ms=6443
+PASS pandas-bsd3               X45=259 currentParent=259 BIFRONT=259 Δ=0 applied=false ms=15961
+PASS pytorch-bsd3-bundle       X45=621 currentParent=621 BIFRONT=621 Δ=0 applied=false ms=17268
+PASS postgres-custom           X45=262 currentParent=262 BIFRONT=262 Δ=0 applied=false ms=9474
+PASS httpie-bsd2               X45=265 currentParent=265 BIFRONT=265 Δ=0 applied=false ms=8382
+PASS kb-article                X45=622 currentParent=622 BIFRONT=622 Δ=0 applied=false ms=7448
+PASS llm-answer                X45=674 currentParent=674 BIFRONT=674 Δ=0 applied=false ms=19063
+PASS email-thread              X45=488 currentParent=488 BIFRONT=488 Δ=0 applied=false ms=18059
+PASS meeting-transcript        X45=385 currentParent=385 BIFRONT=385 Δ=0 applied=false ms=5626
+PASS bibliography              X45=671 currentParent=671 BIFRONT=671 Δ=0 applied=false ms=23824
+PASS find-listing              X45=1267 currentParent=1267 BIFRONT=1267 Δ=0 applied=false ms=121249
+PASS git-log-fuller            X45=143 currentParent=143 BIFRONT=143 Δ=0 applied=false ms=4201
+SUMMARY {"parent":"SYNKRISIS X45","encoding":"o200k_base","cases":16,"exact":16,"noRegression":16,"parentSameAndSourceSame":16,"strictWins":0,"ties":16,"rejectedCandidateInputs":1,"changedSources":[],"parentDiscrepancies":[],"failures":0,"x45Sum":6740,"currentParentSum":6740,"bifrontSum":6740}

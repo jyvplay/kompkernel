@@ -1,0 +1,2 @@
+django: key=synkrisis exact=true oneChat=228 outputTokens=155 note=word-canon id=BSD-3-Clause edits=2 words=216->214; M=228 < prior-best 296; arm=word-canon; parent=296; exact=true
+bundle: key=synkrisis exact=true oneChat=80 outputTokens=42 note=multi-copy id=MIT copies=6; M=80 < prior-best 129; arm=multi-copy; parent=129; exact=true

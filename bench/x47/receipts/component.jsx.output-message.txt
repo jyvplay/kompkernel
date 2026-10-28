@@ -1,0 +1,20 @@
+Before ¶ k=v. expand repeatedly; print only.
+§т className="отretentionе <дspanыpolicyқ               едтый((p) =>у>
+нCardа,лHeaderкBodyв Cardш       р         и </¶import Reactа { useStateа useCallback } from "react";
+import {вавлавк } from "@northgate/ui";
+
+export function RetentionPanel({ policiesа onSelectа selectedId }) {
+  const [filterа setFilter] = useState("");
+  const handle = useCallback((id) => () => onSelect(id), [onSelect]);
+  return (
+   еdivо-panel">
+     ено-card">
+шенло-header">
+реh3о-title">Retention policies</h3уреinputо-filter" value={filter} onChange={(e) => setFilter(e.target.value)} placeholder="Filter policies" />
+шинлушенко-body">
+реulты-list">
+            {policies.filterй p.name.includes(filter)).mapй (
+             еliты-item" key={p.id} onClick={handle(p.id)}>
+қ-name">{p.name}</дуқ-days">{p.days} days</дуқ-mode">{p.mode}</ду             иliу            ))}
+риulушинку     ину   иdivу  );
+}

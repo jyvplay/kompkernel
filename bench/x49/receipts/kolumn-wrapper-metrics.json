@@ -1,0 +1,56 @@
+{
+  "path": "bench/holdout-x40/metrics.tsv",
+  "chars": 1203,
+  "sourceTokens": 811,
+  "planTokens": 131,
+  "contractTokens": 87,
+  "modes": [
+    "T",
+    "Q3",
+    "G1x10",
+    "P1",
+    "G1x7",
+    "Q5"
+  ],
+  "candidates": [
+    {
+      "parent": "APOGRAPHE",
+      "message": "After parent: header/EOL literal; §sep‡n=rows‡cols¤[EOL]. °=columns,µ=values; Qp cycles p values; T=UTC ISO date/sec base+i·step-ms; Gkxp=base+cyclic p signed deltas; Pk=base+i·step; i=0-based row; G/P÷10^k. Rows join sep/EOL.\nBefore ¶ k=v. expand; print only.\n§Ёµ31µ31µ31Ђµnvme0nЄµ1ЅµupІЄЄЇ°G1x¶ts\tiface\tin_mbps\tout_mbps\tloss_pct\tstate\n§\t‡24‡Tµ60000µ2026-10-24T00:00:00Z°Q3Ђ0Ђ1Ђ2Ї10Є000ЁЁЁµ21°P1µ2500µ20Ї7µ0ІІІµ-6°Q5µdownЅЅЅЅ¤\n",
+      "exact": true,
+      "parentTokensReported": 122,
+      "parentExact": true,
+      "tokens": 209
+    },
+    {
+      "parent": "TAGSTACK-on-transformed",
+      "message": "After parent: header/EOL literal; §sep‡n=rows‡cols¤[EOL]. °=columns,µ=values; Qp cycles p values; T=UTC ISO date/sec base+i·step-ms; Gkxp=base+cyclic p signed deltas; Pk=base+i·step; i=0-based row; G/P÷10^k. Rows join sep/EOL.\nBefore ¶ k=v. expand; print only.\n§Ёµ31µ31µ31Ђµnvme0nЄµ1ЅµupІЄЄЇ°G1x¶ts\tiface\tin_mbps\tout_mbps\tloss_pct\tstate\n§\t‡24‡Tµ60000µ2026-10-24T00:00:00Z°Q3Ђ0Ђ1Ђ2Ї10Є000ЁЁЁµ21°P1µ2500µ20Ї7µ0ІІІµ-6°Q5µdownЅЅЅЅ¤\n",
+      "exact": true,
+      "parentTokensReported": 122,
+      "parentExact": true,
+      "parentCodec": "synkrisis",
+      "frontierCosts": {
+        "synkrisis": 122,
+        "kanon": 262,
+        "akolouthia2": 131,
+        "apographe": 122,
+        "diastema": 122
+      },
+      "frontierComplete": true,
+      "tokens": 209
+    },
+    {
+      "parent": "SIBLING-on-transformed",
+      "message": "After parent: header/EOL literal; §sep‡n=rows‡cols¤[EOL]. °=columns,µ=values; Qp cycles p values; T=UTC ISO date/sec base+i·step-ms; Gkxp=base+cyclic p signed deltas; Pk=base+i·step; i=0-based row; G/P÷10^k. Rows join sep/EOL.\nBefore ¶ k=v. expand; print only.\n§Ёµ31µ31µ31Ђµnvme0nЄµ1ЅµupІЄЄЇ°G1x¶ts\tiface\tin_mbps\tout_mbps\tloss_pct\tstate\n§\t‡24‡Tµ60000µ2026-10-24T00:00:00Z°Q3Ђ0Ђ1Ђ2Ї10Є000ЁЁЁµ21°P1µ2500µ20Ї7µ0ІІІµ-6°Q5µdownЅЅЅЅ¤\n",
+      "exact": true,
+      "parentTokensReported": 122,
+      "parentExact": true,
+      "tokens": 209
+    },
+    {
+      "parent": "direct",
+      "message": "After parent: header/EOL literal; §sep‡n=rows‡cols¤[EOL]. °=columns,µ=values; Qp cycles p values; T=UTC ISO date/sec base+i·step-ms; Gkxp=base+cyclic p signed deltas; Pk=base+i·step; i=0-based row; G/P÷10^k. Rows join sep/EOL.\nts\tiface\tin_mbps\tout_mbps\tloss_pct\tstate\n§\t‡24‡Tµ60000µ2026-10-24T00:00:00Z°Q3µnvme0n0µnvme0n1µnvme0n2°G1x10µ1000µ31µ31µ31µ31µ31µ31µ31µ31µ31µ21°P1µ2500µ20°G1x7µ0µ1µ1µ1µ1µ1µ1µ-6°Q5µdownµupµupµupµup¤\n",
+      "exact": true,
+      "tokens": 218
+    }
+  ]
+}

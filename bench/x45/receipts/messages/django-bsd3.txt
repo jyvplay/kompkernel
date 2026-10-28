@@ -1,0 +1,3 @@
+For JSON below, start from the standard body named by id, collapse it to single-space words, and apply each [old,new] phrase replacement once. Consume layout as words per line (0=blank); indent is [1-based line, spaces]. Join with eol, append it iff final, then wrap with prefix and suffix. JSON strings are literal.
+SYNKRISIS/WORD
+{"id":"BSD-3-Clause","prefix":"Copyright (c) Django Software Foundation and individual contributors.\nAll rights reserved.\n\n","edits":[["the copyright holder","Django"],["HOLDER","OWNER"]],"layout":[12,9,0,11,8,0,10,11,8,0,15,10,4,0,13,12,10,13,9,11,13,11,14,10],"indents":[[4,4],[5,7],[7,4],[8,7],[9,7],[11,4],[12,7],[13,7]],"eol":"\n","final":true,"suffix":""}

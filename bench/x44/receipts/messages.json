@@ -1,0 +1,72 @@
+[
+  {
+    "lane": "lic-mit.txt",
+    "message": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) Meta Platforms, Inc. and affiliates.\". This is the whole message. Print only the result.\n",
+    "contract": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) Meta Platforms, Inc. and affiliates.\". This is the whole message. Print only the result.",
+    "wire": "",
+    "M": 38
+  },
+  {
+    "lane": "facebook_react.txt",
+    "message": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) Meta Platforms, Inc. and affiliates.\". This is the whole message. Print only the result.\n",
+    "contract": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) Meta Platforms, Inc. and affiliates.\". This is the whole message. Print only the result.",
+    "wire": "",
+    "M": 38
+  },
+  {
+    "lane": "colinhacks_zod.txt",
+    "message": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) 2025 Colin McDonnell\". This is the whole message. Print only the result.\n",
+    "contract": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) 2025 Colin McDonnell\". This is the whole message. Print only the result.",
+    "wire": "",
+    "M": 37
+  },
+  {
+    "lane": "ollama_ollama.txt",
+    "message": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) Ollama\". This is the whole message. Print only the result.\n",
+    "contract": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) Ollama\". This is the whole message. Print only the result.",
+    "wire": "",
+    "M": 33
+  },
+  {
+    "lane": "tailwindlabs_tailwindcss.txt",
+    "message": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) Tailwind Labs, Inc.\". This is the whole message. Print only the result.\n",
+    "contract": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) Tailwind Labs, Inc.\". This is the whole message. Print only the result.",
+    "wire": "",
+    "M": 36
+  },
+  {
+    "lane": "vitejs_vite.txt",
+    "message": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) 2019-present, VoidZero Inc. and Vite contributors\". This is the whole message. Print only the result.\n",
+    "contract": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) 2019-present, VoidZero Inc. and Vite contributors\". This is the whole message. Print only the result.",
+    "wire": "",
+    "M": 44
+  },
+  {
+    "lane": "langchain-ai_langchain.txt",
+    "message": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) LangChain, Inc.\". This is the whole message. Print only the result.\n",
+    "contract": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) LangChain, Inc.\". This is the whole message. Print only the result.",
+    "wire": "",
+    "M": 35
+  },
+  {
+    "lane": "ggerganov_llama.cpp.txt",
+    "message": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) 2023-2026 The ggml authors\". This is the whole message. Print only the result.\n",
+    "contract": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) 2023-2026 The ggml authors\". This is the whole message. Print only the result.",
+    "wire": "",
+    "M": 41
+  },
+  {
+    "lane": "fastify_fastify.txt",
+    "message": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) 2016-present The Fastify team <https://github.com/fastify/fastify#team>\". This is the whole message. Print only the result.\n",
+    "contract": "Write the standard MIT License with these line edits. Line 3 is \"Copyright (c) 2016-present The Fastify team <https://github.com/fastify/fastify#team>\". This is the whole message. Print only the result.",
+    "wire": "",
+    "M": 52
+  },
+  {
+    "lane": "lic-isc.txt",
+    "message": "Write the standard ISC License with these line edits. Line 3 is \"Copyright (c) [year] [fullname]\". This is the whole message. Print only the result.\n",
+    "contract": "Write the standard ISC License with these line edits. Line 3 is \"Copyright (c) [year] [fullname]\". This is the whole message. Print only the result.",
+    "wire": "",
+    "M": 37
+  }
+]

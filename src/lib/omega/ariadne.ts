@@ -571,6 +571,89 @@ export function runCostPrepared(p: PreparedRuns, assign: Map<number, string>, en
   return t;
 }
 
+/** Exact assignment-cost state, indexed by glyph slots rather than rule IDs. */
+export interface PreparedRunCostState {
+  total: number;
+  costs: number[];
+  patternSlots: number[][];
+  patternsBySlot: number[][];
+}
+
+/** A candidate score plus only the per-pattern costs changed by that candidate. */
+export interface PreparedRunCostDelta {
+  total: number;
+  updates: Array<[pattern: number, cost: number]>;
+}
+
+/**
+ * Build the exact run-cost vector for an assignment. Subsequent local-search
+ * moves usually change one or a few glyph slots, so only patterns containing
+ * those slots need to be retokenized. `total` and every element of `costs` are
+ * the same integer objective used by runCostPrepared; this is an exact delta
+ * evaluator, not a surrogate score.
+ */
+export function prepareRunCostState(
+  p: PreparedRuns, refList: number[], values: string[], enc: EncodingName, cache: Map<string, number>,
+): PreparedRunCostState {
+  if (refList.length !== values.length) throw new Error('run-cost assignment length mismatch');
+  const slotOf = new Map<number, number>();
+  refList.forEach((r, i) => slotOf.set(r, i));
+  const patternSlots: number[][] = [];
+  const patternsBySlot = Array.from({ length: refList.length }, () => [] as number[]);
+  const costs = new Array<number>(p.pats.length);
+  let total = 0;
+  for (let i = 0; i < p.pats.length; i++) {
+    const slots: number[] = [];
+    const seen = new Set<number>();
+    let s = '';
+    for (const r of p.pats[i]) {
+      const slot = slotOf.get(r);
+      if (slot === undefined) throw new Error(`run-cost reference ${r} has no assignment slot`);
+      s += values[slot];
+      slots.push(slot);
+      if (!seen.has(slot)) { seen.add(slot); patternsBySlot[slot].push(i); }
+    }
+    let v = cache.get(s);
+    if (v === undefined) { v = countTokens(s, enc); cache.set(s, v); }
+    patternSlots.push(slots);
+    costs[i] = v;
+    total += v * p.mult[i];
+  }
+  return { total, costs, patternSlots, patternsBySlot };
+}
+
+/** Score a candidate relative to `before`, touching only patterns it changes. */
+export function scoreRunCostDelta(
+  p: PreparedRuns, state: PreparedRunCostState, before: string[], after: string[],
+  enc: EncodingName, cache: Map<string, number>,
+): PreparedRunCostDelta {
+  if (before.length !== after.length || before.length !== state.patternsBySlot.length) {
+    throw new Error('run-cost candidate length mismatch');
+  }
+  const affected = new Set<number>();
+  for (let slot = 0; slot < before.length; slot++) {
+    if (before[slot] === after[slot]) continue;
+    for (const pattern of state.patternsBySlot[slot]) affected.add(pattern);
+  }
+  let total = state.total;
+  const updates: Array<[number, number]> = [];
+  for (const i of affected) {
+    let s = '';
+    for (const slot of state.patternSlots[i]) s += after[slot];
+    let v = cache.get(s);
+    if (v === undefined) { v = countTokens(s, enc); cache.set(s, v); }
+    total += (v - state.costs[i]) * p.mult[i];
+    updates.push([i, v]);
+  }
+  return { total, updates };
+}
+
+/** Commit a previously-scored candidate after the caller accepts it. */
+export function commitRunCostDelta(state: PreparedRunCostState, delta: PreparedRunCostDelta): void {
+  state.total = delta.total;
+  for (const [i, v] of delta.updates) state.costs[i] = v;
+}
+
 export function runCost(runs: number[][], assign: Map<number, string>, enc: EncodingName, cache: Map<string, number>): number {
   let t = 0;
   for (const run of runs) {
@@ -1031,6 +1114,8 @@ export function renderBest(
       const spare2 = chars.filter(c => !new Set(bestArr).has(c)).slice(0, 128);
       const probes = Math.max(40, Math.round(Math.min(9000, 110 * needed) * (o.probeScale ?? 1)));
       let arr = bestArr.slice();
+      const scoreState = prepareRunCostState(prepRuns, refList, arr, enc, cache);
+      if (scoreState.total !== bestRun) throw new Error('run-cost delta baseline mismatch');
       // Precompute the edge list once; a targeted move is worth far more than a
       // random swap because the objective only pays on realised pairs.
       const edgeList = [...cand.pool.pairs].filter(e => { const a = [...e]; return !payload.has(a[0]) && !payload.has(a[1]) && a[0] !== a[1]; });
@@ -1066,8 +1151,13 @@ export function renderBest(
           }
           if (!ok) continue;
           if (new Set(trial).size !== trial.length) continue;
-          const v = runCostPrepared(prepRuns, mkMap(trial), enc, cache);
-          if (v <= bestRun) { if (v < bestRun) { bestRun = v; bestArr = trial.slice(); } arr = trial; }
+          const delta = scoreRunCostDelta(prepRuns, scoreState, arr, trial, enc, cache);
+          const v = delta.total;
+          if (v <= bestRun) {
+            if (v < bestRun) { bestRun = v; bestArr = trial.slice(); }
+            commitRunCostDelta(scoreState, delta);
+            arr = trial;
+          }
           continue;
         }
         if (edgeList.length && hotPairs.length && rnd() < 0.45) {
@@ -1085,8 +1175,13 @@ export function renderBest(
           else trial[iv] = c2;
           void j2;
           if (new Set(trial).size !== trial.length) continue;
-          const v = runCostPrepared(prepRuns, mkMap(trial), enc, cache);
-          if (v <= bestRun) { if (v < bestRun) { bestRun = v; bestArr = trial.slice(); } arr = trial; }
+          const delta = scoreRunCostDelta(prepRuns, scoreState, arr, trial, enc, cache);
+          const v = delta.total;
+          if (v <= bestRun) {
+            if (v < bestRun) { bestRun = v; bestArr = trial.slice(); }
+            commitRunCostDelta(scoreState, delta);
+            arr = trial;
+          }
           continue;
         }
         if (spare2.length && rnd() < 0.3) {
@@ -1100,8 +1195,13 @@ export function renderBest(
           if (i === j) continue;
           const t2 = trial[i]; trial[i] = trial[j]; trial[j] = t2;
         }
-        const v = runCostPrepared(prepRuns, mkMap(trial), enc, cache);
-        if (v <= bestRun) { if (v < bestRun) { bestRun = v; bestArr = trial.slice(); } arr = trial; }
+        const delta = scoreRunCostDelta(prepRuns, scoreState, arr, trial, enc, cache);
+        const v = delta.total;
+        if (v <= bestRun) {
+          if (v < bestRun) { bestRun = v; bestArr = trial.slice(); }
+          commitRunCostDelta(scoreState, delta);
+          arr = trial;
+        }
       }
     }
 

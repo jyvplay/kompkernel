@@ -1,0 +1,10 @@
+Before ¶ k=v. expand repeatedly; print only.
+§ح</صحversion>
+    </dependencyق>
+      <سgroupبIdنب>َ>
+    <dependencyقسنيصَدartifactفحسبقدنوحدبقversion>ا.تا0ذ1خاذهيorgطفpostgresqlوی>
+  <ل2ةcomر5م3ش14ئ13¶<?xml version="ذت" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4تت">
+  <modelVersion>4تتحmodelVersionیسنة.northgate.vaultحسبیدنvault-coreحدبیversion>ماشالحversionیdependenciesَorg.slf4jفslf4j-apiولتائية.fasterxml.jackson.coreفjackson-databindولا17خه.apache.commonsفcommons-langموماشتيio.micrometerفmicrometer-coreوذائخه.postgresqlط42ا7امية.zaxxerفHikariCPورخته.junit.jupiterفjunit-jupiterورا10اله.mockitoفmockito-coreورا12ته.testcontainersطذا19ا8ية.google.guavaفguavaو33الخ-jreص>
+  </dependencies>
+حproject>

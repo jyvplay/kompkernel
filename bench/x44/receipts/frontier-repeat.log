@@ -1,0 +1,22 @@
+same  de-kb.txt                  raw=  525 parent=  457 total=  457
+same  es-kb.txt                  raw=  457 parent=  403 total=  403
+same  chart.svg                  raw= 1331 parent=  417 total=  417
+same  component.jsx              raw=  296 parent=  264 total=  264
+same  page.html                  raw= 3220 parent=  547 total=  547
+same  paper.tex                  raw=  429 parent=  370 total=  370
+same  pom.xml                    raw=  544 parent=  242 total=  242
+same  git-log-fuller.txt         raw=  143 parent=  143 total=  143
+same  ls-full-iso.txt            raw= 1175 parent=  367 total=  367
+same  node-stacktraces.txt       raw=  568 parent=  300 total=  300
+same  df-h.txt                   raw=  570 parent=  250 total=  250
+DIFF  markdown-table.md          raw=  330 parent=  176 total=  176 parent 182->176; total 182->176
+same  psql-output.txt            raw=  675 parent=  322 total=  289
+same  bibliography.txt           raw=  896 parent=  671 total=  671
+same  kb-article.txt             raw=  656 parent=  622 total=  622
+same  meeting-transcript.txt     raw=  472 parent=  385 total=  385
+same  unified-diff.patch         raw=  578 parent=  419 total=  419
+
+FRONTIER REPEAT (subset): 16/17 bit-identical to the X39 configuration, 1 differ, 312 s wall.
+UNTESTED this turn (full-run cost): ja-kb.txt, pl-kb.txt, ru-kb.txt, tr-kb.txt, dump.sql, find-listing.txt, git-numstat.txt, npm-ls.txt, openstack-loghub-26.log, aapl-2014.csv, vix-daily-1990.csv, kubectl-get-pods.txt, email-thread.txt, llm-answer.md
+DIFFS:
+  markdown-table.md: parent 182->176; total 182->176

@@ -1,0 +1,40 @@
+{
+  "input": "bench/holdout-ops/find-listing.txt",
+  "sourceSha256": "8b445fd0443c98821b9858ec0a16f3a620c62fa68b870638a01667e05a6964c6",
+  "encoding": "o200k_base",
+  "measurement": "complete one-chat contract + wire; these branches were not composed over SYNKRISIS",
+  "rawTokens": 3997,
+  "parent": "SYNKRISIS X45",
+  "experiments": [
+    {
+      "name": "path-component alias dictionary (node_modules → ¤N)",
+      "hits": 120,
+      "exact": true,
+      "messageTokens": 4141,
+      "synkrisisParentM": 1267,
+      "deltaToParent": 2874,
+      "deltaToRaw": 144,
+      "gate": "rejected; return parent",
+      "detail": {
+        "hits": 120,
+        "collision": false,
+        "falsifier": "decline if ¤N is already a path component"
+      }
+    },
+    {
+      "name": "adjacent-row longest-common-prefix delta",
+      "hits": null,
+      "exact": true,
+      "messageTokens": 3659,
+      "synkrisisParentM": 1267,
+      "deltaToParent": 2392,
+      "deltaToRaw": -338,
+      "gate": "rejected; return parent",
+      "detail": {
+        "rows": 120,
+        "markerCollision": false,
+        "falsifier": "decline if a path contains the reserved marker or any row is not a path"
+      }
+    }
+  ]
+}

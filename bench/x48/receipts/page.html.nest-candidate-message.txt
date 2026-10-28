@@ -1,0 +1,16 @@
+After parent decode, §template‡separator°rows¤ is a recursive sibling macro: each {{i}} in the literal template receives field i from each ◆-separated row; split fields on µ. Expand records in row order, join them with the exact separator, and preserve all bytes outside the macro.
+Before ¶ k=v. expand repeatedly; print only.
+§н class="ё<sectionнcard" id="sec-и◆ёжµа: Service Reliabilityж99.і>
+А</a></liія          <эnavыяliнэ-item"><aнэ-link" href="/РАые">жSection ә%жоі            <tr><td>ь</td><td>{{у}}</td><td>б</td></trҚ</th><th>ці   ї        <г7т10м2л1с3ш4д5р12к6¶<!DOCTYPE htmlі<html lang="en">
+<headі  <meta charset="utf-8">
+  <title>Quarterly Operations Review</titleі</headі<bodyі  <divнpage">
+    <headerнsite-header">
+      <энэ">
+їulнэ-list">
+ыoverview">OverviewРmetrics">MetricsРincidents">IncidentsРcosts">CostsРroadmap">RoadmapА        </ulі      </эц </headerц <mainнcontent">
+      §{{л}}
+їhмнcard-title">{{м}}</hміїpнcard-body">The service sustained <strong>{{с}}</strong> availability over the period, against a target of <em>99.9%</em>. Error budget consumed: <spanнmetric">{{ш}}</span>.</pіїtableнdata">
+яthead><tr><th>WeekҚRequestsҚErrors</th></tr></theadіяtbodyольдурбомьку15босьгу18бі          </tbodyі        </tableі      </section>‡
+      °ё0е0а00әшә120000ж120311ж120622илела05әгә120997ж121308ж121619имематәтә121994ж122305ж122616исеса15ә13ә122991ж123302ж123613ишеша20ә16ә123988ж124299ж124610идеда25ә19ә124985ж125296ж125607икека30ә22ә125982ж126293ж126604игега35ә25ә126979ж127290ж127601и8е8а40ә28ә127976ж128287ж128598и9е9а45ә31ә128973ж129284ж129595итета50ә34ә129970ж130281ж130592и11е11а55ә37ә130967ж131278ж131589ирера60ә40ә131964ж132275ж132586и13е13а65ә43ә132961ж133272ж133583¤
+    </mainц <footerнsite-footer">
+      <pнcopy">Internal document. Do not distribute.</pц </footerі  </divі</bodyі</htmlі

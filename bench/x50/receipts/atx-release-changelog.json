@@ -1,0 +1,43 @@
+{
+  "configuration": {
+    "lane": "prose-changelog",
+    "path": "bench/z57/lanes/prose-changelog.md",
+    "encoding": "o200k_base",
+    "OMEGA_DET": null,
+    "node": "v22.22.3",
+    "cost": "direct o200k_base count of each complete in-band message",
+    "scope": "AKOLOUTHIA-2 necessary-condition precheck; full TAGSTACK runtime parents plus SIBLING-TEMPLATE are run only if the candidate beats AKOLOUTHIA-2; not registry-wide"
+  },
+  "source": {
+    "sha256": "e7c7856ef0f982e21ae0b650e257ad2907db4ad3d0b3966cbd138289962d492d",
+    "chars": 38227,
+    "rawTokens": 10906
+  },
+  "result": {
+    "exact": true,
+    "exactUtf8Bytes": true,
+    "fullFrontierMeasured": false,
+    "applied": false,
+    "rows": 34,
+    "comparison": "AKOLOUTHIA-2 necessary-condition rejection; full TAGSTACK/SIBLING tournament safely skipped",
+    "precheckParentTokens": 6655,
+    "parentTokens": 6655,
+    "parentCodec": "akolouthia2",
+    "parentCosts": {
+      "akolouthia2": 6655
+    },
+    "candidateTokens": 6696,
+    "candidateMarginVsPrecheck": -41,
+    "candidateExact": true,
+    "candidateParentTokens": 6648,
+    "candidateParentCodec": "daedalus",
+    "candidateParentCosts": {
+      "daedalus": 6648
+    },
+    "messageTokens": 6655,
+    "marginVsFallback": 0,
+    "notes": "candidate M=6696 >= AKOLOUTHIA-2 M=6655; it therefore cannot be below a frontier that includes AKOLOUTHIA-2",
+    "encodeMs": 60527,
+    "totalMs": 60531
+  }
+}

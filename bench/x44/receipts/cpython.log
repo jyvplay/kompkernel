@@ -1,0 +1,12 @@
+EXACT  lic-mit.txt                        M=   38  arm=parametric/selfcanon
+EXACT  facebook_react.txt                 M=   38  arm=parametric/selfcanon
+EXACT  colinhacks_zod.txt                 M=   37  arm=parametric/selfcanon
+EXACT  ollama_ollama.txt                  M=   33  arm=parametric/selfcanon
+EXACT  tailwindlabs_tailwindcss.txt       M=   36  arm=parametric/selfcanon
+EXACT  vitejs_vite.txt                    M=   44  arm=parametric/selfcanon
+EXACT  langchain-ai_langchain.txt         M=   35  arm=parametric/selfcanon
+EXACT  ggerganov_llama.cpp.txt            M=   41  arm=parametric/selfcanon
+EXACT  fastify_fastify.txt                M=   52  arm=parametric/selfcanon
+EXACT  lic-isc.txt                        M=   37  arm=parametric/selfcanon
+
+CPython independent reader: 10 exact, 0 failed, 10 messages

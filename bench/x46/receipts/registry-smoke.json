@@ -1,0 +1,9 @@
+{
+  "key": "bifront",
+  "registryEntries": 209,
+  "lane": "bench/holdout-ops/find-listing.txt",
+  "exact": true,
+  "messageTokens": 1267,
+  "raw": 3997,
+  "note": "exact suffix fold refused: candidate M=1281 >= SYNKRISIS M=1267; parent=1267; exact=true"
+}

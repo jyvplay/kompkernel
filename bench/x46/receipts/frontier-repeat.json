@@ -1,0 +1,24 @@
+{
+  "same": 16,
+  "total": 17,
+  "diffs": [
+    "markdown-table.md: parent 182->176; total 182->176"
+  ],
+  "untested": [
+    "ja-kb.txt",
+    "pl-kb.txt",
+    "ru-kb.txt",
+    "tr-kb.txt",
+    "dump.sql",
+    "find-listing.txt",
+    "git-numstat.txt",
+    "npm-ls.txt",
+    "openstack-loghub-26.log",
+    "aapl-2014.csv",
+    "vix-daily-1990.csv",
+    "kubectl-get-pods.txt",
+    "email-thread.txt",
+    "llm-answer.md"
+  ],
+  "seconds": 268.85
+}

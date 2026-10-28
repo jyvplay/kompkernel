@@ -1,0 +1,1 @@
+PASS independent CPython BIFRONT round trip: bytes=11789 sha256=8b445fd0443c98821b9858ec0a16f3a620c62fa68b870638a01667e05a6964c6 suffix='.js' paths=120 candidateM=1281 parentM=1267 delta=14

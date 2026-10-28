@@ -1,0 +1,60 @@
+X45 FINAL RE-GATE RECEIPT
+Date: 2026-10-26 (America/New_York)
+Branch: arena/1ac6de8e-kompkernel
+Environment: Node v22.22.3; CPython 3.11.2; all Node codec benchmarks serial; OMEGA_DET=1
+for Node benchmark executions (inherited DAEDALUS-family search clock frozen).
+
+1. TypeScript
+   Command: npx tsc --noEmit --incremental false
+   Result: PASS; exit 0; elapsed 13.798 s.
+
+2. SYNKRISIS malformed-input red team
+   Build: npx esbuild bench/x45/rt.ts --bundle --platform=node --format=esm --outfile=bench/tmp/x45-rt.mjs
+   Run: OMEGA_DET=1 node bench/tmp/x45-rt.mjs
+   Result: PASS; 12/12 named checks; elapsed 42.845 s including build.
+   Receipt: redteam.txt.
+
+3. X45 real-corpus suite
+   Build: npx esbuild bench/x45/verify.ts --bundle --platform=node --format=esm --outfile=bench/tmp/x45-verify.mjs
+   Run: OMEGA_DET=1 node bench/tmp/x45-verify.mjs
+   Result: PASS; 16 cases, 16 exact, 16 parent-gate pass, 5 word-canon,
+   1 multi-copy, 6 strict wins, 10 identity/no-gain, 0 failures; sum prior M=7077,
+   sum SYNKRISIS M=6740; elapsed 263.347 s including build.
+   Receipts: metrics.jsonl, summary.json, messages/.
+
+4. Independent CPython reader and model-output comparison
+   Command: python3 bench/x45/verify.py
+   Result: PASS; 4/4 byte-content comparisons (two independent decodes and two
+   direct hand-decodes), elapsed 0.125 s.
+   Receipt: python-verification.txt.
+
+5. X44 corpus no-regression comparison
+   Build: npx esbuild bench/x45/verify-x44.ts --bundle --platform=node --format=esm --outfile=bench/tmp/x45-verify-x44.mjs
+   Run: OMEGA_DET=1 node bench/tmp/x45-verify-x44.mjs
+   Result: PASS; 19/19 exact, 19/19 no-regression, 1 strict win, 18 identity,
+   0 word-canon fires; elapsed 300.548 s in the script (301.295 s including build).
+   Receipt: x44-corpus.json.
+
+6. Email quote-depth probe
+   Build: npx esbuild bench/x45/email-quote-probe.ts --bundle --platform=node --format=esm --outfile=bench/tmp/x45-email-quote-probe.mjs
+   Run: OMEGA_DET=1 node bench/tmp/x45-email-quote-probe.mjs
+   Result: exact reconstruction PASS; no-regression gate FAIL by design, candidate
+   M=636 vs parent M=488 (delta +148); correctly rejected. Elapsed 22.398 s.
+   Receipt: email-quote-probe.json.
+
+7. Registry smoke
+   Build: npx esbuild bench/x45/smoke.ts --bundle --platform=node --format=esm --outfile=bench/tmp/x45-smoke.mjs
+   Run: OMEGA_DET=1 node bench/tmp/x45-smoke.mjs
+   Result: PASS; registry key `synkrisis`; Django word-canon M=228 < 296, exact;
+   six-MIT multi-copy M=80 < 129, exact. Elapsed 30.538 s including build.
+   Receipt: smoke.txt.
+
+8. Post-hardening frontier subset repeat
+   Build: npx esbuild bench/x44/frontier-repeat.ts --bundle --platform=node --format=esm --outfile=bench/tmp/x44-frontier-repeat.mjs
+   Run: OMEGA_DET=1 node bench/tmp/x44-frontier-repeat.mjs
+   Result: 16/17 bit-identical to X39 subset; sole difference markdown-table.md
+   parent/total 182 -> 176; 14 other frontier lanes explicitly untested; 312 s
+   script wall time (313.081 s including build). This is not a full 31-lane repeat.
+   Receipt: ../x44/receipts/frontier-repeat.json and frontier-repeat.log.
+
+No local Lean/Coq/Isabelle run, external LLM call, GPU, or parallel benchmark run.

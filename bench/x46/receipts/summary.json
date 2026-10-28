@@ -1,0 +1,17 @@
+{
+  "parent": "SYNKRISIS X45",
+  "encoding": "o200k_base",
+  "cases": 16,
+  "exact": 16,
+  "noRegression": 16,
+  "parentSameAndSourceSame": 16,
+  "strictWins": 0,
+  "ties": 16,
+  "rejectedCandidateInputs": 1,
+  "changedSources": [],
+  "parentDiscrepancies": [],
+  "failures": 0,
+  "x45Sum": 6740,
+  "currentParentSum": 6740,
+  "bifrontSum": 6740
+}

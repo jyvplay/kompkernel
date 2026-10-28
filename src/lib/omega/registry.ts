@@ -133,6 +133,14 @@ import { metronEncode, metronDecodeResult } from './metron';
 import { typosEncode, typosDecode } from './typos';
 import { kannabosEncode } from './kannabos';
 import { diastemaEncode } from './diastema';
+import { archetyponEncode } from './archetypon';
+import { synkrisisEncode } from './synkrisis';
+import { bifrontEncode } from './bifront';
+import { tagstackEncode } from './tagstack';
+import { siblingTemplateEncode } from './sibling-template';
+import { nestEncode } from './nest';
+import { kolumnEncode } from './kolumn';
+import { atxReleaseEncode } from './atx-release';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -549,6 +557,94 @@ export function codecEntries(): Entry[] {
       run: async (t, enc) => {
         const r: any = kannabosEncode(t, enc);
         return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `in=${r.inTokens}; out=${r.messageTokens}; kannabos=${r.kannabos}; ${r.notes}` };
+      },
+    },
+    {
+      key: 'archetypon',
+      label: 'ἀρχέτυπον ARCHETYPON (X44. Two exact line-patch folds behind one gate. PARAMETRIC: the message names a canonical public text the reader already knows verbatim — Write the standard MIT License; line 3 is X — and carries only an LCS line patch for the differences; the codebook is the weights, not an in-message table, and the from-memory decode is verified on disk. SELF-CANON: the fully in-band, genuinely new mechanism — a long block that is a NEAR-duplicate of an earlier block is replaced by one ⟦a-b|patch⟧ reference that copies wire lines a..b and applies order-independent n=text line replacements; no weights, no catalogue, no tools. Every patch is an exact LCS diff re-applied to the template before shipping; a clause auction measures 3-6 wordings on the live o200k counter; the residual goes to apographeEncode so the codec composes with the shipped frontier. Gates: G1 real-wire decode, G2 chain round trip, G3 independent CPython reader, G4 an actual LLM hand-decode of the emitted MIT message from the message text alone, G5 M < apographeEncode(text) so identity is the shipped frontier and no lane regresses. Greedy: no — catalogue/span enumeration, exact LCS diff, measured minimum over arms. Time/CPU: bounded O(catalogue x anchors x L^2) plus one frontier encode of the smaller residual. Measured: lic-mit 223 -> 38 (frontier 223, ANAGNORISIS 41), exact; 10/88 real LICENSE files fold; 0/31 shipped lanes false-fire. Honest ancestry: the open-world resource is ANAGNORISIS (Z45); ARCHETYPON adds the general LCS line patch, self-canon near-duplicate folding, the clause auction and frontier composition, and beats ANAGNORISIS by 3 tokens on the measured lane.)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r: any = archetyponEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: r.notes };
+      },
+    },
+    {
+      key: 'synkrisis',
+      label: 'σύγκρισις SYNKRISIS (X45. Word-canon comparison: align a short public canonical license on a whitespace-invariant word stream, emit unique old→new phrase edits plus per-line word counts and sparse indent repairs; rewrap is carried separately from lexical changes. Multi-copy arm: replace several exact canonical blocks that differ only in one declared line with a list of hole values and one exact separator. Both are self-describing one-chat JSON messages; the reader uses its own memory of the named standard public text, no system prompt/skills/retrieval. Every candidate is decoded by the library reader and emitted only when byte-exact and strictly below ARCHETYPON prior-best one-chat M. Greedy: no — catalogue/anchor enumeration, LCS phrase extraction, exact round-trip gate, then live o200k minimum. Time/CPU: bounded 50 public text templates × ≤800² word-LCS cells per anchored candidate; wall time is dominated by the inherited frontier gate. Measured one-chat M on the recorded corpus: BSD-3 Django 296→228, NumPy 301→262, Go 282→217, pandas 331→259; BSD-2 HTTPie 309→265; six-MIT THIRD-PARTY-NOTICES 129→80. Prose/ops: no gain claimed; the Periodos→APOGRAPHE composition was measured and lost its gate. Honest ancestry: public-canon codebook is ANAGNORISIS (Z45), and the line-level fold is ARCHETYPON (X44); SYNKRISIS adds word alignment, explicit layout side stream and repeated-template slot lists, not a new public-canon claim.)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r: any = synkrisisEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; arm=${r.arm}; parent=${r.parentTokens}; exact=${r.decoded === t}` };
+      },
+    },
+    {
+      key: 'bifront',
+      label: '◁ BIFRONT (X46 candidate: two-ended path suffix factoring. If at least four non-empty rows all end in slash- or backslash-containing path fields with a non-empty shared right suffix, remove that suffix from every path and state it once in-band; then run SYNKRISIS. The source-class predicate and inverse are checked before accepting the transform. The final contract-plus-wire is re-counted under the selected BPE encoding and must be byte-exact and strictly shorter than SYNKRISIS on the original input; otherwise the parent message is returned unchanged. Distinct from DENDRON/ELLEIPSIS prefix factoring. Greedy: deterministic longest-common-suffix scan, not a search over suffix sets. Time/CPU: O(text length) local scan plus one baseline and one transformed SYNKRISIS encode. No win is claimed until a real lane passes the complete-message gate.)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r: any = bifrontEncode(t, enc);
+        return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; parent=${r.parentTokens}; exact=${r.decoded === t}` };
+      },
+    },
+    {
+      key: 'tagstack',
+      label: 'TAGSTACK (X47 candidate: in bounded, well-nested XML/HTML-style markup, replace explicit end tags with a collision-checked one-token marker and restore the exact name from the stack top. The in-band contract now specifies the tag scan, quotes, comments, CDATA, PIs, declarations, HTML voids, raw-text elements, and SVG/MathML scope. Encodes the transformed document with APOGRAPHE. It measures direct complete-message costs for SYNKRISIS, eligible BIFRONT, KANON, AKOLOUTHIA-2, APOGRAPHE, DIASTEMA, and eligible METRON/HEMERA; comparator failure throws rather than weakening the gate. Emits only on exact reconstruction and a strict win over that same-source minimum; otherwise returns the measured best parent. This is a relevant in-band frontier, not a registry-wide tournament. Greedy/search: deterministic stack scan and bounded one-token marker scan; no global optimality claim. Prior art: XMill (2000) and HTML-aware compression already use shared end-tag tokens; TAGSTACK is not claimed as a new compression primitive. The registry exposes the complete contract-plus-wire message, not just the payload.',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r: any = tagstackEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; parent=${r.parentCodec}:${r.parentTokens}; syn=${r.synkrisisParentTokens}; mode=${r.mode ?? '-'}; pairs=${r.pairs}; exact=${r.exact}; frontierComplete=${r.frontierComplete}` };
+      },
+    },
+    {
+      key: 'sibling-template',
+      label: 'SIBLING-TEMPLATE (X47 candidate: on bounded, well-nested XML-compatible explicit-tag markup, detect a run of at least three adjacent same-name siblings with an identical exact byte skeleton and at least two text-only child slots. Emit the skeleton once, preserve every raw slot value and the exact inter-record separator, and restore records in order from a collision-free in-band macro. The complete contract-plus-wire is priced through APOGRAPHE and must strictly beat TAGSTACK’s same-source measured current-frontier output; otherwise return that exact parent. Greedy/search: deterministic traversal chooses the run with the largest raw-token proxy gain; the proxy never decides shipping. Time/CPU: parse scan is O(n) under a 100,000-character cap; cumulative shape/serialization/proxy work is ≤1,000,000 weighted character-and-node units; then one current-frontier tournament (unless supplied by caller) and one APOGRAPHE encode of a transformed candidate. Prior art: XMill and XML structure/data compressors already factor structure and values; no new general compression primitive is claimed. The registry exposes the full message.',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r: any = siblingTemplateEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; parent=${r.parentCodec}:${r.parentTokens}; records=${r.records}; slots=${r.slots}; exact=${r.exact}` };
+      },
+    },
+    {
+      key: 'nest',
+      label: 'NEST (X48: recursive sibling-tree templates. For a bounded, well-nested XML/HTML-style document, identify consecutive sibling subtrees with identical exact tag topology; recursively place each varying opening-tag byte string or inter-child text segment into an in-band slot, emit the literal tree skeleton once, and transmit the slot rows plus exact join bytes. Candidate round-trip is checked after APOGRAPHE, then its complete contract + wire must strictly beat both TAGSTACK’s measured same-source frontier result and SIBLING-TEMPLATE; otherwise return the cheaper parent. Greedy/search: no — bounded enumeration of eligible sibling runs, ranked by raw proxy gain; the complete-message token count alone decides emission. Time/CPU: parse O(n), n≤100,000 UTF-16 code units, ≤50,000 nodes and depth≤128; tree/row construction ≤2,000,000 weighted character/node units, ≤256 candidate runs, ≤512 slots; one transformed APOGRAPHE encode plus the inherited parent measurements. Prior art: XML structure/data compressors and tree grammars already factor repeated structure; no new general compression primitive is claimed. Repository novelty is recursive nested-tree factoring beyond SIBLING-TEMPLATE’s text-only direct children. LLM-native exact decoding is not externally verified.',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r: any = nestEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; parent=${r.parentCodec}:${r.parentTokens}; records=${r.records}; slots=${r.slots}; depth=${r.depth}; exact=${r.exact}` };
+      },
+    },
+    {
+      key: 'atx-release',
+      label: 'ATX-RELEASE (X50: on valid UTF-8/LF-or-CRLF text up to 100,000 code units, if at least three level-two ATX headings end in ` (YYYY-MM-DD)` and no other line would collide with the marker-free inverse, replace `## TITLE (YYYY-MM-DD)` by `TITLE YYYY-MM-DD`. The one-chat contract restores the omitted frame after parent decode. It first prices the complete DAEDALUS-transformed candidate against complete AKOLOUTHIA-2 on the source; if it fails, return that exact AKOLOUTHIA-2 message because AKOLOUTHIA-2 is a member of the X49 TAGSTACK parent set. Only a candidate below AKOLOUTHIA-2 runs the full same-source TAGSTACK runtime-parent set plus SIBLING-TEMPLATE, and it emits only on a strict exact win; a completed rejection returns the measured best parent, while an incomplete full gate fails closed to AKOLOUTHIA-2. This is a local Markdown transform, not a registry-wide tournament or a new compression-theory claim; adjacent prior art includes parser-aware/format-aware compression and this repository’s EPAGOGE/STIGME. Greedy/search: deterministic line scan, global collision refusal, exact complete-message gates. Time/CPU: one AKOLOUTHIA-2 source parent plus one transformed DAEDALUS candidate normally; full frontier only after the necessary-condition precheck; capped at 100,000 UTF-16 code units; deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = atxReleaseEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rows=${r.rows}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'kolumn',
+      label: 'KOLUMN (X49: bounded rectangular, unquoted delimited tables only. Preserve the literal header and frame; encode each column as literals, a constant, an identical earlier column, a period-p value cycle, UTC ISO date or second timestamps with fixed millisecond steps, fixed-scale signed deltas, cyclic signed deltas, or an arithmetic progression. It emits only after byte-exact reconstruction and a strict complete o200k message win over the same-source runtime TAGSTACK parent set plus SIBLING-TEMPLATE; otherwise it returns the measured best parent. This comparator is not a registry-wide tournament. Greedy/search: per column, bounded enumeration of eligible descriptors, selected by exact o200k wire cost; then compare direct and APOGRAPHE-composed messages, with the full-message gate deciding emission. Prior art: column stores/frame-of-reference coding, Gorilla timestamp/delta coding, and PForDelta-style integer deltas; no new compression primitive is claimed. Time/CPU: planner caps at 100,000 characters, 10,000 data rows, 32 columns, and period 64; there is no wrapper-wide CPU/time cap because the inherited full-frontier search dominates. Metrics.tsv took 371.789 s in the recorded run, so this entry is deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = kolumnEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; exact=${r.exact}; applied=${r.applied}` };
       },
     },
     {

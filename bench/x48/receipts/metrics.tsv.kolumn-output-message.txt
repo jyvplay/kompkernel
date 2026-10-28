@@ -1,0 +1,4 @@
+After parent: header/EOL literal; §sep‡n=rows‡cols¤[EOL]. °=columns,µ=values; Qp cycles p values; T=UTC ISO date/sec base+i·step-ms; Gkxp=base+cyclic p signed deltas; Pk=base+i·step; i=0-based row; G/P÷10^k. Rows join sep/EOL.
+Before ¶ k=v. expand; print only.
+§Ёµ31µ31µ31Ђµnvme0nЄµ1ЅµupІЄЄЇ°G1x¶ts	iface	in_mbps	out_mbps	loss_pct	state
+§	‡24‡Tµ60000µ2026-10-24T00:00:00Z°Q3Ђ0Ђ1Ђ2Ї10Є000ЁЁЁµ21°P1µ2500µ20Ї7µ0ІІІµ-6°Q5µdownЅЅЅЅ¤

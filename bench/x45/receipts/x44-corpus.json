@@ -1,0 +1,202 @@
+{
+  "cases": 19,
+  "exact": 19,
+  "noRegression": 19,
+  "strictWins": 1,
+  "wordCanon": 0,
+  "multiCopy": 1,
+  "identity": 18,
+  "seconds": 300.548,
+  "rows": [
+    {
+      "path": "bench/holdout/lic-mit.txt",
+      "raw": 223,
+      "prior": 38,
+      "M": 38,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 5019
+    },
+    {
+      "path": "bench/holdout/license.txt",
+      "raw": 1166,
+      "prior": 929,
+      "M": 929,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 33627
+    },
+    {
+      "path": "bench/holdout/readme.txt",
+      "raw": 843,
+      "prior": 646,
+      "M": 646,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 15779
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "raw": 1422,
+      "prior": 969,
+      "M": 969,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 63222
+    },
+    {
+      "path": "bench/holdout/md-react.txt",
+      "raw": 252,
+      "prior": 252,
+      "M": 252,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 6017
+    },
+    {
+      "path": "bench/z45/corpus/licenses/facebook_react.txt",
+      "raw": 223,
+      "prior": 38,
+      "M": 38,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 5226
+    },
+    {
+      "path": "bench/z45/corpus/licenses/colinhacks_zod.txt",
+      "raw": 222,
+      "prior": 37,
+      "M": 37,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 5786
+    },
+    {
+      "path": "bench/z45/corpus/licenses/ollama_ollama.txt",
+      "raw": 218,
+      "prior": 33,
+      "M": 33,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 4499
+    },
+    {
+      "path": "bench/z45/corpus/licenses/tailwindlabs_tailwindcss.txt",
+      "raw": 221,
+      "prior": 36,
+      "M": 36,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 5226
+    },
+    {
+      "path": "bench/z45/corpus/licenses/vitejs_vite.txt",
+      "raw": 229,
+      "prior": 44,
+      "M": 44,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 5185
+    },
+    {
+      "path": "bench/z45/corpus/licenses/langchain-ai_langchain.txt",
+      "raw": 220,
+      "prior": 35,
+      "M": 35,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 4662
+    },
+    {
+      "path": "bench/z45/corpus/licenses/ggerganov_llama.cpp.txt",
+      "raw": 226,
+      "prior": 41,
+      "M": 41,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 4663
+    },
+    {
+      "path": "bench/z45/corpus/licenses/fastify_fastify.txt",
+      "raw": 237,
+      "prior": 52,
+      "M": 52,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 5216
+    },
+    {
+      "path": "bench/z45/corpus/licenses/ytdl-org_youtube-dl.txt",
+      "raw": 257,
+      "prior": 62,
+      "M": 62,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 10995
+    },
+    {
+      "path": "bench/train/lic-isc.txt",
+      "raw": 156,
+      "prior": 37,
+      "M": 37,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 4018
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "raw": 656,
+      "prior": 622,
+      "M": 622,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 8593
+    },
+    {
+      "path": "bench/holdout-ops/find-listing.txt",
+      "raw": 3997,
+      "prior": 1267,
+      "M": 1267,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 71144
+    },
+    {
+      "path": "bench/holdout-lang/ru-kb.txt",
+      "raw": 478,
+      "prior": 478,
+      "M": 478,
+      "delta": 0,
+      "arm": "identity",
+      "exact": true,
+      "ms": 21203
+    },
+    {
+      "path": "bench/x44/lanes/third-party-notices.txt",
+      "raw": 1338,
+      "prior": 129,
+      "M": 80,
+      "delta": -49,
+      "arm": "multi-copy",
+      "exact": true,
+      "ms": 20460
+    }
+  ]
+}

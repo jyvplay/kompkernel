@@ -206,28 +206,37 @@ let shortHits = 0, shortMisses = 0;
  *
  * So the memo here is keyed on the whole string. It is exact: the same string
  * and the same encoding always produce the same token count, so this can change
- * timing and never a number. Bounded per encoding, cleared on overflow.
+ * timing and never a number. It is bounded by both entries and retained key
+ * characters; document-sized one-off candidates bypass the memo.
  *
  * The key is the string itself rather than `enc + '\\u0000' + text`, because
  * building that concatenation would allocate another ~1.7 KB on every call --
  * exactly the cost being removed.
  * ------------------------------------------------------------------------- */
 const LONG_CACHE = new Map<EncodingName, Map<string, number>>();
-const LONG_CACHE_MAX = 200_000;
+// Entry count alone is not a memory bound: retaining 200,000 document-sized
+// transformed strings can exhaust the Node heap during a large frontier sweep.
+// Cache only useful, reasonably sized candidates, and cap retained key text per
+// encoding. This changes timing only; cache hits remain keyed by the exact text.
+const LONG_CACHE_MAX = 50_000;
+const LONG_CACHE_MAX_TEXT_CHARS = 4_096;
+const LONG_CACHE_MAX_TOTAL_CHARS = 2_000_000;
+const LONG_CACHE_CHARS = new Map<EncodingName, number>();
 let longHits = 0, longMisses = 0;
 
 export function chunkCacheStats() {
-  let longSize = 0, shortSize = 0;
+  let longSize = 0, shortSize = 0, longChars = 0;
   for (const m of LONG_CACHE.values()) longSize += m.size;
   for (const m of SHORT_CACHE.values()) shortSize += m.size;
+  for (const n of LONG_CACHE_CHARS.values()) longChars += n;
   return { size: CHUNK_CACHE.size, hits: chunkHits, misses: chunkMisses, fallbacks: chunkFallbacks,
            shortSize, shortHits, shortMisses,
-           longSize, longHits, longMisses };
+           longSize, longChars, longHits, longMisses };
 }
 export function chunkCacheClear() {
   CHUNK_CACHE.clear(); chunkHits = 0; chunkMisses = 0; chunkFallbacks = 0;
   SHORT_CACHE.clear(); shortHits = 0; shortMisses = 0;
-  LONG_CACHE.clear(); longHits = 0; longMisses = 0;
+  LONG_CACHE.clear(); LONG_CACHE_CHARS.clear(); longHits = 0; longMisses = 0;
 }
 
 /** the unaccelerated reference implementation */
@@ -252,7 +261,8 @@ export function countTokens(text: string, enc: EncodingName): number {
   }
   let lc = LONG_CACHE.get(enc);
   if (lc === undefined) { lc = new Map<string, number>(); LONG_CACHE.set(enc, lc); }
-  const memo = lc.get(text);
+  const cacheable = text.length <= LONG_CACHE_MAX_TEXT_CHARS;
+  const memo = cacheable ? lc.get(text) : undefined;
   if (memo !== undefined) { longHits++; return memo; }
   longMisses++;
 
@@ -276,8 +286,15 @@ export function countTokens(text: string, enc: EncodingName): number {
       n += t;
     } else { chunkHits++; n += v; }
   }
-  if (lc.size >= LONG_CACHE_MAX) lc.clear();
-  lc.set(text, n);
+  if (cacheable) {
+    let retainedChars = LONG_CACHE_CHARS.get(enc) ?? 0;
+    if (lc.size >= LONG_CACHE_MAX || retainedChars + text.length > LONG_CACHE_MAX_TOTAL_CHARS) {
+      lc.clear();
+      retainedChars = 0;
+    }
+    lc.set(text, n);
+    LONG_CACHE_CHARS.set(enc, retainedChars + text.length);
+  }
   return n;
 }
 

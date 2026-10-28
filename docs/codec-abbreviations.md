@@ -1,12 +1,12 @@
-# Codec abbreviations: decoded design spec (X13)
+# Codec abbreviations: decoded design spec (X13 base; X46 update)
 
-This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 177 keys) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. The companion page is `docs/codecs.md` (measurements and leaders).
+This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 209 keys as of X46) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys). The companion page is `docs/codecs.md` (measurements and leaders).
 
 Conventions:
 
 - **M** = one-chat count, o200k_base tokens of decoder contract plus wire, in one chat message, with no system prompt and no skills file.
 - **Greedy** = the encoder commits to a choice without backtracking. **Search** = the encoder iterates over candidate configurations and keeps the best. Both are stated separately because most entries combine a greedy core with a gate.
-- **Gate** = a check that falls back to the identity arm (plain DAEDALUS) on failure. A gate is not a search: it compares two fixed candidates.
+- **Gate** = a check that falls back to the codec's stated identity/prior-best arm on failure. A gate is not a search: it compares fixed candidates. For X45 SYNKRISIS, the no-regression floor is ARCHETYPON (whose own floor measures the frontier and ANAGNORISIS), not raw text or plain DAEDALUS.
 - **Citation** = an external source only where I verified the link in this turn or an earlier one. "Internal" means the design lives only in this repository's reports.
 - **Time/CPU bound**: under the production clock the DAEDALUS family stops at `budgetMs = min(20000, 1200 + len·1.1)` ms (wall clock). Under `OMEGA_DET=1` the clock is pinned to 0, so each search runs to its natural end and the run time is unbounded on large inputs (measured in X12 and X13).
 
@@ -2069,3 +2069,453 @@ over 120 rows and not over 28.
 `clock`, `%M`); KANNABOS fits **geometry** to a whole space-aligned table; DIASTEMA fits **intervals
 over a shape** when neither a law nor a grid exists but the numbers still march. Each refuses the
 others' lanes, and every refusal is printed with both numbers instead of being hidden.
+
+---
+
+# X44 (2026-10-25) — ARCHETYPON and the second open-world axis
+
+This turn adds one registry entry (`archetypon`, 207 keys) and one module
+(`src/lib/omega/archetypon.ts`). No line of APOGRAPHE, METRON, OURA, EUTELEIA,
+KANNABOS, DIASTEMA, TYPOS, ANAGNORISIS, BPE or CHIRON was changed.
+
+## ἀρχέτυπον ARCHETYPON (X44, `src/lib/omega/archetypon.ts`, registry key `archetypon`, exact, shipped this turn)
+
+**What the abbreviation decodes to.** *ἀρχέτυπον* = "the original pattern /
+archetype": the first occurrence of something is kept as the pattern from which
+later occurrences are regenerated. Two exact line-patch folds implement it.
+
+**(1) PARAMETRIC fold.** The message names a canonical public text the reader
+already holds verbatim (the standard MIT, ISC, BSD-2/3 or Unlicense text) and
+carries only an exact line patch for the differences. Emitted message for
+`bench/holdout/lic-mit.txt`:
+
+```
+Write the standard MIT License with these line edits. Line 3 is "Copyright (c)
+Meta Platforms, Inc. and affiliates.". This is the whole message. Print only
+the result.
+```
+
+That is 38 o200k tokens (contract counted, wire empty) against the shipped
+frontier's 223 (which is also the raw count — the frontier fires nothing on a
+223-token licence) and ANAGNORISIS's 41. The catalogue in `archetypon.ts` is an
+**encoder-side measuring instrument** for the patch and the price; the decoder
+is the reader's own knowledge of the named public text. The from-memory decode
+is not assumed: it is written out in `bench/x44/X44.md` §H and diffed by a tool
+call. The boundary is real and stated: a reader that does not know the named
+text verbatim cannot decode this arm, so every shipped message is additionally
+verified by an independent CPython reader with its own copy of the catalogue
+(`bench/x44/archetypon_decode.py`, 10/10 exact).
+
+**(2) SELF-CANON fold — the genuinely new, fully in-band mechanism.** A long
+block that is a **near-duplicate** of an earlier block (same number of lines,
+a few substituted lines) is replaced by ONE reference line
+
+```
+⟦4-52|3=Copyright (c) Acme;12=SOFTWARE.⟧
+```
+
+meaning "copy wire lines 4..52, then set line 3 to … and line 12 to …". A
+delimiter absent from every patch value is chosen by measurement; the patch is
+`set`-only so its application is order-independent (the X44 red team, cases
+A8/G1, found and killed an earlier insert/delete LCS backtrack that was only
+74/200 exact under seeded fuzz). Nothing outside the message is used: no
+weights, no catalogue, no tools. It is exact by construction
+(`selfCanonDecode(wire) === text` is checked before shipping) and total
+(malformed references are returned unchanged, red-team cases D1–D6, 38/38).
+
+**Greedy? No.** Template/span choice is an exact enumeration over the catalogue
+× all anchored line offsets × all tail truncations; the line patch is an exact
+positional diff re-applied to the template before shipping; the contract is a
+3–6-wording auction measured with the live `countTokens`; the arm choice
+(parametric / self-canon / prior-best identity) is an exact minimum over the
+measured one-chat totals. The inherited frontier chain is a search, as
+documented in its own modules. The identity arm is itself a measured tournament
+between `apographeEncode` and `anagnorisisEncode`, so ARCHETYPON is never worse
+than the best of those two on any measured lane.
+
+**Source article (honest).** The open-world resource — the reader's parametric
+memory as a shared codebook — was discovered in this repository by ANAGNORISIS
+(Z45, `bench/z45/REPORT.md`), with the versioned GitHub/SPDX catalogue and
+Carlini et al. (USENIX Security 2021, `usenix.org/system/files/sec21-carlini-
+extracting.pdf`) as its citation. ARCHETYPON does **not** claim that resource as
+new. What is new here is (i) the general exact line patch (LCS/positional
+`set`-algebra with a measured delimiter) instead of a fixed slot/modifier set,
+(ii) self-canon near-duplicate folding inside the message, (iii) the clause
+auction, (iv) composition with `apographeEncode` rather than DAEDALUS, and
+(v) the verification ladder including a live LLM hand-decode. Independent
+2023–2026 literature that names the same resource but does not emit a one-chat
+byte-exact wire: Deletang et al., *Language Modeling Is Compression*,
+arXiv 2309.10668 (ICLR 2024); Valmeekam et al., *LLMZip*, arXiv 2306.04050;
+*Lossless Token Sequence Compression via Meta-Tokens*, arXiv 2506.00307;
+*Lossless Prompt Compression via Dictionary-Encoding and In-Context Learning*,
+arXiv 2604.13066; *Lossless data compression by large models*, Nature Machine
+Intelligence (2025), doi:10.1038/s42256-025-01033-7. For the line-patch idea
+the classical reference is the line-diff of `diff`/Myers (1986); nothing here
+reuses its implementation.
+
+**Time- or CPU-bound? CPU-bound.** This module consults no wall clock. The scan
+is bounded by `MAX_TEXT = 40 000` chars, `MAX_LINES = 400`, `MAX_PATCH = 16`
+and a 5-entry catalogue; the enumeration is O(catalogue × anchors × L²) with
+L ≤ 400, and the 200-case seeded fuzz finishes in under a second. The only
+expensive step is one `apographeEncode` of the (smaller) residual plus the
+prior-best identity encodes: measured 7.8–131.8 s per lane on this 2-core
+sandbox, dominated by the inherited frontier chain, not by ARCHETYPON.
+
+**Measured (X44, `bench/x44/receipts/verify.jsonl`, `OMEGA_DET=1`, o200k,
+contract counted).** 19 lanes: **12 strict wins vs the shipped frontier (10 from the new parametric arm, 2 from the prior-best identity arm = ANAGNORISIS)**, 0
+regressions, 0 inexact. Ten real licence files (9 MIT, 1 ISC, taken from
+`bench/holdout/` and the pre-existing `bench/z45/` corpus) go from 156–257 raw
+tokens to 33–52 message tokens (−76 % to −83 %); each is 2–3 tokens below
+ANAGNORISIS. `third-party-notices.txt` (a six-licence bundle) stays at the
+prior best 129 (ANAGNORISIS) — the honest boundary: one short reference per
+copy beats one long clause, so the identity arm wins there. All 31 shipped
+X39 lanes were scanned for false positives: **0/31 fire**. The full repeat of
+the frontier configuration is reported in §"Frontier repeat" below.
+
+## Abbreviation → technical design spec (recent stack, X39–X44)
+
+"Greedy" below = the encoder commits without backtracking; "search" = it
+enumerates candidates and keeps the measured best. All M values are o200k
+tokens of the one-chat message under `OMEGA_DET=1`.
+
+| abbreviation | key | mechanism (decoded) | greedy / search | citation (honest) | bound |
+|---|---|---|---|---|---|
+| APOGRAPHE | `apographe` | comma-grid column predictors (`above`, `colM`, `days`, `+b`) | greedy per-column lift + two-pass search | internal (Re-Pair: Bille et al., arXiv 1704.08558, resemblance only) | CPU (parent wall-clock in production) |
+| METRON | `metron` | absolute column generators `lin:V/i,S`, `clock` | greedy + wire-scored second pass | internal | CPU |
+| TYPOS | `typos` | induced record skeleton (mask) + columnar de-interleave | greedy literal induction + exact gate | Drain (ICSE 2017); Abadi et al. SIGMOD 2006 | CPU |
+| KANNABOS | `kannabos` | character-offset grid, padding regenerated | per-column measured choice + plan search | Hollerith/COBOL copybooks; `pandas.read_fwf`; SuperBPE arXiv 2503.13423 | CPU |
+| DIASTEMA | `diastema` | digit mask + signed decimal intervals + RLE line pattern | greedy ordinal choice (≤8) | Gorilla (VLDB 2015); PForDelta (ICDE 2006); HORA (internal X13) | CPU |
+| ANAGNORISIS | `anagnorisis` | public-canon recognition, `【SPDX;layout】` refs | exact catalogue match, not greedy | Carlini et al. USENIX Sec 2021; GitHub/SPDX catalogues (versioned) | CPU |
+| **ARCHETYPON** | `archetypon` | exact line patch vs a canonical text (parametric) **or** vs an earlier in-message block (self-canon) | exact enumeration + LCS/positional diff + clause auction; not greedy | ANAGNORISIS (internal Z45); arXiv 2309.10668, 2506.00307, 2604.13066, doi:10.1038/s42256-025-01033-7 | CPU |
+
+## Generalized local leaders by structural category (X44 refresh)
+
+`M` = shipped one-chat message. "Leader" = the codec with the smallest
+measured M on that lane. Categories not re-measured this turn keep the X43
+values (no line of their codec changed).
+
+| structural category | lanes (raw → M) | local leader | note |
+|---|---|---|---|
+| **Single canonical licence file** | lic-mit 223 → **38**; 9 real MIT files 218–237 → **33–52**; ISC 156 → **37** | **ARCHETYPON (new)** | −76…−83 % vs frontier; 2–3 tokens below ANAGNORISIS on every one; exact, from-memory decode verified |
+| **Bundled licences / THIRD-PARTY-NOTICES** | third-party-notices 1338 → **129** | ANAGNORISIS | one short `【MIT】` reference per copy beats one long clause; ARCHETYPON correctly returns the prior-best arm |
+| **Mangled CRLF Apache excerpt** | license.txt 1166 → **929** | frontier chain | no catalogue entry; ANAGNORISIS 968; ARCHETYPON identity |
+| **Path listings / wide timestamp** | find-listing 3997 → **1 140** (chain 1 279), npm-ls 2747 → **904**, git-numstat 4632 → **1 992** | DIASTEMA on find-listing; chain elsewhere | X43 values unchanged |
+| **Space-aligned CLI tables, generative columns** | df-h 570 → **146**, kubectl 1006 → **301** | KANNABOS | X42 values unchanged |
+| **Delimited tables with a calendar column** | aapl 3108 → **1 151**, vix 3412 → **409** | APOGRAPHE | X39 values unchanged |
+| **Rendered DB output** | psql 675 → **245** | METRON | X40 value unchanged |
+| **Prose, English** | kb-article 656 → **622**, llm-answer 733 → **674**, email-thread 629 → **488**, meeting-transcript 472 → **385**, bibliography 896 → **671** | frontier chain | **still zero movement on general prose** — see the open gap below |
+| **Prose, non-English** | de 525 → **457**, es 457 → **403**, ja 655 → **492**, pl 623 → **602**, ru 478 → **478**, tr 554 → **516** | frontier chain | ru is still identity |
+| **Markup / code / diffs / logs** | page 3220 → **547**, chart.svg 1331 → **417**, component.jsx 296 → **264**, pom 544 → **242**, openstack 4028 → **898**, dump.sql 1795 → **608** | frontier chain | unchanged |
+
+**Generalized rule (X44).** ARCHETYPON is the local leader exactly when (i) the
+message *is* or *contains* a public canonical text whose identity costs fewer
+tokens than its body, (ii) the differences from the canonical body are few
+lines, and (iii) the reader knows that text verbatim — measured, not assumed,
+by a from-memory decode and an independent reader. Condition (ii) is the new
+part: a general line patch fires where a fixed slot/modifier set does not.
+Condition (iii) is the boundary, and it is why the codec keeps a fully in-band
+self-canon arm and a prior-best identity arm.
+
+**The open gap, honestly (updated by X45).** The prior suggestion to test a
+word-stream canonical alignment was implemented in SYNKRISIS X45. It fires on
+five of sixteen lanes (four BSD-3 renderings and one BSD-2 rendering), but not
+on general prose or the operations listing; the six-copy MIT arm is a separate
+one-hole repeat fold. The email quote-depth probe reconstructs exactly but
+loses the full-message gate by 148 tokens. Thus the new axis is measured and
+useful on a narrow canon family, while the everyday prose/ops gap remains.
+Current receipts and the historical frontier re-test are in
+`bench/x45/X45.md` and `bench/x45/receipts/`.
+
+---
+
+# X45 (2026-10-26) — SYNKRISIS: canonical word edits and layout side information
+
+This turn adds registry key `synkrisis` (the measured registry now has 208
+entries) and `src/lib/omega/synkrisis.ts`. It composes neither a new hidden
+reader table nor a private system prompt: the contract names a public text and
+the full contract + wire is measured in one chat. The complete formal model,
+negative space, corpus tables, adversarial analysis, receipts, and current
+research review are in [`bench/x45/X45.md`](../bench/x45/X45.md).
+
+## Mechanism
+
+**WORD-CANON.** The encoder enumerates the 50 public text entries in the
+versioned `CANON` catalogue, anchors a candidate at its first three words, and
+computes a dynamic-programming LCS over the whitespace-delimited word streams.
+Each hunk becomes a unique old-phrase → new-phrase substitution. The payload
+also carries the exact line word-count vector, sparse leading-space counts,
+EOL kind, final-EOL bit, and untouched prefix/suffix. Separating lexical edits
+from line layout is what lets a rewrapped BSD license be represented without
+sending every changed line literally. Tabs, mixed EOL, doubled internal spaces,
+trailing spaces, oversized inputs, and too many hunks/changed words are refused,
+not normalized.
+
+**MULTI-COPY.** If a source is 3–25 exact standard MIT texts separated by the
+specified literal separator and differing only at line 3, the message sends
+the copyright-line values once each. The reader substitutes each value into
+the same 21-line template, then joins the blocks. It is not a general
+third-party-notice dictionary.
+
+The public canon snapshot is from [`choosealicense.com` commit
+`f717b235f404c60b656bfbc1643f623d02ec10a7`](https://github.com/github/choosealicense.com/tree/f717b235f404c60b656bfbc1643f623d02ec10a7),
+recorded in `src/lib/omega/canon-catalog.ts` (2026-10-02). The separate MIT
+multi-copy template lives in `src/lib/omega/archetypon.ts` and is named in the
+message contract. The catalogue is encoder-side measurement/reference data;
+it is not transmitted as a hidden decoder table.
+
+## Selection and exactness
+
+- **Greedy/search.** Template candidates are enumerated. Word LCS is an exact
+  dynamic-programming alignment for each candidate; phrase context tests are
+  bounded from 0 to 10 and choose the first unique recoverable context (so this
+  local patch choice is deterministic, not a global minimum-token diff). The
+  two arm families are both priced as full messages. The shipping choice is
+  the shortest exact candidate that strictly beats ARCHETYPON; otherwise the
+  prior-best message is returned. Thus: no greedy template selection, a
+  bounded first-valid phrase-context heuristic inside each LCS hunk, and an
+  exact measured minimum over the emitted candidate set. No global optimality
+  claim.
+- **Counted M.** For a nonempty contract,
+  `M = countTokens(contract + LF + wire, o200k_base)`. The strict-win test is
+  applied to this full message, not raw wire or raw input. Exactness tolerance
+  is zero UTF-8 bytes.
+- **No-regression boundary.** The comparator is ARCHETYPON's prior-best message
+  (its own prior tournament includes the shipped frontier and ANAGNORISIS),
+  not every specialist codec. The SYNKRISIS result is always `M ≤ parent M` on
+  the measured lane; it is not a repository-wide Pareto guarantee.
+
+## Honest source citation and prior art
+
+There is no paper for this exact codec combination. The actual public text
+source is the pinned ChooseALicense snapshot above. Word LCS and exact phrase
+diffs are standard algorithmic ingredients; [VCDIFF, RFC 3284](https://www.rfc-editor.org/rfc/rfc3284.html)
+is byte-oriented delta-code prior art. I do **not** claim to invent word
+diffing, dictionary encoding, or lossless delta coding.
+
+Adjacent recent work has different constraints: [Lossless Prompt Compression
+via Dictionary-Encoding and In-Context Learning](https://arxiv.org/abs/2604.13066)
+places its dictionary in the system prompt; [Lossless Token Sequence
+Compression via Meta-Tokens](https://arxiv.org/abs/2506.00307) adds vocabulary
+and fine-tunes the reader; [Text-Preserving Lossy Text
+Compression](https://arxiv.org/abs/2605.29000) explicitly permits lossy
+reconstruction. None of those differences establishes novelty. SYNKRISIS is
+positioned narrowly as a measured one-chat, no-system-prompt, exact public-text
+word-edit + layout wire, with a strict parent gate.
+
+## Time / CPU bound
+
+The new word scan is CPU-bounded: 50 canonical text entries, at most 800 words
+per candidate, and at most 800 layout lines. The dominant LCS bound is
+50 × 800² cells; phrase uniqueness and layout construction are additionally
+bounded by the same word, hunk, and context caps. The repeat arm is capped at
+25 values and 40,000 source characters. Neither new transform consults a wall
+clock.
+
+That is not the total `synkrisisEncode` latency: it first computes the inherited
+ARCHETYPON/APOGRAPHE parent floor. In production, the inherited DAEDALUS family
+uses `min(20,000 ms, 1,200 + 1.1 × inputChars)` as a wall-clock search budget.
+`OMEGA_DET=1` freezes that search clock, so benchmark runs continue to natural
+completion. The serial 16-lane X45 run took 263.347 s overall, with measured
+per-lane times 4.486–68.762 s; these are measurement-mode times, not a
+production latency guarantee. See `bench/x45/receipts/verify.log`.
+
+## Measured outcome (X45, 16 declared lanes)
+
+All M values are o200k one-chat totals. `Δ` is SYNKRISIS minus the ARCHETYPON
+prior-best message.
+
+| lane | prior M | SYNKRISIS M | Δ | arm |
+|---|---:|---:|---:|---|
+| Django BSD-3 | 296 | **228** | **−68** | word-canon |
+| NumPy BSD-3 | 301 | **262** | **−39** | word-canon |
+| Go BSD-3 | 282 | **217** | **−65** | word-canon |
+| pandas BSD-3 | 331 | **259** | **−72** | word-canon |
+| HTTPie BSD-2 | 309 | **265** | **−44** | word-canon |
+| six-MIT third-party-notices | 129 | **80** | **−49** | multi-copy |
+
+Suite: 16/16 exact, 16/16 parent-gate pass, six strict wins, ten
+identity/no-gain, zero failures; parent sum 7,077 → SYNKRISIS sum 6,740 (−337
+across this declared corpus). The four short BSD-3 renderings and one BSD-2
+rendering are all canonical-text wins. No general English prose or ops lane
+improved.
+
+The 19-lane X44 corpus comparison is 19/19 exact and no-regression, with one
+strict win (the six-MIT bundle) and 18 identity results. The current two X45
+runs both measure `find-listing` parent M=1,267. The archived X44 log says
+1,279, but does not record a source hash or exact parent build, so the
+historical 12-token difference remains unresolved; the old and current values
+are kept separate. DIASTEMA remains the local `find-listing` leader at 1,140.
+
+Generalized leaders: SYNKRISIS is a local leader for the sampled close,
+canonical BSD license renderings and the six-copy MIT bundle. ARCHETYPON /
+ANAGNORISIS remain leaders for short single-license references; DIASTEMA stays
+ahead on the sampled listing; the shipped frontier stays ahead on prose.
+`bench/x45/X45.md` §C gives the lane-specific values and scope. The frontier
+subset was re-run after parser hardening: 16/17 match the X39 receipt; only
+`markdown-table.md` is 176 rather than 182; fourteen lanes are untested.
+
+## Verification and negative cases
+
+- TypeScript check passes; the 16-lane corpus suite, 19-lane X44 comparison,
+  12-case red team, CPython reader, and registry smoke all pass after final
+  decoder hardening. Receipts: `bench/x45/receipts/verify.log` and sibling
+  JSONL/text files.
+- CPython independently reconstructs Django BSD-3 (1,552 bytes, SHA-256
+  `b846415d1b514e9c1dff14a22deb906d794bc546ca6129f950a18cd091e2a669`) and
+  the six-MIT bundle (6,497 bytes, SHA-256
+  `8a50b476df5ddfd5a67f6c4c4a3a0127ce4e6160675dd8e7da76fc3f353b759e`). It
+  also compares the two direct text-only model hand-decodes to those LF source
+  texts. This does not establish that every LLM remembers the same license
+  version; no external model was called in this turn.
+- The exact email quote-depth probe is rejected: candidate M=636 versus parent
+  488 (Δ +148). Ordinary prose, Flask's double-space variant, the PyTorch
+  bundle, the custom PostgreSQL notice, and the sampled ops inputs remain
+  identity at the parent floor.
+
+**Current verdict:** exact and no-regression against its stated parent on the
+declared corpus; strict wins are real but narrow. No general-prose or ops gain
+is established. The human-readable model and 20-item negative-space review
+remain in `bench/x45/X45.md`.
+
+---
+
+## X46 — BIFRONT (`bifront`, `src/lib/omega/bifront.ts`; registered)
+
+- **Mechanism.** On a bounded homogeneous path-like row list, remove the longest common suffix (2–64 Unicode code points) from every final path field, then place the exact JSON-quoted suffix in the in-band English contract. Run SYNKRISIS X45 on the transformed text. The message decoder is the parent decoder followed by exact suffix restoration; the structural restore preserves line terminators and non-path text. There is no hidden dictionary, system prompt, or external decoder.
+- **Greedy or search.** The planner makes one deterministic maximal/longest suffix choice: greedy, with no suffix-length tournament, backtracking, or search over alternate transforms. The only selection is a binary full-message gate: candidate is emitted iff its exact round trip succeeds and complete `o200k_base` M is strictly below the complete SYNKRISIS X45 parent M. Otherwise the parent message is returned.
+- **Citation / prior art.** No paper supports a novelty claim for this codec. Shared suffix/rear coding is established string-dictionary prior art: Kanda, Morita, and Fuketa (2017), [paper](https://kampersanda.github.io/pdf/InnovateData2017.pdf); Ferragina, Rotundo, and Vinciguerra (2025), [“Two-level massive string dictionaries”](https://www.sciencedirect.com/science/article/pii/S0306437924001480). [VCDIFF, RFC 3284](https://www.rfc-editor.org/rfc/rfc3284.html) is broader byte-delta prior art. These are adjacent algorithmic codecs, not evidence that an LLM will decode this one-chat contract. No novelty claim is made for suffix factoring.
+- **Time/CPU bound.** The suffix planner is O(n) in total input/path length and O(n) working space. An eligible input invokes SYNKRISIS twice (original and transformed), so the wrapper adds parent work; there is no wrapper-wide CPU cap. The inherited production search uses `min(20,000 ms, 1,200 + 1.1 × inputChars)` as a wall-clock budget per call. With `OMEGA_DET=1` that clock is frozen and the search runs to natural completion; the post-optimization `find-listing` lane took 121.249 s in that mode.
+- **Measured outcome.** Against SYNKRISIS X45, 16/16 lanes and the separate 19/19 X44 comparison are exact and no-regression; both record **zero strict wins** (sums 6,740→6,740 and 5,696→5,696). The post-optimization exact `find-listing` candidate is M=1,281 vs parent 1,267 and is rejected; current emitted output is the 1,267-token parent. A separate CPython reader verifies the complete candidate and its suffix restore exactly.
+- **Verification boundary.** Final TypeScript passed; red team 29/29, including 16 negative-space cases and a `.js`/`.jsx` modal-shortcut falsification. `bench/x46/verify-independent.py` uses the independent X39 CPython parent reader plus its own suffix restoration and passes on the serialized `find-listing` candidate. No external LLM decode was run; exact conventional-reader checks do not establish universal LLM-native exactness.
+- **Status.** Registered, but an X46 measured negative: no token gain, increased encode work on the eligible listing, and no general prose/ops Pareto improvement. Full formal model, branches, local leaders, frontier discrepancy and live research review are in `bench/x46/X46.md`.
+
+---
+
+# X49 (2026-10-27) — KOLUMN: bounded exact column laws for delimited text
+
+**Registry key:** `kolumn` (`src/lib/omega/kolumn.ts`, deep-audit-only).
+**Fidelity:** exact UTF-8 reconstruction for valid UTF-8 text. The message is
+self-describing and contains its decoding contract; no skill, hidden system
+prompt, external tool, or side model is part of the design. **LLM-native
+one-chat decoding was not tested**, so only the local decoder is verified.
+
+KOLUMN accepts bounded, rectangular, unquoted delimited text with a literal
+header and at least eight data rows. It preserves header, separator, LF/CRLF,
+and final-EOL state. Each column independently uses the cheapest exact
+candidate among literals (`L`), constant (`C`), identical earlier column (`R`),
+periodic values (`Qp`), UTC ISO date/whole-second progression (`T`),
+fixed-scale signed deltas (`Dk`), cyclic signed deltas (`Gkxp`), or arithmetic
+progression (`Pk`). Decimal arithmetic uses `BigInt`; ambiguous spelling stays
+literal. Unsupported or malformed tables are refused, never normalized.
+
+**Greedy/search status.** The delimiter parser checks four fixed separators
+and chooses the rectangular interpretation with the most columns. Per-column
+mode selection is deterministic bounded enumeration with exact `o200k_base`
+descriptor counts and a deterministic tie-break; columns are optimized
+independently, so this is not a globally optimal joint search. The complete
+message stage compares direct KOLUMN and APOGRAPHE-composed KOLUMN. Only the
+exact full-message count decides emission.
+
+**Measured gate and scope.** The strict gate is against the measured same-source
+TAGSTACK parent set (SYNKRISIS, eligible BIFRONT, KANON, AKOLOUTHIA-2,
+APOGRAPHE, DIASTEMA, eligible METRON/HEMERA) plus SIBLING-TEMPLATE. This is
+not a registry-wide tournament. The fresh `metrics.tsv` gate is exact, complete,
+and no-regression: raw 811, frontier 210, candidate and emitted message **209**,
+one strict win and one-token margin. A fresh, explicitly configured frontier
+repeat again measured 210; receipt `bench/x49/receipts/frontier-repeat-metrics.tsv.json`.
+
+Other evidence is deliberately weaker and labeled accordingly: VIX candidate
+567 loses to 409 and falls back; AAPL's transform-only wire is 3,118 versus raw
+3,108; the Markdown-table transform-only wire is 341 versus raw 330; the
+`prices.csv` parent probe is 199 versus its previous 133-token frontier and is
+not a fresh full gate. Prose, `find-listing`, and `ls-full-iso` are refused.
+No general prose or ops gain is claimed. Full results, mode details, 15+
+non-solutions, formal model/quantifier order, H+/H−/H∂, six branches,
+structure-specific adversaries, repair re-gates, runtime caveats, and a
+bounded sourced survey of AI-mathematics claims are in
+[`bench/x49/X49.md`](../bench/x49/X49.md).
+
+**Honest sources / prior art.** KOLUMN does not claim a new compression
+primitive. PAX's column-oriented page layout, Gorilla timestamp/delta coding,
+PForDelta integer deltas, ALP decimal-to-integer compression, Pcodec's numeric
+mode/delta/binning pipeline, and especially 2026 FLEA's periodic lossless time
+series compression are relevant prior art. See the linked references in
+`bench/x49/X49.md`; the search was bounded, not a universal novelty proof.
+
+**Time / CPU bound.** Local planning caps at 100,000 code units, 10,000 data
+rows, 32 columns, and period 64. The inherited full-frontier search has no
+wrapper-wide CPU/time cap and dominates cost; the current metrics run took
+371,789 ms total (TAGSTACK 352,416 ms; KOLUMN call 19,363 ms). KOLUMN is marked
+`deep` so ordinary codec audits do not pay this cost.
+
+**Exactness caveat.** Encoder-produced strings round-trip byte-for-byte in the
+local oracle and red team. KOLUMN has no checksum or authentication: a
+syntactically valid tampered delta may decode to different bytes. It makes no
+corruption-detection claim.
+
+---
+
+# X50 (2026-10-27) — ATX-RELEASE: exact dated-heading fold, no strict win
+
+**Registry key:** `atx-release` (`src/lib/omega/atx-release.ts`, deep audit).
+Full protocol, admissible domain, measured gate, prior art, category leaders,
+research notes, and checkout provenance: [`bench/x50/X50.md`](../bench/x50/X50.md).
+
+ATX-RELEASE maps `## TITLE (YYYY-MM-DD)` to `TITLE YYYY-MM-DD` and restores
+matching lines after the parent decoder using a short in-band regex rule. It
+uses no per-row marker. To keep that inverse injective, the encoder refuses if
+any untouched line already matches the collapsed shape; it also refuses fewer
+than three target headings, over-cap or ill-formed Unicode, and lone-CR line
+endings. LF/CRLF and final-EOL state are preserved. The accepted inputs are
+valid UTF-8 strings of at most 100,000 UTF-16 code units with only LF/CRLF, at
+least three exact level-two dated headings, and no collision lines.
+
+The candidate is the in-band ATX rule plus DAEDALUS on the transformed body.
+It first compares the complete candidate against complete AKOLOUTHIA-2 on the
+source, which is a named member of the X49 TAGSTACK runtime parent set. A
+candidate that does not strictly beat that member cannot beat the set minimum,
+so it falls back to AKOLOUTHIA-2 without running the expensive full tournament.
+Only a candidate below AKOLOUTHIA-2 proceeds to the full TAGSTACK runtime
+parents plus SIBLING-TEMPLATE; emission then still requires exact reconstruction
+and a strict full-message win. A completed rejection returns the measured best
+parent; if that full gate throws or does not complete, it fails closed to the
+exact AKOLOUTHIA-2 fallback. This is not a registry-wide Pareto guarantee.
+
+**Fresh X50 result.** On `bench/z57/lanes/prose-changelog.md` (34 headings,
+raw 10,906 tokens), the transform-only raw text is 10,846 (−60), while the
+complete candidate is **6,696** versus AKOLOUTHIA-2 **6,655** (+41). The
+candidate is exact and rejected; emitted fallback is the 6,655-token parent.
+Because it already loses to a measured member, the full TAGSTACK/SIBLING gate
+was correctly skipped. No prose/ops Pareto win is claimed. Red team: 619
+checks, 200 seeded generated cases, zero failures; TypeScript passed. No
+external LLM was asked to decode it.
+
+**X49 repeat.** The `metrics.tsv` TAGSTACK+SIBLING frontier still measures
+**210** exactly (previous 210), with AKOLOUTHIA-2 winning; Node v22.22.3,
+`OMEGA_DET` unset, `o200k_base`, source SHA-256
+`b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70`. The
+fresh receipt and preserved pre-run receipt are under `bench/x50/receipts/`.
+This reruns the frontier, not KOLUMN's 209-token candidate gate.
+
+### Generalized local-leader snapshot
+
+These are best-known **local** results from the named historical fixtures, not
+one fresh registry-wide competition. The complete per-suite values and
+source-scope warnings are in [`bench/x50/X50.md`](../bench/x50/X50.md).
+
+| category | representative leader(s) | X50 status |
+|---|---|---|
+| English prose / KB / email / meeting / bibliography | existing frontier chain (X45 M: 622 / 674 / 488 / 385 / 671); DAEDALUS-D wins only small margins in the separate z57 suite | no X50 movement; ATX candidate loses +41 to AKOLOUTHIA-2 |
+| Ops / path listings | DIASTEMA `find-listing` 1,140; KANNABOS space-aligned tables; DENS-2 on z57 listing/git-numstat fixtures | historical, different suites; no new ops win |
+| Delimited data | KOLUMN `metrics.tsv` 209 vs the repeated 210 frontier; APOGRAPHE AAPL 1,151 / VIX 409 | frontier repeat is fresh; KOLUMN 209 is historical |
+| Rendered DB / SQL | METRON `psql-output` 245; SYNKOPE `dump.sql` 608 | historical specialist lanes |
+| Canonical notices | ARCHETYPON single MIT 38; SYNKRISIS six-MIT bundle 80 | narrow public-canon wins |
+| Markup / code | TAGSTACK `pom.xml` 240 against a 242 parent | one historical markup fixture |
+
+**Prior art.** Markdown whitespace/punctuation optimization is documented by
+[`mdziper`](https://github.com/shenyizg/mdziper); that is close format-aware
+preprocessing, not evidence for this exact byte-perfect one-chat transform.
+[`ContextCompressionEngine`](https://github.com/SimplyLiz/ContextCompressionEngine)
+uses a separate `verbatim` store for lossless restoration, outside this
+one-message constraint. No compression-theory novelty is claimed. Native LLM
+decoding remains unverified.

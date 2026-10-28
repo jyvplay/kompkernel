@@ -1,0 +1,15 @@
+After parent decode, scan left to right: ignore comments, CDATA, PIs and declarations; scan > outside quoted attributes. Push each exact <name...> unless it ends />. ° pops the top name and emits </name>. Preserve every other byte.
+Before ¶ k=v. expand repeatedly; print only.
+§өId>ҙ    <dependency>
+      <groupөс°
+    °
+ҙә°
+      <artifactөр°
+      <version>н.ун0а1лназ°
+  <ясorgчәpostgresqlри2тcomы5е3¶<?xml version="ау" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4уу">
+  <modelVersion>4уузgroupөт.northgate.vaultзartifactөvault-coreзversion>ен14низdependencies>
+ҙorg.slf4jәslf4j-apiриун13ст.fasterxml.jackson.coreәjackson-databindрин17ля.apache.commonsәcommons-langерен14усio.micrometerәmicrometer-coreран13ля.postgresqlч42н7нест.zaxxerәHikariCPрылуя.junit.jupiterәjunit-jupiterрын10ния.mockitoәmockito-coreрын12уя.testcontainersчан19н8ст.google.guavaәguavaр33нил-jre°
+    °
+  °
+°

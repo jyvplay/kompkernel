@@ -1,0 +1,51 @@
+{
+  "file": "bench/holdout-ops/find-listing.txt",
+  "raw": 3997,
+  "parentM": 1267,
+  "hits": 121,
+  "apographeM": 1267,
+  "apographeParent": 1267,
+  "exact": true,
+  "results": [
+    {
+      "clause": "After decoding, append \".js\" to every final path field; print only.",
+      "M": 1279,
+      "contract": "Before ¶ k=v. expand repeatedly After decoding, append \".js\" to every final path field; print only."
+    },
+    {
+      "clause": "Every final path field ends with .js; restore it. Print only.",
+      "M": 1278,
+      "contract": "Before ¶ k=v. expand repeatedly Every final path field ends with .js; restore it. Print only."
+    },
+    {
+      "clause": "Append .js to every path field. Print only.",
+      "M": 1274,
+      "contract": "Before ¶ k=v. expand repeatedly Append .js to every path field. Print only."
+    },
+    {
+      "clause": "Append .js to each final path. Print only.",
+      "M": 1274,
+      "contract": "Before ¶ k=v. expand repeatedly Append .js to each final path. Print only."
+    },
+    {
+      "clause": "Every path ends in .js. Print only.",
+      "M": 1273,
+      "contract": "Before ¶ k=v. expand repeatedly Every path ends in .js. Print only."
+    },
+    {
+      "clause": "All paths end with .js. Print only.",
+      "M": 1273,
+      "contract": "Before ¶ k=v. expand repeatedly All paths end with .js. Print only."
+    },
+    {
+      "clause": "Paths end in .js. Print only.",
+      "M": 1272,
+      "contract": "Before ¶ k=v. expand repeatedly Paths end in .js. Print only."
+    },
+    {
+      "clause": "Append \".js\" to all paths. Print only.",
+      "M": 1274,
+      "contract": "Before ¶ k=v. expand repeatedly Append \".js\" to all paths. Print only."
+    }
+  ]
+}

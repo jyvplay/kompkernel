@@ -1,0 +1,84 @@
+{
+  "summary": {
+    "codec": "KOLUMN",
+    "encoding": "o200k_base",
+    "lanes": 1,
+    "failures": 0,
+    "measuredFrontier": "Runtime TAGSTACK parents (SYNKRISIS, eligible BIFRONT, KANON, AKOLOUTHIA-2, APOGRAPHE, DIASTEMA, eligible METRON/HEMERA) plus SIBLING-TEMPLATE; not a registry-wide tournament.",
+    "strictWins": 1,
+    "exact": 1,
+    "noRegression": 1,
+    "sourceFiles": [
+      {
+        "lane": "metrics.tsv",
+        "path": "bench/holdout-x40/metrics.tsv"
+      }
+    ]
+  },
+  "rows": [
+    {
+      "lane": "metrics.tsv",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "sourceSha256": "b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70",
+      "chars": 1203,
+      "rawTokens": 811,
+      "frontier": {
+        "M": 210,
+        "winner": "akolouthia2",
+        "complete": true,
+        "costs": {
+          "synkrisis": 237,
+          "kanon": 236,
+          "akolouthia2": 210,
+          "apographe": 237,
+          "metron": 237,
+          "diastema": 237
+        }
+      },
+      "tagstack": {
+        "M": 210,
+        "applied": false,
+        "exact": true,
+        "ms": 352416
+      },
+      "sibling": {
+        "M": 210,
+        "applied": false,
+        "exact": true,
+        "ms": 0
+      },
+      "KOLUMN": {
+        "M": 209,
+        "candidateM": 209,
+        "candidateExact": true,
+        "applied": true,
+        "exact": true,
+        "parent": "akolouthia2",
+        "parentM": 210,
+        "rows": 24,
+        "cols": 6,
+        "modes": [
+          "T",
+          "Q3",
+          "G1x10",
+          "P1",
+          "G1x7",
+          "Q5"
+        ],
+        "ms": 19363,
+        "notes": "24 rows × 6 columns; modes=T,Q3,G1x10,P1,G1x7,Q5; APOGRAPHE; M=209 < akolouthia2 M=210"
+      },
+      "checks": {
+        "frontierComplete": true,
+        "exact": true,
+        "countConsistent": true,
+        "strictWin": true,
+        "gateConsistent": true,
+        "noRegression": true
+      },
+      "deltaToFrontier": -1,
+      "candidateDeltaToFrontier": -1,
+      "totalMs": 371789
+    }
+  ]
+}

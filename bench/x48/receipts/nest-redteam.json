@@ -1,0 +1,288 @@
+{
+  "summary": {
+    "codec": "NEST",
+    "tests": 228,
+    "authoredChecks": 28,
+    "fuzzCases": 200,
+    "fuzzPlansExact": 200,
+    "failures": 0,
+    "exactScope": "planner/restore and bounded markup parser only; complete-message frontier cost is a separate gate"
+  },
+  "rows": [
+    {
+      "name": "nested recursive rows",
+      "pass": true,
+      "plan": true,
+      "exact": true,
+      "records": 3,
+      "slots": 3,
+      "depth": 3
+    },
+    {
+      "name": "quoted greater-than attribute",
+      "pass": true,
+      "plan": true,
+      "exact": true,
+      "records": 3,
+      "slots": 2,
+      "depth": 3
+    },
+    {
+      "name": "comment with fake tag",
+      "pass": true,
+      "plan": true,
+      "exact": true,
+      "records": 3,
+      "slots": 2,
+      "depth": 2
+    },
+    {
+      "name": "two siblings below minimum",
+      "pass": true,
+      "plan": false,
+      "exact": null,
+      "records": 0,
+      "slots": 0,
+      "depth": 0
+    },
+    {
+      "name": "non-isomorphic child order",
+      "pass": true,
+      "plan": false,
+      "exact": null,
+      "records": 0,
+      "slots": 0,
+      "depth": 0
+    },
+    {
+      "name": "mismatched closing tag",
+      "pass": true,
+      "plan": false,
+      "exact": null,
+      "records": 0,
+      "slots": 0,
+      "depth": 0
+    },
+    {
+      "name": "pre-existing slot syntax",
+      "pass": true,
+      "plan": false,
+      "exact": null,
+      "records": 0,
+      "slots": 0,
+      "depth": 0
+    },
+    {
+      "name": "ordinary prose",
+      "pass": true,
+      "plan": false,
+      "exact": null,
+      "records": 0,
+      "slots": 0,
+      "depth": 0
+    },
+    {
+      "name": "file-bench/holdout-mk/page.html",
+      "pass": true,
+      "path": "bench/holdout-mk/page.html",
+      "sha256": "e16eae36e431c7be499e879a818cf8fd30a1d9325101f27147137bee9531c547",
+      "chars": 10145,
+      "rawTokens": 3220,
+      "plan": true,
+      "records": 14,
+      "slots": 7,
+      "depth": 5,
+      "proxyGain": 2213,
+      "exact": true
+    },
+    {
+      "name": "file-bench/holdout-mk/chart.svg",
+      "pass": true,
+      "path": "bench/holdout-mk/chart.svg",
+      "sha256": "9585a93c5c78580a8e34b9a51a05e5e3b7b4216c4b992eb89be17d6fa9c8806f",
+      "chars": 3446,
+      "rawTokens": 1331,
+      "plan": false,
+      "records": 0,
+      "slots": 0,
+      "depth": 0,
+      "proxyGain": null,
+      "exact": null
+    },
+    {
+      "name": "file-bench/holdout-mk/pom.xml",
+      "pass": true,
+      "path": "bench/holdout-mk/pom.xml",
+      "sha256": "ec213f92d73993d3a92920b21166c9918b6c4ebecc89c258d08e86f37b765cbf",
+      "chars": 1797,
+      "rawTokens": 544,
+      "plan": true,
+      "records": 10,
+      "slots": 3,
+      "depth": 2,
+      "proxyGain": 232,
+      "exact": true
+    },
+    {
+      "name": "file-bench/holdout-mk/component.jsx",
+      "pass": true,
+      "path": "bench/holdout-mk/component.jsx",
+      "sha256": "71f7bb7b830f0aeccf5185cbdb41fe0270b4b455615795a84c838df3479bb1df",
+      "chars": 1194,
+      "rawTokens": 296,
+      "plan": false,
+      "records": 0,
+      "slots": 0,
+      "depth": 0,
+      "proxyGain": null,
+      "exact": null
+    },
+    {
+      "name": "file-bench/holdout-mk/dump.sql",
+      "pass": true,
+      "path": "bench/holdout-mk/dump.sql",
+      "sha256": "e7d38230f855aa242add88d153923b71b7e466e89f2ca00a62a2400be980f044",
+      "chars": 5159,
+      "rawTokens": 1795,
+      "plan": false,
+      "records": 0,
+      "slots": 0,
+      "depth": 0,
+      "proxyGain": null,
+      "exact": null
+    },
+    {
+      "name": "file-bench/holdout-mk/paper.tex",
+      "pass": true,
+      "path": "bench/holdout-mk/paper.tex",
+      "sha256": "7b901e7ecce1035316ac8758ab00df62803e25768d0320e49872479ffa235166",
+      "chars": 1247,
+      "rawTokens": 429,
+      "plan": false,
+      "records": 0,
+      "slots": 0,
+      "depth": 0,
+      "proxyGain": null,
+      "exact": null
+    },
+    {
+      "name": "file-bench/holdout-mk/agent-history.md",
+      "pass": true,
+      "path": "bench/holdout-mk/agent-history.md",
+      "sha256": "1ed9eb762d88f533669add872eb4c084d6ecec8907509c64a3d9779861237026",
+      "chars": 4539,
+      "rawTokens": 1156,
+      "plan": false,
+      "records": 0,
+      "slots": 0,
+      "depth": 0,
+      "proxyGain": null,
+      "exact": null
+    },
+    {
+      "name": "file-bench/x47/holdouts/apache-maven.pom.xml",
+      "pass": true,
+      "path": "bench/x47/holdouts/apache-maven.pom.xml",
+      "sha256": "71de467a75c788ae84112998b3c9ec5995e0f4774152d0b538a2f3a0e3a63c89",
+      "chars": 55863,
+      "rawTokens": 12686,
+      "plan": true,
+      "records": 80,
+      "slots": 7,
+      "depth": 2,
+      "proxyGain": 1009,
+      "exact": true
+    },
+    {
+      "name": "file-bench/x47/holdouts/commons-lang.pom.xml",
+      "pass": true,
+      "path": "bench/x47/holdouts/commons-lang.pom.xml",
+      "sha256": "697fe496836585f1f1719375eb53861dc42887cffd3d6256a4f11a5eadbc6993",
+      "chars": 35602,
+      "rawTokens": 8992,
+      "plan": true,
+      "records": 104,
+      "slots": 1,
+      "depth": 2,
+      "proxyGain": 1321,
+      "exact": true
+    },
+    {
+      "name": "html-voids-plus-nested",
+      "pass": true,
+      "plan": true,
+      "expectedPlan": true,
+      "exact": true,
+      "records": 3,
+      "slots": 2,
+      "depth": 3
+    },
+    {
+      "name": "html-rawtext-fake-tag",
+      "pass": true,
+      "plan": true,
+      "expectedPlan": true,
+      "exact": true,
+      "records": 3,
+      "slots": 1,
+      "depth": 2
+    },
+    {
+      "name": "html-rawtext-fake-close-prefix",
+      "pass": true,
+      "plan": false,
+      "expectedPlan": false,
+      "exact": null,
+      "records": 0,
+      "slots": 0,
+      "depth": 0
+    },
+    {
+      "name": "html-unclosed-rawtext",
+      "pass": true,
+      "plan": false,
+      "expectedPlan": false,
+      "exact": null,
+      "records": 0,
+      "slots": 0,
+      "depth": 0
+    },
+    {
+      "name": "html-mismatched-html",
+      "pass": true,
+      "plan": false,
+      "expectedPlan": false,
+      "exact": null,
+      "records": 0,
+      "slots": 0,
+      "depth": 0
+    },
+    {
+      "name": "attack-corrupt-field-delimiter",
+      "pass": true
+    },
+    {
+      "name": "attack-corrupt-close-marker",
+      "pass": true
+    },
+    {
+      "name": "attack-duplicate-slot-id",
+      "pass": true
+    },
+    {
+      "name": "attack-all-delimiters-collide",
+      "pass": true
+    },
+    {
+      "name": "attack-over-size-limit",
+      "pass": true
+    },
+    {
+      "name": "seeded-fuzz-summary",
+      "pass": true,
+      "cases": 200,
+      "plansExact": 200,
+      "kind": "generated test input, not real corpus"
+    }
+  ]
+}
