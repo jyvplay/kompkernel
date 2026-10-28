@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import { anagennesisEncode, anagennesisMine } from '../../src/lib/omega/anagennesis';
+const f = process.argv[2];
+const text = fs.readFileSync(f, 'utf8');
+const mined = anagennesisMine(text);
+let out = `mined ${mined.length}:\n`;
+for (const r of mined) out += `  ${r.field} hits=${r.hits} saved=${r.saved} shape=${r.shape}\n  sentence: ${r.sentence}\n`;
+const t0 = Date.now();
+const r = anagennesisEncode(text);
+out += `\nM=${r.messageTokens} frontier=${r.frontierM} exact=${r.exact} ms=${Date.now() - t0}\n`;
+out += `notes: ${r.notes}\n`;
+for (const c of r.candidates) out += `  cand ${c.rules}/${c.base} M=${c.M} exact=${c.exact}\n`;
+fs.writeFileSync('/tmp/an.txt', out);

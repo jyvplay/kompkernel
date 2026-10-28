@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import { daedalusEncode } from '../../src/lib/omega/daedalus';
+import { chironEncode } from '../../src/lib/omega/chiron';
+import { countTokens } from '../../src/lib/omega/bpe';
+const enc = 'o200k_base' as const;
+const f = process.argv[2];
+const text = fs.readFileSync(f, 'utf8');
+const t0 = Date.now();
+const r: any = daedalusEncode(text, enc);
+console.log('DAEDALUS M', r.messageTokens, 'wire', r.outTokens, 'ms', Date.now() - t0);
+fs.writeFileSync('/tmp/wire.txt', r.wire);
+const t1 = Date.now();
+const c: any = chironEncode(text, enc);
+console.log('CHIRON M', c.messageTokens, 'ms', Date.now() - t1);

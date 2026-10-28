@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import { daedalusEncode } from '../../src/lib/omega/daedalus';
+import { countTokens } from '../../src/lib/omega/bpe';
+const enc = 'o200k_base' as const;
+const [f, outp] = process.argv.slice(2);
+const text = fs.readFileSync(f, 'utf8');
+const r: any = daedalusEncode(text, enc);
+console.log('M=', r.outTokens, 'in=', countTokens(text, enc), 'keys=', Object.keys(r).join(','));
+fs.writeFileSync(outp, JSON.stringify(r, null, 1));
+console.log(JSON.stringify(r).slice(0, 300));

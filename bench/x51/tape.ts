@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import { daedalusEncode } from '../../src/lib/omega/daedalus';
+import { countTokens } from '../../src/lib/omega/bpe';
+const enc = 'o200k_base' as const;
+const f = process.argv[2];
+const text = fs.readFileSync(f, 'utf8');
+const r: any = daedalusEncode(text, enc);
+console.log('M=', r.messageTokens, 'wire=', r.outTokens, 'contractTok=', r.contractTokens);
+console.log('--- decoderPrompt ---');
+console.log(r.decoderPrompt);

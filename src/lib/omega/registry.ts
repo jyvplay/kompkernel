@@ -104,6 +104,7 @@ import { synartesisEncode } from './synartesis';
 import { denEncode } from './dendron';
 import { densEncode } from './dendrons';
 import { gnomonEncode } from './gnomon';
+import { anagennesisEncode } from './anagennesis';
 import { akolouthiaEncode, akolouthiaDecode } from './akolouthia';
 import { akolouthia2Encode, akolouthia2Decode } from './akolouthia2';
 import { horaEncode, horaDecode } from './hora';
@@ -1108,6 +1109,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'gnomon', label: '∴ ΓΝΩΜΩΝ (GNOMON: fields a public convention fixes from their siblings are not sent. REST link fields (`*_url`) of one JSON object are the object url plus "/"+key stem, or a prefix of an earlier link plus a remainder; npm lockfile `resolved` values are the registry tarball URL of the entry name and version. The reader gets one sentence per rule used, then DAEDALUS; exact, guarded by the plain arm, so never above the frontier)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = gnomonEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `rules=${r.rules.join('+') || 'plain'}; fields rest=${r.fields.rest} npm=${r.fields.npm}; frontierM=${r.frontierM}; one-chat=${r.messageTokens} tok (contract counted)` }; },
+    },
+    {
+      key: 'anagennesis', label: '∴ ΑΝΑΓΕΝΝΗΣΙΣ (ANAGENNĒSIS: a value that is a function of the other values of its own record is not sent at all. The encoder mines record families, parses each family residue into literals and references to the record\'s own key and members, states the template once in the contract, writes \'~\' in the payload, and hands the reduced text to DAEDALUS/GRAMMA. Exact, guarded by the plain arms, so never above the frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = anagennesisEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `rules=${r.rules.map(x => x.field).join('+') || 'plain'}; mined=${r.rules.length}; hits=${r.fields}; frontierM=${r.frontierM}; one-chat=${r.messageTokens} tok (contract counted)` }; },
     },
     {
       key: 'hora', label: '⏱ HORA (Timestamp deltas: a full YYYY-MM-DD HH:MM:SS.mmm that follows a same-date timestamp is written as ※N, N = milliseconds from the previous one; the reader adds N back; identity unless it pays)', family: 'exact', fidelity: 'exact',

@@ -3894,3 +3894,93 @@ These are local leaders from their cited fixtures and comparator sets, not one
 fresh cross-stack tournament. In particular, the older z57 OpenStack value
 (1,008) and later X44 value (898) are kept separate rather than averaged or
 combined. The detailed table and receipts are in `bench/x50/X50.md`.
+
+---
+
+## X51 — ΑΝΑΓΕΝΝΗΣΙΣ (ANAGENNĒSIS): values the reader can regenerate are not sent
+
+`src/lib/omega/anagennesis.ts`, registry key `anagennesis`, family `exact`,
+fidelity `exact`. Design spec: [`docs/codec-abbreviations.md`](codec-abbreviations.md)
+(§ X51).
+
+### What it is
+
+The first codec in this repository that makes a value cheaper by **not sending
+it**. Every other codec re-spells the value — a glyph, a mask, a ramp, a brace
+expansion. ΑΝΑΓΕΝΝΗΣΙΣ mines a document for **records** (JSON objects), groups
+the records that share a member name into **families**, and parses each family's
+values into a template made of literals and **references** to the record's own
+key and members. A value that the template regenerates is replaced by `~`; the
+template is stated once, in the contract, in words.
+
+It is STIGME's economics (buy redundancy at the contract rate, not the payload
+rate) moved from punctuation to **values**, and GNOMON R2's mechanism (one
+hand-authored rule that writes `"resolved": "~"`) turned into a miner.
+
+### Measured — the lane it fires on
+
+`bench/holdout-ops/package-lock-head.json` (40 KB, 15,009 raw o200k tokens),
+`OMEGA_DET=1`, one chat message, production clock:
+
+| arm | M | vs frontier |
+|---|---:|---:|
+| plain DAEDALUS | 5,523 | +60 |
+| plain GRAMMA (frontier) | 5,463 | — |
+| **ΑΝΑΓΕΝΝΗΣΙΣ (mined `resolved` rule, GRAMMA base)** | **5,132** | **−331** |
+| ΑΝΑΓΕΝΝΗΣΙΣ (same rule, DAEDALUS base) | 5,218 | −245 |
+| GNOMON R2 (hand-authored npm rule, X54) | 5,127 | −336 |
+
+The mined rule is
+`L28 | strip(KEY) | L3 | tail(KEY) | L1 | field(version) | L4` — 62 hits, 4,826
+characters removed — which is GNOMON's `NAME`/`BASE`/`VERSION` derivation
+expressed as `STRIP(KEY, "node_modules/@")` / `TAIL(KEY)` / `FIELD(version)` and
+**discovered rather than written**. ΑΝΑΓΕΝΝΗΣΙΣ is 5 tokens above GNOMON's
+hand-authored sentence on this lane and 331 tokens above the frontier the
+harness measures.
+
+### Measured — where it does not fire
+
+The 17-lane z57 frontier suite, `OMEGA_DET=1`, o200k, one chat message, with
+`anagennesis` and `gnomon` added to the seven stack candidates:
+
+| lane | raw | frontier | winner(s) | anagennesis | gnomon |
+|---|---:|---:|---|---:|---:|
+| `de-kb.txt` | 2432 | **492** | daedalus-dual | 495 | 495 |
+| `readme.txt` | 3242 | **688** | daedalus, daedalus-dual, dendron, dendrons, gramma, akolouthia2, anagennesis, gnomon | 688 | 688 |
+| `kb-article.txt` | 3385 | **650** | daedalus-dual | 651 | 651 |
+| `email-thread.txt` | 2126 | **525** | daedalus, dendron, dendrons, gramma, akolouthia2, anagennesis, gnomon | 525 | 525 |
+| `llm-answer.md` | 2542 | **706** | daedalus-dual | 707 | 707 |
+| `bibliography.txt` | 2759 | **709** | daedalus-dual, akolouthia2 | 711 | 711 |
+| `meeting-transcript.txt` | 1746 | **420** | daedalus, daedalus-dual, dendron, dendrons, gramma, akolouthia2, anagennesis, gnomon | 420 | 420 |
+| `df-h.txt` | 939 | **171** | akolouthia2 | 281 | 281 |
+| `psql-output.txt` | 1578 | **355** | akolouthia2 | 397 | 397 |
+| `kubectl-get-pods.txt` | 2649 | **326** | akolouthia2 | 386 | 386 |
+| `node-stacktraces.txt` | 1848 | **339** | daedalus, dendron, dendrons, gramma, akolouthia2, anagennesis, gnomon | 339 | 339 |
+| `openstack-loghub-26.log` | 7969 | **1008** | daedalus, dendron, dendrons, gramma, akolouthia2, anagennesis, gnomon | 1008 | 1008 |
+| `git-numstat.txt` | 12306 | **1904** | dendrons | 2036 | 2036 |
+| `find-listing.txt` | 11789 | **1318** | dendrons | 1326 | 1326 |
+| `chart.svg` | 3446 | **330** | akolouthia2 | 465 | 465 |
+| `dump.sql` | 5159 | **703** | akolouthia2 | 728 | 728 |
+| `vix-daily-1990.csv` | 6578 | **1369** | akolouthia2 | 1394 | 1394 |
+
+**Honest scope:** this is a single-lane win, on the largest lane in the
+corpus, from a mechanism no other codec in the stack has. It is *not* a general
+prose or general ops win, and it is not claimed as one. The 17-lane suite is
+unchanged.
+
+### Correctness
+
+Every arm is guarded twice: the rule set must round-trip the input byte-exactly
+on its own, and the composed wire must decode back to the original text through
+the real decoder (DAEDALUS or GRAMMA). The tournament always contains the plain
+arms, so the emitted message is never above the frontier. All 17 suite lanes plus
+`package-lock-head.json`, `gh-api.json.txt`, `json-pkg.txt` and `metrics.tsv`
+were checked `decoded === text`; all exact.
+
+### Prior art
+
+GNOMON (X54) is the direct neighbour. STIGME (X19) is the same economics on
+punctuation. ONTO (arXiv 2604.17512) deletes JSON keys schema-once — a schema
+elision, not a value regeneration, and it does not mine the template. The
+dictionary-encoding line (arXiv 2604.13066, 2506.00307) transmits a dictionary;
+here nothing is transmitted at all.

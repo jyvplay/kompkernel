@@ -1,0 +1,12 @@
+import fs from 'node:fs';
+import { diastemaEncode } from '../../src/lib/omega/diastema';
+import { countTokens } from '../../src/lib/omega/bpe';
+const enc = 'o200k_base' as const;
+const [f, outp] = process.argv.slice(2);
+const text = fs.readFileSync(f, 'utf8');
+const t0 = Date.now();
+const r: any = diastemaEncode(text, enc);
+console.log('M=', r.messageTokens, 'in=', countTokens(text, enc), 'diastema=', r.diastema, 'ms=', Date.now() - t0);
+console.log('NOTES:', r.notes);
+fs.writeFileSync(outp, r.wire);
+console.log('WIRE HEAD:', JSON.stringify(r.wire.slice(0, 600)));

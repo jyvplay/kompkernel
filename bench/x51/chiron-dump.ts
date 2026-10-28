@@ -1,0 +1,10 @@
+import fs from 'node:fs';
+import { chironEncode } from '../../src/lib/omega/chiron';
+const enc = 'o200k_base' as const;
+const f = process.argv[2];
+const text = fs.readFileSync(f, 'utf8');
+const r: any = chironEncode(text, enc);
+let out = `CHIRON M ${r.messageTokens} wire ${r.outTokens} rules ${r.rules ?? r.phraseRules} script ${r.script}\n`;
+out += `notes ${r.notes}\n`;
+fs.writeFileSync('/tmp/chiron-wire.txt', r.wire);
+fs.writeFileSync('/tmp/chiron-info.txt', out);

@@ -1,0 +1,9 @@
+bench/holdout-ops/package-lock-head.json
+bench/holdout-ops/git-numstat.txt
+bench/holdout-ops/openstack-loghub-26.log
+bench/holdout-ops/find-listing.txt
+bench/holdout-tab/vix-daily-1990.csv
+bench/holdout-mk/page.html
+bench/holdout-tab/aapl-2014.csv
+bench/holdout-ops/npm-ls.txt
+bench/holdout/gh-api.json.txt

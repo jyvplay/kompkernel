@@ -2519,3 +2519,125 @@ preprocessing, not evidence for this exact byte-perfect one-chat transform.
 uses a separate `verbatim` store for lossless restoration, outside this
 one-message constraint. No compression-theory novelty is claimed. Native LLM
 decoding remains unverified.
+
+---
+
+## X51 — ΑΝΑΓΕΝΝΗΣΙΣ (ANAGENNĒSIS) — `src/lib/omega/anagennesis.ts`, registry key `anagennesis`
+
+**`ΑΝΑΓΕΝΝΗΣΙΣ` — "regeneration, rebirth".**
+
+### The seam
+
+Every codec in this repository that makes a value cheaper makes it cheaper by
+**sending it differently**: a glyph instead of the literal (DAEDALUS, CHIRON), a
+mask instead of the separator (TYPOS, APOGRAPHE), a ramp instead of the column
+(METRON), a brace expansion instead of the lines (DENS-2). All of them still
+**send the value**. The value is on the wire, in some spelling.
+
+GNOMON R2 is the one exception in the stack, and it is the whole of this codec:
+it writes `"resolved": "~"` and the reader rebuilds
+`https://registry.npmjs.org/NAME/-/BASE-VERSION.tgz` from the entry key and the
+entry version. Measured on `package-lock-head.json`: **one rule, −336 tokens
+(5463 → 5127)**, the largest single-rule win in the stack.
+
+GNOMON's rule is **hand-authored and reads one file**. ΑΝΑΓΕΝΝΗΣΙΣ asks the
+question it implies: *which other values in a document are regenerable?*
+
+### The mechanism, in one sentence
+
+> **A value is regenerable when it is a function of other values the reader was
+> already sent in the same record. The encoder mines that function, states it
+> once in the contract, writes `~` in the payload, and the reader regenerates
+> the value instead of being sent it.**
+
+This is the STIGME principle — buy redundancy at the **contract** rate, not the
+**payload** rate — moved from *punctuation* to *values*. It is AI-native for
+exactly the same reason STIGME is: a byte-level decoder cannot regenerate a
+value it was never sent, and a reasoning reader can.
+
+### The five steps
+
+1. **Records.** A document is read as a nesting of records. A line ending in
+   `{` opens a record and names it (`"node_modules/@babel/core": {`); a line
+   starting with `}` closes it. A record's string members are the lines
+   `"name": "value",` inside it. A record therefore offers two kinds of source
+   value: **its own key** and **its own members**.
+2. **Family.** All records having a member with the same name form a family.
+   Families with fewer than three members are ignored: a regeneration rule has
+   to amortise its sentence.
+3. **Template mining.** For a family, the longest common prefix of the values is
+   a literal. The residue is then parsed left to right, at each step taking
+   whichever of two things matches **every** member:
+   (a) the longest common literal prefix of the residues (≥ 2 chars), or
+   (b) a **reference** — a function of a source value in the record that is a
+       prefix of every residue.
+
+   The functions are a small closed set, each stated in the contract in words:
+
+   | function | meaning |
+   |---|---|
+   | `FIELD(x)` | the member `x`'s own value |
+   | `KEY` | the record's key |
+   | `STRIP(X, p)` | `X` with the prefix `p` removed |
+   | `TAIL(X)` | `X` up to and including its last `/` |
+   | `HEAD(X)` | `X` up to its first `/` |
+
+   `STRIP`'s prefix is not guessed: it is the longest prefix of the source that
+   is **not** a prefix of the residue, and the rule is kept only if that prefix
+   is the same string in every member.
+
+   The parse is **greedy with bounded backtracking**: literals are tried longest
+   first, then references, and the search gives a literal back character by
+   character when the longer one cannot complete. A family whose parse needs
+   more than the budget is **dropped**, not approximated.
+4. **The wire.** Every value the miner matched is replaced by `~`. The reduced
+   text goes through DAEDALUS **or** GRAMMA, and the contract gets one sentence
+   per rule. The reader expands the glyphs first and regenerates the values
+   **last**, because regeneration needs the record's own key and members intact.
+5. **Guard.** Each rule set must (a) round-trip the input byte-exactly on its
+   own, and (b) survive composition — decode the composed wire, apply the
+   inverse, require the original text back. An arm that fails is not shipped.
+   The tournament is plain DAEDALUS, plain GRAMMA, and every non-empty rule
+   subset on both bases; the smallest **exact** message wins, so the codec is
+   **never above the frontier** it is measured against.
+
+### GNOMON's rule, mined rather than written
+
+ΑΝΑΓΕΝΝΗΣΙΣ reproduces GNOMON's npm rule from the general machinery. For
+`package-lock-head.json` the miner returns:
+
+```
+field    resolved        hits 62       saved 4826 chars
+shape    L28 | strip(KEY) | L3 | tail(KEY) | L1 | field(version) | L4
+sentence ~ in the "resolved" field = "https://registry.npmjs.org/@"
+            + the key minus "node_modules/@" + "/-/" + last segment of the key
+            + "-" + version + ".tgz".
+```
+
+which is GNOMON's `NAME`/`BASE`/`VERSION` derivation expressed as
+`STRIP(KEY, …)` / `TAIL(…)` / `FIELD(version)` — discovered, not written.
+
+### What it does not do
+
+- **No prose.** There are no records, so there are no families; the codec
+  returns the plain arm and is exactly the frontier.
+- **No values that are not functions of their own record** — a hash, a
+  timestamp, a random identifier. Those are the entropy of the file and no
+  codec in this repository can buy them.
+- **No cross-record references.** A value may only be regenerated from its own
+  record's key and members. (GNOMON's `rest` rule, which reaches a sibling
+  field, is not in scope.)
+- **No search over templates.** The parse is greedy plus bounded backtracking.
+  The guard is what makes that safe.
+
+### Prior art
+
+- **GNOMON (X54)** is the direct neighbour and the reason this codec exists;
+  its two rules are hand-authored per file format.
+- **STIGME (X19)** is the same *económics* (contract rate instead of payload
+  rate) applied to punctuation the reader can put back.
+- **ONTO (arXiv 2604.17512)** deletes JSON keys schema-once; that is a
+  *schema* elision, not a *value* regeneration, and it does not mine the
+  template.
+- The dictionary-encoding line (arXiv 2604.13066, 2506.00307) transmits a
+  dictionary; here nothing is transmitted at all — the value is a function.

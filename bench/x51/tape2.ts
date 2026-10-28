@@ -1,0 +1,22 @@
+import fs from 'node:fs';
+import { chironEncode, chironDecode, chironParseTape, CHIRON_SCRIPTS, chironInScript } from '../../src/lib/omega/chiron';
+import { countTokens } from '../../src/lib/omega/bpe';
+const enc = 'o200k_base' as const;
+const f = process.argv[2];
+const text = fs.readFileSync(f, 'utf8');
+const r: any = chironEncode(text, enc);
+console.log('M=', r.outTokens ?? r.messageTokens, 'keys=', Object.keys(r).join(','));
+const wire = r.wire ?? r.output;
+const cut = wire.indexOf('¶', 1);
+const tape = wire.slice(1, cut);
+const script = CHIRON_SCRIPTS.find(s => chironInScript(s, tape.codePointAt(0)!))!;
+const parsed = chironParseTape(tape, script)!;
+console.log('rules=', parsed.length, 'tapeChars=', tape.length, 'tapeTokens~', countTokens(tape, enc), 'script=', script.name);
+let totalRef = 0;
+parsed.forEach((p, i) => {
+  let refs = 0;
+  for (const ch of p.raw) if (chironInScript(script, ch.codePointAt(0)!)) refs++;
+  totalRef += refs;
+  if (i < 40) console.log(String(i).padStart(3), p.glyph, '|', JSON.stringify(p.raw.slice(0, 90)), refs ? 'refs=' + refs : '');
+});
+console.log('total rule-refs in tape=', totalRef);
