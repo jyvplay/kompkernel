@@ -1,0 +1,16 @@
+{"lane":"bench/x53/fixtures2/xcc-array.txt","parent":"akolouthia2","side":"orig","tokens":991,"ms":19953,"contractTok":117,"fmt":"carray","rawTok":10490}
+{"lane":"bench/x53/fixtures2/xcc-array.txt","parent":"akolouthia2","side":"reduced","tokens":712,"ms":13165,"contractTok":117,"fmt":"carray","rawTok":10490}
+{"lane":"bench/x53/fixtures2/xcc-array.txt","parent":"daedalus","side":"orig","tokens":991,"ms":19991,"contractTok":117,"fmt":"carray","rawTok":10490}
+{"lane":"bench/x53/fixtures2/xcc-array.txt","parent":"daedalus","side":"reduced","tokens":712,"ms":11937,"contractTok":117,"fmt":"carray","rawTok":10490}
+{"lane":"bench/x53/fixtures2/xcc-array.txt","parent":"apographe","side":"reduced","tokens":669,"ms":502139,"contractTok":117,"fmt":"carray","rawTok":10490}
+{"lane":"bench/x53/fixtures2/od-x1nogutter.txt","parent":"akolouthia2","side":"orig","tokens":1116,"ms":40046,"contractTok":133,"fmt":"od","rawTok":4602}
+{"lane":"bench/x53/fixtures2/od-x1nogutter.txt","parent":"akolouthia2","side":"reduced","tokens":676,"ms":11550,"contractTok":133,"fmt":"od","rawTok":4602}
+{"lane":"bench/x53/fixtures2/od-x1nogutter.txt","parent":"daedalus","side":"orig","tokens":1116,"ms":20745,"contractTok":133,"fmt":"od","rawTok":4602}
+{"lane":"bench/x53/fixtures2/od-x1nogutter.txt","parent":"daedalus","side":"reduced","tokens":676,"ms":11710,"contractTok":133,"fmt":"od","rawTok":4602}
+{"lane":"bench/x53/fixtures2/od-x1nogutter.txt","parent":"apographe","side":"reduced","tokens":633,"ms":495876,"contractTok":133,"fmt":"od","rawTok":4602}
+{"lane":"bench/x53/fixtures2/od-x2.txt","parent":"akolouthia2","side":"orig","tokens":993,"ms":30564,"contractTok":143,"fmt":"od","rawTok":3585}
+{"lane":"bench/x53/fixtures2/od-x2.txt","parent":"akolouthia2","side":"reduced","tokens":765,"ms":11726,"contractTok":143,"fmt":"od","rawTok":3585}
+{"lane":"bench/x53/fixtures2/od-x2.txt","parent":"daedalus","side":"orig","tokens":1018,"ms":17828,"contractTok":143,"fmt":"od","rawTok":3585}
+{"lane":"bench/x53/fixtures2/od-x2.txt","parent":"daedalus","side":"reduced","tokens":765,"ms":11788,"contractTok":143,"fmt":"od","rawTok":3585}
+{"lane":"bench/x53/fixtures2/od-x2.txt","parent":"apographe","side":"reduced","tokens":653,"ms":119972,"contractTok":143,"fmt":"od","rawTok":3585}
+DIP2DONE

@@ -4015,14 +4015,34 @@ them, and has the reader recompute and re-align. Contract measured 82–90
 tokens (`aligns read LRRRRRLLLLL, minimum gap after each column [digitwise:]
 5111115131`). Full report: `bench/x53/X53.md`.
 
-Verification: red team 241 checks (1 miss — column-0 right-aligned
-overflow — root-caused, fixed, re-run receipted), independent CPython
-decoder reading only the contract byte-exact on 6/6 lanes, blind
-contract-only hand decodes byte-exact on 3/3 fresh samples incl. a 50-row
-endurance slice (X52 task 1). Bench (complete message, o200k): [segmented
-receipts appended when complete — `top` tied APOGRAPHE 818 = 818 and
-correctly did not emit; ps-190 candidate 1,168 vs AKOLOUTHIA-2 1,176
-pre-APOGRAPHE].
+Verification: red team **243/243** (one miss — column-0 right-aligned
+overflow — root-caused, fixed, re-run), independent CPython decoder
+reading only the contract byte-exact on 6/6 lanes (re-verified
+post-repair), blind contract-only hand decodes byte-exact incl. a
+50-row TAXIS endurance slice and a 100-row SYLLOGISMOS endurance slice
+(X52 task 1). Bench (complete message, o200k, receipts in
+`bench/x53/receipts/`): **ps-bigmem (real `ps aux`, 140 rows) — full
+TAGSTACK+SIBLING frontier win: 1,816 < 1,926 (+110)**, `applied=true`,
+`fullFrontierMeasured=true`; member-level: ps-190 +8, `top` tie
+818 = 818 (no emit), sandbox −6, z57 −11, holdout −18 (no regression —
+fallback). The win exists exactly where the derived column carries
+entropy the parents cannot absorb (26 distinct %MEM values on bigmem);
+thin-%MEM tables decline.
+
+Also X53 (X52 task 4): DIPTYCHON gained plain `od -t x1/-t x2` (no
+gutter panel) and `xxd -i` C-array renderings — variants red team
+61/61, X52 regression 227/227, Python 5/5, blind C-array decode exact.
+Member-level benches (2 KiB of `/bin/ls`): C array candidate **786 vs
+991** best member (APOGRAPHE on reduced 669 + 117 contract; +205) and
+plain `od -t x1` **766 vs 1,116** (+350) — continuous hex lets the
+dictionary parents match across byte boundaries, which the
+`0x.., `/spaced dressing fragments; full table in
+`bench/x53/receipts/dip2-bench-segmented.log` (od-x2 line there).
+Full-frontier gates on hex remain unaffordable for the reason X52
+task 5 now names (below).
+X52 task 5 answered: the hex-pathological TAGSTACK parents are
+SYNKRISIS, BIFRONT and DIASTEMA (each >900 s on a 512 B dump where
+KANON/AKOLOUTHIA-2 take ~3 s; `bench/x53/receipts/profile-parents.log`).
 
 Falsified this turn with receipts (X53.md §E): markdown anchor slugs
 (owned by ENTHYMEME/EPAGOGE), gcc span-art re-rendering (byte-exact
@@ -4042,5 +4062,5 @@ true` (314,762 ms). Nothing is restated.
 | Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | See new category for derived-column ops tables |
 | Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 freshly re-confirmed |
 | Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,100 vs 8,115 member-level | No X53 movement |
-| Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; 512 B 385 vs 414 (member-level) | X53 profiling of the slow frontier parent: [pending] |
-| **Aligned tables w/ derived columns (new X53 category)** | **TAXIS** — plans byte-exact on every real ps/top lane tried; candidate vs frontier [pending segmented receipts]; `top` 818 = 818 tie, no emit | Fresh X53 receipts; scope exactly as receipted |
+| Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; 512 B 385 vs 414 (member-level); X53 adds plain-od/C-array renderings | Slow parents identified (SYNKRISIS/BIFRONT/DIASTEMA >900 s vs ~3 s); full-frontier hex gates still unaffordable |
+| **Aligned tables w/ derived columns (new X53 category)** | **TAXIS** ps-bigmem **1,816 < 1,926 full frontier**; ps-190 +8 member; `top` tie; thin lanes decline | Fresh X53 receipts; scope exactly as receipted |

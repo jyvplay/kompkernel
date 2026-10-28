@@ -1,0 +1,17 @@
+{
+  "lane": "bench/x53/fixtures/ps-bigmem.txt",
+  "applied": true,
+  "exact": true,
+  "messageTokens": 1816,
+  "parentTokens": 1926,
+  "parentCodec": "akolouthia2",
+  "candidateTokens": 1816,
+  "candidateExact": true,
+  "candidateParentCodec": "akolouthia2",
+  "candidateParentTokens": 1734,
+  "comparison": "strict complete-message TAGSTACK runtime-parent set plus SIBLING-TEMPLATE",
+  "fullFrontierMeasured": true,
+  "ms": 1797601,
+  "notes": "re-aligned a 140x11 space-aligned table, 1 derived column(s) [fittedPct]; complete-message M=1816 < same-source frontier M=1926"
+}
+EXIT=0

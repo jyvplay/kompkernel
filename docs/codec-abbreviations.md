@@ -2765,6 +2765,26 @@ decoding remains unverified.
   `bench/x53/`. Contrast DIPTYCHON's measured gutter fragility: short
   anchored fields proved robust for this reader; n=1, sufficiency
   claimed, not ease.
-- **Measured (see `bench/x53/X53.md`).** [bench outcomes appended in
-  X53.md §J when receipts complete; the `top` lane tied APOGRAPHE at
-  818 = 818 (candidate 728+90) and correctly did not emit.]
+- **Measured (see `bench/x53/X53.md`).** Full-frontier win on real
+  `ps aux` (ps-bigmem, 140 rows): **1,816 < 1,926** vs the complete
+  TAGSTACK+SIBLING frontier measured in-encode (+110, 5.7%). Member
+  level: ps-190 +8; `top` tie 818 = 818 (correctly no emit); sandbox
+  −6, z57 −11, holdout −18 — declined with no-regression fallback. The
+  win tracks derived-column entropy: 26 distinct %MEM values on bigmem
+  vs near-constant `0.0` columns APOGRAPHE already prices ~free.
+- **Also this turn (DIPTYCHON variants, X52 task 4):** plain
+  `od -t x1/-t x2` (no ASCII panel; x2 odd byte counts refused — GNU od
+  zero-extends) and `xxd -i` C byte arrays (items/line, indent,
+  separator, 0x/0X prefix, last-comma inferred) in `diptychon.ts`,
+  same infer-then-re-render discipline. Variants red team 61/61, X52
+  red team re-run 227/227, independent Python decoder 5/5 from the
+  contract, blind C-array decode exact. Member-level benches on 2 KiB
+  of `/bin/ls`: C array **786 vs 991** (+205), plain `od -t x1` **766 vs
+  1,116** (+350), `od -t x2` **796 vs 993** (+197) — continuous hex lets
+  dictionary parents match across
+  byte boundaries that the `0x`/space dressing fragments; receipts in
+  `bench/x53/receipts/dip2-bench-segmented.log`. Full-frontier hex
+  gates remain unaffordable (task 5 names the parents, below).
+  X52 task 5: the hex-pathological frontier parents are SYNKRISIS,
+  BIFRONT, DIASTEMA (>900 s on a 512 B dump where KANON/AKOLOUTHIA-2
+  take ~3 s).
