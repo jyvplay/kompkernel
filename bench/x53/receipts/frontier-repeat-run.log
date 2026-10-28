@@ -1,0 +1,43 @@
+{
+  "configuration": {
+    "lane": "metrics.tsv",
+    "path": "bench/holdout-x40/metrics.tsv",
+    "encoding": "o200k_base",
+    "OMEGA_DET": null,
+    "node": "v22.22.3",
+    "cost": "direct o200k_base count of each complete in-band parent message",
+    "scope": "TAGSTACK runtime parents (SYNKRISIS, eligible BIFRONT, KANON, AKOLOUTHIA-2, APOGRAPHE, DIASTEMA, eligible METRON/HEMERA) plus SIBLING-TEMPLATE; not a registry-wide tournament"
+  },
+  "source": {
+    "sha256": "b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70",
+    "chars": 1203,
+    "rawTokens": 811
+  },
+  "result": {
+    "frontierComplete": true,
+    "exact": true,
+    "frontierTokens": 210,
+    "winner": "akolouthia2",
+    "frontierCosts": {
+      "synkrisis": 237,
+      "kanon": 236,
+      "akolouthia2": 210,
+      "apographe": 237,
+      "metron": 237,
+      "diastema": 237
+    },
+    "tagstack": {
+      "messageTokens": 210,
+      "applied": false,
+      "ms": 314760
+    },
+    "sibling": {
+      "messageTokens": 210,
+      "applied": false,
+      "ms": 1
+    },
+    "repeatMatchesPreviousGate": true,
+    "previousGateTokens": 210,
+    "totalMs": 314762
+  }
+}

@@ -57,6 +57,16 @@
  * 300,000 lines). The inherited parent encodes and the TAGSTACK frontier
  * dominate wall time and have no wrapper-wide cap, so the registry entry is
  * deep-audit-only, like KOLUMN and SYLLOGISMOS.
+ *
+ * X53 VARIANTS (X52 next-task 4; same mechanism, two more renderings)
+ * -----------------------------------------------------------------------------
+ * Plain od without the ASCII panel (`od -t x1`, `od -t x2`, either with
+ * offsets or `-A n`; the stripped mass is the offsets + spacing),
+ * and C byte arrays (`xxd -i` style `0x7f, 0x45, ...` inside a `{ ... };`
+ * frame, whose `0x`/comma dressing is ~3.1 chars and ~5-7 tokens per byte
+ * of compact hex). Both are inferred + byte-exact-re-rendered like the
+ * X52 formats. `od -t x2` over an odd byte count is out of scope (GNU od
+ * zero-extends the last word; the final-offset check refuses it).
  */
 
 import { countTokens, type EncodingName } from './bpe';
@@ -70,7 +80,7 @@ import { siblingTemplateEncode, type SiblingTemplateResult } from './sibling-tem
 // Spec
 // ---------------------------------------------------------------------------
 
-export type DiptychonFormat = 'od' | 'xxd' | 'hexdumpC';
+export type DiptychonFormat = 'od' | 'xxd' | 'hexdumpC' | 'carray';
 
 export interface DiptychonSpec {
   v: 1;
@@ -89,6 +99,19 @@ export interface DiptychonSpec {
   finalOffsetLine: boolean;
   compact: 'pairs' | 'continuous';
   eol: '\n' | '\r\n';
+  /**
+   * X53 variants (X52 next-task 4). Optional; defaults preserve X52 specs.
+   * `gutter` false: plain `od -t x1`/`-t x2` with no ASCII panel (`group`
+   * then also applies to od: payload bytes are kept in printed order, so
+   * `od -t x2` of an odd byte count is out of scope — GNU od zero-extends
+   * the final word and the final-offset check refuses it).
+   * `indent`/`sep`/`prefix`/`lastComma`: C-array dumps (`xxd -i` style).
+   */
+  gutter?: boolean;
+  indent?: number;
+  sep?: ', ' | ',';
+  prefix?: '0x' | '0X';
+  lastComma?: boolean;
 }
 
 export interface DiptychonPlan {
@@ -147,11 +170,24 @@ const offsetStr = (spec: DiptychonSpec, value: number): string => {
   return s.padStart(spec.offsetWidth, '0');
 };
 
-function renderDataLine(spec: DiptychonSpec, bytes: number[], offsetValue: number): string {
+function renderDataLine(spec: DiptychonSpec, bytes: number[], offsetValue: number, isLastData = false): string {
   const n = spec.bytesPerLine;
   const g = gutterOf(bytes);
+  if (spec.format === 'carray') {
+    const items = bytes.map((b) => (spec.prefix ?? '0x') + hx2(b, spec.upper));
+    const comma = isLastData && !spec.lastComma ? '' : ',';
+    return ' '.repeat(spec.indent ?? 2) + items.join(spec.sep ?? ', ') + comma;
+  }
   if (spec.format === 'od') {
     const off = spec.offsetRadix === 0 ? '' : offsetStr(spec, offsetValue);
+    if (spec.gutter === false) {
+      // plain od: bytes (grouped for -t x2, printed order), no padding, no panel
+      const groups: string[] = [];
+      for (let i = 0; i < bytes.length; i += spec.group) {
+        groups.push(' ' + bytes.slice(i, i + spec.group).map((b) => hx2(b, spec.upper)).join(''));
+      }
+      return `${off}${groups.join('')}`;
+    }
     const hex = bytes.map((b) => ' ' + hx2(b, spec.upper)).join('');
     return `${off}${hex}${' '.repeat(3 * (n - bytes.length))}  >${g}<`;
   }
@@ -184,9 +220,12 @@ function renderDump(spec: DiptychonSpec, items: Item[]): string {
   let cum = 0;
   let prevBlock: number[] | null = null;
   let inStar = false;
+  let lastDataIdx = -1;
+  for (let i = 0; i < items.length; i++) if (items[i]!.t === 'data') lastDataIdx = i;
   const sameBlock = (a: number[], b: number[] | null): boolean =>
     b !== null && a.length === b.length && a.every((v, i) => v === b[i]);
-  for (const it of items) {
+  for (let ii = 0; ii < items.length; ii++) {
+    const it = items[ii]!;
     if (it.t === 'other') {
       out.push(it.s);
       prevBlock = null; inStar = false;
@@ -206,7 +245,7 @@ function renderDump(spec: DiptychonSpec, items: Item[]): string {
     if (squeezable) {
       if (!inStar) { out.push('*'); inStar = true; }
     } else {
-      out.push(renderDataLine(spec, bytes, spec.offsetBase + cum));
+      out.push(renderDataLine(spec, bytes, spec.offsetBase + cum, ii === lastDataIdx));
       inStar = false;
       prevBlock = bytes;
     }
@@ -392,6 +431,171 @@ function parseOd(lines: string[], eol: '\n' | '\r\n', text: string): Parsed | nu
     if (got) return got;
   }
   return null;
+}
+
+/** X53: plain od without the ASCII panel (`od -t x1`, `od -t x2`, `-A n`). */
+function parseOdPlain(lines: string[], eol: '\n' | '\r\n', text: string): Parsed | null {
+  const raw: RawItem[] = [];
+  const offsets: (number | null)[] = [];
+  const offsetTokens: string[] = [];
+  let noOffset: boolean | null = null;
+  let group = -1;
+  for (let li = 0; li < lines.length; li++) {
+    const line = lines[li]!;
+    if (line === '*') { raw.push({ t: 'star' }); offsets.push(null); continue; }
+    let rest = line;
+    let token: string | null = null;
+    if (!rest.startsWith(' ')) {
+      const sp = rest.indexOf(' ');
+      if (sp > 0) { token = rest.slice(0, sp); rest = rest.slice(sp); }
+    }
+    const bytes: number[] = [];
+    let p = 0;
+    let lineGroup = group;
+    let ok = true;
+    while (p < rest.length) {
+      if (rest[p] !== ' ') { ok = false; break; }
+      let w = 0;
+      while (/[0-9a-f]/.test(rest[p + 1 + w] ?? '')) w++;
+      if (w !== 2 && w !== 4) { ok = false; break; }
+      if (lineGroup === -1) lineGroup = w / 2;
+      if (lineGroup !== w / 2) { ok = false; break; }
+      for (let k = 0; k < w / 2; k++) bytes.push(parseInt(rest.slice(p + 1 + 2 * k, p + 3 + 2 * k), 16));
+      p += 1 + w;
+      if (bytes.length > 16) { ok = false; break; }
+    }
+    if (ok && bytes.length > 0 && bytes.length <= 16 && p === rest.length) {
+      if (group === -1) group = lineGroup;
+      if (group !== lineGroup) return null;
+      if (noOffset === null) noOffset = token === null;
+      if ((token === null) !== noOffset) return null;
+      if (token !== null) offsetTokens.push(token);
+      raw.push({ t: 'data', bytes });
+      offsets.push(null);
+      continue;
+    }
+    if (/^[0-9a-f]+$/.test(line) && li === lines.length - 1 && raw.some((r) => r.t === 'data')) {
+      raw.push({ t: 'final' });
+      offsets.push(null);
+      offsetTokens.push(line);
+      continue;
+    }
+    raw.push({ t: 'other', s: line });
+    offsets.push(null);
+  }
+  if (group === -1) return null;
+  const squeeze = raw.some((r) => r.t === 'star') ? ('identical' as const) : ('none' as const);
+  const finalOffsetLine = raw.some((r) => r.t === 'final');
+  if (noOffset) {
+    if (finalOffsetLine) return null;
+    const spec: Omit<DiptychonSpec, 'compact'> = {
+      v: 1, format: 'od', offsetRadix: 0, offsetWidth: 0, offsetBase: 0, offsetUpper: false,
+      bytesPerLine: 16, group, upper: false, squeeze, finalOffsetLine: false, eol, gutter: false,
+    };
+    return finishParse(spec, raw, offsets, text);
+  }
+  if (offsetTokens.length === 0) return null;
+  const width = offsetTokens[offsetTokens.length - 1]!.length;
+  if (!offsetTokens.every((t) => t.length === width)) return null;
+  for (const radix of [16, 8, 10] as const) {
+    const digitOk = offsetTokens.every((t) =>
+      radix === 16 ? /^[0-9a-f]+$/.test(t) : radix === 8 ? /^[0-7]+$/.test(t) : /^[0-9]+$/.test(t));
+    if (!digitOk) continue;
+    const offs = [...offsets];
+    let ti = 0;
+    let base: number | null = null;
+    for (let i = 0; i < raw.length; i++) {
+      if (raw[i]!.t === 'data' || raw[i]!.t === 'final') {
+        const v = parseInt(offsetTokens[ti++]!, radix);
+        if (base === null) base = v;
+        offs[i] = v;
+      }
+    }
+    if (base === null) continue;
+    const spec: Omit<DiptychonSpec, 'compact'> = {
+      v: 1, format: 'od', offsetRadix: radix, offsetWidth: width, offsetBase: base, offsetUpper: false,
+      bytesPerLine: 16, group, upper: false, squeeze, finalOffsetLine, eol, gutter: false,
+    };
+    const got = finishParse(spec, raw, offs, text);
+    if (got) return got;
+  }
+  return null;
+}
+
+/** X53: C byte arrays (`xxd -i` style): `0x7f, 0x45, ...` lines inside a frame. */
+function parseCarray(lines: string[], eol: '\n' | '\r\n', text: string): Parsed | null {
+  const raw: RawItem[] = [];
+  const offsets: (number | null)[] = [];
+  let indent = -1;
+  let sep: (', ' | ',') | null = null;
+  let prefix: ('0x' | '0X') | null = null;
+  let sawUpperAF = false;
+  let sawLowerAF = false;
+  let perLine = -1;
+  let state: 0 | 1 | 2 = 0; // 0 before data, 1 in data, 2 after data
+  let lastComma = false;
+  let lastDataRawIdx = -1;
+  const itemRe = /0[xX][0-9a-fA-F]{2}/g;
+  for (let li = 0; li < lines.length; li++) {
+    const line = lines[li]!;
+    // tokenize as a candidate data line
+    let pos = 0;
+    let lead = 0;
+    while (line[pos] === ' ') { pos++; lead++; }
+    const bytes: number[] = [];
+    let thisSep: (', ' | ',') | null = null;
+    let ok = pos < line.length;
+    let trailingComma = false;
+    while (ok && pos < line.length) {
+      itemRe.lastIndex = pos;
+      const m = itemRe.exec(line);
+      if (!m || m.index !== pos) { ok = false; break; }
+      const tok = m[0] as string;
+      const thisPrefix = tok.slice(0, 2) as '0x' | '0X';
+      if (prefix === null && raw.every((r) => r.t !== 'data') && bytes.length === 0) prefix = thisPrefix;
+      else if (prefix !== null && thisPrefix !== prefix) { ok = false; break; }
+      const hexPart = tok.slice(2);
+      if (/[A-F]/.test(hexPart)) sawUpperAF = true;
+      if (/[a-f]/.test(hexPart)) sawLowerAF = true;
+      bytes.push(parseInt(hexPart, 16));
+      pos += 4;
+      if (pos >= line.length) break;
+      if (line[pos] === ',' && pos === line.length - 1) { trailingComma = true; pos++; break; }
+      const sp: (', ' | ',') | null = line.startsWith(', ', pos) ? ', ' : line[pos] === ',' ? ',' : null;
+      if (sp === null) { ok = false; break; }
+      if (thisSep === null) thisSep = sp;
+      if (thisSep !== sp) { ok = false; break; }
+      pos += sp.length;
+    }
+    if (ok && bytes.length > 0 && pos === line.length) {
+      if (state === 2) return null; // data after non-data gap: refuse
+      state = 1;
+      if (indent === -1) indent = lead;
+      if (indent !== lead) return null;
+      if (thisSep !== null) {
+        if (sep === null) sep = thisSep;
+        if (sep !== thisSep) return null;
+      }
+      if (perLine === -1) perLine = bytes.length;
+      if (bytes.length > perLine) return null;
+      raw.push({ t: 'data', bytes });
+      offsets.push(null);
+      lastComma = trailingComma;
+      lastDataRawIdx = raw.length - 1;
+      continue;
+    }
+    if (state === 1) state = 2;
+    raw.push({ t: 'other', s: line });
+    offsets.push(null);
+  }
+  if (lastDataRawIdx === -1 || perLine < 4 || prefix === null) return null;
+  if (sawUpperAF && sawLowerAF) return null;
+  const spec: Omit<DiptychonSpec, 'compact'> = {
+    v: 1, format: 'carray', offsetRadix: 0, offsetWidth: 0, offsetBase: 0, offsetUpper: false,
+    bytesPerLine: perLine, group: 1, upper: sawUpperAF, squeeze: 'none', finalOffsetLine: false, eol,
+    gutter: false, indent, sep: sep ?? ', ', prefix, lastComma,
+  };
+  return finishParse(spec, raw, offsets, text);
 }
 
 function parseXxd(lines: string[], eol: '\n' | '\r\n', text: string): Parsed | null {
@@ -626,11 +830,24 @@ function diptychonContract(spec: DiptychonSpec): string {
       : '';
   const gut = `one character per byte (the ASCII character itself when printable or a space, else a dot)`;
   let frame: string;
-  if (spec.format === 'od') {
+  if (spec.format === 'carray') {
+    const sepText = spec.sep === ',' ? 'joined by commas with no spaces' : 'joined by a comma and a space';
+    const commaText = spec.lastComma
+      ? 'with a comma right after the last byte of every data line'
+      : 'with a comma right after the last byte of every data line except the last data line';
+    frame = `a C byte array. Rewrite each such line as: ${spec.indent ?? 2} spaces, then its bytes each as ${spec.prefix ?? '0x'} followed by 2 ${spec.upper ? 'upper-case ' : ''}hex digits, ${sepText}, ${n} bytes per line (the last data line may hold fewer), ${commaText}`;
+  } else if (spec.format === 'od') {
     const off = spec.offsetRadix === 0
       ? 'no offset'
       : `the byte offset in ${radixName} (${n} times the data-line index from 0${baseNote}), zero-padded to ${spec.offsetWidth} digits`;
-    frame = `an od dump. Rewrite each such line as: ${off}, then each byte preceded by a space as 2 hex digits, then spaces as if ${n} bytes were present, two spaces, >, ${gut}, <`;
+    if (spec.gutter === false) {
+      const grp = spec.group === 2
+        ? 'then the bytes grouped in 2s, each group preceded by a space and written as 4 hex digits (no padding on a short last line)'
+        : 'then each byte preceded by a space as 2 hex digits (no padding on a short last line)';
+      frame = `an od dump with no ASCII panel. Rewrite each such line as: ${off}, ${grp}`;
+    } else {
+      frame = `an od dump. Rewrite each such line as: ${off}, then each byte preceded by a space as 2 hex digits, then spaces as if ${n} bytes were present, two spaces, >, ${gut}, <`;
+    }
   } else if (spec.format === 'xxd') {
     frame = `an xxd dump. Rewrite each such line as: the byte offset in ${radixName} (${n} times the data-line index from 0${baseNote}), zero-padded to ${spec.offsetWidth} digits, a colon and a space, then the bytes in groups of ${spec.group} written as ${2 * spec.group} ${spec.upper ? 'upper-case ' : ''}hex digits separated by single spaces (pad a short last line with spaces so the text column aligns), two spaces, then ${gut}`;
   } else {
@@ -648,7 +865,8 @@ export function diptychonPlan(text: string, enc: EncodingName = 'o200k_base'): D
   if (!split) return null;
   const { lines, eol } = split;
   const parsed =
-    parseOd(lines, eol, text) ?? parseHexdumpC(lines, eol, text) ?? parseXxd(lines, eol, text);
+    parseOd(lines, eol, text) ?? parseHexdumpC(lines, eol, text) ?? parseXxd(lines, eol, text)
+    ?? parseOdPlain(lines, eol, text) ?? parseCarray(lines, eol, text);
   if (!parsed) return null;
   let best: DiptychonPlan | null = null;
   let bestTok = Infinity;

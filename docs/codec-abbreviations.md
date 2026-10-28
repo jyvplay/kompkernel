@@ -1,6 +1,6 @@
 # Codec abbreviations: decoded design spec (X13 base; X52 update)
 
-This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 213 keys as of X52) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213). The companion page is `docs/codecs.md` (measurements and leaders).
+This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 214 keys as of X53) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213); TAXIS is X53 (214). The companion page is `docs/codecs.md` (measurements and leaders).
 
 Conventions:
 
@@ -2696,3 +2696,75 @@ decoding remains unverified.
   check-count drift explained in X52.md), Python cross-decode 24/24
   re-verified. The `metrics.tsv` frontier was re-run a third time:
   **exactly 210**, unchanged.
+
+# X53 (2026-10-28) — TAXIS: derived columns in space-aligned tables
+
+## τάξις TAXIS (X53, `src/lib/omega/taxis.ts`, registry key `taxis`, exact, deep, shipped this turn)
+
+- **Name decoded.** Greek τάξις, arrangement/formation — the order that
+  lets a column be recomputed rather than shipped. Technical translation:
+  **derived-column elision for space-aligned tables, restored by exact
+  re-alignment under the original header**.
+- **Mechanism (what is new in this stack).** Two parts, each verified
+  absent over all 282 modules. (1) *Column-geometry inference with
+  byte-exact re-rendering*: the header row's word spans are anchors; each
+  column is fitted as L or R against them with a per-transition minimum
+  gap (fitted as the minimum observed remainder); a wide field pushes
+  itself — and everything right of it — right as one piece (this rule is
+  what survives procps overflow rows, where an 8-digit VSZ shifts the
+  whole tail); the fit is accepted only if re-rendering every row from
+  bare fields reproduces the block byte-for-byte. (2) *Ops-shaped
+  derived-column families* SYLLOGISMOS cannot express: **`fittedPct`** —
+  `pct = trunc/round(100·X/T)` at uniform decimals with the hidden total
+  T solved from the rows as an exact rational interval (ps %MEM: trunc,
+  T≈4,024,001 KB on this sandbox; `top`: round, T≈3,592,001 — procps
+  really does use different modes in the two tools, discovered and
+  verified this turn); **`pctOf`** (`100·A/B`); **`ceilShare`** —
+  `ceil(100·A/(A+B))` with the %-suffix (df Use%); **`arith`** — exact
+  `A±B`/`A·B` at the target's scale. Every cell of every row must verify
+  in BigInt arithmetic. The reduced text is the table single-space
+  joined minus the derived columns (header line verbatim), coded by the
+  cheapest measured of DAEDALUS / AKOLOUTHIA-2 / APOGRAPHE under the
+  standard strict TAGSTACK+SIBLING gate with best-parent fallback.
+  Contract (82–90 tokens measured) states aligns as one word
+  (`LRRRRRLLLLL`), gaps digitwise (`5111115131` = 4 tokens vs 19 spaced),
+  and one clause per dropped column, e.g. `{%MEM} = 100*{RSS}/4024001
+  truncated to 1 decimals`.
+- **Scope.** Contiguous aligned blocks (≥4 rows, ≥3 columns) whose first
+  n−1 fields carry no spaces; taps/dumps with space-carrying early cells
+  (kubectl `READY 1/1` style is fine; `kubectl` COMMAND strings with
+  spaces in middle columns are not), wrapped df rows, `%CPU` (needs the
+  wall-clock "now"), and tab-containing blocks all fall back to
+  SYLLOGISMOS/parents. Sibling of SYLLOGISMOS: same entailment genus,
+  different table model — X51 named whitespace alignment SYLLOGISMOS'
+  boundary; TAXIS is the crossing.
+- **Greedy?** Geometry: no — exponential align search capped at 40
+  columns, gaps derived not searched, whole-block re-render arbitrates.
+  Relation discovery: exhaustive over the small family space with exact
+  per-row verification; candidate ranking charges the *true rendered
+  contract* and re-tokenizes the real reduced text, with whole-input
+  restore + byte check as acceptance. Emission is a measured gate.
+- **Honest source-article citation.** Genus prior art: FD/relational
+  semantic compression — SPARTAN; SQUISH; DeepSqueeze (SIGMOD 2020,
+  DOI 10.1145/3318464.3389734); Blitzcrank (VLDB 2024); redundancy-
+  ranked top-k FD discovery (arXiv:2601.10130). For the specific
+  realization — inferred table geometry + fitted-total/share relations
+  as one-chat arithmetic an unmodified LLM re-renders byte-perfectly —
+  **none** (no paper stands behind it; procps/`df` formatting is public
+  tool behavior, re-derived here by measurement).
+- **Time- or CPU-bound?** CPU-bound. Planner poly by caps (200k code
+  units, 20k lines, 40 columns, 4 drops, 20M work units); parents and
+  frontier dominate wall-clock (one full-gate encode on `top`: 436 s),
+  so `deep: true`.
+- **Reader burden, measured.** Blind contract-only hand decodes:
+  24-row live `ps aux` ✓ byte-exact, 14-row ceil-share ✓, **50-row**
+  endurance slice ✓ (overflow VSZ row, wide-RSS row, ~1.4k-char
+  COMMAND). Independent CPython decoder from the contract text alone:
+  6/6 lanes byte-exact. Red team: 241 checks, 1 miss (column-0
+  right-aligned overflow) root-caused and fixed, re-run receipted in
+  `bench/x53/`. Contrast DIPTYCHON's measured gutter fragility: short
+  anchored fields proved robust for this reader; n=1, sufficiency
+  claimed, not ease.
+- **Measured (see `bench/x53/X53.md`).** [bench outcomes appended in
+  X53.md §J when receipts complete; the `top` lane tied APOGRAPHE at
+  818 = 818 (candidate 728+90) and correctly did not emit.]

@@ -3997,3 +3997,50 @@ true` (329,597 ms). Nothing is restated.
 | Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 freshly re-confirmed |
 | Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,100 vs 8,115 member-level | X52 selection-cost repair; plans unchanged |
 | **Hexdumps (new X52 category)** | **DIPTYCHON** od 8 KiB 3,014 vs 5,401; 512 B 385 vs 414 (member-level) | Fresh X52 receipts; scope exactly as receipted |
+
+## X53 — TAXIS: derived columns where the delimiters are spaces
+
+X53 crossed SYLLOGISMOS' documented boundary. Derived columns live in the
+most-pasted ops output there is — `ps aux` %MEM is 100·RSS/(fitted total)
+truncated to tenths, `top`'s is the rounded form, `df` Use% is
+ceil(100·Used/(Used+Avail)) — but their tables are space-aligned, where the
+delimited FD codec cannot even parse. **TAXIS**
+(`src/lib/omega/taxis.ts`, key `taxis`) infers the table's column geometry
+(header-word anchors, per-column L/R, per-transition minimum gaps,
+overflow pushes a row's tail right as one piece — the rule that survives
+procps overflow rows), proves it by byte-exact re-rendering, discovers
+fitted-total percent / percent-of / ceil-share / exact-arithmetic derived
+columns verified per row in BigInt arithmetic, ships the table without
+them, and has the reader recompute and re-align. Contract measured 82–90
+tokens (`aligns read LRRRRRLLLLL, minimum gap after each column [digitwise:]
+5111115131`). Full report: `bench/x53/X53.md`.
+
+Verification: red team 241 checks (1 miss — column-0 right-aligned
+overflow — root-caused, fixed, re-run receipted), independent CPython
+decoder reading only the contract byte-exact on 6/6 lanes, blind
+contract-only hand decodes byte-exact on 3/3 fresh samples incl. a 50-row
+endurance slice (X52 task 1). Bench (complete message, o200k): [segmented
+receipts appended when complete — `top` tied APOGRAPHE 818 = 818 and
+correctly did not emit; ps-190 candidate 1,168 vs AKOLOUTHIA-2 1,176
+pre-APOGRAPHE].
+
+Falsified this turn with receipts (X53.md §E): markdown anchor slugs
+(owned by ENTHYMEME/EPAGOGE), gcc span-art re-rendering (byte-exact
+prototype, token-neutral — space runs are ~free), diff hunk counts (0.09%
+mass), du/JSON aggregates (5/6 exact / digit-sized), free/vmstat sums
+(rounding), markdown pretty-table padding (567 chars, X52 task 3 closed).
+
+### X53 frontier repeat and generalized local leaders
+
+The `metrics.tsv` frontier was rerun a fourth consecutive turn under the
+exact X49 configuration: **exactly 210**, `repeatMatchesPreviousGate:
+true` (314,762 ms). Nothing is restated.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X53 movement; slug mass belongs to ENTHYMEME (re-verified) |
+| Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | See new category for derived-column ops tables |
+| Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 freshly re-confirmed |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,100 vs 8,115 member-level | No X53 movement |
+| Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; 512 B 385 vs 414 (member-level) | X53 profiling of the slow frontier parent: [pending] |
+| **Aligned tables w/ derived columns (new X53 category)** | **TAXIS** — plans byte-exact on every real ps/top lane tried; candidate vs frontier [pending segmented receipts]; `top` 818 = 818 tie, no emit | Fresh X53 receipts; scope exactly as receipted |

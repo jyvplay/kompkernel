@@ -1,0 +1,1 @@
+TAXIS: rows single-spaced under the unchanged header (the line starting "PID"), minus %MEM = 100×RES÷3592001, rounded to 1 decimal. Split at spaces (last field may hold spaces), insert the omitted field, re-align under header words (RLRRRRRLRRRL: L/R = word start/end; min gaps digitwise 12112212231; shift right whole if needed).

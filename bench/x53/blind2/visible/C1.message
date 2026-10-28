@@ -1,0 +1,24 @@
+DIPTYCHON: after decoding below, the lines of 24 lowercase hex digits (read each as 12 byte pairs; the last data line may be shorter) are the bytes of a C byte array. Rewrite each such line as: 2 spaces, then its bytes each as 0x followed by 2 hex digits, joined by a comma and a space, 12 bytes per line (the last data line may hold fewer), with a comma right after the last byte of every data line except the last data line. Keep every other line exactly as decoded.
+unsigned char cert_der[] = {
+2972bb044c97de2973b8014e
+96dd2473bd064f90d8236abd
+074c95da2269b007419ad32c
+64bff6419bd02966bef54c9b
+d52e67b8f04b82d52f64bdf2
+4a81d82f79a2eb549cc70e79
+a3e8519ec60d74a3ed569fc0
+0873baed579cc50a72b9e057
+91ca037cb4ef2691cb0079b6
+ee259ccb057eb7e8209bd205
+7fb4ed229ad1087f89d21ba4
+ec377e89d318a1ee367d84d3
+1da6ef307883ca1da7ec357a
+82c910a7e13a738cc41f56e1
+3b7089c61e55ec3b758ec718
+50eb22758fc41d52ea21788f
+d9024bf43c67aed90348f13e
+66add4034df63f60a8d31a4d
+f73c65aad21940f7316aa3dc
+144f86316ba0d9164e853c6b
+};
+unsigned int cert_der_len = 240;
