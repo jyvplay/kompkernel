@@ -565,10 +565,19 @@ function planForTable(text: string, table: ParsedTable, enc: EncodingName): Syll
     if (dupOf.some(Boolean)) return false; // duplicate of another column: owned by colM/R
     return true;
   };
+  // X52: charge each candidate its true rendered-clause cost. The X51
+  // estimate used placeholder refs (`field N`), undercounting the quoted
+  // target name and {name} source refs the contract actually prints; that
+  // let map-heavy lookups outrank cheaper relations on csv-5. Refs here
+  // mirror syllogismosContract's refOf up to the (unknown) final drop set:
+  // target-like refs are exact, source refs assume the source survives.
+  const estNamesOk = header.every(n => n.length > 0 && n.length <= 40 && !/[;"\n\r]/.test(n)) && new Set(header).size === header.length;
+  const estRefOf = (target: number) => (c: number): string =>
+    c === target ? `field ${c + 1} ${JSON.stringify(header[c]!)}` : estNamesOk ? `{${header[c]!}}` : `decoded field ${c + 1}`;
   const consider = (drop: SyllogismosDrop) => {
     if (work > MAX_WORK) return;
     if (verify(drop)) {
-      const estExtra = countTokens(describeDrop(drop, c => `field ${c + 1}`), enc);
+      const estExtra = countTokens(describeDrop(drop, estRefOf(drop.target)), enc);
       candidates.push({ drop, colTokens: colTokens[drop.target]!, estExtra });
     }
   };

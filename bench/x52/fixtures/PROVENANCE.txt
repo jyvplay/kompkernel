@@ -1,0 +1,1 @@
+provenance: od-*.txt = real GNU od on this sandbox over head -c N of /bin/ls or src/lib/omega/bpe.ts; xxd-*.txt and hdC-*.txt = python-emulated layouts (bench/x52/gen-dump-fixtures.py) since xxd/hexdump are absent here

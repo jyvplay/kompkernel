@@ -142,6 +142,7 @@ import { nestEncode } from './nest';
 import { kolumnEncode } from './kolumn';
 import { atxReleaseEncode } from './atx-release';
 import { syllogismosEncode } from './syllogismos';
+import { diptychonEncode } from './diptychon';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -634,6 +635,18 @@ export function codecEntries(): Entry[] {
         const r = atxReleaseEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rows=${r.rows}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'diptychon',
+      label: 'DIPTYCHON (δίπτυχον, two-panel tablet; X52: canonical hexdump re-rendering. A hexdump (od -t x1z, xxd, hexdump -C) prints every byte twice — as hex and as an ASCII panel — plus an offset that is just 16 times the line index. That frame is not repeated text (grammar codecs price each fresh gutter), not a vertical column law, and not a SYLLOGISMOS dependency between data fields: it is a second encoding of the same values under a fixed external convention, i.e. value-derived rather than position-derived like GRAMMA/KLADOS layout regeneration. DIPTYCHON infers the rendering parameters from the text (format, offset radix/width/base incl. od -A x/o/d/n, xxd grouping/case/decimal offsets/NUL autoskip, hexdump -C spacing, * squeeze lines, final offset line), extracts the bytes, verifies a byte-identical re-render of the whole input, and only then strips the frame: data lines become compact hex (space-separated pairs or one continuous hex string per line, whichever tokenizes cheaper), squeezed runs expand to repeated lines, other lines pass through verbatim, and the contract states the rendering once so a stock LLM re-renders the dump from one chat message. The reduced text is coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2 and APOGRAPHE; the complete candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source (both TAGSTACK runtime-parent members, so losing to either is decisive) and then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, or the measured best parent is returned. This is not a registry-wide tournament. Greedy/search: a small deterministic format-candidate set arbitrated by whole-input byte-exact re-rendering (a wrong guess can only refuse, never emit); compact form by direct token count; emission is a measured gate. Prior art: hexdump reversibility (xxd -r) is as old as the tools and "canonical hex+ASCII display" is util-linux terminology; no new compression primitive is claimed, only the verified one-chat LLM-re-renderable realization with a frontier gate, in a stack with no prior hexdump mechanism (grep xxd/hexdump/gutter = 0). Time/CPU: CPU-bound; planner is linear (caps 2,000,000 code units, 300,000 lines); inherited parent/frontier encodes dominate and have no wrapper-wide cap, so this entry is deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = diptychonEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; format=${r.format ?? '-'}; compact=${r.compact ?? '-'}; dataLines=${r.dataLines}; bytes=${r.totalBytes}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
       },
     },
     {

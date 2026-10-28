@@ -3946,3 +3946,54 @@ frontier statement stands unchanged. Receipt:
 
 These remain local leaders from their cited fixtures and comparator sets,
 not one fresh registry-wide tournament.
+
+## X52 — DIPTYCHON: ship one panel of the hexdump
+
+X52 took X51's cheapest open candidate (the byte-verified `od` gutter
+transform whose parents never finished) and shipped it as a codec class:
+**canonical dual-rendering elision**. A hexdump (`od -t x1z`, `xxd`,
+`hexdump -C`) prints every byte twice — hex panel + ASCII panel — plus
+an offset that is 16 × the line index. That frame is invisible to the
+stack for a new reason: it is not repetition (each gutter is fresh
+semi-random characters), not a vertical law, and not a dependency
+between data fields; it is a second encoding of the same values under a
+fixed external convention — value-derived, where GRAMMA/KLADIOS
+regeneration is position-derived. Grep before X52:
+`xxd`/`hexdump`/`gutter` = 0 hits in 281 modules. DIPTYCHON
+(`src/lib/omega/diptychon.ts`, key `diptychon`) infers the rendering
+parameters from the text, verifies a byte-identical re-render of the
+whole input (offsets in hex/octal/decimal or absent, `*` squeeze lines,
+xxd grouping/case/autoskip, final offset line), strips the frame to
+compact hex (continuous-per-line tokenizes 2.4× cheaper than spaced
+pairs: 6,953 vs 16,990 raw on 8 KiB), and composes under the strict
+TAGSTACK+SIBLING gate. Full report: `bench/x52/X52.md`.
+
+Measured (complete message, receipts in `bench/x52/receipts/`): real
+GNU `od` over 8 KiB of `/bin/ls`: candidate **3,014 vs AKOLOUTHIA-2
+5,401 (−2,387)**; 512 B dump **385 vs 414** (DAEDALUS/AKO2). Both are
+frontier-*member* level: APOGRAPHE exceeds 1,500 s on the 8 KiB lane
+and four full-frontier attempts (512 B–2 KiB, DET and live clocks) were
+stopped at 12–34 min — the frontier parents, not this codec, are the
+bottleneck on hex text. Red team 227/227 vs real `od` ground truth,
+independent Python decoder byte-exact, blind contract-only decodes 3/4
+exact on fresh samples (gutter dot-counting is the measured fragility).
+
+Also X52: SYLLOGISMOS candidate ranking now charges the true
+rendered-clause token cost (X51 used placeholder refs); red team 184/184
+re-run, Python 24/24. Corpus probes for symmetric matrices, totals rows,
+citation numbers, and unit parentheticals all returned zero — recorded
+in X52.md rather than built on synthetic-only evidence.
+
+### X52 frontier repeat and generalized local leaders
+
+The `metrics.tsv` frontier was rerun a third consecutive turn under the
+exact X49 configuration: **exactly 210**, `repeatMatchesPreviousGate:
+true` (329,597 ms). Nothing is restated.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X52 movement; candidate probes returned zero corpus hits |
+| Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | No X52 movement |
+| Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 freshly re-confirmed |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,100 vs 8,115 member-level | X52 selection-cost repair; plans unchanged |
+| **Hexdumps (new X52 category)** | **DIPTYCHON** od 8 KiB 3,014 vs 5,401; 512 B 385 vs 414 (member-level) | Fresh X52 receipts; scope exactly as receipted |

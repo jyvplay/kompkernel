@@ -1,0 +1,7 @@
+DIPTYCHON: after decoding below, the lines of 32 lowercase hex digits (read each as 16 byte pairs; the last data line may be shorter) are the bytes of an xxd dump. Rewrite each such line as: the byte offset in hex (16 times the data-line index from 0), zero-padded to 8 digits, a colon and a space, then the bytes in groups of 2 written as 4 hex digits separated by single spaces (pad a short last line with spaces so the text column aligns), two spaces, then one character per byte (the ASCII character itself when printable or a space, else a dot). Keep every other line exactly as decoded.
+6e04faad4afdde9b0a0ef3cd1f109749
+cec24e762a54b1da63e241b93b93da27
+c504ecc9839bfaf9ce1cf9cc1955a182
+17891a0ee61725eec6e3ef69f751205f
+68eaf68966b9eeaf9a9a9553c6522d27
+f7fa3c6df145106df820

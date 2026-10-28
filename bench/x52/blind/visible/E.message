@@ -1,0 +1,15 @@
+DIPTYCHON: after decoding below, the lines of 32 lowercase hex digits (read each as 16 byte pairs; the last data line may be shorter) are the bytes of an od dump. Rewrite each such line as: the byte offset in octal (16 times the data-line index from 0), zero-padded to 7 digits, then each byte preceded by a space as 2 hex digits, then spaces as if 16 bytes were present, two spaces, >, one character per byte (the ASCII character itself when printable or a space, else a dot), <. A full line whose bytes repeat the previous full line is not printed; the whole run of repeats is replaced by one line containing only *. Keep every other line exactly as decoded.
+f0a43237db41ed73dc4df93ba76d347b
+f2c0cd166be621c80749c58051f38ae7
+4b6b9b2b6421e4cc82213005392f2816
+410fd21e8b67e4d796db7b11d6a9d8f9
+7def56f31af9b680589da5fb7a764459
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+00000000000000000000000000000000
+6b84dcee9f8940d7d3a094c42f2e8522
+1729e1cc9f757e4584611bcaf76f8921
+8b3fbfb9b96d1a0bd121f0b33bc1ac52
+f3747eb9c404634b
+0000310

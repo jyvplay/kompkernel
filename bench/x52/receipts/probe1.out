@@ -1,0 +1,74 @@
+files 143
+SYMMETRIC MATRICES []
+TOTALS ROWS []
+CITATIONS []
+UNIT PARENTHETICALS []
+MD TABLES [
+ {
+  "f": "bench/z48/PR-BODY.md",
+  "tableLines": 16,
+  "tableTok": 447,
+  "ex": "| lane | DAEDALUS | ELLEIPSIS |"
+ },
+ {
+  "f": "bench/z48/REPORT.md",
+  "tableLines": 14,
+  "tableTok": 578,
+  "ex": "| shape | lines | removed | M before → after | per line | file |"
+ },
+ {
+  "f": "bench/z48/corpus/dpkg-l-2.txt",
+  "tableLines": 6,
+  "tableTok": 94,
+  "ex": "| Sequence | Trials | Faults |"
+ },
+ {
+  "f": "bench/z57/REPORT.md",
+  "tableLines": 34,
+  "tableTok": 1228,
+  "ex": "| lane | raw | DAEDALUS | DAEDALUS-D | A10 | DENDRON | DENS-2 | GRAMMA | AKOLOUT"
+ },
+ {
+  "f": "bench/z57/lanes/hybrid-codecs-spec.md",
+  "tableLines": 10,
+  "tableTok": 359,
+  "ex": "| Category | Lanes | Leader (M) | Note |"
+ },
+ {
+  "f": "bench/z57/lanes/hybrid-x10-report.md",
+  "tableLines": 9,
+  "tableTok": 202,
+  "ex": "| Lane | Frontier (min of DAEDALUS, DENS-2, GRAMMA, GNOMON, DENDRON, A10 where m"
+ },
+ {
+  "f": "bench/z57/lanes/prose-readme-2.md",
+  "tableLines": 62,
+  "tableTok": 1972,
+  "ex": "| **Option** | **Type** | **Default value** | **Description** |"
+ },
+ {
+  "f": "bench/z57/lanes/prose-readme-3.md",
+  "tableLines": 12,
+  "tableTok": 369,
+  "ex": "|                | Default              | `Hyphen`                   | `Fallback"
+ },
+ {
+  "f": "bench/z57/lanes/prose-readme-4.md",
+  "tableLines": 15,
+  "tableTok": 202,
+  "ex": "| Name      | Purpose                                         |"
+ },
+ {
+  "f": "bench/z44/REPORT-anamnesis.md",
+  "tableLines": 27,
+  "tableTok": 1046,
+  "ex": "| session | msgs | raw | ANAMNESIS | isolated | DAEDALUS/msg | vs raw | vs isola"
+ },
+ {
+  "f": "bench/z59/REPORT.md",
+  "tableLines": 15,
+  "tableTok": 459,
+  "ex": "| Check | Result | Artifact |"
+ }
+]
+CRLF-UNIFORM [{"f":"bench/holdout-tab/vix-daily-1990.csv","lines":128,"tok":3412},{"f":"bench/x20/receipts/selfdecode/sample-src.txt","lines":17,"tok":415}]

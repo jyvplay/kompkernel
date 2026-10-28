@@ -1,6 +1,6 @@
-# Codec abbreviations: decoded design spec (X13 base; X51 update)
+# Codec abbreviations: decoded design spec (X13 base; X52 update)
 
-This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 212 keys as of X51) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212). The companion page is `docs/codecs.md` (measurements and leaders).
+This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 213 keys as of X52) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213). The companion page is `docs/codecs.md` (measurements and leaders).
 
 Conventions:
 
@@ -2624,3 +2624,75 @@ decoding remains unverified.
   lines break the identity); `du -ak` parent sizes are the sum of listed
   children in only 2/62 cases in the (sorted, truncated) fixture;
   diff hunk-header counts are a 12-token ceiling.
+
+# X52 (2026-10-28) — DIPTYCHON: ship one panel of the hexdump
+
+## δίπτυχον DIPTYCHON (X52, `src/lib/omega/diptychon.ts`, registry key `diptychon`, exact, deep, shipped this turn)
+
+- **Name decoded.** Greek δίπτυχον, a two-panel folding tablet. A hexdump
+  line is exactly that: a hex panel and an ASCII panel (the gutter)
+  printing **the same bytes twice**, plus an offset that is 16 × the line
+  index. Technical translation: **canonical dual-rendering elision** —
+  ship one panel, state the rendering rule once, let the reader re-render
+  the frame.
+- **Mechanism (what is new in this stack).** Grep over all 281 modules:
+  `xxd` / `hexdump` / `gutter` = **0 hits** before X52. The nearest
+  relatives are GRAMMA (regenerates *layout*: JSON/code indentation from
+  structure) and KLADIOS (regenerates tree *connector glyphs* from a depth
+  sequence) — both position-derived. The gutter is **value-derived**: a
+  second encoding of the same values under a fixed external convention,
+  which is why grammar codecs cannot absorb it (each gutter is fresh
+  semi-random characters) and why it survived 51 turns. DIPTYCHON detects
+  three canonical renderings — `od -t x1z` (hex/octal/decimal/no offsets,
+  `*` squeezing), `xxd` (byte grouping, upper-case, decimal offsets,
+  NUL-line autoskip), `hexdump -C` — by inferring parameters from the
+  text, extracting the byte stream, and **verifying a byte-identical
+  re-render of the whole input** (offsets, spacing, gutter, squeeze
+  placement, final offset line). Only then is the frame stripped: data
+  lines become compact hex (space-separated pairs or one continuous hex
+  string per line — measured 16,990 vs 6,953 raw o200k tokens on an
+  8 KiB dump; the planner picks per input), squeezed runs expand to
+  repeated lines, other lines pass through, and the reduced text is
+  coded by the cheapest measured of DAEDALUS / AKOLOUTHIA-2 / APOGRAPHE.
+- **Gate (measured, frontier-scoped).** Identical construction to
+  SYLLOGISMOS: beat AKOLOUTHIA-2 and APOGRAPHE on the source (necessary
+  condition — both are TAGSTACK runtime-parent members), then the full
+  TAGSTACK + SIBLING-TEMPLATE frontier strictly with byte-exact decode,
+  else return the measured best parent.
+- **Greedy?** No. Format detection is a small deterministic candidate set
+  arbitrated by whole-input byte-exact re-rendering — a wrong parameter
+  guess can only refuse, never emit. Compact form is chosen by direct
+  token count. Emission is a measured gate.
+- **Honest source-article citation.** None — no paper stands behind this.
+  Hexdump reversibility is as old as the tools (`xxd -r` reverts a dump
+  to binary; "Canonical hex+ASCII display" is util-linux `hexdump -C`
+  terminology, man hexdump(1)). The claim is only the verified, one-chat,
+  LLM-re-renderable realization with a frontier gate, in a stack that had
+  no hexdump mechanism.
+- **Time- or CPU-bound?** CPU-bound. Planner is linear (caps 2,000,000
+  code units, 300,000 lines); inherited parent/frontier encodes dominate
+  with no wrapper-wide cap, so `deep: true`.
+- **Reader burden, measured not asserted.** Blind contract-only decodes
+  by this model: round 1 (4 fresh samples) 0/4 byte-exact — every
+  failure a gutter dot-count or one nibble-segmentation slip; round 2
+  (4 fresh samples, positional discipline) 3/4 byte-exact incl. octal
+  offsets and `*` squeeze reconstruction. The contract is sufficient;
+  counting dots in ASCII gutters is the known fragility. (Receipts:
+  `bench/x52/receipts/blind-decode.json`, `bench/x52/blind/`.)
+- **Measured (see `bench/x52/X52.md`).** Real `od` over 8 KiB of `/bin/ls`: candidate **3,014 vs AKOLOUTHIA-2
+  5,401 (−44%)** at frontier-member level; real 512 B dump: **385 vs
+  414** (DAEDALUS/AKO2 tie). The full TAGSTACK+SIBLING frontier has not
+  completed on any hexdump lane (APOGRAPHE alone exceeds 1,500 s on the
+  8 KiB dump; four frontier attempts stopped at 12–34 min) — so, as with
+  SYLLOGISMOS on airport, the codec's own gate currently gates it *off*
+  such lanes in practice until the frontier is affordable; the wins
+  above are necessary-condition evidence and are labelled that way.
+  Red team 227/227 against real GNU od ground truth; Python decoder
+  30/30 + lanes; blind decodes 3/4 byte-exact on fresh samples.
+- **Also this turn:** SYLLOGISMOS repair — candidate ranking now charges
+  the *true* rendered-clause token cost (real `{name}`/quoted refs) where
+  X51 used placeholder `field N` refs; red team re-run 184/184 (two
+  adversarial near-misses that previously scraped a plan now refuse;
+  check-count drift explained in X52.md), Python cross-decode 24/24
+  re-verified. The `metrics.tsv` frontier was re-run a third time:
+  **exactly 210**, unchanged.
