@@ -10,3 +10,12 @@
 {"parent":"diastema","error":"timeout-900s-or-fail"}
 == metron
 == metron
+== metron
+{"parent":"metron","error":"timeout-900s-or-fail"}
+== hemera
+{"parent":"hemera","lane":"bench/x52/fixtures/od-bin512.txt","chars":2407,"exact":true,"tokens":414,"ms":2860}
+== daedalus
+{"parent":"daedalus","lane":"bench/x52/fixtures/od-bin512.txt","chars":2407,"exact":true,"tokens":414,"ms":2678}
+== apographe
+{"parent":"apographe","error":"timeout-900s-or-fail"}
+PROFDONE

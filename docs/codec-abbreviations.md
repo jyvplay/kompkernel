@@ -1,6 +1,6 @@
 # Codec abbreviations: decoded design spec (X13 base; X52 update)
 
-This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 214 keys as of X53) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213); TAXIS is X53 (214). The companion page is `docs/codecs.md` (measurements and leaders).
+This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 215 keys as of X54) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213); TAXIS is X53 (214); ATHROISMOS is X54 (215). The companion page is `docs/codecs.md` (measurements and leaders).
 
 Conventions:
 

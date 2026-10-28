@@ -1,0 +1,3 @@
+{"lane":"bench/x54/fixtures/statement_A.csv","parent":"akolouthia2","side":"orig","tokens":3198,"ms":34402,"contractTok":122,"rawTok":7017}
+{"lane":"bench/x54/fixtures/statement_A.csv","parent":"akolouthia2","side":"reduced","tokens":2126,"ms":64942,"contractTok":122,"rawTok":7017}
+{"lane":"bench/x54/fixtures/statement_A.csv","parent":"apographe","side":"orig","tokens":2690,"ms":551027,"contractTok":122,"rawTok":7017}

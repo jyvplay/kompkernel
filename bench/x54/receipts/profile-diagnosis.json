@@ -1,0 +1,21 @@
+{
+  "task": "X52 task 5 / X53 next-task 3: which TAGSTACK runtime parent is pathological on hex text, and where inside it",
+  "lane": "bench/x52/fixtures/od-bin512.txt (2,407 chars, real GNU od of 512 bytes of /bin/ls)",
+  "entryPointResults": {
+    "synkrisis": ">900 s (timeout)",
+    "bifront": ">900 s (timeout)",
+    "diastema": ">900 s (timeout)",
+    "metron": ">900 s (timeout)",
+    "kanon": "3,231 ms (414 tokens, exact)",
+    "akolouthia2": "2,663 ms (414 tokens, exact)",
+    "hemera": "2,860 ms (414 tokens, exact)",
+    "daedalus": "2,678 ms (414 tokens, exact)",
+    "apographe": "not yet resolved at writing (still running niced)"
+  },
+  "conditions": "2-core sandbox, profile jobs niced -19 behind other benches; the four fast parents finished under the same contention, so the qualitative split is sound; absolute times for the slow four are lower bounds only.",
+  "insideSynkrisis": {
+    "finding": "SYNKRISIS's own candidate generators (wordCandidate over CANON anchors, repeatCandidate) are linear scans that cannot explain 900 s on 2.4 KB. Its floor call archetyponEncode is the sink: archetyponEncode alone on the same lane exceeded a 120 s timeout (niced).",
+    "nextStep": "node --cpu-prof on archetyponEncode/od-bin512 solo for ~60 s to name the hot loop; then a bounded guard (e.g. refuse the expensive arm on high-hex-density input) re-verified against the X51/X52/X53 leader lanes. Not done this turn: receipts only, no behavior change shipped."
+  },
+  "consequence": "Full TAGSTACK+SIBLING frontier measurement on hexdump lanes remains unaffordable; DIPTYCHON claims stay frontier-member-level, exactly as labelled since X52."
+}

@@ -4064,3 +4064,50 @@ true` (314,762 ms). Nothing is restated.
 | Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,100 vs 8,115 member-level | No X53 movement |
 | Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; 512 B 385 vs 414 (member-level); X53 adds plain-od/C-array renderings | Slow parents identified (SYNKRISIS/BIFRONT/DIASTEMA >900 s vs ~3 s); full-frontier hex gates still unaffordable |
 | **Aligned tables w/ derived columns (new X53 category)** | **TAXIS** ps-bigmem **1,816 < 1,926 full frontier**; ps-190 +8 member; `top` tie; thin lanes decline | Fresh X53 receipts; scope exactly as receipted |
+
+## X54 — ATHROISMOS: the column that is its own history
+
+X54 read APOGRAPHE's predictor union from source — {above, col, days,
+workdays, int, lin, clock} — and found the missing cell in the
+dependency grid: nothing in the stack can state
+`y_i = y_{i-1} + credit_i − debit_i`, a first-order recurrence *driven by
+other columns of the same row*. That is the balance column of every
+statement ever pasted into a chat for analysis, and its digits are
+fresh on every row. **ATHROISMOS** (`src/lib/omega/athroismos.ts`, key
+`athroismos`) fits one-driver and credit/debit-pair recurrences in
+exact BigInt decimal arithmetic (plain or German 1.234,56 rendering),
+states the starting value once, tolerates up to 3 exception rows whose
+printed values ship and re-anchor the chain, and has the reader
+re-integrate downwards. Full report: `bench/x54/X54.md`.
+
+Verification: headline lanes are real published statement fixtures
+fetched via the GitHub API with provenance (`bench/x54/fixtures/`): a
+241-row commercial statement whose own source repo documents one
+deliberate balance break (ATHROISMOS finds exactly it, as its single
+exception) and a German sample statement verified recurrence-exact
+over all 4,781 rows. Red team 111/111 incl. randomized sweep;
+independent Python decoder from the contract text byte-exact on both
+lanes; blind hand decodes byte-exact (40 rows of 7-digit running
+sums; 25 rows German format). Bench: [segmented receipts appended].
+
+Also X54: hex-parent profiling completed — SYNKRISIS, BIFRONT,
+DIASTEMA and METRON each exceed 900 s on a 512-byte `od` dump where
+KANON/AKOLOUTHIA-2/HEMERA/DAEDALUS take ~3 s; inside SYNKRISIS the
+sink is its `archetyponEncode` floor (>120 s alone). Repair scoped in
+X54.md, not shipped (needs its own regression matrix).
+
+### X54 frontier repeat and generalized local leaders
+
+The `metrics.tsv` frontier was rerun a fifth consecutive turn under
+the exact X49 configuration: **exactly 210**,
+`repeatMatchesPreviousGate: true` (346,536 ms). Nothing is restated.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X54 movement |
+| Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | No X54 movement |
+| Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 freshly re-confirmed |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,100 vs 8,115 member-level | Airport full gate: [pending queued run] |
+| Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | Pathology diagnosed to ARCHETYPON inside SYNKRISIS; repair scoped |
+| Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X54 movement |
+| **Statements / running totals (new X54 category)** | **ATHROISMOS** — [bench outcomes appended] | Fresh X54 receipts; scope exactly as receipted |

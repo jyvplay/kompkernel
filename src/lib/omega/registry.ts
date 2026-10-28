@@ -144,6 +144,7 @@ import { atxReleaseEncode } from './atx-release';
 import { syllogismosEncode } from './syllogismos';
 import { diptychonEncode } from './diptychon';
 import { taxisEncode } from './taxis';
+import { athroismosEncode } from './athroismos';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -660,6 +661,18 @@ export function codecEntries(): Entry[] {
         const r = taxisEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rules=${r.rules.length} [${r.rules.map(x => x.kind).join(',')}]; rows=${r.rows}; cols=${r.cols}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'athroismos',
+      label: 'ATHROISMOS (ἀθροισμός, a gathering/accumulation; X54: driven-recurrence column elision for delimited tables. Every table dependency in this stack is same-row (SYLLOGISMOS/TAXIS), above-only (APOGRAPHE above/int/days), index-based (METRON lin/clock), or a same-row copy (APOGRAPHE col) — APOGRAPHE\'s predictor union is the complete list. None can state a balance column: y_i = y_{i-1} + credit_i - debit_i, a first-order recurrence driven by other columns of the same row, whose digits are fresh every row. ATHROISMOS detects exact running accumulations — one signed driver or a credit/debit pair, a stated starting value, empty driver cells as 0, exact BigInt decimal arithmetic at the columns\' uniform scale, plain or German (1.234,56) rendering — allows up to 3 exception rows whose printed values ship in the contract and re-anchor the chain (real statement fixtures contain deliberate balance breaks), drops the column, and has the reader re-integrate it downwards. Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source (TAGSTACK runtime-parent members) and then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Reader caveat, measured not hidden: the reader carries state down the column, so an arithmetic slip changes digits silently (exceptions re-anchor); blind-decode receipts in bench/x54/. Greedy/search: exhaustive bounded discovery (targets × drivers × cum1±/cum2) with exact per-row verification and an exception budget; ranking charges the true rendered contract; whole-input restore arbitrates; single-drop v1; emission is the measured gate. Prior art: functional/order dependencies are database classics (survey: Kossmann et al., VLDB Journal 2022, DOI 10.1007/s00778-021-00676-3) and FD compressors are cited under SYLLOGISMOS; for driven-recurrence elision taught in-band to a stock LLM, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 40 columns, 60M cell evaluations; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = athroismosEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
       },
     },
     {
