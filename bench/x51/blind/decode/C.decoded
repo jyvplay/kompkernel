@@ -1,0 +1,15 @@
+code,city,lang,handle,gross,net,loss
+TRK-140,Uppsala,sv,trk-140@sv,177,133,44
+TRK-570,Lyon,fr,trk-570@fr,198,154,44
+TRK-423,Malmo,sv,trk-423@sv,893,821,72
+TRK-543,Lyon,fr,trk-543@fr,448,434,14
+TRK-225,Turin,it,trk-225@it,435,356,79
+TRK-237,Turin,it,trk-237@it,371,320,51
+TRK-471,Faro,pt,trk-471@pt,380,360,20
+TRK-226,Dijon,fr,trk-226@fr,610,558,52
+TRK-379,Malmo,sv,trk-379@sv,592,568,24
+TRK-517,Milan,it,trk-517@it,513,441,72
+TRK-571,Milan,it,trk-571@it,276,226,50
+TRK-309,Lyon,fr,trk-309@fr,909,887,22
+TRK-582,Turin,it,trk-582@it,448,366,82
+TRK-207,Porto,pt,trk-207@pt,636,569,67

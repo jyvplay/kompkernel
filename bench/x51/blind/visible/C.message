@@ -1,0 +1,16 @@
+SYLLOGISMOS: after decoding below, the result is a comma-separated table with a header row, missing computed fields. In each row, compute these from the decoded row and insert each so it becomes the numbered field (counting from 1 in the finished table), in listed order: field 3 "lang" = {handle} after last "@"; field 5 "gross" = {net} + {loss} (exact decimal). {name} means that field's value; "..." is literal text. In the header row insert the quoted names. Leave all else exactly as decoded.
+code,city,handle,net,loss
+TRK-140,Uppsala,trk-140@sv,133,44
+TRK-570,Lyon,trk-570@fr,154,44
+TRK-423,Malmo,trk-423@sv,821,72
+TRK-543,Lyon,trk-543@fr,434,14
+TRK-225,Turin,trk-225@it,356,79
+TRK-237,Turin,trk-237@it,320,51
+TRK-471,Faro,trk-471@pt,360,20
+TRK-226,Dijon,trk-226@fr,558,52
+TRK-379,Malmo,trk-379@sv,568,24
+TRK-517,Milan,trk-517@it,441,72
+TRK-571,Milan,trk-571@it,226,50
+TRK-309,Lyon,trk-309@fr,887,22
+TRK-582,Turin,trk-582@it,366,82
+TRK-207,Porto,trk-207@pt,569,67

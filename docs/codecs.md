@@ -3894,3 +3894,55 @@ These are local leaders from their cited fixtures and comparator sets, not one
 fresh cross-stack tournament. In particular, the older z57 OpenStack value
 (1,008) and later X44 value (898) are kept separate rather than averaged or
 combined. The detailed table and receipts are in `bench/x50/X50.md`.
+
+## X51 — SYLLOGISMOS: computed columns are premises, not payload
+
+X51 searched for a mechanism class the whole stack was blind to, and found
+one in the open: in real tables, whole columns are *computed from the row*
+(`COUTAX_FEMALEUNEMP = COUTAX × UNEMPF` on all 32 rows of a real employment
+CSV; `iso_country` = `iso_region` before its dash on all 300 airport rows).
+Grammar codecs price those as fresh digit strings; the vertical-law codecs
+model a column from itself, its header, or an identical sibling. None
+recomputes a field from other fields in its row (grep-verified over all 280
+modules). SYLLOGISMOS (`src/lib/omega/syllogismos.ts`, key `syllogismos`)
+verifies bounded functional dependencies on every row with BigInt-rational
+arithmetic and byte-identical CSV re-rendering, deletes the dependent
+columns, states each dependency once, and composes with the cheapest
+measured parent under the TAGSTACK+SIBLING frontier gate. The mechanism
+class is established prior art (SPARTAN, SQUISH, DeepSqueeze SIGMOD 2020,
+Blitzcrank VLDB 2024 — all bit-level); the new part is the exact,
+one-chat, LLM-readable realization. Full report: `bench/x51/X51.md`.
+
+Measured (complete message, receipts in `bench/x51/receipts/`): real
+`csv-3.csv` **673 < 678** against the full TAGSTACK+SIBLING frontier
+(strict win, −5, `OMEGA_DET=1`); real `airport-codes-300.csv` candidate
+**8,100 vs APOGRAPHE 8,115 / AKOLOUTHIA-2 8,172** (−15 vs both measured
+frontier members, DET unset; full frontier not measured — parents took
+412–462 s each); labelled-synthetic 160-row orders export candidate
+**837 vs 1,769 / 1,812** (−932 vs both members). Real `csv-5.csv`
+falls back (798 vs 381; probe4's earlier −21 there is retracted in
+`bench/x51/X51.md` — cyclic reduction). The measured lesson: categorical
+dependencies are already mostly owned by APOGRAPHE's dictionaries; the
+new headroom is arithmetic columns with fresh digits per row. Red team
+186/186, independent Python decoder byte-exact (incl. all 300 airport
+rows), three blind contract-only LLM decodes byte-exact.
+
+### X51 frontier repeat and generalized local leaders
+
+X51 reran the X49 `metrics.tsv` frontier configuration under its exact prior
+configuration (Node v22.22.3, `o200k_base`, `OMEGA_DET` unset, fixture
+SHA-256 `b367e8d7…f1ac70`, 811 raw tokens): it still measures **210**
+exactly, with TAGSTACK 210 and SIBLING-TEMPLATE 210, so the previous
+frontier statement stands unchanged. Receipt:
+`bench/x51/receipts/frontier-repeat-x51.json`.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General English prose / KB / email / meeting | X45 frontier values 622/674/488/385/671; DAEDALUS-D small z57 margins | **No X51 movement** — stated plainly, a prose breakthrough is not claimed |
+| Ops tables (z57 suite) | AKOLOUTHIA-2: df-h 171, psql 355, kubectl 326; KANNABOS/METRON specialists | No X51 movement; whitespace-aligned entailment measured and kept out of scope |
+| Delimited tables | APOGRAPHE AAPL 1,151 / VIX 409; KOLUMN metrics 209 vs the fresh 210 | Historical except the fresh 210 repeat |
+| **Delimited tables with computed columns (new X51 category)** | **SYLLOGISMOS** csv-3 673 < 678 (full frontier); airport 8,100 vs 8,115 best member; synthetic orders 837 vs 1,769 | Fresh X51 complete-message gates; scope exactly as receipted |
+| Dated listings / canonical notices / markup | DIASTEMA 1,140; ARCHETYPON 38; TAGSTACK pom.xml 240 | Historical, separate suites |
+
+These remain local leaders from their cited fixtures and comparator sets,
+not one fresh registry-wide tournament.

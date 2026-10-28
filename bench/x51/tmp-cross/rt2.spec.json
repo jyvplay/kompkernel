@@ -1,0 +1,1 @@
+{"delimiter":";","cols":5,"header":["part","whole","pct","level","delta"],"headerRaw":["part","whole","pct","level","delta"],"drops":[{"target":2,"name":"pct","kind":"arith","op":"pct","a":0,"b":1,"scale":2,"mode":"half-up"},{"target":4,"name":"delta","kind":"shiftdiff","a":3,"scale":-1,"mode":"exact","first":"0"}]}

@@ -1,0 +1,229 @@
+{
+  "lane": "bench/z11/fresh/csv-5.csv",
+  "sha256": "205e43507c635a8c8a5aa33858533a6d379868784fd15c1c22f22d59a63e0e88",
+  "chars": 2920,
+  "rawTokens": 1594,
+  "encoding": "o200k_base",
+  "node": "v22.22.3",
+  "OMEGA_DET": "1",
+  "totalMs": 333536,
+  "exact": true,
+  "exactUtf8": true,
+  "applied": false,
+  "messageTokens": 381,
+  "parentTokens": 381,
+  "parentCodec": "akolouthia2",
+  "parentCosts": {
+    "akolouthia2": 381,
+    "apographe": 420
+  },
+  "precheckParentTokens": 381,
+  "fullFrontierMeasured": false,
+  "candidateTokens": 798,
+  "candidateExact": true,
+  "candidateParentCodec": "akolouthia2",
+  "candidateParentCosts": {
+    "daedalus": 346,
+    "akolouthia2": 218,
+    "apographe": 255
+  },
+  "drops": [
+    {
+      "target": 2,
+      "name": "gender",
+      "kind": "lookup",
+      "a": 6,
+      "entries": [
+        [
+          "id_1",
+          "M"
+        ],
+        [
+          "id_2",
+          "M"
+        ],
+        [
+          "id_4",
+          "M"
+        ],
+        [
+          "id_5",
+          "M"
+        ],
+        [
+          "id_11",
+          "M"
+        ]
+      ],
+      "defaultValue": "F"
+    },
+    {
+      "target": 3,
+      "name": "age",
+      "kind": "lookup",
+      "a": 6,
+      "entries": [
+        [
+          "id_1",
+          "52.632"
+        ],
+        [
+          "id_2",
+          "64.679"
+        ],
+        [
+          "id_3",
+          "55.299"
+        ],
+        [
+          "id_4",
+          "56.019"
+        ],
+        [
+          "id_5",
+          "62.021"
+        ],
+        [
+          "id_6",
+          "52.298"
+        ],
+        [
+          "id_7",
+          "39.71"
+        ],
+        [
+          "id_8",
+          "57.492"
+        ],
+        [
+          "id_9",
+          "57.623999999999995"
+        ],
+        [
+          "id_10",
+          "40.486999999999995"
+        ],
+        [
+          "id_11",
+          "53.662"
+        ]
+      ],
+      "defaultValue": "58.231"
+    },
+    {
+      "target": 4,
+      "name": "Basename",
+      "kind": "lookup",
+      "a": 6,
+      "entries": [
+        [
+          "id_1",
+          "6042324088_R06C01"
+        ],
+        [
+          "id_2",
+          "6042324088_R01C01"
+        ],
+        [
+          "id_3",
+          "6042324088_R04C02"
+        ],
+        [
+          "id_4",
+          "6042324088_R02C01"
+        ],
+        [
+          "id_5",
+          "6042324088_R01C02"
+        ],
+        [
+          "id_6",
+          "6042324088_R06C02"
+        ],
+        [
+          "id_7",
+          "6042324088_R03C01"
+        ],
+        [
+          "id_8",
+          "6042324088_R05C02"
+        ],
+        [
+          "id_9",
+          "6042324088_R05C01"
+        ],
+        [
+          "id_10",
+          "6042324088_R03C02"
+        ],
+        [
+          "id_11",
+          "6042324088_R02C02"
+        ]
+      ],
+      "defaultValue": "6042324088_R04C01"
+    },
+    {
+      "target": 5,
+      "name": "ID",
+      "kind": "lookup",
+      "a": 6,
+      "entries": [
+        [
+          "id_1",
+          "age52.632_M"
+        ],
+        [
+          "id_2",
+          "age64.679_M"
+        ],
+        [
+          "id_3",
+          "age55.299_F"
+        ],
+        [
+          "id_4",
+          "age56.019_M"
+        ],
+        [
+          "id_5",
+          "age62.021_M"
+        ],
+        [
+          "id_6",
+          "age52.298_F"
+        ],
+        [
+          "id_7",
+          "age39.71_F"
+        ],
+        [
+          "id_8",
+          "age57.492_F"
+        ],
+        [
+          "id_9",
+          "age57.624_F"
+        ],
+        [
+          "id_10",
+          "age40.487_F"
+        ],
+        [
+          "id_11",
+          "age53.662_M"
+        ]
+      ],
+      "defaultValue": "age58.231_F"
+    }
+  ],
+  "dropDescriptions": [
+    "field 3 \"gender\" by decoded field 3: default \"F\"; \"id_1\"=\"M\" \"id_2\"=\"M\" \"id_4\"=\"M\" \"id_5\"=\"M\" \"id_11\"=\"M\"",
+    "field 4 \"age\" by decoded field 3: default \"58.231\"; \"id_1\"=\"52.632\" \"id_2\"=\"64.679\" \"id_3\"=\"55.299\" \"id_4\"=\"56.019\" \"id_5\"=\"62.021\" \"id_6\"=\"52.298\" \"id_7\"=\"39.71\" \"id_8\"=\"57.492\" \"id_9\"=\"57.623999999999995\" \"id_10\"=\"40.486999999999995\" \"id_11\"=\"53.662\"",
+    "field 5 \"Basename\" by decoded field 3: default \"6042324088_R04C01\"; \"id_1\"=\"6042324088_R06C01\" \"id_2\"=\"6042324088_R01C01\" \"id_3\"=\"6042324088_R04C02\" \"id_4\"=\"6042324088_R02C01\" \"id_5\"=\"6042324088_R01C02\" \"id_6\"=\"6042324088_R06C02\" \"id_7\"=\"6042324088_R03C01\" \"id_8\"=\"6042324088_R05C02\" \"id_9\"=\"6042324088_R05C01\" \"id_10\"=\"6042324088_R03C02\" \"id_11\"=\"6042324088_R02C02\"",
+    "field 6 \"ID\" by decoded field 3: default \"age58.231_F\"; \"id_1\"=\"age52.632_M\" \"id_2\"=\"age64.679_M\" \"id_3\"=\"age55.299_F\" \"id_4\"=\"age56.019_M\" \"id_5\"=\"age62.021_M\" \"id_6\"=\"age52.298_F\" \"id_7\"=\"age39.71_F\" \"id_8\"=\"age57.492_F\" \"id_9\"=\"age57.624_F\" \"id_10\"=\"age40.487_F\" \"id_11\"=\"age53.662_M\""
+  ],
+  "comparison": "AKOLOUTHIA-2/APOGRAPHE necessary-condition rejection; full TAGSTACK/SIBLING tournament safely skipped",
+  "notes": "candidate M=798 >= measured frontier member M=381 (akolouthia2); it therefore cannot be below a frontier that includes that member",
+  "ms": 333535
+}

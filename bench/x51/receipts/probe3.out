@@ -1,0 +1,107 @@
+== FD HITS (kind!=dup shown; dup counted separately) ==
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":1,"target":"OPEN","rel":"upper(HIGH)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":1,"target":"OPEN","rel":"lower(HIGH)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":1,"target":"OPEN","rel":"upper(LOW)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":1,"target":"OPEN","rel":"lower(LOW)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":1,"target":"OPEN","rel":"upper(CLOSE)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":1,"target":"OPEN","rel":"lower(CLOSE)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":2,"target":"HIGH","rel":"upper(OPEN)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":2,"target":"HIGH","rel":"lower(OPEN)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":2,"target":"HIGH","rel":"upper(LOW)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":2,"target":"HIGH","rel":"lower(LOW)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":2,"target":"HIGH","rel":"upper(CLOSE)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":2,"target":"HIGH","rel":"lower(CLOSE)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":3,"target":"LOW","rel":"upper(OPEN)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":3,"target":"LOW","rel":"lower(OPEN)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":3,"target":"LOW","rel":"upper(HIGH)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":3,"target":"LOW","rel":"lower(HIGH)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":3,"target":"LOW","rel":"upper(CLOSE)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":3,"target":"LOW","rel":"lower(CLOSE)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":4,"target":"CLOSE","rel":"upper(OPEN)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":4,"target":"CLOSE","rel":"lower(OPEN)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":4,"target":"CLOSE","rel":"upper(HIGH)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":4,"target":"CLOSE","rel":"lower(HIGH)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":4,"target":"CLOSE","rel":"upper(LOW)","colTok":630,"kind":"string"}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"targetIdx":4,"target":"CLOSE","rel":"lower(LOW)","colTok":630,"kind":"string"}
+{"file":"prices.csv","delim":",","rows":30,"targetIdx":0,"target":"sku","rel":"lookup(asof) mapSize=28 mapTok~334","colTok":120,"kind":"lookup"}
+{"file":"csv-2.csv","delim":",","rows":19,"targetIdx":0,"target":"1.00000000","rel":"lookup(0.49898551) mapSize=4 mapTok~50","colTok":114,"kind":"lookup"}
+{"file":"csv-2.csv","delim":",","rows":19,"targetIdx":1,"target":"1.00000000","rel":"lookup(NaN) mapSize=17 mapTok~215","colTok":114,"kind":"lookup"}
+{"file":"csv-2.csv","delim":",","rows":19,"targetIdx":1,"target":"1.00000000","rel":"lookup(NaN) mapSize=17 mapTok~215","colTok":114,"kind":"lookup"}
+{"file":"csv-2.csv","delim":",","rows":19,"targetIdx":2,"target":"NaN","rel":"lookup(NaN) mapSize=17 mapTok~212","colTok":105,"kind":"lookup"}
+{"file":"csv-2.csv","delim":",","rows":19,"targetIdx":3,"target":"NaN","rel":"lookup(NaN) mapSize=17 mapTok~212","colTok":105,"kind":"lookup"}
+{"file":"csv-2.csv","delim":",","rows":19,"targetIdx":3,"target":"NaN","rel":"lookup(NaN) mapSize=17 mapTok~212","colTok":105,"kind":"lookup"}
+{"file":"csv-2.csv","delim":",","rows":19,"targetIdx":4,"target":"NaN","rel":"lookup(NaN) mapSize=17 mapTok~212","colTok":105,"kind":"lookup"}
+{"file":"csv-2.csv","delim":",","rows":19,"targetIdx":6,"target":"0.49898551","rel":"lookup(1.00000000) mapSize=4 mapTok~50","colTok":114,"kind":"lookup"}
+{"file":"csv-3.csv","delim":",","rows":32,"targetIdx":2,"target":"COUTAX","rel":"COUTAX_FEMALEUNEMP/UNEMPF[half-up]","colTok":64,"kind":"arith"}
+{"file":"csv-3.csv","delim":",","rows":32,"targetIdx":2,"target":"COUTAX","rel":"COUTAX_FEMALEUNEMP/UNEMPF[trunc]","colTok":64,"kind":"arith"}
+{"file":"csv-3.csv","delim":",","rows":32,"targetIdx":2,"target":"COUTAX","rel":"COUTAX_FEMALEUNEMP/UNEMPF[ceil]","colTok":64,"kind":"arith"}
+{"file":"csv-3.csv","delim":",","rows":32,"targetIdx":3,"target":"UNEMPF","rel":"COUTAX_FEMALEUNEMP/COUTAX[half-up]","colTok":120,"kind":"arith"}
+{"file":"csv-3.csv","delim":",","rows":32,"targetIdx":3,"target":"UNEMPF","rel":"COUTAX_FEMALEUNEMP/COUTAX[trunc]","colTok":120,"kind":"arith"}
+{"file":"csv-3.csv","delim":",","rows":32,"targetIdx":3,"target":"UNEMPF","rel":"COUTAX_FEMALEUNEMP/COUTAX[ceil]","colTok":120,"kind":"arith"}
+{"file":"csv-3.csv","delim":",","rows":32,"targetIdx":8,"target":"COUTAX_FEMALEUNEMP","rel":"COUTAX*UNEMPF","colTok":142,"kind":"arith"}
+{"file":"csv-3.csv","delim":",","rows":32,"targetIdx":8,"target":"COUTAX_FEMALEUNEMP","rel":"UNEMPF*COUTAX","colTok":142,"kind":"arith"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":0,"target":"","rel":"upper(Unnamed: 0)","colTok":72,"kind":"string"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":0,"target":"","rel":"lower(Unnamed: 0)","colTok":72,"kind":"string"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":1,"target":"Unnamed: 0","rel":"upper()","colTok":72,"kind":"string"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":1,"target":"Unnamed: 0","rel":"lower()","colTok":72,"kind":"string"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":2,"target":"gender","rel":"ID after last \"_\"","colTok":72,"kind":"string"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":2,"target":"gender","rel":"lookup(age) mapSize=12 mapTok~85","colTok":72,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":2,"target":"gender","rel":"lookup(Basename) mapSize=12 mapTok~137","colTok":72,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":2,"target":"gender","rel":"lookup(ID) mapSize=12 mapTok~90","colTok":72,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":2,"target":"gender","rel":"lookup(id) mapSize=12 mapTok~66","colTok":72,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":2,"target":"gender","rel":"lookup(methylation) mapSize=33 mapTok~281","colTok":72,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":3,"target":"age","rel":"lookup(Basename) mapSize=12 mapTok~174","colTok":168,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":3,"target":"age","rel":"lookup(ID) mapSize=12 mapTok~127","colTok":168,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":3,"target":"age","rel":"lookup(id) mapSize=12 mapTok~103","colTok":168,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":4,"target":"Basename","rel":"lookup(age) mapSize=12 mapTok~174","colTok":324,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":4,"target":"Basename","rel":"lookup(ID) mapSize=12 mapTok~179","colTok":324,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":4,"target":"Basename","rel":"lookup(id) mapSize=12 mapTok~155","colTok":324,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":5,"target":"ID","rel":"lookup(age) mapSize=12 mapTok~138","colTok":216,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":5,"target":"ID","rel":"lookup(Basename) mapSize=12 mapTok~190","colTok":216,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":5,"target":"ID","rel":"lookup(id) mapSize=12 mapTok~119","colTok":216,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":6,"target":"id","rel":"lookup(age) mapSize=12 mapTok~102","colTok":144,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":6,"target":"id","rel":"lookup(Basename) mapSize=12 mapTok~154","colTok":144,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":6,"target":"id","rel":"lookup(ID) mapSize=12 mapTok~107","colTok":144,"kind":"lookup"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":7,"target":"plate","rel":"Basename before first \"_\"","colTok":180,"kind":"string"}
+{"file":"csv-5.csv","delim":",","rows":36,"targetIdx":8,"target":"CpG","rel":"lookup(methylation) mapSize=33 mapTok~393","colTok":180,"kind":"lookup"}
+{"file":"airport-codes-300.csv","delim":",","rows":300,"targetIdx":5,"target":"iso_country","rel":"iso_region before first \"-\"","colTok":600,"kind":"string"}
+{"file":"airport-codes-300.csv","delim":",","rows":300,"targetIdx":9,"target":"iata_code","rel":"lookup(iso_country) mapSize=3 mapTok~10","colTok":302,"kind":"lookup"}
+{"file":"fx-4dp.csv","delim":",","rows":480,"targetIdx":2,"target":"open","rel":"upper(close)","colTok":2400,"kind":"string"}
+{"file":"fx-4dp.csv","delim":",","rows":480,"targetIdx":2,"target":"open","rel":"lower(close)","colTok":2400,"kind":"string"}
+{"file":"fx-4dp.csv","delim":",","rows":480,"targetIdx":5,"target":"close","rel":"upper(open)","colTok":2400,"kind":"string"}
+{"file":"fx-4dp.csv","delim":",","rows":480,"targetIdx":5,"target":"close","rel":"lower(open)","colTok":2400,"kind":"string"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"versicolor before first \".\"","colTok":20,"kind":"string"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"150*K(0/51)[half-up]","colTok":20,"kind":"fittedK"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"150*K(0/51)[trunc]","colTok":20,"kind":"fittedK"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"4*K(0/35)[half-up]","colTok":20,"kind":"fittedK"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"4*K(0/35)[trunc]","colTok":20,"kind":"fittedK"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"4/150[trunc]","colTok":20,"kind":"arith"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"setosa[i]-setosa[i-1]","colTok":20,"kind":"shift"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"setosa*K(0/14)[half-up]","colTok":20,"kind":"fittedK"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"setosa*K(0/14)[trunc]","colTok":20,"kind":"fittedK"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"setosa/150[half-up]","colTok":20,"kind":"arith"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"setosa/150[trunc]","colTok":20,"kind":"arith"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"setosa/4[half-up]","colTok":20,"kind":"arith"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"setosa/4[trunc]","colTok":20,"kind":"arith"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"versicolor[i]-versicolor[i-1]","colTok":20,"kind":"shift"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"versicolor*K(0/2)[half-up]","colTok":20,"kind":"fittedK"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"versicolor*K(0/2)[trunc]","colTok":20,"kind":"fittedK"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"versicolor/150[half-up]","colTok":20,"kind":"arith"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"versicolor/150[trunc]","colTok":20,"kind":"arith"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"versicolor/4[half-up]","colTok":20,"kind":"arith"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"versicolor/4[trunc]","colTok":20,"kind":"arith"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"versicolor/setosa[half-up]","colTok":20,"kind":"arith"}
+{"file":"table_1.csv","delim":",","rows":10,"targetIdx":4,"target":"virginica","rel":"versicolor/setosa[trunc]","colTok":20,"kind":"arith"}
+dup hits=16 nonDup=93
+== MEASURED DELETION ==
+{"file":"fx-4dp.csv","target":"open","rel":"upper(close)","kind":"string","baseMinParent":5038,"candPlusContract":4211,"delta":-827}
+{"file":"fx-4dp.csv","target":"open","rel":"lower(close)","kind":"string","baseMinParent":5038,"candPlusContract":4211,"delta":-827}
+{"file":"fx-4dp.csv","target":"close","rel":"upper(open)","kind":"string","baseMinParent":5038,"candPlusContract":4223,"delta":-815}
+{"file":"fx-4dp.csv","target":"close","rel":"lower(open)","kind":"string","baseMinParent":5038,"candPlusContract":4223,"delta":-815}
+{"file":"vix-daily-1990.csv","target":"OPEN","rel":"upper(HIGH)","kind":"string","baseMinParent":1369,"candPlusContract":1148,"delta":-221}
+{"file":"vix-daily-1990.csv","target":"OPEN","rel":"lower(HIGH)","kind":"string","baseMinParent":1369,"candPlusContract":1148,"delta":-221}
+{"file":"vix-daily-1990.csv","target":"OPEN","rel":"upper(LOW)","kind":"string","baseMinParent":1369,"candPlusContract":1148,"delta":-221}
+{"file":"vix-daily-1990.csv","target":"OPEN","rel":"lower(LOW)","kind":"string","baseMinParent":1369,"candPlusContract":1148,"delta":-221}
+{"file":"vix-daily-1990.csv","target":"OPEN","rel":"upper(CLOSE)","kind":"string","baseMinParent":1369,"candPlusContract":1148,"delta":-221}
+{"file":"vix-daily-1990.csv","target":"OPEN","rel":"lower(CLOSE)","kind":"string","baseMinParent":1369,"candPlusContract":1148,"delta":-221}
+DONE

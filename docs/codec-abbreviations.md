@@ -1,6 +1,6 @@
-# Codec abbreviations: decoded design spec (X13 base; X46 update)
+# Codec abbreviations: decoded design spec (X13 base; X51 update)
 
-This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 209 keys as of X46) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys). The companion page is `docs/codecs.md` (measurements and leaders).
+This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 212 keys as of X51) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212). The companion page is `docs/codecs.md` (measurements and leaders).
 
 Conventions:
 
@@ -2519,3 +2519,108 @@ preprocessing, not evidence for this exact byte-perfect one-chat transform.
 uses a separate `verbatim` store for lossless restoration, outside this
 one-message constraint. No compression-theory novelty is claimed. Native LLM
 decoding remains unverified.
+
+# X51 (2026-10-28) — SYLLOGISMOS: computed columns are premises, not payload
+
+## συλλογισμός SYLLOGISMOS (X51, `src/lib/omega/syllogismos.ts`, registry key `syllogismos`, exact, deep, shipped this turn)
+
+- **Name decoded.** Greek συλλογισμός, "a reckoning together, an inference":
+  the decoder *infers* each removed field from premises (the surviving
+  fields) instead of receiving it. Technical translation: **verified
+  functional-dependency (FD) column elision for delimited tables**.
+- **Mechanism (what is new in this stack).** Everything before X51 removes
+  redundancy that is textual repetition (grammar rules), a vertical law in
+  one column (AKOLOUTHIA-2, METRON, KOLUMN descriptors, APOGRAPHE
+  `above`/`days`/`+b`), or an identical sibling (APOGRAPHE `colM`, KOLUMN
+  `R`). No codec removed a column whose values are *computed across the
+  row* — `COUTAX_FEMALEUNEMP = COUTAX × UNEMPF`, an ID assembled as
+  `"age" + age + "_" + gender`, an `iso_country` that is `iso_region`
+  before its dash. To a grammar those are fresh digit strings each row,
+  because the redundancy is arithmetic/functional, not substring-shaped.
+  SYLLOGISMOS enumerates a bounded FD family over the fields of a
+  delimited table, verifies each candidate on **every row** with exact
+  BigInt-rational decimal arithmetic **and** byte-identical CSV rendering
+  (scale, gratuitous quoting, and header bytes all checked), deletes the
+  columns it can recompute, states each dependency once in an in-band
+  contract, and hands the reduced table to the cheapest measured of
+  DAEDALUS / AKOLOUTHIA-2 / APOGRAPHE. Relation kinds: `arith`
+  (A+B, A−B, A*B, A/B, 100·A/B; rendered exact-minimal, or at the
+  target's constant scale with rounding mode in {half-up, trunc, ceil});
+  `scaleK` (A*K for a fitted rational K with a short rendering);
+  `concat` (constants + up to two fields); `split` (one part of a split);
+  `case`; `lookup` (finite map, shipped in the contract, with a
+  majority-default-plus-exceptions rendering when shorter); `shiftdiff`
+  (A_i − A_{i−1}); `fwdeq` (A_{i+1}). **Constant and duplicate columns are
+  deliberately excluded** — APOGRAPHE/KOLUMN own them, and a candidate
+  whose computed values are constant or identical to another column is
+  rejected in verification.
+- **Gate (measured, frontier-scoped).** The complete candidate (contract
+  + best parent message on the reduced table) must first beat both
+  AKOLOUTHIA-2 and APOGRAPHE on the original — both are members of the X49
+  TAGSTACK runtime-parent set, so losing to either proves it cannot beat
+  that frontier — and then the full TAGSTACK + SIBLING-TEMPLATE frontier,
+  strictly, with byte-exact decode. Any failure returns the measured best
+  parent; nothing is emitted on raw-wire estimates.
+- **Greedy?** The per-column relation enumeration is exhaustive within its
+  bounded family and fully verified (not greedy). The *drop-set selection*
+  is greedy: candidates are ranked by isolated column token mass minus
+  contract-fragment cost, accepted subject to an acyclicity rule (a dropped
+  column is never a source; a used source is never dropped), so inverse
+  relations compete by mass — e.g. it may drop `unit = amount / qty`
+  instead of `amount = qty * unit` when the `unit` column is heavier.
+  No joint-optimality claim. Emission is a measured gate, not a search.
+- **Honest source-article citation.** The mechanism class is **not new in
+  the literature**. Exploiting dependencies between columns is the core of
+  semantic/model-based lossless tabular compression: SPARTAN (model-based
+  semantic compression of tables), SQUISH (Bayesian networks + arithmetic
+  coding for relational data), "column dependency" formalized in
+  *Theoretical Computer Science* 387 (2007) 273–283, DeepSqueeze
+  (SIGMOD 2020, doi:10.1145/3318464.3389734), and Blitzcrank (VLDB 2024),
+  all found in this turn's searches and all bit-level systems using
+  arithmetic coding / learned probability models. What is new here is only
+  the repository realization: exact *textual* rendering (decimal scales,
+  rounding modes, CSV quoting), a one-chat LLM-readable contract with no
+  side model, and the measured frontier gate. SQL's generated/computed
+  columns and spreadsheet formulas are the everyday cousins of the same
+  idea.
+- **Time- or CPU-bound?** CPU-bound. The planner is bounded (100,000
+  UTF-16 code units, 10,000 data rows, 32 columns, ≤8 drops, a
+  30,000,000 cell-evaluation work cap, BigInt exact arithmetic). The
+  inherited parent encodes and TAGSTACK frontier gate dominate wall time
+  and have no wrapper-wide cap, so the registry entry is `deep: true`.
+- **Verified reader burden, by kind.** `split`/`case`/`concat`/`lookup`
+  are string operations an LLM performs by inspection; `arith` asks for
+  one exact decimal operation per row (worst usual case: a 3-digit ×
+  2-digit product or one division); `scaleK` is admitted only when K
+  renders short (≤10-char decimal or ≤12-char fraction). A fitted-percent
+  relation of the form `%MEM = trunc1dp(RSS × 100 / 4033536)` was measured
+  exact on 59/59 rows of a real `ps aux` capture this turn but is **out of
+  scope**: whitespace-aligned tables have no clean field-deletion byte
+  model here and the 7-digit division is beyond the reader-arithmetic
+  this codec is willing to demand.
+- **Measured (see `bench/x51/X51.md` for receipts).** Real `csv-3.csv` (employment data, 32 rows): **673 vs the measured
+  TAGSTACK+SIBLING frontier 678** — a strict full-gate win, margin −5
+  (the ~90-token contract floor dominates at this size; two wordier
+  contract drafts lost the same lane at 724 and 703). Real
+  `airport-codes-300.csv`: candidate 8,100 vs best measured frontier
+  member APOGRAPHE 8,115 (−15, member-level; full frontier not measured
+  — single parent encodes took 412–462 s). Synthetic, labelled as such
+  (`bench/x51/fixtures/orders-synthetic-160.csv`, 160 order lines with
+  `total = qty × unit`, a split, and a concatenated reference):
+  candidate 837 vs AKOLOUTHIA-2 1,769 / APOGRAPHE 1,812 (−932,
+  member-level) — the scale economics of arithmetic columns, whose
+  digits no vertical law can predict. Real `csv-5.csv` correctly falls
+  back (candidate 798 vs 381; its cheapest-looking reduction is cyclic
+  and refused). Red team 186/186; independent CPython decoder 24/24
+  red-team cases + the 300-row airport lane byte-exact; three blind
+  native LLM decodes (this model, contract-only) byte-exact.
+- **Negative results from the same turn's probe portfolio** (all measured
+  through DAEDALUS, `OMEGA_DET=1`, in `bench/x51/receipts/probe*.out`):
+  SemVer / IPv4 mixed-radix or zero-padded packing loses on 9/9 lanes
+  (+22…+67 after contract: DAEDALUS already prices a distinct version at
+  the packed cost); disemvoweling inflates prose (+150…+2,948 raw tokens);
+  `git log --stat` summary lines are **not** reliably the sums of the
+  visible per-file counts (3/10 blocks in the fixture; binary/rename
+  lines break the identity); `du -ak` parent sizes are the sum of listed
+  children in only 2/62 cases in the (sorted, truncated) fixture;
+  diff hunk-header counts are a 12-token ceiling.

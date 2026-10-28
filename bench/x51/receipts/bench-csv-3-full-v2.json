@@ -1,0 +1,48 @@
+{
+  "lane": "bench/z11/fresh/csv-3.csv",
+  "sha256": "2ace8b9e4970f8a7d0424a70076d63e6e1c3d65259e6e424f88642fdd6a24727",
+  "chars": 1890,
+  "rawTokens": 1093,
+  "encoding": "o200k_base",
+  "node": "v22.22.3",
+  "OMEGA_DET": "1",
+  "totalMs": 107177,
+  "exact": true,
+  "exactUtf8": true,
+  "applied": false,
+  "messageTokens": 678,
+  "parentTokens": 678,
+  "parentCodec": "apographe",
+  "parentCosts": {
+    "akolouthia2": 774,
+    "apographe": 678
+  },
+  "precheckParentTokens": 678,
+  "fullFrontierMeasured": false,
+  "candidateTokens": 703,
+  "candidateExact": true,
+  "candidateParentCodec": "apographe",
+  "candidateParentCosts": {
+    "daedalus": 685,
+    "akolouthia2": 685,
+    "apographe": 583
+  },
+  "drops": [
+    {
+      "target": 8,
+      "name": "COUTAX_FEMALEUNEMP",
+      "kind": "arith",
+      "op": "*",
+      "a": 2,
+      "b": 3,
+      "scale": -1,
+      "mode": "exact"
+    }
+  ],
+  "dropDescriptions": [
+    "field 9 \"COUTAX_FEMALEUNEMP\" = {COUTAX} * {UNEMPF} (exact decimal)"
+  ],
+  "comparison": "AKOLOUTHIA-2/APOGRAPHE necessary-condition rejection; full TAGSTACK/SIBLING tournament safely skipped",
+  "notes": "candidate M=703 >= measured frontier member M=678 (apographe); it therefore cannot be below a frontier that includes that member",
+  "ms": 107177
+}

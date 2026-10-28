@@ -141,6 +141,7 @@ import { siblingTemplateEncode } from './sibling-template';
 import { nestEncode } from './nest';
 import { kolumnEncode } from './kolumn';
 import { atxReleaseEncode } from './atx-release';
+import { syllogismosEncode } from './syllogismos';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -633,6 +634,18 @@ export function codecEntries(): Entry[] {
         const r = atxReleaseEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rows=${r.rows}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'syllogismos',
+      label: 'SYLLOGISMOS (X51: verified functional-dependency column elision for delimited tables. Where a whole column is an exact function of sibling fields on every row \u2014 same-row decimal arithmetic (+, -, *, /, 100*A/B at exact or fitted scale with a discovered rounding mode; a fitted short multiplier A*K), text assembly (constants + up to two fields), a split part, letter case, a finite lookup shipped in the contract, a row-to-row difference, or the next row\u2019s value \u2014 the column is deleted and the dependency is stated once in-band; the reduced table is coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2 and APOGRAPHE. Verification is exact BigInt-rational arithmetic plus byte-identical CSV rendering (scales, quoting) on every row. Constant and duplicate columns are deliberately excluded: APOGRAPHE and KOLUMN already own those. The candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source (both TAGSTACK runtime-parent members, so losing to either ends the matter) and then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, or the measured best parent is returned; this is not a registry-wide tournament. Greedy/search: bounded deterministic relation enumeration per column, then greedy acyclic drop-set selection by net column token mass (a dropped column is never a source); no joint optimum is claimed. Prior art: functional-dependency / semantic tabular compression is established (SPARTAN; SQUISH; column dependency, TCS 387 (2007) 273-283; DeepSqueeze, SIGMOD 2020; Blitzcrank, VLDB 2024), all bit-level with arithmetic coding; the claim here is only the bounded, exact-text, one-chat realization with a frontier gate. Time/CPU: CPU-bound; planner caps 100,000 code units, 10,000 rows, 32 columns, 30M cell evaluations; the inherited parent/frontier encodes dominate and have no wrapper-wide cap, so this entry is deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = syllogismosEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; drops=${r.drops.length} [${r.drops.map(d => d.kind).join(',')}]; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
       },
     },
     {

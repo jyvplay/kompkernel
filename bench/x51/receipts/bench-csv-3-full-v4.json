@@ -1,0 +1,52 @@
+{
+  "lane": "bench/z11/fresh/csv-3.csv",
+  "sha256": "2ace8b9e4970f8a7d0424a70076d63e6e1c3d65259e6e424f88642fdd6a24727",
+  "chars": 1890,
+  "rawTokens": 1093,
+  "encoding": "o200k_base",
+  "node": "v22.22.3",
+  "OMEGA_DET": "1",
+  "totalMs": 224761,
+  "exact": true,
+  "exactUtf8": true,
+  "applied": true,
+  "messageTokens": 673,
+  "parentTokens": 678,
+  "parentCodec": "synkrisis",
+  "parentCosts": {
+    "synkrisis": 678,
+    "kanon": 1508,
+    "akolouthia2": 774,
+    "apographe": 678,
+    "diastema": 678,
+    "sibling-template": 678
+  },
+  "precheckParentTokens": 678,
+  "fullFrontierMeasured": true,
+  "candidateTokens": 673,
+  "candidateExact": true,
+  "candidateParentCodec": "apographe",
+  "candidateParentCosts": {
+    "daedalus": 685,
+    "akolouthia2": 685,
+    "apographe": 583
+  },
+  "drops": [
+    {
+      "target": 8,
+      "name": "COUTAX_FEMALEUNEMP",
+      "kind": "arith",
+      "op": "*",
+      "a": 2,
+      "b": 3,
+      "scale": -1,
+      "mode": "exact"
+    }
+  ],
+  "dropDescriptions": [
+    "field 9 \"COUTAX_FEMALEUNEMP\" = {COUTAX} * {UNEMPF} (exact decimal)"
+  ],
+  "comparison": "strict complete-message TAGSTACK runtime-parent set plus SIBLING-TEMPLATE",
+  "notes": "dropped 1 computed column(s) [arith]; complete-message M=673 < same-source frontier M=678",
+  "ms": 224760
+}

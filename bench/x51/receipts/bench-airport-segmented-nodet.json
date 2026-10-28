@@ -1,0 +1,4 @@
+{"lane":"bench/z48/corpus/airport-codes-300.csv","config":"OMEGA_DET unset (live wall-clock parent budgets, as shipped), o200k_base, node v22.22.3","rawTokens":13720,"reducedRawTokens":12509,"contractTokens":133,
+"parents":{"apographe":{"orig":8115,"origMs":412135,"reduced":7966,"reducedMs":462122},"akolouthia2":{"orig":8172,"origMs":9071,"reduced":8005,"reducedMs":25535}},
+"candidateTotal":8100,"candidateParent":"apographe on reduced table","deltaVsBestMeasuredFrontierMember":-15,
+"scope":"DAEDALUS and the full TAGSTACK+SIBLING frontier were NOT measured on this lane (two attempts exceeded 9-26 min each under DET and live clocks). -15 is a strict win only against the two measured frontier members; the shipped codec would still require the full frontier measurement before applying here."}

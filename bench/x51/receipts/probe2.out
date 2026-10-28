@@ -1,0 +1,18 @@
+contract semver tok 45 ip tok 35
+micro pad vs int: 3 3 3 3 ip pad12 4 ip int 4
+{"lane":"node-versions","rawTok":779,"baseMinParent":533,"ms":1568,"semver_pad":{"sites":19,"distinct":19,"collisions":0,"roundTrip":true,"candPlusContract":574,"deltaVsBase":41},"semver_int":{"sites":19,"distinct":19,"collisions":0,"roundTrip":true,"candPlusContract":574,"deltaVsBase":41},"ip":{"sites":1,"distinct":1,"collisions":0,"candPlusContract":566,"deltaVsBase":33}}
+{"lane":"json-pkg","rawTok":1152,"baseMinParent":743,"ms":3254,"semver_pad":{"sites":46,"distinct":43,"collisions":0,"roundTrip":true,"candPlusContract":784,"deltaVsBase":41},"semver_int":{"sites":46,"distinct":43,"collisions":0,"roundTrip":true,"candPlusContract":792,"deltaVsBase":49}}
+{"lane":"npm-ls","rawTok":2747,"baseMinParent":983,"ms":13786,"semver_pad":{"sites":119,"distinct":43,"collisions":0,"roundTrip":true,"candPlusContract":1030,"deltaVsBase":47},"semver_int":{"sites":119,"distinct":43,"collisions":0,"roundTrip":true,"candPlusContract":1027,"deltaVsBase":44}}
+{"lane":"pkg0","rawTok":1864,"baseMinParent":1089,"ms":5547,"semver_pad":{"sites":70,"distinct":64,"collisions":0,"roundTrip":true,"candPlusContract":1111,"deltaVsBase":22},"semver_int":{"sites":70,"distinct":64,"collisions":0,"roundTrip":true,"candPlusContract":1119,"deltaVsBase":30}}
+{"lane":"ss-tan","rawTok":843,"baseMinParent":248,"ms":888,"ip":{"sites":40,"distinct":4,"collisions":0,"candPlusContract":275,"deltaVsBase":27}}
+{"lane":"kubectl","rawTok":1006,"baseMinParent":326,"ms":10950,"ip":{"sites":22,"distinct":22,"collisions":0,"candPlusContract":393,"deltaVsBase":67}}
+{"lane":"openstack","rawTok":4028,"baseMinParent":1008,"ms":15283,"ip":{"sites":15,"distinct":1,"collisions":0,"candPlusContract":1035,"deltaVsBase":27}}
+{"lane":"ls-l-real","rawTok":5194,"baseMinParent":1573,"ms":85234,"semver_pad":{"sites":89,"distinct":24,"collisions":0,"roundTrip":true,"candPlusContract":1625,"deltaVsBase":52},"semver_int":{"sites":89,"distinct":24,"collisions":0,"roundTrip":true,"candPlusContract":1637,"deltaVsBase":64}}
+{"lane":"apt-real","rawTok":2739,"baseMinParent":960,"ms":41014,"ip":{"sites":3,"distinct":1,"collisions":0,"candPlusContract":1001,"deltaVsBase":41}}
+{"lane":"bench/x51/fixtures/od-ls.txt","odParse":false}
+{"lane":"bench/x51/fixtures/od-text.txt","odParse":false}
+{"lane":"ops-git-log-stat.txt","commitsWithSummary":10,"filesCountExact":3,"insPlusDelEqSumCounts":3,"pureInsertBlocks":8,"pureExact":2}
+{"lane":"git-log-stat.txt","commitsWithSummary":0,"filesCountExact":0,"insPlusDelEqSumCounts":0,"pureInsertBlocks":0,"pureExact":0}
+{"lane":"du-ak.txt","entries":120,"parentsWithListedChildren":62,"exactChildSum":2,"diffHistogramTop":[["5",4],["9",4],["0",2],["16",2],["21",2],["51",2]]}
+{"lane":"du-real.txt","entries":40,"parentsWithListedChildren":18,"exactChildSum":0,"diffHistogramTop":[["16",2],["51",2],["4",1],["8",1],["24",1],["25",1]]}
+DONE
