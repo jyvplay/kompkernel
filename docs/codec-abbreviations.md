@@ -2878,10 +2878,14 @@ decoding remains unverified.
   Planner on the 30.7k-char, 618-row win lane: seconds inside an
   18.6 s candidate-measure run (DAEDALUS-dominated).
 - **Measured (see `bench/x55/X55.md`).** Real Ethiopia COVID
-  regional breakdown (618 rows, TT = Σ 13 region columns, 0
-  violations, raw 20,741 tok): best-member candidate **2,931 vs
-  DAEDALUS 3,507, +576 (16.4%)**, contract 74 tokens. 150-row
-  high-count slice: **914 vs 1,096, +182 (16.6%)**. Honest
+  regional breakdown (TT = Σ 13 region columns, 0 violations).
+  150-row high-count slice (raw 5,304): members DAEDALUS =
+  AKOLOUTHIA-2 1,096, APOGRAPHE **826** (the binding member on
+  delimited numerics); candidates 914 (DAE/AKO2-coded), **811**
+  (APOGRAPHE-coded reduced 737 + 74 contract) — **win +15 vs
+  APOGRAPHE**. Full 618-row file (raw 20,741): candidate **2,931
+  vs DAEDALUS 3,507, +576**, APOGRAPHE unmeasured there (1–2 h
+  per side; labelled DAEDALUS-relative). Honest
   negatives: zero-dominated early slice 717 vs 643 (**loses**,
   parents price the zeros ~free — gate falls back); 38-row Indian
   state table 547 vs 513 (**loses** — 98-token contract with 3

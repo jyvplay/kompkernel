@@ -18,3 +18,5 @@ TIMEOUT/ERR ethiopiaMid candidate
 {"lane":"ethiopiaFull","member":"cand-daedalus","plan":"rowsum col3 terms13 exc0","contract":74,"reduced":2857,"reducedExact":true,"candidate":2931,"raw":20741,"chars":30657,"ms":18587}
 {"lane":"ethiopiaFull","member":"daedalus","tokens":3507,"exact":true,"raw":20741,"ms":20507}
 {"lane":"ethiopiaMid","member":"cand-akolouthia2","plan":"rowsum col3 terms13 exc0","contract":74,"reduced":840,"reducedExact":true,"candidate":914,"raw":5304,"chars":7841,"ms":2936}
+{"lane":"ethiopiaMid","member":"apographe","tokens":826,"exact":true,"raw":5304,"ms":785110}
+{"lane":"ethiopiaMid","member":"cand-apographe","plan":"rowsum col3 terms13 exc0","contract":74,"reduced":737,"reducedExact":true,"candidate":811,"raw":5304,"chars":7841,"ms":758307}

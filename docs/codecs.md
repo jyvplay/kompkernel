@@ -4144,14 +4144,18 @@ tables fetched via the GitHub API with provenance
 13-term totals, 0 violations, 329 rows exercising empty=0). Red team
 96/96 incl. randomized sweep; independent CPython decoder from the
 contract text alone byte-exact 6/6 (range rowsum, headsum, German,
-colsum-only); blind contract-only hand decodes 3/3. Bench: full file
-candidate **2,931 vs DAEDALUS 3,507 (+576, 16.4%)** with a 74-token
-contract; 150-row slice **914 vs 1,096 (+182)**; honest losses on
-the zero-dominated early slice (717 vs 643) and the 38-row Indian
-state table (547 vs 513) — economics scale with rows × dropped-cell
-entropy over contract size, and the gate falls back. APOGRAPHE on
-reduced fewer-zeros text is slow (≥420 s observed at 150 rows) —
-candidate winners are currently DAEDALUS/AKOLOUTHIA-2-coded.
+colsum-only); blind contract-only hand decodes 3/3. Bench (with
+an early figure corrected after measuring the binding member):
+150-row slice — members DAEDALUS/AKOLOUTHIA-2 1,096, **APOGRAPHE
+826**; candidates 914 (DAE/AKO2-coded), **811** (APOGRAPHE-coded):
+**win +15 vs APOGRAPHE**, thinner than the +182 a DAEDALUS-only
+baseline suggested — APOGRAPHE's own predictors already discount a
+smooth total column; the aggregate identity buys the residual.
+Full file: candidate **2,931 vs DAEDALUS 3,507 (+576)** with a
+74-token contract; APOGRAPHE on the full file unmeasured (est.
+1–2 h/side) — labelled DAEDALUS-relative. Honest losses on the
+zero-dominated early slice (717 vs 643) and the 38-row Indian
+state table (547 vs 513); the gate falls back.
 
 Also X55: X54's ATHROISMOS full-frontier gate reruns at a 9,000 s
 budget (its 3,500 s attempt timed out inside frontier measurement);
@@ -4174,4 +4178,4 @@ the exact X49 configuration: **exactly 210**,
 | Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | ARCHETYPON repair still scoped, unshipped |
 | Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X55 movement |
 | Statements / running totals | ATHROISMOS — statement_A +688, mai +652 (member-grade) | Full gate rerunning at 9,000 s |
-| **Aggregate-total tables (new X55 category)** | **KEPHALAION** — ethiopia-full 2,931 vs 3,507 (+576); mid-150 914 vs 1,096 (+182), member-grade | Full-frontier gate on mid-150 queued behind X54's; colsum-only tables honestly uneconomic at small widths |
+| **Aggregate-total tables (new X55 category)** | **KEPHALAION** — mid-150 811 vs APOGRAPHE 826 (+15); full file 2,931 vs DAEDALUS 3,507 (+576, APO unmeasured); member-grade | Full-frontier gate on mid-150 queued behind X54's; colsum-only honestly uneconomic at small widths |
