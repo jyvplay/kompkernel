@@ -2896,7 +2896,6 @@ decoding remains unverified.
   statement_A); independent CPython from-contract decoder 6/6
   byte-exact (rowsum-range, headsum, de-style, colsum-only);
   blind contract-only hand decodes 3/3 (German rowsum, headsum,
-  colsum). Full TAGSTACK+SIBLING gate on the 150-row slice
   colsum). Full TAGSTACK+SIBLING gate on the 150-row slice:
   **applied, exact, `fullFrontierMeasured=true`, 811 < 835
   (+24), frontier-grade Solved** (5,451,410 ms; receipt
