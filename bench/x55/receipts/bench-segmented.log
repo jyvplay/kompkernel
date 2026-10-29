@@ -1,0 +1,20 @@
+TIMEOUT/ERR ethiopia150 candidate
+TIMEOUT/ERR ethiopia150 daedalus
+{"lane":"ethiopia150","member":"akolouthia2","tokens":643,"exact":true,"raw":4732,"ms":10930}
+TIMEOUT/ERR statewise candidate
+TIMEOUT/ERR statewise daedalus
+{"lane":"statewise","member":"akolouthia2","tokens":513,"exact":true,"raw":580,"ms":5322}
+TIMEOUT/ERR ethiopia150 candidate
+{"lane":"ethiopia150","member":"daedalus","tokens":643,"exact":true,"raw":4732,"ms":4730}
+TIMEOUT/ERR statewise candidate
+{"lane":"statewise","member":"daedalus","tokens":513,"exact":true,"raw":580,"ms":3973}
+TIMEOUT/ERR statewise candidate
+TIMEOUT/ERR ethiopiaMid candidate
+{"lane":"ethiopiaMid","member":"daedalus","tokens":1096,"exact":true,"raw":5304,"ms":3683}
+{"lane":"ethiopiaMid","member":"akolouthia2","tokens":1096,"exact":true,"raw":5304,"ms":3557}
+{"lane":"ethiopiaMid","member":"cand-daedalus","plan":"rowsum col3 terms13 exc0","contract":74,"reduced":840,"reducedExact":true,"candidate":914,"raw":5304,"chars":7841,"ms":3145}
+{"lane":"ethiopia150","member":"cand-daedalus","plan":"rowsum col13 terms4 exc3","contract":101,"reduced":616,"reducedExact":true,"candidate":717,"raw":4732,"chars":7013,"ms":5640}
+{"lane":"statewise","member":"cand-daedalus","plan":"rowsum col2 terms3 exc3","contract":98,"reduced":449,"reducedExact":true,"candidate":547,"raw":580,"chars":1101,"ms":2522}
+{"lane":"ethiopiaFull","member":"cand-daedalus","plan":"rowsum col3 terms13 exc0","contract":74,"reduced":2857,"reducedExact":true,"candidate":2931,"raw":20741,"chars":30657,"ms":18587}
+{"lane":"ethiopiaFull","member":"daedalus","tokens":3507,"exact":true,"raw":20741,"ms":20507}
+{"lane":"ethiopiaMid","member":"cand-akolouthia2","plan":"rowsum col3 terms13 exc0","contract":74,"reduced":840,"reducedExact":true,"candidate":914,"raw":5304,"chars":7841,"ms":2936}

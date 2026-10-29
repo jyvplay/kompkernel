@@ -1,6 +1,6 @@
 # Codec abbreviations: decoded design spec (X13 base; X52 update)
 
-This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 215 keys as of X54) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213); TAXIS is X53 (214); ATHROISMOS is X54 (215). The companion page is `docs/codecs.md` (measurements and leaders).
+This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 216 keys as of X55) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213); TAXIS is X53 (214); ATHROISMOS is X54 (215); KEPHALAION is X55 (216). The companion page is `docs/codecs.md` (measurements and leaders).
 
 Conventions:
 
@@ -2788,3 +2788,109 @@ decoding remains unverified.
   X52 task 5: the hex-pathological frontier parents are SYNKRISIS,
   BIFRONT, DIASTEMA (>900 s on a 512 B dump where KANON/AKOLOUTHIA-2
   take ~3 s).
+
+
+## ἀθροισμός ATHROISMOS (X54, `src/lib/omega/athroismos.ts`, registry key `athroismos`, exact, deep, shipped this turn)
+
+- **Mechanism decoded.** Driven-recurrence elision for delimited
+  tables: a column `y` with `y_i = y_{i-1} ± x_i` or
+  `y_i = y_{i-1} + credit_i - debit_i` (bank-statement running
+  balances) is dropped and recomputed by the reader from the shipped
+  driver column(s), a seed, and at most 3 exception rows carried in
+  the contract (real statements contain adjustments — statement_A's
+  own generator documents a planted +25,000 break). Exact BigInt
+  decimal arithmetic; both plain and German (1.234,56) renderings;
+  reduced text coded by the cheapest measured of DAEDALUS /
+  AKOLOUTHIA-2 / APOGRAPHE; standard strict TAGSTACK+SIBLING gate
+  with best-measured-parent fallback.
+- **Greedy?** Relation fitting is exhaustive over the small family
+  space with exact per-row verification; ranking charges the true
+  rendered contract; whole-input restore arbitrates; emission is
+  the measured gate.
+- **Honest source-article citation.** Genus prior art: lazy
+  dependency discovery (CIDR 2022); column-dependency byte
+  compression (2007). For driven-recurrence elision taught in-band
+  to a stock LLM: **none**.
+- **Time- or CPU-bound?** CPU-bound; planner caps 400k chars / 20k
+  rows; inherited parent + frontier encodes dominate with no
+  wrapper-wide cap; `deep: true`.
+- **Measured (see `bench/x54/X54.md`).** Real statement_A (241 rows,
+  raw 7,017 tok): candidate **2,002 vs best member 2,690, +688
+  (25.6%)**; real German statement excerpt (200 rows, raw 10,229):
+  **1,759 vs 2,411, +652** (APOGRAPHE timed out on both mai sides,
+  labelled). Red team 111/111; independent CPython from-contract
+  decoder 2/2; blind contract-only hand decodes 2/2 byte-exact.
+  Full TAGSTACK+SIBLING frontier gate on statement_A: attempt 1
+  exceeded a 3,500 s cap in frontier measurement (EXIT=124, no
+  verdict); a 9,000 s rerun is receipted under `bench/x54/` when it
+  lands — until then the Pareto claim is member-grade. Reader-burden
+  risk disclosed: carried running state means one arithmetic slip
+  propagates below until an exception re-anchors.
+
+## κεφάλαιον KEPHALAION (X55, `src/lib/omega/kephalaion.ts`, registry key `kephalaion`, exact, deep, shipped this turn)
+
+- **Mechanism decoded.** Aggregate elision for delimited tables.
+  A novelty source-read of every arithmetic relation already owned
+  (SYLLOGISMOS rule union `{arith(binary), scaleK, concat, split,
+  case, lookup, shiftdiff, fwdeq}` at `syllogismos.ts:83-90`, TAXIS
+  binary, ATHROISMOS integrating down a column, APOGRAPHE/METRON
+  predicting from above or row index) shows the stack cannot state
+  an **n-ary aggregate**: a Total column equal to the sum of *many*
+  fields of its row, or a Total *row* whose cells are the sums of
+  their columns. KEPHALAION fits, in exact BigInt decimals:
+  `rowsum` (target = Σ of a fitted subset of ≥2 term columns, empty
+  field = 0 — the TT-over-13-regions shape), `headsum` (target =
+  head column − Σ subset, the Active = Confirmed − Recovered −
+  Deaths shape), `colsum` (one aggregate row — first, last, or
+  labelled Total/Sum/Gesamt/… — whose verifying numeric cells are
+  blanked and refilled as column sums), and the rowsum+colsum
+  composition (restore order teachable: rowsums first, then column
+  sums — proved order-safe when the original identity holds).
+  ≤3 exception rows ship in the contract; plain and German number
+  styles; a target printed coarser than its terms is handled by
+  exact scale division. The reader recomputes sums; there is **no
+  carried state** (contrast ATHROISMOS) — an arithmetic slip
+  damages exactly one cell. Reduced text coded by the cheapest
+  measured of DAEDALUS / AKOLOUTHIA-2 / APOGRAPHE; candidate must
+  beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full
+  TAGSTACK+SIBLING frontier strictly, else the measured best
+  parent is returned (never worse).
+- **Greedy?** Subset fitting is exhaustive for ≤16 term-eligible
+  columns (2^k sum table, multi-probe-row pruning, largest-subset
+  preference); beyond that, contiguous ranges ∪ all-terms only
+  (disclosed recall limit). Aggregate rows verified per cell
+  (≥2 verifying numeric cells). Ranking charges the true rendered
+  contract (74 tokens on the 13-term win via "the sum of fields
+  4 to 16"); whole-input restore + byte check arbitrates;
+  emission is the measured gate.
+- **Honest source-article citation.** Genus prior art:
+  functional/order dependency theory for databases (Kossmann et
+  al., *VLDB Journal* 2022, DOI 10.1007/s00778-021-00676-3; FDX,
+  "A Statistical Perspective on Discovering Functional
+  Dependencies in Noisy Data", SIGMOD 2020), window-SUM as the
+  producing operation of these columns, Gorilla (VLDB 2015) for
+  the dense-small-increment economics intuition (mechanism not
+  used). For exact n-ary-aggregate/aggregate-row elision taught
+  in-band to a stock, unmodified LLM reader: **none**.
+- **Time- or CPU-bound?** CPU-bound. Planner caps: 400,000 code
+  units, 20,000 rows, 40 columns, 80M work units; no
+  wrapper-wide cap (parents/frontier dominate), so `deep: true`.
+  Planner on the 30.7k-char, 618-row win lane: seconds inside an
+  18.6 s candidate-measure run (DAEDALUS-dominated).
+- **Measured (see `bench/x55/X55.md`).** Real Ethiopia COVID
+  regional breakdown (618 rows, TT = Σ 13 region columns, 0
+  violations, raw 20,741 tok): best-member candidate **2,931 vs
+  DAEDALUS 3,507, +576 (16.4%)**, contract 74 tokens. 150-row
+  high-count slice: **914 vs 1,096, +182 (16.6%)**. Honest
+  negatives: zero-dominated early slice 717 vs 643 (**loses**,
+  parents price the zeros ~free — gate falls back); 38-row Indian
+  state table 547 vs 513 (**loses** — 98-token contract with 3
+  exceptions exceeds one column's savings at that row count);
+  economics scale with rows × dropped-cell entropy over contract
+  size. Red team 96/96 (independent BigInt renderer, 40-config
+  randomized sweep, real-lane refusals incl. airport60 and
+  statement_A); independent CPython from-contract decoder 6/6
+  byte-exact (rowsum-range, headsum, de-style, colsum-only);
+  blind contract-only hand decodes 3/3 (German rowsum, headsum,
+  colsum). Full TAGSTACK+SIBLING gate on the 150-row slice
+  queued/receipted under `bench/x55/receipts/`.

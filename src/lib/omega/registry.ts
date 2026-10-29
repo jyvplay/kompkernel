@@ -145,6 +145,7 @@ import { syllogismosEncode } from './syllogismos';
 import { diptychonEncode } from './diptychon';
 import { taxisEncode } from './taxis';
 import { athroismosEncode } from './athroismos';
+import { kephalaionEncode } from './kephalaion';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -661,6 +662,18 @@ export function codecEntries(): Entry[] {
         const r = taxisEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rules=${r.rules.length} [${r.rules.map(x => x.kind).join(',')}]; rows=${r.rows}; cols=${r.cols}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'kephalaion',
+      label: 'KEPHALAION (κεφάλαιον, the main sum/total; X55: aggregate elision for delimited tables. SYLLOGISMOS arithmetic is strictly binary (A+B, A-B, A×B, A÷B, 100A/B, A·K — its rule union read from source), APOGRAPHE/METRON predict from above or index, ATHROISMOS integrates down a column; none can state an n-ary aggregate: a Total column that is the sum of many fields of its row (TT = AA+AF+...+Other over 13 region columns; Active = Confirmed - Recovered - Deaths), or a Total row whose cells are the sums of their columns. KEPHALAION fits exact BigInt-decimal aggregates — rowsum (subset of >=2 term columns, empty=0), headsum (head - sum of subset), and colsum (one aggregate row, first/last/labelled, per-cell verified) — allows up to 3 exception rows shipped in the contract (real reports carry adjustments), supports plain and German (1.234,56) rendering with target rescaling, composes a rowsum drop with a colsum blanking when both verify, and has the reader recompute the sums. No carried state: each value is an independent sum, so an arithmetic slip damages one cell only (contrast ATHROISMOS). Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: subset fitting exhaustive for <=16 term columns (2^k, multi-row pruning, largest-first), contiguous-ranges fallback beyond; aggregate rows verified per cell; ranking charges the true rendered contract; whole-input restore arbitrates; emission is the measured gate. Prior art: functional/order dependency theory (Kossmann et al., VLDB Journal 2022, DOI 10.1007/s00778-021-00676-3; FDX, SIGMOD 2020) and SQL window aggregates as the producing operation; for exact aggregate elision taught in-band to a stock LLM, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 40 columns, 80M work units; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = kephalaionEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
       },
     },
     {

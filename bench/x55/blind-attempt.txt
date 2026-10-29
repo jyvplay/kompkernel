@@ -1,0 +1,17 @@
+=== de blind decode (payload only, KEPHALAION rowsum German) ===
+a: 1000.50+2000.25+3.10=3003.85 -> 3.003,85
+b: 10.00+20.50+30.25=60.75 -> 60,75
+c: 5.05+0(empty)+15.15=20.20 -> 20,20
+d: 100.10+200.20+300.30=600.60 -> 600,60
+e: 7+8+9=24.00 -> 24,00
+f: 11.11+22.22+33.33=66.66 -> 66,66
+
+=== both blind decode (payload only, headsum year-q2-q3) ===
+aa: 60-20-30=10 | bb: 21-7-9=5 | cc: 6-2-3=1 | dd: 15-0(empty)-4=11
+ee: 9-3-3=3 | ff: 15-1-6=8 | gg: 14-5-7=2 | hh: 27-9-9=9
+Total: 167-52-66=49
+
+=== colsum blind decode (payload only, TOTAL row 8 blanks) ===
+sent: 120+85+200+0+64+31+149 = 649
+opened: 30+12+41+0+9+17+28 = 137
+failed: 4+3+6+0+2+1+5 = 21

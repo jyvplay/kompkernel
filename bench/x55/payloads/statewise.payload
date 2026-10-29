@@ -1,0 +1,40 @@
+KEPHALAION: after decoding below, in the comma-separated table: insert "Confirmed" as field 2 of the header and each row: the inserted value = {Recovered} + {Deaths} + {Active} (empty field = 0), written as an integer (except data row 1 = 74079, data row 14 = 925, data row 25 = 65). {x} means that row's decoded {x}. Change nothing else.
+State,Recovered,Deaths,Active,State_code
+Total,24124,2408,47543,TT
+Maharashtra,5125,921,18381,MH
+Gujarat,3246,537,5121,GJ
+Tamil Nadu,2051,61,6606,TN
+Delhi,2512,86,5041,DL
+Rajasthan,2378,115,1563,RJ
+Madhya Pradesh,1860,225,1901,MP
+Uttar Pradesh,1758,80,1735,UP
+Andhra Pradesh,1056,46,949,AP
+West Bengal,612,198,1363,WB
+Punjab,171,32,1711,PB
+Telangana,801,30,495,TG
+Jammu and Kashmir,455,10,469,JK
+Karnataka,433,31,460,KA
+Haryana,342,11,427,HR
+Bihar,382,6,442,BR
+Kerala,489,4,32,KL
+Odisha,85,3,349,OR
+Chandigarh,28,3,156,CH
+Jharkhand,79,3,90,JH
+Tripura,2,0,150,TR
+Uttarakhand,46,1,22,UT
+Assam,40,1,24,AS
+Chhattisgarh,53,0,6,CT
+Himachal Pradesh,35,3,24,HP
+Ladakh,22,0,20,LA
+Andaman and Nicobar Islands,33,0,0,AN
+Meghalaya,10,1,2,ML
+Puducherry,9,0,3,PY
+Goa,7,0,0,GA
+Manipur,2,0,0,MN
+Mizoram,1,0,0,MZ
+Arunachal Pradesh,1,0,0,AR
+Dadra and Nagar Haveli and Daman and Diu,0,0,1,DN
+Nagaland,0,0,0,NL
+Daman and Diu,0,0,0,DD
+Lakshadweep,0,0,0,LD
+Sikkim,0,0,0,SK

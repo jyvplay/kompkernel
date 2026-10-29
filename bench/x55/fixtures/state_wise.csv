@@ -1,0 +1,39 @@
+State,Confirmed,Recovered,Deaths,Active,State_code
+Total,74079,24124,2408,47543,TT
+Maharashtra,24427,5125,921,18381,MH
+Gujarat,8904,3246,537,5121,GJ
+Tamil Nadu,8718,2051,61,6606,TN
+Delhi,7639,2512,86,5041,DL
+Rajasthan,4056,2378,115,1563,RJ
+Madhya Pradesh,3986,1860,225,1901,MP
+Uttar Pradesh,3573,1758,80,1735,UP
+Andhra Pradesh,2051,1056,46,949,AP
+West Bengal,2173,612,198,1363,WB
+Punjab,1914,171,32,1711,PB
+Telangana,1326,801,30,495,TG
+Jammu and Kashmir,934,455,10,469,JK
+Karnataka,925,433,31,460,KA
+Haryana,780,342,11,427,HR
+Bihar,830,382,6,442,BR
+Kerala,525,489,4,32,KL
+Odisha,437,85,3,349,OR
+Chandigarh,187,28,3,156,CH
+Jharkhand,172,79,3,90,JH
+Tripura,152,2,0,150,TR
+Uttarakhand,69,46,1,22,UT
+Assam,65,40,1,24,AS
+Chhattisgarh,59,53,0,6,CT
+Himachal Pradesh,65,35,3,24,HP
+Ladakh,42,22,0,20,LA
+Andaman and Nicobar Islands,33,33,0,0,AN
+Meghalaya,13,10,1,2,ML
+Puducherry,12,9,0,3,PY
+Goa,7,7,0,0,GA
+Manipur,2,2,0,0,MN
+Mizoram,1,1,0,0,MZ
+Arunachal Pradesh,1,1,0,0,AR
+Dadra and Nagar Haveli and Daman and Diu,1,0,0,1,DN
+Nagaland,0,0,0,0,NL
+Daman and Diu,0,0,0,0,DD
+Lakshadweep,0,0,0,0,LD
+Sikkim,0,0,0,0,SK

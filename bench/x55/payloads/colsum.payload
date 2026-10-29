@@ -1,0 +1,10 @@
+KEPHALAION: after decoding below, in the comma-separated table: fill data row 8's empty fields field 2, field 3, field 4: each is the sum of its column over all other data rows, in that column's number format. {x} means that row's decoded {x}. Change nothing else.
+name,sent,opened,failed
+alpha,120,30,4
+beta,85,12,3
+gamma,200,41,6
+delta,0,0,0
+epsilon,64,9,2
+zeta,31,17,1
+eta,149,28,5
+TOTAL,,,

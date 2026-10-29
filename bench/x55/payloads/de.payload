@@ -1,0 +1,8 @@
+KEPHALAION: after decoding below, in the semicolon-separated table: insert "Jahr" as field 5 of the header and each row: the inserted value = {Jan} + {Feb} + {Mrz} (empty field = 0), written with exactly 2 decimals. {x} means that row's decoded {x}. Numbers are German format (1.234,56: dot-grouped thousands, comma point); compute and write in that format. Change nothing else.
+Artikel;Jan;Feb;Mrz
+a;1.000,50;2.000,25;3,10
+b;10,00;20,50;30,25
+c;5,05;;15,15
+d;100,10;200,20;300,30
+e;7,00;8,00;9,00
+f;11,11;22,22;33,33

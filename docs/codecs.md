@@ -4088,7 +4088,11 @@ exception) and a German sample statement verified recurrence-exact
 over all 4,781 rows. Red team 111/111 incl. randomized sweep;
 independent Python decoder from the contract text byte-exact on both
 lanes; blind hand decodes byte-exact (40 rows of 7-digit running
-sums; 25 rows German format). Bench: [segmented receipts appended].
+sums; 25 rows German format). Bench: statement_A candidate
+**2,002 vs best member 2,690 (+688, 25.6%)**; mai-excerpt
+**1,759 vs 2,411 (+652)** — full-frontier gate on statement_A
+rerun at 9,000 s after a 3,500 s measurement timeout; receipt in
+`bench/x54/receipts/` (member-grade until it lands).
 
 Also X54: the X52-task-2 airport full gate completed — **SYLLOGISMOS
 8,099 < 8,115** vs the full frontier (was member-level 8,100 vs 8,115).
@@ -4110,7 +4114,64 @@ the exact X49 configuration: **exactly 210**,
 | General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X54 movement |
 | Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | No X54 movement |
 | Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 freshly re-confirmed |
-| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,100 vs 8,115 member-level | Airport full gate: [pending queued run] |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; **airport 8,099 < 8,115 full frontier** | Airport gate complete (2,631,306 ms, `bench/x53/receipts/airport-fullgate.json`) |
 | Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | Pathology diagnosed to ARCHETYPON inside SYNKRISIS; repair scoped |
 | Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X54 movement |
-| **Statements / running totals (new X54 category)** | **ATHROISMOS** — [bench outcomes appended] | Fresh X54 receipts; scope exactly as receipted |
+| **Statements / running totals (new X54 category)** | **ATHROISMOS** — statement_A 2,002 vs 2,690 (+688); mai-excerpt 1,759 vs 2,411 (+652), both member-grade | Full gate rerunning (9,000 s); receipt in `bench/x54/` |
+
+
+## X55 — KEPHALAION: the sum the stack could not state
+
+X55's novelty check read the arithmetic-relation unions of the whole
+stack from source: SYLLOGISMOS arithmetic is strictly binary
+(`A+B, A-B, A*B, A/B, 100A/B, A*K`), TAXIS binary, ATHROISMOS integrates
+down a column, APOGRAPHE/METRON predict from above or the row index.
+Nobody owned an **n-ary aggregate**: a Total column equal to the sum
+of many fields of its row (`TT = AA+AF+AM+...+Other`, 13 terms,
+chainable by no binary rule because no intermediate column is
+printed), a head figure minus several exclusions (`Active =
+Confirmed - Recovered - Deaths`), or a Total *row* whose cells are
+their columns' sums. KEPHALAION (`src/lib/omega/kephalaion.ts`,
+`kephalaion`) fits subset row sums, head-minus-subset, and verified
+aggregate rows in exact BigInt decimals — ≤3 exception rows shipped,
+plain and German styles, coarser-target rescaling — blanks or drops
+them, and has the reader recompute. No carried state: a reader's
+arithmetic slip damages one cell. Full report: `bench/x55/X55.md`.
+
+Verification: headline lanes are real published COVID regional
+tables fetched via the GitHub API with provenance
+(`bench/x55/fixtures/`): the Ethiopia regional breakdown (618 rows,
+13-term totals, 0 violations, 329 rows exercising empty=0). Red team
+96/96 incl. randomized sweep; independent CPython decoder from the
+contract text alone byte-exact 6/6 (range rowsum, headsum, German,
+colsum-only); blind contract-only hand decodes 3/3. Bench: full file
+candidate **2,931 vs DAEDALUS 3,507 (+576, 16.4%)** with a 74-token
+contract; 150-row slice **914 vs 1,096 (+182)**; honest losses on
+the zero-dominated early slice (717 vs 643) and the 38-row Indian
+state table (547 vs 513) — economics scale with rows × dropped-cell
+entropy over contract size, and the gate falls back. APOGRAPHE on
+reduced fewer-zeros text is slow (≥420 s observed at 150 rows) —
+candidate winners are currently DAEDALUS/AKOLOUTHIA-2-coded.
+
+Also X55: X54's ATHROISMOS full-frontier gate reruns at a 9,000 s
+budget (its 3,500 s attempt timed out inside frontier measurement);
+the ARCHETYPON `--cpu-prof` pass stays queued behind it to avoid CPU
+contention on a 2-core sandbox.
+
+### X55 frontier repeat and generalized local leaders
+
+The `metrics.tsv` frontier was rerun a sixth consecutive turn under
+the exact X49 configuration: **exactly 210**,
+`repeatMatchesPreviousGate: true` (291,530 ms;
+`bench/x55/receipts/frontier-repeat-x55.json`). Nothing is restated.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X55 movement |
+| Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | No X55 movement |
+| Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 re-confirmed a sixth time |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,099 < 8,115 full frontier | No X55 movement |
+| Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | ARCHETYPON repair still scoped, unshipped |
+| Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X55 movement |
+| Statements / running totals | ATHROISMOS — statement_A +688, mai +652 (member-grade) | Full gate rerunning at 9,000 s |
+| **Aggregate-total tables (new X55 category)** | **KEPHALAION** — ethiopia-full 2,931 vs 3,507 (+576); mid-150 914 vs 1,096 (+182), member-grade | Full-frontier gate on mid-150 queued behind X54's; colsum-only tables honestly uneconomic at small widths |
