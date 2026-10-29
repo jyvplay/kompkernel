@@ -1,4 +1,5 @@
 import { now } from './clock';
+import { workTick, workExhausted } from './workmeter';
 /**
  * ARIADNE — grammar induction in symbol space, with the thread that finds the
  * shortest path through it.
@@ -627,6 +628,7 @@ export function scoreRunCostDelta(
   p: PreparedRuns, state: PreparedRunCostState, before: string[], after: string[],
   enc: EncodingName, cache: Map<string, number>,
 ): PreparedRunCostDelta {
+  workTick(); // X57 deterministic search-work meter (see workmeter.ts)
   if (before.length !== after.length || before.length !== state.patternsBySlot.length) {
     throw new Error('run-cost candidate length mismatch');
   }
@@ -948,6 +950,35 @@ export function renderBest(
   const needed = refs.size;
   const refList = [...refs];
 
+  // X57: work-budget shortcut. When the epoch budget is already spent, skip
+  // the pattern tables and the whole assignment search: materialise the
+  // baseline (pool-order) assignment of the first eligible script so the
+  // caller still gets a valid, exact candidate. Deterministic (budget is
+  // counted evaluations, not a clock).
+  if (workExhausted()) {
+    const payload0 = new Set(text);
+    const allowed0 = o.script ? CHIRON_SCRIPTS.filter(s2 => s2.name === o.script)
+      : CHIRON_SCRIPTS.filter(s2 => (o.allowPolyglot ? true : s2.name !== 'polyglot'));
+    for (const s2 of allowed0) {
+      const pool = scriptPool(s2, enc, o.dualTokenizer ?? false);
+      const chars0 = pool.chars.filter(c => !payload0.has(c));
+      if (chars0.length < needed) continue;
+      const glyph0 = new Map<number, string>();
+      refList.forEach((r, i) => glyph0.set(r, chars0[i]));
+      const wire0 = materialise(atoms, glyph0);
+      if (wire0 === null) continue;
+      if (wire0.slice(1, wire0.indexOf(CHIRON_SEP, 1)).includes(CHIRON_SEP)) continue;
+      return {
+        g, plan, listGlyph: new Map(), glyph: glyph0, wire: wire0,
+        tokens: countTokens(wire0, enc),
+        estimate: estAfterGrammar, scriptName: s2.name,
+        assignmentGain: 0, searchGain,
+      };
+    }
+    // no eligible script: fall through to the normal path (which will
+    // reach the same conclusion at its own candidate check)
+  }
+
   // What the assignment can actually influence: ordered pairs inside runs.
   const wanted = new Map<string, number>();
   for (const run of runs) {
@@ -1128,6 +1159,10 @@ export function renderBest(
       // encoded twice gave different wires). The probe count is already bounded,
       // so the clock buys nothing and costs reproducibility.
       for (let step = 0; step < probes; step++) {
+        // X57: deterministic work budget (counted score evaluations, not a
+        // wall clock — G10's load-dependent-wire bug does not apply). When
+        // spent, hill-climbing stops and best-so-far is materialised.
+        if (workExhausted()) break;
         const trial = arr.slice();
         // n-gram move: force a hot run of 3..5 references onto a real n-character
         // single token. This is where the multi-character vocabulary actually pays.

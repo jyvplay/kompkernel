@@ -147,6 +147,7 @@ import { taxisEncode } from './taxis';
 import { athroismosEncode } from './athroismos';
 import { kephalaionEncode } from './kephalaion';
 import { isoskelesEncode } from './isoskeles';
+import { syzygiaEncode } from './syzygia';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -663,6 +664,18 @@ export function codecEntries(): Entry[] {
         const r = taxisEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rules=${r.rules.length} [${r.rules.map(x => x.kind).join(',')}]; rows=${r.rows}; cols=${r.cols}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'syzygia',
+      label: 'SYZYGIA (συζυγία, a yoking/conjugate pair; X57: affine-twin elision with \u00b11-ulp residual correction for delimited tables. The affine map y = a\u00b7x + b between two COLUMNS (a\u22601, b\u22600) is expressible by no union member read from source: SYLLOGISMOS arith is one binary op and cannot chain, scaleK has no intercept, METRON lin puts the slope on the row index, APOGRAPHE int adds a constant only vertically. Dual-unit exports live in exactly that corner (temp_c/temp_f, wind_mph/wind_kph, pressure_mb/pressure_in in every WeatherAPI-style dump; \u00b0C/\u00b0F/K triples; calibrated sensor pairs). Measured twist: APIs round each twin independently from one hidden exact value, so round(1.8\u00b7printed_C + 32) disagrees with printed_F by one last-place unit on 15-45% of rows (38/124 on the X57 lane) — the twin is not redundant, but its whole information beyond the affine law is a ternary rounding residual. SYZYGIA fits (a, b, rounding mode) in exact BigInt rational arithmetic so every residual lies in {-1, 0, +1} ulp, drops the target column, and ships one residual character per data row on a \u00a7N line under the reduced table; exactly-affine pairs (conversion tables) ship no line. Up to 8 drops, sources never dropped, plain and German rendering. Reader: stateless per row multiply-add + \u00b11-ulp nudge (scaleK-class burden; no carried state). Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: per ordered pair, (a,b,mode) candidates from exact two-point rational fits and decimal roundings are verified over all rows with the \u22641-ulp bound (reader-burden-aware constant pricing among verified fits); drops added greedily by true contract+reduced tokens; whole-input restore arbitrates. Prior art: approximate functional dependencies (Kivinen-Mannila g3; Top-k AFD discovery arXiv:2605.24925) bound violating-TUPLE counts for auditing; for fitted affine twins with a \u00b11-ulp residual alphabet taught in-band for one-chat LLM recomputation, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 64 columns, 120M work units; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = syzygiaEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
       },
     },
     {

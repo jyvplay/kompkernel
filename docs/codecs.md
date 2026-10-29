@@ -4250,3 +4250,87 @@ restated.
 | Statements / running totals | ATHROISMOS — statement_A 2,002 < 2,686 full frontier (Solved) | No X56 movement |
 | Aggregate-total tables | KEPHALAION — mid-150 811 < 835 full frontier (Solved, thin); full file +576 vs DAEDALUS (APO unmeasured) | No X56 movement |
 | **Symmetric matrices (new X56 category)** | **ISOSKELES** — us31 **1,677 < 3,297 full frontier (Solved)**; eu24 1,063 vs APO 1,841 (−42%); corr14 470 vs 555 (−15%) | Frontier-grade on us31 |
+
+## X57 — SYZYGIA: the twin that is almost redundant (+ the work budget)
+
+Two deliverables. First, the speed repair owed since X54's 28-minute
+gate, finally profiled properly: on od8 (600 chars of hex)
+`archetyponEncode` took 83.5 s = 3,132 ARIADNE `renderBest` calls and
+7.06M glyph-score evaluations via wrapper-chain re-entry, with
+tokenizer memo hit-rates of 95–98% (the caches were never the
+problem). `src/lib/omega/workmeter.ts` now caps glyph-assignment
+search by **counted evaluations** — deterministic and load-independent,
+explicitly not a clock budget — with per-frontier-parent windows
+after a shared window was measured to starve late parents
+(metrics.tsv 210→236 before the fix; disclosure kept in
+`bench/x57/receipts/budget-sweep.md`). Default 2,000,000 + 100/char
+per window (10–20× above measured knees); `OMEGA_WORK_BUDGET=0`
+restores unbounded pre-X57 search. Measured: `tagstackEncode
+(metrics.tsv)` 304.0 s → 110.0 s **byte-identical** (same message
+hash); archetypon od8 83.5 s → 14.8 s (142 tokens identical from the
+200k knee); lic-mit and SYNKRISIS license.txt byte-identical;
+`synkrisisEncode(od-bin512)` 192 s versus >900 s killed in X54
+(exact; its unbounded output was never obtained, so byte-parity on
+that extreme lane is unverified by design); the frontier repeat
+itself 274.5 s → 115.2 s at the same **210**. Direct measured-parent
+entry points (APOGRAPHE, AKOLOUTHIA-2, DAEDALUS) now also open
+outermost windows — closing a bypass the X57 india lane exposed,
+where raw `apographeEncode` ran unbounded. APOGRAPHE's own planner
+on 45-column tables remains slow independent of the meter (>1,700 s
+on the X57 lane both ways; recorded follow-up, not papered over).
+
+The codec: SYZYGIA (`src/lib/omega/syzygia.ts`, `syzygia`). The
+affine map y = a·x + b between two *columns* is inexpressible
+stack-wide (SYLLOGISMOS `arith` cannot chain ops, `scaleK` has no
+intercept, METRON `lin` slopes the row index, APOGRAPHE `int` is
+vertical-only) — and dual-unit exports live exactly there. But exact
+elision fails in the wild: generators round each twin independently
+from one hidden exact value, so round(1.8·printed_C + 32) ≠ printed_F
+on 15–45% of rows (the modal shortcut, caught by exact per-row
+verification). SYZYGIA fits (a, b, rounding mode) in exact BigInt
+rational arithmetic so every residual lies within **±1 last-place
+unit**, drops the column, and ships one residual character per row
+on a §N line (exactly-affine pairs ship no line). Up to 8 drops;
+stateless reader (multiply-add, round, ±1-ulp nudge; a slip damages
+one cell). Full report: `bench/x57/X57.md`.
+
+Lane: a real 124-city WeatherAPI export (45 columns, sha256
+`4e714e9f…`): 8 twin drops, contract 309 tokens, candidate **6,590
+vs AKOLOUTHIA-2 7,112 on the source (−522, −7.3%)**, DAEDALUS-parent
+candidate 6,668. `vis_miles` is the recorded negative control
+(capped reporting → residuals to −10 ulp → refused). The APOGRAPHE
+member legs did not complete within 1,700 s in this sandbox on
+either side, and the full TAGSTACK+SIBLING gate run was still in
+flight at this section's freeze — so, precisely: **member-grade vs
+AKOLOUTHIA-2, full-frontier grade pending** (receipts will update
+this line; the same split happened for X54's gate). Verification:
+red team 28/28; independent CPython from-contract decoder byte-exact
+on the lane + 15 plain-style cases (it caught two real contract
+bugs en route — omitted duplicate header names, signed-zero
+rendering); blind hand decode 20 rows × 4 fields byte-identical
+(author n=1).
+
+### X57 frontier repeat and generalized local leaders
+
+The `metrics.tsv` frontier was rerun an eighth consecutive turn
+under the exact X49 configuration, with the work budget enabled:
+**exactly 210**, `repeatMatchesPreviousGate: true`, winner
+AKOLOUTHIA-2 (115,156 ms; `bench/x57/receipts/
+frontier-repeat-x57.json`), and the TAGSTACK leg's message is
+hash-identical to its unbounded run. Nothing is restated. Token
+leaders are unchanged; every frontier encode is now 2–5× faster
+(§X57 speed table above).
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X57 token movement |
+| Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | No X57 token movement |
+| Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 re-confirmed an eighth time, 2.4× faster |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,099 < 8,115 full frontier | No X57 movement |
+| Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | ARCHETYPON sink profiled & capped (od8 83.5→14.8 s) |
+| Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X57 movement |
+| Statements / running totals | ATHROISMOS — statement_A 2,002 < 2,686 full frontier (Solved) | No X57 movement |
+| Aggregate-total tables | KEPHALAION — mid-150 811 < 835 full frontier (Solved, thin) | No X57 movement |
+| Symmetric matrices | ISOSKELES — us31 1,677 < 3,297 full frontier (Solved) | No X57 movement |
+| **Dual-unit / affine-twin tables (new X57 category)** | **SYZYGIA** — india-124 **6,590 < 7,112 AKOLOUTHIA-2 (member)**; DAEDALUS-parent 6,668 | APO member legs >1,700 s (unmeasured); full gate pending at freeze |
+| Stack runtime | WORKMETER (not a codec) | frontier repeat 274.5→115.2 s byte-identical; od-bin512 SYNKRISIS >900 s→192 s |

@@ -1,0 +1,59 @@
+{
+ "lane": "bench/x57/fixtures/weatherindia-124cities.csv",
+ "contractTokens": 309,
+ "candidateViaAkolouthia2": 6590,
+ "exactAko": true,
+ "candidateViaDaedalus": 6668,
+ "exactDae": true,
+ "drops": [
+  {
+   "name": "feelslike_c",
+   "tgt": 21,
+   "src": 22,
+   "exactFit": false
+  },
+  {
+   "name": "wind_mph",
+   "tgt": 11,
+   "src": 12,
+   "exactFit": false
+  },
+  {
+   "name": "temp_c",
+   "tgt": 8,
+   "src": 9,
+   "exactFit": false
+  },
+  {
+   "name": "gust_mph",
+   "tgt": 32,
+   "src": 33,
+   "exactFit": false
+  },
+  {
+   "name": "heatindex_c",
+   "tgt": 25,
+   "src": 26,
+   "exactFit": false
+  },
+  {
+   "name": "windchill_c",
+   "tgt": 23,
+   "src": 24,
+   "exactFit": false
+  },
+  {
+   "name": "dewpoint_c",
+   "tgt": 27,
+   "src": 28,
+   "exactFit": false
+  },
+  {
+   "name": "air_quality",
+   "tgt": 44,
+   "src": 45,
+   "exactFit": false
+  }
+ ],
+ "ms": 157407
+}

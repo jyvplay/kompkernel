@@ -1,0 +1,13 @@
+import * as fs from 'node:fs';
+import { archetyponEncode } from '../../../src/lib/omega/archetypon';
+import { chunkCacheClear } from '../../../src/lib/omega/bpe';
+const lane = process.argv[2]!;
+const text = fs.readFileSync(lane, 'utf8');
+chunkCacheClear();
+(globalThis as any).__RB = 0; (globalThis as any).__SRCD = 0; (globalThis as any).__RBHIST = [];
+const t0 = Date.now();
+archetyponEncode(text, 'o200k_base' as const);
+const h: number[] = (globalThis as any).__RBHIST;
+h.sort((a, b) => a - b);
+const q = (p: number) => h[Math.min(h.length - 1, Math.floor(p * h.length))] ?? 0;
+console.log(JSON.stringify({ lane, ms: Date.now() - t0, calls: h.length, total: h.reduce((a, b) => a + b, 0), p50: q(0.5), p90: q(0.9), p99: q(0.99), max: h[h.length - 1] ?? 0, over20k: h.filter((x) => x > 20000).length, over50k: h.filter((x) => x > 50000).length }));

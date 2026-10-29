@@ -42,6 +42,7 @@
 
 import { countTokens, type EncodingName } from './bpe';
 import { daedalusEncode, daedalusDecode, type DaedalusResult } from './daedalus';
+import { workEpoch, workBudgetFor } from './workmeter';
 import { AKOLOUTHIA_MARK, AKOLOUTHIA_CONTRACT, akolouthiaExpand } from './akolouthia';
 
 export const AKOLOUTHIA2_MARK = AKOLOUTHIA_MARK;
@@ -86,7 +87,13 @@ export interface Akolouthia2Result {
   notes: string;
 }
 
+/** X57: top-level calls open a deterministic work window (workmeter.ts);
+ * nested calls share the outer one. */
 export function akolouthia2Encode(text: string, enc: EncodingName = 'o200k_base'): Akolouthia2Result {
+  return workEpoch(workBudgetFor(text.length), () => akolouthia2EncodeInner(text, enc));
+}
+
+function akolouthia2EncodeInner(text: string, enc: EncodingName = 'o200k_base'): Akolouthia2Result {
   const inTokens = countTokens(text, enc);
   const plain = daedalusEncode(text, enc);
   const identity: Akolouthia2Result = {

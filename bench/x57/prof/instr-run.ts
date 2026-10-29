@@ -1,0 +1,11 @@
+import * as fs from 'node:fs';
+import { archetyponEncode } from '../../../src/lib/omega/archetypon';
+import { chunkCacheStats, chunkCacheClear } from '../../../src/lib/omega/bpe';
+const lane = process.argv[2]!;
+const text = fs.readFileSync(lane, 'utf8');
+chunkCacheClear();
+(globalThis as any).__RB = 0; (globalThis as any).__SRCD = 0;
+const t0 = Date.now();
+const r: any = archetyponEncode(text, 'o200k_base' as const);
+const st = chunkCacheStats();
+console.log(JSON.stringify({ lane, ms: Date.now() - t0, tokens: r.messageTokens, renderBestCalls: (globalThis as any).__RB, scoreDeltaCalls: (globalThis as any).__SRCD, shortCalls: st.shortHits + st.shortMisses, longCalls: st.longHits + st.longMisses, chunkCalls: st.hits + st.misses }));

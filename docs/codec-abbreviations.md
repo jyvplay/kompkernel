@@ -1,6 +1,6 @@
 # Codec abbreviations: decoded design spec (X13 base; X52 update)
 
-This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 217 keys as of X56) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213); TAXIS is X53 (214); ATHROISMOS is X54 (215); KEPHALAION is X55 (216); ISOSKELES is X56 (217). The companion page is `docs/codecs.md` (measurements and leaders).
+This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`; `codecEntries()` returns 221 entries as of X57 — count basis corrected this turn: literal registry entries incl. generated preset variants, where earlier editions counted 217 keys as of X56 by `key:` literals) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213); TAXIS is X53 (214); ATHROISMOS is X54 (215); KEPHALAION is X55 (216); ISOSKELES is X56 (217); SYZYGIA is X57. The companion page is `docs/codecs.md` (measurements and leaders).
 
 Conventions:
 
@@ -2964,3 +2964,92 @@ decoding remains unverified.
   scale with n²/2
   mirrored cells over an ~78–107 token contract, so small
   squares lose by design and fall back.
+
+## συζυγία SYZYGIA (X57, `src/lib/omega/syzygia.ts`, registry key `syzygia`, exact, deep, shipped this turn)
+
+- **Mechanism decoded.** Affine-twin elision with ±1-ulp residual
+  correction for delimited tables. The affine map y = a·x + b between
+  two *columns* (a≠1, b≠0) is expressible by no union member (read
+  from source in X57): SYLLOGISMOS `arith` is one binary op and
+  cannot chain a multiply and an add; `scaleK` is pure proportion
+  (no intercept); METRON `lin` puts the slope on the row *index*;
+  APOGRAPHE `int` adds a constant only vertically (`above + b`);
+  TAXIS relations are percents and one binary op. Dual-unit exports
+  live exactly in the missing corner (temp_c/temp_f, wind_mph/
+  wind_kph, pressure_mb/pressure_in, feelslike/windchill/heatindex/
+  dewpoint pairs in every WeatherAPI-style dump; °C/°F/K triples;
+  calibrated sensor pairs value = raw·gain + offset; °C→K is the
+  intercept-only corner). Measured twist: generators round each twin
+  independently from one hidden exact value, so the naive exact law
+  round(1.8·printed_C + 32) = printed_F fails on 15–45% of rows
+  (temp 38/124, dewpoint 52/124 on the X57 lane) — the twin is not
+  redundant, but its entire information beyond the affine law is a
+  ternary rounding residual. SYZYGIA fits (a, b, rounding mode:
+  halves away from zero, or truncate) in exact BigInt rational
+  arithmetic such that **every row's residual lies in {−1, 0, +1}
+  last-place units**, drops the target column, and ships one
+  residual character per data row (+ add 1 ulp, − subtract, . exact)
+  on a §N line under the reduced table; pairs that are exactly
+  affine (conversion tables rounded once) ship no line. Up to 8
+  drops per table, sources never dropped, plain/German rendering,
+  per-cell canonical re-render checks, a §-look-alike source-guard,
+  whole-input byte-exact restore arbitration. Reader protocol: one
+  multiply-add, one rounding, one ±1-ulp nudge per restored cell —
+  the SYLLOGISMOS scaleK burden class, stateless (a slip damages
+  one cell; contrast ATHROISMOS). Reduced text goes to the cheapest
+  measured of DAEDALUS / AKOLOUTHIA-2 / APOGRAPHE; the candidate
+  must beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full
+  TAGSTACK + SIBLING-TEMPLATE frontier strictly, else the measured
+  best parent is returned (house gate).
+- **Greedy/search.** Per ordered column pair: (a, b, mode)
+  candidates are enumerated from exact two-point rational fits and
+  their decimal roundings (≤8 places), verified over every row
+  under the ≤1-ulp residual bound; among verified fits, a
+  reader-burden price demotes non-terminating-decimal and
+  big-denominator constants (24/43 loses to 0.556). Drops are added
+  greedily by true rendered contract + reduced-text tokens (≤8;
+  sources kept, so no cycles). Emission is the measured gate. So:
+  bounded exact verification inside, greedy admission outside,
+  true-cost arbitration on top.
+- **Citation.** Affine/functional dependencies are database classics
+  (survey: Kossmann et al., VLDB Journal 2022, DOI
+  10.1007/s00778-021-00676-3). *Approximate* FDs (Kivinen–Mannila
+  g₃; top-k AFD discovery, Wan & Han, arXiv:2605.24925;
+  probabilistic FDs in Desbordante, arXiv:2607.23636) bound the
+  *count* of violating tuples for data-quality auditing — they
+  never reconstruct anything. For fitted affine twins with a
+  ±1-ulp residual alphabet taught in-band for one-chat LLM
+  recomputation: **none — no paper stands behind this mechanism.**
+- **Time/CPU bound.** CPU-bound. Planner caps: 400,000 code units,
+  20,000 rows, 64 columns, 120M verified cell evaluations
+  (`SYZYGIA_MAX_WORK`); the india lane plans in ~57 s (45×44 ordered
+  pairs). Inherited parent/frontier encodes dominate wall-clock
+  with no wrapper-wide cap → deep-audit-only (`deep: true`).
+  Measured X57 lane (124 cities × 45 cols): candidate **6,590 <
+  7,112** vs AKOLOUTHIA-2 member; APOGRAPHE legs >1,700 s
+  unmeasured; full frontier gate pending at documentation freeze
+  (see `bench/x57/X57.md`).
+
+## WORKMETER (X57, `src/lib/omega/workmeter.ts`, not a codec — no registry key)
+
+- **Mechanism decoded.** Deterministic counted-work budget for
+  ARIADNE's glyph-assignment search: `scoreRunCostDelta` ticks a
+  module meter; exhausted windows stop the hill-climb and make
+  `renderBest` emit the exact baseline assignment without pattern
+  tables. Epochs are opened per TAGSTACK frontier parent, per
+  ARCHETYPON identity arm, and (outermost only) by APOGRAPHE /
+  AKOLOUTHIA-2 / DAEDALUS — nested epochs share the outer window,
+  so wiring is order-safe. Counted evaluations are a pure function
+  of the input: no clocks, no load-dependent wires.
+- **Greedy/search.** Neither: it bounds an existing greedy search's
+  effort. Default `2,000,000 + 100·chars` evaluations per window,
+  calibrated 10–20× above measured knees (metrics.tsv TAGSTACK
+  stays 210 down to 100k/parent; od8 keeps 142 from 200k/arm);
+  `OMEGA_WORK_BUDGET` overrides (≤0 = unbounded, pre-X57 behavior).
+- **Citation.** None (engineering). Calibration, starvation
+  failure of the shared-window variant, and byte-parity receipts:
+  `bench/x57/receipts/budget-sweep.md`.
+- **Time/CPU bound.** Bounds ARIADNE evaluation counts only; the
+  fixed per-`renderBest` setup was separately shortcut. Non-ARIADNE
+  costs (APOGRAPHE's own planner on wide tables, SYNKRISIS
+  catalog/LCS work) are **not** metered — recorded X57 follow-up.
