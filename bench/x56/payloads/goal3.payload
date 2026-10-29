@@ -1,0 +1,7 @@
+ISOSKELES: after decoding below, in the comma-separated table: the square block of fields 1 to 6 across rows 1 to 6 is symmetric. Fill each blank field inside the block with its mirror across the block's main diagonal: the blank at block row r, block column c takes the value at block row c, block column r. Change nothing else.
+,elmo,use,stf,glove,fasttext
+,1.0,0.6978557495179426,0.6465129509441584,0.7340581175531915,0.5655946931784253
+,,1.0,0.6114147547946287,0.5527826855755127,0.40271054676510376
+,,,1.0,0.515617463447702,0.3167078600703089
+,,,,1.0,0.7962446286806047
+,,,,,1.0

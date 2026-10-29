@@ -1,6 +1,6 @@
 # Codec abbreviations: decoded design spec (X13 base; X52 update)
 
-This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 216 keys as of X55) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213); TAXIS is X53 (214); ATHROISMOS is X54 (215); KEPHALAION is X55 (216). The companion page is `docs/codecs.md` (measurements and leaders).
+This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 217 keys as of X56) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213); TAXIS is X53 (214); ATHROISMOS is X54 (215); KEPHALAION is X55 (216); ISOSKELES is X56 (217). The companion page is `docs/codecs.md` (measurements and leaders).
 
 Conventions:
 
@@ -2900,3 +2900,65 @@ decoding remains unverified.
   **applied, exact, `fullFrontierMeasured=true`, 811 < 835
   (+24), frontier-grade Solved** (5,451,410 ms; receipt
   `bench/x55/receipts/fullgate-ethiopiaMid.json`).
+
+
+## ἰσοσκελής ISOSKELES (X56, `src/lib/omega/isoskeles.ts`, registry key `isoskeles`, exact, deep, shipped this turn)
+
+- **Mechanism decoded.** Symmetric-square triangle elision for
+  delimited tables. Every table dependency in the stack is
+  row-local, column-local, or one-step: SYLLOGISMOS/TAXIS
+  same-row functions, APOGRAPHE's predictor union `{above, col,
+  days, workdays, int, lin, clock}` (read from
+  `apographe.ts:185-199`), METRON index models, ATHROISMOS
+  column recurrences, KEPHALAION row/column aggregates. None
+  reaches across the diagonal: in a symmetric square (distance
+  matrices, correlation matrices, similarity/adjacency
+  matrices) cell (i,j) equals cell (j,i) — a transposition
+  isometry whose source is an arbitrary other row *and* column,
+  inexpressible by any one-step predictor (`col` copies within
+  a line; `above` looks one line up). ISOSKELES finds the
+  square block in the pandas-`to_csv` shapes (optional header
+  row, optional label column, optional all-empty trailing
+  padding columns — including the measured special case where
+  header names equal the label column and the (n+1)² square
+  including both is itself string-symmetric), verifies
+  string-exact symmetry pair by pair (≤6 exception pairs and
+  ≥95% symmetric; exceptions stay verbatim; quoted cells
+  refused), blanks the strictly lower triangle — and the
+  diagonal when it is one constant string — and has the
+  reader refill each blank from its mirror across the
+  diagonal, by names or by block coordinates. The reader only
+  copies: no arithmetic, no carried state, a slip damages one
+  cell.
+- **Greedy?** No — the planner is an exhaustive search over
+  the tiny shape space (3 delimiters × header × label width ×
+  diagonal-constant choice) with exact pair verification,
+  ranked by the true rendered contract + reduced token count;
+  whole-input restore arbitrates; emission is the measured
+  gate (cheapest of DAEDALUS/AKOLOUTHIA-2/APOGRAPHE on the
+  reduced text, then the full TAGSTACK+SIBLING frontier
+  strictly, else best measured parent).
+- **Honest source-article citation.** Genus: BLAS/LAPACK
+  packed symmetric storage (`UPLO` triangular formats) —
+  classical numerical practice for typed arrays. For
+  detecting string-exact transposition symmetry in an
+  arbitrary delimited file and teaching the mirror rule
+  in-band to a stock LLM reader: **none**.
+- **Time- or CPU-bound?** CPU-bound. Planner O(rows·cols +
+  n²) under caps (400,000 code units, n ≤ 500); inherited
+  parent/frontier encodes dominate with no wrapper-wide cap;
+  `deep: true`.
+- **Measured (see `bench/x56/X56.md`).** Real US 31-city
+  distance matrix (raw 4,701 tok): DAEDALUS/AKOLOUTHIA-2
+  identity 4,701; APOGRAPHE 3,297; candidate **1,673
+  (−49.3% vs APOGRAPHE)**. EU 24-city: **1,063 vs 1,841
+  (−42.3%)**. Derived 14×14 Ethiopia-regions correlations:
+  **470 vs 555 (−15.3%)**. APOGRAPHE was measured on both
+  sides of every lane before any claim (X55's lesson). Red
+  team 98/98; independent CPython from-contract decoder 4/4
+  byte-exact; blind hand decode of a full small matrix
+  byte-identical. Full TAGSTACK+SIBLING gate on us31:
+  receipt at `bench/x56/receipts/fullgate-us31.json`
+  (member-grade until it lands). Economics scale with n²/2
+  mirrored cells over an ~78–107 token contract, so small
+  squares lose by design and fall back.

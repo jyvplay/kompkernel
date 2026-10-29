@@ -4182,3 +4182,71 @@ the exact X49 configuration: **exactly 210**,
 | Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X55 movement |
 | Statements / running totals | ATHROISMOS — statement_A **2,002 < 2,686 full frontier (Solved)**; mai +652 member-grade | Full gate landed during X55 |
 | **Aggregate-total tables (new X55 category)** | **KEPHALAION** — mid-150 **811 < 835 full frontier (Solved)**; full file 2,931 vs DAEDALUS 3,507 (+576, APO unmeasured) | Frontier-grade on mid-150; colsum-only honestly uneconomic at small widths |
+
+
+## X56 — ISOSKELES: the diagonal nobody used
+
+X56's novelty read targeted the strongest rival directly:
+APOGRAPHE's predictor union `{above, col, days, workdays, int,
+lin, clock}` — every member is a one-step function of one line of
+reader state. The mirror cell of a symmetric square lives in an
+arbitrary *other* row and *other* column: a 2-D transposition
+isometry no one-step predictor, same-row function (SYLLOGISMOS,
+TAXIS), column integrator (ATHROISMOS), or n-ary aggregate
+(KEPHALAION) can state. ISOSKELES (`src/lib/omega/isoskeles.ts`,
+`isoskeles`) detects the square block in a delimited table
+(header/label/padding variants — the pandas `to_csv` square),
+verifies string-exact symmetry pair by pair (≤6 exception pairs
+shipped verbatim), blanks the lower triangle (plus a constant
+diagonal when it is one — distance `0`, correlation `1.000000`),
+and has the reader copy each blank from its mirror. No
+arithmetic, no carried state — the mildest reader obligation in
+the table family. Neatest measured special case: when header
+names equal the label column, the (n+1)² square *including*
+header and labels is itself symmetric, so the labels elide too.
+Full report: `bench/x56/X56.md`.
+
+Verification: lanes are real published matrices (US 31-city and
+EU 24-city distance matrices via the GitHub API, verified
+string-symmetric pair-exact; a 5×5 published correlation
+control; a 14×14 correlation matrix computed from the real X55
+Ethiopia fixture and labelled derived). DAEDALUS/AKOLOUTHIA-2
+cannot shrink high-entropy floats at all (identity); the
+binding member APOGRAPHE was measured on **both** sides first
+(the X55 lesson pre-applied): us31 **1,673 vs 3,297 (−49.3%)**,
+eu24 **1,063 vs 1,841 (−42.3%)**, corr14 **470 vs 555 (−15.3%)**
+— the transpose redundancy survives every one-step predictor.
+Red team 98/98; independent CPython from-contract decoder 4/4
+byte-exact; blind hand decode of a full 6×6 byte-identical.
+Full TAGSTACK+SIBLING gate on us31: running at writing
+(`bench/x56/receipts/fullgate-us31.json`); member-grade until it
+lands.
+
+Also X56: the ARCHETYPON `--cpu-prof` pass queued since X54 was
+finally attempted and timed out at 600 s without flushing a
+profile (`timeout` SIGTERM kills V8's exit-time write) —
+archetyponEncode on the 2.4k-char od dump now measures >600 s
+under contention (>120 s alone in X54); a `SIGINT`-flush retry
+on a truncated input is the recorded next test. The frontier
+gate cost problem and the hex pathology remain the stack's
+known debt.
+
+### X56 frontier repeat and generalized local leaders
+
+The `metrics.tsv` frontier was rerun a seventh consecutive turn
+under the exact X49 configuration: **exactly 210**,
+`repeatMatchesPreviousGate: true` (274,542 ms;
+`bench/x56/receipts/frontier-repeat-x56.json`). Nothing is
+restated.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X56 movement |
+| Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | No X56 movement |
+| Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 re-confirmed a seventh time |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,099 < 8,115 full frontier | No X56 movement |
+| Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | ARCHETYPON prof attempted, timed out >600 s; repair still unscored |
+| Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X56 movement |
+| Statements / running totals | ATHROISMOS — statement_A 2,002 < 2,686 full frontier (Solved) | No X56 movement |
+| Aggregate-total tables | KEPHALAION — mid-150 811 < 835 full frontier (Solved, thin); full file +576 vs DAEDALUS (APO unmeasured) | No X56 movement |
+| **Symmetric matrices (new X56 category)** | **ISOSKELES** — us31 1,673 vs APO 3,297 (−49%); eu24 1,063 vs 1,841 (−42%); corr14 470 vs 555 (−15%) | Member-grade wide; full-frontier gate on us31 running |

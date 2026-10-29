@@ -146,6 +146,7 @@ import { diptychonEncode } from './diptychon';
 import { taxisEncode } from './taxis';
 import { athroismosEncode } from './athroismos';
 import { kephalaionEncode } from './kephalaion';
+import { isoskelesEncode } from './isoskeles';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -662,6 +663,18 @@ export function codecEntries(): Entry[] {
         const r = taxisEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rules=${r.rules.length} [${r.rules.map(x => x.kind).join(',')}]; rows=${r.rows}; cols=${r.cols}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'isoskeles',
+      label: 'ISOSKELES (ἰσοσκελής, equal-legged; X56: symmetric-square triangle elision for delimited tables. Every table dependency in the stack is row-local, column-local, or one-step: same-row functions (SYLLOGISMOS binary arith, TAXIS), above/index/same-line-copy predictors (APOGRAPHE {above, col, days, workdays, int, lin, clock} — union read from source), driven recurrences down a column (ATHROISMOS), n-ary sums across a row or down a column (KEPHALAION). None reaches across the diagonal: in a symmetric square (distance matrices, correlation matrices, adjacency/similarity matrices) cell (i,j) equals cell (j,i) — a 2-D transposition isometry no one-step predictor can express, since `col` copies within one line and `above` looks one line up, while the mirror lives in an arbitrary other row AND other column; half of every such table ships twice. ISOSKELES detects a delimited square block (optional header row, optional label column, optional all-empty trailing padding — the pandas to_csv square shape), verifies string-exact symmetry pair by pair (<=6 exception pairs and >=95% symmetric; exceptions stay verbatim), blanks the strictly lower triangle — plus the diagonal when it is one constant string (distances "0", correlations "1.000000") stated once in the contract — and has the reader refill each blank from its mirror across the diagonal, by row/column names when header names equal the label column, else by block coordinates. The reader only copies; there is no arithmetic and no carried state — the lowest-risk reader obligation in the table family. A neat special case measured this turn: when header names equal the label column, the square INCLUDING header row and label column (32x32 for a 31-city matrix) is itself string-symmetric, so the labels also elide. Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: neither greedy nor heuristic — the shape space (3 delimiters x header on/off x label 0/1 x diagonal-constant on/off) is searched exhaustively, symmetry verified exactly, candidates ranked by the true rendered contract plus reduced-text tokens, whole-input restore arbitrates; emission is the measured gate. Prior art: storing one triangle of a symmetric matrix is classical numerical practice (BLAS/LAPACK packed symmetric storage, UPLO conventions); for detecting string-exact transposition symmetry in an arbitrary delimited file and eliding a triangle under an in-band natural-language mirror rule executed by a stock LLM, honestly none. Time/CPU: CPU-bound; planner O(rows x cols + n^2) under caps (400,000 code units, n<=500); inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = isoskelesEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
       },
     },
     {

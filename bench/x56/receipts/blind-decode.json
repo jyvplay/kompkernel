@@ -1,0 +1,13 @@
+{
+  "reader": "author (n=1, payload files only)",
+  "payloads": [
+    {
+      "name": "goal3 (positional, full 6x6)",
+      "byteExact": true
+    },
+    {
+      "name": "corr14 (named, row AA first 3 fields incl diagonal const)",
+      "byteExact": true
+    }
+  ]
+}

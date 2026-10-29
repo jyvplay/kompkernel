@@ -1,0 +1,30 @@
+X56 ISOSKELES fixtures — provenance (fetched/derived 2026-10-29)
+
+1. eu-cities-distance-matrix.csv
+   Source repo: ronb1512/TSP_Optimization_Research
+   Path: data_files/EU_cities_distance_matrix.csv
+   SHA-256: be88fa2a8f55caaaf93b06e81f8b8777f2df4cfedb1e46dafa6e0196732befad
+   24x24 symmetric (verified: 0 asymmetric string pairs), diagonal "0",
+   BOM in first header field, trailing empty column, CRLF? (check at parse).
+
+2. us-cities-distance-matrix.csv
+   Source repo: ronb1512/TSP_Optimization_Research
+   Path: data_files/US_cities_distance_matrix2.csv
+   SHA-256: 1b87d212d9f125905e354c0e3bdba18b3ec13d4fb2bdd1da7ce16c5aa7cc9aae
+   31x31 symmetric (0 asymmetric pairs), diagonal "0", BOM, trailing empty column.
+
+3. goal3-corr-matrix.csv
+   Source repo: RpM-Kinshuk/sts-measures
+   Path: corr_matrix/Goal_3_corr_matrix.csv
+   SHA-256: 86974b869b97fc33fb4c88f9d087524a43cdbdbd66d4e9cc1bcb4f21a6afdbf8
+   5x5 correlation matrix (elmo,use,stf,glove,fasttext), diag 1.0, symmetric.
+   Small — used as a must-be-exact/mostly-refused control.
+
+4. ethiopia-regions-corr-matrix.csv  (DERIVED, not as-published)
+   Pearson correlations over the 14 numeric columns (TT + 13 regions) of the
+   real X55 fixture bench/x55/fixtures/ethiopia-covid-regions.csv (618 rows),
+   empty=0.0, rendered %.6f by a deterministic Python script run this turn.
+   SHA-256: 19b0794bc05ca793157fefda4c49b4d24c18d816d1471c52762f068bf0d91b95
+   14x14, diagonal 1.000000, symmetric by construction (string-checked anyway).
+
+Fetch channel: `gh api repos/<o>/<r>/contents/<path> --jq .content | base64 -d`.
