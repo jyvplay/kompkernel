@@ -1,0 +1,16 @@
+{
+  "lane": "bench/x55/fixtures/ethiopia-covid-mid150.csv",
+  "applied": true,
+  "exact": true,
+  "messageTokens": 811,
+  "parentTokens": 835,
+  "parentCodec": "apographe",
+  "candidateTokens": 811,
+  "candidateExact": true,
+  "candidateParentCodec": "apographe",
+  "candidateParentTokens": 737,
+  "comparison": "strict complete-message TAGSTACK runtime-parent set plus SIBLING-TEMPLATE",
+  "fullFrontierMeasured": true,
+  "ms": 5451410,
+  "notes": "dropped aggregate (rowsum); complete-message M=811 < same-source frontier M=835"
+}

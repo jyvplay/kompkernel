@@ -4154,14 +4154,16 @@ baseline suggested — APOGRAPHE's own predictors already discount a
 smooth total column; the aggregate identity buys the residual.
 Full file: candidate **2,931 vs DAEDALUS 3,507 (+576)** with a
 74-token contract; APOGRAPHE on the full file unmeasured (est.
-1–2 h/side) — labelled DAEDALUS-relative. Honest losses on the
+1–2 h/side) — labelled DAEDALUS-relative. **Full TAGSTACK+SIBLING
+gate on mid-150: applied, 811 < 835, `fullFrontierMeasured=true`
+(5,451,410 ms) — frontier-grade Solved, thin (+24).** Honest losses on the
 zero-dominated early slice (717 vs 643) and the 38-row Indian
 state table (547 vs 513); the gate falls back.
 
 Also X55: X54's ATHROISMOS full-frontier gate landed (9,000 s rerun;
 3,318,958 ms): **applied, 2,002 < 2,686, frontier-grade Solved**.
-The ARCHETYPON `--cpu-prof` pass remains queued behind
-KEPHALAION's gate to avoid CPU contention on a 2-core sandbox.
+The ARCHETYPON `--cpu-prof` pass was queued behind both gates and
+did not run this turn (both gates consumed the budget; carried).
 
 ### X55 frontier repeat and generalized local leaders
 
@@ -4179,4 +4181,4 @@ the exact X49 configuration: **exactly 210**,
 | Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | ARCHETYPON repair still scoped, unshipped |
 | Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X55 movement |
 | Statements / running totals | ATHROISMOS — statement_A **2,002 < 2,686 full frontier (Solved)**; mai +652 member-grade | Full gate landed during X55 |
-| **Aggregate-total tables (new X55 category)** | **KEPHALAION** — mid-150 811 vs APOGRAPHE 826 (+15); full file 2,931 vs DAEDALUS 3,507 (+576, APO unmeasured); member-grade | Full-frontier gate on mid-150 queued behind X54's; colsum-only honestly uneconomic at small widths |
+| **Aggregate-total tables (new X55 category)** | **KEPHALAION** — mid-150 **811 < 835 full frontier (Solved)**; full file 2,931 vs DAEDALUS 3,507 (+576, APO unmeasured) | Frontier-grade on mid-150; colsum-only honestly uneconomic at small widths |
