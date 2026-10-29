@@ -4090,9 +4090,10 @@ independent Python decoder from the contract text byte-exact on both
 lanes; blind hand decodes byte-exact (40 rows of 7-digit running
 sums; 25 rows German format). Bench: statement_A candidate
 **2,002 vs best member 2,690 (+688, 25.6%)**; mai-excerpt
-**1,759 vs 2,411 (+652)** — full-frontier gate on statement_A
-rerun at 9,000 s after a 3,500 s measurement timeout; receipt in
-`bench/x54/receipts/` (member-grade until it lands).
+**1,759 vs 2,411 (+652)**. Full-frontier gate on statement_A
+(9,000 s rerun after a 3,500 s measurement timeout and a
+sandbox-killed attempt): **applied, 2,002 < 2,686**
+`fullFrontierMeasured=true` — **frontier-grade Solved**.
 
 Also X54: the X52-task-2 airport full gate completed — **SYLLOGISMOS
 8,099 < 8,115** vs the full frontier (was member-level 8,100 vs 8,115).
@@ -4117,7 +4118,7 @@ the exact X49 configuration: **exactly 210**,
 | Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; **airport 8,099 < 8,115 full frontier** | Airport gate complete (2,631,306 ms, `bench/x53/receipts/airport-fullgate.json`) |
 | Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | Pathology diagnosed to ARCHETYPON inside SYNKRISIS; repair scoped |
 | Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X54 movement |
-| **Statements / running totals (new X54 category)** | **ATHROISMOS** — statement_A 2,002 vs 2,690 (+688); mai-excerpt 1,759 vs 2,411 (+652), both member-grade | Full gate rerunning (9,000 s); receipt in `bench/x54/` |
+| **Statements / running totals (new X54 category)** | **ATHROISMOS** — statement_A **2,002 < 2,686 full frontier**; mai-excerpt 1,759 vs 2,411 (+652) member-grade | Frontier-grade Solved on statement_A (`bench/x54/receipts/fullgate-statementA.json`) |
 
 
 ## X55 — KEPHALAION: the sum the stack could not state
@@ -4157,10 +4158,10 @@ Full file: candidate **2,931 vs DAEDALUS 3,507 (+576)** with a
 zero-dominated early slice (717 vs 643) and the 38-row Indian
 state table (547 vs 513); the gate falls back.
 
-Also X55: X54's ATHROISMOS full-frontier gate reruns at a 9,000 s
-budget (its 3,500 s attempt timed out inside frontier measurement);
-the ARCHETYPON `--cpu-prof` pass stays queued behind it to avoid CPU
-contention on a 2-core sandbox.
+Also X55: X54's ATHROISMOS full-frontier gate landed (9,000 s rerun;
+3,318,958 ms): **applied, 2,002 < 2,686, frontier-grade Solved**.
+The ARCHETYPON `--cpu-prof` pass remains queued behind
+KEPHALAION's gate to avoid CPU contention on a 2-core sandbox.
 
 ### X55 frontier repeat and generalized local leaders
 
@@ -4177,5 +4178,5 @@ the exact X49 configuration: **exactly 210**,
 | Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,099 < 8,115 full frontier | No X55 movement |
 | Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | ARCHETYPON repair still scoped, unshipped |
 | Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X55 movement |
-| Statements / running totals | ATHROISMOS — statement_A +688, mai +652 (member-grade) | Full gate rerunning at 9,000 s |
+| Statements / running totals | ATHROISMOS — statement_A **2,002 < 2,686 full frontier (Solved)**; mai +652 member-grade | Full gate landed during X55 |
 | **Aggregate-total tables (new X55 category)** | **KEPHALAION** — mid-150 811 vs APOGRAPHE 826 (+15); full file 2,931 vs DAEDALUS 3,507 (+576, APO unmeasured); member-grade | Full-frontier gate on mid-150 queued behind X54's; colsum-only honestly uneconomic at small widths |

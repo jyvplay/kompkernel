@@ -2820,10 +2820,10 @@ decoding remains unverified.
   **1,759 vs 2,411, +652** (APOGRAPHE timed out on both mai sides,
   labelled). Red team 111/111; independent CPython from-contract
   decoder 2/2; blind contract-only hand decodes 2/2 byte-exact.
-  Full TAGSTACK+SIBLING frontier gate on statement_A: attempt 1
-  exceeded a 3,500 s cap in frontier measurement (EXIT=124, no
-  verdict); a 9,000 s rerun is receipted under `bench/x54/` when it
-  lands — until then the Pareto claim is member-grade. Reader-burden
+  Full TAGSTACK+SIBLING frontier gate on statement_A (9,000 s
+  rerun after EXIT=124 at 3,500 s and a sandbox-killed attempt):
+  **applied, exact, `fullFrontierMeasured=true`, 2,002 < 2,686
+  (+684), frontier-grade Solved** (3,318,958 ms). Reader-burden
   risk disclosed: carried running state means one arithmetic slip
   propagates below until an exception re-anchors.
 
