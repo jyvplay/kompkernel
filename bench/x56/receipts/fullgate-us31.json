@@ -1,0 +1,16 @@
+{
+  "lane": "bench/x56/fixtures/us-cities-distance-matrix.csv",
+  "applied": true,
+  "exact": true,
+  "messageTokens": 1677,
+  "parentTokens": 3297,
+  "parentCodec": "apographe",
+  "candidateTokens": 1677,
+  "candidateExact": true,
+  "candidateParentCodec": "apographe",
+  "candidateParentTokens": 1599,
+  "comparison": "strict complete-message TAGSTACK runtime-parent set plus SIBLING-TEMPLATE",
+  "fullFrontierMeasured": true,
+  "ms": 676697,
+  "notes": "blanked lower triangle of a symmetric 32x32 block (diag=kept, exception pairs=0); complete-message M=1677 < same-source frontier M=3297"
+}

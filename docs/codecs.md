@@ -4218,9 +4218,9 @@ eu24 **1,063 vs 1,841 (−42.3%)**, corr14 **470 vs 555 (−15.3%)**
 — the transpose redundancy survives every one-step predictor.
 Red team 98/98; independent CPython from-contract decoder 4/4
 byte-exact; blind hand decode of a full 6×6 byte-identical.
-Full TAGSTACK+SIBLING gate on us31: running at writing
-(`bench/x56/receipts/fullgate-us31.json`); member-grade until it
-lands.
+**Full TAGSTACK+SIBLING gate on us31: applied, 1,677 < 3,297,
+`fullFrontierMeasured=true` (676,697 ms) — frontier-grade
+Solved at −49%.**
 
 Also X56: the ARCHETYPON `--cpu-prof` pass queued since X54 was
 finally attempted and timed out at 600 s without flushing a
@@ -4249,4 +4249,4 @@ restated.
 | Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X56 movement |
 | Statements / running totals | ATHROISMOS — statement_A 2,002 < 2,686 full frontier (Solved) | No X56 movement |
 | Aggregate-total tables | KEPHALAION — mid-150 811 < 835 full frontier (Solved, thin); full file +576 vs DAEDALUS (APO unmeasured) | No X56 movement |
-| **Symmetric matrices (new X56 category)** | **ISOSKELES** — us31 1,673 vs APO 3,297 (−49%); eu24 1,063 vs 1,841 (−42%); corr14 470 vs 555 (−15%) | Member-grade wide; full-frontier gate on us31 running |
+| **Symmetric matrices (new X56 category)** | **ISOSKELES** — us31 **1,677 < 3,297 full frontier (Solved)**; eu24 1,063 vs APO 1,841 (−42%); corr14 470 vs 555 (−15%) | Frontier-grade on us31 |

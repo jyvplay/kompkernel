@@ -2958,7 +2958,9 @@ decoding remains unverified.
   team 98/98; independent CPython from-contract decoder 4/4
   byte-exact; blind hand decode of a full small matrix
   byte-identical. Full TAGSTACK+SIBLING gate on us31:
-  receipt at `bench/x56/receipts/fullgate-us31.json`
-  (member-grade until it lands). Economics scale with n²/2
+  **applied, exact, `fullFrontierMeasured=true`, 1,677 <
+  3,297 (−49%, +1,620 tok), frontier-grade Solved** (676,697
+  ms; `bench/x56/receipts/fullgate-us31.json`). Economics
+  scale with n²/2
   mirrored cells over an ~78–107 token contract, so small
   squares lose by design and fall back.
