@@ -1,3 +1,13 @@
 {"lane":"bench/x54/fixtures/statement_A.csv","parent":"akolouthia2","side":"orig","tokens":3198,"ms":34402,"contractTok":122,"rawTok":7017}
 {"lane":"bench/x54/fixtures/statement_A.csv","parent":"akolouthia2","side":"reduced","tokens":2126,"ms":64942,"contractTok":122,"rawTok":7017}
 {"lane":"bench/x54/fixtures/statement_A.csv","parent":"apographe","side":"orig","tokens":2690,"ms":551027,"contractTok":122,"rawTok":7017}
+{"lane":"bench/x54/fixtures/statement_A.csv","parent":"apographe","side":"reduced","tokens":1880,"ms":836295,"contractTok":122,"rawTok":7017}
+{"lane":"bench/x54/fixtures/statement_A.csv","parent":"daedalus","side":"orig","tokens":3198,"ms":16885,"contractTok":122,"rawTok":7017}
+{"lane":"bench/x54/fixtures/statement_A.csv","parent":"daedalus","side":"reduced","tokens":2126,"ms":29440,"contractTok":122,"rawTok":7017}
+{"lane":"bench/x54/fixtures/mai-excerpt.csv","parent":"akolouthia2","side":"orig","tokens":2411,"ms":74467,"contractTok":126,"rawTok":10229}
+{"lane":"bench/x54/fixtures/mai-excerpt.csv","parent":"akolouthia2","side":"reduced","tokens":1633,"ms":34482,"contractTok":126,"rawTok":10229}
+{"lane":"bench/x54/fixtures/mai-excerpt.csv","parent":"apographe","side":"orig","error":"timeout/fail"}
+{"lane":"bench/x54/fixtures/mai-excerpt.csv","parent":"apographe","side":"reduced","error":"timeout/fail"}
+{"lane":"bench/x54/fixtures/mai-excerpt.csv","parent":"daedalus","side":"orig","tokens":2411,"ms":34014,"contractTok":126,"rawTok":10229}
+{"lane":"bench/x54/fixtures/mai-excerpt.csv","parent":"daedalus","side":"reduced","tokens":1633,"ms":33686,"contractTok":126,"rawTok":10229}
+SEGDONE

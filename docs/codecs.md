@@ -4090,11 +4090,14 @@ independent Python decoder from the contract text byte-exact on both
 lanes; blind hand decodes byte-exact (40 rows of 7-digit running
 sums; 25 rows German format). Bench: [segmented receipts appended].
 
-Also X54: hex-parent profiling completed — SYNKRISIS, BIFRONT,
-DIASTEMA and METRON each exceed 900 s on a 512-byte `od` dump where
-KANON/AKOLOUTHIA-2/HEMERA/DAEDALUS take ~3 s; inside SYNKRISIS the
-sink is its `archetyponEncode` floor (>120 s alone). Repair scoped in
-X54.md, not shipped (needs its own regression matrix).
+Also X54: the X52-task-2 airport full gate completed — **SYLLOGISMOS
+8,099 < 8,115** vs the full frontier (was member-level 8,100 vs 8,115).
+Hex-parent profiling completed: 5 of 8 TAGSTACK runtime parents
+(SYNKRISIS, BIFRONT, DIASTEMA, METRON, APOGRAPHE) exceed 900 s on a
+512-byte `od` dump where KANON/AKOLOUTHIA-2/HEMERA/DAEDALUS take ~3 s;
+inside SYNKRISIS the sink is its `archetyponEncode` floor (>120 s
+alone). Repair scoped in X54.md, not shipped (needs its own
+regression matrix).
 
 ### X54 frontier repeat and generalized local leaders
 

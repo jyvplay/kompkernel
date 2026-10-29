@@ -1,0 +1,39 @@
+{
+  "bench/x54/fixtures/statement_A.csv": {
+    "rawTok": 7017,
+    "contractTok": 122,
+    "orig": {
+      "akolouthia2": 3198,
+      "apographe": 2690,
+      "daedalus": 3198
+    },
+    "reduced": {
+      "akolouthia2": 2126,
+      "apographe": 1880,
+      "daedalus": 2126
+    },
+    "candidate": 2002,
+    "bestMember": 2690,
+    "margin": 688,
+    "timeouts": []
+  },
+  "bench/x54/fixtures/mai-excerpt.csv": {
+    "rawTok": 10229,
+    "contractTok": 126,
+    "orig": {
+      "akolouthia2": 2411,
+      "daedalus": 2411
+    },
+    "reduced": {
+      "akolouthia2": 1633,
+      "daedalus": 1633
+    },
+    "candidate": 1759,
+    "bestMember": 2411,
+    "margin": 652,
+    "timeouts": [
+      "apographe/orig",
+      "apographe/reduced"
+    ]
+  }
+}

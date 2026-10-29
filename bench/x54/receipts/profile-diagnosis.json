@@ -10,7 +10,7 @@
     "akolouthia2": "2,663 ms (414 tokens, exact)",
     "hemera": "2,860 ms (414 tokens, exact)",
     "daedalus": "2,678 ms (414 tokens, exact)",
-    "apographe": "not yet resolved at writing (still running niced)"
+    "apographe": ">900 s (timeout) — 5 of 8 TAGSTACK runtime parents are pathological on this 2.4 KB hex input"
   },
   "conditions": "2-core sandbox, profile jobs niced -19 behind other benches; the four fast parents finished under the same contention, so the qualitative split is sound; absolute times for the slow four are lower bounds only.",
   "insideSynkrisis": {
