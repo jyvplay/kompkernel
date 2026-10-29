@@ -2897,4 +2897,7 @@ decoding remains unverified.
   byte-exact (rowsum-range, headsum, de-style, colsum-only);
   blind contract-only hand decodes 3/3 (German rowsum, headsum,
   colsum). Full TAGSTACK+SIBLING gate on the 150-row slice
-  queued/receipted under `bench/x55/receipts/`.
+  colsum). Full TAGSTACK+SIBLING gate on the 150-row slice:
+  **applied, exact, `fullFrontierMeasured=true`, 811 < 835
+  (+24), frontier-grade Solved** (5,451,410 ms; receipt
+  `bench/x55/receipts/fullgate-ethiopiaMid.json`).
