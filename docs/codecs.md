@@ -4333,4 +4333,77 @@ leaders are unchanged; every frontier encode is now 2–5× faster
 | Aggregate-total tables | KEPHALAION — mid-150 811 < 835 full frontier (Solved, thin) | No X57 movement |
 | Symmetric matrices | ISOSKELES — us31 1,677 < 3,297 full frontier (Solved) | No X57 movement |
 | **Dual-unit / affine-twin tables (new X57 category)** | **SYZYGIA** — india-124 **6,590 < 7,112 AKOLOUTHIA-2 (member)**; DAEDALUS-parent 6,668 | APO member legs >1,700 s (unmeasured); full gate pending at freeze |
+| **Weighted-total tables (new X58 category)** | **ZYGON** — ewf-standings **3,412 < 3,616 DAEDALUS (member)**; GWU gradebook detection member (economics-blocked at 35 rows) | Full gate timeout-killed 3,400 s on ewf; frontier-grade unclaimed |
 | Stack runtime | WORKMETER (not a codec) | frontier repeat 274.5→115.2 s byte-identical; od-bin512 SYNKRISIS >900 s→192 s |
+
+## X58: speed round 2 (CHIRON epoch lane) + ZYGON weighted-sum elision
+
+**Speed.** X57's WORKMETER bounded the ARIADNE score search per encode but
+left the second unbounded cost: CHIRON's `BlockSearchBudget` was minted fresh
+per call, and parents issue thousands of calls (APO on a 12-column india slice
+burned 7.37 **billion** chiron units). `workmeter.ts` is now two-lane:
+`workEpoch(budget, fn, chars)` opens both the ARIADNE window
+(2,000,000 + 100·chars) and a CHIRON window (400,000,000 + 20,000·chars,
+`OMEGA_CHIRON_BUDGET`, ≤0 = unbounded); `chiron.ts` consults/ticks the shared
+window. Evidence: APO india12 220 s → 138 s bounded (tokens comparable,
+disclosed non-monotone in budget); synkrisis license byte-identical at every
+budget and 32.9 s → 20.8–25.0 s; metrics tagstack parity 210 exact
+(SHA `f0e0ffb9543f3b2f`), lic-mit 38 (SHA `30f044d32098bf39`). Residual wall
+time is unmetered tokenizer/eval work (~45% tokenizer self-time post-fix) —
+the stack is faster, not fast; the SYZYGIA india full gate and this turn's
+ZYGON full gate both still died at their 3,400–3,500 s timeouts inside
+APO/TAGSTACK parent measurement. That is now the documented bottleneck for
+full-grade claims on mid-size tables, independent of the new codecs'
+planners (ZYGON plans ewf in 0.5 s).
+
+**Frontier repeat #9** (exact X49 configuration): **210, match true,
+122,103 ms** (`bench/x58/receipts/frontier-repeat-x58.json`). Nothing restated.
+
+**SYZYGIA full gate: settled-negative.** The X57 run was timeout-killed
+(`FG-EXIT-124`, empty receipt). SYZYGIA remains member-grade
+(india-124 AKO2-parent 6,590 < 7,112).
+
+**ZYGON (ζυγόν, balance-beam; `src/lib/omega/zygon.ts`, registry → 222).**
+Exact weighted-sum column elision: drop a column that equals
+`round_mode(Σ wᵢ·xᵢ + b)` over same-row sources with exact BigInt-rational
+weights — the (n terms × fitted coefficients) cell of the linear-law grid
+that scaleK (1 term), SYLLOGISMOS arith (2 terms, one op) and KEPHALAION
+(all coefficients ±1) leave empty, and where gradebooks, portfolios and
+league tables live. Weights are fitted by exact rational normal equations
+over all rows (least-squares averages print-rounding so weights snap to the
+generator's clean decimals; k=0..6 snap candidates each re-verified per row),
+with singularity-guided column elimination for collinear sources, ≤3
+exception rows shipped verbatim, equal weights grouped in the contract,
+all-ones and single-term laws refused to their owners, constant sources
+excluded, plain/German styles, and optional pre-header lead rows restored
+verbatim. ≤4 drops, sources never dropped; house gate (measured
+DAEDALUS/AKO2/APO parents, strict TAGSTACK+SIBLING frontier, exact restore).
+
+Lanes (`bench/x58/fixtures/`, PROVENANCE.txt):
+- **ewf-standings.csv** (tidytuesday English women's football standings,
+  258×17): `points` dropped as `3×{wins} + 1×({draws} + {point_adjustment})`
+  (contract 81 tokens, 0 exceptions, byte-exact). **Member-grade**:
+  candidate AKO2-parent **3,412** vs best measured source parent DAEDALUS
+  3,616 (**−204, −5.6%**; `member-ewf.json`). APO legs: see receipt
+  `member-ewf-apo.json` if present. Full gate: timeout-killed at 3,400 s
+  (empty receipt), frontier-grade **unclaimed**.
+- **gwu-gradebook.csv** (GWU course gradebook, weights row above header):
+  the fitter recovers the 15-term `final_grade` law from the data alone and
+  verifies it on all rows, but at 35 students the grouped contract (~110 tok)
+  exceeds the raw column saving (~70 tok), so the planner refuses —
+  a real detection member whose economics need a bigger class size, not a
+  gate lane.
+
+Verification: red team **23/23** (incl. collinear sources, weights lead row,
+portfolio with constant share columns, exceptions, trunc generator,
+twin-rounded refusal, TSV/CRLF, German, intercept, negative weights);
+independent CPython twin byte-exact on ewf + 14 applicable cases (German
+style covered by the TS suite, disclosed in the twin header); blind contract
+spot-decode 4/4 rows. Prior art: arithmetic FDs (Kossmann et al. 2022) are
+genus; for grouped rational-weight formulae taught in-band for one-chat
+recomputation, honestly **none**. Live checks this turn: SUMPRODUCT
+weighted-grade practice is universal in spreadsheet tutorials; EAIFD
+(arXiv:2601.16025) advances equality-FD discovery only. AI-mathematics
+check #6 (Oct 2026 lab claims incl. Axiom's Lean formalization of the
+Classification of Finite Simple Groups): methodological echo
+(discover → machine-verify), no implementable compression transfer.

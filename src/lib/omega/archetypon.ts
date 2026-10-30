@@ -435,7 +435,7 @@ function archetyponEncodeInner(text: string, enc: EncodingName = 'o200k_base'): 
   // This is a measured tournament, not a claim: on general prose the frontier
   // wins; on a bundle of many licences ANAGNORISIS wins.
   let parent: any = null;
-  try { parent = workEpoch(workBudgetFor(text.length), () => apographeEncode(text, enc)); } catch { /* identity below */ } // X57 per-arm work epoch
+  try { parent = workEpoch(workBudgetFor(text.length), () => apographeEncode(text, enc), text.length); } catch { /* identity below */ } // X57 per-arm work epoch
   const pWire: string = parent?.wire ?? text;
   const pContract: string = parent?.contract ?? '';
   const identityMsg = (pContract ? pContract + '\n' : '') + pWire;
@@ -446,7 +446,7 @@ function archetyponEncodeInner(text: string, enc: EncodingName = 'o200k_base'): 
     message: identityMsg, notes: 'identity (shipped frontier)', ms: Date.now() - t0,
   };
   try {
-    const an: any = workEpoch(workBudgetFor(text.length), () => anagnorisisEncode(text, enc)); // X57 per-arm work epoch
+    const an: any = workEpoch(workBudgetFor(text.length), () => anagnorisisEncode(text, enc), text.length); // X57 per-arm work epoch
     if (an && an.messageTokens < identity.messageTokens && an.decoded === text) {
       const anMsg: string = an.decoderPrompt ?? ((an.contract ?? '') + '\n' + an.wire);
       const anExact = anagnorisisDecode(an.wire) === text;

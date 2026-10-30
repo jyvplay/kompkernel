@@ -1059,7 +1059,7 @@ export function apographeEncode(
   enc: EncodingName = 'o200k_base',
   opts: ApographeOptions = {},
 ): ApographeResult {
-  return workEpoch(workBudgetFor(text.length), () => apographeEncodeInner(text, enc, opts));
+  return workEpoch(workBudgetFor(text.length), () => apographeEncodeInner(text, enc, opts), text.length);
 }
 
 function apographeEncodeInner(

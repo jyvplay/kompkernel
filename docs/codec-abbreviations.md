@@ -1,6 +1,6 @@
 # Codec abbreviations: decoded design spec (X13 base; X52 update)
 
-This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`; `codecEntries()` returns 221 entries as of X57 — count basis corrected this turn: literal registry entries incl. generated preset variants, where earlier editions counted 217 keys as of X56 by `key:` literals) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213); TAXIS is X53 (214); ATHROISMOS is X54 (215); KEPHALAION is X55 (216); ISOSKELES is X56 (217); SYZYGIA is X57. The companion page is `docs/codecs.md` (measurements and leaders).
+This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`; `codecEntries()` returns 222 entries as of X58 (221 as of X57) — count basis corrected this turn: literal registry entries incl. generated preset variants, where earlier editions counted 217 keys as of X56 by `key:` literals) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys); KOLUMN is X49 (210); ATX-RELEASE is X50 (211); SYLLOGISMOS is X51 (212); DIPTYCHON is X52 (213); TAXIS is X53 (214); ATHROISMOS is X54 (215); KEPHALAION is X55 (216); ISOSKELES is X56 (217); SYZYGIA is X57; ZYGON is X58. The companion page is `docs/codecs.md` (measurements and leaders).
 
 Conventions:
 
@@ -3053,3 +3053,40 @@ decoding remains unverified.
   fixed per-`renderBest` setup was separately shortcut. Non-ARIADNE
   costs (APOGRAPHE's own planner on wide tables, SYNKRISIS
   catalog/LCS work) are **not** metered — recorded X57 follow-up.
+
+## ζυγόν ZYGON (X58, `src/lib/omega/zygon.ts`, registry key `zygon`, exact, deep, shipped this turn)
+
+- **Mechanism**: exact weighted-sum (linear-law) column elision. A column is
+  dropped when it equals `round_mode(Σ wᵢ·xᵢ + b)` over same-row source columns
+  with exact BigInt-rational weights, verified on every row at the printed
+  scale (modes half-up / trunc), with ≤3 exception rows shipped verbatim.
+  Equal weights are grouped in the contract (`0.01×({a} + {b} + {c})`).
+  All-ones weights are refused (KEPHALAION owns plain sums), single-term laws
+  are refused (SYLLOGISMOS scaleK), constant sources are excluded (collinear
+  with the intercept). Up to 4 drops; sources are never dropped; plain and
+  German number styles; an optional pre-header lead row (spreadsheet weights
+  rows above the real header) is supported with verbatim lead-cell restore.
+- **Fitting**: exact rational normal equations (AᵀA w = Aᵀy over all rows;
+  least-squares averages the target's print-rounding so weights snap to the
+  generator's clean decimals), singularity-guided column elimination for
+  collinear sources, weight vectors snapped to k=0..6 decimals and each
+  candidate re-verified per row. Greedy/search: drop admission is greedy by
+  true contract+reduced token score over the exact-verified fits; no
+  probabilistic search inside. Emission gated on measured DAEDALUS /
+  AKOLOUTHIA-2 / APOGRAPHE parents then the TAGSTACK+SIBLING frontier with
+  exact restore arbitration (measured-best parent returned otherwise).
+- **Citation**: honestly **none** for the realization. Genus: arithmetic /
+  linear functional dependencies (Kossmann et al., VLDB Journal 2022,
+  DOI 10.1007/s00778-021-00676-3); spreadsheet SUMPRODUCT weighted-grade
+  practice. Nothing found ships fitted rational weights as a grouped
+  natural-language formula for one-chat LLM recomputation.
+- **Time/CPU**: CPU-bound; planner caps 400,000 code units, 20,000 rows,
+  64 columns, 120M work units (`ZYGON_MAX_WORK`), ≤16 terms, ≤24 candidate
+  sources. Inherited parent/frontier encodes dominate wall time with no
+  wrapper-wide cap, so deep-audit-only, like its siblings.
+- **Workmeter (X58 update)**: `workmeter.ts` is now two-lane. The X57 ARIADNE
+  score window (2,000,000 + 100·chars, `OMEGA_WORK_BUDGET`) is joined by a
+  CHIRON unit window (400,000,000 + 20,000·chars, `OMEGA_CHIRON_BUDGET`,
+  ≤0 = unbounded) opened per `workEpoch`; `chiron.ts` consults/ticks it, so
+  per-call BlockSearchBudget multiplicity across thousands of parent calls is
+  jointly bounded per encode.

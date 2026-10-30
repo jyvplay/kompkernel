@@ -201,7 +201,7 @@ interface Cand { wire: string; tokens: number; M: number; tag: string; gain: num
  * wall-clock budgetMs heuristics; the work window bounds ARIADNE's
  * glyph-assignment evaluations deterministically.) */
 export function daedalusEncode(text: string, enc: EncodingName = 'o200k_base', options: DaedalusOptions = {}): DaedalusResult {
-  return workEpoch(workBudgetFor(text.length), () => daedalusEncodeInner(text, enc, options));
+  return workEpoch(workBudgetFor(text.length), () => daedalusEncodeInner(text, enc, options), text.length);
 }
 
 function daedalusEncodeInner(text: string, enc: EncodingName = 'o200k_base', options: DaedalusOptions = {}): DaedalusResult {

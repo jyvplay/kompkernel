@@ -82,19 +82,70 @@ export function workBudgetFor(chars: number): number {
  * Run `fn` inside a budget window. Outermost call wins; nested calls just
  * run `fn` inside the existing window. Restores prior state afterwards.
  */
-export function workEpoch<T>(b: number, fn: () => T): T {
+export function workEpoch<T>(b: number, fn: () => T, chars = 0): T {
   if (depth > 0) return fn();
   depth++;
   const prevBudget = budget;
   const prevUsed = used;
+  const prevChironBudget = chironBudget;
+  const prevChironUsed = chironUsed;
   budget = b;
   used = 0;
+  chironBudget = chironBudgetFor(chars);
+  chironUsed = 0;
   try {
     return fn();
   } finally {
     lastEpochUsed = used;
+    chironLastEpochUsed = chironUsed;
     budget = prevBudget;
     used = prevUsed;
+    chironBudget = prevChironBudget;
+    chironUsed = prevChironUsed;
     depth--;
   }
+}
+
+/**
+ * X58: CHIRON block-template search lane. Profiling the india APO wall
+ * (bench/x58/prof/) showed the second unseen cost: chiron.ts charges its
+ * own per-call meter (fresh on every call), so the wrapper chain re-buys
+ * a 64M-unit allowance endlessly — apographe on a 12-row india slice
+ * spent 7.37 BILLION chiron units (220 s), synkrisis on license.txt
+ * 1.45B (32 s), while healthy DAEDALUS prose lanes spend 11–32M. This
+ * lane gives CHIRON the same treatment as ARIADNE: epoch-scoped counted
+ * units, `OMEGA_CHIRON_BUDGET` override (<=0 = unbounded). Default is
+ * calibrated by the X58 sweep (bench/x58/receipts/chiron-sweep*).
+ */
+let chironBudget = Number.POSITIVE_INFINITY;
+let chironUsed = 0;
+let chironLastEpochUsed = 0;
+
+export function chironTick(units: number): boolean {
+  chironUsed += units;
+  return chironUsed <= chironBudget;
+}
+
+export function chironExhausted(): boolean {
+  return chironUsed >= chironBudget;
+}
+
+export function chironUsedUnits(): number {
+  return chironUsed;
+}
+
+export function chironLastEpochUsedUnits(): number {
+  return chironLastEpochUsed;
+}
+
+export const CHIRON_BUDGET_BASE = 400_000_000;
+export const CHIRON_BUDGET_PER_CHAR = 20_000;
+
+export function chironBudgetFor(chars: number): number {
+  const env = typeof process !== 'undefined' ? process.env?.OMEGA_CHIRON_BUDGET : undefined;
+  if (env !== undefined && env !== '') {
+    const n = Number(env);
+    if (Number.isFinite(n)) return n <= 0 ? Number.POSITIVE_INFINITY : n;
+  }
+  return CHIRON_BUDGET_BASE + CHIRON_BUDGET_PER_CHAR * Math.max(0, chars);
 }

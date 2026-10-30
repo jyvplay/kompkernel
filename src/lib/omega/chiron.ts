@@ -130,6 +130,7 @@ import { now } from './clock';
  */
 
 import { countTokens, tokenStrings, type EncodingName } from './bpe';
+import { chironTick, chironExhausted } from './workmeter';
 
 /* ---------------------------------------------------------------------------
  * 0. FRAME CHARACTERS — all measured at exactly 1 o200k_base token.
@@ -641,7 +642,7 @@ interface BlockSearchBudget {
   exhausted: boolean;
 }
 function blockBudgetSpent(b: BlockSearchBudget): boolean {
-  return b.exhausted || b.meter.n >= b.meter.max || b.meter.n >= CHIRON_MAX_BLOCK_WORK_UNITS
+  return b.exhausted || chironExhausted() || b.meter.n >= b.meter.max || b.meter.n >= CHIRON_MAX_BLOCK_WORK_UNITS
     || now() >= b.deadline || b.lcsCells >= CHIRON_MAX_BLOCK_LCS_CELLS
     || b.candidates >= CHIRON_MAX_BLOCK_CANDIDATES
     || b.unitSteps >= CHIRON_MAX_BLOCK_UNIT_STEPS
@@ -654,6 +655,7 @@ function chargeBlock(b: BlockSearchBudget, amount: number): boolean {
     return false;
   }
   b.meter.n += amount;
+  chironTick(amount); // X58: epoch-level accounting across all chiron calls
   if (b.meter.n >= b.meter.max || b.meter.n >= CHIRON_MAX_BLOCK_WORK_UNITS) {
     b.exhausted = true;
     return false;

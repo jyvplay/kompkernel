@@ -1,0 +1,94 @@
+[
+ {
+  "name": "league-points",
+  "expect": "apply"
+ },
+ {
+  "name": "weighted-grade",
+  "expect": "apply"
+ },
+ {
+  "name": "average4",
+  "expect": "apply"
+ },
+ {
+  "name": "intercept-law",
+  "expect": "apply"
+ },
+ {
+  "name": "unweighted-sum",
+  "expect": "refuse"
+ },
+ {
+  "name": "single-scale",
+  "expect": "refuse"
+ },
+ {
+  "name": "product",
+  "expect": "refuse"
+ },
+ {
+  "name": "collinear",
+  "expect": "apply"
+ },
+ {
+  "name": "weights-lead-row",
+  "expect": "apply"
+ },
+ {
+  "name": "portfolio",
+  "expect": "apply"
+ },
+ {
+  "name": "two-exceptions",
+  "expect": "apply"
+ },
+ {
+  "name": "five-exceptions",
+  "expect": "refuse"
+ },
+ {
+  "name": "tsv-crlf",
+  "expect": "apply"
+ },
+ {
+  "name": "no-trailing-nl",
+  "expect": "apply"
+ },
+ {
+  "name": "max-blend",
+  "expect": "any"
+ },
+ {
+  "name": "constant-target",
+  "expect": "refuse"
+ },
+ {
+  "name": "negative-weights",
+  "expect": "apply"
+ },
+ {
+  "name": "german-de",
+  "expect": "apply"
+ },
+ {
+  "name": "tiny",
+  "expect": "refuse"
+ },
+ {
+  "name": "shuffled",
+  "expect": "apply"
+ },
+ {
+  "name": "ten-terms",
+  "expect": "apply"
+ },
+ {
+  "name": "trunc-gen",
+  "expect": "any"
+ },
+ {
+  "name": "twin-rounded-weighted",
+  "expect": "refuse"
+ }
+]

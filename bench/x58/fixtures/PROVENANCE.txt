@@ -1,0 +1,19 @@
+X58 fixtures (frozen as published unless noted; fetched 2026-10-29)
+
+ewf-standings.csv
+  Source: rfordatascience/tidytuesday, data/2024/2024-07-16/ewf_standings.csv
+  English women's football league standings 2011-2024: 258 rows x 17 cols.
+  Lane: points = 3*wins + draws + point_adjustment (ZYGON 3-term weighted law,
+  verified 258/258); also goal_difference = goals_for - goals_against
+  (binary, SYLLOGISMOS) and played = wins+draws+losses (KEPHALAION).
+  SHA-256 recorded in bench/x58 receipts.
+
+gwu-gradebook.csv
+  Source: prof-rossetti/gwu-istm-4121-201509, resources/final_gradebook.csv
+  GWU course gradebook: line 1 is a weights row, header on line 2, 35 students,
+  21 cols, CRLF. final_grade = weighted sum over 14 components + 0.5*fav
+  (verified 36/36 incl. header-adjacent row with exact Fractions, 2dp half-up;
+  weights recovered by ZYGON's fitter from the data alone). exam_avg = mean of
+  mt/final exam columns. Instance is economics-blocked at plan level (grouped
+  15-term contract ~110 tok > ~70 tok raw column saving at 35 rows): a real
+  detection member, not a gate lane. Frozen verbatim as published.

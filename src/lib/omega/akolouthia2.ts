@@ -90,7 +90,7 @@ export interface Akolouthia2Result {
 /** X57: top-level calls open a deterministic work window (workmeter.ts);
  * nested calls share the outer one. */
 export function akolouthia2Encode(text: string, enc: EncodingName = 'o200k_base'): Akolouthia2Result {
-  return workEpoch(workBudgetFor(text.length), () => akolouthia2EncodeInner(text, enc));
+  return workEpoch(workBudgetFor(text.length), () => akolouthia2EncodeInner(text, enc), text.length);
 }
 
 function akolouthia2EncodeInner(text: string, enc: EncodingName = 'o200k_base'): Akolouthia2Result {

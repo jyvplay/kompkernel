@@ -148,6 +148,7 @@ import { athroismosEncode } from './athroismos';
 import { kephalaionEncode } from './kephalaion';
 import { isoskelesEncode } from './isoskeles';
 import { syzygiaEncode } from './syzygia';
+import { zygonEncode } from './zygon';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -664,6 +665,18 @@ export function codecEntries(): Entry[] {
         const r = taxisEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rules=${r.rules.length} [${r.rules.map(x => x.kind).join(',')}]; rows=${r.rows}; cols=${r.cols}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'zygon',
+      label: 'ZYGON (ζυγόν, balance-beam; X58: weighted-sum (exact linear-law) column elision for delimited tables. The {terms x coefficients} grid of same-row linear laws, unions read from source: (1 term, fitted coefficient) is SYLLOGISMOS scaleK; (n terms, all coefficients \u00b11) is KEPHALAION rowsum/headsum; (2 terms, one binary op) is SYLLOGISMOS arith; (n terms, fitted rational coefficients) was empty \u2014 and it is where gradebooks, portfolios and cost rollups live: a weighted Final (0.01\u00b7survey + 0.02\u00b7dba + \u2026 + 0.5\u00b7exam_avg; the X58 GWU lane verifies 36/36 with weights printed in its own lead row), league points (3\u00b7wins + draws), portfolio day value (\u03a3 shares\u00b7price), GPA numerators, even the plain average (\u00bd,\u00bd), which SYLLOGISMOS cannot state either. ZYGON solves exact BigInt-rational weights by normal equations over all rows (least-squares averages the target\u2019s print-rounding down so weights snap to the generator\u2019s clean decimals) with singularity-guided column elimination for collinear sources (played = wins+draws+losses), optional intercept, decimal-snap candidates re-verified per row under the stated rounding mode at the printed scale, \u22643 exception rows shipped verbatim, equal weights grouped in the contract (0.01\u00d7({a}+{b}+{c}) \u2014 shorter and lighter to execute). All-ones weights are refused (KEPHALAION owns them), single-term laws refused (scaleK), constant sources excluded (collinear with the intercept). Up to 4 drops, sources never dropped, plain/German rendering, pre-header lead rows (spreadsheet weights rows) supported with verbatim lead-cell restoration. Reader: stateless grouped weighted sum per row (KEPHALAION with coefficients; slip = one cell). Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: exact linear algebra (bounded terms/rows) + exhaustive per-row verification inside; greedy drop admission by true contract+reduced tokens; emission is the measured gate. Prior art: linear/arithmetic functional dependencies (Kossmann et al., VLDB Journal 2022, DOI 10.1007/s00778-021-00676-3) and bit-level linear-model column stores; for rational weight-vector fitting with grouped natural-language formulae taught in-band for one-chat LLM recomputation, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 64 columns, 120M work units; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = zygonEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
       },
     },
     {

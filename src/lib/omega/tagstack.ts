@@ -305,7 +305,7 @@ function tagstackEncodeInner(text: string, enc: EncodingName = 'o200k_base'): Ta
   // X57: each frontier parent is measured inside its OWN deterministic
   // work epoch (workmeter.ts) so an early expensive parent (SYNKRISIS ->
   // ARCHETYPON chain) cannot starve a later one (e.g. AKOLOUTHIA-2).
-  const E = <T,>(fn: () => T): T => workEpoch(workBudgetFor(text.length), fn);
+  const E = <T,>(fn: () => T): T => workEpoch(workBudgetFor(text.length), fn, text.length);
   const frontierCosts: Partial<Record<TagstackFrontierParent, number>> = {};
   const frontierReportedCosts: Partial<Record<TagstackFrontierParent, number>> = {};
   let parent: {
@@ -397,7 +397,7 @@ function tagstackEncodeInner(text: string, enc: EncodingName = 'o200k_base'): Ta
   let child: ReturnType<typeof apographeEncode>;
   let parentDecoded: string;
   try {
-    child = workEpoch(workBudgetFor(plan.text.length), () => apographeEncode(plan.text, enc));
+    child = workEpoch(workBudgetFor(plan.text.length), () => apographeEncode(plan.text, enc), plan.text.length);
     parentDecoded = apographeDecodeResult(child);
   } catch {
     return fallback('APOGRAPHE candidate construction/decoder threw', plan.mode, plan.marker, plan.pairs);
