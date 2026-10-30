@@ -1014,7 +1014,7 @@ export function bathmosEncode(text: string, enc: EncodingName = 'o200k_base'): B
   };
 
   if (!plan) {
-    return fallbackResult(null, null, null, false, precheckParentTokens, 'necessary-condition frontier-member precheck only', 'no weighted-sum drop was found; returned the measured best direct parent');
+    return fallbackResult(null, null, null, false, precheckParentTokens, 'necessary-condition frontier-member precheck only', 'no window-law drop was found; returned the measured best direct parent');
   }
 
   const candidateParent = bestMeasuredParent(plan.reducedText, enc);
