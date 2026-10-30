@@ -1,0 +1,90 @@
+{
+  "runtime": "v22.22.3",
+  "checks": [
+    {
+      "name": "public tree fixture",
+      "pass": true,
+      "detail": {
+        "plan": true,
+        "exact": true,
+        "expectedPlan": true
+      }
+    },
+    {
+      "name": "CRLF, astral filename, no final newline",
+      "pass": true,
+      "detail": {
+        "plan": true,
+        "exact": true,
+        "expectedPlan": true
+      }
+    },
+    {
+      "name": "NBSP outside tree indentation refuses",
+      "pass": true,
+      "detail": {
+        "plan": false,
+        "exact": true,
+        "expectedPlan": false
+      }
+    },
+    {
+      "name": "one-space indentation corruption refuses",
+      "pass": true,
+      "detail": {
+        "plan": false,
+        "exact": true,
+        "expectedPlan": false
+      }
+    },
+    {
+      "name": "reserved marker in indentation refuses",
+      "pass": true,
+      "detail": {
+        "plan": false,
+        "exact": true,
+        "expectedPlan": false
+      }
+    },
+    {
+      "name": "ordinary ASCII tree spaces are not guessed as NBSP",
+      "pass": true,
+      "detail": {
+        "plan": false,
+        "exact": true,
+        "expectedPlan": false
+      }
+    },
+    {
+      "name": "ordinary prose without tree markers is refused",
+      "pass": true,
+      "detail": {
+        "plan": false,
+        "exact": true,
+        "expectedPlan": false
+      }
+    },
+    {
+      "name": "visually similar ASCII spaces are not byte-exact NBSP",
+      "pass": true,
+      "detail": {
+        "sourceNBSP": 8
+      }
+    },
+    {
+      "name": "tampered structural marker cannot falsely roundtrip",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "summary": {
+    "passed": 9,
+    "total": 9
+  },
+  "independentPython": {
+    "total": 2,
+    "passed": 2,
+    "failures": []
+  },
+  "fixture": "bench/z55/lanes/tree-src.txt"
+}

@@ -1,0 +1,94 @@
+{
+  "checks": [
+    {
+      "name": "repeated BPE fragments",
+      "pass": true,
+      "entries": 0,
+      "directMessageTokens": null
+    },
+    {
+      "name": "CRLF and no final newline",
+      "pass": true,
+      "entries": 0,
+      "directMessageTokens": null
+    },
+    {
+      "name": "Unicode and emoji",
+      "pass": true,
+      "entries": 0,
+      "directMessageTokens": null
+    },
+    {
+      "name": "JSON quoting and escapes",
+      "pass": true,
+      "entries": 0,
+      "directMessageTokens": null
+    },
+    {
+      "name": "punctuation adjacency",
+      "pass": true,
+      "entries": 0,
+      "directMessageTokens": null
+    },
+    {
+      "name": "repeated multiline ops fragment",
+      "pass": true,
+      "entries": 0,
+      "directMessageTokens": null
+    },
+    {
+      "name": "profitable long repeated lexical fragments plus astral Unicode",
+      "pass": true,
+      "entries": 2,
+      "directMessageTokens": 781
+    },
+    {
+      "name": "candidate plan actually applies on high-repetition control",
+      "pass": true,
+      "entries": 2,
+      "directMessageTokens": 781
+    },
+    {
+      "name": "longest-marker parsing",
+      "pass": true,
+      "entries": 2,
+      "directMessageTokens": null
+    },
+    {
+      "name": "all marker-pool collisions refuse",
+      "pass": true,
+      "entries": 0,
+      "directMessageTokens": null
+    },
+    {
+      "name": "serialized in-band table parses and restores",
+      "pass": true,
+      "entries": 2,
+      "directMessageTokens": 781
+    },
+    {
+      "name": "malformed serialized JSON table refuses",
+      "pass": true,
+      "entries": 0,
+      "directMessageTokens": null
+    }
+  ],
+  "independentCase": {
+    "source": "internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀 internationalization 😀",
+    "mapped": "international⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀⟦F0⟧⟦F1⟧ 😀",
+    "tableJson": "[[\"⟦F0⟧\",\" international\"],[\"⟦F1⟧\",\"ization\"]]",
+    "entries": [
+      {
+        "marker": "⟦F0⟧",
+        "surface": " international",
+        "frequency": 39
+      },
+      {
+        "marker": "⟦F1⟧",
+        "surface": "ization",
+        "frequency": 40
+      }
+    ],
+    "exactTypeScript": true
+  }
+}

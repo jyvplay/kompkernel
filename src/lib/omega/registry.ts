@@ -137,6 +137,8 @@ import { archetyponEncode } from './archetypon';
 import { synkrisisEncode } from './synkrisis';
 import { bifrontEncode } from './bifront';
 import { tagstackEncode } from './tagstack';
+import { repriseEncode } from './reprise';
+import { fotarEncode } from './fotar';
 import { siblingTemplateEncode } from './sibling-template';
 import { nestEncode } from './nest';
 import { kolumnEncode } from './kolumn';
@@ -151,6 +153,9 @@ import { syzygiaEncode } from './syzygia';
 import { zygonEncode } from './zygon';
 import { bathmosEncode } from './bathmos';
 import { eirmosEncode } from './eirmos';
+import { syndesmosEncode } from './syndesmos';
+import { rhizomaEncode } from './rhizoma';
+import { alphafoldEncode } from './alphafold';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -612,6 +617,29 @@ export function codecEntries(): Entry[] {
       },
     },
     {
+      key: 'fotar',
+      label: 'FOTAR (X65: exact frequency-ordered aliases for repeated BPE-token surface fragments; the literal alias map and decoder clause are in-band, and the mapped stream is encoded by APOGRAPHE. This is a readable adaptation of established dictionary/token-frequency coding, not a global novelty claim; VERITAS and related dictionary codecs are close stack prior art. Bounded deterministic planning ranks repeated token surfaces by a character-mass proxy and keeps at most the top 96; the proxy and direct FOTAR-only count do not decide emission. The final alias candidate is restored exactly, composed through APOGRAPHE, directly counted as the complete contract+table+parent message, and emitted only if strictly below the exact same-source TAGSTACK+SIBLING frontier; otherwise return that measured parent. Caps: 80,000 UTF-16 code units, 96 alias candidates; inherited parent/frontier search has no wrapper-wide time cap. No native LLM decode is claimed.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r: any = fotarEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; exact=${r.exact}; frontierComplete=${r.frontierComplete}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; fotar=${r.fotar}` };
+      },
+    },
+    {
+      key: 'reprise',
+      label: 'REPRISE (X64 speed lane: bounded encoder-only LRU memo for exact complete TAGSTACK frontier results. Identical source + encoding + OMEGA_DET/work/chiron budget controls returns the previously verified TAGSTACK message; it adds no wire syntax, contract, or decoder requirement. Different source/configuration is a cache miss. Only exact complete results are admitted; ≤50,000 source chars, ≤8 entries and ≤500,000 retained characters; LRU eviction. This is a repeated-input runtime speed optimization, not a new compression transform or universal speed claim. The output remains the in-band TAGSTACK message.)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r: any = repriseEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; parent=${r.parentCodec}:${r.parentTokens}; exact=${r.exact}; memoized TAGSTACK output` };
+      },
+    },
+    {
       key: 'sibling-template',
       label: 'SIBLING-TEMPLATE (X47 candidate: on bounded, well-nested XML-compatible explicit-tag markup, detect a run of at least three adjacent same-name siblings with an identical exact byte skeleton and at least two text-only child slots. Emit the skeleton once, preserve every raw slot value and the exact inter-record separator, and restore records in order from a collision-free in-band macro. The complete contract-plus-wire is priced through APOGRAPHE and must strictly beat TAGSTACK’s same-source measured current-frontier output; otherwise return that exact parent. Greedy/search: deterministic traversal chooses the run with the largest raw-token proxy gain; the proxy never decides shipping. Time/CPU: parse scan is O(n) under a 100,000-character cap; cumulative shape/serialization/proxy work is ≤1,000,000 weighted character-and-node units; then one current-frontier tournament (unless supplied by caller) and one APOGRAPHE encode of a transformed candidate. Prior art: XMill and XML structure/data compressors already factor structure and values; no new general compression primitive is claimed. The registry exposes the full message.',
       family: 'exact',
@@ -670,6 +698,18 @@ export function codecEntries(): Entry[] {
       },
     },
     {
+      key: 'syndesmos',
+      label: 'SYNDESMOS (X61: repeated Markdown inline-link destination interning. For supported single-line inline links with simple labels and HTTP(S) destinations, count exact repeated destinations; replace only repeated URL spans with numbered in-band references, preserving every other byte. The URL table and inverse rule live in the same message. Narrow patterns are skipped; marker collisions refuse. Markdown reference links and URL dictionaries are established prior art; no global novelty claim. Repository-scoped delta: syntax-aware exact raw-text inverse and complete-message pricing, not new source-coding theory. Parent-code by DAEDALUS; emit only on strict exact win against the same-source TAGSTACK runtime-parent frontier plus SIBLING-TEMPLATE; otherwise return the measured winner. Greedy/search: deterministic repeated-target count and first-seen IDs; final token price decides. Time/CPU: O(n+m), capped at 120,000 UTF-16 code units and 20,000 links; DAEDALUS and parent-frontier runs have no wrapper-wide time cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = syndesmosEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.comparison}; parent=${r.parentCodec}; urls=${r.urls}; links=${r.eligibleLinks}/${r.linkCount}; candidate=${r.messageTokens}; frontier=${r.frontierTokens}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
       key: 'eirmos',
       label: 'EIRMOS (εἱρμός, a stringing-together/chain; X60: string-template (concatenation) column elision for delimited tables. The stack already has raw literal+field concatenation in SYLLOGISMOS (up to two sibling fields), whole-field case transforms, and JSON object templates in PARADEIGMA. EIRMOS adds a distinct composition absent from those codecs: per-slot string transforms INSIDE a multi-source concatenation (e.g. lowercase-initial({first}) + lowercase({last})), plus up to three slots, bounded seed segmentation, and exact row exceptions for delimited tables; it does not claim generic concatenation as novel. EIRMOS fits a template of 1\u20133 same-row source columns with literal separators and small transforms (verbatim, lowercase, UPPERCASE, capfirst, initial, lowercase-initial/UPPERCASE-initial, first2, first3) by bounded segmentation search over seed rows, verified on every row (\u22643 exceptions verbatim); case transforms require ASCII-only cased letters so the reader\u2019s notion of lowercase matches the encoder\u2019s; pure copies (APOGRAPHE) and \u226464-distinct single-source transforms (SYLLOGISMOS lookup) are refused to their owners; \u22644 drops, sources never dropped. The derived values are near-unique per row, so dictionary/grammar parents pay full price \u2014 on the published generated-data finance-demo fixture the drop is worth 4,234 raw tokens before a 71-token contract; records are not live people. Reader obligation: join the stated pieces per row \u2014 string work, no arithmetic. Reduced text coded by the cheapest measured exact parent (DAEDALUS, AKOLOUTHIA-2, APOGRAPHE); candidate must beat AKOLOUTHIA-2/APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: bounded deterministic segmentation + exhaustive per-row verification; greedy drop admission by true contract+reduced tokens; emission is the measured gate. Prior art: fitting genus is FlashFill-style string-transformation synthesis from examples (Gulwani, POPL 2011; BlinkFill et al.), built to fill cells in place; for fitting a template to elide the column and teach it in-band for one-chat LLM regeneration, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 64 columns, 60M work units; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
       family: 'exact',
@@ -691,6 +731,30 @@ export function codecEntries(): Entry[] {
         const r = bathmosEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'rhizoma',
+      label: 'RHIZOMA (X62: tree-listing indentation canonicalization; exact, deep, whole-frontier gated)',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = rhizomaEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.comparison}; parent=${r.parentCodec}; elidedNBSP=${r.elidedNbsp}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'alphafold',
+      label: 'ALPHAFOLD (X63: in-band alpha-equivalent code-block template plus identifier bindings; exact, deep, whole-frontier gated; no global novelty claim)',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = alphafoldEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.comparison}; parent=${r.parentCodec}; templates=${r.templates}; refs=${r.references}; planMs=${r.planMs}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
       },
     },
     {

@@ -1,0 +1,10 @@
+import * as fs from 'node:fs';
+import { syndesmosPlan, syndesmosExpand } from '../../src/lib/omega/syndesmos';
+import { tagstackEncode } from '../../src/lib/omega/tagstack';
+import { siblingTemplateEncode } from '../../src/lib/omega/sibling-template';
+import { countTokens } from '../../src/lib/omega/bpe';
+const path=process.argv[2]??'bench/z47/corpus/changelog/ucfopen_canvasapi.md';
+const s=fs.readFileSync(path,'utf8'); const p=syndesmosPlan(s); if(!p)throw new Error('no plan');
+const t0=Date.now(); const tag=tagstackEncode(p.transformed,'o200k_base'); const sib=siblingTemplateEncode(p.transformed,'o200k_base',tag);
+const m=`${p.contract}\n${sib.message}`; const exact=syndesmosExpand(sib.decoded)===s;
+console.log(JSON.stringify({path,transformedTag:tag.messageTokens,transformedSibling:sib.messageTokens,candidateWithContract:countTokens(m,'o200k_base'),baselineParentOnTransformed:tag.parentCodec,transformedExact:tag.exact&&sib.exact,restored:exact,ms:Date.now()-t0,frontierComplete:tag.frontierComplete},null,2));

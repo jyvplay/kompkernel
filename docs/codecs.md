@@ -4554,3 +4554,46 @@ These are generalized local leaders only; each row preserves its source fixture,
 **Prior art and research.** BlinkFill (Singh, VLDB 2016) synthesizes concatenations of substring expressions and constants from examples to populate spreadsheet cells; FlashFill (Gulwani, POPL 2011) is an earlier PBE system. These are close genus, so EIRMOS is **not** claimed unprecedented as string synthesis. The stack audit found no existing general string-template column-elision codec; the realization citation for *in-band, exact column elision plus whole-message gate* is honestly **none**. Live search also found newer FD/schema-matching work, including LLM-based normalization benchmarks (arXiv:2609.11141); these address schema inference/normalization, not byte-exact string-template column reconstruction with one-chat contract.
 
 **AI mathematics audit (claims, not independently audited proofs).** Live primary-source checks: OpenAI (Oct 6 and Oct 26–27, 2026) reports many Lean formalizations and new claims about ETH, local smoothing/Kakeya, and Yang–Mills/QCD; the lab itself distinguishes completed Lean artifacts from expert/community validation, and this agent did not inspect the Lean repository. Anthropic (Sep 2026) reports a Lean formalization of the classical Fermat proof, a 67.2% zeta-zero lower-bound improvement with named mathematician review and a Lean comparator, plus its own caveats about human understanding; I did not inspect source proofs. DeepMind reports AlphaProof's Lean-backed IMO 2024 result, Gemini Deep Think IMO 2025 natural-language result, and Aletheia/FirstProof research-level work; these are lab claims, not compression results. Meta's HTPS and AutoformBench address proof search / formalization infrastructure (AutoformBench describes expert-audited tasks); no compression transfer identified. DeepSeek V3.2's math-contest performance and xAI Grok's AIME results are benchmark claims, not new machine-checked theorems located in this search. The unexpected possible transfer is engineering rather than theorem-based: formal proof workflows separate proposal from a machine-checkable certificate; EIRMOS similarly treats a fitted template as a hypothesis and requires every-row exact verification before elision. This validates the methodology, not the fitted law by analogy.
+
+
+## X61–X65 continuation and local-leader updates
+
+### X61 — SYNDESMOS
+
+In-band interning of repeated eligible Markdown destinations and optional common URL path-prefix factoring. First-seen ID assignment is greedy; prefix factoring is bounded search; exact complete-message frontier decides emission. Three measured complete candidates lose (+162, +144, +173), so no leader changes. Close prior art includes CommonMark reference links and hierarchical URL front coding (Brisaboa & Cerdeira-Pena, CIKM 2019).
+
+### X62 — RHIZOMA
+
+Narrow exact normalization of U+00A0 tree-indent pairs with an in-band inverse. Deterministic linear scan; complete-message gate is exact. It loses by 12 and 14 tokens on its two measured tree fixtures and falls back. Existing DENS-2/DENDRON/KLADOS are close repo prior art.
+
+### X63 — ALPHAFOLD
+
+Lexical (not AST/semantic) grouping of balanced code spans with shared identifier patterns and in-band variable-name mappings. Deterministic bounded planner; no token-space search. Exact but loses 1,249 vs the source frontier 1,114 (+135); TS adversarial checks 13/13 and independent Python checks 6/6. Related prior art: nominal anti-unification and alpha-renamed code-clone work; no global novelty claim.
+
+### X64 — REPRISE
+
+A bounded encoder-side LRU memo for exact, complete TAGSTACK frontier results. Exact source, encoding and relevant search settings form the key; only previously accepted results are reused. The recipient still gets the same complete self-contained TAGSTACK message. This is repeated-input runtime reuse, not a new text codec or compression win: on the actual `metrics.tsv` fixture both cold and warm complete messages were 210 tokens (`akolouthia2`) and byte-identical. The cold call took 136,733.854 ms and one warm repeat took 0.129 ms; this single observation is not a stable speed claim. Six checks cover exactness, complete-frontier status, wire/cost equality, accounting, caller-mutation isolation, and observed warm latency. No native LLM decode, prose/ops win, or token reduction is claimed. Exact X61 frontier repeat matched at 210 tokens (`akolouthia2`), 113,300 ms vs the prior 94,136 ms. Full protocol, research, and math-lab audit: `bench/x64/REPORT.md`.
+
+## X65 — FOTAR and updated fixture-specific leaders
+
+FOTAR is a new registered exploratory codec (`src/lib/omega/fotar.ts`). It ranks repeated multi-character BPE surfaces, substitutes collision-checked aliases, and carries the literal alias table in the same message. The table reader parses the serialized JSON and expands aliases left-to-right, longest-first. The deterministic top-96 planner uses a character-mass proxy only; the final decision compares the complete candidate message with the same-source TAGSTACK runtime-parent frontier plus SIBLING-TEMPLATE. FOTAR is dictionary coding, closely related to the repo's VERITAS/PHALANX family; no global novelty claim is made.
+
+### X65 measurements (o200k, exact source-specific configurations)
+
+| fixture / category | measured source frontier | FOTAR evidence | outcome |
+|---|---|---|---|
+| OpenStack operations log (`bench/holdout-ops/openstack-loghub-26.log`, SHA-256 `55899f656f979de1bfae393eeb27a9a25f0c7c13d6b1da1118a61d80c8d54a7e`) | Final run 885 tokens, DIASTEMA; exact and complete (earlier run: 896, SYNKRISIS) | Complete FOTAR→APOGRAPHE candidate 1,080 tokens; exact | Rejected; final fallback to 885. **−195-token candidate deficit; no gain.** |
+| Prose changelog | Not full-frontier gated | Direct FOTAR message 15,675 vs 10,906 raw | Preflight loss only; no full-frontier conclusion |
+| File listing | Not full-frontier gated | Direct FOTAR message 6,730 vs 3,997 raw | Preflight loss only; no full-frontier conclusion |
+| `metrics.tsv` | No FOTAR plan; exact X61 source frontier 210, AKOLOUTHIA-2 | No candidate | No FOTAR change |
+
+Historical OpenStack numbers such as POLYTROPOS 988 are from a different measurement gate/configuration and are not mixed with the X65 TAGSTACK+SIBLING final value of 885 (the earlier run was 896). Receipts: `bench/x65/receipts/`; complete report including bounded research and verification limits: `bench/x65/REPORT.md`.
+
+### X65 exactness, decoder limits, and speed
+
+- FOTAR red team is 12/12. A separate stdlib-Python twin reconstructs the serialized table and restores its 919-codepoint control exactly. These tests verify the alias layer. The full composed gate still verifies APOGRAPHE restoration using encoder result metadata; a complete reader reconstructed from the serialized candidate alone is untested. Native LLM decoding is **not** claimed.
+- Planner CPU cleanup removed repeated intermediate map rendering/token counts: one final render is counted after the fixed ranked plan is assembled. No before/after timing series was collected; this is a code-path reduction, not a measured speedup.
+- The exact prior X61 frontier setup was repeated: `metrics.tsv`, SHA-256 `b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70`, `o200k_base`, unset `OMEGA_DET`, Node v22.22.3, six TAGSTACK runtime parents plus SIBLING-TEMPLATE. It matched the prior gate: 210 complete-message tokens, `akolouthia2`, exact and frontier-complete. Runtime was 113,300 ms vs the prior 94,136 ms; runtime varies, so this is no speedup claim. Receipt: `bench/x61/receipts/frontier-repeat-x61.json`.
+- REPRISE's one same-process cache observation remains strictly a repeated-input optimization: cold 136,733.854 ms vs one warm 0.129 ms on the same 1,203-character `metrics.tsv` message, with exact message bytes/token count unchanged. This does not accelerate cold or distinct inputs. See `bench/x64/receipts/reprise-cache.json` and the full caveats in `bench/x65/REPORT.md`.
+
+**Verdict:** no X65 category leader changes. FOTAR's real OpenStack candidate is exact but larger than the source frontier. Its prose/listing results are preflight-only screens, not full-frontier comparisons. The X65 external-source audit and math-research notes are in `bench/x65/REPORT.md`.

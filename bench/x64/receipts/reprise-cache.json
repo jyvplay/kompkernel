@@ -1,0 +1,64 @@
+{
+  "runtime": "v22.22.3",
+  "fixture": "bench/holdout-x40/metrics.tsv",
+  "sourceSha256": "b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70",
+  "sourceChars": 1203,
+  "config": {
+    "encoding": "o200k_base",
+    "OMEGA_DET": null,
+    "OMEGA_WORK_BUDGET": null,
+    "OMEGA_CHIRON_BUDGET": null
+  },
+  "result": {
+    "exact": true,
+    "frontierComplete": true,
+    "messageTokens": 210,
+    "parentTokens": 210,
+    "parentCodec": "akolouthia2",
+    "applied": false,
+    "coldElapsedMs": 136733.854,
+    "warmElapsedMs": 0.129,
+    "speedup": 1059188.76
+  },
+  "sameWireSha256": "f0e0ffb9543f3b2f7032067ed73d6fa3de84745639647fafdc109bdca1864628",
+  "coldStats": {
+    "entries": 1,
+    "retainedChars": 4422,
+    "hits": 0,
+    "misses": 1,
+    "bypasses": 0
+  },
+  "warmStats": {
+    "entries": 1,
+    "retainedChars": 4422,
+    "hits": 1,
+    "misses": 1,
+    "bypasses": 0
+  },
+  "checks": [
+    {
+      "name": "cold full TAGSTACK result is exact and frontier-complete",
+      "pass": true
+    },
+    {
+      "name": "warm repeat reuses byte-identical self-contained message",
+      "pass": true
+    },
+    {
+      "name": "warm repeat preserves complete-message token cost",
+      "pass": true
+    },
+    {
+      "name": "cache accounting records one miss then one hit",
+      "pass": true
+    },
+    {
+      "name": "caller mutation cannot poison the memoized result",
+      "pass": true
+    },
+    {
+      "name": "warm exact-repeat encode is at least 10x faster",
+      "pass": true
+    }
+  ]
+}

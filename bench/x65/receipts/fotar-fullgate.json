@@ -1,0 +1,28 @@
+{
+  "runtime": "v22.22.3",
+  "fixture": "bench/holdout-ops/openstack-loghub-26.log",
+  "sourceSha256": "55899f656f979de1bfae393eeb27a9a25f0c7c13d6b1da1118a61d80c8d54a7e",
+  "sourceChars": 7969,
+  "rawTokens": 4028,
+  "plan": {
+    "exact": true,
+    "entries": 7,
+    "aliases": 88,
+    "mappedChars": 7676,
+    "directContractMapTokens": 4836
+  },
+  "result": {
+    "fotar": false,
+    "exact": true,
+    "frontierComplete": true,
+    "decodedEqualsSource": true,
+    "messageTokens": 885,
+    "sourceFrontierTokens": 885,
+    "winner": "diastema",
+    "candidateTokens": 1080,
+    "candidateExact": true,
+    "elapsedMs": 570388.192,
+    "messageSha256": "90415e683509e437f595fc67ef91ca9a41cc25ebe48b437869507a0f4b804f80",
+    "notes": "candidate M=1080 >= source frontier M=885; fallback=diastema:885"
+  }
+}

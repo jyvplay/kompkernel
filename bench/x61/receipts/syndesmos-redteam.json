@@ -1,0 +1,135 @@
+{
+  "runtime": "v22.22.3",
+  "checkCount": 12,
+  "checks": [
+    {
+      "name": "repeated destination with distinct labels",
+      "pass": true,
+      "detail": {
+        "expectPlan": true,
+        "gotPlan": true,
+        "exact": true,
+        "gotPrefix": false
+      }
+    },
+    {
+      "name": "common long URL prefix is factored in-band",
+      "pass": true,
+      "detail": {
+        "expectPlan": true,
+        "gotPlan": true,
+        "exact": true,
+        "expectPrefix": true,
+        "gotPrefix": true
+      }
+    },
+    {
+      "name": "prefix factoring composes with repeated URL aliases",
+      "pass": true,
+      "detail": {
+        "expectPlan": true,
+        "gotPlan": true,
+        "exact": true,
+        "expectPrefix": true,
+        "gotPrefix": true
+      }
+    },
+    {
+      "name": "interleaved first-seen dictionary IDs",
+      "pass": true,
+      "detail": {
+        "expectPlan": true,
+        "gotPlan": true,
+        "exact": true,
+        "gotPrefix": false
+      }
+    },
+    {
+      "name": "CRLF and no final newline",
+      "pass": true,
+      "detail": {
+        "expectPlan": true,
+        "gotPlan": true,
+        "exact": true,
+        "gotPrefix": false
+      }
+    },
+    {
+      "name": "Unicode label and percent escape",
+      "pass": true,
+      "detail": {
+        "expectPlan": true,
+        "gotPlan": true,
+        "exact": true,
+        "gotPrefix": false
+      }
+    },
+    {
+      "name": "bare and reference-style URLs remain unchanged",
+      "pass": true,
+      "detail": {
+        "expectPlan": true,
+        "gotPlan": true,
+        "exact": true,
+        "gotPrefix": false
+      }
+    },
+    {
+      "name": "link-like code fence text restores exactly",
+      "pass": true,
+      "detail": {
+        "expectPlan": true,
+        "gotPlan": true,
+        "exact": true,
+        "gotPrefix": false
+      }
+    },
+    {
+      "name": "single-use URLs have no candidate",
+      "pass": true,
+      "detail": {
+        "expectPlan": false,
+        "gotPlan": false,
+        "exact": true,
+        "gotPrefix": false
+      }
+    },
+    {
+      "name": "collision sentinel refuses",
+      "pass": true,
+      "detail": {
+        "expectPlan": false,
+        "gotPlan": false,
+        "exact": true,
+        "gotPrefix": false
+      }
+    },
+    {
+      "name": "ordinary one-time Markdown remains unchanged",
+      "pass": true,
+      "detail": {
+        "expectPlan": false,
+        "gotPlan": false,
+        "exact": true,
+        "gotPrefix": false
+      }
+    },
+    {
+      "name": "forward-reference attack is rejected",
+      "pass": true,
+      "detail": {
+        "decoded": null
+      }
+    }
+  ],
+  "independentCPython": {
+    "total": 8,
+    "passed": 8,
+    "failures": []
+  },
+  "summary": {
+    "pass": 12,
+    "total": 12,
+    "independentCPython": "8/8"
+  }
+}
