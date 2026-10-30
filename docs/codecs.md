@@ -4334,7 +4334,7 @@ leaders are unchanged; every frontier encode is now 2–5× faster
 | Symmetric matrices | ISOSKELES — us31 1,677 < 3,297 full frontier (Solved) | No X57 movement |
 | **Dual-unit / affine-twin tables (new X57 category)** | **SYZYGIA** — india-124 **6,590 < 7,112 AKOLOUTHIA-2 (member)**; DAEDALUS-parent 6,668 | APO member legs >1,700 s (unmeasured); full gate pending at freeze |
 | **Weighted-total tables (new X58 category)** | **ZYGON** — ewf-standings **3,412 < 3,616 DAEDALUS (member)**; GWU gradebook detection member (economics-blocked at 35 rows) | Full gate timeout-killed 3,400 s on ewf; frontier-grade unclaimed |
-| **Standings / percentile / share tables (new X59 category)** | **BATHMOS** — ewf-standings `position` (member, OMEGA_DET=1) **3,502 < 3,561 AKOLOUTHIA-2 / 3,616 DAEDALUS** | On this file ZYGON's 3,412 (non-det member) still leads; BATHMOS full gate pending X59 attempt |
+| **Standings / percentile / share tables (new X59 category)** | **BATHMOS** — ewf-standings `position` (member, OMEGA_DET=1) **3,502 < 3,561 AKOLOUTHIA-2 / 3,616 DAEDALUS** | On this file ZYGON's 3,412 (non-det member) still leads; BATHMOS full gate timeout-dead 3,400 s (frontier measurement wall), member-grade only |
 | Stack runtime | WORKMETER (not a codec) | frontier repeat 274.5→115.2 s byte-identical; od-bin512 SYNKRISIS >900 s→192 s; X59: DAEDALUS ewf 39.6→18.0 s byte-identical (CHIRON recal + ARIADNE branch-and-bound) |
 
 ## X58: speed round 2 (CHIRON epoch lane) + ZYGON weighted-sum elision
@@ -4473,8 +4473,16 @@ Lanes:
   `{goal_difference}` as tiebreaker), so the law is not file order. Honest
   placement: on this file ZYGON's weighted-sum lane (3,412, non-det
   member) remains cheaper; BATHMOS owns the *position* column, a different
-  redundancy, and loses the same-file race. Full gate: see attempt note
-  below.
+  redundancy, and loses the same-file race. Full gate on ewf:
+  **timeout-killed at 3,400 s** (`fullgate-ewf.err` = `FG-DONE-124`, empty
+  receipt) — the same TAGSTACK-frontier-measurement wall that killed the
+  SYZYGIA and ZYGON real-lane gates; the BATHMOS planner itself takes
+  ~1 s. Frontier-grade on the real lane is **unclaimed**; the shipped
+  `bathmosEncode` gate is exercised end-to-end on the generated
+  shuffled-grouped-rank red-team case: **candidate 518 < 553
+  APOGRAPHE-parent frontier, strict TAGSTACK+SIBLING comparison,
+  byte-exact, 290 s** (`fullgate-shuffled.json`) — frontier-grade on
+  generated material, member-grade on the real lane.
 - F1 driver standings (three public copies fetched) are **not** a lane:
   F1 countback tie-breaking (2nd places, 3rds, …) uses data the export
   omits (1,509/4,413 mismatches under points+wins on the largest copy).

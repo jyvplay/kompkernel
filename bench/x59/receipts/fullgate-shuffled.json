@@ -1,0 +1,13 @@
+{
+ "ms": 290065,
+ "applied": true,
+ "exact": true,
+ "messageTokens": 518,
+ "parentCodec": "apographe",
+ "parentTokens": 553,
+ "candidateTokens": 518,
+ "candidateExact": true,
+ "comparison": "strict complete-message TAGSTACK runtime-parent set plus SIBLING-TEMPLATE",
+ "fullFrontierMeasured": true,
+ "notes": "dropped weighted-sum columns (f4(rank)); complete-message M=518 < same-source frontier M=553"
+}

@@ -1053,7 +1053,7 @@ export function bathmosEncode(text: string, enc: EncodingName = 'o200k_base'): B
     candidateParentCodec: candidateParent.parentCodec,
     candidateParentCosts: candidateParent.parentCosts,
     comparison: frontier.comparison,
-    notes: `dropped weighted-sum columns (${shape}); complete-message M=${candidateTokens} < same-source frontier M=${frontier.tokens}`,
+    notes: `dropped window-law columns (${shape}); complete-message M=${candidateTokens} < same-source frontier M=${frontier.tokens}`,
     ms: Date.now() - started,
   };
 }
