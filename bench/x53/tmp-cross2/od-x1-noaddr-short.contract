@@ -1,0 +1,1 @@
+DIPTYCHON: after decoding below, the lines of 32 lowercase hex digits (read each as 16 byte pairs; the last data line may be shorter) are the bytes of an od dump with no ASCII panel. Rewrite each such line as: no offset, then each byte preceded by a space as 2 hex digits (no padding on a short last line). Keep every other line exactly as decoded.

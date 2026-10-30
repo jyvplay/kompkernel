@@ -78,6 +78,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { workEpoch, workBudgetFor } from './workmeter';
 import { apographeEncode, apographeDecodeResult } from './apographe';
 import { anagnorisisEncode, anagnorisisDecode } from './anagnorisis';
 
@@ -425,7 +426,7 @@ export interface ArchetyponResult {
   ms: number;
 }
 
-export function archetyponEncode(text: string, enc: EncodingName = 'o200k_base'): ArchetyponResult {
+function archetyponEncodeInner(text: string, enc: EncodingName = 'o200k_base'): ArchetyponResult {
   const t0 = Date.now();
   const inTokens = countTokens(text, enc);
   // IDENTITY ARM = the exact best of the two strongest prior codecs on this
@@ -434,7 +435,7 @@ export function archetyponEncode(text: string, enc: EncodingName = 'o200k_base')
   // This is a measured tournament, not a claim: on general prose the frontier
   // wins; on a bundle of many licences ANAGNORISIS wins.
   let parent: any = null;
-  try { parent = apographeEncode(text, enc); } catch { /* identity below */ }
+  try { parent = workEpoch(workBudgetFor(text.length), () => apographeEncode(text, enc), text.length); } catch { /* identity below */ } // X57 per-arm work epoch
   const pWire: string = parent?.wire ?? text;
   const pContract: string = parent?.contract ?? '';
   const identityMsg = (pContract ? pContract + '\n' : '') + pWire;
@@ -445,7 +446,7 @@ export function archetyponEncode(text: string, enc: EncodingName = 'o200k_base')
     message: identityMsg, notes: 'identity (shipped frontier)', ms: Date.now() - t0,
   };
   try {
-    const an: any = anagnorisisEncode(text, enc);
+    const an: any = workEpoch(workBudgetFor(text.length), () => anagnorisisEncode(text, enc), text.length); // X57 per-arm work epoch
     if (an && an.messageTokens < identity.messageTokens && an.decoded === text) {
       const anMsg: string = an.decoderPrompt ?? ((an.contract ?? '') + '\n' + an.wire);
       const anExact = anagnorisisDecode(an.wire) === text;
@@ -697,4 +698,15 @@ export function selfCanonDecode(wire: string, delim: string): string {
     out.push(...body);
   }
   return out.join(eol) + (finalEol ? eol : '');
+}
+
+/**
+ * X57: the identity arms price the input through the frontier chain, whose
+ * glyph-assignment search is the stack's pathological sink (83 s on a
+ * 600-char hex dump pre-repair). Each arm runs in its own deterministic
+ * work epoch (see workmeter.ts; per-arm epochs inline above). Nested
+ * inside a parent epoch (SYNKRISIS) they share the outer window.
+ */
+export function archetyponEncode(text: string, enc: EncodingName = 'o200k_base'): ArchetyponResult {
+  return archetyponEncodeInner(text, enc);
 }

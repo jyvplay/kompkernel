@@ -1,0 +1,7 @@
+{
+ "codec": "akolouthia2",
+ "file": "bench/x57/fixtures/weatherindia-124cities.csv",
+ "tokens": 7112,
+ "exact": true,
+ "ms": 50434
+}

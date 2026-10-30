@@ -1,0 +1,113 @@
+{
+  "runtime": "v22.22.3",
+  "checks": [
+    {
+      "name": "two alpha-equivalent function bodies",
+      "pass": true,
+      "details": {
+        "planned": true,
+        "exact": true
+      }
+    },
+    {
+      "name": "constant identifiers are factored; only varying bindings remain",
+      "pass": true,
+      "details": {
+        "planned": true,
+        "exact": true
+      }
+    },
+    {
+      "name": "quoted braces and identifier-like strings are literal",
+      "pass": true,
+      "details": {
+        "planned": true,
+        "exact": true
+      }
+    },
+    {
+      "name": "CRLF exact restore, no final newline",
+      "pass": true,
+      "details": {
+        "planned": true,
+        "exact": true
+      }
+    },
+    {
+      "name": "single function has no reusable template",
+      "pass": true,
+      "details": {
+        "planned": false,
+        "exact": true
+      }
+    },
+    {
+      "name": "exact duplicate blocks without renamed identifiers are refused",
+      "pass": true,
+      "details": {
+        "planned": false,
+        "exact": true
+      }
+    },
+    {
+      "name": "plain prose is refused",
+      "pass": true,
+      "details": {
+        "planned": false,
+        "exact": true
+      }
+    },
+    {
+      "name": "source collision selects a distinct in-band marker set",
+      "pass": true,
+      "details": {
+        "planned": true,
+        "exact": true
+      }
+    },
+    {
+      "name": "all reserved marker alphabets cause safe refusal",
+      "pass": true,
+      "details": {
+        "planned": false,
+        "exact": true
+      }
+    },
+    {
+      "name": "real repository source file: repeated code-synthesis wrappers",
+      "pass": true,
+      "details": {
+        "sourceSha256": "2808b00321d933b03b245790643d0e8860992d880d16f9d03ce905193387a8d9",
+        "chars": 10538,
+        "wireChars": 7503,
+        "references": 34
+      }
+    },
+    {
+      "name": "malformed identifier mapping is rejected",
+      "pass": true
+    },
+    {
+      "name": "unused extra identifier binding is rejected",
+      "pass": true
+    },
+    {
+      "name": "expanded-output amplification is bounded",
+      "pass": true,
+      "details": {
+        "wireChars": 600065,
+        "capChars": 1000000
+      }
+    }
+  ],
+  "summary": {
+    "passed": 13,
+    "total": 13
+  },
+  "independentPython": {
+    "total": 6,
+    "passed": 6,
+    "failures": []
+  },
+  "fixture": "src/lib/omega/codec-synthesis.ts"
+}

@@ -1,0 +1,4 @@
+{"codec":"archetypon","lane":"bench/holdout/lic-mit.txt","budget":"0","ms":4322,"tokens":38,"exact":true,"sha":"30f044d32098bf39"}
+{"codec":"archetypon","lane":"bench/holdout/lic-mit.txt","budget":"default","ms":4375,"tokens":38,"exact":true,"sha":"30f044d32098bf39"}
+{"codec":"synkrisis","lane":"bench/holdout/license.txt","budget":"0","ms":31869,"tokens":929,"exact":true,"sha":"7effcc2ddf52cef1"}
+{"codec":"synkrisis","lane":"bench/holdout/license.txt","budget":"default","ms":31947,"tokens":929,"exact":true,"sha":"7effcc2ddf52cef1"}

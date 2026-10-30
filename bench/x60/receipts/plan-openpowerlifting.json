@@ -1,0 +1,31 @@
+{
+ "lane": "/tmp/x60lanes/openpowerlifting-combined.csv",
+ "applied": true,
+ "exact": true,
+ "ms": 183,
+ "srcTokens": 21434,
+ "reducedTokens": 20882,
+ "contractTokens": 97,
+ "drops": [
+  {
+   "name": "Full Name",
+   "parts": [
+    {
+     "kind": "src",
+     "col": 3,
+     "tf": "id"
+    },
+    {
+     "kind": "lit",
+     "text": " "
+    },
+    {
+     "kind": "src",
+     "col": 4,
+     "tf": "id"
+    }
+   ],
+   "exceptions": 2
+  }
+ ]
+}

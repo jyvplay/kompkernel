@@ -1,0 +1,1 @@
+SYZYGIA: after decoding below, in the comma-separated table insert as header field and value in every row: field 2 "usd": 0.01×{usd_cents} (2 decimals). Round each computed value to the stated decimals, halves away from zero. {x} means that row's decoded {x}. Change nothing else.

@@ -1,0 +1,38 @@
+{
+  "config": {
+    "path": "bench/z47/corpus/changelog/ucfopen_canvasapi.md",
+    "encoding": "o200k_base",
+    "node": "v22.22.3",
+    "OMEGA_DET": null,
+    "cost": "complete in-band message, direct o200k_base count; candidate = optional in-band URL-prefix table + URL-reference contract + transformed TAGSTACK runtime-parent frontier + SIBLING-TEMPLATE; baseline = same-source frontier"
+  },
+  "input": {
+    "sha256": "4ff19c4ecc4e63daee4c9b8d492c495f0c3bc173d49c9381d7a6da4f30be8f78",
+    "chars": 24000,
+    "tokens": 6502
+  },
+  "plan": {
+    "linkCount": 138,
+    "eligibleLinks": 60,
+    "urls": 78,
+    "transformedTokens": 6481,
+    "transformedChars": 22477,
+    "contractTokens": 82,
+    "exactPlan": true,
+    "prefix": null
+  },
+  "result": {
+    "codec": "syndesmos",
+    "exact": true,
+    "applied": false,
+    "messageTokens": 3592,
+    "inTokens": 6502,
+    "baselineTokens": 3592,
+    "frontierTokens": 3592,
+    "parentCodec": "synkrisis",
+    "planMs": 0,
+    "fullFrontierMeasured": true,
+    "comparison": "exact candidate 3765 >= measured source frontier 3592; fallback",
+    "elapsedMs": 678808
+  }
+}

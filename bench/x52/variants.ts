@@ -1,0 +1,12 @@
+import * as fs from 'node:fs';
+import { countTokens } from '../../src/lib/omega/bpe';
+const T = (s: string) => countTokens(s, 'o200k_base');
+const buf = fs.readFileSync('/tmp/x52-bin8k');
+const lines: number[][] = [];
+for (let i = 0; i < buf.length; i += 16) lines.push([...buf.subarray(i, i + 16)]);
+const hx = (b: number) => b.toString(16).padStart(2, '0');
+const spaced = lines.map(l => l.map(hx).join(' ')).join('\n') + '\n';
+const cont = lines.map(l => l.map(hx).join('')).join('\n') + '\n';
+const contAll = lines.map(l => l.map(hx).join('')).join('') + '\n';
+const grp2 = lines.map(l => { const g: string[] = []; for (let i = 0; i < l.length; i += 2) g.push(l.slice(i, i + 2).map(hx).join('')); return g.join(' '); }).join('\n') + '\n';
+console.log(JSON.stringify({ spacedPairsPerLine: T(spaced), continuousPerLine: T(cont), continuousOneLine: T(contAll), group2PerLine: T(grp2), bytes: buf.length }));

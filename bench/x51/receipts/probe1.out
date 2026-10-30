@@ -1,0 +1,220 @@
+corpus files=126
+
+== MICRO (orig -> alt tokens) ==
+"192.168.0.1" 7 -> "c0a80001" 5  d=-2
+"192.168.0.1" 7 -> "3232235521" 4  d=-3
+"10.0.0.255" 7 -> "0a0000ff" 5  d=-2
+"172.16.254.3" 7 -> "ac10fe03" 4  d=-3
+"aa:bb:cc:dd:ee:ff" 11 -> "aabbccddeeff" 5  d=-6
+"1.2.3" 5 -> "1002003" 3  d=-2
+"10.20.30" 5 -> "10020030" 3  d=-2
+"2.11.4" 5 -> "2011004" 3  d=-2
+"0.9.17" 5 -> "9017" 2  d=-3
+"26th" 2 -> "26" 1  d=-1
+"October 26th" 4 -> "October 26" 3  d=-1
+"3rd" 2 -> "3" 1  d=-1
+"$1,234.56" 6 -> "123456" 2  d=-4
+"$12.50" 4 -> "1250" 2  d=-2
+"#ff0000" 4 -> "red" 1  d=-3
+"#ffffff" 2 -> "white" 1  d=-1
+"#000000" 3 -> "black" 1  d=-2
+"#008000" 3 -> "green" 1  d=-2
+"#0000ff" 4 -> "blue" 1  d=-3
+"#808080" 3 -> "gray" 1  d=-2
+"Mon, 26 Oct 2026" 8 -> "26 Oct 2026" 5  d=-3
+"Mon Oct 26 13:53:08 2026" 13 -> "Oct 26 13:53:08 2026" 12  d=-1
+"compression" 1 -> "cmprssn" 4  d=3
+" internationalization" 2 -> " intrntnlztn" 5  d=3
+" the" 1 -> "" 0  d=-1
+" of" 1 -> "" 0  d=-1
+"1,234,567" 5 -> "1234567" 3  d=-2
+"00:02:05" 5 -> "125" 1  d=-4
+"90 minutes" 2 -> "1h30m" 4  d=2
+"1.23e+05" 6 -> "123000" 2  d=-4
+"50%" 2 -> "0.5" 3  d=1
+"three" 1 -> "3" 1  d=0
+"colour" 1 -> "color" 1  d=0
+"do not" 2 -> "don't" 1  d=-1
+"file1 file2 file3 file4 file5" 10 -> "file1-5" 4  d=-6
+"+00:00" 4 -> "Z" 1  d=-3
+"05:56:50" 5 -> "055650" 2  d=-3
+
+== ARITHMETIC FD SCAN (same-row exact for ALL rows) ==
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"C = HIGH * 17240000000000/17240000000000","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"C = LOW * 17240000000000/17240000000000","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"C = CLOSE * 17240000000000/17240000000000","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"C = OPEN * 17240000000000/17240000000000","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"C = LOW * 17240000000000/17240000000000","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"C = CLOSE * 17240000000000/17240000000000","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"C = OPEN * 17240000000000/17240000000000","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"C = HIGH * 17240000000000/17240000000000","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"C = CLOSE * 17240000000000/17240000000000","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"C = OPEN * 17240000000000/17240000000000","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"C = HIGH * 17240000000000/17240000000000","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"C = LOW * 17240000000000/17240000000000","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"upper(HIGH)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"lower(HIGH)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"HIGH+\"\"","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"\"\"+HIGH","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"upper(LOW)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"lower(LOW)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"LOW+\"\"","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"\"\"+LOW","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"upper(CLOSE)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"lower(CLOSE)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"CLOSE+\"\"","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"OPEN","rel":"\"\"+CLOSE","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"upper(OPEN)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"lower(OPEN)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"OPEN+\"\"","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"\"\"+OPEN","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"upper(LOW)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"lower(LOW)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"LOW+\"\"","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"\"\"+LOW","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"upper(CLOSE)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"lower(CLOSE)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"CLOSE+\"\"","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"HIGH","rel":"\"\"+CLOSE","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"upper(OPEN)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"lower(OPEN)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"OPEN+\"\"","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"\"\"+OPEN","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"upper(HIGH)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"lower(HIGH)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"HIGH+\"\"","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"\"\"+HIGH","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"upper(CLOSE)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"lower(CLOSE)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"CLOSE+\"\"","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"LOW","rel":"\"\"+CLOSE","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"upper(OPEN)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"lower(OPEN)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"OPEN+\"\"","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"\"\"+OPEN","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"upper(HIGH)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"lower(HIGH)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"HIGH+\"\"","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"\"\"+HIGH","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"upper(LOW)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"lower(LOW)","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"LOW+\"\"","colTokens":630}
+{"file":"vix-daily-1990.csv","delim":",","rows":126,"target":"CLOSE","rel":"\"\"+LOW","colTokens":630}
+{"file":"markdown-table.md","delim":"|","rows":11,"target":"","rel":"upper()","colTokens":11}
+{"file":"markdown-table.md","delim":"|","rows":11,"target":"","rel":"lower()","colTokens":11}
+{"file":"markdown-table.md","delim":"|","rows":11,"target":"","rel":"+\"\"","colTokens":11}
+{"file":"markdown-table.md","delim":"|","rows":11,"target":"","rel":"\"\"+","colTokens":11}
+{"file":"markdown-table.md","delim":"|","rows":11,"target":"","rel":"upper()","colTokens":11}
+{"file":"markdown-table.md","delim":"|","rows":11,"target":"","rel":"lower()","colTokens":11}
+{"file":"markdown-table.md","delim":"|","rows":11,"target":"","rel":"+\"\"","colTokens":11}
+{"file":"markdown-table.md","delim":"|","rows":11,"target":"","rel":"\"\"+","colTokens":11}
+{"file":"cue-sheet.md","delim":"|","rows":28,"target":"","rel":"upper()","colTokens":28}
+{"file":"cue-sheet.md","delim":"|","rows":28,"target":"","rel":"lower()","colTokens":28}
+{"file":"cue-sheet.md","delim":"|","rows":28,"target":"","rel":"+\"\"","colTokens":28}
+{"file":"cue-sheet.md","delim":"|","rows":28,"target":"","rel":"\"\"+","colTokens":28}
+{"file":"cue-sheet.md","delim":"|","rows":28,"target":"","rel":"upper()","colTokens":28}
+{"file":"cue-sheet.md","delim":"|","rows":28,"target":"","rel":"lower()","colTokens":28}
+{"file":"cue-sheet.md","delim":"|","rows":28,"target":"","rel":"+\"\"","colTokens":28}
+{"file":"cue-sheet.md","delim":"|","rows":28,"target":"","rel":"\"\"+","colTokens":28}
+FD hits total=76
+
+== SHAPE DENSITY (occurrences, files with >=5) ==
+semver3 [{"f":"package-lock-head.json","n":279},{"f":"npm-ls.txt","n":131},{"f":"ls-l-real.txt","n":95},{"f":"apt-real.txt","n":80},{"f":"pkg0.txt","n":79},{"f":"pkg6.txt","n":52},{"f":"json-pkg.txt","n":47},{"f":"prose-changelog.md","n":44},{"f":"ss-tan.txt","n":40},{"f":"pkg4.txt","n":27}]
+ver4 [{"f":"ss-tan.txt","n":40},{"f":"kubectl-get-pods.txt","n":22},{"f":"openstack-loghub-26.log","n":15},{"f":"dts6.txt","n":5}]
+ipv4 [{"f":"ss-tan.txt","n":40},{"f":"kubectl-get-pods.txt","n":22},{"f":"openstack-loghub-26.log","n":15},{"f":"dts6.txt","n":5}]
+weekdayRFC [{"f":"dts0.txt","n":8}]
+ctime [{"f":"ops-git-log-stat.txt","n":12}]
+epoch10 [{"f":"find-listing.txt","n":6}]
+hexcolor [{"f":"chart.svg","n":38}]
+sha40 [{"f":"ops-git-log-stat.txt","n":12}]
+percent [{"f":"page.html","n":42},{"f":"df-h.txt","n":18},{"f":"prose-readme-2.md","n":18},{"f":"ops-git-log-stat.txt","n":13},{"f":"gh-prose.txt","n":12},{"f":"markdown-table.md","n":10},{"f":"gh-api.json.txt","n":6},{"f":"llm-answer.md","n":5},{"f":"df-real.txt","n":5},{"f":"df-h.txt","n":5}]
+sciNot [{"f":"prose-readme-4.md","n":9}]
+fraction [{"f":"kubectl-get-pods.txt","n":22},{"f":"prose-readme-4.md","n":10},{"f":"hybrid-x11-report.md","n":5}]
+
+== DUPLICATE LINES (consecutive-run excess tokens raw, top) ==
+{"f":"package-lock-head.json","consecExcessTok":0,"consecLines":0,"anyDupExcessTok":5617,"rawTok":15009}
+{"f":"dts7.txt","consecExcessTok":0,"consecLines":0,"anyDupExcessTok":1302,"rawTok":3890}
+{"f":"pkg6.txt","consecExcessTok":0,"consecLines":0,"anyDupExcessTok":1218,"rawTok":7380}
+{"f":"dts0.txt","consecExcessTok":0,"consecLines":0,"anyDupExcessTok":695,"rawTok":3991}
+{"f":"page.html","consecExcessTok":0,"consecLines":0,"anyDupExcessTok":663,"rawTok":3220}
+{"f":"prose-readme-1.md","consecExcessTok":0,"consecLines":0,"anyDupExcessTok":633,"rawTok":6099}
+{"f":"dts1.txt","consecExcessTok":0,"consecLines":0,"anyDupExcessTok":624,"rawTok":3280}
+{"f":"prose-changelog.md","consecExcessTok":0,"consecLines":0,"anyDupExcessTok":616,"rawTok":10906}
+{"f":"prose-readme-2.md","consecExcessTok":32,"consecLines":10,"anyDupExcessTok":596,"rawTok":7763}
+{"f":"dts3.txt","consecExcessTok":11,"consecLines":1,"anyDupExcessTok":569,"rawTok":3504}
+{"f":"dts4.txt","consecExcessTok":0,"consecLines":0,"anyDupExcessTok":560,"rawTok":3808}
+{"f":"dts9.txt","consecExcessTok":9,"consecLines":1,"anyDupExcessTok":467,"rawTok":3707}
+{"f":"ops-git-log-stat.txt","consecExcessTok":0,"consecLines":0,"anyDupExcessTok":450,"rawTok":5212}
+{"f":"gh-api.json.txt","consecExcessTok":0,"consecLines":0,"anyDupExcessTok":384,"rawTok":2519}
+{"f":"doc10.txt","consecExcessTok":0,"consecLines":0,"anyDupExcessTok":361,"rawTok":3836}
+
+== LIST NUMBERING ==
+{"f":"bibliography.txt","listMarkers":0,"markerTok":0,"headingNums":0,"biblioNums":20}
+{"f":"llm-answer.md","listMarkers":2,"markerTok":4,"headingNums":5,"biblioNums":0}
+{"f":"hybrid-x10-report.md","listMarkers":29,"markerTok":58,"headingNums":12,"biblioNums":0}
+{"f":"hybrid-x11-report.md","listMarkers":5,"markerTok":10,"headingNums":0,"biblioNums":0}
+{"f":"prose-changelog.md","listMarkers":0,"markerTok":0,"headingNums":18,"biblioNums":0}
+{"f":"lic-apache-2.0.txt","listMarkers":9,"markerTok":18,"headingNums":0,"biblioNums":0}
+
+== PROSE DELETION RAW DELTAS (negative = saves raw tokens; exactness NOT claimed) ==
+{"f":"license.txt","raw":1166,"disemvowel":735,"dropFunc":-237,"dropSpaces":116,"dropCommas":-84}
+{"f":"readme.txt","raw":843,"disemvowel":274,"dropFunc":-58,"dropSpaces":21,"dropCommas":-15}
+{"f":"de-kb.txt","raw":525,"disemvowel":250,"dropFunc":-2,"dropSpaces":127,"dropCommas":-26}
+{"f":"bibliography.txt","raw":896,"disemvowel":238,"dropFunc":-61,"dropSpaces":-73,"dropCommas":-65}
+{"f":"email-thread.txt","raw":629,"disemvowel":155,"dropFunc":-62,"dropSpaces":-39,"dropCommas":-15}
+{"f":"kb-article.txt","raw":656,"disemvowel":431,"dropFunc":-144,"dropSpaces":103,"dropCommas":-27}
+{"f":"llm-answer.md","raw":733,"disemvowel":229,"dropFunc":-52,"dropSpaces":-23,"dropCommas":-7}
+{"f":"meeting-transcript.txt","raw":472,"disemvowel":150,"dropFunc":-57,"dropSpaces":27,"dropCommas":-6}
+{"f":"prose-changelog.md","raw":10906,"disemvowel":2948,"dropFunc":-519,"dropSpaces":-137,"dropCommas":-63}
+{"f":"prose-readme-1.md","raw":6099,"disemvowel":2427,"dropFunc":-399,"dropSpaces":11,"dropCommas":-59}
+{"f":"prose-readme-2.md","raw":7763,"disemvowel":2588,"dropFunc":-451,"dropSpaces":-69,"dropCommas":-136}
+{"f":"prose-readme-3.md","raw":2718,"disemvowel":1024,"dropFunc":-172,"dropSpaces":-121,"dropCommas":-17}
+{"f":"prose-readme-4.md","raw":5992,"disemvowel":1831,"dropFunc":-268,"dropSpaces":117,"dropCommas":-52}
+{"f":"prose-readme-5.md","raw":1217,"disemvowel":417,"dropFunc":-144,"dropSpaces":31,"dropCommas":-25}
+
+== GCD LATTICE (numeric cols whose scaled ints share gcd>1) ==
+{"f":"vix-daily-1990.csv","col":"OPEN","gcd":"10000","scale":6,"rows":126,"before":504,"after":252,"delta":-252}
+{"f":"vix-daily-1990.csv","col":"HIGH","gcd":"10000","scale":6,"rows":126,"before":504,"after":252,"delta":-252}
+{"f":"vix-daily-1990.csv","col":"LOW","gcd":"10000","scale":6,"rows":126,"before":504,"after":252,"delta":-252}
+{"f":"vix-daily-1990.csv","col":"CLOSE","gcd":"10000","scale":6,"rows":126,"before":504,"after":252,"delta":-252}
+{"f":"metrics.tsv","col":"out_mbps","gcd":"20","scale":1,"rows":24,"before":72,"after":24,"delta":-48}
+{"f":"metrics.tsv","col":"out_mbps","gcd":"20","scale":1,"rows":24,"before":72,"after":24,"delta":-48}
+{"f":"prices.csv","col":"unit_price","gcd":"5","scale":2,"rows":30,"before":90,"after":30,"delta":-60}
+
+== DIFF HUNKS ==
+{"f":"unified-diff.patch","hunks":3,"headerTok":30,"countsTok":12,"rawTok":578}
+
+== EMBEDDED NUMBER SEQUENCES (same prefix+suffix, contiguous range len>=8) ==
+{"f":"gh-api.json.txt","hits":[{"pat":"#","n":11,"contig":false}]}
+{"f":"agent-history.md","hits":[{"pat":"#","n":27,"contig":false},{"pat":"#.","n":18,"contig":false}]}
+{"f":"chart.svg","hits":[{"pat":"x=\"#\"","n":37,"contig":false},{"pat":"y=\"#\"","n":20,"contig":false},{"pat":"height=\"#\"","n":19,"contig":false},{"pat":"opacity=\"0.#\"/>","n":18,"contig":true},{"pat":"fill=\"#dce8ff\">W#</text>","n":18,"contig":true}]}
+{"f":"dump.sql","hits":[{"pat":"#","n":31,"contig":false}]}
+{"f":"page.html","hits":[{"pat":"id=\"sec-#\">","n":14,"contig":true},{"pat":"#:","n":14,"contig":true},{"pat":"<strong>99.#%</strong>","n":14,"contig":false},{"pat":"class=\"metric\">#%</span>.</p>","n":14,"contig":false}]}
+{"f":"paper.tex","hits":[{"pat":"#","n":10,"contig":false}]}
+{"f":"find-listing.txt","hits":[{"pat":"#","n":118,"contig":false}]}
+{"f":"git-numstat.txt","hits":[{"pat":"#","n":254,"contig":false},{"pat":"bench/train/dts#.txt","n":10,"contig":true},{"pat":"bench/train/pkg#.txt","n":11,"contig":false}]}
+{"f":"ls-full-iso.txt","hits":[{"pat":"#","n":20,"contig":false}]}
+{"f":"openstack-loghub-26.log","hits":[{"pat":"#","n":8,"contig":false},{"pat":"0.#","n":15,"contig":false}]}
+{"f":"aapl-2014.csv","hits":[{"pat":"2014-01-#","n":21,"contig":false},{"pat":"74.#","n":21,"contig":false},{"pat":"75.#","n":16,"contig":false},{"pat":"76.#","n":10,"contig":false},{"pat":"73.#","n":11,"contig":false},{"pat":"2014-02-#","n":19,"contig":false}]}
+{"f":"vix-daily-1990.csv","hits":[{"pat":"1990-01-#","n":22,"contig":false},{"pat":"17.#","n":21,"contig":false},{"pat":"18.#","n":11,"contig":false},{"pat":"19.#","n":15,"contig":false},{"pat":"20.#","n":15,"contig":false},{"pat":"22.#","n":14,"contig":false}]}
+{"f":"df-h.txt","hits":[{"pat":"/dev/nvme0n1p#","n":18,"contig":true},{"pat":"#G","n":52,"contig":false},{"pat":"#%","n":18,"contig":false},{"pat":"/mnt/vol#","n":18,"contig":true}]}
+{"f":"psql-output.txt","hits":[{"pat":"#","n":24,"contig":true},{"pat":"user_#","n":24,"contig":true}]}
+{"f":"bibliography.txt","hits":[{"pat":"[#]","n":20,"contig":true},{"pat":"(#).","n":13,"contig":false}]}
+{"f":"cue-sheet.md","hits":[{"pat":"#","n":29,"contig":true},{"pat":"00:00:#","n":20,"contig":false},{"pat":"00:01:#","n":8,"contig":false}]}
+{"f":"prices.csv","hits":[{"pat":"2026-09-#","n":28,"contig":true},{"pat":"12.#","n":10,"contig":false},{"pat":"#","n":30,"contig":false},{"pat":"13.#","n":20,"contig":false}]}
+{"f":"du-ak.txt","hits":[{"pat":"#","n":112,"contig":false}]}
+{"f":"du-real.txt","hits":[{"pat":"#","n":39,"contig":false}]}
+{"f":"git-log-stat.txt","hits":[{"pat":"#","n":139,"contig":false}]}
+{"f":"ls-l-nm.txt","hits":[{"pat":"#","n":16,"contig":false}]}
+{"f":"ls-l-real.txt","hits":[{"pat":"#","n":121,"contig":false}]}
+{"f":"ls-real.txt","hits":[{"pat":"#","n":47,"contig":false}]}
+{"f":"node-versions.txt","hits":[{"pat":"#","n":14,"contig":false}]}
+{"f":"ps-aux-real.txt","hits":[{"pat":"#","n":97,"contig":false}]}
+{"f":"ps-real.txt","hits":[{"pat":"#","n":40,"contig":false}]}
+{"f":"ls-usr-bin.txt","hits":[{"pat":"#","n":45,"contig":false}]}
+{"f":"ps-ef.txt","hits":[{"pat":"#","n":40,"contig":false}]}
+{"f":"ss-tan.txt","hits":[{"pat":"[::ffff:10.12.0.18]:#","n":17,"contig":false}]}
+{"f":"ps-eo-cpu.txt","hits":[{"pat":"#","n":49,"contig":false}]}
+{"f":"ss-s.txt","hits":[{"pat":"#","n":11,"contig":false}]}
+{"f":"vmstat.txt","hits":[{"pat":"#","n":20,"contig":false}]}
+{"f":"hybrid-codecs-spec.md","hits":[{"pat":"#","n":20,"contig":false},{"pat":"−#","n":11,"contig":false},{"pat":"(#","n":8,"contig":false}]}

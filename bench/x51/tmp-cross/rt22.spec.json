@@ -1,0 +1,1 @@
+{"delimiter":";","cols":6,"header":["region","country","code","lowcode","start","end"],"headerRaw":["region","country","code","lowcode","start","end"],"drops":[{"target":1,"name":"country","kind":"split","a":0,"sep":"-","part":0},{"target":3,"name":"lowcode","kind":"case","a":2,"upper":false},{"target":5,"name":"end","kind":"fwdeq","a":4,"last":"999"}]}

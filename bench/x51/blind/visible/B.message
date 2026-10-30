@@ -1,0 +1,20 @@
+SYLLOGISMOS: after decoding the message below, the result is a comma-separated table with a header row, but some fields were removed because they are computed from the others. In every row, first compute the removed values from the decoded row, then insert them so each becomes field N (counting fields from 1 in the finished table) as listed: field 3 "delta" = the "level" field minus the the "level" field of the row above (exact decimal value); in the first data row it is "0"; field 6 "ref" = "INV-" + the "day" field + "-" + the "cc" field (text joined). In the header row insert the quoted field names instead of computing. Insert in increasing field-number order. Leave all other fields, quoting and line endings exactly as decoded.
+day,level,city,cc
+D01,577,Lyon,FR
+D02,603,Bruges,BE
+D03,641,Lyon,FR
+D04,689,Bruges,BE
+D05,714,Gent,BE
+D06,757,Lyon,FR
+D07,750,Porto,PT
+D08,750,Lyon,FR
+D09,716,Porto,PT
+D10,711,Nice,FR
+D11,742,Nice,FR
+D12,776,Bruges,BE
+D13,818,Nice,FR
+D14,856,Lyon,FR
+D15,835,Braga,PT
+D16,863,Braga,PT
+D17,900,Bruges,BE
+D18,892,Gent,BE

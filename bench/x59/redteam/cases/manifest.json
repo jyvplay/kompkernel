@@ -1,0 +1,90 @@
+[
+ {
+  "name": "grouped-ordinal",
+  "expect": "apply"
+ },
+ {
+  "name": "competition-ties",
+  "expect": "apply"
+ },
+ {
+  "name": "dense-ties",
+  "expect": "apply"
+ },
+ {
+  "name": "percent-rank",
+  "expect": "apply"
+ },
+ {
+  "name": "cume-dist",
+  "expect": "apply"
+ },
+ {
+  "name": "share-of-sum",
+  "expect": "apply"
+ },
+ {
+  "name": "index-to-max",
+  "expect": "apply"
+ },
+ {
+  "name": "ntile4",
+  "expect": "apply"
+ },
+ {
+  "name": "ntile-labels",
+  "expect": "apply"
+ },
+ {
+  "name": "ratio-ppg-rank",
+  "expect": "apply"
+ },
+ {
+  "name": "rank-two-exceptions",
+  "expect": "any"
+ },
+ {
+  "name": "random-pos",
+  "expect": "refuse"
+ },
+ {
+  "name": "degenerate-counter",
+  "expect": "refuse"
+ },
+ {
+  "name": "foreign-total",
+  "expect": "any"
+ },
+ {
+  "name": "tsv-crlf-asc",
+  "expect": "apply"
+ },
+ {
+  "name": "shuffled",
+  "expect": "apply"
+ },
+ {
+  "name": "tiny",
+  "expect": "refuse"
+ },
+ {
+  "name": "no-trailing-nl",
+  "expect": "apply"
+ },
+ {
+  "name": "twin-rounded-rank",
+  "expect": "any"
+ },
+ {
+  "name": "german-share",
+  "expect": "apply"
+ },
+ {
+  "name": "rank-swapped-exceptions",
+  "expect": "apply"
+ },
+ {
+  "name": "ntile-identity-disguise",
+  "expect": "refuse"
+ }
+]

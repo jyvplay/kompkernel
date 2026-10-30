@@ -1,6 +1,6 @@
-# Codec abbreviations: decoded design spec (X13 base; X46 update)
+# Codec abbreviations: decoded design spec (X13 base; X65 update)
 
-This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`, 209 keys as of X46) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. SYNKRISIS was added in X45 (208 keys); BIFRONT is X46 (209 keys). The companion page is `docs/codecs.md` (measurements and leaders).
+This page decodes the codec abbreviations used in the registry (`src/lib/omega/registry.ts`; `codecEntries()` returns 229 entries as of X65, including generated preset variants; literal `key:` lines count 214) into their technical design: the mechanism, whether the encoder is greedy or a search, the source citation, and the time or CPU bound. Historical entries retain their original measurement scope. SYNKRISIS was added in X45; BIFRONT in X46; KOLUMN in X49; ATX-RELEASE in X50; SYLLOGISMOS in X51; DIPTYCHON in X52; TAXIS in X53; ATHROISMOS in X54; KEPHALAION in X55; ISOSKELES in X56; SYZYGIA in X57; ZYGON in X58; EIRMOS in X60; SYNDESMOS in X61; RHIZOMA in X62; ALPHAFOLD in X63; REPRISE in X64; FOTAR in X65. The companion page is `docs/codecs.md` (measurements and fixture-specific leaders).
 
 Conventions:
 
@@ -2519,3 +2519,688 @@ preprocessing, not evidence for this exact byte-perfect one-chat transform.
 uses a separate `verbatim` store for lossless restoration, outside this
 one-message constraint. No compression-theory novelty is claimed. Native LLM
 decoding remains unverified.
+
+# X51 (2026-10-28) — SYLLOGISMOS: computed columns are premises, not payload
+
+## συλλογισμός SYLLOGISMOS (X51, `src/lib/omega/syllogismos.ts`, registry key `syllogismos`, exact, deep, shipped this turn)
+
+- **Name decoded.** Greek συλλογισμός, "a reckoning together, an inference":
+  the decoder *infers* each removed field from premises (the surviving
+  fields) instead of receiving it. Technical translation: **verified
+  functional-dependency (FD) column elision for delimited tables**.
+- **Mechanism (what is new in this stack).** Everything before X51 removes
+  redundancy that is textual repetition (grammar rules), a vertical law in
+  one column (AKOLOUTHIA-2, METRON, KOLUMN descriptors, APOGRAPHE
+  `above`/`days`/`+b`), or an identical sibling (APOGRAPHE `colM`, KOLUMN
+  `R`). No codec removed a column whose values are *computed across the
+  row* — `COUTAX_FEMALEUNEMP = COUTAX × UNEMPF`, an ID assembled as
+  `"age" + age + "_" + gender`, an `iso_country` that is `iso_region`
+  before its dash. To a grammar those are fresh digit strings each row,
+  because the redundancy is arithmetic/functional, not substring-shaped.
+  SYLLOGISMOS enumerates a bounded FD family over the fields of a
+  delimited table, verifies each candidate on **every row** with exact
+  BigInt-rational decimal arithmetic **and** byte-identical CSV rendering
+  (scale, gratuitous quoting, and header bytes all checked), deletes the
+  columns it can recompute, states each dependency once in an in-band
+  contract, and hands the reduced table to the cheapest measured of
+  DAEDALUS / AKOLOUTHIA-2 / APOGRAPHE. Relation kinds: `arith`
+  (A+B, A−B, A*B, A/B, 100·A/B; rendered exact-minimal, or at the
+  target's constant scale with rounding mode in {half-up, trunc, ceil});
+  `scaleK` (A*K for a fitted rational K with a short rendering);
+  `concat` (constants + up to two fields); `split` (one part of a split);
+  `case`; `lookup` (finite map, shipped in the contract, with a
+  majority-default-plus-exceptions rendering when shorter); `shiftdiff`
+  (A_i − A_{i−1}); `fwdeq` (A_{i+1}). **Constant and duplicate columns are
+  deliberately excluded** — APOGRAPHE/KOLUMN own them, and a candidate
+  whose computed values are constant or identical to another column is
+  rejected in verification.
+- **Gate (measured, frontier-scoped).** The complete candidate (contract
+  + best parent message on the reduced table) must first beat both
+  AKOLOUTHIA-2 and APOGRAPHE on the original — both are members of the X49
+  TAGSTACK runtime-parent set, so losing to either proves it cannot beat
+  that frontier — and then the full TAGSTACK + SIBLING-TEMPLATE frontier,
+  strictly, with byte-exact decode. Any failure returns the measured best
+  parent; nothing is emitted on raw-wire estimates.
+- **Greedy?** The per-column relation enumeration is exhaustive within its
+  bounded family and fully verified (not greedy). The *drop-set selection*
+  is greedy: candidates are ranked by isolated column token mass minus
+  contract-fragment cost, accepted subject to an acyclicity rule (a dropped
+  column is never a source; a used source is never dropped), so inverse
+  relations compete by mass — e.g. it may drop `unit = amount / qty`
+  instead of `amount = qty * unit` when the `unit` column is heavier.
+  No joint-optimality claim. Emission is a measured gate, not a search.
+- **Honest source-article citation.** The mechanism class is **not new in
+  the literature**. Exploiting dependencies between columns is the core of
+  semantic/model-based lossless tabular compression: SPARTAN (model-based
+  semantic compression of tables), SQUISH (Bayesian networks + arithmetic
+  coding for relational data), "column dependency" formalized in
+  *Theoretical Computer Science* 387 (2007) 273–283, DeepSqueeze
+  (SIGMOD 2020, doi:10.1145/3318464.3389734), and Blitzcrank (VLDB 2024),
+  all found in this turn's searches and all bit-level systems using
+  arithmetic coding / learned probability models. What is new here is only
+  the repository realization: exact *textual* rendering (decimal scales,
+  rounding modes, CSV quoting), a one-chat LLM-readable contract with no
+  side model, and the measured frontier gate. SQL's generated/computed
+  columns and spreadsheet formulas are the everyday cousins of the same
+  idea.
+- **Time- or CPU-bound?** CPU-bound. The planner is bounded (100,000
+  UTF-16 code units, 10,000 data rows, 32 columns, ≤8 drops, a
+  30,000,000 cell-evaluation work cap, BigInt exact arithmetic). The
+  inherited parent encodes and TAGSTACK frontier gate dominate wall time
+  and have no wrapper-wide cap, so the registry entry is `deep: true`.
+- **Verified reader burden, by kind.** `split`/`case`/`concat`/`lookup`
+  are string operations an LLM performs by inspection; `arith` asks for
+  one exact decimal operation per row (worst usual case: a 3-digit ×
+  2-digit product or one division); `scaleK` is admitted only when K
+  renders short (≤10-char decimal or ≤12-char fraction). A fitted-percent
+  relation of the form `%MEM = trunc1dp(RSS × 100 / 4033536)` was measured
+  exact on 59/59 rows of a real `ps aux` capture this turn but is **out of
+  scope**: whitespace-aligned tables have no clean field-deletion byte
+  model here and the 7-digit division is beyond the reader-arithmetic
+  this codec is willing to demand.
+- **Measured (see `bench/x51/X51.md` for receipts).** Real `csv-3.csv` (employment data, 32 rows): **673 vs the measured
+  TAGSTACK+SIBLING frontier 678** — a strict full-gate win, margin −5
+  (the ~90-token contract floor dominates at this size; two wordier
+  contract drafts lost the same lane at 724 and 703). Real
+  `airport-codes-300.csv`: candidate 8,100 vs best measured frontier
+  member APOGRAPHE 8,115 (−15, member-level; full frontier not measured
+  — single parent encodes took 412–462 s). Synthetic, labelled as such
+  (`bench/x51/fixtures/orders-synthetic-160.csv`, 160 order lines with
+  `total = qty × unit`, a split, and a concatenated reference):
+  candidate 837 vs AKOLOUTHIA-2 1,769 / APOGRAPHE 1,812 (−932,
+  member-level) — the scale economics of arithmetic columns, whose
+  digits no vertical law can predict. Real `csv-5.csv` correctly falls
+  back (candidate 798 vs 381; its cheapest-looking reduction is cyclic
+  and refused). Red team 186/186; independent CPython decoder 24/24
+  red-team cases + the 300-row airport lane byte-exact; three blind
+  native LLM decodes (this model, contract-only) byte-exact.
+- **Negative results from the same turn's probe portfolio** (all measured
+  through DAEDALUS, `OMEGA_DET=1`, in `bench/x51/receipts/probe*.out`):
+  SemVer / IPv4 mixed-radix or zero-padded packing loses on 9/9 lanes
+  (+22…+67 after contract: DAEDALUS already prices a distinct version at
+  the packed cost); disemvoweling inflates prose (+150…+2,948 raw tokens);
+  `git log --stat` summary lines are **not** reliably the sums of the
+  visible per-file counts (3/10 blocks in the fixture; binary/rename
+  lines break the identity); `du -ak` parent sizes are the sum of listed
+  children in only 2/62 cases in the (sorted, truncated) fixture;
+  diff hunk-header counts are a 12-token ceiling.
+
+# X52 (2026-10-28) — DIPTYCHON: ship one panel of the hexdump
+
+## δίπτυχον DIPTYCHON (X52, `src/lib/omega/diptychon.ts`, registry key `diptychon`, exact, deep, shipped this turn)
+
+- **Name decoded.** Greek δίπτυχον, a two-panel folding tablet. A hexdump
+  line is exactly that: a hex panel and an ASCII panel (the gutter)
+  printing **the same bytes twice**, plus an offset that is 16 × the line
+  index. Technical translation: **canonical dual-rendering elision** —
+  ship one panel, state the rendering rule once, let the reader re-render
+  the frame.
+- **Mechanism (what is new in this stack).** Grep over all 281 modules:
+  `xxd` / `hexdump` / `gutter` = **0 hits** before X52. The nearest
+  relatives are GRAMMA (regenerates *layout*: JSON/code indentation from
+  structure) and KLADIOS (regenerates tree *connector glyphs* from a depth
+  sequence) — both position-derived. The gutter is **value-derived**: a
+  second encoding of the same values under a fixed external convention,
+  which is why grammar codecs cannot absorb it (each gutter is fresh
+  semi-random characters) and why it survived 51 turns. DIPTYCHON detects
+  three canonical renderings — `od -t x1z` (hex/octal/decimal/no offsets,
+  `*` squeezing), `xxd` (byte grouping, upper-case, decimal offsets,
+  NUL-line autoskip), `hexdump -C` — by inferring parameters from the
+  text, extracting the byte stream, and **verifying a byte-identical
+  re-render of the whole input** (offsets, spacing, gutter, squeeze
+  placement, final offset line). Only then is the frame stripped: data
+  lines become compact hex (space-separated pairs or one continuous hex
+  string per line — measured 16,990 vs 6,953 raw o200k tokens on an
+  8 KiB dump; the planner picks per input), squeezed runs expand to
+  repeated lines, other lines pass through, and the reduced text is
+  coded by the cheapest measured of DAEDALUS / AKOLOUTHIA-2 / APOGRAPHE.
+- **Gate (measured, frontier-scoped).** Identical construction to
+  SYLLOGISMOS: beat AKOLOUTHIA-2 and APOGRAPHE on the source (necessary
+  condition — both are TAGSTACK runtime-parent members), then the full
+  TAGSTACK + SIBLING-TEMPLATE frontier strictly with byte-exact decode,
+  else return the measured best parent.
+- **Greedy?** No. Format detection is a small deterministic candidate set
+  arbitrated by whole-input byte-exact re-rendering — a wrong parameter
+  guess can only refuse, never emit. Compact form is chosen by direct
+  token count. Emission is a measured gate.
+- **Honest source-article citation.** None — no paper stands behind this.
+  Hexdump reversibility is as old as the tools (`xxd -r` reverts a dump
+  to binary; "Canonical hex+ASCII display" is util-linux `hexdump -C`
+  terminology, man hexdump(1)). The claim is only the verified, one-chat,
+  LLM-re-renderable realization with a frontier gate, in a stack that had
+  no hexdump mechanism.
+- **Time- or CPU-bound?** CPU-bound. Planner is linear (caps 2,000,000
+  code units, 300,000 lines); inherited parent/frontier encodes dominate
+  with no wrapper-wide cap, so `deep: true`.
+- **Reader burden, measured not asserted.** Blind contract-only decodes
+  by this model: round 1 (4 fresh samples) 0/4 byte-exact — every
+  failure a gutter dot-count or one nibble-segmentation slip; round 2
+  (4 fresh samples, positional discipline) 3/4 byte-exact incl. octal
+  offsets and `*` squeeze reconstruction. The contract is sufficient;
+  counting dots in ASCII gutters is the known fragility. (Receipts:
+  `bench/x52/receipts/blind-decode.json`, `bench/x52/blind/`.)
+- **Measured (see `bench/x52/X52.md`).** Real `od` over 8 KiB of `/bin/ls`: candidate **3,014 vs AKOLOUTHIA-2
+  5,401 (−44%)** at frontier-member level; real 512 B dump: **385 vs
+  414** (DAEDALUS/AKO2 tie). The full TAGSTACK+SIBLING frontier has not
+  completed on any hexdump lane (APOGRAPHE alone exceeds 1,500 s on the
+  8 KiB dump; four frontier attempts stopped at 12–34 min) — so, as with
+  SYLLOGISMOS on airport, the codec's own gate currently gates it *off*
+  such lanes in practice until the frontier is affordable; the wins
+  above are necessary-condition evidence and are labelled that way.
+  Red team 227/227 against real GNU od ground truth; Python decoder
+  30/30 + lanes; blind decodes 3/4 byte-exact on fresh samples.
+- **Also this turn:** SYLLOGISMOS repair — candidate ranking now charges
+  the *true* rendered-clause token cost (real `{name}`/quoted refs) where
+  X51 used placeholder `field N` refs; red team re-run 184/184 (two
+  adversarial near-misses that previously scraped a plan now refuse;
+  check-count drift explained in X52.md), Python cross-decode 24/24
+  re-verified. The `metrics.tsv` frontier was re-run a third time:
+  **exactly 210**, unchanged.
+
+# X53 (2026-10-28) — TAXIS: derived columns in space-aligned tables
+
+## τάξις TAXIS (X53, `src/lib/omega/taxis.ts`, registry key `taxis`, exact, deep, shipped this turn)
+
+- **Name decoded.** Greek τάξις, arrangement/formation — the order that
+  lets a column be recomputed rather than shipped. Technical translation:
+  **derived-column elision for space-aligned tables, restored by exact
+  re-alignment under the original header**.
+- **Mechanism (what is new in this stack).** Two parts, each verified
+  absent over all 282 modules. (1) *Column-geometry inference with
+  byte-exact re-rendering*: the header row's word spans are anchors; each
+  column is fitted as L or R against them with a per-transition minimum
+  gap (fitted as the minimum observed remainder); a wide field pushes
+  itself — and everything right of it — right as one piece (this rule is
+  what survives procps overflow rows, where an 8-digit VSZ shifts the
+  whole tail); the fit is accepted only if re-rendering every row from
+  bare fields reproduces the block byte-for-byte. (2) *Ops-shaped
+  derived-column families* SYLLOGISMOS cannot express: **`fittedPct`** —
+  `pct = trunc/round(100·X/T)` at uniform decimals with the hidden total
+  T solved from the rows as an exact rational interval (ps %MEM: trunc,
+  T≈4,024,001 KB on this sandbox; `top`: round, T≈3,592,001 — procps
+  really does use different modes in the two tools, discovered and
+  verified this turn); **`pctOf`** (`100·A/B`); **`ceilShare`** —
+  `ceil(100·A/(A+B))` with the %-suffix (df Use%); **`arith`** — exact
+  `A±B`/`A·B` at the target's scale. Every cell of every row must verify
+  in BigInt arithmetic. The reduced text is the table single-space
+  joined minus the derived columns (header line verbatim), coded by the
+  cheapest measured of DAEDALUS / AKOLOUTHIA-2 / APOGRAPHE under the
+  standard strict TAGSTACK+SIBLING gate with best-parent fallback.
+  Contract (82–90 tokens measured) states aligns as one word
+  (`LRRRRRLLLLL`), gaps digitwise (`5111115131` = 4 tokens vs 19 spaced),
+  and one clause per dropped column, e.g. `{%MEM} = 100*{RSS}/4024001
+  truncated to 1 decimals`.
+- **Scope.** Contiguous aligned blocks (≥4 rows, ≥3 columns) whose first
+  n−1 fields carry no spaces; taps/dumps with space-carrying early cells
+  (kubectl `READY 1/1` style is fine; `kubectl` COMMAND strings with
+  spaces in middle columns are not), wrapped df rows, `%CPU` (needs the
+  wall-clock "now"), and tab-containing blocks all fall back to
+  SYLLOGISMOS/parents. Sibling of SYLLOGISMOS: same entailment genus,
+  different table model — X51 named whitespace alignment SYLLOGISMOS'
+  boundary; TAXIS is the crossing.
+- **Greedy?** Geometry: no — exponential align search capped at 40
+  columns, gaps derived not searched, whole-block re-render arbitrates.
+  Relation discovery: exhaustive over the small family space with exact
+  per-row verification; candidate ranking charges the *true rendered
+  contract* and re-tokenizes the real reduced text, with whole-input
+  restore + byte check as acceptance. Emission is a measured gate.
+- **Honest source-article citation.** Genus prior art: FD/relational
+  semantic compression — SPARTAN; SQUISH; DeepSqueeze (SIGMOD 2020,
+  DOI 10.1145/3318464.3389734); Blitzcrank (VLDB 2024); redundancy-
+  ranked top-k FD discovery (arXiv:2601.10130). For the specific
+  realization — inferred table geometry + fitted-total/share relations
+  as one-chat arithmetic an unmodified LLM re-renders byte-perfectly —
+  **none** (no paper stands behind it; procps/`df` formatting is public
+  tool behavior, re-derived here by measurement).
+- **Time- or CPU-bound?** CPU-bound. Planner poly by caps (200k code
+  units, 20k lines, 40 columns, 4 drops, 20M work units); parents and
+  frontier dominate wall-clock (one full-gate encode on `top`: 436 s),
+  so `deep: true`.
+- **Reader burden, measured.** Blind contract-only hand decodes:
+  24-row live `ps aux` ✓ byte-exact, 14-row ceil-share ✓, **50-row**
+  endurance slice ✓ (overflow VSZ row, wide-RSS row, ~1.4k-char
+  COMMAND). Independent CPython decoder from the contract text alone:
+  6/6 lanes byte-exact. Red team: 241 checks, 1 miss (column-0
+  right-aligned overflow) root-caused and fixed, re-run receipted in
+  `bench/x53/`. Contrast DIPTYCHON's measured gutter fragility: short
+  anchored fields proved robust for this reader; n=1, sufficiency
+  claimed, not ease.
+- **Measured (see `bench/x53/X53.md`).** Full-frontier win on real
+  `ps aux` (ps-bigmem, 140 rows): **1,816 < 1,926** vs the complete
+  TAGSTACK+SIBLING frontier measured in-encode (+110, 5.7%). Member
+  level: ps-190 +8; `top` tie 818 = 818 (correctly no emit); sandbox
+  −6, z57 −11, holdout −18 — declined with no-regression fallback. The
+  win tracks derived-column entropy: 26 distinct %MEM values on bigmem
+  vs near-constant `0.0` columns APOGRAPHE already prices ~free.
+- **Also this turn (DIPTYCHON variants, X52 task 4):** plain
+  `od -t x1/-t x2` (no ASCII panel; x2 odd byte counts refused — GNU od
+  zero-extends) and `xxd -i` C byte arrays (items/line, indent,
+  separator, 0x/0X prefix, last-comma inferred) in `diptychon.ts`,
+  same infer-then-re-render discipline. Variants red team 61/61, X52
+  red team re-run 227/227, independent Python decoder 5/5 from the
+  contract, blind C-array decode exact. Member-level benches on 2 KiB
+  of `/bin/ls`: C array **786 vs 991** (+205), plain `od -t x1` **766 vs
+  1,116** (+350), `od -t x2` **796 vs 993** (+197) — continuous hex lets
+  dictionary parents match across
+  byte boundaries that the `0x`/space dressing fragments; receipts in
+  `bench/x53/receipts/dip2-bench-segmented.log`. Full-frontier hex
+  gates remain unaffordable (task 5 names the parents, below).
+  X52 task 5: the hex-pathological frontier parents are SYNKRISIS,
+  BIFRONT, DIASTEMA (>900 s on a 512 B dump where KANON/AKOLOUTHIA-2
+  take ~3 s).
+
+
+## ἀθροισμός ATHROISMOS (X54, `src/lib/omega/athroismos.ts`, registry key `athroismos`, exact, deep, shipped this turn)
+
+- **Mechanism decoded.** Driven-recurrence elision for delimited
+  tables: a column `y` with `y_i = y_{i-1} ± x_i` or
+  `y_i = y_{i-1} + credit_i - debit_i` (bank-statement running
+  balances) is dropped and recomputed by the reader from the shipped
+  driver column(s), a seed, and at most 3 exception rows carried in
+  the contract (real statements contain adjustments — statement_A's
+  own generator documents a planted +25,000 break). Exact BigInt
+  decimal arithmetic; both plain and German (1.234,56) renderings;
+  reduced text coded by the cheapest measured of DAEDALUS /
+  AKOLOUTHIA-2 / APOGRAPHE; standard strict TAGSTACK+SIBLING gate
+  with best-measured-parent fallback.
+- **Greedy?** Relation fitting is exhaustive over the small family
+  space with exact per-row verification; ranking charges the true
+  rendered contract; whole-input restore arbitrates; emission is
+  the measured gate.
+- **Honest source-article citation.** Genus prior art: lazy
+  dependency discovery (CIDR 2022); column-dependency byte
+  compression (2007). For driven-recurrence elision taught in-band
+  to a stock LLM: **none**.
+- **Time- or CPU-bound?** CPU-bound; planner caps 400k chars / 20k
+  rows; inherited parent + frontier encodes dominate with no
+  wrapper-wide cap; `deep: true`.
+- **Measured (see `bench/x54/X54.md`).** Real statement_A (241 rows,
+  raw 7,017 tok): candidate **2,002 vs best member 2,690, +688
+  (25.6%)**; real German statement excerpt (200 rows, raw 10,229):
+  **1,759 vs 2,411, +652** (APOGRAPHE timed out on both mai sides,
+  labelled). Red team 111/111; independent CPython from-contract
+  decoder 2/2; blind contract-only hand decodes 2/2 byte-exact.
+  Full TAGSTACK+SIBLING frontier gate on statement_A (9,000 s
+  rerun after EXIT=124 at 3,500 s and a sandbox-killed attempt):
+  **applied, exact, `fullFrontierMeasured=true`, 2,002 < 2,686
+  (+684), frontier-grade Solved** (3,318,958 ms). Reader-burden
+  risk disclosed: carried running state means one arithmetic slip
+  propagates below until an exception re-anchors.
+
+## κεφάλαιον KEPHALAION (X55, `src/lib/omega/kephalaion.ts`, registry key `kephalaion`, exact, deep, shipped this turn)
+
+- **Mechanism decoded.** Aggregate elision for delimited tables.
+  A novelty source-read of every arithmetic relation already owned
+  (SYLLOGISMOS rule union `{arith(binary), scaleK, concat, split,
+  case, lookup, shiftdiff, fwdeq}` at `syllogismos.ts:83-90`, TAXIS
+  binary, ATHROISMOS integrating down a column, APOGRAPHE/METRON
+  predicting from above or row index) shows the stack cannot state
+  an **n-ary aggregate**: a Total column equal to the sum of *many*
+  fields of its row, or a Total *row* whose cells are the sums of
+  their columns. KEPHALAION fits, in exact BigInt decimals:
+  `rowsum` (target = Σ of a fitted subset of ≥2 term columns, empty
+  field = 0 — the TT-over-13-regions shape), `headsum` (target =
+  head column − Σ subset, the Active = Confirmed − Recovered −
+  Deaths shape), `colsum` (one aggregate row — first, last, or
+  labelled Total/Sum/Gesamt/… — whose verifying numeric cells are
+  blanked and refilled as column sums), and the rowsum+colsum
+  composition (restore order teachable: rowsums first, then column
+  sums — proved order-safe when the original identity holds).
+  ≤3 exception rows ship in the contract; plain and German number
+  styles; a target printed coarser than its terms is handled by
+  exact scale division. The reader recomputes sums; there is **no
+  carried state** (contrast ATHROISMOS) — an arithmetic slip
+  damages exactly one cell. Reduced text coded by the cheapest
+  measured of DAEDALUS / AKOLOUTHIA-2 / APOGRAPHE; candidate must
+  beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full
+  TAGSTACK+SIBLING frontier strictly, else the measured best
+  parent is returned (never worse).
+- **Greedy?** Subset fitting is exhaustive for ≤16 term-eligible
+  columns (2^k sum table, multi-probe-row pruning, largest-subset
+  preference); beyond that, contiguous ranges ∪ all-terms only
+  (disclosed recall limit). Aggregate rows verified per cell
+  (≥2 verifying numeric cells). Ranking charges the true rendered
+  contract (74 tokens on the 13-term win via "the sum of fields
+  4 to 16"); whole-input restore + byte check arbitrates;
+  emission is the measured gate.
+- **Honest source-article citation.** Genus prior art:
+  functional/order dependency theory for databases (Kossmann et
+  al., *VLDB Journal* 2022, DOI 10.1007/s00778-021-00676-3; FDX,
+  "A Statistical Perspective on Discovering Functional
+  Dependencies in Noisy Data", SIGMOD 2020), window-SUM as the
+  producing operation of these columns, Gorilla (VLDB 2015) for
+  the dense-small-increment economics intuition (mechanism not
+  used). For exact n-ary-aggregate/aggregate-row elision taught
+  in-band to a stock, unmodified LLM reader: **none**.
+- **Time- or CPU-bound?** CPU-bound. Planner caps: 400,000 code
+  units, 20,000 rows, 40 columns, 80M work units; no
+  wrapper-wide cap (parents/frontier dominate), so `deep: true`.
+  Planner on the 30.7k-char, 618-row win lane: seconds inside an
+  18.6 s candidate-measure run (DAEDALUS-dominated).
+- **Measured (see `bench/x55/X55.md`).** Real Ethiopia COVID
+  regional breakdown (TT = Σ 13 region columns, 0 violations).
+  150-row high-count slice (raw 5,304): members DAEDALUS =
+  AKOLOUTHIA-2 1,096, APOGRAPHE **826** (the binding member on
+  delimited numerics); candidates 914 (DAE/AKO2-coded), **811**
+  (APOGRAPHE-coded reduced 737 + 74 contract) — **win +15 vs
+  APOGRAPHE**. Full 618-row file (raw 20,741): candidate **2,931
+  vs DAEDALUS 3,507, +576**, APOGRAPHE unmeasured there (1–2 h
+  per side; labelled DAEDALUS-relative). Honest
+  negatives: zero-dominated early slice 717 vs 643 (**loses**,
+  parents price the zeros ~free — gate falls back); 38-row Indian
+  state table 547 vs 513 (**loses** — 98-token contract with 3
+  exceptions exceeds one column's savings at that row count);
+  economics scale with rows × dropped-cell entropy over contract
+  size. Red team 96/96 (independent BigInt renderer, 40-config
+  randomized sweep, real-lane refusals incl. airport60 and
+  statement_A); independent CPython from-contract decoder 6/6
+  byte-exact (rowsum-range, headsum, de-style, colsum-only);
+  blind contract-only hand decodes 3/3 (German rowsum, headsum,
+  colsum). Full TAGSTACK+SIBLING gate on the 150-row slice:
+  **applied, exact, `fullFrontierMeasured=true`, 811 < 835
+  (+24), frontier-grade Solved** (5,451,410 ms; receipt
+  `bench/x55/receipts/fullgate-ethiopiaMid.json`).
+
+
+## ἰσοσκελής ISOSKELES (X56, `src/lib/omega/isoskeles.ts`, registry key `isoskeles`, exact, deep, shipped this turn)
+
+- **Mechanism decoded.** Symmetric-square triangle elision for
+  delimited tables. Every table dependency in the stack is
+  row-local, column-local, or one-step: SYLLOGISMOS/TAXIS
+  same-row functions, APOGRAPHE's predictor union `{above, col,
+  days, workdays, int, lin, clock}` (read from
+  `apographe.ts:185-199`), METRON index models, ATHROISMOS
+  column recurrences, KEPHALAION row/column aggregates. None
+  reaches across the diagonal: in a symmetric square (distance
+  matrices, correlation matrices, similarity/adjacency
+  matrices) cell (i,j) equals cell (j,i) — a transposition
+  isometry whose source is an arbitrary other row *and* column,
+  inexpressible by any one-step predictor (`col` copies within
+  a line; `above` looks one line up). ISOSKELES finds the
+  square block in the pandas-`to_csv` shapes (optional header
+  row, optional label column, optional all-empty trailing
+  padding columns — including the measured special case where
+  header names equal the label column and the (n+1)² square
+  including both is itself string-symmetric), verifies
+  string-exact symmetry pair by pair (≤6 exception pairs and
+  ≥95% symmetric; exceptions stay verbatim; quoted cells
+  refused), blanks the strictly lower triangle — and the
+  diagonal when it is one constant string — and has the
+  reader refill each blank from its mirror across the
+  diagonal, by names or by block coordinates. The reader only
+  copies: no arithmetic, no carried state, a slip damages one
+  cell.
+- **Greedy?** No — the planner is an exhaustive search over
+  the tiny shape space (3 delimiters × header × label width ×
+  diagonal-constant choice) with exact pair verification,
+  ranked by the true rendered contract + reduced token count;
+  whole-input restore arbitrates; emission is the measured
+  gate (cheapest of DAEDALUS/AKOLOUTHIA-2/APOGRAPHE on the
+  reduced text, then the full TAGSTACK+SIBLING frontier
+  strictly, else best measured parent).
+- **Honest source-article citation.** Genus: BLAS/LAPACK
+  packed symmetric storage (`UPLO` triangular formats) —
+  classical numerical practice for typed arrays. For
+  detecting string-exact transposition symmetry in an
+  arbitrary delimited file and teaching the mirror rule
+  in-band to a stock LLM reader: **none**.
+- **Time- or CPU-bound?** CPU-bound. Planner O(rows·cols +
+  n²) under caps (400,000 code units, n ≤ 500); inherited
+  parent/frontier encodes dominate with no wrapper-wide cap;
+  `deep: true`.
+- **Measured (see `bench/x56/X56.md`).** Real US 31-city
+  distance matrix (raw 4,701 tok): DAEDALUS/AKOLOUTHIA-2
+  identity 4,701; APOGRAPHE 3,297; candidate **1,673
+  (−49.3% vs APOGRAPHE)**. EU 24-city: **1,063 vs 1,841
+  (−42.3%)**. Derived 14×14 Ethiopia-regions correlations:
+  **470 vs 555 (−15.3%)**. APOGRAPHE was measured on both
+  sides of every lane before any claim (X55's lesson). Red
+  team 98/98; independent CPython from-contract decoder 4/4
+  byte-exact; blind hand decode of a full small matrix
+  byte-identical. Full TAGSTACK+SIBLING gate on us31:
+  **applied, exact, `fullFrontierMeasured=true`, 1,677 <
+  3,297 (−49%, +1,620 tok), frontier-grade Solved** (676,697
+  ms; `bench/x56/receipts/fullgate-us31.json`). Economics
+  scale with n²/2
+  mirrored cells over an ~78–107 token contract, so small
+  squares lose by design and fall back.
+
+## συζυγία SYZYGIA (X57, `src/lib/omega/syzygia.ts`, registry key `syzygia`, exact, deep, shipped this turn)
+
+- **Mechanism decoded.** Affine-twin elision with ±1-ulp residual
+  correction for delimited tables. The affine map y = a·x + b between
+  two *columns* (a≠1, b≠0) is expressible by no union member (read
+  from source in X57): SYLLOGISMOS `arith` is one binary op and
+  cannot chain a multiply and an add; `scaleK` is pure proportion
+  (no intercept); METRON `lin` puts the slope on the row *index*;
+  APOGRAPHE `int` adds a constant only vertically (`above + b`);
+  TAXIS relations are percents and one binary op. Dual-unit exports
+  live exactly in the missing corner (temp_c/temp_f, wind_mph/
+  wind_kph, pressure_mb/pressure_in, feelslike/windchill/heatindex/
+  dewpoint pairs in every WeatherAPI-style dump; °C/°F/K triples;
+  calibrated sensor pairs value = raw·gain + offset; °C→K is the
+  intercept-only corner). Measured twist: generators round each twin
+  independently from one hidden exact value, so the naive exact law
+  round(1.8·printed_C + 32) = printed_F fails on 15–45% of rows
+  (temp 38/124, dewpoint 52/124 on the X57 lane) — the twin is not
+  redundant, but its entire information beyond the affine law is a
+  ternary rounding residual. SYZYGIA fits (a, b, rounding mode:
+  halves away from zero, or truncate) in exact BigInt rational
+  arithmetic such that **every row's residual lies in {−1, 0, +1}
+  last-place units**, drops the target column, and ships one
+  residual character per data row (+ add 1 ulp, − subtract, . exact)
+  on a §N line under the reduced table; pairs that are exactly
+  affine (conversion tables rounded once) ship no line. Up to 8
+  drops per table, sources never dropped, plain/German rendering,
+  per-cell canonical re-render checks, a §-look-alike source-guard,
+  whole-input byte-exact restore arbitration. Reader protocol: one
+  multiply-add, one rounding, one ±1-ulp nudge per restored cell —
+  the SYLLOGISMOS scaleK burden class, stateless (a slip damages
+  one cell; contrast ATHROISMOS). Reduced text goes to the cheapest
+  measured of DAEDALUS / AKOLOUTHIA-2 / APOGRAPHE; the candidate
+  must beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full
+  TAGSTACK + SIBLING-TEMPLATE frontier strictly, else the measured
+  best parent is returned (house gate).
+- **Greedy/search.** Per ordered column pair: (a, b, mode)
+  candidates are enumerated from exact two-point rational fits and
+  their decimal roundings (≤8 places), verified over every row
+  under the ≤1-ulp residual bound; among verified fits, a
+  reader-burden price demotes non-terminating-decimal and
+  big-denominator constants (24/43 loses to 0.556). Drops are added
+  greedily by true rendered contract + reduced-text tokens (≤8;
+  sources kept, so no cycles). Emission is the measured gate. So:
+  bounded exact verification inside, greedy admission outside,
+  true-cost arbitration on top.
+- **Citation.** Affine/functional dependencies are database classics
+  (survey: Kossmann et al., VLDB Journal 2022, DOI
+  10.1007/s00778-021-00676-3). *Approximate* FDs (Kivinen–Mannila
+  g₃; top-k AFD discovery, Wan & Han, arXiv:2605.24925;
+  probabilistic FDs in Desbordante, arXiv:2607.23636) bound the
+  *count* of violating tuples for data-quality auditing — they
+  never reconstruct anything. For fitted affine twins with a
+  ±1-ulp residual alphabet taught in-band for one-chat LLM
+  recomputation: **none — no paper stands behind this mechanism.**
+- **Time/CPU bound.** CPU-bound. Planner caps: 400,000 code units,
+  20,000 rows, 64 columns, 120M verified cell evaluations
+  (`SYZYGIA_MAX_WORK`); the india lane plans in ~57 s (45×44 ordered
+  pairs). Inherited parent/frontier encodes dominate wall-clock
+  with no wrapper-wide cap → deep-audit-only (`deep: true`).
+  Measured X57 lane (124 cities × 45 cols): candidate **6,590 <
+  7,112** vs AKOLOUTHIA-2 member; APOGRAPHE legs >1,700 s
+  unmeasured; full frontier gate pending at documentation freeze
+  (see `bench/x57/X57.md`).
+
+## WORKMETER (X57, `src/lib/omega/workmeter.ts`, not a codec — no registry key)
+
+- **Mechanism decoded.** Deterministic counted-work budget for
+  ARIADNE's glyph-assignment search: `scoreRunCostDelta` ticks a
+  module meter; exhausted windows stop the hill-climb and make
+  `renderBest` emit the exact baseline assignment without pattern
+  tables. Epochs are opened per TAGSTACK frontier parent, per
+  ARCHETYPON identity arm, and (outermost only) by APOGRAPHE /
+  AKOLOUTHIA-2 / DAEDALUS — nested epochs share the outer window,
+  so wiring is order-safe. Counted evaluations are a pure function
+  of the input: no clocks, no load-dependent wires.
+- **Greedy/search.** Neither: it bounds an existing greedy search's
+  effort. Default `2,000,000 + 100·chars` evaluations per window,
+  calibrated 10–20× above measured knees (metrics.tsv TAGSTACK
+  stays 210 down to 100k/parent; od8 keeps 142 from 200k/arm);
+  `OMEGA_WORK_BUDGET` overrides (≤0 = unbounded, pre-X57 behavior).
+- **Citation.** None (engineering). Calibration, starvation
+  failure of the shared-window variant, and byte-parity receipts:
+  `bench/x57/receipts/budget-sweep.md`.
+- **Time/CPU bound.** Bounds ARIADNE evaluation counts only; the
+  fixed per-`renderBest` setup was separately shortcut. Non-ARIADNE
+  costs (APOGRAPHE's own planner on wide tables, SYNKRISIS
+  catalog/LCS work) are **not** metered — recorded X57 follow-up.
+
+## ζυγόν ZYGON (X58, `src/lib/omega/zygon.ts`, registry key `zygon`, exact, deep, shipped this turn)
+
+- **Mechanism**: exact weighted-sum (linear-law) column elision. A column is
+  dropped when it equals `round_mode(Σ wᵢ·xᵢ + b)` over same-row source columns
+  with exact BigInt-rational weights, verified on every row at the printed
+  scale (modes half-up / trunc), with ≤3 exception rows shipped verbatim.
+  Equal weights are grouped in the contract (`0.01×({a} + {b} + {c})`).
+  All-ones weights are refused (KEPHALAION owns plain sums), single-term laws
+  are refused (SYLLOGISMOS scaleK), constant sources are excluded (collinear
+  with the intercept). Up to 4 drops; sources are never dropped; plain and
+  German number styles; an optional pre-header lead row (spreadsheet weights
+  rows above the real header) is supported with verbatim lead-cell restore.
+- **Fitting**: exact rational normal equations (AᵀA w = Aᵀy over all rows;
+  least-squares averages the target's print-rounding so weights snap to the
+  generator's clean decimals), singularity-guided column elimination for
+  collinear sources, weight vectors snapped to k=0..6 decimals and each
+  candidate re-verified per row. Greedy/search: drop admission is greedy by
+  true contract+reduced token score over the exact-verified fits; no
+  probabilistic search inside. Emission gated on measured DAEDALUS /
+  AKOLOUTHIA-2 / APOGRAPHE parents then the TAGSTACK+SIBLING frontier with
+  exact restore arbitration (measured-best parent returned otherwise).
+- **Citation**: honestly **none** for the realization. Genus: arithmetic /
+  linear functional dependencies (Kossmann et al., VLDB Journal 2022,
+  DOI 10.1007/s00778-021-00676-3); spreadsheet SUMPRODUCT weighted-grade
+  practice. Nothing found ships fitted rational weights as a grouped
+  natural-language formula for one-chat LLM recomputation.
+- **Time/CPU**: CPU-bound; planner caps 400,000 code units, 20,000 rows,
+  64 columns, 120M work units (`ZYGON_MAX_WORK`), ≤16 terms, ≤24 candidate
+  sources. Inherited parent/frontier encodes dominate wall time with no
+  wrapper-wide cap, so deep-audit-only, like its siblings.
+- **Workmeter (X58 update)**: `workmeter.ts` is now two-lane. The X57 ARIADNE
+  score window (2,000,000 + 100·chars, `OMEGA_WORK_BUDGET`) is joined by a
+  CHIRON unit window (400,000,000 + 20,000·chars, `OMEGA_CHIRON_BUDGET`,
+  ≤0 = unbounded) opened per `workEpoch`; `chiron.ts` consults/ticks it, so
+  per-call BlockSearchBudget multiplicity across thousands of parent calls is
+  jointly bounded per encode.
+
+## βαθμός BATHMOS (X59, `src/lib/omega/bathmos.ts`, registry key `bathmos`, exact, deep, shipped this turn)
+
+- **Mechanism**: partition-window column elision — the first non-row-local
+  dependency in the stack. A column is dropped when it is an exact
+  SQL-window-function value over a partition of the table (whole table or
+  one categorical column): competition / dense / ordinal `RANK` (sort key
+  one numeric column or an exact rational ratio `A/B`, e.g. points per
+  game; ordinal ties broken by up to two extra fitted keys, then original
+  row order), `PERCENT_RANK`, `CUME_DIST` (×1 or ×100 at the printed
+  scale, half-up/trunc), `NTILE` buckets (SQL balanced or `ceil`
+  convention; optionally text labels), and share/index =
+  source / (partition SUM or MAX). Laws are fit with exact BigInt
+  rationals and verified on every row; ≤3 exception rows ship verbatim;
+  ≤4 drops; sources and partition columns are never dropped; constant
+  targets are refused (KOLUMN/APOGRAPHE territory); ordering fits whose
+  primary key ties cover >50% of a partition are refused (file-order
+  counters in disguise — METRON/APOGRAPHE territory); NTILE requires
+  ≥2 rows per bucket on average (k = group size is ordinal rank in
+  disguise). Plain and German number styles.
+- **Fitting**: bounded deterministic enumeration over (target, source,
+  partition, family) with per-row exact verification and greedy ordinal
+  tie-break extension among near-fitting primaries; drop admission greedy
+  by true contract+reduced token score over exact-verified fits.
+  Emission gated on measured DAEDALUS / AKOLOUTHIA-2 / APOGRAPHE parents
+  then the TAGSTACK+SIBLING frontier with exact restore arbitration
+  (measured-best parent returned otherwise). Reader obligation: sort or
+  sum each stated group — KEPHALAION-grade arithmetic plus an ordering.
+- **Citation**: honestly **none** for the realization. Window functions
+  are SQL:2003 machinery and order statistics / rank definitions are
+  classical; the functional-dependency compressors (SPARTAN; DeepSqueeze,
+  SIGMOD 2020; Blitzcrank, VLDB 2024; Virtual, EDBT 2025) are all
+  row-local. Nothing found fits a window law and teaches it in-band for
+  one-chat LLM recomputation.
+- **Time/CPU**: CPU-bound; planner caps 400,000 code units, 20,000 rows,
+  64 columns, 120M work units (`BATHMOS_MAX_WORK`), ≤128 partitions.
+  Inherited parent/frontier encodes dominate wall time with no
+  wrapper-wide cap, so deep-audit-only, like its siblings.
+- **Workmeter (X59 update)**: CHIRON epoch default recalibrated
+  400,000,000 + 20,000·chars → **4,000,000 + 500·chars** after measured
+  spends showed outcomes stop changing 10–100× earlier (DAEDALUS on
+  ewf-standings: 113M units spent, 5M cap byte-identical, 39.6 s →
+  18.2 s under OMEGA_DET=1; `bench/x59/receipts/chiron-recal*`), and the
+  ARIADNE glyph scorer gained an exact branch-and-bound prune
+  (decision-identical by construction; metrics TAGSTACK wire
+  byte-identical, −10.5% wall).
+
+## EIRMOS (εἱρμός) — string-template column elision (X60, codec 224)
+
+- **Technical design / precise mechanism delta.** SYLLOGISMOS already handles raw literals + up to two sibling fields (`concat`), whole-field case, and split; PARADEIGMA handles JSON sibling templates. EIRMOS's repository-new operator is a case/subfield transform on each individual source slot *inside* one concatenation (e.g. `lowercase-initial(first) + lowercase(last)`), plus up to three source slots, fitted for delimited columns. The encoder finds a target equal on each row to a concatenation of source fields, literals, and transforms (`id`, `lower`, `upper`, `capfirst`, `initial`, `lowercase-initial`, `UPPERCASE-initial`, `first2`, `first3`; character slicing is by Unicode code point, not UTF-16 unit). Enumerate up to six candidate sources after a sampled substring filter; enumerate ordered source tuples of length 1–3; for each, use a bounded segmentation search over up to three seed rows (48 segmentations per seed), retain candidates matching all but at most one seed, then exhaustively verify all rows. Up to three mismatches may be stored verbatim, subject to contract-safe exception constraints. Literals exclude quote/newline/backslash; case transforms require ASCII-cased source cells. A transform that is an identity on all rows is rejected as a duplicate disguised by an operator; one-source transform-only rules with ≤64 distinct source values are left to SYLLOGISMOS lookup. Sources are never dropped; ≤4 target drops. Greedy admission scores the actual contract + reduced text, preserves source columns, and requires byte-exact reconstruction. `eirmosEncode` uses measured exact parents and only emits when it beats the member precheck and then the full TAGSTACK+SIBLING source frontier strictly; fallback returns the measured best direct parent.
+- **Greedy/search status.** The fitter is bounded deterministic search, not greedy: seed segmentation enumeration, ordered tuple enumeration, then exact all-row verification. The multi-drop choice is greedy by actual tokenized contract+reduced-table cost. Emission is not a proxy: it is a measured strict full-frontier gate. Candidate caps and order affect discoverability; exactness does not depend on a candidate being found.
+- **One-chat reader contract.** One plain-language clause describes delimiter, insertion column/header, literals, field references and transforms; the reduced table's parent decoder remains in the same chat message. No external decoder, skills file, side channel, or hidden prompt. CPython twin independently decoded the fixture and all 20 applied/hand-authored red-team contracts byte-exactly. This is a concrete decoder check, not a guarantee about all LLMs.
+- **Measured lanes.** (1) Public `lucidworks/fusion-financial-demo` finance-search sample (generated demo records, not real client data): 1,026 rows; `full_name = first + space + last`, 0 exceptions, 1,024 distinct values. 71-token clause. Member DET: AKOLOUTHIA-2 41,565 → EIRMOS 37,787 (−3,778, −9.1%); DAEDALUS 43,207 → 39,474 (−3,733). (2) Public real OpenPowerlifting raw results (sstangl mirror `meet-data/raw/1902` + `raw/1903`, same 48-column schema, record concatenation only; source files not vendored due repository AGPL-3.0). 124 lifters, exact `Full Name = First Name + " " + Last Name` with two verbatim exceptions, 97-token clause. Member DET: AKOLOUTHIA-2 8,620 → 8,175 (−445, −5.2%); DAEDALUS 8,764 → 8,333 (−431, −4.9%). CPython twin byte-exact; source SHA-256 `44d34480f3ccbd38da4a8cb224e5c3a90c3abe5a6ea435ea229d17ab2b3c19db`. Rebuild source with `bench/x60/fetch-openpowerlifting.sh`; receipts `member-openpowerlifting.json` / `twin-openpowerlifting.txt`. The real-record full TAGSTACK+SIBLING gate hit 2,500 s with no result (member-grade only). Separate generated `full-name.csv` gate passed exact: 629 < 1,017 in 289 s. Frontier-grade is claimed only for that generated lane. Both measured member laws above are plain raw concatenation, already within SYLLOGISMOS's concat family; they establish EIRMOS economics, not the unique per-slot-transform capability. The generated `username` case (`lowercase-initial(first) + lowercase(last)`) is the direct test of that repository-new operator (SYLLOGISMOS refuses it; see `mechanism-delta.json`); its shipped full gate is exact **563 < 775** in 64.9 s (`fullgate-username.json`). This proves the new operator is frontier-grade on generated input only; no real-data lane yet exercises that transform composition.
+- **Citation.** Close prior art: Singh, “BlinkFill: Semi-supervised Programming By Example for Syntactic String Transformations,” VLDB 2016, https://rishabhmit.bitbucket.io/papers/vldb16.pdf; Gulwani, “Automating String Processing in Spreadsheets Using Input-Output Examples,” POPL 2011 (outside the last decade, cited as precursor only). Both synthesize string transforms/concatenations from examples for cell filling. For exact column elision, in-band contract teaching, model-readable reconstruction, and whole-message frontier gate: honestly **no direct paper citation**. The novelty claim is relative to this repository's stack, not a claim of global invention.
+- **Time / CPU bound.** CPU-bound. Planner caps 400,000 UTF-16 code units, 20,000 data rows, 64 columns, four drops, three exceptions per drop, and 60,000,000 counted work units. Candidate source count is capped at six per target, tuple arity at three, sampled rows at 40; therefore the search is incomplete but bounded by these caps (the work meter currently counts source-filter and row-verification operations, not every string allocation/segmentation branch). Parent and frontier encodes are inherited and have no wrapper-wide wall-clock cap; deep-audit-only. Planner took 189 ms on the fixture; full gate receipt remains a separate end-to-end measure.
+
+## X60 stack-speed note — DIASTEMA candidate membership
+
+`diastemaPlan` previously tested `rows.includes(v.li)` for each value, once per candidate mask, which makes participant selection O(n²) in the number of values/rows for a mask. Replaced with a per-candidate `Set(rows)` and expected O(n) membership filtering. A/B on `sysctl-proc`: median of five planner runs 6 ms before / 5 ms after, same plan SHA and exact decode. Complete metrics DIASTEMA A/B: 149,589 ms before / 150,142 ms after, identical wire + contract SHAs and exact output (noise-level difference; both refused 247 ≥ 237). Thus the Set change improves an asymptotic subroutine but has **no demonstrated significant whole-codec speed gain**; X59 ARIADNE/CHIRON remain the accepted measured speedups. X60's independent six-arm profile listed DIASTEMA at 223.7 s standalone and METRON at 47.6 s, pointing to parent/search work outside the changed membership loop. Reproduce via `bench/x60/speed-ab-diastema.sh`; it materializes and removes the baseline module from commit `d7b204a`.
+
+
+## X61 — SYNDESMOS (σύνδεσμος): in-band Markdown URL factoring
+
+- **Technical design.** Intern repeated eligible inline Markdown destinations using first-seen in-band IDs; optionally factor a shared slash-terminated URL path prefix carried in-band. Unsupported Markdown forms, collisions, excessive inputs, and unsafe cases refuse. The exact inverse is checked before complete-message comparison; only a strict same-source frontier win emits.
+- **Greedy/search.** First-seen ID assignment is deterministic greedy. Prefix selection is bounded candidate search (up to 64 estimated candidates), then exact transformed-text/contract token counting. The final decision is the complete TAGSTACK runtime-parent frontier plus SIBLING-TEMPLATE, not a raw payload/member comparison.
+- **Citation / prior art.** CommonMark reference-link definitions provide close document-scoped URL reuse. Brisaboa & Cerdeira-Pena (CIKM 2019, DOI 10.1145/3357384.3357972) study hierarchical front coding / longest-common-prefix compression for URL collections. No global novelty claim; the project-specific claim is only the exact in-band realization and gate.
+- **Time / CPU.** Source cap 120,000 UTF-16 code units, at most 20,000 eligible links, 64 prefix candidates; scan is linear plus bounded candidate evaluation. Parent/frontier runtime is inherited and uncapped by this wrapper.
+- **Results.** Three exact complete candidates lose: README +162, public miniserve Markdown +144, and Canvas changelog +173 tokens versus their source frontiers. No leader changes. Receipts: `bench/x61/receipts/`; full formal/research record: `bench/x61/REPORT.md`.
+
+## X62 — RHIZOMA (ῥίζωμα): tree-indent normalization
+
+- **Technical design.** Recognize a narrow exact tree-indent shape where U+00A0 pairs with the vertical tree glyph, replace the pair with an in-band marker, and restore it without modifying filenames. Refuse malformed or ambiguous indentation. Complete contract+wire must strictly beat the measured source frontier; otherwise return the parent.
+- **Greedy/search.** Deterministic linear scan, not a search; whole-message frontier gate is exact for the run.
+- **Citation / prior art.** Existing repo tree grammar/indent mechanisms DENS-2/DENDRON/KLADOS are close prior art. No paper for this exact normalization is claimed and no global novelty claim is made.
+- **Time / CPU.** Transform cap 200,000 UTF-16 code units, O(n); inherited complete-parent frontiers dominate and have no wrapper-wide cap.
+- **Results / adversaries.** Exact, but `tree-src.txt` loses 12 tokens (999 vs 987) and `tree-bench.txt` loses 14 (255 vs 241); both fall back. TS and independent stdlib-Python tests cover astral filenames, CRLF/no-final-newline, reserved marker, malformed/off-pattern pairs, and ASCII-space shortcut. Receipts: `bench/x62/receipts/`; report: `bench/x62/REPORT.md`.
+
+## X63 — ALPHAFOLD: lexical alpha-template folding
+
+- **Technical design.** A bounded lexical scanner groups balanced `{...}` code spans with matching identifier-pattern signatures, sends only varying identifier names in per-instance maps, and retains all other bytes in shared templates/body. It is not an AST or semantic-equivalence codec. Collision-checked markers and byte-exact expansion are required; candidate contract, templates, mappings, and parent encoding are all charged.
+- **Greedy/search.** Deterministic non-greedy planner ranks groups by estimated character savings and selects non-overlapping spans; it does not search token-space forms. Complete same-source frontier gate rejects non-wins.
+- **Citation / prior art.** Nominal anti-unification and alpha-renamed code-clone research are close (Baumgartner et al., “Nominal anti-unification,” arXiv:2504.21097; AlphaCC, arXiv:2507.15226; “Semantic Code Clone Detection: Are We There Yet?,” arXiv:2606.25272). None is claimed as this in-band byte-exact codec; no global novelty claim. ALPHAFOLD is unrelated to DeepMind's protein model.
+- **Time / CPU.** Scanner cap 200,000 code units; linear/bounded span planning, 1,000,000-character decoder cap. Parent and transformed-parent frontiers have no wrapper-wide cap; fixture planner 8 ms, full gate 131,516 ms.
+- **Results / adversaries.** Exact but loses on `src/lib/omega/codec-synthesis.ts`: complete candidate 1,249 vs source frontier 1,114 (+135). TS red team 13/13 and independent Python twin 6/6. A six-input ROT13 screen increased raw token cost on all six and was rejected before full-frontier calls. Receipts and audit: `bench/x63/`.
+
+## X64 — REPRISE: bounded exact-repeat result memo (speed only)
+
+- **Technical design.** Encoder-only LRU memo keyed by exact source, encoding, and `OMEGA_DET`, `OMEGA_WORK_BUDGET`, `OMEGA_CHIRON_BUDGET`. On a miss, run TAGSTACK; store only `exact && frontierComplete` results. On an identical same-process hit, return a defensive clone of the saved result. The recipient still receives the original self-contained TAGSTACK contract+payload. REPRISE adds no wire syntax, decoder requirement, or compression transform.
+- **Greedy/search.** No representation search; cold misses inherit TAGSTACK's bounded parent comparator and complete-message gate. Warm hits reuse the prior measured output. Because the message is unchanged, token cost is identical by construction; no strict compression gain is possible.
+- **Citation / prior art.** No paper is claimed for ordinary bounded memoization. Fresh adjacent research: Kalcher, “Frequency-Ordered Tokenization for Better Text Compression,” arXiv:2602.22958v2 (2026), conventional binary preprocessing; Adler & Tang, “Synchronizing Probabilities in Model-Driven Lossless Compression,” arXiv:2601.10678v1 (2026), PMATIC arithmetic coding; Heringer & Doerr, WABI 2025 human-readable BPE grammar compression of GFA paths; Kudo & Richardson, SentencePiece, EMNLP System Demonstrations 2018. These are prior-art/context checks, not evidence of a one-message native-LLM decoder or REPRISE novelty. Direct links and scope assessment: `bench/x64/REPORT.md`.
+- **Time / CPU / memory.** Cache admits at most 50,000 source UTF-16 code units, 8 entries, and 500,000 estimated retained JS characters including source-bearing key characters; this is not a hard RSS cap. Key construction O(n), result clone O(frontier-map size), expected Map lookup. Cold parent/frontier runtime has no wrapper-wide bound; one measured cold call was 136,733.854 ms. One warm 1,203-character repeat took 0.129 ms; single-run observation, not a stable general speed claim.
+- **Measured complete message / attack test.** On `bench/holdout-x40/metrics.tsv`, cold `akolouthia2` and warm REPRISE messages both cost 210 `o200k_base` tokens and had identical message SHA-256 `f0e0ffb9543f3b2f7032067ed73d6fa3de84745639647fafdc109bdca1864628`; cold result was exact/frontier-complete. Six checks passed, including mutation of the returned cold result's message, wire, and nested cost map before the warm hit (cache copy remains unpoisoned). No native LLM decode, independent alternate decoder, or external reviewer. Runner/receipt: `bench/x64/reprise-cache.ts`, `bench/x64/receipts/reprise-cache.json`.
+
+## Updated fixture-specific local leaders (no cross-lane ranking)
+
+| Category / fixture | Best recorded evidence | X64 status |
+|---|---|---|
+| General English prose | X45 local values: knowledge base 622; LLM answer 674; email 488; meeting 385; bibliography 671 tokens | No X64 prose test; X63 ROT13 raw screen loses; no general-prose Pareto claim |
+| Ops listings / CLI | `find-listing`: DIASTEMA 1,140; `df -h`: AKOLOUTHIA-2 171; `psql`: AKOLOUTHIA-2 355; `kubectl`: AKOLOUTHIA-2 326; KANNABOS leads selected aligned tables | No X64 ops test; historical fixture-specific leaders only |
+| Repository source code | `codec-synthesis.ts`: source frontier 1,114; ALPHAFOLD 1,249 | X63 candidate loses +135; fallback, no new leader |
+| Tree listings | `tree-src`: 987 APOGRAPHE; `tree-bench`: 241 SYNKRISIS | RHIZOMA loses +12/+14 and falls back |
+| Structured records / metrics | `metrics.tsv`: 210 AKOLOUTHIA-2 at measured TAGSTACK-parent+SIBLING frontier | X64 cold/warm complete message remains 210; REPRISE affects only repeated sender-side runtime |
+| Logs / arithmetic sequences | Existing DIASTEMA / METRON / ATHROISMOS / SYZYGIA fixture leaders | No X64 reranking |
+
+The exact X61 frontier setup was rerun: same `metrics.tsv` SHA-256 `b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70`, `o200k_base`, unset `OMEGA_DET`, Node v22.22.3, recorded six-parent-plus-SIBLING scope; exact match at 210 tokens, `akolouthia2`, `repeatMatchesPreviousGate:true`. Runtime 113,300 ms vs previous 94,136 ms: reproducible cost/winner, variable runtime, no speedup claim. It is not a registry-wide tournament.
+
+## X65 — FOTAR (`fotar`): frequency-ranked in-band token aliases
+
+- **Mechanism.** Count repeated multi-character BPE token surfaces, rank them with a deterministic character-mass proxy, assign collision-free aliases, replace the selected surfaces, and transmit the literal `[alias,surface]` JSON table in the same message. The contract says to decode the remaining self-contained parent message and expand the aliases left-to-right, longest alias first. The composed child is APOGRAPHE. The alias table is serialized; no encoder-side table is needed for the FOTAR expansion.
+- **Greedy/search.** Bounded deterministic top-96 ranking/admission; no token-space search, no backtracking, and no testing alternate dictionary plans. The character proxy only proposes a plan. Emission is a binary exact gate against the complete same-source TAGSTACK runtime-parent frontier plus SIBLING-TEMPLATE. A candidate that is not exact or strictly cheaper is refused.
+- **Citation / prior art.** No novelty claim. This is a specialization of dictionary coding and is close to the repository's VERITAS/PHALANX token-window/substring dictionary family. Related external work: *Lossless Prompt Compression via Dictionary-Encoding and In-Context Learning*, [arXiv:2604.13066](https://arxiv.org/html/2604.13066); its experiment places the dictionary in a system prompt, unlike FOTAR's one-message table. The existence of FOTAR's code is not evidence of algorithmic novelty.
+- **Time / CPU.** For N tokenizer pieces and V distinct multi-character surfaces, tokenization/frequency accumulation and rendering are O(N), plus O(V log V) deterministic sorting; V is bounded by input length. At most 96 aliases are kept. The final plan is token-counted once; earlier prefix rebuild/count work was removed without changing the fixed final candidate. The source frontier and APOGRAPHE parent encoders dominate end-to-end runtime and have no wrapper-wide bound. The two full OpenStack gates took 511,910 ms and 570,388 ms, with different source-frontier winners under the unset production-time budget.
+- **Measured (X65, o200k).** FOTAR alias-table inverse: 12/12 TypeScript red-team checks and exact Python-twin restoration on its 919-codepoint control. Direct screens lose to raw: prose changelog 15,675 vs 10,906, file listing 6,730 vs 3,997, OpenStack 4,836 vs 4,028; `metrics.tsv` gets no plan. On the real OpenStack log, the complete composed FOTAR candidate is exact at 1,080 tokens. Two runs completed the exact source frontier at 896 (SYNKRISIS) and 885 (DIASTEMA); the final run used 885, so FOTAR falls back. No Pareto gain. Full record: [`bench/x65/REPORT.md`](../bench/x65/REPORT.md); receipts: `bench/x65/receipts/`.
+- **Decoder boundary.** The FOTAR envelope/table inverse is tested using the serialized JSON, independent of encoder dictionary metadata. The full composition's APOGRAPHE decode check still uses result metadata (`apographeDecodeResult`); an end-to-end reader reconstructed solely from the complete candidate message was not tested. No native LLM decode is claimed.

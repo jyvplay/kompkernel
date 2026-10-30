@@ -1,0 +1,17 @@
+{
+  "lane": "bench/x54/fixtures/statement_A.csv",
+  "applied": true,
+  "exact": true,
+  "messageTokens": 2002,
+  "parentTokens": 2686,
+  "parentCodec": "apographe",
+  "candidateTokens": 2002,
+  "candidateExact": true,
+  "candidateParentCodec": "apographe",
+  "candidateParentTokens": 1880,
+  "comparison": "strict complete-message TAGSTACK runtime-parent set plus SIBLING-TEMPLATE",
+  "fullFrontierMeasured": true,
+  "ms": 3318958,
+  "notes": "dropped 1 driven-recurrence column (cum2); complete-message M=2002 < same-source frontier M=2686"
+}
+EXIT=0

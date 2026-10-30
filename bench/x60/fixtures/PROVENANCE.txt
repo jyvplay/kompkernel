@@ -1,0 +1,11 @@
+X60 lanes
+
+clients.csv: lucidworks/fusion-financial-demo, data/Finance/clients.csv
+(fetched via GitHub API raw, 2026-10-30). Published vendor demo dataset
+for a financial-advisor search demo: 1,026 client rows x 16 columns,
+CRLF, some quoted list fields. It is generated demo data, NOT real client
+records; treat as a published sample fixture (like Superstore), disclosed
+as such wherever cited.
+SHA-256: see file listing in the X60 commit.
+EIRMOS law: full_name = {first_name} + " " + {last_name} on all 1,026
+rows, 0 exceptions, 1,024 distinct values.

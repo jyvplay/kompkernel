@@ -1,0 +1,17 @@
+import * as fs from 'node:fs';
+import { zygonPlan } from '../../src/lib/omega/zygon';
+import { apographeEncode, apographeDecodeResult } from '../../src/lib/omega/apographe';
+import { countTokens } from '../../src/lib/omega/bpe';
+const ENC = 'o200k_base' as const;
+const text = fs.readFileSync('bench/x58/fixtures/ewf-standings.csv', 'utf8');
+const plan = zygonPlan(text, ENC)!;
+const out: any = { contractTokens: countTokens(plan.contract, ENC), legs: [] };
+let s = Date.now(); const src: any = apographeEncode(text, ENC);
+const srcDec = apographeDecodeResult(src)?.decoded;
+out.legs.push({ codec: 'apographe', side: 'source', tokens: src.messageTokens, exact: srcDec === text, ms: Date.now() - s });
+console.log(JSON.stringify(out.legs[0]));
+s = Date.now(); const red: any = apographeEncode(plan.reducedText, ENC);
+const redDec = apographeDecodeResult(red)?.decoded;
+out.legs.push({ codec: 'apographe', side: 'candidate', tokens: out.contractTokens + 1 + red.messageTokens, exact: redDec === plan.reducedText, ms: Date.now() - s });
+fs.writeFileSync('bench/x58/receipts/member-ewf-apo.json', JSON.stringify(out, null, 1));
+console.log(JSON.stringify(out.legs[1]));

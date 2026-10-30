@@ -1,0 +1,7 @@
+synthTally {"none":{"planned":0,"total":15},"fittedPctR":{"planned":16,"total":16},"arithMul":{"planned":20,"total":20},"fittedPctT":{"planned":6,"total":6},"ceilShare":{"planned":19,"total":19},"arithAdd":{"planned":14,"total":14}}
+{
+  "checks": 243,
+  "fails": 0,
+  "failMsgs": []
+}
+DONE

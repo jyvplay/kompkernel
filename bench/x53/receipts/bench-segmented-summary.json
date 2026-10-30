@@ -1,0 +1,98 @@
+{
+  "bench/x53/fixtures/ps-aux-190.txt": {
+    "rawTok": 9176,
+    "contractTok": 82,
+    "orig": {
+      "akolouthia2": 1176,
+      "apographe": 1436
+    },
+    "reduced": {
+      "akolouthia2": 1086,
+      "apographe": 1278,
+      "daedalus": 1412
+    },
+    "candidate": 1168,
+    "bestMember": 1176,
+    "margin": 8
+  },
+  "bench/x53/fixtures/ps-bigmem.txt": {
+    "rawTok": 6548,
+    "contractTok": 82,
+    "orig": {
+      "akolouthia2": 1926,
+      "apographe": 1945
+    },
+    "reduced": {
+      "akolouthia2": 1734,
+      "apographe": 1785,
+      "daedalus": 1852
+    },
+    "candidate": 1816,
+    "bestMember": 1926,
+    "margin": 110
+  },
+  "bench/z48/corpus/ps-aux-sandbox.txt": {
+    "rawTok": 3643,
+    "contractTok": 82,
+    "orig": {
+      "akolouthia2": 1185,
+      "apographe": 1134
+    },
+    "reduced": {
+      "akolouthia2": 1093,
+      "apographe": 1058,
+      "daedalus": 1102
+    },
+    "candidate": 1140,
+    "bestMember": 1134,
+    "margin": -6
+  },
+  "bench/holdout-x41/ps-aux-real.txt": {
+    "rawTok": 3054,
+    "contractTok": 88,
+    "orig": {
+      "akolouthia2": 1106,
+      "apographe": 1059
+    },
+    "reduced": {
+      "akolouthia2": 1024,
+      "apographe": 989,
+      "daedalus": 1027
+    },
+    "candidate": 1077,
+    "bestMember": 1059,
+    "margin": -18
+  },
+  "bench/z57/lanes/ops-ps-aux.txt": {
+    "rawTok": 1835,
+    "contractTok": 82,
+    "orig": {
+      "akolouthia2": 673,
+      "apographe": 613
+    },
+    "reduced": {
+      "akolouthia2": 590,
+      "apographe": 542,
+      "daedalus": 590
+    },
+    "candidate": 624,
+    "bestMember": 613,
+    "margin": -11
+  },
+  "bench/x53/fixtures/top.txt": {
+    "rawTok": 3338,
+    "contractTok": 90,
+    "orig": {
+      "akolouthia2": 881,
+      "apographe": 819
+    },
+    "reduced": {
+      "akolouthia2": 777,
+      "apographe": 728,
+      "daedalus": 777
+    },
+    "candidate": 818,
+    "bestMember": 819,
+    "margin": 1
+  }
+}

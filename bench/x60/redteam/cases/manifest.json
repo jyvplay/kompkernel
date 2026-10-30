@@ -1,0 +1,114 @@
+[
+ {
+  "name": "full-name",
+  "expect": "apply"
+ },
+ {
+  "name": "email",
+  "expect": "apply"
+ },
+ {
+  "name": "sortable-quoted",
+  "expect": "apply"
+ },
+ {
+  "name": "username",
+  "expect": "apply"
+ },
+ {
+  "name": "sku",
+  "expect": "apply"
+ },
+ {
+  "name": "three-source",
+  "expect": "apply"
+ },
+ {
+  "name": "exceptions",
+  "expect": "apply"
+ },
+ {
+  "name": "too-many-exceptions",
+  "expect": "refuse"
+ },
+ {
+  "name": "pure-copy",
+  "expect": "refuse"
+ },
+ {
+  "name": "upper-lowcard",
+  "expect": "refuse"
+ },
+ {
+  "name": "upper-highcard",
+  "expect": "apply"
+ },
+ {
+  "name": "random-target",
+  "expect": "refuse"
+ },
+ {
+  "name": "empty-source-cells",
+  "expect": "any"
+ },
+ {
+  "name": "tsv-crlf",
+  "expect": "apply"
+ },
+ {
+  "name": "nonascii-case",
+  "expect": "refuse"
+ },
+ {
+  "name": "overlap-trap",
+  "expect": "any"
+ },
+ {
+  "name": "target-first-col",
+  "expect": "apply"
+ },
+ {
+  "name": "two-drops",
+  "expect": "apply"
+ },
+ {
+  "name": "quoted-source-comma",
+  "expect": "any"
+ },
+ {
+  "name": "tiny",
+  "expect": "refuse"
+ },
+ {
+  "name": "no-trailing-nl",
+  "expect": "apply"
+ },
+ {
+  "name": "city-state",
+  "expect": "apply"
+ },
+ {
+  "name": "copy-disguise-upper",
+  "expect": "refuse"
+ },
+ {
+  "name": "exception-first-row",
+  "expect": "apply"
+ },
+ {
+  "name": "copy-disguise-capfirst",
+  "expect": "refuse"
+ },
+ {
+  "name": "exception-comma-contract",
+  "expect": "refuse"
+ },
+ {
+  "name": "special-header",
+  "expect": "apply"
+ },
+ {
+  "name": "astral-first2",
+  "expect": "apply"
+ }
+]

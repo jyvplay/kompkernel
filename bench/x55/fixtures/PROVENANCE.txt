@@ -1,0 +1,4 @@
+All fetched 2026-10-29 via the GitHub API (contents endpoint).
+ethiopia-covid-regions.csv: stevenliuyi/covid19 :: data/ethiopia-data/raw.csv — Ethiopian regional COVID counts; TT = sum of 13 region columns (AA,AF,AM,BG,DD,GA,HR,OR,SO,SN,SI,TG,Other), empty=0; verified 0 violations / 618 rows (bench probe).
+state_wise.csv: bhargavyagnik/Covid19 :: stats/state_wise.csv — covid19india state table; the "Total" row equals the column sums over the 37 state rows on all 4 numeric columns; Active = Confirmed - Recovered - Deaths holds on 35/38 rows (3 real adjustment violations).
+academic-performance.csv: PROxZIMA/Academic-Codes :: Semester 6/DSBDAL/A2/Academic-Performance-Dataset.csv — 20 students x 5 subjects + Total Marks; 6 rows contain empty marks and 2 further rows violate the sum (natural messy data; negative/exception-overload case).

@@ -1,0 +1,25 @@
+{
+ "lane": "bench/x52/fixtures/od-bin.txt",
+ "provenance": "real GNU od -A x -t x1z -v over head -c 8192 /bin/ls",
+ "config": "OMEGA_DET unset for segmented parents; o200k_base; node v22.22.3",
+ "rawTokens": 21517,
+ "reducedRawTokens": 6956,
+ "contractTokens": 130,
+ "compact": "continuous",
+ "parents": {
+  "akolouthia2": {
+   "orig": 5401,
+   "origMs": 54796,
+   "reduced": 2883,
+   "reducedMs": 34849
+  },
+  "apographe": {
+   "orig": "TIMEOUT >1500s",
+   "reduced": "TIMEOUT >1500s (orphaned child of the stopped segmented run, expired on its own timeout)"
+  },
+  "daedalus": "not measured on this lane"
+ },
+ "candidateTotalViaAko2": 3014,
+ "deltaVsAko2": -2387,
+ "scope": "Strict win vs AKOLOUTHIA-2 (a TAGSTACK frontier member) only; APOGRAPHE did not finish the original within 1500s and the full frontier was not measured on the 8K lane. Full-gate strict evidence is on od-bin1k (see bench-od-bin1k-full.json)."
+}

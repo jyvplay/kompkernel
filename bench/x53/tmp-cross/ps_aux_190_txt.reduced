@@ -1,0 +1,226 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root 1 0.0 167228 11708 ? Ss 06:18 0:00 /sbin/init
+root 2 0.0 0 0 ? S 06:18 0:00 [kthreadd]
+root 3 0.0 0 0 ? I< 06:18 0:00 [rcu_gp]
+root 4 0.0 0 0 ? I< 06:18 0:00 [rcu_par_gp]
+root 5 0.0 0 0 ? I< 06:18 0:00 [slub_flushwq]
+root 6 0.0 0 0 ? I< 06:18 0:00 [netns]
+root 8 0.0 0 0 ? I< 06:18 0:00 [kworker/0:0H-events_highpri]
+root 10 0.0 0 0 ? I< 06:18 0:00 [mm_percpu_wq]
+root 11 0.0 0 0 ? I 06:18 0:00 [rcu_tasks_kthread]
+root 12 0.0 0 0 ? I 06:18 0:00 [rcu_tasks_trace_kthread]
+root 13 0.0 0 0 ? S 06:18 0:00 [ksoftirqd/0]
+root 14 0.0 0 0 ? I 06:18 0:00 [rcu_preempt]
+root 15 0.0 0 0 ? S 06:18 0:00 [migration/0]
+root 16 0.0 0 0 ? I 06:18 0:00 [kworker/0:1-mm_percpu_wq]
+root 17 0.0 0 0 ? S 06:18 0:00 [cpuhp/0]
+root 18 0.0 0 0 ? S 06:18 0:00 [cpuhp/1]
+root 19 0.0 0 0 ? S 06:18 0:00 [migration/1]
+root 20 0.0 0 0 ? S 06:18 0:00 [ksoftirqd/1]
+root 21 0.0 0 0 ? I 06:18 0:00 [kworker/1:0-mm_percpu_wq]
+root 22 0.0 0 0 ? I< 06:18 0:00 [kworker/1:0H-events_highpri]
+root 25 0.0 0 0 ? S 06:18 0:00 [kdevtmpfs]
+root 26 0.0 0 0 ? I< 06:18 0:00 [inet_frag_wq]
+root 27 0.0 0 0 ? S 06:18 0:00 [kauditd]
+root 28 0.0 0 0 ? I 06:18 0:00 [kworker/1:1-mm_percpu_wq]
+root 29 0.0 0 0 ? S 06:18 0:00 [khungtaskd]
+root 30 0.0 0 0 ? S 06:18 0:00 [oom_reaper]
+root 31 0.0 0 0 ? I< 06:18 0:00 [writeback]
+root 32 0.0 0 0 ? S 06:18 0:00 [kcompactd0]
+root 33 0.0 0 0 ? SN 06:18 0:00 [ksmd]
+root 34 0.0 0 0 ? SN 06:18 0:00 [khugepaged]
+root 35 0.0 0 0 ? I< 06:18 0:00 [kintegrityd]
+root 36 0.0 0 0 ? I< 06:18 0:00 [kblockd]
+root 37 0.0 0 0 ? I< 06:18 0:00 [blkcg_punt_bio]
+root 38 0.0 0 0 ? S 06:18 0:00 [watchdogd]
+root 39 0.0 0 0 ? I< 06:18 0:00 [rpciod]
+root 40 0.0 0 0 ? I< 06:18 0:00 [kworker/1:1H-kblockd]
+root 41 0.0 0 0 ? I< 06:18 0:00 [xprtiod]
+root 61 0.0 0 0 ? S 06:18 0:00 [kswapd0]
+root 63 0.0 0 0 ? I 06:18 0:00 [kworker/u4:2-events_unbound]
+root 65 0.0 0 0 ? I< 06:18 0:00 [nfsiod]
+root 67 0.0 0 0 ? I< 06:18 0:00 [kworker/0:1H-kblockd]
+root 70 0.0 0 0 ? I< 06:18 0:00 [xfsalloc]
+root 71 0.0 0 0 ? I< 06:18 0:00 [xfs_mru_cache]
+root 73 0.0 0 0 ? I< 06:18 0:00 [kthrotld]
+root 79 0.0 0 0 ? S 06:18 0:00 [irq/24-ACPI:Ged]
+root 112 0.0 0 0 ? S 06:18 0:00 [hwrng]
+root 144 0.0 0 0 ? I< 06:18 0:00 [iscsi_conn_clea]
+root 159 0.0 0 0 ? I< 06:18 0:00 [mld]
+root 160 0.0 0 0 ? I< 06:18 0:00 [ipv6_addrconf]
+root 167 0.0 1004 4 ? S 06:18 0:00 bpfilter_umh
+root 168 0.0 0 0 ? I< 06:18 0:00 [kstrp]
+root 173 0.0 0 0 ? I< 06:18 0:00 [zswap-shrink]
+root 174 0.0 0 0 ? I< 06:18 0:00 [kworker/u5:0]
+root 252 0.0 0 0 ? S 06:18 0:00 [jbd2/vda-8]
+root 253 0.0 0 0 ? I< 06:18 0:00 [ext4-rsv-conver]
+root 284 0.0 35072 8048 ? Ss 06:18 0:00 /lib/systemd/systemd-journald
+root 294 0.0 0 0 ? I 06:18 0:00 [kworker/u4:3-flush-254:0]
+_rpc 304 0.0 7888 3968 ? Ss 06:18 0:00 /sbin/rpcbind -f -w
+systemd+ 306 0.0 17916 8764 ? Ss 06:18 0:00 /lib/systemd/systemd-networkd
+root 318 0.0 15452 8980 ? Ss 06:18 0:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+_chrony 320 0.0 10700 3048 ? S 06:18 0:00 /usr/sbin/chronyd -F 1
+_chrony 322 0.0 10568 544 ? S 06:18 0:00 /usr/sbin/chronyd -F 1
+root 327 0.0 2900 1036 tty1 Ss+ 06:19 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 329 0.0 2900 1020 tty3 Ss+ 06:19 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 330 0.0 2900 1020 tty4 Ss+ 06:19 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 331 0.0 2900 1024 tty5 Ss+ 06:19 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 332 0.0 2900 1012 tty6 Ss+ 06:19 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 348 0.0 2900 1040 tty2 Ss+ 06:19 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 1229 0.4 1338384 19340 ? S<Lsl 06:19 0:06 /usr/bin/envd
+root 3329 0.0 0 0 ? I 06:31 0:00 [kworker/u4:0-events_unbound]
+root 3518 0.0 0 0 ? I 06:34 0:00 [kworker/0:0-cgroup_bpf_destroy]
+root 3629 0.0 0 0 ? I 06:38 0:00 [kworker/u4:1]
+root 3658 0.0 0 0 ? I 06:39 0:00 [kworker/1:2]
+user 3688 0.9 3932 3096 ? S 06:40 0:00 /bin/bash -l -c for i in $(seq 1 150); do sleep 900 & done; sleep 1; ps aux > bench/x53/fixtures/ps-aux-190.txt; wc -l bench/x53/fixtures/ps-aux-190.txt; vmstat 1 5 > /tmp/vmstat-sample.txt 2>/dev/null; cat /tmp/vmstat-sample.txt; kill %1 2>/dev/null; pkill -x sleep; echo cleaned
+user 3691 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3692 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3693 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3694 0.0 2492 892 ? S 06:40 0:00 sleep 900
+user 3695 0.0 2492 856 ? S 06:40 0:00 sleep 900
+user 3696 0.0 2492 924 ? S 06:40 0:00 sleep 900
+user 3697 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3698 0.0 2492 900 ? S 06:40 0:00 sleep 900
+user 3699 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3700 0.0 2492 896 ? S 06:40 0:00 sleep 900
+user 3701 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3702 0.0 2492 852 ? S 06:40 0:00 sleep 900
+user 3703 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3704 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3705 0.0 2492 896 ? S 06:40 0:00 sleep 900
+user 3706 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3707 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3708 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3709 0.0 2492 892 ? S 06:40 0:00 sleep 900
+user 3710 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3711 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3712 0.0 2492 876 ? S 06:40 0:00 sleep 900
+user 3713 0.0 2492 900 ? S 06:40 0:00 sleep 900
+user 3714 0.0 2492 900 ? S 06:40 0:00 sleep 900
+user 3715 0.0 2492 876 ? S 06:40 0:00 sleep 900
+user 3716 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3717 0.0 2492 856 ? S 06:40 0:00 sleep 900
+user 3718 0.0 2492 900 ? S 06:40 0:00 sleep 900
+user 3719 0.0 2492 912 ? S 06:40 0:00 sleep 900
+user 3720 0.0 2492 896 ? S 06:40 0:00 sleep 900
+user 3721 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3722 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3723 0.0 2492 912 ? S 06:40 0:00 sleep 900
+user 3724 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3725 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3726 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3727 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3728 0.0 2492 924 ? S 06:40 0:00 sleep 900
+user 3729 0.0 2492 896 ? S 06:40 0:00 sleep 900
+user 3730 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3731 0.0 2492 924 ? S 06:40 0:00 sleep 900
+user 3732 0.0 2492 876 ? S 06:40 0:00 sleep 900
+user 3733 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3734 0.0 2492 912 ? S 06:40 0:00 sleep 900
+user 3735 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3736 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3737 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3738 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3739 0.0 2492 892 ? S 06:40 0:00 sleep 900
+user 3740 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3741 0.0 2492 900 ? S 06:40 0:00 sleep 900
+user 3742 0.0 2492 928 ? S 06:40 0:00 sleep 900
+user 3743 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3744 0.0 2492 900 ? S 06:40 0:00 sleep 900
+user 3745 0.0 2492 932 ? S 06:40 0:00 sleep 900
+user 3746 0.0 2492 920 ? S 06:40 0:00 sleep 900
+user 3747 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3748 0.0 2492 900 ? S 06:40 0:00 sleep 900
+user 3749 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3750 0.0 2492 912 ? S 06:40 0:00 sleep 900
+user 3751 0.0 2492 904 ? S 06:40 0:00 sleep 900
+user 3752 0.0 2492 876 ? S 06:40 0:00 sleep 900
+user 3753 0.0 2492 924 ? S 06:40 0:00 sleep 900
+user 3754 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3755 0.0 2492 904 ? S 06:40 0:00 sleep 900
+user 3756 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3757 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3758 0.0 2492 904 ? S 06:40 0:00 sleep 900
+user 3759 0.0 2492 896 ? S 06:40 0:00 sleep 900
+user 3760 0.0 2492 896 ? S 06:40 0:00 sleep 900
+user 3761 0.0 2492 876 ? S 06:40 0:00 sleep 900
+user 3762 0.0 2492 908 ? S 06:40 0:00 sleep 900
+user 3763 0.0 2492 908 ? S 06:40 0:00 sleep 900
+user 3764 0.0 2492 876 ? S 06:40 0:00 sleep 900
+user 3765 0.0 2492 916 ? S 06:40 0:00 sleep 900
+user 3766 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3767 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3768 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3769 0.0 2492 896 ? S 06:40 0:00 sleep 900
+user 3770 0.0 2492 900 ? S 06:40 0:00 sleep 900
+user 3771 0.0 2492 892 ? S 06:40 0:00 sleep 900
+user 3772 0.0 2492 928 ? S 06:40 0:00 sleep 900
+user 3773 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3774 0.0 2492 852 ? S 06:40 0:00 sleep 900
+user 3775 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3776 0.0 2492 856 ? S 06:40 0:00 sleep 900
+user 3777 0.0 2492 856 ? S 06:40 0:00 sleep 900
+user 3778 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3779 0.0 2492 868 ? S 06:40 0:00 sleep 900
+user 3780 0.0 2492 908 ? S 06:40 0:00 sleep 900
+user 3781 0.0 2492 860 ? S 06:40 0:00 sleep 900
+user 3782 0.0 2492 908 ? S 06:40 0:00 sleep 900
+user 3783 0.0 2492 860 ? S 06:40 0:00 sleep 900
+user 3784 0.0 2492 876 ? S 06:40 0:00 sleep 900
+user 3785 0.0 2492 872 ? S 06:40 0:00 sleep 900
+user 3786 0.0 2492 896 ? S 06:40 0:00 sleep 900
+user 3787 0.0 2492 904 ? S 06:40 0:00 sleep 900
+user 3788 0.0 2492 872 ? S 06:40 0:00 sleep 900
+user 3789 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3790 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3791 0.0 2492 904 ? S 06:40 0:00 sleep 900
+user 3792 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3793 0.0 2492 856 ? S 06:40 0:00 sleep 900
+user 3794 0.0 2492 924 ? S 06:40 0:00 sleep 900
+user 3795 0.0 2492 932 ? S 06:40 0:00 sleep 900
+user 3796 0.0 2492 924 ? S 06:40 0:00 sleep 900
+user 3797 0.0 2492 892 ? S 06:40 0:00 sleep 900
+user 3798 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3799 0.0 2492 852 ? S 06:40 0:00 sleep 900
+user 3800 0.0 2492 892 ? S 06:40 0:00 sleep 900
+user 3801 0.0 2492 924 ? S 06:40 0:00 sleep 900
+user 3802 0.0 2492 900 ? S 06:40 0:00 sleep 900
+user 3803 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3804 0.0 2492 892 ? S 06:40 0:00 sleep 900
+user 3805 0.0 2492 912 ? S 06:40 0:00 sleep 900
+user 3806 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3807 0.0 2492 876 ? S 06:40 0:00 sleep 900
+user 3808 0.0 2492 904 ? S 06:40 0:00 sleep 900
+user 3809 0.0 2492 932 ? S 06:40 0:00 sleep 900
+user 3810 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3811 0.0 2492 904 ? S 06:40 0:00 sleep 900
+user 3812 0.0 2492 856 ? S 06:40 0:00 sleep 900
+user 3813 0.0 2492 924 ? S 06:40 0:00 sleep 900
+user 3814 0.0 2492 896 ? S 06:40 0:00 sleep 900
+user 3815 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3816 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3817 0.0 2492 908 ? S 06:40 0:00 sleep 900
+user 3818 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3819 0.0 2492 876 ? S 06:40 0:00 sleep 900
+user 3820 0.0 2492 900 ? S 06:40 0:00 sleep 900
+user 3821 0.0 2492 924 ? S 06:40 0:00 sleep 900
+user 3822 0.0 2492 868 ? S 06:40 0:00 sleep 900
+user 3823 0.0 2492 912 ? S 06:40 0:00 sleep 900
+user 3824 0.0 2492 896 ? S 06:40 0:00 sleep 900
+user 3825 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3826 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3827 0.0 2492 872 ? S 06:40 0:00 sleep 900
+user 3828 0.0 2492 884 ? S 06:40 0:00 sleep 900
+user 3829 0.0 2492 932 ? S 06:40 0:00 sleep 900
+user 3830 0.0 2492 876 ? S 06:40 0:00 sleep 900
+user 3831 0.0 2492 876 ? S 06:40 0:00 sleep 900
+user 3832 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3833 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3834 0.0 2492 860 ? S 06:40 0:00 sleep 900
+user 3835 0.0 2492 876 ? S 06:40 0:00 sleep 900
+user 3836 0.0 2492 904 ? S 06:40 0:00 sleep 900
+user 3837 0.0 2492 888 ? S 06:40 0:00 sleep 900
+user 3838 0.0 2492 880 ? S 06:40 0:00 sleep 900
+user 3839 0.0 2492 900 ? S 06:40 0:00 sleep 900
+user 3840 0.0 2492 900 ? S 06:40 0:00 sleep 900
+user 3842 0.0 8240 4456 ? R 06:40 0:00 ps aux

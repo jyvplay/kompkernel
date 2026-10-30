@@ -1,0 +1,11 @@
+KEPHALAION: after decoding below, in the comma-separated table: insert "q1" as field 2 of the header and each row: the inserted value = {year} - {q2} - {q3} (empty field = 0), written as an integer. {x} means that row's decoded {x}. Change nothing else.
+city,q2,q3,year
+aa,20,30,60
+bb,7,9,21
+cc,2,3,6
+dd,,4,15
+ee,3,3,9
+ff,1,6,15
+gg,5,7,14
+hh,9,9,27
+Total,52,66,167

@@ -1,0 +1,10 @@
+X59 lanes
+
+ewf-standings: bench/x58/fixtures/ewf-standings.csv (frozen in X58;
+tidytuesday English women's football standings 2011-2024, 258x17,
+SHA-256 51cbb2f9488f92d1a79d149861265d95c6b20a02a621adc8887834dda66a4279).
+X59 window law: position = ordinal rank within season_id by
+points/played descending (points-per-game decides the COVID-shortened
+2019-20 season, where raw points order is wrong on 6 rows), verified
+258/258, 0 exceptions. Shuffled-row variant (seed 59, derived for the
+red team only) additionally needs goal_difference as tiebreaker.

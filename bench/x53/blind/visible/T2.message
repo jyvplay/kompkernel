@@ -1,0 +1,16 @@
+TAXIS: rows single-spaced under the unchanged header, minus Use% = the ceiling of 100×Used÷(Used+Available), with a % sign. Split at spaces (last field may hold spaces), insert the omitted field, re-align under header words (LRRRRL: L/R = word start/end; min gaps digitwise 51111; shift right whole if needed).
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/sda4 42160291 13478029 28677322 /
+/dev/sdb6 53198799 31285831 21909772 /dev
+/dev/sdc7 68993989 4368710 64621384 /run
+/dev/sdd3 40999681 27140892 13856662 /tmp
+/dev/sde5 58267975 21534214 36733569 /var
+/dev/sdf9 5846774 2177297 3668161 /home
+/dev/sdg2 69813415 46898506 22914743 /boot
+/dev/sdh3 46731189 4746927 41983930 /data
+/dev/sdi7 37716324 37305942 408859 /srv
+/dev/sdj4 7588723 4181094 3405548 /opt
+/dev/sdk9 20813428 7514917 13296703 /usr
+/dev/sdl2 25923286 4283911 21639007 /etc
+/dev/sdm8 56906892 42800060 14101982 /snap
+/dev/sdn9 59150856 11594145 47551912 /mnt

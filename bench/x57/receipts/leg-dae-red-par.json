@@ -1,0 +1,7 @@
+{
+ "codec": "daedalus",
+ "file": "/tmp/syz-reduced.csv",
+ "tokens": 6359,
+ "exact": true,
+ "ms": 30808
+}

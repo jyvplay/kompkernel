@@ -1,0 +1,1 @@
+EIRMOS: after decoding below, in the comma-separated table insert as header field and value in every row: field 3 "email": lowercase {first} + "." + lowercase {last} + "@example.com". {x} means that row's decoded {x}; + joins text pieces end to end; quoted pieces are literal text; lowercase {x} = {x} with every letter made lowercase. Change nothing else.

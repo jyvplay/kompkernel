@@ -1,0 +1,11 @@
+DIPTYCHON: after decoding below, the lines of 32 lowercase hex digits (read each as 16 byte pairs; the last data line may be shorter) are the bytes of a hexdump -C dump. Rewrite each such line as: the byte offset in hex (16 times the data-line index from 0), zero-padded to 8 digits, two spaces, then each byte as 2 hex digits followed by a space (an extra space before the 9th byte; bytes missing on a short line are 3 spaces each), a space, |, one character per byte (the ASCII character itself when printable or a space, else a dot), |. A full line whose bytes repeat the previous full line is not printed; the whole run of repeats is replaced by one line containing only *. Keep every other line exactly as decoded.
+db85f2826c777d03032037513cf0162d
+f2430575a82429149250b4c786d4a1bc
+c9e542294af1cc164f94898b3a801a6a
+a7b008f6c2798be7288fb1672380bfb9
+07070707070707070707070707070707
+07070707070707070707070707070707
+89a79e6f457565327f43507747622d64
+e1da55209478b05b4c4d3755b9f626bc
+f5
+00000081

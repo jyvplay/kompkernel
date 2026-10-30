@@ -137,10 +137,25 @@ import { archetyponEncode } from './archetypon';
 import { synkrisisEncode } from './synkrisis';
 import { bifrontEncode } from './bifront';
 import { tagstackEncode } from './tagstack';
+import { repriseEncode } from './reprise';
+import { fotarEncode } from './fotar';
 import { siblingTemplateEncode } from './sibling-template';
 import { nestEncode } from './nest';
 import { kolumnEncode } from './kolumn';
 import { atxReleaseEncode } from './atx-release';
+import { syllogismosEncode } from './syllogismos';
+import { diptychonEncode } from './diptychon';
+import { taxisEncode } from './taxis';
+import { athroismosEncode } from './athroismos';
+import { kephalaionEncode } from './kephalaion';
+import { isoskelesEncode } from './isoskeles';
+import { syzygiaEncode } from './syzygia';
+import { zygonEncode } from './zygon';
+import { bathmosEncode } from './bathmos';
+import { eirmosEncode } from './eirmos';
+import { syndesmosEncode } from './syndesmos';
+import { rhizomaEncode } from './rhizoma';
+import { alphafoldEncode } from './alphafold';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -602,6 +617,29 @@ export function codecEntries(): Entry[] {
       },
     },
     {
+      key: 'fotar',
+      label: 'FOTAR (X65: exact frequency-ordered aliases for repeated BPE-token surface fragments; the literal alias map and decoder clause are in-band, and the mapped stream is encoded by APOGRAPHE. This is a readable adaptation of established dictionary/token-frequency coding, not a global novelty claim; VERITAS and related dictionary codecs are close stack prior art. Bounded deterministic planning ranks repeated token surfaces by a character-mass proxy and keeps at most the top 96; the proxy and direct FOTAR-only count do not decide emission. The final alias candidate is restored exactly, composed through APOGRAPHE, directly counted as the complete contract+table+parent message, and emitted only if strictly below the exact same-source TAGSTACK+SIBLING frontier; otherwise return that measured parent. Caps: 80,000 UTF-16 code units, 96 alias candidates; inherited parent/frontier search has no wrapper-wide time cap. No native LLM decode is claimed.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r: any = fotarEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; exact=${r.exact}; frontierComplete=${r.frontierComplete}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; fotar=${r.fotar}` };
+      },
+    },
+    {
+      key: 'reprise',
+      label: 'REPRISE (X64 speed lane: bounded encoder-only LRU memo for exact complete TAGSTACK frontier results. Identical source + encoding + OMEGA_DET/work/chiron budget controls returns the previously verified TAGSTACK message; it adds no wire syntax, contract, or decoder requirement. Different source/configuration is a cache miss. Only exact complete results are admitted; ≤50,000 source chars, ≤8 entries and ≤500,000 retained characters; LRU eviction. This is a repeated-input runtime speed optimization, not a new compression transform or universal speed claim. The output remains the in-band TAGSTACK message.)',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r: any = repriseEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; parent=${r.parentCodec}:${r.parentTokens}; exact=${r.exact}; memoized TAGSTACK output` };
+      },
+    },
+    {
       key: 'sibling-template',
       label: 'SIBLING-TEMPLATE (X47 candidate: on bounded, well-nested XML-compatible explicit-tag markup, detect a run of at least three adjacent same-name siblings with an identical exact byte skeleton and at least two text-only child slots. Emit the skeleton once, preserve every raw slot value and the exact inter-record separator, and restore records in order from a collision-free in-band macro. The complete contract-plus-wire is priced through APOGRAPHE and must strictly beat TAGSTACK’s same-source measured current-frontier output; otherwise return that exact parent. Greedy/search: deterministic traversal chooses the run with the largest raw-token proxy gain; the proxy never decides shipping. Time/CPU: parse scan is O(n) under a 100,000-character cap; cumulative shape/serialization/proxy work is ≤1,000,000 weighted character-and-node units; then one current-frontier tournament (unless supplied by caller) and one APOGRAPHE encode of a transformed candidate. Prior art: XMill and XML structure/data compressors already factor structure and values; no new general compression primitive is claimed. The registry exposes the full message.',
       family: 'exact',
@@ -633,6 +671,162 @@ export function codecEntries(): Entry[] {
         const r = atxReleaseEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rows=${r.rows}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'diptychon',
+      label: 'DIPTYCHON (δίπτυχον, two-panel tablet; X52: canonical hexdump re-rendering. A hexdump (od -t x1z, xxd, hexdump -C) prints every byte twice — as hex and as an ASCII panel — plus an offset that is just 16 times the line index. That frame is not repeated text (grammar codecs price each fresh gutter), not a vertical column law, and not a SYLLOGISMOS dependency between data fields: it is a second encoding of the same values under a fixed external convention, i.e. value-derived rather than position-derived like GRAMMA/KLADOS layout regeneration. DIPTYCHON infers the rendering parameters from the text (format, offset radix/width/base incl. od -A x/o/d/n, xxd grouping/case/decimal offsets/NUL autoskip, hexdump -C spacing, * squeeze lines, final offset line; X53 variants: plain od -t x1/-t x2 with no ASCII panel, and xxd -i-style C byte arrays with inferred items-per-line/indent/separator/prefix), extracts the bytes, verifies a byte-identical re-render of the whole input, and only then strips the frame: data lines become compact hex (space-separated pairs or one continuous hex string per line, whichever tokenizes cheaper), squeezed runs expand to repeated lines, other lines pass through verbatim, and the contract states the rendering once so a stock LLM re-renders the dump from one chat message. The reduced text is coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2 and APOGRAPHE; the complete candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source (both TAGSTACK runtime-parent members, so losing to either is decisive) and then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, or the measured best parent is returned. This is not a registry-wide tournament. Greedy/search: a small deterministic format-candidate set arbitrated by whole-input byte-exact re-rendering (a wrong guess can only refuse, never emit); compact form by direct token count; emission is a measured gate. Prior art: hexdump reversibility (xxd -r) is as old as the tools and "canonical hex+ASCII display" is util-linux terminology; no new compression primitive is claimed, only the verified one-chat LLM-re-renderable realization with a frontier gate, in a stack with no prior hexdump mechanism (grep xxd/hexdump/gutter = 0). Time/CPU: CPU-bound; planner is linear (caps 2,000,000 code units, 300,000 lines); inherited parent/frontier encodes dominate and have no wrapper-wide cap, so this entry is deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = diptychonEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; format=${r.format ?? '-'}; compact=${r.compact ?? '-'}; dataLines=${r.dataLines}; bytes=${r.totalBytes}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'taxis',
+      label: 'TAXIS (τάξις, arrangement in ranks; X53: derived columns in space-aligned tables, restored by exact re-alignment. SYLLOGISMOS deletes functionally-dependent columns only where field boundaries are explicit (delimited tables); the aligned ops output pasted into chats daily (ps aux, top, df) has boundaries only as column geometry, and its redundant columns use relation shapes SYLLOGISMOS cannot express: ps %MEM is 100×RSS/total-memory truncated to tenths with the total solved from the rows as an exact rational interval (X51-verified 59/59, re-verified on every ps lane in X53), top %MEM is the rounded form, df Use% is ceil(100×Used/(Used+Avail)). TAXIS infers the geometry from the text alone — header-word anchors, per-column L/R alignment, per-transition minimum gaps, push-right-whole on overflow (the rule that survives procps overflow rows) — accepts it only if re-rendering the whole block from bare cells is byte-identical, searches derived columns (fitted-total percent trunc/round, percent-of-column, ceil-share A/(A+B), exact binary arithmetic at the target scale) verifying every row in BigInt rational arithmetic, then ships the original header plus single-space rows without the derived columns, stating the derivations and the alignment rule once in-band. Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source (TAGSTACK runtime-parent members) and then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: geometry is a bounded deterministic aligns DFS with gaps then uniquely determined, arbitrated by byte-exact re-render; relations bounded per column; drop set greedy by net saving with the true rendered clause priced, acyclic; emission is the measured gate. Prior art: functional-dependency/semantic tabular compression (SPARTAN; SQUISH; DeepSqueeze SIGMOD 2020; Blitzcrank VLDB 2024; redundancy-ranked FD discovery arXiv:2601.10130) is bit-level and delimited; no new compression primitive is claimed, only the verified one-chat realization on inferred alignment geometry — SYLLOGISMOS\' documented whitespace boundary, crossed. Time/CPU: CPU-bound; planner caps 200,000 code units, 20,000 lines, 40 columns, 20M cell evaluations; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = taxisEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rules=${r.rules.length} [${r.rules.map(x => x.kind).join(',')}]; rows=${r.rows}; cols=${r.cols}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'syndesmos',
+      label: 'SYNDESMOS (X61: repeated Markdown inline-link destination interning. For supported single-line inline links with simple labels and HTTP(S) destinations, count exact repeated destinations; replace only repeated URL spans with numbered in-band references, preserving every other byte. The URL table and inverse rule live in the same message. Narrow patterns are skipped; marker collisions refuse. Markdown reference links and URL dictionaries are established prior art; no global novelty claim. Repository-scoped delta: syntax-aware exact raw-text inverse and complete-message pricing, not new source-coding theory. Parent-code by DAEDALUS; emit only on strict exact win against the same-source TAGSTACK runtime-parent frontier plus SIBLING-TEMPLATE; otherwise return the measured winner. Greedy/search: deterministic repeated-target count and first-seen IDs; final token price decides. Time/CPU: O(n+m), capped at 120,000 UTF-16 code units and 20,000 links; DAEDALUS and parent-frontier runs have no wrapper-wide time cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = syndesmosEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.comparison}; parent=${r.parentCodec}; urls=${r.urls}; links=${r.eligibleLinks}/${r.linkCount}; candidate=${r.messageTokens}; frontier=${r.frontierTokens}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'eirmos',
+      label: 'EIRMOS (εἱρμός, a stringing-together/chain; X60: string-template (concatenation) column elision for delimited tables. The stack already has raw literal+field concatenation in SYLLOGISMOS (up to two sibling fields), whole-field case transforms, and JSON object templates in PARADEIGMA. EIRMOS adds a distinct composition absent from those codecs: per-slot string transforms INSIDE a multi-source concatenation (e.g. lowercase-initial({first}) + lowercase({last})), plus up to three slots, bounded seed segmentation, and exact row exceptions for delimited tables; it does not claim generic concatenation as novel. EIRMOS fits a template of 1\u20133 same-row source columns with literal separators and small transforms (verbatim, lowercase, UPPERCASE, capfirst, initial, lowercase-initial/UPPERCASE-initial, first2, first3) by bounded segmentation search over seed rows, verified on every row (\u22643 exceptions verbatim); case transforms require ASCII-only cased letters so the reader\u2019s notion of lowercase matches the encoder\u2019s; pure copies (APOGRAPHE) and \u226464-distinct single-source transforms (SYLLOGISMOS lookup) are refused to their owners; \u22644 drops, sources never dropped. The derived values are near-unique per row, so dictionary/grammar parents pay full price \u2014 on the published generated-data finance-demo fixture the drop is worth 4,234 raw tokens before a 71-token contract; records are not live people. Reader obligation: join the stated pieces per row \u2014 string work, no arithmetic. Reduced text coded by the cheapest measured exact parent (DAEDALUS, AKOLOUTHIA-2, APOGRAPHE); candidate must beat AKOLOUTHIA-2/APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: bounded deterministic segmentation + exhaustive per-row verification; greedy drop admission by true contract+reduced tokens; emission is the measured gate. Prior art: fitting genus is FlashFill-style string-transformation synthesis from examples (Gulwani, POPL 2011; BlinkFill et al.), built to fill cells in place; for fitting a template to elide the column and teach it in-band for one-chat LLM regeneration, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 64 columns, 60M work units; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = eirmosEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'bathmos',
+      label: 'BATHMOS (βαθμός, a step/degree/rank; X59: partition-window column elision for delimited tables. Every table dependency in the stack is row-local (SYLLOGISMOS arith/lookup, ZYGON weighted sums, SYZYGIA affine twins), column-local (APOGRAPHE/METRON generators, ATHROISMOS recurrences), an edge sum (KEPHALAION) or a symmetry (ISOSKELES) \u2014 none can state a law whose value depends on the OTHER ROWS of its partition: a league position, a percentile, a quartile bucket, a share of the group total. Those are SQL window functions (RANK/DENSE_RANK/ROW_NUMBER/PERCENT_RANK/CUME_DIST/NTILE, value/SUM(value) OVER (PARTITION BY \u2026)) exported into everyday CSVs by every BI tool. BATHMOS fits exact BigInt-rational window laws per (target, source, partition): competition/dense/ordinal rank (sort key one numeric column or an exact ratio A/B \u2014 points-per-game; ordinal ties broken by up to two extra keys then original row order), percent-rank, cumulative distribution (\u00d71 or \u00d7100 at the printed scale), NTILE buckets (SQL balanced or ceil convention; optionally text labels), and share = source/SUM or source/MAX over the partition. Partition is the whole table or one categorical column; \u22643 exception rows ship verbatim; ordinal fits whose primary key ties cover >50% of a partition are refused as file-order counters in disguise (METRON/APOGRAPHE own those). Sources and partition columns are never dropped; \u22644 drops; plain/German rendering. Reader obligation: sort or sum each stated group (KEPHALAION-grade arithmetic plus an ordering; a slip is one cell except inside a sort). Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: bounded deterministic enumeration with exhaustive per-row verification; greedy drop admission by true contract+reduced tokens; emission is the measured gate. Prior art: window functions are SQL:2003 machinery and order statistics are classical; the functional-dependency compressors (SPARTAN, DeepSqueeze SIGMOD 2020, Blitzcrank VLDB 2024) are row-local, and for stating a fitted window law in-band for one-chat LLM recomputation, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 64 columns, 120M work units; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = bathmosEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'rhizoma',
+      label: 'RHIZOMA (X62: tree-listing indentation canonicalization; exact, deep, whole-frontier gated)',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = rhizomaEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.comparison}; parent=${r.parentCodec}; elidedNBSP=${r.elidedNbsp}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'alphafold',
+      label: 'ALPHAFOLD (X63: in-band alpha-equivalent code-block template plus identifier bindings; exact, deep, whole-frontier gated; no global novelty claim)',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = alphafoldEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.comparison}; parent=${r.parentCodec}; templates=${r.templates}; refs=${r.references}; planMs=${r.planMs}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'zygon',
+      label: 'ZYGON (ζυγόν, balance-beam; X58: weighted-sum (exact linear-law) column elision for delimited tables. The {terms x coefficients} grid of same-row linear laws, unions read from source: (1 term, fitted coefficient) is SYLLOGISMOS scaleK; (n terms, all coefficients \u00b11) is KEPHALAION rowsum/headsum; (2 terms, one binary op) is SYLLOGISMOS arith; (n terms, fitted rational coefficients) was empty \u2014 and it is where gradebooks, portfolios and cost rollups live: a weighted Final (0.01\u00b7survey + 0.02\u00b7dba + \u2026 + 0.5\u00b7exam_avg; the X58 GWU lane verifies 36/36 with weights printed in its own lead row), league points (3\u00b7wins + draws), portfolio day value (\u03a3 shares\u00b7price), GPA numerators, even the plain average (\u00bd,\u00bd), which SYLLOGISMOS cannot state either. ZYGON solves exact BigInt-rational weights by normal equations over all rows (least-squares averages the target\u2019s print-rounding down so weights snap to the generator\u2019s clean decimals) with singularity-guided column elimination for collinear sources (played = wins+draws+losses), optional intercept, decimal-snap candidates re-verified per row under the stated rounding mode at the printed scale, \u22643 exception rows shipped verbatim, equal weights grouped in the contract (0.01\u00d7({a}+{b}+{c}) \u2014 shorter and lighter to execute). All-ones weights are refused (KEPHALAION owns them), single-term laws refused (scaleK), constant sources excluded (collinear with the intercept). Up to 4 drops, sources never dropped, plain/German rendering, pre-header lead rows (spreadsheet weights rows) supported with verbatim lead-cell restoration. Reader: stateless grouped weighted sum per row (KEPHALAION with coefficients; slip = one cell). Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: exact linear algebra (bounded terms/rows) + exhaustive per-row verification inside; greedy drop admission by true contract+reduced tokens; emission is the measured gate. Prior art: linear/arithmetic functional dependencies (Kossmann et al., VLDB Journal 2022, DOI 10.1007/s00778-021-00676-3) and bit-level linear-model column stores; for rational weight-vector fitting with grouped natural-language formulae taught in-band for one-chat LLM recomputation, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 64 columns, 120M work units; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = zygonEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'syzygia',
+      label: 'SYZYGIA (συζυγία, a yoking/conjugate pair; X57: affine-twin elision with \u00b11-ulp residual correction for delimited tables. The affine map y = a\u00b7x + b between two COLUMNS (a\u22601, b\u22600) is expressible by no union member read from source: SYLLOGISMOS arith is one binary op and cannot chain, scaleK has no intercept, METRON lin puts the slope on the row index, APOGRAPHE int adds a constant only vertically. Dual-unit exports live in exactly that corner (temp_c/temp_f, wind_mph/wind_kph, pressure_mb/pressure_in in every WeatherAPI-style dump; \u00b0C/\u00b0F/K triples; calibrated sensor pairs). Measured twist: APIs round each twin independently from one hidden exact value, so round(1.8\u00b7printed_C + 32) disagrees with printed_F by one last-place unit on 15-45% of rows (38/124 on the X57 lane) — the twin is not redundant, but its whole information beyond the affine law is a ternary rounding residual. SYZYGIA fits (a, b, rounding mode) in exact BigInt rational arithmetic so every residual lies in {-1, 0, +1} ulp, drops the target column, and ships one residual character per data row on a \u00a7N line under the reduced table; exactly-affine pairs (conversion tables) ship no line. Up to 8 drops, sources never dropped, plain and German rendering. Reader: stateless per row multiply-add + \u00b11-ulp nudge (scaleK-class burden; no carried state). Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: per ordered pair, (a,b,mode) candidates from exact two-point rational fits and decimal roundings are verified over all rows with the \u22641-ulp bound (reader-burden-aware constant pricing among verified fits); drops added greedily by true contract+reduced tokens; whole-input restore arbitrates. Prior art: approximate functional dependencies (Kivinen-Mannila g3; Top-k AFD discovery arXiv:2605.24925) bound violating-TUPLE counts for auditing; for fitted affine twins with a \u00b11-ulp residual alphabet taught in-band for one-chat LLM recomputation, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 64 columns, 120M work units; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = syzygiaEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'isoskeles',
+      label: 'ISOSKELES (ἰσοσκελής, equal-legged; X56: symmetric-square triangle elision for delimited tables. Every table dependency in the stack is row-local, column-local, or one-step: same-row functions (SYLLOGISMOS binary arith, TAXIS), above/index/same-line-copy predictors (APOGRAPHE {above, col, days, workdays, int, lin, clock} — union read from source), driven recurrences down a column (ATHROISMOS), n-ary sums across a row or down a column (KEPHALAION). None reaches across the diagonal: in a symmetric square (distance matrices, correlation matrices, adjacency/similarity matrices) cell (i,j) equals cell (j,i) — a 2-D transposition isometry no one-step predictor can express, since `col` copies within one line and `above` looks one line up, while the mirror lives in an arbitrary other row AND other column; half of every such table ships twice. ISOSKELES detects a delimited square block (optional header row, optional label column, optional all-empty trailing padding — the pandas to_csv square shape), verifies string-exact symmetry pair by pair (<=6 exception pairs and >=95% symmetric; exceptions stay verbatim), blanks the strictly lower triangle — plus the diagonal when it is one constant string (distances "0", correlations "1.000000") stated once in the contract — and has the reader refill each blank from its mirror across the diagonal, by row/column names when header names equal the label column, else by block coordinates. The reader only copies; there is no arithmetic and no carried state — the lowest-risk reader obligation in the table family. A neat special case measured this turn: when header names equal the label column, the square INCLUDING header row and label column (32x32 for a 31-city matrix) is itself string-symmetric, so the labels also elide. Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: neither greedy nor heuristic — the shape space (3 delimiters x header on/off x label 0/1 x diagonal-constant on/off) is searched exhaustively, symmetry verified exactly, candidates ranked by the true rendered contract plus reduced-text tokens, whole-input restore arbitrates; emission is the measured gate. Prior art: storing one triangle of a symmetric matrix is classical numerical practice (BLAS/LAPACK packed symmetric storage, UPLO conventions); for detecting string-exact transposition symmetry in an arbitrary delimited file and eliding a triangle under an in-band natural-language mirror rule executed by a stock LLM, honestly none. Time/CPU: CPU-bound; planner O(rows x cols + n^2) under caps (400,000 code units, n<=500); inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = isoskelesEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'kephalaion',
+      label: 'KEPHALAION (κεφάλαιον, the main sum/total; X55: aggregate elision for delimited tables. SYLLOGISMOS arithmetic is strictly binary (A+B, A-B, A×B, A÷B, 100A/B, A·K — its rule union read from source), APOGRAPHE/METRON predict from above or index, ATHROISMOS integrates down a column; none can state an n-ary aggregate: a Total column that is the sum of many fields of its row (TT = AA+AF+...+Other over 13 region columns; Active = Confirmed - Recovered - Deaths), or a Total row whose cells are the sums of their columns. KEPHALAION fits exact BigInt-decimal aggregates — rowsum (subset of >=2 term columns, empty=0), headsum (head - sum of subset), and colsum (one aggregate row, first/last/labelled, per-cell verified) — allows up to 3 exception rows shipped in the contract (real reports carry adjustments), supports plain and German (1.234,56) rendering with target rescaling, composes a rowsum drop with a colsum blanking when both verify, and has the reader recompute the sums. No carried state: each value is an independent sum, so an arithmetic slip damages one cell only (contrast ATHROISMOS). Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: subset fitting exhaustive for <=16 term columns (2^k, multi-row pruning, largest-first), contiguous-ranges fallback beyond; aggregate rows verified per cell; ranking charges the true rendered contract; whole-input restore arbitrates; emission is the measured gate. Prior art: functional/order dependency theory (Kossmann et al., VLDB Journal 2022, DOI 10.1007/s00778-021-00676-3; FDX, SIGMOD 2020) and SQL window aggregates as the producing operation; for exact aggregate elision taught in-band to a stock LLM, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 40 columns, 80M work units; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = kephalaionEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'athroismos',
+      label: 'ATHROISMOS (ἀθροισμός, a gathering/accumulation; X54: driven-recurrence column elision for delimited tables. Every table dependency in this stack is same-row (SYLLOGISMOS/TAXIS), above-only (APOGRAPHE above/int/days), index-based (METRON lin/clock), or a same-row copy (APOGRAPHE col) — APOGRAPHE\'s predictor union is the complete list. None can state a balance column: y_i = y_{i-1} + credit_i - debit_i, a first-order recurrence driven by other columns of the same row, whose digits are fresh every row. ATHROISMOS detects exact running accumulations — one signed driver or a credit/debit pair, a stated starting value, empty driver cells as 0, exact BigInt decimal arithmetic at the columns\' uniform scale, plain or German (1.234,56) rendering — allows up to 3 exception rows whose printed values ship in the contract and re-anchor the chain (real statement fixtures contain deliberate balance breaks), drops the column, and has the reader re-integrate it downwards. Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source (TAGSTACK runtime-parent members) and then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Reader caveat, measured not hidden: the reader carries state down the column, so an arithmetic slip changes digits silently (exceptions re-anchor); blind-decode receipts in bench/x54/. Greedy/search: exhaustive bounded discovery (targets × drivers × cum1±/cum2) with exact per-row verification and an exception budget; ranking charges the true rendered contract; whole-input restore arbitrates; single-drop v1; emission is the measured gate. Prior art: functional/order dependencies are database classics (survey: Kossmann et al., VLDB Journal 2022, DOI 10.1007/s00778-021-00676-3) and FD compressors are cited under SYLLOGISMOS; for driven-recurrence elision taught in-band to a stock LLM, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 40 columns, 60M cell evaluations; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = athroismosEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'syllogismos',
+      label: 'SYLLOGISMOS (X51: verified functional-dependency column elision for delimited tables. Where a whole column is an exact function of sibling fields on every row \u2014 same-row decimal arithmetic (+, -, *, /, 100*A/B at exact or fitted scale with a discovered rounding mode; a fitted short multiplier A*K), text assembly (constants + up to two fields), a split part, letter case, a finite lookup shipped in the contract, a row-to-row difference, or the next row\u2019s value \u2014 the column is deleted and the dependency is stated once in-band; the reduced table is coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2 and APOGRAPHE. Verification is exact BigInt-rational arithmetic plus byte-identical CSV rendering (scales, quoting) on every row. Constant and duplicate columns are deliberately excluded: APOGRAPHE and KOLUMN already own those. The candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source (both TAGSTACK runtime-parent members, so losing to either ends the matter) and then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, or the measured best parent is returned; this is not a registry-wide tournament. Greedy/search: bounded deterministic relation enumeration per column, then greedy acyclic drop-set selection by net column token mass (a dropped column is never a source); no joint optimum is claimed. Prior art: functional-dependency / semantic tabular compression is established (SPARTAN; SQUISH; column dependency, TCS 387 (2007) 273-283; DeepSqueeze, SIGMOD 2020; Blitzcrank, VLDB 2024), all bit-level with arithmetic coding; the claim here is only the bounded, exact-text, one-chat realization with a frontier gate. Time/CPU: CPU-bound; planner caps 100,000 code units, 10,000 rows, 32 columns, 30M cell evaluations; the inherited parent/frontier encodes dominate and have no wrapper-wide cap, so this entry is deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = syllogismosEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; drops=${r.drops.length} [${r.drops.map(d => d.kind).join(',')}]; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
       },
     },
     {

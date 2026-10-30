@@ -1,0 +1,38 @@
+{
+ "applied": true,
+ "planExact": true,
+ "contractTokens": 71,
+ "drops": [
+  "full_name"
+ ],
+ "legs": [
+  {
+   "codec": "akolouthia2",
+   "side": "source",
+   "tokens": 41565,
+   "exact": true,
+   "ms": 149884
+  },
+  {
+   "codec": "akolouthia2",
+   "side": "candidate",
+   "tokens": 37787,
+   "exact": true,
+   "ms": 131211
+  },
+  {
+   "codec": "daedalus",
+   "side": "source",
+   "tokens": 43207,
+   "exact": true,
+   "ms": 70179
+  },
+  {
+   "codec": "daedalus",
+   "side": "candidate",
+   "tokens": 39474,
+   "exact": true,
+   "ms": 61562
+  }
+ ]
+}

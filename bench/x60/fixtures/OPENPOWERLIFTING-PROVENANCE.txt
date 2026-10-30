@@ -1,0 +1,20 @@
+OpenPowerlifting public-record benchmark provenance (source records not vendored)
+
+Source mirror: https://github.com/sstangl/openpowerlifting (repo reports AGPL-3.0)
+Files (main branch):
+  meet-data/raw/1902/original.csv
+  meet-data/raw/1903/original.csv
+
+The 47 + 77 lifter data rows have matching 48-field headers. X60 combines
+those existing rows into a single same-schema CSV; no person/record/value
+was invented or altered. The combined UTF-8/LF table used for measurement
+has SHA-256:
+44d34480f3ccbd38da4a8cb224e5c3a90c3abe5a6ea435ea229d17ab2b3c19db
+
+Observed exact law (0-based source fields in combined schema):
+  Full Name = First Name + " " + Last Name
+for 122 rows; two exact exception values are shipped verbatim. The EIRMOS
+contract + reduced text restored the combined table exactly in the TS
+planner and independently in the CPython twin. Member and full-gate receipts
+are in bench/x60/receipts/. Raw AGPL-governed files are intentionally not
+checked into this repository; rebuild with bench/x60/fetch-openpowerlifting.sh.

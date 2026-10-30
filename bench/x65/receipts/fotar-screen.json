@@ -1,0 +1,48 @@
+[
+  {
+    "path": "bench/z57/lanes/prose-changelog.md",
+    "sha256": "e7c7856ef0f982e21ae0b650e257ad2907db4ad3d0b3966cbd138289962d492d",
+    "chars": 38227,
+    "rawTokens": 10906,
+    "candidate": {
+      "directCompleteTokens": 15675,
+      "entries": 39,
+      "aliasCount": 610,
+      "mappedChars": 36095,
+      "exact": true
+    }
+  },
+  {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "sha256": "b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70",
+    "chars": 1203,
+    "rawTokens": 811,
+    "candidate": null
+  },
+  {
+    "path": "bench/holdout-ops/find-listing.txt",
+    "sha256": "8b445fd0443c98821b9858ec0a16f3a620c62fa68b870638a01667e05a6964c6",
+    "chars": 11789,
+    "rawTokens": 3997,
+    "candidate": {
+      "directCompleteTokens": 6730,
+      "entries": 8,
+      "aliasCount": 351,
+      "mappedChars": 10563,
+      "exact": true
+    }
+  },
+  {
+    "path": "bench/holdout-ops/openstack-loghub-26.log",
+    "sha256": "55899f656f979de1bfae393eeb27a9a25f0c7c13d6b1da1118a61d80c8d54a7e",
+    "chars": 7969,
+    "rawTokens": 4028,
+    "candidate": {
+      "directCompleteTokens": 4836,
+      "entries": 7,
+      "aliasCount": 88,
+      "mappedChars": 7676,
+      "exact": true
+    }
+  }
+]

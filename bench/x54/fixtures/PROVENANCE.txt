@@ -1,0 +1,2 @@
+statement_A.csv: fetched 2026-10-28 via GitHub API from sandy005-09/bank-statement (sample commercial bank statement fixture, 240 transactions; the source repo's report.json documents one deliberate balance break at data row 204).
+mai-excerpt.csv: first 200 data rows of apps/web/public/sample-bank-statement.csv from l-legren/mai (German sample bank statement, semicolon-delimited, German number format), fetched 2026-10-28 via GitHub API; full file 4,781 rows verified recurrence-exact by bench probe.

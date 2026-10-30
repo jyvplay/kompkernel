@@ -1,0 +1,9 @@
+{
+ "codec": "syzygiaPlanOnly",
+ "file": "bench/x57/fixtures/weatherindia-124cities.csv",
+ "applied": true,
+ "exact": true,
+ "contractTokens": 309,
+ "drops": 8,
+ "ms": 57385
+}

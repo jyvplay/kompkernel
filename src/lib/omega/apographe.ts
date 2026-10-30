@@ -176,6 +176,7 @@ import {
 // Gating against the inner layer would let APOGRAPHE "win" a comparison nobody
 // asked it to win, so the gate runs against the codec the repo actually ships.
 import { ouraEncode, ouraDecode } from './oura';
+import { workEpoch, workBudgetFor } from './workmeter';
 import { chironDecode } from './chiron';
 
 /** Line ending kept verbatim, so the transform never has to re-join. */
@@ -1051,7 +1052,17 @@ export function apographePlan(
  * transformed text, then keep the result only if the measured one-chat message
  * is strictly smaller than the parent's own.
  */
+/** X57: top-level calls open a deterministic work window (workmeter.ts);
+ * nested calls (inside TAGSTACK/ARCHETYPON epochs) share the outer one. */
 export function apographeEncode(
+  text: string,
+  enc: EncodingName = 'o200k_base',
+  opts: ApographeOptions = {},
+): ApographeResult {
+  return workEpoch(workBudgetFor(text.length), () => apographeEncodeInner(text, enc, opts), text.length);
+}
+
+function apographeEncodeInner(
   text: string,
   enc: EncodingName = 'o200k_base',
   opts: ApographeOptions = {},

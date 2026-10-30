@@ -1,0 +1,1 @@
+{"delimiter":";","cols":5,"header":["first","last","display","id","email"],"headerRaw":["first","last","display","id","email"],"drops":[{"target":2,"name":"display","kind":"concat","parts":[{"col":1},{"lit":", "},{"col":0}]},{"target":4,"name":"email","kind":"concat","parts":[{"col":3},{"lit":"@x.io"}]}]}

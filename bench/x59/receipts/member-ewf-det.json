@@ -1,0 +1,35 @@
+{
+ "applied": true,
+ "planExact": true,
+ "contractTokens": 102,
+ "legs": [
+  {
+   "codec": "akolouthia2",
+   "side": "source",
+   "tokens": 3561,
+   "exact": true,
+   "ms": 111423
+  },
+  {
+   "codec": "akolouthia2",
+   "side": "candidate",
+   "tokens": 3502,
+   "exact": true,
+   "ms": 96451
+  },
+  {
+   "codec": "daedalus",
+   "side": "source",
+   "tokens": 3616,
+   "exact": true,
+   "ms": 36707
+  },
+  {
+   "codec": "daedalus",
+   "side": "candidate",
+   "tokens": 3502,
+   "exact": true,
+   "ms": 31147
+  }
+ ]
+}

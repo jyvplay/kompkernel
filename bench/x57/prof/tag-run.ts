@@ -1,0 +1,10 @@
+import * as fs from 'node:fs';
+import { tagstackEncode } from '../../../src/lib/omega/tagstack';
+import { chunkCacheClear } from '../../../src/lib/omega/bpe';
+const lane = process.argv[2]!;
+const text = fs.readFileSync(lane, 'utf8');
+chunkCacheClear();
+(globalThis as any).__RB = 0; (globalThis as any).__SRCD = 0;
+const t0 = Date.now();
+const r: any = tagstackEncode(text, 'o200k_base' as const);
+console.log(JSON.stringify({ lane, chars: text.length, ms: Date.now() - t0, tokens: r.messageTokens, renderBest: (globalThis as any).__RB, scoreDelta: (globalThis as any).__SRCD }));

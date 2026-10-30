@@ -1,0 +1,20 @@
+{
+  "reader": "author (n=1, blind against payload files only)",
+  "payloads": [
+    {
+      "name": "de",
+      "rows": 6,
+      "byteExact": true
+    },
+    {
+      "name": "both(headsum)",
+      "rows": 9,
+      "byteExact": true
+    },
+    {
+      "name": "colsum",
+      "rows": 8,
+      "byteExact": true
+    }
+  ]
+}

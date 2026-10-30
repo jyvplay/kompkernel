@@ -77,6 +77,7 @@ import { now } from './clock';
 import { countTokens, tokenStrings, type EncodingName } from './bpe';
 import { CHIRON_START, CHIRON_SEP, chironDecode, chironDecoderPrompt, chironOpsUsed } from './chiron';
 import { ariadneEncode, type AriadneOptions } from './ariadne';
+import { workEpoch, workBudgetFor } from './workmeter';
 import { sibylEncode } from './sibyl';
 
 export interface DaedalusResult {
@@ -195,7 +196,15 @@ function rawResult(text: string, enc: EncodingName, started: number, f: Features
 
 interface Cand { wire: string; tokens: number; M: number; tag: string; gain: number; phrase: number; words: number; blocks: number; lists: number; script: string }
 
+/** X57: top-level calls open a deterministic work window (workmeter.ts);
+ * nested calls share the outer one. (DAEDALUS also carries its own
+ * wall-clock budgetMs heuristics; the work window bounds ARIADNE's
+ * glyph-assignment evaluations deterministically.) */
 export function daedalusEncode(text: string, enc: EncodingName = 'o200k_base', options: DaedalusOptions = {}): DaedalusResult {
+  return workEpoch(workBudgetFor(text.length), () => daedalusEncodeInner(text, enc, options), text.length);
+}
+
+function daedalusEncodeInner(text: string, enc: EncodingName = 'o200k_base', options: DaedalusOptions = {}): DaedalusResult {
   const started = now();
   const inTokens = countTokens(text, enc);
   const f = daedalusFeatures(text, enc);

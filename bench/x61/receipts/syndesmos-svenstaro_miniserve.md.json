@@ -1,0 +1,35 @@
+{
+  "config": {
+    "path": "bench/z47/corpus/changelog/svenstaro_miniserve.md",
+    "encoding": "o200k_base",
+    "node": "v22.22.3",
+    "OMEGA_DET": null,
+    "cost": "complete in-band message, direct o200k_base count; candidate = optional in-band URL-prefix table + URL-reference contract + transformed TAGSTACK runtime-parent frontier + SIBLING-TEMPLATE; baseline = same-source frontier"
+  },
+  "input": {
+    "sha256": "88f62fe1661499cd30b582e3af863abe05ad8ea1b5aeec7cf90e73ee23cb43b2",
+    "chars": 21112,
+    "tokens": 7209
+  },
+  "plan": {
+    "linkCount": 123,
+    "eligibleLinks": 6,
+    "urls": 117,
+    "transformedTokens": 6626,
+    "transformedChars": 17146,
+    "contractTokens": 111,
+    "exactPlan": true,
+    "prefix": "https://github.com/svenstaro/miniserve/pull/"
+  },
+  "result": {
+    "applied": false,
+    "exact": true,
+    "messageTokens": 2914,
+    "sourceFrontierTokens": 2914,
+    "parentCodec": "synkrisis",
+    "fullFrontierMeasured": true,
+    "comparison": "exact candidate 3058 >= measured source frontier 2914; fallback",
+    "planMs": 11,
+    "elapsedMs": 912705
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "config": {
+    "path": "src/lib/omega/codec-synthesis.ts",
+    "encoding": "o200k_base",
+    "node": "v22.22.3",
+    "OMEGA_DET": null,
+    "cost": "complete in-band ALPHAFOLD contract + template definitions and per-instance identifier maps, encoded by TAGSTACK runtime parents + SIBLING-TEMPLATE, against the complete same-source frontier",
+    "scope": "TAGSTACK runtime-parent frontier plus SIBLING-TEMPLATE; not a registry-wide tournament"
+  },
+  "input": {
+    "sha256": "2808b00321d933b03b245790643d0e8860992d880d16f9d03ce905193387a8d9",
+    "chars": 10538,
+    "tokens": 3097
+  },
+  "result": {
+    "applied": false,
+    "exact": true,
+    "messageTokens": 1114,
+    "sourceFrontierTokens": 1114,
+    "parentCodec": "apographe",
+    "templates": 0,
+    "references": 0,
+    "transformedChars": 10538,
+    "planMs": 8,
+    "elapsedMs": 131516,
+    "fullFrontierMeasured": true,
+    "comparison": "exact candidate 1249 >= measured source frontier 1114; fallback"
+  }
+}

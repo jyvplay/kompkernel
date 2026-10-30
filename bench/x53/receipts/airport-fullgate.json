@@ -1,0 +1,15 @@
+{
+  "lane": "bench/z48/corpus/airport-codes-300.csv",
+  "applied": true,
+  "exact": true,
+  "messageTokens": 8099,
+  "parentTokens": 8115,
+  "parentCodec": "synkrisis",
+  "candidateTokens": 8099,
+  "candidateExact": true,
+  "comparison": "strict complete-message TAGSTACK runtime-parent set plus SIBLING-TEMPLATE",
+  "fullFrontierMeasured": true,
+  "ms": 2631306,
+  "notes": "dropped 3 computed column(s) [lookup, split, lookup]; complete-message M=8099 < same-source frontier M=8115"
+}
+EXIT=0

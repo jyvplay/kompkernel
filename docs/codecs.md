@@ -3894,3 +3894,706 @@ These are local leaders from their cited fixtures and comparator sets, not one
 fresh cross-stack tournament. In particular, the older z57 OpenStack value
 (1,008) and later X44 value (898) are kept separate rather than averaged or
 combined. The detailed table and receipts are in `bench/x50/X50.md`.
+
+## X51 — SYLLOGISMOS: computed columns are premises, not payload
+
+X51 searched for a mechanism class the whole stack was blind to, and found
+one in the open: in real tables, whole columns are *computed from the row*
+(`COUTAX_FEMALEUNEMP = COUTAX × UNEMPF` on all 32 rows of a real employment
+CSV; `iso_country` = `iso_region` before its dash on all 300 airport rows).
+Grammar codecs price those as fresh digit strings; the vertical-law codecs
+model a column from itself, its header, or an identical sibling. None
+recomputes a field from other fields in its row (grep-verified over all 280
+modules). SYLLOGISMOS (`src/lib/omega/syllogismos.ts`, key `syllogismos`)
+verifies bounded functional dependencies on every row with BigInt-rational
+arithmetic and byte-identical CSV re-rendering, deletes the dependent
+columns, states each dependency once, and composes with the cheapest
+measured parent under the TAGSTACK+SIBLING frontier gate. The mechanism
+class is established prior art (SPARTAN, SQUISH, DeepSqueeze SIGMOD 2020,
+Blitzcrank VLDB 2024 — all bit-level); the new part is the exact,
+one-chat, LLM-readable realization. Full report: `bench/x51/X51.md`.
+
+Measured (complete message, receipts in `bench/x51/receipts/`): real
+`csv-3.csv` **673 < 678** against the full TAGSTACK+SIBLING frontier
+(strict win, −5, `OMEGA_DET=1`); real `airport-codes-300.csv` candidate
+**8,100 vs APOGRAPHE 8,115 / AKOLOUTHIA-2 8,172** (−15 vs both measured
+frontier members, DET unset; full frontier not measured — parents took
+412–462 s each); labelled-synthetic 160-row orders export candidate
+**837 vs 1,769 / 1,812** (−932 vs both members). Real `csv-5.csv`
+falls back (798 vs 381; probe4's earlier −21 there is retracted in
+`bench/x51/X51.md` — cyclic reduction). The measured lesson: categorical
+dependencies are already mostly owned by APOGRAPHE's dictionaries; the
+new headroom is arithmetic columns with fresh digits per row. Red team
+186/186, independent Python decoder byte-exact (incl. all 300 airport
+rows), three blind contract-only LLM decodes byte-exact.
+
+### X51 frontier repeat and generalized local leaders
+
+X51 reran the X49 `metrics.tsv` frontier configuration under its exact prior
+configuration (Node v22.22.3, `o200k_base`, `OMEGA_DET` unset, fixture
+SHA-256 `b367e8d7…f1ac70`, 811 raw tokens): it still measures **210**
+exactly, with TAGSTACK 210 and SIBLING-TEMPLATE 210, so the previous
+frontier statement stands unchanged. Receipt:
+`bench/x51/receipts/frontier-repeat-x51.json`.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General English prose / KB / email / meeting | X45 frontier values 622/674/488/385/671; DAEDALUS-D small z57 margins | **No X51 movement** — stated plainly, a prose breakthrough is not claimed |
+| Ops tables (z57 suite) | AKOLOUTHIA-2: df-h 171, psql 355, kubectl 326; KANNABOS/METRON specialists | No X51 movement; whitespace-aligned entailment measured and kept out of scope |
+| Delimited tables | APOGRAPHE AAPL 1,151 / VIX 409; KOLUMN metrics 209 vs the fresh 210 | Historical except the fresh 210 repeat |
+| **Delimited tables with computed columns (new X51 category)** | **SYLLOGISMOS** csv-3 673 < 678 (full frontier); airport 8,100 vs 8,115 best member; synthetic orders 837 vs 1,769 | Fresh X51 complete-message gates; scope exactly as receipted |
+| Dated listings / canonical notices / markup | DIASTEMA 1,140; ARCHETYPON 38; TAGSTACK pom.xml 240 | Historical, separate suites |
+
+These remain local leaders from their cited fixtures and comparator sets,
+not one fresh registry-wide tournament.
+
+## X52 — DIPTYCHON: ship one panel of the hexdump
+
+X52 took X51's cheapest open candidate (the byte-verified `od` gutter
+transform whose parents never finished) and shipped it as a codec class:
+**canonical dual-rendering elision**. A hexdump (`od -t x1z`, `xxd`,
+`hexdump -C`) prints every byte twice — hex panel + ASCII panel — plus
+an offset that is 16 × the line index. That frame is invisible to the
+stack for a new reason: it is not repetition (each gutter is fresh
+semi-random characters), not a vertical law, and not a dependency
+between data fields; it is a second encoding of the same values under a
+fixed external convention — value-derived, where GRAMMA/KLADIOS
+regeneration is position-derived. Grep before X52:
+`xxd`/`hexdump`/`gutter` = 0 hits in 281 modules. DIPTYCHON
+(`src/lib/omega/diptychon.ts`, key `diptychon`) infers the rendering
+parameters from the text, verifies a byte-identical re-render of the
+whole input (offsets in hex/octal/decimal or absent, `*` squeeze lines,
+xxd grouping/case/autoskip, final offset line), strips the frame to
+compact hex (continuous-per-line tokenizes 2.4× cheaper than spaced
+pairs: 6,953 vs 16,990 raw on 8 KiB), and composes under the strict
+TAGSTACK+SIBLING gate. Full report: `bench/x52/X52.md`.
+
+Measured (complete message, receipts in `bench/x52/receipts/`): real
+GNU `od` over 8 KiB of `/bin/ls`: candidate **3,014 vs AKOLOUTHIA-2
+5,401 (−2,387)**; 512 B dump **385 vs 414** (DAEDALUS/AKO2). Both are
+frontier-*member* level: APOGRAPHE exceeds 1,500 s on the 8 KiB lane
+and four full-frontier attempts (512 B–2 KiB, DET and live clocks) were
+stopped at 12–34 min — the frontier parents, not this codec, are the
+bottleneck on hex text. Red team 227/227 vs real `od` ground truth,
+independent Python decoder byte-exact, blind contract-only decodes 3/4
+exact on fresh samples (gutter dot-counting is the measured fragility).
+
+Also X52: SYLLOGISMOS candidate ranking now charges the true
+rendered-clause token cost (X51 used placeholder refs); red team 184/184
+re-run, Python 24/24. Corpus probes for symmetric matrices, totals rows,
+citation numbers, and unit parentheticals all returned zero — recorded
+in X52.md rather than built on synthetic-only evidence.
+
+### X52 frontier repeat and generalized local leaders
+
+The `metrics.tsv` frontier was rerun a third consecutive turn under the
+exact X49 configuration: **exactly 210**, `repeatMatchesPreviousGate:
+true` (329,597 ms). Nothing is restated.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X52 movement; candidate probes returned zero corpus hits |
+| Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | No X52 movement |
+| Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 freshly re-confirmed |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,100 vs 8,115 member-level | X52 selection-cost repair; plans unchanged |
+| **Hexdumps (new X52 category)** | **DIPTYCHON** od 8 KiB 3,014 vs 5,401; 512 B 385 vs 414 (member-level) | Fresh X52 receipts; scope exactly as receipted |
+
+## X53 — TAXIS: derived columns where the delimiters are spaces
+
+X53 crossed SYLLOGISMOS' documented boundary. Derived columns live in the
+most-pasted ops output there is — `ps aux` %MEM is 100·RSS/(fitted total)
+truncated to tenths, `top`'s is the rounded form, `df` Use% is
+ceil(100·Used/(Used+Avail)) — but their tables are space-aligned, where the
+delimited FD codec cannot even parse. **TAXIS**
+(`src/lib/omega/taxis.ts`, key `taxis`) infers the table's column geometry
+(header-word anchors, per-column L/R, per-transition minimum gaps,
+overflow pushes a row's tail right as one piece — the rule that survives
+procps overflow rows), proves it by byte-exact re-rendering, discovers
+fitted-total percent / percent-of / ceil-share / exact-arithmetic derived
+columns verified per row in BigInt arithmetic, ships the table without
+them, and has the reader recompute and re-align. Contract measured 82–90
+tokens (`aligns read LRRRRRLLLLL, minimum gap after each column [digitwise:]
+5111115131`). Full report: `bench/x53/X53.md`.
+
+Verification: red team **243/243** (one miss — column-0 right-aligned
+overflow — root-caused, fixed, re-run), independent CPython decoder
+reading only the contract byte-exact on 6/6 lanes (re-verified
+post-repair), blind contract-only hand decodes byte-exact incl. a
+50-row TAXIS endurance slice and a 100-row SYLLOGISMOS endurance slice
+(X52 task 1). Bench (complete message, o200k, receipts in
+`bench/x53/receipts/`): **ps-bigmem (real `ps aux`, 140 rows) — full
+TAGSTACK+SIBLING frontier win: 1,816 < 1,926 (+110)**, `applied=true`,
+`fullFrontierMeasured=true`; member-level: ps-190 +8, `top` tie
+818 = 818 (no emit), sandbox −6, z57 −11, holdout −18 (no regression —
+fallback). The win exists exactly where the derived column carries
+entropy the parents cannot absorb (26 distinct %MEM values on bigmem);
+thin-%MEM tables decline.
+
+Also X53 (X52 task 4): DIPTYCHON gained plain `od -t x1/-t x2` (no
+gutter panel) and `xxd -i` C-array renderings — variants red team
+61/61, X52 regression 227/227, Python 5/5, blind C-array decode exact.
+Member-level benches (2 KiB of `/bin/ls`): C array candidate **786 vs
+991** best member (APOGRAPHE on reduced 669 + 117 contract; +205) and
+plain `od -t x1` **766 vs 1,116** (+350) — continuous hex lets the
+dictionary parents match across byte boundaries, which the
+`0x.., `/spaced dressing fragments; full table in
+`bench/x53/receipts/dip2-bench-segmented.log` (od-x2 line there).
+Full-frontier gates on hex remain unaffordable for the reason X52
+task 5 now names (below).
+X52 task 5 answered: the hex-pathological TAGSTACK parents are
+SYNKRISIS, BIFRONT and DIASTEMA (each >900 s on a 512 B dump where
+KANON/AKOLOUTHIA-2 take ~3 s; `bench/x53/receipts/profile-parents.log`).
+
+Falsified this turn with receipts (X53.md §E): markdown anchor slugs
+(owned by ENTHYMEME/EPAGOGE), gcc span-art re-rendering (byte-exact
+prototype, token-neutral — space runs are ~free), diff hunk counts (0.09%
+mass), du/JSON aggregates (5/6 exact / digit-sized), free/vmstat sums
+(rounding), markdown pretty-table padding (567 chars, X52 task 3 closed).
+
+### X53 frontier repeat and generalized local leaders
+
+The `metrics.tsv` frontier was rerun a fourth consecutive turn under the
+exact X49 configuration: **exactly 210**, `repeatMatchesPreviousGate:
+true` (314,762 ms). Nothing is restated.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X53 movement; slug mass belongs to ENTHYMEME (re-verified) |
+| Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | See new category for derived-column ops tables |
+| Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 freshly re-confirmed |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,100 vs 8,115 member-level | No X53 movement |
+| Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; 512 B 385 vs 414 (member-level); X53 adds plain-od/C-array renderings | Slow parents identified (SYNKRISIS/BIFRONT/DIASTEMA >900 s vs ~3 s); full-frontier hex gates still unaffordable |
+| **Aligned tables w/ derived columns (new X53 category)** | **TAXIS** ps-bigmem **1,816 < 1,926 full frontier**; ps-190 +8 member; `top` tie; thin lanes decline | Fresh X53 receipts; scope exactly as receipted |
+
+## X54 — ATHROISMOS: the column that is its own history
+
+X54 read APOGRAPHE's predictor union from source — {above, col, days,
+workdays, int, lin, clock} — and found the missing cell in the
+dependency grid: nothing in the stack can state
+`y_i = y_{i-1} + credit_i − debit_i`, a first-order recurrence *driven by
+other columns of the same row*. That is the balance column of every
+statement ever pasted into a chat for analysis, and its digits are
+fresh on every row. **ATHROISMOS** (`src/lib/omega/athroismos.ts`, key
+`athroismos`) fits one-driver and credit/debit-pair recurrences in
+exact BigInt decimal arithmetic (plain or German 1.234,56 rendering),
+states the starting value once, tolerates up to 3 exception rows whose
+printed values ship and re-anchor the chain, and has the reader
+re-integrate downwards. Full report: `bench/x54/X54.md`.
+
+Verification: headline lanes are real published statement fixtures
+fetched via the GitHub API with provenance (`bench/x54/fixtures/`): a
+241-row commercial statement whose own source repo documents one
+deliberate balance break (ATHROISMOS finds exactly it, as its single
+exception) and a German sample statement verified recurrence-exact
+over all 4,781 rows. Red team 111/111 incl. randomized sweep;
+independent Python decoder from the contract text byte-exact on both
+lanes; blind hand decodes byte-exact (40 rows of 7-digit running
+sums; 25 rows German format). Bench: statement_A candidate
+**2,002 vs best member 2,690 (+688, 25.6%)**; mai-excerpt
+**1,759 vs 2,411 (+652)**. Full-frontier gate on statement_A
+(9,000 s rerun after a 3,500 s measurement timeout and a
+sandbox-killed attempt): **applied, 2,002 < 2,686**
+`fullFrontierMeasured=true` — **frontier-grade Solved**.
+
+Also X54: the X52-task-2 airport full gate completed — **SYLLOGISMOS
+8,099 < 8,115** vs the full frontier (was member-level 8,100 vs 8,115).
+Hex-parent profiling completed: 5 of 8 TAGSTACK runtime parents
+(SYNKRISIS, BIFRONT, DIASTEMA, METRON, APOGRAPHE) exceed 900 s on a
+512-byte `od` dump where KANON/AKOLOUTHIA-2/HEMERA/DAEDALUS take ~3 s;
+inside SYNKRISIS the sink is its `archetyponEncode` floor (>120 s
+alone). Repair scoped in X54.md, not shipped (needs its own
+regression matrix).
+
+### X54 frontier repeat and generalized local leaders
+
+The `metrics.tsv` frontier was rerun a fifth consecutive turn under
+the exact X49 configuration: **exactly 210**,
+`repeatMatchesPreviousGate: true` (346,536 ms). Nothing is restated.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X54 movement |
+| Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | No X54 movement |
+| Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 freshly re-confirmed |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; **airport 8,099 < 8,115 full frontier** | Airport gate complete (2,631,306 ms, `bench/x53/receipts/airport-fullgate.json`) |
+| Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | Pathology diagnosed to ARCHETYPON inside SYNKRISIS; repair scoped |
+| Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X54 movement |
+| **Statements / running totals (new X54 category)** | **ATHROISMOS** — statement_A **2,002 < 2,686 full frontier**; mai-excerpt 1,759 vs 2,411 (+652) member-grade | Frontier-grade Solved on statement_A (`bench/x54/receipts/fullgate-statementA.json`) |
+
+
+## X55 — KEPHALAION: the sum the stack could not state
+
+X55's novelty check read the arithmetic-relation unions of the whole
+stack from source: SYLLOGISMOS arithmetic is strictly binary
+(`A+B, A-B, A*B, A/B, 100A/B, A*K`), TAXIS binary, ATHROISMOS integrates
+down a column, APOGRAPHE/METRON predict from above or the row index.
+Nobody owned an **n-ary aggregate**: a Total column equal to the sum
+of many fields of its row (`TT = AA+AF+AM+...+Other`, 13 terms,
+chainable by no binary rule because no intermediate column is
+printed), a head figure minus several exclusions (`Active =
+Confirmed - Recovered - Deaths`), or a Total *row* whose cells are
+their columns' sums. KEPHALAION (`src/lib/omega/kephalaion.ts`,
+`kephalaion`) fits subset row sums, head-minus-subset, and verified
+aggregate rows in exact BigInt decimals — ≤3 exception rows shipped,
+plain and German styles, coarser-target rescaling — blanks or drops
+them, and has the reader recompute. No carried state: a reader's
+arithmetic slip damages one cell. Full report: `bench/x55/X55.md`.
+
+Verification: headline lanes are real published COVID regional
+tables fetched via the GitHub API with provenance
+(`bench/x55/fixtures/`): the Ethiopia regional breakdown (618 rows,
+13-term totals, 0 violations, 329 rows exercising empty=0). Red team
+96/96 incl. randomized sweep; independent CPython decoder from the
+contract text alone byte-exact 6/6 (range rowsum, headsum, German,
+colsum-only); blind contract-only hand decodes 3/3. Bench (with
+an early figure corrected after measuring the binding member):
+150-row slice — members DAEDALUS/AKOLOUTHIA-2 1,096, **APOGRAPHE
+826**; candidates 914 (DAE/AKO2-coded), **811** (APOGRAPHE-coded):
+**win +15 vs APOGRAPHE**, thinner than the +182 a DAEDALUS-only
+baseline suggested — APOGRAPHE's own predictors already discount a
+smooth total column; the aggregate identity buys the residual.
+Full file: candidate **2,931 vs DAEDALUS 3,507 (+576)** with a
+74-token contract; APOGRAPHE on the full file unmeasured (est.
+1–2 h/side) — labelled DAEDALUS-relative. **Full TAGSTACK+SIBLING
+gate on mid-150: applied, 811 < 835, `fullFrontierMeasured=true`
+(5,451,410 ms) — frontier-grade Solved, thin (+24).** Honest losses on the
+zero-dominated early slice (717 vs 643) and the 38-row Indian
+state table (547 vs 513); the gate falls back.
+
+Also X55: X54's ATHROISMOS full-frontier gate landed (9,000 s rerun;
+3,318,958 ms): **applied, 2,002 < 2,686, frontier-grade Solved**.
+The ARCHETYPON `--cpu-prof` pass was queued behind both gates and
+did not run this turn (both gates consumed the budget; carried).
+
+### X55 frontier repeat and generalized local leaders
+
+The `metrics.tsv` frontier was rerun a sixth consecutive turn under
+the exact X49 configuration: **exactly 210**,
+`repeatMatchesPreviousGate: true` (291,530 ms;
+`bench/x55/receipts/frontier-repeat-x55.json`). Nothing is restated.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X55 movement |
+| Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | No X55 movement |
+| Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 re-confirmed a sixth time |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,099 < 8,115 full frontier | No X55 movement |
+| Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | ARCHETYPON repair still scoped, unshipped |
+| Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X55 movement |
+| Statements / running totals | ATHROISMOS — statement_A **2,002 < 2,686 full frontier (Solved)**; mai +652 member-grade | Full gate landed during X55 |
+| **Aggregate-total tables (new X55 category)** | **KEPHALAION** — mid-150 **811 < 835 full frontier (Solved)**; full file 2,931 vs DAEDALUS 3,507 (+576, APO unmeasured) | Frontier-grade on mid-150; colsum-only honestly uneconomic at small widths |
+
+
+## X56 — ISOSKELES: the diagonal nobody used
+
+X56's novelty read targeted the strongest rival directly:
+APOGRAPHE's predictor union `{above, col, days, workdays, int,
+lin, clock}` — every member is a one-step function of one line of
+reader state. The mirror cell of a symmetric square lives in an
+arbitrary *other* row and *other* column: a 2-D transposition
+isometry no one-step predictor, same-row function (SYLLOGISMOS,
+TAXIS), column integrator (ATHROISMOS), or n-ary aggregate
+(KEPHALAION) can state. ISOSKELES (`src/lib/omega/isoskeles.ts`,
+`isoskeles`) detects the square block in a delimited table
+(header/label/padding variants — the pandas `to_csv` square),
+verifies string-exact symmetry pair by pair (≤6 exception pairs
+shipped verbatim), blanks the lower triangle (plus a constant
+diagonal when it is one — distance `0`, correlation `1.000000`),
+and has the reader copy each blank from its mirror. No
+arithmetic, no carried state — the mildest reader obligation in
+the table family. Neatest measured special case: when header
+names equal the label column, the (n+1)² square *including*
+header and labels is itself symmetric, so the labels elide too.
+Full report: `bench/x56/X56.md`.
+
+Verification: lanes are real published matrices (US 31-city and
+EU 24-city distance matrices via the GitHub API, verified
+string-symmetric pair-exact; a 5×5 published correlation
+control; a 14×14 correlation matrix computed from the real X55
+Ethiopia fixture and labelled derived). DAEDALUS/AKOLOUTHIA-2
+cannot shrink high-entropy floats at all (identity); the
+binding member APOGRAPHE was measured on **both** sides first
+(the X55 lesson pre-applied): us31 **1,673 vs 3,297 (−49.3%)**,
+eu24 **1,063 vs 1,841 (−42.3%)**, corr14 **470 vs 555 (−15.3%)**
+— the transpose redundancy survives every one-step predictor.
+Red team 98/98; independent CPython from-contract decoder 4/4
+byte-exact; blind hand decode of a full 6×6 byte-identical.
+**Full TAGSTACK+SIBLING gate on us31: applied, 1,677 < 3,297,
+`fullFrontierMeasured=true` (676,697 ms) — frontier-grade
+Solved at −49%.**
+
+Also X56: the ARCHETYPON `--cpu-prof` pass queued since X54 was
+finally attempted and timed out at 600 s without flushing a
+profile (`timeout` SIGTERM kills V8's exit-time write) —
+archetyponEncode on the 2.4k-char od dump now measures >600 s
+under contention (>120 s alone in X54); a `SIGINT`-flush retry
+on a truncated input is the recorded next test. The frontier
+gate cost problem and the hex pathology remain the stack's
+known debt.
+
+### X56 frontier repeat and generalized local leaders
+
+The `metrics.tsv` frontier was rerun a seventh consecutive turn
+under the exact X49 configuration: **exactly 210**,
+`repeatMatchesPreviousGate: true` (274,542 ms;
+`bench/x56/receipts/frontier-repeat-x56.json`). Nothing is
+restated.
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X56 movement |
+| Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | No X56 movement |
+| Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 re-confirmed a seventh time |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,099 < 8,115 full frontier | No X56 movement |
+| Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | ARCHETYPON prof attempted, timed out >600 s; repair still unscored |
+| Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X56 movement |
+| Statements / running totals | ATHROISMOS — statement_A 2,002 < 2,686 full frontier (Solved) | No X56 movement |
+| Aggregate-total tables | KEPHALAION — mid-150 811 < 835 full frontier (Solved, thin); full file +576 vs DAEDALUS (APO unmeasured) | No X56 movement |
+| **Symmetric matrices (new X56 category)** | **ISOSKELES** — us31 **1,677 < 3,297 full frontier (Solved)**; eu24 1,063 vs APO 1,841 (−42%); corr14 470 vs 555 (−15%) | Frontier-grade on us31 |
+
+## X57 — SYZYGIA: the twin that is almost redundant (+ the work budget)
+
+Two deliverables. First, the speed repair owed since X54's 28-minute
+gate, finally profiled properly: on od8 (600 chars of hex)
+`archetyponEncode` took 83.5 s = 3,132 ARIADNE `renderBest` calls and
+7.06M glyph-score evaluations via wrapper-chain re-entry, with
+tokenizer memo hit-rates of 95–98% (the caches were never the
+problem). `src/lib/omega/workmeter.ts` now caps glyph-assignment
+search by **counted evaluations** — deterministic and load-independent,
+explicitly not a clock budget — with per-frontier-parent windows
+after a shared window was measured to starve late parents
+(metrics.tsv 210→236 before the fix; disclosure kept in
+`bench/x57/receipts/budget-sweep.md`). Default 2,000,000 + 100/char
+per window (10–20× above measured knees); `OMEGA_WORK_BUDGET=0`
+restores unbounded pre-X57 search. Measured: `tagstackEncode
+(metrics.tsv)` 304.0 s → 110.0 s **byte-identical** (same message
+hash); archetypon od8 83.5 s → 14.8 s (142 tokens identical from the
+200k knee); lic-mit and SYNKRISIS license.txt byte-identical;
+`synkrisisEncode(od-bin512)` 192 s versus >900 s killed in X54
+(exact; its unbounded output was never obtained, so byte-parity on
+that extreme lane is unverified by design); the frontier repeat
+itself 274.5 s → 115.2 s at the same **210**. Direct measured-parent
+entry points (APOGRAPHE, AKOLOUTHIA-2, DAEDALUS) now also open
+outermost windows — closing a bypass the X57 india lane exposed,
+where raw `apographeEncode` ran unbounded. APOGRAPHE's own planner
+on 45-column tables remains slow independent of the meter (>1,700 s
+on the X57 lane both ways; recorded follow-up, not papered over).
+
+The codec: SYZYGIA (`src/lib/omega/syzygia.ts`, `syzygia`). The
+affine map y = a·x + b between two *columns* is inexpressible
+stack-wide (SYLLOGISMOS `arith` cannot chain ops, `scaleK` has no
+intercept, METRON `lin` slopes the row index, APOGRAPHE `int` is
+vertical-only) — and dual-unit exports live exactly there. But exact
+elision fails in the wild: generators round each twin independently
+from one hidden exact value, so round(1.8·printed_C + 32) ≠ printed_F
+on 15–45% of rows (the modal shortcut, caught by exact per-row
+verification). SYZYGIA fits (a, b, rounding mode) in exact BigInt
+rational arithmetic so every residual lies within **±1 last-place
+unit**, drops the column, and ships one residual character per row
+on a §N line (exactly-affine pairs ship no line). Up to 8 drops;
+stateless reader (multiply-add, round, ±1-ulp nudge; a slip damages
+one cell). Full report: `bench/x57/X57.md`.
+
+Lane: a real 124-city WeatherAPI export (45 columns, sha256
+`4e714e9f…`): 8 twin drops, contract 309 tokens, candidate **6,590
+vs AKOLOUTHIA-2 7,112 on the source (−522, −7.3%)**, DAEDALUS-parent
+candidate 6,668. `vis_miles` is the recorded negative control
+(capped reporting → residuals to −10 ulp → refused). The APOGRAPHE
+member legs did not complete within 1,700 s in this sandbox on
+either side, and the full TAGSTACK+SIBLING gate run was still in
+flight at this section's freeze — so, precisely: **member-grade vs
+AKOLOUTHIA-2, full-frontier grade pending** (receipts will update
+this line; the same split happened for X54's gate). Verification:
+red team 28/28; independent CPython from-contract decoder byte-exact
+on the lane + 15 plain-style cases (it caught two real contract
+bugs en route — omitted duplicate header names, signed-zero
+rendering); blind hand decode 20 rows × 4 fields byte-identical
+(author n=1).
+
+### X57 frontier repeat and generalized local leaders
+
+The `metrics.tsv` frontier was rerun an eighth consecutive turn
+under the exact X49 configuration, with the work budget enabled:
+**exactly 210**, `repeatMatchesPreviousGate: true`, winner
+AKOLOUTHIA-2 (115,156 ms; `bench/x57/receipts/
+frontier-repeat-x57.json`), and the TAGSTACK leg's message is
+hash-identical to its unbounded run. Nothing is restated. Token
+leaders are unchanged; every frontier encode is now 2–5× faster
+(§X57 speed table above).
+
+| category (stated suite) | best-known local leader(s) | evidence boundary |
+|---|---|---|
+| General prose / KB / email / meeting | X45 frontier 622/674/488/385/671; DAEDALUS-D z57 margins | No X57 token movement |
+| Ops tables / listings | AKOLOUTHIA-2 171/326/355; DIASTEMA 1,140; KANNABOS/METRON | No X57 token movement |
+| Delimited tables | APOGRAPHE AAPL 1,151/VIX 409; KOLUMN metrics 209 vs repeated 210 | 210 re-confirmed an eighth time, 2.4× faster |
+| Delimited tables w/ computed columns | SYLLOGISMOS csv-3 673<678; airport 8,099 < 8,115 full frontier | No X57 movement |
+| Hexdumps | DIPTYCHON od 8 KiB 3,014 vs 5,401; C-array 786 vs 991 (member-level) | ARCHETYPON sink profiled & capped (od8 83.5→14.8 s) |
+| Aligned tables w/ derived columns | TAXIS ps-bigmem 1,816 < 1,926 full frontier | No X57 movement |
+| Statements / running totals | ATHROISMOS — statement_A 2,002 < 2,686 full frontier (Solved) | No X57 movement |
+| Aggregate-total tables | KEPHALAION — mid-150 811 < 835 full frontier (Solved, thin) | No X57 movement |
+| Symmetric matrices | ISOSKELES — us31 1,677 < 3,297 full frontier (Solved) | No X57 movement |
+| **Dual-unit / affine-twin tables (new X57 category)** | **SYZYGIA** — india-124 **6,590 < 7,112 AKOLOUTHIA-2 (member)**; DAEDALUS-parent 6,668 | APO member legs >1,700 s (unmeasured); full gate pending at freeze |
+| **Weighted-total tables (new X58 category)** | **ZYGON** — ewf-standings **3,412 < 3,616 DAEDALUS (member)**; GWU gradebook detection member (economics-blocked at 35 rows) | Full gate timeout-killed 3,400 s on ewf; frontier-grade unclaimed |
+| **Standings / percentile / share tables (new X59 category)** | **BATHMOS** — ewf-standings `position` (member, OMEGA_DET=1) **3,502 < 3,561 AKOLOUTHIA-2 / 3,616 DAEDALUS** | On this file ZYGON's 3,412 (non-det member) still leads; BATHMOS full gate timeout-dead 3,400 s (frontier measurement wall), member-grade only |
+| Stack runtime | WORKMETER (not a codec) | frontier repeat 274.5→115.2 s byte-identical; od-bin512 SYNKRISIS >900 s→192 s; X59: DAEDALUS ewf 39.6→18.0 s byte-identical (CHIRON recal + ARIADNE branch-and-bound) |
+
+## X58: speed round 2 (CHIRON epoch lane) + ZYGON weighted-sum elision
+
+**Speed.** X57's WORKMETER bounded the ARIADNE score search per encode but
+left the second unbounded cost: CHIRON's `BlockSearchBudget` was minted fresh
+per call, and parents issue thousands of calls (APO on a 12-column india slice
+burned 7.37 **billion** chiron units). `workmeter.ts` is now two-lane:
+`workEpoch(budget, fn, chars)` opens both the ARIADNE window
+(2,000,000 + 100·chars) and a CHIRON window (400,000,000 + 20,000·chars,
+`OMEGA_CHIRON_BUDGET`, ≤0 = unbounded); `chiron.ts` consults/ticks the shared
+window. Evidence: APO india12 220 s → 138 s bounded (tokens comparable,
+disclosed non-monotone in budget); synkrisis license byte-identical at every
+budget and 32.9 s → 20.8–25.0 s; metrics tagstack parity 210 exact
+(SHA `f0e0ffb9543f3b2f`), lic-mit 38 (SHA `30f044d32098bf39`). Residual wall
+time is unmetered tokenizer/eval work (~45% tokenizer self-time post-fix) —
+the stack is faster, not fast; the SYZYGIA india full gate and this turn's
+ZYGON full gate both still died at their 3,400–3,500 s timeouts inside
+APO/TAGSTACK parent measurement. That is now the documented bottleneck for
+full-grade claims on mid-size tables, independent of the new codecs'
+planners (ZYGON plans ewf in 0.5 s).
+
+**Frontier repeat #9** (exact X49 configuration): **210, match true,
+122,103 ms** (`bench/x58/receipts/frontier-repeat-x58.json`). Nothing restated.
+
+**SYZYGIA full gate: settled-negative.** The X57 run was timeout-killed
+(`FG-EXIT-124`, empty receipt). SYZYGIA remains member-grade
+(india-124 AKO2-parent 6,590 < 7,112).
+
+**ZYGON (ζυγόν, balance-beam; `src/lib/omega/zygon.ts`, registry → 222).**
+Exact weighted-sum column elision: drop a column that equals
+`round_mode(Σ wᵢ·xᵢ + b)` over same-row sources with exact BigInt-rational
+weights — the (n terms × fitted coefficients) cell of the linear-law grid
+that scaleK (1 term), SYLLOGISMOS arith (2 terms, one op) and KEPHALAION
+(all coefficients ±1) leave empty, and where gradebooks, portfolios and
+league tables live. Weights are fitted by exact rational normal equations
+over all rows (least-squares averages print-rounding so weights snap to the
+generator's clean decimals; k=0..6 snap candidates each re-verified per row),
+with singularity-guided column elimination for collinear sources, ≤3
+exception rows shipped verbatim, equal weights grouped in the contract,
+all-ones and single-term laws refused to their owners, constant sources
+excluded, plain/German styles, and optional pre-header lead rows restored
+verbatim. ≤4 drops, sources never dropped; house gate (measured
+DAEDALUS/AKO2/APO parents, strict TAGSTACK+SIBLING frontier, exact restore).
+
+Lanes (`bench/x58/fixtures/`, PROVENANCE.txt):
+- **ewf-standings.csv** (tidytuesday English women's football standings,
+  258×17): `points` dropped as `3×{wins} + 1×({draws} + {point_adjustment})`
+  (contract 81 tokens, 0 exceptions, byte-exact). **Member-grade**:
+  candidate AKO2-parent **3,412** vs best measured source parent DAEDALUS
+  3,616 (**−204, −5.6%**; `member-ewf.json`). APO legs measured separately
+  (`member-ewf-apo.json`): APOGRAPHE(source) 3,364 and APOGRAPHE(candidate)
+  3,100 are both **inexact** on this lane (~760 s each) and cannot arbitrate
+  a lossless claim — which also exposed that the house `measured*` guards
+  *threw* on inexact parents; ZYGON and SYZYGIA now price inexact parents as
+  identity instead (registry-safe, never crowns a lossy message). Full gate
+  on ewf: timeout-killed at 3,400 s (empty receipt), frontier-grade on this
+  real lane **unclaimed**. The shipped `zygonEncode` path did complete a
+  **full-frontier pass on the generated league-points red-team lane**
+  (candidate **791 < 898** APOGRAPHE parent, strict TAGSTACK+SIBLING
+  comparison, byte-exact, 526 s), proving the whole gate end-to-end;
+  real-lane frontier-grade awaits an APO-terminating lane.
+- **gwu-gradebook.csv** (GWU course gradebook, weights row above header):
+  the fitter recovers the 15-term `final_grade` law from the data alone and
+  verifies it on all rows, but at 35 students the grouped contract (~110 tok)
+  exceeds the raw column saving (~70 tok), so the planner refuses —
+  a real detection member whose economics need a bigger class size, not a
+  gate lane.
+
+Verification: red team **23/23** (incl. collinear sources, weights lead row,
+portfolio with constant share columns, exceptions, trunc generator,
+twin-rounded refusal, TSV/CRLF, German, intercept, negative weights);
+independent CPython twin byte-exact on ewf + 14 applicable cases (German
+style covered by the TS suite, disclosed in the twin header); blind contract
+spot-decode 4/4 rows. Prior art: arithmetic FDs (Kossmann et al. 2022) are
+genus; for grouped rational-weight formulae taught in-band for one-chat
+recomputation, honestly **none**. Live checks this turn: SUMPRODUCT
+weighted-grade practice is universal in spreadsheet tutorials; EAIFD
+(arXiv:2601.16025) advances equality-FD discovery only. AI-mathematics
+check #6 (Oct 2026 lab claims incl. Axiom's Lean formalization of the
+Classification of Finite Simple Groups): methodological echo
+(discover → machine-verify), no implementable compression transfer.
+
+## X59: speed round 3 (exact branch-and-bound + CHIRON recalibration) + BATHMOS window-law elision
+
+**Speed.** Two changes, both fidelity-neutral by construction.
+(1) `scoreRunCostDelta` in `ariadne.ts` now takes an acceptance limit and
+prunes exactly: a nonempty run string costs ≥1 token, so pattern *i* can
+still save at most `(costs[i]-1)·mult[i]`; once even the optimistic
+completion cannot reach the incumbent best, the candidate is abandoned
+without retokenizing the rest. Callers accept only totals ≤ limit and
+commit only accepted deltas, so **decisions and wires are unchanged**
+(proved by byte-identical A/B wires on ewf-DAEDALUS and metrics-TAGSTACK
+under `OMEGA_DET=1`; metrics 93.8 s → 84.0 s, ewf unchanged within noise;
+`bench/x59/receipts/speed-ab-*`). (2) The CHIRON epoch budget default is
+recalibrated from 400,000,000 + 20,000·chars to **4,000,000 + 500·chars**:
+epoch-spend instrumentation showed DAEDALUS on ewf-standings burning 113M
+chiron units where a 5M cap produces the byte-identical wire (39.6 s →
+18.2 s); metrics-TAGSTACK and lic-mit-ARCHETYPON wires are likewise
+byte-identical at 2–8M caps and at the new formula (SHAs `d34049e72e50ceb6`,
+`f0e0ffb9543f3b2f`, `30f044d32098bf39`; `chiron-recal*` receipts). Where a cap
+binds, outputs can only stay equal or grow — every codec still
+byte-verifies its decode — but token counts on unmeasured lanes may move;
+that is the disclosed trade of the X57/X58 budget mechanism, now set nearer
+its measured knees.
+
+**BATHMOS (βαθμός, a step/degree/rank; `src/lib/omega/bathmos.ts`, registry → 223).**
+Every table dependency in the stack is row-local (SYLLOGISMOS, ZYGON,
+SYZYGIA), column-local (APOGRAPHE/METRON, ATHROISMOS), an edge sum
+(KEPHALAION) or a symmetry (ISOSKELES). None can state a law whose value
+depends on the *other rows of its partition*: a league position, a
+percentile, a quartile bucket, a share of the group total. Those columns
+are SQL window functions exported into everyday CSVs by every BI tool.
+BATHMOS fits exact BigInt-rational window laws per (target, source,
+partition ∈ {whole table, one categorical column}): competition/dense/
+ordinal RANK (sort key one numeric column or an exact ratio A/B — points
+per game; ordinal ties broken by up to two greedily fitted extra keys,
+then original row order), PERCENT_RANK, CUME_DIST (×1/×100 at the printed
+scale), NTILE (SQL balanced or ceil; text labels allowed), and share =
+source/(partition SUM or MAX). ≤3 exception rows ship verbatim; ≤4 drops;
+sources/partitions never dropped; ordinal fits whose primary key ties
+cover >50% of a partition are refused as file-order counters in disguise,
+as is NTILE with k ≈ group size (both attacks are in the red team after
+the first caught a real leak). House gate (measured DAEDALUS/AKO2/APO
+parents, strict TAGSTACK+SIBLING frontier, exact restore).
+
+Lanes:
+- **ewf-standings.csv** (the X58 fixture; tidytuesday EWF standings,
+  258×17): `position` = ordinal rank within `season_id` by exact rational
+  `{points}/{played}` descending (points-per-game decides the
+  COVID-shortened 2019-20 season; raw points order is wrong on 6 rows),
+  0 exceptions, contract 102 tokens, byte-exact restore. **Member-grade**
+  under `OMEGA_DET=1`: candidate **3,502** vs AKOLOUTHIA-2(source) 3,561
+  and DAEDALUS(source) 3,616 (**−59 / −114**; `member-ewf-det.json`). A
+  seed-59 row-shuffled twin still fits exactly (planner adds
+  `{goal_difference}` as tiebreaker), so the law is not file order. Honest
+  placement: on this file ZYGON's weighted-sum lane (3,412, non-det
+  member) remains cheaper; BATHMOS owns the *position* column, a different
+  redundancy, and loses the same-file race. Full gate on ewf:
+  **timeout-killed at 3,400 s** (`fullgate-ewf.err` = `FG-DONE-124`, empty
+  receipt) — the same TAGSTACK-frontier-measurement wall that killed the
+  SYZYGIA and ZYGON real-lane gates; the BATHMOS planner itself takes
+  ~1 s. Frontier-grade on the real lane is **unclaimed**; the shipped
+  `bathmosEncode` gate is exercised end-to-end on the generated
+  shuffled-grouped-rank red-team case: **candidate 518 < 553
+  APOGRAPHE-parent frontier, strict TAGSTACK+SIBLING comparison,
+  byte-exact, 290 s** (`fullgate-shuffled.json`) — frontier-grade on
+  generated material, member-grade on the real lane.
+- F1 driver standings (three public copies fetched) are **not** a lane:
+  F1 countback tie-breaking (2nd places, 3rds, …) uses data the export
+  omits (1,509/4,413 mismatches under points+wins on the largest copy).
+  A rounded-window-law sweep over all frozen bench CSVs (share /
+  percent-rank / cume-dist, all partitions) found no second real lane in
+  the corpus; the family coverage is therefore proven on generated
+  red-team material + the one real rank lane, stated as such.
+
+Verification: red team **22/22** (grouped ordinal / competition / dense
+ranks with ties, percent-rank, cume-dist, share-of-sum, index-to-max,
+NTILE numeric + text labels, ratio-key PPG ranks, in-range exception
+rows, shuffled rows, TSV/CRLF, German semicolons, no-trailing-newline;
+refusals: random positions, constant-key counter, NTILE-identity
+disguise, foreign-total shares, twin-rounded ranks, tiny tables);
+independent CPython twin byte-exact on ewf + 14/15 applied cases (German
+style covered by the TS suite, disclosed). Prior art: window functions
+are SQL:2003; SPARTAN / DeepSqueeze (SIGMOD 2020) / Blitzcrank (VLDB
+2024) / Virtual (EDBT 2025, live-found this turn) are row-local FD
+compressors; for fitting a window law and teaching it in-band for
+one-chat recomputation, honestly **none**. Relational factorization
+(normalize Superstore into fact + dimension tables) was prototyped and
+**falsified by measurement** this turn: raw tokens fall 12% but the
+grammar parents price the factored text *higher* (AKOLOUTHIA-2 18,250 →
+18,707) — parents already own tuple repetition. AI-mathematics check #7
+(per-lab): OpenAI's Oct 26 claims (ETH false; local smoothing ⇒ Kakeya;
+Yang–Mills/QCD held back) ship Lean artifacts for the first two with
+expert review explicitly not certification; Axiom's CFSG Lean
+formalization (43.1M lines; fix counts vary by source); DeepMind
+AlphaProof/Gemini Deep Think IMO-gold reporting and a Gemini
+algebraic-geometry theorem (arXiv:2601.07222); Anthropic's
+subexponential 3-SAT claim. I audited none of the proof artifacts; no
+implementable compression transfer found.
+
+## X60: EIRMOS string-template column elision (codec 224) + frontier repeat #12
+
+**Mechanism delta (repository-scoped, not global-first).** SYLLOGISMOS already has raw literal-plus-field concatenation (up to two sibling fields) and separate whole-field `upper/lower` rules; PARADEIGMA has sibling-slot templates for JSON objects. EIRMOS's distinct operator is a per-slot string transform *inside* a multi-source concatenation: e.g. `username = lowercase-initial(first) + lowercase(last)` or `display = first2(given) + ". " + middle + " " + family`. It also extends arity to three source slots and offers a bounded seed-segmentation fitter for delimited tables. Stack audit found no other table module composing a substring/case transform inside a concat slot. We therefore claim only this composition/search/contract combination as new to this repository; generic concatenation and global string synthesis are prior art. The OpenPowerlifting and finance-demo member wins below use plain `first + " " + last` (the pre-existing concat genus), so those wins demonstrate economics but **not the novelty-bearing operator**. The generated `username` test exhibits the new operator; its full frontier receipt is listed separately below.
+
+The fitter searches bounded segmentations on up to three seed rows, verifies every row exactly (at most three raw exceptions), greedily admits drops by actual contract+reduced-text token cost, and emits only after the measured parent/frontier house gate. Cases where a case transform is a semantic identity are refused as duplicate columns; low-cardinality single-source transforms (≤64 distinct inputs) are left to SYLLOGISMOS lookup; case transforms require ASCII-cased inputs to avoid locale/Unicode disagreement. Sources are never dropped. The contract and reduced table are in the one message; the reader concatenates the stated per-row pieces.
+
+**Published-fixture lane (not live personal data).** `bench/x60/fixtures/clients.csv` is a public `lucidworks/fusion-financial-demo` financial-advisor search-demo CSV, fetched from GitHub, 1,026 × 16, CRLF; its records are generated demo data, explicitly **not real client records**. The exact law is `full_name = {first_name} + " " + {last_name}` in all 1,026 data rows (1,024 distinct full names, 0 exceptions). This is a published fixture, not an invented or simulated benchmark in this turn; its provenance and SHA-256 are in `bench/x60/fixtures/PROVENANCE.txt`. The 71-token in-band rule drops 4,234 raw tokens from the CSV. Member (DET) receipts price source vs reduced+contract as follows:
+
+| measured exact parent | source | EIRMOS candidate | delta | status |
+|---|---:|---:|---:|---|
+| AKOLOUTHIA-2 | 41,565 | 37,787 | −3,778 (−9.1%) | strict member win; both wires exact |
+| DAEDALUS | 43,207 | 39,474 | −3,733 (−8.6%) | strict member win; both wires exact |
+
+These are member comparisons, not a claim of winning the full stack frontier on the source. The shipped `eirmosEncode` TAGSTACK+SIBLING full-gate attempt on this 193-KiB fixture exhausted the default Node ~2-GB heap after 23 minutes; retry with a 3-GB heap was stopped after 25 minutes at ~3.5 GB RSS to free memory for a higher-information public-record lane. Neither produced a gate result; see `fullgate-clients-node2g.oom.err` and the empty `fullgate-clients-3g.json`. Do not promote the synthetic-person values to a real-life contact-data claim.
+
+**Public real-record lane (not generated).** To avoid relying only on the demo fixture, X60 also tested two OpenPowerlifting raw meet-results CSVs (`sstangl/openpowerlifting`, files `meet-data/raw/1902/original.csv` and `raw/1903/original.csv`, repository license AGPL-3.0). Their schemas match; the 47 + 77 original lifter records were merged without adding or altering records (the raw data are deliberately not committed here; `bench/x60/fetch-openpowerlifting.sh` refetches/validates them). This 124-row, 48-column public meet table has `Full Name = First Name + " " + Last Name` in 122 rows, with two exactly shipped exceptions (one parenthetical alias and one capitalization variance). EIRMOS plan restores exactly; contract 97 tokens; published lane SHA-256 `44d34480f3ccbd38da4a8cb224e5c3a90c3abe5a6ea435ea229d17ab2b3c19db`. Member DET (`member-openpowerlifting.json`): AKOLOUTHIA-2 source **8,620** → candidate **8,175** (−445, −5.2%); DAEDALUS source **8,764** → candidate **8,333** (−431, −4.9%); all four parent wires exact; separate CPython twin byte-exact. The real-record TAGSTACK+SIBLING run exceeded its configured 2,500-second timeout (`fullgate-openpowerlifting.err`, no JSON result), so this public lane remains **member-grade only**. The shipped full gate passes on generated red-team `full-name.csv`: exact candidate **629 < 1,017** same-source TAGSTACK+SIBLING frontier in 289 s (`fullgate-redteam.json`). More importantly, the mechanism-delta `username` case applies the repo-new composition `lowercase-initial(first) + lowercase(last)`, while `syllogismosPlan` refuses it (`mechanism-delta.json`); its full gate is exact **563 < 775** in 64.9 s (`fullgate-username.json`). Thus the novel operator is frontier-grade on generated material; EIRMOS is member-grade on real public records. The OpenPowerlifting lane itself is authentic published competition data, not a synthetic or simulated lane.
+
+**Verification.** `tsc --noEmit` clean. Seeded red team: **28 data cases + 1 direct transform assertion, 29/29 checks**, including string transforms, three sources, quoted delimiter, CRLF/TSV, first-column insertion, exception on first row, overlap, no-final-newline, semantic-copy disguise by `lowercase`/`UPPERCASE`/`capfirst`, many-exception refusal, low-cardinality ownership, non-ASCII case refusal, random targets, and astral Unicode slicing; two initial defects (identity disguised as lowercase; first-row exception suppressed candidate generation) were patched and directly attacked. Independent stdlib CPython decoder: **byte-exact on the fixture + 20 contracts** (19 planner-applied red-team contracts plus a hand-authored astral-codepoint contract). `eirmosPlan` on fixture: 189 ms, 71-token contract; reduced bytes equal the independently produced field-elision prototype. This verifies the in-band contract/restore path, not an external general-purpose LLM's ability to follow every edge case.
+
+**Frontier repeat (exact prior configuration).** Same `bench/x49/frontier-repeat.ts` configuration copied to `bench/x60/frontier-repeat.ts`: default environment, `metrics.tsv`, no `OMEGA_DET`; complete/exact, same six parents and cost table (SYNKRISIS 237 / KANON 236 / AKOLOUTHIA-2 210 / APOGRAPHE 237 / METRON 237 / DIASTEMA 237), winner AKOLOUTHIA-2 at **210 tokens**. Repeat #12 agrees with the prior gate (#11 = 210); whole run 121,546 ms (`bench/x60/receipts/frontier-repeat-x60.json`). This is frontier preservation, not a new compression win.
+
+**Local leaders (current evidence only; no cross-suite universality implied).**
+
+| Structure / fixture suite | best-known local result | boundary |
+|---|---|---|
+| General English prose | Existing X45 lane-specific values: KB 622, LLM answer 674, email 488, meeting transcript 385, bibliography 671 | No new prose test or universal category winner in X60 |
+| Ops listings / CLI | DIASTEMA on `find-listing` (1,140); AKOLOUTHIA-2 on selected ops tables (`df -h` 171, psql 355, kubectl 326); KANNABOS on some aligned tables | Specialists and per-fixture leaders; not rerun this turn |
+| Structured records / tables | `metrics.tsv`: AKOLOUTHIA-2 210 at exact frontier; EIRMOS strict member wins on both published demo-data clients (37,787 vs 41,565 AKO2) and public OpenPowerlifting meet records (8,175 vs 8,620 AKO2); BATHMOS EWF rank member 3,502 vs 3,561 AKO2, but ZYGON's 3,412 weighted-sum member remains cheaper on that file | Different files / columns; EIRMOS full-frontier on generated concat (629 < 1,017) and mixed-transform username (563 < 775), public real-record gate timeout-dead; BATHMOS EWF full gate timeout-dead |
+| Log / arithmetic sequences | Existing DIASTEMA / METRON / ATHROISMOS / SYZYGIA leaders on their measured lane sets | No X60 re-ranking |
+| JSON / repeated records | Existing AKOLOUTHIA-2 / DAEDALUS / TAGSTACK family on the cited fixtures | No new X60 sample contest |
+
+These are generalized local leaders only; each row preserves its source fixture, comparator set, and grade rather than conflating unrelated scores.
+
+**Speed follow-up.** X59's fidelity-preserving ARIADNE branch-and-bound and CHIRON budget calibration remain active. X60 profiling of the six `metrics.tsv` frontier arms (`bench/x60/receipts/profile-metrics-parents.jsonl`) found standalone costs of SYNKRISIS 29.6 s, KANON 0.03 s, AKOLOUTHIA-2 1.04 s, APOGRAPHE 12.4 s, DIASTEMA 223.7 s, METRON 47.6 s, with exact winner costs unchanged. Inspection found DIASTEMA's candidate-scoring loop used `rows.includes(...)` inside a scan over all candidate values — quadratic membership work per mask. X60 replaces this with a `Set` membership lookup. A/B: on the 38-KiB `sysctl-proc` planning lane, median 5× `diastemaPlan` time was 6 ms → 5 ms with identical plan SHA and exact wire decode; on the complete metrics DIASTEMA codec, 149,589 ms → 150,142 ms (noise-level +0.4%), with identical wire/contract SHAs and exact output (both correctly refuse 247 ≥ 237 tokens). This is a semantics-preserving algorithmic improvement to a planner subroutine, **not a demonstrated significant whole-stack speedup**. Reproduce with `bench/x60/speed-ab-diastema.sh` (it materializes the pre-patch source from X60-start commit `d7b204a`, then removes it). The measured X59 ARIADNE/CHIRON gains remain the only accepted stack-speed claims; the 223.7-s standalone DIASTEMA cost is mainly outside this membership loop.
+
+**Prior art and research.** BlinkFill (Singh, VLDB 2016) synthesizes concatenations of substring expressions and constants from examples to populate spreadsheet cells; FlashFill (Gulwani, POPL 2011) is an earlier PBE system. These are close genus, so EIRMOS is **not** claimed unprecedented as string synthesis. The stack audit found no existing general string-template column-elision codec; the realization citation for *in-band, exact column elision plus whole-message gate* is honestly **none**. Live search also found newer FD/schema-matching work, including LLM-based normalization benchmarks (arXiv:2609.11141); these address schema inference/normalization, not byte-exact string-template column reconstruction with one-chat contract.
+
+**AI mathematics audit (claims, not independently audited proofs).** Live primary-source checks: OpenAI (Oct 6 and Oct 26–27, 2026) reports many Lean formalizations and new claims about ETH, local smoothing/Kakeya, and Yang–Mills/QCD; the lab itself distinguishes completed Lean artifacts from expert/community validation, and this agent did not inspect the Lean repository. Anthropic (Sep 2026) reports a Lean formalization of the classical Fermat proof, a 67.2% zeta-zero lower-bound improvement with named mathematician review and a Lean comparator, plus its own caveats about human understanding; I did not inspect source proofs. DeepMind reports AlphaProof's Lean-backed IMO 2024 result, Gemini Deep Think IMO 2025 natural-language result, and Aletheia/FirstProof research-level work; these are lab claims, not compression results. Meta's HTPS and AutoformBench address proof search / formalization infrastructure (AutoformBench describes expert-audited tasks); no compression transfer identified. DeepSeek V3.2's math-contest performance and xAI Grok's AIME results are benchmark claims, not new machine-checked theorems located in this search. The unexpected possible transfer is engineering rather than theorem-based: formal proof workflows separate proposal from a machine-checkable certificate; EIRMOS similarly treats a fitted template as a hypothesis and requires every-row exact verification before elision. This validates the methodology, not the fitted law by analogy.
+
+
+## X61–X65 continuation and local-leader updates
+
+### X61 — SYNDESMOS
+
+In-band interning of repeated eligible Markdown destinations and optional common URL path-prefix factoring. First-seen ID assignment is greedy; prefix factoring is bounded search; exact complete-message frontier decides emission. Three measured complete candidates lose (+162, +144, +173), so no leader changes. Close prior art includes CommonMark reference links and hierarchical URL front coding (Brisaboa & Cerdeira-Pena, CIKM 2019).
+
+### X62 — RHIZOMA
+
+Narrow exact normalization of U+00A0 tree-indent pairs with an in-band inverse. Deterministic linear scan; complete-message gate is exact. It loses by 12 and 14 tokens on its two measured tree fixtures and falls back. Existing DENS-2/DENDRON/KLADOS are close repo prior art.
+
+### X63 — ALPHAFOLD
+
+Lexical (not AST/semantic) grouping of balanced code spans with shared identifier patterns and in-band variable-name mappings. Deterministic bounded planner; no token-space search. Exact but loses 1,249 vs the source frontier 1,114 (+135); TS adversarial checks 13/13 and independent Python checks 6/6. Related prior art: nominal anti-unification and alpha-renamed code-clone work; no global novelty claim.
+
+### X64 — REPRISE
+
+A bounded encoder-side LRU memo for exact, complete TAGSTACK frontier results. Exact source, encoding and relevant search settings form the key; only previously accepted results are reused. The recipient still gets the same complete self-contained TAGSTACK message. This is repeated-input runtime reuse, not a new text codec or compression win: on the actual `metrics.tsv` fixture both cold and warm complete messages were 210 tokens (`akolouthia2`) and byte-identical. The cold call took 136,733.854 ms and one warm repeat took 0.129 ms; this single observation is not a stable speed claim. Six checks cover exactness, complete-frontier status, wire/cost equality, accounting, caller-mutation isolation, and observed warm latency. No native LLM decode, prose/ops win, or token reduction is claimed. Exact X61 frontier repeat matched at 210 tokens (`akolouthia2`), 113,300 ms vs the prior 94,136 ms. Full protocol, research, and math-lab audit: `bench/x64/REPORT.md`.
+
+## X65 — FOTAR and updated fixture-specific leaders
+
+FOTAR is a new registered exploratory codec (`src/lib/omega/fotar.ts`). It ranks repeated multi-character BPE surfaces, substitutes collision-checked aliases, and carries the literal alias table in the same message. The table reader parses the serialized JSON and expands aliases left-to-right, longest-first. The deterministic top-96 planner uses a character-mass proxy only; the final decision compares the complete candidate message with the same-source TAGSTACK runtime-parent frontier plus SIBLING-TEMPLATE. FOTAR is dictionary coding, closely related to the repo's VERITAS/PHALANX family; no global novelty claim is made.
+
+### X65 measurements (o200k, exact source-specific configurations)
+
+| fixture / category | measured source frontier | FOTAR evidence | outcome |
+|---|---|---|---|
+| OpenStack operations log (`bench/holdout-ops/openstack-loghub-26.log`, SHA-256 `55899f656f979de1bfae393eeb27a9a25f0c7c13d6b1da1118a61d80c8d54a7e`) | Final run 885 tokens, DIASTEMA; exact and complete (earlier run: 896, SYNKRISIS) | Complete FOTAR→APOGRAPHE candidate 1,080 tokens; exact | Rejected; final fallback to 885. **−195-token candidate deficit; no gain.** |
+| Prose changelog | Not full-frontier gated | Direct FOTAR message 15,675 vs 10,906 raw | Preflight loss only; no full-frontier conclusion |
+| File listing | Not full-frontier gated | Direct FOTAR message 6,730 vs 3,997 raw | Preflight loss only; no full-frontier conclusion |
+| `metrics.tsv` | No FOTAR plan; exact X61 source frontier 210, AKOLOUTHIA-2 | No candidate | No FOTAR change |
+
+Historical OpenStack numbers such as POLYTROPOS 988 are from a different measurement gate/configuration and are not mixed with the X65 TAGSTACK+SIBLING final value of 885 (the earlier run was 896). Receipts: `bench/x65/receipts/`; complete report including bounded research and verification limits: `bench/x65/REPORT.md`.
+
+### X65 exactness, decoder limits, and speed
+
+- FOTAR red team is 12/12. A separate stdlib-Python twin reconstructs the serialized table and restores its 919-codepoint control exactly. These tests verify the alias layer. The full composed gate still verifies APOGRAPHE restoration using encoder result metadata; a complete reader reconstructed from the serialized candidate alone is untested. Native LLM decoding is **not** claimed.
+- Planner CPU cleanup removed repeated intermediate map rendering/token counts: one final render is counted after the fixed ranked plan is assembled. No before/after timing series was collected; this is a code-path reduction, not a measured speedup.
+- The exact prior X61 frontier setup was repeated: `metrics.tsv`, SHA-256 `b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70`, `o200k_base`, unset `OMEGA_DET`, Node v22.22.3, six TAGSTACK runtime parents plus SIBLING-TEMPLATE. It matched the prior gate: 210 complete-message tokens, `akolouthia2`, exact and frontier-complete. Runtime was 113,300 ms vs the prior 94,136 ms; runtime varies, so this is no speedup claim. Receipt: `bench/x61/receipts/frontier-repeat-x61.json`.
+- REPRISE's one same-process cache observation remains strictly a repeated-input optimization: cold 136,733.854 ms vs one warm 0.129 ms on the same 1,203-character `metrics.tsv` message, with exact message bytes/token count unchanged. This does not accelerate cold or distinct inputs. See `bench/x64/receipts/reprise-cache.json` and the full caveats in `bench/x65/REPORT.md`.
+
+**Verdict:** no X65 category leader changes. FOTAR's real OpenStack candidate is exact but larger than the source frontier. Its prose/listing results are preflight-only screens, not full-frontier comparisons. The X65 external-source audit and math-research notes are in `bench/x65/REPORT.md`.

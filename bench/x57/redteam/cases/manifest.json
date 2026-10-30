@@ -1,0 +1,114 @@
+[
+ {
+  "name": "exact-cf-ints",
+  "expect": "apply"
+ },
+ {
+  "name": "twin-rounded",
+  "expect": "apply"
+ },
+ {
+  "name": "intercept-only-kelvin",
+  "expect": "apply"
+ },
+ {
+  "name": "scale-twin",
+  "expect": "apply"
+ },
+ {
+  "name": "residual-2-row",
+  "expect": "any"
+ },
+ {
+  "name": "quadratic",
+  "expect": "refuse"
+ },
+ {
+  "name": "empty-cells",
+  "expect": "refuse"
+ },
+ {
+  "name": "duplicate-col",
+  "expect": "refuse"
+ },
+ {
+  "name": "constant-target",
+  "expect": "refuse"
+ },
+ {
+  "name": "negative-slope",
+  "expect": "apply"
+ },
+ {
+  "name": "tsv-crlf",
+  "expect": "apply"
+ },
+ {
+  "name": "no-trailing-nl",
+  "expect": "apply"
+ },
+ {
+  "name": "mixed-scale",
+  "expect": "refuse"
+ },
+ {
+  "name": "float-dust",
+  "expect": "refuse"
+ },
+ {
+  "name": "multi-pair-block",
+  "expect": "apply"
+ },
+ {
+  "name": "two-point-only",
+  "expect": "refuse"
+ },
+ {
+  "name": "semicolon",
+  "expect": "apply"
+ },
+ {
+  "name": "quoted-names",
+  "expect": "apply"
+ },
+ {
+  "name": "trunc-generator",
+  "expect": "any"
+ },
+ {
+  "name": "capped-vis",
+  "expect": "any"
+ },
+ {
+  "name": "cents-dollars",
+  "expect": "apply"
+ },
+ {
+  "name": "german-de",
+  "expect": "apply"
+ },
+ {
+  "name": "section-lookalike",
+  "expect": "refuse"
+ },
+ {
+  "name": "dup-header-names",
+  "expect": "apply"
+ },
+ {
+  "name": "tiny",
+  "expect": "refuse"
+ },
+ {
+  "name": "noise-band",
+  "expect": "any"
+ },
+ {
+  "name": "shuffled-rows",
+  "expect": "apply"
+ },
+ {
+  "name": "pa-kpa",
+  "expect": "apply"
+ }
+]

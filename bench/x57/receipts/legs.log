@@ -1,0 +1,6 @@
+{"codec":"syzygiaPlanOnly","file":"bench/x57/fixtures/weatherindia-124cities.csv","applied":true,"exact":true,"contractTokens":309,"drops":8,"ms":57385}
+{"codec":"akolouthia2","file":"bench/x57/fixtures/weatherindia-124cities.csv","tokens":7112,"exact":true,"ms":50434}
+AKO-SRC-DONE
+{"codec":"akolouthia2","file":"/tmp/syz-reduced.csv","tokens":6263,"exact":true,"ms":63765}
+{"codec":"daedalus","file":"/tmp/syz-reduced.csv","tokens":6359,"exact":true,"ms":30808}
+RED-DONE

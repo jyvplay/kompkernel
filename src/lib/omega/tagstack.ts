@@ -20,6 +20,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { workEpoch, workBudgetFor } from './workmeter';
 import { apographeDecodeResult, apographeEncode } from './apographe';
 import { bifrontEncode, bifrontPlan } from './bifront';
 import { akolouthia2Encode } from './akolouthia2';
@@ -298,9 +299,13 @@ export function tagstackRestore(parentDecoded: string, mode: TagstackMode, marke
  * that measured minimum. Any comparator failure is fatal (fail closed), rather
  * than silently weakening the gate to SYNKRISIS alone.
  */
-export function tagstackEncode(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
+function tagstackEncodeInner(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
   const started = Date.now();
   const inTokens = countTokens(text, enc);
+  // X57: each frontier parent is measured inside its OWN deterministic
+  // work epoch (workmeter.ts) so an early expensive parent (SYNKRISIS ->
+  // ARCHETYPON chain) cannot starve a later one (e.g. AKOLOUTHIA-2).
+  const E = <T,>(fn: () => T): T => workEpoch(workBudgetFor(text.length), fn, text.length);
   const frontierCosts: Partial<Record<TagstackFrontierParent, number>> = {};
   const frontierReportedCosts: Partial<Record<TagstackFrontierParent, number>> = {};
   let parent: {
@@ -330,22 +335,22 @@ export function tagstackEncode(text: string, enc: EncodingName = 'o200k_base'): 
     if (!parent || tokens < parent.tokens) parent = { ...candidate, tokens };
   };
 
-  const syn = synkrisisEncode(text, enc);
+  const syn = E(() => synkrisisEncode(text, enc));
   consider({ codec: 'synkrisis', wire: syn.wire, message: syn.message, decoded: syn.decoded,
     reportedTokens: syn.messageTokens });
   if (bifrontPlan(text)) {
-    const b = bifrontEncode(text, enc);
+    const b = E(() => bifrontEncode(text, enc));
     consider({ codec: 'bifront', wire: b.wire, message: b.message, decoded: b.decoded,
       reportedTokens: b.messageTokens });
   }
-  const k = kanonEncode(text, enc);
+  const k = E(() => kanonEncode(text, enc));
   consider({ codec: 'kanon', wire: k.wire, message: k.decoderPrompt + k.wire, decoded: k.decoded,
     reportedTokens: k.messageTokens });
-  const a = akolouthia2Encode(text, enc);
+  const a = E(() => akolouthia2Encode(text, enc));
   consider({ codec: 'akolouthia2', wire: a.wire, message: a.decoderPrompt, decoded: a.decoded,
     reportedTokens: a.messageTokens });
 
-  const ap = apographeEncode(text, enc);
+  const ap = E(() => apographeEncode(text, enc));
   const apMessage = (ap.contract ? ap.contract + '\n' : '') + ap.wire;
   const apDecoded = apographeDecodeResult(ap);
   if (apDecoded !== text) throw new Error('APOGRAPHE comparator did not reconstruct the source exactly');
@@ -354,21 +359,21 @@ export function tagstackEncode(text: string, enc: EncodingName = 'o200k_base'): 
 
   const mp = metronPlan(text, enc);
   if (mp?.proxyGain) {
-    const m = metronEncode(text, enc);
+    const m = E(() => metronEncode(text, enc));
     const message = (m.contract ? m.contract + '\n' : '') + m.wire;
     consider({ codec: 'metron', wire: m.wire, message, decoded: apographeDecodeResult(m), reportedTokens: m.messageTokens });
   }
 
   const hp = hemeraSubstitute(text, { day: true, ms: true });
   if (hp.days + hp.ms) {
-    const h = hemeraEncode(text, enc);
+    const h = E(() => hemeraEncode(text, enc));
     consider({ codec: 'hemera', wire: h.wire, message: h.decoderPrompt, decoded: h.decoded,
       reportedTokens: h.messageTokens });
   }
 
   // DIASTEMA is always measured. Its reported additive total can differ from
   // counting the literal in-band contract + LF + wire, which is the score used.
-  const d = diastemaEncode(text, enc);
+  const d = E(() => diastemaEncode(text, enc));
   const diastemaMessage = d.contract ? d.contract + '\n' + d.wire : d.wire;
   consider({ codec: 'diastema', wire: d.wire, message: diastemaMessage, decoded: d.decoded,
     reportedTokens: d.messageTokens });
@@ -392,7 +397,7 @@ export function tagstackEncode(text: string, enc: EncodingName = 'o200k_base'): 
   let child: ReturnType<typeof apographeEncode>;
   let parentDecoded: string;
   try {
-    child = apographeEncode(plan.text, enc);
+    child = workEpoch(workBudgetFor(plan.text.length), () => apographeEncode(plan.text, enc), plan.text.length);
     parentDecoded = apographeDecodeResult(child);
   } catch {
     return fallback('APOGRAPHE candidate construction/decoder threw', plan.mode, plan.marker, plan.pairs);
@@ -418,4 +423,12 @@ export function tagstackEncode(text: string, enc: EncodingName = 'o200k_base'): 
     notes: `TAGSTACK/${plan.mode} marker=${JSON.stringify(plan.marker)} ${plan.pairs} close names; M=${candidateTokens} < current ${bestParent.codec} M=${bestParent.tokens}`,
     ms: Date.now() - started,
   };
+}
+
+/**
+ * X57: budget windows are per-parent inside tagstackEncodeInner (helper E),
+ * not one shared window — see workmeter.ts.
+ */
+export function tagstackEncode(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
+  return tagstackEncodeInner(text, enc);
 }

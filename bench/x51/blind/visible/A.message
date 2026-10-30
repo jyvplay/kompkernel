@@ -1,0 +1,18 @@
+SYLLOGISMOS: after decoding the message below, the result is a comma-separated table with a header row, but some fields were removed because they are computed from the others. In every row, first compute the removed values from the decoded row, then insert them so each becomes field N (counting fields from 1 in the finished table) as listed: field 3 "unit" = the "amount" field / the "qty" field (exact decimal value); field 6 "bloc" = the part before the first "-" of the "region" field; field 8 "sku_low" = the "sku" field in lower case. In the header row insert the quoted field names instead of computing. Insert in increasing field-number order. Leave all other fields, quoting and line endings exactly as decoded.
+item,qty,amount,region,sku
+item-0,9,1314,EU-FR,WD-266
+item-1,40,820,NA-CA,WD-846
+item-2,18,3991.5,EU-DE,WD-835
+item-3,57,3263.25,EU-ES,WD-716
+item-4,20,2665,EU-FR,WD-256
+item-5,9,1215,OC-AU,WD-765
+item-6,9,1791,NA-CA,WD-925
+item-7,34,1870,NA-US,WD-101
+item-8,48,8244,OC-AU,WD-338
+item-9,60,2895,OC-AU,WD-239
+item-10,41,5422.25,AS-JP,WD-582
+item-11,60,4635,EU-ES,WD-575
+item-12,25,3462.5,EU-FR,WD-947
+item-13,56,1344,EU-DE,WD-986
+item-14,4,125,AS-JP,WD-744
+item-15,54,11961,OC-AU,WD-600

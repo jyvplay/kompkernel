@@ -1,0 +1,15 @@
+{"lane":"us31","member":"daedalus","tokens":4701,"exact":true,"raw":4701,"ms":3437}
+{"lane":"us31","member":"akolouthia2","tokens":4701,"exact":true,"raw":4701,"ms":6098}
+{"lane":"us31","member":"cand-daedalus","plan":"n32 hdrfalse lab0 pad1 diag=null exc0","contract":78,"reduced":2519,"reducedExact":true,"candidate":2597,"raw":4701,"chars":7832,"ms":3063}
+{"lane":"eu24","member":"daedalus","tokens":2725,"exact":true,"raw":2725,"ms":1406}
+{"lane":"eu24","member":"akolouthia2","tokens":2725,"exact":true,"raw":2725,"ms":2688}
+{"lane":"eu24","member":"cand-daedalus","plan":"n25 hdrfalse lab0 pad1 diag=null exc0","contract":78,"reduced":1468,"reducedExact":true,"candidate":1546,"raw":2725,"chars":4615,"ms":1454}
+{"lane":"corr14","member":"daedalus","tokens":594,"exact":true,"raw":1037,"ms":1744}
+{"lane":"corr14","member":"akolouthia2","tokens":594,"exact":true,"raw":1037,"ms":1676}
+{"lane":"corr14","member":"cand-daedalus","plan":"n14 hdrtrue lab1 pad0 diag=1.000000 exc0","contract":107,"reduced":403,"reducedExact":true,"candidate":510,"raw":1037,"chars":1885,"ms":677}
+{"lane":"us31","member":"apographe","tokens":3297,"exact":true,"raw":4701,"ms":121642}
+{"lane":"us31","member":"cand-apographe","plan":"n32 hdrfalse lab0 pad1 diag=null exc0","contract":78,"reduced":1595,"reducedExact":true,"candidate":1673,"raw":4701,"chars":7832,"ms":198703}
+{"lane":"eu24","member":"apographe","tokens":1841,"exact":true,"raw":2725,"ms":135565}
+{"lane":"eu24","member":"cand-apographe","plan":"n25 hdrfalse lab0 pad1 diag=null exc0","contract":78,"reduced":985,"reducedExact":true,"candidate":1063,"raw":2725,"chars":4615,"ms":99792}
+{"lane":"corr14","member":"apographe","tokens":555,"exact":true,"raw":1037,"ms":24115}
+{"lane":"corr14","member":"cand-apographe","plan":"n14 hdrtrue lab1 pad0 diag=1.000000 exc0","contract":107,"reduced":363,"reducedExact":true,"candidate":470,"raw":1037,"chars":1885,"ms":5262}

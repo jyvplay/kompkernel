@@ -1,0 +1,26 @@
+TAXIS: rows single-spaced under the unchanged header, minus %MEM = 100×RSS÷4024001, truncated to 1 decimal. Split at spaces (last field may hold spaces), insert the omitted field, re-align under header words (LRRRRRLLLLL: L/R = word start/end; min gaps digitwise 5112215131; shift right whole if needed).
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root 71 0.0 0 0 ? I< 06:18 0:00 [xfs_mru_cache]
+root 73 0.0 0 0 ? I< 06:18 0:00 [kthrotld]
+root 79 0.0 0 0 ? S 06:18 0:00 [irq/24-ACPI:Ged]
+root 112 0.0 0 0 ? S 06:18 0:00 [hwrng]
+root 144 0.0 0 0 ? I< 06:18 0:00 [iscsi_conn_clea]
+root 159 0.0 0 0 ? I< 06:18 0:00 [mld]
+root 160 0.0 0 0 ? I< 06:18 0:00 [ipv6_addrconf]
+root 167 0.0 1004 4 ? S 06:18 0:00 bpfilter_umh
+root 168 0.0 0 0 ? I< 06:18 0:00 [kstrp]
+root 173 0.0 0 0 ? I< 06:18 0:00 [zswap-shrink]
+root 174 0.0 0 0 ? I< 06:18 0:00 [kworker/u5:0]
+root 252 0.0 0 0 ? S 06:18 0:00 [jbd2/vda-8]
+root 253 0.0 0 0 ? I< 06:18 0:00 [ext4-rsv-conver]
+root 284 0.0 35072 8048 ? Ss 06:18 0:00 /lib/systemd/systemd-journald
+_rpc 304 0.0 7888 3968 ? Ss 06:18 0:00 /sbin/rpcbind -f -w
+systemd+ 306 0.0 17916 8764 ? Ss 06:18 0:00 /lib/systemd/systemd-networkd
+root 318 0.0 15452 8980 ? Ss 06:18 0:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+_chrony 320 0.0 10700 3048 ? S 06:18 0:00 /usr/sbin/chronyd -F 1
+_chrony 322 0.0 10568 544 ? S 06:18 0:00 /usr/sbin/chronyd -F 1
+root 327 0.0 2900 1036 tty1 Ss+ 06:19 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 329 0.0 2900 1020 tty3 Ss+ 06:19 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 330 0.0 2900 1020 tty4 Ss+ 06:19 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 331 0.0 2900 1024 tty5 Ss+ 06:19 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 332 0.0 2900 1012 tty6 Ss+ 06:19 0:00 /sbin/agetty -o -p -- \u --noclear - linux

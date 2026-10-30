@@ -1,0 +1,61 @@
+# source: ps aux --sort=-%mem (real)
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+user 1553 103 1446072 561224 ? Rl 17:49 3:14 node /tmp/_run_1539.mjs
+root 1229 0.4 1338384 18708 ? S<Lsl 17:46 0:01 /usr/bin/envd
+root 1 0.0 167228 11708 ? Ss 17:46 0:00 /sbin/init
+root 318 0.0 15452 8980 ? Ss 17:46 0:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+systemd+ 306 0.0 17916 8764 ? Ss 17:46 0:00 /lib/systemd/systemd-networkd
+root 284 0.0 35072 8056 ? Ss 17:46 0:00 /lib/systemd/systemd-journald
+user 1907 0.0 8108 4056 ? R 17:52 0:00 ps aux --sort=-%mem
+_rpc 304 0.0 7888 3968 ? Ss 17:46 0:00 /sbin/rpcbind -f -w
+_chrony 320 0.0 10700 3048 ? S 17:46 0:00 /usr/sbin/chronyd -F 1
+user 1901 0.0 3932 3036 ? S 17:52 0:00 /bin/bash -l -c cd /home/user/kompkernel && H=bench/holdout-x41 && \ { echo '# source: ls -l /usr/lib/x86_64-linux-gnu (real)'; ls -l /usr/lib/x86_64-linux-gnu 2>/dev/null | head -150; } > $H/ls-l-real.txt && \ { echo '# source: ls -l node_modules/.bin and node_modules (real)'; ls -l node_modules | head -120; } > $H/ls-l-nm.txt && \ { echo '# source: ps aux --sort=-%mem (real)'; ps aux --sort=-%mem | head -60; } > $H/ps-aux-real.txt && \ { echo '# source: apt list --installed (real)'; apt list --installed 2>/dev/null | head -120; } > $H/apt-real.txt && \ { echo '# source: git log --stat -30 (real)'; git log --stat -30 | head -200; } > $H/git-log-stat.txt && \ { echo '# source: node --help (real)'; node --help | head -120; } > $H/node-help.txt && \ { echo '# source: find / -name "*.json" -newer (real)'; find /usr/share -maxdepth 4 -name '*.json' 2>/dev/null | head -120; } > $H/find-json.txt && \ { echo '# source: du -ak node_modules (real, sorted)'; du -ak node_modules 2>/dev/null | sort -rn | head -120; } > $H/du-ak.txt && \ wc -l $H/*.txt && head -3 $H/ls-l-real.txt && head -3 $H/apt-real.txt && head -4 $H/git-log-stat.txt && head -3 $H/find-json.txt
+user 1537 0.0 3932 2928 ? Ss 17:49 0:00 bash -c bash "$0/run.cmd" > "$0/out.log" 2>&1; echo $? > "$0/exit" /tmp/arena-workspace/procs/x41-tape-census-dbaac8ba
+user 1538 0.0 3932 2864 ? S 17:49 0:00 bash /tmp/arena-workspace/procs/x41-tape-census-dbaac8ba/run.cmd
+user 1539 0.0 3932 2828 ? S 17:49 0:00 bash bench/tmp/run2.sh bench/x41/tape2.ts
+root 348 0.0 2900 1040 tty2 Ss+ 17:46 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 327 0.0 2900 1036 tty1 Ss+ 17:46 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 331 0.0 2900 1024 tty5 Ss+ 17:46 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 329 0.0 2900 1020 tty3 Ss+ 17:46 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 330 0.0 2900 1020 tty4 Ss+ 17:46 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+root 332 0.0 2900 1012 tty6 Ss+ 17:46 0:00 /sbin/agetty -o -p -- \u --noclear - linux
+user 1540 0.0 2496 896 ? S 17:49 0:00 tee /tmp/x41-tape.log
+user 1908 0.0 2500 880 ? S 17:52 0:00 head -60
+_chrony 322 0.0 10568 544 ? S 17:46 0:00 /usr/sbin/chronyd -F 1
+root 167 0.0 1004 4 ? S 17:46 0:00 bpfilter_umh
+root 2 0.0 0 0 ? S 17:46 0:00 [kthreadd]
+root 3 0.0 0 0 ? I< 17:46 0:00 [rcu_gp]
+root 4 0.0 0 0 ? I< 17:46 0:00 [rcu_par_gp]
+root 5 0.0 0 0 ? I< 17:46 0:00 [slub_flushwq]
+root 6 0.0 0 0 ? I< 17:46 0:00 [netns]
+root 8 0.0 0 0 ? I< 17:46 0:00 [kworker/0:0H-events_highpri]
+root 9 0.0 0 0 ? I 17:46 0:00 [kworker/u4:0-flush-254:0]
+root 10 0.0 0 0 ? I< 17:46 0:00 [mm_percpu_wq]
+root 11 0.0 0 0 ? I 17:46 0:00 [rcu_tasks_kthread]
+root 12 0.0 0 0 ? I 17:46 0:00 [rcu_tasks_trace_kthread]
+root 13 0.0 0 0 ? S 17:46 0:00 [ksoftirqd/0]
+root 14 0.0 0 0 ? I 17:46 0:00 [rcu_preempt]
+root 15 0.0 0 0 ? S 17:46 0:00 [migration/0]
+root 16 0.0 0 0 ? I 17:46 0:00 [kworker/0:1-mm_percpu_wq]
+root 17 0.0 0 0 ? S 17:46 0:00 [cpuhp/0]
+root 18 0.0 0 0 ? S 17:46 0:00 [cpuhp/1]
+root 19 0.0 0 0 ? S 17:46 0:00 [migration/1]
+root 20 0.0 0 0 ? S 17:46 0:00 [ksoftirqd/1]
+root 21 0.0 0 0 ? I 17:46 0:00 [kworker/1:0-mm_percpu_wq]
+root 22 0.0 0 0 ? I< 17:46 0:00 [kworker/1:0H-events_highpri]
+root 24 0.0 0 0 ? I 17:46 0:00 [kworker/u4:1-events_unbound]
+root 25 0.0 0 0 ? S 17:46 0:00 [kdevtmpfs]
+root 26 0.0 0 0 ? I< 17:46 0:00 [inet_frag_wq]
+root 27 0.0 0 0 ? S 17:46 0:00 [kauditd]
+root 28 0.0 0 0 ? I 17:46 0:00 [kworker/1:1-mm_percpu_wq]
+root 29 0.0 0 0 ? S 17:46 0:00 [khungtaskd]
+root 30 0.0 0 0 ? S 17:46 0:00 [oom_reaper]
+root 31 0.0 0 0 ? I< 17:46 0:00 [writeback]
+root 32 0.0 0 0 ? S 17:46 0:00 [kcompactd0]
+root 33 0.0 0 0 ? SN 17:46 0:00 [ksmd]
+root 34 0.0 0 0 ? SN 17:46 0:00 [khugepaged]
+root 35 0.0 0 0 ? I< 17:46 0:00 [kintegrityd]
+root 36 0.0 0 0 ? I< 17:46 0:00 [kblockd]
+root 37 0.0 0 0 ? I< 17:46 0:00 [blkcg_punt_bio]
+root 38 0.0 0 0 ? S 17:46 0:00 [watchdogd]
+root 39 0.0 0 0 ? I< 17:46 0:00 [rpciod]

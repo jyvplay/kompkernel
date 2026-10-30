@@ -1,0 +1,60 @@
+{
+  "encoding": "o200k_base",
+  "transform": "ASCII ROT13 letters; all other UTF-16 code units literal",
+  "results": [
+    {
+      "name": "kb",
+      "path": "bench/holdout-work/kb-article.txt",
+      "sha256": "d220bfb7a912670e0217b99760f41d40f41e7fab5ceda93f552aebf5ee4744c6",
+      "chars": 3385,
+      "sourceTokens": 656,
+      "transformedTokens": 1525,
+      "exact": true
+    },
+    {
+      "name": "email",
+      "path": "bench/holdout-work/email-thread.txt",
+      "sha256": "fb609b06e6f995f5fd1465b86e19da67e52c75643015e2ab8ef654644ae01324",
+      "chars": 2126,
+      "sourceTokens": 629,
+      "transformedTokens": 1009,
+      "exact": true
+    },
+    {
+      "name": "answer",
+      "path": "bench/holdout-work/llm-answer.md",
+      "sha256": "7c5c7f1929a6da13fad81a2a6f5c55106cf70105c356a03deca8c5cb15c280bf",
+      "chars": 2542,
+      "sourceTokens": 733,
+      "transformedTokens": 1214,
+      "exact": true
+    },
+    {
+      "name": "diff",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "sha256": "ff6cc959f8d6c19505c6d1939b667a3ea3bfcf2a57a3e77d5c8ce9d255823d30",
+      "chars": 1487,
+      "sourceTokens": 578,
+      "transformedTokens": 786,
+      "exact": true
+    },
+    {
+      "name": "tree-src",
+      "path": "bench/z55/lanes/tree-src.txt",
+      "sha256": "c24ef9d01f9521bc0d416c2b9ec82ee4f6f62e40527b5a5410c5c3ca902afbbb",
+      "chars": 7733,
+      "sourceTokens": 3541,
+      "transformedTokens": 4196,
+      "exact": true
+    },
+    {
+      "name": "tree-bench",
+      "path": "bench/z55/lanes/tree-bench.txt",
+      "sha256": "d9e26241fc6173d1ef1e7cc8141f5d0cdf1eb987491160f012a25ab7b44af9d6",
+      "chars": 1399,
+      "sourceTokens": 544,
+      "transformedTokens": 750,
+      "exact": true
+    }
+  ]
+}

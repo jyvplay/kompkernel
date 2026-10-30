@@ -1,0 +1,4 @@
+{"codec":"tagstack","lane":"bench/holdout-x40/metrics.tsv","budget":"0","ms":303987,"tokens":210,"exact":true,"sha":"f0e0ffb9543f3b2f"}
+{"codec":"tagstack","lane":"bench/holdout-x40/metrics.tsv","budget":"default","ms":109950,"tokens":210,"exact":true,"sha":"f0e0ffb9543f3b2f"}
+PARITY-DONE
+REP-DONE

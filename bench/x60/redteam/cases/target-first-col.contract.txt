@@ -1,0 +1,1 @@
+EIRMOS: after decoding below, in the comma-separated table insert as header field and value in every row: field 1 "full": {first} + " " + {last}. {x} means that row's decoded {x}; + joins text pieces end to end; quoted pieces are literal text. Change nothing else.

@@ -1,0 +1,19 @@
+{
+ "contractTokens": 81,
+ "legs": [
+  {
+   "codec": "apographe",
+   "side": "source",
+   "tokens": 3364,
+   "exact": false,
+   "ms": 759303
+  },
+  {
+   "codec": "apographe",
+   "side": "candidate",
+   "tokens": 3100,
+   "exact": false,
+   "ms": 775612
+  }
+ ]
+}

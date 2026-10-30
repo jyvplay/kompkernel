@@ -1,0 +1,1 @@
+ZYGON: after decoding below, in the tab-separated table insert as header field and value in every row: field 4 "total": 1.5×{a} + 2.25×{b} (2 decimals). Round each computed value to the stated decimals, halves away from zero. {x} means that row's decoded {x}. Change nothing else.

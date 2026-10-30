@@ -1,0 +1,35 @@
+{
+  "config": {
+    "path": "bench/z55/lanes/tree-bench.txt",
+    "encoding": "o200k_base",
+    "node": "v22.22.3",
+    "OMEGA_DET": null,
+    "cost": "complete in-band RHIZOMA contract + transformed text encoded by TAGSTACK runtime parents + SIBLING-TEMPLATE, against the complete same-source frontier",
+    "scope": "TAGSTACK runtime-parent frontier plus SIBLING-TEMPLATE; not a registry-wide tournament"
+  },
+  "input": {
+    "sha256": "d9e26241fc6173d1ef1e7cc8141f5d0cdf1eb987491160f012a25ab7b44af9d6",
+    "chars": 1399,
+    "tokens": 544,
+    "nbsp": 70
+  },
+  "plan": {
+    "transformedChars": 1329,
+    "transformedTokens": 509,
+    "contract": "RHIZOMA: ^ before a tree branch means │ plus two NBSP.",
+    "contractTokens": 16,
+    "removedNBSP": 70,
+    "exact": true
+  },
+  "result": {
+    "applied": false,
+    "exact": true,
+    "messageTokens": 241,
+    "sourceFrontierTokens": 241,
+    "parentCodec": "synkrisis",
+    "fullFrontierMeasured": true,
+    "comparison": "exact candidate 255 >= measured source frontier 241; fallback",
+    "planMs": 0,
+    "elapsedMs": 28790
+  }
+}

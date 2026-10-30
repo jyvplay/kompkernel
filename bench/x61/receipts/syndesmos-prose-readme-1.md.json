@@ -1,0 +1,35 @@
+{
+  "config": {
+    "path": "bench/z57/lanes/prose-readme-1.md",
+    "encoding": "o200k_base",
+    "node": "v22.22.3",
+    "OMEGA_DET": null,
+    "cost": "complete in-band message, direct o200k_base count; candidate = optional in-band URL-prefix table + URL-reference contract + transformed TAGSTACK runtime-parent frontier + SIBLING-TEMPLATE; baseline = same-source frontier"
+  },
+  "input": {
+    "sha256": "2d1919cb803aa866a036b5dd7ce2cb7237138e003a3e0307a809aab56ad3be08",
+    "chars": 24345,
+    "tokens": 6099
+  },
+  "plan": {
+    "linkCount": 56,
+    "eligibleLinks": 12,
+    "urls": 44,
+    "transformedTokens": 5967,
+    "transformedChars": 23167,
+    "contractTokens": 111,
+    "exactPlan": true,
+    "prefix": "https://github.com/dotenv-org/examples/tree/master/usage/"
+  },
+  "result": {
+    "applied": false,
+    "exact": true,
+    "messageTokens": 4144,
+    "sourceFrontierTokens": 4144,
+    "parentCodec": "synkrisis",
+    "fullFrontierMeasured": true,
+    "comparison": "exact candidate 4306 >= measured source frontier 4144; fallback",
+    "planMs": 9,
+    "elapsedMs": 311064
+  }
+}

@@ -1,0 +1,1 @@
+EIRMOS: after decoding below, in the comma-separated table insert as header field and value in every row: field 2 "prefix": first2 {source}. {x} means that row's decoded {x}; + joins text pieces end to end; quoted pieces are literal text; first2 {x} = the first 2 Unicode code points of {x} (fewer if {x} is shorter). Change nothing else.

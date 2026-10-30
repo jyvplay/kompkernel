@@ -1,0 +1,13 @@
+{
+ "ms": 288890,
+ "applied": true,
+ "exact": true,
+ "messageTokens": 629,
+ "parentCodec": "akolouthia2",
+ "parentTokens": 1017,
+ "candidateTokens": 629,
+ "candidateExact": true,
+ "comparison": "strict complete-message TAGSTACK runtime-parent set plus SIBLING-TEMPLATE",
+ "fullFrontierMeasured": true,
+ "notes": "dropped string-template columns (f3(tpl3)); complete-message M=629 < same-source frontier M=1017"
+}
