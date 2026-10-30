@@ -149,6 +149,7 @@ import { kephalaionEncode } from './kephalaion';
 import { isoskelesEncode } from './isoskeles';
 import { syzygiaEncode } from './syzygia';
 import { zygonEncode } from './zygon';
+import { bathmosEncode } from './bathmos';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -665,6 +666,18 @@ export function codecEntries(): Entry[] {
         const r = taxisEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rules=${r.rules.length} [${r.rules.map(x => x.kind).join(',')}]; rows=${r.rows}; cols=${r.cols}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'bathmos',
+      label: 'BATHMOS (βαθμός, a step/degree/rank; X59: partition-window column elision for delimited tables. Every table dependency in the stack is row-local (SYLLOGISMOS arith/lookup, ZYGON weighted sums, SYZYGIA affine twins), column-local (APOGRAPHE/METRON generators, ATHROISMOS recurrences), an edge sum (KEPHALAION) or a symmetry (ISOSKELES) \u2014 none can state a law whose value depends on the OTHER ROWS of its partition: a league position, a percentile, a quartile bucket, a share of the group total. Those are SQL window functions (RANK/DENSE_RANK/ROW_NUMBER/PERCENT_RANK/CUME_DIST/NTILE, value/SUM(value) OVER (PARTITION BY \u2026)) exported into everyday CSVs by every BI tool. BATHMOS fits exact BigInt-rational window laws per (target, source, partition): competition/dense/ordinal rank (sort key one numeric column or an exact ratio A/B \u2014 points-per-game; ordinal ties broken by up to two extra keys then original row order), percent-rank, cumulative distribution (\u00d71 or \u00d7100 at the printed scale), NTILE buckets (SQL balanced or ceil convention; optionally text labels), and share = source/SUM or source/MAX over the partition. Partition is the whole table or one categorical column; \u22643 exception rows ship verbatim; ordinal fits whose primary key ties cover >50% of a partition are refused as file-order counters in disguise (METRON/APOGRAPHE own those). Sources and partition columns are never dropped; \u22644 drops; plain/German rendering. Reader obligation: sort or sum each stated group (KEPHALAION-grade arithmetic plus an ordering; a slip is one cell except inside a sort). Reduced text coded by the cheapest measured of DAEDALUS, AKOLOUTHIA-2, APOGRAPHE; candidate must beat AKOLOUTHIA-2 and APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: bounded deterministic enumeration with exhaustive per-row verification; greedy drop admission by true contract+reduced tokens; emission is the measured gate. Prior art: window functions are SQL:2003 machinery and order statistics are classical; the functional-dependency compressors (SPARTAN, DeepSqueeze SIGMOD 2020, Blitzcrank VLDB 2024) are row-local, and for stating a fitted window law in-band for one-chat LLM recomputation, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 64 columns, 120M work units; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = bathmosEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
       },
     },
     {

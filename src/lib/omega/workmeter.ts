@@ -138,8 +138,18 @@ export function chironLastEpochUsedUnits(): number {
   return chironLastEpochUsed;
 }
 
-export const CHIRON_BUDGET_BASE = 400_000_000;
-export const CHIRON_BUDGET_PER_CHAR = 20_000;
+// X59 recalibration (bench/x59/receipts/chiron-recal*): measured epoch
+// spends show the X58 default (400M + 20k/char) is 10-100x above the point
+// where outcomes stop changing — DAEDALUS on ewf-standings spends 113M
+// units yet a 5M cap yields the byte-identical wire in 18.2s vs 39.6s
+// (OMEGA_DET=1); metrics.tsv through TAGSTACK and lic-mit through
+// ARCHETYPON are likewise byte-identical at 2-8M caps. New default keeps
+// generous headroom over those knees while cutting pathological wrapper
+// re-entry (1.45-7.37B units in X58 profiling) by ~20-50x. Outputs can
+// only stay equal or grow where the cap binds; every codec still
+// byte-verifies its decode, so fidelity is unaffected.
+export const CHIRON_BUDGET_BASE = 4_000_000;
+export const CHIRON_BUDGET_PER_CHAR = 500;
 
 export function chironBudgetFor(chars: number): number {
   const env = typeof process !== 'undefined' ? process.env?.OMEGA_CHIRON_BUDGET : undefined;

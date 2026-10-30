@@ -3090,3 +3090,49 @@ decoding remains unverified.
   ≤0 = unbounded) opened per `workEpoch`; `chiron.ts` consults/ticks it, so
   per-call BlockSearchBudget multiplicity across thousands of parent calls is
   jointly bounded per encode.
+
+## βαθμός BATHMOS (X59, `src/lib/omega/bathmos.ts`, registry key `bathmos`, exact, deep, shipped this turn)
+
+- **Mechanism**: partition-window column elision — the first non-row-local
+  dependency in the stack. A column is dropped when it is an exact
+  SQL-window-function value over a partition of the table (whole table or
+  one categorical column): competition / dense / ordinal `RANK` (sort key
+  one numeric column or an exact rational ratio `A/B`, e.g. points per
+  game; ordinal ties broken by up to two extra fitted keys, then original
+  row order), `PERCENT_RANK`, `CUME_DIST` (×1 or ×100 at the printed
+  scale, half-up/trunc), `NTILE` buckets (SQL balanced or `ceil`
+  convention; optionally text labels), and share/index =
+  source / (partition SUM or MAX). Laws are fit with exact BigInt
+  rationals and verified on every row; ≤3 exception rows ship verbatim;
+  ≤4 drops; sources and partition columns are never dropped; constant
+  targets are refused (KOLUMN/APOGRAPHE territory); ordering fits whose
+  primary key ties cover >50% of a partition are refused (file-order
+  counters in disguise — METRON/APOGRAPHE territory); NTILE requires
+  ≥2 rows per bucket on average (k = group size is ordinal rank in
+  disguise). Plain and German number styles.
+- **Fitting**: bounded deterministic enumeration over (target, source,
+  partition, family) with per-row exact verification and greedy ordinal
+  tie-break extension among near-fitting primaries; drop admission greedy
+  by true contract+reduced token score over exact-verified fits.
+  Emission gated on measured DAEDALUS / AKOLOUTHIA-2 / APOGRAPHE parents
+  then the TAGSTACK+SIBLING frontier with exact restore arbitration
+  (measured-best parent returned otherwise). Reader obligation: sort or
+  sum each stated group — KEPHALAION-grade arithmetic plus an ordering.
+- **Citation**: honestly **none** for the realization. Window functions
+  are SQL:2003 machinery and order statistics / rank definitions are
+  classical; the functional-dependency compressors (SPARTAN; DeepSqueeze,
+  SIGMOD 2020; Blitzcrank, VLDB 2024; Virtual, EDBT 2025) are all
+  row-local. Nothing found fits a window law and teaches it in-band for
+  one-chat LLM recomputation.
+- **Time/CPU**: CPU-bound; planner caps 400,000 code units, 20,000 rows,
+  64 columns, 120M work units (`BATHMOS_MAX_WORK`), ≤128 partitions.
+  Inherited parent/frontier encodes dominate wall time with no
+  wrapper-wide cap, so deep-audit-only, like its siblings.
+- **Workmeter (X59 update)**: CHIRON epoch default recalibrated
+  400,000,000 + 20,000·chars → **4,000,000 + 500·chars** after measured
+  spends showed outcomes stop changing 10–100× earlier (DAEDALUS on
+  ewf-standings: 113M units spent, 5M cap byte-identical, 39.6 s →
+  18.2 s under OMEGA_DET=1; `bench/x59/receipts/chiron-recal*`), and the
+  ARIADNE glyph scorer gained an exact branch-and-bound prune
+  (decision-identical by construction; metrics TAGSTACK wire
+  byte-identical, −10.5% wall).

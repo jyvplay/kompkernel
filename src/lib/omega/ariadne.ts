@@ -626,7 +626,7 @@ export function prepareRunCostState(
 /** Score a candidate relative to `before`, touching only patterns it changes. */
 export function scoreRunCostDelta(
   p: PreparedRuns, state: PreparedRunCostState, before: string[], after: string[],
-  enc: EncodingName, cache: Map<string, number>,
+  enc: EncodingName, cache: Map<string, number>, limit = Number.POSITIVE_INFINITY,
 ): PreparedRunCostDelta {
   workTick(); // X57 deterministic search-work meter (see workmeter.ts)
   if (before.length !== after.length || before.length !== state.patternsBySlot.length) {
@@ -639,12 +639,24 @@ export function scoreRunCostDelta(
   }
   let total = state.total;
   const updates: Array<[number, number]> = [];
+  // X59 exact branch-and-bound: a nonempty run string costs >= 1 token, so
+  // pattern i can still save at most (costs[i]-1)*mult[i]. If even the most
+  // optimistic completion cannot reach `limit`, abandon without
+  // retokenizing the rest and return limit+1 (callers accept only totals
+  // <= limit and commit only accepted deltas, so decisions and wires are
+  // unchanged; the only difference is fewer cache entries written).
+  let maxSavingLeft = 0;
+  if (limit !== Number.POSITIVE_INFINITY) {
+    for (const i of affected) maxSavingLeft += Math.max(0, state.costs[i] - 1) * p.mult[i];
+  }
   for (const i of affected) {
+    if (total - maxSavingLeft > limit) return { total: limit + 1, updates: [] };
     let s = '';
     for (const slot of state.patternSlots[i]) s += after[slot];
     let v = cache.get(s);
     if (v === undefined) { v = countTokens(s, enc); cache.set(s, v); }
     total += (v - state.costs[i]) * p.mult[i];
+    if (limit !== Number.POSITIVE_INFINITY) maxSavingLeft -= Math.max(0, state.costs[i] - 1) * p.mult[i];
     updates.push([i, v]);
   }
   return { total, updates };
@@ -1186,7 +1198,7 @@ export function renderBest(
           }
           if (!ok) continue;
           if (new Set(trial).size !== trial.length) continue;
-          const delta = scoreRunCostDelta(prepRuns, scoreState, arr, trial, enc, cache);
+          const delta = scoreRunCostDelta(prepRuns, scoreState, arr, trial, enc, cache, bestRun);
           const v = delta.total;
           if (v <= bestRun) {
             if (v < bestRun) { bestRun = v; bestArr = trial.slice(); }
@@ -1210,7 +1222,7 @@ export function renderBest(
           else trial[iv] = c2;
           void j2;
           if (new Set(trial).size !== trial.length) continue;
-          const delta = scoreRunCostDelta(prepRuns, scoreState, arr, trial, enc, cache);
+          const delta = scoreRunCostDelta(prepRuns, scoreState, arr, trial, enc, cache, bestRun);
           const v = delta.total;
           if (v <= bestRun) {
             if (v < bestRun) { bestRun = v; bestArr = trial.slice(); }
@@ -1230,7 +1242,7 @@ export function renderBest(
           if (i === j) continue;
           const t2 = trial[i]; trial[i] = trial[j]; trial[j] = t2;
         }
-        const delta = scoreRunCostDelta(prepRuns, scoreState, arr, trial, enc, cache);
+        const delta = scoreRunCostDelta(prepRuns, scoreState, arr, trial, enc, cache, bestRun);
         const v = delta.total;
         if (v <= bestRun) {
           if (v < bestRun) { bestRun = v; bestArr = trial.slice(); }

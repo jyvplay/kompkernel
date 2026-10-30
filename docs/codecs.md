@@ -4334,7 +4334,8 @@ leaders are unchanged; every frontier encode is now 2–5× faster
 | Symmetric matrices | ISOSKELES — us31 1,677 < 3,297 full frontier (Solved) | No X57 movement |
 | **Dual-unit / affine-twin tables (new X57 category)** | **SYZYGIA** — india-124 **6,590 < 7,112 AKOLOUTHIA-2 (member)**; DAEDALUS-parent 6,668 | APO member legs >1,700 s (unmeasured); full gate pending at freeze |
 | **Weighted-total tables (new X58 category)** | **ZYGON** — ewf-standings **3,412 < 3,616 DAEDALUS (member)**; GWU gradebook detection member (economics-blocked at 35 rows) | Full gate timeout-killed 3,400 s on ewf; frontier-grade unclaimed |
-| Stack runtime | WORKMETER (not a codec) | frontier repeat 274.5→115.2 s byte-identical; od-bin512 SYNKRISIS >900 s→192 s |
+| **Standings / percentile / share tables (new X59 category)** | **BATHMOS** — ewf-standings `position` (member, OMEGA_DET=1) **3,502 < 3,561 AKOLOUTHIA-2 / 3,616 DAEDALUS** | On this file ZYGON's 3,412 (non-det member) still leads; BATHMOS full gate pending X59 attempt |
+| Stack runtime | WORKMETER (not a codec) | frontier repeat 274.5→115.2 s byte-identical; od-bin512 SYNKRISIS >900 s→192 s; X59: DAEDALUS ewf 39.6→18.0 s byte-identical (CHIRON recal + ARIADNE branch-and-bound) |
 
 ## X58: speed round 2 (CHIRON epoch lane) + ZYGON weighted-sum elision
 
@@ -4416,3 +4417,93 @@ weighted-grade practice is universal in spreadsheet tutorials; EAIFD
 check #6 (Oct 2026 lab claims incl. Axiom's Lean formalization of the
 Classification of Finite Simple Groups): methodological echo
 (discover → machine-verify), no implementable compression transfer.
+
+## X59: speed round 3 (exact branch-and-bound + CHIRON recalibration) + BATHMOS window-law elision
+
+**Speed.** Two changes, both fidelity-neutral by construction.
+(1) `scoreRunCostDelta` in `ariadne.ts` now takes an acceptance limit and
+prunes exactly: a nonempty run string costs ≥1 token, so pattern *i* can
+still save at most `(costs[i]-1)·mult[i]`; once even the optimistic
+completion cannot reach the incumbent best, the candidate is abandoned
+without retokenizing the rest. Callers accept only totals ≤ limit and
+commit only accepted deltas, so **decisions and wires are unchanged**
+(proved by byte-identical A/B wires on ewf-DAEDALUS and metrics-TAGSTACK
+under `OMEGA_DET=1`; metrics 93.8 s → 84.0 s, ewf unchanged within noise;
+`bench/x59/receipts/speed-ab-*`). (2) The CHIRON epoch budget default is
+recalibrated from 400,000,000 + 20,000·chars to **4,000,000 + 500·chars**:
+epoch-spend instrumentation showed DAEDALUS on ewf-standings burning 113M
+chiron units where a 5M cap produces the byte-identical wire (39.6 s →
+18.2 s); metrics-TAGSTACK and lic-mit-ARCHETYPON wires are likewise
+byte-identical at 2–8M caps and at the new formula (SHAs `d34049e72e50ceb6`,
+`f0e0ffb9543f3b2f`, `30f044d32098bf39`; `chiron-recal*` receipts). Where a cap
+binds, outputs can only stay equal or grow — every codec still
+byte-verifies its decode — but token counts on unmeasured lanes may move;
+that is the disclosed trade of the X57/X58 budget mechanism, now set nearer
+its measured knees.
+
+**BATHMOS (βαθμός, a step/degree/rank; `src/lib/omega/bathmos.ts`, registry → 223).**
+Every table dependency in the stack is row-local (SYLLOGISMOS, ZYGON,
+SYZYGIA), column-local (APOGRAPHE/METRON, ATHROISMOS), an edge sum
+(KEPHALAION) or a symmetry (ISOSKELES). None can state a law whose value
+depends on the *other rows of its partition*: a league position, a
+percentile, a quartile bucket, a share of the group total. Those columns
+are SQL window functions exported into everyday CSVs by every BI tool.
+BATHMOS fits exact BigInt-rational window laws per (target, source,
+partition ∈ {whole table, one categorical column}): competition/dense/
+ordinal RANK (sort key one numeric column or an exact ratio A/B — points
+per game; ordinal ties broken by up to two greedily fitted extra keys,
+then original row order), PERCENT_RANK, CUME_DIST (×1/×100 at the printed
+scale), NTILE (SQL balanced or ceil; text labels allowed), and share =
+source/(partition SUM or MAX). ≤3 exception rows ship verbatim; ≤4 drops;
+sources/partitions never dropped; ordinal fits whose primary key ties
+cover >50% of a partition are refused as file-order counters in disguise,
+as is NTILE with k ≈ group size (both attacks are in the red team after
+the first caught a real leak). House gate (measured DAEDALUS/AKO2/APO
+parents, strict TAGSTACK+SIBLING frontier, exact restore).
+
+Lanes:
+- **ewf-standings.csv** (the X58 fixture; tidytuesday EWF standings,
+  258×17): `position` = ordinal rank within `season_id` by exact rational
+  `{points}/{played}` descending (points-per-game decides the
+  COVID-shortened 2019-20 season; raw points order is wrong on 6 rows),
+  0 exceptions, contract 102 tokens, byte-exact restore. **Member-grade**
+  under `OMEGA_DET=1`: candidate **3,502** vs AKOLOUTHIA-2(source) 3,561
+  and DAEDALUS(source) 3,616 (**−59 / −114**; `member-ewf-det.json`). A
+  seed-59 row-shuffled twin still fits exactly (planner adds
+  `{goal_difference}` as tiebreaker), so the law is not file order. Honest
+  placement: on this file ZYGON's weighted-sum lane (3,412, non-det
+  member) remains cheaper; BATHMOS owns the *position* column, a different
+  redundancy, and loses the same-file race. Full gate: see attempt note
+  below.
+- F1 driver standings (three public copies fetched) are **not** a lane:
+  F1 countback tie-breaking (2nd places, 3rds, …) uses data the export
+  omits (1,509/4,413 mismatches under points+wins on the largest copy).
+  A rounded-window-law sweep over all frozen bench CSVs (share /
+  percent-rank / cume-dist, all partitions) found no second real lane in
+  the corpus; the family coverage is therefore proven on generated
+  red-team material + the one real rank lane, stated as such.
+
+Verification: red team **22/22** (grouped ordinal / competition / dense
+ranks with ties, percent-rank, cume-dist, share-of-sum, index-to-max,
+NTILE numeric + text labels, ratio-key PPG ranks, in-range exception
+rows, shuffled rows, TSV/CRLF, German semicolons, no-trailing-newline;
+refusals: random positions, constant-key counter, NTILE-identity
+disguise, foreign-total shares, twin-rounded ranks, tiny tables);
+independent CPython twin byte-exact on ewf + 14/15 applied cases (German
+style covered by the TS suite, disclosed). Prior art: window functions
+are SQL:2003; SPARTAN / DeepSqueeze (SIGMOD 2020) / Blitzcrank (VLDB
+2024) / Virtual (EDBT 2025, live-found this turn) are row-local FD
+compressors; for fitting a window law and teaching it in-band for
+one-chat recomputation, honestly **none**. Relational factorization
+(normalize Superstore into fact + dimension tables) was prototyped and
+**falsified by measurement** this turn: raw tokens fall 12% but the
+grammar parents price the factored text *higher* (AKOLOUTHIA-2 18,250 →
+18,707) — parents already own tuple repetition. AI-mathematics check #7
+(per-lab): OpenAI's Oct 26 claims (ETH false; local smoothing ⇒ Kakeya;
+Yang–Mills/QCD held back) ship Lean artifacts for the first two with
+expert review explicitly not certification; Axiom's CFSG Lean
+formalization (43.1M lines; fix counts vary by source); DeepMind
+AlphaProof/Gemini Deep Think IMO-gold reporting and a Gemini
+algebraic-geometry theorem (arXiv:2601.07222); Anthropic's
+subexponential 3-SAT claim. I audited none of the proof artifacts; no
+implementable compression transfer found.
