@@ -700,8 +700,14 @@ interface MeasureParent {
 function measuredAkolouthia2(text: string, enc: EncodingName): MeasureParent {
   const parent = akolouthia2Encode(text, enc);
   const directTokens = countTokens(parent.decoderPrompt, enc);
-  if (!parent.exact || parent.decoded !== text || directTokens !== parent.messageTokens) {
-    throw new Error('SYZYGIA AKOLOUTHIA-2 parent did not reconstruct or its reported cost disagreed');
+  if (!parent.exact || parent.decoded !== text) {
+    // inexact parents are not lossless bars: price them as identity so the
+    // gate never throws and never crowns a lossy message (X58 ewf lane)
+    const idTokens = countTokens(text, enc);
+    return { wire: text, message: text, decoded: text, messageTokens: idTokens, parentCodec: 'identity', parentCosts: { akolouthia2: idTokens } };
+  }
+  if (directTokens !== parent.messageTokens) {
+    throw new Error('SYZYGIA AKOLOUTHIA-2 parent reported cost disagreed');
   }
   return { wire: parent.wire, message: parent.decoderPrompt, decoded: parent.decoded, messageTokens: directTokens, parentCodec: 'akolouthia2', parentCosts: { akolouthia2: directTokens } };
 }
@@ -709,8 +715,12 @@ function measuredAkolouthia2(text: string, enc: EncodingName): MeasureParent {
 function measuredDaedalus(text: string, enc: EncodingName): MeasureParent {
   const parent = daedalusEncode(text, enc);
   const directTokens = countTokens(parent.decoderPrompt, enc);
-  if (!parent.exact || parent.decoded !== text || directTokens !== parent.messageTokens) {
-    throw new Error('SYZYGIA DAEDALUS parent did not reconstruct or its reported cost disagreed');
+  if (!parent.exact || parent.decoded !== text) {
+    const idTokens = countTokens(text, enc);
+    return { wire: text, message: text, decoded: text, messageTokens: idTokens, parentCodec: 'identity', parentCosts: { daedalus: idTokens } };
+  }
+  if (directTokens !== parent.messageTokens) {
+    throw new Error('SYZYGIA DAEDALUS parent reported cost disagreed');
   }
   return { wire: parent.wire, message: parent.decoderPrompt, decoded: parent.decoded, messageTokens: directTokens, parentCodec: 'daedalus', parentCosts: { daedalus: directTokens } };
 }
@@ -720,7 +730,10 @@ function measuredApographe(text: string, enc: EncodingName): MeasureParent {
   const decoded = apographeDecodeResult(parent);
   const message = ((parent as any).contract ? (parent as any).contract + '\n' : '') + parent.wire;
   const directTokens = countTokens(message, enc);
-  if (decoded !== text) throw new Error('SYZYGIA APOGRAPHE parent did not reconstruct');
+  if (decoded !== text) {
+    const idTokens = countTokens(text, enc);
+    return { wire: text, message: text, decoded: text, messageTokens: idTokens, parentCodec: 'identity', parentCosts: { apographe: idTokens } };
+  }
   return { wire: parent.wire, message, decoded, messageTokens: directTokens, parentCodec: 'apographe', parentCosts: { apographe: directTokens } };
 }
 

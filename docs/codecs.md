@@ -4384,9 +4384,18 @@ Lanes (`bench/x58/fixtures/`, PROVENANCE.txt):
   258×17): `points` dropped as `3×{wins} + 1×({draws} + {point_adjustment})`
   (contract 81 tokens, 0 exceptions, byte-exact). **Member-grade**:
   candidate AKO2-parent **3,412** vs best measured source parent DAEDALUS
-  3,616 (**−204, −5.6%**; `member-ewf.json`). APO legs: see receipt
-  `member-ewf-apo.json` if present. Full gate: timeout-killed at 3,400 s
-  (empty receipt), frontier-grade **unclaimed**.
+  3,616 (**−204, −5.6%**; `member-ewf.json`). APO legs measured separately
+  (`member-ewf-apo.json`): APOGRAPHE(source) 3,364 and APOGRAPHE(candidate)
+  3,100 are both **inexact** on this lane (~760 s each) and cannot arbitrate
+  a lossless claim — which also exposed that the house `measured*` guards
+  *threw* on inexact parents; ZYGON and SYZYGIA now price inexact parents as
+  identity instead (registry-safe, never crowns a lossy message). Full gate
+  on ewf: timeout-killed at 3,400 s (empty receipt), frontier-grade on this
+  real lane **unclaimed**. The shipped `zygonEncode` path did complete a
+  **full-frontier pass on the generated league-points red-team lane**
+  (candidate **791 < 898** APOGRAPHE parent, strict TAGSTACK+SIBLING
+  comparison, byte-exact, 526 s), proving the whole gate end-to-end;
+  real-lane frontier-grade awaits an APO-terminating lane.
 - **gwu-gradebook.csv** (GWU course gradebook, weights row above header):
   the fitter recovers the 15-term `final_grade` law from the data alone and
   verifies it on all rows, but at 35 students the grouped contract (~110 tok)
