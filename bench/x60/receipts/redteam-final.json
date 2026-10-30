@@ -1,0 +1,30 @@
+{
+ "pass": 29,
+ "fail": 0,
+ "fails": [],
+ "applied": [
+  "full-name",
+  "email",
+  "sortable-quoted",
+  "username",
+  "sku",
+  "three-source",
+  "exceptions",
+  "upper-highcard",
+  "empty-source-cells",
+  "tsv-crlf",
+  "overlap-trap",
+  "target-first-col",
+  "two-drops",
+  "quoted-source-comma",
+  "no-trailing-nl",
+  "city-state",
+  "exception-first-row",
+  "special-header",
+  "astral-first2"
+ ],
+ "transformChecks": {
+  "astralActual": "😀😁",
+  "initialActual": "😀"
+ }
+}

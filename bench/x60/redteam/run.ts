@@ -1,6 +1,6 @@
 // X60 EIRMOS red-team runner (plan level).
 import * as fs from 'node:fs';
-import { eirmosPlan, eirmosRestore } from '../../../src/lib/omega/eirmos';
+import { eirmosApplyTransform, eirmosPlan, eirmosRestore } from '../../../src/lib/omega/eirmos';
 const DIR = 'bench/x60/redteam/cases';
 const manifest = JSON.parse(fs.readFileSync(`${DIR}/manifest.json`, 'utf8')) as { name: string; expect: string }[];
 let pass = 0, fail = 0;
@@ -18,4 +18,10 @@ for (const c of manifest) {
   if (ok) pass++; else { fail++; fails.push(`${c.name} expect=${c.expect} applied=${!!plan} err=${err}`); }
   if (plan) { applied.push(c.name); fs.writeFileSync(`${DIR}/${c.name}.contract.txt`, plan.contract); fs.writeFileSync(`${DIR}/${c.name}.reduced.txt`, plan.reducedText); }
 }
-console.log(JSON.stringify({ pass, fail, fails, applied }, null, 1));
+const astralExpected = '😀😁';
+const astralActual = eirmosApplyTransform('first2', '😀😁TAIL');
+const initialActual = eirmosApplyTransform('initial', '😀TAIL');
+if (astralActual !== astralExpected || initialActual !== '😀') {
+  fail++; fails.push(`unicode-codepoint-transform expected=${JSON.stringify(astralExpected)} got=${JSON.stringify(astralActual)}`);
+} else pass++;
+console.log(JSON.stringify({ pass, fail, fails, applied, transformChecks: { astralActual, initialActual } }, null, 1));

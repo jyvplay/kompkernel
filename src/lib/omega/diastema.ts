@@ -319,7 +319,12 @@ export function diastemaPlan(text: string, enc: EncodingName = 'o200k_base'): Di
       if (rows.length < DIASTEMA_MIN_ROWS || !ok) continue;
       // MEASURE, never estimate: the column's own token cost against the
       // intervals plus the mask, minus what the mask costs to state.
-      const colTok = countTokens(vals.filter((v) => rows.includes(v.li)).map((v) => v.s).join('\n'), enc);
+      // Membership is a set lookup, not Array.includes: `vals` and `rows`
+      // can each be O(line count), so the previous nested scan was quadratic
+      // for every (ordinal, mask) candidate on long listings. This changes no
+      // fit, row order, token input, or acceptance decision.
+      const participantRows = new Set(rows);
+      const colTok = countTokens(vals.filter((v) => participantRows.has(v.li)).map((v) => v.s).join('\n'), enc);
       const dTok = countTokens(deltas.join('\n'), enc);
       const gain = colTok - dTok - countTokens(mask, enc) - 4;
       if (gain > 8 && (!best || gain > best.gain)) best = { ord, mask, gain, rows, deltas };

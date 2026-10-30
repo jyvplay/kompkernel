@@ -1,0 +1,31 @@
+{
+ "lane": "bench/x60/fixtures/clients.csv",
+ "applied": true,
+ "exact": true,
+ "ms": 146,
+ "srcTokens": 79127,
+ "reducedTokens": 74893,
+ "contractTokens": 71,
+ "drops": [
+  {
+   "name": "full_name",
+   "parts": [
+    {
+     "kind": "src",
+     "col": 0,
+     "tf": "id"
+    },
+    {
+     "kind": "lit",
+     "text": " "
+    },
+    {
+     "kind": "src",
+     "col": 1,
+     "tf": "id"
+    }
+   ],
+   "exceptions": 0
+  }
+ ]
+}

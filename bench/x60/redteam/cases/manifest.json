@@ -98,5 +98,17 @@
  {
   "name": "copy-disguise-capfirst",
   "expect": "refuse"
+ },
+ {
+  "name": "exception-comma-contract",
+  "expect": "refuse"
+ },
+ {
+  "name": "special-header",
+  "expect": "apply"
+ },
+ {
+  "name": "astral-first2",
+  "expect": "apply"
  }
 ]

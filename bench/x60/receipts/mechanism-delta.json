@@ -1,0 +1,33 @@
+{
+ "lane": "generated mixed-transform username case",
+ "sourceTokens": 1889,
+ "eirmos": {
+  "applied": true,
+  "exact": true,
+  "contractTokens": 100,
+  "drops": [
+   {
+    "name": "username",
+    "parts": [
+     {
+      "kind": "src",
+      "col": 0,
+      "tf": "initial-lower"
+     },
+     {
+      "kind": "src",
+      "col": 1,
+      "tf": "lower"
+     }
+    ],
+    "exceptions": 0
+   }
+  ]
+ },
+ "syllogismos": {
+  "applied": false,
+  "dropKinds": []
+ },
+ "uniqueOperator": "lowercase-initial({first}) + lowercase({last}) inside a single per-row concatenation",
+ "limitation": "in-stack SYLLOGISMOS supports literal concatenation OR whole-field case transform, but does not compose the case transform inside a concatenation slot"
+}

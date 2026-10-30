@@ -14,4 +14,11 @@ console.log(JSON.stringify({
   contractTokens: plan ? countTokens(plan.contract, 'o200k_base') : null,
   drops: plan?.spec.drops.map((d) => ({ name: d.name, parts: d.parts, exceptions: d.exceptions.length })),
 }, null, 1));
-if (plan) { fs.writeFileSync('/tmp/eir-contract.txt', plan.contract); fs.writeFileSync('/tmp/eir-reduced.csv', plan.reducedText); }
+if (plan) {
+  fs.writeFileSync('/tmp/eir-contract.txt', plan.contract);
+  fs.writeFileSync('/tmp/eir-reduced.csv', plan.reducedText);
+  if (path === 'bench/x60/fixtures/clients.csv') {
+    fs.writeFileSync('bench/x60/fixtures/clients.contract.txt', plan.contract);
+    fs.writeFileSync('bench/x60/fixtures/clients-reduced.csv', plan.reducedText);
+  }
+}

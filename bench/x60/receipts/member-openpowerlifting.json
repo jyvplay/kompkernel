@@ -1,0 +1,73 @@
+{
+ "sha256": "44d34480f3ccbd38da4a8cb224e5c3a90c3abe5a6ea435ea229d17ab2b3c19db",
+ "codeUnits": 41623,
+ "sourceTokens": 21434,
+ "applied": true,
+ "exactPlan": true,
+ "clauseTokens": 97,
+ "drops": [
+  {
+   "name": "Full Name",
+   "exceptions": 2,
+   "parts": [
+    {
+     "kind": "src",
+     "col": 3,
+     "tf": "id"
+    },
+    {
+     "kind": "lit",
+     "text": " "
+    },
+    {
+     "kind": "src",
+     "col": 4,
+     "tf": "id"
+    }
+   ]
+  }
+ ],
+ "parents": [
+  {
+   "name": "akolouthia2",
+   "side": "source",
+   "tokens": 8620,
+   "exact": true,
+   "ms": 16200
+  },
+  {
+   "name": "akolouthia2",
+   "side": "candidate",
+   "tokens": 8175,
+   "parentMessageTokens": 8077,
+   "exact": true,
+   "ms": 14355
+  },
+  {
+   "name": "daedalus",
+   "side": "source",
+   "tokens": 8764,
+   "exact": true,
+   "ms": 2569
+  },
+  {
+   "name": "daedalus",
+   "side": "candidate",
+   "tokens": 8333,
+   "parentMessageTokens": 8235,
+   "exact": true,
+   "ms": 2464
+  }
+ ],
+ "source": "sstangl/openpowerlifting raw/1902 + raw/1903, same 48-column schema, joined record sets (public original meet results; no records synthesized)",
+ "sourceURLs": [
+  "https://github.com/sstangl/openpowerlifting/blob/main/meet-data/raw/1902/original.csv",
+  "https://github.com/sstangl/openpowerlifting/blob/main/meet-data/raw/1903/original.csv"
+ ],
+ "sourceLicense": "AGPL-3.0 repository license; source data not vendored in this repository",
+ "lawAudit": {
+  "rows": 124,
+  "exceptions": 2,
+  "law": "Full Name = First Name + space + Last Name for all non-exception rows"
+ }
+}

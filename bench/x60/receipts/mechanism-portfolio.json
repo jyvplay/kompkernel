@@ -1,0 +1,78 @@
+{
+ "fixture": "bench/x60/fixtures/clients.csv",
+ "rows": 1026,
+ "distinct": 1024,
+ "baseTokens": 79127,
+ "eirmosPlanTokens": 74964,
+ "approaches": [
+  {
+   "name": "same-row-concat-template",
+   "mechanism": "T = source1 + literal + source2; bounded synthesis; verify all rows",
+   "exact": true,
+   "targetRows": 1026,
+   "distinctTargets": 1024,
+   "baseTokens": 79127,
+   "sketchTokens": 74964,
+   "ruleTokens": 71,
+   "payloadTokens": 0,
+   "note": "exact inverse checked; not full parent/frontier comparison"
+  },
+  {
+   "name": "adjacent-row-prefix-delta",
+   "mechanism": "cross-row prefix chain; order-sensitive; independent of source columns",
+   "exact": true,
+   "targetRows": 1026,
+   "distinctTargets": 1024,
+   "baseTokens": 79127,
+   "sketchTokens": 81247,
+   "ruleTokens": 49,
+   "payloadTokens": 6305,
+   "note": "exact inverse checked; not full parent/frontier comparison"
+  },
+  {
+   "name": "value-dictionary-index",
+   "mechanism": "dictionary plus index stream; expected to lose when nearly every value is unique",
+   "exact": true,
+   "targetRows": 1026,
+   "distinctTargets": 1024,
+   "baseTokens": 79127,
+   "sketchTokens": 83330,
+   "ruleTokens": 28,
+   "payloadTokens": 8409,
+   "note": "exact inverse checked; not full parent/frontier comparison"
+  },
+  {
+   "name": "common-affix-strip",
+   "mechanism": "one exact global common prefix/suffix; no search over row permutations",
+   "exact": true,
+   "targetRows": 1026,
+   "distinctTargets": 1024,
+   "baseTokens": 79127,
+   "sketchTokens": 79316,
+   "ruleTokens": 27,
+   "payloadTokens": 4396,
+   "note": "exact inverse checked; not full parent/frontier comparison"
+  },
+  {
+   "name": "substring-palette",
+   "mechanism": "single mined substring used by 264/1026 values",
+   "exact": true,
+   "targetRows": 1026,
+   "distinctTargets": 1024,
+   "baseTokens": 79127,
+   "sketchTokens": 81391,
+   "ruleTokens": 32,
+   "payloadTokens": 6466,
+   "note": "exact inverse checked; not full parent/frontier comparison"
+  },
+  {
+   "name": "dimension-fact-normalization",
+   "mechanism": "intern repeated entities into a dimension table and replace fact cells by IDs",
+   "exact": "X59 experiment exact inverse",
+   "baseTokens": 18250,
+   "sketchTokens": 18707,
+   "delta": 457,
+   "note": "measured AKOLOUTHIA-2 costs on X59 Superstore; falsified on that lane; imported receipt, not an X60 run"
+  }
+ ]
+}

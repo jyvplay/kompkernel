@@ -162,6 +162,39 @@ cases.push({ name: 'tiny', text: 'f,l,full\nA,B,A B\nC,D,C D\n', expect: 'refuse
   for (let i = 0; i < 160; i++) rows.push(`V${i}x,V${i}x`);
   cases.push({ name: 'copy-disguise-capfirst', text: rows.join('\n') + '\n', expect: 'refuse' });
 }
+// 26 comma in exception would collide with the contract's exception separator -> refuse
+{
+  const rows = ['first,last,full'];
+  people(160).forEach(([f, l], i) => { const v = i === 51 ? 'EXCEPTION,WITH-COMMA' : `${f} ${l}`; const raw = v.includes(',') ? '"' + v + '"' : v; rows.push(`${f},${l},${raw}`); });
+  cases.push({ name: 'exception-comma-contract', text: rows.join('\n') + '\n', expect: 'refuse' });
+}
+// 27 header requiring positional field reference due braces/comma
+{
+  const rows = ['first,last,"full,name"'];
+  people(160).forEach(([f, l]) => rows.push(`${f},${l},${f} ${l}`));
+  cases.push({ name: 'special-header', text: rows.join('\n') + '\n', expect: 'apply' });
+}
+// 28 astral-codepoint slicing: first2 must not split a UTF-16 surrogate pair
+{
+  const rows = ['source,prefix,detail'];
+  for (let i = 0; i < 240; i++) {
+    const a = String.fromCodePoint(0x1F600 + i);
+    const b = String.fromCodePoint(0x1F680 + i);
+    rows.push(`${a}${b}TAIL${i},${a}${b},${'x'.repeat(40)}`);
+  }
+  cases.push({ name: 'astral-first2', text: rows.join('\n') + '\n', expect: 'apply' });
+}
 for (const c of cases) fs.writeFileSync(`${DIR}/${c.name}.csv`, c.text);
+// Decoder-only astral test: the planner properly refuses this uneconomic
+// 2-codepoint field, but a hand-authored valid one-chat contract still must
+// decode the first two Unicode code points without splitting surrogate pairs.
+{
+  const text = cases.find((c) => c.name === 'astral-first2')!.text;
+  const lines = text.trimEnd().split('\n');
+  const reduced = lines.map((line) => { const p = line.split(','); return `${p[0]},${p[2]}`; }).join('\n') + '\n';
+  fs.writeFileSync(`${DIR}/astral-tf.csv`, text);
+  fs.writeFileSync(`${DIR}/astral-tf.reduced.txt`, reduced);
+  fs.writeFileSync(`${DIR}/astral-tf.contract.txt`, 'EIRMOS: after decoding below, in the comma-separated table insert as header field and value in every row: field 2 "prefix": first2 {source}. {x} means that row\'s decoded {x}; + joins text pieces end to end; quoted pieces are literal text; first2 {x} = the first 2 Unicode code points of {x} (fewer if {x} is shorter). Change nothing else.');
+}
 fs.writeFileSync(`${DIR}/manifest.json`, JSON.stringify(cases.map((c) => ({ name: c.name, expect: c.expect })), null, 1));
 console.log('cases', cases.length);

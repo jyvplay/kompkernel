@@ -13,27 +13,24 @@ import { tagstackEncode, type TagstackResult } from './tagstack';
  *
  * THE GAP
  * -----------------------------------------------------------------------------
- * Every functional dependency this stack can state about a table column is
- * numeric or a finite map: SYLLOGISMOS arith/scaleK (numeric), its lookup
- * (single source, <=64 entries shipped verbatim), ZYGON weighted sums,
- * KEPHALAION edge sums, SYZYGIA affine twins, ATHROISMOS recurrences,
- * BATHMOS partition windows. ENTHYMEME/EPAGOGE elide derived fields inside
- * prose lines, but only for three fixed public conventions (JVM frame file
- * names, GitHub heading slugs, changelog compare links). None of them can
- * state the most common derived column in everyday exports:
+ * The stack already has raw string concatenation in SYLLOGISMOS
+ * (literal pieces + up to two sibling fields), whole-field case transforms,
+ * and object-property templates in PARADEIGMA. EIRMOS does NOT claim those
+ * genera as new. The missing in-stack operation is a CONCATENATION whose
+ * INDIVIDUAL source slots have their own transforms — for example
+ * lowercase-initial(first) + lowercase(last) — with 1–3 slots, bounded
+ * seed segmentation and row-level exception repair, for delimited tables.
+ * No prior table codec composes substring/case transforms inside a
+ * multi-source concatenation slot. Examples of the operator language:
  *
- *     full_name = {first_name} + " " + {last_name}
- *     email     = lowercase {first_name} + "." + lowercase {last_name} + "@acme.com"
- *     sortable  = {last_name} + ", " + {first_name}
- *     username  = initial {first_name} + lowercase {last_name}
+ *     full_name = {first_name} + " " + {last_name}                 (old concat genus)
+ *     email     = lowercase {first} + "." + lowercase {last} + "@acme.com"
+ *     username  = lowercase-initial {first} + lowercase {last}       (new composition)
+ *     display   = first2 {given} + ". " + {middle} + " " + {family}
  *
- * a STRING TEMPLATE over one to four same-row source columns, with literal
- * separators and small per-source transforms (verbatim, lowercase,
- * UPPERCASE, capfirst, initial, first2, first3). The derived values are
- * near-unique per row (every person's full name differs), so dictionary and
- * grammar codecs pay ~full price for them, exactly as with numeric derived
- * columns — measured on the real lane below, dropping full_name cuts the
- * best exact parent by 3,850 tokens (-9.3%) before the contract.
+ * Thus the novelty claim is the per-slot transformable string transducer
+ * and its exact table-elision realization, not generic concatenation.
+ *
  *
  * MECHANISM
  * -----------------------------------------------------------------------------
@@ -166,23 +163,27 @@ export interface EirmosPlan {
 const TRANSFORMS: EirmosTransform[] = ['id', 'lower', 'upper', 'capfirst', 'initial', 'initial-lower', 'initial-upper', 'first2', 'first3'];
 const CASE_TRANSFORMS = new Set<EirmosTransform>(['lower', 'upper', 'capfirst', 'initial-lower', 'initial-upper']);
 
-function applyTf(tf: EirmosTransform, v: string): string {
+export function eirmosApplyTransform(tf: EirmosTransform, v: string): string {
+  // The contract's "character" is a Unicode code point, not a UTF-16 code
+  // unit. Array.from preserves astral symbols as one character, matching a
+  // normal LLM/Python reader; ASCII-only case guards handle case semantics.
+  const chars = Array.from(v);
   switch (tf) {
     case 'id': return v;
     case 'lower': return v.toLowerCase();
     case 'upper': return v.toUpperCase();
-    case 'capfirst': return v.length ? v[0]!.toUpperCase() + v.slice(1) : v;
-    case 'initial': return v.slice(0, 1);
-    case 'initial-lower': return v.slice(0, 1).toLowerCase();
-    case 'initial-upper': return v.slice(0, 1).toUpperCase();
-    case 'first2': return v.slice(0, 2);
-    case 'first3': return v.slice(0, 3);
+    case 'capfirst': return chars.length ? chars[0]!.toUpperCase() + chars.slice(1).join('') : v;
+    case 'initial': return chars[0] ?? '';
+    case 'initial-lower': return (chars[0] ?? '').toLowerCase();
+    case 'initial-upper': return (chars[0] ?? '').toUpperCase();
+    case 'first2': return chars.slice(0, 2).join('');
+    case 'first3': return chars.slice(0, 3).join('');
   }
 }
 
 function renderTemplate(parts: EirmosPart[], rowVals: (col: number) => string): string {
   let out = '';
-  for (const p of parts) out += p.kind === 'lit' ? p.text : applyTf(p.tf, rowVals(p.col));
+  for (const p of parts) out += p.kind === 'lit' ? p.text : eirmosApplyTransform(p.tf, rowVals(p.col));
   return out;
 }
 
@@ -216,7 +217,7 @@ function segmentRow(
     const raw = vals[idx]!;
     for (const tf of TRANSFORMS) {
       if (CASE_TRANSFORMS.has(tf) && !caseOk[idx]) continue;
-      const piece = applyTf(tf, raw);
+      const piece = eirmosApplyTransform(tf, raw);
       if (piece.length === 0) continue; // seed rows keep sources non-empty; a zero piece is ambiguous
       // iterate occurrences of piece at or after pos (bounded)
       let from = pos;
@@ -286,7 +287,7 @@ function fitTuple(
       // semantic copy check: a case transform that changes nothing on ANY
       // row (e.g. lowercase over already-lowercase values) is a duplicate
       // column in disguise, whatever its label — APOGRAPHE owns those
-      if (dataVals[sp.col]!.every((v) => applyTf(sp.tf, v) === v)) continue;
+      if (dataVals[sp.col]!.every((v) => eirmosApplyTransform(sp.tf, v) === v)) continue;
       if (distinctByCol[sp.col]! <= 64) continue; // lookup territory: SYLLOGISMOS owns
     }
     // full verification
@@ -301,7 +302,7 @@ function fitTuple(
         if (bad > EIRMOS_MAX_EXCEPTIONS) break;
         const ev = dataVals[tgt]![i]!;
         // exception values must stay unambiguous inside the contract sentence
-        if (/["\[\]\n\r]/.test(ev) || ev === '(empty)') { bad = EIRMOS_MAX_EXCEPTIONS + 1; break; }
+        if (/[",\[\]\n\r]/.test(ev) || ev === '(empty)') { bad = EIRMOS_MAX_EXCEPTIONS + 1; break; }
         exceptions.push([i, ev]);
       }
     }
@@ -368,7 +369,7 @@ function delimName(d: string): string {
 
 function colRef(header: string[], col: number): string {
   const name = header[col]!;
-  const clean = name.length > 0 && !name.includes('{') && !name.includes('}') && !name.includes('\n');
+  const clean = name.length > 0 && !/[{},;|\t\"\n\r\\]/.test(name);
   const unique = header.filter((h) => h === name).length === 1;
   return clean && unique ? `{${name}}` : `field ${col + 1}`;
 }
@@ -392,8 +393,8 @@ const TF_DEFS: Partial<Record<EirmosTransform, string>> = {
   initial: 'initial {x} = the first character of {x}',
   'initial-lower': 'lowercase-initial {x} = the first character of {x} made lowercase',
   'initial-upper': 'UPPERCASE-initial {x} = the first character of {x} made uppercase',
-  first2: 'first2 {x} = the first 2 characters of {x} (fewer if {x} is shorter)',
-  first3: 'first3 {x} = the first 3 characters of {x} (fewer if {x} is shorter)',
+  first2: 'first2 {x} = the first 2 Unicode code points of {x} (fewer if {x} is shorter)',
+  first3: 'first3 {x} = the first 3 Unicode code points of {x} (fewer if {x} is shorter)',
 };
 
 function buildContract(table: ParsedTable, spec: EirmosSpec): string {
@@ -454,7 +455,7 @@ export function eirmosPlan(text: string, enc: EncodingName = 'o200k_base'): Eirm
           work.n += 1;
           if (TRANSFORMS.some((tf) => {
             if (CASE_TRANSFORMS.has(tf) && !caseOkByCol[s]) return false;
-            const piece = applyTf(tf, sv);
+            const piece = eirmosApplyTransform(tf, sv);
             return piece.length > 0 && tv.includes(piece);
           })) hits++;
         }
