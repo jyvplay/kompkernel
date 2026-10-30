@@ -1,0 +1,161 @@
+first,last
+Linus0,"Torvalds0, Jr."
+Donald1,von Neumann1
+Alan2,Ritchie2
+Donald3,Lamport3
+Dennis4,Kim4
+John5,Garcia5
+Tim6,Dijkstra6
+Margaret7,Liskov7
+Alan8,Allen8
+Barbara9,"Garcia9, Jr."
+Barbara10,Kim10
+John11,Goldwasser11
+Vint12,Berners-Lee12
+Alan13,Dijkstra13
+Alan14,Goldwasser14
+Grace15,Turing15
+Vint16,Liskov16
+Vint17,Torvalds17
+Barbara18,"Knuth18, Jr."
+Mary19,Allen19
+James20,Berners-Lee20
+Dennis21,Kim21
+Leslie22,Perlman22
+Dennis23,Goldwasser23
+Radia24,Dijkstra24
+Grace25,Garcia25
+Radia26,Cerf26
+Katherine27,"Hopper27, Jr."
+Margaret28,Ritchie28
+James29,Dijkstra29
+John30,Hopper30
+Donald31,Smith31
+Mary32,Hamilton32
+Vint33,Hamilton33
+John34,Turing34
+Leslie35,Goldwasser35
+Donald36,"Perlman36, Jr."
+Vint37,Turing37
+Alan38,Lovelace38
+Dennis39,Hamilton39
+Shafi40,Berners-Lee40
+John41,Perlman41
+Grace42,von Neumann42
+Grace43,Garcia43
+Linus44,Liskov44
+Dennis45,"von Neumann45, Jr."
+Tim46,Lovelace46
+Mary47,Kim47
+Leslie48,Goldwasser48
+Katherine49,Cerf49
+Radia50,Ritchie50
+Linus51,Liskov51
+Vint52,Ritchie52
+Barbara53,Garcia53
+Leslie54,"Turing54, Jr."
+Shafi55,Dijkstra55
+Alan56,Perlman56
+Tim57,von Neumann57
+Alan58,Perlman58
+Mary59,von Neumann59
+James60,Liskov60
+Barbara61,Ritchie61
+Dennis62,Turing62
+Dennis63,"Johnson63, Jr."
+James64,Ritchie64
+Margaret65,Dijkstra65
+Mary66,Lamport66
+Frances67,Lovelace67
+Donald68,Knuth68
+James69,Knuth69
+Vint70,Torvalds70
+Frances71,Smith71
+Vint72,"Knuth72, Jr."
+Linus73,Lamport73
+John74,Allen74
+Katherine75,Goldwasser75
+Vint76,Ritchie76
+Radia77,Berners-Lee77
+John78,Cerf78
+Katherine79,Goldwasser79
+Edsger80,Liskov80
+Edsger81,"Cerf81, Jr."
+Ada82,Perlman82
+Tim83,Hamilton83
+Dennis84,Hamilton84
+Barbara85,Smith85
+Grace86,Smith86
+Margaret87,Berners-Lee87
+Margaret88,Kim88
+Ada89,Cerf89
+Mary90,"Berners-Lee90, Jr."
+Katherine91,Knuth91
+Dennis92,Kim92
+Leslie93,Kim93
+Linus94,Hopper94
+Mary95,Smith95
+Edsger96,Allen96
+Barbara97,Cerf97
+Radia98,Johnson98
+Leslie99,"Torvalds99, Jr."
+Dennis100,Perlman100
+Radia101,Garcia101
+Alan102,Allen102
+Donald103,Berners-Lee103
+Margaret104,Johnson104
+Grace105,von Neumann105
+Shafi106,Dijkstra106
+James107,Hamilton107
+Edsger108,"Garcia108, Jr."
+Ada109,Turing109
+Radia110,von Neumann110
+Ada111,Allen111
+Edsger112,Turing112
+Margaret113,Johnson113
+Mary114,Lovelace114
+Dennis115,Dijkstra115
+Linus116,Garcia116
+Linus117,"Garcia117, Jr."
+Barbara118,Dijkstra118
+Barbara119,von Neumann119
+Alan120,Kim120
+Radia121,Torvalds121
+Frances122,Berners-Lee122
+Vint123,Liskov123
+Radia124,Cerf124
+Ada125,Hamilton125
+Dennis126,"Hamilton126, Jr."
+Leslie127,Kim127
+Mary128,Lovelace128
+Alan129,Smith129
+Edsger130,Ritchie130
+Mary131,Lamport131
+Margaret132,Dijkstra132
+Frances133,Dijkstra133
+James134,Garcia134
+Donald135,"Cerf135, Jr."
+Vint136,Liskov136
+Frances137,Lovelace137
+Grace138,Dijkstra138
+Radia139,Torvalds139
+Leslie140,Torvalds140
+Radia141,Liskov141
+Linus142,Berners-Lee142
+Mary143,Cerf143
+Linus144,"Goldwasser144, Jr."
+Vint145,von Neumann145
+Donald146,Hopper146
+Tim147,Lovelace147
+Mary148,Torvalds148
+Alan149,Berners-Lee149
+Edsger150,Ritchie150
+Donald151,Smith151
+Grace152,Perlman152
+Linus153,"Berners-Lee153, Jr."
+Alan154,Smith154
+Radia155,Allen155
+Vint156,Dijkstra156
+Radia157,Cerf157
+Leslie158,Allen158
+Frances159,Hopper159

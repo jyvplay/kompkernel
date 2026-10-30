@@ -150,6 +150,7 @@ import { isoskelesEncode } from './isoskeles';
 import { syzygiaEncode } from './syzygia';
 import { zygonEncode } from './zygon';
 import { bathmosEncode } from './bathmos';
+import { eirmosEncode } from './eirmos';
 import { chironDecode } from './chiron';
 import { daedalusDualEncode } from './daedalus-dual';
 import { lakonikosEncode } from './lakonikos';
@@ -666,6 +667,18 @@ export function codecEntries(): Entry[] {
         const r = taxisEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; rules=${r.rules.length} [${r.rules.map(x => x.kind).join(',')}]; rows=${r.rows}; cols=${r.cols}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
+      },
+    },
+    {
+      key: 'eirmos',
+      label: 'EIRMOS (εἱρμός, a stringing-together/chain; X60: string-template (concatenation) column elision for delimited tables. Every functional dependency the stack states is numeric or a finite map (SYLLOGISMOS arith/scaleK/lookup \u226464, ZYGON weighted sums, KEPHALAION edge sums, SYZYGIA affine twins, ATHROISMOS recurrences, BATHMOS partition windows), and ENTHYMEME/EPAGOGE handle only three fixed prose conventions \u2014 none can state the commonest derived column in everyday exports: full_name = {first_name} + " " + {last_name}, email = lowercase {first} + "." + lowercase {last} + "@acme.com", sortable = {last} + ", " + {first}, username = initial {first} + lowercase {last}. EIRMOS fits a template of 1\u20133 same-row source columns with literal separators and small transforms (verbatim, lowercase, UPPERCASE, capfirst, initial, first2, first3) by bounded segmentation search over seed rows, verified on every row (\u22643 exceptions verbatim); case transforms require ASCII-only cased letters so the reader\u2019s notion of lowercase matches the encoder\u2019s; pure copies (APOGRAPHE) and \u226464-distinct single-source transforms (SYLLOGISMOS lookup) are refused to their owners; \u22644 drops, sources never dropped. The derived values are near-unique per row, so dictionary/grammar parents pay full price \u2014 on the real clients lane the drop is worth 3,850 parent tokens before a 71-token contract. Reader obligation: join the stated pieces per row \u2014 string work, no arithmetic. Reduced text coded by the cheapest measured exact parent (DAEDALUS, AKOLOUTHIA-2, APOGRAPHE); candidate must beat AKOLOUTHIA-2/APOGRAPHE on the source, then the full TAGSTACK + SIBLING-TEMPLATE frontier strictly, byte-exact, else the measured best parent is returned; not a registry-wide tournament. Greedy/search: bounded deterministic segmentation + exhaustive per-row verification; greedy drop admission by true contract+reduced tokens; emission is the measured gate. Prior art: fitting genus is FlashFill-style string-transformation synthesis from examples (Gulwani, POPL 2011; BlinkFill et al.), built to fill cells in place; for fitting a template to elide the column and teach it in-band for one-chat LLM regeneration, honestly none. Time/CPU: CPU-bound; planner caps 400,000 code units, 20,000 rows, 64 columns, 60M work units; inherited parent/frontier encodes dominate with no wrapper-wide cap, so deep-audit-only.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r = eirmosEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; comparison=${r.comparison}; parent=${r.parentCodec}:${r.parentTokens}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; exact=${r.exact}; fullFrontierMeasured=${r.fullFrontierMeasured}` };
       },
     },
     {
