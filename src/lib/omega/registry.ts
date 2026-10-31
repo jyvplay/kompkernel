@@ -139,6 +139,7 @@ import { bifrontEncode } from './bifront';
 import { tagstackEncode } from './tagstack';
 import { repriseEncode } from './reprise';
 import { fotarEncode } from './fotar';
+import { jsonEscapeFoldEncode } from './json-escape-fold';
 import { siblingTemplateEncode } from './sibling-template';
 import { nestEncode } from './nest';
 import { kolumnEncode } from './kolumn';
@@ -626,6 +627,18 @@ export function codecEntries(): Entry[] {
         const r: any = fotarEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; exact=${r.exact}; frontierComplete=${r.frontierComplete}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; fotar=${r.fotar}` };
+      },
+    },
+    {
+      key: 'json-escape-fold',
+      label: 'JSON-ESCAPE-FOLD (X66: in valid JSON strings, fold only lowercase \\u003c, \\u003e, \\u003d, \\u0026, and \\u0027 to their literal ASCII characters, preceded by a collision-free in-band private-use marker. The marker rule restores the exact original escape spelling; all other escapes and source bytes remain unchanged. Compose with the transformed TAGSTACK+SIBLING-TEMPLATE frontier and price the full transform contract plus complete parent message against the same-source current frontier; emit only on exact restoration and a strict token win, otherwise return the measured parent. Bounded to 80,000 UTF-16 code units; scanner is O(n), JSON.parse validation is O(n), and inherited parent/frontier runs dominate with no wrapper-wide time cap. This is a narrow syntax transform, not a global novelty claim. Native LLM decoding is unverified.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r: any = jsonEscapeFoldEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `${r.notes}; exact=${r.exact}; frontierComplete=${r.frontierComplete}; escapes=${r.replacements}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; applied=${r.jsonEscapeFold}` };
       },
     },
     {

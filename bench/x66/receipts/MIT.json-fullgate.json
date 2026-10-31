@@ -1,0 +1,44 @@
+{
+  "run": {
+    "fixture": "bench/z45/canon/spdx/MIT.json",
+    "encoding": "o200k_base",
+    "OMEGA_DET": null,
+    "node": "v22.22.3",
+    "startedAt": "2026-10-31T15:14:28.480Z",
+    "cost": "direct o200k_base count of each complete in-band transform-contract + TAGSTACK/SIBLING message; same-source TAGSTACK runtime parents plus SIBLING-TEMPLATE; not registry-wide"
+  },
+  "source": {
+    "sha256": "0c2b3c87a154a4aaac6bc6a735dd454dc29d9a78c23a85deedb080e0c65de1f8",
+    "chars": 8433,
+    "rawTokens": 2498
+  },
+  "plan": {
+    "exact": true,
+    "replacements": 262,
+    "byEscape": {
+      "\\u003c": 98,
+      "\\u003e": 98,
+      "\\u003d": 58,
+      "\\u0026": 8
+    },
+    "markerCodePoint": 57344,
+    "transformedChars": 7385,
+    "transformedRawTokens": 2429,
+    "directCompleteTransformMessageTokens": 2552
+  },
+  "result": {
+    "applied": false,
+    "exact": true,
+    "frontierComplete": true,
+    "decodedEqualsSource": true,
+    "independentlyEnvelopeRestoredEqualsSource": true,
+    "messageTokens": 949,
+    "sourceFrontierTokens": 949,
+    "sourceWinner": "synkrisis",
+    "candidateTokens": 1053,
+    "candidateExact": true,
+    "replacements": 262,
+    "elapsedMs": 323693,
+    "notes": "candidate M=1053 >= source frontier M=949; fallback=synkrisis:949"
+  }
+}
