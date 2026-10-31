@@ -37,7 +37,7 @@ All other code units are copied unchanged. Uppercase hex, quote/backslash/contro
 - `npx tsx bench/x66/json-escape-fold-redteam.ts`: passed (`checks: 11`). Cases cover all five escapes, untouched literal punctuation, uppercase and unrelated Unicode escapes, quote/backslash/control escapes, nested JSON, a pre-existing BMP private-use scalar, full BMP-marker-pool exhaustion / supplementary marker, serialized-envelope parsing, exact inverse with explicit UTF-8 `Buffer.compare`, malformed header/target, invalid JSON, and identity refusal.
 - `npx tsx bench/x66/json-escape-fold-twin-vectors.ts` plus `python3 bench/x66/json-escape-fold-python-twin.py`: independent stdlib-Python transform reader restored the MIT fixture's 8,433 UTF-8 bytes from only the serialized contract header plus transformed text (`byteExact: true`, SHA-256 matched). The Python reader implements the marker rule separately from TypeScript. It does not decode TAGSTACK's parent message; that decoded parent text is its input.
 - `npx tsc --noEmit`: passed after implementation; `npm run build` (Vite production build) also passed.
-- The full-gate runner checks exact candidate-message token accounting, source equality, and transform-envelope inversion from the serialized header plus decoded child text. No native-LLM decoder test is claimed.
+- The full-gate runner checks exact candidate-message token accounting, source equality, transform-envelope inversion from the serialized header plus decoded child text, and `sourceBytesEqual` plus `independentEnvelopeSourceBytesEqual` using UTF-8 `Buffer.compare`. Both final receipts have both byte flags true. No native-LLM decoder test is claimed.
 
 ## Complete-message measurements (o200k_base)
 
@@ -45,8 +45,8 @@ Runs used Node v22.22.3, unset `OMEGA_DET`, and a 1,800-second shell timeout per
 
 | Fixture / SHA-256 | Bytes/chars | Raw tokens | Supported escapes | Source frontier winner / M | Exact folded candidate M | Candidate minus frontier | Decision / elapsed |
 |---|---:|---:|---:|---:|---:|---:|---|
-| `bench/z45/canon/spdx/MIT.json` / `0c2b3c87a154a4aaac6bc6a735dd454dc29d9a78c23a85deedb080e0c65de1f8` | 8,433 chars | 2,498 | 262 (98 `<`, 98 `>`, 58 `=`, 8 `&`) | SYNKRISIS / **949** | **1,053** | **+104** | exact reject; 323,693 ms |
-| `bench/z45/canon/spdx/Apache-2.0.json` / `b0f85bc041014e63212f71924bf154e0fae058c03356b3185b092028a74811b4` | 43,569 chars | 10,090 | 585 (228 `<`, 228 `>`, 82 `=`, 45 `&`, 2 `'`) | SYNKRISIS / **3,010** | **3,142** | **+132** | exact reject; 747,369 ms |
+| `bench/z45/canon/spdx/MIT.json` / `0c2b3c87a154a4aaac6bc6a735dd454dc29d9a78c23a85deedb080e0c65de1f8` | 8,433 chars | 2,498 | 262 (98 `<`, 98 `>`, 58 `=`, 8 `&`) | SYNKRISIS / **949** | **1,052** | **+103** | exact reject; 347,487 ms |
+| `bench/z45/canon/spdx/Apache-2.0.json` / `b0f85bc041014e63212f71924bf154e0fae058c03356b3185b092028a74811b4` | 43,569 chars | 10,090 | 585 (228 `<`, 228 `>`, 82 `=`, 45 `&`, 2 `'`) | SYNKRISIS / **3,010** | **3,142** | **+132** | exact reject; 542,271 ms |
 
 Both transformed payloads and their serialized-envelope inverses restore the source exactly. On MIT, transformed raw payload tokens fall from 2,498 to 2,429; the contract-plus-transformed-text preflight is 2,552. On Apache, transformed raw payload tokens fall from 10,090 to 10,008; that preflight is 10,131. These preflights do **not** decide the result. In each fixture the complete stack compresses the original much more effectively than it compresses the transformed body plus new rule, so the full candidate loses.
 
@@ -66,7 +66,7 @@ Ran `npx tsx bench/x61/frontier-repeat.ts` unchanged, with:
 
 | Avenue | Concrete evidence / overlap | Falsification test and status |
 |---|---|---|
-| **1. Exact JSON Unicode-escape folding** | New X66 module and serialized marker contract. JSON has a real spelling/value ambiguity, so each rewritten occurrence must carry provenance. | Full candidate must beat the complete current frontier, not merely the raw text. Falsified as a Pareto candidate on MIT (+104) and Apache (+132); exactness passed. |
+| **1. Exact JSON Unicode-escape folding** | New X66 module and serialized marker contract. JSON has a real spelling/value ambiguity, so each rewritten occurrence must carry provenance. | Full candidate must beat the complete current frontier, not merely the raw text. Falsified as a Pareto candidate on MIT (+103) and Apache (+132); exactness passed. |
 | **2. Repeated tokenizer-surface dictionary aliases** | X65 `src/lib/omega/fotar.ts`; close to VERITAS/PHALANX dictionary mechanisms. | FOTAR's exact composed OpenStack candidate was 1,080 tokens against a completed 885-token source frontier: rejected by 195. This is X65 evidence, not rerun in X66; see `bench/x65/REPORT.md`. |
 | **3. Log-template and local-delta transforms** | Repository already has `typos.ts` and log/record transforms. Recent external comparators include LogLite (VLDB 2025) and LogFold (ICSE 2026), which use length-window similarity / structured-token patterns and type-aware encoding. | A new local-delta/XOR candidate would need byte-exact restoration and a complete one-message gate on `bench/holdout-ops/openstack-loghub-26.log`. Not implemented or newly run in X66; the repo overlap and nearby papers block a novelty claim until that differential mechanism is isolated. |
 | **4. Record/row reordering and permutation coding** | Existing `anastrophe.ts`, `valence.ts`, `tensor.ts`, and TYPOS address permutation, rank, or de-interleaving; SortComp (DCC 2022) explicitly stores a sorted table plus permutation tables. Sorting stacktrace lines would change order unless the permutation is transmitted. | A credible test must include the entire in-band permutation cost and exact restoration, then beat the current fixture frontier. Not freshly run: the mechanism substantially overlaps repository code and published row-sort schemes; the 210-token `metrics.tsv` frontier remains the local measured counterexample to a superficial claim. |
@@ -104,7 +104,7 @@ This is a source-and-scope audit, not an independent mathematical proof review. 
 
 New local leader entries: on the X66 MIT JSON and Apache-2.0 JSON full-gate fixtures, SYNKRISIS leads the measured TAGSTACK runtime-parent-plus-SIBLING scope at 949 and 3,010 tokens, respectively. X66 is exact but rejected and does not change either leader. These are not registry-wide or cross-fixture rankings.
 
-Wall time was 323,693 ms for MIT and 747,369 ms for Apache. Each shell invocation had an 1,800-second timeout; there was no separate CPU quota or wrapper-wide parent-search timeout. The local transform has an 80,000 UTF-16-unit cap and linear JSON scan/transform plus bounded marker-pool selection; the parent tournament is the dominant cost. The X61 repeat took 91,210 ms. Timings are individual observations, not speedup evidence.
+Latest full-gate wall time was 347,487 ms for MIT and 542,271 ms for Apache. Each shell invocation had an 1,800-second timeout; there was no separate CPU quota or wrapper-wide parent-search timeout. The local transform has an 80,000 UTF-16-unit cap and linear JSON scan/transform plus bounded marker-pool selection; the parent tournament is the dominant cost. Earlier full-gate timings varied under the unset production-time frontier behavior; this is run variability, not a speed claim. The X61 repeat took 91,210 ms.
 
 ## Verdict
 

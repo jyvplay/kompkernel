@@ -4,7 +4,7 @@
     "encoding": "o200k_base",
     "OMEGA_DET": null,
     "node": "v22.22.3",
-    "startedAt": "2026-10-31T15:27:01.717Z",
+    "startedAt": "2026-10-31T15:46:32.947Z",
     "cost": "direct o200k_base count of each complete in-band transform-contract + TAGSTACK/SIBLING message; same-source TAGSTACK runtime parents plus SIBLING-TEMPLATE; not registry-wide"
   },
   "source": {
@@ -32,14 +32,16 @@
     "exact": true,
     "frontierComplete": true,
     "decodedEqualsSource": true,
+    "sourceBytesEqual": true,
     "independentlyEnvelopeRestoredEqualsSource": true,
+    "independentEnvelopeSourceBytesEqual": true,
     "messageTokens": 3010,
     "sourceFrontierTokens": 3010,
     "sourceWinner": "synkrisis",
     "candidateTokens": 3142,
     "candidateExact": true,
     "replacements": 585,
-    "elapsedMs": 747369,
+    "elapsedMs": 542271,
     "notes": "candidate M=3142 >= source frontier M=3010; fallback=synkrisis:3010"
   }
 }
