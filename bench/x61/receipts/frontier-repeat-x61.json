@@ -29,7 +29,7 @@
     "tagstack": {
       "messageTokens": 210,
       "applied": false,
-      "ms": 113298
+      "ms": 91209
     },
     "sibling": {
       "messageTokens": 210,
@@ -38,6 +38,6 @@
     },
     "repeatMatchesPreviousGate": true,
     "previousGateTokens": 210,
-    "totalMs": 113300
+    "totalMs": 91210
   }
 }
