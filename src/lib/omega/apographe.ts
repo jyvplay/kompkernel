@@ -177,6 +177,7 @@ import {
 // asked it to win, so the gate runs against the codec the repo actually ships.
 import { ouraEncode, ouraDecode } from './oura';
 import { workEpoch, workBudgetFor } from './workmeter';
+import { engramMemo, engramOptionsKey } from './engram';
 import { chironDecode } from './chiron';
 
 /** Line ending kept verbatim, so the transform never has to re-join. */
@@ -1059,7 +1060,11 @@ export function apographeEncode(
   enc: EncodingName = 'o200k_base',
   opts: ApographeOptions = {},
 ): ApographeResult {
-  return workEpoch(workBudgetFor(text.length), () => apographeEncodeInner(text, enc, opts), text.length);
+  // X68: sub-encode memo inside the work epoch (engram.ts), same soundness rule
+  // as DAEDALUS: a hit replays the counted work, never skips it.
+  return workEpoch(workBudgetFor(text.length),
+    () => engramMemo('apographe', enc, text, engramOptionsKey(opts),
+      () => apographeEncodeInner(text, enc, opts)), text.length);
 }
 
 /**

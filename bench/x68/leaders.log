@@ -1,0 +1,24 @@
+{"f":"bench/holdout-work/llm-answer.md","chars":2542,"raw":733,"frontier":674,"winner":"synkrisis","savingPct":8,"costs":{"synkrisis":674,"kanon":1374,"akolouthia2":707,"apographe":674,"diastema":674},"sibling":674,"siblingWins":false,"exact":true,"ms":12610}
+{"f":"bench/holdout-work/bibliography.txt","chars":2759,"raw":896,"frontier":672,"winner":"synkrisis","savingPct":25,"costs":{"synkrisis":672,"kanon":1382,"akolouthia2":709,"apographe":672,"diastema":672},"sibling":672,"siblingWins":false,"exact":true,"ms":15469}
+{"f":"bench/holdout-work/email-thread.txt","chars":2126,"raw":629,"frontier":488,"winner":"synkrisis","savingPct":22.4,"costs":{"synkrisis":488,"kanon":1009,"akolouthia2":525,"apographe":488,"hemera":525,"diastema":488},"sibling":488,"siblingWins":false,"exact":true,"ms":10769}
+{"f":"bench/holdout-tbl/kubectl-get-pods.txt","chars":2649,"raw":1006,"frontier":332,"winner":"akolouthia2","savingPct":67,"costs":{"synkrisis":340,"kanon":352,"akolouthia2":332,"apographe":340,"diastema":340},"sibling":332,"siblingWins":false,"exact":true,"ms":47508}
+{"f":"bench/holdout-ops/find-listing.txt","chars":11789,"raw":3997,"frontier":1148,"winner":"diastema","savingPct":71.3,"costs":{"synkrisis":1271,"bifront":1271,"kanon":2612,"akolouthia2":1326,"apographe":1271,"diastema":1148},"sibling":1148,"siblingWins":false,"exact":true,"ms":71879}
+{"f":"bench/holdout-ops/node-stacktraces.txt","chars":1848,"raw":568,"frontier":300,"winner":"synkrisis","savingPct":47.2,"costs":{"synkrisis":300,"kanon":637,"akolouthia2":339,"apographe":300,"diastema":300},"sibling":300,"siblingWins":false,"exact":true,"ms":20123}
+{"f":"bench/holdout-ops/npm-ls.txt","chars":6688,"raw":2747,"frontier":923,"winner":"synkrisis","savingPct":66.4,"costs":{"synkrisis":923,"kanon":1926,"akolouthia2":983,"apographe":923,"diastema":923},"sibling":923,"siblingWins":false,"exact":true,"ms":153631}
+node:fs:440
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open 'bench/holdout-ops/ls-l-real.txt'
+    at Module.readFileSync (node:fs:440:20)
+    at file:///home/user/kompkernel/bench/x68/leaders.mjs:26416:16
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'bench/holdout-ops/ls-l-real.txt'
+}
+
+Node.js v22.22.3

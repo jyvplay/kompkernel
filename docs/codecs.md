@@ -4650,3 +4650,28 @@ Both gated candidates restore byte-exactly at both layers and both fail the comp
 On structured lanes the frontier sits 2–3× below the `2×(xz+2)` reference because a frontier token buys ~3.2 characters while an emitted xz byte costs ~2 tokens. On prose the frontier is at identity (622 vs 526 raw) — prose has no repetition to substitute, so there is no mechanical win there, only the contract floor.
 
 **Verdict:** one honest, verified speed win (1.601×, byte-identical message) and one exact, registered, self-gating codec that is a **measured negative** on both lanes it was gated on. No Pareto compression gain is claimed. Native-LLM decoding: one worked instance was decoded in-chat from the message alone (20 records, 522 → 317 tokens, reconstruction equal to the source, printed and asserted by `bench/x67/worked-example.ts`); no external model was called. Full record: [`bench/x67/REPORT.md`](../bench/x67/REPORT.md).
+
+## X68 — ENGRAMMA (`engram`, `engramma`): a time codec, and the measured reason the size axis did not move
+
+**Mechanism.** The frontier's parents re-encode the same intermediate text within a single call. ENGRAMMA memoises those sub-encodes on the key `codec \0 encoding \0 serialise(sorted(options)) \0 text`, and on a hit it returns the stored result *and replays the counted work* the original search spent, so every later budget decision in the deterministic epoch is unchanged. Measured hit rate: 41 hits in 78 sub-encode attempts on `bench/holdout-tbl/psql-output.txt`; 53 in 215 on `bench/holdout-x40/metrics.tsv`. Bounds: 256 entries, 64 KB source cap, 2 000 work-unit minimum, 4 MB retained key characters, `OMEGA_ENGRAM=0` kill switch.
+
+**What is emitted.** TAGSTACK's complete message, byte-for-byte. Contract **0 tokens**, wire unchanged, decoder unchanged. This is Pareto dominance on the (tokens, wall clock) plane and nothing else.
+
+**Measured (`o200k_base`, unset `OMEGA_DET`, Node v22.22.3, 2-core sandbox), cold process — one fresh `node` per arm:**
+
+| lane | chars | raw | memo off | memo on | speed-up | frontier | leader | message SHA-256 |
+|---|---|---|---|---|---|---|---|---|
+| `holdout-tbl/psql-output.txt` | 1 578 | 675 | 17 284 ms | 14 906 ms | 1.16× | 244 | `metron` | `2e21ee7f…fb7022` |
+| `holdout-x40/metrics.tsv` | 1 203 | 811 | 72 563 ms | 64 780 ms | 1.12× | 210 | `akolouthia2` | `f0e0ffb9…864628` |
+| `holdout-work/kb-article.txt` | 3 385 | 656 | 6 203 ms | 4 417 ms | 1.40× | 622 | `synkrisis` | `c1c20fb4…a558665` |
+| `holdout-work/unified-diff.patch` | 1 487 | 578 | 6 679 ms | 6 439 ms | 1.04× | 419 | `synkrisis` | `d9de4a05…7073d9` |
+
+**Warm caches** (discarded pass in both arms): 7 267 → 5 229 ms (1.39×) on `psql-output`; 457 → 212 ms (2.16×) on `kb-article`; 496 → 195 ms (2.54×) on `unified-diff`. Every arm decoded byte-exactly and produced the same message digest.
+
+**The ratio trap, recorded.** The first in-process A/B reported 22.0×–26.9×. Those measured the shared pure tokenizer caches warming between arms, not the memo; the honest numbers are the cold-process and warm-cache pairs above. In-process runs are retained only for the byte-identity claim.
+
+**Why 2.4× is out of reach for this mechanism.** With the memo off, `psql-output` costs 17.3 s cold and 7.3 s with warm caches. The 10-second gap is tokenizer first-touch on genuinely distinct candidate texts, which a memo keyed on exact text can never serve. The next speed lever is candidate-count reduction, not more memoisation.
+
+**Contracts as the only remaining token lever (measured).** Complete winning messages on `psql-output` decompose as `metron` 73 + 171 = 244 (contract 29.9 %), `synkrisis` 64 + 225 = 289, `diastema` 62 + 258 = 320; on `metrics.tsv`, `akolouthia2` is 11 + 199 = 210 (5.2 %). The contracts are already feature-assembled (11 tokens when no feature is used) and telegraphic to the point of ungrammaticality, so a conservative rewrite is worth only 11–19 tokens — and it cannot be claimed until an independent from-spec reader decodes the new prose. That reader is test 3 in `bench/x68/REPORT.md` §9.
+
+**Verdict.** One honest, verified speed win (1.04×–1.40× cold, 1.39×–2.54× warm, byte-identical message, work meter unchanged). **No compression gain is claimed and none was found this turn**; the negative space (17 result shapes with their detectors) and the 8-mechanism portfolio are in [`bench/x68/REPORT.md`](../bench/x68/REPORT.md).

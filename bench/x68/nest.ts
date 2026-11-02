@@ -1,0 +1,13 @@
+import * as fs from 'node:fs';
+import { tagstackEncode } from '../../src/lib/omega/tagstack';
+import { __DAE_STATS } from '../../src/lib/omega/daedalus';
+const enc: any = 'o200k_base';
+const f = process.argv[2];
+const t0 = Date.now();
+const r = tagstackEncode(fs.readFileSync(f, 'utf8'), enc);
+const ms = Date.now() - t0;
+const calls = __DAE_STATS.calls;
+const distinct = __DAE_STATS.texts.size;
+let dupTop: Array<[string, number]> = [...__DAE_STATS.texts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 12);
+console.log(JSON.stringify({ f, ms, frontier: Math.min(...Object.values(r.frontierCosts).map(Number)), winner: r.parentCodec, daedalusCalls: calls, distinctTexts: distinct, daedalusChars: __DAE_STATS.chars }, null, 1));
+console.log(dupTop.map(([k, v]) => v + ' x ' + k.slice(0, 80)).join('\n'));

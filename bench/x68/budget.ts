@@ -1,0 +1,13 @@
+import * as fs from 'node:fs';
+import * as crypto from 'node:crypto';
+import { tagstackEncode } from '../../src/lib/omega/tagstack';
+import { countTokens } from '../../src/lib/omega/bpe';
+import { __DAE_STATS } from '../../src/lib/omega/daedalus';
+const enc: any = 'o200k_base';
+const f = process.argv[2];
+const t = fs.readFileSync(f, 'utf8');
+const label = process.env.LABEL ?? 'run';
+const t0 = Date.now();
+const r = tagstackEncode(t, enc);
+const ms = Date.now() - t0;
+console.log(JSON.stringify({ label, f, ms, raw: countTokens(t, enc), costs: r.frontierCosts, min: Math.min(...Object.values(r.frontierCosts).map(Number)), winner: r.parentCodec, sha: crypto.createHash('sha256').update(r.message, 'utf8').digest('hex').slice(0, 16), daedalusCalls: __DAE_STATS.calls, ok: r.decoded === t }));

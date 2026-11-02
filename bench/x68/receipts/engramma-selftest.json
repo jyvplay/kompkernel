@@ -1,0 +1,59 @@
+{
+  "encoding": "o200k_base",
+  "node": "v22.22.3",
+  "selfTestFailures": [],
+  "rows": [
+    {
+      "f": "bench/holdout-tbl/psql-output.txt",
+      "identical": true,
+      "memoOffMs": 15993,
+      "memoOnMs": 5036,
+      "ratio": 3.176,
+      "messageDigest": "0237516bf206ca26",
+      "frontierTokenEquals": true,
+      "frontier": 244,
+      "winner": "metron",
+      "decodedEqualsSource": true,
+      "siblingIdentical": true,
+      "memoStats": {
+        "hits": 29,
+        "misses": 29,
+        "stores": 28,
+        "cheapSkips": 1,
+        "tooBigSkips": 0,
+        "replayedWork": 803383,
+        "replayedChiron": 9580324,
+        "evictions": 0
+      },
+      "contractTokens": 0,
+      "messageTokens": 244,
+      "exact": true
+    },
+    {
+      "f": "bench/holdout-work/kb-article.txt",
+      "identical": true,
+      "memoOffMs": 4618,
+      "memoOnMs": 223,
+      "ratio": 20.709,
+      "messageDigest": "3b69e0154aafbdb2",
+      "frontierTokenEquals": true,
+      "frontier": 622,
+      "winner": "synkrisis",
+      "decodedEqualsSource": true,
+      "siblingIdentical": true,
+      "memoStats": {
+        "hits": 3,
+        "misses": 2,
+        "stores": 2,
+        "cheapSkips": 0,
+        "tooBigSkips": 0,
+        "replayedWork": 244410,
+        "replayedChiron": 5695959,
+        "evictions": 0
+      },
+      "contractTokens": 0,
+      "messageTokens": 622,
+      "exact": true
+    }
+  ]
+}

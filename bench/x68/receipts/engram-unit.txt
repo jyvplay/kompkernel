@@ -1,0 +1,17 @@
+ok   daedalus: first call equals memo-off message
+ok   daedalus: hit equals memo-off message
+ok   daedalus: exact decode
+ok   apographe: first call equals memo-off message
+ok   apographe: repeat call equals memo-off message
+ok   apographe exact decode
+ok   the DAEDALUS hit was actually taken
+ok   work meter identical after 3 calls (memo off vs on)
+ok   chiron meter identical after 3 calls (memo off vs on)
+ok   the memo actually saved work (off > on is impossible; equal is the invariant)
+ok   options key ignores key order
+ok   options key distinguishes budget
+ok   empty options key is empty
+ok   OMEGA_ENGRAM=0 disables the memo
+ok   suffix change is a different key
+
+15 passed, 0 failed
