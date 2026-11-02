@@ -1,3 +1,4 @@
+import { diorthosiEncode } from './diorthosi';
 /**
  * src/lib/omega/registry.ts
  * =============================================================================
@@ -618,6 +619,12 @@ export function codecEntries(): Entry[] {
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; parent=${r.parentCodec}:${r.parentTokens}; syn=${r.synkrisisParentTokens}; mode=${r.mode ?? '-'}; pairs=${r.pairs}; exact=${r.exact}; frontierComplete=${r.frontierComplete}` };
       },
+    },
+    {
+      key: 'diorthosi',
+      label: 'DIORTHOSI (X69: independently patch lines or line substrings of a base document in a literal LF---LF separated series of equal-line-count versions; full in-band JSON contract. Exact reconstruction and strict complete-message TAGSTACK+SIBLING gate. Per-line token-greedy choice between whole-line and prefix/suffix patch; no global search; bounded source 80,000 UTF-16 code units and 128 versions. Time: linear scan plus tokenization and inherited CPU-bound frontier; no whole-call time cap. Prior art: version-control delta encoding; this is a narrow application, not a new primitive. Native LLM reliability unverified.)',
+      family: 'exact', fidelity: 'exact', deep: true,
+      run: async (t, enc) => { const r = diorthosiEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `applied=${r.applied}; candidate=${r.candidateTokens}; parent=${r.parentCodec}:${r.parentTokens}` }; },
     },
     {
       key: 'probole',

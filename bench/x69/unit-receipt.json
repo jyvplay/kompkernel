@@ -1,0 +1,6 @@
+{
+  "seed": "0x96523",
+  "trials": 1000,
+  "malformedCases": 4,
+  "result": "pass"
+}
