@@ -1,0 +1,378 @@
+{
+  "encoding": "o200k_base",
+  "node": "v22.22.3",
+  "OMEGA_DET": null,
+  "rows": [
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "chars": 1578,
+      "rawTokens": 675,
+      "messageChars": 690,
+      "messageTokens": 244,
+      "messageSha256": "2e21ee7ff9fd3147cf193861504320b5deb9d005e6474ff7c313f8932bfb7022",
+      "winner": "metron",
+      "frontierCosts": {
+        "synkrisis": 289,
+        "kanon": 268,
+        "akolouthia2": 355,
+        "apographe": 289,
+        "metron": 244,
+        "hemera": 391,
+        "diastema": 320
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "current-frontier-parent",
+      "ms": 10044,
+      "sibling": {
+        "tokens": 244,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "chars": 3385,
+      "rawTokens": 656,
+      "messageChars": 2822,
+      "messageTokens": 622,
+      "messageSha256": "c1c20fb4bb844d559cf3a3a83dbe792169b3dd42837634d2915616fe7a558665",
+      "winner": "synkrisis",
+      "frontierCosts": {
+        "synkrisis": 622,
+        "kanon": 1262,
+        "akolouthia2": 651,
+        "apographe": 622,
+        "diastema": 622
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "synkrisis-parent",
+      "ms": 2405,
+      "sibling": {
+        "tokens": 622,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "chars": 2126,
+      "rawTokens": 629,
+      "messageChars": 1707,
+      "messageTokens": 488,
+      "messageSha256": "56397449536e791c44ca78186afd97509dbff7c841f0d8c672fab1083187fd58",
+      "winner": "synkrisis",
+      "frontierCosts": {
+        "synkrisis": 488,
+        "kanon": 1009,
+        "akolouthia2": 525,
+        "apographe": 488,
+        "hemera": 525,
+        "diastema": 488
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "synkrisis-parent",
+      "ms": 7287,
+      "sibling": {
+        "tokens": 488,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout-work/meeting-transcript.txt",
+      "chars": 1746,
+      "rawTokens": 472,
+      "messageChars": 1549,
+      "messageTokens": 385,
+      "messageSha256": "ee4c9edf562f607388448852bc136d811e22f875a9100dcf263bd046514aef3b",
+      "winner": "synkrisis",
+      "frontierCosts": {
+        "synkrisis": 385,
+        "kanon": 801,
+        "akolouthia2": 420,
+        "apographe": 385,
+        "diastema": 385
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "synkrisis-parent",
+      "ms": 3192,
+      "sibling": {
+        "tokens": 385,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout-work/bibliography.txt",
+      "chars": 2759,
+      "rawTokens": 896,
+      "messageChars": 2211,
+      "messageTokens": 671,
+      "messageSha256": "9b52f644c3bcd3ace4ad04834a387fc9eb8d6ab0e21beb158028c8ebf65c1247",
+      "winner": "synkrisis",
+      "frontierCosts": {
+        "synkrisis": 671,
+        "kanon": 1382,
+        "akolouthia2": 709,
+        "apographe": 671,
+        "diastema": 671
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "synkrisis-parent",
+      "ms": 9924,
+      "sibling": {
+        "tokens": 671,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "chars": 1487,
+      "rawTokens": 578,
+      "messageChars": 1095,
+      "messageTokens": 419,
+      "messageSha256": "d9de4a0505c4d90f3606560b1500790c79d4515ffbcfc4f0093ad3161f7073d9",
+      "winner": "synkrisis",
+      "frontierCosts": {
+        "synkrisis": 419,
+        "kanon": 910,
+        "akolouthia2": 475,
+        "apographe": 419,
+        "diastema": 419
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "synkrisis-parent",
+      "ms": 3156,
+      "sibling": {
+        "tokens": 419,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "chars": 2542,
+      "rawTokens": 733,
+      "messageChars": 2344,
+      "messageTokens": 674,
+      "messageSha256": "7cc33382bd891afe1ed7e1a48bf9fe1cc15d4e37a9be1dd8ef51ebf91557f682",
+      "winner": "synkrisis",
+      "frontierCosts": {
+        "synkrisis": 674,
+        "kanon": 1374,
+        "akolouthia2": 707,
+        "apographe": 674,
+        "diastema": 674
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "synkrisis-parent",
+      "ms": 7815,
+      "sibling": {
+        "tokens": 674,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "chars": 1203,
+      "rawTokens": 811,
+      "messageChars": 527,
+      "messageTokens": 210,
+      "messageSha256": "f0e0ffb9543f3b2f7032067ed73d6fa3de84745639647fafdc109bdca1864628",
+      "winner": "akolouthia2",
+      "frontierCosts": {
+        "synkrisis": 237,
+        "kanon": 236,
+        "akolouthia2": 210,
+        "apographe": 237,
+        "metron": 237,
+        "diastema": 237
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "current-frontier-parent",
+      "ms": 44690,
+      "sibling": {
+        "tokens": 210,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "chars": 993,
+      "rawTokens": 582,
+      "messageChars": 368,
+      "messageTokens": 133,
+      "messageSha256": "25947a37cc10f3b8ce9a9ab9e62e09072ac8212b67fba3e01f67c2a9f0fad8fb",
+      "winner": "diastema",
+      "frontierCosts": {
+        "synkrisis": 208,
+        "kanon": 190,
+        "akolouthia2": 203,
+        "apographe": 208,
+        "metron": 213,
+        "hemera": 263,
+        "diastema": 133
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "current-frontier-parent",
+      "ms": 11515,
+      "sibling": {
+        "tokens": 133,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "chars": 2649,
+      "rawTokens": 1006,
+      "messageChars": 898,
+      "messageTokens": 326,
+      "messageSha256": "4a5d5a515acaa4e0caee03d7f63cacc8dd34562cb4a33c1ae5d5ac2aeef1a2a2",
+      "winner": "akolouthia2",
+      "frontierCosts": {
+        "synkrisis": 340,
+        "kanon": 352,
+        "akolouthia2": 326,
+        "apographe": 340,
+        "diastema": 340
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "current-frontier-parent",
+      "ms": 35298,
+      "sibling": {
+        "tokens": 326,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "chars": 635,
+      "rawTokens": 330,
+      "messageChars": 483,
+      "messageTokens": 176,
+      "messageSha256": "962e2b166bda3627bf5d8425f5fd1d2673cdfa55d24e223111da788726b69982",
+      "winner": "synkrisis",
+      "frontierCosts": {
+        "synkrisis": 176,
+        "kanon": 219,
+        "akolouthia2": 228,
+        "apographe": 176,
+        "metron": 176,
+        "diastema": 176
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "synkrisis-parent",
+      "ms": 6882,
+      "sibling": {
+        "tokens": 176,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "chars": 939,
+      "rawTokens": 570,
+      "messageChars": 490,
+      "messageTokens": 171,
+      "messageSha256": "4f0ee28dff1c4e55d5973b63e41c8c28e799d6914c8bcf4454dd57dd79eae905",
+      "winner": "akolouthia2",
+      "frontierCosts": {
+        "synkrisis": 250,
+        "kanon": 237,
+        "akolouthia2": 171,
+        "apographe": 250,
+        "diastema": 250
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "current-frontier-parent",
+      "ms": 3115,
+      "sibling": {
+        "tokens": 171,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "chars": 6000,
+      "rawTokens": 1422,
+      "messageChars": 3326,
+      "messageTokens": 984,
+      "messageSha256": "994aacaad23b50539ae6d3074c9d18df17eb6d506844ff640717152b70637ff7",
+      "winner": "synkrisis",
+      "frontierCosts": {
+        "synkrisis": 984,
+        "kanon": 2015,
+        "akolouthia2": 1028,
+        "apographe": 984,
+        "diastema": 984
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "synkrisis-parent",
+      "ms": 25237,
+      "sibling": {
+        "tokens": 984,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "chars": 3620,
+      "rawTokens": 1152,
+      "messageChars": 1972,
+      "messageTokens": 681,
+      "messageSha256": "7a473eae1b6cf707ca216aeac969a79981e8c55a8dd03a19b433428bad9f437d",
+      "winner": "synkrisis",
+      "frontierCosts": {
+        "synkrisis": 681,
+        "kanon": 1446,
+        "akolouthia2": 743,
+        "apographe": 681,
+        "diastema": 681
+      },
+      "frontierComplete": true,
+      "exact": true,
+      "arm": "synkrisis-parent",
+      "ms": 20076,
+      "sibling": {
+        "tokens": 681,
+        "codec": "sibling-template",
+        "exact": true,
+        "delta": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+ "lane": "bench/holdout-tbl/kubectl-get-pods.txt",
+ "exact": true,
+ "gotChars": 2649,
+ "wantChars": 2649,
+ "firstDiffAt": -1,
+ "messageTokens": null
+}

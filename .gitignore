@@ -12,3 +12,4 @@ node_modules/
 npm-debug.log*
 out/
 bench/*/airport-fullgate.mjs
+bench/x70/*.mjs

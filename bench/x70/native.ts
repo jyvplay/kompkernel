@@ -1,0 +1,10 @@
+import * as fs from 'node:fs';
+import { countTokens } from '../../src/lib/omega/bpe';
+import { brachysEncode } from '../../src/lib/omega/brachys';
+const enc: any = 'o200k_base';
+const p = process.argv[2];
+const text = fs.readFileSync(p, 'utf8');
+const r: any = brachysEncode(text, enc);
+console.log('=== lane', p, 'source', text.length, 'chars', countTokens(text, enc), 'tok; frontier', r.frontierFloor);
+console.log('=== complete message as printed to the reader (' + r.messageTokens + ' tok) ===');
+console.log(r.message);

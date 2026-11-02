@@ -138,6 +138,7 @@ import { archetyponEncode } from './archetypon';
 import { synkrisisEncode } from './synkrisis';
 import { bifrontEncode } from './bifront';
 import { tagstackEncode } from './tagstack';
+import { brachysEncode, brachysDecodeMessage } from './brachys';
 import { repriseEncode } from './reprise';
 import { fotarEncode } from './fotar';
 import { engrammaEncode } from './engramma';
@@ -1496,6 +1497,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'kanon', label: '⚖ KANON (HYLE table-fold gate → DAEDALUS on the folded body; AMPHORA otherwise: generated-column + aligned-table folds, no indentation folds, fixed arm)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = kanonEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}; gate=${r.gate}` }; },
+    },
+    {
+      key: 'brachys', label: 'β BRACHYS (X70: contract algebra over the HYLE table fold. The wire is HYLE\'s table directives, unchanged; what changes is that the decoder instruction is one closed algebra whose generator families are PARAMETERS of one arithmetic ({A+B}, mM, zW, cX, #p:v,.., @date) instead of one English clause per family, and each clause is emitted only when the wire uses it. Measured on this checkout: instruction 127 -> 75 tok on psql-output, 211 -> 139 on kubectl-get-pods, 145 -> 91 on metrics.tsv, which is what flips the gate. The body arm (literal tape vs CHIRON tape) is chosen by measured complete-message tokens. BRACHYS ships its own reader, written from the contract prose and NOT from HYLE\'s decoder, differentially tested against hyleDecode (2,147 agreements, 0 disagreements, 1,744 fail-closed refusals over 4,000 mutated wires; 1,417/1,417 constructed tables exact under both readers). Emits only when its own reader reproduces the source code unit for code unit AND the complete message is strictly below tagstackEncode\'s complete message measured in the same process; otherwise returns the frontier message unchanged, so no lane can get worse. Not greedy: minimum over two built body arms plus the frontier arm. Prior art: HYLE/KANON (the fold), ALP (scaled-integer decimal columns, PACMMOD 2024) and Virtual/K-regression (correlation-aware column encoding, arXiv:2410.14066).)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = brachysEncode(t, enc); const decoded = brachysDecodeMessage(r.message); return { output: r.message, decoded, oneChat: r.messageTokens, note: `${r.notes}; winner=${r.brachysWinner}; arm=${r.brachysArm ?? '-'}; contract=${r.contractTokens}+wire=${r.wireTokens}; fromSpecReader=${decoded === t}; floor=${r.frontierFloor}` }; },
     },
     {
       key: 'orthos', label: '♦ ORTHOS (Typographic Canonicalization Pre-Pass)', family: 'exact', fidelity: 'exact',

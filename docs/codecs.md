@@ -4675,3 +4675,64 @@ On structured lanes the frontier sits 2–3× below the `2×(xz+2)` reference be
 **Contracts as the only remaining token lever (measured).** Complete winning messages on `psql-output` decompose as `metron` 73 + 171 = 244 (contract 29.9 %), `synkrisis` 64 + 225 = 289, `diastema` 62 + 258 = 320; on `metrics.tsv`, `akolouthia2` is 11 + 199 = 210 (5.2 %). The contracts are already feature-assembled (11 tokens when no feature is used) and telegraphic to the point of ungrammaticality, so a conservative rewrite is worth only 11–19 tokens — and it cannot be claimed until an independent from-spec reader decodes the new prose. That reader is test 3 in `bench/x68/REPORT.md` §9.
 
 **Verdict.** One honest, verified speed win (1.04×–1.40× cold, 1.39×–2.54× warm, byte-identical message, work meter unchanged). **No compression gain is claimed and none was found this turn**; the negative space (17 result shapes with their detectors) and the 8-mechanism portfolio are in [`bench/x68/REPORT.md`](../bench/x68/REPORT.md).
+
+## X70 — BRACHYS (`brachys`, βραχύς): the instruction is a decoder specification, so price it
+
+- **Design.** BRACHYS ships HYLE's table wire unchanged and changes only the shape of the instruction that decodes it. Where KANON writes one English clause per generator family (a sentence for the modulus, one for the zero pad, one for the letter counter, one for the cycle, one for the date — 127 tokens on `psql`, 211 on `kubectl`), BRACHYS makes the families **parameters of one closed arithmetic** and emits each term only when the wire uses it:
+
+  ```
+  Lines A-B (from 0) below the directive line are one table split by SEP; the rest is literal.
+  G<c>=<spec> restores deleted column c per row r; {A+B}=A+B*r, mM=A+(B*r mod M),
+  zW=zero-pad to W, cX is the r-th letter from X. #p:v,.. cycles p values. print only.
+  ```
+
+  The body is then a wire of literal rows and `G` slots, and the encoder measures **two complete messages** (a literal body and a CHIRON-encoded body), decodes each with its own from-spec reader, and keeps the cheaper against the frontier measured in the same process. Fail-closed: if it cannot be exact, or is not strictly smaller, the parent's message is returned unchanged.
+- **Greedy?** **No.** The body arm is a measured minimum over two complete messages; the final choice is a measured minimum over that candidate and the shipped frontier. The only greedy component is inherited — HYLE's column selection lattice. Note that this is a *pricing* codec, not a new fold: the fold and the wire are HYLE's.
+- **Time / CPU.** CPU-bound, and dominated by the inherited frontier gate (one `tagstackEncode`, one `hyleEncode(fast)`, at most two `daedalusEncode`); 3.4 s–72 s per lane over 34 lanes, i.e. the same range as the frontier alone. It adds no new asymptotic cost and **no speed improvement is claimed**.
+- **Measured (`o200k_base`, complete message, same-process frontier, one run per lane, 34 lanes, no exclusions).** Wins on 3, ties on 31, regresses on 0:
+
+  | lane | raw | frontier | BRACHYS | Δ | contract + wire |
+  |---|---|---|---|---|---|
+  | `holdout-tbl/psql-output.txt` | 675 | 244 | **212** | **−32** (−13.1 %) | 74 + 138 |
+  | `holdout-tbl/kubectl-get-pods.txt` | 1006 | 326 | **280** | **−46** (−14.1 %) | 141 + 139 |
+  | `holdout-x40/metrics.tsv` | 811 | 210 | **197** | **−13** (−6.2 %) | 90 + 107 |
+
+  Four further lanes offer a fold and **lose** to the frontier, and the gate returns the frontier: `df-h` 180 vs 171, `markdown-table` 195 vs 176, `prices.csv` 157 vs 133, `apt-real` 1029 vs 863. Totals over 34 lanes: 13 775 → 13 684 (−91, −0.66 %). Prose does not move at all (622/622 on `kb-article`), and neither do `ls -l`, `ps aux`, `ps -ef` or `du` — see the coverage note below.
+- **Why the size lane was open.** `bench/x70/split.ts` decomposes every parent's message: on `metrics.tsv` the shipped `akolouthia2` message is **0 instruction + 210 wire**, while HYLE's own fold offers **127 instruction + 109 wire**. The representation was already 2× smaller than what shipped and lost the gate because of its English. On `psql`, `metron` is 73 + 171 = 244 and KANON is 127 + 141 = 268 — the fold loses by 24 tokens entirely in the instruction. 35–50 % of every structured winning message is decoder specification, and it is a first-class compression surface.
+- **Why the other 31 lanes do not move (measured, `bench/x70/coverage.ts`).** `ls -l` (5 194 tokens), `ps aux` (3 054) and `ps -ef` (1 144) yield **zero** qualifying table blocks: the stack's space-run join is one space, and a field like `Sep 30 07:59` contains an interior space, so the table never folds. `du-*` and `git-log-stat` fold a 2-field block with nothing to generate. The binding constraint on those lanes is the **field model**, not the contract.
+- **Correctness, and the defect this turn found in itself.** The first assembled instruction read `mM=B*r mod M`, which in a list beginning `{A+B}=A+B*r` naturally means `(A + B*r) mod M`; the reference semantics are `A + (B*r mod M)`, and the two differ on `psql` row 11 (`12-12` vs `00-12`) because the month slot is `{1+1m12z2}`. The wording is now explicit and costs 2 tokens. **A shorter instruction that is 2 tokens cheaper and one row wrong is not a codec.** Verification: 37 checks, 0 failures (`bench/x70/brachys-verify.ts`) — 1 417/1 417 constructed tables exact under both BRACHYS's reader and `hyleDecode`, and 2 147 agreements / 1 744 fail-closed refusals / **0 disagreements** over 4 000 mutated wires. A **second reader** (`bench/x70/reader2.ts`) that imports nothing from the codec and implements only the printed prose reproduces `psql`, `kubectl` and `metrics.tsv` **byte-exactly**.
+- **Frontier reproducibility — restated, not assumed.** The X69 configuration reproduced on 12 of 14 census lanes (`metrics.tsv` = 210, `akolouthia2`, `frontierComplete`, `decoded === source`). It is **not bit-stable on wall-clock-budgeted lanes**: `kubectl` measured 326 and 332 on alternating runs, `du-ak` 788 and 790, because HYLE's DAEDALUS arm is budgeted by clock. Every comparison in this entry is therefore same-process, and the ±6 token error bar applies to any cross-process comparison in earlier reports that does not state one.
+- **Source / novelty — stated honestly.** The instruction-as-cost reframing, the from-spec second reader and the in-band self-gating are this turn's work. The *encoding* ideas are not:
+  - Scaled-decimal integer slots (`{100.00+7.30}`) are standard columnar practice; ClickHouse's `ALP` codec does exactly this ("each value as an exact scaled integer using decimal powers … non-representable values stored as raw exceptions"), https://clickhouse.com/docs/reference/statements/create/table/codec.
+  - Automatic cross-column linear correlation is `Virtual`/K-regression: Stoian et al., *Lightweight Correlation-Aware Table Compression*, arXiv:2410.14066 — the published form of this column-generator family. It does not emit an in-band decoder specification and does not price an instruction, but the encoding idea is theirs and is cited as such.
+  - LLM decoding of an in-prompt code is supported by de Campos et al., *Lossless Prompt Compression via Dictionary-Encoding and In-Context Learning*, arXiv:2604.13066 (>0.99 exact match on template logs) and by P²-LLM, arXiv:2411.12448. Both are fidelity studies, not byte-exactness proofs; **no external model decode trial was run for BRACHYS** and none is claimed.
+  - Delta coding of related versions is prior art (see the X69 entry above).
+- **Prior art inside this repo.** KANON (`kanon`) is the same wire with a clause-per-family instruction and is retained; HYLE (`hyle`) is the fold; `bpe.ts` caches are untouched. No earlier codec is deprecated by this entry.
+- **Honest limits.** Three lanes out of 34; the `metrics.tsv` margin (−13) is the thinnest and is the one to distrust first; a single reader pair is not evidence about LLM decode reliability; and no unconditional claim is available — whether a fold pays is a threshold in document size against a fixed instruction cost, and the same mechanism that wins 46 tokens on `kubectl` *loses 14* on `df-h`.
+- **Full record:** [`bench/x70/REPORT.md`](../bench/x70/REPORT.md).
+
+### Generalized local leaders, by structure category (X70)
+
+Complete-message `o200k_base` tokens; the leader is the local winner of that lane's comparator set, not a universal champion. All rows measured this turn.
+
+| category | lane | raw | leader | mechanism |
+|---|---|---|---|---|
+| Aligned box table, generated columns | `holdout-tbl/psql-output.txt` | 675 | **212** `brachys` | column-generator algebra + priced instruction |
+| Space-run aligned table (7 col × 23 row) | `holdout-tbl/kubectl-get-pods.txt` | 1006 | **280** `brachys` | same, plus field placement |
+| Delimited numeric/temporal columns | `holdout-x40/metrics.tsv` | 811 | **197** `brachys` | same |
+| Wide numeric CSV | `holdout-x40/prices.csv` | 582 | 133 `diastema` | interval elision on a regular grid |
+| Small `df`-style aligned table | `holdout-tbl/df-h.txt` | 570 | 171 `akolouthia2` | second-difference elision |
+| Prose — article | `holdout-work/kb-article.txt` | 656 | 622 `synkrisis` | substitution tape |
+| Prose — email thread | `holdout-work/email-thread.txt` | 629 | 488 `synkrisis` | tape + header aliasing |
+| Prose — transcript | `holdout-work/meeting-transcript.txt` | 472 | 385 `synkrisis` | tape (timestamps sit in the repeated prefix) |
+| Prose — bibliography | `holdout-work/bibliography.txt` | 896 | 671 `synkrisis` | tape over author/venue spans |
+| Prose — Markdown answer | `holdout-work/llm-answer.md` | 733 | 674 `synkrisis` | tape; weakest category (92 % of raw) |
+| Unified diff | `holdout-work/unified-diff.patch` | 578 | 419 `synkrisis` | tape over context lines |
+| Source code | `holdout/code-ts.txt` | 1422 | 984 `synkrisis` | tape over identifiers/indentation |
+| JSON | `holdout/json-pkg.txt` | 1152 | 681 `synkrisis` | rules binding key + value prefix |
+| Markdown table | `holdout-tbl/markdown-table.md` | 330 | 176 `synkrisis` | tape; separator row is not removed |
+| Ops listing (`ls -l`) | `holdout-x41/ls-l-real.txt` | 5194 | 1497 `synkrisis` | tape; **no table fold qualifies** |
+| Ops process table (`ps aux`) | `holdout-x41/ps-aux-real.txt` | 3054 | 1051 | tape; **no table fold qualifies** |
+| Ops package listing | `holdout-x41/apt-real.txt` | 2739 | 861 | tape |
+
+Three regularities the table supports — the gain is monotone in within-window token repetition, not in "structure"; the largest absolute wins come from generated columns; prose is weak for a reason no engineering removes — and one it does not: `ls -l` and `ps aux` are 8 248 raw tokens of the most common ops text on which the fold finds nothing at all, because of a single interior space per row.
