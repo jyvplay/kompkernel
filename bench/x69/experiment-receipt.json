@@ -1,0 +1,24 @@
+{
+  "fixture": "synthetic eight revisions of bench/holdout-work/kb-article.txt",
+  "sourceSha256": "37519c2d8c58a1c0b35d8689724166c1d85d0bac2c13faa3ae255f78692f1037",
+  "sourceChars": 27465,
+  "rawTokens": 5332,
+  "exact": true,
+  "applied": false,
+  "messageTokens": 665,
+  "parentTokens": 665,
+  "parentCodec": "synkrisis",
+  "frontierCosts": {
+    "synkrisis": 665,
+    "kanon": 1352,
+    "akolouthia2": 696,
+    "apographe": 665,
+    "diastema": 665
+  },
+  "frontierComplete": true,
+  "candidateTokens": 883,
+  "candidateExact": true,
+  "ms": 10663.331638,
+  "messageSha256": "ee06ab9c734be3da34c80e36be8cd7e0e4da3155f7d4052354a7d5e11294caaf",
+  "measuredMs": 10663.431150999999
+}
