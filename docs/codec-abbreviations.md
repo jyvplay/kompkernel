@@ -3281,8 +3281,13 @@ The X67 configuration was re-run on this checkout and the frontier did **not** m
 | Prose — `meeting-transcript.txt` | 472 → 385–389 | 18 % | — | inherited |
 | Ops — `psql-output.txt` | 675 → **244** | 63.9 % | `metron` | re-measured |
 | Ops — `kubectl-get-pods.txt` | 1 006 → **332** | 67.0 % | `akolouthia2` | new (X67 recorded 326 under a different comparator set) |
-| Ops — `find-listing.txt` | — → 1 142 | — | `diastema` | inherited |
-| Ops — `df -h` | — → 171 | — | — | inherited |
+| Ops — `find-listing.txt` | 3 997 → **1 148** | 71.3 % | `diastema` | new (X67 recorded 1 142) |
+| Ops — `ls -l` (`holdout-x41/ls-l-real.txt`) | 5 194 → **1 497** | 71.2 % | `synkrisis` | new |
+| Ops — `npm ls` | 2 747 → **923** | 66.4 % | `synkrisis` | new |
+| Ops — Node stack traces | 568 → **300** | 47.2 % | `synkrisis` | new |
+| Ops — `df -h` | 570 → **171** | 70.0 % | `akolouthia2` | re-measured (= X67) |
+| Tabular — `aapl-2014.csv` (wide numeric) | 3 108 → **1 206** | 61.2 % | **`kanon`** | new — the one lane KANON wins |
+| Table — `markdown-table.md` | 330 → **176** | 46.7 % | `synkrisis` | new |
 | Tabular — `metrics.tsv` | 811 → **210** | 74.1 % | `akolouthia2` | re-measured |
 | Diff — `unified-diff.patch` | 578 → **419** | 27.5 % | `synkrisis` | re-measured |
 | License — `license.txt` | 1 166 → **929** | 20.3 % | `synkrisis` | re-measured |

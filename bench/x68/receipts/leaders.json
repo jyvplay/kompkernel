@@ -1,0 +1,222 @@
+{
+  "encoding": "o200k_base",
+  "node": "v22.22.3",
+  "OMEGA_DET": null,
+  "note": "Full TAGSTACK+SIBLING frontier per lane. Rows measured in two runs: bench/x68/leaders.log (7 lanes, first run, aborted on a wrong path) and the second run for 4 more lanes. engram memo left at its default (ON): the message is provably unchanged and the table is about token counts.",
+  "rows": [
+    {
+      "f": "bench/holdout-work/llm-answer.md",
+      "chars": 2542,
+      "raw": 733,
+      "frontier": 674,
+      "winner": "synkrisis",
+      "savingPct": 8,
+      "costs": {
+        "synkrisis": 674,
+        "kanon": 1374,
+        "akolouthia2": 707,
+        "apographe": 674,
+        "diastema": 674
+      },
+      "sibling": 674,
+      "siblingWins": false,
+      "exact": true,
+      "ms": 12610
+    },
+    {
+      "f": "bench/holdout-work/bibliography.txt",
+      "chars": 2759,
+      "raw": 896,
+      "frontier": 672,
+      "winner": "synkrisis",
+      "savingPct": 25,
+      "costs": {
+        "synkrisis": 672,
+        "kanon": 1382,
+        "akolouthia2": 709,
+        "apographe": 672,
+        "diastema": 672
+      },
+      "sibling": 672,
+      "siblingWins": false,
+      "exact": true,
+      "ms": 15469
+    },
+    {
+      "f": "bench/holdout-work/email-thread.txt",
+      "chars": 2126,
+      "raw": 629,
+      "frontier": 488,
+      "winner": "synkrisis",
+      "savingPct": 22.4,
+      "costs": {
+        "synkrisis": 488,
+        "kanon": 1009,
+        "akolouthia2": 525,
+        "apographe": 488,
+        "hemera": 525,
+        "diastema": 488
+      },
+      "sibling": 488,
+      "siblingWins": false,
+      "exact": true,
+      "ms": 10769
+    },
+    {
+      "f": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "chars": 2649,
+      "raw": 1006,
+      "frontier": 332,
+      "winner": "akolouthia2",
+      "savingPct": 67,
+      "costs": {
+        "synkrisis": 340,
+        "kanon": 352,
+        "akolouthia2": 332,
+        "apographe": 340,
+        "diastema": 340
+      },
+      "sibling": 332,
+      "siblingWins": false,
+      "exact": true,
+      "ms": 47508
+    },
+    {
+      "f": "bench/holdout-ops/find-listing.txt",
+      "chars": 11789,
+      "raw": 3997,
+      "frontier": 1148,
+      "winner": "diastema",
+      "savingPct": 71.3,
+      "costs": {
+        "synkrisis": 1271,
+        "bifront": 1271,
+        "kanon": 2612,
+        "akolouthia2": 1326,
+        "apographe": 1271,
+        "diastema": 1148
+      },
+      "sibling": 1148,
+      "siblingWins": false,
+      "exact": true,
+      "ms": 71879
+    },
+    {
+      "f": "bench/holdout-ops/node-stacktraces.txt",
+      "chars": 1848,
+      "raw": 568,
+      "frontier": 300,
+      "winner": "synkrisis",
+      "savingPct": 47.2,
+      "costs": {
+        "synkrisis": 300,
+        "kanon": 637,
+        "akolouthia2": 339,
+        "apographe": 300,
+        "diastema": 300
+      },
+      "sibling": 300,
+      "siblingWins": false,
+      "exact": true,
+      "ms": 20123
+    },
+    {
+      "f": "bench/holdout-ops/npm-ls.txt",
+      "chars": 6688,
+      "raw": 2747,
+      "frontier": 923,
+      "winner": "synkrisis",
+      "savingPct": 66.4,
+      "costs": {
+        "synkrisis": 923,
+        "kanon": 1926,
+        "akolouthia2": 983,
+        "apographe": 923,
+        "diastema": 923
+      },
+      "sibling": 923,
+      "siblingWins": false,
+      "exact": true,
+      "ms": 153631
+    },
+    {
+      "f": "bench/holdout-x41/ls-l-real.txt",
+      "chars": 10692,
+      "raw": 5194,
+      "frontier": 1497,
+      "winner": "synkrisis",
+      "savingPct": 71.2,
+      "costs": {
+        "synkrisis": 1497,
+        "kanon": 3096,
+        "akolouthia2": 1573,
+        "apographe": 1497,
+        "diastema": 1497
+      },
+      "sibling": 1497,
+      "siblingWins": false,
+      "exact": true,
+      "ms": 193069
+    },
+    {
+      "f": "bench/holdout-tbl/markdown-table.md",
+      "chars": 635,
+      "raw": 330,
+      "frontier": 176,
+      "winner": "synkrisis",
+      "savingPct": 46.7,
+      "costs": {
+        "synkrisis": 176,
+        "kanon": 219,
+        "akolouthia2": 228,
+        "apographe": 176,
+        "metron": 176,
+        "diastema": 176
+      },
+      "sibling": 176,
+      "siblingWins": false,
+      "exact": true,
+      "ms": 10470
+    },
+    {
+      "f": "bench/holdout-tab/aapl-2014.csv",
+      "chars": 5488,
+      "raw": 3108,
+      "frontier": 1206,
+      "winner": "kanon",
+      "savingPct": 61.2,
+      "costs": {
+        "synkrisis": 1233,
+        "kanon": 1206,
+        "akolouthia2": 1490,
+        "apographe": 1233,
+        "metron": 1233,
+        "hemera": 1252,
+        "diastema": 1402
+      },
+      "sibling": 1206,
+      "siblingWins": false,
+      "exact": true,
+      "ms": 85910
+    },
+    {
+      "f": "bench/holdout-tbl/df-h.txt",
+      "chars": 939,
+      "raw": 570,
+      "frontier": 171,
+      "winner": "akolouthia2",
+      "savingPct": 70,
+      "costs": {
+        "synkrisis": 250,
+        "kanon": 237,
+        "akolouthia2": 171,
+        "apographe": 250,
+        "diastema": 250
+      },
+      "sibling": 171,
+      "siblingWins": false,
+      "exact": true,
+      "ms": 3829
+    }
+  ]
+}

@@ -25,6 +25,10 @@ for (const f of process.argv.slice(2)) {
     exact: r.decoded === t, ms,
   });
   console.log(JSON.stringify(rows[rows.length - 1]));
+  // write after every lane so a bad path later in the list cannot lose the rows
+  fs.mkdirSync('bench/x68/receipts', { recursive: true });
+  fs.writeFileSync('bench/x68/receipts/leaders.json',
+    JSON.stringify({ encoding: enc, node: process.version, rows }, null, 2) + '\n');
 }
 fs.mkdirSync('bench/x68/receipts', { recursive: true });
 fs.writeFileSync('bench/x68/receipts/leaders.json', JSON.stringify({ encoding: enc, node: process.version, rows }, null, 2) + '\n');

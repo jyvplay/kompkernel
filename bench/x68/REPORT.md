@@ -184,10 +184,15 @@ their last recorded value.
 | prose, LLM answer | `llm-answer.md` | 733 | **674** | 8.0 % | `synkrisis` | **new this turn** |
 | prose, meeting transcript | `meeting-transcript` | 472 | 385–389 | 18 % | — | inherited |
 | ops, `psql` output | `psql-output.txt` | 675 | **244** | 63.9 % | `metron` | re-measured |
-| ops, `find` listing | `find-listing.txt` | — | 1 142 | — | `diastema` | inherited |
-| ops, `df -h` | `df-h.txt` | — | 171 | — | — | inherited |
+| ops, `find` listing | `find-listing.txt` | 3 997 | **1 148** | 71.3 % | `diastema` | **new this turn** (X67 recorded 1 142) |
+| ops, `ls -l` | `holdout-x41/ls-l-real.txt` | 5 194 | **1 497** | 71.2 % | `synkrisis` | **new this turn** |
+| ops, `df -h` | `df-h.txt` | 570 | **171** | 70.0 % | `akolouthia2` | re-measured (matches X67) |
 | ops, `kubectl get pods` | `kubectl-get-pods.txt` | 1 006 | **332** | 67.0 % | `akolouthia2` | **new this turn** (X67 recorded 326 under a different comparator set) |
+| ops, `npm ls` | `npm-ls.txt` | 2 747 | **923** | 66.4 % | `synkrisis` | **new this turn** |
+| ops, Node stack traces | `node-stacktraces.txt` | 568 | **300** | 47.2 % | `synkrisis` | **new this turn** |
 | tabular, delimited | `metrics.tsv` | 811 | **210** | 74.1 % | `akolouthia2` | re-measured |
+| tabular, wide numeric CSV | `holdout-tab/aapl-2014.csv` | 3 108 | **1 206** | 61.2 % | **`kanon`** | **new this turn** — the one lane KANON wins |
+| table, Markdown | `markdown-table.md` | 330 | **176** | 46.7 % | `synkrisis` | **new this turn** |
 | diff / patch | `unified-diff.patch` | 578 | **419** | 27.5 % | `synkrisis` | re-measured |
 | license, boilerplate prose | `license.txt` | 1 166 | **929** | 20.3 % | `synkrisis` | re-measured |
 | markup, `pom.xml` | `pom.xml` | — | 544 | — | `synkrisis` | inherited |
@@ -195,14 +200,18 @@ their last recorded value.
 | JSON, API payload | `gh-api` | 2 519 | 1 112 | — | `synkrisis` | inherited |
 | code, TypeScript | `code-ts` | 1 422 | 985 | — | `apographe` | inherited |
 
-Two structural facts fall out of the table and are worth more than the individual numbers:
+Three structural facts fall out of the table and are worth more than the individual numbers:
 
-1. **The frontier's gain is monotone in local repetition, not in "structure".** The big numbers
-   (74 % tabular, 64 % ops, 68 % JSON) are all documents whose token *vocabulary within a small
+1. **KANON wins `aapl-2014.csv`** (3 108 → 1 206, 61.2 %), the wide comma-separated numeric lane.
+   Every other structured lane here is led by `synkrisis`, `akolouthia2`, `metron` or `diastema`, so
+   the frontier is a per-lane minimum over *four* parents in practice, not one champion with ties.
+
+2. **The frontier's gain is monotone in local repetition, not in "structure".** The big numbers
+   (74 % tabular, 67–71 % ops, 68 % JSON) are all documents whose token *vocabulary within a small
    window* is tiny. Prose — even a bibliography, which is `surname, title, venue, year` repeated —
    lands at 22–25 % because every record carries new words. A mechanism that wins on prose has to
    exploit something other than repeated surface, and §5/§6 record five attempts that do not.
-2. **SIBLING-TEMPLATE never wins on a gated lane** (it ties `synkrisis`/`apographe` on the prose
+3. **SIBLING-TEMPLATE never wins on a gated lane** (it ties `synkrisis`/`apographe` on the prose
    lanes because they share the winner, and loses everywhere else). It is load-bearing for the
    *diff* lane in principle, not in measurement.
 
