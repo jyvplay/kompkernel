@@ -58,6 +58,43 @@ export function workLastEpochUsed(): number {
 }
 
 /**
+ * X67: read-only snapshot of the whole deterministic meter state.
+ *
+ * WHY. `workEpoch` restores the *outermost* window's counters on exit, so a
+ * nested call outside any epoch and a call at the start of a fresh epoch are
+ * the only two states that are reproducible from the arguments alone. This
+ * snapshot exists so `oura.ts` can memoise a pure encode ONLY when the meter
+ * state at entry is bit-identical to the state the memoised entry was computed
+ * under (`depth === 1`, `used === 0`, `chironUsed === 0`, same budgets). Under
+ * any other state the memo is bypassed and the ordinary computation runs, so
+ * the cache can never change a wire: a hit returns exactly the object the
+ * computation would have returned from the same starting counters.
+ *
+ * This module still has no imports and no other state.
+ */
+export interface WorkState {
+  depth: number;
+  budget: number;
+  used: number;
+  chironBudget: number;
+  chironUsed: number;
+}
+
+/** X67: replay a memoised computation's exact unit cost (see ouraMemo). */
+export function workConsume(units: number): void {
+  if (Number.isFinite(units) && units > 0) used += units;
+}
+
+/** X67: replay a memoised computation's exact CHIRON unit cost. */
+export function chironConsume(units: number): void {
+  if (Number.isFinite(units) && units > 0) chironUsed += units;
+}
+
+export function workState(): WorkState {
+  return { depth, budget, used, chironBudget, chironUsed };
+}
+
+/**
  * Default per-window budget in score evaluations, calibrated in X57 by
  * sweeping OMEGA_WORK_BUDGET per parent/arm on the pathological and the
  * frontier lanes (bench/x57/receipts/budget-sweep*): metrics.tsv through

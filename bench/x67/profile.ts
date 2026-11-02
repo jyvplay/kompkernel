@@ -1,0 +1,28 @@
+import * as fs from 'node:fs';
+import { countTokens } from '../../src/lib/omega/bpe';
+import { synkrisisEncode } from '../../src/lib/omega/synkrisis';
+import { bifrontEncode, bifrontPlan } from '../../src/lib/omega/bifront';
+import { kanonEncode } from '../../src/lib/omega/kanon';
+import { akolouthia2Encode } from '../../src/lib/omega/akolouthia2';
+import { apographeEncode, apographeDecodeResult } from '../../src/lib/omega/apographe';
+import { metronEncode, metronPlan } from '../../src/lib/omega/metron';
+import { hemeraEncode, hemeraSubstitute } from '../../src/lib/omega/hemera';
+import { diastemaEncode } from '../../src/lib/omega/diastema';
+
+const enc: any = 'o200k_base';
+const path = process.argv[2];
+const text = fs.readFileSync(path, 'utf8');
+const t0 = Date.now();
+const rows: string[] = [];
+const time = (name: string, fn: () => void) => { const s = Date.now(); let err = ''; try { fn(); } catch (e: any) { err = String(e.message).slice(0,60); } rows.push(`${name}\t${Date.now()-s}\t${err}`); };
+console.log(`${path}: ${text.length} chars, ${countTokens(text, enc)} raw tokens`);
+time('synkrisis', () => { const r = synkrisisEncode(text, enc); console.log('  synkrisis M=', countTokens(r.message, enc)); });
+if (bifrontPlan(text)) time('bifront', () => { const r = bifrontEncode(text, enc); console.log('  bifront M=', countTokens(r.message, enc)); });
+time('kanon', () => { const r = kanonEncode(text, enc); console.log('  kanon M=', countTokens(r.decoderPrompt + r.wire, enc)); });
+time('akolouthia2', () => { const r = akolouthia2Encode(text, enc); console.log('  akolouthia2 M=', countTokens(r.decoderPrompt, enc)); });
+time('apographe', () => { const r = apographeEncode(text, enc); const m = (r.contract ? r.contract + '\n' : '') + r.wire; console.log('  apographe M=', countTokens(m, enc), 'dec=', apographeDecodeResult(r) === text); });
+if (metronPlan(text, enc)?.proxyGain) time('metron', () => { const r = metronEncode(text, enc); const m = (r.contract ? r.contract + '\n' : '') + r.wire; console.log('  metron M=', countTokens(m, enc)); });
+const hp = hemeraSubstitute(text, { day: true, ms: true }); if (hp.days + hp.ms) time('hemera', () => { const r = hemeraEncode(text, enc); console.log('  hemera M=', countTokens(r.decoderPrompt, enc)); });
+time('diastema', () => { const r = diastemaEncode(text, enc); const m = r.contract ? r.contract + '\n' + r.wire : r.wire; console.log('  diastema M=', countTokens(m, enc)); });
+console.log(rows.join('\n'));
+console.log('TOTAL', Date.now() - t0);
