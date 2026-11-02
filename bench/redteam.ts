@@ -13,7 +13,16 @@ import { rosettaEncode, rosettaDecode, rosettaPool, rosettaTranspose } from '@/l
 import { countTokens } from '@/lib/omega/bpe';
 import { signetEncode } from '@/lib/omega/signet';
 import { mosaicEncode } from '@/lib/omega/mosaic';
-import { CHAOS_900, MOSAIC_HANDTRACE_300, CHAOS_G_CJK, mosaicFixtures } from './fixtures';
+import {
+  CHAOS_900,
+  MOSAIC_HANDTRACE_300,
+  CHAOS_G_CJK,
+  mosaicFixtures,
+  NATURAL_PROSE,
+  HYBRID_PROSE,
+  OUTPUT_PROMPT_LOG,
+  CHAOS_1500,
+} from './fixtures';
 import { kappaEncode, kappaDecode, KAPPA_SENTINEL, KAPPA_HOLE } from '@/lib/omega/kappa';
 import { phraseEncode, phraseDecode, phraseCodebook, phraseFold } from '@/lib/omega/phrase';
 import { tauEncode, tauDecode, tauMarkers } from '@/lib/omega/tau';
@@ -1102,9 +1111,32 @@ async function p14() {
   ok(marker.mode === 'identity' && marker.wire === 'literal ↩ marker', 'P14 IM1 sentinel collision no-op', marker.mode);
 }
 
+async function p15() {
+  console.log('P15 — new fixture categories (natural prose, hybrid prose, prompt log, chaos-1500)');
+  const newFixtures: Array<[string, string]> = [
+    ['NATURAL_PROSE', NATURAL_PROSE],
+    ['HYBRID_PROSE', HYBRID_PROSE],
+    ['OUTPUT_PROMPT_LOG', OUTPUT_PROMPT_LOG],
+    ['CHAOS_1500', CHAOS_1500],
+  ];
+
+  for (const [label, text] of newFixtures) {
+    // Test ROSETTA
+    const { r, exact } = await rt(text);
+    const dec = rosettaDecode(r.wire);
+    ok(exact && dec === text, `P15 ROSETTA ${label} (exact)`, `member=${r.member} out=${r.outTokens}/${r.in}`);
+    ok(r.outTokens <= r.inTokens, `P15 ROSETTA ${label} (never-worse)`, `out=${r.outTokens} in=${r.in}`);
+
+    // Test MOSAIC
+    const mRes = mosaicEncode(text, 'o200k_base');
+    ok(mRes.decoded === text && mRes.exact, `P15 MOSAIC ${label} (exact)`, `out=${mRes.outTokens}/${mRes.inTokens}`);
+    ok(mRes.outTokens <= mRes.inTokens, `P15 MOSAIC ${label} (never-worse)`, `out=${mRes.outTokens} in=${mRes.inTokens}`);
+  }
+}
+
 async function main() {
   const t0 = Date.now();
-  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14();
+  await p1(); await p2(); await p3(); await p4(); await p5(); await p6(); await p7(); await p8(); await p9(); await p10(); await p11(); await p12(); await p13(); await p14(); await p15();
   console.log(`\nRED-TEAM: ${pass} pass / ${fail} fail (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
   if (fail > 0) process.exit(1);
 }
