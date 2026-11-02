@@ -78,6 +78,7 @@ import { countTokens, tokenStrings, type EncodingName } from './bpe';
 import { CHIRON_START, CHIRON_SEP, chironDecode, chironDecoderPrompt, chironOpsUsed } from './chiron';
 import { ariadneEncode, type AriadneOptions } from './ariadne';
 import { workEpoch, workBudgetFor } from './workmeter';
+import { engramMemo, engramOptionsKey } from './engram';
 import { sibylEncode } from './sibyl';
 
 export interface DaedalusResult {
@@ -201,7 +202,12 @@ interface Cand { wire: string; tokens: number; M: number; tag: string; gain: num
  * wall-clock budgetMs heuristics; the work window bounds ARIADNE's
  * glyph-assignment evaluations deterministically.) */
 export function daedalusEncode(text: string, enc: EncodingName = 'o200k_base', options: DaedalusOptions = {}): DaedalusResult {
-  return workEpoch(workBudgetFor(text.length), () => daedalusEncodeInner(text, enc, options), text.length);
+  // X68: sub-encode memo inside the work epoch (engram.ts). A hit replays the
+  // exact counted work the original computation spent, so the meter — and every
+  // later budget decision in this epoch — is unchanged.
+  return workEpoch(workBudgetFor(text.length),
+    () => engramMemo('daedalus', enc, text, engramOptionsKey(options),
+      () => daedalusEncodeInner(text, enc, options)), text.length);
 }
 
 function daedalusEncodeInner(text: string, enc: EncodingName = 'o200k_base', options: DaedalusOptions = {}): DaedalusResult {

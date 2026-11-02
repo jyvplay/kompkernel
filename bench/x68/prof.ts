@@ -1,0 +1,15 @@
+import * as fs from 'node:fs';
+import { countTokens } from '../../src/lib/omega/bpe';
+import { synkrisisEncode } from '../../src/lib/omega/synkrisis';
+import { diastemaEncode } from '../../src/lib/omega/diastema';
+import { metronEncode } from '../../src/lib/omega/metron';
+import { apographeEncode } from '../../src/lib/omega/apographe';
+const enc: any = 'o200k_base';
+const f = process.argv[2];
+const t = fs.readFileSync(f, 'utf8');
+const time = (name: string, fn: () => any) => { const t0 = Date.now(); const r = fn(); console.log(name, Date.now() - t0, 'ms'); return r; };
+time('tokenize', () => countTokens(t, enc));
+time('synkrisis', () => synkrisisEncode(t, enc));
+time('diastema', () => diastemaEncode(t, enc));
+time('metron', () => metronEncode(t, enc));
+time('apographe', () => apographeEncode(t, enc));

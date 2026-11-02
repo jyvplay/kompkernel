@@ -3254,3 +3254,40 @@ The exact configuration from the previous turn was rerun and matched: `bench/hol
 | Markup / code | `pom.xml` SYNKRISIS 544 | No X67 rerun |
 | JSON, nested | `json-pkg` SYNKRISIS 681; `gh-api` SYNKRISIS 2,519 | **New lanes:** `gh-labels-50` SYNKRISIS **1,400**; `gh-commits-4` SYNKRISIS **3,567**; `gh-tags-60` screened, not gated |
 | JSON, template projection | — | PROBOLE loses +239 / +255 on the two gated lanes; no leader change |
+
+## X68 — ἔγγραμμα ENGRAMMA (`engram`, `engramma`): the frontier's own sub-encodes, remembered
+
+- **What it is, precisely.** A **time** codec, not a size codec. The emitted complete message is TAGSTACK's complete message — same contract, same wire, same parent, same bytes — so ENGRAMMA adds **0 tokens** and removes wall clock. It is registered because its dominance claim has to be measured on the same axis as every other codec, and stated as what it is. Modules: `src/lib/omega/engram.ts` (the memo), `src/lib/omega/engramma.ts` (the codec wrapper, the identity witness, the self-test). Registry key `engramma`, family `exact`, fidelity `exact`.
+- **Mechanism.** Inside one frontier call the parents re-encode the same intermediate text repeatedly: SYNKRISIS lifts a value, METRON lifts a header, DIASTEMA lifts a mask, and each then asks APOGRAPHE to encode the same transformed document, whose own arms re-encode it under different span and level settings. Measured on `bench/holdout-tbl/psql-output.txt`: 41 hits in 78 sub-encode attempts. The memo key is `codec \0 encoding \0 serialise(sorted(options)) \0 text`; a hit returns the stored result **and replays the counted work** (`workConsume`, `chironConsume`) that the original search spent. Bounds: 256 entries, 64 KB source cap, 2 000 work-unit minimum (cheaper to redo than to store), 4 MB retained key characters, kill switch `OMEGA_ENGRAM=0`.
+- **The soundness trap (X67's, inherited and re-tested).** A memo that skips the search *and* skips the accounting hands the caller free budget, and later decisions in the same deterministic epoch diverge. `bench/x68/engram-unit.ts` asserts the work meter and the chiron meter read the **same** value after three calls with and without the memo, alongside byte-identity of the messages — 15 assertions, all passing.
+- **Greedy/search.** Neither: exact-match memoisation of a pure function. No span is found, no rule is added, no contract sentence changes.
+- **Citation / prior art.** Memoisation of a pure function; no paper claimed and no new compression primitive claimed. The formal frame is incremental computation — Liu, *Incremental Computation: What Is the Essence?* (arXiv:2312.07946, 2025); Sun, Peng & Xiong, *Synthesizing Efficient Memoization Algorithms* (OOPSLA 2023) for the equivalence condition, which here is purely syntactic. The in-tree ancestors are **REPRISE (X64)** at whole-codec granularity and **OURA (X67)** at frontier-entry granularity, including the work-replay fix; ENGRAMMA's only structural difference is that it memoises *inside* a frontier call, which is what makes the hit rate non-zero. It is therefore **marginal to the shipped stack**, and the receipts do not add the savings together.
+- **Time / CPU.** Cold process, one fresh `node` per arm (the per-document number): psql-output 17 284 → 14 906 ms (**1.16×**), metrics.tsv 72 563 → 64 780 ms (**1.12×**), kb-article 6 203 → 4 417 ms (**1.40×**), unified-diff 6 679 → 6 439 ms (**1.04×**). Warm caches, a discarded pass in both arms: 1.39× / 2.16× / 2.54×. **Every arm produced the same message SHA-256 and decoded byte-exactly.** Receipts: `bench/x68/receipts/engram-cold.jsonl`, `engram-warm.json`, `engram-ab.json`, `engram-unit.txt`, `engramma-selftest.json`.
+- **Measured honest bound.** The cold-vs-warm gap (17.3 s vs 7.3 s) is tokenizer first-touch, which the memo cannot reach, so 2.4× is the ceiling for a *different* mechanism and 1.04×–1.40× is what this one delivers. The first in-process A/B reported 22×–27×; those ratios measured cache warming, not the memo, and are not used as evidence for it.
+- **Verdict.** Exact, registered, byte-identical, genuinely faster — and **zero tokens smaller**. The size axis did not move in X68; the report records why in measurements (`bench/x68/REPORT.md` §5–§7) instead of restating an intention.
+
+## X68 exact frontier repeat
+
+The X67 configuration was re-run on this checkout and the frontier did **not** move: `bench/holdout-x40/metrics.tsv` (SHA-256 `b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70`), `o200k_base`, unset `OMEGA_DET`, Node v22.22.3, TAGSTACK runtime parents plus SIBLING-TEMPLATE → **210 tokens, `akolouthia2`**, message SHA-256 `f0e0ffb9543f3b2f7032067ed73d6fa3de84745639647fafdc109bdca1864628`, cost vector `synkrisis 237 · kanon 236 · akolouthia2 210 · apographe 237 · metron 237 · diastema 237` — unchanged in both arms of the cold A/B. **Caveat, unchanged:** the leader flips `synkrisis` ↔ `diastema` across fixtures; the frontier is a per-lane minimum.
+
+## X68 generalized local leaders (full frontier, `bench/x68/leaders.ts`)
+
+| Category / fixture | raw → frontier | saving | leader | status |
+|---|---|---|---|---|
+| Prose — `kb-article` | 656 → **622** | 5.2 % | `synkrisis` | re-measured |
+| Prose — `bibliography.txt` | 896 → **672** | 25.0 % | `synkrisis` | new |
+| Prose — `email-thread.txt` | 629 → **488** | 22.4 % | `synkrisis` | new (reproduces X67) |
+| Prose — `llm-answer.md` | 733 → **674** | 8.0 % | `synkrisis` | new |
+| Prose — `meeting-transcript.txt` | 472 → 385–389 | 18 % | — | inherited |
+| Ops — `psql-output.txt` | 675 → **244** | 63.9 % | `metron` | re-measured |
+| Ops — `kubectl-get-pods.txt` | 1 006 → **332** | 67.0 % | `akolouthia2` | new (X67 recorded 326 under a different comparator set) |
+| Ops — `find-listing.txt` | — → 1 142 | — | `diastema` | inherited |
+| Ops — `df -h` | — → 171 | — | — | inherited |
+| Tabular — `metrics.tsv` | 811 → **210** | 74.1 % | `akolouthia2` | re-measured |
+| Diff — `unified-diff.patch` | 578 → **419** | 27.5 % | `synkrisis` | re-measured |
+| License — `license.txt` | 1 166 → **929** | 20.3 % | `synkrisis` | re-measured |
+| Markup — `pom.xml` | — → 544 | — | `synkrisis` | inherited |
+| JSON — `json-pkg` / `gh-api` | 1 152 → 681 / 2 519 → 1 112 | — | `synkrisis` | inherited |
+| Code — `code-ts` | 1 422 → 985 | — | `apographe` | inherited |
+
+Two structural findings, both measured: the frontier's gain is monotone in **within-window token repetition**, not in "structure" (74 % tabular, 67 % ops, 68 % JSON versus 5–25 % prose), and **SIBLING-TEMPLATE never wins a gated lane** — it ties its parent on the prose lanes and loses elsewhere.

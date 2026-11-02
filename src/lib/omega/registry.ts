@@ -139,6 +139,7 @@ import { bifrontEncode } from './bifront';
 import { tagstackEncode } from './tagstack';
 import { repriseEncode } from './reprise';
 import { fotarEncode } from './fotar';
+import { engrammaEncode } from './engramma';
 import { proboleEncode } from './probole';
 import { jsonEscapeFoldEncode } from './json-escape-fold';
 import { siblingTemplateEncode } from './sibling-template';
@@ -629,6 +630,17 @@ export function codecEntries(): Entry[] {
         return {
           output: r.message, decoded: r.decoded,
           note: `${r.notes}; exact=${r.exact}; frontierComplete=${r.frontierComplete}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; probole=${(r as any).probole}` };
+      },
+    },
+    {
+      key: 'engramma',
+      label: 'ἔγγραμμα ENGRAMMA (X68: the TAGSTACK+SIBLING frontier with its repeated sub-encodes remembered. This is a SPEED codec, not a compression mechanism, and it is registered so that its dominance is measured on the same axis as everything else rather than asserted. The emitted complete message is byte-identical to TAGSTACK\'s by construction — same contract, same wire, same parent — so it adds exactly 0 tokens; it removes wall clock by replaying an identical (codec, encoding, options, text) sub-encode instead of searching for it again and by replaying the exact counted work the original search spent, so the deterministic work meter and every later budget decision in the epoch are unchanged (the X67 soundness bug). Bounds: 256 entries, 64 KB source cap, minimum 2000 work units to be worth storing, 4 MB retained key characters, OMEGA_ENGRAM=0 kill switch; hits, misses, stores, skips, evictions and replayed work are counted. Greedy: exact-match memo, no search. Time/CPU: cold-process measurements 1.04x-1.40x (psql-output 17.3s->14.9s, metrics.tsv 72.6s->64.8s, kb-article 6.2s->4.4s, unified-diff 6.68s->6.44s) and warm-cache 1.39x-2.54x; every arm decodes byte-exactly and reports the same message digest. Prior art: memoisation of a pure function (no citation claimed). MEASURED HONEST BOUND: this turn found no token reduction, and the report records why (see bench/x68/REPORT.md section 5) rather than shipping a relabelled speed-up as one.',
+      family: 'exact',
+      fidelity: 'exact',
+      run: async (t, enc) => {
+        const r: any = engrammaEncode(t, enc);
+        return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
+          note: `contract=0 parent=${r.parentCodec}:${r.parentTokens} hits=${r.engrammaStats.hits} misses=${r.engrammaStats.misses} replayedWork=${r.engrammaStats.replayedWork} sibling=${r.engrammaSiblingMessage ? r.messageTokens : '-'} exact=${r.decoded === t}` };
       },
     },
     {

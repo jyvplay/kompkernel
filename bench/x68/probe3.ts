@@ -1,0 +1,13 @@
+import * as fs from 'node:fs';
+import { countTokens, tokenStrings } from '../../src/lib/omega/bpe';
+import { apographeEncode } from '../../src/lib/omega/apographe';
+const enc: any = 'o200k_base';
+const f = process.argv[2];
+const t = fs.readFileSync(f, 'utf8');
+const a = apographeEncode(t, enc);
+console.log('CONTRACT:', JSON.stringify(a.contract));
+console.log('WIRE first 400:', JSON.stringify(a.wire.slice(0, 400)));
+const toks = tokenStrings(a.wire, enc);
+console.log('wire tokens', toks.length);
+console.log('first 60 wire tokens:', JSON.stringify(toks.slice(0, 60).map(x => x.s)));
+console.log('keys of result:', Object.keys(a));

@@ -1,0 +1,82 @@
+{
+  "encoding": "o200k_base",
+  "node": "v22.22.3",
+  "OMEGA_DET": null,
+  "rows": [
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "chars": 1578,
+      "memoOffMs": 7267,
+      "memoOnMs": 5229,
+      "ratio": 1.39,
+      "identicalMessage": true,
+      "messageSha256": "2e21ee7ff9fd3147cf193861504320b5deb9d005e6474ff7c313f8932bfb7022",
+      "shaMatches": true,
+      "identicalCosts": true,
+      "frontier": 244,
+      "winner": "metron",
+      "exact": true,
+      "memoOn": {
+        "hits": 29,
+        "misses": 29,
+        "stores": 28,
+        "cheapSkips": 1,
+        "tooBigSkips": 0,
+        "replayedWork": 803383,
+        "replayedChiron": 9580324,
+        "evictions": 0
+      },
+      "memoEntries": 28
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "chars": 3385,
+      "memoOffMs": 457,
+      "memoOnMs": 212,
+      "ratio": 2.156,
+      "identicalMessage": true,
+      "messageSha256": "c1c20fb4bb844d559cf3a3a83dbe792169b3dd42837634d2915616fe7a558665",
+      "shaMatches": true,
+      "identicalCosts": true,
+      "frontier": 622,
+      "winner": "synkrisis",
+      "exact": true,
+      "memoOn": {
+        "hits": 3,
+        "misses": 2,
+        "stores": 2,
+        "cheapSkips": 0,
+        "tooBigSkips": 0,
+        "replayedWork": 244410,
+        "replayedChiron": 5695959,
+        "evictions": 0
+      },
+      "memoEntries": 2
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "chars": 1487,
+      "memoOffMs": 496,
+      "memoOnMs": 195,
+      "ratio": 2.544,
+      "identicalMessage": true,
+      "messageSha256": "d9de4a0505c4d90f3606560b1500790c79d4515ffbcfc4f0093ad3161f7073d9",
+      "shaMatches": true,
+      "identicalCosts": true,
+      "frontier": 419,
+      "winner": "synkrisis",
+      "exact": true,
+      "memoOn": {
+        "hits": 3,
+        "misses": 2,
+        "stores": 2,
+        "cheapSkips": 0,
+        "tooBigSkips": 0,
+        "replayedWork": 446943,
+        "replayedChiron": 4743784,
+        "evictions": 0
+      },
+      "memoEntries": 2
+    }
+  ]
+}
