@@ -1062,12 +1062,34 @@ export function apographeEncode(
   return workEpoch(workBudgetFor(text.length), () => apographeEncodeInner(text, enc, opts), text.length);
 }
 
+/**
+ * X67: the option keys this file reads that OURA and its 110-file closure do
+ * not read. They are removed before the parent call so that APOGRAPHE,
+ * METRON ({...opts, kanon:true}) and DIASTEMA all reach `ouraEncode` with the
+ * same option object and can share one memoised computation (oura.ts).
+ * bench/x67/oura-memo.ts re-derives the closure by grep and fails if any of
+ * these names ever appears inside it, because that is the only way stripping
+ * could change a wire.
+ */
+const APOGRAPHE_ONLY_OPTION_KEYS = ['apographe', 'kanon', 'forceLifts', 'forceSep', 'noGate'] as const;
+
+function ouraVisibleOptions(opts: ApographeOptions): ApographeOptions {
+  let out = opts;
+  for (const k of APOGRAPHE_ONLY_OPTION_KEYS) {
+    if ((opts as any)[k] !== undefined) {
+      if (out === opts) out = { ...opts };
+      delete (out as any)[k];
+    }
+  }
+  return out;
+}
+
 function apographeEncodeInner(
   text: string,
   enc: EncodingName = 'o200k_base',
   opts: ApographeOptions = {},
 ): ApographeResult {
-  const parent = ouraEncode(text, enc, opts);
+  const parent = ouraEncode(text, enc, ouraVisibleOptions(opts));
   const plain: ApographeResult = {
     ...parent,
     apographe: false, apographeLifts: [], apographeSep: '', apographeArity: 0,
@@ -1082,7 +1104,7 @@ function apographeEncodeInner(
   if (!plan || plan.proxyGain <= 0) return plain;
 
   let alt: AnadiplosisResult;
-  try { alt = ouraEncode(plan.text, enc, opts); } catch { return plain; }
+  try { alt = ouraEncode(plan.text, enc, ouraVisibleOptions(opts)); } catch { return plain; }
 
   const baseTail = '; print only.';
   let total = alt.messageTokens + countTokens(' ' + plan.clause + baseTail, enc)

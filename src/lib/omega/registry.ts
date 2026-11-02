@@ -139,6 +139,7 @@ import { bifrontEncode } from './bifront';
 import { tagstackEncode } from './tagstack';
 import { repriseEncode } from './reprise';
 import { fotarEncode } from './fotar';
+import { proboleEncode } from './probole';
 import { jsonEscapeFoldEncode } from './json-escape-fold';
 import { siblingTemplateEncode } from './sibling-template';
 import { nestEncode } from './nest';
@@ -615,6 +616,19 @@ export function codecEntries(): Entry[] {
         const r: any = tagstackEncode(t, enc);
         return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens,
           note: `${r.notes}; parent=${r.parentCodec}:${r.parentTokens}; syn=${r.synkrisisParentTokens}; mode=${r.mode ?? '-'}; pairs=${r.pairs}; exact=${r.exact}; frontierComplete=${r.frontierComplete}` };
+      },
+    },
+    {
+      key: 'probole',
+      label: 'προβολή PROBOLE (X67: repeated multi-line frame projection for canonical JSON. Every mechanism in the stack substitutes at the point of use, so APOGRAPHE\'s law holds — a per-use cost of at least one token — and a grammar therefore pays about one glyph per key per record forever. PROBOLE emits one record\'s frame ONCE with `~` slots and projects it onto its instances, then lists the values slot-major so a constant column collapses under the in-band `*<k> <v>` run rule and the parent sees adjacency it can use. Domain is exact and narrow: the document must be regenerable as JSON.stringify(JSON.parse(text), null, unit) plus at most one trailing LF, which is verified byte for byte before anything else; keys may not contain `~`; only contiguous same-shape runs of at least 3 records inside one container are projected; all runs share one child depth. The composed candidate is PROBOLE -> the SAME measured frontier on the envelope, priced as one complete message against the source frontier, and it is emitted only when the envelope restore is byte-exact and the complete message is strictly smaller. Greedy: runs are ranked by a character proxy and admitted one at a time only while the measured envelope strictly falls; the emission decision is the complete-message gate, not the planner. MEASURED NEGATIVE (bench/x67): exact and self-gating, but on the two real JSON lanes fully gated it LOSES — GitHub labels +239 (1639 vs 1400) and GitHub commits +255 (3822 vs 3567) — because the parent grammar binds a key to the prefix of its value, so a record\'s keys are context, not overhead. Prior art: json_compress / compress-json crates and libraries do key-catalogue + columnar-table + string-catalogue lossless JSON packing, and column stores are decades old; no new compression primitive is claimed. Time/CPU: planner is O(source chars) plus one frontier encode of the envelope; the inherited frontier dominates and has no wrapper-wide cap.',
+      family: 'exact',
+      fidelity: 'exact',
+      deep: true,
+      run: async (t, enc) => {
+        const r: any = proboleEncode(t, enc);
+        return {
+          output: r.message, decoded: r.decoded,
+          note: `${r.notes}; exact=${r.exact}; frontierComplete=${r.frontierComplete}; candidate=${r.candidateTokens ?? '-'}; candidateExact=${r.candidateExact ?? '-'}; probole=${(r as any).probole}` };
       },
     },
     {

@@ -93,6 +93,7 @@
 
 import { countTokens, type EncodingName } from './bpe';
 import { euteleiaEncode, euteleiaDecode, type EuteleiaResult } from './euteleia';
+import { workState, workConsume, chironConsume } from './workmeter';
 import type { Framing } from './anadiplosis';
 
 /** Separators scanned, matching the lattice OURA extends. */
@@ -368,11 +369,135 @@ export interface OuraResult extends EuteleiaResult {
   ouraSentinel: string;
 }
 
+/* ===========================================================================
+ * X67 — ENTRY-STATE MEMO (speed lane, decision preserving)
+ *
+ * MEASURED PROBLEM. The whole TAGSTACK frontier measures every parent on the
+ * SAME source, and four of those parents begin with an *identical* call:
+ *
+ *     apographe -> ouraEncode(text, enc, opts)      (first statement)
+ *     metron    -> apographeEncode(text, enc, {..kanon:true}) -> ouraEncode(text, ...)
+ *     diastema  -> ouraEncode(text, enc, opts)      (first statement)
+ *
+ * `ouraEncode` is the expensive part of each of them: on the recorded 1,203-char
+ * frontier lane the OURA/CHIRON search is ~11 s for APOGRAPHE and ~33 s for
+ * DIASTEMA (which exhausts its 2.12 M work budget), i.e. the same deterministic
+ * computation is bought twice. bench/x67/work.ts measures the split.
+ *
+ * WHY A NAIVE MEMO WOULD BE WRONG. The search is bounded by the deterministic
+ * work meter (workmeter.ts), whose result depends on the counters *at entry*.
+ * A second call inside the same epoch starts with fewer units left and may
+ * legitimately return a different wire. A result-keyed cache that ignored the
+ * counters could therefore change an emitted message.
+ *
+ * WHY THIS MEMO IS EXACT. It only fires when the meter state at entry is
+ * `depth === 1 && used === 0 && chironUsed === 0` — i.e. at the *start* of a
+ * fresh outermost epoch, which `workEpoch` always creates with the same
+ * budgets for the same source length. Two such calls are the same pure
+ * function of `(text, enc, options-that-reach-the-chain)` and provably return
+ * the same object; the memo only spares the second computation. Every other
+ * entry state (nested, mid-epoch, explicitly different budget) bypasses the
+ * memo and runs the ordinary code.
+ *
+ * The key contains: encoding, the exact source text, the *closure-visible*
+ * option subset, and both budgets. Options that only APOGRAPHE reads (kanon /
+ * apographe / forceLifts / forceSep / noGate) are excluded from the key HERE
+ * *and* stripped by the caller (apographe.ts) so the two call sites agree;
+ * bench/x67/oura-memo.ts asserts that the 110-file transitive closure of this
+ * module reads no such key. A hit returns a structured clone, so a caller that
+ * mutates its result cannot poison the entry.
+ * ======================================================================== */
+
+/** Option keys that `ouraEncode` and its transitive closure actually read. */
+const OURA_CLOSURE_OPTION_KEYS = [
+  'alphabet', 'anadiplosis', 'allowPolyglot', 'bootstrap', 'budgetMs',
+  'clauseLadder', 'dualTokenizer', 'forceScript', 'framing', 'group', 'hardWorkUnits',
+  'inCap', 'inGate', 'ladder', 'levels', 'marker', 'marker2', 'markers',
+  'maxBootstrapRules', 'maxEvals', 'maxRules', 'maxSpan', 'minGainOverride',
+  'minHexChars', 'minRun', 'noAssign', 'noBlocks', 'noMacros', 'noRelayout',
+  'noSearch', 'order', 'oura', 'ouraMode', 'ouraSentinel', 'ouraSentinels',
+  'ouraShape', 'restarts', 'script', 'scriptName', 'sep', 'stats', 'syncope',
+  'topK', 'undo', 'workUnits',
+];
+
+let ouraMemoHits = 0;
+let ouraMemoMisses = 0;
+const OURA_MEMO_MAX = 24;
+interface OuraMemoEntry { result: OuraResult; work: number; chiron: number }
+const OURA_MEMO = new Map<string, OuraMemoEntry>();
+
+export function ouraMemoStats(): { hits: number; misses: number; size: number } {
+  return { hits: ouraMemoHits, misses: ouraMemoMisses, size: OURA_MEMO.size };
+}
+
+export function ouraMemoClear(): void {
+  OURA_MEMO.clear(); ouraMemoHits = 0; ouraMemoMisses = 0;
+}
+
+function ouraMemoKey(text: string, enc: EncodingName, opts: any, budget: number, chironBudget: number): string | null {
+  if (opts === null || typeof opts !== 'object') return null;
+  const parts: string[] = [];
+  for (const k of OURA_CLOSURE_OPTION_KEYS) {
+    const v = (opts as any)[k];
+    if (v === undefined) continue;
+    if (typeof v === 'function' || typeof v === 'symbol') return null;
+    parts.push(k + '=' + JSON.stringify(v));
+  }
+  // any function-valued option the closure might read later must defeat the memo
+  for (const k of Object.keys(opts)) {
+    const v = (opts as any)[k];
+    if (typeof v === 'function' || typeof v === 'symbol') return null;
+  }
+  return `${enc}\u0000${budget}\u0000${chironBudget}\u0000${parts.join('\u0001')}\u0000${text}`;
+}
+
 /**
  * Encode: collapse one tail-anchored numeric shape, then run the stack.
  * Never ships a regression.
+ *
+ * X67: identical fresh-epoch calls are computed once (see the memo note above).
  */
 export function ouraEncode(
+  text: string,
+  enc: EncodingName = 'o200k_base',
+  opts: any = {},
+): OuraResult {
+  if (ouraMemoDisabled()) return ouraEncodeUncached(text, enc, opts);
+  const st = workState();
+  if (st.depth !== 1 || st.used !== 0 || st.chironUsed !== 0) {
+    return ouraEncodeUncached(text, enc, opts);
+  }
+  const key = ouraMemoKey(text, enc, opts, st.budget, st.chironBudget);
+  if (key === null) return ouraEncodeUncached(text, enc, opts);
+  const hit = OURA_MEMO.get(key);
+  if (hit) {
+    // REPLAY, do not skip. The meter is epoch-scoped and its remaining budget
+    // decides what every LATER stage in the same epoch does. Returning for free
+    // would hand the caller units it would not otherwise have, which was
+    // measured to lengthen DIASTEMA's interval search (36.5 s -> 49.9 s) and to
+    // change which wire it returns. Charging the recorded cost back makes the
+    // meter trajectory — and therefore every later decision — identical to the
+    // uncached run; only wall-clock work disappears.
+    workConsume(hit.work);
+    chironConsume(hit.chiron);
+    ouraMemoHits++;
+    return structuredClone(hit.result);
+  }
+  ouraMemoMisses++;
+  const result = ouraEncodeUncached(text, enc, opts);
+  if (OURA_MEMO.size >= OURA_MEMO_MAX) OURA_MEMO.clear();
+  const after = workState();
+  OURA_MEMO.set(key, { result, work: after.used - st.used, chiron: after.chironUsed - st.chironUsed });
+  return structuredClone(result);
+}
+
+/** `OMEGA_OURA_MEMO=0` disables the X67 memo (audit A/B switch). */
+function ouraMemoDisabled(): boolean {
+  const env = typeof process !== 'undefined' ? process.env?.OMEGA_OURA_MEMO : undefined;
+  return env === '0' || env === 'false';
+}
+
+function ouraEncodeUncached(
   text: string,
   enc: EncodingName = 'o200k_base',
   opts: any = {},

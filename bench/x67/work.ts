@@ -1,0 +1,24 @@
+import * as fs from 'node:fs';
+import { workEpoch, workBudgetFor, workUsed, workLastEpochUsed } from '../../src/lib/omega/workmeter';
+import { synkrisisEncode } from '../../src/lib/omega/synkrisis';
+import { kanonEncode } from '../../src/lib/omega/kanon';
+import { akolouthia2Encode } from '../../src/lib/omega/akolouthia2';
+import { apographeEncode } from '../../src/lib/omega/apographe';
+import { metronEncode, metronPlan } from '../../src/lib/omega/metron';
+import { diastemaEncode } from '../../src/lib/omega/diastema';
+const enc: any = 'o200k_base';
+const path = process.argv[2];
+const text = fs.readFileSync(path, 'utf8');
+const budget = workBudgetFor(text.length);
+console.log(`${path} len=${text.length} budget=${budget}`);
+const run = (name: string, fn: () => void) => {
+  const s = Date.now();
+  workEpoch(budget, fn, text.length);
+  console.log(`${name}\tms=${Date.now()-s}\tepochUsed=${workLastEpochUsed()}\ttotalUsed=${workUsed()}\tbound=${workLastEpochUsed() >= budget}`);
+};
+run('synkrisis', () => synkrisisEncode(text, enc));
+run('kanon', () => kanonEncode(text, enc));
+run('akolouthia2', () => akolouthia2Encode(text, enc));
+run('apographe', () => apographeEncode(text, enc));
+if (metronPlan(text, enc)?.proxyGain) run('metron', () => metronEncode(text, enc));
+run('diastema', () => diastemaEncode(text, enc));

@@ -1,0 +1,57 @@
+{
+  "encoding": "o200k_base",
+  "node": "v22.22.3",
+  "OMEGA_DET": null,
+  "rows": [
+    {
+      "fixture": "bench/x67/fixtures/gh-commits-4.json",
+      "sourceSha256": "873350112a259649a2f36cb1d4310cbcfb2c4fb74406de1bcdc0604478ae15cc",
+      "sourceChars": 21289,
+      "rawTokens": 7777,
+      "plan": {
+        "indent": "",
+        "childDepth": 1,
+        "runs": [
+          {
+            "id": 0,
+            "count": 4,
+            "slots": 62,
+            "templateChars": 939
+          }
+        ],
+        "records": 4,
+        "envelopeTokens": 6966,
+        "contractTokens": 112,
+        "proxyGain": 811
+      },
+      "source": {
+        "frontierTokens": 3567,
+        "winner": "synkrisis",
+        "frontierCosts": {
+          "synkrisis": 3567,
+          "kanon": 7306,
+          "akolouthia2": 3673,
+          "apographe": 3567,
+          "diastema": 3567
+        },
+        "siblingTokens": 3567,
+        "frontierComplete": true,
+        "exact": true
+      },
+      "result": {
+        "applied": false,
+        "probole": false,
+        "exact": true,
+        "messageTokens": 3567,
+        "candidateTokens": 3822,
+        "candidateExact": true,
+        "notes": "candidate M=3822 >= source frontier M=3567; fallback=synkrisis:3567",
+        "deltaVsFrontier": 255,
+        "decodedEqualsSource": true,
+        "independentEnvelopeRestoreEqualsSource": true,
+        "messageSha256": "50faeb6986da02565d54ab62ed09a3760608ce92cc6ff11ac5256ebcf5934a34",
+        "elapsedMs": 321947
+      }
+    }
+  ]
+}

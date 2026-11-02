@@ -4601,3 +4601,52 @@ Historical OpenStack numbers such as POLYTROPOS 988 are from a different measure
 ## X66 — JSON-ESCAPE-FOLD (no full-frontier win)
 
 `json-escape-fold` folds five lowercase safe JSON escapes (`\u003c`, `\u003e`, `\u003d`, `\u0026`, `\u0027`) inside valid JSON strings to their literal punctuation, marking each with a collision-free private-use scalar. Its serialized one-message header carries the marker and inverse rule; child content is a complete TAGSTACK/SIBLING message. Exact inverse checks pass, but the strict complete-message gate rejects both tested candidates: SPDX MIT **1,052** vs SYNKRISIS frontier **949** (+103), and Apache-2.0 **3,142** vs SYNKRISIS **3,010** (+132). Both final receipts report `sourceBytesEqual: true` and `independentEnvelopeSourceBytesEqual: true` after UTF-8 buffer comparisons. No leader change or Pareto win. Red-team runner reports 11 scenarios/check groups passed; `npx tsc --noEmit` and `npm run build` pass. An independent stdlib-Python transform reader matches the MIT fixture's original UTF-8 bytes/SHA from the serialized header and transformed text; this is not an independent TAGSTACK parent decoder. No native LLM decode is claimed. Full design, receipts, prior-art review, six-plus mechanism avenues, exact X61 repeat, and bounded AI-mathematics audit: [`bench/x66/REPORT.md`](../bench/x66/REPORT.md).
+
+## X67 — PROBOLE, the OURA memo, and the finding that decides the next JSON attempt
+
+### X67 speed: OURA entry memo, 1.601× with a byte-identical message
+
+The deterministic work meter makes the frontier's search reproducible, so the same text with the same budget re-derives the same answer. `src/lib/omega/oura.ts` memoises `{key → (result message+wire, work state, chiron state)}` at the frontier entry and replays it on a hit (cap 24, `OMEGA_OURA_MEMO=0` to disable). The first version cached only the result and was **unsound**: skipping the work meter handed the caller free budget, DIASTEMA ran 36.5 s → 49.9 s, and METRON stopped reporting `bound`. The shipped version replays `used` / `chironUsed`, so the hit is a replay of the work rather than a shortcut around it.
+
+Measured on `bench/holdout-x40/metrics.tsv` (1,203 ch, 811 raw), receipt `bench/x67/receipts/frontier-ab.json`:
+
+| | memo OFF | memo ON |
+|---|---|---|
+| wall clock | 110,478 ms | **68,991 ms (1.601×)** |
+| wall clock, post-change re-run | 107,554 ms | **68,179 ms (1.578×)** |
+| complete message SHA-256 | `f0e0ffb9…8664628` | `f0e0ffb9…8664628` (identical) |
+| frontier costs | 237/236/210/237/237/237 | identical |
+| memo counters | — | hits 3, misses 1, size 1 |
+
+METRON and DIASTEMA are `bound` in both runs. This is a single recorded lane on a 2-core sandbox, not a benchmark suite. The memo key is the option tuple after `APOGRAPHE_ONLY_OPTION_KEYS` stripping; a closure scan over 110 files / 45 option keys found that none of `apographe|kanon|forceLifts|forceSep|noGate` is read inside the OURA chain, so stripping cannot change the wire.
+
+### X67 codec: PROBOLE (`src/lib/omega/probole.ts`)
+
+Every frontier mechanism substitutes at the point of use, so a repeated unit costs at least one token per use and a substitution grammar pays about one glyph per key per record forever. PROBOLE emits one record's multi-line frame once with `~` slots, states the record separator and outer text as JSON strings, lists the instance values slot-major with an in-band `*k v` run rule for constant columns, and hands the envelope to the same measured frontier. Contract 112 tokens, self-contained. Domain is exact and narrow (canonical `JSON.stringify` form verified byte for byte; CRLF, escape-folded or hand-prettified JSON, keys with `~`, fewer than 3 same-shape records and non-contiguous shapes are refused).
+
+| fixture | raw | envelope | source frontier | PROBOLE candidate | outcome |
+|---|---|---|---|---|---|
+| `gh-labels-50.json` (14,670 ch) | 4,371 | 3,275 | **1,400** (SYNKRISIS) | 1,639 | refused, **+239** |
+| `gh-commits-4.json` (21,293 ch) | 7,777 | 6,966 | **3,567** (SYNKRISIS) | 3,822 | refused, **+255** |
+| `gh-tags-60.json` (24,128 ch) | 9,890 | 8,999 (−9 %) | not gated | — | screen only |
+
+Both gated candidates restore byte-exactly at both layers and both fail the complete-message gate, so the codec returns the exact frontier message and the frontier does not move.
+
+**Why it loses, and why that matters more than the codec.** On labels, deleting the frame saves ≈350 raw key/punctuation tokens, but the parent then compresses the envelope to 1,527 tokens against 1,370 for the source — it lost ≈500 tokens of compressive power on a text that was 1,096 raw tokens smaller. A substitution grammar binds a key to the prefix of its value (`"url":"https://api.github.com/repos/nodejs/node/labels/` is one rule). Remove the keys and the rule dies. **On nested JSON the keys are context, not overhead**, which is why column-store layout and template projection keep losing against the grammar. The remaining headroom on that fixture is elsewhere: 50 labels carry ≈100 tokens of true content against a 1,400-token frontier because `node_id` is `base64("Label" + id)` and `url` is a constant prefix plus a sibling field. Field entailment over JSON — not frame projection — is the mechanism that can reach it, and it has to be priced at `synkrisis:1400` like everything else.
+
+### X67 cross-lane position (measured, not projected)
+
+| lane | fixture | raw | frontier | `xz -9e` | 2×(xz+2) token reference |
+|---|---|---|---|---|---|
+| ops table | `holdout-x40/metrics.tsv` | 811 | **210** | 396 B | ~796 |
+| prose | `holdout/kb-article.txt` | 526 | **622** | 1,652 B | ~3,308 |
+| markup | `holdout/pom.xml` | 1,178 | **544** | 420 B | ~844 |
+| JSON small | `holdout/json-pkg.txt` | 1,038 | **681** | 1,308 B | ~2,620 |
+| JSON API | `fixtures/gh-api.json.txt` | 2,239 | **2,519** | 1,936 B | ~3,876 |
+| listing | `holdout/find-listing.txt` | 2,013 | **1,142** | 2,096 B | ~4,196 |
+| JSON API (new) | `fixtures/gh-labels-50.json` | 4,371 | **1,400** | 2,348 B | ~4,700 |
+| JSON API (new) | `fixtures/gh-commits-4.json` | 7,777 | **3,567** | 5,144 B | ~10,292 |
+
+On structured lanes the frontier sits 2–3× below the `2×(xz+2)` reference because a frontier token buys ~3.2 characters while an emitted xz byte costs ~2 tokens. On prose the frontier is at identity (622 vs 526 raw) — prose has no repetition to substitute, so there is no mechanical win there, only the contract floor.
+
+**Verdict:** one honest, verified speed win (1.601×, byte-identical message) and one exact, registered, self-gating codec that is a **measured negative** on both lanes it was gated on. No Pareto compression gain is claimed. Native-LLM decoding: one worked instance was decoded in-chat from the message alone (20 records, 522 → 317 tokens, reconstruction equal to the source, printed and asserted by `bench/x67/worked-example.ts`); no external model was called. Full record: [`bench/x67/REPORT.md`](../bench/x67/REPORT.md).

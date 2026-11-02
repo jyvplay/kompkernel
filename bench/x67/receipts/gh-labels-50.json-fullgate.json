@@ -1,0 +1,50 @@
+{
+  "fixture": "bench/x67/fixtures/gh-labels-50.json",
+  "sourceSha256": "be5dafa2dd70fa7d8a6957f9cdb513286f58510551e9d476ebf7a4b7ca93c9c5",
+  "sourceChars": 14670,
+  "rawTokens": 4371,
+  "plan": {
+    "indent": "",
+    "childDepth": 1,
+    "runs": [
+      {
+        "id": 0,
+        "count": 50,
+        "slots": 9,
+        "templateChars": 107
+      }
+    ],
+    "records": 50,
+    "envelopeTokens": 3275,
+    "contractTokens": 112,
+    "proxyGain": 1096
+  },
+  "source": {
+    "frontierTokens": 1400,
+    "winner": "synkrisis",
+    "frontierCosts": {
+      "synkrisis": 1400,
+      "kanon": 2848,
+      "akolouthia2": 1444,
+      "apographe": 1400,
+      "diastema": 1400
+    },
+    "siblingTokens": 1400,
+    "frontierComplete": true,
+    "exact": true
+  },
+  "result": {
+    "applied": false,
+    "probole": false,
+    "exact": true,
+    "messageTokens": 1400,
+    "candidateTokens": 1639,
+    "candidateExact": true,
+    "notes": "candidate M=1639 >= source frontier M=1400; fallback=synkrisis:1400",
+    "deltaVsFrontier": 239,
+    "decodedEqualsSource": true,
+    "independentEnvelopeRestoreEqualsSource": true,
+    "messageSha256": "bcb043f01a1d051dcbca045ceebf6c11d92c168f046cf9c5052aa24de86e210a",
+    "elapsedMs": 197209
+  }
+}

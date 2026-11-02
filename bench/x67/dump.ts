@@ -1,0 +1,10 @@
+import * as fs from 'node:fs';
+import { countTokens } from '../../src/lib/omega/bpe';
+import { apographeEncode } from '../../src/lib/omega/apographe';
+const enc: any = 'o200k_base';
+const text = fs.readFileSync(process.argv[2], 'utf8');
+const r = apographeEncode(text, enc);
+const m = (r.contract ? r.contract + '\n' : '') + r.wire;
+console.log('--- CONTRACT ---\n' + (r.contract ?? '(none)'));
+console.log('--- WIRE (tokens=' + countTokens(r.wire, enc) + ' chars=' + r.wire.length + ') ---');
+console.log(r.wire.slice(0, 4000));

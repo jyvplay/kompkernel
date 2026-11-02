@@ -1,0 +1,40 @@
+{
+  "encoding": "o200k_base",
+  "node": "v22.22.3",
+  "OMEGA_DET": null,
+  "rows": [
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "chars": 1203,
+      "rawTokens": 811,
+      "memoOffMs": 107554,
+      "memoOnMs": 68179,
+      "ratio": 1.578,
+      "sameCompleteMessage": true,
+      "messageSha256": [
+        "f0e0ffb9543f3b2f7032067ed73d6fa3de84745639647fafdc109bdca1864628",
+        "f0e0ffb9543f3b2f7032067ed73d6fa3de84745639647fafdc109bdca1864628"
+      ],
+      "sameFrontierCosts": true,
+      "frontierComplete": true,
+      "frontierTokens": 210,
+      "winner": "akolouthia2",
+      "frontierCosts": {
+        "synkrisis": 237,
+        "kanon": 236,
+        "akolouthia2": 210,
+        "apographe": 237,
+        "metron": 237,
+        "diastema": 237
+      },
+      "decodedEqualsSource": true,
+      "siblingSame": true,
+      "memo": {
+        "hits": 3,
+        "misses": 1,
+        "size": 1
+      },
+      "note": "in-process A/B; the ON run follows the OFF run, so both share warm pure token caches"
+    }
+  ]
+}
