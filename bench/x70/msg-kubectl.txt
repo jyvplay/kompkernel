@@ -1,0 +1,25 @@
+Lines A-B (from 0) below the directive line are one table split by SEP; the rest is literal. _ = fields split by 2+ spaces, rejoined with 1; only the last may hold a space. h = leading lines kept, then rows r=0,1,2,.. A = field start columns, minus = end column of a right-aligned field. G<c>=<spec> restores deleted column c per row r; {A+B}=A+B*r, mM=A+(B*r mod M), zW=zero-pad to W, cX is the r-th letter from X. #p:v,.. cycles p values. print only.
+¦T_0-22h1;G0=api-server-7d9f8b{0+1z2}-{ca0+1m5}{0+3z4};G1=1/1;G2=#3:Running,Running,Pending;G3={0+1m4};G4={2+1}d{0+1}h;G5=10.244.{0+1m8}.{0+11};G6=node-{0+1m5}.cluster.internal;A0,37,45,57,68,76,92
+NAME READY STATUS RESTARTS AGE IP NODE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

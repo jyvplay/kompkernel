@@ -1,0 +1,8 @@
+{
+ "lane": "bench/holdout-x40/metrics.tsv",
+ "exact": true,
+ "gotChars": 1203,
+ "wantChars": 1203,
+ "firstDiffAt": -1,
+ "messageTokens": null
+}

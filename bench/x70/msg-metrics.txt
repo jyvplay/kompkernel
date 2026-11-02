@@ -1,0 +1,27 @@
+Lines A-B (from 0) below the directive line are one table split by SEP; the rest is literal. h = leading lines kept, then rows r=0,1,2,.. G<c>=<spec> restores deleted column c per row r; {A+B}=A+B*r, mM=A+(B*r mod M), zW=zero-pad to W. #p:v,.. cycles p values. print only.
+¦T	0-24h1;G0=2026-10-24T00:{0+1z2}:00Z;G1=nvme0n{0+1m3};G2={100+3}.{0+1m10};G3={250+2}.0;G4=0.{0+1m7};G5=#5:down,up,up,up,up
+ts	iface	in_mbps	out_mbps	loss_pct	state
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
