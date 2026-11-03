@@ -192,10 +192,26 @@ export function brachysContractFor(dirs: string[], band: 'b' | 'c' = 'b'): strin
 }
 
 /** The body band the contract declares, or null when the contract is not ours. */
+/**
+ * X71: the base clause is the BAND MARKER, not decoration. AUSTEROS (austere.ts)
+ * searches the instruction, so the reader must recognise every base phrasing the
+ * pool admits. Two things are load-bearing and are therefore fixed:
+ *   - the c-tape band is identified by the words "c-tape", so a tape body is
+ *     never read as a literal body;
+ *   - the literal band is identified by this exact prefix, which every admitted
+ *     literal phrasing in AUSTERE_POOL.baseLit carries verbatim.
+ * Nothing else in the contract is parsed by the decoder: the WIRE is identical to
+ * BRACHYS's, so exactness does not depend on the rest of the English. The rest of
+ * the English is validated by an independent reader instead (bench/x71/reader3.ts).
+ */
+export const AUSTERE_BASE_LIT_PREFIX = 'A-B are 0-based body lines';
+
 export function brachysBandOf(contract: string): 'b' | 'c' | null {
   if (contract === '') return null;
   if (contract.startsWith(BRACHYS_FRAGMENTS.baseLit)) return 'b';
   if (contract.startsWith(BRACHYS_FRAGMENTS.baseTape)) return 'c';
+  if (contract.includes('c-tape')) return 'c';
+  if (contract.startsWith(AUSTERE_BASE_LIT_PREFIX)) return 'b';
   return null;
 }
 

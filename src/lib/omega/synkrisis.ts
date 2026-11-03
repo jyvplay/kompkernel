@@ -129,6 +129,29 @@ function equalWords(a: readonly string[], b: readonly string[]): boolean {
 }
 
 /** LCS backtrack. All edit positions refer to the original canonical word list. */
+/**
+ * True when the two word bags share at least `floor` words counting multiplicity.
+ * Sound upper bound on the LCS: a common subsequence is a common multiset.
+ * Exits early on a hit, so the common (matching-template) path pays almost nothing.
+ */
+function multisetMeetsFloor(a: readonly string[], b: readonly string[], floor: number): boolean {
+  if (floor <= 0) return true;
+  if (a.length < floor || b.length < floor) return false;
+  const small = a.length <= b.length ? a : b;
+  const big = a.length <= b.length ? b : a;
+  const bag = new Map<string, number>();
+  for (const w of big) bag.set(w, (bag.get(w) ?? 0) + 1);
+  let shared = 0;
+  for (const w of small) {
+    const c = bag.get(w);
+    if (c === undefined) continue;
+    shared++;
+    if (shared >= floor) return true;
+    if (c === 1) bag.delete(w); else bag.set(w, c - 1);
+  }
+  return false;
+}
+
 function wordHunks(a: string[], b: string[]): Hunk[] | null {
   if (a.length > MAX_WORDS || b.length > MAX_WORDS) return null;
   const n = a.length, m = b.length, cols = m + 1;
@@ -258,6 +281,15 @@ function wordCandidate(text: string, enc: EncodingName): WordCandidate[] {
     if (baseWords.length < 30 || baseWords.length > MAX_WORDS) continue;
     const region = parseWordRegion(text, eol, baseWords.slice(0, 3));
     if (!region || region.words.length > MAX_WORDS) continue;
+    // X71 ADMISSIBLE BOUND (pure pruning, no behavioural change).
+    // wordHunks() is an O(n*m) LCS. A candidate is admissible only when
+    //   changed = sum(del + put) <= MAX_CHANGED_WORDS,
+    // so the aligned (LCS) word count is at least baseWords.length - MAX_CHANGED_WORDS,
+    // and LCS(a,b) <= |multiset intersection(a,b)| always. If the intersection is
+    // smaller than that floor, no admissible hunk set exists and the LCS cannot
+    // change the outcome. Words that repeat are counted, so this is a real bound
+    // and not a distinct-word count.
+    if (!multisetMeetsFloor(baseWords, region.words, baseWords.length - MAX_CHANGED_WORDS)) continue;
     const hunks = wordHunks(baseWords, region.words);
     if (!hunks || !hunks.length || hunks.length > MAX_HUNKS) continue;
     const changed = hunks.reduce((sum, h) => sum + h.del + h.put.length, 0);

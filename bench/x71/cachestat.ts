@@ -1,0 +1,13 @@
+import * as fs from 'node:fs';
+import { tagstackEncode } from '../../src/lib/omega/tagstack';
+import { chunkCacheStats } from '../../src/lib/omega/bpe';
+const enc: any = 'o200k_base';
+const p = process.argv[2];
+const text = fs.readFileSync(p, 'utf8');
+const t0 = Date.now();
+const r: any = tagstackEncode(text, enc);
+const ms = Date.now() - t0;
+const s: any = chunkCacheStats();
+console.error(`${p} ${r.messageTokens} tok ${ms}ms exact=${r.decoded === text}`);
+console.error(`chunk hit ${s.hits} miss ${s.misses} size ${s.size} | long hit ${s.longHits} miss ${s.longMisses} size ${s.longSize}/${s.longChars} chars | short hit ${s.shortHits} miss ${s.shortMisses}`);
+console.error(`chunks per miss ${(s.hits + s.misses) / Math.max(1, s.misses)}`);

@@ -3319,3 +3319,19 @@ Two structural findings, both measured: the frontier's gain is monotone in **wit
 | **Known limit** | nothing on a lane with no qualifying fold. `ls -l`, `ps aux`, `ps -ef` have **zero** foldable blocks because their rows carry an interior space (`Sep 30 07:59`) and the space-run join is a single space. That is the next mechanism, not a contract fix. |
 | **Verification** | 37 checks / 0 failures; 1 417/1 417 fuzz tables exact under two readers; 2 147 agreements, 1 744 fail-closed refusals, 0 disagreements over 4 000 mutants; `reader2.ts` (imports nothing from the codec) reproduces all three winning lanes byte-exactly. |
 | **Record** | [`docs/codecs.md`](codecs.md) §X70, [`bench/x70/REPORT.md`](../bench/x70/REPORT.md) |
+
+## X71 — AUSTEROS (αὐστηρός, `austere`)
+
+| field | value |
+|---|---|
+| **Abbreviation** | `austere` — αὐστηρός, "austere". Not an acronym: it names the change, which is that the instruction is austere by search rather than by taste. |
+| **Decodes to (design spec)** | BRACHYS's wire, notation and reader, **unchanged**, with the decoder instruction assembled from a per-feature pool of phrasings by coordinate descent on the token count of the **complete message**. Fixed order, punctuation repaired, gen head and its `s` terms emitted as one sentence. |
+| **Greedy?** | **No.** Coordinate descent (two passes + a gen-head pass) on a measured complete-message objective, then a gate requiring strict improvement over **both** `tagstackEncode` and `brachysEncode` in the same process. |
+| **Time or CPU bound?** | **CPU-bound. No wall clock is consulted.** 20–60 extra `countTokens` calls over two `hyleEncode(fast)` calls; no measurable wall-clock change. No speed claim. |
+| **Source citation (honest)** | Primitives are prior art, cited: HYLE/KANON table fold; ClickHouse `ALP` scaled-decimal integer slots; `Virtual`/K-regression per-column generators, arXiv:2410.14066; in-prompt codes decoded by an LLM, arXiv:2604.13066 and arXiv:2411.12448. Corroborating the prose negative result: arXiv:2605.29000. Contrast (different problem, not beaten): arXiv:2603.25340 (18×, fine-tuned reader) and Harvill et al. 2025 (18–27 %, fine-tuned reader). **No model was called to decode AUSTEROS.** |
+| **What is new here** | The decoder specification as an objective term minimised under measurement, with a pool/descent method that does not change the notation or the decoder; plus the finding that the band marker is load-bearing **code** (reworking it broke the reader until the marker was declared). |
+| **Measured** | `psql-output` 244 → **207** (−37); `kubectl-get-pods` 326 → **263** (−63); `metrics.tsv` 210 → **185** (−25); `prices.csv` 133 → **107** (−26); `df-h` 171 → **151** (−20); `markdown-table` 176 → **162** (−14). 29 lanes: **6 wins, 23 ties, 0 regressions**, 12 702 → 12 517. |
+| **Fails closed on** | any message its own reader cannot reproduce; any candidate not strictly below both incumbents; any lane with no fold. |
+| **Known limit** | table-family lanes only. Prose does not move, and four independent measurements say it cannot under this access model. |
+| **Verification** | own reader exact on all 6 winners; **third, prose-only reader** (`bench/x71/reader3.ts`) byte-exact on `psql`, `metrics.tsv`, `df-h`; `tsc --noEmit` clean. |
+| **Record** | [`docs/codecs.md`](codecs.md) §X71, [`bench/x71/REPORT.md`](../bench/x71/REPORT.md) |

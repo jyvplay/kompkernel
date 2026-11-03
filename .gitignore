@@ -13,3 +13,5 @@ npm-debug.log*
 out/
 bench/*/airport-fullgate.mjs
 bench/x70/*.mjs
+bench/x71/*.mjs
+bench/x71/prof*/

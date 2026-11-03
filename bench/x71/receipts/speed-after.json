@@ -1,0 +1,115 @@
+{
+ "node": "v22.22.3",
+ "encoding": "o200k_base",
+ "OMEGA_DET": null,
+ "rows": [
+  {
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "raw": 1006,
+   "tokens": 332,
+   "winner": "akolouthia2",
+   "exact": true,
+   "sha": "b2b034079d31a0e9",
+   "ms": 47086
+  },
+  {
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "raw": 675,
+   "tokens": 244,
+   "winner": "metron",
+   "exact": true,
+   "sha": "2e21ee7ff9fd3147",
+   "ms": 13857
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "raw": 1000,
+   "tokens": 674,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "cc54cec9a6aaa4b9",
+   "ms": 42176
+  },
+  {
+   "path": "bench/holdout-x41/node-help.txt",
+   "raw": 1099,
+   "tokens": 863,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "5ea261df525c8550",
+   "ms": 8360
+  },
+  {
+   "path": "bench/holdout-x41/ls-l-nm.txt",
+   "raw": 2160,
+   "tokens": 406,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "0a1a7777da62b7da",
+   "ms": 32550
+  },
+  {
+   "path": "bench/holdout-x41/find-files.txt",
+   "raw": 1669,
+   "tokens": 635,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "8cdcc013d3e4a3f8",
+   "ms": 38583
+  },
+  {
+   "path": "bench/holdout-x42/findmnt.txt",
+   "raw": 787,
+   "tokens": 444,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "fb8be7b029008496",
+   "ms": 9302
+  },
+  {
+   "path": "bench/holdout/readme.txt",
+   "raw": 843,
+   "tokens": 646,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "6a78a0b364324b6e",
+   "ms": 12014
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "raw": 656,
+   "tokens": 622,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "c1c20fb4bb844d55",
+   "ms": 3615
+  },
+  {
+   "path": "bench/holdout-work/llm-answer.md",
+   "raw": 733,
+   "tokens": 674,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "7cc33382bd891afe",
+   "ms": 13750
+  },
+  {
+   "path": "bench/holdout/license.txt",
+   "raw": 1166,
+   "tokens": 929,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "7effcc2ddf52cef1",
+   "ms": 13797
+  },
+  {
+   "path": "bench/holdout-x42/ls-usr-bin.txt",
+   "raw": 1029,
+   "tokens": 375,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "9e31e2dcb98548cb",
+   "ms": 19564
+  }
+ ]
+}
