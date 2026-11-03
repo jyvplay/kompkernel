@@ -1,0 +1,11 @@
+import * as fs from 'node:fs';
+import { countTokens } from '../../src/lib/omega/bpe';
+import { tagstackEncode } from '../../src/lib/omega/tagstack';
+const enc: any = 'o200k_base';
+const p = process.argv[2];
+const t = fs.readFileSync(p, 'utf8');
+const r: any = tagstackEncode(t, enc);
+console.log(`${p}: raw ${countTokens(t, enc)} frontier ${r.messageTokens} parent ${r.parentCodec}`);
+const lines = r.message.split('\n');
+console.log('contract:', lines[0].slice(0, 300));
+console.log('lines:', lines.length);

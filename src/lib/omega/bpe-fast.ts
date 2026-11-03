@@ -53,7 +53,15 @@ type AnyCore = {
 
 let CORE: AnyCore | null = null;
 let VOCAB: Map<string, number> | null = null;
-const SMALL = new Map<number, number>();   // 2..4 bytes: key = len * 2^32 + packed
+const SMALL = new Map<number, number>();   // 3..4 bytes: key = len * 2^32 + packed
+/**
+ * X73: the two-byte case is by far the most common rank lookup in the merge loop
+ * (every merge starts by ranking adjacent byte pairs), and it was still going
+ * through a Map with a float key. A flat Int32Array indexed by `b0<<8|b1` is one
+ * load instead of a hash. -1 means "no such token". The gate in bench/x72/ids.ts
+ * is unchanged and still binds: this is the same function.
+ */
+const PAIR2 = new Int32Array(65536).fill(-1);
 const LONG = new Map<string, number>();    // 5+ bytes: key = latin1 of the bytes
 let READY = false;
 export let FAST_BUILD_MS = 0;
@@ -124,9 +132,11 @@ export function fastReady(): boolean {
     RE = new RegExp(CORE.tokenSplitRegex.source, CORE.tokenSplitRegex.flags);
     SMALL.clear();
     LONG.clear();
+    PAIR2.fill(-1);
     const put = (bytes: Uint8Array, rank: number) => {
       const n = bytes.length;
       if (n < 2) return;
+      if (n === 2) { PAIR2[(bytes[0] << 8) | bytes[1]] = rank; return; }
       if (n <= 4) SMALL.set(keyOf(bytes, 0, n), rank);
       else LONG.set(latin1(bytes, 0, n), rank);
     };
@@ -214,8 +224,8 @@ function mergeCount(b: Uint8Array, n: number): number {
 function rankAt(b: Uint8Array, s: number, e: number): number {
   const n = e - s;
   if (n === 2) {
-    const v = SMALL.get(8589934592 + b[s] * 16777216 + b[s + 1] * 65536);
-    return v === undefined ? INF : v;
+    const v = PAIR2[(b[s] << 8) | b[s + 1]];
+    return v < 0 ? INF : v;
   }
   if (n === 3) {
     const v = SMALL.get(12884901888 + b[s] * 16777216 + b[s + 1] * 65536 + b[s + 2] * 256);

@@ -20,6 +20,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { stichomythiaEncode } from './stichomythia';
 import { workEpoch, workBudgetFor } from './workmeter';
 import { apographeDecodeResult, apographeEncode } from './apographe';
 import { bifrontEncode, bifrontPlan } from './bifront';
@@ -70,7 +71,7 @@ export interface TagstackResult {
   mode: TagstackMode | null;
   marker: string | null;
   pairs: number;
-  arm: 'tagstack' | 'synkrisis-parent' | 'current-frontier-parent';
+  arm: 'tagstack' | 'synkrisis-parent' | 'current-frontier-parent' | 'stichomythia';
   candidateTokens: number | null;
   candidateExact: boolean | null;
   /** Kept for audit receipts; not required as decoder-side hidden state. */
@@ -430,5 +431,30 @@ function tagstackEncodeInner(text: string, enc: EncodingName = 'o200k_base'): Ta
  * not one shared window — see workmeter.ts.
  */
 export function tagstackEncode(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
-  return tagstackEncodeInner(text, enc);
+  const base = tagstackEncodeInner(text, enc);
+  /**
+   * X73 — STICHOMYTHIA joins the frontier as a CANDIDATE, not as a rewrite.
+   *
+   * It models each table column as a program (`1+1*r`, `00:00:02@+3s`,
+   * `s0|s1|s2|s3*`) instead of as values to copy, which is the one axis the
+   * parents above do not have: X72 folded repeated CELLS, X71 searched the
+   * CONTRACT, and neither can print a column of distinct values for less than
+   * the values cost. Measured on the 29-lane gate it wins exactly one lane,
+   * cue-sheet 163 -> 101, and loses the rest; so it is admitted the only way
+   * anything is admitted here — by being strictly smaller on a complete,
+   * decoded, byte-exact message, in the same process, or not at all.
+   */
+  const stich = stichomythiaEncode(text, enc);
+  if (!stich.applied || stich.decoded !== text || stich.messageTokens >= base.messageTokens) return base;
+  return {
+    ...base,
+    wire: stich.message,
+    message: stich.message,
+    decoded: stich.decoded,
+    messageTokens: stich.messageTokens,
+    parentCodec: 'stichomythia' as unknown as typeof base.parentCodec,
+    arm: 'stichomythia',
+    applied: true,
+    notes: `STICHOMYTHIA ${stich.rows}x${stich.cols} M=${stich.messageTokens} < ${base.parentCodec} M=${base.messageTokens}; ${base.notes}`,
+  };
 }

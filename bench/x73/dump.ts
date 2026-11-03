@@ -1,0 +1,11 @@
+import * as fs from 'node:fs';
+import { countTokens } from '../../src/lib/omega/bpe';
+import { tagstackEncode } from '../../src/lib/omega/tagstack';
+const enc: any = 'o200k_base';
+const p = process.argv[2];
+const t = fs.readFileSync(p, 'utf8');
+const r: any = tagstackEncode(t, enc);
+const lines = r.message.split('\n');
+console.log(`### ${p}  tokens=${r.messageTokens} parent=${r.parentCodec} lines=${lines.length}`);
+for (const l of lines.slice(0, 12)) console.log(`${String(countTokens(l + '\n', enc)).padStart(4)} | ${l.slice(0, 200)}`);
+console.log(`--- total ${r.messageTokens}; first 12 lines = ${countTokens(lines.slice(0, 12).join('\n'), enc)}`);

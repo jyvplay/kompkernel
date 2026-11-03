@@ -11,7 +11,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 2644
+   "ms": 2595
   },
   {
    "path": "bench/holdout-work/kb-article.txt",
@@ -22,7 +22,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 2647
+   "ms": 2781
   },
   {
    "path": "bench/holdout-x42b/uptime-w.txt",
@@ -33,7 +33,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 2325
+   "ms": 2396
   },
   {
    "path": "bench/holdout-x42b/free-m.txt",
@@ -44,7 +44,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 2915
+   "ms": 2390
   },
   {
    "path": "bench/holdout-x42b/vmstat.txt",
@@ -55,7 +55,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 4265
+   "ms": 3308
   },
   {
    "path": "bench/holdout-work/unified-diff.patch",
@@ -66,7 +66,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 4351
+   "ms": 3547
   },
   {
    "path": "bench/holdout-tbl/df-h.txt",
@@ -77,7 +77,7 @@
    "folded": false,
    "parent": "akolouthia2",
    "exact": true,
-   "ms": 2841
+   "ms": 2494
   },
   {
    "path": "bench/holdout-x41/df-real.txt",
@@ -88,7 +88,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 9941
+   "ms": 9287
   },
   {
    "path": "bench/holdout-x41/du-real.txt",
@@ -99,18 +99,18 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 4296
+   "ms": 4866
   },
   {
    "path": "bench/holdout-x41/node-help.txt",
    "raw": 1099,
-   "tokens": 864,
+   "tokens": 863,
    "prior": 863,
-   "delta": 1,
+   "delta": 0,
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 6808
+   "ms": 6748
   },
   {
    "path": "bench/holdout-x42/findmnt.txt",
@@ -121,7 +121,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 7450
+   "ms": 7831
   },
   {
    "path": "bench/holdout-x42/df-h.txt",
@@ -132,7 +132,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 5035
+   "ms": 5055
   },
   {
    "path": "bench/holdout-work/email-thread.txt",
@@ -143,7 +143,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 9977
+   "ms": 9737
   },
   {
    "path": "bench/holdout-work/llm-answer.md",
@@ -154,7 +154,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 8963
+   "ms": 8907
   },
   {
    "path": "bench/holdout-tbl/markdown-table.md",
@@ -165,7 +165,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 7354
+   "ms": 7812
   },
   {
    "path": "bench/holdout-tbl/psql-output.txt",
@@ -176,7 +176,7 @@
    "folded": false,
    "parent": "metron",
    "exact": true,
-   "ms": 10721
+   "ms": 11211
   },
   {
    "path": "bench/holdout-x40/prices.csv",
@@ -187,18 +187,18 @@
    "folded": false,
    "parent": "diastema",
    "exact": true,
-   "ms": 12337
+   "ms": 12747
   },
   {
    "path": "bench/holdout-x40/cue-sheet.md",
    "raw": 513,
-   "tokens": 163,
+   "tokens": 101,
    "prior": 163,
-   "delta": 0,
+   "delta": -62,
    "folded": false,
-   "parent": "metron",
+   "parent": "stichomythia",
    "exact": true,
-   "ms": 13711
+   "ms": 14807
   },
   {
    "path": "bench/holdout-x42/ps-ef.txt",
@@ -209,7 +209,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 14366
+   "ms": 15492
   },
   {
    "path": "bench/holdout-x41/ls-real.txt",
@@ -220,7 +220,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 19083
+   "ms": 20476
   },
   {
    "path": "bench/holdout/json-pkg.txt",
@@ -231,18 +231,18 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 23347
+   "ms": 23218
   },
   {
    "path": "bench/holdout/code-ts.txt",
    "raw": 1422,
-   "tokens": 983,
+   "tokens": 985,
    "prior": 985,
-   "delta": -2,
+   "delta": 0,
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 26110
+   "ms": 25119
   },
   {
    "path": "bench/holdout-x42/dpkg-l.txt",
@@ -253,7 +253,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 30595
+   "ms": 31144
   },
   {
    "path": "bench/holdout-x41/ps-real.txt",
@@ -264,7 +264,7 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 25908
+   "ms": 26786
   },
   {
    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
@@ -275,7 +275,7 @@
    "folded": false,
    "parent": "akolouthia2",
    "exact": true,
-   "ms": 32298
+   "ms": 35459
   },
   {
    "path": "bench/holdout-x40/metrics.tsv",
@@ -286,7 +286,7 @@
    "folded": false,
    "parent": "akolouthia2",
    "exact": true,
-   "ms": 38684
+   "ms": 40726
   },
   {
    "path": "bench/holdout-x41/ps-aux-real.txt",
@@ -297,18 +297,18 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 62595
+   "ms": 61971
   },
   {
    "path": "bench/holdout-x41/apt-real.txt",
    "raw": 2739,
-   "tokens": 860,
+   "tokens": 859,
    "prior": 865,
-   "delta": -5,
+   "delta": -6,
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 123702
+   "ms": 120593
   },
   {
    "path": "bench/holdout-x41/ls-l-real.txt",
@@ -319,10 +319,10 @@
    "folded": false,
    "parent": "synkrisis",
    "exact": true,
-   "ms": 143320
+   "ms": 140147
   }
  ],
- "totalTokens": 12696,
+ "totalTokens": 12634,
  "totalPrior": 12702,
- "totalMs": 658589
+ "totalMs": 659650
 }
