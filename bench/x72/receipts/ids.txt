@@ -1,0 +1,3 @@
+index built in 303 ms
+checked 323192 strings, mismatches 0
+IDENTICAL on everything tested

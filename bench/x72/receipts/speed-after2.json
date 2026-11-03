@@ -1,0 +1,25 @@
+{
+ "node": "v22.22.3",
+ "encoding": "o200k_base",
+ "OMEGA_DET": null,
+ "rows": [
+  {
+   "path": "bench/holdout/license.txt",
+   "raw": 1166,
+   "tokens": 929,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "7effcc2ddf52cef1",
+   "ms": 11483
+  },
+  {
+   "path": "bench/holdout-x42/ls-usr-bin.txt",
+   "raw": 1029,
+   "tokens": 375,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "9e31e2dcb98548cb",
+   "ms": 16150
+  }
+ ]
+}

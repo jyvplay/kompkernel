@@ -1,0 +1,12 @@
+[
+ {
+  "path": "bench/holdout-work/kb-article.txt",
+  "raw": 656,
+  "frontier": 622,
+  "frontierWinner": "synkrisis",
+  "best": {
+   "key": "stigme",
+   "tok": 611
+  }
+ }
+]

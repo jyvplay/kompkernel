@@ -1,0 +1,4 @@
+Before ¶ k=v. expand repeatedly; print only.
+§Щ2026-06-11 00:46:М
+Щ55ң
+Щ54ің status half-installedуң status unpackedәң installи:amd64в1э.С вэөэв-г2ё+deb12uјС20өгё5ције <none>аиет3м тэ0э20-в~deb12uгы гэЦ+dfsg-Аывэ28Ц10жы4+20151223.gitfa8646dөг+bгчС21эт-вёвЕС52э0-вёто libҭ-гъоldapҭэ5-0иды5э13Ц5УС0э9ҭ+b6фkrb5Боgssapi-фҭяС10э0-т+bвХ 20230311ёвТ libsaslгьТ-modules-dbиНоnghttpг-14инг-вҳ 8энэтӷ 0э21энш 5э4өвхоpsl5икоbrotliвизофsupport0р ca-certificates:allҙоk5cryptoтў readline-common:allбоkeyutilsвй вэ6эт-гОМ status unpackedДМ installЛМ status half-installedщоsslтимп xz-utilsишүајісоф-тИТ-гиАР librtmpвижВоsshнияҧ opensslимл wget¶Щ54 startup archives unpackәўеҳіўҳуўҳәоsslтамң status triggers-pending libc-binиы36-9ё14іщущә opensslаміҧуҧәреХірХурХәхеӷіхӷухӷәлачіличуличә xz-utilsашіпупәкеУікУукУәзүзцузцәҙүҙцуҙцәбайібийубийәсүсцОсцДБајЛБцОБцДьеАЛьАОьАДТҭаАЛИОИДъедЛъдОъдДНеЕЛНЕОНЕД librtmpважЛРОРДоsshнаяЛВОВДоcurl4а 7э88ө10ё14

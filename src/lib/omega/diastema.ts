@@ -286,11 +286,16 @@ export function diastemaPlan(text: string, enc: EncodingName = 'o200k_base'): Di
   if (lines.length < DIASTEMA_MIN_ROWS + 1) return null;
 
   let best: { ord: number; mask: string; gain: number; rows: number[]; deltas: string[] } | null = null;
+  // X71: tokenise each line ONCE. The ordinal loop used to re-split every line for
+  // every ordinal (8 passes over the whole document). The token list of a line does
+  // not depend on the ordinal, so this is a pure memo: same tokens, same order, same
+  // fit decisions, same wire. Verified by message digest in bench/x71/speed.ts.
+  const lineTokens = lines.map((l) => diastemaTokens(l));
   for (let ord = 0; ord < MAX_ORD; ord++) {
     // Group the values at this ordinal by mask.
     const byMask = new Map<string, Array<{ li: number; s: string }>>();
     for (let i = 0; i < lines.length; i++) {
-      const ts = diastemaTokens(lines[i]);
+      const ts = lineTokens[i];
       if (ts.length <= ord) continue;
       const t = ts[ord];
       if (!/\d/.test(t.s)) continue;
@@ -338,7 +343,7 @@ export function diastemaPlan(text: string, enc: EncodingName = 'o200k_base'): Di
   let k = 0;
   for (let i = 0; i < lines.length; i++) {
     if (!rowSet.has(i)) { out.push(lines[i]); continue; }
-    const t = diastemaTokens(lines[i])[best.ord];
+    const t = lineTokens[i][best.ord];
     out.push(lines[i].slice(0, t.i) + best.deltas[k++] + lines[i].slice(t.e));
   }
   const pat = lines.map((_, i) => (rowSet.has(i) ? 'R' : 'L')).join('');

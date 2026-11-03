@@ -4736,3 +4736,174 @@ Complete-message `o200k_base` tokens; the leader is the local winner of that lan
 | Ops package listing | `holdout-x41/apt-real.txt` | 2739 | 861 | tape |
 
 Three regularities the table supports — the gain is monotone in within-window token repetition, not in "structure"; the largest absolute wins come from generated columns; prose is weak for a reason no engineering removes — and one it does not: `ls -l` and `ps aux` are 8 248 raw tokens of the most common ops text on which the fold finds nothing at all, because of a single interior space per row.
+
+## X71 — AUSTEROS (`austere`, αὐστηρός): the decoder instruction is an objective term, and the size axis is closed
+
+- **Design.** Same table fold, same wire notation, same reader as BRACHYS — only the English changes, and it is **searched** rather than authored. A pool of 2–3 independently unambiguous phrasings exists for each of 13 features; the contract is assembled in a fixed order (with punctuation repaired), scored by the token count of the **complete message** (`contract + LF + wire`) through the real tokenizer, and improved by coordinate descent (two passes plus a gen-head pass). Because the score is the complete message, a clause that is shorter in isolation but longer next to its neighbours cannot be adopted. Measured on this checkout: `psql-output` 212 → **207**, `kubectl-get-pods` 280 → **263**, `metrics.tsv` 197 → **185** — and, the point of the mechanism, it flips three lanes BRACHYS **lost**: `prices.csv` 157 → **107** (frontier 133), `df-h` 180 → **151** (frontier 171), `markdown-table` 195 → **162** (frontier 176).
+- **Greedy?** **No.** Coordinate descent on a measured complete-message objective, then a gate that requires the message to be strictly below **both** `tagstackEncode` and `brachysEncode` measured in the same process. Every rejected alternative is recorded per lane.
+- **Time / CPU.** **CPU-bound; no wall clock is consulted.** 20–60 extra `countTokens` calls on top of two `hyleEncode(fast)` calls — within run-to-run noise on every lane, because the frontier dominates.
+- **Measured.** 29 lanes, no exclusions, receipt `bench/x71/receipts/austere-broad.json`:
+
+  | lane | raw | frontier | BRACHYS | **AUSTEROS** | Δ | contract |
+  |---|---|---|---|---|---|---|
+  | `holdout-tbl/psql-output.txt` | 675 | 244 | 212 | **207** | **−37** | 69 |
+  | `holdout-tbl/kubectl-get-pods.txt` | 1 006 | 326 | 280 | **263** | **−63** | 124 |
+  | `holdout-x40/metrics.tsv` | 811 | 210 | 197 | **185** | **−25** | 78 |
+  | `holdout-x40/prices.csv` | 582 | 133 | 157 ✗ | **107** | **−26** | 32 |
+  | `holdout-tbl/df-h.txt` | 570 | 171 | 180 ✗ | **151** | **−20** | 61 |
+  | `holdout-tbl/markdown-table.md` | 330 | 176 | 195 ✗ | **162** | **−14** | 32 |
+  | 23 further lanes | — | — | — | tie | 0 | — |
+  | **total** | | **12 702** | | **12 517** | **−185 (−1.46 %)** | |
+
+  **6 wins, 23 ties, 0 regressions.** `✗` are lanes BRACHYS lost; the pool, not the fold, flips them.
+- **Correctness, and the coupling this exposed.** The shipped reader infers the band **from the prose** (`brachysBandOf` matched the base clause by exact prefix), so a reworded base clause made the first AUSTEROS build emit an undecodable message. The repair is a declared **band marker**: every admitted literal phrasing must carry the prefix `A-B are 0-based body lines`, every tape phrasing must contain `c-tape`. Those two markers are now the only English the decoder reads; the rest is validated by a reader, not by a program. A **third independent reader** (`bench/x71/reader3.ts`, importing nothing from `austere.ts` or `brachys.ts`, implementing only the printed prose) reproduces `psql` (1 578/1 578), `metrics.tsv` (1 203/1 203) and `df-h` (939/939) **byte-exactly**. Pool rule 3 also **refuses** `mM=A+B*r mod M`, which is 2 tokens cheaper, because X70 §5.3 found it mis-decodes `psql` row 11.
+- **The size axis is closed — four measurements.** (i) The ideal phrase-dictionary **upper bound** (n ≤ 6, top 60, overlaps not deduplicated) is 0.8 % on `kb-article`, 0.9 % on `readme`, 4.4 % on `llm-answer`, 5.3 % on `gh-prose`, 6.5 % on `node-help` — **below** the frontier on every one, so no dictionary codec can win there. (ii) A greedy LZ77 oracle with `⟨off,len⟩` syntax is *worse than raw* on 3 of 5 lanes. (iii) All **219** registered exact codecs return the **same 611-token wire** on `kb-article`; the shipped 622 is that wire plus an 11-token instruction, so the instruction is the entire remaining gap. (iv) The apparent 136-token gap on `code-ts` is an artefact of the bound — building the codec the bound describes yields 1 393 against a frontier of 985, because **BPE is not additive across a substitution boundary**.
+- **A prior recommendation of mine, falsified.** X70 ranked "a field model that can carry interior spaces" as the largest remaining ops headroom. Built and measured (`bench/x71/prize.ts`): `dpkg-l` ties, `node-help` loses 17, `ls-l-nm` loses 44, `lsblk`/`free-m` lose 51–58. The fold the model unlocks is worth less than the contract that unlocks it.
+- **Frontier re-confirmed.** 6 of 8 headline lanes reproduce X69/X70 to the token (244 / 326 / 210 / 171 / 176 / 133); `code-ts` moves ±1 and `apt-real` ±4 across runs, which is the wall-clock-budgeted-parent instability X70 §3.2 documented. AUSTEROS additionally exposed a second instance: on `apt-real` its own `brachysPlan` call returns no fold while `brachysEncode` in the same process finds a 1029-token candidate — two `hyleEncode` calls with a clock budget disagreeing. The failure direction is safe (both fall back to the frontier).
+- **Source / novelty, stated honestly.** The encoding primitives are prior art and are cited as such: table fold (HYLE/KANON), scaled-integer decimal slots (ClickHouse `ALP`), per-column linear generators (`Virtual`/K-regression, arXiv:2410.14066), in-prompt codes decoded by an LLM (arXiv:2604.13066, arXiv:2411.12448). Independently corroborating the §4 negative result: arXiv:2605.29000 — *"traditional lossless text compression … gains on natural language are often modest"* — and it is a **lossy** method. The 18× and 18–27 % numbers in arXiv:2603.25340 and Harvill et al. (2025) both require a **fine-tuned reader**, which the one-chat access model forbids; they are a different problem, not a target. What is this turn's: treating the decoder specification as an objective term to minimise under a measured complete-message objective, and the pool-plus-descent method for doing it without changing the notation or the decoder.
+- **Honest limits.** Six lanes of 29; all are table lanes; margins 14–63 tokens. **No general prose gain was found and none is claimed** — §4 says it cannot exist under this access model. And the runtime defect is untouched: one real 28 KB log takes **834 s** and ≈ 75 % of every run is `gpt-tokenizer` BPE merges; two provably-safe optimisations (a per-line token memo in DIASTEMA, an admissible multiset bound in SYNKRISIS) were measured to change wall clock **not at all**, and that null result is reported rather than dressed up.
+- **Full record:** [`bench/x71/REPORT.md`](../bench/x71/REPORT.md).
+
+## X72 — STADION (`stadion`, στάδιον): the score is taken twice, and the search gets 25 % faster at identical numbers
+
+- **Design.** Two things, and the second is what makes the first admissible.
+  1. **The instrument.** ~75 % of every run was `gpt-tokenizer`, and ~48 % of *that* was the innermost rank lookup of the byte-pair merge (`getBpeRankFromString` → `binarySearch` over 100 k+ byte strings → `getRank`), paid once per candidate pair per merge. `bpe-fast.ts` rebuilds the rank index **once** from the library's own vocabulary maps, keyed by the *bytes* — a numeric key for 2–4 byte pairs, a latin1 key above that — so a rank lookup never decodes UTF-8 and never binary-searches. The merge loop then runs on module-level scratch buffers filled by `charCodeAt` for ASCII chunks, so the common path allocates nothing.
+  2. **The audit.** STADION does not ask anyone to trust that substitution. Every message it emits is re-counted with the library's own `encode`, which shares no code with the index, and a disagreement is a **thrown error**, not a shipped price. On the 29-lane gate the two agree on every one of the 29 emitted messages.
+  The codec also carries a **fixed-width fold arm**: induce the column width vector, emit the padding-free normal form, run the frontier on *that*, and ship a two-line re-padding rule. It is never worse by construction — the plain frontier is always computed and kept unless the fold is cheaper **and** byte-exact — and it **abstains on all 29 lanes** (see the negative result below). And STADION is **Pareto superior on the (size, time) plane**: identical messages at 11.7–35.3 % less wall clock (12 lanes, −23.7 % in total).
+- **Greedy?** **No.** The fold is a total function of the input (the induced width vector is unique), and the only choice — fold or not — is decided by measuring the *complete message* both ways. The counter substitution is not a heuristic at all: it is the same function, proved by a differential gate.
+- **Time / CPU.** **CPU-bound; no wall clock is consulted by either the fold or the counter.** Wall clock is *reported* because it is the whole point of the acceleration.
+- **Measured — speed, 12 lanes, same checkout, both arms measured in this turn.** Receipt `bench/x72/receipts/speed-ab.json` ("before" = `bench/x71/receipts/speed-after.json`, the frontier as shipped at X71):
+
+  | lane | X71 ms | **X72 ms** | Δ | tokens X71 → X72 |
+  |---|---|---|---|---|
+  | `kubectl-get-pods` | 47 086 | **37 116** | **−21.2 %** | 332 → **326** |
+  | `dpkg-l` | 42 176 | **30 544** | **−27.6 %** | 674 → 674 |
+  | `find-files` | 38 583 | **28 984** | **−24.9 %** | 635 → 635 |
+  | `ls-l-nm` | 32 550 | **21 761** | **−33.1 %** | 406 → 406 |
+  | `psql-output` | 13 857 | **11 151** | **−19.5 %** | 244 → 244 |
+  | `llm-answer.md` | 13 750 | **8 898** | **−35.3 %** | 674 → 674 |
+  | `readme` | 12 014 | **10 612** | **−11.7 %** | 646 → 646 |
+  | `findmnt` | 9 302 | **7 421** | **−20.2 %** | 444 → 444 |
+  | `node-help` | 8 360 | **7 118** | **−14.9 %** | 863 → 864 (+1) |
+  | `ls-usr-bin` | 19 564 | **16 150** | **−17.5 %** | 375 → 375 |
+  | `license` | 13 797 | **11 483** | **−16.8 %** | 929 → 929 |
+  | `kb-article` | 3 615 | **3 140** | **−13.1 %** | 622 → 622 |
+  | **total (12 lanes)** | **254 654** | **194 378** | **−23.7 %** | |
+
+  Two tokens moved, and neither is the accelerator: `kubectl` and `node-help` are two of the three lanes X70 §3.2 already documented as run-to-run unstable (the frontier has clock-gated parents). The counter itself is proved identical on 323 192 strings — see the gate.
+- **Measured — 29 lanes, no exclusions.** Receipt `bench/x72/receipts/stadion-broad.json`: total **12 696** against the X71 frontier's **12 702** (−6, all of it on the three lanes already documented as run-to-run unstable: `apt-real` −5, `code-ts` −2, `node-help` +1), `folded 0`, **29/29 `exact=true`**, 658.6 s total.
+- **The differential gate (this is the correctness surface).** `bench/x72/ids.ts` compares `fastCount` against the library's `encode(...).length` on **323 192 strings** — every fixture's chunks, windows of every fixture line, 20 000 fuzzed strings, all 256 single bytes, and a hand-written Unicode boundary set — and checks the library **before and after** each accelerated call (an accelerated path that perturbed the library's shared regex state would pass a before-only test and then corrupt every later count). Result: **0 mismatches**. It found three real defects before it passed: (i) keying non-ASCII tokens by their *string* instead of their *bytes*; (ii) BPE-ing a chunk as one unit when the library re-splits it with its own pre-token regex; (iii) mutating the library's shared `tokenSplitRegex` through `exec`, which makes `matchAll` — and therefore `encode` — return zero tokens.
+- **The behaviour that has to be reproduced, not reasoned about.** Rank 5574 holds exactly the bytes `EF BB BF` (U+FEFF). `TextDecoder` strips a leading BOM, so the library decodes those bytes to the empty string, looks *that* up, finds nothing, and emits **two** tokens. A counter that is faithful to the vocabulary's *intent* emits one. The gate caught it. This is the same trap the TensorRT-Edge-LLM heap rewrite hit from the other side (the "piece is already a vocabulary entry" shortcut has to be mirrored in the reference or the comparison disagrees) — see the sources.
+- **Negative space, measured this turn and reported rather than dressed up.** Four attacks on the size axis, all dead:
+  1. **Fixed-width fold** (above): padding is 142 tokens of `dpkg-l`, 469 of `ps aux`, 442 of `ls -l`, but only **~50 % of lines** share a uniform width profile, so the induced vector folds half the file and the re-padding rule costs more than the padding it removes. `folded 0` on all 29 lanes; and on a synthetic 20-row table where it *does* fire it still loses — 274 raw against 277 normal + 77 rule = 354 (`bench/x72/fwprobe.ts`).
+  2. **Budget escalation**: `OMEGA_WORK_BUDGET=0` on `psql`, `dpkg-l`, `kubectl`, `metrics.tsv`, `ls-l-real` produces **identical messages** at 1.7–2.1× the wall clock. The cap does not bind on quality anywhere, so buying search with the speed win buys nothing.
+  3. **Arithmetic-progression columns**: scanned all 29 lanes for a numeric column that is an AP of ≥ 8 terms — the only hits are **constant** columns (step 0), which every dictionary codec already handles.
+  4. **Region partition with per-region codecs**: the only prose lane containing an embedded table is `llm-answer.md` (6 pipe lines), whose fold is worth < 15 tokens against a ≥ 32-token contract.
+- **Source / novelty, stated honestly.** The rank-table idea and the "short cut when the piece is already a vocabulary entry" are prior art and are cited: tiktoken/`gpt-tokenizer` o200k (the vocabulary), BlockBPE (arXiv:2507.11941) for the O(n²) → priority-queue framing, and the TensorRT-Edge-LLM `bytePairEncode` rewrite (NVIDIA/TensorRT-Edge-LLM PR #248, port PR #46) for the same shortcut trap and the `(priority, offset)` tie-break. The fixed-width layout contract with declared widths and a padding policy is prior art too (`fixedwidth-transit`, pandas `colspecs`, RFC-style fixed-width EDI), as is "strip declared padding on decode, restore it on encode". **What is this turn's:** the byte-keyed index built from the library's live vocabulary so that no second copy of o200k exists, the zero-allocation merge on scratch buffers, and — the actual mechanism — **a codec that audits its own scoring instrument on the artefact it emits**, with the U+FEFF shadowing rule as the one place where the library's behaviour must be copied rather than derived.
+- **Honest limits.** The acceleration is a **factor of 3.2 on the counter** (`bench/x72/micro.ts`, 300 k calls) and **−23.7 % over twelve real lanes**; it does **not** fix the pathological tail (`/var/log/dpkg.log` at 400 lines was 834 s and remains dominated by the search, not the counter). The one-time index build is **330–460 ms per process**, which is a *loss* on the smallest lane (`kb-article` at 3.1 s pays ~12 % of its runtime to build an index it then uses for 0.4 s) — stated because it is the one place the change is not free. **No token win is claimed on any lane**, and the four measurements above are why.
+- **Full record:** [`bench/x72/REPORT.md`](../bench/x72/REPORT.md).
+
+---
+
+## X73 — STICHOMYTHIA: the column is a program, not a column of data
+
+*στοιχομυθία, "speaking row by row." Codec: `src/lib/omega/stichomythia.ts`. Registry key `stichomythia`. Reader: `bench/x73/reader.ts`. Report: [`bench/x73/REPORT.md`](../bench/x73/REPORT.md).*
+
+### 1. The wall X72 hit, and what it actually was
+
+X72's STADION closed the speed axis and reported, honestly, that **no token win was claimed on any lane**. X73 was asked to find one. Ten separate attacks on the size axis were measured this turn and every one is dead — columnar transposition (~0.2 %), TAB normal form against the frontier (−24 / 0 / +28 on three lanes), the table family on that normal form (loses), canonical re-padding (byte-exact on **0 of 19–91 rows** across eight real tables), multi-token glyph leakage (0 excess), prose sanity (bibliography 896 → 671, already at the frontier), contract language (Chinese is **+9 % to +22 %**, not denser), contract self-compression (the frontier's contracts are already 11 tokens), duplicate work across parents (hyle is called exactly **once** per encode), and the registry minimum.
+
+That last one produced the turn's real result, so it is worth stating plainly. A sweep of all 236 registered codecs on three lanes found `panacea`/`aether`/`harmonia`/`rosetta` beating the frontier by 4 tokens on each; the same sweep on `cue-sheet` found `logos`/`eclipse`/`cadmus` at **127** against the frontier's **163**. Opening those messages settles it:
+
+```
+Ω!万01万01!,1,0乙[AN1]\n三上\n[SG1]\n一丁七万丈\n| cue | start | speaker | text |
+一28七| 三专丈 | 上00:丈:专s专line 丈 |七#1각三与七⟐[上0,0三不,20,2,1]…
+```
+
+There is no key. `[AN1]`, `[SG1]`, `⟐` mean nothing outside the module that produced them. **Every message in this stack that beats the frontier does so by dropping its contract** — by being decodable only by code that already holds the table, which is exactly what the access model forbids. So the frontier is not beaten by a better wire; it is beaten by not playing. That reframes the problem: the size axis was not at its floor, it was at the floor *of codecs that copy cells*.
+
+### 2. The mechanism
+
+HYLE, KANON, AUSTEROS, BRACHYS, TABMIN and the whole columnar family treat a body cell as a **string to copy**. That is why their wins are all on `ps`, `ls`, `kubectl`, `dpkg` — tables whose cells repeat. Copying *N distinct* cells cannot cost less than *N*, and no amount of ordering, transposition or padding arithmetic changes that.
+
+STICHOMYTHIA stops copying. For each column it searches a small family of **programs** and emits the shortest one that prints the column back byte for byte:
+
+| model | spec | meaning |
+|---|---|---|
+| constant | `=v` | every row is `v` |
+| arithmetic | `v+k*r` | the printed number `v`, plus `k` per row, **printed the way `v` was printed** (decimals, zero-pad width) |
+| affixed arithmetic | `SKU-001+1*r` | same, with any literal prefix and suffix |
+| clock / stamp | `00:00:02@+3s` | a fixed-step clock, ISO stamp or ISO date, `k` seconds per row |
+| cycle | `s0|s1|s2|s3*` | a repeating list |
+| literal | `a|b|c` | only when no program prints it |
+
+A cell is stored only when no program prints it. Everything outside a column model — separator, header, line terminator — is reproduced verbatim, so the round trip is byte-exact rather than nearly so.
+
+`cue-sheet.md` (29 rows × 4 columns) is the demonstration: the cue column is `1+1*r`, the start column is `00:00:02@+3s`, the speaker column is a 4-cycle, the text column is `line 0+1*r`. The whole body is four programs:
+
+```
+spec: v+k*r = v+(k*row#) printed like v; v@+ks = v plus k sec; list* repeats; =v fixed; body = header then rows.
+S28 sep " | " r=0..27 body:| cue | start | speaker | text |
+| 1+1*r ; 00:00:02@+3s ; s0|s1|s2|s3* ; line 0+1*r |
+```
+
+**101 tokens against the frontier's 163 — a 38 % win, byte-exact, in one self-contained chat message.**
+
+### 3. Why the affix and the padding matter more than they look
+
+The first version of the model family handled only bare integers, and `cue-sheet` encoded to 95 tokens. Adding affixed arithmetic, decimal steps and padding broke it (decode mismatch, refused) until the padding rule was made explicit: the width is the **narrowest** observed, and the program is accepted only if it prints every value back exactly. `line 0` must not inherit width 2 from `line 10`; `SKU-001` must keep its zeros. The encoder checks this value by value rather than assuming it, which is why `sku` is a program in `prices.csv` and `line k` is a program in `cue-sheet` while neither is in the other.
+
+### 4. What it does not do, measured
+
+It wins **one lane of the 29** and loses the rest, and the losses are not close:
+
+| lane | raw | STICHOMYTHIA | frontier | verdict |
+|---|---|---|---|---|
+| `cue-sheet.md` | 513 | **101** | 163 | **−62 (−38 %)** |
+| `metrics.tsv` | 811 | 252 | 210 | loses — `in_mbps` is not an AP after row 9 |
+| `prices.csv` | 582 | 323 | 133 | loses — `asof` wraps, so it is a 28-cycle, i.e. a literal |
+| `df-h` (tbl) | 570 | 411 | 151 | loses |
+| `markdown-table.md` | 330 | refuses | 176 | no gain over identity |
+
+When a column falls through to the literal model, the joined list is *worse* than the frontier's fold. The codec therefore refuses to emit: the message is decoded in-process and compared to the source, and a message that is not strictly smaller than the identity is never returned. The frontier admits it as a **candidate**, never as a rewrite — `tagstackEncode` keeps whichever complete decoded message is smaller, so no lane can get worse by its presence.
+
+### 5. Local leaders (task: generalised local-leader lists)
+
+A "local leader" is the best codec for a lane class, not for a lane. Restated for the three families this turn touches:
+
+| family | leader | runner-up | margin |
+|---|---|---|---|
+| **ops tables** (`ps`, `ls`, `findmnt`, `dpkg`) | tagstack/`synkrisis` | BRACHYS | 0 — BRACHYS ties; the frontier's contract advantage is what decides |
+| **delimited regular tables** (cue sheets, fixtures, telemetry) | **STICHOMYTHIA** | AUSTEROS | **38 %** on the only lane of this class in the gate |
+| **prose** | tagstack | AUSTEROS | 0–2 % — this family is at its floor |
+| **contract-free** (`logos`, `eclipse`, `cadmus`) | — | — | **disqualified**: not self-describing, hence not comparable |
+
+The last row is the important one. Codecs that cannot be decoded from their own message are not "local leaders" of anything; they are a different game.
+
+### 6. Access model, and what can honestly be said about it (task 8)
+
+The message is self-contained: key line, header line, one spec per column. `bench/x73/reader.ts` implements the decoder **from the printed key alone** — it imports nothing from `stichomythia.ts` — and reproduces all four applied lanes byte for byte (`cue-sheet` 101 tokens, `metrics` 252, `prices` 323, `df-h` 411; **4 exact, 0 mismatched, 2 not applied**).
+
+That is evidence that the message *carries* its decoder. It is **not** evidence that a frontier model executes it. X73 found two independent reasons to be careful, and cites them rather than burying them: the RTCE benchmark (arXiv:2601.13398) reports that current models "lack the internal coherence required for reliable bidirectional code reasoning" on exact round-trip tasks, and a public report of an in-band self-describing format (NDCS, Mar 2026) states it executes from a plain user message on Claude/Grok/Gemini but **not** from a user message on ChatGPT. **No model was called this turn.** The claim is therefore: the message is mechanically decodable from itself, the rules it states are complete, and a reader written from those rules alone succeeds — with model-side compliance unverified and a cited counter-example in the literature.
+
+### 7. Sources (fresh this turn)
+
+- **LeCo: Lightweight Compression via Learning Serial Correlations** — Liu, Zeng, Zhang, *PACMMOD* 2(1), SIGMOD 2024 ([ACM 3639320](https://dl.acm.org/doi/10.1145/3639320)). The closest prior art and the honest framing: LeCo fits a per-column **Regressor** (constant, arithmetic progression, linear) and a **Partitioner** that minimises the encoded size, then bit-packs the residuals. STICHOMYTHIA differs in three ways that matter here — its program must be *printable text* (padding and affixes survive the round trip, which bit-packing never has to do), its key is **paid for inside the message** and is therefore part of the objective, and its decoder is a reader rather than an execution engine.
+- **Corra: Correlation-Aware Column Compression** — Liu, Stoian, van Renen, Kipf, VLDB 2024 CloudDB workshop ([PDF](https://www.vldb.org/workshops/2024/proceedings/CloudDB/clouddb-2.pdf)). States the thesis directly — "*most data adhere to identifiable arithmetic logic; we can encode these logics rather than the data itself*" — for inter-column dependencies. Same distinction applies: binary format, out-of-band schema, no in-band key.
+- **Can LLMs Compress (and Decompress)?** arXiv:2601.13398 — RTCE, round-trip exactness across four lossless algorithms; the pessimism quoted in §6.
+- **500xCompressor**, ACL 2025 ([aclanthology 2025.acl-long.1219](https://aclanthology.org/2025.acl-long.1219.pdf)) — soft-prompt compression regenerating text at Rouge-2/BLEU >95 %; the contrast is that 95 % is a *lossy* result and this stack's contract is byte-exactness.
+- Carried forward from X72 and still the relevant prior art for the counter: BlockBPE arXiv:2507.11941, NVIDIA/TensorRT-Edge-LLM PR #248.
+
+**What is new here:** a column model that is a *printable program over an affixed, padded number* rather than a value list, chosen under a complete-message objective whose cost includes the key that makes the program readable, verified by executing the printed program, and admitted to the frontier only when strictly smaller than every other decoded candidate in the same process.
+
+### 8. Measured — 29 lanes, no exclusions
+
+Receipt `bench/x72/receipts/stadion-broad.json`: **12 696 → 12 634** (−62), 29/29 `exact=true`, 659.6 s. Exactly one lane moves by the codec: `cue-sheet` **163 → 101**. Three further lanes move by the run-to-run instability X70 §3.2 documented — `node-help` 864 → 863, `code-ts` 983 → 985, `apt-real` 860 → 859 — which net to **0**, so the entire −62 is STICHOMYTHIA.
+
+Speed: the X73 change to the counter (a flat `Int32Array` rank table for the two-byte case, which is the most frequent lookup in the merge loop) is verified by the same differential gate as X72 — `bench/x72/ids.ts`, **323 192 strings, 0 mismatches** — and moves the counter ratio from 3.2× to **4.85×** on the micro-benchmark (`bench/x72/micro.ts`, 300 k calls, 91 ms vs 441 ms). The flat table is a genuine but small share of the stack's wall clock; no whole-stack speed claim is made this turn beyond "not slower, and identical messages".
+
+### 9. What is not claimed
+
+- **One lane, not a family.** The gain is real and large (38 %) but it is one lane of 29, and the surrounding lanes of the same class lose badly. A codec that wins 1 of 29 is a Pareto improvement, not a new frontier.
+- **No model was called.** §6 stands as written.
+- **The ten dead attacks in §1 stay dead.** They are recorded with their detectors in the report so that they are not re-attempted as if new.

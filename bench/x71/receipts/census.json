@@ -1,0 +1,18 @@
+[
+ {
+  "path": "bench/holdout/gh-api.json.txt",
+  "chars": 8000,
+  "raw": 2519,
+  "frontier": 1112,
+  "winner": "synkrisis",
+  "exact": true,
+  "ms": 45874,
+  "costs": {
+   "synkrisis": 1112,
+   "kanon": 2265,
+   "akolouthia2": 1153,
+   "apographe": 1112,
+   "diastema": 1112
+  }
+ }
+]

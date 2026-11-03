@@ -86,6 +86,31 @@ const flushDecoder = (): string => { try { return GPT_TEXT_DECODER.decode(); } c
 setO200kMergeCacheSize(0);
 setCl100kMergeCacheSize(0);
 
+import { fastCount } from './bpe-fast';
+
+/**
+ * X72: an exact, allocation-light counter for o200k_base.
+ *
+ * `node --cpu-prof` on a real 150-line /var/log/dpkg.log put ~75% of the entire
+ * stack's runtime inside gpt-tokenizer, and ~48% of it in the per-candidate-pair
+ * rank lookup (`getBpeRankFromString` + `binarySearch` + `getRank`), which decodes
+ * bytes to UTF-8 and then binary-searches 100k+ byte strings on every merge step.
+ * `bpe-fast.ts` answers the same question from a byte-keyed index instead.
+ *
+ * This is admissible ONLY because it is the same function. `bench/x72/ids.ts`
+ * checks 323,192 strings — every fixture's chunks, all Unicode boundary cases,
+ * 20,000 fuzzed strings, and all 256 single bytes — against the library's own
+ * `encode(...).length`, with **0 mismatches**, including the one place where the
+ * library's behaviour differs from its own vocabulary (U+FEFF).
+ *
+ * OMEGA_FAST_BPE=0 restores the library path exactly.
+ */
+const FAST_BPE = (() => {
+  try {
+    return !(typeof process !== 'undefined' && process.env && process.env.OMEGA_FAST_BPE === '0');
+  } catch { return true; }
+})();
+
 export type EncodingName = 'o200k_base' | 'cl100k_base';
 
 export const ENCODINGS: { key: EncodingName; label: string; models: string }[] = [
@@ -254,7 +279,7 @@ export function countTokens(text: string, enc: EncodingName): number {
     const v = sc.get(text);
     if (v !== undefined) { shortHits++; return v; }
     shortMisses++;
-    const t = countTokensExact(text, enc);
+    const t = (FAST_BPE && enc === 'o200k_base' ? fastCount(text) : null) ?? countTokensExact(text, enc);
     if (sc.size >= SHORT_CACHE_MAX) sc.clear();
     sc.set(text, t);
     return t;
@@ -280,7 +305,7 @@ export function countTokens(text: string, enc: EncodingName): number {
     const v = CHUNK_CACHE.get(k);
     if (v === undefined) {
       chunkMisses++;
-      const t = API[enc].encode(cs[i]).length;
+      const t = (FAST_BPE && enc === 'o200k_base' ? fastCount(cs[i]) : null) ?? API[enc].encode(cs[i]).length;
       if (CHUNK_CACHE.size > 500000) CHUNK_CACHE.clear();
       CHUNK_CACHE.set(k, t);
       n += t;

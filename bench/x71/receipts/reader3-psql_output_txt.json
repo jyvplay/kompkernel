@@ -1,0 +1,8 @@
+{
+ "lane": "bench/holdout-tbl/psql-output.txt",
+ "exact": true,
+ "gotChars": 1578,
+ "wantChars": 1578,
+ "firstDiffAt": -1,
+ "messageTokens": null
+}

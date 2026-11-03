@@ -1470,12 +1470,30 @@ function runArms(text: string, enc: EncodingName, opts: HyleOptions, deadline: n
   return out;
 }
 
+/**
+ * X73 instrumentation (kept: it is read-only accounting and costs one Set insert
+ * per call). Counts how often this layer is asked to fold the SAME text more than
+ * once inside one encode — i.e. how much of the stack's work is duplicated across
+ * parents rather than distinct.
+ */
+export const HYLE_WORK = { calls: 0, unique: 0, chars: 0, dupChars: 0, enabled: false };
+let HYLE_SEEN: Set<string> | null = null;
 export function hyleEncode(text: string, enc: EncodingName = 'o200k_base', opts: HyleOptions = {}): HyleResult {
   const t0 = Date.now();
   const budgetMs = opts.budgetMs ?? 20000;
   const deadline = t0 + budgetMs;
   const inTokens = countTokens(text, enc);
   const finish = (wire: string, decoded: string, contract: string, arm: string, folds: string[], certified: boolean, notes: string, tried: string[] = []): HyleResult => {
+  if (HYLE_WORK.enabled) {
+    // off by default: a long-running process must not accumulate a string per
+    // call, and the accounting is only ever read by bench/x73/dupwork.ts
+    const k = enc + '\u0000' + text;
+    HYLE_WORK.calls++;
+    HYLE_WORK.chars += text.length;
+    if (HYLE_SEEN === null) HYLE_SEEN = new Set<string>();
+    if (HYLE_SEEN.has(k)) HYLE_WORK.dupChars += text.length;
+    else { HYLE_SEEN.add(k); HYLE_WORK.unique++; }
+  }
     const outTokens = countTokens(wire, enc);
     const contractTokens = countTokens(contract, enc);
     const messageTokens = outTokens + contractTokens;

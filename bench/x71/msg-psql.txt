@@ -1,0 +1,31 @@
+A-B are 0-based body lines of a SEP-split table; the rest is literal. G<c>=<spec> gives column c for row r; {A+B}=A+B*r, mM=A+(B*r mod M), zW=zero-pad to W; #p:v,.. cycles p values. print only.
+¦T|3-26;G0=;G1= {10+1} ;G2= user_{0+1z4}    ;G3= 2026-{1+1m12z2}-{1+1z2} ;G4= {100.00+7.30} ;G5=#3: active    , pending   , closed    ;G6=
++----+--------------+------------+--------+-----------+
+| id | name         | created    | amount | status    |
++----+--------------+------------+--------+-----------+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
++----+--------------+------------+--------+-----------+
+(24 rows)
