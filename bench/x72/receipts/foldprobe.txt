@@ -1,0 +1,5 @@
+bench/holdout-x42/dpkg-l.txt: no fold
+bench/holdout-x41/ls-l-real.txt: no fold
+bench/holdout-x41/ps-aux-real.txt: no fold
+bench/holdout-x42/findmnt.txt: no fold
+bench/holdout-x41/node-help.txt: no fold

@@ -1,0 +1,128 @@
+{
+ "note": "X71 = bench/x71/receipts/speed-after.json (frontier only, before the X72 acceleration, same checkout, same harness). X72 measured with the accelerated counter; 5 lanes from the speed harness, 7 from the STADION 29-lane gate (same frontier call, plus one library recount of the emitted message).",
+ "rows": [
+  {
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "tokensX71": 332,
+   "tokensX72": 326,
+   "msX71": 47086,
+   "msX72": 37116,
+   "deltaTokens": -6,
+   "pctMs": -21.2,
+   "measuredBy": "stadion 29-lane gate"
+  },
+  {
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "tokensX71": 244,
+   "tokensX72": 244,
+   "msX71": 13857,
+   "msX72": 11151,
+   "deltaTokens": 0,
+   "pctMs": -19.5,
+   "measuredBy": "stadion 29-lane gate"
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "tokensX71": 674,
+   "tokensX72": 674,
+   "msX71": 42176,
+   "msX72": 30544,
+   "deltaTokens": 0,
+   "pctMs": -27.6,
+   "measuredBy": "stadion 29-lane gate"
+  },
+  {
+   "path": "bench/holdout-x41/node-help.txt",
+   "tokensX71": 863,
+   "tokensX72": 864,
+   "msX71": 8360,
+   "msX72": 7118,
+   "deltaTokens": 1,
+   "pctMs": -14.9,
+   "measuredBy": "stadion 29-lane gate"
+  },
+  {
+   "path": "bench/holdout-x41/ls-l-nm.txt",
+   "tokensX71": 406,
+   "tokensX72": 406,
+   "msX71": 32550,
+   "msX72": 21761,
+   "deltaTokens": 0,
+   "pctMs": -33.1,
+   "measuredBy": "speed harness"
+  },
+  {
+   "path": "bench/holdout-x41/find-files.txt",
+   "tokensX71": 635,
+   "tokensX72": 635,
+   "msX71": 38583,
+   "msX72": 28984,
+   "deltaTokens": 0,
+   "pctMs": -24.9,
+   "measuredBy": "speed harness"
+  },
+  {
+   "path": "bench/holdout-x42/findmnt.txt",
+   "tokensX71": 444,
+   "tokensX72": 444,
+   "msX71": 9302,
+   "msX72": 7421,
+   "deltaTokens": 0,
+   "pctMs": -20.2,
+   "measuredBy": "stadion 29-lane gate"
+  },
+  {
+   "path": "bench/holdout/readme.txt",
+   "tokensX71": 646,
+   "tokensX72": 646,
+   "msX71": 12014,
+   "msX72": 10612,
+   "deltaTokens": 0,
+   "pctMs": -11.7,
+   "measuredBy": "speed harness"
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "tokensX71": 622,
+   "tokensX72": 622,
+   "msX71": 3615,
+   "msX72": 3140,
+   "deltaTokens": 0,
+   "pctMs": -13.1,
+   "measuredBy": "stadion 29-lane gate"
+  },
+  {
+   "path": "bench/holdout-work/llm-answer.md",
+   "tokensX71": 674,
+   "tokensX72": 674,
+   "msX71": 13750,
+   "msX72": 8898,
+   "deltaTokens": 0,
+   "pctMs": -35.3,
+   "measuredBy": "stadion 29-lane gate"
+  },
+  {
+   "path": "bench/holdout/license.txt",
+   "tokensX71": 929,
+   "tokensX72": 929,
+   "msX71": 13797,
+   "msX72": 11483,
+   "deltaTokens": 0,
+   "pctMs": -16.8,
+   "measuredBy": "speed harness"
+  },
+  {
+   "path": "bench/holdout-x42/ls-usr-bin.txt",
+   "tokensX71": 375,
+   "tokensX72": 375,
+   "msX71": 19564,
+   "msX72": 16150,
+   "deltaTokens": 0,
+   "pctMs": -17.5,
+   "measuredBy": "speed harness"
+  }
+ ],
+ "totalMsX71": 254654,
+ "totalMsX72": 194378,
+ "pctTotal": -23.7
+}

@@ -1,0 +1,6 @@
+bench/holdout-x42/dpkg-l.txt: raw 1000  collapse-runs 858  field-trim 858  spaces=2015
+bench/holdout-x41/ls-l-real.txt: raw 5194  collapse-runs 4752  field-trim 4752  spaces=2219
+bench/holdout-x41/ps-aux-real.txt: raw 3054  collapse-runs 2585  field-trim 2585  spaces=2543
+bench/holdout-x41/apt-real.txt: raw 2739  collapse-runs 2739  field-trim 2739  spaces=362
+bench/holdout-x42/findmnt.txt: raw 787  collapse-runs 711  field-trim 711  spaces=1385
+bench/holdout-x41/node-help.txt: raw 1099  collapse-runs 953  field-trim 953  spaces=2846

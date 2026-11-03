@@ -1,0 +1,7 @@
+raw 274  normal 277  rule 77  sum 354  widths [1,3,9,2,22,5]
+--- rule ---
+X72 pad. Unfold: split each line at TAB. Write cell 1 to char 1, cell 2 to char 4, cell 3 to char 13, cell 4 to char 15, cell 5 to char 37, and the last cell as-is. Lines starting with a backslash are literal: drop it and keep the rest.
+--- normal (first 3) ---
+\# fixed-width export
+\  id  name                 dept     amount
+	  0	  item0		            ops	 1000

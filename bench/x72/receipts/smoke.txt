@@ -1,0 +1,2 @@
+bench/holdout-x42/lsblk.txt: oneChat=60 roundTrip=true note=folded=false; parent=synkrisis; tokens=60 (library) 60 (index) agree=true; frontier=60
+bench/holdout-x42b/free-m.txt: oneChat=76 roundTrip=true note=folded=false; parent=synkrisis; tokens=76 (library) 76 (index) agree=true; frontier=76

@@ -15,3 +15,5 @@ bench/*/airport-fullgate.mjs
 bench/x70/*.mjs
 bench/x71/*.mjs
 bench/x71/prof*/
+bench/x72/*.mjs
+bench/x72/prof*/

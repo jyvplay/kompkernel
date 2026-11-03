@@ -1,0 +1,34 @@
+{
+ "node": "v22.22.3",
+ "encoding": "o200k_base",
+ "OMEGA_DET": null,
+ "rows": [
+  {
+   "path": "bench/holdout-x41/ls-l-nm.txt",
+   "raw": 2160,
+   "tokens": 406,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "0a1a7777da62b7da",
+   "ms": 21761
+  },
+  {
+   "path": "bench/holdout-x41/find-files.txt",
+   "raw": 1669,
+   "tokens": 635,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "8cdcc013d3e4a3f8",
+   "ms": 28984
+  },
+  {
+   "path": "bench/holdout/readme.txt",
+   "raw": 843,
+   "tokens": 646,
+   "winner": "synkrisis",
+   "exact": true,
+   "sha": "6a78a0b364324b6e",
+   "ms": 10612
+  }
+ ]
+}
