@@ -1,0 +1,416 @@
+{
+ "encoding": "o200k_base",
+ "node": "v22.22.3",
+ "rows": [
+  {
+   "path": "bench/holdout-x42/lsblk.txt",
+   "raw": 60,
+   "tokens": 60,
+   "prior": 60,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 2530,
+   "memo": {
+    "size": 2,
+    "chars": 264
+   }
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "raw": 656,
+   "tokens": 622,
+   "prior": 622,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 2523,
+   "memo": {
+    "size": 2,
+    "chars": 6770
+   }
+  },
+  {
+   "path": "bench/holdout-x42b/uptime-w.txt",
+   "raw": 80,
+   "tokens": 80,
+   "prior": 80,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 2476,
+   "memo": {
+    "size": 2,
+    "chars": 358
+   }
+  },
+  {
+   "path": "bench/holdout-x42b/free-m.txt",
+   "raw": 76,
+   "tokens": 76,
+   "prior": 76,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 2230,
+   "memo": {
+    "size": 2,
+    "chars": 526
+   }
+  },
+  {
+   "path": "bench/holdout-x42b/vmstat.txt",
+   "raw": 229,
+   "tokens": 149,
+   "prior": 149,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 3652,
+   "memo": {
+    "size": 2,
+    "chars": 934
+   }
+  },
+  {
+   "path": "bench/holdout-work/unified-diff.patch",
+   "raw": 578,
+   "tokens": 419,
+   "prior": 419,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 5624,
+   "memo": {
+    "size": 2,
+    "chars": 2974
+   }
+  },
+  {
+   "path": "bench/holdout-tbl/df-h.txt",
+   "raw": 570,
+   "tokens": 171,
+   "prior": 171,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 4312,
+   "memo": {
+    "size": 2,
+    "chars": 1878
+   }
+  },
+  {
+   "path": "bench/holdout-x41/df-real.txt",
+   "raw": 158,
+   "tokens": 126,
+   "prior": 126,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 7488,
+   "memo": {
+    "size": 2,
+    "chars": 658
+   }
+  },
+  {
+   "path": "bench/holdout-x41/du-real.txt",
+   "raw": 458,
+   "tokens": 272,
+   "prior": 272,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 6043,
+   "memo": {
+    "size": 2,
+    "chars": 3210
+   }
+  },
+  {
+   "path": "bench/holdout-x41/node-help.txt",
+   "raw": 1099,
+   "tokens": 862,
+   "prior": 863,
+   "delta": -1,
+   "arm": "outside",
+   "exact": true,
+   "ms": 10405,
+   "memo": {
+    "size": 2,
+    "chars": 13502
+   }
+  },
+  {
+   "path": "bench/holdout-x42/findmnt.txt",
+   "raw": 787,
+   "tokens": 444,
+   "prior": 444,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 9776,
+   "memo": {
+    "size": 2,
+    "chars": 6430
+   }
+  },
+  {
+   "path": "bench/holdout-x42/df-h.txt",
+   "raw": 140,
+   "tokens": 108,
+   "prior": 108,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 7640,
+   "memo": {
+    "size": 2,
+    "chars": 586
+   }
+  },
+  {
+   "path": "bench/holdout-work/email-thread.txt",
+   "raw": 629,
+   "tokens": 488,
+   "prior": 488,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 13318,
+   "memo": {
+    "size": 2,
+    "chars": 4252
+   }
+  },
+  {
+   "path": "bench/holdout-work/llm-answer.md",
+   "raw": 733,
+   "tokens": 674,
+   "prior": 674,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 11976,
+   "memo": {
+    "size": 2,
+    "chars": 5084
+   }
+  },
+  {
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "raw": 330,
+   "tokens": 176,
+   "prior": 176,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 11925,
+   "memo": {
+    "size": 2,
+    "chars": 1270
+   }
+  },
+  {
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "raw": 675,
+   "tokens": 244,
+   "prior": 244,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 17529,
+   "memo": {
+    "size": 2,
+    "chars": 3156
+   }
+  },
+  {
+   "path": "bench/holdout-x40/prices.csv",
+   "raw": 582,
+   "tokens": 133,
+   "prior": 133,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 24263,
+   "memo": {
+    "size": 2,
+    "chars": 1986
+   }
+  },
+  {
+   "path": "bench/holdout-x40/cue-sheet.md",
+   "raw": 513,
+   "tokens": 101,
+   "prior": 101,
+   "delta": 0,
+   "arm": "STICHOMYTHIA",
+   "exact": true,
+   "ms": 21406,
+   "memo": {
+    "size": 2,
+    "chars": 1876
+   }
+  },
+  {
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "raw": 1144,
+   "tokens": 315,
+   "prior": 315,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 24832,
+   "memo": {
+    "size": 2,
+    "chars": 5338
+   }
+  },
+  {
+   "path": "bench/holdout-x41/ls-real.txt",
+   "raw": 1034,
+   "tokens": 433,
+   "prior": 433,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 26403,
+   "memo": {
+    "size": 2,
+    "chars": 4972
+   }
+  },
+  {
+   "path": "bench/holdout/json-pkg.txt",
+   "raw": 1152,
+   "tokens": 681,
+   "prior": 681,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 26132,
+   "memo": {
+    "size": 2,
+    "chars": 7240
+   }
+  },
+  {
+   "path": "bench/holdout/code-ts.txt",
+   "raw": 1422,
+   "tokens": 969,
+   "prior": 985,
+   "delta": -16,
+   "arm": "outside",
+   "exact": true,
+   "ms": 24098,
+   "memo": {
+    "size": 2,
+    "chars": 12000
+   }
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "raw": 1000,
+   "tokens": 673,
+   "prior": 674,
+   "delta": -1,
+   "arm": "outside",
+   "exact": true,
+   "ms": 27532,
+   "memo": {
+    "size": 2,
+    "chars": 8918
+   }
+  },
+  {
+   "path": "bench/holdout-x41/ps-real.txt",
+   "raw": 1106,
+   "tokens": 397,
+   "prior": 397,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 20826,
+   "memo": {
+    "size": 2,
+    "chars": 4730
+   }
+  },
+  {
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "raw": 1006,
+   "tokens": 326,
+   "prior": 326,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 30529,
+   "memo": {
+    "size": 2,
+    "chars": 5298
+   }
+  },
+  {
+   "path": "bench/holdout-x40/metrics.tsv",
+   "raw": 811,
+   "tokens": 210,
+   "prior": 210,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 36535,
+   "memo": {
+    "size": 2,
+    "chars": 2406
+   }
+  },
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "raw": 3054,
+   "tokens": 1042,
+   "prior": 1051,
+   "delta": -9,
+   "arm": "outside",
+   "exact": true,
+   "ms": 65826,
+   "memo": {
+    "size": 2,
+    "chars": 13180
+   }
+  },
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "raw": 2739,
+   "tokens": 850,
+   "prior": 859,
+   "delta": -9,
+   "arm": "outside",
+   "exact": true,
+   "ms": 148089,
+   "memo": {
+    "size": 2,
+    "chars": 12390
+   }
+  },
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "raw": 5194,
+   "tokens": 1394,
+   "prior": 1497,
+   "delta": -103,
+   "arm": "PROSPHYSIS",
+   "exact": true,
+   "ms": 369535,
+   "memo": {
+    "size": 3,
+    "chars": 31365
+   }
+  }
+ ],
+ "totalTokens": 12495,
+ "totalPrior": 12634,
+ "exactLanes": 29,
+ "totalMs": 965480
+}

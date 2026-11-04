@@ -1,0 +1,104 @@
+{
+ "keyTokens": 31,
+ "rows": [
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "lines": 152,
+   "arrows": 58,
+   "sibling": 52,
+   "density": 0.896551724137931,
+   "siblingChars": 763,
+   "frontier": 1497,
+   "rewritten": 52,
+   "wireMinusKey": 4897
+  },
+  {
+   "path": "bench/holdout-x41/ls-real.txt",
+   "lines": 41,
+   "arrows": 13,
+   "sibling": 0,
+   "density": 0,
+   "siblingChars": 0,
+   "frontier": 433,
+   "rewritten": 0,
+   "wireMinusKey": 1034
+  },
+  {
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "lines": 42,
+   "arrows": 0,
+   "sibling": 0,
+   "density": 0,
+   "siblingChars": 0,
+   "frontier": 315,
+   "rewritten": 0,
+   "wireMinusKey": 1144
+  },
+  {
+   "path": "bench/holdout-x41/ps-real.txt",
+   "lines": 42,
+   "arrows": 0,
+   "sibling": 0,
+   "density": 0,
+   "siblingChars": 0,
+   "frontier": 397,
+   "rewritten": 0,
+   "wireMinusKey": 1106
+  },
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "lines": 62,
+   "arrows": 0,
+   "sibling": 0,
+   "density": 0,
+   "siblingChars": 0,
+   "frontier": 1051,
+   "rewritten": 0,
+   "wireMinusKey": 3054
+  },
+  {
+   "path": "bench/holdout-x42/findmnt.txt",
+   "lines": 28,
+   "arrows": 0,
+   "sibling": 0,
+   "density": 0,
+   "siblingChars": 0,
+   "frontier": 444,
+   "rewritten": 0,
+   "wireMinusKey": 787
+  },
+  {
+   "path": "bench/holdout-work/unified-diff.patch",
+   "lines": 46,
+   "arrows": 0,
+   "sibling": 0,
+   "density": 0,
+   "siblingChars": 0,
+   "frontier": 419,
+   "rewritten": 0,
+   "wireMinusKey": 578
+  },
+  {
+   "path": "bench/holdout/json-pkg.txt",
+   "lines": 121,
+   "arrows": 0,
+   "sibling": 0,
+   "density": 0,
+   "siblingChars": 0,
+   "frontier": 681,
+   "rewritten": 0,
+   "wireMinusKey": 1152
+  },
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "lines": 122,
+   "arrows": 0,
+   "sibling": 0,
+   "density": 0,
+   "siblingChars": 0,
+   "frontier": 859,
+   "rewritten": 0,
+   "wireMinusKey": 2739
+  }
+ ]
+}

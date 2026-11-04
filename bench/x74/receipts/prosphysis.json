@@ -1,0 +1,28 @@
+{
+ "keyTokens": 31,
+ "key": "X74. Body first. Then per line, a last field §x means the target is the name before the arrow followed by x. Print only.",
+ "rows": [
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "raw": 5194,
+   "frontier": 1497,
+   "tokens": 1414,
+   "applied": true,
+   "key": 31,
+   "rewritten": 52,
+   "savedChars": 763,
+   "delta": -83
+  },
+  {
+   "path": "bench/holdout-x41/ls-real.txt",
+   "raw": 1034,
+   "frontier": 433,
+   "tokens": 433,
+   "applied": false,
+   "key": 0,
+   "rewritten": 0,
+   "savedChars": 0,
+   "delta": 0
+  }
+ ]
+}

@@ -1,0 +1,67 @@
+{
+ "keyTokens": 39,
+ "key": "X74. Body first. Then per field: a field starting § is the head of the field that occupied the same place on an earlier line, followed by what follows §. Print only.",
+ "minHead": 3,
+ "rows": [
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "hits": 58,
+   "saved": 847,
+   "exact": false,
+   "plainWire": 5113,
+   "frontierWire": 1509,
+   "key": 39,
+   "base": 1497,
+   "deltaPlain": 3616,
+   "deltaF": 12
+  },
+  {
+   "path": "bench/holdout-x41/ps-real.txt",
+   "hits": 0,
+   "saved": 0,
+   "exact": false,
+   "plainWire": 1011,
+   "frontierWire": 429,
+   "key": 39,
+   "base": 397,
+   "deltaPlain": 614,
+   "deltaF": 32
+  },
+  {
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "hits": 0,
+   "saved": 0,
+   "exact": false,
+   "plainWire": 1051,
+   "frontierWire": 355,
+   "key": 39,
+   "base": 315,
+   "deltaPlain": 736,
+   "deltaF": 40
+  },
+  {
+   "path": "bench/holdout-x41/ls-real.txt",
+   "hits": 8,
+   "saved": 85,
+   "exact": false,
+   "plainWire": 1170,
+   "frontierWire": 463,
+   "key": 39,
+   "base": 433,
+   "deltaPlain": 737,
+   "deltaF": 30
+  },
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "hits": 0,
+   "saved": 0,
+   "exact": false,
+   "plainWire": 3018,
+   "frontierWire": 914,
+   "key": 39,
+   "base": 859,
+   "deltaPlain": 2159,
+   "deltaF": 55
+  }
+ ]
+}

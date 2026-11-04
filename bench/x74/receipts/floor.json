@@ -1,0 +1,113 @@
+{
+ "encoding": "o200k_base",
+ "rows": [
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "raw": 5194,
+   "brotliBytes": 1744,
+   "frontier": 1497,
+   "atom14_8": 943,
+   "base100_6_6": 2114,
+   "eng_4_7": 2969
+  },
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "raw": 3054,
+   "brotliBytes": 1374,
+   "frontier": 1051,
+   "atom14_8": 743,
+   "base100_6_6": 1666,
+   "eng_4_7": 2339
+  },
+  {
+   "path": "bench/holdout-x41/ls-real.txt",
+   "raw": 1034,
+   "brotliBytes": 606,
+   "frontier": 433,
+   "atom14_8": 328,
+   "base100_6_6": 735,
+   "eng_4_7": 1032
+  },
+  {
+   "path": "bench/holdout-x42/findmnt.txt",
+   "raw": 787,
+   "brotliBytes": 618,
+   "frontier": 444,
+   "atom14_8": 335,
+   "base100_6_6": 750,
+   "eng_4_7": 1052
+  },
+  {
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "raw": 1144,
+   "brotliBytes": 462,
+   "frontier": 315,
+   "atom14_8": 250,
+   "base100_6_6": 560,
+   "eng_4_7": 787
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "raw": 1000,
+   "brotliBytes": 1094,
+   "frontier": 674,
+   "atom14_8": 592,
+   "base100_6_6": 1327,
+   "eng_4_7": 1863
+  },
+  {
+   "path": "bench/holdout-tbl/df-h.txt",
+   "raw": 570,
+   "brotliBytes": 237,
+   "frontier": 171,
+   "atom14_8": 129,
+   "base100_6_6": 288,
+   "eng_4_7": 404
+  },
+  {
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "raw": 1006,
+   "brotliBytes": 395,
+   "frontier": 326,
+   "atom14_8": 214,
+   "base100_6_6": 479,
+   "eng_4_7": 673
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "raw": 656,
+   "brotliBytes": 1124,
+   "frontier": 622,
+   "atom14_8": 608,
+   "base100_6_6": 1363,
+   "eng_4_7": 1914
+  },
+  {
+   "path": "bench/holdout-work/llm-answer.md",
+   "raw": 733,
+   "brotliBytes": 1157,
+   "frontier": 674,
+   "atom14_8": 626,
+   "base100_6_6": 1403,
+   "eng_4_7": 1970
+  },
+  {
+   "path": "bench/holdout-work/email-thread.txt",
+   "raw": 629,
+   "brotliBytes": 819,
+   "frontier": 488,
+   "atom14_8": 443,
+   "base100_6_6": 993,
+   "eng_4_7": 1395
+  },
+  {
+   "path": "bench/holdout-x41/node-help.txt",
+   "raw": 1099,
+   "brotliBytes": 1576,
+   "frontier": 863,
+   "atom14_8": 852,
+   "base100_6_6": 1911,
+   "eng_4_7": 2683
+  }
+ ]
+}

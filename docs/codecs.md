@@ -4907,3 +4907,136 @@ Speed: the X73 change to the counter (a flat `Int32Array` rank table for the two
 - **One lane, not a family.** The gain is real and large (38 %) but it is one lane of 29, and the surrounding lanes of the same class lose badly. A codec that wins 1 of 29 is a Pareto improvement, not a new frontier.
 - **No model was called.** §6 stands as written.
 - **The ten dead attacks in §1 stay dead.** They are recorded with their detectors in the report so that they are not re-attempted as if new.
+
+---
+
+## X74 — PROSPHYSIS: the row is a constraint system, not a list of cells
+
+### 1. What every previous codec assumed, and where it is false
+
+Every exact codec in this repository treats a cell as an **independent value**.
+DAEDALUS and SYNKOPE see strings. HYLE, BRACHYS, AUSTEROS and KANON see typed
+cells. APOGRAPHE and METRON predict a cell from **the same column of the row
+above** — a vertical, temporal relation. STICHOMYTHIA prints a column from an
+affine program over a number. ECHO removes text entailed by threading.
+PARADEIGMA writes a JSON field as a concatenation of constants and sibling
+values, but only inside a schema it has already parsed.
+
+None of them has a rule of the form
+
+> **this cell contains that cell plus an affix**
+
+which is the relation that holds, definitionally, between a symlink and its name:
+
+```
+lrwxrwxrwx 1 root root 28 May 27 20:36 libMagickCore-6.Q16.so.6 -> libMagickCore-6.Q16.so.6.0.0
+lrwxrwxrwx 1 root root 15 Oct  3  2023 libX11.so.6 -> libX11.so.6.4.0
+```
+
+Measured on `bench/holdout-x41/ls-l-real.txt` (`bench/x74/t24.ts`): **56 of 58**
+targets satisfy the relation, **0** satisfy the reverse direction, and **821 of
+1 123** target characters are material the message has already printed.
+
+### 2. The codec
+
+```ts
+prosphysisRelation(field, target, dirs)  // the one relation, both directions
+prosphysisRewrite(text, dirs)           // deletion-only rewrite, one O(n) pass
+prosphysisDecode(message)               // total inverse; throws, never guesses
+prosphysisEncode(text, enc)             // rewrite -> frontier -> two gates
+```
+
+The rewritten text goes **through the frontier again**, so the entailment
+compounds with the glyph tape, separator lattice and contract the stack already
+applies to the lane. The message is the 31-token key plus the frontier's message
+for the rewritten text.
+
+### 3. The key is the contract, and it was measured three times
+
+| key | tokens | buys | message on `ls-l-real` |
+|---|---|---|---|
+| v1, both directions spelled out | 105 | total, but six sevenths of the gain is key | 1 486 |
+| **v2, one direction, one sentence** | **31** | total for the suffix arm | **1 412** |
+| probe, hand-waved (discarded) | 54 | **not** a total procedure | 1 375 |
+
+> `X74. Body first. Then per line, a last field §x means the target is the name before the arrow followed by x. Print only.`
+
+The 54-token version scored better and was **discarded because it was not a total
+procedure** — the same failure mode X26 recorded for SYMPLOKE. The prefix
+direction is implemented and fuzz-tested but not admitted: +74 key tokens for a
+relation that occurs zero times in the corpus.
+
+### 4. Result
+
+| lane | raw | X73 frontier | PROSPHYSIS | delta |
+|---|---|---|---|---|
+| `ls-l-real.txt` | 5 194 | 1 497 | **1 412** | **−85 (−5.7 %)** |
+| `apt-real.txt` | 2 739 | 863 | 858 | −5 |
+| `dpkg-l.txt` | 1 000 | 674 | 673 | −1 |
+| 26 other lanes | — | — | unchanged | 0 |
+| **29-lane gate** | — | **12 634** | **12 544** | **−90** |
+
+29/29 byte-exact. The frontier identity is now split in three so that the
+dependency is a total order and cannot recurse:
+
+```
+tagstackEncodeUncached  = the X25 identity (X73 STICHOMYTHIA candidate included)
+tagstackFrontier        = that, memoized           <- candidates price against THIS
+tagstackEncode          = the frontier + PROSPHYSIS + STOICHEION, memoized
+```
+
+The split was forced by a **measured defect**: with the chain nested inside itself,
+a two-lane probe did not finish in 1 800 s.
+
+### 5. Why this is not just front coding
+
+| prior art | its reference string | what it needs that this does not |
+|---|---|---|
+| front coding (Bentley & Sedgewick, SODA 1997) | the previous key in a **sorted dictionary** | a sorted dictionary |
+| FSST (Boncz/Neumann/Leis, SIGMOD 2020) | a **shipped symbol table** | a shipped table |
+| Corra (VLDB 2024 workshop), 50–85 % | a **schema-declared reference column** | a column store and a schema |
+| PARADEIGMA (X39, this repo) | a sibling value in **parsed JSON** | a parse of the document |
+
+PROSPHYSIS has none of those: the reference is a sibling cell in the same row of a
+one-chat message, recovered from the text, with the whole message gated. It
+recovers 5.7 %, not 50–85 %, and the honest reason is that the frontier has
+already absorbed most of the redundancy those systems remove.
+
+### 6. The second codec of the turn, and why it is a negative
+
+**STOICHEION** recomputes a fixed-width table in its columns' own alphabets and is
+registered with a full spec. It **loses on all 29 lanes**. The reason is
+arithmetic, not opinion: `receipts/floor.json` gives each lane's unreadable floor
+(brotli −q 11 in o200k units). The frontier is at **1.00–1.10×** of that floor on
+prose and **1.3–1.4×** on the wide ops lanes; a codec that must ship a key **and a
+width vector** has nothing to buy at 1.3× and nothing at 1.0×.
+
+### 7. The kernel claim of X74
+
+> The frontier is a **near-optimal residual coder over these bodies**. The only
+> term it does not pay is a **key**, and no key is smaller than the gain it buys —
+> except on a lane where a **relation** is available, where the key costs 31 tokens
+> and the relation saves 85.
+
+Six arms, five refutations, one survival, every one measured this turn:
+geometry folding, table generators (+25…+120), entailment (+14/+33), indentation
+restore (+63/+67/+79), generator-first ordering (+19…+198), and **sibling-affix
+entailment (−90 on the gate)**. Every arm that reduces *source characters* raises
+*frontier tokens*. The arm that wins does not remove characters — it removes an
+**entailment the frontier was paying twice**, and pays 31 tokens to say so.
+
+### 8. Speed
+
+- **Document memo** (`tagstack.ts`): result-level, bounded in entries and
+  characters, returns a shallow copy, `OMEGA_NO_MEMO=1` disables it. Measured
+  **10 429 ms → 0 ms** on a second pass, token ids identical.
+- **Warm-up API** (`workmeter.ts`): honest A/B, a 904 ms warm-up then 2 055 ms
+  first encode vs 2 431 ms cold — it **moves** ~380 ms, it does not remove the
+  tokenizer table build. Shipped as an API, not as a speed claim.
+
+### 9. What is not claimed
+
+- **One lane.** −85 on one of 29 is a Pareto improvement, not a family.
+- **No model was called.** The from-key reader is ordinary code written from the
+  key text; that is what ran.
+- **The columnar family stays falsified.** STOICHEION is its strongest member.
