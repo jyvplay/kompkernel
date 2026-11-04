@@ -1,0 +1,266 @@
+{
+ "enc": "o200k_base",
+ "rows": [
+  {
+   "path": "bench/holdout-x42/lsblk.txt",
+   "cat": "misc",
+   "raw": 60,
+   "tokens": 60,
+   "floor": 61,
+   "ratio": 0.98,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "cat": "work",
+   "raw": 656,
+   "tokens": 622,
+   "floor": 608,
+   "ratio": 1.02,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x42b/uptime-w.txt",
+   "cat": "misc",
+   "raw": 80,
+   "tokens": 80,
+   "floor": 70,
+   "ratio": 1.14,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x42b/free-m.txt",
+   "cat": "misc",
+   "raw": 76,
+   "tokens": 76,
+   "floor": 76,
+   "ratio": 1,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x42b/vmstat.txt",
+   "cat": "misc",
+   "raw": 229,
+   "tokens": 149,
+   "floor": 113,
+   "ratio": 1.32,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-work/unified-diff.patch",
+   "cat": "work",
+   "raw": 578,
+   "tokens": 419,
+   "floor": 324,
+   "ratio": 1.29,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-tbl/df-h.txt",
+   "cat": "tbl",
+   "raw": 570,
+   "tokens": 171,
+   "floor": 129,
+   "ratio": 1.33,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x41/df-real.txt",
+   "cat": "misc",
+   "raw": 158,
+   "tokens": 126,
+   "floor": 96,
+   "ratio": 1.31,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x41/du-real.txt",
+   "cat": "misc",
+   "raw": 458,
+   "tokens": 272,
+   "floor": 219,
+   "ratio": 1.24,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x41/node-help.txt",
+   "cat": "misc",
+   "raw": 1099,
+   "tokens": 862,
+   "floor": 852,
+   "ratio": 1.01,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x42/findmnt.txt",
+   "cat": "misc",
+   "raw": 787,
+   "tokens": 444,
+   "floor": 335,
+   "ratio": 1.33,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x42/df-h.txt",
+   "cat": "misc",
+   "raw": 140,
+   "tokens": 108,
+   "floor": 84,
+   "ratio": 1.29,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-work/email-thread.txt",
+   "cat": "work",
+   "raw": 629,
+   "tokens": 488,
+   "floor": 443,
+   "ratio": 1.1,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-work/llm-answer.md",
+   "cat": "work",
+   "raw": 733,
+   "tokens": 674,
+   "floor": 626,
+   "ratio": 1.08,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "cat": "tbl",
+   "raw": 330,
+   "tokens": 176,
+   "floor": 133,
+   "ratio": 1.32,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "cat": "tbl",
+   "raw": 675,
+   "tokens": 244,
+   "floor": 166,
+   "ratio": 1.47,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x40/prices.csv",
+   "cat": "misc",
+   "raw": 582,
+   "tokens": 133,
+   "floor": 110,
+   "ratio": 1.21,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x40/cue-sheet.md",
+   "cat": "misc",
+   "raw": 513,
+   "tokens": 101,
+   "floor": 99,
+   "ratio": 1.02,
+   "arm": "STICHOMYTHIA"
+  },
+  {
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "cat": "misc",
+   "raw": 1144,
+   "tokens": 315,
+   "floor": 250,
+   "ratio": 1.26,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x41/ls-real.txt",
+   "cat": "misc",
+   "raw": 1034,
+   "tokens": 433,
+   "floor": 328,
+   "ratio": 1.32,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout/json-pkg.txt",
+   "cat": "misc",
+   "raw": 1152,
+   "tokens": 681,
+   "floor": 592,
+   "ratio": 1.15,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout/code-ts.txt",
+   "cat": "misc",
+   "raw": 1422,
+   "tokens": 969,
+   "floor": 812,
+   "ratio": 1.19,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "cat": "misc",
+   "raw": 1000,
+   "tokens": 673,
+   "floor": 592,
+   "ratio": 1.14,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x41/ps-real.txt",
+   "cat": "misc",
+   "raw": 1106,
+   "tokens": 397,
+   "floor": 320,
+   "ratio": 1.24,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "cat": "tbl",
+   "raw": 1006,
+   "tokens": 326,
+   "floor": 214,
+   "ratio": 1.52,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x40/metrics.tsv",
+   "cat": "misc",
+   "raw": 811,
+   "tokens": 210,
+   "floor": 130,
+   "ratio": 1.62,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "cat": "misc",
+   "raw": 3054,
+   "tokens": 1042,
+   "floor": 743,
+   "ratio": 1.4,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "cat": "misc",
+   "raw": 2739,
+   "tokens": 850,
+   "floor": 690,
+   "ratio": 1.23,
+   "arm": "outside"
+  },
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "cat": "misc",
+   "raw": 5194,
+   "tokens": 1394,
+   "floor": 943,
+   "ratio": 1.48,
+   "arm": "PROSPHYSIS"
+  }
+ ]
+}

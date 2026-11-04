@@ -27762,6 +27762,7 @@ function prosphysisEncode(text, enc2 = "o200k_base") {
   if (rw.rewritten === 0) return refuse("prosphysis: no sibling-affix relation fires");
   if (prosphysisDecode(rw.wire) !== text) return refuse("prosphysis: own inverse disagrees");
   const inner = tagstackFrontier(rw.wire, enc2);
+  if (inner.decoded !== rw.wire) return refuse("prosphysis: frontier does not reproduce the rewritten body");
   const message = `${PROSPHYSIS_KEY}
 ${inner.message}`;
   const tokens = countTokens3(message, enc2);

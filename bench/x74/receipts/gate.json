@@ -10,7 +10,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 2634,
+   "ms": 2530,
    "memo": {
     "size": 2,
     "chars": 264
@@ -24,7 +24,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 2568,
+   "ms": 2523,
    "memo": {
     "size": 2,
     "chars": 6770
@@ -38,7 +38,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 2231,
+   "ms": 2476,
    "memo": {
     "size": 2,
     "chars": 358
@@ -52,7 +52,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 2091,
+   "ms": 2230,
    "memo": {
     "size": 2,
     "chars": 526
@@ -66,7 +66,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 3777,
+   "ms": 3652,
    "memo": {
     "size": 2,
     "chars": 934
@@ -80,7 +80,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 4785,
+   "ms": 5624,
    "memo": {
     "size": 2,
     "chars": 2974
@@ -94,7 +94,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 3611,
+   "ms": 4312,
    "memo": {
     "size": 2,
     "chars": 1878
@@ -108,7 +108,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 5527,
+   "ms": 7488,
    "memo": {
     "size": 2,
     "chars": 658
@@ -122,7 +122,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 5919,
+   "ms": 6043,
    "memo": {
     "size": 2,
     "chars": 3210
@@ -131,12 +131,12 @@
   {
    "path": "bench/holdout-x41/node-help.txt",
    "raw": 1099,
-   "tokens": 863,
+   "tokens": 862,
    "prior": 863,
-   "delta": 0,
+   "delta": -1,
    "arm": "outside",
    "exact": true,
-   "ms": 8829,
+   "ms": 10405,
    "memo": {
     "size": 2,
     "chars": 13502
@@ -150,7 +150,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 9324,
+   "ms": 9776,
    "memo": {
     "size": 2,
     "chars": 6430
@@ -164,7 +164,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 6095,
+   "ms": 7640,
    "memo": {
     "size": 2,
     "chars": 586
@@ -178,7 +178,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 11952,
+   "ms": 13318,
    "memo": {
     "size": 2,
     "chars": 4252
@@ -192,7 +192,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 10937,
+   "ms": 11976,
    "memo": {
     "size": 2,
     "chars": 5084
@@ -206,7 +206,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 9780,
+   "ms": 11925,
    "memo": {
     "size": 2,
     "chars": 1270
@@ -220,7 +220,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 15378,
+   "ms": 17529,
    "memo": {
     "size": 2,
     "chars": 3156
@@ -234,7 +234,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 23332,
+   "ms": 24263,
    "memo": {
     "size": 2,
     "chars": 1986
@@ -248,7 +248,7 @@
    "delta": 0,
    "arm": "STICHOMYTHIA",
    "exact": true,
-   "ms": 15731,
+   "ms": 21406,
    "memo": {
     "size": 2,
     "chars": 1876
@@ -262,7 +262,7 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 14350,
+   "ms": 24832,
    "memo": {
     "size": 2,
     "chars": 5338
@@ -276,15 +276,141 @@
    "delta": 0,
    "arm": "outside",
    "exact": true,
-   "ms": 16872,
+   "ms": 26403,
    "memo": {
     "size": 2,
     "chars": 4972
    }
+  },
+  {
+   "path": "bench/holdout/json-pkg.txt",
+   "raw": 1152,
+   "tokens": 681,
+   "prior": 681,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 26132,
+   "memo": {
+    "size": 2,
+    "chars": 7240
+   }
+  },
+  {
+   "path": "bench/holdout/code-ts.txt",
+   "raw": 1422,
+   "tokens": 969,
+   "prior": 985,
+   "delta": -16,
+   "arm": "outside",
+   "exact": true,
+   "ms": 24098,
+   "memo": {
+    "size": 2,
+    "chars": 12000
+   }
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "raw": 1000,
+   "tokens": 673,
+   "prior": 674,
+   "delta": -1,
+   "arm": "outside",
+   "exact": true,
+   "ms": 27532,
+   "memo": {
+    "size": 2,
+    "chars": 8918
+   }
+  },
+  {
+   "path": "bench/holdout-x41/ps-real.txt",
+   "raw": 1106,
+   "tokens": 397,
+   "prior": 397,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 20826,
+   "memo": {
+    "size": 2,
+    "chars": 4730
+   }
+  },
+  {
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "raw": 1006,
+   "tokens": 326,
+   "prior": 326,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 30529,
+   "memo": {
+    "size": 2,
+    "chars": 5298
+   }
+  },
+  {
+   "path": "bench/holdout-x40/metrics.tsv",
+   "raw": 811,
+   "tokens": 210,
+   "prior": 210,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 36535,
+   "memo": {
+    "size": 2,
+    "chars": 2406
+   }
+  },
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "raw": 3054,
+   "tokens": 1042,
+   "prior": 1051,
+   "delta": -9,
+   "arm": "outside",
+   "exact": true,
+   "ms": 65826,
+   "memo": {
+    "size": 2,
+    "chars": 13180
+   }
+  },
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "raw": 2739,
+   "tokens": 850,
+   "prior": 859,
+   "delta": -9,
+   "arm": "outside",
+   "exact": true,
+   "ms": 148089,
+   "memo": {
+    "size": 2,
+    "chars": 12390
+   }
+  },
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "raw": 5194,
+   "tokens": 1394,
+   "prior": 1497,
+   "delta": -103,
+   "arm": "PROSPHYSIS",
+   "exact": true,
+   "ms": 369535,
+   "memo": {
+    "size": 3,
+    "chars": 31365
+   }
   }
  ],
- "totalTokens": 5954,
- "totalPrior": 5954,
- "exactLanes": 20,
- "totalMs": 175736
+ "totalTokens": 12495,
+ "totalPrior": 12634,
+ "exactLanes": 29,
+ "totalMs": 965480
 }

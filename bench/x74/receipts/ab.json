@@ -1,0 +1,244 @@
+{
+ "mode": "OMEGA_DET=1",
+ "control": "tagstackEncodeUncached (X25 identity, no STICHOMYTHIA, no X74)",
+ "treatment": "tagstackEncode (identity + STICHOMYTHIA + PROSPHYSIS + STOICHEION)",
+ "controlTotal": 12639,
+ "treatmentTotal": 12495,
+ "delta": -144,
+ "exactControl": 29,
+ "exactTreatment": 29,
+ "rows": [
+  {
+   "path": "bench/holdout-x42/lsblk.txt",
+   "x73_identity": 60,
+   "x74_chain": 60,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "x73_identity": 622,
+   "x74_chain": 622,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x42b/uptime-w.txt",
+   "x73_identity": 80,
+   "x74_chain": 80,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x42b/free-m.txt",
+   "x73_identity": 76,
+   "x74_chain": 76,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x42b/vmstat.txt",
+   "x73_identity": 149,
+   "x74_chain": 149,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-work/unified-diff.patch",
+   "x73_identity": 419,
+   "x74_chain": 419,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-tbl/df-h.txt",
+   "x73_identity": 171,
+   "x74_chain": 171,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x41/df-real.txt",
+   "x73_identity": 126,
+   "x74_chain": 126,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x41/du-real.txt",
+   "x73_identity": 272,
+   "x74_chain": 272,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x41/node-help.txt",
+   "x73_identity": 862,
+   "x74_chain": 862,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x42/findmnt.txt",
+   "x73_identity": 444,
+   "x74_chain": 444,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x42/df-h.txt",
+   "x73_identity": 108,
+   "x74_chain": 108,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-work/email-thread.txt",
+   "x73_identity": 488,
+   "x74_chain": 488,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-work/llm-answer.md",
+   "x73_identity": 674,
+   "x74_chain": 674,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "x73_identity": 176,
+   "x74_chain": 176,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "x73_identity": 244,
+   "x74_chain": 244,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x40/prices.csv",
+   "x73_identity": 133,
+   "x74_chain": 133,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x40/cue-sheet.md",
+   "x73_identity": 163,
+   "x74_chain": 101,
+   "delta": -62,
+   "arm": "STICHOMYTHIA",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "x73_identity": 315,
+   "x74_chain": 315,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x41/ls-real.txt",
+   "x73_identity": 433,
+   "x74_chain": 433,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout/json-pkg.txt",
+   "x73_identity": 681,
+   "x74_chain": 681,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout/code-ts.txt",
+   "x73_identity": 969,
+   "x74_chain": 969,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "x73_identity": 673,
+   "x74_chain": 673,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x41/ps-real.txt",
+   "x73_identity": 397,
+   "x74_chain": 397,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "x73_identity": 326,
+   "x74_chain": 326,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x40/metrics.tsv",
+   "x73_identity": 210,
+   "x74_chain": 210,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "x73_identity": 1042,
+   "x74_chain": 1042,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "x73_identity": 850,
+   "x74_chain": 850,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true
+  },
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "x73_identity": 1476,
+   "x74_chain": 1394,
+   "delta": -82,
+   "arm": "PROSPHYSIS",
+   "exact": true
+  }
+ ]
+}

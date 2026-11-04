@@ -260,6 +260,12 @@ export function prosphysisEncode(text: string, enc: EncodingName = 'o200k_base')
   // The rewritten text goes through the frontier as a CANDIDATE REPRESENTATION, so
   // the entailment compounds with whatever the stack already does on this lane.
   const inner: TagstackResult = tagstackFrontier(rw.wire, enc);
+  // gate 1b: THE COMPOSITION IS CHECKED, NOT ARGUED. The reader of this message inverts
+  // two layers — the frontier's own declared reader on the body, then the relation the
+  // key states. The first layer is the frontier's own claim that it reproduces the text
+  // it was given; if that fails on the REWRITTEN text (a different input from the
+  // source it validated before), the composition is not exact and nothing ships.
+  if (inner.decoded !== rw.wire) return refuse('prosphysis: frontier does not reproduce the rewritten body');
   const message = `${PROSPHYSIS_KEY}\n${inner.message}`;
   const tokens = countTokens(message, enc);
 

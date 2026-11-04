@@ -18,3 +18,17 @@ bench/holdout-x40/prices.csv: raw 582 tok 133 prior 133 delta 0 outside exact=tr
 bench/holdout-x40/cue-sheet.md: raw 513 tok 101 prior 101 delta 0 STICHOMYTHIA exact=true 15731ms
 bench/holdout-x42/ps-ef.txt: raw 1144 tok 315 prior 315 delta 0 outside exact=true 14350ms
 bench/holdout-x41/ls-real.txt: raw 1034 tok 433 prior 433 delta 0 outside exact=true 16872ms
+bench/holdout/json-pkg.txt: raw 1152 tok 681 prior 681 delta 0 outside exact=true 18023ms
+bench/holdout/code-ts.txt: raw 1422 tok 981 prior 985 delta -4 outside exact=true 20747ms
+bench/holdout-x42/dpkg-l.txt: raw 1000 tok 673 prior 674 delta -1 outside exact=true 24561ms
+bench/holdout-x41/ps-real.txt: raw 1106 tok 397 prior 397 delta 0 outside exact=true 21138ms
+bench/holdout-tbl/kubectl-get-pods.txt: raw 1006 tok 326 prior 326 delta 0 outside exact=true 30805ms
+bench/holdout-x40/metrics.tsv: raw 811 tok 210 prior 210 delta 0 outside exact=true 58360ms
+bench/holdout-x41/ps-aux-real.txt: raw 3054 tok 1051 prior 1051 delta 0 outside exact=true 75475ms
+bench/holdout-x41/apt-real.txt: raw 2739 tok 865 prior 859 delta 6 outside exact=true 154755ms
+bench/holdout-x41/ls-l-real.txt: raw 5194 tok 1412 prior 1497 delta -85 PROSPHYSIS exact=true 285486ms
+LANES 29 TOTAL 12550 PRIOR 12634 DELTA -84 exact 29/29 ms 865095
+  delta bench/holdout/code-ts.txt 985 -> 981 (-4)
+  delta bench/holdout-x42/dpkg-l.txt 674 -> 673 (-1)
+  delta bench/holdout-x41/apt-real.txt 859 -> 865 (6)
+  delta bench/holdout-x41/ls-l-real.txt 1497 -> 1412 (-85)
