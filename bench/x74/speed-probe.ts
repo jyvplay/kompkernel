@@ -1,0 +1,31 @@
+import { countTokens as T, countTokensExact, chunkCacheStats, chunkCacheClear } from '../../src/lib/omega/bpe';
+import { fastCount } from '../../src/lib/omega/bpe-fast';
+const enc: any = 'o200k_base';
+chunkCacheClear();
+const s = 'Expand TSV body then re-pad: cells 27,6,6,5,10.';
+let t0 = performance.now();
+for (let i = 0; i < 300000; i++) T(s, enc);
+let t1 = performance.now();
+for (let i = 0; i < 300000; i++) T(s, enc);
+let t2 = performance.now();
+chunkCacheClear();
+// random keys to defeat the memo: emulate the real workload
+const pool = 'abcdefghijklmnopqrstuvwxyz0123456789 |,";:.*=-_/'.split('');
+let x = 12345;
+const rnd = () => { x = (x * 1103515245 + 12345) & 0x7fffffff; return x; };
+const strs: string[] = [];
+for (let i = 0; i < 200000; i++) { let k = 3 + (rnd() % 9); let o = ''; for (let j = 0; j < k; j++) o += pool[rnd() % pool.length]; strs.push(o); }
+t0 = performance.now();
+for (const q of strs) T(q, enc);
+t1 = performance.now();
+for (const q of strs) fastCount(q) ?? 0;
+t2 = performance.now();
+console.log(`same-string memoized 300k: ${(t1-t0).toFixed(0)}ms ; 200k distinct short via countTokens: ${(t1-t1).toFixed(0)}`);
+t0 = performance.now(); for (const q of strs) T(q, enc); t1 = performance.now();
+console.log(`200k distinct short, warm countTokens: ${(t1-t0).toFixed(0)}ms`);
+chunkCacheClear();
+t0 = performance.now(); for (const q of strs) T(q, enc); t1 = performance.now();
+console.log(`200k distinct short, COLD countTokens: ${(t1-t0).toFixed(0)}ms (${((t1-t0)/200).toFixed(1)}us each)`);
+t0 = performance.now(); for (const q of strs) fastCount(q); t1 = performance.now();
+console.log(`200k distinct short, fastCount direct: ${(t1-t0).toFixed(0)}ms`);
+console.log(JSON.stringify(chunkCacheStats()));

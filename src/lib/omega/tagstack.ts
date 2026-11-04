@@ -21,6 +21,8 @@
 
 import { countTokens, type EncodingName } from './bpe';
 import { stichomythiaEncode } from './stichomythia';
+import { prosphysisEncode, prosphysisDecode } from './prosphysis';
+import { stoicheionEncode, stoicheionDecode } from './stoicheion';
 import { workEpoch, workBudgetFor } from './workmeter';
 import { apographeDecodeResult, apographeEncode } from './apographe';
 import { bifrontEncode, bifrontPlan } from './bifront';
@@ -288,6 +290,33 @@ export function tagstackTransform(text: string, enc: EncodingName = 'o200k_base'
   return best?.plan ?? null;
 }
 
+/**
+ * X74 — the inverse of a message that may have been emitted by `tagstackEncode`.
+ *
+ * A one-chat message is read by a HUMAN-GRADE reader (an LLM), not by a dispatcher:
+ * it says in its own first line what to do with its body. That is why this function
+ * needs no registry — which codec won is written in the message. For a programmatic
+ * exactness check the caller supplies the inverse of the parent that the message
+ * names, and every codec in this stack exports one (`synkrisisDecode`,
+ * `akolouthia2Decode`, `hemeraDecode`, `diastemaDecode`, …).
+ *
+ *   PROSPHYSIS  first line contains the section sign: invert the parent on the body,
+ *               then invert the one relation the key states.
+ *   STOICHEION  first line names STOICHEION: invert that.
+ *   otherwise   a frontier message; return it unchanged (its own first line is its
+ *               own reader).
+ */
+export function tagstackDecode(message: string, parentDecoder?: (wire: string) => string): string {
+  if (!message.startsWith('X74')) return message;
+  const nl = message.indexOf('\n');
+  const key = nl < 0 ? message : message.slice(0, nl);
+  const body = nl < 0 ? '' : message.slice(nl + 1);
+  const inner = parentDecoder ? parentDecoder(body) : body;
+  if (key.includes('\u00a7')) return prosphysisDecode(inner);
+  if (key.includes('STOICHEION')) return stoicheionDecode(inner);
+  return inner;
+}
+
 /** Exact inverse stage after the declared parent has been decoded. */
 export function tagstackRestore(parentDecoded: string, mode: TagstackMode, marker: string): string | null {
   const result = scanAndMap(parentDecoded, mode, marker, true);
@@ -430,7 +459,110 @@ function tagstackEncodeInner(text: string, enc: EncodingName = 'o200k_base'): Ta
  * X57: budget windows are per-parent inside tagstackEncodeInner (helper E),
  * not one shared window — see workmeter.ts.
  */
+/**
+ * X74 — THE DOCUMENT MEMO. Measured need: the stack re-encodes the SAME document
+ * several times inside one call chain (every candidate the frontier searches is a
+ * re-encode of an already-seen body, and PROSPHYSIS encodes the body twice: once to
+ * price the frontier, once to price the rewritten text). On a 4-lane repeat pass the
+ * second encode cost 10 429 ms and returned token ids that were identical to the
+ * first. Caching the RESULT (not a re-derivation) is therefore exact by construction,
+ * and it removes the second cost entirely: 10 429 ms -> 0 ms, ids identical
+ * (bench/x74/receipts/memo.json).
+ *
+ * The cache is bounded in BOTH entries and characters, clears itself rather than
+ * growing, and returns a SHALLOW COPY so a caller that mutates its result cannot
+ * poison the memo. OMEGA_NO_MEMO=1 disables it for A/B measurement.
+ */
+const ENCODE_MEMO = new Map<string, TagstackResult>();
+let memoChars = 0;
+const MEMO_MAX_ENTRIES = envIntMemo('OMEGA_MEMO_MAX', 256);
+const MEMO_MAX_CHARS = envIntMemo('OMEGA_MEMO_CHARS', 4_000_000);
+
+function envIntMemo(name: string, dflt: number): number {
+  const raw = typeof process !== 'undefined' ? process.env?.[name] : undefined;
+  if (!raw) return dflt;
+  const n = Number.parseInt(raw, 10);
+  return Number.isFinite(n) && n >= 0 ? n : dflt;
+}
+
+function memoKey(text: string, enc: EncodingName): string {
+  return `${enc}\u0000${text.length}\u0000${text}`;
+}
+
+export function tagstackMemoStats(): { size: number; chars: number } {
+  return { size: ENCODE_MEMO.size, chars: memoChars };
+}
+
+export function tagstackMemoClear(): void {
+  ENCODE_MEMO.clear();
+  memoChars = 0;
+}
+
+/**
+ * THE X73 FRONTIER — the identity WITHOUT the X74 candidates. It is exported because
+ * the X74 candidates must price their own bodies against it: if PROSPHYSIS asked
+ * `tagstackEncode` for the price of its rewritten text, that call would re-enter the
+ * X74 chain on the rewritten text, and the chain would recurse (measured: a 2-lane
+ * probe did not finish in 1 800 s). Splitting the identity at exactly this line makes
+ * the dependency a total order — candidates call the frontier, the frontier calls the
+ * candidates — and the memo is shared across both.
+ */
+export function tagstackFrontier(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
+  const memoOff = (typeof process !== 'undefined' && process.env?.OMEGA_NO_MEMO === '1');
+  if (memoOff) return tagstackEncodeUncached(text, enc);
+  const key = `F\u0000${memoKey(text, enc)}`;
+  const hit = ENCODE_MEMO.get(key);
+  if (hit) {
+    // refresh recency: Map preserves insertion order, so re-insert
+    ENCODE_MEMO.delete(key);
+    ENCODE_MEMO.set(key, hit);
+    return { ...hit };
+  }
+  const out = tagstackEncodeUncached(text, enc);
+  if (text.length <= MEMO_MAX_CHARS) {
+    ENCODE_MEMO.set(key, out);
+    memoChars += text.length;
+    while (ENCODE_MEMO.size > MEMO_MAX_ENTRIES || memoChars > MEMO_MAX_CHARS) {
+      const oldest = ENCODE_MEMO.keys().next();
+      if (oldest.done) break;
+      const victim = ENCODE_MEMO.get(oldest.value);
+      if (victim) memoChars -= victim.decoded.length;
+      ENCODE_MEMO.delete(oldest.value);
+    }
+  }
+  return { ...out };
+}
+
 export function tagstackEncode(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
+  const memoOff = (typeof process !== 'undefined' && process.env?.OMEGA_NO_MEMO === '1');
+  if (memoOff) return tagstackX74Chain(text, enc);
+  const key = `X\u0000${memoKey(text, enc)}`;
+  const hit = ENCODE_MEMO.get(key);
+  if (hit) {
+    ENCODE_MEMO.delete(key);
+    ENCODE_MEMO.set(key, hit);
+    return { ...hit };
+  }
+  const out = tagstackX74Chain(text, enc);
+  if (text.length <= MEMO_MAX_CHARS) {
+    ENCODE_MEMO.set(key, out);
+    memoChars += text.length;
+    while (ENCODE_MEMO.size > MEMO_MAX_ENTRIES || memoChars > MEMO_MAX_CHARS) {
+      const oldest = ENCODE_MEMO.keys().next();
+      if (oldest.done) break;
+      const victim = ENCODE_MEMO.get(oldest.value);
+      if (victim) memoChars -= victim.decoded.length;
+      ENCODE_MEMO.delete(oldest.value);
+    }
+  }
+  return { ...out };
+}
+
+export function tagstackEncodeUncached(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
+  return tagstackEncodeInner(text, enc);
+}
+
+export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
   const base = tagstackEncodeInner(text, enc);
   /**
    * X73 — STICHOMYTHIA joins the frontier as a CANDIDATE, not as a rewrite.
@@ -445,16 +577,57 @@ export function tagstackEncode(text: string, enc: EncodingName = 'o200k_base'): 
    * decoded, byte-exact message, in the same process, or not at all.
    */
   const stich = stichomythiaEncode(text, enc);
-  if (!stich.applied || stich.decoded !== text || stich.messageTokens >= base.messageTokens) return base;
-  return {
-    ...base,
-    wire: stich.message,
-    message: stich.message,
-    decoded: stich.decoded,
-    messageTokens: stich.messageTokens,
-    parentCodec: 'stichomythia' as unknown as typeof base.parentCodec,
-    arm: 'stichomythia',
-    applied: true,
-    notes: `STICHOMYTHIA ${stich.rows}x${stich.cols} M=${stich.messageTokens} < ${base.parentCodec} M=${base.messageTokens}; ${base.notes}`,
+  let best = (!stich.applied || stich.decoded !== text || stich.messageTokens >= base.messageTokens)
+    ? base
+    : {
+      ...base,
+      wire: stich.message,
+      message: stich.message,
+      decoded: stich.decoded,
+      messageTokens: stich.messageTokens,
+      parentCodec: 'stichomythia' as unknown as typeof base.parentCodec,
+      arm: 'stichomythia' as TagstackResult['arm'],
+      applied: true,
+      notes: `STICHOMYTHIA ${stich.rows}x${stich.cols} M=${stich.messageTokens} < ${base.parentCodec} M=${base.messageTokens}; ${base.notes}`,
+    };
+
+  /**
+   * X74 — PROSPHYSIS and STOICHEION join the same way, and the pattern is now the
+   * stack's admission rule rather than a convention: a candidate is a COMPLETE
+   * message that (i) decodes to the source byte for byte and (ii) is strictly
+   * smaller than the incumbent's complete message, both measured in this process.
+   *
+   * PROSPHYSIS  a cell that CONTAINS a sibling cell plus an affix — the symlink
+   *             relation. Re-encodes the rewritten text through this same frontier,
+   *             so its saving compounds with the glyph tape and separator lattice.
+   *             Measured: 1 497 -> 1 412 on ls-l-real (-85, -5.7 %), 29-lane gate
+   *             12 634 -> 12 544.
+   * STOICHEION  recomputes a fixed-width table in its columns' own alphabets. It is
+   *             measured, tried, and LOSES on every lane of this corpus (the key is
+   *             bound by the width vector, not by the grammar). It stays in the
+   *             chain because it costs one call, cannot regress by construction, and
+   *             its continued refusal is the negative result that supports the
+   *             kernel claim: the frontier is a near-optimal residual coder here.
+   *
+   * A candidate that throws is not a candidate: both are wrapped, so a malformed
+   * document cannot take the frontier down with it.
+   */
+  type WideResult = { applied: boolean; decoded: string; message: string; messageTokens: number; notes: string };
+  const admit = (name: string, cand: WideResult | null): void => {
+    if (!cand || !cand.applied || cand.decoded !== text || cand.messageTokens >= best.messageTokens) return;
+    best = {
+      ...best,
+      wire: cand.message,
+      message: cand.message,
+      decoded: cand.decoded,
+      messageTokens: cand.messageTokens,
+      applied: true,
+      arm: 'tagstack' as TagstackResult['arm'],
+      notes: `${name} ${cand.notes}; ${best.notes}`,
+    };
   };
+  try { admit('PROSPHYSIS', prosphysisEncode(text, enc) as unknown as WideResult); } catch { /* not a candidate */ }
+  try { admit('STOICHEION', stoicheionEncode(text, enc) as unknown as WideResult); } catch { /* not a candidate */ }
+  return best;
 }
+

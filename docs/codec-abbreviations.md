@@ -3369,3 +3369,39 @@ Two structural findings, both measured: the frontier's gain is monotone in **wit
 | **Known limit** | Wins **one lane of 29** and loses the surrounding ones badly (`metrics.tsv` 252 vs 210, `prices.csv` 323 vs 133) because the model family is narrow: an irregular column falls through to a literal list, which the frontier's fold beats. It is a Pareto improvement, not a new frontier. |
 | **Verification** | `bench/x73/kat.ts` (per-lane, applied/exact/ms), `bench/x73/reader.ts` + `reader-check.ts` (independent reader from the key), `bench/x72/stadion-broad.ts` (29 lanes, 29/29 exact), `bench/x72/ids.ts` (counter differential), `tsc --noEmit` clean. |
 | **Record** | [`docs/codecs.md`](codecs.md) §X73, [`bench/x73/REPORT.md`](../bench/x73/REPORT.md) |
+
+---
+
+## X74 — PROSPHYSIS (πρόσφυσις, "a growth onto something")
+
+| | |
+|---|---|
+| **Abbreviation** | `§` — the marker **is** the codec. Every other codec here abbreviates a *cell*; PROSPHYSIS abbreviates a *relationship*, and the relationship costs one character. |
+| **Decodes to (design spec)** | The frontier's message for a front-coded listing. **Body first** — invert whatever the body's own first line tells you to invert. Then, per line: a last field `§x` means the target of the arrow is the name that appears immediately before the arrow, followed by `x`. A line with no `§` is printed unchanged. |
+| **Greedy?** | **Neither greedy nor searched — a total function plus one gate.** The relation (target starts with the sibling field) is decided per line by string comparison. The only decision is *fire or not*, and it is made by measuring the complete message against the frontier's complete message in the same process. |
+| **Time or CPU bound?** | **CPU-bound for every decision**; no wall clock is read. Reported: 231 777 ms for `ls-l-real`, of which ~230 000 ms is the frontier's own cost of encoding the 5 194-character listing twice (once as source, once as rewritten text). |
+| **Source citation (honest)** | Front coding of sorted strings: **Bentley & Sedgewick, "Fast Algorithms for Sorting and Searching Strings", SODA 1997**. Shared-substring symbols: **FSST — Boncz, Neumann, Leis, SIGMOD 2020**. Cross-column residual coding: **Corra, VLDB 2024 workshop (50–85 %)**. In-repo ancestor: **PARADEIGMA (X39)**, JSON field as a concatenation of constants and sibling values inside a parsed schema. |
+| **What is new here** | The reference string is a **sibling cell in the same row of a one-chat message**, recovered from the text with **no dictionary, no symbol table, no column store, no schema and no side channel**, and the whole message is gated on a byte-exact decode. Front coding references the previous key in a sorted dictionary; FSST references a shipped table; Corra references a schema-declared column. |
+| **Measured** | `ls-l-real.txt` 5 194 raw → frontier 1 497 → **1 412 (−85, −5.7 %)**, byte-exact, with the **31-token key paid inside the 1 412**. 56 of 58 links satisfy the relation; 821 of 1 123 target characters are the sibling. 29-lane gate: **12 634 → 12 544 (−90)**, 29/29 exact. |
+| **Fails closed on** | a source containing `§` (line untouched); a target not strictly longer than the name; an empty affix; a self-inverse that disagrees (returns the frontier unchanged); a message not strictly smaller than the frontier's. |
+| **Known limit** | **One lane of 29.** It fires where a listing's target contains its own name and nowhere else. The prefix direction is implemented and fuzz-tested but **not admitted to any message**: declaring it costs +74 key tokens against a 31-token key, and it occurs **zero** times in the corpus. |
+| **Verification** | `bench/x74/t30.ts` — **15 adversarial cases, 0 failures; 400 fuzzed documents, 0 non-inverts**. `bench/x74/t40.ts` — the marker is 1 token, absent from every source, and reproduced **byte-exactly through the parent frontier's own round trip**. `bench/x74/t25.mjs` per-lane receipt; `bench/x74/receipts/gate.json`. |
+| **Record** | [`docs/codecs.md`](codecs.md) §X74, [`bench/x74/REPORT.md`](../bench/x74/REPORT.md) |
+
+---
+
+## X74 — STOICHEION (στοιχεῖον, "element, the letter of a column")
+
+| | |
+|---|---|
+| **Abbreviation** | `ΣΤ` — the column as the element. |
+| **Decodes to (design spec)** | A key naming a fixed-width table, its width vector, and one line per column stating that column's alphabet: constant, per-column dictionary with one index character per row, run-length index, arithmetic progression over printed numbers with padding recovered from the base, fixed-step clock/ISO timestamp, or cycle. |
+| **Greedy?** | **Mixed, and the distinction is load-bearing.** Column recoding is an **exact search** over a small closed model family (reconstruct, then price). The *subset of candidate cut positions* is chosen by **coordinate descent** on the measured message cost. |
+| **Time or CPU bound?** | **CPU-bound** for every decision; the wall clock is reported, never consulted. |
+| **Source citation (honest)** | Dictionary coding of columns: **C-Store, VLDB 2005**; **Abadi, Madden, Helfand, SIGMOD 2008**. Per-column encoding choice: **BtrBlocks, SIGMOD 2023**. Scaled decimals: **ALP, SIGMOD 2024**. Fixed-width induction: **STADION (X72, this repository)**. Schema-once columnar prompting: **ONTO, arXiv:2604.17512** (Apr 2026). |
+| **What is new here** | Nothing in the model family — that is the point. What is new is the **result**: the first codec in this stack whose entire family was falsified *on the frontier* rather than on a probe, with the reason stated as arithmetic. |
+| **Measured** | **Loses all 29 lanes.** `df-h` 800 vs 171, `kubectl` 960 vs 326, `ps-aux` refills the frontier and still loses; `code-ts` and `ls-l-nm` find no fold at any tolerance. The frontier is at **1.00–1.10×** of the unreadable floor (brotli −q 11) on prose and **1.3–1.4×** on the wide ops lanes, so a codec that must ship a key **and a width vector** has nothing left to buy. |
+| **Fails closed on** | a fold whose reconstruction is not byte-identical; a message not strictly smaller than the frontier's. It returns the incumbent unless it wins, so it cannot regress. |
+| **Known limit** | Registered as a **measured negative**, not a win. It is the strongest arm built to break the kernel claim of X74, and it did not. |
+| **Verification** | `bench/x74/receipts/broad.json` (29 lanes, applied/refused), `t15.ts` (key cost), `t26.ts` (`floor.json`, `cutrule.json`). |
+| **Record** | [`docs/codecs.md`](codecs.md) §X74, [`bench/x74/REPORT.md`](../bench/x74/REPORT.md) |

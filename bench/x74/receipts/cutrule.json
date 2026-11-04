@@ -1,0 +1,972 @@
+{
+ "rows": [
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "variants": [
+    {
+     "tol": 1,
+     "skip": 0,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 1,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 2,
+     "cuts": 13,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 0,
+     "cuts": 13,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 1,
+     "cuts": 13,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 2,
+     "cuts": 13,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 0,
+     "cuts": 13,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 1,
+     "cuts": 13,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 2,
+     "cuts": 13,
+     "fold": null
+    },
+    {
+     "tol": 0.8,
+     "skip": 0,
+     "cuts": 13,
+     "fold": null
+    },
+    {
+     "tol": 0.8,
+     "skip": 1,
+     "cuts": 13,
+     "fold": null
+    },
+    {
+     "tol": 0.8,
+     "skip": 2,
+     "cuts": 13,
+     "fold": null
+    }
+   ]
+  },
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "variants": [
+    {
+     "tol": 1,
+     "skip": 0,
+     "cuts": 1,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 1,
+     "cuts": 4,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 2,
+     "cuts": 5,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 0,
+     "cuts": 14,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 1,
+     "cuts": 15,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 2,
+     "cuts": 14,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 0,
+     "cuts": 15,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 1,
+     "cuts": 15,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 2,
+     "cuts": 15,
+     "fold": null
+    },
+    {
+     "tol": 0.8,
+     "skip": 0,
+     "cuts": 16,
+     "fold": null
+    },
+    {
+     "tol": 0.8,
+     "skip": 1,
+     "cuts": 16,
+     "fold": null
+    },
+    {
+     "tol": 0.8,
+     "skip": 2,
+     "cuts": 16,
+     "fold": null
+    }
+   ]
+  },
+  {
+   "path": "bench/holdout-x41/ls-real.txt",
+   "variants": [
+    {
+     "tol": 1,
+     "skip": 0,
+     "cuts": 1,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 1,
+     "cuts": 1,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 2,
+     "cuts": 1,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 0,
+     "cuts": 5,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 1,
+     "cuts": 1,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 2,
+     "cuts": 7,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 0,
+     "cuts": 7,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 1,
+     "cuts": 7,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 2,
+     "cuts": 7,
+     "fold": null
+    },
+    {
+     "tol": 0.8,
+     "skip": 0,
+     "cuts": 8,
+     "fold": {
+      "rows": 38,
+      "of": 40,
+      "cols": 9,
+      "align": "<<<<<<<>."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 1,
+     "cuts": 7,
+     "fold": null
+    },
+    {
+     "tol": 0.8,
+     "skip": 2,
+     "cuts": 7,
+     "fold": null
+    }
+   ]
+  },
+  {
+   "path": "bench/holdout-x42/findmnt.txt",
+   "variants": [
+    {
+     "tol": 1,
+     "skip": 0,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 1,
+     "cuts": 3,
+     "fold": {
+      "rows": 26,
+      "of": 27,
+      "cols": 4,
+      "align": "<<<."
+     }
+    },
+    {
+     "tol": 1,
+     "skip": 2,
+     "cuts": 3,
+     "fold": {
+      "rows": 26,
+      "of": 27,
+      "cols": 4,
+      "align": "<<<."
+     }
+    },
+    {
+     "tol": 0.95,
+     "skip": 0,
+     "cuts": 3,
+     "fold": {
+      "rows": 26,
+      "of": 27,
+      "cols": 4,
+      "align": "<<<."
+     }
+    },
+    {
+     "tol": 0.95,
+     "skip": 1,
+     "cuts": 3,
+     "fold": {
+      "rows": 26,
+      "of": 27,
+      "cols": 4,
+      "align": "<<<."
+     }
+    },
+    {
+     "tol": 0.95,
+     "skip": 2,
+     "cuts": 3,
+     "fold": {
+      "rows": 26,
+      "of": 27,
+      "cols": 4,
+      "align": "<<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 0,
+     "cuts": 3,
+     "fold": {
+      "rows": 26,
+      "of": 27,
+      "cols": 4,
+      "align": "<<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 1,
+     "cuts": 3,
+     "fold": {
+      "rows": 26,
+      "of": 27,
+      "cols": 4,
+      "align": "<<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 2,
+     "cuts": 3,
+     "fold": {
+      "rows": 26,
+      "of": 27,
+      "cols": 4,
+      "align": "<<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 0,
+     "cuts": 3,
+     "fold": {
+      "rows": 26,
+      "of": 27,
+      "cols": 4,
+      "align": "<<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 1,
+     "cuts": 3,
+     "fold": {
+      "rows": 26,
+      "of": 27,
+      "cols": 4,
+      "align": "<<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 2,
+     "cuts": 5,
+     "fold": {
+      "rows": 26,
+      "of": 27,
+      "cols": 6,
+      "align": "<<><<."
+     }
+    }
+   ]
+  },
+  {
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "variants": [
+    {
+     "tol": 1,
+     "skip": 0,
+     "cuts": 1,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 1,
+     "cuts": 9,
+     "fold": {
+      "rows": 40,
+      "of": 41,
+      "cols": 10,
+      "align": "<><<<<<<<."
+     }
+    },
+    {
+     "tol": 1,
+     "skip": 2,
+     "cuts": 13,
+     "fold": {
+      "rows": 39,
+      "of": 41,
+      "cols": 14,
+      "align": "<><<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.95,
+     "skip": 0,
+     "cuts": 13,
+     "fold": {
+      "rows": 39,
+      "of": 41,
+      "cols": 14,
+      "align": "<><<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.95,
+     "skip": 1,
+     "cuts": 13,
+     "fold": {
+      "rows": 39,
+      "of": 41,
+      "cols": 14,
+      "align": "<><<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.95,
+     "skip": 2,
+     "cuts": 13,
+     "fold": {
+      "rows": 39,
+      "of": 41,
+      "cols": 14,
+      "align": "<><<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 0,
+     "cuts": 13,
+     "fold": {
+      "rows": 39,
+      "of": 41,
+      "cols": 14,
+      "align": "<><<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 1,
+     "cuts": 13,
+     "fold": {
+      "rows": 39,
+      "of": 41,
+      "cols": 14,
+      "align": "<><<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 2,
+     "cuts": 13,
+     "fold": {
+      "rows": 39,
+      "of": 41,
+      "cols": 14,
+      "align": "<><<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 0,
+     "cuts": 14,
+     "fold": {
+      "rows": 39,
+      "of": 41,
+      "cols": 15,
+      "align": "<<><<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 1,
+     "cuts": 14,
+     "fold": {
+      "rows": 39,
+      "of": 41,
+      "cols": 15,
+      "align": "<<><<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 2,
+     "cuts": 14,
+     "fold": {
+      "rows": 39,
+      "of": 41,
+      "cols": 15,
+      "align": "<<><<<<<<<<<<<."
+     }
+    }
+   ]
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "variants": [
+    {
+     "tol": 1,
+     "skip": 0,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 1,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 2,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 0,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 1,
+     "cuts": 1,
+     "fold": {
+      "rows": 38,
+      "of": 41,
+      "cols": 2,
+      "align": "<."
+     }
+    },
+    {
+     "tol": 0.95,
+     "skip": 2,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 0,
+     "cuts": 3,
+     "fold": {
+      "rows": 38,
+      "of": 41,
+      "cols": 4,
+      "align": "<<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 1,
+     "cuts": 5,
+     "fold": {
+      "rows": 38,
+      "of": 41,
+      "cols": 6,
+      "align": "<<<<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 2,
+     "cuts": 5,
+     "fold": {
+      "rows": 38,
+      "of": 41,
+      "cols": 6,
+      "align": "<<<<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 0,
+     "cuts": 5,
+     "fold": {
+      "rows": 38,
+      "of": 41,
+      "cols": 6,
+      "align": "<<<<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 1,
+     "cuts": 6,
+     "fold": {
+      "rows": 38,
+      "of": 41,
+      "cols": 7,
+      "align": "<<<<<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 2,
+     "cuts": 6,
+     "fold": {
+      "rows": 38,
+      "of": 41,
+      "cols": 7,
+      "align": "<<<<<<."
+     }
+    }
+   ]
+  },
+  {
+   "path": "bench/holdout-tbl/df-h.txt",
+   "variants": [
+    {
+     "tol": 1,
+     "skip": 0,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 1,
+     "cuts": 7,
+     "fold": {
+      "rows": 19,
+      "of": 19,
+      "cols": 8,
+      "align": "<<>><<<."
+     }
+    },
+    {
+     "tol": 1,
+     "skip": 2,
+     "cuts": 7,
+     "fold": {
+      "rows": 19,
+      "of": 19,
+      "cols": 8,
+      "align": "<<>><<<."
+     }
+    },
+    {
+     "tol": 0.95,
+     "skip": 0,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 1,
+     "cuts": 7,
+     "fold": {
+      "rows": 19,
+      "of": 19,
+      "cols": 8,
+      "align": "<<>><<<."
+     }
+    },
+    {
+     "tol": 0.95,
+     "skip": 2,
+     "cuts": 7,
+     "fold": {
+      "rows": 19,
+      "of": 19,
+      "cols": 8,
+      "align": "<<>><<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 0,
+     "cuts": 7,
+     "fold": {
+      "rows": 19,
+      "of": 19,
+      "cols": 8,
+      "align": "<<>><<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 1,
+     "cuts": 7,
+     "fold": {
+      "rows": 19,
+      "of": 19,
+      "cols": 8,
+      "align": "<<>><<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 2,
+     "cuts": 7,
+     "fold": {
+      "rows": 19,
+      "of": 19,
+      "cols": 8,
+      "align": "<<>><<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 0,
+     "cuts": 7,
+     "fold": {
+      "rows": 19,
+      "of": 19,
+      "cols": 8,
+      "align": "<<>><<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 1,
+     "cuts": 7,
+     "fold": {
+      "rows": 19,
+      "of": 19,
+      "cols": 8,
+      "align": "<<>><<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 2,
+     "cuts": 7,
+     "fold": {
+      "rows": 19,
+      "of": 19,
+      "cols": 8,
+      "align": "<<>><<<."
+     }
+    }
+   ]
+  },
+  {
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "variants": [
+    {
+     "tol": 1,
+     "skip": 0,
+     "cuts": 6,
+     "fold": {
+      "rows": 23,
+      "of": 23,
+      "cols": 7,
+      "align": "<<<<<<."
+     }
+    },
+    {
+     "tol": 1,
+     "skip": 1,
+     "cuts": 10,
+     "fold": {
+      "rows": 23,
+      "of": 23,
+      "cols": 11,
+      "align": "<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 1,
+     "skip": 2,
+     "cuts": 10,
+     "fold": {
+      "rows": 23,
+      "of": 23,
+      "cols": 11,
+      "align": "<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.95,
+     "skip": 0,
+     "cuts": 10,
+     "fold": {
+      "rows": 23,
+      "of": 23,
+      "cols": 11,
+      "align": "<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.95,
+     "skip": 1,
+     "cuts": 10,
+     "fold": {
+      "rows": 23,
+      "of": 23,
+      "cols": 11,
+      "align": "<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.95,
+     "skip": 2,
+     "cuts": 10,
+     "fold": {
+      "rows": 23,
+      "of": 23,
+      "cols": 11,
+      "align": "<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 0,
+     "cuts": 10,
+     "fold": {
+      "rows": 23,
+      "of": 23,
+      "cols": 11,
+      "align": "<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 1,
+     "cuts": 10,
+     "fold": {
+      "rows": 23,
+      "of": 23,
+      "cols": 11,
+      "align": "<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.9,
+     "skip": 2,
+     "cuts": 10,
+     "fold": {
+      "rows": 23,
+      "of": 23,
+      "cols": 11,
+      "align": "<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 0,
+     "cuts": 10,
+     "fold": {
+      "rows": 23,
+      "of": 23,
+      "cols": 11,
+      "align": "<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 1,
+     "cuts": 10,
+     "fold": {
+      "rows": 23,
+      "of": 23,
+      "cols": 11,
+      "align": "<<<<<<<<<<."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 2,
+     "cuts": 10,
+     "fold": {
+      "rows": 23,
+      "of": 23,
+      "cols": 11,
+      "align": "<<<<<<<<<<."
+     }
+    }
+   ]
+  },
+  {
+   "path": "bench/holdout-x41/node-help.txt",
+   "variants": [
+    {
+     "tol": 1,
+     "skip": 0,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 1,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 1,
+     "skip": 2,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 0,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 1,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 0.95,
+     "skip": 2,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 0,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 1,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 0.9,
+     "skip": 2,
+     "cuts": 0,
+     "fold": null
+    },
+    {
+     "tol": 0.8,
+     "skip": 0,
+     "cuts": 1,
+     "fold": {
+      "rows": 118,
+      "of": 121,
+      "cols": 2,
+      "align": ">."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 1,
+     "cuts": 1,
+     "fold": {
+      "rows": 118,
+      "of": 121,
+      "cols": 2,
+      "align": ">."
+     }
+    },
+    {
+     "tol": 0.8,
+     "skip": 2,
+     "cuts": 1,
+     "fold": {
+      "rows": 118,
+      "of": 121,
+      "cols": 2,
+      "align": ">."
+     }
+    }
+   ]
+  }
+ ]
+}

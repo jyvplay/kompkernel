@@ -1,0 +1,290 @@
+{
+ "encoding": "o200k_base",
+ "node": "v22.22.3",
+ "rows": [
+  {
+   "path": "bench/holdout-x42/lsblk.txt",
+   "raw": 60,
+   "tokens": 60,
+   "prior": 60,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 2634,
+   "memo": {
+    "size": 2,
+    "chars": 264
+   }
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "raw": 656,
+   "tokens": 622,
+   "prior": 622,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 2568,
+   "memo": {
+    "size": 2,
+    "chars": 6770
+   }
+  },
+  {
+   "path": "bench/holdout-x42b/uptime-w.txt",
+   "raw": 80,
+   "tokens": 80,
+   "prior": 80,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 2231,
+   "memo": {
+    "size": 2,
+    "chars": 358
+   }
+  },
+  {
+   "path": "bench/holdout-x42b/free-m.txt",
+   "raw": 76,
+   "tokens": 76,
+   "prior": 76,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 2091,
+   "memo": {
+    "size": 2,
+    "chars": 526
+   }
+  },
+  {
+   "path": "bench/holdout-x42b/vmstat.txt",
+   "raw": 229,
+   "tokens": 149,
+   "prior": 149,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 3777,
+   "memo": {
+    "size": 2,
+    "chars": 934
+   }
+  },
+  {
+   "path": "bench/holdout-work/unified-diff.patch",
+   "raw": 578,
+   "tokens": 419,
+   "prior": 419,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 4785,
+   "memo": {
+    "size": 2,
+    "chars": 2974
+   }
+  },
+  {
+   "path": "bench/holdout-tbl/df-h.txt",
+   "raw": 570,
+   "tokens": 171,
+   "prior": 171,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 3611,
+   "memo": {
+    "size": 2,
+    "chars": 1878
+   }
+  },
+  {
+   "path": "bench/holdout-x41/df-real.txt",
+   "raw": 158,
+   "tokens": 126,
+   "prior": 126,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 5527,
+   "memo": {
+    "size": 2,
+    "chars": 658
+   }
+  },
+  {
+   "path": "bench/holdout-x41/du-real.txt",
+   "raw": 458,
+   "tokens": 272,
+   "prior": 272,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 5919,
+   "memo": {
+    "size": 2,
+    "chars": 3210
+   }
+  },
+  {
+   "path": "bench/holdout-x41/node-help.txt",
+   "raw": 1099,
+   "tokens": 863,
+   "prior": 863,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 8829,
+   "memo": {
+    "size": 2,
+    "chars": 13502
+   }
+  },
+  {
+   "path": "bench/holdout-x42/findmnt.txt",
+   "raw": 787,
+   "tokens": 444,
+   "prior": 444,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 9324,
+   "memo": {
+    "size": 2,
+    "chars": 6430
+   }
+  },
+  {
+   "path": "bench/holdout-x42/df-h.txt",
+   "raw": 140,
+   "tokens": 108,
+   "prior": 108,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 6095,
+   "memo": {
+    "size": 2,
+    "chars": 586
+   }
+  },
+  {
+   "path": "bench/holdout-work/email-thread.txt",
+   "raw": 629,
+   "tokens": 488,
+   "prior": 488,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 11952,
+   "memo": {
+    "size": 2,
+    "chars": 4252
+   }
+  },
+  {
+   "path": "bench/holdout-work/llm-answer.md",
+   "raw": 733,
+   "tokens": 674,
+   "prior": 674,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 10937,
+   "memo": {
+    "size": 2,
+    "chars": 5084
+   }
+  },
+  {
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "raw": 330,
+   "tokens": 176,
+   "prior": 176,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 9780,
+   "memo": {
+    "size": 2,
+    "chars": 1270
+   }
+  },
+  {
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "raw": 675,
+   "tokens": 244,
+   "prior": 244,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 15378,
+   "memo": {
+    "size": 2,
+    "chars": 3156
+   }
+  },
+  {
+   "path": "bench/holdout-x40/prices.csv",
+   "raw": 582,
+   "tokens": 133,
+   "prior": 133,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 23332,
+   "memo": {
+    "size": 2,
+    "chars": 1986
+   }
+  },
+  {
+   "path": "bench/holdout-x40/cue-sheet.md",
+   "raw": 513,
+   "tokens": 101,
+   "prior": 101,
+   "delta": 0,
+   "arm": "STICHOMYTHIA",
+   "exact": true,
+   "ms": 15731,
+   "memo": {
+    "size": 2,
+    "chars": 1876
+   }
+  },
+  {
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "raw": 1144,
+   "tokens": 315,
+   "prior": 315,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 14350,
+   "memo": {
+    "size": 2,
+    "chars": 5338
+   }
+  },
+  {
+   "path": "bench/holdout-x41/ls-real.txt",
+   "raw": 1034,
+   "tokens": 433,
+   "prior": 433,
+   "delta": 0,
+   "arm": "outside",
+   "exact": true,
+   "ms": 16872,
+   "memo": {
+    "size": 2,
+    "chars": 4972
+   }
+  }
+ ],
+ "totalTokens": 5954,
+ "totalPrior": 5954,
+ "exactLanes": 20,
+ "totalMs": 175736
+}

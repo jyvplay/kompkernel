@@ -1,0 +1,24 @@
+[
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "raw": 570,
+  "frontier": 171,
+  "pad": 178,
+  "key": 51,
+  "bodyFrontier": 127,
+  "parent": "stichomythia",
+  "rows": 19,
+  "of": 19
+ },
+ {
+  "path": "bench/holdout-x41/ps-aux-real.txt",
+  "raw": 3054,
+  "frontier": 1051,
+  "pad": 1104,
+  "key": 49,
+  "bodyFrontier": 1055,
+  "parent": "synkrisis",
+  "rows": 59,
+  "of": 61
+ }
+]
