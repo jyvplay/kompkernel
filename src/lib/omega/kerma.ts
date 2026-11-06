@@ -84,7 +84,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
-import { tagstackEncode, tagstackFrontier } from './tagstack';
+import { tagstackDecode, tagstackEncode, tagstackFrontier } from './tagstack';
 import type { TagstackResult } from './tagstack';
 
 const CONTRACT_HEAD = '§KERMA';
@@ -189,6 +189,28 @@ export function kermaDecode(message: string): string {
     if (pat === undefined) return m;
     return expand(m, pat) ?? m;
   });
+}
+
+/**
+ * Decode a COMPLETE KERMA message the way the reader does it: undo the frontier wire
+ * first, then apply the KERMA clause. Both arms are handled — the clause sits inside
+ * the frontier input on arm A and outside the frontier wire on arm B.
+ *
+ * This is what makes the byte-exactness claim testable rather than asserted: the
+ * registry reports this value as `decoded`, so a smoke test comparing it against the
+ * input is a real round trip through both layers, not a restatement of the input.
+ */
+export function kermaDecodeMessage(message: string): string {
+  // arm A: decoding the wire yields "clause\n<packed>", which kermaDecode expands.
+  const inner = tagstackDecode(message);
+  if (inner.includes(CONTRACT_HEAD)) return kermaDecode(inner);
+  // arm B: the clause sits outside the wire, on the first line.
+  const nl = message.indexOf('\n');
+  if (nl === -1) return message;
+  const first = message.slice(0, nl);
+  if (!first.startsWith(CONTRACT_HEAD)) return message;
+  const packed = tagstackDecode(message.slice(nl + 1));
+  return kermaDecode(first + '\n' + packed);
 }
 
 export function kermaEncode(
@@ -298,13 +320,16 @@ export function kermaEncode(
 
   // ---- the only greedy step: a bounded marginal prune -----------------------
   // Two arms are priced and the cheaper wins; both are priced against the identity arm.
+  // Each arm keeps the frontier result's OWN `decoded` field, so the final gate is a
+  // real two-layer round trip: frontier-decode, then KERMA-expand, then compare.
   const armA = (list: KermaShape[]) => {           // contract INSIDE the frontier input
     const r: TagstackResult = frontierFn(contractOf(list) + '\n' + packWith(list), enc);
-    return { tokens: r.messageTokens, message: r.message, parent: r.parentCodec };
+    return { tokens: r.messageTokens, message: r.message, parent: r.parentCodec, decoded: kermaDecode(r.decoded) };
   };
   const armB = (list: KermaShape[]) => {           // contract OUTSIDE the frontier wire
     const r: TagstackResult = frontierFn(packWith(list), enc);
-    return { tokens: countTokens(contractOf(list) + '\n' + r.message, enc), message: contractOf(list) + '\n' + r.message, parent: r.parentCodec };
+    const c = contractOf(list);
+    return { tokens: countTokens(c + '\n' + r.message, enc), message: c + '\n' + r.message, parent: r.parentCodec, decoded: kermaDecode(c + '\n' + r.decoded) };
   };
   let pruned = 0;
   let bestA = armA(cur), bestB = armB(cur);
@@ -318,6 +343,14 @@ export function kermaEncode(
     cur = trial; bestA = a; bestB = b; bestTok = t; pruned++;
   }
 
+  const win = bestA.tokens <= bestB.tokens ? bestA : bestB;
+
+  // ---- G4 (final): the WHOLE message must round-trip through both layers ----
+  // KERMA's own layer was checked earlier on the packed text; this checks the frontier
+  // layer too, which is the only check that can catch an interaction between them.
+  if (win.decoded !== text)
+    return refuse('refused: full two-layer round trip failed');
+
   // ---- G5: strict win against the identity arm ------------------------------
   if (!(bestTok < identity.messageTokens))
     return refuse(
@@ -325,11 +358,11 @@ export function kermaEncode(
         `shapes ${cur.map((c) => c.pattern).join(',')}`,
     );
 
-  const win = bestA.tokens <= bestB.tokens ? bestA : bestB;
   return {
     ...base,
     applied: true,
     message: win.message,
+    decoded: win.decoded,
     messageTokens: bestTok,
     frontierParent: win.parent,
     shapes: cur,

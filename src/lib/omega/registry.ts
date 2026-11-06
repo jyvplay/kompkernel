@@ -220,7 +220,7 @@ import { syntomiaEncode } from './syntomia';
 import { brachylogiaEncode } from './brachylogia';
 import { pinaxEncode } from './pinax';
 import { merismosEncode } from './merismos';
-import { kermaEncode, kermaDecode } from './kerma';
+import { kermaEncode } from './kerma';
 import { eustochiaEncode } from './eustochia';
 import { akribeiaEncode } from './akribeia';
 import { logistikeEncode } from './logistike';
