@@ -5195,3 +5195,67 @@ caching question. No speed win is claimed this turn.
 - **Gate 6 is half passed**, as stated above.
 - **No speed win.** The memo change was measured, found null, and is reported as null.
 - **No model was called by the encoder.** The cold read was the operator.
+
+
+---
+
+## X76 — PINAX, and where the frontier's headroom is not
+
+> New codec: `src/lib/omega/pinax.ts`, registry key `pinax`.
+> `psql-output.txt` 244 → **236 (−8, −3.3 %)**, byte-exact.
+> Investigated as a measured negative: `src/lib/omega/platos.ts` (not registered).
+
+### 1. The mechanic
+
+Some frontier parents emit a **legend** rather than a sentence: one line carrying the
+whole operator table for the wire as English prose. METRON's, on `psql-output.txt`, is
+**73 tokens of a 244-token message**. A legend is already a table of `name = definition`
+pairs — it is only *spelled* as prose. PINAX writes it as what it is:
+
+```
+73 tok  Before ¶ k=v. expand repeatedly Header line = n, sep, col=model; named columns
+        are dropped from lines and rebuilt; a full n-field line is literal and resets.
+        Drop it. above=line above, colM=column M of the same line, days/workdays=next
+        date/weekday, +b=number above+b same width print only.
+65 tok  Before ¶ k=v, expand repeatedly. Header n,sep,col=model. Named cols: drop,
+        rebuild. Full n-field line: literal, resets, drop. above=line above. colM=col M
+        same line. days/workdays=next date/weekday. +b=above+b same width. print only.
+```
+
+BRACHYLOGIA (X75) shortens a sentence; PINAX restructures a table. Different object,
+different coverage gate (operator set, not sentence elements).
+
+### 2. Item #10 — the representation the parent frontier sees
+
+Investigated properly; the answer is negative with a number attached.
+Inter-column padding in an aligned table is not data — it is a function of column width
+and value length. It is worth **2 034 of 23 020 raw tokens (−8.8 %)** over 20 lanes, and
+exactly 0 on the TSV/CSV/prose lanes. `src/lib/omega/platos.ts` implements the transform
+correctly (byte-exact restore on 11 of 14 lanes).
+
+It loses, and the reason is the finding:
+
+> Removing 469 raw tokens from `ps-aux-real` shrinks the frontier's message by only 57.
+> The frontier compresses padding at an **8.2× marginal rate against its 2.9× average** —
+> it is far better at padding than at the rest of the document.
+
+Measured end to end: `findmnt.txt` **461 vs 444**. The declaration (27–42 tokens) exceeds
+the frontier gain. Same wall STOICHEION hit in X74.
+
+### 3. Two more mechanisms measured and rejected
+
+- **Tape front-coding** — the tape is 26.4 % of the message (825/3 120 tokens), but
+  consecutive rules share only 39 characters over 10 lanes, and the front-coded form is
+  larger (1 282 vs 1 171) because the length codes cost more than they save.
+- **Tape rule composition** — 208 of 341 rules already compose; the encoder exploits it.
+  Remaining potential: 220 characters over 10 lanes.
+
+### 4. Speed
+
+Not improved this turn; none is claimed. X75's profile stands: the chunk cache is already
+at 99.4 % hits, so the fix is fewer candidate measurements, which is a fidelity question.
+
+### 5. What is not claimed
+
+One lane, eight tokens. PLATOS loses and is not registered. No speed win. No model was
+called by the encoder.

@@ -1,0 +1,12 @@
+ps-aux-real.txt        frontier  1042 -> squeezed   985  GAIN    57  (raw save was 469)
+ps-real.txt            frontier   397 -> squeezed   380  GAIN    17  (raw save was 158)
+dpkg-l.txt             frontier   673 -> squeezed   601  GAIN    72  (raw save was 142)
+kubectl-get-pods.txt   frontier   326 -> squeezed   298  GAIN    28  (raw save was 138)
+findmnt.txt            frontier   444 -> squeezed   369  GAIN    75  (raw save was 76)
+ps-ef.txt              frontier   315 -> squeezed   304  GAIN    11  (raw save was 160)
+ls-l-real.txt          frontier  1394 -> squeezed  1339  GAIN    55  (raw save was 442)
+vmstat.txt             frontier   149 -> squeezed   126  GAIN    23  (raw save was 47)
+ls-real.txt            frontier   433 -> squeezed   409  GAIN    24  (raw save was 62)
+df-h.txt               frontier   171 -> squeezed   152  GAIN    19  (raw save was 74)
+
+TOTAL frontier 5344 -> 4963  GAIN 381

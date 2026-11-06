@@ -1,0 +1,14 @@
+[
+ {
+  "path": "bench/holdout-x42/findmnt.txt",
+  "x74": 444,
+  "out": 444,
+  "applied": false,
+  "exact": true,
+  "cols": 0,
+  "removed": 0,
+  "decl": 0,
+  "detected": 4,
+  "notes": "platos loses: 461 vs 444 (decl 27, removed 149)"
+ }
+]

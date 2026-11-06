@@ -218,6 +218,7 @@ import { metatronEncode } from './metatron';
 import { synizesisEncode } from './synizesis';
 import { syntomiaEncode } from './syntomia';
 import { brachylogiaEncode } from './brachylogia';
+import { pinaxEncode } from './pinax';
 import { eustochiaEncode } from './eustochia';
 import { akribeiaEncode } from './akribeia';
 import { logistikeEncode } from './logistike';
@@ -1623,6 +1624,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'brachylogia', label: '↯ BRACHYLOGIA (X75: the decoder INSTRUCTION is a named part of the message, contracted by a fixed substitution table and re-verified by invertibility + element coverage + strict win)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = brachylogiaEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
+    },
+    {
+      key: 'pinax', label: '▤ PINAX (X76: the composed LEGEND is a table spelled as prose; rewrite it as the table it is, operator set preserved, verified by invertibility + operator coverage + strict win)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = pinaxEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
     },
     {
       key: 'synizesis', label: '⇒ SYNIZESIS (Pre-Tokenizer Boundary Collapse by Shape-Template Factoring)', family: 'exact', fidelity: 'exact',

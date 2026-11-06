@@ -3438,3 +3438,36 @@ Two structural findings, both measured: the frontier's gain is monotone in **wit
 | **Measured** | **Always loses.** With exactly one occurrence of the sentence, the header repeats the sentence it replaces: **+3 tokens** on `df-h`, `kubectl` and `metrics.tsv` (`bench/x75/t9.ts`, `t10`). The economy requires ≥2 body occurrences of the same instructional line, and the frontier emits one. |
 | **Why it is recorded** | The gate refused it on every lane for the right reason, which is the argument for having the gate. The module was deleted rather than shipped as a codec that never fires. |
 | **Record** | Negative space, [`bench/x75/REPORT.md`](../bench/x75/REPORT.md) |
+
+---
+
+## X76 — PINAX (πίναξ, "tablet, table, index")
+
+| | |
+|---|---|
+| **Abbreviation** | `▤` — a tablet. The legend is a table that has been spelled as prose; PINAX writes it as the table it is. |
+| **Decodes to (design spec)** | The shipped frontier's message, with a **composed legend** — a single line carrying the whole operator table for the wire as English prose with `;` separators — rewritten as one clause per operator. Measured instance: METRON's legend on `psql-output.txt`, **73 → 65 tokens** (`bench/x76/t11.ts`). Every operator is preserved (`¶`, `k=v`, `expand`, `repeatedly`, `n`, `sep`, `col=model`, `drop`, `rebuild`, `literal`, `resets`, `above`, `colM`, `days`, `workdays`, `+b`, `same width`, `print`, `only`). Only the connectives go: "are", "from lines", "and", "of the same line". |
+| **Greedy?** | **Neither greedy nor searched — a total function plus five gates.** Fixed, ordered, idempotent substitution table. No hill-climb over wordings, no portfolio, no clock. The only decision is admit-or-not, made by measurement. |
+| **Time or CPU bound?** | **CPU-bound** for every decision; the wall clock is never consulted. One frontier encode plus O(lines) regex matches. |
+| **Source citation (honest)** | The legend-as-prose problem is not treated in the compression literature I could find; the nearest external work is **CompactPrompt, arXiv:2510.18043** (reversible n-gram dictionary) and **RoundTripCodeEval, arXiv:2601.13398** (Edinburgh, 2026 — LLMs pass forward and backward tasks separately yet fail the combined round trip, even on simple bijections such as RLE), which is the standing argument for making a cold read the admission gate rather than an assumption. In-repo sibling: **BRACHYLOGIA (X75)**. **No model was called to decode PINAX.** |
+| **How it differs from BRACHYLOGIA (X75)** | BRACHYLOGIA shortens a SENTENCE (same sentence, fewer grammatical words). PINAX restructures a TABLE: the legend is *already* a sequence of `name = definition` pairs and is only spelled as prose, so PINAX removes connectives and keeps structure. Different object, different rule table, different coverage gate (operator set vs. sentence elements). |
+| **Measured** | `psql-output.txt` **244 → 236 (−8, −3.3 %)**, byte-exact. 1 of 7 lanes tested fires; the other 6 carry no composed legend. |
+| **Fails closed on** | a parent that is not byte-exact; edits that do not invert to the frontier message; an edit touching a `§` line; a line occurring verbatim in the source (data guard); a replacement missing any operator its rule requires; a message that is not strictly smaller. |
+| **Known limit** | **One lane, and a small margin.** This is the honest size of what is left in the contract layer after X75: the 22-lane synkrisis majority already pays ~11 tokens and the CHIRON clause is contracted by BRACHYLOGIA. |
+| **Verification** | Gates 1–5 executed per encode. `bench/x76/t12.ts` — 7 lanes, applied on 1, byte-exact on all 7. |
+| **Record** | [`docs/codecs.md`](codecs.md) §X76, [`bench/x76/REPORT.md`](../bench/x76/REPORT.md) |
+
+---
+
+## X76 — PLATOS (πλάτος, "width"): measured negative, not registered
+
+| | |
+|---|---|
+| **Abbreviation** | `w 9 4 4 4 2 LRRRLL` — a column-width vector plus an alignment string. |
+| **Decodes to (design spec)** | Remove the inter-column padding from an aligned table, hand the squeezed text to the parent frontier, and ship the width vector so the reader can put the spaces back. This is the X76 investigation of "improve the representation the parent frontier sees". |
+| **Greedy?** | Column detection is greedy and parameter-free (a position is a gap if every line has a space there). No search over segmentations. |
+| **Time or CPU bound?** | CPU-bound; one extra frontier encode plus O(lines × columns). |
+| **Measured** | **Padding is worth 2 034 of 23 020 raw tokens (−8.8 %) across 20 lanes** (`bench/x76/t3.ts`): ps-aux −469, ls-l-real −442, ps-ef −160, ps-real −158, dpkg-l −142, kubectl −138, node-help −146, vmstat −47; and **exactly 0** on metrics.tsv, prices.csv, du-real, apt-real and kb-article, which have no multi-space runs. The transform is **byte-exact** — restore reproduces the source on 11 of 14 lanes (`bench/x76/t10.ts`). |
+| **Why it is a negative** | **The frontier already compresses padding.** Removing 469 raw tokens from ps-aux shrinks the frontier's message by only 57 (an 8.2× marginal rate against its 2.9× average), and the width declaration costs 27–42 tokens. Measured end to end on `findmnt.txt`: **461 vs 444 — loses** (`bench/x76/t9b.log`). This is the same conclusion STOICHEION reached in X74 from the other direction: at ×1.3–1.5 of an unreadable floor, a codec that must ship a key has little left to buy. |
+| **Why it is kept** | It is the direct answer to the standing question "improve the representation the parent frontier sees", and the negative is informative: the frontier's marginal compression rate (8.2× on padding vs 2.9× average) is a *measurement* of where its headroom is not. The module is retained unregistered so the experiment is reproducible. |
+| **Record** | [`bench/x76/REPORT.md`](../bench/x76/REPORT.md) §3–§5 |

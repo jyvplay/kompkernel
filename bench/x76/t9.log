@@ -1,0 +1,13 @@
+ps-aux-real.txt        x74  1042 ->  1042 (+0) applied false exact true  cols  0 removed    0 decl   0 :: platos: no fixed-width layout every line conforms to
+ps-real.txt            x74   397 ->   397 (+0) applied false exact true  cols  0 removed    0 decl   0 :: platos: no fixed-width layout every line conforms to
+dpkg-l.txt             x74   673 ->   673 (+0) applied false exact true  cols  0 removed    0 decl   0 :: platos: no fixed-width layout every line conforms to
+kubectl-get-pods.txt   x74   326 ->   326 (+0) applied false exact true  cols  7 removed    0 decl   0 :: platos loses: 354 vs 326 (decl 56, removed 262)
+findmnt.txt            x74   444 ->   444 (+0) applied false exact true  cols  0 removed    0 decl   0 :: platos: no fixed-width layout every line conforms to
+ps-ef.txt              x74   315 ->   315 (+0) applied false exact true  cols  0 removed    0 decl   0 :: platos: no fixed-width layout every line conforms to
+vmstat.txt             x74   149 ->   149 (+0) applied false exact true  cols  0 removed    0 decl   0 :: platos: no fixed-width layout every line conforms to
+ls-real.txt            x74   433 ->   433 (+0) applied false exact true  cols  0 removed    0 decl   0 :: platos: no fixed-width layout every line conforms to
+df-h.txt               x74   171 ->   171 (+0) applied false exact true  cols  0 removed    0 decl   0 :: platos: no fixed-width layout every line conforms to
+df-real.txt            x74   126 ->   126 (+0) applied false exact true  cols  3 removed    0 decl   0 :: platos: a cell is empty or a line does not squeeze cleanly
+df-h.txt               x74   108 ->   108 (+0) applied false exact true  cols  0 removed    0 decl   0 :: platos: no fixed-width layout every line conforms to
+psql-output.txt        x74   244 ->   244 (+0) applied false exact true  cols  0 removed    0 decl   0 :: platos: no fixed-width layout every line conforms to
+lsblk.txt              x74    60 ->    60 (+0) applied false exact true  cols  0 removed    0 decl   0 :: platos: no fixed-width layout every line conforms to
