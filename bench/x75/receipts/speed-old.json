@@ -1,0 +1,31 @@
+{
+ "arm": "old(4096)",
+ "tokens": 4049,
+ "ms": 452202,
+ "rows": [
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "tokens": 1042,
+   "ms": 73107,
+   "chars": 6590
+  },
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "tokens": 1476,
+   "ms": 213638,
+   "chars": 10692
+  },
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "tokens": 850,
+   "ms": 143911,
+   "chars": 6195
+  },
+  {
+   "path": "bench/holdout/json-pkg.txt",
+   "tokens": 681,
+   "ms": 21546,
+   "chars": 3620
+  }
+ ]
+}

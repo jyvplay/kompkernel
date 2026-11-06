@@ -3405,3 +3405,36 @@ Two structural findings, both measured: the frontier's gain is monotone in **wit
 | **Known limit** | Registered as a **measured negative**, not a win. It is the strongest arm built to break the kernel claim of X74, and it did not. |
 | **Verification** | `bench/x74/receipts/broad.json` (29 lanes, applied/refused), `t15.ts` (key cost), `t26.ts` (`floor.json`, `cutrule.json`). |
 | **Record** | [`docs/codecs.md`](codecs.md) §X74, [`bench/x74/REPORT.md`](../bench/x74/REPORT.md) |
+
+---
+
+## X75 — BRACHYLOGIA (βραχυλογία, "brevity of speech")
+
+| | |
+|---|---|
+| **Abbreviation** | `↯` — contracted speech. The codec has no wire character: its object is the sentence the decoder already writes about its wire. |
+| **Decodes to (design spec)** | The shipped frontier's message, with the **instruction lines contracted by a fixed, ordered, idempotent substitution table** and **nothing else** — the tape, the body and every data byte are untouched. Two clauses are contracted today: the CHIRON rules clause **39 → 25** tokens, and the positional-delta line **23 → 17** (`bench/x75/t15.ts`). Every load-bearing element of each original is preserved: which characters name a rule (a **new Cyrillic letter**), where the tape ends (**¶**), how far a name's text runs (**to the next new letter or ¶**), where expansion applies (**after ¶**), that it recurses (**repeatedly**), what to emit (**print only**). Only English grammar is dropped. |
+| **Greedy?** | **Neither greedy nor searched — a total function plus five gates.** The rewrite is a fixed table, not a hill-climb and not a portfolio: there is no search over wordings, no pool of paraphrases, and no objective to climb. The only decision is *admit or not*, taken by measurement. This is deliberate: a search over English would need a program that scores "an LLM still reads this the same way", and no such program exists here — see below. |
+| **Time or CPU bound?** | **CPU-bound** for every decision; the wall clock is never consulted. Cost is one frontier encode plus O(lines) regex matches. |
+| **Source citation (honest)** | The idea that an instruction should be compressed like data belongs to others and is recent: **CompactPrompt, arXiv:2510.18043** (reversible n-gram dictionary + quantization); **ProCut, EMNLP 2025 industry** (attribution-based prompt pruning); **efficient-prompting survey, arXiv:2404.01077**. All compress *meaning* and are therefore lossy with respect to bytes. The nearest external work on whether an LLM can invert a lossless codec at all is **RoundTripCodeEval, arXiv:2601.13398** (Maveli, Vergari, Cohen, Edinburgh): models pass forward and backward tasks separately yet fail the combined round trip, and failures persist even on simple bijections such as RLE — which is the strongest available external argument for making the cold read an admission gate rather than an assumption. In-repo ancestors: **BRACHYS (X70)**, **AUSTEROS (X71)**, **SYNTOMIA** — they optimise a contract they author; BRACHYLOGIA optimises the contract the parent already emitted, at the parent's own report level. **No model was called to decode BRACHYLOGIA by the encoder**; the cold read reported below was performed by the operator. |
+| **What is new here** | Every previous codec treats the decoder instruction as a **constant** — authored once, quoted verbatim, paid in full. BRACHYLOGIA treats it as a **named part of the message that can be re-expressed**, and it is the first codec in this stack whose central claim cannot be checked by a program: the wire is decoded by code, but the contract is decoded by **comprehension**, and there is no executable proxy for comprehension. The codec says so, splits its verification into what is checkable and what is not, and pushes the unchecked part to an empirical gate that is actually run. |
+| **Measured** | `df-h.txt` 171 → **153 (−18, −10.5 %)**; `metrics.tsv` 210 → **192 (−18, −8.6 %)**; `kubectl-get-pods.txt` 326 → **308 (−18, −5.5 %)**. Instruction 62 → 44 tokens on each. 29-lane gate: **3 of 29 lanes fire**, all byte-exact. |
+| **Corrected scope (an overclaim was found and removed)** | The first draft claimed "14 % of the gate is instruction prose" from an audit that selected any line over 40 characters ending in a full stop. That selector cannot distinguish an INSTRUCTION from English DATA, so it counted `kb-article` (388), `llm-answer` (158) and `code-ts` (147) as instruction when they are the documents. Rerun structurally over 29 lanes (`bench/x75/t12.ts`, `receipts/contract-audit.json`): long CHIRON clause **3/29**, metron legend 73 tok **2/29**, short ~11-token contract **22/29**, none **2/29**. The instruction is **not** the general lever: on 22 of 29 lanes the parent already pays ~11 tokens. |
+| **Fails closed on** | a parent that is not byte-exact; an edit set that does not invert to the frontier message byte-for-byte; an edit touching a line carrying the tape marker `§`; a line that occurs verbatim in the source (data guard); a replacement missing any element its rule requires; a complete message that is not strictly smaller. |
+| **Known limit** | **3 of 29 lanes.** It cannot help a message whose instruction is already minimal, and it does not touch the ~86 % of every lane that is data. |
+| **Verification** | Gates 1–5 executed per encode (`invert`, `wire immunity`, `data guard`, `element coverage`, `strict win`). Gate 6 **cold read**: `bench/x75/coldcheck.ts` — the operator read the contracted 25-token sentence from a bare message and hand-extracted **18 of 18 tape rules**, all matching `chironParseTape` exactly. The byte-level `⁺` arithmetic half of the cold read was **not** completed by hand this turn, so the reconstruction half of Gate 6 is **not claimed**. `bench/x75/receipts/gate75-det.json` (29 lanes). |
+| **Record** | [`docs/codecs.md`](codecs.md) §X75, [`bench/x75/REPORT.md`](../bench/x75/REPORT.md) |
+
+---
+
+## X75 — KEYLINE (κλειδί + line): measured negative, not shipped
+
+| | |
+|---|---|
+| **Abbreviation** | `k=` — hoist the frontier's longest instructional line into a header `k=<sentence>` and replace its body occurrences with `k`. |
+| **Decodes to (design spec)** | A key line at the top of the message naming a repeated sentence, with each later occurrence replaced by the single character `k`. |
+| **Greedy?** | Yes: longest-instructional-line selection, no backtracking. |
+| **Time or CPU bound?** | CPU-bound; one frontier encode plus O(lines). |
+| **Measured** | **Always loses.** With exactly one occurrence of the sentence, the header repeats the sentence it replaces: **+3 tokens** on `df-h`, `kubectl` and `metrics.tsv` (`bench/x75/t9.ts`, `t10`). The economy requires ≥2 body occurrences of the same instructional line, and the frontier emits one. |
+| **Why it is recorded** | The gate refused it on every lane for the right reason, which is the argument for having the gate. The module was deleted rather than shipped as a codec that never fires. |
+| **Record** | Negative space, [`bench/x75/REPORT.md`](../bench/x75/REPORT.md) |

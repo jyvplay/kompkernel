@@ -5040,3 +5040,158 @@ entailment (−90 on the gate)**. Every arm that reduces *source characters* rai
 - **No model was called.** The from-key reader is ordinary code written from the
   key text; that is what ran.
 - **The columnar family stays falsified.** STOICHEION is its strongest member.
+
+---
+
+## X75 — BRACHYLOGIA: the instruction is a named part of the message
+
+> New codec: `src/lib/omega/brachylogia.ts`, registry key `brachylogia`.
+> Measured: `df-h` 171 → **153 (−10.5 %)**, `metrics.tsv` 210 → **192 (−8.6 %)**,
+> `kubectl-get-pods` 326 → **308 (−5.5 %)**, all byte-exact. 3 of 29 lanes.
+
+### 1. The measurement that redirected the turn
+
+Auditing the frontier's own messages for where the tokens go
+(`bench/x75/t12.ts`, `receipts/contract-audit.json`):
+
+| region | lanes | tokens of instruction |
+|---|---|---|
+| long CHIRON rules clause | **3 / 29** | 62 (`df-h`, `metrics.tsv`, `kubectl`) |
+| metron legend | 2 / 29 | 73 (`psql-output`, `cue-sheet`) |
+| short contract | 22 / 29 | ~11 (the synkrisis majority) |
+| none detected | 2 / 29 | 0 |
+
+The rules clause alone is **39 tokens** of a 171-token message on `df-h`.
+
+**An overclaim was found and removed.** The first audit selected "any line over
+40 characters ending in a full stop" and reported 14 % of the gate as instruction.
+That selector cannot tell an instruction from English *data*, so it counted
+`kb-article` (388), `llm-answer` (158) and `code-ts` (147) — the documents being
+compressed — as instruction. The corrected structural audit is the table above, and
+it says the opposite of the first draft: the instruction is **not** the general
+lever, because on 22 of 29 lanes the parent already pays ~11 tokens.
+
+### 2. The mechanic
+
+Every previous codec treats the decoder instruction as a **constant**: authored once,
+quoted verbatim, paid in full. BRACHYLOGIA re-expresses it — every load-bearing
+element kept, English grammar dropped:
+
+```
+39 tok  Every new Cyrillic letter before ¶ starts a rule whose text runs to the next
+        new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and
+        print only the result.
+25 tok  Before ¶ a new Cyrillic letter names text to the next new letter or ¶.
+        After ¶ expand repeatedly; print only.
+```
+
+The substitution table is fixed, ordered and idempotent — a **total function**, not a
+search. There is no hill-climb over wordings, because a search over English needs an
+objective and there is no program here that scores "an LLM still reads this the same
+way". That absence is the codec's central fact, so it is stated rather than papered
+over, and it determines the verification design.
+
+### 3. Verification: what is checkable, and what is not
+
+The wire is decoded by **code** (`akolouthia2Decode`, `chironParseTape`, …) and code
+can be executed. The contract is decoded by **comprehension**. An early draft tried to
+verify the contract with `chironDecode(message) === source`; that gate failed even on
+the *unmodified* frontier message, which was the useful discovery — it proved the
+composed decoder is not `chironDecode`, and it would have been dishonest to weaken the
+gate until it passed. The gates were rebuilt around what is actually checkable:
+
+1. **Invertibility** — undoing every edit reproduces the frontier message byte-for-byte.
+2. **Wire immunity** — no edited line carries the tape marker `§`.
+3. **Data guard** — a line is never edited if it occurs verbatim in the source.
+4. **Element coverage** — each rule declares the keywords its replacement must contain
+   (`¶`, `Cyrillic`, `expand`, `repeatedly`, `print`, `only`, `new`, `letter`, `next`).
+5. **Strict win** — the complete message must be strictly smaller.
+6. **Cold read** — a reader holding only the message decodes it.
+
+Gates 1–5 are executed on every encode. They are **necessary and provably not
+sufficient**: all five can pass on a sentence no reader understands. Gate 6 is the
+admission test, and it is the one that decides.
+
+### 4. Cold read (performed, half passed)
+
+`bench/holdout-x40/metrics.tsv` was contracted and **only the message** was printed
+(`bench/x75/cold.ts` — the source is never printed). From the contracted 25-token
+sentence alone, the rule table of the tape was extracted by hand and checked against
+`chironParseTape` (`bench/x75/coldcheck.ts`):
+
+```
+rules hand-extracted 18, parser rules 18, mismatches 0
+GATE 6 (rule-extraction half): PASS
+```
+
+The rule-extraction half — exactly the part the contraction changed — passed. The
+byte-level `⁺` arithmetic over 11 rows was **not** completed by hand this turn, so the
+reconstruction half of Gate 6 is **not claimed**.
+
+### 5. Generalized local leaders (29 lanes, `bench/x75/leaders.ts`)
+
+Ratio = frontier tokens ÷ unreadable floor (brotli −q11 at 14.8 bits/token).
+
+| class | lanes | tokens | floor | ratio |
+|---|---|---|---|---|
+| ops: delimited metrics | 1 | 192 | 130 | **×1.48** |
+| ops: listing | 2 | 1 827 | 1 271 | **×1.44** |
+| ops: query output | 1 | 244 | 166 | ×1.47 |
+| ops: process table | 3 | 1 754 | 1 313 | ×1.34 |
+| ops: aligned table | 5 | 844 | 636 | ×1.33 |
+| ops: tree table | 1 | 444 | 335 | ×1.33 |
+| structured: md table | 1 | 176 | 133 | ×1.32 |
+| source: diff | 1 | 419 | 324 | ×1.29 |
+| ops: path list | 1 | 272 | 219 | ×1.24 |
+| ops: log/transcript | 1 | 850 | 690 | ×1.23 |
+| structured: CSV | 1 | 133 | 110 | ×1.21 |
+| source: TypeScript | 1 | 969 | 812 | ×1.19 |
+| structured: JSON | 1 | 681 | 592 | ×1.15 |
+| ops: package table | 1 | 673 | 592 | ×1.14 |
+| **prose: email** | 1 | 488 | 443 | **×1.10** |
+| **prose: markdown** | 1 | 674 | 626 | **×1.08** |
+| **prose: article** | 1 | 622 | 608 | **×1.02** |
+| ops: key-value table | 1 | 76 | 76 | ×1.00 |
+| ops: block/tree | 1 | 60 | 61 | ×0.98 |
+
+**The structural finding of the turn:** prose sits at **×1.02–1.10** of an *unreadable*
+floor. A "general prose gain" would have to beat brotli while staying model-readable.
+The remaining headroom is entirely in **ops** (×1.3–1.5), and the worst single lane is
+`metrics.tsv` at **×1.48**.
+
+### 6. Prior art and the external view
+
+**RoundTripCodeEval** (arXiv:2601.13398, Edinburgh, 2026) is the first external
+benchmark of the exact ability this stack depends on: given a lossless codec, can an
+LLM invert it? Its finding is the strongest available argument for Gate 6 — models
+frequently pass forward and backward tasks separately and **fail the combined round
+trip**, and failures persist even on simple bijections such as RLE. Compression-side
+work (CompactPrompt arXiv:2510.18043, ProCut EMNLP 2025) compresses *meaning* and is
+therefore lossy in bytes; BRACHYLOGIA's subject is narrower and is lossless by
+construction, since the wire is untouched.
+
+### 7. Speed
+
+The count memo in `bpe.ts` skipped every string longer than 4 096 characters, which is
+exactly the size range of the ops messages. Raised to 65 536 with
+`OMEGA_NO_COUNT_MEMO=1` to restore the old behaviour (`bench/x75/speed.ts`):
+
+```
+ARM old(4096)    lanes 4 tokens 4049 wall 452202 ms
+ARM memo(65536)  lanes 4 tokens 4049 wall 468645 ms
+```
+
+**No gain — the memo was not the bottleneck and the claim is withdrawn.** A CPU profile
+of `ls-l-real` (230 s) shows where the time actually is: 25.5 % `countTokens`,
+14.2 % `rankAt` and 9.6 % `scoreRunCostDelta` inside the frontier search, on
+~230 000 distinct candidate measurements per lane, with the chunk cache already at
+**99.4 %** hits. Speeding the stack up therefore means measuring fewer candidates, not
+counting faster — and measuring fewer candidates is a fidelity question, not a
+caching question. No speed win is claimed this turn.
+
+### 8. What is not claimed
+
+- **3 of 29 lanes.** −54 on the gate (0.4 %). Lane-targeted, not general.
+- **Gate 6 is half passed**, as stated above.
+- **No speed win.** The memo change was measured, found null, and is reported as null.
+- **No model was called by the encoder.** The cold read was the operator.

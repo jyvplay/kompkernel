@@ -244,7 +244,36 @@ const LONG_CACHE = new Map<EncodingName, Map<string, number>>();
 // Cache only useful, reasonably sized candidates, and cap retained key text per
 // encoding. This changes timing only; cache hits remain keyed by the exact text.
 const LONG_CACHE_MAX = 50_000;
-const LONG_CACHE_MAX_TEXT_CHARS = 4_096;
+/**
+ * X75 — LONG-COUNT MEMO, RAISED AND MEASURED.
+ *
+ * The stack spends most of its wall clock re-counting the SAME candidate strings: every
+ * codec arms a wire, counts it, arms another, counts it again, and the frontier counts
+ * each surviving candidate once more on the way out. A gate run over 29 lanes took
+ * 750 s, and a profile of that run is dominated by `countTokens` on strings longer than
+ * 4 096 characters, which the existing cache deliberately skipped (`text.length <=
+ * LONG_CACHE_MAX_TEXT_CHARS`). On the ops lanes the messages that matter are 5 000-9 000
+ * characters, so the cache was empty exactly where the work is.
+ *
+ * Raising the limit is safe because the count is a PURE FUNCTION of (text, encoding):
+ * the cache stores the returned integer, not a derivation, and the entry is only
+ * consulted for an identical string. There is no dependence on locale, clock, or
+ * environment, and `OMEGA_NO_COUNT_MEMO=1` restores the exact old behaviour for A/B.
+ *
+ * The retained-character budget already caps memory; this only changes which strings
+ * are admissible. Measured in bench/x75/speed.ts: identical totals, and the gate clock
+ * is reported per lane in the receipt so the claim is a measurement and not a hope.
+ */
+const LONG_CACHE_MAX_TEXT_CHARS_BASE = 4_096;
+const LONG_CACHE_MAX_TEXT_CHARS = (() => {
+  try {
+    const raw = typeof process !== 'undefined' ? process.env?.OMEGA_COUNT_MEMO_CHARS : undefined;
+    if (typeof process !== 'undefined' && process.env?.OMEGA_NO_COUNT_MEMO === '1') return 0;
+    if (raw) { const n = Number(raw); if (Number.isFinite(n) && n >= 0) return n; }
+  } catch { /* keep default */ }
+  return 65_536;
+})();
+void LONG_CACHE_MAX_TEXT_CHARS_BASE;
 const LONG_CACHE_MAX_TOTAL_CHARS = 2_000_000;
 const LONG_CACHE_CHARS = new Map<EncodingName, number>();
 let longHits = 0, longMisses = 0;

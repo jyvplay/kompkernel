@@ -1,0 +1,31 @@
+lsblk.txt               60 prose    0  synkrisis
+kb-article.txt         622 prose  388  synkrisis
+uptime-w.txt            80 prose    0  synkrisis
+free-m.txt              76 prose    0  synkrisis
+vmstat.txt             149 prose   11  synkrisis
+unified-diff.patch     419 prose   11  synkrisis
+df-h.txt               171 prose   62 LONG-CLAUSE akolouthia2
+df-real.txt            126 prose   11  synkrisis
+du-real.txt            272 prose   11  synkrisis
+node-help.txt          862 prose   50  synkrisis
+findmnt.txt            444 prose   11  synkrisis
+df-h.txt               108 prose   11  synkrisis
+email-thread.txt       488 prose   41  synkrisis
+llm-answer.md          674 prose  158  synkrisis
+markdown-table.md      176 prose    0  synkrisis
+psql-output.txt        244 prose   73  metron
+prices.csv             133 prose    0  diastema
+cue-sheet.md           163 prose   73  metron
+ps-ef.txt              315 prose   11  synkrisis
+ls-real.txt            433 prose   11  synkrisis
+json-pkg.txt           681 prose   11  synkrisis
+code-ts.txt            983 prose  147  synkrisis
+dpkg-l.txt             673 prose   11  synkrisis
+ps-real.txt            397 prose   11  synkrisis
+kubectl-get-pods.txt   326 prose   62 LONG-CLAUSE akolouthia2
+metrics.tsv            210 prose   62 LONG-CLAUSE akolouthia2
+ps-aux-real.txt       1051 prose    0  synkrisis
+apt-real.txt           858 prose   11  synkrisis
+ls-l-real.txt         1496 prose    0  synkrisis
+
+lanes with the long clause: 3/29; prose total 1248 of 12690 tokens
