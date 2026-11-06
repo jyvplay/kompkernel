@@ -1,0 +1,66 @@
+[
+ {
+  "path": "bench/holdout-ops/find-listing.txt",
+  "base": 1142,
+  "after": 1213,
+  "d": 71,
+  "dict": 2,
+  "rawSaved": 1565
+ },
+ {
+  "path": "bench/holdout-ops/git-numstat.txt",
+  "base": 1983,
+  "after": 1987,
+  "d": 4,
+  "dict": 2,
+  "rawSaved": 1047
+ },
+ {
+  "path": "bench/holdout-ops/ls-full-iso.txt",
+  "base": 367,
+  "after": 376,
+  "d": 9,
+  "dict": 1,
+  "rawSaved": 279
+ },
+ {
+  "path": "bench/holdout-ops/node-stacktraces.txt",
+  "base": 300,
+  "after": 311,
+  "d": 11,
+  "dict": 2,
+  "rawSaved": 89
+ },
+ {
+  "path": "bench/holdout-ops/npm-ls.txt",
+  "base": 913,
+  "after": 944,
+  "d": 31,
+  "dict": 2,
+  "rawSaved": 530
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "base": 326,
+  "after": 371,
+  "d": 45,
+  "dict": 3,
+  "rawSaved": 289
+ },
+ {
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "base": 1412,
+  "after": 1415,
+  "d": 3,
+  "dict": 2,
+  "rawSaved": 1487
+ },
+ {
+  "path": "bench/holdout-x41/ps-aux-real.txt",
+  "base": 1051,
+  "after": 1078,
+  "d": 27,
+  "dict": 1,
+  "rawSaved": 590
+ }
+]

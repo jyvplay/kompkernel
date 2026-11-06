@@ -1,0 +1,85 @@
+[
+ {
+  "path": "bench/holdout-ops/find-listing.txt",
+  "base": 1142,
+  "after": 1157,
+  "d": 15,
+  "rawSaved": 822,
+  "pats": [
+   "##:##:##.##########",
+   "####-##-##"
+  ]
+ },
+ {
+  "path": "bench/holdout-ops/git-log-fuller.txt",
+  "base": 143,
+  "after": 147,
+  "d": 4,
+  "rawSaved": -4,
+  "pats": [
+   "####-##-##"
+  ]
+ },
+ {
+  "path": "bench/holdout-ops/npm-ls.txt",
+  "base": 909,
+  "after": 923,
+  "d": 14,
+  "rawSaved": -4,
+  "pats": [
+   "##.##.##"
+  ]
+ },
+ {
+  "path": "bench/holdout-ops/openstack-loghub-26.log",
+  "base": 896,
+  "after": 915,
+  "d": 19,
+  "rawSaved": -5,
+  "pats": [
+   "######-####-#"
+  ]
+ },
+ {
+  "path": "bench/holdout-tab/vix-daily-1990.csv",
+  "base": 461,
+  "after": 629,
+  "d": 168,
+  "rawSaved": 1485,
+  "pats": [
+   "####-##-##,##.######,##.######,##.######,##.######"
+  ]
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "base": 326,
+  "after": 362,
+  "d": 36,
+  "rawSaved": 67,
+  "pats": [
+   "##.###.#.###",
+   "##.###.#.##"
+  ]
+ },
+ {
+  "path": "bench/holdout-tbl/psql-output.txt",
+  "base": 244,
+  "after": 169,
+  "d": -75,
+  "rawSaved": 83,
+  "pats": [
+   "####-##-##",
+   "###.##"
+  ]
+ },
+ {
+  "path": "bench/holdout-x41/git-log-stat.txt",
+  "base": 1458,
+  "after": 1462,
+  "d": 4,
+  "rawSaved": 5,
+  "pats": [
+   "####-##-##"
+  ]
+ }
+]

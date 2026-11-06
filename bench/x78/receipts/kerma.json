@@ -1,0 +1,88 @@
+[
+ {
+  "path": "bench/holdout-ops/find-listing.txt",
+  "applied": false,
+  "F": 1142,
+  "notes": "refused: no win (best 1160 >= frontier 1142); shapes ##:##:##.##########,####-##-##"
+ },
+ {
+  "path": "bench/holdout-ops/git-log-fuller.txt",
+  "applied": false,
+  "F": 143,
+  "notes": "refused: no win (best 150 >= frontier 143); shapes ####-##-##"
+ },
+ {
+  "path": "bench/holdout-ops/git-numstat.txt",
+  "applied": false,
+  "F": 1983,
+  "notes": "refused: no shape clears the guards"
+ },
+ {
+  "path": "bench/holdout-ops/ls-full-iso.txt",
+  "applied": false,
+  "F": 367,
+  "notes": "refused: no win (best 372 >= frontier 367); shapes ##:##:##.#########"
+ },
+ {
+  "path": "bench/holdout-ops/node-stacktraces.txt",
+  "applied": false,
+  "F": 300,
+  "notes": "refused: no win (best 303 >= frontier 300); shapes ####:##"
+ },
+ {
+  "path": "bench/holdout-ops/npm-ls.txt",
+  "applied": false,
+  "F": 909,
+  "notes": "refused: no win (best 926 >= frontier 909); shapes ##.##.##"
+ },
+ {
+  "path": "bench/holdout-ops/openstack-loghub-26.log",
+  "applied": false,
+  "F": 896,
+  "notes": "refused: no win (best 918 >= frontier 896); shapes ######-####-#"
+ },
+ {
+  "path": "bench/holdout-tab/aapl-2014.csv",
+  "applied": false,
+  "F": 1206,
+  "notes": "refused: no shape clears the guards"
+ },
+ {
+  "path": "bench/holdout-tab/vix-daily-1990.csv",
+  "applied": false,
+  "F": 461,
+  "notes": "refused: no shape clears the guards"
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "applied": false,
+  "F": 326,
+  "notes": "refused: no win (best 355 >= frontier 326); shapes ##.###.#.###"
+ },
+ {
+  "path": "bench/holdout-tbl/psql-output.txt",
+  "applied": true,
+  "F": 244,
+  "M": 172,
+  "d": -72,
+  "notes": "arm A(in), shapes ####-##-##x24 ###.##x24, message 244->172 (-72)"
+ },
+ {
+  "path": "bench/holdout-x41/git-log-stat.txt",
+  "applied": false,
+  "F": 1458,
+  "notes": "refused: no win (best 1463 >= frontier 1458); shapes ####-##-##"
+ },
+ {
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "applied": false,
+  "F": 1497,
+  "notes": "refused: no shape clears the guards"
+ },
+ {
+  "path": "bench/holdout-x41/ps-aux-real.txt",
+  "applied": false,
+  "F": 1051,
+  "notes": "refused: no shape clears the guards"
+ }
+]

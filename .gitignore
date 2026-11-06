@@ -26,3 +26,5 @@ bench/x75/*.mjs
 # X76 benchmark bundles are generated the same way (see bench/x76/REPORT.md)
 bench/x76/*.mjs
 bench/x77/*.mjs
+bench/x78/*.mjs
+bench/x78/cpu/

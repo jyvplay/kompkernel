@@ -5280,3 +5280,27 @@ win.
 every lane. See `docs/codec-abbreviations.md` §X77 and `bench/x77/` for the three
 mechanics priced and the two earlier mechanics discarded. Registered because it is
 safe and self-limiting, not because it currently wins.
+
+---
+
+## X78 — KERMA
+
+`key: 'kerma'` · family `exact` · fidelity `exact` · `src/lib/omega/kerma.ts`
+
+Arbitrary-shape digit-separator elision. Fits any run of digit groups over `[-:./]`
+(any group widths, up to four groups) to the payload, deletes the separators, and
+declares the width pattern once, e.g. `§KERMA digits fill # in: ####-##-## ###.##`.
+Pays no marker per occurrence — only one clause per shape.
+
+**Gates:** width uniqueness · no bare-run collision · no merge · byte-exact round trip ·
+strict win. Comma and plus are excluded from the separator set (CSV field separators).
+
+**Measured:** fires on 1 of 14 lanes; **psql-output.txt 244 → 172 (−29.5 %)**, where the
+shapes are `####-##-##` ×24 and `###.##` ×24. The full 242-codec frontier — STIGME (X19)
+and MORPHE (X20) included — produces 244 there, because STIGME has no rule for the
+decimal-amount shape. Refusing lanes are timestamp- or version-shaped, which
+HORA/HEMERA/STATHMOS/STIGME already own.
+
+**Inheritance:** the mechanism family is STIGME (X19) / MORPHE (X20). The new part is
+unconstrained shape fitting with per-shape collision guards. Stated in full in
+`docs/codec-abbreviations.md` §X78.

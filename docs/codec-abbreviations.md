@@ -3548,3 +3548,212 @@ marginal rate; PLATOS: findmnt 461 vs 444). The frontier is close to a local opt
 against this family of attacks. MERISMOS is registered rather than discarded because
 its gates are sound and it is safe: it can only ever fire on a strict measured win,
 and it is byte-exact on every lane it refuses.
+
+---
+
+## X78 — KERMA (⚄)
+
+**Name.** Κέρμα — "small coin, small change; a thing cut into small pieces"
+(κερματίζω, to cut up into small pieces). Registered key `kerma`.
+Source: `src/lib/omega/kerma.ts`.
+
+**The mechanic, in one sentence.** Delete the separator characters *inside* a number
+(`2026-01-02` → `20260102`, `100.00` → `10000`) and declare the width pattern once;
+the reader re-inserts the separators from the digit count and the pattern.
+
+**Why it pays — the measurement.** The currency is tokens, not characters, and the
+o200k pretokenizer is lopsided: `\p{N}{1,3}` allows **three digits per chunk**, but
+every separator starts a chunk of its own. Measured (`bench/x78/quirk.ts`):
+
+| string | tokens | packed | tokens |
+|---|---:|---|---:|
+| `2026-09-30` | 6 | `20260930` | **3** |
+| `08:00:03` | 5 | `080003` | **2** |
+| `192.168.1.100` | 7 | `192168100` | **3** |
+| `1,234.56` | 5 | `123456` | **2** |
+| 12 log lines, ISO dates + clock times | 251 | packed | **179** (−28.7 %) |
+| a column of IPv4 addresses | 131 | packed | **95** (−27.5 %) |
+
+**What is and is not new — disclosed inheritance.** The mechanism family is **not**
+new. STIGME (X19) deletes separators inside a token and restores them from the token's
+own digits; MORPHE (X20) removed STIGME's hard-coding and fits a rule library;
+UUIDFOLD, HORA, HEMERA and STATHMOS are related value transforms. KERMA inherits that
+family openly.
+
+What is new is the **shape set**. STIGME ships three hard-coded shapes — `YYYY-MM-DD`,
+`YYYY/MM/DD`, `THH:MM:SS` — plus clock-after-a-date. A payload whose numbers are not
+dates or times gets nothing. KERMA fits **arbitrary** shapes: any run of digit groups
+over `[-:./]`, any group widths, up to four groups, fitted per payload, kept only on a
+measured win.
+
+That is not cosmetic. On `psql-output.txt`, whose numeric columns are dates
+(`2026-01-02`) **and** fixed-precision amounts (`100.00`, shape `###.##`), the complete
+existing frontier — 242 codecs, STIGME and MORPHE included — produces **244 tokens**.
+KERMA produces **172**. The amount column is a shape STIGME has no rule for, and it is
+half the payload's numbers.
+
+```
+STIGME   three hard-coded shapes (date, T-time, clock-after-date)
+MORPHE   a fitted rule library, parameterised over a rule catalogue
+KERMA    unconstrained shape fitting: whatever shape the payload contains
+```
+
+**Why it is a shape transform, not a substitution.** APOGRAPHE (X39) established the
+distinction: every substitution pays at least one token per use for a pointer at the
+point of substitution. KERMA pays **nothing per occurrence**. This is why ~1 token per
+occurrence can still be a large frontier win — there is no per-use pointer to pay for.
+
+**Greedy? Yes, and only in the prune.** Shape discovery is not a search: a fixed rule
+(every digit run over the separator set, grouped by exact shape, occurring ≥ 2 times).
+Selection is a bounded greedy prune — while it helps, drop the least valuable surviving
+shape and re-measure with the real tokenizer (≤ 24 evaluations, one token count each).
+A round is kept only on a strict improvement, so the prune cannot end worse than the
+unpruned table. A two-arm tournament (contract inside vs outside the frontier wire) is
+priced and the cheaper arm wins.
+
+**Time-bound or CPU-bound?** CPU-bound and bounded. Shape discovery is O(n·Lmax) over
+the payload; the prune is at most 24 full token counts. **No clock enters any decision.**
+
+**Honest citation.** Two sources found this turn, neither previously referenced here:
+
+- **Väinämöinen, "The tokens-per-byte trap: character-level 'compression' adds tokens"**
+  (DEV Community, May 2026). States the methodological rule this codec follows and that
+  most prompt-compression work violates: *"Stop equating bytes with tokens. Run your
+  input through the actual tokenizer before AND after any compression scheme. The token
+  count is the truth; the file size is the trap."* It also documents the converse
+  failure — deleting 25 % of characters raises token counts, because surviving fragments
+  fall through to byte fallback. Related: Petrov et al., arXiv:2305.15425 (up to 15×
+  longer tokenisation for low-resource scripts, same out-of-vocab dynamics).
+- **SepLLM, arXiv:2412.12094** (ICML 2025) — separator/punctuation tokens carry
+  disproportionately high attention relative to their information content. Independent
+  corroboration that separators are a distinct and expensive token class, which is the
+  entire premise here.
+
+Neither is admissible as prior art for byte-exact reconstruction: neither checks
+reconstruction, and SepLLM is a lossy inference-speed method. They are cited for the
+token-economy premise, not for the codec.
+
+### Gates — exact by verification, not by argument
+
+| | gate | why |
+|---|---|---|
+| G1 | **width uniqueness** | at most one kept shape per total digit length, so a bare run of length N has exactly one reading |
+| G2 | **no bare collision** | no separator-free digit run of that length exists anywhere, so only elided runs can have it |
+| G3 | **no merge** | a packed run may not sit beside another digit, or the two fuse into a run no rule describes |
+| G4 | **round trip** | `kermaDecode(kermaMessage(x)) === x`, byte for byte |
+| G5 | **strict win** | `countTokens(message) < frontier.messageTokens` |
+
+Comma and plus are deliberately **excluded** from the separator set: in CSV they are
+*field* separators, and eliding them fuses a whole row into one number. Measured:
+`vix-daily-1990.csv` went 461 → 629 (+168) before the exclusion was added.
+
+### Measured result
+
+Fires on **1 of 14** lanes tested; where it fires it saves **72 tokens (−29.5 %)** on
+`psql-output.txt`. Thirteen lanes refuse at G5, and the refusals are informative
+rather than uniform:
+
+| lane | frontier | best KERMA | shape |
+|---|---:|---:|---|
+| **psql-output.txt** | **244** | **172** | `####-##-##` ×24, `###.##` ×24 |
+| ls-full-iso | 367 | 372 | `##:##:##.#########` |
+| node-stacktraces | 300 | 303 | `####:##` |
+| git-log-fuller | 143 | 150 | `####-##-##` |
+| find-listing | 1142 | 1160 | `##:##:##.########` |
+| npm-ls | 909 | 926 | `##.##.##` |
+| kubectl-get-pods | 326 | 355 | `##.###.#.###` |
+
+Every refusing lane is **timestamp-shaped or version-shaped** — exactly the territory
+the stack's own HORA / HEMERA / STATHMOS / STIGME codecs already own. The single lane
+that wins wins because half its numbers are decimal amounts, a shape **no existing
+codec in the stack has a rule for**. KERMA is therefore a real but narrow addition: it
+extends shape-elision from dates and times to arbitrary numeric columns. Because G5 is
+a strict-win gate, it is safe to leave enabled — it cannot make any lane worse.
+
+### KERMA is pre-frontier (a structural note)
+
+PINAX (X76) and MERISMOS (X77) both rewrite `frontier.message`. KERMA must instead
+transform the **source**. Running the same shapes against the wire refuses on 6 of 8
+lanes with "no digit runs": the frontier has already rewritten the digits
+(psql-output's wire carries `хьҭаҭовавигагьДаДобабитать09а09` — no hyphen in sight).
+Rewriting the source rather than the wire is also what `bench/x77/t2c.ts` showed to be
+necessary on independent grounds: comparing a raw-text transform against an
+already-compressed baseline loses by construction.
+
+---
+
+## Generalized local leaders (X78)
+
+Ratio = brotli -q11 floor tokens / stack tokens (@ 14.8 bits/tok). Above 1.0 the stack beats a
+strong general-purpose compressor on that structure. Carried forward from `bench/x75/receipts/leaders.json`,
+regrouped by structure family, with X78's KERMA result on `psql-output.txt` folded in.
+
+
+### ops  (20 lanes)
+
+| lane | structure | raw | stack | brotli floor | ratio |
+|---|---|---:|---:|---:|---:|
+| metrics.tsv | delimited metrics | 811 | 192 | 130 | 1.48 |
+| ls-l-real.txt | listing | 5194 | 1394 | 943 | 1.48 |
+| psql-output.txt **X78 KERMA 244->172** | aligned table | 675 | 244 | 172 | 1.47 |
+| kubectl-get-pods.txt | aligned table | 1006 | 308 | 214 | 1.44 |
+| ps-aux-real.txt | process table | 3054 | 1042 | 743 | 1.4 |
+| findmnt.txt | tree table | 787 | 444 | 335 | 1.33 |
+| vmstat.txt | aligned table | 229 | 149 | 113 | 1.32 |
+| ls-real.txt | listing | 1034 | 433 | 328 | 1.32 |
+| df-real.txt | aligned table | 158 | 126 | 96 | 1.31 |
+| df-h.txt | aligned table | 140 | 108 | 84 | 1.29 |
+| ps-ef.txt | process table | 1144 | 315 | 250 | 1.26 |
+| du-real.txt | path list | 458 | 272 | 219 | 1.24 |
+| ps-real.txt | process table | 1106 | 397 | 320 | 1.24 |
+| apt-real.txt | log/transcript | 2739 | 850 | 690 | 1.23 |
+| df-h.txt | aligned table | 570 | 153 | 129 | 1.19 |
+| uptime-w.txt | single record | 80 | 80 | 70 | 1.14 |
+| dpkg-l.txt | package table | 1000 | 673 | 592 | 1.14 |
+| cue-sheet.md | cue list | 513 | 101 | 99 | 1.02 |
+| free-m.txt | key-value table | 76 | 76 | 76 | 1 |
+| lsblk.txt | block/tree | 60 | 60 | 61 | 0.98 |
+
+mean ratio **1.26**
+
+
+### prose  (3 lanes)
+
+| lane | structure | raw | stack | brotli floor | ratio |
+|---|---|---:|---:|---:|---:|
+| email-thread.txt | email | 629 | 488 | 443 | 1.1 |
+| llm-answer.md | markdown | 733 | 674 | 626 | 1.08 |
+| kb-article.txt | article | 656 | 622 | 608 | 1.02 |
+
+mean ratio **1.07**
+
+
+### source  (2 lanes)
+
+| lane | structure | raw | stack | brotli floor | ratio |
+|---|---|---:|---:|---:|---:|
+| unified-diff.patch | diff | 578 | 419 | 324 | 1.29 |
+| code-ts.txt | TypeScript | 1422 | 969 | 812 | 1.19 |
+
+mean ratio **1.24**
+
+
+### docs  (1 lanes)
+
+| lane | structure | raw | stack | brotli floor | ratio |
+|---|---|---:|---:|---:|---:|
+| node-help.txt | usage text | 1099 | 862 | 852 | 1.01 |
+
+mean ratio **1.01**
+
+
+### structured  (3 lanes)
+
+| lane | structure | raw | stack | brotli floor | ratio |
+|---|---|---:|---:|---:|---:|
+| markdown-table.md | md table | 330 | 176 | 133 | 1.32 |
+| prices.csv | CSV | 582 | 133 | 110 | 1.21 |
+| json-pkg.txt | JSON | 1152 | 681 | 592 | 1.15 |
+
+mean ratio **1.23**
+

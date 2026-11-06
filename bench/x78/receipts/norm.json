@@ -1,0 +1,52 @@
+[
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "base": 171,
+  "out": [
+   "align-colon n/a     ",
+   "align-eq n/a        ",
+   "align-space +13     ",
+   "pad-right +14       "
+  ]
+ },
+ {
+  "path": "bench/holdout-x42/findmnt.txt",
+  "base": 444,
+  "out": [
+   "align-colon n/a     ",
+   "align-eq n/a        ",
+   "align-space +13     ",
+   "pad-right +30       "
+  ]
+ },
+ {
+  "path": "bench/holdout-work/kb-article.txt",
+  "base": 622,
+  "out": [
+   "align-colon n/a     ",
+   "align-eq n/a        ",
+   "align-space +49     ",
+   "pad-right +39       "
+  ]
+ },
+ {
+  "path": "bench/holdout-x42b/free-m.txt",
+  "base": 76,
+  "out": [
+   "align-colon n/a     ",
+   "align-eq n/a        ",
+   "align-space n/a     ",
+   "pad-right +12       "
+  ]
+ },
+ {
+  "path": "bench/holdout-x41/ps-real.txt",
+  "base": 397,
+  "out": [
+   "align-colon n/a     ",
+   "align-eq n/a        ",
+   "align-space n/a     ",
+   "pad-right +63       "
+  ]
+ }
+]
