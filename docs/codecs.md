@@ -5259,3 +5259,24 @@ at 99.4 % hits, so the fix is fewer candidate measurements, which is a fidelity 
 
 One lane, eight tokens. PLATOS loses and is not registered. No speed win. No model was
 called by the encoder.
+
+---
+
+## X77 — MERISMOS
+
+`key: 'merismos'` · family `exact` · fidelity `exact` · `src/lib/omega/merismos.ts`
+
+Interns an arbitrary repeated substring left literal on the frontier wire, replacing
+each occurrence with one character that does not occur on that wire. Candidates are
+every wire substring of length 4–24 occurring ≥ 3 times; selection is a bounded greedy
+hill-climb priced with the real tokenizer.
+
+**Gates** (all must pass or the codec refuses and the frontier message is returned
+unchanged): data guard → invertibility (byte-for-byte, single simultaneous replacement
+pass) → no self-reference (an id never occurs inside any replacement string) → strict
+win.
+
+**Measured: fires on 0 of 9 lanes.** The best candidate came within +2 to +4 tokens on
+every lane. See `docs/codec-abbreviations.md` §X77 and `bench/x77/` for the three
+mechanics priced and the two earlier mechanics discarded. Registered because it is
+safe and self-limiting, not because it currently wins.

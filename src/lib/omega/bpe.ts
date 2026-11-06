@@ -182,6 +182,41 @@ const CHUNK_CACHE = new Map<string, number>();
 let chunkHits = 0, chunkMisses = 0, chunkFallbacks = 0;
 
 /* ---------------------------------------------------------------------------
+ * X77 — DIRECT-INDEX CHUNK LOOKUP.
+ *
+ * Measured (bench/x77/speed1.ts) on the ops lanes, which are where the stack spends
+ * its wall clock:
+ *
+ *     ls-l-real   4 463 chunks: len1 2 320 (52%), len2 641 (14%), len3-4 828, len5+ 674
+ *     ps-aux-real 2 875 chunks: len1 1 408 (49%), len2 677 (24%), len3-4 450, len5+ 340
+ *     distinct chunks per lane: ~320-346
+ *
+ * So two thirds of all chunk lookups are for chunks of ONE OR TWO UTF-16 code units,
+ * and they are looked up in a Map with only a few hundred entries — ~143 million
+ * string hashes per lane (X75 profile: 25.5% of runtime in `countTokens`), virtually
+ * all of them hits.
+ *
+ * A short chunk can be keyed by its code units directly, with no substring hashing:
+ * one array index for length 1, one integer Map key for length 2. Both are consulted
+ * BEFORE the string Map and hold the same values, so this can change timing only.
+ *
+ * EXACTNESS: these tables are only reachable when the cache key has no prefix, i.e.
+ * `enc === 'o200k_base'` (cl100k_base keys are prefixed with \u0002 and take the
+ * string path). Entries are written from the same computation that populates
+ * CHUNK_CACHE, and `verifyChunkAlgebra` re-checks the result against the real
+ * tokenizer. `OMEGA_NO_LUT=1` disables the whole fast path for A/B measurement.
+ * ------------------------------------------------------------------------- */
+const USE_LUT = (() => {
+  try {
+    return !(typeof process !== 'undefined' && process.env?.OMEGA_NO_LUT === '1');
+  } catch { return true; }
+})();
+/** length-1 o200k chunk -> token count. -1 = absent. */
+const LUT1 = new Int32Array(65536).fill(-1);
+/** length-2 o200k chunk -> token count, keyed by (c0 << 16) | c1. */
+const LUT2 = new Map<number, number>();
+
+/* ---------------------------------------------------------------------------
  * SHORT-STRING MEMO  (X30)
  *
  * Measured on bench/holdout-work/kb-article.txt (bench/x30/prof3.ts, X30):
@@ -288,7 +323,8 @@ export function chunkCacheStats() {
            longSize, longChars, longHits, longMisses };
 }
 export function chunkCacheClear() {
-  CHUNK_CACHE.clear(); chunkHits = 0; chunkMisses = 0; chunkFallbacks = 0;
+  CHUNK_CACHE.clear(); LUT2.clear(); LUT1.fill(-1);
+  chunkHits = 0; chunkMisses = 0; chunkFallbacks = 0;
   SHORT_CACHE.clear(); shortHits = 0; shortMisses = 0;
   LONG_CACHE.clear(); LONG_CACHE_CHARS.clear(); longHits = 0; longMisses = 0;
 }
@@ -328,9 +364,35 @@ export function countTokens(text: string, enc: EncodingName): number {
   for (let i = 0; i < cs.length; i++) covered += cs[i].length;
   if (covered !== text.length) { chunkFallbacks++; return countTokensExact(text, enc); }
   const pfx = enc === 'cl100k_base' ? '\u0002' : '';
+  const lut = USE_LUT && pfx === '';
   let n = 0;
   for (let i = 0; i < cs.length; i++) {
-    const k = pfx + cs[i];
+    const c = cs[i];
+    if (lut && c.length === 1) {
+      const k1 = c.charCodeAt(0);
+      const v1 = LUT1[k1];
+      if (v1 >= 0) { chunkHits++; n += v1; continue; }
+      chunkMisses++;
+      const t1 = (FAST_BPE ? fastCount(c) : null) ?? API[enc].encode(c).length;
+      LUT1[k1] = t1;
+      if (CHUNK_CACHE.size > 500000) { CHUNK_CACHE.clear(); LUT2.clear(); LUT1.fill(-1); }
+      CHUNK_CACHE.set(c, t1);
+      n += t1;
+      continue;
+    }
+    if (lut && c.length === 2) {
+      const k2 = (c.charCodeAt(0) << 16) | c.charCodeAt(1);
+      const v2 = LUT2.get(k2);
+      if (v2 !== undefined) { chunkHits++; n += v2; continue; }
+      chunkMisses++;
+      const t2 = (FAST_BPE ? fastCount(c) : null) ?? API[enc].encode(c).length;
+      LUT2.set(k2, t2);
+      if (CHUNK_CACHE.size > 500000) { CHUNK_CACHE.clear(); LUT2.clear(); LUT1.fill(-1); }
+      CHUNK_CACHE.set(c, t2);
+      n += t2;
+      continue;
+    }
+    const k = pfx + c;
     const v = CHUNK_CACHE.get(k);
     if (v === undefined) {
       chunkMisses++;

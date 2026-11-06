@@ -1,0 +1,26 @@
+[
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "ms": 25871,
+    "tokens": 397,
+    "exact": true
+  },
+  {
+    "path": "bench/holdout-x42/findmnt.txt",
+    "ms": 7167,
+    "tokens": 444,
+    "exact": true
+  },
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "ms": 2807,
+    "tokens": 622,
+    "exact": true
+  },
+  {
+    "path": "bench/holdout-tbl/df-h.txt",
+    "ms": 2735,
+    "tokens": 171,
+    "exact": true
+  }
+]

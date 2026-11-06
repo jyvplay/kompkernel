@@ -1,0 +1,8 @@
+ raw  1106 F   397 | pad   158/   17 r=0.11 | ws   158/   17 r=0.11 | digits     0/   85 r=  n/a | case     2/    2 r=1.00 | long    99/   83 r=0.84 | shuffle    -1/  -15 r=15.00 | punct   289/   41 r=0.14
+ raw   229 F   149 | pad    47/   23 r=0.49 | ws    47/   23 r=0.49 | digits     0/   33 r=  n/a | case     0/    0 r=  n/a | long     5/    5 r=1.00 | shuffle    -1/    2 r=-2.00 | punct    20/   20 r=1.00
+ raw   570 F   171 | pad    74/   19 r=0.26 | ws    74/   19 r=0.26 | digits     0/   91 r=  n/a | case     1/    1 r=1.00 | long   123/    6 r=0.05 | shuffle     0/    5 r=  n/a | punct    55/   12 r=0.22
+ raw   787 F   444 | pad    76/   75 r=0.99 | ws    76/   75 r=0.99 | digits     0/   21 r=  n/a | case     1/    1 r=1.00 | long    76/   58 r=0.76 | shuffle    -1/    1 r=-1.00 | punct   156/   47 r=0.30
+ raw  1006 F   326 | pad   138/   28 r=0.20 | ws   138/   28 r=0.20 | digits     0/  191 r=  n/a | case     1/    1 r=1.00 | long   352/  142 r=0.40 | shuffle     0/  -18 r=  n/a | punct   154/    5 r=0.03
+ raw  1034 F   433 | pad    62/   24 r=0.39 | ws    62/   24 r=0.39 | digits     0/  117 r=  n/a | case     0/    0 r=  n/a | long   217/   72 r=0.33 | shuffle    -1/    1 r=-1.00 | punct    87/   23 r=0.26
+
+rate = (frontier saved) / (raw saved).  ~1.0 = the frontier is BLIND here (headroom).  ~0.1 = it already owns it.

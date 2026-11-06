@@ -1,0 +1,119 @@
+[
+ {
+  "path": "bench/holdout-ops/find-listing.txt",
+  "applied": false,
+  "F": 1142,
+  "M": 1142,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +2 tok)"
+ },
+ {
+  "path": "bench/holdout-ops/git-numstat.txt",
+  "applied": false,
+  "F": 1983,
+  "M": 1983,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +2 tok)"
+ },
+ {
+  "path": "bench/holdout-ops/ls-full-iso.txt",
+  "applied": false,
+  "F": 367,
+  "M": 367,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +3 tok)"
+ },
+ {
+  "path": "bench/holdout-ops/node-stacktraces.txt",
+  "applied": false,
+  "F": 300,
+  "M": 300,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +2 tok)"
+ },
+ {
+  "path": "bench/holdout-ops/npm-ls.txt",
+  "applied": false,
+  "F": 915,
+  "M": 915,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +4 tok)"
+ },
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "applied": false,
+  "F": 171,
+  "M": 171,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +2 tok)"
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "applied": false,
+  "F": 326,
+  "M": 326,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +2 tok)"
+ },
+ {
+  "path": "bench/holdout-tbl/psql-output.txt",
+  "applied": false,
+  "F": 244,
+  "M": 244,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +2 tok)"
+ },
+ {
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "applied": false,
+  "F": 1496,
+  "M": 1496,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +2 tok)"
+ },
+ {
+  "path": "bench/holdout-x41/ps-aux-real.txt",
+  "applied": false,
+  "F": 1051,
+  "M": 1051,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +2 tok)"
+ },
+ {
+  "path": "bench/holdout-x42/df-h.txt",
+  "applied": false,
+  "F": 108,
+  "M": 108,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +2 tok)"
+ },
+ {
+  "path": "bench/x53/fixtures/df-h.txt",
+  "applied": false,
+  "F": 99,
+  "M": 99,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +2 tok)"
+ },
+ {
+  "path": "bench/z29/ops-real/df-h.txt",
+  "applied": false,
+  "F": 99,
+  "M": 99,
+  "d": 0,
+  "exact": true,
+  "notes": "refused: no candidate improves the count (closest was +2 tok)"
+ }
+]

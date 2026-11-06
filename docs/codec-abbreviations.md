@@ -3471,3 +3471,80 @@ Two structural findings, both measured: the frontier's gain is monotone in **wit
 | **Why it is a negative** | **The frontier already compresses padding.** Removing 469 raw tokens from ps-aux shrinks the frontier's message by only 57 (an 8.2× marginal rate against its 2.9× average), and the width declaration costs 27–42 tokens. Measured end to end on `findmnt.txt`: **461 vs 444 — loses** (`bench/x76/t9b.log`). This is the same conclusion STOICHEION reached in X74 from the other direction: at ×1.3–1.5 of an unreadable floor, a codec that must ship a key has little left to buy. |
 | **Why it is kept** | It is the direct answer to the standing question "improve the representation the parent frontier sees", and the negative is informative: the frontier's marginal compression rate (8.2× on padding vs 2.9× average) is a *measurement* of where its headroom is not. The module is retained unregistered so the experiment is reproducible. |
 | **Record** | [`bench/x76/REPORT.md`](../bench/x76/REPORT.md) §3–§5 |
+
+---
+
+## X77 — MERISMOS (⧉)
+
+**Name.** Μερισμός — "division into parts", the rhetorical figure that divides a whole
+into its parts. Registered key `merismos`. Source: `src/lib/omega/merismos.ts`.
+
+**The mechanic, in one sentence.** Intern an arbitrary repeated **substring** that the
+frontier left literal on its own wire, replacing every occurrence with a **single
+character that does not occur on that wire** (so no marker is needed), with the table
+shipped as one contract line.
+
+**What it is aimed at.** X77 measured, per input class, the **marginal rate**
+
+    rate = (tokens the frontier saves) / (tokens an ablation saves on the raw text)
+
+`rate ≈ 0.1` means the frontier already owns that redundancy; `rate ≈ 1.0` means it is
+blind to it and pays nearly full price. Measured (`bench/x77/t1.ts`):
+
+| class | rate | reading |
+|---|---|---|
+| inter-column padding | 0.11 – 0.49 | the frontier **owns** this; X76 was right not to build here |
+| punctuation | 0.14 – 1.00 | mixed |
+| **long identifiers** | **0.84** | the frontier is **blind** here |
+
+So the unharvested redundancy of this stack is no longer whitespace — it is the
+*content* of long composite identifiers: paths, package names, module names.
+
+**Greedy? Partially, and only in the selection.**
+Candidate generation is *not* a search: a fixed rule (every wire substring of length
+4–24 occurring ≥ 3 times). Selection **is** a bounded greedy hill-climb: at most 10
+rounds, each adding the single candidate that most reduces the *measured* token count
+of the message, stopping when none helps. Every candidate is priced with the real
+tokenizer, never a proxy. Because a round is kept only on a strict improvement, the
+greedy step cannot do worse than the empty table.
+
+**Time-bound or CPU-bound? CPU-bound, and deliberately capped.**
+Cost is dominated by `ngrams()` — O(n·L) substring counting over the wire — plus
+`GREEDY_ROUNDS × POOL_TOP` full token counts. There is no clock in the decision: the
+codec either finishes its bounded search or it does not fire.
+
+**Honest citation.** The closest external work is *CompactPrompt* (arXiv 2510.18043,
+ICAIF '25), reversible n-gram abbreviation with up to 60 % savings — but its metadata
+table is exactly the overhead this whole line of codecs attacks, and it is not
+byte-exact. arXiv 2604.13066 (a dictionary learned in context) is the only other work
+found that counts its dictionary against the token budget, as this project does.
+
+### The result is negative, and it is a real result
+
+MERISMOS fires on **0 of 9** measured lanes. It is not disabled — it is *gated*, and
+the gates refuse. Three distinct mechanics were tried and each was priced honestly:
+
+1. **Segment interning on the raw text.** Splitting long runs on `[._/:+-]` looked like
+   **+2 807 raw tokens** across 24 lanes (`bench/x77/t2.ts`) — but that measurement
+   omitted the marker that makes decoding unambiguous. Priced *with* the marker it is
+   **−3 281** (`bench/x77/t2b.ts`). The apparent gain was an artefact: bare
+   alphanumeric ids merge into single tokens, which is not a legal encoding.
+2. **Segment interning on the frontier wire.** Rewriting the source instead of the wire
+   compares our output against an already-compressed baseline and loses by
+   construction (best variant 1 019 tok against a 367-token frontier). Fixed, it still
+   refused on 8/8 lanes: coverage 0.04 – 0.10, and the one lane that cleared coverage
+   **lost** (324 vs 300).
+3. **Arbitrary substring interning on the wire** (the shipped shape). Refused on
+   10/10 lanes. The best candidate came within **+2 to +4 tokens** every time — the id
+   characters and the table entry cost more than the substring saves.
+
+Even a synthetic log file built to have heavy literal repetition was refused: the
+frontier interns all of it itself.
+
+**What this establishes.** The frontier wire has no substring redundancy left that a
+one-character id can profitably address. This is now the third consecutive measured
+negative on "improve the representation the parent frontier sees" (X76: padding 8.2×
+marginal rate; PLATOS: findmnt 461 vs 444). The frontier is close to a local optimum
+against this family of attacks. MERISMOS is registered rather than discarded because
+its gates are sound and it is safe: it can only ever fire on a strict measured win,
+and it is byte-exact on every lane it refuses.
