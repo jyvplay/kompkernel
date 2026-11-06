@@ -217,6 +217,7 @@ import { epistemeEncode } from './episteme';
 import { metatronEncode } from './metatron';
 import { synizesisEncode } from './synizesis';
 import { syntomiaEncode } from './syntomia';
+import { brachylogiaEncode } from './brachylogia';
 import { eustochiaEncode } from './eustochia';
 import { akribeiaEncode } from './akribeia';
 import { logistikeEncode } from './logistike';
@@ -1618,6 +1619,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'syntomia', label: '⌁ SYNTOMIA (Minimal-Sufficient Decode Contract + Gate Re-Run)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = syntomiaEncode(t, enc, { budgetMs: 1500 }); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs identity ${r.inTokens}` }; },
+    },
+    {
+      key: 'brachylogia', label: '↯ BRACHYLOGIA (X75: the decoder INSTRUCTION is a named part of the message, contracted by a fixed substitution table and re-verified by invertibility + element coverage + strict win)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = brachylogiaEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
     },
     {
       key: 'synizesis', label: '⇒ SYNIZESIS (Pre-Tokenizer Boundary Collapse by Shape-Template Factoring)', family: 'exact', fidelity: 'exact',

@@ -1,0 +1,31 @@
+{
+ "arm": "memo(65536)",
+ "tokens": 4049,
+ "ms": 468645,
+ "rows": [
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "tokens": 1042,
+   "ms": 72271,
+   "chars": 6590
+  },
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "tokens": 1476,
+   "ms": 228829,
+   "chars": 10692
+  },
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "tokens": 850,
+   "ms": 146388,
+   "chars": 6195
+  },
+  {
+   "path": "bench/holdout/json-pkg.txt",
+   "tokens": 681,
+   "ms": 21157,
+   "chars": 3620
+  }
+ ]
+}

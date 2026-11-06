@@ -1,0 +1,428 @@
+{
+ "rows": [
+  {
+   "name": "lsblk.txt",
+   "cat": "ops: block/tree",
+   "raw": 60,
+   "x75": 60,
+   "delta": 0,
+   "floor": 61,
+   "ratio": 0.98,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "kb-article.txt",
+   "cat": "prose: article",
+   "raw": 656,
+   "x75": 622,
+   "delta": 0,
+   "floor": 608,
+   "ratio": 1.02,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "uptime-w.txt",
+   "cat": "ops: single record",
+   "raw": 80,
+   "x75": 80,
+   "delta": 0,
+   "floor": 70,
+   "ratio": 1.14,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "free-m.txt",
+   "cat": "ops: key-value table",
+   "raw": 76,
+   "x75": 76,
+   "delta": 0,
+   "floor": 76,
+   "ratio": 1,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "vmstat.txt",
+   "cat": "ops: aligned table",
+   "raw": 229,
+   "x75": 149,
+   "delta": 0,
+   "floor": 113,
+   "ratio": 1.32,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "unified-diff.patch",
+   "cat": "source: diff",
+   "raw": 578,
+   "x75": 419,
+   "delta": 0,
+   "floor": 324,
+   "ratio": 1.29,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "df-h.txt",
+   "cat": "ops: aligned table",
+   "raw": 570,
+   "x75": 153,
+   "delta": -18,
+   "floor": 129,
+   "ratio": 1.19,
+   "arm": "current-frontier-parent"
+  },
+  {
+   "name": "df-real.txt",
+   "cat": "ops: aligned table",
+   "raw": 158,
+   "x75": 126,
+   "delta": 0,
+   "floor": 96,
+   "ratio": 1.31,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "du-real.txt",
+   "cat": "ops: path list",
+   "raw": 458,
+   "x75": 272,
+   "delta": 0,
+   "floor": 219,
+   "ratio": 1.24,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "node-help.txt",
+   "cat": "docs: usage text",
+   "raw": 1099,
+   "x75": 862,
+   "delta": 0,
+   "floor": 852,
+   "ratio": 1.01,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "findmnt.txt",
+   "cat": "ops: tree table",
+   "raw": 787,
+   "x75": 444,
+   "delta": 0,
+   "floor": 335,
+   "ratio": 1.33,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "df-h.txt",
+   "cat": "ops: aligned table",
+   "raw": 140,
+   "x75": 108,
+   "delta": 0,
+   "floor": 84,
+   "ratio": 1.29,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "email-thread.txt",
+   "cat": "prose: email",
+   "raw": 629,
+   "x75": 488,
+   "delta": 0,
+   "floor": 443,
+   "ratio": 1.1,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "llm-answer.md",
+   "cat": "prose: markdown",
+   "raw": 733,
+   "x75": 674,
+   "delta": 0,
+   "floor": 626,
+   "ratio": 1.08,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "markdown-table.md",
+   "cat": "structured: md table",
+   "raw": 330,
+   "x75": 176,
+   "delta": 0,
+   "floor": 133,
+   "ratio": 1.32,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "psql-output.txt",
+   "cat": "ops: query output",
+   "raw": 675,
+   "x75": 244,
+   "delta": 0,
+   "floor": 166,
+   "ratio": 1.47,
+   "arm": "current-frontier-parent"
+  },
+  {
+   "name": "prices.csv",
+   "cat": "structured: CSV",
+   "raw": 582,
+   "x75": 133,
+   "delta": 0,
+   "floor": 110,
+   "ratio": 1.21,
+   "arm": "current-frontier-parent"
+  },
+  {
+   "name": "cue-sheet.md",
+   "cat": "ops: cue list",
+   "raw": 513,
+   "x75": 101,
+   "delta": 0,
+   "floor": 99,
+   "ratio": 1.02,
+   "arm": "stichomythia"
+  },
+  {
+   "name": "ps-ef.txt",
+   "cat": "ops: process table",
+   "raw": 1144,
+   "x75": 315,
+   "delta": 0,
+   "floor": 250,
+   "ratio": 1.26,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "ls-real.txt",
+   "cat": "ops: listing",
+   "raw": 1034,
+   "x75": 433,
+   "delta": 0,
+   "floor": 328,
+   "ratio": 1.32,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "json-pkg.txt",
+   "cat": "structured: JSON",
+   "raw": 1152,
+   "x75": 681,
+   "delta": 0,
+   "floor": 592,
+   "ratio": 1.15,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "code-ts.txt",
+   "cat": "source: TypeScript",
+   "raw": 1422,
+   "x75": 969,
+   "delta": 0,
+   "floor": 812,
+   "ratio": 1.19,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "dpkg-l.txt",
+   "cat": "ops: package table",
+   "raw": 1000,
+   "x75": 673,
+   "delta": 0,
+   "floor": 592,
+   "ratio": 1.14,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "ps-real.txt",
+   "cat": "ops: process table",
+   "raw": 1106,
+   "x75": 397,
+   "delta": 0,
+   "floor": 320,
+   "ratio": 1.24,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "kubectl-get-pods.txt",
+   "cat": "ops: aligned table",
+   "raw": 1006,
+   "x75": 308,
+   "delta": -18,
+   "floor": 214,
+   "ratio": 1.44,
+   "arm": "current-frontier-parent"
+  },
+  {
+   "name": "metrics.tsv",
+   "cat": "ops: delimited metrics",
+   "raw": 811,
+   "x75": 192,
+   "delta": -18,
+   "floor": 130,
+   "ratio": 1.48,
+   "arm": "current-frontier-parent"
+  },
+  {
+   "name": "ps-aux-real.txt",
+   "cat": "ops: process table",
+   "raw": 3054,
+   "x75": 1042,
+   "delta": 0,
+   "floor": 743,
+   "ratio": 1.4,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "apt-real.txt",
+   "cat": "ops: log/transcript",
+   "raw": 2739,
+   "x75": 850,
+   "delta": 0,
+   "floor": 690,
+   "ratio": 1.23,
+   "arm": "synkrisis-parent"
+  },
+  {
+   "name": "ls-l-real.txt",
+   "cat": "ops: listing",
+   "raw": 5194,
+   "x75": 1394,
+   "delta": 0,
+   "floor": 943,
+   "ratio": 1.48,
+   "arm": "tagstack"
+  }
+ ],
+ "categories": [
+  {
+   "cat": "ops: delimited metrics",
+   "lanes": 1,
+   "tokens": 192,
+   "floor": 130
+  },
+  {
+   "cat": "ops: query output",
+   "lanes": 1,
+   "tokens": 244,
+   "floor": 166
+  },
+  {
+   "cat": "ops: listing",
+   "lanes": 2,
+   "tokens": 1827,
+   "floor": 1271
+  },
+  {
+   "cat": "ops: process table",
+   "lanes": 3,
+   "tokens": 1754,
+   "floor": 1313
+  },
+  {
+   "cat": "ops: aligned table",
+   "lanes": 5,
+   "tokens": 844,
+   "floor": 636
+  },
+  {
+   "cat": "ops: tree table",
+   "lanes": 1,
+   "tokens": 444,
+   "floor": 335
+  },
+  {
+   "cat": "structured: md table",
+   "lanes": 1,
+   "tokens": 176,
+   "floor": 133
+  },
+  {
+   "cat": "source: diff",
+   "lanes": 1,
+   "tokens": 419,
+   "floor": 324
+  },
+  {
+   "cat": "ops: path list",
+   "lanes": 1,
+   "tokens": 272,
+   "floor": 219
+  },
+  {
+   "cat": "ops: log/transcript",
+   "lanes": 1,
+   "tokens": 850,
+   "floor": 690
+  },
+  {
+   "cat": "structured: CSV",
+   "lanes": 1,
+   "tokens": 133,
+   "floor": 110
+  },
+  {
+   "cat": "source: TypeScript",
+   "lanes": 1,
+   "tokens": 969,
+   "floor": 812
+  },
+  {
+   "cat": "structured: JSON",
+   "lanes": 1,
+   "tokens": 681,
+   "floor": 592
+  },
+  {
+   "cat": "ops: single record",
+   "lanes": 1,
+   "tokens": 80,
+   "floor": 70
+  },
+  {
+   "cat": "ops: package table",
+   "lanes": 1,
+   "tokens": 673,
+   "floor": 592
+  },
+  {
+   "cat": "prose: email",
+   "lanes": 1,
+   "tokens": 488,
+   "floor": 443
+  },
+  {
+   "cat": "prose: markdown",
+   "lanes": 1,
+   "tokens": 674,
+   "floor": 626
+  },
+  {
+   "cat": "prose: article",
+   "lanes": 1,
+   "tokens": 622,
+   "floor": 608
+  },
+  {
+   "cat": "ops: cue list",
+   "lanes": 1,
+   "tokens": 101,
+   "floor": 99
+  },
+  {
+   "cat": "docs: usage text",
+   "lanes": 1,
+   "tokens": 862,
+   "floor": 852
+  },
+  {
+   "cat": "ops: key-value table",
+   "lanes": 1,
+   "tokens": 76,
+   "floor": 76
+  },
+  {
+   "cat": "ops: block/tree",
+   "lanes": 1,
+   "tokens": 60,
+   "floor": 61
+  }
+ ]
+}
