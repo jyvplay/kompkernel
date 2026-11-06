@@ -3686,7 +3686,21 @@ already-compressed baseline loses by construction.
 
 Ratio = brotli -q11 floor tokens / stack tokens (@ 14.8 bits/tok). Above 1.0 the stack beats a
 strong general-purpose compressor on that structure. Carried forward from `bench/x75/receipts/leaders.json`,
-regrouped by structure family, with X78's KERMA result on `psql-output.txt` folded in.
+regrouped by structure family, with X79's SPHRAGIS result on `psql-output.txt` folded in.
+
+**Data correction (X79).** The X78 row for `psql-output.txt` was wrong: its "brotli floor"
+column was filled with KERMA's *stack* value (172) instead of the measured floor. The
+floor is **165** tokens (brotli -q11, 1578 bytes, @ 14.8 bits/tok — recomputed directly
+this turn, and the other rows reproduce exactly: metrics 130, ls-l-real 943, ps-aux 743,
+ls-real 328, dpkg-l 591, free-m 75, lsblk 61, kb-article 608, uptime-w 70). Corrected,
+psql-output's ratio is **not** 1.47 but **1.02**.
+
+**Consequence.** `psql-output.txt` is no longer the headroom leader — it is the lane where
+the stack has *caught up with entropy*. Raw 675 → **169** tokens is a **−75.0 %**
+reduction, sitting within 4 tokens (2.4 %) of a general-purpose compressor's floor while
+remaining directly LLM-readable and byte-exact. The realistic remaining headroom on this
+lane is now under 3 %, so the ops category's live target is `metrics.tsv` (1.48) and
+`ls-l-real.txt` (1.48), not psql-output.
 
 
 ### ops  (20 lanes)
@@ -3695,7 +3709,7 @@ regrouped by structure family, with X78's KERMA result on `psql-output.txt` fold
 |---|---|---:|---:|---:|---:|
 | metrics.tsv | delimited metrics | 811 | 192 | 130 | 1.48 |
 | ls-l-real.txt | listing | 5194 | 1394 | 943 | 1.48 |
-| psql-output.txt **X78 KERMA 244->172** | aligned table | 675 | 244 | 172 | 1.47 |
+| psql-output.txt **X79 SPHRAGIS 244->169** | aligned table | 675 | 169 | 165 | **1.02** |
 | kubectl-get-pods.txt | aligned table | 1006 | 308 | 214 | 1.44 |
 | ps-aux-real.txt | process table | 3054 | 1042 | 743 | 1.4 |
 | findmnt.txt | tree table | 787 | 444 | 335 | 1.33 |
@@ -3757,3 +3771,176 @@ mean ratio **1.01**
 
 mean ratio **1.23**
 
+
+---
+
+## X79 — SPHRAGIS (⚃)
+
+**Name.** Σφραγίς — "a seal, a signet; the stamp that authenticates a document."
+Here, the stamp that fixes where a separator sits. Registered key `sphragis`.
+Source: `src/lib/omega/sphragis.ts`.
+
+**The mechanic, in one sentence.** Delete the separator characters *inside* a run of
+hex-or-decimal groups (`2026-01-02` → `20260102`, `100.00` → `10000`,
+`00:1A:2B` → `001A2B`) and declare the width pattern once; the reader re-inserts the
+separators from the run's length and the declared pattern.
+
+**Disclosed inheritance — this is a generalisation of KERMA, not an unrelated
+mechanism.** That is stated first because it is the honest description. Across X76–X79
+ten distinct mechanics were priced against this frontier and **one** survived
+(shape elision; see the negative table below). SPHRAGIS widens KERMA's shape language
+in four ways, each measured:
+
+| | KERMA (X78) | SPHRAGIS (X79) |
+|---|---|---|
+| group alphabet | digits only | digits **and hex** `[0-9a-fA-F]` |
+| separators | `[-:./]` | `[-:./,]` (comma added) |
+| groups per run | ≤ 4 | ≤ 6 |
+| word-boundary guard | none | run may not abut a hex character |
+| contract | `§KERMA #:char, fill: …` | `§SPHRAGIS …` (shortened, −3 tok) |
+
+**Why it survives where ten other mechanics did not.** Shape elision changes
+**tokenisation**, not redundancy. It pays no pointer, marker or id per occurrence —
+only one clause per *shape* — and the frontier, which is very good at capturing
+redundancy, cannot undo a tokenisation change it never made. Every dictionary-like
+mechanic (MERISMOS, interning, normalisation, remapping) fights the frontier for the
+same redundancy and loses; shape elision does not compete with it.
+
+**The shape grammar.** A run is `[0-9a-fA-F]+(SEP[0-9a-fA-F]+){1,5}` with
+`SEP ∈ [-:./,]`. A shape is rendered as one `#` per run character, every other
+character literal: `####-##-##`, `###.##`, `##:##:##.######`, `###,####-##`. Decoding
+is purely positional — given the packed run and the pattern, walk the pattern emitting
+the next packed character at each `#` and the literal otherwise. The `#` glyphs are
+therefore not a codebook; they are a length.
+
+**Negative space — ten mechanics priced, one kept** (all measured, see
+`bench/x79/receipts/`):
+
+| mechanic | result | why |
+|---|---|---|
+| inter-column padding removal | frontier owns it | marginal rate 0.11 |
+| segment interning, raw text | −3 281, not honest | markers cost more than they save |
+| segment interning, wire | **0/8** | coverage 0.04–0.10 of the wire |
+| arbitrary substring interning | **10/10 refused** | closest +2..+4 tok |
+| structural normalisation | +12..+63 | every lane |
+| long-literal interning | +201 / 8 lanes | id cost exceeds payload |
+| **alphabet remap of wire glyphs** | **+9..+22** | see below |
+| bullet / list-marker elision | 0 through frontier | ANAPHORA already does it |
+| **whitespace elision round separators** | only comma fires, **+3..+32** | see below |
+| tab indentation (units 2, 4) | −17 code-ts, **+137 json-pkg** | per-lane at best |
+
+**Two negatives worth their own explanation.**
+
+1. *Alphabet remap.* `bench/x79/alpha.ts` made this look like a large win: 32 ids
+   embedded in ASCII text cost **69** tokens written with ASCII glyphs and **96**
+   written with Cyrillic. It is an artefact. `remap2.ts` measured the same
+   substitution on real frontier wires and it is **harmful even with no contract at
+   all**: +20 (psql-output), +22 (kb-article), +9 (findmnt). The reason is structural —
+   only 36 of 126 non-ASCII characters on psql-output's wire have ASCII on both sides.
+   The rest sit inside Cyrillic **runs**, which pack at 0.56 tok/char; injecting an
+   ASCII glyph into such a run splits it and costs two boundaries. **The wire's
+   alphabet is already well chosen.**
+2. *Whitespace elision.* `key: value` costs 3 tokens and `key:value` costs 2, which
+   suggests −1 per occurrence. `bench/x79/sep.ts` measured it: of five separator
+   forms, only `comma-space` ever passes its invertibility guard, and it is
+   **positive on every lane** (+3 on `license.txt` to +32 on `ru-kb.txt`), because
+   `,word` tokenises worse than `, word`.
+
+**Where the generalisation does NOT pay — reported because it is the interesting
+result.** The hex and comma extensions were the reason for building SPHRAGIS, and on
+this corpus **they never fire**:
+
+- `aapl-2014.csv` — comma shapes found, but `####-##-##,##.########` and
+  `####-##-##,###.#######` are **both width 18**, so gate G1 (width uniqueness)
+  refuses the lane outright.
+- `vix-daily-1990.csv` — the comma shape passes the guards and still loses badly:
+  **822 vs 461**. Packing a CSV's field separators destroys its column alignment.
+- `git-log-fuller.txt`, `metrics.tsv` — the candidate shapes collide with bare
+  hex runs (commit hashes, small integers), so G2 refuses them.
+- `df-h.txt` — no runs at all after the boundary guard.
+
+So SPHRAGIS's measured advantage over KERMA comes from **one** thing: a shorter
+contract. On the only lane either fires, `psql-output.txt`:
+
+| codec | one-chat tokens | Δ vs frontier |
+|---|---:|---:|
+| frontier (243 codecs, X78) | 244 | — |
+| KERMA (X78) | 172 | −72 |
+| **SPHRAGIS (X79)** | **169** | **−75** |
+
+**Gates — exact by verification, not by argument.**
+
+- **G1 width uniqueness** — at most one kept shape per total run length.
+- **G2 no bare collision** — no separator-free run of that length exists anywhere.
+- **G3 no merge** — a packed run may not sit beside another run character.
+- **G4 word boundary** — a run may not abut `[0-9a-fA-F]` on either side (new; KERMA
+  lacks this, and without it a run can be found inside a longer token).
+- **G5 round trip** — `sphragisDecode(message) === source`, byte for byte, evaluated
+  through **both** layers (frontier decode, then SPHRAGIS decode) as KERMA's fix in
+  X78 established.
+- **G6 comma safety** — a comma may only be elided inside a run; a run may never span
+  a newline.
+- **G7 strict win** — `countTokens(message) < frontier.messageTokens`.
+
+**Greedy?** Yes, and **only in the prune**. Shape discovery is a fixed rule (every run
+over the separator set, grouped by exact shape, occurring ≥ 2 times). Selection is a
+bounded greedy prune: while it helps, drop the least valuable surviving shape and
+re-measure with the real tokenizer (≤ 24 evaluations). A round is kept only on strict
+improvement, so the prune cannot end worse than the unpruned table.
+
+**Time- or CPU-bound?** **CPU-bound and bounded**: discovery is O(n · L_max); the prune
+is at most 24 full token counts. No clock enters any decision.
+
+**Directly model-readable?** Yes. The contract is a single line
+(`§SPHRAGIS ####-##-## ###.##`) followed by the packed wire; every transform is a
+declared rule about digit counts, and the packed form is ordinary text. No external
+table, no tool call.
+
+**Source citation (honest).** Three previously-unreferenced sources bear directly on
+this mechanism, found this turn:
+**"Getting the most out of your tokenizer for pre-training and domain adaptation",
+arXiv:2402.01035** — establishes that the *pre-tokenization regular expression*, not
+the vocabulary size, is the dominant lever on compression, and that a "Punct" variant
+which prevents tokens starting with `.` trades compression for composition. That is the
+same lever SPHRAGIS pulls from the outside, by editing the text rather than the
+tokenizer.
+**"Tokenization counts: the impact of tokenization on arithmetic in frontier LLMs",
+Singh & Strouse, arXiv:2402.14903** — GPT tokenizers chunk long numbers into groups of
+up to three digits **left-to-right**, and commas force 3-digit chunks from the right.
+This is the direct explanation of why eliding a separator is worth tokens: it releases
+a hard L2R 3-digit chunking and lets BPE re-chunk the run freely.
+**MedTPE, arXiv:2505.09388** — merges frequently co-occurring token pairs into
+composite tokens for lossless compression. Related in aim (lossless, token-count
+driven) but it *changes the tokenizer*, which this stack cannot do; SPHRAGIS must
+reach the same effect by editing the text.
+None of these is prior art for the codec: all three assume control of, or a change to,
+the tokenizer. In-repo ancestors: **STIGME (X19)** (separator deletion inside a token),
+**MORPHE (X20)** (fits a rule library instead of hard-coding), **APOGRAPHE (X39)** (the
+cardinal principle: elide what the *width* determines), **KERMA (X78)** (the direct
+parent).
+
+**Fires on** 1 of 8 lanes screened this turn; registered **before KERMA** so the
+frontier tournament takes it where it wins and falls back to KERMA otherwise.
+
+**Correction — the number previously reported as "the frontier" is a control.** The
+29-lane figure carried forward through X76–X78 (`LANES73 29 TOTAL 12639 exact 29/29`) is
+produced by `bench/x74/gate73.ts`, which by its own header runs **"the X73 IDENTITY ONLY
+(`tagstackEncodeUncached`, no X74 candidates)"** — it is the *control arm* of the X74
+experiment, deliberately excluding every candidate codec. It therefore cannot move when a
+codec is added, and confirming it does **not** confirm the frontier. Re-run this turn it
+again returns `LANES73 29 TOTAL 12639 exact 29/29` with SPHRAGIS registered, which is the
+expected result for a control and is now labelled as one. The frontier cost used
+throughout this section (`psql-output.txt` = 244) is measured with `tagstackFrontier`,
+which is the full stack.
+
+**Verification.** Two-layer smoke through the registry, `bench/x79/smoke.mjs`:
+**PASS — 5 of 5 byte-exact** (`psql-output` 169, `df-h` 171, `metrics.tsv` 210,
+`vix-daily-1990.csv` 461, `kb-article` 622). 244 codecs registered.
+Receipts: `bench/x79/receipts/sphragis.json`, `bench/x79/receipts/sep.json`.
+
+**Known limit.** It is a two-token improvement over its own parent, and the four
+generalisation axes that motivated it are all measured negative on this corpus. The
+honest reading is that the shape-elision family is now close to exhausted, and the
+next win must come from a different mechanism rather than a wider shape grammar.
+
+**Record.** [`docs/codecs.md`](codecs.md) §X79, `bench/x79/`

@@ -1,0 +1,58 @@
+[
+ {
+  "path": "bench/holdout-tbl/psql-output.txt",
+  "F": 244,
+  "M": 271,
+  "d": 27,
+  "mapped": 1,
+  "occ": 26
+ },
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "F": 171,
+  "M": 180,
+  "d": 9,
+  "mapped": 1,
+  "occ": 8
+ },
+ {
+  "path": "bench/holdout-x42/findmnt.txt",
+  "F": 444,
+  "M": 460,
+  "d": 16,
+  "mapped": 1,
+  "occ": 17
+ },
+ {
+  "path": "bench/holdout-work/kb-article.txt",
+  "F": 622,
+  "M": 651,
+  "d": 29,
+  "mapped": 1,
+  "occ": 30
+ },
+ {
+  "path": "bench/holdout-x41/ps-real.txt",
+  "F": 397,
+  "M": 414,
+  "d": 17,
+  "mapped": 1,
+  "occ": 21
+ },
+ {
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "F": 1496,
+  "M": 1518,
+  "d": 22,
+  "mapped": 1,
+  "occ": 51
+ },
+ {
+  "path": "bench/holdout-x40/metrics.tsv",
+  "F": 210,
+  "M": 238,
+  "d": 28,
+  "mapped": 1,
+  "occ": 16
+ }
+]

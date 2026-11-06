@@ -5304,3 +5304,63 @@ HORA/HEMERA/STATHMOS/STIGME already own.
 **Inheritance:** the mechanism family is STIGME (X19) / MORPHE (X20). The new part is
 unconstrained shape fitting with per-shape collision guards. Stated in full in
 `docs/codec-abbreviations.md` §X78.
+
+---
+
+## X79 — SPHRAGIS
+
+`key: 'sphragis'` · family `exact` · fidelity `exact` · `src/lib/omega/sphragis.ts`
+
+Generalised separator-shape elision. Fits any run of **hex-or-decimal** groups over
+`[-:./,]` (up to six groups) to the payload, deletes the separators, and declares the
+width pattern once, e.g. `§SPHRAGIS ####-##-## ###.##`. Pays no marker per occurrence —
+only one clause per shape. Registered **before** KERMA, so the frontier tournament takes
+whichever wins.
+
+**Gates:** width uniqueness · no bare-run collision · no merge · **word boundary** (a run
+may not abut a hex character — new here) · byte-exact round trip through **both** layers ·
+comma safety (a run may never span a newline) · strict win.
+
+**Measured:** on the only lane either shape-elider fires, `psql-output.txt`:
+
+| | tokens | Δ |
+|---|---:|---:|
+| frontier (243 codecs, X78) | 244 | — |
+| KERMA (X78) | 172 | −72 |
+| **SPHRAGIS (X79)** | **169** | **−75** |
+
+Two-layer smoke through the registry: **PASS, 5 of 5 byte-exact** (`psql-output` 169,
+`df-h` 171, `metrics.tsv` 210, `vix-daily-1990.csv` 461, `kb-article` 622). 244 codecs.
+
+**The generalisations are measured negative, and that is reported as the main result.**
+The hex and comma axes were the reason for building this, and on this corpus none fires:
+`aapl-2014.csv` is refused because `####-##-##,##.########` and `####-##-##,###.#######`
+are both width 18 (width-uniqueness gate); `vix-daily-1990.csv` passes the guards and
+still loses at **822 vs 461**, because packing a CSV's field separators destroys its
+column alignment; `git-log-fuller.txt` and `metrics.tsv` are refused because the
+candidate shapes collide with bare hex runs. SPHRAGIS's entire advantage over its parent
+therefore comes from a **shorter contract** (−3 tokens), not from a wider grammar.
+
+**Inheritance — disclosed.** This is a generalisation of KERMA (X78), not an unrelated
+mechanism. Descendant of STIGME (X19) / MORPHE (X20), and an application of APOGRAPHE's
+(X39) cardinal principle: elide what the *width* determines. Across X76–X79 **ten**
+mechanics were priced against this frontier (padding, two forms of interning,
+normalisation, long literals, alphabet remap, bullet elision, whitespace elision, tab
+indentation) and **only shape elision survived** — because it changes *tokenisation*
+rather than redundancy, and the frontier eats redundancy but cannot undo tokenisation.
+
+**Source citation.** Three previously-unreferenced sources bear on the mechanism:
+**arXiv:2402.01035** (the pre-tokenization regex, not vocabulary size, dominates
+compression — the lever this codec pulls by editing text instead of the tokenizer);
+**Singh & Strouse, arXiv:2402.14903** (GPT tokenizers chunk numbers into ≤3 digits
+left-to-right, and commas force right-to-left 3-digit chunks — the direct reason eliding
+a separator is worth tokens); **MedTPE, arXiv:2505.09388** (lossless token-pair merging,
+related in aim but changes the tokenizer). None is prior art: all assume control of the
+tokenizer.
+
+**Greedy:** yes, only in the prune (bounded, ≤ 24 full token counts, kept only on strict
+improvement). **CPU-bound**, deterministic, no clock in any decision.
+**Directly model-readable:** yes — one contract line plus the packed wire; every transform
+is a declared rule about digit counts.
+
+Stated in full in `docs/codec-abbreviations.md` §X79. Receipts: `bench/x79/receipts/`.
