@@ -1,0 +1,162 @@
+[
+ {
+  "path": "bench/holdout-x41/ps-aux-real.txt",
+  "base": 3054,
+  "squeezed": 2585,
+  "save": 469,
+  "padChars": 1670,
+  "pct": 15.4
+ },
+ {
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "base": 5194,
+  "squeezed": 4752,
+  "save": 442,
+  "padChars": 905,
+  "pct": 8.5
+ },
+ {
+  "path": "bench/holdout-x42/ps-ef.txt",
+  "base": 1144,
+  "squeezed": 984,
+  "save": 160,
+  "padChars": 926,
+  "pct": 14
+ },
+ {
+  "path": "bench/holdout-x41/ps-real.txt",
+  "base": 1106,
+  "squeezed": 948,
+  "save": 158,
+  "padChars": 626,
+  "pct": 14.3
+ },
+ {
+  "path": "bench/holdout-x41/node-help.txt",
+  "base": 1099,
+  "squeezed": 953,
+  "save": 146,
+  "padChars": 2325,
+  "pct": 13.3
+ },
+ {
+  "path": "bench/holdout-x42/dpkg-l.txt",
+  "base": 1000,
+  "squeezed": 858,
+  "save": 142,
+  "padChars": 1725,
+  "pct": 14.2
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "base": 1006,
+  "squeezed": 868,
+  "save": 138,
+  "padChars": 791,
+  "pct": 13.7
+ },
+ {
+  "path": "bench/holdout-x42/findmnt.txt",
+  "base": 787,
+  "squeezed": 711,
+  "save": 76,
+  "padChars": 1285,
+  "pct": 9.7
+ },
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "base": 570,
+  "squeezed": 496,
+  "save": 74,
+  "padChars": 100,
+  "pct": 13
+ },
+ {
+  "path": "bench/holdout-x41/ls-real.txt",
+  "base": 1034,
+  "squeezed": 972,
+  "save": 62,
+  "padChars": 238,
+  "pct": 6
+ },
+ {
+  "path": "bench/holdout-tbl/psql-output.txt",
+  "base": 675,
+  "squeezed": 624,
+  "save": 51,
+  "padChars": 150,
+  "pct": 7.6
+ },
+ {
+  "path": "bench/holdout-x42b/vmstat.txt",
+  "base": 229,
+  "squeezed": 182,
+  "save": 47,
+  "padChars": 98,
+  "pct": 20.5
+ },
+ {
+  "path": "bench/holdout-work/unified-diff.patch",
+  "base": 578,
+  "squeezed": 553,
+  "save": 25,
+  "padChars": 54,
+  "pct": 4.3
+ },
+ {
+  "path": "bench/holdout-x41/df-real.txt",
+  "base": 158,
+  "squeezed": 136,
+  "save": 22,
+  "padChars": 80,
+  "pct": 13.9
+ },
+ {
+  "path": "bench/holdout-x42/df-h.txt",
+  "base": 140,
+  "squeezed": 118,
+  "save": 22,
+  "padChars": 80,
+  "pct": 15.7
+ },
+ {
+  "path": "bench/holdout-x40/metrics.tsv",
+  "base": 811,
+  "squeezed": 811,
+  "save": 0,
+  "padChars": 0,
+  "pct": 0
+ },
+ {
+  "path": "bench/holdout-x40/prices.csv",
+  "base": 582,
+  "squeezed": 582,
+  "save": 0,
+  "padChars": 0,
+  "pct": 0
+ },
+ {
+  "path": "bench/holdout-x41/du-real.txt",
+  "base": 458,
+  "squeezed": 458,
+  "save": 0,
+  "padChars": 0,
+  "pct": 0
+ },
+ {
+  "path": "bench/holdout-x41/apt-real.txt",
+  "base": 2739,
+  "squeezed": 2739,
+  "save": 0,
+  "padChars": 0,
+  "pct": 0
+ },
+ {
+  "path": "bench/holdout-work/kb-article.txt",
+  "base": 656,
+  "squeezed": 656,
+  "save": 0,
+  "padChars": 0,
+  "pct": 0
+ }
+]

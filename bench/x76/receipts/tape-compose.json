@@ -1,0 +1,82 @@
+[
+ {
+  "path": "bench/holdout-x41/ps-real.txt",
+  "tapeTokens": 93,
+  "rules": 30,
+  "alreadyUsed": 16,
+  "potential": 8,
+  "saveChars": 14
+ },
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "tapeTokens": 49,
+  "rules": 16,
+  "alreadyUsed": 11,
+  "potential": 2,
+  "saveChars": 1
+ },
+ {
+  "path": "bench/holdout-x40/metrics.tsv",
+  "tapeTokens": 61,
+  "rules": 18,
+  "alreadyUsed": 13,
+  "potential": 1,
+  "saveChars": 1
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "tapeTokens": 89,
+  "rules": 24,
+  "alreadyUsed": 18,
+  "potential": 5,
+  "saveChars": 18
+ },
+ {
+  "path": "bench/holdout-x42/ps-ef.txt",
+  "tapeTokens": 84,
+  "rules": 28,
+  "alreadyUsed": 16,
+  "potential": 10,
+  "saveChars": 2
+ },
+ {
+  "path": "bench/holdout-x42/dpkg-l.txt",
+  "tapeTokens": 126,
+  "rules": 48,
+  "alreadyUsed": 24,
+  "potential": 23,
+  "saveChars": 123
+ },
+ {
+  "path": "bench/holdout-x42/findmnt.txt",
+  "tapeTokens": 124,
+  "rules": 34,
+  "alreadyUsed": 19,
+  "potential": 13,
+  "saveChars": 13
+ },
+ {
+  "path": "bench/holdout-x41/ls-real.txt",
+  "tapeTokens": 159,
+  "rules": 48,
+  "alreadyUsed": 26,
+  "potential": 25,
+  "saveChars": 13
+ },
+ {
+  "path": "bench/holdout-x42b/vmstat.txt",
+  "tapeTokens": 39,
+  "rules": 12,
+  "alreadyUsed": 6,
+  "potential": 3,
+  "saveChars": 4
+ },
+ {
+  "path": "bench/holdout-x41/ps-aux-real.txt",
+  "tapeTokens": 347,
+  "rules": 83,
+  "alreadyUsed": 59,
+  "potential": 54,
+  "saveChars": 31
+ }
+]

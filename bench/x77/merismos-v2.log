@@ -1,0 +1,15 @@
+find-listing.txt         ---- F  1142 ->  1142      exact=true | refused: no candidate improves the count (closest was +2 tok)
+git-numstat.txt          ---- F  1983 ->  1983      exact=true | refused: no candidate improves the count (closest was +2 tok)
+ls-full-iso.txt          ---- F   367 ->   367      exact=true | refused: no candidate improves the count (closest was +3 tok)
+node-stacktraces.txt     ---- F   300 ->   300      exact=true | refused: no candidate improves the count (closest was +2 tok)
+npm-ls.txt               ---- F   915 ->   915      exact=true | refused: no candidate improves the count (closest was +4 tok)
+df-h.txt                 ---- F   171 ->   171      exact=true | refused: no candidate improves the count (closest was +2 tok)
+kubectl-get-pods.txt     ---- F   326 ->   326      exact=true | refused: no candidate improves the count (closest was +2 tok)
+psql-output.txt          ---- F   244 ->   244      exact=true | refused: no candidate improves the count (closest was +2 tok)
+ls-l-real.txt            ---- F  1496 ->  1496      exact=true | refused: no candidate improves the count (closest was +2 tok)
+ps-aux-real.txt          ---- F  1051 ->  1051      exact=true | refused: no candidate improves the count (closest was +2 tok)
+df-h.txt                 ---- F   108 ->   108      exact=true | refused: no candidate improves the count (closest was +2 tok)
+df-h.txt                 ---- F    99 ->    99      exact=true | refused: no candidate improves the count (closest was +2 tok)
+df-h.txt                 ---- F    99 ->    99      exact=true | refused: no candidate improves the count (closest was +2 tok)
+
+HIT 0/13 lanes | saved 0 tok | byte-exact 0/0

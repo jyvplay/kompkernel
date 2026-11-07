@@ -1,0 +1,83 @@
+[
+ {
+  "path": "bench/holdout-x41/ps-real.txt",
+  "total": 397,
+  "contract": 11,
+  "tape": 93,
+  "body": 291,
+  "rules": 30,
+  "tapeChars": 213
+ },
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "total": 171,
+  "contract": 23,
+  "tape": 49,
+  "body": 97,
+  "rules": 16,
+  "tapeChars": 89
+ },
+ {
+  "path": "bench/holdout-x40/metrics.tsv",
+  "total": 210,
+  "contract": 23,
+  "tape": 61,
+  "body": 124,
+  "rules": 18,
+  "tapeChars": 98
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "total": 326,
+  "contract": 23,
+  "tape": 89,
+  "body": 212,
+  "rules": 24,
+  "tapeChars": 229
+ },
+ {
+  "path": "bench/holdout-x42/ps-ef.txt",
+  "total": 315,
+  "contract": 11,
+  "tape": 84,
+  "body": 218,
+  "rules": 28,
+  "tapeChars": 204
+ },
+ {
+  "path": "bench/holdout-x42/dpkg-l.txt",
+  "total": 675,
+  "contract": 11,
+  "tape": 127,
+  "body": 535,
+  "rules": 48,
+  "tapeChars": 483
+ },
+ {
+  "path": "bench/holdout-x42/findmnt.txt",
+  "total": 444,
+  "contract": 11,
+  "tape": 124,
+  "body": 307,
+  "rules": 34,
+  "tapeChars": 309
+ },
+ {
+  "path": "bench/holdout-x41/ls-real.txt",
+  "total": 433,
+  "contract": 11,
+  "tape": 159,
+  "body": 261,
+  "rules": 48,
+  "tapeChars": 377
+ },
+ {
+  "path": "bench/holdout-x42b/vmstat.txt",
+  "total": 149,
+  "contract": 11,
+  "tape": 39,
+  "body": 97,
+  "rules": 12,
+  "tapeChars": 80
+ }
+]

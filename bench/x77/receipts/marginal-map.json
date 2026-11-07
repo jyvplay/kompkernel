@@ -1,0 +1,212 @@
+[
+ {
+  "path": "bench/holdout-x41/ps-real.txt",
+  "raw": 1106,
+  "frontier": 397,
+  "rates": {
+   "pad": {
+    "dRaw": 158,
+    "dF": 17,
+    "rate": 0.108
+   },
+   "ws": {
+    "dRaw": 158,
+    "dF": 17,
+    "rate": 0.108
+   },
+   "digits": {
+    "dRaw": 0,
+    "dF": 85,
+    "rate": null
+   },
+   "case": {
+    "dRaw": 2,
+    "dF": 2,
+    "rate": 1
+   },
+   "long": {
+    "dRaw": 99,
+    "dF": 83,
+    "rate": 0.838
+   },
+   "shuffle": {
+    "dRaw": -1,
+    "dF": -15,
+    "rate": 15
+   },
+   "punct": {
+    "dRaw": 289,
+    "dF": 41,
+    "rate": 0.142
+   }
+  }
+ },
+ {
+  "path": "bench/holdout-x42b/vmstat.txt",
+  "raw": 229,
+  "frontier": 149,
+  "rates": {
+   "pad": {
+    "dRaw": 47,
+    "dF": 23,
+    "rate": 0.489
+   },
+   "ws": {
+    "dRaw": 47,
+    "dF": 23,
+    "rate": 0.489
+   },
+   "digits": {
+    "dRaw": 0,
+    "dF": 33,
+    "rate": null
+   },
+   "case": {
+    "dRaw": 0,
+    "dF": 0,
+    "rate": null
+   },
+   "long": {
+    "dRaw": 5,
+    "dF": 5,
+    "rate": 1
+   },
+   "shuffle": {
+    "dRaw": -1,
+    "dF": 2,
+    "rate": -2
+   },
+   "punct": {
+    "dRaw": 20,
+    "dF": 20,
+    "rate": 1
+   }
+  }
+ },
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "raw": 570,
+  "frontier": 171,
+  "rates": {
+   "pad": {
+    "dRaw": 74,
+    "dF": 19,
+    "rate": 0.257
+   },
+   "ws": {
+    "dRaw": 74,
+    "dF": 19,
+    "rate": 0.257
+   },
+   "digits": {
+    "dRaw": 0,
+    "dF": 91,
+    "rate": null
+   },
+   "case": {
+    "dRaw": 1,
+    "dF": 1,
+    "rate": 1
+   },
+   "long": {
+    "dRaw": 123,
+    "dF": 6,
+    "rate": 0.049
+   },
+   "shuffle": {
+    "dRaw": 0,
+    "dF": 5,
+    "rate": null
+   },
+   "punct": {
+    "dRaw": 55,
+    "dF": 12,
+    "rate": 0.218
+   }
+  }
+ },
+ {
+  "path": "bench/holdout-x42/findmnt.txt",
+  "raw": 787,
+  "frontier": 444,
+  "rates": {
+   "pad": {
+    "dRaw": 76,
+    "dF": 75,
+    "rate": 0.987
+   },
+   "ws": {
+    "dRaw": 76,
+    "dF": 75,
+    "rate": 0.987
+   },
+   "digits": {
+    "dRaw": 0,
+    "dF": 21,
+    "rate": null
+   },
+   "case": {
+    "dRaw": 1,
+    "dF": 1,
+    "rate": 1
+   },
+   "long": {
+    "dRaw": 76,
+    "dF": 58,
+    "rate": 0.763
+   },
+   "shuffle": {
+    "dRaw": -1,
+    "dF": 1,
+    "rate": -1
+   },
+   "punct": {
+    "dRaw": 156,
+    "dF": 47,
+    "rate": 0.301
+   }
+  }
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "raw": 1006,
+  "frontier": 326,
+  "rates": {
+   "pad": {
+    "dRaw": 138,
+    "dF": 28,
+    "rate": 0.203
+   },
+   "ws": {
+    "dRaw": 138,
+    "dF": 28,
+    "rate": 0.203
+   },
+   "digits": {
+    "dRaw": 0,
+    "dF": 191,
+    "rate": null
+   },
+   "case": {
+    "dRaw": 1,
+    "dF": 1,
+    "rate": 1
+   },
+   "long": {
+    "dRaw": 352,
+    "dF": 142,
+    "rate": 0.403
+   },
+   "shuffle": {
+    "dRaw": 0,
+    "dF": -18,
+    "rate": null
+   },
+   "punct": {
+    "dRaw": 154,
+    "dF": 5,
+    "rate": 0.032
+   }
+  }
+ }
+]

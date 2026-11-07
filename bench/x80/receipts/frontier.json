@@ -1,0 +1,237 @@
+{
+ "rows": [
+  {
+   "path": "bench/holdout-x42/lsblk.txt",
+   "raw": 60,
+   "tokens": 60,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 2143
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "raw": 656,
+   "tokens": 622,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 2239
+  },
+  {
+   "path": "bench/holdout-x42b/uptime-w.txt",
+   "raw": 80,
+   "tokens": 80,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 2080
+  },
+  {
+   "path": "bench/holdout-x42b/free-m.txt",
+   "raw": 76,
+   "tokens": 76,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 2034
+  },
+  {
+   "path": "bench/holdout-x42b/vmstat.txt",
+   "raw": 229,
+   "tokens": 149,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 2857
+  },
+  {
+   "path": "bench/holdout-work/unified-diff.patch",
+   "raw": 578,
+   "tokens": 419,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 3018
+  },
+  {
+   "path": "bench/holdout-tbl/df-h.txt",
+   "raw": 570,
+   "tokens": 171,
+   "exact": true,
+   "parent": "akolouthia2",
+   "ms": 2106
+  },
+  {
+   "path": "bench/holdout-x41/df-real.txt",
+   "raw": 158,
+   "tokens": 126,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 4006
+  },
+  {
+   "path": "bench/holdout-x41/du-real.txt",
+   "raw": 458,
+   "tokens": 272,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 3496
+  },
+  {
+   "path": "bench/holdout-x41/node-help.txt",
+   "raw": 1099,
+   "tokens": 862,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 5975
+  },
+  {
+   "path": "bench/holdout-x42/findmnt.txt",
+   "raw": 787,
+   "tokens": 444,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 5614
+  },
+  {
+   "path": "bench/holdout-x42/df-h.txt",
+   "raw": 140,
+   "tokens": 108,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 5835
+  },
+  {
+   "path": "bench/holdout-work/email-thread.txt",
+   "raw": 629,
+   "tokens": 488,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 7157
+  },
+  {
+   "path": "bench/holdout-work/llm-answer.md",
+   "raw": 733,
+   "tokens": 674,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 7040
+  },
+  {
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "raw": 330,
+   "tokens": 176,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 6398
+  },
+  {
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "raw": 675,
+   "tokens": 244,
+   "exact": true,
+   "parent": "metron",
+   "ms": 8831
+  },
+  {
+   "path": "bench/holdout-x40/prices.csv",
+   "raw": 582,
+   "tokens": 133,
+   "exact": true,
+   "parent": "diastema",
+   "ms": 12120
+  },
+  {
+   "path": "bench/holdout-x40/cue-sheet.md",
+   "raw": 513,
+   "tokens": 163,
+   "exact": true,
+   "parent": "metron",
+   "ms": 11993
+  },
+  {
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "raw": 1144,
+   "tokens": 315,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 12367
+  },
+  {
+   "path": "bench/holdout-x41/ls-real.txt",
+   "raw": 1034,
+   "tokens": 433,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 17503
+  },
+  {
+   "path": "bench/holdout/json-pkg.txt",
+   "raw": 1152,
+   "tokens": 681,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 20768
+  },
+  {
+   "path": "bench/holdout/code-ts.txt",
+   "raw": 1422,
+   "tokens": 969,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 24733
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "raw": 1000,
+   "tokens": 673,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 26465
+  },
+  {
+   "path": "bench/holdout-x41/ps-real.txt",
+   "raw": 1106,
+   "tokens": 397,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 19372
+  },
+  {
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "raw": 1006,
+   "tokens": 326,
+   "exact": true,
+   "parent": "akolouthia2",
+   "ms": 27452
+  },
+  {
+   "path": "bench/holdout-x40/metrics.tsv",
+   "raw": 811,
+   "tokens": 210,
+   "exact": true,
+   "parent": "akolouthia2",
+   "ms": 31394
+  },
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "raw": 3054,
+   "tokens": 1042,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 64834
+  },
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "raw": 2739,
+   "tokens": 850,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 134740
+  },
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "raw": 5194,
+   "tokens": 1476,
+   "exact": true,
+   "parent": "synkrisis",
+   "ms": 199520
+  }
+ ],
+ "total": 12639
+}

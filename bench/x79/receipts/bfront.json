@@ -1,0 +1,26 @@
+[
+ {
+  "path": "bench/holdout-tbl/markdown-table.md",
+  "F": 176,
+  "d": 0,
+  "name": ""
+ },
+ {
+  "path": "bench/holdout-work/kb-article.txt",
+  "F": 622,
+  "d": 0,
+  "name": ""
+ },
+ {
+  "path": "bench/holdout-work/llm-answer.md",
+  "F": 674,
+  "d": 0,
+  "name": ""
+ },
+ {
+  "path": "bench/holdout-x40/cue-sheet.md",
+  "F": 163,
+  "d": 0,
+  "name": ""
+ }
+]

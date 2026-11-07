@@ -1,0 +1,16 @@
+LUT-ON  ps-real.txt              25750 ms    397 tok  exact=true
+LUT-ON  findmnt.txt               6994 ms    444 tok  exact=true
+LUT-ON  kb-article.txt            2936 ms    622 tok  exact=true
+LUT-ON  df-h.txt                  2676 ms    171 tok  exact=true
+LUT-OFF ps-real.txt              24322 ms    397 tok  exact=true
+LUT-OFF findmnt.txt               6632 ms    444 tok  exact=true
+LUT-OFF kb-article.txt            2871 ms    622 tok  exact=true
+LUT-OFF df-h.txt                  2691 ms    171 tok  exact=true
+LUT-ON  ps-real.txt              24321 ms    397 tok  exact=true
+LUT-ON  findmnt.txt               6653 ms    444 tok  exact=true
+LUT-ON  kb-article.txt            2932 ms    622 tok  exact=true
+LUT-ON  df-h.txt                  2775 ms    171 tok  exact=true
+LUT-OFF ps-real.txt              25871 ms    397 tok  exact=true
+LUT-OFF findmnt.txt               7167 ms    444 tok  exact=true
+LUT-OFF kb-article.txt            2807 ms    622 tok  exact=true
+LUT-OFF df-h.txt                  2735 ms    171 tok  exact=true

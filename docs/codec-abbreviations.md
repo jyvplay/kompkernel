@@ -3438,3 +3438,678 @@ Two structural findings, both measured: the frontier's gain is monotone in **wit
 | **Measured** | **Always loses.** With exactly one occurrence of the sentence, the header repeats the sentence it replaces: **+3 tokens** on `df-h`, `kubectl` and `metrics.tsv` (`bench/x75/t9.ts`, `t10`). The economy requires ≥2 body occurrences of the same instructional line, and the frontier emits one. |
 | **Why it is recorded** | The gate refused it on every lane for the right reason, which is the argument for having the gate. The module was deleted rather than shipped as a codec that never fires. |
 | **Record** | Negative space, [`bench/x75/REPORT.md`](../bench/x75/REPORT.md) |
+
+---
+
+## X76 — PINAX (πίναξ, "tablet, table, index")
+
+| | |
+|---|---|
+| **Abbreviation** | `▤` — a tablet. The legend is a table that has been spelled as prose; PINAX writes it as the table it is. |
+| **Decodes to (design spec)** | The shipped frontier's message, with a **composed legend** — a single line carrying the whole operator table for the wire as English prose with `;` separators — rewritten as one clause per operator. Measured instance: METRON's legend on `psql-output.txt`, **73 → 65 tokens** (`bench/x76/t11.ts`). Every operator is preserved (`¶`, `k=v`, `expand`, `repeatedly`, `n`, `sep`, `col=model`, `drop`, `rebuild`, `literal`, `resets`, `above`, `colM`, `days`, `workdays`, `+b`, `same width`, `print`, `only`). Only the connectives go: "are", "from lines", "and", "of the same line". |
+| **Greedy?** | **Neither greedy nor searched — a total function plus five gates.** Fixed, ordered, idempotent substitution table. No hill-climb over wordings, no portfolio, no clock. The only decision is admit-or-not, made by measurement. |
+| **Time or CPU bound?** | **CPU-bound** for every decision; the wall clock is never consulted. One frontier encode plus O(lines) regex matches. |
+| **Source citation (honest)** | The legend-as-prose problem is not treated in the compression literature I could find; the nearest external work is **CompactPrompt, arXiv:2510.18043** (reversible n-gram dictionary) and **RoundTripCodeEval, arXiv:2601.13398** (Edinburgh, 2026 — LLMs pass forward and backward tasks separately yet fail the combined round trip, even on simple bijections such as RLE), which is the standing argument for making a cold read the admission gate rather than an assumption. In-repo sibling: **BRACHYLOGIA (X75)**. **No model was called to decode PINAX.** |
+| **How it differs from BRACHYLOGIA (X75)** | BRACHYLOGIA shortens a SENTENCE (same sentence, fewer grammatical words). PINAX restructures a TABLE: the legend is *already* a sequence of `name = definition` pairs and is only spelled as prose, so PINAX removes connectives and keeps structure. Different object, different rule table, different coverage gate (operator set vs. sentence elements). |
+| **Measured** | `psql-output.txt` **244 → 236 (−8, −3.3 %)**, byte-exact. 1 of 7 lanes tested fires; the other 6 carry no composed legend. |
+| **Fails closed on** | a parent that is not byte-exact; edits that do not invert to the frontier message; an edit touching a `§` line; a line occurring verbatim in the source (data guard); a replacement missing any operator its rule requires; a message that is not strictly smaller. |
+| **Known limit** | **One lane, and a small margin.** This is the honest size of what is left in the contract layer after X75: the 22-lane synkrisis majority already pays ~11 tokens and the CHIRON clause is contracted by BRACHYLOGIA. |
+| **Verification** | Gates 1–5 executed per encode. `bench/x76/t12.ts` — 7 lanes, applied on 1, byte-exact on all 7. |
+| **Record** | [`docs/codecs.md`](codecs.md) §X76, [`bench/x76/REPORT.md`](../bench/x76/REPORT.md) |
+
+---
+
+## X76 — PLATOS (πλάτος, "width"): measured negative, not registered
+
+| | |
+|---|---|
+| **Abbreviation** | `w 9 4 4 4 2 LRRRLL` — a column-width vector plus an alignment string. |
+| **Decodes to (design spec)** | Remove the inter-column padding from an aligned table, hand the squeezed text to the parent frontier, and ship the width vector so the reader can put the spaces back. This is the X76 investigation of "improve the representation the parent frontier sees". |
+| **Greedy?** | Column detection is greedy and parameter-free (a position is a gap if every line has a space there). No search over segmentations. |
+| **Time or CPU bound?** | CPU-bound; one extra frontier encode plus O(lines × columns). |
+| **Measured** | **Padding is worth 2 034 of 23 020 raw tokens (−8.8 %) across 20 lanes** (`bench/x76/t3.ts`): ps-aux −469, ls-l-real −442, ps-ef −160, ps-real −158, dpkg-l −142, kubectl −138, node-help −146, vmstat −47; and **exactly 0** on metrics.tsv, prices.csv, du-real, apt-real and kb-article, which have no multi-space runs. The transform is **byte-exact** — restore reproduces the source on 11 of 14 lanes (`bench/x76/t10.ts`). |
+| **Why it is a negative** | **The frontier already compresses padding.** Removing 469 raw tokens from ps-aux shrinks the frontier's message by only 57 (an 8.2× marginal rate against its 2.9× average), and the width declaration costs 27–42 tokens. Measured end to end on `findmnt.txt`: **461 vs 444 — loses** (`bench/x76/t9b.log`). This is the same conclusion STOICHEION reached in X74 from the other direction: at ×1.3–1.5 of an unreadable floor, a codec that must ship a key has little left to buy. |
+| **Why it is kept** | It is the direct answer to the standing question "improve the representation the parent frontier sees", and the negative is informative: the frontier's marginal compression rate (8.2× on padding vs 2.9× average) is a *measurement* of where its headroom is not. The module is retained unregistered so the experiment is reproducible. |
+| **Record** | [`bench/x76/REPORT.md`](../bench/x76/REPORT.md) §3–§5 |
+
+---
+
+## X77 — MERISMOS (⧉)
+
+**Name.** Μερισμός — "division into parts", the rhetorical figure that divides a whole
+into its parts. Registered key `merismos`. Source: `src/lib/omega/merismos.ts`.
+
+**The mechanic, in one sentence.** Intern an arbitrary repeated **substring** that the
+frontier left literal on its own wire, replacing every occurrence with a **single
+character that does not occur on that wire** (so no marker is needed), with the table
+shipped as one contract line.
+
+**What it is aimed at.** X77 measured, per input class, the **marginal rate**
+
+    rate = (tokens the frontier saves) / (tokens an ablation saves on the raw text)
+
+`rate ≈ 0.1` means the frontier already owns that redundancy; `rate ≈ 1.0` means it is
+blind to it and pays nearly full price. Measured (`bench/x77/t1.ts`):
+
+| class | rate | reading |
+|---|---|---|
+| inter-column padding | 0.11 – 0.49 | the frontier **owns** this; X76 was right not to build here |
+| punctuation | 0.14 – 1.00 | mixed |
+| **long identifiers** | **0.84** | the frontier is **blind** here |
+
+So the unharvested redundancy of this stack is no longer whitespace — it is the
+*content* of long composite identifiers: paths, package names, module names.
+
+**Greedy? Partially, and only in the selection.**
+Candidate generation is *not* a search: a fixed rule (every wire substring of length
+4–24 occurring ≥ 3 times). Selection **is** a bounded greedy hill-climb: at most 10
+rounds, each adding the single candidate that most reduces the *measured* token count
+of the message, stopping when none helps. Every candidate is priced with the real
+tokenizer, never a proxy. Because a round is kept only on a strict improvement, the
+greedy step cannot do worse than the empty table.
+
+**Time-bound or CPU-bound? CPU-bound, and deliberately capped.**
+Cost is dominated by `ngrams()` — O(n·L) substring counting over the wire — plus
+`GREEDY_ROUNDS × POOL_TOP` full token counts. There is no clock in the decision: the
+codec either finishes its bounded search or it does not fire.
+
+**Honest citation.** The closest external work is *CompactPrompt* (arXiv 2510.18043,
+ICAIF '25), reversible n-gram abbreviation with up to 60 % savings — but its metadata
+table is exactly the overhead this whole line of codecs attacks, and it is not
+byte-exact. arXiv 2604.13066 (a dictionary learned in context) is the only other work
+found that counts its dictionary against the token budget, as this project does.
+
+### The result is negative, and it is a real result
+
+MERISMOS fires on **0 of 9** measured lanes. It is not disabled — it is *gated*, and
+the gates refuse. Three distinct mechanics were tried and each was priced honestly:
+
+1. **Segment interning on the raw text.** Splitting long runs on `[._/:+-]` looked like
+   **+2 807 raw tokens** across 24 lanes (`bench/x77/t2.ts`) — but that measurement
+   omitted the marker that makes decoding unambiguous. Priced *with* the marker it is
+   **−3 281** (`bench/x77/t2b.ts`). The apparent gain was an artefact: bare
+   alphanumeric ids merge into single tokens, which is not a legal encoding.
+2. **Segment interning on the frontier wire.** Rewriting the source instead of the wire
+   compares our output against an already-compressed baseline and loses by
+   construction (best variant 1 019 tok against a 367-token frontier). Fixed, it still
+   refused on 8/8 lanes: coverage 0.04 – 0.10, and the one lane that cleared coverage
+   **lost** (324 vs 300).
+3. **Arbitrary substring interning on the wire** (the shipped shape). Refused on
+   10/10 lanes. The best candidate came within **+2 to +4 tokens** every time — the id
+   characters and the table entry cost more than the substring saves.
+
+Even a synthetic log file built to have heavy literal repetition was refused: the
+frontier interns all of it itself.
+
+**What this establishes.** The frontier wire has no substring redundancy left that a
+one-character id can profitably address. This is now the third consecutive measured
+negative on "improve the representation the parent frontier sees" (X76: padding 8.2×
+marginal rate; PLATOS: findmnt 461 vs 444). The frontier is close to a local optimum
+against this family of attacks. MERISMOS is registered rather than discarded because
+its gates are sound and it is safe: it can only ever fire on a strict measured win,
+and it is byte-exact on every lane it refuses.
+
+---
+
+## X78 — KERMA (⚄)
+
+**Name.** Κέρμα — "small coin, small change; a thing cut into small pieces"
+(κερματίζω, to cut up into small pieces). Registered key `kerma`.
+Source: `src/lib/omega/kerma.ts`.
+
+**The mechanic, in one sentence.** Delete the separator characters *inside* a number
+(`2026-01-02` → `20260102`, `100.00` → `10000`) and declare the width pattern once;
+the reader re-inserts the separators from the digit count and the pattern.
+
+**Why it pays — the measurement.** The currency is tokens, not characters, and the
+o200k pretokenizer is lopsided: `\p{N}{1,3}` allows **three digits per chunk**, but
+every separator starts a chunk of its own. Measured (`bench/x78/quirk.ts`):
+
+| string | tokens | packed | tokens |
+|---|---:|---|---:|
+| `2026-09-30` | 6 | `20260930` | **3** |
+| `08:00:03` | 5 | `080003` | **2** |
+| `192.168.1.100` | 7 | `192168100` | **3** |
+| `1,234.56` | 5 | `123456` | **2** |
+| 12 log lines, ISO dates + clock times | 251 | packed | **179** (−28.7 %) |
+| a column of IPv4 addresses | 131 | packed | **95** (−27.5 %) |
+
+**What is and is not new — disclosed inheritance.** The mechanism family is **not**
+new. STIGME (X19) deletes separators inside a token and restores them from the token's
+own digits; MORPHE (X20) removed STIGME's hard-coding and fits a rule library;
+UUIDFOLD, HORA, HEMERA and STATHMOS are related value transforms. KERMA inherits that
+family openly.
+
+What is new is the **shape set**. STIGME ships three hard-coded shapes — `YYYY-MM-DD`,
+`YYYY/MM/DD`, `THH:MM:SS` — plus clock-after-a-date. A payload whose numbers are not
+dates or times gets nothing. KERMA fits **arbitrary** shapes: any run of digit groups
+over `[-:./]`, any group widths, up to four groups, fitted per payload, kept only on a
+measured win.
+
+That is not cosmetic. On `psql-output.txt`, whose numeric columns are dates
+(`2026-01-02`) **and** fixed-precision amounts (`100.00`, shape `###.##`), the complete
+existing frontier — 242 codecs, STIGME and MORPHE included — produces **244 tokens**.
+KERMA produces **172**. The amount column is a shape STIGME has no rule for, and it is
+half the payload's numbers.
+
+```
+STIGME   three hard-coded shapes (date, T-time, clock-after-date)
+MORPHE   a fitted rule library, parameterised over a rule catalogue
+KERMA    unconstrained shape fitting: whatever shape the payload contains
+```
+
+**Why it is a shape transform, not a substitution.** APOGRAPHE (X39) established the
+distinction: every substitution pays at least one token per use for a pointer at the
+point of substitution. KERMA pays **nothing per occurrence**. This is why ~1 token per
+occurrence can still be a large frontier win — there is no per-use pointer to pay for.
+
+**Greedy? Yes, and only in the prune.** Shape discovery is not a search: a fixed rule
+(every digit run over the separator set, grouped by exact shape, occurring ≥ 2 times).
+Selection is a bounded greedy prune — while it helps, drop the least valuable surviving
+shape and re-measure with the real tokenizer (≤ 24 evaluations, one token count each).
+A round is kept only on a strict improvement, so the prune cannot end worse than the
+unpruned table. A two-arm tournament (contract inside vs outside the frontier wire) is
+priced and the cheaper arm wins.
+
+**Time-bound or CPU-bound?** CPU-bound and bounded. Shape discovery is O(n·Lmax) over
+the payload; the prune is at most 24 full token counts. **No clock enters any decision.**
+
+**Honest citation.** Two sources found this turn, neither previously referenced here:
+
+- **Väinämöinen, "The tokens-per-byte trap: character-level 'compression' adds tokens"**
+  (DEV Community, May 2026). States the methodological rule this codec follows and that
+  most prompt-compression work violates: *"Stop equating bytes with tokens. Run your
+  input through the actual tokenizer before AND after any compression scheme. The token
+  count is the truth; the file size is the trap."* It also documents the converse
+  failure — deleting 25 % of characters raises token counts, because surviving fragments
+  fall through to byte fallback. Related: Petrov et al., arXiv:2305.15425 (up to 15×
+  longer tokenisation for low-resource scripts, same out-of-vocab dynamics).
+- **SepLLM, arXiv:2412.12094** (ICML 2025) — separator/punctuation tokens carry
+  disproportionately high attention relative to their information content. Independent
+  corroboration that separators are a distinct and expensive token class, which is the
+  entire premise here.
+
+Neither is admissible as prior art for byte-exact reconstruction: neither checks
+reconstruction, and SepLLM is a lossy inference-speed method. They are cited for the
+token-economy premise, not for the codec.
+
+### Gates — exact by verification, not by argument
+
+| | gate | why |
+|---|---|---|
+| G1 | **width uniqueness** | at most one kept shape per total digit length, so a bare run of length N has exactly one reading |
+| G2 | **no bare collision** | no separator-free digit run of that length exists anywhere, so only elided runs can have it |
+| G3 | **no merge** | a packed run may not sit beside another digit, or the two fuse into a run no rule describes |
+| G4 | **round trip** | `kermaDecode(kermaMessage(x)) === x`, byte for byte |
+| G5 | **strict win** | `countTokens(message) < frontier.messageTokens` |
+
+Comma and plus are deliberately **excluded** from the separator set: in CSV they are
+*field* separators, and eliding them fuses a whole row into one number. Measured:
+`vix-daily-1990.csv` went 461 → 629 (+168) before the exclusion was added.
+
+### Measured result
+
+Fires on **1 of 14** lanes tested; where it fires it saves **72 tokens (−29.5 %)** on
+`psql-output.txt`. Thirteen lanes refuse at G5, and the refusals are informative
+rather than uniform:
+
+| lane | frontier | best KERMA | shape |
+|---|---:|---:|---|
+| **psql-output.txt** | **244** | **172** | `####-##-##` ×24, `###.##` ×24 |
+| ls-full-iso | 367 | 372 | `##:##:##.#########` |
+| node-stacktraces | 300 | 303 | `####:##` |
+| git-log-fuller | 143 | 150 | `####-##-##` |
+| find-listing | 1142 | 1160 | `##:##:##.########` |
+| npm-ls | 909 | 926 | `##.##.##` |
+| kubectl-get-pods | 326 | 355 | `##.###.#.###` |
+
+Every refusing lane is **timestamp-shaped or version-shaped** — exactly the territory
+the stack's own HORA / HEMERA / STATHMOS / STIGME codecs already own. The single lane
+that wins wins because half its numbers are decimal amounts, a shape **no existing
+codec in the stack has a rule for**. KERMA is therefore a real but narrow addition: it
+extends shape-elision from dates and times to arbitrary numeric columns. Because G5 is
+a strict-win gate, it is safe to leave enabled — it cannot make any lane worse.
+
+### KERMA is pre-frontier (a structural note)
+
+PINAX (X76) and MERISMOS (X77) both rewrite `frontier.message`. KERMA must instead
+transform the **source**. Running the same shapes against the wire refuses on 6 of 8
+lanes with "no digit runs": the frontier has already rewritten the digits
+(psql-output's wire carries `хьҭаҭовавигагьДаДобабитать09а09` — no hyphen in sight).
+Rewriting the source rather than the wire is also what `bench/x77/t2c.ts` showed to be
+necessary on independent grounds: comparing a raw-text transform against an
+already-compressed baseline loses by construction.
+
+---
+
+## Generalized local leaders (X78)
+
+Ratio = brotli -q11 floor tokens / stack tokens (@ 14.8 bits/tok). Above 1.0 the stack beats a
+strong general-purpose compressor on that structure. Carried forward from `bench/x75/receipts/leaders.json`,
+regrouped by structure family, with X79's SPHRAGIS result on `psql-output.txt` folded in.
+
+**Two corrections (X80).**
+
+1. **X79 mislabelled the 29-lane total, and this corrects that correction.** X79 recorded
+   that `LANES73 29 TOTAL 12639` is "a control, not the frontier". That was wrong.
+   `tagstackFrontier` is `tagstackEncodeUncached` plus memoization — the same function
+   `bench/x74/gate73.ts` calls — so 12639 **is** the frontier. (There *is* a larger stack,
+   `tagstackEncode` → `tagstackX74Chain`, which adds the X74 candidate chain on top of the
+   base; that is a different number and has not been measured here.) Re-measured this turn
+   over the same 29 lanes with 245 codecs registered: **FRONTIER 29 TOTAL 12639 exact
+   29/29**, identical to X78 and X79. **The frontier is confirmed to be exactly the
+   configuration last measured.** The useful residue of X79's point stands in a weaker
+   form: because the frontier is the *base* stack, adding a registry codec cannot move
+   12639, so 12639 confirms the base and nothing else.
+2. **X76 already tried padding removal on findmnt and it lost: 461 vs 444.** PARATAXIS
+   reaches **422** on the same lane. The difference is the tab marker (X76's version
+   could not separate a column boundary from a space inside a column), which is why this
+   turn's result does not contradict X76's negative so much as complete it.
+
+**Data correction (X79).** The X78 row for `psql-output.txt` was wrong: its "brotli floor"
+column was filled with KERMA's *stack* value (172) instead of the measured floor. The
+floor is **165** tokens (brotli -q11, 1578 bytes, @ 14.8 bits/tok — recomputed directly
+this turn, and the other rows reproduce exactly: metrics 130, ls-l-real 943, ps-aux 743,
+ls-real 328, dpkg-l 591, free-m 75, lsblk 61, kb-article 608, uptime-w 70). Corrected,
+psql-output's ratio is **not** 1.47 but **1.02**.
+
+**Consequence.** `psql-output.txt` is no longer the headroom leader — it is the lane where
+the stack has *caught up with entropy*. Raw 675 → **169** tokens is a **−75.0 %**
+reduction, sitting within 4 tokens (2.4 %) of a general-purpose compressor's floor while
+remaining directly LLM-readable and byte-exact. The realistic remaining headroom on this
+lane is now under 3 %, so the ops category's live target is `metrics.tsv` (1.48) and
+`ls-l-real.txt` (1.48), not psql-output.
+
+
+### ops  (20 lanes)
+
+| lane | structure | raw | stack | brotli floor | ratio |
+|---|---|---:|---:|---:|---:|
+| metrics.tsv | delimited metrics | 811 | 192 | 130 | 1.48 |
+| ls-l-real.txt | listing | 5194 | 1394 | 943 | 1.48 |
+| psql-output.txt **X79 SPHRAGIS 244->169** | aligned table | 675 | 169 | 165 | **1.02** |
+| kubectl-get-pods.txt **X80 PARATAXIS 326->304** | aligned table | 1006 | 304 | 214 | 1.42 |
+| ps-aux-real.txt | process table | 3054 | 1042 | 743 | 1.4 |
+| findmnt.txt **X80 PARATAXIS 444->422** | tree table | 787 | 422 | 335 | 1.26 |
+| vmstat.txt | aligned table | 229 | 149 | 113 | 1.32 |
+| ls-real.txt | listing | 1034 | 433 | 328 | 1.32 |
+| df-real.txt | aligned table | 158 | 126 | 96 | 1.31 |
+| df-h.txt | aligned table | 140 | 108 | 84 | 1.29 |
+| ps-ef.txt | process table | 1144 | 315 | 250 | 1.26 |
+| du-real.txt | path list | 458 | 272 | 219 | 1.24 |
+| ps-real.txt | process table | 1106 | 397 | 320 | 1.24 |
+| apt-real.txt | log/transcript | 2739 | 850 | 690 | 1.23 |
+| df-h.txt | aligned table | 570 | 153 | 129 | 1.19 |
+| uptime-w.txt | single record | 80 | 80 | 70 | 1.14 |
+| dpkg-l.txt **X80 PARATAXIS 673->651** | package table | 1000 | 651 | 592 | 1.10 |
+| cue-sheet.md | cue list | 513 | 101 | 99 | 1.02 |
+| free-m.txt | key-value table | 76 | 76 | 76 | 1 |
+| lsblk.txt | block/tree | 60 | 60 | 61 | 0.98 |
+
+mean ratio **1.26**
+
+
+### prose  (3 lanes)
+
+| lane | structure | raw | stack | brotli floor | ratio |
+|---|---|---:|---:|---:|---:|
+| email-thread.txt | email | 629 | 488 | 443 | 1.1 |
+| llm-answer.md | markdown | 733 | 674 | 626 | 1.08 |
+| kb-article.txt | article | 656 | 622 | 608 | 1.02 |
+
+mean ratio **1.07**
+
+
+### source  (2 lanes)
+
+| lane | structure | raw | stack | brotli floor | ratio |
+|---|---|---:|---:|---:|---:|
+| unified-diff.patch | diff | 578 | 419 | 324 | 1.29 |
+| code-ts.txt | TypeScript | 1422 | 969 | 812 | 1.19 |
+
+mean ratio **1.24**
+
+
+### docs  (1 lanes)
+
+| lane | structure | raw | stack | brotli floor | ratio |
+|---|---|---:|---:|---:|---:|
+| node-help.txt | usage text | 1099 | 862 | 852 | 1.01 |
+
+mean ratio **1.01**
+
+
+### structured  (3 lanes)
+
+| lane | structure | raw | stack | brotli floor | ratio |
+|---|---|---:|---:|---:|---:|
+| markdown-table.md | md table | 330 | 176 | 133 | 1.32 |
+| prices.csv | CSV | 582 | 133 | 110 | 1.21 |
+| json-pkg.txt | JSON | 1152 | 681 | 592 | 1.15 |
+
+mean ratio **1.23**
+
+
+---
+
+## X79 — SPHRAGIS (⚃)
+
+**Name.** Σφραγίς — "a seal, a signet; the stamp that authenticates a document."
+Here, the stamp that fixes where a separator sits. Registered key `sphragis`.
+Source: `src/lib/omega/sphragis.ts`.
+
+**The mechanic, in one sentence.** Delete the separator characters *inside* a run of
+hex-or-decimal groups (`2026-01-02` → `20260102`, `100.00` → `10000`,
+`00:1A:2B` → `001A2B`) and declare the width pattern once; the reader re-inserts the
+separators from the run's length and the declared pattern.
+
+**Disclosed inheritance — this is a generalisation of KERMA, not an unrelated
+mechanism.** That is stated first because it is the honest description. Across X76–X79
+ten distinct mechanics were priced against this frontier and **one** survived
+(shape elision; see the negative table below). SPHRAGIS widens KERMA's shape language
+in four ways, each measured:
+
+| | KERMA (X78) | SPHRAGIS (X79) |
+|---|---|---|
+| group alphabet | digits only | digits **and hex** `[0-9a-fA-F]` |
+| separators | `[-:./]` | `[-:./,]` (comma added) |
+| groups per run | ≤ 4 | ≤ 6 |
+| word-boundary guard | none | run may not abut a hex character |
+| contract | `§KERMA #:char, fill: …` | `§SPHRAGIS …` (shortened, −3 tok) |
+
+**Why it survives where ten other mechanics did not.** Shape elision changes
+**tokenisation**, not redundancy. It pays no pointer, marker or id per occurrence —
+only one clause per *shape* — and the frontier, which is very good at capturing
+redundancy, cannot undo a tokenisation change it never made. Every dictionary-like
+mechanic (MERISMOS, interning, normalisation, remapping) fights the frontier for the
+same redundancy and loses; shape elision does not compete with it.
+
+**The shape grammar.** A run is `[0-9a-fA-F]+(SEP[0-9a-fA-F]+){1,5}` with
+`SEP ∈ [-:./,]`. A shape is rendered as one `#` per run character, every other
+character literal: `####-##-##`, `###.##`, `##:##:##.######`, `###,####-##`. Decoding
+is purely positional — given the packed run and the pattern, walk the pattern emitting
+the next packed character at each `#` and the literal otherwise. The `#` glyphs are
+therefore not a codebook; they are a length.
+
+**Negative space — ten mechanics priced, one kept** (all measured, see
+`bench/x79/receipts/`):
+
+| mechanic | result | why |
+|---|---|---|
+| inter-column padding removal | frontier owns it | marginal rate 0.11 |
+| segment interning, raw text | −3 281, not honest | markers cost more than they save |
+| segment interning, wire | **0/8** | coverage 0.04–0.10 of the wire |
+| arbitrary substring interning | **10/10 refused** | closest +2..+4 tok |
+| structural normalisation | +12..+63 | every lane |
+| long-literal interning | +201 / 8 lanes | id cost exceeds payload |
+| **alphabet remap of wire glyphs** | **+9..+22** | see below |
+| bullet / list-marker elision | 0 through frontier | ANAPHORA already does it |
+| **whitespace elision round separators** | only comma fires, **+3..+32** | see below |
+| tab indentation (units 2, 4) | −17 code-ts, **+137 json-pkg** | per-lane at best |
+
+**Two negatives worth their own explanation.**
+
+1. *Alphabet remap.* `bench/x79/alpha.ts` made this look like a large win: 32 ids
+   embedded in ASCII text cost **69** tokens written with ASCII glyphs and **96**
+   written with Cyrillic. It is an artefact. `remap2.ts` measured the same
+   substitution on real frontier wires and it is **harmful even with no contract at
+   all**: +20 (psql-output), +22 (kb-article), +9 (findmnt). The reason is structural —
+   only 36 of 126 non-ASCII characters on psql-output's wire have ASCII on both sides.
+   The rest sit inside Cyrillic **runs**, which pack at 0.56 tok/char; injecting an
+   ASCII glyph into such a run splits it and costs two boundaries. **The wire's
+   alphabet is already well chosen.**
+2. *Whitespace elision.* `key: value` costs 3 tokens and `key:value` costs 2, which
+   suggests −1 per occurrence. `bench/x79/sep.ts` measured it: of five separator
+   forms, only `comma-space` ever passes its invertibility guard, and it is
+   **positive on every lane** (+3 on `license.txt` to +32 on `ru-kb.txt`), because
+   `,word` tokenises worse than `, word`.
+
+**Where the generalisation does NOT pay — reported because it is the interesting
+result.** The hex and comma extensions were the reason for building SPHRAGIS, and on
+this corpus **they never fire**:
+
+- `aapl-2014.csv` — comma shapes found, but `####-##-##,##.########` and
+  `####-##-##,###.#######` are **both width 18**, so gate G1 (width uniqueness)
+  refuses the lane outright.
+- `vix-daily-1990.csv` — the comma shape passes the guards and still loses badly:
+  **822 vs 461**. Packing a CSV's field separators destroys its column alignment.
+- `git-log-fuller.txt`, `metrics.tsv` — the candidate shapes collide with bare
+  hex runs (commit hashes, small integers), so G2 refuses them.
+- `df-h.txt` — no runs at all after the boundary guard.
+
+So SPHRAGIS's measured advantage over KERMA comes from **one** thing: a shorter
+contract. On the only lane either fires, `psql-output.txt`:
+
+| codec | one-chat tokens | Δ vs frontier |
+|---|---:|---:|
+| frontier (243 codecs, X78) | 244 | — |
+| KERMA (X78) | 172 | −72 |
+| **SPHRAGIS (X79)** | **169** | **−75** |
+
+**Gates — exact by verification, not by argument.**
+
+- **G1 width uniqueness** — at most one kept shape per total run length.
+- **G2 no bare collision** — no separator-free run of that length exists anywhere.
+- **G3 no merge** — a packed run may not sit beside another run character.
+- **G4 word boundary** — a run may not abut `[0-9a-fA-F]` on either side (new; KERMA
+  lacks this, and without it a run can be found inside a longer token).
+- **G5 round trip** — `sphragisDecode(message) === source`, byte for byte, evaluated
+  through **both** layers (frontier decode, then SPHRAGIS decode) as KERMA's fix in
+  X78 established.
+- **G6 comma safety** — a comma may only be elided inside a run; a run may never span
+  a newline.
+- **G7 strict win** — `countTokens(message) < frontier.messageTokens`.
+
+**Greedy?** Yes, and **only in the prune**. Shape discovery is a fixed rule (every run
+over the separator set, grouped by exact shape, occurring ≥ 2 times). Selection is a
+bounded greedy prune: while it helps, drop the least valuable surviving shape and
+re-measure with the real tokenizer (≤ 24 evaluations). A round is kept only on strict
+improvement, so the prune cannot end worse than the unpruned table.
+
+**Time- or CPU-bound?** **CPU-bound and bounded**: discovery is O(n · L_max); the prune
+is at most 24 full token counts. No clock enters any decision.
+
+**Directly model-readable?** Yes. The contract is a single line
+(`§SPHRAGIS ####-##-## ###.##`) followed by the packed wire; every transform is a
+declared rule about digit counts, and the packed form is ordinary text. No external
+table, no tool call.
+
+**Source citation (honest).** Three previously-unreferenced sources bear directly on
+this mechanism, found this turn:
+**"Getting the most out of your tokenizer for pre-training and domain adaptation",
+arXiv:2402.01035** — establishes that the *pre-tokenization regular expression*, not
+the vocabulary size, is the dominant lever on compression, and that a "Punct" variant
+which prevents tokens starting with `.` trades compression for composition. That is the
+same lever SPHRAGIS pulls from the outside, by editing the text rather than the
+tokenizer.
+**"Tokenization counts: the impact of tokenization on arithmetic in frontier LLMs",
+Singh & Strouse, arXiv:2402.14903** — GPT tokenizers chunk long numbers into groups of
+up to three digits **left-to-right**, and commas force 3-digit chunks from the right.
+This is the direct explanation of why eliding a separator is worth tokens: it releases
+a hard L2R 3-digit chunking and lets BPE re-chunk the run freely.
+**MedTPE, arXiv:2505.09388** — merges frequently co-occurring token pairs into
+composite tokens for lossless compression. Related in aim (lossless, token-count
+driven) but it *changes the tokenizer*, which this stack cannot do; SPHRAGIS must
+reach the same effect by editing the text.
+None of these is prior art for the codec: all three assume control of, or a change to,
+the tokenizer. In-repo ancestors: **STIGME (X19)** (separator deletion inside a token),
+**MORPHE (X20)** (fits a rule library instead of hard-coding), **APOGRAPHE (X39)** (the
+cardinal principle: elide what the *width* determines), **KERMA (X78)** (the direct
+parent).
+
+**Fires on** 1 of 8 lanes screened this turn; registered **before KERMA** so the
+frontier tournament takes it where it wins and falls back to KERMA otherwise.
+
+**Correction — the number previously reported as "the frontier" is a control.** The
+29-lane figure carried forward through X76–X78 (`LANES73 29 TOTAL 12639 exact 29/29`) is
+produced by `bench/x74/gate73.ts`, which by its own header runs **"the X73 IDENTITY ONLY
+(`tagstackEncodeUncached`, no X74 candidates)"** — it is the *control arm* of the X74
+experiment, deliberately excluding every candidate codec. It therefore cannot move when a
+codec is added, and confirming it does **not** confirm the frontier. Re-run this turn it
+again returns `LANES73 29 TOTAL 12639 exact 29/29` with SPHRAGIS registered, which is the
+expected result for a control and is now labelled as one. The frontier cost used
+throughout this section (`psql-output.txt` = 244) is measured with `tagstackFrontier`,
+which is the full stack.
+
+**Verification.** Two-layer smoke through the registry, `bench/x79/smoke.mjs`:
+**PASS — 5 of 5 byte-exact** (`psql-output` 169, `df-h` 171, `metrics.tsv` 210,
+`vix-daily-1990.csv` 461, `kb-article` 622). 244 codecs registered.
+Receipts: `bench/x79/receipts/sphragis.json`, `bench/x79/receipts/sep.json`.
+
+**Known limit.** It is a two-token improvement over its own parent, and the four
+generalisation axes that motivated it are all measured negative on this corpus. The
+honest reading is that the shape-elision family is now close to exhausted, and the
+next win must come from a different mechanism rather than a wider shape grammar.
+
+**Record.** [`docs/codecs.md`](codecs.md) §X79, `bench/x79/`
+
+---
+
+## X80 — PARATAXIS (⫴)
+
+**Name.** Παράταξις — "a placing side by side; an arrangement in line"; in grammar,
+clauses set side by side without subordination. Both senses are meant: the columns are
+placed side by side, and the contract states the arrangement flatly instead of nesting a
+description of it. Registered key `parataxis`. Source: `src/lib/omega/parataxis.ts`.
+
+**The mechanic, in one sentence.** Aligned tables pad every field to a fixed column
+width; delete the padding and declare the widths once — `§PARATAXIS pad fields to 56 18 12`
+— and the reader re-pads each field to its declared width.
+
+**Why the padding is worth attacking at all.** A run of spaces is its own pretokenizer
+chunk, so it is paid for. On `findmnt.txt` the transform removes 1 189 characters; on
+`dpkg-l.txt`, 1 677.
+
+**The central negative, stated first, because it is the interesting result.** The obvious
+version of this codec — collapse every run of two or more spaces to one — is **LOSSY**,
+and it looked excellent: **−75 tokens on `findmnt.txt`** (`bench/x80/arms.ts`). It is not
+a codec result. The padding cannot be recovered from the collapsed text, so that number
+measures discarded information, not compression.
+
+| `findmnt.txt` (frontier 444) | tokens | Δ |
+|---|---:|---:|
+| collapse only (**LOSSY — not a codec**) | 369 | −75 |
+| collapse + short contract | 384 | −60 |
+| collapse + range contract | 389 | −55 |
+| **PARATAXIS as shipped (lossless, tab marker)** | **422** | **−22** |
+
+So of the apparent −75, roughly 53 tokens were information and ~22 were real. This is the
+same lesson as X79's alphabet remap in a new guise, and it is why the round-trip gate is
+the first gate and not the last.
+
+**Why the lossless version loses so much of the apparent gain.** X76 recorded that the
+frontier "owns" padding (marginal rate 0.11), and this turn confirms it: the frontier can
+record the padding for about the same number of tokens that declaring the widths costs.
+The genuine residue is the ~22 tokens that come from the frontier's column machinery
+firing *better* on the normalised text than on the padded text.
+
+**Measured — three lanes fire, each −22 tokens.**
+
+| lane | frontier | PARATAXIS | Δ | chars removed | lines |
+|---|---:|---:|---:|---:|---:|
+| `findmnt.txt` | 444 | **422** | **−22** (−5.0 %) | 1 189 | 23/28 |
+| `kubectl-get-pods.txt` | 326 | **304** | **−22** (−6.7 %) | 791 | 23/24 |
+| `dpkg-l.txt` | 673 | **651** | **−22** (−3.3 %) | 1 677 | 35/42 |
+
+Declined honestly (all byte-exact, all refused for a stated reason): `df-h.txt` (best 183
+vs 171), `ps-aux-real.txt` (1 102 vs 1 051), `ls-l-real.txt` (1 563 vs 1 496) — on these
+the padding is too thin to repay the contract and the marker.
+
+**The design decision that made it work: collapse to a TAB, not to a space.** The first
+version collapsed padding to a single space and refused every table whose columns contain
+internal single spaces — which is most of them (`df-h`'s `Mounted on`, `ps`'s `COMMAND`,
+`ls -l`'s filenames). Splitting on a space cannot tell a column boundary from a space
+inside a column. Collapsing to a tab makes the boundary unambiguous, and that single
+change took the codec from 2 lanes at −4/−7 to **3 lanes at −22 each**.
+
+**Gates.**
+
+- **G1 geometry** — a column set with ≥ 4 lines agreeing on every separator offset
+  (`bench/x80/dbg2.ts`: findmnt 56/74/86 on 23 of 28 lines; kubectl all six offsets on
+  23 of 24; ps-aux 5 of 8 offsets on all 56 lines).
+- **G2 saving** — at least one character must actually be removed.
+- **G3 round trip** — `parataxisDecode(message) === source`, byte for byte, through
+  **both** layers. This is the gate that makes it lossless and it is what separates the
+  codec from the naive collapse.
+- **G4 decoder unambiguity** — a line the reader must not re-pad is one that, after the
+  collapse, would be indistinguishable from a padded line. Those are listed by number in
+  the contract (`except 1`) and left literal; the budget is 6. Everything else is
+  self-identifying, because a line that still carries padding splits differently.
+- **G5 strict win.**
+- **Guard** — the source must not already contain a tab, or the split is not total.
+
+**Two hypotheses tested and falsified** (which is why the widths are transmitted at all):
+
+- *"re-align each column to its own maximum content width"* — **false.** Measured
+  (`bench/x80/align.ts`): `restore_by_maxwidth=false` on all eight lanes. findmnt's TARGET
+  column is padded to 56 while its widest entry is 51.
+- *"width = max content + k, so the contract is free"* — **true on one lane, false in
+  general.** `bench/x80/maxw.ts`: `max+2` reproduces `df-h.txt` exactly (18/18) and
+  equals the observed truth, but it reproduces 0/24 on findmnt and 0/23 on kubectl. So
+  the rule cannot be relied on, and the widths are declared explicitly.
+
+**Greedy?** Yes, and only in the prune — and the prune is **lazy** (see below). Geometry
+detection is a fixed rule: for each separator index take the modal next-field offset over
+the lines carrying the full separator set, then keep the lines agreeing exactly.
+
+**Time- or CPU-bound?** **CPU-bound and bounded.** Detection is O(n) in characters; the
+prune is at most 4 rounds of two full frontier encodes. No clock enters any decision.
+**Speed:** the prune was measured never to improve a result (`pruned=0` on every lane in
+`bench/x80/receipts/parataxis.json`) while costing two full frontier encodes per candidate
+lane, so it now runs only *after* the cheap gates pass. Verified result-preserving: the
+three applied lanes and the three refusals are numerically identical before and after.
+This is a speed win for this codec, **not** for the whole stack — see §Speed below.
+
+**Directly model-readable?** Yes. One contract line, then the wire. The reader splits
+each line on tab, pads field *j* to the *j*-th declared width, and leaves the rest
+literal. No external table, no tool call.
+
+**Source citation (honest).** Four previously-unreferenced sources, found this turn.
+
+- **Mao, Pirk & Xue, arXiv:2505.06297** — *Lossless Compression of LLM-Generated Text via
+  Next-Token Prediction.* Uses an LLM's next-token distribution to drive arithmetic
+  coding: 14.6–23.8× vs gzip's ~3×. **This is the AI-native compressor everyone reaches
+  for, and it is precisely the one that cannot satisfy this stack's contract.** The
+  reviewer's objection is load-bearing: arithmetic coding requires the decoder to
+  reproduce byte-identical conditional probabilities at every step, and §4.4 of the paper
+  itself concedes LLM inference is not bit-stable across runs (floating-point precision,
+  MoE routing, hardware). No round trip, no bit-exactness check, no decoder specified.
+  Everything in this stack is gated on `decode(message) === source`; that gate is exactly
+  what this method cannot pass.
+- **LMCompress, arXiv:2407.07723** — *Understanding is Compression.* Same paradigm
+  extended to images, video and audio. Same limitation.
+- **LM-GC, NeurIPS 2024** (arXiv:2410.12259) — LLMs as zero-shot lossless gradient
+  compressors. Losslessness *is* attainable here because the probabilities come from a
+  frozen, deterministic model. Its transferable finding is empirical and directly
+  relevant: serialising data into "recognizable symbols" with "proper separators" changed
+  compression by up to 70 % and 40 %. **The separator choice materially changes how well
+  a model-driven compressor prices a stream** — independent corroboration that PARATAXIS's
+  separator normalisation is the right axis to pull.
+- **arXiv:2402.01035** (from X79) — the pre-tokenization regex, not vocabulary size,
+  dominates compression.
+
+**Newly-solved mathematics — reviewed as instructed, and reported honestly.** The
+frontier-lab results of this period are real and, unusually, verified: an internal OpenAI
+reasoning model **disproved the Erdős planar unit distance conjecture** (posed 1946) in
+May 2026, with independent verification by Noga Alon, Melanie Wood and Thomas Bloom, and
+Timothy Gowers indicating it would merit a top journal — a new infinite family of
+constructions via Golod–Shafarevich and class field towers, beating the square grid to
+n^(1+δ) with δ refined to 0.014 by Will Sawin. Separately **Erdős problem #1196** was
+resolved by GPT-5.4 Pro from a bare problem statement by Liam Price, in a paper with
+Terence Tao and Jared Duker Lichtman, using a downward Markov chain weighted by the von
+Mangoldt function; #728 and #729 were resolved with **Lean formalisation**
+(OpenAI + Harmonic's Aristotle), as were #1148 and #258.
+
+**None of these yields a new compression algorithm, and I am not going to pretend
+otherwise.** They are results in combinatorial geometry and analytic number theory. The
+one genuinely transferable idea is *methodological*: several were machine-verified in
+Lean rather than merely peer-reviewed. This stack's discipline — every codec gated on a
+byte-exact round trip, with refusals recorded rather than hidden — is the same idea
+applied to codecs, and the Erdős episode is a good argument for keeping it: the first
+GPT-5 claim (ten Erdős problems "solved") collapsed because the model had merely
+rediscovered literature, and it was caught only because someone checked.
+
+**Known limits.** Three lanes, −22 each. It cannot help a table whose padding is thin, and
+it refuses any source already containing a tab.
+
+**Record.** [`docs/codecs.md`](codecs.md) §X80, [`bench/x80/REPORT.md`](../bench/x80/REPORT.md).

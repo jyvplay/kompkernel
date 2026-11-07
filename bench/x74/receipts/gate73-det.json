@@ -7,206 +7,206 @@
    "raw": 60,
    "tokens": 60,
    "exact": true,
-   "ms": 2674
+   "ms": 1958
   },
   {
    "path": "bench/holdout-work/kb-article.txt",
    "raw": 656,
    "tokens": 622,
    "exact": true,
-   "ms": 2387
+   "ms": 2021
   },
   {
    "path": "bench/holdout-x42b/uptime-w.txt",
    "raw": 80,
    "tokens": 80,
    "exact": true,
-   "ms": 2217
+   "ms": 1867
   },
   {
    "path": "bench/holdout-x42b/free-m.txt",
    "raw": 76,
    "tokens": 76,
    "exact": true,
-   "ms": 2135
+   "ms": 1819
   },
   {
    "path": "bench/holdout-x42b/vmstat.txt",
    "raw": 229,
    "tokens": 149,
    "exact": true,
-   "ms": 3255
+   "ms": 2457
   },
   {
    "path": "bench/holdout-work/unified-diff.patch",
    "raw": 578,
    "tokens": 419,
    "exact": true,
-   "ms": 2942
+   "ms": 2570
   },
   {
    "path": "bench/holdout-tbl/df-h.txt",
    "raw": 570,
    "tokens": 171,
    "exact": true,
-   "ms": 2243
+   "ms": 2071
   },
   {
    "path": "bench/holdout-x41/df-real.txt",
    "raw": 158,
    "tokens": 126,
    "exact": true,
-   "ms": 4297
+   "ms": 3523
   },
   {
    "path": "bench/holdout-x41/du-real.txt",
    "raw": 458,
    "tokens": 272,
    "exact": true,
-   "ms": 3592
+   "ms": 3008
   },
   {
    "path": "bench/holdout-x41/node-help.txt",
    "raw": 1099,
    "tokens": 862,
    "exact": true,
-   "ms": 6579
+   "ms": 5389
   },
   {
    "path": "bench/holdout-x42/findmnt.txt",
    "raw": 787,
    "tokens": 444,
    "exact": true,
-   "ms": 5656
+   "ms": 4926
   },
   {
    "path": "bench/holdout-x42/df-h.txt",
    "raw": 140,
    "tokens": 108,
    "exact": true,
-   "ms": 4768
+   "ms": 3968
   },
   {
    "path": "bench/holdout-work/email-thread.txt",
    "raw": 629,
    "tokens": 488,
    "exact": true,
-   "ms": 6821
+   "ms": 6175
   },
   {
    "path": "bench/holdout-work/llm-answer.md",
    "raw": 733,
    "tokens": 674,
    "exact": true,
-   "ms": 7384
+   "ms": 6199
   },
   {
    "path": "bench/holdout-tbl/markdown-table.md",
    "raw": 330,
    "tokens": 176,
    "exact": true,
-   "ms": 7167
+   "ms": 5335
   },
   {
    "path": "bench/holdout-tbl/psql-output.txt",
    "raw": 675,
    "tokens": 244,
    "exact": true,
-   "ms": 9524
+   "ms": 7296
   },
   {
    "path": "bench/holdout-x40/prices.csv",
    "raw": 582,
    "tokens": 133,
    "exact": true,
-   "ms": 11215
+   "ms": 8818
   },
   {
    "path": "bench/holdout-x40/cue-sheet.md",
    "raw": 513,
    "tokens": 163,
    "exact": true,
-   "ms": 11720
+   "ms": 9736
   },
   {
    "path": "bench/holdout-x42/ps-ef.txt",
    "raw": 1144,
    "tokens": 315,
    "exact": true,
-   "ms": 12459
+   "ms": 10468
   },
   {
    "path": "bench/holdout-x41/ls-real.txt",
    "raw": 1034,
    "tokens": 433,
    "exact": true,
-   "ms": 16668
+   "ms": 14187
   },
   {
    "path": "bench/holdout/json-pkg.txt",
    "raw": 1152,
    "tokens": 681,
    "exact": true,
-   "ms": 18697
+   "ms": 16529
   },
   {
    "path": "bench/holdout/code-ts.txt",
    "raw": 1422,
    "tokens": 969,
    "exact": true,
-   "ms": 23787
+   "ms": 21860
   },
   {
    "path": "bench/holdout-x42/dpkg-l.txt",
    "raw": 1000,
    "tokens": 673,
    "exact": true,
-   "ms": 27340
+   "ms": 23730
   },
   {
    "path": "bench/holdout-x41/ps-real.txt",
    "raw": 1106,
    "tokens": 397,
    "exact": true,
-   "ms": 19875
+   "ms": 17341
   },
   {
    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
    "raw": 1006,
    "tokens": 326,
    "exact": true,
-   "ms": 27930
+   "ms": 24830
   },
   {
    "path": "bench/holdout-x40/metrics.tsv",
    "raw": 811,
    "tokens": 210,
    "exact": true,
-   "ms": 30712
+   "ms": 27861
   },
   {
    "path": "bench/holdout-x41/ps-aux-real.txt",
    "raw": 3054,
    "tokens": 1042,
    "exact": true,
-   "ms": 63722
+   "ms": 63113
   },
   {
    "path": "bench/holdout-x41/apt-real.txt",
    "raw": 2739,
    "tokens": 850,
    "exact": true,
-   "ms": 123442
+   "ms": 124632
   },
   {
    "path": "bench/holdout-x41/ls-l-real.txt",
    "raw": 5194,
    "tokens": 1476,
    "exact": true,
-   "ms": 190152
+   "ms": 188012
   }
  ],
  "totalTokens": 12639,
  "exactLanes": 29,
- "totalMs": 651372
+ "totalMs": 611711
 }

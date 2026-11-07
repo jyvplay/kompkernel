@@ -1,0 +1,98 @@
+[
+ {
+  "path": "bench/holdout/license.txt",
+  "name": "comma-space",
+  "raw": 1166,
+  "after": 1169,
+  "d": 3,
+  "n": 84
+ },
+ {
+  "path": "bench/holdout/md-react.txt",
+  "name": "comma-space",
+  "raw": 252,
+  "after": 262,
+  "d": 10,
+  "n": 4
+ },
+ {
+  "path": "bench/holdout/md-vite.txt",
+  "name": "comma-space",
+  "raw": 274,
+  "after": 284,
+  "d": 10,
+  "n": 4
+ },
+ {
+  "path": "bench/holdout/readme.txt",
+  "name": "comma-space",
+  "raw": 843,
+  "after": 847,
+  "d": 4,
+  "n": 23
+ },
+ {
+  "path": "bench/holdout-lang/de-kb.txt",
+  "name": "comma-space",
+  "raw": 525,
+  "after": 541,
+  "d": 16,
+  "n": 26
+ },
+ {
+  "path": "bench/holdout-lang/es-kb.txt",
+  "name": "comma-space",
+  "raw": 457,
+  "after": 466,
+  "d": 9,
+  "n": 15
+ },
+ {
+  "path": "bench/holdout-lang/pl-kb.txt",
+  "name": "comma-space",
+  "raw": 623,
+  "after": 638,
+  "d": 15,
+  "n": 24
+ },
+ {
+  "path": "bench/holdout-lang/ru-kb.txt",
+  "name": "comma-space",
+  "raw": 478,
+  "after": 510,
+  "d": 32,
+  "n": 30
+ },
+ {
+  "path": "bench/holdout-lang/tr-kb.txt",
+  "name": "comma-space",
+  "raw": 554,
+  "after": 569,
+  "d": 15,
+  "n": 9
+ },
+ {
+  "path": "bench/holdout-mk/agent-history.md",
+  "name": "comma-space",
+  "raw": 1156,
+  "after": 1166,
+  "d": 10,
+  "n": 9
+ },
+ {
+  "path": "bench/holdout-ops/git-log-fuller.txt",
+  "name": "comma-space",
+  "raw": 143,
+  "after": 151,
+  "d": 8,
+  "n": 4
+ },
+ {
+  "path": "bench/holdout-ops/git-numstat.txt",
+  "name": "comma-space",
+  "raw": 4632,
+  "after": 4640,
+  "d": 8,
+  "n": 4
+ }
+]

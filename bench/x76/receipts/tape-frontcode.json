@@ -1,0 +1,82 @@
+[
+ {
+  "path": "bench/holdout-x41/ps-real.txt",
+  "tapeTokens": 93,
+  "rules": 30,
+  "shareSeq": 2,
+  "shareSorted": 14,
+  "fcTextTokens": 103
+ },
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "tapeTokens": 49,
+  "rules": 16,
+  "shareSeq": 0,
+  "shareSorted": 5,
+  "fcTextTokens": 63
+ },
+ {
+  "path": "bench/holdout-x40/metrics.tsv",
+  "tapeTokens": 61,
+  "rules": 18,
+  "shareSeq": 1,
+  "shareSorted": 10,
+  "fcTextTokens": 70
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "tapeTokens": 89,
+  "rules": 24,
+  "shareSeq": 4,
+  "shareSorted": 18,
+  "fcTextTokens": 104
+ },
+ {
+  "path": "bench/holdout-x42/ps-ef.txt",
+  "tapeTokens": 84,
+  "rules": 28,
+  "shareSeq": 4,
+  "shareSorted": 16,
+  "fcTextTokens": 88
+ },
+ {
+  "path": "bench/holdout-x42/dpkg-l.txt",
+  "tapeTokens": 126,
+  "rules": 48,
+  "shareSeq": 9,
+  "shareSorted": 32,
+  "fcTextTokens": 141
+ },
+ {
+  "path": "bench/holdout-x42/findmnt.txt",
+  "tapeTokens": 124,
+  "rules": 34,
+  "shareSeq": 9,
+  "shareSorted": 28,
+  "fcTextTokens": 140
+ },
+ {
+  "path": "bench/holdout-x41/ls-real.txt",
+  "tapeTokens": 159,
+  "rules": 48,
+  "shareSeq": 4,
+  "shareSorted": 37,
+  "fcTextTokens": 171
+ },
+ {
+  "path": "bench/holdout-x42b/vmstat.txt",
+  "tapeTokens": 39,
+  "rules": 12,
+  "shareSeq": 1,
+  "shareSorted": 6,
+  "fcTextTokens": 44
+ },
+ {
+  "path": "bench/holdout-x41/ps-aux-real.txt",
+  "tapeTokens": 347,
+  "rules": 83,
+  "shareSeq": 5,
+  "shareSorted": 60,
+  "fcTextTokens": 358
+ }
+]

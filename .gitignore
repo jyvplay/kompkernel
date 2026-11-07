@@ -23,3 +23,5 @@ bench/x72/prof*/
 bench/x74/*.mjs
 # X75 benchmark bundles are generated the same way (see bench/x75/REPORT.md)
 bench/x75/*.mjs
+bench/x79/*.mjs
+bench/x80/*.mjs

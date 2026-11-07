@@ -1,0 +1,57 @@
+[
+ {
+  "lane": "metrics.tsv",
+  "raw": 811,
+  "F": 210,
+  "nl": 2,
+  "ws": 11,
+  "dig": 44,
+  "let": 69,
+  "punct": 20,
+  "mix": 64
+ },
+ {
+  "lane": "psql-output.txt",
+  "raw": 675,
+  "F": 244,
+  "nl": 0,
+  "ws": 10,
+  "dig": 44,
+  "let": 73,
+  "punct": 39,
+  "mix": 78
+ },
+ {
+  "lane": "kb-article.txt",
+  "raw": 656,
+  "F": 622,
+  "nl": 2,
+  "ws": 1,
+  "dig": 2,
+  "let": 249,
+  "punct": 10,
+  "mix": 358
+ },
+ {
+  "lane": "dpkg-l.txt",
+  "raw": 1000,
+  "F": 673,
+  "nl": 4,
+  "ws": 27,
+  "dig": 40,
+  "let": 289,
+  "punct": 48,
+  "mix": 265
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "raw": 5194,
+  "F": 1496,
+  "nl": 5,
+  "ws": 41,
+  "dig": 285,
+  "let": 834,
+  "punct": 115,
+  "mix": 216
+ }
+]

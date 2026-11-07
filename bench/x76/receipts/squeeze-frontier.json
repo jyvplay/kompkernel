@@ -1,0 +1,92 @@
+[
+ {
+  "path": "bench/holdout-x41/ps-aux-real.txt",
+  "orig": 1042,
+  "squeezed": 985,
+  "gain": 57,
+  "rawSave": 469,
+  "exactA": true,
+  "exactB": true
+ },
+ {
+  "path": "bench/holdout-x41/ps-real.txt",
+  "orig": 397,
+  "squeezed": 380,
+  "gain": 17,
+  "rawSave": 158,
+  "exactA": true,
+  "exactB": true
+ },
+ {
+  "path": "bench/holdout-x42/dpkg-l.txt",
+  "orig": 673,
+  "squeezed": 601,
+  "gain": 72,
+  "rawSave": 142,
+  "exactA": true,
+  "exactB": true
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "orig": 326,
+  "squeezed": 298,
+  "gain": 28,
+  "rawSave": 138,
+  "exactA": true,
+  "exactB": true
+ },
+ {
+  "path": "bench/holdout-x42/findmnt.txt",
+  "orig": 444,
+  "squeezed": 369,
+  "gain": 75,
+  "rawSave": 76,
+  "exactA": true,
+  "exactB": true
+ },
+ {
+  "path": "bench/holdout-x42/ps-ef.txt",
+  "orig": 315,
+  "squeezed": 304,
+  "gain": 11,
+  "rawSave": 160,
+  "exactA": true,
+  "exactB": true
+ },
+ {
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "orig": 1394,
+  "squeezed": 1339,
+  "gain": 55,
+  "rawSave": 442,
+  "exactA": true,
+  "exactB": true
+ },
+ {
+  "path": "bench/holdout-x42b/vmstat.txt",
+  "orig": 149,
+  "squeezed": 126,
+  "gain": 23,
+  "rawSave": 47,
+  "exactA": true,
+  "exactB": true
+ },
+ {
+  "path": "bench/holdout-x41/ls-real.txt",
+  "orig": 433,
+  "squeezed": 409,
+  "gain": 24,
+  "rawSave": 62,
+  "exactA": true,
+  "exactB": true
+ },
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "orig": 171,
+  "squeezed": 152,
+  "gain": 19,
+  "rawSave": 74,
+  "exactA": true,
+  "exactB": true
+ }
+]
