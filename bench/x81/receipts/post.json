@@ -1,0 +1,44 @@
+[
+ {
+  "lane": "psql-output.txt",
+  "F": 244,
+  "sites": 2,
+  "gain": -17
+ },
+ {
+  "lane": "cue-sheet.md",
+  "F": 163,
+  "sites": 0,
+  "gain": 0
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "F": 1497,
+  "sites": 18,
+  "gain": -4
+ },
+ {
+  "lane": "markdown-table.md",
+  "F": 176,
+  "sites": 1,
+  "gain": -17
+ },
+ {
+  "lane": "ls-real.txt",
+  "F": 433,
+  "sites": 0,
+  "gain": 0
+ },
+ {
+  "lane": "email-thread.txt",
+  "F": 488,
+  "sites": 0,
+  "gain": 0
+ },
+ {
+  "lane": "metrics.tsv",
+  "F": 210,
+  "sites": 0,
+  "gain": 0
+ }
+]

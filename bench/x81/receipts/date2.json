@@ -1,0 +1,20 @@
+[
+ {
+  "lane": "ls-l-real.txt",
+  "F": 1497,
+  "n": 149,
+  "rt": true,
+  "long": 12,
+  "short": -1,
+  "tiny": -12
+ },
+ {
+  "lane": "ls-real.txt",
+  "F": 433,
+  "n": 37,
+  "rt": true,
+  "long": 50,
+  "short": 33,
+  "tiny": 18
+ }
+]

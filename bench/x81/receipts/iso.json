@@ -1,0 +1,34 @@
+[
+ {
+  "lane": "psql-output.txt",
+  "F": 244,
+  "n": 24,
+  "rt": true,
+  "raw": -72,
+  "net": -36
+ },
+ {
+  "lane": "prices.csv",
+  "F": 133,
+  "n": 30,
+  "rt": true,
+  "raw": -90,
+  "net": 14
+ },
+ {
+  "lane": "metrics.tsv",
+  "F": 210,
+  "n": 24,
+  "rt": true,
+  "raw": -72,
+  "net": 34
+ },
+ {
+  "lane": "email-thread.txt",
+  "F": 488,
+  "n": 4,
+  "rt": true,
+  "raw": -12,
+  "net": 27
+ }
+]

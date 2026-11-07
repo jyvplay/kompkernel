@@ -4113,3 +4113,129 @@ rediscovered literature, and it was caught only because someone checked.
 it refuses any source already containing a tab.
 
 **Record.** [`docs/codecs.md`](codecs.md) §X80, [`bench/x80/REPORT.md`](../bench/x80/REPORT.md).
+
+---
+
+## X81 — HARMOS (⌛)
+
+**Name.** Ἁρμός — "a joint, a seam, that which joins two things"; in masonry, the mortar
+line between cut stones. Both senses are meant: the codec removes the seams between
+fixed-width fields, and what remains are the stones themselves. Registered key `harmos`.
+Source: `src/lib/omega/harmos.ts`.
+
+**The mechanic, in one sentence.** A compound token — a date, a time, a timestamp — is a
+fixed number of fixed-width fields joined by punctuation, and every hyphen, colon and
+separator run is an o200k token carrying no information the digits do not already carry;
+delete the separators and declare the shape once — `§X81 ~8=YYYYMMDD.` — and the reader
+re-inserts them.
+
+**Where this sits relative to X80.** PARATAXIS removed the padding **between** columns —
+pure column geometry — and declared the widths once. HARMOS removes the separators
+**inside** a field — pure field geometry — and declares the shape once. Same claim, one
+level down: a separator recoverable from a declared width is not information. The unit of
+redundancy has moved from the table to the token.
+
+**Measured — three lanes fire, −66 tokens total, every round trip byte-exact.**
+Driving the shipped codec (`bench/x81/verify.ts` → `src/lib/omega/harmos.ts`), cold,
+against the real frontier:
+
+| lane | frontier | HARMOS | Δ | forms |
+|---|---:|---:|---:|---|
+| `psql-output.txt` | 244 | **193** | **−51** | `d8` ×24 |
+| `cue-sheet.md` | 163 | **152** | **−11** | `c6` ×28 |
+| `metrics.tsv` | 210 | **206** | **−4** | `dt14T` ×24 |
+| `prices.csv` | 133 | 133 | +0 REFUSED | `d8` ×30 |
+| `ls-l-real.txt` | 1497 | 1497 | +0 REFUSED | `lsy` ×108, `lst` ×41 |
+| `ps-ef.txt` | 315 | 315 | +0 REFUSED | `c6` ×39, `c4` ×39 |
+| `ps-aux-real.txt` | 1051 | 1051 | +0 REFUSED | `c4` ×59 |
+| `ps-real.txt` | 397 | 397 | +0 REFUSED | `c4` ×39 |
+| `email-thread.txt` | 488 | 488 | +0 REFUSED | `d8` ×4 |
+| `ls-real.txt` | 433 | 433 | +0 REFUSED | `lst` ×14, `lsy` ×23 |
+
+**The central negative, stated first, because it is the interesting result.** `ps-ef.txt`
+has **larger raw savings than the winner** — −156 raw against `cue-sheet`'s −84 — and it
+still loses by +20. So does `ls-l-real.txt` (−185 raw, +3). The frontier already prices
+their punctuation away, because their timestamps are repetitive in a way the frontier's
+own row machinery can see: ps-ef's START column repeats one date 39 times.
+
+HARMOS therefore only wins where the timestamps **vary**. That asymmetry is the
+mechanism, and it is why the win is per-lane and measured rather than global and asserted.
+
+**Pack / unpack.** Forms are applied **sequentially**, each to the output of the previous,
+most specific first. Unpacking applies the inverses in **exact reverse order**. Every
+shape is tagged by its marker **and** by the length of the digit run that follows, and a
+longer run is always matched before a shorter one, so no inverse can consume another
+shape's payload:
+
+| source | packed | tag |
+|---|---|---|
+| `2026-11-07T14:22:01` | `%20261107142201` | `%` + 14 digits |
+| `2026-11-07 14:22:01` | `~20261107142201` | `~` + 14 digits |
+| `2026-11-07T14:22` | `%202611071422` | `%` + 12 digits |
+| `Apr 14  2017` | `&Apr14!2017` | `&` + Mon + DD + `!` + YYYY |
+| `Jan  2 08:00` | `@Jan0208:00` | `@` + Mon + DD + HH:MM |
+| `2026-11-07` | `~20261107` | `~` + 8 digits |
+| `00:03:12` | `^000312` | `^` + 6 digits |
+| `08:00` | `^0800` | `^` + 4 digits |
+
+**G1** closes the last hole: if the source already contains any of `% ~ & @ ^`, the lane
+is REFUSED outright rather than escaped, so a decoder never wonders whether a marker it
+sees was in the original.
+
+**The day field is derived, not transmitted.** `ls -l` right-justifies the day to width 2,
+so `Jan  2` has two spaces and `Jan 15` one — and that spacing is not recoverable from
+the digits. Rather than pay for it, HARMOS observes it is a **function of the day**: a day
+below ten is padded to two columns. The day is stored zero-padded and the inverse
+re-derives the spacing. Verified on all 149 dates of `ls-l-real.txt` (`rt=true`) — even
+though that lane is then refused on cost.
+
+**The contract decides everything, and that is the actual result of the turn.** The
+packing is nearly free; the contract is the whole cost. Measured on the **same transform
+on the same lane** (`bench/x81/receipts/chrono4.json`):
+
+| lane | contract 34 tok | contract 9–13 tok |
+|---|---:|---:|
+| `psql-output.txt` | −27 | **−52** |
+| `cue-sheet.md` | +12 | **−8** |
+| `metrics.tsv` | +21 | **−4** |
+
+So the contract names **only** the shapes a lane actually contains, in terse form: a lane
+with nothing but ISO dates pays nine tokens. Two drafts are recorded because they failed
+and the failure is the point —
+
+- **one fixed contract for all shapes** (`bench/x81/receipts/chrono.json`): contract 95
+  tokens, and **every** lane loses, by +17 to +65. It is also not round-trip correct,
+  because the packed forms collide.
+- **no marker characters**: the inverse is a guess, since a bare 8-digit run in the source
+  is indistinguishable from a packed date.
+
+**Greedy?** The **rewrite** is not — it is a deterministic ordered pass, and the packed
+text is a fixed function of the source. What **is** greedy is the acceptance search:
+shapes are admitted in specificity order and the set is trimmed by a bounded repair loop
+(drop the least specific shape, re-test) while the result does not beat the frontier.
+Bounded at two iterations, so the codec is deterministic and terminating, and it can
+return a locally-but-not-globally-optimal shape set.
+
+**Time- or CPU-bound?** **CPU-bound.** The scan is a handful of linear regex passes; a
+single frontier encode costs orders of magnitude more than the entire HARMOS analysis.
+There is no I/O and no waiting anywhere in the codec.
+
+**Honest source.** The mechanism is empirical and measured here, not borrowed. The
+property it exploits — that a separator between digit groups forces the tokenizer to
+restart a numeric chunk, so `2026-11-07` costs more tokens than `20261107` — is
+documented in Singh & Strouse, *Tokenization counts: the impact of tokenization on
+arithmetic in frontier LLMs* (arXiv:2402.14903), and in *Getting the most out of your
+tokenizer for pre-training and domain adaptation* (arXiv:2402.01035), which show digits
+are chunked in threes right-to-left and any non-digit breaks the chunk. **No compression
+result from either paper is claimed or used**; they are cited for the tokenizer behaviour
+only, which this turn measured directly.
+
+**Known limits.** Three lanes, and the largest is −51. It cannot help a lane whose
+timestamps the frontier already models — which is most of them. It refuses any source
+containing `% ~ & @ ^`. The terse contract assumes a reader that can expand a shape from a
+nine-token declaration; that is exactly the competence this stack is built to rely on,
+but it is an assumption, and it is the reason the full-contract arm is retained for
+comparison rather than removed.
+
+**Record.** [`docs/codecs.md`](codecs.md) §X81, [`bench/x81/REPORT.md`](../bench/x81/REPORT.md),
+receipts in `bench/x81/receipts/`.

@@ -1,0 +1,47 @@
+[
+ {
+  "lane": "cue-sheet.md",
+  "F": 163,
+  "forms": [
+   "c6"
+  ],
+  "rt": true,
+  "raw": -84,
+  "contract": 39,
+  "net": 17
+ },
+ {
+  "lane": "psql-output.txt",
+  "F": 244,
+  "forms": [
+   "d8"
+  ],
+  "rt": true,
+  "raw": -72,
+  "contract": 39,
+  "net": -22
+ },
+ {
+  "lane": "prices.csv",
+  "F": 133,
+  "forms": [
+   "d8"
+  ],
+  "rt": true,
+  "raw": -60,
+  "contract": 39,
+  "net": 29
+ },
+ {
+  "lane": "ps-ef.txt",
+  "F": 315,
+  "forms": [
+   "c6",
+   "c4"
+  ],
+  "rt": true,
+  "raw": -156,
+  "contract": 49,
+  "net": 43
+ }
+]

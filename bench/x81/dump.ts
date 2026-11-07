@@ -1,0 +1,10 @@
+import * as fs from 'node:fs';
+import { countTokens } from '../../src/lib/omega/bpe';
+import { tagstackFrontier } from '../../src/lib/omega/tagstack';
+const enc: any = 'o200k_base';
+const p = process.argv[2];
+const text = fs.readFileSync(p, 'utf8');
+const r: any = tagstackFrontier(text, enc);
+console.log(`--- ${p}  raw ${countTokens(text, enc)}  F ${r.messageTokens}  parent=${r.parentCodec}  len ${r.message.length} chars ---`);
+console.log(r.message.slice(0, 2400));
+console.log('--- [end] ---');

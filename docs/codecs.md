@@ -5431,3 +5431,77 @@ new compression algorithm** — the transferable idea is the Lean *methodology* 
 machine-checking a claim, which is what this stack's round-trip gates already are.
 
 Stated in full in `docs/codec-abbreviations.md` §X80 and `bench/x80/REPORT.md`.
+
+## X81 — HARMOS
+
+**One line.** A timestamp is mostly punctuation: delete the separators inside fixed-width
+compound tokens and declare the shape once — `§X81 ~8=YYYYMMDD.` — and the reader
+re-inserts them.
+
+**Mechanic.** PARATAXIS (X80) removed padding *between* columns; HARMOS removes
+separators *inside* a field. Same claim one level down: a separator recoverable from a
+declared width is not information. Forms are packed sequentially (most specific first)
+and unpacked in **exact reverse order**, each tagged by marker **and** digit-run length so
+no inverse can consume another payload: `%20261107142201`, `~20261107`, `^000312`,
+`&Apr14!2017`, `@Jan0208:00`.
+
+**The result that matters is the contract, not the packing.** The packing is nearly free;
+the contract is the whole cost. On the *same transform on the same lane*, shrinking the
+declaration from 34 tokens to 9–13 turns a loss into a win: psql-output −27 → **−52**,
+cue-sheet +12 → **−8**, metrics +21 → **−4**. The contract is therefore **adaptive**,
+naming only the shapes a lane actually contains. An earlier fixed-contract draft (95
+tokens) lost on *every* lane, by +17 to +65.
+
+**Measured, cold, against the real frontier, driving the shipped `src/lib/omega/harmos.ts`:**
+
+| lane | frontier | HARMOS | Δ |
+|---|---:|---:|---:|
+| `psql-output.txt` | 244 | **193** | **−51** |
+| `cue-sheet.md` | 163 | **152** | **−11** |
+| `metrics.tsv` | 210 | **206** | **−4** |
+| `prices.csv`, `ls-l-real.txt`, `ps-ef.txt`, `ps-aux-real.txt`, `ps-real.txt`, `email-thread.txt`, `ls-real.txt` | — | — | REFUSED (no win) |
+
+**3 of 10 candidate lanes, −66 tokens total, round trip byte-exact on all ten** (including
+the refusals — `rt` is checked before the win gate, not after).
+
+**The negative is the interesting half.** `ps-ef.txt` has *larger* raw savings than the
+winner (−156 vs −84) and still loses by +20; `ls-l-real.txt` has −185 raw and loses by +3.
+The frontier already prices their punctuation away because their timestamps repeat (ps-ef's
+START column is one date 39 times). HARMOS only wins where timestamps **vary**.
+
+**Greedy?** The rewrite is not — a deterministic ordered pass. The **acceptance search**
+is greedy: shapes admitted in specificity order, trimmed by a bounded repair loop (drop
+the least specific, re-test, ≤2 iterations). Deterministic and terminating; can return a
+locally-but-not-globally-optimal shape set.
+
+**Time- or CPU-bound?** **CPU-bound.** Linear regex passes; a single frontier encode
+dwarfs the whole HARMOS analysis. No I/O, no waiting.
+
+**Honest source.** Empirical and measured here. The property exploited — a separator
+between digit groups restarts the tokenizer's numeric chunk — is documented in
+**arXiv:2402.14903** (Singh & Strouse, *Tokenization counts*) and **arXiv:2402.01035**
+(*Getting the most out of your tokenizer*). No compression result is claimed from either;
+they are cited for tokenizer behaviour only.
+
+**Newly-solved mathematics, per lab (all 2026, all on the Erdős corpus).** **OpenAI**
+disproved the planar unit-distance conjecture (posed 1946) on 2026-05-20 — an infinite
+family at n^(1+δ), δ refined to 0.014 by Will Sawin, via Golod–Shafarevich and class
+field towers; verified by Noga Alon, Melanie Wood, Thomas Bloom. **Google DeepMind**'s
+AlphaProof Nexus (arXiv:2605.22763, 2026-05-21) solved **9 of 353** open Erdős problems
+plus 44 OEIS conjectures, Lean-verified, a few hundred dollars each; separately
+AlphaEvolve + Gemini Deep Think + AlphaProof with Tao and Gómez-Serrano found a new
+construction for the finite-field Kakeya conjecture. **Anthropic**'s Claude Mythos
+independently disproved the unit-distance conjecture over a weekend (2026-05-26) using
+isolated Claude Code instances with internet blocked — Daniel Litt rated it "a bit worse"
+than OpenAI's but valid, and it independently recovered OpenAI's approach too. **None of
+this yields a compression algorithm**, and I am not going to pretend otherwise. The
+transferable idea remains methodological: machine-checked claims, which is what this
+stack's round-trip gates are.
+
+**Frontier re-confirmed this turn.** `tagstackFrontier` re-run on the lanes X81 touches:
+psql-output 244, metrics.tsv 210, cue-sheet.md 163, prices.csv 133, ls-l-real 1497,
+ps-ef 315, ps-aux-real 1051, ps-real 397, email-thread 488, ls-real 433. Note the
+outstanding ±1: `ls-l-real` reads **1497** here and **1476** in the X78/X79/X80 table —
+unresolved, and flagged rather than papered over.
+
+Stated in full in `docs/codec-abbreviations.md` §X81 and `bench/x81/REPORT.md`.

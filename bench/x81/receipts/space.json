@@ -1,0 +1,38 @@
+[
+ {
+  "lane": "ls-l-real.txt",
+  "F": 1497,
+  "sites": 114,
+  "adj": 55,
+  "rt": false,
+  "after": 1477,
+  "d": -20
+ },
+ {
+  "lane": "dpkg-l.txt",
+  "F": 674,
+  "sites": 1,
+  "adj": 64,
+  "rt": false,
+  "after": 701,
+  "d": 27
+ },
+ {
+  "lane": "ps-aux-real.txt",
+  "F": 1051,
+  "sites": 8,
+  "adj": 20,
+  "rt": false,
+  "after": 1061,
+  "d": 10
+ },
+ {
+  "lane": "kb-article.txt",
+  "F": 622,
+  "sites": 1,
+  "adj": 0,
+  "rt": true,
+  "after": 634,
+  "d": 12
+ }
+]

@@ -1,0 +1,55 @@
+[
+ {
+  "lane": "psql-output.txt",
+  "F": 244,
+  "counts": {
+   "d8": 24
+  },
+  "rt": true,
+  "raw": -72,
+  "netFull": -27,
+  "cFull": 34,
+  "netTerse": -32,
+  "cTerse": 29
+ },
+ {
+  "lane": "cue-sheet.md",
+  "F": 163,
+  "counts": {
+   "c6": 28
+  },
+  "rt": true,
+  "raw": -84,
+  "netFull": 12,
+  "cFull": 34,
+  "netTerse": 11,
+  "cTerse": 33
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "F": 1496,
+  "counts": {
+   "lsy": 108,
+   "lst": 41
+  },
+  "rt": true,
+  "raw": -185,
+  "netFull": 29,
+  "cFull": 50,
+  "netTerse": 19,
+  "cTerse": 36
+ },
+ {
+  "lane": "metrics.tsv",
+  "F": 210,
+  "counts": {
+   "dt14T": 24
+  },
+  "rt": true,
+  "raw": -144,
+  "netFull": 21,
+  "cFull": 39,
+  "netTerse": 12,
+  "cTerse": 30
+ }
+]
