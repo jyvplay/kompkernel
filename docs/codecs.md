@@ -5434,74 +5434,57 @@ Stated in full in `docs/codec-abbreviations.md` §X80 and `bench/x80/REPORT.md`.
 
 ## X81 — HARMOS
 
-**One line.** A timestamp is mostly punctuation: delete the separators inside fixed-width
-compound tokens and declare the shape once — `§X81 ~8=YYYYMMDD.` — and the reader
-re-inserts them.
+`key: 'harmos'` · family `exact` · fidelity `exact` · `src/lib/omega/harmos.ts`
 
-**Mechanic.** PARATAXIS (X80) removed padding *between* columns; HARMOS removes
-separators *inside* a field. Same claim one level down: a separator recoverable from a
-declared width is not information. Forms are packed sequentially (most specific first)
-and unpacked in **exact reverse order**, each tagged by marker **and** digit-run length so
-no inverse can consume another payload: `%20261107142201`, `~20261107`, `^000312`,
-`&Apr14!2017`, `@Jan0208:00`.
+Lossless separator elision inside a compound token. A date, a time or a timestamp is a
+fixed number of fixed-width fields joined by punctuation, and every hyphen, colon and
+separator run is an o200k token carrying no information the digits do not already carry.
+HARMOS deletes the separators and declares the shape once — `§X81 ~8=YYYYMMDD.` — and the
+reader re-inserts them. This is PARATAXIS's claim moved one level down: X80 removed the
+geometry *between* columns, X81 removes it *inside* a field.
 
-**The result that matters is the contract, not the packing.** The packing is nearly free;
-the contract is the whole cost. On the *same transform on the same lane*, shrinking the
-declaration from 34 tokens to 9–13 turns a loss into a win: psql-output −27 → **−52**,
-cue-sheet +12 → **−8**, metrics +21 → **−4**. The contract is therefore **adaptive**,
-naming only the shapes a lane actually contains. An earlier fixed-contract draft (95
-tokens) lost on *every* lane, by +17 to +65.
+**Packing.** Forms are applied sequentially, most specific first, and unpacked in **exact
+reverse order**. Each shape is tagged by marker **and** by digit-run length, longer runs
+matched before shorter, so no inverse can consume another payload:
 
-**Measured, cold, against the real frontier, driving the shipped `src/lib/omega/harmos.ts`:**
+| source | packed | tag |
+|---|---|---|
+| `2026-11-07T14:22:01` | `%20261107142201` | `%` + 14 digits |
+| `2026-11-07 14:22:01` | `~20261107142201` | `~` + 14 digits |
+| `2026-11-07` | `~20261107` | `~` + 8 digits |
+| `00:03:12` | `^000312` | `^` + 6 digits |
+| `08:00` | `^0800` | `^` + 4 digits |
+| `Apr 14  2017` | `&Apr14!2017` | `&` + Mon + DD + `!` + YYYY |
+| `Jan  2 08:00` | `@Jan0208:00` | `@` + Mon + DD + HH:MM |
 
-| lane | frontier | HARMOS | Δ |
-|---|---:|---:|---:|
-| `psql-output.txt` | 244 | **193** | **−51** |
-| `cue-sheet.md` | 163 | **152** | **−11** |
-| `metrics.tsv` | 210 | **206** | **−4** |
-| `prices.csv`, `ls-l-real.txt`, `ps-ef.txt`, `ps-aux-real.txt`, `ps-real.txt`, `email-thread.txt`, `ls-real.txt` | — | — | REFUSED (no win) |
+**Gates:** marker-absence G1 (a source already containing `% ~ & @ ^` is refused, never
+escaped) · must remove a character · byte-exact round trip · byte-exact two-layer round
+trip · strict win · bounded greedy repair (≤ 2 iterations).
 
-**3 of 10 candidate lanes, −66 tokens total, round trip byte-exact on all ten** (including
-the refusals — `rt` is checked before the win gate, not after).
+**Measured — 3 of 10 candidate lanes fire, −66 total, rt exact on all 10:**
 
-**The negative is the interesting half.** `ps-ef.txt` has *larger* raw savings than the
-winner (−156 vs −84) and still loses by +20; `ls-l-real.txt` has −185 raw and loses by +3.
-The frontier already prices their punctuation away because their timestamps repeat (ps-ef's
-START column is one date 39 times). HARMOS only wins where timestamps **vary**.
+| lane | frontier | HARMOS | Δ | forms |
+|---|---:|---:|---:|---|
+| `psql-output.txt` | 244 | **193** | **−51** (−20.9 %) | `d8` ×24 |
+| `cue-sheet.md` | 163 | **152** | **−11** (−6.7 %) | `c6` ×28 |
+| `metrics.tsv` | 210 | **206** | **−4** (−1.9 %) | `dt14T` ×24 |
+| `prices.csv` | 133 | 133 | REFUSED | `d8` ×30 |
+| `ls-l-real.txt` | 1497 | 1497 | REFUSED | `lsy` ×108, `lst` ×41 |
+| `ps-ef.txt` | 315 | 315 | REFUSED | `c6` ×39, `c4` ×39 |
+| `ps-aux-real.txt` | 1051 | 1051 | REFUSED | `c4` ×59 |
+| `ps-real.txt` | 397 | 397 | REFUSED | `c4` ×39 |
+| `email-thread.txt` | 488 | 488 | REFUSED | `d8` ×4, `c4` ×4 |
+| `ls-real.txt` | 433 | 433 | REFUSED | `lst` ×14, `lsy` ×23 |
 
-**Greedy?** The rewrite is not — a deterministic ordered pass. The **acceptance search**
-is greedy: shapes admitted in specificity order, trimmed by a bounded repair loop (drop
-the least specific, re-test, ≤2 iterations). Deterministic and terminating; can return a
-locally-but-not-globally-optimal shape set.
+**The refusals carry the information.** `ps-ef.txt` has the largest raw saving of any lane
+(−156) and still loses by +20, because its timestamps repeat and the frontier's row
+machinery already prices them. HARMOS wins only where timestamps **vary**.
 
-**Time- or CPU-bound?** **CPU-bound.** Linear regex passes; a single frontier encode
-dwarfs the whole HARMOS analysis. No I/O, no waiting.
+**The contract is adaptive, and that is the result.** Packing is nearly free; the contract
+is the whole cost. On the same transform on the same lane, shortening the declaration from
+34 tokens to 9–13 flips three lanes: `psql-output` −27 → **−52**, `cue-sheet` +12 →
+**−8**, `metrics` +21 → **−4**. A fixed 95-token contract lost on every lane.
 
-**Honest source.** Empirical and measured here. The property exploited — a separator
-between digit groups restarts the tokenizer's numeric chunk — is documented in
-**arXiv:2402.14903** (Singh & Strouse, *Tokenization counts*) and **arXiv:2402.01035**
-(*Getting the most out of your tokenizer*). No compression result is claimed from either;
-they are cited for tokenizer behaviour only.
-
-**Newly-solved mathematics, per lab (all 2026, all on the Erdős corpus).** **OpenAI**
-disproved the planar unit-distance conjecture (posed 1946) on 2026-05-20 — an infinite
-family at n^(1+δ), δ refined to 0.014 by Will Sawin, via Golod–Shafarevich and class
-field towers; verified by Noga Alon, Melanie Wood, Thomas Bloom. **Google DeepMind**'s
-AlphaProof Nexus (arXiv:2605.22763, 2026-05-21) solved **9 of 353** open Erdős problems
-plus 44 OEIS conjectures, Lean-verified, a few hundred dollars each; separately
-AlphaEvolve + Gemini Deep Think + AlphaProof with Tao and Gómez-Serrano found a new
-construction for the finite-field Kakeya conjecture. **Anthropic**'s Claude Mythos
-independently disproved the unit-distance conjecture over a weekend (2026-05-26) using
-isolated Claude Code instances with internet blocked — Daniel Litt rated it "a bit worse"
-than OpenAI's but valid, and it independently recovered OpenAI's approach too. **None of
-this yields a compression algorithm**, and I am not going to pretend otherwise. The
-transferable idea remains methodological: machine-checked claims, which is what this
-stack's round-trip gates are.
-
-**Frontier re-confirmed this turn.** `tagstackFrontier` re-run on the lanes X81 touches:
-psql-output 244, metrics.tsv 210, cue-sheet.md 163, prices.csv 133, ls-l-real 1497,
-ps-ef 315, ps-aux-real 1051, ps-real 397, email-thread 488, ls-real 433. Note the
-outstanding ±1: `ls-l-real` reads **1497** here and **1476** in the X78/X79/X80 table —
-unresolved, and flagged rather than papered over.
-
-Stated in full in `docs/codec-abbreviations.md` §X81 and `bench/x81/REPORT.md`.
+**Greedy?** The rewrite is not — a deterministic ordered pass. The **acceptance search** is
+greedy with a bounded repair loop. **CPU-bound.** Cited for tokenizer behaviour only:
+arXiv:2402.14903, arXiv:2402.01035.
