@@ -1,0 +1,218 @@
+[
+ {
+  "lane": "uptime-w.txt",
+  "tx": "rotR1",
+  "base": 80,
+  "after": 96,
+  "d": 16,
+  "exact": true
+ },
+ {
+  "lane": "uptime-w.txt",
+  "tx": "revfields",
+  "base": 80,
+  "after": 94,
+  "d": 14,
+  "exact": true
+ },
+ {
+  "lane": "uptime-w.txt",
+  "tx": "squeeze2sp",
+  "base": 80,
+  "after": 85,
+  "d": 5,
+  "exact": true
+ },
+ {
+  "lane": "lsblk.txt",
+  "tx": "rotR1",
+  "base": 60,
+  "after": 78,
+  "d": 18,
+  "exact": true
+ },
+ {
+  "lane": "lsblk.txt",
+  "tx": "revfields",
+  "base": 60,
+  "after": 75,
+  "d": 15,
+  "exact": true
+ },
+ {
+  "lane": "lsblk.txt",
+  "tx": "squeeze2sp",
+  "base": 60,
+  "after": 70,
+  "d": 10,
+  "exact": true
+ },
+ {
+  "lane": "free-m.txt",
+  "tx": "rotR1",
+  "base": 76,
+  "after": 88,
+  "d": 12,
+  "exact": true
+ },
+ {
+  "lane": "free-m.txt",
+  "tx": "revfields",
+  "base": 76,
+  "after": 86,
+  "d": 10,
+  "exact": true
+ },
+ {
+  "lane": "free-m.txt",
+  "tx": "squeeze2sp",
+  "base": 76,
+  "after": 75,
+  "d": -1,
+  "exact": true
+ },
+ {
+  "lane": "vmstat.txt",
+  "tx": "rotR1",
+  "base": 149,
+  "after": 165,
+  "d": 16,
+  "exact": true
+ },
+ {
+  "lane": "vmstat.txt",
+  "tx": "revfields",
+  "base": 149,
+  "after": 161,
+  "d": 12,
+  "exact": true
+ },
+ {
+  "lane": "vmstat.txt",
+  "tx": "squeeze2sp",
+  "base": 149,
+  "after": 140,
+  "d": -9,
+  "exact": true
+ },
+ {
+  "lane": "df-h.txt",
+  "tx": "rotR1",
+  "base": 171,
+  "after": 183,
+  "d": 12,
+  "exact": true
+ },
+ {
+  "lane": "df-h.txt",
+  "tx": "revfields",
+  "base": 171,
+  "after": 181,
+  "d": 10,
+  "exact": true
+ },
+ {
+  "lane": "df-h.txt",
+  "tx": "rightalign",
+  "base": 171,
+  "after": 191,
+  "d": 20,
+  "exact": true
+ },
+ {
+  "lane": "df-h.txt",
+  "tx": "squeeze2sp",
+  "base": 171,
+  "after": 166,
+  "d": -5,
+  "exact": true
+ },
+ {
+  "lane": "psql-output.txt",
+  "tx": "pipe2tab",
+  "base": 244,
+  "after": 250,
+  "d": 6,
+  "exact": true
+ },
+ {
+  "lane": "psql-output.txt",
+  "tx": "rotR1",
+  "base": 244,
+  "after": 264,
+  "d": 20,
+  "exact": true
+ },
+ {
+  "lane": "psql-output.txt",
+  "tx": "revfields",
+  "base": 244,
+  "after": 255,
+  "d": 11,
+  "exact": true
+ },
+ {
+  "lane": "psql-output.txt",
+  "tx": "rightalign",
+  "base": 244,
+  "after": 265,
+  "d": 21,
+  "exact": true
+ },
+ {
+  "lane": "psql-output.txt",
+  "tx": "squeeze2sp",
+  "base": 244,
+  "after": 249,
+  "d": 5,
+  "exact": true
+ },
+ {
+  "lane": "metrics.tsv",
+  "tx": "tab2pipe",
+  "base": 210,
+  "after": 223,
+  "d": 13,
+  "exact": true
+ },
+ {
+  "lane": "metrics.tsv",
+  "tx": "rightalign",
+  "base": 210,
+  "after": 244,
+  "d": 34,
+  "exact": true
+ },
+ {
+  "lane": "findmnt.txt",
+  "tx": "pipe2tab",
+  "base": 444,
+  "after": 448,
+  "d": 4,
+  "exact": true
+ },
+ {
+  "lane": "findmnt.txt",
+  "tx": "rotR1",
+  "base": 444,
+  "after": 454,
+  "d": 10,
+  "exact": true
+ },
+ {
+  "lane": "findmnt.txt",
+  "tx": "revfields",
+  "base": 444,
+  "after": 464,
+  "d": 20,
+  "exact": true
+ },
+ {
+  "lane": "findmnt.txt",
+  "tx": "squeeze2sp",
+  "base": 444,
+  "after": 383,
+  "d": -61,
+  "exact": true
+ }
+]

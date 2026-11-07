@@ -1,0 +1,56 @@
+[
+ {
+  "lane": "findmnt.txt",
+  "F": 444,
+  "after": 422,
+  "d": -22,
+  "applied": true,
+  "exact": true,
+  "notes": "arm A(in), widths 56 18 12, 23/28 lines, 1189 chars removed, message 444->422 (-22)"
+ },
+ {
+  "lane": "kubectl-get-pods.txt",
+  "F": 326,
+  "after": 304,
+  "d": -22,
+  "applied": true,
+  "exact": true,
+  "notes": "arm A(in), widths 37 8 12 11 8 16, 23/24 lines, 791 chars removed, message 326->304 (-22)"
+ },
+ {
+  "lane": "dpkg-l.txt",
+  "F": 673,
+  "after": 651,
+  "d": -22,
+  "applied": true,
+  "exact": true,
+  "notes": "arm A(in), widths 4 30 31 13, 35/42 lines, 1677 chars removed, message 673->651 (-22)"
+ },
+ {
+  "lane": "df-h.txt",
+  "F": 171,
+  "after": 171,
+  "d": 0,
+  "applied": false,
+  "exact": true,
+  "notes": "refused: no win (best 183 >= frontier 171); widths 17 6 6 6"
+ },
+ {
+  "lane": "ps-aux-real.txt",
+  "F": 1051,
+  "after": 1051,
+  "d": 0,
+  "applied": false,
+  "exact": true,
+  "notes": "refused: no win (best 1102 >= frontier 1051); widths 14 4 5 9 6 11 5 8"
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "F": 1496,
+  "after": 1496,
+  "d": 0,
+  "applied": false,
+  "exact": true,
+  "notes": "refused: no win (best 1563 >= frontier 1496); widths 12 18 8 3"
+ }
+]

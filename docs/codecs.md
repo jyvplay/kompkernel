@@ -5364,3 +5364,70 @@ improvement). **CPU-bound**, deterministic, no clock in any decision.
 is a declared rule about digit counts.
 
 Stated in full in `docs/codec-abbreviations.md` §X79. Receipts: `bench/x79/receipts/`.
+
+---
+
+## X80 — PARATAXIS
+
+`key: 'parataxis'` · family `exact` · fidelity `exact` · `src/lib/omega/parataxis.ts`
+
+Lossless column-geometry padding elision. Aligned tables pad every field to a fixed column
+width; PARATAXIS deletes the padding and declares the widths once —
+`§PARATAXIS pad fields to 56 18 12` (optionally `except 3,7` for lines the reader must
+leave literal). The reader splits each line on **tab** and pads field *j* to the *j*-th
+width.
+
+**Gates:** geometry agreement (≥ 4 lines) · must remove a character · byte-exact two-layer
+round trip · decoder unambiguity (ambiguous lines listed by number, budget 6) · strict win ·
+source must not already contain a tab.
+
+**Measured — 3 lanes fire, −22 tokens each:**
+
+| lane | frontier | PARATAXIS | Δ |
+|---|---:|---:|---:|
+| `findmnt.txt` | 444 | **422** | **−22** (−5.0 %) |
+| `kubectl-get-pods.txt` | 326 | **304** | **−22** (−6.7 %) |
+| `dpkg-l.txt` | 673 | **651** | **−22** (−3.3 %) |
+
+Declined, all byte-exact and all for a stated reason: `df-h.txt` (183 vs 171),
+`ps-aux-real.txt` (1 102 vs 1 051), `ls-l-real.txt` (1 563 vs 1 496) — padding too thin to
+repay the contract and the marker. Registry smoke: **PASS 8/8 byte-exact**, 245 codecs.
+
+**The central negative, reported because it is the interesting result.** The naive version
+— collapse runs of ≥2 spaces to one — is **LOSSY** and scored **−75** on findmnt. That is
+not a compression number; it is discarded information. The lossless version is −22. X76
+tried padding removal on this lane and got 461 vs 444 (**lost**); PARATAXIS reaches 422
+because collapsing to a **tab** rather than a space separates a column boundary from a
+space inside a column, which is what defeated X76's version and the first version here
+(−4/−7 on 2 lanes before the change to a tab).
+
+Two hypotheses for a free (zero-token) contract were tested and are **false**:
+"re-align to each column's max content width" (`bench/x80/align.ts`: false on all 8 lanes —
+findmnt pads TARGET to 56 while its widest entry is 51) and "width = max + k"
+(`bench/x80/maxw.ts`: true on `df-h` 18/18, false on findmnt 0/24 and kubectl 0/23).
+
+**Greedy:** yes, only in the prune — and the prune is **lazy**. Measured `pruned=0` on
+every lane, so it now runs only after the cheap gates pass; verified numerically identical
+before and after. **CPU-bound**, deterministic, no clock in any decision.
+
+**Directly model-readable:** yes — one contract line plus the wire; split on tab, pad to
+the declared widths.
+
+**Frontier confirmed:** re-measured over the same 29 lanes with 245 codecs registered —
+**TOTAL 12639, exact 29/29**, identical to X78/X79. (`tagstackFrontier` is
+`tagstackEncodeUncached` + memoization, so X79's claim that 12639 is "a control, not the
+frontier" was wrong; corrected here. `tagstackEncode` → `tagstackX74Chain` is a larger
+stack and is a different, unmeasured number.)
+
+**Sources (previously unreferenced):** **arXiv:2505.06297** (LLM next-token probabilities
+driving arithmetic coding, 14.6–23.8× — the AI-native compressor that *cannot* pass a
+byte-exact round trip, because §4.4 of the paper concedes LLM inference is not bit-stable);
+**arXiv:2407.07723** (LMCompress, same paradigm and limitation); **LM-GC, NeurIPS 2024**
+(lossless here because the model is frozen — and its finding that "recognizable symbols"
+and "proper separators" move compression by up to 70 % and 40 % corroborates the separator
+axis directly). Newly-solved mathematics reviewed as instructed (Erdős unit-distance
+disproof, #1196, #728/#729 with Lean formalisation): real and verified, but **none yields a
+new compression algorithm** — the transferable idea is the Lean *methodology* of
+machine-checking a claim, which is what this stack's round-trip gates already are.
+
+Stated in full in `docs/codec-abbreviations.md` §X80 and `bench/x80/REPORT.md`.

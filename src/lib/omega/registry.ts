@@ -220,6 +220,7 @@ import { syntomiaEncode } from './syntomia';
 import { brachylogiaEncode } from './brachylogia';
 import { pinaxEncode } from './pinax';
 import { merismosEncode } from './merismos';
+import { parataxisEncode } from './parataxis';
 import { sphragisEncode } from './sphragis';
 import { kermaEncode } from './kerma';
 import { eustochiaEncode } from './eustochia';
@@ -1627,6 +1628,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'brachylogia', label: '↯ BRACHYLOGIA (X75: the decoder INSTRUCTION is a named part of the message, contracted by a fixed substitution table and re-verified by invertibility + element coverage + strict win)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = brachylogiaEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
+    },
+    {
+      key: 'parataxis', label: '⫴ PARATAXIS (X80: lossless column-geometry padding elision — aligned tables pad every field to a fixed column width, and that padding is pure geometry; delete it and declare the widths once, e.g. `§PARATAXIS pad fields to 56 18 12`; lines that would be ambiguous for the reader are listed by number and left literal; guarded by geometry agreement, byte-exact two-layer round trip, decoder-unambiguity and strict win)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = parataxisEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
     },
     {
       key: 'sphragis', label: '⚃ SPHRAGIS (X79: generalised separator-shape elision — any run of hex-or-decimal groups over [ - : . / , ] with at most six groups, e.g. `100.00` -> `10000`, `2026-01-02` -> `20260102`, `00:1A:2B` -> `001A2B`; pays no marker per use, only one clause per shape; guarded by width-uniqueness, no-bare-collision, no-merge, word-boundary, byte-exact round trip and strict win)', family: 'exact', fidelity: 'exact',

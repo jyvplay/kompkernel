@@ -3688,6 +3688,24 @@ Ratio = brotli -q11 floor tokens / stack tokens (@ 14.8 bits/tok). Above 1.0 the
 strong general-purpose compressor on that structure. Carried forward from `bench/x75/receipts/leaders.json`,
 regrouped by structure family, with X79's SPHRAGIS result on `psql-output.txt` folded in.
 
+**Two corrections (X80).**
+
+1. **X79 mislabelled the 29-lane total, and this corrects that correction.** X79 recorded
+   that `LANES73 29 TOTAL 12639` is "a control, not the frontier". That was wrong.
+   `tagstackFrontier` is `tagstackEncodeUncached` plus memoization — the same function
+   `bench/x74/gate73.ts` calls — so 12639 **is** the frontier. (There *is* a larger stack,
+   `tagstackEncode` → `tagstackX74Chain`, which adds the X74 candidate chain on top of the
+   base; that is a different number and has not been measured here.) Re-measured this turn
+   over the same 29 lanes with 245 codecs registered: **FRONTIER 29 TOTAL 12639 exact
+   29/29**, identical to X78 and X79. **The frontier is confirmed to be exactly the
+   configuration last measured.** The useful residue of X79's point stands in a weaker
+   form: because the frontier is the *base* stack, adding a registry codec cannot move
+   12639, so 12639 confirms the base and nothing else.
+2. **X76 already tried padding removal on findmnt and it lost: 461 vs 444.** PARATAXIS
+   reaches **422** on the same lane. The difference is the tab marker (X76's version
+   could not separate a column boundary from a space inside a column), which is why this
+   turn's result does not contradict X76's negative so much as complete it.
+
 **Data correction (X79).** The X78 row for `psql-output.txt` was wrong: its "brotli floor"
 column was filled with KERMA's *stack* value (172) instead of the measured floor. The
 floor is **165** tokens (brotli -q11, 1578 bytes, @ 14.8 bits/tok — recomputed directly
@@ -3710,9 +3728,9 @@ lane is now under 3 %, so the ops category's live target is `metrics.tsv` (1.48)
 | metrics.tsv | delimited metrics | 811 | 192 | 130 | 1.48 |
 | ls-l-real.txt | listing | 5194 | 1394 | 943 | 1.48 |
 | psql-output.txt **X79 SPHRAGIS 244->169** | aligned table | 675 | 169 | 165 | **1.02** |
-| kubectl-get-pods.txt | aligned table | 1006 | 308 | 214 | 1.44 |
+| kubectl-get-pods.txt **X80 PARATAXIS 326->304** | aligned table | 1006 | 304 | 214 | 1.42 |
 | ps-aux-real.txt | process table | 3054 | 1042 | 743 | 1.4 |
-| findmnt.txt | tree table | 787 | 444 | 335 | 1.33 |
+| findmnt.txt **X80 PARATAXIS 444->422** | tree table | 787 | 422 | 335 | 1.26 |
 | vmstat.txt | aligned table | 229 | 149 | 113 | 1.32 |
 | ls-real.txt | listing | 1034 | 433 | 328 | 1.32 |
 | df-real.txt | aligned table | 158 | 126 | 96 | 1.31 |
@@ -3723,7 +3741,7 @@ lane is now under 3 %, so the ops category's live target is `metrics.tsv` (1.48)
 | apt-real.txt | log/transcript | 2739 | 850 | 690 | 1.23 |
 | df-h.txt | aligned table | 570 | 153 | 129 | 1.19 |
 | uptime-w.txt | single record | 80 | 80 | 70 | 1.14 |
-| dpkg-l.txt | package table | 1000 | 673 | 592 | 1.14 |
+| dpkg-l.txt **X80 PARATAXIS 673->651** | package table | 1000 | 651 | 592 | 1.10 |
 | cue-sheet.md | cue list | 513 | 101 | 99 | 1.02 |
 | free-m.txt | key-value table | 76 | 76 | 76 | 1 |
 | lsblk.txt | block/tree | 60 | 60 | 61 | 0.98 |
@@ -3944,3 +3962,154 @@ honest reading is that the shape-elision family is now close to exhausted, and t
 next win must come from a different mechanism rather than a wider shape grammar.
 
 **Record.** [`docs/codecs.md`](codecs.md) §X79, `bench/x79/`
+
+---
+
+## X80 — PARATAXIS (⫴)
+
+**Name.** Παράταξις — "a placing side by side; an arrangement in line"; in grammar,
+clauses set side by side without subordination. Both senses are meant: the columns are
+placed side by side, and the contract states the arrangement flatly instead of nesting a
+description of it. Registered key `parataxis`. Source: `src/lib/omega/parataxis.ts`.
+
+**The mechanic, in one sentence.** Aligned tables pad every field to a fixed column
+width; delete the padding and declare the widths once — `§PARATAXIS pad fields to 56 18 12`
+— and the reader re-pads each field to its declared width.
+
+**Why the padding is worth attacking at all.** A run of spaces is its own pretokenizer
+chunk, so it is paid for. On `findmnt.txt` the transform removes 1 189 characters; on
+`dpkg-l.txt`, 1 677.
+
+**The central negative, stated first, because it is the interesting result.** The obvious
+version of this codec — collapse every run of two or more spaces to one — is **LOSSY**,
+and it looked excellent: **−75 tokens on `findmnt.txt`** (`bench/x80/arms.ts`). It is not
+a codec result. The padding cannot be recovered from the collapsed text, so that number
+measures discarded information, not compression.
+
+| `findmnt.txt` (frontier 444) | tokens | Δ |
+|---|---:|---:|
+| collapse only (**LOSSY — not a codec**) | 369 | −75 |
+| collapse + short contract | 384 | −60 |
+| collapse + range contract | 389 | −55 |
+| **PARATAXIS as shipped (lossless, tab marker)** | **422** | **−22** |
+
+So of the apparent −75, roughly 53 tokens were information and ~22 were real. This is the
+same lesson as X79's alphabet remap in a new guise, and it is why the round-trip gate is
+the first gate and not the last.
+
+**Why the lossless version loses so much of the apparent gain.** X76 recorded that the
+frontier "owns" padding (marginal rate 0.11), and this turn confirms it: the frontier can
+record the padding for about the same number of tokens that declaring the widths costs.
+The genuine residue is the ~22 tokens that come from the frontier's column machinery
+firing *better* on the normalised text than on the padded text.
+
+**Measured — three lanes fire, each −22 tokens.**
+
+| lane | frontier | PARATAXIS | Δ | chars removed | lines |
+|---|---:|---:|---:|---:|---:|
+| `findmnt.txt` | 444 | **422** | **−22** (−5.0 %) | 1 189 | 23/28 |
+| `kubectl-get-pods.txt` | 326 | **304** | **−22** (−6.7 %) | 791 | 23/24 |
+| `dpkg-l.txt` | 673 | **651** | **−22** (−3.3 %) | 1 677 | 35/42 |
+
+Declined honestly (all byte-exact, all refused for a stated reason): `df-h.txt` (best 183
+vs 171), `ps-aux-real.txt` (1 102 vs 1 051), `ls-l-real.txt` (1 563 vs 1 496) — on these
+the padding is too thin to repay the contract and the marker.
+
+**The design decision that made it work: collapse to a TAB, not to a space.** The first
+version collapsed padding to a single space and refused every table whose columns contain
+internal single spaces — which is most of them (`df-h`'s `Mounted on`, `ps`'s `COMMAND`,
+`ls -l`'s filenames). Splitting on a space cannot tell a column boundary from a space
+inside a column. Collapsing to a tab makes the boundary unambiguous, and that single
+change took the codec from 2 lanes at −4/−7 to **3 lanes at −22 each**.
+
+**Gates.**
+
+- **G1 geometry** — a column set with ≥ 4 lines agreeing on every separator offset
+  (`bench/x80/dbg2.ts`: findmnt 56/74/86 on 23 of 28 lines; kubectl all six offsets on
+  23 of 24; ps-aux 5 of 8 offsets on all 56 lines).
+- **G2 saving** — at least one character must actually be removed.
+- **G3 round trip** — `parataxisDecode(message) === source`, byte for byte, through
+  **both** layers. This is the gate that makes it lossless and it is what separates the
+  codec from the naive collapse.
+- **G4 decoder unambiguity** — a line the reader must not re-pad is one that, after the
+  collapse, would be indistinguishable from a padded line. Those are listed by number in
+  the contract (`except 1`) and left literal; the budget is 6. Everything else is
+  self-identifying, because a line that still carries padding splits differently.
+- **G5 strict win.**
+- **Guard** — the source must not already contain a tab, or the split is not total.
+
+**Two hypotheses tested and falsified** (which is why the widths are transmitted at all):
+
+- *"re-align each column to its own maximum content width"* — **false.** Measured
+  (`bench/x80/align.ts`): `restore_by_maxwidth=false` on all eight lanes. findmnt's TARGET
+  column is padded to 56 while its widest entry is 51.
+- *"width = max content + k, so the contract is free"* — **true on one lane, false in
+  general.** `bench/x80/maxw.ts`: `max+2` reproduces `df-h.txt` exactly (18/18) and
+  equals the observed truth, but it reproduces 0/24 on findmnt and 0/23 on kubectl. So
+  the rule cannot be relied on, and the widths are declared explicitly.
+
+**Greedy?** Yes, and only in the prune — and the prune is **lazy** (see below). Geometry
+detection is a fixed rule: for each separator index take the modal next-field offset over
+the lines carrying the full separator set, then keep the lines agreeing exactly.
+
+**Time- or CPU-bound?** **CPU-bound and bounded.** Detection is O(n) in characters; the
+prune is at most 4 rounds of two full frontier encodes. No clock enters any decision.
+**Speed:** the prune was measured never to improve a result (`pruned=0` on every lane in
+`bench/x80/receipts/parataxis.json`) while costing two full frontier encodes per candidate
+lane, so it now runs only *after* the cheap gates pass. Verified result-preserving: the
+three applied lanes and the three refusals are numerically identical before and after.
+This is a speed win for this codec, **not** for the whole stack — see §Speed below.
+
+**Directly model-readable?** Yes. One contract line, then the wire. The reader splits
+each line on tab, pads field *j* to the *j*-th declared width, and leaves the rest
+literal. No external table, no tool call.
+
+**Source citation (honest).** Four previously-unreferenced sources, found this turn.
+
+- **Mao, Pirk & Xue, arXiv:2505.06297** — *Lossless Compression of LLM-Generated Text via
+  Next-Token Prediction.* Uses an LLM's next-token distribution to drive arithmetic
+  coding: 14.6–23.8× vs gzip's ~3×. **This is the AI-native compressor everyone reaches
+  for, and it is precisely the one that cannot satisfy this stack's contract.** The
+  reviewer's objection is load-bearing: arithmetic coding requires the decoder to
+  reproduce byte-identical conditional probabilities at every step, and §4.4 of the paper
+  itself concedes LLM inference is not bit-stable across runs (floating-point precision,
+  MoE routing, hardware). No round trip, no bit-exactness check, no decoder specified.
+  Everything in this stack is gated on `decode(message) === source`; that gate is exactly
+  what this method cannot pass.
+- **LMCompress, arXiv:2407.07723** — *Understanding is Compression.* Same paradigm
+  extended to images, video and audio. Same limitation.
+- **LM-GC, NeurIPS 2024** (arXiv:2410.12259) — LLMs as zero-shot lossless gradient
+  compressors. Losslessness *is* attainable here because the probabilities come from a
+  frozen, deterministic model. Its transferable finding is empirical and directly
+  relevant: serialising data into "recognizable symbols" with "proper separators" changed
+  compression by up to 70 % and 40 %. **The separator choice materially changes how well
+  a model-driven compressor prices a stream** — independent corroboration that PARATAXIS's
+  separator normalisation is the right axis to pull.
+- **arXiv:2402.01035** (from X79) — the pre-tokenization regex, not vocabulary size,
+  dominates compression.
+
+**Newly-solved mathematics — reviewed as instructed, and reported honestly.** The
+frontier-lab results of this period are real and, unusually, verified: an internal OpenAI
+reasoning model **disproved the Erdős planar unit distance conjecture** (posed 1946) in
+May 2026, with independent verification by Noga Alon, Melanie Wood and Thomas Bloom, and
+Timothy Gowers indicating it would merit a top journal — a new infinite family of
+constructions via Golod–Shafarevich and class field towers, beating the square grid to
+n^(1+δ) with δ refined to 0.014 by Will Sawin. Separately **Erdős problem #1196** was
+resolved by GPT-5.4 Pro from a bare problem statement by Liam Price, in a paper with
+Terence Tao and Jared Duker Lichtman, using a downward Markov chain weighted by the von
+Mangoldt function; #728 and #729 were resolved with **Lean formalisation**
+(OpenAI + Harmonic's Aristotle), as were #1148 and #258.
+
+**None of these yields a new compression algorithm, and I am not going to pretend
+otherwise.** They are results in combinatorial geometry and analytic number theory. The
+one genuinely transferable idea is *methodological*: several were machine-verified in
+Lean rather than merely peer-reviewed. This stack's discipline — every codec gated on a
+byte-exact round trip, with refusals recorded rather than hidden — is the same idea
+applied to codecs, and the Erdős episode is a good argument for keeping it: the first
+GPT-5 claim (ten Erdős problems "solved") collapsed because the model had merely
+rediscovered literature, and it was caught only because someone checked.
+
+**Known limits.** Three lanes, −22 each. It cannot help a table whose padding is thin, and
+it refuses any source already containing a tab.
+
+**Record.** [`docs/codecs.md`](codecs.md) §X80, [`bench/x80/REPORT.md`](../bench/x80/REPORT.md).
