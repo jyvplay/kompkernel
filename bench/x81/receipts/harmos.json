@@ -1,0 +1,104 @@
+[
+ {
+  "lane": "psql-output.txt",
+  "F": 244,
+  "M": 193,
+  "applied": true,
+  "rt": true,
+  "dec": false,
+  "forms": [
+   "d8"
+  ],
+  "contract": 10,
+  "notes": "arm A(in), shapes d8, 24 sites, 24 chars removed, contract 10 tok, message 244->193 (-51)"
+ },
+ {
+  "lane": "prices.csv",
+  "F": 133,
+  "M": 133,
+  "applied": false,
+  "rt": true,
+  "dec": false,
+  "notes": "refused: no win (best 133 >= frontier 133); shapes d8, contract 10 tok"
+ },
+ {
+  "lane": "metrics.tsv",
+  "F": 210,
+  "M": 206,
+  "applied": true,
+  "rt": true,
+  "dec": false,
+  "forms": [
+   "dt14T"
+  ],
+  "contract": 14,
+  "notes": "arm A(in), shapes dt14T, 24 sites, 96 chars removed, contract 14 tok, message 210->206 (-4)"
+ },
+ {
+  "lane": "cue-sheet.md",
+  "F": 163,
+  "M": 152,
+  "applied": true,
+  "rt": true,
+  "dec": false,
+  "forms": [
+   "c6"
+  ],
+  "contract": 10,
+  "notes": "arm A(in), shapes c6, 28 sites, 28 chars removed, contract 10 tok, message 163->152 (-11)"
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "F": 1497,
+  "M": 1497,
+  "applied": false,
+  "rt": true,
+  "dec": false,
+  "notes": "refused: no win (best 1500 >= frontier 1497); shapes lsy,lst, contract 21 tok"
+ },
+ {
+  "lane": "ps-ef.txt",
+  "F": 315,
+  "M": 315,
+  "applied": false,
+  "rt": true,
+  "dec": false,
+  "notes": "refused: no win (best 327 >= frontier 315); shapes c6,c4, contract 15 tok"
+ },
+ {
+  "lane": "ps-aux-real.txt",
+  "F": 1051,
+  "M": 1051,
+  "applied": false,
+  "rt": true,
+  "dec": false,
+  "notes": "refused: source already contains marker [\"%\",\"&\"]"
+ },
+ {
+  "lane": "ps-real.txt",
+  "F": 397,
+  "M": 397,
+  "applied": false,
+  "rt": true,
+  "dec": false,
+  "notes": "refused: source already contains marker [\"%\"]"
+ },
+ {
+  "lane": "email-thread.txt",
+  "F": 488,
+  "M": 488,
+  "applied": false,
+  "rt": true,
+  "dec": false,
+  "notes": "refused: source already contains marker [\"@\"]"
+ },
+ {
+  "lane": "ls-real.txt",
+  "F": 433,
+  "M": 433,
+  "applied": false,
+  "rt": true,
+  "dec": false,
+  "notes": "refused: no win (best 453 >= frontier 433); shapes lsy,lst, contract 21 tok"
+ }
+]

@@ -1,0 +1,234 @@
+[
+ {
+  "lane": "lsblk.txt",
+  "sites": 1,
+  "blockedSites": 0,
+  "net": -13,
+  "usable": "x",
+  "blocked": ""
+ },
+ {
+  "lane": "kb-article.txt",
+  "sites": 1,
+  "blockedSites": 0,
+  "net": -13,
+  "usable": "t",
+  "blocked": ""
+ },
+ {
+  "lane": "uptime-w.txt",
+  "sites": 3,
+  "blockedSites": 1,
+  "net": -11,
+  "usable": "d,",
+  "blocked": ":"
+ },
+ {
+  "lane": "free-m.txt",
+  "sites": 1,
+  "blockedSites": 0,
+  "net": -13,
+  "usable": "d",
+  "blocked": ""
+ },
+ {
+  "lane": "vmstat.txt",
+  "sites": 2,
+  "blockedSites": 0,
+  "net": -12,
+  "usable": "td",
+  "blocked": ""
+ },
+ {
+  "lane": "unified-diff.patch",
+  "sites": 9,
+  "blockedSites": 10,
+  "net": -5,
+  "usable": ":=*",
+  "blocked": "x,"
+ },
+ {
+  "lane": "df-h.txt",
+  "sites": 0,
+  "blockedSites": 0,
+  "net": -14,
+  "usable": "",
+  "blocked": ""
+ },
+ {
+  "lane": "df-real.txt",
+  "sites": 1,
+  "blockedSites": 0,
+  "net": -13,
+  "usable": ",",
+  "blocked": ""
+ },
+ {
+  "lane": "du-real.txt",
+  "sites": 0,
+  "blockedSites": 0,
+  "net": -14,
+  "usable": "",
+  "blocked": ""
+ },
+ {
+  "lane": "node-help.txt",
+  "sites": 0,
+  "blockedSites": 0,
+  "net": -14,
+  "usable": "",
+  "blocked": ""
+ },
+ {
+  "lane": "findmnt.txt",
+  "sites": 0,
+  "blockedSites": 0,
+  "net": -14,
+  "usable": "",
+  "blocked": ""
+ },
+ {
+  "lane": "df-h.txt",
+  "sites": 0,
+  "blockedSites": 0,
+  "net": -14,
+  "usable": "",
+  "blocked": ""
+ },
+ {
+  "lane": "email-thread.txt",
+  "sites": 20,
+  "blockedSites": 4,
+  "net": 6,
+  "usable": "psdnrtey",
+  "blocked": ","
+ },
+ {
+  "lane": "llm-answer.md",
+  "sites": 18,
+  "blockedSites": 0,
+  "net": 4,
+  "usable": "ke#|:",
+  "blocked": ""
+ },
+ {
+  "lane": "markdown-table.md",
+  "sites": 30,
+  "blockedSites": 0,
+  "net": 16,
+  "usable": "|",
+  "blocked": ""
+ },
+ {
+  "lane": "psql-output.txt",
+  "sites": 72,
+  "blockedSites": 0,
+  "net": 58,
+  "usable": "|",
+  "blocked": ""
+ },
+ {
+  "lane": "prices.csv",
+  "sites": 0,
+  "blockedSites": 0,
+  "net": -14,
+  "usable": "",
+  "blocked": ""
+ },
+ {
+  "lane": "cue-sheet.md",
+  "sites": 84,
+  "blockedSites": 0,
+  "net": 70,
+  "usable": "|e",
+  "blocked": ""
+ },
+ {
+  "lane": "ps-ef.txt",
+  "sites": 0,
+  "blockedSites": 0,
+  "net": -14,
+  "usable": "",
+  "blocked": ""
+ },
+ {
+  "lane": "ls-real.txt",
+  "sites": 26,
+  "blockedSites": 49,
+  "net": 12,
+  "usable": ",lynt",
+  "blocked": "xpvr"
+ },
+ {
+  "lane": "json-pkg.txt",
+  "sites": 0,
+  "blockedSites": 0,
+  "net": -14,
+  "usable": "",
+  "blocked": ""
+ },
+ {
+  "lane": "code-ts.txt",
+  "sites": 10,
+  "blockedSites": 0,
+  "net": -4,
+  "usable": "=>?:+",
+  "blocked": ""
+ },
+ {
+  "lane": "dpkg-l.txt",
+  "sites": 1,
+  "blockedSites": 0,
+  "net": -13,
+  "usable": "m",
+  "blocked": ""
+ },
+ {
+  "lane": "ps-real.txt",
+  "sites": 1,
+  "blockedSites": 0,
+  "net": -13,
+  "usable": "F",
+  "blocked": ""
+ },
+ {
+  "lane": "kubectl-get-pods.txt",
+  "sites": 0,
+  "blockedSites": 0,
+  "net": -14,
+  "usable": "",
+  "blocked": ""
+ },
+ {
+  "lane": "metrics.tsv",
+  "sites": 0,
+  "blockedSites": 0,
+  "net": -14,
+  "usable": "",
+  "blocked": ""
+ },
+ {
+  "lane": "ps-aux-real.txt",
+  "sites": 9,
+  "blockedSites": 2,
+  "net": -5,
+  "usable": "l]fFh's\"",
+  "blocked": "ud"
+ },
+ {
+  "lane": "apt-real.txt",
+  "sites": 0,
+  "blockedSites": 119,
+  "net": -14,
+  "usable": "",
+  "blocked": "w"
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "sites": 52,
+  "blockedSites": 62,
+  "net": 38,
+  "usable": "lryp",
+  "blocked": "ntbvc"
+ }
+]

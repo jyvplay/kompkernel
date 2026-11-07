@@ -1,0 +1,82 @@
+[
+ {
+  "lane": "psql-output.txt",
+  "F": 244,
+  "counts": {
+   "d8": 24
+  },
+  "rt": true,
+  "raw": -72,
+  "netFull": -27,
+  "cFull": 34,
+  "netTerse": -52,
+  "cTerse": 9
+ },
+ {
+  "lane": "cue-sheet.md",
+  "F": 163,
+  "counts": {
+   "c6": 28
+  },
+  "rt": true,
+  "raw": -84,
+  "netFull": 12,
+  "cFull": 34,
+  "netTerse": -8,
+  "cTerse": 13
+ },
+ {
+  "lane": "metrics.tsv",
+  "F": 210,
+  "counts": {
+   "dt14T": 24
+  },
+  "rt": true,
+  "raw": -144,
+  "netFull": 21,
+  "cFull": 39,
+  "netTerse": -4,
+  "cTerse": 14
+ },
+ {
+  "lane": "prices.csv",
+  "F": 133,
+  "counts": {
+   "d8": 30
+  },
+  "rt": true,
+  "raw": -60,
+  "netFull": 24,
+  "cFull": 34,
+  "netTerse": -1,
+  "cTerse": 9
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "F": 1497,
+  "counts": {
+   "lsy": 108,
+   "lst": 41
+  },
+  "rt": true,
+  "raw": -185,
+  "netFull": 28,
+  "cFull": 50,
+  "netTerse": 3,
+  "cTerse": 21
+ },
+ {
+  "lane": "ps-ef.txt",
+  "F": 315,
+  "counts": {
+   "c6": 39,
+   "c4": 39
+  },
+  "rt": true,
+  "raw": -156,
+  "netFull": 38,
+  "cFull": 44,
+  "netTerse": 20,
+  "cTerse": 20
+ }
+]

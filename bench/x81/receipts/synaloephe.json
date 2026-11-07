@@ -1,0 +1,65 @@
+[
+ {
+  "lane": "psql-output.txt",
+  "F": 244,
+  "after": 244,
+  "d": 0,
+  "applied": false,
+  "exact": true,
+  "notes": "refused: no win (best 257 >= frontier 244); chars |"
+ },
+ {
+  "lane": "cue-sheet.md",
+  "F": 163,
+  "after": 163,
+  "d": 0,
+  "applied": false,
+  "exact": true,
+  "notes": "refused: no win (best 176 >= frontier 163); chars |e"
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "F": 1496,
+  "after": 1496,
+  "d": 0,
+  "applied": false,
+  "exact": true,
+  "notes": "refused: no win (best 1498 >= frontier 1496); chars rypl"
+ },
+ {
+  "lane": "markdown-table.md",
+  "F": 176,
+  "after": 176,
+  "d": 0,
+  "applied": false,
+  "exact": true,
+  "notes": "refused: no win (best 194 >= frontier 176); chars |"
+ },
+ {
+  "lane": "ls-real.txt",
+  "F": 433,
+  "after": 433,
+  "d": 0,
+  "applied": false,
+  "exact": true,
+  "notes": "refused: no win (best 449 >= frontier 433); chars ynl,t"
+ },
+ {
+  "lane": "email-thread.txt",
+  "F": 488,
+  "after": 488,
+  "d": 0,
+  "applied": false,
+  "exact": true,
+  "notes": "refused: no win (best 505 >= frontier 488); chars prntdesy"
+ },
+ {
+  "lane": "llm-answer.md",
+  "F": 674,
+  "after": 674,
+  "d": 0,
+  "applied": false,
+  "exact": true,
+  "notes": "refused: no win (best 685 >= frontier 674); chars |#ke:"
+ }
+]

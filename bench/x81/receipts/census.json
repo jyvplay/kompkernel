@@ -1,0 +1,205 @@
+[
+ {
+  "lane": "lsblk.txt",
+  "sites": 1,
+  "adj": 1,
+  "anySpaceBeforeDigit": 2,
+  "net": -12
+ },
+ {
+  "lane": "kb-article.txt",
+  "sites": 1,
+  "adj": 0,
+  "anySpaceBeforeDigit": 1,
+  "net": -11
+ },
+ {
+  "lane": "uptime-w.txt",
+  "sites": 1,
+  "adj": 1,
+  "anySpaceBeforeDigit": 4,
+  "net": -12
+ },
+ {
+  "lane": "free-m.txt",
+  "sites": 1,
+  "adj": 1,
+  "anySpaceBeforeDigit": 1,
+  "net": -12
+ },
+ {
+  "lane": "vmstat.txt",
+  "sites": 2,
+  "adj": 1,
+  "anySpaceBeforeDigit": 15,
+  "net": -11
+ },
+ {
+  "lane": "unified-diff.patch",
+  "sites": 2,
+  "adj": 42,
+  "anySpaceBeforeDigit": 21,
+  "net": -52
+ },
+ {
+  "lane": "df-h.txt",
+  "sites": 0,
+  "adj": 72,
+  "anySpaceBeforeDigit": 0,
+  "net": -84
+ },
+ {
+  "lane": "df-real.txt",
+  "sites": 0,
+  "adj": 1,
+  "anySpaceBeforeDigit": 1,
+  "net": -13
+ },
+ {
+  "lane": "du-real.txt",
+  "sites": 0,
+  "adj": 12,
+  "anySpaceBeforeDigit": 0,
+  "net": -24
+ },
+ {
+  "lane": "node-help.txt",
+  "sites": 0,
+  "adj": 14,
+  "anySpaceBeforeDigit": 0,
+  "net": -26
+ },
+ {
+  "lane": "findmnt.txt",
+  "sites": 0,
+  "adj": 4,
+  "anySpaceBeforeDigit": 0,
+  "net": -16
+ },
+ {
+  "lane": "df-h.txt",
+  "sites": 0,
+  "adj": 0,
+  "anySpaceBeforeDigit": 0,
+  "net": -12
+ },
+ {
+  "lane": "email-thread.txt",
+  "sites": 20,
+  "adj": 2,
+  "anySpaceBeforeDigit": 25,
+  "net": 6
+ },
+ {
+  "lane": "llm-answer.md",
+  "sites": 4,
+  "adj": 1,
+  "anySpaceBeforeDigit": 18,
+  "net": -9
+ },
+ {
+  "lane": "markdown-table.md",
+  "sites": 0,
+  "adj": 2,
+  "anySpaceBeforeDigit": 30,
+  "net": -14
+ },
+ {
+  "lane": "psql-output.txt",
+  "sites": 0,
+  "adj": 0,
+  "anySpaceBeforeDigit": 72,
+  "net": -12
+ },
+ {
+  "lane": "prices.csv",
+  "sites": 0,
+  "adj": 0,
+  "anySpaceBeforeDigit": 0,
+  "net": -12
+ },
+ {
+  "lane": "cue-sheet.md",
+  "sites": 28,
+  "adj": 28,
+  "anySpaceBeforeDigit": 84,
+  "net": -12
+ },
+ {
+  "lane": "ps-ef.txt",
+  "sites": 0,
+  "adj": 2,
+  "anySpaceBeforeDigit": 39,
+  "net": -14
+ },
+ {
+  "lane": "ls-real.txt",
+  "sites": 74,
+  "adj": 15,
+  "anySpaceBeforeDigit": 89,
+  "net": 47
+ },
+ {
+  "lane": "json-pkg.txt",
+  "sites": 0,
+  "adj": 9,
+  "anySpaceBeforeDigit": 0,
+  "net": -21
+ },
+ {
+  "lane": "code-ts.txt",
+  "sites": 0,
+  "adj": 10,
+  "anySpaceBeforeDigit": 10,
+  "net": -22
+ },
+ {
+  "lane": "dpkg-l.txt",
+  "sites": 1,
+  "adj": 64,
+  "anySpaceBeforeDigit": 1,
+  "net": -75
+ },
+ {
+  "lane": "ps-real.txt",
+  "sites": 1,
+  "adj": 6,
+  "anySpaceBeforeDigit": 2,
+  "net": -17
+ },
+ {
+  "lane": "kubectl-get-pods.txt",
+  "sites": 0,
+  "adj": 110,
+  "anySpaceBeforeDigit": 0,
+  "net": -122
+ },
+ {
+  "lane": "metrics.tsv",
+  "sites": 0,
+  "adj": 72,
+  "anySpaceBeforeDigit": 0,
+  "net": -84
+ },
+ {
+  "lane": "ps-aux-real.txt",
+  "sites": 8,
+  "adj": 20,
+  "anySpaceBeforeDigit": 18,
+  "net": -24
+ },
+ {
+  "lane": "apt-real.txt",
+  "sites": 119,
+  "adj": 288,
+  "anySpaceBeforeDigit": 119,
+  "net": -181
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "sites": 114,
+  "adj": 55,
+  "anySpaceBeforeDigit": 155,
+  "net": 47
+ }
+]

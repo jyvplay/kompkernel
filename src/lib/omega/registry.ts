@@ -242,6 +242,7 @@ import { solarisEncode } from './solaris';
 import { hyperionEncode } from './hyperion';
 import { polarisEncode } from './polaris';
 import { astraeaEncode } from './astraea';
+import { harmosEncode } from './harmos';
 import { chronosEncode } from './chronos';
 import { tensorEncode } from './tensor';
 import { lumenEncode } from './lumen';
@@ -1632,6 +1633,11 @@ export function codecEntries(): Entry[] {
     {
       key: 'parataxis', label: '⫴ PARATAXIS (X80: lossless column-geometry padding elision — aligned tables pad every field to a fixed column width, and that padding is pure geometry; delete it and declare the widths once, e.g. `§PARATAXIS pad fields to 56 18 12`; lines that would be ambiguous for the reader are listed by number and left literal; guarded by geometry agreement, byte-exact two-layer round trip, decoder-unambiguity and strict win)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = parataxisEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
+    },
+
+    {
+      key: 'harmos', label: '\u231b CHRONOS (X81: separator-as-geometry inside a compound token \u2014 a timestamp is mostly punctuation, and every hyphen, colon and padding run is an o200k token carrying no information the digits do not already carry; delete the separators and declare the shape once, e.g. `\u00a7X81 ~8=YYYYMMDD.`; shapes are packed most-specific-first and unpacked in exact reverse order, each tagged by marker AND digit-run length so no inverse can consume another payload; the contract is ADAPTIVE, naming only the shapes a lane contains, and that is what turns a loss into a win: psql-output -27 -> -52, cue-sheet +12 -> -8, metrics +21 -> -4 from a shorter contract alone; the day is stored zero-padded and ls -l right-justification is re-derived, not transmitted; guarded by marker-absence G1, byte-exact round trip, and a strict win over the frontier)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = harmosEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
     },
     {
       key: 'sphragis', label: '⚃ SPHRAGIS (X79: generalised separator-shape elision — any run of hex-or-decimal groups over [ - : . / , ] with at most six groups, e.g. `100.00` -> `10000`, `2026-01-02` -> `20260102`, `00:1A:2B` -> `001A2B`; pays no marker per use, only one clause per shape; guarded by width-uniqueness, no-bare-collision, no-merge, word-boundary, byte-exact round trip and strict win)', family: 'exact', fidelity: 'exact',

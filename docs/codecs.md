@@ -5431,3 +5431,60 @@ new compression algorithm** — the transferable idea is the Lean *methodology* 
 machine-checking a claim, which is what this stack's round-trip gates already are.
 
 Stated in full in `docs/codec-abbreviations.md` §X80 and `bench/x80/REPORT.md`.
+
+## X81 — HARMOS
+
+`key: 'harmos'` · family `exact` · fidelity `exact` · `src/lib/omega/harmos.ts`
+
+Lossless separator elision inside a compound token. A date, a time or a timestamp is a
+fixed number of fixed-width fields joined by punctuation, and every hyphen, colon and
+separator run is an o200k token carrying no information the digits do not already carry.
+HARMOS deletes the separators and declares the shape once — `§X81 ~8=YYYYMMDD.` — and the
+reader re-inserts them. This is PARATAXIS's claim moved one level down: X80 removed the
+geometry *between* columns, X81 removes it *inside* a field.
+
+**Packing.** Forms are applied sequentially, most specific first, and unpacked in **exact
+reverse order**. Each shape is tagged by marker **and** by digit-run length, longer runs
+matched before shorter, so no inverse can consume another payload:
+
+| source | packed | tag |
+|---|---|---|
+| `2026-11-07T14:22:01` | `%20261107142201` | `%` + 14 digits |
+| `2026-11-07 14:22:01` | `~20261107142201` | `~` + 14 digits |
+| `2026-11-07` | `~20261107` | `~` + 8 digits |
+| `00:03:12` | `^000312` | `^` + 6 digits |
+| `08:00` | `^0800` | `^` + 4 digits |
+| `Apr 14  2017` | `&Apr14!2017` | `&` + Mon + DD + `!` + YYYY |
+| `Jan  2 08:00` | `@Jan0208:00` | `@` + Mon + DD + HH:MM |
+
+**Gates:** marker-absence G1 (a source already containing `% ~ & @ ^` is refused, never
+escaped) · must remove a character · byte-exact round trip · byte-exact two-layer round
+trip · strict win · bounded greedy repair (≤ 2 iterations).
+
+**Measured — 3 of 10 candidate lanes fire, −66 total, rt exact on all 10:**
+
+| lane | frontier | HARMOS | Δ | forms |
+|---|---:|---:|---:|---|
+| `psql-output.txt` | 244 | **193** | **−51** (−20.9 %) | `d8` ×24 |
+| `cue-sheet.md` | 163 | **152** | **−11** (−6.7 %) | `c6` ×28 |
+| `metrics.tsv` | 210 | **206** | **−4** (−1.9 %) | `dt14T` ×24 |
+| `prices.csv` | 133 | 133 | REFUSED | `d8` ×30 |
+| `ls-l-real.txt` | 1497 | 1497 | REFUSED | `lsy` ×108, `lst` ×41 |
+| `ps-ef.txt` | 315 | 315 | REFUSED | `c6` ×39, `c4` ×39 |
+| `ps-aux-real.txt` | 1051 | 1051 | REFUSED | `c4` ×59 |
+| `ps-real.txt` | 397 | 397 | REFUSED | `c4` ×39 |
+| `email-thread.txt` | 488 | 488 | REFUSED | `d8` ×4, `c4` ×4 |
+| `ls-real.txt` | 433 | 433 | REFUSED | `lst` ×14, `lsy` ×23 |
+
+**The refusals carry the information.** `ps-ef.txt` has the largest raw saving of any lane
+(−156) and still loses by +20, because its timestamps repeat and the frontier's row
+machinery already prices them. HARMOS wins only where timestamps **vary**.
+
+**The contract is adaptive, and that is the result.** Packing is nearly free; the contract
+is the whole cost. On the same transform on the same lane, shortening the declaration from
+34 tokens to 9–13 flips three lanes: `psql-output` −27 → **−52**, `cue-sheet` +12 →
+**−8**, `metrics` +21 → **−4**. A fixed 95-token contract lost on every lane.
+
+**Greedy?** The rewrite is not — a deterministic ordered pass. The **acceptance search** is
+greedy with a bounded repair loop. **CPU-bound.** Cited for tokenizer behaviour only:
+arXiv:2402.14903, arXiv:2402.01035.
