@@ -1,0 +1,249 @@
+[
+ {
+  "lane": "apt-real.txt",
+  "k": 1,
+  "shapes": [
+   "1.1.1"
+  ],
+  "rt": false,
+  "raw": 28,
+  "contract": 19,
+  "F": 865,
+  "net": 47
+ },
+ {
+  "lane": "apt-real.txt",
+  "k": 3,
+  "shapes": [
+   "1.1.1",
+   "1.2.1",
+   "1.1"
+  ],
+  "rt": false,
+  "raw": 537,
+  "contract": 29,
+  "F": 865,
+  "net": 39
+ },
+ {
+  "lane": "apt-real.txt",
+  "k": 6,
+  "shapes": [
+   "1.1.1",
+   "1.2.1",
+   "1.1",
+   "1.2",
+   "2.1.1",
+   "1.1.2"
+  ],
+  "rt": false,
+  "raw": 589,
+  "contract": 45,
+  "F": 865,
+  "net": 59
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "k": 1,
+  "shapes": [
+   "1.1.2"
+  ],
+  "rt": false,
+  "raw": 372,
+  "contract": 19,
+  "F": 1497,
+  "net": 33
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "k": 3,
+  "shapes": [
+   "1.1.2",
+   "1.1",
+   "1.2"
+  ],
+  "rt": false,
+  "raw": 1020,
+  "contract": 27,
+  "F": 1497,
+  "net": 103
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "k": 6,
+  "shapes": [
+   "1.1.2",
+   "1.1",
+   "1.2"
+  ],
+  "rt": false,
+  "raw": 1020,
+  "contract": 27,
+  "F": 1497,
+  "net": 103
+ },
+ {
+  "lane": "json-pkg.txt",
+  "k": 1,
+  "shapes": [
+   "1.1.1"
+  ],
+  "rt": false,
+  "raw": 4,
+  "contract": 19,
+  "F": 681,
+  "net": 23
+ },
+ {
+  "lane": "json-pkg.txt",
+  "k": 3,
+  "shapes": [
+   "1.1.1",
+   "1.2.1",
+   "2.1.1"
+  ],
+  "rt": false,
+  "raw": 4,
+  "contract": 31,
+  "F": 681,
+  "net": 21
+ },
+ {
+  "lane": "json-pkg.txt",
+  "k": 6,
+  "shapes": [
+   "1.1.1",
+   "1.2.1",
+   "2.1.1",
+   "1.1.2",
+   "1.1",
+   "2.2"
+  ],
+  "rt": false,
+  "raw": 74,
+  "contract": 45,
+  "F": 681,
+  "net": 16
+ },
+ {
+  "lane": "dpkg-l.txt",
+  "k": 1,
+  "shapes": [
+   "2.1.1"
+  ],
+  "rt": false,
+  "raw": 3,
+  "contract": 19,
+  "F": 674,
+  "net": 20
+ },
+ {
+  "lane": "dpkg-l.txt",
+  "k": 3,
+  "shapes": [
+   "2.1.1",
+   "1.1",
+   "1.2.1"
+  ],
+  "rt": false,
+  "raw": 173,
+  "contract": 29,
+  "F": 674,
+  "net": 29
+ },
+ {
+  "lane": "dpkg-l.txt",
+  "k": 6,
+  "shapes": [
+   "2.1.1",
+   "1.1",
+   "1.2.1",
+   "1.1.1",
+   "1.2",
+   "1.1.2"
+  ],
+  "rt": false,
+  "raw": 181,
+  "contract": 45,
+  "F": 674,
+  "net": 26
+ },
+ {
+  "lane": "kubectl-get-pods.txt",
+  "k": 1,
+  "shapes": [
+   "2.3.1.3"
+  ],
+  "rt": true,
+  "raw": 0,
+  "contract": 21,
+  "F": 326,
+  "net": 21
+ },
+ {
+  "lane": "kubectl-get-pods.txt",
+  "k": 3,
+  "shapes": [
+   "2.3.1.3",
+   "2.3.1.2",
+   "2.3.1.1"
+  ],
+  "rt": true,
+  "raw": 0,
+  "contract": 37,
+  "F": 326,
+  "net": 31
+ },
+ {
+  "lane": "kubectl-get-pods.txt",
+  "k": 6,
+  "shapes": [
+   "2.3.1.3",
+   "2.3.1.2",
+   "2.3.1.1"
+  ],
+  "rt": true,
+  "raw": 0,
+  "contract": 37,
+  "F": 326,
+  "net": 31
+ },
+ {
+  "lane": "ps-aux-real.txt",
+  "k": 1,
+  "shapes": [
+   "1.1"
+  ],
+  "rt": false,
+  "raw": 442,
+  "contract": 17,
+  "F": 1052,
+  "net": 17
+ },
+ {
+  "lane": "ps-aux-real.txt",
+  "k": 3,
+  "shapes": [
+   "1.1",
+   "2.1"
+  ],
+  "rt": false,
+  "raw": 546,
+  "contract": 21,
+  "F": 1052,
+  "net": 30
+ },
+ {
+  "lane": "ps-aux-real.txt",
+  "k": 6,
+  "shapes": [
+   "1.1",
+   "2.1"
+  ],
+  "rt": false,
+  "raw": 546,
+  "contract": 21,
+  "F": 1052,
+  "net": 30
+ }
+]

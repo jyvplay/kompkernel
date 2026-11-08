@@ -624,6 +624,19 @@ export function prepareRunCostState(
 }
 
 /** Score a candidate relative to `before`, touching only patterns it changes. */
+/**
+ * X82 SPEED scratch for the affected-pattern set in `scoreRunCostDelta`. Sized to
+ * the largest pattern count any prepared run can produce; the generation stamp
+ * means an oversized call is impossible as long as `affCount` cannot exceed the
+ * number of distinct patterns, which it cannot (each pattern is stamped at most
+ * once per call).
+ */
+const AFF_MAX = 1 << 16;
+const AFF_GEN = new Int32Array(AFF_MAX);
+const AFF_LIST = new Int32Array(AFF_MAX);
+let AFF_GEN_COUNTER = 0;
+
+
 export function scoreRunCostDelta(
   p: PreparedRuns, state: PreparedRunCostState, before: string[], after: string[],
   enc: EncodingName, cache: Map<string, number>, limit = Number.POSITIVE_INFINITY,
@@ -632,10 +645,21 @@ export function scoreRunCostDelta(
   if (before.length !== after.length || before.length !== state.patternsBySlot.length) {
     throw new Error('run-cost candidate length mismatch');
   }
-  const affected = new Set<number>();
+  /**
+   * X82 SPEED. This ran `new Set<number>()` on every call, and the call is made
+   * millions of times per document. A Set here only ever needs "visited in this
+   * call", so it is replaced by a generation-stamped marker array: `AFF_GEN[i] ===
+   * gen` means pattern i is affected, and bumping `gen` clears the whole thing in
+   * O(1) with no allocation and no clearing pass. Semantics are identical — the set
+   * was local to the call and never escaped it.
+   */
+  const gen = ++AFF_GEN_COUNTER;
+  let affCount = 0;
   for (let slot = 0; slot < before.length; slot++) {
     if (before[slot] === after[slot]) continue;
-    for (const pattern of state.patternsBySlot[slot]) affected.add(pattern);
+    for (const pattern of state.patternsBySlot[slot]) {
+      if (AFF_GEN[pattern] !== gen) { AFF_GEN[pattern] = gen; AFF_LIST[affCount++] = pattern; }
+    }
   }
   let total = state.total;
   const updates: Array<[number, number]> = [];
@@ -647,9 +671,13 @@ export function scoreRunCostDelta(
   // unchanged; the only difference is fewer cache entries written).
   let maxSavingLeft = 0;
   if (limit !== Number.POSITIVE_INFINITY) {
-    for (const i of affected) maxSavingLeft += Math.max(0, state.costs[i] - 1) * p.mult[i];
+    for (let k = 0; k < affCount; k++) {
+      const i = AFF_LIST[k];
+      maxSavingLeft += Math.max(0, state.costs[i] - 1) * p.mult[i];
+    }
   }
-  for (const i of affected) {
+  for (let k = 0; k < affCount; k++) {
+    const i = AFF_LIST[k];
     if (total - maxSavingLeft > limit) return { total: limit + 1, updates: [] };
     let s = '';
     for (const slot of state.patternSlots[i]) s += after[slot];

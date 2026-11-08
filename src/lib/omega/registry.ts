@@ -221,6 +221,7 @@ import { brachylogiaEncode } from './brachylogia';
 import { pinaxEncode } from './pinax';
 import { merismosEncode } from './merismos';
 import { parataxisEncode } from './parataxis';
+import { schemaEncode } from './schema';
 import { sphragisEncode } from './sphragis';
 import { kermaEncode } from './kerma';
 import { eustochiaEncode } from './eustochia';
@@ -1633,6 +1634,11 @@ export function codecEntries(): Entry[] {
     {
       key: 'parataxis', label: '⫴ PARATAXIS (X80: lossless column-geometry padding elision — aligned tables pad every field to a fixed column width, and that padding is pure geometry; delete it and declare the widths once, e.g. `§PARATAXIS pad fields to 56 18 12`; lines that would be ambiguous for the reader are listed by number and left literal; guarded by geometry agreement, byte-exact two-layer round trip, decoder-unambiguity and strict win)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = parataxisEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
+    },
+
+    {
+      key: 'schema', label: '\u2299 SCHEMA (X82: token-shape elision by DISCOVERED signature and LENGTH-TABLE decode \u2014 deletes the internal punctuation of machine tokens (semver, ISO dates, clocks, decimals, IPv4) and declares the group widths once, e.g. `\u00a7SCHEMA 8d=dddd-dd-dd 5d=ddd.dd.`; unlike HARMOS the shape catalogue is DISCOVERED from the text rather than hand-written, and unlike HARMOS it pays NO per-instance marker: shapes are made pairwise length-disjoint, so the packed length alone selects the shape; a DISTINCTNESS gate (distinct values / occurrences >= 0.5) is what makes it win, because measured absorption by the parent frontier is 86-103% on repetitive shapes and only 14% on distinct ones; greedy length-disjoint selection in descending raw saving, bounded greedy prune, byte-exact round trip, strict win measured through the frontier, not against it)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = schemaEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
     },
 
     {
