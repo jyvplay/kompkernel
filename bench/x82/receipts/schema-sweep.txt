@@ -1,0 +1,13 @@
+de-kb.txt                  F   457 ->   457    —   rt=true 
+es-kb.txt                  F   403 ->   403    —   rt=true 
+ja-kb.txt                  F   493 ->   493    —   rt=true 
+pl-kb.txt                  F   602 ->   602    —   rt=true 
+ru-kb.txt                  F   478 ->   478    —   rt=true 
+tr-kb.txt                  F   516 ->   516    —   rt=true 
+agent-history.md           F   250 ->   250    —   rt=true 
+find-listing.txt           F  1142 ->  1142    —   rt=true 
+git-log-fuller.txt         F   143 ->   143    —   rt=true 
+git-numstat.txt            F  1983 ->  1983    —   rt=true 
+ls-full-iso.txt            F   367 ->   367    —   rt=true 
+node-stacktraces.txt       F   300 ->   300    —   rt=true 
+npm-ls.txt                 F   916 ->   916    —   rt=true 

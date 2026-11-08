@@ -5488,3 +5488,107 @@ is the whole cost. On the same transform on the same lane, shortening the declar
 **Greedy?** The rewrite is not — a deterministic ordered pass. The **acceptance search** is
 greedy with a bounded repair loop. **CPU-bound.** Cited for tokenizer behaviour only:
 arXiv:2402.14903, arXiv:2402.01035.
+
+## X82 — SCHEMA
+
+`key: 'schema'` · family `exact` · fidelity `exact` · `src/lib/omega/schema.ts`
+
+Lossless **token-shape elision by discovered signature and length-table decode**. A
+semver, an ISO date, a clock, a fixed-scale decimal or an IPv4 address is a fixed number
+of fixed-width groups joined by punctuation. SCHEMA deletes the punctuation and declares
+the group widths once:
+
+```
+§SCHEMA 8d=dddd-dd-dd 5d=ddd.dd.
+| 10 | user_0000    | 20260101 | 10000 | active    |
+        ↓ decode
+| 10 | user_0000    | 2026-01-01 | 100.00 | active    |
+```
+
+The reader needs no program and no prompt. `8d=dddd-dd-dd` says "an 8-character run is
+four digits, a dash, two digits, a dash, two digits"; `5d=ddd.dd` says "a 5-character run
+is three digits, a dot, two digits". Length alone selects the rule — no per-token marker.
+
+**How this differs from HARMOS (X81) — and why the difference is the mechanism.**
+HARMOS carries a hand-written catalogue of temporal shapes and tags *every* packed token
+with a marker (`~8=`, `^6=`) so the reader knows which shape it is. Both properties cost:
+
+1. The catalogue is closed — a shape nobody wrote down is invisible.
+2. The marker costs a token **per packed token**. On a lane with 120 timestamps that is
+   120 tokens spent saying "this one is a timestamp".
+
+SCHEMA removes both. Shapes are **discovered** from the text, and disambiguation is by
+**packed length** instead of by marker: the accepted shapes are made pairwise
+length-disjoint, so the length of a bare run selects the shape. This is a change of
+measure, not of surface form — HARMOS pays O(n) in markers to make each token
+self-describing; SCHEMA pays O(1) in a length table to make the *set* self-describing.
+
+**Packing.** Each discovered shape is a sequence of per-group character-class signatures,
+e.g. `1.11.3` → `D|DD|D`. Deleting the separator is reversible exactly when every
+occurrence packs to the same length, because then the re-insertion offsets are constants.
+
+| source | signature | packed | length-table entry |
+|---|---|---|---|
+| `1.11.3` | `D\|DD\|D` | `1113` | `4d=d.dd.d` |
+| `5.9.3` | `D\|D\|D` | `593` | `3d=d.d.d` |
+| `2026-01-01` | `DDDD\|DD\|DD` | `20260101` | `8d=dddd-dd-dd` |
+| `100.00` | `DDD\|DD` | `10000` | `5d=ddd.dd` |
+| `00:00:02` | `DD\|DD\|DD` | `000002` | `6d=dd:dd:dd` |
+
+**Gates.**
+`G1` a separator group with ≥ 6 members ·
+`G2` every member packs to the same length (re-insertion is positional) ·
+`G3` packing strictly reduces the token count ·
+`G4` accepted shapes have pairwise distinct packed lengths **and** no bare run of that
+shape already occurs outside its group (the length table must be injective) ·
+`G5` **distinctness** ≥ 0.5 ·
+`G6` byte-exact round trip, and byte-exact recovery by `schemaDecode` on the message alone ·
+`G7` strict win, measured **through** the frontier, after a bounded greedy prune.
+
+**G5 is the gate that makes this win, and it was measured, not assumed.** The parent
+frontier re-absorbs almost all of the raw saving from separator deletion:
+
+| lane | raw Δ | frontier keeps | absorbed | distinctness |
+|---|---:|---:|---:|---:|
+| `ls-full-iso.txt` | −168 | 7 | 96 % | 0.20 |
+| `find-listing.txt` | −600 | **−16** | 103 % | 0.32 |
+| `vix-daily-1990.csv` | −504 | — | — | 0.24 |
+| `json-pkg.txt` | −125 | 17 | 86 % | 0.89 |
+| `psql-output.txt` | −96 | — | — | 1.00 |
+
+Repetitive shapes are already inside a dictionary the frontier owns, and packing them
+destroys a pattern it was exploiting — on `find-listing` the transform is a **+57 loss**.
+Distinct shapes give the frontier nothing to exploit, so the separator is a pure tax.
+Without G5 this codec loses on more lanes than it wins.
+
+**G7 must be measured through the frontier, not against it.** The message `contract +
+body` is *longer* than the source by raw `countTokens`, and measuring it that way refuses
+every lane. The honest cost is `frontier(contract + body)`, because the frontier
+re-encodes what it is given. That one-line distinction is the difference between 0/10
+lanes and 4/10.
+
+**Measured** (o200k, `bench/x82/verify.ts`, byte-exact on every lane tested):
+
+| lane | frontier | SCHEMA | Δ | shapes |
+|---|---:|---:|---:|---|
+| `psql-output.txt` | 244 | **173** | **−71** (−29.1 %) | `2026-01-01`@8d, `100.00`@5d |
+| `cue-sheet.md` | 163 | **155** | **−8** (−4.9 %) | `00:00:02`@6d |
+| `markdown-table.md` | 176 | **171** | **−5** (−2.8 %) | `40.0`@3d |
+| `json-pkg.txt` | 681 | **679** | **−2** | `5.9.3`@3d, `0.93.4`@4d |
+
+On `psql-output` SCHEMA beats HARMOS's −51 on the same lane by 20 tokens, without paying
+a marker on any of the 48 packed tokens.
+
+**Complexity / bound.** Discovery is one pass per separator (6) plus a sort:
+O(n log n) in candidate tokens. Selection is greedy in descending raw saving; the prune is
+greedy in descending round number and bounded by 4 frontier evaluations. **Greedy, not
+optimal**: two medium length-disjoint shapes can beat the single largest, and the greedy
+order does not search that. CPU-bound — the cost is token counting and frontier calls.
+
+**Sources.** No compression result is imported. The tokenizer facts relied on are that a
+punctuation character inside a digit run is its own o200k token, and that BPE merges do
+not cross a pre-token boundary. Related work consulted and *not* transferred: LTSC
+(arXiv:2506.00307, lossless LZ77-style meta-token dictionary, 18–27 %, but needs
+fine-tuning); Splinter (ACL 2025, reversible single-character deletion encoded as a
+composite `position:letter` character — more general than a global declaration but
+strictly more expensive when the shape repeats, which is exactly when we use it).

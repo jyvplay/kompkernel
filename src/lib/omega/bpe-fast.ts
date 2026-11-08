@@ -53,7 +53,6 @@ type AnyCore = {
 
 let CORE: AnyCore | null = null;
 let VOCAB: Map<string, number> | null = null;
-const SMALL = new Map<number, number>();   // 3..4 bytes: key = len * 2^32 + packed
 /**
  * X73: the two-byte case is by far the most common rank lookup in the merge loop
  * (every merge starts by ranking adjacent byte pairs), and it was still going
@@ -62,6 +61,24 @@ const SMALL = new Map<number, number>();   // 3..4 bytes: key = len * 2^32 + pac
  * is unchanged and still binds: this is the same function.
  */
 const PAIR2 = new Int32Array(65536).fill(-1);
+/**
+ * X82 SPEED. Open-addressed tables for the 3- and 4-byte rank lookups, replacing a
+ * `Map<number, number>` whose keys were doubles above 2^31 (heap-boxed per lookup).
+ * Sized to a power of two well above the number of 3/4-byte o200k entries so that
+ * the probe almost always hits on the first try; `-1` marks an empty key slot, and
+ * because no real token key is -1 the probe terminates.
+ */
+const H3_BITS = 18;
+const H3_SIZE = 1 << H3_BITS;
+const H3_MASK = H3_SIZE - 1;
+const H3_KEY = new Int32Array(H3_SIZE).fill(-1);
+const H3_VAL = new Int32Array(H3_SIZE);
+const H4_BITS = 18;
+const H4_SIZE = 1 << H4_BITS;
+const H4_MASK = H4_SIZE - 1;
+const H4_HI = new Int32Array(H4_SIZE).fill(-1);
+const H4_LO = new Int32Array(H4_SIZE);
+const H4_VAL = new Int32Array(H4_SIZE);
 const LONG = new Map<string, number>();    // 5+ bytes: key = latin1 of the bytes
 let READY = false;
 export let FAST_BUILD_MS = 0;
@@ -130,15 +147,35 @@ export function fastReady(): boolean {
     if (!CORE) return false;
     VOCAB = CORE.bytePairStringRankEncoder;
     RE = new RegExp(CORE.tokenSplitRegex.source, CORE.tokenSplitRegex.flags);
-    SMALL.clear();
     LONG.clear();
     PAIR2.fill(-1);
+    H3_KEY.fill(-1);
+    H4_HI.fill(-1);
+    const put3 = (k: number, rank: number) => {
+      let i = k & H3_MASK;
+      for (;;) {
+        const cur = H3_KEY[i];
+        if (cur === -1 || cur === k) { H3_KEY[i] = k; H3_VAL[i] = rank; return; }
+        i = (i + 1) & H3_MASK;
+      }
+    };
+    const put4 = (hi: number, lo: number, rank: number) => {
+      let i = (hi * 31 + lo) & H4_MASK;
+      for (;;) {
+        const cur = H4_HI[i];
+        if (cur === -1 || (cur === hi && H4_LO[i] === lo)) {
+          H4_HI[i] = hi; H4_LO[i] = lo; H4_VAL[i] = rank; return;
+        }
+        i = (i + 1) & H4_MASK;
+      }
+    };
     const put = (bytes: Uint8Array, rank: number) => {
       const n = bytes.length;
       if (n < 2) return;
       if (n === 2) { PAIR2[(bytes[0] << 8) | bytes[1]] = rank; return; }
-      if (n <= 4) SMALL.set(keyOf(bytes, 0, n), rank);
-      else LONG.set(latin1(bytes, 0, n), rank);
+      if (n === 3) { put3((bytes[0] << 16) + (bytes[1] << 8) + bytes[2], rank); return; }
+      if (n === 4) { put4((bytes[0] << 8) | bytes[1], (bytes[2] << 8) | bytes[3], rank); return; }
+      LONG.set(latin1(bytes, 0, n), rank);
     };
     // (1) every token that the library stores as a string. Its bytes are the
     // UTF-8 encoding of that string, and the library finds it by decoding the
@@ -228,12 +265,31 @@ function rankAt(b: Uint8Array, s: number, e: number): number {
     return v < 0 ? INF : v;
   }
   if (n === 3) {
-    const v = SMALL.get(12884901888 + b[s] * 16777216 + b[s + 1] * 65536 + b[s + 2] * 256);
-    return v === undefined ? INF : v;
+    // X82 SPEED: was `SMALL.get(3 * 2^32 + packed)`. That key is a *double* above
+    // 2^31, so V8 boxes it into a heap number on every one of the millions of
+    // lookups in a merge. The 3-byte key fits in 24 bits, so an open-addressed
+    // Int32Array table answers it with two array loads and an integer compare —
+    // no hashing, no boxing, no allocation. Same function, fewer instructions.
+    let i = (b[s] * 65536 + b[s + 1] * 256 + b[s + 2]) & H3_MASK;
+    for (;;) {
+      const k = H3_KEY[i];
+      if (k === -1) return INF;
+      if (k === (b[s] << 16) + (b[s + 1] << 8) + b[s + 2]) return H3_VAL[i];
+      i = (i + 1) & H3_MASK;
+    }
   }
   if (n === 4) {
-    const v = SMALL.get(17179869184 + b[s] * 16777216 + b[s + 1] * 65536 + b[s + 2] * 256 + b[s + 3]);
-    return v === undefined ? INF : v;
+    // 4 bytes need 32 bits, which will not fit one Int32 key, so the key is held
+    // as two 16-bit halves and both are compared.
+    const hi = (b[s] << 8) | b[s + 1];
+    const lo = (b[s + 2] << 8) | b[s + 3];
+    let i = (hi * 31 + lo) & H4_MASK;
+    for (;;) {
+      const k = H4_HI[i];
+      if (k === -1) return INF;
+      if (k === hi && H4_LO[i] === lo) return H4_VAL[i];
+      i = (i + 1) & H4_MASK;
+    }
   }
   if (n < 2) return INF;
   const v = LONG.get(latin1(b, s, e));
@@ -245,6 +301,35 @@ function rankAt(b: Uint8Array, s: number, e: number): number {
  * shortcuts in the same order, then the same merge.
  */
 export function fastChunkCount(chunk: string): number {
+  const L = chunk.length;
+  if (L === 0) return 0;
+  /* X82 SPEED. `fastChunkCount` is called once per pre-token, and in real corpora
+   * the pre-tokens repeat enormously — `metrics.tsv` makes ~2.4M calls over ~2k
+   * distinct chunks. It is a pure function of its argument, so the call can be
+   * memoised with no change to any count. This sat directly beneath the four
+   * hottest frames in the profile (rankAt 17.7%, scoreRunCostDelta 15.4%,
+   * countTokens3 12.7%, renderBest 11.0%), all of which funnel through here.
+   *
+   * Correctness: the cache is keyed on the exact chunk string and stores the exact
+   * return value; the vocabulary is fixed for the process, so the function really
+   * is pure. `bench/x72/ids.ts` (differential test against the library) is the
+   * gate that binds this. Bounded, and cleared wholesale rather than evicted. */
+  const m0 = CHUNK_CACHE.get(chunk);
+  if (m0 !== undefined) { chunkHits++; return m0; }
+  chunkMisses++;
+  const n0 = fastChunkCountUncached(chunk);
+  if (CHUNK_CACHE.size >= CHUNK_CACHE_MAX) CHUNK_CACHE.clear();
+  CHUNK_CACHE.set(chunk, n0);
+  return n0;
+}
+
+/** Counters, exported for the bench. */
+export let chunkHits = 0;
+export let chunkMisses = 0;
+const CHUNK_CACHE = new Map<string, number>();
+const CHUNK_CACHE_MAX = 1 << 21;
+
+function fastChunkCountUncached(chunk: string): number {
   const L = chunk.length;
   if (L === 0) return 0;
   if (!READY && !fastReady()) throw new Error('bpe-fast: vocabulary unavailable');

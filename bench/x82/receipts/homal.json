@@ -1,0 +1,181 @@
+[
+ {
+  "lane": "ps-aux-real.txt",
+  "rt": false,
+  "padW": [
+   4,
+   3,
+   2,
+   7,
+   6,
+   2,
+   2,
+   1,
+   2,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "chars": 769,
+  "raw": 183,
+  "F": 1051,
+  "FT": 1062,
+  "contract": 68,
+  "net": 46
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "rt": false,
+  "padW": [
+   6,
+   7,
+   2,
+   4,
+   0,
+   0
+  ],
+  "chars": 1326,
+  "raw": 396,
+  "F": 1497,
+  "FT": 1556,
+  "contract": 24,
+  "net": 85
+ },
+ {
+  "lane": "apt-real.txt",
+  "rt": true,
+  "padW": [
+   8,
+   0,
+   0,
+   0
+  ],
+  "chars": 750,
+  "raw": 219,
+  "F": 863,
+  "FT": 949,
+  "contract": 20,
+  "net": 89
+ },
+ {
+  "lane": "ps-ef.txt",
+  "rt": false,
+  "padW": [
+   2,
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   2,
+   0,
+   0
+  ],
+  "chars": 7,
+  "raw": 0,
+  "F": 315,
+  "FT": 319,
+  "contract": 32,
+  "net": 22
+ },
+ {
+  "lane": "ps-real.txt",
+  "rt": false,
+  "padW": [
+   4,
+   3,
+   2,
+   2,
+   2,
+   0,
+   0,
+   0
+  ],
+  "chars": 191,
+  "raw": 37,
+  "F": 397,
+  "FT": 411,
+  "contract": 28,
+  "net": 39
+ },
+ {
+  "lane": "findmnt.txt",
+  "rt": true,
+  "padW": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "chars": 0,
+  "raw": 0,
+  "F": 444,
+  "FT": 444,
+  "contract": 24,
+  "net": 18
+ },
+ {
+  "lane": "vmstat.txt",
+  "rt": true,
+  "padW": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "chars": 0,
+  "raw": 0,
+  "F": 149,
+  "FT": 149,
+  "contract": 46,
+  "net": 18
+ },
+ {
+  "lane": "dpkg-l.txt",
+  "rt": true,
+  "padW": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "chars": 0,
+  "raw": 0,
+  "F": 674,
+  "FT": 674,
+  "contract": 20,
+  "net": 22
+ }
+]
