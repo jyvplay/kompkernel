@@ -1,0 +1,50 @@
+{
+ "M": 65536,
+ "N": 24,
+ "kinds": [
+  "flip",
+  "header-flip",
+  "swap",
+  "delete",
+  "truncate1",
+  "truncate2",
+  "extend",
+  "whitespace"
+ ],
+ "total": 5568,
+ "tally": {
+  "REFUSED": 4860,
+  "EXACT(no-op)": 708
+ },
+ "byKind": {
+  "flip": {
+   "REFUSED": 691,
+   "EXACT(no-op)": 5
+  },
+  "header-flip": {
+   "REFUSED": 696
+  },
+  "swap": {
+   "REFUSED": 689,
+   "EXACT(no-op)": 7
+  },
+  "delete": {
+   "REFUSED": 696
+  },
+  "truncate1": {
+   "REFUSED": 696
+  },
+  "truncate2": {
+   "REFUSED": 696
+  },
+  "extend": {
+   "REFUSED": 696
+  },
+  "whitespace": {
+   "EXACT(no-op)": 696
+  }
+ },
+ "hangs": 0,
+ "wrongCount": 0,
+ "wrongs": []
+}

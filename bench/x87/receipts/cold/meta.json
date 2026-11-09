@@ -1,0 +1,21 @@
+{
+ "encoding": "o200k_base",
+ "M": 65536,
+ "bits": 16,
+ "fingerprint": "9f6dfcc4",
+ "candidates": 68059,
+ "scanned": 199999,
+ "meanChars": 7.2866668701171875,
+ "minChars": 4,
+ "maxChars": 21,
+ "proof": {
+  "sample": 512,
+  "tokens": 512,
+  "exact": true
+ },
+ "atomShape": "^ [A-Za-z]{1,24}$",
+ "blockBytes": 512,
+ "headerBytes": 4,
+ "checksumBits": 32,
+ "checksumAtoms": 2
+}

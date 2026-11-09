@@ -1,0 +1,27 @@
+{
+ "entries": 249,
+ "key": "aither",
+ "family": "exact",
+ "fidelity": "exact",
+ "labelChars": 2498,
+ "rows": [
+  {
+   "lane": "bench/holdout-x42b/free-m.txt",
+   "inTokens": 76,
+   "outTokens": 57,
+   "oneChatTokens": 57,
+   "exact": true,
+   "ms": 845,
+   "note": "57 atoms (55 envelope + 2 checksum), payload 0:CM-Ω (context mixing + warm prior), 36.91 bits/atom; one-chat=57 tok"
+  },
+  {
+   "lane": "bench/holdout-x40/cue-sheet.md",
+   "inTokens": 513,
+   "outTokens": 92,
+   "oneChatTokens": 92,
+   "exact": true,
+   "ms": 179,
+   "note": "92 atoms (90 envelope + 2 checksum), payload 0:CM-Ω (context mixing + warm prior), 81.57 bits/atom; one-chat=92 tok"
+  }
+ ]
+}

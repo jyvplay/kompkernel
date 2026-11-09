@@ -1,0 +1,40 @@
+lsblk.txt              atoms=   51  REFUSED=168 EXACT(no-op)=24  2s
+kb-article.txt         atoms=  617  REFUSED=168 EXACT(no-op)=24  5s
+uptime-w.txt           atoms=   59  REFUSED=167 EXACT(no-op)=25  6s
+free-m.txt             atoms=   57  REFUSED=165 EXACT(no-op)=27  7s
+vmstat.txt             atoms=   93  REFUSED=167 EXACT(no-op)=25  8s
+unified-diff.patch     atoms=  285  REFUSED=168 EXACT(no-op)=24  11s
+df-h.txt               atoms=  150  REFUSED=167 EXACT(no-op)=25  12s
+df-real.txt            atoms=   80  REFUSED=168 EXACT(no-op)=24  16s
+du-real.txt            atoms=  192  REFUSED=168 EXACT(no-op)=24  18s
+node-help.txt          atoms=  785  REFUSED=168 EXACT(no-op)=24  25s
+findmnt.txt            atoms=  288  REFUSED=167 EXACT(no-op)=25  27s
+df-h.txt               atoms=   71  REFUSED=167 EXACT(no-op)=25  28s
+email-thread.txt       atoms=  418  REFUSED=168 EXACT(no-op)=24  31s
+llm-answer.md          atoms=  597  REFUSED=168 EXACT(no-op)=24  36s
+markdown-table.md      atoms=  107  REFUSED=168 EXACT(no-op)=24  37s
+psql-output.txt        atoms=  150  REFUSED=168 EXACT(no-op)=24  40s
+prices.csv             atoms=  107  REFUSED=167 EXACT(no-op)=25  41s
+cue-sheet.md           atoms=   92  REFUSED=168 EXACT(no-op)=24  43s
+ps-ef.txt              atoms=  218  REFUSED=168 EXACT(no-op)=24  45s
+ls-real.txt            atoms=  294  REFUSED=167 EXACT(no-op)=25  48s
+json-pkg.txt           atoms=  537  REFUSED=166 EXACT(no-op)=26  54s
+code-ts.txt            atoms=  714  REFUSED=168 EXACT(no-op)=24  61s
+dpkg-l.txt             atoms=  534  REFUSED=168 EXACT(no-op)=24  65s
+ps-real.txt            atoms=  270  REFUSED=168 EXACT(no-op)=24  68s
+kubectl-get-pods.txt   atoms=  200  REFUSED=168 EXACT(no-op)=24  71s
+metrics.tsv            atoms=  130  REFUSED=168 EXACT(no-op)=24  72s
+ps-aux-real.txt        atoms=  650  REFUSED=168 EXACT(no-op)=24  79s
+apt-real.txt           atoms=  566  REFUSED=168 EXACT(no-op)=24  87s
+ls-l-real.txt          atoms=  731  REFUSED=168 EXACT(no-op)=24  98s
+
+TOTAL 5568 mutations  {"REFUSED":4860,"EXACT(no-op)":708}  hangs 0
+effective mutations 4860: refused 4860 (100.0%)  SILENT-WRONG 0
+by kind: flip {"REFUSED":691,"EXACT(no-op)":5}
+           header-flip {"REFUSED":696}
+           swap {"REFUSED":689,"EXACT(no-op)":7}
+           delete {"REFUSED":696}
+           truncate1 {"REFUSED":696}
+           truncate2 {"REFUSED":696}
+           extend {"REFUSED":696}
+           whitespace {"EXACT(no-op)":696}

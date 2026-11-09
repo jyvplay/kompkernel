@@ -3721,6 +3721,52 @@ lane is now under 3 %, so the ops category's live target is `metrics.tsv` (1.48)
 `ls-l-real.txt` (1.48), not psql-output.
 
 
+**Correction (X87) — the "brotli floor" column is not a floor, and four rows in this table
+are not frontier numbers.**
+
+1. **`@ 14.8 bits/tok` was an assumption, and it is too generous.** The Ω-Ξ atom alphabet is
+   K = 65536 single-token atoms, so it carries `log2(K)` = **16 bits per token by
+   construction**, and achieves 15.9 measured. Recomputing nothing else, ΑΙΘΗΡ lands *below*
+   the printed floor on 22 of 29 lanes: `ls-l-real` **731** vs floor 943, `ps-aux-real`
+   **650** vs 743, `apt-real` **566** vs 690, `ls-real` **294** vs 328, `kubectl` **200** vs
+   214, `vmstat` **93** vs 113, `metrics.tsv` **130** vs 130. In raw bits `cm.ts` beats
+   brotli -q11 on 22 of 29 (`bench/x87/receipts/xiprobe.ts`). So the ratio column keeps its
+   meaning only with a tier attached: **in the readable tier the printed ratios stand; in the
+   entropy tier the "floor" column is brotli's score, not a bound.** The sentence "above 1.0
+   the stack beats a strong general-purpose compressor" is now true of the entropy tier on
+   22/29 lanes and of the readable tier exactly as printed.
+2. **Four `stack` cells are a codec's own `countTokens(message)`, not a frontier cost**, and
+   they disagree with the committed 29-lane receipt: `df-h.txt`(raw 570) **153** vs frontier
+   **171**; `cue-sheet.md` **101** vs **163**; `metrics.tsv` **192** vs **210**;
+   `ls-l-real.txt` **1394** vs **1476**. The gaps are the X86 *contract-at-100 %* law
+   measured again from the other side: `cue-sheet`'s 101 is STICHOMYTHIA's message, whose
+   41-token key is already inside it, but the frontier re-encodes that message and pays the
+   contract again on the way through. **Read the frontier receipt, not this column, whenever
+   the two disagree** — `bench/x80/receipts/frontier.json`, total 12639, re-confirmed at X86
+   (runs A and B) and at X87 (run C).
+
+**Leaders after X87 — both tiers, because they answer different questions.**
+
+| lane | raw | readable tier | entropy tier (ΑΙΘΗΡ) |
+|---|---:|---|---:|
+| ls-l-real.txt | 5194 | 1476 (synkrisis) | **731** |
+| ps-aux-real.txt | 3054 | 1042 (synkrisis) | **650** |
+| apt-real.txt | 2739 | 850 (synkrisis) | **566** |
+| code-ts.txt | 1422 | 969 (synkrisis) | **714** |
+| df-h.txt (tbl) | 570 | **134** (X86 ΚΕΝΟΝ) | 150 |
+| psql-output.txt | 675 | **173** (X82 SCHEMA) | 150 |
+| kubectl-get-pods.txt | 1006 | **304** (X80/X86 tie) | 200 |
+| metrics.tsv | 811 | 210 (akolouthia2) | **130** |
+| cue-sheet.md | 513 | 163 (metron) | **92** |
+| kb-article.txt | 656 | 622 (synkrisis) | 617 |
+
+`df-h(tbl)` and `psql-output` are the two lanes where the **readable tier still wins**, and
+they win for the reason X86 identified: those lanes have a *law* — an arithmetic progression
+and a shape catalogue — and a law beats statistics when the law is short. Everywhere else the
+source has more entropy than law, and the entropy tier takes it. ΑΙΘΗΡ does not displace
+either arm; it is a different question, and G5 is the only place the two meet.
+
+
 ### ops  (20 lanes)
 
 | lane | structure | raw | stack | brotli floor | ratio |
@@ -4441,3 +4487,163 @@ measurements say is most lanes. The 41-token contract assumes a reader competent
 
 **Record.** [`docs/codecs.md`](codecs.md) §X86, `src/lib/omega/kenon.ts`, registry key
 `kenon`, `bench/kenon_decode.py`, `bench/x86/`, receipts in `bench/x86/receipts/`.
+
+---
+
+## X87 — ΑΙΘΗΡ (AITHER)
+
+**Decode abbreviation → technical design spec.** *The entropy tier, admitted and made
+shippable: a portable payload portfolio plus a CRC-32 integrity field appended to the
+existing Ω-Ξ atom envelope.* Αἰθήρ is the medium that carries — and the point of the name
+is that ΑΙΘΗΡ carries nothing new. `cm.ts` (an lpaq-class context-mixing arithmetic coder:
+seven hashed context models, a match model, a logistic mixer, an APM/SSE stage, a
+deterministic embedded warm-start prior, pure TypeScript) and `atom-codec.ts` (an envelope
+of K single-token atoms, K measured live, carrying `log2(K)` bits per token **by
+construction** and proving the construction on every call) have been in this repo the whole
+time, wired to the registry arm `omega_xi`, absent from `docs/`, and never once measured
+against the frontier. Measured, they win **29 of 29 lanes**: total **12639 → 9043, −3596
+tokens, −28.45 %**, `ls-l-real` 1476 → 731, `ps-aux-real` 1042 → 650, `apt-real` 850 → 566,
+`code-ts` 969 → 714 — and prose as well, `llm-answer` 674 → 597, `email-thread` 488 → 418.
+
+Two standing claims in this document die on that table and are recorded here as dead rather
+than left to be repeated. **"Prose is at the tokenizer floor"** — the floor is a property of
+the *self-describing-message family*, not of the source; an entropy coder needs statistics,
+not structure. **"The `ls -l` residual is bounded by the one-token reference barrier"** —
+the barrier is real for a readable message and irrelevant to a character-level model, which
+codes the same filename column at 15.9 bits/token and halves the lane. Also dead, quietly:
+the **943-token brotli-q11 "floor"** for `ls-l-real`, which was `bits / 14.8` where 14.8 was
+an assumption; the alphabet carries 16 bits/token by construction and 731 < 943.
+
+ΑΙΘΗΡ is the two fixes that make that win something you can ship.
+
+**(1) Portability.** `omegaXiCompress` ships the smallest of fifteen payload candidates, six
+of which reach brotli through `CompressionStream('brotli')` — a Node 22 extension that **no
+browser implements**. On the 6 of 29 lanes where brotli wins, the server emits a wire the
+client cannot inflate at all. It fails loudly (`payloadDecode` throws), so this is a
+portability defect and not a fidelity one, but it is still unshippable. ΑΙΘΗΡ restricts the
+portfolio to `{0,1,2,4,5,7,8,12,15}` — the brotli ids are 3, 6, 10, 11, 13, 14 — for
+**103 tokens over the corpus, 2.7 % of the win**. And the restriction is nearly free for a
+reason worth keeping: a browser-restricted portfolio and a portfolio with
+`CompressionStream` deleted entirely **agree on all 29 lanes**. Once brotli is refused,
+`cm.ts` wins every lane deflate and gzip were contesting. The native streams were never
+contributing; they were only ever a liability.
+
+**(2) Integrity.** `unpackWire` reads its 4-byte header, trusts `payloadLen`, consumes
+exactly that many bytes in 512-byte blocks, and **never checks that all atoms were
+consumed**. There is no checksum. The encoder is round-trip gated, so it never ships an
+unverified wire — but a wire damaged *after* it leaves the encoder has three possible
+outcomes and only one is acceptable. Measured over 1856 mutations (8 kinds × 8 × 29 lanes,
+deterministic xorshift seed `0x2f6e2b1`): 944 refused, 466 no-ops, and **446 that return
+DIFFERENT TEXT with no error at all — 32.1 % of effective mutations corrupt silently.** For
+a codec whose whole claim is byte-exactness that is disqualifying.
+
+The fix is two atoms. K = 65536, 16 bits/atom, fingerprint `9f6dfcc4` for `o200k_base`, so a
+32-bit field is exactly `ceil(32/16) = 2` atoms = 2 tokens, appended to the wire — and
+because `unpackWire` ignores atoms its header did not ask for (verified: the `extend`
+mutation decodes byte-exactly), the field rides outside the envelope's own digit stream and
+`atom-codec.ts` is untouched. What it covers is the part worth thinking about: not the
+compressed payload, which would only catch damage the payload decoder happens to notice, but
+
+```
+CRC-32( alphabetFingerprint || utf8(sourceText) )
+```
+
+checked against the text the reader finally receives — so it catches damage anywhere
+(header, block boundary, payload) and folds in alphabet drift for **zero extra tokens**: if
+the atom alphabet ever changes, every older wire refuses instead of decoding to noise under
+a shifted index. Same 1856 mutations against `aitherDecode`: **1622 refused, 0 silent
+corruptions**; re-run at N = 24, **5568 mutations, 4860 refused, 708 no-ops, 0 silent
+corruptions, 0 hangs**. The arithmetic reconciles exactly — 944 + 446 = 1390, plus the 232 `extend`
+mutations that were no-ops before and are refusals now (appending an atom shifts the
+checksum window) = 1622; the residual 234 no-ops are 232 whitespace doublings and 2
+self-swaps.
+
+**Wire.** `<Ω-Ξ atom run> <c₁> <c₂>`, the atom run being `omegaXiCompress` output verbatim
+under the portable restriction and `c₁c₂` the big-endian base-K digits of the CRC. **No
+per-message contract line**, deliberately and measured: the envelope carries no per-message
+parameters, so there is nothing to declare. A `§ΑΙΘΗΡ` marker measured **4 tokens per
+message, 116 over the corpus**, and buys only self-identification — the fingerprint inside
+the checksum already detects the one thing a marker would have to be trusted to report.
+**Disclosed:** whitespace between atoms is not significant (the wire splits on `/\S+/g`), so
+a re-spaced wire still decodes but will not reproduce its canonical token count.
+
+**Gates.** P1 portable payload id · **G1 envelope invariant measured on the shipped wire**
+(`countTokens(wire) === atomCount`) · G2 integrity round trip through ΑΙΘΗΡ's own decoder,
+checksum verified · **G3 refusal soundness, probed by deliberately flipping an atom** — if
+that decodes to different text the lane refuses · G4 determinism (two encodes, one wire) ·
+G5 strict win over a caller-supplied frontier cost · G6 size bound (4 MiB). Any failure
+returns the identity, so no lane can regress. G1 is not decoration: its first run refused
+**29 of 29** with `invariant broken: 52 tokens for 51 atoms`, because the checksum seam had
+been built by trimming and rejoining and every atom in the alphabet is space-prefixed — so
+trimming stripped the leading space the *first atom's tokenization* depends on. One token per
+lane, invisible to any round trip, caught only because the invariant was measured rather than
+assumed.
+
+**Measured** (o200k, `bench/x87/receipts/aither-ledger.json`, `xi-env.json`, `xi-fuzz.json`,
+`aither-fuzz.json`): frontier 12639 → **9043**, −3596, −28.45 %, **29/29 applied, 29/29
+byte-exact, 29/29 invariant-holding**. Portable Ω-Ξ 8985 vs Node-only 8882 (the 103-token
+price of P1, +58 for the 29 checksums = 9043). Source density 20.7–117.0 bits per atom
+(`ls-l-real` 117.0). Smallest wins: `kb-article` −5 (0.8 %, inside noise for a codec with a
+2-token checksum), `lsblk` −9, `free-m` −19. Largest: `ls-l-real` −745, `ps-aux-real` −392,
+`apt-real` −284.
+
+**Verification.** Round trip 29/29 through the *public* `aitherDecode`, not the inner
+`omegaXiDecode`, which would not test the field ΑΙΘΗΡ added. Envelope invariant 29/29 on the
+shipped wire. Mutation fuzz 1856 and then 5568, **0 silent corruptions, 0 hangs, 0
+nondeterminism** (the same set against the un-checksummed envelope gives 446).
+Environment fuzz: three environments (Node-with-brotli, browser-realistic, no
+`CompressionStream`) × 29 lanes, all round trips exact in all three. Cross-environment
+hazard measured rather than argued: the 6 brotli-payload wires decoded with brotli refused —
+all 6 fail loudly, none returns wrong text. **Cold read in a second
+language: `bench/aither_coldcheck.py`, 29/29 EXACT, exit 0** — it imports nothing from `src/`
+and re-derives the atom alphabet's shape, count, ordering and **FNV-1a fingerprint** (`9f6dfcc4`,
+recomputed in Python), the 4-byte header, the 512-byte block digit walk, the exact atom
+accounting (header + blocks + 2, nothing left over), the portable-codec restriction, and
+`zlib.crc32(fingerprint || sourceBytes)` over bytes read from disk. **Its boundary is stated
+in the file and is real:** it cannot decode the CM payload, so it proves the checksum agrees
+with the source on disk, not that the body decodes to it. Running it found the counterexample
+that justifies checksumming the *text* rather than the payload — flipping `lsblk`'s first atom
+from index 3072 to 0 turns `codec=12, payloadLen=94` into `codec=0, payloadLen=94`, leaving the
+framing byte-identical and every structural check blind; only the decoded-text CRC sees it. Of
+six body-flip probes four were caught by framing accident and two were not, so that class is
+reported as **deferred** to `aitherDecode` and to the fuzz above. The honest split: the
+envelope is verified in two languages, the CM decode in one.
+
+**Greedy?** **No.** The portfolio is exhaustive over a fixed candidate set and ships the
+smallest; the restriction is a set membership test; the checksum is two atoms in a fixed
+place. Nothing is searched, nothing is ranked, and G3's probe is a single deliberate
+corruption rather than a search for one.
+
+**Time- or CPU-bound?** **CPU-bound.** The CM coder is ~0.2 s per 10 KB; the full portfolio
+plus the two extra compressions for G2 and G4 makes `ls-l-real` seconds where the frontier
+takes minutes. No interleaved A/B was run, so **no speed claim is made** — this document has
+already been burned once by comparing wall times across processes.
+
+**Honest source.** No external source contributed a mechanism here; the mechanism was
+already in the repository and the contribution is measurement plus two fixes. Prior art for
+the *class* is the lpaq/zpaq family (Mahoney) for the coder and the standard CRC-32
+(IEEE 802.3) for the field. Prior art surveyed earlier in this document and still not
+imported: Context Codec (arXiv:2605.17302), MedTPE (arXiv:2605.11774), *LLM as Token
+Compressor* (arXiv:2603.25340) — the last two need adapter fine-tuning and are not
+byte-exact. The methodological transfer from the frontier-lab review survives intact and is
+what this entry is built on: **a claim is only as good as an independent check**, so the
+446 silent corruptions were measured before the fix was written, and the fix was then
+re-measured on the identical mutation set rather than asserted to work.
+
+**Known limits.** The gain is smallest exactly where the readable tier is strongest relative
+to the source, and on a 51-token wire the 2-token checksum is 4 % of it. ΑΙΘΗΡ does not know
+which tier the caller needs — G5 only knows which is cheaper. The wire is bound to
+`o200k_base` and fingerprint `9f6dfcc4`, by design and enforced by the checksum rather than
+by convention. There is **no partial mode**: all glyph run or nothing, so a caller who wants
+the structure readable and only the irreducible literal residue packed does not get that
+here. That hybrid is the obvious X88 and it is not built. And the biggest limit is the one
+that decides whether this arm should ever be used: **the wire is not readable by the model.**
+The frontier's win has always lived in a model being able to expand `t:100G/37` from a
+41-token declaration. Where a prompt must be *used*, the readable tier at 12639 is the only
+one that applies; where content is stored, relayed, cached or handed to a program that will
+restore it, the entropy tier at 9043 is 28.45 % cheaper and now refuses damage instead of
+hiding it. **Neither number should be quoted alone.**
+
+**Record.** [`docs/codecs.md`](codecs.md) §X87, `src/lib/omega/aither.ts`, registry key
+`aither`, `bench/x87/`, `bench/aither_coldcheck.py`, receipts in
+`bench/x87/receipts/` (including `cold/`), seven real lanes in `bench/holdout-x87/`.
