@@ -1,0 +1,19 @@
+# source: apt-cache policy (real)
+python3:
+  Installed: 3.11.2-1+b1
+  Candidate: 3.11.2-1+b1
+  Version table:
+ *** 3.11.2-1+b1 100
+        100 /var/lib/dpkg/status
+git:
+  Installed: 1:2.39.5-0+deb12u3
+  Candidate: 1:2.39.5-0+deb12u3
+  Version table:
+ *** 1:2.39.5-0+deb12u3 100
+        100 /var/lib/dpkg/status
+curl:
+  Installed: 7.88.1-10+deb12u14
+  Candidate: 7.88.1-10+deb12u14
+  Version table:
+ *** 7.88.1-10+deb12u14 100
+        100 /var/lib/dpkg/status

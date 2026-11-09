@@ -1,0 +1,72 @@
+Grid: Ln cell starts/ends char n; blocks per column: x one value/line, rN N v*count lines, dN N values then letters; R = one value per column padded to anchors, L literal. Print.
+⟨5¦L0r1¦L2x¦L56r15¦L74r15¦L86d11¦pL4R4L1R1L2R7L1R6L2⟩¦s
+|*18
+|-/dev/shm
+|-/dev/pts
+|-/dev/mqueue
+`-/dev/hugepages
+`-/proc/sys/fs/binfmt_misc
+|-/sys/kernel/security
+|-/sys/fs/selinux
+|-/sys/fs/cgroup
+|-/sys/fs/pstore
+|-/sys/fs/bpf
+|-/sys/kernel/debug
+`-/sys/fs/fuse/connections
+|-/run/lock
+|-/run/credentials/systemd-sysctl.service
+|-/run/credentials/systemd-sysusers.service
+|-/run/credentials/systemd-tmpfiles-setup-dev.service
+|-/run/credentials/systemd-tmpfiles-setup.service
+`-/run/rpc_pipefs
+tmpfs
+devpts
+mqueue
+hugetlbfs
+systemd-1
+securityfs
+selinuxfs
+cgroup2
+pstore
+bpf
+debugfs
+fusectl
+tmpfs
+ramfs*4
+sunrpc
+tmpfs
+devpts
+mqueue
+hugetlbfs
+autofs
+securityfs
+selinuxfs
+cgroup2
+pstore
+bpf
+debugfs
+fusectl
+tmpfs
+ramfs*4
+rpc_pipefs
+rw,nosuid,nodev
+rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000
+rw,nosuid,nodev,noexec,relatime
+rw,relatime,pagesize=2M
+rw,relatime,fd=30,pgrp=1,timeout=0,minproto=5,maxproto=5,direct
+rw,nosuid,noexec,relatime
+rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot
+rw,nosuid,nodev,noexec,relatime,mode=700
+rw,nosuid,nodev,noexec,relatime,size=5120k
+ro,nosuid,nodev,noexec,relatime,mode=700
+rw,relatime
+abcdecfgchccijjjjk
+# source: findmnt (real)
+TARGET                                                  SOURCE            FSTYPE      OPTIONS
+/                                                       /dev/vda          ext4        rw,relatime,discard
+|-/dev                                                  devtmpfs          devtmpfs    rw,relatime,size=2014060k,nr_inodes=503515,mode=755
+|-/proc                                                 proc              proc        rw,nosuid,nodev,noexec,relatime
+|   `-/proc/sys/fs/binfmt_misc                          binfmt_misc       binfmt_misc rw,nosuid,nodev,noexec,relatime
+|-/sys                                                  sysfs             sysfs       rw,nosuid,nodev,noexec,relatime
+|-/run                                                  tmpfs             tmpfs       rw,nosuid,nodev,size=806892k,nr_inodes=819200,mode=755
+`-/etc/ssl/certs                                        tmpfs[/e2b/certs] tmpfs       rw,nosuid,nodev,size=806892k,nr_inodes=819200,mode=755

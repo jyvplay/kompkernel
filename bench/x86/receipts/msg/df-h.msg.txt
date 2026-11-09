@@ -1,0 +1,3 @@
+Grid: Ln/Rn cell starts/ends char n; blocks per column: t:V/steps V stepping per row; R = one value per column padded to anchors, L literal. Print.
+⟨5¦L0t:/dev/nvme0n1p0/0,0,1¦L17t:100G/37¦R27t:40G/11¦R33t:50G/9¦L35t:30% /mnt/vol0/3,1¦pL1R18L1⟩¦s
+Filesystem      Size  Used Avail Use% Mounted on

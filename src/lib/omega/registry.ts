@@ -133,6 +133,7 @@ import { apographeEncode, apographeDecode, apographeArmOf } from './apographe';
 import { metronEncode, metronDecodeResult } from './metron';
 import { typosEncode, typosDecode } from './typos';
 import { kannabosEncode } from './kannabos';
+import { kenonEncode } from './kenon';
 import { diastemaEncode } from './diastema';
 import { archetyponEncode } from './archetypon';
 import { synkrisisEncode } from './synkrisis';
@@ -1634,6 +1635,11 @@ export function codecEntries(): Entry[] {
     {
       key: 'parataxis', label: '⫴ PARATAXIS (X80: lossless column-geometry padding elision — aligned tables pad every field to a fixed column width, and that padding is pure geometry; delete it and declare the widths once, e.g. `§PARATAXIS pad fields to 56 18 12`; lines that would be ambiguous for the reader are listed by number and left literal; guarded by geometry agreement, byte-exact two-layer round trip, decoder-unambiguity and strict win)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = parataxisEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
+    },
+
+    {
+      key: 'kenon', label: '\u039a\u0395\u039d\u039f\u039d KENON (X86: column-boundary inference by GAP VOTING \u2014 KANNABOS picks its candidate column counts from the cell-count histogram, which is the wrong question when the last column is prose (`dpkg -l` measures 10:25 9:25 8:23 because those are Description word counts, so the true k=5 is never tried and the lane reports "no grid plan"); \u039a\u0395\u039d\u039f\u039d instead lets every run of two or more spaces vote for the offset at which the next field begins and keeps the offsets that almost every line votes for (dpkg -l: 4:135 34:136 65:136 78:135 \u21d2 k=5), then hands those counts to the existing byte-exact grid machinery; prose cannot manufacture a boundary because its word gaps land at offsets that occur once each; guarded by a support floor G2, byte-exact grid G3/G4, one-line contract G5, TWO-STAGE round trip G6 (frontier reproduces our message, our contract reproduces the source) and a strict win measured through the frontier G7; honest ledger: df-h 171\u2192134 and kubectl 326\u2192304 win, psql +55 and dpkg-l +40 LOSE through the frontier and are refused \u2014 de-interleaving pays where columns are generated, not where they are prose)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = kenonEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
     },
 
     {

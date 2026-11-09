@@ -1,0 +1,7 @@
+#!/bin/sh
+# (a) clean A/B on the two winning lanes with the corrected two-stage check,
+# (b) the 29-lane frontier confirmation, sequentially so timings are not contended.
+cd /home/user/kompkernel
+OMEGA_DET=1 X86_AB_OUT=bench/x86/receipts/ab-win.json node bench/x86/ab.mjs bench/holdout-tbl/df-h.txt bench/holdout-tbl/kubectl-get-pods.txt 2>&1 | tee bench/x86/receipts/ab-win.log
+echo "=== FRONTIER CONFIRMATION (29 lanes, OMEGA_DET=1) ==="
+OMEGA_DET=1 node bench/x86/front.mjs bench/holdout-x42/lsblk.txt bench/holdout-work/kb-article.txt bench/holdout-x42b/uptime-w.txt bench/holdout-x42b/free-m.txt bench/holdout-x42b/vmstat.txt bench/holdout-work/unified-diff.patch bench/holdout-tbl/df-h.txt bench/holdout-x41/df-real.txt bench/holdout-x41/du-real.txt bench/holdout-x41/node-help.txt bench/holdout-x42/findmnt.txt bench/holdout-x42/df-h.txt bench/holdout-work/email-thread.txt bench/holdout-work/llm-answer.md bench/holdout-tbl/markdown-table.md bench/holdout-tbl/psql-output.txt bench/holdout-x40/prices.csv bench/holdout-x40/cue-sheet.md bench/holdout-x42/ps-ef.txt bench/holdout-x41/ls-real.txt bench/holdout/json-pkg.txt bench/holdout/code-ts.txt bench/holdout-x42/dpkg-l.txt bench/holdout-x41/ps-real.txt bench/holdout-tbl/kubectl-get-pods.txt bench/holdout-x40/metrics.tsv bench/holdout-x41/ps-aux-real.txt bench/holdout-x41/apt-real.txt bench/holdout-x41/ls-l-real.txt 2>&1 | tee bench/x86/receipts/frontier.log

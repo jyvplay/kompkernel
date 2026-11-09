@@ -4239,3 +4239,205 @@ comparison rather than removed.
 
 **Record.** [`docs/codecs.md`](codecs.md) §X81, [`bench/x81/REPORT.md`](../bench/x81/REPORT.md),
 receipts in `bench/x81/receipts/`.
+
+## X82 — SCHEMA (⊙)
+
+**Back-filled at X86.** SCHEMA shipped in `docs/codecs.md` §X82 with receipts but never got
+an entry here; the omission is corrected rather than papered over, and everything below is
+taken from that section and from `bench/x82/receipts/`, not re-derived.
+
+**Decode abbreviation → technical design spec.** `§SCHEMA 8d=dddd-dd-dd 5d=ddd.dd.` —
+*lossless token-shape elision by discovered signature and length-table decode*. A machine
+token (semver, ISO date, clock, fixed-scale decimal, IPv4) is a fixed number of
+fixed-width groups joined by punctuation, and in o200k each punctuation character inside a
+digit run is its own token because BPE merges do not cross a pre-token boundary. SCHEMA
+deletes the punctuation and declares the group widths **once**; the packed run's *length
+alone* selects the rule, so no per-instance marker is paid. `d` = digit, `L` = letter.
+Discovery is from the text (six separator classes scanned), not from a hand-written
+catalogue. Selection is greedy over length-disjoint shapes in descending raw saving, then
+a bounded prune drops the least valuable shape while the message does not beat the
+frontier. Gates G1–G7: shape discovery, length-table injectivity (no two shapes may claim
+the same packed length), no bare-run collision with text already in the source, round trip,
+and a strict win measured **through** the frontier rather than against `countTokens` —
+which is the whole point, because measured with `countTokens` every lane refuses
+(contract + packed is longer than the source) while several win through the frontier.
+
+**Measured** (`bench/x82/verify.ts`, o200k, byte-exact on every lane):
+
+| lane | frontier | SCHEMA | Δ |
+|---|---:|---:|---:|
+| `psql-output.txt` | 244 | **173** | **−71 (−29.1 %)** |
+| `cue-sheet.md` | 163 | **155** | **−8 (−4.9 %)** |
+| `markdown-table.md` | 176 | **171** | **−5 (−2.8 %)** |
+| `json-pkg.txt` | 681 | **679** | **−2** |
+
+and **zero wins across 13 secondary lanes** (`bench/x82/receipts/schema-sweep.txt`: the six
+`holdout-lang` knowledge bases, `agent-history.md`, `find-listing`, `git-log-fuller`,
+`git-numstat`, `ls-full-iso`, `node-stacktraces`, `npm-ls`), every one `rt=true` and every
+one unchanged. A DISTINCTNESS gate (distinct values / occurrences ≥ 0.5) is what separates
+the wins from the no-ops: measured absorption by the parent frontier is 86–103 % on
+repetitive shapes and only 14 % on distinct ones, so packing a shape the frontier already
+models buys nothing and the contract still costs.
+
+**Greedy?** The rewrite is not — a deterministic ordered pass. The **acceptance search is**
+greedy with a bounded repair loop (≤4 frontier evaluations), so it can return a
+locally-but-not-globally-optimal shape set: two medium length-disjoint shapes can beat the
+single largest and the greedy order never searches that.
+
+**Time- or CPU-bound?** **CPU-bound.** Discovery is a handful of linear passes plus a sort,
+O(n log n) in candidate tokens; the cost is the frontier evaluations in the prune. No I/O.
+
+**Honest source.** No compression result is imported. Cited for tokenizer behaviour only:
+arXiv:2402.14903 and arXiv:2402.01035 (digits chunk in threes right-to-left; any non-digit
+breaks the chunk). Consulted and not transferred: LTSC (arXiv:2506.00307 — lossless
+LZ77-style meta-token dictionary, 18–27 %, needs fine-tuning); Splinter (ACL 2025 —
+reversible single-character deletion as a composite `position:letter` character, more
+general but strictly more expensive when the shape repeats, which is exactly when SCHEMA
+uses it).
+
+**Record.** [`docs/codecs.md`](codecs.md) §X82, `src/lib/omega/schema.ts`, registry key
+`schema`, receipts in `bench/x82/receipts/`.
+
+## X86 — ΚΕΝΟΝ (KENON)
+
+**Decode abbreviation → technical design spec.** *Column-boundary inference by gap voting,
+feeding the existing byte-exact KANNABOS grid.* A space-aligned table whose last column is
+prose — `dpkg -l`, `ps aux`, `ls -la`, `psql` — is the most common shape in real command
+output and the one KANNABOS cannot find, because `kannabosPlan` picks its candidate column
+counts from the **cell-count histogram** (how many non-space runs a line usually carries).
+On `dpkg -l` that histogram reads `10:25 9:25 8:23 7:20 11:18` over 141 lines: those are
+the **word counts of the Description column**, so the true count, 5, is never a candidate
+and the lane reports *no grid plan*.
+
+ΚΕΝΟΝ asks the geometry instead. A column boundary is **a gap that occurs on almost every
+line**: every run of ≥2 spaces votes for the offset at which the next field begins, and the
+offsets supported by ≥ max(3, ⌈0.6 · lines⌉) lines are the boundaries.
+
+```
+dpkg -l, 141 lines      4:135  34:136  65:136  78:135        → k=5
+kubectl,  23 lines      37:23 45:23 57:23 68:23 76:23 92:23   → k=7
+ps aux,   61 lines      18:59  23:58  38:37  49:60  54:58  62:59 → k=7
+apt list, 61 lines      no offset reaches the floor           → refused (G2)
+```
+
+Prose cannot manufacture a boundary — its word gaps land at offsets occurring once or twice
+each — which is why the vote survives a free-text tail that destroys the histogram. Two
+thresholds (0.6 strict, 0.4 permissive) plus *k*−1 are offered, since a boundary just under
+the floor still bounds a real column; every candidate costs a full grid fit, so the list is
+three long. The wire, the anchors (L start / R end / T tail), the per-column codecs
+(`x` value-per-line, `rN` runs, `dN` dictionary, `wW` fixed width, `l:`/`k:` affine and
+clock laws, `t:` compound templates with `%M` periodicity), the row/literal pattern and the
+byte-exact rebuild are **KANNABOS's, unchanged**: ΚΕΝΟΝ re-derives no padding arithmetic.
+The single edit to `kannabos.ts` is an optional `extraK: number[] = []` unioned into the
+candidate list, plus `kannabosRunMarker()` so the contract can name the run marker the wire
+actually declares (G5b) instead of the hard-coded `*`.
+
+**Gates.** G1 ≥6 lines · G2 support floor · G3 a plan exists for a voted count ·
+G4 `kannabosDecode(wire) === text` before anything is measured · G5 one-line contract,
+G5b contract marker = wire marker · **G6 two-stage round trip** (the frontier reproduces our
+message, our contract then reproduces the source) · G7 strict win on one-message tokens
+through the frontier. Refusal returns the frontier's own message, so no lane can regress.
+
+**Measured** (o200k, `OMEGA_DET=1`, `bench/x86/receipts/kenon.json`, `ab.json`):
+
+| lane | frontier | ΚΕΝΟΝ | Δ | cols/rows/lit | clause | wire |
+|---|---:|---:|---:|---|---:|---:|
+| `df-h.txt` (tbl) | 171 | **134** | **−37 (−21.6 %)** | 5/18/2 | 41 | 93 |
+| `kubectl-get-pods.txt` | 326 | **304** | **−22 (−6.7 %)** | 7/22/2 | 69 | 414 |
+| `psql-output.txt` | 244 | 299 | +55 refused | 11/24/6 | 70 | 300 |
+| `findmnt.txt` | 444 | 501 | +57 refused | 5/18/10 | 50 | 722 |
+| `dpkg-l.txt` | 673 | 713 | +40 refused | 5/36/6 | 50 | 800 |
+| `ls-usr-bin.txt` | 375 | 510 | +135 refused | 9/39/3 | 52 | 540 |
+| `ls-full-iso.txt` | 367 | 491 | +124 refused | 9/28/6 | 52 | 525 |
+| `ps-real.txt` / `ss-tan.txt` | 397 / 209 | 506 / 318 | +109 / +109 refused | 6/39/3 · 5/17/9 | 52 / 61 | 565 / 519 |
+| `ps-eo-cpu.txt` / `proc-meminfo.txt` | 389 / 349 | 480 / 438 | +91 / +89 refused | 6/39/3 · 3/48/7 | 52 / 61 | 532 / 386 |
+| `df-real.txt` / `df-h-all.txt` | 126 / 124 | 232 / 230 | +106 / +106 refused | 6/6/2 | 61 | 171 / 169 |
+| `vmstat.txt`, `apt-real.txt` | 149, 850 | — | refused (G2, no grid) | — | — | — |
+
+**Two wins, thirteen refusals.** `df-h.txt` is a lane **no other arm wins**: PARATAXIS's own
+receipt records `refused: no win (best 183 >= frontier 171)` and ΚΕΝΟΝ reaches 134.
+`kubectl` is a **tie** with PARATAXIS (both 304), not a new best — stated as a tie.
+
+**Why the refusals are one inequality, not thirteen accidents.** Two measured laws
+(`bench/x86/receipts/ab.json`): the contract is paid at **100 % of its raw price**
+(`F(clause+wire) − F(wire)` = `raw(clause)` exactly on `df-h` 41, `dpkg-l` 50, `findmnt` 50,
+`psql` 70; 71 vs 69 on `kubectl`), and a columnar wire is **nearly incompressible**
+(`F(wire)/raw(wire)` = 1.000 `df-h`, 0.829 `dpkg-l`, 0.763 `psql`, 0.625 `findmnt`, 0.563
+`kubectl`) against 0.31–0.67 on the sources. So the win condition is
+`raw(wire)·ρ + raw(clause) < F(source)`: `df-h` clears it because five columns are
+*generated* (93 raw tokens for a 570-token source), `kubectl` because its columns *repeat*
+(ρ = 0.563 — the same value adjacent to itself is still a repeat the frontier can use), and
+`dpkg-l` fails it (663 + 50 = 713 > 673). **De-interleaving pays where columns are
+generated or self-repeating, not where they are prose.**
+
+**What the vote bought, isolated.** Arm A = histogram candidates, arm B = histogram + vote,
+same frontier, same gate: `df-h` A −24 → B **−37** (**the vote changed the plan, 13
+tokens**); `kubectl`, `findmnt`, `psql` — **identical**, the vote changed nothing;
+`dpkg-l`, `dpkg-l-full` (16 591 bytes, 136 rows), `df-real`, `df-h-all` — **no plan at all
+without the vote**, byte-exact with it, and all four then *lose on cost and are refused*.
+Reach and win are different properties; the vote buys reach plus 13 tokens on one lane, and
+this entry does not upgrade reach into wins. `dpkg-l-full`'s cost A/B was started and **not
+completed** (three frontier encodes on a 16.5 KB lane); the predicted loss
+(0.829 · 3407 + 50 ≈ 2875 vs a frontier of 2258) is labelled a prediction.
+
+**Verification.** `bench/kenon_decode.py` is a **cold CPython reader** — different language,
+no TypeScript, no repo state, nothing passed in but the message: **16/16 real lanes
+byte-exact**, including `dpkg-l-full` (16 591 chars), `ls-l-real` (10 692), `find-listing`
+(11 789). Synthetic red team (`bench/x86/fuzz.ts`, seeded, 400 generated tables with
+random column counts, alignments, widths, gaps, value classes incl. empty and non-ASCII,
+injected literal rows, CRLF and no-trailing-newline): **223 accepted, 177 refused, 0 hard
+failures**, 60 accepted cases re-verified through the CPython reader. Decoder attack
+(`bench/x86/fuzz_decode.py`, 2 554 and 8 512 mutations over the 16 real messages):
+**0 uncaught exceptions, 0 hangs, 0 nondeterminism**, 618 refusals, and a hand-built
+contract/wire marker mismatch refused by G5b. It found one real defect on the first run
+(`int(' ')` escaping as `ValueError` from the `t:` step parser), fixed and re-run.
+
+**Greedy?** **No.** The vote is a deterministic histogram with a fixed floor; the plan is
+chosen by KANNABOS by *measured* cost among ≤6 candidates; the gate is one comparison. No
+search, no sampling, no repair loop — the output is a total function of the input.
+
+**Time- or CPU-bound?** **CPU-bound.** The vote is one regex pass per line, O(chars),
+milliseconds (the whole 41-lane screen runs in under a second); the grid fit is
+O(lines × candidates); the gate is **exactly one extra frontier encode** — 6.1 s on `df-h`,
+34.6 s on `kubectl`, 50.7 s on `dpkg-l`, measured this turn. No I/O, no waiting.
+
+**Honest source.** Fresh searches this turn. Column-by-column serialisation for LLM input:
+X. Xiao et al., *Cents: Boosting LLMs with Cost-Efficient Sequences* (VLDB 18:4574).
+Fields inferred from recurring character offsets: *TWIX: Visual Template Inference for Data
+Extraction from Documents* (PACMMOD/SIGMOD 2025, doi:10.1145/3780105). Columnar notation
+for LLM context specifically: *ONTO* (arXiv:2604.17512, 46–51 % vs JSON). Contract-cost
+accounting stated formally: arXiv:2604.13066, whose savings criterion charges the
+dictionary `n_token(D)` against the saving — here `D` is the clause and its price is
+**measured** at 100 % of raw. **Imported: the inference principle. Not imported: code,
+data, tokenizer behaviour, or any published ratio** — none of these reads space-aligned CLI
+output, none emits a byte-exact wire, none states a gap-support vote with a floor.
+Consulted and not transferred: Context Codec (arXiv:2605.17304, commitment-level and
+explicitly lossy, though its JSON-is-worse-than-prose ordering independently supports
+staying in plain text), MedTPE (arXiv:2605.11774) and *LLM as Token Compressor*
+(arXiv:2603.25340) — both need adapter fine-tuning, neither is byte-exact or readable in a
+plain chat.
+
+**Frontier-lab solved-math review** (requested): of 120 "AI solved it" announcements in two
+years, 64 are third-party confirmed, 40 unverified, 11 were literature retrieval mislabelled
+as discovery, 4 had wrong proofs. The confirmed ones — OpenAI's unit-distance disproof
+(arXiv:2605.20695, nine external verifiers, Lean-checked), Anthropic's Jacobian
+counterexample (dim ≥3, Lean), the zeta-zero proportion, the FLT Lean formalisation
+(29 511 theorems, ~13 M lines) — all bind the claim to an **independent check in a
+different formalism**; OpenAI's 722-manuscript release withdrew three within a day over one
+sign error that invalidated two dependent constructions, with ~50 % shipped unverified.
+Transferred, methodologically only: (i) the cold CPython reader is that check for this wire;
+(ii) a dependency inherits its parent's risk, so the one-line `kannabos.ts` change is paid
+for with a full 29-lane frontier re-confirmation rather than an argument; (iii) the
+Oct-2025 "10 Erdős problems" retraction is the prior-art duty in negative form. **No
+compression mechanism transfers** — proof search, agent swarms and Lean tactics say nothing
+about token-level representation.
+
+**Known limits.** Two lanes win, the larger by 37 tokens; `kubectl` is a tie with an
+existing arm. The vote needs a *stable* boundary, so single-space output, trees, prose,
+code and CSV are refused at G2 — 25 of 41 screened lanes have no grid at all. It cannot
+beat a frontier that already models the source better than the columnar form, which the ρ
+measurements say is most lanes. The 41-token contract assumes a reader competent to expand
+`t:100G/37`; the 94–123-token full-wording arm is kept for comparison, not deleted.
+
+**Record.** [`docs/codecs.md`](codecs.md) §X86, `src/lib/omega/kenon.ts`, registry key
+`kenon`, `bench/kenon_decode.py`, `bench/x86/`, receipts in `bench/x86/receipts/`.

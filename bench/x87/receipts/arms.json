@@ -1,0 +1,101 @@
+{
+ "rows": [
+  {
+   "path": "bench/holdout-x40/metrics.tsv",
+   "lane": "metrics.tsv",
+   "raw": 811,
+   "F": 210,
+   "parent": "akolouthia2",
+   "synkrisisParentTokens": 237,
+   "parentTokens": 210,
+   "frontierCosts": {
+    "synkrisis": 237,
+    "kanon": 236,
+    "akolouthia2": 210,
+    "apographe": 237,
+    "metron": 237,
+    "diastema": 237
+   },
+   "frontierReportedCosts": {
+    "synkrisis": 237,
+    "kanon": 236,
+    "akolouthia2": 210,
+    "apographe": 237,
+    "metron": 237,
+    "diastema": 237
+   },
+   "frontierComplete": true,
+   "arm": "current-frontier-parent",
+   "mode": null,
+   "pairs": 0,
+   "candidateTokens": null,
+   "candidateExact": null,
+   "notes": "outside bounded, collision-free, well-nested markup domain",
+   "secs": 61.5
+  },
+  {
+   "path": "bench/holdout-x42b/vmstat.txt",
+   "lane": "vmstat.txt",
+   "raw": 229,
+   "F": 149,
+   "parent": "synkrisis",
+   "synkrisisParentTokens": 149,
+   "parentTokens": 149,
+   "frontierCosts": {
+    "synkrisis": 149,
+    "kanon": 326,
+    "akolouthia2": 183,
+    "apographe": 149,
+    "diastema": 149
+   },
+   "frontierReportedCosts": {
+    "synkrisis": 149,
+    "kanon": 183,
+    "akolouthia2": 183,
+    "apographe": 149,
+    "diastema": 149
+   },
+   "frontierComplete": true,
+   "arm": "synkrisis-parent",
+   "mode": null,
+   "pairs": 0,
+   "candidateTokens": null,
+   "candidateExact": null,
+   "notes": "outside bounded, collision-free, well-nested markup domain",
+   "secs": 4.2
+  },
+  {
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "lane": "markdown-table.md",
+   "raw": 330,
+   "F": 176,
+   "parent": "synkrisis",
+   "synkrisisParentTokens": 176,
+   "parentTokens": 176,
+   "frontierCosts": {
+    "synkrisis": 176,
+    "kanon": 219,
+    "akolouthia2": 228,
+    "apographe": 176,
+    "metron": 176,
+    "diastema": 176
+   },
+   "frontierReportedCosts": {
+    "synkrisis": 176,
+    "kanon": 219,
+    "akolouthia2": 228,
+    "apographe": 176,
+    "metron": 176,
+    "diastema": 176
+   },
+   "frontierComplete": true,
+   "arm": "synkrisis-parent",
+   "mode": null,
+   "pairs": 0,
+   "candidateTokens": null,
+   "candidateExact": null,
+   "notes": "outside bounded, collision-free, well-nested markup domain",
+   "secs": 8.9
+  }
+ ]
+}

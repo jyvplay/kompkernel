@@ -25,3 +25,5 @@ bench/x74/*.mjs
 bench/x75/*.mjs
 bench/x79/*.mjs
 bench/x80/*.mjs
+bench/x86/*.mjs
+bench/x87/*.mjs

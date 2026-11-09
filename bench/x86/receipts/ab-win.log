@@ -1,0 +1,10 @@
+df-h.txt                 raw=  570 F=  171 voteK=[4,5] bounds=[17,23,29,35]
+   A(histogram)  cols=6 wire=97 Fwire=97(1) Fmsg=147 d=-24
+   B(+gap vote)  cols=5 wire=93 Fwire=93(1) Fmsg=134 d=-37
+kubectl-get-pods.txt     raw= 1006 F=  326 voteK=[6,7] bounds=[37,45,57,68,76,92]
+   A(histogram)  cols=7 wire=414 Fwire=233(0.563) Fmsg=304 d=-22
+   B(+gap vote)  cols=7 wire=414 Fwire=233(0.563) Fmsg=304 d=-22
+
+lanes=2 A-plans=2 B-plans=2
+  df-h.txt                 A cols=6 d=-24   B cols=5 d=-37   VOTE CHANGED THE PLAN
+  kubectl-get-pods.txt     A cols=7 d=-22   B cols=7 d=-22   vote changed nothing

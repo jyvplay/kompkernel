@@ -1,0 +1,47 @@
+lane                       raw     F  vote k  bounds[support]  plan(cols/rows/lit)  wireRaw clauseRaw  decode
+ps-aux-real.txt           3054  1042  k=7 [18,23,38,49,54,62]  cols=11 rows=57 lit=5   1433    61  EXACT   | histogram-alone: cols=11
+ls-l-real.txt             5194  1476  k=3 [12,41]  cols=9 rows=149 lit=3   2842    52  EXACT   | histogram-alone: cols=9
+apt-real.txt              2739   850  k=1 []  NO PLAN   | histogram-alone: none
+ps-real.txt               1106   397  k=4 [18,23,33]  cols=6 rows=39 lit=3    565    52  EXACT   | histogram-alone: cols=6
+ls-real.txt               1034   433  k=1 []  cols=9 rows=29 lit=12    705    61  EXACT   | histogram-alone: cols=9
+du-real.txt                458   272  k=1 []  NO PLAN   | histogram-alone: none
+df-real.txt                158   126  k=3 [16,35]  cols=6 rows=6 lit=2    171    61  EXACT   | histogram-alone: none
+node-help.txt             1099   862  k=2 [30]  NO PLAN   | histogram-alone: none
+ps-ef.txt                 1144   315  k=5 [14,23,26,43]  cols=8 rows=39 lit=3    448    52  EXACT   | histogram-alone: cols=8
+findmnt.txt                787   444  k=4 [56,74,86]  cols=5 rows=18 lit=10    722    50  EXACT   | histogram-alone: cols=5
+ss-tan.txt                 843     ?  k=5 [11,18,25,85]  cols=5 rows=17 lit=9    519    61  EXACT   | histogram-alone: cols=5
+ls-usr-bin.txt            1029     ?  k=2 [42]  cols=9 rows=39 lit=3    540    52  EXACT   | histogram-alone: cols=9
+proc-partitions.txt         33     ?  k=1 []  NO PLAN   | histogram-alone: none
+lsblk.txt                   60    60  k=1 []  NO PLAN   | histogram-alone: none
+df-h-all.txt               156     ?  k=3 [16,35]  cols=6 rows=6 lit=2    169    61  EXACT   | histogram-alone: none
+ip-br.txt                   74     ?  k=1 []  NO PLAN   | histogram-alone: none
+ps-eo-cpu.txt             1087     ?  k=5 [14,17,22,29]  cols=6 rows=39 lit=3    532    52  EXACT   | histogram-alone: cols=6
+ss-s.txt                   119     ?  k=1 []  NO PLAN   | histogram-alone: none
+free-m.txt                  76    76  k=1 []  NO PLAN   | histogram-alone: none
+metrics.tsv                811   210  k=1 []  NO PLAN   | histogram-alone: none
+prices.csv                 582   133  k=1 []  NO PLAN   | histogram-alone: none
+cue-sheet.md               513   163  k=1 []  NO PLAN   | histogram-alone: cols=10
+markdown-table.md          330   176  k=1 []  NO PLAN   | histogram-alone: none
+dpkg-l-full.txt           4277     ?  k=5 [4,34,65,78]  cols=5 rows=136 lit=6   3407    50  EXACT   | histogram-alone: none
+ls-la-usrbin.txt          3271     ?  k=3 [12,43]  cols=9 rows=119 lit=3   1427    61  EXACT   | histogram-alone: cols=9
+npm-ls-all.txt            2253     ?  k=1 []  NO PLAN   | histogram-alone: cols=3
+proc-cpuinfo.txt          1061     ?  k=1 []  NO PLAN   | histogram-alone: none
+proc-meminfo.txt           550     ?  k=1 []  cols=3 rows=48 lit=7    386    61  EXACT   | histogram-alone: cols=3
+find-listing.txt          3997     ?  k=1 []  cols=3 rows=120 lit=1   3788    43  EXACT   | histogram-alone: cols=3
+git-numstat.txt           4632     ?  k=1 []  NO PLAN   | histogram-alone: none
+npm-ls.txt                2747     ?  k=1 []  NO PLAN   | histogram-alone: cols=3
+ls-full-iso.txt           1175     ?  k=2 [12]  cols=9 rows=28 lit=6    525    52  EXACT   | histogram-alone: cols=9
+git-log-fuller.txt         143     ?  k=1 []  NO PLAN   | histogram-alone: none
+node-stacktraces.txt       568     ?  k=1 []  NO PLAN   | histogram-alone: none
+kb-article.txt             656   622  k=1 []  NO PLAN   | histogram-alone: none
+unified-diff.patch         578   419  k=1 []  NO PLAN   | histogram-alone: none
+email-thread.txt           629   488  k=1 []  NO PLAN   | histogram-alone: none
+llm-answer.md              733   674  k=1 []  NO PLAN   | histogram-alone: none
+json-pkg.txt              1152   681  k=2 [8]  NO PLAN   | histogram-alone: none
+code-ts.txt               1422   969  k=1 []  NO PLAN   | histogram-alone: none
+aapl-2014.csv             3108     ?  k=1 []  NO PLAN   | histogram-alone: none
+
+lanes=41  with-a-grid=16  grid-KANNABOS-ALONE-COULD-NOT-FIND=3
+  df-real.txt              cols=6 bounds=[16,35]
+  df-h-all.txt             cols=6 bounds=[16,35]
+  dpkg-l-full.txt          cols=5 bounds=[4,34,65,78]

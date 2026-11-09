@@ -1,0 +1,34 @@
+Grid: Ln/Rn cell starts/ends char n, Tn tail n spaces after last cell; blocks per column: x one value/line, rN N v*count lines, dN N values then letters; R = one value per column padded to anchors, L literal. Print.
+⟨6¦L0r4¦R20r5¦R26x¦R32r5¦R37d4¦T1x¦pL1R6L1⟩¦s
+Filesystem
+/dev/root
+devtmpfs
+tmpfs*3
+Size
+21G
+2.0G*2
+788M
+5.0M
+Used
+1.7G
+0
+0
+288K
+0
+Avail
+19G
+2.0G*2
+788M
+5.0M
+Use%
+9%
+0%
+1%
+abccdc
+Mounted on
+/
+/dev
+/dev/shm
+/run
+/run/lock
+# source: df -h (real, this sandbox, 2026-10-24T17:52:16Z)

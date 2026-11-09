@@ -1,0 +1,7 @@
+# source: df -h (real, this sandbox, 2026-10-24T17:52:16Z)
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        21G  1.7G   19G   9% /
+devtmpfs        2.0G     0  2.0G   0% /dev
+tmpfs           2.0G     0  2.0G   0% /dev/shm
+tmpfs           788M  288K  788M   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock

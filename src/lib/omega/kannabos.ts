@@ -601,7 +601,22 @@ function expandRuns(r: string): string | null {
 // plan
 // ---------------------------------------------------------------------------
 
-export function kannabosPlan(text: string, enc: EncodingName = 'o200k_base'): KannabosPlan | null {
+export function kannabosPlan(
+  text: string,
+  enc: EncodingName = 'o200k_base',
+  /**
+   * Column counts to try in ADDITION to the ones the cell-count histogram proposes.
+   *
+   * X86 (KENON) supplies this. The histogram answers "how many non-space runs does
+   * a line usually carry", which is the wrong question whenever the last column
+   * holds prose: `dpkg -l`'s Description contributes one run per WORD, so the modal
+   * counts are 10/9/8 and the true column count, 5, never becomes a candidate --
+   * measured, `bench/x86/receipts/gaps.json`. A caller may therefore hand in counts
+   * inferred from the geometry instead. Default `[]`: every existing caller, and
+   * every plan KANNABOS has ever produced, is unchanged.
+   */
+  extraK: number[] = [],
+): KannabosPlan | null {
   if (!text.length || text.length > KANNABOS_MAX_CHARS) return null;
   const lines = kannabosLines(text);
   if (lines.length < KANNABOS_MIN_ROWS + 1) return null;
@@ -611,11 +626,14 @@ export function kannabosPlan(text: string, enc: EncodingName = 'o200k_base'): Ka
     const k = kannabosCells(l.body).length;
     if (k >= KANNABOS_MIN_COLS) hist.set(k, (hist.get(k) ?? 0) + 1);
   }
-  const cands = [...hist.entries()]
-    .filter(([k, n]) => k <= MAX_COLS && n >= KANNABOS_MIN_ROWS)
-    .sort((a, b) => b[1] - a[1] || b[0] - a[0])
-    .slice(0, MAX_COL_CANDIDATES)
-    .map(([k]) => k);
+  const cands = [...new Set([
+    ...[...hist.entries()]
+      .filter(([k, n]) => k <= MAX_COLS && n >= KANNABOS_MIN_ROWS)
+      .sort((a, b) => b[1] - a[1] || b[0] - a[0])
+      .slice(0, MAX_COL_CANDIDATES)
+      .map(([k]) => k),
+    ...extraK.filter((k) => Number.isInteger(k) && k >= KANNABOS_MIN_COLS && k <= MAX_COLS),
+  ])];
   if (!cands.length) return null;
 
   // The header delimiter is CHOSEN BY MEASUREMENT: an exotic character absent
@@ -958,6 +976,18 @@ export function kannabosDecode(wire: string): string {
  * the data, which is why the stack has a clause ladder at all. This is the same
  * idea taken one step: the ladder has one rung per construct.
  */
+/**
+ * The run marker the last `kannabosPlan` call chose.
+ *
+ * A contract that names the wrong marker is not a contract. `kannabosClause`
+ * hard-codes `v*count`, but the marker is picked per lane as the first of RUNMARKS
+ * absent from the source, so on any text containing `*` the wire uses `§` and the
+ * clause still says `*`. X86 reads the real value and names it; see `kenonClause`.
+ */
+export function kannabosRunMarker(): string {
+  return RUNMARK;
+}
+
 export function kannabosClause(plan: KannabosPlan): string {
   const anchors = new Set<string>();
   const kinds = new Set<string>();

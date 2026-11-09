@@ -1,0 +1,823 @@
+{
+ "rows": [
+  {
+   "lane": "ps-aux-real.txt",
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "bytes": 6590,
+   "raw": 3054,
+   "frontierTokens": 1042,
+   "frontierParent": "synkrisis",
+   "voteBounds": [
+    18,
+    23,
+    38,
+    49,
+    54,
+    62
+   ],
+   "voteSupport": [
+    59,
+    58,
+    37,
+    60,
+    58,
+    59
+   ],
+   "voteK": 7,
+   "plan": {
+    "cols": 11,
+    "rows": 57,
+    "literals": 5,
+    "wireRaw": 1433,
+    "clauseRaw": 61,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 11,
+    "rows": 57,
+    "literals": 5
+   }
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "bytes": 10692,
+   "raw": 5194,
+   "frontierTokens": 1476,
+   "frontierParent": "synkrisis",
+   "voteBounds": [
+    12,
+    41
+   ],
+   "voteSupport": [
+    149,
+    108
+   ],
+   "voteK": 3,
+   "plan": {
+    "cols": 9,
+    "rows": 149,
+    "literals": 3,
+    "wireRaw": 2842,
+    "clauseRaw": 52,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 9,
+    "rows": 149,
+    "literals": 3
+   }
+  },
+  {
+   "lane": "apt-real.txt",
+   "path": "bench/holdout-x41/apt-real.txt",
+   "bytes": 6195,
+   "raw": 2739,
+   "frontierTokens": 850,
+   "frontierParent": "synkrisis",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "ps-real.txt",
+   "path": "bench/holdout-x41/ps-real.txt",
+   "bytes": 2365,
+   "raw": 1106,
+   "frontierTokens": 397,
+   "frontierParent": "synkrisis",
+   "voteBounds": [
+    18,
+    23,
+    33
+   ],
+   "voteSupport": [
+    39,
+    38,
+    39
+   ],
+   "voteK": 4,
+   "plan": {
+    "cols": 6,
+    "rows": 39,
+    "literals": 3,
+    "wireRaw": 565,
+    "clauseRaw": 52,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 6,
+    "rows": 39,
+    "literals": 3
+   }
+  },
+  {
+   "lane": "ls-real.txt",
+   "path": "bench/holdout-x41/ls-real.txt",
+   "bytes": 2486,
+   "raw": 1034,
+   "frontierTokens": 433,
+   "frontierParent": "synkrisis",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": {
+    "cols": 9,
+    "rows": 29,
+    "literals": 12,
+    "wireRaw": 705,
+    "clauseRaw": 61,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 9,
+    "rows": 29,
+    "literals": 12
+   }
+  },
+  {
+   "lane": "du-real.txt",
+   "path": "bench/holdout-x41/du-real.txt",
+   "bytes": 1605,
+   "raw": 458,
+   "frontierTokens": 272,
+   "frontierParent": "synkrisis",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "df-real.txt",
+   "path": "bench/holdout-x41/df-real.txt",
+   "bytes": 329,
+   "raw": 158,
+   "frontierTokens": 126,
+   "frontierParent": "synkrisis",
+   "voteBounds": [
+    16,
+    35
+   ],
+   "voteSupport": [
+    5,
+    5
+   ],
+   "voteK": 3,
+   "plan": {
+    "cols": 6,
+    "rows": 6,
+    "literals": 2,
+    "wireRaw": 171,
+    "clauseRaw": 61,
+    "exact": true
+   },
+   "kannabosAlone": null
+  },
+  {
+   "lane": "node-help.txt",
+   "path": "bench/holdout-x41/node-help.txt",
+   "bytes": 6751,
+   "raw": 1099,
+   "frontierTokens": 862,
+   "frontierParent": "synkrisis",
+   "voteBounds": [
+    30
+   ],
+   "voteSupport": [
+    97
+   ],
+   "voteK": 2,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "ps-ef.txt",
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "bytes": 2669,
+   "raw": 1144,
+   "frontierTokens": 315,
+   "frontierParent": "synkrisis",
+   "voteBounds": [
+    14,
+    23,
+    26,
+    43
+   ],
+   "voteSupport": [
+    32,
+    39,
+    40,
+    39
+   ],
+   "voteK": 5,
+   "plan": {
+    "cols": 8,
+    "rows": 39,
+    "literals": 3,
+    "wireRaw": 448,
+    "clauseRaw": 52,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 8,
+    "rows": 39,
+    "literals": 3
+   }
+  },
+  {
+   "lane": "findmnt.txt",
+   "path": "bench/holdout-x42/findmnt.txt",
+   "bytes": 3215,
+   "raw": 787,
+   "frontierTokens": 444,
+   "frontierParent": "synkrisis",
+   "voteBounds": [
+    56,
+    74,
+    86
+   ],
+   "voteSupport": [
+    25,
+    25,
+    25
+   ],
+   "voteK": 4,
+   "plan": {
+    "cols": 5,
+    "rows": 18,
+    "literals": 10,
+    "wireRaw": 722,
+    "clauseRaw": 50,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 5,
+    "rows": 18,
+    "literals": 10
+   }
+  },
+  {
+   "lane": "ss-tan.txt",
+   "path": "bench/holdout-x42/ss-tan.txt",
+   "bytes": 2089,
+   "raw": 843,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [
+    11,
+    18,
+    25,
+    85
+   ],
+   "voteSupport": [
+    22,
+    23,
+    17,
+    23
+   ],
+   "voteK": 5,
+   "plan": {
+    "cols": 5,
+    "rows": 17,
+    "literals": 9,
+    "wireRaw": 519,
+    "clauseRaw": 61,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 5,
+    "rows": 17,
+    "literals": 9
+   }
+  },
+  {
+   "lane": "ls-usr-bin.txt",
+   "path": "bench/holdout-x42/ls-usr-bin.txt",
+   "bytes": 2394,
+   "raw": 1029,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [
+    42
+   ],
+   "voteSupport": [
+    33
+   ],
+   "voteK": 2,
+   "plan": {
+    "cols": 9,
+    "rows": 39,
+    "literals": 3,
+    "wireRaw": 540,
+    "clauseRaw": 52,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 9,
+    "rows": 39,
+    "literals": 3
+   }
+  },
+  {
+   "lane": "proc-partitions.txt",
+   "path": "bench/holdout-x42/proc-partitions.txt",
+   "bytes": 95,
+   "raw": 33,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "lsblk.txt",
+   "path": "bench/holdout-x42/lsblk.txt",
+   "bytes": 132,
+   "raw": 60,
+   "frontierTokens": 60,
+   "frontierParent": "synkrisis",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "df-h-all.txt",
+   "path": "bench/holdout-x42b/df-h-all.txt",
+   "bytes": 324,
+   "raw": 156,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [
+    16,
+    35
+   ],
+   "voteSupport": [
+    5,
+    5
+   ],
+   "voteK": 3,
+   "plan": {
+    "cols": 6,
+    "rows": 6,
+    "literals": 2,
+    "wireRaw": 169,
+    "clauseRaw": 61,
+    "exact": true
+   },
+   "kannabosAlone": null
+  },
+  {
+   "lane": "ip-br.txt",
+   "path": "bench/holdout-x42b/ip-br.txt",
+   "bytes": 184,
+   "raw": 74,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "ps-eo-cpu.txt",
+   "path": "bench/holdout-x42b/ps-eo-cpu.txt",
+   "bytes": 2027,
+   "raw": 1087,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [
+    14,
+    17,
+    22,
+    29
+   ],
+   "voteSupport": [
+    38,
+    39,
+    38,
+    37
+   ],
+   "voteK": 5,
+   "plan": {
+    "cols": 6,
+    "rows": 39,
+    "literals": 3,
+    "wireRaw": 532,
+    "clauseRaw": 52,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 6,
+    "rows": 39,
+    "literals": 3
+   }
+  },
+  {
+   "lane": "ss-s.txt",
+   "path": "bench/holdout-x42b/ss-s.txt",
+   "bytes": 339,
+   "raw": 119,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "free-m.txt",
+   "path": "bench/holdout-x42b/free-m.txt",
+   "bytes": 263,
+   "raw": 76,
+   "frontierTokens": 76,
+   "frontierParent": "synkrisis",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "metrics.tsv",
+   "path": "bench/holdout-x40/metrics.tsv",
+   "bytes": 1203,
+   "raw": 811,
+   "frontierTokens": 210,
+   "frontierParent": "akolouthia2",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "prices.csv",
+   "path": "bench/holdout-x40/prices.csv",
+   "bytes": 993,
+   "raw": 582,
+   "frontierTokens": 133,
+   "frontierParent": "diastema",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "cue-sheet.md",
+   "path": "bench/holdout-x40/cue-sheet.md",
+   "bytes": 938,
+   "raw": 513,
+   "frontierTokens": 163,
+   "frontierParent": "metron",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": {
+    "cols": 10,
+    "rows": 19,
+    "literals": 11
+   }
+  },
+  {
+   "lane": "markdown-table.md",
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "bytes": 635,
+   "raw": 330,
+   "frontierTokens": 176,
+   "frontierParent": "synkrisis",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "dpkg-l-full.txt",
+   "path": "bench/holdout-x86/dpkg-l-full.txt",
+   "bytes": 16591,
+   "raw": 4277,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [
+    4,
+    34,
+    65,
+    78
+   ],
+   "voteSupport": [
+    135,
+    136,
+    136,
+    135
+   ],
+   "voteK": 5,
+   "plan": {
+    "cols": 5,
+    "rows": 136,
+    "literals": 6,
+    "wireRaw": 3407,
+    "clauseRaw": 50,
+    "exact": true
+   },
+   "kannabosAlone": null
+  },
+  {
+   "lane": "ls-la-usrbin.txt",
+   "path": "bench/holdout-x86/ls-la-usrbin.txt",
+   "bytes": 7544,
+   "raw": 3271,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [
+    12,
+    43
+   ],
+   "voteSupport": [
+    118,
+    98
+   ],
+   "voteK": 3,
+   "plan": {
+    "cols": 9,
+    "rows": 119,
+    "literals": 3,
+    "wireRaw": 1427,
+    "clauseRaw": 61,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 9,
+    "rows": 119,
+    "literals": 3
+   }
+  },
+  {
+   "lane": "npm-ls-all.txt",
+   "path": "bench/holdout-x86/npm-ls-all.txt",
+   "bytes": 6068,
+   "raw": 2253,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": {
+    "cols": 3,
+    "rows": 89,
+    "literals": 33
+   }
+  },
+  {
+   "lane": "proc-cpuinfo.txt",
+   "path": "bench/holdout-x86/proc-cpuinfo.txt",
+   "bytes": 2649,
+   "raw": 1061,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "proc-meminfo.txt",
+   "path": "bench/holdout-x86/proc-meminfo.txt",
+   "bytes": 1506,
+   "raw": 550,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": {
+    "cols": 3,
+    "rows": 48,
+    "literals": 7,
+    "wireRaw": 386,
+    "clauseRaw": 61,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 3,
+    "rows": 48,
+    "literals": 7
+   }
+  },
+  {
+   "lane": "find-listing.txt",
+   "path": "bench/holdout-ops/find-listing.txt",
+   "bytes": 11789,
+   "raw": 3997,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": {
+    "cols": 3,
+    "rows": 120,
+    "literals": 1,
+    "wireRaw": 3788,
+    "clauseRaw": 43,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 3,
+    "rows": 120,
+    "literals": 1
+   }
+  },
+  {
+   "lane": "git-numstat.txt",
+   "path": "bench/holdout-ops/git-numstat.txt",
+   "bytes": 12306,
+   "raw": 4632,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "npm-ls.txt",
+   "path": "bench/holdout-ops/npm-ls.txt",
+   "bytes": 6688,
+   "raw": 2747,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": {
+    "cols": 3,
+    "rows": 130,
+    "literals": 21
+   }
+  },
+  {
+   "lane": "ls-full-iso.txt",
+   "path": "bench/holdout-ops/ls-full-iso.txt",
+   "bytes": 2549,
+   "raw": 1175,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [
+    12
+   ],
+   "voteSupport": [
+    24
+   ],
+   "voteK": 2,
+   "plan": {
+    "cols": 9,
+    "rows": 28,
+    "literals": 6,
+    "wireRaw": 525,
+    "clauseRaw": 52,
+    "exact": true
+   },
+   "kannabosAlone": {
+    "cols": 9,
+    "rows": 28,
+    "literals": 6
+   }
+  },
+  {
+   "lane": "git-log-fuller.txt",
+   "path": "bench/holdout-ops/git-log-fuller.txt",
+   "bytes": 368,
+   "raw": 143,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "node-stacktraces.txt",
+   "path": "bench/holdout-ops/node-stacktraces.txt",
+   "bytes": 1848,
+   "raw": 568,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "kb-article.txt",
+   "path": "bench/holdout-work/kb-article.txt",
+   "bytes": 3385,
+   "raw": 656,
+   "frontierTokens": 622,
+   "frontierParent": "synkrisis",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "unified-diff.patch",
+   "path": "bench/holdout-work/unified-diff.patch",
+   "bytes": 1487,
+   "raw": 578,
+   "frontierTokens": 419,
+   "frontierParent": "synkrisis",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "email-thread.txt",
+   "path": "bench/holdout-work/email-thread.txt",
+   "bytes": 2126,
+   "raw": 629,
+   "frontierTokens": 488,
+   "frontierParent": "synkrisis",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "llm-answer.md",
+   "path": "bench/holdout-work/llm-answer.md",
+   "bytes": 2542,
+   "raw": 733,
+   "frontierTokens": 674,
+   "frontierParent": "synkrisis",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "json-pkg.txt",
+   "path": "bench/holdout/json-pkg.txt",
+   "bytes": 3620,
+   "raw": 1152,
+   "frontierTokens": 681,
+   "frontierParent": "synkrisis",
+   "voteBounds": [
+    8
+   ],
+   "voteSupport": [
+    86
+   ],
+   "voteK": 2,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "code-ts.txt",
+   "path": "bench/holdout/code-ts.txt",
+   "bytes": 6000,
+   "raw": 1422,
+   "frontierTokens": 969,
+   "frontierParent": "synkrisis",
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  },
+  {
+   "lane": "aapl-2014.csv",
+   "path": "bench/holdout-tab/aapl-2014.csv",
+   "bytes": 5488,
+   "raw": 3108,
+   "frontierTokens": null,
+   "frontierParent": null,
+   "voteBounds": [],
+   "voteSupport": [],
+   "voteK": 1,
+   "plan": null,
+   "kannabosAlone": null
+  }
+ ]
+}

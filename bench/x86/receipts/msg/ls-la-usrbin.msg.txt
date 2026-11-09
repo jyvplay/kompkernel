@@ -1,0 +1,302 @@
+Grid: Ln/Rn cell starts/ends char n, Tn tail n spaces after last cell; blocks per column: x one value/line, rN N v*count lines, dN N values then letters; R = one value per column padded to anchors, L literal. Print.
+⟨9¦L0d5¦R13r9¦L14r1¦L19r3¦R34r117¦L35d11¦R41d18¦R47d11¦T1x¦pL2R119L1⟩¦s
+drwxr-xr-x
+-rwxr-xr-x
+lrwxrwxrwx
+-rwxr-sr-x
+-rwsr-xr-x
+aabbcccbbbbbbbbcbccbbbbbbbbbbbcbcbcbbbcbcccbcbbcbcdbbebbbbbbebbbbbccbccbccbccbbbbbccbcbbbbbbbbbbbbbbbbbbbbbbccbbccbbbbb
+2
+12
+1*24
+3
+1*2
+3
+1*6
+3
+1*82
+root*119
+root*50
+shadow
+root*68
+12288
+4096
+68496
+31040
+26
+25
+29
+14544
+18752
+88456
+22920
+26944
+51592
+27972
+59784
+19
+43888
+19
+21
+60400
+48016*2
+43856
+56208
+1265648
+6865
+39224
+92672
+1210176
+39224
+6
+2225
+6
+4893
+6
+3775
+39224
+14568
+6
+1297
+21
+24
+21
+428
+21
+454
+6925
+3
+44016
+20
+80376
+14584
+68720
+62672
+68656
+64496
+55616
+72752
+109672
+67904
+52880
+142384
+14584
+14488
+52176
+48048
+25
+29
+14576
+27
+31
+14544
+25
+29
+14544
+25
+29
+14544
+15375
+151152
+8360
+8381
+6
+23
+122032
+6
+280800
+48112
+345280
+125640
+121904
+89240
+24358
+6241
+2859
+11541
+608
+1719
+647
+2995
+1827
+31040
+102200
+155216
+68752
+151344
+52144
+39760
+25
+29
+14544
+88656
+8*2
+318096
+15202
+8335
+33436
+7624
+Jun
+Sep
+Nov
+Jan
+May
+Apr
+Dec
+Feb
+Aug
+Jul
+Mar
+aabcdeeeeeeeeeedbdabbbbbeebfdbbbbcbbbbbbddccccaebdgabgbbcbhcgbeehbeeeeeeeeeeeeibiidfbejbfdbbjidddddddcbhhbbbeeecggkkkkk
+15
+20
+21
+14
+27
+25
+17
+7
+19
+1
+8
+6
+3
+29
+22
+11
+5
+13
+aabcdeeefffffffdbdgbbbbbhhiejiiiieiiiiiikdgggglhbkdlbdbbcbgcdbhhmbeeeeeeeeeeeenbnnkhboibpqbbrbkkkkkkkcbmmbbbeeeciihhhhh
+16:59
+2022
+2024
+2023
+20:36
+2026
+1970
+2021
+2020
+19:56
+2025
+aabcdeeeddddddddbdbbbbbbffbfgbbbbhbbbbbbddiiiijdbdkkbkbbcbfckbdfdbeeeeeeeeeeeekbkkdkbdkbfdbbbkdddddddcbddbbbeeecbbfffff
+.
+..
+[
+addpart
+addr2line -> x86_64-linux-gnu-addr2line
+animate -> /etc/alternatives/animate
+animate-im6 -> /etc/alternatives/animate-im6
+animate-im6.q16
+apt
+apt-cache
+apt-cdrom
+apt-config
+apt-get
+apt-key
+apt-mark
+ar -> x86_64-linux-gnu-ar
+arch
+as -> x86_64-linux-gnu-as
+awk -> /etc/alternatives/awk
+b2sum
+base32
+base64
+basename
+basenc
+bash
+bashbug
+bunzip2
+busctl
+busybox
+bzcat
+bzcmp -> bzdiff
+bzdiff
+bzegrep -> bzgrep
+bzexe
+bzfgrep -> bzgrep
+bzgrep
+bzip2
+bzip2recover
+bzless -> bzmore
+bzmore
+c++ -> /etc/alternatives/c++
+c++filt -> x86_64-linux-gnu-c++filt
+c89 -> /etc/alternatives/c89
+c89-gcc
+c99 -> /etc/alternatives/c99
+c99-gcc
+c_rehash
+captoinfo -> tic
+cat
+cc -> /etc/alternatives/cc
+chage
+chattr
+chcon
+chfn
+chgrp
+chmod
+choom
+chown
+chronyc
+chrt
+chsh
+cksum
+clear
+clear_console
+cmp
+comm
+compare -> /etc/alternatives/compare
+compare-im6 -> /etc/alternatives/compare-im6
+compare-im6.q16
+composite -> /etc/alternatives/composite
+composite-im6 -> /etc/alternatives/composite-im6
+composite-im6.q16
+conjure -> /etc/alternatives/conjure
+conjure-im6 -> /etc/alternatives/conjure-im6
+conjure-im6.q16
+convert -> /etc/alternatives/convert
+convert-im6 -> /etc/alternatives/convert-im6
+convert-im6.q16
+corelist
+cp
+cpan
+cpan5.36-x86_64-linux-gnu
+cpp -> cpp-12
+cpp-12 -> x86_64-linux-gnu-cpp-12
+csplit
+ctstat -> lnstat
+curl
+cut
+cvtsudoers
+dash
+date
+dd
+deb-systemd-helper
+deb-systemd-invoke
+debconf
+debconf-apt-progress
+debconf-communicate
+debconf-copydb
+debconf-escape
+debconf-set-selections
+debconf-show
+delpart
+df
+diff
+diff3
+dir
+dircolors
+dirname
+display -> /etc/alternatives/display
+display-im6 -> /etc/alternatives/display-im6
+display-im6.q16
+dmesg
+dnsdomainname -> hostname
+domainname -> hostname
+dpkg
+dpkg-architecture
+dpkg-buildflags
+dpkg-buildpackage
+dpkg-checkbuilddeps
+# source: ls -la /usr/bin (real, captured this turn)
+total 160172

@@ -1,0 +1,371 @@
+Grid: Ln/Rn cell starts/ends char n; blocks per column: x one value/line, rN N v*count lines, dN N values then letters; R = one value per column padded to anchors, L literal. Print.
+⟨9¦L0d4¦L12r14¦L14r1¦L19r1¦R32r146¦L33d11¦R39d25¦R45d12¦L46x¦pL2R149L1⟩¦s
+drwxr-xr-x
+-rw-r--r--
+-rwxr-xr-x
+lrwxrwxrwx
+abbaabbbaaaabaaabacabdbbdbdbdbdbdbdbdbbdbdbdbdbdbbdbdbdbdbbdbdbdbdbdbdbddbbbcdbbdbdbdbdbdbbddbbdbdbdbddbdbdbbdbdbbbbbdbdbdbbddbdbdbdbdbdbdbdbdbdbdbdb
+4
+1*2
+2*2
+1*3
+2*3
+3
+1
+3
+2*2
+1
+3
+1
+2
+1*129
+root*149
+root*149
+128
+496
+1632
+60*2
+1768
+1072
+648
+4096
+60
+128
+8192
+2520
+60
+4096*2
+2232
+60
+215000
+4096
+1790
+42
+14640
+616464
+28
+2848744
+28
+1203192
+15
+1318408
+15
+14496
+17
+22728
+16
+81568
+18
+38832
+8
+33
+14480
+15
+5639576
+20
+80600
+19
+2067760
+23
+497904
+34880
+16
+8198800
+18
+30776
+19
+26544
+17
+128952
+1514448
+17
+355328
+15
+358880
+24
+137376
+21
+47264
+21
+591920
+16
+84840
+15*2
+74688
+5452590
+283
+1926232
+44
+50200
+5098
+18
+30704
+14
+47128
+16
+69192
+15
+126464
+17
+18344
+269124
+35
+17
+206776
+4734232
+23
+525488
+21
+228184
+15
+220192
+19
+23
+695736
+16
+712120
+17
+1630208
+1843792
+17
+452776
+25
+14376
+149384
+442696
+8
+14480
+24
+14256
+13
+45008
+17
+216640
+109088
+15
+26
+219152
+18
+174184
+19
+174176
+16
+438608
+17
+484640
+15
+43480
+18
+2213808
+22
+30632
+26
+34728
+18
+219040
+23
+306112
+15
+77200
+Jun
+Apr
+Oct
+May
+Jan
+Mar
+Sep
+Feb
+Nov
+Dec
+Jul
+abbaabbbaaaabaaabababbbcddddcceeffggeebbbaahhddddbbbbbeehheiiddeeeeeeeegggbbbbbbeeddggbbaaeeeeajjeeeekkkkkbbejjddccbbeeaaiieeeebbbbaaiicciiiiiiffeedd
+15
+27
+10
+3
+28
+2
+18
+17
+1
+14
+25
+21
+7
+9
+12
+31
+29
+19
+6
+16
+23
+4
+5
+24
+30
+abbaabbbacaabaaabababbbabbbbddeeffgghhbbbiijjkkkklmmmmhhnnjllooppppppqqrrrbbbbbbppmmrrmmsssssssggjjjjrrrrrkktqquudrbbppsslljjvvwwwwssllxxyyyyyyuuppmm
+16:59
+20:14
+00:00
+2022
+20:36
+2023
+2021
+2017
+2025
+2024
+21:10
+19:56
+abbaabbbacaabaaabababbbdeeeeffgghhddffbbbiifffffffiiiifffffjjiiffffffffdddbbbbbbffkkddiiiifffflffffffiiiiijjfffffddbbffiiddffffiiiiiijjddddddddffffff
+ImageMagick-6.9.11
+Mcrt1.o
+Scrt1.o
+audit
+bfd-plugins
+crt1.o
+crti.o
+crtn.o
+cryptsetup
+e2fsprogs
+engines-3
+gconv
+gcrt1.o
+gio
+glib-2.0
+gprofng
+grcrt1.o
+krb5
+ld-linux-x86-64.so.2
+ldscripts
+libBrokenLocale.a
+libBrokenLocale.so -> /lib/x86_64-linux-gnu/libBrokenLocale.so.1
+libBrokenLocale.so.1
+libLerc.so.4
+libMagickCore-6.Q16.so.6 -> libMagickCore-6.Q16.so.6.0.0
+libMagickCore-6.Q16.so.6.0.0
+libMagickWand-6.Q16.so.6 -> libMagickWand-6.Q16.so.6.0.0
+libMagickWand-6.Q16.so.6.0.0
+libX11.so.6 -> libX11.so.6.4.0
+libX11.so.6.4.0
+libXau.so.6 -> libXau.so.6.0.0
+libXau.so.6.0.0
+libXdmcp.so.6 -> libXdmcp.so.6.0.0
+libXdmcp.so.6.0.0
+libXext.so.6 -> libXext.so.6.4.0
+libXext.so.6.4.0
+libacl.so.1 -> libacl.so.1.1.2301
+libacl.so.1.1.2301
+libanl.a
+libanl.so -> /lib/x86_64-linux-gnu/libanl.so.1
+libanl.so.1
+libaom.so.3 -> libaom.so.3.6.0
+libaom.so.3.6.0
+libapparmor.so.1 -> libapparmor.so.1.8.4
+libapparmor.so.1.8.4
+libapt-pkg.so.6.0 -> libapt-pkg.so.6.0.0
+libapt-pkg.so.6.0.0
+libapt-private.so.0.0 -> libapt-private.so.0.0.0
+libapt-private.so.0.0.0
+libargon2.so.1
+libasan.so.8 -> libasan.so.8.0.0
+libasan.so.8.0.0
+libatomic.so.1 -> libatomic.so.1.2.0
+libatomic.so.1.2.0
+libattr.so.1 -> libattr.so.1.1.2501
+libattr.so.1.1.2501
+libaudit.so.1 -> libaudit.so.1.0.0
+libaudit.so.1.0.0
+libbfd-2.40-system.so
+libblkid.so.1 -> libblkid.so.1.1.0
+libblkid.so.1.1.0
+libbpf.so.1 -> libbpf.so.1.1.2
+libbpf.so.1.1.2
+libbrotlicommon.so.1 -> libbrotlicommon.so.1.0.9
+libbrotlicommon.so.1.0.9
+libbrotlidec.so.1 -> libbrotlidec.so.1.0.9
+libbrotlidec.so.1.0.9
+libbrotlienc.so.1 -> libbrotlienc.so.1.0.9
+libbrotlienc.so.1.0.9
+libbsd.so.0 -> libbsd.so.0.11.7
+libbsd.so.0.11.7
+libbz2.so.1 -> libbz2.so.1.0.4
+libbz2.so.1.0 -> libbz2.so.1.0.4
+libbz2.so.1.0.4
+libc.a
+libc.so
+libc.so.6
+libc_malloc_debug.so -> /lib/x86_64-linux-gnu/libc_malloc_debug.so.0
+libc_malloc_debug.so.0
+libc_nonshared.a
+libcap-ng.so.0 -> libcap-ng.so.0.0.0
+libcap-ng.so.0.0.0
+libcap.so.2 -> libcap.so.2.66
+libcap.so.2.66
+libcbor.so.0.8 -> libcbor.so.0.8.0
+libcbor.so.0.8.0
+libcc1.so.0 -> libcc1.so.0.0.0
+libcc1.so.0.0.0
+libcom_err.so.2 -> libcom_err.so.2.1
+libcom_err.so.2.1
+libcrypt.a
+libcrypt.so -> /lib/x86_64-linux-gnu/libcrypt.so.1
+libcrypt.so.1 -> libcrypt.so.1.1.0
+libcrypt.so.1.1.0
+libcrypto.so.3
+libcryptsetup.so.12 -> libcryptsetup.so.12.9.0
+libcryptsetup.so.12.9.0
+libctf-nobfd.so.0 -> libctf-nobfd.so.0.0.0
+libctf-nobfd.so.0.0.0
+libctf.so.0 -> libctf.so.0.0.0
+libctf.so.0.0.0
+libcurl-gnutls.so.3 -> libcurl-gnutls.so.4
+libcurl-gnutls.so.4 -> libcurl-gnutls.so.4.8.0
+libcurl-gnutls.so.4.8.0
+libcurl.so.4 -> libcurl.so.4.8.0
+libcurl.so.4.8.0
+libdav1d.so.6 -> libdav1d.so.6.6.0
+libdav1d.so.6.6.0
+libdb-5.3.so
+libde265.so.0 -> libde265.so.0.1.4
+libde265.so.0.1.4
+libdebconfclient.so.0 -> libdebconfclient.so.0.0.0
+libdebconfclient.so.0.0.0
+libdeflate.so.0
+libdevmapper.so.1.02.1
+libdl.a
+libdl.so.2
+libdrop_ambient.so.0 -> libdrop_ambient.so.0.0.0
+libdrop_ambient.so.0.0.0
+libe2p.so.2 -> libe2p.so.2.3
+libe2p.so.2.3
+libedit.so.2 -> libedit.so.2.0.70
+libedit.so.2.0.70
+libelf-0.188.so
+libelf.so.1 -> libelf-0.188.so
+libevent_core-2.1.so.7 -> libevent_core-2.1.so.7.0.1
+libevent_core-2.1.so.7.0.1
+libexpat.so.1 -> libexpat.so.1.8.10
+libexpat.so.1.8.10
+libexpatw.so.1 -> libexpatw.so.1.8.10
+libexpatw.so.1.8.10
+libext2fs.so.2 -> libext2fs.so.2.4
+libext2fs.so.2.4
+libfdisk.so.1 -> libfdisk.so.1.1.0
+libfdisk.so.1.1.0
+libffi.so.8 -> libffi.so.8.1.2
+libffi.so.8.1.2
+libfftw3.so.3 -> libfftw3.so.3.6.10
+libfftw3.so.3.6.10
+libfftw3_omp.so.3 -> libfftw3_omp.so.3.6.10
+libfftw3_omp.so.3.6.10
+libfftw3_threads.so.3 -> libfftw3_threads.so.3.6.10
+libfftw3_threads.so.3.6.10
+libfido2.so.1 -> libfido2.so.1.12.0
+libfido2.so.1.12.0
+libfontconfig.so.1 -> libfontconfig.so.1.12.0
+libfontconfig.so.1.12.0
+libformw.so.6 -> libformw.so.6.4
+libformw.so.6.4
+# source: ls -l /usr/lib/x86_64-linux-gnu (real)
+total 167495

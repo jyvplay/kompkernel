@@ -5592,3 +5592,270 @@ not cross a pre-token boundary. Related work consulted and *not* transferred: LT
 fine-tuning); Splinter (ACL 2025, reversible single-character deletion encoded as a
 composite `position:letter` character — more general than a global declaration but
 strictly more expensive when the shape repeats, which is exactly when we use it).
+
+## X86 — ΚΕΝΟΝ
+
+`key: 'kenon'` · family `exact` · fidelity `exact` · `src/lib/omega/kenon.ts`
+
+Lossless **column-boundary inference by gap voting**, feeding the existing byte-exact
+KANNABOS grid. A space-aligned table whose *last* column is prose is the single most
+common shape in real command output, and it is the one shape KANNABOS cannot find:
+
+```
+Desired=Unknown/Install/Remove/Purge/Hold            ← literal
+||/ Name           Version        Architecture Description ← literal
+ii  adduser        3.134          all          add and remove users and groups
+ii  apt            2.6.1          amd64        commandline package manager
+    ↑4            ↑34            ↑65          ↑78      ← the four boundaries
+```
+
+`kannabosPlan` chooses its candidate column counts from the **cell-count histogram** —
+how many maximal non-space runs a line usually carries. On `dpkg -l` that histogram is
+`10:25 9:25 8:23 7:20 11:18` (measured over 141 lines, `bench/x86/receipts/gaps.json`):
+those are the **word counts of the Description column**. The true count, 5, is not in the
+top three, is never tried, and the lane reports *no grid plan*. The same failure on
+`ps -ef` (histogram proposes 8, geometry says 5), `ps aux` (11 vs 7), `ls -la` (9 vs 3),
+`psql` (11 vs 3).
+
+**The mechanism.** A column boundary is a *gap that occurs on almost every line*. Every
+run of two or more spaces casts one vote for the offset at which the next field begins;
+offsets supported by ≥ max(3, ⌈0.6 · lines⌉) lines are boundaries, and the column count is
+boundaries + 1:
+
+| lane | lines | votes (offset:support) | k |
+|---|---:|---|---:|
+| `dpkg-l-full.txt` | 141 | `4:135 34:136 65:136 78:135` | 5 |
+| `kubectl-get-pods.txt` | 23 | `37:23 45:23 57:23 68:23 76:23 92:23` | 7 |
+| `ps-aux-real.txt` | 61 | `18:59 23:58 38:37 49:60 54:58 62:59` | 7 |
+| `ls-l-real.txt` | 151 | `12:149 41:108` | 3 |
+| `apt-real.txt` | 61 | *none* — single-space separated | refused (G2) |
+
+Prose in the last column **cannot manufacture a boundary**: its word gaps land at offsets
+that occur once or twice each, far below the floor. That is the whole inference — one
+histogram over gap-end offsets, a support floor, and the resulting counts handed to
+machinery that was already exact. Two thresholds are offered (0.6 strict, 0.4 permissive)
+plus *k*−1 when the strict vote found ≥2 boundaries, because a boundary just under the
+floor — a column blank on a few rows, a right-aligned column whose values touch the
+padding — still bounds a real column. Every candidate costs a full grid fit, so the list
+is deliberately three long.
+
+**The wire is KANNABOS's, unchanged.** ΚΕΝΟΝ re-derives no padding arithmetic: it inherits
+the byte-exact rebuild, the separator-safety refusal, the L/R/T hybrid anchors and the
+literal-line escape. The one change to `kannabos.ts` is an extra optional parameter
+(`extraK: number[] = []`) unioned into the candidate list — with the default, every existing
+caller and every plan KANNABOS has ever produced is bit-identical, which the 29-lane
+frontier re-confirmation below verifies rather than asserts.
+
+```
+Grid: Ln/Rn cell starts/ends char n; blocks per column: t:V/steps V stepping per row; R = one value per column padded to anchors, L literal. Print.
+⟨5¦L0t:/dev/nvme0n1p0/0,0,1¦L17t:100G/37¦R27t:40G/11¦R33t:50G/9¦L35t:30% /mnt/vol0/3,1¦pL1R18L1⟩¦s
+…column blocks, then the literal lines…
+```
+
+**Gates.** G1 ≥6 lines. G2 a boundary must clear the support floor, else refuse (this is
+what declines `apt list`, `git numstat`, `npm ls`, prose, code and CSV — 25 of 41 lanes
+screened). G3 KANNABOS must return a plan for one of the voted counts. G4
+`kannabosDecode(wire) === text` before anything is measured. G5 the contract must be one
+line, since the reader finds the wire by taking everything after the first newline;
+**G5b** the marker named in the contract must be the marker the wire declares. G6 the
+**two-stage** round trip: the frontier must hand our message back byte-for-byte *and* our
+contract must then rebuild the source. G7 a strict win on one-message tokens, measured
+through the frontier.
+
+### Measured, o200k, `OMEGA_DET=1` (`bench/x86/receipts/kenon.json`, `ab.json`)
+
+| lane | raw | frontier | ΚΕΝΟΝ | Δ | cols/rows/lit | clause | wire | verdict |
+|---|---:|---:|---:|---:|---|---:|---:|---|
+| `df-h.txt` (tbl) | 570 | 171 | **134** | **−37 (−21.6 %)** | 5/18/2 | 41 | 93 | **win** — PARATAXIS refuses this lane (best 183) |
+| `kubectl-get-pods.txt` | 1006 | 326 | **304** | **−22 (−6.7 %)** | 7/22/2 | 69 | 414 | **win** — ties PARATAXIS (304) |
+| `psql-output.txt` | 675 | 244 | 299 | +55 | 11/24/6 | 70 | 300 | refused; SCHEMA holds this lane at 173 |
+| `findmnt.txt` | 787 | 444 | 501 | +57 | 5/18/10 | 50 | 722 | refused; PARATAXIS holds it at 422 |
+| `dpkg-l.txt` | 1000 | 673 | 713 | +40 | 5/36/6 | 50 | 800 | refused; PARATAXIS holds it at 651 |
+| `ps-real.txt` | 1106 | 397 | 506 | +109 | 6/39/3 | 52 | 565 | refused |
+| `ps-eo-cpu.txt` | 1087 | 389 | 480 | +91 | 6/39/3 | 52 | 532 | refused |
+| `ls-usr-bin.txt` | 1029 | 375 | 510 | +135 | 9/39/3 | 52 | 540 | refused |
+| `ls-full-iso.txt` | 1175 | 367 | 491 | +124 | 9/28/6 | 52 | 525 | refused |
+| `ss-tan.txt` | 843 | 209 | 318 | +109 | 5/17/9 | 61 | 519 | refused |
+| `proc-meminfo.txt` | 550 | 349 | 438 | +89 | 3/48/7 | 61 | 386 | refused |
+| `df-real.txt` | 158 | 126 | 232 | +106 | 6/6/2 | 61 | 171 | refused |
+| `df-h-all.txt` | 156 | 124 | 230 | +106 | 6/6/2 | 61 | 169 | refused |
+| `vmstat.txt` | 229 | 149 | — | — | no grid | — | — | refused (G2) |
+| `apt-real.txt` | 2739 | 850 | — | — | no grid | — | — | refused (G2) |
+
+**Two wins, thirteen honest refusals.** ΚΕΝΟΝ is registered as an arm gated *against* the
+frontier, never inside it, so a refusal returns the frontier's own message and no lane can
+regress. `df-h.txt` is the lane no other arm wins: PARATAXIS's own receipt records
+`refused: no win (best 183 >= frontier 171)`, and ΚΕΝΟΝ reaches **134**.
+
+### Two laws the refusals obey
+
+The 13 losses are not noise; they are one inequality, and the A/B measured every term
+(`bench/x86/receipts/ab.json`, arm A = histogram candidates, arm B = histogram + vote):
+
+**1. The contract is paid at 100 % of its raw price.** `F(clause+wire) − F(wire)` equals
+`raw(clause)` exactly on four of five lanes and within two tokens on the fifth:
+
+| lane | clause raw | F(msg) − F(wire) |
+|---|---:|---:|
+| `df-h.txt` (k=5) | 41 | **41** |
+| `dpkg-l.txt` | 50 | **50** |
+| `findmnt.txt` | 50 | **50** |
+| `psql-output.txt` | 70 | **70** |
+| `kubectl-get-pods.txt` | 69 | 71 |
+
+The frontier absorbs nothing of it, because a contract is unique English prose with no
+internal redundancy — there is nothing for a repeat-based codec to find. This is the
+empirical form of the token-savings condition stated formally in *Lossless Prompt
+Compression via Dictionary-Encoding and In-Context Learning* (arXiv:2604.13066), whose
+criterion charges the dictionary `n_token(D)` against the saving; here `D` is the clause
+and its price is measured, not estimated.
+
+**2. A columnar wire is nearly incompressible.** `F(wire) / raw(wire)`:
+
+| lane | raw(wire) | F(wire) | ratio |
+|---|---:|---:|---:|
+| `df-h.txt` | 93 | 93 | **1.000** |
+| `psql-output.txt` | 300 | 229 | 0.763 |
+| `dpkg-l.txt` | 800 | 663 | 0.829 |
+| `findmnt.txt` | 722 | 451 | 0.625 |
+| `kubectl-get-pods.txt` | 414 | 233 | **0.563** |
+
+Against the same frontier's 0.31–0.67 on the *sources*. De-interleaving has already
+removed the redundancy the frontier feeds on — padding, row periodicity, repeated
+scaffolding — so what is left is dense and the frontier can do little with it. The
+consequence is a single win condition:
+
+> raw(wire) · ρ + raw(clause) < F(source), with ρ ≈ 0.56–1.00.
+
+`df-h` satisfies it because five of its columns are **generated** (`t:100G/37`,
+`t:40G/11`, `t:/dev/nvme0n1p0/0,0,1`): 93 raw tokens for a 570-token source. `kubectl`
+satisfies it because its columns repeat (`r1`, `d2`, `w25`, `t:0/1%4`), which is also why
+it is the one lane with ρ = 0.563 — the *same column adjacent to itself* is a repeat the
+frontier can still exploit. `dpkg-l` fails it: 800 raw tokens of package names, versions
+and prose, ρ = 0.829, and 663 + 50 = 713 > 673. **De-interleaving pays where columns are
+generated or self-repeating, not where they are prose.** That is the honest scope of this
+codec, and it is why the vote's extra reach did not turn into extra wins.
+
+### What the vote actually contributed (isolated, not assumed)
+
+| lane | arm A (histogram) | arm B (+ vote) | the vote's effect |
+|---|---|---|---|
+| `df-h.txt` | cols=6, F(msg) 147, **−24** | cols=5, F(msg) 134, **−37** | **changed the plan: 13 tokens** |
+| `kubectl-get-pods.txt` | cols=7, 304, −22 | cols=7, 304, −22 | nothing (histogram already right) |
+| `findmnt.txt` | cols=5, 501, +57 | cols=5, 501, +57 | nothing |
+| `psql-output.txt` | cols=11, 299, +55 | cols=11, 299, +55 | nothing |
+| `dpkg-l.txt` | **no plan** | cols=5, 713, +40 | **the only way to get a grid at all** |
+| `dpkg-l-full.txt` | **no plan** (screened) | cols=5, 136 rows, byte-exact | **the only way to get a grid at all** |
+| `df-real.txt`, `df-h-all.txt` | **no plan** (screened) | cols=6, byte-exact | **the only way to get a grid at all** |
+
+So the vote buys **reach** — four real lanes whose grids KANNABOS cannot find at all,
+including a 16 591-byte `dpkg -l` whose 136-row grid is byte-exact and cold-readable — and
+**13 tokens on `df-h`**. It does not buy wins by itself: all four reach-only lanes lose on
+cost and are refused. Reach and win are different properties and this section keeps them
+separate, because conflating them is how a codec ends up over-claimed. `dpkg-l-full`'s
+A/B was started and **not completed** (three frontier encodes on a 16.5 KB lane); its
+predicted loss follows from `dpkg-l`'s measured ρ = 0.829 (0.829 · 3407 + 50 ≈ 2875 against
+a frontier of 2258), and is recorded as a prediction, not a measurement.
+
+### Verification
+
+* **Independent cold reader.** `bench/kenon_decode.py` — CPython, no TypeScript, no repo
+  state, no marker or delimiter passed in: it reads the contract line and the wire and
+  nothing else. **16/16 real lanes byte-exact** (`bench/x86/receipts/msg/`), including
+  `dpkg-l-full` (16 591 chars), `ls-l-real` (10 692) and `find-listing` (11 789). This is
+  the first cold-read decoder for the KANNABOS wire family; X41/X42 verified in-process
+  only.
+* **Synthetic red team.** `bench/x86/fuzz.ts`, seeded xorshift, 400 generated tables:
+  column counts 2–9, per-column L/R alignment, fixed field widths and gaps, values drawn
+  from ints, zero-padded ints, hex, dotted versions, paths, clocks, prose, constants,
+  empty cells and non-ASCII, literal rows injected at random, CRLF and no-trailing-newline
+  variants. **223 accepted, 177 refused, 0 hard failures**; 60 accepted cases re-verified
+  byte-exact through the CPython reader. The first draft of this generator jittered the
+  inter-field gap per row and produced **0 plans in 400 cases** — the vote correctly
+  declined tables with no stable boundaries, which is the gate working, and the generator
+  was fixed rather than the gate loosened.
+* **Decoder attack.** `bench/x86/fuzz_decode.py`, 2 554 and 8 512 mutations over the 16
+  real messages (substitution, insertion, deletion, truncation, transposition, header-field
+  swap, anchor-letter and anchor-number edits, pattern edits, eol-flag and marker edits):
+  **0 uncaught exceptions, 0 hangs, 0 nondeterminism**, 618 refusals. It found one real
+  defect on the first run — `int(' ')` escaping as a `ValueError` from the `t:` step parser
+  — now routed through a `num()` helper that refuses; and one hand-built adversarial case
+  (wire declares marker `§`, contract says `v*count`) is refused by G5b, which is the
+  mismatch `kenonClause` exists to prevent.
+* **G6 two-stage round trip** is checked inside `kenonEncode` on every lane, and the
+  receipt records `endToEnd: true` for both winning arms.
+
+### Frontier confirmation
+
+`OMEGA_DET=1`, `tagstackFrontier`, the same 29 lanes as X75/X78/X79/X80, re-run this turn
+after ΚΕΝΟΝ was registered and `kannabos.ts` was patched:
+**see `bench/x86/receipts/frontier.json`** — total and per-lane diff against
+`bench/x80/receipts/frontier.json` printed by `bench/x86/front.ts`.
+
+**Complexity / bound.** The vote is one regex pass per line: O(chars), milliseconds — the
+whole 41-lane screen runs in under a second. The grid fit is O(lines × candidate counts).
+The gate costs **exactly one extra frontier encode**, which is the expensive term: 6.1 s on
+`df-h`, 34.6 s on `kubectl`, 50.7 s on `dpkg-l` (measured, this turn). **Not greedy**: the
+vote is a deterministic histogram with a fixed floor, the plan is chosen by KANNABOS by
+*measured* cost among ≤6 candidates, and the gate is a single comparison. There is no
+search, no sampling and no repair loop, so the result is a total function of the input.
+**CPU-bound** — no I/O, no waiting, nothing networked.
+
+**Sources.** Fresh searches this turn (arXiv, VLDB/SIGMOD, OpenAI, Anthropic, Epoch AI,
+Retraction Watch, Wikipedia, o-mega.ai). The column-by-column serialisation of a table for
+LLM input is published: X. Xiao et al., *Cents: Boosting LLMs with Cost-Efficient
+Sequences* (VLDB 18:4574). Inferring fields from their recurring character offsets is
+published: *TWIX: Visual Template Inference for Data Extraction from Documents*
+(PACMMOD/SIGMOD 2025, doi:10.1145/3780105). Columnar notation for LLM context specifically
+is published: *ONTO — A Token-Efficient Columnar Notation for LLM Input Optimization*
+(arXiv:2604.17512, 46–51 % token reduction vs JSON on Qwen2.5-7B). **What is imported is
+the inference principle; no code, no data, no tokenizer behaviour and no compression ratio
+is imported** — none of the three reads space-aligned CLI output, none emits a byte-exact
+wire, and none states a gap-support vote with a floor as the column-count estimator.
+Consulted and *not* transferred: *Context Codec* (arXiv:2605.17304) — commitment-level
+compression with CAR/WAR fidelity metrics, explicitly lossy, but its ordering (JSON −29.3 %
+*gain*, i.e. worse than prose, at CAR 1.00) independently supports this stack's refusal to
+move to a structured interchange format; MedTPE (arXiv:2605.11774) and *LLM as Token
+Compressor* (arXiv:2603.25340) — both need adapter fine-tuning and neither is byte-exact or
+readable in a plain chat.
+
+**Frontier-lab solved-math review (requested, and the reason this section's claims are
+bound to receipts).** Of 120 "AI solved it" announcements in two years, 64 are
+third-party confirmed, 40 unverified, 11 were literature retrieval mislabelled as
+discovery, and 4 had wrong proofs (roppongivc.com survey; Epoch AI FrontierMath). The
+confirmed results — OpenAI's unit-distance disproof (20 May 2026, arXiv:2605.20695,
+nine external verifiers incl. Gowers and Alon, Lean-checked), Anthropic's Jacobian
+counterexample in dimension ≥3 (Jul 2026, Lean), the zeta-zero proportion (Aug 2026),
+the FLT Lean formalisation (4 Sep 2026, 29 511 theorems, ~13 M lines) — share one
+structure: **a claim is only as good as an independent check in a different formalism**.
+OpenAI's 6 Oct 2026 release of 722 manuscripts withdrew three within a day over a single
+sign error that invalidated two dependent constructions, and Retraction Watch reports
+~50 % shipped without full verification. Three transfers, all methodological:
+(i) this turn's independent CPython cold reader is that check for the wire — a different
+language, no shared state, byte equality or the claim is void;
+(ii) a dependency inherits its parent's risk, so the one-line change to `kannabos.ts` is
+paid for with a full 29-lane frontier re-confirmation rather than an argument that it
+cannot matter;
+(iii) the Oct-2025 "GPT-5 solved 10 Erdős problems" retraction is the prior-art duty in
+its negative form — the columnar idea is cited to Cents/TWIX/ONTO instead of being
+claimed. **No compression mechanism transfers from any of this work**: proof search,
+agent swarms and Lean tactics say nothing about token-level representation. The one
+quantitative parallel is compute-vs-mechanism — Navier–Stokes cost ~10 000 agents, 88 h
+and 130 B output tokens, while X86's budget A/B on `ps-ef` (x0.25 / x1 / x4 / x16 of the
+work budget) returns 315 tokens every time: this stack's ceiling is mechanism-bound, not
+search-bound, so more compute is not the lever.
+
+**Known limits.** Two lanes win and the larger win is 37 tokens. The vote needs a *stable*
+boundary, so single-space-separated output (`apt list`, `npm ls`, `git numstat`), trees,
+prose, code and CSV are refused at G2 — 25 of 41 screened lanes have no grid at all. It
+cannot help a lane the frontier already models better than the columnar form, which the
+ρ measurements say is most of them. The contract assumes a reader competent to expand
+`t:100G/37` from a 41-token declaration; that is the competence this stack is built on,
+and it is why the full-wording arm (94–123 tokens, `bench/x42/clause.ts`) is kept for
+comparison rather than deleted.
+
+**Record.** `src/lib/omega/kenon.ts`, `src/lib/omega/kannabos.ts` (`extraK`,
+`kannabosRunMarker`), registry key `kenon`, `bench/x86/` (`gaps.ts`, `screen.ts`,
+`verify.ts`, `ab.ts`, `dumpmsg.ts`, `fuzz.ts`, `fuzz_decode.py`, `front.ts`),
+`bench/kenon_decode.py`, receipts in `bench/x86/receipts/`,
+[`docs/codec-abbreviations.md`](codec-abbreviations.md) §X86.

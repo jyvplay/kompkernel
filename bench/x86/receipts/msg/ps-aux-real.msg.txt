@@ -1,0 +1,181 @@
+Grid: Ln/Rn cell starts/ends char n, Tn tail n spaces after last cell; blocks per column: x one value/line, rN N v§count lines, dN N values then letters; R = one value per column padded to anchors, L literal. Print.
+⟨11¦L0d5¦R16x¦L18r1¦R26r3¦R33r14¦R39r21¦L40r8¦L49d7¦L54d3¦L62r1¦T1r52¦pL4R57L1⟩¦s§
+root
+systemd+
+user
+_rpc
+_chrony
+aabacdeccccaaaaaacceaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+1
+318
+306
+284
+1907
+304
+320
+1901
+1537
+1538
+1539
+348
+327
+331
+329
+330
+332
+1540
+1908
+322
+167
+2
+3
+4
+5
+6
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+0.0§57
+0.2§3
+0.1§2
+0.0§52
+167228
+15452
+17916
+35072
+8108
+7888
+10700
+3932§4
+2900§6
+2496
+2500
+10568
+1004
+0§36
+11708
+8980
+8764
+8056
+4056
+3968
+3048
+3036
+2928
+2864
+2828
+1040
+1036
+1024
+1020§2
+1012
+896
+880
+544
+4
+0§36
+?§11
+tty2
+tty1
+tty5
+tty3
+tty4
+tty6
+?§40
+Ss
+R
+S
+Ss+
+I<
+I
+SN
+aaaabaccaccddddddccccceeeeefeffcfcfccccfefcecfccecggeeece
+17:46
+17:52
+17:49
+aaaabaabcccaaaaaacbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+0:00§57
+/sbin/init
+sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+/lib/systemd/systemd-networkd
+/lib/systemd/systemd-journald
+ps aux --sort=-%mem
+/sbin/rpcbind -f -w
+/usr/sbin/chronyd -F 1
+/bin/bash -l -c cd /home/user/kompkernel && H=bench/holdout-x41 && \ { echo '# source: ls -l /usr/lib/x86_64-linux-gnu (real)'; ls -l /usr/lib/x86_64-linux-gnu 2>/dev/null | head -150; } > $H/ls-l-real.txt && \ { echo '# source: ls -l node_modules/.bin and node_modules (real)'; ls -l node_modules | head -120; } > $H/ls-l-nm.txt && \ { echo '# source: ps aux --sort=-%mem (real)'; ps aux --sort=-%mem | head -60; } > $H/ps-aux-real.txt && \ { echo '# source: apt list --installed (real)'; apt list --installed 2>/dev/null | head -120; } > $H/apt-real.txt && \ { echo '# source: git log --stat -30 (real)'; git log --stat -30 | head -200; } > $H/git-log-stat.txt && \ { echo '# source: node --help (real)'; node --help | head -120; } > $H/node-help.txt && \ { echo '# source: find / -name "*.json" -newer (real)'; find /usr/share -maxdepth 4 -name '*.json' 2>/dev/null | head -120; } > $H/find-json.txt && \ { echo '# source: du -ak node_modules (real, sorted)'; du -ak node_modules 2>/dev/null | sort -rn | head -120; } > $H/du-ak.txt && \ wc -l $H/*.txt && head -3 $H/ls-l-real.txt && head -3 $H/apt-real.txt && head -4 $H/git-log-stat.txt && head -3 $H/find-json.txt
+bash -c bash "$0/run.cmd" > "$0/out.log" 2>&1; echo $? > "$0/exit" /tmp/arena-workspace/procs/x41-tape-census-dbaac8ba
+bash /tmp/arena-workspace/procs/x41-tape-census-dbaac8ba/run.cmd
+bash bench/tmp/run2.sh bench/x41/tape2.ts
+/sbin/agetty -o -p -- \u --noclear - linux§6
+tee /tmp/x41-tape.log
+head -60
+/usr/sbin/chronyd -F 1
+bpfilter_umh
+[kthreadd]
+[rcu_gp]
+[rcu_par_gp]
+[slub_flushwq]
+[netns]
+[kworker/0:0H-events_highpri]
+[kworker/u4:0-flush-254:0]
+[mm_percpu_wq]
+[rcu_tasks_kthread]
+[rcu_tasks_trace_kthread]
+[ksoftirqd/0]
+[rcu_preempt]
+[migration/0]
+[kworker/0:1-mm_percpu_wq]
+[cpuhp/0]
+[cpuhp/1]
+[migration/1]
+[ksoftirqd/1]
+[kworker/1:0-mm_percpu_wq]
+[kworker/1:0H-events_highpri]
+[kworker/u4:1-events_unbound]
+[kdevtmpfs]
+[inet_frag_wq]
+[kauditd]
+[kworker/1:1-mm_percpu_wq]
+[khungtaskd]
+[oom_reaper]
+[writeback]
+[kcompactd0]
+[ksmd]
+[khugepaged]
+[kintegrityd]
+[kblockd]
+[blkcg_punt_bio]
+[watchdogd]
+[rpciod]
+# source: ps aux --sort=-%mem (real)
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+user        1553  103 13.9 1446072 561224 ?      Rl   17:49   3:14 node /tmp/_run_1539.mjs
+root        1229  0.4  0.4 1338384 18708 ?       S<Lsl 17:46   0:01 /usr/bin/envd

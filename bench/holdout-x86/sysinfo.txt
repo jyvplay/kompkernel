@@ -1,0 +1,13 @@
+# source: uname/nproc/uptime/df/free (real)
+Linux e2b.local 6.1.158+ #1 SMP PREEMPT_DYNAMIC Mon May 11 18:48:24 UTC 2026 x86_64 GNU/Linux
+2
+ 21:19:40 up 2 min,  0 user,  load average: 0.25, 0.07, 0.02
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/root        21G  991M   20G   5% /
+devtmpfs        2.0G     0  2.0G   0% /dev
+tmpfs           2.0G     0  2.0G   0% /dev/shm
+tmpfs           788M  288K  788M   1% /run
+tmpfs           5.0M     0  5.0M   0% /run/lock
+               total        used        free      shared  buff/cache   available
+Mem:            3939         582        3197           1         376        3357
+Swap:              0           0           0

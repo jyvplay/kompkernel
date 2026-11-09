@@ -1,0 +1,273 @@
+{
+ "generated": "2026-11-08T21:53:58.703Z",
+ "det": "1",
+ "rows": [
+  {
+   "path": "bench/holdout-x42/ss-tan.txt",
+   "lane": "ss-tan.txt",
+   "bytes": 2089,
+   "codec": "kenon",
+   "message": "# source: ss -tan (real)\nState      Recv-Q Send-Q         Local Address:Port         Peer Address:Port Process\nLISTEN     0      4096                 0.0.0.0:111               0.0.0.0:*           \nFIN-WAIT-2 0      0               169.254.0.21:58562           192.0.2.1:80          \nFIN-WAIT-2 0      0               169.254.0.21:58550           192.0.2.1:80          \nLISTEN     0      4096                       *:49983                   *:*           \nLISTEN     0      4096                       *:22                      *:*           \nLISTEN     0      4096                    [::]:111                  [::]:*           \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:55716       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:55728       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:52542       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:42416       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:48712       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:55722       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:57692       \nESTAB      0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:47766       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:48708       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:35944       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:42406       \nESTAB      0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:52558       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:46172       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:57710       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:55432       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:57700       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:55422       \n",
+   "decoded": "# source: ss -tan (real)\nState      Recv-Q Send-Q         Local Address:Port         Peer Address:Port Process\nLISTEN     0      4096                 0.0.0.0:111               0.0.0.0:*           \nFIN-WAIT-2 0      0               169.254.0.21:58562           192.0.2.1:80          \nFIN-WAIT-2 0      0               169.254.0.21:58550           192.0.2.1:80          \nLISTEN     0      4096                       *:49983                   *:*           \nLISTEN     0      4096                       *:22                      *:*           \nLISTEN     0      4096                    [::]:111                  [::]:*           \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:55716       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:55728       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:52542       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:42416       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:48712       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:55722       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:57692       \nESTAB      0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:47766       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:48708       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:35944       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:42406       \nESTAB      0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:52558       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:46172       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:57710       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:55432       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:57700       \nTIME-WAIT  0      0      [::ffff:169.254.0.21]:49983 [::ffff:10.12.0.18]:55422       \n",
+   "exact": true,
+   "applied": false,
+   "frontierTokens": 209,
+   "messageTokens": 318,
+   "frontierParent": "synkrisis",
+   "k": [
+    4,
+    5
+   ],
+   "cols": 5,
+   "rows": 17,
+   "literals": 9,
+   "bounds": [
+    11,
+    18,
+    25,
+    85
+   ],
+   "support": [
+    22,
+    23,
+    17,
+    23
+   ],
+   "clauseTokens": 61,
+   "wireTokens": 519,
+   "delta": 109,
+   "notes": "refused: no strict win — 318 vs frontier 209 (G7)",
+   "secs": 32.828
+  },
+  {
+   "path": "bench/holdout-x42b/ps-eo-cpu.txt",
+   "lane": "ps-eo-cpu.txt",
+   "bytes": 2027,
+   "codec": "kenon",
+   "message": "# source: bash -c ps -eo pid,ppid,pcpu,pmem,etimes,comm --sort=-pcpu | head -40 (real, captured 2026-10-24T23:21:28Z)\n    PID    PPID %CPU %MEM ELAPSED COMMAND\n   4356    4349  102 29.7     948 node\n   1229       1  0.4  0.4    9599 envd\n     14       2  0.0  0.0    9608 rcu_preempt\n    284       1  0.0  0.2    9608 systemd-journal\n    252       2  0.0  0.0    9608 jbd2/vda-8\n      1       0  0.0  0.2    9608 systemd\n   2545       2  0.0  0.0    8280 kworker/1:2-mm_percpu_wq\n    320       1  0.0  0.0    9608 chronyd\n   2392       2  0.0  0.0    8381 kworker/0:2-mm_percpu_wq\n     20       2  0.0  0.0    9608 ksoftirqd/1\n     13       2  0.0  0.0    9608 ksoftirqd/0\n   4324       2  0.0  0.0    1219 kworker/u4:2-events_unbound\n     40       2  0.0  0.0    9608 kworker/1:1H-kblockd\n     67       2  0.0  0.0    9608 kworker/0:1H-kblockd\n   4364       2  0.0  0.0     803 kworker/u4:1-events_unbound\n     61       2  0.0  0.0    9608 kswapd0\n     19       2  0.0  0.0    9608 migration/1\n     15       2  0.0  0.0    9608 migration/0\n    306       1  0.0  0.2    9608 systemd-network\n    304       1  0.0  0.0    9608 rpcbind\n    112       2  0.0  0.0    9608 hwrng\n     79       2  0.0  0.0    9608 irq/24-ACPI:Ged\n      2       0  0.0  0.0    9608 kthreadd\n      3       2  0.0  0.0    9608 rcu_gp\n      4       2  0.0  0.0    9608 rcu_par_gp\n      5       2  0.0  0.0    9608 slub_flushwq\n      6       2  0.0  0.0    9608 netns\n      8       2  0.0  0.0    9608 kworker/0:0H-events_highpri\n     10       2  0.0  0.0    9608 mm_percpu_wq\n     11       2  0.0  0.0    9608 rcu_tasks_kthread\n     12       2  0.0  0.0    9608 rcu_tasks_trace_kthread\n     17       2  0.0  0.0    9608 cpuhp/0\n     18       2  0.0  0.0    9608 cpuhp/1\n     22       2  0.0  0.0    9608 kworker/1:0H-events_highpri\n     25       2  0.0  0.0    9608 kdevtmpfs\n     26       2  0.0  0.0    9608 inet_frag_wq\n     27       2  0.0  0.0    9608 kauditd\n     29       2  0.0  0.0    9608 khungtaskd\n     30       2  0.0  0.0    9608 oom_reaper\n",
+   "decoded": "# source: bash -c ps -eo pid,ppid,pcpu,pmem,etimes,comm --sort=-pcpu | head -40 (real, captured 2026-10-24T23:21:28Z)\n    PID    PPID %CPU %MEM ELAPSED COMMAND\n   4356    4349  102 29.7     948 node\n   1229       1  0.4  0.4    9599 envd\n     14       2  0.0  0.0    9608 rcu_preempt\n    284       1  0.0  0.2    9608 systemd-journal\n    252       2  0.0  0.0    9608 jbd2/vda-8\n      1       0  0.0  0.2    9608 systemd\n   2545       2  0.0  0.0    8280 kworker/1:2-mm_percpu_wq\n    320       1  0.0  0.0    9608 chronyd\n   2392       2  0.0  0.0    8381 kworker/0:2-mm_percpu_wq\n     20       2  0.0  0.0    9608 ksoftirqd/1\n     13       2  0.0  0.0    9608 ksoftirqd/0\n   4324       2  0.0  0.0    1219 kworker/u4:2-events_unbound\n     40       2  0.0  0.0    9608 kworker/1:1H-kblockd\n     67       2  0.0  0.0    9608 kworker/0:1H-kblockd\n   4364       2  0.0  0.0     803 kworker/u4:1-events_unbound\n     61       2  0.0  0.0    9608 kswapd0\n     19       2  0.0  0.0    9608 migration/1\n     15       2  0.0  0.0    9608 migration/0\n    306       1  0.0  0.2    9608 systemd-network\n    304       1  0.0  0.0    9608 rpcbind\n    112       2  0.0  0.0    9608 hwrng\n     79       2  0.0  0.0    9608 irq/24-ACPI:Ged\n      2       0  0.0  0.0    9608 kthreadd\n      3       2  0.0  0.0    9608 rcu_gp\n      4       2  0.0  0.0    9608 rcu_par_gp\n      5       2  0.0  0.0    9608 slub_flushwq\n      6       2  0.0  0.0    9608 netns\n      8       2  0.0  0.0    9608 kworker/0:0H-events_highpri\n     10       2  0.0  0.0    9608 mm_percpu_wq\n     11       2  0.0  0.0    9608 rcu_tasks_kthread\n     12       2  0.0  0.0    9608 rcu_tasks_trace_kthread\n     17       2  0.0  0.0    9608 cpuhp/0\n     18       2  0.0  0.0    9608 cpuhp/1\n     22       2  0.0  0.0    9608 kworker/1:0H-events_highpri\n     25       2  0.0  0.0    9608 kdevtmpfs\n     26       2  0.0  0.0    9608 inet_frag_wq\n     27       2  0.0  0.0    9608 kauditd\n     29       2  0.0  0.0    9608 khungtaskd\n     30       2  0.0  0.0    9608 oom_reaper\n",
+   "exact": true,
+   "applied": false,
+   "frontierTokens": 389,
+   "messageTokens": 480,
+   "frontierParent": "synkrisis",
+   "k": [
+    4,
+    5,
+    6
+   ],
+   "cols": 6,
+   "rows": 39,
+   "literals": 3,
+   "bounds": [
+    14,
+    17,
+    22,
+    29
+   ],
+   "support": [
+    38,
+    39,
+    38,
+    37
+   ],
+   "clauseTokens": 52,
+   "wireTokens": 532,
+   "delta": 91,
+   "notes": "refused: no strict win — 480 vs frontier 389 (G7)",
+   "secs": 40.522
+  },
+  {
+   "path": "bench/holdout-x42/ls-usr-bin.txt",
+   "lane": "ls-usr-bin.txt",
+   "bytes": 2394,
+   "codec": "kenon",
+   "message": "# source: ls -l /usr/bin (real)\ntotal 160156\n-rwxr-xr-x 1 root root      68496 Sep 20  2022 [\n-rwxr-xr-x 1 root root      31040 Nov 21  2024 addpart\nlrwxrwxrwx 1 root root         26 Jan 14  2023 addr2line -> x86_64-linux-gnu-addr2line\nlrwxrwxrwx 1 root root         25 May 27 20:36 animate -> /etc/alternatives/animate\nlrwxrwxrwx 1 root root         29 May 27 20:36 animate-im6 -> /etc/alternatives/animate-im6\n-rwxr-xr-x 1 root root      14544 May 27 20:36 animate-im6.q16\n-rwxr-xr-x 1 root root      18752 May 25  2023 apt\n-rwxr-xr-x 1 root root      88456 May 25  2023 apt-cache\n-rwxr-xr-x 1 root root      22920 May 25  2023 apt-cdrom\n-rwxr-xr-x 1 root root      26944 May 25  2023 apt-config\n-rwxr-xr-x 1 root root      51592 May 25  2023 apt-get\n-rwxr-xr-x 1 root root      27972 May 25  2023 apt-key\n-rwxr-xr-x 1 root root      59784 May 25  2023 apt-mark\nlrwxrwxrwx 1 root root         19 Jan 14  2023 ar -> x86_64-linux-gnu-ar\n-rwxr-xr-x 1 root root      43888 Sep 20  2022 arch\nlrwxrwxrwx 1 root root         19 Jan 14  2023 as -> x86_64-linux-gnu-as\nlrwxrwxrwx 1 root root         21 Jun 17  2022 awk -> /etc/alternatives/awk\n-rwxr-xr-x 1 root root      60400 Sep 20  2022 b2sum\n-rwxr-xr-x 1 root root      48016 Sep 20  2022 base32\n-rwxr-xr-x 1 root root      48016 Sep 20  2022 base64\n-rwxr-xr-x 1 root root      43856 Sep 20  2022 basename\n-rwxr-xr-x 1 root root      56208 Sep 20  2022 basenc\n-rwxr-xr-x 1 root root    1265648 May  7 20:33 bash\n-rwxr-xr-x 1 root root       6865 May  7 20:33 bashbug\n-rwxr-xr-x 3 root root      39224 Sep 19  2022 bunzip2\n-rwxr-xr-x 1 root root      92672 Apr 27 19:48 busctl\n-rwxr-xr-x 1 root root    1210176 Jan  1  1970 busybox\n-rwxr-xr-x 3 root root      39224 Sep 19  2022 bzcat\nlrwxrwxrwx 1 root root          6 Sep 19  2022 bzcmp -> bzdiff\n-rwxr-xr-x 1 root root       2225 Sep 19  2022 bzdiff\nlrwxrwxrwx 1 root root          6 Sep 19  2022 bzegrep -> bzgrep\n-rwxr-xr-x 1 root root       4893 Nov 27  2021 bzexe\nlrwxrwxrwx 1 root root          6 Sep 19  2022 bzfgrep -> bzgrep\n-rwxr-xr-x 1 root root       3775 Sep 19  2022 bzgrep\n-rwxr-xr-x 3 root root      39224 Sep 19  2022 bzip2\n-rwxr-xr-x 1 root root      14568 Sep 19  2022 bzip2recover\nlrwxrwxrwx 1 root root          6 Sep 19  2022 bzless -> bzmore\n-rwxr-xr-x 1 root root       1297 Sep 19  2022 bzmore\nlrwxrwxrwx 1 root root         21 Jan  8  2023 c++ -> /etc/alternatives/c++\n",
+   "decoded": "# source: ls -l /usr/bin (real)\ntotal 160156\n-rwxr-xr-x 1 root root      68496 Sep 20  2022 [\n-rwxr-xr-x 1 root root      31040 Nov 21  2024 addpart\nlrwxrwxrwx 1 root root         26 Jan 14  2023 addr2line -> x86_64-linux-gnu-addr2line\nlrwxrwxrwx 1 root root         25 May 27 20:36 animate -> /etc/alternatives/animate\nlrwxrwxrwx 1 root root         29 May 27 20:36 animate-im6 -> /etc/alternatives/animate-im6\n-rwxr-xr-x 1 root root      14544 May 27 20:36 animate-im6.q16\n-rwxr-xr-x 1 root root      18752 May 25  2023 apt\n-rwxr-xr-x 1 root root      88456 May 25  2023 apt-cache\n-rwxr-xr-x 1 root root      22920 May 25  2023 apt-cdrom\n-rwxr-xr-x 1 root root      26944 May 25  2023 apt-config\n-rwxr-xr-x 1 root root      51592 May 25  2023 apt-get\n-rwxr-xr-x 1 root root      27972 May 25  2023 apt-key\n-rwxr-xr-x 1 root root      59784 May 25  2023 apt-mark\nlrwxrwxrwx 1 root root         19 Jan 14  2023 ar -> x86_64-linux-gnu-ar\n-rwxr-xr-x 1 root root      43888 Sep 20  2022 arch\nlrwxrwxrwx 1 root root         19 Jan 14  2023 as -> x86_64-linux-gnu-as\nlrwxrwxrwx 1 root root         21 Jun 17  2022 awk -> /etc/alternatives/awk\n-rwxr-xr-x 1 root root      60400 Sep 20  2022 b2sum\n-rwxr-xr-x 1 root root      48016 Sep 20  2022 base32\n-rwxr-xr-x 1 root root      48016 Sep 20  2022 base64\n-rwxr-xr-x 1 root root      43856 Sep 20  2022 basename\n-rwxr-xr-x 1 root root      56208 Sep 20  2022 basenc\n-rwxr-xr-x 1 root root    1265648 May  7 20:33 bash\n-rwxr-xr-x 1 root root       6865 May  7 20:33 bashbug\n-rwxr-xr-x 3 root root      39224 Sep 19  2022 bunzip2\n-rwxr-xr-x 1 root root      92672 Apr 27 19:48 busctl\n-rwxr-xr-x 1 root root    1210176 Jan  1  1970 busybox\n-rwxr-xr-x 3 root root      39224 Sep 19  2022 bzcat\nlrwxrwxrwx 1 root root          6 Sep 19  2022 bzcmp -> bzdiff\n-rwxr-xr-x 1 root root       2225 Sep 19  2022 bzdiff\nlrwxrwxrwx 1 root root          6 Sep 19  2022 bzegrep -> bzgrep\n-rwxr-xr-x 1 root root       4893 Nov 27  2021 bzexe\nlrwxrwxrwx 1 root root          6 Sep 19  2022 bzfgrep -> bzgrep\n-rwxr-xr-x 1 root root       3775 Sep 19  2022 bzgrep\n-rwxr-xr-x 3 root root      39224 Sep 19  2022 bzip2\n-rwxr-xr-x 1 root root      14568 Sep 19  2022 bzip2recover\nlrwxrwxrwx 1 root root          6 Sep 19  2022 bzless -> bzmore\n-rwxr-xr-x 1 root root       1297 Sep 19  2022 bzmore\nlrwxrwxrwx 1 root root         21 Jan  8  2023 c++ -> /etc/alternatives/c++\n",
+   "exact": true,
+   "applied": false,
+   "frontierTokens": 375,
+   "messageTokens": 510,
+   "frontierParent": "synkrisis",
+   "k": [
+    2,
+    3
+   ],
+   "cols": 9,
+   "rows": 39,
+   "literals": 3,
+   "bounds": [
+    42
+   ],
+   "support": [
+    33
+   ],
+   "clauseTokens": 52,
+   "wireTokens": 540,
+   "delta": 135,
+   "notes": "refused: no strict win — 510 vs frontier 375 (G7)",
+   "secs": 23.674
+  },
+  {
+   "path": "bench/holdout-ops/ls-full-iso.txt",
+   "lane": "ls-full-iso.txt",
+   "bytes": 2549,
+   "codec": "kenon",
+   "message": "node_modules/.bin:\ntotal 8\ndrwxr-xr-x  2 user user 4096 2026-09-30 08:00:03.676449622 +0000 .\ndrwxr-xr-x 90 user user 4096 2026-09-30 08:00:03.900450754 +0000 ..\nlrwxrwxrwx  1 user user   40 2026-09-30 08:00:03.676449622 +0000 baseline-browser-mapping -> ../baseline-browser-mapping/dist/cli.cjs\nlrwxrwxrwx  1 user user   22 2026-09-30 08:00:03.676449622 +0000 browserslist -> ../browserslist/cli.js\nlrwxrwxrwx  1 user user   22 2026-09-30 08:00:03.676449622 +0000 esbuild -> ../esbuild/bin/esbuild\nlrwxrwxrwx  1 user user   24 2026-09-30 08:00:03.676449622 +0000 jiti -> ../jiti/lib/jiti-cli.mjs\nlrwxrwxrwx  1 user user   18 2026-09-30 08:00:03.676449622 +0000 jsesc -> ../jsesc/bin/jsesc\nlrwxrwxrwx  1 user user   19 2026-09-30 08:00:03.676449622 +0000 json5 -> ../json5/lib/cli.js\nlrwxrwxrwx  1 user user   24 2026-09-30 08:00:03.676449622 +0000 nanoid -> ../nanoid/bin/nanoid.cjs\nlrwxrwxrwx  1 user user   21 2026-09-30 08:00:03.676449622 +0000 next -> ../next/dist/bin/next\nlrwxrwxrwx  1 user user   36 2026-09-30 08:00:03.676449622 +0000 parser -> ../@babel/parser/bin/babel-parser.js\nlrwxrwxrwx  1 user user   25 2026-09-30 08:00:03.676449622 +0000 rollup -> ../rollup/dist/bin/rollup\nlrwxrwxrwx  1 user user   23 2026-09-30 08:00:03.676449622 +0000 semver -> ../semver/bin/semver.js\nlrwxrwxrwx  1 user user   21 2026-09-30 08:00:03.676449622 +0000 tsc -> ../typescript/bin/tsc\nlrwxrwxrwx  1 user user   26 2026-09-30 08:00:03.676449622 +0000 tsserver -> ../typescript/bin/tsserver\nlrwxrwxrwx  1 user user   32 2026-09-30 08:00:03.676449622 +0000 update-browserslist-db -> ../update-browserslist-db/cli.js\nlrwxrwxrwx  1 user user   19 2026-09-30 08:00:03.676449622 +0000 vite -> ../vite/bin/vite.js\n\nnode_modules/@types:\ntotal 20\ndrwxr-xr-x 11 user user 4096 2026-09-30 07:59:50.564383395 +0000 .\ndrwxr-xr-x 90 user user 4096 2026-09-30 08:00:03.900450754 +0000 ..\ndrwxr-xr-x  2 user user  128 2026-09-30 07:59:52.464392992 +0000 babel__core\ndrwxr-xr-x  2 user user  128 2026-09-30 07:59:52.276392041 +0000 babel__generator\ndrwxr-xr-x  2 user user  128 2026-09-30 07:59:52.164391476 +0000 babel__template\ndrwxr-xr-x  2 user user  128 2026-09-30 07:59:52.600393678 +0000 babel__traverse\ndrwxr-xr-x  2 user user  128 2026-09-30 07:59:52.440392871 +0000 estree\ndrwxr-xr-x 11 user user 4096 2026-09-30 07:59:54.328402406 +0000 node\ndrwxr-xr-x  3 user user  128 2026-09-30 07:59:52.464392992 +0000 pg\ndrwxr-xr-x  3 user user 4096 2026-09-30 07:59:53.152396466 +0000 react\ndrwxr-xr-x  3 user user 4096 2026-09-30 07:59:52.812394749 +0000 react-dom\n",
+   "decoded": "node_modules/.bin:\ntotal 8\ndrwxr-xr-x  2 user user 4096 2026-09-30 08:00:03.676449622 +0000 .\ndrwxr-xr-x 90 user user 4096 2026-09-30 08:00:03.900450754 +0000 ..\nlrwxrwxrwx  1 user user   40 2026-09-30 08:00:03.676449622 +0000 baseline-browser-mapping -> ../baseline-browser-mapping/dist/cli.cjs\nlrwxrwxrwx  1 user user   22 2026-09-30 08:00:03.676449622 +0000 browserslist -> ../browserslist/cli.js\nlrwxrwxrwx  1 user user   22 2026-09-30 08:00:03.676449622 +0000 esbuild -> ../esbuild/bin/esbuild\nlrwxrwxrwx  1 user user   24 2026-09-30 08:00:03.676449622 +0000 jiti -> ../jiti/lib/jiti-cli.mjs\nlrwxrwxrwx  1 user user   18 2026-09-30 08:00:03.676449622 +0000 jsesc -> ../jsesc/bin/jsesc\nlrwxrwxrwx  1 user user   19 2026-09-30 08:00:03.676449622 +0000 json5 -> ../json5/lib/cli.js\nlrwxrwxrwx  1 user user   24 2026-09-30 08:00:03.676449622 +0000 nanoid -> ../nanoid/bin/nanoid.cjs\nlrwxrwxrwx  1 user user   21 2026-09-30 08:00:03.676449622 +0000 next -> ../next/dist/bin/next\nlrwxrwxrwx  1 user user   36 2026-09-30 08:00:03.676449622 +0000 parser -> ../@babel/parser/bin/babel-parser.js\nlrwxrwxrwx  1 user user   25 2026-09-30 08:00:03.676449622 +0000 rollup -> ../rollup/dist/bin/rollup\nlrwxrwxrwx  1 user user   23 2026-09-30 08:00:03.676449622 +0000 semver -> ../semver/bin/semver.js\nlrwxrwxrwx  1 user user   21 2026-09-30 08:00:03.676449622 +0000 tsc -> ../typescript/bin/tsc\nlrwxrwxrwx  1 user user   26 2026-09-30 08:00:03.676449622 +0000 tsserver -> ../typescript/bin/tsserver\nlrwxrwxrwx  1 user user   32 2026-09-30 08:00:03.676449622 +0000 update-browserslist-db -> ../update-browserslist-db/cli.js\nlrwxrwxrwx  1 user user   19 2026-09-30 08:00:03.676449622 +0000 vite -> ../vite/bin/vite.js\n\nnode_modules/@types:\ntotal 20\ndrwxr-xr-x 11 user user 4096 2026-09-30 07:59:50.564383395 +0000 .\ndrwxr-xr-x 90 user user 4096 2026-09-30 08:00:03.900450754 +0000 ..\ndrwxr-xr-x  2 user user  128 2026-09-30 07:59:52.464392992 +0000 babel__core\ndrwxr-xr-x  2 user user  128 2026-09-30 07:59:52.276392041 +0000 babel__generator\ndrwxr-xr-x  2 user user  128 2026-09-30 07:59:52.164391476 +0000 babel__template\ndrwxr-xr-x  2 user user  128 2026-09-30 07:59:52.600393678 +0000 babel__traverse\ndrwxr-xr-x  2 user user  128 2026-09-30 07:59:52.440392871 +0000 estree\ndrwxr-xr-x 11 user user 4096 2026-09-30 07:59:54.328402406 +0000 node\ndrwxr-xr-x  3 user user  128 2026-09-30 07:59:52.464392992 +0000 pg\ndrwxr-xr-x  3 user user 4096 2026-09-30 07:59:53.152396466 +0000 react\ndrwxr-xr-x  3 user user 4096 2026-09-30 07:59:52.812394749 +0000 react-dom\n",
+   "exact": true,
+   "applied": false,
+   "frontierTokens": 367,
+   "messageTokens": 491,
+   "frontierParent": "synkrisis",
+   "k": [
+    2,
+    3
+   ],
+   "cols": 9,
+   "rows": 28,
+   "literals": 6,
+   "bounds": [
+    12
+   ],
+   "support": [
+    24
+   ],
+   "clauseTokens": 52,
+   "wireTokens": 525,
+   "delta": 124,
+   "notes": "refused: no strict win — 491 vs frontier 367 (G7)",
+   "secs": 34.588
+  },
+  {
+   "path": "bench/holdout-x86/proc-meminfo.txt",
+   "lane": "proc-meminfo.txt",
+   "bytes": 1506,
+   "codec": "kenon",
+   "message": "# source: /proc/meminfo (real)\nMemTotal:        4034452 kB\nMemFree:         3276604 kB\nMemAvailable:    3437160 kB\nBuffers:           41664 kB\nCached:           308988 kB\nSwapCached:            0 kB\nActive:           105336 kB\nInactive:         577016 kB\nActive(anon):        320 kB\nInactive(anon):   332344 kB\nActive(file):     105016 kB\nInactive(file):   244672 kB\nUnevictable:           8 kB\nMlocked:               4 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:            106184 kB\nWriteback:             0 kB\nAnonPages:        331576 kB\nMapped:            78676 kB\nShmem:              1056 kB\nKReclaimable:      30972 kB\nSlab:              43768 kB\nSReclaimable:      30972 kB\nSUnreclaim:        12796 kB\nKernelStack:        1544 kB\nPageTables:         3888 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:     2017224 kB\nCommitted_AS:     438160 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:        4768 kB\nVmallocChunk:          0 kB\nPercpu:              592 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:       36864 kB\nDirectMap2M:     2060288 kB\nDirectMap1G:     4194304 kB\n",
+   "decoded": "# source: /proc/meminfo (real)\nMemTotal:        4034452 kB\nMemFree:         3276604 kB\nMemAvailable:    3437160 kB\nBuffers:           41664 kB\nCached:           308988 kB\nSwapCached:            0 kB\nActive:           105336 kB\nInactive:         577016 kB\nActive(anon):        320 kB\nInactive(anon):   332344 kB\nActive(file):     105016 kB\nInactive(file):   244672 kB\nUnevictable:           8 kB\nMlocked:               4 kB\nSwapTotal:             0 kB\nSwapFree:              0 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:            106184 kB\nWriteback:             0 kB\nAnonPages:        331576 kB\nMapped:            78676 kB\nShmem:              1056 kB\nKReclaimable:      30972 kB\nSlab:              43768 kB\nSReclaimable:      30972 kB\nSUnreclaim:        12796 kB\nKernelStack:        1544 kB\nPageTables:         3888 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:     2017224 kB\nCommitted_AS:     438160 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:        4768 kB\nVmallocChunk:          0 kB\nPercpu:              592 kB\nAnonHugePages:         0 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:       36864 kB\nDirectMap2M:     2060288 kB\nDirectMap1G:     4194304 kB\n",
+   "exact": true,
+   "applied": false,
+   "frontierTokens": 349,
+   "messageTokens": 438,
+   "frontierParent": "synkrisis",
+   "k": [
+    2
+   ],
+   "cols": 3,
+   "rows": 48,
+   "literals": 7,
+   "bounds": [],
+   "support": [],
+   "clauseTokens": 61,
+   "wireTokens": 386,
+   "delta": 89,
+   "notes": "refused: no strict win — 438 vs frontier 349 (G7)",
+   "secs": 12.559
+  },
+  {
+   "path": "bench/holdout-x41/ps-real.txt",
+   "lane": "ps-real.txt",
+   "bytes": 2365,
+   "codec": "kenon",
+   "message": "# source: ps -eo pid,user,pcpu,pmem,etime,args --sort=-pcpu (real)\n    PID USER     %CPU %MEM     ELAPSED COMMAND\n   1553 user      104 15.7       02:59 node /tmp/_run_1539.mjs\n   1229 root      0.4  0.4       05:40 /usr/bin/envd\n    294 root      0.0  0.0       05:49 [kworker/u4:3-ext4-rsv-conversion]\n     14 root      0.0  0.0       05:50 [rcu_preempt]\n     21 root      0.0  0.0       05:50 [kworker/1:0-mm_percpu_wq]\n      1 root      0.0  0.2       05:50 /sbin/init\n     40 root      0.0  0.0       05:49 [kworker/1:1H-kblockd]\n     63 root      0.0  0.0       05:49 [kworker/u4:2-events_unbound]\n     24 root      0.0  0.0       05:50 [kworker/u4:1-events_unbound]\n      9 root      0.0  0.0       05:50 [kworker/u4:0-flush-254:0]\n    284 root      0.0  0.1       05:49 /lib/systemd/systemd-journald\n     67 root      0.0  0.0       05:49 [kworker/0:1H-kblockd]\n     19 root      0.0  0.0       05:50 [migration/1]\n    252 root      0.0  0.0       05:49 [jbd2/vda-8]\n     20 root      0.0  0.0       05:50 [ksoftirqd/1]\n    306 systemd+  0.0  0.2       05:49 /lib/systemd/systemd-networkd\n     13 root      0.0  0.0       05:50 [ksoftirqd/0]\n    320 _chrony   0.0  0.0       05:49 /usr/sbin/chronyd -F 1\n     16 root      0.0  0.0       05:50 [kworker/0:1-events]\n      2 root      0.0  0.0       05:50 [kthreadd]\n      3 root      0.0  0.0       05:50 [rcu_gp]\n      4 root      0.0  0.0       05:50 [rcu_par_gp]\n      5 root      0.0  0.0       05:50 [slub_flushwq]\n      6 root      0.0  0.0       05:50 [netns]\n      8 root      0.0  0.0       05:50 [kworker/0:0H-events_highpri]\n     10 root      0.0  0.0       05:50 [mm_percpu_wq]\n     11 root      0.0  0.0       05:50 [rcu_tasks_kthread]\n     12 root      0.0  0.0       05:50 [rcu_tasks_trace_kthread]\n     15 root      0.0  0.0       05:50 [migration/0]\n     17 root      0.0  0.0       05:50 [cpuhp/0]\n     18 root      0.0  0.0       05:50 [cpuhp/1]\n     22 root      0.0  0.0       05:50 [kworker/1:0H-events_highpri]\n     25 root      0.0  0.0       05:50 [kdevtmpfs]\n     26 root      0.0  0.0       05:50 [inet_frag_wq]\n     27 root      0.0  0.0       05:50 [kauditd]\n     28 root      0.0  0.0       05:50 [kworker/1:1-mm_percpu_wq]\n     29 root      0.0  0.0       05:50 [khungtaskd]\n     30 root      0.0  0.0       05:50 [oom_reaper]\n     31 root      0.0  0.0       05:50 [writeback]\n",
+   "decoded": "# source: ps -eo pid,user,pcpu,pmem,etime,args --sort=-pcpu (real)\n    PID USER     %CPU %MEM     ELAPSED COMMAND\n   1553 user      104 15.7       02:59 node /tmp/_run_1539.mjs\n   1229 root      0.4  0.4       05:40 /usr/bin/envd\n    294 root      0.0  0.0       05:49 [kworker/u4:3-ext4-rsv-conversion]\n     14 root      0.0  0.0       05:50 [rcu_preempt]\n     21 root      0.0  0.0       05:50 [kworker/1:0-mm_percpu_wq]\n      1 root      0.0  0.2       05:50 /sbin/init\n     40 root      0.0  0.0       05:49 [kworker/1:1H-kblockd]\n     63 root      0.0  0.0       05:49 [kworker/u4:2-events_unbound]\n     24 root      0.0  0.0       05:50 [kworker/u4:1-events_unbound]\n      9 root      0.0  0.0       05:50 [kworker/u4:0-flush-254:0]\n    284 root      0.0  0.1       05:49 /lib/systemd/systemd-journald\n     67 root      0.0  0.0       05:49 [kworker/0:1H-kblockd]\n     19 root      0.0  0.0       05:50 [migration/1]\n    252 root      0.0  0.0       05:49 [jbd2/vda-8]\n     20 root      0.0  0.0       05:50 [ksoftirqd/1]\n    306 systemd+  0.0  0.2       05:49 /lib/systemd/systemd-networkd\n     13 root      0.0  0.0       05:50 [ksoftirqd/0]\n    320 _chrony   0.0  0.0       05:49 /usr/sbin/chronyd -F 1\n     16 root      0.0  0.0       05:50 [kworker/0:1-events]\n      2 root      0.0  0.0       05:50 [kthreadd]\n      3 root      0.0  0.0       05:50 [rcu_gp]\n      4 root      0.0  0.0       05:50 [rcu_par_gp]\n      5 root      0.0  0.0       05:50 [slub_flushwq]\n      6 root      0.0  0.0       05:50 [netns]\n      8 root      0.0  0.0       05:50 [kworker/0:0H-events_highpri]\n     10 root      0.0  0.0       05:50 [mm_percpu_wq]\n     11 root      0.0  0.0       05:50 [rcu_tasks_kthread]\n     12 root      0.0  0.0       05:50 [rcu_tasks_trace_kthread]\n     15 root      0.0  0.0       05:50 [migration/0]\n     17 root      0.0  0.0       05:50 [cpuhp/0]\n     18 root      0.0  0.0       05:50 [cpuhp/1]\n     22 root      0.0  0.0       05:50 [kworker/1:0H-events_highpri]\n     25 root      0.0  0.0       05:50 [kdevtmpfs]\n     26 root      0.0  0.0       05:50 [inet_frag_wq]\n     27 root      0.0  0.0       05:50 [kauditd]\n     28 root      0.0  0.0       05:50 [kworker/1:1-mm_percpu_wq]\n     29 root      0.0  0.0       05:50 [khungtaskd]\n     30 root      0.0  0.0       05:50 [oom_reaper]\n     31 root      0.0  0.0       05:50 [writeback]\n",
+   "exact": true,
+   "applied": false,
+   "frontierTokens": 397,
+   "messageTokens": 506,
+   "frontierParent": "synkrisis",
+   "k": [
+    3,
+    4,
+    5
+   ],
+   "cols": 6,
+   "rows": 39,
+   "literals": 3,
+   "bounds": [
+    18,
+    23,
+    33
+   ],
+   "support": [
+    39,
+    38,
+    39
+   ],
+   "clauseTokens": 52,
+   "wireTokens": 565,
+   "delta": 109,
+   "notes": "refused: no strict win — 506 vs frontier 397 (G7)",
+   "secs": 44.803
+  },
+  {
+   "path": "bench/holdout-x41/df-real.txt",
+   "lane": "df-real.txt",
+   "bytes": 329,
+   "codec": "kenon",
+   "message": "# source: df -h (real, this sandbox, 2026-10-24T17:52:16Z)\nFilesystem      Size  Used Avail Use% Mounted on\n/dev/root        21G  1.7G   19G   9% /\ndevtmpfs        2.0G     0  2.0G   0% /dev\ntmpfs           2.0G     0  2.0G   0% /dev/shm\ntmpfs           788M  288K  788M   1% /run\ntmpfs           5.0M     0  5.0M   0% /run/lock\n",
+   "decoded": "# source: df -h (real, this sandbox, 2026-10-24T17:52:16Z)\nFilesystem      Size  Used Avail Use% Mounted on\n/dev/root        21G  1.7G   19G   9% /\ndevtmpfs        2.0G     0  2.0G   0% /dev\ntmpfs           2.0G     0  2.0G   0% /dev/shm\ntmpfs           788M  288K  788M   1% /run\ntmpfs           5.0M     0  5.0M   0% /run/lock\n",
+   "exact": true,
+   "applied": false,
+   "frontierTokens": 126,
+   "messageTokens": 232,
+   "frontierParent": "synkrisis",
+   "k": [
+    2,
+    3,
+    6
+   ],
+   "cols": 6,
+   "rows": 6,
+   "literals": 2,
+   "bounds": [
+    16,
+    35
+   ],
+   "support": [
+    5,
+    5
+   ],
+   "clauseTokens": 61,
+   "wireTokens": 171,
+   "delta": 106,
+   "notes": "refused: no strict win — 232 vs frontier 126 (G7)",
+   "secs": 10.142
+  },
+  {
+   "path": "bench/holdout-x42b/df-h-all.txt",
+   "lane": "df-h-all.txt",
+   "bytes": 324,
+   "codec": "kenon",
+   "message": "# source: df -h (real, captured 2026-10-24T23:21:28Z)\nFilesystem      Size  Used Avail Use% Mounted on\n/dev/root        21G  1.8G   19G   9% /\ndevtmpfs        2.0G     0  2.0G   0% /dev\ntmpfs           2.0G     0  2.0G   0% /dev/shm\ntmpfs           788M  288K  788M   1% /run\ntmpfs           5.0M     0  5.0M   0% /run/lock\n",
+   "decoded": "# source: df -h (real, captured 2026-10-24T23:21:28Z)\nFilesystem      Size  Used Avail Use% Mounted on\n/dev/root        21G  1.8G   19G   9% /\ndevtmpfs        2.0G     0  2.0G   0% /dev\ntmpfs           2.0G     0  2.0G   0% /dev/shm\ntmpfs           788M  288K  788M   1% /run\ntmpfs           5.0M     0  5.0M   0% /run/lock\n",
+   "exact": true,
+   "applied": false,
+   "frontierTokens": 124,
+   "messageTokens": 230,
+   "frontierParent": "synkrisis",
+   "k": [
+    2,
+    3,
+    6
+   ],
+   "cols": 6,
+   "rows": 6,
+   "literals": 2,
+   "bounds": [
+    16,
+    35
+   ],
+   "support": [
+    5,
+    5
+   ],
+   "clauseTokens": 61,
+   "wireTokens": 169,
+   "delta": 106,
+   "notes": "refused: no strict win — 230 vs frontier 124 (G7)",
+   "secs": 10.247
+  }
+ ]
+}
