@@ -5425,3 +5425,70 @@ census,chiron-sweep,large-sweep}.ts`, `bench/x86/run-front-h.sh`; receipts in `b
 `bench/x89/receipts/front3-runH.{json,log}`, `bench/x91/receipts/coldread-model.log` and the
 model's own outputs `bench/x91/coldread-model/{df-h,meeting-transcript}.model.txt`.
 [`docs/codecs.md`](codecs.md) §X93.
+
+## X94 — no new abbreviation
+
+**X94 adds nothing to this page's subject matter.** It introduces no glyph, no rule family, no
+contract wording, and no arm. `src/` is untouched; the only paths changed this turn are
+`.gitignore` and `bench/x94/`. It is recorded here because it corrects the formula every entry on
+this page was selected with, and because an entry that changes no abbreviation still has to state
+that plainly rather than be absent.
+
+The contract this page applies to each entry, applied to the probe instead:
+
+**Greedy or not.** Neither — the probe makes no selection. It prices **2 309 single local moves**
+(600 entry removals, 1 196 body additions, 513 tape-plus-body factorings) independently against the
+exact token count of the complete message, and reports each move's delta. A greedy pass over them
+would be a *different* experiment and is not claimed: the per-lane best deltas sum to −4, but
+moves interact (removing one entry changes what another rule is worth), so the sum is a lower bound
+on one greedy pass and not a result about any encoder.
+
+**Honest source citation.** The formula under test is this repository's own economic identity,
+`(k−1)(T−1)−1`, recorded in [`docs/codecs.md`](codecs.md); it is **not** from any external paper,
+and no external source is cited for it. External sources are cited only for the mechanism and the
+bounds — arXiv:2611.08671 for merge-point destruction and the 0.361 greedy-BPE bound,
+arXiv:1804.08547 for "introducing too many nonterminals causes the bit-size to grow",
+eti.uni-siegen.de for greedy's ≥1.348 approximation ratio, arXiv:2504.00178 for the ~20 % cost of
+the pre-tokenization barrier. None of those papers measured this repository's tape, and none is the
+source of any number in the receipt.
+
+**Time- or CPU-bound.** Time-bound and trivially so: the whole census over ten wires runs in about
+**9 s** wall in one process, with zero frontier calls, zero encodes and no model queries — it is
+`countTokensExact` over re-serialised strings. `FACTOR`'s candidate generation is the only part
+with a memory hazard: the first version's O(m²) containment filter died with *"Ineffective
+mark-compacts near heap limit"* at 1.9 GB, the failure this repository already records for n-gram
+retention. Sorting by count first and bounding the containment scan to the kept prefix fixed it.
+The probe also **executes on import** (no main guard), so importing it without arguments runs it
+empty and overwrites the receipt — which happened once, and produced a plausible all-zeros file.
+
+**What was measured.** Fidelity exact on all 2 309 moves; **9 of 10 wires reproduce their committed
+lane byte for byte** under the probe's own parser (`ls-l-real` quarantined — its contract carries a
+`~` infix rule the parser does not implement). Verified slack **4 tokens in 7 864 = 0.051 %**, as
+five moves worth exactly one token each: REMOVE `ҽ` (`apt-real`), `м` (`dpkg-l`), `А` (`ls-real`),
+`տ` (`ls-l-real`, proxy) and ADD `"Webpack"` (`llm-answer`, k=4, **T=1**).
+
+**What it changes for every other entry on this page.** The screening formula has **530 false
+positives, 0 true positives and 1 false negative** over 1 709 priced moves; its mean estimate is
++0.08 tokens against a mean measured profit of −8.31; and restricted to T≥2 its slope against the
+measurement is **negative** (−1.82), so the candidates it likes best are the ones it is most wrong
+about. The corrected law is `profit ≈ −0.981k − 3.11` for T=1 material (R²=0.869): **a new rule
+costs ~3.1 tokens fixed and each reference site ~1.0 token net**, because a new reference severs
+BPE merges that the literal text enjoyed on both sides. The 1-token-per-reference figure these
+pages have quoted is the **average** price of the references a shipped tape already contains, which
+cluster into runs; the **marginal** price of adding one is 1–2 tokens higher per site.
+
+**Why nothing new can be added.** 84.5 % of the remaining repeated material in ten shipped wires is
+1–2 tokens and 98.1 % is ≤3; break-even under the corrected law needs T≥9.51 at k=2, T≥5.30 at k=4,
+T≥3.90 at k=10; at T≥3 (265 moves) the best measured profit is **0**. The corrected screen prunes
+**100 % of the 1 709 candidates**. This page is complete on the dictionary side not by estimate but
+by census.
+
+**Not claimed.** Global optimality (these are single-move marginals, not a search over rule sets).
+Coverage of `ls-l-real`. FACTOR coverage of non-ASCII spans — 161 candidates were skipped by the
+purity filter, because the glyph pool is non-ASCII and a non-ASCII span cannot be distinguished
+from a rule. Any improvement to any wire: the four verified tokens were **deliberately not
+shipped**, since realising them would change three wires' SHA-256 and invalidate an 8×-confirmed
+gate total and a 2×-confirmed shipped total, costing both frontier passes (613 s + 1 106 s) plus
+fuzz, cold reads and the anamnesis suite to buy 0.051 %.
+
+[`docs/codecs.md`](codecs.md) §X94.

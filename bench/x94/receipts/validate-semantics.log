@@ -1,0 +1,14 @@
+lane          srcPath                                       bytes  exact  contractHasExtraRules
+apt-real      bench/holdout-x41/apt-real.txt                  6195  EXACT  no
+code-ts       bench/holdout/code-ts.txt                       6000  EXACT  no
+dpkg-l        bench/holdout-x42/dpkg-l.txt                    4459  EXACT  no
+findmnt       bench/holdout-x42/findmnt.txt                   3215  EXACT  no
+json-pkg      bench/holdout/json-pkg.txt                      3620  EXACT  no
+kb-article    bench/holdout-work/kb-article.txt               3385  EXACT  no
+llm-answer    bench/holdout-work/llm-answer.md                2542  EXACT  no
+ls-l-real     bench/holdout-x41/ls-l-real.txt MISMATCH       10692  NO     YES "Before ¶ k=v. expand repeatedly After ~, a number has . befo"
+ls-real       bench/holdout-x41/ls-real.txt                   2486  EXACT  no
+ps-aux-real   bench/holdout-x41/ps-aux-real.txt               6590  EXACT  no
+----------------------------------------------------------------------------------------------------
+SOURCE-EXACT: 9/10 wires reproduce their committed lane byte for byte under the probe's own semantics.
+Lanes that are NOT source-exact are quarantined: their tape-marginal numbers are a proxy and must not be reported as measurements.

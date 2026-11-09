@@ -1,0 +1,125 @@
+{
+ "generatedBy": "bench/x94/validate-semantics.ts",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "path": "bench/holdout-x41/apt-real.txt",
+   "exact": true,
+   "extraContractRules": false,
+   "decodedChars": 6195,
+   "decodedTokens": 2739,
+   "contract": "Before ¶ k=v. expand repeatedly; print only.\n",
+   "candidates": [
+    "bench/holdout-x41/apt-real.txt"
+   ]
+  },
+  {
+   "lane": "code-ts",
+   "path": "bench/holdout/code-ts.txt",
+   "exact": true,
+   "extraContractRules": false,
+   "decodedChars": 6000,
+   "decodedTokens": 1422,
+   "contract": "Before ¶ k=v. expand repeatedly; print only.\n",
+   "candidates": [
+    "bench/holdout/code-ts.txt"
+   ]
+  },
+  {
+   "lane": "dpkg-l",
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "exact": true,
+   "extraContractRules": false,
+   "decodedChars": 4459,
+   "decodedTokens": 1000,
+   "contract": "Before ¶ k=v. expand repeatedly; print only.\n",
+   "candidates": [
+    "bench/holdout-x42/dpkg-l.txt"
+   ]
+  },
+  {
+   "lane": "findmnt",
+   "path": "bench/holdout-x42/findmnt.txt",
+   "exact": true,
+   "extraContractRules": false,
+   "decodedChars": 3215,
+   "decodedTokens": 787,
+   "contract": "Before ¶ k=v. expand repeatedly; print only.\n",
+   "candidates": [
+    "bench/holdout-x42/findmnt.txt"
+   ]
+  },
+  {
+   "lane": "json-pkg",
+   "path": "bench/holdout/json-pkg.txt",
+   "exact": true,
+   "extraContractRules": false,
+   "decodedChars": 3620,
+   "decodedTokens": 1152,
+   "contract": "Before ¶ k=v. expand repeatedly; print only.\n",
+   "candidates": [
+    "bench/holdout/json-pkg.txt"
+   ]
+  },
+  {
+   "lane": "kb-article",
+   "path": "bench/holdout-work/kb-article.txt",
+   "exact": true,
+   "extraContractRules": false,
+   "decodedChars": 3385,
+   "decodedTokens": 656,
+   "contract": "Before ¶ k=v. expand repeatedly; print only.\n",
+   "candidates": [
+    "bench/holdout-work/kb-article.txt"
+   ]
+  },
+  {
+   "lane": "llm-answer",
+   "path": "bench/holdout-work/llm-answer.md",
+   "exact": true,
+   "extraContractRules": false,
+   "decodedChars": 2542,
+   "decodedTokens": 733,
+   "contract": "Before ¶ k=v. expand repeatedly; print only.\n",
+   "candidates": [
+    "bench/holdout-work/llm-answer.md"
+   ]
+  },
+  {
+   "lane": "ls-l-real",
+   "path": null,
+   "exact": false,
+   "extraContractRules": true,
+   "decodedChars": 10621,
+   "decodedTokens": 4912,
+   "contract": "Before ¶ k=v. expand repeatedly After ~, a number has . before its last 1,1 digits. print only.\n",
+   "candidates": [
+    "bench/holdout-x41/ls-l-real.txt"
+   ]
+  },
+  {
+   "lane": "ls-real",
+   "path": "bench/holdout-x41/ls-real.txt",
+   "exact": true,
+   "extraContractRules": false,
+   "decodedChars": 2486,
+   "decodedTokens": 1034,
+   "contract": "Before ¶ k=v. expand repeatedly; print only.\n",
+   "candidates": [
+    "bench/holdout-x41/ls-real.txt"
+   ]
+  },
+  {
+   "lane": "ps-aux-real",
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "exact": true,
+   "extraContractRules": false,
+   "decodedChars": 6590,
+   "decodedTokens": 3054,
+   "contract": "Before ¶ k=v. expand repeatedly; print only.\n",
+   "candidates": [
+    "bench/holdout-x41/ps-aux-real.txt"
+   ]
+  }
+ ]
+}
