@@ -1,0 +1,46 @@
+ps-aux-real.txt chars=6590 gated=true preGate work=2659000 chiron=7295000
+  ps-aux-real.txt shipX89   1042 tok   72271ms exact=true sha=b04f39ebe4d2e6dd
+  ps-aux-real.txt new       1042 tok   64712ms exact=true sha=b04f39ebe4d2e6dd
+  ps-aux-real.txt c0.1      1042 tok   61834ms exact=true sha=b04f39ebe4d2e6dd
+ps-aux-real.txt    control 1042==committed OK  candidate 1042 (+0) shaSame=true x1.117 exactAll=true elapsed=199173ms
+
+apt-real.txt chars=6195 gated=true preGate work=2619500 chiron=7097500
+  apt-real.txt shipX89    886 tok  121153ms exact=true sha=62bfe9e51402437d
+  apt-real.txt new        886 tok  109690ms exact=true sha=62bfe9e51402437d
+  apt-real.txt c0.1       886 tok  117114ms exact=true sha=62bfe9e51402437d
+apt-real.txt       control 886==committed OK  candidate 886 (+0) shaSame=true x1.105 exactAll=true elapsed=547137ms
+
+code-ts.txt chars=6000 gated=true preGate work=2600000 chiron=7000000
+  code-ts.txt shipX89    969 tok   33158ms exact=true sha=7e0f68883b0eb8b7
+  code-ts.txt new        969 tok   27422ms exact=true sha=7e0f68883b0eb8b7
+  code-ts.txt c0.1       969 tok   27566ms exact=true sha=7e0f68883b0eb8b7
+code-ts.txt        control 969==committed OK  candidate 969 (+0) shaSame=true x1.209 exactAll=true elapsed=635287ms
+
+dpkg-l.txt chars=4459 gated=true preGate work=2445900 chiron=6229500
+  dpkg-l.txt shipX89    673 tok   24752ms exact=true sha=2b90f8bb2f52ac46
+  dpkg-l.txt new        673 tok   19524ms exact=true sha=2b90f8bb2f52ac46
+  dpkg-l.txt c0.1       673 tok   19934ms exact=true sha=2b90f8bb2f52ac46
+dpkg-l.txt         control 673==committed OK  candidate 673 (+0) shaSame=true x1.268 exactAll=true elapsed=699499ms
+
+json-pkg.txt chars=3620 gated=true preGate work=2362000 chiron=5810000
+  json-pkg.txt shipX89    681 tok   17217ms exact=true sha=7a473eae1b6cf707
+  json-pkg.txt new        681 tok   13705ms exact=true sha=7a473eae1b6cf707
+  json-pkg.txt c0.1       681 tok   13373ms exact=true sha=7a473eae1b6cf707
+json-pkg.txt       control 681==committed OK  candidate 681 (+0) shaSame=true x1.256 exactAll=true elapsed=743798ms
+
+node-help.txt chars=6751 gated=true preGate work=2675100 chiron=7375500
+  node-help.txt shipX89    862 tok   10005ms exact=true sha=5b0ad36cac4313de
+  node-help.txt new        862 tok    8936ms exact=true sha=5b0ad36cac4313de
+  node-help.txt c0.1       862 tok    8742ms exact=true sha=5b0ad36cac4313de
+node-help.txt      control 862==committed OK  candidate 862 (+0) shaSame=true x1.12 exactAll=true elapsed=771485ms
+
+kb-article.txt chars=3385 gated=true preGate work=2338500 chiron=5692500
+  kb-article.txt shipX89    622 tok    3785ms exact=true sha=c1c20fb4bb844d55
+  kb-article.txt new        622 tok    3183ms exact=true sha=c1c20fb4bb844d55
+  kb-article.txt c0.1       622 tok    3177ms exact=true sha=c1c20fb4bb844d55
+kb-article.txt     control 622==committed OK  candidate 622 (+0) shaSame=true x1.189 exactAll=true elapsed=781632ms
+
+=== DECOUPLED-GATE VERDICT ===
+lanes 7  CONTROL reproduced the committed frontier number on 7/7
+  new      w=0.5 c=0.25  tokens 5735 (+0)  ms 247172 vs 282341 = x1.14  sha-differing 0  lanes-worse 0  INEXACT 0
+  c0.1     w=0.5 c=0.1  tokens 5735 (+0)  ms 251740 vs 282341 = x1.12  sha-differing 0  lanes-worse 0  INEXACT 0

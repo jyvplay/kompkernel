@@ -1,0 +1,10 @@
+### mode=clear
+{"mode":"clear","lane":"bench/holdout-x41/ps-aux-real.txt","chars":6590,"baseWork":664750,"baseChiron":1823750,"workEnv":null,"chironEnv":null,"tokens":1053,"ms":55043,"sha":"aee19714b3b6cfe2","exact":true,"det":"1","engram":"0"}
+### mode=ovr
+{"mode":"ovr","lane":"bench/holdout-x41/ps-aux-real.txt","chars":6590,"baseWork":664750,"baseChiron":1823750,"workEnv":"664750","chironEnv":"1823750","tokens":1053,"ms":56323,"sha":"aee19714b3b6cfe2","exact":true,"det":"1","engram":"0"}
+### mode=half
+{"mode":"half","lane":"bench/holdout-x41/ps-aux-real.txt","chars":6590,"baseWork":664750,"baseChiron":1823750,"workEnv":"332375","chironEnv":"911875","tokens":1066,"ms":46729,"sha":"b80193188a633923","exact":true,"det":"1","engram":"0"}
+### mode=after
+decoy bench/holdout-work/kb-article.txt 622 tok 4744ms exact=true
+{"mode":"after","lane":"bench/holdout-x41/ps-aux-real.txt","chars":6590,"baseWork":664750,"baseChiron":1823750,"workEnv":"664750","chironEnv":"1823750","tokens":1053,"ms":53722,"sha":"aee19714b3b6cfe2","exact":true,"det":"1","engram":"0"}
+=== DONE ===

@@ -1,0 +1,215 @@
+{
+ "det": "1",
+ "engram": "0",
+ "settings": [
+  {
+   "label": "default",
+   "w": 1,
+   "c": 1,
+   "what": "the shipped configuration (both meters already x0.5 under the 8000-char gate)"
+  },
+  {
+   "label": "w.5c1",
+   "w": 0.5,
+   "c": 1,
+   "what": "WORK halved again, CHIRON untouched"
+  },
+  {
+   "label": "w1c.5",
+   "w": 1,
+   "c": 0.5,
+   "what": "WORK untouched, CHIRON halved again"
+  },
+  {
+   "label": "w.5c.5",
+   "w": 0.5,
+   "c": 0.5,
+   "what": "both halved again == uniform factor 0.25, the falsified candidate"
+  }
+ ],
+ "lanes": [
+  {
+   "lane": "ps-aux-real.txt",
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "chars": 6590,
+   "raw": 3054,
+   "passes": [
+    {
+     "label": "default",
+     "w": 1,
+     "c": 1,
+     "workBudget": 664750,
+     "chironBudget": 1823750,
+     "ms": 58301,
+     "tokens": 1053,
+     "sha": "aee19714b3b6cfe2",
+     "exact": true
+    },
+    {
+     "label": "w.5c1",
+     "w": 0.5,
+     "c": 1,
+     "workBudget": 332375,
+     "chironBudget": 1823750,
+     "ms": 41808,
+     "tokens": 1066,
+     "sha": "b80193188a633923",
+     "exact": true
+    },
+    {
+     "label": "w1c.5",
+     "w": 1,
+     "c": 0.5,
+     "workBudget": 664750,
+     "chironBudget": 911875,
+     "ms": 48877,
+     "tokens": 1053,
+     "sha": "aee19714b3b6cfe2",
+     "exact": true
+    },
+    {
+     "label": "w.5c.5",
+     "w": 0.5,
+     "c": 0.5,
+     "workBudget": 332375,
+     "chironBudget": 911875,
+     "ms": 41184,
+     "tokens": 1066,
+     "sha": "b80193188a633923",
+     "exact": true
+    }
+   ],
+   "baseWork": 664750,
+   "baseChiron": 1823750,
+   "regressions": [
+    "w.5c1:1053->1066",
+    "w.5c.5:1053->1066"
+   ],
+   "shaDiffs": [
+    "w.5c1",
+    "w.5c.5"
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "df-real.txt",
+   "path": "bench/holdout-x41/df-real.txt",
+   "chars": 329,
+   "raw": 158,
+   "passes": [
+    {
+     "label": "default",
+     "w": 1,
+     "c": 1,
+     "workBudget": 508225,
+     "chironBudget": 1041125,
+     "ms": 6071,
+     "tokens": 126,
+     "sha": "66aed09755ed021d",
+     "exact": true
+    },
+    {
+     "label": "w.5c1",
+     "w": 0.5,
+     "c": 1,
+     "workBudget": 254113,
+     "chironBudget": 1041125,
+     "ms": 2657,
+     "tokens": 126,
+     "sha": "a3129b343c4d8260",
+     "exact": true
+    },
+    {
+     "label": "w1c.5",
+     "w": 1,
+     "c": 0.5,
+     "workBudget": 508225,
+     "chironBudget": 520563,
+     "ms": 4490,
+     "tokens": 126,
+     "sha": "66aed09755ed021d",
+     "exact": true
+    },
+    {
+     "label": "w.5c.5",
+     "w": 0.5,
+     "c": 0.5,
+     "workBudget": 254113,
+     "chironBudget": 520563,
+     "ms": 2663,
+     "tokens": 126,
+     "sha": "a3129b343c4d8260",
+     "exact": true
+    }
+   ],
+   "baseWork": 508225,
+   "baseChiron": 1041125,
+   "regressions": [],
+   "shaDiffs": [
+    "w.5c1",
+    "w.5c.5"
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "ps-ef.txt",
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "chars": 2669,
+   "raw": 1144,
+   "passes": [
+    {
+     "label": "default",
+     "w": 1,
+     "c": 1,
+     "workBudget": 566725,
+     "chironBudget": 1333625,
+     "ms": 9115,
+     "tokens": 315,
+     "sha": "a2c807e7e4320945",
+     "exact": true
+    },
+    {
+     "label": "w.5c1",
+     "w": 0.5,
+     "c": 1,
+     "workBudget": 283363,
+     "chironBudget": 1333625,
+     "ms": 4615,
+     "tokens": 315,
+     "sha": "a2c807e7e4320945",
+     "exact": true
+    },
+    {
+     "label": "w1c.5",
+     "w": 1,
+     "c": 0.5,
+     "workBudget": 566725,
+     "chironBudget": 666813,
+     "ms": 6866,
+     "tokens": 315,
+     "sha": "a2c807e7e4320945",
+     "exact": true
+    },
+    {
+     "label": "w.5c.5",
+     "w": 0.5,
+     "c": 0.5,
+     "workBudget": 283363,
+     "chironBudget": 666813,
+     "ms": 4459,
+     "tokens": 315,
+     "sha": "a2c807e7e4320945",
+     "exact": true
+    }
+   ],
+   "baseWork": 566725,
+   "baseChiron": 1333625,
+   "regressions": [],
+   "shaDiffs": [],
+   "exactAll": true
+  }
+ ],
+ "summary": {
+  "elapsed": 231511
+ }
+}

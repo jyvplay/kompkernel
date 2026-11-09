@@ -1,0 +1,607 @@
+{
+ "source": "bench/x90/receipts/leaders-x90.json",
+ "decoupleReceipt": "bench/x91/receipts/decouple-sweep.json",
+ "sizeFloor": 500,
+ "basenameCollisions": [
+  {
+   "basename": "df-h.txt",
+   "paths": [
+    "bench/holdout-tbl/df-h.txt",
+    "bench/holdout-x42/df-h.txt"
+   ]
+  }
+ ],
+ "categories": [
+  {
+   "cat": "CODE / MARKUP",
+   "lanes": 3,
+   "raw": 3152,
+   "shippedX90": 2069,
+   "floor": 1728,
+   "ratio": 0.6564,
+   "floorVsShipped": 0.8352,
+   "leader": {
+    "path": "bench/holdout/json-pkg.txt",
+    "raw": 1152,
+    "shippedX90": 681,
+    "ratio": 0.5911,
+    "filtered": true,
+    "parent": "synkrisis"
+   },
+   "leaderUnfiltered": {
+    "path": "bench/holdout/json-pkg.txt",
+    "raw": 1152,
+    "shippedX90": 681,
+    "ratio": 0.5911
+   },
+   "worst": {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "raw": 578,
+    "shippedX90": 419,
+    "ratio": 0.7249
+   },
+   "readabilityLawViolations": [],
+   "ranking": [
+    {
+     "path": "bench/holdout/json-pkg.txt",
+     "raw": 1152,
+     "gate": 681,
+     "shippedX90": 681,
+     "floor": 592,
+     "ratio": 0.5911,
+     "floorVsShipped": 0.8693,
+     "x93": {
+      "candidateDelta": 0,
+      "shaSame": true,
+      "exactAll": true,
+      "controlMatchesCommitted": true,
+      "speedup": 1.256
+     }
+    },
+    {
+     "path": "bench/holdout/code-ts.txt",
+     "raw": 1422,
+     "gate": 969,
+     "shippedX90": 969,
+     "floor": 812,
+     "ratio": 0.6814,
+     "floorVsShipped": 0.838,
+     "x93": {
+      "candidateDelta": 0,
+      "shaSame": true,
+      "exactAll": true,
+      "controlMatchesCommitted": true,
+      "speedup": 1.209
+     }
+    },
+    {
+     "path": "bench/holdout-work/unified-diff.patch",
+     "raw": 578,
+     "gate": 419,
+     "shippedX90": 419,
+     "floor": 324,
+     "ratio": 0.7249,
+     "floorVsShipped": 0.7733,
+     "x93": "UNTESTED"
+    }
+   ]
+  },
+  {
+   "cat": "DATA",
+   "lanes": 2,
+   "raw": 1095,
+   "shippedX90": 234,
+   "floor": 209,
+   "ratio": 0.2137,
+   "floorVsShipped": 0.8932,
+   "leader": {
+    "path": "bench/holdout-x40/cue-sheet.md",
+    "raw": 513,
+    "shippedX90": 101,
+    "ratio": 0.1969,
+    "filtered": true,
+    "parent": "stichomythia"
+   },
+   "leaderUnfiltered": {
+    "path": "bench/holdout-x40/cue-sheet.md",
+    "raw": 513,
+    "shippedX90": 101,
+    "ratio": 0.1969
+   },
+   "worst": {
+    "path": "bench/holdout-x40/prices.csv",
+    "raw": 582,
+    "shippedX90": 133,
+    "ratio": 0.2285
+   },
+   "readabilityLawViolations": [],
+   "ranking": [
+    {
+     "path": "bench/holdout-x40/cue-sheet.md",
+     "raw": 513,
+     "gate": 163,
+     "shippedX90": 101,
+     "floor": 99,
+     "ratio": 0.1969,
+     "floorVsShipped": 0.9802,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x40/prices.csv",
+     "raw": 582,
+     "gate": 133,
+     "shippedX90": 133,
+     "floor": 110,
+     "ratio": 0.2285,
+     "floorVsShipped": 0.8271,
+     "x93": "UNTESTED"
+    }
+   ]
+  },
+  {
+   "cat": "OPS LISTING",
+   "lanes": 13,
+   "raw": 30065,
+   "shippedX90": 9494,
+   "floor": 7275,
+   "ratio": 0.3158,
+   "floorVsShipped": 0.7663,
+   "leader": {
+    "path": "bench/holdout-ops/openstack-loghub-26.log",
+    "raw": 4028,
+    "shippedX90": 896,
+    "ratio": 0.2224,
+    "filtered": true,
+    "parent": "synkrisis"
+   },
+   "leaderUnfiltered": {
+    "path": "bench/holdout-ops/openstack-loghub-26.log",
+    "raw": 4028,
+    "shippedX90": 896,
+    "ratio": 0.2224
+   },
+   "worst": {
+    "path": "bench/holdout-x42/dpkg-l.txt",
+    "raw": 1000,
+    "shippedX90": 673,
+    "ratio": 0.673
+   },
+   "readabilityLawViolations": [],
+   "ranking": [
+    {
+     "path": "bench/holdout-ops/openstack-loghub-26.log",
+     "raw": 4028,
+     "gate": 896,
+     "shippedX90": 896,
+     "floor": 686,
+     "ratio": 0.2224,
+     "floorVsShipped": 0.7656,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x41/ls-l-real.txt",
+     "raw": 5194,
+     "gate": 1476,
+     "shippedX90": 1390,
+     "floor": 943,
+     "ratio": 0.2676,
+     "floorVsShipped": 0.6784,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x42/ps-ef.txt",
+     "raw": 1144,
+     "gate": 315,
+     "shippedX90": 315,
+     "floor": 250,
+     "ratio": 0.2753,
+     "floorVsShipped": 0.7937,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x86/ls-la-usrbin.txt",
+     "raw": 3271,
+     "gate": 946,
+     "shippedX90": 931,
+     "floor": 705,
+     "ratio": 0.2846,
+     "floorVsShipped": 0.7573,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-ops/find-listing.txt",
+     "raw": 3997,
+     "gate": 1140,
+     "shippedX90": 1140,
+     "floor": 948,
+     "ratio": 0.2852,
+     "floorVsShipped": 0.8316,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x41/apt-real.txt",
+     "raw": 2739,
+     "gate": 850,
+     "shippedX90": 850,
+     "floor": 690,
+     "ratio": 0.3103,
+     "floorVsShipped": 0.8118,
+     "x93": {
+      "candidateDelta": 0,
+      "shaSame": true,
+      "exactAll": true,
+      "controlMatchesCommitted": true,
+      "speedup": 1.105
+     }
+    },
+    {
+     "path": "bench/holdout-x86/npm-ls-all.txt",
+     "raw": 2253,
+     "gate": 711,
+     "shippedX90": 711,
+     "floor": 516,
+     "ratio": 0.3156,
+     "floorVsShipped": 0.7257,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x41/ps-aux-real.txt",
+     "raw": 3054,
+     "gate": 1042,
+     "shippedX90": 1042,
+     "floor": 743,
+     "ratio": 0.3412,
+     "floorVsShipped": 0.7131,
+     "x93": {
+      "candidateDelta": 0,
+      "shaSame": true,
+      "exactAll": true,
+      "controlMatchesCommitted": true,
+      "speedup": 1.117
+     }
+    },
+    {
+     "path": "bench/holdout-x41/ps-real.txt",
+     "raw": 1106,
+     "gate": 397,
+     "shippedX90": 397,
+     "floor": 320,
+     "ratio": 0.359,
+     "floorVsShipped": 0.806,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x41/ls-real.txt",
+     "raw": 1034,
+     "gate": 433,
+     "shippedX90": 433,
+     "floor": 328,
+     "ratio": 0.4188,
+     "floorVsShipped": 0.7575,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x42/findmnt.txt",
+     "raw": 787,
+     "gate": 444,
+     "shippedX90": 444,
+     "floor": 335,
+     "ratio": 0.5642,
+     "floorVsShipped": 0.7545,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x41/du-real.txt",
+     "raw": 458,
+     "gate": 272,
+     "shippedX90": 272,
+     "floor": 219,
+     "ratio": 0.5939,
+     "floorVsShipped": 0.8051,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x42/dpkg-l.txt",
+     "raw": 1000,
+     "gate": 673,
+     "shippedX90": 673,
+     "floor": 592,
+     "ratio": 0.673,
+     "floorVsShipped": 0.8796,
+     "x93": {
+      "candidateDelta": 0,
+      "shaSame": true,
+      "exactAll": true,
+      "controlMatchesCommitted": true,
+      "speedup": 1.268
+     }
+    }
+   ]
+  },
+  {
+   "cat": "OPS TABLE",
+   "lanes": 11,
+   "raw": 4135,
+   "shippedX90": 1726,
+   "floor": 1272,
+   "ratio": 0.4174,
+   "floorVsShipped": 0.737,
+   "leader": {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "raw": 811,
+    "shippedX90": 210,
+    "ratio": 0.2589,
+    "filtered": true,
+    "parent": "akolouthia2"
+   },
+   "leaderUnfiltered": {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "raw": 811,
+    "shippedX90": 210,
+    "ratio": 0.2589
+   },
+   "worst": {
+    "path": "bench/holdout-x42b/free-m.txt",
+    "raw": 76,
+    "shippedX90": 76,
+    "ratio": 1
+   },
+   "readabilityLawViolations": [
+    {
+     "path": "bench/holdout-x42/lsblk.txt",
+     "floorVsShipped": 1.0167
+    },
+    {
+     "path": "bench/holdout-x42b/free-m.txt",
+     "floorVsShipped": 1
+    }
+   ],
+   "ranking": [
+    {
+     "path": "bench/holdout-x40/metrics.tsv",
+     "raw": 811,
+     "gate": 210,
+     "shippedX90": 210,
+     "floor": 130,
+     "ratio": 0.2589,
+     "floorVsShipped": 0.619,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-tbl/df-h.txt",
+     "raw": 570,
+     "gate": 171,
+     "shippedX90": 171,
+     "floor": 129,
+     "ratio": 0.3,
+     "floorVsShipped": 0.7544,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+     "raw": 1006,
+     "gate": 326,
+     "shippedX90": 326,
+     "floor": 214,
+     "ratio": 0.3241,
+     "floorVsShipped": 0.6564,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-tbl/psql-output.txt",
+     "raw": 675,
+     "gate": 244,
+     "shippedX90": 244,
+     "floor": 166,
+     "ratio": 0.3615,
+     "floorVsShipped": 0.6803,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-tbl/markdown-table.md",
+     "raw": 330,
+     "gate": 176,
+     "shippedX90": 176,
+     "floor": 133,
+     "ratio": 0.5333,
+     "floorVsShipped": 0.7557,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x42b/vmstat.txt",
+     "raw": 229,
+     "gate": 149,
+     "shippedX90": 149,
+     "floor": 113,
+     "ratio": 0.6507,
+     "floorVsShipped": 0.7584,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x42/df-h.txt",
+     "raw": 140,
+     "gate": 108,
+     "shippedX90": 108,
+     "floor": 84,
+     "ratio": 0.7714,
+     "floorVsShipped": 0.7778,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x41/df-real.txt",
+     "raw": 158,
+     "gate": 126,
+     "shippedX90": 126,
+     "floor": 96,
+     "ratio": 0.7975,
+     "floorVsShipped": 0.7619,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x42/lsblk.txt",
+     "raw": 60,
+     "gate": 60,
+     "shippedX90": 60,
+     "floor": 61,
+     "ratio": 1,
+     "floorVsShipped": 1.0167,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x42b/uptime-w.txt",
+     "raw": 80,
+     "gate": 80,
+     "shippedX90": 80,
+     "floor": 70,
+     "ratio": 1,
+     "floorVsShipped": 0.875,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x42b/free-m.txt",
+     "raw": 76,
+     "gate": 76,
+     "shippedX90": 76,
+     "floor": 76,
+     "ratio": 1,
+     "floorVsShipped": 1,
+     "x93": "UNTESTED"
+    }
+   ]
+  },
+  {
+   "cat": "OTHER",
+   "lanes": 1,
+   "raw": 4277,
+   "shippedX90": 2262,
+   "floor": 1898,
+   "ratio": 0.5289,
+   "floorVsShipped": 0.8391,
+   "leader": {
+    "path": "bench/holdout-x86/dpkg-l-full.txt",
+    "raw": 4277,
+    "shippedX90": 2262,
+    "ratio": 0.5289,
+    "filtered": true,
+    "parent": "synkrisis"
+   },
+   "leaderUnfiltered": {
+    "path": "bench/holdout-x86/dpkg-l-full.txt",
+    "raw": 4277,
+    "shippedX90": 2262,
+    "ratio": 0.5289
+   },
+   "worst": {
+    "path": "bench/holdout-x86/dpkg-l-full.txt",
+    "raw": 4277,
+    "shippedX90": 2262,
+    "ratio": 0.5289
+   },
+   "readabilityLawViolations": [],
+   "ranking": [
+    {
+     "path": "bench/holdout-x86/dpkg-l-full.txt",
+     "raw": 4277,
+     "gate": 2262,
+     "shippedX90": 2262,
+     "floor": 1898,
+     "ratio": 0.5289,
+     "floorVsShipped": 0.8391,
+     "x93": "UNTESTED"
+    }
+   ]
+  },
+  {
+   "cat": "PROSE",
+   "lanes": 4,
+   "raw": 3117,
+   "shippedX90": 2646,
+   "floor": 2529,
+   "ratio": 0.8489,
+   "floorVsShipped": 0.9558,
+   "leader": {
+    "path": "bench/holdout-work/email-thread.txt",
+    "raw": 629,
+    "shippedX90": 488,
+    "ratio": 0.7758,
+    "filtered": true,
+    "parent": "synkrisis"
+   },
+   "leaderUnfiltered": {
+    "path": "bench/holdout-work/email-thread.txt",
+    "raw": 629,
+    "shippedX90": 488,
+    "ratio": 0.7758
+   },
+   "worst": {
+    "path": "bench/holdout-work/kb-article.txt",
+    "raw": 656,
+    "shippedX90": 622,
+    "ratio": 0.9482
+   },
+   "readabilityLawViolations": [],
+   "ranking": [
+    {
+     "path": "bench/holdout-work/email-thread.txt",
+     "raw": 629,
+     "gate": 488,
+     "shippedX90": 488,
+     "floor": 443,
+     "ratio": 0.7758,
+     "floorVsShipped": 0.9078,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-x41/node-help.txt",
+     "raw": 1099,
+     "gate": 862,
+     "shippedX90": 862,
+     "floor": 852,
+     "ratio": 0.7843,
+     "floorVsShipped": 0.9884,
+     "x93": {
+      "candidateDelta": 0,
+      "shaSame": true,
+      "exactAll": true,
+      "controlMatchesCommitted": true,
+      "speedup": 1.12
+     }
+    },
+    {
+     "path": "bench/holdout-work/llm-answer.md",
+     "raw": 733,
+     "gate": 674,
+     "shippedX90": 674,
+     "floor": 626,
+     "ratio": 0.9195,
+     "floorVsShipped": 0.9288,
+     "x93": "UNTESTED"
+    },
+    {
+     "path": "bench/holdout-work/kb-article.txt",
+     "raw": 656,
+     "gate": 622,
+     "shippedX90": 622,
+     "floor": 608,
+     "ratio": 0.9482,
+     "floorVsShipped": 0.9775,
+     "x93": {
+      "candidateDelta": 0,
+      "shaSame": true,
+      "exactAll": true,
+      "controlMatchesCommitted": true,
+      "speedup": 1.189
+     }
+    }
+   ]
+  }
+ ],
+ "totals": {
+  "lanes": 34,
+  "raw": 45841,
+  "shippedX90": 18431,
+  "floor": 14911,
+  "ratio": 0.4021,
+  "floorVsShipped": 0.809
+ }
+}

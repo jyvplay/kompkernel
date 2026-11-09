@@ -1,0 +1,395 @@
+{
+ "det": "1",
+ "engram": "0",
+ "maxChars": 8000,
+ "settings": [
+  {
+   "label": "shipX89",
+   "w": 0.5,
+   "c": 0.5,
+   "what": "CONTROL: what X89 actually shipped; must reproduce the committed frontier numbers"
+  },
+  {
+   "label": "new",
+   "w": 0.5,
+   "c": 0.25,
+   "what": "CANDIDATE: the decoupled gate this turn ships"
+  },
+  {
+   "label": "c0.1",
+   "w": 0.5,
+   "c": 0.1,
+   "what": "TREND ONLY, not shipped: how much further chiron tolerates"
+  }
+ ],
+ "lanes": [
+  {
+   "lane": "ps-aux-real.txt",
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "chars": 6590,
+   "gated": true,
+   "workFactorNow": 0.5,
+   "chironFactorNow": 0.25,
+   "workPreGate": 2659000,
+   "chironPreGate": 7295000,
+   "raw": 3054,
+   "passes": [
+    {
+     "label": "shipX89",
+     "w": 0.5,
+     "c": 0.5,
+     "workBudget": 1329500,
+     "chironBudget": 3647500,
+     "ms": 72271,
+     "tokens": 1042,
+     "sha": "b04f39ebe4d2e6dd",
+     "exact": true
+    },
+    {
+     "label": "new",
+     "w": 0.5,
+     "c": 0.25,
+     "workBudget": 1329500,
+     "chironBudget": 1823750,
+     "ms": 64712,
+     "tokens": 1042,
+     "sha": "b04f39ebe4d2e6dd",
+     "exact": true
+    },
+    {
+     "label": "c0.1",
+     "w": 0.5,
+     "c": 0.1,
+     "workBudget": 1329500,
+     "chironBudget": 729500,
+     "ms": 61834,
+     "tokens": 1042,
+     "sha": "b04f39ebe4d2e6dd",
+     "exact": true
+    }
+   ],
+   "controlMatchesCommitted": true,
+   "committed": 1042,
+   "candidateDelta": 0,
+   "candidateShaSame": true,
+   "exactAll": true,
+   "speedup": 1.117
+  },
+  {
+   "lane": "apt-real.txt",
+   "path": "bench/holdout-x41/apt-real.txt",
+   "chars": 6195,
+   "gated": true,
+   "workFactorNow": 0.5,
+   "chironFactorNow": 0.25,
+   "workPreGate": 2619500,
+   "chironPreGate": 7097500,
+   "raw": 2739,
+   "passes": [
+    {
+     "label": "shipX89",
+     "w": 0.5,
+     "c": 0.5,
+     "workBudget": 1309750,
+     "chironBudget": 3548750,
+     "ms": 121153,
+     "tokens": 886,
+     "sha": "62bfe9e51402437d",
+     "exact": true
+    },
+    {
+     "label": "new",
+     "w": 0.5,
+     "c": 0.25,
+     "workBudget": 1309750,
+     "chironBudget": 1774375,
+     "ms": 109690,
+     "tokens": 886,
+     "sha": "62bfe9e51402437d",
+     "exact": true
+    },
+    {
+     "label": "c0.1",
+     "w": 0.5,
+     "c": 0.1,
+     "workBudget": 1309750,
+     "chironBudget": 709750,
+     "ms": 117114,
+     "tokens": 886,
+     "sha": "62bfe9e51402437d",
+     "exact": true
+    }
+   ],
+   "controlMatchesCommitted": true,
+   "committed": 886,
+   "candidateDelta": 0,
+   "candidateShaSame": true,
+   "exactAll": true,
+   "speedup": 1.105
+  },
+  {
+   "lane": "code-ts.txt",
+   "path": "bench/holdout/code-ts.txt",
+   "chars": 6000,
+   "gated": true,
+   "workFactorNow": 0.5,
+   "chironFactorNow": 0.25,
+   "workPreGate": 2600000,
+   "chironPreGate": 7000000,
+   "raw": 1422,
+   "passes": [
+    {
+     "label": "shipX89",
+     "w": 0.5,
+     "c": 0.5,
+     "workBudget": 1300000,
+     "chironBudget": 3500000,
+     "ms": 33158,
+     "tokens": 969,
+     "sha": "7e0f68883b0eb8b7",
+     "exact": true
+    },
+    {
+     "label": "new",
+     "w": 0.5,
+     "c": 0.25,
+     "workBudget": 1300000,
+     "chironBudget": 1750000,
+     "ms": 27422,
+     "tokens": 969,
+     "sha": "7e0f68883b0eb8b7",
+     "exact": true
+    },
+    {
+     "label": "c0.1",
+     "w": 0.5,
+     "c": 0.1,
+     "workBudget": 1300000,
+     "chironBudget": 700000,
+     "ms": 27566,
+     "tokens": 969,
+     "sha": "7e0f68883b0eb8b7",
+     "exact": true
+    }
+   ],
+   "controlMatchesCommitted": true,
+   "committed": 969,
+   "candidateDelta": 0,
+   "candidateShaSame": true,
+   "exactAll": true,
+   "speedup": 1.209
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "chars": 4459,
+   "gated": true,
+   "workFactorNow": 0.5,
+   "chironFactorNow": 0.25,
+   "workPreGate": 2445900,
+   "chironPreGate": 6229500,
+   "raw": 1000,
+   "passes": [
+    {
+     "label": "shipX89",
+     "w": 0.5,
+     "c": 0.5,
+     "workBudget": 1222950,
+     "chironBudget": 3114750,
+     "ms": 24752,
+     "tokens": 673,
+     "sha": "2b90f8bb2f52ac46",
+     "exact": true
+    },
+    {
+     "label": "new",
+     "w": 0.5,
+     "c": 0.25,
+     "workBudget": 1222950,
+     "chironBudget": 1557375,
+     "ms": 19524,
+     "tokens": 673,
+     "sha": "2b90f8bb2f52ac46",
+     "exact": true
+    },
+    {
+     "label": "c0.1",
+     "w": 0.5,
+     "c": 0.1,
+     "workBudget": 1222950,
+     "chironBudget": 622950,
+     "ms": 19934,
+     "tokens": 673,
+     "sha": "2b90f8bb2f52ac46",
+     "exact": true
+    }
+   ],
+   "controlMatchesCommitted": true,
+   "committed": 673,
+   "candidateDelta": 0,
+   "candidateShaSame": true,
+   "exactAll": true,
+   "speedup": 1.268
+  },
+  {
+   "lane": "json-pkg.txt",
+   "path": "bench/holdout/json-pkg.txt",
+   "chars": 3620,
+   "gated": true,
+   "workFactorNow": 0.5,
+   "chironFactorNow": 0.25,
+   "workPreGate": 2362000,
+   "chironPreGate": 5810000,
+   "raw": 1152,
+   "passes": [
+    {
+     "label": "shipX89",
+     "w": 0.5,
+     "c": 0.5,
+     "workBudget": 1181000,
+     "chironBudget": 2905000,
+     "ms": 17217,
+     "tokens": 681,
+     "sha": "7a473eae1b6cf707",
+     "exact": true
+    },
+    {
+     "label": "new",
+     "w": 0.5,
+     "c": 0.25,
+     "workBudget": 1181000,
+     "chironBudget": 1452500,
+     "ms": 13705,
+     "tokens": 681,
+     "sha": "7a473eae1b6cf707",
+     "exact": true
+    },
+    {
+     "label": "c0.1",
+     "w": 0.5,
+     "c": 0.1,
+     "workBudget": 1181000,
+     "chironBudget": 581000,
+     "ms": 13373,
+     "tokens": 681,
+     "sha": "7a473eae1b6cf707",
+     "exact": true
+    }
+   ],
+   "controlMatchesCommitted": true,
+   "committed": 681,
+   "candidateDelta": 0,
+   "candidateShaSame": true,
+   "exactAll": true,
+   "speedup": 1.256
+  },
+  {
+   "lane": "node-help.txt",
+   "path": "bench/holdout-x41/node-help.txt",
+   "chars": 6751,
+   "gated": true,
+   "workFactorNow": 0.5,
+   "chironFactorNow": 0.25,
+   "workPreGate": 2675100,
+   "chironPreGate": 7375500,
+   "raw": 1099,
+   "passes": [
+    {
+     "label": "shipX89",
+     "w": 0.5,
+     "c": 0.5,
+     "workBudget": 1337550,
+     "chironBudget": 3687750,
+     "ms": 10005,
+     "tokens": 862,
+     "sha": "5b0ad36cac4313de",
+     "exact": true
+    },
+    {
+     "label": "new",
+     "w": 0.5,
+     "c": 0.25,
+     "workBudget": 1337550,
+     "chironBudget": 1843875,
+     "ms": 8936,
+     "tokens": 862,
+     "sha": "5b0ad36cac4313de",
+     "exact": true
+    },
+    {
+     "label": "c0.1",
+     "w": 0.5,
+     "c": 0.1,
+     "workBudget": 1337550,
+     "chironBudget": 737550,
+     "ms": 8742,
+     "tokens": 862,
+     "sha": "5b0ad36cac4313de",
+     "exact": true
+    }
+   ],
+   "controlMatchesCommitted": true,
+   "committed": 862,
+   "candidateDelta": 0,
+   "candidateShaSame": true,
+   "exactAll": true,
+   "speedup": 1.12
+  },
+  {
+   "lane": "kb-article.txt",
+   "path": "bench/holdout-work/kb-article.txt",
+   "chars": 3385,
+   "gated": true,
+   "workFactorNow": 0.5,
+   "chironFactorNow": 0.25,
+   "workPreGate": 2338500,
+   "chironPreGate": 5692500,
+   "raw": 656,
+   "passes": [
+    {
+     "label": "shipX89",
+     "w": 0.5,
+     "c": 0.5,
+     "workBudget": 1169250,
+     "chironBudget": 2846250,
+     "ms": 3785,
+     "tokens": 622,
+     "sha": "c1c20fb4bb844d55",
+     "exact": true
+    },
+    {
+     "label": "new",
+     "w": 0.5,
+     "c": 0.25,
+     "workBudget": 1169250,
+     "chironBudget": 1423125,
+     "ms": 3183,
+     "tokens": 622,
+     "sha": "c1c20fb4bb844d55",
+     "exact": true
+    },
+    {
+     "label": "c0.1",
+     "w": 0.5,
+     "c": 0.1,
+     "workBudget": 1169250,
+     "chironBudget": 569250,
+     "ms": 3177,
+     "tokens": 622,
+     "sha": "c1c20fb4bb844d55",
+     "exact": true
+    }
+   ],
+   "controlMatchesCommitted": true,
+   "committed": 622,
+   "candidateDelta": 0,
+   "candidateShaSame": true,
+   "exactAll": true,
+   "speedup": 1.189
+  }
+ ],
+ "summary": {
+  "controlInvalid": [],
+  "elapsedMs": 781632
+ }
+}

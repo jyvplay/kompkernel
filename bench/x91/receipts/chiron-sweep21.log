@@ -1,0 +1,31 @@
+lsblk.txt              ch=   132 def=   60/  2877ms w1c.5:60=/1850ms w1c.25:60=/1812ms w1c.1:60=/1746ms w.5c1:60=/1774ms w.5c.5:60=/1838ms w.5c4:60=/1925ms shaAll=true exactAll=true
+uptime-w.txt           ch=   179 def=   80/  2973ms w1c.5:80=/2111ms w1c.25:80=/2054ms w1c.1:80=/2110ms w.5c1:80=/2230ms w.5c.5:80=/2178ms w.5c4:80=/2161ms shaAll=true exactAll=true
+free-m.txt             ch=   263 def=   76/  3287ms w1c.5:76=/2397ms w1c.25:76=/2249ms w1c.1:76=/2178ms w.5c1:76=/2294ms w.5c.5:76=/2245ms w.5c4:76=/2689ms shaAll=true exactAll=true
+df-h.txt               ch=   293 def=  108/  7116ms w1c.5:108=/4716ms w1c.25:108=/4691ms w1c.1:108=/4459ms w.5c1:108=/4050ms w.5c.5:108=/4014ms w.5c4:108=/4470ms shaAll=true exactAll=true
+df-real.txt            ch=   329 def=  126/  7806ms w1c.5:126=/5298ms w1c.25:126=/257463ms w1c.1:126=/5100ms w.5c1:126=/3892ms w.5c.5:126=/3857ms w.5c4:126=/4024ms shaAll=true exactAll=true
+vmstat.txt             ch=   467 def=  149/  2507ms w1c.5:149=/1741ms w1c.25:149=/1763ms w1c.1:149=/1661ms w.5c1:149=/1865ms w.5c.5:149=/1782ms w.5c4:149=/2901ms shaAll=true exactAll=true
+markdown-table.md      ch=   635 def=  176/  7688ms w1c.5:176=/6514ms w1c.25:176=/6353ms w1c.1:176=/5995ms w.5c1:176=/3509ms w.5c.5:176=/3518ms w.5c4:176=/3716ms shaAll=true exactAll=true
+cue-sheet.md           ch=   938 def=  163/ 14621ms w1c.5:163=/11151ms w1c.25:163=/10681ms w1c.1:163=/10407ms w.5c1:163=/7247ms w.5c.5:163=/6893ms w.5c4:163=/7396ms shaAll=true exactAll=true
+df-h.txt               ch=   939 def=  171/  3050ms w1c.5:171=/2180ms w1c.25:171=/2285ms w1c.1:171=/2225ms w.5c1:171=/2214ms w.5c.5:171=/2084ms w.5c4:171=/2487ms shaAll=true exactAll=true
+prices.csv             ch=   993 def=  133/ 11593ms w1c.5:133=/8211ms w1c.25:133=/8399ms w1c.1:133=/8392ms w.5c1:133=/6373ms w.5c.5:133=/6541ms w.5c4:133=/7246ms shaAll=true exactAll=true
+metrics.tsv            ch=  1203 def=  210/ 18654ms w1c.5:210=/14048ms w1c.25:210=/13352ms w1c.1:210=/13051ms w.5c1:210=/9158ms w.5c.5:210=/8912ms w.5c4:210=/9175ms shaAll=true exactAll=true
+unified-diff.patch     ch=  1487 def=  419/  4032ms w1c.5:419=/3018ms w1c.25:419=/3426ms w1c.1:419=/3166ms w.5c1:419=/3176ms w.5c.5:419=/3453ms w.5c4:419=/3664ms shaAll=true exactAll=true
+psql-output.txt        ch=  1578 def=  244/ 11689ms w1c.5:244=/8995ms w1c.25:244=/8762ms w1c.1:244=/9365ms w.5c1:244=/6832ms w.5c.5:244=/6304ms w.5c4:244=/7360ms shaAll=true exactAll=true
+du-real.txt            ch=  1605 def=  272/  6759ms w1c.5:272=/5001ms w1c.25:272=/5586ms w1c.1:272=/5084ms w.5c1:272=/4693ms w.5c.5:272=/4555ms w.5c4:272=/4705ms shaAll=true exactAll=true
+email-thread.txt       ch=  2126 def=  488/ 11056ms w1c.5:488=/8695ms w1c.25:488=/8353ms w1c.1:488=/8669ms w.5c1:488=/7163ms w.5c.5:488=/6687ms w.5c4:488=/7479ms shaAll=true exactAll=true
+ps-real.txt            ch=  2365 def=  397/ 19129ms w1c.5:397=/14024ms w1c.25:397=/13243ms w1c.1:397=/13444ms w.5c1:397=/8426ms w.5c.5:397=/8509ms w.5c4:397=/12059ms shaAll=true exactAll=true
+ls-real.txt            ch=  2486 def=  433/ 16278ms w1c.5:433=/11775ms w1c.25:433=/12270ms w1c.1:433=/11987ms w.5c1:433=/8237ms w.5c.5:433=/7423ms w.5c4:433=/10221ms shaAll=true exactAll=true
+llm-answer.md          ch=  2542 def=  674/ 13046ms w1c.5:674=/11209ms w1c.25:674=/10545ms w1c.1:674=/10541ms w.5c1:674=/8528ms w.5c.5:674=/8310ms w.5c4:674=/8942ms shaAll=true exactAll=true
+kubectl-get-pods.txt   ch=  2649 def=  326/ 25923ms w1c.5:326=/19334ms w1c.25:326=/19199ms w1c.1:326=/19251ms w.5c1:326=/13291ms w.5c.5:326=/13729ms w.5c4:326=/13779ms shaAll=true exactAll=true
+ps-ef.txt              ch=  2669 def=  315/ 16437ms w1c.5:315=/12115ms w1c.25:315=/13456ms w1c.1:315=/12051ms w.5c1:315=/7381ms w.5c.5:315=/7242ms w.5c4:315!/10775ms shaAll=false exactAll=true
+findmnt.txt            ch=  3215 def=  444/  9686ms w1c.5:444=/8293ms w1c.25:444=/8129ms w1c.1:444=/8494ms w.5c1:444=/6494ms w.5c.5:444=/6890ms w.5c4:444=/8391ms shaAll=true exactAll=true
+
+=== VERDICT over 21 lanes ===
+default: tokens 5464  ms 216207
+  w1c.5    tokens   5464 (+0)  ms  162676  speedup x1.33  sha-differing 0  INEXACT 0
+  w1c.25   tokens   5464 (+0)  ms  414071  speedup x0.52  sha-differing 0  INEXACT 0
+  w1c.1    tokens   5464 (+0)  ms  159376  speedup x1.36  sha-differing 0  INEXACT 0
+  w.5c1    tokens   5464 (+0)  ms  118827  speedup x1.82  sha-differing 0  INEXACT 0
+  w.5c.5   tokens   5464 (+0)  ms  116964  speedup x1.85  sha-differing 0  INEXACT 0
+  w.5c4    tokens   5464 (+0)  ms  135565  speedup x1.59  sha-differing 1 [ps-ef.txt]  INEXACT 0
+elapsed 1324088 ms

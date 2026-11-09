@@ -1,0 +1,77 @@
+GENERALIZED LOCAL LEADERS — pure join over bench/x90/receipts/leaders-x90.json (34 lanes, zero frontier calls)
+leader rule: lowest shippedX90/raw, headline leader restricted to raw >= 500 tokens; both winners printed
+basename collisions in the corpus (why leaders are keyed by path): df-h.txt [bench/holdout-tbl/df-h.txt | bench/holdout-x42/df-h.txt]
+
+## CODE / MARKUP — 3 lanes, raw 3152 -> shipped 2069 (ratio 0.6564), floor 1728 (floor/shipped 0.8352)
+   LEADER (raw>=500): bench/holdout/json-pkg.txt  1152 -> 681  ratio 0.5911
+   weakest: bench/holdout-work/unified-diff.patch  578 -> 419  ratio 0.7249
+   readability-price law floor/shipped<1.00: holds on all 3
+   full ranking (best first):
+       681/ 1152 = 0.5911  fl/sh 0.869  X93 d=0 sha=same x1.256 ctlOK      bench/holdout/json-pkg.txt
+       969/ 1422 = 0.6814  fl/sh 0.838  X93 d=0 sha=same x1.209 ctlOK      bench/holdout/code-ts.txt
+       419/  578 = 0.7249  fl/sh 0.773  UNTESTED                           bench/holdout-work/unified-diff.patch
+
+## DATA — 2 lanes, raw 1095 -> shipped 234 (ratio 0.2137), floor 209 (floor/shipped 0.8932)
+   LEADER (raw>=500): bench/holdout-x40/cue-sheet.md  513 -> 101  ratio 0.1969
+   weakest: bench/holdout-x40/prices.csv  582 -> 133  ratio 0.2285
+   readability-price law floor/shipped<1.00: holds on all 2
+   full ranking (best first):
+       101/  513 = 0.1969  fl/sh 0.980  UNTESTED                           bench/holdout-x40/cue-sheet.md
+       133/  582 = 0.2285  fl/sh 0.827  UNTESTED                           bench/holdout-x40/prices.csv
+
+## OPS LISTING — 13 lanes, raw 30065 -> shipped 9494 (ratio 0.3158), floor 7275 (floor/shipped 0.7663)
+   LEADER (raw>=500): bench/holdout-ops/openstack-loghub-26.log  4028 -> 896  ratio 0.2224
+   weakest: bench/holdout-x42/dpkg-l.txt  1000 -> 673  ratio 0.673
+   readability-price law floor/shipped<1.00: holds on all 13
+   full ranking (best first):
+       896/ 4028 = 0.2224  fl/sh 0.766  UNTESTED                           bench/holdout-ops/openstack-loghub-26.log
+      1390/ 5194 = 0.2676  fl/sh 0.678  UNTESTED                           bench/holdout-x41/ls-l-real.txt
+       315/ 1144 = 0.2753  fl/sh 0.794  UNTESTED                           bench/holdout-x42/ps-ef.txt
+       931/ 3271 = 0.2846  fl/sh 0.757  UNTESTED                           bench/holdout-x86/ls-la-usrbin.txt
+      1140/ 3997 = 0.2852  fl/sh 0.832  UNTESTED                           bench/holdout-ops/find-listing.txt
+       850/ 2739 = 0.3103  fl/sh 0.812  X93 d=0 sha=same x1.105 ctlOK      bench/holdout-x41/apt-real.txt
+       711/ 2253 = 0.3156  fl/sh 0.726  UNTESTED                           bench/holdout-x86/npm-ls-all.txt
+      1042/ 3054 = 0.3412  fl/sh 0.713  X93 d=0 sha=same x1.117 ctlOK      bench/holdout-x41/ps-aux-real.txt
+       397/ 1106 = 0.3590  fl/sh 0.806  UNTESTED                           bench/holdout-x41/ps-real.txt
+       433/ 1034 = 0.4188  fl/sh 0.757  UNTESTED                           bench/holdout-x41/ls-real.txt
+       444/  787 = 0.5642  fl/sh 0.754  UNTESTED                           bench/holdout-x42/findmnt.txt
+       272/  458 = 0.5939  fl/sh 0.805  UNTESTED                           bench/holdout-x41/du-real.txt
+       673/ 1000 = 0.6730  fl/sh 0.880  X93 d=0 sha=same x1.268 ctlOK      bench/holdout-x42/dpkg-l.txt
+
+## OPS TABLE — 11 lanes, raw 4135 -> shipped 1726 (ratio 0.4174), floor 1272 (floor/shipped 0.737)
+   LEADER (raw>=500): bench/holdout-x40/metrics.tsv  811 -> 210  ratio 0.2589
+   weakest: bench/holdout-x42b/free-m.txt  76 -> 76  ratio 1
+   readability-price law floor/shipped<1.00: VIOLATED on bench/holdout-x42/lsblk.txt 1.017, bench/holdout-x42b/free-m.txt 1.000
+   full ranking (best first):
+       210/  811 = 0.2589  fl/sh 0.619  UNTESTED                           bench/holdout-x40/metrics.tsv
+       171/  570 = 0.3000  fl/sh 0.754  UNTESTED                           bench/holdout-tbl/df-h.txt
+       326/ 1006 = 0.3241  fl/sh 0.656  UNTESTED                           bench/holdout-tbl/kubectl-get-pods.txt
+       244/  675 = 0.3615  fl/sh 0.680  UNTESTED                           bench/holdout-tbl/psql-output.txt
+       176/  330 = 0.5333  fl/sh 0.756  UNTESTED                           bench/holdout-tbl/markdown-table.md
+       149/  229 = 0.6507  fl/sh 0.758  UNTESTED                           bench/holdout-x42b/vmstat.txt
+       108/  140 = 0.7714  fl/sh 0.778  UNTESTED                           bench/holdout-x42/df-h.txt
+       126/  158 = 0.7975  fl/sh 0.762  UNTESTED                           bench/holdout-x41/df-real.txt
+        60/   60 = 1.0000  fl/sh 1.017  UNTESTED                           bench/holdout-x42/lsblk.txt
+        80/   80 = 1.0000  fl/sh 0.875  UNTESTED                           bench/holdout-x42b/uptime-w.txt
+        76/   76 = 1.0000  fl/sh 1.000  UNTESTED                           bench/holdout-x42b/free-m.txt
+
+## OTHER — 1 lanes, raw 4277 -> shipped 2262 (ratio 0.5289), floor 1898 (floor/shipped 0.8391)
+   LEADER (raw>=500): bench/holdout-x86/dpkg-l-full.txt  4277 -> 2262  ratio 0.5289
+   weakest: bench/holdout-x86/dpkg-l-full.txt  4277 -> 2262  ratio 0.5289
+   readability-price law floor/shipped<1.00: holds on all 1
+   full ranking (best first):
+      2262/ 4277 = 0.5289  fl/sh 0.839  UNTESTED                           bench/holdout-x86/dpkg-l-full.txt
+
+## PROSE — 4 lanes, raw 3117 -> shipped 2646 (ratio 0.8489), floor 2529 (floor/shipped 0.9558)
+   LEADER (raw>=500): bench/holdout-work/email-thread.txt  629 -> 488  ratio 0.7758
+   weakest: bench/holdout-work/kb-article.txt  656 -> 622  ratio 0.9482
+   readability-price law floor/shipped<1.00: holds on all 4
+   full ranking (best first):
+       488/  629 = 0.7758  fl/sh 0.908  UNTESTED                           bench/holdout-work/email-thread.txt
+       862/ 1099 = 0.7843  fl/sh 0.988  X93 d=0 sha=same x1.12 ctlOK       bench/holdout-x41/node-help.txt
+       674/  733 = 0.9195  fl/sh 0.929  UNTESTED                           bench/holdout-work/llm-answer.md
+       622/  656 = 0.9482  fl/sh 0.978  X93 d=0 sha=same x1.189 ctlOK      bench/holdout-work/kb-article.txt
+
+## ALL — 34 lanes, raw 45841 -> shipped 18431 (ratio 0.4021), floor 14911 (floor/shipped 0.8090)
+X93 identity measured on 7/34 lanes: kb-article.txt, node-help.txt, json-pkg.txt, code-ts.txt, dpkg-l.txt, ps-aux-real.txt, apt-real.txt
+X93 UNTESTED on 27 lanes — not claimed.
