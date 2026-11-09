@@ -1,0 +1,15 @@
+category       lanes     raw   gate    X89    X90    Δ  ratio floor÷X90   moved
+OPS LISTING       13   30065   9595   9513   9494  -19  0.316     0.766   ls-l-real.txt -4, ls-la-usrbin.txt -15
+OTHER              1    4277   2262   2262   2262    0  0.529     0.839   —
+OPS TABLE         11    4135   1726   1726   1726    0  0.417     0.737   —
+CODE / MARKUP      3    3152   2069   2069   2069    0  0.656     0.835   —
+PROSE              4    3117   2646   2646   2646    0  0.849     0.956   —
+DATA               2    1095    296    234    234    0  0.214     0.893   —
+ALL               34   45841  18594  18450  18431  -19  0.402     0.809
+
+29 gate lanes only: X89 12495 -> X90 12491
+lanes moved: 2 — ls-l-real.txt -4, ls-la-usrbin.txt -15
+lanes REGRESSED: 0 (must be 0; the chain keeps the minimum)
+readability-price law floor÷stack < 1.00 fails on: lsblk.txt 1.017, free-m.txt 1
+
+wrote bench/x90/receipts/leaders-x90.json

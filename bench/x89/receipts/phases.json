@@ -1,0 +1,69 @@
+{
+ "det": "1",
+ "rows": [
+  {
+   "lane": "unified-diff.patch",
+   "raw": 578,
+   "baseMs": 2692,
+   "stichMs": 1,
+   "prosMs": 75,
+   "stoiMs": 3,
+   "baseTokens": 419,
+   "stichApplied": false,
+   "stichTokens": 578,
+   "prosApplied": false,
+   "prosTokens": 419,
+   "stoiApplied": false,
+   "stoiTokens": 419,
+   "totalMs": 2771
+  },
+  {
+   "lane": "code-ts.txt",
+   "raw": 1422,
+   "baseMs": 19495,
+   "stichMs": 0,
+   "prosMs": 370,
+   "stoiMs": 13,
+   "baseTokens": 969,
+   "stichApplied": false,
+   "stichTokens": 1422,
+   "prosApplied": false,
+   "prosTokens": 969,
+   "stoiApplied": false,
+   "stoiTokens": 969,
+   "totalMs": 19878
+  },
+  {
+   "lane": "apt-real.txt",
+   "raw": 2739,
+   "baseMs": 95421,
+   "stichMs": 1,
+   "prosMs": 14138,
+   "stoiMs": 9,
+   "baseTokens": 850,
+   "stichApplied": false,
+   "stichTokens": 2739,
+   "prosApplied": false,
+   "prosTokens": 850,
+   "stoiApplied": false,
+   "stoiTokens": 850,
+   "totalMs": 109569
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "raw": 5194,
+   "baseMs": 159594,
+   "stichMs": 1,
+   "prosMs": 158172,
+   "stoiMs": 225,
+   "baseTokens": 1476,
+   "stichApplied": false,
+   "stichTokens": 5194,
+   "prosApplied": true,
+   "prosTokens": 1394,
+   "stoiApplied": false,
+   "stoiTokens": 1476,
+   "totalMs": 317992
+  }
+ ]
+}

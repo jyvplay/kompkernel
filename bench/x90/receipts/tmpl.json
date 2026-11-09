@@ -1,0 +1,898 @@
+{
+ "note": "raw-token probe, no frontier call; estGain charges one rule per relation",
+ "lanes": [
+  {
+   "lane": "bench/holdout-lang/de-kb.txt",
+   "note": "too few multi-cell lines",
+   "lines": 10
+  },
+  {
+   "lane": "bench/holdout-lang/es-kb.txt",
+   "note": "too few multi-cell lines",
+   "lines": 10
+  },
+  {
+   "lane": "bench/holdout-lang/ja-kb.txt",
+   "note": "too few multi-cell lines",
+   "lines": 10
+  },
+  {
+   "lane": "bench/holdout-lang/pl-kb.txt",
+   "note": "too few multi-cell lines",
+   "lines": 10
+  },
+  {
+   "lane": "bench/holdout-lang/ru-kb.txt",
+   "note": "too few multi-cell lines",
+   "lines": 10
+  },
+  {
+   "lane": "bench/holdout-lang/tr-kb.txt",
+   "note": "too few multi-cell lines",
+   "lines": 10
+  },
+  {
+   "lane": "bench/holdout-mk/agent-history.md",
+   "lines": 108,
+   "usableRows": 63,
+   "rawTokens": 1156,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-mk/chart.svg",
+   "lines": 50,
+   "usableRows": 43,
+   "rawTokens": 1331,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-mk/component.jsx",
+   "lines": 29,
+   "usableRows": 18,
+   "rawTokens": 296,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-mk/dump.sql",
+   "lines": 38,
+   "usableRows": 35,
+   "rawTokens": 1795,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-mk/page.html",
+   "lines": 196,
+   "usableRows": 72,
+   "rawTokens": 3220,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-mk/paper.tex",
+   "lines": 35,
+   "usableRows": 14,
+   "rawTokens": 429,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-mk/pom.xml",
+   "note": "too few multi-cell lines",
+   "lines": 60
+  },
+  {
+   "lane": "bench/holdout-ops/find-listing.txt",
+   "lines": 121,
+   "usableRows": 120,
+   "rawTokens": 3997,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-ops/git-log-fuller.txt",
+   "lines": 10,
+   "usableRows": 7,
+   "rawTokens": 143,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-ops/git-numstat.txt",
+   "lines": 401,
+   "usableRows": 397,
+   "rawTokens": 4632,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-ops/ls-full-iso.txt",
+   "lines": 34,
+   "usableRows": 30,
+   "rawTokens": 1175,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-ops/node-stacktraces.txt",
+   "lines": 54,
+   "usableRows": 38,
+   "rawTokens": 568,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-ops/npm-ls.txt",
+   "lines": 151,
+   "usableRows": 150,
+   "rawTokens": 2747,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-ops/openstack-loghub-26.log",
+   "lines": 27,
+   "usableRows": 25,
+   "rawTokens": 4028,
+   "relations": 2,
+   "estTotalGain": 786,
+   "top": [
+    {
+     "rel": "0<-1",
+     "kind": "WEAK",
+     "rows": 25,
+     "bothCells": 25,
+     "frac": 1,
+     "Aconst": 0.64,
+     "Bconst": 0.64,
+     "avgTargetTokens": 18.4,
+     "A": "nova-api.log.1.",
+     "B": "_13:53:08",
+     "estGain": 415
+    },
+    {
+     "rel": "14<-8",
+     "kind": "DELETE",
+     "rows": 15,
+     "bothCells": 24,
+     "frac": 0.63,
+     "Aconst": 1,
+     "Bconst": 0.93,
+     "avgTargetTokens": 26.1,
+     "A": "/v2/",
+     "B": "/servers/detail",
+     "estGain": 371
+    }
+   ]
+  },
+  {
+   "lane": "bench/holdout-ops/package-lock-head.json",
+   "lines": 1352,
+   "usableRows": 909,
+   "rawTokens": 15009,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-tab/aapl-2014.csv",
+   "note": "too few multi-cell lines",
+   "lines": 242
+  },
+  {
+   "lane": "bench/holdout-tab/vix-daily-1990.csv",
+   "note": "too few multi-cell lines",
+   "lines": 128
+  },
+  {
+   "lane": "bench/holdout-tbl/df-h.txt",
+   "lines": 20,
+   "usableRows": 19,
+   "rawTokens": 570,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "lines": 24,
+   "usableRows": 23,
+   "rawTokens": 1006,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-tbl/markdown-table.md",
+   "lines": 13,
+   "usableRows": 11,
+   "rawTokens": 330,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-tbl/psql-output.txt",
+   "lines": 30,
+   "usableRows": 26,
+   "rawTokens": 675,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-work/bibliography.txt",
+   "lines": 23,
+   "usableRows": 17,
+   "rawTokens": 896,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-work/email-thread.txt",
+   "lines": 54,
+   "usableRows": 40,
+   "rawTokens": 629,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-work/kb-article.txt",
+   "lines": 45,
+   "usableRows": 38,
+   "rawTokens": 656,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-work/llm-answer.md",
+   "lines": 65,
+   "usableRows": 44,
+   "rawTokens": 733,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-work/meeting-transcript.txt",
+   "lines": 17,
+   "usableRows": 16,
+   "rawTokens": 472,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-work/unified-diff.patch",
+   "lines": 46,
+   "usableRows": 39,
+   "rawTokens": 578,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x40/cue-sheet.md",
+   "lines": 30,
+   "usableRows": 29,
+   "rawTokens": 513,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x40/metrics.tsv",
+   "lines": 26,
+   "usableRows": 25,
+   "rawTokens": 811,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x40/prices.csv",
+   "note": "too few multi-cell lines",
+   "lines": 32
+  },
+  {
+   "lane": "bench/holdout-x41/apt-real.txt",
+   "lines": 122,
+   "usableRows": 120,
+   "rawTokens": 2739,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x41/df-real.txt",
+   "lines": 8,
+   "usableRows": 7,
+   "rawTokens": 158,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x41/du-ak.txt",
+   "lines": 122,
+   "usableRows": 121,
+   "rawTokens": 1649,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x41/du-real.txt",
+   "lines": 42,
+   "usableRows": 41,
+   "rawTokens": 458,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x41/find-files.txt",
+   "note": "too few multi-cell lines",
+   "lines": 152
+  },
+  {
+   "lane": "bench/holdout-x41/find-json.txt",
+   "note": "too few multi-cell lines",
+   "lines": 2
+  },
+  {
+   "lane": "bench/holdout-x41/git-log-stat.txt",
+   "lines": 202,
+   "usableRows": 198,
+   "rawTokens": 2909,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x41/ls-l-nm.txt",
+   "lines": 90,
+   "usableRows": 89,
+   "rawTokens": 2160,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x41/ls-l-real.txt",
+   "lines": 152,
+   "usableRows": 151,
+   "rawTokens": 5194,
+   "relations": 1,
+   "estTotalGain": 492,
+   "top": [
+    {
+     "rel": "10<-8",
+     "kind": "MARKER",
+     "rows": 56,
+     "bothCells": 58,
+     "frac": 0.97,
+     "Aconst": 0.93,
+     "Bconst": 0.21,
+     "avgTargetTokens": 10.7,
+     "A": "",
+     "B": ".0.0",
+     "estGain": 492
+    }
+   ]
+  },
+  {
+   "lane": "bench/holdout-x41/ls-real.txt",
+   "lines": 41,
+   "usableRows": 40,
+   "rawTokens": 1034,
+   "relations": 1,
+   "estTotalGain": 39,
+   "top": [
+    {
+     "rel": "10<-8",
+     "kind": "WEAK",
+     "rows": 8,
+     "bothCells": 10,
+     "frac": 0.8,
+     "Aconst": 0.38,
+     "Bconst": 0.88,
+     "avgTargetTokens": 8.9,
+     "A": "x86_64-linux-gnu-",
+     "B": "",
+     "estGain": 39
+    }
+   ]
+  },
+  {
+   "lane": "bench/holdout-x41/node-help.txt",
+   "lines": 122,
+   "usableRows": 94,
+   "rawTokens": 1099,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x41/node-versions.txt",
+   "lines": 97,
+   "usableRows": 71,
+   "rawTokens": 779,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x41/ps-aux-real.txt",
+   "lines": 62,
+   "usableRows": 60,
+   "rawTokens": 3054,
+   "relations": 1,
+   "estTotalGain": 2,
+   "top": [
+    {
+     "rel": "15<-13",
+     "kind": "DELETE",
+     "rows": 6,
+     "bothCells": 6,
+     "frac": 1,
+     "Aconst": 1,
+     "Bconst": 1,
+     "avgTargetTokens": 3,
+     "A": "",
+     "B": "noclear",
+     "estGain": 2
+    }
+   ]
+  },
+  {
+   "lane": "bench/holdout-x41/ps-real.txt",
+   "lines": 42,
+   "usableRows": 41,
+   "rawTokens": 1106,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x41/tsc-diag.txt",
+   "lines": 10,
+   "usableRows": 9,
+   "rawTokens": 187,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x42/df-h.txt",
+   "lines": 8,
+   "usableRows": 7,
+   "rawTokens": 140,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x42/dpkg-l.txt",
+   "lines": 42,
+   "usableRows": 39,
+   "rawTokens": 1000,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x42/findmnt.txt",
+   "lines": 28,
+   "usableRows": 27,
+   "rawTokens": 787,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x42/ls-usr-bin.txt",
+   "lines": 42,
+   "usableRows": 41,
+   "rawTokens": 1029,
+   "relations": 1,
+   "estTotalGain": 28,
+   "top": [
+    {
+     "rel": "10<-8",
+     "kind": "MARKER",
+     "rows": 7,
+     "bothCells": 11,
+     "frac": 0.64,
+     "Aconst": 0.57,
+     "Bconst": 1,
+     "avgTargetTokens": 7.6,
+     "A": "/etc/alternatives/",
+     "B": "",
+     "estGain": 28
+    }
+   ]
+  },
+  {
+   "lane": "bench/holdout-x42/lsblk.txt",
+   "note": "too few multi-cell lines",
+   "lines": 4
+  },
+  {
+   "lane": "bench/holdout-x42/proc-partitions.txt",
+   "note": "too few multi-cell lines",
+   "lines": 5
+  },
+  {
+   "lane": "bench/holdout-x42/ps-ef.txt",
+   "lines": 42,
+   "usableRows": 41,
+   "rawTokens": 1144,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x42/ss-tan.txt",
+   "lines": 26,
+   "usableRows": 25,
+   "rawTokens": 843,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x42b/df-h-all.txt",
+   "lines": 8,
+   "usableRows": 7,
+   "rawTokens": 156,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x42b/free-m.txt",
+   "lines": 5,
+   "usableRows": 4,
+   "rawTokens": 76,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x42b/ip-br.txt",
+   "note": "too few multi-cell lines",
+   "lines": 4
+  },
+  {
+   "lane": "bench/holdout-x42b/ps-eo-cpu.txt",
+   "lines": 42,
+   "usableRows": 41,
+   "rawTokens": 1087,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x42b/ss-s.txt",
+   "lines": 12,
+   "usableRows": 9,
+   "rawTokens": 119,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x42b/uptime-w.txt",
+   "note": "too few multi-cell lines",
+   "lines": 4
+  },
+  {
+   "lane": "bench/holdout-x42b/vmstat.txt",
+   "lines": 7,
+   "usableRows": 6,
+   "rawTokens": 229,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x86/apt-policy.txt",
+   "lines": 20,
+   "usableRows": 16,
+   "rawTokens": 208,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x86/dpkg-l-full.txt",
+   "lines": 142,
+   "usableRows": 139,
+   "rawTokens": 4277,
+   "relations": 1,
+   "estTotalGain": 417,
+   "top": [
+    {
+     "rel": "1<-3",
+     "kind": "MARKER",
+     "rows": 78,
+     "bothCells": 129,
+     "frac": 0.6,
+     "Aconst": 0.01,
+     "Bconst": 1,
+     "avgTargetTokens": 7.6,
+     "A": "binutils-common:",
+     "B": "",
+     "estGain": 417
+    }
+   ]
+  },
+  {
+   "lane": "bench/holdout-x86/ls-la-usrbin.txt",
+   "lines": 122,
+   "usableRows": 121,
+   "rawTokens": 3271,
+   "relations": 1,
+   "estTotalGain": 135,
+   "top": [
+    {
+     "rel": "10<-8",
+     "kind": "MARKER",
+     "rows": 23,
+     "bothCells": 31,
+     "frac": 0.74,
+     "Aconst": 0.74,
+     "Bconst": 0.96,
+     "avgTargetTokens": 7.2,
+     "A": "/etc/alternatives/",
+     "B": "",
+     "estGain": 135
+    }
+   ]
+  },
+  {
+   "lane": "bench/holdout-x86/npm-ls-all.txt",
+   "lines": 122,
+   "usableRows": 121,
+   "rawTokens": 2253,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x86/pip-list.txt",
+   "lines": 7,
+   "usableRows": 6,
+   "rawTokens": 41,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x86/proc-cpuinfo.txt",
+   "lines": 56,
+   "usableRows": 51,
+   "rawTokens": 1061,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x86/proc-meminfo.txt",
+   "lines": 55,
+   "usableRows": 54,
+   "rawTokens": 550,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x86/sysinfo.txt",
+   "lines": 14,
+   "usableRows": 12,
+   "rawTokens": 271,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x87/df-B1.txt",
+   "lines": 7,
+   "usableRows": 6,
+   "rawTokens": 137,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x87/df-h-real.txt",
+   "lines": 7,
+   "usableRows": 6,
+   "rawTokens": 131,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x87/du-b.txt",
+   "lines": 41,
+   "usableRows": 40,
+   "rawTokens": 722,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x87/free-b.txt",
+   "lines": 7,
+   "usableRows": 6,
+   "rawTokens": 116,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x87/meminfo.txt",
+   "lines": 51,
+   "usableRows": 50,
+   "rawTokens": 502,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout-x87/top-bn1.txt",
+   "lines": 15,
+   "usableRows": 13,
+   "rawTokens": 505,
+   "relations": 2,
+   "estTotalGain": 17,
+   "top": [
+    {
+     "rel": "10<-9",
+     "kind": "MARKER",
+     "rows": 6,
+     "bothCells": 6,
+     "frac": 1,
+     "Aconst": 1,
+     "Bconst": 0.83,
+     "avgTargetTokens": 5,
+     "A": "0:0",
+     "B": "0",
+     "estGain": 10
+    },
+    {
+     "rel": "10<-8",
+     "kind": "DELETE",
+     "rows": 5,
+     "bothCells": 5,
+     "frac": 1,
+     "Aconst": 1,
+     "Bconst": 1,
+     "avgTargetTokens": 5,
+     "A": "0:0",
+     "B": "0",
+     "estGain": 7
+    }
+   ]
+  },
+  {
+   "lane": "bench/holdout-x87/vmstat-real.txt",
+   "lines": 6,
+   "usableRows": 5,
+   "rawTokens": 204,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout/code-dts.txt",
+   "lines": 22,
+   "usableRows": 21,
+   "rawTokens": 162,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout/code-ts.txt",
+   "lines": 155,
+   "usableRows": 100,
+   "rawTokens": 1422,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout/gh-api.json.txt",
+   "lines": 194,
+   "usableRows": 171,
+   "rawTokens": 2519,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout/gh-prose.txt",
+   "lines": 154,
+   "usableRows": 85,
+   "rawTokens": 1934,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout/json-pkg.txt",
+   "lines": 121,
+   "usableRows": 94,
+   "rawTokens": 1152,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout/lic-mit.txt",
+   "lines": 22,
+   "usableRows": 16,
+   "rawTokens": 223,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout/license.txt",
+   "lines": 43,
+   "usableRows": 10,
+   "rawTokens": 1166,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout/md-react.txt",
+   "lines": 38,
+   "usableRows": 15,
+   "rawTokens": 252,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout/md-vite.txt",
+   "lines": 21,
+   "usableRows": 12,
+   "rawTokens": 274,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  },
+  {
+   "lane": "bench/holdout/readme.txt",
+   "lines": 45,
+   "usableRows": 21,
+   "rawTokens": 843,
+   "relations": 0,
+   "estTotalGain": 0,
+   "top": []
+  }
+ ]
+}

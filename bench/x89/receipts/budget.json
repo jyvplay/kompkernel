@@ -1,0 +1,150 @@
+{
+ "det": "1",
+ "engram": "0",
+ "lanes": [
+  {
+   "lane": "unified-diff.patch",
+   "chars": 1487,
+   "rows": [
+    {
+     "label": "default",
+     "mult": null,
+     "ms": 3308,
+     "tokens": 419,
+     "sha": "d9de4a0505c4d90f",
+     "parent": "synkrisis",
+     "exact": true,
+     "workBudget": 2148700,
+     "chironBudget": 4743500,
+     "lastEpochWorkUsed": 428261,
+     "lastEpochChironUsed": 4743784,
+     "workBindingPct": 19.9,
+     "chironBindingPct": 100
+    },
+    {
+     "label": "x0.5",
+     "mult": 0.5,
+     "ms": 2056,
+     "tokens": 419,
+     "sha": "d9de4a0505c4d90f",
+     "parent": "synkrisis",
+     "exact": true,
+     "workBudget": 1074350,
+     "chironBudget": 2371750,
+     "lastEpochWorkUsed": 422740,
+     "lastEpochChironUsed": 2377367,
+     "workBindingPct": 39.3,
+     "chironBindingPct": 100.2,
+     "identical": true,
+     "speedup": 1.61
+    },
+    {
+     "label": "x0.25",
+     "mult": 0.25,
+     "ms": 1386,
+     "tokens": 419,
+     "sha": "d9de4a0505c4d90f",
+     "parent": "synkrisis",
+     "exact": true,
+     "workBudget": 268588,
+     "chironBudget": 592938,
+     "lastEpochWorkUsed": 268588,
+     "lastEpochChironUsed": 595776,
+     "workBindingPct": 100,
+     "chironBindingPct": 100.5,
+     "identical": true,
+     "speedup": 2.39
+    },
+    {
+     "label": "x0.1",
+     "mult": 0.1,
+     "ms": 565,
+     "tokens": 445,
+     "sha": "c8ba149400b87c2d",
+     "parent": "synkrisis",
+     "exact": true,
+     "workBudget": 26859,
+     "chironBudget": 59294,
+     "lastEpochWorkUsed": 26859,
+     "lastEpochChironUsed": 59294,
+     "workBindingPct": 100,
+     "chironBindingPct": 100,
+     "identical": false,
+     "speedup": 5.85
+    }
+   ]
+  },
+  {
+   "lane": "code-ts.txt",
+   "chars": 6000,
+   "rows": [
+    {
+     "label": "default",
+     "mult": null,
+     "ms": 27886,
+     "tokens": 969,
+     "sha": "7e0f68883b0eb8b7",
+     "parent": "synkrisis",
+     "exact": true,
+     "workBudget": 2600000,
+     "chironBudget": 7000000,
+     "lastEpochWorkUsed": 1678856,
+     "lastEpochChironUsed": 7000355,
+     "workBindingPct": 64.6,
+     "chironBindingPct": 100
+    },
+    {
+     "label": "x0.5",
+     "mult": 0.5,
+     "ms": 19612,
+     "tokens": 969,
+     "sha": "7e0f68883b0eb8b7",
+     "parent": "synkrisis",
+     "exact": true,
+     "workBudget": 1300000,
+     "chironBudget": 3500000,
+     "lastEpochWorkUsed": 1300000,
+     "lastEpochChironUsed": 3515980,
+     "workBindingPct": 100,
+     "chironBindingPct": 100.5,
+     "identical": true,
+     "speedup": 1.42
+    },
+    {
+     "label": "x0.25",
+     "mult": 0.25,
+     "ms": 10058,
+     "tokens": 969,
+     "sha": "7e0f68883b0eb8b7",
+     "parent": "synkrisis",
+     "exact": true,
+     "workBudget": 325000,
+     "chironBudget": 875000,
+     "lastEpochWorkUsed": 325000,
+     "lastEpochChironUsed": 877869,
+     "workBindingPct": 100,
+     "chironBindingPct": 100.3,
+     "identical": true,
+     "speedup": 2.77
+    },
+    {
+     "label": "x0.1",
+     "mult": 0.1,
+     "ms": 7879,
+     "tokens": 976,
+     "sha": "adbf99ac26078dcc",
+     "parent": "synkrisis",
+     "exact": true,
+     "workBudget": 32500,
+     "chironBudget": 87500,
+     "lastEpochWorkUsed": 32500,
+     "lastEpochChironUsed": 88120,
+     "workBindingPct": 100,
+     "chironBindingPct": 100.7,
+     "identical": false,
+     "speedup": 3.54
+    }
+   ]
+  }
+ ]
+}

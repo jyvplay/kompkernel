@@ -22,6 +22,7 @@
 import { countTokens, type EncodingName } from './bpe';
 import { stichomythiaEncode } from './stichomythia';
 import { prosphysisEncode, prosphysisDecode } from './prosphysis';
+import { symphyiaEncode, symphyiaDecodeWire, symphyiaParseContract } from './symphyia';
 import { stoicheionEncode, stoicheionDecode } from './stoicheion';
 import { workEpoch, workBudgetFor } from './workmeter';
 import { apographeDecodeResult, apographeEncode } from './apographe';
@@ -307,6 +308,24 @@ export function tagstackTransform(text: string, enc: EncodingName = 'o200k_base'
  *               own reader).
  */
 export function tagstackDecode(message: string, parentDecoder?: (wire: string) => string): string {
+  // X90 ΣΥΜΦΥΊΑ. Its contract is the first line and is SELF-DESCIBING: the rules, the marker
+  // and the CRC are all parsed back out of that line, because this function is given the
+  // message and nothing else. Order matters and the contract says so (`Body first.`): the
+  // body is decoded by the frontier's own reader first, since in the encoded body whitespace
+  // has been replaced by glyphs and field-splitting it would bind the rule to the wrong
+  // cells. A malformed contract or a failed CRC THROWS rather than returning an
+  // approximation -- the same convention prosphysisDecode uses.
+  if (message.startsWith('X90.')) {
+    const nl = message.indexOf('\n');
+    const key = nl < 0 ? message : message.slice(0, nl);
+    const body = nl < 0 ? '' : message.slice(nl + 1);
+    const parts = symphyiaParseContract(key);
+    if (!parts) throw new Error('tagstackDecode: X90 contract does not parse');
+    const inner = parentDecoder ? parentDecoder(body) : body;
+    const out = symphyiaDecodeWire(inner, parts.rules, parts.marker, parts.crc);
+    if (out === null) throw new Error('tagstackDecode: X90 body does not satisfy its contract (malformed or corrupt)');
+    return out;
+  }
   if (!message.startsWith('X74')) return message;
   const nl = message.indexOf('\n');
   const key = nl < 0 ? message : message.slice(0, nl);
@@ -627,6 +646,18 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
     };
   };
   try { admit('PROSPHYSIS', prosphysisEncode(text, enc) as unknown as WideResult); } catch { /* not a candidate */ }
+  // X90 ΣΥΜΦΥΊΑ generalises PROSPHYSIS from one hardcoded shape (a symlink target that
+  // STARTS with the field before " -> ") to a template FITTED over the record set: any field
+  // pair, either affix direction, and a constant prefix or suffix stated in the contract.
+  // It is admitted AFTER PROSPHYSIS and handed the incumbent's complete-message cost, so it
+  // makes one frontier call and is scored against the number a user would actually get, not
+  // against the gate. Measured where the two overlap and where they do not:
+  //   ls-l-real     PROSPHYSIS's own relation; ΣΥΜΦΥΊΑ fits it without being told about
+  //                 arrows and lands close (see docs/codecs.md §X90 for the number).
+  //   ls-la-usrbin  PROSPHYSIS CANNOT fire: the target ENDS with the link name
+  //                 (/etc/alternatives/python3 vs python3), which is the prefix direction it
+  //                 measures and declines to admit. ΣΥΜΦΥΊΑ's constant-prefix form takes it.
+  try { admit('ΣΥΜΦΥΊΑ', symphyiaEncode(text, enc, best.messageTokens) as unknown as WideResult); } catch { /* not a candidate */ }
   try { admit('STOICHEION', stoicheionEncode(text, enc) as unknown as WideResult); } catch { /* not a candidate */ }
   return best;
 }

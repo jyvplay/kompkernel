@@ -1,0 +1,15 @@
+
+━━ bench/holdout-x86/ls-la-usrbin.txt
+   raw 3271  shipped 946  predicted 931  MINE 931  applied=true exact=true contract=31 fields=17 ms=7132727
+   1 templates over 17 fields (f11=tail<-f9); wire coded by synkrisis
+   VERDICT: WINS 946 -> 931 (-15)
+   first line: X90. Body first. f11 = "/etc/alternatives/" + f9 + text after ※ (1-based). crc=a7511409
+
+━━ bench/holdout-x86/dpkg-l-full.txt
+   raw 4277  shipped 2262  predicted 2265  MINE 2237  applied=false exact=false contract=0 fields=0 ms=480814
+   symphyia: G7 loses 2265 vs 2262
+   VERDICT: REFUSED (symphyia: G7 loses 2265 vs 2262)
+
+applied 1/2  byte exact 1/2
+shipped total on these two: 3208 -> 3193
+wrote bench/x90/receipts/run-extras.json

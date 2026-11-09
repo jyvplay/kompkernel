@@ -1,0 +1,99 @@
+{
+ "note": "X90 contract ladder. Priced OFFLINE: total = tokens(contract) + 1 + F(rewrite), F(rewrite)=1364 measured in run.json for ls-l-real under OMEGA_DET=1. Break-even vs shipped 1394 is <=29 tokens. PROSPHYSIS fires the same relation with a 31-token key and no CRC.",
+ "fRewrite": 1364,
+ "shipped": 1394,
+ "gate": 1476,
+ "breakEven": 29,
+ "prosphysisKeyTokens": 31,
+ "prosphysisKey": "X74. Body first. Then per line, a last field §x means the target is the name before the arrow followed by x. Print only.",
+ "ladder": [
+  {
+   "id": "L0-shipped",
+   "contractTokens": 70,
+   "total": 1435,
+   "vsShipped": 41,
+   "vsGate": -41,
+   "carriesCrc": true,
+   "verdict": "loses +41",
+   "note": "what run.json actually sent",
+   "text": "ΣΥΜΦΥΊΑ whitespace fields, 1-based, per line. ※ marks a field rebuilt from a sibling of the SAME line; T = the text after ※ in that field, H = the text before it. Expand every ※ before reading. f11=\"\"+f9+T crc32=16f86bf2"
+  },
+  {
+   "id": "L1",
+   "contractTokens": 33,
+   "total": 1398,
+   "vsShipped": 4,
+   "vsGate": -78,
+   "carriesCrc": true,
+   "verdict": "loses +4",
+   "note": "X-number instead of the Greek name; drop the unused H clause; drop the empty A",
+   "text": "X90. Per line, field 11 = field 9 followed by the text after ※ in it. Print only. crc32=16f86bf2"
+  },
+  {
+   "id": "L2",
+   "contractTokens": 34,
+   "total": 1399,
+   "vsShipped": 5,
+   "vsGate": -77,
+   "carriesCrc": true,
+   "verdict": "loses +5",
+   "note": "PROSPHYSIS phrasing, generalised: anchor on the field index instead of the arrow",
+   "text": "X90. Per line, a field 11 of the form ※x means field 9 followed by x. Print only. crc32=16f86bf2"
+  },
+  {
+   "id": "L3",
+   "contractTokens": 24,
+   "total": 1389,
+   "vsShipped": -5,
+   "vsGate": -87,
+   "carriesCrc": true,
+   "verdict": "WIN -5",
+   "note": "algebraic, no prose",
+   "text": "X90 f11=f9+T where T follows ※; print only; crc32=16f86bf2"
+  },
+  {
+   "id": "L4",
+   "contractTokens": 22,
+   "total": 1387,
+   "vsShipped": -7,
+   "vsGate": -89,
+   "carriesCrc": true,
+   "verdict": "WIN -7",
+   "note": "shortest that still defines T",
+   "text": "X90: f11 = f9 + T after ※. Print. crc=16f86bf2"
+  },
+  {
+   "id": "L5",
+   "contractTokens": 15,
+   "total": 1380,
+   "vsShipped": -14,
+   "vsGate": -96,
+   "carriesCrc": true,
+   "verdict": "WIN -14",
+   "note": "terse to the point of ambiguity — priced to show the floor",
+   "text": "X90 f11=f9+※ crc=16f86bf2"
+  },
+  {
+   "id": "L2-noCrc",
+   "contractTokens": 26,
+   "total": 1391,
+   "vsShipped": -3,
+   "vsGate": -85,
+   "carriesCrc": false,
+   "verdict": "WIN -3",
+   "note": "L2 WITHOUT the integrity check — isolates the price of G8",
+   "text": "X90. Per line, a field 11 of the form ※x means field 9 followed by x. Print only."
+  },
+  {
+   "id": "L4-noCrc",
+   "contractTokens": 15,
+   "total": 1380,
+   "vsShipped": -14,
+   "vsGate": -96,
+   "carriesCrc": false,
+   "verdict": "WIN -14",
+   "note": "L4 without G8",
+   "text": "X90: f11 = f9 + T after ※. Print."
+  }
+ ]
+}

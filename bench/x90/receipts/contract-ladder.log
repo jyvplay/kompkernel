@@ -1,0 +1,23 @@
+PROSPHYSIS_KEY = 31 tokens: X74. Body first. Then per line, a last field §x means the target is the name before the arrow followed by x. Print only.
+
+break-even to beat the shipped 1394: tokens(contract) <= 29
+
+id           tok  total  vs shipped   vs gate  verdict
+L0-shipped    70   1435          41       -41  loses +41   G8 yes
+L1            33   1398           4       -78  loses +4   G8 yes
+L2            34   1399           5       -77  loses +5   G8 yes
+L3            24   1389          -5       -87  WIN -5   G8 yes
+L4            22   1387          -7       -89  WIN -7   G8 yes
+L5            15   1380         -14       -96  WIN -14   G8 yes
+L2-noCrc      26   1391          -3       -85  WIN -3   G8 NO 
+L4-noCrc      15   1380         -14       -96  WIN -14   G8 NO 
+
+=== LADDER, 8 phrasings, priced offline against F(rewrite)=1364 ===
+beat the shipped 1394: 5  — L3, L4, L5, L2-noCrc, L4-noCrc
+...of which still carry the CRC-32 integrity check (G8): 3 — L3 -5, L4 -7, L5 -14
+cheapest with G8: L5 at 15 tokens (needs <= 29)
+cheapest without G8: L4-noCrc at 15 tokens
+PRICE OF THE INTEGRITY CHECK: 0 tokens for a comparable phrasing
+PROSPHYSIS's key carries no CRC and costs 31; ΣΥΜΦΥΊΑ must fit G8 inside 29.
+
+wrote bench/x90/receipts/contract-ladder.json

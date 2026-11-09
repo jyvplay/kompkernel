@@ -1,0 +1,7 @@
+EXACT   dpkg-l-full.sym.txt      16593 bytes  crc32 39e50f9b verified from the message alone  rules f2:head<-f4  marker ※  SHA-256 MATCHES the original file
+EXACT   ls-l-real.sym.txt        10692 bytes  crc32 16f86bf2 verified from the message alone  rules f11:tail<-f9  marker ※  SHA-256 MATCHES the original file
+EXACT   ls-la-usrbin.sym.txt     7544 bytes  crc32 a7511409 verified from the message alone  rules f11:tail<-f9  marker ※  SHA-256 MATCHES the original file
+
+=== COLD READ, 3 artifacts ===
+reconstructed and self-certified by CRC: 3   wrong or refused: 0
+COLD READ EXACT
