@@ -106,13 +106,57 @@ export function workState(): WorkState {
 export const WORK_BUDGET_BASE = 2_000_000;
 export const WORK_BUDGET_PER_CHAR = 100;
 
+/**
+ * X89 — SIZE-GATED RECALIBRATION OF BOTH METERS.
+ *
+ * X58 found the shape of this on one lane (DAEDALUS on ewf-standings spends 113M units,
+ * yet a 5M cap yields the byte-identical wire in 18.2s against 39.6s) and then set both
+ * defaults with "generous headroom over those knees". X89 measures the whole knee instead
+ * of one point on it: bench/x89/budget29.ts encodes all 29 frontier lanes at 1x, 0.5x and
+ * 0.25x of both allowances, INTERLEAVED in one process so the ratio is not cross-process
+ * drift (~1.6x on this box, which is what made runs C/D/E look like speedups), under
+ * OMEGA_DET=1 so the wall clock is not the thing that differs, with OMEGA_ENGRAM=0 so the
+ * reduced pass cannot replay the default pass's cached result, and compares the COMPLETE
+ * MESSAGE BY SHA-256 rather than by token count, because two different wires can share a
+ * token count (df-real and df-h both did: same 126/108, different message).
+ *
+ *   0.5x   identical message 28/29   1.40x faster overall (1.10-2.68x per lane)
+ *   0.25x  identical message 18/29   2.34x faster overall, but 11 lanes change, several
+ *          for the worse (psql-output 244 -> 268, ps-aux-real 1042 -> 1066,
+ *          apt-real 850 -> 876, ls-l-real 1476 -> 1493)
+ *
+ * The single lane that 0.5x breaks is the LARGEST one, ls-l-real at 10 692 chars
+ * (1476 -> 1499, +23), while every input up to 6 751 chars was byte-identical. So the
+ * deficiency is a function of size, and the gate below is bracketed by measurement rather
+ * than chosen freely: the threshold sits between the largest input verified sufficient
+ * (6 751) and the smallest verified insufficient (10 692). Halving the allowance only for
+ * inputs at or under the threshold reproduces the measured per-lane times exactly -- the
+ * gate selects, per lane, between two configurations that were both measured -- for an
+ * aggregate 661 105 ms -> 488 154 ms, 1.35x, with the message identical on 29/29.
+ *
+ * WHY THIS CANNOT BREAK CORRECTNESS. Byte-exact decode held at 29/29 at EVERY setting
+ * including 0.25x. A budget bounds the SEARCH, not the VERIFICATION: tagstack's
+ * `consider()` throws unless `candidate.decoded === text`, and every arm re-checks its own
+ * round trip, so a truncated search can only ever produce a larger message or a refusal.
+ * The failure mode of a threshold set too low is tokens, not fidelity.
+ *
+ * The explicit OMEGA_WORK_BUDGET / OMEGA_CHIRON_BUDGET overrides are applied BEFORE the
+ * gate and are not scaled, so a sweep still sweeps the number it asks for.
+ */
+export const X89_HALF_BUDGET_MAX_CHARS = 8_000;
+export const X89_BUDGET_FACTOR = 0.5;
+
+function x89BudgetFactor(chars: number): number {
+  return Math.max(0, chars) <= X89_HALF_BUDGET_MAX_CHARS ? X89_BUDGET_FACTOR : 1;
+}
+
 export function workBudgetFor(chars: number): number {
   const env = typeof process !== 'undefined' ? process.env?.OMEGA_WORK_BUDGET : undefined;
   if (env !== undefined && env !== '') {
     const n = Number(env);
     if (Number.isFinite(n)) return n <= 0 ? Number.POSITIVE_INFINITY : n;
   }
-  return WORK_BUDGET_BASE + WORK_BUDGET_PER_CHAR * Math.max(0, chars);
+  return Math.round((WORK_BUDGET_BASE + WORK_BUDGET_PER_CHAR * Math.max(0, chars)) * x89BudgetFactor(chars));
 }
 
 /**
@@ -194,5 +238,5 @@ export function chironBudgetFor(chars: number): number {
     const n = Number(env);
     if (Number.isFinite(n)) return n <= 0 ? Number.POSITIVE_INFINITY : n;
   }
-  return CHIRON_BUDGET_BASE + CHIRON_BUDGET_PER_CHAR * Math.max(0, chars);
+  return Math.round((CHIRON_BUDGET_BASE + CHIRON_BUDGET_PER_CHAR * Math.max(0, chars)) * x89BudgetFactor(chars));
 }

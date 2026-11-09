@@ -1,0 +1,183 @@
+{
+ "claim": "a positional back-pointer rule is worse than the literal rule the frontier already writes, by exactly 3 tokens, for every span length p and occurrence count k",
+ "derivation": {
+  "baseline": "k*p",
+  "literal": "(1+p)+k -> save k*p-p-k-1",
+  "pointer": "5+p+(k-1) -> save k*p-p-k-4",
+  "difference": 3
+ },
+ "censusNote": "n-gram k counts token ALIGNMENTS (\"ab\"+\"c\" == \"a\"+\"bc\") and one wire token decodes empty; occurrence counts are re-verified with indexOf before pricing",
+ "totals": {
+  "wires": 15,
+  "wiresWithNoMaterial": 1,
+  "literalUpperBound": 202,
+  "pointerUpperBound": -38
+ },
+ "rows": [
+  {
+   "lane": "apt-real",
+   "wireTokens": 850,
+   "alignments": 35,
+   "verifiedRepeats": 77,
+   "payable": 3,
+   "selected": 3,
+   "literalSave": 8,
+   "pointerSave": -1,
+   "pct": 0.94
+  },
+  {
+   "lane": "code-ts",
+   "wireTokens": 969,
+   "alignments": 60,
+   "verifiedRepeats": 127,
+   "payable": 2,
+   "selected": 2,
+   "literalSave": 2,
+   "pointerSave": -4,
+   "pct": 0.21
+  },
+  {
+   "lane": "dpkg-l",
+   "wireTokens": 673,
+   "alignments": 27,
+   "verifiedRepeats": 63,
+   "payable": 7,
+   "selected": 5,
+   "literalSave": 10,
+   "pointerSave": -5,
+   "pct": 1.49
+  },
+  {
+   "lane": "findmnt",
+   "wireTokens": 444,
+   "alignments": 32,
+   "verifiedRepeats": 88,
+   "payable": 12,
+   "selected": 6,
+   "literalSave": 9,
+   "pointerSave": -9,
+   "pct": 2.03
+  },
+  {
+   "lane": "json-pkg",
+   "wireTokens": 681,
+   "alignments": 30,
+   "verifiedRepeats": 57,
+   "payable": 4,
+   "selected": 3,
+   "literalSave": 9,
+   "pointerSave": 0,
+   "pct": 1.32
+  },
+  {
+   "lane": "kb-article",
+   "wireTokens": 622,
+   "alignments": 13,
+   "verifiedRepeats": 31,
+   "payable": 0,
+   "selected": 0,
+   "literalSave": 0,
+   "pointerSave": 0,
+   "pct": 0
+  },
+  {
+   "lane": "llm-answer",
+   "wireTokens": 674,
+   "alignments": 23,
+   "verifiedRepeats": 51,
+   "payable": 3,
+   "selected": 2,
+   "literalSave": 2,
+   "pointerSave": -4,
+   "pct": 0.3
+  },
+  {
+   "lane": "ls-l-real",
+   "wireTokens": 1476,
+   "alignments": 206,
+   "verifiedRepeats": 203,
+   "payable": 15,
+   "selected": 10,
+   "literalSave": 21,
+   "pointerSave": -9,
+   "pct": 1.42
+  },
+  {
+   "lane": "ls-real",
+   "wireTokens": 433,
+   "alignments": 20,
+   "verifiedRepeats": 38,
+   "payable": 2,
+   "selected": 2,
+   "literalSave": 2,
+   "pointerSave": -4,
+   "pct": 0.46
+  },
+  {
+   "lane": "ps-aux-real",
+   "wireTokens": 1042,
+   "alignments": 63,
+   "verifiedRepeats": 104,
+   "payable": 8,
+   "selected": 2,
+   "literalSave": 9,
+   "pointerSave": 3,
+   "pct": 0.86
+  },
+  {
+   "lane": "dpkg-l-full.txt",
+   "wireTokens": 2262,
+   "alignments": 136,
+   "verifiedRepeats": 323,
+   "payable": 65,
+   "selected": 18,
+   "literalSave": 79,
+   "pointerSave": 25,
+   "pct": 3.49
+  },
+  {
+   "lane": "find-listing.txt",
+   "wireTokens": 1140,
+   "alignments": 52,
+   "verifiedRepeats": 98,
+   "payable": 6,
+   "selected": 6,
+   "literalSave": 12,
+   "pointerSave": -6,
+   "pct": 1.05
+  },
+  {
+   "lane": "ls-la-usrbin.txt",
+   "wireTokens": 946,
+   "alignments": 51,
+   "verifiedRepeats": 110,
+   "payable": 15,
+   "selected": 12,
+   "literalSave": 24,
+   "pointerSave": -12,
+   "pct": 2.54
+  },
+  {
+   "lane": "npm-ls-all.txt",
+   "wireTokens": 711,
+   "alignments": 40,
+   "verifiedRepeats": 68,
+   "payable": 4,
+   "selected": 4,
+   "literalSave": 5,
+   "pointerSave": -7,
+   "pct": 0.7
+  },
+  {
+   "lane": "openstack-loghub-26.log",
+   "wireTokens": 896,
+   "alignments": 36,
+   "verifiedRepeats": 63,
+   "payable": 6,
+   "selected": 5,
+   "literalSave": 10,
+   "pointerSave": -5,
+   "pct": 1.12
+  }
+ ]
+}

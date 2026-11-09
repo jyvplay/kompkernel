@@ -1,0 +1,16 @@
+unified-diff.patch         raw=  578 base=  419 | ms: base=  2692 stich=     1 pros=    75 stoi=     3 TOTAL=  2771
+                           applied: stich=false(578) pros=false(419) stoi=false(419)   discarded-work share=2.8%
+code-ts.txt                raw= 1422 base=  969 | ms: base= 19495 stich=     0 pros=   370 stoi=    13 TOTAL= 19878
+                           applied: stich=false(1422) pros=false(969) stoi=false(969)   discarded-work share=1.9%
+apt-real.txt               raw= 2739 base=  850 | ms: base= 95421 stich=     1 pros= 14138 stoi=     9 TOTAL=109569
+                           applied: stich=false(2739) pros=false(850) stoi=false(850)   discarded-work share=12.9%
+ls-l-real.txt              raw= 5194 base= 1476 | ms: base=159594 stich=     1 pros=158172 stoi=   225 TOTAL=317992
+                           applied: stich=false(5194) pros=true(1394) stoi=false(1476)   discarded-work share=0.1%
+
+=== phase totals over 4 lanes ===
+  baseMs     277202 ms  (61.6%)
+  stichMs         3 ms  (0.0%)
+  prosMs     172755 ms  (38.4%)
+  stoiMs        250 ms  (0.1%)
+  TOTAL      450210 ms
+  STOICHEION admitted on 0/4 lanes but consumed 250 ms (0.1% of the shipped encoder)

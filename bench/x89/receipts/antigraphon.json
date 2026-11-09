@@ -1,0 +1,189 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real",
+   "F": 850,
+   "M": 850,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 267
+  },
+  {
+   "lane": "code-ts",
+   "F": 969,
+   "M": 969,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 10
+  },
+  {
+   "lane": "dpkg-l",
+   "F": 673,
+   "M": 673,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 7
+  },
+  {
+   "lane": "findmnt",
+   "F": 444,
+   "M": 444,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 3
+  },
+  {
+   "lane": "json-pkg",
+   "F": 681,
+   "M": 681,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 7
+  },
+  {
+   "lane": "kb-article",
+   "F": 622,
+   "M": 622,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no repeated token-aligned span pays for a rule",
+   "ms": 4
+  },
+  {
+   "lane": "llm-answer",
+   "F": 674,
+   "M": 674,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 30
+  },
+  {
+   "lane": "ls-l-real",
+   "F": 1476,
+   "M": 1476,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 20
+  },
+  {
+   "lane": "ls-real",
+   "F": 433,
+   "M": 433,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no repeated token-aligned span pays for a rule",
+   "ms": 2
+  },
+  {
+   "lane": "ps-aux-real",
+   "F": 1042,
+   "M": 1042,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 7
+  },
+  {
+   "lane": "dpkg-l-full.txt",
+   "F": 2262,
+   "M": 2262,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 33
+  },
+  {
+   "lane": "find-listing.txt",
+   "F": 1140,
+   "M": 1140,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 6
+  },
+  {
+   "lane": "ls-la-usrbin.txt",
+   "F": 946,
+   "M": 946,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 5
+  },
+  {
+   "lane": "npm-ls-all.txt",
+   "F": 711,
+   "M": 711,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 5
+  },
+  {
+   "lane": "openstack-loghub-26.log",
+   "F": 896,
+   "M": 896,
+   "save": 0,
+   "applied": false,
+   "exact": true,
+   "entries": 0,
+   "note": "no entry lowered the measured message cost",
+   "ms": 6
+  }
+ ],
+ "totalF": 13819,
+ "totalM": 13819,
+ "verdict": "REFUSED on 15/15 committed frontier wires; SAVE 0",
+ "why": {
+  "bestCase": "dpkg-l-full, span \"            э\" (12 spaces + a pool glyph), isolated p=2, occ=28",
+  "censusEstimate": 25,
+  "censusTotalOver18Candidates": 102,
+  "censusTotalOver15Wires": 202,
+  "measured": {
+   "inSituMarginalCostOfAll28Folds": 25,
+   "isolatedAssumption": 56,
+   "bodyAfterSubstitution": 2264,
+   "wireBefore": 2262,
+   "contractCost": 17,
+   "realTotal": 2282,
+   "realSave": -20
+  },
+  "law": "a repeated span in the frontier wire costs far LESS in situ than its isolated token count, because the spans a census finds are exactly the ones built from characters that already merge (space runs, glyph clusters). Proxy pricing overstates the gain by 2.2x on this rule and turns a +25 estimate into a -20 measurement.",
+  "consequence": "this is the same dense-wire law that sank SYNTAXIS, measured at the level of a single rule. It explains MERISMOS universal refusal without appealing to its constants, and it closes the post-pass-dictionary class on the frontier wire by measurement rather than by argument."
+ }
+}

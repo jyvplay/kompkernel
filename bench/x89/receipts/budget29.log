@@ -1,0 +1,47 @@
+lsblk.txt                ch=  132 F=   60 exact=true | x0.5: SAME   1283ms (1.65x) | x0.25: SAME    983ms (2.15x) | chironBind=33.1%
+kb-article.txt           ch= 3385 F=  622 exact=true | x0.5: SAME   2022ms (1.23x) | x0.25: SAME   1978ms (1.26x) | chironBind=100.1%
+uptime-w.txt             ch=  179 F=   80 exact=true | x0.5: SAME   1523ms (1.42x) | x0.25: SAME    984ms (2.20x) | chironBind=79.5%
+free-m.txt               ch=  263 F=   76 exact=true | x0.5: SAME   1568ms (1.50x) | x0.25: SAME   1196ms (1.96x) | chironBind=100%
+vmstat.txt               ch=  467 F=  149 exact=true | x0.5: SAME   1454ms (1.61x) | x0.25: SAME   1115ms (2.09x) | chironBind=100%
+unified-diff.patch       ch= 1487 F=  419 exact=true | x0.5: SAME   1987ms (1.35x) | x0.25: SAME   1367ms (1.96x) | chironBind=100%
+df-h.txt                 ch=  939 F=  171 exact=true | x0.5: SAME   1571ms (1.49x) | x0.25: SAME   1430ms (1.63x) | chironBind=100%
+df-real.txt              ch=  329 F=  126 exact=true | x0.5: SAME   3488ms (1.35x) | x0.25: DIFF 126   1590ms (2.95x) | chironBind=100%
+du-real.txt              ch= 1605 F=  272 exact=true | x0.5: SAME   3612ms (1.34x) | x0.25: DIFF 273   1915ms (2.53x) | chironBind=100.2%
+node-help.txt            ch= 6751 F=  862 exact=true | x0.5: SAME   5708ms (1.21x) | x0.25: DIFF 867   4596ms (1.50x) | chironBind=100%
+findmnt.txt              ch= 3215 F=  444 exact=true | x0.5: SAME   5734ms (1.18x) | x0.25: DIFF 446   2926ms (2.31x) | chironBind=100%
+df-h.txt                 ch=  293 F=  108 exact=true | x0.5: SAME   3876ms (1.43x) | x0.25: DIFF 108   1764ms (3.15x) | chironBind=100%
+email-thread.txt         ch= 2126 F=  488 exact=true | x0.5: SAME   6931ms (1.16x) | x0.25: SAME   3533ms (2.28x) | chironBind=100%
+llm-answer.md            ch= 2542 F=  674 exact=true | x0.5: SAME   7285ms (1.21x) | x0.25: SAME   9733ms (0.90x) | chironBind=100%
+markdown-table.md        ch=  635 F=  176 exact=true | x0.5: SAME   4380ms (1.50x) | x0.25: SAME   1758ms (3.74x) | chironBind=100%
+psql-output.txt          ch= 1578 F=  244 exact=true | x0.5: SAME   6672ms (1.23x) | x0.25: DIFF 268   2181ms (3.76x) | chironBind=100%
+prices.csv               ch=  993 F=  133 exact=true | x0.5: SAME   6488ms (1.74x) | x0.25: SAME   2516ms (4.49x) | chironBind=100%
+cue-sheet.md             ch=  938 F=  163 exact=true | x0.5: SAME   7798ms (1.68x) | x0.25: DIFF 164   1944ms (6.74x) | chironBind=100%
+ps-ef.txt                ch= 2669 F=  315 exact=true | x0.5: SAME   8265ms (1.81x) | x0.25: SAME   3201ms (4.68x) | chironBind=100.2%
+ls-real.txt              ch= 2486 F=  433 exact=true | x0.5: SAME   8233ms (1.89x) | x0.25: SAME   3608ms (4.30x) | chironBind=100.4%
+json-pkg.txt             ch= 3620 F=  681 exact=true | x0.5: SAME  10463ms (1.50x) | x0.25: SAME   5611ms (2.80x) | chironBind=100.1%
+code-ts.txt              ch= 6000 F=  969 exact=true | x0.5: SAME  21036ms (1.42x) | x0.25: SAME   9974ms (2.99x) | chironBind=100%
+dpkg-l.txt               ch= 4459 F=  673 exact=true | x0.5: SAME  15277ms (1.91x) | x0.25: SAME   7648ms (3.81x) | chironBind=100.7%
+ps-real.txt              ch= 2365 F=  397 exact=true | x0.5: SAME  10841ms (2.24x) | x0.25: DIFF 409   4175ms (5.82x) | chironBind=100.2%
+kubectl-get-pods.txt     ch= 2649 F=  326 exact=true | x0.5: SAME  14159ms (2.19x) | x0.25: SAME   6162ms (5.03x) | chironBind=100.5%
+metrics.tsv              ch= 1203 F=  210 exact=true | x0.5: SAME  12285ms (2.68x) | x0.25: SAME   4955ms (6.63x) | chironBind=100.1%
+ps-aux-real.txt          ch= 6590 F= 1042 exact=true | x0.5: SAME  43561ms (1.40x) | x0.25: DIFF 1066  26682ms (2.29x) | chironBind=100.6%
+apt-real.txt             ch= 6195 F=  850 exact=true | x0.5: SAME  88011ms (1.40x) | x0.25: DIFF 876  54241ms (2.27x) | chironBind=100.2%
+ls-l-real.txt            ch=10692 F= 1476 exact=true | x0.5: DIFF 1499 166039ms (1.10x) | x0.25: DIFF 1493 112314ms (1.62x) | chironBind=100%
+
+=== VERDICT: 29 lanes, default vs 0.5x vs 0.25x, one process, memo off, det on ===
+byte-exact decode at every setting: 29/29
+  x0.5   identical message 28/29   total  471550 ms   speedup 1.40x
+       CHANGED ls-l-real.txt: 1476 -> 1499
+  x0.25  identical message 18/29   total  282080 ms   speedup 2.34x
+       CHANGED df-real.txt: 126 -> 126
+       CHANGED du-real.txt: 272 -> 273
+       CHANGED node-help.txt: 862 -> 867
+       CHANGED findmnt.txt: 444 -> 446
+       CHANGED df-h.txt: 108 -> 108
+       CHANGED psql-output.txt: 244 -> 268
+       CHANGED cue-sheet.md: 163 -> 164
+       CHANGED ps-real.txt: 397 -> 409
+       CHANGED ps-aux-real.txt: 1042 -> 1066
+       CHANGED apt-real.txt: 850 -> 876
+       CHANGED ls-l-real.txt: 1476 -> 1493
+default total 661105 ms   elapsed 1414996 ms

@@ -1,0 +1,155 @@
+{
+ "ptrRowCost": 5,
+ "rows": [
+  {
+   "lane": "apt-real",
+   "wireTokens": 850,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "code-ts",
+   "wireTokens": 969,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "dpkg-l",
+   "wireTokens": 673,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "findmnt",
+   "wireTokens": 444,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "json-pkg",
+   "wireTokens": 681,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "kb-article",
+   "wireTokens": 622,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "llm-answer",
+   "wireTokens": 674,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "ls-l-real",
+   "wireTokens": 1476,
+   "candidates": 71,
+   "taken": 2,
+   "litSave": 0,
+   "ptrSave": 140,
+   "ptrAdvantage": 140,
+   "ptrPctOfWire": 9.5
+  },
+  {
+   "lane": "ls-real",
+   "wireTokens": 433,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "ps-aux-real",
+   "wireTokens": 1042,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "dpkg-l-full.txt",
+   "wireTokens": 2262,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "find-listing.txt",
+   "wireTokens": 1140,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "ls-la-usrbin.txt",
+   "wireTokens": 946,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "npm-ls-all.txt",
+   "wireTokens": 711,
+   "candidates": 0,
+   "taken": 0,
+   "litSave": 0,
+   "ptrSave": 0,
+   "ptrAdvantage": 0,
+   "ptrPctOfWire": 0
+  },
+  {
+   "lane": "openstack-loghub-26.log",
+   "wireTokens": 896,
+   "candidates": 1,
+   "taken": 1,
+   "litSave": 0,
+   "ptrSave": 1,
+   "ptrAdvantage": 1,
+   "ptrPctOfWire": 0.1
+  }
+ ]
+}

@@ -1,0 +1,14 @@
+unified-diff.patch       raw=  578 default=  419(3027ms, chironBind=100.2%)  w1c2=419(2028ms) w1c4=419(2375ms) w1c8=419(2407ms) w.5c4=419(2116ms)  best=default 419 gain=0 exactAll=true
+markdown-table.md        raw=  330 default=  176(5647ms, chironBind=100.9%)  w1c2=176(4344ms) w1c4=176(4371ms) w1c8=176(4806ms) w.5c4=176(2607ms)  best=default 176 gain=0 exactAll=true
+prices.csv               raw=  582 default=  133(8399ms, chironBind=100.1%)  w1c2=133(6119ms) w1c4=133(6134ms) w1c8=133(6096ms) w.5c4=133(4343ms)  best=default 133 gain=0 exactAll=true
+vmstat.txt               raw=  229 default=  149(1640ms, chironBind=100.1%)  w1c2=149(1732ms) w1c4=149(1849ms) w1c8=149(2233ms) w.5c4=149(1746ms)  best=default 149 gain=0 exactAll=true
+cue-sheet.md             raw=  513 default=  163(9900ms, chironBind=100%)  w1c2=163(7394ms) w1c4=163(7253ms) w1c8=163(7892ms) w.5c4=163(5780ms)  best=default 163 gain=0 exactAll=true
+psql-output.txt          raw=  675 default=  244(8029ms, chironBind=100%)  w1c2=244(6417ms) w1c4=244(6943ms) w1c8=244(6920ms) w.5c4=244(4588ms)  best=default 244 gain=0 exactAll=true
+df-h.txt                 raw=  570 default=  171(2527ms, chironBind=100.4%)  w1c2=171(1550ms) w1c4=171(1514ms) w1c8=171(1745ms) w.5c4=171(1733ms)  best=default 171 gain=0 exactAll=true
+
+=== REBALANCE VERDICT over 7 lanes (default total 1455) ===
+  w1c2    total=  1455 (+0)  ms=  29584  lanesBetter=0  lanesWorse=0
+  w1c4    total=  1455 (+0)  ms=  30439  lanesBetter=0  lanesWorse=0
+  w1c8    total=  1455 (+0)  ms=  32099  lanesBetter=0  lanesWorse=0
+  w.5c4   total=  1455 (+0)  ms=  22913  lanesBetter=0  lanesWorse=0
+elapsed 154464 ms

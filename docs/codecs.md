@@ -6632,3 +6632,397 @@ differing** from run C, 652 815 ms) and `-runE.json` (TOTAL **12 639**, exact 29
 the fourth and fifth consecutive confirmations of 12 639, runs A–E, each diffed lane for
 lane against its predecessor,
 [`docs/codec-abbreviations.md`](codec-abbreviations.md) §X88.
+
+---
+
+## X89 — no new arm: the gate is not the stack, the clock is not the codec, and what the search budget is worth
+
+X89 ships **one change to `src/lib/omega/workmeter.ts`** and **no new codec**. That is the
+honest shape of the turn and the sections below say why: two mechanisms were built far
+enough to be measured and both refused, one was closed by a proof rather than by a
+measurement, and the work that did survive is a correction to two numbers this repository
+has been quoting, a noise floor that had never been measured, and a verified speed gain.
+
+### 1. Correction — 12 639 is the gate, 12 495 is the stack
+
+`bench/x86/front.ts` prices `tagstackFrontier`, which
+`src/lib/omega/tagstack.ts:505-510` documents as *"the identity WITHOUT the X74
+candidates"* — it exists so that a candidate can price its own body without recursing
+("candidates call the frontier, the frontier calls the candidates"). The encoder the stack
+actually ships is `tagstackEncode`, which appends the X73/X74 chain: STICHOMYTHIA, then
+PROSPHYSIS and STOICHEION. So every `FRONTIER 29 TOTAL 12639` quoted since X80 — runs A,
+B, C, D and E, and this document's own §X88 — is the **pre-chain** figure.
+
+`bench/x89/front3.ts` runs the shipped encoder over the same 29 lanes under
+`OMEGA_DET=1`, one encode per lane, diffed against the committed run E receipt:
+
+```
+run E tagstackFrontier TOTAL 12639  ->  tagstackEncode TOTAL 12495   delta -144
+exact 29/29     lanes where the shipped chain beats the gate: 2     lanes worse: NONE
+  ls-l-real.txt    1476 -> 1394  (-82)   PROSPHYSIS  (symlink containment)
+  cue-sheet.md      163 ->  101  (-62)   STICHOMYTHIA (columns as programs)
+```
+
+This is not a discovery of a new win: `tagstack.ts:600` already records PROSPHYSIS as
+*"1 497 -> 1 412 on ls-l-real (-85, -5.7 %), 29-lane gate 12 634 -> 12 544"*, and 12 495
+reproduces the X74 control value that `docs/codecs.md` §X74 records. The correction is to
+**which number a reader should compare a new arm against**. 12 639 is the gate — the right
+baseline for a registry arm, because arms are gated against the frontier and not inside it.
+12 495 is what a user pastes. Quoting the first as if it were the second overstates the
+stack by 144 tokens, and quoting the second as a target for a new arm understates how hard
+the target is.
+
+`admit()` (`tagstack.ts:617-628`) also does **not** set `parentCodec`: it replaces the
+message and sets `arm: 'tagstack'` and `notes`, leaving the base parent's label in place.
+So the ls-l-real row above reports `parent=synkrisis` at 1 394 tokens, which is **not**
+reproducible by calling SYNKRISIS — the winner is PROSPHYSIS's rewrite of a
+synkrisis-parented base. Only STICHOMYTHIA sets its own label (`parentCodec:
+'stichomythia'`, `tagstack.ts:585-595`). Any leader table keyed on `parent` therefore
+mislabels every PROSPHYSIS and STOICHEION win, including the one in §6 below.
+
+### 2. Correction — without `OMEGA_DET=1` the shipped encoder is not a function of its input
+
+`bench/x89/front2.ts` measured both tiers in one process and forgot `OMEGA_DET=1`. Against
+run E, four of 29 lanes moved:
+
+| lane | run E (det) | front2 (wall clock) | Δ |
+|---|---|---|---|
+| ls-l-real.txt | 1476 | 1496 | **+20** |
+| code-ts.txt | 969 | 980 | **+11** |
+| ps-aux-real.txt | 1042 | 1049 | +7 |
+| apt-real.txt | 850 | 851 | +1 |
+| **29-lane total** | **12639** | **12678** | **+39** |
+
+Same code, same inputs, same process, one run. The cause is documented in the repository
+already — `src/lib/omega/clock.ts`: *"the same DAEDALUS input gave different wires under
+load, because the second arm and the search loops were cut at wall-clock deadlines"*
+(measured motivation z13: 1664 against 1613 on the same file) — and the deadlines are real:
+`chiron.ts:1428` sets `budgetMs = min(11_000, 800 + text.length * 1.1)`, and
+`ariadne.ts:881-962` gates every level, iteration and local-search step on
+`now() < deadline`. front2 encoded **two** frontiers per lane, so it ran hotter than runs
+A–E and its searches were cut shorter.
+
+front3, under `OMEGA_DET=1`, reproduces run E on 29/29 including all four lanes above
+(ps-aux-real 1042, apt-real 850, code-ts 969, ls-l-real 1476).
+
+**The consequence is a noise floor that had never been stated: ±20 tokens per lane and
+±39 on the 29-lane total.** Runs A–E are mutually comparable because all five are det.
+A wall-clock run is not comparable to them, and no arm may be accepted or rejected on one:
+an arm measured against a wall-clock frontier can appear to win 20 tokens by arriving at a
+quieter moment. This is the same defect reported independently five times in 2026 by
+projects that hit it from other directions — `Mumunu-team/mununu#553` (*"the iteration
+budget is deterministic and reproducible. The wall-clock budget is neither. They are
+reported identically"*), `spoorendonk/coso#209` (a determinism check that *"fails under
+CPU load … reporting nondeterminism that is not there"*, because `StopCriterion` stops on
+whichever of a work-unit counter and a `steady_clock` limit binds first),
+`DavidVivancos/Neuraxon#2` (a wall-clock deadline inside consensus-critical `verify()`,
+latent in the shipped demo only because the deadline never fires there),
+`Luminous-Dynamics/symthaea#10885` (*"wall-clock deadlines may be applied by an outer
+supervisor, but should not be used as the only in-core bound"*) and
+`jasonyandell/mk5-main#173`. None of them is about compression; all five are the same bug.
+
+### 3. A proof, not a measurement: positional back-references cannot pay here
+
+The one rule form this repository had not tried is LZ77's own — a rule that points instead
+of spelling, `<glyph><start>·<len>` into the text already rebuilt. For a span of `p` tokens
+occurring `k` times:
+
+```
+baseline      k*p
+literal rule  (1 + p) + k        rule text p, its glyph 1, one glyph per fold
+              saving  k*p - p - k - 1
+back-pointer  5 + p + (k - 1)    pointer row 5, FIRST FOLD STAYS LITERAL, rest 1 each
+              saving  k*p - p - k - 4
+```
+
+The first occurrence cannot be replaced by a pointer to itself, so it must stay literal —
+and that single fact makes the difference **exactly 3 tokens, for every `p` and every
+`k`**. A back-pointer rule is never better than the literal rule the frontier already
+writes. The whole LZ77-style family is therefore closed on top of a literal-rule
+dictionary by arithmetic, and no arm was built.
+
+`bench/x89/probe2.ts` confirms the sign empirically over the 15 committed frontier wires:
+the literal form's upper bound is **+202** tokens and the back-pointer form's is **−38** —
+a loss, as the derivation requires.
+
+Prior art, cited honestly. **LTSC** (*Lossless Token Sequence Compression via
+Meta-Tokens*, [arXiv:2506.00307](https://arxiv.org/html/2506.00307v1), May 2025) publishes
+the compressibility condition `N·K > 1 + N + K` for a subsequence of `N` tokens occurring
+`K` non-overlapping times — algebraically the same inequality derived above, reached
+independently. LTSC describes itself as *"similar to LZ77"*, but its dictionary is
+**literal**: meta-token/subsequence pairs prepended inside `<Dict>` tags. The derivation
+says that is the right choice, and that a true `(offset, length)` reference would cost 3
+more tokens per rule. Two further honest notes on that paper, both from its own reviewers:
+it requires the vocabulary to be **augmented and the model fine-tuned** (`|M|` new tokens),
+with exact match falling 15.7 → 8.5 on Qwen2.5-Coder-0.5B; and the machine referee at
+[pith.science/paper/2506.00307](https://pith.science/paper/2506.00307) records that *"the
+lossless claim hinges on a pseudocode ambiguity in Algorithm 2"*. Nothing here needs
+fine-tuning, a system prompt, or a reader that trusts pseudocode. A practitioner account
+reaches the same arithmetic from the other side — **TokenSpan**
+([dev.to](https://dev.to/alexsanderhamir/tokenspan-rethinking-prompt-compression-with-aliases-and-dictionary-encoding-3a27),
+Aug 2025) prices a dictionary entry at 4 tokens and concludes *"you only start saving
+tokens once a phrase appears 5 or more times"*, reporting 8 019 → 7 138 tokens (11.0 %).
+
+### 4. ΑΝΤΙΓΡΑΦΟΝ — built, measured, refused 15/15, and the reason is a law
+
+**The gap that motivated it.** MERISMOS (X77) interns arbitrary repeated substrings *of the
+frontier wire*, which is the right target, but it generates candidates as **character**
+substrings of length `MIN_LEN=4..MAX_LEN=24` requiring `MIN_OCC=3` occurrences, capped at
+`MAX_DICT=30`. ANAMNESIS enumerates maximal repeats properly — a suffix automaton,
+MR-RePair (Furuya et al., *Algorithms* 13(4):103, 2020), ranked by `c·(L−1) − (L+1)`,
+which is the same pricing again — but it encodes the **source** as a frontier competitor,
+so it never sees the wire the frontier actually emits. Between them lies repetition that
+is token-aligned, longer than 24 characters, and occurring exactly twice.
+
+**The census said it was worth 202 tokens.** `bench/x89/probe2.ts` enumerates token-aligned
+spans of unbounded length over the 15 committed wires. 14 of 15 have payable spans:
+dpkg-l-full 79 (3.49 %), ls-la-usrbin 24, ls-l-real 21, find-listing 12, dpkg-l 10,
+openstack 10, findmnt 9, json-pkg 9, ps-aux-real 9, apt-real 8, npm-ls-all 5, code-ts 2,
+llm-answer 2, ls-real 2, kb-article 0.
+
+**The encoder said 0.** `bench/x89/antigraphon.ts` implements it properly — unbounded
+token-aligned spans, occurrence counts re-verified against the wire, ids absent from the
+wire, a measured hill-climb that keeps an entry only if the real token count of the whole
+message drops, byte-exact decode, CRC-32 of the rebuilt wire in the contract (the X88 G9
+lesson: a dictionary substitution is exactly the edit that stays well-formed when
+corrupted). Result: **applied 0/15, SAVE 0 tokens.**
+
+**Why, measured on the single best candidate in the corpus.** On dpkg-l-full that candidate
+is `"            э"` — twelve spaces and a pool glyph — `p = 2` tokens in isolation,
+`occ = 28`. The census charges `28 × 2 = 56` tokens for those folds. Their **marginal
+in-situ cost is 25 tokens**, 0.89 per occurrence. Substituting 28 id glyphs cannot cost
+fewer than 28 tokens, so the body grows (2 262 → 2 264) and the contract adds 17: real
+total 2 282, **real save −20** against an estimated +25.
+
+> **In-situ floor law.** A repeated span whose occurrences cost less than one token each
+> *in situ* can never be profitably interned, because an id character costs at least one
+> token per fold — before the rule text is paid for at all. Census pricing measures the
+> span in isolation, where it always costs ≥ 1 token per occurrence, and is therefore
+> structurally blind to the only cases that matter.
+
+The frontier wire is full of such spans precisely because a census finds them: the spans
+that repeat are the ones built from characters that already merge — space runs, glyph
+clusters. This is the dense-wire law that sank ΣΥΝΤΆΞΙΣ (§X88.6), now measured at the
+resolution of a single rule, and it explains MERISMOS's universal refusal **without
+appealing to its constants**: widening `MAX_LEN` to infinity and dropping `MIN_OCC` to 2
+buys nothing, because the material was never there. It also retro-prices the X39 honesty
+rule *"proxy raw gains ≠ wins"* at 2.2× on this rule.
+
+Two bookkeeping traps, recorded so nobody repeats them. (a) A census over token n-grams
+counts **alignments, not occurrences**: `"ab"+"c"` and `"a"+"bc"` both concatenate to
+`"abc"`, and one wire token decodes to the empty string. The first version of this probe
+reported 87 payable spans on ls-l-real where the true count, re-established with
+`indexOf`, is **0**. (b) `bench/x89/tape.ts` segmented the wire by newline and reported a
+14-token tape for ls-l-real; `chiron.ts:59-66` says the tape runs from `§` to the **first
+`¶` after it** and spans multiple lines, and the true figure is **607**. Its receipts were
+discarded.
+
+### 5. What the search budget is worth — the one change this section ships
+
+`bench/x89/phases.ts` measures the shipped encoder's own phases under `OMEGA_DET=1`
+instead of arguing about them, which is how the two previous speed hypotheses in §X88.10
+were falsified:
+
+```
+             base      stichomythia   prosphysis   stoicheion    TOTAL
+4 lanes     277 202 ms        3 ms     172 755 ms      250 ms   450 210 ms
+               61.6 %        0.0 %         38.4 %        0.1 %
+ls-l-real   159 594 ms        1 ms     158 172 ms      225 ms   317 992 ms
+```
+
+PROSPHYSIS costs as much as the frontier itself on the largest lane because it
+*"re-encodes the rewritten text through this same frontier"* — and that cost **is** the
+−82-token win, so it is not discardable. Discarded work is 12.9 % on apt-real (PROSPHYSIS
+refused after 14.1 s), 2.8 % unified-diff, 1.9 % code-ts, 0.1 % ls-l-real. STOICHEION
+costs 0.1 % and its continued refusal is free. The sub-encode redundancy inside the base
+was already removed by ENGRAMMA (X68), which memoises `daedalusEncode` on
+(codec, enc, options, text) and replays the counted work — because X67 measured that a
+result-only cache is **unsound**: a hit that skips the search but not the accounting hands
+its caller free budget, and DIASTEMA went 36.5 s → 49.9 s, *slower with the cache on*.
+
+What was left unmeasured is whether the two integer allowances **bind**. That they bind is
+established by the sweep below — reducing them changes the messages — and not by the
+percentage columns, which are coarse: `workLastEpochUsed()` and
+`chironLastEpochUsedUnits()` report the **last** epoch's spend, and the last epoch is often
+a small nested sub-encode whose own allowance is `chironBudgetFor(its own chars)`, so
+dividing it by the full lane's allowance is an indicator and not a ratio. Read that way the
+indicator still says something: CHIRON reports ≈100 % on nearly every lane (100.0–100.7 %)
+while the ARIADNE/DAEDALUS meter reports 19.9–64.6 %.
+`bench/x89/budget29.ts` then sweeps both, interleaved in one process, `OMEGA_DET=1`,
+`OMEGA_ENGRAM=0`, comparing the **complete message by SHA-256** rather than by token count
+— necessary, because df-real and df-h changed wire at an unchanged count:
+
+| setting | identical message | total time | speedup | per-lane speedup |
+|---|---|---|---|---|
+| default | 29/29 | 661 105 ms | 1.00× | — |
+| **0.5×** | **28/29** | 471 550 ms | **1.40×** | 1.10–2.68×, median 1.43× |
+| 0.25× | 18/29 | 282 080 ms | 2.34× | 0.90–6.74× |
+
+0.25× is not available at any price: it changes 11 lanes, several for the worse
+(psql-output 244 → 268, ps-aux-real 1042 → 1066, apt-real 850 → 876, ls-l-real
+1476 → 1493). 0.5× breaks exactly one lane — **the largest**, ls-l-real at 10 692 chars,
+1476 → 1499 — while every input up to 6 751 chars was byte-identical.
+
+So the deficiency is a function of size, and the shipped change is a **size gate bracketed
+by measurement** rather than a free parameter: halve both allowances for inputs at or below
+`X89_HALF_BUDGET_MAX_CHARS = 8_000`, keep the full allowance above it. The threshold sits
+between the largest input verified sufficient (6 751) and the smallest verified
+insufficient (10 692). Because the gate selects, per lane, between two configurations that
+were both measured, the aggregate is arithmetic on the receipt: **661 105 ms → 488 154 ms,
+1.35×, message identical on 29/29.**
+
+**Why this cannot break fidelity.** Byte-exact decode held 29/29 at *every* setting
+including 0.25×. A budget bounds the **search**, not the **verification**: `consider()`
+throws unless `candidate.decoded === text`, and every arm re-checks its own round trip, so
+a truncated search can only produce a larger message or a refusal. The failure mode of a
+threshold set too low is tokens, not correctness — which is also why the change is stated
+as a recalibration with a measured bracket, and why the explicit
+`OMEGA_WORK_BUDGET` / `OMEGA_CHIRON_BUDGET` overrides are applied **before** the gate and
+are never scaled, so a sweep still sweeps the number it asks for.
+
+**Raising the binding meter buys nothing** (`bench/x89/rebalance.ts`, 7 lanes, same
+discipline: interleaved, det, memo off, SHA-256 of the complete message). Multiplying the
+CHIRON allowance by 2, 4 and 8 — and halving the work allowance while quadrupling chiron —
+leaves every message **sha-identical on 7/7 lanes** and the 7-lane total unchanged at
+1 455 tokens, while `w.5c4` runs 39 169 ms → 22 913 ms, **1.71×**, byte-exact throughout.
+So the search converges below the allowance on these lanes and the extra units are spent
+without changing the answer; the 1.71× is a lead for a further recalibration, verified on 7
+lanes only and therefore **not shipped**. One caveat recorded so it is not mistaken for a
+result: the first, buggy version of this probe — in which the multipliers compounded
+because `workBudgetFor` reads the very env var the probe sets — produced `prices.csv`
+**130 against 133**. It is not reproducible under the corrected ladder (133 at every
+setting), and it arrived with markdown-table 176 → 182 and unified-diff 419 → 445, so the
+3-lane sum was worse. A starved budget can land a non-monotone hill-climb in a better basin
+by luck; that is not a policy.
+
+This is X58's finding generalised from one point to the whole knee. X58 recorded that
+*"DAEDALUS on ewf-standings spends 113M units yet a 5M cap yields the byte-identical wire
+in 18.2s vs 39.6s"* and then set both defaults with generous headroom over that single
+knee. X89 measures all 29 knees at once and finds the headroom is 2× on everything except
+the largest lane. Independent corroboration of the shape: `jasonyandell/mk5-main#173`
+budgets its players in work units instead of milliseconds and reports **"3.0x faster
+drain, identical outputs"**.
+
+**Not claimed.** The 1.35× is a deterministic-configuration figure. In normal (non-det)
+mode no identity claim is possible *in principle*, because §2 shows the encoder is not a
+pure function of its input there — so the gate was verified in the only configuration where
+verification means anything, which is also the configuration every receipt in this
+repository is produced in.
+
+### 6. Leaders, recomputed against the stack that ships
+
+`bench/x89/leaders.ts` joins two committed receipts — `bench/x88/receipts/leaders.json` for
+the brotli-q11 floor and category, `bench/x89/receipts/front3.json` for the shipped count —
+so it costs no frontier call and cannot drift. 34 lanes, generalised by category:
+
+| category | lanes | raw | gate | **shipped** | ratio | floor ÷ shipped | leaders |
+|---|---|---|---|---|---|---|---|
+| OPS LISTING | 13 | 30 065 | 9 595 | **9 513** | 0.316 | 0.765 | synkrisis 12, diastema 1 |
+| OPS TABLE | 11 | 4 135 | 1 726 | **1 726** | 0.417 | 0.737 | synkrisis 7, akolouthia2 3, metron 1 |
+| PROSE | 4 | 3 117 | 2 646 | **2 646** | 0.849 | 0.956 | synkrisis 4 |
+| CODE / MARKUP | 3 | 3 152 | 2 069 | **2 069** | 0.656 | 0.835 | synkrisis 3 |
+| DATA | 2 | 1 095 | 296 | **234** | 0.214 | 0.893 | diastema 1, stichomythia 1 |
+| OTHER | 1 | 4 277 | 2 262 | **2 262** | 0.529 | 0.839 | synkrisis 1 |
+| **ALL** | **34** | **45 841** | **18 594** | **18 450** | **0.402** | **0.808** | |
+
+Yield is still ordered by how *generated* the text is: PROSE 0.849 against DATA 0.214.
+Two refinements to the §X88.9 reading fall out of using the shipped column.
+
+**The readability-price law has exactly two exceptions.** §X88.9 states that
+`floor ÷ stack < 1.00` on every lane, so the readable tier never beats brotli-q11 at
+14.8 bits/token. Against the shipped column that is false on two lanes: **lsblk 1.017**
+(stack 60, floor 61) and **free-m 1.000** (76 and 76). Both are the information-saturated
+lanes where `F == raw` and the stack emits the source nearly verbatim — on an input that
+small, brotli's own container overhead exceeds anything a dictionary can save. The law
+holds on 32/34, and the exceptions are a statement about tiny inputs, not about
+readability.
+
+**STICHOMYTHIA takes cue-sheet to 98 % of the entropy floor in a readable wire.** At the
+gate cue-sheet was the corpus's most extreme floor ratio (0.61); at the shipped 101 tokens
+its `floor ÷ shipped` is **0.98** — within 2 % of brotli-q11 while remaining a wire a model
+can read with no system prompt. Columns-as-programs (`1+r`, `00:00:02@+3s`, `list*`) is the
+only mechanism in the repository that has closed the readability price almost completely,
+and it does so on a lane whose redundancy is *generative* rather than *repetitive*: there
+is nothing for a dictionary to intern, which is why §4's class finds nothing there.
+
+### 7. Frontier-lab mathematics, surveyed honestly — and one transfer that matters here
+
+The task asks whether the frontier laboratories are proving mathematics, and the honest
+answer in late 2026 is yes, with a documented gap between *checked* and *new*. The
+strongest cases: OpenAI's May 2026 disproof of the 1946 unit-distance conjecture (Erdős
+#281), Lean-verified, digested the same day by Alon, Bloom, Gowers, Litt and Sawin, with
+Tao calling it *"perhaps the most unambiguous instance"* — while noting that a prior
+solution later surfaced and the AI's proof was merely *"rather different"*; the July 2026
+counterexample to the 1939 Jacobian conjecture in dimension 3, Levent Alpöge with Claude
+Fable 5, *"a single map anyone can check"*; OpenAI's August 2026 253-page *Ten Advances*,
+each result shipped with a Lean 4 certificate and no unproved steps, in
+`openai/ten-proofs`; Anthropic's 10 August 2026 bound raising the proportion of Riemann
+zeta zeros on the critical line from 41.6 % to 67.2 % — a real bound and **not** the
+Riemann Hypothesis; DeepMind's AlphaProof Nexus, 9 of 353 open Erdős problems and 44 of
+492 OEIS conjectures, peer-reviewed in *Science* on 8 October 2026; Axiom Math's
+self-reported IMO 2026 42/42; and AlphaEvolve's matrix-multiplication exponent below
+2.371177, open since 1969.
+
+Against that, the audits. An independent check found Erdős #846's Lean proof valid but
+already implied by Reiher–Rödl–Sales, so under a stricter definition Nexus's total is 8,
+not 9. For #125 and #741(i) the word *"density"* was **redefined after** the agent found
+proofs using a different meaning. Of 200 graded AI answers to Erdős problems, 137 (68.5 %)
+were *"fundamentally flawed"*, 63 technically correct, and only 13 answered the problem
+Erdős actually meant — of those 13, eight were already in the literature. Will Sawin's
+improvement to the unit-distance result is real and *"only meaningful at 10^2000000
+points"*. And Bloom's database lists 1 221 problems with 586 (48 %) solved, so the
+headline rate is partly a catalogue maturing.
+
+The transfer that belongs in a codec document is
+[arXiv:2608.28997](https://arxiv.org/html/2608.28997v1), *Verification abundance,
+adjudication scarcity* (29 Aug 2026), which measures the August corpus rather than
+opining about it: **20.6 MB of kernel-checked Lean against 55.6 KB of statements requiring
+human audit, a ratio of 379:1**, and those statements introduce **218 bespoke
+definitions** rather than relying on the community-vetted library. Its conclusion is that
+*"the reader is not asked to check that a theorem correctly composes notions the community
+has already vetted … the reader is asked to check a theorem **and** to validate a private
+dictionary of 218 terms."*
+
+That is this repository's structure exactly, and it is why the verification standard here
+is what it is. A wire is a private dictionary (the glyph tape) plus a body. The mechanical
+check is abundant and free — byte-exact round trip, CRC-32 over the rebuilt text, a cold
+CPython reader. None of it discharges the adjudication burden, which is whether a reader
+can validate the private dictionary. §X88.8 is the local instance: ΣΥΝΤΆΞΙΣ was 75/75
+byte-exact with zero wrong round trips while **244 of 427 mutations decoded silently
+wrong**, because an edited column value is still well-formed and every structural gate
+passed. Machine verification did not fail; it was answering a different question. The
+same distinction, and the same fix: make the dictionary checkable (G9) and then red-team
+it.
+
+### 8. What is not claimed
+
+- **No new arm ships.** ΑΝΤΙΓΡΑΦΟΝ is in `bench/x89/` as a probe with a refusal receipt,
+  not in `src/lib/omega/` and not in the registry. Registering an arm that refuses 15/15
+  would add a 251st entry and zero tokens.
+- **No mechanism improves the representation as seen by the parent frontier this turn.**
+  That was the deliverable and it is unmet. The two candidates reached measurement and
+  refused; the third was closed by a proof. The in-situ floor law in §4 is the reason, and
+  it is a reason to stop looking in this direction rather than a reason to keep trying.
+- **1.35× is not 2.34×.** The faster setting exists and is measured; it is not shipped
+  because it changes 11 of 29 messages. Reporting the sound number and naming the
+  unsound one is the whole claim.
+- **The speed figure is det-only**, and the reason is §2, not convenience.
+- **ls-l-real's `parent` label is wrong** in every receipt that carries it (§1). It was not
+  patched, because changing `parentCodec` would alter the committed receipts' schema and
+  every diff against runs A–E; it is documented instead.
+
+### 9. Record
+
+`src/lib/omega/workmeter.ts` (exports `X89_HALF_BUDGET_MAX_CHARS`, `X89_BUDGET_FACTOR`;
+`workBudgetFor` and `chironBudgetFor` now apply the size gate after the env overrides);
+probes in `bench/x89/` (`front2.ts`, `front3.ts`, `tape.ts`, `probe1.ts`, `probe2.ts`,
+`antigraphon.ts`, `phases.ts`, `budget.ts`, `budget29.ts`, `rebalance.ts`, `leaders.ts`);
+receipts in `bench/x89/receipts/` (`front2.{json,log}`, `front3.{json,log}`,
+`probe2.json`, `antigraphon.json`, `phases.{json,log}`, `budget.json`,
+`budget29.{json,log}`, `leaders-shipped.json`); frontier confirmation
+`bench/x86/receipts/frontier-runF.{json,log}` via `bench/x86/run-front-f.sh`, diffed lane
+for lane against run E — **TOTAL 12 639, exact 29/29, 0 lanes differing, 448 498 ms
+against run E's 608 693 ms, the sixth consecutive confirmation**;
+`bench/x89/receipts/rebalance.{json,log}`, `bench/x86/receipts/frontier-runE.json` (gate TOTAL **12 639**) and
+`bench/x89/receipts/front3.json` (shipped TOTAL **12 495**, exact 29/29, no lane worse),
+[`docs/codec-abbreviations.md`](codec-abbreviations.md) §X89.

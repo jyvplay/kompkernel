@@ -30,3 +30,4 @@ bench/x87/*.mjs
 # 1 MB generated artifact for the X87 cold reader; rebuild with bench/x87/emitcold.ts
 bench/x87/receipts/cold/alphabet.tsv
 bench/x88/*.mjs
+bench/x89/*.mjs
