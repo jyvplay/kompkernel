@@ -6133,6 +6133,31 @@ is therefore reported as *deferred* to `aitherDecode`, where the 1856-mutation f
 it at 1622/1622 refused and 0 silent corruptions. The honest split is: **the envelope is
 verified in two languages, the CM decode in one.**
 
+### 5b. Frontier confirmation
+
+Adding a registry arm must not move the frontier, and "must not" is not an argument.
+`bench/x86/front.ts` was re-run over the same 29 lanes with `aither.ts` present and
+the arm registered (`bench/x86/receipts/frontier-runC.json`):
+
+```
+FRONTIER 29 TOTAL 12639 exact 29/29
+X80 total 12639 -> X86 total 12639  lanes differing: 0
+FRONTIER CONFIRMED: identical to the X80 configuration, lane for lane.
+```
+
+That is the third consecutive confirmation of the same baseline this session — run A
+before the `ariadne.ts` key-construction patch, run B after it, run C after ΑΙΘΗΡ —
+all 12639, all 29/29 exact, all 0 lanes differing. The base stack is stable under
+arm additions, which is the weaker-but-true form of X79's point recorded in
+`docs/codec-abbreviations.md`: `tagstackFrontier` is the *base* stack, so a registry
+codec cannot move it, and 12639 confirms the base and nothing else.
+
+Wall times across A, B and C are **not** comparable and are not quoted as a result.
+The sandbox is suspended across turn boundaries and its speed drifts (run C's
+`ls-l-real` reads 424 319 ms against run B's 391 697 ms and run A's compute of
+~200 s, with an identical patch surface). Any speed claim in this repo needs one
+process, `OMEGA_NO_MEMO=1`, and interleaved A/B/A/B rounds.
+
 ### 6. What is not claimed
 
 * **No new compression mechanism.** `cm.ts`, the SHFP phrase prepass, the Aleph typed
@@ -6147,10 +6172,11 @@ verified in two languages, the CM decode in one.**
   be *used* by the model, the readable tier is the only one that applies. Where
   content is being stored, relayed, cached or handed to a program that will restore
   it, the entropy tier is 28.45 % cheaper and now refuses damage instead of hiding it.
-* **The frontier total is unchanged.** ΑΙΘΗΡ is a registry arm in `family: 'exact'`;
-  it is not a frontier parent, and the 29-lane frontier receipt still reads 12639.
-  Promoting it would invalidate every comparison in this document, which is a decision
-  for whoever owns the baseline, not a side effect of adding an arm.
+* **The frontier total is unchanged, and that is measured, not assumed.** ΑΙΘΗΡ is a
+  registry arm in `family: 'exact'`; it is not a frontier parent, and run C of the
+  29-lane frontier with the arm registered reads **12639, exact 29/29, 0 lanes
+  differing** (§5b). Promoting it would invalidate every comparison in this document,
+  which is a decision for whoever owns the baseline, not a side effect of adding an arm.
 * **Speed is not claimed.** ΑΙΘΗΡ runs the full Ω-Ξ portfolio plus two extra
   compressions for G2 and G4. On `ls-l-real` that is seconds where the frontier takes
   minutes, but no interleaved A/B was run, and this document has already been burned

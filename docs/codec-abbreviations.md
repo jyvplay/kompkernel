@@ -4609,6 +4609,15 @@ six body-flip probes four were caught by framing accident and two were not, so t
 reported as **deferred** to `aitherDecode` and to the fuzz above. The honest split: the
 envelope is verified in two languages, the CM decode in one.
 
+**Frontier confirmation.** Adding the arm must not move the frontier, and "must not" is
+not an argument: `bench/x86/front.ts` re-run over the same 29 lanes with `aither.ts` present
+gives **FRONTIER 29 TOTAL 12639 exact 29/29, lanes differing: 0**
+(`bench/x86/receipts/frontier-runC.json`) — the third consecutive confirmation of the same
+baseline this session (A before the `ariadne.ts` key patch, B after it, C after ΑΙΘΗΡ). Wall
+times across A/B/C are **not** comparable and no speed claim is made from them: the sandbox is
+suspended across turn boundaries and drifts (C's `ls-l-real` 424 319 ms vs B's 391 697 ms on an
+identical patch surface).
+
 **Greedy?** **No.** The portfolio is exhaustive over a fixed candidate set and ships the
 smallest; the restriction is a set membership test; the checksum is two atoms in a fixed
 place. Nothing is searched, nothing is ranked, and G3's probe is a single deliberate
