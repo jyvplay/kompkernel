@@ -1,0 +1,15 @@
+df-h.txt                 raw=  570 F=  171 voteK=[4,5] bounds=[17,23,29,35]
+   A(histogram)  cols=6 wire=97 Fwire=97(1) Fmsg=147 d=-24 EE-FAIL
+   B(+gap vote)  cols=5 wire=93 Fwire=93(1) Fmsg=134 d=-37 EE-FAIL
+kubectl-get-pods.txt     raw= 1006 F=  326 voteK=[6,7] bounds=[37,45,57,68,76,92]
+   A(histogram)  cols=7 wire=414 Fwire=233(0.563) Fmsg=304 d=-22 EE-FAIL
+   B(+gap vote)  cols=7 wire=414 Fwire=233(0.563) Fmsg=304 d=-22 EE-FAIL
+dpkg-l.txt               raw= 1000 F=  673 voteK=[4,5] bounds=[4,34,65,78]
+   A(histogram)  no plan
+   B(+gap vote)  cols=5 wire=800 Fwire=663(0.829) Fmsg=713 d=40 EE-FAIL
+findmnt.txt              raw=  787 F=  444 voteK=[3,4] bounds=[56,74,86]
+   A(histogram)  cols=5 wire=722 Fwire=451(0.625) Fmsg=501 d=57 EE-FAIL
+   B(+gap vote)  cols=5 wire=722 Fwire=451(0.625) Fmsg=501 d=57 EE-FAIL
+psql-output.txt          raw=  675 F=  244 voteK=[2,3] bounds=[20,54]
+   A(histogram)  cols=11 wire=300 Fwire=229(0.763) Fmsg=299 d=55 EE-FAIL
+   B(+gap vote)  cols=11 wire=300 Fwire=229(0.763) Fmsg=299 d=55 EE-FAIL

@@ -1,0 +1,121 @@
+# source: ls -la /usr/bin (real, captured this turn)
+total 160172
+drwxr-xr-x  2 root root      12288 Jun 15 16:59 .
+drwxr-xr-x 12 root root       4096 Jun 15 16:59 ..
+-rwxr-xr-x  1 root root      68496 Sep 20  2022 [
+-rwxr-xr-x  1 root root      31040 Nov 21  2024 addpart
+lrwxrwxrwx  1 root root         26 Jan 14  2023 addr2line -> x86_64-linux-gnu-addr2line
+lrwxrwxrwx  1 root root         25 May 27 20:36 animate -> /etc/alternatives/animate
+lrwxrwxrwx  1 root root         29 May 27 20:36 animate-im6 -> /etc/alternatives/animate-im6
+-rwxr-xr-x  1 root root      14544 May 27 20:36 animate-im6.q16
+-rwxr-xr-x  1 root root      18752 May 25  2023 apt
+-rwxr-xr-x  1 root root      88456 May 25  2023 apt-cache
+-rwxr-xr-x  1 root root      22920 May 25  2023 apt-cdrom
+-rwxr-xr-x  1 root root      26944 May 25  2023 apt-config
+-rwxr-xr-x  1 root root      51592 May 25  2023 apt-get
+-rwxr-xr-x  1 root root      27972 May 25  2023 apt-key
+-rwxr-xr-x  1 root root      59784 May 25  2023 apt-mark
+lrwxrwxrwx  1 root root         19 Jan 14  2023 ar -> x86_64-linux-gnu-ar
+-rwxr-xr-x  1 root root      43888 Sep 20  2022 arch
+lrwxrwxrwx  1 root root         19 Jan 14  2023 as -> x86_64-linux-gnu-as
+lrwxrwxrwx  1 root root         21 Jun 17  2022 awk -> /etc/alternatives/awk
+-rwxr-xr-x  1 root root      60400 Sep 20  2022 b2sum
+-rwxr-xr-x  1 root root      48016 Sep 20  2022 base32
+-rwxr-xr-x  1 root root      48016 Sep 20  2022 base64
+-rwxr-xr-x  1 root root      43856 Sep 20  2022 basename
+-rwxr-xr-x  1 root root      56208 Sep 20  2022 basenc
+-rwxr-xr-x  1 root root    1265648 May  7  2026 bash
+-rwxr-xr-x  1 root root       6865 May  7  2026 bashbug
+-rwxr-xr-x  3 root root      39224 Sep 19  2022 bunzip2
+-rwxr-xr-x  1 root root      92672 Apr 27  2026 busctl
+-rwxr-xr-x  1 root root    1210176 Jan  1  1970 busybox
+-rwxr-xr-x  3 root root      39224 Sep 19  2022 bzcat
+lrwxrwxrwx  1 root root          6 Sep 19  2022 bzcmp -> bzdiff
+-rwxr-xr-x  1 root root       2225 Sep 19  2022 bzdiff
+lrwxrwxrwx  1 root root          6 Sep 19  2022 bzegrep -> bzgrep
+-rwxr-xr-x  1 root root       4893 Nov 27  2021 bzexe
+lrwxrwxrwx  1 root root          6 Sep 19  2022 bzfgrep -> bzgrep
+-rwxr-xr-x  1 root root       3775 Sep 19  2022 bzgrep
+-rwxr-xr-x  3 root root      39224 Sep 19  2022 bzip2
+-rwxr-xr-x  1 root root      14568 Sep 19  2022 bzip2recover
+lrwxrwxrwx  1 root root          6 Sep 19  2022 bzless -> bzmore
+-rwxr-xr-x  1 root root       1297 Sep 19  2022 bzmore
+lrwxrwxrwx  1 root root         21 Jan  8  2023 c++ -> /etc/alternatives/c++
+lrwxrwxrwx  1 root root         24 Jan 14  2023 c++filt -> x86_64-linux-gnu-c++filt
+lrwxrwxrwx  1 root root         21 Nov 17  2020 c89 -> /etc/alternatives/c89
+-rwxr-xr-x  1 root root        428 Nov 17  2020 c89-gcc
+lrwxrwxrwx  1 root root         21 Nov 17  2020 c99 -> /etc/alternatives/c99
+-rwxr-xr-x  1 root root        454 Nov 17  2020 c99-gcc
+-rwxr-xr-x  1 root root       6925 Jun  6 19:56 c_rehash
+lrwxrwxrwx  1 root root          3 May  7  2023 captoinfo -> tic
+-rwxr-xr-x  1 root root      44016 Sep 20  2022 cat
+lrwxrwxrwx  1 root root         20 Jan  8  2023 cc -> /etc/alternatives/cc
+-rwxr-sr-x  1 root shadow    80376 Dec 14  2025 chage
+-rwxr-xr-x  1 root root      14584 Jun  6  2025 chattr
+-rwxr-xr-x  1 root root      68720 Sep 20  2022 chcon
+-rwsr-xr-x  1 root root      62672 Dec 14  2025 chfn
+-rwxr-xr-x  1 root root      68656 Sep 20  2022 chgrp
+-rwxr-xr-x  1 root root      64496 Sep 20  2022 chmod
+-rwxr-xr-x  1 root root      55616 Nov 21  2024 choom
+-rwxr-xr-x  1 root root      72752 Sep 20  2022 chown
+-rwxr-xr-x  1 root root     109672 Feb 17  2026 chronyc
+-rwxr-xr-x  1 root root      67904 Nov 21  2024 chrt
+-rwsr-xr-x  1 root root      52880 Dec 14  2025 chsh
+-rwxr-xr-x  1 root root     142384 Sep 20  2022 cksum
+-rwxr-xr-x  1 root root      14584 May  7  2023 clear
+-rwxr-xr-x  1 root root      14488 May  7  2026 clear_console
+-rwxr-xr-x  1 root root      52176 Feb  3  2023 cmp
+-rwxr-xr-x  1 root root      48048 Sep 20  2022 comm
+lrwxrwxrwx  1 root root         25 May 27 20:36 compare -> /etc/alternatives/compare
+lrwxrwxrwx  1 root root         29 May 27 20:36 compare-im6 -> /etc/alternatives/compare-im6
+-rwxr-xr-x  1 root root      14576 May 27 20:36 compare-im6.q16
+lrwxrwxrwx  1 root root         27 May 27 20:36 composite -> /etc/alternatives/composite
+lrwxrwxrwx  1 root root         31 May 27 20:36 composite-im6 -> /etc/alternatives/composite-im6
+-rwxr-xr-x  1 root root      14544 May 27 20:36 composite-im6.q16
+lrwxrwxrwx  1 root root         25 May 27 20:36 conjure -> /etc/alternatives/conjure
+lrwxrwxrwx  1 root root         29 May 27 20:36 conjure-im6 -> /etc/alternatives/conjure-im6
+-rwxr-xr-x  1 root root      14544 May 27 20:36 conjure-im6.q16
+lrwxrwxrwx  1 root root         25 May 27 20:36 convert -> /etc/alternatives/convert
+lrwxrwxrwx  1 root root         29 May 27 20:36 convert-im6 -> /etc/alternatives/convert-im6
+-rwxr-xr-x  1 root root      14544 May 27 20:36 convert-im6.q16
+-rwxr-xr-x  1 root root      15375 Aug 29  2025 corelist
+-rwxr-xr-x  1 root root     151152 Sep 20  2022 cp
+-rwxr-xr-x  1 root root       8360 Aug 29  2025 cpan
+-rwxr-xr-x  1 root root       8381 Aug 29  2025 cpan5.36-x86_64-linux-gnu
+lrwxrwxrwx  1 root root          6 Jan  8  2023 cpp -> cpp-12
+lrwxrwxrwx  1 root root         23 Apr  7  2025 cpp-12 -> x86_64-linux-gnu-cpp-12
+-rwxr-xr-x  1 root root     122032 Sep 20  2022 csplit
+lrwxrwxrwx  1 root root          6 May 22  2023 ctstat -> lnstat
+-rwxr-xr-x  1 root root     280800 Jul 19  2025 curl
+-rwxr-xr-x  1 root root      48112 Sep 20  2022 cut
+-rwxr-xr-x  1 root root     345280 Apr 11  2026 cvtsudoers
+-rwxr-xr-x  1 root root     125640 Jan  5  2023 dash
+-rwxr-xr-x  1 root root     121904 Sep 20  2022 date
+-rwxr-xr-x  1 root root      89240 Sep 20  2022 dd
+-rwxr-xr-x  1 root root      24358 Jul 13  2022 deb-systemd-helper
+-rwxr-xr-x  1 root root       6241 Aug 20  2025 deb-systemd-invoke
+-rwxr-xr-x  1 root root       2859 Jan  8  2023 debconf
+-rwxr-xr-x  1 root root      11541 Jan  8  2023 debconf-apt-progress
+-rwxr-xr-x  1 root root        608 Jan  8  2023 debconf-communicate
+-rwxr-xr-x  1 root root       1719 Jan  8  2023 debconf-copydb
+-rwxr-xr-x  1 root root        647 Jan  8  2023 debconf-escape
+-rwxr-xr-x  1 root root       2995 Jan  8  2023 debconf-set-selections
+-rwxr-xr-x  1 root root       1827 Jan  8  2023 debconf-show
+-rwxr-xr-x  1 root root      31040 Nov 21  2024 delpart
+-rwxr-xr-x  1 root root     102200 Sep 20  2022 df
+-rwxr-xr-x  1 root root     155216 Feb  3  2023 diff
+-rwxr-xr-x  1 root root      68752 Feb  3  2023 diff3
+-rwxr-xr-x  1 root root     151344 Sep 20  2022 dir
+-rwxr-xr-x  1 root root      52144 Sep 20  2022 dircolors
+-rwxr-xr-x  1 root root      39760 Sep 20  2022 dirname
+lrwxrwxrwx  1 root root         25 May 27 20:36 display -> /etc/alternatives/display
+lrwxrwxrwx  1 root root         29 May 27 20:36 display-im6 -> /etc/alternatives/display-im6
+-rwxr-xr-x  1 root root      14544 May 27 20:36 display-im6.q16
+-rwxr-xr-x  1 root root      88656 Nov 21  2024 dmesg
+lrwxrwxrwx  1 root root          8 Dec 19  2022 dnsdomainname -> hostname
+lrwxrwxrwx  1 root root          8 Dec 19  2022 domainname -> hostname
+-rwxr-xr-x  1 root root     318096 Mar  7  2026 dpkg
+-rwxr-xr-x  1 root root      15202 Mar  7  2026 dpkg-architecture
+-rwxr-xr-x  1 root root       8335 Mar  7  2026 dpkg-buildflags
+-rwxr-xr-x  1 root root      33436 Mar  7  2026 dpkg-buildpackage
+-rwxr-xr-x  1 root root       7624 Mar  7  2026 dpkg-checkbuilddeps

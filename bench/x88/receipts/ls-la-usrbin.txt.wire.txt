@@ -1,0 +1,11 @@
+Before ¶ k=v. expand repeatedly; print only.
+§Е
+-rөr-xВwxөөо  со1І rootСсІІлЕВСәл      РІІ      Һ-rВсРУlrwxrwxrwxӨУС         а
+Өйл       ял     у20іо202т2ю Sep уітҠ
+УС          е Mayр27же р у:36Щ Janоз3иізїЩ8ид19ү дітД SepүгЩ8и debconfЂ -> /etc/alternativesшЂ/ме 25и aptко7в6пківӷ Marків dpkgЛ Sepү bzН86_64-linux-gnuҽ -> xНЫ Nov 21і4ъ 17ін cК Novъ0ны Jan 14иӯ-imвқ-imв.q16ц5щ chѓ Dec 14іцщё Aug 29іцџ Jun 15 16:59эrep -> bzgrepҳә145ћӯҳ44жИЕВозР39224ьа25жҷа29жұл        Мә48016ю baseќ FebозиАД bzipтПа21ђЂ/conjureЮҠ8 DecүчЕwsөөсРОҠв¶# source: ls -la /usr/bin (real, captured this turn)
+total 160172
+drВотР12288џ .
+drВ 12ІІ       409вџ ..
+Һ68496ю [
+Һ31040Ы addpartа26ы addrтlineҽ-addrтlineь animateшanimateҷ animateӯшanimateћ animateқә18752мә88456м-cacheә229ум-cdromә26944м-configә51592м-getә27972м-keyә59784м-markады arҽ-arә43888ю archады asҽ-asП Junът awkшawkә60400ю bтsumМ32М64ә43856ю basenameә56208ю basencл    1265648еп bashй686цеп bashbugИД bunzipтә92672 Apr рів busctlл    121017вЩ1о1970 busyboxИЛcatОЛcmp -> bzdiffй222цД bzdiffОД bzegэй489з Nov рі1 bzexeОЛfgэй377цЛgrepИАҳ68АrecoverОЛless -> bzmoreй1297ЛmoreПїн++Ђ/c++
+Ө24ын++filtҽ-c++filtПК89Ђ/c89ұ428К89-gccПК99Ђ/c99ұ454К99-gccй692ц Junов д:56н_rehashҠзеки captoinfo -> ticә44016ю catауї ccшccЕwxr-sөсІ shadow    80376ѓageҳ84 Junовіцщattrә687ующconч62672ѓfnә68656ющgrpә64496ю chmodә55616Ы choomә72752ющownя109672 Febъв chronycә67904Ыщrtч52880ѓshя142384юнksumҳ84еки clearә14488еп clear_consoleә52176ќ cmpә48048ю commь compareшcompareҷ compareӯшcompareӯҳ76ж compareқарж compositeЂ/compositeа31ж compositeӯЂ/compositeћ compositeқь conjureђҷ conjureӯђћ conjureқь convertшconvertҷ convertӯшconvertћ convertқә15375ё corelistя151152ю cpй8360ёнpanй8381ёнpanц.36-xНОї cpp -> cpp-12а23 Aprкіц cpp-12ҽ-cpp-12я122032юнsplitОе 22и ctstat -> lnstatя280800 Jul діц curlә48112ю cutя345280 Apr 11ів cvtsudoersя125640Щци dashя121904ю dateә89240ю ddә24358 Jul 13іт deb-systemd-helperй6241 Aug уіц deb-systemd-invokeй2859гә11541г-apt-progressұ608г-communicateй1719г-copydbұ647г-escapeй299цг-set-selectionsй1827г-showә31040Ы delpartя102200ю dfя155216ќ diffә68752ќ diffзя151344ю dirә52144ю dircolorsә39760ю dirnameь displayЂ/displayҷ displayӯЂ/displayћ displayқә88656Ы dmesgЮ dnsdomainname -> hostnameЮ domainname -> hostnameя318096ӷә15202ӷ-architectureй833цӷ-buildflagsә33436ӷ-buildpackageй7624ӷ-checkbuilddeps

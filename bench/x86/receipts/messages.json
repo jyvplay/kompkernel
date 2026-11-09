@@ -1,0 +1,386 @@
+{
+ "rows": [
+  {
+   "lane": "df-h",
+   "plan": true,
+   "cols": 5,
+   "rows": 18,
+   "literals": 2,
+   "bounds": [
+    17,
+    23,
+    29,
+    35
+   ],
+   "support": [
+    18,
+    12,
+    12,
+    18
+   ],
+   "k": [
+    4,
+    5
+   ],
+   "msgChars": 296,
+   "srcChars": 939,
+   "msg": "bench/x86/receipts/msg/df-h.msg.txt"
+  },
+  {
+   "lane": "kubectl-get-pods",
+   "plan": true,
+   "cols": 7,
+   "rows": 22,
+   "literals": 2,
+   "bounds": [
+    37,
+    45,
+    57,
+    68,
+    76,
+    92
+   ],
+   "support": [
+    23,
+    23,
+    23,
+    23,
+    23,
+    23
+   ],
+   "k": [
+    6,
+    7
+   ],
+   "msgChars": 1029,
+   "srcChars": 2649,
+   "msg": "bench/x86/receipts/msg/kubectl-get-pods.msg.txt"
+  },
+  {
+   "lane": "dpkg-l",
+   "plan": true,
+   "cols": 5,
+   "rows": 36,
+   "literals": 6,
+   "bounds": [
+    4,
+    34,
+    65,
+    78
+   ],
+   "support": [
+    35,
+    36,
+    36,
+    35
+   ],
+   "k": [
+    4,
+    5
+   ],
+   "msgChars": 2622,
+   "srcChars": 4459,
+   "msg": "bench/x86/receipts/msg/dpkg-l.msg.txt"
+  },
+  {
+   "lane": "findmnt",
+   "plan": true,
+   "cols": 5,
+   "rows": 18,
+   "literals": 10,
+   "bounds": [
+    56,
+    74,
+    86
+   ],
+   "support": [
+    25,
+    25,
+    25
+   ],
+   "k": [
+    3,
+    4
+   ],
+   "msgChars": 2346,
+   "srcChars": 3215,
+   "msg": "bench/x86/receipts/msg/findmnt.msg.txt"
+  },
+  {
+   "lane": "psql-output",
+   "plan": true,
+   "cols": 11,
+   "rows": 24,
+   "literals": 6,
+   "bounds": [
+    20,
+    54
+   ],
+   "support": [
+    25,
+    25
+   ],
+   "k": [
+    2,
+    3
+   ],
+   "msgChars": 883,
+   "srcChars": 1578,
+   "msg": "bench/x86/receipts/msg/psql-output.msg.txt"
+  },
+  {
+   "lane": "ps-aux-real",
+   "plan": true,
+   "cols": 11,
+   "rows": 57,
+   "literals": 5,
+   "bounds": [
+    18,
+    23,
+    38,
+    49,
+    54,
+    62
+   ],
+   "support": [
+    59,
+    58,
+    37,
+    60,
+    58,
+    59
+   ],
+   "k": [
+    6,
+    7,
+    9
+   ],
+   "msgChars": 3547,
+   "srcChars": 6590,
+   "msg": "bench/x86/receipts/msg/ps-aux-real.msg.txt"
+  },
+  {
+   "lane": "ls-l-real",
+   "plan": true,
+   "cols": 9,
+   "rows": 149,
+   "literals": 3,
+   "bounds": [
+    12,
+    41
+   ],
+   "support": [
+    149,
+    108
+   ],
+   "k": [
+    2,
+    3,
+    4
+   ],
+   "msgChars": 5699,
+   "srcChars": 10692,
+   "msg": "bench/x86/receipts/msg/ls-l-real.msg.txt"
+  },
+  {
+   "lane": "dpkg-l-full",
+   "plan": true,
+   "cols": 5,
+   "rows": 136,
+   "literals": 6,
+   "bounds": [
+    4,
+    34,
+    65,
+    78
+   ],
+   "support": [
+    135,
+    136,
+    136,
+    135
+   ],
+   "k": [
+    4,
+    5
+   ],
+   "msgChars": 9771,
+   "srcChars": 16591,
+   "msg": "bench/x86/receipts/msg/dpkg-l-full.msg.txt"
+  },
+  {
+   "lane": "ls-la-usrbin",
+   "plan": true,
+   "cols": 9,
+   "rows": 119,
+   "literals": 3,
+   "bounds": [
+    12,
+    43
+   ],
+   "support": [
+    118,
+    98
+   ],
+   "k": [
+    2,
+    3,
+    4
+   ],
+   "msgChars": 3466,
+   "srcChars": 7544,
+   "msg": "bench/x86/receipts/msg/ls-la-usrbin.msg.txt"
+  },
+  {
+   "lane": "ps-eo-cpu",
+   "plan": true,
+   "cols": 6,
+   "rows": 39,
+   "literals": 3,
+   "bounds": [
+    14,
+    17,
+    22,
+    29
+   ],
+   "support": [
+    38,
+    39,
+    38,
+    37
+   ],
+   "k": [
+    4,
+    5,
+    6
+   ],
+   "msgChars": 1255,
+   "srcChars": 2027,
+   "msg": "bench/x86/receipts/msg/ps-eo-cpu.msg.txt"
+  },
+  {
+   "lane": "ss-tan",
+   "plan": true,
+   "cols": 5,
+   "rows": 17,
+   "literals": 9,
+   "bounds": [
+    11,
+    18,
+    25,
+    85
+   ],
+   "support": [
+    22,
+    23,
+    17,
+    23
+   ],
+   "k": [
+    4,
+    5
+   ],
+   "msgChars": 1522,
+   "srcChars": 2089,
+   "msg": "bench/x86/receipts/msg/ss-tan.msg.txt"
+  },
+  {
+   "lane": "ls-full-iso",
+   "plan": true,
+   "cols": 9,
+   "rows": 28,
+   "literals": 6,
+   "bounds": [
+    12
+   ],
+   "support": [
+    24
+   ],
+   "k": [
+    2,
+    3
+   ],
+   "msgChars": 1425,
+   "srcChars": 2549,
+   "msg": "bench/x86/receipts/msg/ls-full-iso.msg.txt"
+  },
+  {
+   "lane": "proc-meminfo",
+   "plan": true,
+   "cols": 3,
+   "rows": 48,
+   "literals": 7,
+   "bounds": [],
+   "support": [],
+   "k": [
+    2
+   ],
+   "msgChars": 1225,
+   "srcChars": 1506,
+   "msg": "bench/x86/receipts/msg/proc-meminfo.msg.txt"
+  },
+  {
+   "lane": "df-real",
+   "plan": true,
+   "cols": 6,
+   "rows": 6,
+   "literals": 2,
+   "bounds": [
+    16,
+    35
+   ],
+   "support": [
+    5,
+    5
+   ],
+   "k": [
+    2,
+    3,
+    6
+   ],
+   "msgChars": 496,
+   "srcChars": 329,
+   "msg": "bench/x86/receipts/msg/df-real.msg.txt"
+  },
+  {
+   "lane": "ps-real",
+   "plan": true,
+   "cols": 6,
+   "rows": 39,
+   "literals": 3,
+   "bounds": [
+    18,
+    23,
+    33
+   ],
+   "support": [
+    39,
+    38,
+    39
+   ],
+   "k": [
+    3,
+    4,
+    5
+   ],
+   "msgChars": 1374,
+   "srcChars": 2365,
+   "msg": "bench/x86/receipts/msg/ps-real.msg.txt"
+  },
+  {
+   "lane": "find-listing",
+   "plan": true,
+   "cols": 3,
+   "rows": 120,
+   "literals": 1,
+   "bounds": [],
+   "support": [],
+   "k": [
+    2
+   ],
+   "msgChars": 11111,
+   "srcChars": 11789,
+   "msg": "bench/x86/receipts/msg/find-listing.msg.txt"
+  }
+ ]
+}

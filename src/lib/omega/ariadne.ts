@@ -1020,15 +1020,42 @@ export function renderBest(
   }
 
   // What the assignment can actually influence: ordered pairs inside runs.
-  const wanted = new Map<string, number>();
+  //
+  // X86 speed. `run[i] + '\u0000' + run[i + 1]` allocates a string per adjacent pair and
+  // the sort then splits every one of them back apart. A reference id is a non-negative
+  // integer, so when the ids are small enough a single number carries the same pair with
+  // no allocation and no parsing. Map iteration order is insertion order either way and
+  // Array.prototype.sort is stable, so `hotPairs` is element-for-element what it was —
+  // the identity is checked by re-running the 29-lane frontier receipt
+  // (`bench/x86/receipts/frontier.json` vs `speed.json`), not argued from the code.
+  let maxId = 0;
+  let idsOk = true;
+  for (const run of runs) {
+    for (const id of run) {
+      if (!Number.isSafeInteger(id) || id < 0) { idsOk = false; break; }
+      if (id > maxId) maxId = id;
+    }
+  }
+  const PAIR_BASE = maxId + 1;
+  const numericPairs = idsOk && PAIR_BASE * PAIR_BASE < 2 ** 53;
+  const wanted = new Map<number | string, number>();
   for (const run of runs) {
     for (let i = 0; i + 1 < run.length; i++) {
-      const k = run[i] + '\u0000' + run[i + 1];
+      const k: number | string = numericPairs
+        ? run[i] * PAIR_BASE + run[i + 1]
+        : run[i] + '\u0000' + run[i + 1];
       wanted.set(k, (wanted.get(k) ?? 0) + 1);
     }
   }
   const hotPairs = [...wanted.entries()].sort((x, y) => y[1] - x[1])
-    .map(([k, c]) => { const [u, v] = k.split('\u0000').map(Number); return { u, v, c }; });
+    .map(([k, c]) => {
+      if (numericPairs) {
+        const n = k as number;
+        return { u: Math.floor(n / PAIR_BASE), v: n % PAIR_BASE, c };
+      }
+      const [u, v] = (k as string).split('\u0000').map(Number);
+      return { u, v, c };
+    });
 
   // Hot n-grams, n = 3..5. A pair that merges saves one token; a quadruple that
   // merges saves three. The construction below only reasons about pairs, so the
@@ -1039,8 +1066,16 @@ export function renderBest(
     for (let n = 3; n <= 5; n++) {
       const m = wantedN.get(n)!;
       for (let i = 0; i + n <= run.length; i++) {
+        // X86 speed: `new Set(seg).size !== n` allocated a Set per segment per n, three
+        // times over every run. The same distinctness test on at most five integers is ten
+        // integer comparisons and no allocation; the slice is still taken, because the key
+        // and `hotN`'s ids are built from it exactly as before.
+        let dup = false;
+        for (let x = i; x < i + n && !dup; x++) {
+          for (let y = x + 1; y < i + n; y++) if (run[x] === run[y]) { dup = true; break; }
+        }
+        if (dup) continue;
         const seg = run.slice(i, i + n);
-        if (new Set(seg).size !== n) continue;
         const k = seg.join('\u0000');
         m.set(k, (m.get(k) ?? 0) + 1);
       }

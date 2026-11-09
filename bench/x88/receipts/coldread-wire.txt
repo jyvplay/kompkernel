@@ -1,0 +1,18 @@
+§ΣΥΝΤΆΞΙΣ H=9778db04 L=6 F=1 E=1 T=1 lines share shapes; each shape is a family letter. M: one char per line, *=that line is under X, else its family. T<f> <sep><cells joined by sep>: the line's cells in order; @n = slot n. W<f> n:W,... : slot n is not sent, it is spaces of length W minus the next cell's length. C<f>.n<sep><that slot's values down the family, joined by sep>. X: the * lines, in order. Rebuild a line: put its cells together with nothing between, padding slots recomputed from W, then read line i of the source as row i of its family. H is the CRC-32 of the rebuilt text in hex, checked on decode.
+M*aaaaa
+Ta ¦@0¦@1¦@2
+Ca.0x5
+Package
+----------
+pip
+setuptools
+wheel
+Ca.1:|    | |        | |      
+Ca.2x5
+Version
+-------
+23.0.1
+66.1.1
+0.38.4
+X
+# source: pip list (real)

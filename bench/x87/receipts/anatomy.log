@@ -1,0 +1,72 @@
+
+===== apt-real  src raw=2739 F=850 parent=synkrisis exact=true msgChars=1906 lines=5 115.1s
+  token census: glyph=458(53.9%,775ch) lower=220(25.9%,681ch) digit=92(10.8%,174ch) ascii-mix=64(7.5%,258ch) num-punct=16(1.9%,18ch)
+  top tokens: "л"×13 "g"×11 "т"×10 "в"×8 "с"×8 "н"×8 "8"×8 "utils"×8 "г"×7 ":"×7 "э"×7 "п"×7 "Ч"×7 "7"×6 "+b"×6 "К"×6
+  costliest lines: #4:620 #2:211 #0:11 #1:7 #3:2
+  first 3 lines: "Before ¶ k=v. expand repeatedly; print only. | §М [installed,local] | т amd64Мвтlibа1Катlibс/now і12н.о2у0л-мнулціномю14Нdebіuр+Нёсцюрайсонгсанш allМы6Вс8:ын9н1"
+
+===== dpkg-l  src raw=1000 F=673 parent=synkrisis exact=true msgChars=2735 lines=11 23.5s
+  token census: glyph=247(36.7%,411ch) ascii-mix=247(36.7%,1479ch) lower=76(11.3%,296ch) digit=40(5.9%,70ch) space=31(4.6%,440ch) num-punct=28(4.2%,31ch) upper=4(0.6%,8ch)
+  top tokens: "і"×26 "/"×9 ":"×8 "о"×7 " utilities"×6 ","×5 "њ"×5 " ("×5 ")\n"×5 " ы"×5 "а"×4 "64"×4 " GNU"×4 "од"×4 "\n"×4 " and"×4
+  costliest lines: #8:220 #7:202 #2:88 #1:50 #9:34 #4:28
+  first 3 lines: "Before ¶ k=v. expand repeatedly; print only. | §л12гdebлuО+ги х4а.д2к0о-Аладакон3з                    Е                          их:Анзы  | iiиеutilsЄ GNU assembler, linker and binary utilitiesі binеү compilerі gccч1яачосичац     "
+
+===== ls-real  src raw=1034 F=433 parent=synkrisis exact=true msgChars=1069 lines=5 15.0s
+  token census: glyph=181(41.8%,283ch) ascii-mix=95(21.9%,384ch) digit=91(21.0%,205ch) lower=50(11.5%,155ch) num-punct=9(2.1%,9ch) space=7(1.6%,33ch)
+  top tokens: "л"×12 "е"×10 "ӷ"×7 "ө"×6 "/bin"×5 "wx"×4 "r"×4 "Ө"×4 "э"×4 "щ"×4 "."×3 "у"×3 "к"×3 "Ҳ"×3 "pack"×3 "ҽ"×3
+  costliest lines: #2:174 #4:163 #3:83 #0:11 #1:3
+  first 3 lines: "Before ¶ k=v. expand repeatedly; print only. | §у | ч-rючwxr-xr-xе О1Д rootцеОДДУуюць     қюцьебwxrwxrwxцхуlrби Mayпеесп202я3өие25ся aptг20к2ӷ"
+
+===== findmnt  src raw=787 F=444 parent=synkrisis exact=true msgChars=2152 lines=8 5.3s
+  token census: ascii-mix=128(28.8%,461ch) glyph=122(27.5%,206ch) lower=97(21.8%,330ch) space=51(11.5%,1069ch) digit=29(6.5%,60ch) num-punct=13(2.9%,14ch) upper=4(0.9%,12ch)
+  top tokens: "="×14 "ش"×8 "/"×7 "           "×6 "\n"×5 "ئ"×5 " rw"×4 "ۇ"×4 " dev"×4 "2"×4 ".service"×4 "ر"×3 ",n"×3 "mode"×3 "ث"×3 "/fs"×3
+  costliest lines: #5:271 #3:84 #2:29 #1:21 #6:18 #0:11
+  first 3 lines: "Before ¶ k=v. expand repeatedly; print only. | §ر,ېرrelatimeں,noexecېد,nosuid,nodevںو rwدم | |ب rwدمشfsا            کش      ن ramشا ramک roدرmode=700ی rw,nosuidي-/ج"
+
+===== code-ts  src raw=1422 F=969 parent=synkrisis exact=true msgChars=3326 lines=40 24.4s
+  token census: glyph=449(46.3%,755ch) ascii-mix=348(35.9%,1776ch) lower=143(14.8%,713ch) num-punct=9(0.9%,11ch) space=9(0.9%,49ch) digit=6(0.6%,6ch) upper=5(0.5%,16ch)
+  top tokens: "о"×13 "Class"×13 "д"×10 "Group"×9 "Р"×9 " for"×9 "const"×9 " process"×9 "Part"×8 "з"×8 " get"×8 " ==="×8 "н"×7 "С"×7 "ё"×7 "ҧ"×6
+  costliest lines: #38:119 #27:96 #22:81 #24:73 #6:54 #7:50
+  first 3 lines: "Before ¶ k=v. expand repeatedly; print only. | §д classөPartObjectн,зGroupIdйн themeьдөндзйРдөр о =Пр0пр for (let iоП; i <ҽдзя } | мряре)О =>с {"
+
+===== json-pkg  src raw=1152 F=681 parent=synkrisis exact=true msgChars=1972 lines=22 17.1s
+  token census: glyph=280(41.1%,438ch) lower=193(28.3%,827ch) ascii-mix=133(19.5%,547ch) digit=43(6.3%,77ch) num-punct=18(2.6%,23ch) space=10(1.5%,39ch) upper=4(0.6%,21ch)
+  top tokens: "с"×19 "й"×15 "\":"×14 "О"×9 " \""×8 "Н"×8 "Ө"×8 "А"×8 "п"×7 "   "×6 "ё"×6 "ҳ"×5 "/"×5 "р"×4 "б"×4 "ц"×4
+  costliest lines: #17:327 #7:49 #19:45 #15:37 #16:37 #6:36
+  first 3 lines: "Before ¶ k=v. expand repeatedly; print only. | §р.и0б\", |        сб \"Арисп\""
+
+===== kb-article  src raw=656 F=622 parent=synkrisis exact=true msgChars=2822 lines=19 2.3s
+  token census: ascii-mix=351(56.4%,2214ch) glyph=206(33.1%,306ch) lower=54(8.7%,288ch) num-punct=4(0.6%,4ch) space=3(0.5%,4ch) upper=2(0.3%,2ch) digit=2(0.3%,4ch)
+  top tokens: "с"×18 "я"×13 "р"×10 "е"×10 "ы"×8 "о"×7 "и"×7 "м"×7 " an"×6 "а"×5 "з"×5 " how"×5 ".\n\n"×5 ";"×4 " only"×4 " and"×4
+  costliest lines: #9:93 #4:92 #17:90 #11:79 #15:75 #6:54
+  first 3 lines: "Before ¶ k=v. expand repeatedly; print only. | §р,әр andЗ forа aп policyт looksЗап attachedя.уя Theс | е theо itи isы toн documentд sweepм thatз inй workspaceж holdү retentionк withъ dispositio"
+
+===== llm-answer  src raw=733 F=674 parent=synkrisis exact=true msgChars=2344 lines=47 6.7s
+  token census: ascii-mix=302(44.8%,1464ch) glyph=217(32.2%,369ch) lower=83(12.3%,384ch) digit=29(4.3%,49ch) num-punct=17(2.5%,22ch) upper=17(2.5%,39ch) space=9(1.3%,17ch)
+  top tokens: "`"×14 "а"×10 "л"×8 "т"×8 "у"×8 "з"×8 ","×7 "и"×6 "х"×6 "\n\n"×6 " ("×5 "|"×5 "к"×5 "я"×5 "с"×5 "Ә"×4
+  costliest lines: #39:66 #16:60 #8:52 #43:46 #11:40 #10:36
+  first 3 lines: "Before ¶ k=v. expand repeatedly; print only. | §л.е5д) | г-эг [ ]А` (0ле dayдэ Updateр |т С|---|---в sи **нвригу**ж%у |"
+
+===== ps-aux-real  src raw=3054 F=1042 parent=synkrisis exact=true msgChars=2484 lines=14 59.2s
+  token census: glyph=406(39.0%,591ch) ascii-mix=262(25.1%,884ch) lower=171(16.4%,514ch) digit=146(14.0%,345ch) space=33(3.2%,117ch) num-punct=15(1.4%,16ch) upper=9(0.9%,17ch)
+  top tokens: " -"×19 "в"×13 " /"×10 "пи"×10 "d"×9 "\n"×8 "я"×7 " --"×7 "с"×7 "Ў"×7 "ж"×7 "ги"×7 "ы"×6 "Ғ"×6 " ы"×6 ".txt"×6
+  costliest lines: #11:332 #12:195 #6:91 #5:68 #1:59 #3:55
+  first 3 lines: "Before ¶ k=v. expand repeatedly; print only. | §ы дыыя0лдя.яцыяолыц.Б17а:е  жеца00мыБа46жим [ҩыБањҩ46ецү ?       Ғлл     ц    цүпҒ I<егҒ  | root         ыәм /sbinкллеыҡк290ядГ && \\ { echo '# sourceаИ.txtГА $HМ; } >Ай | head -120МК"
+
+===== ls-l-real  src raw=5194 F=1476 parent=synkrisis exact=true msgChars=3005 lines=8 191.4s
+  token census: glyph=774(52.4%,1029ch) digit=285(19.3%,707ch) lower=205(13.9%,613ch) ascii-mix=140(9.5%,550ch) space=44(3.0%,76ch) num-punct=21(1.4%,23ch) upper=7(0.5%,7ch)
+  top tokens: "ց"×33 " "×30 "ס"×25 "त"×17 "ש"×16 "ոց"×15 "ო"×14 "ն"×13 "ा"×11 "ת"×9 "బ"×9 "ე"×8 "े"×8 "-"×8 "ვ"×8 "ბ"×7
+  costliest lines: #6:843 #4:282 #5:233 #3:67 #0:26 #1:15
+  first 3 lines: "Before ¶ k=v. expand repeatedly After ~, a number has . before its last 1,1 digits. print  | §ო  े1գოेट root rootতट       ש | lrwxrwxrwxգতो"
+
+--- headroom ranking (F, and the digit+glyph share of the residual) ---
+apt-real             F=  850  digit+num+glyph=  566 (66.6%)  lower=220 upper=0 mix=64 space=0
+dpkg-l               F=  673  digit+num+glyph=  315 (46.8%)  lower=76 upper=4 mix=247 space=31
+ls-real              F=  433  digit+num+glyph=  281 (64.9%)  lower=50 upper=0 mix=95 space=7
+findmnt              F=  444  digit+num+glyph=  164 (36.9%)  lower=97 upper=4 mix=128 space=51
+code-ts              F=  969  digit+num+glyph=  464 (47.9%)  lower=143 upper=5 mix=348 space=9
+json-pkg             F=  681  digit+num+glyph=  341 (50.1%)  lower=193 upper=4 mix=133 space=10
+kb-article           F=  622  digit+num+glyph=  212 (34.1%)  lower=54 upper=2 mix=351 space=3
+llm-answer           F=  674  digit+num+glyph=  263 (39.0%)  lower=83 upper=17 mix=302 space=9
+ps-aux-real          F= 1042  digit+num+glyph=  567 (54.4%)  lower=171 upper=9 mix=262 space=33
+ls-l-real            F= 1476  digit+num+glyph= 1080 (73.2%)  lower=205 upper=7 mix=140 space=44

@@ -1,0 +1,4716 @@
+{
+ "seed": 20260108,
+ "cases": 400,
+ "planned": 223,
+ "hardFail": 0,
+ "writtenForColdRead": 60,
+ "rows": [
+  {
+   "i": 0,
+   "label": "k=2 rows=22 lit=3 eol=CRLF gaps=0,1 kinds=tiny/prog",
+   "planned": false
+  },
+  {
+   "i": 1,
+   "label": "k=4 rows=23 lit=1 eol=LF gaps=0,1,1,1 kinds=word/pad/ver/prog",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 24,
+   "literals": 3,
+   "bounds": [
+    16
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 757,
+   "srcChars": 819
+  },
+  {
+   "i": 2,
+   "label": "k=6 rows=16 lit=3 eol=LF gaps=0,1,3,3,2,2 kinds=ver/tiny/clock/prog/prose/ver",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 15,
+   "literals": 4,
+   "bounds": [
+    12,
+    33,
+    42,
+    47
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 988,
+   "srcChars": 1203
+  },
+  {
+   "i": 3,
+   "label": "k=2 rows=27 lit=3 eol=LF gaps=0,3 kinds=prose/prose",
+   "planned": false
+  },
+  {
+   "i": 4,
+   "label": "k=2 rows=35 lit=1 eol=LF gaps=0,2 kinds=prog/word",
+   "planned": false
+  },
+  {
+   "i": 5,
+   "label": "k=8 rows=17 lit=1 eol=LF gaps=0,1,3,2,3,1,3,1 kinds=pad/clock/int/int/word/word/word/tiny",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 18,
+   "literals": 3,
+   "bounds": [
+    8,
+    28,
+    37,
+    43
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1208,
+   "srcChars": 1475
+  },
+  {
+   "i": 6,
+   "label": "k=4 rows=19 lit=0 eol=CRLF gaps=0,1,3,3 kinds=ver/prose/path/hex",
+   "planned": false
+  },
+  {
+   "i": 7,
+   "label": "k=2 rows=9 lit=0 eol=LF gaps=0,2 kinds=pad/hex",
+   "planned": false
+  },
+  {
+   "i": 8,
+   "label": "k=7 rows=12 lit=1 eol=LF gaps=0,3,1,3,1,3,2 kinds=prog/pad/pad/prog/hex/clock/prose",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 13,
+   "literals": 2,
+   "bounds": [
+    16,
+    38,
+    60,
+    67,
+    78,
+    88
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 808,
+   "srcChars": 1522
+  },
+  {
+   "i": 9,
+   "label": "k=8 rows=6 lit=0 eol=LF gaps=0,3,1,3,1,3,3,2 kinds=pad/path/tiny/clock/clock/path/prose/prog",
+   "planned": false
+  },
+  {
+   "i": 10,
+   "label": "k=3 rows=21 lit=0 eol=LF gaps=0,2,2 kinds=word/prose/word",
+   "planned": false
+  },
+  {
+   "i": 11,
+   "label": "k=7 rows=9 lit=2 eol=LF gaps=0,2,3,2,1,1,3 kinds=ver/int/pad/clock/tiny/int/pad",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 9,
+   "literals": 4,
+   "bounds": [
+    23,
+    29,
+    38,
+    45,
+    55,
+    71
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 613,
+   "srcChars": 790
+  },
+  {
+   "i": 12,
+   "label": "k=5 rows=30 lit=0 eol=LF gaps=0,1,3,3,3 kinds=int/int/tiny/path/word",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 32,
+   "literals": 2,
+   "bounds": [
+    8,
+    26,
+    46,
+    50,
+    70
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1092,
+   "srcChars": 2511
+  },
+  {
+   "i": 13,
+   "label": "k=2 rows=18 lit=0 eol=LF gaps=0,3 kinds=word/pad",
+   "planned": false
+  },
+  {
+   "i": 14,
+   "label": "k=9 rows=29 lit=2 eol=LF gaps=0,1,2,1,1,1,1,3,1 kinds=pad/pad/tiny/path/prog/prose/prose/const/clock",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 29,
+   "literals": 4,
+   "bounds": [
+    15,
+    23,
+    31
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 3611,
+   "srcChars": 3902
+  },
+  {
+   "i": 15,
+   "label": "k=5 rows=18 lit=1 eol=LF gaps=0,3,2,2,3 kinds=word/const/const/word/ver",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 17,
+   "literals": 5,
+   "bounds": [
+    47,
+    62
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 809,
+   "srcChars": 1407
+  },
+  {
+   "i": 16,
+   "label": "k=5 rows=30 lit=0 eol=LF gaps=0,1,2,1,2 kinds=path/hex/word/prog/const",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 32,
+   "literals": 2,
+   "bounds": [
+    19,
+    29,
+    54
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1204,
+   "srcChars": 1964
+  },
+  {
+   "i": 17,
+   "label": "k=8 rows=16 lit=0 eol=LF gaps=0,1,2,2,2,1,2,3 kinds=tiny/tiny/prose/hex/pad/tiny/path/word",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 18,
+   "literals": 1,
+   "bounds": [
+    15,
+    32
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1940,
+   "srcChars": 2278
+  },
+  {
+   "i": 18,
+   "label": "k=9 rows=22 lit=0 eol=CRLF gaps=0,3,3,3,1,3,3,3,3 kinds=word/prose/hex/hex/prog/path/word/pad/int",
+   "planned": false
+  },
+  {
+   "i": 19,
+   "label": "k=7 rows=7 lit=0 eol=LF gaps=0,2,2,3,3,3,1 kinds=path/prose/clock/prog/tiny/ver/word",
+   "planned": false
+  },
+  {
+   "i": 20,
+   "label": "k=3 rows=26 lit=0 eol=LF gaps=0,1,2 kinds=hex/const/clock",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 28,
+   "literals": 2,
+   "bounds": [
+    17,
+    32
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 650,
+   "srcChars": 1102
+  },
+  {
+   "i": 21,
+   "label": "k=3 rows=16 lit=0 eol=LF gaps=0,2,3 kinds=pad/ver/prose",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 18,
+   "literals": 2,
+   "bounds": [
+    3,
+    11,
+    31
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 742,
+   "srcChars": 982
+  },
+  {
+   "i": 22,
+   "label": "k=7 rows=21 lit=0 eol=CRLF gaps=0,2,1,2,1,3,3 kinds=const/int/prog/word/clock/path/ver",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 18,
+   "literals": 7,
+   "bounds": [
+    8,
+    17,
+    49
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1406,
+   "srcChars": 1743
+  },
+  {
+   "i": 23,
+   "label": "k=6 rows=7 lit=3 eol=LF gaps=0,1,2,1,1,3 kinds=hex/prog/int/hex/prose/tiny",
+   "planned": false
+  },
+  {
+   "i": 24,
+   "label": "k=7 rows=21 lit=0 eol=LF gaps=0,1,2,2,2,3,3 kinds=tiny/path/path/hex/path/const/ver",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 23,
+   "literals": 1,
+   "bounds": [
+    17,
+    39,
+    54,
+    67
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1996,
+   "srcChars": 2335
+  },
+  {
+   "i": 25,
+   "label": "k=7 rows=23 lit=0 eol=LF gaps=0,2,3,2,2,3,1 kinds=prose/pad/path/int/const/hex/ver",
+   "planned": false
+  },
+  {
+   "i": 26,
+   "label": "k=6 rows=20 lit=2 eol=CRLF gaps=0,3,2,3,1,1 kinds=ver/path/path/clock/const/ver",
+   "planned": false
+  },
+  {
+   "i": 27,
+   "label": "k=9 rows=22 lit=2 eol=LF gaps=0,1,3,1,2,3,1,2,2 kinds=prose/hex/prose/prose/path/int/clock/pad/clock",
+   "planned": false
+  },
+  {
+   "i": 28,
+   "label": "k=6 rows=14 lit=1 eol=LF gaps=0,3,1,1,2,2 kinds=pad/pad/const/const/int/prose",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 15,
+   "literals": 2,
+   "bounds": [
+    9,
+    45,
+    65
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1087,
+   "srcChars": 1273
+  },
+  {
+   "i": 29,
+   "label": "k=5 rows=20 lit=1 eol=LF gaps=0,1,1,3,2 kinds=pad/int/hex/clock/path",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 21,
+   "literals": 2,
+   "bounds": [
+    15,
+    30,
+    37
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 987,
+   "srcChars": 1102
+  },
+  {
+   "i": 30,
+   "label": "k=7 rows=26 lit=0 eol=LF gaps=0,2,1,1,3,1,2 kinds=const/int/path/const/tiny/int/const",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 19,
+   "literals": 11,
+   "bounds": [
+    18,
+    31,
+    49,
+    56,
+    75,
+    80
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1685,
+   "srcChars": 2469
+  },
+  {
+   "i": 31,
+   "label": "k=7 rows=27 lit=2 eol=LF gaps=0,2,3,1,3,3,2 kinds=path/tiny/pad/const/int/clock/hex",
+   "planned": false
+  },
+  {
+   "i": 32,
+   "label": "k=7 rows=20 lit=3 eol=LF gaps=0,2,2,1,2,2,1 kinds=prog/ver/word/word/prog/tiny/tiny",
+   "planned": false
+  },
+  {
+   "i": 33,
+   "label": "k=4 rows=16 lit=0 eol=LF gaps=0,1,3,3 kinds=prog/prose/ver/pad",
+   "planned": false
+  },
+  {
+   "i": 34,
+   "label": "k=3 rows=10 lit=2 eol=LF gaps=0,2,3 kinds=const/ver/hex",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 10,
+   "literals": 3,
+   "bounds": [
+    17,
+    36
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 401,
+   "srcChars": 452
+  },
+  {
+   "i": 35,
+   "label": "k=3 rows=20 lit=0 eol=LF gaps=0,1,1 kinds=prose/path/pad",
+   "planned": false
+  },
+  {
+   "i": 36,
+   "label": "k=9 rows=10 lit=1 eol=LF gaps=0,2,1,2,3,3,2,1,2 kinds=const/ver/const/clock/path/clock/path/pad/clock",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 11,
+   "literals": 2,
+   "bounds": [
+    16,
+    42,
+    58,
+    112
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1106,
+   "srcChars": 1319
+  },
+  {
+   "i": 37,
+   "label": "k=6 rows=26 lit=0 eol=LF gaps=0,1,3,2,2,1 kinds=pad/hex/clock/tiny/const/path",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 28,
+   "literals": 1,
+   "bounds": [
+    7,
+    40,
+    54,
+    57
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1300,
+   "srcChars": 2239
+  },
+  {
+   "i": 38,
+   "label": "k=9 rows=15 lit=0 eol=LF gaps=0,2,3,2,3,3,1,2,3 kinds=tiny/prog/prose/int/int/ver/word/prog/tiny",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 17,
+   "literals": 2,
+   "bounds": [
+    6,
+    9,
+    24
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1787,
+   "srcChars": 1949
+  },
+  {
+   "i": 39,
+   "label": "k=6 rows=8 lit=0 eol=LF gaps=0,1,1,1,3,3 kinds=ver/pad/hex/const/prog/const",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 10,
+   "literals": 2,
+   "bounds": [
+    9,
+    38,
+    54
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 548,
+   "srcChars": 656
+  },
+  {
+   "i": 40,
+   "label": "k=7 rows=8 lit=1 eol=LF gaps=0,3,3,2,2,2,3 kinds=path/pad/clock/int/path/hex/int",
+   "planned": false
+  },
+  {
+   "i": 41,
+   "label": "k=6 rows=14 lit=0 eol=LF gaps=0,1,3,1,2,2 kinds=word/const/tiny/word/path/word",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 16,
+   "literals": 2,
+   "bounds": [
+    32,
+    44
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 864,
+   "srcChars": 1242
+  },
+  {
+   "i": 42,
+   "label": "k=9 rows=19 lit=0 eol=LF gaps=0,1,3,1,1,1,3,3,3 kinds=prose/int/const/prog/tiny/pad/path/path/clock",
+   "planned": false
+  },
+  {
+   "i": 43,
+   "label": "k=5 rows=34 lit=0 eol=LF gaps=0,2,3,2,3 kinds=int/const/int/prog/ver",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 36,
+   "literals": 2,
+   "bounds": [
+    5,
+    31,
+    36,
+    47
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 818,
+   "srcChars": 1977
+  },
+  {
+   "i": 44,
+   "label": "k=4 rows=31 lit=0 eol=CRLF gaps=0,1,2,3 kinds=prose/int/tiny/hex",
+   "planned": false
+  },
+  {
+   "i": 45,
+   "label": "k=5 rows=16 lit=3 eol=LF gaps=0,2,3,3,3 kinds=int/pad/ver/int/pad",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 15,
+   "literals": 3,
+   "bounds": [
+    7,
+    12,
+    30,
+    46,
+    58
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 636,
+   "srcChars": 1039
+  },
+  {
+   "i": 46,
+   "label": "k=8 rows=34 lit=0 eol=LF gaps=0,2,3,1,2,3,1,3 kinds=path/tiny/pad/clock/ver/int/int/path",
+   "planned": true,
+   "cols": 8,
+   "rowsN": 36,
+   "literals": 2,
+   "bounds": [
+    17,
+    32,
+    52,
+    59,
+    72,
+    94
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2128,
+   "srcChars": 4007
+  },
+  {
+   "i": 47,
+   "label": "k=4 rows=17 lit=0 eol=LF gaps=0,2,3,3 kinds=hex/tiny/path/prose",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 19,
+   "literals": 2,
+   "bounds": [
+    20,
+    27,
+    45
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1239,
+   "srcChars": 1365
+  },
+  {
+   "i": 48,
+   "label": "k=2 rows=17 lit=0 eol=CRLF gaps=0,2 kinds=word/pad",
+   "planned": false
+  },
+  {
+   "i": 49,
+   "label": "k=8 rows=14 lit=2 eol=CRLF gaps=0,2,1,2,1,2,2,1 kinds=path/path/tiny/hex/prog/prog/hex/word",
+   "planned": false
+  },
+  {
+   "i": 50,
+   "label": "k=9 rows=13 lit=0 eol=CRLF gaps=0,1,1,3,3,3,1,2,2 kinds=tiny/hex/hex/const/pad/tiny/int/const/prose",
+   "planned": true,
+   "cols": 9,
+   "rowsN": 15,
+   "literals": 1,
+   "bounds": [
+    5,
+    12,
+    45,
+    61,
+    69,
+    77,
+    91
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 949,
+   "srcChars": 1630
+  },
+  {
+   "i": 51,
+   "label": "k=6 rows=18 lit=3 eol=LF gaps=0,2,1,1,1,3 kinds=path/hex/ver/hex/prose/word",
+   "planned": false
+  },
+  {
+   "i": 52,
+   "label": "k=9 rows=23 lit=0 eol=LF gaps=0,1,1,2,2,3,3,1,2 kinds=clock/ver/path/hex/tiny/int/tiny/prose/hex",
+   "planned": false
+  },
+  {
+   "i": 53,
+   "label": "k=6 rows=32 lit=0 eol=LF gaps=0,2,2,2,1,3 kinds=word/hex/path/path/clock/path",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 34,
+   "literals": 2,
+   "bounds": [
+    15,
+    35
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2477,
+   "srcChars": 3072
+  },
+  {
+   "i": 54,
+   "label": "k=6 rows=33 lit=2 eol=LF gaps=0,2,2,1,3,3 kinds=word/word/hex/int/path/const",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 31,
+   "literals": 5,
+   "bounds": [
+    17,
+    35,
+    58
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1615,
+   "srcChars": 2762
+  },
+  {
+   "i": 55,
+   "label": "k=6 rows=8 lit=0 eol=LF gaps=0,3,3,2,3,2 kinds=hex/ver/word/prose/const/int",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 10,
+   "literals": 0,
+   "bounds": [
+    17,
+    37
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 885,
+   "srcChars": 934
+  },
+  {
+   "i": 56,
+   "label": "k=3 rows=26 lit=2 eol=LF gaps=0,1,1 kinds=const/prog/word",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 26,
+   "literals": 4,
+   "bounds": [
+    18,
+    28
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 434,
+   "srcChars": 960
+  },
+  {
+   "i": 57,
+   "label": "k=5 rows=7 lit=0 eol=LF gaps=0,3,1,1,3 kinds=const/tiny/prog/word/tiny",
+   "planned": false
+  },
+  {
+   "i": 58,
+   "label": "k=4 rows=9 lit=0 eol=LF gaps=0,2,2,1 kinds=prog/prose/clock/const",
+   "planned": false
+  },
+  {
+   "i": 59,
+   "label": "k=5 rows=35 lit=2 eol=LF gaps=0,1,1,1,1 kinds=pad/word/clock/clock/prose",
+   "planned": false
+  },
+  {
+   "i": 60,
+   "label": "k=4 rows=24 lit=0 eol=LF gaps=0,1,2,3 kinds=tiny/clock/word/clock",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 26,
+   "literals": 2,
+   "bounds": [
+    9,
+    16,
+    37
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 632,
+   "srcChars": 1161
+  },
+  {
+   "i": 61,
+   "label": "k=6 rows=6 lit=3 eol=LF gaps=0,1,1,1,1,3 kinds=hex/word/tiny/word/hex/clock",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 6,
+   "literals": 2,
+   "bounds": [
+    4,
+    36
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 469,
+   "srcChars": 407
+  },
+  {
+   "i": 62,
+   "label": "k=6 rows=14 lit=1 eol=CRLF gaps=0,3,1,3,1,3 kinds=const/hex/prose/clock/clock/prose",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 15,
+   "literals": 3,
+   "bounds": [
+    19,
+    36
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1538,
+   "srcChars": 1716
+  },
+  {
+   "i": 63,
+   "label": "k=7 rows=25 lit=1 eol=LF gaps=0,3,1,3,1,3,2 kinds=hex/prog/word/tiny/prose/int/const",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 26,
+   "literals": 3,
+   "bounds": [
+    13,
+    31,
+    43
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1856,
+   "srcChars": 2186
+  },
+  {
+   "i": 64,
+   "label": "k=7 rows=25 lit=1 eol=LF gaps=0,1,3,2,2,1,3 kinds=tiny/word/const/prose/hex/int/clock",
+   "planned": false
+  },
+  {
+   "i": 65,
+   "label": "k=9 rows=32 lit=1 eol=LF gaps=0,1,3,3,2,3,1,1,2 kinds=int/path/word/int/prog/pad/path/tiny/ver",
+   "planned": false
+  },
+  {
+   "i": 66,
+   "label": "k=9 rows=8 lit=0 eol=LF gaps=0,1,1,1,1,1,1,2,3 kinds=pad/ver/clock/prose/word/prog/const/path/int",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 10,
+   "literals": 2,
+   "bounds": [
+    11,
+    27
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1241,
+   "srcChars": 1244
+  },
+  {
+   "i": 67,
+   "label": "k=5 rows=21 lit=2 eol=LF gaps=0,2,1,3,1 kinds=hex/ver/word/const/pad",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 14,
+   "literals": 11,
+   "bounds": [],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1144,
+   "srcChars": 1277
+  },
+  {
+   "i": 68,
+   "label": "k=2 rows=9 lit=1 eol=LF gaps=0,1 kinds=hex/const",
+   "planned": false
+  },
+  {
+   "i": 69,
+   "label": "k=4 rows=24 lit=0 eol=LF gaps=0,3,3,3 kinds=const/prog/path/prose",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 26,
+   "literals": 1,
+   "bounds": [
+    18,
+    39
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1173,
+   "srcChars": 1927
+  },
+  {
+   "i": 70,
+   "label": "k=5 rows=31 lit=2 eol=LF gaps=0,3,2,2,3 kinds=clock/hex/prog/clock/hex",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 31,
+   "literals": 4,
+   "bounds": [
+    9,
+    30,
+    38
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1196,
+   "srcChars": 1539
+  },
+  {
+   "i": 71,
+   "label": "k=5 rows=23 lit=3 eol=LF gaps=0,2,1,3,2 kinds=word/hex/ver/const/tiny",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 16,
+   "literals": 11,
+   "bounds": [
+    8,
+    19
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1356,
+   "srcChars": 1233
+  },
+  {
+   "i": 72,
+   "label": "k=3 rows=23 lit=2 eol=LF gaps=0,2,1 kinds=const/tiny/const",
+   "planned": false
+  },
+  {
+   "i": 73,
+   "label": "k=2 rows=21 lit=0 eol=LF gaps=0,2 kinds=hex/const",
+   "planned": false
+  },
+  {
+   "i": 74,
+   "label": "k=6 rows=29 lit=0 eol=LF gaps=0,1,2,1,1,3 kinds=word/prose/hex/hex/prose/const",
+   "planned": false
+  },
+  {
+   "i": 75,
+   "label": "k=7 rows=9 lit=0 eol=LF gaps=0,1,3,1,1,3,2 kinds=hex/const/hex/prog/int/int/ver",
+   "planned": false
+  },
+  {
+   "i": 76,
+   "label": "k=6 rows=29 lit=0 eol=LF gaps=0,1,1,3,2,3 kinds=int/tiny/prog/hex/word/pad",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 31,
+   "literals": 1,
+   "bounds": [
+    21,
+    32,
+    46,
+    65
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 722,
+   "srcChars": 2232
+  },
+  {
+   "i": 77,
+   "label": "k=6 rows=14 lit=3 eol=LF gaps=0,3,1,2,1,3 kinds=pad/ver/word/tiny/pad/pad",
+   "planned": false
+  },
+  {
+   "i": 78,
+   "label": "k=4 rows=15 lit=0 eol=LF gaps=0,2,1,2 kinds=const/tiny/word/path",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 17,
+   "literals": 0,
+   "bounds": [
+    19,
+    24,
+    31
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 627,
+   "srcChars": 781
+  },
+  {
+   "i": 79,
+   "label": "k=2 rows=35 lit=3 eol=LF gaps=0,1 kinds=tiny/prog",
+   "planned": false
+  },
+  {
+   "i": 80,
+   "label": "k=4 rows=9 lit=0 eol=LF gaps=0,2,2,1 kinds=ver/clock/prose/ver",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 9,
+   "literals": 4,
+   "bounds": [
+    16,
+    32
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 746,
+   "srcChars": 740
+  },
+  {
+   "i": 81,
+   "label": "k=8 rows=34 lit=2 eol=LF gaps=0,2,1,2,1,2,1,3 kinds=const/ver/tiny/word/pad/pad/prose/const",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 34,
+   "literals": 3,
+   "bounds": [
+    14,
+    33,
+    38,
+    51,
+    63,
+    72
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2229,
+   "srcChars": 3579
+  },
+  {
+   "i": 82,
+   "label": "k=8 rows=16 lit=1 eol=LF gaps=0,2,2,1,1,3,2,2 kinds=word/pad/prog/pad/clock/int/ver/ver",
+   "planned": true,
+   "cols": 8,
+   "rowsN": 17,
+   "literals": 3,
+   "bounds": [
+    28,
+    52,
+    66,
+    87,
+    101,
+    120
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1071,
+   "srcChars": 2283
+  },
+  {
+   "i": 83,
+   "label": "k=4 rows=19 lit=0 eol=LF gaps=0,3,1,2 kinds=const/prose/clock/pad",
+   "planned": false
+  },
+  {
+   "i": 84,
+   "label": "k=4 rows=7 lit=0 eol=LF gaps=0,1,2,2 kinds=hex/word/pad/word",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 9,
+   "literals": 1,
+   "bounds": [
+    29,
+    48
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 389,
+   "srcChars": 490
+  },
+  {
+   "i": 85,
+   "label": "k=7 rows=17 lit=0 eol=LF gaps=0,3,2,1,3,1,2 kinds=clock/word/pad/hex/path/path/int",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 14,
+   "literals": 5,
+   "bounds": [
+    8,
+    14,
+    22,
+    40
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1524,
+   "srcChars": 1514
+  },
+  {
+   "i": 86,
+   "label": "k=2 rows=33 lit=0 eol=LF gaps=0,2 kinds=word/clock",
+   "planned": false
+  },
+  {
+   "i": 87,
+   "label": "k=5 rows=28 lit=0 eol=LF gaps=0,1,2,3,3 kinds=hex/const/path/int/path",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 21,
+   "literals": 10,
+   "bounds": [
+    40,
+    46
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1716,
+   "srcChars": 1825
+  },
+  {
+   "i": 88,
+   "label": "k=2 rows=19 lit=3 eol=CRLF gaps=0,1 kinds=pad/prog",
+   "planned": false
+  },
+  {
+   "i": 89,
+   "label": "k=6 rows=20 lit=1 eol=LF gaps=0,1,2,1,3,2 kinds=prog/hex/prose/ver/ver/int",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 21,
+   "literals": 3,
+   "bounds": [
+    6,
+    16
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1591,
+   "srcChars": 1478
+  },
+  {
+   "i": 90,
+   "label": "k=4 rows=7 lit=1 eol=LF gaps=0,1,1,2 kinds=int/tiny/prose/tiny",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 8,
+   "literals": 3,
+   "bounds": [
+    18,
+    29
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 523,
+   "srcChars": 508
+  },
+  {
+   "i": 91,
+   "label": "k=6 rows=34 lit=0 eol=LF gaps=0,3,2,3,2,2 kinds=prose/ver/tiny/path/const/prog",
+   "planned": false
+  },
+  {
+   "i": 92,
+   "label": "k=7 rows=29 lit=0 eol=CRLF gaps=0,3,3,1,2,2,2 kinds=prog/path/path/prog/pad/const/clock",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 31,
+   "literals": 2,
+   "bounds": [
+    14,
+    33
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2943,
+   "srcChars": 3313
+  },
+  {
+   "i": 93,
+   "label": "k=9 rows=30 lit=2 eol=CRLF gaps=0,1,3,3,3,2,2,2,1 kinds=tiny/prose/clock/tiny/pad/pad/hex/path/prose",
+   "planned": false
+  },
+  {
+   "i": 94,
+   "label": "k=2 rows=26 lit=1 eol=LF gaps=0,1 kinds=word/path",
+   "planned": false
+  },
+  {
+   "i": 95,
+   "label": "k=7 rows=7 lit=3 eol=CRLF gaps=0,1,2,2,2,1,2 kinds=const/int/pad/word/int/pad/pad",
+   "planned": false
+  },
+  {
+   "i": 96,
+   "label": "k=4 rows=12 lit=0 eol=LF gaps=0,1,2,1 kinds=clock/const/clock/clock",
+   "planned": false
+  },
+  {
+   "i": 97,
+   "label": "k=9 rows=16 lit=0 eol=CRLF gaps=0,3,3,3,3,3,3,2,2 kinds=hex/path/path/pad/pad/int/int/const/pad",
+   "planned": false
+  },
+  {
+   "i": 98,
+   "label": "k=3 rows=16 lit=3 eol=CRLF gaps=0,2,2 kinds=prog/prog/ver",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 16,
+   "literals": 4,
+   "bounds": [
+    9,
+    22
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 427,
+   "srcChars": 536
+  },
+  {
+   "i": 99,
+   "label": "k=8 rows=28 lit=0 eol=LF gaps=0,3,1,2,1,1,2,3 kinds=pad/path/prog/ver/const/hex/const/int",
+   "planned": false
+  },
+  {
+   "i": 100,
+   "label": "k=6 rows=18 lit=0 eol=LF gaps=0,3,1,3,1,2 kinds=int/tiny/prose/word/prose/clock",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 17,
+   "literals": 4,
+   "bounds": [
+    10,
+    20
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1576,
+   "srcChars": 1627
+  },
+  {
+   "i": 101,
+   "label": "k=3 rows=18 lit=0 eol=LF gaps=0,1,3 kinds=int/word/prog",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 20,
+   "literals": 1,
+   "bounds": [
+    19,
+    38
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 413,
+   "srcChars": 861
+  },
+  {
+   "i": 102,
+   "label": "k=2 rows=10 lit=0 eol=LF gaps=0,1 kinds=path/prose",
+   "planned": false
+  },
+  {
+   "i": 103,
+   "label": "k=5 rows=16 lit=0 eol=LF gaps=0,3,3,3,1 kinds=word/word/path/pad/prog",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 17,
+   "literals": 2,
+   "bounds": [
+    14,
+    46,
+    62
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 733,
+   "srcChars": 1169
+  },
+  {
+   "i": 104,
+   "label": "k=7 rows=10 lit=0 eol=LF gaps=0,3,2,2,3,1,3 kinds=tiny/word/word/hex/word/prose/int",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 8,
+   "literals": 5,
+   "bounds": [
+    10,
+    30,
+    47,
+    63
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1156,
+   "srcChars": 1112
+  },
+  {
+   "i": 105,
+   "label": "k=7 rows=14 lit=0 eol=LF gaps=0,2,3,1,1,2,2 kinds=clock/path/word/hex/pad/ver/const",
+   "planned": false
+  },
+  {
+   "i": 106,
+   "label": "k=9 rows=18 lit=3 eol=LF gaps=0,2,2,2,2,1,2,3,2 kinds=int/const/const/hex/clock/tiny/const/hex/tiny",
+   "planned": true,
+   "cols": 9,
+   "rowsN": 15,
+   "literals": 7,
+   "bounds": [
+    14,
+    29,
+    41,
+    53,
+    63,
+    77,
+    87
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1134,
+   "srcChars": 1664
+  },
+  {
+   "i": 107,
+   "label": "k=6 rows=10 lit=0 eol=LF gaps=0,3,3,3,2,1 kinds=pad/clock/prose/ver/path/hex",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 9,
+   "literals": 5,
+   "bounds": [
+    12,
+    30
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1222,
+   "srcChars": 1202
+  },
+  {
+   "i": 108,
+   "label": "k=8 rows=16 lit=0 eol=LF gaps=0,2,3,2,2,3,2,2 kinds=prog/prog/tiny/path/const/pad/tiny/prog",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 18,
+   "literals": 2,
+   "bounds": [
+    19,
+    40,
+    43
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1390,
+   "srcChars": 1907
+  },
+  {
+   "i": 109,
+   "label": "k=4 rows=31 lit=3 eol=LF gaps=0,3,1,1 kinds=int/pad/pad/word",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 30,
+   "literals": 5,
+   "bounds": [
+    12,
+    18
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 869,
+   "srcChars": 1254
+  },
+  {
+   "i": 110,
+   "label": "k=5 rows=24 lit=0 eol=LF gaps=0,3,2,2,1 kinds=clock/ver/prog/hex/pad",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 26,
+   "literals": 1,
+   "bounds": [
+    10,
+    22,
+    26,
+    42
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 746,
+   "srcChars": 1274
+  },
+  {
+   "i": 111,
+   "label": "k=2 rows=20 lit=2 eol=CRLF gaps=0,2 kinds=ver/prog",
+   "planned": false
+  },
+  {
+   "i": 112,
+   "label": "k=4 rows=32 lit=3 eol=CRLF gaps=0,2,3,1 kinds=ver/word/pad/path",
+   "planned": false
+  },
+  {
+   "i": 113,
+   "label": "k=6 rows=8 lit=0 eol=LF gaps=0,1,2,1,3,1 kinds=prose/const/clock/pad/word/ver",
+   "planned": false
+  },
+  {
+   "i": 114,
+   "label": "k=2 rows=16 lit=2 eol=CRLF gaps=0,1 kinds=int/hex",
+   "planned": false
+  },
+  {
+   "i": 115,
+   "label": "k=8 rows=16 lit=0 eol=LF gaps=0,2,2,2,1,1,2,1 kinds=clock/clock/prog/pad/prog/pad/int/prose",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 18,
+   "literals": 1,
+   "bounds": [
+    11,
+    26,
+    34,
+    52,
+    60,
+    81
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 751,
+   "srcChars": 1771
+  },
+  {
+   "i": 116,
+   "label": "k=9 rows=33 lit=0 eol=LF gaps=0,3,1,3,2,2,2,3,1 kinds=pad/clock/path/prog/hex/word/word/pad/path",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 35,
+   "literals": 2,
+   "bounds": [
+    9,
+    28,
+    68,
+    78
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2991,
+   "srcChars": 4445
+  },
+  {
+   "i": 117,
+   "label": "k=7 rows=19 lit=0 eol=LF gaps=0,2,2,1,1,2,1 kinds=path/path/clock/clock/prog/const/hex",
+   "planned": false
+  },
+  {
+   "i": 118,
+   "label": "k=4 rows=9 lit=0 eol=LF gaps=0,2,1,2 kinds=const/pad/pad/prog",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 11,
+   "literals": 0,
+   "bounds": [
+    16,
+    37
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 266,
+   "srcChars": 437
+  },
+  {
+   "i": 119,
+   "label": "k=9 rows=21 lit=0 eol=LF gaps=0,1,3,3,3,1,3,1,1 kinds=clock/int/hex/const/prog/int/word/tiny/clock",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 23,
+   "literals": 1,
+   "bounds": [
+    19,
+    31,
+    42,
+    63,
+    69,
+    75
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1473,
+   "srcChars": 2441
+  },
+  {
+   "i": 120,
+   "label": "k=3 rows=27 lit=0 eol=CRLF gaps=0,2,2 kinds=tiny/int/int",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 29,
+   "literals": 2,
+   "bounds": [
+    6,
+    9,
+    29
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 437,
+   "srcChars": 1022
+  },
+  {
+   "i": 121,
+   "label": "k=3 rows=33 lit=1 eol=LF gaps=0,2,2 kinds=int/ver/ver",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 34,
+   "literals": 2,
+   "bounds": [
+    6,
+    21
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 792,
+   "srcChars": 955
+  },
+  {
+   "i": 122,
+   "label": "k=6 rows=6 lit=2 eol=LF gaps=0,1,3,2,2,1 kinds=tiny/prog/const/clock/path/ver",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 6,
+   "literals": 4,
+   "bounds": [
+    23,
+    41,
+    51
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 527,
+   "srcChars": 503
+  },
+  {
+   "i": 123,
+   "label": "k=2 rows=30 lit=0 eol=CRLF gaps=0,2 kinds=tiny/tiny",
+   "planned": false
+  },
+  {
+   "i": 124,
+   "label": "k=7 rows=28 lit=1 eol=LF gaps=0,3,2,2,2,1,2 kinds=int/prose/const/prose/pad/prog/hex",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 24,
+   "literals": 8,
+   "bounds": [
+    9,
+    15
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2825,
+   "srcChars": 2905
+  },
+  {
+   "i": 125,
+   "label": "k=5 rows=35 lit=2 eol=LF gaps=0,1,3,1,2 kinds=const/clock/word/int/word",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 35,
+   "literals": 3,
+   "bounds": [
+    11,
+    20
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1589,
+   "srcChars": 1836
+  },
+  {
+   "i": 126,
+   "label": "k=5 rows=35 lit=1 eol=LF gaps=0,2,2,2,2 kinds=pad/const/clock/clock/clock",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 36,
+   "literals": 2,
+   "bounds": [
+    4,
+    12,
+    27,
+    41,
+    50
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1038,
+   "srcChars": 2026
+  },
+  {
+   "i": 127,
+   "label": "k=7 rows=17 lit=0 eol=LF gaps=0,3,2,1,3,2,1 kinds=int/tiny/word/pad/const/prose/int",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 18,
+   "literals": 3,
+   "bounds": [
+    18,
+    30,
+    43,
+    70
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1209,
+   "srcChars": 1950
+  },
+  {
+   "i": 128,
+   "label": "k=9 rows=34 lit=0 eol=LF gaps=0,1,2,1,2,1,3,1,3 kinds=tiny/pad/tiny/word/word/clock/int/int/const",
+   "planned": true,
+   "cols": 9,
+   "rowsN": 32,
+   "literals": 6,
+   "bounds": [
+    16,
+    34,
+    78,
+    86,
+    104,
+    110
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1753,
+   "srcChars": 4273
+  },
+  {
+   "i": 129,
+   "label": "k=2 rows=34 lit=3 eol=LF gaps=0,2 kinds=prose/word",
+   "planned": false
+  },
+  {
+   "i": 130,
+   "label": "k=8 rows=32 lit=0 eol=LF gaps=0,3,3,3,1,2,1,2 kinds=prog/path/tiny/prose/hex/ver/word/hex",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 34,
+   "literals": 1,
+   "bounds": [
+    13,
+    31,
+    40
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2803,
+   "srcChars": 3402
+  },
+  {
+   "i": 131,
+   "label": "k=3 rows=22 lit=1 eol=LF gaps=0,2,1 kinds=int/prog/pad",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 23,
+   "literals": 3,
+   "bounds": [
+    5,
+    12
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 514,
+   "srcChars": 487
+  },
+  {
+   "i": 132,
+   "label": "k=5 rows=24 lit=1 eol=LF gaps=0,3,2,2,1 kinds=ver/word/tiny/path/path",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 22,
+   "literals": 5,
+   "bounds": [
+    26,
+    45
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1755,
+   "srcChars": 1866
+  },
+  {
+   "i": 133,
+   "label": "k=7 rows=13 lit=0 eol=LF gaps=0,2,1,3,1,2,3 kinds=int/tiny/const/int/clock/prose/word",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 15,
+   "literals": 2,
+   "bounds": [
+    32,
+    58,
+    64,
+    71
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 960,
+   "srcChars": 1552
+  },
+  {
+   "i": 134,
+   "label": "k=2 rows=27 lit=3 eol=CRLF gaps=0,2 kinds=clock/ver",
+   "planned": false
+  },
+  {
+   "i": 135,
+   "label": "k=2 rows=6 lit=2 eol=LF gaps=0,2 kinds=tiny/tiny",
+   "planned": false
+  },
+  {
+   "i": 136,
+   "label": "k=8 rows=18 lit=3 eol=LF gaps=0,1,2,3,2,3,1,2 kinds=path/const/tiny/prog/path/word/pad/pad",
+   "planned": false
+  },
+  {
+   "i": 137,
+   "label": "k=4 rows=32 lit=0 eol=LF gaps=0,2,2,2 kinds=word/ver/ver/prog",
+   "planned": false
+  },
+  {
+   "i": 138,
+   "label": "k=8 rows=21 lit=0 eol=LF gaps=0,1,2,1,3,3,3,3 kinds=hex/pad/ver/prose/const/prog/prog/path",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 23,
+   "literals": 2,
+   "bounds": [
+    25,
+    35
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2359,
+   "srcChars": 2530
+  },
+  {
+   "i": 139,
+   "label": "k=9 rows=13 lit=1 eol=CRLF gaps=0,2,3,1,3,2,1,2,1 kinds=const/hex/prog/hex/const/pad/ver/clock/int",
+   "planned": true,
+   "cols": 9,
+   "rowsN": 14,
+   "literals": 3,
+   "bounds": [
+    10,
+    21,
+    35,
+    47,
+    67,
+    89,
+    100
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1000,
+   "srcChars": 1583
+  },
+  {
+   "i": 140,
+   "label": "k=7 rows=25 lit=0 eol=LF gaps=0,2,3,2,1,2,3 kinds=prose/clock/pad/clock/word/path/tiny",
+   "planned": false
+  },
+  {
+   "i": 141,
+   "label": "k=8 rows=9 lit=3 eol=LF gaps=0,1,2,3,3,3,2,1 kinds=clock/pad/path/path/pad/int/prose/hex",
+   "planned": false
+  },
+  {
+   "i": 142,
+   "label": "k=9 rows=24 lit=0 eol=LF gaps=0,3,3,2,1,1,1,3,1 kinds=clock/path/pad/int/prog/tiny/path/prog/int",
+   "planned": true,
+   "cols": 9,
+   "rowsN": 26,
+   "literals": 2,
+   "bounds": [
+    19,
+    38,
+    50,
+    77,
+    109,
+    120
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1506,
+   "srcChars": 3350
+  },
+  {
+   "i": 143,
+   "label": "k=2 rows=29 lit=0 eol=CRLF gaps=0,3 kinds=int/prog",
+   "planned": false
+  },
+  {
+   "i": 144,
+   "label": "k=9 rows=15 lit=3 eol=CRLF gaps=0,1,2,3,3,3,1,2,3 kinds=path/pad/clock/hex/const/prog/clock/int/const",
+   "planned": false
+  },
+  {
+   "i": 145,
+   "label": "k=3 rows=33 lit=0 eol=CRLF gaps=0,3,3 kinds=hex/pad/const",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 35,
+   "literals": 1,
+   "bounds": [
+    16,
+    29
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 570,
+   "srcChars": 1222
+  },
+  {
+   "i": 146,
+   "label": "k=3 rows=30 lit=3 eol=LF gaps=0,1,1 kinds=const/hex/const",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 29,
+   "literals": 4,
+   "bounds": [
+    9,
+    26
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 610,
+   "srcChars": 969
+  },
+  {
+   "i": 147,
+   "label": "k=4 rows=18 lit=0 eol=LF gaps=0,2,3,3 kinds=int/word/pad/const",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 20,
+   "literals": 2,
+   "bounds": [
+    19,
+    36,
+    53
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 473,
+   "srcChars": 1223
+  },
+  {
+   "i": 148,
+   "label": "k=4 rows=22 lit=0 eol=LF gaps=0,3,1,2 kinds=const/clock/const/path",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 24,
+   "literals": 1,
+   "bounds": [
+    15,
+    34
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 823,
+   "srcChars": 1204
+  },
+  {
+   "i": 149,
+   "label": "k=3 rows=9 lit=0 eol=LF gaps=0,3,2 kinds=path/ver/pad",
+   "planned": false
+  },
+  {
+   "i": 150,
+   "label": "k=5 rows=18 lit=2 eol=LF gaps=0,2,1,2,2 kinds=prose/prog/clock/clock/int",
+   "planned": false
+  },
+  {
+   "i": 151,
+   "label": "k=9 rows=21 lit=3 eol=CRLF gaps=0,1,3,3,3,1,1,1,2 kinds=hex/const/ver/tiny/prose/prose/hex/const/path",
+   "planned": false
+  },
+  {
+   "i": 152,
+   "label": "k=6 rows=27 lit=0 eol=LF gaps=0,1,2,2,1,2 kinds=prose/hex/hex/prose/prose/clock",
+   "planned": false
+  },
+  {
+   "i": 153,
+   "label": "k=9 rows=16 lit=0 eol=CRLF gaps=0,1,1,1,2,3,3,1,1 kinds=pad/prose/int/prog/pad/const/int/const/prog",
+   "planned": false
+  },
+  {
+   "i": 154,
+   "label": "k=7 rows=12 lit=0 eol=LF gaps=0,1,2,3,3,2,1 kinds=clock/clock/hex/pad/const/ver/int",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 14,
+   "literals": 2,
+   "bounds": [
+    31,
+    42,
+    51,
+    68,
+    83
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 779,
+   "srcChars": 1306
+  },
+  {
+   "i": 155,
+   "label": "k=4 rows=8 lit=0 eol=LF gaps=0,1,2,1 kinds=clock/word/hex/const",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 9,
+   "literals": 3,
+   "bounds": [
+    5,
+    20
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 486,
+   "srcChars": 385
+  },
+  {
+   "i": 156,
+   "label": "k=3 rows=30 lit=3 eol=LF gaps=0,3,1 kinds=path/int/ver",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 29,
+   "literals": 4,
+   "bounds": [
+    28
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 950,
+   "srcChars": 1175
+  },
+  {
+   "i": 157,
+   "label": "k=2 rows=26 lit=0 eol=LF gaps=0,2 kinds=path/ver",
+   "planned": false
+  },
+  {
+   "i": 158,
+   "label": "k=5 rows=21 lit=0 eol=LF gaps=0,1,3,1,3 kinds=const/int/path/prose/pad",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 23,
+   "literals": 1,
+   "bounds": [
+    14,
+    26,
+    44
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1414,
+   "srcChars": 1686
+  },
+  {
+   "i": 159,
+   "label": "k=8 rows=24 lit=3 eol=LF gaps=0,2,3,1,1,2,2,1 kinds=clock/word/prose/prose/prose/prose/prog/const",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 17,
+   "literals": 11,
+   "bounds": [
+    17
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 3352,
+   "srcChars": 3372
+  },
+  {
+   "i": 160,
+   "label": "k=5 rows=14 lit=1 eol=LF gaps=0,1,1,3,3 kinds=word/ver/word/hex/tiny",
+   "planned": false
+  },
+  {
+   "i": 161,
+   "label": "k=4 rows=16 lit=0 eol=LF gaps=0,1,3,2 kinds=pad/int/path/ver",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 18,
+   "literals": 1,
+   "bounds": [
+    10,
+    16
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 674,
+   "srcChars": 689
+  },
+  {
+   "i": 162,
+   "label": "k=3 rows=22 lit=0 eol=LF gaps=0,2,1 kinds=hex/const/int",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 24,
+   "literals": 2,
+   "bounds": [
+    15,
+    30
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 544,
+   "srcChars": 852
+  },
+  {
+   "i": 163,
+   "label": "k=5 rows=30 lit=0 eol=LF gaps=0,2,1,1,3 kinds=clock/hex/prose/path/pad",
+   "planned": false
+  },
+  {
+   "i": 164,
+   "label": "k=7 rows=32 lit=1 eol=LF gaps=0,3,1,1,2,3,1 kinds=prose/prog/word/clock/const/path/int",
+   "planned": false
+  },
+  {
+   "i": 165,
+   "label": "k=3 rows=8 lit=0 eol=LF gaps=0,3,1 kinds=prog/ver/word",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 10,
+   "literals": 2,
+   "bounds": [
+    17
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 392,
+   "srcChars": 313
+  },
+  {
+   "i": 166,
+   "label": "k=6 rows=22 lit=3 eol=LF gaps=0,2,2,2,2,1 kinds=word/prose/word/tiny/pad/tiny",
+   "planned": false
+  },
+  {
+   "i": 167,
+   "label": "k=5 rows=13 lit=2 eol=CRLF gaps=0,2,3,1,3 kinds=clock/hex/prog/const/ver",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 13,
+   "literals": 3,
+   "bounds": [
+    11,
+    18,
+    29,
+    48,
+    68
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 579,
+   "srcChars": 997
+  },
+  {
+   "i": 168,
+   "label": "k=8 rows=34 lit=2 eol=LF gaps=0,3,1,2,3,2,2,2 kinds=prog/int/hex/tiny/hex/path/ver/path",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 34,
+   "literals": 4,
+   "bounds": [
+    21,
+    27,
+    44,
+    48,
+    64
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2705,
+   "srcChars": 3841
+  },
+  {
+   "i": 169,
+   "label": "k=9 rows=17 lit=0 eol=LF gaps=0,1,1,2,1,3,1,2,2 kinds=prog/prose/const/hex/const/prog/ver/path/prog",
+   "planned": false
+  },
+  {
+   "i": 170,
+   "label": "k=3 rows=35 lit=1 eol=LF gaps=0,1,3 kinds=prog/word/pad",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 32,
+   "literals": 7,
+   "bounds": [
+    6,
+    16
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 750,
+   "srcChars": 876
+  },
+  {
+   "i": 171,
+   "label": "k=2 rows=28 lit=0 eol=LF gaps=0,2 kinds=int/prog",
+   "planned": false
+  },
+  {
+   "i": 172,
+   "label": "k=4 rows=12 lit=0 eol=CRLF gaps=0,1,3,2 kinds=prose/word/const/ver",
+   "planned": false
+  },
+  {
+   "i": 173,
+   "label": "k=5 rows=27 lit=1 eol=CRLF gaps=0,3,1,3,3 kinds=tiny/int/int/tiny/hex",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 28,
+   "literals": 2,
+   "bounds": [
+    15,
+    19,
+    44,
+    55,
+    59
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 768,
+   "srcChars": 2029
+  },
+  {
+   "i": 174,
+   "label": "k=3 rows=9 lit=2 eol=LF gaps=0,2,2 kinds=clock/tiny/pad",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 9,
+   "literals": 3,
+   "bounds": [
+    7,
+    18
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 354,
+   "srcChars": 267
+  },
+  {
+   "i": 175,
+   "label": "k=2 rows=32 lit=0 eol=LF gaps=0,1 kinds=prose/prose",
+   "planned": false
+  },
+  {
+   "i": 176,
+   "label": "k=6 rows=35 lit=1 eol=CRLF gaps=0,2,2,2,2,2 kinds=const/hex/int/const/int/word",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 36,
+   "literals": 2,
+   "bounds": [
+    11,
+    26,
+    31,
+    59,
+    64
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 966,
+   "srcChars": 2568
+  },
+  {
+   "i": 177,
+   "label": "k=9 rows=20 lit=0 eol=LF gaps=0,3,2,1,2,3,3,2,1 kinds=pad/word/pad/pad/ver/clock/const/pad/const",
+   "planned": true,
+   "cols": 9,
+   "rowsN": 21,
+   "literals": 3,
+   "bounds": [
+    12,
+    23,
+    33,
+    41,
+    58,
+    71,
+    87
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1405,
+   "srcChars": 2290
+  },
+  {
+   "i": 178,
+   "label": "k=6 rows=20 lit=3 eol=LF gaps=0,2,3,2,3,1 kinds=path/clock/int/prog/int/ver",
+   "planned": false
+  },
+  {
+   "i": 179,
+   "label": "k=9 rows=24 lit=2 eol=LF gaps=0,3,1,2,3,3,1,1,2 kinds=pad/int/tiny/prog/ver/tiny/ver/int/clock",
+   "planned": true,
+   "cols": 9,
+   "rowsN": 24,
+   "literals": 4,
+   "bounds": [
+    10,
+    28,
+    52,
+    71,
+    78,
+    89,
+    98
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1298,
+   "srcChars": 2639
+  },
+  {
+   "i": 180,
+   "label": "k=2 rows=28 lit=2 eol=LF gaps=0,3 kinds=ver/hex",
+   "planned": false
+  },
+  {
+   "i": 181,
+   "label": "k=2 rows=32 lit=1 eol=LF gaps=0,1 kinds=tiny/tiny",
+   "planned": false
+  },
+  {
+   "i": 182,
+   "label": "k=7 rows=14 lit=0 eol=LF gaps=0,3,3,3,3,3,2 kinds=prose/path/word/tiny/word/int/ver",
+   "planned": false
+  },
+  {
+   "i": 183,
+   "label": "k=3 rows=9 lit=0 eol=CRLF gaps=0,3,2 kinds=word/tiny/clock",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 12,
+   "literals": 1,
+   "bounds": [
+    10,
+    19
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 325,
+   "srcChars": 312
+  },
+  {
+   "i": 184,
+   "label": "k=4 rows=13 lit=1 eol=LF gaps=0,1,2,1 kinds=tiny/path/pad/tiny",
+   "planned": false
+  },
+  {
+   "i": 185,
+   "label": "k=5 rows=9 lit=2 eol=LF gaps=0,3,3,3,3 kinds=const/tiny/const/clock/ver",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 9,
+   "literals": 3,
+   "bounds": [
+    21,
+    40,
+    57,
+    78
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 445,
+   "srcChars": 800
+  },
+  {
+   "i": 186,
+   "label": "k=5 rows=10 lit=0 eol=LF gaps=0,1,3,3,3 kinds=prose/prose/int/pad/hex",
+   "planned": false
+  },
+  {
+   "i": 187,
+   "label": "k=8 rows=22 lit=0 eol=LF gaps=0,3,2,1,2,1,3,2 kinds=prose/pad/const/path/hex/int/hex/word",
+   "planned": false
+  },
+  {
+   "i": 188,
+   "label": "k=5 rows=9 lit=0 eol=CRLF gaps=0,2,2,2,3 kinds=hex/prog/ver/clock/path",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 11,
+   "literals": 2,
+   "bounds": [
+    10,
+    51,
+    59
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 661,
+   "srcChars": 876
+  },
+  {
+   "i": 189,
+   "label": "k=6 rows=24 lit=0 eol=LF gaps=0,3,3,3,3,1 kinds=prog/hex/path/pad/prog/int",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 20,
+   "literals": 8,
+   "bounds": [
+    16,
+    28,
+    45,
+    66,
+    81
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1560,
+   "srcChars": 2303
+  },
+  {
+   "i": 190,
+   "label": "k=9 rows=24 lit=0 eol=LF gaps=0,3,3,1,1,1,1,1,2 kinds=ver/clock/path/clock/prog/prose/pad/prog/path",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 26,
+   "literals": 2,
+   "bounds": [
+    17,
+    27
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 3589,
+   "srcChars": 3794
+  },
+  {
+   "i": 191,
+   "label": "k=3 rows=32 lit=0 eol=LF gaps=0,3,1 kinds=clock/const/hex",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 34,
+   "literals": 1,
+   "bounds": [
+    13,
+    23
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 694,
+   "srcChars": 1088
+  },
+  {
+   "i": 192,
+   "label": "k=3 rows=21 lit=0 eol=LF gaps=0,2,3 kinds=path/tiny/prog",
+   "planned": false
+  },
+  {
+   "i": 193,
+   "label": "k=3 rows=18 lit=3 eol=LF gaps=0,3,1 kinds=const/clock/clock",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 18,
+   "literals": 4,
+   "bounds": [
+    20
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 535,
+   "srcChars": 656
+  },
+  {
+   "i": 194,
+   "label": "k=5 rows=28 lit=3 eol=LF gaps=0,1,2,3,1 kinds=path/clock/ver/word/path",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 27,
+   "literals": 4,
+   "bounds": [
+    30,
+    43,
+    55
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1466,
+   "srcChars": 1920
+  },
+  {
+   "i": 195,
+   "label": "k=5 rows=35 lit=2 eol=LF gaps=0,2,2,3,2 kinds=word/tiny/hex/word/hex",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 35,
+   "literals": 3,
+   "bounds": [
+    15,
+    20,
+    31,
+    45
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1065,
+   "srcChars": 1923
+  },
+  {
+   "i": 196,
+   "label": "k=6 rows=18 lit=0 eol=LF gaps=0,1,1,1,1,3 kinds=tiny/prog/pad/const/prog/word",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 20,
+   "literals": 2,
+   "bounds": [
+    14,
+    32,
+    49,
+    60
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 462,
+   "srcChars": 1388
+  },
+  {
+   "i": 197,
+   "label": "k=8 rows=11 lit=0 eol=LF gaps=0,2,3,3,3,1,3,2 kinds=prog/const/pad/int/hex/prog/hex/prose",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 8,
+   "literals": 6,
+   "bounds": [
+    11,
+    15
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1532,
+   "srcChars": 1431
+  },
+  {
+   "i": 198,
+   "label": "k=4 rows=13 lit=2 eol=CRLF gaps=0,3,1,1 kinds=hex/hex/prose/prog",
+   "planned": false
+  },
+  {
+   "i": 199,
+   "label": "k=4 rows=22 lit=3 eol=LF gaps=0,2,3,2 kinds=ver/pad/const/hex",
+   "planned": false
+  },
+  {
+   "i": 200,
+   "label": "k=7 rows=34 lit=3 eol=LF gaps=0,1,2,2,2,3,2 kinds=ver/int/hex/prog/word/pad/pad",
+   "planned": false
+  },
+  {
+   "i": 201,
+   "label": "k=6 rows=21 lit=2 eol=LF gaps=0,3,1,1,3,1 kinds=clock/int/hex/const/hex/const",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 21,
+   "literals": 4,
+   "bounds": [
+    26,
+    31,
+    57
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 941,
+   "srcChars": 1612
+  },
+  {
+   "i": 202,
+   "label": "k=9 rows=13 lit=0 eol=LF gaps=0,1,3,1,2,2,1,3,1 kinds=path/prog/hex/word/const/path/path/word/path",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 14,
+   "literals": 2,
+   "bounds": [
+    28,
+    50,
+    66,
+    100,
+    118
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1756,
+   "srcChars": 1992
+  },
+  {
+   "i": 203,
+   "label": "k=7 rows=34 lit=2 eol=LF gaps=0,3,3,1,3,1,3 kinds=path/clock/pad/prog/prog/tiny/tiny",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 34,
+   "literals": 4,
+   "bounds": [
+    18,
+    37,
+    60,
+    72,
+    83
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1540,
+   "srcChars": 3002
+  },
+  {
+   "i": 204,
+   "label": "k=5 rows=24 lit=0 eol=LF gaps=0,2,1,3,1 kinds=word/pad/prose/prog/prose",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 17,
+   "literals": 10,
+   "bounds": [
+    16,
+    25
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2133,
+   "srcChars": 2175
+  },
+  {
+   "i": 205,
+   "label": "k=6 rows=19 lit=0 eol=LF gaps=0,3,2,1,2,3 kinds=int/prose/word/prose/hex/clock",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 17,
+   "literals": 6,
+   "bounds": [
+    14,
+    20
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2002,
+   "srcChars": 2084
+  },
+  {
+   "i": 206,
+   "label": "k=5 rows=10 lit=0 eol=LF gaps=0,2,1,1,1 kinds=prog/word/hex/pad/path",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 12,
+   "literals": 1,
+   "bounds": [
+    58
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 662,
+   "srcChars": 1017
+  },
+  {
+   "i": 207,
+   "label": "k=6 rows=6 lit=1 eol=LF gaps=0,3,3,2,3,2 kinds=prose/clock/prog/word/hex/prog",
+   "planned": false
+  },
+  {
+   "i": 208,
+   "label": "k=2 rows=10 lit=0 eol=LF gaps=0,1 kinds=pad/prog",
+   "planned": false
+  },
+  {
+   "i": 209,
+   "label": "k=7 rows=31 lit=2 eol=LF gaps=0,2,1,2,2,3,1 kinds=ver/prose/clock/pad/pad/ver/prog",
+   "planned": false
+  },
+  {
+   "i": 210,
+   "label": "k=2 rows=19 lit=1 eol=LF gaps=0,1 kinds=clock/prog",
+   "planned": false
+  },
+  {
+   "i": 211,
+   "label": "k=4 rows=15 lit=2 eol=LF gaps=0,3,3,3 kinds=word/pad/const/word",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 12,
+   "literals": 7,
+   "bounds": [
+    20,
+    29
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 633,
+   "srcChars": 673
+  },
+  {
+   "i": 212,
+   "label": "k=9 rows=10 lit=1 eol=CRLF gaps=0,2,1,3,1,1,3,2,1 kinds=tiny/prose/word/tiny/tiny/prose/tiny/const/clock",
+   "planned": false
+  },
+  {
+   "i": 213,
+   "label": "k=5 rows=16 lit=3 eol=LF gaps=0,1,2,2,3 kinds=clock/hex/path/clock/int",
+   "planned": false
+  },
+  {
+   "i": 214,
+   "label": "k=2 rows=32 lit=0 eol=LF gaps=0,1 kinds=word/tiny",
+   "planned": false
+  },
+  {
+   "i": 215,
+   "label": "k=9 rows=9 lit=0 eol=LF gaps=0,1,3,3,2,2,1,2,2 kinds=path/word/clock/word/hex/prose/prose/word/clock",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 10,
+   "literals": 2,
+   "bounds": [
+    30,
+    40
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1496,
+   "srcChars": 1418
+  },
+  {
+   "i": 216,
+   "label": "k=8 rows=13 lit=1 eol=LF gaps=0,3,2,2,3,3,1,1 kinds=int/prose/ver/path/ver/clock/clock/const",
+   "planned": false
+  },
+  {
+   "i": 217,
+   "label": "k=9 rows=10 lit=0 eol=LF gaps=0,1,2,1,3,3,1,3,1 kinds=pad/hex/pad/prose/pad/int/int/word/prose",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 12,
+   "literals": 2,
+   "bounds": [
+    9,
+    19,
+    32
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1408,
+   "srcChars": 1462
+  },
+  {
+   "i": 218,
+   "label": "k=2 rows=7 lit=0 eol=CRLF gaps=0,1 kinds=hex/hex",
+   "planned": false
+  },
+  {
+   "i": 219,
+   "label": "k=9 rows=14 lit=0 eol=CRLF gaps=0,3,2,2,3,2,1,2,1 kinds=prose/clock/clock/int/prose/word/const/path/tiny",
+   "planned": false
+  },
+  {
+   "i": 220,
+   "label": "k=9 rows=21 lit=0 eol=CRLF gaps=0,3,3,2,1,1,1,3,3 kinds=pad/word/const/prog/path/clock/path/path/prose",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 20,
+   "literals": 5,
+   "bounds": [
+    10,
+    39,
+    58
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 3025,
+   "srcChars": 3328
+  },
+  {
+   "i": 221,
+   "label": "k=2 rows=11 lit=1 eol=LF gaps=0,3 kinds=ver/prog",
+   "planned": false
+  },
+  {
+   "i": 222,
+   "label": "k=7 rows=25 lit=0 eol=CRLF gaps=0,1,1,1,2,2,1 kinds=word/path/ver/tiny/path/tiny/word",
+   "planned": false
+  },
+  {
+   "i": 223,
+   "label": "k=6 rows=17 lit=0 eol=CRLF gaps=0,2,3,2,3,1 kinds=hex/prose/ver/prose/pad/int",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 15,
+   "literals": 5,
+   "bounds": [
+    10,
+    20
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1917,
+   "srcChars": 1888
+  },
+  {
+   "i": 224,
+   "label": "k=8 rows=28 lit=1 eol=LF gaps=0,2,2,2,1,3,3,3 kinds=clock/ver/const/pad/path/clock/ver/word",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 29,
+   "literals": 2,
+   "bounds": [
+    13,
+    24,
+    43,
+    58
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2111,
+   "srcChars": 3004
+  },
+  {
+   "i": 225,
+   "label": "k=8 rows=10 lit=3 eol=LF gaps=0,2,1,2,1,2,2,2 kinds=tiny/word/tiny/tiny/clock/ver/word/int",
+   "planned": true,
+   "cols": 8,
+   "rowsN": 8,
+   "literals": 5,
+   "bounds": [
+    16,
+    35,
+    38,
+    54,
+    77
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 664,
+   "srcChars": 827
+  },
+  {
+   "i": 226,
+   "label": "k=9 rows=10 lit=1 eol=LF gaps=0,1,2,3,3,1,2,1,1 kinds=hex/int/hex/word/hex/hex/const/prog/path",
+   "planned": true,
+   "cols": 9,
+   "rowsN": 11,
+   "literals": 3,
+   "bounds": [
+    16,
+    24,
+    41,
+    58,
+    68,
+    78,
+    99
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1053,
+   "srcChars": 1408
+  },
+  {
+   "i": 227,
+   "label": "k=7 rows=13 lit=2 eol=LF gaps=0,2,1,2,3,1,3 kinds=pad/hex/path/hex/pad/int/pad",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 13,
+   "literals": 3,
+   "bounds": [
+    8,
+    37,
+    48,
+    67,
+    84
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1009,
+   "srcChars": 1307
+  },
+  {
+   "i": 228,
+   "label": "k=7 rows=24 lit=3 eol=LF gaps=0,2,3,3,2,1,3 kinds=word/prose/prog/prog/hex/const/path",
+   "planned": false
+  },
+  {
+   "i": 229,
+   "label": "k=3 rows=22 lit=1 eol=LF gaps=0,1,2 kinds=path/pad/pad",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 23,
+   "literals": 2,
+   "bounds": [
+    24
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 814,
+   "srcChars": 729
+  },
+  {
+   "i": 230,
+   "label": "k=2 rows=33 lit=3 eol=LF gaps=0,1 kinds=int/word",
+   "planned": false
+  },
+  {
+   "i": 231,
+   "label": "k=4 rows=8 lit=0 eol=LF gaps=0,1,3,1 kinds=tiny/const/word/path",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 10,
+   "literals": 2,
+   "bounds": [
+    25,
+    33
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 511,
+   "srcChars": 514
+  },
+  {
+   "i": 232,
+   "label": "k=9 rows=18 lit=0 eol=LF gaps=0,1,2,2,1,1,3,1,3 kinds=clock/const/ver/word/int/ver/path/hex/tiny",
+   "planned": true,
+   "cols": 9,
+   "rowsN": 12,
+   "literals": 9,
+   "bounds": [
+    23
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1926,
+   "srcChars": 2323
+  },
+  {
+   "i": 233,
+   "label": "k=4 rows=16 lit=3 eol=LF gaps=0,3,1,2 kinds=prose/tiny/hex/prose",
+   "planned": false
+  },
+  {
+   "i": 234,
+   "label": "k=6 rows=13 lit=1 eol=LF gaps=0,2,2,3,3,3 kinds=clock/int/path/path/prose/ver",
+   "planned": false
+  },
+  {
+   "i": 235,
+   "label": "k=4 rows=13 lit=0 eol=LF gaps=0,1,3,3 kinds=pad/tiny/tiny/ver",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 15,
+   "literals": 2,
+   "bounds": [
+    4,
+    21,
+    25,
+    37
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 418,
+   "srcChars": 695
+  },
+  {
+   "i": 236,
+   "label": "k=7 rows=16 lit=0 eol=LF gaps=0,2,1,3,2,2,2 kinds=hex/clock/hex/prog/clock/prog/word",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 18,
+   "literals": 2,
+   "bounds": [
+    20,
+    39,
+    48,
+    55,
+    75
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 887,
+   "srcChars": 1541
+  },
+  {
+   "i": 237,
+   "label": "k=3 rows=7 lit=3 eol=CRLF gaps=0,2,1 kinds=pad/prose/hex",
+   "planned": false
+  },
+  {
+   "i": 238,
+   "label": "k=9 rows=31 lit=0 eol=LF gaps=0,2,3,3,3,1,3,3,3 kinds=ver/int/const/tiny/int/path/path/int/hex",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 33,
+   "literals": 2,
+   "bounds": [
+    15,
+    28,
+    55,
+    59,
+    77
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2829,
+   "srcChars": 4633
+  },
+  {
+   "i": 239,
+   "label": "k=7 rows=28 lit=2 eol=LF gaps=0,3,3,3,1,3,3 kinds=word/int/prose/tiny/clock/ver/hex",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 28,
+   "literals": 4,
+   "bounds": [
+    21,
+    27
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2681,
+   "srcChars": 3032
+  },
+  {
+   "i": 240,
+   "label": "k=2 rows=23 lit=0 eol=LF gaps=0,3 kinds=prose/const",
+   "planned": false
+  },
+  {
+   "i": 241,
+   "label": "k=6 rows=15 lit=0 eol=LF gaps=0,1,2,3,1,3 kinds=clock/pad/prose/clock/ver/tiny",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 17,
+   "literals": 1,
+   "bounds": [
+    27,
+    35
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1386,
+   "srcChars": 1677
+  },
+  {
+   "i": 242,
+   "label": "k=8 rows=12 lit=0 eol=LF gaps=0,3,1,3,2,3,2,2 kinds=word/prog/pad/prog/hex/prog/word/const",
+   "planned": true,
+   "cols": 8,
+   "rowsN": 14,
+   "literals": 1,
+   "bounds": [
+    28,
+    41,
+    58,
+    62,
+    73,
+    93,
+    111
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 551,
+   "srcChars": 1628
+  },
+  {
+   "i": 243,
+   "label": "k=7 rows=30 lit=3 eol=LF gaps=0,1,3,3,1,1,1 kinds=tiny/path/tiny/pad/tiny/prog/word",
+   "planned": false
+  },
+  {
+   "i": 244,
+   "label": "k=2 rows=23 lit=0 eol=LF gaps=0,1 kinds=tiny/path",
+   "planned": false
+  },
+  {
+   "i": 245,
+   "label": "k=6 rows=26 lit=3 eol=LF gaps=0,2,1,3,3,3 kinds=path/const/int/int/word/const",
+   "planned": false
+  },
+  {
+   "i": 246,
+   "label": "k=2 rows=11 lit=3 eol=CRLF gaps=0,2 kinds=clock/prose",
+   "planned": false
+  },
+  {
+   "i": 247,
+   "label": "k=5 rows=27 lit=3 eol=LF gaps=0,1,1,1,2 kinds=tiny/prog/clock/const/ver",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 26,
+   "literals": 4,
+   "bounds": [
+    4,
+    23,
+    39,
+    55
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 718,
+   "srcChars": 1618
+  },
+  {
+   "i": 248,
+   "label": "k=8 rows=18 lit=2 eol=LF gaps=0,2,2,1,1,2,1,1 kinds=tiny/path/clock/int/tiny/word/path/pad",
+   "planned": false
+  },
+  {
+   "i": 249,
+   "label": "k=8 rows=30 lit=1 eol=LF gaps=0,3,1,1,2,2,2,1 kinds=hex/pad/clock/word/word/word/prog/ver",
+   "planned": true,
+   "cols": 8,
+   "rowsN": 31,
+   "literals": 2,
+   "bounds": [
+    17,
+    43
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1477,
+   "srcChars": 2864
+  },
+  {
+   "i": 250,
+   "label": "k=3 rows=27 lit=0 eol=CRLF gaps=0,2,1 kinds=int/clock/const",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 29,
+   "literals": 0,
+   "bounds": [
+    22
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 476,
+   "srcChars": 1001
+  },
+  {
+   "i": 251,
+   "label": "k=9 rows=25 lit=2 eol=LF gaps=0,3,2,1,3,2,3,3,2 kinds=const/pad/ver/prose/pad/prog/word/const/word",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 25,
+   "literals": 3,
+   "bounds": [
+    12,
+    20
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2764,
+   "srcChars": 2814
+  },
+  {
+   "i": 252,
+   "label": "k=8 rows=9 lit=0 eol=LF gaps=0,2,2,1,2,3,3,2 kinds=word/hex/path/tiny/pad/tiny/tiny/pad",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 8,
+   "literals": 4,
+   "bounds": [
+    7,
+    17
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1167,
+   "srcChars": 1043
+  },
+  {
+   "i": 253,
+   "label": "k=6 rows=6 lit=3 eol=LF gaps=0,3,1,3,1,3 kinds=path/word/path/tiny/int/prog",
+   "planned": false
+  },
+  {
+   "i": 254,
+   "label": "k=5 rows=30 lit=3 eol=LF gaps=0,1,1,1,1 kinds=int/prog/path/ver/pad",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 29,
+   "literals": 4,
+   "bounds": [
+    15
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1630,
+   "srcChars": 1943
+  },
+  {
+   "i": 255,
+   "label": "k=7 rows=16 lit=0 eol=LF gaps=0,2,2,1,3,1,2 kinds=clock/int/clock/prog/ver/prose/const",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 18,
+   "literals": 1,
+   "bounds": [
+    17,
+    35,
+    51,
+    56,
+    67
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1175,
+   "srcChars": 1718
+  },
+  {
+   "i": 256,
+   "label": "k=3 rows=23 lit=2 eol=LF gaps=0,1,3 kinds=prog/word/prose",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 17,
+   "literals": 10,
+   "bounds": [
+    7,
+    16
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 924,
+   "srcChars": 881
+  },
+  {
+   "i": 257,
+   "label": "k=2 rows=14 lit=0 eol=CRLF gaps=0,1 kinds=tiny/path",
+   "planned": false
+  },
+  {
+   "i": 258,
+   "label": "k=4 rows=16 lit=0 eol=LF gaps=0,2,3,3 kinds=pad/path/hex/pad",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 18,
+   "literals": 1,
+   "bounds": [
+    6,
+    14
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 817,
+   "srcChars": 995
+  },
+  {
+   "i": 259,
+   "label": "k=2 rows=22 lit=0 eol=CRLF gaps=0,1 kinds=pad/const",
+   "planned": false
+  },
+  {
+   "i": 260,
+   "label": "k=5 rows=23 lit=1 eol=LF gaps=0,2,2,2,1 kinds=clock/pad/ver/path/prose",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 24,
+   "literals": 3,
+   "bounds": [
+    16,
+    47
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1570,
+   "srcChars": 2045
+  },
+  {
+   "i": 261,
+   "label": "k=2 rows=29 lit=1 eol=LF gaps=0,1 kinds=const/tiny",
+   "planned": false
+  },
+  {
+   "i": 262,
+   "label": "k=8 rows=17 lit=1 eol=LF gaps=0,3,1,2,2,3,2,2 kinds=const/ver/path/int/prose/prose/const/ver",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 16,
+   "literals": 4,
+   "bounds": [
+    9,
+    20
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2136,
+   "srcChars": 2128
+  },
+  {
+   "i": 263,
+   "label": "k=8 rows=28 lit=3 eol=CRLF gaps=0,1,1,3,1,3,3,1 kinds=path/clock/pad/word/ver/prose/word/path",
+   "planned": false
+  },
+  {
+   "i": 264,
+   "label": "k=8 rows=20 lit=0 eol=LF gaps=0,2,3,3,2,1,1,3 kinds=pad/prog/ver/prose/hex/ver/int/tiny",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 22,
+   "literals": 0,
+   "bounds": [
+    9,
+    20,
+    40
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2024,
+   "srcChars": 2264
+  },
+  {
+   "i": 265,
+   "label": "k=3 rows=35 lit=2 eol=LF gaps=0,3,3 kinds=const/tiny/hex",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 35,
+   "literals": 3,
+   "bounds": [
+    18,
+    22
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 619,
+   "srcChars": 1118
+  },
+  {
+   "i": 266,
+   "label": "k=6 rows=35 lit=2 eol=CRLF gaps=0,2,3,2,2,1 kinds=prose/prog/word/clock/tiny/pad",
+   "planned": false
+  },
+  {
+   "i": 267,
+   "label": "k=6 rows=26 lit=0 eol=LF gaps=0,2,1,1,3,1 kinds=hex/pad/clock/hex/prose/hex",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 28,
+   "literals": 1,
+   "bounds": [
+    14,
+    41
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1865,
+   "srcChars": 2010
+  },
+  {
+   "i": 268,
+   "label": "k=5 rows=9 lit=0 eol=LF gaps=0,1,1,3,2 kinds=hex/prose/hex/prog/prose",
+   "planned": false
+  },
+  {
+   "i": 269,
+   "label": "k=7 rows=6 lit=3 eol=LF gaps=0,3,2,2,3,2,3 kinds=ver/word/prog/int/const/int/ver",
+   "planned": false
+  },
+  {
+   "i": 270,
+   "label": "k=5 rows=14 lit=2 eol=LF gaps=0,1,1,2,1 kinds=prose/path/int/int/ver",
+   "planned": false
+  },
+  {
+   "i": 271,
+   "label": "k=2 rows=23 lit=2 eol=LF gaps=0,1 kinds=prose/const",
+   "planned": false
+  },
+  {
+   "i": 272,
+   "label": "k=4 rows=22 lit=3 eol=LF gaps=0,1,3,2 kinds=word/ver/const/hex",
+   "planned": false
+  },
+  {
+   "i": 273,
+   "label": "k=9 rows=30 lit=0 eol=LF gaps=0,2,1,1,2,3,1,3,3 kinds=hex/ver/hex/ver/path/prose/const/path/pad",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 32,
+   "literals": 2,
+   "bounds": [
+    17,
+    41
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 3722,
+   "srcChars": 3746
+  },
+  {
+   "i": 274,
+   "label": "k=9 rows=29 lit=0 eol=LF gaps=0,3,3,3,2,2,2,1,2 kinds=prose/prog/const/word/prose/const/hex/prog/tiny",
+   "planned": false
+  },
+  {
+   "i": 275,
+   "label": "k=3 rows=9 lit=0 eol=LF gaps=0,2,1 kinds=clock/tiny/hex",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 11,
+   "literals": 2,
+   "bounds": [
+    20,
+    36
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 396,
+   "srcChars": 537
+  },
+  {
+   "i": 276,
+   "label": "k=8 rows=15 lit=3 eol=CRLF gaps=0,3,3,1,2,3,2,3 kinds=hex/pad/word/clock/path/ver/pad/hex",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 13,
+   "literals": 5,
+   "bounds": [
+    7,
+    18,
+    46
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1608,
+   "srcChars": 1597
+  },
+  {
+   "i": 277,
+   "label": "k=4 rows=17 lit=1 eol=LF gaps=0,1,3,1 kinds=const/hex/clock/ver",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 11,
+   "literals": 9,
+   "bounds": [],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 790,
+   "srcChars": 684
+  },
+  {
+   "i": 278,
+   "label": "k=8 rows=12 lit=3 eol=LF gaps=0,2,3,3,1,1,3,2 kinds=pad/hex/prog/pad/ver/path/hex/ver",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 11,
+   "literals": 4,
+   "bounds": [
+    8,
+    22,
+    42,
+    54,
+    73
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1170,
+   "srcChars": 1310
+  },
+  {
+   "i": 279,
+   "label": "k=6 rows=25 lit=3 eol=LF gaps=0,3,3,2,1,1 kinds=const/path/int/hex/const/tiny",
+   "planned": false
+  },
+  {
+   "i": 280,
+   "label": "k=6 rows=35 lit=2 eol=CRLF gaps=0,2,3,1,1,1 kinds=tiny/int/pad/word/clock/pad",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 35,
+   "literals": 4,
+   "bounds": [
+    15,
+    22,
+    67
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1159,
+   "srcChars": 2721
+  },
+  {
+   "i": 281,
+   "label": "k=7 rows=7 lit=0 eol=LF gaps=0,2,2,3,2,3,3 kinds=prog/tiny/int/clock/hex/clock/prog",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 9,
+   "literals": 2,
+   "bounds": [
+    17,
+    44,
+    50,
+    65,
+    76,
+    87
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 548,
+   "srcChars": 897
+  },
+  {
+   "i": 282,
+   "label": "k=4 rows=28 lit=1 eol=LF gaps=0,3,1,3 kinds=pad/word/word/hex",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 21,
+   "literals": 10,
+   "bounds": [
+    9,
+    25,
+    33
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1059,
+   "srcChars": 1279
+  },
+  {
+   "i": 283,
+   "label": "k=8 rows=19 lit=0 eol=CRLF gaps=0,1,1,2,3,2,2,1 kinds=prog/path/path/int/ver/int/clock/word",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 21,
+   "literals": 2,
+   "bounds": [
+    3,
+    24
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2381,
+   "srcChars": 2399
+  },
+  {
+   "i": 284,
+   "label": "k=9 rows=33 lit=1 eol=CRLF gaps=0,1,1,1,3,2,3,2,2 kinds=prose/prog/hex/tiny/prog/word/prog/word/ver",
+   "planned": false
+  },
+  {
+   "i": 285,
+   "label": "k=9 rows=27 lit=2 eol=LF gaps=0,1,2,1,2,1,1,3,2 kinds=path/clock/path/int/prose/ver/int/clock/clock",
+   "planned": false
+  },
+  {
+   "i": 286,
+   "label": "k=5 rows=14 lit=0 eol=LF gaps=0,2,1,3,1 kinds=tiny/path/hex/ver/prose",
+   "planned": false
+  },
+  {
+   "i": 287,
+   "label": "k=8 rows=27 lit=0 eol=LF gaps=0,2,3,2,1,3,1,3 kinds=prog/ver/hex/word/const/ver/tiny/tiny",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 29,
+   "literals": 1,
+   "bounds": [
+    18,
+    37,
+    47
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2049,
+   "srcChars": 2774
+  },
+  {
+   "i": 288,
+   "label": "k=6 rows=13 lit=0 eol=CRLF gaps=0,2,1,2,2,3 kinds=hex/pad/tiny/clock/prog/int",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 15,
+   "literals": 1,
+   "bounds": [
+    10,
+    31,
+    47,
+    50,
+    62,
+    72
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 514,
+   "srcChars": 1155
+  },
+  {
+   "i": 289,
+   "label": "k=5 rows=27 lit=0 eol=LF gaps=0,2,3,3,1 kinds=clock/clock/word/prog/pad",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 29,
+   "literals": 2,
+   "bounds": [
+    15,
+    23
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1391,
+   "srcChars": 1584
+  },
+  {
+   "i": 290,
+   "label": "k=4 rows=35 lit=0 eol=LF gaps=0,1,3,1 kinds=tiny/pad/path/clock",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 37,
+   "literals": 2,
+   "bounds": [
+    8,
+    17
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1083,
+   "srcChars": 1420
+  },
+  {
+   "i": 291,
+   "label": "k=3 rows=9 lit=2 eol=LF gaps=0,3,1 kinds=const/pad/clock",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 9,
+   "literals": 3,
+   "bounds": [
+    12,
+    28
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 361,
+   "srcChars": 356
+  },
+  {
+   "i": 292,
+   "label": "k=2 rows=18 lit=0 eol=LF gaps=0,3 kinds=tiny/const",
+   "planned": false
+  },
+  {
+   "i": 293,
+   "label": "k=4 rows=25 lit=0 eol=LF gaps=0,2,2,3 kinds=word/tiny/const/prose",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 27,
+   "literals": 1,
+   "bounds": [
+    29,
+    32,
+    53
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1154,
+   "srcChars": 2202
+  },
+  {
+   "i": 294,
+   "label": "k=6 rows=11 lit=0 eol=CRLF gaps=0,2,1,1,2,3 kinds=word/int/path/prose/hex/prose",
+   "planned": false
+  },
+  {
+   "i": 295,
+   "label": "k=3 rows=16 lit=3 eol=LF gaps=0,1,3 kinds=tiny/prose/prog",
+   "planned": false
+  },
+  {
+   "i": 296,
+   "label": "k=4 rows=29 lit=3 eol=LF gaps=0,3,1,2 kinds=path/clock/prose/prose",
+   "planned": false
+  },
+  {
+   "i": 297,
+   "label": "k=3 rows=32 lit=0 eol=CRLF gaps=0,2,3 kinds=word/pad/hex",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 34,
+   "literals": 1,
+   "bounds": [
+    22,
+    31
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 640,
+   "srcChars": 1430
+  },
+  {
+   "i": 298,
+   "label": "k=2 rows=12 lit=0 eol=LF gaps=0,1 kinds=clock/path",
+   "planned": false
+  },
+  {
+   "i": 299,
+   "label": "k=2 rows=14 lit=2 eol=LF gaps=0,3 kinds=const/ver",
+   "planned": false
+  },
+  {
+   "i": 300,
+   "label": "k=2 rows=7 lit=0 eol=LF gaps=0,1 kinds=prog/hex",
+   "planned": false
+  },
+  {
+   "i": 301,
+   "label": "k=4 rows=7 lit=0 eol=LF gaps=0,2,3,2 kinds=clock/word/prog/word",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 9,
+   "literals": 1,
+   "bounds": [
+    26,
+    30
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 398,
+   "srcChars": 357
+  },
+  {
+   "i": 302,
+   "label": "k=8 rows=20 lit=0 eol=LF gaps=0,2,2,1,2,3,2,3 kinds=hex/tiny/pad/path/prog/path/prose/ver",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 22,
+   "literals": 2,
+   "bounds": [
+    10,
+    29,
+    47
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2407,
+   "srcChars": 2983
+  },
+  {
+   "i": 303,
+   "label": "k=7 rows=32 lit=0 eol=LF gaps=0,2,3,3,1,2,2 kinds=tiny/int/pad/path/pad/path/path",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 34,
+   "literals": 0,
+   "bounds": [
+    12,
+    31,
+    40
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2576,
+   "srcChars": 3544
+  },
+  {
+   "i": 304,
+   "label": "k=5 rows=9 lit=3 eol=CRLF gaps=0,3,1,2,1 kinds=word/hex/path/int/const",
+   "planned": false
+  },
+  {
+   "i": 305,
+   "label": "k=6 rows=29 lit=0 eol=LF gaps=0,1,2,2,1,2 kinds=word/ver/int/clock/int/const",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 31,
+   "literals": 2,
+   "bounds": [
+    33,
+    50,
+    68
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1012,
+   "srcChars": 2339
+  },
+  {
+   "i": 306,
+   "label": "k=2 rows=22 lit=3 eol=LF gaps=0,2 kinds=word/prose",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 18,
+   "literals": 7,
+   "bounds": [
+    19
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 741,
+   "srcChars": 819
+  },
+  {
+   "i": 307,
+   "label": "k=3 rows=33 lit=1 eol=CRLF gaps=0,2,3 kinds=prog/prose/path",
+   "planned": false
+  },
+  {
+   "i": 308,
+   "label": "k=7 rows=16 lit=1 eol=LF gaps=0,2,1,3,1,2,2 kinds=prose/path/ver/int/prog/tiny/tiny",
+   "planned": false
+  },
+  {
+   "i": 309,
+   "label": "k=5 rows=27 lit=0 eol=LF gaps=0,1,3,1,2 kinds=tiny/prose/prog/path/clock",
+   "planned": false
+  },
+  {
+   "i": 310,
+   "label": "k=5 rows=7 lit=0 eol=LF gaps=0,3,3,1,1 kinds=clock/prog/const/const/tiny",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 9,
+   "literals": 1,
+   "bounds": [
+    5,
+    13,
+    25,
+    34,
+    48
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 362,
+   "srcChars": 450
+  },
+  {
+   "i": 311,
+   "label": "k=4 rows=14 lit=0 eol=LF gaps=0,1,2,3 kinds=word/tiny/word/word",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 17,
+   "literals": 1,
+   "bounds": [
+    17,
+    25,
+    44
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 441,
+   "srcChars": 866
+  },
+  {
+   "i": 312,
+   "label": "k=4 rows=31 lit=0 eol=CRLF gaps=0,2,2,3 kinds=word/word/pad/hex",
+   "planned": false
+  },
+  {
+   "i": 313,
+   "label": "k=4 rows=27 lit=1 eol=LF gaps=0,1,2,3 kinds=prose/ver/pad/path",
+   "planned": false
+  },
+  {
+   "i": 314,
+   "label": "k=5 rows=20 lit=0 eol=LF gaps=0,1,3,1,2 kinds=path/path/ver/int/prose",
+   "planned": false
+  },
+  {
+   "i": 315,
+   "label": "k=7 rows=35 lit=1 eol=LF gaps=0,3,3,1,1,3,1 kinds=clock/path/word/clock/const/prog/prose",
+   "planned": false
+  },
+  {
+   "i": 316,
+   "label": "k=9 rows=7 lit=0 eol=LF gaps=0,3,1,1,1,1,3,1,2 kinds=ver/word/path/int/int/pad/path/int/ver",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 9,
+   "literals": 2,
+   "bounds": [
+    59,
+    73,
+    96
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1267,
+   "srcChars": 1344
+  },
+  {
+   "i": 317,
+   "label": "k=3 rows=19 lit=1 eol=LF gaps=0,1,1 kinds=ver/clock/tiny",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 20,
+   "literals": 3,
+   "bounds": [
+    23
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 520,
+   "srcChars": 545
+  },
+  {
+   "i": 318,
+   "label": "k=5 rows=28 lit=0 eol=LF gaps=0,1,2,2,2 kinds=word/prog/tiny/int/const",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 26,
+   "literals": 6,
+   "bounds": [
+    10,
+    26,
+    50,
+    55
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 904,
+   "srcChars": 1871
+  },
+  {
+   "i": 319,
+   "label": "k=6 rows=27 lit=0 eol=LF gaps=0,1,1,2,1,1 kinds=clock/tiny/ver/int/hex/clock",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 29,
+   "literals": 1,
+   "bounds": [
+    15,
+    21,
+    38,
+    52
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1059,
+   "srcChars": 1943
+  },
+  {
+   "i": 320,
+   "label": "k=3 rows=33 lit=2 eol=CRLF gaps=0,1,1 kinds=tiny/prog/prose",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 33,
+   "literals": 4,
+   "bounds": [
+    2,
+    17
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1127,
+   "srcChars": 1380
+  },
+  {
+   "i": 321,
+   "label": "k=4 rows=15 lit=0 eol=LF gaps=0,3,1,3 kinds=ver/tiny/prog/prog",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 17,
+   "literals": 1,
+   "bounds": [
+    15,
+    19,
+    40
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 362,
+   "srcChars": 729
+  },
+  {
+   "i": 322,
+   "label": "k=9 rows=13 lit=3 eol=CRLF gaps=0,1,1,1,2,2,2,3,1 kinds=prog/pad/word/clock/int/word/ver/tiny/prose",
+   "planned": false
+  },
+  {
+   "i": 323,
+   "label": "k=3 rows=20 lit=2 eol=LF gaps=0,3,3 kinds=tiny/word/int",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 20,
+   "literals": 4,
+   "bounds": [
+    15,
+    19,
+    33
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 455,
+   "srcChars": 821
+  },
+  {
+   "i": 324,
+   "label": "k=4 rows=32 lit=3 eol=LF gaps=0,2,2,3 kinds=ver/tiny/ver/pad",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 31,
+   "literals": 5,
+   "bounds": [
+    17,
+    28,
+    38
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 942,
+   "srcChars": 1466
+  },
+  {
+   "i": 325,
+   "label": "k=8 rows=33 lit=2 eol=LF gaps=0,2,3,3,1,2,3,3 kinds=tiny/clock/word/int/path/prog/word/prog",
+   "planned": true,
+   "cols": 8,
+   "rowsN": 29,
+   "literals": 8,
+   "bounds": [
+    13,
+    29,
+    55,
+    76,
+    108
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1984,
+   "srcChars": 3833
+  },
+  {
+   "i": 326,
+   "label": "k=5 rows=23 lit=0 eol=LF gaps=0,3,3,2,2 kinds=tiny/const/tiny/path/hex",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 25,
+   "literals": 2,
+   "bounds": [
+    18,
+    33,
+    49
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1002,
+   "srcChars": 1907
+  },
+  {
+   "i": 327,
+   "label": "k=7 rows=29 lit=2 eol=LF gaps=0,3,2,1,1,1,2 kinds=path/path/tiny/ver/pad/word/tiny",
+   "planned": false
+  },
+  {
+   "i": 328,
+   "label": "k=7 rows=9 lit=0 eol=LF gaps=0,1,3,1,2,3,2 kinds=hex/tiny/word/prog/prose/prose/int",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 10,
+   "literals": 3,
+   "bounds": [
+    6,
+    26,
+    50
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1154,
+   "srcChars": 1189
+  },
+  {
+   "i": 329,
+   "label": "k=2 rows=25 lit=2 eol=LF gaps=0,3 kinds=ver/int",
+   "planned": false
+  },
+  {
+   "i": 330,
+   "label": "k=2 rows=27 lit=0 eol=LF gaps=0,2 kinds=ver/pad",
+   "planned": false
+  },
+  {
+   "i": 331,
+   "label": "k=3 rows=33 lit=1 eol=CRLF gaps=0,3,3 kinds=ver/pad/hex",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 34,
+   "literals": 3,
+   "bounds": [
+    21,
+    30
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 974,
+   "srcChars": 1419
+  },
+  {
+   "i": 332,
+   "label": "k=7 rows=15 lit=0 eol=LF gaps=0,2,2,3,2,3,3 kinds=clock/prose/ver/const/pad/int/word",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 16,
+   "literals": 3,
+   "bounds": [
+    3,
+    10
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1779,
+   "srcChars": 1630
+  },
+  {
+   "i": 333,
+   "label": "k=9 rows=35 lit=0 eol=LF gaps=0,1,1,3,3,2,2,1,1 kinds=ver/ver/const/prog/hex/tiny/int/int/clock",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 38,
+   "literals": 1,
+   "bounds": [
+    18,
+    28
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 3840,
+   "srcChars": 4254
+  },
+  {
+   "i": 334,
+   "label": "k=2 rows=7 lit=1 eol=LF gaps=0,2 kinds=clock/pad",
+   "planned": false
+  },
+  {
+   "i": 335,
+   "label": "k=8 rows=22 lit=0 eol=LF gaps=0,3,3,2,1,2,3,3 kinds=path/pad/pad/int/prose/clock/hex/pad",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 24,
+   "literals": 1,
+   "bounds": [
+    20,
+    33,
+    43,
+    58
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1959,
+   "srcChars": 2691
+  },
+  {
+   "i": 336,
+   "label": "k=9 rows=11 lit=0 eol=CRLF gaps=0,3,3,1,1,2,1,1,1 kinds=pad/prose/clock/const/word/hex/tiny/prose/prog",
+   "planned": false
+  },
+  {
+   "i": 337,
+   "label": "k=4 rows=7 lit=0 eol=LF gaps=0,3,2,1 kinds=prose/word/prog/pad",
+   "planned": false
+  },
+  {
+   "i": 338,
+   "label": "k=8 rows=33 lit=0 eol=LF gaps=0,3,1,2,2,3,3,1 kinds=pad/word/tiny/prog/const/hex/tiny/path",
+   "planned": false
+  },
+  {
+   "i": 339,
+   "label": "k=6 rows=7 lit=0 eol=CRLF gaps=0,3,1,3,1,3 kinds=word/clock/prog/const/int/const",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 9,
+   "literals": 2,
+   "bounds": [
+    10,
+    26,
+    39,
+    60,
+    66
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 500,
+   "srcChars": 720
+  },
+  {
+   "i": 340,
+   "label": "k=3 rows=25 lit=0 eol=LF gaps=0,2,1 kinds=tiny/clock/word",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 27,
+   "literals": 2,
+   "bounds": [
+    7
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 480,
+   "srcChars": 537
+  },
+  {
+   "i": 341,
+   "label": "k=5 rows=21 lit=2 eol=LF gaps=0,1,3,2,3 kinds=prog/hex/word/path/hex",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 21,
+   "literals": 3,
+   "bounds": [
+    16,
+    32,
+    60
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1035,
+   "srcChars": 1473
+  },
+  {
+   "i": 342,
+   "label": "k=9 rows=34 lit=0 eol=CRLF gaps=0,2,3,3,1,1,1,3,1 kinds=hex/hex/path/const/path/const/hex/prog/word",
+   "planned": true,
+   "cols": 9,
+   "rowsN": 36,
+   "literals": 2,
+   "bounds": [
+    16,
+    27,
+    84,
+    103,
+    114,
+    127
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2592,
+   "srcChars": 4956
+  },
+  {
+   "i": 343,
+   "label": "k=8 rows=31 lit=0 eol=LF gaps=0,2,3,1,3,3,1,3 kinds=const/path/int/path/prose/const/path/prose",
+   "planned": false
+  },
+  {
+   "i": 344,
+   "label": "k=3 rows=9 lit=3 eol=LF gaps=0,1,3 kinds=tiny/prose/prose",
+   "planned": false
+  },
+  {
+   "i": 345,
+   "label": "k=8 rows=13 lit=0 eol=LF gaps=0,1,2,1,3,2,2,3 kinds=const/clock/int/path/clock/const/int/pad",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 15,
+   "literals": 2,
+   "bounds": [
+    17,
+    24,
+    29
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1458,
+   "srcChars": 1512
+  },
+  {
+   "i": 346,
+   "label": "k=8 rows=32 lit=0 eol=LF gaps=0,2,3,3,3,1,1,2 kinds=pad/pad/pad/tiny/tiny/hex/pad/tiny",
+   "planned": true,
+   "cols": 8,
+   "rowsN": 34,
+   "literals": 1,
+   "bounds": [
+    15,
+    36,
+    45,
+    57,
+    62,
+    79,
+    96
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 778,
+   "srcChars": 3433
+  },
+  {
+   "i": 347,
+   "label": "k=7 rows=29 lit=0 eol=LF gaps=0,1,3,1,2,1,3 kinds=word/clock/path/prog/path/const/clock",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 31,
+   "literals": 2,
+   "bounds": [
+    20,
+    28
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2425,
+   "srcChars": 2834
+  },
+  {
+   "i": 348,
+   "label": "k=7 rows=8 lit=0 eol=LF gaps=0,3,2,3,1,1,3 kinds=tiny/path/pad/const/hex/hex/hex",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 8,
+   "literals": 4,
+   "bounds": [
+    21,
+    40,
+    60,
+    67,
+    86,
+    97
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 981,
+   "srcChars": 1164
+  },
+  {
+   "i": 349,
+   "label": "k=9 rows=22 lit=2 eol=CRLF gaps=0,3,3,3,1,1,3,1,1 kinds=path/const/tiny/clock/int/clock/path/word/const",
+   "planned": false
+  },
+  {
+   "i": 350,
+   "label": "k=2 rows=12 lit=0 eol=LF gaps=0,1 kinds=word/word",
+   "planned": false
+  },
+  {
+   "i": 351,
+   "label": "k=5 rows=34 lit=3 eol=LF gaps=0,1,1,3,3 kinds=word/ver/word/hex/ver",
+   "planned": false
+  },
+  {
+   "i": 352,
+   "label": "k=4 rows=17 lit=2 eol=LF gaps=0,1,3,3 kinds=path/tiny/path/prose",
+   "planned": false
+  },
+  {
+   "i": 353,
+   "label": "k=7 rows=16 lit=0 eol=LF gaps=0,2,1,3,3,1,2 kinds=hex/prose/int/word/const/clock/ver",
+   "planned": false
+  },
+  {
+   "i": 354,
+   "label": "k=4 rows=6 lit=3 eol=LF gaps=0,1,3,1 kinds=prog/prose/const/word",
+   "planned": false
+  },
+  {
+   "i": 355,
+   "label": "k=3 rows=14 lit=0 eol=LF gaps=0,2,3 kinds=hex/prose/tiny",
+   "planned": false
+  },
+  {
+   "i": 356,
+   "label": "k=3 rows=12 lit=0 eol=LF gaps=0,3,3 kinds=tiny/prose/const",
+   "planned": false
+  },
+  {
+   "i": 357,
+   "label": "k=7 rows=9 lit=0 eol=LF gaps=0,2,2,3,1,2,1 kinds=path/hex/prog/word/prose/prose/prog",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 11,
+   "literals": 2,
+   "bounds": [
+    20,
+    34,
+    55
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1169,
+   "srcChars": 1308
+  },
+  {
+   "i": 358,
+   "label": "k=7 rows=26 lit=2 eol=CRLF gaps=0,2,3,2,2,2,2 kinds=int/path/prog/const/tiny/hex/clock",
+   "planned": false
+  },
+  {
+   "i": 359,
+   "label": "k=9 rows=13 lit=0 eol=LF gaps=0,2,1,2,3,3,2,3,3 kinds=prog/const/prog/word/prose/hex/hex/clock/pad",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 10,
+   "literals": 6,
+   "bounds": [
+    11,
+    15,
+    29
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1661,
+   "srcChars": 1628
+  },
+  {
+   "i": 360,
+   "label": "k=7 rows=19 lit=0 eol=LF gaps=0,3,1,3,3,2,1 kinds=pad/prose/int/path/pad/word/prose",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 20,
+   "literals": 2,
+   "bounds": [
+    3,
+    12
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2160,
+   "srcChars": 2069
+  },
+  {
+   "i": 361,
+   "label": "k=2 rows=12 lit=0 eol=LF gaps=0,1 kinds=word/const",
+   "planned": false
+  },
+  {
+   "i": 362,
+   "label": "k=7 rows=30 lit=0 eol=LF gaps=0,3,3,2,2,1,2 kinds=tiny/clock/hex/ver/pad/clock/prose",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 32,
+   "literals": 2,
+   "bounds": [
+    6,
+    27,
+    54,
+    78
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1853,
+   "srcChars": 3238
+  },
+  {
+   "i": 363,
+   "label": "k=3 rows=8 lit=3 eol=LF gaps=0,2,2 kinds=prose/prog/const",
+   "planned": false
+  },
+  {
+   "i": 364,
+   "label": "k=8 rows=28 lit=0 eol=LF gaps=0,3,2,3,1,3,2,2 kinds=hex/ver/int/ver/path/path/clock/const",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 30,
+   "literals": 1,
+   "bounds": [
+    27,
+    46,
+    81
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2741,
+   "srcChars": 3764
+  },
+  {
+   "i": 365,
+   "label": "k=2 rows=29 lit=0 eol=LF gaps=0,1 kinds=const/int",
+   "planned": false
+  },
+  {
+   "i": 366,
+   "label": "k=7 rows=27 lit=0 eol=LF gaps=0,3,2,3,2,1,2 kinds=int/pad/ver/ver/clock/ver/int",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 29,
+   "literals": 2,
+   "bounds": [
+    9,
+    15,
+    29,
+    41,
+    59,
+    70
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1243,
+   "srcChars": 2442
+  },
+  {
+   "i": 367,
+   "label": "k=5 rows=21 lit=3 eol=LF gaps=0,1,2,3,2 kinds=int/ver/word/tiny/pad",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 20,
+   "literals": 4,
+   "bounds": [
+    13,
+    27,
+    48,
+    61
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 700,
+   "srcChars": 1418
+  },
+  {
+   "i": 368,
+   "label": "k=6 rows=31 lit=3 eol=LF gaps=0,3,3,3,3,1 kinds=hex/tiny/hex/path/hex/int",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 30,
+   "literals": 4,
+   "bounds": [
+    5,
+    16,
+    35,
+    46
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1917,
+   "srcChars": 2607
+  },
+  {
+   "i": 369,
+   "label": "k=3 rows=34 lit=3 eol=LF gaps=0,3,1 kinds=clock/prose/tiny",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 29,
+   "literals": 8,
+   "bounds": [
+    13,
+    21
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1288,
+   "srcChars": 1569
+  },
+  {
+   "i": 370,
+   "label": "k=6 rows=25 lit=1 eol=LF gaps=0,3,2,1,2,1 kinds=hex/path/path/hex/hex/prose",
+   "planned": true,
+   "cols": 6,
+   "rowsN": 26,
+   "literals": 2,
+   "bounds": [
+    31,
+    50,
+    62,
+    79
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2134,
+   "srcChars": 2597
+  },
+  {
+   "i": 371,
+   "label": "k=9 rows=15 lit=0 eol=LF gaps=0,1,2,3,1,2,3,3,1 kinds=ver/tiny/hex/const/prose/clock/hex/ver/path",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 17,
+   "literals": 1,
+   "bounds": [
+    17,
+    31,
+    48
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 2074,
+   "srcChars": 2118
+  },
+  {
+   "i": 372,
+   "label": "k=9 rows=7 lit=0 eol=LF gaps=0,3,1,1,2,3,3,1,3 kinds=pad/ver/hex/int/word/clock/path/clock/int",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 9,
+   "literals": 2,
+   "bounds": [
+    57,
+    62
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1164,
+   "srcChars": 1137
+  },
+  {
+   "i": 373,
+   "label": "k=8 rows=20 lit=2 eol=LF gaps=0,1,1,1,3,3,3,1 kinds=word/ver/path/int/const/ver/ver/int",
+   "planned": false
+  },
+  {
+   "i": 374,
+   "label": "k=6 rows=8 lit=2 eol=LF gaps=0,2,2,2,3,2 kinds=path/ver/hex/prog/prose/clock",
+   "planned": false
+  },
+  {
+   "i": 375,
+   "label": "k=3 rows=16 lit=0 eol=LF gaps=0,2,1 kinds=path/prog/prose",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 18,
+   "literals": 1,
+   "bounds": [
+    20,
+    29
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 975,
+   "srcChars": 1042
+  },
+  {
+   "i": 376,
+   "label": "k=4 rows=33 lit=0 eol=CRLF gaps=0,2,3,3 kinds=tiny/tiny/prog/clock",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 35,
+   "literals": 1,
+   "bounds": [
+    18,
+    41
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 491,
+   "srcChars": 1680
+  },
+  {
+   "i": 377,
+   "label": "k=8 rows=7 lit=0 eol=CRLF gaps=0,3,3,2,2,1,2,2 kinds=clock/prog/const/tiny/ver/const/prog/hex",
+   "planned": true,
+   "cols": 8,
+   "rowsN": 9,
+   "literals": 2,
+   "bounds": [
+    2,
+    10,
+    17,
+    36,
+    47,
+    68,
+    79
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 628,
+   "srcChars": 887
+  },
+  {
+   "i": 378,
+   "label": "k=8 rows=15 lit=0 eol=LF gaps=0,3,1,3,1,3,3,3 kinds=prose/path/int/prog/tiny/prose/prose/word",
+   "planned": false
+  },
+  {
+   "i": 379,
+   "label": "k=3 rows=6 lit=2 eol=LF gaps=0,2,3 kinds=word/pad/clock",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 6,
+   "literals": 4,
+   "bounds": [
+    18,
+    29
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 347,
+   "srcChars": 262
+  },
+  {
+   "i": 380,
+   "label": "k=9 rows=8 lit=0 eol=CRLF gaps=0,2,2,1,3,1,3,1,3 kinds=pad/word/prog/prog/path/prose/prose/clock/path",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 10,
+   "literals": 1,
+   "bounds": [
+    10,
+    34,
+    47,
+    52
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1208,
+   "srcChars": 1443
+  },
+  {
+   "i": 381,
+   "label": "k=7 rows=12 lit=0 eol=LF gaps=0,3,2,1,3,1,1 kinds=hex/prog/word/prog/hex/pad/prog",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 12,
+   "literals": 4,
+   "bounds": [
+    15,
+    24,
+    31,
+    49,
+    59,
+    71
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 899,
+   "srcChars": 1113
+  },
+  {
+   "i": 382,
+   "label": "k=7 rows=21 lit=3 eol=LF gaps=0,3,2,1,1,2,3 kinds=prog/word/int/const/prose/path/tiny",
+   "planned": false
+  },
+  {
+   "i": 383,
+   "label": "k=9 rows=12 lit=1 eol=LF gaps=0,2,1,1,2,3,3,3,3 kinds=pad/const/const/hex/prose/prog/int/int/clock",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 13,
+   "literals": 2,
+   "bounds": [
+    11,
+    31,
+    41
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1454,
+   "srcChars": 1480
+  },
+  {
+   "i": 384,
+   "label": "k=2 rows=14 lit=0 eol=LF gaps=0,2 kinds=int/hex",
+   "planned": false
+  },
+  {
+   "i": 385,
+   "label": "k=5 rows=31 lit=2 eol=LF gaps=0,1,1,2,2 kinds=prose/ver/tiny/const/ver",
+   "planned": false
+  },
+  {
+   "i": 386,
+   "label": "k=2 rows=11 lit=0 eol=LF gaps=0,2 kinds=const/path",
+   "planned": false
+  },
+  {
+   "i": 387,
+   "label": "k=5 rows=25 lit=3 eol=LF gaps=0,1,1,1,1 kinds=int/tiny/ver/int/prog",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 25,
+   "literals": 4,
+   "bounds": [
+    5,
+    19,
+    33
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 730,
+   "srcChars": 1073
+  },
+  {
+   "i": 388,
+   "label": "k=7 rows=20 lit=1 eol=LF gaps=0,2,3,2,3,1,3 kinds=word/prog/path/word/pad/path/prog",
+   "planned": true,
+   "cols": 7,
+   "rowsN": 13,
+   "literals": 10,
+   "bounds": [],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1698,
+   "srcChars": 2008
+  },
+  {
+   "i": 389,
+   "label": "k=5 rows=21 lit=3 eol=LF gaps=0,3,2,1,2 kinds=pad/prog/word/clock/pad",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 20,
+   "literals": 4,
+   "bounds": [
+    9,
+    24,
+    43,
+    53
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 828,
+   "srcChars": 1305
+  },
+  {
+   "i": 390,
+   "label": "k=7 rows=19 lit=2 eol=LF gaps=0,2,2,3,3,3,1 kinds=word/int/tiny/int/const/prog/prose",
+   "planned": false
+  },
+  {
+   "i": 391,
+   "label": "k=9 rows=34 lit=3 eol=LF gaps=0,1,3,2,3,1,1,3,1 kinds=word/prose/path/prose/path/const/prog/prog/hex",
+   "planned": false
+  },
+  {
+   "i": 392,
+   "label": "k=2 rows=9 lit=3 eol=CRLF gaps=0,2 kinds=ver/hex",
+   "planned": false
+  },
+  {
+   "i": 393,
+   "label": "k=3 rows=11 lit=0 eol=LF gaps=0,2,2 kinds=clock/clock/word",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 13,
+   "literals": 1,
+   "bounds": [
+    25,
+    32
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 426,
+   "srcChars": 533
+  },
+  {
+   "i": 394,
+   "label": "k=2 rows=14 lit=2 eol=LF gaps=0,3 kinds=int/tiny",
+   "planned": false
+  },
+  {
+   "i": 395,
+   "label": "k=8 rows=14 lit=3 eol=LF gaps=0,2,3,1,1,3,3,3 kinds=int/hex/path/hex/word/const/tiny/path",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 13,
+   "literals": 4,
+   "bounds": [
+    7,
+    12,
+    25
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 1291,
+   "srcChars": 1375
+  },
+  {
+   "i": 396,
+   "label": "k=5 rows=7 lit=0 eol=LF gaps=0,2,2,1,2 kinds=tiny/ver/hex/clock/int",
+   "planned": true,
+   "cols": 5,
+   "rowsN": 9,
+   "literals": 2,
+   "bounds": [
+    11,
+    24,
+    53,
+    60
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 508,
+   "srcChars": 642
+  },
+  {
+   "i": 397,
+   "label": "k=3 rows=16 lit=1 eol=CRLF gaps=0,1,3 kinds=const/hex/hex",
+   "planned": true,
+   "cols": 3,
+   "rowsN": 17,
+   "literals": 2,
+   "bounds": [
+    20
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 570,
+   "srcChars": 568
+  },
+  {
+   "i": 398,
+   "label": "k=3 rows=25 lit=2 eol=LF gaps=0,2,2 kinds=prose/const/prose",
+   "planned": false
+  },
+  {
+   "i": 399,
+   "label": "k=4 rows=25 lit=2 eol=LF gaps=0,3,2,1 kinds=prog/const/ver/tiny",
+   "planned": true,
+   "cols": 4,
+   "rowsN": 25,
+   "literals": 3,
+   "bounds": [
+    27
+   ],
+   "inProcessExact": true,
+   "messageExact": true,
+   "msgChars": 639,
+   "srcChars": 949
+  }
+ ]
+}

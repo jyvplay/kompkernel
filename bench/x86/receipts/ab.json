@@ -1,0 +1,224 @@
+{
+ "rows": [
+  {
+   "lane": "df-h.txt",
+   "path": "bench/holdout-tbl/df-h.txt",
+   "raw": 570,
+   "F": 171,
+   "identSecs": 4.6,
+   "voteK": [
+    4,
+    5
+   ],
+   "bounds": [
+    17,
+    23,
+    29,
+    35
+   ],
+   "A": {
+    "cols": 6,
+    "rows": 18,
+    "literals": 2,
+    "exact": true,
+    "wireRaw": 97,
+    "clauseRaw": 50,
+    "Fwire": 97,
+    "Fmsg": 147,
+    "delta": -24,
+    "wireRatio": 1,
+    "clauseCost": 50,
+    "secs": 7.4,
+    "endToEnd": false
+   },
+   "B": {
+    "cols": 5,
+    "rows": 18,
+    "literals": 2,
+    "exact": true,
+    "wireRaw": 93,
+    "clauseRaw": 41,
+    "Fwire": 93,
+    "Fmsg": 134,
+    "delta": -37,
+    "wireRatio": 1,
+    "clauseCost": 41,
+    "secs": 6.9,
+    "endToEnd": false
+   }
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "raw": 1006,
+   "F": 326,
+   "identSecs": 41.4,
+   "voteK": [
+    6,
+    7
+   ],
+   "bounds": [
+    37,
+    45,
+    57,
+    68,
+    76,
+    92
+   ],
+   "A": {
+    "cols": 7,
+    "rows": 22,
+    "literals": 2,
+    "exact": true,
+    "wireRaw": 414,
+    "clauseRaw": 69,
+    "Fwire": 233,
+    "Fmsg": 304,
+    "delta": -22,
+    "wireRatio": 0.563,
+    "clauseCost": 71,
+    "secs": 15,
+    "endToEnd": false
+   },
+   "B": {
+    "cols": 7,
+    "rows": 22,
+    "literals": 2,
+    "exact": true,
+    "wireRaw": 414,
+    "clauseRaw": 69,
+    "Fwire": 233,
+    "Fmsg": 304,
+    "delta": -22,
+    "wireRatio": 0.563,
+    "clauseCost": 71,
+    "secs": 0,
+    "endToEnd": false
+   }
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "raw": 1000,
+   "F": 673,
+   "identSecs": 41.1,
+   "voteK": [
+    4,
+    5
+   ],
+   "bounds": [
+    4,
+    34,
+    65,
+    78
+   ],
+   "A": null,
+   "B": {
+    "cols": 5,
+    "rows": 36,
+    "literals": 6,
+    "exact": true,
+    "wireRaw": 800,
+    "clauseRaw": 50,
+    "Fwire": 663,
+    "Fmsg": 713,
+    "delta": 40,
+    "wireRatio": 0.829,
+    "clauseCost": 50,
+    "secs": 50,
+    "endToEnd": false
+   }
+  },
+  {
+   "lane": "findmnt.txt",
+   "path": "bench/holdout-x42/findmnt.txt",
+   "raw": 787,
+   "F": 444,
+   "identSecs": 6.9,
+   "voteK": [
+    3,
+    4
+   ],
+   "bounds": [
+    56,
+    74,
+    86
+   ],
+   "A": {
+    "cols": 5,
+    "rows": 18,
+    "literals": 10,
+    "exact": true,
+    "wireRaw": 722,
+    "clauseRaw": 50,
+    "Fwire": 451,
+    "Fmsg": 501,
+    "delta": 57,
+    "wireRatio": 0.625,
+    "clauseCost": 50,
+    "secs": 14.2,
+    "endToEnd": false
+   },
+   "B": {
+    "cols": 5,
+    "rows": 18,
+    "literals": 10,
+    "exact": true,
+    "wireRaw": 722,
+    "clauseRaw": 50,
+    "Fwire": 451,
+    "Fmsg": 501,
+    "delta": 57,
+    "wireRatio": 0.625,
+    "clauseCost": 50,
+    "secs": 0,
+    "endToEnd": false
+   }
+  },
+  {
+   "lane": "psql-output.txt",
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "raw": 675,
+   "F": 244,
+   "identSecs": 11.5,
+   "voteK": [
+    2,
+    3
+   ],
+   "bounds": [
+    20,
+    54
+   ],
+   "A": {
+    "cols": 11,
+    "rows": 24,
+    "literals": 6,
+    "exact": true,
+    "wireRaw": 300,
+    "clauseRaw": 70,
+    "Fwire": 229,
+    "Fmsg": 299,
+    "delta": 55,
+    "wireRatio": 0.763,
+    "clauseCost": 70,
+    "secs": 20,
+    "endToEnd": false
+   },
+   "B": {
+    "cols": 11,
+    "rows": 24,
+    "literals": 6,
+    "exact": true,
+    "wireRaw": 300,
+    "clauseRaw": 70,
+    "Fwire": 229,
+    "Fmsg": 299,
+    "delta": 55,
+    "wireRatio": 0.763,
+    "clauseCost": 70,
+    "secs": 0,
+    "endToEnd": false
+   }
+  }
+ ]
+}

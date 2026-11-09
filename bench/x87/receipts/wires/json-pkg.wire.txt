@@ -1,0 +1,21 @@
+Before ¶ k=v. expand repeatedly; print only.
+§р.и0б",
+       сб "Арисп"
+    },
+    "а1зрасй": "О": "herebyц        "Н": false,
+цё": {
+цяб "@ляtypesҳ    "жрид": "^гдарьдиро8өдор24рафцurl": "https://github.com/microsoft/TypeScriptӨ",
+    "і10кдіры4тдырэ2вдэрнtypescriptхян-eslintүсbuild:ә5рю": "./lib/typescriptИ": "./bin/tsъд9р20шdprintу3чрусЖ"
+    ],
+ҳӣimistгэрЫ-map-supportьәБwhichдужмор19рые7КcГeslint¶{
+ҳnameйнӨauthorйMicrosoft Corp.",
+ҳhomepageйhttps://www.typescriptlang.org/",
+ҳversionйә9руӨlicenseйApache-эжӨdescriptionйTypeScript is a language for application scale JavaScript developmentӨkeywords": [
+цTypeScriptсMicrosoftсcompilerсlanguageсjavascriptЖbugs": {
+ф/issuesпrepositoryёtypeйgit",
+ф.gitпmainю.jsӨtypingsю.d.tsӨbinёtsКИКсtsserverИserverпenginesёnodeй>=14р17пfiles": [
+цbinсlibб "!lib/enuсLICENSE.txtсREADME.mdсSECURITY.mdсThirdPartyNoticeText.txtб "!**/.gitattributesЖdevDependencies": {
+        "@ш/formatterьыраяш/typescriptйир93рыяesfx/canceltokenгирияГ/jsъжяoctokit/restд21рарал/chaiтур20л/diffдежрал/minӣ5л/mochaкиріл/msьер34л/nodeйlatestл/sourceЫіл/Брых/rule-testerөх/type-utilsөх/utilsөсazure-devops-node-apiд14раАКокачchaiт5АchokidarтичdiffдежАшь49Аesbuildь25АГъзГ-formatter-autolinkable-stylishгыАГ-plugin-regexpвеАfast-xml-parserтәэсglobкыр5сglobalsд15р15АherebyгіАjsonК-parserдурузknipдә44рысminӣосmochaкорэсmocha-fivemat-progress-reporterьаАmonocart-coverage-reportsв12зmsвачpicocolorsгазplaywrightг50зsourceЫ21сtslibвозндәечн-eslintөсБрапoverridesён@*": "$нпscriptsёtestО runtests-parallel --light=falseсtest:Г-rulesО run-eslint-rules-testsсbuildйnpm run build:compiler && npm run build:testsүcompilerО localүtestsО testsүtests:notypecheckО tests --no-typecheckсcleanО cleanсgulpОсlintО lintсknipО knipсformatйш fmtсsetup-hooksйnode scripts/link-hooks.mjsпbrowserёfsНosНpathНcryptoНbufferНsource-map-supportНinspectorНperf_hooks": false
+    },
+ҳpackageManagerйnpm@мӨvoltaёnodeй20раАnpmймпgitHeadйК63de15a992d37fиd6cec03ac763187283860эcb"
+}

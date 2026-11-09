@@ -1,0 +1,400 @@
+Grid: Ln cell starts/ends char n; blocks per column: x one value/line, rN N v*count lines, dN N values then letters; R = one value per column padded to anchors, L literal. Print.
+⟨5¦L0r2¦L4x¦L34r117¦L65d3¦L78r134¦pL4R1L1R135L1⟩¦s
+||/
+ii*135
+Name
+adduser
+apt
+base-files
+base-passwd
+bash
+binutils
+binutils-common:amd64
+binutils-x86-64-linux-gnu
+bsdutils
+build-essential
+bzip2
+ca-certificates
+chrony
+coreutils
+cpp
+cpp-12
+curl
+dash
+debconf
+debian-archive-keyring
+debianutils
+diffutils
+dmsetup
+dpkg
+dpkg-dev
+e2fsprogs
+findutils
+fontconfig-config
+fonts-dejavu-core
+fuse3
+g++
+g++-12
+gcc
+gcc-12
+gcc-12-base:amd64
+gh
+git
+git-man
+gpgv
+grep
+gzip
+hicolor-icon-theme
+hostname
+imagemagick
+imagemagick-6-common
+imagemagick-6.q16
+init-system-helpers
+iproute2
+iptables
+iputils-ping
+jq
+keyutils
+less
+libacl1:amd64
+libaom3:amd64
+libapparmor1:amd64
+libapt-pkg6.0:amd64
+libargon2-1:amd64
+libasan8:amd64
+libatomic1:amd64
+libattr1:amd64
+libaudit-common
+libaudit1:amd64
+libbinutils:amd64
+libblkid1:amd64
+libbpf1:amd64
+libbrotli1:amd64
+libbsd0:amd64
+libbz2-1.0:amd64
+libc-bin
+libc-dev-bin
+libc6:amd64
+libc6-dev:amd64
+libcap-ng0:amd64
+libcap2:amd64
+libcap2-bin
+libcbor0.8:amd64
+libcc1-0:amd64
+libcom-err2:amd64
+libcrypt-dev:amd64
+libcrypt1:amd64
+libcryptsetup12:amd64
+libctf-nobfd0:amd64
+libctf0:amd64
+libcurl3-gnutls:amd64
+libcurl4:amd64
+libdav1d6:amd64
+libdb5.3:amd64
+libde265-0:amd64
+libdebconfclient0:amd64
+libdeflate0:amd64
+libdevmapper1.02.1:amd64
+libdpkg-perl
+libedit2:amd64
+libelf1:amd64
+liberror-perl
+libevent-core-2.1-7:amd64
+libexpat1:amd64
+libext2fs2:amd64
+libfdisk1:amd64
+libffi8:amd64
+libfftw3-double3:amd64
+libfido2-1:amd64
+libfontconfig1:amd64
+libfreetype6:amd64
+libfuse3-3:amd64
+libgcc-12-dev:amd64
+libgcc-s1:amd64
+libgcrypt20:amd64
+libgdbm-compat4:amd64
+libgdbm6:amd64
+libglib2.0-0:amd64
+libgmp10:amd64
+libgnutls30:amd64
+libgomp1:amd64
+libgpg-error0:amd64
+libgprofng0:amd64
+libgssapi-krb5-2:amd64
+libheif1:amd64
+libhogweed6:amd64
+libicu72:amd64
+libidn2-0:amd64
+libip4tc2:amd64
+libip6tc2:amd64
+libisl23:amd64
+libitm1:amd64
+libjansson4:amd64
+libjbig0:amd64
+libjpeg62-turbo:amd64
+libjq1:amd64
+libjson-c5:amd64
+libk5crypto3:amd64
+libkeyutils1:amd64
+libkmod2:amd64
+libkrb5-3:amd64
+Version
+3.134
+2.6.1
+12.4+deb12u14
+3.6.1
+5.2.15-2+b13
+2.40-2*3
+1:2.38.1-5+deb12u3
+12.9
+1.0.8-5+b1
+20230311+deb12u1
+4.3-2+deb12u2
+9.1-1
+4:12.2.0-3
+12.2.0-14+deb12u1
+7.88.1-10+deb12u14
+0.5.12-2
+1.5.82
+2023.3+deb12u2
+5.7-0.5~deb12u1
+1:3.8-4
+2:1.02.185-2
+1.21.23*2
+1.47.0-2+b2
+4.9.0-4
+2.14.1-4
+2.37-6
+3.14.0-4
+4:12.2.0-3
+12.2.0-14+deb12u1
+4:12.2.0-3
+12.2.0-14+deb12u1*2
+2.23.0+dfsg1-1
+1:2.39.5-0+deb12u3*2
+2.2.40-1.1+deb12u2
+3.8-5
+1.12-1
+0.17-2
+3.23+nmu1
+8:6.9.11.60+dfsg-1.6+deb12u10*3
+1.65.2+deb12u1
+6.1.0-3
+1.8.9-2
+3:20221126-1+deb12u1
+1.6-2.1+deb12u1
+1.6.3-2
+590-2.1~deb12u2
+2.3.1-3
+3.6.0-1+deb12u2
+3.0.8-3
+2.6.1
+0~20171227-0.3+deb12u1
+12.2.0-14+deb12u1*2
+1:2.5.1-4
+1:3.0.9-1*2
+2.40-2
+2.38.1-5+deb12u3
+1:1.1.2-0+deb12u1
+1.0.9-2+b6
+0.11.7-2
+1.0.8-5+b1
+2.36-9+deb12u14*4
+0.8.3-1+b3
+1:2.66-4+deb12u3+b1*2
+0.8.0-2+b1
+12.2.0-14+deb12u1
+1.47.0-2+b2
+1:4.4.33-2*2
+2:2.6.1-4~deb12u2
+2.40-2*2
+7.88.1-10+deb12u14*2
+1.0.0-2+deb12u1
+5.3.28+dfsg2-1
+1.0.11-1+deb12u2
+0.270
+1.14-1
+2:1.02.185-2
+1.21.23
+3.1-20221030-2
+0.188-2.1
+0.17029-2
+2.1.12-stable-8
+2.5.0-1+deb12u2
+1.47.0-2+b2
+2.38.1-5+deb12u3
+3.4.4-1
+3.3.10-1
+1.12.0-2+b1
+2.14.1-4
+2.12.1+dfsg-5+deb12u4
+3.14.0-4
+12.2.0-14+deb12u1*2
+1.10.1-3+deb12u1
+1.23-3*2
+2.74.6-2+deb12u9
+2:6.2.1+dfsg1-1.1
+3.7.9-2+deb12u7
+12.2.0-14+deb12u1
+1.46-1
+2.40-2
+1.20.1-2+deb12u5
+1.15.1-1+deb12u1
+3.8.1-2
+72.1-3+deb12u1
+2.3.3-1+b1
+1.8.9-2*2
+0.25-1.1
+12.2.0-14+deb12u1
+2.14-2
+2.1-6.1
+1:2.1.5-2
+1.6-2.1+deb12u1
+0.16-2
+1.20.1-2+deb12u5
+1.6.3-2
+30+20221128-1
+1.20.1-2+deb12u5
+Architecture
+all
+amd64
+abccccccccccbccccccbbccccbcccbccccccccbcccbccbcbccccccccccccccbccccccccccccccccccccccccccccccbccbccccccccccccccccccccccccccccccccccccccc
+Description
+add and remove users and groups
+commandline package manager
+Debian base system miscellaneous files
+Debian base system master password and group files
+GNU Bourne Again SHell
+GNU assembler, linker and binary utilities
+Common files for the GNU assembler, linker and binary utilities
+GNU binary utilities, for x86-64-linux-gnu target
+basic utilities from 4.4BSD-Lite
+Informational list of build-essential packages
+high-quality block-sorting file compressor - utilities
+Common CA certificates
+Versatile implementation of the Network Time Protocol
+GNU core utilities
+GNU C preprocessor (cpp)
+GNU C preprocessor
+command line tool for transferring data with URL syntax
+POSIX-compliant shell
+Debian configuration management system
+GnuPG archive keys of the Debian archive
+Miscellaneous utilities specific to Debian
+File comparison utilities
+Linux Kernel Device Mapper userspace library
+Debian package management system
+Debian package development tools
+ext2/ext3/ext4 file system utilities
+utilities for finding files--find, xargs
+generic font configuration library - configuration
+Vera font family derivate with additional characters
+Filesystem in Userspace (3.x version)
+GNU C++ compiler*2
+GNU C compiler*2
+GCC, the GNU Compiler Collection (base package)
+GitHub CLI, GitHub’s official command line tool
+fast, scalable, distributed revision control system
+fast, scalable, distributed revision control system (manual pages)
+GNU privacy guard - signature verification tool
+GNU grep, egrep and fgrep
+GNU compression utilities
+default fallback theme for FreeDesktop.org icon themes
+utility to set/show the host name or domain name
+image manipulation programs -- binaries
+image manipulation programs -- infrastructure
+image manipulation programs -- quantum depth Q16
+helper tools for all init systems
+networking and traffic control tools
+administration tools for packet filtering and NAT
+Tools to test the reachability of network hosts
+lightweight and flexible command-line JSON processor
+Linux Key Management Utilities
+pager program similar to more
+access control list - shared library
+AV1 Video Codec Library
+changehat AppArmor library
+package management runtime library
+memory-hard hashing function - runtime library
+AddressSanitizer -- a fast memory error detector
+support library providing __atomic built-in functions
+extended attribute handling - shared library
+Dynamic library for security auditing - common files
+Dynamic library for security auditing
+GNU binary utilities (private shared library)
+block device ID library
+eBPF helper library (shared library)
+library implementing brotli encoder and decoder (shared libraries)
+utility functions from BSD systems - shared library
+high-quality block-sorting file compressor library - runtime
+GNU C Library: Binaries
+GNU C Library: Development binaries
+GNU C Library: Shared libraries
+GNU C Library: Development Libraries and Header Files
+alternate POSIX capabilities library
+POSIX 1003.1e capabilities (library)
+POSIX 1003.1e capabilities (utilities)
+library for parsing and generating CBOR (RFC 7049)
+GCC cc1 plugin for GDB
+common error description library
+libcrypt development files
+libcrypt shared library
+disk encryption support - shared library
+Compact C Type Format library (runtime, no BFD dependency)
+Compact C Type Format library (runtime, BFD dependency)
+easy-to-use client-side URL transfer library (GnuTLS flavour)
+easy-to-use client-side URL transfer library (OpenSSL flavour)
+fast and small AV1 video stream decoder (shared library)
+Berkeley v5.3 Database Libraries [runtime]
+Open H.265 video codec implementation
+Debian Configuration Management System (C-implementation library)
+fast, whole-buffer DEFLATE-based compression and decompression
+Linux Kernel Device Mapper userspace library
+Dpkg perl modules
+BSD editline and history libraries
+library to read and write ELF files
+Perl module for error/exception handling in an OO-ish way
+Asynchronous event notification library (core)
+XML parsing C library - runtime library
+ext2/ext3/ext4 file system libraries
+fdisk partitioning library
+Foreign Function Interface library runtime
+Library for computing Fast Fourier Transforms - Double precision
+library for generating and verifying FIDO 2.0 objects
+generic font configuration library - runtime
+FreeType 2 font engine, shared library files
+Filesystem in Userspace (library) (3.x version)
+GCC support library (development files)
+GCC support library
+LGPL Crypto library - runtime library
+GNU dbm database routines (legacy support runtime version) 
+GNU dbm database routines (runtime version) 
+GLib library of C routines
+Multiprecision arithmetic library
+GNU TLS library - main runtime library
+GCC OpenMP (GOMP) support library
+GnuPG development runtime library
+GNU Next Generation profiler (runtime library)
+MIT Kerberos runtime libraries - krb5 GSS-API Mechanism
+ISO/IEC 23008-12:2017 HEIF file format decoder - shared library
+low level cryptographic library (public-key cryptos)
+International Components for Unicode
+Internationalized domain names (IDNA2008/TR46) library
+netfilter libip4tc library
+netfilter libip6tc library
+manipulating sets and relations of integer points bounded by linear constraints
+GNU Transactional Memory Library
+C library for encoding, decoding and manipulating JSON data
+JBIGkit libraries
+libjpeg-turbo JPEG runtime library
+lightweight and flexible command-line JSON processor - shared library
+JSON manipulation library - shared library
+MIT Kerberos runtime libraries - Crypto Library
+Linux Key Management Utilities (library)
+libkmod shared library
+MIT Kerberos runtime libraries
+# source: dpkg -l (real, captured this turn)
+Desired=Unknown/Install/Remove/Purge/Hold
+| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
+|/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
++++-=============================-==============================-============-================================================================================

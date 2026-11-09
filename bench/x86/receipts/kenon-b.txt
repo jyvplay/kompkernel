@@ -1,0 +1,19 @@
+lane                       F(src) F(clause+wire)  delta  cols rows lit  clause wire  applied  secs  notes
+ss-tan.txt                    209            318    109     5   17   9      61  519  no     32.8  refused: no strict win — 318 vs frontier 209 (G7)
+ps-eo-cpu.txt                 389            480     91     6   39   3      52  532  no     40.5  refused: no strict win — 480 vs frontier 389 (G7)
+ls-usr-bin.txt                375            510    135     9   39   3      52  540  no     23.7  refused: no strict win — 510 vs frontier 375 (G7)
+ls-full-iso.txt               367            491    124     9   28   6      52  525  no     34.6  refused: no strict win — 491 vs frontier 367 (G7)
+proc-meminfo.txt              349            438     89     3   48   7      61  386  no     12.6  refused: no strict win — 438 vs frontier 349 (G7)
+ps-real.txt                   397            506    109     6   39   3      52  565  no     44.8  refused: no strict win — 506 vs frontier 397 (G7)
+df-real.txt                   126            232    106     6    6   2      61  171  no     10.1  refused: no strict win — 232 vs frontier 126 (G7)
+df-h-all.txt                  124            230    106     6    6   2      61  169  no     10.2  refused: no strict win — 230 vs frontier 124 (G7)
+
+lanes=8 wins=0 totalDelta=0
+  --- ss-tan.txt                 209 vs 318  refused: no strict win — 318 vs frontier 209 (G7)
+  --- ps-eo-cpu.txt              389 vs 480  refused: no strict win — 480 vs frontier 389 (G7)
+  --- ls-usr-bin.txt             375 vs 510  refused: no strict win — 510 vs frontier 375 (G7)
+  --- ls-full-iso.txt            367 vs 491  refused: no strict win — 491 vs frontier 367 (G7)
+  --- proc-meminfo.txt           349 vs 438  refused: no strict win — 438 vs frontier 349 (G7)
+  --- ps-real.txt                397 vs 506  refused: no strict win — 506 vs frontier 397 (G7)
+  --- df-real.txt                126 vs 232  refused: no strict win — 232 vs frontier 126 (G7)
+  --- df-h-all.txt               124 vs 230  refused: no strict win — 230 vs frontier 124 (G7)

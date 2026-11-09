@@ -1,0 +1,33 @@
+Grid: Ln/Rn cell starts/ends char n, Tn tail n spaces after last cell; blocks per column: x one value/line, rN N v§count lines, dN N values then letters; R = one value per column padded to anchors, L literal. Print.
+⟨5¦L0d2¦L11r1¦L18r1¦R52r1¦T1x¦pL8R17L1⟩¦s§
+TIME-WAIT
+ESTAB
+aaaaaaabaaabaaaaa
+0§17
+0§17
+[::ffff:169.254.0.21]:49983§17
+[::ffff:10.12.0.18]:55716       
+[::ffff:10.12.0.18]:55728       
+[::ffff:10.12.0.18]:52542       
+[::ffff:10.12.0.18]:42416       
+[::ffff:10.12.0.18]:48712       
+[::ffff:10.12.0.18]:55722       
+[::ffff:10.12.0.18]:57692       
+[::ffff:10.12.0.18]:47766       
+[::ffff:10.12.0.18]:48708       
+[::ffff:10.12.0.18]:35944       
+[::ffff:10.12.0.18]:42406       
+[::ffff:10.12.0.18]:52558       
+[::ffff:10.12.0.18]:46172       
+[::ffff:10.12.0.18]:57710       
+[::ffff:10.12.0.18]:55432       
+[::ffff:10.12.0.18]:57700       
+[::ffff:10.12.0.18]:55422       
+# source: ss -tan (real)
+State      Recv-Q Send-Q         Local Address:Port         Peer Address:Port Process
+LISTEN     0      4096                 0.0.0.0:111               0.0.0.0:*           
+FIN-WAIT-2 0      0               169.254.0.21:58562           192.0.2.1:80          
+FIN-WAIT-2 0      0               169.254.0.21:58550           192.0.2.1:80          
+LISTEN     0      4096                       *:49983                   *:*           
+LISTEN     0      4096                       *:22                      *:*           
+LISTEN     0      4096                    [::]:111                  [::]:*           

@@ -1,0 +1,5 @@
+openstack-loghub-26.log      raw=  4028 F=   896 parent=synkrisis exact=true encode(base+X74)=896 135s
+ls-la-usrbin.txt             raw=  3271 F=   946 parent=synkrisis exact=true encode(base+X74)=946 71.6s
+npm-ls-all.txt               raw=  2253 F=   711 parent=synkrisis exact=true encode(base+X74)=711 157.8s
+find-listing.txt             raw=  3997 F=  1140 parent=diastema exact=true encode(base+X74)=1140 62s
+dpkg-l-full.txt              raw=  4277 F=  2262 parent=synkrisis exact=true encode(base+X74)=2262 751.3s

@@ -1,0 +1,472 @@
+{
+ "rows": [
+  {
+   "lane": "openstack-loghub-26.log",
+   "path": "bench/holdout-ops/openstack-loghub-26.log",
+   "lines": 26,
+   "groups": 7,
+   "largest": 15,
+   "coveragePct": 57.7,
+   "top5": [
+    [
+     "22|w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,",
+     15
+    ],
+    [
+     "18|w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,",
+     4
+    ],
+    [
+     "24|w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,",
+     3
+    ],
+    [
+     "17|w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,",
+     1
+    ],
+    [
+     "31|w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,",
+     1
+    ]
+   ],
+   "raw": 4028,
+   "typosPlan": true,
+   "typosXformTokens": 3348,
+   "minorityLines": 11
+  },
+  {
+   "lane": "ls-la-usrbin.txt",
+   "path": "bench/holdout-x86/ls-la-usrbin.txt",
+   "lines": 121,
+   "groups": 20,
+   "largest": 38,
+   "coveragePct": 31.4,
+   "top5": [
+    [
+     "9|w,s2,w,s1,w,s1,w,s6,w,s1,w,s1,w,s2,w,s",
+     38
+    ],
+    [
+     "11|w,s2,w,s1,w,s1,w,s9,w,s1,w,s1,w,s1,w,",
+     12
+    ],
+    [
+     "9|w,s2,w,s1,w,s1,w,s5,w,s1,w,s1,w,s2,w,s",
+     9
+    ],
+    [
+     "9|w,s2,w,s1,w,s1,w,s6,w,s1,w,s2,w,s2,w,s",
+     8
+    ],
+    [
+     "9|w,s2,w,s1,w,s1,w,s6,w,s1,w,s1,w,s1,w,s",
+     7
+    ]
+   ],
+   "raw": 3271,
+   "typosPlan": true,
+   "typosXformTokens": 3225,
+   "minorityLines": 83
+  },
+  {
+   "lane": "npm-ls-all.txt",
+   "path": "bench/holdout-x86/npm-ls-all.txt",
+   "lines": 121,
+   "groups": 11,
+   "largest": 89,
+   "coveragePct": 73.6,
+   "top5": [
+    [
+     "3|w,s1,w,s1,w,",
+     89
+    ],
+    [
+     "4|w,s1,w,s1,w,s1,w,",
+     14
+    ],
+    [
+     "8|w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,",
+     3
+    ],
+    [
+     "10|w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,",
+     3
+    ],
+    [
+     "7|w,s1,w,s1,w,s1,w,s1,w,s1,w,s1,w,",
+     3
+    ]
+   ],
+   "raw": 2253,
+   "typosPlan": false,
+   "typosXformTokens": null,
+   "minorityLines": 32
+  },
+  {
+   "lane": "find-listing.txt",
+   "path": "bench/holdout-ops/find-listing.txt",
+   "lines": 120,
+   "groups": 5,
+   "largest": 64,
+   "coveragePct": 53.3,
+   "top5": [
+    [
+     "3|w,s7,w,s1,w,",
+     64
+    ],
+    [
+     "3|w,s8,w,s1,w,",
+     37
+    ],
+    [
+     "3|w,s6,w,s1,w,",
+     16
+    ],
+    [
+     "3|w,s9,w,s1,w,",
+     2
+    ],
+    [
+     "3|w,s5,w,s1,w,",
+     1
+    ]
+   ],
+   "raw": 3997,
+   "typosPlan": true,
+   "typosXformTokens": 2909,
+   "minorityLines": 56
+  },
+  {
+   "lane": "dpkg-l-full.txt",
+   "path": "bench/holdout-x86/dpkg-l-full.txt",
+   "lines": 141,
+   "groups": 129,
+   "largest": 3,
+   "coveragePct": 2.1,
+   "top5": [
+    [
+     "7|w,s2,w,s24,w,s14,w,s8,w,s1,w,s1,w,",
+     3
+    ],
+    [
+     "10|w,s2,w,s13,w,s25,w,s8,w,s1,w,s1,w,s1,",
+     3
+    ],
+    [
+     "1|w,",
+     2
+    ],
+    [
+     "9|w,s2,w,s19,w,s16,w,s8,w,s1,w,s1,w,s1,w",
+     2
+    ],
+    [
+     "7|w,s2,w,s27,w,s21,w,s8,w,s1,w,s1,w,",
+     2
+    ]
+   ],
+   "raw": 4277,
+   "typosPlan": false,
+   "typosXformTokens": null,
+   "minorityLines": 138
+  },
+  {
+   "lane": "apt-real.txt",
+   "path": "bench/holdout-x41/apt-real.txt",
+   "lines": 121,
+   "groups": 3,
+   "largest": 119,
+   "coveragePct": 98.3,
+   "top5": [
+    [
+     "4|w,s1,w,s1,w,s1,w,",
+     119
+    ],
+    [
+     "6|w,s1,w,s1,w,s1,w,s1,w,s1,w,",
+     1
+    ],
+    [
+     "1|w,",
+     1
+    ]
+   ],
+   "raw": 2739,
+   "typosPlan": true,
+   "typosXformTokens": 2527,
+   "minorityLines": 2
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "lines": 151,
+   "groups": 21,
+   "largest": 36,
+   "coveragePct": 23.8,
+   "top5": [
+    [
+     "11|w,s2,w,s1,w,s1,w,s7,w,s1,w,s1,w,s2,w,",
+     36
+    ],
+    [
+     "9|w,s2,w,s1,w,s1,w,s3,w,s1,w,s1,w,s2,w,s",
+     18
+    ],
+    [
+     "11|w,s2,w,s1,w,s1,w,s7,w,s1,w,s2,w,s2,w,",
+     16
+    ],
+    [
+     "9|w,s2,w,s1,w,s1,w,s4,w,s1,w,s1,w,s2,w,s",
+     16
+    ],
+    [
+     "9|w,s2,w,s1,w,s1,w,s5,w,s1,w,s1,w,s1,w,s",
+     12
+    ]
+   ],
+   "raw": 5194,
+   "typosPlan": true,
+   "typosXformTokens": 5168,
+   "minorityLines": 115
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "lines": 41,
+   "groups": 37,
+   "largest": 3,
+   "coveragePct": 7.3,
+   "top5": [
+    [
+     "7|w,s2,w,s24,w,s14,w,s8,w,s1,w,s1,w,",
+     3
+    ],
+    [
+     "1|w,",
+     2
+    ],
+    [
+     "7|w,s2,w,s27,w,s21,w,s8,w,s1,w,s1,w,",
+     2
+    ],
+    [
+     "5|w,s1,w,s1,w,s1,w,s1,w,",
+     1
+    ],
+    [
+     "2|w,s1,w,",
+     1
+    ]
+   ],
+   "raw": 1000,
+   "typosPlan": false,
+   "typosXformTokens": null,
+   "minorityLines": 38
+  },
+  {
+   "lane": "git-numstat.txt",
+   "path": "bench/holdout-ops/git-numstat.txt",
+   "lines": 400,
+   "groups": 8,
+   "largest": 392,
+   "coveragePct": 98,
+   "top5": [
+    [
+     "3|w,w,w,",
+     392
+    ],
+    [
+     "0|",
+     2
+    ],
+    [
+     "2|w,s1,w,",
+     1
+    ],
+    [
+     "3|w,s1,w,s1,w,",
+     1
+    ],
+    [
+     "4|w,s3,w,s1,w,s1,w,",
+     1
+    ]
+   ],
+   "raw": 4632,
+   "typosPlan": false,
+   "typosXformTokens": null,
+   "minorityLines": 8
+  },
+  {
+   "lane": "npm-ls.txt",
+   "path": "bench/holdout-ops/npm-ls.txt",
+   "lines": 150,
+   "groups": 7,
+   "largest": 60,
+   "coveragePct": 40,
+   "top5": [
+    [
+     "6|w,s1,w,s1,w,s1,w,s1,w,s1,w,",
+     60
+    ],
+    [
+     "4|w,s1,w,s1,w,s1,w,",
+     32
+    ],
+    [
+     "3|w,s1,w,s1,w,",
+     20
+    ],
+    [
+     "2|w,s1,w,",
+     13
+    ],
+    [
+     "5|w,s1,w,s1,w,s1,w,s1,w,",
+     10
+    ]
+   ],
+   "raw": 2747,
+   "typosPlan": true,
+   "typosXformTokens": 2610,
+   "minorityLines": 90
+  },
+  {
+   "lane": "findmnt.txt",
+   "path": "bench/holdout-x42/findmnt.txt",
+   "lines": 27,
+   "groups": 26,
+   "largest": 2,
+   "coveragePct": 7.4,
+   "top5": [
+    [
+     "4|w,s50,w,s13,w,s7,w,",
+     2
+    ],
+    [
+     "4|w,s1,w,s1,w,s1,w,",
+     1
+    ],
+    [
+     "4|w,s50,w,s12,w,s6,w,",
+     1
+    ],
+    [
+     "4|w,s55,w,s10,w,s8,w,",
+     1
+    ],
+    [
+     "4|w,s50,w,s10,w,s4,w,",
+     1
+    ]
+   ],
+   "raw": 787,
+   "typosPlan": false,
+   "typosXformTokens": null,
+   "minorityLines": 25
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "lines": 61,
+   "groups": 22,
+   "largest": 19,
+   "coveragePct": 31.1,
+   "top5": [
+    [
+     "11|w,s10,w,s2,w,s2,w,s6,w,s5,w,s1,w,s8,w",
+     19
+    ],
+    [
+     "11|w,s10,w,s2,w,s2,w,s6,w,s5,w,s1,w,s8,w",
+     10
+    ],
+    [
+     "18|w,s9,w,s2,w,s2,w,s3,w,s2,w,s1,w,s5,w,",
+     6
+    ],
+    [
+     "11|w,s11,w,s2,w,s2,w,s6,w,s5,w,s1,w,s8,w",
+     5
+    ],
+    [
+     "13|w,s8,w,s2,w,s2,w,s3,w,s2,w,s1,w,s8,w,",
+     2
+    ]
+   ],
+   "raw": 3054,
+   "typosPlan": true,
+   "typosXformTokens": 2627,
+   "minorityLines": 42
+  },
+  {
+   "lane": "node-help.txt",
+   "path": "bench/holdout-x41/node-help.txt",
+   "lines": 121,
+   "groups": 43,
+   "largest": 16,
+   "coveragePct": 13.2,
+   "top5": [
+    [
+     "1|s2,w,",
+     16
+    ],
+    [
+     "6|s30,w,s1,w,s1,w,s1,w,s1,w,s1,w,",
+     15
+    ],
+    [
+     "3|s30,w,s1,w,s1,w,",
+     12
+    ],
+    [
+     "4|s30,w,s1,w,s1,w,s1,w,",
+     11
+    ],
+    [
+     "5|s30,w,s1,w,s1,w,s1,w,s1,w,",
+     10
+    ]
+   ],
+   "raw": 1099,
+   "typosPlan": false,
+   "typosXformTokens": null,
+   "minorityLines": 105
+  },
+  {
+   "lane": "psql-output.txt",
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "lines": 29,
+   "groups": 5,
+   "largest": 16,
+   "coveragePct": 55.2,
+   "top5": [
+    [
+     "11|w,s1,w,s1,w,s1,w,s4,w,s1,w,s1,w,s1,w,",
+     16
+    ],
+    [
+     "11|w,s1,w,s1,w,s1,w,s4,w,s1,w,s1,w,s1,w,",
+     8
+    ],
+    [
+     "1|w,",
+     3
+    ],
+    [
+     "11|w,s1,w,s1,w,s1,w,s9,w,s1,w,s4,w,s1,w,",
+     1
+    ],
+    [
+     "2|w,s1,w,",
+     1
+    ]
+   ],
+   "raw": 675,
+   "typosPlan": false,
+   "typosXformTokens": null,
+   "minorityLines": 13
+  }
+ ]
+}

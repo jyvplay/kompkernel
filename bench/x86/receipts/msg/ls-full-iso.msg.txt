@@ -1,0 +1,74 @@
+Grid: Ln/Rn cell starts/ends char n; blocks per column: x one value/line, rN N v*count lines, dN N values then letters; R = one value per column padded to anchors, L literal. Print.
+⟨9¦L0d2¦R13d5¦L14r1¦L19r1¦R28d13¦L29r1¦L40d11¦L59r1¦L65x¦pL2R17L3R11L1⟩¦s
+drwxr-xr-x
+lrwxrwxrwx
+aabbbbbbbbbbbbbbbaaaaaaaaaaa
+2
+90
+1
+11
+3
+abcccccccccccccccdbaaaaadeee
+user*28
+user*28
+4096
+40
+22
+24
+18
+19
+21
+36
+25
+23
+26
+32
+128
+aabccdefdghijgklfaammmmmamaa
+2026-09-30*28
+08:00:03.676449622
+08:00:03.900450754
+07:59:50.564383395
+07:59:52.464392992
+07:59:52.276392041
+07:59:52.164391476
+07:59:52.600393678
+07:59:52.440392871
+07:59:54.328402406
+07:59:53.152396466
+07:59:52.812394749
+abaaaaaaaaaaaaaaacbdefghidjk
++0000*28
+.
+..
+baseline-browser-mapping -> ../baseline-browser-mapping/dist/cli.cjs
+browserslist -> ../browserslist/cli.js
+esbuild -> ../esbuild/bin/esbuild
+jiti -> ../jiti/lib/jiti-cli.mjs
+jsesc -> ../jsesc/bin/jsesc
+json5 -> ../json5/lib/cli.js
+nanoid -> ../nanoid/bin/nanoid.cjs
+next -> ../next/dist/bin/next
+parser -> ../@babel/parser/bin/babel-parser.js
+rollup -> ../rollup/dist/bin/rollup
+semver -> ../semver/bin/semver.js
+tsc -> ../typescript/bin/tsc
+tsserver -> ../typescript/bin/tsserver
+update-browserslist-db -> ../update-browserslist-db/cli.js
+vite -> ../vite/bin/vite.js
+.
+..
+babel__core
+babel__generator
+babel__template
+babel__traverse
+estree
+node
+pg
+react
+react-dom
+node_modules/.bin:
+total 8
+
+node_modules/@types:
+total 20

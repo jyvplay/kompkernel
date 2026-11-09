@@ -1,0 +1,33 @@
+lsblk.txt                raw    60 F    60 exact=true parent=synkrisis 2328ms
+kb-article.txt           raw   656 F   622 exact=true parent=synkrisis 2270ms
+uptime-w.txt             raw    80 F    80 exact=true parent=synkrisis 1803ms
+free-m.txt               raw    76 F    76 exact=true parent=synkrisis 2065ms
+vmstat.txt               raw   229 F   149 exact=true parent=synkrisis 2506ms
+unified-diff.patch       raw   578 F   419 exact=true parent=synkrisis 2862ms
+df-h.txt                 raw   570 F   171 exact=true parent=akolouthia2 1943ms
+df-real.txt              raw   158 F   126 exact=true parent=synkrisis 3714ms
+du-real.txt              raw   458 F   272 exact=true parent=synkrisis 3204ms
+node-help.txt            raw  1099 F   862 exact=true parent=synkrisis 5859ms
+findmnt.txt              raw   787 F   444 exact=true parent=synkrisis 4887ms
+df-h.txt                 raw   140 F   108 exact=true parent=synkrisis 4102ms
+email-thread.txt         raw   629 F   488 exact=true parent=synkrisis 6381ms
+llm-answer.md            raw   733 F   674 exact=true parent=synkrisis 6852ms
+markdown-table.md        raw   330 F   176 exact=true parent=synkrisis 5567ms
+psql-output.txt          raw   675 F   244 exact=true parent=metron 7827ms
+prices.csv               raw   582 F   133 exact=true parent=diastema 9169ms
+cue-sheet.md             raw   513 F   163 exact=true parent=metron 10226ms
+ps-ef.txt                raw  1144 F   315 exact=true parent=synkrisis 10556ms
+ls-real.txt              raw  1034 F   433 exact=true parent=synkrisis 14928ms
+json-pkg.txt             raw  1152 F   681 exact=true parent=synkrisis 17281ms
+code-ts.txt              raw  1422 F   969 exact=true parent=synkrisis 23706ms
+dpkg-l.txt               raw  1000 F   673 exact=true parent=synkrisis 25003ms
+ps-real.txt              raw  1106 F   397 exact=true parent=synkrisis 18212ms
+kubectl-get-pods.txt     raw  1006 F   326 exact=true parent=akolouthia2 24607ms
+metrics.tsv              raw   811 F   210 exact=true parent=akolouthia2 28341ms
+ps-aux-real.txt          raw  3054 F  1042 exact=true parent=synkrisis 64324ms
+apt-real.txt             raw  2739 F   850 exact=true parent=synkrisis 125956ms
+ls-l-real.txt            raw  5194 F  1476 exact=true parent=synkrisis 216321ms
+
+FRONTIER 29 TOTAL 12639 exact 29/29 ms 652815
+X80 total 12639 -> X86 total 12639  lanes differing: 0
+FRONTIER CONFIRMED: identical to the X80 configuration, lane for lane.

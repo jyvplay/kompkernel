@@ -309,7 +309,56 @@ const LONG_CACHE_MAX_TEXT_CHARS = (() => {
   return 65_536;
 })();
 void LONG_CACHE_MAX_TEXT_CHARS_BASE;
-const LONG_CACHE_MAX_TOTAL_CHARS = 2_000_000;
+/**
+ * X88 — RETAINED-KEY BUDGET, RAISED AND MADE MEASURABLE.
+ *
+ * The count memo is exact and can only change timing, never a number. What bounds it is
+ * this retained-character budget, and at 2 000 000 characters it binds exactly where the
+ * stack works hardest: the candidate wires on the ops lanes are 5 000-11 000 characters,
+ * so the budget admits ~200-400 entries, and the audit runs **249 arms** per lane. Every
+ * arm produces at least one document-sized candidate, so on `apt-real` and `ls-l-real` the
+ * budget is exhausted inside a single lane and the memo evicts the very strings the next
+ * arm is about to re-count. `chunkCacheStats().longChars` pinned at the cap with
+ * `longSize` in the low hundreds is the fingerprint, and bench/x88/memoab.ts measures it
+ * rather than asserting it.
+ *
+ * Raising it is safe for the same reason raising LONG_CACHE_MAX_TEXT_CHARS was safe in
+ * X75: the entry stores the returned integer for an identical (text, encoding) pair, so
+ * there is no dependence on clock, locale, order or environment.
+ *
+ * **X88 MEASURED IT AND THE HYPOTHESIS IS FALSE, SO THE DEFAULT IS UNCHANGED.**
+ * bench/x88/memoab.ts flips the budget INSIDE one process and alternates the order, which
+ * is the only honest way to compare clocks (wall time drifts ~1.6x across sandbox
+ * suspensions, so a run-C-versus-run-D comparison proves nothing). Over code-ts, json-pkg
+ * and ls-real, warm round: 478ms at 2M against 528ms at 32M, 266 against 286, 115 against
+ * 121 -- no gain, marginally worse, with F identical (981/681/433) and exact=true on every
+ * phase. The slow phase in that A/B tracked FIRST-ENCODE-OF-A-NEW-LANE, not the budget.
+ * A separate localisation (/tmp/cold.ts, reproduced in the receipt) shows `countTokens` is
+ * not the bottleneck at all: 367ms once per process for the vocabulary load, then 1ms per
+ * 6 000-character count, chunk-cache hit rate 78%. The remaining wall clock is the 249-arm
+ * audit itself, whose first pass over a lane is ~40x a warm pass -- consistent with JIT
+ * warm-up across 249 distinct code paths, which cannot be removed without removing arms.
+ * So the budget stays at 2 000 000 rather than buying 16x the memory for nothing, and what
+ * is kept is the hook: `setCountMemoBudget` lets an A/B flip the cap inside one process,
+ * and `OMEGA_COUNT_MEMO_TOTAL_CHARS` / `OMEGA_NO_COUNT_MEMO=1` still override from outside.
+ * Reporting a falsified speed hypothesis with its numbers is the deliverable here; shipping
+ * it as a win would not be.
+ */
+function readMemoBudget(): number {
+  try {
+    if (typeof process !== 'undefined' && process.env?.OMEGA_NO_COUNT_MEMO === '1') return 0;
+    const raw = typeof process !== 'undefined' ? process.env?.OMEGA_COUNT_MEMO_TOTAL_CHARS : undefined;
+    if (raw) { const n = Number(raw); if (Number.isFinite(n) && n >= 0) return n; }
+  } catch { /* keep default */ }
+  return 2_000_000;
+}
+let LONG_CACHE_MAX_TOTAL_CHARS = readMemoBudget();
+/** Benchmark hook: set the retained-key budget at runtime and report what it is. */
+export function setCountMemoBudget(n: number): number {
+  LONG_CACHE_MAX_TOTAL_CHARS = Number.isFinite(n) && n >= 0 ? n : 0;
+  return LONG_CACHE_MAX_TOTAL_CHARS;
+}
+export function countMemoBudget(): number { return LONG_CACHE_MAX_TOTAL_CHARS; }
 const LONG_CACHE_CHARS = new Map<EncodingName, number>();
 let longHits = 0, longMisses = 0;
 

@@ -1,0 +1,18 @@
+Grid: Ln cell starts/ends char n; blocks per column: rN N v*count lines, dN N values then letters, wW fixed width W, l/k V+(row−i)S, t:V/steps V stepping per row; R = one value per column padded to anchors, L literal. Print.
+⟨11¦L0r1¦L2t:10/1¦L5r1¦L7t:user_0000/1¦L20r1¦L22w10¦L33r1¦L35l:100.00/0,730¦L42r1¦L44d3¦L54r1¦pL3R24L3⟩¦s
+|*24
+|*24
+|*24
+2026-01-012026-02-022026-03-032026-04-042026-05-052026-06-062026-07-072026-08-082026-09-092026-10-102026-11-112026-12-122026-01-132026-02-142026-03-152026-04-162026-05-172026-06-182026-07-192026-08-202026-09-212026-10-222026-11-232026-12-24
+|*24
+|*24
+active
+pending
+closed
+abcabcabcabcabcabcabcabc
+|*24
++----+--------------+------------+--------+-----------+
+| id | name         | created    | amount | status    |
++----+--------------+------------+--------+-----------+
++----+--------------+------------+--------+-----------+
+(24 rows)

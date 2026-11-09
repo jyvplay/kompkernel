@@ -1,0 +1,8 @@
+Grid: Ln cell starts/ends char n; blocks per column: rN N v*count lines, dN N values then letters, wW fixed width W, t:V/steps, s%M means (V+s·row) mod M; R = one value per column padded to anchors, L literal. Print.
+⟨7¦L0w25¦L37r1¦L45d2¦L57t:0/1%4¦L68t:2d0h/1,1¦L76t:10.244.0.0/0,0,1%8,11¦L92t:node-0.cluster.internal/1%5¦pL1R22L1⟩¦s
+api-server-7d9f8b00-a0000api-server-7d9f8b01-b0003api-server-7d9f8b02-c0006api-server-7d9f8b03-d0009api-server-7d9f8b04-e0012api-server-7d9f8b05-a0015api-server-7d9f8b06-b0018api-server-7d9f8b07-c0021api-server-7d9f8b08-d0024api-server-7d9f8b09-e0027api-server-7d9f8b10-a0030api-server-7d9f8b11-b0033api-server-7d9f8b12-c0036api-server-7d9f8b13-d0039api-server-7d9f8b14-e0042api-server-7d9f8b15-a0045api-server-7d9f8b16-b0048api-server-7d9f8b17-c0051api-server-7d9f8b18-d0054api-server-7d9f8b19-e0057api-server-7d9f8b20-a0060api-server-7d9f8b21-b0063
+1/1*22
+Running
+Pending
+aabaabaabaabaabaabaaba
+NAME                                 READY   STATUS      RESTARTS   AGE     IP              NODE

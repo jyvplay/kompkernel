@@ -1,0 +1,112 @@
+Grid: Ln cell starts/ends char n; blocks per column: x one value/line, rN N v*count lines, dN N values then letters; R = one value per column padded to anchors, L literal. Print.
+⟨5¦L0r2¦L4x¦L34d28¦L65d3¦L78r34¦pL4R1L1R35L1⟩¦s
+||/
+ii*35
+Name
+adduser
+apt
+base-files
+base-passwd
+bash
+binutils
+binutils-common:amd64
+binutils-x86-64-linux-gnu
+bsdutils
+build-essential
+bzip2
+ca-certificates
+chrony
+coreutils
+cpp
+cpp-12
+curl
+dash
+debconf
+debian-archive-keyring
+debianutils
+diffutils
+dmsetup
+dpkg
+dpkg-dev
+e2fsprogs
+findutils
+fontconfig-config
+fonts-dejavu-core
+fuse3
+g++
+g++-12
+gcc
+gcc-12
+gcc-12-base:amd64
+Version
+3.134
+2.6.1
+12.4+deb12u14
+3.6.1
+5.2.15-2+b13
+2.40-2
+1:2.38.1-5+deb12u3
+12.9
+1.0.8-5+b1
+20230311+deb12u1
+4.3-2+deb12u2
+9.1-1
+4:12.2.0-3
+12.2.0-14+deb12u1
+7.88.1-10+deb12u14
+0.5.12-2
+1.5.82
+2023.3+deb12u2
+5.7-0.5~deb12u1
+1:3.8-4
+2:1.02.185-2
+1.21.23
+1.47.0-2+b2
+4.9.0-4
+2.14.1-4
+2.37-6
+3.14.0-4
+abcdefggghijklmnopqrstuvwwxyz01nonoo
+Architecture
+all
+amd64
+abccccccccccbccccccbbccccbcccbcccccc
+Description
+add and remove users and groups
+commandline package manager
+Debian base system miscellaneous files
+Debian base system master password and group files
+GNU Bourne Again SHell
+GNU assembler, linker and binary utilities
+Common files for the GNU assembler, linker and binary utilities
+GNU binary utilities, for x86-64-linux-gnu target
+basic utilities from 4.4BSD-Lite
+Informational list of build-essential packages
+high-quality block-sorting file compressor - utilities
+Common CA certificates
+Versatile implementation of the Network Time Protocol
+GNU core utilities
+GNU C preprocessor (cpp)
+GNU C preprocessor
+command line tool for transferring data with URL syntax
+POSIX-compliant shell
+Debian configuration management system
+GnuPG archive keys of the Debian archive
+Miscellaneous utilities specific to Debian
+File comparison utilities
+Linux Kernel Device Mapper userspace library
+Debian package management system
+Debian package development tools
+ext2/ext3/ext4 file system utilities
+utilities for finding files--find, xargs
+generic font configuration library - configuration
+Vera font family derivate with additional characters
+Filesystem in Userspace (3.x version)
+GNU C++ compiler*2
+GNU C compiler*2
+GCC, the GNU Compiler Collection (base package)
+# source: dpkg -l (real)
+Desired=Unknown/Install/Remove/Purge/Hold
+| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend
+|/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)
++++-=============================-==============================-============-================================================================================

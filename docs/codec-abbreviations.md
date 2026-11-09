@@ -3721,6 +3721,52 @@ lane is now under 3 %, so the ops category's live target is `metrics.tsv` (1.48)
 `ls-l-real.txt` (1.48), not psql-output.
 
 
+**Correction (X87) — the "brotli floor" column is not a floor, and four rows in this table
+are not frontier numbers.**
+
+1. **`@ 14.8 bits/tok` was an assumption, and it is too generous.** The Ω-Ξ atom alphabet is
+   K = 65536 single-token atoms, so it carries `log2(K)` = **16 bits per token by
+   construction**, and achieves 15.9 measured. Recomputing nothing else, ΑΙΘΗΡ lands *below*
+   the printed floor on 22 of 29 lanes: `ls-l-real` **731** vs floor 943, `ps-aux-real`
+   **650** vs 743, `apt-real` **566** vs 690, `ls-real` **294** vs 328, `kubectl` **200** vs
+   214, `vmstat` **93** vs 113, `metrics.tsv` **130** vs 130. In raw bits `cm.ts` beats
+   brotli -q11 on 22 of 29 (`bench/x87/receipts/xiprobe.ts`). So the ratio column keeps its
+   meaning only with a tier attached: **in the readable tier the printed ratios stand; in the
+   entropy tier the "floor" column is brotli's score, not a bound.** The sentence "above 1.0
+   the stack beats a strong general-purpose compressor" is now true of the entropy tier on
+   22/29 lanes and of the readable tier exactly as printed.
+2. **Four `stack` cells are a codec's own `countTokens(message)`, not a frontier cost**, and
+   they disagree with the committed 29-lane receipt: `df-h.txt`(raw 570) **153** vs frontier
+   **171**; `cue-sheet.md` **101** vs **163**; `metrics.tsv` **192** vs **210**;
+   `ls-l-real.txt` **1394** vs **1476**. The gaps are the X86 *contract-at-100 %* law
+   measured again from the other side: `cue-sheet`'s 101 is STICHOMYTHIA's message, whose
+   41-token key is already inside it, but the frontier re-encodes that message and pays the
+   contract again on the way through. **Read the frontier receipt, not this column, whenever
+   the two disagree** — `bench/x80/receipts/frontier.json`, total 12639, re-confirmed at X86
+   (runs A and B) and at X87 (run C).
+
+**Leaders after X87 — both tiers, because they answer different questions.**
+
+| lane | raw | readable tier | entropy tier (ΑΙΘΗΡ) |
+|---|---:|---|---:|
+| ls-l-real.txt | 5194 | 1476 (synkrisis) | **731** |
+| ps-aux-real.txt | 3054 | 1042 (synkrisis) | **650** |
+| apt-real.txt | 2739 | 850 (synkrisis) | **566** |
+| code-ts.txt | 1422 | 969 (synkrisis) | **714** |
+| df-h.txt (tbl) | 570 | **134** (X86 ΚΕΝΟΝ) | 150 |
+| psql-output.txt | 675 | **173** (X82 SCHEMA) | 150 |
+| kubectl-get-pods.txt | 1006 | **304** (X80/X86 tie) | 200 |
+| metrics.tsv | 811 | 210 (akolouthia2) | **130** |
+| cue-sheet.md | 513 | 163 (metron) | **92** |
+| kb-article.txt | 656 | 622 (synkrisis) | 617 |
+
+`df-h(tbl)` and `psql-output` are the two lanes where the **readable tier still wins**, and
+they win for the reason X86 identified: those lanes have a *law* — an arithmetic progression
+and a shape catalogue — and a law beats statistics when the law is short. Everywhere else the
+source has more entropy than law, and the entropy tier takes it. ΑΙΘΗΡ does not displace
+either arm; it is a different question, and G5 is the only place the two meet.
+
+
 ### ops  (20 lanes)
 
 | lane | structure | raw | stack | brotli floor | ratio |
@@ -4239,3 +4285,478 @@ comparison rather than removed.
 
 **Record.** [`docs/codecs.md`](codecs.md) §X81, [`bench/x81/REPORT.md`](../bench/x81/REPORT.md),
 receipts in `bench/x81/receipts/`.
+
+## X82 — SCHEMA (⊙)
+
+**Back-filled at X86.** SCHEMA shipped in `docs/codecs.md` §X82 with receipts but never got
+an entry here; the omission is corrected rather than papered over, and everything below is
+taken from that section and from `bench/x82/receipts/`, not re-derived.
+
+**Decode abbreviation → technical design spec.** `§SCHEMA 8d=dddd-dd-dd 5d=ddd.dd.` —
+*lossless token-shape elision by discovered signature and length-table decode*. A machine
+token (semver, ISO date, clock, fixed-scale decimal, IPv4) is a fixed number of
+fixed-width groups joined by punctuation, and in o200k each punctuation character inside a
+digit run is its own token because BPE merges do not cross a pre-token boundary. SCHEMA
+deletes the punctuation and declares the group widths **once**; the packed run's *length
+alone* selects the rule, so no per-instance marker is paid. `d` = digit, `L` = letter.
+Discovery is from the text (six separator classes scanned), not from a hand-written
+catalogue. Selection is greedy over length-disjoint shapes in descending raw saving, then
+a bounded prune drops the least valuable shape while the message does not beat the
+frontier. Gates G1–G7: shape discovery, length-table injectivity (no two shapes may claim
+the same packed length), no bare-run collision with text already in the source, round trip,
+and a strict win measured **through** the frontier rather than against `countTokens` —
+which is the whole point, because measured with `countTokens` every lane refuses
+(contract + packed is longer than the source) while several win through the frontier.
+
+**Measured** (`bench/x82/verify.ts`, o200k, byte-exact on every lane):
+
+| lane | frontier | SCHEMA | Δ |
+|---|---:|---:|---:|
+| `psql-output.txt` | 244 | **173** | **−71 (−29.1 %)** |
+| `cue-sheet.md` | 163 | **155** | **−8 (−4.9 %)** |
+| `markdown-table.md` | 176 | **171** | **−5 (−2.8 %)** |
+| `json-pkg.txt` | 681 | **679** | **−2** |
+
+and **zero wins across 13 secondary lanes** (`bench/x82/receipts/schema-sweep.txt`: the six
+`holdout-lang` knowledge bases, `agent-history.md`, `find-listing`, `git-log-fuller`,
+`git-numstat`, `ls-full-iso`, `node-stacktraces`, `npm-ls`), every one `rt=true` and every
+one unchanged. A DISTINCTNESS gate (distinct values / occurrences ≥ 0.5) is what separates
+the wins from the no-ops: measured absorption by the parent frontier is 86–103 % on
+repetitive shapes and only 14 % on distinct ones, so packing a shape the frontier already
+models buys nothing and the contract still costs.
+
+**Greedy?** The rewrite is not — a deterministic ordered pass. The **acceptance search is**
+greedy with a bounded repair loop (≤4 frontier evaluations), so it can return a
+locally-but-not-globally-optimal shape set: two medium length-disjoint shapes can beat the
+single largest and the greedy order never searches that.
+
+**Time- or CPU-bound?** **CPU-bound.** Discovery is a handful of linear passes plus a sort,
+O(n log n) in candidate tokens; the cost is the frontier evaluations in the prune. No I/O.
+
+**Honest source.** No compression result is imported. Cited for tokenizer behaviour only:
+arXiv:2402.14903 and arXiv:2402.01035 (digits chunk in threes right-to-left; any non-digit
+breaks the chunk). Consulted and not transferred: LTSC (arXiv:2506.00307 — lossless
+LZ77-style meta-token dictionary, 18–27 %, needs fine-tuning); Splinter (ACL 2025 —
+reversible single-character deletion as a composite `position:letter` character, more
+general but strictly more expensive when the shape repeats, which is exactly when SCHEMA
+uses it).
+
+**Record.** [`docs/codecs.md`](codecs.md) §X82, `src/lib/omega/schema.ts`, registry key
+`schema`, receipts in `bench/x82/receipts/`.
+
+## X86 — ΚΕΝΟΝ (KENON)
+
+**Decode abbreviation → technical design spec.** *Column-boundary inference by gap voting,
+feeding the existing byte-exact KANNABOS grid.* A space-aligned table whose last column is
+prose — `dpkg -l`, `ps aux`, `ls -la`, `psql` — is the most common shape in real command
+output and the one KANNABOS cannot find, because `kannabosPlan` picks its candidate column
+counts from the **cell-count histogram** (how many non-space runs a line usually carries).
+On `dpkg -l` that histogram reads `10:25 9:25 8:23 7:20 11:18` over 141 lines: those are
+the **word counts of the Description column**, so the true count, 5, is never a candidate
+and the lane reports *no grid plan*.
+
+ΚΕΝΟΝ asks the geometry instead. A column boundary is **a gap that occurs on almost every
+line**: every run of ≥2 spaces votes for the offset at which the next field begins, and the
+offsets supported by ≥ max(3, ⌈0.6 · lines⌉) lines are the boundaries.
+
+```
+dpkg -l, 141 lines      4:135  34:136  65:136  78:135        → k=5
+kubectl,  23 lines      37:23 45:23 57:23 68:23 76:23 92:23   → k=7
+ps aux,   61 lines      18:59  23:58  38:37  49:60  54:58  62:59 → k=7
+apt list, 61 lines      no offset reaches the floor           → refused (G2)
+```
+
+Prose cannot manufacture a boundary — its word gaps land at offsets occurring once or twice
+each — which is why the vote survives a free-text tail that destroys the histogram. Two
+thresholds (0.6 strict, 0.4 permissive) plus *k*−1 are offered, since a boundary just under
+the floor still bounds a real column; every candidate costs a full grid fit, so the list is
+three long. The wire, the anchors (L start / R end / T tail), the per-column codecs
+(`x` value-per-line, `rN` runs, `dN` dictionary, `wW` fixed width, `l:`/`k:` affine and
+clock laws, `t:` compound templates with `%M` periodicity), the row/literal pattern and the
+byte-exact rebuild are **KANNABOS's, unchanged**: ΚΕΝΟΝ re-derives no padding arithmetic.
+The single edit to `kannabos.ts` is an optional `extraK: number[] = []` unioned into the
+candidate list, plus `kannabosRunMarker()` so the contract can name the run marker the wire
+actually declares (G5b) instead of the hard-coded `*`.
+
+**Gates.** G1 ≥6 lines · G2 support floor · G3 a plan exists for a voted count ·
+G4 `kannabosDecode(wire) === text` before anything is measured · G5 one-line contract,
+G5b contract marker = wire marker · **G6 two-stage round trip** (the frontier reproduces our
+message, our contract then reproduces the source) · G7 strict win on one-message tokens
+through the frontier. Refusal returns the frontier's own message, so no lane can regress.
+
+**Measured** (o200k, `OMEGA_DET=1`, `bench/x86/receipts/kenon.json`, `ab.json`):
+
+| lane | frontier | ΚΕΝΟΝ | Δ | cols/rows/lit | clause | wire |
+|---|---:|---:|---:|---|---:|---:|
+| `df-h.txt` (tbl) | 171 | **134** | **−37 (−21.6 %)** | 5/18/2 | 41 | 93 |
+| `kubectl-get-pods.txt` | 326 | **304** | **−22 (−6.7 %)** | 7/22/2 | 69 | 414 |
+| `psql-output.txt` | 244 | 299 | +55 refused | 11/24/6 | 70 | 300 |
+| `findmnt.txt` | 444 | 501 | +57 refused | 5/18/10 | 50 | 722 |
+| `dpkg-l.txt` | 673 | 713 | +40 refused | 5/36/6 | 50 | 800 |
+| `ls-usr-bin.txt` | 375 | 510 | +135 refused | 9/39/3 | 52 | 540 |
+| `ls-full-iso.txt` | 367 | 491 | +124 refused | 9/28/6 | 52 | 525 |
+| `ps-real.txt` / `ss-tan.txt` | 397 / 209 | 506 / 318 | +109 / +109 refused | 6/39/3 · 5/17/9 | 52 / 61 | 565 / 519 |
+| `ps-eo-cpu.txt` / `proc-meminfo.txt` | 389 / 349 | 480 / 438 | +91 / +89 refused | 6/39/3 · 3/48/7 | 52 / 61 | 532 / 386 |
+| `df-real.txt` / `df-h-all.txt` | 126 / 124 | 232 / 230 | +106 / +106 refused | 6/6/2 | 61 | 171 / 169 |
+| `vmstat.txt`, `apt-real.txt` | 149, 850 | — | refused (G2, no grid) | — | — | — |
+
+**Two wins, thirteen refusals.** `df-h.txt` is a lane **no other arm wins**: PARATAXIS's own
+receipt records `refused: no win (best 183 >= frontier 171)` and ΚΕΝΟΝ reaches 134.
+`kubectl` is a **tie** with PARATAXIS (both 304), not a new best — stated as a tie.
+
+**Why the refusals are one inequality, not thirteen accidents.** Two measured laws
+(`bench/x86/receipts/ab.json`): the contract is paid at **100 % of its raw price**
+(`F(clause+wire) − F(wire)` = `raw(clause)` exactly on `df-h` 41, `dpkg-l` 50, `findmnt` 50,
+`psql` 70; 71 vs 69 on `kubectl`), and a columnar wire is **nearly incompressible**
+(`F(wire)/raw(wire)` = 1.000 `df-h`, 0.829 `dpkg-l`, 0.763 `psql`, 0.625 `findmnt`, 0.563
+`kubectl`) against 0.31–0.67 on the sources. So the win condition is
+`raw(wire)·ρ + raw(clause) < F(source)`: `df-h` clears it because five columns are
+*generated* (93 raw tokens for a 570-token source), `kubectl` because its columns *repeat*
+(ρ = 0.563 — the same value adjacent to itself is still a repeat the frontier can use), and
+`dpkg-l` fails it (663 + 50 = 713 > 673). **De-interleaving pays where columns are
+generated or self-repeating, not where they are prose.**
+
+**What the vote bought, isolated.** Arm A = histogram candidates, arm B = histogram + vote,
+same frontier, same gate: `df-h` A −24 → B **−37** (**the vote changed the plan, 13
+tokens**); `kubectl`, `findmnt`, `psql` — **identical**, the vote changed nothing;
+`dpkg-l`, `dpkg-l-full` (16 591 bytes, 136 rows), `df-real`, `df-h-all` — **no plan at all
+without the vote**, byte-exact with it, and all four then *lose on cost and are refused*.
+Reach and win are different properties; the vote buys reach plus 13 tokens on one lane, and
+this entry does not upgrade reach into wins. `dpkg-l-full`'s cost A/B was started and **not
+completed** (three frontier encodes on a 16.5 KB lane); the predicted loss
+(0.829 · 3407 + 50 ≈ 2875 vs a frontier of 2258) is labelled a prediction.
+
+**Verification.** `bench/kenon_decode.py` is a **cold CPython reader** — different language,
+no TypeScript, no repo state, nothing passed in but the message: **16/16 real lanes
+byte-exact**, including `dpkg-l-full` (16 591 chars), `ls-l-real` (10 692), `find-listing`
+(11 789). Synthetic red team (`bench/x86/fuzz.ts`, seeded, 400 generated tables with
+random column counts, alignments, widths, gaps, value classes incl. empty and non-ASCII,
+injected literal rows, CRLF and no-trailing-newline): **223 accepted, 177 refused, 0 hard
+failures**, 60 accepted cases re-verified through the CPython reader. Decoder attack
+(`bench/x86/fuzz_decode.py`, 2 554 and 8 512 mutations over the 16 real messages):
+**0 uncaught exceptions, 0 hangs, 0 nondeterminism**, 618 refusals, and a hand-built
+contract/wire marker mismatch refused by G5b. It found one real defect on the first run
+(`int(' ')` escaping as `ValueError` from the `t:` step parser), fixed and re-run.
+
+**Greedy?** **No.** The vote is a deterministic histogram with a fixed floor; the plan is
+chosen by KANNABOS by *measured* cost among ≤6 candidates; the gate is one comparison. No
+search, no sampling, no repair loop — the output is a total function of the input.
+
+**Time- or CPU-bound?** **CPU-bound.** The vote is one regex pass per line, O(chars),
+milliseconds (the whole 41-lane screen runs in under a second); the grid fit is
+O(lines × candidates); the gate is **exactly one extra frontier encode** — 6.1 s on `df-h`,
+34.6 s on `kubectl`, 50.7 s on `dpkg-l`, measured this turn. No I/O, no waiting.
+
+**Honest source.** Fresh searches this turn. Column-by-column serialisation for LLM input:
+X. Xiao et al., *Cents: Boosting LLMs with Cost-Efficient Sequences* (VLDB 18:4574).
+Fields inferred from recurring character offsets: *TWIX: Visual Template Inference for Data
+Extraction from Documents* (PACMMOD/SIGMOD 2025, doi:10.1145/3780105). Columnar notation
+for LLM context specifically: *ONTO* (arXiv:2604.17512, 46–51 % vs JSON). Contract-cost
+accounting stated formally: arXiv:2604.13066, whose savings criterion charges the
+dictionary `n_token(D)` against the saving — here `D` is the clause and its price is
+**measured** at 100 % of raw. **Imported: the inference principle. Not imported: code,
+data, tokenizer behaviour, or any published ratio** — none of these reads space-aligned CLI
+output, none emits a byte-exact wire, none states a gap-support vote with a floor.
+Consulted and not transferred: Context Codec (arXiv:2605.17304, commitment-level and
+explicitly lossy, though its JSON-is-worse-than-prose ordering independently supports
+staying in plain text), MedTPE (arXiv:2605.11774) and *LLM as Token Compressor*
+(arXiv:2603.25340) — both need adapter fine-tuning, neither is byte-exact or readable in a
+plain chat.
+
+**Frontier-lab solved-math review** (requested): of 120 "AI solved it" announcements in two
+years, 64 are third-party confirmed, 40 unverified, 11 were literature retrieval mislabelled
+as discovery, 4 had wrong proofs. The confirmed ones — OpenAI's unit-distance disproof
+(arXiv:2605.20695, nine external verifiers, Lean-checked), Anthropic's Jacobian
+counterexample (dim ≥3, Lean), the zeta-zero proportion, the FLT Lean formalisation
+(29 511 theorems, ~13 M lines) — all bind the claim to an **independent check in a
+different formalism**; OpenAI's 722-manuscript release withdrew three within a day over one
+sign error that invalidated two dependent constructions, with ~50 % shipped unverified.
+Transferred, methodologically only: (i) the cold CPython reader is that check for this wire;
+(ii) a dependency inherits its parent's risk, so the one-line `kannabos.ts` change is paid
+for with a full 29-lane frontier re-confirmation rather than an argument; (iii) the
+Oct-2025 "10 Erdős problems" retraction is the prior-art duty in negative form. **No
+compression mechanism transfers** — proof search, agent swarms and Lean tactics say nothing
+about token-level representation.
+
+**Known limits.** Two lanes win, the larger by 37 tokens; `kubectl` is a tie with an
+existing arm. The vote needs a *stable* boundary, so single-space output, trees, prose,
+code and CSV are refused at G2 — 25 of 41 screened lanes have no grid at all. It cannot
+beat a frontier that already models the source better than the columnar form, which the ρ
+measurements say is most lanes. The 41-token contract assumes a reader competent to expand
+`t:100G/37`; the 94–123-token full-wording arm is kept for comparison, not deleted.
+
+**Record.** [`docs/codecs.md`](codecs.md) §X86, `src/lib/omega/kenon.ts`, registry key
+`kenon`, `bench/kenon_decode.py`, `bench/x86/`, receipts in `bench/x86/receipts/`.
+
+---
+
+## X87 — ΑΙΘΗΡ (AITHER)
+
+**Decode abbreviation → technical design spec.** *The entropy tier, admitted and made
+shippable: a portable payload portfolio plus a CRC-32 integrity field appended to the
+existing Ω-Ξ atom envelope.* Αἰθήρ is the medium that carries — and the point of the name
+is that ΑΙΘΗΡ carries nothing new. `cm.ts` (an lpaq-class context-mixing arithmetic coder:
+seven hashed context models, a match model, a logistic mixer, an APM/SSE stage, a
+deterministic embedded warm-start prior, pure TypeScript) and `atom-codec.ts` (an envelope
+of K single-token atoms, K measured live, carrying `log2(K)` bits per token **by
+construction** and proving the construction on every call) have been in this repo the whole
+time, wired to the registry arm `omega_xi`, absent from `docs/`, and never once measured
+against the frontier. Measured, they win **29 of 29 lanes**: total **12639 → 9043, −3596
+tokens, −28.45 %**, `ls-l-real` 1476 → 731, `ps-aux-real` 1042 → 650, `apt-real` 850 → 566,
+`code-ts` 969 → 714 — and prose as well, `llm-answer` 674 → 597, `email-thread` 488 → 418.
+
+Two standing claims in this document die on that table and are recorded here as dead rather
+than left to be repeated. **"Prose is at the tokenizer floor"** — the floor is a property of
+the *self-describing-message family*, not of the source; an entropy coder needs statistics,
+not structure. **"The `ls -l` residual is bounded by the one-token reference barrier"** —
+the barrier is real for a readable message and irrelevant to a character-level model, which
+codes the same filename column at 15.9 bits/token and halves the lane. Also dead, quietly:
+the **943-token brotli-q11 "floor"** for `ls-l-real`, which was `bits / 14.8` where 14.8 was
+an assumption; the alphabet carries 16 bits/token by construction and 731 < 943.
+
+ΑΙΘΗΡ is the two fixes that make that win something you can ship.
+
+**(1) Portability.** `omegaXiCompress` ships the smallest of fifteen payload candidates, six
+of which reach brotli through `CompressionStream('brotli')` — a Node 22 extension that **no
+browser implements**. On the 6 of 29 lanes where brotli wins, the server emits a wire the
+client cannot inflate at all. It fails loudly (`payloadDecode` throws), so this is a
+portability defect and not a fidelity one, but it is still unshippable. ΑΙΘΗΡ restricts the
+portfolio to `{0,1,2,4,5,7,8,12,15}` — the brotli ids are 3, 6, 10, 11, 13, 14 — for
+**103 tokens over the corpus, 2.7 % of the win**. And the restriction is nearly free for a
+reason worth keeping: a browser-restricted portfolio and a portfolio with
+`CompressionStream` deleted entirely **agree on all 29 lanes**. Once brotli is refused,
+`cm.ts` wins every lane deflate and gzip were contesting. The native streams were never
+contributing; they were only ever a liability.
+
+**(2) Integrity.** `unpackWire` reads its 4-byte header, trusts `payloadLen`, consumes
+exactly that many bytes in 512-byte blocks, and **never checks that all atoms were
+consumed**. There is no checksum. The encoder is round-trip gated, so it never ships an
+unverified wire — but a wire damaged *after* it leaves the encoder has three possible
+outcomes and only one is acceptable. Measured over 1856 mutations (8 kinds × 8 × 29 lanes,
+deterministic xorshift seed `0x2f6e2b1`): 944 refused, 466 no-ops, and **446 that return
+DIFFERENT TEXT with no error at all — 32.1 % of effective mutations corrupt silently.** For
+a codec whose whole claim is byte-exactness that is disqualifying.
+
+The fix is two atoms. K = 65536, 16 bits/atom, fingerprint `9f6dfcc4` for `o200k_base`, so a
+32-bit field is exactly `ceil(32/16) = 2` atoms = 2 tokens, appended to the wire — and
+because `unpackWire` ignores atoms its header did not ask for (verified: the `extend`
+mutation decodes byte-exactly), the field rides outside the envelope's own digit stream and
+`atom-codec.ts` is untouched. What it covers is the part worth thinking about: not the
+compressed payload, which would only catch damage the payload decoder happens to notice, but
+
+```
+CRC-32( alphabetFingerprint || utf8(sourceText) )
+```
+
+checked against the text the reader finally receives — so it catches damage anywhere
+(header, block boundary, payload) and folds in alphabet drift for **zero extra tokens**: if
+the atom alphabet ever changes, every older wire refuses instead of decoding to noise under
+a shifted index. Same 1856 mutations against `aitherDecode`: **1622 refused, 0 silent
+corruptions**; re-run at N = 24, **5568 mutations, 4860 refused, 708 no-ops, 0 silent
+corruptions, 0 hangs**. The arithmetic reconciles exactly — 944 + 446 = 1390, plus the 232 `extend`
+mutations that were no-ops before and are refusals now (appending an atom shifts the
+checksum window) = 1622; the residual 234 no-ops are 232 whitespace doublings and 2
+self-swaps.
+
+**Wire.** `<Ω-Ξ atom run> <c₁> <c₂>`, the atom run being `omegaXiCompress` output verbatim
+under the portable restriction and `c₁c₂` the big-endian base-K digits of the CRC. **No
+per-message contract line**, deliberately and measured: the envelope carries no per-message
+parameters, so there is nothing to declare. A `§ΑΙΘΗΡ` marker measured **4 tokens per
+message, 116 over the corpus**, and buys only self-identification — the fingerprint inside
+the checksum already detects the one thing a marker would have to be trusted to report.
+**Disclosed:** whitespace between atoms is not significant (the wire splits on `/\S+/g`), so
+a re-spaced wire still decodes but will not reproduce its canonical token count.
+
+**Gates.** P1 portable payload id · **G1 envelope invariant measured on the shipped wire**
+(`countTokens(wire) === atomCount`) · G2 integrity round trip through ΑΙΘΗΡ's own decoder,
+checksum verified · **G3 refusal soundness, probed by deliberately flipping an atom** — if
+that decodes to different text the lane refuses · G4 determinism (two encodes, one wire) ·
+G5 strict win over a caller-supplied frontier cost · G6 size bound (4 MiB). Any failure
+returns the identity, so no lane can regress. G1 is not decoration: its first run refused
+**29 of 29** with `invariant broken: 52 tokens for 51 atoms`, because the checksum seam had
+been built by trimming and rejoining and every atom in the alphabet is space-prefixed — so
+trimming stripped the leading space the *first atom's tokenization* depends on. One token per
+lane, invisible to any round trip, caught only because the invariant was measured rather than
+assumed.
+
+**Measured** (o200k, `bench/x87/receipts/aither-ledger.json`, `xi-env.json`, `xi-fuzz.json`,
+`aither-fuzz.json`): frontier 12639 → **9043**, −3596, −28.45 %, **29/29 applied, 29/29
+byte-exact, 29/29 invariant-holding**. Portable Ω-Ξ 8985 vs Node-only 8882 (the 103-token
+price of P1, +58 for the 29 checksums = 9043). Source density 20.7–117.0 bits per atom
+(`ls-l-real` 117.0). Smallest wins: `kb-article` −5 (0.8 %, inside noise for a codec with a
+2-token checksum), `lsblk` −9, `free-m` −19. Largest: `ls-l-real` −745, `ps-aux-real` −392,
+`apt-real` −284.
+
+**Verification.** Round trip 29/29 through the *public* `aitherDecode`, not the inner
+`omegaXiDecode`, which would not test the field ΑΙΘΗΡ added. Envelope invariant 29/29 on the
+shipped wire. Mutation fuzz 1856 and then 5568, **0 silent corruptions, 0 hangs, 0
+nondeterminism** (the same set against the un-checksummed envelope gives 446).
+Environment fuzz: three environments (Node-with-brotli, browser-realistic, no
+`CompressionStream`) × 29 lanes, all round trips exact in all three. Cross-environment
+hazard measured rather than argued: the 6 brotli-payload wires decoded with brotli refused —
+all 6 fail loudly, none returns wrong text. **Cold read in a second
+language: `bench/aither_coldcheck.py`, 29/29 EXACT, exit 0** — it imports nothing from `src/`
+and re-derives the atom alphabet's shape, count, ordering and **FNV-1a fingerprint** (`9f6dfcc4`,
+recomputed in Python), the 4-byte header, the 512-byte block digit walk, the exact atom
+accounting (header + blocks + 2, nothing left over), the portable-codec restriction, and
+`zlib.crc32(fingerprint || sourceBytes)` over bytes read from disk. **Its boundary is stated
+in the file and is real:** it cannot decode the CM payload, so it proves the checksum agrees
+with the source on disk, not that the body decodes to it. Running it found the counterexample
+that justifies checksumming the *text* rather than the payload — flipping `lsblk`'s first atom
+from index 3072 to 0 turns `codec=12, payloadLen=94` into `codec=0, payloadLen=94`, leaving the
+framing byte-identical and every structural check blind; only the decoded-text CRC sees it. Of
+six body-flip probes four were caught by framing accident and two were not, so that class is
+reported as **deferred** to `aitherDecode` and to the fuzz above. The honest split: the
+envelope is verified in two languages, the CM decode in one.
+
+**Frontier confirmation.** Adding the arm must not move the frontier, and "must not" is
+not an argument: `bench/x86/front.ts` re-run over the same 29 lanes with `aither.ts` present
+gives **FRONTIER 29 TOTAL 12639 exact 29/29, lanes differing: 0**
+(`bench/x86/receipts/frontier-runC.json`) — the third consecutive confirmation of the same
+baseline this session (A before the `ariadne.ts` key patch, B after it, C after ΑΙΘΗΡ). Wall
+times across A/B/C are **not** comparable and no speed claim is made from them: the sandbox is
+suspended across turn boundaries and drifts (C's `ls-l-real` 424 319 ms vs B's 391 697 ms on an
+identical patch surface).
+
+**Greedy?** **No.** The portfolio is exhaustive over a fixed candidate set and ships the
+smallest; the restriction is a set membership test; the checksum is two atoms in a fixed
+place. Nothing is searched, nothing is ranked, and G3's probe is a single deliberate
+corruption rather than a search for one.
+
+**Time- or CPU-bound?** **CPU-bound.** The CM coder is ~0.2 s per 10 KB; the full portfolio
+plus the two extra compressions for G2 and G4 makes `ls-l-real` seconds where the frontier
+takes minutes. No interleaved A/B was run, so **no speed claim is made** — this document has
+already been burned once by comparing wall times across processes.
+
+**Honest source.** No external source contributed a mechanism here; the mechanism was
+already in the repository and the contribution is measurement plus two fixes. Prior art for
+the *class* is the lpaq/zpaq family (Mahoney) for the coder and the standard CRC-32
+(IEEE 802.3) for the field. Prior art surveyed earlier in this document and still not
+imported: Context Codec (arXiv:2605.17302), MedTPE (arXiv:2605.11774), *LLM as Token
+Compressor* (arXiv:2603.25340) — the last two need adapter fine-tuning and are not
+byte-exact. The methodological transfer from the frontier-lab review survives intact and is
+what this entry is built on: **a claim is only as good as an independent check**, so the
+446 silent corruptions were measured before the fix was written, and the fix was then
+re-measured on the identical mutation set rather than asserted to work.
+
+**Known limits.** The gain is smallest exactly where the readable tier is strongest relative
+to the source, and on a 51-token wire the 2-token checksum is 4 % of it. ΑΙΘΗΡ does not know
+which tier the caller needs — G5 only knows which is cheaper. The wire is bound to
+`o200k_base` and fingerprint `9f6dfcc4`, by design and enforced by the checksum rather than
+by convention. There is **no partial mode**: all glyph run or nothing, so a caller who wants
+the structure readable and only the irreducible literal residue packed does not get that
+here. That hybrid is the obvious X88 and it is not built. And the biggest limit is the one
+that decides whether this arm should ever be used: **the wire is not readable by the model.**
+The frontier's win has always lived in a model being able to expand `t:100G/37` from a
+41-token declaration. Where a prompt must be *used*, the readable tier at 12639 is the only
+one that applies; where content is stored, relayed, cached or handed to a program that will
+restore it, the entropy tier at 9043 is 28.45 % cheaper and now refuses damage instead of
+hiding it. **Neither number should be quoted alone.**
+
+**Record.** [`docs/codecs.md`](codecs.md) §X87, `src/lib/omega/aither.ts`, registry key
+`aither`, `bench/x87/`, `bench/aither_coldcheck.py`, receipts in
+`bench/x87/receipts/` (including `cold/`), seven real lanes in `bench/holdout-x87/`.
+
+---
+
+## X88 — ΣΥΝΤΆΞΙΣ (SYNTAXIS)
+
+**ΣΥΝΤΆΞΙΣ** = *syntaxis*, Greek "a putting in order together, an arrangement" — the
+root of *syntax*. Chosen because the mechanism is a fact about the **arrangement of a
+line's gaps**, not about its words: two lines are the same shape when their whitespace
+runs fall in the same places, whatever the widths and whatever the punctuation.
+
+| | |
+|---|---|
+| **Registry key** | `syntaxis` |
+| **File** | `src/lib/omega/syntaxis.ts` |
+| **Family / fidelity** | `exact` / `exact` — byte-perfect or refused |
+| **One line** | Partition a file's lines into **shape families** by a length-invariant, whitespace-general key, fold **every** family (constants → template, slots → de-interleaved columns, right-alignment padding → derived), route each line with a one-character map, carry the rest verbatim. |
+| **Greedy?** | **No.** Deterministic grouping by a fixed key; constants by exact equality; padding by an exact solve for one integer `W`; separator = first candidate surviving a scan. No scoring loop, no local move — the wire is a function of the text. |
+| **Time- or CPU-bound?** | **CPU-bound**, O(chars), small constant, **no tokenizer call inside the transform**. The only tokenizer work is the two counts the gates need. The costly part of *using* the arm is the one parent-frontier encode G7 requires. |
+| **Source, honestly** | **Not a new idea in outline.** `TYPOS` (X41, `typos.ts`, label at `registry.ts:578`) already clusters lines by exact skeleton (`cellSignature`, line 320), induces a mask and separator, and de-interleaves columnar, citing **Drain (ICSE 2017)**, the **Abadi et al. column store (SIGMOD 2006)** and **LZ77**; `PHALANX-A4` adds a gated log-template stage. New here, and scoped narrowly: the **key** (length-invariant *and* whitespace-general), the **scope** (every family ≥ `MIN_ROWS`, not `largestGroup`), the **routing** (one-char-per-line map + literal section), and the **per-position derived-padding fit**. `PARATAXIS` (X80) declared padding as fixed widths; ΣΥΝΤΆΞΙΣ *fits* `W` per family and per position and only where the fit is exact on every line. |
+| **Verdict** | **Byte-exact on 75 of 91 lanes, 0 wrong round trips, 9 gross wins totalling −2988 — and refused on every lane measured through the frontier.** Registered because it is sound, because it covers a structural blind spot, and because the refusal is a measurement and not an assumption. |
+
+### The blind spot it covers
+
+`cellSignature` is length-sensitive **and** space-only. Length-sensitivity shatters one
+obvious shape into many (`ls -l /usr/lib/x86_64-linux-gnu`: 151 lines → **21 shapes**,
+largest group **23.8 %**, so TYPOS folds 36 lines and leaves 115 literal; `ps aux`
+22/31.1 %; `findmnt` 26/7.4 %; `dpkg -l` 37/7.3 %; `dpkg-l-full` 129/**2.1 %** — and on
+the last three the largest group is below `MIN_ROWS`, so `typosPlan` returns **null**).
+Space-only splitting means a **TAB is neither cell nor hole**: `/\S+| +/g` drops it, the
+cells stop reassembling to the line, and `git numstat` — 392 of 400 lines with the
+identical shape `added<TAB>deleted<TAB>path`, **98 % coverage under any key** — also gets
+`typosPlan === null`. `kannabosCells` (`/[^ ]+/g`) is blind to the same file the same way.
+ΣΥΝΤΆΞΙΣ splits on `/\S+|\s+/g`, signs a line by *where its gaps are*, and folds all of
+them: coverage **23.8 → 60.3 %**, **31.4 → 73.6 %**, **56.2 → 97.8 %**, **2.1 → 17.7 %**,
+**14.8 → 90.7 %** on `ls-l-real`, `ls-la-usrbin`, `ls-l-nm`, `dpkg-l-full`, `proc-meminfo`.
+
+### Why it still loses, and the screen that says so cheaply
+
+The dense-wire law (`F(wire)/raw(wire) ≥ 0.563` for any wire this stack produces, against
+0.222–0.316 on sources) turns into a **necessary condition**: a pre-transform can only win
+if `tokens(M(text)) < 1.78 × F(text)`. Measured this turn — `openstack-loghub-26.log`
+F = **896** from raw 4028 (ΣΥΝΤΆΞΙΣ: 3680), `ls-la-usrbin` F = **946** (ΣΥΝΤΆΞΙΣ: 4045),
+`npm-ls-all` F = **711** (2811), `find-listing` F = **1140**, `ls-l-real` F = **1476**
+(4575). Nothing measured this turn is within 2× of the bound.
+
+The explanation is the result: **a pre-transform that removes plain repetition makes the
+wire denser, and the parent glyph pool's yield is a function of the redundancy left in
+front of it.** Removing repetition early loses to a pool that removes repetition better.
+Arms win only where they delete what a substring dictionary **cannot represent** —
+recomputable values, positional constants, tree geometry, numeric shapes, voted column
+boundaries. ΣΥΝΤΆΞΙΣ deletes repetition, so G7 refuses it.
+
+**De-interleaving is not uniformly good.** On `git-numstat` the `added`/`deleted` columns
+cost **1588 tokens split against ≈658 interleaved**, because o200k merges *across* field
+boundaries and one-value-per-line destroys those merges; the `path` column is 3174 either
+way, irreducible literal text only a dictionary can reach. Columnar pays on **long string
+fields with no cross-field merges** and loses on **short numeric ones**.
+
+### Wire
+
+`§ΣΥΝΤΆΞΙΣ L=<lines> F=<families> E=<1|2> T=<0|1> …` · `M<one char per line, * = literal>` ·
+`T<f> <sep><template cells, @n = slot n>` · `W<f> n:W,…` (derived padding, not sent) ·
+`C<f>.n<sep><values>` or `C<f>.nx<rows>` then one value per line · `X` then the literal
+lines in source order. `E=` declares the **source** EOL because the wire's own joiner is
+always `\n` and a CRLF log's wire contains no CRLF at all.
+
+**Gates:** G1 cells reassemble · G2 partition total and row counts met · G3 separator
+absent from its family · G4 padding fit exact · G5 byte-exact round trip through the
+public decoder · G6 map characters in range · **G7 strict win through the frontier** ·
+G8 size bound · **G9 integrity**, `H=` is the CRC-32 of the rebuilt text (imported from
+`aither.ts`, one table not two).
+
+**Red team, and a defect it caught.** 9 mutation kinds × 60 per lane × 8 lanes: before G9,
+**244 of 427 effective mutations (57.1 %) decoded SILENTLY WRONG** — an edited column value
+is still a well-formed value, so every structural gate passed and the decoder returned a
+different 10 692-character `ls -l` with no error. After G9: **397 of 425 refused (93.4 %),
+0 silent-wrong, 0 hangs**, still 75/91 byte-exact. Cost of the checksum, measured: the 9
+gross wins went −2988 → −2773, i.e. **2.9 tokens per applied lane**. Scope: a model cannot
+compute a CRC by hand, so G9 is a decoder-side safety property, not a claim the reader can
+verify the body.
+
+**Bug the receipt caught and the tests did not:** `W<idx> n:W` was parsed at `l.slice(2)`
+— the space after the family letter — so every padding spec was dropped, the padded slot
+looked like a transmitted one with no column, and G5 refused `ls-l-real`, `ps-aux-real`
+and `ls-real` with `slot 0 has no column` while all 75 lanes that *did* encode still round
+-tripped. Fixed to `l.slice(3)`.
+
+**Whole-stack speed, honestly: no win claimed this turn.** Two hypotheses tested and both
+falsified with numbers. (1) The count memo's retained-key budget (2 000 000 chars against
+5 000–11 000-char candidate wires and **249 arms** per lane) looks like the bottleneck; an
+A/B flipping it *inside one process* with the order alternated gives 478 vs 528 ms, 266 vs
+286, 115 vs 121 at 2 M against 32 M with identical F — nothing, so the default is
+unchanged and only the `setCountMemoBudget` hook is kept. Run D clocked 652 815 ms against
+run C's 1 215 714 ms with identical F on all 29 lanes, which is the ~1.6× cross-process
+drift and **not** a speedup. (2) `countTokens` is not the hot path: 367 ms once per process
+for the vocabulary load, then 1 ms per 6 000-character count, chunk cache 78 % hit, 0
+fallbacks. The remaining cost is the 249-arm audit, whose first pass over a lane is ~40× a
+warm pass — JIT warm-up across 249 code paths, not removable without removing arms.
+
+**Record.** [`docs/codecs.md`](codecs.md) §X88, `src/lib/omega/syntaxis.ts`, registry key
+`syntaxis`, `bench/x88/`, receipts `bench/x88/receipts/{skeleton-census,syntaxis-gross,
+syntaxis-fuzz,memo-ab,leaders,logfront,probe1,sweep}.json` and the five frontier wires
+`bench/x88/receipts/*.wire.txt`; frontier confirmations `bench/x86/receipts/
+frontier-runD.json` and `-runE.json`.

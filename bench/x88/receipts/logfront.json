@@ -1,0 +1,59 @@
+{
+ "rows": [
+  {
+   "path": "bench/holdout-ops/openstack-loghub-26.log",
+   "lane": "openstack-loghub-26.log",
+   "raw": 4028,
+   "F": 896,
+   "parent": "synkrisis",
+   "exact": true,
+   "encode": 896,
+   "encodeExact": true,
+   "secs": 135
+  },
+  {
+   "path": "bench/holdout-x86/ls-la-usrbin.txt",
+   "lane": "ls-la-usrbin.txt",
+   "raw": 3271,
+   "F": 946,
+   "parent": "synkrisis",
+   "exact": true,
+   "encode": 946,
+   "encodeExact": true,
+   "secs": 71.6
+  },
+  {
+   "path": "bench/holdout-x86/npm-ls-all.txt",
+   "lane": "npm-ls-all.txt",
+   "raw": 2253,
+   "F": 711,
+   "parent": "synkrisis",
+   "exact": true,
+   "encode": 711,
+   "encodeExact": true,
+   "secs": 157.8
+  },
+  {
+   "path": "bench/holdout-ops/find-listing.txt",
+   "lane": "find-listing.txt",
+   "raw": 3997,
+   "F": 1140,
+   "parent": "diastema",
+   "exact": true,
+   "encode": 1140,
+   "encodeExact": true,
+   "secs": 62
+  },
+  {
+   "path": "bench/holdout-x86/dpkg-l-full.txt",
+   "lane": "dpkg-l-full.txt",
+   "raw": 4277,
+   "F": 2262,
+   "parent": "synkrisis",
+   "exact": true,
+   "encode": 2262,
+   "encodeExact": true,
+   "secs": 751.3
+  }
+ ]
+}

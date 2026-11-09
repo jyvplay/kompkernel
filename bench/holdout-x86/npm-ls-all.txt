@@ -1,0 +1,121 @@
+# source: npm ls --all (real, captured this turn)
+kompkernel@1.0.0 /home/user/kompkernel
++-- @babel/code-frame@7.29.7 extraneous
+| +-- @babel/helper-validator-identifier@7.29.7 deduped
+| +-- js-tokens@4.0.0 deduped
+| `-- picocolors@1.1.1 deduped
++-- @babel/compat-data@7.29.7 extraneous
++-- @babel/generator@ extraneous
++-- @babel/helper-compilation-targets@7.29.7 extraneous
+| +-- @babel/compat-data@7.29.7 deduped
+| +-- @babel/helper-validator-option@7.29.7 deduped
+| +-- browserslist@4.28.7 deduped
+| +-- lru-cache@5.1.1 deduped
+| `-- semver@6.3.1 deduped
++-- @babel/helper-globals@7.29.7 extraneous
++-- @babel/helper-module-imports@7.29.7 extraneous
+| +-- @babel/traverse@ deduped invalid: "^7.29.7" from node_modules/@babel/helper-module-imports
+| `-- @babel/types@ invalid: "^7.29.7" from node_modules/@babel/helper-module-imports, "^7.29.7" from node_modules/@babel/template
++-- @babel/helper-module-transforms@7.29.7 extraneous
+| +-- @babel/core@ invalid: "^7.0.0" from node_modules/@babel/helper-module-transforms, "^7.28.5" from node_modules/@vitejs/plugin-react
+| +-- @babel/helper-module-imports@7.29.7 deduped
+| +-- @babel/helper-validator-identifier@7.29.7 deduped
+| `-- @babel/traverse@ deduped invalid: "^7.29.7" from node_modules/@babel/helper-module-imports, "^7.29.7" from node_modules/@babel/helper-module-transforms
++-- @babel/helper-string-parser@7.29.7 extraneous
++-- @babel/helper-validator-identifier@7.29.7 extraneous
++-- @babel/helper-validator-option@7.29.7 extraneous
++-- @babel/helpers@ extraneous
++-- @babel/template@7.29.7 extraneous
+| +-- @babel/code-frame@7.29.7 deduped
+| +-- @babel/parser@ invalid: "^7.29.7" from node_modules/@babel/template
+| `-- @babel/types@ deduped invalid: "^7.29.7" from node_modules/@babel/helper-module-imports, "^7.29.7" from node_modules/@babel/template
++-- @babel/traverse@ invalid: "^7.29.7" from node_modules/@babel/helper-module-imports, "^7.29.7" from node_modules/@babel/helper-module-transforms extraneous
++-- @emnapi/runtime@1.11.3 extraneous
+| `-- tslib@2.8.1 deduped
++-- @img/colour@1.1.0 extraneous
++-- @img/sharp-darwin-arm64@ extraneous
++-- @img/sharp-darwin-x64@ extraneous
++-- @img/sharp-freebsd-wasm32@ extraneous
++-- @img/sharp-libvips-darwin-arm64@ extraneous
++-- @img/sharp-libvips-darwin-x64@ extraneous
++-- @img/sharp-libvips-linux-arm@ extraneous
++-- @img/sharp-libvips-linux-arm64@ extraneous
++-- @img/sharp-libvips-linux-ppc64@ extraneous
++-- @img/sharp-libvips-linux-riscv64@ extraneous
++-- @img/sharp-libvips-linux-s390x@ extraneous
++-- @img/sharp-libvips-linux-x64@ extraneous
++-- @img/sharp-libvips-linuxmusl-arm64@ extraneous
++-- @img/sharp-libvips-linuxmusl-x64@ extraneous
++-- @img/sharp-linux-arm@ extraneous
++-- @img/sharp-linux-arm64@ extraneous
++-- @img/sharp-linux-ppc64@ extraneous
++-- @img/sharp-linux-riscv64@ extraneous
++-- @img/sharp-linux-s390x@ extraneous
++-- @img/sharp-linux-x64@0.35.4 extraneous
+| `-- @img/sharp-libvips-linux-x64@ deduped invalid: "1.3.3" from node_modules/@img/sharp-linux-x64
++-- @img/sharp-linuxmusl-arm64@ extraneous
++-- @img/sharp-linuxmusl-x64@0.35.4 extraneous
+| `-- @img/sharp-libvips-linuxmusl-x64@ deduped invalid: "1.3.3" from node_modules/@img/sharp-linuxmusl-x64
++-- @img/sharp-wasm32@0.35.4 extraneous
+| `-- @emnapi/runtime@1.11.3 deduped
++-- @img/sharp-webcontainers-wasm32@ extraneous
++-- @img/sharp-win32-arm64@ extraneous
++-- @img/sharp-win32-ia32@ extraneous
++-- @img/sharp-win32-x64@ extraneous
++-- @napi-rs/lzma-linux-x64-gnu@1.5.1 extraneous
++-- @next/env@16.3.5 extraneous
++-- @next/swc-darwin-arm64@ extraneous
++-- @next/swc-darwin-x64@ extraneous
++-- @next/swc-linux-arm64-gnu@ extraneous
++-- @next/swc-linux-arm64-musl@ extraneous
++-- @next/swc-linux-x64-gnu@16.3.5 extraneous
++-- @next/swc-linux-x64-musl@16.3.5 extraneous
++-- @next/swc-win32-arm64-msvc@ extraneous
++-- @next/swc-win32-x64-msvc@ extraneous
++-- @rollup/rollup-android-arm-eabi@ extraneous
++-- @rollup/rollup-android-arm64@ extraneous
++-- @rollup/rollup-darwin-arm64@ extraneous
++-- @rollup/rollup-darwin-x64@ extraneous
++-- @rollup/rollup-freebsd-arm64@ extraneous
++-- @rollup/rollup-freebsd-x64@ extraneous
++-- @rollup/rollup-linux-arm-gnueabihf@ extraneous
++-- @rollup/rollup-linux-arm-musleabihf@ extraneous
++-- @rollup/rollup-linux-arm64-gnu@ extraneous
++-- @rollup/rollup-linux-arm64-musl@ extraneous
++-- @rollup/rollup-linux-loong64-gnu@ extraneous
++-- @rollup/rollup-linux-loong64-musl@ extraneous
++-- @rollup/rollup-linux-ppc64-gnu@ extraneous
++-- @rollup/rollup-linux-ppc64-musl@ extraneous
++-- @rollup/rollup-linux-riscv64-gnu@ extraneous
++-- @rollup/rollup-linux-riscv64-musl@ extraneous
++-- @rollup/rollup-linux-s390x-gnu@ extraneous
++-- @rollup/rollup-linux-x64-gnu@4.62.4 extraneous
++-- @rollup/rollup-linux-x64-musl@4.62.4 extraneous
++-- @rollup/rollup-openbsd-x64@ extraneous
++-- @rollup/rollup-openharmony-arm64@ extraneous
++-- @rollup/rollup-win32-arm64-msvc@ extraneous
++-- @rollup/rollup-win32-ia32-msvc@ extraneous
++-- @rollup/rollup-win32-x64-gnu@ extraneous
++-- @rollup/rollup-win32-x64-msvc@ extraneous
++-- @swc/helpers@ extraneous
++-- @tailwindcss/oxide-android-arm64@ extraneous
++-- @tailwindcss/oxide-darwin-arm64@ extraneous
++-- @tailwindcss/oxide-darwin-x64@ extraneous
++-- @tailwindcss/oxide-freebsd-x64@ extraneous
++-- @tailwindcss/oxide-linux-arm-gnueabihf@ extraneous
++-- @tailwindcss/oxide-linux-arm64-gnu@ extraneous
++-- @tailwindcss/oxide-linux-arm64-musl@ extraneous
++-- @tailwindcss/oxide-linux-x64-gnu@4.1.17 extraneous
++-- @tailwindcss/oxide-linux-x64-musl@4.1.17 extraneous
++-- @tailwindcss/oxide-wasm32-wasi@ extraneous
++-- @tailwindcss/oxide-win32-arm64-msvc@ extraneous
++-- @tailwindcss/oxide-win32-x64-msvc@ extraneous
++-- @tailwindcss/vite@4.1.17
+| +-- @tailwindcss/node@4.1.17
+| | +-- @jridgewell/remapping@2.3.5
+| | | +-- @jridgewell/gen-mapping@0.3.13
+| | | | +-- @jridgewell/sourcemap-codec@1.5.5 deduped
+| | | | `-- @jridgewell/trace-mapping@0.3.31 deduped
+| | | `-- @jridgewell/trace-mapping@0.3.31
+| | |   +-- @jridgewell/resolve-uri@3.1.2
+| | |   `-- @jridgewell/sourcemap-codec@1.5.5 deduped

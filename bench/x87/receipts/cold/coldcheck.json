@@ -1,0 +1,374 @@
+{
+ "fingerprint": "9f6dfcc4",
+ "M": 65536,
+ "exact": 29,
+ "mismatch": 0,
+ "refused": 0,
+ "nonPortable": [],
+ "damageRejected": 18,
+ "damageTried": 18,
+ "bodyDamageDeferred": 2,
+ "bodyDamageCaughtByFraming": 4,
+ "bodyDamageDetail": [
+  {
+   "lane": "lsblk.txt",
+   "kind": "flip-body",
+   "structurallyVisible": false,
+   "codecBefore": null,
+   "codecAfter": 0
+  },
+  {
+   "lane": "kb-article.txt",
+   "kind": "flip-body",
+   "structurallyVisible": true,
+   "framing": "wire truncated at body: need 770 digits at byte 1024, have 103"
+  },
+  {
+   "lane": "uptime-w.txt",
+   "kind": "flip-body",
+   "structurallyVisible": true,
+   "framing": "wire truncated at body: need 258 digits at byte 0, have 57"
+  },
+  {
+   "lane": "free-m.txt",
+   "kind": "flip-body",
+   "structurallyVisible": true,
+   "framing": "wire truncated at body: need 258 digits at byte 0, have 55"
+  },
+  {
+   "lane": "vmstat.txt",
+   "kind": "flip-body",
+   "structurallyVisible": true,
+   "framing": "wire truncated at body: need 258 digits at byte 0, have 91"
+  },
+  {
+   "lane": "unified-diff.patch",
+   "kind": "flip-body",
+   "structurallyVisible": false,
+   "codecBefore": null,
+   "codecAfter": 0
+  }
+ ],
+ "boundary": "this reader cannot decode the CM payload, so body damage is verified by aitherDecode + the mutation fuzz, not here",
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "verdict": "EXACT",
+   "bytes": 132,
+   "codec": 12,
+   "payloadLen": 94,
+   "atoms": 51,
+   "consumed": 49,
+   "crc": 2923867569,
+   "digits": 49
+  },
+  {
+   "lane": "kb-article.txt",
+   "verdict": "EXACT",
+   "bytes": 3385,
+   "codec": 0,
+   "payloadLen": 1226,
+   "atoms": 617,
+   "consumed": 615,
+   "crc": 768946689,
+   "digits": 615
+  },
+  {
+   "lane": "uptime-w.txt",
+   "verdict": "EXACT",
+   "bytes": 179,
+   "codec": 0,
+   "payloadLen": 110,
+   "atoms": 59,
+   "consumed": 57,
+   "crc": 425265833,
+   "digits": 57
+  },
+  {
+   "lane": "free-m.txt",
+   "verdict": "EXACT",
+   "bytes": 263,
+   "codec": 0,
+   "payloadLen": 106,
+   "atoms": 57,
+   "consumed": 55,
+   "crc": 1354658637,
+   "digits": 55
+  },
+  {
+   "lane": "vmstat.txt",
+   "verdict": "EXACT",
+   "bytes": 467,
+   "codec": 0,
+   "payloadLen": 178,
+   "atoms": 93,
+   "consumed": 91,
+   "crc": 3634027968,
+   "digits": 91
+  },
+  {
+   "lane": "unified-diff.patch",
+   "verdict": "EXACT",
+   "bytes": 1487,
+   "codec": 4,
+   "payloadLen": 562,
+   "atoms": 285,
+   "consumed": 283,
+   "crc": 2229619399,
+   "digits": 283
+  },
+  {
+   "lane": "df-h.txt",
+   "verdict": "EXACT",
+   "bytes": 939,
+   "codec": 0,
+   "payloadLen": 292,
+   "atoms": 150,
+   "consumed": 148,
+   "crc": 2466403550,
+   "digits": 148
+  },
+  {
+   "lane": "df-real.txt",
+   "verdict": "EXACT",
+   "bytes": 329,
+   "codec": 12,
+   "payloadLen": 152,
+   "atoms": 80,
+   "consumed": 78,
+   "crc": 3857763190,
+   "digits": 78
+  },
+  {
+   "lane": "du-real.txt",
+   "verdict": "EXACT",
+   "bytes": 1605,
+   "codec": 0,
+   "payloadLen": 375,
+   "atoms": 192,
+   "consumed": 190,
+   "crc": 1001239757,
+   "digits": 190
+  },
+  {
+   "lane": "node-help.txt",
+   "verdict": "EXACT",
+   "bytes": 6751,
+   "codec": 0,
+   "payloadLen": 1561,
+   "atoms": 785,
+   "consumed": 783,
+   "crc": 1372698565,
+   "digits": 783
+  },
+  {
+   "lane": "findmnt.txt",
+   "verdict": "EXACT",
+   "bytes": 3215,
+   "codec": 0,
+   "payloadLen": 567,
+   "atoms": 288,
+   "consumed": 286,
+   "crc": 141154032,
+   "digits": 286
+  },
+  {
+   "lane": "df-h.txt",
+   "verdict": "EXACT",
+   "bytes": 293,
+   "codec": 0,
+   "payloadLen": 133,
+   "atoms": 71,
+   "consumed": 69,
+   "crc": 1022988192,
+   "digits": 69
+  },
+  {
+   "lane": "email-thread.txt",
+   "verdict": "EXACT",
+   "bytes": 2126,
+   "codec": 0,
+   "payloadLen": 827,
+   "atoms": 418,
+   "consumed": 416,
+   "crc": 2767828055,
+   "digits": 416
+  },
+  {
+   "lane": "llm-answer.md",
+   "verdict": "EXACT",
+   "bytes": 2542,
+   "codec": 0,
+   "payloadLen": 1185,
+   "atoms": 597,
+   "consumed": 595,
+   "crc": 3479663858,
+   "digits": 595
+  },
+  {
+   "lane": "markdown-table.md",
+   "verdict": "EXACT",
+   "bytes": 635,
+   "codec": 0,
+   "payloadLen": 205,
+   "atoms": 107,
+   "consumed": 105,
+   "crc": 972118299,
+   "digits": 105
+  },
+  {
+   "lane": "psql-output.txt",
+   "verdict": "EXACT",
+   "bytes": 1578,
+   "codec": 0,
+   "payloadLen": 291,
+   "atoms": 150,
+   "consumed": 148,
+   "crc": 3903986931,
+   "digits": 148
+  },
+  {
+   "lane": "prices.csv",
+   "verdict": "EXACT",
+   "bytes": 993,
+   "codec": 0,
+   "payloadLen": 205,
+   "atoms": 107,
+   "consumed": 105,
+   "crc": 2890512732,
+   "digits": 105
+  },
+  {
+   "lane": "cue-sheet.md",
+   "verdict": "EXACT",
+   "bytes": 938,
+   "codec": 0,
+   "payloadLen": 176,
+   "atoms": 92,
+   "consumed": 90,
+   "crc": 3243338546,
+   "digits": 90
+  },
+  {
+   "lane": "ps-ef.txt",
+   "verdict": "EXACT",
+   "bytes": 2669,
+   "codec": 4,
+   "payloadLen": 428,
+   "atoms": 218,
+   "consumed": 216,
+   "crc": 126165349,
+   "digits": 216
+  },
+  {
+   "lane": "ls-real.txt",
+   "verdict": "EXACT",
+   "bytes": 2486,
+   "codec": 0,
+   "payloadLen": 580,
+   "atoms": 294,
+   "consumed": 292,
+   "crc": 150608210,
+   "digits": 292
+  },
+  {
+   "lane": "json-pkg.txt",
+   "verdict": "EXACT",
+   "bytes": 3620,
+   "codec": 0,
+   "payloadLen": 1065,
+   "atoms": 537,
+   "consumed": 535,
+   "crc": 3324495507,
+   "digits": 535
+  },
+  {
+   "lane": "code-ts.txt",
+   "verdict": "EXACT",
+   "bytes": 6000,
+   "codec": 0,
+   "payloadLen": 1419,
+   "atoms": 714,
+   "consumed": 712,
+   "crc": 1306808510,
+   "digits": 712
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "verdict": "EXACT",
+   "bytes": 4459,
+   "codec": 0,
+   "payloadLen": 1060,
+   "atoms": 534,
+   "consumed": 532,
+   "crc": 2118594772,
+   "digits": 532
+  },
+  {
+   "lane": "ps-real.txt",
+   "verdict": "EXACT",
+   "bytes": 2365,
+   "codec": 0,
+   "payloadLen": 532,
+   "atoms": 270,
+   "consumed": 268,
+   "crc": 2526774524,
+   "digits": 268
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "verdict": "EXACT",
+   "bytes": 2649,
+   "codec": 0,
+   "payloadLen": 392,
+   "atoms": 200,
+   "consumed": 198,
+   "crc": 790811271,
+   "digits": 198
+  },
+  {
+   "lane": "metrics.tsv",
+   "verdict": "EXACT",
+   "bytes": 1203,
+   "codec": 0,
+   "payloadLen": 251,
+   "atoms": 130,
+   "consumed": 128,
+   "crc": 1483904514,
+   "digits": 128
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "verdict": "EXACT",
+   "bytes": 6590,
+   "codec": 0,
+   "payloadLen": 1291,
+   "atoms": 650,
+   "consumed": 648,
+   "crc": 3495258949,
+   "digits": 648
+  },
+  {
+   "lane": "apt-real.txt",
+   "verdict": "EXACT",
+   "bytes": 6195,
+   "codec": 0,
+   "payloadLen": 1123,
+   "atoms": 566,
+   "consumed": 564,
+   "crc": 2019036295,
+   "digits": 564
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "verdict": "EXACT",
+   "bytes": 10692,
+   "codec": 0,
+   "payloadLen": 1454,
+   "atoms": 731,
+   "consumed": 729,
+   "crc": 3154106922,
+   "digits": 729
+  }
+ ]
+}
