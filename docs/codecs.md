@@ -6628,6 +6628,7 @@ large file with few shapes, not a small one.
 frontier wires), `bench/x86/receipts/frontier-runD.json` (TOTAL **12 639**, exact 29/29, **0 lanes
 differing** from run C, 652 815 ms) and `-runE.json` (TOTAL **12 639**, exact 29/29,
 **0 lanes differing** from run D, 608 693 ms) — the frontier re-confirmed with the
-ΣΥΝΤΆΞΙΣ arm registered, then re-confirmed again after G9 and the `bpe.ts` hooks, which is
-the fifth and sixth consecutive confirmation of 12 639 (runs A–F),
+ΣΥΝΤΆΞΙΣ arm registered, then re-confirmed again after G9 and the `bpe.ts` hooks. Those are
+the fourth and fifth consecutive confirmations of 12 639, runs A–E, each diffed lane for
+lane against its predecessor,
 [`docs/codec-abbreviations.md`](codec-abbreviations.md) §X88.
