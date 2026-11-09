@@ -1,0 +1,756 @@
+{
+ "transforms": [
+  {
+   "name": "case-fold",
+   "rule": "all letters were lowercased; a bitmask restores case"
+  },
+  {
+   "name": "space-after-punct",
+   "rule": "a space follows every , ; : ! ?"
+  },
+  {
+   "name": "space-before-punct-none",
+   "rule": "no space precedes , . ; :"
+  },
+  {
+   "name": "collapse-2space",
+   "rule": "every run of 2+ spaces was one space"
+  },
+  {
+   "name": "strip-trailing-ws",
+   "rule": "no line ended in whitespace"
+  },
+  {
+   "name": "tab-to-1space",
+   "rule": "every tab was one space"
+  },
+  {
+   "name": "eol-normalise",
+   "rule": "the file ended with exactly one \\n"
+  },
+  {
+   "name": "dbl-newline-to-par",
+   "rule": "a blank line was the paragraph mark ¶"
+  },
+  {
+   "name": "quote-strip-dq",
+   "rule": "every \" was deleted"
+  },
+  {
+   "name": "bracket-strip",
+   "rule": "every ( ) [ ] { } was deleted"
+  },
+  {
+   "name": "tree-draw-to-depth",
+   "rule": "a leading depth digit replaces the tree drawing"
+  },
+  {
+   "name": "indent-to-depth",
+   "rule": "leading whitespace was 2 spaces per level"
+  },
+  {
+   "name": "drop-decimal-trailing0",
+   "rule": "a trailing .0 was dropped from every number"
+  },
+  {
+   "name": "drop-leading-zeros",
+   "rule": "leading zeros were dropped from every number"
+  },
+  {
+   "name": "thousands-sep-strip",
+   "rule": "every , inside a number was deleted"
+  },
+  {
+   "name": "hex-lower",
+   "rule": "hex letters were lowercased"
+  },
+  {
+   "name": "uri-scheme-strip",
+   "rule": "https:// was deleted"
+  },
+  {
+   "name": "path-root-strip",
+   "rule": "the longest constant path prefix was deleted"
+  },
+  {
+   "name": "dup-line-run",
+   "rule": "a repeated line was written once with a ×count"
+  },
+  {
+   "name": "ascii-fold",
+   "rule": "non-ASCII letters were folded to ASCII"
+  }
+ ],
+ "rows": [
+  {
+   "cat": "prose",
+   "lane": "kb-article.txt",
+   "path": "bench/holdout-work/kb-article.txt",
+   "raw": 656,
+   "best": [
+    {
+     "t": "space-after-punct",
+     "d": -15,
+     "pct": -2.29
+    },
+    {
+     "t": "case-fold",
+     "d": 0,
+     "pct": 0
+    },
+    {
+     "t": "drop-leading-zeros",
+     "d": 0,
+     "pct": 0
+    },
+    {
+     "t": "dbl-newline-to-par",
+     "d": 5,
+     "pct": 0.76
+    }
+   ]
+  },
+  {
+   "cat": "prose",
+   "lane": "llm-answer.md",
+   "path": "bench/holdout-work/llm-answer.md",
+   "raw": 733,
+   "best": [
+    {
+     "t": "case-fold",
+     "d": -16,
+     "pct": -2.18
+    },
+    {
+     "t": "space-after-punct",
+     "d": -14,
+     "pct": -1.91
+    },
+    {
+     "t": "collapse-2space",
+     "d": -12,
+     "pct": -1.64
+    },
+    {
+     "t": "bracket-strip",
+     "d": -12,
+     "pct": -1.64
+    },
+    {
+     "t": "tree-draw-to-depth",
+     "d": -7,
+     "pct": -0.95
+    },
+    {
+     "t": "drop-leading-zeros",
+     "d": 0,
+     "pct": 0
+    }
+   ]
+  },
+  {
+   "cat": "prose",
+   "lane": "email-thread.txt",
+   "path": "bench/holdout-work/email-thread.txt",
+   "raw": 629,
+   "best": [
+    {
+     "t": "space-after-punct",
+     "d": -5,
+     "pct": -0.79
+    },
+    {
+     "t": "drop-leading-zeros",
+     "d": -3,
+     "pct": -0.48
+    },
+    {
+     "t": "bracket-strip",
+     "d": -2,
+     "pct": -0.32
+    },
+    {
+     "t": "thousands-sep-strip",
+     "d": -2,
+     "pct": -0.32
+    },
+    {
+     "t": "dbl-newline-to-par",
+     "d": 4,
+     "pct": 0.64
+    },
+    {
+     "t": "case-fold",
+     "d": 8,
+     "pct": 1.27
+    }
+   ]
+  },
+  {
+   "cat": "prose",
+   "lane": "node-help.txt",
+   "path": "bench/holdout-x41/node-help.txt",
+   "raw": 1099,
+   "best": [
+    {
+     "t": "collapse-2space",
+     "d": -146,
+     "pct": -13.28
+    },
+    {
+     "t": "tree-draw-to-depth",
+     "d": -53,
+     "pct": -4.82
+    },
+    {
+     "t": "bracket-strip",
+     "d": -15,
+     "pct": -1.36
+    },
+    {
+     "t": "space-after-punct",
+     "d": -5,
+     "pct": -0.45
+    },
+    {
+     "t": "case-fold",
+     "d": 1,
+     "pct": 0.09
+    },
+    {
+     "t": "dbl-newline-to-par",
+     "d": 1,
+     "pct": 0.09
+    }
+   ]
+  },
+  {
+   "cat": "ops",
+   "lane": "apt-real.txt",
+   "path": "bench/holdout-x41/apt-real.txt",
+   "raw": 2739,
+   "best": [
+    {
+     "t": "bracket-strip",
+     "d": -120,
+     "pct": -4.38
+    },
+    {
+     "t": "drop-decimal-trailing0",
+     "d": -58,
+     "pct": -2.12
+    },
+    {
+     "t": "case-fold",
+     "d": 0,
+     "pct": 0
+    },
+    {
+     "t": "space-after-punct",
+     "d": 0,
+     "pct": 0
+    },
+    {
+     "t": "drop-leading-zeros",
+     "d": 0,
+     "pct": 0
+    }
+   ]
+  },
+  {
+   "cat": "ops",
+   "lane": "dpkg-l.txt",
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "raw": 1000,
+   "best": [
+    {
+     "t": "collapse-2space",
+     "d": -142,
+     "pct": -14.2
+    },
+    {
+     "t": "drop-decimal-trailing0",
+     "d": -20,
+     "pct": -2
+    },
+    {
+     "t": "bracket-strip",
+     "d": -5,
+     "pct": -0.5
+    },
+    {
+     "t": "tree-draw-to-depth",
+     "d": -1,
+     "pct": -0.1
+    },
+    {
+     "t": "space-after-punct",
+     "d": 0,
+     "pct": 0
+    },
+    {
+     "t": "drop-leading-zeros",
+     "d": 0,
+     "pct": 0
+    }
+   ]
+  },
+  {
+   "cat": "ops",
+   "lane": "ls-real.txt",
+   "path": "bench/holdout-x41/ls-real.txt",
+   "raw": 1034,
+   "best": [
+    {
+     "t": "collapse-2space",
+     "d": -62,
+     "pct": -6
+    },
+    {
+     "t": "space-after-punct",
+     "d": -1,
+     "pct": -0.1
+    },
+    {
+     "t": "bracket-strip",
+     "d": -1,
+     "pct": -0.1
+    },
+    {
+     "t": "case-fold",
+     "d": 0,
+     "pct": 0
+    },
+    {
+     "t": "space-before-punct-none",
+     "d": 0,
+     "pct": 0
+    },
+    {
+     "t": "drop-leading-zeros",
+     "d": 0,
+     "pct": 0
+    }
+   ]
+  },
+  {
+   "cat": "ops",
+   "lane": "findmnt.txt",
+   "path": "bench/holdout-x42/findmnt.txt",
+   "raw": 787,
+   "best": [
+    {
+     "t": "collapse-2space",
+     "d": -76,
+     "pct": -9.66
+    },
+    {
+     "t": "tree-draw-to-depth",
+     "d": -20,
+     "pct": -2.54
+    },
+    {
+     "t": "bracket-strip",
+     "d": -3,
+     "pct": -0.38
+    },
+    {
+     "t": "case-fold",
+     "d": -1,
+     "pct": -0.13
+    },
+    {
+     "t": "space-after-punct",
+     "d": 0,
+     "pct": 0
+    },
+    {
+     "t": "drop-leading-zeros",
+     "d": 0,
+     "pct": 0
+    }
+   ]
+  },
+  {
+   "cat": "ops",
+   "lane": "npm-ls-all.txt",
+   "path": "bench/holdout-x86/npm-ls-all.txt",
+   "raw": 2253,
+   "best": [
+    {
+     "t": "tree-draw-to-depth",
+     "d": -165,
+     "pct": -7.32
+    },
+    {
+     "t": "quote-strip-dq",
+     "d": -14,
+     "pct": -0.62
+    },
+    {
+     "t": "drop-decimal-trailing0",
+     "d": -8,
+     "pct": -0.36
+    },
+    {
+     "t": "space-after-punct",
+     "d": -2,
+     "pct": -0.09
+    },
+    {
+     "t": "collapse-2space",
+     "d": -2,
+     "pct": -0.09
+    },
+    {
+     "t": "bracket-strip",
+     "d": -1,
+     "pct": -0.04
+    }
+   ]
+  },
+  {
+   "cat": "ops",
+   "lane": "find-listing.txt",
+   "path": "bench/holdout-ops/find-listing.txt",
+   "raw": 3997,
+   "best": [
+    {
+     "t": "collapse-2space",
+     "d": -120,
+     "pct": -3
+    },
+    {
+     "t": "drop-leading-zeros",
+     "d": -9,
+     "pct": -0.23
+    },
+    {
+     "t": "case-fold",
+     "d": 1,
+     "pct": 0.03
+    }
+   ]
+  },
+  {
+   "cat": "ops",
+   "lane": "ls-la-usrbin.txt",
+   "path": "bench/holdout-x86/ls-la-usrbin.txt",
+   "raw": 3271,
+   "best": [
+    {
+     "t": "collapse-2space",
+     "d": -363,
+     "pct": -11.1
+    },
+    {
+     "t": "bracket-strip",
+     "d": -1,
+     "pct": -0.03
+    },
+    {
+     "t": "case-fold",
+     "d": 0,
+     "pct": 0
+    },
+    {
+     "t": "space-after-punct",
+     "d": 0,
+     "pct": 0
+    },
+    {
+     "t": "space-before-punct-none",
+     "d": 0,
+     "pct": 0
+    }
+   ]
+  },
+  {
+   "cat": "ops",
+   "lane": "dpkg-l-full.txt",
+   "path": "bench/holdout-x86/dpkg-l-full.txt",
+   "raw": 4277,
+   "best": [
+    {
+     "t": "collapse-2space",
+     "d": -542,
+     "pct": -12.67
+    },
+    {
+     "t": "drop-decimal-trailing0",
+     "d": -62,
+     "pct": -1.45
+    },
+    {
+     "t": "bracket-strip",
+     "d": -34,
+     "pct": -0.79
+    },
+    {
+     "t": "strip-trailing-ws",
+     "d": -2,
+     "pct": -0.05
+    },
+    {
+     "t": "tree-draw-to-depth",
+     "d": -1,
+     "pct": -0.02
+    },
+    {
+     "t": "space-after-punct",
+     "d": 0,
+     "pct": 0
+    }
+   ]
+  },
+  {
+   "cat": "other",
+   "lane": "code-ts.txt",
+   "path": "bench/holdout/code-ts.txt",
+   "raw": 1422,
+   "best": [
+    {
+     "t": "collapse-2space",
+     "d": -112,
+     "pct": -7.88
+    },
+    {
+     "t": "bracket-strip",
+     "d": -89,
+     "pct": -6.26
+    },
+    {
+     "t": "space-after-punct",
+     "d": -40,
+     "pct": -2.81
+    },
+    {
+     "t": "case-fold",
+     "d": -17,
+     "pct": -1.2
+    },
+    {
+     "t": "space-before-punct-none",
+     "d": -1,
+     "pct": -0.07
+    },
+    {
+     "t": "tree-draw-to-depth",
+     "d": 0,
+     "pct": 0
+    }
+   ]
+  },
+  {
+   "cat": "other",
+   "lane": "json-pkg.txt",
+   "path": "bench/holdout/json-pkg.txt",
+   "raw": 1152,
+   "best": [
+    {
+     "t": "quote-strip-dq",
+     "d": -132,
+     "pct": -11.46
+    },
+    {
+     "t": "collapse-2space",
+     "d": -118,
+     "pct": -10.24
+    },
+    {
+     "t": "space-after-punct",
+     "d": -36,
+     "pct": -3.13
+    },
+    {
+     "t": "drop-decimal-trailing0",
+     "d": -28,
+     "pct": -2.43
+    },
+    {
+     "t": "uri-scheme-strip",
+     "d": -6,
+     "pct": -0.52
+    },
+    {
+     "t": "bracket-strip",
+     "d": -1,
+     "pct": -0.09
+    }
+   ]
+  },
+  {
+   "cat": "other",
+   "lane": "metrics.tsv",
+   "path": "bench/holdout-x40/metrics.tsv",
+   "raw": 811,
+   "best": [
+    {
+     "t": "drop-decimal-trailing0",
+     "d": -62,
+     "pct": -7.64
+    },
+    {
+     "t": "tab-to-1space",
+     "d": -31,
+     "pct": -3.82
+    },
+    {
+     "t": "case-fold",
+     "d": 0,
+     "pct": 0
+    },
+    {
+     "t": "drop-leading-zeros",
+     "d": 0,
+     "pct": 0
+    }
+   ]
+  },
+  {
+   "cat": "other",
+   "lane": "psql-output.txt",
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "raw": 675,
+   "best": [
+    {
+     "t": "collapse-2space",
+     "d": -51,
+     "pct": -7.56
+    },
+    {
+     "t": "tree-draw-to-depth",
+     "d": -27,
+     "pct": -4
+    },
+    {
+     "t": "bracket-strip",
+     "d": -1,
+     "pct": -0.15
+    },
+    {
+     "t": "drop-leading-zeros",
+     "d": 0,
+     "pct": 0
+    }
+   ]
+  },
+  {
+   "cat": "other",
+   "lane": "unified-diff.patch",
+   "path": "bench/holdout-work/unified-diff.patch",
+   "raw": 578,
+   "best": [
+    {
+     "t": "space-after-punct",
+     "d": -29,
+     "pct": -5.02
+    },
+    {
+     "t": "collapse-2space",
+     "d": -25,
+     "pct": -4.33
+    },
+    {
+     "t": "tree-draw-to-depth",
+     "d": -20,
+     "pct": -3.46
+    },
+    {
+     "t": "bracket-strip",
+     "d": -19,
+     "pct": -3.29
+    },
+    {
+     "t": "strip-trailing-ws",
+     "d": -3,
+     "pct": -0.52
+    },
+    {
+     "t": "case-fold",
+     "d": 2,
+     "pct": 0.35
+    }
+   ]
+  },
+  {
+   "cat": "other",
+   "lane": "git-numstat.txt",
+   "path": "bench/holdout-ops/git-numstat.txt",
+   "raw": 4632,
+   "best": [
+    {
+     "t": "tab-to-1space",
+     "d": -164,
+     "pct": -3.54
+    },
+    {
+     "t": "case-fold",
+     "d": -3,
+     "pct": -0.06
+    },
+    {
+     "t": "collapse-2space",
+     "d": -3,
+     "pct": -0.06
+    },
+    {
+     "t": "space-after-punct",
+     "d": -2,
+     "pct": -0.04
+    },
+    {
+     "t": "bracket-strip",
+     "d": -1,
+     "pct": -0.02
+    },
+    {
+     "t": "drop-leading-zeros",
+     "d": -1,
+     "pct": -0.02
+    }
+   ]
+  },
+  {
+   "cat": "other",
+   "lane": "cue-sheet.md",
+   "path": "bench/holdout-x40/cue-sheet.md",
+   "raw": 513,
+   "best": [
+    {
+     "t": "tree-draw-to-depth",
+     "d": 0,
+     "pct": 0
+    },
+    {
+     "t": "drop-leading-zeros",
+     "d": 0,
+     "pct": 0
+    }
+   ]
+  },
+  {
+   "cat": "other",
+   "lane": "markdown-table.md",
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "raw": 330,
+   "best": [
+    {
+     "t": "drop-decimal-trailing0",
+     "d": -42,
+     "pct": -12.73
+    },
+    {
+     "t": "tree-draw-to-depth",
+     "d": -9,
+     "pct": -2.73
+    },
+    {
+     "t": "case-fold",
+     "d": -1,
+     "pct": -0.3
+    }
+   ]
+  }
+ ]
+}

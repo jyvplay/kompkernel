@@ -4656,3 +4656,107 @@ hiding it. **Neither number should be quoted alone.**
 **Record.** [`docs/codecs.md`](codecs.md) §X87, `src/lib/omega/aither.ts`, registry key
 `aither`, `bench/x87/`, `bench/aither_coldcheck.py`, receipts in
 `bench/x87/receipts/` (including `cold/`), seven real lanes in `bench/holdout-x87/`.
+
+---
+
+## X88 — ΣΥΝΤΆΞΙΣ (SYNTAXIS)
+
+**ΣΥΝΤΆΞΙΣ** = *syntaxis*, Greek "a putting in order together, an arrangement" — the
+root of *syntax*. Chosen because the mechanism is a fact about the **arrangement of a
+line's gaps**, not about its words: two lines are the same shape when their whitespace
+runs fall in the same places, whatever the widths and whatever the punctuation.
+
+| | |
+|---|---|
+| **Registry key** | `syntaxis` |
+| **File** | `src/lib/omega/syntaxis.ts` |
+| **Family / fidelity** | `exact` / `exact` — byte-perfect or refused |
+| **One line** | Partition a file's lines into **shape families** by a length-invariant, whitespace-general key, fold **every** family (constants → template, slots → de-interleaved columns, right-alignment padding → derived), route each line with a one-character map, carry the rest verbatim. |
+| **Greedy?** | **No.** Deterministic grouping by a fixed key; constants by exact equality; padding by an exact solve for one integer `W`; separator = first candidate surviving a scan. No scoring loop, no local move — the wire is a function of the text. |
+| **Time- or CPU-bound?** | **CPU-bound**, O(chars), small constant, **no tokenizer call inside the transform**. The only tokenizer work is the two counts the gates need. The costly part of *using* the arm is the one parent-frontier encode G7 requires. |
+| **Source, honestly** | **Not a new idea in outline.** `TYPOS` (X41, `typos.ts`, label at `registry.ts:578`) already clusters lines by exact skeleton (`cellSignature`, line 320), induces a mask and separator, and de-interleaves columnar, citing **Drain (ICSE 2017)**, the **Abadi et al. column store (SIGMOD 2006)** and **LZ77**; `PHALANX-A4` adds a gated log-template stage. New here, and scoped narrowly: the **key** (length-invariant *and* whitespace-general), the **scope** (every family ≥ `MIN_ROWS`, not `largestGroup`), the **routing** (one-char-per-line map + literal section), and the **per-position derived-padding fit**. `PARATAXIS` (X80) declared padding as fixed widths; ΣΥΝΤΆΞΙΣ *fits* `W` per family and per position and only where the fit is exact on every line. |
+| **Verdict** | **Byte-exact on 75 of 91 lanes, 0 wrong round trips, 9 gross wins totalling −2988 — and refused on every lane measured through the frontier.** Registered because it is sound, because it covers a structural blind spot, and because the refusal is a measurement and not an assumption. |
+
+### The blind spot it covers
+
+`cellSignature` is length-sensitive **and** space-only. Length-sensitivity shatters one
+obvious shape into many (`ls -l /usr/lib/x86_64-linux-gnu`: 151 lines → **21 shapes**,
+largest group **23.8 %**, so TYPOS folds 36 lines and leaves 115 literal; `ps aux`
+22/31.1 %; `findmnt` 26/7.4 %; `dpkg -l` 37/7.3 %; `dpkg-l-full` 129/**2.1 %** — and on
+the last three the largest group is below `MIN_ROWS`, so `typosPlan` returns **null**).
+Space-only splitting means a **TAB is neither cell nor hole**: `/\S+| +/g` drops it, the
+cells stop reassembling to the line, and `git numstat` — 392 of 400 lines with the
+identical shape `added<TAB>deleted<TAB>path`, **98 % coverage under any key** — also gets
+`typosPlan === null`. `kannabosCells` (`/[^ ]+/g`) is blind to the same file the same way.
+ΣΥΝΤΆΞΙΣ splits on `/\S+|\s+/g`, signs a line by *where its gaps are*, and folds all of
+them: coverage **23.8 → 60.3 %**, **31.4 → 73.6 %**, **56.2 → 97.8 %**, **2.1 → 17.7 %**,
+**14.8 → 90.7 %** on `ls-l-real`, `ls-la-usrbin`, `ls-l-nm`, `dpkg-l-full`, `proc-meminfo`.
+
+### Why it still loses, and the screen that says so cheaply
+
+The dense-wire law (`F(wire)/raw(wire) ≥ 0.563` for any wire this stack produces, against
+0.222–0.316 on sources) turns into a **necessary condition**: a pre-transform can only win
+if `tokens(M(text)) < 1.78 × F(text)`. Measured this turn — `openstack-loghub-26.log`
+F = **896** from raw 4028 (ΣΥΝΤΆΞΙΣ: 3680), `ls-la-usrbin` F = **946** (ΣΥΝΤΆΞΙΣ: 4045),
+`npm-ls-all` F = **711** (2811), `find-listing` F = **1140**, `ls-l-real` F = **1476**
+(4575). Nothing measured this turn is within 2× of the bound.
+
+The explanation is the result: **a pre-transform that removes plain repetition makes the
+wire denser, and the parent glyph pool's yield is a function of the redundancy left in
+front of it.** Removing repetition early loses to a pool that removes repetition better.
+Arms win only where they delete what a substring dictionary **cannot represent** —
+recomputable values, positional constants, tree geometry, numeric shapes, voted column
+boundaries. ΣΥΝΤΆΞΙΣ deletes repetition, so G7 refuses it.
+
+**De-interleaving is not uniformly good.** On `git-numstat` the `added`/`deleted` columns
+cost **1588 tokens split against ≈658 interleaved**, because o200k merges *across* field
+boundaries and one-value-per-line destroys those merges; the `path` column is 3174 either
+way, irreducible literal text only a dictionary can reach. Columnar pays on **long string
+fields with no cross-field merges** and loses on **short numeric ones**.
+
+### Wire
+
+`§ΣΥΝΤΆΞΙΣ L=<lines> F=<families> E=<1|2> T=<0|1> …` · `M<one char per line, * = literal>` ·
+`T<f> <sep><template cells, @n = slot n>` · `W<f> n:W,…` (derived padding, not sent) ·
+`C<f>.n<sep><values>` or `C<f>.nx<rows>` then one value per line · `X` then the literal
+lines in source order. `E=` declares the **source** EOL because the wire's own joiner is
+always `\n` and a CRLF log's wire contains no CRLF at all.
+
+**Gates:** G1 cells reassemble · G2 partition total and row counts met · G3 separator
+absent from its family · G4 padding fit exact · G5 byte-exact round trip through the
+public decoder · G6 map characters in range · **G7 strict win through the frontier** ·
+G8 size bound · **G9 integrity**, `H=` is the CRC-32 of the rebuilt text (imported from
+`aither.ts`, one table not two).
+
+**Red team, and a defect it caught.** 9 mutation kinds × 60 per lane × 8 lanes: before G9,
+**244 of 427 effective mutations (57.1 %) decoded SILENTLY WRONG** — an edited column value
+is still a well-formed value, so every structural gate passed and the decoder returned a
+different 10 692-character `ls -l` with no error. After G9: **397 of 425 refused (93.4 %),
+0 silent-wrong, 0 hangs**, still 75/91 byte-exact. Cost of the checksum, measured: the 9
+gross wins went −2988 → −2773, i.e. **2.9 tokens per applied lane**. Scope: a model cannot
+compute a CRC by hand, so G9 is a decoder-side safety property, not a claim the reader can
+verify the body.
+
+**Bug the receipt caught and the tests did not:** `W<idx> n:W` was parsed at `l.slice(2)`
+— the space after the family letter — so every padding spec was dropped, the padded slot
+looked like a transmitted one with no column, and G5 refused `ls-l-real`, `ps-aux-real`
+and `ls-real` with `slot 0 has no column` while all 75 lanes that *did* encode still round
+-tripped. Fixed to `l.slice(3)`.
+
+**Whole-stack speed, honestly: no win claimed this turn.** Two hypotheses tested and both
+falsified with numbers. (1) The count memo's retained-key budget (2 000 000 chars against
+5 000–11 000-char candidate wires and **249 arms** per lane) looks like the bottleneck; an
+A/B flipping it *inside one process* with the order alternated gives 478 vs 528 ms, 266 vs
+286, 115 vs 121 at 2 M against 32 M with identical F — nothing, so the default is
+unchanged and only the `setCountMemoBudget` hook is kept. Run D clocked 652 815 ms against
+run C's 1 215 714 ms with identical F on all 29 lanes, which is the ~1.6× cross-process
+drift and **not** a speedup. (2) `countTokens` is not the hot path: 367 ms once per process
+for the vocabulary load, then 1 ms per 6 000-character count, chunk cache 78 % hit, 0
+fallbacks. The remaining cost is the 249-arm audit, whose first pass over a lane is ~40× a
+warm pass — JIT warm-up across 249 code paths, not removable without removing arms.
+
+**Record.** [`docs/codecs.md`](codecs.md) §X88, `src/lib/omega/syntaxis.ts`, registry key
+`syntaxis`, `bench/x88/`, receipts `bench/x88/receipts/{skeleton-census,syntaxis-gross,
+syntaxis-fuzz,memo-ab,leaders,logfront,probe1,sweep}.json` and the five frontier wires
+`bench/x88/receipts/*.wire.txt`; frontier confirmations `bench/x86/receipts/
+frontier-runD.json` and `-runE.json`.

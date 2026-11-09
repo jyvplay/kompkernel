@@ -1,0 +1,2082 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real",
+   "path": "bench/holdout-x41/apt-real.txt",
+   "srcRaw": 2739,
+   "F": 850,
+   "parent": "synkrisis",
+   "exact": true,
+   "msgChars": 1906,
+   "msgTokensRecount": 850,
+   "secs": 115.1,
+   "census": {
+    "glyph": {
+     "n": 458,
+     "chars": 775
+    },
+    "lower": {
+     "n": 220,
+     "chars": 681
+    },
+    "digit": {
+     "n": 92,
+     "chars": 174
+    },
+    "ascii-mix": {
+     "n": 64,
+     "chars": 258
+    },
+    "num-punct": {
+     "n": 16,
+     "chars": 18
+    }
+   },
+   "topTokens": [
+    {
+     "t": "л",
+     "n": 13,
+     "cls": "glyph"
+    },
+    {
+     "t": "g",
+     "n": 11,
+     "cls": "lower"
+    },
+    {
+     "t": "т",
+     "n": 10,
+     "cls": "glyph"
+    },
+    {
+     "t": "в",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "с",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "н",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "8",
+     "n": 8,
+     "cls": "digit"
+    },
+    {
+     "t": "utils",
+     "n": 8,
+     "cls": "lower"
+    },
+    {
+     "t": "г",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": ":",
+     "n": 7,
+     "cls": "num-punct"
+    },
+    {
+     "t": "э",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "п",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "Ч",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "7",
+     "n": 6,
+     "cls": "digit"
+    },
+    {
+     "t": "+b",
+     "n": 6,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "К",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": "й",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": "f",
+     "n": 6,
+     "cls": "lower"
+    },
+    {
+     "t": "lib",
+     "n": 5,
+     "cls": "lower"
+    },
+    {
+     "t": "о",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": "9",
+     "n": 5,
+     "cls": "digit"
+    },
+    {
+     "t": "10",
+     "n": 5,
+     "cls": "digit"
+    },
+    {
+     "t": "ў",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": "Є",
+     "n": 5,
+     "cls": "glyph"
+    }
+   ],
+   "costliestLines": [
+    {
+     "i": 4,
+     "n": 620,
+     "head": "adduserп134шaptйызтbase-filesсінирютbase-passwdпызтbashскон1"
+    },
+    {
+     "i": 2,
+     "n": 211,
+     "head": "т amd64Мвтlibа1Катlibс/now і12н.о2у0л-мнулціномю14Нdebіuр+Нё"
+    },
+    {
+     "i": 0,
+     "n": 11,
+     "head": "Before ¶ k=v. expand repeatedly; print only."
+    },
+    {
+     "i": 1,
+     "n": 7,
+     "head": "§М [installed,local]"
+    },
+    {
+     "i": 3,
+     "n": 2,
+     "head": "Listing..."
+    }
+   ],
+   "lines": 5
+  },
+  {
+   "lane": "dpkg-l",
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "srcRaw": 1000,
+   "F": 673,
+   "parent": "synkrisis",
+   "exact": true,
+   "msgChars": 2735,
+   "msgTokensRecount": 673,
+   "secs": 23.5,
+   "census": {
+    "glyph": {
+     "n": 247,
+     "chars": 411
+    },
+    "ascii-mix": {
+     "n": 247,
+     "chars": 1479
+    },
+    "lower": {
+     "n": 76,
+     "chars": 296
+    },
+    "digit": {
+     "n": 40,
+     "chars": 70
+    },
+    "space": {
+     "n": 31,
+     "chars": 440
+    },
+    "num-punct": {
+     "n": 28,
+     "chars": 31
+    },
+    "upper": {
+     "n": 4,
+     "chars": 8
+    }
+   },
+   "topTokens": [
+    {
+     "t": "і",
+     "n": 26,
+     "cls": "glyph"
+    },
+    {
+     "t": "/",
+     "n": 9,
+     "cls": "num-punct"
+    },
+    {
+     "t": ":",
+     "n": 8,
+     "cls": "num-punct"
+    },
+    {
+     "t": "о",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": " utilities",
+     "n": 6,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": ",",
+     "n": 5,
+     "cls": "num-punct"
+    },
+    {
+     "t": "њ",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": " (",
+     "n": 5,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": ")\n",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": " ы",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": "а",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": "64",
+     "n": 4,
+     "cls": "digit"
+    },
+    {
+     "t": " GNU",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "од",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": "\n",
+     "n": 4,
+     "cls": "space"
+    },
+    {
+     "t": " and",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": " system",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": " package",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": " files",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": " for",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": " the",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "д",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": "                         ",
+     "n": 3,
+     "cls": "space"
+    },
+    {
+     "t": "ii",
+     "n": 3,
+     "cls": "lower"
+    }
+   ],
+   "costliestLines": [
+    {
+     "i": 8,
+     "n": 220,
+     "head": "iiи cppп preprocessorі curlти7а88я10Орбы command line tool f"
+    },
+    {
+     "i": 7,
+     "n": 202,
+     "head": "ө+-=============================-==========================="
+    },
+    {
+     "i": 2,
+     "n": 88,
+     "head": "iiиеutilsЄ GNU assembler, linker and binary utilitiesі binеү"
+    },
+    {
+     "i": 1,
+     "n": 50,
+     "head": "§л12гdebлuО+ги х4а.д2к0о-Аладакон3з                    Е    "
+    },
+    {
+     "i": 9,
+     "n": 34,
+     "head": "iiи gөЕСө compilerі gөпөүЕСүпүол-base:amd64биАрОч           "
+    },
+    {
+     "i": 4,
+     "n": 28,
+     "head": "| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/tr"
+    },
+    {
+     "i": 5,
+     "n": 19,
+     "head": "|/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)"
+    },
+    {
+     "i": 3,
+     "n": 12,
+     "head": "Desired=Unknown/Install/Remove/Purge/Hold"
+    },
+    {
+     "i": 0,
+     "n": 11,
+     "head": "Before ¶ k=v. expand repeatedly; print only."
+    },
+    {
+     "i": 6,
+     "n": 9,
+     "head": "||/ Nameт Versionц Architecture Description"
+    }
+   ],
+   "lines": 11
+  },
+  {
+   "lane": "ls-real",
+   "path": "bench/holdout-x41/ls-real.txt",
+   "srcRaw": 1034,
+   "F": 433,
+   "parent": "synkrisis",
+   "exact": true,
+   "msgChars": 1069,
+   "msgTokensRecount": 433,
+   "secs": 15,
+   "census": {
+    "glyph": {
+     "n": 181,
+     "chars": 283
+    },
+    "ascii-mix": {
+     "n": 95,
+     "chars": 384
+    },
+    "digit": {
+     "n": 91,
+     "chars": 205
+    },
+    "lower": {
+     "n": 50,
+     "chars": 155
+    },
+    "num-punct": {
+     "n": 9,
+     "chars": 9
+    },
+    "space": {
+     "n": 7,
+     "chars": 33
+    }
+   },
+   "topTokens": [
+    {
+     "t": "л",
+     "n": 12,
+     "cls": "glyph"
+    },
+    {
+     "t": "е",
+     "n": 10,
+     "cls": "glyph"
+    },
+    {
+     "t": "ӷ",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "ө",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": "/bin",
+     "n": 5,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "wx",
+     "n": 4,
+     "cls": "lower"
+    },
+    {
+     "t": "r",
+     "n": 4,
+     "cls": "lower"
+    },
+    {
+     "t": "Ө",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": "э",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": "щ",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": ".",
+     "n": 3,
+     "cls": "num-punct"
+    },
+    {
+     "t": "у",
+     "n": 3,
+     "cls": "glyph"
+    },
+    {
+     "t": "к",
+     "n": 3,
+     "cls": "glyph"
+    },
+    {
+     "t": "Ҳ",
+     "n": 3,
+     "cls": "glyph"
+    },
+    {
+     "t": "pack",
+     "n": 3,
+     "cls": "lower"
+    },
+    {
+     "t": "ҽ",
+     "n": 3,
+     "cls": "glyph"
+    },
+    {
+     "t": ".js",
+     "n": 3,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "47",
+     "n": 3,
+     "cls": "digit"
+    },
+    {
+     "t": "/npm",
+     "n": 3,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": " ¶",
+     "n": 2,
+     "cls": "glyph"
+    },
+    {
+     "t": "-x",
+     "n": 2,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "ие",
+     "n": 2,
+     "cls": "glyph"
+    },
+    {
+     "t": "25",
+     "n": 2,
+     "cls": "digit"
+    },
+    {
+     "t": " Sep",
+     "n": 2,
+     "cls": "ascii-mix"
+    }
+   ],
+   "costliestLines": [
+    {
+     "i": 2,
+     "n": 174,
+     "head": "ч-rючwxr-xr-xе О1Д rootцеОДДУуюць     қюцьебwxrwxrwxцхуlrби "
+    },
+    {
+     "i": 4,
+     "n": 163,
+     "head": "қ31040 Novе21с4 addpartр26Ө addrкүн-addrкүр25двАр29дыңвАыңл1"
+    },
+    {
+     "i": 3,
+     "n": 83,
+     "head": "totalе121900э45щ corepackҽ/corepack/dist/corepack.jsучбќе388"
+    },
+    {
+     "i": 0,
+     "n": 11,
+     "head": "Before ¶ k=v. expand repeatedly; print only."
+    },
+    {
+     "i": 1,
+     "n": 3,
+     "head": "§у"
+    }
+   ],
+   "lines": 5
+  },
+  {
+   "lane": "findmnt",
+   "path": "bench/holdout-x42/findmnt.txt",
+   "srcRaw": 787,
+   "F": 444,
+   "parent": "synkrisis",
+   "exact": true,
+   "msgChars": 2152,
+   "msgTokensRecount": 444,
+   "secs": 5.3,
+   "census": {
+    "ascii-mix": {
+     "n": 128,
+     "chars": 461
+    },
+    "glyph": {
+     "n": 122,
+     "chars": 206
+    },
+    "lower": {
+     "n": 97,
+     "chars": 330
+    },
+    "space": {
+     "n": 51,
+     "chars": 1069
+    },
+    "digit": {
+     "n": 29,
+     "chars": 60
+    },
+    "num-punct": {
+     "n": 13,
+     "chars": 14
+    },
+    "upper": {
+     "n": 4,
+     "chars": 12
+    }
+   },
+   "topTokens": [
+    {
+     "t": "=",
+     "n": 14,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "ش",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "/",
+     "n": 7,
+     "cls": "num-punct"
+    },
+    {
+     "t": "           ",
+     "n": 6,
+     "cls": "space"
+    },
+    {
+     "t": "\n",
+     "n": 5,
+     "cls": "space"
+    },
+    {
+     "t": "ئ",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": " rw",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "ۇ",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": " dev",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "2",
+     "n": 4,
+     "cls": "digit"
+    },
+    {
+     "t": ".service",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "ر",
+     "n": 3,
+     "cls": "glyph"
+    },
+    {
+     "t": ",n",
+     "n": 3,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "mode",
+     "n": 3,
+     "cls": "lower"
+    },
+    {
+     "t": "ث",
+     "n": 3,
+     "cls": "glyph"
+    },
+    {
+     "t": "/fs",
+     "n": 3,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "fmt",
+     "n": 3,
+     "cls": "lower"
+    },
+    {
+     "t": "_misc",
+     "n": 3,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "٫",
+     "n": 3,
+     "cls": "glyph"
+    },
+    {
+     "t": ",size",
+     "n": 3,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "                                                 ",
+     "n": 3,
+     "cls": "space"
+    },
+    {
+     "t": "         ",
+     "n": 3,
+     "cls": "space"
+    },
+    {
+     "t": "      ",
+     "n": 3,
+     "cls": "space"
+    },
+    {
+     "t": "0",
+     "n": 3,
+     "cls": "digit"
+    }
+   ],
+   "costliestLines": [
+    {
+     "i": 5,
+     "n": 271,
+     "head": "/                                                       /ز/v"
+    },
+    {
+     "i": 3,
+     "n": 84,
+     "head": "| |يعrunےجع/credentials/systemdګ rwېۇرmode=هsysثجه/fsة `يسةp"
+    },
+    {
+     "i": 2,
+     "n": 29,
+     "head": "|ب rwدمشfsا            کش      ن ramشا ramک roدرmode=700ی rw"
+    },
+    {
+     "i": 1,
+     "n": 21,
+     "head": "§ر,ېرrelatimeں,noexecېد,nosuid,nodevںو rwدم"
+    },
+    {
+     "i": 6,
+     "n": 18,
+     "head": "`يetc/ssl/certs                                       تش[/e2"
+    },
+    {
+     "i": 0,
+     "n": 11,
+     "head": "Before ¶ k=v. expand repeatedly; print only."
+    },
+    {
+     "i": 4,
+     "n": 10,
+     "head": "TARGET                                                  SOUR"
+    },
+    {
+     "i": 7,
+     "n": 1,
+     "head": ""
+    }
+   ],
+   "lines": 8
+  },
+  {
+   "lane": "code-ts",
+   "path": "bench/holdout/code-ts.txt",
+   "srcRaw": 1422,
+   "F": 969,
+   "parent": "synkrisis",
+   "exact": true,
+   "msgChars": 3326,
+   "msgTokensRecount": 969,
+   "secs": 24.4,
+   "census": {
+    "glyph": {
+     "n": 449,
+     "chars": 755
+    },
+    "ascii-mix": {
+     "n": 348,
+     "chars": 1776
+    },
+    "lower": {
+     "n": 143,
+     "chars": 713
+    },
+    "num-punct": {
+     "n": 9,
+     "chars": 11
+    },
+    "space": {
+     "n": 9,
+     "chars": 49
+    },
+    "digit": {
+     "n": 6,
+     "chars": 6
+    },
+    "upper": {
+     "n": 5,
+     "chars": 16
+    }
+   },
+   "topTokens": [
+    {
+     "t": "о",
+     "n": 13,
+     "cls": "glyph"
+    },
+    {
+     "t": "Class",
+     "n": 13,
+     "cls": "lower"
+    },
+    {
+     "t": "д",
+     "n": 10,
+     "cls": "glyph"
+    },
+    {
+     "t": "Group",
+     "n": 9,
+     "cls": "lower"
+    },
+    {
+     "t": "Р",
+     "n": 9,
+     "cls": "glyph"
+    },
+    {
+     "t": " for",
+     "n": 9,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "const",
+     "n": 9,
+     "cls": "lower"
+    },
+    {
+     "t": " process",
+     "n": 9,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "Part",
+     "n": 8,
+     "cls": "lower"
+    },
+    {
+     "t": "з",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": " get",
+     "n": 8,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": " ===",
+     "n": 8,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "н",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "С",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "ё",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "ҧ",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": "Index",
+     "n": 6,
+     "cls": "lower"
+    },
+    {
+     "t": " //",
+     "n": 6,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "]",
+     "n": 6,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "ҽ",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": "class",
+     "n": 5,
+     "cls": "lower"
+    },
+    {
+     "t": "э",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": "ң",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": "љ",
+     "n": 5,
+     "cls": "glyph"
+    }
+   ],
+   "costliestLines": [
+    {
+     "i": 38,
+     "n": 119,
+     "head": "р for (constҽ inдәћу groupодәютЙ(groupнгАйэмигаљЙҧGroupньеф "
+    },
+    {
+     "i": 27,
+     "n": 96,
+     "head": "ж nextБоР.nextPart.get(currentClassPartЕСnextБћу resultов +р"
+    },
+    {
+     "i": 22,
+     "n": 81,
+     "head": "ўGroupUtilsо configфго createClassMap(configэжИЯътєҫж getCla"
+    },
+    {
+     "i": 24,
+     "n": 73,
+     "head": "жҐҧзн hasГОИСhasГскучоєюку baseВоЯюкСmodifierВес       Сbase"
+    },
+    {
+     "i": 6,
+     "n": 54,
+     "head": "ҟ to maintain monomorphic call sitesёconst processClassБClas"
+    },
+    {
+     "i": 7,
+     "n": 50,
+     "head": "б EMPTY_CONFLICTSњ(CLASS_PART_SEPARATORЬ getзForArbitraryPro"
+    },
+    {
+     "i": 15,
+     "n": 47,
+     "head": "const concatArraysхarrayінүҙ // Pre-allocate for better V8 o"
+    },
+    {
+     "i": 1,
+     "n": 36,
+     "head": "§д classөPartObjectн,зGroupIdйн themeьдөндзйРдөр о =Пр0пр fo"
+    },
+    {
+     "i": 26,
+     "n": 36,
+     "head": "љ getGroupRecursiveҧPartsнїнРефдPathsLengthоқл -їарСclassPat"
+    },
+    {
+     "i": 31,
+     "n": 30,
+     "head": " * @paramғ - Theд name to get the group ID for. Is expected "
+    }
+   ],
+   "lines": 40
+  },
+  {
+   "lane": "json-pkg",
+   "path": "bench/holdout/json-pkg.txt",
+   "srcRaw": 1152,
+   "F": 681,
+   "parent": "synkrisis",
+   "exact": true,
+   "msgChars": 1972,
+   "msgTokensRecount": 681,
+   "secs": 17.1,
+   "census": {
+    "glyph": {
+     "n": 280,
+     "chars": 438
+    },
+    "lower": {
+     "n": 193,
+     "chars": 827
+    },
+    "ascii-mix": {
+     "n": 133,
+     "chars": 547
+    },
+    "digit": {
+     "n": 43,
+     "chars": 77
+    },
+    "num-punct": {
+     "n": 18,
+     "chars": 23
+    },
+    "space": {
+     "n": 10,
+     "chars": 39
+    },
+    "upper": {
+     "n": 4,
+     "chars": 21
+    }
+   },
+   "topTokens": [
+    {
+     "t": "с",
+     "n": 19,
+     "cls": "glyph"
+    },
+    {
+     "t": "й",
+     "n": 15,
+     "cls": "glyph"
+    },
+    {
+     "t": "\":",
+     "n": 14,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "О",
+     "n": 9,
+     "cls": "glyph"
+    },
+    {
+     "t": " \"",
+     "n": 8,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "Н",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "Ө",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "А",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "п",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "   ",
+     "n": 6,
+     "cls": "space"
+    },
+    {
+     "t": "ё",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": "ҳ",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": "/",
+     "n": 5,
+     "cls": "num-punct"
+    },
+    {
+     "t": "р",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": "б",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": "ц",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": "Script",
+     "n": 4,
+     "cls": "lower"
+    },
+    {
+     "t": "н",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": ":",
+     "n": 4,
+     "cls": "num-punct"
+    },
+    {
+     "t": "5",
+     "n": 4,
+     "cls": "digit"
+    },
+    {
+     "t": "lib",
+     "n": 4,
+     "cls": "lower"
+    },
+    {
+     "t": "ts",
+     "n": 4,
+     "cls": "lower"
+    },
+    {
+     "t": "д",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": "К",
+     "n": 4,
+     "cls": "glyph"
+    }
+   ],
+   "costliestLines": [
+    {
+     "i": 17,
+     "n": 327,
+     "head": "        \"@ш/formatterьыраяш/typescriptйир93рыяesfx/canceltok"
+    },
+    {
+     "i": 7,
+     "n": 49,
+     "head": "    \"і10кдіры4тдырэ2вдэрнtypescriptхян-eslintүсbuild:ә5рю\": "
+    },
+    {
+     "i": 19,
+     "n": 45,
+     "head": "ҳpackageManagerйnpm@мӨvoltaёnodeй20раАnpmймпgitHeadйК63de15a"
+    },
+    {
+     "i": 15,
+     "n": 37,
+     "head": "ф.gitпmainю.jsӨtypingsю.d.tsӨbinёtsКИКсtsserverИserverпengin"
+    },
+    {
+     "i": 16,
+     "n": 37,
+     "head": "цbinсlibб \"!lib/enuсLICENSE.txtсREADME.mdсSECURITY.mdсThirdP"
+    },
+    {
+     "i": 6,
+     "n": 36,
+     "head": "цяб \"@ляtypesҳ    \"жрид\": \"^гдарьдиро8өдор24рафцurl\": \"https"
+    },
+    {
+     "i": 12,
+     "n": 29,
+     "head": "ҳversionйә9руӨlicenseйApache-эжӨdescriptionйTypeScript is a "
+    },
+    {
+     "i": 9,
+     "n": 22,
+     "head": "ҳӣimistгэрЫ-map-supportьәБwhichдужмор19рые7КcГeslint¶{"
+    },
+    {
+     "i": 4,
+     "n": 21,
+     "head": "    \"а1зрасй\": \"О\": \"herebyц        \"Н\": false,"
+    },
+    {
+     "i": 13,
+     "n": 15,
+     "head": "цTypeScriptсMicrosoftсcompilerсlanguageсjavascriptЖbugs\": {"
+    }
+   ],
+   "lines": 22
+  },
+  {
+   "lane": "kb-article",
+   "path": "bench/holdout-work/kb-article.txt",
+   "srcRaw": 656,
+   "F": 622,
+   "parent": "synkrisis",
+   "exact": true,
+   "msgChars": 2822,
+   "msgTokensRecount": 622,
+   "secs": 2.3,
+   "census": {
+    "ascii-mix": {
+     "n": 351,
+     "chars": 2214
+    },
+    "glyph": {
+     "n": 206,
+     "chars": 306
+    },
+    "lower": {
+     "n": 54,
+     "chars": 288
+    },
+    "num-punct": {
+     "n": 4,
+     "chars": 4
+    },
+    "space": {
+     "n": 3,
+     "chars": 4
+    },
+    "upper": {
+     "n": 2,
+     "chars": 2
+    },
+    "digit": {
+     "n": 2,
+     "chars": 4
+    }
+   },
+   "topTokens": [
+    {
+     "t": "с",
+     "n": 18,
+     "cls": "glyph"
+    },
+    {
+     "t": "я",
+     "n": 13,
+     "cls": "glyph"
+    },
+    {
+     "t": "р",
+     "n": 10,
+     "cls": "glyph"
+    },
+    {
+     "t": "е",
+     "n": 10,
+     "cls": "glyph"
+    },
+    {
+     "t": "ы",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "о",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "и",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "м",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": " an",
+     "n": 6,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "а",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": "з",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": " how",
+     "n": 5,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": ".\n\n",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": ";",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": " only",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": " and",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "З",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": "г",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": " of",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": " up",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": " be",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": ".\n",
+     "n": 3,
+     "cls": "glyph"
+    },
+    {
+     "t": "н",
+     "n": 3,
+     "cls": "glyph"
+    },
+    {
+     "t": "д",
+     "n": 3,
+     "cls": "glyph"
+    }
+   ],
+   "costliestLines": [
+    {
+     "i": 9,
+     "n": 93,
+     "head": "There are three kinds ofъя Soft deletion movesеныа recycle b"
+    },
+    {
+     "i": 4,
+     "n": 92,
+     "head": "Aүп determines how long Northgate Vault keepsан beforeо beco"
+    },
+    {
+     "i": 17,
+     "n": 90,
+     "head": "Two questions come up repeatedlyз support ticketsули whyанк "
+    },
+    {
+     "i": 11,
+     "n": 79,
+     "head": "A legalж suspends allъЗего coversя Holds take precedence ove"
+    },
+    {
+     "i": 15,
+     "n": 75,
+     "head": "Anything not processedи picked up byе nextдя Becauseеди time"
+    },
+    {
+     "i": 6,
+     "n": 54,
+     "head": "Policies are evaluatedза fixedбу systemлт directlyысtheня If"
+    },
+    {
+     "i": 2,
+     "n": 46,
+     "head": "е theо itи isы toн documentд sweepм thatз inй workspaceж hol"
+    },
+    {
+     "i": 14,
+     "n": 34,
+     "head": "The nightlyд runs at 02:00зей's configured timezoneя It proc"
+    },
+    {
+     "i": 1,
+     "n": 21,
+     "head": "§р,әр andЗ forа aп policyт looksЗап attachedя.уя Theс"
+    },
+    {
+     "i": 7,
+     "n": 14,
+     "head": "only changedр which guaranteesм everyн always resolvesы some"
+    }
+   ],
+   "lines": 19
+  },
+  {
+   "lane": "llm-answer",
+   "path": "bench/holdout-work/llm-answer.md",
+   "srcRaw": 733,
+   "F": 674,
+   "parent": "synkrisis",
+   "exact": true,
+   "msgChars": 2344,
+   "msgTokensRecount": 674,
+   "secs": 6.7,
+   "census": {
+    "ascii-mix": {
+     "n": 302,
+     "chars": 1464
+    },
+    "glyph": {
+     "n": 217,
+     "chars": 369
+    },
+    "lower": {
+     "n": 83,
+     "chars": 384
+    },
+    "digit": {
+     "n": 29,
+     "chars": 49
+    },
+    "num-punct": {
+     "n": 17,
+     "chars": 22
+    },
+    "upper": {
+     "n": 17,
+     "chars": 39
+    },
+    "space": {
+     "n": 9,
+     "chars": 17
+    }
+   },
+   "topTokens": [
+    {
+     "t": "`",
+     "n": 14,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "а",
+     "n": 10,
+     "cls": "glyph"
+    },
+    {
+     "t": "л",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "т",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "у",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "з",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": ",",
+     "n": 7,
+     "cls": "num-punct"
+    },
+    {
+     "t": "и",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": "х",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": "\n\n",
+     "n": 6,
+     "cls": "space"
+    },
+    {
+     "t": " (",
+     "n": 5,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "|",
+     "n": 5,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "к",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": "я",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": "с",
+     "n": 5,
+     "cls": "glyph"
+    },
+    {
+     "t": "Ә",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": "packages",
+     "n": 4,
+     "cls": "lower"
+    },
+    {
+     "t": "ъ",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": " from",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": ".js",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "рт",
+     "n": 4,
+     "cls": "glyph"
+    },
+    {
+     "t": ".config",
+     "n": 4,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "import",
+     "n": 4,
+     "cls": "lower"
+    },
+    {
+     "t": " k",
+     "n": 3,
+     "cls": "ascii-mix"
+    }
+   ],
+   "costliestLines": [
+    {
+     "i": 39,
+     "n": 66,
+     "head": "олиDynamicаrequire()`с testsлуаjest`х still used for unit te"
+    },
+    {
+     "i": 16,
+     "n": 60,
+     "head": "| Cold startрт42л8Ә6лән85л7ж Hot reload (p50)ртәл9Ә0л09н95лё"
+    },
+    {
+     "i": 8,
+     "n": 52,
+     "head": "The migration fromиWebpackтөучиViteтеу reduces cold-start ti"
+    },
+    {
+     "i": 43,
+     "n": 46,
+     "head": "эц/adminОдг [x]ц/web` (doneдэ Removeаwebpack.config.js`ъаbab"
+    },
+    {
+     "i": 11,
+     "n": 40,
+     "head": "гиBuildук production builds still bundle, but throughиRollup"
+    },
+    {
+     "i": 10,
+     "n": 36,
+     "head": "гиDevүукаwebpack-dev-server`х replaced byі's native ESMүл No"
+    },
+    {
+     "i": 38,
+     "n": 34,
+     "head": "м ship only CJSлі handles thisс dev via pre-bundling, butз S"
+    },
+    {
+     "i": 41,
+     "n": 34,
+     "head": "Shipз migration behindзаVITE_MIGRATION` flag for one release"
+    },
+    {
+     "i": 2,
+     "n": 33,
+     "head": "г-эг [ ]А` (0ле dayдэ Updateр |т С|---|---в sи **нвригу**ж%у"
+    },
+    {
+     "i": 5,
+     "n": 29,
+     "head": "###тӘврті Viteа `ц Migrateаpackagesә1О` (ә dayз theч toк:я"
+    }
+   ],
+   "lines": 47
+  },
+  {
+   "lane": "ps-aux-real",
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "srcRaw": 3054,
+   "F": 1042,
+   "parent": "synkrisis",
+   "exact": true,
+   "msgChars": 2484,
+   "msgTokensRecount": 1042,
+   "secs": 59.2,
+   "census": {
+    "glyph": {
+     "n": 406,
+     "chars": 591
+    },
+    "ascii-mix": {
+     "n": 262,
+     "chars": 884
+    },
+    "lower": {
+     "n": 171,
+     "chars": 514
+    },
+    "digit": {
+     "n": 146,
+     "chars": 345
+    },
+    "space": {
+     "n": 33,
+     "chars": 117
+    },
+    "num-punct": {
+     "n": 15,
+     "chars": 16
+    },
+    "upper": {
+     "n": 9,
+     "chars": 17
+    }
+   },
+   "topTokens": [
+    {
+     "t": " -",
+     "n": 19,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "в",
+     "n": 13,
+     "cls": "glyph"
+    },
+    {
+     "t": " /",
+     "n": 10,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "пи",
+     "n": 10,
+     "cls": "glyph"
+    },
+    {
+     "t": "d",
+     "n": 9,
+     "cls": "lower"
+    },
+    {
+     "t": "\n",
+     "n": 8,
+     "cls": "space"
+    },
+    {
+     "t": "я",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": " --",
+     "n": 7,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "с",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "Ў",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "ж",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "ги",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "ы",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": "Ғ",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": " ы",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": ".txt",
+     "n": 6,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "ь",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": " node",
+     "n": 6,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "І",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": "К",
+     "n": 6,
+     "cls": "glyph"
+    },
+    {
+     "t": "  ",
+     "n": 5,
+     "cls": "space"
+    },
+    {
+     "t": "bin",
+     "n": 5,
+     "cls": "lower"
+    },
+    {
+     "t": " &&",
+     "n": 5,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": " |",
+     "n": 5,
+     "cls": "ascii-mix"
+    }
+   ],
+   "costliestLines": [
+    {
+     "i": 11,
+     "n": 332,
+     "head": "_rpc        ы304к788ъд396ъчә/rpcbind -f -wҠ320ояд10700д304ъЕ"
+    },
+    {
+     "i": 12,
+     "n": 195,
+     "head": "энгуthreaddӯзпиrcu_gpӯрпиrcu_par_gpӯ5пиslub_flushwqӯөпиnetns"
+    },
+    {
+     "i": 6,
+     "n": 91,
+     "head": "root        ыюӷња00 /sbinПТРҒ I   иrcuУчња00ҚУ /lib/systemd/"
+    },
+    {
+     "i": 5,
+     "n": 68,
+     "head": "_chrony     ых1ёсхўаяH-events_highpriД du -ak node_modulesіс"
+    },
+    {
+     "i": 1,
+     "n": 59,
+     "head": "§ы дыыя0лдя.яцыяолыц.Б17а:е  жеца00мыБа46жим [ҩыБањҩ46ецү ? "
+    },
+    {
+     "i": 3,
+     "n": 55,
+     "head": "user       ық ps aux --sort=-%memь (real)';с/Ё/x41-tapeъ8Є /"
+    },
+    {
+     "i": 7,
+     "n": 55,
+     "head": "USER         PID %CPU %MEM    VSZе RSS TTY      STAT STARTе "
+    },
+    {
+     "i": 10,
+     "n": 44,
+     "head": "systemd+    ы306онд17916д876рҚ-networkdТ284охд35072д805өҚ-jo"
+    },
+    {
+     "i": 2,
+     "n": 37,
+     "head": "root         ыәм /sbinкллеыҡк290ядГ && \\ { echo '# sourceаИ."
+    },
+    {
+     "i": 9,
+     "n": 36,
+     "head": "эхоны167228ы11708чә/initТ318онд15452д898яУ sshdафsshd -D [li"
+    }
+   ],
+   "lines": 14
+  },
+  {
+   "lane": "ls-l-real",
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "srcRaw": 5194,
+   "F": 1476,
+   "parent": "synkrisis",
+   "exact": true,
+   "msgChars": 3005,
+   "msgTokensRecount": 1476,
+   "secs": 191.4,
+   "census": {
+    "glyph": {
+     "n": 774,
+     "chars": 1029
+    },
+    "digit": {
+     "n": 285,
+     "chars": 707
+    },
+    "lower": {
+     "n": 205,
+     "chars": 613
+    },
+    "ascii-mix": {
+     "n": 140,
+     "chars": 550
+    },
+    "space": {
+     "n": 44,
+     "chars": 76
+    },
+    "num-punct": {
+     "n": 21,
+     "chars": 23
+    },
+    "upper": {
+     "n": 7,
+     "chars": 7
+    }
+   },
+   "topTokens": [
+    {
+     "t": "ց",
+     "n": 33,
+     "cls": "glyph"
+    },
+    {
+     "t": " ",
+     "n": 30,
+     "cls": "space"
+    },
+    {
+     "t": "ס",
+     "n": 25,
+     "cls": "glyph"
+    },
+    {
+     "t": "त",
+     "n": 17,
+     "cls": "glyph"
+    },
+    {
+     "t": "ש",
+     "n": 16,
+     "cls": "glyph"
+    },
+    {
+     "t": "ոց",
+     "n": 15,
+     "cls": "glyph"
+    },
+    {
+     "t": "ო",
+     "n": 14,
+     "cls": "glyph"
+    },
+    {
+     "t": "ն",
+     "n": 13,
+     "cls": "glyph"
+    },
+    {
+     "t": "ा",
+     "n": 11,
+     "cls": "glyph"
+    },
+    {
+     "t": "ת",
+     "n": 9,
+     "cls": "glyph"
+    },
+    {
+     "t": "బ",
+     "n": 9,
+     "cls": "glyph"
+    },
+    {
+     "t": "ე",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "े",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "-",
+     "n": 8,
+     "cls": "num-punct"
+    },
+    {
+     "t": "ვ",
+     "n": 8,
+     "cls": "glyph"
+    },
+    {
+     "t": "ბ",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "դ",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "ல",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "ন",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "ნ",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "თ",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": "य",
+     "n": 7,
+     "cls": "glyph"
+    },
+    {
+     "t": " root",
+     "n": 6,
+     "cls": "ascii-mix"
+    },
+    {
+     "t": "w",
+     "n": 6,
+     "cls": "lower"
+    }
+   ],
+   "costliestLines": [
+    {
+     "i": 6,
+     "n": 843,
+     "head": "total 167495իկল ImageMagick-ზე9ე11म496դ Mcrtீழ163նդ Scrtீীর "
+    },
+    {
+     "i": 4,
+     "n": 282,
+     "head": "drղოীինչ Jun 15 16:59රցfftwბை Nov 30անරక Aprά14ցրա5տրցה Aprო"
+    },
+    {
+     "i": 5,
+     "n": 233,
+     "head": "-rղգ root rootല Apr 25ակեբ Janოկաბცח Mar 23ոցfidoնீे.oরত60չক"
+    },
+    {
+     "i": 3,
+     "n": 67,
+     "head": "-rw-r--r--գ root rootתो   तो    աო202ბ3ոաბց libά 27 20:դ Apr"
+    },
+    {
+     "i": 0,
+     "n": 26,
+     "head": "Before ¶ k=v. expand repeatedly After ~, a number has . befo"
+    },
+    {
+     "i": 1,
+     "n": 15,
+     "head": "§ო  े1գოेट root rootতट       ש"
+    },
+    {
+     "i": 2,
+     "n": 10,
+     "head": "lrwxrwxrwxգতो"
+    },
+    {
+     "i": 7,
+     "n": 1,
+     "head": ""
+    }
+   ],
+   "lines": 8
+  }
+ ]
+}

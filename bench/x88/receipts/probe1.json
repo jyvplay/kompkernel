@@ -1,0 +1,129 @@
+{
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "receiptF": 60,
+   "frontier": 60,
+   "encode": 60,
+   "chain": 60,
+   "exact": true
+  },
+  {
+   "lane": "uptime-w.txt",
+   "receiptF": 80,
+   "frontier": 80,
+   "encode": 80,
+   "chain": 80,
+   "exact": true
+  },
+  {
+   "lane": "free-m.txt",
+   "receiptF": 76,
+   "frontier": 76,
+   "encode": 76,
+   "chain": 76,
+   "exact": true
+  },
+  {
+   "lane": "vmstat.txt",
+   "receiptF": 149,
+   "frontier": 149,
+   "encode": 149,
+   "chain": 149,
+   "exact": true
+  },
+  {
+   "lane": "df-real.txt",
+   "receiptF": 126,
+   "frontier": 126,
+   "encode": 126,
+   "chain": 126,
+   "exact": true
+  },
+  {
+   "lane": "markdown-table.md",
+   "receiptF": 176,
+   "frontier": 176,
+   "encode": 176,
+   "chain": 176,
+   "exact": true
+  },
+  {
+   "lane": "prices.csv",
+   "receiptF": 133,
+   "frontier": 133,
+   "encode": 133,
+   "chain": 133,
+   "exact": true
+  },
+  {
+   "lane": "cue-sheet.md",
+   "receiptF": 163,
+   "frontier": 163,
+   "encode": 101,
+   "chain": 101,
+   "exact": true
+  },
+  {
+   "lane": "psql-output.txt",
+   "receiptF": 244,
+   "frontier": 244,
+   "encode": 244,
+   "chain": 244,
+   "exact": true
+  },
+  {
+   "lane": "metrics.tsv",
+   "receiptF": 210,
+   "frontier": 210,
+   "encode": 210,
+   "chain": 210,
+   "exact": true
+  },
+  {
+   "lane": "du-real.txt",
+   "receiptF": 272,
+   "frontier": 272,
+   "encode": 272,
+   "chain": 272,
+   "exact": true
+  },
+  {
+   "lane": "ps-ef.txt",
+   "receiptF": 315,
+   "frontier": 315,
+   "encode": 315,
+   "chain": 315,
+   "exact": true
+  },
+  {
+   "lane": "unified-diff.patch",
+   "receiptF": 419,
+   "frontier": 419,
+   "encode": 419,
+   "chain": 419,
+   "exact": true
+  },
+  {
+   "lane": "ls-real.txt",
+   "receiptF": 433,
+   "frontier": 433,
+   "encode": 433,
+   "chain": 433,
+   "exact": true
+  },
+  {
+   "lane": "df-h.txt",
+   "receiptF": 108,
+   "frontier": 108,
+   "encode": 108,
+   "chain": 108,
+   "exact": true
+  }
+ ],
+ "totals": {
+  "frontier": 2964,
+  "encode": 2902,
+  "wins": 1
+ }
+}

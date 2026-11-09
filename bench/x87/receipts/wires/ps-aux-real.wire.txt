@@ -1,0 +1,13 @@
+Before ¶ k=v. expand repeatedly; print only.
+§ы дыыя0лдя.яцыяолыц.Б17а:е  жеца00мыБа46жим [ҩыБањҩ46ецү ?       Ғлл     ц    цүпҒ I<егҒ S   ум [kтү S   ҩшеыв]
+root         ыәм /sbinкллеыҡк290ядГ && \ { echo '# sourceаИ.txtГА $HМ; } >Ай | head -120МК
+user       ық ps aux --sort=-%memь (real)';с/Ё/x41-tapeъ8Є /tmpсarena-workspace/procsЁ-census-dbaacъbaчү Ssеӷ     Ss+ыэroot          ыӯ]
+эН -lЫ /usrџ lsНЫ/lib/x86_64-linux-gnuЎ head -фЫ/sbinсЙ git log --stat -30Ҡ
+_chrony     ых1ёсхўаяH-events_highpriД du -ak node_modulesісяЛ apt list --installedПсagetty -o -p -- \u --noclear - linuxщҒ I   уworkerЕт46жфchronyd -Fыхз3В &&ЎзАТ
+root        ыюӷња00 /sbinПТРҒ I   иrcuУчња00ҚУ /lib/systemd/systemdн2Эк393ндХ lsН node_modulesҰ49ж bashЪгиcpuhpҲгуsoftirqdІdвһын>/dev/nullӘҡ102я ttyС_percpu_wqбах-mmСвр4ҙдя.рОсls-lө6¶# sourceақ (real)
+USER         PID %CPU %MEM    VSZе RSS TTY      STAT STARTе TIME COMMANDК155зд103ы13.9ы144607ны561224 ?      RlшБа49шза14 node /tmp/_run_1539.mjs
+root       ы1229ҙҙы133838ры18708 ?       S<Lslња01Ы/bin/envd
+эхоны167228ы11708чә/initТ318онд15452д898яУ sshdафsshd -D [listener]ц ofы10-100 startups
+systemd+    ы306онд17916д876рҚ-networkdТ284охд35072д805өҚ-journaldК1907охш810ъд405өү R   ҩ52жқ
+_rpc        ы304к788ъд396ъчә/rpcbind -f -wҠ320ояд10700д304ъЕК190хЭ303өт52ж /bin/bashН -c cd /home/userсkompkernel && H=benchсholdout-x41Гџьџһ |Ў150МО-realИХ/.bin and node_modulesьХйО-nmИқьқ |Ў60Мсps-aux-realИЛьЛһйсapt-realИЙьЙ |Ў200М/git-log-statИ node --helpь node --helpй/node-helpИ find / -name "*.json" -newerь findЫ/share -maxdepthыр -name '*.json'һй/find-jsonИД (real, sorted)';Дһ | sort -rnйсdu-ak.txt && \ wcНА/*.txtВО-real.txtВсapt-real.txt &&ЎрА/git-log-stat.txtВ/find-json.txtК1537Э292ъчҩҰ -c bash "$я/run.cmd" > "$я/out.log"ын>&х; echo $? > "$ясexit"ЄК153ъЭ286ртҰЄ/run.cmdК1539Э282ътҰ bench/tmp/runн.sh bench/x41/tapeн.tsТ348ҡ104я ttyню327ҡ103ө ttyхю331ҡ102р tty5ю329Әзю330Әрю332ҡ101н ttyөӷәПК154як249өш896т49ж tee /tmpЁ.logК190ък250яш880т52жЎ60Ҡ322ояд10568ш544ЕТ167к100р    ырт46ж bpfilter_umh
+энгуthreaddӯзпиrcu_gpӯрпиrcu_par_gpӯ5пиslub_flushwqӯөпиnetnsӯъпуworkerіўӯ9щ/uрая-flush-254аяв10пиmmСв11Р_tasks_kthreadв12Р_tasks_trace_kthreadв13Ҳів14Р_preemptв15гиmigrationів16щібБЪів18Ъёв19гиmigrationёв20Ҳёв21щёая-mmСв22пуworkerёўв24щ/uрах-events_unboundв25гуdevtmpfsв26пиinet_frag_wqв27гиkauditІ28щёб29гиkhungtaskІ30гиoom_reaperв31пиwritebackв32гуcompactdяв33Ғ SNеиksmdв34Ғ SNеуhugepagedв35пиkintegrityІ36пуblockІ37пиblkcg_punt_bioв38гиwatchdogІ39пиrpciod]
