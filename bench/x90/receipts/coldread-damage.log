@@ -1,0 +1,37 @@
+=== X90 DAMAGE REJECTION: 27 corrupted artifacts, CPython cold reader ===
+Expected outcome: ALL refused. A reader that reconstructs damaged input certifies nothing;
+this is the counterpart to the 3/3 EXACT cold read on intact artifacts (coldread.log).
+Note: the reader's own summary line prints 'COLD READ FAILED' because 0 artifacts were
+reconstructed, which IS the correct behaviour for damaged input.
+
+REFUSED dpkg-l-ful.char.sym.txt  CRC MISMATCH: contract says 39e50f9b, reconstruction gives b8e9597f — the message is damaged or was misread
+REFUSED dpkg-l-ful.crc.sym.txt   message has no body
+REFUSED dpkg-l-ful.digit.sym.txt CRC MISMATCH: contract says 39e50f9b, reconstruction gives 82ff2eac — the message is damaged or was misread
+REFUSED dpkg-l-ful.field-swap.sym.txt CRC MISMATCH: contract says 39e50f9b, reconstruction gives e2bfa73f — the message is damaged or was misread
+REFUSED dpkg-l-ful.line-del.sym.txt CRC MISMATCH: contract says 39e50f9b, reconstruction gives a9344529 — the message is damaged or was misread
+REFUSED dpkg-l-ful.marker-del.sym.txt CRC MISMATCH: contract says 39e50f9b, reconstruction gives 156b9dce — the message is damaged or was misread
+REFUSED dpkg-l-ful.marker-move.sym.txt marker in field 3, which no rule rebuilds
+REFUSED dpkg-l-ful.rule-index.sym.txt CRC MISMATCH: contract says 39e50f9b, reconstruction gives 48095203 — the message is damaged or was misread
+REFUSED dpkg-l-ful.truncate.sym.txt CRC MISMATCH: contract says 39e50f9b, reconstruction gives cd04aece — the message is damaged or was misread
+REFUSED ls-l-rea.char.sym.txt    CRC MISMATCH: contract says 16f86bf2, reconstruction gives 21e6873a — the message is damaged or was misread
+REFUSED ls-l-rea.crc.sym.txt     message has no body
+REFUSED ls-l-rea.digit.sym.txt   CRC MISMATCH: contract says 16f86bf2, reconstruction gives 593f2d4d — the message is damaged or was misread
+REFUSED ls-l-rea.field-swap.sym.txt CRC MISMATCH: contract says 16f86bf2, reconstruction gives 9520511b — the message is damaged or was misread
+REFUSED ls-l-rea.marker-del.sym.txt CRC MISMATCH: contract says 16f86bf2, reconstruction gives 23fee3bd — the message is damaged or was misread
+REFUSED ls-l-rea.marker-move.sym.txt tail form expects nothing before the marker
+REFUSED ls-l-rea.rule-index.sym.txt CRC MISMATCH: contract says 16f86bf2, reconstruction gives baceb6f1 — the message is damaged or was misread
+REFUSED ls-l-rea.truncate.sym.txt CRC MISMATCH: contract says 16f86bf2, reconstruction gives 81e388fc — the message is damaged or was misread
+REFUSED ls-la-usrbi.affix.sym.txt CRC MISMATCH: contract says a7511409, reconstruction gives fc18ff4e — the message is damaged or was misread
+REFUSED ls-la-usrbi.char.sym.txt CRC MISMATCH: contract says a7511409, reconstruction gives c13edd9a — the message is damaged or was misread
+REFUSED ls-la-usrbi.crc.sym.txt  message has no body
+REFUSED ls-la-usrbi.digit.sym.txt CRC MISMATCH: contract says a7511409, reconstruction gives a12cb43f — the message is damaged or was misread
+REFUSED ls-la-usrbi.field-swap.sym.txt CRC MISMATCH: contract says a7511409, reconstruction gives 86729862 — the message is damaged or was misread
+REFUSED ls-la-usrbi.line-del.sym.txt CRC MISMATCH: contract says a7511409, reconstruction gives b1a140fe — the message is damaged or was misread
+REFUSED ls-la-usrbi.marker-del.sym.txt CRC MISMATCH: contract says a7511409, reconstruction gives fd56b0cf — the message is damaged or was misread
+REFUSED ls-la-usrbi.marker-move.sym.txt marker in field 1, which no rule rebuilds
+REFUSED ls-la-usrbi.rule-index.sym.txt CRC MISMATCH: contract says a7511409, reconstruction gives 0c84dd1d — the message is damaged or was misread
+REFUSED ls-la-usrbi.truncate.sym.txt CRC MISMATCH: contract says a7511409, reconstruction gives de4996c5 — the message is damaged or was misread
+
+=== COLD READ, 27 artifacts ===
+reconstructed and self-certified by CRC: 0   wrong or refused: 27
+COLD READ FAILED

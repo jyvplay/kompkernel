@@ -1,0 +1,27 @@
+OK   X90. Body first. f11 = f9 + text after ※ (1-based). crc=16f86bf2
+        ls-l-real as measured: symlink target = link name + tail
+OK   X90. Body first. f11 = "/etc/alternatives/" + f9 + text after ※ (1-based). crc=a7511409
+        ls-la-usrbin as measured: constant prefix + sibling, PROSPHYSIS cannot fire
+OK   X90. Body first. f2 = text before ჻ + f4 (1-based). crc=39e50f9b
+        dpkg-l-full: package:arch over the arch column
+OK   X90. Body first. ⸙ in f15 = "/v2/" + f9 + "/servers/detail" (1-based). crc=deadbeef
+        openstack shape (refused by G9, but the form must still be self-describing)
+OK   X90. Body first. ҂ in f12 = "**" + f6 + "**" (1-based). crc=00112233
+        agent-history markdown bold shape (refused by G9)
+OK   X90. Body first. f3 = "x" + f1 + text after ※; f7 = text before ※ + f5 + "z" (1-based). crc=a1b2c3d4
+        two rules, mixed forms, one shared marker
+OK   X90. Body first. ⸙ in f15 = "/v2/" + f9 + "/x"; f3 = f1 + text after ⸙ (1-based). crc=ffee0011
+        full + tail: the full rule is the only place the marker is named
+OK   X90. Body first. f4 = "a\"b" + f2 + text after ꙮ (1-based). crc=0a0b0c0d
+        a quote INSIDE an affix (must be escaped or the contract is ambiguous), marker outside the Cyrillic/Georgian range
+OK   X90. Body first. f4 = text before ※ + f2 + "x\\y" (1-based). crc=ff00ff00
+        a BACKSLASH inside an affix
+FAIL X90. Body first. ※ in f4 = " + text after " + f2 + " in f9 = " (1-based). crc=12345678
+        ADVERSARIAL: affixes containing the contract's own grammar, which must not be re-parseable as rules
+     parsed: null
+
+contract parser round trip: 9/10
+
+edited-index contract parses: true (expected true; the CRC, not the parser, must catch it)
+truncated contract refused: true
+wrong prefix refused: true

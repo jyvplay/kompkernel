@@ -1,0 +1,80 @@
+{
+ "note": "X90 PASS 1, superseded by run.json but preserved because it contains the measurement that set G9. Three findings live only here: (1) openstack-loghub-26 f15=\"/v2/\"+f9+\"/servers/detail\" held on 15 records with a 291-token raw win, and F(rewrite) came back 896 -- EXACTLY F(original) -- so the frontier gained ZERO, then the 72-token contract made the message lose 968 vs 896. Its source cell f9 takes 2 distinct values, which is the upper bracket of the G9 variance gate. (2) dpkg-l-full refused at 2310 vs 2262 with the 69-token contract; decomposed, F(rewrite) was 2240 against F(original) 2262, a REAL -22 at the frontier, so the refusal was contract tax and not a dead relation. Its source has 4 distinct values, the lower bracket of G9. (3) ls-l-real applied byte-exact at 1434 = 70 contract + 1364 F(rewrite), against PROSPHYSIS shipped 1394 = 31 key + 1363 F(rewrite): the two rewrites are one token apart and the entire 40-token deficit was the contract, which is what bench/x90/contract-ladder.json then priced. Pass 1 spent 843 s of frontier time, 610 s of it on the two relations G9 now refuses in about 3 ms.",
+ "det": "1",
+ "engram": "0",
+ "lanes": [
+  {
+   "lane": "bench/holdout-ops/openstack-loghub-26.log",
+   "rawTokens": 4028,
+   "gate": 896,
+   "shipped": 896,
+   "applied": false,
+   "exact": false,
+   "messageTokens": 894,
+   "deltaGate": -2,
+   "deltaShipped": -2,
+   "contractTokens": 0,
+   "rules": [],
+   "fields": 0,
+   "frontierParent": "synkrisis",
+   "crc": "",
+   "ms": 111002,
+   "notes": "symphyia: G7 loses 968 vs 896",
+   "verdict": "REFUSED (symphyia: G7 loses 968 vs 896)"
+  },
+  {
+   "lane": "bench/holdout-x41/ls-l-real.txt",
+   "rawTokens": 5194,
+   "gate": 1476,
+   "shipped": 1394,
+   "applied": true,
+   "exact": true,
+   "messageTokens": 1434,
+   "deltaGate": -42,
+   "deltaShipped": 40,
+   "contractTokens": 70,
+   "rules": [
+    {
+     "j": 11,
+     "i": 9,
+     "form": "tail",
+     "A": "",
+     "B": "",
+     "rows": 52,
+     "eligible": 57,
+     "est": 625.6714285714286
+    }
+   ],
+   "fields": 52,
+   "frontierParent": "synkrisis",
+   "crc": "16f86bf2",
+   "ms": 233491,
+   "notes": "1 templates over 52 fields (f11=tail<-f9); wire coded by synkrisis",
+   "verdict": "loses to SHIPPED 1434 vs 1394"
+  },
+  {
+   "lane": "bench/holdout-x86/dpkg-l-full.txt",
+   "rawTokens": 4277,
+   "gate": 2262,
+   "shipped": 2262,
+   "applied": false,
+   "exact": false,
+   "messageTokens": 2237,
+   "deltaGate": -25,
+   "deltaShipped": -25,
+   "contractTokens": 0,
+   "rules": [],
+   "fields": 0,
+   "frontierParent": "synkrisis",
+   "crc": "",
+   "ms": 499248,
+   "notes": "symphyia: G7 loses 2310 vs 2262",
+   "verdict": "REFUSED (symphyia: G7 loses 2310 vs 2262)"
+  }
+ ],
+ "totals": {
+  "gate": 4634,
+  "shipped": 4552,
+  "mine": 4565
+ }
+}

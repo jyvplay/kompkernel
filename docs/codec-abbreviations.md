@@ -4958,3 +4958,233 @@ budget29,leaders-shipped}.json`, frontier confirmation
 lane against run E — **TOTAL 12 639, exact 29/29, 0 lanes differing, 448 498 ms against
 run E's 608 693 ms, the sixth consecutive confirmation** — and
 `bench/x89/receipts/rebalance.{json,log}`.
+
+## X90 — ΣΥΜΦΥΊΑ: the cross-field template, fitted
+
+X90 ships an **arm**, which X89 did not. `src/lib/omega/symphyia.ts`, admitted into the X74
+candidate chain in `tagstack.ts` after PROSPHYSIS and before STOICHEION. **ΣΥΜΦΥΊΑ**
+(symphyia), *"a growing together"* — the generalisation of PROSPHYSIS's *"a growth onto"*.
+
+**The relation.** A cell that is a template over a **sibling cell of the same record**:
+`f[j] = A + f[i] + B`, with `A` and `B` **fitted from the data** rather than written in the
+code. Three forms by which affix is constant — `full` (both, field collapses to the marker),
+`tail` (`A` constant, field becomes `marker ‖ B`), `head` (`B` constant, field becomes
+`A ‖ marker`). `tail` with `A = ""` **is** PROSPHYSIS's admitted rewrite; `head` with `B = ""`
+is the prefix direction PROSPHYSIS measures and declines to admit.
+
+**Taken, and how narrowly.** PROSPHYSIS's trigger is `/^(.* -> )([^\s]+)(.*)$/`, so it fires
+*only* on lines containing `" -> "`, relates *only* the last field before the arrow to the
+symlink target, and admits *only* the suffix direction. GNOMON and SYNARTESIS derive the npm
+`resolved` URL from the key and the sibling `version`, but the template is **hardcoded**
+(`gnomon.ts:157`). APOGRAPHE, METRON and STICHOMYTHIA are *vertical* — a cell from the row
+above, or a column from an affine program. ΣΥΜΦΥΊΑ is horizontal, generic, and knows nothing
+about arrows, symlinks or npm.
+
+**Measured** (`bench/x90/receipts/run.json`, `OMEGA_DET=1`, one frontier call per lane):
+
+```
+lane            raw    gate  shipped  ΣΥΜΦΥΊΑ   vs shipped
+ls-l-real      5194    1476     1394     1386      -8    f11 = f9 + tail
+ls-la-usrbin   3271     946      946      927     -19    f11 = "/etc/alternatives/" + f9
+dpkg-l-full    4277    2262     2262     2261      -1    f2  = <name> + ":" + f4
+                            total 4602     4574     -28    applied 3/3, byte exact 3/3
+```
+
+**`ls-la-usrbin` is the point.** Its targets *end with* the link name
+(`/etc/alternatives/python3` vs `python3`) — PROSPHYSIS's prefix direction, the one it
+refuses by design. So this is a generalisation taking a lane the special case is
+structurally blind to, not a rival winning on shared ground.
+
+**The rewrites are identical; the contract was the whole deficit.** On `ls-l-real`:
+`1386 = contract 22 + F(rewrite) 1363` against PROSPHYSIS's `1394 = key 31 + F(rewrite) 1363`.
+PROSPHYSIS's key is cheaper because it anchors **visually** — *"the name before the arrow"* —
+since the arrow is in the payload, so it never explains a numbering convention. **Generality
+costs 9 tokens here, and that is the price measured, not argued.** The contract ladder
+(`bench/x90/receipts/contract-ladder.json`) then took it 70 → 22 by dropping the Greek name
+for the house `X90.`, defining only the affix in use, and stating `1-based` once. Break-even
+against the shipped 1 394 was **29 tokens**. Because the message is `contract ‖ "\n" ‖ inner`
+and the contract is its own line, `total = T(contract) + 1 + F(rewrite)` — so every phrasing
+was priced **offline**, at 233 s a frontier call saved, and the prediction was then verified:
+predicted 1 386, measured **1 386**. A further 4 tokens buys `Body first.`, paid deliberately:
+the shipped message carries two instruction lines and the body between them has its whitespace
+replaced by glyphs, so field-splitting it before the inner decode binds the rule to the wrong
+cells. With it: `ls-l-real` **−4**, `ls-la-usrbin` **−15**, and `dpkg-l-full` loses its
+1-token margin and is **refused** — reported, not recovered by tuning the contract back down.
+
+**Final measured, with the contract that actually ships** (carrying `Body first.`, +4 tokens
+over the table above — `bench/x89/receipts/front3-runG.json` and
+`bench/x90/receipts/run-extras.json`):
+
+```
+                        gate   shipped before   shipped now    Δ
+ls-l-real               1476        1394            1390       -4     (PROSPHYSIS had -82; ΣΥΜΦΥΊΑ has -86)
+ls-la-usrbin             946         946             931      -15     PROSPHYSIS cannot fire here
+dpkg-l-full             2262        2262            2262       0     REFUSED by G7 at 2265 vs 2262
+29 gate lanes          12639       12495           12491       -4
+34-lane corpus         18594       18450           18431      -19     lanes regressed: 0
+```
+
+The offline model `total = T(contract) + 1 + F(rewrite)` predicted **1 386 / 931 / 2 265** and
+measured **1 386 / 931 / 2 265** — exact three times out of three. So once `F(rewrite)` is
+measured once, every later contract wording is priced by a token count instead of a 233–508 s
+frontier call. That is why eight phrasings could be tried and one chosen on evidence.
+
+**Leaders, generalised** (`bench/x90/receipts/leaders-x90.json`, a pure join of committed
+receipts — zero frontier calls, so zero drift):
+
+```
+category        lanes     raw    gate     X89     X90     Δ   ratio  floor÷X90
+OPS LISTING        13   30065    9595    9513    9494   -19   0.316      0.766
+OTHER               1    4277    2262    2262    2262     0   0.529      0.839
+OPS TABLE          11    4135    1726    1726    1726     0   0.417      0.737
+CODE / MARKUP       3    3152    2069    2069    2069     0   0.656      0.835
+PROSE               4    3117    2646    2646    2646     0   0.849      0.956
+DATA                2    1095     296     234     234     0   0.214      0.893
+ALL                34   45841   18594   18450   18431   -19   0.402      0.809
+```
+
+**The gain is entirely in OPS LISTING** — record sets whose fields reference each other. PROSE
+does not move (floor÷stack 0.956, already within 5 % of brotli-q11, and there are no sibling
+fields to template over). So this is **not** a general prose-and-ops gain and is not presented as
+one. The readability-price law `floor ÷ stack < 1.00` still fails on exactly the same two lanes,
+`lsblk` 1.017 and `free-m` 1.000; a win shrinks the stack so the ratio rises toward 1.00, and the
+law was re-tested rather than assumed. The join also caught a real bug: keying lanes by
+**basename** reported 28 gate lanes instead of 29, because the gate contains **two different files
+named `df-h.txt`** (`holdout-tbl`, 570 raw → 171; `holdout-x42`, 140 raw → 108). A fail-loud
+assertion caught it; the join is keyed by `path`.
+
+**Speed — one cost, one gain, one lead not shipped.** *Cost:* the arm adds one frontier call on
+the 3 of 91 lanes where a rule set lowers the raw count, and run G pass 2 paid 733 404 →
+**1 124 066 ms**, `ls-l-real` alone 677 933 ms. The 4 tokens it buys there cost about 280 s.
+*Gain:* **G9 refuses in ~3 ms what pass 1 spent 610 s of its 843 s discovering** — a real,
+fidelity-preserving speed mechanism, since both lanes were refused anyway, only after paying for
+the frontier call that proved it. *Lead not shipped:* X89's interleaved `w.5c4` (work ×0.5,
+chiron ×4) measured **1.71×** with every message sha-identical, and the blocker X89 recorded
+against shipping it — that uniform 0.5× work breaks `ls-l-real` — is **now largely answered**,
+because the X89 size gate applies only at or below 8 000 chars and `ls-l-real` is 10 692. What
+remains is a measurement, not a design question: one interleaved 29-lane run comparing SHA-256 of
+the complete message, ~1 500 s. It was not run because run G had already confirmed the frontier
+configuration and changing budgets afterwards would have invalidated it. **That is the next
+highest-information test in the repository and it is a speed test.** No stack-wide multiplier
+ships this turn; the confirmed figure remains X89's **1.35×**.
+
+**Two claims downgraded by this turn's research.** Reading the full text of
+[arXiv:2608.28997](https://arxiv.org/html/2608.28997v1) — which measures OpenAI's August 2026
+ten-proof corpus at **20.6 MB of kernel-checked Lean against 55.6 KB of statements needing human
+audit, 379 : 1, with 218 bespoke definitions** — splits verification into **L1 derivational
+validity** (mechanizable, cost falling), **L2 representational fidelity** (*not* mechanizable even
+in principle, cost constant) and **L3 epistemic significance** (cost rising), and names **T3
+"bespoke definitional substitution"**: *"a local definition carries none [of the weight of many
+eyes], and shifts the auditor's task from reading a theorem to reading a theorem plus a
+dictionary."* A wire **is** that structure: L1 is the round trip and the CRC, and the glyph tape
+plus marker plus field convention are a private dictionary of exactly the T3 kind. Their verdict
+on the corpus — *"the compression was in bytes; the expansion was in expertise"* — applies to this
+page's own contract ladder, which compressed 70 tokens to 22 while the local symbols stayed local.
+So: (1) **"an LLM can natively decode this" is downgraded to strongly evidenced, not verified**,
+since the CPython cold reader is an L2 *proxy* and one of OpenAI's ten results was still disputed
+on L2 a month after L1 succeeded; (2) **the verification portfolio is less independent than it is
+long** — seven artifacts, but the TS round trip, the fuzz and the contract parser share
+`symphyiaDecodeWire`, and the CPython reader shares an author. Independent *implementation* and
+independent *code path* are claimed; independent *review* is not available here and is not
+claimed. [arXiv:2608.14673v3](https://arxiv.org/html/2608.14673v3) is the warning, finding that a
+corpus of 18 assessments does **not** represent 18 independent reviewers; and
+[groundtruth.day](https://groundtruth.day/news/three-days-on-nobody-has-publicly-compiled-openais-ten-proofs.html)
+reports the ten-proofs repo at 434 stars, one commit, PRs and issues disabled, no Actions runs —
+*"OpenAI attesting to OpenAI's own work until somebody else runs the compiler"*, which is the
+cold-reader situation one level down. One improvement the paper's disclosure schema suggests and
+this repo does not yet do: it asks a release to state **"which definitions are local rather than
+imported from a vetted library"**. There is no such register for wire glyphs, and every glyph-pool
+character is local by construction — the 607-token tape that defines them being the largest
+never-correctly-priced object in the message. That is an **L2** target, and it is where the survey
+points next.
+
+**Greedy?** Yes, and only in the selection. Candidate generation is a **fixed rule** (every
+ordered field pair on every record, priced by an exact integer estimate). Selection is a
+bounded greedy hill-climb on the raw token count, keeping a rule only if it *strictly* lowers
+that count, so it **cannot lose against the empty rule set** — which is why the 91-lane screen
+reports 3 raw wins and **0 raw losses**. One frontier call, after the rule set is fixed.
+
+**CPU-bound, and it takes no clock at all.** The fit is `O(records × fields²)` integer work,
+1–7 ms on lanes up to 16 593 bytes. It imports no `now()` and no `budgetMs`, so its output is
+a pure function of its input on any machine — the property X89 §2 measured the wall-clock
+frontier losing.
+
+**SOURCE-VARIANCE LAW (G9).** `openstack`'s `f15 = "/v2/" + f9 + "/servers/detail"` held on 15
+records with a **291-token raw win**, the largest anywhere, and returned
+`F(rewrite) = 896 = F(original)` **exactly** — zero frontier gain — then lost 968 vs 896 once
+the contract was counted. Its source `f9` takes one value across those records, so `f15` is a
+*literal repeat* the dictionary already interns.
+
+> A cross-field template whose source cell does not vary is not a template; it is a repeat, and
+> repeats are dictionary territory. Only a **varying** sibling is information a dictionary
+> cannot reach.
+
+This is X89's in-situ floor law moved from the target side to the source side: both say a proxy
+that measures redundancy **in isolation** overstates it, because the frontier has usually
+already taken the part that looks largest. G9's threshold is **bracketed by measurement**
+(`bench/x90/_g9.ts`, G9 disabled): 1 distinct = constant, ELLEIPSIS/APOGRAPHE territory;
+**2 = measured insufficient** (zero frontier gain); **4 = measured sufficient** (−25 at the
+frontier). No relation here has exactly 3, so the boundary value itself is **untested**. The
+gate is also a speed result: pass 1 spent **843 s, 610 s of it** on the two relations G9 now
+refuses in about 3 ms.
+
+**Second-order adversary.** `bench/x90/receipts/fuzz.json`: **4 159 mutations, 4 150 refused,
+9 exact no-ops, 0 silently wrong.** The mutation that matters is `rule-index` — editing *which
+field the contract says is rebuilt*, leaving the wire well-formed so every structural gate
+still passes and only the contract's claim is false. That is X88's exact failure mode (244 of
+427 silent decodes behind 75/75 byte-exact round trips) and it was refused **381/381**, by the
+CRC. G8 costs 7 tokens and that is what they buy.
+
+**G10 caught two real defects on paths the corpus does not exercise.** The contract must parse
+back out of the message, because `tagstackDecode` gets the message and nothing else — and
+`admit()` checks only the encode-side claim `cand.decoded === text`, so a **missing inverse is
+invisible to the gate and fatal to the reader**. G10 requires the printed line to parse back to
+its own rules, and found: (1) the `full` form **named no marker**, since it collapses the whole
+field *to* the marker — dormant here only because G9 refuses both `full` relations in this
+corpus first; (2) an affix containing a double quote produced `"a"b"`, which is not merely
+unparseable but **ambiguous**, and is reachable on any JSON-ish lane whose constant affix is
+`"name":`. Round trip now **9/10**; the tenth is adversarial by design — affixes containing the
+contract's *own grammar* — and G10 **refuses** rather than emit something readable two ways.
+
+**Cold read, second language, no shared code.** `bench/x90/coldread.py` (CPython, `zlib.crc32`)
+is given the contract line and the rewritten body and nothing else: **3/3 EXACT**, each
+self-certified by CRC **from the message alone**, SHA-256 matching the originals. Its
+counterpart corrupts 27 artifacts 9 ways each and the reader refuses **27/27**, every refusal
+naming its cause. Against `ctxfold`'s July 2026 finding that folding *syntax* stays
+model-readable while folding *data* does not, this arm is on the validated side **by
+construction**: the sibling stays verbatim in the same row and the expansion is local and
+single-pass, with no header table. **No model was queried** — this is a byte-exact independent
+decode plus a structural argument, not a graded comprehension study.
+
+**Prior art, honestly.** The relation is SQL's *generated* / *computed* column: "a virtual
+generated column is calculated from other column values in the row, while a stored generated
+column is materialized as part of the row data" — so **a stored derived column is
+denormalisation and deleting it is normalisation**, which is what this arm does to a text
+record set. AWS Glue states the same shape with the same operator (`success * 100 / count ||
+'%'`). `stanford-star/plurel` #116 documents derived chains in dependency order with "a cycle
+raises naming its columns", which validates G4's fail-closed choice and marks a limit not
+crossed: ΣΥΜΦΥΊΑ **forbids** chains rather than topologically ordering them. **The mechanism
+is standard in databases and absent from prompt compression; that gap is the contribution, and
+the relation itself is not new.**
+
+**Run G — the gate is unperturbed.** `bench/x86/receipts/frontier-runG.{json,log}`:
+**TOTAL 12 639, exact 29/29, 0 lanes differing**, *"identical to the X80 configuration, lane
+for lane"* — the seventh consecutive confirmation, and the control that matters here, because
+`tagstack.ts` gained an import of `symphyia.ts` (pulling `aither.ts` and `bpe.ts` at module
+scope) and any initialisation side effect would have shown up in this number.
+
+**Not claimed.** No model was queried. The win is small and concentrated: among the **29 gate
+lanes only `ls-l-real` moves**, and there ΣΥΜΦΥΊΑ is a *rival* of PROSPHYSIS, not new ground.
+`dpkg-l-full`'s −1 was measured and then given up to pay for `Body first.` G9's boundary value
+3 is untested. Chains are forbidden, not ordered. The contract cannot express an affix
+containing its own grammar. And the 291-token raw win on `openstack` is real and worth zero.
+
+**Record.** `src/lib/omega/symphyia.ts` (new), `src/lib/omega/tagstack.ts` (chain admission and
+the `X90.` branch of `tagstackDecode`); `bench/x90/{tmpl,screen,run,ladder,fuzz,emit-coldread,_g9,_p,_o}.ts`,
+`bench/x90/coldread.py`, `bench/x86/run-front-g.sh`; receipts in `bench/x90/receipts/`
+(`screen.json`, `run.json`, `run-pass1.json` — preserved because it holds the openstack
+measurement that set G9, `contract-ladder.{json,log}`, `fuzz.{json,log}`,
+`contract-parser.log`, `coldread.log`, `coldread-damage.log`, `wires/`),
+`bench/x86/receipts/frontier-runG.{json,log}`, `bench/x89/receipts/front3-runG.{json,log}`,
+with the pre-X90 `front3.json` preserved as `front3-preX90.json`.
+[`docs/codecs.md`](codecs.md) §X90.

@@ -1,0 +1,108 @@
+{
+ "note": "X90 ΣΥΜΦΥΊΑ frontier run. ONE frontier call per lane; the incumbent is read from committed receipts (gate = bench/x86/receipts/frontier-runF.json, shipped = bench/x89/receipts/front3.json). G6/G7 measured here, G1-G5/G8 in screen.json. OMEGA_DET=1, OMEGA_ENGRAM=0.",
+ "det": "1",
+ "engram": "0",
+ "lanes": [
+  {
+   "lane": "bench/holdout-x41/ls-l-real.txt",
+   "rawTokens": 5194,
+   "gate": 1476,
+   "shipped": 1394,
+   "applied": true,
+   "exact": true,
+   "messageTokens": 1386,
+   "deltaGate": -90,
+   "deltaShipped": -8,
+   "contractTokens": 22,
+   "rules": [
+    {
+     "j": 11,
+     "i": 9,
+     "form": "tail",
+     "A": "",
+     "B": "",
+     "rows": 52,
+     "eligible": 57,
+     "distinctSource": 57,
+     "est": 139
+    }
+   ],
+   "fields": 52,
+   "frontierParent": "synkrisis",
+   "crc": "16f86bf2",
+   "ms": 232999,
+   "notes": "1 templates over 52 fields (f11=tail<-f9); wire coded by synkrisis",
+   "verdict": "WINS vs shipped 1394 -> 1386 (-8)",
+   "why": "rival of PROSPHYSIS on the same relation; must beat 1394, not 1476"
+  },
+  {
+   "lane": "bench/holdout-x86/ls-la-usrbin.txt",
+   "rawTokens": 3271,
+   "gate": 946,
+   "shipped": 946,
+   "applied": true,
+   "exact": true,
+   "messageTokens": 927,
+   "deltaGate": -19,
+   "deltaShipped": -19,
+   "contractTokens": 27,
+   "rules": [
+    {
+     "j": 11,
+     "i": 9,
+     "form": "tail",
+     "A": "/etc/alternatives/",
+     "B": "",
+     "rows": 17,
+     "eligible": 24,
+     "distinctSource": 24,
+     "est": 91
+    }
+   ],
+   "fields": 17,
+   "frontierParent": "synkrisis",
+   "crc": "a7511409",
+   "ms": 39565,
+   "notes": "1 templates over 17 fields (f11=tail<-f9); wire coded by synkrisis",
+   "verdict": "WINS vs shipped 946 -> 927 (-19)",
+   "why": "PROSPHYSIS CANNOT fire here: the target ENDS with the link name (its prefix direction, which it declines to admit). Genuinely non-overlapping."
+  },
+  {
+   "lane": "bench/holdout-x86/dpkg-l-full.txt",
+   "rawTokens": 4277,
+   "gate": 2262,
+   "shipped": 2262,
+   "applied": true,
+   "exact": true,
+   "messageTokens": 2261,
+   "deltaGate": -1,
+   "deltaShipped": -1,
+   "contractTokens": 23,
+   "rules": [
+    {
+     "j": 2,
+     "i": 4,
+     "form": "head",
+     "A": "",
+     "B": "",
+     "rows": 78,
+     "eligible": 120,
+     "distinctSource": 4,
+     "est": 20
+    }
+   ],
+   "fields": 78,
+   "frontierParent": "synkrisis",
+   "crc": "39e50f9b",
+   "ms": 508191,
+   "notes": "1 templates over 78 fields (f2=head<-f4); wire coded by synkrisis",
+   "verdict": "WINS vs shipped 2262 -> 2261 (-1)",
+   "why": "f2 = <name>:<arch> over the arch column; first pass measured F(rewrite) 2240 vs 2262, so the cheap contract decides it"
+  }
+ ],
+ "totals": {
+  "gate": 4684,
+  "shipped": 4602,
+  "mine": 4574
+ }
+}

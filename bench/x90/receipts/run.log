@@ -1,0 +1,31 @@
+
+━━ bench/holdout-x41/ls-l-real.txt
+   raw 5194  gate 1476  shipped 1394  MINE 1386  applied=true exact=true contract=22 fields=52 ms=232999
+   1 templates over 52 fields (f11=tail<-f9); wire coded by synkrisis
+   VERDICT: WINS vs shipped 1394 -> 1386 (-8)
+   why this lane: rival of PROSPHYSIS on the same relation; must beat 1394, not 1476
+   first line: X90 f11 = f9 + text after ※ (1-based). crc=16f86bf2
+   sample body: Before ¶ k=v. expand repeatedly; print only. | §ე  რ1ी | -rw-r--r--ერर root rootზीरსზ   ა.ია0ನर       ര
+
+━━ bench/holdout-x86/ls-la-usrbin.txt
+   raw 3271  gate 946  shipped 946  MINE 927  applied=true exact=true contract=27 fields=17 ms=39565
+   1 templates over 17 fields (f11=tail<-f9); wire coded by synkrisis
+   VERDICT: WINS vs shipped 946 -> 927 (-19)
+   why this lane: PROSPHYSIS CANNOT fire here: the target ENDS with the link name (its prefix direction, which it declines to admit). Genuinely non-overlapping.
+   first line: X90 f11 = "/etc/alternatives/" + f9 + text after ※ (1-based). crc=a7511409
+   sample body: Before ¶ k=v. expand repeatedly; print only. | §п | -rІr-xуwxІІе  те1ү rootСтүүлпуСәл      ьүү      Э
+
+━━ bench/holdout-x86/dpkg-l-full.txt
+   raw 4277  gate 2262  shipped 2262  MINE 2261  applied=true exact=true contract=23 fields=78 ms=508191
+   1 templates over 78 fields (f2=head<-f4); wire coded by synkrisis
+   VERDICT: WINS vs shipped 2262 -> 2261 (-1)
+   why this lane: f2 = <name>:<arch> over the arch column; first pass measured F(rewrite) 2240 vs 2262, so the cheap contract decides it
+   first line: X90 f2 = text before ※ + f4 (1-based). crc=39e50f9b
+   sample body: Before ¶ k=v. expand repeatedly; print only. | §с Р | iiсЯР libн.е2ү12нен0г-һdeb12uц+һа1м amd64       Ҷ             мҩсүг14цаҶС libraryР libвцаЙм GNUПсенигеҡсен40и 
+
+=== ΣΥΜΦΥΊΑ, 3 lanes ===
+gate total 4684  shipped total 4602  MINE total 4574
+vs gate -110   vs shipped -28
+applied 3/3   byte exact 3/3
+STRICT WINS vs the shipped column: 3 — ls-l-real.txt -8, ls-la-usrbin.txt -19, dpkg-l-full.txt -1
+wrote bench/x90/receipts/run.json

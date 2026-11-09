@@ -1,0 +1,28 @@
+
+━━ bench/holdout-x41/ls-l-real.txt  rules=1 (f11:tail<-f9) fields=52 marker=※ crc=16f86bf2
+   mutations 1400: refused 1390, exact 1, SILENT-WRONG 0
+
+━━ bench/holdout-x86/ls-la-usrbin.txt  rules=1 (f11:tail<-f9) fields=17 marker=※ crc=a7511409
+   mutations 1400: refused 1380, exact 3, SILENT-WRONG 0
+
+━━ bench/holdout-x86/dpkg-l-full.txt  rules=1 (f2:head<-f4) fields=78 marker=※ crc=39e50f9b
+   mutations 1400: refused 1380, exact 5, SILENT-WRONG 0
+
+=== ΣΥΜΦΥΊΑ MUTATION TALLY, 4159 mutations over 3 lanes ===
+kind                   n  refused  exact  WRONG
+char-sub             384      375      9      0
+digit-bump           384      384      0      0
+marker-delete        384      384      0      0
+marker-duplicate     381      381      0      0
+marker-move          381      381      0      0
+field-swap           340      340      0      0
+rule-index           381      381      0      0
+crc-edit             381      381      0      0
+truncate             381      381      0      0
+line-delete          381      381      0      0
+affix-edit           381      381      0      0
+
+TOTAL refused 4150  exact 9  SILENT-WRONG 0
+VERDICT: 0 silently-wrong decodes. Every mutation was either refused or a semantic no-op.
+
+wrote bench/x90/receipts/fuzz.json

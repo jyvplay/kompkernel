@@ -1,0 +1,62 @@
+{
+ "note": "Cold-read artifacts. Each .sym.txt holds the ΣΥΜΦΥΊΑ contract line and the rewritten body and nothing else. bench/x90/coldread.py must reconstruct the source from those two lines alone, in CPython, sharing no code with the encoder, and verify the CRC-32 with zlib. sourceSha256 is over the ORIGINAL file so the reconstruction can be compared byte for byte without the Python ever being given the original.",
+ "artifacts": [
+  {
+   "lane": "bench/holdout-x41/ls-l-real.txt",
+   "artifact": "bench/x90/receipts/wires/ls-l-real.sym.txt",
+   "sourceBytes": 10692,
+   "sourceSha256": "82572e90c7619baad4690b42704b29002a4c7c0a70acc8b35193431ff6286cfa",
+   "crc32": "16f86bf2",
+   "rules": [
+    {
+     "j": 11,
+     "i": 9,
+     "form": "tail",
+     "A": "",
+     "B": ""
+    }
+   ],
+   "marker": "※",
+   "fieldsRewritten": 52,
+   "contractTokens": 26
+  },
+  {
+   "lane": "bench/holdout-x86/ls-la-usrbin.txt",
+   "artifact": "bench/x90/receipts/wires/ls-la-usrbin.sym.txt",
+   "sourceBytes": 7544,
+   "sourceSha256": "ab26abdfa69c8c3e06903c9a7bb23404c5d88c8d9337cde5450654911fd6732d",
+   "crc32": "a7511409",
+   "rules": [
+    {
+     "j": 11,
+     "i": 9,
+     "form": "tail",
+     "A": "/etc/alternatives/",
+     "B": ""
+    }
+   ],
+   "marker": "※",
+   "fieldsRewritten": 17,
+   "contractTokens": 31
+  },
+  {
+   "lane": "bench/holdout-x86/dpkg-l-full.txt",
+   "artifact": "bench/x90/receipts/wires/dpkg-l-full.sym.txt",
+   "sourceBytes": 16593,
+   "sourceSha256": "545fdaedcefa7297cd89dc4b3853a75c70531a4c767b95174fe477f9b576246d",
+   "crc32": "39e50f9b",
+   "rules": [
+    {
+     "j": 2,
+     "i": 4,
+     "form": "head",
+     "A": "",
+     "B": ""
+    }
+   ],
+   "marker": "※",
+   "fieldsRewritten": 78,
+   "contractTokens": 27
+  }
+ ]
+}

@@ -1,0 +1,758 @@
+{
+ "note": "X90 raw-token screen, ZERO frontier calls; delta = wireRaw - raw, negative is better; establishes G1-G5+G8 only, NOT G6/G7",
+ "lanes": [
+  {
+   "lane": "bench/holdout-lang/de-kb.txt",
+   "chars": 2432,
+   "raw": 525,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-lang/es-kb.txt",
+   "chars": 2367,
+   "raw": 457,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-lang/ja-kb.txt",
+   "chars": 901,
+   "raw": 655,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-lang/pl-kb.txt",
+   "chars": 2096,
+   "raw": 623,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-lang/ru-kb.txt",
+   "chars": 2171,
+   "raw": 478,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-lang/tr-kb.txt",
+   "chars": 2123,
+   "raw": 554,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-mk/agent-history.md",
+   "chars": 4539,
+   "raw": 1156,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 4
+  },
+  {
+   "lane": "bench/holdout-mk/chart.svg",
+   "chars": 3446,
+   "raw": 1331,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-mk/component.jsx",
+   "chars": 1194,
+   "raw": 296,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-mk/dump.sql",
+   "chars": 5159,
+   "raw": 1795,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-mk/page.html",
+   "chars": 10145,
+   "raw": 3220,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 2
+  },
+  {
+   "lane": "bench/holdout-mk/paper.tex",
+   "chars": 1247,
+   "raw": 429,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-mk/pom.xml",
+   "chars": 1797,
+   "raw": 544,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-ops/find-listing.txt",
+   "chars": 11789,
+   "raw": 3997,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-ops/git-log-fuller.txt",
+   "chars": 368,
+   "raw": 143,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-ops/git-numstat.txt",
+   "chars": 12306,
+   "raw": 4632,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-ops/ls-full-iso.txt",
+   "chars": 2549,
+   "raw": 1175,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-ops/node-stacktraces.txt",
+   "chars": 1848,
+   "raw": 568,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-ops/npm-ls.txt",
+   "chars": 6688,
+   "raw": 2747,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-ops/openstack-loghub-26.log",
+   "chars": 7969,
+   "raw": 4028,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 3
+  },
+  {
+   "lane": "bench/holdout-ops/package-lock-head.json",
+   "chars": 40000,
+   "raw": 15009,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 2
+  },
+  {
+   "lane": "bench/holdout-tab/aapl-2014.csv",
+   "chars": 5488,
+   "raw": 3108,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-tab/vix-daily-1990.csv",
+   "chars": 6578,
+   "raw": 3412,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-tbl/df-h.txt",
+   "chars": 939,
+   "raw": 570,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "chars": 2649,
+   "raw": 1006,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-tbl/markdown-table.md",
+   "chars": 635,
+   "raw": 330,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-tbl/psql-output.txt",
+   "chars": 1578,
+   "raw": 675,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-work/bibliography.txt",
+   "chars": 2759,
+   "raw": 896,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-work/email-thread.txt",
+   "chars": 2126,
+   "raw": 629,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-work/kb-article.txt",
+   "chars": 3385,
+   "raw": 656,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 2
+  },
+  {
+   "lane": "bench/holdout-work/llm-answer.md",
+   "chars": 2542,
+   "raw": 733,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-work/meeting-transcript.txt",
+   "chars": 1746,
+   "raw": 472,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-work/unified-diff.patch",
+   "chars": 1487,
+   "raw": 578,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x40/cue-sheet.md",
+   "chars": 938,
+   "raw": 513,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x40/metrics.tsv",
+   "chars": 1203,
+   "raw": 811,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x40/prices.csv",
+   "chars": 993,
+   "raw": 582,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x41/apt-real.txt",
+   "chars": 6195,
+   "raw": 2739,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 3
+  },
+  {
+   "lane": "bench/holdout-x41/df-real.txt",
+   "chars": 329,
+   "raw": 158,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x41/du-ak.txt",
+   "chars": 5754,
+   "raw": 1649,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x41/du-real.txt",
+   "chars": 1605,
+   "raw": 458,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x41/find-files.txt",
+   "chars": 6223,
+   "raw": 1669,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x41/find-json.txt",
+   "chars": 46,
+   "raw": 16,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x41/git-log-stat.txt",
+   "chars": 12259,
+   "raw": 2909,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 2
+  },
+  {
+   "lane": "bench/holdout-x41/ls-l-nm.txt",
+   "chars": 4662,
+   "raw": 2160,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 2
+  },
+  {
+   "lane": "bench/holdout-x41/ls-l-real.txt",
+   "chars": 10692,
+   "raw": 5194,
+   "wireRaw": 4922,
+   "delta": -272,
+   "rules": 1,
+   "fields": 52,
+   "forms": "f11:tail<-f9",
+   "contractTokens": 24,
+   "fitMs": 3,
+   "crcRejectsBad": true,
+   "ownExact": true,
+   "crc": "16f86bf2"
+  },
+  {
+   "lane": "bench/holdout-x41/ls-real.txt",
+   "chars": 2486,
+   "raw": 1034,
+   "rules": 1,
+   "note": "no rule set lowered raw",
+   "fitMs": 2
+  },
+  {
+   "lane": "bench/holdout-x41/node-help.txt",
+   "chars": 6751,
+   "raw": 1099,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x41/node-versions.txt",
+   "chars": 1802,
+   "raw": 779,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x41/ps-aux-real.txt",
+   "chars": 6590,
+   "raw": 3054,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 2
+  },
+  {
+   "lane": "bench/holdout-x41/ps-real.txt",
+   "chars": 2365,
+   "raw": 1106,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x41/tsc-diag.txt",
+   "chars": 609,
+   "raw": 187,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x42/df-h.txt",
+   "chars": 293,
+   "raw": 140,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x42/dpkg-l.txt",
+   "chars": 4459,
+   "raw": 1000,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x42/findmnt.txt",
+   "chars": 3215,
+   "raw": 787,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x42/ls-usr-bin.txt",
+   "chars": 2394,
+   "raw": 1029,
+   "rules": 1,
+   "note": "no rule set lowered raw",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x42/lsblk.txt",
+   "chars": 132,
+   "raw": 60,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x42/proc-partitions.txt",
+   "chars": 95,
+   "raw": 33,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x42/ps-ef.txt",
+   "chars": 2669,
+   "raw": 1144,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 11
+  },
+  {
+   "lane": "bench/holdout-x42/ss-tan.txt",
+   "chars": 2089,
+   "raw": 843,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x42b/df-h-all.txt",
+   "chars": 324,
+   "raw": 156,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x42b/free-m.txt",
+   "chars": 263,
+   "raw": 76,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x42b/ip-br.txt",
+   "chars": 184,
+   "raw": 74,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x42b/ps-eo-cpu.txt",
+   "chars": 2027,
+   "raw": 1087,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x42b/ss-s.txt",
+   "chars": 339,
+   "raw": 119,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x42b/uptime-w.txt",
+   "chars": 179,
+   "raw": 80,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x42b/vmstat.txt",
+   "chars": 467,
+   "raw": 229,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x86/apt-policy.txt",
+   "chars": 459,
+   "raw": 208,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x86/dpkg-l-full.txt",
+   "chars": 16591,
+   "raw": 4277,
+   "wireRaw": 4224,
+   "delta": -53,
+   "rules": 1,
+   "fields": 78,
+   "forms": "f2:head<-f4",
+   "contractTokens": 24,
+   "fitMs": 4,
+   "crcRejectsBad": true,
+   "ownExact": true,
+   "crc": "39e50f9b"
+  },
+  {
+   "lane": "bench/holdout-x86/ls-la-usrbin.txt",
+   "chars": 7544,
+   "raw": 3271,
+   "wireRaw": 3190,
+   "delta": -81,
+   "rules": 1,
+   "fields": 17,
+   "forms": "f11:tail<-f9",
+   "contractTokens": 31,
+   "fitMs": 2,
+   "crcRejectsBad": true,
+   "ownExact": true,
+   "crc": "a7511409"
+  },
+  {
+   "lane": "bench/holdout-x86/npm-ls-all.txt",
+   "chars": 6068,
+   "raw": 2253,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x86/pip-list.txt",
+   "chars": 118,
+   "raw": 41,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x86/proc-cpuinfo.txt",
+   "chars": 2649,
+   "raw": 1061,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x86/proc-meminfo.txt",
+   "chars": 1506,
+   "raw": 550,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x86/sysinfo.txt",
+   "chars": 678,
+   "raw": 271,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x87/df-B1.txt",
+   "chars": 372,
+   "raw": 137,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x87/df-h-real.txt",
+   "chars": 270,
+   "raw": 131,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x87/du-b.txt",
+   "chars": 1828,
+   "raw": 722,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x87/free-b.txt",
+   "chars": 414,
+   "raw": 116,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x87/meminfo.txt",
+   "chars": 1391,
+   "raw": 502,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout-x87/top-bn1.txt",
+   "chars": 1003,
+   "raw": 505,
+   "rules": 1,
+   "note": "no rule set lowered raw",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout-x87/vmstat-real.txt",
+   "chars": 411,
+   "raw": 204,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout/code-dts.txt",
+   "chars": 662,
+   "raw": 162,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout/code-ts.txt",
+   "chars": 6000,
+   "raw": 1422,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 2
+  },
+  {
+   "lane": "bench/holdout/gh-api.json.txt",
+   "chars": 8000,
+   "raw": 2519,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout/gh-prose.txt",
+   "chars": 8000,
+   "raw": 1934,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 2
+  },
+  {
+   "lane": "bench/holdout/json-pkg.txt",
+   "chars": 3620,
+   "raw": 1152,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout/lic-mit.txt",
+   "chars": 1088,
+   "raw": 223,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout/license.txt",
+   "chars": 6000,
+   "raw": 1166,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  },
+  {
+   "lane": "bench/holdout/md-react.txt",
+   "chars": 1158,
+   "raw": 252,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout/md-vite.txt",
+   "chars": 1134,
+   "raw": 274,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 0
+  },
+  {
+   "lane": "bench/holdout/readme.txt",
+   "chars": 3242,
+   "raw": 843,
+   "rules": 0,
+   "note": "no relation at support",
+   "fitMs": 1
+  }
+ ],
+ "wins": 3,
+ "losses": 0,
+ "totalWinDelta": -406,
+ "ms": 555
+}
