@@ -1,0 +1,13 @@
+EUTHYNTERIA_FACTOR=0.25  EUTHYNTERIA_MAX_CHARS=8000
+  chars=   132 factor=0.25 work=   503300 chiron=  1016500 gated=true preGateWork=2013200 ok
+  chars=  1000 factor=0.25 work=   525000 chiron=  1125000 gated=true preGateWork=2100000 ok
+  chars=  6751 factor=0.25 work=   668775 chiron=  1843875 gated=true preGateWork=2675100 ok
+  chars=  7999 factor=0.25 work=   699975 chiron=  1999875 gated=true preGateWork=2799900 ok
+  chars=  8000 factor=0.25 work=   700000 chiron=  2000000 gated=true preGateWork=2800000 ok
+  chars=  8001 factor=1 work=  2800100 chiron=  8000500 gated=false preGateWork=2800100 ok
+  chars= 10692 factor=1 work=  3069200 chiron=  9346000 gated=false preGateWork=3069200 ok
+  chars= 40000 factor=1 work=  6000000 chiron= 24000000 gated=false preGateWork=6000000 ok
+
+ls-l-real (10692 chars) reached by this arm? false (must be false)
+node-help (6751 chars, largest verified sufficient at X89) reached? true (must be true)
+GATE CHECK: all assertions hold

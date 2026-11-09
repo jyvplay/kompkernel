@@ -1,0 +1,23 @@
+  ps-aux-real.txt default  1053 tok   58301ms exact=true sha=aee19714b3b6cfe2
+  ps-aux-real.txt w.5c1    1066 tok   41808ms exact=true sha=b80193188a633923
+  ps-aux-real.txt w1c.5    1053 tok   48877ms exact=true sha=aee19714b3b6cfe2
+  ps-aux-real.txt w.5c.5   1066 tok   41184ms exact=true sha=b80193188a633923
+ps-aux-real.txt      def=1053/58301ms  regressions=[w.5c1:1053->1066 w.5c.5:1053->1066]  sha-diffs=[w.5c1 w.5c.5]  exactAll=true  elapsed=190568ms
+  df-real.txt default   126 tok    6071ms exact=true sha=66aed09755ed021d
+  df-real.txt w.5c1     126 tok    2657ms exact=true sha=a3129b343c4d8260
+  df-real.txt w1c.5     126 tok    4490ms exact=true sha=66aed09755ed021d
+  df-real.txt w.5c.5    126 tok    2663ms exact=true sha=a3129b343c4d8260
+df-real.txt          def=126/6071ms  regressions=[]  sha-diffs=[w.5c1 w.5c.5]  exactAll=true  elapsed=206452ms
+  ps-ef.txt default   315 tok    9115ms exact=true sha=a2c807e7e4320945
+  ps-ef.txt w.5c1     315 tok    4615ms exact=true sha=a2c807e7e4320945
+  ps-ef.txt w1c.5     315 tok    6866ms exact=true sha=a2c807e7e4320945
+  ps-ef.txt w.5c.5    315 tok    4459ms exact=true sha=a2c807e7e4320945
+ps-ef.txt            def=315/9115ms  regressions=[]  sha-diffs=[]  exactAll=true  elapsed=231510ms
+
+=== METER ISOLATION VERDICT over 3 lanes ===
+  w.5c1   WORK halved again, CHIRON untouched
+          tokens 1507 (+13)  ms 49080 x1.50  lanes-worse 1 [ps-aux-real.txt(+13)]
+  w1c.5   WORK untouched, CHIRON halved again
+          tokens 1494 (+0)  ms 60233 x1.22  lanes-worse 0
+  w.5c.5  both halved again == uniform factor 0.25, the falsified candidate
+          tokens 1507 (+13)  ms 48306 x1.52  lanes-worse 1 [ps-aux-real.txt(+13)]

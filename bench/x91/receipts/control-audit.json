@@ -1,0 +1,103 @@
+{
+ "note": "control re-audited against receipts from different harnesses and turns",
+ "lanes": [
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "lane": "ps-aux-real.txt",
+   "chars": 6590,
+   "probeControl": 1042,
+   "probeCandidate": 1042,
+   "hashSame": true,
+   "exactAll": true,
+   "committedGate": 1042,
+   "committedShipped": 1042,
+   "committedParent": "synkrisis",
+   "verdict": "MATCHES SHIPPED AND GATE"
+  },
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "lane": "apt-real.txt",
+   "chars": 6195,
+   "probeControl": 886,
+   "probeCandidate": 886,
+   "hashSame": true,
+   "exactAll": true,
+   "committedGate": 850,
+   "committedShipped": 850,
+   "committedParent": "synkrisis",
+   "verdict": "MATCHES NEITHER TIER (probe measures the pre-chain base; committed 850/850)"
+  },
+  {
+   "path": "bench/holdout/code-ts.txt",
+   "lane": "code-ts.txt",
+   "chars": 6000,
+   "probeControl": 969,
+   "probeCandidate": 969,
+   "hashSame": true,
+   "exactAll": true,
+   "committedGate": 969,
+   "committedShipped": 969,
+   "committedParent": "synkrisis",
+   "verdict": "MATCHES SHIPPED AND GATE"
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "lane": "dpkg-l.txt",
+   "chars": 4459,
+   "probeControl": 673,
+   "probeCandidate": 673,
+   "hashSame": true,
+   "exactAll": true,
+   "committedGate": 673,
+   "committedShipped": 673,
+   "committedParent": "synkrisis",
+   "verdict": "MATCHES SHIPPED AND GATE"
+  },
+  {
+   "path": "bench/holdout/json-pkg.txt",
+   "lane": "json-pkg.txt",
+   "chars": 3620,
+   "probeControl": 681,
+   "probeCandidate": 681,
+   "hashSame": true,
+   "exactAll": true,
+   "committedGate": 681,
+   "committedShipped": 681,
+   "committedParent": "synkrisis",
+   "verdict": "MATCHES SHIPPED AND GATE"
+  },
+  {
+   "path": "bench/holdout-x41/node-help.txt",
+   "lane": "node-help.txt",
+   "chars": 6751,
+   "probeControl": 862,
+   "probeCandidate": 862,
+   "hashSame": true,
+   "exactAll": true,
+   "committedGate": 862,
+   "committedShipped": 862,
+   "committedParent": "synkrisis",
+   "verdict": "MATCHES SHIPPED AND GATE"
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "lane": "kb-article.txt",
+   "chars": 3385,
+   "probeControl": 622,
+   "probeCandidate": 622,
+   "hashSame": true,
+   "exactAll": true,
+   "committedGate": 622,
+   "committedShipped": 622,
+   "committedParent": "synkrisis",
+   "verdict": "MATCHES SHIPPED AND GATE"
+  }
+ ],
+ "summary": {
+  "matchShip": 6,
+  "matchBaseOnly": 1,
+  "invalid": 0,
+  "hashIdentical": 7,
+  "lanes": 7
+ }
+}

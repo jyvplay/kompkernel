@@ -30,8 +30,11 @@
  * minutes-to-hours. `OMEGA_WORK_BUDGET` (integer) overrides for audits;
  * `OMEGA_WORK_BUDGET=0` means unbounded (pre-X57 behavior, for A/B).
  *
- * This module has no imports (no cycles) and no other state.
+ * This module has one import, added at X93: `euthynteria.ts`, which itself imports nothing,
+ * so the acyclicity this header claimed still holds. It has no other state.
  */
+
+import { euthynteriaWorkFactor, euthynteriaChironFactor } from './euthynteria';
 
 let budget = Number.POSITIVE_INFINITY;
 let used = 0;
@@ -142,12 +145,73 @@ export const WORK_BUDGET_PER_CHAR = 100;
  *
  * The explicit OMEGA_WORK_BUDGET / OMEGA_CHIRON_BUDGET overrides are applied BEFORE the
  * gate and are not scaled, so a sweep still sweeps the number it asks for.
+ *
+ * ---------------------------------------------------------------------------
+ * X93 — ΕΥΘΥΝΤΗΡΙΑ: THE FACTOR ABOVE IS WRONG, AND THE RECEIPT THAT SET IT HAD A BUG.
+ * ---------------------------------------------------------------------------
+ * The 0.5 shipped here was chosen because `bench/x89/receipts/budget29.json` reported that
+ * 0.25x changes 11 of 29 wires. That receipt was produced by a probe which clears the
+ * OMEGA_*_BUDGET overrides only on its `mult === 1` pass (budget29.ts:42-44), so its third
+ * setting read the SECOND setting's override as the base and multiplied it again: the pass
+ * labelled x0.25 actually ran at **x0.125** on both meters. The identical bug is documented
+ * in the header of bench/x89/rebalance.ts -- "reading them inside the loop makes every
+ * multiplier compound on the previous pass instead of applying to the base" -- and was fixed
+ * there but never re-checked here, because the number had already been promoted into a
+ * shipped constant.
+ *
+ * Re-measured with the base captured ONCE and the overrides cleared (bench/x91/chiron-sweep
+ * .ts, 21 lanes x 7 settings, interleaved in one process, OMEGA_DET=1, OMEGA_ENGRAM=0,
+ * scored on the SHA-256 of the complete message because X89 measured two lanes that changed
+ * wire at an UNCHANGED token count):
+ *
+ *     setting   tokens   ms        speedup   sha-differing   inexact
+ *     default     5464   216 207      --          --           --
+ *     w.5c.5      5464   116 964    x1.85          0            0     <- shipped here
+ *     w.5c1       5464   118 827    x1.82          0            0
+ *     w1c.1       5464   159 376    x1.36          0            0
+ *     w1c.5       5464   162 676    x1.33          0            0
+ *     w.5c4       5464   135 565    x1.59          1 [ps-ef]    0     <- X90's lead, FALSIFIED
+ *     w1c.25      5464   414 071    x0.52          0            0     <- pathological on time
+ *
+ * `w.5c.5` against this module's shipped default IS a factor of 0.25 against the pre-gate
+ * base, and it is byte-identical on all 21 lanes. So 0.25 is sound and 0.125 is not; the
+ * bracket is 0.25 verified sufficient / 0.125 verified insufficient, and the values between
+ * them are UNTESTED and not claimed.
+ *
+ * `w.5c4` -- the setting X90 recorded as the highest-information next test, on the strength
+ * of 7 lanes at 1.71x with identical messages -- CHANGES ps-ef.txt's wire while leaving its
+ * token count at 315. A token-count comparison reports identity for a wire that moved. That
+ * is the second time this corpus has produced that exact divergence and the reason the score
+ * here is a hash.
+ *
+ * The size gate is deliberately NOT re-derived: X89 bracketed it at 6 751 (largest verified
+ * sufficient) to 10 692 (smallest verified insufficient) and ls-l-real, the lane above it, is
+ * still the only lane in 29 whose wire moves when the work meter is halved. Keeping the
+ * threshold at 8 000 means this arm cannot reach it.
  */
 export const X89_HALF_BUDGET_MAX_CHARS = 8_000;
 export const X89_BUDGET_FACTOR = 0.5;
 
+/**
+ * The gate, now delegated to ΕΥΘΥΝΤΗΡΙΑ (X93). Kept as a named function rather than inlined
+ * so that the two call sites below -- work and chiron -- cannot drift apart, which is the
+ * property that made the X89 receipt readable as "both meters" in the first place.
+ */
 function x89BudgetFactor(chars: number): number {
-  return Math.max(0, chars) <= X89_HALF_BUDGET_MAX_CHARS ? X89_BUDGET_FACTOR : 1;
+  return euthynteriaWorkFactor(chars);
+}
+
+/**
+ * X93: the chiron meter gets its OWN gate. This is the whole content of the decoupling and
+ * the reason the two functions below no longer call the same helper. Measured on the one
+ * lane a uniform factor breaks (ps-aux-real, +11 tokens at 0.25/0.25): cutting chiron again
+ * from 0.25 to 0.125 with work held costs +0, while cutting work again from 0.25 to 0.125
+ * with chiron held costs +13. Chiron binds at 100% of its allowance on every lane in every
+ * setting measured, including at 8x the allowance, with identical output -- a saturated and
+ * insensitive meter is an over-allocated one. See euthynteria.ts section 4.
+ */
+function x93ChironFactor(chars: number): number {
+  return euthynteriaChironFactor(chars);
 }
 
 export function workBudgetFor(chars: number): number {
@@ -238,5 +302,5 @@ export function chironBudgetFor(chars: number): number {
     const n = Number(env);
     if (Number.isFinite(n)) return n <= 0 ? Number.POSITIVE_INFINITY : n;
   }
-  return Math.round((CHIRON_BUDGET_BASE + CHIRON_BUDGET_PER_CHAR * Math.max(0, chars)) * x89BudgetFactor(chars));
+  return Math.round((CHIRON_BUDGET_BASE + CHIRON_BUDGET_PER_CHAR * Math.max(0, chars)) * x93ChironFactor(chars));
 }

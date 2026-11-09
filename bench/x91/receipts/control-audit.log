@@ -1,0 +1,20 @@
+CONTROL AUDIT — decouple-sweep control vs committed gate (runE) and shipped (runG)
+
+lane                 probeCtl probeCand gateRunE shipRunG  hashSame  verdict
+ps-aux-real.txt          1042      1042     1042     1042      true  MATCHES SHIPPED AND GATE
+apt-real.txt              886       886      850      850      true  MATCHES NEITHER TIER (probe measures the pre-chain base; committed 850/850)
+code-ts.txt               969       969      969      969      true  MATCHES SHIPPED AND GATE
+dpkg-l.txt                673       673      673      673      true  MATCHES SHIPPED AND GATE
+json-pkg.txt              681       681      681      681      true  MATCHES SHIPPED AND GATE
+node-help.txt             862       862      862      862      true  MATCHES SHIPPED AND GATE
+kb-article.txt            622       622      622      622      true  MATCHES SHIPPED AND GATE
+
+control reproduces BOTH committed tiers on 6/7 lanes
+control reproduces neither tier (pre-chain base, identity still holds) on 1/7: apt-real.txt
+INVALID on 0/7
+
+THE BUDGET CLAIM, RESTATED AT THE TIER IT WAS MEASURED.
+  identity between control (work 0.5 / chiron 0.5) and candidate (work 0.5 / chiron 0.25):
+  7/7 lanes hash-identical, 7/7 byte-exact at every setting, 0 lanes worse.
+  apt-real's SHIPPED tier is not covered by this probe and is covered by run H pass 2
+  (bench/x86/run-front-h.sh, front3.mjs -> tagstackEncode, expected total 12 491, 0 differing).

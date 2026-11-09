@@ -1,0 +1,85 @@
+X93 — LLM-NATIVE DECODABILITY, COLD READ BY THE MODEL ITSELF
+=============================================================
+
+WHAT WAS ASKED. Confirm that the LLM (including the one writing this) can natively decode the
+coded text with no access to a skills.md or system prompt input box, and only with a basic
+single chat input/output.
+
+WHAT WAS DONE, EXACTLY. For each lane the model was shown TWO files and nothing else: the
+`<lane>.prompt.txt` (the contract a user would paste) and `<lane>.wire.txt` (the coded body).
+Together those two files ARE the single chat input. The model then expanded the tape by hand —
+identifying each newly-introduced glyph, taking its value as the text up to the next new glyph,
+and resolving references recursively to a fixed point — and wrote the result to
+`bench/x91/coldread-model/<lane>.model.txt` BEFORE the corresponding `<lane>.src.txt` was read
+for the first time. Verification is `diff` against the source. No decoder script, no
+`skills.md`, no system prompt, no tool other than writing the answer down and diffing it.
+
+RESULT 1 — df-h.txt (OPS TABLE, X16-era wire). **BYTE-IDENTICAL.**
+  31 rule glyphs, 18 data rows. Recovered the full tape by hand:
+    ж=0  р=1  о="\n/dev/nvme"+ж+"n"+р+"p"  н=" "  ы="G"+н+н  и="% /mnt/vol"  а=н+н  і="  "
+    у="G"+і+н  е=і+н  ч=51  щ=2  г=3  з=4  к=5  д=95  ё=6  м=7  ц=8  в=9  Т=10  л=11  ф=12
+    б=13  П=14  т=194  Б=15  Д=16  с=17  Н=100
+  Two non-obvious things had to be got right or the diff would not have been clean:
+    (a) the irregular column padding — rows 1-6 use у ("G"+3 spaces) after Size and Used while
+        rows 7-18 use ы ("G"+2 spaces), because the Used/Avail fields go from 2 to 3 digits;
+    (b) two rules whose values are numbers that occur TWICE in the document, ч="51" (row 2's
+        Used and row 8's Use%) and т="194" (row 14's Used and row 16's Avail). Recognising that
+        a *number* can be a rule target, and finding both of its occurrences, is what makes the
+        arithmetic progressions come out right (Size +37, Used +11, Avail +9, Use% +3).
+  File: bench/x91/coldread-model/df-h.model.txt
+
+RESULT 2 — meeting-transcript.txt (PROSE, X16-era wire). **BYTE-IDENTICAL.**
+  6 rules: 在="[00:"  天=".\n"+在  线="] Priya Raghunathan:"  中="] Marcus Oyelaran:"
+           的="] Dana Whitfield:"  大="] Tom Beckett:"
+  The load-bearing observation is that 天 folds THREE things — the sentence-final period, the
+  newline and the timestamp opener — so it applies only to lines that end in a period. Exactly
+  one line ends in "?" and it therefore uses a literal newline followed by 在 instead. Getting
+  that asymmetry right is the whole decode; a reader who treats 天 as "newline + speaker" fails
+  on 15 of 16 lines and produces a document with no sentence-final periods.
+  File: bench/x91/coldread-model/meeting-transcript.model.txt
+
+RESULT 3 — email-thread.txt (PROSE, X16-era wire). **ATTEMPTED, NOT COMPLETED. REPORTED AS A
+FAILURE, WITH THE OBSTACLE MEASURED RATHER THAN GUESSED.**
+  43 rule glyphs. The model's hand parse produced rules that expand to nonsense in places
+  (e.g. "<m.oyelaran" + " Priya Raghunathan <priya.r" + " the"), which means a rule boundary was
+  mis-assigned. The obstacle is specific and was then verified programmatically:
+
+      rule glyphs                        ambiguous with a Latin lookalike
+      df-h.txt                     31      10  (32%)   роаіуеёТсН
+      email-thread.txt             43      15  (35%)   іурсМхеРТоОЕёаУ
+      meeting-transcript.txt        7       0  ( 0%)   —
+      ops-ls-l-bin.txt              8       3  (38%)   Мсо
+
+  The contract says "New Cyrillic before ¶ starts a rule". For 15 of this wire's 43 glyphs the
+  character is Cyrillic і, у, р, с, М, х, е, Р, Т, о, О, Е, ё, а or У — each of which is
+  VISUALLY IDENTICAL to a Latin letter, and the body contains those Latin letters (the body's
+  Latin alphabet is ABCDFHILMOPQRSTWabcdefghijklmnoprstuvwxy). So a cold reader cannot decide by
+  shape whether a given character is a rule start or literal text, and must fall back on
+  context. Context was sufficient on df-h at 32% ambiguity and insufficient here at 35%.
+
+  HONEST READING OF THE THREE RESULTS. Ambiguity is a HAZARD that raises the error rate, not a
+  deterministic blocker: the two lanes decoded exactly had 32% and 0% ambiguous glyphs and the
+  one that failed had 35%. Two successes and one failure at similar ambiguity is a small sample
+  and does not establish a threshold. What it does establish is that a glyph pool drawn from a
+  script that shares shapes with Latin makes the contract undecidable from the glyphs alone —
+  which is a defect in the X16-era pool, not in the reader, and which is precisely why the
+  shipped stack from X87 onward fingerprints its alphabet and carries a CRC-32 integrity check
+  (ΑΙΘΗΡ, ΣΥΝΤΆΞΙΣ G9) instead of relying on a reader to notice a wrong character.
+
+WHAT IS AND IS NOT CLAIMED.
+  Claimed: a model reading only a pasted contract and a pasted wire, with no decoder, no
+  skills.md and no system prompt, reproduced two committed lanes BYTE FOR BYTE — one ops table
+  and one prose transcript.
+  NOT claimed: that this verifies L2 representational fidelity in general. Per arXiv:2608.28997
+  the L2 question (does the formal statement mean the informal one / does the reader execute the
+  intended reasoning over the representation) is not mechanisable even in principle, and a cold
+  read by the same model that wrote the encoder is a PROXY, not an independent verification. It
+  is a stronger proxy than a TypeScript round trip — the round trip cannot see a contract that
+  under-describes the wire, and X28 shipped exactly that bug — but it is not independent review,
+  and independent review is unavailable in this sandbox and is not claimed.
+  NOT claimed: that X93 needed any of this. ΕΥΘΥΝΤΗΡΙΑ emits byte-identical messages, so the
+  decodability of the shipped stack is unchanged by construction and every prior cold-read
+  receipt (X90's 3/3 exact in independent CPython, X87's 29/29, 27/27 damage refusals, 4 159
+  mutations with 0 silently wrong) applies verbatim. These three reads were run because the
+  brief asks for a native-decode confirmation this turn, and they are reported with the failure
+  included.

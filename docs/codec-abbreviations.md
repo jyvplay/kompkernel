@@ -5188,3 +5188,307 @@ measurement that set G9, `contract-ladder.{json,log}`, `fuzz.{json,log}`,
 `bench/x86/receipts/frontier-runG.{json,log}`, `bench/x89/receipts/front3-runG.{json,log}`,
 with the pre-X90 `front3.json` preserved as `front3-preX90.json`.
 [`docs/codecs.md`](codecs.md) §X90.
+
+## X93 — ΕΥΘΥΝΤΗΡΙΑ (εὐθυντηρία): the audit of accounts rendered
+
+**Abbreviation resolved.** ΕΥΘΥΝΤΗΡΙΑ / *euthynteria* — in Athenian practice the public audit
+every magistrate underwent at the end of his term, when he rendered his accounts
+(*euthynai*) and they were straightened. The name is exact rather than decorative: this codec
+audits an account this repository rendered four turns ago and finds the entry wrong.
+
+### Design spec
+
+| field | value |
+|---|---|
+| **module** | `src/lib/omega/euthynteria.ts` (new; imports nothing, so the acyclicity `workmeter.ts`'s header claims still holds) |
+| **registry arm** | `euthynteria`, immediately before `timema`; 236 unique `key:` slugs |
+| **family** | search allocation (HEURESIS X31, OIKONOMIA X33) |
+| **wire format** | **unchanged**. No glyph, no rule class, no contract, no marker |
+| **fidelity** | exact — `decoded === text` byte-for-byte, checked per lane |
+| **what it changes** | `workBudgetFor` uses `euthynteriaWorkFactor`; `chironBudgetFor` uses `euthynteriaChironFactor`. Two functions where X89 had one |
+| **`EUTHYNTERIA_WORK_FACTOR`** | **0.5** — X89's verified value, **unchanged** |
+| **`EUTHYNTERIA_CHIRON_FACTOR`** | **0.25** — decoupled, new |
+| **`EUTHYNTERIA_MAX_CHARS`** | 8 000 — inherited from X89's measured bracket (6 751 largest verified sufficient / 10 692 smallest verified insufficient), deliberately **not** re-derived |
+| **measured effect** | **+0 tokens**, **0 messages differing by SHA-256**, **0 inexact**, **0 lanes worse** on 28 lanes; **×1.14** on the 7 large gated lanes, **×1.33** on 21 small and mid lanes |
+| **run H (both tiers, `OMEGA_DET=1`)** | gate **12 639** exact 29/29, **0 lanes differing** from run G (8th consecutive); shipped **12 491** exact 29/29, **0 differing**, ms 1 105 795. The frontier is **exactly** the configuration named last turn |
+| **GREEDY OR NOT** | **NO.** There is no search in this module at all. Two constants are selected by a bracket over an **enumerated finite set of measured configurations** — not hill-climbed, not sampled, not annealed. What the constants *configure* is greedy and documented elsewhere: ARIADNE's glyph assignment hill-climbs from a seeded start and returns best-so-far when its allowance is spent, and the chiron rule search keeps a rule only when it strictly lowers the scored message. Neither greediness is modified here |
+| **SOURCE ARTICLE** | **None.** The mechanism is original to this repository and no paper is implemented by it. Cited as *family*, explicitly **not** as source: anytime algorithms returning best-so-far at budget exhaustion (Dean & Boddy 1988, the usual citation); **AnytimeReasoner** (`openreview.net/forum?id=jFaFCc5978`), which truncates a reasoning trace to a sampled token budget and optimises expected score over a *distribution* of budgets; **AnySearch** (arXiv:2609.00813, *Findings of EMNLP 2026*, 39643–39665), which trains one policy for *any* budget by injecting budget state; and the **Anytime Index** / Conditional Satisfaction Rate metric (arXiv:2601.11038). The contrast is the point: those allocate a **token length** to a **stochastic** reasoner scored by **accuracy**; this allocates an **evaluation count** to a **deterministic** lossless encoder scored by **message identity**. Neither reduction transfers, and the discovery here was made by auditing a prior turn's probe for a bug a later turn's probe had already documented — not by reading anything |
+| **TIME- OR CPU-BOUND** | **CPU-bound, deliberately.** Both allowances count **work** (`workTick`, one unit per score evaluation), never milliseconds; nothing in the module reads `Date.now()`. Consequences: the same input consumes the same work on any machine, the emitted wire is machine-independent, and the reduction is reproducible across boxes. The **speedup it produces is a wall-clock measurement** and is reported as one — comparable **only within a single interleaved process**, because cross-process drift on this box is ~1.6× (which is what made runs C/D/E look like speedups). The ×1.14 and ×1.33 come from two different processes and are **never summed** |
+| **verification tier** | **L1** (derivational, kernel-checkable): `tsc --noEmit` exit 0; `gate-check.ts` asserts the resolved budgets at 8 char counts across the threshold; hash identity per lane. **L2** (representational fidelity — does a reader reconstruct the source?) is **downgraded, not claimed verified**: no model was queried, and per arXiv:2608.28997 L2 is not mechanisable in principle. X93 needs no new L2 argument because it emits **byte-identical messages**, so prior cold-read receipts apply **verbatim** |
+
+### The account being audited
+
+X89 shipped a size-gated halving of both meters and recorded, in `workmeter.ts`, that going
+further was unavailable:
+
+> `0.25x identical message 18/29  2.34x faster overall, but 11 lanes change, several for the
+> worse (psql-output 244 -> 268, ps-aux-real 1042 -> 1066, apt-real 850 -> 876, ls-l-real
+> 1476 -> 1493)`
+
+That line was the only reason the shipped factor was 0.5. Reading the receipt against the probe
+that produced it: `bench/x89/budget29.ts:42-44` clears `OMEGA_WORK_BUDGET` /
+`OMEGA_CHIRON_BUDGET` **only on the `mult === 1` pass**, and `workBudgetFor` returns an override
+verbatim when one is set — so the third setting read the **second** setting as its base and
+multiplied again. **The pass labelled `x0.25` ran at `x0.125`.** The identical bug is documented
+in `bench/x89/rebalance.ts`'s own header and was fixed there but never re-checked here, because
+the number had already been promoted into a shipped constant.
+
+**The correction is corroborated by a number, not argued.** `bench/x91/order-probe.ts` at work
+0.125 / chiron 0.125 returns `ps-aux-real` = **1066** — exactly the value X89 recorded under the
+label `0.25x`. Two harnesses, four turns apart, agree on 1066 at 0.125. **The unsound point is
+0.125×, not 0.25×.**
+
+### Why the shipped design has two constants instead of one
+
+Version one of this arm took the correction at face value and shipped a **single** factor 0.25,
+on a 21-lane sweep where every setting was byte-identical (×1.85). `ps-aux-real.txt` was not
+among those 21 lanes. Measured, it gives **1042 → 1053, +11 tokens**, still byte-exact. Version
+one was withdrawn and **nothing from its receipt was carried forward**: the ×1.85 is quoted
+nowhere as a result, the gate was not re-derived from it, and the acceptance test was re-run
+from scratch on the **large** lanes because the sample that missed the regression had been small
+ones.
+
+`bench/x91/meter-isolate.ts` then moved the two meters independently on the breaker lane. From
+work 0.25 / chiron 0.25 = 1053:
+
+```
+cut CHIRON again, 0.25 -> 0.125, work held   ->  1053   (+0)   hash unchanged
+cut WORK   again, 0.25 -> 0.125, chiron held ->  1066   (+13)
+```
+
+and on `df-real` the same asymmetry shows up in the **hash** rather than the count: cutting work
+changes the message (`66aed097` → `a3129b34`) at an unchanged 126 tokens, while cutting chiron
+leaves the hash identical. Two lanes, two different observables, one direction.
+
+The meters are not interchangeable. `W` bounds ARIADNE's glyph-assignment hill-climb, where a
+truncation changes **which characters stand for which phrases** and therefore how many glyph
+runs the tokenizer can swallow — a first-order effect on wire cost. `C` bounds the rule search
+that decides the tape, whose candidate set already contains the parent's rules, so a truncation
+returns best-so-far over a set that includes the answer it would have found. `C` binds at
+**100 %** of its allowance on every lane in every setting measured, **including at 8× the
+allowance**, with identical output: a meter that is saturated and insensitive is a meter that is
+over-allocated.
+
+X89 stated the opposite design goal in terms: the single helper existed *"so that the two call
+sites below cannot drift apart, which is the property that made the X89 receipt readable as
+'both meters' in the first place"*. **The coupling was the defect.** Readability of a constant is
+not evidence about the two things it scales.
+
+### Acceptance test
+
+`bench/x91/decouple-sweep.ts`, on the large gated lanes, `OMEGA_DET=1`, `OMEGA_ENGRAM=0`,
+interleaved in one process, scored on the **SHA-256 of the complete message**. The control is
+the configuration X89 actually shipped (0.5 / 0.5) and it must reproduce the **committed**
+frontier numbers before the candidate is allowed to report anything:
+
+| lane | chars | control 0.5/0.5 | == committed | candidate 0.5/0.25 | Δ | hash | chiron 0.1 | speedup |
+|---|---|---|---|---|---|---|---|---|
+| `ps-aux-real.txt` | 6 590 | 1042 | **OK** | 1042 | +0 | same | 1042 | ×1.117 |
+| `apt-real.txt` | 6 195 | 886 | **base only** † | 886 | +0 | same | 886 | ×1.105 |
+| `code-ts.txt` | 6 000 | 969 | **OK** | 969 | +0 | same | 969 | ×1.209 |
+| `dpkg-l.txt` | 4 459 | 673 | **OK** | 673 | +0 | same | 673 | ×1.268 |
+| `json-pkg.txt` | 3 620 | 681 | **OK** | 681 | +0 | same | 681 | ×1.256 |
+| `node-help.txt` | 6 751 | 862 | **OK** | 862 | +0 | same | 862 | ×1.120 |
+| `kb-article.txt` | 3 385 | 622 | **OK** | 622 | +0 | same | 622 | ×1.189 |
+| **total** | | **5 735** | **6/7 both tiers** | **5 735** | **+0** | **0 differing** | **5 735** | **×1.14** |
+
+† **The control audit, and why the seventh lane is not what it looks like.** The `== committed`
+column is evaluated by `bench/x91/control-audit.ts` against receipts from **different harnesses
+in different turns** (`frontier-runE.json` gate, `front3-runG.json` shipped), not against the
+probe's own family. `decouple-sweep.ts`'s built-in assertion printed OK on 7/7 — because its
+expectation table came from `large-sweep.ts`, the same function, which makes it a tautology
+rather than a control. Re-audited, the honest figure is **6/7**: `apt-real.txt` is committed at
+**850** on both tiers while this probe returns **886** on both settings, because
+`tagstackEncodeUncached` is `tagstackEncodeInner` (`tagstack.ts:580-582`) — the base **without**
+the X73/X74 chain, worth **−36** on that lane. The probe measured the pre-chain tier there and
+reproduced it exactly. **The identity claim is unaffected — 7/7 hash-identical** — and
+apt-real's shipped tier is covered by run H pass 2, which calls the real shipped encoder. Rule
+this turn now carries: **a control must be checked against a number the code under test did not
+produce, or it is not a control.**
+
+Plus 21 small and mid lanes at **0 differing, ×1.33** (`chiron-sweep21.json`, setting `w1c.5`,
+which *is* the shipped pair). **28 lanes byte-identical between the two settings.** The 29th,
+`ls-l-real` (10 692 chars), is outside the gate — asserted directly by `gate-check.ts`, not
+assumed.
+
+Note the last column: chiron at **0.1** is also +0 everywhere but **slower** (×1.12 against
+×1.14). Cutting chiron past 0.25 buys nothing, so 0.25 is a stopping point and not a tuning
+knob, and 0.1 is **not shipped** — 21 lanes is the same sample size that just failed to contain
+the one lane that breaks.
+
+### Why it cannot break correctness
+
+Both meters count work, not time. `workTick` consumes one unit per score evaluation and when the
+allowance is spent the search stops climbing and returns best-so-far, so a **smaller** allowance
+cannot make a search explore **more**. A budget bounds the **SEARCH**, not the **VERIFICATION**:
+`tagstack`'s `consider()` throws unless `candidate.decoded === text`, and every arm re-verifies
+its own round trip. The failure mode of a factor set too low is **tokens, not fidelity** — which
+is exactly what was observed (+11, +13, +24) and exactly why the withdrawal was a withdrawal
+rather than a bug fix. Byte-exact decode held on every lane at every setting measured, including
+the unsound 0.125×.
+
+### Falsifications recorded, including this turn's own
+
+* **uniform 0.25** — `ps-aux-real` +11. Withdrawn. *(this turn's own first candidate)*
+* **`w.5c4`** (raise chiron 4× at shipped work) — X90's recorded *highest-information next test*,
+  7 lanes at ×1.71 with identical messages. On 21 lanes it **changes `ps-ef.txt`'s message while
+  leaving its token count at 315**. The third time this corpus has produced a wire change at an
+  unchanged count (X89: `df-real`, `df-h`), and the reason every score here is a hash.
+* **`w1c.25`** — fidelity-safe, **pathological on time**: 414 071 ms against 216 207 ms, ×0.52,
+  because `df-real` alone took 257 463 ms at an identical wire. Safe and unusable.
+* **chiron 0.1** — identical tokens, **slower**. A further cut that pays nothing.
+* **three per-lane budget predictors** — work-binding fraction, chiron-binding fraction, and
+  source size all fail to predict identity (§D5–D7 of `docs/codecs.md` §X93). There is **no cheap
+  sound proxy**, so the honest design is two constants, an inherited size gate, and per-lane
+  hash identity verified by re-running both configurations interleaved.
+
+### The methodology result worth more than the win
+
+Two harnesses with **identical logic** disagreed about the same lane at the same nominal setting
+(1042 against 1053). Two explanations were tested before either was believed.
+`bench/x91/order-probe.ts` shows that setting `OMEGA_*_BUDGET` to exactly the resolved base gives
+the **same tokens and the same message hash** as clearing it (1053 / `aee19714b3b6cfe2` both
+ways), and that encoding a decoy lane first changes nothing — so the override is faithful and
+there is no cross-lane state leak. The real cause was a **stale bundle**: `large-sweep.mjs` was
+built at **16:32:34** and `workmeter.ts` was last written at **16:33:48**. The two harnesses ran
+**different factors under identical labels**, and nothing in either receipt recorded which.
+
+Two guards follow, both now in code: every probe prints the **resolved budgets it actually ran
+at**, next to the label; and `decouple-sweep.ts` carries a **`controlMatchesCommitted`**
+assertion per lane, comparing the control against a committed receipt from a different harness in
+a different turn. **A harness that cannot reproduce the baseline it is comparing against has no
+standing to report a delta.** The instrument this repository still lacks, and should build next,
+is a **build stamp in every receipt**.
+
+The first diagnosis reached for was plausible, mechanistically specific, and **wrong**: that the
+new registry arm's `heuresisEncode` call was eating the shared work epoch and starving
+downstream arms. `tagstack.ts:15` settles it — of the shipped encoder, *"This is not a
+registry-wide tournament"* — so a registry arm cannot change either tier. It is recorded here
+because a wrong diagnosis that would have produced a confident fix is more dangerous than no
+diagnosis, and because the mechanism it invoked is real (HEURESIS at `tries=8` does regress
+`ls-full-iso` 373 → 374 by exactly that route).
+
+### Native decodability, cold-read by the model this turn
+
+The brief requires confirmation that a model can decode the wire with **no `skills.md`, no
+system-prompt input box, only a basic single chat input/output**. Run three times; receipt
+`bench/x91/receipts/coldread-model.log`, model outputs committed under
+`bench/x91/coldread-model/`. Method: show the model only `<lane>.prompt.txt` + `<lane>.wire.txt`
+(which together *are* the single chat input), have it expand the tape by hand to a fixed point,
+write the answer, and only then `diff` against a source it had not read.
+
+| lane | category | glyphs | ambiguous with Latin | result |
+|---|---|---|---|---|
+| `df-h.txt` | OPS TABLE | 31 | 10 (32 %) | **BYTE-IDENTICAL** |
+| `meeting-transcript.txt` | **PROSE** | 6 | **0** | **BYTE-IDENTICAL** |
+| `email-thread.txt` | **PROSE** | 43 | 15 (35 %) | **attempted, NOT completed** |
+
+The two successes needed real insight, not transcription: on `df-h` that **numbers can be rule
+targets** (`ч`="51" is row 2's Used *and* row 8's Use%; `т`="194" is row 14's Used *and* row
+16's Avail) and that the column padding is deliberately irregular (`у`="G"+3 spaces for rows
+1–6, `ы`="G"+2 spaces for rows 7–18, because Used/Avail go from two digits to three); on
+`meeting-transcript` that `天` folds **period + newline + timestamp opener**, so it applies only
+to lines ending in a period — exactly one line ends in `?` and uses a literal newline plus `在`.
+
+The failure's obstacle was **measured, not guessed**: the contract says *"New Cyrillic before ¶
+starts a rule"*, and 15 of that wire's 43 glyphs are Cyrillic **і у р с М х е Р Т о О Е ё а У**,
+each visually identical to a Latin letter that also occurs in the body — so rule-start vs
+literal text is **undecidable by shape** and must be recovered from context. Context sufficed at
+32 % and failed at 35 %. Three lanes establish no threshold; they do establish that a glyph pool
+sharing shapes with Latin makes the contract undecidable from the glyphs alone, which is why the
+shipped stack from X87 fingerprints its alphabet and carries a CRC-32 (ΑΙΘΗΡ, ΣΥΝΤΆΞΙΣ G9)
+instead of trusting a reader to notice a wrong character. **A cold read by the model that wrote
+the encoder is a proxy, not independent verification** — stronger than a TypeScript round trip,
+which cannot see a contract that under-describes the wire (X28 shipped that bug), but not
+review, and review is unavailable here.
+
+### Not claimed
+
+No token win, anywhere, on any lane, at any setting. **Compression is H−.** No model was
+queried, so L2 decodability is argued from hash identity with prior cold-read receipts rather
+than demonstrated. The ×1.14 and ×1.33 are from different processes and are not summed. **The acceptance probe
+measures the pre-chain tier**, so `apt-real`'s shipped 850 is verified by run H rather than by
+`decouple-sweep.ts`; the control column's 6/7 is the honest figure and the built-in assertion's
+7/7 was a tautology. Chiron
+between 0.1 and 0.25 and work between 0.25 and 0.5 are **untested gaps** and are not claimed
+safe. The work/chiron asymmetry is established on two lanes and is **not** generalised. The
+`euthynteria` registry arm emits its parent's wire and can therefore never win a selection — it
+exists so the resolved budgets appear in every receipt, and its cost is one duplicate HEURESIS
+encode on the registry path, which the shipped encoder does not take.
+
+**Record.** `src/lib/omega/euthynteria.ts` (new), `src/lib/omega/workmeter.ts` (two factors,
+in-situ correction comment), `src/lib/omega/registry.ts` (the arm);
+`bench/x91/{meter-isolate,decouple-sweep,control-audit,order-probe,gate-check,leaders-general,
+census,chiron-sweep,large-sweep}.ts`, `bench/x86/run-front-h.sh`; receipts in `bench/x91/receipts/`
+(`chiron-sweep21`, `large-sweep`, `meter-isolate`, `decouple-sweep`, `control-audit`,
+`order-probe`, `gate-check`, `leaders-general`), `bench/x86/receipts/frontier-runH.{json,log}`,
+`bench/x89/receipts/front3-runH.{json,log}`, `bench/x91/receipts/coldread-model.log` and the
+model's own outputs `bench/x91/coldread-model/{df-h,meeting-transcript}.model.txt`.
+[`docs/codecs.md`](codecs.md) §X93.
+
+## X94 — no new abbreviation
+
+**X94 adds nothing to this page's subject matter.** It introduces no glyph, no rule family, no
+contract wording, and no arm. `src/` is untouched; the only paths changed this turn are
+`.gitignore` and `bench/x94/`. It is recorded here because it corrects the formula every entry on
+this page was selected with, and because an entry that changes no abbreviation still has to state
+that plainly rather than be absent.
+
+The contract this page applies to each entry, applied to the probe instead:
+
+**Greedy or not.** Neither — the probe makes no selection. It prices **2 309 single local moves**
+(600 entry removals, 1 196 body additions, 513 tape-plus-body factorings) independently against the
+exact token count of the complete message, and reports each move's delta. A greedy pass over them
+would be a *different* experiment and is not claimed: the per-lane best deltas sum to −4, but
+moves interact (removing one entry changes what another rule is worth), so the sum is a lower bound
+on one greedy pass and not a result about any encoder.
+
+**Honest source citation.** The formula under test is this repository's own economic identity,
+`(k−1)(T−1)−1`, recorded in [`docs/codecs.md`](codecs.md); it is **not** from any external paper,
+and no external source is cited for it. External sources are cited only for the mechanism and the
+bounds — arXiv:2611.08671 for merge-point destruction and the 0.361 greedy-BPE bound,
+arXiv:1804.08547 for "introducing too many nonterminals causes the bit-size to grow",
+eti.uni-siegen.de for greedy's ≥1.348 approximation ratio, arXiv:2504.00178 for the ~20 % cost of
+the pre-tokenization barrier. None of those papers measured this repository's tape, and none is the
+source of any number in the receipt.
+
+**Time- or CPU-bound.** Time-bound and trivially so: the whole census over ten wires runs in about
+**9 s** wall in one process, with zero frontier calls, zero encodes and no model queries — it is
+`countTokensExact` over re-serialised strings. `FACTOR`'s candidate generation is the only part
+with a memory hazard: the first version's O(m²) containment filter died with *"Ineffective
+mark-compacts near heap limit"* at 1.9 GB, the failure this repository already records for n-gram
+retention. Sorting by count first and bounding the containment scan to the kept prefix fixed it.
+The probe also **executes on import** (no main guard), so importing it without arguments runs it
+empty and overwrites the receipt — which happened once, and produced a plausible all-zeros file.
+
+**What was measured.** Fidelity exact on all 2 309 moves; **9 of 10 wires reproduce their committed
+lane byte for byte** under the probe's own parser (`ls-l-real` quarantined — its contract carries a
+`~` infix rule the parser does not implement). Verified slack **4 tokens in 7 864 = 0.051 %**, as
+five moves worth exactly one token each: REMOVE `ҽ` (`apt-real`), `м` (`dpkg-l`), `А` (`ls-real`),
+`տ` (`ls-l-real`, proxy) and ADD `"Webpack"` (`llm-answer`, k=4, **T=1**).
+
+**What it changes for every other entry on this page.** The screening formula has **530 false
+positives, 0 true positives and 1 false negative** over 1 709 priced moves; its mean estimate is
++0.08 tokens against a mean measured profit of −8.31; and restricted to T≥2 its slope against the
+measurement is **negative** (−1.82), so the candidates it likes best are the ones it is most wrong
+about. The corrected law is `profit ≈ −0.981k − 3.11` for T=1 material (R²=0.869): **a new rule
+costs ~3.1 tokens fixed and each reference site ~1.0 token net**, because a new reference severs
+BPE merges that the literal text enjoyed on both sides. The 1-token-per-reference figure these
+pages have quoted is the **average** price of the references a shipped tape already contains, which
+cluster into runs; the **marginal** price of adding one is 1–2 tokens higher per site.
+
+**Why nothing new can be added.** 84.5 % of the remaining repeated material in ten shipped wires is
+1–2 tokens and 98.1 % is ≤3; break-even under the corrected law needs T≥9.51 at k=2, T≥5.30 at k=4,
+T≥3.90 at k=10; at T≥3 (265 moves) the best measured profit is **0**. The corrected screen prunes
+**100 % of the 1 709 candidates**. This page is complete on the dictionary side not by estimate but
+by census.
+
+**Not claimed.** Global optimality (these are single-move marginals, not a search over rule sets).
+Coverage of `ls-l-real`. FACTOR coverage of non-ASCII spans — 161 candidates were skipped by the
+purity filter, because the glyph pool is non-ASCII and a non-ASCII span cannot be distinguished
+from a rule. Any improvement to any wire: the four verified tokens were **deliberately not
+shipped**, since realising them would change three wires' SHA-256 and invalidate an 8×-confirmed
+gate total and a 2×-confirmed shipped total, costing both frontier passes (613 s + 1 106 s) plus
+fuzz, cold reads and the anamnesis suite to buy 0.051 %.
+
+[`docs/codecs.md`](codecs.md) §X94.

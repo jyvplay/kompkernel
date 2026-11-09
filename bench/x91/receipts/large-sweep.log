@@ -1,0 +1,29 @@
+  kb-article.txt default: 622 tok 4695ms exact=true
+  kb-article.txt w.5c.5: 622 tok 3434ms exact=true
+  kb-article.txt w1c4: 622 tok 3796ms exact=true
+kb-article.txt         ch=  3385 gated=true def=622/4694ms w.5c.5:622=/3434ms w1c4:622=/3796ms shaAll=true exactAll=true elapsed=12300ms
+  json-pkg.txt default: 681 tok 18753ms exact=true
+  json-pkg.txt w.5c.5: 681 tok 10936ms exact=true
+  json-pkg.txt w1c4: 681 tok 17348ms exact=true
+json-pkg.txt           ch=  3620 gated=true def=681/18753ms w.5c.5:681=/10936ms w1c4:681=/17348ms shaAll=true exactAll=true elapsed=59338ms
+  dpkg-l.txt default: 673 tok 25690ms exact=true
+  dpkg-l.txt w.5c.5: 673 tok 13955ms exact=true
+  dpkg-l.txt w1c4: 673 tok 24641ms exact=true
+dpkg-l.txt             ch=  4459 gated=true def=673/25690ms w.5c.5:673=/13955ms w1c4:673=/24641ms shaAll=true exactAll=true elapsed=123627ms
+  code-ts.txt default: 969 tok 37203ms exact=true
+  code-ts.txt w.5c.5: 969 tok 21122ms exact=true
+  code-ts.txt w1c4: 969 tok 32405ms exact=true
+code-ts.txt            ch=  6000 gated=true def=969/37203ms w.5c.5:969=/21122ms w1c4:969=/32405ms shaAll=true exactAll=true elapsed=214360ms
+  apt-real.txt default: 886 tok 139174ms exact=true
+  apt-real.txt w.5c.5: 886 tok 100531ms exact=true
+  apt-real.txt w1c4: 886 tok 135342ms exact=true
+apt-real.txt           ch=  6195 gated=true def=886/139174ms w.5c.5:886=/100531ms w1c4:886=/135342ms shaAll=true exactAll=true elapsed=589412ms
+  ps-aux-real.txt default: 1042 tok 70549ms exact=true
+  ps-aux-real.txt w.5c.5: 1053 tok 49891ms exact=true
+  ps-aux-real.txt w1c4: 1042 tok 61742ms exact=true
+ps-aux-real.txt        ch=  6590 gated=true def=1042/70549ms w.5c.5:1053!DIFF/49891ms w1c4:1042=/61742ms shaAll=false exactAll=true elapsed=771597ms
+  node-help.txt default: 862 tok 9928ms exact=true
+  node-help.txt w.5c.5: 862 tok 7919ms exact=true
+  node-help.txt w1c4: 862 tok 10052ms exact=true
+node-help.txt          ch=  6751 gated=true def=862/9927ms w.5c.5:862=/7919ms w1c4:862=/10052ms shaAll=true exactAll=true elapsed=799498ms
+  ls-l-real.txt default: 1476 tok 252866ms exact=true
