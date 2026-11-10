@@ -6067,3 +6067,55 @@ reader who could expand the X100 incumbent can expand the X101 wire by the same 
 not tested.** External support is unchanged: arXiv:2604.13066 (in-context dictionary learning, exact
 match > 0.99) and arXiv:2606.19857 (BabelTele, "Universality: any LLM should fully understand
 compressed output without a codebook").
+
+---
+
+## §X102 — ΔΙΑΓΡΑΦΗ and ΠΑΛΙΝΔΡΟΜΟΣ
+
+| # | Name | Literal | Mechanism | Greedy? | Source | Time- or CPU-bound | Δ tokens | Δ CPU |
+|---|---|---|---|---|---|---|---|---|
+| 45 | **ΔΙΑΓΡΑΦΗ** | "the deletion, the erasure" | Sweep the FINISHED wire for rules that no longer pay, writing each deleted rule's value back into every user and re-pricing the whole message | **Greedy, single sweep, last-to-first.** First strictly-improving deletion kept; repeats until a full pass deletes nothing. No claim about the joint optimum | arXiv:1704.05254 (Maneth, *Grammar-Based Graph Compression*): *"as we remove rules, the contribution of other nonterminals might change… the effectiveness of pruning depends on the order in which the nonterminals are considered"*; also *"every SLP can be easily made irreducible by a simple post-processing"* — and irreducibility is what the O(n/log n) bound assumes. The profit notion `p(A) = |cs\|_A(\|α\|−1) − \|α\|` is ΧΕΙΡΟΝ's own local bound | **Neither, measurably** | **−5 on 29/29 lanes, 3 improved, 0 worse** | **2.0 % faster = drift, reported as no measurable cost** |
+| 46 | **ΠΑΛΙΝΔΡΟΜΟΣ** | "running back, recurrence, a return" | Re-run the WHOLE wire-level codec sequence against the incumbent until no member improves; capped at 3 rounds | **Greedy descent over a fixed member list, to a fixed point.** Not a search over schedules — the member order is the chain's own order and no permutation is explored | The **phase-ordering problem**. UW PLSE (2025): with passes A and B, *"neither ordering of A and B correctly optimizes both P and Q"*. Scala-LMS: the remedy is to *"re-run the analyses on the transformed code until a fixpoint is reached"* | **CPU-bound and expensive** | **−9 on top of ΔΙΑΓΡΑΦΗ, 4 improved, 0 worse** | **+72.8 %** ⇒ **ships DISABLED, `OMEGA_PALINDROMOS=1` to opt in** |
+
+### The evidence
+
+| claim | receipt |
+|---|---|
+| ΔΙΑΓΡΑΦΗ 29-lane interleaved A/B: **12 410 → 12 405 = −5, 3 improved, 0 worse, byte-exact 29/29** | `bench/x102/receipts/diagraphe29.json` |
+| ΔΙΑΓΡΑΦΗ isolated CPU, alternating reps, medians: **75 429 ms vs 76 953 ms = 2.0 % faster**, byte-exact on every rep | `bench/x102/receipts/diacpu.json` |
+| ΠΑΛΙΝΔΡΟΜΟΣ 29-lane A/B on top of ΔΙΑΓΡΑΦΗ: **−9, 4 improved, 0 worse, byte-exact 29/29** | `bench/x102/receipts/palindromos29.json` |
+| ΠΑΛΙΝΔΡΟΜΟΣ per-member yield: **ΓΕΝΝΑΔΑΣ 3, ΔΙΑΓΡΑΦΗ 1, ΜΕΤΑΤΑΞΙΣ 1, ἸΣΟΜΟΡΦΪΑ 1, ΣΥΝΔΥΑΣΜΟΣ 0**; max 2 steps on any lane | `bench/x102/palmembers.ts` |
+| ΠΑΛΙΝΔΡΟΜΟΣ + ΔΙΑΓΡΑΦΗ isolated CPU: **109 959 ms vs 63 648 ms = +72.8 %** | `bench/x102/receipts/x102cpu.json` |
+| ADD census re-run on the final wire with **no model filter**: **270 prices, Δ = 0** | `bench/x102/receipts/epanalepsis.json` |
+| ADD census over **body and rule values**: **52 335 candidates, 283 prices, Δ = 0** | `bench/x102/receipts/epanalepsis2.json` |
+| Frontier gate, final defaults: **12 639, exact 29/29, 0 lanes differing** | `bench/x102/receipts/frontier-runX102b.json` |
+
+### A corrected instrument, kept rather than replaced
+
+`bench/x101/prosthese.ts` filtered its ADD candidates with `if (model >= 0) continue`, where `model` is
+the predicted **saving** — so it priced exactly the candidates the model expected to lose and skipped
+every one it expected to pay. Its Δ = 0 was therefore unsupported. `bench/x102/epanalepsis.ts` removes
+the filter and prices everything: **270 prices, Δ = 0 on all ten lanes.** The conclusion survives and
+is now supported; the defect is recorded here rather than silently dropped.
+
+### External results imported this turn, with their hypotheses
+
+| result | what it says | what it is used for |
+|---|---|---|
+| arXiv:1704.05254, Maneth, *Grammar-Based Graph Compression* | *"as we remove rules, the contribution of other nonterminals might change as edges are added or deleted. Therefore, the effectiveness of pruning depends on the order in which the nonterminals are considered"*, with the worked example that *"the B-rule turns into a contributing rule if the A-rule is removed first"*; and *"every SLP can be easily made irreducible by a simple post-processing"* | ΔΙΑΓΡΑΦΗ's mechanism, and the reason a single deletion pass is not enough |
+| ICALP 2016, *On the Complexity of Grammar-Based Compression over Fixed Alphabets* | rule profit `p(A) = \|cs\|_A(\|α\|−1) − \|α\|` — the same local bound ΧΕΙΡΟΝ uses, and the same reason a local bound is not a price | why ΔΙΑΓΡΑΦΗ prices the whole message instead |
+| Siyari et al., PMLR v57, *The Generalized Smallest Grammar Problem* | a post-processing pass over **any** SGP grammar: *"while the reduction in size is small, it applies consistently throughout all the SGP algorithms we tried. **The better the original algorithm, the smaller the gain**"* | an external prediction that matched ΔΙΑΓΡΑΦΗ's measured −5 |
+| UW PLSE (2025), *What is the phase ordering problem* | with passes A (interval-analysis peepholes) and B (conditional invariant code motion), *"neither ordering of A and B correctly optimizes both P and Q"* | why a fixed single pass is structurally insufficient |
+| Scala-LMS compiler tutorial | the remedy: *"re-run the analyses on the transformed code until a fixpoint is reached"* | ΠΑΛΙΝΔΡΟΜΟΣ's mechanism |
+| arXiv:2605.30914 (2026), *Automating Formal Verification with RL and Recursive Inference* | on VERINA, **OpenAI o3: 72.6 % code correctness, 52.3 % specification correctness, 4.9 % end-to-end proof success** | the quantitative cost of verifying the wrong object |
+| arXiv:2606.29493 (June 2026), *Faults in Our Formal Benchmarking* | first-class fault taxonomy: **Specification Error, Formalization Error, Domain Mismatch, Definition Mismatch**; frontier-model detection recall 0.48–0.57 | why a mis-pointed checker is the dominant failure mode, not a rounding error |
+| `alphaxiv.org/abs/2610.byte-pair-encoding-optimal-compression` (2026) | BPE worst-case compression utility ≤ **(1 − e⁻²)/2 ≈ 0.4323** of optimal, because *"a merge with the largest immediate payoff can destroy adjacent savings"* | why the 18.17 % readability price is consistent with the bound, not evidence of an unexploited mechanism |
+| arXiv:2608.03983 (SeGaBench 2026) | LLM-proposed optimisations are admissible only where *"their artifacts are validated and evaluated"* | ΤΥΠΟΣ's principle, carried forward |
+| Alive2 / translation validation (Lopes et al. 2021); ZipLex arXiv:2510.18479 §3.1 | *"A transformation from strings to semantic values is sufficient to construct tokens, but insufficient to print them back to the same strings"* | the general statement of the fidelity-gate defect |
+
+### Model-readability
+
+ΔΙΑΓΡΑΦΗ's output is an ordinary ΧΕΙΡΟΝ wire with fewer rules; ΠΑΛΙΝΔΡΟΜΟΣ's output is an ordinary
+ΧΕΙΡΟΝ wire produced by the same operators. **Neither adds an operator, a contract clause or a decode
+rule.** **Downgraded, not declared verified: no model API exists in this environment, so LLM
+decodability was not tested.**

@@ -1,0 +1,91 @@
+{
+ "note": "X102 EPANALEPSIS: re-run CHIRON ADD mining on the SHIPPED wire with NO model filter; whole-message priced, chironDecode-gated. Corrects the inverted filter in bench/x101/prosthese.ts",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "base": 838,
+   "after": 838,
+   "delta": 0,
+   "roundsApplied": 0,
+   "priced": 28
+  },
+  {
+   "lane": "code-ts",
+   "base": 968,
+   "after": 968,
+   "delta": 0,
+   "roundsApplied": 0,
+   "priced": 48
+  },
+  {
+   "lane": "dpkg-l",
+   "base": 669,
+   "after": 669,
+   "delta": 0,
+   "roundsApplied": 0,
+   "priced": 23
+  },
+  {
+   "lane": "findmnt",
+   "base": 440,
+   "after": 440,
+   "delta": 0,
+   "roundsApplied": 0,
+   "priced": 23
+  },
+  {
+   "lane": "json-pkg",
+   "base": 670,
+   "after": 670,
+   "delta": 0,
+   "roundsApplied": 0,
+   "priced": 20
+  },
+  {
+   "lane": "kb-article",
+   "base": 621,
+   "after": 621,
+   "delta": 0,
+   "roundsApplied": 0,
+   "priced": 13
+  },
+  {
+   "lane": "llm-answer",
+   "base": 671,
+   "after": 671,
+   "delta": 0,
+   "roundsApplied": 0,
+   "priced": 21
+  },
+  {
+   "lane": "ls-l-real",
+   "base": 1381,
+   "after": 1381,
+   "delta": 0,
+   "roundsApplied": 0,
+   "priced": 47
+  },
+  {
+   "lane": "ls-real",
+   "base": 432,
+   "after": 432,
+   "delta": 0,
+   "roundsApplied": 0,
+   "priced": 11
+  },
+  {
+   "lane": "ps-aux-real",
+   "base": 1043,
+   "after": 1043,
+   "delta": 0,
+   "roundsApplied": 0,
+   "priced": 36
+  }
+ ],
+ "totals": {
+  "base": 7733,
+  "after": 7733,
+  "delta": 0,
+  "priced": 270
+ }
+}

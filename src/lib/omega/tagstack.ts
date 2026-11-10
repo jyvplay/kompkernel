@@ -37,6 +37,8 @@ import { isomorphiaEncode, isomorphiaDisabled } from './isomorphia';
 import { metataxisEncode, metataxisDisabled } from './metataxis';
 import { syndyasmosDisabled, syndyasmosEncode } from './syndyasmos';
 import { gennadasDisabled, gennadasEncode } from './gennadas';
+import { diagrapheDisabled, diagrapheEncode } from './diagraphe';
+import { palindromosDisabled, palindromosEncode } from './palindromos';
 import { CHIRON_START, chironDecode } from './chiron';
 
 export type TagstackMode = 'xml' | 'html';
@@ -779,6 +781,35 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
   // improved (ls-l-real −26, apt-real −1, json-pkg −2), zero worse, zero inexact.
   if (!gennadasDisabled()) {
     try { admitParentRelative('ΓΕΝΝΑΔΑΣ', gennadasEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X102 — ΔΙΑΓΡΑΦΗ.  ΧΕΙΡΟΝ's own backward-deletion pass is gated on the SHARED
+  // work meter (`while (changed && !spent() && trials < 400)`), and that meter is
+  // 96 % exhausted on ls-l-real, 75 % on ps-aux-real and 73 % on code-ts
+  // (bench/x101/klimax29.json) — so ΧΕΙΡΟΝ's cleanup is cut short exactly where
+  // it has the most rules.  Nothing downstream sweeps after it either:
+  // ΜΕΤΑΤΑΞΙΣ, ΣΥΝΔΥΑΣΜΟΣ and ΓΕΝΝΑΔΑΣ all change the tape's price and none of
+  // them asks whether a rule that paid at ΧΕΙΡΟΝ time still pays now.  This is
+  // that sweep, on the finished wire, where it is not budget-gated.  It adds no
+  // operator, no contract clause and no decode rule.
+  if (!diagrapheDisabled()) {
+    try { admitParentRelative('ΔΙΑΓΡΑΦΗ', diagrapheEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X102 — ΠΑΛΙΝΔΡΟΜΟΣ.  Every wire-level codec above is called exactly once, in a
+  // fixed order, and each one's gate is "the whole message got strictly smaller".
+  // A gate like that is a DESCENT step, locally optimal only for the objective it
+  // was measured against: after ΜΕΤΑΤΑΞΙΣ relocates a rule the tape's price
+  // changes, so a re-spelling ΣΥΝΔΥΑΣΜΟΣ rejected a moment ago may now pay and a
+  // rule ΧΕΙΡΟΝ's deletion pass kept may now be dead.  Nothing in the stack ever
+  // goes back.  ΠΑΛΙΝΔΡΟΜΟΣ re-runs the whole sequence until no member improves.
+  // It introduces no move, no operator and no contract clause — its contribution
+  // is the schedule, and its gain is exactly the set of improvements invisible to
+  // any single pass.
+  //
+  // OPT-IN, and that is measured rather than cautious: -9 tokens for +72.8 %
+  // wall clock (bench/x102/receipts/palindromos29.json, x102cpu.json).  Set
+  // OMEGA_PALINDROMOS=1 to take the trade.
+  if (!palindromosDisabled()) {
+    try { admitParentRelative('ΠΑΛΙΝΔΡΟΜΟΣ', palindromosEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
   }
   return best;
 }
