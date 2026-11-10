@@ -1,0 +1,116 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real.wire.txt",
+   "committed": 850,
+   "synd": 832,
+   "committedDelta": 0,
+   "committedExact": true,
+   "committedApplied": 1,
+   "syndDelta": 0,
+   "syndExact": true,
+   "syndApplied": 1
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "committed": 969,
+   "synd": 958,
+   "committedDelta": 0,
+   "committedExact": true,
+   "committedApplied": 0,
+   "syndDelta": 0,
+   "syndExact": true,
+   "syndApplied": 0
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "committed": 673,
+   "synd": 669,
+   "committedDelta": 0,
+   "committedExact": true,
+   "committedApplied": 0,
+   "syndDelta": 0,
+   "syndExact": true,
+   "syndApplied": 0
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "committed": 444,
+   "synd": 440,
+   "committedDelta": 0,
+   "committedExact": true,
+   "committedApplied": 0,
+   "syndDelta": 0,
+   "syndExact": true,
+   "syndApplied": 0
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "committed": 681,
+   "synd": 670,
+   "committedDelta": 1,
+   "committedExact": true,
+   "committedApplied": 1,
+   "syndDelta": 1,
+   "syndExact": true,
+   "syndApplied": 1
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "committed": 622,
+   "synd": 621,
+   "committedDelta": 0,
+   "committedExact": true,
+   "committedApplied": 0,
+   "syndDelta": 0,
+   "syndExact": true,
+   "syndApplied": 0
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "committed": 674,
+   "synd": 672,
+   "committedDelta": 0,
+   "committedExact": true,
+   "committedApplied": 0,
+   "syndDelta": 0,
+   "syndExact": true,
+   "syndApplied": 0
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "committed": 1476,
+   "synd": 1476,
+   "committedDelta": 0,
+   "committedExact": false,
+   "committedApplied": 0,
+   "syndDelta": 0,
+   "syndExact": false,
+   "syndApplied": 0
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "committed": 433,
+   "synd": 432,
+   "committedDelta": 0,
+   "committedExact": true,
+   "committedApplied": 0,
+   "syndDelta": 0,
+   "syndExact": true,
+   "syndApplied": 0
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "committed": 1042,
+   "synd": 1030,
+   "committedDelta": 0,
+   "committedExact": true,
+   "committedApplied": 0,
+   "syndDelta": 0,
+   "syndExact": true,
+   "syndApplied": 0
+  }
+ ],
+ "gCommitted": 1,
+ "gSynd": 1
+}

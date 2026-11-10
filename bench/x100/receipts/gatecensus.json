@@ -1,0 +1,132 @@
+{
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "kb-article.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "uptime-w.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "free-m.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "vmstat.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "unified-diff.patch",
+   "status": "missing"
+  },
+  {
+   "lane": "df-h.txt",
+   "status": "identity",
+   "tok": 0
+  },
+  {
+   "lane": "df-real.txt",
+   "status": "identity",
+   "tok": 0
+  },
+  {
+   "lane": "du-real.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "node-help.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "findmnt.txt",
+   "status": "identity",
+   "tok": 0
+  },
+  {
+   "lane": "df-h.txt",
+   "status": "identity",
+   "tok": 0
+  },
+  {
+   "lane": "email-thread.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "llm-answer.md",
+   "status": "missing"
+  },
+  {
+   "lane": "markdown-table.md",
+   "status": "missing"
+  },
+  {
+   "lane": "psql-output.txt",
+   "status": "identity",
+   "tok": 0
+  },
+  {
+   "lane": "prices.csv",
+   "status": "missing"
+  },
+  {
+   "lane": "cue-sheet.md",
+   "status": "missing"
+  },
+  {
+   "lane": "ps-ef.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "ls-real.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "json-pkg.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "code-ts.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "status": "identity",
+   "tok": 0
+  },
+  {
+   "lane": "ps-real.txt",
+   "status": "identity",
+   "tok": 0
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "status": "identity",
+   "tok": 0
+  },
+  {
+   "lane": "metrics.tsv",
+   "status": "missing"
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "composed": true,
+   "srcBytes": 6590,
+   "decBytes": 3465
+  },
+  {
+   "lane": "apt-real.txt",
+   "status": "missing"
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "status": "identity",
+   "tok": 0
+  }
+ ],
+ "composed": 1
+}

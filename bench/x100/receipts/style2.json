@@ -1,0 +1,125 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real.wire.txt",
+   "bodyTokens": 631,
+   "refs": 135,
+   "bestN": 3,
+   "bestC": 2,
+   "gram": "тпт",
+   "saving": 3,
+   "costX": 9,
+   "costLists": 9,
+   "net": -15
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "bodyTokens": 709,
+   "refs": 150,
+   "bestN": 4,
+   "bestC": 2,
+   "gram": "ёўоф",
+   "saving": 4,
+   "costX": 11,
+   "costLists": 12,
+   "net": -19
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "bodyTokens": 534,
+   "refs": 85,
+   "bestN": 2,
+   "bestC": 6,
+   "gram": "іі",
+   "saving": 10,
+   "costX": 7,
+   "costLists": 6,
+   "net": -3
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "bodyTokens": 307,
+   "refs": 32,
+   "bestN": 2,
+   "bestC": 3,
+   "gram": "شش",
+   "saving": 4,
+   "costX": 7,
+   "costLists": 6,
+   "net": -9
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "bodyTokens": 523,
+   "refs": 132,
+   "bestN": 2,
+   "bestC": 7,
+   "gram": "сс",
+   "saving": 12,
+   "costX": 7,
+   "costLists": 6,
+   "net": -1
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "bodyTokens": 553,
+   "refs": 100,
+   "bestN": 2,
+   "bestC": 4,
+   "gram": "яс",
+   "saving": 6,
+   "costX": 7,
+   "costLists": 6,
+   "net": -7
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "bodyTokens": 573,
+   "refs": 80,
+   "bestN": 2,
+   "bestC": 3,
+   "gram": "иу",
+   "saving": 4,
+   "costX": 7,
+   "costLists": 6,
+   "net": -9
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "bodyTokens": 856,
+   "refs": 308,
+   "bestN": 2,
+   "bestC": 5,
+   "gram": "סय",
+   "saving": 8,
+   "costX": 7,
+   "costLists": 6,
+   "net": -5
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "bodyTokens": 261,
+   "refs": 70,
+   "bestN": 2,
+   "bestC": 5,
+   "gram": "лӷ",
+   "saving": 8,
+   "costX": 7,
+   "costLists": 6,
+   "net": -5
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "bodyTokens": 692,
+   "refs": 157,
+   "bestN": 2,
+   "bestC": 3,
+   "gram": "тж",
+   "saving": 4,
+   "costX": 7,
+   "costLists": 6,
+   "net": -9
+  }
+ ],
+ "pooledPositiveNet": 0
+}

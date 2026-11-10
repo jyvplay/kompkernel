@@ -1,0 +1,132 @@
+{
+ "note": "X100 GENNADAS end-to-end A/B on the real chain, interleaved in one process, OMEGA_DET=1 OMEGA_NO_MEMO=1",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "raw": 2739,
+   "armA": 837,
+   "armB": 837,
+   "delta": 0,
+   "exactA": true,
+   "exactB": true,
+   "msA": 65700,
+   "msB": 21812,
+   "notesB": "ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 2 re-spellings, 1390 priced, 839 -> 837; ΜΕΤΑΤΑΞΙΣ metataxis: 4167 probes, 10 relocations, 849 -> 839 (-10); ἸΣΟΜΟΡΦΊΑ ISOMORPHIA 853 -> 849 (-4) over 271 probes (reorder 3, reassign 1), 64 letters, script cyrillic, 134 distinct body runs; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "code-ts",
+   "raw": 1422,
+   "armA": 969,
+   "armB": 968,
+   "delta": -1,
+   "exactA": true,
+   "exactB": true,
+   "msA": 19792,
+   "msB": 7058,
+   "notesB": "ΓΕΝΝΑΔΑΣ gennadas: ref = source (6000 B); 8 enabling pairs, 1 priced improvements; M 969 -> 968; ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 3 rounds (1 skipped by early exit), 1 relocations, 1 re-spellings, 3422 priced, 971 -> 969; ΜΕΤΑΤΑΞΙΣ metataxis: 5850 probes, 6 relocations, 977 -> 971 (-6); ἸΣΟΜΟΡΦΊΑ ISOMORPHIA 981 -> 977 (-4) over 360 probes (reorder 3, reassign 1), 75 letters, script cyrillic, 124 distinct body runs; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "dpkg-l",
+   "raw": 1000,
+   "armA": 669,
+   "armB": 669,
+   "delta": 0,
+   "exactA": true,
+   "exactB": true,
+   "msA": 16609,
+   "msB": 1631,
+   "notesB": "ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 2 re-spellings, 6782 priced, 671 -> 669; ΜΕΤΑΤΑΞΙΣ metataxis: 1624 probes, 1 relocations, 672 -> 671 (-1); ἸΣΟΜΟΡΦΊΑ ISOMORPHIA 673 -> 672 (-1) over 269 probes (reorder 1, reassign 0), 48 letters, script cyrillic, 73 distinct body runs; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "findmnt",
+   "raw": 787,
+   "armA": 440,
+   "armB": 440,
+   "delta": 0,
+   "exactA": true,
+   "exactB": true,
+   "msA": 5697,
+   "msB": 847,
+   "notesB": "ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 2 re-spellings, 795 priced, 443 -> 440; ΜΕΤΑΤΑΞΙΣ metataxis: 694 probes, 1 relocations, 444 -> 443 (-1); outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "json-pkg",
+   "raw": 1152,
+   "armA": 672,
+   "armB": 670,
+   "delta": -2,
+   "exactA": true,
+   "exactB": true,
+   "msA": 14232,
+   "msB": 2437,
+   "notesB": "ΓΕΝΝΑΔΑΣ gennadas: ref = source (3620 B); 4 enabling pairs, 1 priced improvements; M 672 -> 670; ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 3 rounds (1 skipped by early exit), 1 relocations, 2 re-spellings, 495 priced, 675 -> 672; ΜΕΤΑΤΑΞΙΣ metataxis: 2297 probes, 5 relocations, 680 -> 675 (-5); ἸΣΟΜΟΡΦΊΑ ISOMORPHIA 681 -> 680 (-1) over 268 probes (reorder 1, reassign 0), 48 letters, script cyrillic, 77 distinct body runs; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "kb-article",
+   "raw": 656,
+   "armA": 621,
+   "armB": 621,
+   "delta": 0,
+   "exactA": true,
+   "exactB": true,
+   "msA": 2574,
+   "msB": 609,
+   "notesB": "ΜΕΤΑΤΑΞΙΣ metataxis: 560 probes, 1 relocations, 622 -> 621 (-1); outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "llm-answer",
+   "raw": 733,
+   "armA": 671,
+   "armB": 671,
+   "delta": 0,
+   "exactA": true,
+   "exactB": true,
+   "msA": 7209,
+   "msB": 1061,
+   "notesB": "ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 1 re-spellings, 668 priced, 672 -> 671; ἸΣΟΜΟΡΦΊΑ ISOMORPHIA 674 -> 672 (-2) over 320 probes (reorder 2, reassign 0), 34 letters, script cyrillic, 74 distinct body runs; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "ls-l-real",
+   "raw": 5194,
+   "armA": 1408,
+   "armB": 1381,
+   "delta": -27,
+   "exactA": true,
+   "exactB": true,
+   "msA": 299140,
+   "msB": 27532,
+   "notesB": "ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (10085 B); 3 enabling pairs, 1 priced improvements; M 1408 -> 1381; ΣΥΜΦΥΊΑ 1 templates over 52 fields (f11=tail<-f9); wire coded by synkrisis; PROSPHYSIS 52 rows rewritten, 763 chars entailed; wire coded by synkrisis; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "ls-real",
+   "raw": 1034,
+   "armA": 432,
+   "armB": 432,
+   "delta": 0,
+   "exactA": true,
+   "exactB": true,
+   "msA": 9857,
+   "msB": 681,
+   "notesB": "ΜΕΤΑΤΑΞΙΣ metataxis: 1692 probes, 1 relocations, 433 -> 432 (-1); outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "ps-aux-real",
+   "raw": 3054,
+   "armA": 1043,
+   "armB": 1043,
+   "delta": 0,
+   "exactA": true,
+   "exactB": true,
+   "msA": 29260,
+   "msB": 5061,
+   "notesB": "ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 2 re-spellings, 7413 priced, 1045 -> 1043; ΜΕΤΑΤΑΞΙΣ metataxis: 5522 probes, 8 relocations, 1053 -> 1045 (-8); ἸΣΟΜΟΡΦΊΑ ISOMORPHIA 1055 -> 1053 (-2) over 326 probes (reorder 0, reassign 2), 79 letters, script cyrillic, 123 distinct body runs; outside bounded, collision-free, well-nested markup domain"
+  }
+ ],
+ "totals": {
+  "armA": 7762,
+  "armB": 7732,
+  "delta": -30,
+  "msA": 470070,
+  "msB": 68729
+ }
+}
