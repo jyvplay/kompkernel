@@ -9124,13 +9124,13 @@ interface ἸΣΟΜΟΡΦΊΑ occupies. It is small, and §F measures exactly ho
     a *second*, older chain that was still running its own `front3` pass overwrote that file with a
     **24-row, 8 664-token partial**. The repair was a second `cp` from `front3-preX90.json`, verified
     three ways: `cmp` identical, `rows.length === 29`, and **`git diff` empty — i.e. byte-identical to
-    the committed receipt, not merely to the snapshot**. Two honest caveats. (a) `front3.ts` contains a
-    *single* end-of-run `writeFileSync` (line 45), so a run killed mid-flight should not have been able
-    to write a partial at all; the provenance of the 24-row file is therefore **not determined**, and
-    this entry records the observation and the repair rather than an explanation. (b) The lesson is
-    unaffected by which mechanism produced it: **`ps -p` every running chain before starting or killing
-    anything, and re-verify an authoritative receipt with `git diff` — not `cmp` against a snapshot —
-    after the run that clobbered it has exited.**
+    Mechanism, now determined rather than guessed: `bench/x89/front3.ts` calls
+    `fs.writeFileSync('bench/x89/receipts/front3.json', …)` **inside the per-lane loop** (line 45), so a
+    run killed at lane 24 of 29 leaves exactly a 24-row file — and it does so *after* the restore step
+    of the script that was killed, because that restore only runs on success. **`ps -p` every running
+    chain before starting or killing anything, and re-verify an authoritative receipt with `git diff`
+    (empty ⇒ byte-identical to the commit), not `cmp` against a snapshot, after the run that clobbered
+    it has exited.**
 19. **"A wall-clock gain below the noise floor."** Per-lane deltas on identical bytes range −8 % to
     +36 % on this box. Anything under ±25 % is reported as a CPU-time change or not at all.
 
@@ -9189,6 +9189,11 @@ all with zero frontier calls except `iso29`/`isoab`:**
 | `seeds.ts` | `seeds.json` | the modal shortcut's falsification: `min=med=max=0`, `improved=0/8` |
 | `joint.ts` | `joint.json` | joint order+assignment: **−9 median** (−11/−7), 9/9 verified |
 | `iso29.ts` | `iso29.json`, `iso29.log` | shipped chain + ἸΣΟΜΟΡΦΊΑ on 29 lanes |
+| `determinism.ts` | `determinism.log` | 4 in-process repeats, identical SHA-256 ⇒ the climb is deterministic |
+| `determinism.ts` under 6-way CPU load | `loadsens.log` | **883 vs 850 = +33 (+3.9 %)**, 2/2 identical ⇒ the *chain* is load-sensitive |
+| `readable.ts` | `readable.log` | contract/operators/tape before-and-after; `chironDecode` both ways |
+| `front3-400.ts` | `front3-400.{json,log}` | shipped tier re-measured at the final `ISOMORPHIA_ITERS = 400`: **12 478** |
+| `leaders.ts` | `leaders-x96.{json,log}` | generalized local leaders on the current stack, zero frontier calls |
 | `isoab.ts` | `isoab.json`, `isoab.log` | interleaved single-process A/B, 3 reps, median ms |
 
 ### G. SECOND-ORDER ADVERSARY
@@ -9332,6 +9337,105 @@ program.
 Five lanes in X90's 34-lane table have no RUN K row because they are not in the 29-lane frontier
 (`openstack-loghub-26.log`, `ls-la-usrbin.txt`, `npm-ls-all.txt`, `find-listing.txt`,
 `dpkg-l-full.txt`); they are reported as unmatched rather than silently dropped.
+
+### L. THE STACK IS NOT DETERMINISTIC UNDER `OMEGA_DET=1` — MEASURED, REPRODUCED, AND DECLINED AS A PATCH
+
+This is the finding of the turn that outranks the codec, and it was found by a control, not by a
+search.
+
+**The observation.** `bench/holdout-x41/apt-real.txt`, `OMEGA_DET=1`, memo off, same command, same
+input: **864 tokens** in the first `node` process after a 20-minute 100 %-CPU run, and **850** in
+every process since. Four in-process repeats with the memo off gave an **identical SHA-256 four
+times** (`bench/x96/receipts/determinism.log`), so the climb itself is deterministic. The variation
+is therefore not in the search — it is in *which arms run*.
+
+**A second, independent observation of the same anomaly.** `bench/x96/receipts/readable.log` encodes
+`apt-real.txt` with `OMEGA_DET=1 OMEGA_NO_MEMO=1` and no artificial load, and the incumbent arm
+returned **864** again — so 864 has now been seen in two separately-scheduled processes, both of which
+ran shortly after heavy CPU work, and never in a process that ran on a box that had been idle for a
+while. In that same run ἸΣΟΜΟΡΦΊΑ returned **861 (−3)** rather than 846 (−4), because the degraded
+incumbent is a different starting point for the reorder climb. **The load-sensitivity therefore
+propagates into the codec's own measured gain, not just into the baseline.**
+
+**The reproduction.** Six `node` busy-loops were started and the lane re-encoded under that load:
+
+```
+run 0: tokens=883 sha=cf9b44c3665845cb exact=true parent=synkrisis 308582ms
+run 1: tokens=883 sha=cf9b44c3665845cb exact=true parent=synkrisis  73697ms
+distinct messages over 2 runs: 1
+```
+
+**883 against 850 = +33 tokens, +3.9 % worse, deterministically worse under that load.** Receipt:
+`bench/x96/receipts/loadsens.log`. This is 2.5× the size of this turn's entire compression gain.
+
+**The mechanism.** `src/lib/omega/clock.ts` stubs `now()` to the constant 0 under `OMEGA_DET=1`, and
+its own comment claims the output "is then a pure function of the input and does not depend on
+machine load". **That claim is false for the chain.** 95 files read `Date.now()` directly, and six of
+them use it as a *budget gate* rather than as a reporting field: `akribeia.ts`, `hyle.ts`,
+`logistike.ts`, `palimpsest.ts`, `polytropos.ts`, `tachos.ts`. Four of the six are reachable from
+`tagstackEncode`:
+
+| codec | reached through | gate |
+|---|---|---|
+| `hyle.ts` | `brachys.ts`, `kanon.ts` | `:1465-1469` — `if (Date.now() < deadline) push('c'|'g'|'e'|'a'|'k', …)` |
+| `polytropos.ts` | `anastrophe.ts`, `kiones.ts`, `plinthos.ts` | `:326`, `:348`, `:367`, `:371`, `:374` |
+| `tachos.ts` | `heuresis.ts` | `:185`, `:193` |
+| `akribeia.ts` | `polytropos.ts` | `:202`, `:349`, `:380` |
+
+`hyle.ts:1465-1469` is the smoking gun: under load the later arms are **never pushed**, so they never
+run at all. `logistike.ts` and `palimpsest.ts` are reachable only through `registry.ts` and are not in
+the chain.
+
+**Why this is a defect and not a measurement nuisance.** Every number this repository reports — the
+12 639 gate, the 12 478 shipped tier, the X94 census, the X95 A/B, ἸΣΟΜΟΡΦΊΑ's −13 — is an
+**idle-box number**. A user on a loaded machine gets a different, worse wire from the same input.
+That is a fidelity-of-measurement defect, and it is invisible precisely because `OMEGA_DET=1` is
+documented as removing it.
+
+**Why the patch is declined this turn, with the numbers attached.** Routing those four files through
+`clock.now()` would be a four-line change and would make the measurement reproducible — but on an
+idle box it changes nothing, because the deadlines are already met when the machine is fast, which is
+why `883 → 850` only ever moved in one direction. The gain is **load-robustness**, a different lane,
+and buying it would invalidate RUN K's gate confirmation (12 639, "lanes differing: 0") and every
+cross-turn receipt that joins it, because `hyle` is reachable from `tagstackEncodeInner` and therefore
+from `tagstackFrontier` too. Re-establishing those confirmations costs two full 29-lane runs
+(~35 min measured) plus re-verification, against a gain of zero on the configuration actually being
+measured. **The rule "a measured gain smaller than the cost of re-establishing every confirmation it
+invalidates is declined with the numbers attached" applies exactly, and the patch is declined.**
+
+**What is claimed and what is not.** Claimed: the defect exists, its mechanism is named to the line,
+and it reproduces (+33 tokens, 2/2 identical). Not claimed: that it explains *every* historical
+discrepancy; that patching it is safe; that the idle-box numbers are wrong. **The honest qualifier on
+this turn's headline result is that 12 478 is an idle-box number and could be worse on a loaded
+machine — by an amount this receipt bounds at +3.9 % on the one lane measured.**
+
+### K½. MODEL-READABILITY OF ἸΣΟΜΟΡΦΊΑ'S OUTPUT (`bench/x96/receipts/readable.log`)
+
+The standing requirement is that the coded text be decodable by an LLM from a basic single chat
+input/output — no `skills.md`, no system-prompt box. ἸΣΟΜΟΡΦΊΑ permutes rules and relabels letters, so
+the question is whether the **wire language** is preserved, not merely whether the bytes decode. The
+receipt prints, for one lane, the contract, the first 300 characters of the tape before and after, and
+the decoded text:
+
+```
+contract (45 ch): "Before ¶ k=v. expand repeatedly; print only.\n"      <- IDENTICAL in both arms
+operators present: (none)   tape entries=366                            <- IDENTICAL in both arms
+
+INCUMBENT  tape[0..300]: ҩ [installed,local]\nт amd64ҩвтlibа1Катlibс/now я12р.о2е0л-щрелЫярощг14Цdebяuн+ЦёсЫг…
+ἸΣΟΜΟΡΦΊΑ tape[0..300]: ҩ [installed,local]\nт amd64ҩа1втlibКатlibс/now я12о2р.е0л-щрелЫярощг14цdebяuн+цёсЫг…
+
+decoded[0..300]: "# source: apt list --installed (real)\nListing...\nadduser/now 3.134 all …"
+chironDecode(wire) === source: true    (both arms)
+```
+
+Three things a reader can check directly from that receipt. **The contract is byte-identical**, so the
+decoder needs no new knowledge. **The operators are the same set** (here none; `×` and `…` are neither
+added nor removed), so no new syntax is introduced. **The rules are the same strings in a different
+order under different letters** — `втlibа1Катlibс/now` becomes `а1втlibКатlibс/now` — which is a
+re-ordering and re-labelling of an unchanged grammar, not a new one. Expansion is still "replace each
+key by its already-expanded value, left to right", and `chironDecode` recovers the source exactly in
+both arms. **ἸΣΟΜΟΡΦΊΑ therefore adds no decoding burden whatsoever: it is invisible to the reader
+except that the tape is easier to tokenise.**
 
 ### K. Record
 
