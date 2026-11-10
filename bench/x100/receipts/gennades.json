@@ -1,0 +1,116 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real.wire.txt",
+   "base": 850,
+   "ouraComposed": false,
+   "refBytes": 6195,
+   "meta": 835,
+   "metaDelta": -15,
+   "synd": 832,
+   "syndDelta": -18,
+   "syndExact": true
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "base": 969,
+   "ouraComposed": false,
+   "refBytes": 6000,
+   "meta": 960,
+   "metaDelta": -9,
+   "synd": 958,
+   "syndDelta": -11,
+   "syndExact": true
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "base": 673,
+   "ouraComposed": false,
+   "refBytes": 4459,
+   "meta": 671,
+   "metaDelta": -2,
+   "synd": 669,
+   "syndDelta": -4,
+   "syndExact": true
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "base": 444,
+   "ouraComposed": false,
+   "refBytes": 3215,
+   "meta": 443,
+   "metaDelta": -1,
+   "synd": 440,
+   "syndDelta": -4,
+   "syndExact": true
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "base": 681,
+   "ouraComposed": false,
+   "refBytes": 3620,
+   "meta": 674,
+   "metaDelta": -7,
+   "synd": 670,
+   "syndDelta": -11,
+   "syndExact": true
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "base": 622,
+   "ouraComposed": false,
+   "refBytes": 3385,
+   "meta": 621,
+   "metaDelta": -1,
+   "synd": 621,
+   "syndDelta": -1,
+   "syndExact": true
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "base": 674,
+   "ouraComposed": false,
+   "refBytes": 2542,
+   "meta": 672,
+   "metaDelta": -2,
+   "synd": 672,
+   "syndDelta": -2,
+   "syndExact": true
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "base": 1476,
+   "ouraComposed": true,
+   "refBytes": 10621,
+   "meta": 1456,
+   "metaDelta": -20,
+   "synd": 1450,
+   "syndDelta": -26,
+   "syndExact": true
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "base": 433,
+   "ouraComposed": false,
+   "refBytes": 2486,
+   "meta": 432,
+   "metaDelta": -1,
+   "synd": 432,
+   "syndDelta": -1,
+   "syndExact": true
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "base": 1042,
+   "ouraComposed": false,
+   "refBytes": 6590,
+   "meta": 1032,
+   "metaDelta": -10,
+   "synd": 1030,
+   "syndDelta": -12,
+   "syndExact": true
+  }
+ ],
+ "gM": -68,
+ "gS": -90
+}

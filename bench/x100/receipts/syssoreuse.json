@@ -1,0 +1,75 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real.wire.txt",
+   "base": 850,
+   "candidates": 1,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "base": 969,
+   "candidates": 0,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "base": 673,
+   "candidates": 2,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "base": 444,
+   "candidates": 1,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "base": 681,
+   "candidates": 0,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "base": 622,
+   "candidates": 1,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "base": 674,
+   "candidates": 4,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "base": 1476,
+   "candidates": 8,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "base": 433,
+   "candidates": 0,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "base": 1042,
+   "candidates": 3,
+   "bestDelta": 0,
+   "bestDesc": ""
+  }
+ ],
+ "pooled": 0
+}

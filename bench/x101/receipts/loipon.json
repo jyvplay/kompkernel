@@ -1,0 +1,103 @@
+{
+ "note": "X101 LOIPON: body reference/literal split on the final chain output, with the committed CHIRON-only wire as control",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "chainBodyTokens": 632,
+   "chainRef": 136,
+   "chainLit": 496,
+   "committedBodyTokens": 631,
+   "committedRef": 135,
+   "committedLit": 496
+  },
+  {
+   "lane": "code-ts",
+   "chainBodyTokens": 718,
+   "chainRef": 168,
+   "chainLit": 550,
+   "committedBodyTokens": 709,
+   "committedRef": 150,
+   "committedLit": 559
+  },
+  {
+   "lane": "dpkg-l",
+   "chainBodyTokens": 534,
+   "chainRef": 85,
+   "chainLit": 449,
+   "committedBodyTokens": 534,
+   "committedRef": 85,
+   "committedLit": 449
+  },
+  {
+   "lane": "findmnt",
+   "chainBodyTokens": 307,
+   "chainRef": 32,
+   "chainLit": 275,
+   "committedBodyTokens": 307,
+   "committedRef": 32,
+   "committedLit": 275
+  },
+  {
+   "lane": "json-pkg",
+   "chainBodyTokens": 523,
+   "chainRef": 132,
+   "chainLit": 391,
+   "committedBodyTokens": 523,
+   "committedRef": 132,
+   "committedLit": 391
+  },
+  {
+   "lane": "kb-article",
+   "chainBodyTokens": 553,
+   "chainRef": 100,
+   "chainLit": 453,
+   "committedBodyTokens": 553,
+   "committedRef": 100,
+   "committedLit": 453
+  },
+  {
+   "lane": "llm-answer",
+   "chainBodyTokens": 573,
+   "chainRef": 80,
+   "chainLit": 493,
+   "committedBodyTokens": 573,
+   "committedRef": 80,
+   "committedLit": 493
+  },
+  {
+   "lane": "ls-l-real",
+   "chainBodyTokens": 780,
+   "chainRef": 305,
+   "chainLit": 475,
+   "committedBodyTokens": 856,
+   "committedRef": 308,
+   "committedLit": 548
+  },
+  {
+   "lane": "ls-real",
+   "chainBodyTokens": 261,
+   "chainRef": 70,
+   "chainLit": 191,
+   "committedBodyTokens": 261,
+   "committedRef": 70,
+   "committedLit": 191
+  },
+  {
+   "lane": "ps-aux-real",
+   "chainBodyTokens": 701,
+   "chainRef": 175,
+   "chainLit": 526,
+   "committedBodyTokens": 692,
+   "committedRef": 157,
+   "committedLit": 535
+  }
+ ],
+ "totals": {
+  "chainTokens": 5582,
+  "chainRef": 1283,
+  "chainLit": 4299,
+  "committedTokens": 5639,
+  "committedRef": 1249,
+  "committedLit": 4390
+ }
+}

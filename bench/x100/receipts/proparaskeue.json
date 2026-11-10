@@ -1,0 +1,97 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real.wire.txt",
+   "rules": 64,
+   "population": 4,
+   "legal": 4,
+   "bestDelta": 1,
+   "synd": 832,
+   "t0": 850
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "rules": 75,
+   "population": 7,
+   "legal": 7,
+   "bestDelta": 1,
+   "synd": 958,
+   "t0": 969
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "rules": 48,
+   "population": 24,
+   "legal": 24,
+   "bestDelta": 1,
+   "synd": 669,
+   "t0": 673
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "rules": 34,
+   "population": 9,
+   "legal": 9,
+   "bestDelta": 1,
+   "synd": 440,
+   "t0": 444
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "rules": 48,
+   "population": 3,
+   "legal": 3,
+   "bestDelta": 2,
+   "synd": 670,
+   "t0": 681
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "rules": 27,
+   "population": 1,
+   "legal": 1,
+   "bestDelta": 0,
+   "synd": 621,
+   "t0": 622
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "rules": 34,
+   "population": 3,
+   "legal": 3,
+   "bestDelta": 1,
+   "synd": 672,
+   "t0": 674
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "rules": 143,
+   "population": 6,
+   "legal": 6,
+   "bestDelta": 1,
+   "synd": 1476,
+   "t0": 1476
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "rules": 48,
+   "population": 5,
+   "legal": 5,
+   "bestDelta": 4,
+   "synd": 432,
+   "t0": 433
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "rules": 79,
+   "population": 2,
+   "legal": 2,
+   "bestDelta": 3,
+   "synd": 1030,
+   "t0": 1042
+  }
+ ],
+ "gPop": 64,
+ "gLegal": 64,
+ "gGain": 15
+}

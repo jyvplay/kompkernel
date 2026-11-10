@@ -1,0 +1,187 @@
+{
+ "iters": 3000,
+ "rows": [
+  {
+   "lane": "apt-real.wire.txt",
+   "t0": 850,
+   "syndTokens": 832,
+   "syndDelta": -18,
+   "swapOnCommitted": {
+    "tokens": 850,
+    "swaps": 0,
+    "probes": 2961
+   },
+   "swapOnSynd": {
+    "tokens": 831,
+    "swaps": 1,
+    "probes": 2961
+   },
+   "bestCommitted": 850,
+   "bestSynd": 831
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "t0": 969,
+   "syndTokens": 958,
+   "syndDelta": -11,
+   "swapOnCommitted": {
+    "tokens": 969,
+    "swaps": 0,
+    "probes": 2958
+   },
+   "swapOnSynd": {
+    "tokens": 958,
+    "swaps": 0,
+    "probes": 2958
+   },
+   "bestCommitted": 969,
+   "bestSynd": 958
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "t0": 673,
+   "syndTokens": 669,
+   "syndDelta": -4,
+   "swapOnCommitted": {
+    "tokens": 673,
+    "swaps": 0,
+    "probes": 2942
+   },
+   "swapOnSynd": {
+    "tokens": 669,
+    "swaps": 0,
+    "probes": 2942
+   },
+   "bestCommitted": 673,
+   "bestSynd": 669
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "t0": 444,
+   "syndTokens": 440,
+   "syndDelta": -4,
+   "swapOnCommitted": {
+    "tokens": 444,
+    "swaps": 0,
+    "probes": 2914
+   },
+   "swapOnSynd": {
+    "tokens": 440,
+    "swaps": 0,
+    "probes": 2914
+   },
+   "bestCommitted": 444,
+   "bestSynd": 440
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "t0": 681,
+   "syndTokens": 670,
+   "syndDelta": -11,
+   "swapOnCommitted": {
+    "tokens": 681,
+    "swaps": 0,
+    "probes": 2942
+   },
+   "swapOnSynd": {
+    "tokens": 669,
+    "swaps": 1,
+    "probes": 2942
+   },
+   "bestCommitted": 681,
+   "bestSynd": 669
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "t0": 622,
+   "syndTokens": 621,
+   "syndDelta": -1,
+   "swapOnCommitted": {
+    "tokens": 622,
+    "swaps": 0,
+    "probes": 2886
+   },
+   "swapOnSynd": {
+    "tokens": 621,
+    "swaps": 0,
+    "probes": 2886
+   },
+   "bestCommitted": 622,
+   "bestSynd": 621
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "t0": 674,
+   "syndTokens": 672,
+   "syndDelta": -2,
+   "swapOnCommitted": {
+    "tokens": 674,
+    "swaps": 0,
+    "probes": 2914
+   },
+   "swapOnSynd": {
+    "tokens": 672,
+    "swaps": 0,
+    "probes": 2914
+   },
+   "bestCommitted": 674,
+   "bestSynd": 672
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "t0": 1476,
+   "syndTokens": 1476,
+   "syndDelta": 0,
+   "swapOnCommitted": {
+    "tokens": 1476,
+    "swaps": 0,
+    "probes": 2985
+   },
+   "swapOnSynd": {
+    "tokens": 1476,
+    "swaps": 0,
+    "probes": 2985
+   },
+   "bestCommitted": 1476,
+   "bestSynd": 1476
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "t0": 433,
+   "syndTokens": 432,
+   "syndDelta": -1,
+   "swapOnCommitted": {
+    "tokens": 433,
+    "swaps": 0,
+    "probes": 2942
+   },
+   "swapOnSynd": {
+    "tokens": 432,
+    "swaps": 0,
+    "probes": 2942
+   },
+   "bestCommitted": 433,
+   "bestSynd": 432
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "t0": 1042,
+   "syndTokens": 1030,
+   "syndDelta": -12,
+   "swapOnCommitted": {
+    "tokens": 1042,
+    "swaps": 0,
+    "probes": 2965
+   },
+   "swapOnSynd": {
+    "tokens": 1030,
+    "swaps": 0,
+    "probes": 2965
+   },
+   "bestCommitted": 1042,
+   "bestSynd": 1030
+  }
+ ],
+ "gA": 0,
+ "gB": -2
+}

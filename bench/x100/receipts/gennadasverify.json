@@ -1,0 +1,140 @@
+{
+ "note": "X100 GENNADAS fidelity verified by DECODING both arms with tagstackDecode, not by the exact flag",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "armA": 837,
+   "armB": 837,
+   "delta": 0,
+   "aDecodable": true,
+   "aExact": false,
+   "bDecodable": true,
+   "bExact": false,
+   "aBytes": 2661,
+   "bBytes": 2661,
+   "srcBytes": 6195
+  },
+  {
+   "lane": "code-ts",
+   "armA": 969,
+   "armB": 968,
+   "delta": -1,
+   "aDecodable": true,
+   "aExact": false,
+   "bDecodable": true,
+   "bExact": false,
+   "aBytes": 3935,
+   "bBytes": 3926,
+   "srcBytes": 6000
+  },
+  {
+   "lane": "dpkg-l",
+   "armA": 669,
+   "armB": 669,
+   "delta": 0,
+   "aDecodable": true,
+   "aExact": false,
+   "bDecodable": true,
+   "bExact": false,
+   "aBytes": 3079,
+   "bBytes": 3079,
+   "srcBytes": 4459
+  },
+  {
+   "lane": "findmnt",
+   "armA": 440,
+   "armB": 440,
+   "delta": 0,
+   "aDecodable": true,
+   "aExact": false,
+   "bDecodable": true,
+   "bExact": false,
+   "aBytes": 2333,
+   "bBytes": 2333,
+   "srcBytes": 3215
+  },
+  {
+   "lane": "json-pkg",
+   "armA": 672,
+   "armB": 670,
+   "delta": -2,
+   "aDecodable": true,
+   "aExact": false,
+   "bDecodable": true,
+   "bExact": false,
+   "aBytes": 2345,
+   "bBytes": 2342,
+   "srcBytes": 3620
+  },
+  {
+   "lane": "kb-article",
+   "armA": 621,
+   "armB": 621,
+   "delta": 0,
+   "aDecodable": true,
+   "aExact": false,
+   "bDecodable": true,
+   "bExact": false,
+   "aBytes": 3102,
+   "bBytes": 3102,
+   "srcBytes": 3385
+  },
+  {
+   "lane": "llm-answer",
+   "armA": 671,
+   "armB": 671,
+   "delta": 0,
+   "aDecodable": true,
+   "aExact": false,
+   "bDecodable": true,
+   "bExact": false,
+   "aBytes": 2628,
+   "bBytes": 2628,
+   "srcBytes": 2542
+  },
+  {
+   "lane": "ls-l-real",
+   "armA": 1408,
+   "armB": 1381,
+   "delta": -27,
+   "aDecodable": false,
+   "aExact": false,
+   "bDecodable": false,
+   "bExact": false,
+   "aBytes": null,
+   "bBytes": null,
+   "srcBytes": 10692
+  },
+  {
+   "lane": "ls-real",
+   "armA": 432,
+   "armB": 432,
+   "delta": 0,
+   "aDecodable": true,
+   "aExact": false,
+   "bDecodable": true,
+   "bExact": false,
+   "aBytes": 1337,
+   "bBytes": 1337,
+   "srcBytes": 2486
+  },
+  {
+   "lane": "ps-aux-real",
+   "armA": 1043,
+   "armB": 1043,
+   "delta": 0,
+   "aDecodable": true,
+   "aExact": false,
+   "bDecodable": true,
+   "bExact": false,
+   "aBytes": 3043,
+   "bBytes": 3043,
+   "srcBytes": 6590
+  }
+ ],
+ "totals": {
+  "decodable": 9,
+  "armAExact": 0,
+  "armBExact": 0
+ }
+}

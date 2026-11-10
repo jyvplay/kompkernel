@@ -1,0 +1,13 @@
+apt-real           tot=  837  contract= 11 tape= 194 (23%) body= 632 (76%)  bodyTok= 632 ref= 136 lit= 496  top=[["g",11],["utils",7],["8",6],["f",6],["7",5]]
+code-ts            tot=  968  contract= 11 tape= 239 (25%) body= 718 (74%)  bodyTok= 718 ref= 168 lit= 550  top=[[" for",8],["Part",7],["Class",7],[" ===",7],[" process",7]]
+dpkg-l             tot=  669  contract= 11 tape= 124 (19%) body= 534 (80%)  bodyTok= 534 ref=  85 lit= 449  top=[["/",9],[":",7],[" (",5],[")\n",5],[" ы",5]]
+findmnt            tot=  440  contract= 11 tape= 122 (28%) body= 307 (70%)  bodyTok= 307 ref=  32 lit= 275  top=[["=",10],["/",6],["           ",5],[" dev",4],["2",4]]
+json-pkg           tot=  670  contract= 11 tape= 136 (20%) body= 523 (78%)  bodyTok= 523 ref= 132 lit= 391  top=[["\":",6],["-",4],["ра",4],["Script",3],["compiler",3]]
+kb-article         tot=  621  contract= 11 tape=  57 (9%) body= 553 (89%)  bodyTok= 553 ref= 100 lit= 453  top=[[" an",6],[" how",5],[".\n\n",5],[" of",4],[" up",4]]
+llm-answer         tot=  671  contract= 11 tape=  87 (13%) body= 573 (85%)  bodyTok= 573 ref=  80 lit= 493  top=[["`",12],[",",7],["\n\n",6],[" from",4],[".js",4]]
+ls-l-real          tot= 1381  contract= 38 tape= 563 (41%) body= 780 (56%)  bodyTok= 780 ref= 305 lit= 475  top=[["0",6],[".a",6],[" ",5],["-",5],["00",5]]
+ls-real            tot=  432  contract= 11 tape= 160 (37%) body= 261 (60%)  bodyTok= 261 ref=  70 lit= 191  top=[["/bin",3],["pack",3],[".js",3],["47",3],["/npm",3]]
+ps-aux-real        tot= 1043  contract= 11 tape= 331 (32%) body= 701 (67%)  bodyTok= 701 ref= 175 lit= 526  top=[[" -",10],["ши",10],["ги",6],["9",5],[" /",5]]
+
+MERIDES over the ten lanes: contract=137 tape=2013 (26.0%) body=5582 (72.2%)  sum=7732
+  body literals=4299 (55.6% of the message), body references=1283

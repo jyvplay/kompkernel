@@ -1,0 +1,309 @@
+{
+ "note": "X101 leaders: raw/floor imported from X90, shipped measured in this process, zero frontier calls",
+ "groups": [
+  {
+   "category": "OPS TABLE",
+   "lanes": 11,
+   "raw": 4135,
+   "shipped": 1712,
+   "floor": 1272,
+   "ratio": 0.4140266021765417,
+   "headroom": 0.15368494586098497,
+   "readabilityPrice": 0.2570093457943925,
+   "leader": {
+    "lane": "kubectl-get-pods.txt",
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "raw": 1006,
+    "shipped": 322,
+    "floor": 214
+   },
+   "rows": [
+    {
+     "lane": "kubectl-get-pods.txt",
+     "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+     "raw": 1006,
+     "shipped": 322,
+     "floor": 214
+    },
+    {
+     "lane": "metrics.tsv",
+     "path": "bench/holdout-x40/metrics.tsv",
+     "raw": 811,
+     "shipped": 208,
+     "floor": 130
+    },
+    {
+     "lane": "psql-output.txt",
+     "path": "bench/holdout-tbl/psql-output.txt",
+     "raw": 675,
+     "shipped": 242,
+     "floor": 166
+    },
+    {
+     "lane": "df-h.txt",
+     "path": "bench/holdout-tbl/df-h.txt",
+     "raw": 570,
+     "shipped": 170,
+     "floor": 129
+    },
+    {
+     "lane": "markdown-table.md",
+     "path": "bench/holdout-tbl/markdown-table.md",
+     "raw": 330,
+     "shipped": 174,
+     "floor": 133
+    },
+    {
+     "lane": "vmstat.txt",
+     "path": "bench/holdout-x42b/vmstat.txt",
+     "raw": 229,
+     "shipped": 148,
+     "floor": 113
+    },
+    {
+     "lane": "df-real.txt",
+     "path": "bench/holdout-x41/df-real.txt",
+     "raw": 158,
+     "shipped": 125,
+     "floor": 96
+    },
+    {
+     "lane": "df-h.txt",
+     "path": "bench/holdout-x42/df-h.txt",
+     "raw": 140,
+     "shipped": 107,
+     "floor": 84
+    },
+    {
+     "lane": "uptime-w.txt",
+     "path": "bench/holdout-x42b/uptime-w.txt",
+     "raw": 80,
+     "shipped": 80,
+     "floor": 70
+    },
+    {
+     "lane": "free-m.txt",
+     "path": "bench/holdout-x42b/free-m.txt",
+     "raw": 76,
+     "shipped": 76,
+     "floor": 76
+    },
+    {
+     "lane": "lsblk.txt",
+     "path": "bench/holdout-x42/lsblk.txt",
+     "raw": 60,
+     "shipped": 60,
+     "floor": 61
+    }
+   ]
+  },
+  {
+   "category": "OPS LISTING",
+   "lanes": 9,
+   "raw": 16516,
+   "shipped": 5776,
+   "floor": 4420,
+   "ratio": 0.34972148219907967,
+   "headroom": 0.11210317460317461,
+   "readabilityPrice": 0.2347645429362881,
+   "leader": {
+    "lane": "ls-l-real.txt",
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "raw": 5194,
+    "shipped": 1381,
+    "floor": 943
+   },
+   "rows": [
+    {
+     "lane": "ls-l-real.txt",
+     "path": "bench/holdout-x41/ls-l-real.txt",
+     "raw": 5194,
+     "shipped": 1381,
+     "floor": 943
+    },
+    {
+     "lane": "ps-aux-real.txt",
+     "path": "bench/holdout-x41/ps-aux-real.txt",
+     "raw": 3054,
+     "shipped": 1041,
+     "floor": 743
+    },
+    {
+     "lane": "apt-real.txt",
+     "path": "bench/holdout-x41/apt-real.txt",
+     "raw": 2739,
+     "shipped": 844,
+     "floor": 690
+    },
+    {
+     "lane": "ps-ef.txt",
+     "path": "bench/holdout-x42/ps-ef.txt",
+     "raw": 1144,
+     "shipped": 309,
+     "floor": 250
+    },
+    {
+     "lane": "ps-real.txt",
+     "path": "bench/holdout-x41/ps-real.txt",
+     "raw": 1106,
+     "shipped": 391,
+     "floor": 320
+    },
+    {
+     "lane": "ls-real.txt",
+     "path": "bench/holdout-x41/ls-real.txt",
+     "raw": 1034,
+     "shipped": 432,
+     "floor": 328
+    },
+    {
+     "lane": "dpkg-l.txt",
+     "path": "bench/holdout-x42/dpkg-l.txt",
+     "raw": 1000,
+     "shipped": 669,
+     "floor": 592
+    },
+    {
+     "lane": "findmnt.txt",
+     "path": "bench/holdout-x42/findmnt.txt",
+     "raw": 787,
+     "shipped": 440,
+     "floor": 335
+    },
+    {
+     "lane": "du-real.txt",
+     "path": "bench/holdout-x41/du-real.txt",
+     "raw": 458,
+     "shipped": 269,
+     "floor": 219
+    }
+   ]
+  },
+  {
+   "category": "CODE / MARKUP",
+   "lanes": 3,
+   "raw": 3152,
+   "shipped": 2053,
+   "floor": 1728,
+   "ratio": 0.6513324873096447,
+   "headroom": 0.22823033707865167,
+   "readabilityPrice": 0.15830491962981003,
+   "leader": {
+    "lane": "code-ts.txt",
+    "path": "bench/holdout/code-ts.txt",
+    "raw": 1422,
+    "shipped": 968,
+    "floor": 812
+   },
+   "rows": [
+    {
+     "lane": "code-ts.txt",
+     "path": "bench/holdout/code-ts.txt",
+     "raw": 1422,
+     "shipped": 968,
+     "floor": 812
+    },
+    {
+     "lane": "json-pkg.txt",
+     "path": "bench/holdout/json-pkg.txt",
+     "raw": 1152,
+     "shipped": 670,
+     "floor": 592
+    },
+    {
+     "lane": "unified-diff.patch",
+     "path": "bench/holdout-work/unified-diff.patch",
+     "raw": 578,
+     "shipped": 415,
+     "floor": 324
+    }
+   ]
+  },
+  {
+   "category": "DATA",
+   "lanes": 2,
+   "raw": 1095,
+   "shipped": 234,
+   "floor": 209,
+   "ratio": 0.2136986301369863,
+   "headroom": 0.028216704288939052,
+   "readabilityPrice": 0.10683760683760683,
+   "leader": {
+    "lane": "prices.csv",
+    "path": "bench/holdout-x40/prices.csv",
+    "raw": 582,
+    "shipped": 133,
+    "floor": 110
+   },
+   "rows": [
+    {
+     "lane": "prices.csv",
+     "path": "bench/holdout-x40/prices.csv",
+     "raw": 582,
+     "shipped": 133,
+     "floor": 110
+    },
+    {
+     "lane": "cue-sheet.md",
+     "path": "bench/holdout-x40/cue-sheet.md",
+     "raw": 513,
+     "shipped": 101,
+     "floor": 99
+    }
+   ]
+  },
+  {
+   "category": "PROSE",
+   "lanes": 4,
+   "raw": 3117,
+   "shipped": 2639,
+   "floor": 2529,
+   "ratio": 0.8466474173885146,
+   "headroom": 0.1870748299319728,
+   "readabilityPrice": 0.041682455475558926,
+   "leader": {
+    "lane": "node-help.txt",
+    "path": "bench/holdout-x41/node-help.txt",
+    "raw": 1099,
+    "shipped": 860,
+    "floor": 852
+   },
+   "rows": [
+    {
+     "lane": "node-help.txt",
+     "path": "bench/holdout-x41/node-help.txt",
+     "raw": 1099,
+     "shipped": 860,
+     "floor": 852
+    },
+    {
+     "lane": "llm-answer.md",
+     "path": "bench/holdout-work/llm-answer.md",
+     "raw": 733,
+     "shipped": 671,
+     "floor": 626
+    },
+    {
+     "lane": "kb-article.txt",
+     "path": "bench/holdout-work/kb-article.txt",
+     "raw": 656,
+     "shipped": 621,
+     "floor": 608
+    },
+    {
+     "lane": "email-thread.txt",
+     "path": "bench/holdout-work/email-thread.txt",
+     "raw": 629,
+     "shipped": 487,
+     "floor": 443
+    }
+   ]
+  }
+ ],
+ "totals": {
+  "lanes": 29,
+  "raw": 28015,
+  "shipped": 12414,
+  "floor": 10158
+ }
+}

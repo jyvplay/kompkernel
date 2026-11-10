@@ -1,0 +1,106 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real.wire.txt",
+   "base": 850,
+   "shippedTail": 837,
+   "gennadas": 836,
+   "delta": -1,
+   "applied": true,
+   "exact": true,
+   "notes": "gennadas: ref = source (6195 B); 8 enabling pairs, 1 priced improvements; M 837 -> 836"
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "base": 969,
+   "shippedTail": 958,
+   "gennadas": 958,
+   "delta": 0,
+   "applied": false,
+   "exact": true,
+   "notes": "gennadas: ref = source (6000 B), 0 enabling pairs, 0 priced improvements — no gain"
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "base": 673,
+   "shippedTail": 669,
+   "gennadas": 669,
+   "delta": 0,
+   "applied": false,
+   "exact": true,
+   "notes": "gennadas: ref = source (4459 B), 0 enabling pairs, 0 priced improvements — no gain"
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "base": 444,
+   "shippedTail": 440,
+   "gennadas": 440,
+   "delta": 0,
+   "applied": false,
+   "exact": true,
+   "notes": "gennadas: ref = source (3215 B), 0 enabling pairs, 0 priced improvements — no gain"
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "base": 681,
+   "shippedTail": 672,
+   "gennadas": 670,
+   "delta": -2,
+   "applied": true,
+   "exact": true,
+   "notes": "gennadas: ref = source (3620 B); 4 enabling pairs, 1 priced improvements; M 672 -> 670"
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "base": 622,
+   "shippedTail": 621,
+   "gennadas": 621,
+   "delta": 0,
+   "applied": false,
+   "exact": true,
+   "notes": "gennadas: ref = source (3385 B), 0 enabling pairs, 0 priced improvements — no gain"
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "base": 674,
+   "shippedTail": 671,
+   "gennadas": 671,
+   "delta": 0,
+   "applied": false,
+   "exact": true,
+   "notes": "gennadas: ref = source (2542 B), 0 enabling pairs, 0 priced improvements — no gain"
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "base": 1476,
+   "shippedTail": 1476,
+   "gennadas": 1450,
+   "delta": -26,
+   "applied": true,
+   "exact": true,
+   "notes": "gennadas: ref = parent output (10621 B); 0 enabling pairs, 0 priced improvements; M 1476 -> 1450"
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "base": 433,
+   "shippedTail": 432,
+   "gennadas": 432,
+   "delta": 0,
+   "applied": false,
+   "exact": true,
+   "notes": "gennadas: ref = source (2486 B), 0 enabling pairs, 0 priced improvements — no gain"
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "base": 1042,
+   "shippedTail": 1030,
+   "gennadas": 1030,
+   "delta": 0,
+   "applied": false,
+   "exact": true,
+   "notes": "gennadas: ref = source (6590 B), 0 enabling pairs, 0 priced improvements — no gain"
+  }
+ ],
+ "gPre": -58,
+ "gPost": -87
+}

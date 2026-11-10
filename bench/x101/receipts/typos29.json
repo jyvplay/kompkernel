@@ -1,0 +1,277 @@
+{
+ "note": "X101 TYPOS: price macro candidates on the emitted wire (renderWire) vs the creation-order proxy (provisionalWire); CHIRON only, 29 lanes, 3 reps interleaved",
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "armA": 60,
+   "armB": 60,
+   "delta": 0,
+   "armAms": 5,
+   "armBms": 4,
+   "exact": true
+  },
+  {
+   "lane": "kb-article.txt",
+   "armA": 656,
+   "armB": 656,
+   "delta": 0,
+   "armAms": 65,
+   "armBms": 64,
+   "exact": true
+  },
+  {
+   "lane": "uptime-w.txt",
+   "armA": 80,
+   "armB": 80,
+   "delta": 0,
+   "armAms": 5,
+   "armBms": 4,
+   "exact": true
+  },
+  {
+   "lane": "free-m.txt",
+   "armA": 76,
+   "armB": 76,
+   "delta": 0,
+   "armAms": 8,
+   "armBms": 8,
+   "exact": true
+  },
+  {
+   "lane": "vmstat.txt",
+   "armA": 189,
+   "armB": 189,
+   "delta": 0,
+   "armAms": 11,
+   "armBms": 9,
+   "exact": true
+  },
+  {
+   "lane": "unified-diff.patch",
+   "armA": 479,
+   "armB": 479,
+   "delta": 0,
+   "armAms": 56,
+   "armBms": 56,
+   "exact": true
+  },
+  {
+   "lane": "df-h.txt",
+   "armA": 308,
+   "armB": 308,
+   "delta": 0,
+   "armAms": 15,
+   "armBms": 14,
+   "exact": true
+  },
+  {
+   "lane": "df-real.txt",
+   "armA": 158,
+   "armB": 158,
+   "delta": 0,
+   "armAms": 14,
+   "armBms": 12,
+   "exact": true
+  },
+  {
+   "lane": "du-real.txt",
+   "armA": 346,
+   "armB": 346,
+   "delta": 0,
+   "armAms": 22,
+   "armBms": 18,
+   "exact": true
+  },
+  {
+   "lane": "node-help.txt",
+   "armA": 934,
+   "armB": 934,
+   "delta": 0,
+   "armAms": 197,
+   "armBms": 210,
+   "exact": true
+  },
+  {
+   "lane": "findmnt.txt",
+   "armA": 518,
+   "armB": 518,
+   "delta": 0,
+   "armAms": 198,
+   "armBms": 200,
+   "exact": true
+  },
+  {
+   "lane": "df-h.txt",
+   "armA": 140,
+   "armB": 140,
+   "delta": 0,
+   "armAms": 11,
+   "armBms": 12,
+   "exact": true
+  },
+  {
+   "lane": "email-thread.txt",
+   "armA": 558,
+   "armB": 558,
+   "delta": 0,
+   "armAms": 52,
+   "armBms": 57,
+   "exact": true
+  },
+  {
+   "lane": "llm-answer.md",
+   "armA": 733,
+   "armB": 733,
+   "delta": 0,
+   "armAms": 100,
+   "armBms": 79,
+   "exact": true
+  },
+  {
+   "lane": "markdown-table.md",
+   "armA": 228,
+   "armB": 228,
+   "delta": 0,
+   "armAms": 29,
+   "armBms": 27,
+   "exact": true
+  },
+  {
+   "lane": "psql-output.txt",
+   "armA": 406,
+   "armB": 406,
+   "delta": 0,
+   "armAms": 133,
+   "armBms": 94,
+   "exact": true
+  },
+  {
+   "lane": "prices.csv",
+   "armA": 288,
+   "armB": 288,
+   "delta": 0,
+   "armAms": 25,
+   "armBms": 23,
+   "exact": true
+  },
+  {
+   "lane": "cue-sheet.md",
+   "armA": 257,
+   "armB": 257,
+   "delta": 0,
+   "armAms": 40,
+   "armBms": 39,
+   "exact": true
+  },
+  {
+   "lane": "ps-ef.txt",
+   "armA": 368,
+   "armB": 368,
+   "delta": 0,
+   "armAms": 110,
+   "armBms": 111,
+   "exact": true
+  },
+  {
+   "lane": "ls-real.txt",
+   "armA": 489,
+   "armB": 489,
+   "delta": 0,
+   "armAms": 150,
+   "armBms": 143,
+   "exact": true
+  },
+  {
+   "lane": "json-pkg.txt",
+   "armA": 794,
+   "armB": 794,
+   "delta": 0,
+   "armAms": 314,
+   "armBms": 333,
+   "exact": true
+  },
+  {
+   "lane": "code-ts.txt",
+   "armA": 1138,
+   "armB": 1138,
+   "delta": 0,
+   "armAms": 552,
+   "armBms": 510,
+   "exact": true
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "armA": 767,
+   "armB": 767,
+   "delta": 0,
+   "armAms": 199,
+   "armBms": 192,
+   "exact": true
+  },
+  {
+   "lane": "ps-real.txt",
+   "armA": 485,
+   "armB": 485,
+   "delta": 0,
+   "armAms": 128,
+   "armBms": 127,
+   "exact": true
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "armA": 475,
+   "armB": 475,
+   "delta": 0,
+   "armAms": 120,
+   "armBms": 117,
+   "exact": true
+  },
+  {
+   "lane": "metrics.tsv",
+   "armA": 328,
+   "armB": 328,
+   "delta": 0,
+   "armAms": 34,
+   "armBms": 33,
+   "exact": true
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "armA": 1163,
+   "armB": 1163,
+   "delta": 0,
+   "armAms": 715,
+   "armBms": 644,
+   "exact": true
+  },
+  {
+   "lane": "apt-real.txt",
+   "armA": 1120,
+   "armB": 1120,
+   "delta": 0,
+   "armAms": 194,
+   "armBms": 211,
+   "exact": true
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "armA": 1669,
+   "armB": 1669,
+   "delta": 0,
+   "armAms": 1059,
+   "armBms": 1087,
+   "exact": true
+  }
+ ],
+ "totals": {
+  "armA": 15210,
+  "armB": 15210,
+  "delta": 0,
+  "better": 0,
+  "worse": 0,
+  "same": 29,
+  "exact": 29,
+  "armAms": 4561,
+  "armBms": 4438
+ }
+}

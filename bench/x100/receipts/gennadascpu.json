@@ -1,0 +1,129 @@
+{
+ "note": "X100 GENNADAS isolated CPU, 3 reps, median; chain run once with GENNADAS disabled, then GENNADAS alone timed",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "incumbent": 835,
+   "delta": 0,
+   "applied": false,
+   "reps": [
+    2,
+    1,
+    1
+   ],
+   "medianMs": 1
+  },
+  {
+   "lane": "code-ts",
+   "incumbent": 969,
+   "delta": -1,
+   "applied": true,
+   "reps": [
+    1340,
+    1441,
+    1434
+   ],
+   "medianMs": 1434
+  },
+  {
+   "lane": "dpkg-l",
+   "incumbent": 669,
+   "delta": 0,
+   "applied": false,
+   "reps": [
+    5,
+    1,
+    1
+   ],
+   "medianMs": 1
+  },
+  {
+   "lane": "findmnt",
+   "incumbent": 440,
+   "delta": 0,
+   "applied": false,
+   "reps": [
+    1,
+    1,
+    2
+   ],
+   "medianMs": 1
+  },
+  {
+   "lane": "json-pkg",
+   "incumbent": 672,
+   "delta": -2,
+   "applied": true,
+   "reps": [
+    419,
+    362,
+    490
+   ],
+   "medianMs": 419
+  },
+  {
+   "lane": "kb-article",
+   "incumbent": 621,
+   "delta": 0,
+   "applied": false,
+   "reps": [
+    0,
+    0,
+    0
+   ],
+   "medianMs": 0
+  },
+  {
+   "lane": "llm-answer",
+   "incumbent": 671,
+   "delta": 0,
+   "applied": false,
+   "reps": [
+    1,
+    0,
+    0
+   ],
+   "medianMs": 0
+  },
+  {
+   "lane": "ls-l-real",
+   "incumbent": 1408,
+   "delta": -27,
+   "applied": true,
+   "reps": [
+    9601,
+    9333,
+    9321
+   ],
+   "medianMs": 9333
+  },
+  {
+   "lane": "ls-real",
+   "incumbent": 432,
+   "delta": 0,
+   "applied": false,
+   "reps": [
+    1,
+    1,
+    1
+   ],
+   "medianMs": 1
+  },
+  {
+   "lane": "ps-aux-real",
+   "incumbent": 1041,
+   "delta": 0,
+   "applied": false,
+   "reps": [
+    1,
+    0,
+    1
+   ],
+   "medianMs": 1
+  }
+ ],
+ "totals": {
+  "medianMs": 11191,
+  "delta": -30
+ }
+}

@@ -1,0 +1,32 @@
+lsblk.txt              raw=   60  A=   60  B=   60  d=  0  exact=true/true     1785/     81ms
+kb-article.txt         raw=  656  A=  621  B=  621  d=  0  exact=true/true     2648/    637ms
+uptime-w.txt           raw=   80  A=   80  B=   80  d=  0  exact=true/true     1761/     83ms
+free-m.txt             raw=   76  A=   76  B=   76  d=  0  exact=true/true     1896/     91ms
+vmstat.txt             raw=  229  A=  148  B=  148  d=  0  exact=true/true     2032/    166ms
+unified-diff.patch     raw=  578  A=  416  B=  415  d= -1  exact=true/true     2871/    409ms
+df-h.txt               raw=  570  A=  171  B=  170  d= -1  exact=true/true     2085/    265ms
+df-real.txt            raw=  158  A=  125  B=  125  d=  0  exact=true/true     3093/    158ms
+du-real.txt            raw=  458  A=  269  B=  269  d=  0  exact=true/true     3041/    203ms
+node-help.txt          raw= 1099  A=  860  B=  860  d=  0  exact=true/true     6634/   2103ms
+findmnt.txt            raw=  787  A=  440  B=  440  d=  0  exact=true/true     5131/    844ms
+df-h.txt               raw=  140  A=  107  B=  107  d=  0  exact=true/true     3666/    152ms
+email-thread.txt       raw=  629  A=  487  B=  487  d=  0  exact=true/true     6048/    609ms
+llm-answer.md          raw=  733  A=  671  B=  671  d=  0  exact=true/true     7723/   1016ms
+markdown-table.md      raw=  330  A=  176  B=  174  d= -2  exact=true/true     5322/    144ms
+psql-output.txt        raw=  675  A=  244  B=  242  d= -2  exact=true/true    10106/   3455ms
+prices.csv             raw=  582  A=  133  B=  133  d=  0  exact=true/true    13334/   7880ms
+cue-sheet.md           raw=  513  A=  101  B=  101  d=  0  exact=true/true    11345/   2520ms
+ps-ef.txt              raw= 1144  A=  309  B=  309  d=  0  exact=true/true    12302/   4306ms
+ls-real.txt            raw= 1034  A=  432  B=  432  d=  0  exact=true/true     9761/    719ms
+json-pkg.txt           raw= 1152  A=  672  B=  670  d= -2  exact=true/true    14471/   2486ms
+code-ts.txt            raw= 1422  A=  969  B=  968  d= -1  exact=true/true    23964/   7788ms
+dpkg-l.txt             raw= 1000  A=  669  B=  669  d=  0  exact=true/true    16132/   1269ms
+ps-real.txt            raw= 1106  A=  392  B=  391  d= -1  exact=true/true     9981/    621ms
+kubectl-get-pods.txt   raw= 1006  A=  326  B=  322  d= -4  exact=true/true    17747/   3552ms
+metrics.tsv            raw=  811  A=  210  B=  208  d= -2  exact=true/true    16268/   7359ms
+ps-aux-real.txt        raw= 3054  A= 1043  B= 1043  d=  0  exact=true/true    27603/   5046ms
+apt-real.txt           raw= 2739  A=  838  B=  838  d=  0  exact=true/true    70656/  21193ms
+ls-l-real.txt          raw= 5194  A= 1408  B= 1381  d=-27  exact=true/true   270955/  27094ms
+
+29-LANE TOTAL raw=28015 armA=12453 armB=12410 d=-43 (-0.345%)  improved=10 worse=0 inexact=0
+ms armA=580361 armB=102249

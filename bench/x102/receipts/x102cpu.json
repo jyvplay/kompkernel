@@ -1,0 +1,117 @@
+{
+ "note": "X102 isolated CPU for DIAGRAPHE+PALINDROMOS: alternating reps in one process, medians, full-decode exactness per rep",
+ "rows": [
+  {
+   "lane": "ls-l-real",
+   "tokensOn": 1376,
+   "tokensOff": 1381,
+   "msOn": 72077,
+   "msOff": 33207,
+   "repsOn": [
+    73136,
+    72077,
+    70362
+   ],
+   "repsOff": [
+    324772,
+    33207,
+    31309
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "code-ts",
+   "tokensOn": 969,
+   "tokensOff": 970,
+   "msOn": 13176,
+   "msOff": 8269,
+   "repsOn": [
+    13911,
+    13176,
+    12913
+   ],
+   "repsOff": [
+    25021,
+    7828,
+    8269
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "metrics.tsv",
+   "tokensOn": 206,
+   "tokensOff": 208,
+   "msOn": 9352,
+   "msOff": 9377,
+   "repsOn": [
+    9352,
+    9553,
+    9227
+   ],
+   "repsOff": [
+    19290,
+    9377,
+    9083
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "dpkg-l",
+   "tokensOn": 666,
+   "tokensOff": 669,
+   "msOn": 2898,
+   "msOff": 1442,
+   "repsOn": [
+    2859,
+    2898,
+    3023
+   ],
+   "repsOff": [
+    17820,
+    1442,
+    1394
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "ps-aux-real",
+   "tokensOn": 1043,
+   "tokensOff": 1043,
+   "msOn": 7890,
+   "msOff": 5615,
+   "repsOn": [
+    7466,
+    8070,
+    7890
+   ],
+   "repsOff": [
+    32458,
+    5615,
+    5539
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "psql-output",
+   "tokensOn": 242,
+   "tokensOff": 242,
+   "msOn": 4566,
+   "msOff": 5738,
+   "repsOn": [
+    4622,
+    4566,
+    4066
+   ],
+   "repsOff": [
+    13456,
+    5738,
+    4095
+   ],
+   "exactAll": true
+  }
+ ],
+ "totals": {
+  "msOn": 109959,
+  "msOff": 63648
+ }
+}

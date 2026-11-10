@@ -1,0 +1,241 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real.wire.txt",
+   "msgTokens": 850,
+   "digitTokens": 92,
+   "runs": 57,
+   "byLen": [
+    [
+     2,
+     45
+    ],
+    [
+     3,
+     7
+    ],
+    [
+     5,
+     1
+    ],
+    [
+     8,
+     4
+    ]
+   ],
+   "upperBoundSaving": 9
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "msgTokens": 969,
+   "digitTokens": 6,
+   "runs": 0,
+   "byLen": [],
+   "upperBoundSaving": 0
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "msgTokens": 673,
+   "digitTokens": 40,
+   "runs": 23,
+   "byLen": [
+    [
+     2,
+     19
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     8,
+     1
+    ]
+   ],
+   "upperBoundSaving": 2
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "msgTokens": 444,
+   "digitTokens": 29,
+   "runs": 12,
+   "byLen": [
+    [
+     2,
+     1
+    ],
+    [
+     3,
+     6
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     7,
+     1
+    ]
+   ],
+   "upperBoundSaving": 6
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "msgTokens": 681,
+   "digitTokens": 43,
+   "runs": 26,
+   "byLen": [
+    [
+     2,
+     24
+    ],
+    [
+     3,
+     1
+    ],
+    [
+     12,
+     1
+    ]
+   ],
+   "upperBoundSaving": 3
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "msgTokens": 622,
+   "digitTokens": 2,
+   "runs": 2,
+   "byLen": [
+    [
+     2,
+     2
+    ]
+   ],
+   "upperBoundSaving": 0
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "msgTokens": 674,
+   "digitTokens": 29,
+   "runs": 16,
+   "byLen": [
+    [
+     2,
+     12
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     1
+    ]
+   ],
+   "upperBoundSaving": 1
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "msgTokens": 1476,
+   "digitTokens": 285,
+   "runs": 197,
+   "byLen": [
+    [
+     2,
+     81
+    ],
+    [
+     3,
+     48
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     5,
+     25
+    ],
+    [
+     6,
+     42
+    ]
+   ],
+   "upperBoundSaving": 68
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "msgTokens": 433,
+   "digitTokens": 91,
+   "runs": 60,
+   "byLen": [
+    [
+     2,
+     34
+    ],
+    [
+     3,
+     3
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     5,
+     16
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     7,
+     1
+    ],
+    [
+     9,
+     1
+    ]
+   ],
+   "upperBoundSaving": 25
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "msgTokens": 1042,
+   "digitTokens": 146,
+   "runs": 119,
+   "byLen": [
+    [
+     2,
+     54
+    ],
+    [
+     3,
+     49
+    ],
+    [
+     4,
+     5
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     6,
+     4
+    ]
+   ],
+   "upperBoundSaving": 16
+  }
+ ],
+ "gRuns": 512,
+ "gDigits": 763,
+ "gTok": 7864,
+ "gSaving": 130
+}

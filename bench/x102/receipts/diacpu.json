@@ -1,0 +1,153 @@
+{
+ "note": "X102 DIAGRAPHE isolated CPU (the codec that ships ENABLED): alternating reps, medians, full-decode exactness per rep",
+ "rows": [
+  {
+   "lane": "ls-l-real",
+   "tokensOn": 1381,
+   "tokensOff": 1381,
+   "msOn": 28169,
+   "msOff": 29456,
+   "repsOn": [
+    28542,
+    28169,
+    27912
+   ],
+   "repsOff": [
+    309990,
+    29456,
+    27808
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "apt-real",
+   "tokensOn": 834,
+   "tokensOff": 836,
+   "msOn": 22425,
+   "msOff": 22601,
+   "repsOn": [
+    22873,
+    22425,
+    22067
+   ],
+   "repsOff": [
+    73769,
+    22601,
+    22194
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "ps-aux-real",
+   "tokensOn": 1043,
+   "tokensOff": 1043,
+   "msOn": 5009,
+   "msOff": 5082,
+   "repsOn": [
+    5155,
+    5009,
+    4953
+   ],
+   "repsOff": [
+    28355,
+    5013,
+    5082
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "code-ts",
+   "tokensOn": 968,
+   "tokensOff": 968,
+   "msOn": 7290,
+   "msOff": 7189,
+   "repsOn": [
+    7290,
+    7199,
+    7356
+   ],
+   "repsOff": [
+    21761,
+    7189,
+    7109
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "metrics.tsv",
+   "tokensOn": 208,
+   "tokensOff": 208,
+   "msOn": 8064,
+   "msOff": 8041,
+   "repsOn": [
+    8271,
+    8064,
+    7860
+   ],
+   "repsOff": [
+    17128,
+    7959,
+    8041
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "dpkg-l",
+   "tokensOn": 667,
+   "tokensOff": 669,
+   "msOn": 1309,
+   "msOff": 1344,
+   "repsOn": [
+    1410,
+    1309,
+    1214
+   ],
+   "repsOff": [
+    16303,
+    1344,
+    1341
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "ls-real",
+   "tokensOn": 431,
+   "tokensOff": 432,
+   "msOn": 654,
+   "msOff": 709,
+   "repsOn": [
+    647,
+    654,
+    664
+   ],
+   "repsOff": [
+    9462,
+    709,
+    689
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "json-pkg",
+   "tokensOn": 670,
+   "tokensOff": 670,
+   "msOn": 2509,
+   "msOff": 2531,
+   "repsOn": [
+    2509,
+    2367,
+    2518
+   ],
+   "repsOff": [
+    14776,
+    2337,
+    2531
+   ],
+   "exactAll": true
+  }
+ ],
+ "totals": {
+  "msOn": 75429,
+  "msOff": 76953
+ }
+}

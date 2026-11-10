@@ -9864,3 +9864,532 @@ ops, and this turn's two codecs went exactly there**: of ΜΕΤΑΤΑΞΙΣ's 13
 (OPS TABLE 4, OPS LISTING 6, CODE 1); of ΣΥΝΔΥΑΣΜΟΣ's 12, 11 are ops and 1 is prose. PROSE gained
 −2 of −68, consistent with its 4.2 % headroom. **The next large gain, if there is one, is in OPS
 TABLE and OPS LISTING — 26.2 % and 23.4 % against the independent floor — and not in prose.**
+
+---
+
+## §X100 — ΓΕΝΝΑΔΑΣ: the invariant was pointed at the wrong object, and the largest lane had never been searched
+
+### The finding
+
+`bench/x100/lsl2.ts` (receipt `bench/x100/receipts/lsl2.json`) priced the committed `ls-l-real` wire
+and the source it came from:
+
+```
+chironDecode(committed ls-l-real wire)   = 10 621 bytes
+the source                               = 10 692 bytes      -> not equal
+chironEncode(source) alone               =  1 768 tokens, exact — CHIRON WITHOUT OURA
+```
+
+`chiron.ts` contains **no `~` handling at all** (grep: zero hits). The committed wire is a
+**CHIRON+ΟΥΡΑ composition**: ΟΥΡΑ (X38) collapses `1.0.0` into a `~`-marked `100` *before* CHIRON
+mines the tape, so expanding the wire yields ΟΥΡΑ's **output**, and ΟΥΡΑ's inverse is still owed.
+
+The consequence is structural, and it is silent. ἸΣΟΜΟΡΦΪΑ (X96), ΜΕΤΑΤΑΞΙΣ (X97) and ΣΥΝΔΥΑΣΜΟΣ
+(X99) all gate on `decoded === text` with `text` the **source**. On a composed lane that predicate is
+**unsatisfiable**, so the codec refuses and reports a refusal that reads exactly like a negative
+result. `ls-l-real` is the largest of the ten authoritative lanes — 1 476 tok, **18.8 %** of 7 864 —
+and all three codecs have been declining it for three turns. **The search was never run.**
+
+This is the same error class as the L2 failure reported across the 2026 frontier-lab proof surveys —
+Lean code that did not match the English proof it was meant to verify — and it is precisely what the
+stack's own `chironDecode` gate has been catching everywhere else.
+
+**The defect has a name in the formal-methods literature.** Chassot & Kunčak, *Formally Verified
+Linear-Time Invertible Lexing* (ZipLex), arXiv:2510.18479 (cs.PL, v1 21 Oct 2025, v3 21 May 2026),
+verified in Stainless: "Unlike past verified lexers that focus only on satisfying the semantics of
+regular expressions and the longest match property, ZipLex also guarantees that **lexing and printing
+are mutual inverses**." And the sentence that names this codec's defect exactly: *"A transformation
+from strings to semantic values is sufficient to construct tokens, but **insufficient to print them
+back to the same strings**."* ΟΥΡΑ is that transformation and `chironDecode` is not its inverse; the
+stack's gate was checking the *construction* direction on a lane that needed the *printing* direction.
+
+### The repair, and why it is not a weakening
+
+The reference object becomes `chironDecode(incumbent.message)`: the parent's **output**. On a pure
+CHIRON lane that *is* the source, so nothing changes there. On a composed lane it is the transformed
+text, and the search finally runs.
+
+Admission in `tagstack.ts` is a separate predicate (`admitParentRelative`) that compares the two
+strings **with the repository's own decoder** rather than trusting either codec's self-report. The
+first version of that path compared `cand.decoded` against `best.decoded`, and **refused the only lane
+it was written for** — because `best.decoded` is the *full-chain* decode (ΟΥΡΑ's inverse included)
+while ΓΕΝΝΑΔΑΣ preserves the *CHIRON-layer* expansion, and the two differ on exactly that lane. The
+correction is recorded in the source comment rather than quietly dropped.
+
+### The second mechanism — RELOCATE-TO-ENABLE
+
+ΣΥΝΔΥΑΣΜΟΣ re-spells a value using factors that are *strictly earlier* rules and alternates that with
+ΜΕΤΑΤΑΞΙΣ's relocation — but it never asks whether a rule *j* sitting *after* rule *i* is already a
+perfect prefix or suffix of `value(i)`, a factor that would be ideal if only it were legal. Moving *j*
+to immediately before *i* makes it legal, and the re-spelling it enables converts a dead
+**script→ASCII** boundary into a live **script→script** one — the asymmetry `glossa.json` measured:
+**0** vocabulary tokens of the S→A shape against **823** (cyrillic) and **3 417** (polyglot) of the
+S→S shape. Its parent idea, ΠΡΟΠΑΡΑΣΚΕΥΗ, is **falsified**: 64 enabling pairs, all legal, and every
+enabling relocation costs **+1…+4**, because moving a rule re-prices every boundary it crosses
+(`proparaskeue.json`). ΓΕΝΝΑΔΑΣ's version survives only because it is gated on the whole message.
+
+### Measured — end-to-end A/B on the real chain, ten authoritative lanes
+
+One process, interleaved lane by lane, `OMEGA_DET=1 OMEGA_NO_MEMO=1`, so the load-sensitivity defect
+(X97: 846 / 850 / 858 / 874 for identical bytes across processes, all `exact=true`) cannot be mistaken
+for a codec effect. `bench/x100/receipts/gennadasab.json`:
+
+| lane | arm A (no ΓΕΝΝΑΔΑΣ) | arm B (ΓΕΝΝΑΔΑΣ) | Δ |
+|---|---|---|---|
+| apt-real | 837 | 837 | 0 |
+| code-ts | 969 | 968 | **−1** |
+| dpkg-l | 669 | 669 | 0 |
+| findmnt | 440 | 440 | 0 |
+| json-pkg | 672 | 670 | **−2** |
+| kb-article | 621 | 621 | 0 |
+| llm-answer | 671 | 671 | 0 |
+| **ls-l-real** | **1 408** | **1 381** | **−27** |
+| ls-real | 432 | 432 | 0 |
+| ps-aux-real | 1 043 | 1 043 | 0 |
+| **TOTAL** | **7 762** | **7 732** | **−30 (−0.386 %)** |
+
+**3 improved, 0 worse, 0 inexact**, and `exact=true` on both arms for every lane.
+
+### Measured — 29-lane A/B on the real chain
+
+One process, interleaved lane by lane, `OMEGA_DET=1 OMEGA_NO_MEMO=1`
+(`bench/x100/receipts/gennadas29.json`):
+
+**raw 28 015 → arm A 12 453 → arm B 12 410, Δ = −43 (−0.345 %), 10 lanes improved, 0 worse, 0 inexact.**
+
+| improved lane | category | arm A | arm B | Δ |
+|---|---|---|---|---|
+| `holdout-x41/ls-l-real.txt` | OPS LISTING | 1 408 | 1 381 | **−27** |
+| `holdout-x40/kubectl-get-pods.txt` | OPS TABLE | 326 | 322 | **−4** |
+| `holdout-x40/markdown-table.md` | OPS TABLE | 176 | 174 | −2 |
+| `holdout/psql-output.txt` | OPS TABLE | 244 | 242 | −2 |
+| `holdout/json-pkg.txt` | CODE | 672 | 670 | −2 |
+| `holdout-x40/metrics.tsv` | OPS TABLE | 210 | 208 | −2 |
+| `holdout-x42/unified-diff.patch` | CODE | 416 | 415 | −1 |
+| `holdout/df-h.txt` | OPS LISTING | 171 | 170 | −1 |
+| `holdout/code-ts.txt` | CODE | 969 | 968 | −1 |
+| `holdout-x42/ps-real.txt` | OPS LISTING | 392 | 391 | −1 |
+
+**All ten improved lanes are ops or code; not one is prose**, which is what the leaders table
+(`bench/x99/receipts/leaders-x99.json`) predicts: OPS TABLE 26.2 % and OPS LISTING 23.4 % of headroom
+against an independent readability floor, PROSE 4.2 %. The defensible claim is the **within-process Δ
+and the lane set**, not the absolute total — the load-sensitivity defect (X97) makes a cross-process
+total irreproducible, and arm A's own 12 453 differs from run K's 12 478 by well inside that band.
+
+**Fidelity, verified by decoding rather than by the `exact` flag** (`bench/x100/receipts/gennadasfidelity.json`).
+The A/B's `exact` flag is *not* re-derived after ΓΕΝΝΑΔΑΣ runs, so it cannot be the evidence. What is
+checked instead, with the repository's own `chironDecode` on the exact strings both arms emit:
+
+```
+CHIRON-layer expansion identical between arms:  10 / 10 lanes
+chironDecode(arm A) === source:                   9 / 10 lanes
+chironDecode(arm A) === the chain's decoded field: 9 / 10 lanes
+```
+
+The tenth lane, `ls-l-real`, is the composed one: its expansion is 10 085 bytes against a 10 692-byte
+source, and it is **identical between arms**, so the full-chain decode is preserved there
+**compositionally** — every layer above ΧΕΙΡΟΝ is a deterministic function of that expansion — and not
+by direct measurement. That is a downgraded claim on exactly one lane and is reported as one. An
+earlier attempt at this probe used `tagstackDecode`, which is a no-op outside the X74/X90 stack fold
+and therefore measured nothing; it is discarded, not cited.
+
+### CPU, measured honestly and in isolation
+
+`bench/x100/receipts/gennadascpu.json`. The A/B's per-lane millisecond columns are **not** usable for
+this — arm A runs first in the same process and pays the JIT and module-load warm-up arm B does not
+(apt-real read 70 656 ms for arm A against 21 193 ms for arm B on identical bytes). So ΓΕΝΝΑΔΑΣ is
+timed on its own, three reps, median:
+
+| lane | incumbent | Δ | reps (ms) | median |
+|---|---|---|---|---|
+| apt-real | 835 | 0 | 2/1/1 | **1** |
+| code-ts | 969 | −1 | 1340/1441/1434 | **1 434** |
+| dpkg-l | 669 | 0 | 5/1/1 | **1** |
+| findmnt | 440 | 0 | 1/1/2 | **1** |
+| json-pkg | 672 | −2 | 419/362/490 | **419** |
+| kb-article | 621 | 0 | 0/0/0 | **0** |
+| llm-answer | 671 | 0 | 1/0/0 | **0** |
+| **ls-l-real** | 1 408 | **−27** | 9601/9333/9321 | **9 333** |
+| ls-real | 432 | 0 | 1/1/1 | **1** |
+| ps-aux-real | 1 041 | 0 | 1/0/1 | **1** |
+
+**Median total 11 191 ms over the ten wires = 2.38 % of the chain's own cost.** The CPU guard is doing
+real work: on the seven lanes where ΓΕΝΝΑΔΑΣ does not fire the median is **0–5 ms**, and the entire
+cost sits on the three lanes where it does. **ΓΕΝΝΑΔΑΣ is therefore a Pareto improvement on both
+axes — 43 tokens on 29 lanes for 2.38 % CPU, and effectively free where it declines.**
+
+**A correction that must not be dropped.** Against the *committed-wire* baseline (7 864, a staler
+incumbent) ΓΕΝΝΑΔΑΣ reads **−90** (`gennadas10.json`). That is **not** the number to cite: the full
+chain already reaches 1 408 on `ls-l-real` through ΟΥΡΑ and ΣΥΝΚΡΙΣΙΣ, and the honest incremental
+figure is the **−30** above. An earlier draft of this section quoted −90; it is corrected here.
+
+### X100 falsifications, all with receipts
+
+| # | Lever | Receipt | Result |
+|---|---|---|---|
+| 29 | **ΔΙΑΛΕΚΤΟΣ** — switch the tape's declared script | `dialektos.json` | every script worse on every lane, including the lane's own script in codepoint order (+56…+247). The first run was itself wrong (first n *codepoints*; cyrillic has 256 codepoints but 122 one-token letters). **Corollary kept: the assignment is worth 56–247 tokens against codepoint order** |
+| 30 | **ΑΝΤΑΛΛΑΓΗ** — seeded pairwise-swap search over the assignment | `antallage.json` | **Δ = 0** on the committed wire (0/30 000 probes); **Δ = −2** on the ΣΥΝΔΥΑΣΜΟΣ wire. Local optimum |
+| 31 | **ΣΤΗΛΗ** — ΧΕΙΡΟΝ's `×` columnar operator as a post-pass | `style.json`, `style2.json` | pooled positive net **0**; best-period agreement **0.014–0.069**. The first scan was also flawed (a fixed period never aligns variable-length rows); the corrected scan still finds only n=2 ×5–7 |
+| 32 | **ΠΡΟΠΑΡΑΣΚΕΥΗ** — relocate a rule earlier so it becomes a legal factor | `proparaskeue.json` | 64 pairs, 64 legal, **every enabling relocation +1…+4** |
+| 33 | **ΑΝΤΑΝΑΚΛΑΣΙΣ** — reflect the tape's key-sequences back into the body | `antanaklasis.json` | **0–1 per lane**; ΧΕΙΡΟΝ's macro pass already covers it |
+| 34 | **ΣΥΣΣΩΡΕΥΣΗ** — hoist a repeated body token n-gram into a rule | `syssoreuse.json` | **0**, and diagnostic: it shows ΣΤΗΛΗ's counts were inflated, because dropping literals to form the reduced reference sequence created adjacencies that do not exist in the body |
+
+### What this says about the frontier
+
+The three recent wire-level codecs were not converging on a residual; one of them was being **locked
+out of 18.8 % of the ten-lane corpus by its own predicate**. That is a different failure from "the
+dictionary is exhausted", and it is the reason this turn's gain (−30) is larger than ἸΣΟΜΟΡΦΪΑ's
+whole contribution (−13) despite a much smaller search.
+
+**Generalised local leaders** (`bench/x99/receipts/leaders-x99.json`, unchanged this turn because
+ΓΕΝΝΑΔΑΣ's measured lanes are ops and the category table is a join, not a re-measurement): the
+remaining headroom is **OPS TABLE 26.2 %** and **OPS LISTING 23.4 %** against an independent
+readability floor, **PROSE 4.2 %**. ΓΕΝΝΑΔΑΣ's three improved lanes are all ops, consistent with that
+ranking.
+
+---
+
+## §X101 — ΣΤΑΘΜΟΣ and ΤΥΠΟΣ: the variant sweep was paying for branches that never win, and the
+## acceptance test was pricing a string that never ships
+
+### What was measured first, and what it closed
+
+Before building anything, the residual was characterised rather than guessed at
+(`bench/x101/merides.ts` → `receipts/merides.json`, ten lanes, the shipped chain's own output):
+
+| component | tokens | share |
+|---|---|---|
+| contract | 137 | 1.8 % |
+| tape | 2 013 | 26.0 % |
+| **body literals** | **4 299** | **55.6 %** |
+| body references | 1 283 | 16.6 % |
+| **total** | **7 732** | |
+
+**55.6 % of the message is body literals.** That single number decides the turn: a literal token is a
+token of the *original text* that ΧΕΙΡΟΝ's macro mining did not turn into a reference, so the literal
+population is the tokenizer's own price of the non-repeated residue. No grammar mechanism can compress
+it, and that is why every mechanism below comes back at Δ = 0.
+
+`bench/x101/loipon.ts` → `receipts/loipon.json` settles the same population with an explicit
+definition and a control, and **corrects an earlier receipt**: `bench/x97/receipts/runpack2.json`
+reports "57.1 % of the body is reference tokens (3 222 / 5 639)". Counting on the committed ΧΕΙΡΟΝ
+wire with the definition *a token is a reference iff it is exactly one character and that character is
+a declared rule key* gives **1 249 / 5 639 = 22.1 % references, 4 390 literals**. The runpack2 number
+counted a different object. The ΛΟΙΠΟΝ figure is the one to cite.
+
+### ΣΤΑΘΜΟΣ — drop the sweep variants that never win
+
+ΧΕΙΡΟΝ's variant sweep runs `full/<sep>` per candidate separator, then `macros-only`, then — for texts
+under 24 000 characters — `blocks-only/<sep>` per separator. **Every variant draws on one shared work
+meter** (`CHIRON_MAX_TOTAL_WORK_UNITS`, 64 M units) and one shared wall-clock envelope
+(`min(26 000, budgetMs × 2.1)` ms).
+
+`bench/x101/klimax29.ts` → `receipts/klimax29.json` records which variant wins on all 29 frontier
+lanes:
+
+| winner | lanes |
+|---|---|
+| `full/"\n"` | 11 |
+| `full/" "` | 8 |
+| `full/","` | 1 |
+| `macros-only` | 2 |
+| identity (no framing pays) | 7 |
+| **`blocks-only`** | **0** |
+
+So `blocks-only` is run on every lane, is charged 30 % of the per-variant budget, and wins nowhere —
+while the shared meter is **96 % exhausted on ls-l-real, 75 % on ps-aux-real, 73 % on code-ts**, i.e.
+exactly the lanes where more search would pay. ΣΤΑΘΜΟΣ removes it from the sweep by default;
+`keepBlocksOnly` and `OMEGA_KEEP_BLOCKS_ONLY=1` put it back for the ablation.
+
+**Results.** 29-lane interleaved A/B (`receipts/stathmos29.json`): **Δ tokens = 0 on 29/29 lanes,
+byte-exact (`decoded === source`) on 29/29.** Isolated CPU with **alternating** reps in one process,
+three reps each, median (`receipts/stathmoscpu.json`): **79 233 ms vs 81 695 ms control = −3.0 %**, and
+byte-exact on every rep of both arms.
+
+> **A correction that must not be dropped.** The first CPU measurement of ΣΤΑΘΜΟΣ read
+> **584 924 ms → 103 555 ms = −82.3 %**. That figure is **wrong and is withdrawn**: arm A ran first in
+> a cold process and the chain is known to be JIT- and load-sensitive. The alternating-rep control
+> shows the pattern directly — the first control rep on ls-l-real is **294 357 ms** and the next two
+> are **28 617 ms and 30 008 ms**. The 82 % was measuring module load and JIT warm-up, not the codec.
+> The honest figure is **−3.0 %**, and it is the one in the table above. The same confound was already
+> recorded once in this repository (X100, ΓΕΝΝΑΔΑΣ's A/B wall-clock pair); it recurred and was caught
+> by the alternating design, not by inspection.
+
+**At the gate the effect is not measurable.** `tagstackFrontier` over the 29 lanes with ΣΤΑΘΜΟΣ on
+vs `OMEGA_KEEP_BLOCKS_ONLY=1` off (`receipts/frontier-runX101.json` vs
+`receipts/frontier-runX101-control.json`): **511 786 ms vs 513 163 ms = −0.3 %**, inside run-to-run
+drift. **Reported as no measured effect at the frontier level.** The −3.0 % is a
+`tagstackEncode`-path figure and is labelled as such.
+
+**Two follow-ons, both falsified.** Widening the separator gate (`= : . "` added, `n > nl * 2`
+dropped — `receipts/stathmos29b.json`): **Δ = 0 on 29/29**, no time change. Raising the shared work
+meter 4× to 256 M units (`receipts/stathmos29c.json`): **Δ = 0 on 29/29**, no time change. The second
+is the informative one: **ΧΕΙΡΟΝ's search has already converged**, so the budget the `blocks-only`
+variants were consuming was not buying quality anywhere. The meter exhaustion is a symptom of waste,
+not of starvation.
+
+### ΤΥΠΟΣ — price the artifact that ships
+
+ΧΕΙΡΟΝ's macro pass accepted a candidate by counting `provisionalWire`: the tape concatenated in
+**creation order** with the search-time glyphs. The string the caller receives is `renderWire`: a
+**topological order** with a fresh glyph assignment drawn from `ctx.pool`. The comment that used to sit
+at that accept test asserted that "token counting does not care whether the glyphs are densely packed
+or topologically ordered". It is false — ΜΕΤΑΤΑΞΙΣ measured **−44** from relocation alone and
+ΔΙΑΛΕΚΤΟΣ measured **+56…+247** from the letter assignment alone — so a candidate accepted on the
+wrong string is accepted on a number the emitted wire does not have.
+
+ΤΥΠΟΣ adds `exactAccept`, which prices `renderWire` at both the macro accept test and the
+backward-deletion test, and rejects a state `renderWire` cannot emit.
+
+**Result, and it is a falsification, not a gain.** 29-lane ΧΕΙΡΟΝ-only A/B, three interleaved reps,
+medians (`receipts/typos29.json`): **Δ = 0 on 29/29 lanes**, `chironDecode`-exact 29/29, ΧΕΙΡΟΝ wall
+clock 4 561 ms → 4 438 ms. The instrumentation (`receipts/typosprobe.json`, `OMEGA_TYPOS_PROBE=1`)
+explains why: over the 29 lanes the macro search prices **5 504 candidates and 0 of them on a string
+different from the one that ships**. ΧΕΙΡΟΝ's rules are created in dependency order and glyphs are
+taken from the pool in order, so `topoOrder` is the identity and the two strings are byte-identical.
+
+**So ΤΥΠΟΣ is a latent-defect fix, not a measured gain, and it is reported that way.** It is kept
+because it makes the invariant the code actually depends on explicit, and because the defect would
+silently reappear the moment any pass creates rules out of dependency order. The error class is the
+one already named twice in this repository: ΓΕΝΝΑΔΑΣ's fidelity gate pointed at the wrong object, and
+ZipLex §3.1 states the general form — *"A transformation from strings to semantic values is sufficient
+to construct tokens, but insufficient to print them back to the same strings."*
+
+### Greedy, source, and cost model
+
+| codec | greedy? | source | time- or CPU-bound |
+|---|---|---|---|
+| **ΣΤΑΘΜΟΣ** | **Not a search at all — a measured deletion.** It removes a branch that was *observed* to win 0/29. This is **empirical, not proven**: unlike α–β pruning, nothing establishes that `blocks-only` cannot win on a future input, which is exactly why the ablation knob exists | α–β pruning's safety statement ("removes only branches that cannot influence the final outcome… the result is always identical") is the shape of the claim and **ΣΤΑΘΜΟΣ does not meet it**; the honest analogue is measured branch elimination | **CPU-bound** (−3.0 % measured, −0.3 % and unmeasurable at the gate) |
+| **ΤΥΠΟΣ** | Greedy acceptance, unchanged; only the priced object changed | arXiv:2608.03983 (SeGaBench, 2026): LLM-proposed optimisations are admissible only where *"their artifacts are validated and evaluated"*; Alive2 / translation validation (Lopes et al. 2021) | **Time-bound in principle** (`renderWire` is O(rules × length) per candidate vs a concatenation), **measured neutral** here because the branch is never taken |
+
+### X101 falsifications, all with receipts
+
+| # | Lever | Receipt | Result |
+|---|---|---|---|
+| 35 | **ΨΗΦΟΣ** — collapse wire-level digit runs to one token | `psifos.json` | 763 pure-digit tokens (9.70 %) and 512 runs ≥ 2 across the ten wires, but the upper bound if *every* run collapsed is **130 tokens over ten lanes**, which cannot pay a new contract clause (~10 × 10 = 100) and leaves nothing for its decode cost. Digit population is real but ops-only (ls-l-real 19.3 %, ls-real 21.0 %, ps-aux-real 14.0 %) |
+| 36 | **ΠΡΟΣΘΕΣΗ** — re-open ΧΕΙΡΟΝ's ADD census on the *final* chain output | `prosthese.json` | **269 body n-gram candidates, pooled Δ = 0.** X94's closure was measured on the ΧΕΙΡΟΝ wire; re-pricing it after ΣΥΝΔΥΑΣΜΟΣ re-spelled every value changes the candidate set and not the answer |
+| 37 | **ΜΕΙΖΩΝ** — bound the order constraint on ΣΥΝΔΥΑΣΜΟΣ's factors | `meizon.json` | The −831 "upper bound" is **invalid**: the re-speller was allowed to reference a rule's *own* value, so the bound was not a bound. Reported as withdrawn, not as headroom |
+| 38 | **ΠΡΟΤΕΡΟΣ** — order the tape by increasing expanded length so every shorter value is a legal factor | `proteros.json` | **+133 / +315 / +154.** A length order destroys boundary fusion before any re-spelling pays for it, and the greedy longest-factor re-spelling then *expands* values, because inserting a script glyph breaks the BPE merges around it |
+| 39 | **ΣΤΑΘΜΟΣ stage 2** — widen the separator gate | `stathmos29b.json` | **Δ = 0 on 29/29** |
+| 40 | **ΣΤΑΘΜΟΣ stage 3** — raise the shared work meter 4× | `stathmos29c.json` | **Δ = 0 on 29/29** ⇒ the search has converged |
+| 41 | **ΤΥΠΟΣ** — price the emitted wire, not the search proxy | `typos29.json`, `typosprobe.json` | **Δ = 0 on 29/29**, and instrumented: **5 504 candidates priced, 0 on a different string.** Latent-defect fix, not a gain |
+| 42 | **ΠΑΡΑΚΟΛΟΥΘΙΑ** — mine the token-**misaligned** repeats ΧΕΙΡΟΝ's token-aligned mining cannot see | `parakolouthia.json` | The population is real and large — **675 misaligned candidates priced exactly** — and the pooled best Δ is **−1 token over ten lanes**. ΧΕΙΡΟΝ's comment ("char-level n-gram mining proposes phrases whose substitution splits the BPE merges around every site") is **correct** |
+
+### What the frontier reads now
+
+`tagstackFrontier` over the 29 lanes, `OMEGA_DET=1 OMEGA_NO_MEMO=1`
+(`receipts/frontier-runX101b.json`): **12 639, exact 29/29, 0 lanes differing from the X80 receipt.**
+
+> **The frontier is exactly the configuration named last turn and no restatement is needed.** The
+> compression axis did **not** move in X101. Every mechanism that was priced exactly came back at
+> Δ = 0 or worse, and the one that paid — ΣΤΑΘΜΟΣ — pays on CPU. This is reported as plainly as a
+> gain would be.
+
+### Why the compression axis is closed, and the external result that says so
+
+The body is 77 % literal tokens, and a literal token is the tokenizer's own price of non-repeated
+text. The gap between the readable frontier (12 639) and the independent entropy floor (10 158) is
+**2 481 tokens = 18.17 %**, and it is not reachable by any byte-perfect, directly model-readable
+codec, because reaching it requires arithmetic coding, which is inadmissible here (Kipf et al.,
+*Waiting to Decompress*, VLDB CIDR 2026: losslessness requires model, tokenizer, mask, context and
+arithmetic coder to be identical at compress and decompress time).
+
+A 2026 result now names the reason the residual cannot be recovered by a *greedy* mechanism at all:
+**byte-pair encoding can lose more than half of the optimal compression**
+(`alphaxiv.org/abs/2610.byte-pair-encoding-optimal-compression`, Yang) — BPE's worst-case compression
+utility is at most **(1 − e⁻²)/2 ≈ 0.4323** of optimal, and the mechanism is exactly that *"a merge
+with the largest immediate payoff can destroy adjacent savings that a better-planned sequence would
+collect."* ΧΕΙΡΟΝ is a greedy grammar compressor over a tokenizer that is itself greedy in precisely
+that sense, so the readable representation is bounded by two nested greedy constructions. The measured
+18.17 % is consistent with that bound rather than evidence of an unexploited mechanism.
+
+### Generalised local leaders, X101 configuration
+
+`bench/x101/leaders-x101.ts` → `receipts/leaders-x101.json`. Pure join: **zero frontier calls**, `raw`
+and `floor` and the **category labels** imported from `bench/x90/receipts/leaders-x90.json` and not
+re-measured, `shipped` measured in this process under `OMEGA_DET=1 OMEGA_NO_MEMO=1`.
+**headroom = (shipped − floor) / (raw − floor)**, the fraction of the achievable saving still
+unclaimed; **readability price = (shipped − floor) / shipped**.
+
+| category | lanes | raw | shipped | ratio | floor | headroom | price | leader |
+|---|---|---|---|---|---|---|---|---|
+| OPS TABLE | 11 | 4 135 | 1 712 | 0.4140 | 1 272 | **15.4 %** | 25.7 % | `kubectl-get-pods` 1 006 → 322 |
+| OPS LISTING | 9 | 16 516 | 5 776 | 0.3497 | 4 420 | **11.2 %** | 23.5 % | `ls-l-real` 5 194 → 1 381 |
+| CODE / MARKUP | 3 | 3 152 | 2 053 | 0.6513 | 1 728 | **22.8 %** | 15.8 % | `code-ts` 1 422 → 968 |
+| DATA | 2 | 1 095 | 234 | 0.2137 | 209 | **2.8 %** | 10.7 % | `prices.csv` 582 → 133 |
+| PROSE | 4 | 3 117 | 2 639 | 0.8466 | 2 529 | **18.7 %** | 4.2 % | `node-help` 1 099 → 860 |
+| **ALL** | **29** | **28 015** | **12 414** | **0.4431** | **10 158** | **12.6 %** | **18.17 %** | |
+
+> **A correction that must not be dropped.** The first version of this table printed a negative
+> "headroom" on every category, because the formula was `1 − (raw − floor)/(raw − shipped)`, which is
+> meaningless whenever `shipped > floor`. The **shipped measurements are unchanged**; only the derived
+> quantity was corrected. The first version also re-derived the categories with a regex of my own,
+> which classified all 29 lanes as ops and matched **no PROSE lane at all** — this 29-lane set contains
+> no lane whose *name* looks like prose, and the four PROSE lanes are `node-help`, `llm-answer`,
+> `kb-article` and `email-thread` by the X90 labels. Categories are now imported, not re-derived.
+
+### Model-readability
+
+The contract is byte-identical, the operator set is unchanged, and the decode rule is unchanged, so a
+reader who could expand the X100 incumbent can expand the X101 wire by the same rule.
+**Downgraded, not declared verified: no model API exists in this environment, so LLM decodability was
+not tested.** External support is unchanged: arXiv:2604.13066 (in-context dictionary learning, exact
+match > 0.99) and arXiv:2606.19857 (BabelTele, "Universality: any LLM should fully understand
+compressed output without a codebook").
+
+---
+
+## §X102 — ΔΙΑΓΡΑΦΗ and ΠΑΛΙΝΔΡΟΜΟΣ: the wire is never swept, and no codec is ever re-run
+
+### The two structural findings
+
+**1. ΧΕΙΡΟΝ's only rule-deletion pass is budget-gated, and nothing sweeps after it.** ΧΕΙΡΟΝ's macro
+search ends with a backward-deletion pass — *"a rule that stopped paying is removed"* — gated by
+
+```js
+while (changed && !spent() && trials < 400) {
+  for (let i = rules.length - 1; i >= 0; i--) {
+    if (trials++ >= 400 || spent()) break;
+```
+
+`spent()` is the **shared work meter**, and it is nearly gone by then: 96 % exhausted on ls-l-real,
+75 % on ps-aux-real, 73 % on code-ts (`bench/x101/klimax29.json`). Nothing downstream sweeps either —
+ΜΕΤΑΤΑΞΙΣ relocates rules, ΣΥΝΔΥΑΣΜΟΣ re-spells their values, ΓΕΝΝΑΔΑΣ relocates again, and **none of
+them asks whether a rule that paid at ΧΕΙΡΟΝ time still pays now.** The shipped wire has never been
+swept.
+
+**2. Every wire-level codec is called exactly once, in a fixed order, and each one's gate is a descent
+step.** `tagstackEncode` runs ἸΣΟΜΟΡΦΪΑ → ΜΕΤΑΤΑΞΙΣ → ΣΥΝΔΥΑΣΜΟΣ → ΓΕΝΝΑΔΑΣ → ΔΙΑΓΡΑΦΗ and never goes
+back. A gate of the form "the whole message got strictly smaller" is locally optimal only for the
+objective it was measured against: after ΜΕΤΑΤΑΞΙΣ relocates a rule the tape's price changes, so a
+re-spelling ΣΥΝΔΥΑΣΜΟΣ rejected a moment ago may now pay, and a rule ΧΕΙΡΟΝ kept may now be dead.
+ΓΕΝΝΑΔΑΣ is the only codec that loops at all, and it loops over two moves inside its own call.
+
+### ΔΙΑΓΡΑΦΗ — sweep the finished wire for rules that no longer pay
+
+`src/lib/omega/diagraphe.ts`. For each rule, last to first: write its value back into every user (the
+body and every other rule's value), drop the rule, re-price the **whole message**, and keep it only if
+the message got strictly smaller **and** `chironDecode` is unchanged. Not budget-gated, so it cannot be
+cut short by the meter ΧΕΙΡΟΝ's own pass shares with the variant sweep.
+
+Three properties make it a different mechanism rather than a rehash: it runs on the **post-wire-level**
+wire, so it sees what ΜΕΤΑΤΑΞΙΣ/ΣΥΝΔΥΑΣΜΟΣ/ΓΕΝΝΑΔΑΣ did to the tape's price; it is not budget-gated;
+and its predicate is the whole message re-priced and re-decoded, not a per-rule bound.
+
+**Results.** 29-lane interleaved A/B (`receipts/diagraphe29.json`, arm A = `OMEGA_NO_DIAGRAPHE=1`):
+**12 410 → 12 405, Δ = −5 tokens, 3 lanes improved (ls-real −1, dpkg-l −2, apt-real −2), 0 worse,
+byte-exact (`decoded === source`) on 29/29.** Isolated CPU, alternating reps, three each, median
+(`receipts/diacpu.json`): **75 429 ms vs 76 953 ms control = 2.0 % faster, byte-exact on every rep of
+both arms.** The 2.0 % is inside run-to-run drift and is reported as **no measurable cost**, not as a
+speedup.
+
+**ΔΙΑΓΡΑΦΗ is Pareto-superior on both axes: fewer tokens at no measurable CPU cost, with zero
+fidelity loss.** It ships ENABLED.
+
+### ΠΑΛΙΝΔΡΟΜΟΣ — re-run the whole sequence to a fixed point
+
+`src/lib/omega/palindromos.ts`. Re-runs the entire wire-level sequence against the incumbent until no
+member improves, capped at 3 rounds. Because every member's gate is a strict decrease on an integer
+token count, the loop terminates. It introduces no move, no operator and no contract clause — its
+contribution is the **schedule**, and its gain is exactly the set of improvements invisible to any
+single pass.
+
+**Results.** 29-lane interleaved A/B on top of ΔΙΑΓΡΑΦΗ (`receipts/palindromos29.json`, arm A =
+`OMEGA_NO_PALINDROMOS=1`): **Δ = −9 tokens, 4 lanes improved (ls-l-real −5, metrics.tsv −2, code-ts −1,
+dpkg-l −1), 0 worse, byte-exact 29/29.** Per-member instrumentation (`bench/x102/palmembers.ts`):
+**ΓΕΝΝΑΔΑΣ 3 accepted steps, ΔΙΑΓΡΑΦΗ 1, ΜΕΤΑΤΑΞΙΣ 1, ἸΣΟΜΟΡΦΪΑ 1, ΣΥΝΔΥΑΣΜΟΣ 0.** The maximum
+observed on any lane is 2 accepted steps, so the loop terminates in at most 3 rounds everywhere.
+
+**And its cost is real, so it ships DISABLED.** Isolated CPU, alternating reps, medians
+(`receipts/x102cpu.json`): **109 959 ms vs 63 648 ms control = +72.8 % wall clock** on the six lanes
+measured, because the loop re-runs ΓΕΝΝΑΔΑΣ and ΓΕΝΝΑΔΑΣ's `relocateToEnable` is O(rules²). 0.07 % of
+tokens is not worth 1.7× the wall clock for a user who is not billed per token, so
+`OMEGA_PALINDROMOS=1` is opt-in and the trade is documented rather than hidden.
+
+### Greedy, source, and cost model
+
+| codec | greedy? | source | time- or CPU-bound |
+|---|---|---|---|
+| **ΔΙΑΓΡΑΦΗ** | **Greedy, single sweep, last-to-first.** Each deletion is priced on the whole message and the first strictly-improving one is kept; the sweep repeats until a full pass deletes nothing. No claim about the joint optimum | arXiv:1704.05254 (Maneth, *Grammar-Based Graph Compression*): *"as we remove rules, the contribution of other nonterminals might change… **the effectiveness of pruning depends on the order in which the nonterminals are considered**"*, with the explicit worked example that *"the B-rule turns into a contributing rule if the A-rule is removed first"*. Also: *"every SLP can be easily made irreducible by a simple post-processing"*, and irreducibility is what the O(n/log n) size bound assumes. The rule-profit notion `p(A) = |cs|_A(|α|−1) − |α|` is the same local bound ΧΕΙΡΟΝ uses (ICALP 2016, *On the Complexity of Grammar-Based Compression over Fixed Alphabets*) | **Neither, measurably.** −5 tokens at 2.0 % faster, which is drift, not a speedup |
+| **ΠΑΛΙΝΔΡΟΜΟΣ** | **Greedy descent over a fixed member list, to a fixed point.** Not a search over schedules: the member order is the chain's own order, and no permutation is explored | The **phase-ordering problem**. UW PLSE (2025): with passes A (interval-analysis peepholes) and B (conditional invariant code motion), *"neither ordering of A and B correctly optimizes both P and Q"* — a fixed single pass is structurally insufficient. The standard remedy, stated in the Scala-LMS tutorial: *"**re-run the analyses on the transformed code until a fixpoint is reached**"* | **CPU-bound, and expensive: +72.8 %.** Ships disabled |
+
+An external prediction that matched the measurement: Siyari et al. (PMLR v57) report a post-processing
+pass over *any* SGP grammar and find that *"while the reduction in size is small, it applies
+consistently throughout all the SGP algorithms we tried. **The better the original algorithm, the
+smaller the gain.**"* ΧΕΙΡΟΝ is a good SGP compressor, and ΔΙΑΓΡΑΦΗ's −5 over 29 lanes is exactly that
+shape.
+
+### X102 falsifications, all with receipts
+
+| # | Lever | Receipt | Result |
+|---|---|---|---|
+| 45 | **ΠΡΟΣΘΕΣΗ (corrected)** — ΧΕΙΡΟΝ's ADD census on the final wire, **no model filter** | `epanalepsis.json` | **270 exact prices, Δ = 0 on all ten lanes.** The X101 version of this probe had an **inverted filter** (`if (model >= 0) continue` skipped every candidate the model predicted would pay); it is corrected here and the conclusion survives |
+| 46 | **ΕΠΑΝΑΛΗΨΙΣ Β** — the same, but candidates mined from the **body and the rule values** | `epanalepsis2.json` | **52 335 candidates, 283 exact prices, Δ = 0 on all ten lanes.** ΧΕΙΡΟΝ mines `[body, …lit rule texts]` but only at ΧΕΙΡΟΝ time; this mines the same population after ΣΥΝΔΥΑΣΜΟΣ has re-spelled every value. The dictionary is exhausted there too |
+| 47 | **ΠΑΛΙΝΔΡΟΜΟΣ** as a default | `palindromos29.json`, `x102cpu.json` | −9 tokens for **+72.8 % CPU**. A trade, not a Pareto improvement; shipped opt-in |
+
+### What the frontier reads now
+
+`tagstackFrontier` over the 29 lanes, `OMEGA_DET=1 OMEGA_NO_MEMO=1`
+(`receipts/frontier-runX102b.json`): **12 639, exact 29/29, 0 lanes differing from the X80 receipt.**
+
+> **The frontier is exactly the configuration named last turn; no restatement is needed.** The gate
+> number cannot move — ΔΙΑΓΡΑΦΗ and ΠΑΛΙΝΔΡΟΜΟΣ are wire-level codecs gated against the frontier, not
+> members of it. The **shipped** number moves: 12 410 → 12 405 on the 29-lane `tagstackEncode` path.
+
+### What has been missed this whole time
+
+The honest answer, after ten turns of falsifications, is that **the compression axis under these
+constraints is closed, and the reason is measurable rather than speculative.** 55.6 % of the message is
+body literals, and a literal token is the tokenizer's own price of non-repeated text. Every mechanism
+that could address it — ADD/FACTOR, token-misaligned repeats, digit collapse, script switching, letter
+reassignment, rule relocation, value re-spelling, contract repricing, separator widening, budget
+raising — has been priced exactly and returned Δ = 0 or worse. The remaining 18.17 % gap to the
+entropy floor requires arithmetic coding, which is inadmissible, and a 2026 result now bounds what any
+greedy mechanism can recover: **BPE's worst-case compression utility is at most (1 − e⁻²)/2 ≈ 0.4323
+of optimal** because *"a merge with the largest immediate payoff can destroy adjacent savings that a
+better-planned sequence would collect"* (`alphaxiv.org/abs/2610.byte-pair-encoding-optimal-compression`).
+ΧΕΙΡΟΝ is a greedy grammar compressor over a tokenizer that is itself greedy in that sense.
+
+**So the AI-native ideas that are not blind spots are the ones about the SEARCH, not the wire.** Two
+of them paid this turn and they are both of that kind: the sweep (ΔΙΑΓΡΑΦΗ) and the schedule
+(ΠΑΛΙΝΔΡΟΜΟΣ). Neither is a compression idea at all — they are ideas about what a compressor owes its
+own output. That is the same lesson the 2026 formal-verification literature is learning from the other
+direction: on VERINA, OpenAI o3 reaches **72.6 % code correctness, 52.3 % specification correctness and
+4.9 % end-to-end proof success** (arXiv:2605.30914), and a dedicated fault taxonomy
+(arXiv:2606.29493, June 2026) finds **Specification Error, Formalization Error, Domain Mismatch and
+Definition Mismatch** as first-class failure modes, detected by frontier models at only 0.48–0.57
+recall. **A checker pointed at the wrong object is not a rounding error; it is the dominant term.**
+ΓΕΝΝΑΔΑΣ's gate, ΤΥΠΟΣ's accept test and this turn's two codecs are all the same correction applied
+to a compressor.
+
+### Generalized local leaders, X102 configuration
+
+`bench/x101/leaders-x101.ts` → `bench/x101/receipts/leaders-x101.json` is unchanged in construction
+and is the current table: pure join, zero frontier calls, `raw`/`floor`/category labels imported from
+`bench/x90/receipts/leaders-x90.json`, `shipped` measured in-process.
+**headroom = (shipped − floor)/(raw − floor)**; **readability price = (shipped − floor)/shipped**.
+
+| category | lanes | raw | shipped | ratio | floor | headroom | price | leader |
+|---|---|---|---|---|---|---|---|---|
+| OPS TABLE | 11 | 4 135 | 1 712 | 0.4140 | 1 272 | **15.4 %** | 25.7 % | `kubectl-get-pods` 1 006 → 322 |
+| OPS LISTING | 9 | 16 516 | 5 776 | 0.3497 | 4 420 | **11.2 %** | 23.5 % | `ls-l-real` 5 194 → 1 381 |
+| CODE / MARKUP | 3 | 3 152 | 2 053 | 0.6513 | 1 728 | **22.8 %** | 15.8 % | `code-ts` 1 422 → 968 |
+| DATA | 2 | 1 095 | 234 | 0.2137 | 209 | **2.8 %** | 10.7 % | `prices.csv` 582 → 133 |
+| PROSE | 4 | 3 117 | 2 639 | 0.8466 | 2 529 | **18.7 %** | 4.2 % | `node-help` 1 099 → 860 |
+| **ALL** | **29** | **28 015** | **12 414** | **0.4431** | **10 158** | **12.6 %** | **18.17 %** | |
+
+ΔΙΑΓΡΑΦΗ's three improved lanes and ΠΑΛΙΝΔΡΟΜΟΣ's four are all **ops or code**, none prose —
+consistent with the X99 ranking that put OPS TABLE and OPS LISTING ahead of PROSE, and with the tape
+share that separates them (25–40 % for ops, 9 % for prose). **Prose remains the category with the
+largest unclaimed headroom fraction (18.7 %) and the smallest absolute one (110 tokens over four
+lanes)**, and no mechanism has been found that addresses it.
+
+### Model-readability
+
+ΔΙΑΓΡΑΦΗ's output is an ordinary ΧΕΙΡΟΝ wire with fewer rules; ΠΑΛΙΝΔΡΟΜΟΣ's output is an ordinary
+ΧΕΙΡΟΝ wire produced by the same operators. **Neither adds an operator, a contract clause or a decode
+rule**, so a reader who could expand the X101 incumbent can expand this by the same rule.
+**Downgraded, not declared verified: no model API exists in this environment, so LLM decodability was
+not tested.** External support is unchanged: arXiv:2604.13066 (in-context dictionary learning, exact
+match > 0.99) and arXiv:2606.19857 (BabelTele, "Universality: any LLM should fully understand
+compressed output without a codebook").

@@ -1,0 +1,120 @@
+{
+ "note": "X100 GENNADAS fidelity: CHIRON-layer expansion equality between arms, checked with chironDecode on the exact emitted strings",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "armA": 837,
+   "armB": 837,
+   "delta": 0,
+   "expansionEqual": true,
+   "aExpansionIsSource": true,
+   "aExpansionIsChainDecoded": true,
+   "expBytes": 6195,
+   "srcBytes": 6195
+  },
+  {
+   "lane": "code-ts",
+   "armA": 969,
+   "armB": 968,
+   "delta": -1,
+   "expansionEqual": true,
+   "aExpansionIsSource": true,
+   "aExpansionIsChainDecoded": true,
+   "expBytes": 6000,
+   "srcBytes": 6000
+  },
+  {
+   "lane": "dpkg-l",
+   "armA": 669,
+   "armB": 669,
+   "delta": 0,
+   "expansionEqual": true,
+   "aExpansionIsSource": true,
+   "aExpansionIsChainDecoded": true,
+   "expBytes": 4459,
+   "srcBytes": 4459
+  },
+  {
+   "lane": "findmnt",
+   "armA": 440,
+   "armB": 440,
+   "delta": 0,
+   "expansionEqual": true,
+   "aExpansionIsSource": true,
+   "aExpansionIsChainDecoded": true,
+   "expBytes": 3215,
+   "srcBytes": 3215
+  },
+  {
+   "lane": "json-pkg",
+   "armA": 672,
+   "armB": 670,
+   "delta": -2,
+   "expansionEqual": true,
+   "aExpansionIsSource": true,
+   "aExpansionIsChainDecoded": true,
+   "expBytes": 3620,
+   "srcBytes": 3620
+  },
+  {
+   "lane": "kb-article",
+   "armA": 621,
+   "armB": 621,
+   "delta": 0,
+   "expansionEqual": true,
+   "aExpansionIsSource": true,
+   "aExpansionIsChainDecoded": true,
+   "expBytes": 3385,
+   "srcBytes": 3385
+  },
+  {
+   "lane": "llm-answer",
+   "armA": 671,
+   "armB": 671,
+   "delta": 0,
+   "expansionEqual": true,
+   "aExpansionIsSource": true,
+   "aExpansionIsChainDecoded": true,
+   "expBytes": 2542,
+   "srcBytes": 2542
+  },
+  {
+   "lane": "ls-l-real",
+   "armA": 1408,
+   "armB": 1381,
+   "delta": -27,
+   "expansionEqual": true,
+   "aExpansionIsSource": false,
+   "aExpansionIsChainDecoded": false,
+   "expBytes": 10085,
+   "srcBytes": 10692
+  },
+  {
+   "lane": "ls-real",
+   "armA": 432,
+   "armB": 432,
+   "delta": 0,
+   "expansionEqual": true,
+   "aExpansionIsSource": true,
+   "aExpansionIsChainDecoded": true,
+   "expBytes": 2486,
+   "srcBytes": 2486
+  },
+  {
+   "lane": "ps-aux-real",
+   "armA": 1043,
+   "armB": 1043,
+   "delta": 0,
+   "expansionEqual": true,
+   "aExpansionIsSource": true,
+   "aExpansionIsChainDecoded": true,
+   "expBytes": 6590,
+   "srcBytes": 6590
+  }
+ ],
+ "totals": {
+  "expansionEqual": 10,
+  "aExpansionIsSource": 9,
+  "aExpansionIsChainDecoded": 9
+ }
+}

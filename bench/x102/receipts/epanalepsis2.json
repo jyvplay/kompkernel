@@ -1,0 +1,102 @@
+{
+ "note": "X102 EPANALEPSIS B: re-mine CHIRON ADD over the body AND the rule values (the population CHIRON mines but only at CHIRON time, before SYNDYASMOS re-spells the values)",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "base": 835,
+   "after": 835,
+   "delta": 0,
+   "rulesAdded": 0,
+   "candidates": 5896,
+   "priced": 29
+  },
+  {
+   "lane": "code-ts",
+   "base": 968,
+   "after": 968,
+   "delta": 0,
+   "rulesAdded": 0,
+   "candidates": 6638,
+   "priced": 48
+  },
+  {
+   "lane": "dpkg-l",
+   "base": 667,
+   "after": 667,
+   "delta": 0,
+   "rulesAdded": 0,
+   "candidates": 4862,
+   "priced": 23
+  },
+  {
+   "lane": "findmnt",
+   "base": 440,
+   "after": 440,
+   "delta": 0,
+   "rulesAdded": 0,
+   "candidates": 2881,
+   "priced": 23
+  },
+  {
+   "lane": "json-pkg",
+   "base": 670,
+   "after": 670,
+   "delta": 0,
+   "rulesAdded": 0,
+   "candidates": 4781,
+   "priced": 20
+  },
+  {
+   "lane": "kb-article",
+   "base": 621,
+   "after": 621,
+   "delta": 0,
+   "rulesAdded": 0,
+   "candidates": 4923,
+   "priced": 13
+  },
+  {
+   "lane": "llm-answer",
+   "base": 671,
+   "after": 671,
+   "delta": 0,
+   "rulesAdded": 0,
+   "candidates": 5135,
+   "priced": 22
+  },
+  {
+   "lane": "ls-l-real",
+   "base": 1381,
+   "after": 1381,
+   "delta": 0,
+   "rulesAdded": 0,
+   "candidates": 7829,
+   "priced": 51
+  },
+  {
+   "lane": "ls-real",
+   "base": 431,
+   "after": 431,
+   "delta": 0,
+   "rulesAdded": 0,
+   "candidates": 2555,
+   "priced": 17
+  },
+  {
+   "lane": "ps-aux-real",
+   "base": 1043,
+   "after": 1043,
+   "delta": 0,
+   "rulesAdded": 0,
+   "candidates": 6835,
+   "priced": 37
+  }
+ ],
+ "totals": {
+  "base": 7727,
+  "after": 7727,
+  "delta": 0,
+  "candidates": 52335,
+  "priced": 283
+ }
+}

@@ -36,6 +36,10 @@ import { synkrisisEncode } from './synkrisis';
 import { isomorphiaEncode, isomorphiaDisabled } from './isomorphia';
 import { metataxisEncode, metataxisDisabled } from './metataxis';
 import { syndyasmosDisabled, syndyasmosEncode } from './syndyasmos';
+import { gennadasDisabled, gennadasEncode } from './gennadas';
+import { diagrapheDisabled, diagrapheEncode } from './diagraphe';
+import { palindromosDisabled, palindromosEncode } from './palindromos';
+import { CHIRON_START, chironDecode } from './chiron';
 
 export type TagstackMode = 'xml' | 'html';
 export type TagstackFrontierParent = 'synkrisis' | 'bifront' | 'kanon' | 'akolouthia2' | 'apographe' | 'metron' | 'hemera' | 'diastema';
@@ -648,6 +652,62 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
       notes: `${name} ${cand.notes}; ${best.notes}`,
     };
   };
+  /**
+   * X100 — PARENT-RELATIVE ADMISSION, for ΓΕΝΝΑΔΑΣ only.
+   *
+   * `admit`'s predicate is `cand.decoded === text` with `text` the SOURCE.  That is
+   * the right invariant for a codec that re-encodes the source, and the wrong one
+   * for a codec that edits the WIRE the source has already been compiled into.
+   * When the layer below is a text-transform codec — OURA collapses `1.0.0` to a
+   * `~`-marked `100` before CHIRON ever mines the tape — expanding the incumbent's
+   * wire yields OURA's OUTPUT, not the source, and `admit`'s predicate is
+   * unsatisfiable.  The lane is then declined without ever being searched, and the
+   * refusal is indistinguishable from a genuine negative result.  ls-l-real, the
+   * largest of the ten authoritative lanes, sat in exactly that state for three
+   * turns (bench/x100/lsl2.ts: chironDecode gives 10 621 bytes against a 10 692-byte
+   * source, while chironEncode of the source ALONE is 1 768 tokens and exact —
+   * i.e. CHIRON without OURA, which is not what the chain produces).
+   *
+   * The invariant here is the compositional one: the candidate must preserve the
+   * object the INCUMBENT produces.  On a pure-CHIRON lane `best.decoded === text`,
+   * so this path is identical to `admit` and nothing changes.  On a composed lane
+   * it is the only predicate that can be satisfied at all.
+   *
+   * It is CONSERVATIVE in the one direction that matters.  The comparison is made by
+   * the repository's own decoder on the exact strings both codecs emit, so nothing is
+   * admitted unless the incumbent's CHIRON-layer expansion is reproduced byte for
+   * byte.  Because every layer above ΧΕΙΡΟΝ is a deterministic function of that
+   * expansion, preserving it preserves the full-chain decode as well — which is why
+   * the lane's own `exact` flag can be re-checked after the fact and still hold.
+   */
+  const admitParentRelative = (name: string, cand: WideResult | null): void => {
+    if (!cand || !cand.applied) return;
+    if (cand.messageTokens >= best.messageTokens) return; // must beat the incumbent on the message
+    // THE INVARIANT, checked with the repository's own decoder on the exact strings
+    // rather than by trusting either codec's self-report.  A wire-level codec edits
+    // the CHIRON tape, so what it must preserve is the CHIRON-LAYER EXPANSION of the
+    // incumbent.  Comparing that is what makes the predicate satisfiable on a lane
+    // whose parent is a text-transform codec, and it is also strictly stronger than
+    // comparing `decoded` fields: `best.decoded` is the FULL-CHAIN decode (OURA's
+    // inverse included) and is NOT chironDecode(best.message) on such a lane, which
+    // is exactly why the first version of this path refused the only lane it was
+    // written for.  If the two expansions differ, nothing is admitted.
+    let incExp: string, candExp: string;
+    try {
+      incExp = chironDecode(best.message.slice(best.message.indexOf(CHIRON_START)));
+      candExp = chironDecode(cand.message.slice(cand.message.indexOf(CHIRON_START)));
+    } catch { return; }
+    if (incExp !== candExp) return;
+    best = {
+      ...best,
+      wire: cand.message,
+      message: cand.message,
+      messageTokens: cand.messageTokens,
+      applied: true,
+      arm: 'tagstack' as TagstackResult['arm'],
+      notes: `${name} ${cand.notes}; ${best.notes}`,
+    };
+  };
   try { admit('PROSPHYSIS', prosphysisEncode(text, enc) as unknown as WideResult); } catch { /* not a candidate */ }
   // X90 ΣΥΜΦΥΊΑ generalises PROSPHYSIS from one hardcoded shape (a symlink target that
   // STARTS with the field before " -> ") to a template FITTED over the record set: any field
@@ -697,6 +757,59 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
   // −27, combined −76, all arms chironDecode-exact 9/9.
   if (!syndyasmosDisabled()) {
     try { admit('ΣΥΝΔΥΑΣΜΟΣ', syndyasmosEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X100 — ΓΕΝΝΑΔΑΣ.  Runs LAST, after ΣΥΝΔΥΑΣΜΟΣ, and does the one thing no codec
+  // above it can: it gates against the object the incumbent ACTUALLY PRODUCED
+  // (chironDecode(best.message)) instead of against the source.  On a lane whose
+  // parent is a text-transform codec — OURA's `~`-marked tail-collapsed numbers
+  // above all — the two differ, and every codec above gates on `decoded === text`
+  // with `text` the SOURCE, a predicate that is unsatisfiable there.  Those lanes
+  // are not "searched and declined"; they are never searched, and the refusal
+  // reads the same either way.  ls-l-real is the largest of the ten authoritative
+  // lanes (1 476 tok, 18.8 % of 7 864) and had been declined by all three.
+  //
+  // Its second move, RELOCATE-TO-ENABLE, is one ΣΥΝΔΥΑΣΜΟΣ structurally lacks:
+  // find a rule j sitting AFTER rule i whose value is already a perfect prefix
+  // or suffix of value(i), relocate j to just before i so it becomes a legal
+  // factor, and re-spell value(i) with it — turning a dead script->ASCII boundary
+  // into a live script->script one (glossa.json: 0 vocabulary tokens of the S->A
+  // shape against 823 cyrillic / 3 417 polyglot of the S->S shape).
+  //
+  // Measured in chain position on the ten authoritative wires, one process,
+  // whole-message priced, chironDecode-gated against the parent's output
+  // (bench/x100/receipts/gennadaschain.json): incremental −29, three lanes
+  // improved (ls-l-real −26, apt-real −1, json-pkg −2), zero worse, zero inexact.
+  if (!gennadasDisabled()) {
+    try { admitParentRelative('ΓΕΝΝΑΔΑΣ', gennadasEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X102 — ΔΙΑΓΡΑΦΗ.  ΧΕΙΡΟΝ's own backward-deletion pass is gated on the SHARED
+  // work meter (`while (changed && !spent() && trials < 400)`), and that meter is
+  // 96 % exhausted on ls-l-real, 75 % on ps-aux-real and 73 % on code-ts
+  // (bench/x101/klimax29.json) — so ΧΕΙΡΟΝ's cleanup is cut short exactly where
+  // it has the most rules.  Nothing downstream sweeps after it either:
+  // ΜΕΤΑΤΑΞΙΣ, ΣΥΝΔΥΑΣΜΟΣ and ΓΕΝΝΑΔΑΣ all change the tape's price and none of
+  // them asks whether a rule that paid at ΧΕΙΡΟΝ time still pays now.  This is
+  // that sweep, on the finished wire, where it is not budget-gated.  It adds no
+  // operator, no contract clause and no decode rule.
+  if (!diagrapheDisabled()) {
+    try { admitParentRelative('ΔΙΑΓΡΑΦΗ', diagrapheEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X102 — ΠΑΛΙΝΔΡΟΜΟΣ.  Every wire-level codec above is called exactly once, in a
+  // fixed order, and each one's gate is "the whole message got strictly smaller".
+  // A gate like that is a DESCENT step, locally optimal only for the objective it
+  // was measured against: after ΜΕΤΑΤΑΞΙΣ relocates a rule the tape's price
+  // changes, so a re-spelling ΣΥΝΔΥΑΣΜΟΣ rejected a moment ago may now pay and a
+  // rule ΧΕΙΡΟΝ's deletion pass kept may now be dead.  Nothing in the stack ever
+  // goes back.  ΠΑΛΙΝΔΡΟΜΟΣ re-runs the whole sequence until no member improves.
+  // It introduces no move, no operator and no contract clause — its contribution
+  // is the schedule, and its gain is exactly the set of improvements invisible to
+  // any single pass.
+  //
+  // OPT-IN, and that is measured rather than cautious: -9 tokens for +72.8 %
+  // wall clock (bench/x102/receipts/palindromos29.json, x102cpu.json).  Set
+  // OMEGA_PALINDROMOS=1 to take the trade.
+  if (!palindromosDisabled()) {
+    try { admitParentRelative('ΠΑΛΙΝΔΡΟΜΟΣ', palindromosEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
   }
   return best;
 }
