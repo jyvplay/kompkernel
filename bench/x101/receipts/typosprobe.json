@@ -1,0 +1,7 @@
+{
+ "note": "X101 TYPOS instrumentation: how often the priced string differs from the shipped string",
+ "totals": {
+  "priced": 5504,
+  "differed": 0
+ }
+}

@@ -1,0 +1,79 @@
+{
+ "note": "X101 PROSTHESE: ADD census re-opened on the FINAL chain output, whole-message priced, chironDecode-gated",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "base": 835,
+   "candidates": 27,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "code-ts",
+   "base": 968,
+   "candidates": 48,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "dpkg-l",
+   "base": 669,
+   "candidates": 23,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "findmnt",
+   "base": 440,
+   "candidates": 23,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "json-pkg",
+   "base": 670,
+   "candidates": 20,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "kb-article",
+   "base": 621,
+   "candidates": 13,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "llm-answer",
+   "base": 671,
+   "candidates": 21,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "ls-l-real",
+   "base": 1381,
+   "candidates": 47,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "ls-real",
+   "base": 432,
+   "candidates": 11,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "ps-aux-real",
+   "base": 1041,
+   "candidates": 36,
+   "bestDelta": 0,
+   "bestDesc": ""
+  }
+ ],
+ "totals": {
+  "candidates": 269,
+  "bestDelta": 0
+ }
+}

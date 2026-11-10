@@ -1,0 +1,80 @@
+{
+ "note": "X101 MEIZON: is the order constraint on SYNDYASMOS factors binding? legal vs unordered re-spelling upper bound",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "rules": 64,
+   "actualTape": 193,
+   "legalRespell": 226,
+   "unorderedRespell": 128
+  },
+  {
+   "lane": "code-ts",
+   "rules": 75,
+   "actualTape": 239,
+   "legalRespell": 274,
+   "unorderedRespell": 150
+  },
+  {
+   "lane": "dpkg-l",
+   "rules": 48,
+   "actualTape": 124,
+   "legalRespell": 153,
+   "unorderedRespell": 96
+  },
+  {
+   "lane": "findmnt",
+   "rules": 34,
+   "actualTape": 122,
+   "legalRespell": 143,
+   "unorderedRespell": 68
+  },
+  {
+   "lane": "json-pkg",
+   "rules": 48,
+   "actualTape": 136,
+   "legalRespell": 155,
+   "unorderedRespell": 96
+  },
+  {
+   "lane": "kb-article",
+   "rules": 27,
+   "actualTape": 57,
+   "legalRespell": 61,
+   "unorderedRespell": 54
+  },
+  {
+   "lane": "llm-answer",
+   "rules": 34,
+   "actualTape": 87,
+   "legalRespell": 94,
+   "unorderedRespell": 68
+  },
+  {
+   "lane": "ls-l-real",
+   "rules": 134,
+   "actualTape": 563,
+   "legalRespell": 617,
+   "unorderedRespell": 267
+  },
+  {
+   "lane": "ls-real",
+   "rules": 48,
+   "actualTape": 160,
+   "legalRespell": 185,
+   "unorderedRespell": 96
+  },
+  {
+   "lane": "ps-aux-real",
+   "rules": 79,
+   "actualTape": 331,
+   "legalRespell": 377,
+   "unorderedRespell": 158
+  }
+ ],
+ "totals": {
+  "actual": 2012,
+  "legal": 2285,
+  "unordered": 1181
+ }
+}

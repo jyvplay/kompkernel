@@ -1,0 +1,101 @@
+{
+ "note": "X101 PARAKOLOUTHIA: token-MISALIGNED repeats, the population CHIRON token-aligned mining cannot see; whole-message priced, chironDecode-gated",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "base": 835,
+   "ngramCandidates": 5,
+   "misaligned": 2,
+   "priced": 2,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "code-ts",
+   "base": 968,
+   "ngramCandidates": 126,
+   "misaligned": 113,
+   "priced": 113,
+   "bestDelta": -1,
+   "bestDesc": "x3 len=7 \"/**\\n * \""
+  },
+  {
+   "lane": "dpkg-l",
+   "base": 669,
+   "ngramCandidates": 167,
+   "misaligned": 160,
+   "priced": 160,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "findmnt",
+   "base": 440,
+   "ngramCandidates": 214,
+   "misaligned": 211,
+   "priced": 211,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "json-pkg",
+   "base": 670,
+   "ngramCandidates": 13,
+   "misaligned": 11,
+   "priced": 11,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "kb-article",
+   "base": 621,
+   "ngramCandidates": 108,
+   "misaligned": 101,
+   "priced": 101,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "llm-answer",
+   "base": 671,
+   "ngramCandidates": 38,
+   "misaligned": 32,
+   "priced": 32,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "ls-l-real",
+   "base": 1381,
+   "ngramCandidates": 36,
+   "misaligned": 33,
+   "priced": 33,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "ls-real",
+   "base": 432,
+   "ngramCandidates": 8,
+   "misaligned": 8,
+   "priced": 8,
+   "bestDelta": 0,
+   "bestDesc": ""
+  },
+  {
+   "lane": "ps-aux-real",
+   "base": 1043,
+   "ngramCandidates": 6,
+   "misaligned": 4,
+   "priced": 4,
+   "bestDelta": 0,
+   "bestDesc": ""
+  }
+ ],
+ "totals": {
+  "ngramCandidates": 721,
+  "misaligned": 675,
+  "priced": 675,
+  "bestDelta": -1
+ }
+}

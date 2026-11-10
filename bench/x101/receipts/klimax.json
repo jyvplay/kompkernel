@@ -1,0 +1,106 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real",
+   "bytes": 6195,
+   "tokens": 1120,
+   "ms": 741,
+   "variant": "macros-only",
+   "notes": "variant=macros-only; 66 macro rules, 0 blocks, 0 lists; script=hangul; contract=40 tok for ops [rules]; whole-wire decode + message gate verified; sweep work budget charged=25206117/64000000; LCS cells, block scans and macro spans share this deterministic cap"
+  },
+  {
+   "lane": "code-ts",
+   "bytes": 6000,
+   "tokens": 1138,
+   "ms": 789,
+   "variant": "full/\"\\n\"",
+   "notes": "variant=full/\"\\n\"; 55 macro rules, 0 blocks, 0 lists; script=hangul; contract=40 tok for ops [rules]; whole-wire decode + message gate verified; sweep work budget charged=46569073/64000000; LCS cells, block scans and macro spans share this deterministic cap"
+  },
+  {
+   "lane": "dpkg-l",
+   "bytes": 4459,
+   "tokens": 767,
+   "ms": 428,
+   "variant": "full/\" \"",
+   "notes": "variant=full/\" \"; 23 macro rules, 0 blocks, 0 lists; script=hangul; contract=39 tok for ops [rules]; whole-wire decode + message gate verified; sweep work budget charged=33062306/64000000; LCS cells, block scans and macro spans share this deterministic cap"
+  },
+  {
+   "lane": "findmnt",
+   "bytes": 3215,
+   "tokens": 518,
+   "ms": 358,
+   "variant": "full/\",\"",
+   "notes": "variant=full/\",\"; 23 macro rules, 0 blocks, 0 lists; script=hangul; contract=39 tok for ops [rules]; whole-wire decode + message gate verified; sweep work budget charged=32814163/64000000; LCS cells, block scans and macro spans share this deterministic cap"
+  },
+  {
+   "lane": "json-pkg",
+   "bytes": 3620,
+   "tokens": 794,
+   "ms": 543,
+   "variant": "full/\" \"",
+   "notes": "variant=full/\" \"; 39 macro rules, 0 blocks, 0 lists; script=hangul; contract=39 tok for ops [rules]; whole-wire decode + message gate verified; sweep work budget charged=20596063/64000000; LCS cells, block scans and macro spans share this deterministic cap"
+  },
+  {
+   "lane": "kb-article",
+   "bytes": 3385,
+   "tokens": 656,
+   "ms": 140,
+   "variant": "(none)",
+   "notes": "identity: no framing pays here; message gate: framed 665 >= raw 656 (wire 658); sweep work budget charged=14992339/64000000; LCS cells, block scans and macro spans share this deterministic cap"
+  },
+  {
+   "lane": "llm-answer",
+   "bytes": 2542,
+   "tokens": 733,
+   "ms": 165,
+   "variant": "(none)",
+   "notes": "identity: no framing pays here; message gate: framed 742 >= raw 733 (wire 703); sweep work budget charged=12544666/64000000; LCS cells, block scans and macro spans share this deterministic cap"
+  },
+  {
+   "lane": "ls-l-real",
+   "bytes": 10692,
+   "tokens": 1768,
+   "ms": 1110,
+   "variant": "full/\" \"",
+   "notes": "variant=full/\" \"; 84 macro rules, 0 blocks, 0 lists; script=hangul; contract=39 tok for ops [rules]; whole-wire decode + message gate verified; sweep work budget charged=61206639/64000000; LCS cells, block scans and macro spans share this deterministic cap"
+  },
+  {
+   "lane": "ls-real",
+   "bytes": 2486,
+   "tokens": 489,
+   "ms": 347,
+   "variant": "full/\" \"",
+   "notes": "variant=full/\" \"; 25 macro rules, 0 blocks, 0 lists; script=hangul; contract=39 tok for ops [rules]; whole-wire decode + message gate verified; sweep work budget charged=16293052/64000000; LCS cells, block scans and macro spans share this deterministic cap"
+  },
+  {
+   "lane": "ps-aux-real",
+   "bytes": 6590,
+   "tokens": 1163,
+   "ms": 888,
+   "variant": "full/\" \"",
+   "notes": "variant=full/\" \"; 69 macro rules, 0 blocks, 0 lists; script=hangul; contract=39 tok for ops [rules]; whole-wire decode + message gate verified; sweep work budget charged=47701987/64000000; LCS cells, block scans and macro spans share this deterministic cap"
+  }
+ ],
+ "wins": [
+  [
+   "macros-only",
+   1
+  ],
+  [
+   "full/\"\\n\"",
+   1
+  ],
+  [
+   "full/\" \"",
+   5
+  ],
+  [
+   "full/\",\"",
+   1
+  ],
+  [
+   "(none)",
+   2
+  ]
+ ]
+}

@@ -1,0 +1,320 @@
+{
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "path": "bench/holdout-x42/lsblk.txt",
+   "bytes": 132,
+   "tokens": 60,
+   "ms": 320,
+   "variant": "(identity)",
+   "workUsed": 124143,
+   "workCap": 64000000
+  },
+  {
+   "lane": "kb-article.txt",
+   "path": "bench/holdout-work/kb-article.txt",
+   "bytes": 3385,
+   "tokens": 656,
+   "ms": 164,
+   "variant": "(identity)",
+   "workUsed": 14992339,
+   "workCap": 64000000
+  },
+  {
+   "lane": "uptime-w.txt",
+   "path": "bench/holdout-x42b/uptime-w.txt",
+   "bytes": 179,
+   "tokens": 80,
+   "ms": 9,
+   "variant": "(identity)",
+   "workUsed": 328214,
+   "workCap": 64000000
+  },
+  {
+   "lane": "free-m.txt",
+   "path": "bench/holdout-x42b/free-m.txt",
+   "bytes": 263,
+   "tokens": 76,
+   "ms": 22,
+   "variant": "(identity)",
+   "workUsed": 445779,
+   "workCap": 64000000
+  },
+  {
+   "lane": "vmstat.txt",
+   "path": "bench/holdout-x42b/vmstat.txt",
+   "bytes": 467,
+   "tokens": 189,
+   "ms": 19,
+   "variant": "macros-only",
+   "workUsed": 883186,
+   "workCap": 64000000
+  },
+  {
+   "lane": "unified-diff.patch",
+   "path": "bench/holdout-work/unified-diff.patch",
+   "bytes": 1487,
+   "tokens": 479,
+   "ms": 135,
+   "variant": "full/\"\\n\"",
+   "workUsed": 7352220,
+   "workCap": 64000000
+  },
+  {
+   "lane": "df-h.txt",
+   "path": "bench/holdout-tbl/df-h.txt",
+   "bytes": 939,
+   "tokens": 308,
+   "ms": 32,
+   "variant": "full/\"\\n\"",
+   "workUsed": 2191141,
+   "workCap": 64000000
+  },
+  {
+   "lane": "df-real.txt",
+   "path": "bench/holdout-x41/df-real.txt",
+   "bytes": 329,
+   "tokens": 158,
+   "ms": 33,
+   "variant": "(identity)",
+   "workUsed": 1094824,
+   "workCap": 64000000
+  },
+  {
+   "lane": "du-real.txt",
+   "path": "bench/holdout-x41/du-real.txt",
+   "bytes": 1605,
+   "tokens": 346,
+   "ms": 33,
+   "variant": "full/\"\\n\"",
+   "workUsed": 2377212,
+   "workCap": 64000000
+  },
+  {
+   "lane": "node-help.txt",
+   "path": "bench/holdout-x41/node-help.txt",
+   "bytes": 6751,
+   "tokens": 934,
+   "ms": 467,
+   "variant": "full/\"\\n\"",
+   "workUsed": 35143062,
+   "workCap": 64000000
+  },
+  {
+   "lane": "findmnt.txt",
+   "path": "bench/holdout-x42/findmnt.txt",
+   "bytes": 3215,
+   "tokens": 518,
+   "ms": 383,
+   "variant": "full/\",\"",
+   "workUsed": 32814163,
+   "workCap": 64000000
+  },
+  {
+   "lane": "df-h.txt",
+   "path": "bench/holdout-x42/df-h.txt",
+   "bytes": 293,
+   "tokens": 140,
+   "ms": 23,
+   "variant": "(identity)",
+   "workUsed": 936271,
+   "workCap": 64000000
+  },
+  {
+   "lane": "email-thread.txt",
+   "path": "bench/holdout-work/email-thread.txt",
+   "bytes": 2126,
+   "tokens": 558,
+   "ms": 121,
+   "variant": "full/\" \"",
+   "workUsed": 9087211,
+   "workCap": 64000000
+  },
+  {
+   "lane": "llm-answer.md",
+   "path": "bench/holdout-work/llm-answer.md",
+   "bytes": 2542,
+   "tokens": 733,
+   "ms": 144,
+   "variant": "(identity)",
+   "workUsed": 12544666,
+   "workCap": 64000000
+  },
+  {
+   "lane": "markdown-table.md",
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "bytes": 635,
+   "tokens": 228,
+   "ms": 51,
+   "variant": "full/\"\\n\"",
+   "workUsed": 2879892,
+   "workCap": 64000000
+  },
+  {
+   "lane": "psql-output.txt",
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "bytes": 1578,
+   "tokens": 406,
+   "ms": 244,
+   "variant": "full/\"\\n\"",
+   "workUsed": 10024757,
+   "workCap": 64000000
+  },
+  {
+   "lane": "prices.csv",
+   "path": "bench/holdout-x40/prices.csv",
+   "bytes": 993,
+   "tokens": 288,
+   "ms": 41,
+   "variant": "full/\"\\n\"",
+   "workUsed": 3137344,
+   "workCap": 64000000
+  },
+  {
+   "lane": "cue-sheet.md",
+   "path": "bench/holdout-x40/cue-sheet.md",
+   "bytes": 938,
+   "tokens": 257,
+   "ms": 111,
+   "variant": "full/\"\\n\"",
+   "workUsed": 3811247,
+   "workCap": 64000000
+  },
+  {
+   "lane": "ps-ef.txt",
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "bytes": 2669,
+   "tokens": 368,
+   "ms": 270,
+   "variant": "full/\" \"",
+   "workUsed": 12155309,
+   "workCap": 64000000
+  },
+  {
+   "lane": "ls-real.txt",
+   "path": "bench/holdout-x41/ls-real.txt",
+   "bytes": 2486,
+   "tokens": 489,
+   "ms": 381,
+   "variant": "full/\" \"",
+   "workUsed": 16293052,
+   "workCap": 64000000
+  },
+  {
+   "lane": "json-pkg.txt",
+   "path": "bench/holdout/json-pkg.txt",
+   "bytes": 3620,
+   "tokens": 794,
+   "ms": 405,
+   "variant": "full/\" \"",
+   "workUsed": 20596063,
+   "workCap": 64000000
+  },
+  {
+   "lane": "code-ts.txt",
+   "path": "bench/holdout/code-ts.txt",
+   "bytes": 6000,
+   "tokens": 1138,
+   "ms": 849,
+   "variant": "full/\"\\n\"",
+   "workUsed": 46569073,
+   "workCap": 64000000
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "bytes": 4459,
+   "tokens": 767,
+   "ms": 408,
+   "variant": "full/\" \"",
+   "workUsed": 33062306,
+   "workCap": 64000000
+  },
+  {
+   "lane": "ps-real.txt",
+   "path": "bench/holdout-x41/ps-real.txt",
+   "bytes": 2365,
+   "tokens": 485,
+   "ms": 383,
+   "variant": "full/\" \"",
+   "workUsed": 12830371,
+   "workCap": 64000000
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "bytes": 2649,
+   "tokens": 475,
+   "ms": 332,
+   "variant": "full/\"\\n\"",
+   "workUsed": 15633385,
+   "workCap": 64000000
+  },
+  {
+   "lane": "metrics.tsv",
+   "path": "bench/holdout-x40/metrics.tsv",
+   "bytes": 1203,
+   "tokens": 328,
+   "ms": 51,
+   "variant": "full/\"\\n\"",
+   "workUsed": 4346258,
+   "workCap": 64000000
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "bytes": 6590,
+   "tokens": 1163,
+   "ms": 893,
+   "variant": "full/\" \"",
+   "workUsed": 47701987,
+   "workCap": 64000000
+  },
+  {
+   "lane": "apt-real.txt",
+   "path": "bench/holdout-x41/apt-real.txt",
+   "bytes": 6195,
+   "tokens": 1120,
+   "ms": 415,
+   "variant": "macros-only",
+   "workUsed": 25206117,
+   "workCap": 64000000
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "bytes": 10692,
+   "tokens": 1768,
+   "ms": 1189,
+   "variant": "full/\" \"",
+   "workUsed": 61206639,
+   "workCap": 64000000
+  }
+ ],
+ "wins": [
+  [
+   "(identity)",
+   7
+  ],
+  [
+   "macros-only",
+   2
+  ],
+  [
+   "full/\"\\n\"",
+   11
+  ],
+  [
+   "full/\",\"",
+   1
+  ],
+  [
+   "full/\" \"",
+   8
+  ]
+ ],
+ "totals": {
+  "ms": 7928,
+  "workUsed": 435768231
+ }
+}

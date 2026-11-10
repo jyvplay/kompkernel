@@ -1,0 +1,452 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real",
+   "total": 837,
+   "contract": 11,
+   "tape": 194,
+   "body": 632,
+   "bodyTokens": 632,
+   "refs": 136,
+   "lits": 496,
+   "topLiterals": [
+    [
+     "g",
+     11
+    ],
+    [
+     "utils",
+     7
+    ],
+    [
+     "8",
+     6
+    ],
+    [
+     "f",
+     6
+    ],
+    [
+     "7",
+     5
+    ],
+    [
+     "-dev",
+     5
+    ],
+    [
+     "ат",
+     4
+    ],
+    [
+     "202",
+     4
+    ]
+   ]
+  },
+  {
+   "lane": "code-ts",
+   "total": 968,
+   "contract": 11,
+   "tape": 239,
+   "body": 718,
+   "bodyTokens": 718,
+   "refs": 168,
+   "lits": 550,
+   "topLiterals": [
+    [
+     " for",
+     8
+    ],
+    [
+     "Part",
+     7
+    ],
+    [
+     "Class",
+     7
+    ],
+    [
+     " ===",
+     7
+    ],
+    [
+     " process",
+     7
+    ],
+    [
+     "const",
+     6
+    ],
+    [
+     " //",
+     6
+    ],
+    [
+     "]",
+     6
+    ]
+   ]
+  },
+  {
+   "lane": "dpkg-l",
+   "total": 669,
+   "contract": 11,
+   "tape": 124,
+   "body": 534,
+   "bodyTokens": 534,
+   "refs": 85,
+   "lits": 449,
+   "topLiterals": [
+    [
+     "/",
+     9
+    ],
+    [
+     ":",
+     7
+    ],
+    [
+     " (",
+     5
+    ],
+    [
+     ")\n",
+     5
+    ],
+    [
+     " ы",
+     5
+    ],
+    [
+     ",",
+     4
+    ],
+    [
+     " package",
+     4
+    ],
+    [
+     " files",
+     4
+    ]
+   ]
+  },
+  {
+   "lane": "findmnt",
+   "total": 440,
+   "contract": 11,
+   "tape": 122,
+   "body": 307,
+   "bodyTokens": 307,
+   "refs": 32,
+   "lits": 275,
+   "topLiterals": [
+    [
+     "=",
+     10
+    ],
+    [
+     "/",
+     6
+    ],
+    [
+     "           ",
+     5
+    ],
+    [
+     " dev",
+     4
+    ],
+    [
+     "2",
+     4
+    ],
+    [
+     ".service",
+     4
+    ],
+    [
+     "                                                 ",
+     3
+    ],
+    [
+     "\n",
+     3
+    ]
+   ]
+  },
+  {
+   "lane": "json-pkg",
+   "total": 670,
+   "contract": 11,
+   "tape": 136,
+   "body": 523,
+   "bodyTokens": 523,
+   "refs": 132,
+   "lits": 391,
+   "topLiterals": [
+    [
+     "\":",
+     6
+    ],
+    [
+     "-",
+     4
+    ],
+    [
+     "ра",
+     4
+    ],
+    [
+     "Script",
+     3
+    ],
+    [
+     "compiler",
+     3
+    ],
+    [
+     "ts",
+     3
+    ],
+    [
+     "node",
+     3
+    ],
+    [
+     "lib",
+     3
+    ]
+   ]
+  },
+  {
+   "lane": "kb-article",
+   "total": 621,
+   "contract": 11,
+   "tape": 57,
+   "body": 553,
+   "bodyTokens": 553,
+   "refs": 100,
+   "lits": 453,
+   "topLiterals": [
+    [
+     " an",
+     6
+    ],
+    [
+     " how",
+     5
+    ],
+    [
+     ".\n\n",
+     5
+    ],
+    [
+     " of",
+     4
+    ],
+    [
+     " up",
+     4
+    ],
+    [
+     " be",
+     4
+    ],
+    [
+     "үп",
+     3
+    ],
+    [
+     " deletion",
+     3
+    ]
+   ]
+  },
+  {
+   "lane": "llm-answer",
+   "total": 671,
+   "contract": 11,
+   "tape": 87,
+   "body": 573,
+   "bodyTokens": 573,
+   "refs": 80,
+   "lits": 493,
+   "topLiterals": [
+    [
+     "`",
+     12
+    ],
+    [
+     ",",
+     7
+    ],
+    [
+     "\n\n",
+     6
+    ],
+    [
+     " from",
+     4
+    ],
+    [
+     ".js",
+     4
+    ],
+    [
+     "рт",
+     4
+    ],
+    [
+     ".config",
+     4
+    ],
+    [
+     "import",
+     4
+    ]
+   ]
+  },
+  {
+   "lane": "ls-l-real",
+   "total": 1381,
+   "contract": 38,
+   "tape": 563,
+   "body": 780,
+   "bodyTokens": 780,
+   "refs": 305,
+   "lits": 475,
+   "topLiterals": [
+    [
+     "0",
+     6
+    ],
+    [
+     ".a",
+     6
+    ],
+    [
+     " ",
+     5
+    ],
+    [
+     "-",
+     5
+    ],
+    [
+     "00",
+     5
+    ],
+    [
+     "28",
+     5
+    ],
+    [
+     "10",
+     4
+    ],
+    [
+     "19",
+     4
+    ]
+   ]
+  },
+  {
+   "lane": "ls-real",
+   "total": 432,
+   "contract": 11,
+   "tape": 160,
+   "body": 261,
+   "bodyTokens": 261,
+   "refs": 70,
+   "lits": 191,
+   "topLiterals": [
+    [
+     "/bin",
+     3
+    ],
+    [
+     "pack",
+     3
+    ],
+    [
+     ".js",
+     3
+    ],
+    [
+     "47",
+     3
+    ],
+    [
+     "/npm",
+     3
+    ],
+    [
+     "total",
+     2
+    ],
+    [
+     "121",
+     2
+    ],
+    [
+     "/core",
+     2
+    ]
+   ]
+  },
+  {
+   "lane": "ps-aux-real",
+   "total": 1043,
+   "contract": 11,
+   "tape": 331,
+   "body": 701,
+   "bodyTokens": 701,
+   "refs": 175,
+   "lits": 526,
+   "topLiterals": [
+    [
+     " -",
+     10
+    ],
+    [
+     "ши",
+     10
+    ],
+    [
+     "ги",
+     6
+    ],
+    [
+     "9",
+     5
+    ],
+    [
+     " /",
+     5
+    ],
+    [
+     "\n",
+     5
+    ],
+    [
+     "d",
+     5
+    ],
+    [
+     "-real",
+     5
+    ]
+   ]
+  }
+ ],
+ "totals": {
+  "contract": 137,
+  "tape": 2013,
+  "body": 5582,
+  "refs": 1283,
+  "lits": 4299,
+  "sum": 7732
+ }
+}

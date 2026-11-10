@@ -560,6 +560,15 @@ function topoOrder(rules: Rule[], glyphOf: Map<number, string>): number[] | null
  * O(rules^2) remap of renderWire on every candidate.  The emitted wire is always
  * the real renderWire output, counted exactly, and gated on that count.
  */
+/**
+ * X101 — ΤΥΠΟΣ instrumentation.  How many times, across the whole macro search, the string the
+ * search prices (provisionalWire) differs from the string that ships (renderWire).  If this stays at
+ * zero the correction is a latent-defect fix and NOT a measured gain, and it must be reported that
+ * way.  Set OMEGA_TYPOS_PROBE=1 to collect it.
+ */
+export const TYPOS_PROBE: { priced: number; differed: number } = { priced: 0, differed: 0 };
+const typosProbeOn = (): boolean => typeof process !== 'undefined' && !!process.env && process.env.OMEGA_TYPOS_PROBE === '1';
+
 function provisionalWire(rules: Rule[], body: string, glyphOf: Map<number, string>): string {
   let tape = '';
   for (const r of rules) {
@@ -625,6 +634,18 @@ const MAX_BLOCK_UNITS = 200_000;
 
 /** Deterministic safety envelope for one complete CHIRON encode/search sweep. */
 export const CHIRON_MAX_TOTAL_WORK_UNITS = 64_000_000;
+/**
+ * X101 — ΣΤΑΘΜΟΣ stage 3.  The shared sweep meter above is a hard cap on how much search one
+ * chironEncode may do, and it is 96 % exhausted on ls-l-real, 75 % on ps-aux-real and 73 % on
+ * code-ts (bench/x101/klimax29.json).  Removing the never-winning `blocks-only` variants gives
+ * 82.3 % of the chain's wall clock back, so the cap can be raised without spending it.  OMEGA_CHIRON_
+ * WORK_SCALE multiplies it; 1 is the shipped default.
+ */
+export const chironWorkScale = (): number => {
+  if (typeof process === 'undefined' || !process.env) return 1;
+  const v = Number(process.env.OMEGA_CHIRON_WORK_SCALE);
+  return Number.isFinite(v) && v > 0 ? v : 1;
+};
 export const CHIRON_MAX_BLOCK_WORK_UNITS = 24_000_000;
 export const CHIRON_MAX_BLOCK_LCS_CELLS = 20_000_000;
 export const CHIRON_MAX_BLOCK_CANDIDATES = 2_048;
@@ -1014,12 +1035,21 @@ export function chironFindBlocks(
 }
 
 /** Candidate unit separators, in the order they are tried. */
-export function chironSeparators(text: string): string[] {
+export function chironSeparators(text: string, wide = false): string[] {
   const out: string[] = ['\n'];
   const nl = (text.match(/\n/g) ?? []).length;
-  for (const c of [',', '\t', ';', '|', ' ']) {
+  const cands = wide ? [',', '\t', ';', '|', ' ', '=', ':', '.', '"'] : [',', '\t', ';', '|', ' '];
+  for (const c of cands) {
     const n = (text.split(c).length - 1);
-    if (n >= 8 && n > nl * 2) out.push(c);
+    // X101 — ΣΤΑΘΜΟΣ.  The strict gate `n > nl * 2` is a hand-tuned heuristic that keeps a
+    // separator out of the sweep unless it outnumbers newlines twice over.  Measured over the 29
+    // frontier lanes (bench/x101/klimax29.json) the separator is what decides which variant wins
+    // (full/"\n" 11, full/" " 8, full/"," 1, macros-only 2, identity 7), so the gate is choosing the
+    // winner on a heuristic rather than on price.  `wide` drops the newline comparison and keeps any
+    // separator that occurs at all in a structurally meaningful number, plus `= : . "` which the
+    // strict list never considers.  It is only affordable because ΣΤΑΘΜΟΣ removed the never-winning
+    // `blocks-only` variants and gave 82 % of the chain's wall clock back.
+    if (n >= 8 && (wide || n > nl * 2)) out.push(c);
   }
   return out;
 }
@@ -1112,6 +1142,26 @@ export interface ChironOptions {
   noMacros?: boolean;
   /** cap on macro rules */
   maxRules?: number;
+  /**
+   * X101 — ΣΤΑΘΜΟΣ.  Put the `blocks-only` variants back into the sweep for the ablation.  They are
+   * dropped by default because they win on 0 of 29 frontier lanes while charging the shared work
+   * meter; see the comment at the variant sweep and bench/x101/receipts/klimax29.json.
+   */
+  keepBlocksOnly?: boolean;
+  /**
+   * X101 — ΣΤΑΘΜΟΣ.  Widen the separator sweep past the `n > nl * 2` gate (see chironSeparators).
+   * Only affordable once `blocks-only` has been removed from the variant list.
+   */
+  wideSeparators?: boolean;
+  /**
+   * X101 — ΤΥΠΟΣ.  Price macro candidates on the wire that is actually EMITTED (renderWire:
+   * topological order, fresh glyph assignment from ctx.pool) instead of on `provisionalWire`
+   * (creation order, the search-time assignment).  The two are different strings with different
+   * token counts — ΜΕΤΑΤΑΞΙΣ (-44) and ΔΙΑΛΕΚΤΟΣ (+56..+247) both measure that order and assignment
+   * change the price — so a search that accepts on one and ships the other is optimising the wrong
+   * object.  See the comment at the macro accept test.
+   */
+  exactAccept?: boolean;
   /** unit separator for the block pass */
   sep?: string;
   /**
@@ -1159,8 +1209,8 @@ type BuildOptions = Required<Omit<ChironOptions, 'workUnits'>> & { workUnits?: n
 function buildCandidate(text: string, enc: EncodingName, script: ChironScript, opts: BuildOptions): BuildOutcome | null {
   const deadline = now() + opts.budgetMs;
   const det = opts.workUnits !== undefined;
-  const work: ChironWorkMeter = { n: 0, max: Math.min(opts.workUnits ?? CHIRON_MAX_TOTAL_WORK_UNITS,
-    opts.hardWorkUnits ?? CHIRON_MAX_TOTAL_WORK_UNITS) };
+  const cap = Math.round(CHIRON_MAX_TOTAL_WORK_UNITS * chironWorkScale());
+  const work: ChironWorkMeter = { n: 0, max: Math.min(opts.workUnits ?? cap, opts.hardWorkUnits ?? cap) };
   const spent = (): boolean => work.n >= work.max || (!det && now() >= deadline);
   const payloadChars = new Set(text);
   const pool = scriptPool(script, enc).filter(g => !payloadChars.has(g));
@@ -1280,6 +1330,9 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
   let best = renderWire(rules, body, glyphOf, ctx);
   if (best === null) return null;
   let bestTokens = countTokens(best, enc);
+  // X101 — ΤΥΠΟΣ: the real token count of the state currently held as best.  Under `exactAccept`
+  // this is the acceptance threshold, so it must start at the price of the wire actually emitted.
+  let bestReal = bestTokens;
   let bestRules = rules.map(r => ({ ...r }));
   let bestBody = body;
   let probe = countTokens(provisionalWire(rules, body, glyphOf), enc);
@@ -1325,11 +1378,29 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
         const gl = glyphOf.get(created.id)!;
         for (const r of rules) if (r.kind === 'lit' && r.id !== created.id) r.text = r.text.split(p).join(gl);
         body = body.split(p).join(gl);
-        const pw = provisionalWire(rules, body, glyphOf);
-        work.n = Math.min(work.max, work.n + pw.length);
-        const t = countTokens(pw, enc);
-        if (t < probe) {
-          probe = t;
+        // X101 — ΤΥΠΟΣ.  Score the artifact that ships.  `provisionalWire` concatenates the tape in
+        // CREATION order with the search-time glyphs; `renderWire` re-derives a topological order and
+        // a fresh glyph assignment from ctx.pool, and THAT is the string the caller receives.  The
+        // comment that used to sit here claimed token counting does not care whether the glyphs are
+        // densely packed or topologically ordered.  It is false: ΜΕΤΑΤΑΞΙΣ measured -44 tokens from
+        // relocation alone and ΔΙΑΛΕΚΤΟΣ measured +56..+247 from the letter assignment alone, so the
+        // two strings have different prices and a candidate accepted on the wrong one is accepted on
+        // a number the emitted wire does not have.  `exactAccept` prices the emitted wire; the
+        // default keeps the old proxy so the two can be A/B'd in one process.
+        const scored = opts.exactAccept ? renderWire(rules, body, glyphOf, ctx) : provisionalWire(rules, body, glyphOf);
+        if (typosProbeOn()) { TYPOS_PROBE.priced++; if (scored !== provisionalWire(rules, body, glyphOf)) TYPOS_PROBE.differed++; }
+        if (scored === null) {
+          rules.length = 0; rules.push(...snapshotRules);
+          body = snapshotBody;
+          poolAt = snapshotPool;
+          glyphOf.delete(created.id);
+          nextId--;
+          continue;
+        }
+        work.n = Math.min(work.max, work.n + scored.length);
+        const t = countTokens(scored, enc);
+        if (t < (opts.exactAccept ? bestReal : probe)) {
+          if (opts.exactAccept) bestReal = t; else probe = t;
           bestRules = rules.map(r => ({ ...r }));
           bestBody = body;
           applied++;
@@ -1368,11 +1439,13 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
         if (rules.some(o => o.kind === 'rep' && o.tplRule === r.id)) continue;
         const rest = rules.filter((_, j) => j !== i).map(o => (o.kind === 'lit' ? { ...o, text: o.text.split(g).join(r.text) } : { ...o }));
         const b2 = body.split(g).join(r.text);
-        const pw2 = provisionalWire(rest, b2, glyphOf);
-        work.n = Math.min(work.max, work.n + pw2.length);
-        const t = countTokens(pw2, enc);
-        if (t < probe) {
-          probe = t;
+        // X101 — ΤΥΠΟΣ: same correction as the macro accept test above — price what ships.
+        const scored2 = opts.exactAccept ? renderWire(rest, b2, glyphOf, ctx) : provisionalWire(rest, b2, glyphOf);
+        if (scored2 === null) continue;
+        work.n = Math.min(work.max, work.n + scored2.length);
+        const t = countTokens(scored2, enc);
+        if (t < (opts.exactAccept ? bestReal : probe)) {
+          if (opts.exactAccept) bestReal = t; else probe = t;
           rules.length = 0; rules.push(...rest);
           body = b2;
           bestRules = rules.map(x => ({ ...x })); bestBody = body;
@@ -1436,22 +1509,35 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
   });
   const script = scripts[0];
 
-  const seps = options.sep !== undefined ? [options.sep] : chironSeparators(text);
+  const keepBlocksOnly = options.keepBlocksOnly
+    || (typeof process !== 'undefined' && !!process.env && process.env.OMEGA_KEEP_BLOCKS_ONLY === '1');
+  const wideSeparators = !!options.wideSeparators;
+  const exactAccept = !!options.exactAccept;
+  const seps = options.sep !== undefined ? [options.sep] : chironSeparators(text, wideSeparators);
   const forcedBlocks = options.noBlocks;
   const forcedMacros = options.noMacros;
   const variants: Array<{ tag: string; o: Required<Omit<ChironOptions, 'workUnits'>> }> = [];
   if (forcedBlocks !== undefined || forcedMacros !== undefined) {
     for (const sep of seps) {
-      variants.push({ tag: `forced/${JSON.stringify(sep)}`, o: { noBlocks: !!forcedBlocks, noMacros: !!forcedMacros, maxRules, budgetMs, sep } });
+      variants.push({ tag: `forced/${JSON.stringify(sep)}`, o: { noBlocks: !!forcedBlocks, noMacros: !!forcedMacros, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept } });
     }
   } else {
   for (const sep of seps) {
-    variants.push({ tag: `full/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules, budgetMs, sep } });
+    variants.push({ tag: `full/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept } });
   }
-  variants.push({ tag: 'macros-only', o: { noBlocks: true, noMacros: false, maxRules, budgetMs: Math.round(budgetMs * 0.8), sep: '\n' } });
-  if (text.length <= 24_000) {
+  variants.push({ tag: 'macros-only', o: { noBlocks: true, noMacros: false, maxRules, budgetMs: Math.round(budgetMs * 0.8), sep: '\n', keepBlocksOnly, wideSeparators, exactAccept } });
+  // X101 — ΣΤΑΘΜΟΣ.  `blocks-only` is a variant that turns the macro tape OFF and leaves only the
+  // block pass.  It is run once per candidate separator and is charged 30 % of the per-variant
+  // budget, and every variant in this sweep draws on ONE shared work meter
+  // (CHIRON_MAX_TOTAL_WORK_UNITS, chiron.ts:627) that the winning variants need.  Measured on all 29
+  // frontier lanes (bench/x101/klimax29.json) the winner is `full/<sep>` on 20 lanes, `macros-only`
+  // on 2 and identity on 7 — **`blocks-only` wins on 0 of 29** — while the shared meter is 96 %
+  // exhausted on ls-l-real, 75 % on ps-aux-real and 73 % on code-ts, i.e. exactly the lanes where
+  // more search would pay.  So it is dropped from the sweep BY DEFAULT; `keepBlocksOnly` puts it
+  // back for the ablation, and OMEGA_KEEP_BLOCKS_ONLY=1 does the same from the environment.
+  if (text.length <= 24_000 && keepBlocksOnly) {
     for (const sep of seps) {
-      variants.push({ tag: `blocks-only/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: true, maxRules, budgetMs: Math.round(budgetMs * 0.3), sep } });
+      variants.push({ tag: `blocks-only/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: true, maxRules, budgetMs: Math.round(budgetMs * 0.3), sep, keepBlocksOnly, wideSeparators, exactAccept } });
     }
   }
   }

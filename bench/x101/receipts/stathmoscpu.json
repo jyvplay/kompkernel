@@ -1,0 +1,145 @@
+{
+ "note": "X101 STATHMOS isolated CPU on the shipped chain: alternating reps in one process, medians, full-decode exactness per rep",
+ "rows": [
+  {
+   "lane": "ls-l-real",
+   "tokens": 1381,
+   "msStathmos": 28706,
+   "msControl": 30008,
+   "repsOn": [
+    28190,
+    28706,
+    31246
+   ],
+   "repsOff": [
+    294357,
+    28617,
+    30008
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "apt-real",
+   "tokens": 838,
+   "msStathmos": 22832,
+   "msControl": 23668,
+   "repsOn": [
+    23681,
+    22832,
+    22307
+   ],
+   "repsOff": [
+    72816,
+    23668,
+    23646
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "ps-aux-real",
+   "tokens": 1043,
+   "msStathmos": 5080,
+   "msControl": 5027,
+   "repsOn": [
+    5084,
+    4941,
+    5080
+   ],
+   "repsOff": [
+    27810,
+    5023,
+    5027
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "code-ts",
+   "tokens": 968,
+   "msStathmos": 7140,
+   "msControl": 7412,
+   "repsOn": [
+    7140,
+    7226,
+    7107
+   ],
+   "repsOff": [
+    21738,
+    7412,
+    7134
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "psql-output",
+   "tokens": 242,
+   "msStathmos": 3556,
+   "msControl": 3517,
+   "repsOn": [
+    3732,
+    3399,
+    3556
+   ],
+   "repsOff": [
+    10164,
+    3512,
+    3517
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "prices.csv",
+   "tokens": 133,
+   "msStathmos": 7536,
+   "msControl": 7498,
+   "repsOn": [
+    7403,
+    7846,
+    7536
+   ],
+   "repsOff": [
+    13228,
+    7498,
+    7452
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "kubectl-get-pods",
+   "tokens": 322,
+   "msStathmos": 3750,
+   "msControl": 3822,
+   "repsOn": [
+    3748,
+    3750,
+    3831
+   ],
+   "repsOff": [
+    17753,
+    3822,
+    3797
+   ],
+   "exactAll": true
+  },
+  {
+   "lane": "ls-real",
+   "tokens": 432,
+   "msStathmos": 633,
+   "msControl": 743,
+   "repsOn": [
+    713,
+    633,
+    608
+   ],
+   "repsOff": [
+    9595,
+    743,
+    716
+   ],
+   "exactAll": true
+  }
+ ],
+ "totals": {
+  "msStathmos": 79233,
+  "msControl": 81695
+ }
+}

@@ -1,0 +1,277 @@
+{
+ "note": "X101 STATHMOS: drop the never-winning blocks-only variants; 29-lane interleaved A/B",
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "armA": 60,
+   "armB": 60,
+   "delta": 0,
+   "armAms": 2087,
+   "armBms": 76,
+   "exactBoth": true
+  },
+  {
+   "lane": "kb-article.txt",
+   "armA": 621,
+   "armB": 621,
+   "delta": 0,
+   "armAms": 2602,
+   "armBms": 588,
+   "exactBoth": true
+  },
+  {
+   "lane": "uptime-w.txt",
+   "armA": 80,
+   "armB": 80,
+   "delta": 0,
+   "armAms": 1763,
+   "armBms": 82,
+   "exactBoth": true
+  },
+  {
+   "lane": "free-m.txt",
+   "armA": 76,
+   "armB": 76,
+   "delta": 0,
+   "armAms": 2062,
+   "armBms": 103,
+   "exactBoth": true
+  },
+  {
+   "lane": "vmstat.txt",
+   "armA": 148,
+   "armB": 148,
+   "delta": 0,
+   "armAms": 2080,
+   "armBms": 148,
+   "exactBoth": true
+  },
+  {
+   "lane": "unified-diff.patch",
+   "armA": 415,
+   "armB": 415,
+   "delta": 0,
+   "armAms": 2932,
+   "armBms": 367,
+   "exactBoth": true
+  },
+  {
+   "lane": "df-h.txt",
+   "armA": 170,
+   "armB": 170,
+   "delta": 0,
+   "armAms": 2045,
+   "armBms": 259,
+   "exactBoth": true
+  },
+  {
+   "lane": "df-real.txt",
+   "armA": 125,
+   "armB": 125,
+   "delta": 0,
+   "armAms": 3107,
+   "armBms": 153,
+   "exactBoth": true
+  },
+  {
+   "lane": "du-real.txt",
+   "armA": 269,
+   "armB": 269,
+   "delta": 0,
+   "armAms": 3125,
+   "armBms": 203,
+   "exactBoth": true
+  },
+  {
+   "lane": "node-help.txt",
+   "armA": 860,
+   "armB": 860,
+   "delta": 0,
+   "armAms": 6647,
+   "armBms": 2143,
+   "exactBoth": true
+  },
+  {
+   "lane": "findmnt.txt",
+   "armA": 440,
+   "armB": 440,
+   "delta": 0,
+   "armAms": 4951,
+   "armBms": 779,
+   "exactBoth": true
+  },
+  {
+   "lane": "df-h.txt",
+   "armA": 107,
+   "armB": 107,
+   "delta": 0,
+   "armAms": 3538,
+   "armBms": 146,
+   "exactBoth": true
+  },
+  {
+   "lane": "email-thread.txt",
+   "armA": 487,
+   "armB": 487,
+   "delta": 0,
+   "armAms": 5766,
+   "armBms": 539,
+   "exactBoth": true
+  },
+  {
+   "lane": "llm-answer.md",
+   "armA": 671,
+   "armB": 671,
+   "delta": 0,
+   "armAms": 7200,
+   "armBms": 932,
+   "exactBoth": true
+  },
+  {
+   "lane": "markdown-table.md",
+   "armA": 174,
+   "armB": 174,
+   "delta": 0,
+   "armAms": 5362,
+   "armBms": 139,
+   "exactBoth": true
+  },
+  {
+   "lane": "psql-output.txt",
+   "armA": 242,
+   "armB": 242,
+   "delta": 0,
+   "armAms": 9804,
+   "armBms": 3409,
+   "exactBoth": true
+  },
+  {
+   "lane": "prices.csv",
+   "armA": 133,
+   "armB": 133,
+   "delta": 0,
+   "armAms": 13067,
+   "armBms": 7743,
+   "exactBoth": true
+  },
+  {
+   "lane": "cue-sheet.md",
+   "armA": 101,
+   "armB": 101,
+   "delta": 0,
+   "armAms": 10827,
+   "armBms": 2874,
+   "exactBoth": true
+  },
+  {
+   "lane": "ps-ef.txt",
+   "armA": 309,
+   "armB": 309,
+   "delta": 0,
+   "armAms": 11670,
+   "armBms": 4144,
+   "exactBoth": true
+  },
+  {
+   "lane": "ls-real.txt",
+   "armA": 432,
+   "armB": 432,
+   "delta": 0,
+   "armAms": 9125,
+   "armBms": 634,
+   "exactBoth": true
+  },
+  {
+   "lane": "json-pkg.txt",
+   "armA": 670,
+   "armB": 670,
+   "delta": 0,
+   "armAms": 14020,
+   "armBms": 2364,
+   "exactBoth": true
+  },
+  {
+   "lane": "code-ts.txt",
+   "armA": 968,
+   "armB": 968,
+   "delta": 0,
+   "armAms": 23485,
+   "armBms": 7365,
+   "exactBoth": true
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "armA": 669,
+   "armB": 669,
+   "delta": 0,
+   "armAms": 15550,
+   "armBms": 1288,
+   "exactBoth": true
+  },
+  {
+   "lane": "ps-real.txt",
+   "armA": 391,
+   "armB": 391,
+   "delta": 0,
+   "armAms": 10136,
+   "armBms": 596,
+   "exactBoth": true
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "armA": 322,
+   "armB": 322,
+   "delta": 0,
+   "armAms": 17708,
+   "armBms": 3707,
+   "exactBoth": true
+  },
+  {
+   "lane": "metrics.tsv",
+   "armA": 208,
+   "armB": 208,
+   "delta": 0,
+   "armAms": 15902,
+   "armBms": 7327,
+   "exactBoth": true
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "armA": 1043,
+   "armB": 1043,
+   "delta": 0,
+   "armAms": 27808,
+   "armBms": 4869,
+   "exactBoth": true
+  },
+  {
+   "lane": "apt-real.txt",
+   "armA": 835,
+   "armB": 835,
+   "delta": 0,
+   "armAms": 68952,
+   "armBms": 21922,
+   "exactBoth": true
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "armA": 1381,
+   "armB": 1381,
+   "delta": 0,
+   "armAms": 281603,
+   "armBms": 28656,
+   "exactBoth": true
+  }
+ ],
+ "totals": {
+  "armA": 12407,
+  "armB": 12407,
+  "delta": 0,
+  "better": 0,
+  "worse": 0,
+  "same": 29,
+  "exact": 29,
+  "armAms": 584924,
+  "armBms": 103555
+ }
+}
