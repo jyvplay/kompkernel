@@ -1,0 +1,14 @@
+vocabulary ids decodable: 0..200006  (N=200007)
+
+script         1-char   2-char   3-char   4-char       5+
+ASCII-printable       96     3262    11633    19216    91444
+hangul            677      387       41       13        2
+katakana           80      153       65       27        7
+cyrillic          122      823     1896     1329     1283
+arabic            128      771     1187      503      125
+myanmar            67       85       63       20        6
+khmer              66      110       53       19        9
+cjk              2515     2408      388      321      144
+polyglot          799     3417     3399     1882     1278
+
+(5+ is capped at "4-char" bucket label only for printing; a[4] counts length>=5)

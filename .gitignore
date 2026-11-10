@@ -37,3 +37,7 @@ bench/x91/*.mjs
 bench/x94/*.mjs
 bench/x95/*.mjs
 bench/x96/*.mjs
+
+# X97/X99 probe bundles (sources are the .ts; receipts are the .json/.log)
+bench/x97/*.mjs
+bench/x99/*.mjs

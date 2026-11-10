@@ -1,0 +1,238 @@
+{
+ "note": "X99 \u2014 shipped configuration per lane, taken from bench/x99/receipts/ab99.json arm B (tagstackEncode with METATAXIS and SYNDYASMOS admitted, OMEGA_DET=1 OMEGA_NO_MEMO=1, both arms in one process so load is held constant). `raw` is filled from the gate receipt below.",
+ "rows": [
+  {
+   "path": "bench/holdout-x42/lsblk.txt",
+   "raw": 60,
+   "X": 60,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 155
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "raw": 656,
+   "X": 621,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 1414
+  },
+  {
+   "path": "bench/holdout-x42b/uptime-w.txt",
+   "raw": 80,
+   "X": 80,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 168
+  },
+  {
+   "path": "bench/holdout-x42b/free-m.txt",
+   "raw": 76,
+   "X": 76,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 179
+  },
+  {
+   "path": "bench/holdout-x42b/vmstat.txt",
+   "raw": 229,
+   "X": 148,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 323
+  },
+  {
+   "path": "bench/holdout-work/unified-diff.patch",
+   "raw": 578,
+   "X": 416,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 624
+  },
+  {
+   "path": "bench/holdout-tbl/df-h.txt",
+   "raw": 570,
+   "X": 171,
+   "parent": "akolouthia2",
+   "exact": true,
+   "ms": 681
+  },
+  {
+   "path": "bench/holdout-x41/df-real.txt",
+   "raw": 158,
+   "X": 125,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 356
+  },
+  {
+   "path": "bench/holdout-x41/du-real.txt",
+   "raw": 458,
+   "X": 269,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 537
+  },
+  {
+   "path": "bench/holdout-x41/node-help.txt",
+   "raw": 1099,
+   "X": 860,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 6027
+  },
+  {
+   "path": "bench/holdout-x42/findmnt.txt",
+   "raw": 787,
+   "X": 440,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 1942
+  },
+  {
+   "path": "bench/holdout-x42/df-h.txt",
+   "raw": 140,
+   "X": 107,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 337
+  },
+  {
+   "path": "bench/holdout-work/email-thread.txt",
+   "raw": 629,
+   "X": 487,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 1143
+  },
+  {
+   "path": "bench/holdout-work/llm-answer.md",
+   "raw": 733,
+   "X": 671,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 2571
+  },
+  {
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "raw": 330,
+   "X": 176,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 277
+  },
+  {
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "raw": 675,
+   "X": 244,
+   "parent": "metron",
+   "exact": true,
+   "ms": 8189
+  },
+  {
+   "path": "bench/holdout-x40/prices.csv",
+   "raw": 582,
+   "X": 133,
+   "parent": "diastema",
+   "exact": true,
+   "ms": 20163
+  },
+  {
+   "path": "bench/holdout-x40/cue-sheet.md",
+   "raw": 513,
+   "X": 101,
+   "parent": "stichomythia",
+   "exact": true,
+   "ms": 5855
+  },
+  {
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "raw": 1144,
+   "X": 309,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 10106
+  },
+  {
+   "path": "bench/holdout-x41/ls-real.txt",
+   "raw": 1034,
+   "X": 432,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 1270
+  },
+  {
+   "path": "bench/holdout/json-pkg.txt",
+   "raw": 1152,
+   "X": 672,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 5613
+  },
+  {
+   "path": "bench/holdout/code-ts.txt",
+   "raw": 1422,
+   "X": 958,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 14067
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "raw": 1000,
+   "X": 669,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 4139
+  },
+  {
+   "path": "bench/holdout-x41/ps-real.txt",
+   "raw": 1106,
+   "X": 392,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 1385
+  },
+  {
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "raw": 1006,
+   "X": 326,
+   "parent": "akolouthia2",
+   "exact": true,
+   "ms": 7280
+  },
+  {
+   "path": "bench/holdout-x40/metrics.tsv",
+   "raw": 811,
+   "X": 210,
+   "parent": "akolouthia2",
+   "exact": true,
+   "ms": 16906
+  },
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "raw": 3054,
+   "X": 1030,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 15086
+  },
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "raw": 2739,
+   "X": 837,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 114706
+  },
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "raw": 5194,
+   "X": 1390,
+   "parent": "synkrisis",
+   "exact": true,
+   "ms": 29647
+  }
+ ],
+ "Xtotal": 12410
+}

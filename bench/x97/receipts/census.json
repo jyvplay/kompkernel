@@ -1,0 +1,853 @@
+{
+ "note": "X97 structural census, zero frontier calls",
+ "rows": [
+  {
+   "path": "bench/holdout-x42/lsblk.txt",
+   "lane": "lsblk.txt",
+   "chars": 132,
+   "lines": 3,
+   "distinctLines": 3,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 1,
+   "modalFieldLines": 1,
+   "fieldCounts": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ],
+    [
+     4,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "lane": "kb-article.txt",
+   "chars": 3385,
+   "lines": 38,
+   "distinctLines": 38,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 1,
+   "modalFieldLines": 38,
+   "fieldCounts": [
+    [
+     1,
+     38
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x42b/uptime-w.txt",
+   "lane": "uptime-w.txt",
+   "chars": 179,
+   "lines": 3,
+   "distinctLines": 3,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 1,
+   "modalFieldLines": 1,
+   "fieldCounts": [
+    [
+     1,
+     1
+    ],
+    [
+     4,
+     1
+    ],
+    [
+     7,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x42b/free-m.txt",
+   "lane": "free-m.txt",
+   "chars": 263,
+   "lines": 4,
+   "distinctLines": 4,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 7,
+   "modalFieldLines": 2,
+   "fieldCounts": [
+    [
+     7,
+     2
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     4,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x42b/vmstat.txt",
+   "lane": "vmstat.txt",
+   "chars": 467,
+   "lines": 6,
+   "distinctLines": 6,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 13,
+   "modalFieldLines": 3,
+   "fieldCounts": [
+    [
+     13,
+     3
+    ],
+    [
+     1,
+     2
+    ],
+    [
+     12,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-work/unified-diff.patch",
+   "lane": "unified-diff.patch",
+   "chars": 1487,
+   "lines": 45,
+   "distinctLines": 42,
+   "dupLineFrac": 0.0667,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 3,
+   "columnar": false,
+   "modalFieldCount": 2,
+   "modalFieldLines": 25,
+   "fieldCounts": [
+    [
+     2,
+     25
+    ],
+    [
+     1,
+     20
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-tbl/df-h.txt",
+   "lane": "df-h.txt",
+   "chars": 939,
+   "lines": 19,
+   "distinctLines": 19,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": true,
+   "modalFieldCount": 5,
+   "modalFieldLines": 18,
+   "fieldCounts": [
+    [
+     5,
+     18
+    ],
+    [
+     3,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x41/df-real.txt",
+   "lane": "df-real.txt",
+   "chars": 329,
+   "lines": 7,
+   "distinctLines": 7,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": true,
+   "modalFieldCount": 5,
+   "modalFieldLines": 5,
+   "fieldCounts": [
+    [
+     5,
+     5
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     3,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x41/du-real.txt",
+   "lane": "du-real.txt",
+   "chars": 1605,
+   "lines": 41,
+   "distinctLines": 41,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": true,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 2,
+   "modalFieldLines": 40,
+   "fieldCounts": [
+    [
+     2,
+     40
+    ],
+    [
+     1,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x41/node-help.txt",
+   "lane": "node-help.txt",
+   "chars": 6751,
+   "lines": 120,
+   "distinctLines": 115,
+   "dupLineFrac": 0.0417,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 2,
+   "modalFieldLines": 88,
+   "fieldCounts": [
+    [
+     2,
+     88
+    ],
+    [
+     3,
+     29
+    ],
+    [
+     1,
+     3
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x42/findmnt.txt",
+   "lane": "findmnt.txt",
+   "chars": 3215,
+   "lines": 27,
+   "distinctLines": 27,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": true,
+   "modalFieldCount": 4,
+   "modalFieldLines": 24,
+   "fieldCounts": [
+    [
+     4,
+     24
+    ],
+    [
+     3,
+     2
+    ],
+    [
+     1,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x42/df-h.txt",
+   "lane": "df-h.txt",
+   "chars": 293,
+   "lines": 7,
+   "distinctLines": 7,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": true,
+   "modalFieldCount": 5,
+   "modalFieldLines": 5,
+   "fieldCounts": [
+    [
+     5,
+     5
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     3,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-work/email-thread.txt",
+   "lane": "email-thread.txt",
+   "chars": 2126,
+   "lines": 47,
+   "distinctLines": 37,
+   "dupLineFrac": 0.2128,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 1,
+   "modalFieldLines": 47,
+   "fieldCounts": [
+    [
+     1,
+     47
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-work/llm-answer.md",
+   "lane": "llm-answer.md",
+   "chars": 2542,
+   "lines": 49,
+   "distinctLines": 49,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 1,
+   "modalFieldLines": 37,
+   "fieldCounts": [
+    [
+     1,
+     37
+    ],
+    [
+     2,
+     12
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "lane": "markdown-table.md",
+   "chars": 635,
+   "lines": 12,
+   "distinctLines": 12,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 1,
+   "modalFieldLines": 12,
+   "fieldCounts": [
+    [
+     1,
+     12
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "lane": "psql-output.txt",
+   "chars": 1578,
+   "lines": 29,
+   "distinctLines": 27,
+   "dupLineFrac": 0.069,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": true,
+   "modalFieldCount": 3,
+   "modalFieldLines": 24,
+   "fieldCounts": [
+    [
+     3,
+     24
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     4,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x40/prices.csv",
+   "lane": "prices.csv",
+   "chars": 993,
+   "lines": 31,
+   "distinctLines": 31,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 1,
+   "modalFieldLines": 31,
+   "fieldCounts": [
+    [
+     1,
+     31
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x40/cue-sheet.md",
+   "lane": "cue-sheet.md",
+   "chars": 938,
+   "lines": 29,
+   "distinctLines": 29,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 1,
+   "modalFieldLines": 29,
+   "fieldCounts": [
+    [
+     1,
+     29
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "lane": "ps-ef.txt",
+   "chars": 2669,
+   "lines": 41,
+   "distinctLines": 41,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": true,
+   "modalFieldCount": 5,
+   "modalFieldLines": 40,
+   "fieldCounts": [
+    [
+     5,
+     40
+    ],
+    [
+     1,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x41/ls-real.txt",
+   "lane": "ls-real.txt",
+   "chars": 2486,
+   "lines": 40,
+   "distinctLines": 40,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 3,
+   "modalFieldLines": 24,
+   "fieldCounts": [
+    [
+     3,
+     24
+    ],
+    [
+     2,
+     11
+    ],
+    [
+     1,
+     4
+    ],
+    [
+     4,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout/json-pkg.txt",
+   "lane": "json-pkg.txt",
+   "chars": 3620,
+   "lines": 120,
+   "distinctLines": 111,
+   "dupLineFrac": 0.075,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 2,
+   "modalFieldLines": 118,
+   "fieldCounts": [
+    [
+     2,
+     118
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout/code-ts.txt",
+   "lane": "code-ts.txt",
+   "chars": 6000,
+   "lines": 154,
+   "distinctLines": 123,
+   "dupLineFrac": 0.2013,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 2,
+   "modalFieldLines": 112,
+   "fieldCounts": [
+    [
+     2,
+     112
+    ],
+    [
+     1,
+     42
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "lane": "dpkg-l.txt",
+   "chars": 4459,
+   "lines": 41,
+   "distinctLines": 41,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": true,
+   "modalFieldCount": 5,
+   "modalFieldLines": 35,
+   "fieldCounts": [
+    [
+     5,
+     35
+    ],
+    [
+     1,
+     5
+    ],
+    [
+     3,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x41/ps-real.txt",
+   "lane": "ps-real.txt",
+   "chars": 2365,
+   "lines": 41,
+   "distinctLines": 41,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": true,
+   "modalFieldCount": 5,
+   "modalFieldLines": 38,
+   "fieldCounts": [
+    [
+     5,
+     38
+    ],
+    [
+     4,
+     2
+    ],
+    [
+     1,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "lane": "kubectl-get-pods.txt",
+   "chars": 2649,
+   "lines": 23,
+   "distinctLines": 23,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": true,
+   "modalFieldCount": 7,
+   "modalFieldLines": 23,
+   "fieldCounts": [
+    [
+     7,
+     23
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x40/metrics.tsv",
+   "lane": "metrics.tsv",
+   "chars": 1203,
+   "lines": 25,
+   "distinctLines": 25,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": true,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": true,
+   "modalFieldCount": 6,
+   "modalFieldLines": 25,
+   "fieldCounts": [
+    [
+     6,
+     25
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "lane": "ps-aux-real.txt",
+   "chars": 6590,
+   "lines": 61,
+   "distinctLines": 61,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": true,
+   "modalFieldCount": 9,
+   "modalFieldLines": 56,
+   "fieldCounts": [
+    [
+     9,
+     56
+    ],
+    [
+     6,
+     3
+    ],
+    [
+     1,
+     1
+    ],
+    [
+     7,
+     1
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "lane": "apt-real.txt",
+   "chars": 6195,
+   "lines": 121,
+   "distinctLines": 121,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 1,
+   "modalFieldLines": 121,
+   "fieldCounts": [
+    [
+     1,
+     121
+    ]
+   ]
+  },
+  {
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "lane": "ls-l-real.txt",
+   "chars": 10692,
+   "lines": 151,
+   "distinctLines": 151,
+   "dupLineFrac": 0,
+   "isNFC": true,
+   "isNFD": true,
+   "hasCR": false,
+   "hasTab": false,
+   "hasBOM": false,
+   "nonAscii": 0,
+   "trailingWS": 0,
+   "columnar": false,
+   "modalFieldCount": 4,
+   "modalFieldLines": 78,
+   "fieldCounts": [
+    [
+     4,
+     78
+    ],
+    [
+     3,
+     38
+    ],
+    [
+     5,
+     33
+    ],
+    [
+     1,
+     2
+    ]
+   ]
+  }
+ ]
+}

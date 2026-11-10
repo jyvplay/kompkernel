@@ -1,0 +1,541 @@
+{
+ "note": "X97 run-packing upper bound; ESTIMATE, ranks only",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "bodyTok": 631,
+   "refTok": 539,
+   "refFrac": 0.8542,
+   "distinctRuns": 114,
+   "runOcc": 124,
+   "bound": 366,
+   "byLen": [
+    {
+     "L": 2,
+     "runs": 32,
+     "occ": 40,
+     "save": 40
+    },
+    {
+     "L": 3,
+     "runs": 23,
+     "occ": 24,
+     "save": 48
+    },
+    {
+     "L": 4,
+     "runs": 16,
+     "occ": 17,
+     "save": 51
+    },
+    {
+     "L": 5,
+     "runs": 19,
+     "occ": 19,
+     "save": 76
+    },
+    {
+     "L": 6,
+     "runs": 8,
+     "occ": 8,
+     "save": 40
+    },
+    {
+     "L": 7,
+     "runs": 9,
+     "occ": 9,
+     "save": 54
+    },
+    {
+     "L": 8,
+     "runs": 3,
+     "occ": 3,
+     "save": 21
+    },
+    {
+     "L": 9,
+     "runs": 1,
+     "occ": 1,
+     "save": 8
+    },
+    {
+     "L": 10,
+     "runs": 2,
+     "occ": 2,
+     "save": 18
+    },
+    {
+     "L": 11,
+     "runs": 1,
+     "occ": 1,
+     "save": 10
+    }
+   ]
+  },
+  {
+   "lane": "code-ts",
+   "bodyTok": 709,
+   "refTok": 456,
+   "refFrac": 0.6432,
+   "distinctRuns": 93,
+   "runOcc": 96,
+   "bound": 307,
+   "byLen": [
+    {
+     "L": 2,
+     "runs": 24,
+     "occ": 26,
+     "save": 26
+    },
+    {
+     "L": 3,
+     "runs": 18,
+     "occ": 19,
+     "save": 38
+    },
+    {
+     "L": 4,
+     "runs": 19,
+     "occ": 19,
+     "save": 57
+    },
+    {
+     "L": 5,
+     "runs": 9,
+     "occ": 9,
+     "save": 36
+    },
+    {
+     "L": 6,
+     "runs": 10,
+     "occ": 10,
+     "save": 50
+    },
+    {
+     "L": 7,
+     "runs": 6,
+     "occ": 6,
+     "save": 36
+    },
+    {
+     "L": 8,
+     "runs": 2,
+     "occ": 2,
+     "save": 14
+    },
+    {
+     "L": 9,
+     "runs": 2,
+     "occ": 2,
+     "save": 16
+    },
+    {
+     "L": 10,
+     "runs": 1,
+     "occ": 1,
+     "save": 9
+    },
+    {
+     "L": 12,
+     "runs": 1,
+     "occ": 1,
+     "save": 11
+    },
+    {
+     "L": 15,
+     "runs": 1,
+     "occ": 1,
+     "save": 14
+    }
+   ]
+  },
+  {
+   "lane": "dpkg-l",
+   "bodyTok": 534,
+   "refTok": 252,
+   "refFrac": 0.4719,
+   "distinctRuns": 51,
+   "runOcc": 51,
+   "bound": 138,
+   "byLen": [
+    {
+     "L": 2,
+     "runs": 19,
+     "occ": 19,
+     "save": 19
+    },
+    {
+     "L": 3,
+     "runs": 8,
+     "occ": 8,
+     "save": 16
+    },
+    {
+     "L": 4,
+     "runs": 14,
+     "occ": 14,
+     "save": 42
+    },
+    {
+     "L": 5,
+     "runs": 2,
+     "occ": 2,
+     "save": 8
+    },
+    {
+     "L": 6,
+     "runs": 3,
+     "occ": 3,
+     "save": 15
+    },
+    {
+     "L": 7,
+     "runs": 2,
+     "occ": 2,
+     "save": 12
+    },
+    {
+     "L": 8,
+     "runs": 1,
+     "occ": 1,
+     "save": 7
+    },
+    {
+     "L": 10,
+     "runs": 1,
+     "occ": 1,
+     "save": 9
+    },
+    {
+     "L": 11,
+     "runs": 1,
+     "occ": 1,
+     "save": 10
+    }
+   ]
+  },
+  {
+   "lane": "findmnt",
+   "bodyTok": 307,
+   "refTok": 114,
+   "refFrac": 0.3713,
+   "distinctRuns": 28,
+   "runOcc": 29,
+   "bound": 62,
+   "byLen": [
+    {
+     "L": 2,
+     "runs": 9,
+     "occ": 10,
+     "save": 10
+    },
+    {
+     "L": 3,
+     "runs": 9,
+     "occ": 9,
+     "save": 18
+    },
+    {
+     "L": 4,
+     "runs": 6,
+     "occ": 6,
+     "save": 18
+    },
+    {
+     "L": 5,
+     "runs": 4,
+     "occ": 4,
+     "save": 16
+    }
+   ]
+  },
+  {
+   "lane": "json-pkg",
+   "bodyTok": 523,
+   "refTok": 271,
+   "refFrac": 0.5182,
+   "distinctRuns": 46,
+   "runOcc": 47,
+   "bound": 123,
+   "byLen": [
+    {
+     "L": 2,
+     "runs": 10,
+     "occ": 11,
+     "save": 11
+    },
+    {
+     "L": 3,
+     "runs": 20,
+     "occ": 20,
+     "save": 40
+    },
+    {
+     "L": 4,
+     "runs": 4,
+     "occ": 4,
+     "save": 12
+    },
+    {
+     "L": 5,
+     "runs": 5,
+     "occ": 5,
+     "save": 20
+    },
+    {
+     "L": 6,
+     "runs": 5,
+     "occ": 5,
+     "save": 25
+    },
+    {
+     "L": 8,
+     "runs": 1,
+     "occ": 1,
+     "save": 7
+    },
+    {
+     "L": 9,
+     "runs": 1,
+     "occ": 1,
+     "save": 8
+    }
+   ]
+  },
+  {
+   "lane": "kb-article",
+   "bodyTok": 553,
+   "refTok": 245,
+   "refFrac": 0.443,
+   "distinctRuns": 55,
+   "runOcc": 59,
+   "bound": 99,
+   "byLen": [
+    {
+     "L": 2,
+     "runs": 30,
+     "occ": 34,
+     "save": 34
+    },
+    {
+     "L": 3,
+     "runs": 15,
+     "occ": 15,
+     "save": 30
+    },
+    {
+     "L": 4,
+     "runs": 5,
+     "occ": 5,
+     "save": 15
+    },
+    {
+     "L": 5,
+     "runs": 5,
+     "occ": 5,
+     "save": 20
+    }
+   ]
+  },
+  {
+   "lane": "llm-answer",
+   "bodyTok": 573,
+   "refTok": 230,
+   "refFrac": 0.4014,
+   "distinctRuns": 53,
+   "runOcc": 61,
+   "bound": 104,
+   "byLen": [
+    {
+     "L": 2,
+     "runs": 26,
+     "occ": 34,
+     "save": 34
+    },
+    {
+     "L": 3,
+     "runs": 17,
+     "occ": 17,
+     "save": 34
+    },
+    {
+     "L": 4,
+     "runs": 6,
+     "occ": 6,
+     "save": 18
+    },
+    {
+     "L": 5,
+     "runs": 3,
+     "occ": 3,
+     "save": 12
+    },
+    {
+     "L": 7,
+     "runs": 1,
+     "occ": 1,
+     "save": 6
+    }
+   ]
+  },
+  {
+   "lane": "ls-l-real",
+   "bodyTok": 856,
+   "refTok": 609,
+   "refFrac": 0.7114,
+   "distinctRuns": 142,
+   "runOcc": 153,
+   "bound": 378,
+   "byLen": [
+    {
+     "L": 2,
+     "runs": 54,
+     "occ": 65,
+     "save": 65
+    },
+    {
+     "L": 3,
+     "runs": 36,
+     "occ": 36,
+     "save": 72
+    },
+    {
+     "L": 4,
+     "runs": 21,
+     "occ": 21,
+     "save": 63
+    },
+    {
+     "L": 5,
+     "runs": 10,
+     "occ": 10,
+     "save": 40
+    },
+    {
+     "L": 6,
+     "runs": 12,
+     "occ": 12,
+     "save": 60
+    },
+    {
+     "L": 7,
+     "runs": 4,
+     "occ": 4,
+     "save": 24
+    },
+    {
+     "L": 8,
+     "runs": 1,
+     "occ": 1,
+     "save": 7
+    },
+    {
+     "L": 9,
+     "runs": 1,
+     "occ": 1,
+     "save": 8
+    },
+    {
+     "L": 12,
+     "runs": 1,
+     "occ": 1,
+     "save": 11
+    },
+    {
+     "L": 13,
+     "runs": 1,
+     "occ": 1,
+     "save": 12
+    },
+    {
+     "L": 17,
+     "runs": 1,
+     "occ": 1,
+     "save": 16
+    }
+   ]
+  },
+  {
+   "lane": "ls-real",
+   "bodyTok": 261,
+   "refTok": 142,
+   "refFrac": 0.5441,
+   "distinctRuns": 24,
+   "runOcc": 27,
+   "bound": 61,
+   "byLen": [
+    {
+     "L": 2,
+     "runs": 6,
+     "occ": 6,
+     "save": 6
+    },
+    {
+     "L": 3,
+     "runs": 11,
+     "occ": 14,
+     "save": 28
+    },
+    {
+     "L": 4,
+     "runs": 4,
+     "occ": 4,
+     "save": 12
+    },
+    {
+     "L": 5,
+     "runs": 2,
+     "occ": 2,
+     "save": 8
+    },
+    {
+     "L": 8,
+     "runs": 1,
+     "occ": 1,
+     "save": 7
+    }
+   ]
+  },
+  {
+   "lane": "ps-aux-real",
+   "bodyTok": 692,
+   "refTok": 364,
+   "refFrac": 0.526,
+   "distinctRuns": 87,
+   "runOcc": 104,
+   "bound": 170,
+   "byLen": [
+    {
+     "L": 2,
+     "runs": 48,
+     "occ": 63,
+     "save": 63
+    },
+    {
+     "L": 3,
+     "runs": 23,
+     "occ": 25,
+     "save": 50
+    },
+    {
+     "L": 4,
+     "runs": 11,
+     "occ": 11,
+     "save": 33
+    },
+    {
+     "L": 5,
+     "runs": 3,
+     "occ": 3,
+     "save": 12
+    },
+    {
+     "L": 7,
+     "runs": 2,
+     "occ": 2,
+     "save": 12
+    }
+   ]
+  }
+ ]
+}

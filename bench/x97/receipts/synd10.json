@@ -1,0 +1,122 @@
+{
+ "note": "X99 SYNDYASMOS smoke test on the ten authoritative wires; incumbent = committed wire; zero frontier calls",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "T0": 850,
+   "meta": 835,
+   "metaDelta": -15,
+   "synd": 832,
+   "syndDelta": -18,
+   "msMeta": 929,
+   "msSynd": 1353,
+   "notes": "syndyasmos: 2 rounds (2 skipped by early exit), 1 relocations, 3 re-spellings, 1370 priced, 850 -> 832"
+  },
+  {
+   "lane": "code-ts",
+   "T0": 969,
+   "meta": 960,
+   "metaDelta": -9,
+   "synd": 958,
+   "syndDelta": -11,
+   "msMeta": 2090,
+   "msSynd": 6540,
+   "notes": "syndyasmos: 3 rounds (1 skipped by early exit), 2 relocations, 1 re-spellings, 3428 priced, 969 -> 958"
+  },
+  {
+   "lane": "dpkg-l",
+   "T0": 673,
+   "meta": 671,
+   "metaDelta": -2,
+   "synd": 669,
+   "syndDelta": -4,
+   "msMeta": 376,
+   "msSynd": 816,
+   "notes": "syndyasmos: 2 rounds (2 skipped by early exit), 1 relocations, 2 re-spellings, 6782 priced, 673 -> 669"
+  },
+  {
+   "lane": "findmnt",
+   "T0": 444,
+   "meta": 443,
+   "metaDelta": -1,
+   "synd": 440,
+   "syndDelta": -4,
+   "msMeta": 101,
+   "msSynd": 198,
+   "notes": "syndyasmos: 2 rounds (2 skipped by early exit), 1 relocations, 2 re-spellings, 795 priced, 444 -> 440"
+  },
+  {
+   "lane": "json-pkg",
+   "T0": 681,
+   "meta": 674,
+   "metaDelta": -7,
+   "synd": 670,
+   "syndDelta": -11,
+   "msMeta": 601,
+   "msSynd": 961,
+   "notes": "syndyasmos: 3 rounds (1 skipped by early exit), 2 relocations, 3 re-spellings, 442 priced, 681 -> 670"
+  },
+  {
+   "lane": "kb-article",
+   "T0": 622,
+   "meta": 621,
+   "metaDelta": -1,
+   "synd": 621,
+   "syndDelta": -1,
+   "msMeta": 108,
+   "msSynd": 106,
+   "notes": "syndyasmos: 2 rounds (2 skipped by early exit), 1 relocations, 0 re-spellings, 60 priced, 622 -> 621"
+  },
+  {
+   "lane": "llm-answer",
+   "T0": 674,
+   "meta": 672,
+   "metaDelta": -2,
+   "synd": 672,
+   "syndDelta": -2,
+   "msMeta": 150,
+   "msSynd": 58,
+   "notes": "syndyasmos: 2 rounds (2 skipped by early exit), 1 relocations, 0 re-spellings, 670 priced, 674 -> 672"
+  },
+  {
+   "lane": "ls-l-real",
+   "T0": 1476,
+   "meta": 1476,
+   "metaDelta": 0,
+   "synd": 1476,
+   "syndDelta": 0,
+   "msMeta": 7355,
+   "msSynd": 6668,
+   "notes": "syndyasmos: re-spelling failed fidelity at round 1 — refused"
+  },
+  {
+   "lane": "ls-real",
+   "T0": 433,
+   "meta": 432,
+   "metaDelta": -1,
+   "synd": 432,
+   "syndDelta": -1,
+   "msMeta": 160,
+   "msSynd": 188,
+   "notes": "syndyasmos: 2 rounds (2 skipped by early exit), 1 relocations, 0 re-spellings, 3048 priced, 433 -> 432"
+  },
+  {
+   "lane": "ps-aux-real",
+   "T0": 1042,
+   "meta": 1032,
+   "metaDelta": -10,
+   "synd": 1030,
+   "syndDelta": -12,
+   "msMeta": 1456,
+   "msSynd": 2588,
+   "notes": "syndyasmos: 2 rounds (2 skipped by early exit), 1 relocations, 2 re-spellings, 7401 priced, 1042 -> 1030"
+  }
+ ],
+ "totals": {
+  "T0": 7864,
+  "meta": 7816,
+  "synd": 7800,
+  "metaDelta": -48,
+  "syndDelta": -64
+ }
+}

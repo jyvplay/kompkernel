@@ -5730,3 +5730,112 @@ real decoder. Reported as a quarantine, not as a pass and not as a fidelity fail
 | 16 | Derived rule (`β = OP(α)`), Functionalizer-style | priced against X94's T=1 law | loses: opcode glyph + reference > suffix literal |
 | 17 | Tape REORDERING under the reference DAG (adjacent swaps) | `reorder.json` | **−11 (−0.140 %)**, saturating at 400 and 20 000 iterations ⇒ −11 is the ceiling |
 | 18 | `OMEGA_DET` omitted from an A/B arm | `isoab.json` (rev. 1, discarded) | bases 11–17 tokens worse than committed; **the flag is load-bearing, not cosmetic** |
+
+---
+
+## §X97 — ΜΕΤΑΤΑΞΙΣ (`src/lib/omega/metataxis.ts`)
+
+**Name.** ΜΕΤΑΤΑΞΙΣ, *metataxis* — "rearrangement". The tape's entries are rearranged; nothing else changes.
+
+**Is it greedy?** **Yes — a seeded, stochastic, first-improvement hill-climb with a fixed deterministic probe budget.** It never backtracks and never considers the joint optimum. It has exactly **one** move type:
+
+**RELOCATE** — take the rule at tape position `a` and re-insert it at position `p`, for **any** `p ≠ a, a+1` (not merely an adjacent transposition). Legal exactly when every rule it references still precedes it and every rule referencing it still follows it, i.e. the move respects the reference DAG.
+
+**Source article.** **None for the mechanism — original engineering of this repository.** The framing is imported and only the framing:
+- **ACL 2025, `2025.acl-long.1365`, "Tokenisation is NP-Complete"** — distinguishes *direct* from *bottom-up* tokenisation, and states that an SLP "must find the minimum number of merges (or rules) to fully compress a string into a single symbol" whereas a tokeniser "must maximally compress the string given a fixed number of merges", and that non-CNF SLPs "are closely linked to direct tokenisation … a direct tokeniser could be converted into an SLP with depth two". That is exactly this wire's shape: the tape is the rule set and the body is the start rule.
+- **Optimal Linear Arrangement** — the problem ΜΕΤΑΤΑΞΙΣ instantiates. Imported results, with the hypotheses actually needed:
+  - *arXiv:2502.10909* (Feb 2025), "Exponential-Time Approximation (Schemes) for Vertex-Ordering Problems": OLA input is a graph and the task is "find an ordering π of V minimizing Σᵢ₌₁ⁿ⁻¹ |cut_πⁱ|"; OLA is solvable in O*(2ⁿ) and the best polynomial-time factor is O(√(log n) log log n); the paper gives a (1.5+ε)-approximation for undirected OLA and (2+ε) for directed OLA in O*((2−δ)ⁿ).
+  - *Bienkowski & Even, STACS 2024, LIPIcs 289:15*: dynamic minimum linear arrangement gets a deterministic O(log n log log n)-approximation, improving Olver et al.'s randomized O(log²n), via a spreading-metric LP on a time-expanded graph, a tree decomposition, and conversion to permutations.
+  - *Leighton, "Multicommodity Max-Flow Min-Cut Theorems…"* (§3.8): minimum cut linear arrangement has an O(log²n) approximation by recursively finding a balanced cut and placing one side entirely before the other — the template for a divide-and-conquer ordering.
+  - *ICALP 2026, LIPIcs 374:4*: MLOP with a submodular objective generalises OLA ("MLOP captures Minimum Linear Arrangement as a special case with a symmetric submodular f that is the cut function of G") and admits an O(√(n/ln n)) approximation.
+
+  **Honest scope limit on the import:** ΜΕΤΑΤΑΞΙΣ's cost is *not* the classical cut function. It is the token count of a delimiter-free serialisation under a fixed tokenizer, where consecutive entries may or may not fuse. The imported results therefore supply the **problem's shape and the algorithmic template** — ordering under a boundary cost — and **no approximation bound transfers**. Nothing in this turn is claimed as a consequence of them.
+
+**Time- or CPU-bound?** **CPU-bound, deliberately and reproducibly.** The budget is a pure function of the message length, there is no wall-clock term, and every candidate is priced with `countTokens` on the complete message. `countTokens` is the repository's standard metric and is asserted equal to `countTokensExact` by `verifyChunkAlgebra`; measured equal on all ten committed messages (`bench/x97/receipts/eq.log`). It is also chunk-cached, and a relocation leaves the body byte-identical, so the body's chunks are cache hits — which is why tens of thousands of probes per lane are affordable.
+
+**This pass needs NO letter pool**, because it never changes a letter. ἸΣΟΜΟΡΦΊΑ builds the incumbent script's full one-token pool before its first probe (20 742 `countTokensExact` calls for a CJK tape); ΜΕΤΑΤΑΞΙΣ builds nothing.
+
+**Fidelity.** A relocation is a permutation of the tape's entries, so the rule→letter map is untouched: keys stay distinct, the first letter still declares the same script, and the DAG check keeps every reference pointing at a strictly earlier rule, so `chironDecode`'s forward-reference guard still passes and expansion terminates. Expansion composes with the permutation, so the decoded string is byte-identical. **This is a proof**, and the pass re-decodes every candidate through `chironDecode` anyway.
+
+**Measured result (RUN L, `OMEGA_DET=1`, 29 lanes).** Gate **unchanged at 12 639**, "FRONTIER CONFIRMED: identical to the X80 configuration, lane for lane", lanes differing 0. Shipped tier **12 478 → 12 396 (−82)**, exact 29/29. On the ten authoritative wires (`bench/x97/receipts/meta10.json`): **7 864 → 7 816 = −48**, where ἸΣΟΜΟΡΦΊΑ's adjacent-swap move measured −11 — a **4.4×** larger gain, and 9 of 9 decode-verifiable lanes improved. `ls-l-real.txt` is **quarantined** (its extra contract clause is not implemented by `chironDecode`), so ΜΕΤΑΤΑΞΙΣ correctly emits nothing for it.
+
+**Model-readability.** ΜΕΤΑΤΑΞΙΣ changes only the ORDER of the tape's entries. The contract is byte-identical, the operator set is unchanged, and every rule is the same string under the same letter — so the wire language is untouched and the decoding burden is unchanged. **The claim is downgraded, not declared verified:** no model API is available in this environment, so LLM decodability is NOT tested here. What is bound to evidence is (a) `chironDecode` round-trips on every emitted message, (b) the wire language is provably unchanged, and (c) external work shows LLMs can decode dictionary/meta-token representations without fine-tuning — arXiv:2604.13066 (in-context key learning, lossless dictionary encoding, exact match > 0.99) and arXiv:2606.19857 (BabelTele: "Universality: any LLM should fully understand compressed output without a codebook"). The second is the closer analogue to this stack and the stronger external support for the in-band-contract design.
+
+### X97 closures (measured, all exact, all on the complete message)
+
+| # | Lever | Receipt | Result |
+|---|---|---|---|
+| 19 | Unicode canonical normalisation as a representation lever (NFC/NFD) | `census.json` | **all 29 lanes are pure ASCII and already NFC** ⇒ 0 headroom, measured not assumed |
+| 20 | RUN PACKING by **joint** multi-letter relabelling (ἉΡΜΟΓΉ probe) | `harmogi.json` | **0 over 1 200 whole-message-priced probes**; capacity is NOT the constraint (cyrillic 823 two-char / 1 896 three-char single tokens vs demand 195 / 135, `capacity.json`) — the assignment's coupling is |
+| 21 | RUN FUSION — add one rule whose value is a repeated reference run | `moves.json` | **0**, on all ten wires; re-confirms X94's ADD closure against a population it may not have covered |
+| 22 | `OMEGA_DET` omitted from an A/B arm | `ab.json` rev. 1 (X96, discarded) | bases 11–17 tokens worse than committed; the flag is load-bearing, not cosmetic |
+| 23 | Measured run-packing headroom (the number the mechanism was chasing) | `runpack2.json` | already packed **1 051**, headroom **757** (718 capacity-feasible) — **57.1 % of the body is reference tokens** |
+
+---
+
+## §X99 — ΣΥΝΔΥΑΣΜΟΣ (`src/lib/omega/syndyasmos.ts`)
+
+**Name.** ΣΥΝΔΥΑΣΜΟΣ, *syndyasmos* — "combination". It combines two tape transformations.
+
+**Is it greedy?** **Yes, doubly: a seeded stochastic first-improvement climb (ΜΕΤΑΤΑΞΙΣ's
+arbitrary-rank relocation) alternated with a deterministic greedy first-improvement sweep
+(ΠΡΟΟΙΜΙΟΝ's value re-spelling), for `SYNDYASMOS_ROUNDS = 4` rounds.** Neither backtracks; neither
+considers the joint optimum. Two move types:
+
+* **RELOCATE** — take the rule at tape position `a` and re-insert it at any position `p ≠ a, a+1`,
+  legal exactly when the reference DAG still holds. (Inherited from ΜΕΤΑΤΑΞΙΣ.)
+* **RESPELL** — replace a rule's value with any interleaving of literal runs and references to
+  **strictly earlier** rules, admitted only when the complete message gets strictly cheaper.
+
+**Why the two belong together.** `glossa.json` counts the tapes' boundaries: 589 ASCII→script,
+600 script→ASCII, 846 script→script. The vocabulary supplies 2-char tokens for the first and third
+(polyglot 596 / 3 417, cjk 568 / 2 408, cyrillic 161 / 823) and **essentially none for the second**
+(0 for every script but CJK's 1). So a value that begins with an ASCII character has a boundary that
+*cannot* fuse, and one that begins with a reference letter has a boundary with 823–3 417 tokens
+available. Relocation decides which rules are neighbours; re-spelling decides whether the boundary is
+fusable at all. A factor must precede its user, so relocation *enables* re-spellings that were
+previously illegal — which is why neither half prices the whole.
+
+**Source article.** **None for the mechanism — original engineering of this repository.** Imported,
+and only as framing: ACL 2025 `2025.acl-long.1365` ("Tokenisation is NP-Complete"; the
+direct/bottom-up split; non-CNF SLPs and depth two); arXiv:2602.22958 (Frequency-Ordered
+Tokenization — renumbering a code assignment is a lever independent of the code set); Optimal Linear
+Arrangement (arXiv:2502.10909; Leighton; Bienkowski & Even STACS 2024; Abboud & Schwartz ICALP 2026)
+— **with the honest scope limit that this codec's cost is a tokenizer-defined boundary cost, not a
+cut function, so no imported approximation bound transfers.**
+
+**Time- or CPU-bound?** **CPU-bound, deliberately and reproducibly.** Both budgets are pure functions
+of the message length; there is no wall-clock term; every candidate is priced with `countTokens` on
+the complete message and re-decoded through `chironDecode`. `countTokens` is asserted equal to
+`countTokensExact` on all ten committed messages (`bench/x97/receipts/eq.log`), and a re-spelling
+leaves the body byte-identical, so the body's chunks are cache hits. **No letter pool is needed**,
+because no letter ever changes.
+
+**Fidelity.** Relocation is a permutation of the entries with the DAG intact; re-spelling replaces a
+value's text with a concatenation that expands to the same string. Expansion therefore composes with
+both, so the decode is byte-identical **by construction** — and every admitted candidate is
+re-decoded anyway. `ls-l-real`'s extra contract clause is not implemented by `chironDecode`, so the
+codec **refuses** that lane rather than emit an unverifiable wire; it is reported as a quarantine.
+
+**Measured.** Ten authoritative wires, incumbent = the committed wire (`bench/x99/receipts/synd10.json`):
+**7 864 → 7 800 = −64**, against ΜΕΤΑΤΑΞΙΣ's −48 and ἸΣΟΜΟΡΦΪΑ's −11 on the same wires.
+`bench/x97/receipts/syndyasmos.json`: ΜΕΤΑΤΑΞΙΣ −48, ΠΡΟΟΙΜΙΟΝ −27, combined **−76**, all arms
+`chironDecode`-exact 9/9 (the tenth is the quarantine). The 29-lane load-controlled A/B is
+`bench/x99/receipts/ab99.json`.
+
+**Model-readability.** The contract is byte-identical, the operator set is unchanged, every rule is
+the same string under the same letter, and the decode rule is unchanged — so a reader who could
+expand the incumbent can expand this by the same rule. **Downgraded, not declared verified:** no
+model API exists in this environment, so LLM decodability was not tested here. External support for
+the in-band-dictionary design: arXiv:2604.13066 (in-context dictionary learning, exact match > 0.99)
+and arXiv:2606.19857 (BabelTele, "Universality: any LLM should fully understand compressed output
+without a codebook").
+
+### X99 closures (measured, all exact, all on the complete message)
+
+| # | Lever | Receipt | Result |
+|---|---|---|---|
+| 25 | **ΑΝΑΠΑΡΑΓΩΓΗ** — re-spell a value as a *complete* decomposition into earlier rules | `anaparagoge.json` | **−1**, and the one acceptance is on the quarantined lane with `exact=false`. Only **30** candidate decompositions exist across all ten wires |
+| 26 | **ΚΑΤΑΛΥΤΗΣ** — add a single-character catalyst rule so any value can begin with a reference | `katalytes.json` | **0 over 1 536 whole-message prices**: a catalyst costs 2 tokens to save at most 1 |
+| 27 | **ΑΝΤΙΣΤΟΙΧΊΑ** — transliterate costly ASCII bigrams onto non-ASCII 2-char tokens | `antistoichia2.json` | **31** adjacent single-ASCII-char token pairs across all ten wires (not 1 659 — the first bound was wrong by **53×**); pooled net **1** at 2 tok/entry, **0** at 3. Supply is 8 789; demand is not |
+| 28 | **Script choice** as a free parameter (ΧΕΙΡΟΝ declares it by the first letter's range) | `glossa.json` | priced, and the asymmetry it exposes is what ΠΡΟΟΙΜΙΟΝ exploits: script→ASCII has **0** vocabulary tokens, script→script has 823 (cyrillic) / 3 417 (polyglot) |

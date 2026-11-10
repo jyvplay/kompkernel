@@ -1,0 +1,17 @@
+2-char pure-ASCII vocabulary tokens: 3261 of 9025 possible printable bigrams
+2-char vocabulary tokens made of two non-ASCII characters (the injective map's codomain): 8789
+
+lane                 ASCII bigrams  not 1 token  msg tok
+apt-real.wire.txt              907           64      850
+code-ts.wire.txt              2431          286      969
+dpkg-l.wire.txt               2186          190      673
+findmnt.wire.txt              1867          111      444
+json-pkg.wire.txt             1374          133      681
+kb-article.wire.txt           2339          222      622
+llm-answer.wire.txt           1833          249      674
+ls-l-real.wire.txt            1589          139     1476
+ls-real.wire.txt               662           62      433
+ps-aux-real.wire.txt          1626          203     1042
+
+UPPER BOUND on the transliteration gain = 1659 tokens over the ten wires (21.10% of 7 844).
+supply 8789 >= bound 1659 ? true   (necessary, NOT sufficient: the map itself must be transmitted)

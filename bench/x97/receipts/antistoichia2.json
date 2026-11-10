@@ -1,0 +1,108 @@
+{
+ "supply": 8789,
+ "poolMissing": 31,
+ "poolNet2": 1,
+ "poolNet3": 0,
+ "rows": [
+  {
+   "lane": "apt-real.wire.txt",
+   "distinct": 1,
+   "missing": 1,
+   "bestK2": 0,
+   "net2": 0,
+   "bestK3": 0,
+   "net3": 0,
+   "top": "8:x1"
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "distinct": 3,
+   "missing": 3,
+   "bestK2": 0,
+   "net2": 0,
+   "bestK3": 0,
+   "net3": 0,
+   "top": "[0x1 0]x1 (0x1"
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "distinct": 1,
+   "missing": 1,
+   "bestK2": 0,
+   "net2": 0,
+   "bestK3": 0,
+   "net3": 0,
+   "top": "|/x1"
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "distinct": 10,
+   "missing": 12,
+   "bestK2": 1,
+   "net2": 1,
+   "bestK3": 0,
+   "net3": 0,
+   "top": "=5x3 =2x1 2Mx1 d-x1 -1x1 =1x1"
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "distinct": 2,
+   "missing": 2,
+   "bestK2": 0,
+   "net2": 0,
+   "bestK3": 0,
+   "net3": 0,
+   "top": "@*x1 d6x1"
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "distinct": 0,
+   "missing": 0,
+   "bestK2": 0,
+   "net2": 0,
+   "bestK3": 0,
+   "net3": 0,
+   "top": ""
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "distinct": 3,
+   "missing": 3,
+   "bestK2": 0,
+   "net2": 0,
+   "bestK3": 0,
+   "net3": 0,
+   "top": "6%x1 0,x1 x]x1"
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "distinct": 6,
+   "missing": 6,
+   "bestK2": 0,
+   "net2": 0,
+   "bestK3": 0,
+   "net3": 0,
+   "top": " 1x1 1,x1 ,1x1 7 x1 b5x1 -5x1"
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "distinct": 0,
+   "missing": 0,
+   "bestK2": 0,
+   "net2": 0,
+   "bestK3": 0,
+   "net3": 0,
+   "top": ""
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "distinct": 3,
+   "missing": 3,
+   "bestK2": 0,
+   "net2": 0,
+   "bestK3": 0,
+   "net3": 0,
+   "top": ".9x1 d+x1 wqx1"
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+lsblk.txt                iso=   60 iso+meta=   60 Δ=   0 exact=true parent=synkrisis    2763/89ms
+kb-article.txt           iso=  622 iso+meta=  621 Δ=  -1 exact=true parent=synkrisis    3271/843ms
+uptime-w.txt             iso=   80 iso+meta=   80 Δ=   0 exact=true parent=synkrisis    2265/104ms
+free-m.txt               iso=   76 iso+meta=   76 Δ=   0 exact=true parent=synkrisis    2531/112ms
+vmstat.txt               iso=  149 iso+meta=  149 Δ=   0 exact=true parent=synkrisis    2678/179ms
+unified-diff.patch       iso=  418 iso+meta=  416 Δ=  -2 exact=true parent=synkrisis    3758/562ms
+df-h.txt                 iso=  171 iso+meta=  171 Δ=   0 exact=true parent=akolouthia2  2713/370ms
+df-real.txt              iso=  125 iso+meta=  125 Δ=   0 exact=true parent=synkrisis    5121/289ms
+du-real.txt              iso=  272 iso+meta=  272 Δ=   0 exact=true parent=synkrisis    4209/272ms
+node-help.txt            iso=  862 iso+meta=  861 Δ=  -1 exact=true parent=synkrisis    8473/2035ms
+findmnt.txt              iso=  444 iso+meta=  443 Δ=  -1 exact=true parent=synkrisis    6557/884ms
+df-h.txt                 iso=  107 iso+meta=  107 Δ=   0 exact=true parent=synkrisis    5162/190ms
+email-thread.txt         iso=  488 iso+meta=  487 Δ=  -1 exact=true parent=synkrisis    7829/703ms
+llm-answer.md            iso=  672 iso+meta=  672 Δ=   0 exact=true parent=synkrisis    9470/970ms
+markdown-table.md        iso=  176 iso+meta=  176 Δ=   0 exact=true parent=synkrisis    7476/167ms
+psql-output.txt          iso=  244 iso+meta=  244 Δ=   0 exact=true parent=metron       13188/4616ms
+prices.csv               iso=  133 iso+meta=  133 Δ=   0 exact=true parent=diastema     17578/9405ms
+cue-sheet.md             iso=  101 iso+meta=  101 Δ=   0 exact=true parent=stichomythia 15660/3137ms
+ps-ef.txt                iso=  314 iso+meta=  312 Δ=  -2 exact=true parent=synkrisis    15234/5473ms
+ls-real.txt              iso=  433 iso+meta=  432 Δ=  -1 exact=true parent=synkrisis    12031/890ms
+json-pkg.txt             iso=  680 iso+meta=  675 Δ=  -5 exact=true parent=synkrisis    16621/1855ms
+code-ts.txt              iso=  968 iso+meta=  960 Δ=  -8 exact=true parent=synkrisis    28970/4184ms
+dpkg-l.txt               iso=  672 iso+meta=  671 Δ=  -1 exact=true parent=synkrisis    22525/962ms
+ps-real.txt              iso=  397 iso+meta=  394 Δ=  -3 exact=true parent=synkrisis    13059/807ms
+kubectl-get-pods.txt     iso=  326 iso+meta=  326 Δ=   0 exact=true parent=akolouthia2  23694/5089ms
+metrics.tsv              iso=  210 iso+meta=  210 Δ=   0 exact=true parent=akolouthia2  22134/9799ms
+ps-aux-real.txt          iso= 1042 iso+meta= 1032 Δ= -10 exact=true parent=synkrisis    59632/3885ms
+apt-real.txt             iso=  846 iso+meta=  838 Δ=  -8 exact=true parent=synkrisis    156474/81340ms
+ls-l-real.txt            iso= 1390 iso+meta= 1390 Δ=   0 exact=true parent=synkrisis    774413/19535ms
+
+shipped minus ΜΕΤΑΤΑΞΙΣ 12478  ->  shipped 12434  Δ=-44   improved 13/29  worse 0  inexact 0
+wrote bench/x97/receipts/ab29.json

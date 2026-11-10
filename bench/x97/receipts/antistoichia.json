@@ -1,0 +1,96 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real.wire.txt",
+   "distinct": 47,
+   "totalMissing": 64,
+   "bestK": 4,
+   "F": 16,
+   "net": 8,
+   "top": "t-x6 g-x4 t x3 e-x3 d x2"
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "distinct": 105,
+   "totalMissing": 286,
+   "bestK": 29,
+   "F": 181,
+   "net": 123,
+   "top": "e x19 t x16 s x16 r x10 / x10"
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "distinct": 81,
+   "totalMissing": 190,
+   "bestK": 17,
+   "F": 112,
+   "net": 78,
+   "top": "e x23 r x10 d x9 t x9 s x9"
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "distinct": 70,
+   "totalMissing": 111,
+   "bestK": 8,
+   "F": 37,
+   "net": 21,
+   "top": "e=x7 e x6 s x5 c x5 s/x4"
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "distinct": 79,
+   "totalMissing": 133,
+   "bestK": 12,
+   "F": 58,
+   "net": 34,
+   "top": ": x14 e-x8 s\"x5 e x4 t x4"
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "distinct": 36,
+   "totalMissing": 222,
+   "bestK": 14,
+   "F": 196,
+   "net": 168,
+   "top": "e x40 s x33 t x26 y x20 n x18"
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "distinct": 112,
+   "totalMissing": 249,
+   "bestK": 19,
+   "F": 139,
+   "net": 101,
+   "top": "t x20 e x19 d x13 s x12 ` x8"
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "distinct": 76,
+   "totalMissing": 139,
+   "bestK": 11,
+   "F": 61,
+   "net": 39,
+   "top": " 1x12  2x12 t x7 r x5 y x4"
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "distinct": 47,
+   "totalMissing": 62,
+   "bestK": 4,
+   "F": 12,
+   "net": 4,
+   "top": "r-x3 n/x3 0 x3 7 x3 6 x2"
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "distinct": 114,
+   "totalMissing": 203,
+   "bestK": 17,
+   "F": 76,
+   "net": 42,
+   "top": "t x12 d x9 e x8 t-x5 ? x4"
+  }
+ ],
+ "poolF": 1659,
+ "poolNet": 618
+}
