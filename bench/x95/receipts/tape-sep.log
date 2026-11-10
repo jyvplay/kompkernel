@@ -1,0 +1,19 @@
+lane          ents  tapeTok  +space-before  Δ   +space-after  Δ   +newline-before  Δ
+apt-real        64      206          222  16          235  29            271  65
+code-ts         75      247          271  24          292  45            314  67
+dpkg-l          48      126          145  19          157  31            176  50
+findmnt         34      124          140  16          142  18            155  31
+json-pkg        48      145          158  13          166  21            193  48
+kb-article      27       56           58   2           79  23             80  24
+llm-answer      34       88           94   6          110  22            112  24
+ls-l-real      143      592          657  65          677  85            739 147
+ls-real         48      159          181  22          196  37            213  54
+ps-aux-real     79      337          362  25          389  52            419  82
+------------------------------------------------------------------------------------------------
+TOTAL: entries 600  tape 2080  Δ space-before-glyph 208  Δ space-after-glyph 363  Δ newline-before-glyph 592
+
+reading: a NEGATIVE delta is a saving on the tape alone, before any change to the contract
+that would have to describe the new separator, and before any effect on the body. The
+separator is inserted once per entry, so a saving is not a deletion: the entry count is
+unchanged and the parse is unambiguous either way, because an entry still begins at the
+first appearance of each glyph.

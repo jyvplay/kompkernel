@@ -1,0 +1,105 @@
+{
+ "note": "exact whole-message price of front-coding the tape; zero frontier calls",
+ "lanes": [
+  {
+   "lane": "apt-real",
+   "msgTokens": 850,
+   "tapeTokens": 206,
+   "pureEntries": 15,
+   "mixedEntries": 49,
+   "newTapeTokens": 213,
+   "delta": 7,
+   "dependencyOrderPreserved": true
+  },
+  {
+   "lane": "code-ts",
+   "msgTokens": 969,
+   "tapeTokens": 247,
+   "pureEntries": 40,
+   "mixedEntries": 35,
+   "newTapeTokens": 294,
+   "delta": 47,
+   "dependencyOrderPreserved": true
+  },
+  {
+   "lane": "dpkg-l",
+   "msgTokens": 673,
+   "tapeTokens": 126,
+   "pureEntries": 24,
+   "mixedEntries": 24,
+   "newTapeTokens": 153,
+   "delta": 27,
+   "dependencyOrderPreserved": true
+  },
+  {
+   "lane": "findmnt",
+   "msgTokens": 444,
+   "tapeTokens": 124,
+   "pureEntries": 15,
+   "mixedEntries": 19,
+   "newTapeTokens": 142,
+   "delta": 18,
+   "dependencyOrderPreserved": true
+  },
+  {
+   "lane": "json-pkg",
+   "msgTokens": 681,
+   "tapeTokens": 145,
+   "pureEntries": 23,
+   "mixedEntries": 25,
+   "newTapeTokens": 156,
+   "delta": 11,
+   "dependencyOrderPreserved": true
+  },
+  {
+   "lane": "kb-article",
+   "msgTokens": 622,
+   "tapeTokens": 56,
+   "pureEntries": 24,
+   "mixedEntries": 3,
+   "newTapeTokens": 84,
+   "delta": 28,
+   "dependencyOrderPreserved": true
+  },
+  {
+   "lane": "llm-answer",
+   "msgTokens": 674,
+   "tapeTokens": 88,
+   "pureEntries": 26,
+   "mixedEntries": 8,
+   "newTapeTokens": 111,
+   "delta": 23,
+   "dependencyOrderPreserved": true
+  },
+  {
+   "lane": "ls-l-real",
+   "msgTokens": 1476,
+   "tapeTokens": 592,
+   "pureEntries": 23,
+   "mixedEntries": 120,
+   "newTapeTokens": 605,
+   "delta": 13,
+   "dependencyOrderPreserved": true
+  },
+  {
+   "lane": "ls-real",
+   "msgTokens": 433,
+   "tapeTokens": 159,
+   "pureEntries": 22,
+   "mixedEntries": 26,
+   "newTapeTokens": 180,
+   "delta": 21,
+   "dependencyOrderPreserved": true
+  },
+  {
+   "lane": "ps-aux-real",
+   "msgTokens": 1042,
+   "tapeTokens": 337,
+   "pureEntries": 24,
+   "mixedEntries": 55,
+   "newTapeTokens": 352,
+   "delta": 15,
+   "dependencyOrderPreserved": true
+  }
+ ]
+}

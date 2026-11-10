@@ -5492,3 +5492,241 @@ gate total and a 2×-confirmed shipped total, costing both frontier passes (613 
 fuzz, cold reads and the anamnesis suite to buy 0.051 %.
 
 [`docs/codecs.md`](codecs.md) §X94.
+
+---
+
+## X95 ἈΝΑΚΛΗΣΙΣ
+
+**ἈΝΑΚΛΗΣΙΣ** (*anaklēsis*, "a calling-back, a revocation") — the ARIADNE glyph-assignment
+hill-climb's treatment of a candidate it rejects. The probe used to *copy* the whole assignment,
+*rebuild a set of every glyph* to re-verify the no-duplicate invariant, and then *re-scan every
+slot* to discover which ones had moved; the candidate is now applied in place to a reused buffer,
+revoked on rejection by walking a change log backwards, with the invariant maintained incrementally
+as a glyph multiset and the changed slots handed straight to the scorer.
+
+- **Greedy or not:** **neither — it is not a search at all.** ἈΝΑΚΛΗΣΙΣ is a deterministic
+  mechanical transformation of the probe loop. It makes no choice the original loop did not make:
+  the RNG call order, the acceptance test `total <= bestRun`, the commit-on-accept rule and the
+  branch-and-bound bound are all preserved bit-for-bit. It is therefore *not* greedy local search,
+  and it is *not* an approximation — it is the same computation with the redundant work removed.
+  (For contrast: ΣΥΝΤΆΞΙΣ, the last codec implemented before this one, **is** greedy local search.)
+- **Source article citation:** **none, and this is stated rather than dressed up.** ἈΝΑΚΛΗΣΙΣ is
+  original engineering derived from a V8 `--cpu-prof` sampling profile of *this repository's own hot
+  loop*. No paper, preprint or prior art is claimed for it, and none was found: the mechanism is a
+  property of where this particular search spends its time, not of a published algorithm. The
+  external literature surveyed in §X94 (grammar compression, BPE merge utility, per-lab proof
+  releases) informed what *not* to retry; it did not supply this mechanism.
+- **Time- or CPU-bound:** **CPU-bound, measured; wall-clock-neutral, measured.** Under
+  `node --cpu-prof` on `bench/holdout-x40/metrics.tsv`, three runs of the unpatched build and four
+  of the patched build give a median of **15 060 → 14 677 samples, a 2.5 % reduction in CPU time**
+  (×1.026), with the collector's share falling 5.6 % → 4.1 %. **End-to-end wall clock across the 29
+  frontier lanes moved by less than this machine's noise band (±25 % per lane, ~1.6× cross-process
+  drift) and is explicitly not claimed.** An earlier revision measured −1.4 % (a small *loss*)
+  before the per-pattern tuple allocation was removed; that number is published because it is why
+  the allocation was worth removing.
+- **Fidelity:** byte-perfect and exact-lossless by construction and by measurement — **29 of 29
+  frontier lanes emit a bit-identical message**, 12 491 tokens before and after, `exact` on all 29.
+  The message is unchanged, so it remains directly model-readable with no skills file and no system
+  prompt, exactly as before.
+- **What it is not:** not a compression codec. It is token-neutral on every lane and is not
+  presented as a token win.
+
+### The eleven measured closures (not codecs — measurements)
+
+These are recorded here because they are what decided the direction of X95. Each priced the
+**complete** message exactly, with zero frontier calls. All eleven are negative.
+
+1. **Second-level glyph-run rules** — 0 of 238 profitable, net delta 0 (`runmerge`).
+2. **Vocabulary glyph-merge relabelling** — incumbent 0.9078 tok/glyph vs the vocabulary's optimum
+   0.9681 ⇒ headroom **−17** (`vocab-merge`).
+3. **Bridge-token glyph choice** — difference **0.000** in all 14 contexts; the shipped Cyrillic
+   pool already *is* the best-bridging set (`vocab-bridge`).
+4. **Space-in-front-of-run absorption** — 36 of 1 414 runs are space-preceded and all 36 already
+   merge ⇒ 0 (`space-bridge-headroom`).
+5. **Boundary severance** — total **−38** over 1 414 runs, already net-beneficial; the vocabulary
+   contains **zero** digit↔non-ASCII bridge tokens, so that class is closed by the tokenizer
+   (`boundary-census`).
+6. **Better glyph per tape entry** — upper bound **44** tokens over 600 entries, 0.56 %
+   (`tape-glyph-headroom`).
+7. **Run-coalescence by absorbing a single-occurrence span** — **0 wins in 1 160**, sum +2 100
+   (`span-absorb`).
+8. **Tape field separator** — space before +208, space after +363, newline +592; all cost
+   (`tape-sep`).
+9. **Repeated long runs as meta-rules** — **no run of length ≥ 5 repeats at all**; the 471 extra
+   occurrences are 431 at length 1 and 51 at length 2 at multiplicity ≈ 2.
+10. **Shared prefixes in the tape's values** — **0 wins in 45** (`tape-prefix`).
+11. **Shared suffixes in the tape's values** — **0 wins in 116** (`tape-suffix`).
+12. **Front coding the tape's value column** — sort the entries and store each shared-prefix *length*
+    as one digit instead of the prefix. Measured **+210 tokens, worse on all ten lanes**: only 236 of
+    600 values are glyph-free and therefore sortable, the other 364 contain rule references and are
+    pinned by the positional constraint (`frontcode`, `frontcode-exact`).
+
+The value population they close over is the weakest block in the message: **4 323 characters costing
+1 671 tokens, 2.59 ch/tok**, against a 3.0 ch/tok digit ceiling and a ~4.3 ch/tok English ceiling
+(`tape-values`). It is weak *because* it is the rare content, and the eleven closures say there is no
+readable way to make it cheaper.
+
+### Generalized local leaders, by category
+
+Re-measured on the current stack (`bench/x91/leaders-general.mjs`; a leader is the lane with the
+lowest `shipped/raw` ratio in its category, a violation is `floor/shipped >= 1.00`):
+
+| Category | Lanes | Raw → shipped | Ratio | Local leader | Weakest lane |
+|---|---|---|---|---|---|
+| **DATA** | 2 | 1 095 → 234 | 0.214 | `holdout-x40/cue-sheet.md` 513 → 101 (0.197) | — |
+| **OPS LIST** | 13 | 30 065 → 9 494 | 0.316 | `holdout-ops/openstack-loghub-26.log` 4 028 → 896 (0.222) | `holdout-x42/dpkg-l.txt` 0.673 |
+| **OPS TABLE** | 11 | 4 135 → 1 726 | 0.417 | `holdout-x40/metrics.tsv` 811 → 210 (0.259) | — |
+| **OTHER** | 1 | 4 277 → 2 262 | 0.529 | — | — |
+| **CODE** | 3 | 3 152 → 2 069 | 0.656 | `holdout/json-pkg.txt` 1 152 → 681 (0.591) | — |
+| **PROSE** | 4 | 3 117 → 2 646 | 0.849 | `holdout-work/email-thread.txt` 629 → 488 (0.776) | `kb-article` 0.948 |
+| **ALL** | 34 | 45 841 → 18 431 | 0.402 | floor 14 911 (0.809) | — |
+
+**Headroom against the blind-compressor floor: OPS TABLE 26 %, OPS LIST 23 %, CODE 16.5 %,
+DATA 10.7 %, PROSE 4.4 %.** The money is in ops; prose is nearly exhausted. The readability-price
+law holds on 32 of 34 lanes; the two violations are `lsblk` 1.017 and `free-m` 1.000.
+
+[`docs/codecs.md`](codecs.md) §X95.
+
+---
+
+## X96 ἸΣΟΜΟΡΦΊΑ
+
+**ἸΣΟΜΟΡΦΊΑ** (*isomorphía*, "equality of form") — the relabelling of a CHIRON wire's glyph tape.
+The wire language declares its alphabet implicitly ("the first letter of the tape declares which
+script the wire uses, so nothing about the alphabet is transmitted", `chiron.ts`), and a rule is
+"one *new* letter of a declared one-token script followed by its text". **Nothing says which letter
+a rule gets.** That map is a free parameter of every wire the stack emits, it is billed, and — this
+is the part the stack had not used — so is the **order** of the rules in the tape, constrained only
+by "rules only ever reference rules defined earlier".
+
+ἸΣΟΜΟΡΦΊΑ takes the incumbent's complete message and re-climbs both against the token cost of the
+**complete** message. It touches nothing else: not the contract, not the rule set, not the body
+text, not the separators, not the operators.
+
+- **Greedy or not:** **greedy local search (stochastic hill-climb) — and this is stated plainly.**
+  Two move types, both isomorphisms of the wire language:
+  - **REORDER** — swap two rules that are adjacent in the tape, legal exactly when the later one
+    does not reference the earlier one (`dep[j][i]` false). ARIADNE's four move types (n-gram,
+    hot-pair, random-single, random-swap) all *preserve rule order*, so **no sequence of them can
+    reach a different order at all**. This is the move the shipped search structurally cannot make.
+  - **REASSIGN** — move one rule onto an unused one-token letter of the same script.
+  Acceptance is "strictly smaller on a complete, decoded, byte-exact message measured in this
+  process", the same admission rule as PROSPHYSIS / ΣΥΜΦΥΊΑ / STOICHEION. The climb is seeded and
+  bounded, so the emitted wire is a pure function of the input.
+- **Source article citation:** **none for the mechanism; two honest imported results frame it.**
+  No paper was found that relabels or reorders a delimiter-free grammar tape against a live
+  tokenizer, and none is claimed. The two external results that *do* apply and are cited in
+  `docs/codecs.md` §X96 are:
+  - **PathPiece** (ACL Anthology 2024.emnlp-main.40, *Tokenization Is More Than Compression*): "In
+    order to design an optimal vocabulary V, it is first necessary to know how the vocabulary will
+    be used to tokenize. There can be no best vocabulary in the abstract." — the formal reason the
+    script/assignment cannot be chosen once and for all.
+  - **The Functionalizer** (arXiv:2609.15991, 2026): reversible opcode/operand factoring of
+    orthographic variation before tokenization. Cited as the closest published neighbour and as the
+    reason the *derived-rule* variant was priced and refused here.
+- **Time- or CPU-bound:** **CPU-bound, measured.** Every probe is one string build plus one
+  `countTokens` of the complete message. The probe cap scales inversely with message length
+  (`4 000 000 / msg.length`, floored at 40, capped at the iteration budget) and there is a hard
+  40 M-character ceiling, so the pass is bounded and deterministic. It **adds** work to the chain;
+  the measured CPU cost and the measured token gain are both reported in `docs/codecs.md` §X96
+  rather than being traded off silently.
+- **Fidelity:** byte-perfect and exact-lossless **by proof, then verified against the repository's
+  own decoder.** A bijection of the declared script's letters keeps keys distinct (so
+  `chironParseTape` still returns one rule per key), keeps the first letter inside the same script
+  (so `scriptOf` resolves the same alphabet), and keeps every reference pointing at a strictly
+  earlier rule (so `chironDecode`'s forward-reference guard still passes). Expansion composes with
+  relabelling, so the decoded string is byte-identical. The pass nevertheless re-decodes through
+  `chironDecode` and refuses to emit anything that does not reproduce the source exactly. One lane
+  (`ls-l-real`) carries an extra contract clause that `chironDecode` does not implement; it is
+  **quarantined**, not silently counted.
+- **What it is not:** not a rewrite of the text (every other X74 candidate re-encodes the source),
+  and not a large win. It is a small, exact, general gain from a degree of freedom the stack had
+  never searched. The measured negatives that bound it — the assignment being a local optimum, the
+  script not being a free lever, and CHIRON itself losing to the gate by 21 % — are all in
+  `docs/codecs.md` §X96.
+
+### The X96 measured closures
+
+| # | Lever | Receipt | Result |
+|---|---|---|---|
+| 13 | Whole-message vs body-runs assignment objective | `bench/x96/receipts/wholeobj.json` | **0** over 8 seeds × 10 wires — the incumbent letter map is already a local optimum of the objective we are billed on |
+| 14 | Script co-optimisation from scratch | `bench/x96/receipts/wholeobj.json` (sweep) | **+374 (+4.76 %) worse** — the incumbent's *assignment* is worth far more than the script |
+| 15 | CHIRON itself as a frontier candidate | `bench/x96/receipts/chiron29.json` | **+2 670 (+21.1 %) vs the gate**, 0 of 29 lanes; `×`/`…` emitted 0 times |
+| 16 | Tape reordering under the reference DAG | `bench/x96/receipts/reorder.json` | **−11 (−0.14 %)**, 6 of 10 lanes, saturating at 4 000 *and* 20 000 iterations |
+| 17 | Joint (order, assignment) climb | `bench/x96/receipts/joint.json` | **−9 median** (−11 best, −7 worst) over 3 seeds — the reorder move is the entire gain |
+
+[`docs/codecs.md`](codecs.md) §X96.
+
+---
+
+## §X96 — ἸΣΟΜΟΡΦΊΑ (`src/lib/omega/isomorphia.ts`)
+
+**Name.** ἸΣΟΜΟΡΦΊΑ, *isomorphía* — "equality of form". The message's *form* is changed while its
+*meaning* is not.
+
+**Is it greedy?** **Yes, explicitly — it is a seeded stochastic hill-climb with a fixed deterministic
+budget.** It takes the incumbent's message as it stands and repeatedly applies the first improving move
+it can find, never backtracking and never considering the joint optimum. Its two move types are:
+
+1. **REORDER** — swap two rules that are adjacent in the tape, when the later does not reference the
+   earlier (i.e. the swap respects the reference DAG). This is the move that pays.
+2. **REASSIGN** — change one rule's letter to a different unused one-token letter of the same declared
+   script. Priced at 0 gain; retained at 40 % of the move mix.
+
+Move mix 60 % reorder / 40 % reassign; the RNG is seeded; the budget is a pure function of the message
+length plus a patience term; there is no wall-clock term anywhere.
+
+**Source article.** **There is none — the mechanism is original engineering of this repository, not a
+published algorithm.** This is stated plainly because the honesty rule requires it. The two published
+papers that frame it are:
+- **PathPiece** (ACL Anthology `2024.emnlp-main.40`, *Tokenization Is More Than Compression*) — the
+  reason a code assignment can only be optimal *relative to* the tokenizer that prices it.
+- **Frequency-Ordered Tokenization** (arXiv:2602.22958, v1 Feb 2026 / v2 Oct 2026, Kalcher) — the first
+  published demonstration that *renumbering a code assignment* is a compression lever independent of
+  the code set, and that it can improve ratio and speed together.
+
+ἸΣΟΜΟΡΦΊΑ is not either of those: they renumber integers for varint width and LZ; ἸΣΟΜΟΡΦΊΑ reorders and
+relabels the *rules of a grammar tape* priced by a live tokenizer. **The Functionalizer**
+(arXiv:2609.15991) is the closest published neighbour and its specific mechanism was priced and
+refused — see the closures table.
+
+**Speed, honestly.** NOT a speed win. Interleaved single-process A/B
+(`bench/x96/receipts/isoab.json`, `OMEGA_DET=1 OMEGA_NO_MEMO=1`, 3 arms × 3 reps, medians):
+`apt-real.txt` 850 → 846 in 85.6 s → 78.5 s; `code-ts.txt` 969 → 968 in 2.15 s → 3.29 s;
+`ls-real.txt` 433 → 433 (SHA untouched) in 0.43 s → 0.71 s. The large lane's −8.4 % is inside this
+box's ±25 % drift band and is reported as a CPU-time change, not a speedup; the two lanes where the
+pass finds nothing cost +53 % and +62 % in absolute terms. **The pass trades CPU for tokens.**
+Also measured: an A/B run without `OMEGA_DET=1` reports bases 11–17 tokens worse than the committed
+receipts, because `clock.ts` freezes `now()` at 0 under the flag and every wall-clock budget in the
+chain fires for real without it.
+
+**Time- or CPU-bound?** **CPU-bound, and deliberately so.** Every candidate is priced with
+`countTokens` on the complete message, and the budget is derived from the message length rather than a
+clock, so the pass is reproducible bit-for-bit. `OMEGA_ISO_ITERS` overrides the probe count; `OMEGA_NO_ISO=1`
+skips the pass for an honest interleaved A/B.
+
+**Fidelity.** Two independent mechanisms. (1) A proof: a bijection on the letters plus a topological
+permutation of the rules keeps keys distinct, keeps the first letter in the same declared script, keeps
+every reference pointing strictly backwards, and composes with substitution, so the decoded string is
+byte-identical. (2) A gate: every candidate is re-decoded with `chironDecode` and discarded if it does
+not reproduce the source. **Not** a check against this pass's own notion of the format.
+
+**Measured result (RUN K + `iso29`, `OMEGA_DET=1`, 29 lanes).** Shipped tier 12 491 → **12 478**
+(−13, −0.104 %); gate unchanged at 12 639; `exact 29/29`; 9 lanes improved, 0 worse. Improved:
+`apt-real.txt` −4, `llm-answer.md` −2, `unified-diff.patch` −1, `df-real.txt` −1, `df-h.txt` −1,
+`ps-ef.txt` −1, `json-pkg.txt` −1, `code-ts.txt` −1, `dpkg-l.txt` −1.
+
+**Quarantine.** `ls-l-real.txt` carries an extra contract clause (`After ~, a number has . before its
+last 1,1 digits`) that `chironDecode` does not implement, so no relabelling of it can be verified by the
+real decoder. Reported as a quarantine, not as a pass and not as a fidelity failure.
+
+### X96 closures (measured, all exact, all on the complete message)
+
+| # | Lever | Receipt | Result |
+|---|---|---|---|
+| 13 | Whole-message glyph REASSIGNMENT climb (8 seeds × 10 wires) | `seeds.json` | **0** on every lane, every seed; `min=med=max=0`, `improved 0/80` |
+| 14 | Script / alphabet co-optimisation (8 scripts, same 500-probe climb) | `wholeobj.json` | **+374 (+4.756 %) WORSE** |
+| 15 | `chironEncode` as a frontier candidate (29 lanes) | `chiron29.json` | **+2 670 (+21.1 %) vs gate**, 0 lanes better, `×`/`…` emitted 0 times |
+| 16 | Derived rule (`β = OP(α)`), Functionalizer-style | priced against X94's T=1 law | loses: opcode glyph + reference > suffix literal |
+| 17 | Tape REORDERING under the reference DAG (adjacent swaps) | `reorder.json` | **−11 (−0.140 %)**, saturating at 400 and 20 000 iterations ⇒ −11 is the ceiling |
+| 18 | `OMEGA_DET` omitted from an A/B arm | `isoab.json` (rev. 1, discarded) | bases 11–17 tokens worse than committed; **the flag is load-bearing, not cosmetic** |

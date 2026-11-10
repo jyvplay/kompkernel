@@ -1,0 +1,322 @@
+{
+ "note": "upper bound on tape-aware glyph assignment; zero frontier calls",
+ "poolSize": 282,
+ "lanes": [
+  {
+   "lane": "apt-real",
+   "msgTokens": 850,
+   "entries": 64,
+   "tapeTokens": 206,
+   "glyphColumn": 51,
+   "upperBoundSaving": 10,
+   "pctOfMessage": 1.1764705882352942,
+   "entriesThatWouldChange": 10,
+   "examples": [
+    {
+     "from": "в",
+     "to": "ү",
+     "v": "тlib",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "П",
+     "to": "є",
+     "v": "мо+b",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "ў",
+     "to": "ғ",
+     "v": "ун8",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "д",
+     "to": "ү",
+     "v": "н9",
+     "from_cost": 1,
+     "to_cost": 0
+    }
+   ]
+  },
+  {
+   "lane": "code-ts",
+   "msgTokens": 969,
+   "entries": 75,
+   "tapeTokens": 247,
+   "glyphColumn": 65,
+   "upperBoundSaving": 2,
+   "pctOfMessage": 0.20639834881320948,
+   "entriesThatWouldChange": 2,
+   "examples": [
+    {
+     "from": "м",
+     "to": "ұ",
+     "v": "ряр",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "ё",
+     "to": "։",
+     "v": "\n",
+     "from_cost": 1,
+     "to_cost": 0
+    }
+   ]
+  },
+  {
+   "lane": "dpkg-l",
+   "msgTokens": 673,
+   "entries": 48,
+   "tapeTokens": 126,
+   "glyphColumn": 41,
+   "upperBoundSaving": 4,
+   "pctOfMessage": 0.5943536404160475,
+   "entriesThatWouldChange": 4,
+   "examples": [
+    {
+     "from": "у",
+     "to": "қ",
+     "v": "ий",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "і",
+     "to": "։",
+     "v": "\niiи",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "я",
+     "to": "Н",
+     "v": "ачо",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "П",
+     "to": "щ",
+     "v": "ина",
+     "from_cost": 1,
+     "to_cost": 0
+    }
+   ]
+  },
+  {
+   "lane": "findmnt",
+   "msgTokens": 444,
+   "entries": 34,
+   "tapeTokens": 124,
+   "glyphColumn": 27,
+   "upperBoundSaving": 2,
+   "pctOfMessage": 0.45045045045045046,
+   "entriesThatWouldChange": 2,
+   "examples": [
+    {
+     "from": "م",
+     "to": "։",
+     "v": "\n|",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "ج",
+     "to": "։",
+     "v": "\n| |ي",
+     "from_cost": 1,
+     "to_cost": 0
+    }
+   ]
+  },
+  {
+   "lane": "json-pkg",
+   "msgTokens": 681,
+   "entries": 48,
+   "tapeTokens": 145,
+   "glyphColumn": 43,
+   "upperBoundSaving": 2,
+   "pctOfMessage": 0.2936857562408223,
+   "entriesThatWouldChange": 2,
+   "examples": [
+    {
+     "from": "с",
+     "to": "ӡ",
+     "v": "б \"",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "ж",
+     "to": "П",
+     "v": "ри",
+     "from_cost": 1,
+     "to_cost": 0
+    }
+   ]
+  },
+  {
+   "lane": "kb-article",
+   "msgTokens": 622,
+   "entries": 27,
+   "tapeTokens": 56,
+   "glyphColumn": 25,
+   "upperBoundSaving": 1,
+   "pctOfMessage": 0.1607717041800643,
+   "entriesThatWouldChange": 1,
+   "examples": [
+    {
+     "from": "с",
+     "to": "։",
+     "v": "\n",
+     "from_cost": 1,
+     "to_cost": 0
+    }
+   ]
+  },
+  {
+   "lane": "llm-answer",
+   "msgTokens": 674,
+   "entries": 34,
+   "tapeTokens": 88,
+   "glyphColumn": 33,
+   "upperBoundSaving": 3,
+   "pctOfMessage": 0.44510385756676557,
+   "entriesThatWouldChange": 3,
+   "examples": [
+    {
+     "from": "н",
+     "to": "ы",
+     "v": "вриг",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "Ә",
+     "to": "ы",
+     "v": "врт",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "я",
+     "to": "։",
+     "v": "\n",
+     "from_cost": 1,
+     "to_cost": 0
+    }
+   ]
+  },
+  {
+   "lane": "ls-l-real",
+   "msgTokens": 1476,
+   "entries": 143,
+   "tapeTokens": 592,
+   "glyphColumn": 120,
+   "upperBoundSaving": 13,
+   "pctOfMessage": 0.8807588075880759,
+   "entriesThatWouldChange": 13,
+   "examples": [
+    {
+     "from": "ש",
+     "to": "։",
+     "v": "\nlrwxrwxrwxգত",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "ो",
+     "to": "։",
+     "v": "\n-rw-r--r--գ root root",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "ո",
+     "to": "յ",
+     "v": "աბ",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "ի",
+     "to": "։",
+     "v": "\ndrղო",
+     "from_cost": 1,
+     "to_cost": 0
+    }
+   ]
+  },
+  {
+   "lane": "ls-real",
+   "msgTokens": 433,
+   "entries": 48,
+   "tapeTokens": 159,
+   "glyphColumn": 37,
+   "upperBoundSaving": 2,
+   "pctOfMessage": 0.4618937644341801,
+   "entriesThatWouldChange": 2,
+   "examples": [
+    {
+     "from": "у",
+     "to": "։",
+     "v": "\n",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "Р",
+     "to": "Т",
+     "v": "ип7его33 bash",
+     "from_cost": 1,
+     "to_cost": 0
+    }
+   ]
+  },
+  {
+   "lane": "ps-aux-real",
+   "msgTokens": 1042,
+   "entries": 79,
+   "tapeTokens": 337,
+   "glyphColumn": 60,
+   "upperBoundSaving": 5,
+   "pctOfMessage": 0.4798464491362764,
+   "entriesThatWouldChange": 5,
+   "examples": [
+    {
+     "from": "ҡ",
+     "to": "Я",
+     "v": "к290яд",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "К",
+     "to": "։",
+     "v": "\nuser       ы",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "Ҡ",
+     "to": "։",
+     "v": "\n_chrony     ы",
+     "from_cost": 1,
+     "to_cost": 0
+    },
+    {
+     "from": "П",
+     "to": "ұ",
+     "v": "сagetty -o -p -- \\u --no",
+     "from_cost": 1,
+     "to_cost": 0
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,105 @@
+{
+ "note": "exact whole-message price of tape prefix extraction; zero frontier calls",
+ "lanes": [
+  {
+   "lane": "apt-real",
+   "msgTokens": 850,
+   "candidates": 3,
+   "tested": 3,
+   "wins": 0,
+   "bestDelta": 0,
+   "bestPrefix": "",
+   "winningCases": []
+  },
+  {
+   "lane": "code-ts",
+   "msgTokens": 969,
+   "candidates": 32,
+   "tested": 32,
+   "wins": 0,
+   "bestDelta": 0,
+   "bestPrefix": "",
+   "winningCases": []
+  },
+  {
+   "lane": "dpkg-l",
+   "msgTokens": 673,
+   "candidates": 2,
+   "tested": 2,
+   "wins": 0,
+   "bestDelta": 0,
+   "bestPrefix": "",
+   "winningCases": []
+  },
+  {
+   "lane": "findmnt",
+   "msgTokens": 444,
+   "candidates": 4,
+   "tested": 4,
+   "wins": 0,
+   "bestDelta": 0,
+   "bestPrefix": "",
+   "winningCases": []
+  },
+  {
+   "lane": "json-pkg",
+   "msgTokens": 681,
+   "candidates": 20,
+   "tested": 20,
+   "wins": 0,
+   "bestDelta": 0,
+   "bestPrefix": "",
+   "winningCases": []
+  },
+  {
+   "lane": "kb-article",
+   "msgTokens": 622,
+   "candidates": 12,
+   "tested": 12,
+   "wins": 0,
+   "bestDelta": 0,
+   "bestPrefix": "",
+   "winningCases": []
+  },
+  {
+   "lane": "llm-answer",
+   "msgTokens": 674,
+   "candidates": 3,
+   "tested": 3,
+   "wins": 0,
+   "bestDelta": 0,
+   "bestPrefix": "",
+   "winningCases": []
+  },
+  {
+   "lane": "ls-l-real",
+   "msgTokens": 1476,
+   "candidates": 18,
+   "tested": 18,
+   "wins": 0,
+   "bestDelta": 0,
+   "bestPrefix": "",
+   "winningCases": []
+  },
+  {
+   "lane": "ls-real",
+   "msgTokens": 433,
+   "candidates": 7,
+   "tested": 7,
+   "wins": 0,
+   "bestDelta": 0,
+   "bestPrefix": "",
+   "winningCases": []
+  },
+  {
+   "lane": "ps-aux-real",
+   "msgTokens": 1042,
+   "candidates": 15,
+   "tested": 15,
+   "wins": 0,
+   "bestDelta": 0,
+   "bestPrefix": "",
+   "winningCases": []
+  }
+ ]
+}

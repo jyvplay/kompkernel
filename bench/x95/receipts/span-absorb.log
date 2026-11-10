@@ -1,0 +1,20 @@
+lane          msgTok  spans  absorbable  WINS  best delta  sum delta  (best cases: span -> delta)
+apt-real         850   133         133     0          0       266  
+code-ts          969   103         103     0          0       206  
+dpkg-l           673    88          88     0          0       118  
+findmnt          444    49          49     0          0        98  
+json-pkg         681   130         130     0          0       249  
+kb-article       622   143         143     0          0       208  
+llm-answer       674   123         123     0          0       200  
+ls-l-real       1476   147         147     0          0       295  
+ls-real          433    80          80     0          0       132  
+ps-aux-real     1042   164         164     0          0       328  
+--------------------------------------------------------------------------------------------------------------
+TOTAL: absorbable single-occurrence spans 1160  WINS 0  best delta 0  sum delta 2100
+
+reading: delta is the EXACT change in the token count of the complete message when the span
+is absorbed into an appended tape entry. A negative delta is a real saving; the sum of the
+negatives would be the arm's value if the moves were independent, which they are not -- each
+absorption changes the run structure the next one sees, so the realisable figure is below
+the sum. A single fresh glyph P was used for every candidate; the shipped codec could
+choose P per candidate, which can only lower the deltas, so this is a conservative reading.

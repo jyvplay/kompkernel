@@ -1,0 +1,31 @@
+lsblk.txt                 132ch    60tok    2873ms exact=true sha=6c01e1a89186
+kb-article.txt           3385ch   622tok    2653ms exact=true sha=c1c20fb4bb84
+uptime-w.txt              179ch    80tok    2528ms exact=true sha=d57da79a4bfc
+free-m.txt                263ch    76tok    2801ms exact=true sha=0d0194b9ede5
+vmstat.txt                467ch   149tok    2174ms exact=true sha=d36b1f0211cf
+unified-diff.patch       1487ch   419tok    2737ms exact=true sha=d9de4a0505c4
+df-h.txt                  939ch   171tok    2757ms exact=true sha=4f0ee28dff1c
+df-real.txt               329ch   126tok    5425ms exact=true sha=66aed09755ed
+du-real.txt              1605ch   272tok    4867ms exact=true sha=19d517c8ef3c
+node-help.txt            6751ch   862tok    7341ms exact=true sha=5b0ad36cac43
+findmnt.txt              3215ch   444tok    7011ms exact=true sha=fb8be7b02900
+df-h.txt                  293ch   108tok    5990ms exact=true sha=e87cb3e4a13d
+email-thread.txt         2126ch   488tok    8341ms exact=true sha=56397449536e
+llm-answer.md            2542ch   674tok    9013ms exact=true sha=7cc33382bd89
+markdown-table.md         635ch   176tok   10000ms exact=true sha=962e2b166bda
+psql-output.txt          1578ch   244tok   15533ms exact=true sha=2e21ee7ff9fd
+prices.csv                993ch   133tok   17074ms exact=true sha=25947a37cc10
+cue-sheet.md              938ch   101tok   22381ms exact=true sha=77cc680a88f4
+ps-ef.txt                2669ch   315tok   17521ms exact=true sha=a2c807e7e432
+ls-real.txt              2486ch   433tok   12993ms exact=true sha=095d9c56a506
+json-pkg.txt             3620ch   681tok   14277ms exact=true sha=7a473eae1b6c
+code-ts.txt              6000ch   969tok   29011ms exact=true sha=7e0f68883b0e
+dpkg-l.txt               4459ch   673tok   22609ms exact=true sha=2b90f8bb2f52
+ps-real.txt              2365ch   397tok   16048ms exact=true sha=6c252e1abf3e
+kubectl-get-pods.txt     2649ch   326tok   27611ms exact=true sha=4a5d5a515aca
+metrics.tsv              1203ch   210tok   18395ms exact=true sha=f0e0ffb9543f
+ps-aux-real.txt          6590ch  1042tok   54031ms exact=true sha=b04f39ebe4d2
+apt-real.txt             6195ch   850tok  133486ms exact=true sha=ca28182c1cad
+ls-l-real.txt           10692ch  1390tok 2213870ms exact=true sha=231b05704ac7
+
+=== TOTAL 29 lanes: 12491 tokens, 2691351 ms, exact 29/29 (ALL EXACT) ===

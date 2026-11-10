@@ -33,6 +33,7 @@ import { hemeraEncode, hemeraSubstitute } from './hemera';
 import { kanonEncode } from './kanon';
 import { metronEncode, metronPlan } from './metron';
 import { synkrisisEncode } from './synkrisis';
+import { isomorphiaEncode, isomorphiaDisabled } from './isomorphia';
 
 export type TagstackMode = 'xml' | 'html';
 export type TagstackFrontierParent = 'synkrisis' | 'bifront' | 'kanon' | 'akolouthia2' | 'apographe' | 'metron' | 'hemera' | 'diastema';
@@ -659,6 +660,24 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
   //                 measures and declines to admit. ΣΥΜΦΥΊΑ's constant-prefix form takes it.
   try { admit('ΣΥΜΦΥΊΑ', symphyiaEncode(text, enc, best.messageTokens) as unknown as WideResult); } catch { /* not a candidate */ }
   try { admit('STOICHEION', stoicheionEncode(text, enc) as unknown as WideResult); } catch { /* not a candidate */ }
+
+  /**
+   * X96 — ἸΣΟΜΟΡΦΊΑ is the last candidate and the only one that never touches the
+   * text.  Every candidate above re-encodes the source; this one takes the
+   * incumbent's COMPLETE message and relabels its glyph tape, because the rule ->
+   * letter map is a free parameter of the wire that nothing in the chain prices
+   * against the message we are actually billed for (ARIADNE prices the body's
+   * reference runs only, and on lanes where another parent wins it does not run
+   * last at all).  A bijection of the declared script's unused letters is an
+   * isomorphism of the wire language — keys stay distinct, the first letter still
+   * declares the same alphabet, references still point backwards — so the decoded
+   * text cannot change.  It is still re-decoded through chironDecode and admitted
+   * on exactly the same rule as everything else: strictly smaller on a complete,
+   * byte-exact message measured in this process, or not at all.
+   */
+  if (!isomorphiaDisabled()) {
+    try { admit('ἸΣΟΜΟΡΦΊΑ', isomorphiaEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
   return best;
 }
 

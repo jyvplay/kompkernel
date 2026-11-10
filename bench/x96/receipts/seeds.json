@@ -1,0 +1,217 @@
+{
+ "note": "seed distribution of the whole-message assignment climb; zero frontier calls",
+ "iters": 900,
+ "seeds": 8,
+ "rows": [
+  {
+   "lane": "apt-real",
+   "script": "cyrillic",
+   "glyphs": 64,
+   "T0": 850,
+   "ds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "improved": 0,
+   "seeds": 8
+  },
+  {
+   "lane": "code-ts",
+   "script": "cyrillic",
+   "glyphs": 75,
+   "T0": 969,
+   "ds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "improved": 0,
+   "seeds": 8
+  },
+  {
+   "lane": "dpkg-l",
+   "script": "cyrillic",
+   "glyphs": 48,
+   "T0": 673,
+   "ds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "improved": 0,
+   "seeds": 8
+  },
+  {
+   "lane": "findmnt",
+   "script": "arabic",
+   "glyphs": 34,
+   "T0": 444,
+   "ds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "improved": 0,
+   "seeds": 8
+  },
+  {
+   "lane": "json-pkg",
+   "script": "cyrillic",
+   "glyphs": 48,
+   "T0": 681,
+   "ds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "improved": 0,
+   "seeds": 8
+  },
+  {
+   "lane": "kb-article",
+   "script": "cyrillic",
+   "glyphs": 27,
+   "T0": 622,
+   "ds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "improved": 0,
+   "seeds": 8
+  },
+  {
+   "lane": "llm-answer",
+   "script": "cyrillic",
+   "glyphs": 34,
+   "T0": 674,
+   "ds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "improved": 0,
+   "seeds": 8
+  },
+  {
+   "lane": "ls-l-real",
+   "script": "polyglot",
+   "glyphs": 143,
+   "T0": 1476,
+   "ds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "improved": 0,
+   "seeds": 8
+  },
+  {
+   "lane": "ls-real",
+   "script": "cyrillic",
+   "glyphs": 48,
+   "T0": 433,
+   "ds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "improved": 0,
+   "seeds": 8
+  },
+  {
+   "lane": "ps-aux-real",
+   "script": "cyrillic",
+   "glyphs": 79,
+   "T0": 1042,
+   "ds": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "improved": 0,
+   "seeds": 8
+  }
+ ]
+}

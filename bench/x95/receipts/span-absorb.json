@@ -1,0 +1,95 @@
+{
+ "note": "exact whole-message delta for absorbing a single-occurrence span; zero frontier calls",
+ "lanes": [
+  {
+   "lane": "apt-real",
+   "msgTokens": 850,
+   "absorbableSingleOccurrenceSpans": 133,
+   "wins": 0,
+   "bestDelta": 0,
+   "sumDelta": 266,
+   "bestCases": []
+  },
+  {
+   "lane": "code-ts",
+   "msgTokens": 969,
+   "absorbableSingleOccurrenceSpans": 103,
+   "wins": 0,
+   "bestDelta": 0,
+   "sumDelta": 206,
+   "bestCases": []
+  },
+  {
+   "lane": "dpkg-l",
+   "msgTokens": 673,
+   "absorbableSingleOccurrenceSpans": 88,
+   "wins": 0,
+   "bestDelta": 0,
+   "sumDelta": 118,
+   "bestCases": []
+  },
+  {
+   "lane": "findmnt",
+   "msgTokens": 444,
+   "absorbableSingleOccurrenceSpans": 49,
+   "wins": 0,
+   "bestDelta": 0,
+   "sumDelta": 98,
+   "bestCases": []
+  },
+  {
+   "lane": "json-pkg",
+   "msgTokens": 681,
+   "absorbableSingleOccurrenceSpans": 130,
+   "wins": 0,
+   "bestDelta": 0,
+   "sumDelta": 249,
+   "bestCases": []
+  },
+  {
+   "lane": "kb-article",
+   "msgTokens": 622,
+   "absorbableSingleOccurrenceSpans": 143,
+   "wins": 0,
+   "bestDelta": 0,
+   "sumDelta": 208,
+   "bestCases": []
+  },
+  {
+   "lane": "llm-answer",
+   "msgTokens": 674,
+   "absorbableSingleOccurrenceSpans": 123,
+   "wins": 0,
+   "bestDelta": 0,
+   "sumDelta": 200,
+   "bestCases": []
+  },
+  {
+   "lane": "ls-l-real",
+   "msgTokens": 1476,
+   "absorbableSingleOccurrenceSpans": 147,
+   "wins": 0,
+   "bestDelta": 0,
+   "sumDelta": 295,
+   "bestCases": []
+  },
+  {
+   "lane": "ls-real",
+   "msgTokens": 433,
+   "absorbableSingleOccurrenceSpans": 80,
+   "wins": 0,
+   "bestDelta": 0,
+   "sumDelta": 132,
+   "bestCases": []
+  },
+  {
+   "lane": "ps-aux-real",
+   "msgTokens": 1042,
+   "absorbableSingleOccurrenceSpans": 164,
+   "wins": 0,
+   "bestDelta": 0,
+   "sumDelta": 328,
+   "bestCases": []
+  }
+ ]
+}

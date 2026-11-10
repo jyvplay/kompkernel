@@ -1,0 +1,23 @@
+apt-real      runs  173  boundary {"LETTER":0,"DIGIT":0,"PUNCT":0}
+code-ts       runs  149  boundary {"LETTER":0,"PUNCT":0,"NEWLINE":0,"SPACE":-4,"DIGIT":0}
+dpkg-l        runs  114  boundary {"LETTER":0,"NEWLINE":0,"PUNCT":0,"DIGIT":0,"SPACE":-16}
+findmnt       runs   52  boundary {"LETTER":0,"PUNCT":0,"SPACE":-11,"DIGIT":0}
+json-pkg      runs  148  boundary {"NEWLINE":0,"LETTER":0,"DIGIT":0,"PUNCT":0}
+kb-article    runs  146  boundary {"LETTER":0,"PUNCT":0,"DIGIT":0}
+llm-answer    runs  126  boundary {"LETTER":0,"PUNCT":0,"NEWLINE":0,"DIGIT":0}
+ls-l-real     runs  231  boundary {"LETTER":0,"DIGIT":0,"PUNCT":-1}
+ls-real       runs   81  boundary {"LETTER":0,"PUNCT":0,"DIGIT":0,"NEWLINE":0,"SPACE":-1}
+ps-aux-real   runs  194  boundary {"LETTER":0,"DIGIT":0,"SPACE":-5,"NEWLINE":0,"PUNCT":0}
+
+BOUNDARY COST BY CLASS OF THE PRECEDING CHARACTER (marginal - isolated, over all ten wires):
+  class     runs   marginal  isolated  BOUNDARY  per-run   vocab bridges for this class  distinct bridge glyphs
+  LETTER      883       1325      1325         0    0.000               44478               240
+  DIGIT       377        629       629         0    0.000                   0                 0
+  NEWLINE      34         45        45         0    0.000                 359                61
+  PUNCT        84        121       122        -1   -0.012                 577               281
+  SPACE        36         13        50       -37   -1.028               36741              2720
+  TOTAL      1414       2133      2171       -38   -0.027
+
+reading: a POSITIVE boundary column is what the left context costs beyond the run in isolation;
+a class with a large positive boundary and MANY vocabulary bridges is an open lever, and one with
+zero bridges is closed by the tokenizer itself and no assignment can recover it.

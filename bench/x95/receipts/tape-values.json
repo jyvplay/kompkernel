@@ -1,0 +1,115 @@
+{
+ "note": "tape value population census; zero frontier calls",
+ "lanes": [
+  {
+   "lane": "apt-real",
+   "entries": 64,
+   "tapeTokens": 206,
+   "valueChars": 303,
+   "valueTokens": 162,
+   "density": 1.8703703703703705,
+   "pctDigitStart": 14.0625,
+   "pctPureDigit": 14.0625,
+   "pairsSharingPrefix4": 0
+  },
+  {
+   "lane": "code-ts",
+   "entries": 75,
+   "tapeTokens": 247,
+   "valueChars": 729,
+   "valueTokens": 192,
+   "density": 3.796875,
+   "pctDigitStart": 1.3333333333333333,
+   "pctPureDigit": 1.3333333333333333,
+   "pairsSharingPrefix4": 6
+  },
+  {
+   "lane": "dpkg-l",
+   "entries": 48,
+   "tapeTokens": 126,
+   "valueChars": 435,
+   "valueTokens": 100,
+   "density": 4.35,
+   "pctDigitStart": 20.833333333333332,
+   "pctPureDigit": 16.666666666666668,
+   "pairsSharingPrefix4": 8
+  },
+  {
+   "lane": "findmnt",
+   "entries": 34,
+   "tapeTokens": 124,
+   "valueChars": 275,
+   "valueTokens": 103,
+   "density": 2.6699029126213594,
+   "pctDigitStart": 0,
+   "pctPureDigit": 0,
+   "pairsSharingPrefix4": 4
+  },
+  {
+   "lane": "json-pkg",
+   "entries": 48,
+   "tapeTokens": 145,
+   "valueChars": 309,
+   "valueTokens": 111,
+   "density": 2.7837837837837838,
+   "pctDigitStart": 18.75,
+   "pctPureDigit": 16.666666666666668,
+   "pairsSharingPrefix4": 7
+  },
+  {
+   "lane": "kb-article",
+   "entries": 27,
+   "tapeTokens": 56,
+   "valueChars": 160,
+   "valueTokens": 31,
+   "density": 5.161290322580645,
+   "pctDigitStart": 0,
+   "pctPureDigit": 0,
+   "pairsSharingPrefix4": 1
+  },
+  {
+   "lane": "llm-answer",
+   "entries": 34,
+   "tapeTokens": 88,
+   "valueChars": 135,
+   "valueTokens": 59,
+   "density": 2.288135593220339,
+   "pctDigitStart": 14.705882352941176,
+   "pctPureDigit": 14.705882352941176,
+   "pairsSharingPrefix4": 0
+  },
+  {
+   "lane": "ls-l-real",
+   "entries": 143,
+   "tapeTokens": 592,
+   "valueChars": 965,
+   "valueTokens": 486,
+   "density": 1.98559670781893,
+   "pctDigitStart": 4.895104895104895,
+   "pctPureDigit": 4.895104895104895,
+   "pairsSharingPrefix4": 25
+  },
+  {
+   "lane": "ls-real",
+   "entries": 48,
+   "tapeTokens": 159,
+   "valueChars": 329,
+   "valueTokens": 136,
+   "density": 2.4191176470588234,
+   "pctDigitStart": 16.666666666666668,
+   "pctPureDigit": 16.666666666666668,
+   "pairsSharingPrefix4": 3
+  },
+  {
+   "lane": "ps-aux-real",
+   "entries": 79,
+   "tapeTokens": 337,
+   "valueChars": 683,
+   "valueTokens": 291,
+   "density": 2.3470790378006874,
+   "pctDigitStart": 11.39240506329114,
+   "pctPureDigit": 10.126582278481013,
+   "pairsSharingPrefix4": 2
+  }
+ ]
+}

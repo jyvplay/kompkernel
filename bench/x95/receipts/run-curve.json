@@ -1,0 +1,271 @@
+{
+ "note": "run-length cost curve vs vocabulary capacity; zero frontier calls",
+ "lanes": [
+  {
+   "lane": "apt-real",
+   "runs": 173,
+   "runTokens": 315
+  },
+  {
+   "lane": "code-ts",
+   "runs": 149,
+   "runTokens": 296
+  },
+  {
+   "lane": "dpkg-l",
+   "runs": 114,
+   "runTokens": 170
+  },
+  {
+   "lane": "findmnt",
+   "runs": 52,
+   "runTokens": 71
+  },
+  {
+   "lane": "json-pkg",
+   "runs": 148,
+   "runTokens": 193
+  },
+  {
+   "lane": "kb-article",
+   "runs": 146,
+   "runTokens": 165
+  },
+  {
+   "lane": "llm-answer",
+   "runs": 126,
+   "runTokens": 146
+  },
+  {
+   "lane": "ls-l-real",
+   "runs": 231,
+   "runTokens": 453
+  },
+  {
+   "lane": "ls-real",
+   "runs": 81,
+   "runTokens": 103
+  },
+  {
+   "lane": "ps-aux-real",
+   "runs": 194,
+   "runTokens": 259
+  }
+ ],
+ "curve": [
+  {
+   "length": 1,
+   "runs": 663,
+   "cost": 663
+  },
+  {
+   "length": 2,
+   "runs": 308,
+   "cost": 372
+  },
+  {
+   "length": 3,
+   "runs": 187,
+   "cost": 337
+  },
+  {
+   "length": 4,
+   "runs": 107,
+   "cost": 263
+  },
+  {
+   "length": 5,
+   "runs": 62,
+   "cost": 176
+  },
+  {
+   "length": 6,
+   "runs": 38,
+   "cost": 127
+  },
+  {
+   "length": 7,
+   "runs": 24,
+   "cost": 94
+  },
+  {
+   "length": 8,
+   "runs": 9,
+   "cost": 36
+  },
+  {
+   "length": 9,
+   "runs": 5,
+   "cost": 28
+  },
+  {
+   "length": 10,
+   "runs": 4,
+   "cost": 20
+  },
+  {
+   "length": 11,
+   "runs": 2,
+   "cost": 11
+  },
+  {
+   "length": 12,
+   "runs": 2,
+   "cost": 16
+  },
+  {
+   "length": 13,
+   "runs": 1,
+   "cost": 7
+  },
+  {
+   "length": 15,
+   "runs": 1,
+   "cost": 9
+  },
+  {
+   "length": 17,
+   "runs": 1,
+   "cost": 12
+  }
+ ],
+ "capacity": [
+  {
+   "length": 2,
+   "tokens": 9027,
+   "distinct": 8785,
+   "examples": [
+    "о�",
+    "ა�",
+    "ա�",
+    "ра",
+    "ा�",
+    "ст"
+   ]
+  },
+  {
+   "length": 3,
+   "tokens": 7419,
+   "distinct": 6821,
+   "examples": [
+    "ու�",
+    "中彩票",
+    "ост",
+    "ств",
+    "ать",
+    "र्�"
+   ]
+  },
+  {
+   "length": 4,
+   "tokens": 4200,
+   "distinct": 3217,
+   "examples": [
+    "ения",
+    "彩神争霸",
+    "�京赛车",
+    "ност",
+    "ется",
+    "ությ"
+   ]
+  },
+  {
+   "length": 5,
+   "tokens": 1634,
+   "distinct": 986,
+   "examples": [
+    "итель",
+    "ности",
+    "ность",
+    "ствен",
+    "атель",
+    "овать"
+   ]
+  },
+  {
+   "length": 6,
+   "tokens": 743,
+   "distinct": 327,
+   "examples": [
+    "ության",
+    "ования",
+    "станов",
+    "ирован",
+    "ართველ",
+    "ование"
+   ]
+  },
+  {
+   "length": 7,
+   "tokens": 273,
+   "distinct": 94,
+   "examples": [
+    "ительно",
+    "ировать",
+    "ательно",
+    "еспубли",
+    "ությամբ",
+    "ической"
+   ]
+  },
+  {
+   "length": 8,
+   "tokens": 166,
+   "distinct": 39,
+   "examples": [
+    "ิเคราะห์",
+    "ҳәынҭқар",
+    "онавирус",
+    "ительный",
+    "ительных",
+    "ительной"
+   ]
+  },
+  {
+   "length": 9,
+   "tokens": 71,
+   "distinct": 7,
+   "examples": [
+    "еспублика",
+    "ิเวอร์พูล",
+    "ироваться",
+    "大发展有限公司官网",
+    "збекистон",
+    "给主人留下些什么吧"
+   ]
+  },
+  {
+   "length": 10,
+   "tokens": 29,
+   "distinct": 5,
+   "examples": [
+    "ดลองใช้ฟรี",
+    "เงินไทยฟรี",
+    "การเดิมพัน",
+    "ありがとうございます",
+    "ไม่ต้องฝาก"
+   ]
+  },
+  {
+   "length": 11,
+   "tokens": 20,
+   "distinct": 3,
+   "examples": [
+    "ทดลองใช้ฟรี",
+    "ประจำวันที่",
+    "ありがとうございました"
+   ]
+  },
+  {
+   "length": 12,
+   "tokens": 12,
+   "distinct": 0,
+   "examples": []
+  }
+ ],
+ "totals": {
+  "runs": 1414,
+  "tokens": 2171,
+  "upperBoundSaving": 757
+ }
+}

@@ -1,0 +1,14 @@
+lane          msgTok   refs  | n-gram census: distinct runs by length (k>=2) | priced  neg  bestTok  fidelity
+apt-real         850    539  | n=2:  79 n=3:  24 n=4:   8  |     40    0       0   exact
+code-ts          969    456  | n=2:  67 n=3:  13 n=4:   0  |     40    0       0   exact
+dpkg-l           673    252  | n=2:  24 n=3:   4 n=4:   0  |     22    0       0   exact
+findmnt          444    114  | n=2:  10 n=3:   0 n=4:   0  |     10    0       0   exact
+json-pkg         681    271  | n=2:  18 n=3:   3 n=4:   0  |     18    0       0   exact
+kb-article       622    245  | n=2:  15 n=3:   0 n=4:   0  |     15    0       0   exact
+llm-answer       674    230  | n=2:  19 n=3:   2 n=4:   0  |     19    0       0   exact
+ls-l-real       1476    609  | n=2:  54 n=3:   2 n=4:   0  |     40    0       0   exact
+ls-real          433    142  | n=2:  15 n=3:   6 n=4:   0  |     10    0       0   exact
+ps-aux-real     1042    364  | n=2:  25 n=3:   2 n=4:   0  |     24    0       0   exact
+--------------------------------------------------------------------------------------------------------
+TOTAL over 10 wires: msgTokens 7864  run rules applied 0 of 238 candidates  net delta 0 tokens  fidelity failures 0
+(negative delta = improvement; NO GAIN)

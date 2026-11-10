@@ -1,0 +1,14 @@
+--- INCUMBENT (ἸΣΟΜΟΡΦΊΑ skipped): tokens=864 exact=true parent=synkrisis
+    contract (45 ch): "Before ¶ k=v. expand repeatedly; print only.\n"
+    operators present: (none)   tape entries=366
+    tape[0..300]: ҩ [installed,local]
+т amd64ҩвтlibа1Катlibс/now я12р.о2е0л-щрелЫярощг14Цdebяuн+ЦёсЫгнамсорчсарш allҩы6Вс8:ыр9р11р60+dfsgларын10э3йсэрәса:Ссор40лоїсор36л9нгулозраҳса:орңсерАс7р88рал10нгі5фор38ралінэқэрПщо+bљ+dfsgкр9ьлэжрэҮgccляҐbinutilsи4Ғси:Ыэтӯҳ66линэ+bКѓсо:Єѓар02р185уОч21р23ҧҳ39ріленэўәирир33увcryp
+    decoded[0..300]: "# source: apt list --installed (real)\nListing...\nadduser/now 3.134 all [installed,local]\napt/now 2.6.1 amd64 [installed,local]\nbase-files/now 12.4+deb12u14 amd64 [installed,local]\nbase-passwd/now 3.6.1 amd64 [installed,local]\nbash/now 5.2.15-2+b13 amd64 [installed,local]\nbinutils-common/now 2.40-2 a"
+    chironDecode(wire) === source: true
+--- ἸΣΟΜΟΡΦΊΑ: tokens=861 exact=true parent=synkrisis
+    contract (45 ch): "Before ¶ k=v. expand repeatedly; print only.\n"
+    operators present: (none)   tape entries=366
+    tape[0..300]: ҩ [installed,local]
+т amd64ҩа1втlibКатlibс/now я12о2р.е0л-щрелЫярощг14цdebяuн+цёсЫгнамсорчсарш allҩы6Вс8:ыр9р11р60+dfsgларын10э3йсэрәса:Ссор40лоїсор36л9нгулозраҳса:орңсерАс7р88рал10нгі5фор38ралінэқэрПщо+bљ+dfsgкр9ьлэжрэҮgccляҐbinutilsи4Ғси:Ыэтӯҳ66линэ+bКѓсо:Єѓар02р185уОч21р23ҧҳ39ріленэўәирир33увcryp
+    decoded[0..300]: "# source: apt list --installed (real)\nListing...\nadduser/now 3.134 all [installed,local]\napt/now 2.6.1 amd64 [installed,local]\nbase-files/now 12.4+deb12u14 amd64 [installed,local]\nbase-passwd/now 3.6.1 amd64 [installed,local]\nbash/now 5.2.15-2+b13 amd64 [installed,local]\nbinutils-common/now 2.40-2 a"
+    chironDecode(wire) === source: true

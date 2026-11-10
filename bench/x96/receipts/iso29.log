@@ -1,0 +1,44 @@
+lsblk.txt                  raw=   60 X96=   60(synkrisis    ) runJ=   60 Δ=    0 exact=true iso=- 2879ms
+kb-article.txt             raw=  656 X96=  622(synkrisis    ) runJ=  622 Δ=    0 exact=true iso=- 4408ms
+uptime-w.txt               raw=   80 X96=   80(synkrisis    ) runJ=   80 Δ=    0 exact=true iso=- 3041ms
+free-m.txt                 raw=   76 X96=   76(synkrisis    ) runJ=   76 Δ=    0 exact=true iso=- 2755ms
+vmstat.txt                 raw=  229 X96=  149(synkrisis    ) runJ=  149 Δ=    0 exact=true iso=- 2717ms
+unified-diff.patch         raw=  578 X96=  418(synkrisis    ) runJ=  419 Δ=   -1 exact=true iso=419->418 4269ms
+df-h.txt                   raw=  570 X96=  171(akolouthia2  ) runJ=  171 Δ=    0 exact=true iso=- 3006ms
+df-real.txt                raw=  158 X96=  125(synkrisis    ) runJ=  126 Δ=   -1 exact=true iso=126->125 5141ms
+du-real.txt                raw=  458 X96=  272(synkrisis    ) runJ=  272 Δ=    0 exact=true iso=- 4316ms
+node-help.txt              raw= 1099 X96=  862(synkrisis    ) runJ=  862 Δ=    0 exact=true iso=- 8521ms
+findmnt.txt                raw=  787 X96=  444(synkrisis    ) runJ=  444 Δ=    0 exact=true iso=- 8318ms
+df-h.txt                   raw=  140 X96=  107(synkrisis    ) runJ=  108 Δ=   -1 exact=true iso=108->107 6082ms
+email-thread.txt           raw=  629 X96=  488(synkrisis    ) runJ=  488 Δ=    0 exact=true iso=- 8637ms
+llm-answer.md              raw=  733 X96=  672(synkrisis    ) runJ=  674 Δ=   -2 exact=true iso=674->672 8829ms
+markdown-table.md          raw=  330 X96=  176(synkrisis    ) runJ=  176 Δ=    0 exact=true iso=- 8497ms
+psql-output.txt            raw=  675 X96=  244(metron       ) runJ=  244 Δ=    0 exact=true iso=- 13514ms
+prices.csv                 raw=  582 X96=  133(diastema     ) runJ=  133 Δ=    0 exact=true iso=- 14581ms
+cue-sheet.md               raw=  513 X96=  101(stichomythia ) runJ=  101 Δ=    0 exact=true iso=- 15749ms
+ps-ef.txt                  raw= 1144 X96=  314(synkrisis    ) runJ=  315 Δ=   -1 exact=true iso=315->314 15364ms
+ls-real.txt                raw= 1034 X96=  433(synkrisis    ) runJ=  433 Δ=    0 exact=true iso=- 12739ms
+json-pkg.txt               raw= 1152 X96=  680(synkrisis    ) runJ=  681 Δ=   -1 exact=true iso=681->680 18697ms
+code-ts.txt                raw= 1422 X96=  968(synkrisis    ) runJ=  969 Δ=   -1 exact=true iso=969->968 31204ms
+dpkg-l.txt                 raw= 1000 X96=  672(synkrisis    ) runJ=  673 Δ=   -1 exact=true iso=673->672 23064ms
+ps-real.txt                raw= 1106 X96=  397(synkrisis    ) runJ=  397 Δ=    0 exact=true iso=- 13238ms
+kubectl-get-pods.txt       raw= 1006 X96=  326(akolouthia2  ) runJ=  326 Δ=    0 exact=true iso=- 22184ms
+metrics.tsv                raw=  811 X96=  210(akolouthia2  ) runJ=  210 Δ=    0 exact=true iso=- 19250ms
+ps-aux-real.txt            raw= 3054 X96= 1042(synkrisis    ) runJ= 1042 Δ=    0 exact=true iso=- 63994ms
+apt-real.txt               raw= 2739 X96=  846(synkrisis    ) runJ=  850 Δ=   -4 exact=true iso=850->846 125157ms
+ls-l-real.txt              raw= 5194 X96= 1390(synkrisis    ) runJ= 1390 Δ=    0 exact=true iso=- 2449170ms
+
+=== X96 ISOMORPHIA 29-LANE (OMEGA_DET=1) ===
+run J shipped TOTAL 12491   ->   X96 shipped TOTAL 12478   delta -13 (-0.104%)
+exact 29/29   lanes improved 9   lanes worse 0   ms 2919346
+  IMPROVED apt-real.txt               850 -> 846  (-4)  parent synkrisis  iso 850->846
+  IMPROVED llm-answer.md              674 -> 672  (-2)  parent synkrisis  iso 674->672
+  IMPROVED unified-diff.patch         419 -> 418  (-1)  parent synkrisis  iso 419->418
+  IMPROVED df-real.txt                126 -> 125  (-1)  parent synkrisis  iso 126->125
+  IMPROVED df-h.txt                   108 -> 107  (-1)  parent synkrisis  iso 108->107
+  IMPROVED ps-ef.txt                  315 -> 314  (-1)  parent synkrisis  iso 315->314
+  IMPROVED json-pkg.txt               681 -> 680  (-1)  parent synkrisis  iso 681->680
+  IMPROVED code-ts.txt                969 -> 968  (-1)  parent synkrisis  iso 969->968
+  IMPROVED dpkg-l.txt                 673 -> 672  (-1)  parent synkrisis  iso 673->672
+
+wrote bench/x96/receipts/iso29.json

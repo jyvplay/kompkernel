@@ -1,0 +1,14 @@
+lane          msgTok  runs  spacePreceded  alreadyFree  PAYING  headroom  byRunLen(paying)
+apt-real         850   173            0            0       0         0  
+code-ts          969   149            4            4       0         0  
+dpkg-l           673   114           15           15       0         0  
+findmnt          444    52           11           11       0         0  
+json-pkg         681   148            0            0       0         0  
+kb-article       622   146            0            0       0         0  
+llm-answer       674   126            0            0       0         0  
+ls-l-real       1476   231            0            0       0         0  
+ls-real          433    81            1            1       0         0  
+ps-aux-real     1042   194            5            5       0         0  
+----------------------------------------------------------------------------------------------------
+TOTAL: msgTokens 7864  runs 1414  space-preceded 36  space already free 36  space PAYING 0  HEADROOM 0 tokens (0.00% of the ten-wire total)
+free rate among space-preceded runs: 100.0%

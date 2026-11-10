@@ -1,0 +1,20 @@
+lane          ents  valTok  sharedPrefixChars  lenTok(1 digit each)  NET  with L capped at 9
+apt-real        64     162                 38                     21  -6.33      38
+code-ts         75     192                 94                     25  11.29      86
+dpkg-l          48     100                174                     1651.18000000000001      88
+findmnt         34     103                 44                     115.989999999999998      44
+json-pkg        48     111                 58                     166.390000000000001      58
+kb-article      27      31                 36                      9    4.9      36
+llm-answer      34      59                 23                     11-2.119999999999999      23
+ls-l-real      143     486                224                     4838.489999999999995     224
+ls-real         48     136                 50                     163.3099999999999987      50
+ps-aux-real     79     291                 70                     261.0300000000000011      70
+----------------------------------------------------------------------------------------------------
+TOTAL: entries 600  value tokens 1671  shared-prefix chars 811 (capped at 9: 717)  length-digit tokens 199
+
+reading: shared-prefix chars are converted at the measured 2.59 ch/tok value density, which
+is an UPPER bound on the saving because a character removed from a value is not always worth
+1/2.59 of a token in context. The length digits are priced exactly. NET is therefore
+optimistic, and the contract tax for describing front coding (the measured break-even for a
+new contract clause is ~20-25 tokens) is NOT subtracted. A positive NET here is necessary
+but not sufficient; a negative one closes the lever outright.

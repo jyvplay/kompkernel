@@ -635,6 +635,9 @@ const AFF_MAX = 1 << 16;
 const AFF_GEN = new Int32Array(AFF_MAX);
 const AFF_LIST = new Int32Array(AFF_MAX);
 let AFF_GEN_COUNTER = 0;
+/** X95 / ANAKLESIS scratch: the recomputed per-pattern costs, parallel to `AFF_LIST`. */
+const UPD_IDX = new Int32Array(AFF_MAX);
+const UPD_VAL = new Float64Array(AFF_MAX);
 
 
 export function scoreRunCostDelta(
@@ -688,6 +691,80 @@ export function scoreRunCostDelta(
     updates.push([i, v]);
   }
   return { total, updates };
+}
+
+/**
+ * X95 / ANAKLESIS. Same contract as `scoreRunCostDelta`, but the caller names the slots it moved
+ * instead of making the scorer re-scan every slot to discover them, and the recomputed per-pattern
+ * costs are written into module-level scratch instead of a freshly allocated tuple per pattern.
+ *
+ * WHY. The hill-climb in `renderBest` probes an assignment millions of times per document, and
+ * each probe changes one or two glyph slots. `scoreRunCostDelta` spent an O(needed) pass over the
+ * whole assignment on every one of those probes to find the two slots that had moved, then did the
+ * real work. For the recorded 1,203-char frontier lane that is 17.9 M scans of a several-hundred
+ * slot array to locate a couple of dozen changed slots in total. Separately, every affected
+ * pattern pushed a new two-element array into `updates`, and the overwhelming majority of probes
+ * are rejected -- so that allocation was bought and immediately discarded millions of times, which
+ * the X95 cpu-profile shows as 5.6 % of the run in the collector.
+ *
+ * WHY IT IS EXACT, NOT AN APPROXIMATION. The affected-pattern set is the union, over the slots
+ * whose glyph changed, of `patternsBySlot[slot]`. Given the exact changed-slot list that union is
+ * identical to what the scan computes. The order in which the affected patterns are then visited
+ * does not change the returned total: the total is `state.total + sum((v_i - costs_i) * mult_i)`
+ * over the affected set, which is order-independent, and the acceptance test at the call site is
+ * `total <= bestRun`. The X59 branch-and-bound early exit is sound for any visiting order because
+ * at every step `total - maxSavingLeft` is a valid lower bound on the final total (a nonempty run
+ * string costs at least one token), so abandoning can only skip work whose outcome was already
+ * decided. `workTick` is called exactly once per invocation, as before, so the deterministic work
+ * budget and therefore the search trajectory are unchanged.
+ *
+ * The scratch is safe to share because this function is not re-entrant: it never calls itself,
+ * and its caller applies the result with `commitRunCostDeltaSlots` before scoring anything else.
+ * The abandoned path reports `n = 0`, so a commit after an abandonment applies nothing.
+ */
+export function scoreRunCostDeltaSlots(
+  p: PreparedRuns, state: PreparedRunCostState, after: string[], changed: number[],
+  enc: EncodingName, cache: Map<string, number>, limit = Number.POSITIVE_INFINITY,
+): { total: number; n: number } {
+  workTick(); // X57 deterministic search-work meter (see workmeter.ts)
+  if (after.length !== state.patternsBySlot.length) {
+    throw new Error('run-cost candidate length mismatch');
+  }
+  const gen = ++AFF_GEN_COUNTER;
+  let affCount = 0;
+  for (let c = 0; c < changed.length; c++) {
+    const slot = changed[c];
+    for (const pattern of state.patternsBySlot[slot]) {
+      if (AFF_GEN[pattern] !== gen) { AFF_GEN[pattern] = gen; AFF_LIST[affCount++] = pattern; }
+    }
+  }
+  let total = state.total;
+  let n = 0;
+  let maxSavingLeft = 0;
+  if (limit !== Number.POSITIVE_INFINITY) {
+    for (let k = 0; k < affCount; k++) {
+      const i = AFF_LIST[k];
+      maxSavingLeft += Math.max(0, state.costs[i] - 1) * p.mult[i];
+    }
+  }
+  for (let k = 0; k < affCount; k++) {
+    const i = AFF_LIST[k];
+    if (total - maxSavingLeft > limit) return { total: limit + 1, n: 0 };
+    let s = '';
+    for (const slot of state.patternSlots[i]) s += after[slot];
+    let v = cache.get(s);
+    if (v === undefined) { v = countTokens(s, enc); cache.set(s, v); }
+    total += (v - state.costs[i]) * p.mult[i];
+    if (limit !== Number.POSITIVE_INFINITY) maxSavingLeft -= Math.max(0, state.costs[i] - 1) * p.mult[i];
+    UPD_IDX[n] = i; UPD_VAL[n] = v; n++;
+  }
+  return { total, n };
+}
+
+/** Apply a `scoreRunCostDeltaSlots` result. Must be called before the next scoring call. */
+export function commitRunCostDeltaSlots(state: PreparedRunCostState, d: { total: number; n: number }): void {
+  state.total = d.total;
+  for (let k = 0; k < d.n; k++) state.costs[UPD_IDX[k]] = UPD_VAL[k];
 }
 
 /** Commit a previously-scored candidate after the caller accepts it. */
@@ -1222,6 +1299,56 @@ export function renderBest(
       let arr = bestArr.slice();
       const scoreState = prepareRunCostState(prepRuns, refList, arr, enc, cache);
       if (scoreState.total !== bestRun) throw new Error('run-cost delta baseline mismatch');
+      /* X95 / ANAKLESIS scratch. Three O(needed) operations ran on EVERY probe of this loop:
+       * `const trial = arr.slice()` allocated a fresh array, `new Set(trial).size !== trial.length`
+       * rebuilt a set of every glyph to re-verify the no-duplicate invariant, and
+       * `scoreRunCostDelta` re-scanned every slot to discover which ones had moved. The loop runs
+       * millions of probes per document, so all three were paid millions of times.
+       *
+       * The trial is now one buffer reused across probes, the invariant is maintained
+       * incrementally as a glyph multiset (`overCount` is the number of glyphs appearing more
+       * than once, so "no duplicates" is a single integer comparison), and the slots a probe
+       * touched are logged and handed straight to `scoreRunCostDeltaSlots`.
+       *
+       * NOTHING ABOUT THE SEARCH CHANGES. `arr` still holds the committed assignment, `trial`
+       * still holds the candidate, the RNG call order is untouched, the acceptance test is still
+       * `total <= bestRun`, and a rejected probe leaves `arr` and the multiset exactly as they
+       * were. The X95 gate verifies that by SHA-256 of the complete message on all 29 frontier
+       * lanes, because this corpus has produced a wire change at an unchanged token count three
+       * times and a token count is not evidence of an unchanged wire. */
+      const trial = new Array<string>(arr.length);
+      const glyphCount = new Map<string, number>();
+      for (const c of arr) glyphCount.set(c, (glyphCount.get(c) ?? 0) + 1);
+      let overCount = 0;
+      for (const [, n] of glyphCount) if (n > 1) overCount++;
+      const changed: number[] = [];
+      const oldVals: string[] = [];
+      const beginMove = () => { changed.length = 0; oldVals.length = 0; };
+      const put = (i: number, c: string) => {
+        const old = trial[i];
+        if (old === c) return;
+        changed.push(i); oldVals.push(old);
+        const nOld = glyphCount.get(old)!;
+        if (nOld === 2) overCount--;
+        if (nOld === 1) glyphCount.delete(old); else glyphCount.set(old, nOld - 1);
+        const nNew = glyphCount.get(c) ?? 0;
+        if (nNew === 1) overCount++;
+        glyphCount.set(c, nNew + 1);
+        trial[i] = c;
+      };
+      const rollback = () => {
+        for (let k = changed.length - 1; k >= 0; k--) {
+          const i = changed[k], old = oldVals[k], cur = trial[i];
+          const nCur = glyphCount.get(cur)!;
+          if (nCur === 2) overCount--;
+          if (nCur === 1) glyphCount.delete(cur); else glyphCount.set(cur, nCur - 1);
+          const nOld = glyphCount.get(old) ?? 0;
+          if (nOld === 1) overCount++;
+          glyphCount.set(old, nOld + 1);
+          trial[i] = old;
+        }
+        beginMove();
+      };
       // Precompute the edge list once; a targeted move is worth far more than a
       // random swap because the objective only pays on realised pairs.
       const edgeList = [...cand.pool.pairs].filter(e => { const a = [...e]; return !payload.has(a[0]) && !payload.has(a[1]) && a[0] !== a[1]; });
@@ -1238,7 +1365,15 @@ export function renderBest(
         // wall clock — G10's load-dependent-wire bug does not apply). When
         // spent, hill-climbing stops and best-so-far is materialised.
         if (workExhausted()) break;
-        const trial = arr.slice();
+        /* X95 / ANAKLESIS. Undo whatever the previous probe left applied, then seed this
+         * probe's trial from the committed assignment. The guard matters: after an accepted
+         * probe the log is already empty, so the common case costs one length comparison
+         * instead of a call into `rollback`. `beginMove` is inlined for the same reason -- the
+         * loop runs millions of probes per document and a closure call is not free at that
+         * count. */
+        if (changed.length) rollback();
+        for (let i = 0; i < arr.length; i++) trial[i] = arr[i];
+        changed.length = 0; oldVals.length = 0;
         // n-gram move: force a hot run of 3..5 references onto a real n-character
         // single token. This is where the multi-character vocabulary actually pays.
         if (hotN.length && rnd() < 0.30) {
@@ -1256,18 +1391,23 @@ export function renderBest(
             const slot = pos.get(hn.ids[q]);
             if (slot === undefined) { ok = false; break; }
             const held = trial.indexOf(target);
-            if (held >= 0) { const t0 = trial[slot]; trial[slot] = trial[held]; trial[held] = t0; }
-            else trial[slot] = target;
+            if (held >= 0) {
+              // the original wrote `t0 = trial[slot]; trial[slot] = trial[held]; trial[held] = t0`,
+              // which is a no-op when held === slot; `put` keeps the multiset and the change log
+              // exact, and the swap is only issued when it actually moves something
+              if (held !== slot) { const a = trial[slot], b = trial[held]; put(slot, b); put(held, a); }
+            } else put(slot, target);
           }
-          if (!ok) continue;
-          if (new Set(trial).size !== trial.length) continue;
-          const delta = scoreRunCostDelta(prepRuns, scoreState, arr, trial, enc, cache, bestRun);
+          if (!ok) { rollback(); continue; }
+          if (overCount !== 0) { rollback(); continue; }
+          const delta = scoreRunCostDeltaSlots(prepRuns, scoreState, trial, changed, enc, cache, bestRun);
           const v = delta.total;
           if (v <= bestRun) {
             if (v < bestRun) { bestRun = v; bestArr = trial.slice(); }
-            commitRunCostDelta(scoreState, delta);
-            arr = trial;
-          }
+            commitRunCostDeltaSlots(scoreState, delta);
+            arr = trial.slice();
+            beginMove();
+          } else rollback();
           continue;
         }
         if (edgeList.length && hotPairs.length && rnd() < 0.45) {
@@ -1278,40 +1418,47 @@ export function renderBest(
           const iu = pos.get(hp.u)!, iv = pos.get(hp.v)!;
           if (iu === iv) continue;
           const j1 = trial.indexOf(c1), j2 = trial.indexOf(c2);
-          if (j1 >= 0) { const t0 = trial[iu]; trial[iu] = trial[j1]; trial[j1] = t0; }
-          else trial[iu] = c1;
+          if (j1 >= 0) {
+            if (j1 !== iu) { const a = trial[iu], b = trial[j1]; put(iu, b); put(j1, a); }
+          } else put(iu, c1);
           const j2b = trial.indexOf(c2);
-          if (j2b >= 0) { const t0 = trial[iv]; trial[iv] = trial[j2b]; trial[j2b] = t0; }
-          else trial[iv] = c2;
+          if (j2b >= 0) {
+            if (j2b !== iv) { const a = trial[iv], b = trial[j2b]; put(iv, b); put(j2b, a); }
+          } else put(iv, c2);
           void j2;
-          if (new Set(trial).size !== trial.length) continue;
-          const delta = scoreRunCostDelta(prepRuns, scoreState, arr, trial, enc, cache, bestRun);
+          if (overCount !== 0) { rollback(); continue; }
+          const delta = scoreRunCostDeltaSlots(prepRuns, scoreState, trial, changed, enc, cache, bestRun);
           const v = delta.total;
           if (v <= bestRun) {
             if (v < bestRun) { bestRun = v; bestArr = trial.slice(); }
-            commitRunCostDelta(scoreState, delta);
-            arr = trial;
-          }
+            commitRunCostDeltaSlots(scoreState, delta);
+            arr = trial.slice();
+            beginMove();
+          } else rollback();
           continue;
         }
         if (spare2.length && rnd() < 0.3) {
           const i = Math.floor(rnd() * trial.length);
           const c = spare2[Math.floor(rnd() * spare2.length)];
-          if (trial.includes(c)) continue;
-          trial[i] = c;
+          // `glyphCount.has(c)` is exactly `trial.includes(c)`: the multiset holds precisely the
+          // glyphs of the trial, and a glyph is present iff its count is at least one
+          if (glyphCount.has(c)) continue;
+          put(i, c);
         } else {
           const i = Math.floor(rnd() * trial.length);
           const j = Math.floor(rnd() * trial.length);
           if (i === j) continue;
-          const t2 = trial[i]; trial[i] = trial[j]; trial[j] = t2;
+          const a = trial[i], b = trial[j];
+          put(i, b); put(j, a);
         }
-        const delta = scoreRunCostDelta(prepRuns, scoreState, arr, trial, enc, cache, bestRun);
+        const delta = scoreRunCostDeltaSlots(prepRuns, scoreState, trial, changed, enc, cache, bestRun);
         const v = delta.total;
         if (v <= bestRun) {
           if (v < bestRun) { bestRun = v; bestArr = trial.slice(); }
-          commitRunCostDelta(scoreState, delta);
-          arr = trial;
-        }
+          commitRunCostDeltaSlots(scoreState, delta);
+          arr = trial.slice();
+          beginMove();
+        } else rollback();
       }
     }
 

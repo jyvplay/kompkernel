@@ -1,0 +1,154 @@
+{
+ "note": "second-level rules over the reference alphabet; exact whole-message pricing; zero frontier calls",
+ "lanes": [
+  {
+   "lane": "apt-real",
+   "path": "bench/x87/receipts/wires/apt-real.wire.txt",
+   "msgTokens": 850,
+   "refs": 539,
+   "runsByLenDistinctKGe2": {
+    "2": 79,
+    "3": 24,
+    "4": 8
+   },
+   "candidates": 40,
+   "applied": [],
+   "fidelityFailures": 0,
+   "finalTokens": 850,
+   "delta": 0
+  },
+  {
+   "lane": "code-ts",
+   "path": "bench/x87/receipts/wires/code-ts.wire.txt",
+   "msgTokens": 969,
+   "refs": 456,
+   "runsByLenDistinctKGe2": {
+    "2": 67,
+    "3": 13
+   },
+   "candidates": 40,
+   "applied": [],
+   "fidelityFailures": 0,
+   "finalTokens": 969,
+   "delta": 0
+  },
+  {
+   "lane": "dpkg-l",
+   "path": "bench/x87/receipts/wires/dpkg-l.wire.txt",
+   "msgTokens": 673,
+   "refs": 252,
+   "runsByLenDistinctKGe2": {
+    "2": 24,
+    "3": 4
+   },
+   "candidates": 22,
+   "applied": [],
+   "fidelityFailures": 0,
+   "finalTokens": 673,
+   "delta": 0
+  },
+  {
+   "lane": "findmnt",
+   "path": "bench/x87/receipts/wires/findmnt.wire.txt",
+   "msgTokens": 444,
+   "refs": 114,
+   "runsByLenDistinctKGe2": {
+    "2": 10
+   },
+   "candidates": 10,
+   "applied": [],
+   "fidelityFailures": 0,
+   "finalTokens": 444,
+   "delta": 0
+  },
+  {
+   "lane": "json-pkg",
+   "path": "bench/x87/receipts/wires/json-pkg.wire.txt",
+   "msgTokens": 681,
+   "refs": 271,
+   "runsByLenDistinctKGe2": {
+    "2": 18,
+    "3": 3
+   },
+   "candidates": 18,
+   "applied": [],
+   "fidelityFailures": 0,
+   "finalTokens": 681,
+   "delta": 0
+  },
+  {
+   "lane": "kb-article",
+   "path": "bench/x87/receipts/wires/kb-article.wire.txt",
+   "msgTokens": 622,
+   "refs": 245,
+   "runsByLenDistinctKGe2": {
+    "2": 15
+   },
+   "candidates": 15,
+   "applied": [],
+   "fidelityFailures": 0,
+   "finalTokens": 622,
+   "delta": 0
+  },
+  {
+   "lane": "llm-answer",
+   "path": "bench/x87/receipts/wires/llm-answer.wire.txt",
+   "msgTokens": 674,
+   "refs": 230,
+   "runsByLenDistinctKGe2": {
+    "2": 19,
+    "3": 2
+   },
+   "candidates": 19,
+   "applied": [],
+   "fidelityFailures": 0,
+   "finalTokens": 674,
+   "delta": 0
+  },
+  {
+   "lane": "ls-l-real",
+   "path": "bench/x87/receipts/wires/ls-l-real.wire.txt",
+   "msgTokens": 1476,
+   "refs": 609,
+   "runsByLenDistinctKGe2": {
+    "2": 54,
+    "3": 2
+   },
+   "candidates": 40,
+   "applied": [],
+   "fidelityFailures": 0,
+   "finalTokens": 1476,
+   "delta": 0
+  },
+  {
+   "lane": "ls-real",
+   "path": "bench/x87/receipts/wires/ls-real.wire.txt",
+   "msgTokens": 433,
+   "refs": 142,
+   "runsByLenDistinctKGe2": {
+    "2": 15,
+    "3": 6
+   },
+   "candidates": 10,
+   "applied": [],
+   "fidelityFailures": 0,
+   "finalTokens": 433,
+   "delta": 0
+  },
+  {
+   "lane": "ps-aux-real",
+   "path": "bench/x87/receipts/wires/ps-aux-real.wire.txt",
+   "msgTokens": 1042,
+   "refs": 364,
+   "runsByLenDistinctKGe2": {
+    "2": 25,
+    "3": 2
+   },
+   "candidates": 24,
+   "applied": [],
+   "fidelityFailures": 0,
+   "finalTokens": 1042,
+   "delta": 0
+  }
+ ]
+}

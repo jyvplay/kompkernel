@@ -1,0 +1,70 @@
+{
+ "note": "X96 interleaved single-process A/B of ISOMORPHIA; OMEGA_DET=1 OMEGA_NO_MEMO=1; 3 repetitions per arm, median ms",
+ "rows": [
+  {
+   "lane": "apt-real.txt",
+   "path": "bench/holdout-x41/apt-real.txt",
+   "rawChars": 6195,
+   "base": 850,
+   "iso400": 846,
+   "iso900": 846,
+   "d400": -4,
+   "d900": -4,
+   "exactBase": true,
+   "exact400": true,
+   "exact900": true,
+   "shaBase": "ca28182c1cad9b19",
+   "sha400": "7acf126fc253f3c3",
+   "sha900": "7acf126fc253f3c3",
+   "msBase": 85598,
+   "ms400": 78461,
+   "ms900": 80246
+  },
+  {
+   "lane": "code-ts.txt",
+   "path": "bench/holdout/code-ts.txt",
+   "rawChars": 6000,
+   "base": 969,
+   "iso400": 968,
+   "iso900": 968,
+   "d400": -1,
+   "d900": -1,
+   "exactBase": true,
+   "exact400": true,
+   "exact900": true,
+   "shaBase": "7e0f68883b0eb8b7",
+   "sha400": "11d5acfce5f3f9d1",
+   "sha900": "11d5acfce5f3f9d1",
+   "msBase": 2149,
+   "ms400": 3294,
+   "ms900": 3267
+  },
+  {
+   "lane": "ls-real.txt",
+   "path": "bench/holdout-x41/ls-real.txt",
+   "rawChars": 2486,
+   "base": 433,
+   "iso400": 433,
+   "iso900": 433,
+   "d400": 0,
+   "d900": 0,
+   "exactBase": true,
+   "exact400": true,
+   "exact900": true,
+   "shaBase": "095d9c56a506fb63",
+   "sha400": "095d9c56a506fb63",
+   "sha900": "095d9c56a506fb63",
+   "msBase": 434,
+   "ms400": 705,
+   "ms900": 699
+  }
+ ],
+ "totals": {
+  "base": 2252,
+  "iso400": 2247,
+  "iso900": 2247,
+  "msBase": 88181,
+  "ms400": 82460,
+  "ms900": 84212
+ }
+}

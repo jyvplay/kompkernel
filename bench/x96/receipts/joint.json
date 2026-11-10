@@ -1,0 +1,127 @@
+{
+ "note": "joint order+assignment climb; zero frontier calls",
+ "iters": 3000,
+ "seeds": 3,
+ "rows": [
+  {
+   "lane": "apt-real",
+   "script": "cyrillic",
+   "rules": 64,
+   "T0": 850,
+   "quarantined": 0,
+   "min": -5,
+   "median": -4,
+   "max": -2,
+   "verified": 3,
+   "seeds": 3
+  },
+  {
+   "lane": "code-ts",
+   "script": "cyrillic",
+   "rules": 75,
+   "T0": 969,
+   "quarantined": 0,
+   "min": -1,
+   "median": -1,
+   "max": -1,
+   "verified": 3,
+   "seeds": 3
+  },
+  {
+   "lane": "dpkg-l",
+   "script": "cyrillic",
+   "rules": 48,
+   "T0": 673,
+   "quarantined": 0,
+   "min": -1,
+   "median": -1,
+   "max": -1,
+   "verified": 3,
+   "seeds": 3
+  },
+  {
+   "lane": "findmnt",
+   "script": "arabic",
+   "rules": 34,
+   "T0": 444,
+   "quarantined": 0,
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "verified": 3,
+   "seeds": 3
+  },
+  {
+   "lane": "json-pkg",
+   "script": "cyrillic",
+   "rules": 48,
+   "T0": 681,
+   "quarantined": 0,
+   "min": -1,
+   "median": -1,
+   "max": -1,
+   "verified": 3,
+   "seeds": 3
+  },
+  {
+   "lane": "kb-article",
+   "script": "cyrillic",
+   "rules": 27,
+   "T0": 622,
+   "quarantined": 0,
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "verified": 3,
+   "seeds": 3
+  },
+  {
+   "lane": "llm-answer",
+   "script": "cyrillic",
+   "rules": 34,
+   "T0": 674,
+   "quarantined": 0,
+   "min": -2,
+   "median": -2,
+   "max": -2,
+   "verified": 3,
+   "seeds": 3
+  },
+  {
+   "lane": "ls-l-real",
+   "script": "polyglot",
+   "rules": 143,
+   "T0": 1476,
+   "quarantined": 3,
+   "min": null,
+   "median": null,
+   "max": null,
+   "verified": 0,
+   "seeds": 3
+  },
+  {
+   "lane": "ls-real",
+   "script": "cyrillic",
+   "rules": 48,
+   "T0": 433,
+   "quarantined": 0,
+   "min": 0,
+   "median": 0,
+   "max": 0,
+   "verified": 3,
+   "seeds": 3
+  },
+  {
+   "lane": "ps-aux-real",
+   "script": "cyrillic",
+   "rules": 79,
+   "T0": 1042,
+   "quarantined": 0,
+   "min": -1,
+   "median": 0,
+   "max": 0,
+   "verified": 3,
+   "seeds": 3
+  }
+ ]
+}

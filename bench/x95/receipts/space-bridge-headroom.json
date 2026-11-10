@@ -1,0 +1,115 @@
+{
+ "note": "cost of the space preceding a reference run; zero frontier calls",
+ "lanes": [
+  {
+   "lane": "apt-real",
+   "path": "bench/x87/receipts/wires/apt-real.wire.txt",
+   "msgTokens": 850,
+   "runs": 173,
+   "spacePreceded": 0,
+   "alreadyFree": 0,
+   "paying": 0,
+   "headroomTokens": 0,
+   "payingByRunLength": []
+  },
+  {
+   "lane": "code-ts",
+   "path": "bench/x87/receipts/wires/code-ts.wire.txt",
+   "msgTokens": 969,
+   "runs": 149,
+   "spacePreceded": 4,
+   "alreadyFree": 4,
+   "paying": 0,
+   "headroomTokens": 0,
+   "payingByRunLength": []
+  },
+  {
+   "lane": "dpkg-l",
+   "path": "bench/x87/receipts/wires/dpkg-l.wire.txt",
+   "msgTokens": 673,
+   "runs": 114,
+   "spacePreceded": 15,
+   "alreadyFree": 15,
+   "paying": 0,
+   "headroomTokens": 0,
+   "payingByRunLength": []
+  },
+  {
+   "lane": "findmnt",
+   "path": "bench/x87/receipts/wires/findmnt.wire.txt",
+   "msgTokens": 444,
+   "runs": 52,
+   "spacePreceded": 11,
+   "alreadyFree": 11,
+   "paying": 0,
+   "headroomTokens": 0,
+   "payingByRunLength": []
+  },
+  {
+   "lane": "json-pkg",
+   "path": "bench/x87/receipts/wires/json-pkg.wire.txt",
+   "msgTokens": 681,
+   "runs": 148,
+   "spacePreceded": 0,
+   "alreadyFree": 0,
+   "paying": 0,
+   "headroomTokens": 0,
+   "payingByRunLength": []
+  },
+  {
+   "lane": "kb-article",
+   "path": "bench/x87/receipts/wires/kb-article.wire.txt",
+   "msgTokens": 622,
+   "runs": 146,
+   "spacePreceded": 0,
+   "alreadyFree": 0,
+   "paying": 0,
+   "headroomTokens": 0,
+   "payingByRunLength": []
+  },
+  {
+   "lane": "llm-answer",
+   "path": "bench/x87/receipts/wires/llm-answer.wire.txt",
+   "msgTokens": 674,
+   "runs": 126,
+   "spacePreceded": 0,
+   "alreadyFree": 0,
+   "paying": 0,
+   "headroomTokens": 0,
+   "payingByRunLength": []
+  },
+  {
+   "lane": "ls-l-real",
+   "path": "bench/x87/receipts/wires/ls-l-real.wire.txt",
+   "msgTokens": 1476,
+   "runs": 231,
+   "spacePreceded": 0,
+   "alreadyFree": 0,
+   "paying": 0,
+   "headroomTokens": 0,
+   "payingByRunLength": []
+  },
+  {
+   "lane": "ls-real",
+   "path": "bench/x87/receipts/wires/ls-real.wire.txt",
+   "msgTokens": 433,
+   "runs": 81,
+   "spacePreceded": 1,
+   "alreadyFree": 1,
+   "paying": 0,
+   "headroomTokens": 0,
+   "payingByRunLength": []
+  },
+  {
+   "lane": "ps-aux-real",
+   "path": "bench/x87/receipts/wires/ps-aux-real.wire.txt",
+   "msgTokens": 1042,
+   "runs": 194,
+   "spacePreceded": 5,
+   "alreadyFree": 5,
+   "paying": 0,
+   "headroomTokens": 0,
+   "payingByRunLength": []
+  }
+ ]
+}
