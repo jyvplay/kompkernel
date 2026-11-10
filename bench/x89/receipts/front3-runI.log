@@ -1,0 +1,36 @@
+lsblk.txt                    raw=   60 X74=   60(synkrisis    ) runE_F=   60 Δ=    0 exact=true 2345ms
+kb-article.txt               raw=  656 X74=  622(synkrisis    ) runE_F=  622 Δ=    0 exact=true 1970ms
+uptime-w.txt                 raw=   80 X74=   80(synkrisis    ) runE_F=   80 Δ=    0 exact=true 1658ms
+free-m.txt                   raw=   76 X74=   76(synkrisis    ) runE_F=   76 Δ=    0 exact=true 2051ms
+vmstat.txt                   raw=  229 X74=  149(synkrisis    ) runE_F=  149 Δ=    0 exact=true 2000ms
+unified-diff.patch           raw=  578 X74=  419(synkrisis    ) runE_F=  419 Δ=    0 exact=true 2769ms
+df-h.txt                     raw=  570 X74=  171(akolouthia2  ) runE_F=  171 Δ=    0 exact=true 2040ms
+df-real.txt                  raw=  158 X74=  126(synkrisis    ) runE_F=  126 Δ=    0 exact=true 3636ms
+du-real.txt                  raw=  458 X74=  272(synkrisis    ) runE_F=  272 Δ=    0 exact=true 2946ms
+node-help.txt                raw= 1099 X74=  862(synkrisis    ) runE_F=  862 Δ=    0 exact=true 5636ms
+findmnt.txt                  raw=  787 X74=  444(synkrisis    ) runE_F=  444 Δ=    0 exact=true 5671ms
+df-h.txt                     raw=  140 X74=  108(synkrisis    ) runE_F=  108 Δ=    0 exact=true 4139ms
+email-thread.txt             raw=  629 X74=  488(synkrisis    ) runE_F=  488 Δ=    0 exact=true 6675ms
+llm-answer.md                raw=  733 X74=  674(synkrisis    ) runE_F=  674 Δ=    0 exact=true 7360ms
+markdown-table.md            raw=  330 X74=  176(synkrisis    ) runE_F=  176 Δ=    0 exact=true 5412ms
+psql-output.txt              raw=  675 X74=  244(metron       ) runE_F=  244 Δ=    0 exact=true 8748ms
+prices.csv                   raw=  582 X74=  133(diastema     ) runE_F=  133 Δ=    0 exact=true 12135ms
+cue-sheet.md                 raw=  513 X74=  101(stichomythia ) runE_F=  163 Δ=  -62 exact=true 11765ms
+ps-ef.txt                    raw= 1144 X74=  315(synkrisis    ) runE_F=  315 Δ=    0 exact=true 10949ms
+ls-real.txt                  raw= 1034 X74=  433(synkrisis    ) runE_F=  433 Δ=    0 exact=true 9612ms
+json-pkg.txt                 raw= 1152 X74=  681(synkrisis    ) runE_F=  681 Δ=    0 exact=true 14069ms
+code-ts.txt                  raw= 1422 X74=  969(synkrisis    ) runE_F=  969 Δ=    0 exact=true 22681ms
+dpkg-l.txt                   raw= 1000 X74=  673(synkrisis    ) runE_F=  673 Δ=    0 exact=true 16078ms
+ps-real.txt                  raw= 1106 X74=  397(synkrisis    ) runE_F=  397 Δ=    0 exact=true 9807ms
+kubectl-get-pods.txt         raw= 1006 X74=  326(akolouthia2  ) runE_F=  326 Δ=    0 exact=true 15478ms
+metrics.tsv                  raw=  811 X74=  210(akolouthia2  ) runE_F=  210 Δ=    0 exact=true 14236ms
+ps-aux-real.txt              raw= 3054 X74= 1042(synkrisis    ) runE_F= 1042 Δ=    0 exact=true 42197ms
+apt-real.txt                 raw= 2739 X74=  850(synkrisis    ) runE_F=  850 Δ=    0 exact=true 88208ms
+ls-l-real.txt                raw= 5194 X74= 1390(synkrisis    ) runE_F= 1476 Δ=  -86 exact=true 532360ms
+
+=== X89 AUTHORITATIVE (OMEGA_DET=1) ===
+run E tagstackFrontier TOTAL 12639   ->   tagstackEncode TOTAL 12491   delta -148
+exact 29/29   ms 864649
+lanes where the shipped chain beats the reported frontier: 2
+  ls-l-real.txt                1476 -> 1390  (-86)  parent synkrisis
+  cue-sheet.md                 163 -> 101  (-62)  parent stichomythia

@@ -1,0 +1,7 @@
+lsblk.txt                    raw=   60 X74=   60(synkrisis    ) runE_F=   60 Δ=    0 exact=true 3222ms
+kb-article.txt               raw=  656 X74=  622(synkrisis    ) runE_F=  622 Δ=    0 exact=true 3645ms
+uptime-w.txt                 raw=   80 X74=   80(synkrisis    ) runE_F=   80 Δ=    0 exact=true 2503ms
+free-m.txt                   raw=   76 X74=   76(synkrisis    ) runE_F=   76 Δ=    0 exact=true 2969ms
+vmstat.txt                   raw=  229 X74=  149(synkrisis    ) runE_F=  149 Δ=    0 exact=true 3378ms
+unified-diff.patch           raw=  578 X74=  418(synkrisis    ) runE_F=  419 Δ=   -1 exact=true 3654ms
+df-h.txt                     raw=  570 X74=  171(akolouthia2  ) runE_F=  171 Δ=    0 exact=true 3053ms

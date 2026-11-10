@@ -1,0 +1,19 @@
+lane          msgTok  cands  tested  WINS  best delta  best prefix
+apt-real         850     3      3     0          0  ""
+code-ts          969    32     32     0          0  ""
+dpkg-l           673     2      2     0          0  ""
+findmnt          444     4      4     0          0  ""
+json-pkg         681    20     20     0          0  ""
+kb-article       622    12     12     0          0  ""
+llm-answer       674     3      3     0          0  ""
+ls-l-real       1476    18     18     0          0  ""
+ls-real          433     7      7     0          0  ""
+ps-aux-real     1042    15     15     0          0  ""
+------------------------------------------------------------------------------------------------
+TOTAL: msg 7864  candidates priced 116  WINS 0  best delta 0
+
+reading: a NEGATIVE delta is an exact saving on the complete message, with the body and the
+contract both untouched. The winning cases are listed per lane in the receipt. A single
+prefix is tested at a time; a real arm would compose them, and the composition is bounded
+above by the sum of the individual negatives only if the moves do not interact, which they
+do -- so the sum is an upper bound on a composed arm, never a promise.

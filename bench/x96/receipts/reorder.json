@@ -1,0 +1,126 @@
+{
+ "note": "tape reordering under the reference DAG; zero frontier calls",
+ "iters": 4000,
+ "rows": [
+  {
+   "lane": "apt-real",
+   "script": "cyrillic",
+   "rules": 64,
+   "T0": 850,
+   "Tbest": 847,
+   "dT": -3,
+   "validSwaps": 3349,
+   "tried": 4000,
+   "accepted": 3,
+   "exact": true
+  },
+  {
+   "lane": "code-ts",
+   "script": "cyrillic",
+   "rules": 75,
+   "T0": 969,
+   "Tbest": 968,
+   "dT": -1,
+   "validSwaps": 3313,
+   "tried": 4000,
+   "accepted": 1,
+   "exact": true
+  },
+  {
+   "lane": "dpkg-l",
+   "script": "cyrillic",
+   "rules": 48,
+   "T0": 673,
+   "Tbest": 672,
+   "dT": -1,
+   "validSwaps": 2820,
+   "tried": 4000,
+   "accepted": 1,
+   "exact": true
+  },
+  {
+   "lane": "findmnt",
+   "script": "arabic",
+   "rules": 34,
+   "T0": 444,
+   "Tbest": 444,
+   "dT": 0,
+   "validSwaps": 2583,
+   "tried": 4000,
+   "accepted": 0,
+   "exact": true
+  },
+  {
+   "lane": "json-pkg",
+   "script": "cyrillic",
+   "rules": 48,
+   "T0": 681,
+   "Tbest": 680,
+   "dT": -1,
+   "validSwaps": 2986,
+   "tried": 4000,
+   "accepted": 1,
+   "exact": true
+  },
+  {
+   "lane": "kb-article",
+   "script": "cyrillic",
+   "rules": 27,
+   "T0": 622,
+   "Tbest": 622,
+   "dT": 0,
+   "validSwaps": 3551,
+   "tried": 4000,
+   "accepted": 0,
+   "exact": true
+  },
+  {
+   "lane": "llm-answer",
+   "script": "cyrillic",
+   "rules": 34,
+   "T0": 674,
+   "Tbest": 672,
+   "dT": -2,
+   "validSwaps": 3367,
+   "tried": 4000,
+   "accepted": 2,
+   "exact": true
+  },
+  {
+   "lane": "ls-l-real",
+   "script": "polyglot",
+   "rules": 143,
+   "T0": 1476,
+   "Tbest": 1473,
+   "dT": -3,
+   "validSwaps": 3281,
+   "tried": 4000,
+   "accepted": 2,
+   "exact": false
+  },
+  {
+   "lane": "ls-real",
+   "script": "cyrillic",
+   "rules": 48,
+   "T0": 433,
+   "Tbest": 433,
+   "dT": 0,
+   "validSwaps": 2905,
+   "tried": 4000,
+   "accepted": 0,
+   "exact": true
+  },
+  {
+   "lane": "ps-aux-real",
+   "script": "cyrillic",
+   "rules": 79,
+   "T0": 1042,
+   "Tbest": 1042,
+   "dT": 0,
+   "validSwaps": 2786,
+   "tried": 4000,
+   "accepted": 0,
+   "exact": true
+  }
+ ]
+}

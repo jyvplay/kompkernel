@@ -1,0 +1,621 @@
+{
+ "encoding": "o200k_base",
+ "scanned": 200006,
+ "failures": 94,
+ "scanMs": 103,
+ "multiGlyphTokens": 23606,
+ "distinctMergeablePairs": 12225,
+ "byBlock": [
+  [
+   "CJK+CJK",
+   2408
+  ],
+  [
+   "Cyrillic+Cyrillic+Cyrillic",
+   1896
+  ],
+  [
+   "Cyrillic+Cyrillic+Cyrillic+Cyrillic",
+   1329
+  ],
+  [
+   "Arabic+Arabic+Arabic",
+   1187
+  ],
+  [
+   "Cyrillic+Cyrillic",
+   823
+  ],
+  [
+   "Arabic+Arabic",
+   771
+  ],
+  [
+   "Cyrillic+Cyrillic+Cyrillic+Cyrillic+Cyrillic",
+   719
+  ],
+  [
+   "Arabic+Arabic+Arabic+Arabic",
+   503
+  ],
+  [
+   "Hebrew+Hebrew+Hebrew",
+   448
+  ],
+  [
+   "CJK+CJK+CJK",
+   388
+  ],
+  [
+   "Hangul+Hangul",
+   387
+  ],
+  [
+   "Georgian+Georgian+Georgian",
+   366
+  ],
+  [
+   "Thai+Thai",
+   345
+  ],
+  [
+   "CJK+CJK+CJK+CJK",
+   321
+  ],
+  [
+   "Thai+Thai+Thai",
+   315
+  ],
+  [
+   "Hebrew+Hebrew",
+   310
+  ],
+  [
+   "Cyrillic+Cyrillic+Cyrillic+Cyrillic+Cyrillic+Cyrillic",
+   310
+  ],
+  [
+   "Greek+Greek+Greek",
+   297
+  ],
+  [
+   "Kana+Kana",
+   279
+  ],
+  [
+   "Greek+Greek",
+   252
+  ]
+ ],
+ "topGlyphs": [
+  {
+   "g": "а",
+   "cp": "U+430",
+   "block": "Cyrillic",
+   "n": 2156
+  },
+  {
+   "g": "и",
+   "cp": "U+438",
+   "block": "Cyrillic",
+   "n": 1580
+  },
+  {
+   "g": "н",
+   "cp": "U+43D",
+   "block": "Cyrillic",
+   "n": 1409
+  },
+  {
+   "g": "е",
+   "cp": "U+435",
+   "block": "Cyrillic",
+   "n": 1344
+  },
+  {
+   "g": "о",
+   "cp": "U+43E",
+   "block": "Cyrillic",
+   "n": 1324
+  },
+  {
+   "g": "т",
+   "cp": "U+442",
+   "block": "Cyrillic",
+   "n": 1220
+  },
+  {
+   "g": "ا",
+   "cp": "U+627",
+   "block": "Arabic",
+   "n": 1096
+  },
+  {
+   "g": "р",
+   "cp": "U+440",
+   "block": "Cyrillic",
+   "n": 1061
+  },
+  {
+   "g": "л",
+   "cp": "U+43B",
+   "block": "Cyrillic",
+   "n": 915
+  },
+  {
+   "g": "с",
+   "cp": "U+441",
+   "block": "Cyrillic",
+   "n": 771
+  },
+  {
+   "g": "ы",
+   "cp": "U+44B",
+   "block": "Cyrillic",
+   "n": 654
+  },
+  {
+   "g": "ي",
+   "cp": "U+64A",
+   "block": "Arabic",
+   "n": 562
+  },
+  {
+   "g": "у",
+   "cp": "U+443",
+   "block": "Cyrillic",
+   "n": 559
+  },
+  {
+   "g": "д",
+   "cp": "U+434",
+   "block": "Cyrillic",
+   "n": 557
+  },
+  {
+   "g": "к",
+   "cp": "U+43A",
+   "block": "Cyrillic",
+   "n": 557
+  },
+  {
+   "g": "ر",
+   "cp": "U+631",
+   "block": "Arabic",
+   "n": 548
+  },
+  {
+   "g": "്",
+   "cp": "U+D4D",
+   "block": "U+d4xx",
+   "n": 539
+  },
+  {
+   "g": "м",
+   "cp": "U+43C",
+   "block": "Cyrillic",
+   "n": 526
+  },
+  {
+   "g": "в",
+   "cp": "U+432",
+   "block": "Cyrillic",
+   "n": 516
+  },
+  {
+   "g": "י",
+   "cp": "U+5D9",
+   "block": "Hebrew",
+   "n": 495
+  },
+  {
+   "g": "ა",
+   "cp": "U+10D0",
+   "block": "Georgian",
+   "n": 482
+  },
+  {
+   "g": "�",
+   "cp": "U+FFFD",
+   "block": "U+ffxx",
+   "n": 477
+  },
+  {
+   "g": "ा",
+   "cp": "U+93E",
+   "block": "U+93xx",
+   "n": 473
+  },
+  {
+   "g": "و",
+   "cp": "U+648",
+   "block": "Arabic",
+   "n": 464
+  },
+  {
+   "g": "ი",
+   "cp": "U+10D8",
+   "block": "Georgian",
+   "n": 461
+  },
+  {
+   "g": "ա",
+   "cp": "U+561",
+   "block": "Armenian",
+   "n": 435
+  },
+  {
+   "g": "ن",
+   "cp": "U+646",
+   "block": "Arabic",
+   "n": 431
+  },
+  {
+   "g": "ل",
+   "cp": "U+644",
+   "block": "Arabic",
+   "n": 415
+  },
+  {
+   "g": "ו",
+   "cp": "U+5D5",
+   "block": "Hebrew",
+   "n": 406
+  },
+  {
+   "g": "्",
+   "cp": "U+94D",
+   "block": "U+94xx",
+   "n": 395
+  },
+  {
+   "g": "я",
+   "cp": "U+44F",
+   "block": "Cyrillic",
+   "n": 374
+  },
+  {
+   "g": "г",
+   "cp": "U+433",
+   "block": "Cyrillic",
+   "n": 359
+  },
+  {
+   "g": "ь",
+   "cp": "U+44C",
+   "block": "Cyrillic",
+   "n": 343
+  },
+  {
+   "g": "்",
+   "cp": "U+BCD",
+   "block": "U+bcxx",
+   "n": 340
+  },
+  {
+   "g": "ე",
+   "cp": "U+10D4",
+   "block": "Georgian",
+   "n": 335
+  },
+  {
+   "g": "ت",
+   "cp": "U+62A",
+   "block": "Arabic",
+   "n": 325
+  },
+  {
+   "g": "م",
+   "cp": "U+645",
+   "block": "Arabic",
+   "n": 323
+  },
+  {
+   "g": "ة",
+   "cp": "U+629",
+   "block": "Arabic",
+   "n": 300
+  },
+  {
+   "g": "د",
+   "cp": "U+62F",
+   "block": "Arabic",
+   "n": 296
+  },
+  {
+   "g": "і",
+   "cp": "U+456",
+   "block": "Cyrillic",
+   "n": 291
+  },
+  {
+   "g": "া",
+   "cp": "U+9BE",
+   "block": "U+9bxx",
+   "n": 288
+  },
+  {
+   "g": "र",
+   "cp": "U+930",
+   "block": "U+93xx",
+   "n": 281
+  },
+  {
+   "g": "్",
+   "cp": "U+C4D",
+   "block": "U+c4xx",
+   "n": 280
+  },
+  {
+   "g": "า",
+   "cp": "U+E32",
+   "block": "Thai",
+   "n": 278
+  },
+  {
+   "g": "ә",
+   "cp": "U+4D9",
+   "block": "Cyrillic",
+   "n": 278
+  },
+  {
+   "g": "್",
+   "cp": "U+CCD",
+   "block": "U+ccxx",
+   "n": 267
+  },
+  {
+   "g": "й",
+   "cp": "U+439",
+   "block": "Cyrillic",
+   "n": 263
+  },
+  {
+   "g": "რ",
+   "cp": "U+10E0",
+   "block": "Georgian",
+   "n": 260
+  },
+  {
+   "g": "্",
+   "cp": "U+9CD",
+   "block": "U+9cxx",
+   "n": 258
+  },
+  {
+   "g": "น",
+   "cp": "U+E19",
+   "block": "Thai",
+   "n": 256
+  },
+  {
+   "g": "ی",
+   "cp": "U+6CC",
+   "block": "Arabic",
+   "n": 254
+  },
+  {
+   "g": "ն",
+   "cp": "U+576",
+   "block": "Armenian",
+   "n": 249
+  },
+  {
+   "g": "з",
+   "cp": "U+437",
+   "block": "Cyrillic",
+   "n": 240
+  },
+  {
+   "g": "ч",
+   "cp": "U+447",
+   "block": "Cyrillic",
+   "n": 239
+  },
+  {
+   "g": "ب",
+   "cp": "U+628",
+   "block": "Arabic",
+   "n": 237
+  },
+  {
+   "g": "ր",
+   "cp": "U+580",
+   "block": "Armenian",
+   "n": 236
+  },
+  {
+   "g": "ി",
+   "cp": "U+D3F",
+   "block": "U+d3xx",
+   "n": 231
+  },
+  {
+   "g": "ಿ",
+   "cp": "U+CBF",
+   "block": "U+cbxx",
+   "n": 230
+  },
+  {
+   "g": "ո",
+   "cp": "U+578",
+   "block": "Armenian",
+   "n": 228
+  },
+  {
+   "g": "ร",
+   "cp": "U+E23",
+   "block": "Thai",
+   "n": 228
+  }
+ ],
+ "incumbentGlyphs": 282,
+ "incumbentRunTokens": 256,
+ "bestRunTokens": 273,
+ "pairReencode": {
+  "verified": 333,
+  "refuted": 67
+ },
+ "samples": [
+  {
+   "id": 439,
+   "s": "о�"
+  },
+  {
+   "id": 671,
+   "s": "ა�"
+  },
+  {
+   "id": 709,
+   "s": "ա�"
+  },
+  {
+   "id": 714,
+   "s": "ра"
+  },
+  {
+   "id": 721,
+   "s": "ा�"
+  },
+  {
+   "id": 749,
+   "s": "ст"
+  },
+  {
+   "id": 760,
+   "s": "י�"
+  },
+  {
+   "id": 776,
+   "s": "ен"
+  },
+  {
+   "id": 790,
+   "s": "ו�"
+  },
+  {
+   "id": 811,
+   "s": "्�"
+  },
+  {
+   "id": 832,
+   "s": "്�"
+  },
+  {
+   "id": 841,
+   "s": "ан"
+  },
+  {
+   "id": 856,
+   "s": "ე�"
+  },
+  {
+   "id": 911,
+   "s": "ि�"
+  },
+  {
+   "id": 928,
+   "s": "ი�"
+  },
+  {
+   "id": 938,
+   "s": "ов"
+  },
+  {
+   "id": 967,
+   "s": "া�"
+  },
+  {
+   "id": 969,
+   "s": "ар"
+  },
+  {
+   "id": 1019,
+   "s": "ал"
+  },
+  {
+   "id": 1025,
+   "s": "ер"
+  },
+  {
+   "id": 1031,
+   "s": "ол"
+  },
+  {
+   "id": 1035,
+   "s": "ат"
+  },
+  {
+   "id": 1041,
+   "s": "ет"
+  },
+  {
+   "id": 1046,
+   "s": "ા�"
+  },
+  {
+   "id": 1049,
+   "s": "彩�"
+  },
+  {
+   "id": 1108,
+   "s": "ит"
+  },
+  {
+   "id": 1115,
+   "s": "ال"
+  },
+  {
+   "id": 1129,
+   "s": "্�"
+  },
+  {
+   "id": 1146,
+   "s": "ор"
+  },
+  {
+   "id": 1195,
+   "s": "ان"
+  },
+  {
+   "id": 1208,
+   "s": "ны"
+  },
+  {
+   "id": 1216,
+   "s": "彩票"
+  },
+  {
+   "id": 1231,
+   "s": "ом"
+  },
+  {
+   "id": 1257,
+   "s": "்�"
+  },
+  {
+   "id": 1260,
+   "s": "ел"
+  },
+  {
+   "id": 1267,
+   "s": "од"
+  },
+  {
+   "id": 1287,
+   "s": "ни"
+  },
+  {
+   "id": 1300,
+   "s": "್�"
+  },
+  {
+   "id": 1306,
+   "s": "ി�"
+  },
+  {
+   "id": 1325,
+   "s": "ار"
+  }
+ ]
+}

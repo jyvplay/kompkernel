@@ -1,0 +1,92 @@
+ENCODING o200k_base   ids scanned 200006   scan 179 ms
+BRIDGE TOKENS (containing >=1 ASCII and >=1 non-ASCII character): 41726
+distinct non-ASCII glyphs that participate in at least one bridge: 2748
+
+shape histogram (a = ASCII char, N = non-ASCII char):
+  aNNN          7022
+  aNNNN         5255
+  aNN           4834
+  aNNNNN        4024
+  aN            2912
+  aNNNNNN       2458
+  aNNNNNNN      1474
+  aaN            910
+  aNNNNNNNN      823
+  Naa            809
+  aaNa           801
+  Na             740
+  aaaN           558
+  Naaa           460
+
+ASCII class <-> non-ASCII block, the boundaries that matter for a body:
+  LETTER <-> Latin1Sup                           31238
+  SPACE <-> Latin1Sup                             5210
+  LETTER <-> Latin1Sup/Latin1Sup                  2840
+  SPACE <-> Cyrillic/Cyrillic/Cyrillic            1939
+  SPACE <-> Cyrillic/Cyrillic/Cyrillic/Cyrillic   1558
+  LETTER <-> U+1exx                               1535
+  SPACE <-> Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic  1494
+  LETTER <-> GenPunct                             1475
+  SPACE <-> Arabic/Arabic/Arabic                  1399
+  SPACE <-> Arabic/Arabic/Arabic/Arabic           1337
+  SPACE <-> Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic  1111
+  LETTER <-> U+10xx                               1014
+  SPACE <-> Arabic/Arabic/Arabic/Arabic/Arabic     954
+  LETTER <-> U+13xx                                784
+  LETTER <-> U+15xx                                777
+  SPACE <-> Arabic/Arabic                          720
+  SPACE <-> Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic   680
+  LETTER <-> U+11xx                                659
+  SPACE <-> Cyrillic/Cyrillic                      646
+  SPACE <-> Hangul/Hangul                          646
+  SPACE <-> CJK                                    553
+  SPACE <-> Hebrew/Hebrew/Hebrew                   522
+  SPACE <-> U+1exx                                 486
+  LETTER <-> U+17xx                                476
+
+the 24 glyphs that bridge most:
+  а  U+0430  Cyrillic      bridges=3974
+  о  U+043E  Cyrillic      bridges=3544
+  ا  U+0627  Arabic        bridges=3199
+  е  U+0435  Cyrillic      bridges=2862
+  р  U+0440  Cyrillic      bridges=2749
+  и  U+0438  Cyrillic      bridges=2597
+  т  U+0442  Cyrillic      bridges=2578
+  н  U+043D  Cyrillic      bridges=2236
+  с  U+0441  Cyrillic      bridges=2180
+  ل  U+0644  Arabic        bridges=2128
+  é  U+00E9  Latin1Sup     bridges=1886
+  л  U+043B  Cyrillic      bridges=1717
+  д  U+0434  Cyrillic      bridges=1457
+  в  U+0432  Cyrillic      bridges=1450
+  п  U+043F  Cyrillic      bridges=1443
+  к  U+043A  Cyrillic      bridges=1429
+  м  U+043C  Cyrillic      bridges=1425
+  م  U+0645  Arabic        bridges=1352
+  ر  U+0631  Arabic        bridges=1278
+  у  U+0443  Cyrillic      bridges=1259
+  و  U+0648  Arabic        bridges=1118
+  ن  U+0646  Arabic        bridges= 997
+  ت  U+062A  Arabic        bridges= 994
+  б  U+0431  Cyrillic      bridges= 930
+
+MARGINAL COST OF INSERTING ONE GLYPH INTO A REALISTIC CONTEXT (tokens added, 0.00 = free):
+  context             incumbent mean   bridge mean   difference
+  " "                      0.000         0.000       0.000
+  "\n"                     1.000         1.000       0.000
+  "  "                     1.000         1.000       0.000
+  "1 "                     0.000         0.000       0.000
+  " 4096"                  1.000         1.000       0.000
+  "root "                  0.000         0.000       0.000
+  " Nov "                  0.000         0.000       0.000
+  "-rw-r--r-- "            0.000         0.000       0.000
+  "the "                   0.000         0.000       0.000
+  "x="                     1.000         1.000       0.000
+  ":"                      1.000         1.000       0.000
+  " /"                     1.000         1.000       0.000
+  "9 "                     0.000         0.000       0.000
+  "drwxr-xr-x "            0.000         0.000       0.000
+  MEAN OVER CONTEXTS       0.429         0.429       0.000
+
+VERIFICATION: a bridge token must re-encode to exactly 1 token for the merge to be real.
+  bridges re-encoded: 600   exactly 1 token: 593   more: 7   (1.2% of vocabulary membership does NOT survive encoding)

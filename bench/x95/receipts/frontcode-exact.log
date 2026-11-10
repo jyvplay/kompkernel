@@ -1,0 +1,18 @@
+lane          msgTok  tapeTok  pure/mixed  newTapeTok  DELTA  dependency-order preserved
+apt-real         850      206    15/   49          213      7      true
+code-ts          969      247    40/   35          294     47      true
+dpkg-l           673      126    24/   24          153     27      true
+findmnt          444      124    15/   19          142     18      true
+json-pkg         681      145    23/   25          156     11      true
+kb-article       622       56    24/    3           84     28      true
+llm-answer       674       88    26/    8          111     23      true
+ls-l-real       1476      592    23/  120          605     13      true
+ls-real          433      159    22/   26          180     21      true
+ps-aux-real     1042      337    24/   55          352     15      true
+----------------------------------------------------------------------------------------------------
+TOTAL: msg 7864  tape 2080 -> 2290  DELTA 210  entries pure 236 / mixed 364
+
+reading: DELTA is the exact change in the COMPLETE message token count, body and contract
+both untouched. It is an upper bound on the arm because the contract must also describe the
+scheme, and the measured break-even for a new contract clause is ~20-25 tokens per lane. A
+negative DELTA on a lane closes front coding for that lane outright.

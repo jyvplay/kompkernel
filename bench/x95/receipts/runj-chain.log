@@ -1,0 +1,73 @@
+=== RUN J PASS 1: the gate (tagstackFrontier), expected exactly 12639, 0 lanes differing vs run H ===
+lsblk.txt                raw    60 F    60 exact=true parent=synkrisis 1923ms
+kb-article.txt           raw   656 F   622 exact=true parent=synkrisis 1950ms
+uptime-w.txt             raw    80 F    80 exact=true parent=synkrisis 1613ms
+free-m.txt               raw    76 F    76 exact=true parent=synkrisis 1786ms
+vmstat.txt               raw   229 F   149 exact=true parent=synkrisis 1883ms
+unified-diff.patch       raw   578 F   419 exact=true parent=synkrisis 2352ms
+df-h.txt                 raw   570 F   171 exact=true parent=akolouthia2 1638ms
+df-real.txt              raw   158 F   126 exact=true parent=synkrisis 3422ms
+du-real.txt              raw   458 F   272 exact=true parent=synkrisis 2940ms
+node-help.txt            raw  1099 F   862 exact=true parent=synkrisis 4902ms
+findmnt.txt              raw   787 F   444 exact=true parent=synkrisis 4580ms
+df-h.txt                 raw   140 F   108 exact=true parent=synkrisis 4142ms
+email-thread.txt         raw   629 F   488 exact=true parent=synkrisis 6050ms
+llm-answer.md            raw   733 F   674 exact=true parent=synkrisis 5877ms
+markdown-table.md        raw   330 F   176 exact=true parent=synkrisis 4952ms
+psql-output.txt          raw   675 F   244 exact=true parent=metron 8047ms
+prices.csv               raw   582 F   133 exact=true parent=diastema 7819ms
+cue-sheet.md             raw   513 F   163 exact=true parent=metron 9453ms
+ps-ef.txt                raw  1144 F   315 exact=true parent=synkrisis 8449ms
+ls-real.txt              raw  1034 F   433 exact=true parent=synkrisis 8803ms
+json-pkg.txt             raw  1152 F   681 exact=true parent=synkrisis 12214ms
+code-ts.txt              raw  1422 F   969 exact=true parent=synkrisis 19423ms
+dpkg-l.txt               raw  1000 F   673 exact=true parent=synkrisis 16396ms
+ps-real.txt              raw  1106 F   397 exact=true parent=synkrisis 9167ms
+kubectl-get-pods.txt     raw  1006 F   326 exact=true parent=akolouthia2 15130ms
+metrics.tsv              raw   811 F   210 exact=true parent=akolouthia2 11601ms
+ps-aux-real.txt          raw  3054 F  1042 exact=true parent=synkrisis 40882ms
+apt-real.txt             raw  2739 F   850 exact=true parent=synkrisis 70111ms
+ls-l-real.txt            raw  5194 F  1476 exact=true parent=synkrisis 179140ms
+
+FRONTIER 29 TOTAL 12639 exact 29/29 ms 466663
+X80 total 12639 -> X86 total 12639  lanes differing: 0
+FRONTIER CONFIRMED: identical to the X80 configuration, lane for lane.
+=== RUN J PASS 2: the shipped encoder (tagstackEncode), expected exactly 12491 ===
+lsblk.txt                    raw=   60 X74=   60(synkrisis    ) runE_F=   60 Δ=    0 exact=true 2057ms
+kb-article.txt               raw=  656 X74=  622(synkrisis    ) runE_F=  622 Δ=    0 exact=true 1948ms
+uptime-w.txt                 raw=   80 X74=   80(synkrisis    ) runE_F=   80 Δ=    0 exact=true 1743ms
+free-m.txt                   raw=   76 X74=   76(synkrisis    ) runE_F=   76 Δ=    0 exact=true 1836ms
+vmstat.txt                   raw=  229 X74=  149(synkrisis    ) runE_F=  149 Δ=    0 exact=true 2035ms
+unified-diff.patch           raw=  578 X74=  419(synkrisis    ) runE_F=  419 Δ=    0 exact=true 2456ms
+df-h.txt                     raw=  570 X74=  171(akolouthia2  ) runE_F=  171 Δ=    0 exact=true 2029ms
+df-real.txt                  raw=  158 X74=  126(synkrisis    ) runE_F=  126 Δ=    0 exact=true 3344ms
+du-real.txt                  raw=  458 X74=  272(synkrisis    ) runE_F=  272 Δ=    0 exact=true 2962ms
+node-help.txt                raw= 1099 X74=  862(synkrisis    ) runE_F=  862 Δ=    0 exact=true 5531ms
+findmnt.txt                  raw=  787 X74=  444(synkrisis    ) runE_F=  444 Δ=    0 exact=true 4662ms
+df-h.txt                     raw=  140 X74=  108(synkrisis    ) runE_F=  108 Δ=    0 exact=true 3937ms
+email-thread.txt             raw=  629 X74=  488(synkrisis    ) runE_F=  488 Δ=    0 exact=true 6065ms
+llm-answer.md                raw=  733 X74=  674(synkrisis    ) runE_F=  674 Δ=    0 exact=true 6398ms
+markdown-table.md            raw=  330 X74=  176(synkrisis    ) runE_F=  176 Δ=    0 exact=true 5393ms
+psql-output.txt              raw=  675 X74=  244(metron       ) runE_F=  244 Δ=    0 exact=true 9147ms
+prices.csv                   raw=  582 X74=  133(diastema     ) runE_F=  133 Δ=    0 exact=true 11223ms
+cue-sheet.md                 raw=  513 X74=  101(stichomythia ) runE_F=  163 Δ=  -62 exact=true 11048ms
+ps-ef.txt                    raw= 1144 X74=  315(synkrisis    ) runE_F=  315 Δ=    0 exact=true 10980ms
+ls-real.txt                  raw= 1034 X74=  433(synkrisis    ) runE_F=  433 Δ=    0 exact=true 8971ms
+json-pkg.txt                 raw= 1152 X74=  681(synkrisis    ) runE_F=  681 Δ=    0 exact=true 13207ms
+code-ts.txt                  raw= 1422 X74=  969(synkrisis    ) runE_F=  969 Δ=    0 exact=true 21548ms
+dpkg-l.txt                   raw= 1000 X74=  673(synkrisis    ) runE_F=  673 Δ=    0 exact=true 16010ms
+ps-real.txt                  raw= 1106 X74=  397(synkrisis    ) runE_F=  397 Δ=    0 exact=true 10078ms
+kubectl-get-pods.txt         raw= 1006 X74=  326(akolouthia2  ) runE_F=  326 Δ=    0 exact=true 16361ms
+metrics.tsv                  raw=  811 X74=  210(akolouthia2  ) runE_F=  210 Δ=    0 exact=true 14132ms
+ps-aux-real.txt              raw= 3054 X74= 1042(synkrisis    ) runE_F= 1042 Δ=    0 exact=true 43969ms
+apt-real.txt                 raw= 2739 X74=  850(synkrisis    ) runE_F=  850 Δ=    0 exact=true 96384ms
+ls-l-real.txt                raw= 5194 X74= 1390(synkrisis    ) runE_F= 1476 Δ=  -86 exact=true 506881ms
+
+=== X89 AUTHORITATIVE (OMEGA_DET=1) ===
+run E tagstackFrontier TOTAL 12639   ->   tagstackEncode TOTAL 12491   delta -148
+exact 29/29   ms 842350
+lanes where the shipped chain beats the reported frontier: 2
+  ls-l-real.txt                1476 -> 1390  (-86)  parent synkrisis
+  cue-sheet.md                 163 -> 101  (-62)  parent stichomythia
+front3.json RESTORED identical to preX90
+RUN J COMPLETE

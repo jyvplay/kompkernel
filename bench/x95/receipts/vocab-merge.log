@@ -1,0 +1,56 @@
+ENCODING o200k_base   ids scanned 200006 (limit 200100, decode failures 94)   scan 103 ms
+vocabulary tokens made of >=2 non-ASCII characters: 23606
+distinct adjacent non-ASCII pairs that are ONE token: 12225
+
+top block combinations of mergeable tokens:
+  CJK+CJK                       2408
+  Cyrillic+Cyrillic+Cyrillic    1896
+  Cyrillic+Cyrillic+Cyrillic+Cyrillic  1329
+  Arabic+Arabic+Arabic          1187
+  Cyrillic+Cyrillic              823
+  Arabic+Arabic                  771
+  Cyrillic+Cyrillic+Cyrillic+Cyrillic+Cyrillic   719
+  Arabic+Arabic+Arabic+Arabic    503
+  Hebrew+Hebrew+Hebrew           448
+  CJK+CJK+CJK                    388
+  Hangul+Hangul                  387
+  Georgian+Georgian+Georgian     366
+
+the 20 glyphs that appear in the most mergeable tokens:
+  а  U+0430  Cyrillic        2156
+  и  U+0438  Cyrillic        1580
+  н  U+043D  Cyrillic        1409
+  е  U+0435  Cyrillic        1344
+  о  U+043E  Cyrillic        1324
+  т  U+0442  Cyrillic        1220
+  ا  U+0627  Arabic          1096
+  р  U+0440  Cyrillic        1061
+  л  U+043B  Cyrillic         915
+  с  U+0441  Cyrillic         771
+  ы  U+044B  Cyrillic         654
+  ي  U+064A  Arabic           562
+  у  U+0443  Cyrillic         559
+  д  U+0434  Cyrillic         557
+  к  U+043A  Cyrillic         557
+  ر  U+0631  Arabic           548
+  ്  U+0D4D  U+d4xx           539
+  м  U+043C  Cyrillic         526
+  в  U+0432  Cyrillic         516
+  י  U+05D9  Hebrew           495
+
+EMPIRICAL RUN COST using the top-K most mergeable glyphs (the ceiling on the relabelling lever):
+  K   runTokens  tok/glyph   control: K distinct Latin letters tok/glyph
+     4          2      0.5000        1  0.2500
+     8          5      0.6250        1  0.1250
+    16         11      0.6875        2  0.1250
+    32         26      0.8125        3  0.0938
+    64         57      0.8906        2  0.0313
+   128        119      0.9297        2  0.0156
+
+INCUMBENT: the ten shipped wires use 282 distinct glyphs in total.
+  all 282 concatenated (one occurrence each): 256 tokens = 0.9078 tok/glyph
+  the 282 MOST MERGEABLE glyphs in the vocabulary, same test: 273 tokens = 0.9681 tok/glyph
+  headroom if relabelling could reach the vocabulary optimum: -17 tokens on a 282-glyph run
+
+VERIFICATION of the merge claim: each reported pair is re-encoded and must return exactly 1 token.
+  pairs re-encoded: 400   encoded to exactly 1 token: 333   more than 1: 67

@@ -35,3 +35,5 @@ bench/x90/*.mjs
 
 bench/x91/*.mjs
 bench/x94/*.mjs
+bench/x95/*.mjs
+bench/x96/*.mjs

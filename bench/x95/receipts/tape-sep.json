@@ -1,0 +1,115 @@
+{
+ "note": "exact token cost of the tape under four serialisations; zero frontier calls",
+ "lanes": [
+  {
+   "lane": "apt-real",
+   "entries": 64,
+   "tapeTokens": 206,
+   "spaceBeforeGlyph": 222,
+   "deltaSpaceBeforeGlyph": 16,
+   "spaceAfterGlyph": 235,
+   "deltaSpaceAfterGlyph": 29,
+   "newlineBeforeGlyph": 271,
+   "deltaNewlineBeforeGlyph": 65
+  },
+  {
+   "lane": "code-ts",
+   "entries": 75,
+   "tapeTokens": 247,
+   "spaceBeforeGlyph": 271,
+   "deltaSpaceBeforeGlyph": 24,
+   "spaceAfterGlyph": 292,
+   "deltaSpaceAfterGlyph": 45,
+   "newlineBeforeGlyph": 314,
+   "deltaNewlineBeforeGlyph": 67
+  },
+  {
+   "lane": "dpkg-l",
+   "entries": 48,
+   "tapeTokens": 126,
+   "spaceBeforeGlyph": 145,
+   "deltaSpaceBeforeGlyph": 19,
+   "spaceAfterGlyph": 157,
+   "deltaSpaceAfterGlyph": 31,
+   "newlineBeforeGlyph": 176,
+   "deltaNewlineBeforeGlyph": 50
+  },
+  {
+   "lane": "findmnt",
+   "entries": 34,
+   "tapeTokens": 124,
+   "spaceBeforeGlyph": 140,
+   "deltaSpaceBeforeGlyph": 16,
+   "spaceAfterGlyph": 142,
+   "deltaSpaceAfterGlyph": 18,
+   "newlineBeforeGlyph": 155,
+   "deltaNewlineBeforeGlyph": 31
+  },
+  {
+   "lane": "json-pkg",
+   "entries": 48,
+   "tapeTokens": 145,
+   "spaceBeforeGlyph": 158,
+   "deltaSpaceBeforeGlyph": 13,
+   "spaceAfterGlyph": 166,
+   "deltaSpaceAfterGlyph": 21,
+   "newlineBeforeGlyph": 193,
+   "deltaNewlineBeforeGlyph": 48
+  },
+  {
+   "lane": "kb-article",
+   "entries": 27,
+   "tapeTokens": 56,
+   "spaceBeforeGlyph": 58,
+   "deltaSpaceBeforeGlyph": 2,
+   "spaceAfterGlyph": 79,
+   "deltaSpaceAfterGlyph": 23,
+   "newlineBeforeGlyph": 80,
+   "deltaNewlineBeforeGlyph": 24
+  },
+  {
+   "lane": "llm-answer",
+   "entries": 34,
+   "tapeTokens": 88,
+   "spaceBeforeGlyph": 94,
+   "deltaSpaceBeforeGlyph": 6,
+   "spaceAfterGlyph": 110,
+   "deltaSpaceAfterGlyph": 22,
+   "newlineBeforeGlyph": 112,
+   "deltaNewlineBeforeGlyph": 24
+  },
+  {
+   "lane": "ls-l-real",
+   "entries": 143,
+   "tapeTokens": 592,
+   "spaceBeforeGlyph": 657,
+   "deltaSpaceBeforeGlyph": 65,
+   "spaceAfterGlyph": 677,
+   "deltaSpaceAfterGlyph": 85,
+   "newlineBeforeGlyph": 739,
+   "deltaNewlineBeforeGlyph": 147
+  },
+  {
+   "lane": "ls-real",
+   "entries": 48,
+   "tapeTokens": 159,
+   "spaceBeforeGlyph": 181,
+   "deltaSpaceBeforeGlyph": 22,
+   "spaceAfterGlyph": 196,
+   "deltaSpaceAfterGlyph": 37,
+   "newlineBeforeGlyph": 213,
+   "deltaNewlineBeforeGlyph": 54
+  },
+  {
+   "lane": "ps-aux-real",
+   "entries": 79,
+   "tapeTokens": 337,
+   "spaceBeforeGlyph": 362,
+   "deltaSpaceBeforeGlyph": 25,
+   "spaceAfterGlyph": 389,
+   "deltaSpaceAfterGlyph": 52,
+   "newlineBeforeGlyph": 419,
+   "deltaNewlineBeforeGlyph": 82
+  }
+ ]
+}

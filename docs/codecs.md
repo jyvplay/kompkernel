@@ -8758,3 +8758,586 @@ via `.gitignore`, as for `bench/x91`). Receipts `bench/x94/receipts/tape-margina
 `validate-semantics.{json,log}`. `src/` untouched.
 
 [`docs/codec-abbreviations.md`](codec-abbreviations.md) §X94.
+
+---
+
+## X95 ἈΝΑΚΛΗΣΙΣ — eleven measured closures of the compression frontier, and a probe loop that allocates nothing
+
+### A. Runtime honesty
+
+What was actually available and used this turn: `node` (the only execution engine), `tsc --noEmit`
+(typecheck), `esbuild` (bundling), the repository's own encoders and decoders, `node --cpu-prof`
+with the V8 sampling profiler, `git` and `gh`. Ten frontier lanes' committed wires under
+`bench/x87/receipts/wires/` were read as data. Web search and page fetch were used for the
+external-literature survey in §X94 and are not repeated here.
+
+What was **not** available, and is therefore not claimed: no theorem prover (no Lean, no Coq), no
+SAT/SMT solver, no model API, no second human reviewer, no `tiktoken` (its blob host is blocked),
+and no parallelism. Every run reported below was a single sequential process. The V8 profiler was
+run three times per configuration and the **median** sample count is reported, because a single
+profiled run differs by more than the effect being measured (the first attempt compared one run
+against one run and produced a 7 % "speedup" that three runs each refuted).
+
+### B. Formal model
+
+**Admissible objects.** A message is `contract + '§' + tape + '¶' + body`, where the tape is the
+concatenation `<glyph><value>` entries in definition order, the body is the source with repeated
+spans replaced by their glyphs, and the contract is natural language a reader needs. A *move* is a
+transformation of the tape or the body that yields another legal message.
+
+**Information/access model.** The decoder sees the message and nothing else. The encoder may read
+the source and the vocabulary of `o200k_base` (via `decodeIds`), but may not use any side channel:
+no cross-message dictionary, no external file, no prompt.
+
+**Resource counted.** Three, kept separate and never traded against each other: (i) tokens of the
+**complete** message under `countTokensExact`; (ii) the SHA-256 of the complete message, for
+identity; (iii) CPU samples under `--cpu-prof`, for speed. Token counts alone are never accepted as
+evidence of an unchanged wire — this corpus produced a wire change at an unchanged token count
+three times (X89 `df-real`, X89 `df-h`, X93).
+
+**Success and failure, with quantifier order.** The arm succeeds iff **for every** lane in the
+29-lane frontier set, **for every** pass, the emitted message's SHA-256 equals the control's, and
+the median profiled sample count over three runs is strictly lower. Failure is **there exists** a
+lane whose digest differs, at **any** token count. The order matters: identity is checked first and
+a token-count match is not a substitute.
+
+**Units and tolerances.** Tokens are exact integers. Wall-clock milliseconds are *not* used as a
+speed receipt: cross-process drift on this machine is ~1.6×, and per-lane swings of ±25 % were
+observed between two runs of the same binary. Only profiled CPU samples are used, and only as a
+median of three.
+
+### C. Frontier re-confirmation
+
+**RUN I** (`bench/x86/run-front-i.sh`, receipts `frontier-runI.{json,log}` and
+`front3-runI.{json,log}`) re-ran both passes against the X80 configuration before any `src/`
+change: gate `tagstackFrontier` **12 639**, `exact 29/29`, `ms 497067`, "FRONTIER CONFIRMED:
+identical to the X80 configuration, lane for lane"; shipped `tagstackEncode` **12 491**,
+`exact 29/29`, `ms 864649`, 2 lanes where the shipped chain beats the reported frontier
+(`ls-l-real` 1476→1390, `cue-sheet` 163→101). `front3.json` was restored and verified identical to
+`front3-preX90.json` with `cmp`. **The frontier is exactly the configuration named by the test run
+last turn: gate 12 639, shipped 12 491, 0 differing.**
+
+**RUN J** (`bench/x86/run-front-j.sh`) is the gate for this turn's `src/` change; its numbers are
+in §F.
+
+### D. Negative space — eleven result shapes that look like solutions and are not
+
+Each of these was priced exactly, on the complete message, with zero frontier calls. All eleven are
+negative, and each is recorded with the receipt that makes it exact rather than as an absence of
+findings.
+
+| # | Shape that looks like a solution | Exact measurement | Receipt |
+|---|---|---|---|
+| 1 | Second-level rules over glyph-run n-grams | 0 of 238 candidates profitable; net delta 0; fidelity exact on all ten wires | `runmerge.{json,log}` |
+| 2 | Relabel glyphs toward the vocabulary's most-mergeable set | Incumbent 282 shipped glyphs cost 256 tokens (0.9078/glyph); the vocabulary's 282 *most mergeable* cost 273 (0.9681) ⇒ **headroom −17** | `vocab-merge.{json,log}` |
+| 3 | Choose glyphs for their bridge behaviour at glyph↔literal boundaries | Marginal cost identical: **0.429 for both pools, difference 0.000 in all 14 contexts** | `vocab-bridge.{json,log}` |
+| 4 | Absorb the space in front of a reference run | Only 36 of 1 414 runs are space-preceded and **all 36 already merge** ⇒ headroom 0 | `space-bridge-headroom.{json,log}` |
+| 5 | Reduce the tokenizer's severance at run boundaries | Total boundary cost **−38** over 1 414 runs (already net-beneficial); LETTER/DIGIT/NEWLINE exactly 0.000; **the vocabulary contains zero digit↔non-ASCII bridge tokens**, so that class is closed by the tokenizer, not by search | `boundary-census.{json,log}` |
+| 6 | Pick a better glyph for each tape entry | Upper bound **44 tokens** over 600 entries (0.56 %), computed per entry independently and ignoring the body interaction, so the realisable figure is lower | `tape-glyph-headroom.{json,log}` |
+| 7 | Absorb a single-occurrence literal span to weld two runs into one | **0 wins in 1 160** absorbable spans; sum of deltas +2 100 | `span-absorb.{json,log}` |
+| 8 | Serialise the tape with a field separator | Space before the glyph **+208**, space after **+363**, newline before **+592** — all cost | `tape-sep.{json,log}` |
+| 9 | Extract a repeated long run as a meta-rule | Of 1 414 runs, 471 are repeated, but **no run of length ≥ 5 repeats at all**; the 471 extra occurrences are 431 at length 1 and 51 at length 2 with multiplicity ≈ 2 | (census, §D.9) |
+| 10 | Extract a shared prefix from the tape's values | **0 wins in 45** candidates priced on the complete message | `tape-prefix.{json,log}` |
+| 11 | Extract a shared suffix from the tape's values | **0 wins in 116** candidates | `tape-suffix.{json,log}` |
+| 12 | Front-code the tape's value column — sort the entries and store each shared-prefix *length* as one digit instead of the prefix itself | **+210 tokens, worse on all ten lanes.** Only 236 of 600 values are glyph-free and therefore sortable; the other 364 contain rule references and are pinned by the positional constraint. A +114 upper bound derived from a density conversion was refuted by the exact price | `frontcode.{json,log}`, `frontcode-exact.{json,log}` |
+
+**The modal shortcut and why it fails.** The tempting shortcut is: "the tape's values are the
+distinct content and they are priced at 2.59 ch/tok, far below the 4.3 ch/tok English ceiling, so
+re-encoding them denser must win." It fails because the ceiling argument is about *readable ASCII*,
+and the values are not free to be re-spelled — a value is the bytes the body must expand to, so any
+re-spelling must be invertible by a reader holding only the message, which reintroduces exactly the
+dictionary whose cost rows 10 and 11 just measured. **The test that detects the failure** is
+`tape-values.ts`: it prices the value population exactly (4 323 chars → 1 671 tokens, 2.59 ch/tok)
+and simultaneously reports that 9.7 % of values begin with a digit, where the vocabulary holds
+**zero** bridge tokens, so no glyph can merge into them at all. A re-spelling argument that does not
+price the entry cost and the boundary cost is pricing the wrong object.
+
+**The classical technique that this turn rediscovered and then refuted.** Front coding — also called
+incremental encoding or front compression — encodes a lexicographically sorted string as the pair
+(ℓ, α): the length of the longest common prefix with its predecessor, and the remainder
+([Wikipedia, *Incremental encoding*](https://en.wikipedia.org/wiki/Incremental_encoding)). It is the
+standard way search-index lexicons are stored, and the literature reports ~40 % on such lexicons.
+Row 12 above is this technique applied to the tape, and it **loses by 210 tokens on all ten lanes**,
+for a reason the literature itself records twice: Apache Druid's front-coding implementation notes
+that its benchmark "does pretty poorly with this encoding due to being composed of numbers which
+have been translated directly into strings, leaving few prefixes to take advantage of … so this is
+likely near worst case for this encoding strategy"
+([apache/druid PR #12277](https://github.com/apache/druid/pull/12277)), and a string-dictionary study
+observes that front coding "cannot see that far by construction because it only ever looks at the
+previous value", proposing a *shared prefix table per chunk* instead
+([tamnd/rudb issue #575](https://github.com/tamnd/rudb/issues/575)). That proposed fix is exactly
+row 10, measured here at 0 wins in 45 candidates. **The refutation is therefore not local to this
+stack: it is the published failure mode of the technique on this shape of data, reproduced
+independently.** The one refinement the literature offers that was not separately priced here is
+storing the prefix lengths as a contiguous block header rather than interleaved with the suffixes
+(*plain front coding* vs *inline front coding*, [Adaptive String Dictionary Compression, EDBT
+2014](https://openproceedings.org/2014/conf/edbt/0002RF14.pdf)); the block form would move roughly
+157 of the 236 length-digit tokens into a 3.0 ch/tok digit run, leaving the lane still a net loss
+before any contract tax, so it was not built.
+
+**What the eleven closures establish.** The data side of the readable stack is at a measured local
+optimum, from eleven independent directions: dictionary moves (1, 7, 9, 10, 11), glyph choice
+(2, 3, 6), boundary behaviour (4, 5), and serialisation (8). The remaining gap to the blind
+compressor — 23–26 % on ops lanes — is the price of self-description, which is what the contract
+and the tape are.
+
+### E. The mechanism: ἈΝΑΚΛΗΣΙΣ
+
+ἈΝΑΚΛΗΣΙΣ (a calling-back, a revocation) is what the ARIADNE glyph-assignment hill-climb does to a
+candidate it rejects. It is a **speed arm**: it changes no wire, adds no tape entry, and is
+therefore trivially byte-perfect, exact-lossless and directly model-readable — the message a user
+receives is bit-identical to the one the previous turn's stack produced.
+
+**The central construction.** `renderBest`'s probe loop scored a candidate assignment by first
+*copying* the whole assignment (`const trial = arr.slice()`), then *rebuilding a set of every glyph*
+to re-verify the no-duplicate invariant (`new Set(trial).size !== trial.length`), then handing both
+arrays to `scoreRunCostDelta`, which *re-scanned every slot* to discover which ones had moved. All
+three are O(needed) and the loop runs millions of probes per document. ἈΝΑΚΛΗΣΙΣ replaces them with:
+
+1. **In-place probing with revocation.** The move is applied to a single reused trial buffer through
+   `put(i, c)`, which logs the slot and its previous value. A rejected probe is undone by
+   `rollback()`, which walks the log backwards and restores both the array and the glyph multiset.
+   An accepted probe clears the log and copies once.
+2. **An incrementally maintained invariant.** `glyphCount` is the multiset of the trial's glyphs and
+   `overCount` is the number of glyphs appearing more than once, so "no duplicates" — which the
+   original tested by building a Set of every glyph — is a single integer comparison.
+3. **Slot-indexed scoring.** `scoreRunCostDeltaSlots` receives the changed slots directly instead of
+   scanning the assignment to find them.
+4. **Scratch-backed costs.** The recomputed per-pattern costs go into module-level `Int32Array` /
+   `Float64Array` scratch (`UPD_IDX`/`UPD_VAL`) rather than a freshly allocated two-element array
+   per affected pattern. This was the single largest measured win: the X95 profile showed 5.6 % of
+   the run in the garbage collector, almost all of it tuples that were allocated and immediately
+   discarded because the probe was rejected.
+
+**Why it is exact, not an approximation.** The affected-pattern set is the union, over the slots
+whose glyph changed, of `patternsBySlot[slot]`; given the exact changed-slot list that union is
+identical to what the scan computed. The visiting order of the affected patterns does not change the
+returned total, because the total is `state.total + Σ(v_i − costs_i)·mult_i` over the affected set,
+which is order-independent, and the acceptance test is `total <= bestRun`. The X59
+branch-and-bound early exit is sound for any visiting order, since at every step
+`total − maxSavingLeft` is a valid lower bound on the final total (a nonempty run string costs at
+least one token), so abandoning skips only work whose outcome was already decided. `workTick` is
+called exactly once per invocation, as before, so the deterministic work budget — and therefore the
+search trajectory — is unchanged.
+
+### F. Verification
+
+**Fidelity.** All 29 frontier lanes were encoded through the shipped chain `tagstackEncode` before
+and after the change and scored on the SHA-256 of the complete message: **29 of 29 digests
+identical, 12 491 tokens before and after, `exact` on all 29.** Two lanes share the basename
+`df-h.txt`, so the digest comparison is reported over 28 distinct names plus the duplicate pair,
+which was compared explicitly.
+
+**Speed.** `node --cpu-prof` on `bench/holdout-x40/metrics.tsv`, three runs of the unpatched build and
+four of the patched build, median sample count **15 060 → 14 677**, a **2.5 % reduction in CPU time**
+(×1.026). The garbage collector's share fell from 5.6 % to 4.1 %, which is the tuple fix.
+**The end-to-end wall-clock change across the 29 lanes is inside this machine's noise band and is
+explicitly not claimed as a speedup.** An earlier version of the arm was measured at −1.4 % (a small
+loss) before the scratch-backed costs were added; that measurement is reported because it is the
+reason the tuple allocation was worth removing.
+
+**A contaminated timing run, recorded as such.** The 29-lane "after" wall-clock run was executed
+while two measurement probes ran concurrently on the same machine and reported 2 691 351 ms against
+a clean control of 1 022 584 ms. That run's **digests and token counts are valid** — they are
+load-independent — and they are the fidelity evidence in §F. Its milliseconds are discarded. This is
+the same failure mode the repo already records for run I, and it happened again here because the
+probes were started without checking that the chain was still using the CPU.
+
+**Frontier.** RUN J, receipts `bench/x86/receipts/frontier-runJ.{json,log}` and
+`bench/x89/receipts/front3-runJ.{json,log}`: gate and shipped totals and the differing-lane count
+are recorded there. This is the first turn since X90 to change a file under `src/lib/omega/`, so
+RUN J is a test rather than a formality: a sound arm can only leave the gate total unchanged or
+raise it and the shipped total unchanged or lower it.
+
+### G. What is not claimed
+
+- **No compression gain.** ἈΝΑΚΛΗΣΙΣ is token-neutral on every lane. It is not a compression codec
+  and is not presented as one.
+- **No significant end-to-end speedup.** 2.5 % of CPU time inside one function, on one lane, under
+  a profiler. Wall-clock across 29 lanes moved by less than the noise.
+- **No claim that the eleven closures are global.** Each is a measurement over the ten committed
+  wires and the populations they define. A different corpus could behave differently; what is
+  claimed is that these specific levers, priced exactly on this corpus, do not pay.
+- **No claim of independent verification.** The round trip, the fuzz, the contract parser and this
+  arm's own A/B all share `ariadne.ts`'s code path and were written by the same author. The
+  independent artefacts remain the CPython reader, the committed cross-turn receipts, and the
+  source bytes used by `validate-semantics`.
+
+### H. Record
+
+New this turn: `bench/x95/{runmerge,vocab-merge,vocab-bridge,space-bridge-headroom,boundary-census,tape-glyph-headroom,span-absorb,tape-sep,tape-values,tape-prefix,tape-suffix,speed-ab}.ts`
+with receipts under `bench/x95/receipts/`, and `bench/x86/run-front-j.sh`. `src/lib/omega/ariadne.ts`
+is the only `src/` file changed. `.gitignore` gains `bench/x95/*.mjs`.
+
+[`docs/codec-abbreviations.md`](codec-abbreviations.md) §X95.
+
+---
+
+# §X96 — ἸΣΟΜΟΡΦΊΑ: the wire is not determined by the text
+
+### RUNTIME HONESTY
+
+Available and actually used this turn: `npx tsc --noEmit -p tsconfig.json` (exit 0, several times),
+`npx esbuild` (bundling probes and the frontier harnesses), `node` (all probes and the 29-lane runs),
+`python3` (text surgery on probe sources), `grep`/`sed`/`cmp`/`find`, `web_search` and `fetch_page`
+(three live searches, all on sources not previously cited by this stack: arXiv:2602.22958,
+arXiv:2609.15991, arXiv:2604.02343, arXiv:2610.17586, plus ACL 2024.emnlp-main.40), and
+`node --cpu-prof` was NOT run this turn.
+
+**Not available, and therefore not claimed:** no Lean, Coq, Agda, Isabelle or any theorem prover; no SAT
+or SMT solver; no model API and no second reviewer; no independent implementation of the decoder beyond
+`chironDecode` in this repository; no GPU; no parallel execution — every run below is a single
+sequential `node` process. **No claim is made of any search, verification or measurement that did not
+run.** Where a probe had a bug, the bug is published with the receipt that exposes it rather than the
+number it produced.
+
+### A. FORMAL MODEL
+
+**1. Admissible objects.** A *wire* is a string `contract § tape ¶ body` where `tape` is a
+delimiter-free sequence of rules, each rule being one **new** letter of a declared one-token script
+followed by its text, and each rule's text referencing only letters of **strictly earlier** rules
+(`chiron.ts`). The text is the decoded expansion. Two wires are *equivalent* iff they decode to the
+same string. An *incumbent* is a complete message the frontier would otherwise emit.
+
+**2. Information/access model.** The encoder sees the source text and the incumbent's complete message.
+The decoder sees only the message. No side channel, no shared state, no out-of-band dictionary.
+
+**3. Resource counted.** `countTokens(message, 'o200k_base')` — the number of tokens of the complete
+one-chat message. Nothing else is optimised and nothing else is reported as a gain.
+
+**4. Success and failure, with quantifier order.** The pass succeeds on a lane iff
+`∃ permutation π of the incumbent wire such that decode(π(w)) = text ∧ countTokens(π(w)) < countTokens(w)`,
+both measured in the same process. Failure is `∀ π in the search neighbourhood: ¬(...)` — which is a
+statement about the *neighbourhood searched*, not about all permutations, and is reported as such.
+The turn's success predicate is stronger and is the one that was actually run:
+`∀ lane ∈ 29: decode(message_lane) = text_lane ∧ countTokens(message_lane) ≤ countTokens(incumbent_lane)`,
+with at least one lane strictly less.
+
+**5. Parameter regime, boundary conditions, units, tolerances.** Encoding `o200k_base`. Lanes are the
+29 committed holdout files, 60–5 194 raw tokens. Units are tokens. The climb budget is 400 probes
+(measured knee, see §F), patience 260, character ceiling 40 M. Boundary conditions: the pass is skipped
+when the message has no tape marker, when the tape does not parse, when fewer than four letters are in
+use, or when the script's pool (filtered against the source text) is smaller than the letters in use.
+
+**6. Adjacent problems that must NOT be substituted.**
+- *Choosing a better rule set.* That is X94's dictionary problem and it is closed; ἸΣΟΜΟΡΦΊΑ does not
+  add, delete or edit a single rule.
+- *Re-encoding the text.* Every other X74 candidate re-encodes; this one takes the incumbent's message
+  as given.
+- *Optimising the body's reference runs only.* That is ARIADNE's objective, and §F shows it is the wrong
+  objective for this pass.
+- *Choosing the script.* Priced and refused this turn (§F, lever 14).
+- *Admitting CHIRON's block pass.* Priced and refused this turn (§F, lever 15).
+
+### B. OUTCOME SPACE
+
+- **H+ (achievable, and achieved).** The rule→letter map and the rule order are free parameters of the
+  wire that the shipped search does not price against the message metric. Re-climbing them against the
+  complete message yields a strictly smaller complete message on 9 of 29 lanes, exact on all 29.
+- **H− (impossible under the stated constraints).** No gain from the *assignment* move alone: measured
+  0 over 8 seeds × 10 wires (§F, lever 13). No gain from changing the script: +374 worse from scratch.
+  No gain from CHIRON as a candidate: +2 670 against the gate. These are the boundaries of H+.
+- **H∂ (changes at a boundary).** The pass needs ≥4 letters in the tape and a script pool at least as
+  large as the letters in use, filtered against the source text. Below that it is inert. `ls-l-real`
+  carries an extra contract clause (`After ~, a number has . before its last 1,1 digits`) that
+  `chironDecode` does not implement, so no relabelling of it can be verified by the real decoder here;
+  it is quarantined in the probes and simply not improved in the chain.
+
+**Evidence threshold, declared before the numbers were read:** a claim of a frontier move requires
+(a) `exact` on all 29 lanes, (b) zero lanes worse, and (c) the improvement reproduced by the committed
+harness under `OMEGA_DET=1` in a fresh process. All three were met.
+
+### C. FRONTIER
+
+**Imported results, restated with the hypotheses actually needed.**
+
+- **PathPiece** (ACL Anthology 2024.emnlp-main.40, *Tokenization Is More Than Compression*). Hypothesis:
+  a vocabulary is used by a specific segmentation algorithm. Result: "In order to design an optimal
+  vocabulary V, it is first necessary to know how the vocabulary will be used to tokenize. There can be
+  no best vocabulary in the abstract." **Use here:** this is the formal reason the wire's alphabet and
+  the wire's letter map cannot be chosen once and for all — they are only optimal relative to the
+  tokenizer that will price them, which is exactly the quantity ἸΣΟΜΟΡΦΊΑ optimises against.
+- **Frequency-Ordered Tokenization** (arXiv:2602.22958, v1 Feb 2026, v2 Oct 2026, Kalcher). Hypothesis:
+  BPE assigns IDs in merge order, not frequency order, and natural-language token frequencies obey
+  Zipf's law. Result: renumbering IDs by frequency shrinks the coded stream *and* makes the downstream
+  compressor faster at the same time (zlib 7.96 pp, xz 2.24 pp, brotli 1.96 pp, zstd 1.44 pp; 1.6×–5.0×
+  faster). **Use here:** the first published demonstration that *renumbering a code assignment* is a
+  compression lever in its own right, independent of the code set. That is the class ἸΣΟΜΟΡΦΊΑ belongs
+  to; the difference is that our codes are Unicode letters priced by a live tokenizer rather than
+  integers priced by varint width, and our measurement is the exact whole-message token count.
+- **The Functionalizer** (arXiv:2609.15991, 2026, Makowski & Guter). Hypothesis: orthographic variants
+  of a word are unrelated vocabulary entries under a standard tokenizer. Result: a reversible
+  opcode/operand prefix stream (CAPITALIZE, 13 diacritic opcodes, REPEAT/MULTIREPEAT) cuts vocabulary
+  slot requirements by up to 19.7 %. **Use here:** cited as the closest published neighbour and as the
+  reason the *derived-rule* variant of this idea was priced and refused — see §F, lever 13's note.
+
+**The exact open interface.** None of the above prices a *delimiter-free grammar tape* against a live
+tokenizer, and none of them considers the *order* of a tape's rules as a free parameter. That is the
+interface ἸΣΟΜΟΡΦΊΑ occupies. It is small, and §F measures exactly how small.
+
+### D. NEGATIVE SPACE — eighteen shapes that look like solutions
+
+1. **"−128 tokens from a better assignment."** My first probe reported this. It was a bug: `render`
+   used sequential `split(k).join(v)`, which *chains* substitutions (if v₁ equals k₂ the later rule
+   also rewrites the character just inserted). The corrected per-character relabelling reports **0**
+   over 8 seeds × 10 wires. Published because the number was real output of real code.
+2. **"−14 from reordering."** My first reorder probe reported this. The swap-validity test was inverted
+   (`d[i][j]`, vacuously false for an adjacent pair of the incumbent order), so it emitted *invalid*
+   orders; exactly the three lanes with the biggest "gains" failed `chironDecode`. Corrected: **−11**.
+3. **"The script is a free lever."** A naive relabelling into each of the eight scripts, with the same
+   climb budget, is **+374 (+4.76 %) worse** in aggregate. The incumbent's *assignment* is worth far
+   more than the script.
+4. **"CHIRON is an unadmitted candidate."** `chironEncode` on all 29 lanes is **+2 670 (+21.1 %) vs the
+   gate** and beats it on 0 lanes, exact 29/29. It emitted `×` and `…` **zero** times: `chironFindBlocks`
+   found nothing profitable. The block/column machinery is genuinely worse than the SLP on this corpus.
+5. **"Just climb harder."** 20 000 iterations of the reorder lever give the same −11 as 400. The lever
+   is saturated, not under-searched.
+6. **"More seeds."** 8 seeds × 10 wires on the assignment move: 0 improvements on every lane, every seed.
+7. **"A derived rule (`β = OP(α)`)."** The Functionalizer's shape, priced against X94's T=1 law
+   (`profit = −0.981k − 3.11`): an opcode glyph plus a reference costs more than the suffix-literal
+   form that X95 closure 11 already measured at 0 wins of 116.
+8. **"Front coding the tape's values."** Closed in X95 at **+210, worse on all ten lanes**; Druid calls
+   numeric-ish data "likely near worst case" for it and rudb notes front coding "only ever looks at the
+   previous value".
+9. **"A control checked against a number the code under test produced."** `iso29.ts` diffs against
+   `front3-runJ.json`, which was produced by a *different* process of the same harness — that is the
+   committed cross-turn receipt, not a self-comparison, and it is the reason the −13 is admissible.
+10. **"The ms column is a speed claim."** It is not, and it is contaminated: the 29-lane ἸΣΟΜΟΡΦΊΑ run
+    overlapped RUN K on the same box (`ls-l-real` 2 449 s against RUN J's 507 s). The tokens and the
+    exactness survived; the milliseconds did not. Speed is measured separately, interleaved, in §H.
+11. **"Token counts prove fidelity."** They do not; `w.5c4` changes `ps-ef.txt`'s wire at an unchanged
+    315. Fidelity here is `chironDecode(message) === text`, the repository's own decoder.
+12. **"A permutation is obviously safe."** It is safe for the *letters*, but only because the first tape
+    letter still declares the same script and keys stay distinct. It is **not** safe for the *order*
+    unless the reference DAG is respected — see item 2.
+13. **"The body's runs are the whole cost."** They are 2 171 of 7 864 tokens on the ten wires. Pricing
+    only them is what ARIADNE does, and it is the wrong objective for a pass that rewrites the tape.
+14. **"A census is an acceptance test."** X94's screen `est − 3.1 − k·σ` pruned 100 % of ADD+FACTOR
+    candidates and discarded the single winner. An estimate ranks; it never accepts.
+15. **"One favourable sample."** X95's single `--cpu-prof` pair showed +7 %; three runs each showed
+    −1.4 %. Same trap, and the reason §H uses three interleaved repetitions and reports medians.
+16. **"A quarantine is a zero."** `ls-l-real` cannot be verified by `chironDecode` because of its extra
+    contract clause. It is reported as quarantined, not counted as unchanged.
+17. **"The pass is free."** It is not: every probe is a full-message `countTokens`. §H prices it.
+18. **KILLING A CONCURRENT FRONTIER RUN CLOBBERED AN AUTHORITATIVE RECEIPT (X96, observed and
+    repaired).** After RUN K had restored `bench/x89/receipts/front3.json` from `front3-preX90.json`,
+    a *second*, older chain that was still running its own `front3` pass overwrote that file with a
+    **24-row, 8 664-token partial**. The repair was a second `cp` from `front3-preX90.json`, verified
+    three ways: `cmp` identical, `rows.length === 29`, and **`git diff` empty — i.e. byte-identical to
+    the committed receipt, not merely to the snapshot**. Two honest caveats. (a) `front3.ts` contains a
+    *single* end-of-run `writeFileSync` (line 45), so a run killed mid-flight should not have been able
+    to write a partial at all; the provenance of the 24-row file is therefore **not determined**, and
+    this entry records the observation and the repair rather than an explanation. (b) The lesson is
+    unaffected by which mechanism produced it: **`ps -p` every running chain before starting or killing
+    anything, and re-verify an authoritative receipt with `git diff` — not `cmp` against a snapshot —
+    after the run that clobbered it has exited.**
+19. **"A wall-clock gain below the noise floor."** Per-lane deltas on identical bytes range −8 % to
+    +36 % on this box. Anything under ±25 % is reported as a CPU-time change or not at all.
+
+**The modal shortcut, and the test that detects it.** The tempting shortcut is: *"the assignment is a
+free parameter, therefore a better assignment exists, therefore the frontier can be improved."* The
+modal step — from "free" to "improvable" — is exactly what fails. **Test:** `bench/x96/seeds.ts`, which
+runs the shipped climb over 8 independent seeds on 10 wires and reports the distribution. Result:
+`min = median = max = 0` on every lane, `improved = 0/8` everywhere. The shortcut is falsified by a
+receipt, not by an argument.
+
+### E. MECHANISM PORTFOLIO
+
+Six mechanism-distinct approaches were carried; four were priced and refused, two were built.
+
+| # | Mechanism | Central construction | Artifact | Proved portion | Unresolved interface | Cheapest falsification | Gap |
+|---|---|---|---|---|---|---|---|
+| M1 | **Whole-message assignment objective** | Re-climb rule→letter against `countTokens(complete message)` instead of `runCostPrepared` | `bench/x96/wholeobj.ts`, `seeds.ts` | The objective is the right one (ARIADNE prices 28 % of the message) | None found — the incumbent is a local optimum | 8 seeds × 10 wires: `dT = 0` on all | **Closed, negative** |
+| M2 | **Script co-optimisation** | Relabel into each of the 8 declared scripts, same climb budget | `bench/x96/wholeobj.ts` (sweep) | The script is a free parameter of the wire | Whether a *better search* in another script beats cyrillic | Naive relabelling + 500-probe climb: **+374** | **Closed, negative** |
+| M3 | **CHIRON as a frontier candidate** | Admit `chironEncode` (block/column/`×`/`…`) | `bench/x96/chiron29.ts` | The machinery exists and is exact (29/29) | Whether a work-unit bound instead of `budgetMs` changes the outcome | 29 lanes: **+2 670**, 0 wins, 0 blocks emitted | **Closed, negative** |
+| M4 | **Joint (order, assignment) climb** | Both move types, one objective | `bench/x96/joint.ts` | The neighbourhood is reachable and exact | Nothing unresolved; the assignment move is inert | 3 seeds: −11/−9/−7 — all of it from the order move | **Absorbed into M5** |
+| M5 | **ἸΣΟΜΟΡΦΊΑ: tape reordering under the reference DAG** | Swap two rules adjacent in the tape when the later does not reference the earlier | `src/lib/omega/isomorphia.ts` | Exact by isomorphism (§F proof); 9/9 decode-verified where verifiable | Whether a *non-adjacent* move (move a rule to any valid slot) finds more | 20 000 iterations: still −11 | **Shipped** |
+| M6 | **Frequency-ordered relabelling** (from arXiv:2602.22958) | Order letters by reference frequency so the hottest rules get the best-merging letters | Priced inside M1/M4 | The published mechanism transfers to code *assignments* | It is dominated by the local search already in M1 | M1's 0/80 result covers it | **Closed, negative** |
+
+### F. ARTIFACT REQUIREMENT
+
+**The exactness proof (M5).** Let `w = contract § k₁v₁ … kₙvₙ ¶ body` be the incumbent and let `π` be a
+bijection from `{k₁…kₙ}` onto a set of unused one-token letters of the same script, and let `ρ` be a
+permutation of `{1…n}` that is a topological sort of the reference DAG (`i` depends on `j` iff `vᵢ`
+contains `kⱼ`). Then
+
+1. `chironParseTape` returns one rule per key rather than `null`, because keys stay distinct.
+2. `scriptOf(tape[0])` resolves the same alphabet, because the first letter is still a letter of the
+   same script — so no existing wire changes meaning.
+3. Every reference still points at a strictly earlier rule, because `ρ` respects the DAG, so
+   `chironDecode`'s forward-reference guard (`at >= upto`) still passes and expansion terminates.
+4. `expand(relabel(v)) = expand(v)` for every rule text and for the body, because expansion is
+   substitution of earlier rules' expansions and relabelling composes with substitution.
+
+Therefore `decode(π,ρ(w)) = decode(w)`. **This is a proof, not a measurement** — and the pass
+nevertheless re-decodes every candidate through `chironDecode` and refuses to emit anything that does
+not reproduce the source exactly.
+
+**The measured knee.** `bench/x96/reorder.ts` at 150 / 400 / 1 000 / 4 000 / 20 000 iterations over the
+ten committed wires: **−10 / −11 / −11 / −11 / −11**. The lever saturates by ~150 probes, so the shipped
+budget is 400 (100 % of the measured gain at 44 % of the cost of the 900-probe revision).
+
+**Reproducible experiments, all under `bench/x96/`, all with receipts under `bench/x96/receipts/`,
+all with zero frontier calls except `iso29`/`isoab`:**
+
+| Probe | Receipt | Result |
+|---|---|---|
+| `wholeobj.ts` | `wholeobj.json` | whole-message vs body-runs objective; **0** over 8 seeds × 10 wires |
+| `wholeobj.ts` (sweep) | `wholeobj.json` | 8-script relabelling + 500-probe climb: **+374 (+4.76 %)** |
+| `chiron29.ts` | `chiron29.json` | CHIRON on 29 lanes: **+2 670 (+21.1 %) vs the gate**, 0 wins, 0 blocks |
+| `reorder.ts` | `reorder.json` | tape reordering: **−11 (−0.14 %)**, 6/10 lanes, saturating |
+| `seeds.ts` | `seeds.json` | the modal shortcut's falsification: `min=med=max=0`, `improved=0/8` |
+| `joint.ts` | `joint.json` | joint order+assignment: **−9 median** (−11/−7), 9/9 verified |
+| `iso29.ts` | `iso29.json`, `iso29.log` | shipped chain + ἸΣΟΜΟΡΦΊΑ on 29 lanes |
+| `isoab.ts` | `isoab.json`, `isoab.log` | interleaved single-process A/B, 3 reps, median ms |
+
+### G. SECOND-ORDER ADVERSARY
+
+- **A(M5) — "the reorder can break a forward reference."** The DAG check `dep[j][i]` is the guard. The
+  first version tested the wrong direction and emitted invalid orders; the corrected version is
+  decode-verified 9/9 wherever the decoder can verify. The one lane it cannot verify is quarantined.
+- **A(M5) — "a new letter may collide with payload text."** The pool is filtered against the source
+  text before the climb, and the filtered pool is asserted to be at least as large as the letters in
+  use. An incumbent letter is already collision-free by construction.
+- **A(M5) — "the pass could emit a worse message."** It cannot: `admit` requires
+  `messageTokens < best.messageTokens`, measured in the same process on the complete message.
+- **A(M5) — "the pass is non-deterministic."** The RNG is seeded, the budget is a pure function of the
+  message length, and there is no wall-clock term anywhere in the pass. Same input, same wire.
+- **A(M5) — "the pass starves the shared work budget."** The first revision consulted
+  `chironExhausted()` and did literally zero probes on all 29 lanes. `workEpoch` cannot open a fresh
+  window from inside the chain (it only resets at depth 0), so the pass carries its own local,
+  deterministic budget instead. That bug is published, not hidden.
+- **A(M5) — "the pass is free."** It is not. §H prices it interleaved.
+- **A(M5) — "a small gain invalidates the whole verification chain."** It does not change the gate
+  (`tagstackFrontier` has no X74 chain), and RUN K re-ran both tiers to confirm it.
+
+### H. VERIFICATION
+
+**Frontier, re-run this turn (RUN K).** `bench/x86/run-front-k.sh`, receipts
+`bench/x86/receipts/frontier-runK.{json,log}` and `bench/x89/receipts/front3-runK.{json,log}`:
+
+- **Pass 1, the gate:** `FRONTIER 29 TOTAL 12639 exact 29/29 ms 510991`, then
+  `X80 total 12639 -> X86 total 12639 lanes differing: 0` and
+  `FRONTIER CONFIRMED: identical to the X80 configuration, lane for lane.`
+  **The frontier is exactly the configuration named by the run last turn. No restatement is required.**
+- **Pass 2, the shipped tier:** `run E tagstackFrontier TOTAL 12639 -> tagstackEncode TOTAL 12478`,
+  `exact 29/29`. This is the first turn since X90 to add a new `src/` file to the chain, so RUN K is a
+  test rather than a formality.
+- **Receipt hygiene:** `front3.json` restored identical to `front3-preX90.json` (`cmp` verified).
+
+**The 29-lane ἸΣΟΜΟΡΦΊΑ measurement** (`bench/x96/receipts/iso29.json`, `OMEGA_DET=1`): 9 lanes improved,
+0 worse, `exact 29/29`, 12 491 → 12 478. Per lane: `apt-real` −4, `llm-answer` −2, `unified-diff` −1,
+`df-real` −1, `df-h` −1, `ps-ef` −1, `json-pkg` −1, `code-ts` −1, `dpkg-l` −1.
+
+**Fidelity.** Every candidate is re-decoded with `chironDecode`, the repository's own decoder, and
+refused if it does not reproduce the source. This is not a check against this pass's own idea of the
+format.
+
+**Speed — interleaved single-process A/B, and it is NOT a speed win.** `bench/x96/receipts/isoab.json`,
+three arms (pass skipped / 400 probes / 900 probes), three repetitions each, medians, `OMEGA_DET=1`
+**and** `OMEGA_NO_MEMO=1` (the memo's key is `X\u0000<text>\u0000<enc>` and does not include the
+environment, so without the bypass the second arm would be served the first arm's cached object).
+
+| lane | base | iso400 | Δ | iso900 | Δ | exact | ms base / 400 / 900 |
+|---|---|---|---|---|---|---|---|
+| `apt-real.txt` | **850** | **846** | −4 | 846 | −4 | true/true/true | 85 598 / 78 461 / 80 246 |
+| `code-ts.txt` | **969** | **968** | −1 | 968 | −1 | true/true/true | 2 149 / 3 294 / 3 267 |
+| `ls-real.txt` | **433** | **433** | 0 | 433 | 0 | true/true/true | 434 / 705 / 699 |
+
+The base column reproduces RUN K's committed numbers **exactly** (850 / 969 / 433), which is the
+control this A/B needed: it is checked against numbers the code under test did not produce in this
+process. `ls-real` is the negative control — the pass leaves its SHA-256 untouched.
+
+**The honest statement: ἸΣΟΜΟΡΦΊΑ costs CPU time and buys tokens. It is not a speed win.** On the one
+lane where it rewrote most, the interleaved median fell 85.6 s → 78.5 s (−8.4 %), which is *inside* the
+±25 % band this box has been measured to drift on identical bytes and is therefore reported as a
+CPU-time change, not a speedup. On the two lanes where it rewrote little or nothing it cost **+53 %**
+(2.15 s → 3.29 s) and **+62 %** (0.43 s → 0.71 s) — a real absolute cost of running a search that
+finds nothing. The 400-vs-900 comparison is the only place the pass is cheaper than it was: the knee
+measurement is what keeps the cost proportionate to a −4-token gain.
+
+**A second-order finding from this A/B, published because it invalidated my own first revision.** The
+first revision of `isoab.ts` did not set `OMEGA_DET`, and it reported `base = 861 / 986 / 433` against
+the committed `850 / 969 / 433` — **an 11-token and a 17-token discrepancy caused by one missing
+environment variable.** `src/lib/omega/clock.ts` freezes `now()` at 0 under `OMEGA_DET=1`; without it,
+every wall-clock budget in the chain fires for real and the searches stop early. **Any A/B, control or
+audit of this stack must set `OMEGA_DET=1`, or it is measuring a different codec.**
+
+**Downgrades, stated rather than buried.**
+- The `ms` column of the 29-lane ἸΣΟΜΟΡΦΊΑ run is **discarded**: it overlapped RUN K on the same box.
+- No claim of independent verification. `chironDecode`, the harnesses and the probes were all written by
+  the same author and share this repository's code path. The independent artefacts remain the CPython
+  reader from X87, the committed cross-turn receipts, and the source bytes.
+- No claim that the closures are global. Each is a measurement over the ten committed wires and the
+  populations they define.
+
+### I. REPAIR
+
+The pass was repaired three times this turn, and **a repaired candidate inherits no trust**:
+
+1. **Budget starvation** (`workExhausted()` true on entry ⇒ 0 probes on all 29 lanes). Repaired with a
+   local deterministic budget. New attack aimed at the patch: *is the local budget itself bounded?* —
+   yes, `maxProbes` is a pure function of the message length and `charBudget` is a hard 40 M ceiling.
+2. **Shape bug** (`startsWith(CHIRON_START)` rejected every message because the contract precedes the
+   marker). Repaired by locating the marker. New attack: *does the contract ever contain `§`?* — it
+   does not on any of the 29 lanes, and if it did the parse would throw and the pass would decline.
+3. **Move-set and budget tuning** (900 → 400 probes after measuring the knee). New attack: *does the
+   smaller budget lose the gain?* — re-measured on the full 29 lanes; see §H.
+
+Each repair re-ran `npx tsc --noEmit -p tsconfig.json` (exit 0) and the 29-lane gate.
+
+### J. STOPPING
+
+The compression frontier was **not** improved by a large margin this turn, and that is the honest
+result: seventeen levers were priced and sixteen were closed. What moved is the **shipped** tier, by
+−13 tokens (−0.104 %), from a degree of freedom — the tape's letter map and rule order — that no codec
+in this stack had ever searched against the metric we are billed on.
+
+**The exact remaining gap.** The gate is 12 639 and the shipped tier is 12 478; the ΑΙΘΗΡ entropy tier
+is 9 043 on the ten authoritative wires. The readability price is therefore ~28 % and this turn closed
+none of it. The next highest-information test is **not** another assignment or ordering search (both are
+saturated, with receipts); it is whether a *non-adjacent* reordering move — relocating a rule to any
+valid slot rather than swapping neighbours — reaches a different basin, which `bench/x96/reorder.ts`
+has not tested and which the −11 saturation does not rule out.
+
+### K. GENERALIZED LOCAL LEADERS — CURRENT STACK (X96)
+
+Re-measured this turn because X91's table joined the X90 shipped tier and ἸΣΟΜΟΡΦΊΑ has since moved
+9 lanes. `bench/x96/receipts/leaders-x96.{json,log}` is a pure join — `shipped` from
+`front3-runK.json`, `gate` from `frontier-runK.json`, `cat`/`raw`/`floor` from `leaders-x90.json`
+(**`raw` and `floor` are imported, not re-derived, and are not claimed as fresh measurements**) —
+with **zero frontier calls**, so no machine-load contamination. Leader rule: lowest `shipped/raw`;
+the headline leader is restricted to `raw >= 500` and printed **alongside** the unfiltered winner.
+
+| Category | lanes | raw → shipped | ratio | floor | headroom | LEADER (raw ≥ 500) | weakest |
+|---|---|---|---|---|---|---|---|
+| OPS TABLE | 11 | 4 135 → 1 724 | 0.4169 | 1 272 | **26.2 %** | `holdout-x40/metrics.tsv` 811 → 210 (0.2589) | `holdout-x42b/free-m.txt` 1.000 |
+| OPS LISTING | 9 | 16 516 → 5 810 | 0.3518 | 4 420 | **23.9 %** | `holdout-x41/ls-l-real.txt` 5 194 → 1 390 (0.2676) | `holdout-x42/dpkg-l.txt` 0.672 |
+| CODE / MARKUP | 3 | 3 152 → 2 066 | 0.6555 | 1 728 | **16.4 %** | `holdout/json-pkg.txt` 1 152 → 680 (0.5903) | `holdout-work/unified-diff.patch` 0.7232 |
+| DATA | 2 | 1 095 → 234 | 0.2137 | 209 | 10.7 % | `holdout-x40/cue-sheet.md` 513 → 101 (0.1969) | `holdout-x40/prices.csv` 0.2285 |
+| PROSE | 4 | 3 117 → 2 644 | 0.8483 | 2 529 | **4.3 %** | `holdout-work/email-thread.txt` 629 → 488 (0.7758) | `holdout-work/kb-article.txt` 0.9482 |
+| **ALL** | 29 | 28 015 → 12 478 | 0.4454 | 10 158 | 18.6 % | — | — |
+
+Three things this table says that the aggregate does not. **First, the money is still in ops**: OPS
+TABLE and OPS LISTING carry 26.2 % and 23.9 % headroom against the independent readability floor while
+PROSE carries 4.3 % — prose is nearly exhausted and ops is not, so the next codec should be aimed at
+ops and will be paid in the units the user actually ships. **Second, the two smallest lanes are
+degenerate**: `lsblk.txt` (60 → 60) and `free-m.txt` (76 → 76) compress to *nothing*, and both are the
+readability-price-law violations (`floor/shipped` 1.017 and 1.000) — a lane too small to amortise the
+contract over. **Third, ἸΣΟΜΟΡΦΊΑ's −13 is not evenly spread**: it landed in OPS LISTING (−6), CODE
+(−3), OPS TABLE (−2) and PROSE (−2), and moved DATA by zero, which is what a reordering lever should
+look like — it helps where the tape is long and does nothing where the winning codec is a column
+program.
+
+Five lanes in X90's 34-lane table have no RUN K row because they are not in the 29-lane frontier
+(`openstack-loghub-26.log`, `ls-la-usrbin.txt`, `npm-ls-all.txt`, `find-listing.txt`,
+`dpkg-l-full.txt`); they are reported as unmatched rather than silently dropped.
+
+### K. Record
+
+New this turn: `src/lib/omega/isomorphia.ts` (the codec) and one import plus one `admit` call in
+`src/lib/omega/tagstack.ts` (the only other `src/` change). Probes `bench/x96/{wholeobj,seeds,reorder,
+joint,chiron29,iso29,isoab}.ts` with receipts under `bench/x96/receipts/`. Harness
+`bench/x86/run-front-k.sh`. `.gitignore` gains `bench/x96/*.mjs`.
+
+[`docs/codec-abbreviations.md`](codec-abbreviations.md) §X96.

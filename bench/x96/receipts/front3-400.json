@@ -1,0 +1,92 @@
+{
+ "det": "1",
+ "note": "X74 chain (tagstackEncode) under OMEGA_DET=1, diffed against run E tagstackFrontier",
+ "rows": [
+  {
+   "path": "bench/holdout-x42/lsblk.txt",
+   "lane": "lsblk.txt",
+   "raw": 60,
+   "X": 60,
+   "parent": "synkrisis",
+   "exact": true,
+   "runE": 60,
+   "runEparent": "synkrisis",
+   "delta": 0,
+   "ms": 3222
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "lane": "kb-article.txt",
+   "raw": 656,
+   "X": 622,
+   "parent": "synkrisis",
+   "exact": true,
+   "runE": 622,
+   "runEparent": "synkrisis",
+   "delta": 0,
+   "ms": 3645
+  },
+  {
+   "path": "bench/holdout-x42b/uptime-w.txt",
+   "lane": "uptime-w.txt",
+   "raw": 80,
+   "X": 80,
+   "parent": "synkrisis",
+   "exact": true,
+   "runE": 80,
+   "runEparent": "synkrisis",
+   "delta": 0,
+   "ms": 2503
+  },
+  {
+   "path": "bench/holdout-x42b/free-m.txt",
+   "lane": "free-m.txt",
+   "raw": 76,
+   "X": 76,
+   "parent": "synkrisis",
+   "exact": true,
+   "runE": 76,
+   "runEparent": "synkrisis",
+   "delta": 0,
+   "ms": 2969
+  },
+  {
+   "path": "bench/holdout-x42b/vmstat.txt",
+   "lane": "vmstat.txt",
+   "raw": 229,
+   "X": 149,
+   "parent": "synkrisis",
+   "exact": true,
+   "runE": 149,
+   "runEparent": "synkrisis",
+   "delta": 0,
+   "ms": 3378
+  },
+  {
+   "path": "bench/holdout-work/unified-diff.patch",
+   "lane": "unified-diff.patch",
+   "raw": 578,
+   "X": 418,
+   "parent": "synkrisis",
+   "exact": true,
+   "runE": 419,
+   "runEparent": "synkrisis",
+   "delta": -1,
+   "ms": 3654
+  },
+  {
+   "path": "bench/holdout-tbl/df-h.txt",
+   "lane": "df-h.txt",
+   "raw": 570,
+   "X": 171,
+   "parent": "akolouthia2",
+   "exact": true,
+   "runE": 171,
+   "runEparent": "akolouthia2",
+   "delta": 0,
+   "ms": 3053
+  }
+ ],
+ "Xtotal": 1576,
+ "runEtotal": 1577
+}

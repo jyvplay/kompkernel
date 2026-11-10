@@ -1,0 +1,95 @@
+{
+ "note": "front-coding headroom on the tape value column; zero frontier calls",
+ "lanes": [
+  {
+   "lane": "apt-real",
+   "entries": 64,
+   "valueTokens": 162,
+   "sharedPrefixChars": 38,
+   "lengthDigitsTokens": 21,
+   "netUpperBound": -6.33,
+   "sharedPrefixCharsCappedAt9": 38
+  },
+  {
+   "lane": "code-ts",
+   "entries": 75,
+   "valueTokens": 192,
+   "sharedPrefixChars": 94,
+   "lengthDigitsTokens": 25,
+   "netUpperBound": 11.29,
+   "sharedPrefixCharsCappedAt9": 86
+  },
+  {
+   "lane": "dpkg-l",
+   "entries": 48,
+   "valueTokens": 100,
+   "sharedPrefixChars": 174,
+   "lengthDigitsTokens": 16,
+   "netUpperBound": 51.18000000000001,
+   "sharedPrefixCharsCappedAt9": 88
+  },
+  {
+   "lane": "findmnt",
+   "entries": 34,
+   "valueTokens": 103,
+   "sharedPrefixChars": 44,
+   "lengthDigitsTokens": 11,
+   "netUpperBound": 5.989999999999998,
+   "sharedPrefixCharsCappedAt9": 44
+  },
+  {
+   "lane": "json-pkg",
+   "entries": 48,
+   "valueTokens": 111,
+   "sharedPrefixChars": 58,
+   "lengthDigitsTokens": 16,
+   "netUpperBound": 6.390000000000001,
+   "sharedPrefixCharsCappedAt9": 58
+  },
+  {
+   "lane": "kb-article",
+   "entries": 27,
+   "valueTokens": 31,
+   "sharedPrefixChars": 36,
+   "lengthDigitsTokens": 9,
+   "netUpperBound": 4.9,
+   "sharedPrefixCharsCappedAt9": 36
+  },
+  {
+   "lane": "llm-answer",
+   "entries": 34,
+   "valueTokens": 59,
+   "sharedPrefixChars": 23,
+   "lengthDigitsTokens": 11,
+   "netUpperBound": -2.119999999999999,
+   "sharedPrefixCharsCappedAt9": 23
+  },
+  {
+   "lane": "ls-l-real",
+   "entries": 143,
+   "valueTokens": 486,
+   "sharedPrefixChars": 224,
+   "lengthDigitsTokens": 48,
+   "netUpperBound": 38.489999999999995,
+   "sharedPrefixCharsCappedAt9": 224
+  },
+  {
+   "lane": "ls-real",
+   "entries": 48,
+   "valueTokens": 136,
+   "sharedPrefixChars": 50,
+   "lengthDigitsTokens": 16,
+   "netUpperBound": 3.3099999999999987,
+   "sharedPrefixCharsCappedAt9": 50
+  },
+  {
+   "lane": "ps-aux-real",
+   "entries": 79,
+   "valueTokens": 291,
+   "sharedPrefixChars": 70,
+   "lengthDigitsTokens": 26,
+   "netUpperBound": 1.0300000000000011,
+   "sharedPrefixCharsCappedAt9": 70
+  }
+ ]
+}

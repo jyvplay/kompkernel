@@ -1,0 +1,78 @@
+GENERALIZED LOCAL LEADERS — CURRENT STACK (X96, ἸΣΟΜΟΡΦΊΑ admitted)
+join: shipped <- bench/x89/receipts/front3-runK.json (RUN K, OMEGA_DET=1); gate <- bench/x86/receipts/frontier-runK.json; cat/raw/floor <- bench/x90/receipts/leaders-x90.json (not re-measured)
+leader rule: lowest shipped/raw, headline leader restricted to raw >= 500; both winners printed
+basename collisions (why leaders are keyed by path): df-h.txt [bench/holdout-tbl/df-h.txt | bench/holdout-x42/df-h.txt]
+lanes in X90 with no RUN K row: bench/holdout-ops/openstack-loghub-26.log, bench/holdout-x86/ls-la-usrbin.txt, bench/holdout-x86/npm-ls-all.txt, bench/holdout-ops/find-listing.txt, bench/holdout-x86/dpkg-l-full.txt
+
+## CODE / MARKUP — 3 lanes, raw 3152 -> shipped 2066 (ratio 0.6555), gate 2069 (gate/shipped 0.9986), floor 1728 (floor/shipped 0.8364, headroom 16.4%)
+   LEADER (raw>=500): bench/holdout/json-pkg.txt  1152 -> 680  ratio 0.5903  parent synkrisis
+   weakest: bench/holdout-work/unified-diff.patch  578 -> 418  ratio 0.7232
+   readability-price law floor/shipped<1.00: holds on all 3
+   moved since X90: -3 tokens
+   full ranking (best first):
+      0.5903   1152 ->   680  floor   592  fl/sh 0.8706  Δ-1  bench/holdout/json-pkg.txt
+      0.6807   1422 ->   968  floor   812  fl/sh 0.8388  Δ-1  bench/holdout/code-ts.txt
+      0.7232    578 ->   418  floor   324  fl/sh 0.7751  Δ-1  bench/holdout-work/unified-diff.patch
+
+## DATA — 2 lanes, raw 1095 -> shipped 234 (ratio 0.2137), gate 296 (gate/shipped 0.7905), floor 209 (floor/shipped 0.8932, headroom 10.7%)
+   LEADER (raw>=500): bench/holdout-x40/cue-sheet.md  513 -> 101  ratio 0.1969  parent stichomythia
+   weakest: bench/holdout-x40/prices.csv  582 -> 133  ratio 0.2285
+   readability-price law floor/shipped<1.00: holds on all 2
+   moved since X90: none
+   full ranking (best first):
+      0.1969    513 ->   101  floor    99  fl/sh 0.9802        bench/holdout-x40/cue-sheet.md
+      0.2285    582 ->   133  floor   110  fl/sh 0.8271        bench/holdout-x40/prices.csv
+
+## OPS LISTING — 9 lanes, raw 16516 -> shipped 5810 (ratio 0.3518), gate 5902 (gate/shipped 0.9844), floor 4420 (floor/shipped 0.7608, headroom 23.9%)
+   LEADER (raw>=500): bench/holdout-x41/ls-l-real.txt  5194 -> 1390  ratio 0.2676  parent synkrisis
+   weakest: bench/holdout-x42/dpkg-l.txt  1000 -> 672  ratio 0.672
+   readability-price law floor/shipped<1.00: holds on all 9
+   moved since X90: -6 tokens
+   full ranking (best first):
+      0.2676   5194 ->  1390  floor   943  fl/sh 0.6784        bench/holdout-x41/ls-l-real.txt
+      0.2745   1144 ->   314  floor   250  fl/sh 0.7962  Δ-1  bench/holdout-x42/ps-ef.txt
+      0.3089   2739 ->   846  floor   690  fl/sh 0.8156  Δ-4  bench/holdout-x41/apt-real.txt
+      0.3412   3054 ->  1042  floor   743  fl/sh 0.7131        bench/holdout-x41/ps-aux-real.txt
+       0.359   1106 ->   397  floor   320  fl/sh  0.806        bench/holdout-x41/ps-real.txt
+      0.4188   1034 ->   433  floor   328  fl/sh 0.7575        bench/holdout-x41/ls-real.txt
+      0.5642    787 ->   444  floor   335  fl/sh 0.7545        bench/holdout-x42/findmnt.txt
+      0.5939    458 ->   272  floor   219  fl/sh 0.8051        bench/holdout-x41/du-real.txt
+       0.672   1000 ->   672  floor   592  fl/sh  0.881  Δ-1  bench/holdout-x42/dpkg-l.txt
+
+## OPS TABLE — 11 lanes, raw 4135 -> shipped 1724 (ratio 0.4169), gate 1726 (gate/shipped 0.9988), floor 1272 (floor/shipped 0.7378, headroom 26.2%)
+   LEADER (raw>=500): bench/holdout-x40/metrics.tsv  811 -> 210  ratio 0.2589  parent akolouthia2
+   weakest: bench/holdout-x42b/free-m.txt  76 -> 76  ratio 1
+   readability-price law floor/shipped<1.00: VIOLATED on bench/holdout-x42/lsblk.txt 1.017, bench/holdout-x42b/free-m.txt 1.000
+   moved since X90: -2 tokens
+   full ranking (best first):
+      0.2589    811 ->   210  floor   130  fl/sh  0.619        bench/holdout-x40/metrics.tsv
+         0.3    570 ->   171  floor   129  fl/sh 0.7544        bench/holdout-tbl/df-h.txt
+      0.3241   1006 ->   326  floor   214  fl/sh 0.6564        bench/holdout-tbl/kubectl-get-pods.txt
+      0.3615    675 ->   244  floor   166  fl/sh 0.6803        bench/holdout-tbl/psql-output.txt
+      0.5333    330 ->   176  floor   133  fl/sh 0.7557        bench/holdout-tbl/markdown-table.md
+      0.6507    229 ->   149  floor   113  fl/sh 0.7584        bench/holdout-x42b/vmstat.txt
+      0.7643    140 ->   107  floor    84  fl/sh  0.785  Δ-1  bench/holdout-x42/df-h.txt
+      0.7911    158 ->   125  floor    96  fl/sh  0.768  Δ-1  bench/holdout-x41/df-real.txt
+           1     60 ->    60  floor    61  fl/sh 1.0167        bench/holdout-x42/lsblk.txt
+           1     80 ->    80  floor    70  fl/sh  0.875        bench/holdout-x42b/uptime-w.txt
+           1     76 ->    76  floor    76  fl/sh      1        bench/holdout-x42b/free-m.txt
+
+## PROSE — 4 lanes, raw 3117 -> shipped 2644 (ratio 0.8483), gate 2646 (gate/shipped 0.9992), floor 2529 (floor/shipped 0.9565, headroom 4.3%)
+   LEADER (raw>=500): bench/holdout-work/email-thread.txt  629 -> 488  ratio 0.7758  parent synkrisis
+   weakest: bench/holdout-work/kb-article.txt  656 -> 622  ratio 0.9482
+   readability-price law floor/shipped<1.00: holds on all 4
+   moved since X90: -2 tokens
+   full ranking (best first):
+      0.7758    629 ->   488  floor   443  fl/sh 0.9078        bench/holdout-work/email-thread.txt
+      0.7843   1099 ->   862  floor   852  fl/sh 0.9884        bench/holdout-x41/node-help.txt
+      0.9168    733 ->   672  floor   626  fl/sh 0.9315  Δ-2  bench/holdout-work/llm-answer.md
+      0.9482    656 ->   622  floor   608  fl/sh 0.9775        bench/holdout-work/kb-article.txt
+
+## ALL 29 JOINED LANES — raw 28015 -> shipped 12478 (ratio 0.4454), floor 10158 (floor/shipped 0.8141, headroom 18.6%)
+
+WHERE THE MONEY IS (headroom vs the independent readability floor):
+   26.2 %  OPS TABLE    11 lanes  raw 4135 -> shipped 1724  floor 1272
+   23.9 %  OPS LISTING  9 lanes  raw 16516 -> shipped 5810  floor 4420
+   16.4 %  CODE / MARKUP 3 lanes  raw 3152 -> shipped 2066  floor 1728
+   10.7 %  DATA         2 lanes  raw 1095 -> shipped 234  floor 209
+    4.3 %  PROSE        4 lanes  raw 3117 -> shipped 2644  floor 2529

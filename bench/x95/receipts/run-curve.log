@@ -1,0 +1,39 @@
+VOCABULARY CAPACITY (tokens of exactly L non-ASCII chars, and how many have all-distinct chars):
+  L   tokens   distinct-char  examples
+   2     9027           8785  о� ა� ա�
+   3     7419           6821  ու� 中彩票 ост
+   4     4200           3217  ения 彩神争霸 �京赛车
+   5     1634            986  итель ности ность
+   6      743            327  ության ования станов
+   7      273             94  ительно ировать ательно
+   8      166             39  ิเคราะห์ ҳәынҭқар онавирус
+   9       71              7  еспублика ิเวอร์พูล ироваться
+  10       29              5  ดลองใช้ฟรี เงินไทยฟรี การเดิมพัน
+  11       20              3  ทดลองใช้ฟรี ประจำวันที่ ありがとうございました
+  12       12              0  
+
+INCUMBENT COST CURVE over the ten committed wires (1414 runs, 2171 tokens):
+  L   runs   tokens   tok/run   IF ALL 1 TOKEN   SAVING   vocab distinct-capacity at this L
+   1   663     663     1.000             663        0             0
+   2   308     372     1.208             308       64          8785
+   3   187     337     1.802             187      150          6821
+   4   107     263     2.458             107      156          3217
+   5    62     176     2.839              62      114           986
+   6    38     127     3.342              38       89           327
+   7    24      94     3.917              24       70            94
+   8     9      36     4.000               9       27            39
+   9     5      28     5.600               5       23             7
+  10     4      20     5.000               4       16             5
+  11     2      11     5.500               2        9             3
+  12     2      16     8.000               2       14             0
+  13     1       7     7.000               1        6             0
+  15     1       9     9.000               1        8             0
+  17     1      12    12.000               1       11             0
+  TOT  1414    2171     1.535            1414      757
+
+reading: the SAVING column is what the body's reference structure would gain if every run
+of length L cost one token instead of 1.535 on average -- an UPPER bound,
+because the glyph sequence of a run is fixed by the rule assignment and cannot be chosen
+freely per run. The capacity column says whether enough distinct-character tokens exist
+at each length for an assignment to aim at, and "CAPACITY BINDS" marks a length where the
+body contains more runs than the vocabulary has distinct-char tokens to serve them.

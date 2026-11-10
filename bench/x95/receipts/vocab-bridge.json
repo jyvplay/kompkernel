@@ -1,0 +1,1179 @@
+{
+ "encoding": "o200k_base",
+ "scanned": 200006,
+ "scanMs": 179,
+ "bridgeTokens": 41726,
+ "distinctBridgeGlyphs": 2748,
+ "byShape": [
+  [
+   "aNNN",
+   7022
+  ],
+  [
+   "aNNNN",
+   5255
+  ],
+  [
+   "aNN",
+   4834
+  ],
+  [
+   "aNNNNN",
+   4024
+  ],
+  [
+   "aN",
+   2912
+  ],
+  [
+   "aNNNNNN",
+   2458
+  ],
+  [
+   "aNNNNNNN",
+   1474
+  ],
+  [
+   "aaN",
+   910
+  ],
+  [
+   "aNNNNNNNN",
+   823
+  ],
+  [
+   "Naa",
+   809
+  ],
+  [
+   "aaNa",
+   801
+  ],
+  [
+   "Na",
+   740
+  ],
+  [
+   "aaaN",
+   558
+  ],
+  [
+   "Naaa",
+   460
+  ],
+  [
+   "aNNNNNNNNN",
+   430
+  ],
+  [
+   "aaNaa",
+   428
+  ],
+  [
+   "aaaNa",
+   367
+  ],
+  [
+   "aNa",
+   335
+  ],
+  [
+   "aaNaaa",
+   303
+  ],
+  [
+   "Naaaa",
+   289
+  ]
+ ],
+ "byBoundary": [
+  [
+   "LETTER <-> Latin1Sup",
+   31238
+  ],
+  [
+   "SPACE <-> Latin1Sup",
+   5210
+  ],
+  [
+   "LETTER <-> Latin1Sup/Latin1Sup",
+   2840
+  ],
+  [
+   "SPACE <-> Cyrillic/Cyrillic/Cyrillic",
+   1939
+  ],
+  [
+   "SPACE <-> Cyrillic/Cyrillic/Cyrillic/Cyrillic",
+   1558
+  ],
+  [
+   "LETTER <-> U+1exx",
+   1535
+  ],
+  [
+   "SPACE <-> Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic",
+   1494
+  ],
+  [
+   "LETTER <-> GenPunct",
+   1475
+  ],
+  [
+   "SPACE <-> Arabic/Arabic/Arabic",
+   1399
+  ],
+  [
+   "SPACE <-> Arabic/Arabic/Arabic/Arabic",
+   1337
+  ],
+  [
+   "SPACE <-> Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic",
+   1111
+  ],
+  [
+   "LETTER <-> U+10xx",
+   1014
+  ],
+  [
+   "SPACE <-> Arabic/Arabic/Arabic/Arabic/Arabic",
+   954
+  ],
+  [
+   "LETTER <-> U+13xx",
+   784
+  ],
+  [
+   "LETTER <-> U+15xx",
+   777
+  ],
+  [
+   "SPACE <-> Arabic/Arabic",
+   720
+  ],
+  [
+   "SPACE <-> Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic",
+   680
+  ],
+  [
+   "LETTER <-> U+11xx",
+   659
+  ],
+  [
+   "SPACE <-> Cyrillic/Cyrillic",
+   646
+  ],
+  [
+   "SPACE <-> Hangul/Hangul",
+   646
+  ],
+  [
+   "SPACE <-> CJK",
+   553
+  ],
+  [
+   "SPACE <-> Hebrew/Hebrew/Hebrew",
+   522
+  ],
+  [
+   "SPACE <-> U+1exx",
+   486
+  ],
+  [
+   "LETTER <-> U+17xx",
+   476
+  ],
+  [
+   "LETTER <-> U+16xx",
+   473
+  ],
+  [
+   "SPACE <-> Latin1Sup/Latin1Sup",
+   467
+  ],
+  [
+   "SPACE <-> Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic",
+   457
+  ],
+  [
+   "SPACE <-> CJK/CJK",
+   447
+  ],
+  [
+   "SPACE <-> Hangul",
+   443
+  ],
+  [
+   "LETTER <-> U+25xx",
+   442
+  ],
+  [
+   "SPACE <-> Arabic/Arabic/Arabic/Arabic/Arabic/Arabic",
+   424
+  ],
+  [
+   "SPACE <-> U+ffxx",
+   421
+  ],
+  [
+   "LETTER <-> U+14xx",
+   398
+  ],
+  [
+   "SPACE <-> Hebrew/Hebrew",
+   297
+  ],
+  [
+   "SPACE <-> Georgian/Georgian/Georgian",
+   292
+  ],
+  [
+   "SPACE <-> Arabic/Arabic/Arabic/Arabic/Arabic/Arabic/Arabic",
+   274
+  ],
+  [
+   "SPACE <-> Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic/Cyrillic",
+   269
+  ],
+  [
+   "SPACE <-> Hebrew/Hebrew/Hebrew/Hebrew",
+   263
+  ],
+  [
+   "SPACE <-> Armenian/Armenian/Armenian",
+   236
+  ],
+  [
+   "LETTER <-> GenPunct/Latin1Sup",
+   236
+  ]
+ ],
+ "topBridgeGlyphs": [
+  {
+   "g": "а",
+   "cp": "U+430",
+   "block": "Cyrillic",
+   "bridges": 3974
+  },
+  {
+   "g": "о",
+   "cp": "U+43E",
+   "block": "Cyrillic",
+   "bridges": 3544
+  },
+  {
+   "g": "ا",
+   "cp": "U+627",
+   "block": "Arabic",
+   "bridges": 3199
+  },
+  {
+   "g": "е",
+   "cp": "U+435",
+   "block": "Cyrillic",
+   "bridges": 2862
+  },
+  {
+   "g": "р",
+   "cp": "U+440",
+   "block": "Cyrillic",
+   "bridges": 2749
+  },
+  {
+   "g": "и",
+   "cp": "U+438",
+   "block": "Cyrillic",
+   "bridges": 2597
+  },
+  {
+   "g": "т",
+   "cp": "U+442",
+   "block": "Cyrillic",
+   "bridges": 2578
+  },
+  {
+   "g": "н",
+   "cp": "U+43D",
+   "block": "Cyrillic",
+   "bridges": 2236
+  },
+  {
+   "g": "с",
+   "cp": "U+441",
+   "block": "Cyrillic",
+   "bridges": 2180
+  },
+  {
+   "g": "ل",
+   "cp": "U+644",
+   "block": "Arabic",
+   "bridges": 2128
+  },
+  {
+   "g": "é",
+   "cp": "U+E9",
+   "block": "Latin1Sup",
+   "bridges": 1886
+  },
+  {
+   "g": "л",
+   "cp": "U+43B",
+   "block": "Cyrillic",
+   "bridges": 1717
+  },
+  {
+   "g": "д",
+   "cp": "U+434",
+   "block": "Cyrillic",
+   "bridges": 1457
+  },
+  {
+   "g": "в",
+   "cp": "U+432",
+   "block": "Cyrillic",
+   "bridges": 1450
+  },
+  {
+   "g": "п",
+   "cp": "U+43F",
+   "block": "Cyrillic",
+   "bridges": 1443
+  },
+  {
+   "g": "к",
+   "cp": "U+43A",
+   "block": "Cyrillic",
+   "bridges": 1429
+  },
+  {
+   "g": "м",
+   "cp": "U+43C",
+   "block": "Cyrillic",
+   "bridges": 1425
+  },
+  {
+   "g": "م",
+   "cp": "U+645",
+   "block": "Arabic",
+   "bridges": 1352
+  },
+  {
+   "g": "ر",
+   "cp": "U+631",
+   "block": "Arabic",
+   "bridges": 1278
+  },
+  {
+   "g": "у",
+   "cp": "U+443",
+   "block": "Cyrillic",
+   "bridges": 1259
+  },
+  {
+   "g": "و",
+   "cp": "U+648",
+   "block": "Arabic",
+   "bridges": 1118
+  },
+  {
+   "g": "ن",
+   "cp": "U+646",
+   "block": "Arabic",
+   "bridges": 997
+  },
+  {
+   "g": "ت",
+   "cp": "U+62A",
+   "block": "Arabic",
+   "bridges": 994
+  },
+  {
+   "g": "б",
+   "cp": "U+431",
+   "block": "Cyrillic",
+   "bridges": 930
+  },
+  {
+   "g": "ä",
+   "cp": "U+E4",
+   "block": "Latin1Sup",
+   "bridges": 891
+  },
+  {
+   "g": "ي",
+   "cp": "U+64A",
+   "block": "Arabic",
+   "bridges": 881
+  },
+  {
+   "g": "з",
+   "cp": "U+437",
+   "block": "Cyrillic",
+   "bridges": 866
+  },
+  {
+   "g": "ा",
+   "cp": "U+93E",
+   "block": "U+93xx",
+   "bridges": 818
+  },
+  {
+   "g": "د",
+   "cp": "U+62F",
+   "block": "Arabic",
+   "bridges": 773
+  },
+  {
+   "g": "ب",
+   "cp": "U+628",
+   "block": "Arabic",
+   "bridges": 753
+  },
+  {
+   "g": "ы",
+   "cp": "U+44B",
+   "block": "Cyrillic",
+   "bridges": 744
+  },
+  {
+   "g": "á",
+   "cp": "U+E1",
+   "block": "Latin1Sup",
+   "bridges": 718
+  },
+  {
+   "g": "र",
+   "cp": "U+930",
+   "block": "U+93xx",
+   "bridges": 716
+  },
+  {
+   "g": "ó",
+   "cp": "U+F3",
+   "block": "Latin1Sup",
+   "bridges": 704
+  },
+  {
+   "g": "ა",
+   "cp": "U+10D0",
+   "block": "Georgian",
+   "bridges": 696
+  },
+  {
+   "g": "س",
+   "cp": "U+633",
+   "block": "Arabic",
+   "bridges": 686
+  },
+  {
+   "g": "г",
+   "cp": "U+433",
+   "block": "Cyrillic",
+   "bridges": 673
+  },
+  {
+   "g": "ա",
+   "cp": "U+561",
+   "block": "Armenian",
+   "bridges": 672
+  },
+  {
+   "g": "्",
+   "cp": "U+94D",
+   "block": "U+94xx",
+   "bridges": 664
+  },
+  {
+   "g": "í",
+   "cp": "U+ED",
+   "block": "Latin1Sup",
+   "bridges": 659
+  },
+  {
+   "g": "ü",
+   "cp": "U+FC",
+   "block": "Latin1Sup",
+   "bridges": 643
+  },
+  {
+   "g": "ی",
+   "cp": "U+6CC",
+   "block": "Arabic",
+   "bridges": 579
+  },
+  {
+   "g": "я",
+   "cp": "U+44F",
+   "block": "Cyrillic",
+   "bridges": 553
+  },
+  {
+   "g": "ع",
+   "cp": "U+639",
+   "block": "Arabic",
+   "bridges": 536
+  },
+  {
+   "g": "�",
+   "cp": "U+FFFD",
+   "block": "U+ffxx",
+   "bridges": 525
+  },
+  {
+   "g": "स",
+   "cp": "U+938",
+   "block": "U+93xx",
+   "bridges": 481
+  },
+  {
+   "g": "ç",
+   "cp": "U+E7",
+   "block": "Latin1Sup",
+   "bridges": 480
+  },
+  {
+   "g": "ч",
+   "cp": "U+447",
+   "block": "Cyrillic",
+   "bridges": 471
+  },
+  {
+   "g": "ه",
+   "cp": "U+647",
+   "block": "Arabic",
+   "bridges": 470
+  },
+  {
+   "g": "ि",
+   "cp": "U+93F",
+   "block": "U+93xx",
+   "bridges": 461
+  },
+  {
+   "g": "क",
+   "cp": "U+915",
+   "block": "U+91xx",
+   "bridges": 460
+  },
+  {
+   "g": "й",
+   "cp": "U+439",
+   "block": "Cyrillic",
+   "bridges": 458
+  },
+  {
+   "g": "ь",
+   "cp": "U+44C",
+   "block": "Cyrillic",
+   "bridges": 457
+  },
+  {
+   "g": "न",
+   "cp": "U+928",
+   "block": "U+92xx",
+   "bridges": 450
+  },
+  {
+   "g": "ö",
+   "cp": "U+F6",
+   "block": "Latin1Sup",
+   "bridges": 450
+  },
+  {
+   "g": "ი",
+   "cp": "U+10D8",
+   "block": "Georgian",
+   "bridges": 438
+  },
+  {
+   "g": "ш",
+   "cp": "U+448",
+   "block": "Cyrillic",
+   "bridges": 434
+  },
+  {
+   "g": "х",
+   "cp": "U+445",
+   "block": "Cyrillic",
+   "bridges": 433
+  },
+  {
+   "g": "ж",
+   "cp": "U+436",
+   "block": "Cyrillic",
+   "bridges": 423
+  },
+  {
+   "g": "ו",
+   "cp": "U+5D5",
+   "block": "Hebrew",
+   "bridges": 410
+  },
+  {
+   "g": "്",
+   "cp": "U+D4D",
+   "block": "U+d4xx",
+   "bridges": 410
+  },
+  {
+   "g": "ق",
+   "cp": "U+642",
+   "block": "Arabic",
+   "bridges": 407
+  },
+  {
+   "g": "ı",
+   "cp": "U+131",
+   "block": "U+13xx",
+   "bridges": 402
+  },
+  {
+   "g": "া",
+   "cp": "U+9BE",
+   "block": "U+9bxx",
+   "bridges": 396
+  },
+  {
+   "g": "त",
+   "cp": "U+924",
+   "block": "U+92xx",
+   "bridges": 394
+  },
+  {
+   "g": "ة",
+   "cp": "U+629",
+   "block": "Arabic",
+   "bridges": 394
+  },
+  {
+   "g": "म",
+   "cp": "U+92E",
+   "block": "U+92xx",
+   "bridges": 386
+  },
+  {
+   "g": "े",
+   "cp": "U+947",
+   "block": "U+94xx",
+   "bridges": 381
+  },
+  {
+   "g": "ح",
+   "cp": "U+62D",
+   "block": "Arabic",
+   "bridges": 378
+  },
+  {
+   "g": "’",
+   "cp": "U+2019",
+   "block": "GenPunct",
+   "bridges": 377
+  },
+  {
+   "g": "ف",
+   "cp": "U+641",
+   "block": "Arabic",
+   "bridges": 374
+  },
+  {
+   "g": "י",
+   "cp": "U+5D9",
+   "block": "Hebrew",
+   "bridges": 361
+  },
+  {
+   "g": "მ",
+   "cp": "U+10DB",
+   "block": "Georgian",
+   "bridges": 360
+  },
+  {
+   "g": "ე",
+   "cp": "U+10D4",
+   "block": "Georgian",
+   "bridges": 357
+  },
+  {
+   "g": "ج",
+   "cp": "U+62C",
+   "block": "Arabic",
+   "bridges": 348
+  },
+  {
+   "g": "ն",
+   "cp": "U+576",
+   "block": "Armenian",
+   "bridges": 336
+  },
+  {
+   "g": "ր",
+   "cp": "U+580",
+   "block": "Armenian",
+   "bridges": 329
+  },
+  {
+   "g": "ल",
+   "cp": "U+932",
+   "block": "U+93xx",
+   "bridges": 327
+  },
+  {
+   "g": "प",
+   "cp": "U+92A",
+   "block": "U+92xx",
+   "bridges": 325
+  },
+  {
+   "g": "რ",
+   "cp": "U+10E0",
+   "block": "Georgian",
+   "bridges": 321
+  }
+ ],
+ "marginalCost": {
+  "contexts": [
+   " ",
+   "\n",
+   "  ",
+   "1 ",
+   " 4096",
+   "root ",
+   " Nov ",
+   "-rw-r--r-- ",
+   "the ",
+   "x=",
+   ":",
+   " /",
+   "9 ",
+   "drwxr-xr-x "
+  ],
+  "incumbentMean": 0.42857142857142855,
+  "bridgeMean": 0.42857142857142855
+ },
+ "reencode": {
+  "verified": 593,
+  "refuted": 7
+ },
+ "bridgeSamples": [
+  {
+   "id": 300,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 333,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 367,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 389,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 463,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 496,
+   "s": " ا",
+   "ascii": " ",
+   "nonascii": "ا",
+   "shape": "aN"
+  },
+  {
+   "id": 559,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 571,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 589,
+   "s": " ال",
+   "ascii": " ",
+   "nonascii": "ال",
+   "shape": "aNN"
+  },
+  {
+   "id": 607,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 636,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 648,
+   "s": " п",
+   "ascii": " ",
+   "nonascii": "п",
+   "shape": "aN"
+  },
+  {
+   "id": 669,
+   "s": " с",
+   "ascii": " ",
+   "nonascii": "с",
+   "shape": "aN"
+  },
+  {
+   "id": 701,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 743,
+   "s": " в",
+   "ascii": " ",
+   "nonascii": "в",
+   "shape": "aN"
+  },
+  {
+   "id": 752,
+   "s": " م",
+   "ascii": " ",
+   "nonascii": "م",
+   "shape": "aN"
+  },
+  {
+   "id": 768,
+   "s": " н",
+   "ascii": " ",
+   "nonascii": "н",
+   "shape": "aN"
+  },
+  {
+   "id": 800,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 802,
+   "s": "’s",
+   "ascii": "s",
+   "nonascii": "’",
+   "shape": "Na"
+  },
+  {
+   "id": 804,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 816,
+   "s": " и",
+   "ascii": " ",
+   "nonascii": "и",
+   "shape": "aN"
+  },
+  {
+   "id": 828,
+   "s": " к",
+   "ascii": " ",
+   "nonascii": "к",
+   "shape": "aN"
+  },
+  {
+   "id": 848,
+   "s": " क",
+   "ascii": " ",
+   "nonascii": "क",
+   "shape": "aN"
+  },
+  {
+   "id": 879,
+   "s": " б",
+   "ascii": " ",
+   "nonascii": "б",
+   "shape": "aN"
+  },
+  {
+   "id": 883,
+   "s": " д",
+   "ascii": " ",
+   "nonascii": "д",
+   "shape": "aN"
+  },
+  {
+   "id": 888,
+   "s": " و",
+   "ascii": " ",
+   "nonascii": "و",
+   "shape": "aN"
+  },
+  {
+   "id": 890,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 900,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 913,
+   "s": " о",
+   "ascii": " ",
+   "nonascii": "о",
+   "shape": "aN"
+  },
+  {
+   "id": 927,
+   "s": " ب",
+   "ascii": " ",
+   "nonascii": "ب",
+   "shape": "aN"
+  },
+  {
+   "id": 931,
+   "s": " т",
+   "ascii": " ",
+   "nonascii": "т",
+   "shape": "aN"
+  },
+  {
+   "id": 946,
+   "s": " м",
+   "ascii": " ",
+   "nonascii": "м",
+   "shape": "aN"
+  },
+  {
+   "id": 960,
+   "s": " а",
+   "ascii": " ",
+   "nonascii": "а",
+   "shape": "aN"
+  },
+  {
+   "id": 966,
+   "s": " “",
+   "ascii": " ",
+   "nonascii": "“",
+   "shape": "aN"
+  },
+  {
+   "id": 986,
+   "s": "ão",
+   "ascii": "o",
+   "nonascii": "ã",
+   "shape": "Na"
+  },
+  {
+   "id": 1060,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 1077,
+   "s": " ک",
+   "ascii": " ",
+   "nonascii": "ک",
+   "shape": "aN"
+  },
+  {
+   "id": 1091,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 1112,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 1127,
+   "s": " –",
+   "ascii": " ",
+   "nonascii": "–",
+   "shape": "aN"
+  },
+  {
+   "id": 1153,
+   "s": "ió",
+   "ascii": "i",
+   "nonascii": "ó",
+   "shape": "aN"
+  },
+  {
+   "id": 1155,
+   "s": " ت",
+   "ascii": " ",
+   "nonascii": "ت",
+   "shape": "aN"
+  },
+  {
+   "id": 1210,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 1212,
+   "s": " é",
+   "ascii": " ",
+   "nonascii": "é",
+   "shape": "aN"
+  },
+  {
+   "id": 1221,
+   "s": " à",
+   "ascii": " ",
+   "nonascii": "à",
+   "shape": "aN"
+  },
+  {
+   "id": 1222,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 1235,
+   "s": " на",
+   "ascii": " ",
+   "nonascii": "на",
+   "shape": "aNN"
+  },
+  {
+   "id": 1263,
+   "s": " स",
+   "ascii": " ",
+   "nonascii": "स",
+   "shape": "aN"
+  },
+  {
+   "id": 1266,
+   "s": " пр",
+   "ascii": " ",
+   "nonascii": "пр",
+   "shape": "aNN"
+  },
+  {
+   "id": 1296,
+   "s": " з",
+   "ascii": " ",
+   "nonascii": "з",
+   "shape": "aN"
+  },
+  {
+   "id": 1304,
+   "s": "ión",
+   "ascii": "in",
+   "nonascii": "ó",
+   "shape": "aNa"
+  },
+  {
+   "id": 1322,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 1342,
+   "s": " د",
+   "ascii": " ",
+   "nonascii": "د",
+   "shape": "aN"
+  },
+  {
+   "id": 1358,
+   "s": " ل",
+   "ascii": " ",
+   "nonascii": "ل",
+   "shape": "aN"
+  },
+  {
+   "id": 1409,
+   "s": " ह",
+   "ascii": " ",
+   "nonascii": "ह",
+   "shape": "aN"
+  },
+  {
+   "id": 1438,
+   "s": " ف",
+   "ascii": " ",
+   "nonascii": "ف",
+   "shape": "aN"
+  },
+  {
+   "id": 1449,
+   "s": " у",
+   "ascii": " ",
+   "nonascii": "у",
+   "shape": "aN"
+  },
+  {
+   "id": 1469,
+   "s": " ה",
+   "ascii": " ",
+   "nonascii": "ה",
+   "shape": "aN"
+  },
+  {
+   "id": 1474,
+   "s": " �",
+   "ascii": " ",
+   "nonascii": "�",
+   "shape": "aN"
+  },
+  {
+   "id": 1497,
+   "s": "。\n\n",
+   "ascii": "\n\n",
+   "nonascii": "。",
+   "shape": "Naa"
+  }
+ ]
+}
