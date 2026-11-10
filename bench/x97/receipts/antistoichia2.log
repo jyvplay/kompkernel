@@ -1,0 +1,17 @@
+codomain (2-char non-ASCII vocabulary tokens): 8789
+
+lane                 distinct  pairs   K@2  net@2   K@3  net@3  top
+apt-real.wire.txt           1      1     0      0     0      0  8:x1
+code-ts.wire.txt            3      3     0      0     0      0  [0x1 0]x1 (0x1
+dpkg-l.wire.txt             1      1     0      0     0      0  |/x1
+findmnt.wire.txt           10     12     1      1     0      0  =5x3 =2x1 2Mx1 d-x1 -1x1 =1x1
+json-pkg.wire.txt           2      2     0      0     0      0  @*x1 d6x1
+kb-article.wire.txt         0      0     0      0     0      0  
+llm-answer.wire.txt         3      3     0      0     0      0  6%x1 0,x1 x]x1
+ls-l-real.wire.txt          6      6     0      0     0      0   1x1 1,x1 ,1x1 7 x1 b5x1 -5x1
+ls-real.wire.txt            0      0     0      0     0      0  
+ps-aux-real.wire.txt        3      3     0      0     0      0  .9x1 d+x1 wqx1
+
+pooled adjacent single-ASCII-char token pairs = 31
+pooled net at 2 tok/entry = 1   at 3 tok/entry = 0   (over the ten wires, 7 844 tokens)
+=> 0.01% / 0.00% of the message

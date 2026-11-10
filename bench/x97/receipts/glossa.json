@@ -1,0 +1,124 @@
+{
+ "cross": {
+  "hangul": {
+   "as": 452,
+   "sa": 0
+  },
+  "katakana": {
+   "as": 54,
+   "sa": 0
+  },
+  "cyrillic": {
+   "as": 161,
+   "sa": 0
+  },
+  "arabic": {
+   "as": 70,
+   "sa": 0
+  },
+  "myanmar": {
+   "as": 25,
+   "sa": 0
+  },
+  "khmer": {
+   "as": 23,
+   "sa": 0
+  },
+  "cjk": {
+   "as": 568,
+   "sa": 1
+  },
+  "polyglot": {
+   "as": 596,
+   "sa": 0
+  }
+ },
+ "perLane": [
+  {
+   "lane": "apt-real.wire.txt",
+   "script": "cyrillic",
+   "asciiScript": 55,
+   "scriptAscii": 56,
+   "scriptScript": 163,
+   "asciiAscii": 90
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "script": "cyrillic",
+   "asciiScript": 62,
+   "scriptAscii": 70,
+   "scriptScript": 86,
+   "asciiAscii": 564
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "script": "cyrillic",
+   "asciiScript": 47,
+   "scriptAscii": 47,
+   "scriptScript": 65,
+   "asciiAscii": 321
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "script": "arabic",
+   "asciiScript": 37,
+   "scriptAscii": 36,
+   "scriptScript": 29,
+   "asciiAscii": 202
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "script": "cyrillic",
+   "asciiScript": 36,
+   "scriptAscii": 40,
+   "scriptScript": 64,
+   "asciiAscii": 200
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "script": "cyrillic",
+   "asciiScript": 26,
+   "scriptAscii": 27,
+   "scriptScript": 4,
+   "asciiAscii": 127
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "script": "cyrillic",
+   "asciiScript": 34,
+   "scriptAscii": 36,
+   "scriptScript": 13,
+   "asciiAscii": 76
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "script": "polyglot",
+   "asciiScript": 161,
+   "scriptAscii": 157,
+   "scriptScript": 240,
+   "asciiAscii": 541
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "script": "cyrillic",
+   "asciiScript": 50,
+   "scriptAscii": 51,
+   "scriptScript": 71,
+   "asciiAscii": 202
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "script": "cyrillic",
+   "asciiScript": 81,
+   "scriptAscii": 80,
+   "scriptScript": 111,
+   "asciiAscii": 479
+  }
+ ],
+ "totals": {
+  "asciiScript": 589,
+  "scriptAscii": 600,
+  "scriptScript": 846,
+  "asciiAscii": 2802
+ }
+}

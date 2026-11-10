@@ -1,0 +1,21 @@
+lane                 distinct  missing  bestK   F(K)    net  top
+apt-real.wire.txt          47       64      4     16      8  t-x6 g-x4 t x3 e-x3 d x2
+code-ts.wire.txt          105      286     29    181    123  e x19 t x16 s x16 r x10 / x10
+dpkg-l.wire.txt            81      190     17    112     78  e x23 r x10 d x9 t x9 s x9
+findmnt.wire.txt           70      111      8     37     21  e=x7 e x6 s x5 c x5 s/x4
+json-pkg.wire.txt          79      133     12     58     34  : x14 e-x8 s"x5 e x4 t x4
+kb-article.wire.txt        36      222     14    196    168  e x40 s x33 t x26 y x20 n x18
+llm-answer.wire.txt       112      249     19    139    101  t x20 e x19 d x13 s x12 ` x8
+ls-l-real.wire.txt         76      139     11     61     39   1x12  2x12 t x7 r x5 y x4
+ls-real.wire.txt           47       62      4     12      4  r-x3 n/x3 0 x3 7 x3 6 x2
+ps-aux-real.wire.txt      114      203     17     76     42  t x12 d x9 e x8 t-x5 ? x4
+
+pooled positive net (map cost 2-4 tok/entry, per-wire optimum) = 618 tokens over the ten wires
+pooled missing occurrences = 1659
+
+MAP-COST SENSITIVITY, pooled best-K net by per-entry cost:
+  c=1 tok/entry -> pooled net 878
+  c=2 tok/entry -> pooled net 868
+  c=3 tok/entry -> pooled net 858
+  c=4 tok/entry -> pooled net 848
+  c=5 tok/entry -> pooled net 838

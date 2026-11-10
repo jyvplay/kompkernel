@@ -34,6 +34,8 @@ import { kanonEncode } from './kanon';
 import { metronEncode, metronPlan } from './metron';
 import { synkrisisEncode } from './synkrisis';
 import { isomorphiaEncode, isomorphiaDisabled } from './isomorphia';
+import { metataxisEncode, metataxisDisabled } from './metataxis';
+import { syndyasmosDisabled, syndyasmosEncode } from './syndyasmos';
 
 export type TagstackMode = 'xml' | 'html';
 export type TagstackFrontierParent = 'synkrisis' | 'bifront' | 'kanon' | 'akolouthia2' | 'apographe' | 'metron' | 'hemera' | 'diastema';
@@ -677,6 +679,24 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
    */
   if (!isomorphiaDisabled()) {
     try { admit('ἸΣΟΜΟΡΦΊΑ', isomorphiaEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X97 — ΜΕΤΑΤΑΞΙΣ.  Runs AFTER ἸΣΟΜΟΡΦΊΑ and relocates rules to arbitrary valid
+  // slots rather than swapping adjacent pairs, so its neighbourhood strictly
+  // contains ἸΣΟΜΟΡΦΊΑ's reorder move.  Measured on the ten authoritative wires:
+  // adjacent swaps -11, arbitrary-rank relocation -62 (bench/x97/receipts/moves.json).
+  if (!metataxisDisabled()) {
+    try { admit('ΜΕΤΑΤΑΞΙΣ', metataxisEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X99 — ΣΥΝΔΥΑΣΜΟΣ.  Runs LAST, after ΜΕΤΑΤΑΞΙΣ, and alternates that codec's
+  // arbitrary-rank relocation with a re-spelling of each rule's value as an
+  // interleaving of literal runs and references to STRICTLY EARLIER rules.  The
+  // two are coupled — a factor must precede the rule that uses it, so relocation
+  // ENABLES re-spellings that were previously illegal — and no codec in the stack
+  // has ever run them together.  Measured on the ten authoritative wires
+  // (bench/x97/receipts/syndyasmos.json): ΜΕΤΑΤΑΞΙΣ alone −48, ΠΡΟΟΙΜΙΟΝ alone
+  // −27, combined −76, all arms chironDecode-exact 9/9.
+  if (!syndyasmosDisabled()) {
+    try { admit('ΣΥΝΔΥΑΣΜΟΣ', syndyasmosEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
   }
   return best;
 }

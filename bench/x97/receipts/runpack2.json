@@ -1,0 +1,531 @@
+{
+ "note": "X97 measured run-packing headroom; in-isolation token counts, whole-message price still required",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "bodyTok": 631,
+   "runs": 173,
+   "packed": 224,
+   "head": 142,
+   "feas": 142,
+   "byLen": [
+    {
+     "L": 2,
+     "packed": 33,
+     "head": 7,
+     "feas": 7
+    },
+    {
+     "L": 3,
+     "packed": 28,
+     "head": 20,
+     "feas": 20
+    },
+    {
+     "L": 4,
+     "packed": 28,
+     "head": 23,
+     "feas": 23
+    },
+    {
+     "L": 5,
+     "packed": 45,
+     "head": 31,
+     "feas": 31
+    },
+    {
+     "L": 6,
+     "packed": 25,
+     "head": 15,
+     "feas": 15
+    },
+    {
+     "L": 7,
+     "packed": 32,
+     "head": 22,
+     "feas": 22
+    },
+    {
+     "L": 8,
+     "packed": 14,
+     "head": 7,
+     "feas": 7
+    },
+    {
+     "L": 9,
+     "packed": 3,
+     "head": 5,
+     "feas": 5
+    },
+    {
+     "L": 10,
+     "packed": 10,
+     "head": 8,
+     "feas": 8
+    },
+    {
+     "L": 11,
+     "packed": 6,
+     "head": 4,
+     "feas": 4
+    }
+   ]
+  },
+  {
+   "lane": "code-ts",
+   "bodyTok": 709,
+   "runs": 149,
+   "packed": 160,
+   "head": 147,
+   "feas": 132,
+   "byLen": [
+    {
+     "L": 2,
+     "packed": 20,
+     "head": 6,
+     "feas": 6
+    },
+    {
+     "L": 3,
+     "packed": 24,
+     "head": 14,
+     "feas": 14
+    },
+    {
+     "L": 4,
+     "packed": 29,
+     "head": 28,
+     "feas": 28
+    },
+    {
+     "L": 5,
+     "packed": 15,
+     "head": 21,
+     "feas": 21
+    },
+    {
+     "L": 6,
+     "packed": 26,
+     "head": 24,
+     "feas": 24
+    },
+    {
+     "L": 7,
+     "packed": 17,
+     "head": 19,
+     "feas": 19
+    },
+    {
+     "L": 8,
+     "packed": 8,
+     "head": 6,
+     "feas": 6
+    },
+    {
+     "L": 9,
+     "packed": 7,
+     "head": 9,
+     "feas": 9
+    },
+    {
+     "L": 10,
+     "packed": 4,
+     "head": 5,
+     "feas": 5
+    },
+    {
+     "L": 12,
+     "packed": 4,
+     "head": 7,
+     "feas": 0
+    },
+    {
+     "L": 15,
+     "packed": 6,
+     "head": 8,
+     "feas": 0
+    }
+   ]
+  },
+  {
+   "lane": "dpkg-l",
+   "bodyTok": 534,
+   "runs": 114,
+   "packed": 82,
+   "head": 56,
+   "feas": 56,
+   "byLen": [
+    {
+     "L": 2,
+     "packed": 13,
+     "head": 6,
+     "feas": 6
+    },
+    {
+     "L": 3,
+     "packed": 10,
+     "head": 6,
+     "feas": 6
+    },
+    {
+     "L": 4,
+     "packed": 23,
+     "head": 19,
+     "feas": 19
+    },
+    {
+     "L": 5,
+     "packed": 5,
+     "head": 3,
+     "feas": 3
+    },
+    {
+     "L": 6,
+     "packed": 9,
+     "head": 6,
+     "feas": 6
+    },
+    {
+     "L": 7,
+     "packed": 7,
+     "head": 5,
+     "feas": 5
+    },
+    {
+     "L": 8,
+     "packed": 4,
+     "head": 3,
+     "feas": 3
+    },
+    {
+     "L": 10,
+     "packed": 6,
+     "head": 3,
+     "feas": 3
+    },
+    {
+     "L": 11,
+     "packed": 5,
+     "head": 5,
+     "feas": 5
+    }
+   ]
+  },
+  {
+   "lane": "findmnt",
+   "bodyTok": 307,
+   "runs": 52,
+   "packed": 43,
+   "head": 19,
+   "feas": 19,
+   "byLen": [
+    {
+     "L": 2,
+     "packed": 10,
+     "head": 0,
+     "feas": 0
+    },
+    {
+     "L": 3,
+     "packed": 14,
+     "head": 4,
+     "feas": 4
+    },
+    {
+     "L": 4,
+     "packed": 11,
+     "head": 7,
+     "feas": 7
+    },
+    {
+     "L": 5,
+     "packed": 8,
+     "head": 8,
+     "feas": 8
+    }
+   ]
+  },
+  {
+   "lane": "json-pkg",
+   "bodyTok": 523,
+   "runs": 148,
+   "packed": 78,
+   "head": 45,
+   "feas": 45,
+   "byLen": [
+    {
+     "L": 2,
+     "packed": 8,
+     "head": 3,
+     "feas": 3
+    },
+    {
+     "L": 3,
+     "packed": 25,
+     "head": 15,
+     "feas": 15
+    },
+    {
+     "L": 4,
+     "packed": 7,
+     "head": 5,
+     "feas": 5
+    },
+    {
+     "L": 5,
+     "packed": 14,
+     "head": 6,
+     "feas": 6
+    },
+    {
+     "L": 6,
+     "packed": 16,
+     "head": 9,
+     "feas": 9
+    },
+    {
+     "L": 8,
+     "packed": 4,
+     "head": 3,
+     "feas": 3
+    },
+    {
+     "L": 9,
+     "packed": 4,
+     "head": 4,
+     "feas": 4
+    }
+   ]
+  },
+  {
+   "lane": "kb-article",
+   "bodyTok": 553,
+   "runs": 146,
+   "packed": 80,
+   "head": 19,
+   "feas": 19,
+   "byLen": [
+    {
+     "L": 2,
+     "packed": 34,
+     "head": 0,
+     "feas": 0
+    },
+    {
+     "L": 3,
+     "packed": 23,
+     "head": 7,
+     "feas": 7
+    },
+    {
+     "L": 4,
+     "packed": 10,
+     "head": 5,
+     "feas": 5
+    },
+    {
+     "L": 5,
+     "packed": 13,
+     "head": 7,
+     "feas": 7
+    }
+   ]
+  },
+  {
+   "lane": "llm-answer",
+   "bodyTok": 573,
+   "runs": 126,
+   "packed": 84,
+   "head": 20,
+   "feas": 20,
+   "byLen": [
+    {
+     "L": 2,
+     "packed": 34,
+     "head": 0,
+     "feas": 0
+    },
+    {
+     "L": 3,
+     "packed": 27,
+     "head": 7,
+     "feas": 7
+    },
+    {
+     "L": 4,
+     "packed": 10,
+     "head": 8,
+     "feas": 8
+    },
+    {
+     "L": 5,
+     "packed": 9,
+     "head": 3,
+     "feas": 3
+    },
+    {
+     "L": 7,
+     "packed": 4,
+     "head": 2,
+     "feas": 2
+    }
+   ]
+  },
+  {
+   "lane": "ls-l-real",
+   "bodyTok": 856,
+   "runs": 231,
+   "packed": 156,
+   "head": 222,
+   "feas": 198,
+   "byLen": [
+    {
+     "L": 2,
+     "packed": 35,
+     "head": 30,
+     "feas": 30
+    },
+    {
+     "L": 3,
+     "packed": 27,
+     "head": 45,
+     "feas": 45
+    },
+    {
+     "L": 4,
+     "packed": 24,
+     "head": 39,
+     "feas": 39
+    },
+    {
+     "L": 5,
+     "packed": 14,
+     "head": 26,
+     "feas": 26
+    },
+    {
+     "L": 6,
+     "packed": 25,
+     "head": 35,
+     "feas": 35
+    },
+    {
+     "L": 7,
+     "packed": 10,
+     "head": 14,
+     "feas": 14
+    },
+    {
+     "L": 8,
+     "packed": 3,
+     "head": 4,
+     "feas": 4
+    },
+    {
+     "L": 9,
+     "packed": 3,
+     "head": 5,
+     "feas": 5
+    },
+    {
+     "L": 12,
+     "packed": 4,
+     "head": 7,
+     "feas": 0
+    },
+    {
+     "L": 13,
+     "packed": 6,
+     "head": 6,
+     "feas": 0
+    },
+    {
+     "L": 17,
+     "packed": 5,
+     "head": 11,
+     "feas": 0
+    }
+   ]
+  },
+  {
+   "lane": "ls-real",
+   "bodyTok": 261,
+   "runs": 81,
+   "packed": 39,
+   "head": 22,
+   "feas": 22,
+   "byLen": [
+    {
+     "L": 2,
+     "packed": 6,
+     "head": 0,
+     "feas": 0
+    },
+    {
+     "L": 3,
+     "packed": 17,
+     "head": 11,
+     "feas": 11
+    },
+    {
+     "L": 4,
+     "packed": 8,
+     "head": 4,
+     "feas": 4
+    },
+    {
+     "L": 5,
+     "packed": 5,
+     "head": 3,
+     "feas": 3
+    },
+    {
+     "L": 8,
+     "packed": 3,
+     "head": 4,
+     "feas": 4
+    }
+   ]
+  },
+  {
+   "lane": "ps-aux-real",
+   "bodyTok": 692,
+   "runs": 194,
+   "packed": 105,
+   "head": 65,
+   "feas": 65,
+   "byLen": [
+    {
+     "L": 2,
+     "packed": 51,
+     "head": 12,
+     "feas": 12
+    },
+    {
+     "L": 3,
+     "packed": 29,
+     "head": 21,
+     "feas": 21
+    },
+    {
+     "L": 4,
+     "packed": 15,
+     "head": 18,
+     "feas": 18
+    },
+    {
+     "L": 5,
+     "packed": 6,
+     "head": 6,
+     "feas": 6
+    },
+    {
+     "L": 7,
+     "packed": 4,
+     "head": 8,
+     "feas": 8
+    }
+   ]
+  }
+ ]
+}

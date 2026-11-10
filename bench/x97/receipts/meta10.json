@@ -1,0 +1,100 @@
+{
+ "note": "X97 METATAXIS smoke test on the ten authoritative wires; incumbent = committed wire; zero frontier calls",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "T0": 850,
+   "out": 835,
+   "delta": -15,
+   "applied": true,
+   "ms": 1359,
+   "notes": "metataxis: 5699 probes, 14 relocations, 850 -> 835 (-15)"
+  },
+  {
+   "lane": "code-ts",
+   "T0": 969,
+   "out": 960,
+   "delta": -9,
+   "applied": true,
+   "ms": 3256,
+   "notes": "metataxis: 7614 probes, 9 relocations, 969 -> 960 (-9)"
+  },
+  {
+   "lane": "dpkg-l",
+   "T0": 673,
+   "out": 671,
+   "delta": -2,
+   "applied": true,
+   "ms": 307,
+   "notes": "metataxis: 1755 probes, 2 relocations, 673 -> 671 (-2)"
+  },
+  {
+   "lane": "findmnt",
+   "T0": 444,
+   "out": 443,
+   "delta": -1,
+   "applied": true,
+   "ms": 136,
+   "notes": "metataxis: 694 probes, 1 relocations, 444 -> 443 (-1)"
+  },
+  {
+   "lane": "json-pkg",
+   "T0": 681,
+   "out": 674,
+   "delta": -7,
+   "applied": true,
+   "ms": 786,
+   "notes": "metataxis: 3259 probes, 7 relocations, 681 -> 674 (-7)"
+  },
+  {
+   "lane": "kb-article",
+   "T0": 622,
+   "out": 621,
+   "delta": -1,
+   "applied": true,
+   "ms": 160,
+   "notes": "metataxis: 560 probes, 1 relocations, 622 -> 621 (-1)"
+  },
+  {
+   "lane": "llm-answer",
+   "T0": 674,
+   "out": 672,
+   "delta": -2,
+   "applied": true,
+   "ms": 238,
+   "notes": "metataxis: 778 probes, 2 relocations, 674 -> 672 (-2)"
+  },
+  {
+   "lane": "ls-l-real",
+   "T0": 1476,
+   "out": 1476,
+   "delta": 0,
+   "applied": false,
+   "ms": 9710,
+   "notes": "skipped"
+  },
+  {
+   "lane": "ls-real",
+   "T0": 433,
+   "out": 432,
+   "delta": -1,
+   "applied": true,
+   "ms": 283,
+   "notes": "metataxis: 1692 probes, 1 relocations, 433 -> 432 (-1)"
+  },
+  {
+   "lane": "ps-aux-real",
+   "T0": 1042,
+   "out": 1032,
+   "delta": -10,
+   "applied": true,
+   "ms": 2098,
+   "notes": "metataxis: 5114 probes, 10 relocations, 1042 -> 1032 (-10)"
+  }
+ ],
+ "totals": {
+  "T0": 7864,
+  "out": 7816,
+  "delta": -48
+ }
+}

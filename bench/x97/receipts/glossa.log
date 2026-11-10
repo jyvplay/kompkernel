@@ -1,0 +1,23 @@
+script        ASCII+script  script+ASCII   (2-char vocabulary tokens crossing the boundary)
+hangul                 452             0
+katakana                54             0
+cyrillic               161             0
+arabic                  70             0
+myanmar                 25             0
+khmer                   23             0
+cjk                    568             1
+polyglot               596             0
+
+lane                     script   A->S   S->A   S->S   A->A
+apt-real.wire.txt      cyrillic     55     56    163     90
+code-ts.wire.txt       cyrillic     62     70     86    564
+dpkg-l.wire.txt        cyrillic     47     47     65    321
+findmnt.wire.txt         arabic     37     36     29    202
+json-pkg.wire.txt      cyrillic     36     40     64    200
+kb-article.wire.txt    cyrillic     26     27      4    127
+llm-answer.wire.txt    cyrillic     34     36     13     76
+ls-l-real.wire.txt     polyglot    161    157    240    541
+ls-real.wire.txt       cyrillic     50     51     71    202
+ps-aux-real.wire.txt   cyrillic     81     80    111    479
+
+TOTAL boundaries in the ten tapes: ASCII->script 589, script->ASCII 600, script->script 846, ASCII->ASCII 2802

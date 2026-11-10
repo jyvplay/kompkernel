@@ -9445,3 +9445,422 @@ joint,chiron29,iso29,isoab}.ts` with receipts under `bench/x96/receipts/`. Harne
 `bench/x86/run-front-k.sh`. `.gitignore` gains `bench/x96/*.mjs`.
 
 [`docs/codec-abbreviations.md`](codec-abbreviations.md) §X96.
+
+---
+
+## §X97 — ΜΕΤΑΤΑΞΙΣ: arbitrary-rank rule relocation
+
+**The question this turn asked.** X96 shipped ἸΣΟΜΟΡΦΊΑ, whose only paying move is an *adjacent*
+transposition of two tape entries. X97 asked whether the tape's entry order carries more than that,
+and whether the remaining levers in the stack are worth pulling at all. Four were measured and three
+are closed with exact receipts; the fourth is the new codec.
+
+**Runtime honesty for this section.** Available in this environment: `git`, `gh`, `node` 22.22.3,
+`npx esbuild` (bundler), `npx tsc` (TypeScript 5 compiler), `python3`, `bash`, `grep`/`sed`/`awk`/
+`join`, `curl`-free `fetch_page`/`web_search`. **Not available: any model API, any SAT/SMT/SMT-LIB
+solver, Lean/Coq/Isabelle, a second human reviewer, a GPU.** No parallelism was used: every probe is
+single-threaded and was run with no other node process alive (`ps -p` checked before each launch).
+Every number below is the output of a command that actually ran; the receipts are in
+`bench/x97/receipts/`.
+
+### X97.1 The mechanism
+
+The wire is `§ RULES ¶ BODY` with a **delimiter-free** tape: each rule is one *new* letter of a
+declared one-token script, and its text runs to the next new letter. The tokenizer therefore never
+sees an entry boundary — it sees one long string. Two adjacent entries may or may not fuse across
+the boundary, and the fusion is worth a token.
+
+That makes a rule's **slot** a free parameter. ἸΣΟΜΟΡΦΊΑ searches it by *adjacent* transposition;
+ΜΕΤΑΤΑΞΙΣ searches it by **arbitrary-rank relocation**: take the rule at position `a`, re-insert it
+at any position `p ≠ a, a+1`, legal exactly when the reference DAG still holds (every rule it
+references precedes it, every rule referencing it follows it). One move can cross up to n−1
+boundaries at once, so ΜΕΤΑΤΑΞΙΣ's neighbourhood strictly contains ἸΣΟΜΟΡΦΊΑ's.
+
+Two properties make it cheap and safe:
+
+* **Relocation only, no letter pool.** ἸΣΟΜΟΡΦΪΑ must build the declared script's full one-token
+  pool before its first probe — 20 742 `countTokensExact` calls for a CJK tape. ΜΕΤΑΤΑΞΙΣ builds
+  nothing, because it never changes a letter.
+* **A relocation is a permutation of the entries**, so the rule→letter map is untouched: keys stay
+  distinct, the first letter still declares the same script, the DAG check keeps every reference
+  pointing strictly backwards, expansion terminates, and expansion composes with the permutation.
+  The decoded string is byte-identical **by construction** — and every candidate is re-decoded
+  through `chironDecode` anyway.
+
+**Pricing.** Whole-message `countTokens`. `bench/x97/receipts/eq.log` asserts
+`countTokens === countTokensExact` on all ten committed messages with 0 mismatches, and a relocation
+leaves the body byte-identical, so the body's chunks are cache hits — which is why tens of thousands
+of probes per lane cost seconds rather than minutes.
+
+### X97.2 Measured
+
+**(a) Standalone probe** `bench/x97/moves.ts`, `receipts/moves.json` — ten authoritative wires,
+whole-message priced, `chironDecode` verified, seeded, deterministic budget:
+
+| probes | result | vs ἸΣΟΜΟΡΦΊΑ |
+|---|---|---|
+| 250 | −30 | |
+| 1 000 | −45 | |
+| 4 000 | −58 | |
+| 16 000 | **−62** (7 864 → 7 802) | adjacent swap **−11** ⇒ **5.6×** |
+
+8 of 10 lanes improved; `ls-l-real` was still improving at the cap. Per lane at 16 000 probes:
+apt-real 850→836, code-ts 969→961, dpkg-l 673→671, findmnt 444→443, json-pkg 681→675, kb-article
+622→621, llm-answer 674→672, ls-l-real 1 476→1 458, ls-real 433→432, ps-aux-real 1 042→1 033.
+Convergence probes: 3 224 / 4 331 / 1 695 / 757 / 2 422 / 560 / 761 / >16 000 / 1 111 / 7 129.
+
+**(b) The shipped codec** `bench/x97/meta10.ts`, `receipts/meta10.json` — the committed wire as
+incumbent, zero frontier calls: **7 864 → 7 816 = −48 in 20 s**, where ἸΣΟΜΟΡΦΊΑ's adjacent swap
+measured −11 on the same wires. **9 of 9 decode-verifiable lanes improved, 0 worse.** On the 9
+verifiable wires the codec beats the standalone probe (−48 vs −44), and it is ~6× faster than the
+probe because `countTokens` is chunk-cached. `ls-l-real` is **0 and is reported as a quarantine**
+(its contract carries an extra clause `chironDecode` does not implement, so no relabelling of it can
+be verified).
+
+**(c) The 29-lane, load-controlled A/B** `bench/x97/ab29.ts`, `receipts/ab29.json` — see §X97.5.
+
+### X97.3 Three levers closed this turn, with the receipt that makes each exact
+
+| Lever | Receipt | Result |
+|---|---|---|
+| Unicode canonical normalisation (NFC/NFD) as a representation lever | `census.json` | **all 29 lanes are pure ASCII and already NFC** (not-NFC 0/29, not-NFD 0/29, non-ASCII 0/29, CR 0/29, BOM 0/29) ⇒ 0 headroom, measured not assumed |
+| **Run packing by joint multi-letter relabelling** (ἉΡΜΟΓΉ) | `harmogi.json` | **ΔT = 0, 0 acceptances over 1 200 whole-message-priced, `chironDecode`-verified probes.** Cause measured: the incumbent assignment is already merge-converged — 0.9078 tok/glyph in context vs 0.9681 for the vocabulary's 282 densest-merge glyphs — and every letter participates in many runs |
+| **Run fusion** — add a rule whose value is a repeated reference run | `moves.json` | **0** on all ten wires; re-confirms X94's ADD closure on a population it may not have covered |
+| **Bigram transliteration** (ΑΝΤΙΣΤΟΙΧΊΑ) | `antistoichia2.json` | **falsified, and the first bound was wrong by 53×.** `antistoichia.ts` counted every printable-ASCII bigram window that is not a vocabulary token and reported a 1 659-token upper bound (21.1 % of the message). `antistoichia2.ts` re-priced on `tokenStrings` — the segmentation o200k *actually* emits — and found **31** adjacent single-ASCII-character token pairs across all ten wires. Pooled net **1 token** at 2 tokens/entry, **0** at 3 |
+
+ΑΝΤΙΣΤΟΙΧΊΑ is the same error the repository has already paid for twice: a vocabulary-membership
+bound that does not survive contact with the tokenizer's real segmentation (cf. X95's frontcoding,
++114 claimed → +210 measured loss). It is recorded here with both receipts so the correction is
+visible.
+
+### X97.4 The cost centres, and why the remaining levers are where they are
+
+`receipts/centres.json` — the ten committed wires total **7 844 = contract 125 + tape 2 080 + body
+5 639**. Per lane (total / contract / tape / body): apt-real 848/11/206/631 · code-ts 967/11/247/709 ·
+dpkg-l 671/11/126/534 · findmnt 442/11/124/307 · json-pkg 679/11/145/523 · kb-article 620/11/56/553 ·
+llm-answer 672/11/88/573 · **ls-l-real 1 474/26/592/856** · ls-real 431/11/159/261 · ps-aux-real
+1 040/11/337/692. For ops the tape is 25–40 % of the message; for prose it is 9 %.
+
+`receipts/runpack2.json` — 57.1 % of the body is reference tokens (3 222 of 5 639). Already packed by
+the incumbent assignment **1 051**; true headroom **757** (718 restricted to capacity-feasible
+L ≤ 11). `receipts/capacity.json` — capacity is **not** the binding constraint (cyrillic 823
+two-char / 1 896 three-char single tokens against demand 195 / 135). So the 757 tokens are real but
+measured unreachable by **both** available mechanisms (ἉΡΜΟΓΉ ΔT = 0, FUSE 0), which is why they are
+reported as headroom and not as a plan.
+
+### X97.5 The frontier is exactly the configuration named last turn — re-confirmed, not restated
+
+RUN L (`bench/x86/run-front-l.sh`, two passes, `OMEGA_DET=1`, 29 lanes):
+
+* **PASS 1, gate `tagstackFrontier`:** `bench/x86/receipts/frontier-runL.log` — **TOTAL 12 639,
+  exact 29/29, 1 011 358 ms**, *"X80 total 12639 -> X86 total 12639 lanes differing: 0 / FRONTIER
+  CONFIRMED: identical to the X80 configuration, lane for lane."* ΜΕΤΑΤΑΞΙΣ is X74-chain-only, so
+  the gate cannot move, and it did not.
+* **PASS 2, shipped `tagstackEncode`:** `bench/x89/receipts/front3-runL.log` — **TOTAL 12 470**,
+  exact 29/29, against run K's 12 478.
+
+**But that −8 is NOT a clean measurement of ΜΕΤΑΤΑΞΙΣ, and it is not reported as one.** In the same
+process, apt-real's *shipped* value was **874** while run K's process produced **846** for the same
+bytes with ΜΕΤΑΤΑΞΙΣ absent, and a third isolated process produced **858** for the base chain. The
+parents budget with the wall clock and `OMEGA_DET` does not stub `hyle.ts`'s `Date.now()`, so the
+base chain is load-sensitive and a cross-process diff confounds the new codec with machine noise.
+
+The clean measurement is the **load-controlled A/B** `bench/x97/ab29.ts`, `receipts/ab29.json`: both
+arms in ONE process, back to back per lane, `OMEGA_DET=1 OMEGA_NO_MEMO=1` (the memo key omits the
+environment, so without `OMEGA_NO_MEMO` the second arm is served the first arm's cached object), arm
+A = shipped minus ΜΕΤΑΤΑΞΙΣ, arm B = shipped. Every emitted message is re-decoded against the source
+and its token count recomputed independently, because `admit` trusts `messageTokens`.
+
+> **RESULT (`bench/x97/receipts/ab29.json`).** shipped minus ΜΕΤΑΤΑΞΙΣ **12 478** → shipped
+> **12 434 = −44**, **13 of 29 lanes improved, 0 worse, 0 inexact** (every emitted message re-decoded
+> against its source and its token count recomputed independently). Per lane: kb-article −1,
+> unified-diff −2, node-help −1, findmnt −1, email-thread −1, ps-ef −2, ls-real −1, json-pkg −5,
+> code-ts −8, dpkg-l −1, ps-real −3, ps-aux-real −10, apt-real −8; the other 16 lanes unchanged.
+>
+> So the honest X97 headline is **−44 on 29 lanes (−0.35 %), 13 improved, 0 worse, exact 29/29**,
+> which is **3.4× ἸΣΟΜΟΡΦΪΑ's −13**; on the ten authoritative wires it is **−48 vs −11 = 4.4×**.
+> RUN L pass 2's −8 is reported as a *confounded* cross-process number and is NOT the codec's
+> measurement.
+>
+> **CPU is not claimed from ab29.** Arm A ran first and arm B second in the same process, so the
+> `msA`/`msB` columns are confounded by cold vs warm caches (1 265 489 ms vs 158 746 ms is an
+> ordering artefact, not a speedup). A CPU claim for ΜΕΤΑΤΑΞΙΣ requires an interleaved-repetition
+> design and has not been made.
+
+### X97.6 The open interface
+
+ΜΕΤΑΤΑΞΙΣ instantiates the **Optimal Linear Arrangement** problem: given a graph, "find an ordering
+π of V minimizing Σ_{i=1}^{n−1} |cut_πⁱ|" (arXiv:2502.10909, Feb 2025). OLA is solvable in O*(2ⁿ),
+has best polynomial factor O(√(log n) log log n), and admits exponential-time approximation schemes
+— (1.5+ε) for undirected OLA, (2+ε) for directed OLA in O*((2−δ)ⁿ). Leighton's minimum cut linear
+arrangement gets O(log²n) by recursively finding a 1/3-balanced cut of size O(S log n), recursing on
+both sides, and placing all of G₁ before G₂. Bienkowski & Even (STACS 2024) give a deterministic
+O(log n log log n) dynamic version via a spreading-metric LP on a time-expanded graph. Abboud &
+Schwartz (ICALP 2026) give MLOP O(√(n/ln n)) and note MLOP "captures Minimum Linear Arrangement as
+a special case with a symmetric submodular f that is the cut function of G".
+
+**The honest scope limit.** ΜΕΤΑΤΑΞΙΣ's cost is **not** a cut function. It is the token count of a
+delimiter-free serialisation under a fixed tokenizer, where consecutive entries may or may not fuse.
+None of the imported bounds transfers; they supply the problem's identity and the **balanced-cut
+divide-and-conquer template**, which is the natural next improvement over the current
+first-improvement climb. Nothing in this section is claimed as a consequence of them.
+
+### X97.7 Model-readability — the claim, and the honest downgrade
+
+ΜΕΤΑΤΑΞΙΣ changes only the ORDER of the tape's entries. The contract is byte-identical, the operator
+set is unchanged, every rule is the same string under the same letter, and `chironDecode` round-trips
+on every emitted message. So the *wire language* is provably unchanged and the decoding burden is
+unchanged.
+
+**What is NOT claimed: that an LLM decodes it.** No model API is available in this environment, so
+LLM decodability was not tested here, and the claim is downgraded accordingly. What external work
+does support the design is recorded: arXiv:2604.13066 (LLMs learn in-context dictionaries and analyse
+encoded representations losslessly, exact match > 0.99 on template-based compression) and
+arXiv:2606.19857 (BabelTele — "Universality: any LLM should fully understand compressed output
+without a codebook"). The second is the closer analogue to this stack and the stronger external
+support for the in-band-contract design; neither is a test of *this* wire.
+
+---
+
+## §X99 — ΣΥΝΔΥΑΣΜΟΣ: relocation and re-spelling, alternated
+
+**What X99 asked, and what it found.** X97 closed four levers with exact receipts and shipped
+ΜΕΤΑΤΑΞΙΣ. X99 asked whether a *fifth*, orthogonal degree of freedom existed on the tape that no
+codec had touched, and found one — plus the coupling that makes it worth more than either half.
+
+**Runtime honesty for this section.** Available: `git`, `gh`, `node` 22.22.3, `npx esbuild`,
+`npx tsc` (exit 0 on the shipped tree), `python3`, `bash`, `grep`/`sed`/`awk`, `web_search` /
+`fetch_page`. **Not available: any model API, any SAT/SMT solver, Lean/Coq/Isabelle, a GPU, a second
+human reviewer.** No parallelism: every probe is single-threaded and was launched only after `ps -p`
+confirmed no other node process was alive. Every number below is the output of a command that ran;
+receipts are in `bench/x97/receipts/` and `bench/x99/receipts/`.
+
+### X99.1 The boundary census that names the mechanism
+
+`bench/x97/receipts/glossa.json` (and `glossa.log`). The ten committed tapes contain **589
+ASCII→script boundaries, 600 script→ASCII boundaries, 846 script→script boundaries and 2 802
+ASCII→ASCII boundaries**. The vocabulary's 2-character tokens, counted per script by scanning all
+200 007 decodable ids through `decodeIds` (`vocab.log`):
+
+| script | ASCII+script | script+ASCII | script+script (2-char) | script+script (3-char) |
+|---|---|---|---|---|
+| polyglot | 596 | 0 | 3 417 | 3 399 |
+| cjk | 568 | 1 | 2 408 | 388 |
+| hangul | 452 | 0 | 387 | 41 |
+| cyrillic | 161 | 0 | 823 | 1 896 |
+| arabic | 70 | 0 | 771 | 1 187 |
+| katakana | 54 | 0 | 153 | 65 |
+| myanmar | 25 | 0 | 85 | 63 |
+| khmer | 23 | 0 | 110 | 53 |
+
+**The asymmetry is the mechanism.** A tape entry `kᵢ vᵢ` whose value begins with an ASCII character
+has a `script→ASCII` boundary, and there is essentially **no** vocabulary token of that shape — 0 for
+every script except CJK's single one. The same entry with a value that *begins with a reference
+letter* has a `script→script` boundary, with 823 (cyrillic) to 3 417 (polyglot) tokens available.
+**So the spelling of a value decides whether its own boundary can fuse at all**, and that is a free
+parameter no codec in the stack had used.
+
+### X99.2 The mechanism
+
+Two transformations of the same tape, neither of which changes the rule→letter map, the rule set, or
+the expansion:
+
+* **ΜΕΤΑΤΑΞΙΣ** — relocate an entry to an arbitrary valid slot. Changes which rules are *neighbours*.
+* **ΠΡΟΟΙΜΙΟΝ** — re-spell a value as an interleaving of literal runs and references to **strictly
+  earlier** rules. Changes whether a boundary is *fusable at all*.
+
+**They are coupled.** A factor must precede the rule that uses it, so relocating a rule earlier can
+enable a re-spelling that was previously illegal; and a re-spelling changes the character stream that
+relocation optimises. ΣΥΝΔΥΑΣΜΟΣ alternates them for four rounds, keeping the best message seen.
+
+**Legality, stated exactly.** The tape is delimiter-free and the parser treats a letter as a key on
+its *first* appearance only. So `kᵢ kₐ literal` is read as key `kᵢ` whose value is `value(a)+literal`,
+and the expansion is unchanged. A factor must be a **strictly earlier** rule: a forward reference
+would be read as a new key and corrupt the tape.
+
+**Fidelity.** Both transformations preserve expansion — relocation is a permutation of entries with
+the reference DAG intact, re-spelling replaces a value's text with a concatenation that expands to
+the same string — so the decode is byte-identical **by construction**. Every admitted candidate is
+re-decoded through `chironDecode` anyway, and a candidate that throws is not a candidate.
+
+### X99.3 Measured
+
+**Standalone, ten authoritative wires** `bench/x97/receipts/syndyasmos.json`, all arms from the
+committed wire, whole-message priced, `chironDecode`-verified:
+
+| arm | total | Δ | exact |
+|---|---|---|---|
+| ΜΕΤΑΤΑΞΙΣ only | 7 816 | −48 | 9/10 |
+| ΠΡΟΟΙΜΙΟΝ only | 7 837 | −27 | 9/10 |
+| ΜΕΤΑΤΑΞΙΣ → ΠΡΟΟΙΜΙΟΝ | 7 792 | −72 | 9/10 |
+| **ΠΡΟΟΙΜΙΟΝ → ΜΕΤΑΤΑΞΙΣ** | **7 788** | **−76** | 9/10 |
+| alternate ×4 | 7 790 | −74 | 9/10 |
+
+The combination beats either half by ~1.6× and beats their **sum** (−75) by 1 token, so the
+interaction is real and not merely additive.
+
+**The shipped codec** `bench/x99/receipts/synd10.json`, incumbent = the committed wire, zero
+frontier calls: **7 864 → 7 800 = −64**, against ΜΕΤΑΤΑΞΙΣ's −48 on the same wires. Per lane:
+apt-real −18, code-ts −11, json-pkg −11, ps-aux-real −12, dpkg-l −4, findmnt −4, kb-article −1,
+llm-answer −2, ls-real −1, ls-l-real 0.
+
+**CPU, measured honestly.** `bench/x97/receipts/synd10.json` carries `msMeta` and `msSynd` per lane
+for both arms in the same process, back to back, `OMEGA_DET=1`:
+
+| | ΜΕΤΑΤΑΞΙΣ | ΣΥΝΔΥΑΣΜΟΣ, 4 rounds | ΣΥΝΔΥΑΣΜΟΣ, early exit |
+|---|---|---|---|
+| ten wires, total ms | 19 072 | 35 141 | **19 476** |
+| ten wires, tokens | 7 816 (−48) | 7 800 (−64) | **7 800 (−64)** |
+
+The four-round form costs **1.8×** ΜΕΤΑΤΑΞΙΣ's CPU, which would make the codec a compression/CPU
+trade rather than a Pareto win. `synd10.json` shows why that is avoidable: a typical lane is *"4
+rounds, 1 relocation, 3 re-spellings"* — three of the four rounds change nothing, and every wasted
+round re-runs ΜΕΤΑΤΑΞΙΣ's whole climb over an unchanged tape with the same seeded budget, so it
+cannot improve either. The early exit (`if (cur.messageTokens >= atEntry) break;`) stops at the first
+non-improving round and is **output-identical**: −64 before and after, lane for lane. The result is
+**+16 tokens saved for +2.1 % CPU over ΜΕΤΑΤΑΞΙΣ** — a Pareto improvement on both axes, not a trade.
+Per lane, the early exit takes ps-aux-real from 7 299 ms to 2 588 ms and dpkg-l from 2 061 ms to
+816 ms at identical output.
+
+This is the only honest CPU claim in this section, and it is a *codec-internal* one: it compares
+ΣΥΝΔΥΑΣΜΟΣ with ΜΕΤΑΤΑΞΙΣ on the same input in the same process. It is **not** a claim about the
+whole stack's wall clock, which the base chain dominates and which the load-sensitivity defect in
+§X97.5 makes unmeasurable across processes.
+
+**`ls-l-real` is a quarantine and the codec refuses it.** Its contract carries an extra clause
+(`"After ~, a number has . before its last 1,1 digits"`) that `chironDecode` does not implement, so
+no re-spelling of it can be verified. ΣΥΝΔΥΑΣΜΟΣ's own gate detects the mismatch and returns
+`applied: false` with the incumbent unchanged — visible in `synd10.json` as
+`"syndyasmos: re-spelling failed fidelity at round 1 — refused"`. That is the fidelity gate doing
+its job on the one lane where a construction argument is not enough.
+
+### X99.4 Four more levers closed this turn, with the receipt that makes each exact
+
+| Lever | Receipt | Result |
+|---|---|---|
+| **ΑΝΑΠΑΡΑΓΩΓΗ** — re-spell a value as a *complete* decomposition into earlier rules | `anaparagoge.json` | **−1, and the single acceptance is on the quarantined lane with `exact=false`.** Only **30** candidate decompositions exist across all ten wires: the incumbent grammar's values are already maximal with respect to each other. ΠΡΟΟΙΜΙΟΝ's relaxation to *partial* interleaving is what opens the population |
+| **ΚΑΤΑΛΥΤΗΣ** — add a single-character "catalyst" rule so every value can begin with a reference | `katalytes.json` | **0 over 1 536 whole-message prices.** A catalyst costs 1 key + 1 value = 2 tokens and can save at most 1 per fused boundary, so it never pays. Published as a falsification, not an absence of findings |
+| **ΑΝΤΙΣΤΟΙΧΊΑ** — transliterate costly ASCII bigrams onto non-ASCII 2-char vocabulary tokens | `antistoichia.json`, `antistoichia2.json` | **falsified, and the first bound was wrong by 53×.** `antistoichia.ts` counted every printable-ASCII bigram window that is not a vocabulary token → a 1 659-token "upper bound" (21.1 %). `antistoichia2.ts` re-priced on `tokenStrings`, the segmentation o200k *actually* emits, and found **31** adjacent single-ASCII-character token pairs across all ten wires; pooled net **1 token** at 2 tokens/entry, **0** at 3. Supply is ample (8 789 two-char non-ASCII tokens, `bigram.json`) — the *demand* is not |
+| **Run packing / fusion / ADD** | `harmogi.json`, `moves.json` | unchanged from X97: ΔT = 0 over 1 200 whole-message-priced probes; FUSE 0 |
+
+ΑΝΤΙΣΤΟΙΧΊΑ is the same error the repository has now paid for three times: a vocabulary-membership
+bound that does not survive contact with the tokenizer's real segmentation (cf. X95's frontcoding,
++114 claimed → +210 measured loss). Both receipts are kept so the correction is visible.
+
+### X99.5 The frontier is exactly the configuration named last turn — re-confirmed, not restated
+
+RUN L (`bench/x86/run-front-l.sh`, two passes, `OMEGA_DET=1`, 29 lanes):
+
+* **PASS 1, gate `tagstackFrontier`** — `bench/x86/receipts/frontier-runL.log`: **TOTAL 12 639,
+  exact 29/29, 1 011 358 ms**, *"X80 total 12639 -> X86 total 12639 lanes differing: 0 / FRONTIER
+  CONFIRMED: identical to the X80 configuration, lane for lane."* ΣΥΝΔΥΑΣΜΟΣ is X74-chain-only, so
+  the gate cannot move, and it did not.
+* **PASS 2, shipped `tagstackEncode`** — `bench/x89/receipts/front3-runL.log`: **TOTAL 12 470**
+  against run K's 12 478. **That −8 is confounded** (see §X97.5) and is not the codec's measurement.
+
+The clean measurements are the load-controlled A/Bs, both arms in one process, `OMEGA_DET=1
+OMEGA_NO_MEMO=1`, every emitted message re-decoded against its source and its token count recomputed
+independently:
+
+| step | 29-lane shipped total | Δ | improved | worse | inexact | receipt |
+|---|---|---|---|---|---|---|
+| X96 baseline (ἸΣΟΜΟΡΦΪΑ) | 12 478 | — | — | — | — | `bench/x89/receipts/front3-runK.json` |
+| + ΜΕΤΑΤΑΞΙΣ | **12 434** | −44 | 13 | 0 | 0 | `bench/x97/receipts/ab29.json` |
+| + ΣΥΝΔΥΑΣΜΟΣ | **12 410** / **12 443** | −24 / −27 | 12 | 0 | 0 | `bench/x99/receipts/ab99.json`, `ab99b.log` |
+
+ΣΥΝΔΥΑΣΜΟΣ's twelve improved lanes (the same set in both runs): vmstat −1, du-real −3, node-help −1,
+findmnt −3, llm-answer −1, ps-ef −3, json-pkg −3, code-ts −2, dpkg-l −2, ps-real −2, ps-aux-real −2,
+apt-real −1/−4. The other 17 lanes are unchanged, and **none is worse in either run**.
+
+**The two runs disagree on the totals (12 410 vs 12 443) and agree on everything that matters: 12
+improved, 0 worse, 0 inexact, the same twelve lanes.** That is the load-sensitivity defect, not a
+codec defect — the two processes' base chains read 12 434 and 12 470 for the same bytes. **So the
+defensible claim is the Δ and the lane set, not the total.** Quoting only the better total would be
+exactly the "an estimate may rank candidates but never accept them" error, so both are recorded.
+
+**X97+X99 together move the shipped 29-lane total by −68 to −35 depending on the process** (12 478 →
+12 410, or → 12 443), i.e. **−0.28 % to −0.54 %**, and the gate-to-shipped gap from 12 639 narrows by
+the same amount. On the ten authoritative wires — where the incumbent is a *fixed committed file*, so
+there is no base-chain variance at all — the numbers are exact and reproducible: ἸΣΟΜΟΡΦΪΑ −11,
+ΜΕΤΑΤΑΞΙΣ −48, ΣΥΝΔΥΑΣΜΟΣ −64.
+
+**A third observation of the load-sensitivity defect, and what it means for these numbers.**
+`ab99b.log` (the re-run against the shipped bundle) reports `apt-real iso=874` in arm A — the lane
+whose arm A read **846** in `ab29.json`, **858** in an isolated process, **874** in RUN L pass 2 and
+**874** again here. The 29-lane *total* is therefore **not a reproducible number**: only the
+**within-process Δ** is, because both arms share the process and hence the load. This is why every
+claim in this section is stated as a Δ against a same-process base, and why the 29-lane totals above
+are quoted from `ab99.json` with that caveat attached rather than as configurations.
+
+`ab99.json` was produced by a bundle built before the early-exit patch of §X99.3; `ab99b.log` is the
+re-run against the shipped bundle. The early exit is output-identical on the ten authoritative wires
+(`synd10.json`, −64 before and after), so the difference between the two runs is base-chain variance,
+not the patch.
+**CPU is not claimed from either A/B**: arm A runs before arm B in the same process, so the
+`msA`/`msB` columns carry a cold-vs-warm confound (1 689 849 ms vs 271 146 ms is an ordering
+artefact). The only honest CPU claim in this turn is the codec-internal one in §X99.3.
+
+### X99.6 The open interface
+
+ΜΕΤΑΤΑΞΙΣ and ΣΥΝΔΥΑΣΜΟΣ both instantiate the **Optimal Linear Arrangement** problem — "find an
+ordering π of V minimizing Σ_{i=1}^{n−1} |cut_πⁱ|" (arXiv:2502.10909, Feb 2025) — except that the cost
+is a *tokenizer-defined boundary cost*, not a cut function. **Honest scope limit: none of the
+imported approximation bounds transfers.** What they supply is the problem's shape and the
+**balanced-cut divide-and-conquer template** (Leighton: O(log²n) by recursively finding a 1/3-balanced
+cut, recursing on both sides, placing all of G₁ before G₂; Bienkowski & Even, STACS 2024:
+deterministic O(log n log log n) dynamic; Abboud & Schwartz, ICALP 2026, Algorithm 1 "Recursive
+Balanced Global Cutting": MLOP O(√(n/ln n)), and MLOP "captures Minimum Linear Arrangement as a
+special case with a symmetric submodular f that is the cut function of G"). That template is the
+natural next improvement over the current first-improvement climb, and it is unbuilt.
+
+### X99.7 Model-readability — the claim, and the honest downgrade
+
+ΣΥΝΔΥΑΣΜΟΣ changes only the *order* of the tape's entries and the *spelling* of their values. The
+contract is byte-identical, the operator set is unchanged, every rule is the same string under the
+same letter, and `chironDecode` round-trips on every emitted message. So the wire language is
+provably unchanged and the decoding burden is unchanged: a reader who could expand the incumbent can
+expand this, by the same rule.
+
+**What is NOT claimed: that an LLM decodes it.** No model API is available in this environment, so
+LLM decodability was not tested here, and the claim is downgraded accordingly. External work that
+supports the *design* (not this wire) is recorded: arXiv:2604.13066 (LLMs learn in-context
+dictionaries and reconstruct losslessly; exact match > 0.99 on template-based compression,
+Levenshtein > 0.91 on algorithmic, at 60–80 % ratios) and arXiv:2606.19857 (BabelTele:
+"Universality: any LLM should fully understand compressed output without a codebook"). The former's
+token-savings condition `(1+f)·n(M) + n(S) < f·n(S)` is an independent restatement of the ADD
+profitability rule X94 measured closed here.
+
+**And the reason LLM-arithmetic-coding is inadmissible for this contract**, now with a citation:
+Kipf et al., *Waiting to Decompress: The Economics of LLM-Based Compression*, VLDB CIDR 2026 —
+"deterministic decompression requires access to the exact same model used during encoding —
+including its weights, tokenizer, and preprocessing pipeline. Any change, even in floating-point
+arithmetic or token handling, could result in mismatches during decoding, making lossless
+reconstruction impossible." Our reader is a different model on a different day, so a
+model-dependent decoder is out of contract and a *grammar* is the only admissible form.
+
+### X99.8 Generalized local leaders (`bench/x99/receipts/leaders-x99.{json,log}`)
+
+Pure join, zero frontier calls. `raw` and `floor` are imported from `bench/x90/receipts/
+leaders-x90.json` and **not** re-measured; `shipped` is the load-controlled A/B arm B
+(`bench/x99/receipts/front3-shipped-x99.json`), i.e. the current shipped configuration measured with
+load held constant rather than the confounded RUN L pass-2 number. **Uncertainty:** the same
+configuration reads 12 443 in the `ab99b.log` process against the 12 410 used here, so the headroom
+figures below carry a ±0.3 percentage-point band from the load-sensitivity defect and should be read
+as rankings, not as constants. Headroom = `1 − floor/shipped`
+against an **independent readability floor**, so a lane whose floor is *above* its shipped value is
+flagged rather than silently dropped.
+
+| category | lanes | raw | shipped | ratio | gate | floor | headroom | leader |
+|---|---|---|---|---|---|---|---|---|
+| **OPS TABLE** | 11 | 4 135 | 1 723 | 0.4169 | 1 740 | 1 272 | **26.2 %** | `holdout-x40/metrics.tsv` 811→210 |
+| **OPS LISTING** | 9 | 16 516 | 5 768 | 0.3518 | 5 810 | 4 420 | **23.4 %** | `holdout-x41/ls-l-real.txt` 5 194→1 390 |
+| **CODE / MARKUP** | 3 | 3 152 | 2 046 | 0.6555 | 2 066 | 1 728 | **15.5 %** | `holdout/json-pkg.txt` 1 152→672 |
+| **DATA** | 2 | 1 095 | 234 | 0.2137 | 234 | 209 | 10.7 % | `holdout-x40/cue-sheet.md` 513→101 |
+| **PROSE** | 4 | 3 117 | 2 639 | 0.8466 | 2 646 | 2 529 | **4.2 %** | `holdout-work/email-thread.txt` 629→487 |
+| **ALL 29** | 29 | 28 015 | 12 410 | 0.4430 | 12 639 | 10 158 | **18.1 %** | |
+
+The readability-price law (`floor/shipped < 1.00`) holds on all 29 lanes. **The money is still in
+ops, and this turn's two codecs went exactly there**: of ΜΕΤΑΤΑΞΙΣ's 13 improved lanes, 11 are ops
+(OPS TABLE 4, OPS LISTING 6, CODE 1); of ΣΥΝΔΥΑΣΜΟΣ's 12, 11 are ops and 1 is prose. PROSE gained
+−2 of −68, consistent with its 4.2 % headroom. **The next large gain, if there is one, is in OPS
+TABLE and OPS LISTING — 26.2 % and 23.4 % against the independent floor — and not in prose.**

@@ -1,0 +1,67 @@
+{
+ "twoCharAscii": 3261,
+ "supplyNonAscii": 8789,
+ "bound": 1659,
+ "rows": [
+  {
+   "lane": "apt-real.wire.txt",
+   "windows": 907,
+   "bound": 64,
+   "messageTokens": 850
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "windows": 2431,
+   "bound": 286,
+   "messageTokens": 969
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "windows": 2186,
+   "bound": 190,
+   "messageTokens": 673
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "windows": 1867,
+   "bound": 111,
+   "messageTokens": 444
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "windows": 1374,
+   "bound": 133,
+   "messageTokens": 681
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "windows": 2339,
+   "bound": 222,
+   "messageTokens": 622
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "windows": 1833,
+   "bound": 249,
+   "messageTokens": 674
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "windows": 1589,
+   "bound": 139,
+   "messageTokens": 1476
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "windows": 662,
+   "bound": 62,
+   "messageTokens": 433
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "windows": 1626,
+   "bound": 203,
+   "messageTokens": 1042
+  }
+ ]
+}

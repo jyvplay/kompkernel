@@ -1,0 +1,131 @@
+{
+ "note": "X97 HARMOGI falsification probe; whole-message measured acceptance only",
+ "rows": [
+  {
+   "lane": "apt-real",
+   "script": "cyrillic",
+   "rules": 64,
+   "T0": 850,
+   "best": 850,
+   "delta": 0,
+   "probes": 120,
+   "accepted": 0,
+   "distinctRuns": 114,
+   "runOcc": 124
+  },
+  {
+   "lane": "code-ts",
+   "script": "cyrillic",
+   "rules": 75,
+   "T0": 969,
+   "best": 969,
+   "delta": 0,
+   "probes": 120,
+   "accepted": 0,
+   "distinctRuns": 93,
+   "runOcc": 96
+  },
+  {
+   "lane": "dpkg-l",
+   "script": "cyrillic",
+   "rules": 48,
+   "T0": 673,
+   "best": 673,
+   "delta": 0,
+   "probes": 120,
+   "accepted": 0,
+   "distinctRuns": 51,
+   "runOcc": 51
+  },
+  {
+   "lane": "findmnt",
+   "script": "arabic",
+   "rules": 34,
+   "T0": 444,
+   "best": 444,
+   "delta": 0,
+   "probes": 120,
+   "accepted": 0,
+   "distinctRuns": 28,
+   "runOcc": 29
+  },
+  {
+   "lane": "json-pkg",
+   "script": "cyrillic",
+   "rules": 48,
+   "T0": 681,
+   "best": 681,
+   "delta": 0,
+   "probes": 120,
+   "accepted": 0,
+   "distinctRuns": 46,
+   "runOcc": 47
+  },
+  {
+   "lane": "kb-article",
+   "script": "cyrillic",
+   "rules": 27,
+   "T0": 622,
+   "best": 622,
+   "delta": 0,
+   "probes": 120,
+   "accepted": 0,
+   "distinctRuns": 55,
+   "runOcc": 59
+  },
+  {
+   "lane": "llm-answer",
+   "script": "cyrillic",
+   "rules": 34,
+   "T0": 674,
+   "best": 674,
+   "delta": 0,
+   "probes": 120,
+   "accepted": 0,
+   "distinctRuns": 53,
+   "runOcc": 61
+  },
+  {
+   "lane": "ls-l-real",
+   "script": "polyglot",
+   "rules": 143,
+   "T0": 1476,
+   "best": 1476,
+   "delta": 0,
+   "probes": 120,
+   "accepted": 0,
+   "distinctRuns": 142,
+   "runOcc": 153
+  },
+  {
+   "lane": "ls-real",
+   "script": "cyrillic",
+   "rules": 48,
+   "T0": 433,
+   "best": 433,
+   "delta": 0,
+   "probes": 120,
+   "accepted": 0,
+   "distinctRuns": 24,
+   "runOcc": 27
+  },
+  {
+   "lane": "ps-aux-real",
+   "script": "cyrillic",
+   "rules": 79,
+   "T0": 1042,
+   "best": 1042,
+   "delta": 0,
+   "probes": 120,
+   "accepted": 0,
+   "distinctRuns": 87,
+   "runOcc": 104
+  }
+ ],
+ "totals": {
+  "T0": 7864,
+  "best": 7864,
+  "delta": 0,
+  "probes": 1200
+ }
+}

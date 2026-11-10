@@ -1,0 +1,314 @@
+{
+ "rows": [
+  {
+   "lane": "apt-real.wire.txt",
+   "t0": 850,
+   "arms": {
+    "A_meta": {
+     "n": 835,
+     "delta": -15,
+     "exact": true
+    },
+    "B_prooimion": {
+     "n": 847,
+     "delta": -3,
+     "exact": true
+    },
+    "C_meta_pro": {
+     "n": 832,
+     "delta": -18,
+     "exact": true
+    },
+    "D_pro_meta": {
+     "n": 832,
+     "delta": -18,
+     "exact": true
+    },
+    "E_alternate": {
+     "n": 832,
+     "delta": -18,
+     "exact": true
+    }
+   }
+  },
+  {
+   "lane": "code-ts.wire.txt",
+   "t0": 969,
+   "arms": {
+    "A_meta": {
+     "n": 960,
+     "delta": -9,
+     "exact": true
+    },
+    "B_prooimion": {
+     "n": 968,
+     "delta": -1,
+     "exact": true
+    },
+    "C_meta_pro": {
+     "n": 959,
+     "delta": -10,
+     "exact": true
+    },
+    "D_pro_meta": {
+     "n": 958,
+     "delta": -11,
+     "exact": true
+    },
+    "E_alternate": {
+     "n": 958,
+     "delta": -11,
+     "exact": true
+    }
+   }
+  },
+  {
+   "lane": "dpkg-l.wire.txt",
+   "t0": 673,
+   "arms": {
+    "A_meta": {
+     "n": 671,
+     "delta": -2,
+     "exact": true
+    },
+    "B_prooimion": {
+     "n": 671,
+     "delta": -2,
+     "exact": true
+    },
+    "C_meta_pro": {
+     "n": 669,
+     "delta": -4,
+     "exact": true
+    },
+    "D_pro_meta": {
+     "n": 669,
+     "delta": -4,
+     "exact": true
+    },
+    "E_alternate": {
+     "n": 669,
+     "delta": -4,
+     "exact": true
+    }
+   }
+  },
+  {
+   "lane": "findmnt.wire.txt",
+   "t0": 444,
+   "arms": {
+    "A_meta": {
+     "n": 443,
+     "delta": -1,
+     "exact": true
+    },
+    "B_prooimion": {
+     "n": 441,
+     "delta": -3,
+     "exact": true
+    },
+    "C_meta_pro": {
+     "n": 440,
+     "delta": -4,
+     "exact": true
+    },
+    "D_pro_meta": {
+     "n": 440,
+     "delta": -4,
+     "exact": true
+    },
+    "E_alternate": {
+     "n": 440,
+     "delta": -4,
+     "exact": true
+    }
+   }
+  },
+  {
+   "lane": "json-pkg.wire.txt",
+   "t0": 681,
+   "arms": {
+    "A_meta": {
+     "n": 674,
+     "delta": -7,
+     "exact": true
+    },
+    "B_prooimion": {
+     "n": 678,
+     "delta": -3,
+     "exact": true
+    },
+    "C_meta_pro": {
+     "n": 671,
+     "delta": -10,
+     "exact": true
+    },
+    "D_pro_meta": {
+     "n": 670,
+     "delta": -11,
+     "exact": true
+    },
+    "E_alternate": {
+     "n": 670,
+     "delta": -11,
+     "exact": true
+    }
+   }
+  },
+  {
+   "lane": "kb-article.wire.txt",
+   "t0": 622,
+   "arms": {
+    "A_meta": {
+     "n": 621,
+     "delta": -1,
+     "exact": true
+    },
+    "B_prooimion": {
+     "n": 622,
+     "delta": 0,
+     "exact": true
+    },
+    "C_meta_pro": {
+     "n": 621,
+     "delta": -1,
+     "exact": true
+    },
+    "D_pro_meta": {
+     "n": 621,
+     "delta": -1,
+     "exact": true
+    },
+    "E_alternate": {
+     "n": 621,
+     "delta": -1,
+     "exact": true
+    }
+   }
+  },
+  {
+   "lane": "llm-answer.wire.txt",
+   "t0": 674,
+   "arms": {
+    "A_meta": {
+     "n": 672,
+     "delta": -2,
+     "exact": true
+    },
+    "B_prooimion": {
+     "n": 673,
+     "delta": -1,
+     "exact": true
+    },
+    "C_meta_pro": {
+     "n": 672,
+     "delta": -2,
+     "exact": true
+    },
+    "D_pro_meta": {
+     "n": 671,
+     "delta": -3,
+     "exact": true
+    },
+    "E_alternate": {
+     "n": 672,
+     "delta": -2,
+     "exact": true
+    }
+   }
+  },
+  {
+   "lane": "ls-l-real.wire.txt",
+   "t0": 1476,
+   "arms": {
+    "A_meta": {
+     "n": 1476,
+     "delta": 0,
+     "exact": false
+    },
+    "B_prooimion": {
+     "n": 1466,
+     "delta": -10,
+     "exact": false
+    },
+    "C_meta_pro": {
+     "n": 1466,
+     "delta": -10,
+     "exact": false
+    },
+    "D_pro_meta": {
+     "n": 1466,
+     "delta": -10,
+     "exact": false
+    },
+    "E_alternate": {
+     "n": 1466,
+     "delta": -10,
+     "exact": false
+    }
+   }
+  },
+  {
+   "lane": "ls-real.wire.txt",
+   "t0": 433,
+   "arms": {
+    "A_meta": {
+     "n": 432,
+     "delta": -1,
+     "exact": true
+    },
+    "B_prooimion": {
+     "n": 433,
+     "delta": 0,
+     "exact": true
+    },
+    "C_meta_pro": {
+     "n": 432,
+     "delta": -1,
+     "exact": true
+    },
+    "D_pro_meta": {
+     "n": 432,
+     "delta": -1,
+     "exact": true
+    },
+    "E_alternate": {
+     "n": 432,
+     "delta": -1,
+     "exact": true
+    }
+   }
+  },
+  {
+   "lane": "ps-aux-real.wire.txt",
+   "t0": 1042,
+   "arms": {
+    "A_meta": {
+     "n": 1032,
+     "delta": -10,
+     "exact": true
+    },
+    "B_prooimion": {
+     "n": 1038,
+     "delta": -4,
+     "exact": true
+    },
+    "C_meta_pro": {
+     "n": 1030,
+     "delta": -12,
+     "exact": true
+    },
+    "D_pro_meta": {
+     "n": 1029,
+     "delta": -13,
+     "exact": true
+    },
+    "E_alternate": {
+     "n": 1030,
+     "delta": -12,
+     "exact": true
+    }
+   }
+  }
+ ]
+}
