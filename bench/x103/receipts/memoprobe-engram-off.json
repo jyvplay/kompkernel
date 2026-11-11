@@ -1,0 +1,23 @@
+{
+ "setting": "engram-off",
+ "out": [
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "tokens": 845,
+   "control": 836,
+   "delta": 9
+  },
+  {
+   "path": "bench/holdout/code-ts.txt",
+   "tokens": 970,
+   "control": 968,
+   "delta": 2
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "tokens": 668,
+   "control": 667,
+   "delta": 1
+  }
+ ]
+}

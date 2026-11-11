@@ -1,0 +1,153 @@
+{
+ "note": "X103 OURA-MEMO A/B: arm A = shipped default (X67 memo on), arm B = OMEGA_OURA_MEMO=0. Both arms OMEGA_DET=1, OMEGA_NO_MEMO=1, PROAGOGE enabled. Interleaved lane by lane, one process.",
+ "lo": 0,
+ "hi": 15,
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "armA": 60,
+   "armB": 60,
+   "delta": 0,
+   "armAms": 2438,
+   "armBms": 770,
+   "sameDecode": true
+  },
+  {
+   "lane": "kb-article.txt",
+   "armA": 621,
+   "armB": 621,
+   "delta": 0,
+   "armAms": 3299,
+   "armBms": 5246,
+   "sameDecode": true
+  },
+  {
+   "lane": "uptime-w.txt",
+   "armA": 80,
+   "armB": 80,
+   "delta": 0,
+   "armAms": 2170,
+   "armBms": 999,
+   "sameDecode": true
+  },
+  {
+   "lane": "free-m.txt",
+   "armA": 76,
+   "armB": 76,
+   "delta": 0,
+   "armAms": 2204,
+   "armBms": 914,
+   "sameDecode": true
+  },
+  {
+   "lane": "vmstat.txt",
+   "armA": 148,
+   "armB": 148,
+   "delta": 0,
+   "armAms": 2284,
+   "armBms": 3592,
+   "sameDecode": true
+  },
+  {
+   "lane": "unified-diff.patch",
+   "armA": 415,
+   "armB": 415,
+   "delta": 0,
+   "armAms": 3380,
+   "armBms": 6926,
+   "sameDecode": true
+  },
+  {
+   "lane": "df-h.txt",
+   "armA": 170,
+   "armB": 170,
+   "delta": 0,
+   "armAms": 2515,
+   "armBms": 2152,
+   "sameDecode": true
+  },
+  {
+   "lane": "df-real.txt",
+   "armA": 125,
+   "armB": 125,
+   "delta": 0,
+   "armAms": 3618,
+   "armBms": 2362,
+   "sameDecode": true
+  },
+  {
+   "lane": "du-real.txt",
+   "armA": 269,
+   "armB": 269,
+   "delta": 0,
+   "armAms": 3586,
+   "armBms": 4346,
+   "sameDecode": true
+  },
+  {
+   "lane": "node-help.txt",
+   "armA": 860,
+   "armB": 860,
+   "delta": 0,
+   "armAms": 7498,
+   "armBms": 12341,
+   "sameDecode": true
+  },
+  {
+   "lane": "findmnt.txt",
+   "armA": 440,
+   "armB": 440,
+   "delta": 0,
+   "armAms": 6015,
+   "armBms": 9143,
+   "sameDecode": true
+  },
+  {
+   "lane": "df-h.txt",
+   "armA": 107,
+   "armB": 107,
+   "delta": 0,
+   "armAms": 4164,
+   "armBms": 2222,
+   "sameDecode": true
+  },
+  {
+   "lane": "email-thread.txt",
+   "armA": 487,
+   "armB": 487,
+   "delta": 0,
+   "armAms": 7178,
+   "armBms": 8433,
+   "sameDecode": true
+  },
+  {
+   "lane": "llm-answer.md",
+   "armA": 671,
+   "armB": 671,
+   "delta": 0,
+   "armAms": 8653,
+   "armBms": 12632,
+   "sameDecode": true
+  },
+  {
+   "lane": "markdown-table.md",
+   "armA": 174,
+   "armB": 174,
+   "delta": 0,
+   "armAms": 6302,
+   "armBms": 6081,
+   "sameDecode": true
+  }
+ ],
+ "totals": {
+  "armA": 4703,
+  "armB": 4703,
+  "delta": 0,
+  "better": 0,
+  "worse": 0,
+  "same": 15,
+  "sameDec": 15,
+  "armAms": 65304,
+  "armBms": 78159
+ }
+}

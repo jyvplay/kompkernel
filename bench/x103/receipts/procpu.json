@@ -1,0 +1,136 @@
+{
+ "note": "X103 PROAGOGE CPU: 7 lanes, 3 reps, alternating arm order, medians. OMEGA_DET=1 OMEGA_NO_MEMO=1.",
+ "rows": [
+  {
+   "lane": "kb-article.txt",
+   "onMs": [
+    720,
+    885,
+    728
+   ],
+   "offMs": [
+    4006,
+    742,
+    868
+   ],
+   "onMedian": 728,
+   "offMedian": 868,
+   "onTokens": 621,
+   "offTokens": 621,
+   "delta": 0
+  },
+  {
+   "lane": "vmstat.txt",
+   "onMs": [
+    162,
+    184,
+    169
+   ],
+   "offMs": [
+    2705,
+    183,
+    177
+   ],
+   "onMedian": 169,
+   "offMedian": 183,
+   "onTokens": 148,
+   "offTokens": 148,
+   "delta": 0
+  },
+  {
+   "lane": "unified-diff.patch",
+   "onMs": [
+    649,
+    667,
+    658
+   ],
+   "offMs": [
+    3813,
+    668,
+    647
+   ],
+   "onMedian": 658,
+   "offMedian": 668,
+   "onTokens": 415,
+   "offTokens": 415,
+   "delta": 0
+  },
+  {
+   "lane": "df-real.txt",
+   "onMs": [
+    189,
+    192,
+    183
+   ],
+   "offMs": [
+    3964,
+    181,
+    192
+   ],
+   "onMedian": 189,
+   "offMedian": 192,
+   "onTokens": 125,
+   "offTokens": 125,
+   "delta": 0
+  },
+  {
+   "lane": "du-real.txt",
+   "onMs": [
+    249,
+    282,
+    263
+   ],
+   "offMs": [
+    3835,
+    266,
+    283
+   ],
+   "onMedian": 263,
+   "offMedian": 283,
+   "onTokens": 269,
+   "offTokens": 269,
+   "delta": 0
+  },
+  {
+   "lane": "node-help.txt",
+   "onMs": [
+    2492,
+    2426,
+    2379
+   ],
+   "offMs": [
+    7679,
+    2509,
+    2323
+   ],
+   "onMedian": 2426,
+   "offMedian": 2509,
+   "onTokens": 860,
+   "offTokens": 860,
+   "delta": 0
+  },
+  {
+   "lane": "findmnt.txt",
+   "onMs": [
+    1098,
+    1095,
+    1095
+   ],
+   "offMs": [
+    6786,
+    977,
+    951
+   ],
+   "onMedian": 1095,
+   "offMedian": 977,
+   "onTokens": 438,
+   "offTokens": 440,
+   "delta": -2
+  }
+ ],
+ "totals": {
+  "offMedian": 5680,
+  "onMedian": 5528,
+  "relPct": -2.676056338028169
+ }
+}

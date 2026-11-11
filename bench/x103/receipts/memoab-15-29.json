@@ -1,0 +1,144 @@
+{
+ "note": "X103 OURA-MEMO A/B: arm A = shipped default (X67 memo on), arm B = OMEGA_OURA_MEMO=0. Both arms OMEGA_DET=1, OMEGA_NO_MEMO=1, PROAGOGE enabled. Interleaved lane by lane, one process.",
+ "lo": 15,
+ "hi": 29,
+ "rows": [
+  {
+   "lane": "psql-output.txt",
+   "armA": 242,
+   "armB": 242,
+   "delta": 0,
+   "armAms": 13184,
+   "armBms": 12098,
+   "sameDecode": true
+  },
+  {
+   "lane": "prices.csv",
+   "armA": 133,
+   "armB": 133,
+   "delta": 0,
+   "armAms": 16681,
+   "armBms": 14173,
+   "sameDecode": true
+  },
+  {
+   "lane": "cue-sheet.md",
+   "armA": 101,
+   "armB": 101,
+   "delta": 0,
+   "armAms": 14303,
+   "armBms": 7497,
+   "sameDecode": true
+  },
+  {
+   "lane": "ps-ef.txt",
+   "armA": 309,
+   "armB": 309,
+   "delta": 0,
+   "armAms": 12894,
+   "armBms": 12061,
+   "sameDecode": true
+  },
+  {
+   "lane": "ls-real.txt",
+   "armA": 431,
+   "armB": 431,
+   "delta": 0,
+   "armAms": 12181,
+   "armBms": 14691,
+   "sameDecode": true
+  },
+  {
+   "lane": "json-pkg.txt",
+   "armA": 670,
+   "armB": 670,
+   "delta": 0,
+   "armAms": 16645,
+   "armBms": 32104,
+   "sameDecode": true
+  },
+  {
+   "lane": "code-ts.txt",
+   "armA": 970,
+   "armB": 968,
+   "delta": -2,
+   "armAms": 26083,
+   "armBms": 32141,
+   "sameDecode": true
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "armA": 668,
+   "armB": 667,
+   "delta": -1,
+   "armAms": 19716,
+   "armBms": 27673,
+   "sameDecode": true
+  },
+  {
+   "lane": "ps-real.txt",
+   "armA": 391,
+   "armB": 391,
+   "delta": 0,
+   "armAms": 12706,
+   "armBms": 15773,
+   "sameDecode": true
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "armA": 322,
+   "armB": 322,
+   "delta": 0,
+   "armAms": 21853,
+   "armBms": 25821,
+   "sameDecode": true
+  },
+  {
+   "lane": "metrics.tsv",
+   "armA": 208,
+   "armB": 208,
+   "delta": 0,
+   "armAms": 20780,
+   "armBms": 18344,
+   "sameDecode": true
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "armA": 1043,
+   "armB": 1043,
+   "delta": 0,
+   "armAms": 35033,
+   "armBms": 43828,
+   "sameDecode": true
+  },
+  {
+   "lane": "apt-real.txt",
+   "armA": 843,
+   "armB": 843,
+   "delta": 0,
+   "armAms": 79191,
+   "armBms": 101164,
+   "sameDecode": true
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "armA": 1380,
+   "armB": 1380,
+   "delta": 0,
+   "armAms": 351807,
+   "armBms": 413184,
+   "sameDecode": true
+  }
+ ],
+ "totals": {
+  "armA": 7711,
+  "armB": 7708,
+  "delta": -3,
+  "better": 2,
+  "worse": 0,
+  "same": 12,
+  "sameDec": 14,
+  "armAms": 653057,
+  "armBms": 770552
+ }
+}

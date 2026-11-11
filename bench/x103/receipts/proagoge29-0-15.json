@@ -1,0 +1,184 @@
+{
+ "note": "X103 PROAGOGE: bring interior factors forward; 29-lane interleaved A/B, arm A = OMEGA_NO_PROAGOGE=1",
+ "lo": 0,
+ "hi": 15,
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "armA": 60,
+   "armB": 60,
+   "delta": 0,
+   "armAms": 2375,
+   "armBms": 87,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "kb-article.txt",
+   "armA": 621,
+   "armB": 621,
+   "delta": 0,
+   "armAms": 3275,
+   "armBms": 723,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΜΕΤΑΤΑΞΙΣ metataxis: 560 probes, 1 relocations, 622 -> 621 (-1); outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "uptime-w.txt",
+   "armA": 80,
+   "armB": 80,
+   "delta": 0,
+   "armAms": 2035,
+   "armBms": 90,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "free-m.txt",
+   "armA": 76,
+   "armB": 76,
+   "delta": 0,
+   "armAms": 2339,
+   "armBms": 111,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "vmstat.txt",
+   "armA": 148,
+   "armB": 148,
+   "delta": 0,
+   "armAms": 2621,
+   "armBms": 164,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 1 re-spellings, 48 priced, 149 -> 148; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "unified-diff.patch",
+   "armA": 415,
+   "armB": 415,
+   "delta": 0,
+   "armAms": 3851,
+   "armBms": 596,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΓΕΝΝΑΔΑΣ gennadas: ref = source (1487 B); 7 enabling pairs, 1 priced improvements; M 416 -> 415; ΜΕΤΑΤΑΞΙΣ metataxis: 925 probes, 2 relocations, 418 -> 416 (-2); ἸΣΟΜΟΡΦΊΑ ISOMORPHIA 419 -> 418 (-1) o"
+  },
+  {
+   "lane": "df-h.txt",
+   "armA": 170,
+   "armB": 170,
+   "delta": 0,
+   "armAms": 2538,
+   "armBms": 358,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (1189 B); 0 enabling pairs, 0 priced improvements; M 171 -> 170; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "df-real.txt",
+   "armA": 125,
+   "armB": 125,
+   "delta": 0,
+   "armAms": 3871,
+   "armBms": 210,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ἸΣΟΜΟΡΦΊΑ ISOMORPHIA 126 -> 125 (-1) over 315 probes (reorder 0, reassign 1), 13 letters, script cyrillic, 10 distinct body runs; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "du-real.txt",
+   "armA": 269,
+   "armB": 269,
+   "delta": 0,
+   "armAms": 3746,
+   "armBms": 251,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 2 re-spellings, 426 priced, 272 -> 269; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "node-help.txt",
+   "armA": 860,
+   "armB": 860,
+   "delta": 0,
+   "armAms": 7716,
+   "armBms": 2482,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 1 re-spellings, 215 priced, 861 -> 860; ΜΕΤΑΤΑΞΙΣ metataxis: 1240 probes, 1 relocations, 862 -> 861 (-1); outside bounded, col"
+  },
+  {
+   "lane": "findmnt.txt",
+   "armA": 440,
+   "armB": 438,
+   "delta": -2,
+   "armAms": 6604,
+   "armBms": 1099,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΠΡΟΑΓΩΓΗ proagoge: 2 scan(s), 18 interior-factor pairs, 0 blocked by a forward reference, 1 moved (0 bring-forward, 1 push-back), 2 re-spelled, 4181 whole-message prices; M 440 -> 438; ΣΥΝΔΥΑΣΜΟΣ synd"
+  },
+  {
+   "lane": "df-h.txt",
+   "armA": 107,
+   "armB": 107,
+   "delta": 0,
+   "armAms": 4627,
+   "armBms": 179,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ἸΣΟΜΟΡΦΊΑ ISOMORPHIA 108 -> 107 (-1) over 315 probes (reorder 0, reassign 1), 13 letters, script cyrillic, 10 distinct body runs; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "email-thread.txt",
+   "armA": 487,
+   "armB": 487,
+   "delta": 0,
+   "armAms": 8059,
+   "armBms": 794,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΜΕΤΑΤΑΞΙΣ metataxis: 973 probes, 1 relocations, 488 -> 487 (-1); outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "llm-answer.md",
+   "armA": 671,
+   "armB": 671,
+   "delta": 0,
+   "armAms": 9330,
+   "armBms": 1218,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 1 re-spellings, 668 priced, 672 -> 671; ἸΣΟΜΟΡΦΊΑ ISOMORPHIA 674 -> 672 (-2) over 320 probes (reorder 2, reassign 0), 34 lette"
+  },
+  {
+   "lane": "markdown-table.md",
+   "armA": 174,
+   "armB": 174,
+   "delta": 0,
+   "armAms": 6875,
+   "armBms": 158,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (635 B); 1 enabling pairs, 1 priced improvements; M 176 -> 174; outside bounded, collision-free, well-nested markup domain"
+  }
+ ],
+ "totals": {
+  "armA": 4703,
+  "armB": 4701,
+  "delta": -2,
+  "better": 1,
+  "worse": 0,
+  "same": 14,
+  "exact": 15,
+  "sameDecode": 15,
+  "armAms": 69862,
+  "armBms": 8520
+ }
+}

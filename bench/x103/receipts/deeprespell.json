@@ -1,0 +1,7 @@
+{
+ "note": "X103: is PROOIMION search bound (MAX_SEGMENTATIONS 400, MAX_PARTS 5) binding? best single-value whole-message gain under shipped vs deep bounds",
+ "boundedBestGain": 0,
+ "deepBestGain": 0,
+ "candsBounded": 42066,
+ "candsDeep": 167498
+}

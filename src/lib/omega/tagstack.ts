@@ -39,6 +39,7 @@ import { syndyasmosDisabled, syndyasmosEncode } from './syndyasmos';
 import { gennadasDisabled, gennadasEncode } from './gennadas';
 import { diagrapheDisabled, diagrapheEncode } from './diagraphe';
 import { palindromosDisabled, palindromosEncode } from './palindromos';
+import { proagogeDisabled, proagogeEncode } from './proagoge';
 import { CHIRON_START, chironDecode } from './chiron';
 
 export type TagstackMode = 'xml' | 'html';
@@ -793,6 +794,23 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
   // operator, no contract clause and no decode rule.
   if (!diagrapheDisabled()) {
     try { admitParentRelative('ΔΙΑΓΡΑΦΗ', diagrapheEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X103 — ΠΡΟΑΓΩΓΗ.  The tape's ORDER is a free parameter and the stack has been
+  // spending it three ways: ΜΕΤΑΤΑΞΙΣ relocates to an arbitrary valid slot by a
+  // seeded first-improvement climb with no notion of why a slot is good;
+  // ΓΕΝΝΑΔΑΣ relocate-to-enable moves a rule that is a PREFIX or SUFFIX of a
+  // later user's value; ΠΡΟΟΙΜΙΟΝ re-spells a value with references to STRICTLY
+  // EARLIER rules, interior factors included.  A rule j sitting AFTER i whose
+  // value is a proper INTERIOR substring of value(i) therefore falls through all
+  // three: ΠΡΟΟΙΜΙΟΝ cannot reference it, ΓΕΝΝΑΔΑΣ will not relocate it,
+  // ΜΕΤΑΤΑΞΙΣ has no reason to pick that slot.  ΠΡΟΑΓΩΓΗ brings it forward and
+  // re-spells the user with the full interleaver.  Population measured, not
+  // assumed (bench/x103/receipts/pop.json): 24 interior-factor pairs with j after
+  // i against ΓΕΝΝΑΔΑΣ's 57 prefix/suffix control, on the same wires, in the same
+  // process, by the same routine.  Adds no operator, contract clause or decode
+  // rule.
+  if (!proagogeDisabled()) {
+    try { admitParentRelative('ΠΡΟΑΓΩΓΗ', proagogeEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
   }
   // X102 — ΠΑΛΙΝΔΡΟΜΟΣ.  Every wire-level codec above is called exactly once, in a
   // fixed order, and each one's gate is "the whole message got strictly smaller".

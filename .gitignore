@@ -44,3 +44,5 @@ bench/x99/*.mjs
 
 # X100 probe bundles (sources are the .ts; receipts are the .json/.log)
 bench/x100/*.mjs
+bench/x103/*.mjs
+bench/x103/prof/

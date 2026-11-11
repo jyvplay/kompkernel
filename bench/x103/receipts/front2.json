@@ -1,0 +1,307 @@
+{
+ "note": "X103 FRONTIER re-confirmation, base stack (tagstackFrontier -> tagstackEncodeInner, no registry arms). Setting: OMEGA_DET=1, OMEGA_NO_MEMO=1, OMEGA_OURA_MEMO=0, OMEGA_ENGRAM=0. Diffed against bench/x102/receipts/frontier-runX102b.json (12 639).",
+ "setting": {
+  "OMEGA_DET": "1",
+  "OMEGA_NO_MEMO": "1",
+  "OMEGA_OURA_MEMO": "0",
+  "OMEGA_ENGRAM": "0"
+ },
+ "total": 12685,
+ "prevTotal": 12639,
+ "moved": 5,
+ "exact": 29,
+ "lanes": 29,
+ "ms": 1223479,
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "path": "bench/holdout-x42/lsblk.txt",
+   "tokens": 60,
+   "prev": 60,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "kb-article.txt",
+   "path": "bench/holdout-work/kb-article.txt",
+   "tokens": 622,
+   "prev": 622,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "uptime-w.txt",
+   "path": "bench/holdout-x42b/uptime-w.txt",
+   "tokens": 80,
+   "prev": 80,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "free-m.txt",
+   "path": "bench/holdout-x42b/free-m.txt",
+   "tokens": 76,
+   "prev": 76,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "vmstat.txt",
+   "path": "bench/holdout-x42b/vmstat.txt",
+   "tokens": 149,
+   "prev": 149,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "unified-diff.patch",
+   "path": "bench/holdout-work/unified-diff.patch",
+   "tokens": 419,
+   "prev": 419,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "df-h.txt",
+   "path": "bench/holdout-tbl/df-h.txt",
+   "tokens": 171,
+   "prev": 171,
+   "parent": "akolouthia2",
+   "prevParent": "akolouthia2",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "df-real.txt",
+   "path": "bench/holdout-x41/df-real.txt",
+   "tokens": 126,
+   "prev": 126,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "du-real.txt",
+   "path": "bench/holdout-x41/du-real.txt",
+   "tokens": 272,
+   "prev": 272,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "node-help.txt",
+   "path": "bench/holdout-x41/node-help.txt",
+   "tokens": 862,
+   "prev": 862,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "findmnt.txt",
+   "path": "bench/holdout-x42/findmnt.txt",
+   "tokens": 444,
+   "prev": 444,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "df-h.txt",
+   "path": "bench/holdout-x42/df-h.txt",
+   "tokens": 108,
+   "prev": 108,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "email-thread.txt",
+   "path": "bench/holdout-work/email-thread.txt",
+   "tokens": 488,
+   "prev": 488,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "llm-answer.md",
+   "path": "bench/holdout-work/llm-answer.md",
+   "tokens": 674,
+   "prev": 674,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "markdown-table.md",
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "tokens": 176,
+   "prev": 176,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "psql-output.txt",
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "tokens": 244,
+   "prev": 244,
+   "parent": "metron",
+   "prevParent": "metron",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "prices.csv",
+   "path": "bench/holdout-x40/prices.csv",
+   "tokens": 133,
+   "prev": 133,
+   "parent": "diastema",
+   "prevParent": "diastema",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "cue-sheet.md",
+   "path": "bench/holdout-x40/cue-sheet.md",
+   "tokens": 163,
+   "prev": 163,
+   "parent": "metron",
+   "prevParent": "metron",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "ps-ef.txt",
+   "path": "bench/holdout-x42/ps-ef.txt",
+   "tokens": 315,
+   "prev": 315,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "ls-real.txt",
+   "path": "bench/holdout-x41/ls-real.txt",
+   "tokens": 433,
+   "prev": 433,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "json-pkg.txt",
+   "path": "bench/holdout/json-pkg.txt",
+   "tokens": 681,
+   "prev": 681,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "code-ts.txt",
+   "path": "bench/holdout/code-ts.txt",
+   "tokens": 981,
+   "prev": 969,
+   "parent": "apographe",
+   "prevParent": "synkrisis",
+   "moved": true,
+   "exact": true
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "tokens": 673,
+   "prev": 673,
+   "parent": "apographe",
+   "prevParent": "synkrisis",
+   "moved": true,
+   "exact": true
+  },
+  {
+   "lane": "ps-real.txt",
+   "path": "bench/holdout-x41/ps-real.txt",
+   "tokens": 397,
+   "prev": 397,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "tokens": 326,
+   "prev": 326,
+   "parent": "akolouthia2",
+   "prevParent": "akolouthia2",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "metrics.tsv",
+   "path": "bench/holdout-x40/metrics.tsv",
+   "tokens": 210,
+   "prev": 210,
+   "parent": "akolouthia2",
+   "prevParent": "akolouthia2",
+   "moved": false,
+   "exact": true
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "path": "bench/holdout-x41/ps-aux-real.txt",
+   "tokens": 1055,
+   "prev": 1042,
+   "parent": "apographe",
+   "prevParent": "synkrisis",
+   "moved": true,
+   "exact": true
+  },
+  {
+   "lane": "apt-real.txt",
+   "path": "bench/holdout-x41/apt-real.txt",
+   "tokens": 851,
+   "prev": 850,
+   "parent": "diastema",
+   "prevParent": "synkrisis",
+   "moved": true,
+   "exact": true
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "path": "bench/holdout-x41/ls-l-real.txt",
+   "tokens": 1496,
+   "prev": 1476,
+   "parent": "synkrisis",
+   "prevParent": "synkrisis",
+   "moved": true,
+   "exact": true
+  }
+ ]
+}

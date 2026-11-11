@@ -6119,3 +6119,119 @@ is now supported; the defect is recorded here rather than silently dropped.
 ΧΕΙΡΟΝ wire produced by the same operators. **Neither adds an operator, a contract clause or a decode
 rule.** **Downgraded, not declared verified: no model API exists in this environment, so LLM
 decodability was not tested.**
+
+---
+
+## X103 — ΠΡΟΑΓΩΓΗ, and two corrections to recorded numbers
+
+### The name
+
+**ΠΡΟΑΓΩΓΗ** (*proagōgē*, "the bringing-forward, the promotion") — the mechanism is to bring a rule
+that lives **inside** another rule's value forward to a slot where its user can reference it, or to
+push the user back to a slot where the factor is already legal.
+
+### The gap it closes, stated once
+
+A ΧΕΙΡΩΝ tape is `contract § k₁v₁ k₂v₂ … kₙvₙ ¶ body`.  The decoder does not care what order the
+entries are in, provided every rule still appears after the rules it references, so the **order is a
+free parameter**.  ΜΕΤΑΤΑΞΙΣ relocates to an arbitrary valid slot by a seeded first-improvement climb
+with no notion of *why* a slot is good; ΓΕΝΝΑΔΑΣ relocates only when the later rule's value is a
+perfect **prefix or suffix** and re-spells only that boundary; ΠΡΟΟΙΜΙΟΝ re-spells with references to
+**strictly earlier** rules, interior factors included, but only for rules already earlier.  So:
+
+> a rule `j` sitting **after** `i` whose value is a proper **interior** substring of `value(i)` is a
+> factor no codec in this stack can use.
+
+ΠΡΟΑΓΩΓΗ closes it with **BRING-FORWARD** (relocate `j` to just before `i`, then re-spell `i` and every
+rule that gained `j`) and **PUSH-BACK** (relocate `i` to just after `j`).  PUSH-BACK exists because
+BRING-FORWARD is blocked exactly when `value(j)` mentions a key between `i` and `j`, and in that case
+PUSH-BACK is still legal — the two variants cover different halves of the same population.
+
+**Population measured before the codec was written** (`bench/x103/receipts/pop.json`, 29 lanes, one
+process): **24** interior-factor pairs with `j` after `i`, against a control of ΓΕΝΝΑΔΑΣ's own
+population counted by the same routine in the same process — 41 prefix pairs and 16 suffix pairs.
+ΓΕΝΝΑΔΑΣ paid −43 from 57 pairs, so 24 pairs with a stronger re-spelling arm is a live population.
+
+### Result, and what it is not
+
+29-lane interleaved A/B (`bench/x103/receipts/proagoge29-*.json`, arm A = `OMEGA_NO_PROAGOGE=1`):
+**12 415 → 12 412, Δ = −3**; better **2** (`findmnt` −2 by PUSH-BACK, `ls-l-real` −1 by BRING-FORWARD),
+worse **0**, same 27; `A.decoded === B.decoded` 29/29; byte-exact 29/29.  Variant A alone paid −1;
+adding PUSH-BACK took it to −3.  **Confirmed three times:** `proagoge29` (two calls) and `settle.ts`
+(one process) both give A = 12 415 / B = 12 412 / **Δ = −3, identical numbers**, and the alternating CPU
+probe independently records `findmnt` 440 → 438.  (An earlier `settle` run made before PUSH-BACK existed
+gave Δ = −1 with variant A alone; its receipt was overwritten and the figure is corrected here.)
+
+**CPU** (`bench/x103/receipts/procpu.json`, seven lanes, three reps, **alternating** arm order,
+medians): aggregate 5 680 → 5 528 ms = **−2.68 %**, inside the drift the alternating protocol exists to
+expose.  On the one lane where the codec fires it costs **+12.1 %** (977 → 1 095 ms).  **Not claimed as
+a two-axis win on `findmnt`.**  The 29-lane A/B's wall-clock columns are not used: arm A runs cold and
+arm B warm, so B looks ~6× faster for reasons unrelated to the codec.
+
+### Falsified this turn, with the numbers
+
+* **ΑΝΑΓΕΝΝΗΣΙΣ** — ΧΕΙΡΩΝ as a second stage on the shipped message: 12 416 → 12 416, **Δ = 0 on
+  29/29**, better 0, worse 0, round-trip true everywhere.  ΧΕΙΡΩΝ takes the identity path everywhere.
+* **RESCORE** — optimise every parent's ΧΕΙΡΩΝ wire then select: synkrisis 12 961 → **12 822** against
+  the shipped winner's **12 700**; still loses by 122.
+* **BODY RE-REFERENCING** — 5 232 body literal occurrences of an existing rule's expanded value on 19
+  lanes, control 3 440 references ΧΕΙΡΩΝ already made, **upper bound 10 tokens**.
+* **DEEP RE-SPELLING** — ΠΡΟΟΙΜΙΟΝ's bounds (400, 5) → (2 000, 8) generates 167 498 candidates instead
+  of 42 066 and gains **exactly 0**.  The re-spelling search is converged.
+
+### Correction 1 — the X102 shipped total does not reproduce
+
+`OMEGA_NO_MEMO` disables the **TAGSTACK** memo only (`tagstack.ts:501, :538, :564`).  The **X67 OURA
+memo** (`oura.ts:494`, `OMEGA_OURA_MEMO=0`, 24 entries, cleared when full) and the **ἔγγραμμα** memo
+(`engram.ts`, `OMEGA_ENGRAM=0`) stay live.  `oura.ts` claims the replay makes the meter trajectory
+*"identical to the uncached run; only wall clock work disappears"* — **falsified on two of three lanes**
+(apt-real 843 on / 834 off; code-ts 970 / 968) — and the effect depends on **process history**:
+`apt-real` encodes to **834** in a three-lane process and **843** in a 29-lane process under the same
+flags.  The 29-lane memo effect is −3, not the −11 the three-lane probe suggested.
+
+**The correction, kept rather than silently replaced: the reproducible full-chain total under
+`OMEGA_DET=1 OMEGA_NO_MEMO=1` is 12 415 with ΠΡΟΑΓΩΓΗ off and 12 412 with it on.  The X102 figure of
+12 405 is not reproducible.**
+
+### Correction 2 — the frontier is restated, not confirmed
+
+`tagstackFrontier` → `tagstackEncodeUncached` → `tagstackEncodeInner`.  Registry arms live in
+`tagstackX74Chain`, a **sibling** of that path, so **ΠΡΟΑΓΩΓΗ provably cannot move the frontier**.
+
+| probe | setting | frontier |
+|---|---|---|
+| `bench/x102/receipts/frontier-runX102b.json` | `det: "1"` only | **12 639** |
+| `bench/x103/settle.ts` | `OMEGA_DET=1 OMEGA_NO_MEMO=1` | **12 695** |
+| `bench/x103/front2.ts` | `+ OMEGA_OURA_MEMO=0 OMEGA_ENGRAM=0` | **12 685** |
+
+Both reproductions exact 29/29.  Five lanes differ from the X102 receipt and **three differ in the
+parent codec**: `code-ts` 969 → 981 (synkrisis → **apographe**), `ps-aux-real` 1 042 → 1 055
+(synkrisis → **apographe**), `apt-real` 850 → 851 (synkrisis → **diastema**), `ls-l-real` 1 476 → 1 496,
+`dpkg-l` 673 → 673 with a differing parent.  **The X102 receipt's 12 639 does not reproduce under
+either setting and is recorded as stale.**
+
+### What has been missed all along
+
+Rule **addition** closed (Δ = 0, twice, 283 exact prices); rule **deletion** is ΔΙΑΓΡΑΦΗ's −5;
+**re-spelling** converged (deep bounds gain 0); **body re-referencing** bounded at 10 tokens.  **The
+ΧΕΙΡΩΝ tape is at a local optimum of the current move set.**  Every gate in this stack is a **descent**
+step — accept iff strictly smaller — so the stack is structurally a greedy climber, and a greedy
+climber cannot collect the savings a better-planned sequence would.  That is the measured face of the
+bound already on record: greedy BPE's worst-case compression utility ≤ (1 − e⁻²)/2 ≈ 0.4323 of optimal,
+because *"a merge with the largest immediate payoff can destroy adjacent savings."*
+
+The AI-native observation: **the stack optimises the wire as a string, but the wire is read by a model,
+not by a parser.**  Every mechanism is judged by `countTokens`; nothing measures what the *reader* must
+do.  **55.6 % of the ΧΕΙΡΩΝ wire is body literals** — text the tokenizer prices and no rule covers,
+which a grammar compressor calls irreducible and a model simply reads.  **That axis has never been
+measured here, because there is no model API to measure it with.  Downgrade, not a claim: LLM
+decodability was not tested.**
+
+### Model-readability
+
+ΠΡΟΑΓΩΓΗ's output is an ordinary ΧΕΙΡΩΝ wire with the same rules in a different order and some values
+spelled differently.  **It adds no operator, no contract clause and no decode rule.**  **Downgraded,
+not declared verified: no model API exists in this environment, so LLM decodability was not tested.**
+What is verified is structural: the wire is self-contained, the tape is delimiter-free with the
+first-appearance key rule `chironParseTape` implements, and every reference is backwards — which
+`chironDecode` enforces by rejecting forward references.

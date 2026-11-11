@@ -10393,3 +10393,181 @@ rule**, so a reader who could expand the X101 incumbent can expand this by the s
 not tested.** External support is unchanged: arXiv:2604.13066 (in-context dictionary learning, exact
 match > 0.99) and arXiv:2606.19857 (BabelTele, "Universality: any LLM should fully understand
 compressed output without a codebook").
+
+---
+
+## X103 — ΠΡΟΑΓΩΓΗ, and two corrections to recorded numbers
+
+Full report: `bench/x103/REPORT.md`.  Every figure below is measured in this repository; nothing is
+simulated or estimated.
+
+### The new codec: ΠΡΟΑΓΩΓΗ (`src/lib/omega/proagoge.ts`), shipped ENABLED
+
+`OMEGA_NO_PROAGOGE=1` disables.  Admitted through `admitParentRelative`, so its reference object is
+`chironDecode(incumbent)` — ΓΕΝΝΑΔΑΣ's object, not the source.
+
+A ΧΕΙΡΩΝ tape is `contract § k₁v₁ k₂v₂ … kₙvₙ ¶ body`.  The decoder does not care what order the
+entries are in, provided every rule still appears after the rules it references, so the **order is a
+free parameter**.  The stack has been spending it three ways, and none of them reaches the case
+ΠΡΟΑΓΩΓΗ addresses:
+
+| codec | what it does with the order |
+|---|---|
+| ΜΕΤΑΤΑΞΙΣ | relocates to an arbitrary valid slot by a seeded stochastic first-improvement climb on the whole-message price — no notion of *why* a slot is good |
+| ΓΕΝΝΑΔΑΣ | relocate-to-enable, but only when the later rule's value is a perfect **prefix or suffix**, and it re-spells only that one boundary |
+| ΠΡΟΟΙΜΙΟΝ (in ΣΥΝΔΥΑΣΜΟΣ) | re-spells a value with references to **strictly earlier** rules — interior factors included, but only for rules already earlier |
+
+> a rule `j` sitting **after** `i` whose value is a proper **interior** substring of `value(i)` is a
+> factor no codec in this stack can use.
+
+ΠΡΟΟΙΜΙΟΝ cannot reference it (the delimiter-free parser would read the letter as a new key and
+corrupt the tape — `syndyasmos.ts` records this as why its index is built incrementally); ΓΕΝΝΑΔΑΣ
+will not relocate it (`startsWith`/`endsWith`, never `includes`); ΜΕΤΑΤΑΞΙΣ has no reason to pick that
+slot.  ΠΡΟΑΓΩΓΗ closes it with **two** moves, because the constraint is directional and either end can
+be moved:
+
+* **BRING-FORWARD** — relocate `j` to immediately before `i`, then re-spell `i` and every rule that
+  *gained* `j`, with the full interleaver over all rules now earlier than it.
+* **PUSH-BACK** — relocate `i` to immediately *after* `j`.  `i`'s dependencies are all earlier than
+  `i`, hence earlier than `j`, so the move is legal for `i` by construction; the only check is that no
+  rule between them mentions `key(i)`.
+
+PUSH-BACK exists because BRING-FORWARD is blocked exactly when `value(j)` mentions a key between `i`
+and `j`, and in that case PUSH-BACK is still legal — so the two variants cover different halves of the
+same population.
+
+**Population measured before the codec was written** (`bench/x103/pop.ts` → `receipts/pop.json`, 29
+lanes, one process): **24** interior-factor pairs with `j` after `i`, against a control of ΓΕΝΝΑΔΑΣ's
+own population counted by the same routine in the same process — 41 prefix pairs and 16 suffix pairs.
+ΓΕΝΝΑΔΑΣ paid −43 from 57 pairs, so 24 pairs with a stronger re-spelling arm is a live population.
+
+**Result** (`bench/x103/proagoge29.ts` → `receipts/proagoge29-*.json`, 29-lane interleaved A/B, arm A =
+`OMEGA_NO_PROAGOGE=1`):
+
+| | tokens |
+|---|---|
+| arm A | **12 415** |
+| arm B | **12 412** |
+| **Δ** | **−3** |
+
+better **2** (`findmnt` −2 by PUSH-BACK, `ls-l-real` −1 by BRING-FORWARD), worse **0**, same 27,
+`A.decoded === B.decoded` **29/29**, byte-exact **29/29**.  Variant A alone paid −1; adding PUSH-BACK
+took it to −3, which is the measured value of the second variant.  **Confirmed three times:**
+`proagoge29` (two calls) A = 12 415 / B = 12 412 / Δ = −3; `settle.ts` in one process A = 12 415 /
+B = 12 412 / **Δ = −3, identical numbers**; and the alternating CPU probe independently records
+`findmnt` 440 → 438.  (An earlier `settle` run made before PUSH-BACK existed gave Δ = −1 with variant A
+alone; its receipt was overwritten and the figure is corrected here rather than left standing.)
+
+**CPU** (`bench/x103/procpu.ts` → `receipts/procpu.json`, seven lanes, three reps, **alternating** arm
+order, medians): aggregate 5 680 ms → 5 528 ms = **−2.68 %**, inside the drift the alternating protocol
+exists to expose.  On the one lane where the codec fires it costs **+12.1 %** (977 → 1 095 ms).
+**ΠΡΟΑΓΩΓΗ is therefore not claimed as a two-axis win on `findmnt`.**  Its work counters are
+deterministic and small (15 whole-message prices on `ls-l-real`; a hard `PRICE_CAP` of 40 000 prices per
+lane, reported in the notes when reached).  The 29-lane A/B's own wall-clock columns are **not** used:
+arm A runs cold and arm B warm, so B looks ~6× faster for reasons unrelated to the codec.
+
+### Falsified this turn, with the numbers
+
+* **ΑΝΑΓΕΝΝΗΣΙΣ** — ΧΕΙΡΩΝ as a second stage on the already-shipped message: 12 416 → 12 416,
+  **Δ = 0 on 29/29**, better 0, worse 0, round-trip true on every lane.  ΧΕΙΡΩΝ takes the identity
+  path everywhere.  Closed.
+* **RESCORE** — optimise every parent's ΧΕΙΡΩΝ wire, then select: synkrisis raw 12 961 → optimised
+  **12 822**, against the shipped winner's **12 700**.  Still loses by 122.  Falsified.
+* **BODY RE-REFERENCING** — 5 232 body literal occurrences of an existing rule's expanded value on 19
+  lanes, against a control of 3 440 references ΧΕΙΡΩΝ already made, with an **upper bound of 10
+  tokens**.  Closed.
+* **DEEP RE-SPELLING** — raising ΠΡΟΟΙΜΙΟΝ's bounds from (400, 5) to (2 000, 8) generates 167 498
+  candidates instead of 42 066 and gains **exactly 0**.  **The re-spelling search is converged; the
+  bounds are not the lever.**
+
+### Correction 1 — the X102 shipped total does not reproduce
+
+The X102 receipt records **12 405** for the full chain.  Three probes reported 12 405, 12 415 and
+12 416 for what should be the same configuration.  The cause is measured: `OMEGA_NO_MEMO` disables the
+**TAGSTACK** memo only (`tagstack.ts:501, :538, :564`), while the **X67 OURA memo** (`oura.ts:494`,
+`OMEGA_OURA_MEMO=0`, 24 entries, cleared when full) and the **ἔγγραμμα** memo (`engram.ts`,
+`OMEGA_ENGRAM=0`) stay live.  `oura.ts` claims the replay makes the meter trajectory *"identical to
+the uncached run; only wall clock work disappears"* — **falsified on two of three lanes** (apt-real
+843 with the memo on, 834 off; code-ts 970 → 968), and the effect depends on **process history**:
+`apt-real` encodes to **834** in a three-lane process and **843** in a 29-lane process under the same
+flags.  The 29-lane memo effect is −3, not the −11 the three-lane probe suggested.
+
+**The correction, kept rather than silently replaced: the reproducible full-chain total under
+`OMEGA_DET=1 OMEGA_NO_MEMO=1` is 12 415 with ΠΡΟΑΓΩΓΗ off and 12 412 with it on, and it moves by a few
+tokens with process history.  The X102 figure of 12 405 is not reproducible.**
+
+### Correction 2 — the frontier is restated, not confirmed
+
+`bench/x86/front.ts` measures `tagstackFrontier`, which calls `tagstackEncodeUncached` →
+`tagstackEncodeInner`.  Registry arms live in `tagstackX74Chain`, a **sibling** of that path, so
+**ΠΡΟΑΓΩΓΗ provably cannot move the frontier** — verified by reading the call graph, and the only
+source change to `tagstack.ts` is the import plus the `if (!proagogeDisabled())` block inside
+`tagstackX74Chain`.
+
+| probe | setting | frontier |
+|---|---|---|
+| `bench/x102/receipts/frontier-runX102b.json` | `det: "1"` only | **12 639** |
+| `bench/x103/settle.ts` | `OMEGA_DET=1 OMEGA_NO_MEMO=1` (X67 memo on) | **12 695** |
+| `bench/x103/front2.ts` | `+ OMEGA_OURA_MEMO=0 OMEGA_ENGRAM=0` | **12 685** |
+
+Both reproductions are exact 29/29.  Five lanes differ from the X102 receipt and **three differ in the
+parent codec**, which is behavioural and not rounding: `code-ts` 969 → 981 (synkrisis → **apographe**),
+`ps-aux-real` 1 042 → 1 055 (synkrisis → **apographe**), `apt-real` 850 → 851 (synkrisis → **diastema**),
+`ls-l-real` 1 476 → 1 496, `dpkg-l` 673 → 673 with a differing parent.  **The X102 receipt's 12 639 does
+not reproduce under either setting and is recorded as stale.**
+
+### What has been missed this whole time
+
+Four independent measurements converge: rule **addition** is closed (Δ = 0, twice, 283 exact prices),
+rule **deletion** is ΔΙΑΓΡΑΦΗ's −5, **re-spelling** is converged (deep bounds gain 0), **body
+re-referencing** has an upper bound of 10 tokens.  **The ΧΕΙΡΩΝ tape is at a local optimum of the
+current move set, and the remaining headroom is not in the wire.**
+
+Every gate in this stack is a **descent** step — accept iff strictly smaller — so the stack is
+structurally a greedy climber, and a greedy climber cannot collect the savings a better-planned
+sequence would.  That is the measured face of the external bound already on record: greedy BPE's
+worst-case compression utility is ≤ (1 − e⁻²)/2 ≈ 0.4323 of optimal, because *"a merge with the largest
+immediate payoff can destroy adjacent savings."*
+
+The AI-native observation a human researcher on this stack is blind to: **the stack optimises the wire
+as a string, but the wire is read by a model, not by a parser.**  Every mechanism is judged by
+`countTokens`, the tokenizer's price of the emitted characters; nothing measures what the *reader* must
+do.  The contract is priced at ~12 tokens and treated as a fixed cost, yet it is the entire
+specification of the decode procedure.  **55.6 % of the ΧΕΙΡΩΝ wire is body literals** — text the
+tokenizer prices and no rule covers, which a grammar compressor calls irreducible and a model simply
+reads.  **That axis has never been measured here, because there is no model API to measure it with.
+This is a downgrade, not a claim: LLM decodability was not tested.**
+
+### Model-readability
+
+ΠΡΟΑΓΩΓΗ's output is an ordinary ΧΕΙΡΩΝ wire with the same rules in a different order and some values
+spelled differently.  **It adds no operator, no contract clause and no decode rule**, so a reader who
+could expand the incumbent can expand this by the same rule.  **Downgraded, not declared verified: no
+model API exists in this environment, so LLM decodability was not tested.**  What is verified is
+structural: the wire is self-contained, the tape is delimiter-free with the first-appearance key rule
+that `chironParseTape` implements, and every reference is backwards — which `chironDecode` enforces by
+rejecting forward references.
+
+### Leaders, X103 configuration
+
+`bench/x101/leaders-x101.ts` is unchanged in construction (pure join, zero frontier calls, `raw`/`floor`
+imported from `bench/x90/receipts/leaders-x90.json`; `floor` is **not reachable by a readable codec and
+is only a denominator**).  `shipped` below uses the reproduced X103 figure.
+
+| category | lanes | raw | shipped | ratio | floor | headroom | price | leader |
+|---|---|---|---|---|---|---|---|---|
+| OPS TABLE | 11 | 4 135 | ~1 710 | 0.4134 | 1 272 | ~15.5 % | ~25.8 % | `kubectl-get-pods` 1 006 → 322 |
+| OPS LISTING | 9 | 16 516 | 5 776 | 0.3497 | 4 420 | 11.2 % | 23.5 % | `ls-l-real` 5 194 → 1 380 |
+| CODE / MARKUP | 3 | 3 152 | 2 053 | 0.6513 | 1 728 | 22.8 % | 15.8 % | `code-ts` 1 422 → 970 |
+| DATA | 2 | 1 095 | 234 | 0.2137 | 209 | 2.8 % | 10.7 % | `prices.csv` 582 → 133 |
+| PROSE | 4 | 3 117 | 2 639 | 0.8466 | 2 529 | **18.7 %** | 4.2 % | `node-help` 1 099 → 860 |
+
+**Generalised local leaders.**  *ops listing* — `ls-l-real`, the largest single lane and the one whose
+ΧΕΙΡΩΝ work meter is 96 % exhausted; ΠΡΟΑΓΩΓΗ's only BRING-FORWARD win lands here.  *ops table* —
+`kubectl-get-pods`, the lowest ratio in the set (0.320) and a non-ΧΕΙΡΩΝ parent (`akolouthia2`), so the
+wire codecs see a ΧΕΙΡΩΝ frame that is nearly empty.  *code / markup* — `code-ts`, and a lane where the
+base stack's parent *changed* this turn.  *data* — `prices.csv`, essentially closed at 2.8 %.  *prose* —
+`node-help`, the largest headroom **fraction** (18.7 %) and the smallest **absolute** one (110 tokens
+over four lanes).  ΠΡΟΑΓΩΓΗ's two improved lanes are both ops listings, consistent with every previous
+turn: **the tape share separates the categories (25–40 % for ops, 9 % for prose), and every mechanism
+that has ever paid has paid on a lane with a large tape.**

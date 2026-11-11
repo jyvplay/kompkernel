@@ -1,0 +1,8 @@
+{
+ "note": "X103 population census: rules whose value contains another rule value, split by position and prefix/suffix/interior",
+ "rules": 922,
+ "interiorLater": 24,
+ "prefixLater": 41,
+ "suffixLater": 16,
+ "interiorEarlierUnused": 33
+}
