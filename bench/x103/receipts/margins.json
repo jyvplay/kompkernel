@@ -1,0 +1,477 @@
+{
+ "note": "X103 MARGINS: winning parent vs the CHIRON arm before the wire-level codecs, per lane",
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "parent": "synkrisis",
+   "parentTokens": 60,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 60,
+   "applied": false,
+   "frontierCosts": {
+    "synkrisis": 60,
+    "kanon": 120,
+    "akolouthia2": 60,
+    "apographe": 60,
+    "diastema": 60
+   }
+  },
+  {
+   "lane": "kb-article.txt",
+   "parent": "synkrisis",
+   "parentTokens": 622,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 621,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 622,
+    "kanon": 1262,
+    "akolouthia2": 651,
+    "apographe": 622,
+    "diastema": 622
+   }
+  },
+  {
+   "lane": "uptime-w.txt",
+   "parent": "synkrisis",
+   "parentTokens": 80,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 80,
+   "applied": false,
+   "frontierCosts": {
+    "synkrisis": 80,
+    "kanon": 160,
+    "akolouthia2": 80,
+    "apographe": 80,
+    "diastema": 80
+   }
+  },
+  {
+   "lane": "free-m.txt",
+   "parent": "synkrisis",
+   "parentTokens": 76,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 76,
+   "applied": false,
+   "frontierCosts": {
+    "synkrisis": 76,
+    "kanon": 152,
+    "akolouthia2": 76,
+    "apographe": 76,
+    "diastema": 76
+   }
+  },
+  {
+   "lane": "vmstat.txt",
+   "parent": "synkrisis",
+   "parentTokens": 149,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 148,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 149,
+    "kanon": 326,
+    "akolouthia2": 183,
+    "apographe": 149,
+    "diastema": 149
+   }
+  },
+  {
+   "lane": "unified-diff.patch",
+   "parent": "synkrisis",
+   "parentTokens": 419,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 415,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 419,
+    "kanon": 910,
+    "akolouthia2": 475,
+    "apographe": 419,
+    "diastema": 419
+   }
+  },
+  {
+   "lane": "df-h.txt",
+   "parent": "akolouthia2",
+   "parentTokens": 171,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 170,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 250,
+    "kanon": 237,
+    "akolouthia2": 171,
+    "apographe": 250,
+    "diastema": 250
+   }
+  },
+  {
+   "lane": "df-real.txt",
+   "parent": "synkrisis",
+   "parentTokens": 126,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 125,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 126,
+    "kanon": 316,
+    "akolouthia2": 158,
+    "apographe": 126,
+    "diastema": 126
+   }
+  },
+  {
+   "lane": "du-real.txt",
+   "parent": "synkrisis",
+   "parentTokens": 272,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 269,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 272,
+    "kanon": 592,
+    "akolouthia2": 316,
+    "apographe": 272,
+    "diastema": 272
+   }
+  },
+  {
+   "lane": "node-help.txt",
+   "parent": "synkrisis",
+   "parentTokens": 862,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 860,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 862,
+    "kanon": 1761,
+    "akolouthia2": 901,
+    "apographe": 862,
+    "diastema": 862
+   }
+  },
+  {
+   "lane": "findmnt.txt",
+   "parent": "synkrisis",
+   "parentTokens": 444,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 440,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 444,
+    "kanon": 926,
+    "akolouthia2": 483,
+    "apographe": 444,
+    "diastema": 444
+   }
+  },
+  {
+   "lane": "df-h.txt",
+   "parent": "synkrisis",
+   "parentTokens": 108,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 107,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 108,
+    "kanon": 280,
+    "akolouthia2": 140,
+    "apographe": 108,
+    "diastema": 108
+   }
+  },
+  {
+   "lane": "email-thread.txt",
+   "parent": "synkrisis",
+   "parentTokens": 488,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 487,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 488,
+    "kanon": 1009,
+    "akolouthia2": 525,
+    "apographe": 488,
+    "hemera": 525,
+    "diastema": 488
+   }
+  },
+  {
+   "lane": "llm-answer.md",
+   "parent": "synkrisis",
+   "parentTokens": 674,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 671,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 674,
+    "kanon": 1374,
+    "akolouthia2": 707,
+    "apographe": 674,
+    "diastema": 674
+   }
+  },
+  {
+   "lane": "markdown-table.md",
+   "parent": "synkrisis",
+   "parentTokens": 176,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 174,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 176,
+    "kanon": 219,
+    "akolouthia2": 228,
+    "apographe": 176,
+    "metron": 176,
+    "diastema": 176
+   }
+  },
+  {
+   "lane": "psql-output.txt",
+   "parent": "metron",
+   "parentTokens": 244,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 242,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 289,
+    "kanon": 268,
+    "akolouthia2": 355,
+    "apographe": 289,
+    "metron": 244,
+    "hemera": 391,
+    "diastema": 320
+   }
+  },
+  {
+   "lane": "prices.csv",
+   "parent": "diastema",
+   "parentTokens": 133,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 133,
+   "applied": false,
+   "frontierCosts": {
+    "synkrisis": 208,
+    "kanon": 190,
+    "akolouthia2": 203,
+    "apographe": 208,
+    "metron": 213,
+    "hemera": 263,
+    "diastema": 133
+   }
+  },
+  {
+   "lane": "cue-sheet.md",
+   "parent": "stichomythia",
+   "parentTokens": 163,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 101,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 184,
+    "kanon": 235,
+    "akolouthia2": 164,
+    "apographe": 184,
+    "metron": 163,
+    "diastema": 184
+   }
+  },
+  {
+   "lane": "ps-ef.txt",
+   "parent": "synkrisis",
+   "parentTokens": 315,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 309,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 315,
+    "kanon": 668,
+    "akolouthia2": 343,
+    "apographe": 315,
+    "diastema": 315
+   }
+  },
+  {
+   "lane": "ls-real.txt",
+   "parent": "synkrisis",
+   "parentTokens": 433,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 431,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 433,
+    "kanon": 899,
+    "akolouthia2": 470,
+    "apographe": 433,
+    "diastema": 433
+   }
+  },
+  {
+   "lane": "json-pkg.txt",
+   "parent": "synkrisis",
+   "parentTokens": 681,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 670,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 681,
+    "kanon": 1446,
+    "akolouthia2": 743,
+    "apographe": 681,
+    "diastema": 681
+   }
+  },
+  {
+   "lane": "code-ts.txt",
+   "parent": "synkrisis",
+   "parentTokens": 983,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 970,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 983,
+    "kanon": 2015,
+    "akolouthia2": 1028,
+    "apographe": 983,
+    "diastema": 983
+   }
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "parent": "synkrisis",
+   "parentTokens": 674,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 668,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 674,
+    "kanon": 730,
+    "akolouthia2": 712,
+    "apographe": 674,
+    "diastema": 674
+   }
+  },
+  {
+   "lane": "ps-real.txt",
+   "parent": "synkrisis",
+   "parentTokens": 397,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 391,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 397,
+    "kanon": 864,
+    "akolouthia2": 452,
+    "apographe": 397,
+    "diastema": 397
+   }
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "parent": "akolouthia2",
+   "parentTokens": 326,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 322,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 340,
+    "kanon": 352,
+    "akolouthia2": 326,
+    "apographe": 340,
+    "diastema": 340
+   }
+  },
+  {
+   "lane": "metrics.tsv",
+   "parent": "akolouthia2",
+   "parentTokens": 210,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 208,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 237,
+    "kanon": 236,
+    "akolouthia2": 210,
+    "apographe": 237,
+    "metron": 237,
+    "diastema": 237
+   }
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "parent": "synkrisis",
+   "parentTokens": 1056,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 1043,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 1056,
+    "kanon": 2174,
+    "akolouthia2": 1106,
+    "apographe": 1056,
+    "diastema": 1056
+   }
+  },
+  {
+   "lane": "apt-real.txt",
+   "parent": "synkrisis",
+   "parentTokens": 858,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 843,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 858,
+    "kanon": 1009,
+    "akolouthia2": 960,
+    "apographe": 858,
+    "diastema": 858
+   }
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "parent": "synkrisis",
+   "parentTokens": 1496,
+   "candidateTokens": null,
+   "gap": null,
+   "shipped": 1381,
+   "applied": true,
+   "frontierCosts": {
+    "synkrisis": 1496,
+    "kanon": 3096,
+    "akolouthia2": 1573,
+    "apographe": 1496,
+    "diastema": 1496
+   }
+  }
+ ]
+}

@@ -1,0 +1,356 @@
+{
+ "note": "X103 population census 2: body literals that already have a rule. estSave is an UPPER BOUND (tokens(v)-1 per occurrence, ignoring boundary effects and overlap).",
+ "literalOccurrences": 5232,
+ "referencedOccurrences": 3440,
+ "estSaveUpperBound": 10,
+ "lanesWithLiteral": 19,
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "rules": 0,
+   "literalOccurrences": 0,
+   "referencedOccurrences": 0,
+   "estSave": 0
+  },
+  {
+   "lane": "kb-article.txt",
+   "rules": 27,
+   "literalOccurrences": 49,
+   "referencedOccurrences": 185,
+   "estSave": 0,
+   "sample": [
+    "а:2B",
+    "а:2B",
+    "а:2B",
+    "а:2B",
+    "а:2B",
+    "а:2B"
+   ]
+  },
+  {
+   "lane": "uptime-w.txt",
+   "rules": 0,
+   "literalOccurrences": 0,
+   "referencedOccurrences": 0,
+   "estSave": 0
+  },
+  {
+   "lane": "free-m.txt",
+   "rules": 0,
+   "literalOccurrences": 0,
+   "referencedOccurrences": 0,
+   "estSave": 0
+  },
+  {
+   "lane": "vmstat.txt",
+   "rules": 12,
+   "literalOccurrences": 24,
+   "referencedOccurrences": 21,
+   "estSave": 0,
+   "sample": [
+    "ә:2B",
+    "ә:2B",
+    "ә:2B",
+    "ә:2B",
+    "ә:2B",
+    "ә:2B"
+   ]
+  },
+  {
+   "lane": "unified-diff.patch",
+   "rules": 33,
+   "literalOccurrences": 5,
+   "referencedOccurrences": 89,
+   "estSave": 0,
+   "sample": [
+    "і:2B",
+    "і:2B",
+    "і:2B",
+    "і:2B",
+    "т:2B"
+   ]
+  },
+  {
+   "lane": "df-h.txt",
+   "rules": 17,
+   "literalOccurrences": 19,
+   "referencedOccurrences": 30,
+   "estSave": 0,
+   "sample": [
+    "г:2B",
+    "г:2B",
+    "г:2B",
+    "г:2B",
+    "г:2B",
+    "г:2B"
+   ]
+  },
+  {
+   "lane": "df-real.txt",
+   "rules": 13,
+   "literalOccurrences": 4,
+   "referencedOccurrences": 16,
+   "estSave": 0,
+   "sample": [
+    "о:3B",
+    "о:3B",
+    "о:3B",
+    "о:3B"
+   ]
+  },
+  {
+   "lane": "du-real.txt",
+   "rules": 23,
+   "literalOccurrences": 0,
+   "referencedOccurrences": 62,
+   "estSave": 0,
+   "sample": []
+  },
+  {
+   "lane": "node-help.txt",
+   "rules": 42,
+   "literalOccurrences": 177,
+   "referencedOccurrences": 246,
+   "estSave": 1,
+   "sample": [
+    "э:4B",
+    "к:3B",
+    "к:3B",
+    "к:3B",
+    "к:3B",
+    "к:3B"
+   ]
+  },
+  {
+   "lane": "findmnt.txt",
+   "rules": 34,
+   "literalOccurrences": 4368,
+   "referencedOccurrences": 109,
+   "estSave": 0,
+   "sample": [
+    "ش:2B",
+    "ش:2B",
+    "ا:12B",
+    "ا:12B",
+    "ا:12B",
+    "ا:12B"
+   ]
+  },
+  {
+   "lane": "df-h.txt",
+   "rules": 13,
+   "literalOccurrences": 4,
+   "referencedOccurrences": 16,
+   "estSave": 0,
+   "sample": [
+    "о:3B",
+    "о:3B",
+    "о:3B",
+    "о:3B"
+   ]
+  },
+  {
+   "lane": "email-thread.txt",
+   "rules": 39,
+   "literalOccurrences": 7,
+   "referencedOccurrences": 103,
+   "estSave": 0,
+   "sample": [
+    "т:2B",
+    "л:4B",
+    "л:4B",
+    "л:4B",
+    "ъ:2B",
+    "ъ:2B"
+   ]
+  },
+  {
+   "lane": "llm-answer.md",
+   "rules": 34,
+   "literalOccurrences": 27,
+   "referencedOccurrences": 143,
+   "estSave": 0,
+   "sample": [
+    "д:2B",
+    "д:2B",
+    "р:2B",
+    "р:2B",
+    "в:2B",
+    "в:2B"
+   ]
+  },
+  {
+   "lane": "markdown-table.md",
+   "rules": 12,
+   "literalOccurrences": 0,
+   "referencedOccurrences": 61,
+   "estSave": 0,
+   "sample": []
+  },
+  {
+   "lane": "psql-output.txt",
+   "rules": 20,
+   "literalOccurrences": 2,
+   "referencedOccurrences": 67,
+   "estSave": 0,
+   "sample": [
+    "е:2B",
+    "е:2B"
+   ]
+  },
+  {
+   "lane": "prices.csv",
+   "rules": 9,
+   "literalOccurrences": 5,
+   "referencedOccurrences": 13,
+   "estSave": 0,
+   "sample": [
+    "л:2B",
+    "л:2B",
+    "л:2B",
+    "л:2B",
+    "л:2B"
+   ]
+  },
+  {
+   "lane": "cue-sheet.md",
+   "rules": 0,
+   "literalOccurrences": 0,
+   "referencedOccurrences": 0,
+   "estSave": 0
+  },
+  {
+   "lane": "ps-ef.txt",
+   "rules": 28,
+   "literalOccurrences": 0,
+   "referencedOccurrences": 99,
+   "estSave": 0,
+   "sample": []
+  },
+  {
+   "lane": "ls-real.txt",
+   "rules": 47,
+   "literalOccurrences": 33,
+   "referencedOccurrences": 110,
+   "estSave": 0,
+   "sample": [
+    "ь:5B",
+    "ь:5B",
+    "ь:5B",
+    "ь:5B",
+    "ь:5B",
+    "п:2B"
+   ]
+  },
+  {
+   "lane": "json-pkg.txt",
+   "rules": 48,
+   "literalOccurrences": 8,
+   "referencedOccurrences": 205,
+   "estSave": 6,
+   "sample": [
+    "ҳ:5B",
+    "й:4B",
+    "ц:9B",
+    "ё:14B",
+    "н:10B",
+    "н:10B"
+   ]
+  },
+  {
+   "lane": "code-ts.txt",
+   "rules": 75,
+   "literalOccurrences": 88,
+   "referencedOccurrences": 402,
+   "estSave": 0,
+   "sample": [
+    "д:6B",
+    "о:2B",
+    "о:2B",
+    "о:2B",
+    "о:2B",
+    "о:2B"
+   ]
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "rules": 46,
+   "literalOccurrences": 256,
+   "referencedOccurrences": 168,
+   "estSave": 0,
+   "sample": [
+    "з:20B",
+    "з:20B",
+    "з:20B",
+    "з:20B",
+    "з:20B",
+    "з:20B"
+   ]
+  },
+  {
+   "lane": "ps-real.txt",
+   "rules": 30,
+   "literalOccurrences": 0,
+   "referencedOccurrences": 99,
+   "estSave": 0,
+   "sample": []
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "rules": 25,
+   "literalOccurrences": 0,
+   "referencedOccurrences": 66,
+   "estSave": 0,
+   "sample": []
+  },
+  {
+   "lane": "metrics.tsv",
+   "rules": 19,
+   "literalOccurrences": 0,
+   "referencedOccurrences": 46,
+   "estSave": 0,
+   "sample": []
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "rules": 79,
+   "literalOccurrences": 137,
+   "referencedOccurrences": 272,
+   "estSave": 1,
+   "sample": [
+    "д:2B",
+    "д:2B",
+    "д:2B",
+    "д:2B",
+    "д:2B",
+    "д:2B"
+   ]
+  },
+  {
+   "lane": "apt-real.txt",
+   "rules": 63,
+   "literalOccurrences": 2,
+   "referencedOccurrences": 343,
+   "estSave": 0,
+   "sample": [
+    "і:2B",
+    "і:2B"
+   ]
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "rules": 134,
+   "literalOccurrences": 17,
+   "referencedOccurrences": 469,
+   "estSave": 2,
+   "sample": [
+    "ე:2B",
+    "ე:2B",
+    "ე:2B",
+    "ე:2B",
+    "ე:2B",
+    "ე:2B"
+   ]
+  }
+ ]
+}

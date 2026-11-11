@@ -1,0 +1,379 @@
+{
+ "note": "X103 RESCORE: optimise synkrisis CHIRON wire with the full wire-level sequence, then compare with the winning parent",
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 60,
+   "synkrisisRaw": 60,
+   "synkrisisOptimised": 60,
+   "beatsWinner": false,
+   "steps": [],
+   "note": ""
+  },
+  {
+   "lane": "kb-article.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 622,
+   "synkrisisRaw": 622,
+   "synkrisisOptimised": 621,
+   "beatsWinner": true,
+   "steps": [
+    "METATAXIS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "uptime-w.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 80,
+   "synkrisisRaw": 80,
+   "synkrisisOptimised": 80,
+   "beatsWinner": false,
+   "steps": [],
+   "note": ""
+  },
+  {
+   "lane": "free-m.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 76,
+   "synkrisisRaw": 76,
+   "synkrisisOptimised": 76,
+   "beatsWinner": false,
+   "steps": [],
+   "note": ""
+  },
+  {
+   "lane": "vmstat.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 149,
+   "synkrisisRaw": 149,
+   "synkrisisOptimised": 148,
+   "beatsWinner": true,
+   "steps": [
+    "SYNDYASMOS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "unified-diff.patch",
+   "winnerCodec": "synkrisis",
+   "winner": 419,
+   "synkrisisRaw": 419,
+   "synkrisisOptimised": 415,
+   "beatsWinner": true,
+   "steps": [
+    "ISOMORPHIA",
+    "METATAXIS",
+    "GENNADAS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "df-h.txt",
+   "winnerCodec": "akolouthia2",
+   "winner": 171,
+   "synkrisisRaw": 250,
+   "synkrisisOptimised": 249,
+   "beatsWinner": false,
+   "steps": [
+    "METATAXIS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "df-real.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 126,
+   "synkrisisRaw": 126,
+   "synkrisisOptimised": 125,
+   "beatsWinner": true,
+   "steps": [
+    "ISOMORPHIA"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "du-real.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 272,
+   "synkrisisRaw": 272,
+   "synkrisisOptimised": 269,
+   "beatsWinner": true,
+   "steps": [
+    "SYNDYASMOS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "node-help.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 862,
+   "synkrisisRaw": 862,
+   "synkrisisOptimised": 860,
+   "beatsWinner": true,
+   "steps": [
+    "METATAXIS",
+    "SYNDYASMOS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "findmnt.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 444,
+   "synkrisisRaw": 444,
+   "synkrisisOptimised": 440,
+   "beatsWinner": true,
+   "steps": [
+    "METATAXIS",
+    "SYNDYASMOS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "df-h.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 108,
+   "synkrisisRaw": 108,
+   "synkrisisOptimised": 107,
+   "beatsWinner": true,
+   "steps": [
+    "ISOMORPHIA"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "email-thread.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 488,
+   "synkrisisRaw": 488,
+   "synkrisisOptimised": 487,
+   "beatsWinner": true,
+   "steps": [
+    "METATAXIS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "llm-answer.md",
+   "winnerCodec": "synkrisis",
+   "winner": 674,
+   "synkrisisRaw": 674,
+   "synkrisisOptimised": 671,
+   "beatsWinner": true,
+   "steps": [
+    "ISOMORPHIA",
+    "SYNDYASMOS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "markdown-table.md",
+   "winnerCodec": "synkrisis",
+   "winner": 176,
+   "synkrisisRaw": 176,
+   "synkrisisOptimised": 174,
+   "beatsWinner": true,
+   "steps": [
+    "GENNADAS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "psql-output.txt",
+   "winnerCodec": "metron",
+   "winner": 244,
+   "synkrisisRaw": 289,
+   "synkrisisOptimised": 286,
+   "beatsWinner": false,
+   "steps": [
+    "GENNADAS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "prices.csv",
+   "winnerCodec": "diastema",
+   "winner": 133,
+   "synkrisisRaw": 208,
+   "synkrisisOptimised": 207,
+   "beatsWinner": false,
+   "steps": [
+    "GENNADAS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "cue-sheet.md",
+   "winnerCodec": "stichomythia",
+   "winner": 163,
+   "synkrisisRaw": 184,
+   "synkrisisOptimised": 183,
+   "beatsWinner": false,
+   "steps": [
+    "ISOMORPHIA"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "ps-ef.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 315,
+   "synkrisisRaw": 315,
+   "synkrisisOptimised": 309,
+   "beatsWinner": true,
+   "steps": [
+    "ISOMORPHIA",
+    "METATAXIS",
+    "SYNDYASMOS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "ls-real.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 433,
+   "synkrisisRaw": 433,
+   "synkrisisOptimised": 431,
+   "beatsWinner": true,
+   "steps": [
+    "METATAXIS",
+    "DIAGRAPHE"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "json-pkg.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 681,
+   "synkrisisRaw": 681,
+   "synkrisisOptimised": 670,
+   "beatsWinner": true,
+   "steps": [
+    "ISOMORPHIA",
+    "METATAXIS",
+    "SYNDYASMOS",
+    "GENNADAS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "code-ts.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 983,
+   "synkrisisRaw": 983,
+   "synkrisisOptimised": 970,
+   "beatsWinner": true,
+   "steps": [
+    "ISOMORPHIA",
+    "METATAXIS",
+    "SYNDYASMOS",
+    "GENNADAS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 674,
+   "synkrisisRaw": 674,
+   "synkrisisOptimised": 668,
+   "beatsWinner": true,
+   "steps": [
+    "ISOMORPHIA",
+    "METATAXIS",
+    "SYNDYASMOS",
+    "DIAGRAPHE"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "ps-real.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 397,
+   "synkrisisRaw": 397,
+   "synkrisisOptimised": 391,
+   "beatsWinner": true,
+   "steps": [
+    "METATAXIS",
+    "SYNDYASMOS",
+    "GENNADAS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "winnerCodec": "akolouthia2",
+   "winner": 326,
+   "synkrisisRaw": 340,
+   "synkrisisOptimised": 332,
+   "beatsWinner": false,
+   "steps": [
+    "ISOMORPHIA",
+    "METATAXIS",
+    "SYNDYASMOS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "metrics.tsv",
+   "winnerCodec": "akolouthia2",
+   "winner": 210,
+   "synkrisisRaw": 237,
+   "synkrisisOptimised": 235,
+   "beatsWinner": false,
+   "steps": [
+    "ISOMORPHIA",
+    "METATAXIS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 1056,
+   "synkrisisRaw": 1056,
+   "synkrisisOptimised": 1043,
+   "beatsWinner": true,
+   "steps": [
+    "ISOMORPHIA",
+    "METATAXIS",
+    "SYNDYASMOS"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "apt-real.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 861,
+   "synkrisisRaw": 861,
+   "synkrisisOptimised": 844,
+   "beatsWinner": true,
+   "steps": [
+    "ISOMORPHIA",
+    "METATAXIS",
+    "GENNADAS",
+    "DIAGRAPHE"
+   ],
+   "note": ""
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "winnerCodec": "synkrisis",
+   "winner": 1497,
+   "synkrisisRaw": 1497,
+   "synkrisisOptimised": 1471,
+   "beatsWinner": true,
+   "steps": [
+    "GENNADAS"
+   ],
+   "note": ""
+  }
+ ],
+ "totals": {
+  "synkrisisRaw": 12961,
+  "synkrisisOptimised": 12822,
+  "winner": 12700
+ }
+}

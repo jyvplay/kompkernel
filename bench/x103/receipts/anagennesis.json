@@ -1,0 +1,302 @@
+{
+ "note": "X103 ANAGENNESIS: CHIRON applied to the SHIPPED message as a second stage. CHIRON-parented lanes are the control and must not improve.",
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "parent": "synkrisis",
+   "base": 60,
+   "stage2": 60,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 5,
+   "note": "identity: no framing pays here; message gate: framed 69 >= raw 60 (wire 62); sweep work bu"
+  },
+  {
+   "lane": "kb-article.txt",
+   "parent": "synkrisis",
+   "base": 621,
+   "stage2": 621,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 60,
+   "note": "identity: no framing pays here; message gate: framed 630 >= raw 621 (wire 623); sweep work"
+  },
+  {
+   "lane": "uptime-w.txt",
+   "parent": "synkrisis",
+   "base": 80,
+   "stage2": 80,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 6,
+   "note": "identity: no framing pays here; message gate: framed 117 >= raw 80 (wire 78); sweep work b"
+  },
+  {
+   "lane": "free-m.txt",
+   "parent": "synkrisis",
+   "base": 76,
+   "stage2": 76,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 12,
+   "note": "identity: no framing pays here; message gate: framed 85 >= raw 76 (wire 78); sweep work bu"
+  },
+  {
+   "lane": "vmstat.txt",
+   "parent": "synkrisis",
+   "base": 148,
+   "stage2": 148,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 8,
+   "note": "identity: no framing pays here; message gate: framed 157 >= raw 148 (wire 150); sweep work"
+  },
+  {
+   "lane": "unified-diff.patch",
+   "parent": "synkrisis",
+   "base": 415,
+   "stage2": 415,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 33,
+   "note": "identity: no framing pays here; message gate: framed 425 >= raw 415 (wire 417); sweep work"
+  },
+  {
+   "lane": "df-h.txt",
+   "parent": "akolouthia2",
+   "base": 170,
+   "stage2": 170,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 17,
+   "note": "identity: no framing pays here; message gate: framed 179 >= raw 170 (wire 172); sweep work"
+  },
+  {
+   "lane": "df-real.txt",
+   "parent": "synkrisis",
+   "base": 125,
+   "stage2": 125,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 7,
+   "note": "identity: no framing pays here; message gate: framed 134 >= raw 125 (wire 127); sweep work"
+  },
+  {
+   "lane": "du-real.txt",
+   "parent": "synkrisis",
+   "base": 269,
+   "stage2": 269,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 10,
+   "note": "identity: no framing pays here; message gate: framed 279 >= raw 269 (wire 271); sweep work"
+  },
+  {
+   "lane": "node-help.txt",
+   "parent": "synkrisis",
+   "base": 860,
+   "stage2": 860,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 373,
+   "note": "identity: no framing pays here; message gate: framed 870 >= raw 860 (wire 862); sweep work"
+  },
+  {
+   "lane": "findmnt.txt",
+   "parent": "synkrisis",
+   "base": 440,
+   "stage2": 440,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 160,
+   "note": "identity: no framing pays here; message gate: framed 449 >= raw 440 (wire 442); sweep work"
+  },
+  {
+   "lane": "df-h.txt",
+   "parent": "synkrisis",
+   "base": 107,
+   "stage2": 107,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 8,
+   "note": "identity: no framing pays here; message gate: framed 116 >= raw 107 (wire 109); sweep work"
+  },
+  {
+   "lane": "email-thread.txt",
+   "parent": "synkrisis",
+   "base": 487,
+   "stage2": 487,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 36,
+   "note": "identity: no framing pays here; message gate: framed 497 >= raw 487 (wire 489); sweep work"
+  },
+  {
+   "lane": "llm-answer.md",
+   "parent": "synkrisis",
+   "base": 671,
+   "stage2": 671,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 62,
+   "note": "identity: no framing pays here; message gate: framed 680 >= raw 671 (wire 673); sweep work"
+  },
+  {
+   "lane": "markdown-table.md",
+   "parent": "synkrisis",
+   "base": 174,
+   "stage2": 174,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 13,
+   "note": "identity: no framing pays here; message gate: framed 183 >= raw 174 (wire 176); sweep work"
+  },
+  {
+   "lane": "psql-output.txt",
+   "parent": "metron",
+   "base": 242,
+   "stage2": 242,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 21,
+   "note": "identity: no framing pays here; message gate: framed 251 >= raw 242 (wire 244); sweep work"
+  },
+  {
+   "lane": "prices.csv",
+   "parent": "diastema",
+   "base": 133,
+   "stage2": 133,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 12,
+   "note": "identity: no framing pays here; message gate: framed 143 >= raw 133 (wire 135); sweep work"
+  },
+  {
+   "lane": "cue-sheet.md",
+   "parent": "stichomythia",
+   "base": 101,
+   "stage2": 101,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 7,
+   "note": "identity: no framing pays here; message gate: framed 110 >= raw 101 (wire 103); sweep work"
+  },
+  {
+   "lane": "ps-ef.txt",
+   "parent": "synkrisis",
+   "base": 309,
+   "stage2": 309,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 27,
+   "note": "identity: no framing pays here; message gate: framed 318 >= raw 309 (wire 311); sweep work"
+  },
+  {
+   "lane": "ls-real.txt",
+   "parent": "synkrisis",
+   "base": 431,
+   "stage2": 431,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 31,
+   "note": "identity: no framing pays here; message gate: framed 441 >= raw 431 (wire 433); sweep work"
+  },
+  {
+   "lane": "json-pkg.txt",
+   "parent": "synkrisis",
+   "base": 670,
+   "stage2": 670,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 60,
+   "note": "identity: no framing pays here; message gate: framed 679 >= raw 670 (wire 672); sweep work"
+  },
+  {
+   "lane": "code-ts.txt",
+   "parent": "synkrisis",
+   "base": 970,
+   "stage2": 970,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 127,
+   "note": "identity: no framing pays here; message gate: framed 980 >= raw 970 (wire 972); sweep work"
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "parent": "synkrisis",
+   "base": 668,
+   "stage2": 668,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 323,
+   "note": "identity: no framing pays here; message gate: framed 677 >= raw 668 (wire 670); sweep work"
+  },
+  {
+   "lane": "ps-real.txt",
+   "parent": "synkrisis",
+   "base": 391,
+   "stage2": 391,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 33,
+   "note": "identity: no framing pays here; message gate: framed 400 >= raw 391 (wire 393); sweep work"
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "parent": "akolouthia2",
+   "base": 322,
+   "stage2": 322,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 93,
+   "note": "identity: no framing pays here; message gate: framed 331 >= raw 322 (wire 324); sweep work"
+  },
+  {
+   "lane": "metrics.tsv",
+   "parent": "akolouthia2",
+   "base": 208,
+   "stage2": 208,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 28,
+   "note": "identity: no framing pays here; message gate: framed 217 >= raw 208 (wire 210); sweep work"
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "parent": "synkrisis",
+   "base": 1044,
+   "stage2": 1044,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 163,
+   "note": "identity: no framing pays here; message gate: framed 1053 >= raw 1044 (wire 1046); sweep w"
+  },
+  {
+   "lane": "apt-real.txt",
+   "parent": "synkrisis",
+   "base": 843,
+   "stage2": 843,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 35,
+   "note": "identity: no framing pays here; message gate: framed 853 >= raw 843 (wire 845); sweep work"
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "parent": "synkrisis",
+   "base": 1381,
+   "stage2": 1381,
+   "delta": 0,
+   "roundTrip": true,
+   "ms": 116,
+   "note": "identity: no framing pays here; message gate: framed 1390 >= raw 1381 (wire 1383); sweep w"
+  }
+ ],
+ "totals": {
+  "base": 12416,
+  "stage2": 12416,
+  "delta": 0,
+  "better": 0,
+  "worse": 0
+ }
+}

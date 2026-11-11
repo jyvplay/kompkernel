@@ -1,0 +1,173 @@
+{
+ "note": "X103 PROAGOGE: bring interior factors forward; 29-lane interleaved A/B, arm A = OMEGA_NO_PROAGOGE=1",
+ "lo": 15,
+ "hi": 29,
+ "rows": [
+  {
+   "lane": "psql-output.txt",
+   "armA": 242,
+   "armB": 242,
+   "delta": 0,
+   "armAms": 13010,
+   "armBms": 4510,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (948 B); 0 enabling pairs, 0 priced improvements; M 244 -> 242; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "prices.csv",
+   "armA": 133,
+   "armB": 133,
+   "delta": 0,
+   "armAms": 15736,
+   "armBms": 9337,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "cue-sheet.md",
+   "armA": 101,
+   "armB": 101,
+   "delta": 0,
+   "armAms": 12800,
+   "armBms": 2844,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "STICHOMYTHIA 28x4 M=101 < metron M=163; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "ps-ef.txt",
+   "armA": 309,
+   "armB": 309,
+   "delta": 0,
+   "armAms": 13728,
+   "armBms": 5335,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 3 re-spellings, 2233 priced, 312 -> 309; ΜΕΤΑΤΑΞΙΣ metataxis: 554 probes, 2 relocations, 314 -> 312 (-2); ἸΣΟΜΟΡΦΊΑ ISOMORPHIA"
+  },
+  {
+   "lane": "ls-real.txt",
+   "armA": 431,
+   "armB": 431,
+   "delta": 0,
+   "armAms": 11538,
+   "armBms": 835,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΔΙΑΓΡΑΦΗ diagraphe: swept 95 rules, deleted 1, 95 whole-message prices; M 432 -> 431; ΜΕΤΑΤΑΞΙΣ metataxis: 1692 probes, 1 relocations, 433 -> 432 (-1); outside bounded, collision-free, well-nested mar"
+  },
+  {
+   "lane": "json-pkg.txt",
+   "armA": 670,
+   "armB": 670,
+   "delta": 0,
+   "armAms": 16643,
+   "armBms": 2872,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΓΕΝΝΑΔΑΣ gennadas: ref = source (3620 B); 4 enabling pairs, 1 priced improvements; M 672 -> 670; ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 3 rounds (1 skipped by early exit), 1 relocations, 2 re-spellings, 495 priced, 6"
+  },
+  {
+   "lane": "code-ts.txt",
+   "armA": 970,
+   "armB": 970,
+   "delta": 0,
+   "armAms": 25597,
+   "armBms": 8650,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΓΕΝΝΑΔΑΣ gennadas: ref = source (6000 B); 8 enabling pairs, 1 priced improvements; M 971 -> 970; ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 3 rounds (1 skipped by early exit), 1 relocations, 1 re-spellings, 3422 priced, "
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "armA": 668,
+   "armB": 668,
+   "delta": 0,
+   "armAms": 18793,
+   "armBms": 1568,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΔΙΑΓΡΑΦΗ diagraphe: swept 94 rules, deleted 2, 94 whole-message prices; M 670 -> 668; ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 2 re-spellings, 6782 priced, 672 -> 670;"
+  },
+  {
+   "lane": "ps-real.txt",
+   "armA": 391,
+   "armB": 391,
+   "delta": 0,
+   "armAms": 12366,
+   "armBms": 738,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΓΕΝΝΑΔΑΣ gennadas: ref = source (2365 B); 1 enabling pairs, 1 priced improvements; M 392 -> 391; ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 2 re-spellings, 296 priced, 3"
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "armA": 322,
+   "armB": 322,
+   "delta": 0,
+   "armAms": 21491,
+   "armBms": 4648,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (2975 B); 0 enabling pairs, 0 priced improvements; M 326 -> 322; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "metrics.tsv",
+   "armA": 208,
+   "armB": 208,
+   "delta": 0,
+   "armAms": 20282,
+   "armBms": 9035,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (1477 B); 0 enabling pairs, 0 priced improvements; M 210 -> 208; outside bounded, collision-free, well-nested markup domain"
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "armA": 1043,
+   "armB": 1043,
+   "delta": 0,
+   "armAms": 32317,
+   "armBms": 5643,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΣΥΝΔΥΑΣΜΟΣ syndyasmos: 2 rounds (2 skipped by early exit), 0 relocations, 3 re-spellings, 7271 priced, 1046 -> 1043; ΜΕΤΑΤΑΞΙΣ metataxis: 4169 probes, 8 relocations, 1054 -> 1046 (-8); ἸΣΟΜΟΡΦΊΑ ISOMO"
+  },
+  {
+   "lane": "apt-real.txt",
+   "armA": 843,
+   "armB": 843,
+   "delta": 0,
+   "armAms": 75997,
+   "armBms": 24342,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΔΙΑΓΡΑΦΗ diagraphe: swept 127 rules, deleted 1, 127 whole-message prices; M 844 -> 843; ΓΕΝΝΑΔΑΣ gennadas: ref = source (6195 B); 9 enabling pairs, 1 priced improvements; M 845 -> 844; ΜΕΤΑΤΑΞΙΣ metat"
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "armA": 1381,
+   "armB": 1380,
+   "delta": -1,
+   "armAms": 370172,
+   "armBms": 33055,
+   "sameDecode": true,
+   "exactBoth": true,
+   "notesB": "ΠΡΟΑΓΩΓΗ proagoge: 2 scan(s), 1 interior-factor pairs, 0 blocked by a forward reference, 1 moved (1 bring-forward, 0 push-back), 1 re-spelled, 15 whole-message prices; M 1381 -> 1380; ΓΕΝΝΑΔΑΣ gennada"
+  }
+ ],
+ "totals": {
+  "armA": 7712,
+  "armB": 7711,
+  "delta": -1,
+  "better": 1,
+  "worse": 0,
+  "same": 13,
+  "exact": 14,
+  "sameDecode": 14,
+  "armAms": 660470,
+  "armBms": 113412
+ }
+}

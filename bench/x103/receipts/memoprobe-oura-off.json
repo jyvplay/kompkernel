@@ -1,0 +1,23 @@
+{
+ "setting": "oura-off",
+ "out": [
+  {
+   "path": "bench/holdout-x41/apt-real.txt",
+   "tokens": 834,
+   "control": 836,
+   "delta": -2
+  },
+  {
+   "path": "bench/holdout/code-ts.txt",
+   "tokens": 968,
+   "control": 968,
+   "delta": 0
+  },
+  {
+   "path": "bench/holdout-x42/dpkg-l.txt",
+   "tokens": 668,
+   "control": 667,
+   "delta": 1
+  }
+ ]
+}
