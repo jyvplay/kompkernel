@@ -78,9 +78,12 @@ been falsified before it was written.
 * worse **0**, same 27
 * `A.decoded === B.decoded` **29/29**; byte-exact against the source **29/29**
 
-Reproduced twice: `bench/x103/settle.ts` → `receipts/settle.json` independently gives A = 12 415,
-B = 12 414, Δ = −1 on the same lane set in a single process (the one-token difference is the
-process-history effect documented in §3, not a different result for the codec).
+**Confirmed three times.**  (1) `bench/x103/proagoge29.ts` run in two calls: A = 12 415, B = 12 412,
+Δ = −3.  (2) `bench/x103/settle.ts` → `receipts/settle.json`, one process, frontier + A + B per lane:
+A = 12 415, B = 12 412, **Δ = −3, identical numbers**.  (3) `bench/x103/procpu.ts` → `receipts/procpu.json`,
+the alternating 3-rep CPU probe, independently records `findmnt` 440 → 438, the PUSH-BACK win.
+(An earlier `settle` run, made before PUSH-BACK existed, gave Δ = −1 with variant A alone; its receipt
+was overwritten by the run above and the figure is corrected here rather than left standing.)
 
 **Variant A alone paid −1.  Adding PUSH-BACK took it to −3.**  That is the measured value of the
 second variant, and it is why both are shipped.

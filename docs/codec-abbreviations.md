@@ -6157,7 +6157,10 @@ population counted by the same routine in the same process — 41 prefix pairs a
 29-lane interleaved A/B (`bench/x103/receipts/proagoge29-*.json`, arm A = `OMEGA_NO_PROAGOGE=1`):
 **12 415 → 12 412, Δ = −3**; better **2** (`findmnt` −2 by PUSH-BACK, `ls-l-real` −1 by BRING-FORWARD),
 worse **0**, same 27; `A.decoded === B.decoded` 29/29; byte-exact 29/29.  Variant A alone paid −1;
-adding PUSH-BACK took it to −3.
+adding PUSH-BACK took it to −3.  **Confirmed three times:** `proagoge29` (two calls) and `settle.ts`
+(one process) both give A = 12 415 / B = 12 412 / **Δ = −3, identical numbers**, and the alternating CPU
+probe independently records `findmnt` 440 → 438.  (An earlier `settle` run made before PUSH-BACK existed
+gave Δ = −1 with variant A alone; its receipt was overwritten and the figure is corrected here.)
 
 **CPU** (`bench/x103/receipts/procpu.json`, seven lanes, three reps, **alternating** arm order,
 medians): aggregate 5 680 → 5 528 ms = **−2.68 %**, inside the drift the alternating protocol exists to

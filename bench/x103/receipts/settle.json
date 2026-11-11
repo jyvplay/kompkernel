@@ -5,10 +5,10 @@
   "OMEGA_NO_MEMO": "1"
  },
  "totals": {
-  "frontier": 12695,
+  "frontier": 12696,
   "armA": 12415,
-  "armB": 12414,
-  "delta": -1,
+  "armB": 12412,
+  "delta": -3,
   "frontierMoved": 5,
   "frontierPrevTotal": 12639
  },
@@ -140,9 +140,9 @@
    "prevFrontier": 444,
    "frontierMoved": false,
    "armA": 440,
-   "armB": 440,
-   "delta": 0,
-   "proagogeNote": "",
+   "armB": 438,
+   "delta": -2,
+   "proagogeNote": "ΠΡΟΑΓΩΓΗ proagoge: 2 scan(s), 18 interior-factor pairs, 0 blocked by a forward reference, 1 moved (0 bring-forward, 1 push-back), 2 re-spelled, 4181 whole-message prices",
    "exact": true
   },
   {
@@ -352,13 +352,13 @@
   {
    "lane": "ls-l-real.txt",
    "path": "bench/holdout-x41/ls-l-real.txt",
-   "frontier": 1496,
+   "frontier": 1497,
    "prevFrontier": 1476,
    "frontierMoved": true,
    "armA": 1381,
    "armB": 1380,
    "delta": -1,
-   "proagogeNote": "ΠΡΟΑΓΩΓΗ proagoge: 2 scan(s), 1 interior-factor pairs, 1 brought forward, 1 re-spelled, 15 whole-message prices",
+   "proagogeNote": "ΠΡΟΑΓΩΓΗ proagoge: 2 scan(s), 1 interior-factor pairs, 0 blocked by a forward reference, 1 moved (1 bring-forward, 0 push-back), 1 re-spelled, 15 whole-message prices",
    "exact": true
   }
  ]
