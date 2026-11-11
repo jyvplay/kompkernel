@@ -39,6 +39,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { eidosDecode, eidosEncode } from './eidos';
 import { aionDecode, aionEncode } from './aion';
 import { mnemosyneDecode, mnemosyneEncode } from './mnemosyne';
@@ -268,7 +269,7 @@ function nyxOptEncode(text: string, enc: EncodingName): { wire: string; decoded:
 }
 
 export function nyxEncode(text: string, enc: EncodingName = 'o200k_base', opts: { budgetMs?: number } = {}): NyxResult {
-  const t0 = Date.now();
+  const t0 = now();
   const inTokens = countTokens(text, enc);
   const budgetMs = opts.budgetMs ?? 26000;
   let eidos: any; try { eidos = eidosEncode(text, enc) as any; } catch { eidos = { wire: text, decoded: text, messageTokens: inTokens, winner: 'raw', decoderPrompt: text }; }
@@ -281,10 +282,10 @@ export function nyxEncode(text: string, enc: EncodingName = 'o200k_base', opts: 
   let prog: ReturnType<typeof nyxProgEncode> = null;
   let opt: ReturnType<typeof nyxOptEncode> = null;
   let M_prog = Infinity, M_opt = Infinity;
-  if (Date.now() - t0 < budgetMs - 800 && text.length >= 80 && text.length <= 50000) {
+  if (now() - t0 < budgetMs - 800 && text.length >= 80 && text.length <= 50000) {
     try { prog = nyxProgEncode(text, enc); if (prog) M_prog = prog.messageTokens; } catch {}
   }
-  if (Date.now() - t0 < budgetMs - 400 && text.length >= 80 && text.length <= 30000 && /[a-zA-Zıİğ]/.test(text)) {
+  if (now() - t0 < budgetMs - 400 && text.length >= 80 && text.length <= 30000 && /[a-zA-Zıİğ]/.test(text)) {
     try { opt = nyxOptEncode(text, enc); if (opt) M_opt = opt.messageTokens; } catch {}
   }
   const cands: Array<{ name: NyxResult['winner']; M: number; wire: string; decoded: string; prompt: string; outTok: number }> = [];

@@ -88,6 +88,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { CHIRON_START, chironDecode, chironSeparators } from './chiron';
 import { syntomiaContract } from './syntomia';
 import { akribeiaPolish } from './akribeia';
@@ -247,7 +248,7 @@ export function polytroposEncode(
   enc: EncodingName = 'o200k_base',
   options: PolytroposOptions = {},
 ): PolytroposResult {
-  const t0 = Date.now();
+  const t0 = now();
   const T = (s: string) => countTokens(s, enc);
   const inTokens = T(text);
   /* X33: OMEGA_POLYTROPOS_BUDGET_MS.
@@ -323,7 +324,7 @@ export function polytroposEncode(
   const tried: string[] = [];
   let configsRun = 0;
   for (const c of order) {
-    if (configsRun >= maxConfigs || Date.now() > searchDeadline) break;
+    if (configsRun >= maxConfigs || now() > searchDeadline) break;
     tried.push(c.id);
     configsRun++;
     try { price(c.id, runConfig(c, text, enc, cfgBudget)); } catch { /* config failed */ }
@@ -339,13 +340,13 @@ export function polytroposEncode(
   // the separator sweep, then polish again.  Monotone by construction.
   const polishPhase = (limitMs: number) => {
     if (!doPolish) return;
-    const stop = Date.now() + Math.max(400, limitMs);
+    const stop = now() + Math.max(400, limitMs);
     const best = cands
       .filter((c) => c.wire !== text && c.wire.startsWith(CHIRON_START) && !c.name.endsWith('+polish'))
       .sort((a, b) => a.tokens - b.tokens)
       .slice(0, 3);
     for (const c of best) {
-      if (Date.now() > stop) break;
+      if (now() > stop) break;
       if (cands.some((x) => x.name === c.name + '+polish')) continue;
       try {
         const p = akribeiaPolish(c.wire, text, enc, 200, stop);
@@ -364,14 +365,14 @@ export function polytroposEncode(
 
   // the separator dimension: only the candidates chironSeparators actually
   // proposes, and only the two cheapest engines, so the cost stays bounded
-  if (sweepSep && Date.now() < searchDeadline) {
+  if (sweepSep && now() < searchDeadline) {
     let seps: string[] = [];
     try { seps = chironSeparators(text).filter((s) => s !== '\n'); } catch { seps = []; }
     for (const s of seps.slice(0, 3)) {
-      if (Date.now() > searchDeadline) break;
+      if (now() > searchDeadline) break;
       for (const c of [{ id: 'w6', engine: 'sb', wordGrid: [6] } as Config,
                        { id: 'ep', engine: 'ep' } as Config]) {
-        if (Date.now() > searchDeadline) break;
+        if (now() > searchDeadline) break;
         tried.push(`${c.id}/sep${JSON.stringify(s)}`);
         configsRun++;
         try { price(`${c.id}/sep${JSON.stringify(s)}`, runConfig({ ...c, sep: s }, text, enc, cfgBudget)); }

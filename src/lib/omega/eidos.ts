@@ -83,6 +83,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { glossiaDecode } from './glossia';
 import { glossiaEncode } from './glossia';
 import { CHIRON_START } from './chiron';
@@ -347,7 +348,7 @@ function deltaCSVEncode(text: string, enc: EncodingName): { wire: string; decode
 export interface EidosOptions { budgetMs?: number; }
 
 export function eidosEncode(text: string, enc: EncodingName = 'o200k_base', opts: EidosOptions = {}): EidosResult {
-  const t0 = Date.now();
+  const t0 = now();
   const inTokens = countTokens(text, enc);
   const budgetMs = opts.budgetMs ?? 26000;
 
@@ -360,14 +361,14 @@ export function eidosEncode(text: string, enc: EncodingName = 'o200k_base', opts
   // Arm 1: DELTA-TIMESTAMP
   let deltaT: ReturnType<typeof deltaTimestampEncode> = null;
   let M_deltaT = Infinity;
-  if (Date.now() - t0 < budgetMs - 800 && text.length >= 120 && text.length <= 24000 && text.includes('[') && text.includes(':')) {
+  if (now() - t0 < budgetMs - 800 && text.length >= 120 && text.length <= 24000 && text.includes('[') && text.includes(':')) {
     try { deltaT = deltaTimestampEncode(text, enc); if (deltaT) M_deltaT = deltaT.messageTokens; } catch { /* */ }
   }
 
   // Arm 2: DELTA-CSV
   let deltaC: ReturnType<typeof deltaCSVEncode> = null;
   let M_deltaC = Infinity;
-  if (Date.now() - t0 < budgetMs - 600 && text.length >= 200 && text.length <= 24000 && (text.includes(',') || text.includes('\t') || text.includes('|'))) {
+  if (now() - t0 < budgetMs - 600 && text.length >= 200 && text.length <= 24000 && (text.includes(',') || text.includes('\t') || text.includes('|'))) {
     try { deltaC = deltaCSVEncode(text, enc); if (deltaC) M_deltaC = deltaC.messageTokens; } catch { /* */ }
   }
 

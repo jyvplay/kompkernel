@@ -84,6 +84,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { chironDecode, CHIRON_START, CHIRON_SEP } from './chiron';
 import { tachysEncode, tachysDecode, TACHYS_SYSTEM_PROMPT } from './tachys';
 import { hydraEncode, hydraDecode } from './hydra';
@@ -170,7 +171,7 @@ function mosaicArm(text: string, enc: EncodingName): { wire: string; decoded: st
 export interface GlossiaOptions { budgetMs?: number; }
 
 export function glossiaEncode(text: string, enc: EncodingName = 'o200k_base', opts: GlossiaOptions = {}): GlossiaResult {
-  const t0 = Date.now();
+  const t0 = now();
   const inTokens = countTokens(text, enc);
   const budgetMs = opts.budgetMs ?? 26000;
 
@@ -183,21 +184,21 @@ export function glossiaEncode(text: string, enc: EncodingName = 'o200k_base', op
   // Arm 1: HYDRA (tabular, 336L)
   let hydra: any = null;
   let M_hydra = Infinity;
-  if (Date.now() - t0 < budgetMs - 800) {
+  if (now() - t0 < budgetMs - 800) {
     try { hydra = hydraEncode(text, enc, { budgetMs: Math.min(26000, budgetMs) } as any) as any; M_hydra = hydra.messageTokens; } catch { /* */ }
   }
 
   // Arm 2: MOSAIC (hybrid, grammar-aware split)
   let mosaic: ReturnType<typeof mosaicArm> = null;
   let M_mosaic = Infinity;
-  if (Date.now() - t0 < budgetMs - 600 && text.length >= 120 && text.length <= 24000) {
+  if (now() - t0 < budgetMs - 600 && text.length >= 120 && text.length <= 24000) {
     try { mosaic = mosaicArm(text, enc); if (mosaic) M_mosaic = mosaic.messageTokens; } catch { /* */ }
   }
 
   // Arm 3: MINI-MACRO (hybrid code, grammar-ignorant fold, 8 tok)
   let mini: ReturnType<typeof miniMacroEncode> = null;
   let M_mini = Infinity;
-  if (Date.now() - t0 < budgetMs - 400 && text.length >= 200 && text.length <= 24000) {
+  if (now() - t0 < budgetMs - 400 && text.length >= 200 && text.length <= 24000) {
     try { mini = miniMacroEncode(text, enc); if (mini) M_mini = mini.messageTokens; } catch { /* */ }
   }
 

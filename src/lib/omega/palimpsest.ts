@@ -63,6 +63,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import {
   CHIRON_START, CHIRON_SEP, chironDecode, chironDecoderPrompt, chironOpsUsed,
   chironFindBlocks, chironSeparators,
@@ -175,7 +176,7 @@ export function palimpsestEncode(text: string, enc: EncodingName = 'o200k_base',
       let bestGain = -1;
       for (const cand of seps) {
         let gain = 0;
-        try { for (const b of chironFindBlocks(text, blank, cand, enc, Date.now() + 800)) gain += b.gain; } catch { gain = -1; }
+        try { for (const b of chironFindBlocks(text, blank, cand, enc, now() + 800)) gain += b.gain; } catch { gain = -1; }
         if (gain > bestGain) { bestGain = gain; sep = cand; }
       }
     }
@@ -209,7 +210,7 @@ export function palimpsestEncode(text: string, enc: EncodingName = 'o200k_base',
   };
 
   for (let i = 0; i < Math.min(maxArms, PORTFOLIO.length); i++) {
-    if (i > 0 && Date.now() > deadline) break;
+    if (i > 0 && now() > deadline) break;
     runArm(PORTFOLIO[i]);
   }
   if (!cands.length) return raw;

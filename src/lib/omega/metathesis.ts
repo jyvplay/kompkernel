@@ -73,7 +73,7 @@ import { symplokeEncode, symplokeDecode, type SymplokeStats } from './symploke';
 import { chironParseTape, chironDecode, CHIRON_START, CHIRON_SEP , CHIRON_SCRIPTS} from './chiron';
 import { scriptOfChar } from './syntomia';
 import { countTokens, type EncodingName } from './bpe';
-import { now, DET_MODE as DET } from './clock';
+import { now, isDet as DET } from './clock';
 
 export interface MetathesisOptions {
   /** wall-clock budget for the relayout search, in ms */
@@ -226,7 +226,7 @@ export function relayoutGlyphs(
   // machine independent, which is the property the repo actually wants.
   const maxEvals = opts.maxEvals ?? Math.min(400_000, 40_000 + orig.length * orig.length * 12);
   let evals = 0;
-  const spent = () => evals >= maxEvals || (!DET && now() > deadline);
+  const spent = () => evals >= maxEvals || (!DET() && now() > deadline);
 
   // The candidate alphabet: the pool actually in play plus a margin of spares
   // so that reassign-to-free remains expressible.

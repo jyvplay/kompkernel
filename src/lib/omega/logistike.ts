@@ -91,6 +91,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { CHIRON_START, chironDecode } from './chiron';
 import { syntomiaContract } from './syntomia';
 import { akribeiaPolish } from './akribeia';
@@ -290,7 +291,7 @@ export function logistikeEncode(
   enc: EncodingName = 'o200k_base',
   options: LogistikeOptions = {},
 ): LogistikeResult {
-  const t0 = Date.now();
+  const t0 = now();
   const T = (s: string) => countTokens(s, enc);
   const inTokens = T(text);
   const budgetMs = options.budgetMs ?? 20000;
@@ -325,7 +326,7 @@ export function logistikeEncode(
   const tried: LogArm[] = [];
   let armsRun = 0;
   for (const name of order) {
-    if (armsRun >= maxArms || Date.now() > deadline) break;
+    if (armsRun >= maxArms || now() > deadline) break;
     tried.push(name);
     armsRun++;
     let r: any = null;
@@ -355,7 +356,7 @@ export function logistikeEncode(
       .sort((a, b) => a.tokens - b.tokens)
       .slice(0, 2);
     for (const c of best) {
-      if (Date.now() > deadline) break;
+      if (now() > deadline) break;
       try {
         const p = akribeiaPolish(c.wire, text, enc, 200, deadline);
         if (p && p.tokens < c.tokens) {
