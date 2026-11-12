@@ -1,0 +1,29 @@
+lane                     M   exact  arity  modelled  literal  lifts  proxyGain  parentTok
+lsblk.txt                60  y       0         0        0                 0        60
+kb-article.txt          622  y       0         0        0                 0       622
+uptime-w.txt             80  y       0         0        0                 0        80
+free-m.txt               76  y       0         0        0                 0        76
+vmstat.txt              149  y       0         0        0                 0       149
+unified-diff.patch      419  y       0         0        0                 0       419
+df-h.txt                250  y       0         0        0                 0       250
+df-real.txt             126  y       0         0        0                 0       126
+du-real.txt             272  y       0         0        0                 0       272
+node-help.txt           862  y       0         0        0                 0       862
+findmnt.txt             444  y       0         0        0                 0       444
+df-h.txt                108  y       0         0        0                 0       108
+email-thread.txt        488  y       0         0        0                 0       488
+llm-answer.md           674  y       0         0        0                 0       674
+markdown-table.md       176  y       0         0        0                 0       176
+psql-output.txt         289  y       7        23        2 [object Object],[object Object]        147       322
+prices.csv              209  y       5        25        6 [object Object],[object Object],[object Object],[object Object]        289       226
+cue-sheet.md            184  y       0         0        0                 0       184
+ps-ef.txt               315  y       0         0        0                 0       315
+ls-real.txt             433  y       0         0        0                 0       433
+json-pkg.txt            681  y       0         0        0                 0       681
+code-ts.txt             969  y       0         0        0                 0       969
+dpkg-l.txt              673  y       0         0        0                 0       673
+ps-real.txt             397  y       0         0        0                 0       397
+kubectl-get-pods.txt    340  y       0         0        0                 0       340
+metrics.tsv             237  y       0         0        0                 0       237
+ps-aux-real.txt        1042  y       0         0        0                 0      1042
+apt-real.txt            850  y       0         0        0                 0       850

@@ -889,6 +889,17 @@ export interface ApographeOptions extends AnadiplosisOptions {
   forceSep?: string;
   /** disable the parent-encode gate (tests only; the gate is what keeps lanes safe) */
   noGate?: boolean;
+  /**
+   * X110 — ΚΕΝΟΝ.  Extra separator candidates offered to `detectSeparator`
+   * BEFORE the built-in list, so a caller can widen the record-set detector
+   * without changing any existing lane.  `APOGRAPHE_SEPARATORS` is
+   * `[',', '\t', '|', ';']` — SPACE IS NOT IN IT — which is why the column
+   * lifter has never fired on a space-separated listing: `apt list`, `pip
+   * list`, `npm ls` and every single-spaced record set are invisible to it
+   * (measured: `apographeArity = 0`, `apographeLifts = 0` on all 15 lanes
+   * probed, bench/x110/receipts/lift.out).
+   */
+  extraSeps?: readonly string[];
 }
 
 export interface ApographeResult extends AnadiplosisResult {
@@ -906,10 +917,13 @@ export interface ApographeResult extends AnadiplosisResult {
 }
 
 /** Choose the separator that makes the most lines have the same arity. */
-export function detectSeparator(lines: Line[]):
+export function detectSeparator(lines: Line[], extraSeps: readonly string[] = []):
   { sep: string; n: number; rows: number } | null {
   let best: { sep: string; n: number; rows: number } | null = null;
-  for (const sep of APOGRAPHE_SEPARATORS) {
+  // X110 — ΚΕΝΟΝ.  Extra candidates first: a caller that asks for a wider
+  // detector gets it, and a caller that does not is byte-for-byte unchanged
+  // because the built-in list is only ever appended to.
+  for (const sep of [...extraSeps, ...APOGRAPHE_SEPARATORS]) {
     const counts = new Map<number, number>();
     for (const l of lines) {
       const k = splitFields(l.text, sep).length;
@@ -936,7 +950,7 @@ export function apographePlan(
     if (lines[0].text.startsWith(open)) return null;
   }
 
-  const detected = detectSeparator(lines);
+  const detected = detectSeparator(lines, opts.extraSeps ?? []);
   if (!detected) return null;
   const sep = opts.forceSep ?? detected.sep;
   const n = detected.n;

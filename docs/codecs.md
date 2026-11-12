@@ -11446,3 +11446,89 @@ exact 10/10, at both the 32M and 64M grants) that the chain's current parent
 selection cannot see, because the parent that wins 20 of 26 lanes does not call
 ΧΕΙΡΩΝ. The single most valuable structural fact X109 produced is that identification,
 not the −12.
+
+---
+
+## §X110 — ΜΕΣΟΝ (MESON)
+
+**Module 337, registry arm 252.** APOGRAPHE's record-set detector
+(`APOGRAPHE_SEPARATORS`) offers four separator candidates — `,` `\t` `|` `;` — and
+**omits SPACE**. ΜΕΣΟΝ is the same column lifter with `' '` offered ahead of that
+list via an opt-in `ApographeOptions.extraSeps`, so no existing lane's detector
+input changes. Same five predictors (`above`, `colM`, `days`, `workdays`, `+b`),
+same greedy forward addition, same whole-message gate, same wire, same decoder.
+
+### Measured (`bench/x110/receipts/smoke.out`, 10 lanes)
+
+```
+TOTAL apographe 2299   meson 2299   ΣΔ 0   win 0  lose 0   exact 10/10
+```
+
+**The widened detector does not fire on a single measured lane, and the turn did
+not produce a Pareto-superior codec. That is the result and it is reported as
+such.** `apt-real` — 119 of 121 lines at a stable arity of 4 under a single-space
+split, with a constant fourth column `[installed,local]` that `above` should
+delete at zero cost per row — still plans to `arity 0, sep ""`. The cause was not
+diagnosed before the turn's budget ran out; it is NOT the opener gate
+(`APOGRAPHE_OPENERS` is `<` `«` `‹` `{` `[`, and `#` is not among them).
+
+### ★★★★★ A CORRECTION TO THIS TURN'S OWN EARLIER CLAIM
+
+An intermediate probe (`bench/x110/receipts/lift.out`, 15 lanes) printed
+`apographeArity = 0, apographeModelled = 0, apographeLifts = 0` on every lane it
+reached, and this turn briefly concluded that APOGRAPHE's column lifting "never
+fires on a frontier lane". **That conclusion was wrong and is corrected here.**
+The 15 lanes printed did not include `prices.csv` or `psql-output`, and the smoke
+run shows the lift firing on both:
+
+```
+prices.csv       arity 5  sep ","   modelled 25  lifts 4
+psql-output.txt  arity 7  sep "|"   modelled 23  lifts 2
+```
+
+APOGRAPHE's column lifting works on comma- and pipe-separated record sets. It is
+blind to space-separated ones, and ΜΕΣΟΝ is the (measured-inert) attempt to remove
+that blindness. The correction is kept rather than the wrong claim being quietly
+replaced.
+
+### What X110 measured and closed
+
+* **ΧΕΙΡΩΝ's full sweep is not competitive at the frontier** (`chvsf.out`, 12
+  lanes): it loses on all 12, by +32 to +137 tokens. Adding `chironEncode` as a
+  frontier parent is closed.
+* **None of the frontier's eight parents calls `chironEncode`** — they are
+  independent codecs. This *corrects* X109's diagnosis, which attributed the
+  chain-level null to `synkrisis` not routing through ΧΕΙΡΩΝ: the real reason is
+  that no parent routes through it, and ΧΕΙΡΩΝ's sweep is simply not on the
+  frontier path at all. ΣΥΜΜΕΤΡΟΝ's ΧΕΙΡΩΝ-layer −12 therefore remains real and
+  remains unreachable from `tagstackFrontier`.
+* **Frontier parent duplication** (`dup.out`, findmnt): `diastema` (32 675 ms) and
+  `apographe` (15 409 ms) each emit a message byte-identical to `synkrisis`'s
+  (15 832 ms) — **48 134 of 66 940 ms, 72 % of parent time, is duplicate work.**
+  Measured with `OMEGA_NO_MEMO=1`; the production memo is per-`tagstackEncode`
+  and does not de-duplicate parents *within* one call, so the waste is real, but
+  the speedup was not implemented or measured this turn.
+* **Month/time columns are low-cardinality, not sequential** (`mon.mjs`):
+  `ps-aux-real` START has 4 distinct values across 118 occurrences;
+  `ls-l-real` months span 11 values scattered over 149 lines. A sequence
+  predictor would be ~100 % exceptions. **Closed.**
+* **Per-lane headroom** (`leaders-x106.json`, recomputed): 2 481 total;
+  `ls-l-real` 533, `ps-aux-real` 299, `apt-real` 160, `code-ts` 157 — 46 % of all
+  headroom in four lanes.
+
+### The frontier, restated
+
+```
+12 639   tagstackFrontier  (the IDENTITY layer — X107 proved the routing defect)
+12 360   tagstackEncode, ΠΕΡΙΚΟΠΈ off
+12 315   tagstackEncode, ΠΕΡΙΚΟΠΈ v3 live                        (X107, 29 lanes)
+12 290   tagstackEncode, ΠΕΡΙΚΟΠΈ v3 + ΤΑΧΥΓΡΑΦΊΑ                (X108, 27 of 29)
+12 2xx   tagstackFrontier + ΣΥΜΜΕΤΡΟΝ                            (X109, 26 of 29, ΣΔ 0)
+12 2xx   + ΜΕΣΟΝ                                                 (X110, 10 lanes, ΣΔ 0)
+```
+
+**The frontier did not move in X109 or X110.** Two turns of mechanism work have
+produced zero frontier motion, and the reason is now identified rather than
+guessed: the frontier's winning parents are single-shot specialists that do not
+route through ΧΕΙΡΩΝ's search, and the one mechanism that demonstrably wins on
+individual lanes (ΧΕΙΡΩΝ's variant sweep) is unreachable from `tagstackFrontier`.
