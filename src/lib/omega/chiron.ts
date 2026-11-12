@@ -1070,7 +1070,17 @@ const PREFILTER = 1600;
 const EPOCH_APPLY = 12;
 export const CHIRON_MAX_TOKEN_SPAN_ENTRIES = 400_000;
 
-export function enumerateTokenSpans(parts: string[], enc: EncodingName, meter?: ChironWorkMeter): Map<string, number> {
+/**
+ * X109 — ΣΥΜΜΕΤΡΟΝ.  Rank macro candidates by their TOKEN span length instead of
+ * their CHARACTER length.  Read live per call, never at module load: X104
+ * established that a load-time const in this repository reads the environment
+ * before the probe sets it, so the flag silently never takes effect.
+ */
+export function symmetronOn(): boolean {
+  return !(typeof process !== 'undefined' && !!process.env && process.env.OMEGA_NO_SYMMETRON === '1');
+}
+
+export function enumerateTokenSpans(parts: string[], enc: EncodingName, meter?: ChironWorkMeter, spans?: Map<string, number>): Map<string, number> {
   // Same map as the reference (enumerateTokenSpansRef): every token-aligned phrase
   // of 2..LMAX_TOKENS tokens, counted per part. A phrase is a substring of its part
   // (the exact-join precondition is checked), so it is taken by offset instead of
@@ -1100,6 +1110,15 @@ export function enumerateTokenSpans(parts: string[], enc: EncodingName, meter?: 
         const phrase = part.slice(offs[at], offs[at + len]);
         if (!counts.has(phrase) && counts.size >= CHIRON_MAX_TOKEN_SPAN_ENTRIES) return counts;
         counts.set(phrase, (counts.get(phrase) ?? 0) + 1);
+        // X109 — ΣΥΜΜΕΤΡΟΝ.  `len` is the number of tokens this phrase occupies
+        // where it currently sits, and it is FREE: the loop already walks the
+        // token grid.  The macro loop ranks candidates by a CHARACTER proxy
+        // `c * (p.length - 1) - p.length - 1` while its objective is a TOKEN bound
+        // `c * (t - 1) - t - 1`, so the proxy speaks the wrong units and the
+        // PREFILTER cut is decided on a different scale from the objective it is
+        // supposed to proxy.  Recording the span length lets the loop rank in the
+        // objective's own units at zero extra meter cost.
+        if (spans) { const prev = spans.get(phrase); if (prev === undefined || len < prev) spans.set(phrase, len); }
       }
     }
   }
@@ -1166,6 +1185,21 @@ export interface ChironOptions {
   exactAccept?: boolean;
   /** unit separator for the block pass */
   sep?: string;
+  /**
+   * X109 — ΣΥΜΜΕΤΡΟΝ.  Rank macro candidates by their TOKEN span length instead
+   * of their CHARACTER length.  `enumerateTokenSpans` already walks the token
+   * grid, so the span length is free, and the objective it proxies
+   * (`c * (t - 1) - t - 1`) is denominated in tokens while the shipped proxy was
+   * denominated in characters.  Measured at the PRODUCTION work envelope
+   * (64M units, bench/x109/receipts/sym2.out): ΣΔ -7 over 7 lanes, 5 win / 1
+   * lose / 1 same, exact 7/7.  The same A/B at a starved 8M-unit grant gives
+   * ΣΔ +8 and flips the sign on findmnt and npm-ls, so the grant has to be the
+   * production one before this flag means anything.  It is a SWEEP DIMENSION,
+   * not a default: `dpkg-l` is +5, so the base variants keep the character proxy
+   * and the token-proxy variants are admitted only when the shared work meter
+   * has headroom, exactly as ΤΥΠΟΣ's `exactAcceptVariants` is.
+   */
+  symmetron?: boolean;
   /**
    * X105 — ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ.  Take the macro candidate window from the HEAD
    * of the bound ranking after a dead set, instead of from a fixed positional
@@ -1387,14 +1421,25 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
       const parts = [body, ...rules.filter(r => r.kind === 'lit').map(r => r.text)];
       for (const q of parts) work.n = Math.min(work.max, work.n + q.length);
       if (spent()) { stalled = true; break; }
-      const counts = enumerateTokenSpans(parts, enc, work);
+      // X109 — ΣΥΜΜΕΤΡΟΝ.  Collect each candidate's token span length while the
+      // enumeration is already walking the token grid.
+      const spans: Map<string, number> | undefined = (opts.symmetron ?? symmetronOn()) ? new Map<string, number>() : undefined;
+      const counts = enumerateTokenSpans(parts, enc, work, spans);
       if (spent()) { stalled = true; break; }
       // Rank cheaply by characters saved, then pay for exact token bounds only
       // on the short list. (Slicing the raw map in insertion order, as an
       // earlier revision did, silently discarded most of the search space.)
       const rough = [...counts.entries()]
         .filter(([p, c]) => c >= 2 && p.length >= 2 && phraseLegal(p))
-        .map(([p, c]) => ({ p, c, rough: c * (p.length - 1) - p.length - 1 }))
+        .map(([p, c]) => {
+          // X109 — ΣΥΜΜΕΤΡΟΝ.  The objective is `c * (t - 1) - t - 1` tokens.  The
+          // span length `k` is an upper bound on `t` that costs nothing to know, so
+          // ranking by `c * (k - 1) - k - 1` ranks on the objective's own scale
+          // instead of on characters, which is what decided the PREFILTER cut
+          // before.  Falls back to the character proxy when the flag is off.
+          const k = spans?.get(p);
+          return { p, c, rough: k === undefined ? c * (p.length - 1) - p.length - 1 : c * (k - 1) - k - 1 };
+        })
         .filter(x => x.rough > 0)
         .sort((a, b) => b.rough - a.rough);
       // X104 — ΤΑΞΙΝΟΜΗΣΙΣ, prefilter cut. The cut lands inside a tie group on
@@ -1624,19 +1669,19 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
   const variants: Array<{ tag: string; o: Required<Omit<ChironOptions, 'workUnits'>> }> = [];
   if (forcedBlocks !== undefined || forcedMacros !== undefined) {
     for (const sep of seps) {
-      variants.push({ tag: `forced/${JSON.stringify(sep)}`, o: { noBlocks: !!forcedBlocks, noMacros: !!forcedMacros, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants } });
+      variants.push({ tag: `forced/${JSON.stringify(sep)}`, o: { noBlocks: !!forcedBlocks, noMacros: !!forcedMacros, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants, symmetron: symmetronOn() } });
     }
   } else {
   for (const sep of seps) {
-    variants.push({ tag: `full/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants } });
+    variants.push({ tag: `full/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants, symmetron: symmetronOn() } });
     // X105 — ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ.  The same separator under the MR-order
     // window.  Half the per-variant budget so the pair costs what one variant
     // cost before, and the shared meter is not starved any harder than it was.
     if (mrOrderVariants) {
-      variants.push({ tag: `full-mr/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules: Math.round(maxRules * 0.5), budgetMs: Math.round(budgetMs * 0.5), sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder: true, mrOrderVariants, exactAcceptVariants } });
+      variants.push({ tag: `full-mr/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules: Math.round(maxRules * 0.5), budgetMs: Math.round(budgetMs * 0.5), sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder: true, mrOrderVariants, exactAcceptVariants, symmetron: symmetronOn() } });
     }
   }
-  variants.push({ tag: 'macros-only', o: { noBlocks: true, noMacros: false, maxRules, budgetMs: Math.round(budgetMs * 0.8), sep: '\n', keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants } });
+  variants.push({ tag: 'macros-only', o: { noBlocks: true, noMacros: false, maxRules, budgetMs: Math.round(budgetMs * 0.8), sep: '\n', keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants, symmetron: symmetronOn() } });
   // X101 — ΣΤΑΘΜΟΣ.  `blocks-only` is a variant that turns the macro tape OFF and leaves only the
   // block pass.  It is run once per candidate separator and is charged 30 % of the per-variant
   // budget, and every variant in this sweep draws on ONE shared work meter
@@ -1648,7 +1693,7 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
   // back for the ablation, and OMEGA_KEEP_BLOCKS_ONLY=1 does the same from the environment.
   if (text.length <= 24_000 && keepBlocksOnly) {
     for (const sep of seps) {
-      variants.push({ tag: `blocks-only/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: true, maxRules, budgetMs: Math.round(budgetMs * 0.3), sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants } });
+      variants.push({ tag: `blocks-only/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: true, maxRules, budgetMs: Math.round(budgetMs * 0.3), sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants, symmetron: symmetronOn() } });
     }
   }
   }
@@ -1676,6 +1721,8 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
   // ΧΕΙΡΩΝ can observe after the standard sweep and not a guess about the lane.
   const EXACT_ADMIT = 0.4;
   let admittedExact = false;
+  // X109 — ΣΥΜΜΕΤΡΟΝ.  Same headroom gate as ΤΥΠΟΣ above, for the opposite proxy.
+  let admittedSym = false;
   for (let vi = 0; vi < variants.length; vi++) {
     const v = variants[vi]!;
     if (vi === variants.length - 1 && exactAcceptVariants && !admittedExact) {
@@ -1683,7 +1730,22 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
       const roomy = initialWorkBudget > 0 && workLeft > initialWorkBudget * EXACT_ADMIT;
       if (roomy) {
         for (const sep of seps) {
-          variants.push({ tag: `full-exact/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept: true, mrOrder, mrOrderVariants, exactAcceptVariants } });
+          variants.push({ tag: `full-exact/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept: true, mrOrder, mrOrderVariants, exactAcceptVariants, symmetron: symmetronOn() } });
+        }
+      }
+    }
+    if (vi === variants.length - 1 && symmetronOn() && !admittedSym) {
+      admittedSym = true;
+      const roomy = initialWorkBudget > 0 && workLeft > initialWorkBudget * EXACT_ADMIT;
+      if (roomy) {
+        // The tag names the proxy this variant actually uses, so a receipt that
+        // says `full-charproxy` really did rank by characters.  `symmetronOn()`
+        // is true by default, so the base variants rank by TOKENS and the
+        // admitted pair ranks by CHARACTERS; with OMEGA_NO_SYMMETRON=1 the whole
+        // dimension is off and the base variants rank by characters as before.
+        const altTag = symmetronOn() ? 'full-charproxy' : 'full-tokproxy';
+        for (const sep of seps) {
+          variants.push({ tag: `${altTag}/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants, symmetron: false } });
         }
       }
     }

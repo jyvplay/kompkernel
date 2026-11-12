@@ -1,0 +1,9 @@
+lane                  before  after    Δ  expanded  exact  decode-same
+psql-output.txt         230    230    0         0   y    y
+kubectl-get-pods.txt    314    314    0         0   y    y
+metrics.tsv             200    200    0         0   y    y
+df-h.txt                162    162    0         0   y    y
+prices.csv              120    120    0         0   y    y
+node-help.txt           859    859    0         0   y    y
+
+TOTAL before 1885  after 1885  ΣΔ 0

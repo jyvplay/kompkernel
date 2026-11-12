@@ -1,0 +1,11 @@
+lane                     charOnly  swept    Δ   exact  decode  tagB
+kubectl-get-pods.txt        475     474   -1    y     y   full-exact/"\n"
+email-thread.txt            558     555   -3    y     y   full/" "
+unified-diff.patch          479     477   -2    y     y   full/"\n"
+findmnt.txt                 518     515   -3    y     y   full-exact/","
+dpkg-l.txt                  761     761    0    y     y   full-sym/" "
+npm-ls.txt                 1117    1114   -3    y     y   macros-only
+psql-output.txt             406     406    0    y     y   full/"\n"
+
+TOTAL char-only 4314  swept 4302  ΣΔ -12   win 5 lose 0 same 2
+full-sym variants WON on 1/7 lanes (0 would mean the gate never fired)

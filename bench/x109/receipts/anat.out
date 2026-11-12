@@ -1,0 +1,12 @@
+lane                  body  runTok runGlyph  tok/glyph  litTok  litChars  ctr  tape
+psql-output.txt       106     49       94      0.521      58       147   61    61
+kubectl-get-pods.txt  212     44       70      0.629     168       501   15    85
+metrics.tsv           124     31       53      0.585      93       278   15    59
+df-h.txt               97     18       30      0.600      80       273   15    49
+prices.csv             49     15       28      0.536      34        81   44    25
+node-help.txt         729    181      254      0.713     549      3025   10   118
+
+TOTAL body 1317 = run 338 (529 glyphs, 0.639 tok/glyph) + literal 982 (4305 chars, 0.228 tok/char)
+contract 160  tape 397
+
+If tok/glyph is 0.5 the runs are at the pairing floor. Literal text at ~0.25 tok/char is the o200k English density.

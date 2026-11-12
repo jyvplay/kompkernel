@@ -1,0 +1,18 @@
+lane                     charP   tokP    Δ   workN  workW  exactN exactW  candsN candsW
+findmnt.txt               518    520    2      0      0    y     y      23    23
+psql-output.txt           406    406    0      0      0    y     y      11    11
+kubectl-get-pods.txt      475    474   -1      0      0    y     y      21    22
+metrics.tsv               328    328    0      0      0    y     y      17    17
+prices.csv                288    288    0      0      0    y     y      11    11
+node-help.txt             934    934    0      0      0    y     y      23    23
+df-real.txt               158    158    0      0      0    y     y       0     0
+dpkg-l.txt                761    767    6      0      0    y     y      26    22
+email-thread.txt          558    555   -3      0      0    y     y      14    17
+unified-diff.patch        479    477   -2      0      0    y     y      20    21
+npm-ls.txt               1504   1510    6      0      0    y     y      24    23
+aapl-2014.csv            1702   1702    0      0      0    y     y      37    37
+gh-prose.txt             1921   1921    0      0      0    y     y       5     5
+code-ts.txt              1336   1336    0      0      0    y     y       7     7
+
+TOTAL char-proxy 11368  token-proxy 11376  ΣΔ 8   win 3 lose 3 same 8   exact 14/14 of 14
+work units char 0  token 0

@@ -1,0 +1,11 @@
+lane                     charP   tokP    Δ   workN  workW  exactN exactW  candsN candsW
+kubectl-get-pods.txt      475    474   -1      0      0    y     y      21    22
+email-thread.txt          558    555   -3      0      0    y     y      14    17
+unified-diff.patch        479    477   -2      0      0    y     y      20    21
+findmnt.txt               518    515   -3      0      0    y     y      23    20
+dpkg-l.txt                761    766    5      0      0    y     y      26    23
+npm-ls.txt               1117   1114   -3      0      0    y     y      77    78
+psql-output.txt           406    406    0      0      0    y     y      11    11
+
+TOTAL char-proxy 4314  token-proxy 4307  ΣΔ -7   win 5 lose 1 same 1   exact 7/7 of 7
+work units char 0  token 0

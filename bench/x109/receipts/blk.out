@@ -1,0 +1,20 @@
+findmnt.txt
+  full(sweep)      520 (rules  23, blocks   0, lists   0, script hangul) exact
+  macros-only      520 (rules  23, blocks   0, lists   0, script hangul) exact
+  blocks-only      595 (rules  18, blocks   1, lists   4, script hangul) exact
+proc-partitions.txt
+  full(sweep)       33 (rules   0, blocks   0, lists   0, script none) exact
+  macros-only       33 (rules   0, blocks   0, lists   0, script none) exact
+  blocks-only       33 (rules   0, blocks   0, lists   0, script none) exact
+ps-ef.txt
+  full(sweep)      368 (rules  19, blocks   0, lists   0, script hangul) exact
+  macros-only      368 (rules  19, blocks   0, lists   0, script hangul) exact
+  blocks-only      368 (rules  19, blocks   0, lists   0, script hangul) exact
+psql-output.txt
+  full(sweep)      406 (rules  11, blocks   0, lists   0, script hangul) exact
+  macros-only      406 (rules  11, blocks   0, lists   0, script hangul) exact
+  blocks-only      406 (rules  11, blocks   0, lists   0, script hangul) exact
+markdown-table.md
+  full(sweep)      228 (rules   9, blocks   0, lists   0, script hangul) exact
+  macros-only      228 (rules   9, blocks   0, lists   0, script hangul) exact
+  blocks-only      228 (rules   9, blocks   0, lists   0, script hangul) exact
