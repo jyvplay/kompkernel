@@ -1,0 +1,17 @@
+lane	arm	tokens	exact	parent	sha	ms
+df-h.txt	off	171	true	akolouthia2	a68f18c5e153	6808
+df-h.txt	on	171	true	akolouthia2	da622610b31e	5290
+kubectl-get-pods.txt	off	326	true	akolouthia2	3840d0e768bd	41894
+kubectl-get-pods.txt	on	326	true	akolouthia2	c181f4c070bb	36704
+markdown-table.md	off	176	true	synkrisis	81be0ec44432	11000
+markdown-table.md	on	176	true	synkrisis	722dfebc9fa5	8994
+psql-output.txt	off	244	true	metron	2dd98d4489d9	14427
+psql-output.txt	on	244	true	metron	f3bb457943ef	13180
+TOTAL		off 917	on 917	D 0
+true	synkrisis	3cd0742be29d	15583
+email-thread.txt	on	488	true	synkrisis	1b809942b832	13958
+markdown-table.md	off	176	true	synkrisis	d4589337fa51	10545
+markdown-table.md	on	176	true	synkrisis	20bf82451252	9295
+kubectl-get-pods.txt	off	326	true	akolouthia2	4a823e6b4e58	42962
+kubectl-get-pods.txt	on	326	true	akolouthia2	f5c532a7c2ba	39449
+TOTAL		off 1907	on 1907	D 0

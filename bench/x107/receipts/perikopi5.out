@@ -1,0 +1,11 @@
+df-h.txt               off   171  on   171  D   0  exact true/true  shaSame=false  ms 6808/5290
+kubectl-get-pods.txt   off   326  on   326  D   0  exact true/true  shaSame=false  ms 41894/36704
+markdown-table.md      off   176  on   176  D   0  exact true/true  shaSame=false  ms 11000/8994
+psql-output.txt        off   244  on   244  D   0  exact true/true  shaSame=false  ms 14427/13180
+oemail-thread.txt       off   488  on   488  D   0  exact true/true  shaSame=false  ms 15583/13958
+markdown-table.md      off   176  on   176  D   0  exact true/true  shaSame=false  ms 10545/9295
+kubectl-get-pods.txt   off   326  on   326  D   0  exact true/true  shaSame=false  ms 42962/39449
+off  TOTAL   1907  exact 7/7  ms 145960
+on   TOTAL   1907  exact 7/7  ms 127194
+
+PERIKOPI CHAIN DELTA 0  (negative is a win)

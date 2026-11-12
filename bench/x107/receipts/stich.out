@@ -1,0 +1,29 @@
+
+### cue-sheet.md  chain 101  parent stichomythia  has§=false  has¶=false  lines 4
+  [0] (112 ch, 41 tok) "spec: v+k*r = v+(k*row#) printed like v; v@+ks = v plus k sec; list* repeats; =v fixed; body = header then rows."
+  [1] (59 ch, 22 tok) "S28 sep \" | \" r=0..27 body:| cue | start | speaker | text |"
+  [2] (52 ch, 38 tok) "| 1+1*r ; 00:00:02@+3s ; s0|s1|s2|s3* ; line 0+1*r |"
+  [3] (0 ch, 0 tok) ""
+  isLegend lines: 1
+    (112 ch) -> NO WIN
+  notes: STICHOMYTHIA 28x4 M=101 < metron M=163; outside bounded, collision-free, well-nested markup domain
+
+### kubectl-get-pods.txt  chain 322  parent akolouthia2  has§=true  has¶=true  lines 5
+  [0] (95 ch, 23 tok) "⁺ = the number at the same position in the line above, plus the change from the line two above."
+  [1] (2 ch, 2 tok) "§ъ"
+  [2] (605 ch, 256 tok) "api-server-7d9f8bа.internalъд⁺ы node-д.clusterхыар          ⁺dдhА 10.244.тр Ав.детдв   над-м node-1.clusterяр   Адв    у            1/1    пу Running "
+  [3] (0 ch, 0 tok) ""
+  isLegend lines: 2
+    (95 ch) -> NO WIN
+    (174 ch) -> NO WIN
+  notes: ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (2975 B); 0 enabling pairs, 0 priced improvements; M 326 -> 322; outside bounded, collision-free, well-nested markup domain
+
+### metrics.tsv  chain 208  parent akolouthia2  has§=true  has¶=true  lines 5
+  [0] (95 ch, 23 tok) "⁺ = the number at the same position in the line above, plus the change from the line two above."
+  [1] (8 ch, 7 tok) "§ж.0\t0.А"
+  [2] (245 ch, 137 tok) "2026-10-24T00:т\tupАл:00Z\tnvme0nы\t⁺хы.рыжа⁺яхарасл0ятол1италјаояиг\tdownАвхардтасјеаянх0раг¶ts\tiface\tin_mbps\tout_mbps\tloss_pct\tstateА00л0\t100.0\t250ж0г01"
+  [3] (0 ch, 0 tok) ""
+  isLegend lines: 2
+    (95 ch) -> NO WIN
+    (174 ch) -> NO WIN
+  notes: ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (1477 B); 0 enabling pairs, 0 priced improvements; M 210 -> 208; outside bounded, collision-free, well-nested markup domain

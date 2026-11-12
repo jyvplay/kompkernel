@@ -1,0 +1,102 @@
+{
+ "lanes": [
+  "bench/holdout-tbl/df-h.txt",
+  "bench/holdout-tbl/kubectl-get-pods.txt",
+  "bench/holdout-tbl/markdown-table.md",
+  "bench/holdout-tbl/psql-output.txt",
+  "bench/holdout-work/email-thread.txt",
+  "bench/holdout-tbl/markdown-table.md",
+  "bench/holdout-tbl/kubectl-get-pods.txt"
+ ],
+ "arms": {
+  "off": [
+   {
+    "path": "bench/holdout-tbl/df-h.txt",
+    "tokens": 171,
+    "exact": true,
+    "ms": 5551
+   },
+   {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "tokens": 326,
+    "exact": true,
+    "ms": 44385
+   },
+   {
+    "path": "bench/holdout-tbl/markdown-table.md",
+    "tokens": 176,
+    "exact": true,
+    "ms": 11902
+   },
+   {
+    "path": "bench/holdout-tbl/psql-output.txt",
+    "tokens": 244,
+    "exact": true,
+    "ms": 15032
+   },
+   {
+    "path": "bench/holdout-work/email-thread.txt",
+    "tokens": 488,
+    "exact": true,
+    "ms": 15583
+   },
+   {
+    "path": "bench/holdout-tbl/markdown-table.md",
+    "tokens": 176,
+    "exact": true,
+    "ms": 10545
+   },
+   {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "tokens": 326,
+    "exact": true,
+    "ms": 42962
+   }
+  ],
+  "on": [
+   {
+    "path": "bench/holdout-tbl/df-h.txt",
+    "tokens": 171,
+    "exact": true,
+    "ms": 4731
+   },
+   {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "tokens": 326,
+    "exact": true,
+    "ms": 36279
+   },
+   {
+    "path": "bench/holdout-tbl/markdown-table.md",
+    "tokens": 176,
+    "exact": true,
+    "ms": 10170
+   },
+   {
+    "path": "bench/holdout-tbl/psql-output.txt",
+    "tokens": 244,
+    "exact": true,
+    "ms": 13312
+   },
+   {
+    "path": "bench/holdout-work/email-thread.txt",
+    "tokens": 488,
+    "exact": true,
+    "ms": 13958
+   },
+   {
+    "path": "bench/holdout-tbl/markdown-table.md",
+    "tokens": 176,
+    "exact": true,
+    "ms": 9295
+   },
+   {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "tokens": 326,
+    "exact": true,
+    "ms": 39449
+   }
+  ]
+ },
+ "delta": 0
+}

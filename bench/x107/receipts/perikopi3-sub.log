@@ -1,0 +1,14 @@
+lane	arm	tokens	exact	parent	ms	v1off	control
+lsblk.txt	off	60	true	synkrisis	15051	60	CONTROL
+lsblk.txt	on	60	true	synkrisis	12746	60	CONTROL
+kb-article.txt	off	621	true	synkrisis	21241	621	CONTROL
+kb-article.txt	on	620	true	synkrisis	19100	621	CONTROL
+uptime-w.txt	off	80	true	synkrisis	15204	80	CONTROL
+uptime-w.txt	on	80	true	synkrisis	15033	80	CONTROL
+psql-output.txt	on	230	true	metron	49548	242	
+cue-sheet.md	on	101	true	stichomythia	48305	101	
+prices.csv	on	121	true	diastema	38352	133	
+markdown-table.md	on	172	true	synkrisis	40234	174	
+kubectl-get-pods.txt	on	322	true	akolouthia2	136205	322	
+metrics.tsv	on	208	true	akolouthia2	98735	208	
+TOTAL		off 1941	on 1914	D -27	controlFail 0

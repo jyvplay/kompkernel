@@ -41,6 +41,7 @@ import { diagrapheDisabled, diagrapheEncode } from './diagraphe';
 import { palindromosDisabled, palindromosEncode } from './palindromos';
 import { proagogeDisabled, proagogeEncode } from './proagoge';
 import { CHIRON_START, chironDecode } from './chiron';
+import { perikopiDisabled, perikopiRewrite } from './perikopi';
 
 export type TagstackMode = 'xml' | 'html';
 export type TagstackFrontierParent = 'synkrisis' | 'bifront' | 'kanon' | 'akolouthia2' | 'apographe' | 'metron' | 'hemera' | 'diastema';
@@ -853,6 +854,57 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
   // OMEGA_PALINDROMOS=1 to take the trade.
   if (!palindromosDisabled()) {
     try { admitParentRelative('ΠΑΛΙΝΔΡΟΜΟΣ', palindromosEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+
+  // ---------------------------------------------------------------------------
+  // X107 — ΠΕΡΙΚΟΠΉ (perikopi.ts), the last unfired lever on the contract line.
+  //
+  // X106's cost census split the frontier 734 contract / 3403 tape / 8878 body.
+  // The contract is the decoder-instruction line, it is 5.8 % of the frontier, and
+  // it is wildly uneven: 73 of 163 tokens on cue-sheet.md, 73 of 244 on
+  // psql-output.txt, 57 of 133 on prices.csv, against 11 on most lanes.
+  //
+  // ΠΊΝΑΞ (X76) is the codec written for that line and its own header records the
+  // measurement — 73 -> 65 tokens on psql-output.txt — yet a grep of this file for
+  // `pinax` returns NOTHING: it has only ever been a registry arm, so the chain has
+  // never collected its -8.  Worse, `pinaxIsLegend` rejects any line containing a
+  // digit, and ΑΠΟΓΡΑΦΗ's legends are full of column numbers and arithmetic
+  // constants, so even the two rules that exist cannot see the ΑΠΟΓΡΑΦΗ family.
+  //
+  // ΠΕΡΙΚΟΠΉ parses the legend into clauses and abbreviates each through a table
+  // keyed on the clause's opening words, tries ΠΊΝΑΞ's rules as well, and keeps
+  // whichever is cheaper.  It then applies the same admission discipline the rest
+  // of the chain uses: the incumbent's ΧΕΙΡΩΝ-layer expansion must be unchanged,
+  // checked with the repository's own decoder, and the message must be strictly
+  // smaller.  What is NOT proved — and is reported rather than assumed — is that a
+  // reader still understands the contracted line; the contract is decoded by
+  // comprehension, not by code, so no program can prove it.
+  // ---------------------------------------------------------------------------
+  if (!perikopiDisabled()) {
+    try {
+      const start = best.message.indexOf(CHIRON_START);
+      const incExp = start < 0 ? null : chironDecode(best.message.slice(start));
+      if (incExp !== null) {
+        const rw = perikopiRewrite(best.message, enc, text);
+        if (rw.edits.length > 0) {
+          const cstart = rw.message.indexOf(CHIRON_START);
+          if (cstart >= 0) {
+            let candExp: string | null = null;
+            try { candExp = chironDecode(rw.message.slice(cstart)); } catch { candExp = null; }
+            const tok = countTokens(rw.message, enc);
+            if (candExp === incExp && tok < best.messageTokens) {
+              best = {
+                ...best,
+                wire: rw.message,
+                message: rw.message,
+                messageTokens: tok,
+                notes: `PERIKOPI legend ${rw.before}->${rw.after} tok over ${rw.edits.length} clause(s) via ${rw.edits.map((e) => e.via).join(',')}; ${best.notes}`,
+              };
+            }
+          }
+        }
+      }
+    } catch { /* not a candidate */ }
   }
   return best;
 }
