@@ -10571,3 +10571,274 @@ base stack's parent *changed* this turn.  *data* — `prices.csv`, essentially c
 over four lanes).  ΠΡΟΑΓΩΓΗ's two improved lanes are both ops listings, consistent with every previous
 turn: **the tape share separates the categories (25–40 % for ops, 9 % for prose), and every mechanism
 that has ever paid has paid on a lane with a large tape.**
+
+---
+
+## §X104 — the measurement harness was inside the trust boundary, and `OMEGA_DET=1` never took effect
+
+**The defect.** `src/lib/omega/clock.ts` exported
+
+```ts
+export const DET_MODE = ... process.env.OMEGA_DET === '1';
+```
+
+a **module-load-time constant**. Every probe in this repository sets
+`process.env.OMEGA_DET = '1'` in its own module body, and ES modules evaluate their imports
+**before** the importing module's body runs. In the esbuild bundle the probe's assignment lands
+tens of thousands of lines after `DET_MODE` is computed. `DET_MODE` was therefore always `false`,
+`now()` always returned real `Date.now()`, and **every "under `OMEGA_DET=1`" figure ever recorded
+here — including every byte-exact 29/29 receipt — was taken with live wall clocks.**
+
+**Two measurements, both in `bench/x104/`.** `clockaudit.mjs` patches the global clocks to run one
+second per call: before the repair `code-ts` moves 967 → **1 397** tokens and `apt-real` 835 →
+**2 521**; after the repair the control, plain and patched arms all return sha `940c8bfc`, 958
+tokens, `gateDetected: false`. `callsites.mjs` records the calling line of every global-clock read
+and finds **105 012 calls arriving through `clock.ts`'s own `return DET_MODE ? 0 : Date.now();`
+line** — a frozen clock cannot call `Date.now()`, so that line was executing the live branch.
+
+**The repair.** `isDet()` reads the flag per call; `DET_MODE` is gone and its one consumer
+(`metathesis.ts:229`) reads `isDet()`. Every wall-clock **gate** in the 148 modules reachable from
+`tagstack` is routed through `now()`: `tachos`, `tachys`, `aion`, `eidos`, `glossia`, `akribeia`,
+`hyle`, `polytropos`, `syntomia`, `hydra`, `echo`, `hermes`, `logistike`, `eustochia`, `lethe`,
+`mnemosyne`, `nyx`, `oracle`, `palimpsest`, `bifront`, `sibyl`. Modules that read the clock only to
+fill an `ms:` report field still read it directly, because a report field cannot change a wire.
+`hyle.ts:1470` is routed even though it looks like reporting: it computes a *budget* from a clock
+(`Math.max(300, deadline - Date.now())`) and passes it into `kiones` → `polytropos` as a search
+stop. A clock-derived budget is a gate wearing a different name.
+
+**What it changes.** `bench/x103/memoprobe.mjs`, fresh process per run: `code-ts`
+970/969/968/967/968/970/969/968/967 → **958 × 5**; `apt-real` 835/836/836/843/836/836/835/836 →
+**835 × 5**; `dpkg-l` 667/668/667/667/667/667/667/668 → **667 × 5**. The ±3-token noise X103
+attributed to the X67 OURA memo was this, and was never the memo.
+
+**The frontier, restated a third time.** `bench/x104/frontier.ts`, 29 lanes, `tagstackFrontier`,
+flag now genuinely live, memos off: **TOTAL 12 639, exact 29/29, 1 298 761 ms**. X102b's 12 639 —
+which X103 declared non-reproducing and stale — **reproduces exactly, lane for lane.** The X103
+restatement to 12 685 / 12 695 was an artifact of the defect this repair removes.
+
+**The honest cost.** The 29-lane frontier probe goes from roughly 12 minutes to **21.6 minutes**,
+because the wall-clock truncations that used to cut searches short are now inert. Reported, not
+hidden: determinism was bought with time.
+
+**What has been missed this whole time.** The harness was inside the trust boundary. In classical
+compression research the experimenter stands outside the experiment; here the experimenter's flag is
+a module-load-time `const` consumed by the code under test, and a module boundary silently disabled
+it. The AI-native version of that lesson: **when the instrument is written in the same language, in
+the same process, as the thing it measures, the instrument is part of the system and must be
+verified like any other component.** A flag that is *set* is not a flag that is *read*.
+
+---
+
+## §X105 — ΟΡΟΘΕΣΙΑ (`src/lib/omega/orothesia.ts`), ΤΑΞΙΝΟΜΗΣΙΣ (`src/lib/omega/taxinomasis.ts`)
+
+Two codecs, both shipped, both mechanism-distinct from the 237 registry arms and from each other.
+
+**ΤΑΞΙΝΟΜΗΣΙΣ (TAXINOMĒSIS, "selection by rank").** ΧΕΙΡΩΝ ranks candidate phrases twice and cuts
+each ranking. Both sorts are `(a, b) => b.key - a.key` and V8's sort is stable, so every candidate
+that **ties at the cut** is ordered by the insertion order of the `Map` that fed it — leftmost
+occurrence in the text. Measured over 29 lanes (`bench/x104/tiecensus.ts`): 259 epochs at each cut;
+**every truncating epoch at both cuts has a tie group strictly larger than one** (prefilter 21/21,
+max group 263; window 133/133, max group 100). ΤΑΞΙΝΟΜΗΣΙΣ resolves those groups by a declared total
+order, or — under the default `exact` policy — by pricing the wire each tied candidate would actually
+emit. Source: **Bieniawski, arXiv:2608.19228 (Jul 2026)**, Re-Pair T-NDR, which establishes that the
+tie-break in Re-Pair is a hidden degree of freedom worth searching. ΧΕΙΡΩΝ is a Re-Pair-family
+compressor, so the degree of freedom is present here and had never been searched.
+
+**ΟΡΟΘΕΣΙΑ (OROTHESIA, "boundary-setting").** ΜΕΤΑΤΑΞΙΣ relocates rules over the tape and measured
+−44 tokens doing it, by a randomized first-improvement walk in which every probe rebuilds the whole
+tape string and re-tokenises the whole message. ΟΡΟΘΕΣΙΑ searches the **same move set with the same
+legality test and the same exact acceptor**, but with a different price and a different search order:
+a permutation changes only which blocks are **adjacent**, so `junction(i,j) = countTokens(Bᵢ + Bⱼ) −
+tᵢ − tⱼ` is precomputable for all `n²` ordered pairs once, and the price of any order is an `O(n)`
+integer sum. Measured (`bench/x104/junction.ts`, 64-rule tape, 200 random permutations): worst error
+against the exact price **2 tokens**, mean absolute error **0.16**, matrix build **18 ms**, and a
+**≥ 32×** reduction in per-probe cost. The model is a **ranking function only** — `MODEL_SLACK = 3`
+skips candidates it says cannot win, and a move is accepted only when the exact `countTokens` of the
+actual serialised message strictly beats the incumbent. ΟΡΟΘΕΣΙΑ then does **steepest descent over
+the complete neighbourhood** instead of ΜΕΤΑΤΑΞΙΣ's shuffled first improvement, and stops when no
+legal move wins rather than on a patience counter or a budget derived from message length.
+
+**External corroboration, independent and current.** **arXiv:2610.12376 (Oct 2026), "Latent Core
+Tokenizer"**: *"For an adjacent pair (a,b), the packer maintains the support score … The
+highest-score pair is replaced in all affected sequences … **Recomputing affected counts after every
+non-overlapping merge makes the merge order deterministic**."* The adjacent-pair score is the object
+of study, the greedy on it is Re-Pair/BPE/ΧΕΙΡΩΝ, and the order is the hidden degree of freedom. The
+same paper's "known-piece backoff" — *"dynamic programming to find the fewest known vocabulary pieces
+whose concatenation exactly reconstructs it"* — is the template for an optimal re-spelling of a
+rule's value, which ΣΥΝΔΥΑΣΜΟΣ approximates by bounded enumeration (`MAX_SEGMENTATIONS = 400`,
+`MAX_PARTS = 5`); that probe was run and re-spelling is measured converged, so it is recorded and
+not retried.
+
+**Both are CPU-bound, deliberately and reproducibly.** Neither reads a wall clock; both run to a
+stopping condition that is a function of the input, so the same input yields the same wire on any
+machine. `OMEGA_NO_TAXINOMASIS=1` and `OMEGA_NO_OROTHESIA=1` disable them for an honest interleaved
+A/B, and ΤΑΞΙΝΟΜΗΣΙΣ's policy is read **per call** so an A/B can change arms inside one process —
+which is also why it cannot repeat the `DET_MODE` bug.
+
+**Model-readability, downgraded not declared verified.** Neither codec adds an operator, a contract
+clause or a decode rule. ΤΑΞΙΝΟΜΗΣΙΣ changes only which of several equally-scoring rules is chosen;
+ΟΡΟΘΕΣΙΑ changes only the order of the tape's entries. **No model API exists in this environment, so
+LLM decodability was not tested.** What is bound to evidence is that `chironDecode` round-trips every
+emitted message and that the wire language is provably unchanged. The external record that this
+downgrade is the right call: **arXiv:2601.07354 (MetaGlyph)** measures that symbolic decodability is
+model-family dependent and collapses to **0 % parse success** on GPT-5.2 for complex
+multi-constraint tasks, while its own CTRL arm — the same structure with meaningless symbols —
+returns an unchanged token count, proving the gain is structure and not symbol identity.
+
+---
+
+## §X106 — WHERE THE 12 639 TOKENS ACTUALLY LIVE, AND FOUR MECHANISMS FALSIFIED
+
+**The census.** `bench/x106/centres.ts` re-runs the X97 cost-centre split on the messages the
+**current** chain emits, under the same pinned flags as `bench/x104/frontier.ts`
+(`receipts/centres-x106.json`, exact 29/29):
+
+```
+TOTAL 12639 = contract 734 (5.8%) + tape 3403 (26.9%) + body 8878 (70.2%)
+
+ops-listing  n= 6  total 2274  contract 262 (11.5%)  tape 1004 (44.2%)  body 1430 (62.9%)
+prose        n= 4  total 2646  contract  44 ( 1.7%)  tape  387 (14.6%)  body 2207 (83.4%)
+code-markup  n= 3  total 2069  contract  33 ( 1.6%)  tape  525 (25.4%)  body 1505 (72.7%)
+ops-table    n=12  total 4934  contract 168 ( 3.4%)  tape 1322 (26.8%)  body 3420 (69.3%)
+data         n= 3  total  553  contract 154 (27.8%)  tape  125 (22.6%)  body  268 (48.5%)
+```
+
+**The body is 70.2 % of the frontier and the tape is 26.9 %.** Two consequences that directed
+everything below. First, the tape — not the body — is where a *rule-shaped* mechanism can still
+bite, and it is 44.2 % of the ops-listing lanes, the largest single share in the corpus. Second, the
+contract is only 5.8 % overall but is wildly uneven: 44.8 % of `cue-sheet.md`, 29.9 % of
+`psql-output.txt`, 42.9 % of `prices.csv`. That unevenness is a lead, not a result; no claim is made
+about it here.
+
+**Honest correction to the instrument.** The X97 probe's `refToks`/`litToks` split is **invalid for
+this corpus**. It decides a token is a "reference" only when the tokenizer's own chunk is a single
+glyph character, but ΧΕΙΡΩΝ's glyphs are embedded inside non-whitespace runs — the `ps-real` body is
+`.../usr/bin/envd강294결3-ext4-rsv-conversion개14거_preempt...` — so the split counts essentially
+everything as literal and reports `refs 12 = 0.1 % of body`. **That number is a chunking artifact and
+must not be quoted.** What the census does establish is the contract/tape/body split, which does not
+depend on the chunking.
+
+**Four falsifications, each with its receipt.**
+
+1. **The overlap over-count is 0.1 % of candidates.** arXiv:2610.32298 (Chen, 23 Oct 2026) proves
+   that in an optimal SLP the chosen occurrences of the nonterminals' expansions are pairwise
+   disjoint, so "the dictionary can be read off from a partition of the input". ΧΕΙΡΩΝ's
+   `enumerateTokenSpans` (`chiron.ts:1092`) slides its window one token at a time
+   (`for (let at = 0; at + len <= n; at++)`), so `c` counts **overlapping** occurrences while
+   `split(p).join(gl)` replaces only **non-overlapping** ones — the score charges itself savings it
+   cannot collect. Measured over all 29 lanes at epoch 0 (`bench/x106/overlap.ts`,
+   `receipts/overlap-x106.json`): **30 204 candidates, 41 with any overlap (0.1 %), Σgap 632 tokens,
+   max gap 116.** The defect is real and the transfer is not.
+
+2. **The 400 000-entry enumeration cap never bites.** `enumerateTokenSpans` returns early when
+   `counts.size` reaches `CHIRON_MAX_TOKEN_SPAN_ENTRIES`, which would make survival depend on Map
+   insertion order, i.e. leftmost text occurrence. `bench/x106/mapsize.ts`: **0 of 29 lanes reach the
+   cap**; the largest map is `ls-l-real` at 94 714 entries.
+
+3. **The tape has zero second-level headroom.** ΧΕΙΡΩΝ's macro loop re-enumerates over
+   `[body, ...literal rule texts]`, so rule values are already compressed by later rules.
+   `bench/x106/tapesecond.ts` runs ΧΕΙΡΩΝ again on the emitted **tape string alone**: **gain exactly
+   0 on 15 of 15 lanes**, every round-trip exact. The tape is at ΧΕΙΡΩΝ's fixed point, so no
+   second-level grammar pass over it can pay.
+
+4. **ΤΑΞΙΝΟΜΗΣΙΣ's `exact` policy gains nothing.** X104's tie census measured that every truncating
+   epoch at both cuts lands inside a tie group > 1 (prefilter 21/21, max 263; window 133/133, max
+   100), so candidate survival is decided by leftmost occurrence. The `exact` policy replaces that
+   with the objective itself — snapshot, apply, price the emitted wire, restore. The X104 run was
+   killed mid-arm and no total existed; `bench/x106/taxexact.ts` finished it: **Δ = 0 over 15 lanes,
+   exact 15/15, 403 530 ms**, and the wires differ at equal price.
+
+**The one mechanism that does move something, and where it stops.**
+
+ΤΥΠΟΣ (X101) added `exactAccept` to ΧΕΙΡΩΝ's macro accept test so the candidate is priced on
+`renderWire` — topological order, fresh glyph assignment, **the string the caller receives** —
+instead of `provisionalWire`. A grep of `src/lib/omega` shows that **nothing in the chain ever
+passed the flag**: `const exactAccept = !!options.exactAccept` is false on every path. For the entire
+life of this stack ΧΕΙΡΩΝ has been accepting macro candidates on one string and shipping a different
+one. ΤΥΠΟΣ's own comment records why that matters — ΜΕΤΑΤΑΞΙΣ measured −44 tokens from relocation
+alone and ΔΙΑΛΕΚΤΟΣ measured +56..+247 from the letter assignment alone.
+
+Forced, it is **+9 over 20 lanes** (`receipts/exactaccept.log`): −3 on `node-help`, −2 on `code-ts`,
+against +8 on `ls-l-real` and +5 on `ps-aux-real`. The pattern is not noise: the lanes that lose are
+exactly the lanes whose shared work meter is already 96 %/75 % exhausted
+(`bench/x101/klimax29.json`), because `renderWire` costs more per candidate and a starved search
+creates fewer rules.
+
+So the flag is right for the lanes with meter headroom and wrong for the starved ones, which is
+precisely what a sweep dimension expresses. The **eager** form is catastrophic: `ls-l-real`
+1 670 → 2 126 (**+456**) because the extra variant halves every other variant's grant from the one
+shared meter. The fix is **meter-aware admission**: the `full-exact/<sep>` variant is pushed only
+when `workLeft > 0.4 × initialWorkBudget` after the standard sweep — a fact ΧΕΙΡΩΝ observes, not a
+guess about the lane. Measured (`receipts/exactaccept-variants.log`, 20 lanes):
+
+```
+ΧΕΙΡΩΝ layer   off 12468 -> on 12463   Δ -5   exact 20/20   0 worse   (node-help -3, code-ts -2)
+               ls-l-real 1670 -> 1670 (the gate refused to admit)
+chain layer    off 10142 -> on 10142   Δ  0   exact 28/28  0 worse   (receipts/chainab.log)
+```
+
+**The ΧΕΙΡΩΝ-layer win does not propagate to the chain.** The chain's `node-help` is 862 while
+ΧΕΙΡΩΝ's is 934, so the downstream gates re-derive the answer and absorb the improvement. That is
+reported plainly: **the frontier did not move in tokens this turn.** The mechanism is shipped ON by
+default because it is weakly token-Pareto-superior at both layers and strictly better at the ΧΕΙΡΩΝ
+layer, and because the only thing that ever made it dangerous is what the headroom gate prevents.
+`OMEGA_NO_EXACT_ACCEPT_VARIANTS=1` restores the X105 sweep.
+
+**The honest speed win.** ΟΡΟΘΕΣΙΑ is Δ=0 on 29/29 (its `plus` arm even produces a *different wire
+at the same price* on `ls-l-real`: sha `173cbbfb3232` → `a9031c286056`, both 1 476 tokens, so every
+improving relocation it finds is exactly price-neutral) and costs **+74.9 %** of the encoder's time
+in the interleaved A/B (base 224 238 ms vs plus 392 100 ms over 29 lanes). A codec that changes no
+token and costs three quarters of the runtime is not a Pareto improvement, so X106 **removed it from
+the chain**. That is a **−42.8 % chain-CPU reduction at Δ=0 tokens**, which is the stack's real gain
+this turn and the reason the merge is justified.
+
+### The generalized local-leaders table (X106)
+
+`bench/x104/receipts/leaders-x106.json`. **Configuration stated explicitly:** `raw` and `floor` are
+**imported** from `bench/x90/receipts/leaders-x90.json` and are **not re-measured** (the floor is the
+X90 entropy tier, which is **not reachable by a readable codec and is only a denominator**); the
+category labels are imported from the same receipt rather than re-derived by a regex, because
+re-deriving them silently reclassifies lanes; `shipped` is measured **this turn**, from the `on` arm
+of `bench/x104/receipts/chainab.log`, i.e. `tagstackFrontier` under
+`OMEGA_DET=1 OMEGA_NO_MEMO=1 OMEGA_ENGRAM=0 OMEGA_OURA_MEMO=1` — **the frontier configuration, total
+12 639, exact 29/29**.
+
+```
+category        n    raw  shipped   floor  headroom  head%  price%
+OPS LISTING     9  16516     5902    4420      1482  25.1%   64.3%
+OPS TABLE      11   4135     1726    1272       454  26.3%   58.3%
+CODE / MARKUP   3   3152     2069    1728       341  16.5%   34.4%
+PROSE           4   3117     2646    2529       117   4.4%   15.1%
+DATA            2   1095      296     209        87  29.4%   73.0%
+ALL            29  28015    12639   10158      2481  19.6%   54.9%
+```
+
+**Two honest caveats.** (1) This table is on `tagstackFrontier`, so it is **not** directly comparable
+to X101's table, which was on `tagstackEncode` (the chain, 12 414) — the two probes measure different
+objects and the chain is cheaper. A lane-for-lane cross-check of the 28 lanes the chain probe
+(`bench/x104/leaders-x105.ts`) has finished shows the chain **better on 26, equal on 2, worse on 0**,
+by 1–15 tokens per lane, which is the expected offset and not a regression. (2) `head%` and `price%`
+order the categories differently, which is the actionable distinction: **PROSE has the smallest
+headroom in both fraction and tokens (117 over four lanes), while OPS LISTING has the largest
+absolute headroom (1 482 over nine lanes)** — 60 % of the entire corpus headroom sits in nine lanes.
+
+**Per-lane absolute headroom, largest first — the order a practitioner should work down:**
+
+```
+ls-l-real.txt        OPS LISTING   shipped 1476  floor  943  headroom  533  raw 5194
+ps-aux-real.txt      OPS LISTING   shipped 1042  floor  743  headroom  299  raw 3054
+apt-real.txt         OPS LISTING   shipped  850  floor  690  headroom  160  raw 2739
+code-ts.txt          CODE / MARKUP shipped  969  floor  812  headroom  157  raw 1422
+kubectl-get-pods.txt OPS TABLE     shipped  326  floor  214  headroom  112  raw 1006
+findmnt.txt          OPS LISTING   shipped  444  floor  335  headroom  109  raw  787
+ls-real.txt          OPS LISTING   shipped  433  floor  328  headroom  105  raw 1034
+unified-diff.patch   CODE / MARKUP shipped  419  floor  324  headroom   95  raw  578
+json-pkg.txt         CODE / MARKUP shipped  681  floor  592  headroom   89  raw 1152
+dpkg-l.txt           OPS LISTING   shipped  673  floor  592  headroom   81  raw 1000
+metrics.tsv          OPS TABLE     shipped  210  floor  130  headroom   80  raw  811
+psql-output.txt      OPS TABLE     shipped  244  floor  166  headroom   78  raw  675
+```
+
+**One lane has NEGATIVE headroom:** `lsblk.txt` ships 60 tokens against a floor of 61, i.e. it is
+already at the entropy tier. That is not an error — it is the denominator doing its job, and it is
+reported rather than clipped.

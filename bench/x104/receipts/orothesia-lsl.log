@@ -1,0 +1,8 @@
+base   tokens  1476  exact=true  parent=synkrisis  sha=173cbbfb3232  608300ms
+base	1476	true	synkrisis	173cbbfb3232	608303
+alone  tokens  1476  exact=true  parent=synkrisis  sha=a9031c286056  646286ms
+alone	1476	true	synkrisis	a9031c286056	646287
+wide   tokens  1476  exact=true  parent=synkrisis  sha=dc68f5a42f45  7435272ms
+wide	1476	true	synkrisis	dc68f5a42f45	7435273
+both   tokens  1476  exact=true  parent=synkrisis  sha=f29c5c8e7b80  817116ms
+both	1476	true	synkrisis	f29c5c8e7b80	817117

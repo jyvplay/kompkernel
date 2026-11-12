@@ -6235,3 +6235,375 @@ not declared verified: no model API exists in this environment, so LLM decodabil
 What is verified is structural: the wire is self-contained, the tape is delimiter-free with the
 first-appearance key rule `chironParseTape` implements, and every reference is backwards — which
 `chironDecode` enforces by rejecting forward references.
+
+---
+
+## §X104 — ΤΑΞΙΝΟΜΗΣΙΣ (`src/lib/omega/taxinomasis.ts`), and the repair of the measurement harness
+
+### The harness repair, because it outranks the codec
+
+**Name.** ΟΡΟΘΕΣΙΑ is below; what ships first is a repair to `src/lib/omega/clock.ts`, and it
+invalidates every determinism claim this repository has ever made.
+
+**The defect.** `clock.ts` exported
+
+```ts
+export const DET_MODE = ... process.env.OMEGA_DET === '1';
+```
+
+a **module-load-time constant**. Every probe sets `process.env.OMEGA_DET = '1'` in its own module
+body, and ES modules evaluate their imports **before** the importing module's body runs. In the
+esbuild bundle the probe's assignment lands tens of thousands of lines after `DET_MODE` is
+computed, so `DET_MODE` was always `false`, `now()` always returned real `Date.now()`, and **every
+"under `OMEGA_DET=1`" figure ever recorded here was taken with live wall clocks.**
+
+**Two measurements that prove it, both in `bench/x104/`:**
+- `clockaudit.mjs` patches the global clocks to run **one second per call**. Before the repair:
+  `code-ts` 967 → **1 397** tokens, `apt-real` 835 → **2 521**. After the repair: control, plain and
+  patched all return sha `940c8bfc`, 958 tokens, `gateDetected: false`.
+- `callsites.mjs` records the calling line of every global-clock read: **105 012 calls arrive
+  through `clock.ts`'s own `return DET_MODE ? 0 : Date.now();` line.** A frozen clock cannot call
+  `Date.now()`; that line was executing the live branch.
+
+**The repair.** `isDet()` reads the flag **per call**; `DET_MODE` is gone and its one consumer
+(`metathesis.ts:229`) reads `isDet()`. Every wall-clock **gate** in the 148 modules reachable from
+`tagstack` is routed through `now()`: `tachos`, `tachys`, `aion`, `eidos`, `glossia`, `akribeia`,
+`hyle`, `polytropos`, `syntomia`, `hydra`, `echo`, `hermes`, `logistike`, `eustochia`, `lethe`,
+`mnemosyne`, `nyx`, `oracle`, `palimpsest`, `bifront`, `sibyl`. Modules that read the clock only to
+fill an `ms:` report field still read it directly, because a report field cannot change a wire.
+**`hyle.ts:1470` is routed even though it looks like reporting**: it computes a *budget* from a
+clock (`Math.max(300, deadline - Date.now())`) and passes it into `kiones` → `polytropos` as a
+search stop. A clock-derived budget is a gate wearing a different name.
+
+**What the repair changes.** `bench/x103/memoprobe.mjs`, fresh process per run: `code-ts`
+970/969/968/967/968/970/969/968/967 → **958 × 5**; `apt-real` 835/836/836/843/836/836/835/836 →
+**835 × 5**; `dpkg-l` 667/668/667/667/667/667/667/668 → **667 × 5**. The ±3-token noise that X103
+attributed to the X67 OURA memo was this, and was never the memo.
+
+**Is it greedy?** Not applicable — it is a correctness repair to the measurement instrument, not a
+compression pass. **Source article:** none; the bug class is the classic module-initialisation-order
+defect, found here by instrumenting the instrument.
+
+**Time- or CPU-bound?** The repair makes the chain **CPU-bound and machine-independent**, at a
+measured cost: the 29-lane frontier probe goes from roughly 12 minutes to **1 298 761 ms (21.6 min)**
+because the wall-clock truncations that used to cut searches short are now inert. That regression is
+reported, not hidden.
+
+### ΤΑΞΙΝΟΜΗΣΙΣ (TAXINOMĒSIS, "selection by rank")
+
+**Name.** ΤΑΞΙΝΟΜΗΣΙΣ — selection by rank. ΧΕΙΡΩΝ ranks candidate phrases twice and cuts each
+ranking; this codec decides what happens to the candidates that **tie at the cut**.
+
+**Is it greedy?** **Yes**, and it is greedy *about the same acceptor* ΧΕΙΡΩΝ already uses. It changes
+neither which substrings are eligible nor how a rule is accepted. It changes the **order tied
+candidates are tried in**, because that order was previously decided by accident: both of ΧΕΙΡΩΝ's
+sorts are `(a, b) => b.key - a.key`, V8's sort is stable, and the `Map` that feeds them is in
+leftmost-text-occurrence order.
+
+**Move types.** Exactly one, at each of two cuts:
+- **PREFILTER cut** — `taxinomasisResolvePrefilter`: when the cut lands inside a tie group on the
+  *character* proxy, price the group (≤ 64) exactly and keep the best by the real token bound.
+- **WINDOW cut** — `taxinomasisResolve`: when the cut lands inside a tie group on the *exact* bound,
+  resolve the group (≤ 8) by `measure`, which snapshots the search state, applies the candidate,
+  prices the **emitted** wire, and restores. `measure` is the accept test itself.
+
+**Source article.** **Bieniawski, "Assembly Theory and the Smallest Grammar Problem",
+arXiv:2608.19228 (Jul 2026)** — introduces **Re-Pair T-NDR**, a branch-and-bound variant of Re-Pair
+that searches all tied digrams at each iteration instead of applying FIFO or lexicographic
+tie-breaking, pruned by `r + ⌈log₂N⌉ ≥ G_best`. Measured over 408 strings: never larger than FIFO or
+FIXED, strictly smaller in 31 of 325 non-unary strings (1–3 rules), tighter bound in 9.54 % of cases.
+ΧΕΙΡΩΝ is a Re-Pair-family compressor, so the degree of freedom is present here and had never been
+searched. **The objective is different and stronger**: the paper minimises rule count; this stack
+minimises the token count of the message that ships, so the default policy resolves ties by pricing
+the wire each tied candidate would actually emit.
+
+**The measurement that justifies it** (`bench/x104/tiecensus.ts`, 29 lanes, env-gated census inside
+`chiron.ts`):
+
+| site | epochs | mean pool | mean tie group | epochs truncated | epochs with tie > 1 | max tie group |
+|---|---|---|---|---|---|---|
+| prefilter | 259 | 603.7 | 9.53 | 21 | **21** | **263** |
+| window | 259 | 297.4 | 12.82 | 133 | **133** | **100** |
+
+**Every truncating epoch at both cuts has a tie group strictly larger than one.**
+
+**Time- or CPU-bound?** **CPU-bound, deliberately.** No wall clock. The policy is read **per call**
+(not at module load) so an A/B can change arms inside one process — and precisely so this module does
+not repeat the `DET_MODE` bug. `OMEGA_NO_TAXINOMASIS=1` disables; `OMEGA_TAXINOMASIS` selects
+`insertion` (the shipped behaviour, and the control) / `count` / `short` / `exact` (default).
+
+**Fidelity.** The acceptor keeps a rule only when it **strictly** lowers the scored message and
+restores the snapshot otherwise, so reordering cannot make an individual accept test pass when it did
+not before. What it can do is find a different, equally-scoring rule *earlier*, changing the state
+every later rule is tested against. The mechanism is order-dependent search under a monotone
+acceptor, not a stronger acceptor.
+
+**Measured result.** `bench/x104/smoke.mjs`, three smallest lanes: insertion / count / short / exact
+all give 60 / 76 / 126, all byte-exact — **no gain, reported as plainly as a gain would be**. Full
+29-lane A/B: see `bench/x104/REPORT.md`.
+
+**Model-readability.** ΤΑΞΙΝΟΜΗΣΙΣ changes only which of several equally-scoring rules is chosen. The
+wire language, the contract and the operator set are untouched. **Downgraded, not declared verified:
+no model API exists in this environment, so LLM decodability was not tested.**
+
+---
+
+## §X105 — ΟΡΟΘΕΣΙΑ (`src/lib/omega/orothesia.ts`)
+
+**Name.** ΟΡΟΘΕΣΙΑ, *orothesia* — "boundary-setting, delimitation". The codec sets the boundaries
+between the tape's rules; the rules themselves are untouched.
+
+**Is it greedy?** **Yes — steepest descent over the complete legal neighbourhood, with an exact
+acceptor.** It is *not* ΜΕΤΑΤΑΞΙΣ's greedy, and the difference is the whole content of this codec:
+
+| | ΜΕΤΑΤΑΞΙΣ (X97) | ΟΡΟΘΕΣΙΑ (X105) |
+|---|---|---|
+| move | RELOCATE one rule to any legal slot | RELOCATE one rule to any legal slot (**identical move set**) |
+| legality | reference DAG | reference DAG (**identical test**) |
+| search order | Fisher-Yates-shuffled list, **first improvement** | **complete** neighbourhood, **steepest descent** |
+| per-probe price | rebuild the whole tape string, re-tokenise the whole message | **O(n) integer sum** over a precomputed pairwise junction matrix |
+| stop rule | patience + a budget derived from message **length** | no legal move in the complete neighbourhood wins |
+| acceptance | exact `countTokens` on the serialised message | exact `countTokens` on the serialised message (**identical acceptor**) |
+
+**Move types.** Exactly one, inherited from ΜΕΤΑΤΑΞΙΣ and not extended: **RELOCATE** the rule at tape
+position `a` to any legal position `p ≠ a, a+1`. ΟΡΟΘΕΣΙΑ contributes no new move; it contributes a
+different **price** and a different **search order**.
+
+**The central construction.** A permutation of the tape changes only which blocks are **adjacent** —
+ΜΕΤΑΤΑΞΙΣ's own comment says "Letters are UNCHANGED, so no substitution pass is needed". So
+
+```
+price(o) = head + tail + Σᵢ tᵢ + Σⱼ junction(Bⱼ, Bⱼ₊₁)
+junction(i,j) = countTokens(Bᵢ + Bⱼ) − tᵢ − tⱼ
+```
+
+and `junction` is precomputable for all `n²` ordered pairs **once**. `bench/x104/junction.ts` measures
+the model against the exact price on **200 random permutations of a 64-rule tape**: worst error
+**2 tokens**, mean absolute error **0.16**, matrix build **18 ms**, and the model prices the whole
+neighbourhood faster than the timer resolves — a **≥ 32×** reduction in per-probe cost against
+ΜΕΤΑΤΑΞΙΣ's O(message) rebuild plus full re-tokenisation.
+
+**Why the model is not the acceptor.** A token that *spans* a junction shifts where the scan resumes
+inside the next block, which can change that block's interior tokenisation. That is exactly the ±2
+residual the measurement shows. So `MODEL_SLACK = 3` (one token of headroom over the measured bound)
+skips candidates the model says cannot win, and **a move is accepted only when the exact
+`countTokens` of the actual serialised message strictly beats the incumbent**. The model decides what
+gets looked at; the tokenizer decides what ships.
+
+**Source article.** **None for the mechanism — original to this repository.** The pairwise-junction
+decomposition of a permutation of fixed blocks is the standard device for pricing a sequence by
+adjacent-pair costs, and it is what makes the problem Travelling-Salesman-shaped; using it as a
+**ranking function under an exact acceptor inside a grammar-compression tape** is not. The
+neighbouring imports, with their hypotheses and their honest scope limit:
+- **arXiv:2608.19228** (Jul 2026), Re-Pair T-NDR — the order in which tied digrams are resolved is a
+  hidden degree of freedom worth searching. Supplies the *motivation* for searching order at all.
+- **arXiv:1704.05254** (Maneth, *Grammar-Based Graph Compression*) — "the effectiveness of pruning
+  depends on the order in which the nonterminals are considered". Supplies the *observation* that
+  post-processing order matters, not this decomposition.
+- **arXiv:2502.10909** (Feb 2025) and **Bienkowski & Even, STACS 2024** on Optimal Linear Arrangement
+  — the classical problem ΜΕΤΑΤΑΞΙΣ instantiates. **No approximation bound transfers**, because
+  ΟΡΟΘΕΣΙΑ's cost is a token count under a fixed tokenizer, not a cut function.
+
+**Time- or CPU-bound?** **CPU-bound, deliberately and reproducibly.** There is no wall clock in this
+module at all: the search runs to a local optimum of the complete neighbourhood, so the same input
+yields the same wire on any machine. The one apparently unbounded cost, the `n²` junction matrix, is
+a pure function of the rule count and is built once per call. `OMEGA_NO_OROTHESIA=1` disables.
+
+**Fidelity.** A relocation is a permutation of the tape's entries, so the rule→letter map is
+untouched, keys stay distinct, and the DAG check keeps every reference pointing at a strictly earlier
+rule, so `chironDecode`'s forward-reference guard still passes. Expansion composes with the
+permutation, so the decoded string is byte-identical. **This is a proof**, and the pass re-decodes
+the final message through `chironDecode` before returning it, refusing to emit on mismatch.
+
+**Measured result.** `bench/x104/orothesia29.ts`, 29 lanes, arms interleaved in one process, scored
+on the SHA-256 of the complete message: see `bench/x104/REPORT.md`.
+
+**Model-readability.** ΟΡΟΘΕΣΙΑ changes only the ORDER of the tape's entries. The contract is
+byte-identical, the operator set is unchanged, and every rule is the same string under the same
+letter. **Downgraded, not declared verified: no model API exists in this environment, so LLM
+decodability was not tested.** What is bound to evidence is that `chironDecode` round-trips every
+emitted message and that the wire language is provably unchanged.
+
+---
+
+## §X105 — ΟΡΟΘΕΣΙΑ · ΤΑΞΙΝΟΜΗΣΙΣ · ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ (three codecs, two falsified)
+
+### ΟΡΟΘΕΣΙΑ (orothesia.ts) — *boundary/junction steepest descent*. **REMOVED FROM THE CHAIN in X106.**
+
+**Design spec.** ΧΕΙΡΩΝ's tape is a sequence of entries `<glyph><value>`; the price of the
+concatenation is *not* the sum of the entries' prices, because the tokenizer fuses some adjacent
+pairs across an entry boundary and not others. ΟΡΟΘΕΣΙΑ builds the full `n×n` symmetric junction
+matrix `J[i][j]` = token cost of entry *i* immediately followed by entry *j*, prices any permutation
+as `Σ J[π(k)][π(k+1)] + Σ selfCost` in **O(n)**, and runs **complete-neighbourhood steepest
+descent**: every single relocation is scored by the model, the top `SHORTLIST = 4` are re-priced by
+the real tokenizer, and the best exact win is taken. `MAX_STEPS = 512`. The emitted message is
+re-decoded through `chironDecode` before it is returned.
+
+**Greedy?** **Yes** — steepest descent, i.e. greedy on the exactly-priced shortlist. Not a beam, not
+exhaustive, not randomized.
+
+**Source citation (honest scope).** The framing import is **arXiv:2502.10909** (Feb 2025) and
+**Bienkowski & Even, STACS 2024** on Optimal Linear Arrangement. **No approximation bound
+transfers**: ΟΡΟΘΕΣΙΑ's cost is a token count under a fixed tokenizer, not a cut function, so the
+O(√(log n) log log n) and O(log n log log n) results are framing only and are recorded as such. The
+premise that the adjacent-pair score is the object of study is corroborated externally by
+**arXiv:2610.12376** (Oct 2026, *Latent Core Tokenizer*): *"Recomputing affected counts after every
+non-overlapping merge makes the merge order deterministic."*
+
+**Time- or CPU-bound?** **CPU-bound by construction and reproducibly.** No wall clock is read at
+all. The one apparently unbounded cost, the `n²` matrix, is a pure function of the rule count.
+
+**Measured result — FALSIFIED, Δ=0.** `bench/x104/receipts/orothesia29.log`: `base` arm **12 639,
+exact 29/29, 1 794 109 ms** (the frontier reproduced a third time). `bench/x104/receipts/
+orothesia-big.log`: `plus` arm **7 372 over the 11 biggest lanes, Δ 0, inexact 0**. On `ls-l-real`
+the two arms produce **different wires at the same price** (sha `173cbbfb3232` → `a9031c286056`,
+both 1 476 tokens), so it is not a no-op — every improving relocation it finds is exactly
+price-neutral. Cost measured interleaved in one process: base 224 238 ms vs plus 392 100 ms over 29
+lanes, **+74.9 %**. **A codec that changes no token and costs three quarters of the encoder's time
+is not a Pareto improvement, so X106 removed it from the chain.** The module and both receipts stay
+in the tree as a measured falsification.
+
+### ΤΑΞΙΝΟΜΗΣΙΣ (taxinomasis.ts) — *tie resolution by declared order*. **SHIPPED, default = control.**
+
+**Design spec.** ΧΕΙΡΩΝ ranks macro candidates by the exact token bound `c*(t-1)-t-1` and then
+truncates twice — `PREFILTER = 1600` on the cheap ranking and `EPOCH_APPLY*5 = 60` on the exact
+ranking. Both cuts are `Array.prototype.sort` + `slice`, so a tie group is broken by **Map insertion
+order**, i.e. by leftmost occurrence in the text. ΤΑΞΙΝΟΜΗΣΙΣ replaces that with a declared order:
+`insertion` (the shipped behaviour, the control), `count`, `short`, and `exact`, which snapshots the
+rule set, applies the candidate, prices the wire the encoder would actually emit, and restores.
+`TAXINOMASIS_EXACT_TIE_CAP = 8`, `TAXINOMASIS_PREFILTER_TIE_CAP = 64`. The policy is read **per
+call**, never at module load.
+
+**Greedy?** **Yes** — it resolves ties inside ΧΕΙΡΩΝ's greedy; it does not change the greedy.
+
+**Source citation.** **arXiv:2608.19228** (Jul 2026, *Assembly Theory and the Smallest Grammar
+Problem*), Re-Pair T-NDR: exhaustive branch-and-bound over *tied* digrams, prune when
+`r + ⌈log₂N⌉ ≥ G_best`; mean error **4.03 %** vs FIFO 4.96 / FIXED 4.89; strictly smaller grammar in
+**31 of 325** non-unary strings. Independently corroborated by **arXiv:2610.12376** (Oct 2026).
+
+**Time- or CPU-bound?** **CPU-bound, no wall clock.** The `exact` policy is the expensive one
+because it prices a whole wire per tied candidate.
+
+**Measured result.** The defect is real and measured: `bench/x104/tiecensus.ts` over 29 lanes,
+1 260 257 ms — **every** truncating epoch at both cuts lands inside a tie group > 1 (prefilter 21/21,
+max group 263; window 133/133, max group 100). The `insertion` control reproduced **12 639, exact
+29/29** (`bench/x104/receipts/taxinomasis29.log`). The `exact` arm was killed mid-run in X104 and
+was finished in X106: `bench/x106/taxexact.ts`, 15 lanes, **Δ = 0, exact 15/15, 403 530 ms**, and
+the wires differ at equal price (`shaSame=false`) — the same price-neutral signature as ΟΡΟΘΕΣΙΑ.
+`bench/x104/smoke.mjs`: all four policies identical at 60/76/126. **No gain; reported plainly.**
+
+### ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ (megaepanalipsis.ts) — *MR-order window*. **SHIPPED DISABLED (opt-in).**
+
+**Design spec.** ΧΕΙΡΩΝ takes its candidate window as `cands.slice(offset, offset + 60)` and then
+does `offset += 60`, so the order it realises is rank 0..11, then 60..71, then 120..131 — ranks
+12..59, 72..119, … are never applied. ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ replaces the positional window with
+the **head of the ranking after a dead set**: a candidate joins the dead set only when it is
+*observed* not to apply (its phrase is absent from the body and every literal rule, or `addRule`
+refuses it), never merely because it was ranked below the cut; `offset` then advances past the dead
+head only.
+
+**Greedy?** **Yes** — it changes which ranks ΧΕΙΡΩΝ's greedy considers, not the greedy itself.
+
+**Source citation (honest scope).** **Maruyama et al., "Practical Grammar Compression Based on
+Maximal Repeats", Axioms 2020, 9(4), 63; arXiv:1811.04596v2.** Their Theorem 4: *"The sizes of
+grammars generated by RePair are the same if they are generated in the same MR-order."* Their
+experiment: MR-RePair produced **4 492 rules against RePair's 41 661 on rand77.txt (10.8 %)** and
+21 787 against 49 933 on einstein.de.txt (43.6 %). **Hypotheses that do NOT transfer:** their object
+is a straight-line grammar over an alphabet with no tokenizer and no per-symbol cost model, the
+objective is grammar size in symbols, and the counts are occurrence counts. ΧΕΙΡΩΝ's objective is a
+token count under a fixed tokenizer with a per-rule glyph cost. **The direction of the effect had to
+be measured, and it was.**
+
+**Time- or CPU-bound?** **CPU-bound, no wall clock.**
+
+**Measured result — FALSIFIED when forced, marginal as a variant.** Forced
+(`bench/x104/receipts/megaepanalipsis.log`, 15 lanes): **off 9 361 → on 9 374, Δ = +13**, exact
+15/15 — the MR-order transfer **fails** on a token-count objective. As a half-budget sweep variant
+(`bench/x104/receipts/mrvariants.log`, 20 lanes): **off 12 468 → on 12 463, Δ = −2** (`ls-real`
+−1, `json-pkg` −1), 0 worse, but the `on` arm cost **+40 %** ΧΕΙΡΩΝ time. That is a trade, not a
+two-axis win, so it ships **opt-in** via `OMEGA_MEGAEPANALIPSIS=1`, exactly like ΠΑΛΙΝΔΡΟΜΟΣ.
+
+---
+
+## §X106 — ΜΕΤΡΟ-ΠΥΛΗ (ΤΥΠΟΣ under a meter-headroom gate) · the shipped codec of X106
+
+**Design spec.** ΧΕΙΡΩΝ's variant sweep runs `full/<sep>` per candidate separator plus
+`macros-only`, all drawing on **one shared work meter** (`CHIRON_MAX_TOTAL_WORK_UNITS = 64 M`
+units; per-variant grant `share = 64M × budgetMs / Σ budgetMs`). ΜΕΤΡΟ-ΠΥΛΗ adds a second
+dimension — `full-exact/<sep>`, the same separator with `exactAccept: true`, i.e. the macro accept
+test pricing `renderWire` (topological order, fresh glyph assignment, **the string the caller
+receives**) instead of `provisionalWire` — and admits it **only when the meter says there is room**:
+after the standard sweep, if `workLeft > 0.4 × initialWorkBudget`, the exact variants are pushed and
+run; otherwise they are not.
+
+**Central construction / lemma.** There is no new lemma; the construction is a scheduling gate over
+an existing acceptor. What is proved is the *necessity* of the gate, and it is an experimental
+disproof of the ungated form: the eager sweep dimension measures `ls-l-real` 1 670 → 2 126 (**+456**),
+because the extra variant halves every other variant's grant from the one shared meter and the
+starved `full/<sep>` runs create far fewer rules. The gate turns a +453 regression into a −5 gain
+without changing the acceptor.
+
+**Greedy?** **Yes, twice over.** ΧΕΙΡΩΝ's macro loop is greedy on the token bound; `exactAccept`
+makes that greedy hill-climb on the string that ships rather than on a proxy. ΜΕΤΡΟ-ΠΥΛΗ adds no
+search of its own — it decides *whether* to spend the meter on the more expensive acceptor.
+
+**Source citation (honest).** The acceptor is **ΤΥΠΟΣ, X101, this repository** — no external paper
+supplies it, and none is claimed. Its justification is internal and measured: ΜΕΤΑΤΑΞΙΣ measured −44
+tokens from tape relocation alone and ΔΙΑΛΕΚΤΟΣ measured +56..+247 from the letter assignment alone,
+so `provisionalWire` and `renderWire` are different strings with different prices, and a search that
+accepts on one and ships the other optimises the wrong object. The *framing* import is
+**arXiv:1704.05254** (Maneth): *"the effectiveness of pruning depends on the order in which the
+nonterminals are considered"* — here, the order in which the wire is rendered.
+
+**Time- or CPU-bound?** **CPU-bound, no wall clock, reproducibly.** The gate itself is a pure
+function of the meter state, which is a pure function of the input. The expensive part is
+`renderWire` per accepted candidate; that is exactly what the gate budgets for.
+
+**Measured result, both layers, arms interleaved in one process, scored on the SHA-256 of the
+complete message:**
+
+| form | lanes | Δ tokens | exact | 0 worse? |
+|---|---|---|---|---|
+| `exactAccept` forced | 20 | **+9** (−3 node-help, −2 code-ts, +8 ls-l-real, +5 ps-aux-real) | 20/20 | no |
+| eager sweep dimension | 20 | **+453** (ls-l-real 1 670 → 2 126) | 20/20 | no |
+| **ΜΕΤΡΟ-ΠΥΛΗ (meter-gated)** | 20 | **−5** (node-help −3, code-ts −2) | 20/20 | **yes** |
+| ΜΕΤΡΟ-ΠΥΛΗ at the chain | 29 | **0** | 29/29 | **yes** |
+
+Receipts: `bench/x104/receipts/exactaccept.log`, `…/exactaccept-variants.log`,
+`…/chainab.log`.
+
+**Honest statement of what did and did not move.** The ΧΕΙΡΩΝ-layer win is real and does **not**
+propagate: the chain's `node-help` is 862 while ΧΕΙΡΩΝ's is 934, so the downstream gates re-derive
+the answer and absorb it. **The frontier did not move in tokens this turn; it stays at 12 639,
+exact 29/29.** ΜΕΤΡΟ-ΠΥΛΗ ships ON by default because it is weakly token-Pareto-superior at both
+layers and strictly better at the ΧΕΙΡΩΝ layer, and because the only thing that ever made it
+dangerous is precisely what the gate prevents. `OMEGA_NO_EXACT_ACCEPT_VARIANTS=1` restores the X105
+sweep.
+
+**No CPU figure is claimed for it.** The chain A/B's wall-clock pair is confounded — arm A cold, arm
+B warm, and both shared the box with the leaders probe — so the observed −16.5 % is not a CPU
+result and is not reported as one.
+
+### Model-readability of everything shipped in X106 — **downgraded, not declared verified**
+
+No model API exists in this environment, so **no new decode was run this turn.** What is bound to
+evidence:
+
+- ΤΥΠΟΣ and ΜΕΤΡΟ-ΠΥΛΗ add **no operator, no contract clause and no decode rule**. They change
+  which of several equally-legal ΧΕΙΡΩΝ wires is emitted, and the wire language is provably
+  unchanged.
+- `chironDecode` round-trips every emitted message in every receipt quoted above (29/29 exact in
+  `chainab.log`, 20/20 in `exactaccept-variants.log`, 15/15 in `taxexact.log`).
+- The prior-turn evidence that a model *can* decode this wire class from a single chat input with no
+  skills.md and no system prompt stands as recorded: **10 of 10 available LLM-blind decode cases
+  byte-exact** (`bench/x104/llmdecode.mjs`). That evidence does **not** transfer automatically to
+  the wires emitted this turn, and no claim is made that it does.
+
+### The four falsifications of X106, and why each was worth running
+
+| hypothesis | imported result | measurement | verdict |
+|---|---|---|---|
+| ΧΕΙΡΩΝ's candidate score over-counts overlapping occurrences | arXiv:2610.32298 (disjointness/partition) | 41 of 30 204 candidates, Σgap 632 | **real defect, no transfer** |
+| the 400 000-entry enumeration cap truncates by text order | — | 0 of 29 lanes at cap | **falsified** |
+| the tape has second-level grammar headroom | — | gain 0 on 15 of 15 lanes | **falsified — tape is at ΧΕΙΡΩΝ's fixed point** |
+| tie resolution by the emitted-wire price gains tokens | arXiv:2608.19228 (Re-Pair T-NDR) | Δ 0 over 15 lanes, exact 15/15 | **falsified — price-neutral** |

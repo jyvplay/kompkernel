@@ -1,0 +1,47 @@
+lane	arm	tokens	bytes	exact	sha	ms
+vmstat.txt	off	192	354	true	922415a2823c	17
+vmstat.txt	on	192	354	true	922415a2823c	13
+unified-diff.patch	off	479	1074	true	da5ba5c1f636	94
+unified-diff.patch	on	479	1074	true	da5ba5c1f636	182
+df-real.txt	off	158	329	true	8bc9354fd729	19
+df-real.txt	on	158	329	true	8bc9354fd729	27
+du-real.txt	off	346	674	true	2aa246214ffe	23
+du-real.txt	on	346	674	true	2aa246214ffe	19
+node-help.txt	off	934	4010	true	8fe846981f10	283
+node-help.txt	on	931	4016	true	cfa8d4d33c2e	529
+findmnt.txt	off	518	2230	true	a6ad643cf662	329
+findmnt.txt	on	518	2230	true	a6ad643cf662	532
+email-thread.txt	off	558	1753	true	5cd8c58a16d3	74
+email-thread.txt	on	558	1753	true	5cd8c58a16d3	116
+llm-answer.md	off	733	2542	true	7c5c7f1929a6	126
+llm-answer.md	on	733	2542	true	7c5c7f1929a6	139
+markdown-table.md	off	228	368	true	13391d90d858	42
+markdown-table.md	on	228	368	true	13391d90d858	72
+psql-output.txt	off	406	644	true	49923c9baafa	210
+psql-output.txt	on	406	644	true	49923c9baafa	266
+prices.csv	off	288	389	true	a32cca953815	35
+prices.csv	on	288	389	true	a32cca953815	57
+ls-real.txt	off	490	1014	true	6d1ced001817	328
+ls-real.txt	on	490	1014	true	6d1ced001817	435
+code-ts.txt	off	1138	3804	true	9bd7d980270d	682
+code-ts.txt	on	1136	3800	true	3f0c6bb33ec8	1253
+dpkg-l.txt	off	761	3271	true	d6c96240f8d7	356
+dpkg-l.txt	on	761	3271	true	d6c96240f8d7	664
+ps-real.txt	off	485	914	true	7f3bd21b5aad	277
+ps-real.txt	on	485	914	true	7f3bd21b5aad	423
+kubectl-get-pods.txt	off	475	828	true	bb7c267622d7	250
+kubectl-get-pods.txt	on	475	828	true	bb7c267622d7	354
+metrics.tsv	off	328	456	true	1c4fe606404a	40
+metrics.tsv	on	328	456	true	1c4fe606404a	75
+ps-aux-real.txt	off	1163	2340	true	3da11c73fbff	709
+ps-aux-real.txt	on	1163	2340	true	3da11c73fbff	1469
+apt-real.txt	off	1118	1785	true	091a624dc17b	410
+apt-real.txt	on	1118	1785	true	091a624dc17b	767
+ls-l-real.txt	off	1670	2748	true	22018516cc93	1435
+ls-l-real.txt	on	1670	2748	true	22018516cc93	1128
+TOTAL		off 12468	on 12463	D -5	exact 20/20 vs 20/20	ms 5739/8520
+e  ms 709/1469
+apt-real.txt           off  1118  on  1118  D    0  rules 67/67  exact true/true  shaSame=true  ms 410/767
+ls-l-real.txt          off  1670  on  1670  D    0  rules 137/137  exact true/true  shaSame=true  ms 1435/1128
+
+20 lanes: off 12468 -> on 12463   DELTA -5   exact off 20/20 on 20/20   shaChanged 2/20   ms off 5739 on 8520 (48.5%)

@@ -1,0 +1,65 @@
+node:fs:440
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open 'bench/holdout/kb-article.txt'
+    at Module.readFileSync (node:fs:440:20)
+    at file:///home/user/kompkernel/bench/x104/orothesia29.mjs:28405:23
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'bench/holdout/kb-article.txt'
+}
+
+Node.js v22.22.3
+base	lsblk.txt	60	true	synkrisis	4250
+base	kb-article.txt	622	true	synkrisis	6744
+base	uptime-w.txt	80	true	synkrisis	5434
+base	free-m.txt	76	true	synkrisis	5660
+base	vmstat.txt	149	true	synkrisis	5157
+base	unified-diff.patch	419	true	synkrisis	6915
+base	df-h.txt	171	true	akolouthia2	5664
+base	df-real.txt	126	true	synkrisis	12985
+base	du-real.txt	272	true	synkrisis	12330
+base	node-help.txt	862	true	synkrisis	20252
+base	findmnt.txt	444	true	synkrisis	19722
+base	df-h.txt	108	true	synkrisis	13762
+base	email-thread.txt	488	true	synkrisis	20166
+base	llm-answer.md	674	true	synkrisis	27211
+base	markdown-table.md	176	true	synkrisis	13271
+base	psql-output.txt	244	true	metron	17661
+base	prices.csv	133	true	diastema	14854
+base	cue-sheet.md	163	true	metron	17864
+base	ps-ef.txt	315	true	synkrisis	23434
+base	ls-real.txt	433	true	synkrisis	29868
+base	json-pkg.txt	681	true	synkrisis	36064
+base	code-ts.txt	969	true	synkrisis	65475
+base	dpkg-l.txt	673	true	synkrisis	49106
+base	ps-real.txt	397	true	synkrisis	34595
+base	kubectl-get-pods.txt	326	true	akolouthia2	45985
+base	metrics.tsv	210	true	akolouthia2	36715
+base	ps-aux-real.txt	1042	true	synkrisis	129258
+base	apt-real.txt	850	true	synkrisis	216105
+base	ls-l-real.txt	1476	true	synkrisis	897602
+base    TOTAL  12639  exact 29/29  ms 1794109
+plus	lsblk.txt	60	true	synkrisis	7313
+plus	kb-article.txt	622	true	synkrisis	12798
+plus	uptime-w.txt	80	true	synkrisis	9480
+plus	free-m.txt	76	true	synkrisis	9237
+plus	vmstat.txt	149	true	synkrisis	8746
+plus	unified-diff.patch	419	true	synkrisis	11650
+plus	df-h.txt	171	true	akolouthia2	9726
+plus	df-real.txt	126	true	synkrisis	19413
+plus	du-real.txt	272	true	synkrisis	19159
+plus	node-help.txt	862	true	synkrisis	34448
+plus	findmnt.txt	444	true	synkrisis	20686
+plus	df-h.txt	108	true	synkrisis	20664
+plus	email-thread.txt	488	true	synkrisis	39769
+plus	llm-answer.md	674	true	synkrisis	52958
+plus	markdown-table.md	176	true	synkrisis	26276
+plus	psql-output.txt	244	true	metron	33862
+plus	prices.csv	133	true	diastema	29226
+plus	cue-sheet.md	163	true	metron	36415

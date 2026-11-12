@@ -1,0 +1,11 @@
+{
+ "lanes": 20,
+ "off": 12468,
+ "on": 12477,
+ "delta": 9,
+ "exactOff": 20,
+ "exactOn": 20,
+ "msOff": 12138,
+ "msOn": 20270,
+ "shaChanged": 8
+}

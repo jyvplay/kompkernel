@@ -748,6 +748,31 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
   if (!metataxisDisabled()) {
     try { admit('ΜΕΤΑΤΑΞΙΣ', metataxisEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
   }
+  // X106 — ΟΡΟΘΕΣΙΑ IS REMOVED FROM THE CHAIN, AND THIS IS WHY.
+  //
+  // X105 built ΟΡΟΘΕΣΙΑ to relocate ΧΕΙΡΩΝ's tape rules by steepest descent over
+  // the complete neighbourhood, priced by a precomputed pairwise junction model
+  // (bench/x104/junction.mjs: identity exact 850 / model 849, worst error 2
+  // tokens, mean absolute error 0.16, >=32x per-probe speedup).  The model was
+  // validated and the search was sound, and the A/B still came out Δ=0:
+  //
+  //   bench/x104/receipts/orothesia29.log   base 12 639, exact 29/29
+  //   bench/x104/receipts/orothesia-big.log plus  7 372 over the 11 biggest lanes, Δ 0
+  //
+  // and on ls-l-real the arm produced a DIFFERENT wire at the SAME price
+  // (sha 173cbbfb3232 -> a9031c286056, both 1 476 tokens), so it is not a no-op:
+  // every improving relocation it finds is exactly price-neutral.  The
+  // relocation move set is at a local optimum, and ΜΕΤΑΤΑΞΙΣ already reaches it.
+  //
+  // Meanwhile the interleaved A/B measured its cost: base 224 238 ms vs plus
+  // 392 100 ms over 29 lanes, +74.9 %.  A codec that changes no token and costs
+  // three quarters of the encoder's time is not a Pareto improvement, so it is
+  // not shipped in the chain.  The module, its junction model and both receipts
+  // stay in the tree as a measured falsification; OMEGA_NO_OROTHESIA=1 still
+  // disables it if anyone wants to re-run the arm.
+  //
+  // (Removing it also removes the reason X105 had to add a live-read env gate
+  // here: the arm is gone, so no gate is needed.)
   // X99 — ΣΥΝΔΥΑΣΜΟΣ.  Runs LAST, after ΜΕΤΑΤΑΞΙΣ, and alternates that codec's
   // arbitrary-rank relocation with a re-spelling of each rule's value as an
   // interleaving of literal runs and references to STRICTLY EARLIER rules.  The

@@ -1,0 +1,28 @@
+OPS TABLE	lsblk.txt	60	60	61	-1	true	synkrisis
+PROSE	kb-article.txt	656	621	608	13	true	synkrisis
+OPS TABLE	uptime-w.txt	80	80	70	10	true	synkrisis
+OPS TABLE	free-m.txt	76	76	76	0	true	synkrisis
+OPS TABLE	vmstat.txt	229	148	113	35	true	synkrisis
+CODE / MARKUP	unified-diff.patch	578	415	324	91	true	synkrisis
+OPS TABLE	df-h.txt	570	170	129	41	true	akolouthia2
+OPS TABLE	df-real.txt	158	125	96	29	true	synkrisis
+OPS LISTING	du-real.txt	458	269	219	50	true	synkrisis
+PROSE	node-help.txt	1099	860	852	8	true	synkrisis
+OPS LISTING	findmnt.txt	787	438	335	103	true	synkrisis
+OPS TABLE	df-h.txt	140	107	84	23	true	synkrisis
+PROSE	email-thread.txt	629	487	443	44	true	synkrisis
+PROSE	llm-answer.md	733	671	626	45	true	synkrisis
+OPS TABLE	markdown-table.md	330	174	133	41	true	synkrisis
+OPS TABLE	psql-output.txt	675	242	166	76	true	metron
+DATA	prices.csv	582	133	110	23	true	diastema
+DATA	cue-sheet.md	513	101	99	2	true	stichomythia
+OPS LISTING	ps-ef.txt	1144	309	250	59	true	synkrisis
+OPS LISTING	ls-real.txt	1034	431	328	103	true	synkrisis
+CODE / MARKUP	json-pkg.txt	1152	670	592	78	true	synkrisis
+CODE / MARKUP	code-ts.txt	1422	958	812	146	true	synkrisis
+OPS LISTING	dpkg-l.txt	1000	667	592	75	true	synkrisis
+OPS LISTING	ps-real.txt	1106	391	320	71	true	synkrisis
+OPS TABLE	kubectl-get-pods.txt	1006	322	214	108	true	akolouthia2
+OPS TABLE	metrics.tsv	811	208	130	78	true	akolouthia2
+OPS LISTING	ps-aux-real.txt	3054	1030	743	287	true	synkrisis
+OPS LISTING	apt-real.txt	2739	835	690	145	true	synkrisis
