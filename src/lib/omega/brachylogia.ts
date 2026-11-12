@@ -187,8 +187,12 @@ export const BRACHYLOGIA_RULES: readonly BrachylogiaRule[] = [
   { re: /Before ¶ a new foreign letter labels text up to the next new letter\. After ¶ expand all; print result only\./g,
     rep: 'Before ¶ a new Cyrillic letter names text to the next new letter or ¶. After ¶ expand; print only.',
     requires: ['¶', 'Cyrillic', 'new', 'letter', 'next', 'expand', 'print', 'only'] },
-  { // 23 -> 17; "at the same position" KEPT: ⁺ is a column marker and dropping the
+  { // X108 CORRECTION — this comment claimed "23 -> 17".  The replacement string
+    // below, measured with the real o200k_base tokenizer, is 19 tokens, not 17
+    // (bench/x108/t2.mjs).  The rule is kept and the claim is corrected rather than
+    // repeated.  "at the same position" KEPT: ⁺ is a column marker and dropping the
     // column reference would be ambiguous in a table with several numeric columns.
+    // ΤΑΧΥΓΡΑΦΊΑ (X108) reaches 16 on the same sentence by also dropping the articles.
     re: /^⁺ = the number at the same position in the line above, plus the change from the line two above\.$/gm,
     rep: '⁺ = the number at the same position above, plus its change from two lines above.',
     requires: ['⁺', '=', 'same', 'position', 'above', 'change', 'two'] },

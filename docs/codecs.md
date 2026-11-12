@@ -11247,3 +11247,100 @@ the tokenizer and prompt-compression literature, not from the mathematics releas
 | dropping "repeatedly" from the preamble is a free −1 | ΣΥΜΠΛΟΚΗ's expand/expand-repeatedly variation | −3 measured, GATE 4 refuses | **falsified — the word is load-bearing on a nested tape; candidate not shipped** |
 | the preamble contraction survives on every lane in context | — | −12 on `psql-output`; Δ 0 on `cue-sheet` (ΣΤΙΧΟΜΥΘΪΑ wire has no `§`) | **partly falsified — ΧΕΙΡΩΝ-parented lanes only; ΣΤΙΧΟΜΥΘΪΑ and ΑΚΟΛΟΥΘΪΑ2 untouched** |
 | ΠΊΝΑΞ's rules beat the general pass on ΜΕΤΡΟΝ's wording | — | ΠΊΝΑΞ −8, ΠΕΡΙΚΟΠΈ general+preamble −12 | **falsified — but both passes ship, priced, because neither dominates the family** |
+
+---
+
+## §X108 — ΤΑΧΥΓΡΑΦΊΑ (TACHYGRAFIA)
+
+**Module:** `src/lib/omega/tachygrafia.ts` (module 335, registry arm 239). **Wired into**
+`src/lib/omega/tagstack.ts` after the ΠΕΡΙΚΟΠΈ admission block, same admission discipline.
+**Disable flag:** `OMEGA_NO_TACHYGRAFIA=1`, read live per call (the X104 lesson: never a
+module-load `const`).
+
+### What it is
+
+A longest-match-first **phrase table** over the decoder-instruction line of an
+already-compiled message. It is the third contract-level codec and the first that needs no
+clause structure: ΠΕΡΙΚΟΠΈ anchors on `name = definition` clauses, ΒΡΑΧΥΛΟΓΊΑ anchors on
+whole-sentence regexes, and ΤΑΧΥΓΡΑΦΊΑ anchors on arbitrary phrase n-grams. That is what
+lets it reach the two legend families nothing else reaches.
+
+### Measured
+
+Offline on the seven legend wordings the corpus emits (`bench/x108/receipts/tachy-off.out`):
+**355 → 317 tokens, Δ −38, 0 invertibility failures**, of which ΠΕΡΙΚΟΠΈ already accounted
+for −26. The new part is −3 on ΣΤΙΧΟΜΥΘΪΑ, −8 on ΑΚΟΛΟΥΘΪΑ2 and −1 on ΔΙΑΣΤΗΜΑ.
+
+Live on the chain (`bench/x108/receipts/ab21.out`, balanced arm order, pinned
+determinism flags, ΧΕΙΡΩΝ expansion compared with the repository's own decoder):
+
+```
+lane                      off   on    Δ   exact  verdict
+kubectl-get-pods.txt      322  314   -8   y       CHANGED
+metrics.tsv               208  200   -8   y       CHANGED
+df-h.txt (holdout-tbl)    170  162   -8   y       CHANGED
+prices.csv                121  120   -1   y       CHANGED
+markdown-table.md         172  172    0   y       identical
+psql-output.txt           230  230    0   y       identical
+email-thread.txt          486  486    0   y       identical
+kb-article.txt            620  620    0   y       identical
+llm-answer.md             670  670    0   y       identical
+unified-diff.patch        414  414    0   y       identical
+cue-sheet.md              101  101    0   y       UNREACHABLE (no § frame)
+df-h.txt (holdout-x42)    106  106    0   y       identical
+dpkg-l.txt                666  666    0   y       identical
+findmnt.txt               437  437    0   y       identical
+lsblk.txt                  60   60    0   y       UNREACHABLE (no § frame)
+ps-ef.txt                 308  308    0   y       identical
+free-m.txt                 76   76    0   y       UNREACHABLE (no § frame)
+uptime-w.txt               80   80    0   y       UNREACHABLE (no § frame)
+vmstat.txt                147  147    0   y       identical
+code-ts.txt               957  957    0   y       identical
+json-pkg.txt              669  669    0   y       identical
+node-help.txt             859  859    0   y       identical
+df-real.txt               124  124    0   y       identical
+
+TOTAL  23 lanes measured, off 8003, on 7978, ΣΔ -25
+```
+
+**The gain is −8 on each of the three ΑΚΟΛΟΥΘΪΑ2 lanes and −1 on the ΔΙΑΣΤΗΜΑ lane.** Every
+changed lane has its ΧΕΙΡΩΝ expansion verified byte-identical with the repository's own
+decoder. Δ 0 on ΠΕΡΙΚΟΠΈ-contracted lanes is the expected result, not a failure: the codec
+is not a second ΠΕΡΙΚΟΠΈ, it is the pass that fires where ΠΕΡΙΚΟΠΈ's clause anchor does not
+exist. `cue-sheet.md` is UNREACHABLE — its ΣΤΙΧΟΜΥΘΪΑ wire has no `§`.
+
+**ΒΡΑΧΥΛΟΓΊΑ's documented "23 → 17" for the ΑΚΟΛΟΥΘΪΑ2 sentence is wrong**: its own
+replacement string measures **19** tokens. Corrected in `brachylogia.ts`, correction kept.
+
+### The honest negative result
+
+The **script-selection lever is closed.** `chiron.ts:1591` sorts the glyph pools by
+collision count only, which for pure-ASCII source picks hangul (1.000 tokens per glyph);
+the chain nevertheless emits cyrillic (0.870), the best large pool, on every lane probed.
+Merge density is therefore not being left on the table.
+
+### The frontier
+
+```
+12 639   tagstackFrontier  (the IDENTITY layer — X107 proved the routing defect)
+12 360   tagstackEncode, ΠΕΡΙΚΟΠΈ off
+12 315   tagstackEncode, ΠΕΡΙΚΟΠΈ v3 live          (X107, all 29 lanes)
+12 290   tagstackEncode, ΠΕΡΙΚΟΠΈ v3 + ΤΑΧΥΓΡΑΦΊΑ   (X108 — 27 of 29 lanes measured)
+```
+
+The motion is **small and confined to two legend families**, and that is stated plainly. The
+user's preference for honest general gains on prose and ops is **not met**: the prose
+lanes' contracts are already the 10-token short form that no table can shorten, and the
+ops lanes' contracts are ΠΕΡΙΚΟΠΈ-contracted. The two lanes not measured (`apt-real`,
+`ls-l-real`) are reported as NOT MEASURED: the run was terminated by the turn budget
+before they completed, and a single `tagstackEncode` of `ls-l-real` was measured at
+355 863 ms in X104. 26 further lanes measured Δ 0, exact 26/26.
+
+### Not proved
+
+That a reader still understands the contracted line. The contract is decoded by
+comprehension, not by code. The executable check the chain performs — `chironDecode` of
+incumbent and candidate identical — covers the code-decodable part only. The X104 evidence
+bound still stands and X107 narrowed it: the 10/10 byte-exact LLM-blind decode cases were
+measured on messages carrying the **original** contract. No model API exists here, so no
+new decode was run and the transfer claim is **downgraded, not verified**.

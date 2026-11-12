@@ -1,0 +1,9 @@
+
+##### bench/holdout-tbl/kubectl-get-pods.txt  messageTokens=322  § at 96 of 880
+  chironDecode(wire) -> len 2756  threw=
+  tachygrafiaRewrite: edits=1 before=23 after=19
+  cand § at 81  candExp=len 2756  tok=318  < 322 ? true  expEqual=true
+
+##### bench/holdout-tbl/psql-output.txt  messageTokens=230  § at 217 of 616
+  chironDecode(wire) -> len 948  threw=
+  tachygrafiaRewrite: edits=0 before=0 after=0

@@ -1,0 +1,6 @@
+lane                      off   on    Δ   exact  chironSame  verdict
+kubectl-get-pods.txt      322  322    0   y       identical
+metrics.tsv               208  208    0   y       identical
+psql-output.txt           230  230    0   y       identical
+
+TOTAL off 760  on 760  ΣΔ 0   better 0  same 3  worse 0  unreachable 0  exact true  chironSame true

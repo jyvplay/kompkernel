@@ -1,0 +1,14 @@
+X108 — live A/B of ΤΑΧΥΓΡΑΦΊΑ on the six slow lanes.  Pinned: OMEGA_DET=1 OMEGA_NO_MEMO=1
+OMEGA_ENGRAM=0 OMEGA_OURA_MEMO=0 OMEGA_NO_OROTHESIA=1.  RUN TERMINATED BY THE TURN
+BUDGET: apt-real and ls-l-real had not completed when the turn ended and are reported as
+NOT MEASURED, not as Δ 0.
+
+lane                      off   on    Δ   exact  verdict
+ps-real.txt               390  390    0   y       identical
+du-real.txt               268  268    0   y       identical
+ls-real.txt               430  430    0   y       identical
+ps-aux-real.txt          1029 1029    0   y       identical
+apt-real.txt               —    —     —   —       NOT COMPLETED (run terminated by turn budget)
+ls-l-real.txt              —    —     —   —       NOT COMPLETED (run terminated by turn budget)
+
+4 lanes measured, ΣΔ 0, exact 4/4, ΧΕΙΡΩΝ expansion identical.

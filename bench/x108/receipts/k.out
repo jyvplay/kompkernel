@@ -1,0 +1,12 @@
+
+##### bench/holdout-tbl/kubectl-get-pods.txt  total 322
+  INSTRUCTION len=95 legend=true steps=2
+  "⁺ = the number at the same position in the line above, plus the change from the line two above."
+  INSTRUCTION len=174 legend=true steps=4
+  "Every new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result."
+
+##### bench/holdout-x40/metrics.tsv  total 208
+  INSTRUCTION len=95 legend=true steps=2
+  "⁺ = the number at the same position in the line above, plus the change from the line two above."
+  INSTRUCTION len=174 legend=true steps=4
+  "Every new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result."
