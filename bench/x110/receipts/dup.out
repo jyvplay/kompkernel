@@ -1,0 +1,12 @@
+findmnt.txt            F=  444 parentMs= 66940 dupMs= 48634  synkrisis=444tok/15832ms  kanon=0tok/2474ms  akolouthia2=DUP(kanon,550ms)  apographe=DUP(synkrisis,15409ms)  diastema=DUP(synkrisis,32675ms)
+psql-output.txt        F=  244 parentMs= 54111 dupMs= 10635  synkrisis=289tok/10551ms  kanon=0tok/88ms  akolouthia2=DUP(kanon,158ms)  apographe=DUP(synkrisis,10477ms)  diastema=320tok/32837ms
+df-real.txt            F=  126 parentMs= 40702 dupMs= 28834  synkrisis=126tok/11031ms  kanon=0tok/837ms  akolouthia2=DUP(kanon,667ms)  apographe=DUP(synkrisis,9896ms)  diastema=DUP(synkrisis,18271ms)
+df-h.txt               F=  108 parentMs= 42197 dupMs= 28394  synkrisis=108tok/12863ms  kanon=0tok/940ms  akolouthia2=DUP(kanon,852ms)  apographe=DUP(synkrisis,12847ms)  diastema=DUP(synkrisis,14695ms)
+prices.csv             F=  133 parentMs= 65158 dupMs=  5722  synkrisis=208tok/6030ms  kanon=0tok/58ms  akolouthia2=DUP(kanon,212ms)  apographe=DUP(synkrisis,5510ms)  diastema=133tok/53348ms
+metrics.tsv            F=  210 parentMs=5229296 dupMs=5205496  synkrisis=237tok/23746ms  kanon=0tok/54ms  akolouthia2=DUP(kanon,703ms)  apographe=DUP(synkrisis,23107ms)  diastema=DUP(synkrisis,5181686ms)
+markdown-table.md      F=  176 parentMs= 33516 dupMs= 26183  synkrisis=176tok/6718ms  kanon=0tok/615ms  akolouthia2=DUP(kanon,187ms)  apographe=DUP(synkrisis,6527ms)  diastema=DUP(synkrisis,19469ms)
+vmstat.txt             F=  149 parentMs= 28112 dupMs= 21875  synkrisis=149tok/6056ms  kanon=0tok/181ms  akolouthia2=DUP(kanon,87ms)  apographe=DUP(synkrisis,7621ms)  diastema=DUP(synkrisis,14167ms)
+du-real.txt            F=  272 parentMs= 33688 dupMs= 21392  synkrisis=272tok/11670ms  kanon=0tok/626ms  akolouthia2=DUP(kanon,570ms)  apographe=DUP(synkrisis,10156ms)  diastema=DUP(synkrisis,10666ms)
+email-thread.txt       F=  488 parentMs= 59162 dupMs= 40329  synkrisis=488tok/17651ms  kanon=0tok/1182ms  akolouthia2=DUP(kanon,572ms)  apographe=DUP(synkrisis,17495ms)  diastema=DUP(synkrisis,22262ms)
+
+TOTAL parent ms 5652882   duplicate ms 5437494   (96.2 %)
