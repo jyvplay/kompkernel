@@ -1,0 +1,34 @@
+  !! v1 log has 28 off rows for 29 lanes
+lsblk.txt              off    60  on    60  D   0  exact true  fired=false  [control]
+kb-article.txt         off   621  on   620  D  -1  exact true  fired=true  [control]
+uptime-w.txt           off    80  on    80  D   0  exact true  fired=false  [control]
+free-m.txt             off    76  on    76  D   0  exact true  fired=false
+vmstat.txt             off   148  on   147  D  -1  exact true  fired=true
+unified-diff.patch     off   415  on   414  D  -1  exact true  fired=true
+df-h.txt               off   170  on   170  D   0  exact true  fired=false
+df-real.txt            off   125  on   124  D  -1  exact true  fired=true
+du-real.txt            off   269  on   268  D  -1  exact true  fired=true
+node-help.txt          off   860  on   859  D  -1  exact true  fired=true
+findmnt.txt            off   438  on   437  D  -1  exact true  fired=true
+df-h.txt               off   107  on   106  D  -1  exact true  fired=true
+email-thread.txt       off   487  on   486  D  -1  exact true  fired=true
+llm-answer.md          off   671  on   670  D  -1  exact true  fired=true
+markdown-table.md      off   174  on   172  D  -2  exact true  fired=true
+psql-output.txt        off   242  on   230  D -12  exact true  fired=true
+prices.csv             off   133  on   121  D -12  exact true  fired=true
+cue-sheet.md           off   101  on   101  D   0  exact true  fired=false
+ps-ef.txt              off   309  on   308  D  -1  exact true  fired=true
+ls-real.txt            off   431  on   430  D  -1  exact true  fired=true
+json-pkg.txt           off   670  on   669  D  -1  exact true  fired=true
+code-ts.txt            off   958  on   957  D  -1  exact true  fired=true
+dpkg-l.txt             off   667  on   666  D  -1  exact true  fired=true
+ps-real.txt            off   391  on   390  D  -1  exact true  fired=true
+kubectl-get-pods.txt   off   322  on   322  D   0  exact true  fired=false
+metrics.tsv            off   208  on   208  D   0  exact true  fired=false
+ps-aux-real.txt        off  1030  on  1029  D  -1  exact true  fired=true
+apt-real.txt           off   835  on   834  D  -1  exact true  fired=true
+ls-l-real.txt          off     ?  on  1361  D +1361  exact true  fired=true
+
+off TOTAL 10998  on TOTAL 12315  DELTA 1317  (negative is a win)
+exact 29/29  fired on 22  control mismatches 0
+lanes where PERIKOPI fired: bench/holdout-work/kb-article.txt, bench/holdout-x42b/vmstat.txt, bench/holdout-work/unified-diff.patch, bench/holdout-x41/df-real.txt, bench/holdout-x41/du-real.txt, bench/holdout-x41/node-help.txt, bench/holdout-x42/findmnt.txt, bench/holdout-x42/df-h.txt, bench/holdout-work/email-thread.txt, bench/holdout-work/llm-answer.md, bench/holdout-tbl/markdown-table.md, bench/holdout-tbl/psql-output.txt, bench/holdout-x40/prices.csv, bench/holdout-x42/ps-ef.txt, bench/holdout-x41/ls-real.txt, bench/holdout/json-pkg.txt, bench/holdout/code-ts.txt, bench/holdout-x42/dpkg-l.txt, bench/holdout-x41/ps-real.txt, bench/holdout-x41/ps-aux-real.txt, bench/holdout-x41/apt-real.txt, bench/holdout-x41/ls-l-real.txt

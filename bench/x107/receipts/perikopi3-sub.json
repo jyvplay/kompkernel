@@ -1,0 +1,71 @@
+{
+ "onRows": [
+  {
+   "path": "bench/holdout-x42/lsblk.txt",
+   "tokens": 60,
+   "exact": true,
+   "ms": 12746,
+   "fired": false
+  },
+  {
+   "path": "bench/holdout-work/kb-article.txt",
+   "tokens": 620,
+   "exact": true,
+   "ms": 19100,
+   "fired": true
+  },
+  {
+   "path": "bench/holdout-x42b/uptime-w.txt",
+   "tokens": 80,
+   "exact": true,
+   "ms": 15033,
+   "fired": false
+  },
+  {
+   "path": "bench/holdout-tbl/psql-output.txt",
+   "tokens": 230,
+   "exact": true,
+   "ms": 49548,
+   "fired": true
+  },
+  {
+   "path": "bench/holdout-x40/cue-sheet.md",
+   "tokens": 101,
+   "exact": true,
+   "ms": 48305,
+   "fired": false
+  },
+  {
+   "path": "bench/holdout-x40/prices.csv",
+   "tokens": 121,
+   "exact": true,
+   "ms": 38352,
+   "fired": true
+  },
+  {
+   "path": "bench/holdout-tbl/markdown-table.md",
+   "tokens": 172,
+   "exact": true,
+   "ms": 40234,
+   "fired": true
+  },
+  {
+   "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+   "tokens": 322,
+   "exact": true,
+   "ms": 136205,
+   "fired": false
+  },
+  {
+   "path": "bench/holdout-x40/metrics.tsv",
+   "tokens": 208,
+   "exact": true,
+   "ms": 98735,
+   "fired": false
+  }
+ ],
+ "offTotal": 1941,
+ "onTotal": 1914,
+ "delta": -27,
+ "controlFail": 0
+}

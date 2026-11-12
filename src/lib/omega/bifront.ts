@@ -15,6 +15,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { synkrisisEncode, type SynkrisisResult } from './synkrisis';
 
 export const BIFRONT_MAX_CHARS = 50_000;
@@ -160,7 +161,7 @@ export function bifrontEncode(
   text: string,
   enc: EncodingName = 'o200k_base',
 ): BifrontResult {
-  const t0 = Date.now();
+  const t0 = now();
   let parent: SynkrisisResult;
   try {
     parent = synkrisisEncode(text, enc);

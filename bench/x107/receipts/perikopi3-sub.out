@@ -1,0 +1,13 @@
+lsblk.txt              off    60  on    60  D   0  exact true  fired=false  [control]
+kb-article.txt         off   621  on   620  D  -1  exact true  fired=true  [control]
+uptime-w.txt           off    80  on    80  D   0  exact true  fired=false  [control]
+psql-output.txt        off   242  on   230  D -12  exact true  fired=true
+cue-sheet.md           off   101  on   101  D   0  exact true  fired=false
+prices.csv             off   133  on   121  D -12  exact true  fired=true
+markdown-table.md      off   174  on   172  D  -2  exact true  fired=true
+kubectl-get-pods.txt   off   322  on   322  D   0  exact true  fired=false
+metrics.tsv            off   208  on   208  D   0  exact true  fired=false
+
+off TOTAL 1941  on TOTAL 1914  DELTA -27  (negative is a win)
+exact 9/9  fired on 4  control mismatches 0
+lanes where PERIKOPI fired: kb-article.txt, psql-output.txt, prices.csv, markdown-table.md

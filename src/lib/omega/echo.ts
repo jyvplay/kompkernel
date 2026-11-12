@@ -87,6 +87,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { chironDecode, chironEncode, CHIRON_START } from './chiron';
 import { tachysEncode, tachysDecode } from './tachys';
 import { hydraDecode, hydraEncode } from './hydra';
@@ -287,7 +288,7 @@ function echoQuoteEncode(text: string, enc: EncodingName): { wire: string; decod
 export interface EchoOptions { budgetMs?: number; }
 
 export function echoEncode(text: string, enc: EncodingName = 'o200k_base', opts: EchoOptions = {}): EchoResult {
-  const t0 = Date.now();
+  const t0 = now();
   const inTokens = countTokens(text, enc);
   const budgetMs = opts.budgetMs ?? 26000;
 
@@ -307,7 +308,7 @@ export function echoEncode(text: string, enc: EncodingName = 'o200k_base', opts:
   } catch { /* */ }
 
   // 2. Glossia
-  if (Date.now() - t0 < budgetMs - 800) {
+  if (now() - t0 < budgetMs - 800) {
     try {
       const r: any = glossiaEncode(text, enc);
       const M = r.messageTokens as number;
@@ -318,7 +319,7 @@ export function echoEncode(text: string, enc: EncodingName = 'o200k_base', opts:
   }
 
   // 3. Hydra
-  if (Date.now() - t0 < budgetMs - 900) {
+  if (now() - t0 < budgetMs - 900) {
     try {
       const r: any = hydraEncode(text, enc);
       const M = r.messageTokens as number;
@@ -329,7 +330,7 @@ export function echoEncode(text: string, enc: EncodingName = 'o200k_base', opts:
   }
 
   // 4. Eidos
-  if (Date.now() - t0 < budgetMs - 900) {
+  if (now() - t0 < budgetMs - 900) {
     try {
       const r: any = eidosEncode(text, enc);
       const M = r.messageTokens as number;
@@ -340,7 +341,7 @@ export function echoEncode(text: string, enc: EncodingName = 'o200k_base', opts:
   }
 
   // 5. Aion (hydra-on-delta)
-  if (Date.now() - t0 < budgetMs - 1000 && text.length >= 500) {
+  if (now() - t0 < budgetMs - 1000 && text.length >= 500) {
     try {
       const r: any = aionEncode(text, enc);
       const M = r.messageTokens as number;
@@ -352,7 +353,7 @@ export function echoEncode(text: string, enc: EncodingName = 'o200k_base', opts:
 
   // 6. ECHO-QUOTE
   let echoQuoted: ReturnType<typeof echoQuoteEncode> = null;
-  if (Date.now() - t0 < budgetMs - 700 && text.length >= 80 && text.length <= 24000 && text.includes('>')) {
+  if (now() - t0 < budgetMs - 700 && text.length >= 80 && text.length <= 24000 && text.includes('>')) {
     try { echoQuoted = echoQuoteEncode(text, enc); } catch { echoQuoted = null; }
     if (echoQuoted && echoQuoted.decoded === text) {
       const prompt = echoQuoted.wire + '\n' + ECHO_CONTRACT;

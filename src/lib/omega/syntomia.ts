@@ -89,6 +89,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import {
   CHIRON_START, CHIRON_SEP, CHIRON_REP, CHIRON_LIST, CHIRON_SCRIPTS,
   chironDecode, chironOpsUsed, chironParseTape, chironInScript,
@@ -441,7 +442,7 @@ export function syntomiaSearch(
   enc: EncodingName,
   opts: { maxRules?: number; topK?: number; budgetMs?: number; scriptName?: string } = {},
 ): OwnSearchResult | null {
-  const t0 = Date.now();
+  const t0 = now();
   const maxRules = opts.maxRules ?? 96;
   const topK = opts.topK ?? 110;
   const budgetMs = opts.budgetMs ?? 2500;
@@ -456,7 +457,7 @@ export function syntomiaSearch(
   const rules: Array<{ g: string; s: string }> = [];
 
   for (let r = 0; r < maxRules; r++) {
-    if (Date.now() - t0 > budgetMs) break;
+    if (now() - t0 > budgetMs) break;
     const g = pool[r];
     if (!g) break;
     const cands = [...maximalRepeats(body).entries()]
@@ -525,7 +526,7 @@ export function syntomiaEncode(
   enc: EncodingName = 'o200k_base',
   options: SyntomiaOptions = {},
 ): SyntomiaResult {
-  const t0 = Date.now();
+  const t0 = now();
   const T = (s: string) => countTokens(s, enc);
   const inTokens = T(text);
   const budgetMs = options.budgetMs ?? 2500;

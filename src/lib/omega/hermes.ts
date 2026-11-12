@@ -186,6 +186,7 @@
  * =============================================================================
  */
 import { countTokens, tokenStrings, type EncodingName } from './bpe';
+import { now } from './clock';
 
 export const HERMES_START = '∀'; // U+2200 FOR ALL — measured 1 o200k token
 export const HERMES_SEP = '⇒'; // U+21D2 RIGHTWARDS DOUBLE ARROW — 1 token
@@ -596,7 +597,7 @@ function induceGrammar(
   budgetMs: number,
   enc: EncodingName,
 ): { rules: Rule[]; body: string; tokens: number } {
-  const t0 = Date.now();
+  const t0 = now();
   let body = seedBody;
   const rules = seedRules.map(r => ({ ...r }));
   const assigned = new Set(rules.map(r => r.glyph));
@@ -606,7 +607,7 @@ function induceGrammar(
   for (let cycle = 0; cycle < CYCLES; cycle++) {
     // ---- admission: mine, rank, verify, commit ----
     let stalled = false;
-    while (!stalled && rules.length < MAX_RULES && Date.now() - t0 < budgetMs) {
+    while (!stalled && rules.length < MAX_RULES && now() - t0 < budgetMs) {
       const counts = enumerateTokenSpans([...rules.map(r => r.text), body], LMAX_TOKENS, enc);
       let cands = [...counts.entries()]
         .filter(([phrase, c]) => c >= 2 && !phraseForbidden(ctx, assigned, phrase))
@@ -624,7 +625,7 @@ function induceGrammar(
         .slice(0, VERIFY_PER_ROUND);
       let applied = false;
       for (const { phrase } of cands) {
-        if (rules.length >= MAX_RULES || Date.now() - t0 >= budgetMs) break;
+        if (rules.length >= MAX_RULES || now() - t0 >= budgetMs) break;
         const g = nextFreeGlyph(ctx, assigned);
         if (!g) { stalled = true; break; }
         const nextRules = [...rules.map(r => ({ ...r, text: r.text.split(phrase).join(g) })), { glyph: g, text: phrase }];
@@ -644,7 +645,7 @@ function induceGrammar(
     // ---- backward deletion with topological re-render ----
     let deleted = false;
     let changed = true;
-    while (changed && Date.now() - t0 < budgetMs) {
+    while (changed && now() - t0 < budgetMs) {
       changed = false;
       for (let i = rules.length - 1; i >= 0; i--) {
         const r = rules[i];
@@ -672,7 +673,7 @@ function induceGrammar(
 /* --- orchestration ---------------------------------------------------------- */
 
 export async function hermesEncode(text: string, enc: EncodingName = 'o200k_base'): Promise<HermesResult> {
-  const t0 = Date.now();
+  const t0 = now();
   const inTokens = countTokens(text, enc);
   const mk = (wire: string, decoded: string, mode: string, notes: string, rules: number, counters: number, script: string): HermesResult => {
     const outTokens = countTokens(wire, enc);

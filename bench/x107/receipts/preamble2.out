@@ -1,0 +1,45 @@
+
+### psql-output.txt  chain 232 tok, exact true
+    contract line 219 ch, 63 tok
+    identity                       msg  232 tok  Δ   0
+    drop "Before "                 msg  232 tok  Δ   0
+    ¶ k=v; expand repeatedly.      msg  232 tok  Δ   0
+    ¶k=v expand                    msg  232 tok  Δ   0
+    PERIKOPI general only          msg  232 tok  Δ   0
+    PERIKOPI general + ¶k=v expand msg  232 tok  Δ   0
+
+### cue-sheet.md  chain 101 tok, exact true
+    contract line 226 ch, 101 tok
+    identity                       msg  101 tok  Δ   0
+    drop "Before "                 msg  101 tok  Δ   0
+    ¶ k=v; expand repeatedly.      msg  101 tok  Δ   0
+    ¶k=v expand                    msg  101 tok  Δ   0
+    PERIKOPI general only          msg  101 tok  Δ   0
+    PERIKOPI general + ¶k=v expand msg  101 tok  Δ   0
+
+### prices.csv  chain 133 tok, exact true
+    contract line 200 ch, 57 tok
+    identity                       msg  133 tok  Δ   0
+    drop "Before "                 msg  132 tok  Δ  -1
+    ¶ k=v; expand repeatedly.      msg  133 tok  Δ   0
+    ¶k=v expand                    msg  130 tok  Δ  -3
+    PERIKOPI general only          msg  133 tok  Δ   0
+    PERIKOPI general + ¶k=v expand msg  130 tok  Δ  -3
+
+### markdown-table.md  chain 174 tok, exact true
+    contract line 93 ch, 24 tok
+    identity                       msg  174 tok  Δ   0
+    drop "Before "                 msg  173 tok  Δ  -1
+    ¶ k=v; expand repeatedly.      msg  174 tok  Δ   0
+    ¶k=v expand                    msg  171 tok  Δ  -3
+    PERIKOPI general only          msg  174 tok  Δ   0
+    PERIKOPI general + ¶k=v expand msg  171 tok  Δ  -3
+
+### node-help.txt  chain 860 tok, exact true
+    contract line 44 ch, 11 tok
+    identity                       msg  860 tok  Δ   0
+    drop "Before "                 msg  859 tok  Δ  -1
+    ¶ k=v; expand repeatedly.      msg  860 tok  Δ   0
+    ¶k=v expand                    msg  860 tok  Δ   0
+    PERIKOPI general only          msg  860 tok  Δ   0
+    PERIKOPI general + ¶k=v expand msg  859 tok  Δ  -1

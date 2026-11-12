@@ -91,6 +91,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { chironDecode, chironEncode, CHIRON_START } from './chiron';
 import { tachysEncode, tachysDecode } from './tachys';
 import { hydraDecode, hydraEncode } from './hydra';
@@ -382,7 +383,7 @@ function lethePunctEncode(text: string, enc: EncodingName): { wire: string; deco
 export interface LetheOptions { budgetMs?: number; }
 
 export function letheEncode(text: string, enc: EncodingName = 'o200k_base', opts: LetheOptions = {}): LetheResult {
-  const t0 = Date.now();
+  const t0 = now();
   const inTokens = countTokens(text, enc);
   // Fast delegate: run full ECHO tournament once (which already does tachys/glossia/hydra/eidos/aion/echo-quote)
   // and add LETHE-PUNCT as extra arm. This makes LETHE = ECHO ∪ {lethe-punct} and thus strictly ≥ ECHO,
@@ -402,7 +403,7 @@ export function letheEncode(text: string, enc: EncodingName = 'o200k_base', opts
   // 7. LETHE-PUNCT (only extra arm beyond ECHO)
   let lethePunct: ReturnType<typeof lethePunctEncode> = null;
   const budgetMs = opts.budgetMs ?? 26000;
-  if (Date.now() - t0 < budgetMs - 700 && text.length >= 80 && text.length <= 24000) {
+  if (now() - t0 < budgetMs - 700 && text.length >= 80 && text.length <= 24000) {
     try { lethePunct = lethePunctEncode(text, enc); } catch { lethePunct = null; }
     if (lethePunct && lethePunct.decoded === text) {
       const prompt = lethePunct.wire + '\n' + LETHE_CONTRACT;

@@ -1,0 +1,295 @@
+{
+ "note": "X106 overlap defect in chiron candidate score, epoch-0 enumeration over the raw body",
+ "rows": [
+  {
+   "lane": "lsblk.txt",
+   "cands": 2,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 0,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "kb-article.txt",
+   "cands": 51,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 34,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "uptime-w.txt",
+   "cands": 16,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 2,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "free-m.txt",
+   "cands": 11,
+   "overl": 3,
+   "sumGap": 9,
+   "maxGap": 4,
+   "rankFlip": 11,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "vmstat.txt",
+   "cands": 685,
+   "overl": 4,
+   "sumGap": 21,
+   "maxGap": 8,
+   "rankFlip": 679,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "unified-diff.patch",
+   "cands": 518,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 502,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "df-h.txt",
+   "cands": 78,
+   "overl": 3,
+   "sumGap": 13,
+   "maxGap": 5,
+   "rankFlip": 38,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "df-real.txt",
+   "cands": 209,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 203,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "du-real.txt",
+   "cands": 417,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 409,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "node-help.txt",
+   "cands": 380,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 335,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "findmnt.txt",
+   "cands": 1229,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 1193,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "df-h.txt",
+   "cands": 209,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 203,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "email-thread.txt",
+   "cands": 527,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 527,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "llm-answer.md",
+   "cands": 153,
+   "overl": 6,
+   "sumGap": 20,
+   "maxGap": 5,
+   "rankFlip": 147,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "markdown-table.md",
+   "cands": 206,
+   "overl": 11,
+   "sumGap": 61,
+   "maxGap": 10,
+   "rankFlip": 201,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "psql-output.txt",
+   "cands": 410,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 303,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "prices.csv",
+   "cands": 405,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 79,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "cue-sheet.md",
+   "cands": 206,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 178,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "ps-ef.txt",
+   "cands": 840,
+   "overl": 1,
+   "sumGap": 76,
+   "maxGap": 76,
+   "rankFlip": 770,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "ls-real.txt",
+   "cands": 1167,
+   "overl": 1,
+   "sumGap": 30,
+   "maxGap": 30,
+   "rankFlip": 1160,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "json-pkg.txt",
+   "cands": 550,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 541,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "code-ts.txt",
+   "cands": 1031,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 1024,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "dpkg-l.txt",
+   "cands": 763,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 747,
+   "topChanged": true,
+   "parts": 1
+  },
+  {
+   "lane": "ps-real.txt",
+   "cands": 963,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 925,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "kubectl-get-pods.txt",
+   "cands": 836,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 792,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "metrics.tsv",
+   "cands": 681,
+   "overl": 1,
+   "sumGap": 2,
+   "maxGap": 2,
+   "rankFlip": 571,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "ps-aux-real.txt",
+   "cands": 3775,
+   "overl": 5,
+   "sumGap": 164,
+   "maxGap": 80,
+   "rankFlip": 3768,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "apt-real.txt",
+   "cands": 3722,
+   "overl": 0,
+   "sumGap": 0,
+   "maxGap": 0,
+   "rankFlip": 3669,
+   "topChanged": false,
+   "parts": 1
+  },
+  {
+   "lane": "ls-l-real.txt",
+   "cands": 10164,
+   "overl": 6,
+   "sumGap": 236,
+   "maxGap": 116,
+   "rankFlip": 10154,
+   "topChanged": true,
+   "parts": 1
+  }
+ ]
+}

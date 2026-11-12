@@ -87,6 +87,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { chironDecode, CHIRON_START, CHIRON_SEP } from './chiron';
 import { tachysEncode, tachysDecode, TACHYS_SYSTEM_PROMPT } from './tachys';
 import { kionesEncodeText, kionesDecodeText, KION_CLAUSE, KION_CLOSE, KION_OPEN } from './kiones';
@@ -168,7 +169,7 @@ export interface HydraOptions {
 const HYDRA_LARGE = 8000;
 
 export function hydraEncode(text: string, enc: EncodingName = 'o200k_base', opts: HydraOptions = {}): HydraResult {
-  const t0 = Date.now();
+  const t0 = now();
   const inTokens = countTokens(text, enc);
   const budgetMs = opts.budgetMs ?? 26000;
 
@@ -184,7 +185,7 @@ export function hydraEncode(text: string, enc: EncodingName = 'o200k_base', opts
       notes: 'tachys threw; fallback to raw',
     };
   }
-  const tAfterTachys = Date.now();
+  const tAfterTachys = now();
   const M_tachys = (tachys as any).messageTokens as number;
   const tachysWire = (tachys as any).wire as string;
   const tachysDecoded = (tachys as any).decoded as string;

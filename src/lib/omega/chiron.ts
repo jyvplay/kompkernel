@@ -130,6 +130,8 @@ import { now } from './clock';
  */
 
 import { countTokens, tokenStrings, type EncodingName } from './bpe';
+import { taxinomasisPolicy, taxinomasisResolve, taxinomasisResolvePrefilter, type TaxinomasisCand } from './taxinomasis';
+import { megaepanalipsisDisabled, megaepanalipsisWindow, megaepanalipsisAdvance } from './megaepanalipsis';
 import { chironTick, chironExhausted } from './workmeter';
 
 /* ---------------------------------------------------------------------------
@@ -1165,6 +1167,41 @@ export interface ChironOptions {
   /** unit separator for the block pass */
   sep?: string;
   /**
+   * X105 — ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ.  Take the macro candidate window from the HEAD
+   * of the bound ranking after a dead set, instead of from a fixed positional
+   * slice `cands.slice(offset, offset + EPOCH_APPLY*5)` that skips every
+   * candidate ranked between `EPOCH_APPLY` and `EPOCH_APPLY*5`.  See
+   * megaepanalipsis.ts for the imported MR-order result and its hypotheses.
+   */
+  mrOrder?: boolean;
+  /**
+   * X105 — ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ as a SWEEP DIMENSION.  When set, every
+   * separator is tried twice, once with the positional window and once with the
+   * head-of-ranking window, and the sweep keeps whichever is cheaper.  The
+   * isolated A/B (bench/x104/receipts/megaepanalipsis.log) measures +13 tokens
+   * over 15 lanes when MR-order is forced, so the order is not globally better;
+   * as a variant the sweep can only take the lanes where it wins and keep the
+   * shipped answer everywhere else.  The cost is one extra variant per
+   * separator drawn from the SAME shared meter, so this is a real trade and it
+   * is measured, not assumed.
+   */
+  mrOrderVariants?: boolean;
+  /**
+   * X106 — ΤΥΠΟΣ AS A SWEEP DIMENSION.  The isolated A/B
+   * (bench/x104/receipts/exactaccept.log) forces `exactAccept` on every lane and
+   * measures +9 tokens over 20 lanes: -3 on node-help and -2 on code-ts against
+   * +8 on ls-l-real and +5 on ps-aux-real.  The pattern is not noise — the lanes
+   * that lose are exactly the lanes whose shared work meter is already 96 %/75 %
+   * exhausted (bench/x101/klimax29.json), because `renderWire` costs more per
+   * candidate than `provisionalWire` and a starved search creates fewer rules.
+   * So the flag is right for the lanes with meter headroom and wrong for the
+   * starved ones, which is precisely what a sweep dimension expresses: run both
+   * and keep the cheaper.  The extra variant is charged the SAME per-variant
+   * budget as the others (unlike mrOrderVariants, which halves it), because the
+   * measurement above shows the halved variant never wins.
+   */
+  exactAcceptVariants?: boolean;
+  /**
    * KAIROS deterministic budget. When set, the macro search and the variant
    * sweep stop after this many work units (1 unit = 1 character enumerated or
    * 1 character tokenised in the search loop) instead of at wall-clock deadlines,
@@ -1340,6 +1377,12 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
   if (!opts.noMacros) {
     let stalled = false;
     let offset = 0;
+    // X105 — ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ.  Phrases observed not to apply.  The
+    // shipped loop never records this, which is why it has to skip a fixed
+    // positional block: without a dead set it would re-pick the same stale
+    // candidate on every epoch and never advance.
+    const mrDead = new Set<string>();
+    const mrOn = !!opts.mrOrder && !megaepanalipsisDisabled();
     while (!stalled && rules.length < opts.maxRules && !spent()) {
       const parts = [body, ...rules.filter(r => r.kind === 'lit').map(r => r.text)];
       for (const q of parts) work.n = Math.min(work.max, work.n + q.length);
@@ -1353,28 +1396,68 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
         .filter(([p, c]) => c >= 2 && p.length >= 2 && phraseLegal(p))
         .map(([p, c]) => ({ p, c, rough: c * (p.length - 1) - p.length - 1 }))
         .filter(x => x.rough > 0)
-        .sort((a, b) => b.rough - a.rough)
-        .slice(0, PREFILTER);
-      const cands: Array<{ p: string; bound: number }> = [];
-      for (const { p, c } of rough) {
+        .sort((a, b) => b.rough - a.rough);
+      // X104 — ΤΑΞΙΝΟΜΗΣΙΣ, prefilter cut. The cut lands inside a tie group on
+      // all 21 epochs where it bites (max group 263), and the group is ranked by
+      // a CHARACTER proxy, so which members survive is decided by leftmost text
+      // occurrence. Price the tied group exactly and keep the best by the real
+      // token bound. Off by default is not an option: this only ever replaces a
+      // proxy-ranked choice with an exactly-ranked one over the same group.
+      const roughCut = taxinomasisResolvePrefilter(rough, PREFILTER, (p, c) => {
+        const t = countTokens(p, enc);
+        return { t, bound: c * (t - 1) - t - 1 };
+      });
+      const cands: TaxinomasisCand[] = [];
+      for (const { p, c } of roughCut) {
         if (spent()) break;
         work.n = Math.min(work.max, work.n + p.length);
         const t = countTokens(p, enc);
         const bound = c * (t - 1) - t - 1;
-        if (bound > 0) cands.push({ p, bound });
+        if (bound > 0) cands.push({ p, bound, c, t });
       }
       cands.sort((a, b) => b.bound - a.bound);
       if (spent()) { stalled = true; break; }
-      const window = cands.slice(offset, offset + EPOCH_APPLY * 5);
+      // X104 — ΤΑΞΙΝΟΜΗΣΙΣ. The window cut lands inside a tie group on 133 of 259
+      // epochs (bench/x104/tiecensus.ts), so which candidates reach the window was
+      // decided by Map insertion order, i.e. by leftmost occurrence in the text.
+      // Resolve the group by a declared order, or — under the default policy — by
+      // pricing the wire each tied candidate would actually emit. `measure` reuses
+      // the accept test below: snapshot, apply, price the EMITTED wire, restore.
+      // It is the objective itself, not a proxy for it.
+      const window = (() => {
+        const policy = taxinomasisPolicy();
+        // X105 — ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ takes precedence over ΤΑΞΙΝΟΜΗΣΙΣ's
+        // positional slice: it decides WHICH ranks are considered, ΤΑΞΙΝΟΜΗΣΙΣ
+        // decides the order inside a tie among those that survive.
+        if (mrOn) return megaepanalipsisWindow(cands, offset, mrDead, EPOCH_APPLY * 5);
+        if (policy === 'insertion') return cands.slice(offset, offset + EPOCH_APPLY * 5);
+        const whole = offset === 0 ? cands : cands.slice(offset);
+        if (whole.length <= EPOCH_APPLY * 5) return whole;
+        const measure = (p: string): number | null => {
+          const sR = rules.map(r => ({ ...r }));
+          const sB = body;
+          const sP = poolAt;
+          const created = addRule({ kind: 'lit', text: p });
+          if (!created) { rules.length = 0; rules.push(...sR); body = sB; poolAt = sP; return null; }
+          const gl = glyphOf.get(created.id)!;
+          for (const r of rules) if (r.kind === 'lit' && r.id !== created.id) r.text = r.text.split(p).join(gl);
+          body = body.split(p).join(gl);
+          const scored = opts.exactAccept ? renderWire(rules, body, glyphOf, ctx) : provisionalWire(rules, body, glyphOf);
+          const t = scored === null ? null : countTokens(scored, enc);
+          rules.length = 0; rules.push(...sR); body = sB; poolAt = sP; glyphOf.delete(created.id); nextId--;
+          return t;
+        };
+        return taxinomasisResolve(whole, EPOCH_APPLY * 5, policy, measure);
+      })();
       let applied = 0;
       for (const { p } of window) {
         if (applied >= EPOCH_APPLY || rules.length >= opts.maxRules || spent()) break;
-        if (!body.includes(p) && !rules.some(r => r.kind === 'lit' && r.text.includes(p))) continue;
+        if (!body.includes(p) && !rules.some(r => r.kind === 'lit' && r.text.includes(p))) { if (mrOn) mrDead.add(p); continue; }
         const snapshotRules = rules.map(r => ({ ...r }));
         const snapshotBody = body;
         const snapshotPool = poolAt;
         const created = addRule({ kind: 'lit', text: p });
-        if (!created) { stalled = true; break; }
+        if (!created) { if (mrOn) mrDead.add(p); stalled = true; break; }
         const gl = glyphOf.get(created.id)!;
         for (const r of rules) if (r.kind === 'lit' && r.id !== created.id) r.text = r.text.split(p).join(gl);
         body = body.split(p).join(gl);
@@ -1417,7 +1500,9 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
       // candidates. Slide it instead of stopping (measured: -94 tokens on the
       // one lane where CHIRON was behind HERMES-Ω).
       if (applied === 0) {
-        offset += EPOCH_APPLY * 5;
+        // X105 — ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ.  Advance past the dead head, not past a
+      // fixed block, so a live candidate ranked below the cut is reached.
+      offset = mrOn ? megaepanalipsisAdvance(cands, offset, mrDead) : offset + EPOCH_APPLY * 5;
         if (offset >= cands.length) stalled = true;
       } else {
         offset = 0;
@@ -1513,19 +1598,45 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
     || (typeof process !== 'undefined' && !!process.env && process.env.OMEGA_KEEP_BLOCKS_ONLY === '1');
   const wideSeparators = !!options.wideSeparators;
   const exactAccept = !!options.exactAccept;
+  const mrOrder = !!options.mrOrder;
+  const mrOrderVariants = !!options.mrOrderVariants && !megaepanalipsisDisabled();
+  // Read live per call, never at module load: X104 established that a load-time
+  // const in this repository reads the environment before the probe sets it, so
+  // the flag silently never takes effect anywhere in the repo.
+  // X106 — ON BY DEFAULT.  The measurement that justifies it:
+  //   bench/x104/receipts/exactaccept.log         forced, 20 lanes: +9  (-3 node-help, -2 code-ts,
+  //                                               +8 ls-l-real, +5 ps-aux-real)
+  //   bench/x104/receipts/exactaccept-variants.log EAGER sweep dimension, 20 lanes: +453
+  //                                               (ls-l-real 1670 -> 2126: the extra variant halves
+  //                                               every other variant's grant from the ONE shared meter)
+  //   bench/x104/receipts/exactaccept-variants.log METER-GATED, 20 lanes: -5, 0 worse
+  //   bench/x104/receipts/chainab.log              chain level, 29 lanes: 0, 0 worse
+  // So it is weakly token-Pareto-superior at BOTH layers and strictly better at the
+  // ΧΕΙΡΩΝ layer, and the only thing that made it dangerous — starving the cheap
+  // variants — is exactly what the headroom gate prevents.  OMEGA_NO_EXACT_ACCEPT_VARIANTS=1
+  // puts the sweep back to its X105 form.
+  const exactAcceptVariants = options.exactAcceptVariants !== undefined
+    ? !!options.exactAcceptVariants
+    : !(typeof process !== 'undefined' && !!process.env && process.env.OMEGA_NO_EXACT_ACCEPT_VARIANTS === '1');
   const seps = options.sep !== undefined ? [options.sep] : chironSeparators(text, wideSeparators);
   const forcedBlocks = options.noBlocks;
   const forcedMacros = options.noMacros;
   const variants: Array<{ tag: string; o: Required<Omit<ChironOptions, 'workUnits'>> }> = [];
   if (forcedBlocks !== undefined || forcedMacros !== undefined) {
     for (const sep of seps) {
-      variants.push({ tag: `forced/${JSON.stringify(sep)}`, o: { noBlocks: !!forcedBlocks, noMacros: !!forcedMacros, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept } });
+      variants.push({ tag: `forced/${JSON.stringify(sep)}`, o: { noBlocks: !!forcedBlocks, noMacros: !!forcedMacros, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants } });
     }
   } else {
   for (const sep of seps) {
-    variants.push({ tag: `full/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept } });
+    variants.push({ tag: `full/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants } });
+    // X105 — ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ.  The same separator under the MR-order
+    // window.  Half the per-variant budget so the pair costs what one variant
+    // cost before, and the shared meter is not starved any harder than it was.
+    if (mrOrderVariants) {
+      variants.push({ tag: `full-mr/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules: Math.round(maxRules * 0.5), budgetMs: Math.round(budgetMs * 0.5), sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder: true, mrOrderVariants, exactAcceptVariants } });
+    }
   }
-  variants.push({ tag: 'macros-only', o: { noBlocks: true, noMacros: false, maxRules, budgetMs: Math.round(budgetMs * 0.8), sep: '\n', keepBlocksOnly, wideSeparators, exactAccept } });
+  variants.push({ tag: 'macros-only', o: { noBlocks: true, noMacros: false, maxRules, budgetMs: Math.round(budgetMs * 0.8), sep: '\n', keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants } });
   // X101 — ΣΤΑΘΜΟΣ.  `blocks-only` is a variant that turns the macro tape OFF and leaves only the
   // block pass.  It is run once per candidate separator and is charged 30 % of the per-variant
   // budget, and every variant in this sweep draws on ONE shared work meter
@@ -1537,7 +1648,7 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
   // back for the ablation, and OMEGA_KEEP_BLOCKS_ONLY=1 does the same from the environment.
   if (text.length <= 24_000 && keepBlocksOnly) {
     for (const sep of seps) {
-      variants.push({ tag: `blocks-only/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: true, maxRules, budgetMs: Math.round(budgetMs * 0.3), sep, keepBlocksOnly, wideSeparators, exactAccept } });
+      variants.push({ tag: `blocks-only/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: true, maxRules, budgetMs: Math.round(budgetMs * 0.3), sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants } });
     }
   }
   }
@@ -1553,7 +1664,29 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
   let workLeft = workUnits !== undefined ? Math.round(workUnits * 2.1) : CHIRON_MAX_TOTAL_WORK_UNITS;
   const initialWorkBudget = workLeft;
   const totalVariantBudget = variants.reduce((n, v) => n + v.o.budgetMs, 0) || 1;
-  for (const v of variants) {
+  // X106 — ΤΥΠΟΣ, ADMITTED BY METER HEADROOM, NOT BY DEFAULT.  The eager form
+  // (push `full-exact/<sep>` beside every `full/<sep>` before the sweep) is
+  // measured catastrophic: bench/x104/receipts/exactaccept-variants.log records
+  // ls-l-real 1670 -> 2126 (+456) because the extra variant halves every other
+  // variant's grant from the ONE shared meter and the starved `full/<sep>` runs
+  // create far fewer rules.  The lanes that WIN under ΤΥΠΟΣ are the ones with
+  // meter headroom (node-help -3, code-ts -2) and the lanes that LOSE are the
+  // ones already 96 %/75 % exhausted (bench/x101/klimax29.json).  So the
+  // variant is admitted only when the meter says there is room, which is a fact
+  // ΧΕΙΡΩΝ can observe after the standard sweep and not a guess about the lane.
+  const EXACT_ADMIT = 0.4;
+  let admittedExact = false;
+  for (let vi = 0; vi < variants.length; vi++) {
+    const v = variants[vi]!;
+    if (vi === variants.length - 1 && exactAcceptVariants && !admittedExact) {
+      admittedExact = true;
+      const roomy = initialWorkBudget > 0 && workLeft > initialWorkBudget * EXACT_ADMIT;
+      if (roomy) {
+        for (const sep of seps) {
+          variants.push({ tag: `full-exact/${JSON.stringify(sep)}`, o: { noBlocks: false, noMacros: false, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept: true, mrOrder, mrOrderVariants, exactAcceptVariants } });
+        }
+      }
+    }
     if (workUnits !== undefined) {
       // Deterministic sweep: each variant gets its share of the total unit cap.
       if (workLeft < 1) break;

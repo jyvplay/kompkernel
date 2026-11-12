@@ -79,6 +79,7 @@
  * =============================================================================
  */
 import { countTokens, tokenStrings, type EncodingName } from './bpe';
+import { now } from './clock';
 import { chironDecode, chironDecoderPrompt, chironEncode } from './chiron';
 import { kionesDecode } from './kiones';
 
@@ -175,12 +176,12 @@ export function tachysEncode(text: string, enc: EncodingName = 'o200k_base'): Ta
   };
   if (!text) return identity('fast-prose', 'empty input', 'raw');
   // Fast incompressibility certificate — <5 ms on 2k chars, no search.
-  const fastStart = Date.now();
+  const fastStart = now();
   let fast = false;
   try {
     fast = isProseIncompressible(text, enc);
   } catch { fast = false; }
-  const fastMs = Date.now() - fastStart;
+  const fastMs = now() - fastStart;
   if (fast && fastMs <= FAST_CAP_MS * 4) {
     // Certified incompressible: no dictionary can beat literal+contract.
     return identity('fast-prose', `tachys-fast: free-dictionary bound < ${CONTRACT_FLOOR} tok (optimistic), digit/punct gated; chiron search skipped in ${fastMs}ms`, 'tachys-fast');

@@ -1,0 +1,17 @@
+import * as fs from 'node:fs';
+import { chironEncode } from '../../src/lib/omega/chiron';
+process.env.OMEGA_DET='1';
+const enc:any='o200k_base';
+const p = process.argv[2];
+const text = fs.readFileSync(p,'utf8');
+const r:any = chironEncode(text, enc);
+const w = r.wire.indexOf('\u00a7'), tEnd = r.wire.indexOf('\u00b6', w);
+console.log('=== SOURCE ('+text.length+' chars) ===');
+console.log(JSON.stringify(text.slice(0,700)));
+console.log('\n=== CONTRACT ('+r.wire.slice(0,w).length+' chars) ===');
+console.log(r.wire.slice(0,w));
+console.log('\n=== TAPE ('+(tEnd-w-1)+' chars) ===');
+console.log(r.wire.slice(w+1,tEnd));
+console.log('\n=== BODY ('+r.wire.slice(tEnd+1).length+' chars) ===');
+console.log(JSON.stringify(r.wire.slice(tEnd+1).slice(0,900)));
+console.log('\nrules='+r.rules+' blocks='+r.blocks+' lists='+r.lists+' outToks='+r.outTokens+' msgToks='+r.messageTokens+' mode='+r.mode);

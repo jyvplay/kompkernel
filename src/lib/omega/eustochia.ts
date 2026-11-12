@@ -95,6 +95,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { CHIRON_START, chironDecode } from './chiron';
 import { syntomiaContract } from './syntomia';
 import { ariadneEncode } from './ariadne';
@@ -246,7 +247,7 @@ export function eustochiaEncode(
   enc: EncodingName = 'o200k_base',
   options: EustochiaOptions = {},
 ): EustochiaResult {
-  const t0 = Date.now();
+  const t0 = now();
   const T = (s: string) => countTokens(s, enc);
   const inTokens = T(text);
   const budgetMs = options.budgetMs ?? 9000;
@@ -278,7 +279,7 @@ export function eustochiaEncode(
   let armsRun = 0;
   for (const name of order) {
     if (armsRun >= maxArms) break;
-    if (Date.now() - t0 > budgetMs) break;
+    if (now() - t0 > budgetMs) break;
     const def = EUSTOCHIA_ARMS.find((a) => a.name === name);
     if (!def) continue;
     tried.push(name);

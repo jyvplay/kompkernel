@@ -154,6 +154,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { chironEncode, chironDecode, chironDecoderPrompt } from './chiron';
 import { kionesEncode, kionesDecode } from './kiones';
 import { hydraEncode, hydraDecode } from './hydra';
@@ -1249,7 +1250,7 @@ function buildVariants(text: string, enc: EncodingName, deadline: number): Varia
   let iFolds: string[] = [];
   try {
     const inf = indentInfer(text);
-    if (inf && Date.now() < deadline) {
+    if (inf && now() < deadline) {
       const dir = indentDirective(inf.spec);
       const icl = hyleContractFor([dir]);
       const cost = T(inf.body) + T(dir) + T(icl) + 2;
@@ -1267,11 +1268,11 @@ function buildVariants(text: string, enc: EncodingName, deadline: number): Varia
     ['indent', iTxt, iDirs, iCl, iFolds],
   ];
   for (const [srcName, srcText, preDirs, preCl, preFolds] of bases) {
-    if (Date.now() > deadline) break;
+    if (now() > deadline) break;
     let hits: TableHit[] = [];
     try { hits = tableHits(srcText); } catch { hits = []; }
     for (const h of hits.slice(0, 2)) {
-      if (Date.now() > deadline) break;
+      if (now() > deadline) break;
       for (const nHead of [1, 0, 2]) {
         if (nHead > h.fields.length - 3) continue;
         const t: TableSpec = { ...h.spec, nHead };
@@ -1443,7 +1444,7 @@ function identityArm(text: string, enc: EncodingName): ArmRun {
 function runArms(text: string, enc: EncodingName, opts: HyleOptions, deadline: number): ArmRun[] {
   const out: ArmRun[] = [];
   const push = (arm: string, fn: () => { wire: string; decoded: string; messageTokens: number; decoderPrompt?: string }) => {
-    const t0 = Date.now();
+    const t0 = now();
     try {
       const r = fn();
       if (r.decoded !== text) return;
@@ -1462,11 +1463,11 @@ function runArms(text: string, enc: EncodingName, opts: HyleOptions, deadline: n
   };
   push('b', () => ({ wire: text, decoded: text, messageTokens: countTokens(text, enc) }));
   if (opts.fast) return out;
-  if (Date.now() < deadline) push('c', () => chironEncode(text, enc, { budgetMs: opts.chironBudgetMs ?? 3000 }));
-  if (Date.now() < deadline) push('g', () => glossiaEncode(text, enc));
-  if (Date.now() < deadline) push('e', () => eidosEncode(text, enc));
-  if (Date.now() < deadline) push('a', () => aionEncode(text, enc));
-  if (Date.now() < deadline) push('k', () => kionesEncode(text, enc, { maxConfigs: 2, configBudgetMs: 40, budgetMs: Math.max(300, deadline - Date.now()) }));
+  if (now() < deadline) push('c', () => chironEncode(text, enc, { budgetMs: opts.chironBudgetMs ?? 3000 }));
+  if (now() < deadline) push('g', () => glossiaEncode(text, enc));
+  if (now() < deadline) push('e', () => eidosEncode(text, enc));
+  if (now() < deadline) push('a', () => aionEncode(text, enc));
+  if (now() < deadline) push('k', () => kionesEncode(text, enc, { maxConfigs: 2, configBudgetMs: 40, budgetMs: Math.max(300, deadline - now()) }));
   return out;
 }
 
@@ -1479,7 +1480,7 @@ function runArms(text: string, enc: EncodingName, opts: HyleOptions, deadline: n
 export const HYLE_WORK = { calls: 0, unique: 0, chars: 0, dupChars: 0, enabled: false };
 let HYLE_SEEN: Set<string> | null = null;
 export function hyleEncode(text: string, enc: EncodingName = 'o200k_base', opts: HyleOptions = {}): HyleResult {
-  const t0 = Date.now();
+  const t0 = now();
   const budgetMs = opts.budgetMs ?? 20000;
   const deadline = t0 + budgetMs;
   const inTokens = countTokens(text, enc);
@@ -1535,11 +1536,11 @@ export function hyleEncode(text: string, enc: EncodingName = 'o200k_base', opts:
   if (!opts.fast) {
     const order = variants.slice().sort((x, y) => countTokens(x.text, enc) - countTokens(y.text, enc));
     for (const v of order) {
-      if (Date.now() > deadline) break;
+      if (now() > deadline) break;
       for (const a of runArms(v.text, enc, opts, deadline)) {
         if (a.arm === 'b') continue;                     // already scored in pass A
         evaluate(v, a);
-        if (Date.now() > deadline) break;
+        if (now() > deadline) break;
       }
     }
   }

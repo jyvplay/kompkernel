@@ -89,6 +89,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { chironDecode, chironEncode, CHIRON_START } from './chiron';
 import { tachysEncode, tachysDecode } from './tachys';
 import { hydraDecode, hydraEncode } from './hydra';
@@ -276,7 +277,7 @@ function oracleKnowledgeEncode(text: string, enc: EncodingName): { wire: string;
 export interface OracleOptions { budgetMs?: number; }
 
 export function oracleEncode(text: string, enc: EncodingName = 'o200k_base', opts: OracleOptions = {}): OracleResult {
-  const t0 = Date.now();
+  const t0 = now();
   const inTokens = countTokens(text, enc);
   const budgetMs = opts.budgetMs ?? 26000;
 
@@ -291,7 +292,7 @@ export function oracleEncode(text: string, enc: EncodingName = 'o200k_base', opt
 
   // ORACLE-KNOWLEDGE (only extra arm beyond LETHE)
   let oracleKnow: ReturnType<typeof oracleKnowledgeEncode> = null;
-  if (Date.now() - t0 < budgetMs - 700 && text.length >= 200 && text.length <= 24000) {
+  if (now() - t0 < budgetMs - 700 && text.length >= 200 && text.length <= 24000) {
     try { oracleKnow = oracleKnowledgeEncode(text, enc); } catch { oracleKnow = null; }
     if (oracleKnow && oracleKnow.decoded === text) {
       const prompt = oracleKnow.wire + '\n' + ORACLE_CONTRACT;

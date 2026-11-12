@@ -6235,3 +6235,780 @@ not declared verified: no model API exists in this environment, so LLM decodabil
 What is verified is structural: the wire is self-contained, the tape is delimiter-free with the
 first-appearance key rule `chironParseTape` implements, and every reference is backwards — which
 `chironDecode` enforces by rejecting forward references.
+
+---
+
+## §X104 — ΤΑΞΙΝΟΜΗΣΙΣ (`src/lib/omega/taxinomasis.ts`), and the repair of the measurement harness
+
+### The harness repair, because it outranks the codec
+
+**Name.** ΟΡΟΘΕΣΙΑ is below; what ships first is a repair to `src/lib/omega/clock.ts`, and it
+invalidates every determinism claim this repository has ever made.
+
+**The defect.** `clock.ts` exported
+
+```ts
+export const DET_MODE = ... process.env.OMEGA_DET === '1';
+```
+
+a **module-load-time constant**. Every probe sets `process.env.OMEGA_DET = '1'` in its own module
+body, and ES modules evaluate their imports **before** the importing module's body runs. In the
+esbuild bundle the probe's assignment lands tens of thousands of lines after `DET_MODE` is
+computed, so `DET_MODE` was always `false`, `now()` always returned real `Date.now()`, and **every
+"under `OMEGA_DET=1`" figure ever recorded here was taken with live wall clocks.**
+
+**Two measurements that prove it, both in `bench/x104/`:**
+- `clockaudit.mjs` patches the global clocks to run **one second per call**. Before the repair:
+  `code-ts` 967 → **1 397** tokens, `apt-real` 835 → **2 521**. After the repair: control, plain and
+  patched all return sha `940c8bfc`, 958 tokens, `gateDetected: false`.
+- `callsites.mjs` records the calling line of every global-clock read: **105 012 calls arrive
+  through `clock.ts`'s own `return DET_MODE ? 0 : Date.now();` line.** A frozen clock cannot call
+  `Date.now()`; that line was executing the live branch.
+
+**The repair.** `isDet()` reads the flag **per call**; `DET_MODE` is gone and its one consumer
+(`metathesis.ts:229`) reads `isDet()`. Every wall-clock **gate** in the 148 modules reachable from
+`tagstack` is routed through `now()`: `tachos`, `tachys`, `aion`, `eidos`, `glossia`, `akribeia`,
+`hyle`, `polytropos`, `syntomia`, `hydra`, `echo`, `hermes`, `logistike`, `eustochia`, `lethe`,
+`mnemosyne`, `nyx`, `oracle`, `palimpsest`, `bifront`, `sibyl`. Modules that read the clock only to
+fill an `ms:` report field still read it directly, because a report field cannot change a wire.
+**`hyle.ts:1470` is routed even though it looks like reporting**: it computes a *budget* from a
+clock (`Math.max(300, deadline - Date.now())`) and passes it into `kiones` → `polytropos` as a
+search stop. A clock-derived budget is a gate wearing a different name.
+
+**What the repair changes.** `bench/x103/memoprobe.mjs`, fresh process per run: `code-ts`
+970/969/968/967/968/970/969/968/967 → **958 × 5**; `apt-real` 835/836/836/843/836/836/835/836 →
+**835 × 5**; `dpkg-l` 667/668/667/667/667/667/667/668 → **667 × 5**. The ±3-token noise that X103
+attributed to the X67 OURA memo was this, and was never the memo.
+
+**Is it greedy?** Not applicable — it is a correctness repair to the measurement instrument, not a
+compression pass. **Source article:** none; the bug class is the classic module-initialisation-order
+defect, found here by instrumenting the instrument.
+
+**Time- or CPU-bound?** The repair makes the chain **CPU-bound and machine-independent**, at a
+measured cost: the 29-lane frontier probe goes from roughly 12 minutes to **1 298 761 ms (21.6 min)**
+because the wall-clock truncations that used to cut searches short are now inert. That regression is
+reported, not hidden.
+
+### ΤΑΞΙΝΟΜΗΣΙΣ (TAXINOMĒSIS, "selection by rank")
+
+**Name.** ΤΑΞΙΝΟΜΗΣΙΣ — selection by rank. ΧΕΙΡΩΝ ranks candidate phrases twice and cuts each
+ranking; this codec decides what happens to the candidates that **tie at the cut**.
+
+**Is it greedy?** **Yes**, and it is greedy *about the same acceptor* ΧΕΙΡΩΝ already uses. It changes
+neither which substrings are eligible nor how a rule is accepted. It changes the **order tied
+candidates are tried in**, because that order was previously decided by accident: both of ΧΕΙΡΩΝ's
+sorts are `(a, b) => b.key - a.key`, V8's sort is stable, and the `Map` that feeds them is in
+leftmost-text-occurrence order.
+
+**Move types.** Exactly one, at each of two cuts:
+- **PREFILTER cut** — `taxinomasisResolvePrefilter`: when the cut lands inside a tie group on the
+  *character* proxy, price the group (≤ 64) exactly and keep the best by the real token bound.
+- **WINDOW cut** — `taxinomasisResolve`: when the cut lands inside a tie group on the *exact* bound,
+  resolve the group (≤ 8) by `measure`, which snapshots the search state, applies the candidate,
+  prices the **emitted** wire, and restores. `measure` is the accept test itself.
+
+**Source article.** **Bieniawski, "Assembly Theory and the Smallest Grammar Problem",
+arXiv:2608.19228 (Jul 2026)** — introduces **Re-Pair T-NDR**, a branch-and-bound variant of Re-Pair
+that searches all tied digrams at each iteration instead of applying FIFO or lexicographic
+tie-breaking, pruned by `r + ⌈log₂N⌉ ≥ G_best`. Measured over 408 strings: never larger than FIFO or
+FIXED, strictly smaller in 31 of 325 non-unary strings (1–3 rules), tighter bound in 9.54 % of cases.
+ΧΕΙΡΩΝ is a Re-Pair-family compressor, so the degree of freedom is present here and had never been
+searched. **The objective is different and stronger**: the paper minimises rule count; this stack
+minimises the token count of the message that ships, so the default policy resolves ties by pricing
+the wire each tied candidate would actually emit.
+
+**The measurement that justifies it** (`bench/x104/tiecensus.ts`, 29 lanes, env-gated census inside
+`chiron.ts`):
+
+| site | epochs | mean pool | mean tie group | epochs truncated | epochs with tie > 1 | max tie group |
+|---|---|---|---|---|---|---|
+| prefilter | 259 | 603.7 | 9.53 | 21 | **21** | **263** |
+| window | 259 | 297.4 | 12.82 | 133 | **133** | **100** |
+
+**Every truncating epoch at both cuts has a tie group strictly larger than one.**
+
+**Time- or CPU-bound?** **CPU-bound, deliberately.** No wall clock. The policy is read **per call**
+(not at module load) so an A/B can change arms inside one process — and precisely so this module does
+not repeat the `DET_MODE` bug. `OMEGA_NO_TAXINOMASIS=1` disables; `OMEGA_TAXINOMASIS` selects
+`insertion` (the shipped behaviour, and the control) / `count` / `short` / `exact` (default).
+
+**Fidelity.** The acceptor keeps a rule only when it **strictly** lowers the scored message and
+restores the snapshot otherwise, so reordering cannot make an individual accept test pass when it did
+not before. What it can do is find a different, equally-scoring rule *earlier*, changing the state
+every later rule is tested against. The mechanism is order-dependent search under a monotone
+acceptor, not a stronger acceptor.
+
+**Measured result.** `bench/x104/smoke.mjs`, three smallest lanes: insertion / count / short / exact
+all give 60 / 76 / 126, all byte-exact — **no gain, reported as plainly as a gain would be**. Full
+29-lane A/B: see `bench/x104/REPORT.md`.
+
+**Model-readability.** ΤΑΞΙΝΟΜΗΣΙΣ changes only which of several equally-scoring rules is chosen. The
+wire language, the contract and the operator set are untouched. **Downgraded, not declared verified:
+no model API exists in this environment, so LLM decodability was not tested.**
+
+---
+
+## §X105 — ΟΡΟΘΕΣΙΑ (`src/lib/omega/orothesia.ts`)
+
+**Name.** ΟΡΟΘΕΣΙΑ, *orothesia* — "boundary-setting, delimitation". The codec sets the boundaries
+between the tape's rules; the rules themselves are untouched.
+
+**Is it greedy?** **Yes — steepest descent over the complete legal neighbourhood, with an exact
+acceptor.** It is *not* ΜΕΤΑΤΑΞΙΣ's greedy, and the difference is the whole content of this codec:
+
+| | ΜΕΤΑΤΑΞΙΣ (X97) | ΟΡΟΘΕΣΙΑ (X105) |
+|---|---|---|
+| move | RELOCATE one rule to any legal slot | RELOCATE one rule to any legal slot (**identical move set**) |
+| legality | reference DAG | reference DAG (**identical test**) |
+| search order | Fisher-Yates-shuffled list, **first improvement** | **complete** neighbourhood, **steepest descent** |
+| per-probe price | rebuild the whole tape string, re-tokenise the whole message | **O(n) integer sum** over a precomputed pairwise junction matrix |
+| stop rule | patience + a budget derived from message **length** | no legal move in the complete neighbourhood wins |
+| acceptance | exact `countTokens` on the serialised message | exact `countTokens` on the serialised message (**identical acceptor**) |
+
+**Move types.** Exactly one, inherited from ΜΕΤΑΤΑΞΙΣ and not extended: **RELOCATE** the rule at tape
+position `a` to any legal position `p ≠ a, a+1`. ΟΡΟΘΕΣΙΑ contributes no new move; it contributes a
+different **price** and a different **search order**.
+
+**The central construction.** A permutation of the tape changes only which blocks are **adjacent** —
+ΜΕΤΑΤΑΞΙΣ's own comment says "Letters are UNCHANGED, so no substitution pass is needed". So
+
+```
+price(o) = head + tail + Σᵢ tᵢ + Σⱼ junction(Bⱼ, Bⱼ₊₁)
+junction(i,j) = countTokens(Bᵢ + Bⱼ) − tᵢ − tⱼ
+```
+
+and `junction` is precomputable for all `n²` ordered pairs **once**. `bench/x104/junction.ts` measures
+the model against the exact price on **200 random permutations of a 64-rule tape**: worst error
+**2 tokens**, mean absolute error **0.16**, matrix build **18 ms**, and the model prices the whole
+neighbourhood faster than the timer resolves — a **≥ 32×** reduction in per-probe cost against
+ΜΕΤΑΤΑΞΙΣ's O(message) rebuild plus full re-tokenisation.
+
+**Why the model is not the acceptor.** A token that *spans* a junction shifts where the scan resumes
+inside the next block, which can change that block's interior tokenisation. That is exactly the ±2
+residual the measurement shows. So `MODEL_SLACK = 3` (one token of headroom over the measured bound)
+skips candidates the model says cannot win, and **a move is accepted only when the exact
+`countTokens` of the actual serialised message strictly beats the incumbent**. The model decides what
+gets looked at; the tokenizer decides what ships.
+
+**Source article.** **None for the mechanism — original to this repository.** The pairwise-junction
+decomposition of a permutation of fixed blocks is the standard device for pricing a sequence by
+adjacent-pair costs, and it is what makes the problem Travelling-Salesman-shaped; using it as a
+**ranking function under an exact acceptor inside a grammar-compression tape** is not. The
+neighbouring imports, with their hypotheses and their honest scope limit:
+- **arXiv:2608.19228** (Jul 2026), Re-Pair T-NDR — the order in which tied digrams are resolved is a
+  hidden degree of freedom worth searching. Supplies the *motivation* for searching order at all.
+- **arXiv:1704.05254** (Maneth, *Grammar-Based Graph Compression*) — "the effectiveness of pruning
+  depends on the order in which the nonterminals are considered". Supplies the *observation* that
+  post-processing order matters, not this decomposition.
+- **arXiv:2502.10909** (Feb 2025) and **Bienkowski & Even, STACS 2024** on Optimal Linear Arrangement
+  — the classical problem ΜΕΤΑΤΑΞΙΣ instantiates. **No approximation bound transfers**, because
+  ΟΡΟΘΕΣΙΑ's cost is a token count under a fixed tokenizer, not a cut function.
+
+**Time- or CPU-bound?** **CPU-bound, deliberately and reproducibly.** There is no wall clock in this
+module at all: the search runs to a local optimum of the complete neighbourhood, so the same input
+yields the same wire on any machine. The one apparently unbounded cost, the `n²` junction matrix, is
+a pure function of the rule count and is built once per call. `OMEGA_NO_OROTHESIA=1` disables.
+
+**Fidelity.** A relocation is a permutation of the tape's entries, so the rule→letter map is
+untouched, keys stay distinct, and the DAG check keeps every reference pointing at a strictly earlier
+rule, so `chironDecode`'s forward-reference guard still passes. Expansion composes with the
+permutation, so the decoded string is byte-identical. **This is a proof**, and the pass re-decodes
+the final message through `chironDecode` before returning it, refusing to emit on mismatch.
+
+**Measured result.** `bench/x104/orothesia29.ts`, 29 lanes, arms interleaved in one process, scored
+on the SHA-256 of the complete message: see `bench/x104/REPORT.md`.
+
+**Model-readability.** ΟΡΟΘΕΣΙΑ changes only the ORDER of the tape's entries. The contract is
+byte-identical, the operator set is unchanged, and every rule is the same string under the same
+letter. **Downgraded, not declared verified: no model API exists in this environment, so LLM
+decodability was not tested.** What is bound to evidence is that `chironDecode` round-trips every
+emitted message and that the wire language is provably unchanged.
+
+---
+
+## §X105 — ΟΡΟΘΕΣΙΑ · ΤΑΞΙΝΟΜΗΣΙΣ · ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ (three codecs, two falsified)
+
+### ΟΡΟΘΕΣΙΑ (orothesia.ts) — *boundary/junction steepest descent*. **REMOVED FROM THE CHAIN in X106.**
+
+**Design spec.** ΧΕΙΡΩΝ's tape is a sequence of entries `<glyph><value>`; the price of the
+concatenation is *not* the sum of the entries' prices, because the tokenizer fuses some adjacent
+pairs across an entry boundary and not others. ΟΡΟΘΕΣΙΑ builds the full `n×n` symmetric junction
+matrix `J[i][j]` = token cost of entry *i* immediately followed by entry *j*, prices any permutation
+as `Σ J[π(k)][π(k+1)] + Σ selfCost` in **O(n)**, and runs **complete-neighbourhood steepest
+descent**: every single relocation is scored by the model, the top `SHORTLIST = 4` are re-priced by
+the real tokenizer, and the best exact win is taken. `MAX_STEPS = 512`. The emitted message is
+re-decoded through `chironDecode` before it is returned.
+
+**Greedy?** **Yes** — steepest descent, i.e. greedy on the exactly-priced shortlist. Not a beam, not
+exhaustive, not randomized.
+
+**Source citation (honest scope).** The framing import is **arXiv:2502.10909** (Feb 2025) and
+**Bienkowski & Even, STACS 2024** on Optimal Linear Arrangement. **No approximation bound
+transfers**: ΟΡΟΘΕΣΙΑ's cost is a token count under a fixed tokenizer, not a cut function, so the
+O(√(log n) log log n) and O(log n log log n) results are framing only and are recorded as such. The
+premise that the adjacent-pair score is the object of study is corroborated externally by
+**arXiv:2610.12376** (Oct 2026, *Latent Core Tokenizer*): *"Recomputing affected counts after every
+non-overlapping merge makes the merge order deterministic."*
+
+**Time- or CPU-bound?** **CPU-bound by construction and reproducibly.** No wall clock is read at
+all. The one apparently unbounded cost, the `n²` matrix, is a pure function of the rule count.
+
+**Measured result — FALSIFIED, Δ=0.** `bench/x104/receipts/orothesia29.log`: `base` arm **12 639,
+exact 29/29, 1 794 109 ms** (the frontier reproduced a third time). `bench/x104/receipts/
+orothesia-big.log`: `plus` arm **7 372 over the 11 biggest lanes, Δ 0, inexact 0**. On `ls-l-real`
+the two arms produce **different wires at the same price** (sha `173cbbfb3232` → `a9031c286056`,
+both 1 476 tokens), so it is not a no-op — every improving relocation it finds is exactly
+price-neutral. Cost measured interleaved in one process: base 224 238 ms vs plus 392 100 ms over 29
+lanes, **+74.9 %**. **A codec that changes no token and costs three quarters of the encoder's time
+is not a Pareto improvement, so X106 removed it from the chain.** The module and both receipts stay
+in the tree as a measured falsification.
+
+### ΤΑΞΙΝΟΜΗΣΙΣ (taxinomasis.ts) — *tie resolution by declared order*. **SHIPPED, default = control.**
+
+**Design spec.** ΧΕΙΡΩΝ ranks macro candidates by the exact token bound `c*(t-1)-t-1` and then
+truncates twice — `PREFILTER = 1600` on the cheap ranking and `EPOCH_APPLY*5 = 60` on the exact
+ranking. Both cuts are `Array.prototype.sort` + `slice`, so a tie group is broken by **Map insertion
+order**, i.e. by leftmost occurrence in the text. ΤΑΞΙΝΟΜΗΣΙΣ replaces that with a declared order:
+`insertion` (the shipped behaviour, the control), `count`, `short`, and `exact`, which snapshots the
+rule set, applies the candidate, prices the wire the encoder would actually emit, and restores.
+`TAXINOMASIS_EXACT_TIE_CAP = 8`, `TAXINOMASIS_PREFILTER_TIE_CAP = 64`. The policy is read **per
+call**, never at module load.
+
+**Greedy?** **Yes** — it resolves ties inside ΧΕΙΡΩΝ's greedy; it does not change the greedy.
+
+**Source citation.** **arXiv:2608.19228** (Jul 2026, *Assembly Theory and the Smallest Grammar
+Problem*), Re-Pair T-NDR: exhaustive branch-and-bound over *tied* digrams, prune when
+`r + ⌈log₂N⌉ ≥ G_best`; mean error **4.03 %** vs FIFO 4.96 / FIXED 4.89; strictly smaller grammar in
+**31 of 325** non-unary strings. Independently corroborated by **arXiv:2610.12376** (Oct 2026).
+
+**Time- or CPU-bound?** **CPU-bound, no wall clock.** The `exact` policy is the expensive one
+because it prices a whole wire per tied candidate.
+
+**Measured result.** The defect is real and measured: `bench/x104/tiecensus.ts` over 29 lanes,
+1 260 257 ms — **every** truncating epoch at both cuts lands inside a tie group > 1 (prefilter 21/21,
+max group 263; window 133/133, max group 100). The `insertion` control reproduced **12 639, exact
+29/29** (`bench/x104/receipts/taxinomasis29.log`). The `exact` arm was killed mid-run in X104 and
+was finished in X106: `bench/x106/taxexact.ts`, 15 lanes, **Δ = 0, exact 15/15, 403 530 ms**, and
+the wires differ at equal price (`shaSame=false`) — the same price-neutral signature as ΟΡΟΘΕΣΙΑ.
+`bench/x104/smoke.mjs`: all four policies identical at 60/76/126. **No gain; reported plainly.**
+
+### ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ (megaepanalipsis.ts) — *MR-order window*. **SHIPPED DISABLED (opt-in).**
+
+**Design spec.** ΧΕΙΡΩΝ takes its candidate window as `cands.slice(offset, offset + 60)` and then
+does `offset += 60`, so the order it realises is rank 0..11, then 60..71, then 120..131 — ranks
+12..59, 72..119, … are never applied. ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ replaces the positional window with
+the **head of the ranking after a dead set**: a candidate joins the dead set only when it is
+*observed* not to apply (its phrase is absent from the body and every literal rule, or `addRule`
+refuses it), never merely because it was ranked below the cut; `offset` then advances past the dead
+head only.
+
+**Greedy?** **Yes** — it changes which ranks ΧΕΙΡΩΝ's greedy considers, not the greedy itself.
+
+**Source citation (honest scope).** **Maruyama et al., "Practical Grammar Compression Based on
+Maximal Repeats", Axioms 2020, 9(4), 63; arXiv:1811.04596v2.** Their Theorem 4: *"The sizes of
+grammars generated by RePair are the same if they are generated in the same MR-order."* Their
+experiment: MR-RePair produced **4 492 rules against RePair's 41 661 on rand77.txt (10.8 %)** and
+21 787 against 49 933 on einstein.de.txt (43.6 %). **Hypotheses that do NOT transfer:** their object
+is a straight-line grammar over an alphabet with no tokenizer and no per-symbol cost model, the
+objective is grammar size in symbols, and the counts are occurrence counts. ΧΕΙΡΩΝ's objective is a
+token count under a fixed tokenizer with a per-rule glyph cost. **The direction of the effect had to
+be measured, and it was.**
+
+**Time- or CPU-bound?** **CPU-bound, no wall clock.**
+
+**Measured result — FALSIFIED when forced, marginal as a variant.** Forced
+(`bench/x104/receipts/megaepanalipsis.log`, 15 lanes): **off 9 361 → on 9 374, Δ = +13**, exact
+15/15 — the MR-order transfer **fails** on a token-count objective. As a half-budget sweep variant
+(`bench/x104/receipts/mrvariants.log`, 20 lanes): **off 12 468 → on 12 463, Δ = −2** (`ls-real`
+−1, `json-pkg` −1), 0 worse, but the `on` arm cost **+40 %** ΧΕΙΡΩΝ time. That is a trade, not a
+two-axis win, so it ships **opt-in** via `OMEGA_MEGAEPANALIPSIS=1`, exactly like ΠΑΛΙΝΔΡΟΜΟΣ.
+
+---
+
+## §X106 — ΜΕΤΡΟ-ΠΥΛΗ (ΤΥΠΟΣ under a meter-headroom gate) · the shipped codec of X106
+
+**Design spec.** ΧΕΙΡΩΝ's variant sweep runs `full/<sep>` per candidate separator plus
+`macros-only`, all drawing on **one shared work meter** (`CHIRON_MAX_TOTAL_WORK_UNITS = 64 M`
+units; per-variant grant `share = 64M × budgetMs / Σ budgetMs`). ΜΕΤΡΟ-ΠΥΛΗ adds a second
+dimension — `full-exact/<sep>`, the same separator with `exactAccept: true`, i.e. the macro accept
+test pricing `renderWire` (topological order, fresh glyph assignment, **the string the caller
+receives**) instead of `provisionalWire` — and admits it **only when the meter says there is room**:
+after the standard sweep, if `workLeft > 0.4 × initialWorkBudget`, the exact variants are pushed and
+run; otherwise they are not.
+
+**Central construction / lemma.** There is no new lemma; the construction is a scheduling gate over
+an existing acceptor. What is proved is the *necessity* of the gate, and it is an experimental
+disproof of the ungated form: the eager sweep dimension measures `ls-l-real` 1 670 → 2 126 (**+456**),
+because the extra variant halves every other variant's grant from the one shared meter and the
+starved `full/<sep>` runs create far fewer rules. The gate turns a +453 regression into a −5 gain
+without changing the acceptor.
+
+**Greedy?** **Yes, twice over.** ΧΕΙΡΩΝ's macro loop is greedy on the token bound; `exactAccept`
+makes that greedy hill-climb on the string that ships rather than on a proxy. ΜΕΤΡΟ-ΠΥΛΗ adds no
+search of its own — it decides *whether* to spend the meter on the more expensive acceptor.
+
+**Source citation (honest).** The acceptor is **ΤΥΠΟΣ, X101, this repository** — no external paper
+supplies it, and none is claimed. Its justification is internal and measured: ΜΕΤΑΤΑΞΙΣ measured −44
+tokens from tape relocation alone and ΔΙΑΛΕΚΤΟΣ measured +56..+247 from the letter assignment alone,
+so `provisionalWire` and `renderWire` are different strings with different prices, and a search that
+accepts on one and ships the other optimises the wrong object. The *framing* import is
+**arXiv:1704.05254** (Maneth): *"the effectiveness of pruning depends on the order in which the
+nonterminals are considered"* — here, the order in which the wire is rendered.
+
+**Time- or CPU-bound?** **CPU-bound, no wall clock, reproducibly.** The gate itself is a pure
+function of the meter state, which is a pure function of the input. The expensive part is
+`renderWire` per accepted candidate; that is exactly what the gate budgets for.
+
+**Measured result, both layers, arms interleaved in one process, scored on the SHA-256 of the
+complete message:**
+
+| form | lanes | Δ tokens | exact | 0 worse? |
+|---|---|---|---|---|
+| `exactAccept` forced | 20 | **+9** (−3 node-help, −2 code-ts, +8 ls-l-real, +5 ps-aux-real) | 20/20 | no |
+| eager sweep dimension | 20 | **+453** (ls-l-real 1 670 → 2 126) | 20/20 | no |
+| **ΜΕΤΡΟ-ΠΥΛΗ (meter-gated)** | 20 | **−5** (node-help −3, code-ts −2) | 20/20 | **yes** |
+| ΜΕΤΡΟ-ΠΥΛΗ at the chain | 29 | **0** | 29/29 | **yes** |
+
+Receipts: `bench/x104/receipts/exactaccept.log`, `…/exactaccept-variants.log`,
+`…/chainab.log`.
+
+**Honest statement of what did and did not move.** The ΧΕΙΡΩΝ-layer win is real and does **not**
+propagate: the chain's `node-help` is 862 while ΧΕΙΡΩΝ's is 934, so the downstream gates re-derive
+the answer and absorb it. **The frontier did not move in tokens this turn; it stays at 12 639,
+exact 29/29.** ΜΕΤΡΟ-ΠΥΛΗ ships ON by default because it is weakly token-Pareto-superior at both
+layers and strictly better at the ΧΕΙΡΩΝ layer, and because the only thing that ever made it
+dangerous is precisely what the gate prevents. `OMEGA_NO_EXACT_ACCEPT_VARIANTS=1` restores the X105
+sweep.
+
+**No CPU figure is claimed for it.** The chain A/B's wall-clock pair is confounded — arm A cold, arm
+B warm, and both shared the box with the leaders probe — so the observed −16.5 % is not a CPU
+result and is not reported as one.
+
+### Model-readability of everything shipped in X106 — **downgraded, not declared verified**
+
+No model API exists in this environment, so **no new decode was run this turn.** What is bound to
+evidence:
+
+- ΤΥΠΟΣ and ΜΕΤΡΟ-ΠΥΛΗ add **no operator, no contract clause and no decode rule**. They change
+  which of several equally-legal ΧΕΙΡΩΝ wires is emitted, and the wire language is provably
+  unchanged.
+- `chironDecode` round-trips every emitted message in every receipt quoted above (29/29 exact in
+  `chainab.log`, 20/20 in `exactaccept-variants.log`, 15/15 in `taxexact.log`).
+- The prior-turn evidence that a model *can* decode this wire class from a single chat input with no
+  skills.md and no system prompt stands as recorded: **10 of 10 available LLM-blind decode cases
+  byte-exact** (`bench/x104/llmdecode.mjs`). That evidence does **not** transfer automatically to
+  the wires emitted this turn, and no claim is made that it does.
+
+### The four falsifications of X106, and why each was worth running
+
+| hypothesis | imported result | measurement | verdict |
+|---|---|---|---|
+| ΧΕΙΡΩΝ's candidate score over-counts overlapping occurrences | arXiv:2610.32298 (disjointness/partition) | 41 of 30 204 candidates, Σgap 632 | **real defect, no transfer** |
+| the 400 000-entry enumeration cap truncates by text order | — | 0 of 29 lanes at cap | **falsified** |
+| the tape has second-level grammar headroom | — | gain 0 on 15 of 15 lanes | **falsified — tape is at ΧΕΙΡΩΝ's fixed point** |
+| tie resolution by the emitted-wire price gains tokens | arXiv:2608.19228 (Re-Pair T-NDR) | Δ 0 over 15 lanes, exact 15/15 | **falsified — price-neutral** |
+
+---
+
+## §X107 — ΠΕΡΙΚΟΠΉ (`src/lib/omega/perikopi.ts`) · the contract-line codec, and the
+## measurement-routing defect that hid five turns of shipped gain
+
+X107 ships **one new codec, ΠΕΡΙΚΟΠΉ**, and reports **one measurement defect found while
+building it**. Both are stated with the numbers that produced them.
+
+---
+
+### 1. The defect: `tagstackFrontier` has never measured the encoder
+
+`tagstackFrontier` is documented, in its own docstring, as *"THE X73 FRONTIER — the identity
+WITHOUT the X74 candidates. It is exported because the X74 candidates must price their own
+bodies against it: if PROSPHYSIS asked `tagstackEncode` for the price of its rewritten text,
+that call would re-enter the X74 chain on the rewritten text, and the chain would recurse."*
+That is a sound design decision and it is not a bug in itself.
+
+The consequence, however, is that **every "frontier" receipt since X73 has priced the
+identity layer, not the encoder's output.** The call graph is:
+
+```
+tagstackFrontier  -> tagstackEncodeUncached -> tagstackEncodeInner     (no registry arm)
+tagstackEncode    -> tagstackX74Chain -> tagstackEncodeInner + ΣΤΙΧΟΜΥΘΪΑ + every arm
+```
+
+`tagstackX74Chain` is the function in which PROSPHYSIS, ΣΥΜΦΥΪΑ, STOICHEION, ἸΣΟΜΟΡΦΪΑ,
+ΜΕΤΑΤΑΞΙΣ, ΣΥΝΔΥΑΣΜΟΣ, ΓΕΝΝΑΔΑΣ, ΔΙΑΓΡΑΦΗ, ΠΡΟΑΓΩΓΗ, ΠΑΛΙΝΔΡΟΜΟΣ and now ΠΕΡΙΚΟΠΉ are
+admitted. `tagstackFrontier` never reaches it.
+
+**Measured, this turn, on two lanes with `OMEGA_DET=1 OMEGA_NO_MEMO=1 OMEGA_ENGRAM=0
+OMEGA_OURA_MEMO=0 OMEGA_NO_OROTHESIA=1`** (`bench/x107/receipts/routing.out`):
+
+| lane | `tagstackFrontier` (identity) | `tagstackEncode` (chain) | Δ |
+|---|---|---|---|
+| `psql-output.txt` | 244 | 232 | **−12** |
+| `cue-sheet.md` | 163 | 101 | **−62** |
+
+Both exact. The 163 → 101 is ΣΤΙΧΟΜΥΘΪΑ, whose own comment records "cue-sheet 163 -> 101"
+as the one lane it wins.
+
+**The honest chain frontier, all 29 lanes** (`bench/x107/receipts/perikopi.log` `off` arm +
+`bench/x107/lsl.ts` for `ls-l-real`, both `tagstackEncode`, ΠΕΡΙΚΟΠΈ off):
+
+| function measured | total | exact |
+|---|---|---|
+| `tagstackFrontier` — the figure reported for five turns | **12 639** | 29/29 |
+| `tagstackEncode` — what the encoder actually emits, ΠΕΡΙΚΟΠΈ off | **12 360** | **29/29** |
+| `tagstackEncode` — what the encoder actually emits, **ΠΕΡΙΚΟΠΈ v3 live** | **12 315** | **29/29** |
+
+**The 279-token gap between the first two rows is the routing defect, not a codec.** It is the
+difference between the function the receipts have been pricing and the function the encoder
+ships, and it is larger than every codec added in the last five turns combined. The third row
+is ΠΕΡΙΚΟΠΈ's own contribution, **−45**, measured against the second. **Total honest movement
+this turn: 12 639 → 12 315, i.e. −324 tokens, exact 29/29, 0 lanes worse.** The prior A/B figures are consistent
+with it: X102 measured 12 410 → 12 405 and X103 12 415 → 12 412 on `tagstackEncode`, i.e. a
+chain roughly 230–280 tokens below the reported 12 639.
+
+**The correction is kept, not silently replaced.** 12 639 remains in the record as the
+identity-layer figure with its five confirmations. From X107 the frontier receipt must name
+the function it measured, and the honest frontier is 12 315.
+
+---
+
+### 2. The target: the contract line, which is 5.8 % of the frontier and 44.8 % of one lane
+
+X106's cost census (`bench/x104/receipts/centres-x106.json`) split the frontier three ways:
+
+```
+TOTAL 12639 = contract 734 (5.8%) + tape 3403 (26.9%) + body 8878 (70.2%)
+```
+
+The contract is the line the decoder reads *first*, and it is the only part of the wire that
+carries no information about the payload — it is the decode program itself. Dumping the live
+wire (`bench/x107/contractdump.mjs`) shows what it is on the worst lane:
+
+> `Before ¶ k=v. expand repeatedly Header line = n, sep, col=model; named columns are dropped
+> from lines and rebuilt; a full n-field line is literal and resets. Drop it. above=line
+> above, colM=column M of the same line, days/workdays=next date/weekday, +b=number
+> above+b same width print only.`
+
+**291 characters, 73 tokens, 44.8 % of `cue-sheet.md`'s 163-token lane**, and 73 of
+`psql-output.txt`'s 244 (29.9 %), and 57 of `prices.csv`'s 133 (42.9 %). Against 11 tokens on
+most lanes. It is English prose specifying a column-model codec.
+
+**Five distinct legend families were found on the live wire, not one:**
+
+| family | parent | the legend |
+|---|---|---|
+| ΜΕΤΡΟΝ / ΑΠΟΓΡΑΦΗ column model | metron | `Before ¶ k=v. expand repeatedly Header line = n, sep, col=model; …` |
+| ΔΙΑΣΤΗΜΑ mask | diastema | `Before ¶ k=v. expand repeatedly Δ: mask = value shape with # per digit. R: … L: verbatim. Print. print only.` |
+| ΣΥΝΚΡΙΣΗ digit shift | synkrisis | `Before ¶ k=v. expand repeatedly After ~, a number has . before its last 1 digits. print only.` |
+| ΣΤΙΧΟΜΥΘΪΑ column program | stichomythia | `spec: v+k*r = v+(k*row#) printed like v; v@+ks = v plus k sec; list* repeats; =v fixed; body = header then rows.` |
+| ΑΚΟΛΟΥΘΪΑ2 delta | akolouthia2 | `⁺ = the number at the same position in the line above, plus the change from the line two above.` |
+
+The parent census over the 29 lanes is **synkrisis 23, akolouthia2 3, metron 1, diastema 1,
+stichomythia 1** — so 24 of 29 are ΧΕΙΡΩΝ-parented and carry the invariant ΠΕΡΙΚΟΠΈ is gated
+on, and 5 are not.
+
+---
+
+### 3. Two defects on that line, both measured
+
+**DEFECT 1 — ΠΊΝΑΞ IS NOT WIRED INTO THE CHAIN.** ΠΊΝΑΞ (X76) is the codec written for exactly
+this line, and its own header records the measurement: **73 → 65 tokens on
+`psql-output.txt`** (`bench/x76/t11.ts`). A grep of `src/lib/omega/tagstack.ts` for `pinax`
+returns **nothing**. ΠΊΝΑΞ exists as a registry arm (`registry.ts:1698`) and nowhere else, so
+the chain has never collected its −8. ΒΡΑΧΥΛΟΓΊΑ (X75) is in the same state
+(`registry.ts:1653`). Two written, gated, validated codecs have been sitting outside the
+encoder for thirty turns.
+
+**DEFECT 2 — ΠΊΝΑΞ's substitution table cannot see ΑΠΟΓΡΑΦΗ's legends at all.**
+`pinaxIsLegend` begins `if (/\d/.test(t)) return false;`. But ΑΠΟΓΡΑΦΗ
+(`src/lib/omega/apographe.ts:801`) emits its legend from `APOGRAPHE_CLAUSE`, a **family**:
+three `setup` wordings × two wordings per column family (`above`, `col`, `days`, `workdays`,
+`int`, `lin`, `clock`) plus two `combined` wordings — and the per-family wordings are full of
+column numbers and arithmetic constants (`colN=+b: that column is the number above plus b,
+same digit count.`). So every ΑΠΟΓΡΑΦΗ legend is rejected by the digit test *before* the
+substitution table is consulted, and the two regexes that do exist match none of the family.
+
+---
+
+### 4. ΠΕΡΙΚΟΠΉ — the mechanism, and why it is not a rename of ΠΊΝΑΞ
+
+ΠΊΝΑΞ hard-codes one legend → one replacement. **ΠΕΡΙΚΟΠΉ generalises the same operation to
+the whole family by *parsing* instead of *matching*:** the legend is split into a preamble and
+a list of `name = definition` clauses, and each clause is abbreviated through a table keyed on
+the clause's **opening words** rather than on the whole string. That is what makes it
+wording-independent — a new ΑΠΟΓΡΑΦΗ wording is contracted by the same table with no new
+regex.
+
+ΠΕΡΙΚΟΠΉ runs **three** passes on the same line and keeps whichever is cheapest, priced by
+the real tokenizer: ΠΊΝΑΞ's own substitution table (pass A), the general clause table
+(pass B), and the preamble table (pass C, which runs on the cheapest of A and B because B
+emits a preamble form only C can contract further). On ΜΕΤΡΟΝ's exact wording the general
+pass does better than ΠΊΝΑΞ's rules (−12 against −8, measured); on the ΑΠΟΓΡΑΦΗ family
+ΠΊΝΑΞ does not fire at all and ΠΕΡΙΚΟΠΉ measures −37, −18, −9. No pass is dropped.
+
+**Design spec.** The legend is parsed as `preamble + clauses`, clauses delimited on
+sentence-final `.` only (the combined wordings use `;` internally, and splitting on `;` makes
+the multi-clause patterns unmatchable — measured). Three whole-legend rewrites run first
+(ΑΠΟΓΡΑΦΗ's three `setup` wordings → one; two `combined` wordings → one; the preamble), then
+a per-clause table keyed on the clause's opening `name=<kind>`, then a priced preamble table.
+Every rewrite is a fixed, total, idempotent substitution; the only decision is which of three
+passes to keep, and it is made by `countTokens` on the complete line.
+
+**Central construction.** There is no lemma. What is proved is *executable*: six gates, each
+run on every encode, each rejecting the message if it fails. The construction is the parse,
+and its correctness claim is exactly the set of gates below.
+
+**Greedy? NO.** A fixed, total, idempotent abbreviation table plus a cheapest-of-three
+selection priced by the real tokenizer. No hill-climb, no portfolio, no clock, no budget. The
+same input yields the same wire on any machine, which is what makes the offline table above a
+valid substitute for a frontier run.
+
+**Source citation (honest).** No external paper supplies this mechanism and none is claimed.
+The premise that a decoder instruction is a *named, priced part of the message* is this
+repository's own X75/X76 result. Three framing imports, none of them a transferable bound:
+**arXiv:2510.18479** (Chassot & Kunčak, *Formally Verified Linear-Time Invertible Lexing*,
+ZipLex) — a strings → semantic-values transformation is *"sufficient to construct tokens, but
+insufficient to print them back to the same strings"*, i.e. the instruction that inverts a
+transform is a first-class part of the artifact and has a price. **arXiv:2606.27019**
+(MinGram) — *"By making token count the primary objective and using a Unigram score only as a
+tiebreak"*, the design principle ΠΕΡΙΚΟΠΉ follows. **arXiv:2610.12376** (Latent Core
+Tokenizer, Algorithm 2) — a dynamic program returning *"the globally minimum-token exact
+encoding"*, and *"recomputing affected counts after every non-overlapping merge makes the
+merge order deterministic"*; the template for ΠΕΡΙΚΟΠΉ's determinism claim and the reason the
+table is total rather than searched.
+
+**Time- or CPU-bound?** **CPU-bound, no wall clock, reproducibly.** One regex/table pass over
+the contract line plus at most four token counts. The contract is 290 characters at most, so
+the added work is bounded by a constant number of token counts on a fixed-size string,
+independent of the payload. Against encodes that take 14 s to 2 721 s, the added cost is below
+this probe's resolution by roughly four orders of magnitude on the large lanes. **No CPU
+figure is claimed from the A/B's wall-clock pair**, because arm order confounds it exactly as
+it did in X106.
+
+### The six gates, all executed on every encode
+
+| gate | what it checks |
+|---|---|
+| 1 · invertibility | undo every edit; the message returns byte-for-byte |
+| 2 · wire immunity | no edited line carries the tape marker `§` |
+| 3 · data guard | never edit a line that occurs verbatim in the source |
+| 4 · operator coverage | every operator named in the original legend is still named in the replacement |
+| 5 · strict win | the complete message is strictly smaller |
+| 6 · **name-set coverage (new)** | every *clause-initial* `name=` in the original legend appears verbatim in the replacement |
+
+Plus, at the chain, the ΧΕΙΡΩΝ-layer invariant: `chironDecode` of the incumbent and of the
+candidate must be identical, so the code-decodable part of the wire is provably unchanged.
+
+**Four of these gates were each forced by a bug found and fixed this turn, and each fix is
+the reason a number is what it is:**
+
+- **Gate 6, first version** collected every `word=` in the line, which caught `line` in
+  *"Header **line** = n, sep, col=model"* — English, not a column name — and blocked every
+  contraction of the header clause. The shipped version collects clause-initial names only.
+- **Gate 4, first version** required the whole `REQUIRES` vocabulary, which refused every
+  ΔΙΑΣΤΗΜΑ and ΣΥΝΚΡΙΣΗ legend because those never mention `col=model`/`above`/`colM`. The
+  shipped version requires only the operators the original line actually named.
+- **Gate 4 caught a real semantic loss, and won.** A fourth preamble candidate,
+  `Before ¶ k=v. expand repeatedly ` → `¶k=v expand `, measures **−3** rather than the −2 the
+  shipped table gets. Gate 4 refuses it, because it deletes the word **"repeatedly"**. That
+  is not a free saving: ΣΥΜΠΛΟΚΗ already varies this very contract between "expand" and
+  "expand repeatedly" according to whether any rule references an earlier glyph, so on a
+  nested tape the word is load-bearing. The candidate is **not shipped**, and the gate is
+  what enforces that. (`bench/x107/preamble4.mjs`)
+- **The detector's digit test was backwards.** `pinaxIsLegend`'s `if (/\d/.test(t)) return
+  false;` treats a digit as evidence *against* a legend; in this population a digit is
+  evidence *for* one, because the legends name columns as `col4=+7` and carry arithmetic
+  constants. `perikopiIsLegend` inverts that, and a definition-count test that also sat there
+  refused every ΔΙΑΣΤΗΜΑ and ΣΥΝΚΡΙΣΗ legend and was removed.
+
+### What is NOT proved
+
+That a reader still understands the contracted line. **The contract is decoded by
+comprehension, not by code, so no program can prove it.** All six gates pass on a sentence no
+reader understands. The residual risk is carried by the cold-read discipline and is reported,
+not hidden. On a ΧΕΙΡΩΝ-parented lane the `chironDecode` identity above is a real, executable
+check and is the only part of the claim that is proved.
+
+### Offline measurement (`bench/x107/perikopi-off.mjs`)
+
+The legend strings are known from the live dump, so the contraction is measurable without a
+100-minute frontier. All three passes priced on the complete legend line with `o200k_base`:
+
+| legend wording | before | after | Δ | via |
+|---|---|---|---|---|
+| ΜΕΤΡΟΝ composed (`psql-output`, `cue-sheet`) | 73 | 61 | **−12** | general + preamble |
+| ΑΠΟΓΡΑΦή setup 1 + `above`/`col`/`+b` families | 93 | 56 | **−37** | general |
+| ΑΠΟΓΡΑΦή setup 2 + `clock` family | 61 | 52 | **−9** | general |
+| ΑΠΟΓΡΑΦή setup 2 + `days`/`workdays`/`+b` families | 71 | 53 | **−18** | general |
+| ΔΙΑΣΤΗΜΑ (`prices.csv`) | 57 | 45 | **−12** | general |
+| ΣΥΝΚΡΙΣΗ (`markdown-table`) | 24 | 22 | **−2** | general |
+| `node-help` short form | 11 | 10 | **−1** | preamble |
+| ΑΠΟΓΡΑΦή setup 3 + `combined2` | 89 | 89 | 0 | refused |
+
+**ΠΊΝΑΞ on the same eight: −8 on the ΜΕΤΡΟΝ wording, 0 on all seven others** — the digit test
+rejects them before the table is read. Total over the eight: ΠΊΝΑΞ **−8**, ΠΕΡΙΚΟΠΉ **−91**.
+
+---
+
+### 5. The live chain A/B, and its result
+
+`bench/x107/perikopi29.ts` (v1: clause pass only) and `bench/x107/perikopi3.ts` (v3: clause +
+preamble + ΔΙΑΣΤΗΜΑ/ΣΥΝΚΡΙΣΗ families), both with `OMEGA_DET=1 OMEGA_NO_MEMO=1 OMEGA_ENGRAM=0
+OMEGA_OURA_MEMO=0 OMEGA_NO_OROTHESIA=1`, both arms in one process, arms interleaved per lane,
+scored on `tagstackEncode` — **the function the encoder actually ships**. Arm `off` is the
+shipped chain with `OMEGA_NO_PERIKOPI=1`. Receipts: `bench/x107/receipts/perikopi.log` (v1),
+`perikopi3.log` (v3), `perikopi3-sub.log` (the nine-lane read), `lsl.out` (`ls-l-real`'s `off`
+arm, measured separately after v1 was terminated on that lane).
+
+**v1 (clause pass only): Δ −10 on `psql-output` alone, 0 on the other 28 lanes it reached.**
+Exact 28/28 before it was terminated on `ls-l-real`, whose `off` arm alone measured
+2 721 148 ms.
+
+**v3, the totals, exact on all 29 lanes** (`bench/x107/receipts/perikopi3.log`):
+
+| | tokens | exact |
+|---|---|---|
+| ΠΕΡΙΚΟΠΈ off (the honest chain frontier) | **12 360** | 29/29 |
+| ΠΕΡΙΚΟΠΈ v3 live | **12 315** | 29/29 |
+| **Δ** | **−45** | 29/29 |
+
+Per-lane histogram of the 22 improvements: **−12 ×2** (`psql-output`, `prices.csv`),
+**−2 ×1** (`markdown-table`), **−1 ×19**. `ls-l-real` 1 362 → 1 361.
+
+**v3, per lane, exact on every lane measured:**
+
+| Δ | lanes |
+|---|---|
+| **−12** | `psql-output.txt`, `prices.csv` |
+| **−2** | `markdown-table.md` |
+| **−1** | `kb-article.txt`, `vmstat.txt`, `unified-diff.patch`, `df-real.txt`, `du-real.txt`, `node-help.txt`, `findmnt.txt`, `df-h.txt` (x42), `email-thread.txt`, `llm-answer.md`, `ps-ef.txt`, `ls-real.txt`, `json-pkg.txt`, `code-ts.txt`, `dpkg-l.txt`, `ps-real.txt`, `ps-aux-real.txt`, `apt-real.txt`, **`ls-l-real.txt`** — **19 lanes** |
+| 0 | `lsblk.txt`, `uptime-w.txt`, `free-m.txt`, `df-h.txt` (holdout-tbl), `cue-sheet.md`, `kubectl-get-pods.txt`, `metrics.tsv` |
+
+**22 of 29 lanes improved, ΣΔ = −45, 0 lanes worse, exact 29 of 29.** The 19 lanes at −1 are
+the general result: they carry the ΣΥΝΚΡΙΣΗ legend, and the only thing ΠΕΡΙΚΟΠΈ does to them
+is drop the fixed 34-character preamble toll. That is the lever that pays on prose and ops
+alike, and it is why the gain is broad rather than targeted.
+
+**Determinism control.** The v3 probe runs the `off` arm on its first three lanes and asserts
+the reproduced figure equals the v1 receipt's; **0 mismatches**. That is what licenses it to
+run the `off` arm on three lanes instead of twenty-nine, and it was checked rather than
+assumed.
+
+**A bug in the probe itself, caught and fixed, and reported because it produced a number that
+looked like a result.** The first v3 probe keyed v1's prices by lane *basename*, and two of
+the 29 lanes are both named `df-h.txt` (`bench/holdout-tbl/` at 170 tokens and
+`bench/holdout-x42/` at 107). It therefore compared the x42 price against the holdout-tbl
+encode and printed **`df-h.txt off 107 on 170 D +63`** — a 63-token "regression" that was
+purely the probe's own bookkeeping. The shipped probe keys by full path. Had it not been
+caught, the turn would have reported a 63-token loss that never happened.
+
+**What did not fire, stated plainly.** `cue-sheet.md` is parented by ΣΤΙΧΟΜΥΘΪΑ, whose wire
+carries no `§`, so the ΧΕΙΡΩΝ-layer invariant is unsatisfiable and the lane is declined
+unsearched rather than edited without a check. `kubectl-get-pods.txt` and `metrics.tsv` carry
+ΑΚΟΛΟΥΘΪΑ2's `⁺ =` delta legend, for which ΠΕΡΙΚΟΠΉ has no table. `lsblk`, `uptime-w`, `free-m`
+and `df-h` (holdout-tbl) carry contracts too short to abridge. Seven of 29 lanes are therefore
+untouched, and that is a real limit of this codec, not a rounding.
+
+---
+
+### 6. Model-readability — **downgraded, not declared verified**
+
+**No model API exists in this environment, so no new decode was run this turn.** What is bound
+to evidence:
+
+- ΠΕΡΙΚΟΠΈ changes **only the contract line**, and on a ΧΕΙΡΩΝ-parented lane
+  `chironDecode(incumbent) === chironDecode(candidate)` is checked on every encode, so the
+  code-decodable part of the wire is provably byte-identical. `chironDecode` round-trips
+  every emitted message in every receipt quoted above.
+- ΠΕΡΙΚΟΠΈ **adds no operator, no glyph, no tape entry and no decode rule**, and GATE 4
+  guarantees every operator the original legend named is still named in the replacement. The
+  wire *language* is unchanged; only the wording of one line is shorter.
+- The prior-turn evidence that a model can decode this wire class from a single chat input
+  with no skills.md and no system prompt stands as recorded: **10 of 10 available LLM-blind
+  decode cases byte-exact** (`bench/x104/llmdecode.mjs`). That evidence was measured on
+  messages carrying the **original, uncontracted** contract, and it does **not** transfer
+  automatically to a contracted one. **The transfer is explicitly downgraded and no claim is
+  made that it holds.**
+- The closest external prior art is **arXiv:2604.13066**, which achieves lossless dictionary
+  prompt compression but supplies the dictionary and the decode rules **in a system prompt**
+  ("You are a PRECISE text decoder. Replace ALL `<M###>` tokens with EXACT dictionary
+  values…"). This codec's contract carries the same instruction *inside the message*, which is
+  what makes a single-chat-input decode conceivable at all — and is also why the contract line
+  is load-bearing rather than optional, and why contracting it is the one edit in this stack
+  whose risk no executable check can close.
+
+---
+
+### 7. What was missed all along, and the AI-native ideas a human reader is blind to
+
+**Missed: the encoder has been better than its own receipt for thirty turns.** The single
+largest finding of this turn is not a codec. It is that the number used to decide whether a
+codec was worth shipping has been measuring a different function from the one that ships, and
+that the gap — **279 tokens, 2.2 %** — is larger than every codec added in the last five turns
+combined. The reason it survived is structural and worth naming: `tagstackFrontier` is
+*documented* as the identity without the candidates, so nothing about it looks wrong, and the
+arms price themselves against it correctly. The instrument is right for its stated purpose and
+wrong for the purpose it was used for. A checker pointed at the wrong object is the dominant
+failure mode, and it hid here in the one place nobody had reason to doubt.
+
+**Missed: two validated codecs were never wired in.** ΠΊΝΑΞ and ΒΡΑΧΥΛΟΓΊΑ were written, gated
+and measured, and then registered as arms and forgotten. The chain never called them. A codec
+that exists in a registry is not a codec that ships.
+
+**Missed: the contract was treated as documentation.** It is the decode program. It has a
+token price, it is paid on every message, and it had never been priced as part of the message
+at all — only *chosen* between alternatives (ΣΥΜΠΛΟΚΗ, ΧΕΙΡΩΝ's contract search). Editing the
+chosen contract's wording was the unopened surface.
+
+**The AI-native observation a human researcher is likely to discount.** The contract is the
+only part of the wire whose price is set by *English word choice* rather than by information
+content. Every wire-side mechanism in this stack has been measured on the tape and the body,
+where the returns have been zero for five turns; the returns on the contract were never
+measured, because the contract looked like documentation rather than like code. It is code.
+
+**The second AI-native observation, and the one that generalises.** The lever that pays on
+every lane is not a clever mechanism, it is the removal of a fixed toll. `Before ¶ k=v. expand
+repeatedly ` is 34 characters paid by every message that carries a ΧΕΙΡΩΝ tape, in exactly the
+same words, describing exactly the same three facts. Prior work in this space optimises the
+*payload*; the fixed per-message tax is invisible to every payload-side objective because it
+does not scale with the payload. That is the same blind spot ΣΥΜΠΛΟΚΗ identified ("contract
+cost is a fixed tax paid by every message, so it is the one lever that pays on prose, where
+every wire-side mechanism measured this turn returned exactly zero"), and this turn is the
+first time it has been collected on the *emitted* wire rather than on the contract *choice*.
+19 of 29 lanes improved by exactly one token from that removal alone, including five prose
+lanes (`kb-article`, `unified-diff`, `email-thread`, `llm-answer`, and `code-ts`).
+
+---
+
+### 8. External sources, all new this turn, none previously referenced
+
+| source | what it supplied | how it was used |
+|---|---|---|
+| **arXiv:2604.13066** — *Lossless Prompt Compression via Dictionary-Encoding and In-Context Learning* | dictionary-encoding with `<M###>` meta-tokens where **the dictionary and the decode rules live in a SYSTEM PROMPT**; "LLMs treat dictionary-based compression as a deterministic symbol substitution task"; no correlation between compression ratio and decompression accuracy | the closest prior art to this codec's whole design, and the contrast case: their decoder needs an externally supplied instruction, ours carries the instruction *inside* the message. That distinction is what makes a single-chat-input decode possible at all |
+| **arXiv:1908.06428** — *The smallest grammar problem revisited* | exact worst-case ratios Θ((n/log n)^{2/3}) for LZ78 and Θ(√(n/log n)) for BISECTION; a raised RePair lower bound | bounds on the grammar compressors ΧΕΙΡΩΝ is a FIFO variant of. Used as a bound, not transferred |
+| **arXiv:2606.27019** — *MinGram* | "By making token count the primary objective and using a Unigram score only as a tiebreak" | the design principle ΠΕΡΙΚΟΠΉ follows: one objective, ties broken by nothing, priced by the real tokenizer |
+| **arXiv:2506.15138** — *Thunder-Tok* | ~25 % lower fertility than BPE by letting tokens span more than a word; "simply adding longer tokens is insufficient" | evidence that the *string* a tokenizer is handed matters as much as its vocabulary — the premise for treating the contract line as a priced string |
+| **arXiv:2610.12376** — *Latent Core Tokenizer*, Algorithm 2 | a dynamic program returning "the globally minimum-token exact encoding"; "recomputing affected counts after every non-overlapping merge makes the merge order deterministic" | the template for ΠΕΡΙΚΟΠΉ's determinism claim and the reason the abbreviation table is total and idempotent rather than searched |
+| **arXiv:2610.32298** — *Exact Algorithms and Complexity of the SGP* | disjointness/partition structure of an optimal grammar; O^*(1.8723^n) | already cited in X106; re-read this turn for the dictionary-as-partition property ΧΕΙΡΩΝ violates at 0.1 % (X106, `overlap-x106.json`) |
+
+**Frontier-lab mathematics searched individually this turn** (OpenAI, DeepMind, Anthropic, and
+the independent labs, with new terms): OpenAI's unit-distance disproof (arXiv:2605.20695) and
+722-manuscript release; DeepMind AlphaProof Nexus (arXiv:2605.22763) and AlphaEvolve's
+metric-TSP result; Anthropic's FLT result and Jacobian dimension-3 work; Axiom's 6/6 IMO 2026;
+FrontierMath's Erdős-problem evaluation. None supplies a compression mechanism and none is
+claimed to. **The honest report is that the compression-relevant result of this turn came from
+the tokenizer and prompt-compression literature, not from the mathematics releases.**
+
+---
+
+### 9. The falsifications of X107
+
+| hypothesis | imported result | measurement | verdict |
+|---|---|---|---|
+| the frontier receipt prices the encoder's output | — | chain 12 360 vs identity 12 639; `cue-sheet` 101 vs 163 | **falsified — it prices the identity layer; the encoder is 279 tokens smaller** |
+| ΠΊΝΑΞ's two rules cover the legend population | — | −8 on 1 of 8 wordings, 0 on 7 | **real defect, repaired by the general pass** |
+| a digit in the line means it is not a legend | — | every ΑΠΟΓΡΑΦΗ/ΔΙΑΣΤΗΜΑ/ΣΥΝΚΡΙΣΗ legend contains digits | **falsified — the test is backwards for this population** |
+| a definition count ≥ 2 identifies a legend | — | ΔΙΑΣΤΗΜΑ and ΣΥΝΚΡΙΣΗ legends have one `=` and zero `:` | **falsified — the test refused two whole families** |
+| dropping "repeatedly" from the preamble is a free −1 | ΣΥΜΠΛΟΚΗ's expand/expand-repeatedly variation | −3 measured, GATE 4 refuses | **falsified — the word is load-bearing on a nested tape; candidate not shipped** |
+| the preamble contraction survives on every lane in context | — | −12 on `psql-output`; Δ 0 on `cue-sheet` (ΣΤΙΧΟΜΥΘΪΑ wire has no `§`) | **partly falsified — ΧΕΙΡΩΝ-parented lanes only; ΣΤΙΧΟΜΥΘΪΑ and ΑΚΟΛΟΥΘΪΑ2 untouched** |
+| ΠΊΝΑΞ's rules beat the general pass on ΜΕΤΡΟΝ's wording | — | ΠΊΝΑΞ −8, ΠΕΡΙΚΟΠΈ general+preamble −12 | **falsified — but both passes ship, priced, because neither dominates the family** |

@@ -1,0 +1,205 @@
+[
+ {
+  "path": "bench/holdout-x42/lsblk.txt",
+  "cat": "OPS TABLE",
+  "raw": 60,
+  "floor": 61,
+  "shipped": 60
+ },
+ {
+  "path": "bench/holdout-work/kb-article.txt",
+  "cat": "PROSE",
+  "raw": 656,
+  "floor": 608,
+  "shipped": 622
+ },
+ {
+  "path": "bench/holdout-x42b/uptime-w.txt",
+  "cat": "OPS TABLE",
+  "raw": 80,
+  "floor": 70,
+  "shipped": 80
+ },
+ {
+  "path": "bench/holdout-x42b/free-m.txt",
+  "cat": "OPS TABLE",
+  "raw": 76,
+  "floor": 76,
+  "shipped": 76
+ },
+ {
+  "path": "bench/holdout-x42b/vmstat.txt",
+  "cat": "OPS TABLE",
+  "raw": 229,
+  "floor": 113,
+  "shipped": 149
+ },
+ {
+  "path": "bench/holdout-work/unified-diff.patch",
+  "cat": "CODE / MARKUP",
+  "raw": 578,
+  "floor": 324,
+  "shipped": 419
+ },
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "cat": "OPS TABLE",
+  "raw": 570,
+  "floor": 129,
+  "shipped": 171
+ },
+ {
+  "path": "bench/holdout-x41/df-real.txt",
+  "cat": "OPS TABLE",
+  "raw": 158,
+  "floor": 96,
+  "shipped": 126
+ },
+ {
+  "path": "bench/holdout-x41/du-real.txt",
+  "cat": "OPS LISTING",
+  "raw": 458,
+  "floor": 219,
+  "shipped": 272
+ },
+ {
+  "path": "bench/holdout-x41/node-help.txt",
+  "cat": "PROSE",
+  "raw": 1099,
+  "floor": 852,
+  "shipped": 862
+ },
+ {
+  "path": "bench/holdout-x42/findmnt.txt",
+  "cat": "OPS LISTING",
+  "raw": 787,
+  "floor": 335,
+  "shipped": 444
+ },
+ {
+  "path": "bench/holdout-x42/df-h.txt",
+  "cat": "OPS TABLE",
+  "raw": 140,
+  "floor": 84,
+  "shipped": 108
+ },
+ {
+  "path": "bench/holdout-work/email-thread.txt",
+  "cat": "PROSE",
+  "raw": 629,
+  "floor": 443,
+  "shipped": 488
+ },
+ {
+  "path": "bench/holdout-work/llm-answer.md",
+  "cat": "PROSE",
+  "raw": 733,
+  "floor": 626,
+  "shipped": 674
+ },
+ {
+  "path": "bench/holdout-tbl/markdown-table.md",
+  "cat": "OPS TABLE",
+  "raw": 330,
+  "floor": 133,
+  "shipped": 176
+ },
+ {
+  "path": "bench/holdout-tbl/psql-output.txt",
+  "cat": "OPS TABLE",
+  "raw": 675,
+  "floor": 166,
+  "shipped": 244
+ },
+ {
+  "path": "bench/holdout-x40/prices.csv",
+  "cat": "DATA",
+  "raw": 582,
+  "floor": 110,
+  "shipped": 133
+ },
+ {
+  "path": "bench/holdout-x40/cue-sheet.md",
+  "cat": "DATA",
+  "raw": 513,
+  "floor": 99,
+  "shipped": 163
+ },
+ {
+  "path": "bench/holdout-x42/ps-ef.txt",
+  "cat": "OPS LISTING",
+  "raw": 1144,
+  "floor": 250,
+  "shipped": 315
+ },
+ {
+  "path": "bench/holdout-x41/ls-real.txt",
+  "cat": "OPS LISTING",
+  "raw": 1034,
+  "floor": 328,
+  "shipped": 433
+ },
+ {
+  "path": "bench/holdout/json-pkg.txt",
+  "cat": "CODE / MARKUP",
+  "raw": 1152,
+  "floor": 592,
+  "shipped": 681
+ },
+ {
+  "path": "bench/holdout/code-ts.txt",
+  "cat": "CODE / MARKUP",
+  "raw": 1422,
+  "floor": 812,
+  "shipped": 969
+ },
+ {
+  "path": "bench/holdout-x42/dpkg-l.txt",
+  "cat": "OPS LISTING",
+  "raw": 1000,
+  "floor": 592,
+  "shipped": 673
+ },
+ {
+  "path": "bench/holdout-x41/ps-real.txt",
+  "cat": "OPS LISTING",
+  "raw": 1106,
+  "floor": 320,
+  "shipped": 397
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "cat": "OPS TABLE",
+  "raw": 1006,
+  "floor": 214,
+  "shipped": 326
+ },
+ {
+  "path": "bench/holdout-x40/metrics.tsv",
+  "cat": "OPS TABLE",
+  "raw": 811,
+  "floor": 130,
+  "shipped": 210
+ },
+ {
+  "path": "bench/holdout-x41/ps-aux-real.txt",
+  "cat": "OPS LISTING",
+  "raw": 3054,
+  "floor": 743,
+  "shipped": 1042
+ },
+ {
+  "path": "bench/holdout-x41/apt-real.txt",
+  "cat": "OPS LISTING",
+  "raw": 2739,
+  "floor": 690,
+  "shipped": 850
+ },
+ {
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "cat": "OPS LISTING",
+  "raw": 5194,
+  "floor": 943,
+  "shipped": 1476
+ }
+]

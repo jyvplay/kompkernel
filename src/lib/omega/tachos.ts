@@ -83,6 +83,7 @@
  */
 
 import { EncodingName, countTokens } from './bpe';
+import { now } from './clock';
 import { chironDecode } from './chiron';
 import { symplokeDecode, symplokeUncollapse } from './symploke';
 import { SyntomosResult } from './syntomos';
@@ -165,7 +166,7 @@ function bootstrapArm(
   maxRules: number,
 ): { wire: string; rules: number } | null {
   if (text.length > MAX_BOOTSTRAP_CHARS) return null;
-  const deadline = Date.now() + BOOTSTRAP_DEADLINE_MS;
+  const deadline = now() + BOOTSTRAP_DEADLINE_MS;
   const used = new Set([...text]);
   const pool: string[] = [];
   for (const [lo, hi] of [[0x400, 0x460], [0x370, 0x3d0]] as Array<[number, number]>) {
@@ -182,7 +183,7 @@ function bootstrapArm(
   let rules = 0;
 
   for (let round = 0; round < maxRules && gi < pool.length; round++) {
-    if (Date.now() > deadline) break;
+    if (now() > deadline) break;
     const cand = new Map<string, number>();
     for (let L = 2; L <= Math.min(64, body.length); L++) {
       const seen = new Set<string>();
@@ -190,7 +191,7 @@ function bootstrapArm(
         const s = body.slice(i, i + L);
         if (!seen.has(s)) { seen.add(s); const c = countAll(body, s); if (c >= 2) cand.set(s, c); }
       }
-      if (Date.now() > deadline) break;
+      if (now() > deadline) break;
     }
     let best: { s: string; tot: number; nb: string; nt: string } | null = null;
     const X = pool[gi];

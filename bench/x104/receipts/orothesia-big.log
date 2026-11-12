@@ -1,0 +1,24 @@
+ps-ef.txt              base   315  plus   315  Δ   0  exact=true parent=synkrisis 18024ms
+ps-ef.txt	315	315	0	true	synkrisis	18046
+ls-real.txt            base   433  plus   433  Δ   0  exact=true parent=synkrisis 24684ms
+ls-real.txt	433	433	0	true	synkrisis	24684
+json-pkg.txt	681	681	0	true	synkrisis	34284
+json-pkg.txt           base   681  plus   681  Δ   0  exact=true parent=synkrisis 34284ms
+code-ts.txt            base   969  plus   969  Δ   0  exact=true parent=synkrisis 58958ms
+code-ts.txt	969	969	0	true	synkrisis	58959
+dpkg-l.txt	673	673	0	true	synkrisis	43407
+dpkg-l.txt             base   673  plus   673  Δ   0  exact=true parent=synkrisis 43407ms
+ps-real.txt	397	397	0	true	synkrisis	30714
+ps-real.txt            base   397  plus   397  Δ   0  exact=true parent=synkrisis 30714ms
+kubectl-get-pods.txt	326	326	0	true	akolouthia2	45253
+kubectl-get-pods.txt   base   326  plus   326  Δ   0  exact=true parent=akolouthia2 45252ms
+metrics.tsv	210	210	0	true	akolouthia2	36196
+metrics.tsv            base   210  plus   210  Δ   0  exact=true parent=akolouthia2 36196ms
+ps-aux-real.txt        base  1042  plus  1042  Δ   0  exact=true parent=synkrisis 137322ms
+ps-aux-real.txt	1042	1042	0	true	synkrisis	137323
+apt-real.txt           base   850  plus   850  Δ   0  exact=true parent=synkrisis 222110ms
+apt-real.txt	850	850	0	true	synkrisis	222111
+ls-l-real.txt          base  1476  plus  1476  Δ   0  exact=true parent=synkrisis 592266ms
+ls-l-real.txt	1476	1476	0	true	synkrisis	592266
+
+11 lanes: base 7372 -> plus 7372   Δ 0   inexact 0

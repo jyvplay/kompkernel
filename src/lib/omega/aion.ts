@@ -89,6 +89,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { eidosDecode, eidosEncode } from './eidos';
 import { hydraDecode, hydraEncode } from './hydra';
 import { glossiaDecode } from './glossia';
@@ -312,7 +313,7 @@ function deltaConstEncode(text: string, enc: EncodingName): { wire: string; deco
 export interface AionOptions { budgetMs?: number; }
 
 export function aionEncode(text: string, enc: EncodingName = 'o200k_base', opts: AionOptions = {}): AionResult {
-  const t0 = Date.now();
+  const t0 = now();
   const inTokens = countTokens(text, enc);
   const budgetMs = opts.budgetMs ?? 26000;
 
@@ -323,7 +324,7 @@ export function aionEncode(text: string, enc: EncodingName = 'o200k_base', opts:
 
   let delta: ReturnType<typeof deltaConstEncode> = null;
   let M_delta = Infinity;
-  if (Date.now() - t0 < budgetMs - 800 && text.length >= 120 && text.length <= 40000 && (text.includes(',') || text.includes('\t') || text.includes('|'))) {
+  if (now() - t0 < budgetMs - 800 && text.length >= 120 && text.length <= 40000 && (text.includes(',') || text.includes('\t') || text.includes('|'))) {
     try { delta = deltaConstEncode(text, enc); if (delta) M_delta = delta.messageTokens; } catch {}
   }
 

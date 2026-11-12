@@ -90,6 +90,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import { eidosDecode, eidosEncode } from './eidos';
 
 export interface MnemosyneResult {
@@ -226,7 +227,7 @@ function drainTemplateEncode(text: string, enc: EncodingName): { wire: string; d
 export interface MnemosyneOptions { budgetMs?: number; }
 
 export function mnemosyneEncode(text: string, enc: EncodingName = 'o200k_base', opts: MnemosyneOptions = {}): MnemosyneResult {
-  const t0 = Date.now();
+  const t0 = now();
   const inTokens = countTokens(text, enc);
   const budgetMs = opts.budgetMs ?? 26000;
 
@@ -237,7 +238,7 @@ export function mnemosyneEncode(text: string, enc: EncodingName = 'o200k_base', 
 
   let drain: ReturnType<typeof drainTemplateEncode> = null;
   let M_drain = Infinity;
-  if (Date.now() - t0 < budgetMs - 800 && text.length >= 120 && text.length <= 40000 && text.includes('\n')) {
+  if (now() - t0 < budgetMs - 800 && text.length >= 120 && text.length <= 40000 && text.includes('\n')) {
     try { drain = drainTemplateEncode(text, enc); if (drain) M_drain = drain.messageTokens; } catch { /* */ }
   }
 

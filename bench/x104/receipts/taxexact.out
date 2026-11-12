@@ -1,0 +1,19 @@
+vmstat.txt             insertion   149  exact   149  Δ   0  exact true/true  shaSame=false  ms 9310/8812
+unified-diff.patch     insertion   419  exact   419  Δ   0  exact true/true  shaSame=false  ms 11015/11107
+df-real.txt            insertion   126  exact   126  Δ   0  exact true/true  shaSame=false  ms 23233/21270
+du-real.txt            insertion   272  exact   272  Δ   0  exact true/true  shaSame=false  ms 19751/18852
+node-help.txt          insertion   862  exact   862  Δ   0  exact true/true  shaSame=false  ms 36134/32962
+findmnt.txt            insertion   444  exact   444  Δ   0  exact true/true  shaSame=false  ms 36190/34218
+email-thread.txt       insertion   488  exact   488  Δ   0  exact true/true  shaSame=false  ms 32445/36006
+llm-answer.md          insertion   674  exact   674  Δ   0  exact true/true  shaSame=false  ms 47093/38071
+markdown-table.md      insertion   176  exact   176  Δ   0  exact true/true  shaSame=false  ms 22163/20620
+psql-output.txt        insertion   244  exact   244  Δ   0  exact true/true  shaSame=false  ms 28743/26615
+prices.csv             insertion   133  exact   133  Δ   0  exact true/true  shaSame=false  ms 17153/12792
+ls-real.txt            insertion   433  exact   433  Δ   0  exact true/true  shaSame=false  ms 27859/25789
+ps-real.txt            insertion   397  exact   397  Δ   0  exact true/true  shaSame=false  ms 32718/30333
+kubectl-get-pods.txt   insertion   326  exact   326  Δ   0  exact true/true  shaSame=false  ms 50917/53498
+metrics.tsv            insertion   210  exact   210  Δ   0  exact true/true  shaSame=false  ms 47993/32585
+insertion  TOTAL   5353  exact 15/15  ms 442717
+exact      TOTAL   5353  exact 15/15  ms 403530
+
+DELTA exact - insertion = 0

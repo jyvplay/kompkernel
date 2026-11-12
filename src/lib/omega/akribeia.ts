@@ -88,6 +88,7 @@
  */
 
 import { countTokens, type EncodingName } from './bpe';
+import { now } from './clock';
 import {
   CHIRON_START, CHIRON_SEP, CHIRON_SCRIPTS,
   chironDecode, chironParseTape, chironInScript,
@@ -199,7 +200,7 @@ export function akribeiaPolish(
   if (!Number.isFinite(cur)) return null;
   let dropped = 0;
   for (let it = 0; it < maxIters; it++) {
-    if (Date.now() > deadline) break;
+    if (now() > deadline) break;
     let bestI = -1, bestTok = cur, bestState: ParsedWire | null = null;
     for (let i = 0; i < p.rules.length; i++) {
       const d = dropRule(p, i);
@@ -314,7 +315,7 @@ export function akribeiaEncode(
   enc: EncodingName = 'o200k_base',
   options: AkribeiaOptions = {},
 ): AkribeiaResult {
-  const t0 = Date.now();
+  const t0 = now();
   const T = (s: string) => countTokens(s, enc);
   const inTokens = T(text);
   const budgetMs = options.budgetMs ?? 12000;
@@ -346,7 +347,7 @@ export function akribeiaEncode(
   const tried: AkribeiaArm[] = [];
   let armsRun = 0;
   for (const name of order) {
-    if (armsRun >= maxArms || Date.now() > deadline) break;
+    if (armsRun >= maxArms || now() > deadline) break;
     tried.push(name);
     armsRun++;
     let r: any = null;
@@ -377,7 +378,7 @@ export function akribeiaEncode(
       .sort((a, b) => a.tokens - b.tokens)
       .slice(0, 2);
     for (const c of chironCands) {
-      if (Date.now() > deadline) break;
+      if (now() > deadline) break;
       try {
         const p = akribeiaPolish(c.wire, text, enc, 200, deadline);
         if (p && p.tokens < c.tokens) {

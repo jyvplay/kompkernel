@@ -1,0 +1,197 @@
+{
+ "lanes": 15,
+ "policies": [
+  "insertion",
+  "exact"
+ ],
+ "totals": {
+  "insertion": 5353,
+  "exact": 5353
+ },
+ "rows": {
+  "insertion": [
+   {
+    "path": "bench/holdout-x42b/vmstat.txt",
+    "tokens": 149,
+    "exact": true,
+    "ms": 9310
+   },
+   {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "tokens": 419,
+    "exact": true,
+    "ms": 11015
+   },
+   {
+    "path": "bench/holdout-x41/df-real.txt",
+    "tokens": 126,
+    "exact": true,
+    "ms": 23233
+   },
+   {
+    "path": "bench/holdout-x41/du-real.txt",
+    "tokens": 272,
+    "exact": true,
+    "ms": 19751
+   },
+   {
+    "path": "bench/holdout-x41/node-help.txt",
+    "tokens": 862,
+    "exact": true,
+    "ms": 36134
+   },
+   {
+    "path": "bench/holdout-x42/findmnt.txt",
+    "tokens": 444,
+    "exact": true,
+    "ms": 36190
+   },
+   {
+    "path": "bench/holdout-work/email-thread.txt",
+    "tokens": 488,
+    "exact": true,
+    "ms": 32445
+   },
+   {
+    "path": "bench/holdout-work/llm-answer.md",
+    "tokens": 674,
+    "exact": true,
+    "ms": 47093
+   },
+   {
+    "path": "bench/holdout-tbl/markdown-table.md",
+    "tokens": 176,
+    "exact": true,
+    "ms": 22163
+   },
+   {
+    "path": "bench/holdout-tbl/psql-output.txt",
+    "tokens": 244,
+    "exact": true,
+    "ms": 28743
+   },
+   {
+    "path": "bench/holdout-x40/prices.csv",
+    "tokens": 133,
+    "exact": true,
+    "ms": 17153
+   },
+   {
+    "path": "bench/holdout-x41/ls-real.txt",
+    "tokens": 433,
+    "exact": true,
+    "ms": 27859
+   },
+   {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "tokens": 397,
+    "exact": true,
+    "ms": 32718
+   },
+   {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "tokens": 326,
+    "exact": true,
+    "ms": 50917
+   },
+   {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "tokens": 210,
+    "exact": true,
+    "ms": 47993
+   }
+  ],
+  "exact": [
+   {
+    "path": "bench/holdout-x42b/vmstat.txt",
+    "tokens": 149,
+    "exact": true,
+    "ms": 8812
+   },
+   {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "tokens": 419,
+    "exact": true,
+    "ms": 11107
+   },
+   {
+    "path": "bench/holdout-x41/df-real.txt",
+    "tokens": 126,
+    "exact": true,
+    "ms": 21270
+   },
+   {
+    "path": "bench/holdout-x41/du-real.txt",
+    "tokens": 272,
+    "exact": true,
+    "ms": 18852
+   },
+   {
+    "path": "bench/holdout-x41/node-help.txt",
+    "tokens": 862,
+    "exact": true,
+    "ms": 32962
+   },
+   {
+    "path": "bench/holdout-x42/findmnt.txt",
+    "tokens": 444,
+    "exact": true,
+    "ms": 34218
+   },
+   {
+    "path": "bench/holdout-work/email-thread.txt",
+    "tokens": 488,
+    "exact": true,
+    "ms": 36006
+   },
+   {
+    "path": "bench/holdout-work/llm-answer.md",
+    "tokens": 674,
+    "exact": true,
+    "ms": 38071
+   },
+   {
+    "path": "bench/holdout-tbl/markdown-table.md",
+    "tokens": 176,
+    "exact": true,
+    "ms": 20620
+   },
+   {
+    "path": "bench/holdout-tbl/psql-output.txt",
+    "tokens": 244,
+    "exact": true,
+    "ms": 26615
+   },
+   {
+    "path": "bench/holdout-x40/prices.csv",
+    "tokens": 133,
+    "exact": true,
+    "ms": 12792
+   },
+   {
+    "path": "bench/holdout-x41/ls-real.txt",
+    "tokens": 433,
+    "exact": true,
+    "ms": 25789
+   },
+   {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "tokens": 397,
+    "exact": true,
+    "ms": 30333
+   },
+   {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "tokens": 326,
+    "exact": true,
+    "ms": 53498
+   },
+   {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "tokens": 210,
+    "exact": true,
+    "ms": 32585
+   }
+  ]
+ }
+}
