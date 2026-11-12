@@ -1,0 +1,10 @@
+X108 — live A/B of ΤΑΧΥΓΡΑΦΪΑ on the three ΑΚΟΛΟΥΘΪΑ2 lanes, FINAL table (whole-sentence
+rule, ΑΚΟΛΟΥΘΪΑ2 23 -> 15).  Pinned: OMEGA_DET=1 OMEGA_NO_MEMO=1 OMEGA_ENGRAM=0
+OMEGA_OURA_MEMO=0 OMEGA_NO_OROTHESIA=1
+
+lane                      off   on    Δ   exact  verdict
+kubectl-get-pods.txt      322  314   -8   y       CHANGED
+metrics.tsv               208  200   -8   y       CHANGED
+df-h.txt (holdout-tbl)    170  162   -8   y       CHANGED
+
+TOTAL off 700  on 676  ΣΔ -24   better 3  same 0  worse 0  unreachable 0  exact true  chironSame true

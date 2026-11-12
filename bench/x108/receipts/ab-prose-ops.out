@@ -1,0 +1,8 @@
+X108 — live A/B on the two lanes that answer the "general gain on prose and ops" question.
+Pinned: OMEGA_DET=1 OMEGA_NO_MEMO=1 OMEGA_ENGRAM=0 OMEGA_OURA_MEMO=0 OMEGA_NO_OROTHESIA=1
+
+lane                      off   on    Δ   exact  verdict
+node-help.txt             859  859    0   y       identical
+df-real.txt               124  124    0   y       identical
+
+TOTAL off 983  on 983  ΣΔ 0   better 0  same 2  worse 0  unreachable 0  exact true  chironSame true

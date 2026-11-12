@@ -1,0 +1,4 @@
+psql-output.txt      parent metron         script=cyrillic rules=true glyphsInWire=20
+node-help.txt        parent synkrisis      script=cyrillic rules=true glyphsInWire=42
+kb-article.txt       parent synkrisis      script=cyrillic rules=true glyphsInWire=27
+df-real.txt          parent synkrisis      script=cyrillic rules=true glyphsInWire=13

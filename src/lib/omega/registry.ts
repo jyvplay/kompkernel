@@ -224,6 +224,7 @@ import { synizesisEncode } from './synizesis';
 import { syntomiaEncode } from './syntomia';
 import { brachylogiaEncode } from './brachylogia';
 import { pinaxEncode } from './pinax';
+import { tachygrafiaEncode } from './tachygrafia';
 import { merismosEncode } from './merismos';
 import { parataxisEncode } from './parataxis';
 import { schemaEncode } from './schema';
@@ -1697,6 +1698,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'pinax', label: '▤ PINAX (X76: the composed LEGEND is a table spelled as prose; rewrite it as the table it is, operator set preserved, verified by invertibility + operator coverage + strict win)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = pinaxEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
+    },
+    {
+      key: 'tachygrafia', label: 'ΤΑΧΥΓΡΑΦΉΑ TACHYGRAFIA (X108: the decoder INSTRUCTION line is shortened by a longest-match-first PHRASE table needing no clause structure; covers the ΣΤΙΧΟΜΥΘΉΑ and ΑΚΟΛΟΥΘΉΑ2 legends no other codec reaches; verified by per-edit invertibility + structural § gate + element coverage + strict win)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = tachygrafiaEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
     },
     {
       key: 'synizesis', label: '⇒ SYNIZESIS (Pre-Tokenizer Boundary Collapse by Shape-Template Factoring)', family: 'exact', fidelity: 'exact',

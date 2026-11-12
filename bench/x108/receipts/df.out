@@ -1,0 +1,15 @@
+off tokens=170 §at 96 explen=994
+on  tokens=166 §at 81 explen=994
+equal exp: true
+
+--- OFF contract (before §) ---
+"⁺ = the number at the same position in the line above, plus the change from the line two above.\n"
+
+--- ON contract (before §) ---
+"⁺ = the number at the same position above, plus its change from two lines above.\n"
+
+--- OFF wire-from-§ (first 200) ---
+"§ө ⁺Gгө агги  ө  өр% /mnt/volт⁺ш ⁺рт\nйш/devн  гоG   с/nvme0n1pдагшейственаекстинеуд/devст ¶Filesystem      Size  Used Avail Use% Mounted on\n/devс0   100о40о50G  30р0\n/devс1   137о51о59G  33р1\n/devкинй"
+
+--- ON wire-from-§ (first 200) ---
+"§ө ⁺Gгө агги  ө  өр% /mnt/volт⁺ш ⁺рт\nйш/devн  гоG   с/nvme0n1pдагшейственаекстинеуд/devст ¶Filesystem      Size  Used Avail Use% Mounted on\n/devс0   100о40о50G  30р0\n/devс1   137о51о59G  33р1\n/devкинй"

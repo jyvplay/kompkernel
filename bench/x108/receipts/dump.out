@@ -1,0 +1,22 @@
+
+##### bench/holdout-tbl/psql-output.txt  total 230  contract 61  tape 61  body 106
+--- CONTRACT ---
+¶k=v expand repeatedly Header n,sep,col=model; named cols drop+rebuild; full n-field line literal,resets,drop. above=prev line, colM=col M same line, days/workdays=next date/weekday, +b=above+b same width print only.
+
+--- TAPE (raw) ---
+"е |ю|а-ш 2026ас |\nюшие active   сл01ье pending  сг05ое closed   сі+----+--------------+------------+--------+-----------+\nҠ=+1;щ 100.00н10х02ҭ03в04Д06б07т08"
+--- BODY (first 700) ---
+"<7;ю;2Ҡ3Ҡ5=lin:щ /3,730>\nію idе name        е created   е amountе status    |\nію не user_0000   ешлалещихахьҭаҭовавигагьДаДобабитать09а09онани11а11ь12а12ола13иха14ьҭа15ова16ига17ьДа18оба19ита20ь09а21она22и11а23ь12а24е closed    |\nі(24 rows)\n"
+--- BODY TOKEN CLASSES: pure-glyph chunks 2 (2 tok)  mixed/ascii chunks 25 (113 tok)
+--- distinct glyphs in tape: 20
+
+##### bench/holdout-x41/node-help.txt  total 859  contract 10  tape 118  body 729
+--- CONTRACT ---
+¶ k=v. expand repeatedly; print only.
+
+--- TAPE (raw) ---
+"л\nа  --иланлаexperimentalылаallowъ --cpu-profэ=...о                             слов setч when anyс permissions areву theг Generate a snapshot blob whenус process exitsӡэлок inМу V8 CPUұс experimentalФ [options] [ script.jsе fileСов configе fromй are placed before IPvА,ВА --Г (default:\nоӣку test runnerн-testі  -ю ър.\nц)\nм toхdisableд-dirя profileзв environment variables from suppliedсет specifiedё addressesБ writeһ filesystemў        О ofь generatedп             "
+--- BODY (first 700) ---
+"# source: node --help (realцUsage: nodeФ ] [arguments]\n       node inspectФ | host:port ] [arguments]\n\nOptions:\nі                           script read from stdin (default if noсе name is providedА interactive modeс if a ttyца                          indicateу endО node optionsиabort-on-uncaught-exceptionс aborting insteadО exiting causes aс coreем beь for analysisы-addonsп allow useО addonsчы-child-process       allow useО child processчы-fs-readэў allow permissionsм readусһы-fs-writeэ        allow permissionsмБкусһы-wasi                allow wasi when any permissions areвы-workerп allow worker threadsчиbuild-snapshot           граbuild-snapshot-configэг using aJSON configurationскут pathр"
+--- BODY TOKEN CLASSES: pure-glyph chunks 2 (2 tok)  mixed/ascii chunks 422 (830 tok)
+--- distinct glyphs in tape: 42

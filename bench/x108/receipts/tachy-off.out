@@ -1,0 +1,16 @@
+ΣΤΙΧΟΜΥΘΪΑ spec (cue-sheet) — NOTHING covers it  41 ->  38  Δ -3  invert=y  via=tachygrafia
+     -> "spec: v+k*r=v+(k*row#) printed like v; v@+ks=v+k sec; list* repeats; =v fixed; body=header then rows."
+ΑΚΟΛΟΥΘΪΑ2 delta (kubectl, metrics)           23 ->  15  Δ -8  invert=y  via=tachygrafia
+     -> "⁺ = number at same position above + change from two lines above."
+ΜΕΤΡΟΝ composed (psql)                        73 ->  61  Δ -12  invert=y  via=perikopi
+     -> "¶k=v expand repeatedly Header n,sep,col=model; named cols drop+rebuild; full n-field line literal,resets,drop. above=prev line, colM=col M same line, days/workdays=next date/weekday, +b=above+b same width print only."
+ΜΕΤΡΟΝ already ΠΕΡΙΚΟΠΈ-contracted            61 ->  61  Δ 0  invert=y  via=-
+ΔΙΑΣΤΗΜΑ mask (prices.csv)                    57 ->  44  Δ -13  invert=y  via=tachygrafia
+     -> "¶k=v expand repeatedly Δ: mask=value shape,# per digit. R: first space-token (signed int)+sum from 0 into #s, 0-padded; L: verbatim. print only."
+ΔΙΑΣΤΗΜΑ already ΠΕΡΙΚΟΠΈ-contracted          43 ->  43  Δ 0  invert=y  via=-
+ΣΥΝΚΡΙΣΗ (markdown-table)                     24 ->  22  Δ -2  invert=y  via=perikopi
+     -> "¶k=v expand repeatedly After ~, a number has . before its last 1 digits. print only."
+ΣΥΝΚΡΙΣΗ already ΠΕΡΙΚΟΠΈ-contracted          22 ->  22  Δ 0  invert=y  via=-
+node-help short form                          11 ->  11  Δ 0  invert=y  via=-
+
+TOTAL 355 -> 317  Δ -38   invertibility failures 0

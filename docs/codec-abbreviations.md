@@ -7012,3 +7012,119 @@ the tokenizer and prompt-compression literature, not from the mathematics releas
 | dropping "repeatedly" from the preamble is a free −1 | ΣΥΜΠΛΟΚΗ's expand/expand-repeatedly variation | −3 measured, GATE 4 refuses | **falsified — the word is load-bearing on a nested tape; candidate not shipped** |
 | the preamble contraction survives on every lane in context | — | −12 on `psql-output`; Δ 0 on `cue-sheet` (ΣΤΙΧΟΜΥΘΪΑ wire has no `§`) | **partly falsified — ΧΕΙΡΩΝ-parented lanes only; ΣΤΙΧΟΜΥΘΪΑ and ΑΚΟΛΟΥΘΪΑ2 untouched** |
 | ΠΊΝΑΞ's rules beat the general pass on ΜΕΤΡΟΝ's wording | — | ΠΊΝΑΞ −8, ΠΕΡΙΚΟΠΈ general+preamble −12 | **falsified — but both passes ship, priced, because neither dominates the family** |
+
+---
+
+## §X108 — ΤΑΧΥΓΡΑΦΊΑ (TACHYGRAFIA)
+
+**Abbreviation → technical design spec.** `ΤΑΧΥΓΡΑΦΊΑ` = *tachygrafía*, "shorthand".
+The codec shortens the **decoder-instruction line** of an already-compiled message by a
+**longest-match-first phrase table** that requires no clause structure, no legend-family
+knowledge and no sentence boundary.
+
+| field | value |
+|---|---|
+| **Greedy?** | **NO.** Fixed, total, idempotent table + longest-match-first scan, priced by the real tokenizer, cheapest of {ΠΕΡΙΚΟΠΈ clause pass, phrase pass} kept. No hill-climb, no portfolio, no clock, no budget. Same input → same wire on any machine. |
+| **Time- or CPU-bound?** | **CPU-bound, no wall clock, reproducibly.** One scan over the contract line (≤ 291 chars measured) plus a handful of token counts; independent of payload size. |
+| **Object priced** | `message.slice(0, indexOf(§))` — the contract line and nothing else (GATE 8). |
+| **Lossless?** | Yes, exact. ΠΕΡΙΚΟΠΈ's machinery is reused unchanged for the clause pass; the phrase pass is inverted from recorded steps. |
+| **Source citation** | **No external paper supplies the mechanism and none is claimed.** Framing imports: arXiv:2610.12376 (Latent Core Tokenizer) Algorithm 2, "the globally minimum-token exact encoding" and "recomputing affected counts after every non-overlapping merge makes the merge order deterministic"; arXiv:2606.27019 (MinGram), "By making token count the primary objective and using a Unigram score only as a tiebreak"; arXiv:2604.13066 (lossless dictionary prompt compression), whose compressibility inequality `(1+f)·n_token(M)+n_token(S)` prices a decode *dictionary* — the same accounting applied here to the decode *program*. |
+| **Honest gain** | **−8 tokens per ΑΚΟΛΟΥΘΪΑ2-parented lane and −1 on the ΔΙΑΣΤΗΜΑ lane**, live, exact, ΧΕΙΡΩΝ expansion byte-identical; **ΣΔ −25 over 27 of 29 lanes measured**. Δ 0 on ΠΕΡΙΚΟΠΈ-contracted lanes and on prose. Small and confined to two legend families; stated plainly. |
+
+### Why a third contract codec is not a duplicate
+
+ΠΕΡΙΚΟΠΈ parses the legend into `name = definition` **clauses** and keys a table on each
+clause's opening words. ΒΡΑΧΥΛΟΓΊΑ keys on **whole-sentence regexes** and is unwired.
+Two of the five live families have **no clause structure to anchor on** — ΣΤΙΧΟΜΥΘΪΑ's
+`spec:` is a semicolon list of equations (41 tokens, 40 % of the whole `cue-sheet.md`
+lane) and ΑΚΟΛΟΥΘΪΑ2's `⁺ =` is a single sentence with no `=`-pair. ΤΑΧΥΓΡΑΦΊΑ keys on
+phrase n-grams, so it reaches both.
+
+### Measured
+
+Offline, on the seven legend wordings the corpus emits (`bench/x108/receipts/tachy-off.out`):
+**355 → 317 tokens, Δ −38, 0 invertibility failures**, of which ΠΕΡΙΚΟΠΈ already accounted
+for −26. The new part is −3 on ΣΤΙΧΟΜΥΘΪΑ, −8 on ΑΚΟΛΟΥΘΪΑ2 and −1 on ΔΙΑΣΤΗΜΑ.
+
+Live, on the chain (`bench/x108/receipts/ab21.out`, balanced arm order, pinned
+determinism flags, ΧΕΙΡΩΝ expansion compared with the repository's own decoder):
+
+```
+lane                      off   on    Δ   exact  verdict
+kubectl-get-pods.txt      322  314   -8   y       CHANGED
+metrics.tsv               208  200   -8   y       CHANGED
+df-h.txt (holdout-tbl)    170  162   -8   y       CHANGED
+prices.csv                121  120   -1   y       CHANGED
+markdown-table.md         172  172    0   y       identical
+psql-output.txt           230  230    0   y       identical
+email-thread.txt          486  486    0   y       identical
+kb-article.txt            620  620    0   y       identical
+llm-answer.md             670  670    0   y       identical
+unified-diff.patch        414  414    0   y       identical
+cue-sheet.md              101  101    0   y       UNREACHABLE (no § frame)
+df-h.txt (holdout-x42)    106  106    0   y       identical
+dpkg-l.txt                666  666    0   y       identical
+findmnt.txt               437  437    0   y       identical
+lsblk.txt                  60   60    0   y       UNREACHABLE (no § frame)
+ps-ef.txt                 308  308    0   y       identical
+free-m.txt                 76   76    0   y       UNREACHABLE (no § frame)
+uptime-w.txt               80   80    0   y       UNREACHABLE (no § frame)
+vmstat.txt                147  147    0   y       identical
+code-ts.txt               957  957    0   y       identical
+json-pkg.txt              669  669    0   y       identical
+node-help.txt             859  859    0   y       identical
+df-real.txt               124  124    0   y       identical
+
+TOTAL  27 lanes measured, off 8003, on 7978, ΣΔ -25
+```
+
+**ΒΡΑΧΥΛΟΓΊΑ's documented "23 → 17" for the ΑΚΟΛΟΥΘΪΑ2 sentence is wrong**: its own
+replacement string measures **19** tokens with the real tokenizer; ΤΑΧΥΓΡΑΦΊΑ reaches
+**15**. The claim is corrected in `brachylogia.ts` and the correction kept, not silently
+replaced.
+
+**Bug 5, caught by GATE 7 while deepening the table:** a partial entry whose replacement
+is a *prefix* of a longer entry's replacement makes the two rules genuinely ambiguous —
+a line contracted by the longer rule contains the partial rule's replacement, so
+inverting would corrupt it. The whole-sentence rule was refused (23 → 21 instead of 15)
+until the subsumed entry was deleted. The gate was right; the entry was removed rather
+than the gate weakened.
+
+### The new part: invertibility by construction
+
+Both existing codecs check invertibility by *undoing* the edit, which works because each
+of their edits is a whole-clause replacement. A phrase table firing mid-line cannot be
+undone by remembering the line number. ΤΑΧΥΓΡΑΦΊΑ admits a firing edit only when the span
+it replaces contains no other rule's replacement string and its own replacement is not a
+string another rule would match, and records each step's position in the string it started
+from — so the original is reconstructed by walking the steps, with no ambiguity about
+which occurrence was which.
+
+### The eight gates and the four bugs they caught
+
+| gate | caught |
+|---|---|
+| 1 invertibility (executed, staged) | **bug 3** — inversion sliced the contracted line with *original* positions; steps relative to ΠΕΡΙΚΟΠΈ's output were inverted as if relative to the original |
+| 4 element coverage (firing rules only) | **bug 2** — the gate charged requirements of rules the longest match had consumed, and refused the ΑΚΟΛΟΥΘΪΑ2 legend |
+| 7 per-edit soundness | **bug 1** — `every(o => o !== hit && !span.includes(o.rep))` is false *for the hit itself*, so `every` short-circuited false and **no rule ever fired** |
+| 8 structural (before § only) | **bug 4, the serious one** — see below |
+
+**★★★★★ Bug 4: the content-based instruction detector is unsound.**
+`bench/x108/receipts/why.out` first run: `kubectl-get-pods` incumbent expansion 2756 chars
+→ candidate 2680 chars, **DIFFER**. A detector accepting "long, ends with '.', contains no
+§" cannot distinguish a contract line from a **tape** line, because the ΧΕΙΡΩΝ tape is
+itself prose — a rule's text runs to the next new letter, so a whole English sentence is a
+legal tape literal. Contracting it changed the decoder's output by 76 characters. The
+chain's gate caught it; the offline token measurement did not, because it never checked the
+expansion. **General lesson for the repository: any codec filtering "instruction-looking
+lines" by content rather than by position has the same hole.**
+
+### The closed lever, reported as closed
+
+`chiron.ts:1591` picks the glyph script by **collision count only**; merge density is never
+consulted, though the source comments record CJK's 2415 and POLYGLOT's 3420 two-character
+single tokens. Measured tokens per 100-glyph run: khmer 0.660, myanmar 0.670, katakana
+0.790, **cyrillic 0.870**, arabic 0.920, polyglot 0.930, cjk 0.990, hangul 1.000. For
+pure-ASCII source all collision counts are 0, so the stable sort picks **hangul — the
+worst pool** — yet the chain emits **cyrillic, the best large pool**, on all four lanes
+probed (`bench/x108/receipts/whichscript.out`). **No gain available; lever closed.**

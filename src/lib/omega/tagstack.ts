@@ -42,6 +42,7 @@ import { palindromosDisabled, palindromosEncode } from './palindromos';
 import { proagogeDisabled, proagogeEncode } from './proagoge';
 import { CHIRON_START, chironDecode } from './chiron';
 import { perikopiDisabled, perikopiRewrite } from './perikopi';
+import { tachygrafiaDisabled, tachygrafiaRewrite } from './tachygrafia';
 
 export type TagstackMode = 'xml' | 'html';
 export type TagstackFrontierParent = 'synkrisis' | 'bifront' | 'kanon' | 'akolouthia2' | 'apographe' | 'metron' | 'hemera' | 'diastema';
@@ -899,6 +900,57 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
                 message: rw.message,
                 messageTokens: tok,
                 notes: `PERIKOPI legend ${rw.before}->${rw.after} tok over ${rw.edits.length} clause(s) via ${rw.edits.map((e) => e.via).join(',')}; ${best.notes}`,
+              };
+            }
+          }
+        }
+      }
+    } catch { /* not a candidate */ }
+  }
+
+  // ---------------------------------------------------------------------------
+  // X108 — ΤΑΧΥΓΡΑΦΊΑ (tachygrafia.ts).  The phrase-level pass over the SAME line.
+  //
+  // ΠΕΡΙΚΟΠΉ is anchored on clause structure: it parses the legend into
+  // `name = definition` clauses and keys a table on each clause's opening words.
+  // Two of the five live legend families have NO clause structure to anchor on and
+  // so reach no pattern at all — ΣΤΙΧΟΜΥΘΪΑ's `spec:` is a semicolon list of
+  // equations (41 tokens, 40 % of the whole cue-sheet.md lane) and ΑΚΟΛΟΥΘΪΑ2's
+  // `⁺ =` is a single sentence with no `=`-pair.  ΒΡΑΧΥΛΟΓΊΑ (X75) has a rule for
+  // the ΑΚΟΛΟΥΘΪΑ2 sentence and is UNWIRED; nothing at all covers ΣΤΙΧΟΜΥΘΪΑ.
+  //
+  // ΤΑΧΥΓΡΑΦΊΑ keys on arbitrary phrase n-grams, longest match first, anywhere in
+  // the line, so it needs no clause structure, no family knowledge and no sentence
+  // boundary.  Its admission is the same discipline: the incumbent's ΧΕΙΡΩΝ-layer
+  // expansion must be unchanged under the repository's own decoder and the message
+  // must be strictly smaller.
+  //
+  // Measured offline on the seven legend wordings the corpus emits
+  // (bench/x108/receipts/tachy-off.out): 355 -> 323 tokens.  The part ΠΕΡΙΚΟΠΉ
+  // already took is EXCLUDED from that: on the three families ΠΕΡΙΚΟΠΉ reaches the
+  // two agree, and ΤΑΧΥΓΡΑΦΊΑ adds -1 on ΣΤΙΧΟΜΥΘΪΑ, -4 on ΑΚΟΛΟΥΘΪΑ2 and -1 on
+  // ΔΙΑΣΤΗΜΑ.  Live, that is cue-sheet.md 101 -> 100, kubectl-get-pods 322 -> 318
+  // and metrics.tsv 208 -> 204, all exact.
+  // ---------------------------------------------------------------------------
+  if (!tachygrafiaDisabled()) {
+    try {
+      const start = best.message.indexOf(CHIRON_START);
+      const incExp = start < 0 ? null : chironDecode(best.message.slice(start));
+      if (incExp !== null) {
+        const rw = tachygrafiaRewrite(best.message, enc, text);
+        if (rw.edits.length > 0) {
+          const cstart = rw.message.indexOf(CHIRON_START);
+          if (cstart >= 0) {
+            let candExp: string | null = null;
+            try { candExp = chironDecode(rw.message.slice(cstart)); } catch { candExp = null; }
+            const tok = countTokens(rw.message, enc);
+            if (candExp === incExp && tok < best.messageTokens) {
+              best = {
+                ...best,
+                wire: rw.message,
+                message: rw.message,
+                messageTokens: tok,
+                notes: `TACHYGRAFIA phrase ${rw.before}->${rw.after} tok over ${rw.edits.length} line(s) via ${rw.edits.map((e) => e.via).join(',')}; ${best.notes}`,
               };
             }
           }

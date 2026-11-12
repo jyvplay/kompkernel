@@ -1,0 +1,29 @@
+X108 — live A/B of ΤΑΧΥΓΡΑΦΊΑ, 21 lanes, table as first shipped (ΑΚΟΛΟΥΘΪΑ2 at -4).
+Pinned: OMEGA_DET=1 OMEGA_NO_MEMO=1 OMEGA_ENGRAM=0 OMEGA_OURA_MEMO=0 OMEGA_NO_OROTHESIA=1
+Arm order balanced (off first on even lanes). `CHANGED` = token count moved AND the
+ΧΕΙΡΩΝ expansion was verified byte-identical; a real difference prints CHIRON MISMATCH.
+
+lane                      off   on    Δ   exact  verdict
+df-h.txt                  170  166   -4   y       CHANGED
+kubectl-get-pods.txt      322  318   -4   y       CHANGED
+markdown-table.md         172  172    0   y       identical
+psql-output.txt           230  230    0   y       identical
+email-thread.txt          486  486    0   y       identical
+kb-article.txt            620  620    0   y       identical
+llm-answer.md             670  670    0   y       identical
+unified-diff.patch        414  414    0   y       identical
+cue-sheet.md              101  101    0   y       UNREACHABLE (no § frame)
+metrics.tsv               208  204   -4   y       CHANGED
+prices.csv                121  120   -1   y       CHANGED
+df-h.txt                  106  106    0   y       identical
+dpkg-l.txt                666  666    0   y       identical
+findmnt.txt               437  437    0   y       identical
+lsblk.txt                  60   60    0   y       UNREACHABLE (no § frame)
+ps-ef.txt                 308  308    0   y       identical
+free-m.txt                 76   76    0   y       UNREACHABLE (no § frame)
+uptime-w.txt               80   80    0   y       UNREACHABLE (no § frame)
+vmstat.txt                147  147    0   y       identical
+code-ts.txt               957  957    0   y       identical
+json-pkg.txt              669  669    0   y       identical
+
+TOTAL off 7020  on 7007  ΣΔ -13   better 4  same 17  worse 0  unreachable 4  exact true  chironSame true

@@ -1,0 +1,14 @@
+uptime-w.txt           NO ΧΕΙΡΩΝ FRAME (parent synkrisis) total 80
+free-m.txt             NO ΧΕΙΡΩΝ FRAME (parent synkrisis) total 76
+lsblk.txt              NO ΧΕΙΡΩΝ FRAME (parent synkrisis) total 60
+lane                       cat           total   ctr   tape  body  refs   lit   ref%  rules  adj  uniq  mrg  ctl
+psql-output.txt          data           230    61    61   106     1   114   0.9%     20    69    51   46    0
+kubectl-get-pods.txt     ops-table      322    23    85   212     0   249   0.0%     25    66    56   43    0
+node-help.txt            prose          859    10   118   729     2   830   0.3%     42   121    85   66    0
+kb-article.txt           prose          620    10    55   553     0   568   0.0%     27   103    79   63    0
+df-real.txt              ops-table      124    10    35    77     0    81   0.0%     13    36    31   26    0
+
+TOTAL 2155  contract 114 (5.3%)  tape 354 (16.4%)  body 1677 (77.8%)
+refs 3 = 0.2% of body
+adjacent glyph-glyph pairs 395  distinct 302  merged to 1 token 244  control merged 0
+exact 8/8
