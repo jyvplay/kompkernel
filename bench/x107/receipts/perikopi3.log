@@ -14,3 +14,21 @@ du-real.txt	on	268	true	synkrisis	36264	269
 node-help.txt	on	859	true	synkrisis	57545	860	
 findmnt.txt	on	437	true	synkrisis	54493	438	
 df-h.txt	on	106	true	synkrisis	37083	107	
+email-thread.txt	on	486	true	synkrisis	52107	487	
+llm-answer.md	on	670	true	synkrisis	65576	671	
+markdown-table.md	on	172	true	synkrisis	37276	174	
+psql-output.txt	on	230	true	metron	48863	242	
+prices.csv	on	121	true	diastema	39898	133	
+cue-sheet.md	on	101	true	stichomythia	44855	101	
+ps-ef.txt	on	308	true	synkrisis	55473	309	
+ls-real.txt	on	430	true	synkrisis	72336	431	
+json-pkg.txt	on	669	true	synkrisis	94295	670	
+code-ts.txt	on	957	true	synkrisis	168681	958	
+dpkg-l.txt	on	666	true	synkrisis	134066	667	
+ps-real.txt	on	390	true	synkrisis	84083	391	
+kubectl-get-pods.txt	on	322	true	akolouthia2	123192	322	
+metrics.tsv	on	208	true	akolouthia2	96362	208	
+ps-aux-real.txt	on	1029	true	synkrisis	352599	1030	
+apt-real.txt	on	834	true	synkrisis	599246	835	
+ls-l-real.txt	on	1361	true	synkrisis	2950323	-	
+TOTAL		off 10998	on 12315	D 1317	controlFail 0
