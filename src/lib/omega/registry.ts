@@ -225,6 +225,7 @@ import { syntomiaEncode } from './syntomia';
 import { brachylogiaEncode } from './brachylogia';
 import { pinaxEncode } from './pinax';
 import { tachygrafiaEncode } from './tachygrafia';
+import { symmetronEncode, symmetronDecode } from './symmetron';
 import { merismosEncode } from './merismos';
 import { parataxisEncode } from './parataxis';
 import { schemaEncode } from './schema';
@@ -1702,6 +1703,10 @@ export function codecEntries(): Entry[] {
     {
       key: 'tachygrafia', label: 'ΤΑΧΥΓΡΑΦΉΑ TACHYGRAFIA (X108: the decoder INSTRUCTION line is shortened by a longest-match-first PHRASE table needing no clause structure; covers the ΣΤΙΧΟΜΥΘΉΑ and ΑΚΟΛΟΥΘΉΑ2 legends no other codec reaches; verified by per-edit invertibility + structural § gate + element coverage + strict win)', family: 'exact', fidelity: 'exact',
       run: async (t, enc) => { const r = tachygrafiaEncode(t, enc); return { output: r.message, decoded: r.decoded, oneChat: r.messageTokens, note: `${r.notes}; one-chat=${r.messageTokens} tok vs frontier ${r.frontierTokens} (parent ${r.frontierParent})` }; },
+    },
+    {
+      key: 'symmetron', label: 'ΣΥΜΜΕΤΡΟΝ SYMMETRON (X109: ΧΕΙΡΩΝ macro candidates ranked by their TOKEN span length instead of their CHARACTER length — the free by-product of the token-grid walk enumerateTokenSpans already performs — so the prefilter cut is denominated in the objective own units; shipped as a meter-headroom-gated sweep dimension because dpkg-l is +5 when forced; verified by chironDecode + ΧΕΙΡΩΝ own exactness)', family: 'exact', fidelity: 'exact',
+      run: async (t, enc) => { const r = symmetronEncode(t, enc); return { output: r.wire, decoded: r.decoded, oneChat: r.messageTokens, note: `symmetron: proxy=${r.proxy} variant=${r.variant}; one-chat=${r.messageTokens} tok; exact=${r.exact}` }; },
     },
     {
       key: 'synizesis', label: '⇒ SYNIZESIS (Pre-Tokenizer Boundary Collapse by Shape-Template Factoring)', family: 'exact', fidelity: 'exact',

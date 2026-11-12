@@ -7128,3 +7128,155 @@ single tokens. Measured tokens per 100-glyph run: khmer 0.660, myanmar 0.670, ka
 pure-ASCII source all collision counts are 0, so the stable sort picks **hangul — the
 worst pool** — yet the chain emits **cyrillic, the best large pool**, on all four lanes
 probed (`bench/x108/receipts/whichscript.out`). **No gain available; lever closed.**
+
+---
+
+## §X109 — ΣΥΜΜΕΤΡΟΝ (SYMMETRON)
+
+**Abbreviation → technical design spec.** `ΣΥΜΜΕΤΡΟΝ` = *symmetron*, "commensurate,
+in proportion". The name states the mechanism: a ranking proxy that is
+**commensurate with the objective it proxies**.
+
+### The problem, stated exactly
+
+ΧΕΙΡΩΝ's macro loop is a greedy hill-climb over SLP rules. At every epoch it must
+decide which candidate phrases are worth pricing exactly, and pricing is the scarce
+resource: the whole variant sweep draws on ONE shared deterministic work meter
+(`CHIRON_MAX_TOTAL_WORK_UNITS` = 64M), which X101 measured 96 %/75 %/73 % exhausted
+on exactly the lanes where more search would pay. Under a meter bound, the cheap
+ranking that decides which candidates reach the exact pricer **is** the search.
+
+The shipped ranking is denominated in **characters**:
+
+```
+rough = c * (p.length - 1) - p.length - 1
+```
+
+while the objective it proxies is denominated in **tokens**:
+
+```
+bound = c * (t - 1) - t - 1,   t = countTokens(p)
+```
+
+A 2-token 40-character phrase and a 2-token 6-character phrase get very different
+character ranks and identical token ranks, so the character proxy spends the meter on
+long phrases that may not pay and discards short ones that do.
+
+### The mechanism
+
+`enumerateTokenSpans` already walks the token grid to build the candidate map. The
+span length `len` — the number of tokens a phrase occupies where it currently sits —
+is a **free by-product** of that walk. ΣΥΜΜΕΤΡΟΝ records it (an optional fourth
+out-parameter, so no existing caller or the equivalence test changes) and ranks by
+
+```
+rough = c * (len - 1) - len - 1
+```
+
+which is the objective's own formula with `t` replaced by its free upper bound.
+**Zero extra meter cost. No new syntax, no new contract clause, no new decoder
+rule** — the wire family, tape grammar and decode are ΧΕΙΡΩΝ's own, so exactness is
+inherited rather than re-argued.
+
+### Greedy or not
+
+**Still greedy.** ΣΥΜΜΕΤΡΟΝ changes only *which* candidates the greedy loop
+considers and in what order; it does not change the search shape, the accept test,
+the backward-deletion pass, or the wire. ΧΕΙΡΩΝ's accept test remains an exact
+whole-message price (`messageTokens = countTokens(chironDecoderPrompt(wire))`), and
+the backward deletion still removes rules that stopped paying.
+
+### Measured (ΧΕΙΡΩΝ layer, `bench/x109/receipts/kai.out`)
+
+| grant | char proxy | token proxy | ΣΔ | win / lose / same | exact |
+|---|---|---|---|---|---|
+| 32M (the chain's `KAIROS_WORK_UNITS`) | 6269 | 6257 | **−12** | 5 / 0 / 5 | 10/10 |
+| 64M (production envelope) | 6269 | 6257 | **−12** | 5 / 0 / 5 | 10/10 |
+| 8M (starved) | 11368 | 11376 | **+8** | 3 / 3 / 8 | 14/14 |
+
+Per lane at both 32M and 64M: findmnt −3, email-thread −3, unified-diff −2,
+npm-ls −3, kubectl-get-pods −1; dpkg-l, ps-ef, kb-article, psql-output, node-help 0.
+
+**★★★★★ The measurement trap this documents.** The same A/B at a starved 8M-unit
+grant gives the **opposite sign** (+8) and **reverses the sign on two lanes**
+(findmnt +2 → −3, npm-ls +6 → −3). A starved grant is not a small perturbation of
+the production regime: it changes which candidates the prefilter keeps, so it changes
+the answer. Any proxy or ordering claim in this repository must be measured at the
+production envelope — or at the grant the caller actually uses — before it means
+anything. X104 recorded the same trap for ΤΥΠΟΣ; this is the second instance, and it
+is the reason the 8M run was discarded rather than averaged with the 32M/64M runs.
+
+### Why it is a sweep dimension and not a default
+
+Forcing the token proxy on every lane is **not** Pareto-superior: `dpkg-l` is +5.
+Under this repository's Pareto rule it cannot be a default. It is shipped the way
+ΤΥΠΟΣ's `exactAcceptVariants` is: the base variants rank by tokens, and the opposite
+proxy is admitted as extra variants **only when the shared work meter still has
+headroom** (`workLeft > initialWorkBudget * EXACT_ADMIT`), and the sweep keeps
+whichever is cheaper. `bench/x109/receipts/sym3.out` is the A/B that justifies the
+shipped form: char-proxy-only 4314 vs both-proxies-swept 4302, **ΣΔ −12, 5 win / 0
+lose / 2 same, exact 7/7, `chironDecode`-verified 7/7**, and the admitted
+opposite-proxy variant **won on 1 of 7 lanes** — which is the evidence that the
+headroom gate fires at all, without which a null result would be indistinguishable
+from a gate that never opened.
+
+### The honest chain-level result, and why it is zero
+
+`bench/x109/receipts/frontier.jsonl`, 26 of 29 lanes, both arms in one process under
+the pinned flags, exactness re-checked against the chain's own decode:
+
+```
+OFF 9271   ON 9271   ΣΔ 0     better 0   worse 0   same 26     exact 26/26
+```
+
+`apt-real`, `ps-aux-real`, `ls-l-real` are **NOT MEASURED** (the run had not reached
+them when the turn ended; reported as such, not estimated).
+
+**The null is structural and is now identified.** `parentCodec` on the 26 measured
+lanes is `synkrisis` on 20, `akolouthia2` on 3, `metron` on 2, `diastema` on 1 — and
+`src/lib/omega/synkrisis.ts` contains **zero** references to `chiron`
+(`grep -c chiron` = 0). It is an `archetypon`/`canon`-based codec. A ΧΕΙΡΩΝ-layer
+improvement therefore cannot reach 20 of the 26 measured lanes: the frontier's winner
+does not route through the sweep at all. On the lanes where ΧΕΙΡΩΝ *is* an ancestor
+(`metron`, `diastema`, `akolouthia2`), ΣΥΜΜΕΤΡΟΝ's ΧΕΙΡΩΝ-layer winners
+(findmnt, email-thread, unified-diff, npm-ls, kubectl-get-pods) are exactly the lanes
+where a different parent wins, so the two sets barely intersect. **Reported as a null,
+not as a gain.**
+
+### Source articles (read live this turn, none previously referenced by this stack)
+
+* **arXiv:1704.08558**, *Practical and Effective Re-Pair Compression* — the two
+  strategies that keep the priority queue's space under control are **(i) a frequency
+  cut-off equal to c·√n** and **(ii) exploiting "a degree of freedom in the Re-Pair
+  procedure specification (namely, the processing order of same-frequency pairs in
+  the queue)"** to maximise the compressibility of the output grammar; a linear-time
+  heuristic lands within **2.8 %** of the information-theoretic minimum
+  `log(d!) + 2d`. The cut-off is the direct external analogue of ΧΕΙΡΩΝ's
+  `PREFILTER = 1600`, and the tie-order degree of freedom is ΤΑΞΙΝΟΜΗΣΗΣ. **Both
+  already exist here; this search confirmed them rather than opening a new lever.**
+* **arXiv:2609.31564**, *Weight Pair Encoding* — an orthogonal, **lossy** (therefore
+  inadmissible) use of the same machinery: a straight-through estimator makes neural
+  network weights admit a smaller Re-Pair grammar, 0.43×/0.38× the QAT grammar for
+  1.9/1.1 accuracy points. Its transferable observation is that "a grammar offers
+  variable-length patterns and reuses them hierarchically inside larger ones", which
+  is why ΧΕΙΡΩΝ's rule texts compose instead of forming a flat codebook.
+* **arXiv:2610.12376**, *Latent Core Tokenizer* — the optimal re-spelling is a
+  min-token dynamic program over a four-part lexicographic cost. ΣΥΜΜΕΤΡΟΝ's proxy
+  is the cheapest possible approximation to that objective inside an existing greedy
+  loop; it is not the DP, and is not claimed to be.
+
+### Time / CPU
+
+The proxy itself is **free**: the span length is produced by a loop that already
+runs, and recording it is one `Map.set` per candidate. The sweep dimension costs one
+extra variant per separator, drawn from the same shared meter, and is admitted only
+when `workLeft > initialWorkBudget * 0.4`. No wall-clock claim is made: the A/Bs
+above are work-unit-denominated, because X104 established that an on-arm ms pair in
+any A/B in this repository is confounded (the OFF arm always runs first, cold).
+
+### Not proved
+
+That a reader still decodes. No model API exists here, so no new decode was run; the
+LLM-decodability claim remains **downgraded, not verified**, exactly as recorded in
+X104–X108. What *is* verified is the code-decodable part: `chironDecode` of the
+emitted wire reproduces the input on every lane measured, in both arms.

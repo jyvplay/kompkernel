@@ -1,0 +1,18 @@
+lane                     narrow  wide    Δ   msN   msW  exactN exactW  seps(narrow) -> seps(wide)
+findmnt.txt               518    518    0     0     0    y     y
+psql-output.txt           406    406    0     0     0    y     y
+kubectl-get-pods.txt      475    475    0     0     0    y     y
+metrics.tsv               328    328    0     0     0    y     y
+prices.csv                288    288    0     0     0    y     y
+node-help.txt             934    934    0     0     0    y     y
+df-real.txt               158    158    0     0     0    y     y
+dpkg-l.txt                761    761    0     0     0    y     y
+email-thread.txt          558    558    0     0     0    y     y
+unified-diff.patch        479    479    0     0     0    y     y
+npm-ls.txt               1504   1783  279     0     0    y     y
+aapl-2014.csv            1702   1898  196     0     0    y     y
+gh-prose.txt             1921   1934   13     0     0    y     y
+code-ts.txt              1336   1336    0     0     0    y     y
+
+TOTAL narrow 11368  wide 11856  ΣΔ 488   win 0 lose 3 same 11   exact 14/14 of 14
+ms narrow 0  wide 0  (ΣΔ 0, -100.0 %)

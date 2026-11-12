@@ -1,0 +1,9 @@
+lane                    chain  ariadne   Δ     exact  rules  blocks  script
+psql-output.txt          230      397   167   y       12      0  cyrillic
+kubectl-get-pods.txt     314      430   116   y       23      0  cyrillic
+metrics.tsv              200      314   114   y       16      0  cyrillic
+df-h.txt                 162      294   132   y        6      0  cjk
+prices.csv               120      273   153   y       11      0  cyrillic
+node-help.txt            859      927    68   y       23      0  cyrillic
+
+TOTAL chain 1885  ariadne 2635  ΣΔ 750

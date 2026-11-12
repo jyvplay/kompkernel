@@ -1,0 +1,15 @@
+import * as fs from 'node:fs';
+import { tagstackFrontier } from '../../src/lib/omega/tagstack';
+process.env.OMEGA_DET='1'; process.env.OMEGA_NO_MEMO='1'; process.env.OMEGA_ENGRAM='0'; process.env.OMEGA_OURA_MEMO='0'; process.env.OMEGA_NO_OROTHESIA='1';
+const enc:any='o200k_base';
+const p=process.argv[2]!;
+const text=fs.readFileSync(p,'utf8');
+process.env.OMEGA_NO_SYMMETRON='1';
+const a:any=tagstackFrontier(text,enc);
+delete process.env.OMEGA_NO_SYMMETRON;
+const b:any=tagstackFrontier(text,enc);
+console.log('OFF M='+a.messageTokens+' parent='+a.parentCodec);
+console.log('ON  M='+b.messageTokens+' parent='+b.parentCodec);
+console.log('OFF notes: '+(a.notes??'').slice(0,400));
+console.log('ON  notes: '+(b.notes??'').slice(0,400));
+console.log('same message? '+(a.message===b.message));

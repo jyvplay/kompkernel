@@ -11344,3 +11344,105 @@ incumbent and candidate identical — covers the code-decodable part only. The X
 bound still stands and X107 narrowed it: the 10/10 byte-exact LLM-blind decode cases were
 measured on messages carrying the **original** contract. No model API exists here, so no
 new decode was run and the transfer claim is **downgraded, not verified**.
+
+---
+
+## §X109 — ΣΥΜΜΕΤΡΟΝ (SYMMETRON)
+
+**Module 336, registry arm 251.** ΧΕΙΡΩΝ's macro loop ranks candidate phrases by a
+**character** proxy while its objective is a **token** bound, so the prefilter cut is
+decided on a different scale from the thing it proxies. `enumerateTokenSpans` already
+walks the token grid, so the span length — the number of tokens a phrase occupies
+where it sits — is free. ΣΥΜΜΕΤΡΟΝ records it and ranks by
+`c * (len - 1) - len - 1`, the objective's own formula with `t` replaced by its free
+upper bound. No new syntax, no new contract clause, no new decoder rule; the decode
+is ΧΕΙΡΩΝ's own.
+
+### Measured
+
+ΧΕΙΡΩΝ layer, 10 lanes, exact 10/10, both at the chain's own `KAIROS_WORK_UNITS`
+(32M) grant and at the 64M production envelope — identical results at both:
+
+```
+char proxy 6269   token proxy 6257   ΣΔ -12   5 win / 0 lose / 5 same
+findmnt -3  email-thread -3  unified-diff -2  npm-ls -3  kubectl-get-pods -1
+```
+
+Shipped as a **meter-headroom-gated sweep dimension** (the ΤΥΠΟΣ pattern), because
+forcing it costs `dpkg-l` +5 and a mechanism that loses a lane cannot be a default:
+
+```
+char-proxy only 4314   both proxies swept 4302   ΣΔ -12   5 win / 0 lose / 2 same
+exact 7/7, chironDecode-verified 7/7, admitted variant WON on 1 of 7 lanes
+```
+
+**Chain level, 26 of 29 lanes: ΣΔ 0, 0 better, 0 worse, 26 same, exact 26/26.**
+`apt-real`, `ps-aux-real`, `ls-l-real` NOT MEASURED. The null is structural: the
+frontier's `parentCodec` is `synkrisis` on 20 of 26 lanes, and
+`src/lib/omega/synkrisis.ts` contains zero references to `chiron` — it is an
+`archetypon`/`canon` codec. A ΧΕΙΡΩΝ-layer improvement cannot reach those lanes.
+
+### The measurement trap, recorded
+
+The same ΧΕΙΡΩΝ-layer A/B at a **starved 8M-unit** grant gives ΣΔ **+8** and
+**reverses the sign on two lanes** (findmnt +2 → −3, npm-ls +6 → −3). The grant is
+not a detail: it changes which candidates the prefilter keeps, so it changes the
+answer. The 8M run is reported and discarded, not averaged in.
+
+### Negative space closed this turn (all measured, all negative)
+
+| # | lever | measurement |
+|---|---|---|
+| 1 | ARIADNE (ΑΝΑΚΛΗΣΙΣ) at chain level | `psql-output` 230 vs 397; ΣΔ **+750** over 6 lanes, exact 6/6 — a standalone codec, not a chain layer |
+| 2 | **multi-character glyphs** (2-char rule names, one token) | 2-char merge graph is **4× sparser**: cyrillic degree **1.50** vs 6.7 for 1-char; cjk 300 edges/2517 glyphs |
+| 3 | glyph reassignment, greedy multi-pass over the full 122-char cyrillic pool | **−1** on psql-output, 0 elsewhere |
+| 4 | random-swap glyph permutation | **+1 / +14** — strictly worse than the greedy search |
+| 5 | body-side glyph relabelling | **5** tokens (psql-output), **2** (kubectl-get-pods); the X108 census's 151 unmerged occurrences were TAPE, not body |
+| 6 | selective (partial) rule substitution — expanding single occurrences back to literal | **Δ 0** on both lanes; ΧΕΙΡΩΝ's all-occurrences `split/join` is already locally optimal |
+| 7 | wide separator sweep (`chironSeparators(wide)`, `= : . "` added) | ΣΔ **+488**, 3 lanes lose, **0 win** — more variants starve the shared meter; X101's gate is protecting the search |
+| 8 | ΣΥΜΜΕΤΡΟΝ forced as a default | `dpkg-l` **+5** — not Pareto-superior, hence the sweep-dimension form |
+| 9 | ΧΕΙΡΩΝ block/column pass on columnar lanes | `blocks 0, lists 0` on findmnt / ps-ef / psql-output / markdown-table; blocks-only is 595 vs 520 on findmnt |
+| 10 | contract-aware ΧΕΙΡΩΝ ablation (`noBlocks`/`noMacros`) | **already live**: `chiron.ts:1554` prices `countTokens(chironDecoderPrompt(wire))` and the sweep selects on it |
+| 11 | "ΧΕΙΡΩΝ is a Re-Pair FIFO variant, tie order is the untried lever" | **refuted by the code**: ΤΑΞΙΝΟΜΗΣΗΣ resolves prefilter and window ties, ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ slides the window, ΤΥΠΟΣ prices the emitted wire |
+| 12 | 1-char glyph adjacency (X108) | cyrillic already the measured best pool (0.870 tok/glyph); the live wire already uses it |
+| 13 | nested ΧΕΙΡΩΝ on the tape | Δ 0, 15/15 (X107) |
+| 14 | cross-message dictionaries | inadmissible — one message, one chat turn |
+
+**The modal shortcut and its failure-detecting test.** The tempting shortcut is
+"ΧΕΙΡΩΝ's glyph layer is the residue, so re-optimise the glyphs". It is the modal
+move because the census says the body is 77.8 % of the wire and the body is mostly
+glyph runs. **The test that detects the failure**: price the *whole message* under a
+glyph permutation, not the runs. The runs sit at 0.52–0.63 tokens/glyph, which looks
+like headroom, but a full-pool greedy multi-pass over the live vocabulary moves the
+message by **−1 token** — because ΧΕΙΡΩΝ's `renderWire` already assigns glyphs with
+the tokenizer in view (ΔΙΑΛΕΚΤΟΣ measured +56…+247 from assignment alone). A
+run-local metric that ignores the tape and the contract will always show headroom
+that the message does not have.
+
+### Still owed / downgraded
+
+* **LLM decodability is downgraded, not verified.** No model API exists here, so no
+  new decode was run this turn. The X104 evidence bound (10/10 byte-exact LLM-blind
+  decodes) was measured on messages carrying the **original** contract; ΠΕΡΙΚΟΠΈ,
+  ΤΑΧΥΓΡΑΦΊΑ and now ΣΥΜΜΕΤΡΟΝ all change what the reader sees.
+* **The fifth web search on open interfaces is still owed.**
+* **Newly solved frontier-lab mathematics: still owed.** No compression mechanism has
+  been extracted from any of them in any turn so far, and that is reported rather
+  than dressed up.
+
+### The frontier, restated
+
+```
+12 639   tagstackFrontier  (the IDENTITY layer — X107 proved the routing defect)
+12 360   tagstackEncode, ΠΕΡΙΚΟΠΈ off
+12 315   tagstackEncode, ΠΕΡΙΚΟΠΈ v3 live                        (X107, 29 lanes)
+12 290   tagstackEncode, ΠΕΡΙΚΟΠΈ v3 + ΤΑΧΥΓΡΑΦΊΑ                (X108, 27 of 29)
+12 2xx   tagstackFrontier + ΣΥΜΜΕΤΡΟΝ                            (X109, 26 of 29, ΣΔ 0)
+```
+
+**The frontier does not move this turn, and that is the honest result.** ΣΥΜΜΕΤΡΟΝ is
+a real, verified, Pareto-superior improvement at the ΧΕΙΡΩΝ layer (5 win / 0 lose,
+exact 10/10, at both the 32M and 64M grants) that the chain's current parent
+selection cannot see, because the parent that wins 20 of 26 lanes does not call
+ΧΕΙΡΩΝ. The single most valuable structural fact X109 produced is that identification,
+not the −12.

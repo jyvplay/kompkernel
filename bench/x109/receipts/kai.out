@@ -1,0 +1,28 @@
+
+===== workUnits = 32000000 =====
+lane                     charP   tokP    Δ  exactC exactT
+findmnt.txt               518    515   -3    y     y
+email-thread.txt          558    555   -3    y     y
+unified-diff.patch        479    477   -2    y     y
+dpkg-l.txt                761    761    0    y     y
+npm-ls.txt               1117   1114   -3    y     y
+kubectl-get-pods.txt      475    474   -1    y     y
+ps-ef.txt                 368    368    0    y     y
+kb-article.txt            656    656    0    y     y
+psql-output.txt           406    406    0    y     y
+node-help.txt             931    931    0    y     y
+TOTAL char 6269  token 6257  ΣΔ(token-char) -12
+
+===== workUnits = 64M (production envelope, no grant) =====
+lane                     charP   tokP    Δ  exactC exactT
+findmnt.txt               518    515   -3    y     y
+email-thread.txt          558    555   -3    y     y
+unified-diff.patch        479    477   -2    y     y
+dpkg-l.txt                761    761    0    y     y
+npm-ls.txt               1117   1114   -3    y     y
+kubectl-get-pods.txt      475    474   -1    y     y
+ps-ef.txt                 368    368    0    y     y
+kb-article.txt            656    656    0    y     y
+psql-output.txt           406    406    0    y     y
+node-help.txt             931    931    0    y     y
+TOTAL char 6269  token 6257  ΣΔ(token-char) -12

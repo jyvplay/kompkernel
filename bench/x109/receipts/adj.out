@@ -1,0 +1,10 @@
+lane                    body_tok  glyphs  adj_occ  adj_dist  merged  UNMERGED  runs>=3  save_if_all
+psql-output.txt             106      20       60        42      55          5          11            5
+kubectl-get-pods.txt        212      24       29        22      27          2           5            2
+metrics.tsv                 124      18       25        21      24          1           7            1
+df-h.txt                     97      16       20        11      15          5           2            5
+prices.csv                   49       9       17        12      14          3           4            3
+node-help.txt               729      42       93        64      76         17          15           17
+
+TOTAL body 1317  adj_occ 244  distinct 172  merged 211  UNMERGED 33  runs>=3 44
+Upper bound on the relabelling lever: -33 tokens (2.5% of body cost) — an UPPER bound, not a promise.
