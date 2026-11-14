@@ -1,0 +1,417 @@
+{
+  "schema": "kompkernel-x114-leaders-v1",
+  "date": "2026-11-14",
+  "note": "shipped imported from X114 baseline receipt; raw/floor/category imported from X90; zero encoder calls",
+  "baselineSchema": "kompkernel-x114-baseline-v1",
+  "baselineSourceCommit": "bb2b70b526acc0313db2ca62fa75f5dbbfb5e330",
+  "groups": [
+    {
+      "category": "OPS TABLE",
+      "lanes": 11,
+      "raw": 4135,
+      "shipped": 1671,
+      "floor": 1272,
+      "ratio": 0.4041112454655381,
+      "headroom": 0.1393643031784841,
+      "readabilityPrice": 0.23877917414721722,
+      "leader": {
+        "lane": "kubectl-get-pods.txt",
+        "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+        "cat": "OPS TABLE",
+        "raw": 1006,
+        "shipped": 314,
+        "floor": 214,
+        "parent": "akolouthia2",
+        "exact": true
+      },
+      "rows": [
+        {
+          "lane": "kubectl-get-pods.txt",
+          "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+          "cat": "OPS TABLE",
+          "raw": 1006,
+          "shipped": 314,
+          "floor": 214,
+          "parent": "akolouthia2",
+          "exact": true
+        },
+        {
+          "lane": "metrics.tsv",
+          "path": "bench/holdout-x40/metrics.tsv",
+          "cat": "OPS TABLE",
+          "raw": 811,
+          "shipped": 200,
+          "floor": 130,
+          "parent": "akolouthia2",
+          "exact": true
+        },
+        {
+          "lane": "psql-output.txt",
+          "path": "bench/holdout-tbl/psql-output.txt",
+          "cat": "OPS TABLE",
+          "raw": 675,
+          "shipped": 230,
+          "floor": 166,
+          "parent": "metron",
+          "exact": true
+        },
+        {
+          "lane": "df-h.txt",
+          "path": "bench/holdout-tbl/df-h.txt",
+          "cat": "OPS TABLE",
+          "raw": 570,
+          "shipped": 162,
+          "floor": 129,
+          "parent": "akolouthia2",
+          "exact": true
+        },
+        {
+          "lane": "markdown-table.md",
+          "path": "bench/holdout-tbl/markdown-table.md",
+          "cat": "OPS TABLE",
+          "raw": 330,
+          "shipped": 172,
+          "floor": 133,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "vmstat.txt",
+          "path": "bench/holdout-x42b/vmstat.txt",
+          "cat": "OPS TABLE",
+          "raw": 229,
+          "shipped": 147,
+          "floor": 113,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "df-real.txt",
+          "path": "bench/holdout-x41/df-real.txt",
+          "cat": "OPS TABLE",
+          "raw": 158,
+          "shipped": 124,
+          "floor": 96,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "df-h.txt",
+          "path": "bench/holdout-x42/df-h.txt",
+          "cat": "OPS TABLE",
+          "raw": 140,
+          "shipped": 106,
+          "floor": 84,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "uptime-w.txt",
+          "path": "bench/holdout-x42b/uptime-w.txt",
+          "cat": "OPS TABLE",
+          "raw": 80,
+          "shipped": 80,
+          "floor": 70,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "free-m.txt",
+          "path": "bench/holdout-x42b/free-m.txt",
+          "cat": "OPS TABLE",
+          "raw": 76,
+          "shipped": 76,
+          "floor": 76,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "lsblk.txt",
+          "path": "bench/holdout-x42/lsblk.txt",
+          "cat": "OPS TABLE",
+          "raw": 60,
+          "shipped": 60,
+          "floor": 61,
+          "parent": "synkrisis",
+          "exact": true
+        }
+      ]
+    },
+    {
+      "category": "OPS LISTING",
+      "lanes": 9,
+      "raw": 16516,
+      "shipped": 5723,
+      "floor": 4420,
+      "ratio": 0.3465124727536934,
+      "headroom": 0.10772156084656084,
+      "readabilityPrice": 0.22767779136816355,
+      "leader": {
+        "lane": "ls-l-real.txt",
+        "path": "bench/holdout-x41/ls-l-real.txt",
+        "cat": "OPS LISTING",
+        "raw": 5194,
+        "shipped": 1361,
+        "floor": 943,
+        "parent": "synkrisis",
+        "exact": true
+      },
+      "rows": [
+        {
+          "lane": "ls-l-real.txt",
+          "path": "bench/holdout-x41/ls-l-real.txt",
+          "cat": "OPS LISTING",
+          "raw": 5194,
+          "shipped": 1361,
+          "floor": 943,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "ps-aux-real.txt",
+          "path": "bench/holdout-x41/ps-aux-real.txt",
+          "cat": "OPS LISTING",
+          "raw": 3054,
+          "shipped": 1029,
+          "floor": 743,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "apt-real.txt",
+          "path": "bench/holdout-x41/apt-real.txt",
+          "cat": "OPS LISTING",
+          "raw": 2739,
+          "shipped": 834,
+          "floor": 690,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "ps-ef.txt",
+          "path": "bench/holdout-x42/ps-ef.txt",
+          "cat": "OPS LISTING",
+          "raw": 1144,
+          "shipped": 308,
+          "floor": 250,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "ps-real.txt",
+          "path": "bench/holdout-x41/ps-real.txt",
+          "cat": "OPS LISTING",
+          "raw": 1106,
+          "shipped": 390,
+          "floor": 320,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "ls-real.txt",
+          "path": "bench/holdout-x41/ls-real.txt",
+          "cat": "OPS LISTING",
+          "raw": 1034,
+          "shipped": 430,
+          "floor": 328,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "dpkg-l.txt",
+          "path": "bench/holdout-x42/dpkg-l.txt",
+          "cat": "OPS LISTING",
+          "raw": 1000,
+          "shipped": 666,
+          "floor": 592,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "findmnt.txt",
+          "path": "bench/holdout-x42/findmnt.txt",
+          "cat": "OPS LISTING",
+          "raw": 787,
+          "shipped": 437,
+          "floor": 335,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "du-real.txt",
+          "path": "bench/holdout-x41/du-real.txt",
+          "cat": "OPS LISTING",
+          "raw": 458,
+          "shipped": 268,
+          "floor": 219,
+          "parent": "synkrisis",
+          "exact": true
+        }
+      ]
+    },
+    {
+      "category": "CODE / MARKUP",
+      "lanes": 3,
+      "raw": 3152,
+      "shipped": 2040,
+      "floor": 1728,
+      "ratio": 0.6472081218274112,
+      "headroom": 0.21910112359550563,
+      "readabilityPrice": 0.15294117647058825,
+      "leader": {
+        "lane": "code-ts.txt",
+        "path": "bench/holdout/code-ts.txt",
+        "cat": "CODE / MARKUP",
+        "raw": 1422,
+        "shipped": 957,
+        "floor": 812,
+        "parent": "synkrisis",
+        "exact": true
+      },
+      "rows": [
+        {
+          "lane": "code-ts.txt",
+          "path": "bench/holdout/code-ts.txt",
+          "cat": "CODE / MARKUP",
+          "raw": 1422,
+          "shipped": 957,
+          "floor": 812,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "json-pkg.txt",
+          "path": "bench/holdout/json-pkg.txt",
+          "cat": "CODE / MARKUP",
+          "raw": 1152,
+          "shipped": 669,
+          "floor": 592,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "unified-diff.patch",
+          "path": "bench/holdout-work/unified-diff.patch",
+          "cat": "CODE / MARKUP",
+          "raw": 578,
+          "shipped": 414,
+          "floor": 324,
+          "parent": "synkrisis",
+          "exact": true
+        }
+      ]
+    },
+    {
+      "category": "DATA",
+      "lanes": 2,
+      "raw": 1095,
+      "shipped": 221,
+      "floor": 209,
+      "ratio": 0.20182648401826483,
+      "headroom": 0.013544018058690745,
+      "readabilityPrice": 0.05429864253393665,
+      "leader": {
+        "lane": "prices.csv",
+        "path": "bench/holdout-x40/prices.csv",
+        "cat": "DATA",
+        "raw": 582,
+        "shipped": 120,
+        "floor": 110,
+        "parent": "diastema",
+        "exact": true
+      },
+      "rows": [
+        {
+          "lane": "prices.csv",
+          "path": "bench/holdout-x40/prices.csv",
+          "cat": "DATA",
+          "raw": 582,
+          "shipped": 120,
+          "floor": 110,
+          "parent": "diastema",
+          "exact": true
+        },
+        {
+          "lane": "cue-sheet.md",
+          "path": "bench/holdout-x40/cue-sheet.md",
+          "cat": "DATA",
+          "raw": 513,
+          "shipped": 101,
+          "floor": 99,
+          "parent": "stichomythia",
+          "exact": true
+        }
+      ]
+    },
+    {
+      "category": "PROSE",
+      "lanes": 4,
+      "raw": 3117,
+      "shipped": 2635,
+      "floor": 2529,
+      "ratio": 0.8453641321783767,
+      "headroom": 0.18027210884353742,
+      "readabilityPrice": 0.040227703984819736,
+      "leader": {
+        "lane": "node-help.txt",
+        "path": "bench/holdout-x41/node-help.txt",
+        "cat": "PROSE",
+        "raw": 1099,
+        "shipped": 859,
+        "floor": 852,
+        "parent": "synkrisis",
+        "exact": true
+      },
+      "rows": [
+        {
+          "lane": "node-help.txt",
+          "path": "bench/holdout-x41/node-help.txt",
+          "cat": "PROSE",
+          "raw": 1099,
+          "shipped": 859,
+          "floor": 852,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "llm-answer.md",
+          "path": "bench/holdout-work/llm-answer.md",
+          "cat": "PROSE",
+          "raw": 733,
+          "shipped": 670,
+          "floor": 626,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "kb-article.txt",
+          "path": "bench/holdout-work/kb-article.txt",
+          "cat": "PROSE",
+          "raw": 656,
+          "shipped": 620,
+          "floor": 608,
+          "parent": "synkrisis",
+          "exact": true
+        },
+        {
+          "lane": "email-thread.txt",
+          "path": "bench/holdout-work/email-thread.txt",
+          "cat": "PROSE",
+          "raw": 629,
+          "shipped": 486,
+          "floor": 443,
+          "parent": "synkrisis",
+          "exact": true
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "lanes": 29,
+    "raw": 28015,
+    "shipped": 12290,
+    "floor": 10158,
+    "headroom": 0.11939295514364115,
+    "readabilityPrice": 0.17347436940602115
+  }
+}

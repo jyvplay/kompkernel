@@ -11532,3 +11532,239 @@ produced zero frontier motion, and the reason is now identified rather than
 guessed: the frontier's winning parents are single-shot specialists that do not
 route through ΧΕΙΡΩΝ's search, and the one mechanism that demonstrably wins on
 individual lanes (ΧΕΙΡΩΝ's variant sweep) is unreachable from `tagstackFrontier`.
+
+---
+
+## §X114 — ΣΥΝΕΔΡΙΑ (SYNEDRIA)
+
+**New module:** `src/lib/omega/synedria.ts` (316 non-`.orig.ts` modules in
+`src/lib/omega`), **registry arm 253** (`synedria`). **Wired into**
+`tagstackEncodeInner`, `apographeEncode` and `ouraEncode`. This is an
+**encoder-only Pareto lane**: it changes no wire, no contract, no decoder, and no
+token. It removes duplicate parent computation while replaying the deterministic
+meter exactly.
+
+### Baseline health, measured this turn
+
+`npx tsc --noEmit --incremental false` exits 0. `bench/x114/baseline.ts` runs the
+**shipped** function `tagstackEncode` under the pinned audit flags
+(`OMEGA_DET=1 OMEGA_NO_MEMO=1 OMEGA_ENGRAM=0 OMEGA_OURA_MEMO=0
+OMEGA_NO_OROTHESIA=1`) on all 29 canonical lanes:
+
+```
+TOTAL 12 290   exact 29/29   wall 5 294.6 s
+ls-l-real 5 194 -> 1 361, exact, synkrisis, 2 612.9 s
+```
+
+Receipt: `bench/x114/receipts/baseline.{jsonl,json,log}`. The total reproduces the
+X108 shipped readable frontier on the full 29-lane set; **the token frontier does
+not move this turn**. `ls-l-real` alone is 49.4% of baseline wall time. The
+historical trap is reconfirmed: `tagstackFrontier` is not the shipped encoder;
+X110's `costs29` frontier numbers are not A/B controls for `tagstackEncode`.
+
+### Mechanism screens: six candidates, all raw-negative
+
+X114 screened six reversible transforms with their own decoders and byte-exactness
+checks before any frontier call. The design constraint is the X88 SYNTAXIS
+dense-wire law: for any wire this stack emits, F(wire)/raw(wire) >= 0.563, so a
+pre-transform must land below ~1.78 x F(source) to have a chance. Removing plain
+repetition makes the wire denser and reduces the parent glyph pool's yield. New
+shapes must delete what a substring dictionary cannot represent: recomputable
+values, positional constants, geometry, numeric templates.
+
+Screen 1 (`bench/x114/receipts/screen.{json,log}`), 29 lanes, raw o200k:
+
+| candidate | total raw | total candidate | ΣΔ | verdict |
+|---|---:|---:|---:|---|
+| words-per-line layout channel | 28 015 | 28 357 | +342 | exact where fired, loses |
+| delta-coded layout channel | 28 015 | 28 319 | +304 | exact where fired, loses |
+| sentence-case canon + exceptions | 28 015 | 28 105 | +90 | exact where fired, loses |
+
+Screen 2 (`bench/x114/receipts/screen2.{json,log}`), same lanes:
+
+| candidate | total raw | total candidate | ΣΔ | fired/exact | verdict |
+|---|---:|---:|---:|---|---|
+| same-row percentage recomputation | 28 015 | 28 093 | +78 | 2/2 | loses |
+| findmnt-style tree geometry | 28 015 | 28 024 | +9 | 1/1 | loses |
+| column unit template | 28 015 | 28 026 | +11 | 3/3 | one raw lane win, net loses |
+
+The unit screen wins one raw lane (`df-h` table 570 -> 535) but loses on `df-real`
+(158 -> 181) and `df-h` x42 (140 -> 163). It was **not parent-gated** and is not
+shipped: the parent stack already prices that lane at 162, and a raw win is
+necessary, not sufficient. The tree screen initially matched Markdown separator
+rows (`|---|`) as tree connectors; the exactness gate refused those false
+positives, and `fired` was redefined to mean "admissible exact transform". The
+final receipt reports fired/exact, not fired/inexact.
+
+### The shipped seam: cross-parent replay, not another dictionary
+
+X110 measured the waste on findmnt: diastema (32.7 s) and apographe (15.4 s)
+emitted messages byte-identical to synkrisis's (15.8 s); 72% of parent time was
+duplicate work. The call graph is:
+
+```
+synkrisis -> archetypon -> apographeEncode(text) -> ouraEncode(text)
+apographe                                        -> ouraEncode(text)
+metron    -> apographeEncode(text,{kanon:true})  -> ouraEncode(text)
+diastema                                         -> ouraEncode(text)
+```
+
+`tagstackEncodeInner` measures each parent in its own `workEpoch`, but these
+parents begin with the same fresh-epoch sub-encode. Nested `workEpoch` is a no-op
+(`depth > 0 => fn()`), so a sub-codec cannot buy its own budget window inside a
+parent. ENGRAMMA is a global sub-encode memo and is off under `OMEGA_ENGRAM=0`;
+OURA's X67 memo is global, OURA-only, and off under `OMEGA_OURA_MEMO=0`; REPRISE
+is a per-document LRU. None de-duplicates parents inside one audit-flagged
+frontier measurement.
+
+SYNEDRIA opens one **council** per `tagstackEncodeInner` measurement. It stores
+exact APOGRAPHE/OURA results keyed by codec, encoding, text, stable option key and
+**both** budgets. A hit is admitted only at `depth === 1 && used === 0 &&
+chironUsed === 0`; nested/mid-epoch calls bypass. Every hit **replays** the stored
+`workUsed`/`chironUsedUnits` delta via `workConsume`/`chironConsume` before
+returning a `structuredClone`. This is the X67 soundness rule: returning a hit for
+free changed DIASTEMA's wire and made it slower (36.5 s -> 49.9 s). The council is
+bounded (64 entries, 1 M key chars, 64 K source chars), clears over either bound,
+and is discarded on return. `OMEGA_SYNEDRIA=0` / `OMEGA_NO_SYNEDRIA=1` disables.
+
+Unit probes (`bench/x114/receipts/synedria-unit.log`) PASS: replay delta, clone
+isolation, mid-epoch bypass, scope discard, disable switch.
+
+### Balanced 29-lane A/B
+
+`bench/x114/ab.ts` calls the same shipped `tagstackEncode` in both arms, toggles
+only `OMEGA_SYNEDRIA`, balances arm order by lane index, and compares complete
+message SHA-256, token-id SHA-256, parent costs, exactness, and CHIRON-layer
+expansion. A lane with no `§` frame is UNREACHABLE for the CHIRON comparison, not
+a mismatch. Receipt: `bench/x114/receipts/ab.{jsonl,json,log}`.
+
+```
+TOTAL off 12290 on 12290 ΣΔ 0 better 0 worse 0 same 29
+identical True exact True chironSame True unreachable 4
+WALL off 4958.0 s on 1909.0 s speedup 2.597x
+CPU off 5175.6 s on 1995.1 s speedup 2.594x
+hits 193 stores 193
+```
+
+| lane | tokens | off s | on s | speedup | hits | verdict |
+|---|---:|---:|---:|---:|---:|---|
+| lsblk.txt | 60 | 14.1 | 4.9 | 2.89x | 6 | identical / no § |
+| kb-article.txt | 620 | 19.0 | 7.9 | 2.39x | 6 | identical |
+| uptime-w.txt | 80 | 14.8 | 5.4 | 2.76x | 6 | identical / no § |
+| free-m.txt | 76 | 15.6 | 7.0 | 2.22x | 6 | identical / no § |
+| vmstat.txt | 147 | 17.2 | 6.0 | 2.89x | 6 | identical |
+| unified-diff.patch | 414 | 19.5 | 8.1 | 2.41x | 6 | identical |
+| df-h.txt (tbl) | 162 | 15.7 | 5.6 | 2.82x | 6 | identical |
+| df-real.txt | 124 | 35.6 | 16.4 | 2.17x | 6 | identical |
+| du-real.txt | 268 | 33.3 | 11.7 | 2.84x | 6 | identical |
+| node-help.txt | 859 | 51.3 | 21.2 | 2.42x | 6 | identical |
+| findmnt.txt | 437 | 53.5 | 19.0 | 2.81x | 6 | identical |
+| df-h.txt (x42) | 106 | 32.3 | 14.7 | 2.20x | 6 | identical |
+| email-thread.txt | 486 | 50.2 | 18.8 | 2.67x | 6 | identical |
+| llm-answer.md | 670 | 62.2 | 24.4 | 2.55x | 6 | identical |
+| markdown-table.md | 172 | 33.7 | 16.1 | 2.10x | 9 | identical |
+| psql-output.txt | 230 | 43.4 | 20.9 | 2.08x | 9 | identical |
+| prices.csv | 120 | 35.7 | 23.5 | 1.52x | 9 | identical |
+| cue-sheet.md | 101 | 45.2 | 31.3 | 1.44x | 9 | identical / no § |
+| ps-ef.txt | 308 | 60.8 | 26.5 | 2.29x | 6 | identical |
+| ls-real.txt | 430 | 70.0 | 28.6 | 2.45x | 6 | identical |
+| json-pkg.txt | 669 | 93.0 | 33.7 | 2.76x | 6 | identical |
+| code-ts.txt | 957 | 162.4 | 67.8 | 2.39x | 6 | identical |
+| dpkg-l.txt | 666 | 128.3 | 43.3 | 2.96x | 6 | identical |
+| ps-real.txt | 390 | 80.4 | 33.2 | 2.42x | 6 | identical |
+| kubectl-get-pods.txt | 314 | 119.1 | 41.5 | 2.87x | 6 | identical |
+| metrics.tsv | 200 | 83.7 | 30.7 | 2.72x | 9 | identical |
+| ps-aux-real.txt | 1029 | 341.9 | 120.5 | 2.84x | 6 | identical |
+| apt-real.txt | 834 | 601.5 | 272.1 | 2.21x | 6 | identical |
+| ls-l-real.txt | 1361 | 2624.8 | 948.3 | 2.77x | 10 | identical |
+
+The claim is encoder-only identity plus time. ΣΔ tokens = 0; no lane is worse in
+tokens; every emitted object is byte-identical. Wall/CPU speedups are receipt
+measurements on this 2-vCPU sandbox, not universal guarantees. The odd-lane arm
+labelling bug in the first smoke harness was fixed and the smoke receipt
+regenerated; the full A/B harness assigns arms explicitly.
+
+### Leaders refresh (zero encoder calls)
+
+`bench/x114/leaders.ts` imports `shipped` from the completed baseline receipt and
+`raw`/`floor`/category from X90 exactly as X101 did. Receipt:
+`bench/x114/receipts/leaders-x114.{json,log}`.
+
+| category | lanes | raw | shipped | floor | ratio | headroom | readability price | leader |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| OPS TABLE | 11 | 4 135 | 1 671 | 1 272 | 0.4041 | 13.9% | 23.9% | kubectl-get-pods 1006->314 |
+| OPS LISTING | 9 | 16 516 | 5 723 | 4 420 | 0.3465 | 10.8% | 22.8% | ls-l-real 5194->1361 |
+| CODE / MARKUP | 3 | 3 152 | 2 040 | 1 728 | 0.6472 | 21.9% | 15.3% | code-ts 1422->957 |
+| DATA | 2 | 1 095 | 221 | 209 | 0.2018 | 1.4% | 5.4% | prices.csv 582->120 |
+| PROSE | 4 | 3 117 | 2 635 | 2 529 | 0.8454 | 18.0% | 4.0% | node-help 1099->859 |
+| **all** | **29** | **28 015** | **12 290** | **10 158** | **0.4387** | **11.9%** | **17.35%** | ls-l-real saved 3833 |
+
+The X90 floor is a denominator, not the AITHER entropy tier. The two-tier ledger
+must still be quoted together: readable shipped frontier **12 290** (X114 baseline,
+29/29 exact) vs AITHER entropy tier **9 043** (X87, non-readable, byte-exact,
+-28.45% against the 12 639 identity frontier). SYNEDRIA does not move either
+token number; it moves encoder time at identical output.
+
+### Frontier-lab mathematics refresh
+
+Research note: `bench/x114/research/frontier-labs-2026.md`; compression prior-art
+note: `bench/x114/research/compression-prior-art.md`. Verdict per lab:
+
+* **OpenAI** ten-proofs @ 94bc0fe, Oct 6: 722 manuscripts / 372 families, 3
+  withdrawn, 14 revised, ~42% Lean-checked. No compression operator extracted;
+  the transferable lesson is provenance/withdrawal discipline.
+* **Anthropic** formal-math @ 16a5ce4 (zeta23 + eth + 3sum-apsp) and FLT repo.
+  No operator extracted; large proof corpora are a workload, not an inverse.
+* **DeepMind** AlphaProof Code: Lean kernel + comparator against a held-out
+  human-approved spec caught 2 reintroduced bugs. **Trust pattern transferred**:
+  SYNEDRIA is admitted only under independent byte comparison and meter replay.
+* **Microsoft** KLS500 @ c1a5099, dimension-free Poincare <= 500. No operator.
+* **Mistral** Leanstral / 1.5: secondary-source benchmarks only in this note; no
+  primary artefact fetched, no operator.
+* Proof compression (arXiv 2610.25357): AI proofs realise 31% of available logical
+  compression vs mathlib 73%; BPE optimal pair encoding is APX-complete (ESA
+  2026, 0.333-0.625 greedy factor); CIDR'26 LLM arithmetic-coding amortisation
+  ~10 yr supports the CPU-only symbolic stance. None supplies a missing exact
+  readable operator.
+
+### Negative space closed / corrected this turn
+
+* Layout, delta-layout, sentence-case, same-row percentage, tree geometry and
+  column-unit templates are raw-negative on the canonical corpus. The unit
+  screen's single raw lane win is recorded but not shipped.
+* `fired` in screen2 means exact admissible firing; Markdown `|---|` false
+  positives are refused, not counted as tree wins.
+* The first SYNEDRIA smoke receipt mislabelled odd-lane arms; fixed and
+  regenerated. The full A/B assigns arms explicitly.
+* Nested `workEpoch` cannot create a new budget window; memo hits must replay
+  work/chiron. Arm labels are not authoritative; the wire and independent
+  decoders are.
+
+### The frontier, restated
+
+```
+12 639   tagstackFrontier identity layer (X107 routing defect)
+12 360   tagstackEncode, PERIKOPI off
+12 315   tagstackEncode, PERIKOPI v3 live                 (X107, 29 lanes)
+12 290   tagstackEncode, PERIKOPI v3 + TACHYGRAFIA         (X108, 27/29 then)
+12 290   tagstackEncode, X114 baseline verification        (29/29 exact)
+12 290   + SYNEDRIA                                        (ΣΔ 0, identical wires, faster)
+ 9 043   AITHER entropy tier                               (X87, non-readable)
+```
+
+**The readable token frontier does not move in X114.** The shipped improvement is
+Pareto in time at byte-identical output, not a new compression operator. The
+honest negative result is that six mechanism-distinct screens failed the raw
+necessary condition, and the frontier-lab refresh yielded no new exact operator.
+
+### Still owed / downgraded
+
+* **LLM decodability remains downgraded, not verified.** No model API exists here.
+  SYNEDRIA changes no reader-visible object, so it inherits the incumbent's
+  status; it does not repair the post-X107 contract-comprehension gap.
+* `ls-l-real` remains the wall-time pathology (2 612.9 s baseline, 49.4% of total).
+  SYNEDRIA reduces duplicate parent work but does not remove the X74 candidate
+  re-encode cost; a scoped council across the whole X74 chain is a future lever,
+  not claimed here.
+* No theorem prover or model API was run; the per-lab note is a literature refresh,
+  not a formal verification of those labs' results.

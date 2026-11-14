@@ -43,6 +43,7 @@ import { proagogeDisabled, proagogeEncode } from './proagoge';
 import { CHIRON_START, chironDecode } from './chiron';
 import { perikopiDisabled, perikopiRewrite } from './perikopi';
 import { tachygrafiaDisabled, tachygrafiaRewrite } from './tachygrafia';
+import { synedriaScope } from './synedria';
 
 export type TagstackMode = 'xml' | 'html';
 export type TagstackFrontierParent = 'synkrisis' | 'bifront' | 'kanon' | 'akolouthia2' | 'apographe' | 'metron' | 'hemera' | 'diastema';
@@ -359,6 +360,13 @@ export function tagstackRestore(parentDecoded: string, mode: TagstackMode, marke
  * than silently weakening the gate to SYNKRISIS alone.
  */
 function tagstackEncodeInner(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
+  // X114 SYNEDRIA: one council per frontier measurement. Parents may share
+  // exact fresh-epoch sub-encodes (APOGRAPHE / OURA) with meter replay; the
+  // council is discarded on return, so nothing is retained across documents.
+  return synedriaScope(() => tagstackEncodeInnerMeasured(text, enc));
+}
+
+function tagstackEncodeInnerMeasured(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
   const started = Date.now();
   const inTokens = countTokens(text, enc);
   // X57: each frontier parent is measured inside its OWN deterministic

@@ -1,0 +1,5 @@
+lsblk.txt              off=60 on=60 exact=true same=true offMs=11777 onMs=3734 hits=6 stores=6
+kb-article.txt         off=620 on=620 exact=true same=true offMs=17098 onMs=6771 hits=6 stores=6
+uptime-w.txt           off=80 on=80 exact=true same=true offMs=13470 onMs=4604 hits=6 stores=6
+free-m.txt             off=76 on=76 exact=true same=true offMs=12749 onMs=6069 hits=6 stores=6
+IDENTICAL true lanes=4
