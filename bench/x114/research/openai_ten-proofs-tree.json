@@ -1,0 +1,358 @@
+{
+  "sha": "94bc0feb6a9ff12c7d31d6de640a725c9d43d2b6",
+  "url": "https://api.github.com/repos/openai/ten-proofs/git/trees/94bc0feb6a9ff12c7d31d6de640a725c9d43d2b6",
+  "tree": [
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d03174196e0b259418afc6175bd1d072b12646cc",
+      "size": 17,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/d03174196e0b259418afc6175bd1d072b12646cc"
+    },
+    {
+      "path": "All.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "88c84b365294a8dfae3a48701ec6da73620bcdfa",
+      "size": 242,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/88c84b365294a8dfae3a48701ec6da73620bcdfa"
+    },
+    {
+      "path": "CompactnessAndDegeneracy.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e973d50014e8c800af597ef699ef29b81e42fc6",
+      "size": 721769,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/0e973d50014e8c800af597ef699ef29b81e42fc6"
+    },
+    {
+      "path": "ComparatorChallenges",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "84e2aa4c3e60fd0927ba6a9a9e6f41a0ed18c954",
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/trees/84e2aa4c3e60fd0927ba6a9a9e6f41a0ed18c954"
+    },
+    {
+      "path": "ComparatorChallenges/A_SpherePacking.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "46b2e7b49da43fb17a7efa88652f8ee1adc01cbe",
+      "size": 467,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/46b2e7b49da43fb17a7efa88652f8ee1adc01cbe"
+    },
+    {
+      "path": "ComparatorChallenges/A_SpherePacking.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2477846e1883534837340c636fd928b091509783",
+      "size": 5883,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/2477846e1883534837340c636fd928b091509783"
+    },
+    {
+      "path": "ComparatorChallenges/B_BinaryCodes.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b530b77972c83396c1f2aed2deccda3a12fb6cab",
+      "size": 556,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/b530b77972c83396c1f2aed2deccda3a12fb6cab"
+    },
+    {
+      "path": "ComparatorChallenges/B_BinaryCodes.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c9e93b1944e6806802068cf593fa6557e4267bb1",
+      "size": 5805,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/c9e93b1944e6806802068cf593fa6557e4267bb1"
+    },
+    {
+      "path": "ComparatorChallenges/B_SphericalCodes.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b343dca9c0373f80c6304f30f261b81b371661c3",
+      "size": 504,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/b343dca9c0373f80c6304f30f261b81b371661c3"
+    },
+    {
+      "path": "ComparatorChallenges/B_SphericalCodes.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5f2bcda432b7091097ae8753cac24c08d0c10f6c",
+      "size": 9409,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/5f2bcda432b7091097ae8753cac24c08d0c10f6c"
+    },
+    {
+      "path": "ComparatorChallenges/C_PermanentFormulaLowerBound.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "662595032dced7ea0bb4d0ee43c3b1d20ecb4c2b",
+      "size": 421,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/662595032dced7ea0bb4d0ee43c3b1d20ecb4c2b"
+    },
+    {
+      "path": "ComparatorChallenges/C_PermanentFormulaLowerBound.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ca71c280479f12a4249b0dc63b6e1af27bdb32ff",
+      "size": 3605,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/ca71c280479f12a4249b0dc63b6e1af27bdb32ff"
+    },
+    {
+      "path": "ComparatorChallenges/D_NonSoficGroup.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "af023106a83552d7fafb4f0d122f121a095f802c",
+      "size": 328,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/af023106a83552d7fafb4f0d122f121a095f802c"
+    },
+    {
+      "path": "ComparatorChallenges/D_NonSoficGroup.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "158d97224fbd51c203ff07a2f74041ffa2c6013b",
+      "size": 1117,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/158d97224fbd51c203ff07a2f74041ffa2c6013b"
+    },
+    {
+      "path": "ComparatorChallenges/E_ConnesRigidity.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f5d2964be6b1a154bc12b38a0f99f0960960a2d9",
+      "size": 434,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/f5d2964be6b1a154bc12b38a0f99f0960960a2d9"
+    },
+    {
+      "path": "ComparatorChallenges/E_ConnesRigidity.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9425edabd79319cbe2943888c6ece107bdd81dfb",
+      "size": 7483,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/9425edabd79319cbe2943888c6ece107bdd81dfb"
+    },
+    {
+      "path": "ComparatorChallenges/F_EhrhartVolumeInequality.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "374e80eca19e6265508843a76a51710f9d32f94c",
+      "size": 488,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/374e80eca19e6265508843a76a51710f9d32f94c"
+    },
+    {
+      "path": "ComparatorChallenges/F_EhrhartVolumeInequality.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "63804696dba3cad019816309501b394e13e6b6ad",
+      "size": 2127,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/63804696dba3cad019816309501b394e13e6b6ad"
+    },
+    {
+      "path": "ComparatorChallenges/G_QuantumParallelRepetition.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c7dd59e9df9ae5d90b35f76a9d958943d8e94770",
+      "size": 393,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/c7dd59e9df9ae5d90b35f76a9d958943d8e94770"
+    },
+    {
+      "path": "ComparatorChallenges/G_QuantumParallelRepetition.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8257e7726643a8f8c08c7e91584e003ab204c589",
+      "size": 4660,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/8257e7726643a8f8c08c7e91584e003ab204c589"
+    },
+    {
+      "path": "ComparatorChallenges/H_GapCVP.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fdba0e774acc6c2bd6fd450ee155975c0eda1833",
+      "size": 654,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/fdba0e774acc6c2bd6fd450ee155975c0eda1833"
+    },
+    {
+      "path": "ComparatorChallenges/H_GapCVP.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "770e202350a5c94d3f6516428ff01092cb8f8cb4",
+      "size": 10839,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/770e202350a5c94d3f6516428ff01092cb8f8cb4"
+    },
+    {
+      "path": "ComparatorChallenges/I_MulticolorTriangleRamsey.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ce67db0653e18a2de68f471c00b9f892b789f806",
+      "size": 562,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/ce67db0653e18a2de68f471c00b9f892b789f806"
+    },
+    {
+      "path": "ComparatorChallenges/I_MulticolorTriangleRamsey.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6a9e42d686720f4b74ddc2001006b0b7a20f11aa",
+      "size": 1624,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/6a9e42d686720f4b74ddc2001006b0b7a20f11aa"
+    },
+    {
+      "path": "ComparatorChallenges/J_CompactnessConjecture.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c484ab6f83edebc64c660c06d2ddb7263380084f",
+      "size": 427,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/c484ab6f83edebc64c660c06d2ddb7263380084f"
+    },
+    {
+      "path": "ComparatorChallenges/J_CompactnessConjecture.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e9c50d24422cc1016e1621b88bece204056ce33",
+      "size": 2862,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/0e9c50d24422cc1016e1621b88bece204056ce33"
+    },
+    {
+      "path": "ComparatorChallenges/J_TwoDegenerateGraphs.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d8a542b5ce620b686cb24a6756360e76c5d2b1c1",
+      "size": 359,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/d8a542b5ce620b686cb24a6756360e76c5d2b1c1"
+    },
+    {
+      "path": "ComparatorChallenges/J_TwoDegenerateGraphs.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dd22ce141dd0a860ecdccfda291c0f3a480a1d70",
+      "size": 1487,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/dd22ce141dd0a860ecdccfda291c0f3a480a1d70"
+    },
+    {
+      "path": "ComparatorChallenges/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2a21e1ceac78e1ad47b7c29b4cb05920f7cf4a9a",
+      "size": 370,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/2a21e1ceac78e1ad47b7c29b4cb05920f7cf4a9a"
+    },
+    {
+      "path": "ConnesRigidity.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "81cf03e3f7ccdc66815cc00c9969bcfd2341c8d6",
+      "size": 1449151,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/81cf03e3f7ccdc66815cc00c9969bcfd2341c8d6"
+    },
+    {
+      "path": "EhrhartVolumeInequality.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "842c602ab882dfae64352fed0bce2d83c19b31e8",
+      "size": 2163484,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/842c602ab882dfae64352fed0bce2d83c19b31e8"
+    },
+    {
+      "path": "GapCVP.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "47f3a395e4d9ec3e2892664860f26ed63421b0c9",
+      "size": 5335203,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/47f3a395e4d9ec3e2892664860f26ed63421b0c9"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "size": 11357,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+    },
+    {
+      "path": "MetricCodes.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "51628c0db81bd6cb9a79777fa601306c9d64cbc5",
+      "size": 4531268,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/51628c0db81bd6cb9a79777fa601306c9d64cbc5"
+    },
+    {
+      "path": "MulticolorTriangleRamsey.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "24b55f531a4d36347cd2277b1b9c7d784d91ae35",
+      "size": 125769,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/24b55f531a4d36347cd2277b1b9c7d784d91ae35"
+    },
+    {
+      "path": "NonSoficGroup.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dd1f8e63960300c8674fcd491007d2a628fbc6fe",
+      "size": 1343031,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/dd1f8e63960300c8674fcd491007d2a628fbc6fe"
+    },
+    {
+      "path": "Permanent.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "56100e1ae26e6920a569166d0f4cdb4b42b04301",
+      "size": 1131535,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/56100e1ae26e6920a569166d0f4cdb4b42b04301"
+    },
+    {
+      "path": "QuantumParallelRepetition.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "887c4378f124a5d81a3f2624b6dc34867ec409c4",
+      "size": 2683872,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/887c4378f124a5d81a3f2624b6dc34867ec409c4"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3b8381257d1ee2edd7912323cb4ceaa719572257",
+      "size": 3042,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/3b8381257d1ee2edd7912323cb4ceaa719572257"
+    },
+    {
+      "path": "SpherePacking.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e6117934a80142a8249356fdafa797eba030e920",
+      "size": 2096663,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/e6117934a80142a8249356fdafa797eba030e920"
+    },
+    {
+      "path": "formalization.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "63d31d019f0bcff6052191d3aac71d4191f34131",
+      "size": 5399,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/63d31d019f0bcff6052191d3aac71d4191f34131"
+    },
+    {
+      "path": "lake-manifest.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "046e8de7f46832fbf092e3fb815efae01e4a2129",
+      "size": 4141,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/046e8de7f46832fbf092e3fb815efae01e4a2129"
+    },
+    {
+      "path": "lakefile.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f29d6b0307597932154b34b97e37fe07ec3356de",
+      "size": 1548,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/f29d6b0307597932154b34b97e37fe07ec3356de"
+    },
+    {
+      "path": "lean-toolchain",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "94b9f495baff80fd9cb44aad8f4762cb3b2066fe",
+      "size": 25,
+      "url": "https://api.github.com/repos/openai/ten-proofs/git/blobs/94b9f495baff80fd9cb44aad8f4762cb3b2066fe"
+    }
+  ],
+  "truncated": false
+}

@@ -1,0 +1,855 @@
+{
+  "sha": "0647711a71183c1ea492ad60860776617ce1ea88",
+  "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/0647711a71183c1ea492ad60860776617ce1ea88",
+  "tree": [
+    {
+      "path": ".github",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d37e2c6508d0c1e1ff4ccc0fd6309879be9397b5",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/d37e2c6508d0c1e1ff4ccc0fd6309879be9397b5"
+    },
+    {
+      "path": ".github/workflows",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4f6fcbca844d118edf30756712fedb370d7d25b4",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/4f6fcbca844d118edf30756712fedb370d7d25b4"
+    },
+    {
+      "path": ".github/workflows/lean_action_ci.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "db09247d95896bc768f71e39b47b2e2f192c5cdd",
+      "size": 487,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/db09247d95896bc768f71e39b47b2e2f192c5cdd"
+    },
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "87df5a1cb638f2cbb0227da5e199ae74016f2423",
+      "size": 263,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/87df5a1cb638f2cbb0227da5e199ae74016f2423"
+    },
+    {
+      "path": "APNOutputs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1760f3c2530a0e2454515b3276ccc15a84441df2",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/1760f3c2530a0e2454515b3276ccc15a84441df2"
+    },
+    {
+      "path": "APNOutputs/AICollaborator",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1ce8dd412ec1d02c0bd52bba049d7d771c17a5fa",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/1ce8dd412ec1d02c0bd52bba049d7d771c17a5fa"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/AdditiveCombinatorics",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5dbb1bbd94dc689189f9584cda8500b7d736cb5f",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/5dbb1bbd94dc689189f9584cda8500b7d736cb5f"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/AdditiveCombinatorics/57.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "599179d6303afd30fd0e08a3e8a5193b693ffd4a",
+      "size": 64249,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/599179d6303afd30fd0e08a3e8a5193b693ffd4a"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/AlgebraicGeometry",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7b87eb86ddb6baacacb533e730c5f7b2af5536e5",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/7b87eb86ddb6baacacb533e730c5f7b2af5536e5"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/AlgebraicGeometry/hilbert_functions_1.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b877fef7aabdb5796b0f8c359648fa65cca72ac2",
+      "size": 11817,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/b877fef7aabdb5796b0f8c359648fa65cca72ac2"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/AlgebraicGeometry/hilbert_functions_2.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e983a9f9944d27cb304d4357f25bbf8482d9eb1e",
+      "size": 27023,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/e983a9f9944d27cb304d4357f25bbf8482d9eb1e"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/AlgebraicGeometry/hilbert_functions_3.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "197f37facbe31bdbaf97e9e426c6e2701817b1de",
+      "size": 75753,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/197f37facbe31bdbaf97e9e426c6e2701817b1de"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/AlgebraicGeometry/hilbert_functions_4.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9d60c06ad0fbb2f95e12907b2601865b283f0880",
+      "size": 50626,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/9d60c06ad0fbb2f95e12907b2601865b283f0880"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/AlgebraicGeometry/hilbert_functions_5.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6072dcc9231b98875fb98a0370242eebb9c4cac1",
+      "size": 125326,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/6072dcc9231b98875fb98a0370242eebb9c4cac1"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/AlgebraicGeometry/hilbert_functions_7.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "63957779e4f97e7e87da0e0d1fe766a8f3088787",
+      "size": 36615,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/63957779e4f97e7e87da0e0d1fe766a8f3088787"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/AlgebraicGeometry/hilbert_functions_8.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2aea1de6ddbb1ea5de4c9401e01d4e565229c676",
+      "size": 36432,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/2aea1de6ddbb1ea5de4c9401e01d4e565229c676"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/Graphs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a8c929d703b2800398a6e7e318c6b3f591ba8d7c",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/a8c929d703b2800398a6e7e318c6b3f591ba8d7c"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/Graphs/GraphConjecture2.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b9e4bb33528ee29f8ccf1dec77df4346be839271",
+      "size": 39394,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/b9e4bb33528ee29f8ccf1dec77df4346be839271"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/Graphs/bipartite_graph_reconstruction_conjecture_2.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3351552da7f5b4b972bf8e19c183a7a3cabf87f6",
+      "size": 61516,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/3351552da7f5b4b972bf8e19c183a7a3cabf87f6"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/Optimization",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "344df47a2f43f298bd606d542ff26b431920ddb3",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/344df47a2f43f298bd606d542ff26b431920ddb3"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/Optimization/LastIterateConvergence.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "40c66b391e15ff560584c31f85e4e17f2a076740",
+      "size": 32994,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/40c66b391e15ff560584c31f85e4e17f2a076740"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/QuantumOptics",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d62c305392d45cc99e9762b69c0c944da0d636cf",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/d62c305392d45cc99e9762b69c0c944da0d636cf"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/QuantumOptics/35.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f373d3e70c0d1d6be0a81554c81503ec07cf8f65",
+      "size": 106151,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/f373d3e70c0d1d6be0a81554c81503ec07cf8f65"
+    },
+    {
+      "path": "APNOutputs/AICollaborator/QuantumOptics/MonochromaticQuantumGraph.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4b9dffce3babce570f7abd02ebccc20f65f9372",
+      "size": 31767,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/d4b9dffce3babce570f7abd02ebccc20f65f9372"
+    },
+    {
+      "path": "APNOutputs/ErdosProblems",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4e095b735d0afa8a01178d01c771264c1e111133",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/4e095b735d0afa8a01178d01c771264c1e111133"
+    },
+    {
+      "path": "APNOutputs/ErdosProblems/erdos_12.parts.i.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a8b86904c2833e434450db6859e452a5718d428f",
+      "size": 48859,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/a8b86904c2833e434450db6859e452a5718d428f"
+    },
+    {
+      "path": "APNOutputs/ErdosProblems/erdos_12.parts.ii.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "889784d2df64400fe917c4a7766db004f6a42277",
+      "size": 36449,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/889784d2df64400fe917c4a7766db004f6a42277"
+    },
+    {
+      "path": "APNOutputs/ErdosProblems/erdos_125.variants.positive_lower_density.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dd6f9a90a4699f4e8508c04d0c7202525bddf16d",
+      "size": 22480,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/dd6f9a90a4699f4e8508c04d0c7202525bddf16d"
+    },
+    {
+      "path": "APNOutputs/ErdosProblems/erdos_138.variants.difference.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e688a506be413d719ce96b2742d58d5af536353",
+      "size": 33637,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/1e688a506be413d719ce96b2742d58d5af536353"
+    },
+    {
+      "path": "APNOutputs/ErdosProblems/erdos_152.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e09219a2220f579656757682839069d30572d28b",
+      "size": 32896,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/e09219a2220f579656757682839069d30572d28b"
+    },
+    {
+      "path": "APNOutputs/ErdosProblems/erdos_26.variants.tenenbaum.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c9a2fcd592ca2051303e99f70cd66e942541a7c5",
+      "size": 45108,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/c9a2fcd592ca2051303e99f70cd66e942541a7c5"
+    },
+    {
+      "path": "APNOutputs/ErdosProblems/erdos_741.parts.i.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f443df2a10cf49e00b933ff89551696b8ffabd04",
+      "size": 87669,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/f443df2a10cf49e00b933ff89551696b8ffabd04"
+    },
+    {
+      "path": "APNOutputs/ErdosProblems/erdos_741.parts.ii.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ce265785bee364bf843d8ae215e4c2d6ac2cc0ad",
+      "size": 23385,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/ce265785bee364bf843d8ae215e4c2d6ac2cc0ad"
+    },
+    {
+      "path": "APNOutputs/ErdosProblems/erdos_846.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2533cd0e1fbe453980aab9519211686c9eb567e3",
+      "size": 45873,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/2533cd0e1fbe453980aab9519211686c9eb567e3"
+    },
+    {
+      "path": "APNOutputs/OEIS",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c22a57249d7fa8dad7cea7e1f1cc55bb264f730d",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/c22a57249d7fa8dad7cea7e1f1cc55bb264f730d"
+    },
+    {
+      "path": "APNOutputs/OEIS/A224515_conjecture_existence.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fd96bd10760007fe0c18f51186cee3b736b616f7",
+      "size": 11899,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/fd96bd10760007fe0c18f51186cee3b736b616f7"
+    },
+    {
+      "path": "APNOutputs/OEIS/A309132_conjecture_carmichael.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3c283139190af23dc3824500c32c600da1fa1621",
+      "size": 29307,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/3c283139190af23dc3824500c32c600da1fa1621"
+    },
+    {
+      "path": "APNOutputs/OEIS/A382590_conjecture_kth_prime_factor_is_eventually_periodic.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "42bf84066aae7ed874627cb0a529a6a8a1f80149",
+      "size": 10853,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/42bf84066aae7ed874627cb0a529a6a8a1f80149"
+    },
+    {
+      "path": "APNOutputs/OEIS/a091669_conjecture_primitive_root.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fb82a4f1f9a19925555195f44387b73e752fb88e",
+      "size": 20338,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/fb82a4f1f9a19925555195f44387b73e752fb88e"
+    },
+    {
+      "path": "APNOutputs/OEIS/a325046_odd_terms_at_k_times_k_plus_1.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b0433afc98b6feb391bcf2f9f208bde449d3544e",
+      "size": 10537,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/b0433afc98b6feb391bcf2f9f208bde449d3544e"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_103311_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c7273541cfeb42ed3245c5c1dd183030286c5a95",
+      "size": 9519,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/c7273541cfeb42ed3245c5c1dd183030286c5a95"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_108_conjecture_2.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ad22dd09294ce28e4203eb5862b5fe6151663822",
+      "size": 16499,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/ad22dd09294ce28e4203eb5862b5fe6151663822"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_113254_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5da2d89954366e7be57220b6b9ea06b12ff841ef",
+      "size": 4174,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/5da2d89954366e7be57220b6b9ea06b12ff841ef"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_175386_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "81fdb0eb69e486f59a2ca74f202865520aaa96eb",
+      "size": 17155,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/81fdb0eb69e486f59a2ca74f202865520aaa96eb"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_194806_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bca9d5579290b9ea88ff7164bf66bc545dd101b5",
+      "size": 21018,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/bca9d5579290b9ea88ff7164bf66bc545dd101b5"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_227582_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f3f7ec28a76ceb329e04b23502b6a92230947438",
+      "size": 26965,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/f3f7ec28a76ceb329e04b23502b6a92230947438"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_228143_conjecture_1.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b88257383f8faeac508c84baf1f3015e8ccd1854",
+      "size": 31635,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/b88257383f8faeac508c84baf1f3015e8ccd1854"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_243106_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "43d242990576825e5897e2bf7de927c8b6c9d7b2",
+      "size": 7113,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/43d242990576825e5897e2bf7de927c8b6c9d7b2"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_248802_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "389802ecf4971d2595178635887b4642c9e753d6",
+      "size": 7791,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/389802ecf4971d2595178635887b4642c9e753d6"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_248802_conjecture_4.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6f2449b83e52d56a5acabfc745253e8fd70c5f7b",
+      "size": 33002,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/6f2449b83e52d56a5acabfc745253e8fd70c5f7b"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_256012_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ee0f5fa99d8927d9685c4ff8dd2269a0b64a9daf",
+      "size": 5913,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/ee0f5fa99d8927d9685c4ff8dd2269a0b64a9daf"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_267581_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "104166ab188ce01b42125d4dd0ef8555feed7999",
+      "size": 8894,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/104166ab188ce01b42125d4dd0ef8555feed7999"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_271591_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "28953bd3f2dc73a8b9fed132481cc674008ad0de",
+      "size": 22698,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/28953bd3f2dc73a8b9fed132481cc674008ad0de"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_278070_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "90d6c6518cfa42262d353025ef23b65c84e34d7e",
+      "size": 3406,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/90d6c6518cfa42262d353025ef23b65c84e34d7e"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_282779_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6aaa6d28f10ed855f0f79a0c4d4b94b2ee9ef526",
+      "size": 7276,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/6aaa6d28f10ed855f0f79a0c4d4b94b2ee9ef526"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_289411_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5196752f0b508555e39d7a60410256720217ffd7",
+      "size": 8644,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/5196752f0b508555e39d7a60410256720217ffd7"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_2897_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1817297e5d6f5c9643150b4c2eadd241b69db6b5",
+      "size": 28876,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/1817297e5d6f5c9643150b4c2eadd241b69db6b5"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_306424_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4d89a0db9f9ab0181fa9fcb72651cda9093c80aa",
+      "size": 14954,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/4d89a0db9f9ab0181fa9fcb72651cda9093c80aa"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_307865_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9b3509bea7b23a005328b039849129ee2f2dbcef",
+      "size": 8727,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/9b3509bea7b23a005328b039849129ee2f2dbcef"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_323557_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "43b2b9bb02fa136c9b25e0ac5e788a25ac3e7f63",
+      "size": 10998,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/43b2b9bb02fa136c9b25e0ac5e788a25ac3e7f63"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_340737_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "50f8a9b0152abea191141e21475fecb9d0a04371",
+      "size": 23411,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/50f8a9b0152abea191141e21475fecb9d0a04371"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_341254_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cba118e5572a6b6fc211b6c8e1e7243e4454be45",
+      "size": 6758,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/cba118e5572a6b6fc211b6c8e1e7243e4454be45"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_363347_conjecture_2.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c9534f963bb086beeaa84aa230b79fc273b7749c",
+      "size": 38821,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/c9534f963bb086beeaa84aa230b79fc273b7749c"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_372761_conjecture_2.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "16752a30667a9d54918a7835863e6957ed5e1a8d",
+      "size": 37580,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/16752a30667a9d54918a7835863e6957ed5e1a8d"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_51293_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7337a1af3a878f3462a127a4fef0443070534596",
+      "size": 41881,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/7337a1af3a878f3462a127a4fef0443070534596"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_62567_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "13adba67ae966b5983f1c6206dfe2c192588e799",
+      "size": 15635,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/13adba67ae966b5983f1c6206dfe2c192588e799"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_A028859_conjecture_1.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "328275e1c4f42fd81e399956a8f0330a5abf48b1",
+      "size": 28747,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/328275e1c4f42fd81e399956a8f0330a5abf48b1"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_A258667_conjecture_0.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4d8c31abe0f8452bc75371313df996fc01eb3537",
+      "size": 28220,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/4d8c31abe0f8452bc75371313df996fc01eb3537"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_a211417_conjecture_specific.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9c3046f90c554c4964436241e275071c7e28f518",
+      "size": 12940,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/9c3046f90c554c4964436241e275071c7e28f518"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_a237271_conjecture_2.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3506e9a582dc514ccc841a03ba554d9d359f4712",
+      "size": 4405,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/3506e9a582dc514ccc841a03ba554d9d359f4712"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_a300997_finite_difference_is_one_or_two.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b418896865f701c22131b8cdacec9813de5a666c",
+      "size": 42505,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/b418896865f701c22131b8cdacec9813de5a666c"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_a363102_conjecture_1.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dc6b32e3d931a0a06757c3152a41070c5d14c11f",
+      "size": 16131,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/dc6b32e3d931a0a06757c3152a41070c5d14c11f"
+    },
+    {
+      "path": "APNOutputs/OEIS/oeis_a368692_conjecture_integrality.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bbc0470b80b29b4dc86d9ada56c3123479b9ea38",
+      "size": 9060,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/bbc0470b80b29b4dc86d9ada56c3123479b9ea38"
+    },
+    {
+      "path": "APNOutputs/StacksProject",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c353d6462c7697622cd9cb57620c06dc344cee4e",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/c353d6462c7697622cd9cb57620c06dc344cee4e"
+    },
+    {
+      "path": "APNOutputs/StacksProject/AlgebrasOverFields_GeometricallyIrreducibleAlgebra_of_directed_colimit.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a245f30293eef5f14368777fc1708bb2c2a614ad",
+      "size": 40553,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/a245f30293eef5f14368777fc1708bb2c2a614ad"
+    },
+    {
+      "path": "APNOutputs/StacksProject/AlgebrasOverFields_GeometricallyIrreducibleAlgebra_transitive.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b8f0cf98de858a492ccb73e133d2555b887836bd",
+      "size": 21093,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/b8f0cf98de858a492ccb73e133d2555b887836bd"
+    },
+    {
+      "path": "APNOutputs/StacksProject/AlgebrasOverFields_geometrically_irreducible_tfae.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b7c70364550c4f608a2cfd94eb69aa7a229a6b16",
+      "size": 64454,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/b7c70364550c4f608a2cfd94eb69aa7a229a6b16"
+    },
+    {
+      "path": "APNOutputs/StacksProject/AlgebrasOverFields_minimalPrimes_bijection_of_geometrically_IrreducibleAlgebra.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "98fa40074239e2cf1f6b2b094440901b6f0b8fc8",
+      "size": 27413,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/98fa40074239e2cf1f6b2b094440901b6f0b8fc8"
+    },
+    {
+      "path": "APNOutputs/StacksProject/AlgebrasOverFields_unique_minimal_prime_of_tensor_product_of_separably_closed.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7183d579c7ac245e0224cb409f4db11e65422c98",
+      "size": 41095,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/7183d579c7ac245e0224cb409f4db11e65422c98"
+    },
+    {
+      "path": "APNOutputs/StacksProject/GeometricallyReduced_isGeometricallyReduced_iff_of_separable_algebraic.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "22926abae89e109830f53c506e6c3ff705c68e73",
+      "size": 51354,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/22926abae89e109830f53c506e6c3ff705c68e73"
+    },
+    {
+      "path": "APNOutputs/StacksProject/GeometricallyReduced_isReduced_tensorProduct_of_separable.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e3a1bb834c6e22837cc579225d4fe49582308f69",
+      "size": 22820,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/e3a1bb834c6e22837cc579225d4fe49582308f69"
+    },
+    {
+      "path": "APNOutputs/StacksProject/GeometricallyReduced_isReduced_tensorProduct_of_separablyGenerated.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf6fa0f6791225972655d5bc5bed068b518ade4c",
+      "size": 48185,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/cf6fa0f6791225972655d5bc5bed068b518ade4c"
+    },
+    {
+      "path": "APNOutputs/StacksProject/NormalRings_NormalDomain_powerSeries.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "69ef962f980589073d3a178ef43bea7f66e85cd1",
+      "size": 25444,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/69ef962f980589073d3a178ef43bea7f66e85cd1"
+    },
+    {
+      "path": "APNOutputs/StacksProject/NormalRings_normalRing_characterization.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0f6cdd84840e75835cbbc2a2b35019a5ae092f88",
+      "size": 51267,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/0f6cdd84840e75835cbbc2a2b35019a5ae092f88"
+    },
+    {
+      "path": "APNOutputs/StacksProject/Separability_exists_isPurelyInseparable_isSeparablyGenerated_of_essFiniteType.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b7432b768c0f05ffb39fb7e48c373c7868951857",
+      "size": 96588,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/b7432b768c0f05ffb39fb7e48c373c7868951857"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e85d9451a8b06aef26eecd751141c6737e1ae2f9",
+      "size": 970,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/e85d9451a8b06aef26eecd751141c6737e1ae2f9"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "size": 11358,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/d645695673349e3947e8e5ae42332d0ac3164cd7"
+    },
+    {
+      "path": "NaturalLanguageProofs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "28164aba5aefccd5c1351941ad6e4b02c65794d1",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/28164aba5aefccd5c1351941ad6e4b02c65794d1"
+    },
+    {
+      "path": "NaturalLanguageProofs/AICollaborator",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "446d2cb0da349803985f6ee88af93c795d902c5e",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/446d2cb0da349803985f6ee88af93c795d902c5e"
+    },
+    {
+      "path": "NaturalLanguageProofs/AICollaborator/graph_reconstruction.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2a42499dbc09c42f88a2c91323c3dcadfe069137",
+      "size": 155211,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/2a42499dbc09c42f88a2c91323c3dcadfe069137"
+    },
+    {
+      "path": "NaturalLanguageProofs/AICollaborator/hilbert.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "682fbc5c6e2603c6cfd1e9d3d5c3b2c7e75b58d6",
+      "size": 166114,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/682fbc5c6e2603c6cfd1e9d3d5c3b2c7e75b58d6"
+    },
+    {
+      "path": "NaturalLanguageProofs/ErdosProblems",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d8252dc7d8dee6ffd9b327842b39ed2fe2c20297",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/d8252dc7d8dee6ffd9b327842b39ed2fe2c20297"
+    },
+    {
+      "path": "NaturalLanguageProofs/ErdosProblems/erdos125.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e71f6be570f6d674406f3e993de9f8f9f84a5070",
+      "size": 94328,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/e71f6be570f6d674406f3e993de9f8f9f84a5070"
+    },
+    {
+      "path": "NaturalLanguageProofs/ErdosProblems/erdos12i.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3a1a20a371eb33686b47d900b8ef2d0bf4e41392",
+      "size": 135167,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/3a1a20a371eb33686b47d900b8ef2d0bf4e41392"
+    },
+    {
+      "path": "NaturalLanguageProofs/ErdosProblems/erdos12ii.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d024d05985f1d9dc6d27dd0627361be1416df1b0",
+      "size": 131062,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/d024d05985f1d9dc6d27dd0627361be1416df1b0"
+    },
+    {
+      "path": "NaturalLanguageProofs/ErdosProblems/erdos138.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7b12b1a3af95f0af7c45c0a38a1832fcecdfa45a",
+      "size": 71009,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/7b12b1a3af95f0af7c45c0a38a1832fcecdfa45a"
+    },
+    {
+      "path": "NaturalLanguageProofs/ErdosProblems/erdos152.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "10cf3a8b982d128816dc66aff4bfc8cb9d260147",
+      "size": 110988,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/10cf3a8b982d128816dc66aff4bfc8cb9d260147"
+    },
+    {
+      "path": "NaturalLanguageProofs/ErdosProblems/erdos26.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4e2b5ed579ef2cb13b9878912d139366e83eab01",
+      "size": 129441,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/4e2b5ed579ef2cb13b9878912d139366e83eab01"
+    },
+    {
+      "path": "NaturalLanguageProofs/ErdosProblems/erdos741i.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d2bc1af9b16f169b2eb578f71e0d2782afadcf7f",
+      "size": 97016,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/d2bc1af9b16f169b2eb578f71e0d2782afadcf7f"
+    },
+    {
+      "path": "NaturalLanguageProofs/ErdosProblems/erdos741ii.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1add1e47d86b85a677835785d1259daf04ca572c",
+      "size": 92877,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/1add1e47d86b85a677835785d1259daf04ca572c"
+    },
+    {
+      "path": "NaturalLanguageProofs/ErdosProblems/erdos846.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a86b3d925eb489ca589f484a865c7be10ac3ec2c",
+      "size": 115400,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/a86b3d925eb489ca589f484a865c7be10ac3ec2c"
+    },
+    {
+      "path": "NaturalLanguageProofs/OEIS",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "cd2955272a58129898c96828f722d35b08086f1a",
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/trees/cd2955272a58129898c96828f722d35b08086f1a"
+    },
+    {
+      "path": "NaturalLanguageProofs/OEIS/oeis_51293.pdf",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5b26c4633e833a64a5495fdc12be5ec7a21a0d32",
+      "size": 148653,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/5b26c4633e833a64a5495fdc12be5ec7a21a0d32"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a9e64e4fab4cd3988ca1633262042dc5d42e2d85",
+      "size": 4112,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/a9e64e4fab4cd3988ca1633262042dc5d42e2d85"
+    },
+    {
+      "path": "erdos_problems_attempted.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d01a75de0185696f21a30145fa1a308f6cda81c2",
+      "size": 6929,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/d01a75de0185696f21a30145fa1a308f6cda81c2"
+    },
+    {
+      "path": "lake-manifest.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b7e2a4236bacc34931ea0276349a677a1c479ce",
+      "size": 3468,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/8b7e2a4236bacc34931ea0276349a677a1c479ce"
+    },
+    {
+      "path": "lakefile.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "38e88d78737f25c47fe49f24e07600980ac83178",
+      "size": 434,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/38e88d78737f25c47fe49f24e07600980ac83178"
+    },
+    {
+      "path": "lean-toolchain",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5249182c0dd885dfd2c6fb87ed4b4113a2449a6c",
+      "size": 25,
+      "url": "https://api.github.com/repos/google-deepmind/alphaproof-nexus-results/git/blobs/5249182c0dd885dfd2c6fb87ed4b4113a2449a6c"
+    }
+  ],
+  "truncated": false
+}

@@ -1,0 +1,31 @@
+lsblk.txt              raw    60  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+kb-article.txt         raw   656  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+uptime-w.txt           raw    80  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+free-m.txt             raw    76  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+vmstat.txt             raw   229  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+unified-diff.patch     raw   578  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+df-h.txt               raw   570  pct     -  tree     -  unit   535  fired false/false/true exact false/false/true
+df-real.txt            raw   158  pct   197  tree     -  unit   181  fired true/false/true exact true/false/true
+du-real.txt            raw   458  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+node-help.txt          raw  1099  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+findmnt.txt            raw   787  pct     -  tree   796  unit     -  fired false/true/false exact false/true/false
+df-h.txt               raw   140  pct   179  tree     -  unit   163  fired true/false/true exact true/false/true
+email-thread.txt       raw   629  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+llm-answer.md          raw   733  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+markdown-table.md      raw   330  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+psql-output.txt        raw   675  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+prices.csv             raw   582  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+cue-sheet.md           raw   513  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+ps-ef.txt              raw  1144  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+ls-real.txt            raw  1034  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+json-pkg.txt           raw  1152  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+code-ts.txt            raw  1422  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+dpkg-l.txt             raw  1000  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+ps-real.txt            raw  1106  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+kubectl-get-pods.txt   raw  1006  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+metrics.tsv            raw   811  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+ps-aux-real.txt        raw  3054  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+apt-real.txt           raw  2739  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+ls-l-real.txt          raw  5194  pct     -  tree     -  unit     -  fired false/false/false exact false/false/false
+TOTAL raw 28015 pct 28093 tree 28024 unit 28026
+FIRED/EXACT pct 2/2 tree 1/1 unit 3/3

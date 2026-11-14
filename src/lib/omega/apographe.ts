@@ -178,6 +178,7 @@ import {
 import { ouraEncode, ouraDecode } from './oura';
 import { workEpoch, workBudgetFor } from './workmeter';
 import { engramMemo, engramOptionsKey } from './engram';
+import { synedriaKey, synedriaMemo } from './synedria';
 import { chironDecode } from './chiron';
 
 /** Line ending kept verbatim, so the transform never has to re-join. */
@@ -1076,9 +1077,16 @@ export function apographeEncode(
 ): ApographeResult {
   // X68: sub-encode memo inside the work epoch (engram.ts), same soundness rule
   // as DAEDALUS: a hit replays the counted work, never skips it.
-  return workEpoch(workBudgetFor(text.length),
-    () => engramMemo('apographe', enc, text, engramOptionsKey(opts),
-      () => apographeEncodeInner(text, enc, opts)), text.length);
+  // X114 SYNEDRIA: inside a TAGSTACK council, the same fresh-epoch APOGRAPHE
+  // call made by different parents is computed once and its exact meter spend
+  // is replayed. Outside a council this is a no-op wrapper.
+  return workEpoch(workBudgetFor(text.length), () => {
+    const optionsKey = engramOptionsKey(opts);
+    const key = synedriaKey('apographe', enc, text, optionsKey);
+    return synedriaMemo(key,
+      () => engramMemo('apographe', enc, text, optionsKey,
+        () => apographeEncodeInner(text, enc, opts)));
+  }, text.length);
 }
 
 /**

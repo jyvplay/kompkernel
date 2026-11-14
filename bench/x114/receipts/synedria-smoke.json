@@ -1,0 +1,296 @@
+{
+  "schema": "kompkernel-x114-synedria-smoke-v1",
+  "date": "2026-11-14",
+  "environment": {
+    "OMEGA_DET": "1",
+    "OMEGA_NO_MEMO": "1",
+    "OMEGA_ENGRAM": "0",
+    "OMEGA_OURA_MEMO": "0",
+    "OMEGA_NO_OROTHESIA": "1"
+  },
+  "encoding": "o200k_base",
+  "lanes": 4,
+  "identical": true,
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "off": {
+        "on": false,
+        "tokens": 60,
+        "reported": 60,
+        "exact": true,
+        "parent": "synkrisis",
+        "messageSHA256": "6c01e1a891869dfcf63f1cd2f4cf81930f51dbf3459243681cce3d752687c496",
+        "tokenIdsSHA256": "7034fd4f68c5b1d8b64e81c870492520db6b7383059d03c1c383f7076fb832f2",
+        "expSHA256": null,
+        "hasFrame": false,
+        "frontierCosts": {
+          "synkrisis": 60,
+          "kanon": 120,
+          "akolouthia2": 60,
+          "apographe": 60,
+          "diastema": 60
+        },
+        "wallMs": 11776.944784,
+        "cpuMs": 11764.062,
+        "stats": {
+          "scopes": 0,
+          "hits": 0,
+          "misses": 0,
+          "stores": 0,
+          "bypassNested": 0,
+          "bypassDisabled": 3,
+          "tooBigSkips": 0,
+          "cloneSkips": 0,
+          "evictions": 0,
+          "replayedWork": 0,
+          "replayedChiron": 0
+        }
+      },
+      "on": {
+        "on": true,
+        "tokens": 60,
+        "reported": 60,
+        "exact": true,
+        "parent": "synkrisis",
+        "messageSHA256": "6c01e1a891869dfcf63f1cd2f4cf81930f51dbf3459243681cce3d752687c496",
+        "tokenIdsSHA256": "7034fd4f68c5b1d8b64e81c870492520db6b7383059d03c1c383f7076fb832f2",
+        "expSHA256": null,
+        "hasFrame": false,
+        "frontierCosts": {
+          "synkrisis": 60,
+          "kanon": 120,
+          "akolouthia2": 60,
+          "apographe": 60,
+          "diastema": 60
+        },
+        "wallMs": 3734.433795000001,
+        "cpuMs": 3731.912,
+        "stats": {
+          "scopes": 3,
+          "hits": 6,
+          "misses": 6,
+          "stores": 6,
+          "bypassNested": 0,
+          "bypassDisabled": 0,
+          "tooBigSkips": 0,
+          "cloneSkips": 0,
+          "evictions": 0,
+          "replayedWork": 1978182,
+          "replayedChiron": 6099282
+        }
+      },
+      "same": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "off": {
+        "on": false,
+        "tokens": 620,
+        "reported": 620,
+        "exact": true,
+        "parent": "synkrisis",
+        "messageSHA256": "b62e84ee6cf6630198e68503804b82e1503acaa9b61c4ee410407752edb01483",
+        "tokenIdsSHA256": "4f72b0d4b5f2935562b675d950f2601c7047d976f74ff279d01fb2cd7b29037c",
+        "expSHA256": "d220bfb7a912670e0217b99760f41d40f41e7fab5ceda93f552aebf5ee4744c6",
+        "hasFrame": true,
+        "frontierCosts": {
+          "synkrisis": 622,
+          "kanon": 1262,
+          "akolouthia2": 651,
+          "apographe": 622,
+          "diastema": 622
+        },
+        "wallMs": 17097.765102,
+        "cpuMs": 17055.727,
+        "stats": {
+          "scopes": 0,
+          "hits": 0,
+          "misses": 0,
+          "stores": 0,
+          "bypassNested": 0,
+          "bypassDisabled": 3,
+          "tooBigSkips": 0,
+          "cloneSkips": 0,
+          "evictions": 0,
+          "replayedWork": 0,
+          "replayedChiron": 0
+        }
+      },
+      "on": {
+        "on": true,
+        "tokens": 620,
+        "reported": 620,
+        "exact": true,
+        "parent": "synkrisis",
+        "messageSHA256": "b62e84ee6cf6630198e68503804b82e1503acaa9b61c4ee410407752edb01483",
+        "tokenIdsSHA256": "4f72b0d4b5f2935562b675d950f2601c7047d976f74ff279d01fb2cd7b29037c",
+        "expSHA256": "d220bfb7a912670e0217b99760f41d40f41e7fab5ceda93f552aebf5ee4744c6",
+        "hasFrame": true,
+        "frontierCosts": {
+          "synkrisis": 622,
+          "kanon": 1262,
+          "akolouthia2": 651,
+          "apographe": 622,
+          "diastema": 622
+        },
+        "wallMs": 6771.033399999998,
+        "cpuMs": 6783.518,
+        "stats": {
+          "scopes": 3,
+          "hits": 6,
+          "misses": 6,
+          "stores": 6,
+          "bypassNested": 0,
+          "bypassDisabled": 0,
+          "tooBigSkips": 0,
+          "cloneSkips": 0,
+          "evictions": 0,
+          "replayedWork": 1348164,
+          "replayedChiron": 8841300
+        }
+      },
+      "same": true
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "off": {
+        "on": false,
+        "tokens": 80,
+        "reported": 80,
+        "exact": true,
+        "parent": "synkrisis",
+        "messageSHA256": "d57da79a4bfc7b0bfad09641d429f7ff139a4b354f47ddea07eed9d717e84ae6",
+        "tokenIdsSHA256": "d7e328cc981693e8c26cbc58249a53152a5f292ff6c0dc0c1328a524090b7ae0",
+        "expSHA256": null,
+        "hasFrame": false,
+        "frontierCosts": {
+          "synkrisis": 80,
+          "kanon": 160,
+          "akolouthia2": 80,
+          "apographe": 80,
+          "diastema": 80
+        },
+        "wallMs": 13469.577754000005,
+        "cpuMs": 13457.288,
+        "stats": {
+          "scopes": 0,
+          "hits": 0,
+          "misses": 0,
+          "stores": 0,
+          "bypassNested": 0,
+          "bypassDisabled": 3,
+          "tooBigSkips": 0,
+          "cloneSkips": 0,
+          "evictions": 0,
+          "replayedWork": 0,
+          "replayedChiron": 0
+        }
+      },
+      "on": {
+        "on": true,
+        "tokens": 80,
+        "reported": 80,
+        "exact": true,
+        "parent": "synkrisis",
+        "messageSHA256": "d57da79a4bfc7b0bfad09641d429f7ff139a4b354f47ddea07eed9d717e84ae6",
+        "tokenIdsSHA256": "d7e328cc981693e8c26cbc58249a53152a5f292ff6c0dc0c1328a524090b7ae0",
+        "expSHA256": null,
+        "hasFrame": false,
+        "frontierCosts": {
+          "synkrisis": 80,
+          "kanon": 160,
+          "akolouthia2": 80,
+          "apographe": 80,
+          "diastema": 80
+        },
+        "wallMs": 4603.7594180000015,
+        "cpuMs": 4587.853,
+        "stats": {
+          "scopes": 3,
+          "hits": 6,
+          "misses": 6,
+          "stores": 6,
+          "bypassNested": 0,
+          "bypassDisabled": 0,
+          "tooBigSkips": 0,
+          "cloneSkips": 0,
+          "evictions": 0,
+          "replayedWork": 2218428,
+          "replayedChiron": 6134478
+        }
+      },
+      "same": true
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "off": {
+        "on": false,
+        "tokens": 76,
+        "reported": 76,
+        "exact": true,
+        "parent": "synkrisis",
+        "messageSHA256": "0d0194b9ede575d9a4697a04563d1bb2b4f1f269c2103b2f08e95302297b6612",
+        "tokenIdsSHA256": "3d189fb0b34e3f26bf3c532c3b3fbcbcf5e869371a0609fb4723164256bfcd35",
+        "expSHA256": null,
+        "hasFrame": false,
+        "frontierCosts": {
+          "synkrisis": 76,
+          "kanon": 152,
+          "akolouthia2": 76,
+          "apographe": 76,
+          "diastema": 76
+        },
+        "wallMs": 12749.340308999992,
+        "cpuMs": 12650.038,
+        "stats": {
+          "scopes": 0,
+          "hits": 0,
+          "misses": 0,
+          "stores": 0,
+          "bypassNested": 0,
+          "bypassDisabled": 3,
+          "tooBigSkips": 0,
+          "cloneSkips": 0,
+          "evictions": 0,
+          "replayedWork": 0,
+          "replayedChiron": 0
+        }
+      },
+      "on": {
+        "on": true,
+        "tokens": 76,
+        "reported": 76,
+        "exact": true,
+        "parent": "synkrisis",
+        "messageSHA256": "0d0194b9ede575d9a4697a04563d1bb2b4f1f269c2103b2f08e95302297b6612",
+        "tokenIdsSHA256": "3d189fb0b34e3f26bf3c532c3b3fbcbcf5e869371a0609fb4723164256bfcd35",
+        "expSHA256": null,
+        "hasFrame": false,
+        "frontierCosts": {
+          "synkrisis": 76,
+          "kanon": 152,
+          "akolouthia2": 76,
+          "apographe": 76,
+          "diastema": 76
+        },
+        "wallMs": 6068.678853999998,
+        "cpuMs": 6161.507,
+        "stats": {
+          "scopes": 3,
+          "hits": 6,
+          "misses": 6,
+          "stores": 6,
+          "bypassNested": 0,
+          "bypassDisabled": 0,
+          "tooBigSkips": 0,
+          "cloneSkips": 0,
+          "evictions": 0,
+          "replayedWork": 2040444,
+          "replayedChiron": 6197622
+        }
+      },
+      "same": true
+    }
+  ]
+}

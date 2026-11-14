@@ -1,0 +1,36 @@
+OPS TABLE      11 lanes  raw  4135 -> shipped  1671 (0.4041)  floor  1272  headroom 13.9%  price 23.9%  leader kubectl-get-pods.txt 1006->314
+    kubectl-get-pods.txt   raw  1006  shipped   314  floor   214  saved   692  parent akolouthia2
+    metrics.tsv            raw   811  shipped   200  floor   130  saved   611  parent akolouthia2
+    psql-output.txt        raw   675  shipped   230  floor   166  saved   445  parent metron
+    df-h.txt               raw   570  shipped   162  floor   129  saved   408  parent akolouthia2
+    markdown-table.md      raw   330  shipped   172  floor   133  saved   158  parent synkrisis
+    vmstat.txt             raw   229  shipped   147  floor   113  saved    82  parent synkrisis
+    df-real.txt            raw   158  shipped   124  floor    96  saved    34  parent synkrisis
+    df-h.txt               raw   140  shipped   106  floor    84  saved    34  parent synkrisis
+    uptime-w.txt           raw    80  shipped    80  floor    70  saved     0  parent synkrisis
+    free-m.txt             raw    76  shipped    76  floor    76  saved     0  parent synkrisis
+    lsblk.txt              raw    60  shipped    60  floor    61  saved     0  parent synkrisis
+OPS LISTING     9 lanes  raw 16516 -> shipped  5723 (0.3465)  floor  4420  headroom 10.8%  price 22.8%  leader ls-l-real.txt 5194->1361
+    ls-l-real.txt          raw  5194  shipped  1361  floor   943  saved  3833  parent synkrisis
+    ps-aux-real.txt        raw  3054  shipped  1029  floor   743  saved  2025  parent synkrisis
+    apt-real.txt           raw  2739  shipped   834  floor   690  saved  1905  parent synkrisis
+    ps-ef.txt              raw  1144  shipped   308  floor   250  saved   836  parent synkrisis
+    ps-real.txt            raw  1106  shipped   390  floor   320  saved   716  parent synkrisis
+    ls-real.txt            raw  1034  shipped   430  floor   328  saved   604  parent synkrisis
+    dpkg-l.txt             raw  1000  shipped   666  floor   592  saved   334  parent synkrisis
+    findmnt.txt            raw   787  shipped   437  floor   335  saved   350  parent synkrisis
+    du-real.txt            raw   458  shipped   268  floor   219  saved   190  parent synkrisis
+CODE / MARKUP   3 lanes  raw  3152 -> shipped  2040 (0.6472)  floor  1728  headroom 21.9%  price 15.3%  leader code-ts.txt 1422->957
+    code-ts.txt            raw  1422  shipped   957  floor   812  saved   465  parent synkrisis
+    json-pkg.txt           raw  1152  shipped   669  floor   592  saved   483  parent synkrisis
+    unified-diff.patch     raw   578  shipped   414  floor   324  saved   164  parent synkrisis
+DATA            2 lanes  raw  1095 -> shipped   221 (0.2018)  floor   209  headroom 1.4%  price 5.4%  leader prices.csv 582->120
+    prices.csv             raw   582  shipped   120  floor   110  saved   462  parent diastema
+    cue-sheet.md           raw   513  shipped   101  floor    99  saved   412  parent stichomythia
+PROSE           4 lanes  raw  3117 -> shipped  2635 (0.8454)  floor  2529  headroom 18.0%  price 4.0%  leader node-help.txt 1099->859
+    node-help.txt          raw  1099  shipped   859  floor   852  saved   240  parent synkrisis
+    llm-answer.md          raw   733  shipped   670  floor   626  saved    63  parent synkrisis
+    kb-article.txt         raw   656  shipped   620  floor   608  saved    36  parent synkrisis
+    email-thread.txt       raw   629  shipped   486  floor   443  saved   143  parent synkrisis
+
+ΗΓΕΜΟΝΕΣ, all 29 lanes: raw 28015 -> shipped 12290 (0.4387), floor 10158, headroom 11.9%, readability price 17.35%

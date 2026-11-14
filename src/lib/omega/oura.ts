@@ -94,6 +94,7 @@
 import { countTokens, type EncodingName } from './bpe';
 import { euteleiaEncode, euteleiaDecode, type EuteleiaResult } from './euteleia';
 import { workState, workConsume, chironConsume } from './workmeter';
+import { synedriaKey, synedriaMemo } from './synedria';
 import type { Framing } from './anadiplosis';
 
 /** Separators scanned, matching the lattice OURA extends. */
@@ -434,7 +435,7 @@ export function ouraMemoClear(): void {
   OURA_MEMO.clear(); ouraMemoHits = 0; ouraMemoMisses = 0;
 }
 
-function ouraMemoKey(text: string, enc: EncodingName, opts: any, budget: number, chironBudget: number): string | null {
+function ouraClosureOptionsKey(opts: any): string | null {
   if (opts === null || typeof opts !== 'object') return null;
   const parts: string[] = [];
   for (const k of OURA_CLOSURE_OPTION_KEYS) {
@@ -448,7 +449,13 @@ function ouraMemoKey(text: string, enc: EncodingName, opts: any, budget: number,
     const v = (opts as any)[k];
     if (typeof v === 'function' || typeof v === 'symbol') return null;
   }
-  return `${enc}\u0000${budget}\u0000${chironBudget}\u0000${parts.join('\u0001')}\u0000${text}`;
+  return parts.join('\u0001');
+}
+
+function ouraMemoKey(text: string, enc: EncodingName, opts: any, budget: number, chironBudget: number): string | null {
+  const optionsKey = ouraClosureOptionsKey(opts);
+  if (optionsKey === null) return null;
+  return `${enc}\u0000${budget}\u0000${chironBudget}\u0000${optionsKey}\u0000${text}`;
 }
 
 /**
@@ -461,6 +468,21 @@ export function ouraEncode(
   text: string,
   enc: EncodingName = 'o200k_base',
   opts: any = {},
+): OuraResult {
+  // X114 SYNEDRIA: inside a TAGSTACK council, APOGRAPHE / METRON / DIASTEMA
+  // share one fresh-epoch OURA computation even when the global X67 memo is
+  // disabled. The hit replays the exact work/chiron spend; outside a council
+  // this wrapper is inert and the X67 path below is unchanged.
+  const st = workState();
+  const optionsKey = ouraClosureOptionsKey(opts);
+  const key = optionsKey === null ? null : synedriaKey('oura', enc, text, optionsKey, st);
+  return synedriaMemo(key, () => ouraEncodeGlobalMemo(text, enc, opts));
+}
+
+function ouraEncodeGlobalMemo(
+  text: string,
+  enc: EncodingName,
+  opts: any,
 ): OuraResult {
   if (ouraMemoDisabled()) return ouraEncodeUncached(text, enc, opts);
   const st = workState();

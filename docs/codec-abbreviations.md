@@ -7280,3 +7280,78 @@ That a reader still decodes. No model API exists here, so no new decode was run;
 LLM-decodability claim remains **downgraded, not verified**, exactly as recorded in
 X104–X108. What *is* verified is the code-decodable part: `chironDecode` of the
 emitted wire reproduces the input on every lane measured, in both arms.
+
+---
+
+## §X114 — ΣΥΝΕΔΡΙΑ (SYNEDRIA)
+
+**Module:** `src/lib/omega/synedria.ts` (316 non-`.orig.ts` modules in
+`src/lib/omega`), registry arm `synedria`. **Wired into** `tagstackEncodeInner`
+(`tagstack.ts`), `apographeEncode` (`apographe.ts`) and `ouraEncode` (`oura.ts`).
+**Encoder-only speed lane.** It adds no wire syntax, no contract clause, no
+decoder rule, and no token. The complete message is the incumbent's complete
+message.
+
+### The mechanism
+
+`tagstackEncodeInner` opens one **council** for a frontier measurement. Several
+parents begin with the same expensive fresh-epoch sub-encode:
+
+```
+synkrisis -> archetypon -> apographeEncode(text) -> ouraEncode(text)
+apographe                                        -> ouraEncode(text)
+metron    -> apographeEncode(text,{kanon:true})  -> ouraEncode(text)
+diastema                                         -> ouraEncode(text)
+```
+
+X110 measured the waste on findmnt: diastema 32.7 s and apographe 15.4 s emitted
+messages byte-identical to synkrisis's 15.8 s; 72% of parent time was duplicate
+work. The council stores the exact result of a fresh-epoch APOGRAPHE or OURA
+call, keyed by codec, encoding, text, stable option key, and **both** meter
+budgets. A hit is admitted only at `depth === 1 && used === 0 && chironUsed === 0`;
+nested or mid-epoch calls bypass. The council is bounded (64 entries, 1 M key
+chars, 64 K source chars), clears itself over either bound, and is discarded when
+the measurement returns. There is no cross-document retention.
+
+### Greedy or not
+
+Not a search. It is a replay memo. The underlying searches are unchanged.
+
+### Soundness: replay, not skip
+
+X67 measured that returning a memoised OURA result for free changed DIASTEMA's
+wire and made it slower (36.5 s -> 49.9 s), because the deterministic work meter
+decides how long later searches run. Every SYNEDRIA entry stores the exact
+`workUsed` / `chironUsedUnits` delta of the original computation; every hit adds
+those units back with `workConsume` / `chironConsume` before returning a
+`structuredClone`. The meter trajectory after a hit is the trajectory after the
+uncached call. `OMEGA_SYNEDRIA=0` (or `OMEGA_NO_SYNEDRIA=1`) disables it. It works
+under the audit flags `OMEGA_ENGRAM=0` and `OMEGA_OURA_MEMO=0`, which disable the
+global ENGRAMMA and OURA memos; it is not a rename of either, nor of REPRISE's
+per-document LRU.
+
+### Measured
+
+* Unit probes (`bench/x114/receipts/synedria-unit.log`): fresh-epoch hit replays
+  the exact work/chiron delta, results are cloned, mid-epoch calls bypass, the
+  council is discarded on scope exit, and the disable switch bypasses. PASS.
+* Smoke A/B (`bench/x114/receipts/synedria-smoke.json`, 4 lanes, balanced order,
+  pinned flags): identical complete messages, token ids, parent costs and CHIRON
+  expansions; 6 hits / 6 stores per on-arm; wall speedups 2.1-3.2x on the four
+  small lanes. An earlier smoke receipt mislabelled the odd-lane arms; the
+  harness bug was fixed and the receipt regenerated.
+* Full 29-lane balanced A/B (`bench/x114/receipts/ab.{jsonl,json,log}`): off
+  12 290, on 12 290, **ΣΔ 0**, better 0 / worse 0 / same 29, identical true,
+  exact true, CHIRON-same true (4 lanes UNREACHABLE, no `§` frame). Wall
+  4 958.0 s -> 1 909.0 s (**2.597x**); CPU 5 175.6 s -> 1 995.1 s (**2.594x**);
+  193 hits / 193 stores. `ls-l-real` alone: 2 624.8 s -> 948.3 s, 10 hits,
+  identical 1 361-token message. The admission claim is byte identity, not a
+  token gain.
+
+### Not proved
+
+That a reader still decodes. No model API exists here; SYNEDRIA changes no
+reader-visible object, so it inherits the incumbent's decodability status rather
+than improving it. The LLM-decodability claim remains **downgraded, not
+verified**, exactly as recorded in X104-X108. What is verified is the
+code-decodable part and the encoder-only identity above.

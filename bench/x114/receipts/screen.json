@@ -1,0 +1,295 @@
+{
+  "note": "raw-token screen only; no parent gate",
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "raw": 60,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "raw": 656,
+      "layout": 699,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": true,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "raw": 80,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "raw": 76,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "raw": 229,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "raw": 578,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "raw": 570,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "raw": 158,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "raw": 458,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "raw": 1099,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "raw": 787,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "raw": 140,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "raw": 629,
+      "layout": 698,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": true,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "raw": 733,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "raw": 330,
+      "layout": 387,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": true,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "raw": 675,
+      "layout": null,
+      "deltaLayout": null,
+      "case": 720,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": true
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "raw": 582,
+      "layout": 608,
+      "deltaLayout": 649,
+      "case": null,
+      "layoutExact": true,
+      "deltaExact": true,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "raw": 513,
+      "layout": 580,
+      "deltaLayout": 610,
+      "case": 558,
+      "layoutExact": true,
+      "deltaExact": true,
+      "caseExact": true
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "raw": 1144,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "raw": 1034,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "raw": 1152,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "raw": 1422,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "raw": 1000,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "raw": 1106,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "raw": 1006,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "raw": 811,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "raw": 3054,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "layout": 2819,
+      "deltaLayout": 2879,
+      "case": null,
+      "layoutExact": true,
+      "deltaExact": true,
+      "caseExact": false
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "layout": null,
+      "deltaLayout": null,
+      "case": null,
+      "layoutExact": false,
+      "deltaExact": false,
+      "caseExact": false
+    }
+  ]
+}
