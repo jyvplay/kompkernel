@@ -1,0 +1,19 @@
+{
+  "path": "bench/holdout-work/unified-diff.patch",
+  "marker": "¤",
+  "hits": 6,
+  "keyTokens": 39,
+  "baseTokens": 414,
+  "baseExact": true,
+  "baseParent": "synkrisis",
+  "baseMs": 8441,
+  "innerTokens": 404,
+  "innerExact": true,
+  "innerParent": "synkrisis",
+  "innerMs": 4551,
+  "ownInverse": true,
+  "composedExact": true,
+  "candidateTokens": 443,
+  "delta": 29,
+  "admitted": false
+}

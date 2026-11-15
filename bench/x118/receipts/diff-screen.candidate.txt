@@ -1,0 +1,30 @@
+X118. Body first. diff --git a/P gains " b/P"; ¤---/¤+++ become --- a/P / +++ b/P with the last P. Print only.
+Before ¶ k=v. expand repeatedly; print only.
+§ن0ب,ف نيفxجنبية], [نxر:۱ export const CHIRON_SCRIPTSر ChironScript[] = [
+ئبينے 100644
+¤---
+¤+++
+@@ -وريت+یو037ن,
+ت   زGain(rulesر Rule[], poolر string۶diff --git a/src/lib/omegaمت   خ  for (const r of rules)ا;
+س  let total =فاء   { nameر 'ص labelر 'ش total += r.countاً.ts
+index قت أت      [نxد {
+پ loل numberک hiىaط00¶۶/chironً3f8ى1c2..9d4e7bنے140ب6 +140ب7 @@ export interface ChironScriptد   labelر stringا  پرلا  کرلاق ranges?: Array<[numberبل]>;
+ }
+ 
+۱@@ -152ب6 +153ب18 @@۱ءkhmer',صKhmer letter',پو178نبکو180ن },
+ءcjk',صChinese character',پو4eطبکرفxa000 },
+قدم nameر 'polyglot',
+مصGreekب Hebrewب Armenianب Georgianب Thai or Indic letter',
+مپیکی rangesر [
+أ037ج040نة053ج059نة059ج060نة090ج098ن],
+أ098نئىطةنىطئى80ةنى80ئbطةنb80ئcط],
+م ],
+ق },
+ ];
+ 
+ const poolCache = new Map<stringب string[]>();
+۶/ariadneً1ى2b3c4..5e6f7ى8ے848ب10 +848ب14 @@ function assignmentز[]):لد-س-خش-  return totalاتستخدمشم if (r.adjacent) total += r.adjacent *ف.5اق }
+ق return Math.round(total);
+ }
+ 
+ function searchز[], budgetMsرل):لد

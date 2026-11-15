@@ -1,0 +1,18 @@
+{
+  "rows": [
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "raw": 629,
+      "base": 486,
+      "hits": 34,
+      "exact": true,
+      "inner": 492,
+      "innerExact": true,
+      "candidate": 506,
+      "delta": 20,
+      "key": 14,
+      "bodyRaw": 600,
+      "innerParent": "synkrisis"
+    }
+  ]
+}

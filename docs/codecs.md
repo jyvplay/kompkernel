@@ -11867,3 +11867,89 @@ mid-A/B because it drops the explicit `after ->` locator; the shipped 6-tok key
 keeps the locator. Swapping ΕΝΑΛΛΑΓΗ/ΜΗΚΟΣ nesting order is token-neutral (1 348).
 4-token `len` key rejected for byte/code-point ambiguity. Post-parent measure expansion not attempted:
 dense-wire law predicts loss; ΜΗΚΟΣ is pre-frontier only.
+
+## §X117 — ΣΥΝΘΕΣΙΣ (SYNTHESIS)
+
+ΣΥΝΘΕΣΙΣ fuses the three independent record entailments shipped in X90/X115/X116
+(ΣΥΜΦΥΊΑ tail template, ΕΝΑΛΛΑΓΗ mode radix, ΜΗΚΟΣ symlink measure) into ONE
+in-band key over the SAME fully rewritten body. The rewrites touch disjoint
+fields and commute (verified), so the parent frontier sees one body once, and the
+reader sees one 41-token key instead of a 48-token nested preamble. It is a
+contract algebra and schedule over three already-verified inverses, not a new
+wire operator. `OMEGA_SYNTHESIS=0` (or `OMEGA_NO_SYNTHESIS=1`) disables it.
+
+### ΣΥΝΘΕΣΙΣ — technical design spec
+
+| Field | Value |
+|---|---|
+| **Object** | A record set where octal-mode exchange, symlink measure, and exactly one ΣΥΜΦΥΊΑ tail rule (empty constant prefix) all fire. |
+| **Mechanism** | Cross-codec contract CSE + single-pass entailment conjunction. Fused key parses back to the identical rule/marker/CRC; decoder applies ΣΥΜΦΥΊΑ → ΕΝΑΛΛΑΓΗ → ΜΗΚΟΣ inverses in that order. |
+| **Wire** | `Body first. f{j}=f{i}+text after {marker} (1-based); ^Tnnnn␠→T+chmod; λ=#bytes after ->. crc={crc8}` + LF + parent message for the rewritten body. |
+| **Greedy?** | ΣΥΜΦΥΊΑ selection is X90's bounded raw-token hill-climb; conjunction is a total line-local rewrite; admission is the strict complete-message gate. |
+| **Gates** | G1 domain (all three fire); G2 ambiguity (marker/octal/λ absent); G3 own inverse; G4 parent reproduces body; G5 strict win; G6 canonical key parse. |
+| **Source citation (honest)** | Entailments are repo X90/X115/X116 (POSIX chmod/lstat; template fitting). Contract CSE + single-pass schedule original to X117; no external paper claims it. |
+| **Time / CPU** | CPU-bound, no wall clock in decisions. One parent encode of the rewritten body replaces several nested X74 re-entries. |
+| **Key ladder** | Nested 48 tok → fused 41 tok (with LF), Δ**−7**; 35–38-tok spellings rejected for dropping self-description clauses. `bench/x117/receipts/fusion-ladder*.log`; cross-check `bench/x118/receipts/fast-verify.json` (OFF 1 348 → ON 1 341, key parses, body shared). |
+| **Unit / cold read / mutation** | unit 9/9; CPython cold read EXACT (SHA match); mutations 930/878 refused/52 identity/**0 silent-wrong**; `tsc --noEmit` exit 0. |
+
+### X117 frontier and leaders (measured, X118 re-gate)
+
+Balanced A/B (`bench/x117/receipts/ab.json`): OFF = X116 shipped
+(`OMEGA_SYNTHESIS=0`), ON = +ΣΥΝΘΕΣΙΣ. OFF arm re-verified to reproduce X116 ON
+**29/29** (`verify-frontier.log`, total 12 277; `verify-ab-off.log`,
+OFF=X116-ON identical 29/29). Final: Σ29 **12 277 → 12 270** (Δ**−7**),
+better 1 / worse 0 / same 28, exact 29/29, same-price hashes stable.
+`ls-l-real` **1 348 → 1 341**. Whole-stack wall 5 153.9 s → 1 598.3 s
+(**3.225×**), CPU 5 304.5 s → 1 640.9 s (**3.233×**); `ls-l-real` ON paid
+818.4 s against OFF 4 375.9 s because the fused pass replaces the nested
+ΕΝΑΛΛΑΓΗ/ΜΗΚΟΣ/ΣΥΜΦΥΊΑ re-entries with one full-chain re-entry. Leaders
+(`leaders-x117.json`): OPS LISTING 5 710 → **5 703**, leader `ls-l-real`
+5 194 → **1 341**; ALL 29 raw 28 015 → **12 270** (0.4380), floor 10 158,
+headroom 11.8 %, readability price 17.21 %.
+
+**Regression caught and fixed by the X118 A/B.** The first balanced A/B
+(`ab-prefix.json`) measured `ls-l-real` 1 348 → **1 360** (+12): ΣΥΝΘΕΣΙΣ priced
+the fused body through the BASE frontier (`tagstackFrontier`), skipping the
+wire-level glyph optimizations (ἸΣΟΜΟΡΦΊΑ/ΜΕΤΑΤΑΞΙΣ) that the nested path applies
+to the same tape. It was 3.59× faster but **not** Pareto-superior, so it was not
+shipped. The fix passes the full X74 chain as the inner encoder (the same
+callback ΕΝΑΛΛΑΓΗ/ΜΗΚΟΣ already use), so the fused body is optimized identically;
+the repair re-gate (`regate-lsl.json`, `ab.json` `regate` field) then measured
+1 341 (−7) with the speed win intact. New attack on the repair
+(`attack-crc-domain.json`): CRC-domain substitution, field-order swap, absent
+marker, and non-canonical key all refuse — 6 trials, **0 silent accepts**.
+
+## §X118 — frontier re-verification and new-mechanism falsification
+
+X118 re-verified the shipped frontier configuration and searched for a new
+Pareto-superior mechanism. The frontier re-run reproduced X116 ON **29/29**,
+total **12 277**, exact 29/29 (`verify-frontier.log`); the configuration is
+exactly the one reported last turn, restated here. Seven mechanism-distinct
+candidates were screened with real receipts; every one that reached the
+complete-message frontier gate LOST, and the raw winners that did not reach it
+are labelled necessary-but-not-sufficient.
+
+| Candidate | Raw screen | Frontier gate | Outcome |
+|---|---|---|---|
+| Negation contraction | +24 corpus | not reached (too few sites) | H− |
+| Vertical character-affix (bidirectional, K≤8 donors) | −501 corpus | findmnt **+77**, prices **+114** | H∂→H− |
+| Unified-diff hunk-count entailment | premise false (counts not body-consistent) | refused before encode | H− |
+| Unified-diff derived headers | −22 on diff | 443 vs 414 = **+29** | H∂→H− |
+| Sentence-case channel | +13 948 corpus | not reached | H− |
+| Markdown separator-row entailment | +22 corpus | not reached | H− |
+| SQL row-count footer | +11 | not reached | H− |
+
+The modal shortcut "raw screen saved tokens ⇒ frontier will too" is explicitly
+falsified by the affix and diff candidates. Novelty-blocked seams were cited to
+their owning codecs rather than re-implemented (constant-field = ELLEIPSIS; JSON
+identifier-key unquoting = ROSETTA; hanging indent = PADTAB/KENON/GRAMMA; sibling
+affix = PROSPHYSIS/ΣΥΜΦΥΊΑ). Full protocol, outcome space, ≥15 negative-result
+shapes, and per-candidate second-order adversary: `bench/x118/research/protocol.md`.
+Live prior-art and per-lab math review: `bench/x118/research/sources.md`.
+
+The shipped Pareto-superior improvement this turn is ΣΥΝΘΕΣΙΣ (§X117) **as
+repaired by the X118 A/B**: the balanced gate caught a +12-token inner-encoder
+regression in the X117 wiring, the fix re-enters the full X74 chain for the fused
+body, and the re-gate confirms **12 277 → 12 270 (−7), 0 worse, 29/29 exact,
+3.225× wall / 3.233× CPU**. This is the turn's new committed codec result; the
+seven screened mechanisms above are recorded negative results, not shipped.

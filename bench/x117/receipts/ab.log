@@ -1,0 +1,32 @@
+bench/holdout-x42/lsblk.txt                off=60 on=60 Δ=0 exact=true offMs=6570 onMs=4354 hits=2 joined=1 token-same / UNREACHABLE (no § frame)
+bench/holdout-work/kb-article.txt          off=620 on=620 Δ=0 exact=true offMs=7224 onMs=8087 hits=2 joined=1 token-same
+bench/holdout-x42b/uptime-w.txt            off=80 on=80 Δ=0 exact=true offMs=5672 onMs=4787 hits=2 joined=1 token-same / UNREACHABLE (no § frame)
+bench/holdout-x42b/free-m.txt              off=76 on=76 Δ=0 exact=true offMs=4832 onMs=5921 hits=2 joined=1 token-same / UNREACHABLE (no § frame)
+bench/holdout-x42b/vmstat.txt              off=147 on=147 Δ=0 exact=true offMs=5192 onMs=3764 hits=2 joined=1 token-same
+bench/holdout-work/unified-diff.patch      off=414 on=414 Δ=0 exact=true offMs=5855 onMs=7635 hits=2 joined=1 token-same
+bench/holdout-tbl/df-h.txt                 off=162 on=162 Δ=0 exact=true offMs=6311 onMs=4845 hits=2 joined=1 token-same
+bench/holdout-x41/df-real.txt              off=124 on=124 Δ=0 exact=true offMs=9915 onMs=13039 hits=2 joined=1 token-same
+bench/holdout-x41/du-real.txt              off=268 on=268 Δ=0 exact=true offMs=10125 onMs=9094 hits=2 joined=1 token-same
+bench/holdout-x41/node-help.txt            off=859 on=859 Δ=0 exact=true offMs=16041 onMs=18049 hits=2 joined=1 token-same
+bench/holdout-x42/findmnt.txt              off=437 on=437 Δ=0 exact=true offMs=16165 onMs=16320 hits=2 joined=1 token-same
+bench/holdout-x42/df-h.txt                 off=106 on=106 Δ=0 exact=true offMs=9579 onMs=14119 hits=2 joined=1 token-same
+bench/holdout-work/email-thread.txt        off=486 on=486 Δ=0 exact=true offMs=16513 onMs=13703 hits=2 joined=1 token-same
+bench/holdout-work/llm-answer.md           off=670 on=670 Δ=0 exact=true offMs=20144 onMs=21593 hits=2 joined=1 token-same
+bench/holdout-tbl/markdown-table.md        off=172 on=172 Δ=0 exact=true offMs=17516 onMs=13189 hits=3 joined=1 token-same
+bench/holdout-tbl/psql-output.txt          off=230 on=230 Δ=0 exact=true offMs=16440 onMs=20202 hits=3 joined=1 token-same
+bench/holdout-x40/prices.csv               off=120 on=120 Δ=0 exact=true offMs=21693 onMs=16016 hits=3 joined=1 token-same
+bench/holdout-x40/cue-sheet.md             off=101 on=101 Δ=0 exact=true offMs=18786 onMs=24936 hits=3 joined=1 token-same / UNREACHABLE (no § frame)
+bench/holdout-x42/ps-ef.txt                off=308 on=308 Δ=0 exact=true offMs=24541 onMs=22017 hits=2 joined=1 token-same
+bench/holdout-x41/ls-real.txt              off=430 on=430 Δ=0 exact=true offMs=17406 onMs=23097 hits=2 joined=1 token-same
+bench/holdout/json-pkg.txt                 off=669 on=669 Δ=0 exact=true offMs=26849 onMs=24394 hits=2 joined=1 token-same
+bench/holdout/code-ts.txt                  off=957 on=957 Δ=0 exact=true offMs=48518 onMs=61970 hits=2 joined=1 token-same
+bench/holdout-x42/dpkg-l.txt               off=666 on=666 Δ=0 exact=true offMs=43742 onMs=32874 hits=2 joined=1 token-same
+bench/holdout-x41/ps-real.txt              off=390 on=390 Δ=0 exact=true offMs=22519 onMs=27045 hits=2 joined=1 token-same
+bench/holdout-tbl/kubectl-get-pods.txt     off=314 on=314 Δ=0 exact=true offMs=41271 onMs=32732 hits=2 joined=1 token-same
+bench/holdout-x40/metrics.tsv              off=200 on=200 Δ=0 exact=true offMs=20671 onMs=30858 hits=3 joined=1 token-same
+bench/holdout-x41/ps-aux-real.txt          off=1029 on=1029 Δ=0 exact=true offMs=114880 onMs=97640 hits=2 joined=1 token-same
+bench/holdout-x41/apt-real.txt             off=834 on=834 Δ=0 exact=true offMs=203098 onMs=207615 hits=2 joined=1 token-same
+bench/holdout-x41/ls-l-real.txt            off=1348 on=1360 Δ=12 exact=true offMs=4375856 onMs=657373 hits=4 joined=2 TOKEN-LOSS
+TOTAL off 12277 on 12289 ΣΔ 12 better 0 worse 1 same 28 noRegression false exact true chironReachable true samePriceHashStable true unreachable 4
+WALL off 5153.9s on 1437.3s speedup 3.586x; CPU off 5304.5s on 1484.7s speedup 3.573x; hits 65 stores 65 joined 30
+AB_EXIT=1

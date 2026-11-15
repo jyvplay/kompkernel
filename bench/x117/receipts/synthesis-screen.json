@@ -1,0 +1,212 @@
+{
+  "schema": "kompkernel-x117-synthesis-screen-v1",
+  "date": "2026-11-15",
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "raw": 60,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "raw": 656,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "raw": 80,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "raw": 76,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "raw": 229,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "raw": 578,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "raw": 570,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "raw": 158,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "raw": 458,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "raw": 1099,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "raw": 787,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "raw": 140,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "raw": 629,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "raw": 733,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "raw": 330,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "raw": 675,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "raw": 582,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "raw": 513,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "raw": 1144,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "raw": 1034,
+      "fires": false,
+      "preRaw": 910,
+      "modeHits": 37,
+      "measureHits": 13,
+      "chosen": [],
+      "refusal": "not single empty-prefix tail"
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "raw": 1152,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "raw": 1422,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "raw": 1000,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "raw": 1106,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "raw": 1006,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "raw": 811,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "raw": 3054,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "fires": false,
+      "refusal": "no mode"
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "fires": true,
+      "preRaw": 4689,
+      "modeHits": 149,
+      "measureHits": 58,
+      "chosen": [
+        {
+          "j": 11,
+          "i": 9,
+          "form": "tail",
+          "A": "",
+          "rows": 52,
+          "eligible": 57,
+          "distinctSource": 57
+        }
+      ],
+      "key": "Body first. f11=f9+text after ※ (1-based); ^Tnnnn␠→T+chmod; λ=#bytes after ->. crc=25b707b9",
+      "keyTokens": 40,
+      "keyLFTokens": 41,
+      "crc": "25b707b9",
+      "marker": "※",
+      "templateHits": 52,
+      "rewriteRaw": 4392,
+      "rawSaved": 802,
+      "keyParse": true,
+      "ownInverse": true,
+      "symInverse": true,
+      "commute": true,
+      "nestedKey": "λ=#bytes after ->.\nBody first. ^Tnnnn␠→T+chmod.\nX90. Body first. f11 = f9 + text after ※ (1-based). crc=25b707b9\n",
+      "nestedKeyTokens": 48,
+      "keyDelta": -7
+    }
+  ]
+}
