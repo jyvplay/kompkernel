@@ -1,0 +1,3 @@
+hyle fast ms 337 dirs  source: ls -l /usr/lib/x86_64-linux-gnu (real) bodyChars 10643 bodyTok 5175
+{"maxArms":1,"ms":6848.035383,"cpuMs":8247.405,"M":1561,"wireTok":1512,"armsRun":1,"winningArm":"span12+words","predictedArm":"span12+words","exact":true}
+{"maxArms":2,"ms":2411.83792,"cpuMs":2770.465,"M":1561,"wireTok":1512,"armsRun":2,"winningArm":"span12+words","predictedArm":"span12+words","exact":true}

@@ -1,0 +1,209 @@
+{
+  "totalMs": 55193,
+  "folds": 9,
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "table": false,
+      "ms": 879,
+      "M": 60,
+      "winner": "identity"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "table": false,
+      "ms": 1105,
+      "M": 651,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "table": false,
+      "ms": 505,
+      "M": 80,
+      "winner": "identity"
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "table": false,
+      "ms": 886,
+      "M": 76,
+      "winner": "identity"
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "table": false,
+      "ms": 150,
+      "M": 183,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "table": false,
+      "ms": 676,
+      "M": 475,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "table": true,
+      "ms": 20,
+      "M": 237,
+      "winner": "kanon-table-fold"
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "table": false,
+      "ms": 1976,
+      "M": 158,
+      "winner": "identity"
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "table": false,
+      "ms": 887,
+      "M": 316,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "table": false,
+      "ms": 1785,
+      "M": 901,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "table": false,
+      "ms": 2029,
+      "M": 483,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "table": false,
+      "ms": 1450,
+      "M": 140,
+      "winner": "identity"
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "table": false,
+      "ms": 1257,
+      "M": 525,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "table": false,
+      "ms": 1169,
+      "M": 707,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "table": true,
+      "ms": 506,
+      "M": 219,
+      "winner": "kanon-table-fold"
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "table": true,
+      "ms": 38,
+      "M": 268,
+      "winner": "kanon-table-fold"
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "table": true,
+      "ms": 20,
+      "M": 190,
+      "winner": "kanon-table-fold"
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "table": true,
+      "ms": 77,
+      "M": 235,
+      "winner": "kanon-table-fold"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "table": false,
+      "ms": 1767,
+      "M": 354,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "table": false,
+      "ms": 2387,
+      "M": 470,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "table": false,
+      "ms": 1978,
+      "M": 743,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "table": false,
+      "ms": 5500,
+      "M": 1028,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "table": true,
+      "ms": 1469,
+      "M": 730,
+      "winner": "kanon-table-fold"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "table": false,
+      "ms": 2131,
+      "M": 452,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "table": true,
+      "ms": 37,
+      "M": 352,
+      "winner": "kanon-table-fold"
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "table": true,
+      "ms": 23,
+      "M": 236,
+      "winner": "kanon-table-fold"
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "table": false,
+      "ms": 5906,
+      "M": 1107,
+      "winner": "amphora:daedalus"
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "table": true,
+      "ms": 7839,
+      "M": 1009,
+      "winner": "kanon-table-fold"
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "table": false,
+      "ms": 10743,
+      "M": 1573,
+      "winner": "amphora:daedalus"
+    }
+  ]
+}

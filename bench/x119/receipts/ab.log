@@ -1,0 +1,31 @@
+bench/holdout-x42/lsblk.txt                off=60 on=60 Δ=0 exact=true offMs=4517 onMs=2232 token-same / UNREACHABLE (no § frame)
+bench/holdout-work/kb-article.txt          off=620 on=620 Δ=0 exact=true offMs=3868 onMs=4985 token-same
+bench/holdout-x42b/uptime-w.txt            off=80 on=80 Δ=0 exact=true offMs=3532 onMs=2499 token-same / UNREACHABLE (no § frame)
+bench/holdout-x42b/free-m.txt              off=76 on=76 Δ=0 exact=true offMs=2814 onMs=4142 token-same / UNREACHABLE (no § frame)
+bench/holdout-x42b/vmstat.txt              off=147 on=147 Δ=0 exact=true offMs=3010 onMs=2268 token-same
+bench/holdout-work/unified-diff.patch      off=414 on=414 Δ=0 exact=true offMs=3634 onMs=4390 token-same
+bench/holdout-tbl/df-h.txt                 off=162 on=162 Δ=0 exact=true offMs=3913 onMs=2522 token-same
+bench/holdout-x41/df-real.txt              off=124 on=124 Δ=0 exact=true offMs=5763 onMs=7193 token-same
+bench/holdout-x41/du-real.txt              off=268 on=268 Δ=0 exact=true offMs=6312 onMs=4887 token-same
+bench/holdout-x41/node-help.txt            off=859 on=857 Δ=-2 exact=true offMs=10275 onMs=11549 TOKEN-WIN
+bench/holdout-x42/findmnt.txt              off=437 on=435 Δ=-2 exact=true offMs=10191 onMs=9965 TOKEN-WIN
+bench/holdout-x42/df-h.txt                 off=106 on=106 Δ=0 exact=true offMs=5345 onMs=7834 token-same
+bench/holdout-work/email-thread.txt        off=486 on=486 Δ=0 exact=true offMs=10976 onMs=8731 token-same
+bench/holdout-work/llm-answer.md           off=670 on=668 Δ=-2 exact=true offMs=10704 onMs=12648 TOKEN-WIN
+bench/holdout-tbl/markdown-table.md        off=172 on=172 Δ=0 exact=true offMs=12451 onMs=11006 token-same
+bench/holdout-tbl/psql-output.txt          off=230 on=230 Δ=0 exact=true offMs=13880 onMs=14101 token-same
+bench/holdout-x40/prices.csv               off=120 on=120 Δ=0 exact=true offMs=12628 onMs=9186 token-same
+bench/holdout-x40/cue-sheet.md             off=101 on=101 Δ=0 exact=true offMs=12837 onMs=14701 token-same / UNREACHABLE (no § frame)
+bench/holdout-x42/ps-ef.txt                off=308 on=308 Δ=0 exact=true offMs=16880 onMs=13992 token-same
+bench/holdout-x41/ls-real.txt              off=430 on=429 Δ=-1 exact=true offMs=11346 onMs=15648 TOKEN-WIN
+bench/holdout/json-pkg.txt                 off=669 on=667 Δ=-2 exact=true offMs=20828 onMs=26622 TOKEN-WIN
+bench/holdout/code-ts.txt                  off=957 on=957 Δ=0 exact=true offMs=31679 onMs=39781 token-same
+bench/holdout-x42/dpkg-l.txt               off=666 on=662 Δ=-4 exact=true offMs=27762 onMs=22918 TOKEN-WIN
+bench/holdout-x41/ps-real.txt              off=390 on=390 Δ=0 exact=true offMs=12923 onMs=17998 token-same
+bench/holdout-tbl/kubectl-get-pods.txt     off=314 on=314 Δ=0 exact=true offMs=25014 onMs=18634 token-same
+bench/holdout-x40/metrics.tsv              off=200 on=200 Δ=0 exact=true offMs=17049 onMs=17420 token-same
+bench/holdout-x41/ps-aux-real.txt          off=1029 on=1024 Δ=-5 exact=true offMs=74683 onMs=64377 TOKEN-WIN
+bench/holdout-x41/apt-real.txt             off=834 on=833 Δ=-1 exact=true offMs=135130 onMs=135991 TOKEN-WIN
+bench/holdout-x41/ls-l-real.txt            off=1341 on=1340 Δ=-1 exact=true offMs=503576 onMs=502529 TOKEN-WIN
+TOTAL off 12270 on 12250 ΣΔ -20 better 9 worse 0 same 20 noRegression true exact true chironReachable true samePriceHashStable true unreachable 4
+WALL off 1013.5s on 1010.7s speedup 1.003x; CPU off 958.4s on 968.8s speedup 0.989x

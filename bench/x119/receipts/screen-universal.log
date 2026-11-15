@@ -1,0 +1,37 @@
+CONTRACTS [
+  [ '¶ k=v. expand repeatedly; print only.', 10 ],
+  [ '¶ new-letter=v. expand repeatedly; print only.', 11 ],
+  [
+    '§ new letter before ¶ starts a rule; expand repeatedly; print only.',
+    15
+  ],
+  [
+    'Each new letter before ¶ defines a rule. Expand repeatedly; print only.',
+    15
+  ]
+]
+UNIVERSAL_POOL 4454
+kb-article.txt         M=620 contractOnly=620 -> 620 Δ=0 moves=0 priced=1697 exact=true
+vmstat.txt             M=147 contractOnly=147 -> 147 Δ=0 moves=0 priced=755 exact=true
+unified-diff.patch     M=414 contractOnly=414 -> 414 Δ=0 moves=0 priced=2069 exact=true
+df-h.txt               M=162 contractOnly=162 -> 162 Δ=0 moves=0 priced=1004 exact=true
+df-real.txt            M=124 contractOnly=124 -> 124 Δ=0 moves=0 priced=819 exact=true
+du-real.txt            M=268 contractOnly=268 -> 268 Δ=0 moves=0 priced=1444 exact=true
+node-help.txt          M=859 contractOnly=859 -> 857 Δ=-2 moves=2 priced=5270 exact=true
+findmnt.txt            M=437 contractOnly=437 -> 437 Δ=0 moves=0 priced=2132 exact=true
+df-h.txt               M=106 contractOnly=106 -> 106 Δ=0 moves=0 priced=819 exact=true
+email-thread.txt       M=486 contractOnly=486 -> 486 Δ=0 moves=0 priced=2441 exact=true
+llm-answer.md          M=670 contractOnly=670 -> 669 Δ=-1 moves=1 priced=4271 exact=true
+markdown-table.md      M=172 contractOnly=172 -> 172 Δ=0 moves=0 priced=752 exact=true
+psql-output.txt        M=230 contractOnly=230 -> 229 Δ=-1 moves=1 priced=2512 exact=true
+ps-ef.txt              M=308 contractOnly=308 -> 308 Δ=0 moves=0 priced=1750 exact=true
+ls-real.txt            M=430 contractOnly=430 -> 430 Δ=0 moves=0 priced=2939 exact=true
+json-pkg.txt           M=669 contractOnly=669 -> 669 Δ=0 moves=0 priced=3008 exact=true
+code-ts.txt            M=957 contractOnly=957 -> 957 Δ=0 moves=2 priced=9398 exact=false
+dpkg-l.txt             M=666 contractOnly=666 -> 666 Δ=0 moves=0 priced=2878 exact=true
+ps-real.txt            M=390 contractOnly=390 -> 390 Δ=0 moves=0 priced=1877 exact=true
+kubectl-get-pods.txt   M=314 contractOnly=314 -> 314 Δ=0 moves=0 priced=1506 exact=true
+metrics.tsv            M=200 contractOnly=200 -> 200 Δ=0 moves=0 priced=1130 exact=true
+ps-aux-real.txt        M=1029 contractOnly=1029 -> 1029 Δ=0 moves=4 priced=9899 exact=false
+apt-real.txt           M=834 contractOnly=834 -> 834 Δ=0 moves=3 priced=7893 exact=false
+TOTAL 12270 -> 12266 Δ=-4 wins=3/29

@@ -1,0 +1,182 @@
+{
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "mode": true,
+      "measure": true,
+      "both": true
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "mode": false,
+      "measure": false,
+      "both": false
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "mode": true,
+      "measure": true,
+      "both": true
+    }
+  ],
+  "both": [
+    "bench/holdout-x41/ls-real.txt",
+    "bench/holdout-x41/ls-l-real.txt"
+  ]
+}

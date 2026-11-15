@@ -1,0 +1,2 @@
+amphora {"ms":10326,"cpuMs":12174,"M":1573,"winner":"daedalus","exact":true}
+kanon {"ms":4239,"cpuMs":5205,"M":1573,"winner":"amphora:daedalus","gate":"amphora","exact":true}

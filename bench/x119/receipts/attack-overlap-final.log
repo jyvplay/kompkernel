@@ -1,0 +1,28 @@
+[
+  {
+    "name": "ltsc-start-index-only",
+    "naiveInvertible": false,
+    "naiveExp": "α",
+    "ref": "ababa aba"
+  },
+  {
+    "name": "diglossia-interval-disjoint",
+    "applied": false,
+    "exact": true,
+    "tokens": 15,
+    "base": 15
+  },
+  {
+    "name": "overlapping-bypass-windows",
+    "applied": true,
+    "exact": true,
+    "tokens": 18,
+    "base": 22
+  },
+  {
+    "name": "forward-reference-guard",
+    "applied": false,
+    "exact": true
+  }
+]
+ATTACK-OVERLAP PASS
