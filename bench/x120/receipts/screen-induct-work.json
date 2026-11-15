@@ -1,0 +1,73 @@
+{
+  "schema": "kompkernel-x120-veltistos2-screen-v1",
+  "src": "bench/x119/receipts/final-frontier.jsonl",
+  "ctx": 24,
+  "beam": 8,
+  "induct": 6,
+  "totals": {
+    "base": 2188,
+    "after": 2184,
+    "delta": -4,
+    "wins": 2,
+    "lanes": 4
+  },
+  "rows": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "base": 620,
+      "after": 620,
+      "delta": 0,
+      "stages": [],
+      "induced": 0,
+      "rulesBefore": 27,
+      "rulesAfter": 27,
+      "edges": 137551,
+      "ms": 499,
+      "message": "¶ k=v. expand repeatedly; print only.\n§р,әр andЗ forа aя.п policyт looksЗап attachedуя Theс\nе theо itи isы toн documentд sweepм thatз inй workspaceж holdү retentionк withъ dispositionг documentsб orderл firstөdocumentх created¶Understanding Retention Policiesз Northgate Vault\n\nAүп determines how long Northgate Vault keepsан beforeо becomesсeligibleЗ permanent deletionя Everyн inherits exactly oneүпәмсpolicyи resolved atе momentенихя Changingап later affects onlyсdocumentsх afterе change;о never retroactively altersеъ date ofасөм already existsя This behaviourи deliberateр because retroactive changes wouldсmakeо impossibleы proveы an auditor whatеъ schedule was at any given pointсinе past.\n\nPolicies are evaluatedза fixedбу systemлт directlyысtheня If none existsротые folderм containsесөр thenым folder's parentә so on upыей rootя If noпи foundсanywhere onм pathрей default appliesуй default cannot be removed,\nonly changedр which guaranteesм everyн always resolvesы someп.\n\nThere are three kinds ofъя Soft deletion movesеныа recycle bin whereосremains visibleы administratorsЗа further thirty daysя Hard deletion removesенсcontent but keeps an immutable audit stub recordingман existedр whoхоәсwhenо was disposedя Purge removes everythingр includingе audit stubәи only availableсto workspaces operating underа legal regimeм requiresо; most customers should never enableсpurgeр becauseо destroysе evidenceмеүп was followed.\n\nA legalж suspends allъЗего coversя Holds take precedence overсeveryпр including purgeә they cannot be overridden by an administratorя Onlyа userксthe Legal Hold Officer role may place or releaseажә every placement and releaseисwrittenые audit logке reason supplied byм userя Whenажи releasedресaffectedг returnы their normal schedule; if theirъ date has already passed,\nthey become eligible immediately and will be processedзе next nightlyд.\n\nThe nightlyд runs at 02:00зей's configured timezoneя It processesгзсcreationбр oldestлә stops after four hours regardless of how much work remains.\nAnything not processedи picked up byе nextдя Becauseеди time-bounded ratherсthan work-boundedрайка very large backlog may take several nightsы catch upәсadministrators sometimes mistake thisЗа failureуд reportр available under Reports andсAuditр shows exactly how manyг were consideredр how many were disposedә how manyсremainedзе queue whenед stopped.\n\nTwo questions come up repeatedlyз support ticketsули whyанк an expiredсdisposition dateи still visibleя Almost alwaysе answerи either an active legalж orасbackloggedдр both of whichед report will showу secondи whetherаүсpolicy can be shortenedя It canр but onlyЗ futureгәе interface deliberatelyсmakes this awkwardзбы prevent an administrator from accidentally believingм existingсdocuments have been reshuffled ontoе shorter schedule.\n"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "base": 414,
+      "after": 411,
+      "delta": -3,
+      "stages": [
+        "body",
+        "tape"
+      ],
+      "induced": 0,
+      "rulesBefore": 33,
+      "rulesAfter": 33,
+      "edges": 91911,
+      "ms": 362,
+      "message": "¶ k=v. expand repeatedly; print only.\n§й/src/lib/omegaей/ariadne.tsәй/chiron.tsо0у ол,суxТолсп], [0xш:Н export const CHIRON_SCRIPTS: ChironScript[] = [\nэшса hiнэ0370,\n+   ҷGain(rules: Rule[], pool: stringж+ иж  ү  for (const r of rules)і;\nБ  let total =уір\nф 100644\n--- aИ   { name: 'ю label: 'Алсоз total += r.countіцdiff --git aғи   [0xт bд {\nг loь numberвa¶цәтәрindex 3f8a1c2..9d4e7bофәр+++тәр@@ -140,6 +140,7 @@ export interface ChironScript {\n   label: string;\n   loшь;\n  ашьіж ranges?: Array<[numberль]>і }\n \nН@@ -152,6 +153,18 @@НИkhmer',юKhmer letter',гэ178олаэ1800 },\nИcjk',юChinese character',гэ4e00лаэв000 },\nжди name: 'polyglot',\nиюGreek, Hebrew, Armenian, Georgian, Thai or Indic letter',\nигнан ranges: [\nғ037То400по530А590по590А600по900А980],\nғ0980Ав00пов00Ав80пов80Аbооп0b80Аc00],\nи ],\nж },\n ];\n \n const poolCache = new Map<string, string[]>();\nцетерindex 1a2b3c4..5e6f7a8фер+++тер@@ -848,10 +848,14 @@ function assignmentҷ[]):ьд-Б-үз-  return total;\n+Б+үдизи if (r.adjacent) total += r.adjacent * о.5іж }\nж return Math.round(total);\n }\n \n function searchҷ[], budgetMsшь):ьд"
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "base": 486,
+      "after": 486,
+      "delta": 0,
+      "stages": [],
+      "induced": 0,
+      "rulesBefore": 39,
+      "rulesAfter": 39,
+      "edges": 151353,
+      "ms": 512,
+      "message": "¶ k=v. expand repeatedly; print only.\n§ә-й@northgateәanalytics.comв>өйв wrote:\nк >\nА >івАнвкіш>\nа қ2026әт08г onақтәи,Е Sepа2026у atКА On Monиа22ЕуазікіАс Marcus Oyelaran <m.oyelaranщ Priya Raghunathan <priya.rл theћа18и442.17 onле\nНеіх Tom Beckett <tbeckettршвы against cost centerаж Tueиа23ЕЛатәо:ъ.\nь29ч isц soя,\nю varianceү thatИ forм11¶Fromо Dana Whitfield <dana.whitfieldйшDateожа14отом -0400еToосйшCcощй>,хйшSubjectо Reо Q3 reconciliationю - need a decision by Thursday\n\nMarcus,\n\nI pulledл ledger again this morning andлюч still there. Itчћеconsolidated view andћ subsidiary viewицу least itч consistent now.\n\nMy readчү we bookedл Halstead refund twiceо onceг14ы4120еand onceгьы4180. Ifүч rightил fixч a single reversingеentry and we are done.\n\nCan you confirm withл AP team before Thursday?\n\nDana\n\nв Onжуамо42исөр Danaяр Agreedүл numberч stable. I am less sure aboutл double-booking theory. TheЛьев entry has a different vendor reference (HALәқ0881 vs HALәқ0774) which suggests twoев separate credits rather than one duplicated creditър I would rather we pullл original remittance advice before we reverse anything. Priyaи do youев still haveл August remittance PDFs?\nр MarcusерК17о03ищөн Bothян I haveл remittance adviceИЛ14 but notИЛь. I have asked Halstead ARИ aН copy and they saidа2 business daysиц Wednesdayул earliestън One more thingола4180 cost center was only openedг25иц any entry against itН beforeү date would have failed validation. That makes a genuine second credit moreН likely than a duplicateън PriyaенК09о15ихөз Teamяз Flaggingү audit wantsл Q3 reconciliation closed byақ09ә30. IfлючНА unresolved we have to disclose it as a known itemи which I would prefer to avoidъз Tomе"
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "base": 668,
+      "after": 667,
+      "delta": -1,
+      "stages": [
+        "body"
+      ],
+      "induced": 0,
+      "rulesBefore": 34,
+      "rulesAfter": 34,
+      "edges": 176575,
+      "ms": 996,
+      "message": "¶ k=v. expand repeatedly; print only.\n§л.е5г-д)\nэг [ ]А` (0ле dayдэ Updateр |т С|---|---в sи **нвригу**ж%у |\n|Т.\n\n###ті ViteӘврта `ц Migrateаpackagesә1О` (ә dayз theч toк:я\nө4с inм то2ё3ъ andү serverх isю The¶## Summary\n\nThe migration from уWebpack өучиViteтеу reduces cold-start time by roughly **85%у onзя`packages/web` workspace. Below are the concrete steps, the measured numbers,ъз two\nregressions we foundТәл What actually changed\n\n-иDevүукаwebpack-dev-server` is replaced byі's native ESMүл No bundlingят happens in development, so the cold start no longer scales with module count.\n-иBuildук production builds still bundle, but through уRollup** rather than Webpackлюямoutputхаdist/assets/*.js` with content hashes instead of `build/static/js/*.chunk.js`.\n-иTransformsукаbabel-loader` is goneлиesbuild** handles TypeScript strippingъя иSWCух no longer requiredТол Measured results\n\n| MetricртWebpack өрі ер ChangeряСС|\n| Cold startрт42.8Ә6лән85.7ж Hot reload (p50) | әл9Ә0.09н95.ёж Production buildрт188Ә71н62лож Bundle size (gzip)рт412 kBрт389 kBригел6%ур\n\n### ё. Required code changes\n\n```ts\n// vite.config.ts\nimport { defineConfig } from 'vite';\nimport react from '@vitejs/plugin-react';\n\nexport default defineConfig({\nмplugins: [react()],\n  resolve: {\n м alias: { '@': '/src' },\n  },\n ү: { port: ё000,вtrictPort: true },\n});\n```\n\nYou must also rename every `process.env.REACT_APP_*` referenceчаimport.meta.env.VITE_*`.\nThere are у47утsuch referencesсаpackages/web`ъи11усаpackages/admin`.\n\n### өл Regressions found\n\nәлиCommonJS interopлу Three dependencies (`lodash.debounce`, `qs`, `react-copy-to-clipboard`)\n   ship only CJSлі handles this in dev via pre-bundling, but the SSR build failsлю fix isям to add themчаssr.noExternal`.\nолиDynamic `require()` in tests.уаjest` is still used for unit tests and does not understandямаimport.meta`. Either migrateчиVitest** or add a `jest.config.js` transform. We choseямиVitest**, which sharesзі config and cut test wall-clock from у94вучиоёв**Тел Recommendation\n\nShip the migration behindзаVITE_MIGRATION` flag for one release, then removeз Webpack\nconfig entirelyлю remaining work is approximatelyиё engineer-days**:\n\nэц/adminОд-т[x]ц/web` (doneдэ Remove `webpack.config.js`ъаbabel.config.jsА CI cache keysса.github/workflows/ci.ymlАз contributor docsсаCONTRIBUTING.mdО)\n\nLet me know if you want the SSR fix broken out into its own PR.\n"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schema": "kompkernel-x119-coldread-v1",
+  "reader": "bench/chiron_decode.py (independent CPython)",
+  "lanes": 9,
+  "allChironLayerEqual": true,
+  "allContractPrefixEqual": true,
+  "rows": [
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "offTokens": 859,
+      "onTokens": 857,
+      "delta": -2,
+      "chironLayerEqual": true,
+      "offExpansionIsSource": true,
+      "onExpansionIsSource": true,
+      "contractPrefixEqual": true
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "offTokens": 437,
+      "onTokens": 435,
+      "delta": -2,
+      "chironLayerEqual": true,
+      "offExpansionIsSource": true,
+      "onExpansionIsSource": true,
+      "contractPrefixEqual": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "offTokens": 670,
+      "onTokens": 668,
+      "delta": -2,
+      "chironLayerEqual": true,
+      "offExpansionIsSource": true,
+      "onExpansionIsSource": true,
+      "contractPrefixEqual": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "offTokens": 430,
+      "onTokens": 429,
+      "delta": -1,
+      "chironLayerEqual": true,
+      "offExpansionIsSource": true,
+      "onExpansionIsSource": true,
+      "contractPrefixEqual": true
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "offTokens": 669,
+      "onTokens": 667,
+      "delta": -2,
+      "chironLayerEqual": true,
+      "offExpansionIsSource": true,
+      "onExpansionIsSource": true,
+      "contractPrefixEqual": true
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "offTokens": 666,
+      "onTokens": 662,
+      "delta": -4,
+      "chironLayerEqual": true,
+      "offExpansionIsSource": true,
+      "onExpansionIsSource": true,
+      "contractPrefixEqual": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "offTokens": 1029,
+      "onTokens": 1024,
+      "delta": -5,
+      "chironLayerEqual": true,
+      "offExpansionIsSource": true,
+      "onExpansionIsSource": true,
+      "contractPrefixEqual": true
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "offTokens": 834,
+      "onTokens": 833,
+      "delta": -1,
+      "chironLayerEqual": true,
+      "offExpansionIsSource": true,
+      "onExpansionIsSource": true,
+      "contractPrefixEqual": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "offTokens": 1341,
+      "onTokens": 1340,
+      "delta": -1,
+      "chironLayerEqual": true,
+      "offExpansionIsSource": false,
+      "onExpansionIsSource": false,
+      "contractPrefixEqual": true
+    }
+  ],
+  "note": "No model API. LLM-blind decode is not claimed; the executed independent reader is the evidence."
+}

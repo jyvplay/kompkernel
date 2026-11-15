@@ -7472,3 +7472,99 @@ dense-wire law predicts loss; ΜΗΚΟΣ is pre-frontier only.
 | **Inner encoder (X118 repair)** | The fused body MUST be priced through the full X74 chain (the same `innerEncoder` callback ΕΝΑΛΛΑΓΗ/ΜΗΚΟΣ use), not the base frontier. The X118 balanced A/B caught the base-frontier wiring at **+12** tokens on `ls-l-real` (it skipped ἸΣΟΜΟΡΦΊΑ/ΜΕΤΑΤΑΞΙΣ tape optimization); the full-chain re-entry measures **−7**. Pre-fix receipt `ab-prefix.json`, repair re-gate `regate-lsl.json`. |
 | **Measured complete** | Balanced A/B + re-gate: Σ29 **12 277 → 12 270** (Δ−7), better 1 / worse 0 / same 28, exact 29/29, OFF=X116-ON identical 29/29. `ls-l-real` 1 348 → **1 341**. Wall **3.225×**, CPU **3.233×**. New attack `attack-crc-domain.json`: 6 trials, 0 silent accepts. |
 | **Unit / cold read / mutation** | `synthesis-unit` 9/9; independent CPython cold read of the fused message EXACT (SHA match); mutation battery 930 trials / 878 refused / 52 identity / **0 silent-wrong**. `tsc --noEmit` exit 0. |
+
+## §X119 — ΔΙΓΛΩΣΣΙΑ (DIGLOSSIA)
+
+**Name.** ΔΙΓΛΩΣΣΙΑ, *diglossia* — "two registers". Each existing CHIRON rule has
+two spellings (glyph and literal); the choice is made per OCCURRENCE, not per
+rule. **Module:** `src/lib/omega/diglossia.ts`; wired into the X74 wire-level
+tail in `tagstack.ts` after ΠΡΟΑΓΩΓΗ (X120: after ΒΕΛΤΙΣΤΟΣ) and before
+ΠΑΛΙΝΔΡΟΜΟΣ. **Toggle:**
+`OMEGA_DIGLOSSIA=0` / `OMEGA_NO_DIGLOSSIA=1` disables.
+
+### ΔΙΓΛΩΣΣΙΑ — technical design spec
+
+| Field | Value |
+|---|---|
+| **Object** | A finished CHIRON wire `contract § tape ¶ body` produced by the X118 frontier. Only FLAT literal rules (expansion contains no script character) participate. |
+| **Mechanism** | Per-occurrence recoding. ADOPT: a literal body span equal to an existing flat rule value is replaced by that rule's glyph when the complete message gets cheaper. BYPASS: a body window with ≥2 flat references, or a tape-value window with ≥1 flat reference, is expanded back to literal text when that is cheaper. The rule set, contract prefix, script and decoder are unchanged. No operator, no clause, no new syntax. |
+| **Wire** | An ordinary CHIRON wire. `chironDecode(candidate) === chironDecode(incumbent)` byte-for-byte; the contract prefix is preserved verbatim. |
+| **Greedy?** | Yes, bounded and measured. Each round enumerates sites, prices every single move on the WHOLE message with the real tokenizer, keeps negative-exact sites, then tries a non-overlapping batch plus a greedy descent. At most 4 rounds; every accepted move strictly lowers the complete-message count. No clock, no encoder call, no randomness. |
+| **Gates** | G1 flat-rule only; G2 interval disjointness (domain+rule+interval, closing the LTSC Algorithm-2 overlap adversary); G3 `chironDecode` equality on every accepted batch; G4 strict whole-message win; G5 hard caps (rules 512, value 240, window 96, enumerated 200k, priced 60k) reported as `capped`. |
+| **Source citation (honest)** | No external paper supplies the mechanism. Framing imports: LTSC (arXiv:2506.00307) Algorithm-2 overlap bug is the adversary shape closed here; CompactPrompt (arXiv:2510.18043) is prior art for phrase dictionaries (owned here by PRAXIS/PHRASE), not per-use spelling; arXiv:2608.18025 Fact–Token vs Token–State bounds the claim to carrier tokens only. The per-occurrence contextual judgment over an incumbent tape is original to X119. Full record: `bench/x119/research/sources.md`. |
+| **Time / CPU** | CPU-bound, no wall clock. Zero encoder calls; runs on the completed wire. |
+| **Screen** | `screen-recoding.json`: Σ29 12 270 → **12 250** (Δ**−20**), 9 wins, 0 losses, exact. Dominated sub-screens: adoption-only −15, body-bypass-only −1, tape-bypass-only −4, universal-glyph −4 (valid prefix-preserving run; the −62 contract-deletion run was INVALID). |
+| **Measured complete** | Balanced A/B (`bench/x119/receipts/ab.json`): OFF 12 270 → ON **12 250** (ΣΔ **−20**), better 9 / worse 0 / same 20, exact 29/29, same-price hashes stable. Wins: node-help −2, findmnt −2, llm-answer −2, ls-real −1, json-pkg −2, dpkg-l −4, ps-aux-real −5, apt-real −1, ls-l-real −1. No single lane reaches the preferred −10 bar (H∂ reported honestly). Wall 1.003× / CPU 0.989× — token win, speed-neutral. |
+| **Unit / attack / cold read** | `diglossia-unit` 8/8; `attack-overlap` PASS (naive start-index-only LTSC selection corrupts, DIGLOSSIA interval-disjoint output exact); independent CPython cold read of the CHIRON layer equal on every win lane; mutation battery records identity/changed/malformed classes honestly (no checksum claimed). |
+| **Speed scope (falsified, not shipped)** | Scoping the ΣΥΝΘΕΣΙΣ inner re-entry (skip PROSPHYSIS/ΣΥΜΦΥΊΑ/STOICHEION on the already-entailed body, keep the wire-level tail) was hash-identical on `ls-l-real` but measured only **1.019× wall / 0.986× CPU** (`speed-inner.json`), below the declared 1.20× speed threshold. Reverted; no speed claim ships from it. Domain census: only `ls-l-real` reaches that inner encoder on the 29 lanes. |
+
+### X119 frontier and leaders
+
+Balanced A/B (`bench/x119/receipts/ab.json`) and leaders
+(`receipts/leaders-x119.json`). OFF arm = X118 shipped; ON arm = +ΔΙΓΛΩΣΣΙΑ.
+Final: Σ29 **12 250** (raw 28 015, ratio 0.4373), floor 10 158, headroom 11.7%,
+readability price 17.08%. OPS LISTING leader `ls-l-real` 5 194 → **1 340**;
+OPS TABLE 4 135 → 1 671; CODE/MARKUP 3 152 → 2 038; DATA 1 095 → 221;
+PROSE 3 117 → 2 631. Independent CPython cold read: CHIRON layer equal on all
+9 win lanes, contract prefix equal on all 9. Mutation battery: 5 565 trials,
+189 identity-effect / 5 301 changed / 75 malformed-refused (ordinary CHIRON has
+no checksum; the encoder admission gate is the exactness claim).
+
+### Negative results kept
+
+Single-reference inlining Δ0; body-window bypass alone Δ−1; tape-window bypass
+alone Δ−4; universal cross-script glyph pool Δ−4 after the prefix-preservation
+repair (the first −62 run was a contract-deletion artifact and is INVALID);
+single-reference body bypass Δ−3 (dominated); ΣΥΝΘΕΣΙΣ inner-scope speed arm
+1.019× wall / 0.986× CPU, below the declared 1.20× threshold, reverted. Full
+protocol and ≥15 negative shapes: `bench/x119/research/protocol.md`.
+
+## §X120 — ΒΕΛΤΙΣΤΟΣ (VELTISTOS)
+
+**Name.** ΒΕΛΤΙΣΤΟΣ, *veltistos* — "best, optimal". The global answer to the
+question ΔΙΓΛΩΣΣΙΑ asks one site at a time: given this tape, what is the cheapest
+spelling of the WHOLE body as an interleaving of literal characters and rule
+glyphs? **Module:** `src/lib/omega/veltistos.ts`; wired into the X74 wire-level
+tail in `tagstack.ts` after ΠΡΟΑΓΩΓΗ and **before** ΔΙΓΛΩΣΣΙΑ. **Toggle:**
+`OMEGA_VELTISTOS=0` / `OMEGA_NO_VELTISTOS=1` disables.
+**Supporting export:** `bpe.tokenTail` (the exact-state algebra, below).
+
+### ΒΕΛΤΙΣΤΟΣ — technical design spec
+
+| Field | Value |
+|---|---|
+| **Object** | A finished CHIRON wire `contract § tape ¶ body` from the X118/X119 frontier. The rule set, contract prefix, script and decoder are the incumbent's own; nothing is added to the wire grammar. |
+| **Mechanism** | Shortest path over `(body position, emitted state)`. Edges: emit one literal character, or emit glyph `g` and advance `|value(g)|`. Weight = the real marginal tokenizer cost. Stage 2 runs the same parse on each rule's own value using only EARLIER glyphs (the wire grammar forbids forward references). Stage 3 deletes rules the new spelling no longer reaches, with reachability computed through the tape as well as the body. |
+| **The state (the new result)** | The exact Markov state of a BPE marginal is **the suffix of the emitted string starting at its last non-whitespace pre-tokenizer chunk**, not a character window. `tokens(s+p) = tokens(s) − tokens(tail(s)) + tokens(tail(s)+p)` exactly. The first draft used a 24/32-character window; the exact state is smaller, merges more paths in the beam, and prices edges on 2–14-character keys instead of 25–44. |
+| **The counterexample that corrected it** | `s = "a\na\na\n "`, `p = "\n"`: `chunks(s) = [… "a", "\n", " "]` but `chunks(s+p) = [… "a", "\n \n"]` — two chunks merge, because the whitespace alternatives are greedy over a whole run and one carries a lookahead. The naive "only the last chunk changes" identity failed **45 of 104 976** adversarial triples. Including the last non-whitespace chunk in the state gives **104 976/104 976 exact** against the unaccelerated tokenizer (`receipts/tail-algebra.json`). |
+| **Greedy?** | **No.** Stages 1 and 2 are dynamic programs, optimal within the stated cost model for the rung that produced them (beam permitting). The ladder is a fixed finite portfolio `[[24,8],[0,1],[32,16]]`; in chunk mode the context number is ignored and equal-beam rungs run once. Rung choice is by measured complete-message price. No randomness, no clock, no encoder call. |
+| **Gates** | G1 contract prefix preserved byte-for-byte; G2 `chironDecode(candidate) === chironDecode(incumbent)`; G3 strict whole-message token win; G4 key letter must not occur in the payload (the reachable path is a `…` list item, which `chironDecode` copies verbatim); G5 `…` list rules are never edges (no string value); G6 hard CPU caps — rules 512, ref chars 60 000, value 4 000, matches/site 12, edges 1 500 000, priced 64 — reported as `capped`. |
+| **Source citation (honest)** | **Close prior art, cited as such:** OptFSST (arXiv:2607.11271, ADMS@VLDB 2026) already replaces FSST's longest-match encoder with a DP minimum-cost segmentation over a **fixed** symbol table, and proves table selection NP-hard when the alphabet is input; adafruit/circuitpython#11369 (Sep 2026) already chooses qstr-vs-inline **per occurrence**. "DP over a dictionary" and "per-occurrence choice" are therefore **not** claimed as new. OptFSST's costs are additive constants so its state is a position; BPE costs are contextual, which is exactly why the state result above is needed. Framing imports: LTSC (arXiv:2506.00307) Algorithm 2's overlap bug is closed by construction (a path is a partition); CompactPrompt (arXiv:2510.18043) changes the vocabulary, this changes neither vocabulary nor tokenizer; arXiv:2608.18025 bounds the claim to carrier tokens only. Full record: `bench/x120/research/sources.md`. **No external verifier has reviewed this module.** |
+| **Time / CPU** | **CPU-bound**, no wall clock in any decision. Zero encoder calls. Hard counted-work caps above. |
+| **State A/B (speed + quality)** | `receipts/speed-state.json`, same 29 frozen wires, balanced arm order: window state **12 148 tok / 18 511 ms**, exact chunk state **12 137 tok / 2 617 ms** → **7.07× faster and 11 tokens better**, 4 lanes better / 2 worse / 0 inexact. Tail memo on findmnt: 227 978 hits / 56 293 misses (~80 %), replacing a population of 285 054 distinct 25–44-character long queries. |
+| **Screen** | `receipts/screen-shipped-chunkstate.json`: Σ29 12 270 → **12 137** (Δ**−133**), 19 wins, 0 losses, 0 inexact. Composition (`receipts/screen-order.json`): global→local **12 135**, local→global 12 136, global alone 12 137, local alone 12 250 — the shipped order is global→local. |
+| **Unit / attack** | `veltistos-unit` **16/16**; `attack-lattice` (second-order, derived from the mechanism's own structure): long chunks beyond the old window, list-item key collision, overlapping and nested values, forward-reference bait, source-argument independence, character cap → `silentWrong=0`, `claimedWinNotReal=0`, `regressions=0`. Modal-shortcut detector: **25/25** winning messages cannot be expanded with the tape deleted, and the contract prefix is preserved on **25/25**. |
+| **Opt-out / opt-in flags** | `OMEGA_VELTISTOS_WINDOW=1` restores the character-window draft (slower, 11 tokens worse in aggregate). `OMEGA_VELTISTOS_COLLAPSE=1` collapses choice-free literal runs into one edge. `OMEGA_VELTISTOS_LADDER="c:b,…"` overrides the rung portfolio. All three are read **per call**, not at module load — two X120 A/Bs were void before that was fixed. |
+| **Measured complete** | Balanced A/B (`bench/x120/receipts/ab.json`), OFF = merged X118: Σ29 **12 270 → 12 133** (Δ**−137**), better **19** / worse **0** / same 10, exact **29/29**, same-price hashes stable. Wall **1.011×**, CPU **1.015×** — no measurable whole-stack cost. Lanes over the −10 bar: ps-aux-real **−27**, ls-l-real **−16**, apt-real **−14**. |
+| **Cold read / mutation** | Independent CPython reader: CHIRON expansion identical on **19/19** win lanes; ON decodes to source exactly as often as OFF on every lane. One preamble difference (`llm-answer.md`, ΠΕΡΙΚΟΠΉ re-pricing `Before ` on the changed wire) is recorded verbatim, both forms complete. Mutation battery **12 580** trials: 427 identity / 11 918 changed / 235 refused — no checksum claimed for ordinary CHIRON. |
+| **Known approximation** | The tape-stage seed is still truncated to 32 characters, which can cut the last chunk of a long rule value; it can mis-price a proposal, never corrupt one (the gate re-prices and re-decodes). Removing it changes the wire and needs a fresh 34-minute A/B. |
+
+### X120 frontier and leaders
+
+Σ29 **12 133** (raw 28 015, ratio **0.4331**), floor 10 158, headroom **11.1 %**,
+readability price **16.28 %**. OPS TABLE 4 135 → **1 662** (0.4019); OPS LISTING
+16 516 → **5 604** (0.3393), leader `ls-l-real` 5 194 → **1 325**; CODE/MARKUP
+3 152 → **2 023** (0.6418); DATA 1 095 → **220** (0.2009); PROSE 3 117 → **2 624**
+(0.8418). Receipt: `bench/x120/receipts/leaders-x120.json`.
+
+### X120 negative results kept
+
+Dictionary induction **0 admissions**; ΒΑΘΥΣΥΝΕΔΡΙΑ nested replay **0 hits on six
+lanes**, ×1.0620 with three regressions, reverted; scoped ENGRAM ×1.2723 but
+dpkg-l ×0.930 and a budget-blind key, not shipped; line-boundary prefix reuse four
+drafts **0.94–1.05×** against a ~15 % per-lane noise floor (a zero-activity control
+lane moved 1.16×), reverted once the exact state removed its query population;
+short-path threshold routing ×1.04, reverted; beam 32 in chunk mode **identical
+tokens at 2× cost**. The naive last-chunk identity failed **45/104 976** cases and
+was corrected before shipping. Protocol, ≥15 negative shapes and the resolved
+eleven-mechanism portfolio: `bench/x120/research/{protocol,sources,portfolio}.md`.

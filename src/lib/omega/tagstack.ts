@@ -40,6 +40,8 @@ import { gennadasDisabled, gennadasEncode } from './gennadas';
 import { diagrapheDisabled, diagrapheEncode } from './diagraphe';
 import { palindromosDisabled, palindromosEncode } from './palindromos';
 import { proagogeDisabled, proagogeEncode } from './proagoge';
+import { diglossiaDisabled, diglossiaEncode } from './diglossia';
+import { veltistosDisabled, veltistosEncode } from './veltistos';
 import { CHIRON_START, chironDecode } from './chiron';
 import { perikopiDisabled, perikopiRewrite } from './perikopi';
 import { tachygrafiaDisabled, tachygrafiaRewrite } from './tachygrafia';
@@ -912,6 +914,33 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
   // rule.
   if (!proagogeDisabled()) {
     try { admitParentRelative('ΠΡΟΑΓΩΓΗ', proagogeEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X120 — ΒΕΛΤΙΣΤΟΣ.  The GLOBAL version of the question ΔΙΓΛΩΣΣΙΑ asks locally:
+  // given this tape, what is the cheapest spelling of the whole body as an
+  // interleaving of literal characters and rule glyphs?  A shortest path over
+  // (body position, emitted tail) with the real marginal tokenizer cost as the
+  // edge weight, then the same parse applied to each rule value under the
+  // wire's own topological restriction, then reachability pruning.  Runs after
+  // ΠΡΟΑΓΩΓΗ so it sees the final tape order, and BEFORE the local pass:
+  // measured on the canonical 29 (bench/x120/receipts/screen-order.json),
+  // global-then-local is 12 140 tokens against 12 145 for local-then-global at
+  // the same total cost, because the global parse leaves a different and better
+  // set of local sites behind it.  Parent-relative admission, hard CPU caps, no
+  // encoder call, no clock.
+  if (!veltistosDisabled()) {
+    try { admitParentRelative('ΒΕΛΤΙΣΤΟΣ', veltistosEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X119 — ΔΙΓΛΩΣΣΙΑ.  Per-OCCURRENCE recoding of the finished wire: a literal
+  // body span equal to an existing flat rule value may be adopted as that glyph,
+  // and a body/tape window of flat references may be bypassed back to literal
+  // text, whichever is cheaper in context.  The rule set, contract, script and
+  // decoder are unchanged; the only new object is the per-use choice between a
+  // rule's two spellings.  Runs after ΒΕΛΤΙΣΤΟΣ, whose global parse leaves local
+  // sites the greedy pass can still take (−10 tokens on the canonical 29 in
+  // that order, against −20 when it runs alone on the X118 wire).  Parent-relative
+  // admission, hard CPU caps, no encoder call, no clock.
+  if (!diglossiaDisabled()) {
+    try { admitParentRelative('ΔΙΓΛΩΣΣΙΑ', diglossiaEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
   }
   // X102 — ΠΑΛΙΝΔΡΟΜΟΣ.  Every wire-level codec above is called exactly once, in a
   // fixed order, and each one's gate is "the whole message got strictly smaller".

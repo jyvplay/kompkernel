@@ -1,0 +1,408 @@
+{
+  "schema": "kompkernel-x120-veltistos2-screen-v1",
+  "src": "bench/x119/receipts/final-frontier.jsonl",
+  "ctx": 24,
+  "beam": 8,
+  "induct": 0,
+  "totals": {
+    "base": 12250,
+    "after": 12156,
+    "delta": -94,
+    "wins": 17,
+    "lanes": 29
+  },
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "base": 60,
+      "after": 60,
+      "delta": 0,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "base": 620,
+      "after": 620,
+      "delta": 0,
+      "stages": [],
+      "induced": 0,
+      "rulesBefore": 27,
+      "rulesAfter": 27,
+      "edges": 19724,
+      "ms": 194,
+      "message": "¶ k=v. expand repeatedly; print only.\n§р,әр andЗ forа aя.п policyт looksЗап attachedуя Theс\nе theо itи isы toн documentд sweepм thatз inй workspaceж holdү retentionк withъ dispositionг documentsб orderл firstөdocumentх created¶Understanding Retention Policiesз Northgate Vault\n\nAүп determines how long Northgate Vault keepsан beforeо becomesсeligibleЗ permanent deletionя Everyн inherits exactly oneүпәмсpolicyи resolved atе momentенихя Changingап later affects onlyсdocumentsх afterе change;о never retroactively altersеъ date ofасөм already existsя This behaviourи deliberateр because retroactive changes wouldсmakeо impossibleы proveы an auditor whatеъ schedule was at any given pointсinе past.\n\nPolicies are evaluatedза fixedбу systemлт directlyысtheня If none existsротые folderм containsесөр thenым folder's parentә so on upыей rootя If noпи foundсanywhere onм pathрей default appliesуй default cannot be removed,\nonly changedр which guaranteesм everyн always resolvesы someп.\n\nThere are three kinds ofъя Soft deletion movesеныа recycle bin whereосremains visibleы administratorsЗа further thirty daysя Hard deletion removesенсcontent but keeps an immutable audit stub recordingман existedр whoхоәсwhenо was disposedя Purge removes everythingр includingе audit stubәи only availableсto workspaces operating underа legal regimeм requiresо; most customers should never enableсpurgeр becauseо destroysе evidenceмеүп was followed.\n\nA legalж suspends allъЗего coversя Holds take precedence overсeveryпр including purgeә they cannot be overridden by an administratorя Onlyа userксthe Legal Hold Officer role may place or releaseажә every placement and releaseисwrittenые audit logке reason supplied byм userя Whenажи releasedресaffectedг returnы their normal schedule; if theirъ date has already passed,\nthey become eligible immediately and will be processedзе next nightlyд.\n\nThe nightlyд runs at 02:00зей's configured timezoneя It processesгзсcreationбр oldestлә stops after four hours regardless of how much work remains.\nAnything not processedи picked up byе nextдя Becauseеди time-bounded ratherсthan work-boundedрайка very large backlog may take several nightsы catch upәсadministrators sometimes mistake thisЗа failureуд reportр available under Reports andсAuditр shows exactly how manyг were consideredр how many were disposedә how manyсremainedзе queue whenед stopped.\n\nTwo questions come up repeatedlyз support ticketsули whyанк an expiredсdisposition dateи still visibleя Almost alwaysе answerи either an active legalж orасbackloggedдр both of whichед report will showу secondи whetherаүсpolicy can be shortenedя It canр but onlyЗ futureгәе interface deliberatelyсmakes this awkwardзбы prevent an administrator from accidentally believingм existingсdocuments have been reshuffled ontoе shorter schedule.\n"
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "base": 80,
+      "after": 80,
+      "delta": 0,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "base": 76,
+      "after": 76,
+      "delta": 0,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "base": 147,
+      "after": 147,
+      "delta": 0,
+      "stages": [],
+      "induced": 0,
+      "rulesBefore": 12,
+      "rulesAfter": 12,
+      "edges": 7384,
+      "ms": 81,
+      "message": "¶ k=v. expand repeatedly; print only.\n§а ка0әаас   е\nа2ак     ка2140656ә53860а596816сксиакоә1атасыииекткткән49л268д45¶# source: vmstatа1а3 (real, capturedа2026-10-24T23:21:26Z)\nprocs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----\n rа b   swpd   free   buffа cache   si   soс biс bo   in   cs us sy id wa stекса12са59әлә433а54оды494ә545а51оны445ә367а50онии\n"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "base": 414,
+      "after": 411,
+      "delta": -3,
+      "stages": [
+        "body",
+        "tape"
+      ],
+      "induced": 0,
+      "rulesBefore": 33,
+      "rulesAfter": 33,
+      "edges": 13597,
+      "ms": 137,
+      "message": "¶ k=v. expand repeatedly; print only.\n§й/src/lib/omegaей/ariadne.tsәй/chiron.tsо0у ол,суxТолсп], [0xш:Н export const CHIRON_SCRIPTS: ChironScript[] = [\nэшса hiнэ0370,\n+   ҷGain(rules: Rule[], pool: stringж+ иж  ү  for (const r of rules)і;\nБ  let total =уір\nф 100644\n--- aИ   { name: 'ю label: 'Алсоз total += r.countіцdiff --git aғи   [0xт bд {\nг loь numberвa¶цәтәрindex 3f8a1c2..9d4e7bофәр+++тәр@@ -140,6 +140,7 @@ export interface ChironScript {\n   label: string;\n   loшь;\n  ашьіж ranges?: Array<[numberль]>і }\n \nН@@ -152,6 +153,18 @@НИkhmer',юKhmer letter',гэ178олаэ1800 },\nИcjk',юChinese character',гэ4e00лаэв000 },\nжди name: 'polyglot',\nиюGreek, Hebrew, Armenian, Georgian, Thai or Indic letter',\nигнан ranges: [\nғ037То400по530А590по590А600по900А980],\nғ0980Ав00пов00Ав80пов80Аbооп0b80Аc00],\nи ],\nж },\n ];\n \n const poolCache = new Map<string, string[]>();\nцетерindex 1a2b3c4..5e6f7a8фер+++тер@@ -848,10 +848,14 @@ function assignmentҷ[]):ьд-Б-үз-  return total;\n+Б+үдизи if (r.adjacent) total += r.adjacent * о.5іж }\nж return Math.round(total);\n }\n \n function searchҷ[], budgetMsшь):ьд"
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "base": 162,
+      "after": 159,
+      "delta": -3,
+      "stages": [
+        "tape"
+      ],
+      "induced": 0,
+      "rulesBefore": 16,
+      "rulesAfter": 16,
+      "edges": 10195,
+      "ms": 91,
+      "message": "⁺ = number at same position above + change from two lines above.\n§ө ⁺Gгө агги  г өр% /mnt/volт⁺ш трт\nйш/devн  гоG   с/nvme0n1pдагшейственаекстинеугае ¶Filesystem      Size  Used Avail Use% Mounted on\n/devс0   100о40о50G  30р0\n/devс1   137о51о59G  33р1\n/devкинеинеиненавнав уууууууд\nEvery new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result."
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "base": 124,
+      "after": 124,
+      "delta": 0,
+      "stages": [],
+      "induced": 0,
+      "rulesBefore": 13,
+      "rulesAfter": 13,
+      "edges": 4766,
+      "ms": 38,
+      "message": "¶ k=v. expand repeatedly; print only.\n§а д0гGца2.дгу    адао  аяод% /ицуцяdevлMн5.длр\ntmpfs          бrunқ       ¶# source: df -h (real, this sandbox,а2026-10-24T17:52:16Z)\nFilesystem      Sizeа Used Avail Use% Mounted on\n/dev/rootқа21гаа1.7го19го9% /\ndevtmpfsқири/shmра788лаа288Kаа788ло1% /брануаняб/lock\n"
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "base": 268,
+      "after": 266,
+      "delta": -2,
+      "stages": [
+        "body"
+      ],
+      "induced": 0,
+      "rulesBefore": 23,
+      "rulesAfter": 23,
+      "edges": 13676,
+      "ms": 110,
+      "message": "¶ k=v. expand repeatedly; print only.\n§н\tnode_modulesон/gpt-tokenizerын/@пыimg/sharpсп-libvips-linuxу/ануnext/distлауcompiledел/react-domк-x64хыesbuildи\nг/cjsия-linux-x64-gnuи926в-linuxк-muslизн/lightningcssм/libиң/bpeRanksидыnext/swcәсmuslктуesmъп-wasm32р2¶# source: du -k (real)\n202709нуnext\n202246аи187110ыnext\n132028ли94473дя13дв80436луnext-server\n55426ои46458ыimg\n26369ати23389нуtypescript\n23320нуtypescriptм20672о/dist\n18433әи18417әм18213ски18197скм18120а/server\n16305н/drizzle-orm\n11686ат/server\n11450оти11399ог11176хи11172х/linuxки11164х/linuxк/bin\n10304ыbabel\n9947е-experimental\n9896е-experimentalг9269зя1зв8969ъи8944ъм826ротң826ро/cjsң7523еи747рег728ра/build\n7251н/react-dom\n7184нуreact-domг6900о/data\n"
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "base": 857,
+      "after": 854,
+      "delta": -3,
+      "stages": [
+        "body"
+      ],
+      "induced": 0,
+      "rulesBefore": 42,
+      "rulesAfter": 42,
+      "edges": 66527,
+      "ms": 495,
+      "message": "¶ k=v. expand repeatedly; print only.\n§л\nа  --иланлаexperimentalылаallowъ --cpu-profэ=...о                             слов setч when anyс permissions areву theг Generate a snapshot blob whenус process exitsӡэлок inМу V8 CPUұс experimentalФ [options] [ script.jsе fileСов configе fromй are placed before IPvА,ВА --Г (default:\nоӣку test runnerн-testі  -ю ър.\nц)\nм toхdisableд-dirя profileзв environment variables from suppliedсет specifiedё addressesБ writeһ filesystemў        О ofь generatedп             ¶# source: node --help (real)\nUsage: nodeФ ] [arguments]\n       node inspectФ | host:port ] [arguments]\n\nOptions:\nі                           script read from stdin (default if noсе name is provided, interactive modeло if a ttyца                          indicate the end of node optionsлаabort-on-uncaught-exceptionло aborting instead of exiting causes aло coreем be generated for analysisы-addons              allow use of addonsчы-child-process       allow use of child processчы-fs-readэў allow permissions to readусһы-fs-writeэўallow permissions to writeкусһы-wasi                allow wasi when any permissions areвы-worker              allow worker threadsчиbuild-snapshot           граbuild-snapshot-configэг using aJSON configurationску specified pathріcВcheck                 syntax check script without executingлаcompletion-bash           print source-able bash completionло scriptліCВconditionsэўadditional user conditions forло conditional exports and importsлю                  StartМ profiler on start upАс andБу CPUям diskло before exit. Ifъд is notлот,Буямус current working directoryрюдэ          Directory where the V8 profilesсь byъ will be placedро Does not affect --profрю-intervalэ     specified sampling intervalкс microseconds forМясь withъ.Г 1000цю-nameэўте nameОМся generated withъиdiagnosticдэ        set dir for all output filesГ current working directoryцах-protoэў disable Object.prototype.__proto__\nах-sigusr1           Disable inspector threadм beло listening for SIGUSR1 signalлах-warningэ       silence specific process warningsлах-wasm-trap-handler Disable trap-handler-based WebAssemblyло bound checks. V8 will insert inlineло bound checks when compiling WebAssemblyло which may slow down performanceрі-disallow-code-generation-from-stringsло disallow eval and friendsлаdns-result-orderэ      set default value of verbatimкс dns.lookup. Options are 'ipv4first'\n                              (IPv4ёй6сё) 'ipv6first' (IPv6 addressesлой4 addressesцо 'verbatim' (addresses areку orderсу DNS resolver returnedці-enable-etw-stack-walking  provides heap dataм ETW Windowsло native tracingлі-enable-fips               enable FIPS crypto at startupлі-enable-source-maps        Source Map V3 support for stack tracesлі-entry-url                 Treat the entrypoint as a URLлі-env-fileэпзиenv-file-if-existsэ   зліeВevalэп evaluate scriptн-addon-modulesұ import support for addonsн-async-context-frameло Improve AsyncLocalStorage performanceло with AsyncContextFrameн-config-fileэлС suppliedен-default-config-file\nС default configсен-default-typeӡ set module system to use by defaultн-eventsource  experimental EventSource APIн-import-meta-resolveұ ES Moduleло import.meta.resolve() parentURL supportн-inspector-network-resourceұ load network resources viaсу inspectorлі-loaderВexperimental-loaderӡ useут module as a customло loaderн-network-inspectionұ network inspection supportн-print-required-tlaло Print pending top-level await. Ifло --experimental-require-module is trueАс evaluate asynchronous graphs loaded byло `require()` but do not runус microtasksАк orderмм find andло print top-level awaitку graphн-sea-configӡ Generate a blob that can be embeddedло into the single executable applicationн-test-coverageло enable code coverageӣ-isolationӡ configures the type of test isolationс usedӣ-module-mocksло enable module mockingку testло runnerн-transform-typesло enable transformationОс TypeScript-onlysyntax into JavaScript\n"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "base": 435,
+      "after": 435,
+      "delta": 0,
+      "stages": [],
+      "induced": 0,
+      "rulesBefore": 34,
+      "rulesAfter": 34,
+      "edges": 69196,
+      "ms": 531,
+      "message": "¶ k=v. expand repeatedly; print only.\n§ر,ېرrelatimeں,noexecېد,nosuid,nodevںو rwدم\n|شfsا            کش      ی rw,nosuidي-/جم |يعrunےجع/credentials/systemdګ rwېۇرmode=ن ramشا ramک roدۇ700هsysثجه/fsبومة `يسةproc/sys/fs/binfmt_miscذ hugetlbشت tmpلتکی,nodev٫k,nr_inodes=ىل,size=806892٫819200ۇ755گنے-tmpfiles-setupقتشاف  زdevئ     ط    ك        ¶# source: findmnt (real)\nTARGET                                                  SOURCE            FSTYPEئ OPTIONS\n/                                                       /ز/vda          ext4       ګرdiscardميز                                                  devtmpش          devtmpشف ګ,size=2014060٫503515ۇ755جز/shm                                           قلجز/pts                                            devpts            devptsئیں,gid=5ۇ620رptmxmode=000جز/mqueue                                         mqueue            mqueueئبةز/hugepages                                     ذكذفګ,pagesize=2Mميproc                                                 proc              proc       بس                            systemd-1ك autofsئګرfd=30,pgrp=1رtimeout=0,minproto=5,maxproto=5,directمفس                          binfmt_misc       binfmt_miscبيه                                                  sysشا sysکوجه/kernel/security                                securityشكsecurityش وث/selinux                                     selinuxشك selinuxشفیںث/cgroup                                      cgroup2           cgroup2طورnsdelegate,memory_recursiveprotث/pstore                                      pstore            pstoreئوث/bpf                                         bpf               bpfكوۇ700جه/kernel/debug                                   debugش           debugشطبةه/fs/fuse/connections                            fusectl           fusectlطبيع                                                 قىجع/lock                                          قتکو,size=5120kے-sysctl.serviceانے-sysusers.service          گ-dev.serviceگ.serviceطنمةع/rpc_pipeش                                     sunrpc            rpc_pipeش ګ\n`يetc/ssl/certs                                       تش[/e2b/certs]ى\n"
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "base": 106,
+      "after": 106,
+      "delta": 0,
+      "stages": [],
+      "induced": 0,
+      "rulesBefore": 13,
+      "rulesAfter": 13,
+      "edges": 4537,
+      "ms": 37,
+      "message": "¶ k=v. expand repeatedly; print only.\n§а д0гGца2.дгу    адао  аяод% /ицуцяdevлMн5.длр\ntmpfs          бrunқ       ¶# source: df -h (real)\nFilesystem      Sizeа Used Avail Use% Mounted on\n/dev/rootқа21гаа1.7го19го9% /\ndevtmpfsқири/shmра788лаа288Kаа788ло1% /брануаняб/lock\n"
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "base": 486,
+      "after": 486,
+      "delta": 0,
+      "stages": [],
+      "induced": 0,
+      "rulesBefore": 39,
+      "rulesAfter": 39,
+      "edges": 22533,
+      "ms": 177,
+      "message": "¶ k=v. expand repeatedly; print only.\n§ә-й@northgateәanalytics.comв>өйв wrote:\nк >\nА >івАнвкіш>\nа қ2026әт08г onақтәи,Е Sepа2026у atКА On Monиа22ЕуазікіАс Marcus Oyelaran <m.oyelaranщ Priya Raghunathan <priya.rл theћа18и442.17 onле\nНеіх Tom Beckett <tbeckettршвы against cost centerаж Tueиа23ЕЛатәо:ъ.\nь29ч isц soя,\nю varianceү thatИ forм11¶Fromо Dana Whitfield <dana.whitfieldйшDateожа14отом -0400еToосйшCcощй>,хйшSubjectо Reо Q3 reconciliationю - need a decision by Thursday\n\nMarcus,\n\nI pulledл ledger again this morning andлюч still there. Itчћеconsolidated view andћ subsidiary viewицу least itч consistent now.\n\nMy readчү we bookedл Halstead refund twiceо onceг14ы4120еand onceгьы4180. Ifүч rightил fixч a single reversingеentry and we are done.\n\nCan you confirm withл AP team before Thursday?\n\nDana\n\nв Onжуамо42исөр Danaяр Agreedүл numberч stable. I am less sure aboutл double-booking theory. TheЛьев entry has a different vendor reference (HALәқ0881 vs HALәқ0774) which suggests twoев separate credits rather than one duplicated creditър I would rather we pullл original remittance advice before we reverse anything. Priyaи do youев still haveл August remittance PDFs?\nр MarcusерК17о03ищөн Bothян I haveл remittance adviceИЛ14 but notИЛь. I have asked Halstead ARИ aН copy and they saidа2 business daysиц Wednesdayул earliestън One more thingола4180 cost center was only openedг25иц any entry against itН beforeү date would have failed validation. That makes a genuine second credit moreН likely than a duplicateън PriyaенК09о15ихөз Teamяз Flaggingү audit wantsл Q3 reconciliation closed byақ09ә30. IfлючНА unresolved we have to disclose it as a known itemи which I would prefer to avoidъз Tomе"
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "base": 668,
+      "after": 667,
+      "delta": -1,
+      "stages": [
+        "body"
+      ],
+      "induced": 0,
+      "rulesBefore": 34,
+      "rulesAfter": 34,
+      "edges": 25580,
+      "ms": 205,
+      "message": "¶ k=v. expand repeatedly; print only.\n§л.е5г-д)\nэг [ ]А` (0ле dayдэ Updateр |т С|---|---в sи **нвригу**ж%у |\n|Т.\n\n###ті ViteӘврта `ц Migrateаpackagesә1О` (ә dayз theч toк:я\nө4с inм то2ё3ъ andү serverх isю The¶## Summary\n\nThe migration from уWebpack өучиViteтеу reduces cold-start time by roughly **85%у onзя`packages/web` workspace. Below are the concrete steps, the measured numbers,ъз two\nregressions we foundТәл What actually changed\n\n-иDevүукаwebpack-dev-server` is replaced byі's native ESMүл No bundlingят happens in development, so the cold start no longer scales with module count.\n-иBuildук production builds still bundle, but through уRollup** rather than Webpackлюямoutputхаdist/assets/*.js` with content hashes instead of `build/static/js/*.chunk.js`.\n-иTransformsукаbabel-loader` is goneлиesbuild** handles TypeScript strippingъя иSWCух no longer requiredТол Measured results\n\n| MetricртWebpack өрі ер ChangeряСС|\n| Cold startрт42.8Ә6лән85.7ж Hot reload (p50) | әл9Ә0.09н95.ёж Production buildрт188Ә71н62лож Bundle size (gzip)рт412 kBрт389 kBригел6%ур\n\n### ё. Required code changes\n\n```ts\n// vite.config.ts\nimport { defineConfig } from 'vite';\nimport react from '@vitejs/plugin-react';\n\nexport default defineConfig({\nмplugins: [react()],\n  resolve: {\n м alias: { '@': '/src' },\n  },\n ү: { port: ё000,вtrictPort: true },\n});\n```\n\nYou must also rename every `process.env.REACT_APP_*` referenceчаimport.meta.env.VITE_*`.\nThere are у47утsuch referencesсаpackages/web`ъи11усаpackages/admin`.\n\n### өл Regressions found\n\nәлиCommonJS interopлу Three dependencies (`lodash.debounce`, `qs`, `react-copy-to-clipboard`)\n   ship only CJSлі handles this in dev via pre-bundling, but the SSR build failsлю fix isям to add themчаssr.noExternal`.\nолиDynamic `require()` in tests.уаjest` is still used for unit tests and does not understandямаimport.meta`. Either migrateчиVitest** or add a `jest.config.js` transform. We choseямиVitest**, which sharesзі config and cut test wall-clock from у94вучиоёв**Тел Recommendation\n\nShip the migration behindзаVITE_MIGRATION` flag for one release, then removeз Webpack\nconfig entirelyлю remaining work is approximatelyиё engineer-days**:\n\nэц/adminОд-т[x]ц/web` (doneдэ Remove `webpack.config.js`ъаbabel.config.jsА CI cache keysса.github/workflows/ci.ymlАз contributor docsсаCONTRIBUTING.mdО)\n\nLet me know if you want the SSR fix broken out into its own PR.\n"
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "base": 172,
+      "after": 172,
+      "delta": 0,
+      "stages": [],
+      "induced": 0,
+      "rulesBefore": 12,
+      "rulesAfter": 12,
+      "edges": 5556,
+      "ms": 57,
+      "message": "¶k=v expand repeatedly After ~, a number has . before its last 1 digits. print only.\n§ک | ~ة s | **-~ب|ك%** |\nبوك Hot reload pنب---ب---ط300ل220ر175ا sکم160ت200¶ب Metric | Baseline | Variant A | Variant B | Delta |\nننب---|\nب Cold startک400اطالة125ك Warm startک375ا280ا205ة142و50ک350ا260ا190ة159و95ک325ا240ارة176ك Prod buildکطالامة193ك Bundle gzipک275اتا145ة210ك Test wall-clockک250ا180ا130ة227ك Memory peakک225اما115ة244ك CPU userکتا140ا100ة261ك CPU sysکرا120ا85ة278%** |\n"
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "base": 230,
+      "after": 230,
+      "delta": 0,
+      "stages": [],
+      "induced": 0,
+      "rulesBefore": 20,
+      "rulesAfter": 20,
+      "edges": 11259,
+      "ms": 85,
+      "message": "¶k=v expand repeatedly Header n,sep,col=model; named cols drop+rebuild; full n-field line literal,resets,drop. above=prev line, colM=col M same line, days/workdays=next date/weekday, +b=above+b same width print only.\n§е |ю|а-ш 2026ас |\nюшие active   сл01ье pending  сг05ое closed   сі+----+--------------+------------+--------+-----------+\nҠ=+1;щ 100.00н10х02ҭ03в04Д06б07т08¶<7;ю;2Ҡ3Ҡ5=lin:щ /3,730>\nію idе name        е created   е amountе status    |\nію не user_0000   ешлалещихахьҭаҭовавигагьДаДобабитать09а09онани11а11ь12а12ола13иха14ьҭа15ова16ига17ьДа18оба19ита20ь09а21она22и11а23ь12а24е closed    |\nі(24 rows)\n"
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "base": 120,
+      "after": 119,
+      "delta": -1,
+      "stages": [
+        "body"
+      ],
+      "induced": 0,
+      "rulesBefore": 9,
+      "rulesAfter": 9,
+      "edges": 5584,
+      "ms": 40,
+      "message": "¶k=v expand repeatedly Δ: mask=value shape,# per digit. R: first space-token (signed int)+sum from 0 into #s, 0-padded; L: verbatim. print only.\n§т\nит100000001000503киииі-м497сккті599999998999мо,л##е010¶Δ¦SKUіл#,####ілілол.лол,USD¦0¦s¦L1R30L1\nsku,asof,unit_price,qty,currency\n120260901125есссккті600000026999мит"
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "base": 101,
+      "after": 101,
+      "delta": 0,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "base": 308,
+      "after": 299,
+      "delta": -9,
+      "stages": [
+        "body"
+      ],
+      "induced": 0,
+      "rulesBefore": 28,
+      "rulesAfter": 28,
+      "edges": 41198,
+      "ms": 293,
+      "message": "¶ k=v. expand repeatedly; print only.\n§ب ی2ي0صیيل:ن00عببيبصل41 ?       بنلنلى      بیعاىن [ة]\nroot         بأroot          بې]\nأس1م/سطليH-events_highpriزdجلسH-kblockزر/يض_percpu_wqهاkڪاrcuفهsoftirqزوworkerكاcpuhpشهومت      بيعند_gpئmigration¶# source: ps -ef (real)\nUID          PID    PPID  C STIME TTY          TIME CMD\nأست /sbin/init\nأیت [kthreadزې3ڪدې4ڪ_parدې5اslub_flushwqې6اnetnsې8هورطة10اmmضة11ڪ_tasks_kthreadة12ڪ_tasks_trace_kthreadة13فرة14ى01 [rcu_preemptة15ائرة17كرة18كمة19ائمةصفمة22شطة25هdevtmpfsة26اinet_frag_wqة27هauditزة28شل1-mmضة29هhungtaskزة30اoom_reaperة31اwritebackة32هcompactزية33هsmزة34هhugepagedة35هintegrityزة36هblockزة37اblkcg_punt_bioة38اwatchdogزة39اrpcioزة40شجة41اxprtioزة61هswapزية65اnfsiodة67هورجة70اxfsalloc]\n"
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "base": 429,
+      "after": 425,
+      "delta": -4,
+      "stages": [
+        "body",
+        "tape"
+      ],
+      "induced": 0,
+      "rulesBefore": 47,
+      "rulesAfter": 47,
+      "edges": 36889,
+      "ms": 348,
+      "message": "¶ k=v. expand repeatedly; print only.\n§у\nч-rючwxr-xr-xе О1Д rootцеОДДУуюць     қюць бwxrwxrwxци Mayпе сп202я3өие25ся aptг20к2ӷ Sep гско:щие13 14:50ш27ди ш го36 animateхуlrба ->на x86_64-linux-gnuме/вамetc/alternatives/Ө Jan 14сят19ж Sep тскіopt/yarn-v1.22.к2/bin/yarnҽа ../lib/node_modulesРип7 го33 bashъмusr/local/binлуқэх пьрэ зл48016ӷ baseҲую яДДье39224жә Jun 11 00:ў38ң6ы-imќеьүlineНеп¶# source: ls -lъмusr/bin (real, ң0 үs)\ntotal Окт00э45щ corepackҽ/corepack/dist/corepack.jsучбќе388ә46 docker-entrypoint.shучбе124819136щ nodeэтә47 nodejsаъ/nodeэўщ npmҽ/npm/bin/npm-cli.jsэўщ npxҽ/npm/bin/npx-cli.jsэшә47 yarnаміэ30ә47 yarnpkgаміpkg\ntotal 160156уқ68496ӷ [ля1040 Nov кОс4 addpartр26Ө addrкүн-addr2үр25двanimateр29дыңвanimateыңуқ14544дың.q16уқ18752өл88456ө-cacheуқ229гө-cdromуқ26944ө-configл51592ө-getуқш972ө-keyуқ59784ө-markртӨ arн-arуқ43888ӷ archртӨ asн-asр21 Jun 17ск awkвawkл60400ӷ b2sumз32з64уқ43856ӷ basenameл56208ӷ basencУ пе1265648Рлең865РbugҲ bunzipкл92672 Apr ш то48 busctlУ Н1210176 Jan  Оп1970 busyboxҲ bzcatр ңжеbzcmpаеbzdiff\n"
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "base": 667,
+      "after": 659,
+      "delta": -8,
+      "stages": [
+        "body",
+        "tape"
+      ],
+      "induced": 0,
+      "rulesBefore": 48,
+      "rulesAfter": 48,
+      "edges": 32331,
+      "ms": 262,
+      "message": "¶ k=v. expand repeatedly; print only.\n§и0р.б\",\n       сб \"ҳ    \"Арисп\"\n    },\nҳа1й\": \"Ойherebyц    ҳН\": false,\nцё\": {\nці10яс@ляtypesжридй^гдары4ьдиро8өдор24рафцurlйhttps://github.com/microsoft/TypeScriptкдірэ2вдэрнtypescriptхян-eslintүсbuild:Ө\",\nҳә5.юй./lib/нИй./bin/tsъд9рэ0мор19рышdprintтдыру3чрусЖ\"\n    ],\nҳӣimistгэрЫ-map-supportдирәзрасБwhichдуже7КcГeslint¶{\nҳnameйнӨauthorйMicrosoft Corp.Өhomepageйhttps://www.typescriptlang.org/Өversionйә9руӨlicenseйApache-эжӨdescriptionйTypeScript is a language for application scale JavaScript developmentӨkeywords\": [\nцTypeScriptсMicrosoftсcompilerсlanguageсjavascriptЖbugs\": {\nф/issuesпrepositoryёtypeйgit\",\nф.gitпmainю.jsӨtypingsю.d.tsӨbinёtscИКсtsserverИserverпenginesёnodeй>=14раепfiles\": [\nцbinсlibб \"!lib/enuсLICENSE.txtсREADME.mdсSECURITY.mdсThirdPartyNoticeText.txtб \"!**/.gitattributesЖdevDependenciesё@ш/formatterьыр1яш/нйир93рыс@esfx/canceltokenгирияeslint/jsъжяoctokit/restдэарарал/chaiтур20л/diffдежрал/minӣ5л/mochaкиріл/msьеруыл/nodeйlatestл/sourceЫіл/Брых/rule-testerөх/type-utilsөх/utilsөсazure-devops-node-apiдаыраАК8качchaiтәисchokidarтичdiffдежАшь49Аesbuildдир25АГъзeslint-formatter-autolinkable-stylishгыАГ-plugin-regexpвеАfast-xml-parserтәэсglobкы.5сglobalsдаә15АherebyгіАjsonc-parserдурузknipдә44рысminӣосmochaкорэсmocha-fivemat-progress-reporterьаАmonocart-coverage-reportsваэзmsвачpicocolorsгазplaywrightг50зsourceЫ21сtslibвозtypescriptдәечtypescript-eslintөсБрапoverridesён@*\": \"$typescriptпscriptsёtestО runtests-parallel --light=falseсtest:eslint-rulesО run-eslint-rules-testsсbuildйnpm run build:compiler && npm run build:testsүcompilerО localүtestsО testsүtests:notypecheckО tests --no-typecheckсcleanО cleanсgulpОсlintО lintсknipО knipсformatйш fmtсsetup-hooksйnode scripts/link-hooks.mjsпbrowserёfsНosНpathНcryptoНbufferНsource-map-supportНinspectorНperf_hooks\": false\n    },\nҳpackageManagerйnpm@мӨvoltaёnodeй20раАnpmймпgitHeadйc63de15a992d37f0d6cec03ac7631872838602cb\"\n}\n"
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "base": 957,
+      "after": 956,
+      "delta": -1,
+      "stages": [
+        "body"
+      ],
+      "induced": 0,
+      "rulesBefore": 75,
+      "rulesAfter": 75,
+      "edges": 62718,
+      "ms": 525,
+      "message": "¶ k=v. expand repeatedly; print only.\n§д classөPartObjectн,зGroupIdйн themeРдөр о =Пр0пр for (let iоП; i <ҽдзя }\nмряре)О =>ьдөндзйс {\nҙеОсру constГPostfixModifierефОсружрут   Истхо (ҧхclassӯ; i++)сти returnНеО ({\nрэ);\nЕэра;\nДэтиарярыDefinitionӷыхclassынё\nҟ to maintain monomorphic call sitesёconst processClassБClassөү array2ВConflictsң(classҿ modifier conflictsёв getGroupRecursiveңPartsн startIndexғдNameћесті1Лғ.slice(ін -іўconst createClassқдPartsї startIndexю[classз];\nб EMPTY_CONFLICTSњ(CLASS_PART_SEPARATORЬ getзForArbitraryPropertyЙ processClassesRecursivelyҐ getConflictingClassGroupIdsҫёр }о configач modifierВС if (Т ARBITRARY_PROPERTY_PREFIXщ};\n// Split into separate functionsҳ combinedArrayш[i];\nУСtypeofды === 'әGroupsгдMapє conflictingClassGroupModifiersАнҽљ};\nconstџыңынЯ conflictingClassәк     л.lengthц validatorsъ,\n¶/**\n * Concatenates two arrays faster than the array spread operator.\n */\nconst concatArraysор(arrayінүҙ // Pre-allocate for better V8 optimizationёжҳо new Array(arrayіл +үлэп arrayілӯҳ[i] = arrayіш япүлӯҳ[arrayіл + i] =үшмиҳа};\n\n// Factory function ensures consistent object shapesёўValidatorObjectҧз, validatorНдзър validator\n});\n// Factory ensures consistent Б shapeёўөхnextPartо new Map(),цо nullАН nextPart,\n църҽ\n});\nconst CLASS_PART_SEPARATOR = '-';\nconstбо [];\n// I use two dots here because one dot is used as prefix for class groups in plugins\nconstТо 'arbitrary..';\nўGroupUtilsо configфго createClassMap(configэжИЯътєҫж getClassзоғ =>ИСclassName.startsWith('[') &&ғ.endsWith(']'))скиЬ(classNameэтятуқоғ.splitњеат // Classes like `-inset-1` produce an empty string as first classPart. We assume that classes for negative values are used correctly and skip it.\nтуїоқ[0] === '' &&қл > і ? і :Патив,гэр };\nжҐҧз, hasГОИСhasГст ручоєюку baseВоЯюкСmodifierВес к СbaseВес          // Merge base conflicts withҿ тки concatArrays(baseВ,чэ км       // Onlyҿ к ичатрмк// Fall back to without postfix if noҿки baseВ ||батятиЯ[classз] ||бар };\n ист getClassзътҐёр };\nљ getGroupRecursiveҧParts,їнРеф classPathsLengthоқ.length -ї;\n СclassPathsLength ===ПестиР.classзам const currentClassPartоқ[startIndex];\nж nextБоР.nextPart.get(currentClassPartЕСnextБћу resultов + ін nextБэтСresultеи resultамуцоР.validators;\n Сvalidators === nullести undefinedам // Build classRest string efficiently by joining fromї onwards\n удRestої ===П ?қ.joinње :қ.slice(startIndex).joinњеаж validatorsLengthоцлапцLengthӯ const validatorObjоцштСvalidatorObj.validator(classRest))ски validatorObj.classзатями undefined;\n};\n/**\n * Get the class group ID for an arbitrary property.\n *\n * @paramғ - Theд name to get the group ID for. Is expected to be string starting with `[` and ending with `]`.\n */\nconstЬоғОЛ).indexOf(':') === -1 ? undefined : (()ф content =Лэж colonIndex = content.indexOf(':')аж property = content.slice(0, colonIndexЕ return property ?Т + property : undefined;\n})();\n/**\n * Exported for testing only\n */\nўMapо configфс тtheme,\n тclassәҫ и processClassәңәй);\nщҟәҧәйефго createБ();\n  for (constдз inдәћу groupодәютЙ(groupнгАй)амигаљЙҧGroupньеф lenодGroupлап lenӯудыодGroupшт processClassџьЕящ for each typeҟӷьҙУstring')ст processStringџРАДУfunction')И processFunctionџьД processObjectџь);\nљ processStringӷРАефдөToEditоды === '' ?Р : getPart(classөндыЕРToEdit.classзоҽаљ processFunctionӷьҙСisThemeGetterңы))ИЙңы(themeеньДСclassө.validators === nullћдө.validatorsор[];\nмР.valid"
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "base": 662,
+      "after": 658,
+      "delta": -4,
+      "stages": [
+        "body"
+      ],
+      "induced": 0,
+      "rulesBefore": 46,
+      "rulesAfter": 46,
+      "edges": 75525,
+      "ms": 591,
+      "message": "¶ k=v. expand repeatedly; print only.\n§л12гdebлuО+ги х4а.д2к0о-Аладакон3з                    Е                          их:Анзы amd64       Ты GNUСТ Cйдауийь                        Му40одьыэаков                      і\niiиеutilsЄ GNU assembler, linker and binary utilitiesі binеү compilerі gccч1яачосичац                       К86о64-linuxоgnuәс21а23цю all         р14полциАр+гч             Сш Debianғыш base systemњ utilitiesіў5ёўать ҡ6ачтө++б            ң                  ӯ              ¶# source: dpkg -l (real)\nDesired=Unknown/Install/Remove/Purge/Hold\n| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend\n|/ Err?=(none)/Reinst-required (Status,Err: uppercase=bad)\n||/ Name                          VersionциArchitecture Description\n+++-=============================-==============================-============-================================================================================і adduser                       на134ьию add and remove users and groupsі apt                          уҡы commandline package managerі base-filesзлахОр                 ғ miscellaneous filesі base-passwd                   наҡғ master password and group filesі bash тёй15-д+b13ңы GNU Bourne Again SHellі binезиМЄ-common:amd64        М Common files for theЄ-xК    М GNU binary utilities, for xК targetі bsdев1:йн8яўОнбы basic utilities from ха4BSD-Liteі build-essential               ла9 ты Informational list of build-essential packagesі bzip2 виска8оў+b1зы high-quality block-sorting file compressor -њ ca-certificates ӯ20230311Оч              ю Common CA certificatesі chrony                        хан-дОд иӯиы Versatile implementation of the Network Time Protocolі coreези9яч                         Т coreњ cppЕС preprocessor (cpp)і cppп preprocessorі curl т7.88я10Орбы command line tool for transferring data with URL syntaxі dashтикаёл-двы POSIX-compliant shellі debconf изсё82 цюш configuration management systemі debian-archive-keyring        д023анОд                ю GnuPG archive keys of theш archiveі debianең ё7ока5~гч ӯы Miscellaneous utilities specific toші diffез ч:на8-х вы File comparisonњ dmsetup вд:чакй185-дңы Linux Kernel Device Mapper userspace libraryі dpkgтәы Debian package management systemі dpkg-dev                     әюш package development toolsі e2fsprogs                    с47эд+bдиңы ext2/ext3/ext4 file systemњ findезиха9эх вы utilities for finding files--find, xargsі fontconfig-configбуряхвы generic font configuration library - configurationі fonts-dejavu-coreбий37-6ью Vera font family derivate with additional charactersі fuseницинарэхвы Filesystem in Userspace (3.x version)і g++ЕСө compilerі gөпөүЕСүпүол-base:amd64             АрОч бы GCC, the GNU Compiler Collection (base package)\n"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "base": 390,
+      "after": 381,
+      "delta": -9,
+      "stages": [
+        "body"
+      ],
+      "induced": 0,
+      "rulesBefore": 30,
+      "rulesAfter": 30,
+      "edges": 24349,
+      "ms": 251,
+      "message": "¶ k=v. expand repeatedly; print only.\n§и0с и.п\n     қ root     си сн:д       05ньқиджь50э [ежэз]\n    тз шkәэшworker/ржәк4іәuкныт оdл_percpu_wqа1ёнаH-kblockойд49 /lib/systemо/systemов-eventsяниHв_highpriНеrcuмешsoftirqо/гь49чеcpuhp/ө2¶# source: ps -eo pid,user,pcpu,pmem,etime,args --sort=-pcpu (real)\n    PID USER     %CPU %MEM     ELAPSED COMMAND\n   а553 user      104 а5.7       иөн59 node /tmp/_run_1539.mjs\n   а229 root     ск скд40 /usr/bin/envd\n    294гі3-ext4-rsv-conversionтакН_preemptт21рани-mmлт ақөд50 /sbin/initп40гәаёт63гіөв_unboundт24жіав_unboundы9жі0-flush-254низ284қай-journalоп67гә0ёт19еmigration/аз252гэjbd2/vda-8т20маз306 systemd+ си сөй-networkоп13миз320 _chrony  си сид49 /usr/sbin/chronyd -F ап16ринавы2ешthreadот 3Н_gpыкН_par_gpы5еslub_flushwqы6еnetnsы8риятаиеmmлт11Н_tasks_kthreadт12Н_tasks_trace_kthreadт15еmigration/ит17чит18чат22жәаят25ешdevtmpfsт26еinet_frag_wqт27ешauditот28рана-mmлт29ешhungtaskот30еoom_reaperт31еwriteback]\n"
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "base": 314,
+      "after": 311,
+      "delta": -3,
+      "stages": [
+        "tape"
+      ],
+      "induced": 0,
+      "rulesBefore": 24,
+      "rulesAfter": 24,
+      "edges": 18111,
+      "ms": 153,
+      "message": "⁺ = number at same position above + change from two lines above.\n§ъ\napi-server-7d9f8bа.internalъд⁺ы node-д.clusterхыар          дdдhА 10.244.тр Ав.детдв   над-м node-1.clusterяр   Ад.д    у            1/1    пу Running     эпдс node-0.clusterзеыншу Pending     ишдляхәп0оп1кеснb¶NAME                                 READY   STATUS      RESTARTS   AGE     IP              NODEъ00-a0000ә          2d0h   А0.0     са01-b0003о          3d1h   А1.11    ма02-c0006ил03-d0009эл04-e0012әл05-a0015ш1яса06-b0018эяма07-c0021эл08-d0024ш0р  А0в    х09-e0027ор  А1в    х10-a0030эеса11-b0033иемад-c0036әзd0039озe0042изa0045эк0048әт0.д   мад-c0051ш1т1в   ынd0054эзe0057эзa0060ш0к0063оем.internal\n\nEvery new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result."
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "base": 200,
+      "after": 198,
+      "delta": -2,
+      "stages": [
+        "body"
+      ],
+      "induced": 0,
+      "rulesBefore": 18,
+      "rulesAfter": 18,
+      "edges": 11721,
+      "ms": 112,
+      "message": "⁺ = number at same position above + change from two lines above.\n§ж.0\t0.А\n2026-10-24T00:т\tupАл:00Z\tnvme0nы\t⁺хы.рыжа⁺яхарасл0ятол1италјаояиг\tdownАвхардтасјеаянх0раг¶ts\tiface\tin_mbps\tout_mbps\tloss_pct\tstateА00л0\t100.0\t250ж0г01о\t103.1\t252ж1т02лет03с04оват05лег06с07ов0т08лав1т09с10он11лах1радав0и0хар1гједанал0х1р0таов1ие\tup\n\nEvery new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result."
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "base": 1024,
+      "after": 1008,
+      "delta": -16,
+      "stages": [
+        "body",
+        "tape"
+      ],
+      "induced": 0,
+      "rulesBefore": 79,
+      "rulesAfter": 79,
+      "edges": 137805,
+      "ms": 1171,
+      "message": "¶ k=v. expand repeatedly; print only.\n§ы ды я0лдя.0з3цыяол ц.Б17а:едждца00ӷ деSs+ м Ба46жим [ҩ Бар4њ Ба46  цү ? дедҒлл деце д0үпҒ I<дгҒ S дум [kтү S   ҩшыдв]\nroot дедшәм /sbinкояшҡк290ядГ && \\ { echo '# source:щҒ I дуworkerИ.txtГА $HМ; } >Ай | head -120МК\nuser дешқ ps aux --sort=-%memчү Ssдс/Ё/x41-tapeъ8Є /tmp/arena-workspace/procsЁ-census-dbaac8baҙ ц.4эroot дешшӯвых1Н -lЫ /usrџ lsНЫ/lib/x86_64-linux-gnuЎ head -фЫ/sbin/ьы(real)';Й git log --stat -30Ҡ\n_chrony ешёс1ўаяH-events_highpriД du -ak node_modulesЛ apt list --installedП/agetty -o -p -- \\u --noclear - linuxЕү S емфchronyd -F хВ &&Ў3АТ\nroot шешн2юӷәПТРҒ IшиrcuУчмҚчмысlib/systemd/systemdЭк393ндХ lsН node_modulesҰ49ж bashЪгиcpuhpҲгуsoftirqdІdвісяһын>/dev/nullӘҡ1020 ttyС_percpu_wqбах-mmСвОсls-lө6¶# source:қы(real)\nUSER шешPID %CPU %MEM шVSZ дRSS TTY шеSTAT START дTIME COMMANDК155зд103 13.9 х446072 561224 ? едыRlдҩ49 дз:14 node /tmp/_run_1539.mjs\nroot деш1229ҙҙы133838ры18708үS<Lslња01Ы/bin/envd\nэхоны167228 х1708чә/initТ318онд15452еъ980У sshdафsshd -D [listener] я of х0-х00 startups\nsystemd+ де306ондБ916 ы8764Қ-networkdТ284ох ы35072еъ056Қ-journaldК1907ох д810ъд405өү R шБа52жқ\n_rpc шеш304к788ъд396ъчәсrpcbind -f -wҠ320ояд10700  з048ЕК1901Э303өт52жы/bin/bashН -c cd /home/user/kompkernel && H=bench/holdout-x41Гџьџһ |Ў150МО-realИХ/.bin and node_modulesьХйО-nmИқьқ |Ў60М/ps-aux-realИЛьЛһйсapt-realИЙьЙ |Ў200М/git-log-statИ node --helpь node --helpй/node-helpИ find сы-name \"*.json\" -newerь findЫ/share -maxdepth ры-name '*.json'һй/find-jsonИД (real, sorted)';Дһ | sort -rnйсdu-ak.txt && \\ wcНА/*.txtВО-real.txtВсapt-real.txt &&Ў4А/git-log-stat.txtВ/find-json.txtК1537Э292ъч БаҰ -c bash \"$0/run.cmd\" > \"$0/out.log\" н>&1; echo $? > \"$ясexit\"ЄК1538Э286ртҰЄ/run.cmdК1539Э282ътҰ bench/tmp/run2.sh bench/x41/tape2.tsТ348ҡ1040 ttyню327ҡ1036 tty1ю331ҡ1024 tty5ю329Ә3ю330Әрю332ҡ1012 tty6ӷәПК154як249өш896т49ж tee /tmpЁ.logК190ък250яш880т52жЎ60Ҡ322ояд10568 д544ЕТ167к100решрт46ж bpfilter_umhТенгуthreadІ зпиrcu_gpӯрпиrcu_par_gpӯ5пиslub_flushwqвы6пиnetnsӯъпуworkerіўвы9щ/uра0-flush-254аяв10пиmmСв11Р_tasks_kthreadв12Р_tasks_trace_kthreadв13Ҳів14Р_preemptв15гиmigrationів16щіб17Ъів18Ъёв19гиmigrationёв20Ҳёв21щёая-mmСв22пуworkerёўв24щ/uрах-events_unboundв25гуdevtmpfsв26пиinet_frag_wqв27гуauditІ28щёб29гуhungtaskІ30гиoom_reaperв31пиwritebackв32гуcompactdяв33Ғ SNдуsmІ34Ғ SNдуhugepageІ35пуintegrityІ36пуblockІ37пиblkcg_punt_bioв38гиwatchdogІ39пиrpciod]\n"
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "base": 833,
+      "after": 823,
+      "delta": -10,
+      "stages": [
+        "body"
+      ],
+      "induced": 0,
+      "rulesBefore": 63,
+      "rulesAfter": 63,
+      "edges": 67978,
+      "ms": 543,
+      "message": "¶ k=v. expand repeatedly; print only.\n§н.М [installed,local]\nт amd64Ма1Катlibс/now і12о2әса:щәону0л-мнулціномю14Нdebіuр+Нёсцюрагсанш allМы6Вс8:ын9н11н60+dfsgланыр10э3їсон36л9рюелоқсунөсон40лобналАс7н88б10рюя5Сон38бярэпсэнхэнПмо+bД+dfsgўун8фг47Подн9ьлэжнэЇgccлікяни4ЄbinutilsӘси:цэтјщ66лирэ+bКзначсо:Цчан02н185еүгоан23ҧщ39нялурэвтlibҙәинин33евcryptЧ-КџimagemagickлыҡївcБуөвЂрКИгўля+bРасСвъпюмийсонӡёв¶# source: apt list --installed (real)\nListing...\nadduserсэн134шaptсон6натbase-filesсінирютbase-passwdпы.атbashсконаяе+b13тЄ-commonөтЄ-x86-64-linux-gnuөтЄөтbsdutilsәСтbuild-essentialсідтbzip2Иатca-certificatesс20230311рашchronyсижеротcoreutilsс9батcppліётcppӘcurlАтdashқкілотdebconfгк82шdebian-archive-keyringс202эжрошdebianutilsск7луня~Натdiffutilsәх8литdmsetupЦтdpkg-devүшdpkgүтe2fsprogsфтfindutilsсидмитfontconfig-configсонаибитfonts-dejavu-coreй37лышfuse3ътg++ліётg++ӘЇ-baseётЇётgccӘghй2хуДа-атgit-manҧшgitҧтgpgvйон40лазротgrepп8-ятgzipгілатhicolor-icon-themeқ17ешhostnameсэн23+nmuатџ-commonВшџ.q16ВтimagemagickВтinit-system-helpersгыкорашiprouteосынамэтiptablesг8детiputils-pingс3:20221126-аратjqгыенаратkeyutilsгыжетlessс590ез~Новaclайхаьвaomэпымаровapparmorапўьвapt-pkgынуй6.Кargon2лас0~20171227лужЂasan8ёвatomicаӡattrащябивaudit-commonәхудлашlibaudit1әхудЧЄөвblkidРbpf1әаз.олуравbrotliасануде+bывbsdусуза.7евbzолануИКc-binҡ-dev-binҡы-devҡыҡap-ngуқ8нэ-а+bэвcap2-binјcapојcborўқ8ПКccалуёвcom-errофвcrypt-devҙаҙsetupічоныби~Новctf-nobfdБctfБcurlэлgnutlsАвcurl4Авdav1dыгумоЂdbяжскэн28До-Кde265лугузаларовdebconfclientуқ270вdeflateуга4ЧdevmapperануонаЦвdpkg-perlүшlibeditопалоу221030евelfақ188лонавerror-perlқа7029ешlibevent-coreеб7соззо-stable-8вexpatайямаровext2fsофвfdiskРffi8пинилавfftw3-doubleэпхаулатlibfidoолаг12ПКfontconfigайюбивfreetypeыйізДляривfuse3ьъвЇ-devёвgcc-sаӡgcrypt20гауб3Ђgdbm-compatиг23ьвgdbmыг23ьвglibомуй74ныер9вgmp10чынозДалазвgnutls30сэн7дер7вgompаӡgpg-errorуг46лавgprofngБgssapi-krb5ег20борявheifагаябарат"
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "base": 1340,
+      "after": 1325,
+      "delta": -15,
+      "stages": [
+        "body",
+        "tape"
+      ],
+      "induced": 0,
+      "rulesBefore": 119,
+      "rulesAfter": 119,
+      "edges": 95288,
+      "ms": 963,
+      "message": "Body first. f11=f9+text after ※ (1-based); ^Tnnnn␠→T+chmod; λ=#bytes after ->. crc=25b707b9\n¶k=v expand repeatedly and 4 digits become dd:dd, ^ marks those digits so drop it; print only.\n§е.0ы  ны1я root rootи\nl0777ня       λьеик\n-0644нія     ы60скямс ыҩ Marы2ы2017 libXdmcpјеех.so.ПBrokenLocaleах1Ь Jan їы202єї3 libРЬ31єҲї2 libу.1бу.Тау2ьӡ Feb 14єapparmorү -> ※өүеҳ\nd0755ың Jun 15 ^1659тҳ2ЪЬ14єю.soейм Ц Apr 27 ^2014Ёї5 libҒ Aprы7ЁѕРbrotА.soеүјҡ Junы6Ёәх6ёюјЭү.ІәЭСЦ libФ/x86_64-linux-gnuҐ.so -> /libФ/libҽ Janы6єcryptҮЪctfҶ May НҶ27 ^2036 libMagickГҶ25єaptџ Sep 19ї2Лтя   ы4096ңг Jul 19ї5ӷәөейшмыИх2ох1үп Nov 21ї4 libћх3ҫћЭ6.д.4э libcurl-gnutls.soҠЬ 4єevent_core-2ух7ж.8ве.9ря      зб2ЖЬ28ї1 libXauЈelf-0.188.soиғжу0МҶ 7 ^2110 libcapҷanlҙ Apr 25ї4 libdav1dлесыҵ Dec 18єcryptsetupа2њ-6.Q16әқ Dec 29єde265юҧкры8СЩ Mar 23єfido2Қ Octы3єX11Ұ Sep 18ҲXextЧ JunнЁaomОдиҺЬ29єbsdючџ libbz2ъчаеЅСcДҶ23єdebconfclientђ Nov 21ҲeditИЙ Oct 24Ҳffi.soжБоу2емѓҶ 7єformwӯ1.oҗcrtӯҳ3іңҭ Febы9єauditВҶ12ЁbpfЎавицџ libcborюжҟоуемӨг libcurl.soдӣҡe2pИХҡext2fsИЕћ.6.10иф Aprы5ЁexpatЫНWandњЗЬ17єУ.aищГ-pkgәһеьӘѕlicommonЮѕliencќҡcom_errИЯҮ-nobfdЇсын4480СК Nov 30Ҳfftw3ЄРdrop_ambientШоғм174ҿ\n-0755няўҒasan.soж¶# source: ls -l /usr/libФ (real)\ntotal 167495ҳ4р128ң ImageMagick-6.9.11кр496Ц Mcrtӯш1632Ц Scrtӯтің auditтің bfd-pluginsмн768Ц crtӯш1072Ц crti.oкр648Ц crtn.oЛ cryptsetupті Jun 10 ^0000 e2fsprogsтр128ң engines-3ҳ3я     8192ң gconvш2520Ц gҗ gioЛ glib-2еЛ gprofngш2232Ц grҗ krb5ҿы 215000Ц ld-linux-x86-64ИЛ ldscriptsмн790СПУСПҐПай14640СПам616464 Oct 15ҲLerc.soОНCoreњөл2848744НCoreњһЫөл1203192ЫјиҚІ4л1318408ҚәдьЖӷ14496Жәһҩӷ22728ҩәһҰәүдей81568ҰәдьЗaclоз301й38832Зaclаз301ҧҷУСҷҐҷаЇҷаиЧҫ0сы5639576Чћ.6ьӡождй80600ӡаждищеүл2067760щееиГ-privateюеүем497904Г-privateёй34880 Apr 21єargon2аиўөл8198800ўјиҒatomicо.2ей30776Ғatomic.soзьЗattrоз501й26544Зattrаз501иҭоеем128952ҭаел1514448Ъbfd-2.40-system.soипblkidҟ355328пblkidауеиВозм358880ВазиӘовм137376ӘЎѕlidecовй47264ѕlidecЎЮовм591920ЮЎҺЭ11.7й84840Һ.11.7ичаөдичаеүдй74688ъдсы5452590Ѕ.aкр283Ѕ.soҿы1926232ЅәиЅ_malloc_debugҐc_malloc_debugюй50200Ѕ_malloc_debugюш5098Ѕ_nonsharedУРcap-ngАй30704Рcap-ngёиМИЭ66й47128МИ.66ицөй69192цьҒcc1Ам126464Ғcc1ёиќүуй18344ќум269124ҽУҽҐcryptаиҽҟ206776ҽаул4734232 Junы6 ^1956 libcryptoћиҵЭ9ем525488ҵ.9еиЯАм228184ЯёиҮАм220192Үёигэ.3 ->эдигэдүжем695736гэджьӨүжем712120ӨжьҙәЭ6л1630208ҙә.6л1843792Ь16єdb-5.3.soиқүудм452776қуОДАй14376Дём149384 Octы3Ҳdeflateюм442696 Oct 19Ҳdevmapperае2уҧdl.aЇdlИиЄАй14256ЄёиӣЭ3й45008ӣ.3иђө.70м216640ђе.70м109088ЪЈЪelfа -> libЈҠөум219152ҠеуифШ184фағифwШ176фwағиХүдм438608ХОпfdiskҟ484640пfdiskауеиЙүзй43480ЙзиКҫ10сы2213808КЕК_ompҫ10й30632К_ompЕК_threadsҫ10й34728К_threadsЕЩБ219040ЩТРfontconfigБ306112РfontconfigТѓәүдй77200ѓәд\n"
+    }
+  ]
+}

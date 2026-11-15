@@ -376,6 +376,7 @@ export function chunkCacheClear() {
   chunkHits = 0; chunkMisses = 0; chunkFallbacks = 0;
   SHORT_CACHE.clear(); shortHits = 0; shortMisses = 0;
   LONG_CACHE.clear(); LONG_CACHE_CHARS.clear(); longHits = 0; longMisses = 0;
+  TAIL_MEMO.clear(); tailHits = 0; tailMisses = 0;
 }
 
 /** the unaccelerated reference implementation */
@@ -462,6 +463,82 @@ export function countTokens(text: string, enc: EncodingName): number {
   }
   return n;
 }
+
+/* ---------------------------------------------------------------------------
+ * X120 — LAST-CHUNK TAIL INFO, and the exact Markov state of a BPE marginal.
+ *
+ * THEOREM (corrected by its own falsification test). Pre-tokenization is a
+ * left-to-right scan, so appending text cannot change any chunk that is
+ * finished before the appended part begins — with ONE exception, and the
+ * exception was found by running the identity rather than by reading it:
+ *
+ *     s = "a\na\na\n ", p = "\n"      chunks(s) = [... "a", "\n", " "]
+ *     chunks(s+p) = [... "a", "\n \n"]   ← TWO chunks merged, not one
+ *
+ * `\s*[\r\n]+`, `\s+(?!\S)` and `\s+` are greedy over a whole whitespace run
+ * and one of them has a lookahead, so a trailing whitespace run can be
+ * re-partitioned AND merged with the whitespace chunk before it. The first
+ * version of this function returned only the final chunk and the algebra probe
+ * failed 45 of 104 976 cases, all of them whitespace tails.
+ *
+ * THE CORRECT STATE. Let `k` be the start of the last chunk of s that is NOT
+ * entirely whitespace (0 if every chunk is whitespace). Every chunk before k is
+ * decided by input that lies entirely inside s and is followed by unchanged
+ * non-whitespace text, so it is identical in s and s+p. Define tail(s) = s[k..].
+ * Then for every p
+ *
+ *     tokens(s + p) = tokens(s) - tokens(tail(s)) + tokens(tail(s) + p)
+ *
+ * exactly, and the marginal cost of emitting p depends on s ONLY through
+ * tail(s). That suffix — not a fixed-width character window — is the exact
+ * state of the cost process. A 24-character window approximates it; this is it.
+ *
+ * This function returns, for one string, its total token count, that suffix,
+ * and the suffix's token count: one regex pass, one memo entry. The ΒΕΛΤΙΣΤΟΣ
+ * DP prices an edge with a single lookup on `tail + piece`, typically 2-14
+ * characters, instead of a 25-44-character context query. `count-stats.json`
+ * measured 285 054 distinct long queries on one lane; the tail-keyed population
+ * is far smaller because many contexts share a final chunk.
+ *
+ * Returns null when the regex does not cover the string (the caller must then
+ * refuse, not approximate). `chunkFallbacks` measured 0 on the canonical lanes.
+ * Executed evidence: `bench/x120/prefix-verify.ts` checks the identity against
+ * the unaccelerated tokenizer on 104 976 adversarial triples.
+ * ------------------------------------------------------------------------- */
+export interface TailInfo { tot: number; tail: string; tailTok: number }
+const TAIL_MEMO = new Map<string, TailInfo>();
+const WHITESPACE_ONLY = /^\s+$/u;
+const TAIL_MEMO_MAX = 200_000;
+let tailHits = 0, tailMisses = 0;
+export function tokenTail(text: string, enc: EncodingName): TailInfo | null {
+  if (text === '') return { tot: 0, tail: '', tailTok: 0 };
+  const key = enc === 'cl100k_base' ? '\u0002' + text : text;
+  const hit = TAIL_MEMO.get(key);
+  if (hit !== undefined) { tailHits++; return hit; }
+  tailMisses++;
+  const re = PRETOK[enc];
+  re.lastIndex = 0;
+  const cs = text.match(re);
+  if (cs === null || cs.length === 0) return null;
+  let covered = 0;
+  for (let i = 0; i < cs.length; i++) covered += cs[i]!.length;
+  if (covered !== text.length) return null;
+  const toks: number[] = new Array(cs.length);
+  let tot = 0;
+  for (let i = 0; i < cs.length; i++) { const v = countTokens(cs[i]!, enc); toks[i] = v; tot += v; }
+  // walk back over entirely-whitespace chunks, then include one more
+  let k = cs.length - 1;
+  while (k >= 0 && WHITESPACE_ONLY.test(cs[k]!)) k--;
+  if (k < 0) k = 0;
+  let tail = '', tailTok = 0;
+  for (let i = k; i < cs.length; i++) { tail += cs[i]!; tailTok += toks[i]!; }
+  const info: TailInfo = { tot, tail, tailTok };
+  if (TAIL_MEMO.size >= TAIL_MEMO_MAX) TAIL_MEMO.clear();
+  TAIL_MEMO.set(key, info);
+  return info;
+}
+export function tailMemoStats() { return { size: TAIL_MEMO.size, hits: tailHits, misses: tailMisses }; }
+export function tailMemoClear(): void { TAIL_MEMO.clear(); tailHits = 0; tailMisses = 0; }
 
 /** assert the algebra rather than trust it */
 export function verifyChunkAlgebra(text: string, enc: EncodingName): boolean {

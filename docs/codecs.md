@@ -11953,3 +11953,266 @@ regression in the X117 wiring, the fix re-enters the full X74 chain for the fuse
 body, and the re-gate confirms **12 277 → 12 270 (−7), 0 worse, 29/29 exact,
 3.225× wall / 3.233× CPU**. This is the turn's new committed codec result; the
 seven screened mechanisms above are recorded negative results, not shipped.
+
+## §X119 — ΔΙΓΛΩΣΣΙΑ: per-occurrence recoding of the finished wire
+
+X119 re-verified the X118 frontier configuration first: the replay
+(`bench/x119/receipts/frontier.jsonl`) reproduced X118 ON **29/29**, Σ **12 270**,
+with the X118 `ls-l-real` re-gate message swapped in; every message hash matched
+`bench/x117/receipts/ab.json` ON. The configuration is exactly the one reported
+last turn, restated here.
+
+The new shipped codec is **ΔΙΓΛΩΣΣΙΑ** (`src/lib/omega/diglossia.ts`), wired into
+the X74 wire-level tail after ΠΡΟΑΓΩΓΗ (X120 later moved it after ΒΕΛΤΙΣΤΟΣ; the
+X119 numbers below are the X119 order, measured before that change). CHIRON decides once per rule whether a
+substring deserves a glyph; every occurrence then inherits that decision. BPE is
+contextual, so the marginal cost of a glyph depends on its neighbours. DIGLOSSIA
+relaxes the quantifier: on the finished wire it may ADOPT a literal body span as
+an existing flat rule's glyph, or BYPASS a body/tape reference window back to
+literal text, whichever is cheaper on the COMPLETE message. The rule set,
+contract prefix, script and decoder are unchanged; the output is an ordinary
+CHIRON wire. Admission is parent-relative (`chironDecode(candidate) ===
+chironDecode(incumbent)`) plus a strict whole-message token win. Sites are
+interval-disjoint, closing the LTSC Algorithm-2 overlap adversary; every accepted
+batch is re-decoded. Hard CPU caps are reported, no clock and no encoder call.
+
+Balanced A/B (`bench/x119/receipts/ab.json`): OFF 12 270 → ON **12 250**
+(Δ **−20**), better 9 / worse 0 / same 20, exact 29/29, same-price hashes stable.
+Win lanes: node-help −2, findmnt −2, llm-answer −2, ls-real −1, json-pkg −2,
+dpkg-l −4, ps-aux-real −5, apt-real −1, ls-l-real −1. No single lane reaches the
+preferred −10 bar; that preference is reported as missed (H∂), not hidden.
+Wall 1.003× / CPU 0.989×: a token/exactness win, speed-neutral.
+
+Verification: `diglossia-unit` 8/8; `attack-overlap` PASS (the naive
+start-index-only LTSC selection corrupts `ababa` while DIGLOSSIA's interval
+disjointness stays exact); independent CPython cold read
+(`bench/chiron_decode.py`) confirms the CHIRON layer and contract prefix on all
+9 win lanes; mutation battery 5 565 trials records identity/changed/malformed
+classes honestly (no checksum is claimed for the ordinary CHIRON layer).
+`tsc --noEmit` exit 0. Leaders: `bench/x119/receipts/leaders-x119.json`.
+
+Speed arms screened and falsified this turn: the ΣΥΝΘΕΣΙΣ inner-scope cut was
+hash-identical on ls-l-real but only 1.019× wall / 0.986× CPU
+(`speed-inner.json`), below the declared 1.20× threshold, and was reverted.
+KANON's `decoderPrompt + wire` double-count was identified as a metadata
+artifact (frontierCosts kanon ≈ 2× true M), not a compression lead. Extending the
+X93 CHIRON 0.25 factor to the large regime was hash-identical on ls-l-real but
+only 1.039× wall / 1.074× CPU (`speed-budget.json`), also below threshold and not
+shipped. KANON fallback timing across the 29 lanes is 55 s total
+(`kanon-all.json`), too small to carry a whole-stack speed claim. Protocol, ≥15
+negative shapes, and per-lab math review:
+`bench/x119/research/{protocol,sources}.md`.
+
+## §X120 — ΒΕΛΤΙΣΤΟΣ: the exact state of a BPE marginal, and a global parse over the finished tape
+
+X120 re-verified the frontier configuration first: the X119 replay
+(`bench/x119/receipts/frontier.jsonl`) reproduces the merged X118 ON arm **29/29**,
+Σ **12 270**, and the X119 A/B on top of it is Σ **12 250**. Both are restated
+here because the X120 OFF arm is the merged X118 configuration, not X119-ON.
+
+The new shipped codec is **ΒΕΛΤΙΣΤΟΣ** (`src/lib/omega/veltistos.ts`), wired into
+the X74 wire-level tail after ΠΡΟΑΓΩΓΗ and **before** ΔΙΓΛΩΣΣΙΑ. Every dictionary
+codec in this stack inherits one quantifier: ΧΕΙΡΩΝ admits a substring as a rule
+and then spells *every* occurrence with the glyph; ΔΙΑΓΡΑΦΗ deletes a rule (all
+uses); ΣΥΝΔΥΑΣΜΟΣ/ΓΕΝΝΑΔΑΣ/ΠΡΟΑΓΩΓΗ re-spell a whole value; X119's ΔΙΓΛΩΣΣΙΑ moves
+one site at a time. Nothing asked the global question: *given this tape, what is
+the cheapest spelling of the whole body as an interleaving of literal characters
+and rule glyphs?* That is a shortest path, and this module answers it.
+
+### The result that made it fast: the state is a theorem, not a window
+
+BPE merges never cross a pre-tokenizer chunk, so the marginal cost of the next
+piece depends only on the end of what has been emitted. The first X120 draft
+approximated "the end" by the last 24 or 32 **characters**. That worked
+(Δ−122 on the canonical 29) but every edge priced a 25–44-character string, and
+`count-stats.json` measured **285 054 distinct** such strings on one lane.
+
+The exact state is smaller. Pre-tokenization scans left to right, so appending
+text cannot change a finished chunk — with one exception, found by **running**
+the identity rather than reading it:
+
+```
+s = "a\na\na\n "   p = "\n"
+chunks(s)   = [… "a", "\n", " "]
+chunks(s+p) = [… "a", "\n \n"]      ← two chunks merge
+```
+
+The whitespace alternatives are greedy over a whole run and one carries a
+lookahead, so a trailing whitespace run can be re-partitioned *and* merged with
+the whitespace chunk before it. The corrected statement: let `k` be the start of
+the last chunk of `s` that is **not** entirely whitespace (0 if there is none) and
+let `tail(s) = s[k..]`. Then for every `p`
+
+```
+tokens(s + p) = tokens(s) − tokens(tail(s)) + tokens(tail(s) + p)
+```
+
+exactly. The marginal cost of `p` depends on `s` **only** through `tail(s)`: that
+suffix is the exact Markov state of the cost process. `bpe.tokenTail` returns it
+with one regex pass and one memo entry; the DP carries it in the node.
+
+The naive "only the last chunk changes" version **failed 45 of 104 976**
+adversarial triples. After the correction: **104 976/104 976 exact, 0 uncovered**
+against the unaccelerated tokenizer (`bench/x120/receipts/tail-algebra.json`).
+The bug was caught by the cheapest falsification, before shipping, and the
+admission gate meant it could only ever have cost optimality, never bytes.
+
+**Measured consequence** — same 29 frozen wires, balanced arm order
+(`receipts/speed-state.json`):
+
+| state | Σ tokens | wall | lanes better | lanes worse | inexact |
+|---|---|---|---|---|---|
+| 24/32-character window (draft) | 12 148 | 18 511 ms | — | — | 0 |
+| **exact chunk suffix (shipped)** | **12 137** | **2 617 ms** | 4 | 2 | 0 |
+
+**7.07× faster and 11 tokens better.** Pricing keys are now a chunk plus a piece
+(2–14 characters); the tail memo runs at ~80 % hits (findmnt: 227 978 hits /
+56 293 misses), and the long-query population that motivated three earlier speed
+attempts simply disappears.
+
+### What ships
+
+* Stage 1 — shortest path over the decoded body, a fixed ladder of rungs
+  `[[24,8],[0,1],[32,16]]` (in chunk mode the context number is ignored and
+  equal-beam rungs run once), each priced as a **complete message**.
+* Stage 2 — the same parse on each rule's own value using only **earlier** glyphs;
+  a later glyph would be parsed as a new key and `chironDecode` rejects forward
+  references, so the topological restriction is the wire grammar, not a heuristic.
+* Stage 3 — rules the new spelling no longer reaches are deleted, with
+  reachability computed through the tape as well as the body, so a `…` list
+  feeding a `×` template is never dropped.
+* Admission — contract prefix preserved byte-for-byte, `chironDecode(candidate)
+  === chironDecode(incumbent)`, and a **strict whole-message token win**. Hard
+  counted-work caps (rules 512, ref chars 60 000, value 4 000, matches/site 12,
+  edges 1 500 000, priced 64). No clock, no randomness, no encoder call.
+* Order — ΒΕΛΤΙΣΤΟΣ runs **before** ΔΙΓΛΩΣΣΙΑ. Measured on the canonical 29
+  (`receipts/screen-order.json`): global→local **12 135**, local→global 12 136,
+  global alone 12 137, local alone 12 250.
+
+### Measured complete — balanced A/B on the canonical 29
+
+`bench/x120/receipts/ab.json`. OFF = the merged X118 configuration
+(`OMEGA_VELTISTOS=0 OMEGA_DIGLOSSIA=0`), ON = X120. Both arms call the same shipped
+`tagstackEncode` under the pinned audit flags, arm order alternated by lane.
+
+**Σ29 12 270 → 12 133, Δ −137. Better 19 / worse 0 / same 10. Exact 29/29.
+CHIRON-reachable on every framed lane. Same-price message hashes stable.**
+Wall 940.4 s → 930.4 s (**1.011×**), CPU 979.1 s → 964.3 s (**1.015×**): the new
+codec adds **no measurable whole-stack cost** — the 7.07× state win pays for the
+extra pass. That is the honest speed statement: whole-stack speed is neutral
+(1.011× is inside this box's noise), not "significantly faster"; the significant
+speed result is the new stage against its own draft.
+
+Three lanes clear the user's >10-token bar: **ps-aux-real −27**, **ls-l-real −16**,
+**apt-real −14**.
+
+| lane | OFF | ON | Δ |
+|---|---|---|---|
+| ps-aux-real | 1029 | 1002 | **−27** |
+| ls-l-real | 1341 | 1325 | **−16** |
+| apt-real | 834 | 820 | **−14** |
+| dpkg-l | 666 | 657 | −9 |
+| json-pkg | 669 | 660 | −9 |
+| ps-ef | 308 | 299 | −9 |
+| ps-real | 390 | 381 | −9 |
+| node-help | 859 | 852 | −7 |
+| ls-real | 430 | 423 | −7 |
+| findmnt | 437 | 431 | −6 |
+| code-ts | 957 | 952 | −5 |
+| llm-answer | 670 | 666 | −4 |
+| kubectl-get-pods | 314 | 311 | −3 |
+| unified-diff | 414 | 411 | −3 |
+| df-h / du-real / metrics / vmstat | 162/268/200/147 | 160/266/198/145 | −2 each |
+| prices.csv | 120 | 119 | −1 |
+
+Four lanes have no `§` frame (their parent is not a CHIRON lane), so ΒΕΛΤΙΣΤΟΣ
+refuses by construction; they are reported as unreachable, not as wins.
+
+### Independent cold read and mutation battery
+
+`bench/x120/coldread.py` runs `bench/chiron_decode.py` — a CPython reader written
+from the contract prose alone, sharing no code with the TypeScript encoder — on
+all **19** winning messages: the CHIRON expansion is **identical to the OFF arm on
+19/19**, and the ON message decodes to the source exactly as often as the OFF
+message on every lane.
+
+One honest difference is recorded rather than asserted away: on `llm-answer.md`
+the contract preamble differs (`¶ k=v…` → `Before ¶ k=v…`). ΒΕΛΤΙΣΤΟΣ preserves
+its incumbent's prefix by construction; what changed is that ΠΕΡΙΚΟΠΉ, whose
+preamble table prices `Before ` deletion on the complete line, re-chose the longer
+form on the changed wire because it is cheaper there in context. Both forms are
+complete instructions, the expansion is identical, and the ON message still
+decodes to the source. The receipt prints both prefixes verbatim.
+
+Mutation battery (`coldmut.json`): **12 580** single-character trials on the
+emitted CHIRON layers — 427 identity-effect, 11 918 changed, 235
+malformed-refused. Ordinary CHIRON has no checksum, so a changed expansion under
+mutation is expected and is **not** a silent accept of the original; the
+exactness claim is the encoder's admission gate, attacked separately by
+`attack-lattice`.
+
+### Local leaders (X120)
+
+`bench/x120/receipts/leaders-x120.json`, zero encoder calls (shipped tokens
+imported from the A/B ON arm; raw/floor/category from X90).
+
+| category | lanes | raw → shipped | ratio | floor | headroom | leader |
+|---|---|---|---|---|---|---|
+| OPS TABLE | 11 | 4 135 → **1 662** | 0.4019 | 1 272 | 13.6 % | kubectl-get-pods 1 006 → 311 |
+| OPS LISTING | 9 | 16 516 → **5 604** | 0.3393 | 4 420 | 9.8 % | ls-l-real 5 194 → **1 325** |
+| CODE / MARKUP | 3 | 3 152 → **2 023** | 0.6418 | 1 728 | 20.7 % | code-ts 1 422 → 952 |
+| DATA | 2 | 1 095 → **220** | 0.2009 | 209 | 1.2 % | prices.csv 582 → 119 |
+| PROSE | 4 | 3 117 → **2 624** | 0.8418 | 2 529 | 16.2 % | node-help 1 099 → 852 |
+| **ALL** | **29** | **28 015 → 12 133** | **0.4331** | **10 158** | **11.1 %** | readability price **16.28 %** |
+
+
+### Verification
+
+`veltistos-unit` **16/16**. `attack-lattice` is the second-order adversary derived
+from the mechanism's own structure: chunks far longer than the old window (A1),
+a key letter smuggled into the payload through a `…` list item (A2 — the one
+reachable collision path, and the reason the unit battery's fourth probe was
+rewritten), overlapping and nested rule values (A3), forward-reference bait (A4),
+the modal-shortcut detector (A5), source-argument independence (A6) and the
+declared character cap (A7): `silentWrong=0`, `claimedWinNotReal=0`,
+`regressions=0`. The modal detector deletes the entire dictionary from each
+winning message and requires the executable reader to fail: **25/25** fail, and
+the contract prefix is preserved on **25/25**, so nothing is left to the reader's
+prior. Independent CPython cold read and mutation battery: see below.
+`tsc --noEmit` exit 0.
+
+### Honest prior art
+
+OptFSST (arXiv:2607.11271, ADMS@VLDB 2026) already replaces FSST's longest-match
+encoder with a DP minimum-cost segmentation over a **fixed** symbol table, and
+proves table selection NP-hard when the alphabet is part of the input.
+adafruit/circuitpython#11369 (Sep 2026) already chooses qstr-vs-inline **per
+occurrence**. Neither "DP over a dictionary" nor "per-occurrence choice" is
+claimed as new here. OptFSST's edge costs are additive constants, so its state is
+a position; BPE costs are contextual, which is exactly why the state theorem
+above is needed and where the novelty sits. LIPIcs.CPM.2023.3 (optimal LZ-End
+parsing is NP-complete) is the reason the table is kept fixed. LTSC
+(arXiv:2506.00307) Algorithm 2's overlap bug is closed by construction: a path
+through this DAG is a partition. CompactPrompt (arXiv:2510.18043) and
+BoundlessBPE-class work change the vocabulary or the tokenizer; this changes
+neither. arXiv:2608.18025 bounds the claim to carrier tokens, not downstream
+accuracy. Per-lab math review (Anthropic ζ(2/3), OpenAI Yang–Mills, AlphaProof
+Nexus, DoubleAI girth-8/5) and the transferable lesson from each:
+`bench/x120/research/sources.md`. **No external verifier has reviewed this
+module; the executed independent reader is the strongest evidence claimed.**
+
+### Negative results kept (all with receipts)
+
+Dictionary induction on top of the global parse: **0 admissions** on five lanes.
+ΒΑΘΥΣΥΝΕΔΡΙΑ state-complete nested replay: **0 hits on all six lanes**, TOTAL
+×1.0620 with three regressions — reverted, receipt kept
+(`speed-deep-headroom.json`). Scoped global ENGRAM: ×1.2723 but dpkg-l ×0.930 and
+a budget-blind key — not shippable. Line-boundary prefix reuse: four drafts,
+aggregate 0.94–1.05× against a ~15 % per-lane noise floor (a zero-activity control
+lane moved 1.16×), kb-article 1.32–1.34× every time — falsified and reverted once
+the exact state removed the population it targeted. Short-path threshold routing:
+×1.04, reverted. Beam 32 in chunk mode: identical tokens at twice the cost. Node
+compression (`OMEGA_VELTISTOS_COLLAPSE=1`) and the two-rung ladder remain opt-in
+trades measured on the window draft. Full protocol with ≥15 negative shapes and
+the resolved eleven-mechanism portfolio:
+`bench/x120/research/{protocol,sources,portfolio}.md`.

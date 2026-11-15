@@ -1,0 +1,26 @@
+kb-article.txt         M=620 -> 620 Δ=0 enum=2284 pre=770 wins=0 acc=0
+vmstat.txt             M=147 -> 147 Δ=0 enum=367 pre=23 wins=0 acc=0
+unified-diff.patch     M=414 -> 414 Δ=0 enum=2190 pre=102 wins=0 acc=0
+df-h.txt               M=162 -> 162 Δ=0 enum=435 pre=0 wins=0 acc=0
+df-real.txt            M=124 -> 124 Δ=0 enum=496 pre=39 wins=0 acc=0
+du-real.txt            M=268 -> 268 Δ=0 enum=1691 pre=17 wins=0 acc=0
+node-help.txt          M=859 -> 859 Δ=0 enum=2207 pre=134 wins=0 acc=0
+findmnt.txt            M=437 -> 437 Δ=0 enum=706 pre=52 wins=0 acc=0
+df-h.txt               M=106 -> 106 Δ=0 enum=487 pre=35 wins=0 acc=0
+email-thread.txt       M=486 -> 486 Δ=0 enum=1474 pre=135 wins=0 acc=0
+llm-answer.md          M=670 -> 669 Δ=-1 enum=2654 pre=559 wins=1 acc=1
+markdown-table.md      M=172 -> 172 Δ=0 enum=1189 pre=4 wins=0 acc=0
+psql-output.txt        M=230 -> 230 Δ=0 enum=3570 pre=48 wins=0 acc=0
+prices.csv             M=120 -> 120 Δ=0 enum=372 pre=48 wins=0 acc=0
+ps-ef.txt              M=308 -> 308 Δ=0 enum=2477 pre=7 wins=0 acc=0
+ls-real.txt            M=430 -> 430 Δ=0 enum=2762 pre=33 wins=0 acc=0
+json-pkg.txt           M=669 -> 669 Δ=0 enum=5165 pre=51 wins=0 acc=0
+code-ts.txt            M=957 -> 957 Δ=0 enum=9673 pre=269 wins=0 acc=0
+dpkg-l.txt             M=666 -> 666 Δ=0 enum=3533 pre=171 wins=0 acc=0
+ps-real.txt            M=390 -> 390 Δ=0 enum=3545 pre=20 wins=0 acc=0
+kubectl-get-pods.txt   M=314 -> 314 Δ=0 enum=1441 pre=0 wins=0 acc=0
+metrics.tsv            M=200 -> 200 Δ=0 enum=1360 pre=0 wins=0 acc=0
+ps-aux-real.txt        M=1029 -> 1029 Δ=0 enum=7999 pre=108 wins=0 acc=0
+apt-real.txt           M=834 -> 834 Δ=0 enum=18941 pre=106 wins=0 acc=0
+ls-l-real.txt          M=1341 -> 1341 Δ=0 enum=14245 pre=0 wins=0 acc=0
+TOTAL 12270 -> 12269 Δ=-1 wins=1/29

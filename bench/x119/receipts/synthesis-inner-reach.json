@@ -1,0 +1,13 @@
+{
+  "rows": [
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "innerReached": false
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "innerReached": true
+    }
+  ],
+  "note": "Only ls-l-real reaches the ΣΥΝΘΕΣΙΣ inner encoder on the canonical 29; the X119 inner scope cannot change the other 28 lanes."
+}

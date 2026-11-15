@@ -1,0 +1,26 @@
+{
+  "schema": "kompkernel-x119-speed-inner-v1",
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "off": {
+    "on": false,
+    "tokens": 1340,
+    "exact": true,
+    "sha": "8d4465eca85157546e98d6bddad88d80d89983de3ccfde859e6513fab715f389",
+    "wallMs": 518460.172847,
+    "cpuMs": 483888.901,
+    "notes": "ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (9340 B); 2 enabling pairs, 1 priced improvements; M 1359 -> 1340; ΣΥΝΘΕΣΙΣ fused key over 149 mode fields, 58 measure fields, 52 template fields; wire coded by synkrisis; M=1359 < 1476; outside bounded, collision-free, well-nested markup domain"
+  },
+  "on": {
+    "on": true,
+    "tokens": 1340,
+    "exact": true,
+    "sha": "8d4465eca85157546e98d6bddad88d80d89983de3ccfde859e6513fab715f389",
+    "wallMs": 508709.095855,
+    "cpuMs": 490664.239,
+    "notes": "ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (9340 B); 2 enabling pairs, 1 priced improvements; M 1359 -> 1340; ΣΥΝΘΕΣΙΣ fused key over 149 mode fields, 58 measure fields, 52 template fields; wire coded by synkrisis; M=1359 < 1476; outside bounded, collision-free, well-nested markup domain"
+  },
+  "deltaTokens": 0,
+  "hashIdentical": true,
+  "wallSpeedup": 1.0191682772560045,
+  "cpuSpeedup": 0.986191498255898
+}

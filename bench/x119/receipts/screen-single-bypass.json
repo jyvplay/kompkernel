@@ -1,0 +1,213 @@
+{
+  "totals": {
+    "base": 12270,
+    "after": 12267,
+    "delta": -3,
+    "wins": 2
+  },
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "base": 60,
+      "after": 60,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "base": 620,
+      "after": 620,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "base": 80,
+      "after": 80,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "base": 76,
+      "after": 76,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "base": 147,
+      "after": 147,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "base": 414,
+      "after": 414,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "base": 162,
+      "after": 162,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "base": 124,
+      "after": 124,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "base": 268,
+      "after": 268,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "base": 859,
+      "after": 859,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "base": 437,
+      "after": 437,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "base": 106,
+      "after": 106,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "base": 486,
+      "after": 486,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "base": 670,
+      "after": 668,
+      "delta": -2,
+      "acc": 2
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "base": 172,
+      "after": 172,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "base": 230,
+      "after": 230,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "base": 120,
+      "after": 120,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "base": 101,
+      "after": 101,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "base": 308,
+      "after": 308,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "base": 430,
+      "after": 430,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "base": 669,
+      "after": 669,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "base": 957,
+      "after": 956,
+      "delta": -1,
+      "acc": 1
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "base": 666,
+      "after": 666,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "base": 390,
+      "after": 390,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "base": 314,
+      "after": 314,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "base": 200,
+      "after": 200,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "base": 1029,
+      "after": 1029,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "base": 834,
+      "after": 834,
+      "delta": 0,
+      "acc": 0
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "base": 1341,
+      "after": 1341,
+      "delta": 0,
+      "acc": 0
+    }
+  ]
+}

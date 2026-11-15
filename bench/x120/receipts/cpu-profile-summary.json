@@ -1,0 +1,121 @@
+{
+  "schema": "kompkernel-x120-cpu-profile-v1",
+  "lane": "bench/holdout-x42/findmnt.txt",
+  "driver": "bench/x120/profile-lane.ts",
+  "note": "WINDOW-state draft, before the exact chunk state shipped. Raw .cpuprofile is gitignored and regenerable: node --cpu-prof on the bundle produced by bench/x15/run.sh.",
+  "samples": 13277,
+  "selfTop": [
+    {
+      "fn": "countTokens3 @x120prof.mjs:1825",
+      "samples": 3518,
+      "pct": 26.5
+    },
+    {
+      "fn": "scoreRunCostDeltaSlots @x120prof.mjs:5637",
+      "samples": 1505,
+      "pct": 11.34
+    },
+    {
+      "fn": "renderBest @x120prof.mjs:5943",
+      "samples": 1144,
+      "pct": 8.62
+    },
+    {
+      "fn": "RegExp: [^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]*[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]+[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\\p{N}{1,3}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n/]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+ @:-1",
+      "samples": 676,
+      "pct": 5.09
+    },
+    {
+      "fn": "(garbage collector) @:-1",
+      "samples": 601,
+      "pct": 4.53
+    },
+    {
+      "fn": "(anon) @x120prof.mjs:6177",
+      "samples": 474,
+      "pct": 3.57
+    },
+    {
+      "fn": "rankAt @x120prof.mjs:1675",
+      "samples": 323,
+      "pct": 2.43
+    },
+    {
+      "fn": "put @x120prof.mjs:6193",
+      "samples": 310,
+      "pct": 2.33
+    },
+    {
+      "fn": "evaluate @x120prof.mjs:7259",
+      "samples": 277,
+      "pct": 2.09
+    },
+    {
+      "fn": "encode @encoding:350",
+      "samples": 267,
+      "pct": 2.01
+    },
+    {
+      "fn": "mergeCount @x120prof.mjs:1649",
+      "samples": 241,
+      "pct": 1.82
+    },
+    {
+      "fn": "rollback @x120prof.mjs:6207",
+      "samples": 208,
+      "pct": 1.57
+    },
+    {
+      "fn": "fastChunkCount @x120prof.mjs:1705",
+      "samples": 187,
+      "pct": 1.41
+    },
+    {
+      "fn": "enumerateTokenSpans @x120prof.mjs:2931",
+      "samples": 170,
+      "pct": 1.28
+    }
+  ],
+  "inclusive": [
+    {
+      "fn": "synkrisisEncode",
+      "samples": 8067,
+      "pct": 60.76
+    },
+    {
+      "fn": "apographeEncodeInner",
+      "samples": 7812,
+      "pct": 58.84
+    },
+    {
+      "fn": "daedalusEncodeInner",
+      "samples": 5255,
+      "pct": 39.58
+    },
+    {
+      "fn": "veltistosEncode",
+      "samples": 1555,
+      "pct": 11.71
+    },
+    {
+      "fn": "shortestPath",
+      "samples": 1524,
+      "pct": 11.48
+    },
+    {
+      "fn": "ariadneEncode",
+      "samples": 1284,
+      "pct": 9.67
+    },
+    {
+      "fn": "diglossiaEncode",
+      "samples": 956,
+      "pct": 7.2
+    },
+    {
+      "fn": "chironDecode",
+      "samples": 77,
+      "pct": 0.58
+    }
+  ]
+}

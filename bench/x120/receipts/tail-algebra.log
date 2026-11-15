@@ -1,0 +1,4 @@
+last-chunk theorem: 104976/104976 exact, 0 uncovered, 0 MISMATCHES
+boundary algebra: 420/420 exact
+bench/holdout-x42/findmnt.txt M=431 exact=true ms=12922 tailMemo size=56293 hits=227978 misses=56293
+bench/holdout-work/kb-article.txt M=620 exact=true ms=4567 tailMemo size=61478 hits=240278 misses=61478

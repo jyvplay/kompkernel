@@ -1,0 +1,26 @@
+{
+  "schema": "kompkernel-x119-speed-budget-v1",
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "baseW": 3069200,
+  "baseC": 9346000,
+  "def": {
+    "cFactor": 1,
+    "tokens": 1340,
+    "exact": true,
+    "sha": "8d4465eca85157546e98d6bddad88d80d89983de3ccfde859e6513fab715f389",
+    "wallMs": 535747.070054,
+    "cpuMs": 540703.206
+  },
+  "red": {
+    "cFactor": 0.25,
+    "tokens": 1340,
+    "exact": true,
+    "sha": "8d4465eca85157546e98d6bddad88d80d89983de3ccfde859e6513fab715f389",
+    "wallMs": 515577.841105,
+    "cpuMs": 503277.357
+  },
+  "deltaTokens": 0,
+  "hashIdentical": true,
+  "wallSpeedup": 1.0391196582571756,
+  "cpuSpeedup": 1.0743642615338245
+}

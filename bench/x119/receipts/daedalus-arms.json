@@ -1,0 +1,299 @@
+{
+  "ms1": 38278,
+  "ms2": 13588,
+  "speedup": 0.3549856010573885,
+  "diff": 2,
+  "worse": 2,
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "ms1": 1131,
+      "ms2": 213,
+      "M1": 60,
+      "M2": 60,
+      "same": true,
+      "arm1": "none",
+      "arm2": "none"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "ms1": 449,
+      "ms2": 252,
+      "M1": 651,
+      "M2": 651,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "ms1": 530,
+      "ms2": 212,
+      "M1": 80,
+      "M2": 80,
+      "same": true,
+      "arm1": "none",
+      "arm2": "none"
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "ms1": 884,
+      "ms2": 440,
+      "M1": 76,
+      "M2": 76,
+      "same": true,
+      "arm1": "none",
+      "arm2": "none"
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "ms1": 44,
+      "ms2": 93,
+      "M1": 183,
+      "M2": 183,
+      "same": true,
+      "arm1": "default",
+      "arm2": "default"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "ms1": 125,
+      "ms2": 123,
+      "M1": 478,
+      "M2": 475,
+      "same": false,
+      "arm1": "span12",
+      "arm2": "default"
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "ms1": 567,
+      "ms2": 121,
+      "M1": 281,
+      "M2": 281,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "ms1": 1377,
+      "ms2": 351,
+      "M1": 158,
+      "M2": 158,
+      "same": true,
+      "arm1": "none",
+      "arm2": "none"
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "ms1": 790,
+      "ms2": 212,
+      "M1": 316,
+      "M2": 316,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "ms1": 667,
+      "ms2": 286,
+      "M1": 901,
+      "M2": 901,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "ms1": 832,
+      "ms2": 298,
+      "M1": 483,
+      "M2": 483,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "ms1": 1399,
+      "ms2": 598,
+      "M1": 140,
+      "M2": 140,
+      "same": true,
+      "arm1": "none",
+      "arm2": "none"
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "ms1": 608,
+      "ms2": 272,
+      "M1": 525,
+      "M2": 525,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "ms1": 528,
+      "ms2": 175,
+      "M1": 707,
+      "M2": 707,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "ms1": 77,
+      "ms2": 65,
+      "M1": 228,
+      "M2": 228,
+      "same": true,
+      "arm1": "span12",
+      "arm2": "span12"
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "ms1": 48,
+      "ms2": 47,
+      "M1": 397,
+      "M2": 397,
+      "same": true,
+      "arm1": "span12",
+      "arm2": "span12"
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "ms1": 45,
+      "ms2": 37,
+      "M1": 273,
+      "M2": 273,
+      "same": true,
+      "arm1": "span12",
+      "arm2": "span12"
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "ms1": 136,
+      "ms2": 87,
+      "M1": 249,
+      "M2": 249,
+      "same": true,
+      "arm1": "span12",
+      "arm2": "span12"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "ms1": 687,
+      "ms2": 278,
+      "M1": 354,
+      "M2": 354,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "ms1": 835,
+      "ms2": 282,
+      "M1": 470,
+      "M2": 470,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "ms1": 203,
+      "ms2": 179,
+      "M1": 743,
+      "M2": 743,
+      "same": true,
+      "arm1": "span12",
+      "arm2": "span12"
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "ms1": 3723,
+      "ms2": 879,
+      "M1": 1028,
+      "M2": 1028,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "ms1": 1602,
+      "ms2": 427,
+      "M1": 712,
+      "M2": 712,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "ms1": 1111,
+      "ms2": 479,
+      "M1": 452,
+      "M2": 452,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "ms1": 2174,
+      "ms2": 346,
+      "M1": 386,
+      "M2": 386,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "ms1": 949,
+      "ms2": 203,
+      "M1": 281,
+      "M2": 281,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "ms1": 3000,
+      "ms2": 1528,
+      "M1": 1110,
+      "M2": 1107,
+      "same": false,
+      "arm1": "span12+words",
+      "arm2": "default"
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "ms1": 7394,
+      "ms2": 2370,
+      "M1": 960,
+      "M2": 960,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "ms1": 6365,
+      "ms2": 2737,
+      "M1": 1573,
+      "M2": 1573,
+      "same": true,
+      "arm1": "span12+words",
+      "arm2": "span12+words"
+    }
+  ]
+}

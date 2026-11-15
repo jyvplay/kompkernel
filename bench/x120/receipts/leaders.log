@@ -1,0 +1,7 @@
+OPS TABLE      11 lanes  raw  4135 -> shipped  1662 (0.4019)  floor  1272  headroom 13.6%  price 23.5%  leader kubectl-get-pods.txt 1006->311
+OPS LISTING     9 lanes  raw 16516 -> shipped  5604 (0.3393)  floor  4420  headroom 9.8%  price 21.1%  leader ls-l-real.txt 5194->1325
+CODE / MARKUP   3 lanes  raw  3152 -> shipped  2023 (0.6418)  floor  1728  headroom 20.7%  price 14.6%  leader code-ts.txt 1422->952
+DATA            2 lanes  raw  1095 -> shipped   220 (0.2009)  floor   209  headroom 1.2%  price 5.0%  leader prices.csv 582->119
+PROSE           4 lanes  raw  3117 -> shipped  2624 (0.8418)  floor  2529  headroom 16.2%  price 3.6%  leader node-help.txt 1099->852
+
+ΗΓΕΜΟΝΕΣ, all 29 lanes: raw 28015 -> shipped 12133 (0.4331), floor 10158, headroom 11.1%, readability price 16.28%

@@ -1,0 +1,44 @@
+{
+  "path": "bench/holdout-x42/findmnt.txt",
+  "tokens": 435,
+  "ms": 14260.183987,
+  "before": {
+    "size": 0,
+    "hits": 0,
+    "misses": 0,
+    "fallbacks": 0,
+    "shortSize": 0,
+    "shortHits": 0,
+    "shortMisses": 0,
+    "longSize": 0,
+    "longChars": 0,
+    "longHits": 0,
+    "longMisses": 0
+  },
+  "after": {
+    "size": 46521,
+    "hits": 5475782,
+    "misses": 46521,
+    "fallbacks": 0,
+    "shortSize": 295327,
+    "shortHits": 4249958,
+    "shortMisses": 295327,
+    "longSize": 5700,
+    "longChars": 162235,
+    "longHits": 31655,
+    "longMisses": 285054
+  },
+  "delta": {
+    "size": 46521,
+    "hits": 5475782,
+    "misses": 46521,
+    "fallbacks": 0,
+    "shortSize": 295327,
+    "shortHits": 4249958,
+    "shortMisses": 295327,
+    "longSize": 5700,
+    "longChars": 162235,
+    "longHits": 31655,
+    "longMisses": 285054
+  }
+}

@@ -1,0 +1,6 @@
+bench/holdout-work/kb-article.txt
+bench/holdout-x41/node-help.txt
+bench/holdout/json-pkg.txt
+bench/holdout-x42/dpkg-l.txt
+bench/holdout-x41/ps-real.txt
+bench/holdout-x42/findmnt.txt

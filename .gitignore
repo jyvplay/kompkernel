@@ -47,6 +47,10 @@ bench/x100/*.mjs
 bench/x103/*.mjs
 bench/x103/prof/
 
-# X117/X118 probe bundles (sources are .ts; receipts are .json/.log)
+# X117/X118/X119/X120 probe bundles (sources are .ts; receipts are .json/.log)
 bench/x117/*.mjs
 bench/x118/*.mjs
+bench/x119/*.mjs
+bench/x120/*.mjs
+# raw CPU profiles are regenerable; the analysis receipts are committed
+bench/x120/receipts/prof/

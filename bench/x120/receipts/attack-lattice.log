@@ -1,0 +1,13 @@
+A1 long letter chunk               base=998 out=96 applied=true exact=true veltistos: 3 shortest-path parse(s), 22095 edges, 3 whole-me
+A1 long digit chunk                base=2548 out=158 applied=true exact=true veltistos: 3 shortest-path parse(s), 22059 edges, 3 whole-me
+A1 case-boundary chunk             base=603 out=83 applied=true exact=true veltistos: 3 shortest-path parse(s), 9111 edges, 3 whole-mes
+A1 chunk exactly at the window     base=436 out=136 applied=true exact=true veltistos: 3 shortest-path parse(s), 5445 edges, 3 whole-mes
+A2 list-item key collision         base=28 out=28 applied=false exact=true 
+A3 overlapping values              base=136 out=103 applied=true exact=true veltistos: 4 shortest-path parse(s), 10561 edges, 2 whole-me
+A3 nested values                   base=216 out=139 applied=true exact=true veltistos: 4 shortest-path parse(s), 4169 edges, 3 whole-mes
+A4 forward-reference bait          base=115 out=112 applied=true exact=true veltistos: 3 shortest-path parse(s), 6356 edges, 3 whole-mes
+A6 source-argument independence    PASS
+A7 character cap                   REFUSED as declared
+A5 modal shortcut                  25/25 messages cannot be expanded without the tape; contract prefix preserved on 25/25
+
+ATTACK SUMMARY silentWrong=0 claimedWinNotReal=0 regressions=0

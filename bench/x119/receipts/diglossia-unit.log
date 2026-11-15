@@ -1,0 +1,10 @@
+PASS disabled switch refuses without touching the wire
+PASS no CHIRON frame is a refusal, not a crash
+PASS adoption keeps the contract and the CHIRON expansion byte-exact
+PASS bypass can inline a reference window when the literal merges cheaper
+PASS a forward reference introduced into a tape value is rejected
+PASS overlapping sites are never both applied
+PASS the pass is monotone and idempotent at its own fixed point
+PASS nested (non-flat) rules are not used as bypass literals
+
+DIGLOSSIA unit 8/8 PASS

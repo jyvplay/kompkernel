@@ -1,0 +1,187 @@
+{
+  "schema": "kompkernel-x120-speed-prefix-v1",
+  "lanes": 6,
+  "offWall": 84845.71707299999,
+  "onWall": 90479.67207099998,
+  "offCpu": 90386.32400000001,
+  "onCpu": 91580.15699999999,
+  "wallSpeedup": 0.9377323671821115,
+  "cpuSpeedup": 0.9869640647154603,
+  "shaDiffering": 0,
+  "rows": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "off": {
+        "on": false,
+        "tokens": 620,
+        "exact": true,
+        "sha": "b62e84ee6cf6630198e68503804b82e1503acaa9b61c4ee410407752edb01483",
+        "wallMs": 5554.390236,
+        "cpuMs": 6857.193,
+        "hits": 0,
+        "tries": 0,
+        "saved": 0,
+        "longMisses": 116283
+      },
+      "on": {
+        "on": true,
+        "tokens": 620,
+        "exact": true,
+        "sha": "b62e84ee6cf6630198e68503804b82e1503acaa9b61c4ee410407752edb01483",
+        "wallMs": 4219.322386999999,
+        "cpuMs": 4528.918,
+        "hits": 911,
+        "tries": 7173,
+        "saved": 1008798,
+        "longMisses": 117116
+      },
+      "same": true,
+      "speedup": 1.3164175966058982
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "off": {
+        "on": false,
+        "tokens": 852,
+        "exact": true,
+        "sha": "1e879d5d45280036a74495f1097dcc0985c04d08316c3c9999bd19e8f9634092",
+        "wallMs": 10846.877448999996,
+        "cpuMs": 11492.795,
+        "hits": 0,
+        "tries": 0,
+        "saved": 0,
+        "longMisses": 322995
+      },
+      "on": {
+        "on": true,
+        "tokens": 852,
+        "exact": true,
+        "sha": "1e879d5d45280036a74495f1097dcc0985c04d08316c3c9999bd19e8f9634092",
+        "wallMs": 12411.480306999998,
+        "cpuMs": 13391.358,
+        "hits": 2860,
+        "tries": 28697,
+        "saved": 1520194,
+        "longMisses": 326761
+      },
+      "same": true,
+      "speedup": 0.8739390613126481
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "off": {
+        "on": false,
+        "tokens": 659,
+        "exact": true,
+        "sha": "cc584a7066a77d050c115687b86c118d91a569c2b9eb8954e913fbc9f3f63c7f",
+        "wallMs": 19332.700130999998,
+        "cpuMs": 20898.342,
+        "hits": 0,
+        "tries": 0,
+        "saved": 0,
+        "longMisses": 202884
+      },
+      "on": {
+        "on": true,
+        "tokens": 659,
+        "exact": true,
+        "sha": "cc584a7066a77d050c115687b86c118d91a569c2b9eb8954e913fbc9f3f63c7f",
+        "wallMs": 16628.248785999996,
+        "cpuMs": 17340.045,
+        "hits": 1932,
+        "tries": 71825,
+        "saved": 650566,
+        "longMisses": 204872
+      },
+      "same": true,
+      "speedup": 1.1626419823160807
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "off": {
+        "on": false,
+        "tokens": 657,
+        "exact": true,
+        "sha": "5d0f7a7bff71f52e2cf1ea711ff3b0cc21d3f271faeb4710e301bbae992bb25f",
+        "wallMs": 21694.464045,
+        "cpuMs": 22377.996,
+        "hits": 0,
+        "tries": 0,
+        "saved": 0,
+        "longMisses": 337993
+      },
+      "on": {
+        "on": true,
+        "tokens": 657,
+        "exact": true,
+        "sha": "5d0f7a7bff71f52e2cf1ea711ff3b0cc21d3f271faeb4710e301bbae992bb25f",
+        "wallMs": 31203.693232999998,
+        "cpuMs": 29229.025,
+        "hits": 789,
+        "tries": 80317,
+        "saved": 607892,
+        "longMisses": 338555
+      },
+      "same": true,
+      "speedup": 0.6952530869665341
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "off": {
+        "on": false,
+        "tokens": 381,
+        "exact": true,
+        "sha": "963f12a4aa0f00a390a9d447fa6905baa58bb3632d2d689818bc507d75867540",
+        "wallMs": 16833.396919000006,
+        "cpuMs": 17753.475,
+        "hits": 0,
+        "tries": 0,
+        "saved": 0,
+        "longMisses": 138744
+      },
+      "on": {
+        "on": true,
+        "tokens": 381,
+        "exact": true,
+        "sha": "963f12a4aa0f00a390a9d447fa6905baa58bb3632d2d689818bc507d75867540",
+        "wallMs": 14067.293181999994,
+        "cpuMs": 14673.589,
+        "hits": 4,
+        "tries": 195,
+        "saved": 3709,
+        "longMisses": 138747
+      },
+      "same": true,
+      "speedup": 1.196633687889538
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "off": {
+        "on": false,
+        "tokens": 432,
+        "exact": true,
+        "sha": "5e460b8ef0bd9989fd4b7e996d525b5d649a4b6d7a1a155045baa8d52294107e",
+        "wallMs": 10583.888292999996,
+        "cpuMs": 11006.523,
+        "hits": 0,
+        "tries": 0,
+        "saved": 0,
+        "longMisses": 285164
+      },
+      "on": {
+        "on": true,
+        "tokens": 432,
+        "exact": true,
+        "sha": "5e460b8ef0bd9989fd4b7e996d525b5d649a4b6d7a1a155045baa8d52294107e",
+        "wallMs": 11949.634175999992,
+        "cpuMs": 12417.222,
+        "hits": 7494,
+        "tries": 34655,
+        "saved": 2788595,
+        "longMisses": 292640
+      },
+      "same": true,
+      "speedup": 0.8857081427862452
+    }
+  ]
+}

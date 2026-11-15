@@ -1,0 +1,97 @@
+{
+  "schema": "kompkernel-x120-attack-lattice-v1",
+  "silentWrong": 0,
+  "claimedWinNotReal": 0,
+  "regressions": 0,
+  "modalChecked": 25,
+  "dictionaryLoadBearing": 25,
+  "contractPrefixEqual": 25,
+  "results": [
+    {
+      "name": "A1 long letter chunk",
+      "base": 998,
+      "real": 96,
+      "applied": true,
+      "exact": true,
+      "reported": 96,
+      "notes": "veltistos: 3 shortest-path parse(s), 22095 edges, 3 whole-message prices; body −902, tape −0, 1 rule(s) retired; M 998 -> 96"
+    },
+    {
+      "name": "A1 long digit chunk",
+      "base": 2548,
+      "real": 158,
+      "applied": true,
+      "exact": true,
+      "reported": 158,
+      "notes": "veltistos: 3 shortest-path parse(s), 22059 edges, 3 whole-message prices; body −2390, tape −0, 1 rule(s) retired; M 2548 -> 158"
+    },
+    {
+      "name": "A1 case-boundary chunk",
+      "base": 603,
+      "real": 83,
+      "applied": true,
+      "exact": true,
+      "reported": 83,
+      "notes": "veltistos: 3 shortest-path parse(s), 9111 edges, 3 whole-message prices; body −520, tape −0, 0 rule(s) retired; M 603 -> 83"
+    },
+    {
+      "name": "A1 chunk exactly at the window",
+      "base": 436,
+      "real": 136,
+      "applied": true,
+      "exact": true,
+      "reported": 136,
+      "notes": "veltistos: 3 shortest-path parse(s), 5445 edges, 3 whole-message prices; body −300, tape −0, 0 rule(s) retired; M 436 -> 136"
+    },
+    {
+      "name": "A2 list-item key collision",
+      "base": 28,
+      "real": 28,
+      "applied": false,
+      "exact": true,
+      "reported": 28,
+      "notes": "veltistos: key letter occurs in the payload"
+    },
+    {
+      "name": "A3 overlapping values",
+      "base": 136,
+      "real": 103,
+      "applied": true,
+      "exact": true,
+      "reported": 103,
+      "notes": "veltistos: 4 shortest-path parse(s), 10561 edges, 2 whole-message prices; body −33, tape −0, 1 rule(s) retired; M 136 -> 103"
+    },
+    {
+      "name": "A3 nested values",
+      "base": 216,
+      "real": 139,
+      "applied": true,
+      "exact": true,
+      "reported": 139,
+      "notes": "veltistos: 4 shortest-path parse(s), 4169 edges, 3 whole-message prices; body −77, tape −0, 1 rule(s) retired; M 216 -> 139"
+    },
+    {
+      "name": "A4 forward-reference bait",
+      "base": 115,
+      "real": 112,
+      "applied": true,
+      "exact": true,
+      "reported": 112,
+      "notes": "veltistos: 3 shortest-path parse(s), 6356 edges, 3 whole-message prices; body −3, tape −0, 1 rule(s) retired; M 115 -> 112"
+    },
+    {
+      "name": "A6 source-argument independence",
+      "equal": true
+    },
+    {
+      "name": "A7 character cap",
+      "refused": true
+    },
+    {
+      "name": "A5 modal-shortcut detector",
+      "checked": 25,
+      "dictionaryLoadBearing": 25,
+      "contractPrefixEqual": 25
+    }
+  ]
+}

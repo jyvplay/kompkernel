@@ -1,0 +1,10 @@
+node-help.txt          Δ=-2 layerEqual=True prefixEqual=True offIsSrc=True
+findmnt.txt            Δ=-2 layerEqual=True prefixEqual=True offIsSrc=True
+llm-answer.md          Δ=-2 layerEqual=True prefixEqual=True offIsSrc=True
+ls-real.txt            Δ=-1 layerEqual=True prefixEqual=True offIsSrc=True
+json-pkg.txt           Δ=-2 layerEqual=True prefixEqual=True offIsSrc=True
+dpkg-l.txt             Δ=-4 layerEqual=True prefixEqual=True offIsSrc=True
+ps-aux-real.txt        Δ=-5 layerEqual=True prefixEqual=True offIsSrc=True
+apt-real.txt           Δ=-1 layerEqual=True prefixEqual=True offIsSrc=True
+ls-l-real.txt          Δ=-1 layerEqual=True prefixEqual=True offIsSrc=False
+X119 coldread lanes=9 allChironLayerEqual=True

@@ -1,0 +1,31 @@
+{
+  "schema": "kompkernel-x120-veltistos2-screen-v1",
+  "src": "bench/x119/receipts/final-frontier.jsonl",
+  "ctx": 24,
+  "beam": 8,
+  "induct": 6,
+  "totals": {
+    "base": 857,
+    "after": 854,
+    "delta": -3,
+    "wins": 1,
+    "lanes": 1
+  },
+  "rows": [
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "base": 857,
+      "after": 854,
+      "delta": -3,
+      "stages": [
+        "body"
+      ],
+      "induced": 0,
+      "rulesBefore": 42,
+      "rulesAfter": 42,
+      "edges": 459835,
+      "ms": 2988,
+      "message": "¶ k=v. expand repeatedly; print only.\n§л\nа  --иланлаexperimentalылаallowъ --cpu-profэ=...о                             слов setч when anyс permissions areву theг Generate a snapshot blob whenус process exitsӡэлок inМу V8 CPUұс experimentalФ [options] [ script.jsе fileСов configе fromй are placed before IPvА,ВА --Г (default:\nоӣку test runnerн-testі  -ю ър.\nц)\nм toхdisableд-dirя profileзв environment variables from suppliedсет specifiedё addressesБ writeһ filesystemў        О ofь generatedп             ¶# source: node --help (real)\nUsage: nodeФ ] [arguments]\n       node inspectФ | host:port ] [arguments]\n\nOptions:\nі                           script read from stdin (default if noсе name is provided, interactive modeло if a ttyца                          indicate the end of node optionsлаabort-on-uncaught-exceptionло aborting instead of exiting causes aло coreем be generated for analysisы-addons              allow use of addonsчы-child-process       allow use of child processчы-fs-readэў allow permissions to readусһы-fs-writeэўallow permissions to writeкусһы-wasi                allow wasi when any permissions areвы-worker              allow worker threadsчиbuild-snapshot           граbuild-snapshot-configэг using aJSON configurationску specified pathріcВcheck                 syntax check script without executingлаcompletion-bash           print source-able bash completionло scriptліCВconditionsэўadditional user conditions forло conditional exports and importsлю                  StartМ profiler on start upАс andБу CPUям diskло before exit. Ifъд is notлот,Буямус current working directoryрюдэ          Directory where the V8 profilesсь byъ will be placedро Does not affect --profрю-intervalэ     specified sampling intervalкс microseconds forМясь withъ.Г 1000цю-nameэўте nameОМся generated withъиdiagnosticдэ        set dir for all output filesГ current working directoryцах-protoэў disable Object.prototype.__proto__\nах-sigusr1           Disable inspector threadм beло listening for SIGUSR1 signalлах-warningэ       silence specific process warningsлах-wasm-trap-handler Disable trap-handler-based WebAssemblyло bound checks. V8 will insert inlineло bound checks when compiling WebAssemblyло which may slow down performanceрі-disallow-code-generation-from-stringsло disallow eval and friendsлаdns-result-orderэ      set default value of verbatimкс dns.lookup. Options are 'ipv4first'\n                              (IPv4ёй6сё) 'ipv6first' (IPv6 addressesлой4 addressesцо 'verbatim' (addresses areку orderсу DNS resolver returnedці-enable-etw-stack-walking  provides heap dataм ETW Windowsло native tracingлі-enable-fips               enable FIPS crypto at startupлі-enable-source-maps        Source Map V3 support for stack tracesлі-entry-url                 Treat the entrypoint as a URLлі-env-fileэпзиenv-file-if-existsэ   зліeВevalэп evaluate scriptн-addon-modulesұ import support for addonsн-async-context-frameло Improve AsyncLocalStorage performanceло with AsyncContextFrameн-config-fileэлС suppliedен-default-config-file\nС default configсен-default-typeӡ set module system to use by defaultн-eventsource  experimental EventSource APIн-import-meta-resolveұ ES Moduleло import.meta.resolve() parentURL supportн-inspector-network-resourceұ load network resources viaсу inspectorлі-loaderВexperimental-loaderӡ useут module as a customло loaderн-network-inspectionұ network inspection supportн-print-required-tlaло Print pending top-level await. Ifло --experimental-require-module is trueАс evaluate asynchronous graphs loaded byло `require()` but do not runус microtasksАк orderмм find andло print top-level awaitку graphн-sea-configӡ Generate a blob that can be embeddedло into the single executable applicationн-test-coverageло enable code coverageӣ-isolationӡ configures the type of test isolationс usedӣ-module-mocksло enable module mockingку testло runnerн-transform-typesло enable transformationОс TypeScript-onlysyntax into JavaScript\n"
+    }
+  ]
+}
