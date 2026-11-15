@@ -1,0 +1,26 @@
+{
+  "off": 1348,
+  "on": 1341,
+  "delta": -7,
+  "exact": true,
+  "wallMs": 818389,
+  "totals": {
+    "off": 12277,
+    "on": 12270,
+    "delta": -7,
+    "better": 1,
+    "worse": 0,
+    "same": 28,
+    "offWallMs": 5153925.107765,
+    "onWallMs": 1598283.9854619997,
+    "offCpuMs": 5304504.065,
+    "onCpuMs": 1640901.5489999999,
+    "wallSpeedup": 3.2246616712956726,
+    "cpuSpeedup": 3.232676615018541,
+    "synedriaHits": 65,
+    "synedriaStores": 65,
+    "synedriaJoined": 30
+  },
+  "noTokenRegression": true
+}
+REGATE_EXIT=0

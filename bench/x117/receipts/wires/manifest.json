@@ -1,0 +1,18 @@
+{
+  "schema": "kompkernel-x117-synthesis-wires-v1",
+  "artifacts": [
+    {
+      "artifact": "bench/x117/receipts/wires/ls-l-real.syn.txt",
+      "source": "bench/holdout-x41/ls-l-real.txt",
+      "sourceSha256": "82572e90c7619baad4690b42704b29002a4c7c0a70acc8b35193431ff6286cfa",
+      "preSha256": "3f30c7e26649bcd87086e204e299218f7d57b52af11d8dc1834033de28f3e893",
+      "crc": "25b707b9",
+      "marker": "※",
+      "rule": {
+        "j": 11,
+        "i": 9,
+        "form": "tail"
+      }
+    }
+  ]
+}

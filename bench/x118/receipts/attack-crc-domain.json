@@ -1,0 +1,38 @@
+{
+  "schema": "kompkernel-x118-attack-crc-domain-v1",
+  "date": "2026-11-15",
+  "trials": 6,
+  "silentAccepts": 0,
+  "allFailClosed": true,
+  "rows": [
+    {
+      "name": "baseline valid",
+      "refused": false,
+      "ok": true
+    },
+    {
+      "name": "crc=post-template domain",
+      "refused": true,
+      "error": "synthesis: ΣΥΜΦΥΊΑ body/CRC does not satisfy the fused key"
+    },
+    {
+      "name": "crc=wrong constant",
+      "refused": true,
+      "error": "synthesis: ΣΥΜΦΥΊΑ body/CRC does not satisfy the fused key"
+    },
+    {
+      "name": "field order swapped f9=f11",
+      "refused": true,
+      "error": "synthesis: ΣΥΜΦΥΊΑ body/CRC does not satisfy the fused key"
+    },
+    {
+      "name": "marker absent",
+      "refused": true,
+      "error": "synthesis: ΣΥΜΦΥΊΑ body/CRC does not satisfy the fused key"
+    },
+    {
+      "name": "non-canonical key parses?",
+      "refused": true
+    }
+  ]
+}

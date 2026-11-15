@@ -1,0 +1,29 @@
+lsblk.txt                raw=60 REFUSE no mode
+kb-article.txt           raw=656 REFUSE no mode
+uptime-w.txt             raw=80 REFUSE no mode
+free-m.txt               raw=76 REFUSE no mode
+vmstat.txt               raw=229 REFUSE no mode
+unified-diff.patch       raw=578 REFUSE no mode
+df-h.txt                 raw=570 REFUSE no mode
+df-real.txt              raw=158 REFUSE no mode
+du-real.txt              raw=458 REFUSE no mode
+node-help.txt            raw=1099 REFUSE no mode
+findmnt.txt              raw=787 REFUSE no mode
+df-h.txt                 raw=140 REFUSE no mode
+email-thread.txt         raw=629 REFUSE no mode
+llm-answer.md            raw=733 REFUSE no mode
+markdown-table.md        raw=330 REFUSE no mode
+psql-output.txt          raw=675 REFUSE no mode
+prices.csv               raw=582 REFUSE no mode
+cue-sheet.md             raw=513 REFUSE no mode
+ps-ef.txt                raw=1144 REFUSE no mode
+ls-real.txt              raw=1034 REFUSE not single empty-prefix tail chosen=[]
+json-pkg.txt             raw=1152 REFUSE no mode
+code-ts.txt              raw=1422 REFUSE no mode
+dpkg-l.txt               raw=1000 REFUSE no mode
+ps-real.txt              raw=1106 REFUSE no mode
+kubectl-get-pods.txt     raw=1006 REFUSE no mode
+metrics.tsv              raw=811 REFUSE no mode
+ps-aux-real.txt          raw=3054 REFUSE no mode
+apt-real.txt             raw=2739 REFUSE no mode
+ls-l-real.txt            raw=5194 pre=4689 rewrite=4392 saved=802 key=40+LF=41 nested=48 Δkey=-7 hits=149/58/52 crc=25b707b9 own=true commute=true parse=true

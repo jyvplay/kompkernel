@@ -1,0 +1,10 @@
+PASS fused key is canonical, self-describing, and 40 tokens / 41 with LF
+PASS parser refuses non-canonical, ambiguous, or damaged keys
+PASS three rewrites commute and the fused own inverse is exact
+PASS CRC fails closed on a damaged fused body
+PASS tagstackDecode dispatches the fused key after the parent decoder
+PASS encode fires on the synthetic conjunction and beats a generous incumbent
+PASS strict complete-message gate refuses a loss
+PASS kill switches refuse without touching the source
+PASS non-conjunction domains refuse cheaply
+9 passed

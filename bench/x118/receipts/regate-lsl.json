@@ -1,0 +1,11 @@
+{
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "offTokens": 1348,
+  "onTokens": 1341,
+  "delta": -7,
+  "exact": true,
+  "wallMs": 818389.107857,
+  "cpuMs": 834963.379,
+  "parent": "synkrisis",
+  "messageSHA256": "2c42f34e2ae75d4ccee0fff90471789b5a441b0abfab5075fd3dbd3f10987117"
+}

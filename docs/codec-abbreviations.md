@@ -7454,3 +7454,21 @@ mid-A/B because it drops the explicit `after ->` locator; the shipped 6-tok key
 keeps the locator. Swapping ΕΝΑΛΛΑΓΗ/ΜΗΚΟΣ nesting order is token-neutral (1 348).
 4-token `len` key rejected for byte/code-point ambiguity. Post-parent measure expansion not attempted:
 dense-wire law predicts loss; ΜΗΚΟΣ is pre-frontier only.
+
+## §X117 — ΣΥΝΘΕΣΙΣ (SYNTHESIS)
+
+### ΣΥΝΘΕΣΙΣ — technical design spec
+
+| Field | Value |
+|---|---|
+| **Object** | A POSIX `ls -l`-shaped record set on which all three shipped record entailments fire together: ΕΝΑΛΛΑΓΗ (symbolic mode ↔ octal), ΜΗΚΟΣ (symlink size = target byte length), and one ΣΥΜΦΥΊΑ tail template with empty constant prefix. |
+| **Mechanism** | Cross-codec contract common-subexpression elimination + single-pass entailment conjunction. The three rewrites touch disjoint fields and commute, so one pass presents the fully entailed body to the parent frontier ONCE, and ONE fused key replaces the three nested keys. Not a new wire operator: the fused key is a macro that parses back to the same rule/marker/CRC and applies the existing ΣΥΜΦΥΊΑ → ΕΝΑΛΛΑΓΗ → ΜΗΚΟΣ inverses in that order. |
+| **Wire** | `Body first. f{j}=f{i}+text after {marker} (1-based); ^Tnnnn␠→T+chmod; λ=#bytes after ->. crc={crc8}` + LF + parent-frontier message for the fully rewritten body. `tagstackDecode` parses the fused key first and peels it before the nested-key path. |
+| **Greedy?** | The ΣΥΜΦΥΊΑ rule selection is X90's bounded raw-token greedy hill-climb. The conjunction is a total line-local rewrite on its domain. Admission is FIRE/NOT on the measured COMPLETE message (G5 strict win). |
+| **Gates** | G1 all three rewrites fire (one tail rule, A=''); G2 marker absent, no pre-existing octal field, no λ; G3 own inverse ΣΥΜΦΥΊΑ(CRC)→ΕΝΑΛΛΑΓΗ→ΜΗΚΟΣ reproduces source; G4 parent reproduces rewritten body; G5 strict complete-message win; G6 fused key parses back to identical parts (canonical re-render guard). |
+| **Source citation (honest)** | The three entailments are the repository's X90/X115/X116 constructions (POSIX chmod/lstat semantics; cross-field template fitting). Contract CSE + single-pass conjunction are original X117 engineering; no paper claims this schedule. |
+| **Time / CPU** | CPU-bound; no wall clock in any decision. Dominant cost is ONE parent-frontier encode of the rewritten body instead of several nested X74 re-entries. |
+| **Key ladder** | Nested keys 48 tok; fused shipped key 41 tok (with LF), Δ**−7**. 35–38-tok spellings were rejected because they drop `(1-based)`, `text after`, or `T+` — the self-description clauses X90/X115 paid to keep. Receipts: `bench/x117/receipts/fusion-ladder*.log`. |
+| **Inner encoder (X118 repair)** | The fused body MUST be priced through the full X74 chain (the same `innerEncoder` callback ΕΝΑΛΛΑΓΗ/ΜΗΚΟΣ use), not the base frontier. The X118 balanced A/B caught the base-frontier wiring at **+12** tokens on `ls-l-real` (it skipped ἸΣΟΜΟΡΦΊΑ/ΜΕΤΑΤΑΞΙΣ tape optimization); the full-chain re-entry measures **−7**. Pre-fix receipt `ab-prefix.json`, repair re-gate `regate-lsl.json`. |
+| **Measured complete** | Balanced A/B + re-gate: Σ29 **12 277 → 12 270** (Δ−7), better 1 / worse 0 / same 28, exact 29/29, OFF=X116-ON identical 29/29. `ls-l-real` 1 348 → **1 341**. Wall **3.225×**, CPU **3.233×**. New attack `attack-crc-domain.json`: 6 trials, 0 silent accepts. |
+| **Unit / cold read / mutation** | `synthesis-unit` 9/9; independent CPython cold read of the fused message EXACT (SHA match); mutation battery 930 trials / 878 refused / 52 identity / **0 silent-wrong**. `tsc --noEmit` exit 0. |

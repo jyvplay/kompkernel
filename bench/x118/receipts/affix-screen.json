@@ -1,0 +1,43 @@
+{
+  "schema": "kompkernel-x118-affix-frontier-screen-v1",
+  "rows": [
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "marker": "¤",
+      "hits": 16,
+      "keyTokens": 31,
+      "baseTokens": 437,
+      "baseExact": true,
+      "baseParent": "synkrisis",
+      "baseMs": 11547,
+      "innerTokens": 483,
+      "innerExact": true,
+      "innerParent": "synkrisis",
+      "innerMs": 10776,
+      "ownInverse": true,
+      "composedExact": true,
+      "candidateTokens": 514,
+      "delta": 77,
+      "admitted": false
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "marker": "¤",
+      "hits": 23,
+      "keyTokens": 31,
+      "baseTokens": 120,
+      "baseExact": true,
+      "baseParent": "diastema",
+      "baseMs": 16978,
+      "innerTokens": 203,
+      "innerExact": true,
+      "innerParent": "akolouthia2",
+      "innerMs": 21647,
+      "ownInverse": true,
+      "composedExact": true,
+      "candidateTokens": 234,
+      "delta": 114,
+      "admitted": false
+    }
+  ]
+}

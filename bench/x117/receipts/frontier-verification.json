@@ -1,0 +1,216 @@
+{
+  "schema": "kompkernel-x117-frontier-verification-v1",
+  "date": "2026-11-15",
+  "reference": "bench/x116/receipts/ab.json ON",
+  "sourceCommit": "3ba345c59d04d0bd4ee28caddb2966bb2ccd2acb",
+  "lanes": 29,
+  "identical": 29,
+  "total": 12277,
+  "expectedTotal": 12277,
+  "allIdentical": true,
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 60,
+      "expected": 60,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 620,
+      "expected": 620,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 80,
+      "expected": 80,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 76,
+      "expected": 76,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 147,
+      "expected": 147,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 414,
+      "expected": 414,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 162,
+      "expected": 162,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 124,
+      "expected": 124,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 268,
+      "expected": 268,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 859,
+      "expected": 859,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 437,
+      "expected": 437,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 106,
+      "expected": 106,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 486,
+      "expected": 486,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 670,
+      "expected": 670,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 172,
+      "expected": 172,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 230,
+      "expected": 230,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 120,
+      "expected": 120,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 101,
+      "expected": 101,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 308,
+      "expected": 308,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 430,
+      "expected": 430,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 669,
+      "expected": 669,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 957,
+      "expected": 957,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "tokens": 666,
+      "expected": 666,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 390,
+      "expected": 390,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 314,
+      "expected": 314,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 200,
+      "expected": 200,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 1029,
+      "expected": 1029,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "tokens": 834,
+      "expected": 834,
+      "identical": true,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 1348,
+      "expected": 1348,
+      "identical": true,
+      "exact": true
+    }
+  ]
+}

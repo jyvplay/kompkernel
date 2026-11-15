@@ -46,6 +46,7 @@ import { tachygrafiaDisabled, tachygrafiaRewrite } from './tachygrafia';
 import { synedriaChainScope, synedriaChainDisabled } from './synedria';
 import { enallageEncode, enallageExpand, ENALLAGE_KEY } from './enallage';
 import { mekosEncode, mekosExpand, MEKOS_KEY } from './mekos';
+import { synthesisEncode, synthesisDecode, synthesisParseKey } from './synthesis';
 
 export type TagstackMode = 'xml' | 'html';
 export type TagstackFrontierParent = 'synkrisis' | 'bifront' | 'kanon' | 'akolouthia2' | 'apographe' | 'metron' | 'hemera' | 'diastema';
@@ -325,6 +326,14 @@ export function tagstackDecode(message: string, parentDecoder?: (wire: string) =
   // order because each re-enters the X74 chain on its rewritten body. Peel the
   // outermost declared key, recursively decode the body (which may carry the other
   // key or a frontier contract), then apply this layer's inverse last.
+  // X117 ΣΥΝΘΕΣΙΣ. A fused key is a macro over the X90/X115/X116 keys; parse it
+  // first so the nested-key peeling below does not mistake its `Body first.` for
+  // an ordinary frontier contract. The inverse order is ΣΥΜΦΥΊΑ → ΕΝΑΛΛΑΓΗ → ΜΗΚΟΣ.
+  {
+    const nl = message.indexOf('\n');
+    const first = nl < 0 ? message : message.slice(0, nl);
+    if (synthesisParseKey(first)) return synthesisDecode(message, parentDecoder);
+  }
   if (message.startsWith(MEKOS_KEY + '\n')) {
     const nl = message.indexOf('\n');
     const body = nl < 0 ? '' : message.slice(nl + 1);
@@ -749,31 +758,46 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
   // the same bytes. Handing them the verdict removes that duplicate council
   // work without touching their rewritten-body encodes or exactness gates.
   const sharedFrontier = synedriaChainDisabled() ? undefined : base;
-  // X115 — ΕΝΑΛΛΑΓΗ joins as a source-representation candidate. It exchanges
-  // Unix symbolic mode fields for their octal radix rendering BEFORE the parent
-  // frontier prices the text, then declares the inverse in one in-band line.
-  // Admission is the same strict complete-message gate as every X74 candidate.
-  try { admit('ΕΝΑΛΛΑΓΗ', enallageEncode(text, enc, best.messageTokens, (t, e) => tagstackX74ChainMeasured(t, e)) as unknown as WideResult); } catch { /* not a candidate */ }
-  // X116 — ΜΗΚΟΣ joins after ΕΝΑΛΛΑΓΗ. A symlink's printed size is entailed by
-  // the target path already present after ` -> ` (POSIX lstat st_size). Replacing
-  // that numeric cell with λ before the parent frontier prices the text lets the
-  // redundant measure become a constant column. The inner re-entry is the same
-  // X74 chain, so ΜΗΚΟΣ composes with ΕΝΑΛΛΑΓΗ in either nesting order; admission
-  // is still the strict complete-message, byte-exact gate against the incumbent.
-  try { admit('ΜΗΚΟΣ', mekosEncode(text, enc, best.messageTokens, (t, e) => tagstackX74ChainMeasured(t, e)) as unknown as WideResult); } catch { /* not a candidate */ }
-  try { admit('PROSPHYSIS', prosphysisEncode(text, enc, sharedFrontier) as unknown as WideResult); } catch { /* not a candidate */ }
-  // X90 ΣΥΜΦΥΊΑ generalises PROSPHYSIS from one hardcoded shape (a symlink target that
-  // STARTS with the field before " -> ") to a template FITTED over the record set: any field
-  // pair, either affix direction, and a constant prefix or suffix stated in the contract.
-  // It is admitted AFTER PROSPHYSIS and handed the incumbent's complete-message cost, so it
-  // makes one frontier call and is scored against the number a user would actually get, not
-  // against the gate. Measured where the two overlap and where they do not:
-  //   ls-l-real     PROSPHYSIS's own relation; ΣΥΜΦΥΊΑ fits it without being told about
-  //                 arrows and lands close (see docs/codecs.md §X90 for the number).
-  //   ls-la-usrbin  PROSPHYSIS CANNOT fire: the target ENDS with the link name
-  //                 (/etc/alternatives/python3 vs python3), which is the prefix direction it
-  //                 measures and declines to admit. ΣΥΜΦΥΊΑ's constant-prefix form takes it.
-  try { admit('ΣΥΜΦΥΊΑ', symphyiaEncode(text, enc, best.messageTokens) as unknown as WideResult); } catch { /* not a candidate */ }
+  // X117 — ΣΥΝΘΕΣΙΣ is the single-pass conjunction of the three independent
+  // record entailments (ΕΝΑΛΛΑΓΗ mode radix, ΜΗΚOS measure, ΣΥΜΦΥΊΑ template)
+  // with one fused contract. When it fires it dominates the nested permutations
+  // of the same three rewrites, so the redundant X74 re-entries are skipped.
+  // When it refuses, the X116 candidate order below is preserved unchanged.
+  let synthesisApplied = false;
+  try {
+    const cand = synthesisEncode(text, enc, best.messageTokens, (t, e) => tagstackX74ChainMeasured(t, e));
+    if (cand.applied && cand.decoded === text && cand.messageTokens < best.messageTokens) {
+      admit('ΣΥΝΘΕΣΙΣ', cand as unknown as WideResult);
+      synthesisApplied = true;
+    }
+  } catch { /* not a candidate */ }
+  if (!synthesisApplied) {
+    // X115 — ΕΝΑΛΛΑΓΗ joins as a source-representation candidate. It exchanges
+    // Unix symbolic mode fields for their octal radix rendering BEFORE the parent
+    // frontier prices the text, then declares the inverse in one in-band line.
+    // Admission is the same strict complete-message gate as every X74 candidate.
+    try { admit('ΕΝΑΛΛΑΓΗ', enallageEncode(text, enc, best.messageTokens, (t, e) => tagstackX74ChainMeasured(t, e)) as unknown as WideResult); } catch { /* not a candidate */ }
+    // X116 — ΜΗΚΟΣ joins after ΕΝΑΛΛΑΓΗ. A symlink's printed size is entailed by
+    // the target path already present after ` -> ` (POSIX lstat st_size). Replacing
+    // that numeric cell with λ before the parent frontier prices the text lets the
+    // redundant measure become a constant column. The inner re-entry is the same
+    // X74 chain, so ΜΗΚΟΣ composes with ΕΝΑΛΛΑΓΗ in either nesting order; admission
+    // is still the strict complete-message, byte-exact gate against the incumbent.
+    try { admit('ΜΗΚΟΣ', mekosEncode(text, enc, best.messageTokens, (t, e) => tagstackX74ChainMeasured(t, e)) as unknown as WideResult); } catch { /* not a candidate */ }
+    try { admit('PROSPHYSIS', prosphysisEncode(text, enc, sharedFrontier) as unknown as WideResult); } catch { /* not a candidate */ }
+    // X90 ΣΥΜΦΥΊΑ generalises PROSPHYSIS from one hardcoded shape (a symlink target that
+    // STARTS with the field before " -> ") to a template FITTED over the record set: any field
+    // pair, either affix direction, and a constant prefix or suffix stated in the contract.
+    // It is admitted AFTER PROSPHYSIS and handed the incumbent's complete-message cost, so it
+    // makes one frontier call and is scored against the number a user would actually get, not
+    // against the gate. Measured where the two overlap and where they do not:
+    //   ls-l-real     PROSPHYSIS's own relation; ΣΥΜΦΥΊΑ fits it without being told about
+    //                 arrows and lands close (see docs/codecs.md §X90 for the number).
+    //   ls-la-usrbin  PROSPHYSIS CANNOT fire: the target ENDS with the link name
+    //                 (/etc/alternatives/python3 vs python3), which is the prefix direction it
+    //                 measures and declines to admit. ΣΥΜΦΥΊΑ's constant-prefix form takes it.
+    try { admit('ΣΥΜΦΥΊΑ', symphyiaEncode(text, enc, best.messageTokens) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
   try { admit('STOICHEION', stoicheionEncode(text, enc, sharedFrontier) as unknown as WideResult); } catch { /* not a candidate */ }
 
   /**
