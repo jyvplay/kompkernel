@@ -1,0 +1,22 @@
+{
+  "schema": "kompkernel-x115-enallage-probe-v1",
+  "date": "2026-11-14",
+  "rows": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "incumbent": 1361,
+      "raw": 5194,
+      "rewriteRaw": 4747,
+      "hits": 149,
+      "ownInverse": true,
+      "applied": true,
+      "tokens": 1353,
+      "delta": -8,
+      "exact": true,
+      "parent": "synkrisis",
+      "notes": "149 mode fields exchanged to octal; wire coded by synkrisis; M=1353 < 1361",
+      "ms": 940459.063218,
+      "message": "Body first. ^Tnnnn␠→T+chmod.\nX90. Body first. f11 = f9 + text after ※ (1-based). crc=1e2c57b6\n¶ k=v. expand repeatedly; print only.\n§ლ7ე  რ1ն rootցնն      λց ת\nl077ლერλै-ब28র4ա\nै064রერმանն   क 27 20:त14า.soა.უาათ6ं Jan जე202ि3च libא Aprकतचरजिचुं31रიარകიან9ิ -> ※ள Jun 15 რთ:59ുურდ0งად็ิงय2टजयचल5छ\nd075लეαछयू Aprकतนงաննესजलचן Aprელსరुbrotיადადે Junეთსוางיד -> ※აাუთדלanlखնն     กიงો Aprეलსexpatം Mayक36चMagickપ Janეთरcryptยंतरctfմ May 25रaptॉ 19নუये 21ં Novेजরचעუिदעדთა്ურิดაরণैთ.Q16უთฝ Sepॉटbzयीचcurlैgnutlsาสუთവงანკმ ג8ვაגם Nov 30टfftwिश/x86_64-linuxैgnuხვงറიაयस Marეयე201ლचXdmcpצंबजრचXauम10ো Mayელे:मचcapലვაमन JulॉजलวงתהBrokenLocaleμαख409თளოางิימת15ય Apr 25ე202রचdavრdાת17้12ב Dec 18रcryptsetupუ้නաखյաննებ Dec 29रde265างძանն        גאר Jan तरह23ാ Mar हरfidoयාრ.oιλ60ளைcrtාछिιε11ট OctეिरXεύ Junერსaomണ Feb तरapparmorנดתחา -> /libश/libয়ת16שת18իू libcז May हरdebconfclientક Novेटeditনি Oct 24टffiาვך Mayელरformwপ Sep 18टXextલ Febენरauditָ May ้სbpfള്กმ्नचcurlาดનેeयpনৰ Janეরე202िचevent_coreैयიულসેextयfsনীעათაमתസ്ა้งმിംWandণেं29रbsdางිส็งკौं17रणմ-pkgสุరlicommonేరliencી Sepॉजय libcborางરેcom_errনหย-nobfdטკ14480אפुdrop_ambientસ്ലმ174։\nै075लერննסelfैდა188าลുവת21മาകടןasanาვכ.a¶# source: ls -l /usr/libश (real)\ntotal 167495छরց128ள ImageMagickैთანაεաց496ू Mcrtාන163यू Scrtාαι auditαι bfdैpluginsන176גू crtාන107यू crti.oաց648ू crtn.oμ cryptsetupαλ60 Jun म 00:00 eयfsprogsαց128ள enginesैिछिख819यள gconvන252დू gை gioμ glibैयงμ gprofngන223यू grை krbल։   215000ू ld-linux-x86ै64নμ ldscriptsන179დאהכת42אהחהുკ14640אהുმ616464 Oct 15टLercาנबംCoreণ็น284874রംCoreণיתबി็น120319यിימটারน131840גটสดงמצි14496צสיાसි227बसสיয়পারงკ81568পสดงשौacl്ക230რკ38832ौaclുക230რძלכת33אלחלുטלുמύदდյ563957თύעათว20ണ്ვดკ80600ണമגנ19णงิน206776დणיתहմ-privateาי็მ497904մ-privateוკ34880 Aprेरargonयുয়ട็น819880დടישןatomic്აयงკ30776ןatomicาറว19ौattr്ക250რკ26544ौattrുക250რાલ്יმ128952લากน151444גרbfdैयა40-systemาાંblkidള355328ંblkidുกמ്ָറმ358880ָുറת24്ุവმ137376ุลరlidec്വკ47264రlidecลే്വმ591920ేുവয়েדεალკ84840েაεალמฝു็ดמฝากิดკ74688ฝากดյ545259დիכաց283իา։ე192623यիสת44ի_malloc_debugחc_malloc_debugางკ50200ի_malloc_debugางන509גի_nonsharedכשुcap-ngოკ30704ुcap-ngותतোনד66კ471बোনა66য়ીვ็კ69192ીხמןccრომ126464ןccრוારิიკ18344રიმ269124પכת35પחcryptുાપള206776પുიน473423य Junეთॉ:56चcryptoעתहבדნงმ525488בანว21หომ228184หומยომ220192ยות19नीაि ->ीנहनीดิხმ695736नीดხয়्ิხმ712120्ხાયাთน163020גયสათน184379यं16रdbैलაिาાბิიดმ452776ბიנ25זოკ14376זוმ149384 Octეिटdeflateางმ442696 Octॉटdevmapperമ02იძdlכטdlনת24פოკ14256פות13નדिკ45008નაिાક็ა70მ216640કงა70მ109088רסמרelfു ->चסת26ৰ็იმ219152ৰงიשોસ184ોുലת19ોwસ176ોwുലয়সิดმ438608সดાંfdiskള484640ંfdiskുกמিิറკ43480িറשםदमյ221380גםী22ם_ompदमკ30632ם_ompী26ם_threadsदमკ347बם_threadsী18ാസ219040ാമ้วहुfontconfigസ306112ुfontconfigമ้งמךারკ77200ךสด\n"
+    }
+  ]
+}

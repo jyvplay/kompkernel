@@ -1,0 +1,15 @@
+bench/holdout-x41/ls-real.txt incumbent=430 raw=1034->1021 hits=13 M=1034 Δ=604 exact=true dispatch=null applied=false ms=545 mekos: raw saving 13 below floor 22
+file:///tmp/x15-HrGb/bundle.mjs:31722
+    if (out2 === null) throw new Error("tagstackDecode: X90 body does not satisfy its contract (malformed or corrupt)");
+                             ^
+
+Error: tagstackDecode: X90 body does not satisfy its contract (malformed or corrupt)
+    at tagstackDecode (file:///tmp/x15-HrGb/bundle.mjs:31722:30)
+    at tagstackDecode (file:///tmp/x15-HrGb/bundle.mjs:31712:27)
+    at tagstackDecode (file:///tmp/x15-HrGb/bundle.mjs:31707:24)
+    at file:///tmp/x15-HrGb/bundle.mjs:32263:32
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v22.22.3

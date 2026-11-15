@@ -1,0 +1,24 @@
+18 Body first. ^Tnnnn␠→T+chmod nnnn.
+15 Body first. ^Tnnnn␠→T+chmod.
+18 Body first. ^Tnnnn␠=T+chmod nnnn.
+15 Body first. ^Tnnnn␠=T+chmod.
+18 Body first. ^Tnnnn␠:T+chmod nnnn.
+15 Body first. ^Tnnnn␠:T+chmod.
+16 Body first. ^Tnnnn␠→chmod nnnn.
+13 Body first. ^Tnnnn␠→chmod.
+20 E. Body first. ^Tnnnn␠→T+chmod nnnn.
+17 E. Body first. ^Tnnnn␠→T+chmod.
+20 X. Body first. ^Tnnnn␠→T+chmod nnnn.
+17 X. Body first. ^Tnnnn␠→T+chmod.
+21 Ⓔ. Body first. ^Tnnnn␠→T+chmod nnnn.
+18 Ⓔ. Body first. ^Tnnnn␠→T+chmod.
+18 Body first. ^Tnnnn␠→T+chmod(nnnn).
+16 Body first. ^Tnnnn␠=chmod(nnnn).
+16 Body first. ^Tnnnn␠:chmod(nnnn).
+16 Body first. ^Tnnnn␠→chmod(nnnn).
+18 Body first. ^Tnnnn␠→T+mode nnnn.
+15 Body first. ^Tnnnn␠→T+mode.
+19 Body first. ^Tnnnn␠→T+perms nnnn.
+16 Body first. ^Tnnnn␠→T+perms.
+17 Body first. ^Tnnnn␠→T+nnnn chmod.
+17 Body first. ^Tnnnn␠→T+nnnn mode.

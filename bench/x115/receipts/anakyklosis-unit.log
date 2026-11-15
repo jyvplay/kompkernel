@@ -1,0 +1,30 @@
+✘ [ERROR] Could not resolve "../../src/lib/omega/ergasia"
+
+    bench/x115/anakyklosis-unit.ts:6:27:
+      6 │ import { beginEpoch } from '../../src/lib/omega/ergasia';
+        ╵                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+node:child_process:955
+    throw err;
+    ^
+
+Error: Command failed: /home/user/kompkernel/node_modules/@esbuild/linux-x64/bin/esbuild bench/x115/anakyklosis-unit.ts --bundle --platform=node --format=esm --tsconfig=/home/user/kompkernel/tsconfig.json --log-level=warning --outfile=/tmp/x15-X0nD/bundle.mjs
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at checkExecSyncError (node:child_process:916:11)
+    at Object.execFileSync (node:child_process:952:15)
+    at Object.<anonymous> (/home/user/kompkernel/node_modules/esbuild/bin/esbuild:222:28)
+    at Module._compile (node:internal/modules/cjs/loader:1781:14)
+    at Object..js (node:internal/modules/cjs/loader:1913:10)
+    at Module.load (node:internal/modules/cjs/loader:1505:32)
+    at Function._load (node:internal/modules/cjs/loader:1309:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:254:19) {
+  status: 1,
+  signal: null,
+  output: [ null, null, null ],
+  pid: 6117,
+  stdout: null,
+  stderr: null
+}
+
+Node.js v22.22.3

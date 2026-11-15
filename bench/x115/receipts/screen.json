@@ -1,0 +1,302 @@
+{
+  "schema": "kompkernel-x115-screen-v1",
+  "date": "2026-11-14",
+  "note": "raw screen only; no parent gate",
+  "totals": {
+    "raw": 28015,
+    "mode": 27553,
+    "set": 28011
+  },
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "raw": 60,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "raw": 656,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "raw": 80,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "raw": 76,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "raw": 229,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "raw": 578,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "raw": 570,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "raw": 158,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "raw": 458,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "raw": 1099,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "raw": 787,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": 783,
+      "setHits": 15,
+      "setExact": true
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "raw": 140,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "raw": 629,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "raw": 733,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "raw": 330,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "raw": 675,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "raw": 582,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "raw": 513,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "raw": 1144,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "raw": 1034,
+      "mode": 971,
+      "modeHits": 37,
+      "modeExact": true,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "raw": 1152,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "raw": 1422,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "raw": 1000,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "raw": 1106,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "raw": 1006,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "raw": 811,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "raw": 3054,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "mode": null,
+      "modeHits": 0,
+      "modeExact": false,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "mode": 4795,
+      "modeHits": 149,
+      "modeExact": true,
+      "set": null,
+      "setHits": 0,
+      "setExact": false
+    }
+  ]
+}

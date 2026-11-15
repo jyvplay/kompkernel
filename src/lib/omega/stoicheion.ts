@@ -701,8 +701,13 @@ export function stoicheionPlan(text: string, enc: EncodingName = 'o200k_base'): 
   return best;
 }
 
-export function stoicheionEncode(text: string, enc: EncodingName = 'o200k_base'): StoicheionResult {
-  const frontier: TagstackResult = tagstackEncode(text, enc);
+export function stoicheionEncode(
+  text: string,
+  enc: EncodingName = 'o200k_base',
+  /** X115 ΕΠΙΣΥΝΕΔΡΙΑ: optional already-measured base frontier verdict. */
+  sharedFrontier?: TagstackResult,
+): StoicheionResult {
+  const frontier: TagstackResult = sharedFrontier ?? tagstackEncode(text, enc);
   const refuse = (notes: string): StoicheionResult => ({
     codec: 'stoicheion',
     wire: frontier.message,

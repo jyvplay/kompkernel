@@ -1,0 +1,1 @@
+{"path":"bench/holdout-x41/ls-real.txt","incumbent":430,"raw":1034,"rewriteRaw":1021,"hits":13,"ownInverse":true,"applied":false,"tokens":1034,"delta":604,"exact":true,"dispatchExact":null,"parent":"identity","key":"λ=#bytes after ->.","notes":"mekos: raw saving 13 below floor 22","ms":545.1874339999999,"message":null}

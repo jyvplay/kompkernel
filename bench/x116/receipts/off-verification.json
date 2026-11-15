@@ -1,0 +1,154 @@
+{
+  "schema": "kompkernel-x116-off-verification-v1",
+  "date": "2026-11-14",
+  "lanes": 29,
+  "identical": 29,
+  "allIdentical": true,
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "identical": true,
+      "tokens": 60
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "identical": true,
+      "tokens": 620
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "identical": true,
+      "tokens": 80
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "identical": true,
+      "tokens": 76
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "identical": true,
+      "tokens": 147
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "identical": true,
+      "tokens": 414
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "identical": true,
+      "tokens": 162
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "identical": true,
+      "tokens": 124
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "identical": true,
+      "tokens": 268
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "identical": true,
+      "tokens": 859
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "identical": true,
+      "tokens": 437
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "identical": true,
+      "tokens": 106
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "identical": true,
+      "tokens": 486
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "identical": true,
+      "tokens": 670
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "identical": true,
+      "tokens": 172
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "identical": true,
+      "tokens": 230
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "identical": true,
+      "tokens": 120
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "identical": true,
+      "tokens": 101
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "identical": true,
+      "tokens": 308
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "identical": true,
+      "tokens": 430
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "identical": true,
+      "tokens": 669
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "identical": true,
+      "tokens": 957
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "identical": true,
+      "tokens": 666
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "identical": true,
+      "tokens": 390
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "identical": true,
+      "tokens": 314
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "identical": true,
+      "tokens": 200
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "identical": true,
+      "tokens": 1029
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "identical": true,
+      "tokens": 834
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "identical": true,
+      "tokens": 1352
+    }
+  ]
+}

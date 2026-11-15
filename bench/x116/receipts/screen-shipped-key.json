@@ -1,0 +1,200 @@
+{
+  "schema": "kompkernel-x116-screen-shipped-key-v1",
+  "key": "λ=#bytes after ->.",
+  "keyTokens": 6,
+  "totals": {
+    "base": 28015,
+    "after": 27398,
+    "delta": -617
+  },
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "raw": 60,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "raw": 656,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "raw": 80,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "raw": 76,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "raw": 229,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "raw": 578,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "raw": 570,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "raw": 158,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "raw": 458,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "raw": 1099,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "raw": 787,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "raw": 140,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "raw": 629,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "raw": 733,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "raw": 330,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "raw": 675,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "raw": 582,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "raw": 513,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "raw": 1144,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "raw": 1034,
+      "octRaw": 923,
+      "best": {
+        "tokens": 916,
+        "delta": -118,
+        "hits": 13,
+        "exact": true,
+        "key": "λ=#bytes after ->.",
+        "keyTokens": 6
+      }
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "raw": 1152,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "raw": 1422,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "raw": 1000,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "raw": 1106,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "raw": 1006,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "raw": 811,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "raw": 3054,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "octRaw": null,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "octRaw": 4747,
+      "best": {
+        "tokens": 4695,
+        "delta": -499,
+        "hits": 58,
+        "exact": true,
+        "key": "λ=#bytes after ->.",
+        "keyTokens": 6
+      }
+    }
+  ]
+}

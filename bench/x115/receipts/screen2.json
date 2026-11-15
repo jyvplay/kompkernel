@@ -1,0 +1,152 @@
+{
+  "schema": "kompkernel-x115-screen2-v1",
+  "note": "residual glyph-pair nonterminal screen on baseline messages; no encoder calls",
+  "totals": {
+    "base": 8552,
+    "best": 8552,
+    "delta": 0,
+    "wins": 0
+  },
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 60,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 620,
+      "pairs": 12,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 80,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 76,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 147,
+      "pairs": 2,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 414,
+      "pairs": 12,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 162,
+      "pairs": 5,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 124,
+      "pairs": 4,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 268,
+      "pairs": 6,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 859,
+      "pairs": 12,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 437,
+      "pairs": 10,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 106,
+      "pairs": 4,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 486,
+      "pairs": 9,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 670,
+      "pairs": 12,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 172,
+      "pairs": 4,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 230,
+      "pairs": 12,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 120,
+      "pairs": 4,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 101,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 308,
+      "pairs": 12,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 430,
+      "pairs": 12,
+      "best": null
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 669,
+      "pairs": 12,
+      "best": null
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 957,
+      "pairs": 12,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "tokens": 666,
+      "pairs": 12,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 390,
+      "pairs": 12,
+      "best": null
+    }
+  ]
+}

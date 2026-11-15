@@ -1,0 +1,31 @@
+import { countTokens } from '../../src/lib/omega/bpe';
+const enc = 'o200k_base' as const;
+const keys = [
+  'X115. Body first. ^Tnnnn␠→T+chmod nnnn. Print only.',
+  'X115. Body first. ^Tnnnn␠→T+chmod nnnn.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn chmod.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn chmod. Print only.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn mode.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn mode. Print only.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn symbolic.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn symbolic. Print only.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn expand.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn expand. Print only.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn rwx.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn rwx. Print only.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn octal.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn octal. Print only.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn ls.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn ls. Print only.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn stat.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn stat. Print only.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn unix.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn unix. Print only.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn perm.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn perm. Print only.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn perms.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn perms. Print only.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn decode.',
+  'X115. Body first. ^Tnnnn␠→T+nnnn decode. Print only.',
+];
+for (const k of keys) console.log(countTokens(k, enc), k);

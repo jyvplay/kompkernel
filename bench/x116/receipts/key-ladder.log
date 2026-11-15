@@ -1,0 +1,20 @@
+6 λ=bytes after ->.
+7 λ=UTF8 bytes after ->.
+7 λ=byte length after ->.
+4 λ=len(target).
+5 λ=bytes(target).
+6 λ is bytes after ->.
+8 λ is the byte length after ->.
+7 λ=size of target after ->.
+6 λ=bytes after arrow.
+7 λ=bytes after " -> ".
+9 Body first. λ=bytes after ->.
+9 λ=bytes after ->. Body first.
+8 Replace λ with byte count after ->.
+7 λ→byte count after ->.
+6 λ→bytes after ->.
+7 λ=bytes(target after ->).
+5 λ=strlen(target).
+7 λ=octets after ->.
+6 λ=octets(target).
+5 λ=len(after ->).

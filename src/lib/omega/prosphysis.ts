@@ -235,8 +235,15 @@ export function prosphysisDecode(message: string): string {
  */
 const ADMITTED: Array<'suffix' | 'prefix'> = ['suffix'];
 
-export function prosphysisEncode(text: string, enc: EncodingName = 'o200k_base'): ProsphysisResult {
-  const frontier: TagstackResult = tagstackFrontier(text, enc);
+export function prosphysisEncode(
+  text: string,
+  enc: EncodingName = 'o200k_base',
+  /** X115 ΕΠΙΣΥΝΕΔΡΙΑ: the chain may hand us the base frontier verdict it already
+   *  measured on this exact source. Using it is pure common-subexpression reuse:
+   *  the candidate body is still independently frontier-encoded and decoded. */
+  sharedFrontier?: TagstackResult,
+): ProsphysisResult {
+  const frontier: TagstackResult = sharedFrontier ?? tagstackFrontier(text, enc);
   const refuse = (notes: string): ProsphysisResult => ({
     codec: 'prosphysis',
     wire: frontier.message,

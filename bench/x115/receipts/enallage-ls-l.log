@@ -1,0 +1,1 @@
+bench/holdout-x41/ls-l-real.txt incumbent=1361 raw=5194->4747 hits=149 M=1452 Δ=91 exact=false applied=false ms=296557 enallage loses: 1488 vs 1361 (synkrisis)

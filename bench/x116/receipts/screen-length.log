@@ -1,0 +1,30 @@
+lsblk.txt              raw=60 oct=- best=none
+kb-article.txt         raw=656 oct=- best=none
+uptime-w.txt           raw=80 oct=- best=none
+free-m.txt             raw=76 oct=- best=none
+vmstat.txt             raw=229 oct=- best=none
+unified-diff.patch     raw=578 oct=- best=none
+df-h.txt               raw=570 oct=- best=none
+df-real.txt            raw=158 oct=- best=none
+du-real.txt            raw=458 oct=- best=none
+node-help.txt          raw=1099 oct=- best=none
+findmnt.txt            raw=787 oct=- best=none
+df-h.txt               raw=140 oct=- best=none
+email-thread.txt       raw=629 oct=- best=none
+llm-answer.md          raw=733 oct=- best=none
+markdown-table.md      raw=330 oct=- best=none
+psql-output.txt        raw=675 oct=- best=none
+prices.csv             raw=582 oct=- best=none
+cue-sheet.md           raw=513 oct=- best=none
+ps-ef.txt              raw=1144 oct=- best=none
+ls-real.txt            raw=1034 oct=923 best=914 (-120) hits=13 key=4 λ=len(target).
+json-pkg.txt           raw=1152 oct=- best=none
+code-ts.txt            raw=1422 oct=- best=none
+dpkg-l.txt             raw=1000 oct=- best=none
+ps-real.txt            raw=1106 oct=- best=none
+kubectl-get-pods.txt   raw=1006 oct=- best=none
+metrics.tsv            raw=811 oct=- best=none
+ps-aux-real.txt        raw=3054 oct=- best=none
+apt-real.txt           raw=2739 oct=- best=none
+ls-l-real.txt          raw=5194 oct=4747 best=4693 (-501) hits=58 key=4 λ=len(target).
+TOTAL raw 28015 best 27394 delta -621

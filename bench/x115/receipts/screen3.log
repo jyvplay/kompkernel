@@ -1,0 +1,20 @@
+kb-article.txt         620 -> 620 Δ=0 applied=false rounds=1 steps=0 ms=1156
+vmstat.txt             147 -> 147 Δ=0 applied=false rounds=1 steps=0 ms=53
+unified-diff.patch     414 -> 414 Δ=0 applied=false rounds=1 steps=0 ms=363
+df-h.txt               162 -> 162 Δ=0 applied=false rounds=1 steps=0 ms=76
+df-real.txt            124 -> 124 Δ=0 applied=false rounds=1 steps=0 ms=80
+du-real.txt            268 -> 268 Δ=0 applied=false rounds=1 steps=0 ms=183
+findmnt.txt            437 -> 437 Δ=0 applied=false rounds=1 steps=0 ms=385
+df-h.txt               106 -> 106 Δ=0 applied=false rounds=1 steps=0 ms=42
+email-thread.txt       486 -> 486 Δ=0 applied=false rounds=1 steps=0 ms=481
+llm-answer.md          670 -> 670 Δ=0 applied=false rounds=1 steps=0 ms=575
+markdown-table.md      172 -> 172 Δ=0 applied=false rounds=1 steps=0 ms=55
+psql-output.txt        230 -> 230 Δ=0 applied=false rounds=1 steps=0 ms=195
+prices.csv             120 -> 120 Δ=0 applied=false rounds=1 steps=0 ms=36
+ps-ef.txt              308 -> 308 Δ=0 applied=false rounds=1 steps=0 ms=217
+ls-real.txt            430 -> 430 Δ=0 applied=false rounds=1 steps=0 ms=367
+json-pkg.txt           669 -> 669 Δ=0 applied=false rounds=1 steps=0 ms=899
+dpkg-l.txt             666 -> 665 Δ=-1 applied=true rounds=2 steps=1 ms=1790
+ps-real.txt            390 -> 390 Δ=0 applied=false rounds=1 steps=0 ms=220
+kubectl-get-pods.txt   314 -> 314 Δ=0 applied=false rounds=1 steps=0 ms=95
+TOTAL 8866 -> 8865 Δ=-1

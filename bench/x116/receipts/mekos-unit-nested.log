@@ -1,0 +1,15 @@
+PASS ASCII symlink size is target byte length
+PASS UTF-8 byte length, not code-point length
+PASS wrong size is not rewritten
+PASS non-symlink lines untouched
+PASS ambiguity guard refuses pre-existing mark
+PASS no final newline preserved
+PASS composes with ENALLAGE octal modes
+  key 6 tok: λ=#bytes after ->.
+  key 6 tok: λ=bytes after ->.
+  key 4 tok: λ=len(target).
+  key 7 tok: λ=UTF8 bytes after ->.
+PASS contract token ladder
+PASS tagstackDecode dispatches ΜΗΚΟΣ key after parent
+PASS tagstackDecode peels nested ΜΗΚΟΣ/ΕΝΑΛΛΑΓΗ in either order
+10 passed

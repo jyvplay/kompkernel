@@ -1,0 +1,2 @@
+bench/holdout-x41/ls-real.txt incumbent=430 raw=1034->1021 hits=13 M=1034 Δ=604 exact=true dispatch=null applied=false ms=347 mekos: raw saving 13 below floor 22
+bench/holdout-x41/ls-l-real.txt incumbent=1352 raw=5194->5136 hits=58 M=1348 Δ=-4 exact=true dispatch=null applied=true ms=1112128 58 symlink size fields entailed by target length; wire coded by synkrisis; M=1348 < 1352

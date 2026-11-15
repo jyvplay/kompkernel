@@ -43,7 +43,9 @@ import { proagogeDisabled, proagogeEncode } from './proagoge';
 import { CHIRON_START, chironDecode } from './chiron';
 import { perikopiDisabled, perikopiRewrite } from './perikopi';
 import { tachygrafiaDisabled, tachygrafiaRewrite } from './tachygrafia';
-import { synedriaScope } from './synedria';
+import { synedriaChainScope, synedriaChainDisabled } from './synedria';
+import { enallageEncode, enallageExpand, ENALLAGE_KEY } from './enallage';
+import { mekosEncode, mekosExpand, MEKOS_KEY } from './mekos';
 
 export type TagstackMode = 'xml' | 'html';
 export type TagstackFrontierParent = 'synkrisis' | 'bifront' | 'kanon' | 'akolouthia2' | 'apographe' | 'metron' | 'hemera' | 'diastema';
@@ -319,6 +321,20 @@ export function tagstackTransform(text: string, enc: EncodingName = 'o200k_base'
  *               own reader).
  */
 export function tagstackDecode(message: string, parentDecoder?: (wire: string) => string): string {
+  // X116 ΜΗΚΟΣ / X115 ΕΝΑΛΛΑΓΗ. These two source-relative keys can nest in either
+  // order because each re-enters the X74 chain on its rewritten body. Peel the
+  // outermost declared key, recursively decode the body (which may carry the other
+  // key or a frontier contract), then apply this layer's inverse last.
+  if (message.startsWith(MEKOS_KEY + '\n')) {
+    const nl = message.indexOf('\n');
+    const body = nl < 0 ? '' : message.slice(nl + 1);
+    return mekosExpand(tagstackDecode(body, parentDecoder));
+  }
+  if (message.startsWith(ENALLAGE_KEY + '\n')) {
+    const nl = message.indexOf('\n');
+    const body = nl < 0 ? '' : message.slice(nl + 1);
+    return enallageExpand(tagstackDecode(body, parentDecoder));
+  }
   // X90 ΣΥΜΦΥΊΑ. Its contract is the first line and is SELF-DESCIBING: the rules, the marker
   // and the CRC are all parsed back out of that line, because this function is given the
   // message and nothing else. Order matters and the contract says so (`Body first.`): the
@@ -360,10 +376,11 @@ export function tagstackRestore(parentDecoded: string, mode: TagstackMode, marke
  * than silently weakening the gate to SYNKRISIS alone.
  */
 function tagstackEncodeInner(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
-  // X114 SYNEDRIA: one council per frontier measurement. Parents may share
-  // exact fresh-epoch sub-encodes (APOGRAPHE / OURA) with meter replay; the
-  // council is discarded on return, so nothing is retained across documents.
-  return synedriaScope(() => tagstackEncodeInnerMeasured(text, enc));
+  // X114 SYNEDRIA: one council per frontier measurement. X115: when a chain-wide
+  // council is already open, join it instead of opening an independent one, so
+  // the X74 candidates' re-entries on the same source replay the same exact
+  // fresh-epoch sub-encodes. With OMEGA_SYNEDRIA_CHAIN=0 this is X114 exactly.
+  return synedriaChainScope(() => tagstackEncodeInnerMeasured(text, enc));
 }
 
 function tagstackEncodeInnerMeasured(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
@@ -600,6 +617,13 @@ export function tagstackEncodeUncached(text: string, enc: EncodingName = 'o200k_
 }
 
 export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
+  // X115 EPISYNEDRIA: one council spans the base frontier AND the X74 candidate
+  // re-entries. Disabled => no outer scope, and the inner scope is X114's.
+  if (synedriaChainDisabled()) return tagstackX74ChainMeasured(text, enc);
+  return synedriaChainScope(() => tagstackX74ChainMeasured(text, enc));
+}
+
+function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
   const base = tagstackEncodeInner(text, enc);
   /**
    * X73 — STICHOMYTHIA joins the frontier as a CANDIDATE, not as a rewrite.
@@ -719,7 +743,25 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
       notes: `${name} ${cand.notes}; ${best.notes}`,
     };
   };
-  try { admit('PROSPHYSIS', prosphysisEncode(text, enc) as unknown as WideResult); } catch { /* not a candidate */ }
+  // X115 ΕΠΙΣΥΝΕΔΡΙΑ: the base frontier verdict is a shared premise of the
+  // source-relative candidates. PROSPHYSIS and STOICHEION used to re-measure
+  // tagstackFrontier(text) even though this chain had just computed `base` on
+  // the same bytes. Handing them the verdict removes that duplicate council
+  // work without touching their rewritten-body encodes or exactness gates.
+  const sharedFrontier = synedriaChainDisabled() ? undefined : base;
+  // X115 — ΕΝΑΛΛΑΓΗ joins as a source-representation candidate. It exchanges
+  // Unix symbolic mode fields for their octal radix rendering BEFORE the parent
+  // frontier prices the text, then declares the inverse in one in-band line.
+  // Admission is the same strict complete-message gate as every X74 candidate.
+  try { admit('ΕΝΑΛΛΑΓΗ', enallageEncode(text, enc, best.messageTokens, (t, e) => tagstackX74ChainMeasured(t, e)) as unknown as WideResult); } catch { /* not a candidate */ }
+  // X116 — ΜΗΚΟΣ joins after ΕΝΑΛΛΑΓΗ. A symlink's printed size is entailed by
+  // the target path already present after ` -> ` (POSIX lstat st_size). Replacing
+  // that numeric cell with λ before the parent frontier prices the text lets the
+  // redundant measure become a constant column. The inner re-entry is the same
+  // X74 chain, so ΜΗΚΟΣ composes with ΕΝΑΛΛΑΓΗ in either nesting order; admission
+  // is still the strict complete-message, byte-exact gate against the incumbent.
+  try { admit('ΜΗΚΟΣ', mekosEncode(text, enc, best.messageTokens, (t, e) => tagstackX74ChainMeasured(t, e)) as unknown as WideResult); } catch { /* not a candidate */ }
+  try { admit('PROSPHYSIS', prosphysisEncode(text, enc, sharedFrontier) as unknown as WideResult); } catch { /* not a candidate */ }
   // X90 ΣΥΜΦΥΊΑ generalises PROSPHYSIS from one hardcoded shape (a symlink target that
   // STARTS with the field before " -> ") to a template FITTED over the record set: any field
   // pair, either affix direction, and a constant prefix or suffix stated in the contract.
@@ -732,7 +774,7 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
   //                 (/etc/alternatives/python3 vs python3), which is the prefix direction it
   //                 measures and declines to admit. ΣΥΜΦΥΊΑ's constant-prefix form takes it.
   try { admit('ΣΥΜΦΥΊΑ', symphyiaEncode(text, enc, best.messageTokens) as unknown as WideResult); } catch { /* not a candidate */ }
-  try { admit('STOICHEION', stoicheionEncode(text, enc) as unknown as WideResult); } catch { /* not a candidate */ }
+  try { admit('STOICHEION', stoicheionEncode(text, enc, sharedFrontier) as unknown as WideResult); } catch { /* not a candidate */ }
 
   /**
    * X96 — ἸΣΟΜΟΡΦΊΑ is the last candidate and the only one that never touches the
@@ -966,6 +1008,7 @@ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base')
       }
     } catch { /* not a candidate */ }
   }
+
   return best;
 }
 

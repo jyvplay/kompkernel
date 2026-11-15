@@ -1,0 +1,33 @@
+24 X115. Body first. ^Tnnnn␠→T+chmod nnnn. Print only.
+22 X115. Body first. ^Tnnnn␠→chmod nnnn. Print only.
+22 X115. Body first. ^Tnnnn␠→T+nnnn. Print only.
+22 X115. Body first. ^Tnnnn␠→ls nnnn. Print only.
+22 X115. Body first. ^Tnnnn␠→mode nnnn. Print only.
+22 X115. Body first. ^Tnnnn␠→perm nnnn. Print only.
+22 X115. Body first. ^Tnnnn␠→unix nnnn. Print only.
+22 X115. Body first. ^Tnnnn␠→stat nnnn. Print only.
+22 X115. Body first. ^Tnnnn␠→mode(nnnn). Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn mode. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn perms. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn unix. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn stat. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn ls. Print only.
+24 X115. Body first. ^Tnnnn␠→T+nnnn rwx. Print only.
+24 X115. Body first. ^Tnnnn␠→T+nnnn octal. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn symbolic. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn expanded. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn expand. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn decode. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn chmod. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn mode. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn perm. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn unix. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn stat. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn ls. Print only.
+24 X115. Body first. ^Tnnnn␠→T+nnnn rwx. Print only.
+24 X115. Body first. ^Tnnnn␠→T+nnnn octal. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn symbolic. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn expanded. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn expand. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn decode. Print only.
+23 X115. Body first. ^Tnnnn␠→T+nnnn chmod. Print only.

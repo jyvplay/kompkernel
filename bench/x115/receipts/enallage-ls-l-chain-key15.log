@@ -1,0 +1,1 @@
+bench/holdout-x41/ls-l-real.txt incumbent=1361 raw=5194->4747 hits=149 M=1353 Δ=-8 exact=true applied=true ms=940459 149 mode fields exchanged to octal; wire coded by synkrisis; M=1353 < 1361

@@ -1,0 +1,1 @@
+{"path":"bench/holdout-x41/ls-real.txt","incumbent":430,"raw":1034,"rewriteRaw":923,"hits":37,"ownInverse":true,"applied":false,"tokens":422,"delta":-8,"exact":false,"parent":"synkrisis","notes":"enallage loses: 443 vs 430 (synkrisis)","ms":19449.858876000002,"message":null}
