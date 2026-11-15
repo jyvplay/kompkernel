@@ -1,0 +1,28 @@
+{
+  "schema": "kompkernel-x120-tail-algebra-v1",
+  "boundaryCases": 420,
+  "boundaryBad": 0,
+  "tailCases": 104976,
+  "tailBad": 0,
+  "tailNull": 0,
+  "rows": [
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 431,
+      "exact": true,
+      "ms": 12922.192721000001,
+      "size": 56293,
+      "hits": 227978,
+      "misses": 56293
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 620,
+      "exact": true,
+      "ms": 4566.797774999999,
+      "size": 61478,
+      "hits": 240278,
+      "misses": 61478
+    }
+  ]
+}

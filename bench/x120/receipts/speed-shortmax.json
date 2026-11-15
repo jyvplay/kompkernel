@@ -1,0 +1,75 @@
+{
+  "schema": "kompkernel-x120-speed-shortmax-v1",
+  "lanes": 2,
+  "offWall": 26954.297038999997,
+  "onWall": 25909.398444,
+  "offCpu": 29873.585,
+  "onCpu": 27579.152000000002,
+  "wallSpeedup": 1.0403289407609528,
+  "cpuSpeedup": 1.0831944724043725,
+  "shaDiffering": 0,
+  "rows": [
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "off": {
+        "on": false,
+        "tokens": 432,
+        "exact": true,
+        "sha": "5e460b8ef0bd9989fd4b7e996d525b5d649a4b6d7a1a155045baa8d52294107e",
+        "wallMs": 14839.22986,
+        "cpuMs": 17275.843,
+        "hits": 0,
+        "tries": 0,
+        "shortMax": 24,
+        "longMisses": 285164,
+        "longHits": 31704
+      },
+      "on": {
+        "on": true,
+        "tokens": 432,
+        "exact": true,
+        "sha": "5e460b8ef0bd9989fd4b7e996d525b5d649a4b6d7a1a155045baa8d52294107e",
+        "wallMs": 12269.027721,
+        "cpuMs": 13178.392,
+        "hits": 0,
+        "tries": 0,
+        "shortMax": 48,
+        "longMisses": 18103,
+        "longHits": 10503
+      },
+      "same": true,
+      "speedup": 1.2094870268000757
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "off": {
+        "on": false,
+        "tokens": 852,
+        "exact": true,
+        "sha": "1e879d5d45280036a74495f1097dcc0985c04d08316c3c9999bd19e8f9634092",
+        "wallMs": 12115.067178999998,
+        "cpuMs": 12597.742,
+        "hits": 0,
+        "tries": 0,
+        "shortMax": 24,
+        "longMisses": 322995,
+        "longHits": 13278
+      },
+      "on": {
+        "on": true,
+        "tokens": 852,
+        "exact": true,
+        "sha": "1e879d5d45280036a74495f1097dcc0985c04d08316c3c9999bd19e8f9634092",
+        "wallMs": 13640.370722999996,
+        "cpuMs": 14400.76,
+        "hits": 0,
+        "tries": 0,
+        "shortMax": 48,
+        "longMisses": 15508,
+        "longHits": 4825
+      },
+      "same": true,
+      "speedup": 0.888177266221359
+    }
+  ]
+}

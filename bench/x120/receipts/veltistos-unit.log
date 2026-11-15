@@ -1,0 +1,18 @@
+PASS disabled switch refuses without touching the wire
+PASS no CHIRON frame is a refusal, not a crash
+PASS a tape whose first letter is not a known script is refused
+PASS a key letter that reaches the payload through a LIST item is refused
+PASS body re-spelling keeps the contract and the expansion byte-exact and is strictly cheaper
+PASS a rule made dead by re-spelling is retired, a reachable one is not
+PASS a list rule feeding a repeat template survives pruning and is never a body edge
+PASS a repeat rule has a string value and may be used as an edge
+PASS the tape stage never introduces a forward reference
+PASS the tape stage can shorten a later rule using an earlier one
+PASS deterministic: the same input gives the same message twice
+PASS monotone and idempotent at its own fixed point
+PASS the edge counter never exceeds the declared cap
+PASS a malformed ladder override falls back to the shipped ladder
+PASS a one-rung additive ladder is admissible but never better than the full ladder
+PASS an empty tape and a tape with no usable value are refusals
+
+VELTISTOS unit 16/16 PASS

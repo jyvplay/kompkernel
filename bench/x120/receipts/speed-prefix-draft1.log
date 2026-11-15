@@ -1,0 +1,7 @@
+kb-article.txt         off=6220ms/620tok on=4775ms/620tok same=true x=1.303 hits=911 misses=undefined
+node-help.txt          off=13449ms/852tok on=14151ms/852tok same=true x=0.950 hits=2860 misses=undefined
+json-pkg.txt           off=22289ms/659tok on=19087ms/659tok same=true x=1.168 hits=1932 misses=undefined
+dpkg-l.txt             off=24982ms/657tok on=27706ms/657tok same=true x=0.902 hits=789 misses=undefined
+ps-real.txt            off=19891ms/381tok on=16937ms/381tok same=true x=1.174 hits=4 misses=undefined
+findmnt.txt            off=11326ms/432tok on=12665ms/432tok same=true x=0.894 hits=7494 misses=undefined
+TOTAL off=98157ms on=95321ms x=1.0298 shaDiffering=0

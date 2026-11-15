@@ -1,0 +1,30 @@
+lsblk.txt              M=60 SKIP no frame
+kb-article.txt         M=620 -> 620 Δ=0 stages=- induced=0 rules=27->27 edges=19724 ms=194
+uptime-w.txt           M=80 SKIP no frame
+free-m.txt             M=76 SKIP no frame
+vmstat.txt             M=147 -> 147 Δ=0 stages=- induced=0 rules=12->12 edges=7384 ms=81
+unified-diff.patch     M=414 -> 411 Δ=-3 stages=body+tape induced=0 rules=33->33 edges=13597 ms=137
+df-h.txt               M=162 -> 159 Δ=-3 stages=tape induced=0 rules=16->16 edges=10195 ms=91
+df-real.txt            M=124 -> 124 Δ=0 stages=- induced=0 rules=13->13 edges=4766 ms=38
+du-real.txt            M=268 -> 266 Δ=-2 stages=body induced=0 rules=23->23 edges=13676 ms=110
+node-help.txt          M=857 -> 854 Δ=-3 stages=body induced=0 rules=42->42 edges=66527 ms=495
+findmnt.txt            M=435 -> 435 Δ=0 stages=- induced=0 rules=34->34 edges=69196 ms=531
+df-h.txt               M=106 -> 106 Δ=0 stages=- induced=0 rules=13->13 edges=4537 ms=37
+email-thread.txt       M=486 -> 486 Δ=0 stages=- induced=0 rules=39->39 edges=22533 ms=177
+llm-answer.md          M=668 -> 667 Δ=-1 stages=body induced=0 rules=34->34 edges=25580 ms=205
+markdown-table.md      M=172 -> 172 Δ=0 stages=- induced=0 rules=12->12 edges=5556 ms=57
+psql-output.txt        M=230 -> 230 Δ=0 stages=- induced=0 rules=20->20 edges=11259 ms=85
+prices.csv             M=120 -> 119 Δ=-1 stages=body induced=0 rules=9->9 edges=5584 ms=40
+cue-sheet.md           M=101 SKIP no frame
+ps-ef.txt              M=308 -> 299 Δ=-9 stages=body induced=0 rules=28->28 edges=41198 ms=293
+ls-real.txt            M=429 -> 425 Δ=-4 stages=body+tape induced=0 rules=47->47 edges=36889 ms=348
+json-pkg.txt           M=667 -> 659 Δ=-8 stages=body+tape induced=0 rules=48->48 edges=32331 ms=262
+code-ts.txt            M=957 -> 956 Δ=-1 stages=body induced=0 rules=75->75 edges=62718 ms=525
+dpkg-l.txt             M=662 -> 658 Δ=-4 stages=body induced=0 rules=46->46 edges=75525 ms=591
+ps-real.txt            M=390 -> 381 Δ=-9 stages=body induced=0 rules=30->30 edges=24349 ms=251
+kubectl-get-pods.txt   M=314 -> 311 Δ=-3 stages=tape induced=0 rules=24->24 edges=18111 ms=153
+metrics.tsv            M=200 -> 198 Δ=-2 stages=body induced=0 rules=18->18 edges=11721 ms=112
+ps-aux-real.txt        M=1024 -> 1008 Δ=-16 stages=body+tape induced=0 rules=79->79 edges=137805 ms=1171
+apt-real.txt           M=833 -> 823 Δ=-10 stages=body induced=0 rules=63->63 edges=67978 ms=543
+ls-l-real.txt          M=1340 -> 1325 Δ=-15 stages=body+tape induced=0 rules=119->119 edges=95288 ms=963
+TOTAL 12250 -> 12156 Δ=-94 wins=17/29

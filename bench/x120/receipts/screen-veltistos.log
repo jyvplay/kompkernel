@@ -1,0 +1,30 @@
+lsblk.txt              M=60 SKIP no frame
+kb-article.txt         M=620 -> 620 Δ=0 via=parent rules=27 model=true edges=7938 ms=66
+uptime-w.txt           M=80 SKIP no frame
+free-m.txt             M=76 SKIP no frame
+vmstat.txt             M=147 -> 147 Δ=0 via=parent rules=12 model=true edges=2414 ms=26
+unified-diff.patch     M=414 -> 412 Δ=-2 via=dp rules=33 model=true edges=4923 ms=34
+df-h.txt               M=162 -> 162 Δ=0 via=parent rules=16 model=true edges=3359 ms=34
+df-real.txt            M=124 -> 124 Δ=0 via=parent rules=13 model=true edges=1598 ms=11
+du-real.txt            M=268 -> 266 Δ=-2 via=dp rules=23 model=true edges=4694 ms=33
+node-help.txt          M=857 -> 857 Δ=0 via=parent rules=42 model=true edges=25275 ms=134
+findmnt.txt            M=435 -> 435 Δ=0 via=parent rules=34 model=true edges=24685 ms=186
+df-h.txt               M=106 -> 106 Δ=0 via=parent rules=13 model=true edges=1502 ms=2
+email-thread.txt       M=486 -> 486 Δ=0 via=parent rules=39 model=true edges=7977 ms=52
+llm-answer.md          M=668 -> 668 Δ=0 via=parent rules=34 model=true edges=9276 ms=61
+markdown-table.md      M=172 -> 172 Δ=0 via=parent rules=12 model=true edges=2052 ms=15
+psql-output.txt        M=230 -> 230 Δ=0 via=parent rules=20 model=true edges=3860 ms=16
+prices.csv             M=120 -> 120 Δ=0 via=parent rules=9 model=true edges=1901 ms=9
+cue-sheet.md           M=101 SKIP no frame
+ps-ef.txt              M=308 -> 299 Δ=-9 via=dp rules=28 model=true edges=14180 ms=84
+ls-real.txt            M=429 -> 428 Δ=-1 via=dp rules=47 model=true edges=12594 ms=70
+json-pkg.txt           M=667 -> 660 Δ=-7 via=dp rules=48 model=true edges=11486 ms=75
+code-ts.txt            M=957 -> 957 Δ=0 via=parent rules=75 model=true edges=21961 ms=159
+dpkg-l.txt             M=662 -> 661 Δ=-1 via=dp rules=46 model=true edges=26613 ms=181
+ps-real.txt            M=390 -> 381 Δ=-9 via=dp rules=30 model=true edges=8603 ms=73
+kubectl-get-pods.txt   M=314 -> 314 Δ=0 via=parent rules=24 model=true edges=6113 ms=38
+metrics.tsv            M=200 -> 198 Δ=-2 via=dp rules=18 model=true edges=3762 ms=23
+ps-aux-real.txt        M=1024 -> 1007 Δ=-17 via=dp rules=79 model=true edges=47009 ms=298
+apt-real.txt           M=833 -> 822 Δ=-11 via=dp rules=63 model=true edges=22863 ms=178
+ls-l-real.txt          M=1340 -> 1331 Δ=-9 via=dp rules=119 model=true edges=31704 ms=286
+TOTAL 12250 -> 12180 Δ=-70 wins=11/29
