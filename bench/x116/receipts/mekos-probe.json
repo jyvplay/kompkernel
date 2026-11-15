@@ -1,0 +1,42 @@
+{
+  "schema": "kompkernel-x116-mekos-probe-v1",
+  "date": "2026-11-14",
+  "rows": [
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "incumbent": 430,
+      "raw": 1034,
+      "rewriteRaw": 1021,
+      "hits": 13,
+      "ownInverse": true,
+      "applied": false,
+      "tokens": 1034,
+      "delta": 604,
+      "exact": true,
+      "dispatchExact": null,
+      "parent": "identity",
+      "key": "λ=#bytes after ->.",
+      "notes": "mekos: raw saving 13 below floor 22",
+      "ms": 347.45350599999995,
+      "message": null
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "incumbent": 1352,
+      "raw": 5194,
+      "rewriteRaw": 5136,
+      "hits": 58,
+      "ownInverse": true,
+      "applied": true,
+      "tokens": 1348,
+      "delta": -4,
+      "exact": true,
+      "dispatchExact": null,
+      "parent": "synkrisis",
+      "key": "λ=#bytes after ->.",
+      "notes": "58 symlink size fields entailed by target length; wire coded by synkrisis; M=1348 < 1352",
+      "ms": 1112127.817736,
+      "message": "λ=#bytes after ->.\nBody first. ^Tnnnn␠→T+chmod.\nX90. Body first. f11 = f9 + text after ※ (1-based). crc=25b707b9\n¶k=v expand repeatedly and 4 digits become dd:dd, ^ marks those digits so drop it; print only.\n§е.0ы  ны1я root rootи\nl0777ня       λьеик\n-0644нія       60скямсы ҩ Marы2ы2017 libXdmcpјеех.so.ПBrokenLocaleах1Ь Jan їы202єї3 libРЬ31єҲї2 libу.1бу.Т.soб12ьӡ Feb 14єapparmorү -> ※өүеҳ\nd0755ың Jun 15 ^1659тҳ2ЪЬ14єю.soейс    Ц Apr 27 ^2014Ёї5 libҒ Aprы7ЁѕРbrotА.soеүееҡ Junы6Ёәх6ёюјЭ -> ※.ІәЭСЦ libФ/x86_64-linux-gnuҐ.so -> /libФ/libҽ Janы6єcryptҮЪctfҶ May НҶ27 ^2036 libMagickГҶ25єaptџ Sep 19ї2Лтя     4096ңг Jul 19ї5ӷә -> ※јйшй Их2ох1үп Nov 21ї4 libћх3ҫћЭ6.д.4э libcurl-gnutls.soҠ Janы4єevent_core-2ух7ж.8ве.9ря      зб2ЖЬ28ї1 libXauЈelf-0.188.soиғжу0М Mayы7 ^2110 libcapҷanlҙ Apr 25ы2024 libdav1dлесыҵ Dec 18єcryptsetupх12њ-6.Q16әқ Dec 29єde265юҧс        8СЩ Mar 23єfido2Қ Octы3єX11Ұ Sep 18ҲXextЧ JunнЁaomОдиҺЬ29єbsdючџ libbz2ъч.soуеЅЦ libcДҶ23єdebconfclientђ Nov 21ҲeditИЙ Oct 24Ҳffiх8Бо.12емѓ Mayы7єformwӯ1.oҗcrtӯҳ3іңҭ Febы9єauditВҶ12ЁbpfЎавицџ libcborюжҟоуемӨг libcurl.soдӣҡe2pИХҡext2fsИЕћ.6.10иф Aprы5ЁexpatЫНWandњЗЬ17єУ.aищГ-pkgәһјиӘѕlicommonЮѕliencќҡcom_errИЯҮ-nobfdЇй14480СК Nov 30ї2 libfftw3ЄРdrop_ambientШоғм174ҿ\n-0755няўҒasanх8¶# source: ls -l /usr/libФ (real)\ntotal 167495ҳ4р128ң ImageMagick-6.9.11кр496Ц Mcrtӯш1632Ц Scrtӯтің auditтің bfd-pluginsш1768Ц crtӯш1072Ц crti.oкр648Ц crtn.oЛ cryptsetupті Jun 10 ^0000 e2fsprogsтр128ң engines-3ҳ3я     8192ң gconvш2520Ц gҗ gioЛ glib-2еЛ gprofngш2232Ц grҗ krb5ҿ   215000Ц ld-linux-x86-64ИЛ ldscriptsш1790СПУСПҐПай14640СПам616464 Oct 15ҲLerc.soОНCoreњөл2848744НCoreњһЫөл1203192ЫһҚІ4л1318408ҚәдьЖӷ14496Жәһҩӷ22728ҩәһҰІ4ей81568ҰәдьЗaclоб2301й38832Зaclаб2301ҧҷУСҷҐҷаЇҷаиЧҫ0сы5639576Чћ.6ьӡождй80600ӡажОщеүл2067760щһГ-private.soјөм497904Г-privateёй34880 Apr 21єargon2аиўөл8198800ўһҒatomicо.2ей30776Ғatomic.soзьЗattrоб2501й26544Зattrаб2501иҭојм128952ҭ.soуел1514448Ъbfd-2.40-system.soипblkidҟ355328пblkidауьВозм358880ВазиӘовм137376ӘЎѕlidecовй47264ѕlidecЎЮовм591920ЮЎҺЭ11.7й84840Һ.11.7ичаөОъүдй74688ъдсы5452590Ѕ.aкр283Ѕ.soҿы1926232ЅәиЅ_malloc_debugҐc_malloc_debugюй50200Ѕ_malloc_debugюш5098Ѕ_nonsharedУРcap-ngАй30704Рcap-ngёиМИЭ66й47128МИ.66ицөй69192цьҒcc1Ам126464Ғcc1ёиќүуй18344ќум269124ҽУҽҐcryptаиҽҟ206776ҽаул4734232 Junы6 ^1956 libcryptoћиҵЭ9ем525488ҵ.9ьЯАм228184ЯёиҮАм220192Үёигэ.3 ->эОгэдүжем695736гэджьӨүжем712120ӨжьҙІ6л1630208ҙә.6л1843792Ь16єdb-5.3.soиқүудм452776қуОДАй14376Дём149384 Octы3Ҳdeflateюм442696 Oct 19Ҳdevmapper.soб02уҧdl.aЇdlИиЄАй14256ЄёиӣЭ3й45008ӣ.3иђө.70м216640ђе.70м109088ЪЈЪelfа -> libЈҠөум219152ҠеуифШ184фағифwШ176фwағиХүдм438608ХОпfdiskҟ484640пfdiskауьЙүзй43480ЙзиКҫ10сы2213808КЕК_ompҫ10й30632К_ompЕК_threadsҫ10й34728К_threadsЕЩБ219040ЩТРfontconfigБ306112РfontconfigТѓІ4й77200ѓәд\n"
+    }
+  ]
+}

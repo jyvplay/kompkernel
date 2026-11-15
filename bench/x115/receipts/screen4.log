@@ -1,0 +1,3 @@
+ls-real.txt            M=430 -> 454 Δ=24 exact=false fields=3 hits=37
+ls-l-real.txt          M=1361 -> 1379 Δ=18 exact=false fields=4 hits=149
+TOTAL base 12290 best 12290 delta 0

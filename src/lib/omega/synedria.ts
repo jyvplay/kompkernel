@@ -87,6 +87,8 @@ const MAX_SOURCE_CHARS = 64 * 1024;
 
 export const synedriaStats = {
   scopes: 0,
+  /** X115: nested chain scopes that joined an already-open council. */
+  joined: 0,
   hits: 0,
   misses: 0,
   stores: 0,
@@ -102,6 +104,7 @@ export const synedriaStats = {
 export function synedriaReset(): void {
   STACK.length = 0;
   synedriaStats.scopes = 0;
+  synedriaStats.joined = 0;
   synedriaStats.hits = 0;
   synedriaStats.misses = 0;
   synedriaStats.stores = 0;
@@ -134,6 +137,55 @@ export function synedriaScope<T>(fn: () => T): T {
     return fn();
   } finally {
     // Pop exactly this council even if a nested callee threw.
+    const at = STACK.lastIndexOf(council);
+    if (at >= 0) STACK.splice(at, 1);
+  }
+}
+
+/**
+ * X115 chain-wide council toggle. When disabled, `synedriaChainScope` degrades
+ * to the X114 per-measurement `synedriaScope`, so the off-arm of an A/B is the
+ * shipped X114 behaviour rather than a new variant.
+ */
+export function synedriaChainDisabled(): boolean {
+  if (typeof process === 'undefined') return false;
+  return process.env?.OMEGA_SYNEDRIA_CHAIN === '0'
+    || process.env?.OMEGA_SYNEDRIA_CHAIN === 'false'
+    || process.env?.OMEGA_NO_SYNEDRIA_CHAIN === '1';
+}
+
+/**
+ * X115 — EPISYNEDRIA / chain-wide council.
+ *
+ * X114 opened one council per `tagstackEncodeInner` measurement. The X74
+ * candidate chain then re-entered the frontier on the SAME source (PROSPHYSIS,
+ * ΣΥΜΦΥΊΑ, STOICHEION each price themselves against `tagstackFrontier(text)`),
+ * and each re-entry opened a fresh, independent council. The duplicate
+ * fresh-epoch APOGRAPHE/OURA sub-encodes were therefore paid again.
+ *
+ * `synedriaChainScope` opens a council only if none is open; a nested call
+ * JOINS the existing council instead of pushing an independent one. The outermost
+ * scope still discards the council on return. Keys already contain the exact
+ * source, encoding, options and both budgets, and hits still replay the meter,
+ * so joining cannot alias two different computations. When the chain toggle is
+ * disabled this is exactly `synedriaScope` (X114 semantics).
+ */
+export function synedriaChainScope<T>(fn: () => T): T {
+  if (synedriaDisabled()) {
+    synedriaStats.bypassDisabled++;
+    return fn();
+  }
+  if (synedriaChainDisabled()) return synedriaScope(fn);
+  if (STACK.length > 0) {
+    synedriaStats.joined++;
+    return fn();
+  }
+  const council: Council = { table: new Map(), chars: 0 };
+  STACK.push(council);
+  synedriaStats.scopes++;
+  try {
+    return fn();
+  } finally {
     const at = STACK.lastIndexOf(council);
     if (at >= 0) STACK.splice(at, 1);
   }

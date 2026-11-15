@@ -1,0 +1,22 @@
+{
+  "schema": "kompkernel-x115-enallage-probe-v1",
+  "date": "2026-11-14",
+  "rows": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "incumbent": 1361,
+      "raw": 5194,
+      "rewriteRaw": 4747,
+      "hits": 149,
+      "ownInverse": true,
+      "applied": false,
+      "tokens": 1338,
+      "delta": -23,
+      "exact": false,
+      "parent": "synkrisis",
+      "notes": "enallage loses: 1365 vs 1361 (synkrisis)",
+      "ms": 969237.456393,
+      "message": null
+    }
+  ]
+}

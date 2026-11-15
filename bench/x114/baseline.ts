@@ -6,11 +6,12 @@
  */
 import * as fs from 'node:fs';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 import { countTokens, encodeIds } from '../../src/lib/omega/bpe';
 import { tagstackEncode, type TagstackResult } from '../../src/lib/omega/tagstack';
 
 const env = { OMEGA_DET: '1', OMEGA_NO_MEMO: '1', OMEGA_ENGRAM: '0',
-  OMEGA_OURA_MEMO: '0', OMEGA_NO_OROTHESIA: '1' };
+  OMEGA_OURA_MEMO: '0', OMEGA_NO_OROTHESIA: '1', OMEGA_SYNEDRIA: '1' };
 Object.assign(process.env, env);
 const enc = 'o200k_base' as const;
 const laneFile = process.argv[2] ?? 'bench/x109/lanes29.txt';
@@ -39,7 +40,12 @@ for (const path of lanes) {
 fs.closeSync(stream);
 const receipt = { schema: 'kompkernel-x114-baseline-v1', date: '2026-11-14', function: 'tagstackEncode',
   encoding: enc, environment: env, node: process.version, platform: process.platform, arch: process.arch,
-  sourceCommit: 'bb2b70b526acc0313db2ca62fa75f5dbbfb5e330', lanes: rows.length,
+  // X115 metadata repair: bind a rerun to the checkout actually executing it,
+  // rather than the historical commit of the first X114 run. Encoding unchanged.
+  sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+  workingTreePatchSHA256: hash(execFileSync('git', ['diff', '--binary', 'HEAD'], { encoding: 'utf8', maxBuffer: 16 * 1024 * 1024 })),
+  untrackedFiles: execFileSync('git', ['ls-files', '--others', '--exclude-standard'], { encoding: 'utf8' }).trim().split('\n').filter(Boolean),
+  lanes: rows.length,
   total: rows.reduce((n, r) => n + Number(r.tokens), 0),
   exact: rows.filter(r => r.exact).length, wallMs: performance.now() - start, rows };
 fs.writeFileSync(out + '.json', JSON.stringify(receipt, null, 2) + '\n');

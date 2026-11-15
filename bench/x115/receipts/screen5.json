@@ -1,0 +1,225 @@
+{
+  "schema": "kompkernel-x115-screen5-v1",
+  "note": "affix closure of existing CHIRON rules on baseline messages; no encoder calls",
+  "totals": {
+    "base": 12290,
+    "best": 12287,
+    "delta": -3,
+    "wins": 2
+  },
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 60,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 620,
+      "rules": 23,
+      "candidates": 11,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 80,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 76,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 147,
+      "rules": 7,
+      "candidates": 7,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 414,
+      "rules": 24,
+      "candidates": 0,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 162,
+      "rules": 15,
+      "candidates": 0,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 124,
+      "rules": 9,
+      "candidates": 3,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 268,
+      "rules": 20,
+      "candidates": 0,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 859,
+      "rules": 38,
+      "candidates": 35,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 437,
+      "rules": 28,
+      "candidates": 52,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 106,
+      "rules": 9,
+      "candidates": 3,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 486,
+      "rules": 26,
+      "candidates": 6,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 670,
+      "rules": 18,
+      "candidates": 9,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 172,
+      "rules": 11,
+      "candidates": 0,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 230,
+      "rules": 8,
+      "candidates": 0,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 120,
+      "rules": 4,
+      "candidates": 0,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 101,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 308,
+      "rules": 18,
+      "candidates": 0,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 430,
+      "rules": 33,
+      "candidates": 9,
+      "best": null
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 669,
+      "rules": 36,
+      "candidates": 14,
+      "best": {
+        "g": "ё",
+        "v": "\": {\n        \"",
+        "aff": "",
+        "dir": "suffix",
+        "tokens": 667,
+        "delta": -2,
+        "exact": true,
+        "n": 1
+      }
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 957,
+      "rules": 66,
+      "candidates": 9,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "tokens": 666,
+      "rules": 32,
+      "candidates": 22,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 390,
+      "rules": 22,
+      "candidates": 0,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 314,
+      "rules": 22,
+      "candidates": 0,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 200,
+      "rules": 15,
+      "candidates": 0,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 1029,
+      "rules": 63,
+      "candidates": 4,
+      "best": {
+        "g": "ү",
+        "v": " ?       ",
+        "aff": "",
+        "dir": "suffix",
+        "tokens": 1028,
+        "delta": -1,
+        "exact": true,
+        "n": 1
+      }
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "tokens": 834,
+      "rules": 45,
+      "candidates": 0,
+      "best": null
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 1361,
+      "rules": 120,
+      "candidates": 2,
+      "best": null
+    }
+  ]
+}

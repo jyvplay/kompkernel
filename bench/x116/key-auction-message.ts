@@ -1,0 +1,13 @@
+import * as fs from 'node:fs';
+import { countTokens } from '../../src/lib/omega/bpe';
+import { MEKOS_KEY } from '../../src/lib/omega/mekos';
+import { ENALLAGE_KEY } from '../../src/lib/omega/enallage';
+const enc = 'o200k_base' as const;
+const m = fs.readFileSync(process.argv[2] ?? '/tmp/mekos-message.txt', 'utf8');
+const nl = m.indexOf('\n');
+const rest = m.slice(nl + 1);
+const keys = [MEKOS_KEY, 'λ=#bytes after ->.', 'λ=bytes after ->.', 'λ=#bytes after→.', 'λ=#bytes post ->.', 'λ=byte count after ->.', 'λ=#UTF8 bytes after ->.', 'λ=target #bytes.', 'λ=#bytes(target).', 'λ=bytes(target) #.', 'λ=#bytes of target.', 'λ=target bytes #.', 'λ=#bytes after arrow.', 'λ=bytes after -> #.', 'λ=# bytes after ->.'];
+for (const k of keys) console.log(countTokens(k + '\n' + rest, enc), countTokens(k, enc), k);
+const n2 = rest.indexOf('\n');
+const body2 = rest.slice(n2 + 1);
+console.log('SWAP', countTokens(ENALLAGE_KEY + '\n' + MEKOS_KEY + '\n' + body2, enc), 'vs original', countTokens(m, enc));

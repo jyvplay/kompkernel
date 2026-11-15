@@ -1,0 +1,13 @@
+PASS all 4096 modes round-trip through independent decoder
+PASS file type chars preserved
+PASS ambiguity guard refuses pre-existing octal form
+PASS no mode fields refuses
+PASS line-local rewrite preserves other bytes
+PASS special bits s/S/t/T
+  key 15 tok: Body first. ^Tnnnn␠→T+chmod.
+  key 36 tok: X115. Body first. Then line-start Tnnnn before space is type T plus octal chmod nnnn; expand to ls -l symbolic mode. Print only.
+  key 27 tok: X115. Body first. Then Tnnnn at line start before space = T + symbolic chmod nnnn. Print only.
+  key 31 tok: X115. Body first. Line-start Tnnnn␠ is T plus ls -l mode for octal nnnn. Print only.
+PASS contract token ladder
+PASS tagstackDecode dispatches the compact key and expands after the parent
+8 passed

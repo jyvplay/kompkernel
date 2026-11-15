@@ -1,0 +1,165 @@
+{
+  "schema": "kompkernel-x115-screen4-v1",
+  "key": "X115. Body first. ^Tnnnn␠→T+chmod nnnn. Print only.",
+  "keyTokens": 24,
+  "totals": {
+    "base": 12290,
+    "after": 12290,
+    "delta": 0
+  },
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 60,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 620,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 80,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 76,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 147,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 414,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 162,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 124,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 268,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 859,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 437,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 106,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 486,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 670,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 172,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 230,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 120,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 101,
+      "note": "no frame"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 308,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 430,
+      "after": 454,
+      "delta": 24,
+      "exact": false,
+      "fields": 3,
+      "hits": 37
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 669,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 957,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "tokens": 666,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 390,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 314,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 200,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 1029,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "tokens": 834,
+      "note": "no mode rewrite"
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 1361,
+      "after": 1379,
+      "delta": 18,
+      "exact": false,
+      "fields": 4,
+      "hits": 149
+    }
+  ]
+}

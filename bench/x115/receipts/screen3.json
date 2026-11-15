@@ -1,0 +1,25 @@
+{
+  "schema": "kompkernel-x115-screen3-v1",
+  "note": "PALINDROMOS re-price on current baseline messages; existing opt-in mechanism",
+  "totals": {
+    "base": 1361,
+    "after": 1355,
+    "delta": -6
+  },
+  "rows": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 1361,
+      "after": 1355,
+      "delta": -6,
+      "applied": true,
+      "rounds": 3,
+      "steps": 2,
+      "byMember": {
+        "ΓΕΝΝΑΔΑΣ": 2
+      },
+      "ms": 42391.395037,
+      "notes": "palindromos: 3 rounds, 2 re-run steps (ΓΕΝΝΑΔΑΣ 2); M 1361 -> 1355"
+    }
+  ]
+}

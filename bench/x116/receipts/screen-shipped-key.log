@@ -1,0 +1,30 @@
+lsblk.txt              raw=60 oct=- shipped=none
+kb-article.txt         raw=656 oct=- shipped=none
+uptime-w.txt           raw=80 oct=- shipped=none
+free-m.txt             raw=76 oct=- shipped=none
+vmstat.txt             raw=229 oct=- shipped=none
+unified-diff.patch     raw=578 oct=- shipped=none
+df-h.txt               raw=570 oct=- shipped=none
+df-real.txt            raw=158 oct=- shipped=none
+du-real.txt            raw=458 oct=- shipped=none
+node-help.txt          raw=1099 oct=- shipped=none
+findmnt.txt            raw=787 oct=- shipped=none
+df-h.txt               raw=140 oct=- shipped=none
+email-thread.txt       raw=629 oct=- shipped=none
+llm-answer.md          raw=733 oct=- shipped=none
+markdown-table.md      raw=330 oct=- shipped=none
+psql-output.txt        raw=675 oct=- shipped=none
+prices.csv             raw=582 oct=- shipped=none
+cue-sheet.md           raw=513 oct=- shipped=none
+ps-ef.txt              raw=1144 oct=- shipped=none
+ls-real.txt            raw=1034 oct=923 shipped=916 (-118) hits=13 exact=true
+json-pkg.txt           raw=1152 oct=- shipped=none
+code-ts.txt            raw=1422 oct=- shipped=none
+dpkg-l.txt             raw=1000 oct=- shipped=none
+ps-real.txt            raw=1106 oct=- shipped=none
+kubectl-get-pods.txt   raw=1006 oct=- shipped=none
+metrics.tsv            raw=811 oct=- shipped=none
+ps-aux-real.txt        raw=3054 oct=- shipped=none
+apt-real.txt           raw=2739 oct=- shipped=none
+ls-l-real.txt          raw=5194 oct=4747 shipped=4695 (-499) hits=58 exact=true
+TOTAL raw 28015 shipped-key 27398 delta -617; key=6 tok λ=#bytes after ->.

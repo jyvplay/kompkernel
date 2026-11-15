@@ -1,0 +1,26 @@
+kb-article.txt         M=620 rules=23 cand=11 best=none
+vmstat.txt             M=147 rules=7 cand=7 best=none
+unified-diff.patch     M=414 rules=24 cand=0 best=none
+df-h.txt               M=162 rules=15 cand=0 best=none
+df-real.txt            M=124 rules=9 cand=3 best=none
+du-real.txt            M=268 rules=20 cand=0 best=none
+node-help.txt          M=859 rules=38 cand=35 best=none
+findmnt.txt            M=437 rules=28 cand=52 best=none
+df-h.txt               M=106 rules=9 cand=3 best=none
+email-thread.txt       M=486 rules=26 cand=6 best=none
+llm-answer.md          M=670 rules=18 cand=9 best=none
+markdown-table.md      M=172 rules=11 cand=0 best=none
+psql-output.txt        M=230 rules=8 cand=0 best=none
+prices.csv             M=120 rules=4 cand=0 best=none
+ps-ef.txt              M=308 rules=18 cand=0 best=none
+ls-real.txt            M=430 rules=33 cand=9 best=none
+json-pkg.txt           M=669 rules=36 cand=14 best=667 (-2) suffix "\": {\n        \""+"" n=1
+code-ts.txt            M=957 rules=66 cand=9 best=none
+dpkg-l.txt             M=666 rules=32 cand=22 best=none
+ps-real.txt            M=390 rules=22 cand=0 best=none
+kubectl-get-pods.txt   M=314 rules=22 cand=0 best=none
+metrics.tsv            M=200 rules=15 cand=0 best=none
+ps-aux-real.txt        M=1029 rules=63 cand=4 best=1028 (-1) suffix " ?       "+"" n=1
+apt-real.txt           M=834 rules=45 cand=0 best=none
+ls-l-real.txt          M=1361 rules=120 cand=2 best=none
+TOTAL base 12290 best 12287 delta -3 wins 2/29

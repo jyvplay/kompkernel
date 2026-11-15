@@ -1,0 +1,14 @@
+{
+  "schema": "kompkernel-x116-key-decision-v1",
+  "date": "2026-11-14",
+  "chosen": { "key": "λ=#bytes after ->.", "tokens": 6, "reason": "Explicit byte COUNT (#bytes) of the target after the arrow; no code-point/byte ambiguity; 1 token cheaper than the UTF8-worded key." },
+  "rejected": [
+    { "key": "λ=len(target).", "tokens": 4, "reason": "len is code-point length in common languages (JS/Python), not UTF-8 bytes; fails the semantic floor despite the Unicode unit passing for the encoder." },
+    { "key": "λ=bytes(target).", "tokens": 5, "reason": "Could denote the byte sequence rather than its count." },
+    { "key": "λ=strlen(target).", "tokens": 5, "reason": "C strlen connotation, but target is not NUL-terminated in the wire and strlen is not a bare-chat primitive." },
+    { "key": "λ=len(after ->).", "tokens": 5, "reason": "Same len ambiguity." },
+    { "key": "λ=bytes after ->.", "tokens": 6, "reason": "Same price as chosen key but less explicitly a count." },
+    { "key": "λ=UTF8 bytes after ->.", "tokens": 7, "reason": "Unambiguous but 1 token more expensive than #bytes; UTF-8 is the wire encoding already." }
+  ],
+  "evidence": ["bench/x116/receipts/key-ladder.log", "bench/x116/receipts/key-ladder2.log", "bench/x116/receipts/mekos-unit-nested.log"]
+}

@@ -1,0 +1,24 @@
+21 X115. Body first. ^Tnnnn␠→T+chmod nnnn.
+18 X115. Body first. ^Tnnnn␠→T+chmod.
+19 X115. Body first. ^Tnnnn␠→chmod nnnn.
+16 X115. Body first. ^Tnnnn␠→chmod.
+21 X115. Body first. ^Tnnnn␠=T+chmod nnnn.
+18 X115. Body first. ^Tnnnn␠=T+chmod.
+21 X115. Body first. ^Tnnnn␠:T+chmod nnnn.
+18 X115. Body first. ^Tnnnn␠:T+chmod.
+21 X115. After body, ^Tnnnn␠→T+chmod nnnn.
+18 X115. After body, ^Tnnnn␠→T+chmod.
+20 X115. ^Tnnnn␠→T+chmod nnnn after body.
+17 X115. ^Tnnnn␠→T+chmod after body.
+18 X115. Body first. ^Tnnnn␠→T+mode.
+18 X115. Body first. ^Tnnnn␠→T+ls.
+18 X115. Body first. ^Tnnnn␠→T+rwx.
+19 X115. Body first. ^Tnnnn␠→T+nnnn.
+19 X115. Body first. ^Tnnnn␠→T+octal.
+19 X115. Body first. ^Tnnnn␠→T+symbolic.
+18 X115. Body first. ^Tnnnn␠→T+expand.
+18 X115. Body first. ^Tnnnn␠→T+decode.
+19 X115. Body first. ^Tnnnn␠→T+perms.
+18 X115. Body first. ^Tnnnn␠→T+perm.
+18 X115. Body first. ^Tnnnn␠→T+stat.
+18 X115. Body first. ^Tnnnn␠→T+unix.
