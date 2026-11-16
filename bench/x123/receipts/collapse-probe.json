@@ -1,0 +1,74 @@
+[
+ {
+  "lane": "dpkg-l.txt",
+  "padChars": 1725,
+  "orig": 673,
+  "col": 601,
+  "delta": -72,
+  "exact": true
+ },
+ {
+  "lane": "ps-aux-real.txt",
+  "padChars": 1670,
+  "orig": 1042,
+  "col": 985,
+  "delta": -57,
+  "exact": true
+ },
+ {
+  "lane": "findmnt.txt",
+  "padChars": 1285,
+  "orig": 444,
+  "col": 369,
+  "delta": -75,
+  "exact": true
+ },
+ {
+  "lane": "ps-ef.txt",
+  "padChars": 926,
+  "orig": 315,
+  "col": 304,
+  "delta": -11,
+  "exact": true
+ },
+ {
+  "lane": "ps-real.txt",
+  "padChars": 626,
+  "orig": 397,
+  "col": 380,
+  "delta": -17,
+  "exact": true
+ },
+ {
+  "lane": "node-help.txt",
+  "padChars": 2048,
+  "orig": 862,
+  "col": 819,
+  "delta": -43,
+  "exact": true
+ },
+ {
+  "lane": "kubectl-get-pods.txt",
+  "padChars": 791,
+  "orig": 326,
+  "col": 298,
+  "delta": -28,
+  "exact": true
+ },
+ {
+  "lane": "ls-real.txt",
+  "padChars": 238,
+  "orig": 433,
+  "col": 409,
+  "delta": -24,
+  "exact": true
+ },
+ {
+  "lane": "df-h.txt",
+  "padChars": 100,
+  "orig": 171,
+  "col": 152,
+  "delta": -19,
+  "exact": true
+ }
+]

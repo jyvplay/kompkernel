@@ -138,17 +138,61 @@ function seedFrom(s: string): number {
   return h >>> 0;
 }
 
-/** One-token characters of a script that do not occur in the payload. */
-function poolFor(sc: any, payload: Set<string>, enc: EncodingName): string[] {
+/**
+ * One-token characters of a script that do not occur in the payload.
+ *
+ * X123 SPEED. `countTokens(ch)` per code point is a tokenizer call, and the
+ * answer does not depend on the payload: for a fixed (script, encoding) the set
+ * of one-token code points is a constant. CJK alone is 20 992 code points, so
+ * the uncached form paid five figures of tokenizer calls every time the
+ * relayout ran. The payload filter that remains is a Set lookup per code point.
+ * This can only change timing: it is a memo of a pure function of (script, enc).
+ */
+const ONE_TOKEN_POOL = new Map<string, string[]>();
+const POOL_MEMO_MAX = 64;
+
+function oneTokenChars(sc: any, enc: EncodingName): string[] {
+  const key = `${sc.name}:${enc}`;
+  const hit = ONE_TOKEN_POOL.get(key);
+  if (hit) return hit;
   const out: string[] = [];
   const spans: Array<[number, number]> = sc.ranges ?? [[sc.lo, sc.hi]];
   for (const [a, b] of spans) {
     for (let cp = a; cp < b; cp++) {
       const ch = String.fromCodePoint(cp);
-      if (!payload.has(ch) && countTokens(ch, enc) === 1) out.push(ch);
+      if (countTokens(ch, enc) === 1) out.push(ch);
     }
   }
+  if (ONE_TOKEN_POOL.size >= POOL_MEMO_MAX) ONE_TOKEN_POOL.clear();
+  ONE_TOKEN_POOL.set(key, out);
   return out;
+}
+
+function poolFor(sc: any, payload: Set<string>, enc: EncodingName): string[] {
+  const chars = oneTokenChars(sc, enc);
+  const out: string[] = [];
+  for (let k = 0; k < chars.length; k++) if (!payload.has(chars[k]!)) out.push(chars[k]!);
+  return out;
+}
+
+/**
+ * X123 SPEED. The relayout scores up to 400 000 evaluations, and each one used
+ * to rebuild the whole wire one UTF-16 code unit at a time with a `Map.get`
+ * and a string concatenation per character. The substitution only ever touches
+ * the (small, fixed) parent glyph alphabet, so a single compiled character
+ * class and one `String.replace` pass does the same job with one call per
+ * substituted character instead of one per character of the message. Purely a
+ * change of constant factor: the function computed is identical.
+ */
+function translationFn(alphabet: string[]): (map: Map<string, string>) => (s: string) => string {
+  const cls = alphabet
+    .map((c) => '\\u' + c.charCodeAt(0).toString(16).padStart(4, '0'))
+    .join('');
+  // A single-character alphabet still compiles; an empty one cannot happen
+  // (relayoutGlyphs returns early when there are no rules) but guard anyway.
+  const re = cls ? new RegExp('[' + cls + ']', 'g') : null;
+  return (map: Map<string, string>) => (s: string): string =>
+    re === null ? s : s.replace(re, (ch) => map.get(ch) ?? ch);
 }
 
 export interface RelayoutOutcome {
@@ -203,14 +247,13 @@ export function relayoutGlyphs(
 
   // The renderer: substitute symbolically, so nested references inside other
   // rules' payloads are rewritten too, then rebuild tape and body.
+  // X123: the per-character Map walk is replaced by one compiled class replace
+  // (see translationFn); the substitution it computes is byte-identical.
+  const mkConv = translationFn(orig);
   const wireOf = (assign: string[]): string => {
     const map = new Map<string, string>();
     for (let i = 0; i < orig.length; i++) map.set(orig[i], assign[i]);
-    const conv = (s: string): string => {
-      let out = '';
-      for (const ch of s) out += map.get(ch) ?? ch;
-      return out;
-    };
+    const conv = mkConv(map);
     let t = '';
     for (let i = 0; i < rules.length; i++) t += assign[i] + conv(rules[i].raw);
     return CHIRON_START + t + CHIRON_SEP + conv(body);

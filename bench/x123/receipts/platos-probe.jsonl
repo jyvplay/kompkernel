@@ -1,0 +1,6 @@
+{"lane":"ls-l-real.txt","rows":146,"cols":9,"constCols":[2,3],"rawOrig":5194,"rawDel":4468,"orig":1476,"depad":1419,"del":1417,"exact":true,"msOrig":171958}
+{"lane":"ls-real.txt","rows":26,"cols":9,"constCols":[2,3],"rawOrig":1034,"rawDel":933,"orig":433,"depad":422,"del":423,"exact":true,"msOrig":8939}
+{"lane":"ps-ef.txt","rows":37,"cols":8,"constCols":[0,3,4,5],"rawOrig":1144,"rawDel":663,"orig":315,"depad":325,"del":306,"exact":true,"msOrig":7843}
+{"lane":"kubectl-get-pods.txt","rows":23,"cols":7,"constCols":[],"rawOrig":1006,"rawDel":868,"orig":326,"depad":298,"del":298,"exact":true,"msOrig":15406}
+{"lane":"df-h.txt","rows":16,"cols":6,"constCols":[],"rawOrig":570,"rawDel":506,"orig":171,"depad":162,"del":162,"exact":true,"msOrig":1752}
+{"lane":"psql-output.txt","rows":21,"cols":11,"constCols":[0,2,4,6,8],"rawOrig":675,"rawDel":507,"orig":244,"depad":272,"del":335,"exact":true,"msOrig":7579}

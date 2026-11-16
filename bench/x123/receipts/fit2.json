@@ -1,0 +1,92 @@
+[
+ {
+  "lane": "df-h.txt",
+  "path": "bench/holdout-tbl/df-h.txt",
+  "rows": 18,
+  "cols": 6,
+  "mass": 94,
+  "side": "LLRRL",
+  "blockChars": 872
+ },
+ {
+  "lane": "email-thread.txt",
+  "path": "bench/holdout-work/email-thread.txt",
+  "rows": 8,
+  "cols": 3,
+  "mass": 0,
+  "side": "LL",
+  "blockChars": 305
+ },
+ {
+  "lane": "markdown-table.md",
+  "path": "bench/holdout-tbl/markdown-table.md",
+  "rows": 10,
+  "cols": 3,
+  "mass": 0,
+  "side": "LL",
+  "blockChars": 549
+ },
+ {
+  "lane": "psql-output.txt",
+  "path": "bench/holdout-tbl/psql-output.txt",
+  "rows": 24,
+  "cols": 10,
+  "mass": 72,
+  "side": "LLLLLLLLL",
+  "blockChars": 1320
+ },
+ {
+  "lane": "cue-sheet.md",
+  "path": "bench/holdout-x40/cue-sheet.md",
+  "rows": 29,
+  "cols": 3,
+  "mass": 0,
+  "side": "LL",
+  "blockChars": 909
+ },
+ {
+  "lane": "ps-ef.txt",
+  "path": "bench/holdout-x42/ps-ef.txt",
+  "rows": 40,
+  "cols": 8,
+  "mass": 926,
+  "side": "LRRLLLR",
+  "blockChars": 2605
+ },
+ {
+  "lane": "ls-real.txt",
+  "path": "bench/holdout-x41/ls-real.txt",
+  "rows": 29,
+  "cols": 9,
+  "mass": 190,
+  "side": "LLLLRLRR",
+  "blockChars": 1722
+ },
+ {
+  "lane": "dpkg-l.txt",
+  "path": "bench/holdout-x42/dpkg-l.txt",
+  "rows": 35,
+  "cols": 6,
+  "mass": 1677,
+  "side": "LLLLL",
+  "blockChars": 3970
+ },
+ {
+  "lane": "ps-aux-real.txt",
+  "path": "bench/holdout-x41/ps-aux-real.txt",
+  "rows": 16,
+  "cols": 12,
+  "mass": 356,
+  "side": "LRLLRRLLLLL",
+  "blockChars": 2827
+ },
+ {
+  "lane": "ls-l-real.txt",
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "rows": 149,
+  "cols": 9,
+  "mass": 905,
+  "side": "LLLLRLRR",
+  "blockChars": 10481
+ }
+]
