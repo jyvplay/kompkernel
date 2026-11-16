@@ -29,6 +29,35 @@ Receipts in this directory:
 | `stoichedon-unit.ts` | 62 assertions, 0 failures |
 | `ab.ts` → `receipts/ab2.json` | balanced 29-lane A/B, ON vs `OMEGA_NO_STOICHEDON=1` |
 
+## 0. Headline result (live pipeline, not the frozen wires)
+
+Balanced A/B on the canonical 29 (`bench/x122/receipts/ab2.json`), OFF =
+`OMEGA_NO_STOICHEDON=1`, ON = ΣΤΟΙΧΗΔΟΝ, everything else identical, balanced arm
+order:
+
+| | lanes | Σ tokens | better | worse | inexact | wall |
+|---|---|---|---|---|---|---|
+| OFF | 28 | 10 808 | — | — | 0 | 569.7 s |
+| ON | 28 | **10 779** | **12** | **0** | 0 | 583.2 s |
+| Δ | | **−29** | | | | **1.024×** |
+
+Best lane **`ps-aux-real` 1 002 → 991, Δ −11** (ΣΤΟΙΧΗΔΟΝ's own note: *M 1004 →
+992 (−12); 8 order + 4 glyph moves over 78 rules, 37 447 priced probes*) — an OPS
+lane, which is where the brief asked for the gain. Then `apt-real` −4,
+`json-pkg` −3, `code-ts` −2, `dpkg-l` −2, and seven lanes −1. `expSHA256` is
+identical between arms on every lane, i.e. the CHIRON-layer expansion is
+byte-identical; `exact true` on both arms of every lane.
+
+The 29th lane (`ls-l-real`) had not completed when this was written; the frozen
+wire screen and the pool census both give Δ = 0 for it, so the expected final
+total is **−29 on 29**.
+
+Wall clock: **1.024×**, i.e. ΣΤΟΙΧΗΔΟΝ is a trade — 29 tokens for ~2.4 % more
+time on the whole stack. That is much better than the frozen-wire screen's raw
+search cost suggested (27 s over 19 lanes), because the search runs once per lane
+on a tape the rest of the stack has already built. **Requirement (c), whole-stack
+speed, is still NOT met: this is strictly more CPU for strictly fewer tokens.**
+
 ---
 
 ## 1. The frontier this turn started from, re-confirmed
