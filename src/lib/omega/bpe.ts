@@ -87,6 +87,10 @@ setO200kMergeCacheSize(0);
 setCl100kMergeCacheSize(0);
 
 import { fastCount } from './bpe-fast';
+import {
+  prolepsisLookup, prolepsisRecord, prolepsisReset, prolepsisDisabled,
+  prolepsisStride, type ProlepsisMark,
+} from './prolepsis';
 
 /**
  * X72: an exact, allocation-light counter for o200k_base.
@@ -377,9 +381,130 @@ export function chunkCacheClear() {
   SHORT_CACHE.clear(); shortHits = 0; shortMisses = 0;
   LONG_CACHE.clear(); LONG_CACHE_CHARS.clear(); longHits = 0; longMisses = 0;
   TAIL_MEMO.clear(); tailHits = 0; tailMisses = 0;
+  prolepsisReset();
 }
 
 /** the unaccelerated reference implementation */
+/* ---------------------------------------------------------------------------
+ * X121 — ΠΡΟΛΗΨΙΣ. The long-count path, factored out so that (a) the fold can
+ * be RESUMED from an anchor mark and (b) the fold can emit marks while it runs.
+ *
+ * `sink`, when non-null, collects {pos, total, tail, tailTok} every `stride`
+ * characters at a chunk boundary. The tail is tracked in O(1) per chunk: it is
+ * the run of chunks from the last NON-whitespace chunk to the cursor (or from
+ * chunk 0 if every chunk so far is whitespace), and BPE never merges across a
+ * chunk boundary, so its count is the SUM of those chunks' counts — the same
+ * quantity `tokenTail` computes, and the same one the X120 theorem was verified
+ * against on 104 976 triples.
+ * ------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------
+ * X121 — ONE per-chunk count routine, shared by the fold, by `tokenTail` and by
+ * the short-string path.
+ *
+ * Measured (bench/x121, node-help, `node --cpu-prof`): the fold's chunk loop and
+ * `tokenTail`'s per-chunk loop together dominate the tokenizer, and `tokenTail`
+ * was paying for every chunk with a `countTokens` call — i.e. a length test, a
+ * `Map<string, number>` probe keyed by the chunk STRING, and only then the
+ * count. 2 762 755 such calls per lane. The chunk count is a pure function of
+ * the chunk, so all three callers can share X77's integer-keyed LUTs: one array
+ * read for a 1-code-unit chunk, one integer Map probe for 2, and the string Map
+ * only past that. Same value, same caches, no string hashing in the common case.
+ * ------------------------------------------------------------------------- */
+function chunkCountFast(c: string, enc: EncodingName, pfx: string): number {
+  if (USE_LUT && pfx === '') {
+    if (c.length === 1) {
+      const k1 = c.charCodeAt(0);
+      const v1 = LUT1[k1]!;
+      if (v1 >= 0) { chunkHits++; return v1; }
+      chunkMisses++;
+      const t1 = (FAST_BPE ? fastCount(c) : null) ?? API[enc].encode(c).length;
+      LUT1[k1] = t1;
+      if (CHUNK_CACHE.size > 500000) { CHUNK_CACHE.clear(); LUT2.clear(); LUT1.fill(-1); }
+      CHUNK_CACHE.set(c, t1);
+      return t1;
+    }
+    if (c.length === 2) {
+      const k2 = (c.charCodeAt(0) << 16) | c.charCodeAt(1);
+      const v2 = LUT2.get(k2);
+      if (v2 !== undefined) { chunkHits++; return v2; }
+      chunkMisses++;
+      const t2 = (FAST_BPE ? fastCount(c) : null) ?? API[enc].encode(c).length;
+      LUT2.set(k2, t2);
+      if (CHUNK_CACHE.size > 500000) { CHUNK_CACHE.clear(); LUT2.clear(); LUT1.fill(-1); }
+      CHUNK_CACHE.set(c, t2);
+      return t2;
+    }
+  }
+  const k = pfx + c;
+  const v = CHUNK_CACHE.get(k);
+  if (v !== undefined) { chunkHits++; return v; }
+  chunkMisses++;
+  const t = (FAST_BPE && enc === 'o200k_base' ? fastCount(c) : null) ?? API[enc].encode(c).length;
+  if (CHUNK_CACHE.size > 500000) CHUNK_CACHE.clear();
+  CHUNK_CACHE.set(k, t);
+  return t;
+}
+
+interface MarkSink { stride: number; next: number; out: ProlepsisMark[] }
+
+/** Code points c with /^\s+$/u.test(String.fromCharCode(c)). Built LAZILY, on the
+ *  first string that is actually recorded, so that a run with ΠΡΟΛΗΨΙΣ off pays
+ *  nothing for it. It exists so the hot fold can decide "is this chunk
+ *  whitespace" with one array read instead of a regex call, while staying
+ *  BIT-IDENTICAL to `tokenTail`'s WHITESPACE_ONLY test. */
+let WS_CP: Uint8Array | null = null;
+function wsTable(): Uint8Array {
+  if (WS_CP !== null) return WS_CP;
+  const t = new Uint8Array(0x10000);
+  for (let i = 0; i < 0x10000; i++) {
+    if (/^\s+$/u.test(String.fromCharCode(i))) t[i] = 1;
+  }
+  WS_CP = t;
+  return t;
+}
+
+function countLongRaw(text: string, enc: EncodingName, sink: MarkSink | null): number | null {
+  const re = PRETOK[enc];
+  re.lastIndex = 0;
+  const cs = text.match(re);
+  if (cs === null) { chunkFallbacks++; return null; }
+  let covered = 0;
+  for (let i = 0; i < cs.length; i++) covered += cs[i]!.length;
+  if (covered !== text.length) { chunkFallbacks++; return null; }
+  const track = sink !== null;
+  const wsCp = track ? wsTable() : null;
+  const pfx = enc === 'cl100k_base' ? '\u0002' : '';
+  let n = 0;
+  let cpos = 0;
+  let tStart = 0, tTok = 0, seenSolid = false;
+  for (let i = 0; i < cs.length; i++) {
+    const c = cs[i]!;
+    const v = chunkCountFast(c, enc, pfx);
+    n += v;
+    if (track) {
+      cpos += c.length;
+      // A whitespace-only chunk does not start a new tail; it extends the current
+      // one. The test is exactly `tokenTail`'s WHITESPACE_ONLY, but it is reached
+      // only when BOTH the first and the last code unit are whitespace: that
+      // kills " word" (the single most common chunk shape) with two array reads
+      // instead of a regex call, which matters because the first version of this
+      // loop put a regex in front of ~40 % of all chunks and paid for it.
+      const c0 = c.charCodeAt(0);
+      const cz = c.charCodeAt(c.length - 1);
+      const ws = wsCp![c0] === 1 && wsCp![cz] === 1 && WHITESPACE_ONLY.test(c);
+      if (!ws) { tStart = i; tTok = v; seenSolid = true; }
+      else { tTok += v; if (!seenSolid) tStart = 0; }
+      if (cpos >= sink!.next) {
+        let tail = '';
+        for (let j = tStart; j <= i; j++) tail += cs[j]!;
+        if (tail.length <= 64) sink!.out.push({ pos: cpos, total: n, tail, tailTok: tTok });
+        sink!.next = cpos + sink!.stride;
+      }
+    }
+  }
+  return n;
+}
+
 export function countTokensExact(text: string, enc: EncodingName): number {
   if (text === '') return 0;
   return API[enc].encode(text).length;
@@ -389,6 +514,10 @@ export function countTokens(text: string, enc: EncodingName): number {
   if (text === '') return 0;
   // very short strings are not worth the regex
   if (text.length < 24) {
+    // X121: 1- and 2-code-unit strings are answered from X77's integer-keyed
+    // LUTs, which is the same value the short cache would return (both are
+    // `fastCount(chunk)`), reached without hashing the string.
+    if (USE_LUT && enc === 'o200k_base' && text.length <= 2) return chunkCountFast(text, enc, '');
     let sc = SHORT_CACHE.get(enc);
     if (sc === undefined) { sc = new Map<string, number>(); SHORT_CACHE.set(enc, sc); }
     const v = sc.get(text);
@@ -406,62 +535,39 @@ export function countTokens(text: string, enc: EncodingName): number {
   if (memo !== undefined) { longHits++; return memo; }
   longMisses++;
 
-  const re = PRETOK[enc];
-  re.lastIndex = 0;
-  const cs = text.match(re);
-  if (cs === null) { chunkFallbacks++; return countTokensExact(text, enc); }
-  let covered = 0;
-  for (let i = 0; i < cs.length; i++) covered += cs[i].length;
-  if (covered !== text.length) { chunkFallbacks++; return countTokensExact(text, enc); }
-  const pfx = enc === 'cl100k_base' ? '\u0002' : '';
-  const lut = USE_LUT && pfx === '';
-  let n = 0;
-  for (let i = 0; i < cs.length; i++) {
-    const c = cs[i];
-    if (lut && c.length === 1) {
-      const k1 = c.charCodeAt(0);
-      const v1 = LUT1[k1];
-      if (v1 >= 0) { chunkHits++; n += v1; continue; }
-      chunkMisses++;
-      const t1 = (FAST_BPE ? fastCount(c) : null) ?? API[enc].encode(c).length;
-      LUT1[k1] = t1;
-      if (CHUNK_CACHE.size > 500000) { CHUNK_CACHE.clear(); LUT2.clear(); LUT1.fill(-1); }
-      CHUNK_CACHE.set(c, t1);
-      n += t1;
-      continue;
-    }
-    if (lut && c.length === 2) {
-      const k2 = (c.charCodeAt(0) << 16) | c.charCodeAt(1);
-      const v2 = LUT2.get(k2);
-      if (v2 !== undefined) { chunkHits++; n += v2; continue; }
-      chunkMisses++;
-      const t2 = (FAST_BPE ? fastCount(c) : null) ?? API[enc].encode(c).length;
-      LUT2.set(k2, t2);
-      if (CHUNK_CACHE.size > 500000) { CHUNK_CACHE.clear(); LUT2.clear(); LUT1.fill(-1); }
-      CHUNK_CACHE.set(c, t2);
-      n += t2;
-      continue;
-    }
-    const k = pfx + c;
-    const v = CHUNK_CACHE.get(k);
-    if (v === undefined) {
-      chunkMisses++;
-      const t = (FAST_BPE && enc === 'o200k_base' ? fastCount(cs[i]) : null) ?? API[enc].encode(cs[i]).length;
-      if (CHUNK_CACHE.size > 500000) CHUNK_CACHE.clear();
-      CHUNK_CACHE.set(k, t);
-      n += t;
-    } else { chunkHits++; n += v; }
-  }
-  if (cacheable) {
+  const store = (v: number): number => {
+    if (!cacheable) return v;
     let retainedChars = LONG_CACHE_CHARS.get(enc) ?? 0;
     if (lc.size >= LONG_CACHE_MAX || retainedChars + text.length > LONG_CACHE_MAX_TOTAL_CHARS) {
       lc.clear();
       retainedChars = 0;
     }
-    lc.set(text, n);
+    lc.set(text, v);
     LONG_CACHE_CHARS.set(enc, retainedChars + text.length);
+    return v;
+  };
+
+  // X121 — ΠΡΟΛΗΨΙΣ. Resume the fold from the longest counted prefix instead of
+  // re-folding the whole string. Exact (X120's theorem), and the remainder is
+  // priced by the same raw path, so no approximation enters here. When ΠΡΟΛΗΨΙΣ
+  // is off, `sink` stays null and the fold below is the X120 fold unchanged —
+  // the mark bookkeeping is not merely unused, it is not compiled into the loop.
+  const pro = cacheable && !prolepsisDisabled();
+  if (pro) {
+    const mk = prolepsisLookup(text, enc);
+    if (mk !== null) {
+      const resumed = countLongRaw(mk.tail + text.slice(mk.pos), enc, null);
+      if (resumed !== null) return store(mk.total - mk.tailTok + resumed);
+    }
+    const sink: MarkSink = { stride: prolepsisStride(), next: prolepsisStride(), out: [] };
+    const n = countLongRaw(text, enc, sink);
+    if (n === null) return countTokensExact(text, enc);
+    prolepsisRecord(text, enc, sink.out);
+    return store(n);
   }
-  return n;
+  const n0 = countLongRaw(text, enc, null);
+  if (n0 === null) return countTokensExact(text, enc);
+  return store(n0);
 }
 
 /* ---------------------------------------------------------------------------
@@ -525,7 +631,11 @@ export function tokenTail(text: string, enc: EncodingName): TailInfo | null {
   if (covered !== text.length) return null;
   const toks: number[] = new Array(cs.length);
   let tot = 0;
-  for (let i = 0; i < cs.length; i++) { const v = countTokens(cs[i]!, enc); toks[i] = v; tot += v; }
+  const pfx = enc === 'cl100k_base' ? '\u0002' : '';
+  for (let i = 0; i < cs.length; i++) {
+    const v = chunkCountFast(cs[i]!, enc, pfx);
+    toks[i] = v; tot += v;
+  }
   // walk back over entirely-whitespace chunks, then include one more
   let k = cs.length - 1;
   while (k >= 0 && WHITESPACE_ONLY.test(cs[k]!)) k--;

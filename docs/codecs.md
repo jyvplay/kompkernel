@@ -12216,3 +12216,105 @@ compression (`OMEGA_VELTISTOS_COLLAPSE=1`) and the two-rung ladder remain opt-in
 trades measured on the window draft. Full protocol with ≥15 negative shapes and
 the resolved eleven-mechanism portfolio:
 `bench/x120/research/{protocol,sources,portfolio}.md`.
+
+## §X121 — ΠΡΟΛΗΨΙΣ: a token count is a fold, and a fold can be resumed
+
+X121 re-verified the frontier first. The A/B on the canonical 29
+(`bench/x121/receipts/ab.log`) reproduces the merged X120 configuration exactly:
+Σ **12 133**, `better 19 worse 0 same 10`, `exact true`,
+`samePriceHashStable true`, 4 lanes unreachable (no `§` frame). Nothing about the
+frontier moved; this section is therefore not a codec that changes a wire, and it
+claims no tokens.
+
+### What the profile said before any of this existed
+
+`node --cpu-prof` on the shipped X120 stack (`bench/x121/receipts/prof/`): the
+tokenizer path is ~24 % of self time, and one ops lane performs **1 016 908
+full-string tokenizations** against **119 580** long-cache hits — a 10 % hit rate.
+Every miss re-runs the pre-tokenizer over the whole candidate message to learn a
+number the encoder already knew for a message that differed from it in one place.
+
+The whole-string memo cannot help: it keys on the entire string, so it pays only
+for a byte-identical repeat. What the search produces is *variants*.
+
+### The mechanism
+
+X120 proved, for the ΒΕΛΤΙΣΤΟΣ search,
+
+```
+tokens(s + p) = tokens(s) − tokens(tail(s)) + tokens(tail(s) + p)
+```
+
+That is not a fact about search. It is a fact about the tokenizer: **the token
+count is a fold, and a fold can be resumed.** ΠΡΟΛΗΨΙΣ
+(`src/lib/omega/prolepsis.ts`) is the general form. A ring of anchors (recent
+strings that were fully counted) each carries marks every `stride` characters at
+a chunk boundary, holding `{pos, total, tail, tailTok}`; the tail is tracked in
+O(1) per chunk while the fold runs, so recording is free. A new string picks the
+largest mark its shared prefix covers and resumes there. An O(1) gate compares a
+single code unit at the current best position, which is what makes a wide anchor
+ring affordable.
+
+### The refinement that this turn had to discover
+
+Prefix consistency (Berglund & van der Merwe 2023, Remark 3) is a property of the
+BPE **merges**. The **pre-tokenizer** is a separate regex pass and is not
+prefix-monotone. At offset 3080 of `ps-aux-real`:
+
+```
+inside the anchor:   … "0" | " " | " " | "102" …
+as a standalone string: … "0" | "  "
+```
+
+because o200k's `\s+(?!\S)` backtracks one space at a time, and end-of-string
+makes the lookahead succeed for the whole run. So a mark's `total` is the
+anchor's **in-context** running total and can differ by 1 from
+`countTokensExact(prefix)`. Both accountings are correct for their own purpose;
+mixing them is off by one. The first version of the unit suite failed 8/220
+samples for exactly this reason, and the fix was to recompute marks from the
+anchor's own chunk list rather than from `tokenTail(prefix)`.
+
+### What it is worth, honestly
+
+| Measurement | Result |
+|---|---|
+| Prefix-sharing microbenchmark (unit §6) | **1.29×–1.94×** (17 vs 33 ms; 21 vs 33; 14 vs 18), accumulated totals identical digit for digit |
+| Real stack, mechanism (node-help) | 26.5 % of long-path lookups hit; **6.6 %** of all folded characters skipped (1 724 060 of 26 244 105), paid for with 10.9 M code-unit comparisons |
+| Real stack, wall clock | **below this host's noise floor**. 8 interleaved samples per arm: pristine 11 491–13 415 ms, ΠΡΟΛΗΨΙΣ off 11 649–12 661 ms, ΠΡΟΛΗΨΙΣ on 11 190–14 493 ms. CPU-time minima agree (12 097 / 12 426 / 11 767 ms) |
+| 29-lane A/B | Σ29 **12 133 → 12 133**, Δ **0**, 29/29 exact, 29/29 message SHA-256 identical to the independent frontier-verification receipt |
+| `chunkCountFast` (shared per-chunk counter) | **45 %** fewer string-keyed Map probes per lane (2 762 755 → 1 519 189); also below the noise floor |
+
+Two unpaired runs had suggested 1.5×–1.6×. Strict interleaving showed they were
+contention artifacts: a run measured while anything else is alive reads roughly
+1.9× slow on this 2-vCPU host. The lesson is recorded as a harness rule, not as a
+result.
+
+### Why the stack cannot benefit more — the negative result that matters
+
+The frontier's candidate messages are **not prefix-local**. When a candidate hits
+an anchor it saves 415 characters on average out of a 1 574-character message,
+and only 26.5 % of long-path calls hit at all. The search edits the **front** of
+the message (rule spellings, tape order), not the back, so a prefix-anchored fold
+is structurally capped at the length of the shared prefix. A suffix-side
+decomposition is not available: the pre-tokenizer is a greedy left-to-right scan,
+so a suffix's chunking depends on where the scan started.
+
+The tokenizer is ~24–38 % of self time, so no tokenizer-side optimization can
+deliver a large whole-stack win; the remaining 60–70 % is ariadne's combinatorial
+search (`scoreRunCostDeltaSlots` 10.2 %, `renderBest` 7.7 %, and their callees).
+Requirement (d) is therefore **not met** this turn, and is stated as not met.
+
+### Exactness
+
+`bench/x121/prolepsis-unit.ts`: the chunk-sum lemma (0), 48 marks recomputed from
+first principles (1), **1 040 mutated variants with 0 mismatches** against
+`countTokensExact` (2), a whitespace adversary covering long runs, all-whitespace
+text, tabs, NBSP and non-final tails (3), modal-shortcut tests proving the lcp
+gate is load-bearing (4), an independently written second implementation agreeing
+on 228/228 (5), and throughput (6). The 29-lane A/B's two arms differ by one
+environment variable and must produce identical token totals and identical
+message hashes; they do.
+
+Full research record, including the prior art that is closer than is comfortable
+(`niieani/gpt-tokenizer` PR #94/#95, sglang #41148) and the lab-mathematics
+review: `bench/x121/research/sources.md`.

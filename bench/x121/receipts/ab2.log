@@ -1,0 +1,23 @@
+bench/holdout-x42/lsblk.txt                off=60 on=60 Δ=0 exact=true offMs=8042 onMs=5028 token-same / UNREACHABLE (no § frame)
+bench/holdout-work/kb-article.txt          off=620 on=620 Δ=0 exact=true offMs=8940 onMs=11219 token-same
+bench/holdout-x42b/uptime-w.txt            off=80 on=80 Δ=0 exact=true offMs=6992 onMs=5419 token-same / UNREACHABLE (no § frame)
+bench/holdout-x42b/free-m.txt              off=76 on=76 Δ=0 exact=true offMs=5323 onMs=7008 token-same / UNREACHABLE (no § frame)
+bench/holdout-x42b/vmstat.txt              off=145 on=145 Δ=0 exact=true offMs=5711 onMs=5448 token-same
+bench/holdout-work/unified-diff.patch      off=411 on=411 Δ=0 exact=true offMs=6772 onMs=7893 token-same
+bench/holdout-tbl/df-h.txt                 off=160 on=160 Δ=0 exact=true offMs=8194 onMs=5802 token-same
+bench/holdout-x41/df-real.txt              off=124 on=124 Δ=0 exact=true offMs=12599 onMs=15782 token-same
+bench/holdout-x41/du-real.txt              off=266 on=266 Δ=0 exact=true offMs=13614 onMs=11354 token-same
+bench/holdout-x41/node-help.txt            off=852 on=852 Δ=0 exact=true offMs=22290 onMs=24923 token-same
+bench/holdout-x42/findmnt.txt              off=431 on=431 Δ=0 exact=true offMs=24648 onMs=22561 token-same
+bench/holdout-x42/df-h.txt                 off=106 on=106 Δ=0 exact=true offMs=12703 onMs=18250 token-same
+bench/holdout-work/email-thread.txt        off=486 on=486 Δ=0 exact=true offMs=24976 onMs=21842 token-same
+bench/holdout-work/llm-answer.md           off=666 on=666 Δ=0 exact=true offMs=23944 onMs=29782 token-same
+bench/holdout-tbl/markdown-table.md        off=172 on=172 Δ=0 exact=true offMs=20540 onMs=16375 token-same
+bench/holdout-tbl/psql-output.txt          off=230 on=230 Δ=0 exact=true offMs=19138 onMs=23782 token-same
+bench/holdout-x40/prices.csv               off=119 on=119 Δ=0 exact=true offMs=27870 onMs=20849 token-same
+bench/holdout-x40/cue-sheet.md             off=101 on=101 Δ=0 exact=true offMs=23864 onMs=31813 token-same / UNREACHABLE (no § frame)
+bench/holdout-x42/ps-ef.txt                off=299 on=299 Δ=0 exact=true offMs=31311 onMs=28682 token-same
+bench/holdout-x41/ls-real.txt              off=423 on=423 Δ=0 exact=true offMs=24917 onMs=33316 token-same
+bench/holdout/json-pkg.txt                 off=660 on=660 Δ=0 exact=true offMs=40301 onMs=33279 token-same
+bench/holdout/code-ts.txt                  off=952 on=952 Δ=0 exact=true offMs=54327 onMs=71666 token-same
+bench/holdout-x42/dpkg-l.txt               off=657 on=657 Δ=0 exact=true offMs=43450 onMs=38488 token-same
