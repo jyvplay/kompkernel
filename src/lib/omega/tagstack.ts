@@ -35,6 +35,7 @@ import { metronEncode, metronPlan } from './metron';
 import { synkrisisEncode } from './synkrisis';
 import { isomorphiaEncode, isomorphiaDisabled } from './isomorphia';
 import { metataxisEncode, metataxisDisabled } from './metataxis';
+import { platosEncode, platosDisabled } from './platos';
 import { syndyasmosDisabled, syndyasmosEncode } from './syndyasmos';
 import { gennadasDisabled, gennadasEncode } from './gennadas';
 import { diagrapheDisabled, diagrapheEncode } from './diagraphe';
@@ -802,6 +803,14 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
     try { admit('ΣΥΜΦΥΊΑ', symphyiaEncode(text, enc, best.messageTokens) as unknown as WideResult); } catch { /* not a candidate */ }
   }
   try { admit('STOICHEION', stoicheionEncode(text, enc, sharedFrontier) as unknown as WideResult); } catch { /* not a candidate */ }
+
+  // X123 — ΠΛΑΤΟΣ. Off by default; see platosDisabled() for the three receipts
+  // that put it at -8 tokens on its best lane against a > 10 bar. It is wired
+  // anyway so that `OMEGA_PLATOS=1` measures the real chain rather than a
+  // stand-in, and so the arm cannot rot: it type-checks and is reachable.
+  if (!platosDisabled()) {
+    try { admit('ΠΛΑΤΟΣ', platosEncode(text, enc, { incumbent: best.messageTokens }) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
 
   /**
    * X96 — ἸΣΟΜΟΡΦΊΑ is the last candidate and the only one that never touches the

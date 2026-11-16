@@ -1,0 +1,1649 @@
+[
+ {
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "rows": 150,
+  "cols": 9,
+  "bounds": [
+   10,
+   11,
+   13,
+   18,
+   23,
+   24,
+   25,
+   32,
+   36,
+   39,
+   45
+  ],
+  "spans": [
+   [
+    0,
+    10
+   ],
+   [
+    12,
+    13
+   ],
+   [
+    14,
+    18
+   ],
+   [
+    19,
+    23
+   ],
+   [
+    26,
+    32
+   ],
+   [
+    33,
+    36
+   ],
+   [
+    37,
+    39
+   ],
+   [
+    40,
+    45
+   ],
+   [
+    46,
+    114
+   ]
+  ],
+  "totalChars": 10493,
+  "constChars": 0,
+  "aboveChars": 1192,
+  "stats": [
+   {
+    "col": 0,
+    "span": [
+     0,
+     10
+    ],
+    "distinct": 5,
+    "mass": 1500,
+    "above": 28,
+    "example": "total 1674"
+   },
+   {
+    "col": 1,
+    "span": [
+     12,
+     13
+    ],
+    "distinct": 5,
+    "mass": 149,
+    "above": 135,
+    "example": ""
+   },
+   {
+    "col": 2,
+    "span": [
+     14,
+     18
+    ],
+    "distinct": 2,
+    "mass": 596,
+    "above": 148,
+    "example": ""
+   },
+   {
+    "col": 3,
+    "span": [
+     19,
+     23
+    ],
+    "distinct": 2,
+    "mass": 596,
+    "above": 148,
+    "example": ""
+   },
+   {
+    "col": 4,
+    "span": [
+     26,
+     32
+    ],
+    "distinct": 101,
+    "mass": 894,
+    "above": 3,
+    "example": ""
+   },
+   {
+    "col": 5,
+    "span": [
+     33,
+     36
+    ],
+    "distinct": 12,
+    "mass": 447,
+    "above": 89,
+    "example": ""
+   },
+   {
+    "col": 6,
+    "span": [
+     37,
+     39
+    ],
+    "distinct": 26,
+    "mass": 298,
+    "above": 85,
+    "example": ""
+   },
+   {
+    "col": 7,
+    "span": [
+     40,
+     45
+    ],
+    "distinct": 13,
+    "mass": 745,
+    "above": 98,
+    "example": ""
+   },
+   {
+    "col": 8,
+    "span": [
+     46,
+     114
+    ],
+    "distinct": 150,
+    "mass": 3627,
+    "above": 0,
+    "example": ""
+   }
+  ],
+  "sample": [
+   [
+    "total 1674",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   [
+    "drwxr-xr-x",
+    "4",
+    "root",
+    "root",
+    "   128",
+    "Jun",
+    "15",
+    "16:59",
+    "ImageMagick-6.9.11"
+   ],
+   [
+    "-rw-r--r--",
+    "1",
+    "root",
+    "root",
+    "   496",
+    "Apr",
+    "27",
+    "20:14",
+    "Mcrt1.o"
+   ]
+  ]
+ },
+ {
+  "path": "bench/holdout-x41/ps-aux-real.txt",
+  "rows": 60,
+  "cols": 11,
+  "bounds": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   16,
+   17,
+   21,
+   22,
+   26,
+   27,
+   28,
+   33,
+   34,
+   39,
+   41,
+   42,
+   43,
+   44,
+   45,
+   46,
+   47,
+   48,
+   51,
+   52,
+   53,
+   59,
+   60,
+   61,
+   66
+  ],
+  "spans": [
+   [
+    0,
+    4
+   ],
+   [
+    13,
+    16
+   ],
+   [
+    18,
+    21
+   ],
+   [
+    23,
+    26
+   ],
+   [
+    29,
+    33
+   ],
+   [
+    35,
+    39
+   ],
+   [
+    40,
+    41
+   ],
+   [
+    49,
+    51
+   ],
+   [
+    54,
+    59
+   ],
+   [
+    62,
+    66
+   ],
+   [
+    67,
+    1236
+   ]
+  ],
+  "totalChars": 6493,
+  "constChars": 0,
+  "aboveChars": 0,
+  "stats": [
+   {
+    "col": 0,
+    "span": [
+     0,
+     4
+    ],
+    "distinct": 6,
+    "mass": 240,
+    "above": 47,
+    "example": "USER"
+   },
+   {
+    "col": 1,
+    "span": [
+     13,
+     16
+    ],
+    "distinct": 60,
+    "mass": 180,
+    "above": 0,
+    "example": "PID"
+   },
+   {
+    "col": 2,
+    "span": [
+     18,
+     21
+    ],
+    "distinct": 4,
+    "mass": 180,
+    "above": 56,
+    "example": "CPU"
+   },
+   {
+    "col": 3,
+    "span": [
+     23,
+     26
+    ],
+    "distinct": 6,
+    "mass": 180,
+    "above": 54,
+    "example": "MEM"
+   },
+   {
+    "col": 4,
+    "span": [
+     29,
+     33
+    ],
+    "distinct": 17,
+    "mass": 240,
+    "above": 43,
+    "example": " VSZ"
+   },
+   {
+    "col": 5,
+    "span": [
+     35,
+     39
+    ],
+    "distinct": 24,
+    "mass": 240,
+    "above": 36,
+    "example": " RSS"
+   },
+   {
+    "col": 6,
+    "span": [
+     40,
+     41
+    ],
+    "distinct": 5,
+    "mass": 60,
+    "above": 54,
+    "example": "T"
+   },
+   {
+    "col": 7,
+    "span": [
+     49,
+     51
+    ],
+    "distinct": 9,
+    "mass": 120,
+    "above": 26,
+    "example": "ST"
+   },
+   {
+    "col": 8,
+    "span": [
+     54,
+     59
+    ],
+    "distinct": 5,
+    "mass": 300,
+    "above": 48,
+    "example": "START"
+   },
+   {
+    "col": 9,
+    "span": [
+     62,
+     66
+    ],
+    "distinct": 4,
+    "mass": 240,
+    "above": 56,
+    "example": "TIME"
+   },
+   {
+    "col": 10,
+    "span": [
+     67,
+     1236
+    ],
+    "distinct": 54,
+    "mass": 2473,
+    "above": 5,
+    "example": "COMMAND"
+   }
+  ],
+  "sample": [
+   [
+    "USER",
+    "PID",
+    "CPU",
+    "MEM",
+    " VSZ",
+    " RSS",
+    "T",
+    "ST",
+    "START",
+    "TIME",
+    "COMMAND"
+   ],
+   [
+    "user",
+    "553",
+    "103",
+    "3.9",
+    "4607",
+    "5612",
+    "4",
+    "Rl",
+    "17:49",
+    "3:14",
+    "node /tmp/_run_1539.mjs"
+   ],
+   [
+    "root",
+    "229",
+    "0.4",
+    "0.4",
+    "3838",
+    "1870",
+    " ",
+    "S<",
+    " 17:4",
+    " 0:0",
+    " /usr/bin/envd"
+   ]
+  ]
+ },
+ {
+  "path": "bench/holdout-x42/dpkg-l.txt",
+  "rows": 40,
+  "cols": 5,
+  "bounds": [
+   2,
+   3,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   51,
+   52,
+   53,
+   54,
+   55,
+   56,
+   57,
+   58,
+   59,
+   60,
+   61,
+   62,
+   63,
+   64,
+   70,
+   71,
+   72,
+   73,
+   74,
+   75,
+   76,
+   77
+  ],
+  "spans": [
+   [
+    0,
+    2
+   ],
+   [
+    4,
+    25
+   ],
+   [
+    34,
+    51
+   ],
+   [
+    65,
+    70
+   ],
+   [
+    78,
+    158
+   ]
+  ],
+  "totalChars": 4394,
+  "constChars": 0,
+  "aboveChars": 0,
+  "stats": [
+   {
+    "col": 0,
+    "span": [
+     0,
+     2
+    ],
+    "distinct": 6,
+    "mass": 80,
+    "above": 34,
+    "example": "De"
+   },
+   {
+    "col": 1,
+    "span": [
+     4,
+     25
+    ],
+    "distinct": 40,
+    "mass": 840,
+    "above": 0,
+    "example": "red=Unknown/Install/R"
+   },
+   {
+    "col": 2,
+    "span": [
+     34,
+     51
+    ],
+    "distinct": 32,
+    "mass": 670,
+    "above": 4,
+    "example": "ge/Hold"
+   },
+   {
+    "col": 3,
+    "span": [
+     65,
+     70
+    ],
+    "distinct": 6,
+    "mass": 190,
+    "above": 25,
+    "example": ""
+   },
+   {
+    "col": 4,
+    "span": [
+     78,
+     158
+    ],
+    "distinct": 36,
+    "mass": 1331,
+    "above": 4,
+    "example": ""
+   }
+  ],
+  "sample": [
+   [
+    "De",
+    "red=Unknown/Install/R",
+    "ge/Hold",
+    "",
+    ""
+   ],
+   [
+    "| ",
+    "atus=Not/Inst/Conf-fi",
+    "ked/halF-conf/Hal",
+    "ait/T",
+    ""
+   ],
+   [
+    "|/",
+    "rr?=(none)/Reinst-req",
+    "atus,Err: upperca",
+    "",
+    ""
+   ]
+  ]
+ },
+ {
+  "path": "bench/holdout-x42/findmnt.txt",
+  "rows": 26,
+  "cols": 4,
+  "bounds": [
+   43,
+   44,
+   45,
+   46,
+   47,
+   48,
+   49,
+   50,
+   51,
+   52,
+   53,
+   54,
+   55,
+   65,
+   66,
+   67,
+   68,
+   69,
+   70,
+   71,
+   72,
+   73,
+   83,
+   84,
+   85
+  ],
+  "spans": [
+   [
+    0,
+    43
+   ],
+   [
+    56,
+    65
+   ],
+   [
+    74,
+    83
+   ],
+   [
+    86,
+    149
+   ]
+  ],
+  "totalChars": 3164,
+  "constChars": 0,
+  "aboveChars": 0,
+  "stats": [
+   {
+    "col": 0,
+    "span": [
+     0,
+     43
+    ],
+    "distinct": 25,
+    "mass": 1118,
+    "above": 1,
+    "example": "TARGET                  "
+   },
+   {
+    "col": 1,
+    "span": [
+     56,
+     65
+    ],
+    "distinct": 21,
+    "mass": 234,
+    "above": 4,
+    "example": "SOURCE   "
+   },
+   {
+    "col": 2,
+    "span": [
+     74,
+     83
+    ],
+    "distinct": 20,
+    "mass": 234,
+    "above": 4,
+    "example": "FSTYPE   "
+   },
+   {
+    "col": 3,
+    "span": [
+     86,
+     149
+    ],
+    "distinct": 15,
+    "mass": 928,
+    "above": 6,
+    "example": "OPTIONS"
+   }
+  ],
+  "sample": [
+   [
+    "TARGET                                     ",
+    "SOURCE   ",
+    "FSTYPE   ",
+    "OPTIONS"
+   ],
+   [
+    "/                                          ",
+    "/dev/vda ",
+    "ext4     ",
+    "rw,relatime,discard"
+   ],
+   [
+    "|-/dev                                     ",
+    "devtmpfs ",
+    "devtmpfs ",
+    "rw,relatime,size=2014060k,nr_inodes=503515,mode=755"
+   ]
+  ]
+ },
+ {
+  "path": "bench/holdout-x41/ls-real.txt",
+  "rows": 39,
+  "cols": 5,
+  "bounds": [
+   10,
+   12,
+   17,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27
+  ],
+  "spans": [
+   [
+    0,
+    10
+   ],
+   [
+    11,
+    12
+   ],
+   [
+    13,
+    17
+   ],
+   [
+    18,
+    22
+   ],
+   [
+    28,
+    103
+   ]
+  ],
+  "totalChars": 2390,
+  "constChars": 0,
+  "aboveChars": 0,
+  "stats": [
+   {
+    "col": 0,
+    "span": [
+     0,
+     10
+    ],
+    "distinct": 5,
+    "mass": 390,
+    "above": 26,
+    "example": "total 1219"
+   },
+   {
+    "col": 1,
+    "span": [
+     11,
+     12
+    ],
+    "distinct": 4,
+    "mass": 39,
+    "above": 31,
+    "example": "0"
+   },
+   {
+    "col": 2,
+    "span": [
+     13,
+     17
+    ],
+    "distinct": 2,
+    "mass": 148,
+    "above": 35,
+    "example": ""
+   },
+   {
+    "col": 3,
+    "span": [
+     18,
+     22
+    ],
+    "distinct": 2,
+    "mass": 148,
+    "above": 35,
+    "example": ""
+   },
+   {
+    "col": 4,
+    "span": [
+     28,
+     103
+    ],
+    "distinct": 38,
+    "mass": 1330,
+    "above": 0,
+    "example": ""
+   }
+  ],
+  "sample": [
+   [
+    "total 1219",
+    "0",
+    "",
+    "",
+    ""
+   ],
+   [
+    "lrwxrwxrwx",
+    "1",
+    "root",
+    "root",
+    "  45 May 13 14:50 corepack -> ../lib/node_modules/corepack/dist/corepack.js"
+   ],
+   [
+    "-rwxrwxrwx",
+    "1",
+    "root",
+    "root",
+    " 388 Jun 11 00:46 docker-entrypoint.sh"
+   ]
+  ]
+ },
+ {
+  "path": "bench/holdout-x41/ps-real.txt",
+  "rows": 40,
+  "cols": 6,
+  "bounds": [
+   0,
+   1,
+   2,
+   3,
+   7,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   21,
+   22,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   38
+  ],
+  "spans": [
+   [
+    4,
+    7
+   ],
+   [
+    8,
+    12
+   ],
+   [
+    18,
+    21
+   ],
+   [
+    23,
+    26
+   ],
+   [
+    33,
+    38
+   ],
+   [
+    39,
+    73
+   ]
+  ],
+  "totalChars": 2258,
+  "constChars": 0,
+  "aboveChars": 0,
+  "stats": [
+   {
+    "col": 0,
+    "span": [
+     4,
+     7
+    ],
+    "distinct": 40,
+    "mass": 120,
+    "above": 0,
+    "example": "PID"
+   },
+   {
+    "col": 1,
+    "span": [
+     8,
+     12
+    ],
+    "distinct": 5,
+    "mass": 160,
+    "above": 33,
+    "example": "USER"
+   },
+   {
+    "col": 2,
+    "span": [
+     18,
+     21
+    ],
+    "distinct": 4,
+    "mass": 120,
+    "above": 36,
+    "example": "CPU"
+   },
+   {
+    "col": 3,
+    "span": [
+     23,
+     26
+    ],
+    "distinct": 6,
+    "mass": 120,
+    "above": 30,
+    "example": "MEM"
+   },
+   {
+    "col": 4,
+    "span": [
+     33,
+     38
+    ],
+    "distinct": 5,
+    "mass": 200,
+    "above": 25,
+    "example": "APSED"
+   },
+   {
+    "col": 5,
+    "span": [
+     39,
+     73
+    ],
+    "distinct": 40,
+    "mass": 698,
+    "above": 0,
+    "example": "COMMAND"
+   }
+  ],
+  "sample": [
+   [
+    "PID",
+    "USER",
+    "CPU",
+    "MEM",
+    "APSED",
+    "COMMAND"
+   ],
+   [
+    "553",
+    "user",
+    "104",
+    "5.7",
+    "02:59",
+    "node /tmp/_run_1539.mjs"
+   ],
+   [
+    "229",
+    "root",
+    "0.4",
+    "0.4",
+    "05:40",
+    "/usr/bin/envd"
+   ]
+  ]
+ },
+ {
+  "path": "bench/holdout-x42/ps-ef.txt",
+  "rows": 40,
+  "cols": 8,
+  "bounds": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   24,
+   25,
+   27,
+   33,
+   35,
+   36,
+   37,
+   38,
+   39,
+   40,
+   41,
+   42,
+   51
+  ],
+  "spans": [
+   [
+    0,
+    4
+   ],
+   [
+    14,
+    16
+   ],
+   [
+    23,
+    24
+   ],
+   [
+    26,
+    27
+   ],
+   [
+    28,
+    33
+   ],
+   [
+    34,
+    35
+   ],
+   [
+    43,
+    51
+   ],
+   [
+    52,
+    81
+   ]
+  ],
+  "totalChars": 2605,
+  "constChars": 0,
+  "aboveChars": 440,
+  "stats": [
+   {
+    "col": 0,
+    "span": [
+     0,
+     4
+    ],
+    "distinct": 2,
+    "mass": 160,
+    "above": 38,
+    "example": "UID "
+   },
+   {
+    "col": 1,
+    "span": [
+     14,
+     16
+    ],
+    "distinct": 40,
+    "mass": 80,
+    "above": 0,
+    "example": "ID"
+   },
+   {
+    "col": 2,
+    "span": [
+     23,
+     24
+    ],
+    "distinct": 3,
+    "mass": 40,
+    "above": 37,
+    "example": "D"
+   },
+   {
+    "col": 3,
+    "span": [
+     26,
+     27
+    ],
+    "distinct": 2,
+    "mass": 40,
+    "above": 38,
+    "example": "C"
+   },
+   {
+    "col": 4,
+    "span": [
+     28,
+     33
+    ],
+    "distinct": 2,
+    "mass": 200,
+    "above": 38,
+    "example": "STIME"
+   },
+   {
+    "col": 5,
+    "span": [
+     34,
+     35
+    ],
+    "distinct": 2,
+    "mass": 40,
+    "above": 38,
+    "example": "T"
+   },
+   {
+    "col": 6,
+    "span": [
+     43,
+     51
+    ],
+    "distinct": 3,
+    "mass": 320,
+    "above": 36,
+    "example": "    TIME"
+   },
+   {
+    "col": 7,
+    "span": [
+     52,
+     81
+    ],
+    "distinct": 40,
+    "mass": 525,
+    "above": 0,
+    "example": "CMD"
+   }
+  ],
+  "sample": [
+   [
+    "UID ",
+    "ID",
+    "D",
+    "C",
+    "STIME",
+    "T",
+    "    TIME",
+    "CMD"
+   ],
+   [
+    "root",
+    " 1",
+    "0",
+    "0",
+    "20:41",
+    "?",
+    "00:00:00",
+    "/sbin/init"
+   ],
+   [
+    "root",
+    " 2",
+    "0",
+    "0",
+    "20:41",
+    "?",
+    "00:00:00",
+    "[kthreadd]"
+   ]
+  ]
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "rows": 23,
+  "cols": 7,
+  "bounds": [
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   36,
+   40,
+   41,
+   42,
+   43,
+   44,
+   52,
+   53,
+   54,
+   55,
+   56,
+   58,
+   59,
+   60,
+   61,
+   62,
+   63,
+   64,
+   65,
+   66,
+   67,
+   74,
+   75,
+   88,
+   89,
+   90,
+   91
+  ],
+  "spans": [
+   [
+    0,
+    25
+   ],
+   [
+    37,
+    40
+   ],
+   [
+    45,
+    52
+   ],
+   [
+    57,
+    58
+   ],
+   [
+    68,
+    74
+   ],
+   [
+    76,
+    88
+   ],
+   [
+    92,
+    115
+   ]
+  ],
+  "totalChars": 2626,
+  "constChars": 0,
+  "aboveChars": 69,
+  "stats": [
+   {
+    "col": 0,
+    "span": [
+     0,
+     25
+    ],
+    "distinct": 23,
+    "mass": 575,
+    "above": 0,
+    "example": "NAME                    "
+   },
+   {
+    "col": 1,
+    "span": [
+     37,
+     40
+    ],
+    "distinct": 2,
+    "mass": 69,
+    "above": 21,
+    "example": "REA"
+   },
+   {
+    "col": 2,
+    "span": [
+     45,
+     52
+    ],
+    "distinct": 3,
+    "mass": 161,
+    "above": 7,
+    "example": "STATUS "
+   },
+   {
+    "col": 3,
+    "span": [
+     57,
+     58
+    ],
+    "distinct": 5,
+    "mass": 23,
+    "above": 0,
+    "example": "R"
+   },
+   {
+    "col": 4,
+    "span": [
+     68,
+     74
+    ],
+    "distinct": 23,
+    "mass": 138,
+    "above": 0,
+    "example": "AGE   "
+   },
+   {
+    "col": 5,
+    "span": [
+     76,
+     88
+    ],
+    "distinct": 23,
+    "mass": 276,
+    "above": 0,
+    "example": "IP          "
+   },
+   {
+    "col": 6,
+    "span": [
+     92,
+     115
+    ],
+    "distinct": 6,
+    "mass": 510,
+    "above": 0,
+    "example": "NODE"
+   }
+  ],
+  "sample": [
+   [
+    "NAME                     ",
+    "REA",
+    "STATUS ",
+    "R",
+    "AGE   ",
+    "IP          ",
+    "NODE"
+   ],
+   [
+    "api-server-7d9f8b00-a0000",
+    "1/1",
+    "Running",
+    "0",
+    "2d0h  ",
+    "10.244.0.0  ",
+    "node-0.cluster.internal"
+   ],
+   [
+    "api-server-7d9f8b01-b0003",
+    "1/1",
+    "Running",
+    "1",
+    "3d1h  ",
+    "10.244.1.11 ",
+    "node-1.cluster.internal"
+   ]
+  ]
+ },
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "rows": 19,
+  "cols": 6,
+  "bounds": [
+   15,
+   16,
+   21,
+   22,
+   27,
+   28,
+   33,
+   34,
+   38
+  ],
+  "spans": [
+   [
+    0,
+    15
+   ],
+   [
+    17,
+    21
+   ],
+   [
+    23,
+    27
+   ],
+   [
+    29,
+    33
+   ],
+   [
+    35,
+    38
+   ],
+   [
+    39,
+    49
+   ]
+  ],
+  "totalChars": 920,
+  "constChars": 0,
+  "aboveChars": 0,
+  "stats": [
+   {
+    "col": 0,
+    "span": [
+     0,
+     15
+    ],
+    "distinct": 19,
+    "mass": 285,
+    "above": 0,
+    "example": "Filesystem     "
+   },
+   {
+    "col": 1,
+    "span": [
+     17,
+     21
+    ],
+    "distinct": 19,
+    "mass": 76,
+    "above": 0,
+    "example": "ize "
+   },
+   {
+    "col": 2,
+    "span": [
+     23,
+     27
+    ],
+    "distinct": 19,
+    "mass": 76,
+    "above": 0,
+    "example": "sed "
+   },
+   {
+    "col": 3,
+    "span": [
+     29,
+     33
+    ],
+    "distinct": 19,
+    "mass": 76,
+    "above": 0,
+    "example": "ail "
+   },
+   {
+    "col": 4,
+    "span": [
+     35,
+     38
+    ],
+    "distinct": 19,
+    "mass": 57,
+    "above": 0,
+    "example": "e% "
+   },
+   {
+    "col": 5,
+    "span": [
+     39,
+     49
+    ],
+    "distinct": 19,
+    "mass": 179,
+    "above": 0,
+    "example": "ounted on"
+   }
+  ],
+  "sample": [
+   [
+    "Filesystem     ",
+    "ize ",
+    "sed ",
+    "ail ",
+    "e% ",
+    "ounted on"
+   ],
+   [
+    "/dev/nvme0n1p0 ",
+    "100G",
+    " 40G",
+    " 50G",
+    "30%",
+    "/mnt/vol0"
+   ],
+   [
+    "/dev/nvme0n1p1 ",
+    "137G",
+    " 51G",
+    " 59G",
+    "33%",
+    "/mnt/vol1"
+   ]
+  ]
+ },
+ {
+  "path": "bench/holdout-x41/df-real.txt",
+  "rows": 6,
+  "cols": 6,
+  "bounds": [
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   20,
+   21,
+   26,
+   32,
+   37
+  ],
+  "spans": [
+   [
+    0,
+    10
+   ],
+   [
+    16,
+    20
+   ],
+   [
+    22,
+    26
+   ],
+   [
+    27,
+    32
+   ],
+   [
+    33,
+    37
+   ],
+   [
+    38,
+    48
+   ]
+  ],
+  "totalChars": 264,
+  "constChars": 0,
+  "aboveChars": 0,
+  "stats": [
+   {
+    "col": 0,
+    "span": [
+     0,
+     10
+    ],
+    "distinct": 4,
+    "mass": 60,
+    "above": 2,
+    "example": "Filesystem"
+   },
+   {
+    "col": 1,
+    "span": [
+     16,
+     20
+    ],
+    "distinct": 5,
+    "mass": 24,
+    "above": 1,
+    "example": "Size"
+   },
+   {
+    "col": 2,
+    "span": [
+     22,
+     26
+    ],
+    "distinct": 4,
+    "mass": 24,
+    "above": 1,
+    "example": "Used"
+   },
+   {
+    "col": 3,
+    "span": [
+     27,
+     32
+    ],
+    "distinct": 5,
+    "mass": 30,
+    "above": 1,
+    "example": "Avail"
+   },
+   {
+    "col": 4,
+    "span": [
+     33,
+     37
+    ],
+    "distinct": 4,
+    "mass": 24,
+    "above": 1,
+    "example": "Use%"
+   },
+   {
+    "col": 5,
+    "span": [
+     38,
+     48
+    ],
+    "distinct": 6,
+    "mass": 36,
+    "above": 0,
+    "example": "Mounted on"
+   }
+  ],
+  "sample": [
+   [
+    "Filesystem",
+    "Size",
+    "Used",
+    "Avail",
+    "Use%",
+    "Mounted on"
+   ],
+   [
+    "/dev/root ",
+    " 21G",
+    "1.7G",
+    "  19G",
+    "  9%",
+    "/"
+   ],
+   [
+    "devtmpfs  ",
+    "2.0G",
+    "   0",
+    " 2.0G",
+    "  0%",
+    "/dev"
+   ]
+  ]
+ }
+]

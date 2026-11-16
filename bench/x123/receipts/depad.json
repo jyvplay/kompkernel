@@ -1,0 +1,164 @@
+[
+ {
+  "lane": "ls-l-real.txt",
+  "rows": 146,
+  "cols": 9,
+  "constCols": [
+   2,
+   3
+  ],
+  "constVals": [
+   "root",
+   "root"
+  ],
+  "constMass": 1460,
+  "widths": [
+   10,
+   2,
+   4,
+   4,
+   8,
+   3,
+   2,
+   5
+  ],
+  "aligns": "LRLLRLRR",
+  "blockChars": 10303,
+  "depadChars": 9416,
+  "delChars": 7956
+ },
+ {
+  "lane": "ls-real.txt",
+  "rows": 26,
+  "cols": 9,
+  "constCols": [
+   2,
+   3
+  ],
+  "constVals": [
+   "root",
+   "root"
+  ],
+  "constMass": 260,
+  "widths": [
+   10,
+   1,
+   4,
+   4,
+   10,
+   3,
+   2,
+   5
+  ],
+  "aligns": "LLLLRLRR",
+  "blockChars": 1558,
+  "depadChars": 1390,
+  "delChars": 1130
+ },
+ {
+  "lane": "ps-ef.txt",
+  "rows": 37,
+  "cols": 8,
+  "constCols": [
+   0,
+   3,
+   4,
+   5
+  ],
+  "constVals": [
+   "root",
+   "0",
+   "20:41",
+   "?"
+  ],
+  "constMass": 555,
+  "widths": [
+   4,
+   11,
+   7,
+   2,
+   5,
+   1,
+   15
+  ],
+  "aligns": "LRRRLLR",
+  "blockChars": 2426,
+  "depadChars": 1569,
+  "delChars": 1014
+ },
+ {
+  "lane": "kubectl-get-pods.txt",
+  "rows": 23,
+  "cols": 7,
+  "constCols": [],
+  "constVals": [],
+  "constMass": 0,
+  "widths": [
+   36,
+   7,
+   11,
+   10,
+   7,
+   15
+  ],
+  "aligns": "LLLLLL",
+  "blockChars": 2626,
+  "depadChars": 1835,
+  "delChars": 1835
+ },
+ {
+  "lane": "df-h.txt",
+  "rows": 16,
+  "cols": 6,
+  "constCols": [],
+  "constVals": [],
+  "constMass": 0,
+  "widths": [
+   16,
+   4,
+   5,
+   5,
+   4
+  ],
+  "aligns": "LLRRR",
+  "blockChars": 775,
+  "depadChars": 692,
+  "delChars": 692
+ },
+ {
+  "lane": "psql-output.txt",
+  "rows": 21,
+  "cols": 11,
+  "constCols": [
+   0,
+   2,
+   4,
+   6,
+   8
+  ],
+  "constVals": [
+   "|",
+   "|",
+   "|",
+   "|",
+   "|"
+  ],
+  "constMass": 210,
+  "widths": [
+   1,
+   2,
+   1,
+   9,
+   4,
+   10,
+   1,
+   6,
+   1,
+   9
+  ],
+  "aligns": "LLLLRLLLLL",
+  "blockChars": 1155,
+  "depadChars": 1036,
+  "delChars": 826
+ }
+]
