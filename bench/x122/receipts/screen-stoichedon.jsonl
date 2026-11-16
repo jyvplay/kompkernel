@@ -1,0 +1,10 @@
+{"path":"bench/holdout-x42b/vmstat.txt","tokens":144}
+{"path":"bench/holdout-x42/findmnt.txt","tokens":430}
+{"path":"bench/holdout-work/llm-answer.md","tokens":665}
+{"path":"bench/holdout-x41/ls-real.txt","tokens":422}
+{"path":"bench/holdout/json-pkg.txt","tokens":657}
+{"path":"bench/holdout/code-ts.txt","tokens":950}
+{"path":"bench/holdout-x42/dpkg-l.txt","tokens":655}
+{"path":"bench/holdout-tbl/kubectl-get-pods.txt","tokens":310}
+{"path":"bench/holdout-x41/ps-aux-real.txt","tokens":991}
+{"path":"bench/holdout-x41/apt-real.txt","tokens":816}

@@ -42,6 +42,7 @@ import { palindromosDisabled, palindromosEncode } from './palindromos';
 import { proagogeDisabled, proagogeEncode } from './proagoge';
 import { diglossiaDisabled, diglossiaEncode } from './diglossia';
 import { veltistosDisabled, veltistosEncode } from './veltistos';
+import { stoichedonDisabled, stoichedonEncode } from './stoichedon';
 import { CHIRON_START, chironDecode } from './chiron';
 import { perikopiDisabled, perikopiRewrite } from './perikopi';
 import { tachygrafiaDisabled, tachygrafiaRewrite } from './tachygrafia';
@@ -929,6 +930,22 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
   // encoder call, no clock.
   if (!veltistosDisabled()) {
     try { admitParentRelative('ΒΕΛΤΙΣΤΟΣ', veltistosEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X122 — ΣΤΟΙΧΗΔΟΝ.  ΒΕΛΤΙΣΤΟΣ has just re-spelled the body and the values and
+  // left the tape in whatever order that left it.  Two things about a tape are
+  // invisible to the reader — the ORDER the rules are written out in, and which
+  // pool letter names which rule — because CHIRON's contract names a rule by its
+  // glyph and never by its position.  Both are therefore free, and both change the
+  // price, since the tape is delimiter-free and its glyphs double as the
+  // token-boundary separators for the literal dictionary text.  Runs right after
+  // ΒΕΛΤΙΣΤΟΣ so it sees the final tape, and BEFORE the local ΔΙΓΛΩΣΣΙΑ pass,
+  // which then prices per-use choices against the re-ordered tape.  Pure
+  // relabelling: no rule added, deleted or re-spelled; the expansion is verified
+  // byte-for-byte by `chironDecode` against the incumbent's own expansion, the
+  // whole message must be strictly smaller, and the parent message is returned
+  // unchanged otherwise.  No encoder call, no clock, deterministic work budget.
+  if (!stoichedonDisabled()) {
+    try { admitParentRelative('ΣΤΟΙΧΗΔΟΝ', stoichedonEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
   }
   // X119 — ΔΙΓΛΩΣΣΙΑ.  Per-OCCURRENCE recoding of the finished wire: a literal
   // body span equal to an existing flat rule value may be adopted as that glyph,
