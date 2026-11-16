@@ -29,36 +29,46 @@ Receipts in this directory:
 | `stoichedon-unit.ts` | 62 assertions, 0 failures |
 | `ab.ts` → `receipts/ab2.json` | balanced 29-lane A/B, ON vs `OMEGA_NO_STOICHEDON=1` |
 
-## 0. Headline result (live pipeline, not the frozen wires)
+## 0. Headline result (live pipeline, complete)
 
 Balanced A/B on the canonical 29 (`bench/x122/receipts/ab2.json`), OFF =
 `OMEGA_NO_STOICHEDON=1`, ON = ΣΤΟΙΧΗΔΟΝ, everything else identical, balanced arm
-order:
+order — the harness's own verdict line:
 
-| | lanes | Σ tokens | better | worse | inexact | wall |
-|---|---|---|---|---|---|---|
-| OFF | 28 | 10 808 | — | — | 0 | 569.7 s |
-| ON | 28 | **10 779** | **12** | **0** | 0 | 583.2 s |
-| Δ | | **−29** | | | | **1.024×** |
+```
+TOTAL off 12133 on 12102  ΣΔ -31  better 13  worse 0  same 16
+      noRegression true  exact true  chironReachable true  samePriceHashStable true  unreachable 4
+WALL  off 1193.0s on 1268.5s  speedup 0.940x ; CPU off 1247.8s on 1327.2s  speedup 0.940x
+```
 
-Best lane **`ps-aux-real` 1 002 → 991, Δ −11** (ΣΤΟΙΧΗΔΟΝ's own note: *M 1004 →
+| | Σ tokens | better | worse | inexact |
+|---|---|---|---|---|
+| OFF (`OMEGA_NO_STOICHEDON=1`) | 12 133 | — | — | 0 |
+| ON (ΣΤΟΙΧΗΔΟΝ) | **12 102** | **13** | **0** | 0 |
+| Δ | **−31** | | | |
+
+`OFF` reproduces the X121 frontier exactly (12 133), so the whole of the −31 is
+attributable to this module. `samePriceHashStable true` and `exact true` on every
+lane; the 4 lanes marked UNREACHABLE carry no `§` frame and are returned
+untouched, as designed.
+
+**Best lane `ps-aux-real` 1 002 → 991, Δ −11** (ΣΤΟΙΧΗΔΟΝ's own note: *M 1004 →
 992 (−12); 8 order + 4 glyph moves over 78 rules, 37 447 priced probes*) — an OPS
 lane, which is where the brief asked for the gain. Then `apt-real` −4,
-`json-pkg` −3, `code-ts` −2, `dpkg-l` −2, and seven lanes −1. `expSHA256` is
-identical between arms on every lane, i.e. the CHIRON-layer expansion is
-byte-identical; `exact true` on both arms of every lane.
+`json-pkg` −3, `code-ts` −2, `dpkg-l` −2, `ls-l-real` **−2**, and seven lanes −1.
 
-The 29th lane (`ls-l-real`) had not completed when this was written; the frozen
-wire screen and the pool census both give Δ = 0 for it, so the expected final
-total is **−29 on 29**.
+**Correction to an earlier claim in this report.** The frozen-wire screen and the
+pool census both predicted Δ = 0 for `ls-l-real`, the largest-gap lane, and §3
+records that as a limit. On the live pipeline it is **−2**: ΜΕΤΑΤΑΞΙΣ, ΠΡΟΑΓΩΓΉ,
+ΒΕΛΤΙΣΤΟΣ and ΔΙΑΓΡΑΦΉ leave a different tape behind than the frozen wire, one
+with four more pool letters free than the 119/122 the frozen tape uses. The limit
+is softer than the screen suggested, and the screen's Δ for a lane is not the
+pipeline's Δ for that lane — which is the general lesson of this turn's two
+measurement layers.
 
-Wall clock: **1.024×**, i.e. ΣΤΟΙΧΗΔΟΝ is a trade — 29 tokens for ~2.4 % more
-time on the whole stack. That is much better than the frozen-wire screen's raw
-search cost suggested (27 s over 19 lanes), because the search runs once per lane
-on a tape the rest of the stack has already built. **Requirement (c), whole-stack
-speed, is still NOT met: this is strictly more CPU for strictly fewer tokens.**
-
----
+Wall clock **0.940×** (i.e. +6.4 % time), CPU **0.940×**. **Requirement (c),
+whole-stack speed, is NOT met: this is strictly more CPU for strictly fewer
+tokens**, and it is reported as such rather than smoothed over.
 
 ## 1. The frontier this turn started from, re-confirmed
 
