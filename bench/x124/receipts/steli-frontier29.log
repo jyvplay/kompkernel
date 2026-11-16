@@ -1,0 +1,22 @@
+lsblk.txt                frozen    60 today    60 same         steli    60 Δ     0 exact y [2.4s] no fit | no offset-aligned padded record block
+free-m.txt               frozen    76 today    76 same         steli    76 Δ     0 exact y [2.4s] no fit | no offset-aligned padded record block
+kb-article.txt           frozen   620 today   620 same         steli   620 Δ     0 exact y [5.7s] no fit | no offset-aligned padded record block
+vmstat.txt               frozen   145 today   144 MOVED -1     steli   144 Δ     0 exact y [2.9s] no fit | no offset-aligned padded record block
+df-h.txt                 frozen   160 today   160 same         steli   160 Δ     0 exact y [10.4s] fit 12x5 off 0,17,23,29,35 pad 52 split f | G6 loses 227 vs 160 (pad 52)
+df-real.txt              frozen   124 today   123 MOVED -1     steli   123 Δ     0 exact y [9.0s] fit 4x3 off 0,16,22 pad 41 split f | G6 loses 178 vs 123 (pad 41)
+node-help.txt            frozen   852 today   852 same         steli   852 Δ     0 exact y [16.9s] fit 6x2 off 2,30 pad 174 split f | G6 loses 897 vs 852 (pad 174)
+findmnt.txt              frozen   431 today   430 MOVED -1     steli   416 Δ   -14 exact y [14.9s] fit 26x4 off 0,56,74,86 pad 1283 split l
+email-thread.txt         frozen   486 today   486 same         steli   486 Δ     0 exact y [7.6s] no fit | no offset-aligned padded record block
+llm-answer.md            frozen   666 today   665 MOVED -1     steli   665 Δ     0 exact y [9.3s] no fit | no offset-aligned padded record block
+psql-output.txt          frozen   230 today   230 same         steli   230 Δ     0 exact y [9.2s] no fit | no offset-aligned padded record block
+prices.csv               frozen   119 today   119 same         steli   119 Δ     0 exact y [9.7s] no fit | no offset-aligned padded record block
+ps-ef.txt                frozen   299 today   299 same         steli   299 Δ     0 exact y [10.6s] no fit | no offset-aligned padded record block
+ls-real.txt              frozen   423 today   422 MOVED -1     steli   422 Δ     0 exact y [13.0s] no fit | no offset-aligned padded record block
+code-ts.txt              frozen   952 today   950 MOVED -2     steli   950 Δ     0 exact y [32.8s] no fit | no offset-aligned padded record block
+dpkg-l.txt               frozen   657 today   655 MOVED -2     steli   648 Δ    -7 exact y [39.8s] fit 35x5 off 0,4,34,65,78 pad 1677 split f
+metrics.tsv              frozen   198 today   198 same         steli   198 Δ     0 exact y [14.6s] no fit | no offset-aligned padded record block
+kubectl-get-pods.txt     frozen   311 today   310 MOVED -1     steli   310 Δ     0 exact y [34.9s] fit 23x7 off 0,37,45,57,68,76,92 pad 791 split f | G6 loses 333 vs 310 (pad 791)
+apt-real.txt             frozen   820 today   816 MOVED -4     steli   816 Δ     0 exact y [97.2s] no fit | no offset-aligned padded record block
+chunk 0/3: Σ frozen 4246 Σ today 4239 Σ Δ 0 over 10 lanes
+ls-l-real.txt            frozen  1325 today  1323 MOVED -2     steli  1323 Δ     0 exact y [411.7s] no fit | no offset-aligned padded record block
+chunk 1/3: Σ frozen 4708 Σ today 4699 Σ Δ -21 over 10 lanes

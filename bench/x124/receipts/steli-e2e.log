@@ -1,0 +1,9 @@
+node-help.txt                inc   852 ->   852  Δ     0  exact true  marker does not parse back
+findmnt.txt                  inc   430 ->   430  Δ     0  exact true  G7 the parent wire lost the marker line
+dpkg-l.txt                   inc   655 ->   655  Δ     0  exact true  G7 the parent wire lost the marker line
+kubectl-get-pods.txt         inc   303 ->   303  Δ     0  exact true  G6 loses 305 vs 303 (pad 791)
+df-real.txt                  inc   123 ->   123  Δ     0  exact true  G6 loses 158 vs 123 (pad 41)
+df-h.txt                     inc   160 ->   160  Δ     0  exact true  G6 loses 200 vs 160 (pad 52)
+df-real.txt                  inc   123 ->   123  Δ     0  exact true  G6 loses 158 vs 123 (pad 41)
+node-help.txt                inc   852 ->   852  Δ     0  exact true  G6 loses 880 vs 852 (pad 174)
+df-h.txt                     inc   105 ->   105  Δ     0  exact true  G6 loses 140 vs 105 (pad 41)

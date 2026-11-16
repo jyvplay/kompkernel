@@ -1,0 +1,7 @@
+¶ k=v. expand repeatedly; print only.
+§ی rwه,بهnosuid,nodevشهrelatimeطب,noexecشح
+|ایطحرfsعهmode=ت.service ramر ramر roطع700ویطن-/صح |نيsysمصrun/credentials/systemdفصي/fsخریق `ندقproc/sys/fs/binfmt_miscښk,nr_inodes=ے tmpخب,size=806892ښ819200ع755ستم-tmpfiles-setupٹ tmpرل,nosuid,noexecشةdev¶# source: findmnt (real)
+‡56,18,12:26 rows single-spaced, pad field k to width kه split from the right.
+TARGET SOURCE FSTYPE OPTIONS
+/ /dev/vda ext4یشهdiscardحنة devtmpfs devtmpخش,size=2014060ښ503515ع755صة/shmٹ tmpخبصة/pts devpts devptsیلهgid=5ع620,ptmxmode=000صة/mqueue mqueue mqueueاقة/hugepages hugetlbfs hugetlbfsیشهpagesize=2Mحنproc proc procاد systemd-1 autofsیشهfd=30,pgrp=1,timeout=0,minproto=5,maxproto=5,directح  د binfmt_misc binfmt_miscاني ير sysخطصي/kernel/security securityfs securityروف/selinux selinuxfs selinuxخلف/cgroup cgroup2 cgroup2وهnsdelegate,memory_recursiveprotف/pstore pstore pstoreوف/bpf bpf bpfوع700صي/kernel/debug debugfs debugراقي/fs/fuse/connections fusectl fusectlانrunٹےصrun/lockٹٹو,size=5120kم-sysctlتم-sysusersس-devستحقrun/rpc_pipefs sunrpc rpc_pipeخش
+`نetc/ssl/certsٹ[/e2b/certs]ے

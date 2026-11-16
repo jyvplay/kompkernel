@@ -1,0 +1,11 @@
+import * as fs from 'node:fs';
+import { countTokens } from '../../src/lib/omega/bpe';
+import { tagstackFrontier } from '../../src/lib/omega/tagstack';
+const enc = 'o200k_base' as const;
+const [srcPath, newPath] = process.argv.slice(2);
+const a = fs.readFileSync(srcPath, 'utf8');
+const b = fs.readFileSync(newPath, 'utf8');
+console.log('raw', countTokens(a, enc), '->', countTokens(b, enc));
+const fa = tagstackFrontier(a, enc);
+const fb = tagstackFrontier(b, enc);
+console.log('frontier', fa.messageTokens, '->', fb.messageTokens, 'exact', fa.decoded === a && fb.decoded === b);

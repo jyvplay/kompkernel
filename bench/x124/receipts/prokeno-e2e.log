@@ -1,0 +1,30 @@
+lsblk                  base    60  unique    60 (refused)  all-sites no plan  exact true  2243ms  no elidable space-before-number junction
+kb-article             base   622  unique   622 (refused)  all-sites 644 (+22) elided 1 marked 0  exact false  2189ms  G6 loses 644 vs 622 (raw 656->655)
+uptime-w               base    80  unique    80 (refused)  all-sites 100 (+20) elided 2 marked 0  exact false  2004ms  G6 loses 100 vs 80 (raw 80->78)
+free-m                 base    76  unique    76 (refused)  all-sites no plan  exact true  2244ms  no elidable space-before-number junction
+vmstat                 base   149  unique   149 (refused)  all-sites 171 (+22) elided 2 marked 1  exact false  2201ms  G6 loses 171 vs 149 (raw 229->228)
+unified-diff           base   419  unique   419 (refused)  all-sites 449 (+30) elided 17 marked 6  exact false  3107ms  G6 loses 449 vs 419 (raw 578->569)
+df-h                   base   171  unique   171 (refused)  all-sites no plan  exact true  2156ms  no elidable space-before-number junction
+df-real                base   126  unique   126 (refused)  all-sites 147 (+21) elided 1 marked 0  exact false  4077ms  G6 loses 147 vs 126 (raw 158->157)
+du-real                base   272  unique   272 (refused)  all-sites no plan  exact true  3143ms  no elidable space-before-number junction
+node-help              base   862  unique   862 (refused)  all-sites no plan  exact true  5804ms  no elidable space-before-number junction
+findmnt                base   444  unique   444 (refused)  all-sites no plan  exact true  5391ms  no elidable space-before-number junction
+df-h                   base   108  unique   108 (refused)  all-sites no plan  exact true  3774ms  no elidable space-before-number junction
+email-thread           base   488  unique   488 (refused)  all-sites 511 (+23) elided 24 marked 4  exact false  6443ms  G6 loses 514 vs 488 (raw 629->615)
+llm-answer             base   674  unique   674 (refused)  all-sites 695 (+21) elided 18 marked 1  exact false  6958ms  G6 loses 695 vs 674 (raw 733->716)
+markdown-table         base   176  unique   176 (refused)  all-sites 198 (+22) elided 30 marked 0  exact false  6230ms  G6 loses 200 vs 176 (raw 330->304)
+psql-output            base   244  unique   244 (refused)  all-sites 261 (+17) elided 72 marked 0  exact false  8820ms  G6 loses 261 vs 244 (raw 675->603)
+prices                 base   133  unique   133 (refused)  all-sites no plan  exact true  9343ms  no elidable space-before-number junction
+cue-sheet              base   163  unique   163 (refused)  all-sites 180 (+17) elided 56 marked 0  exact false  11234ms  G6 loses 180 vs 163 (raw 513->457)
+ps-ef                  base   315  unique   315 (refused)  all-sites no plan  exact true  9458ms  no elidable space-before-number junction
+ls-real                base   433  unique   433 (refused)  all-sites 458 (+25) elided 75 marked 15  exact false  10337ms  G6 loses 465 vs 433 (raw 1034->1019)
+json-pkg               base   681  unique   681 (refused)  all-sites no plan  exact true  13571ms  no elidable space-before-number junction
+code-ts                base   969  unique   969 (refused)  all-sites 1005 (+36) elided 10 marked 0  exact false  20366ms  G6 loses 995 vs 969 (raw 1422->1416)
+dpkg-l                 base   673  unique   673 (refused)  all-sites no plan  exact true  17698ms  no elidable space-before-number junction
+ps-real                base   397  unique   397 (refused)  all-sites no plan  exact true  11029ms  no elidable space-before-number junction
+kubectl-get-pods       base   326  unique   326 (refused)  all-sites no plan  exact true  17950ms  no elidable space-before-number junction
+metrics                base   210  unique   210 (refused)  all-sites no plan  exact true  14410ms  no elidable space-before-number junction
+ps-aux-real            base  1042  unique  1042 (refused)  all-sites 1074 (+32) elided 3 marked 0  exact false  48129ms  G6 loses 1074 vs 1042 (raw 3054->3051)
+apt-real               base   850  unique   850 (refused)  all-sites no plan  exact true  90558ms  no elidable space-before-number junction
+ls-l-real              base  1476  unique  1476 (refused)  all-sites 1489 (+13) elided 114 marked 55  exact false  206747ms  G6 loses 1492 vs 1476 (raw 5194->5162)
+TOTAL base 12639 best 12639 delta 0

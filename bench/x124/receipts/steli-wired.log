@@ -1,0 +1,45 @@
+ON  lsblk.txt                M    60 exact y [2.4s] arm outside | outside bounded, collision-free, well-nested markup domain
+ON  uptime-w.txt             M    80 exact y [2.0s] arm outside | outside bounded, collision-free, well-nested markup domain
+ON  vmstat.txt               M   144 exact y [2.6s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΣΤΟΙΧΗΔΟΝ M 146 -> 145 (-1); 1 order + 0 glyph moves over 11 r
+ON  kb-article.txt           M   620 exact y [5.1s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΜΕΤΑΤΑΞΙΣ metataxis: 560 probes, 1 relocations, 622 -> 621 (-1
+ON  free-m.txt               M    76 exact y [2.8s] arm outside | outside bounded, collision-free, well-nested markup domain
+ON  df-h.txt                 M   160 exact y [10.5s] arm TACHYGRAFIA | TACHYGRAFIA phrase 23->15 tok over 1 line(s) via tachygrafia; ΒΕΛΤΙΣΤΟΣ veltistos: 17 shortest-path parse(s), 16825 edge
+ON  unified-diff.patch       M   411 exact y [4.2s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΒΕΛΤΙΣΤΟΣ veltistos: 30 shortest-path parse(s), 12016 edges, 4
+ON  du-real.txt              M   266 exact y [3.9s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΒΕΛΤΙΣΤΟΣ veltistos: 22 shortest-path parse(s), 12002 edges, 4
+ON  df-real.txt              M   123 exact y [9.3s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΣΤΟΙΧΗΔΟΝ M 125 -> 124 (-1); 0 order + 1 glyph moves over 13 r
+ON  findmnt.txt              M   416 exact y [12.1s] arm STELI | ΣΤΉΛΗ ΣΤΉΛΗ 26x4 offsets 0,56,74,86 pad 1283; M 444->416; wire by synkrisis; outside bounded, collision-free, well-neste
+ON  email-thread.txt         M   486 exact y [7.2s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΜΕΤΑΤΑΞΙΣ metataxis: 973 probes, 1 relocations, 488 -> 487 (-1
+ON  node-help.txt            M   852 exact y [16.4s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΒΕΛΤΙΣΤΟΣ veltistos: 42 shortest-path parse(s), 117724 edges, 
+ON  markdown-table.md        M   172 exact y [6.7s] arm PERIKOPI | PERIKOPI legend 24->22 tok over 1 clause(s) via general; ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (635 B); 1 enabling pair
+ON  df-h.txt                 M   105 exact y [9.4s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΣΤΟΙΧΗΔΟΝ M 107 -> 106 (-1); 0 order + 1 glyph moves over 13 r
+ON  prices.csv               M   119 exact y [9.8s] arm TACHYGRAFIA | TACHYGRAFIA phrase 45->44 tok over 1 line(s) via tachygrafia; PERIKOPI legend 57->45 tok over 1 clause(s) via general; Β
+ON  llm-answer.md            M   665 exact y [9.0s] arm ΣΤΟΙΧΗΔΟΝ | ΣΤΟΙΧΗΔΟΝ M 666 -> 665 (-1); 0 order + 1 glyph moves over 34 rules, 6396 priced probes; ΒΕΛΤΙΣΤΟΣ veltistos: 27 shortest
+ON  ps-ef.txt                M   299 exact y [10.2s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΒΕΛΤΙΣΤΟΣ veltistos: 25 shortest-path parse(s), 82202 edges, 4
+ON  psql-output.txt          M   230 exact y [10.1s] arm PERIKOPI | PERIKOPI legend 73->61 tok over 1 clause(s) via general; ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (948 B); 0 enabling pair
+ON  json-pkg.txt             M   657 exact y [17.8s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΣΤΟΙΧΗΔΟΝ M 661 -> 658 (-3); 1 order + 2 glyph moves over 48 r
+ON  cue-sheet.md             M   101 exact y [12.4s] arm STICHOMYTHIA | STICHOMYTHIA 28x4 M=101 < metron M=163; outside bounded, collision-free, well-nested markup domain
+ON  ls-real.txt              M   422 exact y [12.4s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΔΙΓΛΩΣΣΙΑ diglossia: 2 round(s), 6612 sites, 317 prices, 0 ado
+ON  dpkg-l.txt               M   648 exact y [33.4s] arm STELI | ΣΤΉΛΗ ΣΤΉΛΗ 35x5 offsets 0,4,34,65,78 pad 1677; M 673->648; wire by synkrisis; outside bounded, collision-free, well-nes
+ON  code-ts.txt              M   950 exact y [31.8s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΣΤΟΙΧΗΔΟΝ M 953 -> 951 (-2); 0 order + 2 glyph moves over 75 r
+ON  ps-real.txt              M   381 exact y [20.3s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΒΕΛΤΙΣΤΟΣ veltistos: 26 shortest-path parse(s), 27161 edges, 4
+ON  kubectl-get-pods.txt     M   310 exact y [46.2s] arm TACHYGRAFIA | TACHYGRAFIA phrase 23->15 tok over 1 line(s) via tachygrafia; ΣΤΟΙΧΗΔΟΝ M 319 -> 318 (-1); 1 order + 0 glyph moves over 
+ON  metrics.tsv              M   198 exact y [19.5s] arm TACHYGRAFIA | TACHYGRAFIA phrase 23->15 tok over 1 line(s) via tachygrafia; ΒΕΛΤΙΣΤΟΣ veltistos: 19 shortest-path parse(s), 13536 edge
+ON  ps-aux-real.txt          M   991 exact y [75.6s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΣΤΟΙΧΗΔΟΝ M 1004 -> 992 (-12); 8 order + 4 glyph moves over 78
+ON  apt-real.txt             M   816 exact y [118.5s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΣΤΟΙΧΗΔΟΝ M 821 -> 817 (-4); 1 order + 3 glyph moves over 62 r
+ON  ls-l-real.txt            M  1323 exact y [373.2s] arm ΓΕΝΝΑΔΑΣ | ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (9340 B); 2 enabling pairs, 1 priced improvements; M 1325 -> 1323; ΣΥΝΘΕΣΙΣ fused
+OFF uptime-w.txt             M    80 exact y [3.0s] arm outside | outside bounded, collision-free, well-nested markup domain
+OFF unified-diff.patch       M   411 exact y [4.0s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΒΕΛΤΙΣΤΟΣ veltistos: 30 shortest-path parse(s), 12016 edges, 4
+OFF du-real.txt              M   266 exact y [3.4s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΒΕΛΤΙΣΤΟΣ veltistos: 22 shortest-path parse(s), 12002 edges, 4
+OFF markdown-table.md        M   172 exact y [6.3s] arm PERIKOPI | PERIKOPI legend 24->22 tok over 1 clause(s) via general; ΓΕΝΝΑΔΑΣ gennadas: ref = parent output (635 B); 1 enabling pair
+OFF ls-real.txt              M   422 exact y [15.4s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΔΙΓΛΩΣΣΙΑ diglossia: 2 round(s), 6612 sites, 317 prices, 0 ado
+ON  findmnt.txt              M   414 exact y [15.1s] arm STELI | ΣΤΉΛΗ ΣΤΉΛΗ 26x4 offsets 0,56,74,86 pad 1283; M 444->414; wire by synkrisis; outside bounded, collision-free, well-neste
+OFF code-ts.txt              M   950 exact y [36.2s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΣΤΟΙΧΗΔΟΝ M 953 -> 951 (-2); 0 order + 2 glyph moves over 75 r
+ON  dpkg-l.txt               M   646 exact y [33.7s] arm STELI | ΣΤΉΛΗ ΣΤΉΛΗ 35x5 offsets 0,4,34,65,78 pad 1677; M 673->646; wire by synkrisis; outside bounded, collision-free, well-nes
+OFF kubectl-get-pods.txt     M   310 exact y [18.2s] arm TACHYGRAFIA | TACHYGRAFIA phrase 23->15 tok over 1 line(s) via tachygrafia; ΣΤΟΙΧΗΔΟΝ M 319 -> 318 (-1); 1 order + 0 glyph moves over 
+OFF apt-real.txt             M   816 exact y [98.4s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΣΤΟΙΧΗΔΟΝ M 821 -> 817 (-4); 1 order + 3 glyph moves over 62 r
+OFF findmnt.txt              M   430 exact y [8.7s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΣΤΟΙΧΗΔΟΝ M 432 -> 431 (-1); 0 order + 1 glyph moves over 34 r
+ON  findmnt.txt              M   389 exact y [14.9s] arm STELI | ΣΤΉΛΗ ΣΤΉΛΗ 26x4 offsets 0,56,74,86 pad 1283; M 444->389; wire by synkrisis; outside bounded, collision-free, well-neste
+OFF dpkg-l.txt               M   655 exact y [22.7s] arm PERIKOPI | PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; ΣΤΟΙΧΗΔΟΝ M 658 -> 656 (-2); 1 order + 1 glyph moves over 46 r
+OFF kubectl-get-pods.txt     M   310 exact y [19.0s] arm TACHYGRAFIA | TACHYGRAFIA phrase 23->15 tok over 1 line(s) via tachygrafia; ΣΤΟΙΧΗΔΟΝ M 319 -> 318 (-1); 1 order + 0 glyph moves over 
+ON  dpkg-l.txt               M   624 exact y [35.0s] arm STELI | ΣΤΉΛΗ ΣΤΉΛΗ 35x5 offsets 0,4,34,65,78 pad 1677; M 673->624; wire by synkrisis; outside bounded, collision-free, well-nes
+ON  kubectl-get-pods.txt     M   303 exact y [34.6s] arm STELI | ΣΤΟΙΧΗΔΟΝ M 304 -> 303 (-1); 1 order + 0 glyph moves over 25 rules, 3330 priced probes; ΓΕΝΝΑΔΑΣ gennadas: ref = parent 
