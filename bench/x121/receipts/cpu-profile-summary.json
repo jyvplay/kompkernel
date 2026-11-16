@@ -1,0 +1,123 @@
+{
+  "schema": "kompkernel-x121-cpu-profile-summary-v1",
+  "date": "2026-11-16",
+  "lane": "bench/holdout-x41/node-help.txt",
+  "command": "node --cpu-prof bench/x121/_prof.ts",
+  "tokens": 852,
+  "wallMs": 24550,
+  "note": "self time; raw .cpuprofile is gitignored (bench/x121/receipts/prof/). Symbol names are the esbuild bundle's, mapped back to source: countTokens3 = bpe.ts countTokens.",
+  "selfPctByFrame": [
+    {
+      "frame": "countLongRaw (the chunk fold)",
+      "source": "bpe.ts",
+      "selfPct": 13.43
+    },
+    {
+      "frame": "countTokens3 (= bpe.ts countTokens, esbuild-renamed)",
+      "source": "bpe.ts",
+      "selfPct": 10.34
+    },
+    {
+      "frame": "scoreRunCostDeltaSlots",
+      "source": "ariadne.ts",
+      "selfPct": 10.21
+    },
+    {
+      "frame": "renderBest",
+      "source": "ariadne.ts",
+      "selfPct": 7.66
+    },
+    {
+      "frame": "(garbage collector)",
+      "source": "-",
+      "selfPct": 4.55
+    },
+    {
+      "frame": "PRETOK regex (o200k pre-tokenizer)",
+      "source": "bpe.ts",
+      "selfPct": 4.15
+    },
+    {
+      "frame": "(anon @6405)",
+      "source": "ariadne.ts",
+      "selfPct": 3.42
+    },
+    {
+      "frame": "getBpeRankFromString",
+      "source": "bpe-fast.ts",
+      "selfPct": 2.41
+    },
+    {
+      "frame": "conv",
+      "source": "bpe-fast.ts",
+      "selfPct": 2.05
+    },
+    {
+      "frame": "put",
+      "source": "ariadne.ts",
+      "selfPct": 1.94
+    },
+    {
+      "frame": "encode",
+      "source": "tiktoken encoding",
+      "selfPct": 1.82
+    },
+    {
+      "frame": "evaluate",
+      "source": "ariadne.ts",
+      "selfPct": 1.8
+    },
+    {
+      "frame": "rankAt",
+      "source": "bpe-fast.ts",
+      "selfPct": 1.71
+    },
+    {
+      "frame": "enumerateTokenSpans",
+      "source": "-",
+      "selfPct": 1.56
+    },
+    {
+      "frame": "rollback",
+      "source": "ariadne.ts",
+      "selfPct": 1.39
+    },
+    {
+      "frame": "relayoutGlyphs",
+      "source": "ariadne.ts",
+      "selfPct": 1.29
+    },
+    {
+      "frame": "mergeCount",
+      "source": "bpe-fast.ts",
+      "selfPct": 1.08
+    },
+    {
+      "frame": "fastChunkCount",
+      "source": "bpe-fast.ts",
+      "selfPct": 1.03
+    }
+  ],
+  "tokenizerSharePct": 23.77,
+  "searchSharePct": 28.4,
+  "counters": {
+    "chunkHits": 7550112,
+    "chunkMisses": 95563,
+    "shortHits": 1389533,
+    "shortMisses": 129656,
+    "longHits": 5627,
+    "longMisses": 16648,
+    "tailMemoHits": 86624,
+    "tailMemoMisses": 31139,
+    "prolepsis": {
+      "lookups": 15635,
+      "hits": 4145,
+      "hitRate": 0.2651,
+      "savedChars": 1724060,
+      "countedChars": 26244105,
+      "savedFraction": 0.0616,
+      "lcpWork": 10889435,
+      "gateStops": 6781
+    }
+  }
+}
