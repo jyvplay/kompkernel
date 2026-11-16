@@ -1,0 +1,30 @@
+bench/holdout-x42/lsblk.txt                no fit
+bench/holdout-work/kb-article.txt          no fit
+bench/holdout-x42b/uptime-w.txt            no fit
+bench/holdout-x42b/free-m.txt              no fit
+bench/holdout-x42b/vmstat.txt              no fit
+bench/holdout-work/unified-diff.patch      no fit
+bench/holdout-tbl/df-h.txt                 fit 12x5 off 0,17,23,29,35                pad    52 split f undo y contract 22
+bench/holdout-x41/df-real.txt              fit 4x3 off 0,16,22                      pad    41 split f undo y contract 18
+bench/holdout-x41/du-real.txt              no fit
+bench/holdout-x41/node-help.txt            fit 6x2 off 2,30                         pad   174 split f undo y contract 17
+bench/holdout-x42/findmnt.txt              fit 26x4 off 0,56,74,86                   pad  1283 split l undo y contract 25
+bench/holdout-x42/df-h.txt                 fit 4x3 off 0,16,22                      pad    41 split f undo y contract 18
+bench/holdout-work/email-thread.txt        no fit
+bench/holdout-work/llm-answer.md           no fit
+bench/holdout-tbl/markdown-table.md        no fit
+bench/holdout-tbl/psql-output.txt          no fit
+bench/holdout-x40/prices.csv               no fit
+bench/holdout-x40/cue-sheet.md             no fit
+bench/holdout-x42/ps-ef.txt                no fit
+bench/holdout-x41/ls-real.txt              no fit
+bench/holdout/json-pkg.txt                 no fit
+bench/holdout/code-ts.txt                  no fit
+bench/holdout-x42/dpkg-l.txt               fit 35x5 off 0,4,34,65,78                 pad  1677 split f undo y contract 22
+bench/holdout-x41/ps-real.txt              no fit
+bench/holdout-tbl/kubectl-get-pods.txt     fit 23x7 off 0,37,45,57,68,76,92          pad   791 split f undo y contract 26
+bench/holdout-x40/metrics.tsv              no fit
+bench/holdout-x41/ps-aux-real.txt          no fit
+bench/holdout-x41/apt-real.txt             no fit
+bench/holdout-x41/ls-l-real.txt            no fit
+census: 7/29 fit, Σ pad 4059

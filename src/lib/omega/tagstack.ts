@@ -36,6 +36,7 @@ import { synkrisisEncode } from './synkrisis';
 import { isomorphiaEncode, isomorphiaDisabled } from './isomorphia';
 import { metataxisEncode, metataxisDisabled } from './metataxis';
 import { platosEncode, platosDisabled } from './platos';
+import { steliEncode, steliDisabled } from './steli';
 import { syndyasmosDisabled, syndyasmosEncode } from './syndyasmos';
 import { gennadasDisabled, gennadasEncode } from './gennadas';
 import { diagrapheDisabled, diagrapheEncode } from './diagraphe';
@@ -810,6 +811,31 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
   // stand-in, and so the arm cannot rot: it type-checks and is reachable.
   if (!platosDisabled()) {
     try { admit('ΠΛΑΤΟΣ', platosEncode(text, enc, { incumbent: best.messageTokens }) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+
+  // X124 — ΣΤΉΛΗ. Unlike ΠΛΆΤΟΣ this one is ON by default, because it clears the
+  // bar on a lane the parent cannot reach at all. The two fitters look similar
+  // and are not: ΠΛΆΤΟΣ cuts a row on whitespace runs, so a column that contains
+  // a single space (findmnt's tree column, `| |-/dev/shm`) breaks its arity and
+  // the block is unfittable at every sub-window. ΣΤΉΛΗ slices by absolute
+  // offsets instead, which is a strict superset on fixed-offset tables and costs
+  // a vector of integers in the marker rather than a template row plus per-column
+  // anchoring. Measured on the shipped path (bench/x124/steli-e2e.ts receipts):
+  //   findmnt 430 -> 416  (pad 1 283 chars, 26x4 at 0,56,74,86, split from the right)
+  //   dpkg-l  655 -> 648  (pad 1 677 chars, 35x5 at 0,4,34,65,78)
+  //   kubectl 310 -> refused (+7), node-help 852 -> refused (+35)
+  // 25 of the 29 lanes have no offset-aligned block at all and refuse at the fit,
+  // before any parent work. Like every candidate it is admitted only on a
+  // strictly smaller complete, byte-exact message measured in this process, and
+  // the nested call refuses (`IN_STELI`) so the child is priced with one level.
+  // `OMEGA_NO_STELI=1` turns it off for A/B.
+  if (!steliDisabled()) {
+    try {
+      admit('ΣΤΉΛΗ', steliEncode(text, enc, {
+        incumbent: best.messageTokens,
+        inner: (t: string, e: EncodingName) => tagstackX74ChainMeasured(t, e),
+      }) as unknown as WideResult);
+    } catch { /* not a candidate */ }
   }
 
   /**
