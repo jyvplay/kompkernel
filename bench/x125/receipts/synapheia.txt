@@ -1,0 +1,58 @@
+lane                     rules  pairs  base   opt   Δopt  bestRnd  medRnd  worstRnd  exact
+lsblk.txt                (skip)
+uptime-w.txt             (skip)
+vmstat.txt                  11     35    173   173     0      202     208       215  y
+kb-article.txt              27    103    649   649     0      712     725       731  y
+df-h.txt                    16     50    184   184     0      213     217       222  y
+free-m.txt               (skip)
+du-real.txt                 23     56    295   295     0      336     344       348  y
+unified-diff.patch          33     89    441   441     0      503     511       515  y
+df-real.txt                 13     36    152   152     0      176     181       185  y
+findmnt.txt                 25     75    417   417     0      459     468       478  y
+email-thread.txt            39    108    516   516     0      586     594       597  y
+node-help.txt               41    149    881   881     0      982    1011      1016  y
+markdown-table.md           12     26    188   188     0      202     208       210  y
+df-h.txt                    13     36    134   134     0      158     163       167  y
+prices.csv                   9     27    115   115     0      135     137       137  y
+llm-answer.md               34    126    694   694     0      783     792       801  y
+ps-ef.txt                   28    102    327   327     0      375     387       397  y
+psql-output.txt             20     69    208   208     0      256     261       263  y
+cue-sheet.md             (skip)
+json-pkg.txt                48    224    686   686     0      803     833       841  y
+ls-real.txt                 46    139    451   451     0      539     545       549  y
+dpkg-l.txt                  32    157    652   652     0      731     748       761  y
+code-ts.txt                 75    394    980   980     0     1174    1196      1215  y
+ps-real.txt                 30    130    410   410     0      493     503       511  y
+kubectl-get-pods.txt        25     78    327   327     0      376     386       390  y
+metrics.tsv                 18     67    222   222     0      260     269       272  y
+ps-aux-real.txt             78    321   1020  1020     0     1182    1210      1227  y
+apt-real.txt                62    590    846   846     0     1139    1185      1212  y
+ls-l-real.txt              119    466   1296  1296     0     1481    1504      1515  y
+
+vmstat.txt	shipScore=46	optScore=46	pool=122	script=cyrillic
+kb-article.txt	shipScore=87	optScore=87	pool=122	script=cyrillic
+df-h.txt	shipScore=52	optScore=52	pool=122	script=cyrillic
+du-real.txt	shipScore=53	optScore=53	pool=122	script=cyrillic
+unified-diff.patch	shipScore=86	optScore=86	pool=122	script=cyrillic
+df-real.txt	shipScore=38	optScore=38	pool=122	script=cyrillic
+findmnt.txt	shipScore=70	optScore=70	pool=128	script=arabic
+email-thread.txt	shipScore=87	optScore=87	pool=122	script=cyrillic
+node-help.txt	shipScore=145	optScore=145	pool=122	script=cyrillic
+markdown-table.md	shipScore=25	optScore=25	pool=128	script=arabic
+df-h.txt	shipScore=38	optScore=38	pool=122	script=cyrillic
+prices.csv	shipScore=23	optScore=23	pool=122	script=cyrillic
+llm-answer.md	shipScore=126	optScore=126	pool=122	script=cyrillic
+ps-ef.txt	shipScore=89	optScore=89	pool=128	script=arabic
+psql-output.txt	shipScore=71	optScore=71	pool=122	script=cyrillic
+json-pkg.txt	shipScore=180	optScore=180	pool=122	script=cyrillic
+ls-real.txt	shipScore=119	optScore=119	pool=122	script=cyrillic
+dpkg-l.txt	shipScore=164	optScore=164	pool=128	script=arabic
+code-ts.txt	shipScore=289	optScore=289	pool=122	script=cyrillic
+ps-real.txt	shipScore=129	optScore=129	pool=122	script=cyrillic
+kubectl-get-pods.txt	shipScore=81	optScore=81	pool=122	script=cyrillic
+metrics.tsv	shipScore=57	optScore=57	pool=122	script=cyrillic
+ps-aux-real.txt	shipScore=276	optScore=276	pool=122	script=cyrillic
+apt-real.txt	shipScore=464	optScore=464	pool=122	script=cyrillic
+ls-l-real.txt	shipScore=256	optScore=256	pool=122	script=cyrillic
+
+Σ base 12264   Σ optimised 12264   Δ 0   (Σ median-random 14586, Δ vs base 2322)

@@ -31,6 +31,7 @@
  * =============================================================================
  */
 
+import { epipsephisisTry, epipsephisisRecord, epipsephisisBind } from './epipsephisis';
 import {
   encode as encO200k,
   decode as decO200k,
@@ -181,6 +182,11 @@ const PRETOK: Record<EncodingName, RegExp> = {
   o200k_base: /[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n/]*|\s*[\r\n]+|\s+(?!\S)|\s+/gu,
   cl100k_base: /'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD])|[^\r\n\p{L}\p{N}]?\p{L}+|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n]*|\s*[\r\n]+|\s+(?!\S)|\s+/gu,
 };
+
+// X125 — ἘΠΙΨΉΦΙΣΙΣ. Hand the pre-tokenizer source and the counting entry point
+// to the window re-pricer. It re-derives a sticky copy of the pattern from this
+// one so the two can never disagree about where a chunk starts.
+epipsephisisBind((enc) => PRETOK[enc].source, countTokens);
 
 const CHUNK_CACHE = new Map<string, number>();
 let chunkHits = 0, chunkMisses = 0, chunkFallbacks = 0;
@@ -547,6 +553,14 @@ export function countTokens(text: string, enc: EncodingName): number {
     return v;
   };
 
+  // X125 — ἘΠΙΨΉΦΙΣΙΣ. Before folding the whole string, see whether it differs
+  // from a recently counted one only inside a bounded window. Exact (window
+  // re-price theorem), self-checking, and falls back to the fold below whenever
+  // it cannot prove the cut. Records the result in the long memo like any other
+  // count, so a repeated query still costs one map lookup.
+  const ep = cacheable ? epipsephisisTry(text, enc) : null;
+  if (ep !== null) return store(ep);
+
   // X121 — ΠΡΟΛΗΨΙΣ. Resume the fold from the longest counted prefix instead of
   // re-folding the whole string. Exact (X120's theorem), and the remainder is
   // priced by the same raw path, so no approximation enters here. When ΠΡΟΛΗΨΙΣ
@@ -557,17 +571,25 @@ export function countTokens(text: string, enc: EncodingName): number {
     const mk = prolepsisLookup(text, enc);
     if (mk !== null) {
       const resumed = countLongRaw(mk.tail + text.slice(mk.pos), enc, null);
-      if (resumed !== null) return store(mk.total - mk.tailTok + resumed);
+      if (resumed !== null) {
+        const v = store(mk.total - mk.tailTok + resumed);
+        epipsephisisRecord(text, enc, v);
+        return v;
+      }
     }
     const sink: MarkSink = { stride: prolepsisStride(), next: prolepsisStride(), out: [] };
     const n = countLongRaw(text, enc, sink);
     if (n === null) return countTokensExact(text, enc);
     prolepsisRecord(text, enc, sink.out);
-    return store(n);
+    const v = store(n);
+    epipsephisisRecord(text, enc, v);
+    return v;
   }
   const n0 = countLongRaw(text, enc, null);
   if (n0 === null) return countTokensExact(text, enc);
-  return store(n0);
+  const v0 = store(n0);
+  epipsephisisRecord(text, enc, v0);
+  return v0;
 }
 
 /* ---------------------------------------------------------------------------
@@ -651,6 +673,17 @@ export function tailMemoStats() { return { size: TAIL_MEMO.size, hits: tailHits,
 export function tailMemoClear(): void { TAIL_MEMO.clear(); tailHits = 0; tailMisses = 0; }
 
 /** assert the algebra rather than trust it */
+/**
+ * X126 — the pre-token regex source, so a codec can re-chunk a WINDOW of a
+ * string instead of re-scanning all of it.  `countTokens` prices a string by
+ * splitting it with this regex and merging each piece independently, so the
+ * split is the only global step; everything after it is per-chunk and memoised.
+ * Exposed read-only: the source, not the RegExp object, so no caller can mutate
+ * `lastIndex` on the shared instance (X125 hit exactly that bug when esbuild
+ * produced two copies of this module in one bundle).
+ */
+export function pretokSource(enc: EncodingName): string { return PRETOK[enc].source; }
+
 export function verifyChunkAlgebra(text: string, enc: EncodingName): boolean {
   return countTokens(text, enc) === countTokensExact(text, enc);
 }

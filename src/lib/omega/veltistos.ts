@@ -211,11 +211,11 @@ function ladder(): Array<readonly [number, number]> {
   return out.length ? out : VELTISTOS_LADDER.slice();
 }
 
-interface Entry { g: string; v: string }
+export interface Entry { g: string; v: string }
 /** `ctxTok` is lazy: a state that is pruned before it is expanded never pays for
  *  its own token count. -1 means "not computed yet". */
 interface State { ctx: string; ctxTok: number; cost: number; bi: number; bs: number; piece: string }
-interface Budget { edges: number; capped: boolean }
+export interface Budget { edges: number; capped: boolean }
 
 const cmp = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
 
@@ -334,7 +334,13 @@ function shortestPathChunk(
   return parts.join('');
 }
 
-/** Dispatch: exact chunk state by default, character window on opt-out. */
+/** Dispatch: exact chunk state by default, character window on opt-out.
+ *  Exported for X125's ΑΝΑΓΡΑΦΗ, which drives the same lattice over the tape
+ *  with a different portfolio. */
+export function veltistosParse(ref: string, entries: readonly Entry[], ctxLen: number, beam: number,
+             seedCtx: string, enc: EncodingName, budget: Budget): string | null {
+  return parse(ref, entries, ctxLen, beam, seedCtx, enc, budget);
+}
 function parse(ref: string, entries: readonly Entry[], ctxLen: number, beam: number,
              seedCtx: string, enc: EncodingName, budget: Budget): string | null {
   return windowState()
@@ -342,6 +348,10 @@ function parse(ref: string, entries: readonly Entry[], ctxLen: number, beam: num
     : shortestPathChunk(ref, entries, beam, seedCtx, enc, budget);
 }
 
+/** Rungs actually run: in chunk mode the context width is not a parameter.
+ *  Exported so ΑΝΑΓΡΑΦΗ runs the SAME portfolio over the tape that ΒΕΛΤΙΣΤΟΣ
+ *  runs over the body. */
+export function veltistosRungs() { return rungs(); }
 /** Rungs actually run: in chunk mode the context width is not a parameter. */
 function rungs(): Array<readonly [number, number]> {
   const all = ladder();

@@ -1,0 +1,8 @@
+hangul     one-token chars   677  merge pairs    387  Σdegree 774
+katakana   one-token chars    80  merge pairs    153  Σdegree 306
+cyrillic   one-token chars   122  merge pairs    823  Σdegree 1646
+arabic     one-token chars   128  merge pairs    771  Σdegree 1542
+myanmar    one-token chars    67  merge pairs     85  Σdegree 170
+khmer      one-token chars    66  merge pairs    109  Σdegree 218
+cjk        one-token chars  2515  merge pairs   2400  Σdegree 4800
+polyglot   one-token chars   799  merge pairs   3413  Σdegree 6826

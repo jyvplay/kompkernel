@@ -1,0 +1,51 @@
+lane                        rules    hangul katakan cyrilli  arabic myanmar   khmer     cjk polyglo
+lsblk.txt                  (no frame)
+uptime-w.txt               (no frame)
+vmstat.txt                    11       +25     +33     +15     +10     +36     +34     +26     +39
+kb-article.txt                27       +70     +68     +27     +22     +81     +70     +77     +89
+df-h.txt                      16       +31     +31     +14     +12     +35     +31     +29     +38
+free-m.txt                 (no frame)
+du-real.txt                   23       +46     +53     +25     +20     +52     +47     +46     +56
+unified-diff.patch            33       +71     +68     +34     +36     +65     +66     +68     +78
+df-real.txt                   13       +27     +23      +8      +5     +25     +27     +27     +38
+findmnt.txt                   25       +54     +53     +32     +20     +58     +59     +64     +74
+email-thread.txt              39       +72     +72     +41     +45     +77     +68     +79     +86
+node-help.txt                 41      +120     +97     +54     +54    +124    +130    +132    +146
+markdown-table.md             12       +17     +20      +4      +6     +20     +19     +19     +32
+df-h.txt                      13       +27     +23      +8      +5     +25     +27     +27     +38
+prices.csv                     9       +18     +17      +8      +6     +20     +16     +17     +27
+llm-answer.md                 34       +85     +97     +53     +49    +105    +101    +106    +115
+ps-ef.txt                     28       +67     +75     +40     +33     +77     +72     +69     +77
+psql-output.txt               20       +43     +49     +18     +16     +51     +51     +51     +60
+cue-sheet.md               (no frame)
+json-pkg.txt                  48      +131    +132     +89     +78    +149    +144    +154    +158
+ls-real.txt                   46       +87     +87     +62     +57    +105     +93     +90     +97
+dpkg-l.txt                    32       +95    +102     +46     +38    +115    +103    +113    +112
+code-ts.txt                   75      +227    +239    +179    +159     --     --    +236    +266
+ps-real.txt                   30       +78    +101     +44     +34    +108     +99     +95    +117
+kubectl-get-pods.txt          25       +56     +56     +32     +21     +53     +63     +66     +68
+metrics.tsv                   18       +44     +42     +26     +13     +40     +38     +44     +57
+ps-aux-real.txt               78      +193    +207    +122    +150     --     --    +210    +219
+apt-real.txt                  62      +342    +337    +215    +206    +333    +355    +367    +371
+ls-l-real.txt                119      +208     --    +149    +154     --     --    +206    +216
+
+Σ complete messages (contract re-generated per script; BASE = as shipped):
+  BASE    12264
+  hangul    14498  (Δ 2234)
+  katakana  13050  (Δ 786)
+  cyrillic  13609  (Δ 1345)
+  arabic    13513  (Δ 1249)
+  myanmar   10722  (Δ -1542)
+  khmer     10681  (Δ -1583)
+  cjk       14682  (Δ 2418)
+  polyglot  14938  (Δ 2674)
+
+label token costs (the contract names the script):
+  hangul    39  Hangul letter
+  katakana  39  Katakana letter
+  cyrillic  39  Cyrillic letter
+  arabic    38  Arabic letter
+  myanmar   38  Myanmar letter
+  khmer     38  Khmer letter
+  cjk       38  Chinese character
+  polyglot  48  Greek, Hebrew, Armenian, Georgian, Thai or Indic letter

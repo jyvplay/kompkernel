@@ -189,6 +189,23 @@ export const CHIRON_SCRIPTS: ChironScript[] = [
       [0x0e00, 0x0e80], [0x10a0, 0x1100],
     ],
   },
+  // X126 — union alphabets.  Every alphabet above is one Unicode block, so its
+  // size is whatever that block happens to contain: cyrillic 122 one-token
+  // letters, myanmar 67, khmer 66.  A lane that wants more rules than the block
+  // holds is CAPPED BY THE BLOCK, not by what the rules are worth — measured on
+  // ls-l-real, 119 of cyrillic's 122 letters are in use and removing any one of
+  // those rules costs tokens.  These entries are unions of blocks, appended so
+  // no earlier codec's choice changes, and exist so the pool SIZE can be a
+  // variable instead of an accident.
+  {
+    name: 'union2', label: 'Cyrillic or Arabic letter',
+    lo: 0x0400, hi: 0x0400, ranges: [[0x0400, 0x0500], [0x0600, 0x0700]],
+  },
+  {
+    name: 'union5', label: 'Cyrillic, Arabic, Katakana, Myanmar or Khmer letter',
+    lo: 0x0400, hi: 0x0400,
+    ranges: [[0x0400, 0x0500], [0x0600, 0x0700], [0x30a0, 0x3100], [0x1000, 0x10a0], [0x1780, 0x1800]],
+  },
 ];
 
 const poolCache = new Map<string, string[]>();
@@ -1186,6 +1203,11 @@ export interface ChironOptions {
   /** unit separator for the block pass */
   sep?: string;
   /**
+   * X125 — force the glyph alphabet by name (see the comment at the script pick
+   * in `chironEncode`). Undefined keeps the collision-minimum choice.
+   */
+  script?: string | undefined;
+  /**
    * X109 — ΣΥΜΜΕΤΡΟΝ.  Rank macro candidates by their TOKEN span length instead
    * of their CHARACTER length.  `enumerateTokenSpans` already walks the token
    * grid, so the span length is free, and the objective it proxies
@@ -1275,7 +1297,7 @@ interface BuildOutcome {
   work: number;
 }
 
-type BuildOptions = Required<Omit<ChironOptions, 'workUnits'>> & { workUnits?: number; hardWorkUnits?: number };
+type BuildOptions = Required<Omit<ChironOptions, 'workUnits' | 'script'>> & { script?: string | undefined; workUnits?: number; hardWorkUnits?: number };
 
 function buildCandidate(text: string, enc: EncodingName, script: ChironScript, opts: BuildOptions): BuildOutcome | null {
   const deadline = now() + opts.budgetMs;
@@ -1619,6 +1641,111 @@ function buildCandidate(text: string, enc: EncodingName, script: ChironScript, o
  * each operator family disabled.  An operator whose clause costs more than it
  * saves therefore never ships.
  */
+/* ---------------------------------------------------------------------------
+ * X125 — ΚΛΉΡΩΣΙΣ (klērōsis, "allotment / choice by lot").  Choosing the glyph
+ * alphabet by what it COSTS instead of by a proxy that is constant.
+ * -----------------------------------------------------------------------------
+ * The old pick sorted the scripts by how many payload characters fall inside
+ * each script's Unicode range and took the minimum. That number is meant to be a
+ * safety filter — a letter that occurs in the payload cannot be used as a key,
+ * because the tape is delimiter-free — and it is a good one. It is not a price.
+ * On any payload of ordinary ASCII it is ZERO FOR EVERY SCRIPT, so the sort is a
+ * no-op and the "minimum" is simply the first element of CHIRON_SCRIPTS. That
+ * element is hangul, and hangul is the worst alphabet in the table for this job.
+ *
+ * What an alphabet is actually for, once the collisions are equal: rules are
+ * named by one letter each, adjacent rule uses in the body land in one
+ * pre-token chunk, and a chunk of two letters is one token when the tokenizer
+ * happens to have a merge for that pair and two when it does not. So the number
+ * that matters is the probability that two pool letters merge. Measured
+ * (bench/x125/pools.ts, o200k_base, and bench/x125/klerosis.ts pricing all eight
+ * alphabets on ten lanes):
+ *
+ *     script     one-token letters   ordered merge pairs   merge rate
+ *     cyrillic          122                  823              5.53 %
+ *     arabic            128                  771              4.71 %
+ *     khmer              66                  109              2.50 %
+ *     katakana           80                  153              2.39 %
+ *     myanmar            67                   85              1.89 %
+ *     polyglot          799                 3413              0.53 %
+ *     hangul            677                  387              0.08 %
+ *     cjk              2515                 2400              0.04 %
+ *
+ * The old default was the 0.08 % row. Priced end to end over ten lanes
+ * (bench/x125/receipts/klerosis.log) the complete-message totals are
+ * hangul 9 120, cyrillic 9 070, arabic 9 019 — so hangul costs 51-101 tokens
+ * more than the two dense alphabets on those lanes, up to 24 on one lane.
+ *
+ * The rule is therefore: among the scripts with the fewest payload collisions,
+ * take the one whose letters merge most often. Collisions still dominate — a
+ * letter that appears in the payload is unusable, and no density compensates for
+ * that — and the density is only a tie-break inside the collision minimum, which
+ * is exactly where the old code had no rule at all.
+ *
+ * The density is measured on a SAMPLE of the pool (the first KLEROSIS_SAMPLE
+ * usable letters), not on the whole pool: cjk has 2 515 one-token letters and
+ * 6.3 M ordered pairs, which is not a price worth paying on a cold start. The
+ * sample is the same for every script and the table is computed once per
+ * process. `options.script` still forces an alphabet by name, and
+ * OMEGA_NO_KLEROSIS=1 restores the old first-element behaviour for the A/B.
+ * ------------------------------------------------------------------------- */
+const KLEROSIS_SAMPLE = 96;
+const densityCache = new Map<string, number>();
+
+export function klerosisDensity(script: ChironScript, enc: EncodingName): number {
+  const key = `${script.name}:${enc}`;
+  const hit = densityCache.get(key);
+  if (hit !== undefined) return hit;
+  const pool = scriptPool(script, enc);
+  const n = Math.min(pool.length, KLEROSIS_SAMPLE);
+  let merges = 0;
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      if (i === j) continue;
+      if (countTokens(pool[i]! + pool[j]!, enc) === 1) merges++;
+    }
+  }
+  const d = n > 1 ? merges / (n * (n - 1)) : 0;
+  densityCache.set(key, d);
+  return d;
+}
+
+function klerosisOn(): boolean {
+  try {
+    return !(typeof process !== 'undefined' && !!process.env && process.env.OMEGA_NO_KLEROSIS === '1');
+  } catch { return true; }
+}
+
+function klerosisPick(order: ChironScript[], text: string, enc: EncodingName): ChironScript {
+  /* X126 debug hook: force the alphabet by name so pool SIZE can be measured
+   * against pool DENSITY end to end.  Read per call, never at module load —
+   * X104 established that a load-time const in this repository reads the
+   * environment before the probe sets it. */
+  try {
+    const forced = typeof process !== 'undefined' && process.env ? process.env.OMEGA_CHIRON_SCRIPT : undefined;
+    if (forced) {
+      const s = CHIRON_SCRIPTS.find((x) => x.name === forced);
+      if (s) return s;
+    }
+  } catch { /* no process */ }
+  if (!klerosisOn()) return order[0]!;
+  const cols = new Map<ChironScript, number>();
+  let best = Infinity;
+  for (const s of order) {
+    const c = [...new Set(text)].filter((ch) => chironInScript(s, ch.codePointAt(0)!)).length;
+    cols.set(s, c);
+    if (c < best) best = c;
+  }
+  const tied = order.filter((s) => cols.get(s) === best);
+  let pick = tied[0]!;
+  let bestD = klerosisDensity(pick, enc);
+  for (const s of tied) {
+    const d = klerosisDensity(s, enc);
+    if (d > bestD) { bestD = d; pick = s; }
+  }
+  return pick;
+}
+
 export function chironEncode(text: string, enc: EncodingName = 'o200k_base', options: ChironOptions = {}): ChironResult {
   const started = now();
   const inTokens = countTokens(text, enc);
@@ -1637,7 +1764,18 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
     const cb = [...new Set(text)].filter(ch => chironInScript(b, ch.codePointAt(0)!)).length;
     return ca - cb;
   });
-  const script = scripts[0];
+  // X125 — ΚΛΉΡΩΣΙΣ. The collision-minimum above is a proxy, never a price, and
+  // it has no notion of HEADROOM: cyrillic has 122 one-token letters, so a wire
+  // that wants more rules than that is capped no matter how much a bigger
+  // alphabet (polyglot 799, cjk 2515, hangul 677) would have paid. `options.script`
+  // lets a caller force the alphabet so the two can be measured against each
+  // other. Default is unchanged.
+  const script = (options.script ? CHIRON_SCRIPTS.find(s2 => s2.name === options.script) : undefined)
+    ?? klerosisPick(scripts, text, enc);
+  if (typeof process !== 'undefined' && process.env && process.env.OMEGA_SCRIPT_TRACE === '1') {
+    process.stderr.write(`[script-trace] len=${text.length} pick=${script.name} ` +
+      CHIRON_SCRIPTS.map((s2) => `${s2.name}:${[...new Set(text)].filter((ch) => chironInScript(s2, ch.codePointAt(0)!)).length}`).join(' ') + `\n`);
+  }
 
   const keepBlocksOnly = options.keepBlocksOnly
     || (typeof process !== 'undefined' && !!process.env && process.env.OMEGA_KEEP_BLOCKS_ONLY === '1');
@@ -1666,7 +1804,7 @@ export function chironEncode(text: string, enc: EncodingName = 'o200k_base', opt
   const seps = options.sep !== undefined ? [options.sep] : chironSeparators(text, wideSeparators);
   const forcedBlocks = options.noBlocks;
   const forcedMacros = options.noMacros;
-  const variants: Array<{ tag: string; o: Required<Omit<ChironOptions, 'workUnits'>> }> = [];
+  const variants: Array<{ tag: string; o: BuildOptions }> = [];
   if (forcedBlocks !== undefined || forcedMacros !== undefined) {
     for (const sep of seps) {
       variants.push({ tag: `forced/${JSON.stringify(sep)}`, o: { noBlocks: !!forcedBlocks, noMacros: !!forcedMacros, maxRules, budgetMs, sep, keepBlocksOnly, wideSeparators, exactAccept, mrOrder, mrOrderVariants, exactAcceptVariants, symmetron: symmetronOn() } });

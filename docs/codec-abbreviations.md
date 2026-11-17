@@ -7742,3 +7742,352 @@ other complete message the frontier priced on that lane.
 3. **ΠΛΆΤΟΣ cannot fit fixed-offset tables** — measured at six sub-windows on `findmnt`; this is the gap ΣΤΉΛΗ was built to fill, and it is why the two codecs are not redundant.
 4. **Punctuation-space elision** carries ~1 025 raw-level profit concentrated in `| : > ? %` (corpus census), but the per-class junction probe (`bench/x124/numspace2.ts`) shows it does not survive the parent on any lane.
 5. **The frontier oracle is not the shipped price.** `tagstackFrontier` returned 444 on `findmnt` where `tagstackEncode` returns 430; X124's first end-to-end table priced the incumbent with the frontier and overstated both wins by ~2×. Every number in this section is from the shipped entry point.
+
+## §X125 — ΑΝΑΓΡΑΦΗ (ANAGRAPHE) + ΚΛΉΡΩΣΙΣ (KLEROSIS) + ἘΠΙΨΉΦΙΣΙΣ (EPIPSEPHISIS)
+
+X125 went looking for a token win and did not find a large one. It found three
+things instead: a **proved-exact incremental token counter that is a measured
+speed loss**, a **default that was never actually a choice**, and a **column of
+the ΒΕΛΤΙΣΤΟΣ search that had never been searched**. All three are shipped, one
+of them is shipped switched off, and the corpus total is reported below with the
+number it actually moved.
+
+**Headline: Σ 12 023 → 12 020, Δ −3 on the canonical 29** (`bench/x125/receipts/x125-ab.jsonl`,
+both arms `tagstackEncode`, every row `decoded === src`). One lane moved
+(`ps-aux-real` 991 → **988**); 28 did not. That is the honest size of X125, and
+everything below is the measurement that produced it.
+
+### X125.1 — ΚΛΉΡΩΣΙΣ: the alphabet pick that was not a pick
+
+`chironEncode` chose the glyph alphabet by sorting the eight candidates on *how
+many payload characters fall inside each script's Unicode range* and taking the
+minimum. That number is a **safety filter**, and a good one — a letter that
+occurs in the payload cannot be a rule name, because the tape is
+delimiter-free. It is not a price. On a payload of ordinary ASCII it is **zero
+for every script**, so the sort was a no-op and the "minimum" was always just
+the first element of `CHIRON_SCRIPTS`. That element is **hangul**.
+
+Hangul is the worst alphabet in the table for this job. Once collisions are
+equal, what an alphabet is *for* is that adjacent rule uses land in one
+pre-token chunk, and a two-letter chunk is one token when the tokenizer has a
+merge for that pair and two when it does not. Measured (`bench/x125/pools.ts`,
+o200k_base; `bench/x125/klerosis.ts` prices all eight on ten lanes):
+
+| script | one-token letters | ordered merge pairs | merge rate |
+|---|---|---|---|
+| **cyrillic** | 122 | 823 | **5.53 %** |
+| arabic | 128 | 771 | 4.71 % |
+| khmer | 66 | 109 | 2.50 % |
+| katakana | 80 | 153 | 2.39 % |
+| myanmar | 67 | 85 | 1.89 % |
+| polyglot | 799 | 3 413 | 0.53 % |
+| **hangul (old default)** | 677 | 387 | **0.08 %** |
+| cjk | 2 515 | 2 400 | 0.04 % |
+
+The rule is now: **among the scripts with the fewest payload collisions, take
+the one whose letters merge most often** (`klerosisPick`). Collisions still
+dominate — no density compensates for a letter that appears in the payload — and
+density is only a tie-break *inside* the collision minimum, which is exactly the
+place where the old code had no rule at all. Density is measured on a 96-letter
+sample of each pool once per process, because cjk's 2 515 letters are 6.3 M
+ordered pairs and that is not a price worth paying on a cold start.
+
+**Δ 0 tokens end to end.** On the bare ΧΊΡΩΝ path (`bench/x125/receipts/klerosis.log`)
+the choice is worth 50–101 tokens (hangul 9 120, cyrillic 9 070, arabic 9 019
+over ten lanes); through the shipped chain it is worth **nothing** — every lane
+of the 29-lane A/B returns the same total. The downstream search
+(ΒΕΛΤΙΣΤΟΣ's portfolio, ΣΤΟΙΧΗΔΟΝ's relabelling, ΔΙΓΛΏΣΣΙΑ's per-occurrence
+recoding) is evidently rich enough to find the same price in any alphabet whose
+pool is larger than the rule count. It ships as a **defect fix, not a win**: a
+comparator that is constant on the whole input distribution is a bug, and the
+bare-path number says the fixed default is the right one.
+
+A trap worth recording: `bench/x125/receipts/respell.txt` appears to show khmer
+at Σ 10 681 against a Σ 12 264 base, a 13 % win. It is an artefact. The `--`
+entries (lanes whose rule count exceeds the script's one-token pool — code-ts 75,
+ps-aux-real 78, ls-l-real 119 against myanmar 67 / khmer 66) are **excluded from
+the script columns and included in the base**, so the two Σ are not over the same
+lanes. Corrected for the three missing lanes the sign flips. Do not quote that row.
+
+### X125.2 — ΑΝΑΓΡΑΦΗ: the search that was never run on the tape
+
+X120's ΒΕΛΤΙΣΤΟΣ answers "given this tape, what is the cheapest spelling of the
+BODY?" with an exact shortest path, then applies the same parse to the tape's
+values. Its shipped note on `bench/holdout-x41/apt-real.txt` reads `body −14,
+tape −0`, and the tape column is the one that does not move on every lane I have
+measured. The reason is in the code, and it is not a modelling judgement:
+
+* **stage 1 (body)** is searched over a **portfolio** — `rungs()` returns three
+  `(context, beam)` settings, each is priced as a complete message, the cheapest
+  survives;
+* **stage 2 (tape)** is searched **once**, at a fixed `(24, 4)` — a beam of 4
+  that is not even a rung of the ladder.
+
+So ΑΝΑΓΡΑΦΗ (**"a writing out afresh"**) runs the tape over the *same* lattice
+(`veltistosParse`, whose `(position, emitted-tail)` state X120 proved exact) with
+the *same* portfolio, and three additions:
+
+1. **the portfolio** — the rungs ΒΕΛΤΙΣΤΟΣ runs on the body, on the tape. Rungs
+   at or below beam 4 are skipped: that is work whose answer is already in the
+   incumbent, and repeating it is how this lane got to 3× cost.
+2. **exact seeds** — each value's parse is seeded with the whole tape prefix,
+   not X120's deliberately truncated 32-character slice. I measured before
+   claiming anything: of the 877 rules in the 29 shipped wires, **exactly 2**
+   have a value long enough for the truncation to change the seed's tail
+   (`bench/x125`). So this is a **latent-defect fix and is reported as one**,
+   worth ≈1–2 tokens, not where the gain comes from.
+3. **re-entry** — after the tape is re-spelled, a full ΒΕΛΤΙΣΤΟΣ pass, and back,
+   until neither improves. Re-spelling the tape invalidates the body's price and
+   vice versa, so a single pass is a fixed point only by accident. This is the
+   multi-round shape Hucke's Ω(log n / log log n) lower bound on Greedy
+   (arXiv:2609.12106, X124) says is the only shape that can approach the optimum.
+
+The topological restriction (a value may only be spelled with glyphs of rules
+written *earlier* in the tape) is the wire grammar, not a heuristic: a later
+glyph would be parsed as a new key and `chironDecode` rejects forward
+references. Every proposal is priced as a complete one-chat message and admitted
+only if `chironDecode` of it reproduces the incumbent's expansion byte for byte.
+
+**Result: −3 tokens, all of them on one lane.** `ps-aux-real` 991 → **988**;
+`code-ts` 950, `ls-l-real` 1 323, `apt-real` 816, `node-help` 852 unchanged
+(`bench/x125/receipts/x125-ab.jsonl`, 1 better / 0 worse / 28 same). The tape column is dense for a reason
+that is not the search's fault and is worth stating, because it is the largest
+structure in the corpus and the thing a future turn should attack:
+
+* Σ 12 023 = contract 736 (6.1 %) + **tape 2 940 (24.5 %)** + body 8 347 (69.4 %);
+* tape 7 001 chars at **0.420 tok/char**, body 26 832 chars at **0.311**;
+* 877 rules, 512 of which quote another glyph; 1 154 of 6 124 literal tape
+  characters (18.9 %) sit inside nested refs;
+* on `ls-l-real` the tape is 531 of 726 emitted tokens and *119 of those 531 are
+  the rule-name letters themselves* — one token per rule, which is the floor for
+  naming 119 rules with one-token letters (`bench/x125/receipts/anatomy-x125.txt`).
+
+Price the tape at the body's rate and the corpus falls by ~760 tokens (6.3 %).
+That gap is boundary waste, and ΑΝΑΓΡΑΦΗ closes **3** of it. The search is not
+the lever; the tape's *layout* is.
+
+### X125.3 — ἘΠΙΨΉΦΙΣΙΣ: proved exact, measured useless, shipped OFF
+
+ἘΠΙΨΉΦΙΣΙΣ is an **incremental token counter**: when the stack asks for the
+price of a long string it has already priced a near neighbour of, it proves the
+two agree on a prefix and a suffix, cuts both at a legal boundary, and prices
+only the window between the cuts. `bench/x125/epipsephisis-verify.ts` does a
+differential test against `countTokensExact` across 4 edit modes × the 29 lanes
+plus the 29 shipped wires: **5 989 cases at ROUNDS=120, 0 mismatches, EXACT**
+(20 009 cases in an earlier configuration). Getting there took two rules that
+are not obvious and that I record because they will bite again:
+
+1. **a window must not end in a whitespace-only chunk.** `\s+(?!\S)` is the only
+   pre-token alternative with a lookahead, so a trailing whitespace run is *two*
+   chunks before a non-space and *one* chunk at end-of-string. "The cuts land on
+   chunk boundaries in both strings" is **not** sufficient. Guarded by
+   `scanWindow().lastWs` **and** by refusing a right cut at `isSpace(T, x−1)`.
+   This was the last of 4 mismatches and it accounted for all of them.
+2. **cuts must lie strictly inside the common prefix/suffix** (`ws ≤ lo−1`,
+   `we ≥ hi+1`, or end-of-string). `ws == lo` / `we == hi` gave 24 mismatches.
+
+Then the speed measurement, which is why it is off.
+`bench/x125/speed-ab.ts` prices all four arm combinations in one process on
+`bench/holdout-x41/apt-real.txt`, alternating arm order over two rounds and
+discarding round 0 (the first encode in a process is ~4× the second; the same
+artefact invalidated X124's cold pair). Warm milliseconds:
+
+| arms | warm ms | message |
+|---|---|---|
+| neither | **18 438** | M 816, exact |
+| ΠΡΌΛΗΨΙΣ only | 18 552 | M 816, exact |
+| ἘΠΙΨΉΦΙΣΙΣ only | 20 491 | M 816, exact |
+| both | 21 181 | M 816, exact |
+
+All four produce the same message, so both counting arms are **net losses
+warm**: ΠΡΌΛΗΨΙΣ ≈ +0.1 s and ἘΠΙΨΉΦΙΣΙΣ ≈ **+2.05 s on an 18.4 s lane (+11 %)**.
+The stats say why, and they say the window rule is innocent: **8 422 hits out of
+97 634 attempts (8.6 %)**, and of the rejections 69 % are `bigEdit` and 31 %
+`noPrefix`. The calls that reach this code are mostly **not** the "long string,
+small edit near the end" shape it is built for. A profile of the same lane
+(71 589 samples, `/tmp/prof`) puts 51 % of counting in two functions —
+`scoreRunCostDeltaSlots` (58.9 %) and `relayoutGlyphs` (32.3 %) — i.e. in the
+*number of counting calls*, not in their length.
+
+**Verdict: shipped, default OFF**, opt in with `OMEGA_EPIPSEPHISIS=1`. It is the
+only verified-exact incremental counter in the tree and the right tool the day
+the hit rate changes; shipping it on would be paying 11 % for nothing, which is
+not "infrastructure", it is a regression.
+
+### Requirement (d) — whole-stack speed
+
+**Not met, and the attempt is now bounded from both sides.** The counting path
+is 51 % of the lane's samples and both arms that try to shorten it lose
+(X125.3). Caching was closed earlier (long cache ~70 k hits against ~534 k
+misses). **X123's ΜΕΤΆΘΕΣΙΣ memo (+8.2 %) is still the last whole-stack speed
+win.**
+
+**A measurement trap this turn's driver walked into and that the next one should
+not.** `bench/x125/x125-ab.ts` alternates arm order per lane and reports wall
+time, and its headline looks like a win: Σ wall OFF 525.2 s → ON 294.1 s (−44 %).
+It is an artefact, and splitting the table by which arm ran first proves it:
+
+* in the 15 lanes where **OFF ran first**, OFF 477.6 s vs ON 93.5 s (ON 5.1× faster);
+* in the 14 lanes where **ON ran first**, OFF 47.6 s vs ON 200.6 s (ON 4.2× slower).
+
+Whichever arm runs **second in a lane** is 4–5× faster, regardless of which arm
+it is — the ~4× warm-up is **per (process, lane), not per process**, and
+clearing the memos between arms does not remove it. So no arm-ranking may be
+drawn from a driver that runs each lane once per arm, and **X125 makes no
+whole-stack speed claim**. The only instrument here that can rank arms is
+`bench/x125/speed-ab.ts`, which encodes the same lane repeatedly per arm; it
+says the counting arms lose (X125.3).
+
+### X125 negative results kept
+
+1. **The tape portfolio is worth 3 tokens, not more.** ΒΕΛΤΙΣΤΟΣ's tape column
+   was unsearched and searching it moves one lane of 29 by three.
+2. **The alphabet is worth 0 tokens end to end** (X125.1) despite being worth
+   50–101 on the bare path.
+3. **Adding a fourth rung to ΒΕΛΤΙΣΤΟΣ's ladder** (`0:32`) changes nothing:
+   3 lanes, both arm orders, M identical, and the apparent 3× r0 speedup is the
+   round-0 warm-up, not the rung.
+4. **The `respell.txt` Σ row is not comparable** — missing lanes are excluded
+   from the script columns and included in the base (X125.1).
+5. **Contract reword is worth ≤24 tokens.** The 39-token "Every new Cyrillic
+   letter before ¶…" clause is carried by only **3 of 29** lanes; the other 26
+   put a shorter contract at the message head (Σ contract 736 = 6.1 %; biggest
+   single items cue-sheet 101, ls-l-real 66, psql-output 61). Two 31-token
+   rewordings are measured, but any change here invalidates the external-reader
+   validation, so it is not in this turn.
+6. **The first encode is ~4× the second — and it is per lane, not per process**
+   (apt-real 81.0 s → 20.2 s for two identical runs; and in the 29-lane A/B the
+   second arm of a lane beats the first arm of the same lane by 4–5× in *both*
+   directions). Alternating arm order, which every driver in this repository
+   does, therefore does **not** control for it: only repeating the same arm on
+   the same lane does. X124's cold pair did not.
+
+## §X126 — ΤΜΗΜΑΤΙΣΜΌΣ (TMEMATISMOS), and eight axes closed with receipts
+
+**The frontier is exactly what the previous turn reported. Re-verified this turn,
+29 lanes, both arms through `tagstackEncode`, every row `decoded === src`
+(`bench/x126/receipts/x125-frontier-reverify.log`):**
+
+    Σ OFF 12 023  →  Σ ON 12 020   Δ −3   (1 better / 0 worse / 28 same)
+    ps-aux-real 991 → 988; every other lane unchanged.
+
+Nothing in the previous turn's statement needs restating. What X126 adds is the
+answer to "can we keep improving?" — measured on eight separate axes, all of
+which came back zero — and one new module that exists precisely because the
+measurement said the obvious idea was already spent.
+
+### X126.1 — the relabelling is converged, not budget-starved
+
+Before writing any code, X126 annealed the glyph assignment of the shipped wires,
+because "search the relabelling harder" is the first thing anyone would try and
+it had to be paid for before being claimed:
+
+| lane | probes | move set | best found | incumbent |
+|---|---|---|---|---|
+| ls-l-real | 126 719 | transpositions | **1 323** | 1 323 |
+| ls-l-real | 64 587 | transpositions + 3-cycles | **1 323** | 1 323 |
+| ps-aux-real | 76 391 | transpositions + 3-cycles | **991** | 991 |
+| apt-real | 75 484 | transpositions + 3-cycles | **816** | 816 |
+
+Random assignments on the same lanes price at 1 509 / 1 151 / 1 074, so the
+incumbent sits **13 % below a random relabelling** and 267 000 probes — two
+orders of magnitude more than ΣΤΟΙΧΗΔΟΝ can afford — find **nothing**. The
+assignment is not stuck; it is finished. Same for the tape order: a full sweep of
+adjacent topological transpositions finds 0 improving moves on all five lanes
+tested (ls-l-real, ps-aux-real, apt-real, code-ts, du-real).
+
+### X126.2 — ΤΜΗΜΑΤΙΣΜΌΣ: what it is, and what it is worth (nothing, honestly)
+
+`countTokens` is a two-stage function: `tokens(s) = Σ over pre-token chunks c of
+tokens(c)`. That is not an approximation — BPE runs per chunk — and the
+repository already relies on it (`chunkCountFast`, `verifyChunkAlgebra`). The
+consequence nobody here had used:
+
+> **the only global step in pricing a string is the regex split; everything after
+> it is per-chunk, and per-chunk costs are already memoised.**
+
+So a move that changes *k* character positions needs the regex re-run over *k*
+small neighbourhoods, not over the whole ~1 000-character tape plus the
+~1 500-character body. `src/lib/omega/tmematismos.ts` supplies that: it holds the
+chunk boundaries and per-chunk costs of the tape and the body and re-prices a
+glyph transposition by re-splitting a window around **the positions where those
+two letters occur** — which the caller knows, by construction.
+
+**How it differs from ἘΠΙΨΉΦΙΣΙΣ (X125), which measured as a −11 % loss.** Both
+are exact incremental counters. ἘΠΙΨΉΦΙΣΙΣ sits on the counting path and must
+*discover* that two strings share a prefix and a suffix: 8 422 hits / 97 634
+attempts (8.6 %), 69 % of rejections `bigEdit`. It pays a scan to learn what its
+caller already knew. ΤΜΗΜΑΤΙΣΜΌΣ is *told* the edit — a transposition changes
+exactly the occurrences of two letters — so there is no prefix scan, no
+`bigEdit`, no `noPrefix`, and the hit rate is 1 by construction. Same exactness
+rule, opposite economy.
+
+**Measured end to end, it is worth nothing, and it ships OFF by default**
+(`OMEGA_TMEMATISMOS=1` to opt in). Over the 29 lanes it changes no token total
+and it costs encode time. Every state it accepts is re-priced with the real
+`countTokens` and byte-compared with `chironDecode`, so a windowing bug can cost
+time and can never ship a wrong wire, and it *counts and reports* the times its
+fast price disagreed with the real one (`mismatches`, must be 0). It is kept for
+the same reason ἘΠΙΨΉΦΙΣΙΣ is kept: it is an exact instrument, and what it
+measures is §X126.1.
+
+- **Greedy?** Yes: first-improvement local descent over finite neighbourhoods
+  (letter transpositions, 3-cycles, relocations), swept to a local optimum, no
+  randomness, no global-optimality claim. The underlying problem is a quadratic
+  assignment problem and is NP-hard.
+- **Citation.** Segment additivity is a property of the tokenizer, not a result:
+  tiktoken and the GPT-2 BPE apply merges *within* each pre-token piece. Nothing
+  is imported. The nearest external thing X126 read is the incremental-tokenizer
+  literature (Fenwick-tree boundary expansion, `ninetyfive.gg/blog/incr-tokenization`;
+  gpt-tokenizer PR #94's exact incremental counter), which is the *discovered-edit*
+  case that X125 already measured and that this module deliberately avoids.
+- **Time/CPU bound.** No wall clock; deterministic; bounded by `workTick` and
+  `TMEMATISMOS_MAX_PROBES = 200 000`; a window over 64 characters falls back to a
+  full re-count rather than guess.
+
+### X126.3 — the seven other axes closed this turn, each with its number
+
+| axis | experiment | result |
+|---|---|---|
+| **glyph assignment** | 267 k annealing probes, 2- and 3-cycles | **0** (§X126.1) |
+| **tape order** | full sweep of adjacent topological transpositions, 5 lanes | **0** |
+| **second-pass rule mining** (mine repeats in the *already-spelled* body, a different search space from mining the original text) | top-60 candidates per lane × 7 lanes, each inserted with a real free one-token glyph and byte-verified | **0** on every lane |
+| **pool headroom** (`union2` = Cyrillic∪Arabic 250 letters, `union5` = 463) | full stack, 3 lanes | **0** — the miner is *not* pool-bound; it stops because the marginal rules are not worth their tape cost. (ls-l-real does use 119 of Cyrillic's 122 letters, so it *looks* capped; giving it 250 letters changes nothing.) |
+| **rule retirement** (marginal value of every rule) | drop-one-and-re-price, 5 lanes | **Σ negative = 0**: every rule of every lane is load-bearing. Σ value: ls-l-real 3 987, ps-aux 2 669, apt 2 591, code-ts 776, node-help 430 |
+| **digits** (963 tokens attributable, 8 % of the corpus) | all 1 000 three-digit groups priced | **all 1 000 cost exactly 1 token.** Digit runs are already at the `⌈L/3⌉` floor: current 489 = ideal 489 over 308 runs, **slack 0**. Zero-padding to shift the grouping also buys 0. This closes the numeric axis that X15's delta result only partly covered |
+| **speed** | ΤΜΗΜΑΤΙΣΜΌΣ on/off, 3 lanes, both orders | an **artefact**, and the second time this trap has bitten: whichever arm runs *first in a lane* is 3–5× slower (ON-first: 74.1 s vs 18.7 s; OFF-first: 74.3 s vs 19.4 s). No speed claim is made |
+
+**The measurement trap, restated because it cost this turn twice.** The ~4×
+first-encode warm-up is per *(process, lane)*, not per process. Alternating arm
+order — which every driver in this repository does — does **not** control for it,
+because both arms pay it once each. Only repeating the *same* arm on the *same*
+lane separates the arm's cost from the warm-up.
+
+### Requirement (d) — whole-stack speed
+
+**Not met, and now with a named reason.** The counting path is 51 % of a lane's
+samples; both arms that try to shorten it (ΠΡΌΛΗΨΙΣ, ἘΠΙΨΉΦΙΣΙΣ) are measured
+losses; the chunk cache is already memoised so per-chunk costs are not the cost;
+and the remaining cost is the pre-token regex scan, which only a *known-edit*
+window pricer avoids — and the one search that would benefit from it is already
+converged, so there is nothing for the extra speed to buy. **X123's ΜΕΤΆΘΕΣΙΣ
+memo (+8.2 %) is still the last whole-stack speed win.**
+
+### Local leaders by structure (re-derived from the shipped 29, Σ 12 020)
+
+| category | lanes | leader | the number |
+|---|---|---|---|
+| **Ops — fixed-offset tables** | findmnt, dpkg-l, kubectl-get-pods, df-h ×2, df-real, du-real, metrics.tsv, prices.csv | **ΣΤΉΛΗ** where it fits (findmnt 389, dpkg-l 624, kubectl 303); **ΔΙΆΣΤΗΜΑ / ΑΚΟΛΟΥΘΊΑ2 / ΜΈΤΡΟΝ** lane-specific on the flat files | no single leader; padding is 8.5–15.4 % of raw |
+| **Ops — variable-width listings** | ls-l-real 1 323, ps-aux-real 988, ps-real 381, ls-real 422, ps-ef 299 | **ΣΥΝΚΡΙΣΙΣ + ΒΈΛΤΙΣΤΟΣ + ΣΤΟΙΧΗΔΟΝ** (the tape is 24–40 % of these messages) | ls-l-real: tape 531 of 1 323, of which **119 are the rule-name letters themselves** |
+| **Ops — small outputs** | lsblk 60, uptime-w 80, free-m 76 | **no codec** — shipped raw, below every admission threshold | 317 tokens, 2.6 % of the corpus, and the only untouched pool left |
+| **Prose** | kb-article 620, llm-answer 665, email-thread 486, node-help 852 | **ΣΥΝΚΡΙΣΙΣ** with ΠΕΡΙΚΟΠΉ's preamble as the inner arm | body rates **0.214–0.260 tok/char**, i.e. 3.8–4.7 chars/token — *better than the raw text's own rate*. Prose is done |
+| **Code / config / diff** | code-ts 950, json-pkg 657, unified-diff 411 | **ΣΥΝΚΡΙΣΙΣ** | code-ts 0.269 tok/char |
+| **Markdown** | markdown-table 172, cue-sheet 101 | **ΣΤΙΧΟΜΥΘΊΑ** on cue-sheet; **ΣΥΝΚΡΙΣΙΣ = ΜΈΤΡΟΝ = ΔΙΆΣΤΗΜΑ** = 176 on markdown-table | cue-sheet is 101 tokens of which **101 are contract** — it ships as raw prose |
+
+**Where the remaining tokens are, in one line:** the corpus is 12 020 = contract
+736 (6.1 %) + tape 2 940 (24.5 %) + body 8 347 (69.4 %); the body's literal
+residual is already at or below the tokenizer's native rate on prose and on
+digits; the untouched pools are the **317 tokens of small outputs** and the
+**~763-token gap between the tape's 0.420 tok/char and the body's 0.311**, which
+is boundary waste in the tape's *layout* and is not reachable by any move in the
+current neighbourhood set.
