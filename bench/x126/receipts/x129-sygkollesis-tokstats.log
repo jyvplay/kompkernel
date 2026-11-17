@@ -1,0 +1,232 @@
+
+holdout-x42/lsblk.txt  tokens=60 distinct=45
+  K= 20 covered=  35/60  glyphGlyphAdj=  28  ruleCost=2K=40  breakEvenMergeRate=143%
+  K= 50 covered=  60/60  glyphGlyphAdj=  59  ruleCost=2K=100  breakEvenMergeRate=169%
+  K=100 covered=  60/60  glyphGlyphAdj=  59  ruleCost=2K=200  breakEvenMergeRate=339%
+  K=200 covered=  60/60  glyphGlyphAdj=  59  ruleCost=2K=400  breakEvenMergeRate=678%
+  K=400 covered=  60/60  glyphGlyphAdj=  59  ruleCost=2K=800  breakEvenMergeRate=1356%
+  top14: " "x8 ":"x5 "0"x3 "-"x2 "21"x2 "#"x1 " source"x1 " ls"x1 "blk"x1 " ("x1 "real"x1 ","x1 " this"x1 " sandbox"x1
+
+holdout-work/kb-article.txt  tokens=656 distinct=312
+  K= 20 covered= 250/656  glyphGlyphAdj=  83  ruleCost=2K=40  breakEvenMergeRate=48%
+  K= 50 covered= 343/656  glyphGlyphAdj= 169  ruleCost=2K=100  breakEvenMergeRate=59%
+  K=100 covered= 443/656  glyphGlyphAdj= 287  ruleCost=2K=200  breakEvenMergeRate=70%
+  K=200 covered= 544/656  glyphGlyphAdj= 465  ruleCost=2K=400  breakEvenMergeRate=86%
+  K=400 covered= 656/656  glyphGlyphAdj= 655  ruleCost=2K=800  breakEvenMergeRate=122%
+  top14: " the"x29 "\n"x28 ","x27 "."x20 " a"x19 " and"x13 " is"x13 " to"x13 " that"x11 " it"x10 " policy"x9 " document"x9 " in"x8 " sweep"x8
+
+holdout-x42b/uptime-w.txt  tokens=80 distinct=49
+  K= 20 covered=  51/80  glyphGlyphAdj=  33  ruleCost=2K=40  breakEvenMergeRate=121%
+  K= 50 covered=  80/80  glyphGlyphAdj=  79  ruleCost=2K=100  breakEvenMergeRate=127%
+  K=100 covered=  80/80  glyphGlyphAdj=  79  ruleCost=2K=200  breakEvenMergeRate=253%
+  K=200 covered=  80/80  glyphGlyphAdj=  79  ruleCost=2K=400  breakEvenMergeRate=506%
+  K=400 covered=  80/80  glyphGlyphAdj=  79  ruleCost=2K=800  breakEvenMergeRate=1013%
+  top14: " "x10 ":"x7 ","x5 "."x3 "  "x3 "-"x2 "23"x2 "21"x2 "28"x2 "0"x2 "1"x2 "\n"x2 "CPU"x2 "#"x1
+
+holdout-x42b/free-m.txt  tokens=76 distinct=48
+  K= 20 covered=  48/76  glyphGlyphAdj=  30  ruleCost=2K=40  breakEvenMergeRate=133%
+  K= 50 covered=  76/76  glyphGlyphAdj=  75  ruleCost=2K=100  breakEvenMergeRate=133%
+  K=100 covered=  76/76  glyphGlyphAdj=  75  ruleCost=2K=200  breakEvenMergeRate=267%
+  K=200 covered=  76/76  glyphGlyphAdj=  75  ruleCost=2K=400  breakEvenMergeRate=533%
+  K=400 covered=  76/76  glyphGlyphAdj=  75  ruleCost=2K=800  breakEvenMergeRate=1067%
+  top14: " "x11 ":"x5 "       "x5 "\n"x3 "          "x3 "0"x3 " free"x2 "-"x2 "1"x2 "8"x2 "#"x1 " source"x1 " -"x1 "m"x1
+
+holdout-x42b/vmstat.txt  tokens=229 distinct=84
+  K= 20 covered= 165/229  glyphGlyphAdj= 132  ruleCost=2K=40  breakEvenMergeRate=30%
+  K= 50 covered= 195/229  glyphGlyphAdj= 169  ruleCost=2K=100  breakEvenMergeRate=59%
+  K=100 covered= 229/229  glyphGlyphAdj= 228  ruleCost=2K=200  breakEvenMergeRate=88%
+  K=200 covered= 229/229  glyphGlyphAdj= 228  ruleCost=2K=400  breakEvenMergeRate=175%
+  K=400 covered= 229/229  glyphGlyphAdj= 228  ruleCost=2K=800  breakEvenMergeRate=351%
+  top14: " "x77 "0"x22 "   "x10 "  "x7 "1"x4 "6"x4 "\n"x4 "    "x4 ":"x3 "2"x3 "     "x3 "214"x3 "065"x3 "538"x3
+
+holdout-work/unified-diff.patch  tokens=578 distinct=169
+  K= 20 covered= 269/578  glyphGlyphAdj= 159  ruleCost=2K=40  breakEvenMergeRate=25%
+  K= 50 covered= 384/578  glyphGlyphAdj= 278  ruleCost=2K=100  breakEvenMergeRate=36%
+  K=100 covered= 498/578  glyphGlyphAdj= 443  ruleCost=2K=200  breakEvenMergeRate=45%
+  K=200 covered= 578/578  glyphGlyphAdj= 577  ruleCost=2K=400  breakEvenMergeRate=69%
+  K=400 covered= 578/578  glyphGlyphAdj= 577  ruleCost=2K=800  breakEvenMergeRate=139%
+  top14: "0"x46 " "x31 ":"x23 ","x22 "x"x21 "+"x17 "/"x12 ";\n"x9 "/src"x8 "/lib"x8 "omega"x8 ".ts"x8 "\n"x8 "   "x8
+
+holdout-tbl/df-h.txt  tokens=570 distinct=111
+  K= 20 covered= 463/570  glyphGlyphAdj= 362  ruleCost=2K=40  breakEvenMergeRate=11%
+  K= 50 covered= 509/570  glyphGlyphAdj= 447  ruleCost=2K=100  breakEvenMergeRate=22%
+  K=100 covered= 559/570  glyphGlyphAdj= 547  ruleCost=2K=200  breakEvenMergeRate=37%
+  K=200 covered= 570/570  glyphGlyphAdj= 569  ruleCost=2K=400  breakEvenMergeRate=70%
+  K=400 covered= 570/570  glyphGlyphAdj= 569  ruleCost=2K=800  breakEvenMergeRate=141%
+  top14: " "x123 "G"x54 "  "x22 "0"x20 "1"x20 "%"x19 "\n"x19 "/dev"x18 "/n"x18 "v"x18 "me"x18 "n"x18 "p"x18 " /"x18
+
+holdout-x41/df-real.txt  tokens=158 distinct=64
+  K= 20 covered= 111/158  glyphGlyphAdj=  87  ruleCost=2K=40  breakEvenMergeRate=46%
+  K= 50 covered= 144/158  glyphGlyphAdj= 133  ruleCost=2K=100  breakEvenMergeRate=75%
+  K=100 covered= 158/158  glyphGlyphAdj= 157  ruleCost=2K=200  breakEvenMergeRate=127%
+  K=200 covered= 158/158  glyphGlyphAdj= 157  ruleCost=2K=400  breakEvenMergeRate=255%
+  K=400 covered= 158/158  glyphGlyphAdj= 157  ruleCost=2K=800  breakEvenMergeRate=510%
+  top14: " "x28 "0"x12 "G"x7 "."x7 "%"x6 "  "x6 "\n"x5 "tmp"x4 "fs"x4 "2"x4 " /"x4 "M"x4 ":"x3 "dev"x3
+
+holdout-x41/du-real.txt  tokens=458 distinct=129
+  K= 20 covered= 279/458  glyphGlyphAdj= 199  ruleCost=2K=40  breakEvenMergeRate=20%
+  K= 50 covered= 364/458  glyphGlyphAdj= 313  ruleCost=2K=100  breakEvenMergeRate=32%
+  K=100 covered= 429/458  glyphGlyphAdj= 407  ruleCost=2K=200  breakEvenMergeRate=49%
+  K=200 covered= 458/458  glyphGlyphAdj= 457  ruleCost=2K=400  breakEvenMergeRate=88%
+  K=400 covered= 458/458  glyphGlyphAdj= 457  ruleCost=2K=800  breakEvenMergeRate=175%
+  top14: "\tnode"x40 "_modules"x40 "\n"x40 "/"x23 "next"x16 "/@"x14 "/dist"x12 "64"x11 "-x"x10 "-linux"x8 "/g"x7 "pt"x7 "-token"x7 "izer"x7
+
+holdout-x41/node-help.txt  tokens=1099 distinct=425
+  K= 20 covered= 445/1099  glyphGlyphAdj= 244  ruleCost=2K=40  breakEvenMergeRate=16%
+  K= 50 covered= 592/1099  glyphGlyphAdj= 375  ruleCost=2K=100  breakEvenMergeRate=27%
+  K=100 covered= 731/1099  glyphGlyphAdj= 545  ruleCost=2K=200  breakEvenMergeRate=37%
+  K=200 covered= 874/1099  glyphGlyphAdj= 743  ruleCost=2K=400  breakEvenMergeRate=54%
+  K=400 covered=1074/1099  glyphGlyphAdj=1055  ruleCost=2K=800  breakEvenMergeRate=76%
+  top14: "\n"x94 "                             "x68 " --"x55 " "x51 " the"x25 "="x19 "experimental"x17 "..."x14 " set"x11 " to"x10 " in"x10 " file"x9 " a"x8 " of"x8
+
+holdout-x42/findmnt.txt  tokens=787 distinct=196
+  K= 20 covered= 417/787  glyphGlyphAdj= 308  ruleCost=2K=40  breakEvenMergeRate=13%
+  K= 50 covered= 570/787  glyphGlyphAdj= 480  ruleCost=2K=100  breakEvenMergeRate=21%
+  K=100 covered= 686/787  glyphGlyphAdj= 629  ruleCost=2K=200  breakEvenMergeRate=32%
+  K=200 covered= 787/787  glyphGlyphAdj= 786  ruleCost=2K=400  breakEvenMergeRate=51%
+  K=400 covered= 787/787  glyphGlyphAdj= 786  ruleCost=2K=800  breakEvenMergeRate=102%
+  top14: ","x36 "fs"x30 "\n"x26 "-/"x24 "="x24 "|"x23 ",n"x23 "rel"x22 "at"x22 "ime"x22 " rw"x21 "os"x20 "uid"x20 ",node"x18
+
+holdout-x42/df-h.txt  tokens=140 distinct=51
+  K= 20 covered= 109/140  glyphGlyphAdj=  97  ruleCost=2K=40  breakEvenMergeRate=41%
+  K= 50 covered= 139/140  glyphGlyphAdj= 137  ruleCost=2K=100  breakEvenMergeRate=73%
+  K=100 covered= 140/140  glyphGlyphAdj= 139  ruleCost=2K=200  breakEvenMergeRate=144%
+  K=200 covered= 140/140  glyphGlyphAdj= 139  ruleCost=2K=400  breakEvenMergeRate=288%
+  K=400 covered= 140/140  glyphGlyphAdj= 139  ruleCost=2K=800  breakEvenMergeRate=576%
+  top14: " "x27 "0"x12 "G"x7 "."x7 "%"x6 "  "x6 "\n"x5 "tmp"x4 "fs"x4 "2"x4 " /"x4 "M"x4 "dev"x3 "    "x3
+
+holdout-work/email-thread.txt  tokens=629 distinct=243
+  K= 20 covered= 256/629  glyphGlyphAdj= 129  ruleCost=2K=40  breakEvenMergeRate=31%
+  K= 50 covered= 375/629  glyphGlyphAdj= 255  ruleCost=2K=100  breakEvenMergeRate=39%
+  K=100 covered= 482/629  glyphGlyphAdj= 392  ruleCost=2K=200  breakEvenMergeRate=51%
+  K=200 covered= 586/629  glyphGlyphAdj= 554  ruleCost=2K=400  breakEvenMergeRate=72%
+  K=400 covered= 629/629  glyphGlyphAdj= 628  ruleCost=2K=800  breakEvenMergeRate=127%
+  top14: ">"x32 " "x25 "-"x22 " >"x21 " the"x16 ","x15 "\n"x14 ":"x13 "."x12 "202"x10 "6"x10 ">\n"x8 " is"x8 " >\n"x8
+
+holdout-work/llm-answer.md  tokens=733 distinct=357
+  K= 20 covered= 255/733  glyphGlyphAdj=  81  ruleCost=2K=40  breakEvenMergeRate=49%
+  K= 50 covered= 374/733  glyphGlyphAdj= 229  ruleCost=2K=100  breakEvenMergeRate=44%
+  K=100 covered= 475/733  glyphGlyphAdj= 331  ruleCost=2K=200  breakEvenMergeRate=60%
+  K=200 covered= 576/733  glyphGlyphAdj= 499  ruleCost=2K=400  breakEvenMergeRate=80%
+  K=400 covered= 733/733  glyphGlyphAdj= 732  ruleCost=2K=800  breakEvenMergeRate=109%
+  top14: "."x27 " "x25 " **"x22 "**"x21 " `"x21 "`"x16 " |"x15 "-"x13 " the"x12 "\n"x11 ":"x9 "|"x9 " s"x8 ","x7
+
+holdout-tbl/markdown-table.md  tokens=330 distinct=72
+  K= 20 covered= 267/330  glyphGlyphAdj= 217  ruleCost=2K=40  breakEvenMergeRate=18%
+  K= 50 covered= 308/330  glyphGlyphAdj= 290  ruleCost=2K=100  breakEvenMergeRate=34%
+  K=100 covered= 330/330  glyphGlyphAdj= 329  ruleCost=2K=200  breakEvenMergeRate=61%
+  K=200 covered= 330/330  glyphGlyphAdj= 329  ruleCost=2K=400  breakEvenMergeRate=122%
+  K=400 covered= 330/330  glyphGlyphAdj= 329  ruleCost=2K=800  breakEvenMergeRate=243%
+  top14: " |"x44 "."x40 " "x30 " s"x30 "0"x21 "|"x16 " |\n"x11 "5"x11 " **"x10 "-"x10 "%"x10 "**"x10 "---"x5 "22"x4
+
+holdout-tbl/psql-output.txt  tokens=675 distinct=106
+  K= 20 covered= 512/675  glyphGlyphAdj= 361  ruleCost=2K=40  breakEvenMergeRate=11%
+  K= 50 covered= 603/675  glyphGlyphAdj= 533  ruleCost=2K=100  breakEvenMergeRate=19%
+  K=100 covered= 669/675  glyphGlyphAdj= 664  ruleCost=2K=200  breakEvenMergeRate=30%
+  K=200 covered= 675/675  glyphGlyphAdj= 674  ruleCost=2K=400  breakEvenMergeRate=59%
+  K=400 covered= 675/675  glyphGlyphAdj= 674  ruleCost=2K=800  breakEvenMergeRate=119%
+  top14: " |"x100 " "x72 "-"x48 "   "x42 "6"x26 "|"x25 " |\n"x25 "202"x25 " user"x24 "_"x24 "."x24 "+"x15 "000"x10 "001"x10
+
+holdout-x40/prices.csv  tokens=582 distinct=85
+  K= 20 covered= 494/582  glyphGlyphAdj= 410  ruleCost=2K=40  breakEvenMergeRate=10%
+  K= 50 covered= 547/582  glyphGlyphAdj= 511  ruleCost=2K=100  breakEvenMergeRate=20%
+  K=100 covered= 582/582  glyphGlyphAdj= 581  ruleCost=2K=200  breakEvenMergeRate=34%
+  K=200 covered= 582/582  glyphGlyphAdj= 581  ruleCost=2K=400  breakEvenMergeRate=69%
+  K=400 covered= 582/582  glyphGlyphAdj= 581  ruleCost=2K=800  breakEvenMergeRate=138%
+  top14: ","x123 "-"x90 "\n"x31 "09"x31 "SKU"x30 "202"x30 "6"x30 "."x30 "USD"x30 "13"x22 "12"x11 "001"x5 "002"x5 "003"x4
+
+holdout-x40/cue-sheet.md  tokens=513 distinct=56
+  K= 20 covered= 457/513  glyphGlyphAdj= 400  ruleCost=2K=40  breakEvenMergeRate=10%
+  K= 50 covered= 507/513  glyphGlyphAdj= 500  ruleCost=2K=100  breakEvenMergeRate=20%
+  K=100 covered= 513/513  glyphGlyphAdj= 512  ruleCost=2K=200  breakEvenMergeRate=39%
+  K=200 covered= 513/513  glyphGlyphAdj= 512  ruleCost=2K=400  breakEvenMergeRate=78%
+  K=400 covered= 513/513  glyphGlyphAdj= 512  ruleCost=2K=800  breakEvenMergeRate=156%
+  top14: " |"x87 " "x84 ":"x56 "00"x48 "|"x29 " |\n"x29 " s"x28 " line"x28 "1"x9 "2"x9 "3"x9 "0"x8 "01"x8 "11"x4
+
+holdout-x42/ps-ef.txt  tokens=1144 distinct=160
+  K= 20 covered= 964/1144  glyphGlyphAdj= 879  ruleCost=2K=40  breakEvenMergeRate=5%
+  K= 50 covered=1034/1144  glyphGlyphAdj= 966  ruleCost=2K=100  breakEvenMergeRate=10%
+  K=100 covered=1084/1144  glyphGlyphAdj=1043  ruleCost=2K=200  breakEvenMergeRate=19%
+  K=200 covered=1144/1144  glyphGlyphAdj=1143  ruleCost=2K=400  breakEvenMergeRate=35%
+  K=400 covered=1144/1144  glyphGlyphAdj=1143  ruleCost=2K=800  breakEvenMergeRate=70%
+  top14: " "x235 ":"x123 "00"x116 "0"x50 "20"x40 "41"x40 "root"x39 "      "x39 " ?"x39 "       "x39 "2"x38 " ["x38 "]\n"x38 "         "x34
+
+holdout-x41/ls-real.txt  tokens=1034 distinct=196
+  K= 20 covered= 700/1034  glyphGlyphAdj= 553  ruleCost=2K=40  breakEvenMergeRate=7%
+  K= 50 covered= 834/1034  glyphGlyphAdj= 716  ruleCost=2K=100  breakEvenMergeRate=14%
+  K=100 covered= 938/1034  glyphGlyphAdj= 872  ruleCost=2K=200  breakEvenMergeRate=23%
+  K=200 covered=1034/1034  glyphGlyphAdj=1033  ruleCost=2K=400  breakEvenMergeRate=39%
+  K=400 covered=1034/1034  glyphGlyphAdj=1033  ruleCost=2K=800  breakEvenMergeRate=77%
+  top14: " "x177 "r"x74 " root"x74 "wx"x67 "-x"x44 "\n"x38 "1"x38 "-r"x24 "202"x22 "     "x19 " May"x16 ":"x15 "2"x15 "lr"x13
+
+holdout/json-pkg.txt  tokens=1152 distinct=289
+  K= 20 covered= 716/1152  glyphGlyphAdj= 529  ruleCost=2K=40  breakEvenMergeRate=8%
+  K= 50 covered= 863/1152  glyphGlyphAdj= 712  ruleCost=2K=100  breakEvenMergeRate=14%
+  K=100 covered= 963/1152  glyphGlyphAdj= 852  ruleCost=2K=200  breakEvenMergeRate=23%
+  K=200 covered=1063/1152  glyphGlyphAdj=1006  ruleCost=2K=400  breakEvenMergeRate=40%
+  K=400 covered=1152/1152  glyphGlyphAdj=1151  ruleCost=2K=800  breakEvenMergeRate=70%
+  top14: " \""x117 "."x96 "\":"x94 "       "x86 "\",\n"x75 " \"^"x42 "   "x32 "0"x30 "1"x28 " \"@"x16 "4"x12 "\"\n"x11 "3"x10 "2"x10
+
+holdout/code-ts.txt  tokens=1422 distinct=312
+  K= 20 covered= 645/1422  glyphGlyphAdj= 370  ruleCost=2K=40  breakEvenMergeRate=11%
+  K= 50 covered= 941/1422  glyphGlyphAdj= 725  ruleCost=2K=100  breakEvenMergeRate=14%
+  K=100 covered=1129/1422  glyphGlyphAdj= 982  ruleCost=2K=200  breakEvenMergeRate=20%
+  K=200 covered=1310/1422  glyphGlyphAdj=1229  ruleCost=2K=400  breakEvenMergeRate=33%
+  K=400 covered=1422/1422  glyphGlyphAdj=1421  ruleCost=2K=800  breakEvenMergeRate=56%
+  top14: " "x73 " class"x69 " ="x51 ","x44 "Group"x39 "   "x35 "Part"x33 " {\n"x32 " ("x28 "Object"x28 "Id"x28 " const"x26 "Class"x24 ";\n"x22
+
+holdout-x42/dpkg-l.txt  tokens=1000 distinct=298
+  K= 20 covered= 509/1000  glyphGlyphAdj= 340  ruleCost=2K=40  breakEvenMergeRate=12%
+  K= 50 covered= 681/1000  glyphGlyphAdj= 513  ruleCost=2K=100  breakEvenMergeRate=19%
+  K=100 covered= 797/1000  glyphGlyphAdj= 673  ruleCost=2K=200  breakEvenMergeRate=30%
+  K=200 covered= 902/1000  glyphGlyphAdj= 846  ruleCost=2K=400  breakEvenMergeRate=47%
+  K=400 covered=1000/1000  glyphGlyphAdj= 999  ruleCost=2K=800  breakEvenMergeRate=80%
+  top14: " "x71 "."x58 "\n"x36 "-"x36 "ii"x35 "64"x33 "2"x30 "       "x30 " amd"x29 "12"x25 "1"x22 "3"x14 "4"x13 "0"x13
+
+holdout-x41/ps-real.txt  tokens=1106 distinct=189
+  K= 20 covered= 853/1106  glyphGlyphAdj= 749  ruleCost=2K=40  breakEvenMergeRate=5%
+  K= 50 covered= 950/1106  glyphGlyphAdj= 859  ruleCost=2K=100  breakEvenMergeRate=12%
+  K=100 covered=1017/1106  glyphGlyphAdj= 954  ruleCost=2K=200  breakEvenMergeRate=21%
+  K=200 covered=1106/1106  glyphGlyphAdj=1105  ruleCost=2K=400  breakEvenMergeRate=36%
+  K=400 covered=1106/1106  glyphGlyphAdj=1105  ruleCost=2K=800  breakEvenMergeRate=72%
+  top14: " "x196 "0"x158 "."x77 ":"x52 "     "x45 "      "x39 "05"x38 " root"x36 " ["x33 "]\n"x33 "50"x29 "    "x26 "k"x15 "1"x15
+
+holdout-tbl/kubectl-get-pods.txt  tokens=1006 distinct=99
+  K= 20 covered= 695/1006  glyphGlyphAdj= 518  ruleCost=2K=40  breakEvenMergeRate=8%
+  K= 50 covered= 944/1006  glyphGlyphAdj= 890  ruleCost=2K=100  breakEvenMergeRate=11%
+  K=100 covered=1006/1006  glyphGlyphAdj=1005  ruleCost=2K=200  breakEvenMergeRate=20%
+  K=200 covered=1006/1006  glyphGlyphAdj=1005  ruleCost=2K=400  breakEvenMergeRate=40%
+  K=400 covered=1006/1006  glyphGlyphAdj=1005  ruleCost=2K=800  breakEvenMergeRate=80%
+  top14: " "x100 "."x66 "1"x61 "    "x54 "-"x44 "d"x44 "7"x28 "9"x26 "8"x26 "10"x25 "\n"x23 "api"x22 "-server"x22 "f"x22
+
+holdout-x40/metrics.tsv  tokens=811 distinct=108
+  K= 20 covered= 701/811  glyphGlyphAdj= 603  ruleCost=2K=40  breakEvenMergeRate=7%
+  K= 50 covered= 753/811  glyphGlyphAdj= 694  ruleCost=2K=100  breakEvenMergeRate=14%
+  K=100 covered= 803/811  glyphGlyphAdj= 794  ruleCost=2K=200  breakEvenMergeRate=25%
+  K=200 covered= 811/811  glyphGlyphAdj= 810  ruleCost=2K=400  breakEvenMergeRate=49%
+  K=400 covered= 811/811  glyphGlyphAdj= 810  ruleCost=2K=800  breakEvenMergeRate=99%
+  top14: "0"x87 "\t"x77 "."x72 "00"x49 "-"x48 ":"x48 "6"x29 "\n"x25 "10"x25 "202"x24 "24"x24 "T"x24 "Z"x24 "\tn"x24
+
+holdout-x41/ps-aux-real.txt  tokens=3054 distinct=405
+  K= 20 covered=1958/3054  glyphGlyphAdj=1570  ruleCost=2K=40  breakEvenMergeRate=3%
+  K= 50 covered=2359/3054  glyphGlyphAdj=1964  ruleCost=2K=100  breakEvenMergeRate=5%
+  K=100 covered=2640/3054  glyphGlyphAdj=2389  ruleCost=2K=200  breakEvenMergeRate=8%
+  K=200 covered=2849/3054  glyphGlyphAdj=2703  ruleCost=2K=400  breakEvenMergeRate=15%
+  K=400 covered=3049/3054  glyphGlyphAdj=3045  ruleCost=2K=800  breakEvenMergeRate=26%
+  top14: " "x567 "0"x382 ":"x136 "."x117 "  "x101 "       "x60 "17"x60 "00"x58 " ?"x53 " -"x53 "46"x51 "root"x47 "    "x44 "     "x40
+
+holdout-x41/apt-real.txt  tokens=2739 distinct=248
+  K= 20 covered=2130/2739  glyphGlyphAdj=1726  ruleCost=2K=40  breakEvenMergeRate=2%
+  K= 50 covered=2476/2739  glyphGlyphAdj=2300  ruleCost=2K=100  breakEvenMergeRate=4%
+  K=100 covered=2591/2739  glyphGlyphAdj=2486  ruleCost=2K=200  breakEvenMergeRate=8%
+  K=200 covered=2691/2739  glyphGlyphAdj=2653  ruleCost=2K=400  breakEvenMergeRate=15%
+  K=400 covered=2739/2739  glyphGlyphAdj=2738  ruleCost=2K=800  breakEvenMergeRate=29%
+  top14: "."x216 "1"x143 "-"x130 "installed"x120 "/"x119 "now"x119 " "x119 " ["x119 ","x119 "local"x119 "]\n"x119 "2"x114 "64"x107 " amd"x106
+
+holdout-x41/ls-l-real.txt  tokens=5194 distinct=347
+  K= 20 covered=3790/5194  glyphGlyphAdj=3006  ruleCost=2K=40  breakEvenMergeRate=1%
+  K= 50 covered=4436/5194  glyphGlyphAdj=3986  ruleCost=2K=100  breakEvenMergeRate=3%
+  K=100 covered=4757/5194  glyphGlyphAdj=4451  ruleCost=2K=200  breakEvenMergeRate=4%
+  K=200 covered=5045/5194  glyphGlyphAdj=4936  ruleCost=2K=400  breakEvenMergeRate=8%
+  K=400 covered=5194/5194  glyphGlyphAdj=5193  ruleCost=2K=800  breakEvenMergeRate=15%
+  top14: " "x903 "."x385 " root"x298 "1"x241 "r"x221 "wx"x188 ".so"x182 " lib"x174 "-r"x156 "--"x154 "\n"x150 "0"x141 "202"x106 "3"x86

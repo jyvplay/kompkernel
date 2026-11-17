@@ -1,0 +1,10 @@
+X130: repeated-token n-gram census on the FRONTIER OUTPUT (tagstackEncode).
+gain model: for an n-gram of n tokens occurring c times, gain = c*(n-1) - (1+n).
+kb-article.txt       raw= 656 M= 620  repeated-ngram potential=   0
+llm-answer.md        raw= 733 M= 665  repeated-ngram potential=   0
+vmstat.txt           raw= 229 M= 144  repeated-ngram potential=   0
+du-real.txt          raw= 458 M= 266  repeated-ngram potential=   0
+lsblk.txt            raw=  60 M=  60  repeated-ngram potential=   0
+uptime-w.txt         raw=  80 M=  80  repeated-ngram potential=   5
+free-m.txt           raw=  76 M=  76  repeated-ngram potential=   4
+=> A second dictionary pass has nothing to find. Dictionary methods are exhausted.

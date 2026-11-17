@@ -1,0 +1,21 @@
+X130 glyph-alphabet pair-merge census (countTokens(a+b)==1, 40x40 grid per range)
+block                                pool  pairMerge  charsWith>=10partners
+Greek+Cyr 0386-044f (CURRENT pool)     40      2.8%      0/40
+CJK      4e00-9fff                     40      0.9%      0/40
+Hangul   ac00-d7a3                     40      0.1%      0/40
+Hiragana 3041-3096                     40      2.8%      0/40
+Katakana 30a1-30fa                     40      1.8%      0/40
+Hebrew   05d0-05ea                     27     42.7%     17/27
+Arabic   0621-064a                     37     34.5%     23/37
+Thai     0e01-0e3a                     40      4.7%      1/40
+Devanag. 0915-0939                     35      7.1%      0/35
+Fullwidth ff01-ff5e                    40      1.5%      0/40
+LatinExt 0100-017f                     40      0.4%      0/40
+Armenian 0531-0556                     31      0.3%      0/31
+Georgian 10d0-10fa                     33     18.4%      6/33
+
+RETRACTION: the 2.8% figure for the "current" pool samples the FIRST 40
+codepoints of 0x0386..0x044f, which is the GREEK half. The glyphs actually in
+use come from merismos.ts:84, which lists CYRILLIC FIRST, and Cyrillic bigrams
+are common Russian sequences that o200k already merges. See x130-dbg.log:
+71 of 82 adjacent glyph pairs already merge in the shipped alphabet.

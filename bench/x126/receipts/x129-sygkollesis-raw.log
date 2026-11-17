@@ -1,0 +1,29 @@
+holdout-x42/lsblk.txt                  raw=   60  no pay (347ms)
+holdout-work/kb-article.txt            raw=  656  no pay (167ms)
+holdout-x42b/uptime-w.txt              raw=   80  no pay (1ms)
+holdout-x42b/free-m.txt                raw=   76  no pay (0ms)
+holdout-x42b/vmstat.txt                raw=  229  no pay (8ms)
+holdout-work/unified-diff.patch        raw=  578 sygkollesis=  575 Δ=   -3 K=16 merges=88 EXACT 383ms
+holdout-tbl/df-h.txt                   raw=  570 sygkollesis=  487 Δ=  -83 K=16 merges=168 EXACT 9ms
+holdout-x41/df-real.txt                raw=  158  no pay (9ms)
+holdout-x41/du-real.txt                raw=  458 sygkollesis=  440 Δ=  -18 K=16 merges=87 EXACT 62ms
+holdout-x41/node-help.txt              raw= 1099 sygkollesis= 1025 Δ=  -74 K=16 merges=130 EXACT 407ms
+holdout-x42/findmnt.txt                raw=  787 sygkollesis=  736 Δ=  -51 K=16 merges=158 EXACT 316ms
+holdout-x42/df-h.txt                   raw=  140  no pay (0ms)
+holdout-work/email-thread.txt          raw=  629  no pay (132ms)
+holdout-work/llm-answer.md             raw=  733  no pay (161ms)
+holdout-tbl/markdown-table.md          raw=  330 sygkollesis=  296 Δ=  -34 K=16 merges=128 EXACT 9ms
+holdout-tbl/psql-output.txt            raw=  675 sygkollesis=  591 Δ=  -84 K=16 merges=196 EXACT 56ms
+holdout-x40/prices.csv                 raw=  582 sygkollesis=  495 Δ=  -87 K=16 merges=158 EXACT 10ms
+holdout-x40/cue-sheet.md               raw=  513 sygkollesis=  418 Δ=  -95 K=16 merges=203 EXACT 12ms
+holdout-x42/ps-ef.txt                  raw= 1144 sygkollesis=  884 Δ= -260 K=24 merges=454 EXACT 26ms
+holdout-x41/ls-real.txt                raw= 1034 sygkollesis=  903 Δ= -131 K=24 merges=311 EXACT 142ms
+holdout/json-pkg.txt                   raw= 1152 sygkollesis= 1008 Δ= -144 K=16 merges=266 EXACT 241ms
+holdout/code-ts.txt                    raw= 1422 sygkollesis= 1332 Δ=  -90 K=48 merges=296 EXACT 1669ms
+holdout-x42/dpkg-l.txt                 raw= 1000 sygkollesis=  962 Δ=  -38 K=16 merges=160 EXACT 437ms
+holdout-x41/ps-real.txt                raw= 1106 sygkollesis=  861 Δ= -245 K=16 merges=379 EXACT 66ms
+holdout-tbl/kubectl-get-pods.txt       raw= 1006 sygkollesis=  868 Δ= -138 K=32 merges=297 EXACT 272ms
+holdout-x40/metrics.tsv                raw=  811 sygkollesis=  678 Δ= -133 K=16 merges=239 EXACT 28ms
+holdout-x41/ps-aux-real.txt            raw= 3054 sygkollesis= 2441 Δ= -613 K=32 merges=910 EXACT 1074ms
+holdout-x41/apt-real.txt               raw= 2739 sygkollesis= 2141 Δ= -598 K=48 merges=1116 EXACT 704ms
+holdout-x41/ls-l-real.txt              raw= 5194 sygkollesis= 3878 Δ=-1316 K=64 merges=1921 EXACT 1592ms

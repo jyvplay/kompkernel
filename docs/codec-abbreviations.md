@@ -8245,3 +8245,128 @@ an argument.
 figure in that log (OFF 520.3 s vs ON 296.7 s) is the ordering artefact again —
 whichever arm runs first in a lane is 3–5× slower in both directions — and is
 **not** a speed claim.
+
+## X129 — ΣΥΓΚΌΛΛΗΣΙΣ / SYGKOLLESIS (adjacent-glyph welding)
+
+**Mechanism.** Glyph-encode high-frequency *single-token* units, chosen jointly
+so that adjacent glyphs merge into one token in the reader's own vocabulary.
+
+**Greedy?** **No — and it provably cannot be.** This is the point of the codec.
+For a substring `v` costing `t = countTokens(v)` tokens and occurring `c` times,
+a substitution rule changes the message by
+
+```
+gain = c*(t-1) - (1 + t)                      ... the ONE-TOKEN FLOOR
+```
+
+`c*(t-1)` saved in the body, minus one tape glyph and the `t` tokens the tape
+spends naming the value. For `t = 1` this is **−2 for every `c`**: no
+substitution codec, however clever, can profit from a one-token string. Prose is
+dominated by one-token words, which is exactly why `kb-article` compresses 5.5 %
+while the tabular ops lanes reach 75–82 %. Every miner in this stack is therefore
+*right* to refuse such rules.
+
+**What the floor does not cover.** It prices each rule **in isolation**. Two
+adjacent glyphs `g1 g2` may themselves be a single token, collapsing two
+references into one — and that saving is paid for by the rule **set**, not by
+either rule. A set that is negative rule-by-rule can be strongly positive
+together. Marginal selection cannot express this; only a joint decision can.
+
+**Source citation (honest).** The cross-boundary-span effect is the "superword"
+idea reported by **BoundlessBPE** at ~20 % better bytes/token; related
+tokenizer-boundary work is **ByteSampler (arXiv 2506.14123)** and **Pruned BPE
+(arXiv 2608.00837)** — all *tokenizer design* papers. The transfer to a
+reversible pre-stage, and the one-token floor above, are ours.
+
+**Time- or cpu-bound?** **CPU-bound.** Glyph assignment probes the real
+`countTokens` (`merges()`), then does greedy-with-restarts plus a swap
+hill-climb over a K-sweep. 70–1600 ms per lane standalone.
+
+**Measured — raw level, `OMEGA_SYGKOLLESIS=1`**
+(`bench/x126/receipts/x129-sygkollesis-raw.log`, all 29 lanes, **every lane
+EXACT**): **Σ raw Δ = −4235**, 23 lanes improved, 6 "no pay" (the six small or
+pure-prose lanes). Best: `ls-l-real` −1316 (K=64), `ps-aux-real` −613,
+`apt-real` −598, `ps-ef` −260, `ps-real` −245, `json-pkg` −144, `code-ts` −90.
+
+**Measured — end to end: NOT PARETO. Two placements tested.**
+- *Pre-stage* `frontier(sygkollesis(src))` —
+  `bench/x126/receipts/x129-sygkollesis-compose.jsonl`:
+  **Σ A(stack) 12 639 → Σ B 14 829, ΣΔ +2190, 0 better / 26 worse.** Glyphing
+  destroys the very structure the X-chain exploits (ΣΤΉΛΗ alignment, ΣΤΟΙΧΗΔΟΝ,
+  ΒΈΛΤΙΣΤΟΣ identifiers, whitespace runs). The stack loses more than ΣΥΓΚΌΛΛΗΣΙΣ
+  wins: on `code-ts` the stack gains −453 on the original but only −218 on the
+  glyph version, against a −90 raw win.
+- *Post-stage* `sygkollesis(frontier(src))` — **ΣΔ 0 on every lane tested.**
+  The stack's output has no repeated one-token units left to glyph; everything
+  repeatable is already a tape reference.
+
+**Status: ships OFF**, opt in with `OMEGA_SYGKOLLESIS=1`. Kept because the
+raw-level win is large and it is the only known route past the one-token floor.
+The open problem it hands on: **jointly** optimize the unit set against the true
+objective `countTokens(frontier(msg))` rather than the raw-token proxy, which is
+too slow to evaluate per lane today (4–30 s per stack call).
+
+## X130 — ΜΕΤΟΝΟΜΑΣΊΑ / METONOMASIA (glyph renaming for adjacency merge)
+
+**Mechanism.** A dictionary's glyph→value binding is ARBITRARY: rule 7 is rule 7
+whether it is written `т` or `ж`. So the frontier's dictionary letters may be
+*renamed* without changing one byte of body, tape content, contract or
+structure. Renaming changes only how the message tokenizes — specifically, how
+often two ADJACENT glyph references collapse into a single vocabulary token.
+
+**Greedy?** No. No substring is ever mined, ranked or replaced. It is a JOINT
+assignment over a weighted glyph-adjacency graph: which partner a glyph merges
+with depends on every other assignment, so the search is a swap/move hill-climb
+scored by the real `countTokens` on the whole rebuilt message.
+
+**Why this is not X129 again.** X129 tried to win the same adjacency effect by
+substituting NEW glyphs into the SOURCE, and was not pareto (+2190 composed)
+because it destroyed the whitespace runs, column alignment and identifier
+substrings that ΣΤΉΛΗ / ΣΤΟΙΧΗΔΌΝ / ΒΈΛΤΙΣΤΟΣ exploit. Renaming edits nothing
+those codecs read. It is structural-damage-free by construction.
+
+**A refuted hypothesis, recorded because the measurement is what kills it.**
+The first design moved the alphabet to Hebrew/Arabic, measured at 42.7 % /
+34.5 % pair-merge versus 2.8 % for the shipped pool
+(`bench/x129/receipts/x130-mergegrid.log`). That comparison was WRONG and is
+retracted here: the 2.8 % figure sampled the first 40 codepoints of
+0x0386..0x044f, which is the **Greek** half. The glyphs actually in use come from
+`merismos.ts:84`, which lists **Cyrillic first**, and Cyrillic bigrams are common
+Russian sequences that o200k already merges:
+
+```
+kb-article: 71 of 82 adjacent glyph pairs ALREADY merge in the shipped alphabet.
+```
+
+Installing a Hebrew/Arabic alphabet scored 59/82 and cost **+63 tokens**
+(`bench/x129/receipts/x130-dbg.log`). The surviving version therefore keeps the
+alphabet and permutes it, starting from the identity permutation.
+
+**Source citation (honest).** No paper was imported; there is no prior work on
+renaming a dictionary's alphabet for tokenizer adjacency. The transferable
+background is the cross-boundary-span / "superword" line (BoundlessBPE ~20 %
+better bytes/token; ByteSampler arXiv 2506.14123; Pruned BPE arXiv 2608.00837),
+all tokenizer-*design* papers. The adjacency census and the refutation above are
+ours.
+
+**Time- or cpu-bound?** **CPU-bound.** Every candidate is priced with the real
+`countTokens` over the full rebuilt message; cost is dominated by those probes
+and is capped by `OMEGA_METONOMASIA_MS` (default 25000 ms/lane).
+
+**Safety.** The search starts from the identity permutation (the shipped
+message) and accepts only a strict measured improvement, so the worst case is
+the unmodified frontier output — a lane can never regress.
+
+**Result (29 lanes, `OMEGA_DET=1`, receipt below):** ΣΔ **−8**, 3 better /
+0 worse, `exact 29/29`. This is pareto-superior but **small**: the ceiling was
+probed with a 45 s budget and the search exhausts its space in ~5 s, so
+relabelling has only a few tokens of headroom. The stack's alphabet is already
+near a real-token local optimum.
+
+### Frontier restated (correction)
+
+The frontier is **`tagstackEncode` (== `tagstackX74Chain`), Σ ≈ 12 031**.
+`tagstackFrontier` is a *weaker* path, Σ ≈ 12 639 — 608 tokens worse. X129
+measured against `tagstackFrontier` and its numbers should be read in that
+light. `OMEGA_DET=1` is required for reproducibility: without it the frontier
+varies run to run (observed 12 035 vs 12 031).
