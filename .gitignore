@@ -57,4 +57,5 @@ bench/x120/receipts/prof/
 bench/x121/receipts/prof/
 bench/x131/*.mjs
 bench/x131/prof*/
+bench/x132/*.mjs
 bench/x126/*.mjs
