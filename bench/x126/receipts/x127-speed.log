@@ -1,0 +1,85 @@
+X127 — WHERE A WARM `tagstackEncode` ACTUALLY SPENDS ITS TIME, AND TWO FALSIFIED SPEED HYPOTHESES
+=================================================================================================
+Branch arena/6adc24e4-kompkernel, from 77e5e02. Node 22.22.3, o200k_base. All runs OMEGA_DET=1.
+
+(g) FRONTIER RE-VERIFICATION (requirement: confirm before merging anything)
+    Driver: bench/x125/x125-ab.ts bundled to bench/x126/x125ab29.mjs, ROUNDS=1.
+    Result:  Σ OFF 12023  →  Σ ON 12020   Δ -3   (1 better / 0 worse / 28 same)
+             every row decoded === src
+             ps-aux-real  991 → 988
+    Receipt: bench/x126/receipts/x127-frontier-reverify.log
+    The Σ wall figure in that log (OFF 536.2s vs ON 295.8s, "-44.8%") is NOT a speed result.
+    Whichever arm runs first inside a lane is 3-5x slower, in both directions:
+        lsblk     OFF first 2.2s / ON 0.2s      kb-article ON first 3.0s / OFF 1.0s
+        ps-aux    OFF first 52.7s / ON 11.7s    apt-real   ON first 80.4s / OFF 20.6s
+    The two arms alternate as first across lanes, so the sums are not order-balanced. Do not cite it.
+
+1. PROFILE (bench/x126/x127-profile.ts, warm encode of apt-real, 18.4s, --cpu-prof)
+      16.4%  countLongRaw              (bpe.ts: the pretoken fold loop)
+       8.2%  (anon)                    (cache probe closures)
+       7.9%  rankAt                    (bpe-fast: byte-pair rank lookup)
+       7.0%  scoreRunCostDeltaSlots    (ariadne: the probe scorer)
+       6.1%  mergeCount                (bpe-fast: the BPE merge loop)
+       6.1%  RegExp: PRETOK            (the o200k pretokenizer itself)
+       6.0%  countTokens3 / 6.0% chunkCountFast / 3.5% fastChunkCount / 2.0% fastCount
+       3.8%  garbage collector
+       2.2%  encode @ encoding (TextEncoder), 1.9% renderBest, 1.8% prolepsisLookup, 1.2% envOff
+   => ~55% of a warm lane is token counting. Counting is the only place a whole-stack win can live.
+
+2. THE COUNT IS ALMOST ENTIRELY CACHE LOOKUPS, NOT BPE WORK (bench/x126/x127-cache-stats.ts)
+   apt-real, warm:  chunk hits 38,613,291   misses 284,396   fallbacks 0   hit rate 99.3%
+   cache size at end 284,396. i.e. the working set of chunks is small and 99.3% of the fold
+   is served from memory; only 284k genuine BPE counts are performed per lane.
+
+3. HYPOTHESIS A — "the count memo thrashes; raise the budget"    FALSIFIED (already, at X88)
+   LONG_CACHE_MAX_TOTAL_CHARS defaults to 2,000,000 retained chars and evicts with clear().
+   It is env-overridable, so it was tested directly with no code change:
+       OMEGA_COUNT_MEMO_TOTAL_CHARS=2000000   17575ms / 18398ms
+                                 =64000000   16993ms / 17026ms
+                                 =256000000  16807ms / 16247ms
+   ~-7% at 128x the memory, inside run-to-run noise, and X88 measured it the other way
+   (478ms at 2M against 528ms at 32M). The long strings are mostly DISTINCT, so no budget helps.
+   Closed lever. Do not re-ship.
+
+4. HYPOTHESIS B — "SHORT_CACHE evicts with clear() and thrashes; use FIFO partial eviction"
+   FALSIFIED. countTokens answers strings <24 code units from SHORT_CACHE (2,000,000 entries),
+   and on overflow it discarded the WHOLE map. Replaced with FIFO deletion of the oldest
+   quarter (a Map iterates in insertion order), default raised to 8,000,000, and an
+   OMEGA_SHORT_CACHE_EVICT=clear toggle read per eviction so both arms can alternate inside
+   one process. In-process alternating A/B, arms warmed in both orders, R=3, medians:
+       apt-real  M identical 816 = 816   med clear=20222ms  fifo=20080ms  (-0.7%)
+                                        min clear=19060ms  fifo=19153ms
+   No effect: at 2M entries the map never overflows on this lane, so eviction policy is moot.
+
+5. HYPOTHESIS C — "mergeCount is O(n^2) with two array shifts per merge; use a linked list"
+   FALSIFIED, AND IT IS SLOWER. mergeCount kept token boundaries packed in `starts`/`ranks` and
+   shifted BOTH arrays left by one on every accepted merge (~3n^2 element moves per count).
+   Replaced with a doubly-linked list over boundary nodes (node index == byte offset, so
+   `starts` is never written), the minimum scan walking the list from node 0 so a strict `<`
+   still selects the leftmost minimum; OMEGA_MERGECOUNT_SHIFT=1 restores the old body.
+   CORRECTNESS (bench/x126/x127-mergecount-diff.ts): 76,000 strings — 60,000 random over the
+   real wire alphabets (greek, cyrillic, cjk, latin, digits, punctuation, ¶§±×÷→←∞≈≡) plus
+   16,000 slices of apt-real / code-ts / kb-article — each compared against `countTokensExact`
+   (the reference encoder):  list(new) mismatches 0,  shift(old) mismatches 0. The rewrite is
+   exact on this sample.
+   SPEED, in-process alternating A/B, both arms warmed, R=3, medians, M identical 816 = 816:
+       apt-real  med old=18783ms  new=19181ms   (+2.1% — SLOWER)
+                 min old=18644ms  new=18979ms
+   Why: the two shifts were contiguous typed-array moves that V8 does well; the replacement
+   scan chases SN[i] pointers through an Int32Array and loses more than the shifts cost.
+
+VERDICT. Three speed hypotheses tested this turn, three falsified; no speed win was shipped and
+both code changes were reverted (git checkout of src/lib/omega/bpe.ts and bpe-fast.ts) so the
+tree carries only the investigation. Counting is ~55% of the warm cost, the chunk hit rate is
+99.3%, and the residual 0.7% of genuine counts is not reachable by any cache-policy or
+data-structure change tried here. The remaining live lever is to make FEWER countTokens calls,
+i.e. to prune probes in the ARIADNE search — and note that scoreRunCostDeltaSlots ALREADY passes
+`bestRun` as the branch-and-bound limit, so the cheap pruning is done.
+
+6. SMALL-OUTPUT LANES (bench/x126/x127-smalloutput-probe.ts) — axis closed, no headroom found.
+   The 317 tokens shipped raw (lsblk 60, uptime-w 80, free-m 76) are raw because the WHOLE
+   stack declines them, not because one codec was never tried: ΣΤΉΛΗ is already inside
+   tagstack.ts (4 references), as are synkrisis, bifront, kanon, akolouthia2, apographe, metron,
+   hemera, diastema, stichomythia. Measured directly: raw == M on all three.
+   Separately, tagstackTransform refuses any text that does not start with '<', so no
+   non-markup lane can ever take that path regardless of structure.
