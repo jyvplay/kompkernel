@@ -8091,3 +8091,157 @@ digits; the untouched pools are the **317 tokens of small outputs** and the
 **~763-token gap between the tape's 0.420 tok/char and the body's 0.311**, which
 is boundary waste in the tape's *layout* and is not reachable by any move in the
 current neighbourhood set.
+
+## §X127 — the warm-cost census, and three falsified speed hypotheses
+
+**Result: nothing shipped.** Three mechanisms were built, measured against the incumbent
+inside a single process with the arms alternated, and reverted. This section exists so the
+negative results are not re-derived.
+
+**Where the time actually goes** (`bench/x126/receipts/x127-speed.log`, CPU profile of a warm
+`tagstackEncode` on `apt-real`): ~55 % of the lane is token counting — `countLongRaw` 16.4 %,
+`rankAt` 7.9 %, `mergeCount` 6.1 %, the pretoken regex 6.1 %, `countTokens3` 6.0 %,
+`chunkCountFast` 6.0 %, `fastChunkCount` 3.5 %, `fastCount` 2.0 %. `scoreRunCostDeltaSlots`
+ itself is 7.0 % and `renderBest` 1.9 %.
+
+**The surprising part — the counting is nearly all cache hits.** Same lane, warm:
+38 613 291 chunk-cache hits against 284 396 misses, `fallbacks 0`, hit rate **99.3 %**.
+The working set of chunks is small and fully resident; only 284 k genuine BPE counts happen.
+
+| # | hypothesis | outcome |
+|---|---|---|
+| A | the long count-memo thrashes — raise `LONG_CACHE_MAX_TOTAL_CHARS` (2 M → 256 M) | **falsified, and already falsified at X88** (478 ms at 2 M vs 528 ms at 32 M). ~−7 % here, inside noise. The long strings are mostly *distinct*, so no budget helps. |
+| B | `SHORT_CACHE` evicts with `clear()` and thrashes — use FIFO deletion of the oldest quarter | **falsified.** In-process alternating A/B: med 20 222 ms → 20 080 ms (**−0.7 %**), min 19 060 → 19 153. At 2 M entries the map never overflows on this lane, so the policy is moot. |
+| C | `mergeCount` is O(n²) with two array shifts per merge — replace with a linked list | **falsified, and slower.** Exact on 76 000 differential strings (0 mismatches for both arms), but med 18 783 ms → 19 181 ms (**+2.1 %**). The shifts were contiguous typed-array moves; the replacement scan chases pointers. |
+
+Both code changes were reverted (`git checkout` of `src/lib/omega/bpe.ts` and `bpe-fast.ts`).
+
+**Two closed axes recorded here so they are not reopened.**
+- *Small-output lanes.* The 317 tokens shipped raw (lsblk 60, uptime-w 80, free-m 76) are raw
+  because the **whole stack** declines them, not because a codec was never tried: ΣΤΉΛΗ is
+  already inside `tagstack.ts`, as are synkrisis, bifront, kanon, akolouthia2, apographe,
+  metron, hemera, diastema and stichomythia. Measured directly: raw == M on all three. And
+  `tagstackTransform` refuses any text not starting with `<`, so no non-markup lane can take
+  that path at all.
+- *Probe pruning.* `scoreRunCostDeltaSlots` **already** passes `bestRun` as the
+  branch-and-bound limit and returns `limit + 1` on abandonment, so a probe whose lower bound
+  cannot win is already cut. There is no cheap pruning left to add.
+
+**The one live lever this census identifies:** make **fewer** `countTokens` calls, not cheaper
+ones — i.e. prune at the level of the ARIADNE *search* (which candidates are proposed), not at
+the level of the counter. Every counter-level change tried here is bounded by the fact that
+99.3 % of the fold is already memory-served.
+
+**Frontier re-verified on this branch** (requirement g) before any of the above:
+Σ OFF **12 023** → Σ ON **12 020**, **Δ −3**, 1 better / 0 worse / 28 same, `decoded === src`
+on every row. Receipt: `bench/x126/receipts/x127-frontier-reverify.log`. The Σ wall figure in
+that log (OFF 536.2 s vs ON 295.8 s) is **not** a speed result — whichever arm runs first in a
+lane is 3–5× slower in both directions, and the arms alternate as first across lanes, so the
+sums are not order-balanced.
+
+## §X128 — codec design-spec table, generalized local leaders, and ΣΤΟΙΧΟΘΈΤΗΣ
+
+### 1. Design spec per codec
+
+`greedy?` means the codec commits to locally-best choices without backtracking.
+`bound` is what actually stops it: **work** = the X57 deterministic score-evaluation
+budget, **time** = a wall-clock check, **size** = a structural cap. Citations are
+given only where a real external paper exists; the rest are internal inventions and
+are marked `internal` — most of this stack has no external ancestor.
+
+| codec | mechanism | greedy? | bound | citation |
+|---|---|---|---|---|
+| ΣΥΝΚΡΙΣΙΣ | dictionary / SLP rule extraction + replacement | yes (greedy repeat selection) | work | `internal`; *adjacent* to Charikar et al., "The smallest grammar problem", IEEE Trans. IT 51(4) 2005, doi:10.1109/TIT.2005.850116 — NP-hard, inapproximable within 8569/8568 |
+| ΑΡΙΆΔΝΗ | glyph→rule assignment, random-probe hill-climb over run costs | no (stochastic hill-climb, restarts) | work (X57 budget) | `internal` |
+| ΒΈΛΤΙΣΤΟΣ | shortest-path parse over the rule lattice | no (exact DP) | work | `internal` |
+| ΣΤΟΙΧΗΔΟΝ | tape ordering, adjacent transposition hill-climb | yes | work | `internal` |
+| ΣΤΉΛΗ | fixed-offset columnar; single-space rows + geometry marker | yes (best pad-mass block) | size (`STELI_MAX_COLS`) | `internal`. **Cannot express right-aligned cells**: `sliceRow` trims each cell and `steliRebuildRow` writes it back at an absolute offset |
+| ΚΑΝΏΝ | gate over HYLE's fold lattice (T/G/A folds, no I), fixed DAEDALUS arm | yes (gate on an O(n) estimate) | work | `internal`; measured −1.06 % over 80 files, gate open on 10 (psql −32 %, aapl −23 %, vix −18 %, kubectl −18 %, dump −15 %, df −16 %) |
+| ΑΝΑΓΡΑΦΗ | multi-rung tape re-parse | no (bounded search) | work | `internal` |
+| ΠΕΡΙΚΟΠΉ | preamble/legend hoisting | yes | size | `internal` |
+| ΤΑΧΥΓΡΑΦΊΑ | phrase-level substitution | yes | size | `internal` |
+| Δ-mask / `⁺` (ΔΙΑΦΟΡΆ, ΑΠΟΓΡΑΦΉ) | per-column numeric shape mask + running-sum digits; delta from two lines above | yes | size | `internal`; *conceptually* delta / delta-of-delta as in time-series DB codecs (Gorilla, FCM+dfcm), no direct ancestor |
+| ΗΜΈΡΑ / ὭΡΑ | date & time substitution | yes | size | `internal` |
+| ΔΙΓΛΩΣΣΊΑ | per-use choice between a glyph and the literal | yes (per occurrence) | size | `internal` |
+| ΤΜΗΜΑΤΙΣΜΌΣ (X126) | segment-additive window re-pricer, exact | yes | probe cap (200 000) | `internal`; **OFF**, 0 token change |
+| ΣΤΟΙΧΟΘΈΤΗΣ (X128) | alignment-aware fixed-width columnar (per-column L/**R**) | yes (best pad-mass block) | size (`ST_MAX_COLS`) | `internal`; **OFF**, loses end-to-end (see §3) |
+
+### 2. Generalized local leaders by structure class
+
+Measured on the 29-lane frontier (Σ 12 020) plus the held-out directories.
+
+| structure class | local leader | observed density / note |
+|---|---|---|
+| prose (kb-article, llm-answer, email-thread) | ΣΥΝΚΡΙΣΙΣ + ΠΕΡΙΚΟΠΉ + ΤΑΧΥΓΡΑΦΊΑ | 0.214–0.260 tok/char; no columnar or numeric op fires |
+| ops listings, **variable width** (ps-aux, apt-real, ls-l, dpkg-l, ps-real, ps-ef, ls-real, du) | ΣΥΝΚΡΙΣΙΣ + ΒΈΛΤΙΣΤΟΣ + ΣΤΟΙΧΗΔΟΝ, + ΑΝΑΓΡΑΦΗ on ps-aux | 67–70 % reduction; right-aligned cells defeat ΣΤΉΛΗ |
+| ops tables, **fixed width / numeric** (kubectl, psql, df, findmnt, metrics.tsv, prices.csv, vmstat) | ΚΑΝΏΝ (HYLE table fold), ΣΤΉΛΗ when left-aligned, Δ-mask / `⁺` for numeric columns | **75–80 %** reduction — the best-behaved class |
+| code / config / diff (code-ts, json-pkg, unified-diff) | ΣΥΝΚΡΙΣΙΣ (~0.269) + structural folds | worst class by ratio; code-ts 950 is the 2nd-largest lane |
+| markdown tables | ΣΤΙΧΟΜΥΘΊΑ | markdown-table 172 |
+| small outputs (lsblk 60, uptime-w 80, free-m 76) | **raw** — the whole stack declines them | closed axis: ΣΤΉΛΗ and 8 other codecs are already in the chain and all lose |
+
+**The structural regularity this exposes:** lanes that reach the numeric/columnar
+ops get **75–80 %**; lanes that only reach the dictionary get **67–70 %**. That
+8–10 point gap *is* the remaining headroom, and it is entirely in the
+variable-width ops listings — which is exactly what §3 attacks, and fails to close.
+
+### 3. ΣΤΟΙΧΟΘΈΤΗΣ (X128) — new codec, shipped **OFF**, honestly not pareto
+
+**Mechanism.** A row is `slot_0 ++ … ++ slot_{n-1} ++ tail` with
+`slot_j = pad(field_ij, w_j, a_j)`, `a_j ∈ {L, R}`. This is *strictly more
+expressive than ΣΤΉΛΗ*, which cannot express right-aligned cells at all.
+Alignment is **not** guessed: a column is `L` only if every row starts that field
+at the same offset, `R` only if every row ends it there, else the block is
+rejected; widths come from the gap equations; and **every candidate block is
+rebuilt and compared byte-for-byte** before acceptance, so the width solver can
+only cost compression, never fidelity.
+
+**Measured, end-to-end through the real frontier** (`bench/x126/receipts/x128-stoichothetes.log`,
+round-trip `EXACT` on every lane):
+
+| lane | raw Δ after transform | frontier M | M with ΣΤΟΙΧΟΘΈΤΗΣ | Δ |
+|---|---|---|---|---|
+| kubectl-get-pods | **−88** | 303 | 327 | **+24** |
+| psql-output | +8 | 230 | 268 | **+38** |
+| df-h | +54 | 160 | 243 | **+83** |
+| ps-aux-real | +32 | 988 | (not run end-to-end: loses on raw) | — |
+
+**Why it loses, and why that is the useful finding.** The transform reclaims real
+whitespace (pad-mass 733 on kubectl) but the frontier's dictionary *already*
+recovers aligned space runs as shared rules, so the padding was never costing
+what it appears to cost — and the geometry marker (~40 tokens) is then paid on
+top. Explicit padding removal is **redundant** with the existing stack. This
+closes the "tape/body alignment" family of ideas with a measurement rather than
+an argument.
+
+### 4. External sources consulted this turn (new sites/terms)
+
+- **Delétang et al., "Language Modeling Is Compression", ICLR 2024** — an LLM plus
+  arithmetic coding attains the model's cross-entropy. This is the *limit* result
+  for this whole problem and it is **adjacent but different**: its decoder must
+  reproduce the model's exact conditional distributions token by token, which a
+  single chat turn cannot do. Not importable under our constraint.
+- **arXiv 2611.05871, "The Invocation Bottleneck in LLM-Based Lossless
+  Compression"** — sequential dependency (one model call per decoded token) is
+  inherent to lossless decoding and can only be traded, not removed. Confirms the
+  above is out of scope for a one-shot readable wire.
+- **Frontier-lab mathematics, reviewed individually:** DeepMind/Gemini —
+  AlphaProof Nexus, 9 of 353 Erdős problems and 44 of 492 OEIS conjectures,
+  *Science* 8 Oct 2026, with the audit caveat that Erdős 846 was already implied
+  by Reiher–Rödl–Sales (so 8, not 9, are newly resolved). OpenAI — disproof of
+  the Erdős planar unit-distance conjecture (1946), May 2026, with companion
+  remarks from Alon, Wood, Bloom and Gowers; Bloom notes the human-improved
+  proof. Anthropic — Claude's 13-million-line Lean formalisation of Fermat's Last
+  Theorem, Sept 2026, reviewed by Buzzard; formalisation of a *known* theorem,
+  not a new one.
+  **Verdict, honestly: none of them yields a compression mechanism.** All three
+  are search-plus-verification results. The only transferable idea is
+  *verification-driven search* (generate, mechanically check, iterate), which
+  this codebase already implements — every codec byte-verifies before emitting.
+  No new lemma, construction or bound transfers to source coding.
+
+### 5. Frontier re-verified this turn
+`bench/x126/receipts/x128-frontier-reverify.log`: **Σ OFF 12 023 → Σ ON 12 020,
+Δ −3, 1 better / 0 worse / 28 same**, `decoded === src` on every row. The Σ wall
+figure in that log (OFF 520.3 s vs ON 296.7 s) is the ordering artefact again —
+whichever arm runs first in a lane is 3–5× slower in both directions — and is
+**not** a speed claim.

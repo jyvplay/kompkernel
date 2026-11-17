@@ -1,0 +1,61 @@
+X128 — ΣΤΟΙΧΟΘΈΤΗΣ: alignment-aware fixed-width columnar blocks. NEW CODEC, SHIPPED OFF.
+Branch arena/6adc24e4-kompkernel from 77e5e02. Node 22.22.3, o200k_base, OMEGA_DET=1.
+
+WHY IT IS NEW. ΣΤΉΛΗ (steli.ts) cannot express a RIGHT-ALIGNED cell: `sliceRow`
+does `const f = seg.trim()` and `steliRebuildRow` writes the field back at an
+absolute offset, so every cell comes out left-aligned; its offset candidates also
+come from `startsOf`, which only fires after TWO OR MORE spaces. Every numeric
+column in `ps aux` / `ls -l` / `free -m` / `kubectl get` is right-aligned, so
+ΣΤΉΛΗ returns null on all of them. ΚΑΝΏΝ (kanon.ts) is a different thing — a gate
+over HYLE's fold lattice with a fixed DAEDALUS arm, and a frontier PARENT.
+ΣΤΟΙΧΟΘΈΤΗΣ adds one symbol per column (alignment) and is a pure pre-transform.
+
+CORRECTNESS CONTRACT. Alignment is not guessed: column j is 'L' only if every row
+starts that field at the same offset, 'R' only if every row ends it there, else the
+block is rejected. Widths come from the gap equations
+    gap_ij = [a_j=='L' ? w_j-|f_ij| : 0] + [a_j+1=='R' ? w_j+1-|f_i,j+1| : 0]
+and EVERY candidate block is rebuilt and compared byte-for-byte to the source
+before acceptance; `stoichothetesTransform` then re-checks the whole text with its
+own inverse and returns null if it does not round-trip. A bad width can therefore
+only lose compression, never fidelity.
+
+1. SOURCE-LEVEL EFFECT (bench/x126/x128-stoichothetes-raw.ts)
+   lane                                    blocks padMass  raw -> after   Δ
+   ps-aux-real.txt                         1       96     3054 -> 3086   +32  EXACT
+   kubectl-get-pods.txt                    1      733     1006 ->  918   -88  EXACT
+   psql-output.txt                         1      136      675 ->  683    +8  EXACT
+   df-h.txt (holdout-tbl)                  3       94      570 ->  624   +54  EXACT
+   vmstat / lsblk / free-m / metrics.tsv / prices.csv / df-h(x42) / bibliography /
+   ls-real                                 —        —     no fit
+   Every fit round-trips EXACT.
+
+2. END-TO-END THROUGH THE REAL FRONTIER (bench/x126/x128-stoichothetes-e2e.ts)
+   lane                     M(baseline)  M(with ΣΤΟΙΧΟΘΈΤΗΣ)   Δ     round-trip
+   kubectl-get-pods.txt          303            327           +24      EXACT
+   psql-output.txt               230            268           +38      EXACT
+   df-h.txt                      160            243           +83      EXACT
+
+   VERDICT: NOT PARETO. It reclaims real whitespace (pad-mass 733 on kubectl) and
+   still loses end-to-end, and the reason is the finding: the frontier's dictionary
+   ALREADY recovers aligned space runs as shared rules, so the padding was never
+   costing what it appears to cost, and the ~40-token geometry marker is paid on
+   top. Explicit padding removal is redundant with the existing stack.
+
+3. DISCLOSURE — a tracked file was clobbered and restored during this work.
+   `src/lib/omega/kanon.ts` already existed (it is a frontier parent, imported at
+   tagstack.ts:33) and was overwritten by a first draft of this mechanism that
+   reused the name. It was restored with `git checkout -- src/lib/omega/kanon.ts`
+   before any build that referenced it ran; the frontier re-verification of §5 ran
+   BEFORE the overwrite and is unaffected. The rewrite is named ΣΤΟΙΧΟΘΈΤΗΣ.
+
+4. WHERE THE REMAINING HEADROOM ACTUALLY IS (measured, not argued)
+   Lanes that reach the numeric/columnar ops compress 75-80 %:
+       prices.csv 582 -> 119 (79.6 %), metrics.tsv 811 -> 198 (75.6 %),
+       kubectl 1006 -> 303, vix/aapl/dump/psql/df via ΚΑΝΏΝ.
+   Lanes that only reach the dictionary compress 67-70 %:
+       ps-aux-real 3054 -> 988 (67.6 %), apt-real 2739 -> 816 (70.2 %).
+   The 8-10 point gap is the headroom, and it sits in VARIABLE-WIDTH ops listings.
+   ΣΤΟΙΧΟΘΈΤΗΣ was the attempt to close it by attacking alignment; it failed.
+   What that leaves: the variable-width lanes may simply be at their dictionary
+   limit, because their residual is free text (the COMMAND column of ps aux, the
+   package names and versions of apt list) which no dictionary can touch.

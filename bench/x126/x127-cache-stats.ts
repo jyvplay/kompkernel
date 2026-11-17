@@ -1,0 +1,16 @@
+import * as fs from 'node:fs';
+import { tagstackEncode, tagstackMemoClear } from '../../src/lib/omega/tagstack';
+import { chunkCacheStats, chunkCacheClear, tailMemoClear } from '../../src/lib/omega/bpe';
+import { prolepsisReset } from '../../src/lib/omega/prolepsis';
+const enc='o200k_base' as const;
+const clear = () => { tagstackMemoClear(); chunkCacheClear(); tailMemoClear(); prolepsisReset(); };
+const lane = process.env.LANE ?? 'bench/holdout-x41/apt-real.txt';
+const src = fs.readFileSync(lane,'utf8');
+clear(); tagstackEncode(src, enc);
+clear(); chunkCacheClear();
+const t0=Date.now();
+const r = tagstackEncode(src, enc);
+const ms=Date.now()-t0;
+const s = chunkCacheStats();
+console.log(`${lane} ms=${ms} exact=${r.decoded===src}`);
+console.log(`chunk: hits=${s.hits} misses=${s.misses} fallbacks=${s.fallbacks} hitRate=${(100*s.hits/(s.hits+s.misses)).toFixed(1)}% size=${s.size}`);
