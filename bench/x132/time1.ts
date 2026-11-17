@@ -1,0 +1,12 @@
+import * as fs from 'node:fs';
+import { countTokens } from '../../src/lib/omega/bpe';
+import { tagstackEncode } from '../../src/lib/omega/tagstack';
+process.env.OMEGA_DET='1'; process.env.OMEGA_NO_MEMO='1'; process.env.OMEGA_ENGRAM='0';
+process.env.OMEGA_OURA_MEMO='0'; process.env.OMEGA_NO_OROTHESIA='1';
+const enc:any='o200k_base';
+const p=process.env.LANE??'bench/holdout-work/kb-article.txt';
+const text=fs.readFileSync(p,'utf8');
+let t0=Date.now(); const a:any=tagstackEncode(text,enc); const encMs=Date.now()-t0;
+const M=a.message as string;
+t0=Date.now(); let n=0; for(let i=0;i<50;i++){ countTokens(M,enc); n++; } const perTok=(Date.now()-t0)/n;
+console.log(`${p.split('/').pop()} encodeMs=${encMs} msgLen=${M.length} msgTok=${a.messageTokens} countTokens ms/call=${perTok.toFixed(2)}`);

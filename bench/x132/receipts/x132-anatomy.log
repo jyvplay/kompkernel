@@ -1,0 +1,33 @@
+lsblk.txt              raw    60 out    60  pre   60 tape     0 body     0 | glyphs   0 body: glyph    0 num    0 word    0 other    0  EXACT
+kb-article.txt         raw   656 out   620  pre   10 tape    56 body   554 | glyphs  27 body: glyph  165 num    2 word  371 other   16  EXACT
+uptime-w.txt           raw    80 out    80  pre   80 tape     0 body     0 | glyphs   0 body: glyph    0 num    0 word    0 other    0  EXACT
+free-m.txt             raw    76 out    76  pre   76 tape     0 body     0 | glyphs   0 body: glyph    0 num    0 word    0 other    0  EXACT
+vmstat.txt             raw   229 out   144  pre   10 tape    36 body    98 | glyphs  11 body: glyph   18 num   19 word   32 other   29  EXACT
+unified-diff.patch     raw   578 out   411  pre   10 tape   129 body   272 | glyphs  33 body: glyph   70 num   48 word   81 other   73  EXACT
+df-h.txt               raw   570 out   160  pre   15 tape    48 body    98 | glyphs  16 body: glyph   18 num   12 word   45 other   23  EXACT
+df-real.txt            raw   158 out   123  pre   10 tape    35 body    78 | glyphs  13 body: glyph   15 num   16 word   25 other   22  EXACT
+du-real.txt            raw   458 out   266  pre   10 tape    79 body   177 | glyphs  23 body: glyph   49 num   74 word   33 other   21  EXACT
+node-help.txt          raw  1099 out   852  pre   10 tape   117 body   725 | glyphs  41 body: glyph  160 num   13 word  481 other   71  EXACT
+findmnt.txt            raw   787 out   389  pre   10 tape    96 body   283 | glyphs  26 body: glyph   49 num   27 word  170 other   37  EXACT
+df-h.txt               raw   140 out   105  pre   10 tape    35 body    60 | glyphs  13 body: glyph   14 num    9 word   21 other   16  EXACT
+email-thread.txt       raw   629 out   486  pre   10 tape   123 body   353 | glyphs  39 body: glyph   91 num   26 word  214 other   22  EXACT
+llm-answer.md          raw   733 out   665  pre   11 tape    86 body   568 | glyphs  34 body: glyph  118 num   21 word  326 other  103  EXACT
+markdown-table.md      raw   330 out   172  pre   22 tape    36 body   114 | glyphs  12 body: glyph   46 num   32 word   25 other   11  EXACT
+psql-output.txt        raw   675 out   230  pre   61 tape    62 body   107 | glyphs  20 body: glyph   49 num   30 word    9 other   19  EXACT
+prices.csv             raw   582 out   119  pre   44 tape    26 body    49 | glyphs  10 body: glyph   10 num   12 word   14 other   13  EXACT
+cue-sheet.md           raw   513 out   101  pre  101 tape     0 body     0 | glyphs   0 body: glyph    0 num    0 word    0 other    0  EXACT
+ps-ef.txt              raw  1144 out   299  pre   10 tape    79 body   210 | glyphs  28 body: glyph   78 num   36 word   84 other   12  EXACT
+ls-real.txt            raw  1034 out   422  pre   10 tape   154 body   258 | glyphs  46 body: glyph  101 num   59 word   88 other   10  EXACT
+json-pkg.txt           raw  1152 out   657  pre   10 tape   133 body   514 | glyphs  48 body: glyph  187 num   22 word  264 other   41  EXACT
+code-ts.txt            raw  1422 out   950  pre   10 tape   237 body   703 | glyphs  75 body: glyph  256 num    4 word  313 other  130  EXACT
+dpkg-l.txt             raw  1000 out   624  pre   10 tape    97 body   517 | glyphs  33 body: glyph  128 num   28 word  294 other   67  EXACT
+ps-real.txt            raw  1106 out   381  pre   10 tape    88 body   283 | glyphs  30 body: glyph   90 num   44 word  105 other   44  EXACT
+kubectl-get-pods.txt   raw  1006 out   303  pre   15 tape    78 body   210 | glyphs  26 body: glyph   40 num   79 word   71 other   20  EXACT
+metrics.tsv            raw   811 out   198  pre   15 tape    60 body   123 | glyphs  18 body: glyph   31 num   31 word   46 other   15  EXACT
+ps-aux-real.txt        raw  3054 out   988  pre   10 tape   310 body   668 | glyphs  78 body: glyph  267 num  117 word  223 other   61  EXACT
+apt-real.txt           raw  2739 out   816  pre   10 tape   185 body   621 | glyphs  62 body: glyph  307 num   46 word  243 other   25  EXACT
+ls-l-real.txt          raw  5194 out  1323  pre   66 tape   530 body   727 | glyphs 120 body: glyph  344 num  215 word  127 other   41  EXACT
+
+SIGMA raw=28015 out=12020  preamble=736 tape=2915 body=8370  mismatch=0
+BODY CLASSES (corrected): total 8370  glyph 2701 (32%)  word 3705 (44%)  other 942 (11%)  num 1022 (12%)
+EXIT=0

@@ -1,0 +1,32 @@
+lsblk.txt              raw    60 out    60  pre   60 tape     0 body     0 | body: glyph    0 num    0 word    0 other    0  EXACT
+kb-article.txt         raw   656 out   620  pre   10 tape    56 body   554 | body: glyph  100 num    2 word  371 other   81  EXACT
+uptime-w.txt           raw    80 out    80  pre   80 tape     0 body     0 | body: glyph    0 num    0 word    0 other    0  EXACT
+free-m.txt             raw    76 out    76  pre   76 tape     0 body     0 | body: glyph    0 num    0 word    0 other    0  EXACT
+vmstat.txt             raw   229 out   144  pre   10 tape    36 body    98 | body: glyph   12 num   19 word   32 other   35  EXACT
+unified-diff.patch     raw   578 out   411  pre   10 tape   129 body   272 | body: glyph   28 num   48 word   81 other  115  EXACT
+df-h.txt               raw   570 out   160  pre   15 tape    48 body    98 | body: glyph   10 num   12 word   45 other   31  EXACT
+df-real.txt            raw   158 out   123  pre   10 tape    35 body    78 | body: glyph    3 num   16 word   25 other   34  EXACT
+du-real.txt            raw   458 out   266  pre   10 tape    79 body   177 | body: glyph   20 num   74 word   33 other   50  EXACT
+node-help.txt          raw  1099 out   852  pre   10 tape   117 body   725 | body: glyph   53 num   13 word  481 other  178  EXACT
+findmnt.txt            raw   787 out   389  pre   10 tape    96 body   283 | body: glyph    0 num   27 word  170 other   86  EXACT
+df-h.txt               raw   140 out   105  pre   10 tape    35 body    60 | body: glyph    2 num    9 word   21 other   28  EXACT
+email-thread.txt       raw   629 out   486  pre   10 tape   123 body   353 | body: glyph   45 num   26 word  214 other   68  EXACT
+llm-answer.md          raw   733 out   665  pre   11 tape    86 body   568 | body: glyph   37 num   21 word  326 other  184  EXACT
+markdown-table.md      raw   330 out   172  pre   22 tape    36 body   114 | body: glyph    0 num   32 word   25 other   57  EXACT
+psql-output.txt        raw   675 out   230  pre   61 tape    62 body   107 | body: glyph   20 num   30 word    9 other   48  EXACT
+prices.csv             raw   582 out   119  pre   44 tape    26 body    49 | body: glyph    2 num   12 word   14 other   21  EXACT
+cue-sheet.md           raw   513 out   101  pre  101 tape     0 body     0 | body: glyph    0 num    0 word    0 other    0  EXACT
+ps-ef.txt              raw  1144 out   299  pre   10 tape    79 body   210 | body: glyph    0 num   36 word   84 other   90  EXACT
+ls-real.txt            raw  1034 out   422  pre   10 tape   154 body   258 | body: glyph   58 num   59 word   88 other   53  EXACT
+json-pkg.txt           raw  1152 out   657  pre   10 tape   133 body   514 | body: glyph  107 num   22 word  264 other  121  EXACT
+code-ts.txt            raw  1422 out   950  pre   10 tape   237 body   703 | body: glyph   82 num    4 word  313 other  304  EXACT
+dpkg-l.txt             raw  1000 out   624  pre   10 tape    97 body   517 | body: glyph    0 num   28 word  294 other  195  EXACT
+ps-real.txt            raw  1106 out   381  pre   10 tape    88 body   283 | body: glyph   27 num   44 word  105 other  107  EXACT
+kubectl-get-pods.txt   raw  1006 out   303  pre   15 tape    78 body   210 | body: glyph   13 num   79 word   71 other   47  EXACT
+metrics.tsv            raw   811 out   198  pre   15 tape    60 body   123 | body: glyph   17 num   31 word   46 other   29  EXACT
+ps-aux-real.txt        raw  3054 out   988  pre   10 tape   310 body   668 | body: glyph  128 num  117 word  223 other  200  EXACT
+apt-real.txt           raw  2739 out   816  pre   10 tape   185 body   621 | body: glyph   83 num   46 word  243 other  249  EXACT
+ls-l-real.txt          raw  5194 out  1323  pre   66 tape   530 body   727 | body: glyph  207 num  215 word  127 other  178  EXACT
+
+SIGMA raw=28015 out=12020  preamble=736 tape=2915 body=8370  mismatch=0
+EXIT=0

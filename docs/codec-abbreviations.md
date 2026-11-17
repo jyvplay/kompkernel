@@ -8578,3 +8578,237 @@ pruning may rewrite the body; (G1) every glyph the body uses is still defined;
 (G2) the whole message is **strictly** cheaper; (G3) the frontier still reproduces
 the source. Anything else returns `null` and the caller emits the unmodified
 frontier message, so **no lane can regress.**
+
+## X132 — ΕΥΡΟΣ / EUROS (dictionary span-extent retuning)
+
+**One line.** A rule is one chosen span covering `c` occurrences — but *adjacent*
+spans with the same occurrence count cover equally well and cost different
+numbers of tokens. Retune the extent of each rule, one character at a time,
+trading tape cost against body cost, priced against the real tokenizer.
+
+### The mechanism
+
+If every occurrence of rule `R` is followed by the same character `x`, then
+`v+x` occurs `c` times too and is an equally valid rule: the tape grows by one
+character, and the body loses one character at each of the `c` sites as the `x`
+is absorbed into the glyph. Dually, a rule can be **shrunk**, pushing characters
+back out into the body. Both are exact by construction.
+
+The miners choose spans **once**, with an estimated price and hard caps.
+`merismos.ts:84` fixes `MIN_OCC=3, MIN_LEN=4, MAX_DICT=30` and — critically —
+`MAX_LEN=24`, so no rule already at the cap was ever eligible to grow. ΕΥΡΟΣ
+re-prices those boundary decisions on the **final** representation, after every
+later arm has had its turn at the body.
+
+### Why this is not ΟΡΟΘΕΣΊΑ (X105) or ΜΕΤΑΤΆΞΙΣ
+
+ΌΡΟΘΕΣΊΑ permutes the tape's blocks and prices the permutation by pairwise
+junctions; in its own words, *"Letters are UNCHANGED"*. ΜΕΤΑΤΆΞΙΣ likewise
+relocates rules. **ΕΥΡΟΣ leaves the order alone and changes what each block
+COVERS**, moving characters across the rule/body boundary. Different object,
+different search space.
+
+### The bug the exactness check caught (worth recording)
+
+The first implementation rewrote only the body. But a rule can also be
+referenced **inside another rule's value**, and extending such a rule silently
+lengthened the referencing rule's expansion. It reported **+3 on apt-real and
++5 on node-help**; the expanded-body check showed both were *corrupting the
+text*. Both are now rejected: an extension is legal only if **every** occurrence
+— in the body **and** in every other rule's value — shares the same neighbours,
+and a shrink must re-insert its dropped characters at every occurrence.
+This is exactly the discipline §I (repair: a repaired candidate inherits no
+trust) asks for.
+
+### The alphabet was wrong, and so was last turn's anatomy
+
+X131 hard-coded glyphs to `0x0386..0x04ff`. **`dpkg-l` names its rules with
+ARABIC characters** (س ش ا ف …), outside that range — so X131 was completely
+blind there, recording *"body glyph 0"* where the body holds **211**. The
+alphabet is now derived per instance: a glyph is a character present in the
+message but **absent from the source**, which is how the miners choose ids.
+
+Consequences, measured (`bench/x132/receipts/x132-anatomy.log`):
+
+| body class | X131 (wrong) | X132 (corrected) |
+|---|---|---|
+| glyph | 1 054 (13 %) | **2 701 (32 %)** |
+| word | 3 705 (44 %) | 3 705 (44 %) |
+| other | 2 589 (31 %) | **942 (11 %)** |
+| num | 1 022 (12 %) | 1 022 (12 %) |
+
+1 647 tokens had been misfiled as "other" when they were glyph references.
+X131's headline conclusion — *"79 % of the body is sub-token"* — is therefore
+**wrong**; the honest figure is **55 %** (word 44 % + other 11 %), and the
+frontier's substitution machinery is doing far more work than X131 credited.
+
+### Byte-exactness: absolute where possible
+
+`tagstackDecode` needs the parent chain and does **not** round-trip standalone
+(measured `decoderRT=false` on every lane), so a relative check is used: fully
+expand every glyph in the body and require the string to be unchanged. If it is,
+the parent decoder receives byte-identical input, so the whole chain decodes to
+the same source.
+
+Where expanding the frontier's own tape+body reproduces the source exactly —
+measured true on **kb-article, json-pkg, node-help, apt-real** — the target
+is the **source itself**, giving an *absolute*
+ground-truth check rather than a before/after comparison. Lanes whose body is a
+generative program (dpkg-l: 2 841 expanded chars vs 4 459 of source) fall back
+to the relative check.
+
+### Result (29 lanes, `OMEGA_DET=1`)
+
+**Σ A 12 020 → B 11 979, ΣΔ −41, 11 better / 0 worse, exact 29/29.**
+Frontier **confirmed a third time** at Σ 28 015 → 12 020 (mismatch 0).
+
+| lane | A | B | Δ | | lane | A | B | Δ |
+|---|---|---|---|---|---|---|---|---|
+| ls-l-real | 1323 | 1312 | **−11** | | findmnt | 389 | 387 | −2 |
+| node-help | 852 | 847 | **−5** | | apt-real | 816 | 814 | −2 |
+| ps-aux-real | 988 | 983 | **−5** | | prices.csv | 119 | 118 | −1 |
+| ls-real | 422 | 418 | **−4** | | dpkg-l | 624 | 623 | −1 |
+| json-pkg | 657 | 653 | **−4** | | | | |
+| ps-ef | 299 | 296 | −3 | | | | |
+| kubectl-get-pods | 303 | 300 | −3 | | | | |
+
+30 extensions, 1 shrink, 1 orphan dropped. This is **10× X131's −4** and
+**5× X130's −8**, and it clears the "more than 10 tokens" bar.
+
+### Generalized local-leader list (corrected)
+
+**PROSE (10 lanes)** — body 5 282: **word 2 633 (50 %)** · glyph 1 756 (33 %) ·
+other 516 (10 %) · num 377 (7 %). Leader is `word` almost everywhere
+(kb-article 67 %, node-help 66 %, email-thread 61 %, llm-answer 57 %,
+dpkg-l 57 %, json-pkg 51 %, code-ts 45 %). **Two lanes are `glyph`-led:**
+**ls-l-real (47 %)** and **apt-real (49 %)** — these two carry the largest
+absolute bodies in the prose group and are where substitution is doing real work.
+
+**OPS (19 lanes)** — body 3 088: **word 1 072 (35 %)** · **glyph 945 (31 %)** ·
+num 645 (21 %) · other 426 (14 %). Leadership splits three ways: `glyph` on
+ps-aux-real (40 %), psql (46 %), markdown-table (40 %), ls-real (39 %);
+`word` on findmnt (60 %), ps-ef, ps-real, unified-diff, metrics, vmstat, df-h,
+df-real, prices; **`num` on kubectl-get-pods (38 %) and du-real (42 %)**.
+
+**Overall body 8 370:** word 3 705 (44 %) · glyph 2 701 (32 %) · num 1 022 (12 %)
+· other 942 (11 %).
+
+Reading: the ops group is where `num` and `glyph` concentrate, so numeric and
+dictionary mechanisms bite there; the prose group is word-dominated, which is
+precisely the part no substitution scheme can reach.
+
+### Speed: adopting the codec is 44 % cheaper
+
+The frontier encode dominates the stack. `eurosEncode(text)` re-encodes, so
+frontier+codec cost **two** encodes. `eurosFromFrontier(base, text, enc)` takes
+the result the caller already has (it must have it anyway — the codec returns
+`null` whenever it cannot beat the frontier) and pays for the search only.
+
+Measured on 6 lanes (`bench/x132/speed2.ts`, `OMEGA_NO_MEMO=1`, output asserted
+identical on all 6):
+
+```
+frontier encodes      69 962 ms
+naive path  (eurosEncode)          55 158 ms  -> total 125 120 ms
+shared path (eurosFromFrontier)        89 ms  -> total  70 051 ms
+=> 44.0 % cheaper to adopt the codec; 6/6 identical messages
+```
+
+The search itself is only **~15 ms per lane** — the codec is essentially free
+once the frontier result is reused.
+
+**An honest failure.** A micro-optimisation to `scoreRunCostDeltaSlots`
+(skip a string allocation for single-slot patterns, ~11 % of the frontier's
+profile) was implemented and A/B'd with SHA-256 output hashing: it was
+**output-identical but 3.1 % slower** (77 634 ms vs 75 327 ms). It was
+**discarded, not shipped.** The harness (`bench/x132/speed.ts`) remains, and
+reports `TOTAL_MS` plus a `MESSAGE_SHA256` of every lane so any future speed
+claim must clear both bars.
+
+### Frontier-lab mathematics — with a correction to X131
+
+X131 cited a source claiming *"recent AI-driven work on the Riemann hypothesis
+produced novel mathematics"*. That is **wrong**, and here is what is actually
+true:
+
+- **Anthropic, 2026-08-10.** An unreleased Claude raised the proven share of
+  Riemann zeta zeros on the critical line from **41.6 % → 67.2 %**, Lean-
+  formalised, reviewed by Alpöge and Furman internally and by Conrey and
+  Goldston externally. This is a real result — but the hypothesis needs
+  **100 %**, and Anthropic itself says it does not expect the technique to get
+  there; Maynard says there is *"no pathway"*. **The Riemann hypothesis is not
+  proved**; the Clay Institute still lists it Unsolved.
+- **OpenAI, 2026-10-06.** Claimed the *quasi*-Riemann hypothesis (no zeros with
+  real part > 7/8), plus the Unique Games Conjecture, Mahler, a Kaplansky
+  disproof and more — 722 manuscripts in 372 families. Experts quoted by Quanta
+  largely think the quasi-Riemann result is correct, **but it is not yet
+  formally verified**; Sarnak declines to call it a theorem until humans check
+  every detail, and OpenAI's own catalogue labels its computer checks
+  *"unchecked"*.
+- **OpenAI, 2026-05-20** (unchanged from X131): the Erdős unit-distance
+  conjecture **disproved**, the strongest claim on the list, genuinely
+  Lean-verified and written up by nine external mathematicians.
+- **Google DeepMind**: AlphaProof Nexus, 9/353 Erdős problems and 44/492 OEIS
+  conjectures, all Lean-checked.
+- **Anthropic, 2026-09-04**: FLT formalised in Lean — *verification, not
+  discovery* (it formalises Wiles).
+
+**What this licenses for codec design: nothing new.** The asymmetry that
+actually constrains us is unchanged — frontier models are superb at semantic
+reasoning and still only **56–60 %** at mechanical arithmetic (arXiv 2605.00817)
+and **50.7 %** at strict instruction-following (MathIF, arXiv 2505.14810).
+**Substitution is safe; computation is not.** Every move in ΕΥΡΟΣ is pure
+substitution, mechanically resolvable, and verified by full expansion.
+
+### Source citation (honest)
+
+**LTSC — Lossless Token Sequence Compression via Meta-Tokens**
+(arXiv 2506.00307) is the closest published analogue and it independently
+derives the exact profitability inequality this stack uses: a repeated
+subsequence of length ℓ occurring n times costs ℓ·n tokens, versus ℓ+n with a
+dictionary entry, so it pays iff **ℓ·n > ℓ + n** — the same gate as
+`c·(t−1) > (1+t)`. It reports 27 % and 18 % length reduction.
+
+Two honest caveats that make our problem strictly harder, not easier:
+LTSC **fine-tunes** the LLM to read meta-tokens, and it adds vocabulary. We
+may do neither — no fine-tuning, no system prompt, no skills file, a single
+plain chat message. Against that, the frontier here achieves 2.33× overall.
+
+The abstract lineage of the move is grammar-based compression (**Re-Pair**,
+Larsson & Moffat 1999) and the **smallest grammar problem**; the nearest
+framing in print for searching a grammar's degrees of freedom is Bieniawski,
+*Assembly Theory and the Smallest Grammar Problem* (arXiv 2608.19228), and
+Maneth on grammar-based graph compression. What is original here is the
+specific operation — retuning an existing rule's **span extent** on the final
+representation, measured, under a no-fine-tuning constraint — which appears in
+none of them.
+
+### Greedy or not?
+
+**Greedy** (steepest-ascent over a bounded neighbourhood): for each rule, every
+prefix of the longest shared neighbour is tried head and tail, plus shrinks of
+1–3 characters; a move is adopted only if the real whole-message token count
+strictly falls **and** the expansion invariant still holds, and is reverted
+otherwise. Not optimal — the joint selection is a packing problem — but every
+accepted step is verified, so the result can never be worse than the identity.
+
+### Time- or cpu-bound?
+
+**CPU-bound.** Cost is whole-message `countTokens` probes (221–1 751 per lane
+here, ~15 ms/lane total). Search budget `OMEGA_EUROS_MS` (default 20 000 ms),
+dated **after** the frontier encode — dating it before meant the search never
+ran on the slow lanes, which is precisely where it has most to look at.
+Opt out with `OMEGA_NO_EUROS=1`.
+
+### What was refuted this turn (all measured, all real runs)
+
+| hypothesis | result |
+|---|---|
+| marginal clearing — audit every rule for `c·(t−1) ≤ (1+t)` by inlining | **0** on 4/4 lanes (apt-real +2 only) |
+| rule merging — fuse rules adjacent in the body (Re-Pair on the sequence) | **0**; adjacent pairs already merge token-wise |
+| re-mining the compressed body for new spans | **0** on 3/3 lanes |
+| containment factoring (X131's move) | ~0, and its candidate generation cost 30 s on dpkg-l — deliberately **not** included here |
+| micro-optimising `scoreRunCostDeltaSlots` | output-identical but **3.1 % slower** — discarded |
+
+With X131's five (body/tape/message n-grams, second pass, glyph relabelling,
+tape ordering), **ten** independent axes are now measured at or near zero.
