@@ -1,0 +1,8 @@
+X130 debug: is the merge actually happening? (kb-article, tagstackEncode)
+bench/holdout-work/kb-article.txt  raw=656 M=620  rules=24
+adjacent glyph-glyph pairs: 82 (distinct 62)
+top12: "За"x3 "ан"x3 "ен"x3 "ые"x3 "ей"x3 "зе"x3 "ед"x3 "ап"x2 "еъ"x2 "ас"x2 "ес"x2 "ре"x2
+pairs already merging in CURRENT alphabet: 71/82      <-- refutes the Hebrew plan
+pool=97 afterOccupiedFilter=97
+greedy-first-pass mergeable weight: 59/82  (upper bound on saving)
+greedy rebuilt tokens=683 vs base 620  (exact-invertible=true)   <-- Hebrew is WORSE by 63

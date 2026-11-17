@@ -8305,3 +8305,68 @@ raw-level win is large and it is the only known route past the one-token floor.
 The open problem it hands on: **jointly** optimize the unit set against the true
 objective `countTokens(frontier(msg))` rather than the raw-token proxy, which is
 too slow to evaluate per lane today (4–30 s per stack call).
+
+## X130 — ΜΕΤΟΝΟΜΑΣΊΑ / METONOMASIA (glyph renaming for adjacency merge)
+
+**Mechanism.** A dictionary's glyph→value binding is ARBITRARY: rule 7 is rule 7
+whether it is written `т` or `ж`. So the frontier's dictionary letters may be
+*renamed* without changing one byte of body, tape content, contract or
+structure. Renaming changes only how the message tokenizes — specifically, how
+often two ADJACENT glyph references collapse into a single vocabulary token.
+
+**Greedy?** No. No substring is ever mined, ranked or replaced. It is a JOINT
+assignment over a weighted glyph-adjacency graph: which partner a glyph merges
+with depends on every other assignment, so the search is a swap/move hill-climb
+scored by the real `countTokens` on the whole rebuilt message.
+
+**Why this is not X129 again.** X129 tried to win the same adjacency effect by
+substituting NEW glyphs into the SOURCE, and was not pareto (+2190 composed)
+because it destroyed the whitespace runs, column alignment and identifier
+substrings that ΣΤΉΛΗ / ΣΤΟΙΧΗΔΌΝ / ΒΈΛΤΙΣΤΟΣ exploit. Renaming edits nothing
+those codecs read. It is structural-damage-free by construction.
+
+**A refuted hypothesis, recorded because the measurement is what kills it.**
+The first design moved the alphabet to Hebrew/Arabic, measured at 42.7 % /
+34.5 % pair-merge versus 2.8 % for the shipped pool
+(`bench/x129/receipts/x130-mergegrid.log`). That comparison was WRONG and is
+retracted here: the 2.8 % figure sampled the first 40 codepoints of
+0x0386..0x044f, which is the **Greek** half. The glyphs actually in use come from
+`merismos.ts:84`, which lists **Cyrillic first**, and Cyrillic bigrams are common
+Russian sequences that o200k already merges:
+
+```
+kb-article: 71 of 82 adjacent glyph pairs ALREADY merge in the shipped alphabet.
+```
+
+Installing a Hebrew/Arabic alphabet scored 59/82 and cost **+63 tokens**
+(`bench/x129/receipts/x130-dbg.log`). The surviving version therefore keeps the
+alphabet and permutes it, starting from the identity permutation.
+
+**Source citation (honest).** No paper was imported; there is no prior work on
+renaming a dictionary's alphabet for tokenizer adjacency. The transferable
+background is the cross-boundary-span / "superword" line (BoundlessBPE ~20 %
+better bytes/token; ByteSampler arXiv 2506.14123; Pruned BPE arXiv 2608.00837),
+all tokenizer-*design* papers. The adjacency census and the refutation above are
+ours.
+
+**Time- or cpu-bound?** **CPU-bound.** Every candidate is priced with the real
+`countTokens` over the full rebuilt message; cost is dominated by those probes
+and is capped by `OMEGA_METONOMASIA_MS` (default 25000 ms/lane).
+
+**Safety.** The search starts from the identity permutation (the shipped
+message) and accepts only a strict measured improvement, so the worst case is
+the unmodified frontier output — a lane can never regress.
+
+**Result (29 lanes, `OMEGA_DET=1`, receipt below):** ΣΔ **−8**, 3 better /
+0 worse, `exact 29/29`. This is pareto-superior but **small**: the ceiling was
+probed with a 45 s budget and the search exhausts its space in ~5 s, so
+relabelling has only a few tokens of headroom. The stack's alphabet is already
+near a real-token local optimum.
+
+### Frontier restated (correction)
+
+The frontier is **`tagstackEncode` (== `tagstackX74Chain`), Σ ≈ 12 031**.
+`tagstackFrontier` is a *weaker* path, Σ ≈ 12 639 — 608 tokens worse. X129
+measured against `tagstackFrontier` and its numbers should be read in that
+light. `OMEGA_DET=1` is required for reproducibility: without it the frontier
+varies run to run (observed 12 035 vs 12 031).

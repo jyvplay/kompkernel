@@ -1,0 +1,30 @@
+import * as fs from 'node:fs';
+import { countTokens } from '../../src/lib/omega/bpe';
+import { tagstackFrontier } from '../../src/lib/omega/tagstack';
+if(process.env.ARME==='1') process.env.OMEGA_NO_SYMMETRON='1';
+process.env.OMEGA_DET='1'; process.env.OMEGA_NO_MEMO='1'; process.env.OMEGA_ENGRAM='0'; process.env.OMEGA_OURA_MEMO='0'; process.env.OMEGA_NO_OROTHESIA='1';
+const enc:any='o200k_base';
+const arm=process.env.ARME==='1'?'OFF':'ON ';
+const lanes=fs.readFileSync('bench/x109/lanes29.txt','utf8').split('\n').filter(Boolean);
+const out=process.env.OUT!;
+fs.mkdirSync('bench/x129/receipts',{recursive:true});
+const f=fs.openSync(out,'w');
+let SP=0,ST=0,SB=0,STOT=0,SRAW=0,bad=0;
+for(const p of lanes){
+  const text=fs.readFileSync(p,'utf8');
+  const raw=countTokens(text,enc);
+  const a:any=tagstackFrontier(text,enc);
+  const m=a.message as string;
+  const i1=m.indexOf('\u00a7');
+  const i2=i1<0?-1:m.indexOf('\u00b6',i1);
+  const pre=i1<0?m:m.slice(0,i1);
+  const tape=i1<0?'':(i2<0?m.slice(i1):m.slice(i1,i2));
+  const body=i2<0?'':m.slice(i2);
+  const tPre=countTokens(pre,enc),tTape=countTokens(tape,enc),tBody=countTokens(body,enc);
+  SP+=tPre;ST+=tTape;SB+=tBody;STOT+=a.messageTokens;SRAW+=raw;
+  if(a.decoded!==text)bad++;
+  fs.writeSync(f,JSON.stringify({path:p,raw,out:a.messageTokens,pre:tPre,tape:tTape,body:tBody,exact:a.decoded===text,parent:a.parentCodec})+'\n');
+  console.log(`${arm} ${p.split('/').pop()!.padEnd(22)} raw ${String(raw).padStart(5)} out ${String(a.messageTokens).padStart(5)}  pre ${String(tPre).padStart(4)} tape ${String(tTape).padStart(5)} body ${String(tBody).padStart(5)}  ${a.decoded===text?'EXACT':'***MISMATCH***'}`);
+}
+fs.closeSync(f);
+console.log(`\nSIGMA[${arm}] raw=${SRAW} out=${STOT}  preamble=${SP} tape=${ST} body=${SB}  mismatch=${bad}`);

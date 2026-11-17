@@ -1,0 +1,31 @@
+ON  lsblk.txt              raw    60 out    60  pre   60 tape     0 body     0  EXACT
+ON  kb-article.txt         raw   656 out   622  pre   11 tape    57 body   554  EXACT
+ON  uptime-w.txt           raw    80 out    80  pre   80 tape     0 body     0  EXACT
+ON  free-m.txt             raw    76 out    76  pre   76 tape     0 body     0  EXACT
+ON  vmstat.txt             raw   229 out   149  pre   11 tape    40 body    98  EXACT
+ON  unified-diff.patch     raw   578 out   419  pre   11 tape   134 body   274  EXACT
+ON  df-h.txt               raw   570 out   171  pre   23 tape    50 body    98  EXACT
+ON  df-real.txt            raw   158 out   126  pre   11 tape    37 body    78  EXACT
+ON  du-real.txt            raw   458 out   272  pre   11 tape    82 body   179  EXACT
+ON  node-help.txt          raw  1099 out   862  pre   11 tape   121 body   730  EXACT
+ON  findmnt.txt            raw   787 out   444  pre   11 tape   125 body   308  EXACT
+ON  df-h.txt               raw   140 out   108  pre   11 tape    37 body    60  EXACT
+ON  email-thread.txt       raw   629 out   488  pre   11 tape   124 body   353  EXACT
+ON  llm-answer.md          raw   733 out   674  pre   11 tape    89 body   574  EXACT
+ON  markdown-table.md      raw   330 out   176  pre   24 tape    38 body   114  EXACT
+ON  psql-output.txt        raw   675 out   244  pre   73 tape    64 body   107  EXACT
+ON  prices.csv             raw   582 out   133  pre   57 tape    26 body    50  EXACT
+ON  cue-sheet.md           raw   513 out   163  pre   73 tape    41 body    49  EXACT
+ON  ps-ef.txt              raw  1144 out   315  pre   11 tape    85 body   219  EXACT
+ON  ls-real.txt            raw  1034 out   433  pre   11 tape   160 body   262  EXACT
+ON  json-pkg.txt           raw  1152 out   681  pre   11 tape   146 body   524  EXACT
+ON  code-ts.txt            raw  1422 out   969  pre   11 tape   248 body   710  EXACT
+ON  dpkg-l.txt             raw  1000 out   673  pre   11 tape   127 body   535  EXACT
+ON  ps-real.txt            raw  1106 out   397  pre   11 tape    94 body   292  EXACT
+ON  kubectl-get-pods.txt   raw  1006 out   326  pre   23 tape    90 body   213  EXACT
+ON  metrics.tsv            raw   811 out   210  pre   23 tape    62 body   125  EXACT
+ON  ps-aux-real.txt        raw  3054 out  1042  pre   11 tape   338 body   693  EXACT
+ON  apt-real.txt           raw  2739 out   850  pre   11 tape   207 body   632  EXACT
+ON  ls-l-real.txt          raw  5194 out  1476  pre   26 tape   593 body   857  EXACT
+
+SIGMA[ON ] raw=28015 out=12639  preamble=736 tape=3215 body=8688  mismatch=0

@@ -1,0 +1,13 @@
+X130: which entry point is the frontier? (OMEGA_DET=1 NO_MEMO=1 ENGRAM=0 OURA_MEMO=0 NO_OROTHESIA=1)
+lane                          X74Chain  EncodeUncached  Encode  Frontier
+df-h.txt (raw 570)                 160            171     160       171
+prices.csv (raw 582)               119            133     119       133
+psql-output.txt (raw 675)          230            244     230       244
+lsblk.txt (raw 60)                  60             60      60        60
+uptime-w.txt (raw 80)               80             80      80        80
+free-m.txt (raw 76)                 76             76      76        76
+=> tagstackEncode == tagstackX74Chain is the frontier (Sigma 12029 with OMEGA_DET=1).
+   tagstackFrontier is a WEAKER path (Sigma 12639). X129 measured the wrong one.
+Env-var sweep (A..F, six configs incl. defaults): vmstat 149 and unified-diff 419
+in EVERY config -- the gap was the entry point, not the environment.
+Warm/cold: 3 repeats per lane -> 149/149/149, 419/419/419, 622/622/622 (stable).

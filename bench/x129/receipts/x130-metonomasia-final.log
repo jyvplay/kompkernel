@@ -1,0 +1,32 @@
+lsblk.txt              raw    60  A    60  B    60  Δ     0  no-pay                   exact y/y
+kb-article.txt         raw   656  A   620  B   620  Δ     0  no-pay                   exact y/y
+uptime-w.txt           raw    80  A    80  B    80  Δ     0  no-pay                   exact y/y
+free-m.txt             raw    76  A    76  B    76  Δ     0  no-pay                   exact y/y
+vmstat.txt             raw   229  A   144  B   144  Δ     0  no-pay                   exact y/y
+unified-diff.patch     raw   578  A   411  B   411  Δ     0  no-pay                   exact y/y
+df-h.txt               raw   570  A   160  B   160  Δ     0  no-pay                   exact y/y
+df-real.txt            raw   158  A   123  B   123  Δ     0  no-pay                   exact y/y
+du-real.txt            raw   458  A   266  B   266  Δ     0  no-pay                   exact y/y
+node-help.txt          raw  1099  A   852  B   852  Δ     0  no-pay                   exact y/y
+findmnt.txt            raw   787  A   389  B   389  Δ     0  no-pay                   exact y/y
+df-h.txt               raw   140  A   105  B   105  Δ     0  no-pay                   exact y/y
+email-thread.txt       raw   629  A   486  B   486  Δ     0  no-pay                   exact y/y
+llm-answer.md          raw   733  A   665  B   665  Δ     0  no-pay                   exact y/y
+markdown-table.md      raw   330  A   172  B   172  Δ     0  no-pay                   exact y/y
+psql-output.txt        raw   675  A   230  B   230  Δ     0  no-pay                   exact y/y
+prices.csv             raw   582  A   119  B   119  Δ     0  no-pay                   exact y/y
+cue-sheet.md           raw   513  A   101  B   101  Δ     0  no-pay                   exact y/y
+ps-ef.txt              raw  1144  A   299  B   299  Δ     0  no-pay                   exact y/y
+ls-real.txt            raw  1034  A   422  B   421  Δ    -1  rules=46 merged=undefined exact y/y
+json-pkg.txt           raw  1152  A   657  B   657  Δ     0  no-pay                   exact y/y
+code-ts.txt            raw  1422  A   955  B   952  Δ    -3  rules=75 merged=undefined exact y/y
+dpkg-l.txt             raw  1000  A   624  B   624  Δ     0  no-pay                   exact y/y
+ps-real.txt            raw  1106  A   381  B   381  Δ     0  no-pay                   exact y/y
+kubectl-get-pods.txt   raw  1006  A   303  B   303  Δ     0  no-pay                   exact y/y
+metrics.tsv            raw   811  A   198  B   198  Δ     0  no-pay                   exact y/y
+ps-aux-real.txt        raw  3054  A   993  B   989  Δ    -4  rules=77 merged=undefined exact y/y
+apt-real.txt           raw  2739  A   820  B   820  Δ     0  no-pay                   exact y/y
+ls-l-real.txt          raw  5194  A  1318  B  1318  Δ     0  no-pay                   exact y/y
+
+METONOMASIA 29   A(frontier) 12029   B(relabelled) 12021   ΣΔ -8   better 3 worse 0  noTape 4
+exact  A 29/29   B 29/29
