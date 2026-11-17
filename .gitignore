@@ -55,3 +55,6 @@ bench/x120/*.mjs
 # raw CPU profiles are regenerable; the analysis receipts are committed
 bench/x120/receipts/prof/
 bench/x121/receipts/prof/
+bench/x131/*.mjs
+bench/x131/prof*/
+bench/x126/*.mjs
