@@ -49,6 +49,7 @@ import { tmematismosDisabled, tmematismosEncode } from './tmematismos';
 import { stoichedonDisabled, stoichedonEncode } from './stoichedon';
 import { CHIRON_START, chironDecode } from './chiron';
 import { perikopiDisabled, perikopiRewrite } from './perikopi';
+import { synarmogeDisabled, synarmogeFromFrontier } from './synarmoge';
 import { tachygrafiaDisabled, tachygrafiaRewrite } from './tachygrafia';
 import { synedriaChainScope, synedriaChainDisabled } from './synedria';
 import { enallageEncode, enallageExpand, ENALLAGE_KEY } from './enallage';
@@ -1139,6 +1140,54 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
                 notes: `TACHYGRAFIA phrase ${rw.before}->${rw.after} tok over ${rw.edits.length} line(s) via ${rw.edits.map((e) => e.via).join(',')}; ${best.notes}`,
               };
             }
+          }
+        }
+      }
+    } catch { /* not a candidate */ }
+  }
+
+  // ---------------------------------------------------------------------------
+  // X133 — ΣΥΝΑΡΜΟΓΗ / SYNARMOGE (synarmoge.ts), the joint post-frontier search.
+  //
+  // X132 (ΕΥΡΟΣ) moved rule spans, X130 (ΜΕΤΟΝΟΜΑΣΊΑ) permuted the glyph
+  // assignment, X131 (ΕΓΚΙΒΩΤΙΣΜΌΣ) factored the tape — each in its own stage,
+  // each with the other axes frozen. They are not separable: extending a rule
+  // from `foo` to `foob` deletes the `b` beside the glyph at every occurrence, so
+  // every token boundary touching that glyph moves with the span, and which
+  // character the glyph should be — and whether the rule should exist at all —
+  // are functions of it. ΣΥΝΑΡΜΟΓΗ runs ONE local search over span, drop and
+  // assignment moves against ONE objective, the real countTokens of the whole
+  // message, and iterates them to a joint fixed point.
+  //
+  // It is admitted here under the chain's own rule: the incumbent's ΧΕΙΡΩΝ-layer
+  // expansion must be byte-identical under the repository's own decoder, and the
+  // message must be strictly smaller. It also re-enters with the frontier result
+  // this chain just computed rather than re-encoding, which is what makes a
+  // whole extra local search cost ~0.1 s against a 5-43 s frontier encode.
+  // ---------------------------------------------------------------------------
+  if (!synarmogeDisabled() && best.decoded === text) {
+    try {
+      const incAt = best.message.indexOf(CHIRON_START);
+      const incExp = incAt < 0 ? null : chironDecode(best.message.slice(incAt));
+      if (incExp !== null) {
+        const s = synarmogeFromFrontier(
+          { message: best.message, messageTokens: best.messageTokens, decoded: best.decoded },
+          text, enc);
+        if (s && s.message !== best.message) {
+          const cAt = s.message.indexOf(CHIRON_START);
+          let candExp: string | null = null;
+          try { candExp = cAt >= 0 ? chironDecode(s.message.slice(cAt)) : null; } catch { candExp = null; }
+          if (candExp === incExp && s.tokens < best.messageTokens) {
+            best = {
+              ...best,
+              wire: s.message,
+              message: s.message,
+              messageTokens: s.tokens,
+              applied: true,
+              notes: `SYNARMOGE ext=${s.extends_} shr=${s.shrinks} drop=${s.drops} orphan=${s.orphans} ` +
+                `ren=${s.renames} swap=${s.swaps} add=${s.adds} probes=${s.probes} ` +
+                `M=${s.tokens} < ${s.baseTokens}; ${best.notes}`,
+            };
           }
         }
       }

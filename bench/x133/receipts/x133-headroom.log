@@ -1,0 +1,220 @@
+
+### lsblk.txt  raw=60 out=60  (pre=60 tape=0 body=0)  rules=0
+  no tape / no rules — skip A and B
+
+### kb-article.txt  raw=656 out=620  (pre=10 tape=56 body=554)  rules=28
+  (A) rule drop: 0/28 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 2 candidates with score>0 (n<=32, body 554 tokens)
+      score    1  len=2 occ=3  " how many"
+      score    1  len=3 occ=2  " Northgate Vault"
+  (C) body classes: glyph=166 word=371 num=2 other=15  (alphabet 30: ¶=§рәЗаяптусеоиындмзйжүк)
+
+### uptime-w.txt  raw=80 out=80  (pre=80 tape=0 body=0)  rules=0
+  no tape / no rules — skip A and B
+
+### free-m.txt  raw=76 out=76  (pre=76 tape=0 body=0)  rules=0
+  no tape / no rules — skip A and B
+
+### vmstat.txt  raw=229 out=144  (pre=10 tape=36 body=98)  rules=12
+  (A) rule drop: 0/12 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 0 candidates with score>0 (n<=32, body 98 tokens)
+  (C) body classes: glyph=19 word=32 num=19 other=28  (alphabet 18: ¶k=.x;§аәскеиоынлд)
+
+### unified-diff.patch  raw=578 out=411  (pre=10 tape=129 body=272)  rules=34
+  (A) rule drop: 0/34 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 3 candidates with score>0 (n<=32, body 272 tokens)
+      score    1  len=2 occ=3  "@@ -"
+      score    1  len=3 occ=2  ",6 +"
+      score    1  len=3 occ=2  ".adjacent"
+  (C) body classes: glyph=71 word=81 num=48 other=72  (alphabet 36: ¶v§йеәоулсТпшНэанҷжиүіБр)
+
+### df-h.txt  raw=570 out=160  (pre=15 tape=48 body=98)  rules=18
+  (A) rule drop: 1/18 rules are NET-NEGATIVE; total recoverable 2 tok
+      -2  "G"
+  (B) token n-grams: 3 candidates with score>0 (n<=32, body 98 tokens)
+      score    1  len=2 occ=3  "\n/dev"
+      score    1  len=3 occ=2  "\n/devс"
+      score    1  len=3 occ=2  "G  "
+  (C) body classes: glyph=53 word=18 num=12 other=15  (alphabet 34: ⁺=br+chgfw.§өгаиртшйносд)
+
+### df-real.txt  raw=158 out=123  (pre=10 tape=35 body=78)  rules=14
+  (A) rule drop: 0/14 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 0 candidates with score>0 (n<=32, body 78 tokens)
+  (C) body classes: glyph=16 word=25 num=16 other=21  (alphabet 17: ¶=;§адлцуояигнрбқ)
+
+### du-real.txt  raw=458 out=266  (pre=10 tape=79 body=177)  rules=24
+  (A) rule drop: 0/24 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 2 candidates with score>0 (n<=32, body 177 tokens)
+      score    1  len=3 occ=2  "е-experimental"
+      score    1  len=3 occ=2  "н/react-dom"
+  (C) body classes: glyph=50 word=33 num=74 other=20  (alphabet 28: ¶=.;§ноыпсуалекхигявзмңд)
+
+### node-help.txt  raw=1099 out=852  (pre=10 tape=117 body=725)  rules=42
+  (A) rule drop: 0/42 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 8 candidates with score>0 (n<=32, body 725 tokens)
+      score    1  len=2 occ=3  "ло enable"
+      score    1  len=3 occ=2  " ] [arguments"
+      score    1  len=3 occ=2  " allow use of"
+      score    1  len=3 occ=2  "build-snapshot"
+      score    1  len=3 occ=2  " current working directory"
+      score    1  len=3 occ=2  " WebAssemblyло"
+      score    1  len=3 occ=2  "ло bound checks"
+      score    1  len=3 occ=2  " top-level await"
+  (C) body classes: glyph=161 word=481 num=13 other=70  (alphabet 44: ¶;§лаиныъэосвчугкМұФеСйА)
+
+### findmnt.txt  raw=787 out=389  (pre=10 tape=96 body=283)  rules=26
+  (A) rule drop: 0/26 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 7 candidates with score>0 (n<=32, body 283 tokens)
+      score    2  len=4 occ=2  " hugetlbfs"
+      score    1  len=2 occ=3  "=5"
+      score    1  len=3 occ=2  " hugetlb"
+      score    1  len=3 occ=2  "getlbfs"
+      score    1  len=3 occ=2  "proto=5"
+      score    1  len=3 occ=2  " binfmt_misc"
+      score    1  len=3 occ=2  " cgroup2"
+  (C) body classes: glyph=50 word=170 num=27 other=36  (alphabet 29: ¶;§یهبشطحارعتونصيمفخقدښے)
+
+### df-h.txt  raw=140 out=105  (pre=10 tape=35 body=60)  rules=14
+  (A) rule drop: 0/14 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 0 candidates with score>0 (n<=32, body 60 tokens)
+  (C) body classes: glyph=15 word=21 num=9 other=15  (alphabet 18: ¶=x;§адлцуояигнрбқ)
+
+### email-thread.txt  raw=629 out=486  (pre=10 tape=123 body=353)  rules=40
+  (A) rule drop: 0/40 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 3 candidates with score>0 (n<=32, body 353 tokens)
+      score    1  len=2 occ=3  " remittance"
+      score    1  len=3 occ=2  " Q3 reconciliation"
+      score    1  len=3 occ=2  " remittance advice"
+  (C) body classes: glyph=92 word=214 num=26 other=21  (alphabet 43: ¶=;§әйвөкАіншақтгиЕуКзсщ)
+
+### llm-answer.md  raw=733 out=665  (pre=11 tape=86 body=568)  rules=35
+  (A) rule drop: 0/35 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 5 candidates with score>0 (n<=32, body 568 tokens)
+      score    1  len=2 occ=3  "/web`"
+      score    1  len=2 occ=3  "` is"
+      score    1  len=2 occ=3  ".config.js"
+      score    1  len=3 occ=2  "packages/web`"
+      score    1  len=3 occ=2  ".config.js`"
+  (C) body classes: glyph=119 word=326 num=21 other=102  (alphabet 37: ¶=§легдэүртСвинужТіӘацәО)
+
+### markdown-table.md  raw=330 out=172  (pre=22 tape=36 body=114)  rules=14
+  (A) rule drop: 0/14 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 0 candidates with score>0 (n<=32, body 114 tokens)
+  (C) body classes: glyph=47 word=25 num=32 other=10  (alphabet 21: ¶=vxf~,h§کةبكونطلرامت)
+
+### psql-output.txt  raw=675 out=230  (pre=61 tape=62 body=107)  rules=23
+  (A) rule drop: 3/23 rules are NET-NEGATIVE; total recoverable 7 tok
+      -4  ""
+      -2  ""
+      -1  "+1"
+  (B) token n-grams: 1 candidates with score>0 (n<=32, body 107 tokens)
+      score    1  len=3 occ=2  "ь12а"
+  (C) body classes: glyph=58 word=9 num=30 other=10  (alphabet 37: ¶k=xyH,;bfM/h§еюашсильго)
+
+### prices.csv  raw=582 out=119  (pre=44 tape=26 body=49)  rules=11
+  (A) rule drop: 1/11 rules are NET-NEGATIVE; total recoverable 1 tok
+      -1  "#"
+  (B) token n-grams: 0 candidates with score>0 (n<=32, body 49 tokens)
+  (C) body classes: glyph=20 word=11 num=12 other=6  (alphabet 31: ¶=v xdlΔ:mh#gR()+;Lb§тик)
+
+### cue-sheet.md  raw=513 out=101  (pre=101 tape=0 body=0)  rules=0
+  no tape / no rules — skip A and B
+
+### ps-ef.txt  raw=1144 out=299  (pre=10 tape=79 body=210)  rules=29
+  (A) rule drop: 0/29 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 1 candidates with score>0 (n<=32, body 210 tokens)
+      score    1  len=3 occ=2  "_kthreadة"
+  (C) body classes: glyph=79 word=84 num=36 other=11  (alphabet 33: ¶=.;§بیيصلنعىاةأېسمطزجرض)
+
+### ls-real.txt  raw=1034 out=422  (pre=10 tape=154 body=258)  rules=47
+  (A) rule drop: 0/47 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 1 candidates with score>0 (n<=32, body 258 tokens)
+      score    1  len=3 occ=2  "ҽ/npm/bin"
+  (C) body classes: glyph=102 word=88 num=59 other=9  (alphabet 50: ¶=;§учюеАДцУьқбипсяөгкӷо)
+
+### json-pkg.txt  raw=1152 out=657  (pre=10 tape=133 body=514)  rules=49
+  (A) rule drop: 0/49 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 3 candidates with score>0 (n<=32, body 514 tokens)
+      score    1  len=3 occ=2  "\": [\nц"
+      score    1  len=3 occ=2  "ёnodeй"
+      score    1  len=3 occ=2  " run build:"
+  (C) body classes: glyph=188 word=264 num=22 other=40  (alphabet 51: ¶;§ирбсҳАпайүцӨёіялждгыь)
+
+### code-ts.txt  raw=1422 out=950  (pre=10 tape=237 body=703)  rules=76
+  (A) rule drop: 0/76 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 6 candidates with score>0 (n<=32, body 703 tokens)
+      score    1  len=3 occ=2  "ҧз,"
+      score    1  len=3 occ=2  " = configф"
+      score    1  len=3 occ=2  " getClassз"
+      score    1  len=3 occ=2  " group ID for"
+      score    1  len=3 occ=2  ".indexOf(':"
+      score    1  len=3 occ=2  "'ест process"
+  (C) body classes: glyph=257 word=313 num=4 other=129  (alphabet 77: ¶§дөнзйРроПпҽямеОьсҙуТфж)
+
+### dpkg-l.txt  raw=1000 out=624  (pre=10 tape=97 body=517)  rules=33
+  (A) rule drop: 0/33 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 7 candidates with score>0 (n<=32, body 517 tokens)
+      score    1  len=2 occ=3  " dpkg"
+      score    1  len=2 occ=3  "، deb"
+      score    1  len=3 occ=2  " Debian base system"
+      score    1  len=3 occ=2  ":amd64"
+      score    1  len=3 occ=2  " management system،"
+      score    1  len=3 occ=2  "، debian"
+      score    1  len=3 occ=2  "، dpkg"
+  (C) body classes: glyph=129 word=294 num=28 other=66  (alphabet 36: ¶;§سشافموطنجرلےكعهدّئہىک)
+
+### ps-real.txt  raw=1106 out=381  (pre=10 tape=88 body=283)  rules=31
+  (A) rule drop: 0/31 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 3 candidates with score>0 (n<=32, body 283 tokens)
+      score    1  len=3 occ=2  "\n   а"
+      score    1  len=3 occ=2  "еmigration/"
+      score    1  len=3 occ=2  "_kthreadт"
+  (C) body classes: glyph=91 word=105 num=44 other=43  (alphabet 33: ¶;§испқндьжэезтшәркіыола)
+
+### kubectl-get-pods.txt  raw=1006 out=303  (pre=15 tape=78 body=210)  rules=27
+  (A) rule drop: 1/27 rules are NET-NEGATIVE; total recoverable 1 tok
+      -1  ""
+  (B) token n-grams: 1 candidates with score>0 (n<=32, body 210 tokens)
+      score    1  len=3 occ=2  ",8,"
+  (C) body classes: glyph=69 word=55 num=79 other=7  (alphabet 39: ⁺=m+w§ашбыигунемзвжскрід)
+
+### metrics.tsv  raw=811 out=198  (pre=15 tape=60 body=123)  rules=20
+  (A) rule drop: 1/20 rules are NET-NEGATIVE; total recoverable 3 tok
+      -3  ""
+  (B) token n-grams: 0 candidates with score>0 (n<=32, body 123 tokens)
+  (C) body classes: glyph=68 word=15 num=31 other=9  (alphabet 33: ⁺ =r+hg§жАтлыхраясоијгвд)
+
+### ps-aux-real.txt  raw=3054 out=988  (pre=10 tape=310 body=668)  rules=79
+  (A) rule drop: 0/79 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 6 candidates with score>0 (n<=32, body 668 tokens)
+      score    1  len=2 occ=3  "Кх"
+      score    1  len=3 occ=2  "/git-log-stat"
+      score    1  len=3 occ=2  " node --help"
+      score    1  len=3 occ=2  "пиrcu"
+      score    1  len=3 occ=2  "_kthreadв"
+      score    1  len=3 occ=2  "Ғ SNду"
+  (C) body classes: glyph=268 word=223 num=117 other=60  (alphabet 80: ¶§ыдялзцноБаежшмиҩрӷүҒгу)
+
+### apt-real.txt  raw=2739 out=816  (pre=10 tape=185 body=621)  rules=63
+  (A) rule drop: 1/63 rules are NET-NEGATIVE; total recoverable 1 tok
+      -1  "рК"
+  (B) token n-grams: 4 candidates with score>0 (n<=32, body 621 tokens)
+      score    1  len=2 occ=3  "dpkg"
+      score    1  len=2 occ=3  "вg"
+      score    1  len=3 occ=2  "gnutls"
+      score    1  len=3 occ=2  "gdbm"
+  (C) body classes: glyph=308 word=243 num=46 other=24  (alphabet 66: ¶=;§нМтаКсіоәқулмцюНрёгш)
+
+### ls-l-real.txt  raw=5194 out=1323  (pre=66 tape=530 body=727)  rules=123
+  (A) rule drop: 0/123 rules are NET-NEGATIVE; total recoverable 0 tok
+  (B) token n-grams: 8 candidates with score>0 (n<=32, body 727 tokens)
+      score    1  len=2 occ=3  "_malloc_debug"
+      score    1  len=2 occ=3  ".3"
+      score    1  len=2 occ=3  "ҫ10"
+      score    1  len=3 occ=2  "ѕlidec"
+      score    1  len=3 occ=2  "Ѕ_malloc_debug"
+      score    1  len=3 occ=2  "Ғcc1"
+      score    1  len=3 occ=2  ".70м"
+      score    1  len=3 occ=2  "ҫ10й"
+  (C) body classes: glyph=347 word=127 num=215 other=38  (alphabet 131: =+※;^T␠→λ¶,§еынкяиьсмјхМ)
+EXIT=0
