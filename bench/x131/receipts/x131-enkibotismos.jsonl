@@ -1,0 +1,29 @@
+{"path":"bench/holdout-x42/lsblk.txt","raw":60,"a":60,"b":60,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-work/kb-article.txt","raw":656,"a":620,"b":620,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x42b/uptime-w.txt","raw":80,"a":80,"b":80,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x42b/free-m.txt","raw":76,"a":76,"b":76,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x42b/vmstat.txt","raw":229,"a":144,"b":144,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-work/unified-diff.patch","raw":578,"a":411,"b":411,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-tbl/df-h.txt","raw":570,"a":160,"b":160,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x41/df-real.txt","raw":158,"a":123,"b":123,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x41/du-real.txt","raw":458,"a":266,"b":265,"d":-1,"orphans":0,"refs":1,"rulesBefore":23,"rulesAfter":23,"exact":true,"note":"rules 23->23 orph-0 once-0 refs+1"}
+{"path":"bench/holdout-x41/node-help.txt","raw":1099,"a":852,"b":852,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x42/findmnt.txt","raw":787,"a":389,"b":389,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x42/df-h.txt","raw":140,"a":105,"b":105,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-work/email-thread.txt","raw":629,"a":486,"b":486,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-work/llm-answer.md","raw":733,"a":665,"b":665,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-tbl/markdown-table.md","raw":330,"a":172,"b":172,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-tbl/psql-output.txt","raw":675,"a":230,"b":230,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x40/prices.csv","raw":582,"a":119,"b":119,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x40/cue-sheet.md","raw":513,"a":101,"b":101,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x42/ps-ef.txt","raw":1144,"a":299,"b":299,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x41/ls-real.txt","raw":1034,"a":422,"b":422,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout/json-pkg.txt","raw":1152,"a":657,"b":656,"d":-1,"orphans":0,"refs":1,"rulesBefore":48,"rulesAfter":48,"exact":true,"note":"rules 48->48 orph-0 once-0 refs+1"}
+{"path":"bench/holdout/code-ts.txt","raw":1422,"a":950,"b":950,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x42/dpkg-l.txt","raw":1000,"a":624,"b":624,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x41/ps-real.txt","raw":1106,"a":381,"b":381,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-tbl/kubectl-get-pods.txt","raw":1006,"a":303,"b":303,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x40/metrics.tsv","raw":811,"a":198,"b":198,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x41/ps-aux-real.txt","raw":3054,"a":988,"b":988,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}
+{"path":"bench/holdout-x41/apt-real.txt","raw":2739,"a":816,"b":814,"d":-2,"orphans":0,"refs":1,"rulesBefore":62,"rulesAfter":62,"exact":true,"note":"rules 62->62 orph-0 once-0 refs+1"}
+{"path":"bench/holdout-x41/ls-l-real.txt","raw":5194,"a":1323,"b":1323,"d":0,"orphans":0,"refs":0,"rulesBefore":0,"rulesAfter":0,"exact":true,"note":"no-pay"}

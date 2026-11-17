@@ -1,0 +1,32 @@
+lsblk.txt              raw    60  A    60  B    60  Δ    0  no-pay                             exact y
+kb-article.txt         raw   656  A   620  B   620  Δ    0  no-pay                             exact y
+uptime-w.txt           raw    80  A    80  B    80  Δ    0  no-pay                             exact y
+free-m.txt             raw    76  A    76  B    76  Δ    0  no-pay                             exact y
+vmstat.txt             raw   229  A   144  B   144  Δ    0  no-pay                             exact y
+unified-diff.patch     raw   578  A   411  B   411  Δ    0  no-pay                             exact y
+df-h.txt               raw   570  A   160  B   160  Δ    0  no-pay                             exact y
+df-real.txt            raw   158  A   123  B   123  Δ    0  no-pay                             exact y
+du-real.txt            raw   458  A   266  B   265  Δ   -1  rules 23->23 orph-0 once-0 refs+1  exact y
+node-help.txt          raw  1099  A   852  B   852  Δ    0  no-pay                             exact y
+findmnt.txt            raw   787  A   389  B   389  Δ    0  no-pay                             exact y
+df-h.txt               raw   140  A   105  B   105  Δ    0  no-pay                             exact y
+email-thread.txt       raw   629  A   486  B   486  Δ    0  no-pay                             exact y
+llm-answer.md          raw   733  A   665  B   665  Δ    0  no-pay                             exact y
+markdown-table.md      raw   330  A   172  B   172  Δ    0  no-pay                             exact y
+psql-output.txt        raw   675  A   230  B   230  Δ    0  no-pay                             exact y
+prices.csv             raw   582  A   119  B   119  Δ    0  no-pay                             exact y
+cue-sheet.md           raw   513  A   101  B   101  Δ    0  no-pay                             exact y
+ps-ef.txt              raw  1144  A   299  B   299  Δ    0  no-pay                             exact y
+ls-real.txt            raw  1034  A   422  B   422  Δ    0  no-pay                             exact y
+json-pkg.txt           raw  1152  A   657  B   656  Δ   -1  rules 48->48 orph-0 once-0 refs+1  exact y
+code-ts.txt            raw  1422  A   950  B   950  Δ    0  no-pay                             exact y
+dpkg-l.txt             raw  1000  A   624  B   624  Δ    0  no-pay                             exact y
+ps-real.txt            raw  1106  A   381  B   381  Δ    0  no-pay                             exact y
+kubectl-get-pods.txt   raw  1006  A   303  B   303  Δ    0  no-pay                             exact y
+metrics.tsv            raw   811  A   198  B   198  Δ    0  no-pay                             exact y
+ps-aux-real.txt        raw  3054  A   988  B   988  Δ    0  no-pay                             exact y
+apt-real.txt           raw  2739  A   816  B   814  Δ   -2  rules 62->62 orph-0 once-0 refs+1  exact y
+ls-l-real.txt          raw  5194  A  1323  B  1323  Δ    0  no-pay                             exact y
+
+ENKIBOTISMOS 29   A 12020   B 12016   ΣΔ -4   better 3 worse 0   exact 29/29   orphans 0 refs 3
+EXIT=0

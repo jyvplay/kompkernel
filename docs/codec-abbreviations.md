@@ -8370,3 +8370,211 @@ The frontier is **`tagstackEncode` (== `tagstackX74Chain`), Σ ≈ 12 031**.
 measured against `tagstackFrontier` and its numbers should be read in that
 light. `OMEGA_DET=1` is required for reproducibility: without it the frontier
 varies run to run (observed 12 035 vs 12 031).
+
+## X131 — ΕΓΚΙΒΩΤΙΣΜΌΣ / ENKIBOTISMOS (tape self-encapsulation)
+
+**One line.** Stop the frontier's **tape** paying for rules nothing reads, and let
+the tape cite itself — editing *only* the dictionary, never the body.
+
+### Why the tape
+
+Every prior arm edited the **body**. X129 ΣΥΓΚΌΛΛΗΣΙΣ was not pareto (+2190):
+rewriting the body destroys the whitespace, column alignment and identifier
+substrings that ΣΤΉΛΗ / ΣΤΟΙΧΗΔΌΝ / ΒΈΛΤΙΣΤΟΣ depend on. X130 ΜΕΤΟΝΟΜΑΣΊΑ touched
+only glyph *names* and was worth −8 over 29 lanes. X131 goes somewhere no arm has
+gone: the **tape**, which on this frontier is **2 915 of 12 020 tokens (24 %)** and
+stores no content of its own — it only names the content. It is the one region
+where a change can lower cost without changing what the message *means*.
+
+### The moves (all leave the message denoting the same text)
+
+1. **Liveness pruning.** A rule costs (1 glyph + its value) in the tape and saves
+   (len − 1) tokens per use. Used **zero** times (an *orphan* — the body never
+   reaches it, even through another rule) the whole entry is waste; used **once**
+   it is a dead loss of ~2 tokens. Mining makes rules for spans that *were*
+   repeated, so a rule can be born profitable and be stranded by a later arm.
+   **Measured: both are ≈ 0.** The frontier's own mining gate `c·(t−1)−(1+t) > 0`
+   already refuses `c ≤ 1`, and a reachability closure shows it strands nothing.
+   Kept because it is the correctness precondition for (2); contributes ≈ 0 tokens.
+2. **Containment factoring.** If rule A's value occurs inside rule B's value, B
+   spells that part as a back-reference to A — which the tape format *already
+   supports*. This is a different relation from the repeated-n-gram one every
+   previous census tested and found empty: it is **containment between rules**,
+   and no n-gram census can see it. Matches are computed on **expanded** values
+   but must land on **raw character boundaries**, so a match may straddle a
+   back-reference the frontier already emitted. (Matching raw literals only —
+   the first implementation — found far less.)
+3. **Order restoration.** The tape is an unordered rule set serialized in some
+   order, and o200k is context-sensitive across the concatenation boundary, so
+   the token count *depends on the order*: measured spread over valid orderings
+   is code-ts 21, ls-real 17, json-pkg 19 tokens — **but the frontier's own order
+   already sits at the minimum, so ordering headroom is 0.** Ordering is therefore
+   only ever *restored*, never improved: references that point backwards need no
+   reordering at all; forward ones are tried with the smallest legal move (A to
+   immediately before B) and kept only if the measured total still falls.
+
+### The estimate trap (worth recording)
+
+Ranking references by `countTokens(substring) − 1` **overstates** the gain,
+because in context a substring often merges with its neighbours and costs less
+than it does alone. Measured: `json-pkg` estimated **6 tokens from 6 references
+and realised 1**. Every reference is therefore applied tentatively and kept only
+if the **real whole-message** count actually falls. The earlier per-lane
+projections of 3–5 tokens were illusions of isolated tokenisation.
+
+### Result (29 lanes, `OMEGA_DET=1`, receipt below)
+
+**Σ A 12 020 → B 12 016, ΣΔ −4, 3 better / 0 worse, exact 29/29, orphans 0,
+references added 3** (`bench/x131/receipts/x131-enkibotismos.log`). The three
+lanes that moved: `du-real` −1, `json-pkg` −1, `apt-real` −2.
+
+**This is honest but it is small, and it does not meet the bar set for this turn.**
+The turn asked for "significantly better — not only under 10 tokens better"; −4
+is 0.033 % of the frontier and is *less* than X130's −8. It is reported as
+measured, not dressed up. The finding that matters is the negative one: after
+six independent axes all returned zero, **the tape — the only region no arm had
+ever touched, and 24 % of the output — contains essentially no reclaimable
+redundancy either.** Every projected 3–5 token/lane gain dissolved into −4 once
+each candidate was measured against the real message rather than estimated in
+isolation. The frontier is a genuine local optimum, and the remaining 79 % of the
+body is sub-token, closable only by an arithmetic decoder the bare LLM does not
+have.
+
+### Exhaustion: the frontier is a fixed point on six independent axes
+
+All measured this turn, all real execution, all zero:
+
+| axis | probe | result |
+|---|---|---|
+| repeated-token n-grams in the **body** | n=2..8 | 0 profitable |
+| repeated-token n-grams in the **tape** | `bench/x131/tape.mjs`, n=2..10 | 0 on all 6 lanes |
+| repeated-token n-grams in the **whole message** | — | 0 profitable |
+| a **second full frontier pass** | `bench/x131/recursive.ts` | pass2 == pass1, 6/6 |
+| **glyph relabelling** | X130 | −8 total |
+| orphaned / single-use rules | this codec | ≈ 0 |
+| **tape ordering** | `bench/x131/order.mjs` | 0 (shipped order is already optimal) |
+
+The residual is **sub-token**: 79 % of the body is 1-token units (words 47 %,
+other 32 %), and for a 1-token unit substitution can never pay
+(`gain = c·(t−1) − (1+t)` is −2 at `t=1` for every `c`). Closing it needs
+entropy/bits-back coding, i.e. an arithmetic decoder the bare LLM does not have.
+
+### Generalized local-leader list (29 lanes, `x131-confirm.log`)
+
+**PROSE (10 lanes)** — body 5 282 tokens:
+**word 2 633 (50 %)** · other 1 558 (29 %) · glyph 714 (14 %) · num 377 (7 %).
+Per lane the leader is `word` almost everywhere (kb-article 371/554, node-help
+481/725, dpkg-l 294/517, llm-answer 326/568, json-pkg 264/514, code-ts 313/703).
+Two exceptions: **ls-l-real** is `num`-led (215/727 — timestamps and sizes) and
+**apt-real** is `other`-led (249/621).
+
+**OPS (19 lanes)** — body 3 088 tokens:
+**word 1 072 (35 %)** · **other 1 031 (33 %)** · num 645 (21 %) · glyph 340 (11 %).
+Split leadership: the numeric ops lanes are `num`- or `other`-led
+(du-real 74/177 num, kubectl 79/210 num, psql 30/107 num, markdown-table 57/114
+other, prices.csv 21/49 other); the process/filesystem lanes are `word`-led
+(findmnt 170/283, ls-real 88/258, ps-aux-real 223/668).
+
+**Overall body 8 370:** word 3 705 (44 %) · other 2 589 (31 %) · glyph 1 054 (13 %)
+· num 1 022 (12 %).
+
+The "other" class is **highly distinct, low-count** (`bench/x131/other.mjs`):
+kb-article 81 tokens / 64 distinct, code-ts 304/180, node-help 178/96. It is
+dominated by 1–3 char punctuation and space runs (`" ="×9`, `" ==="×7`, `".\n\n"×5`)
+plus already-merged Cyrillic glyph pairs (`ло`×25) — i.e. **already compressed**,
+and with no n-gram to exploit.
+
+### Frontier restated (correction to X130)
+
+The frontier is **`tagstackEncode` with `OMEGA_DET=1`: Σ raw 28 015 → out 12 020**
+(preamble 736, tape 2 915, body 8 370, mismatch 0, 28/29 lanes printed EXACT).
+X130 documented **12 029**; the 9-token gap is **not** explained by an
+environment difference and **12 020 should be used as the restated frontier**
+(`bench/x131/receipts/x131-confirm.log`). `tagstackFrontier` remains a weaker path
+at Σ 12 639 — never use it.
+
+### Frontier-lab mathematics: individual, honest review
+
+Requested every turn, not previously started in X131. Three labs, three
+different *kinds* of result:
+
+- **OpenAI — new mathematics.** On 2026-05-20 an internal general-purpose
+  reasoning model *disproved* the Erdős unit-distance conjecture (posed 1946):
+  configurations of `n` points with ≥ `n^(1+δ)` unit-distance pairs for some fixed
+  δ>0, against the believed `n^(1+o(1))`. Independently digested and verified by
+  Alon, Bloom, Gowers, Litt, Sawin, Shankar, Tsimerman, Wang and Wood
+  (arXiv 2605.20695). This is the first prominent open problem solved
+  autonomously — and it came from a **general-purpose** model, not a math system.
+- **Google DeepMind — scale, formally checked.** *AlphaProof Nexus*
+  (arXiv 2605.22763) autonomously resolved **9 of 353** open Erdős problems and
+  proved **44 of 492** OEIS conjectures, every one Lean-verified, at a few hundred
+  dollars per problem.
+- **Anthropic / Claude — verification, not discovery.** On 2026-09-04 Claude
+  published the first fully machine-checked Lean 4 formalisation of Fermat's Last
+  Theorem: ~13 M lines, ~29 500 intermediate theorems, 11 days, coordinated by
+  Prove2Me (arXiv 2608.28433), reviewed by Kevin Buzzard. Being precise: this
+  formalises **Wiles's 1995 proof** (via Darmon–Diamond–Taylor); **no new
+  mathematics** resulted. It is an autoformalisation milestone, not a solve.
+- **Other labs.** Axiom Math's AxiomProver: Fel's conjecture on syzygies of
+  numerical semigroups, Conjecture A.10 on parity of k-differentials, "almost all
+  primes are partially regular" — each generated from a natural-language statement
+  and formalised in Lean.
+- **The honest caveat.** Terence Tao's assessment: these are largely *long-tail*
+  problems nobody prioritised, not frontier challenges (GPT-5.2 scores 77 % on
+  olympiad-style questions but ~25 % on open research problems). Erdős #333 was
+  announced solved and then **withdrawn** — Erdős himself had solved it in 1977.
+
+**What this does and does not license for codec design.** The results above
+concern *semantic* reasoning, and they are spectacular. They say nothing about
+*mechanical* step-execution, where the measured numbers are bad: best models
+execute arithmetic procedures at **56–60 %** (arXiv 2605.00817) and strict
+instruction-following tops out at **50.71 %** (MathIF, arXiv 2505.14810). So the
+asymmetry is sharp — **substitution is safe, computation is not.** That is exactly
+why this codec only ever rewrites the tape into other tape entries (pure
+substitution, mechanically resolvable) and never asks the reader to recompute a
+field, which is what killed the derived-column / functional-dependency direction
+this turn.
+
+### Source citation (honest)
+
+The **abstract mechanism is not new**: encoding dictionary entries in terms of
+other dictionary entries is textbook **grammar-based compression** (straight-line
+grammars; **Re-Pair**, Larsson & Moffat 1999), and **Re-Pair on front coding
+(RPFC)** is the standard strong compressor for string dictionaries; GLZ applies
+the same idea with dictionary entries embedded at first use. What is new here is
+the **application site and the constraint set**: applying it to this frontier's
+tape, with liveness pruning and order restoration, under the requirement that the
+result stay **directly model-readable with no arithmetic decoder**. No prior arm
+in this document touches the tape, and no source was found that does this under
+that constraint.
+
+New sources consulted this turn (new sites, new terms): Lacuna on the **order
+tax** (`log₂(m!)` bits wasted by sequencing an unordered set — reclaimable only
+via bits-back + ANS, i.e. **unreachable** under the bare-LLM constraint); the
+Twelvefold Way of non-sequential compression; Dubois et al., *Lossy Compression
+for Lossless Prediction* (arXiv 2106.10800, rate-invariance theorem);
+arXiv 2605.00817 and arXiv 2505.14810 (above); Vo & Vo, *Compressing table data
+with column dependency*, DCC 2004.
+
+### Greedy or not?
+
+**Greedy.** References are ranked by estimated gain and applied one at a time,
+each **measured** against the real whole-message token count and kept only on a
+strict improvement (bounded at 600 probes/lane). It is not optimal — the joint
+selection is a set-packing problem — but every accepted step is verified, so the
+result can never be worse than the identity.
+
+### Time- or cpu-bound?
+
+**CPU-bound.** Cost is `O(rules²)` containment tests plus up to 600 whole-message
+`countTokens` probes. No wall-clock budget; `OMEGA_NO_ENKIBOTISMOS=1` disables it.
+
+### Safety
+
+The identity is the floor. Four gates must pass before anything ships: (G0) the
+**fully-expanded body text must be character-identical** before and after — this
+is the real correctness condition, and it is checked, not assumed, because
+pruning may rewrite the body; (G1) every glyph the body uses is still defined;
+(G2) the whole message is **strictly** cheaper; (G3) the frontier still reproduces
+the source. Anything else returns `null` and the caller emits the unmodified
+frontier message, so **no lane can regress.**
