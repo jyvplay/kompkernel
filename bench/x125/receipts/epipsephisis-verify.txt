@@ -1,0 +1,3 @@
+cases 20009  mismatches 0  EXACT
+stats {"refs":12,"refChars":30338,"attempts":19026,"hits":4192,"rejected":65215,"failed":39,"savedChars":4688854,"foldedChars":5164946,"windowChars":973713,"verifyFails":39}
+window-priced fraction of attempts: 22.03%

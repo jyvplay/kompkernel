@@ -44,6 +44,8 @@ import { palindromosDisabled, palindromosEncode } from './palindromos';
 import { proagogeDisabled, proagogeEncode } from './proagoge';
 import { diglossiaDisabled, diglossiaEncode } from './diglossia';
 import { veltistosDisabled, veltistosEncode } from './veltistos';
+import { anagrapheDisabled, anagrapheEncode } from './anagraphe';
+import { tmematismosDisabled, tmematismosEncode } from './tmematismos';
 import { stoichedonDisabled, stoichedonEncode } from './stoichedon';
 import { CHIRON_START, chironDecode } from './chiron';
 import { perikopiDisabled, perikopiRewrite } from './perikopi';
@@ -981,6 +983,35 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
   // unchanged otherwise.  No encoder call, no clock, deterministic work budget.
   if (!stoichedonDisabled()) {
     try { admitParentRelative('ΣΤΟΙΧΗΔΟΝ', stoichedonEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X125 — ΑΝΑΓΡΑΦΗ.  ΒΕΛΤΙΣΤΟΣ searches the BODY over a portfolio of three
+  // (context, beam) rungs and prices each one; it searches the TAPE once, with a
+  // fixed beam of 4 that is not a rung of that ladder. The tape column is 24.5 %
+  // of the emitted tokens and is the one that does not move (shipped note:
+  // "body −14, tape −0"). This re-spells the values with the same lattice and
+  // the same portfolio, with the exact (untruncated) context, and repeats while
+  // a round still wins. Runs after ΣΤΟΙΧΗΔΟΝ so it sees the final tape order and
+  // the final letter assignment, and BEFORE the local ΔΙΓΛΩΣΣΙΑ pass. Same gate
+  // as everything here: whole-message price, byte-exact chironDecode against the
+  // incumbent's own expansion, strict improvement or nothing.
+  if (!anagrapheDisabled()) {
+    try { admitParentRelative('ΑΝΑΓΡΑΦΗ', anagrapheEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
+  }
+  // X126 — ΤΜΗΜΑΤΙΣΜΟΣ.  ΣΤΟΙΧΗΔΟΝ already searches the tape order and the rule
+  // -> glyph bijection, and X126 measured that search to be CONVERGED rather than
+  // budget-starved (126 719 transposition probes and 64 587 two- and three-cycle
+  // probes on ls-l-real, none of which beat the incumbent). This module does not
+  // re-open that question: it attacks the COST of a probe. Every codec here
+  // prices a move by re-running the pre-token regex over the whole tape plus the
+  // whole body, although a glyph transposition changes only the positions where
+  // those two letters occur. It holds the chunk boundaries and the per-chunk
+  // costs and re-splits a window around the changed positions, verifying that
+  // the boundary sequence outside the window is identical; every state it
+  // accepts is then re-priced with the real counter and byte-compared with
+  // `chironDecode`, so a windowing bug can cost time and can never ship a wrong
+  // wire. Runs after ΑΝΑΓΡΑΦΗ so it sees the final tape.
+  if (!tmematismosDisabled()) {
+    try { admitParentRelative('ΤΜΗΜΑΤΙΣΜΟΣ', tmematismosEncode(text, enc, best) as unknown as WideResult); } catch { /* not a candidate */ }
   }
   // X119 — ΔΙΓΛΩΣΣΙΑ.  Per-OCCURRENCE recoding of the finished wire: a literal
   // body span equal to an existing flat rule value may be adopted as that glyph,

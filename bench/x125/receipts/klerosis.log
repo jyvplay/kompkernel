@@ -1,0 +1,114 @@
+lanes 10  scripts hangul,katakana,cyrillic,arabic,myanmar,khmer,cjk,polyglot  reps 1
+
+lane            script      price   Δ vs base   rules  exact   ms     work
+ls-l-real      hangul       1677        +3     135  y        0         0
+ls-l-real      katakana     1780      +106      79  y        0         0
+ls-l-real      cyrillic     1674         0     121  y        0         0
+ls-l-real      arabic       1662       -12     120  y        0         0
+ls-l-real      myanmar      1830      +156      66  y        0         0
+ls-l-real      khmer        1839      +165      65  y        0         0
+ls-l-real      cjk          1694       +20     115  y        0         0
+ls-l-real      polyglot     1672        -2     132  y        0         0
+               unforced     1677         3     135  y        0         0
+
+ps-aux-real    hangul       1174       +15      58  y        0         0
+ps-aux-real    katakana     1171       +12      67  y        0         0
+ps-aux-real    cyrillic     1159         0      66  y        0         0
+ps-aux-real    arabic       1150        -9      68  y        0         0
+ps-aux-real    myanmar      1178       +19      61  y        0         0
+ps-aux-real    khmer        1173       +14      59  y        0         0
+ps-aux-real    cjk          1172       +13      58  y        0         0
+ps-aux-real    polyglot     1172       +13      67  y        0         0
+               unforced     1174        15      58  y        0         0
+
+code-ts        hangul       1136        +5      53  y        0         0
+code-ts        katakana     1132        +1      55  y        0         0
+code-ts        cyrillic     1131         0      56  y        0         0
+code-ts        arabic       1134        +3      52  y        0         0
+code-ts        myanmar      1131         0      52  y        0         0
+code-ts        khmer        1137        +6      48  y        0         0
+code-ts        cjk          1143       +12      51  y        0         0
+code-ts        polyglot     1140        +9      56  y        0         0
+               unforced     1136         5      53  y        0         0
+
+apt-real       hangul       1118       +14      67  y        0         0
+apt-real       katakana     1115       +11      67  y        0         0
+apt-real       cyrillic     1104         0      64  y        0         0
+apt-real       arabic       1096        -8      66  y        0         0
+apt-real       myanmar      1117       +13      66  y        0         0
+apt-real       khmer        1112        +8      66  y        0         0
+apt-real       cjk          1118       +14      67  y        0         0
+apt-real       polyglot     1120       +16      67  y        0         0
+               unforced     1118        14      67  y        0         0
+
+json-pkg       hangul        794       +13      39  y        0         0
+json-pkg       katakana      794       +13      39  y        0         0
+json-pkg       cyrillic      781         0      39  y        0         0
+json-pkg       arabic        781         0      41  y        0         0
+json-pkg       myanmar       789        +8      39  y        0         0
+json-pkg       khmer         791       +10      37  y        0         0
+json-pkg       cjk           800       +19      37  y        0         0
+json-pkg       polyglot      805       +24      39  y        0         0
+               unforced      794        13      39  y        0         0
+
+node-help      hangul        931        +1      22  y        0         0
+node-help      katakana      932        +2      23  y        0         0
+node-help      cyrillic      930         0      23  y        0         0
+node-help      arabic        929        -1      21  y        0         0
+node-help      myanmar       932        +2      23  y        0         0
+node-help      khmer         932        +2      23  y        0         0
+node-help      cjk           932        +2      22  y        0         0
+node-help      polyglot      941       +11      23  y        0         0
+               unforced      931         1      22  y        0         0
+
+ls-real        hangul        489         0      25  y        0         0
+ls-real        katakana      488        -1      25  y        0         0
+ls-real        cyrillic      489         0      25  y        0         0
+ls-real        arabic        485        -4      26  y        0         0
+ls-real        myanmar       489         0      25  y        0         0
+ls-real        khmer         490        +1      25  y        0         0
+ls-real        cjk           489         0      25  y        0         0
+ls-real        polyglot      499       +10      25  y        0         0
+               unforced      489         0      25  y        0         0
+
+dpkg-l         hangul        761        -5      26  y        0         0
+dpkg-l         katakana      771        +5      28  y        0         0
+dpkg-l         cyrillic      766         0      29  y        0         0
+dpkg-l         arabic        751       -15      26  y        0         0
+dpkg-l         myanmar       767        +1      26  y        0         0
+dpkg-l         khmer         768        +2      24  y        0         0
+dpkg-l         cjk           773        +7      24  y        0         0
+dpkg-l         polyglot      768        +2      26  y        0         0
+               unforced      761        -5      26  y        0         0
+
+ps-real        hangul        485        -3      23  y        0         0
+ps-real        katakana      488         0      24  y        0         0
+ps-real        cyrillic      488         0      24  y        0         0
+ps-real        arabic        480        -8      24  y        0         0
+ps-real        myanmar       486        -2      20  y        0         0
+ps-real        khmer         486        -2      22  y        0         0
+ps-real        cjk           485        -3      24  y        0         0
+ps-real        polyglot      497        +9      24  y        0         0
+               unforced      485        -3      23  y        0         0
+
+email-thread   hangul        555        +7      17  y        0         0
+email-thread   katakana      554        +6      18  y        0         0
+email-thread   cyrillic      548         0      18  y        0         0
+email-thread   arabic        551        +3      18  y        0         0
+email-thread   myanmar       552        +4      18  y        0         0
+email-thread   khmer         553        +5      18  y        0         0
+email-thread   cjk           554        +6      17  y        0         0
+email-thread   polyglot      563       +15      18  y        0         0
+               unforced      555         7      17  y        0         0
+
+Σ over lanes:
+  hangul     9120
+  katakana   9225
+  cyrillic   9070
+  arabic     9019
+  myanmar    9271
+  khmer      9281
+  cjk        9160
+  polyglot   9177
+  unforced   9120
+chironExhausted: false
