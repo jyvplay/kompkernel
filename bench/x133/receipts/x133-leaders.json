@@ -1,0 +1,218 @@
+{
+ "kb-article.txt": [
+  "PROSE",
+  554,
+  166,
+  371,
+  2,
+  15,
+  "word"
+ ],
+ "email-thread.txt": [
+  "PROSE",
+  353,
+  92,
+  214,
+  26,
+  21,
+  "word"
+ ],
+ "llm-answer.md": [
+  "PROSE",
+  568,
+  119,
+  326,
+  21,
+  102,
+  "word"
+ ],
+ "node-help.txt": [
+  "PROSE",
+  725,
+  161,
+  481,
+  13,
+  70,
+  "word"
+ ],
+ "apt-real.txt": [
+  "PROSE",
+  621,
+  308,
+  243,
+  46,
+  24,
+  "glyph"
+ ],
+ "code-ts.txt": [
+  "CODE/STRUCT",
+  703,
+  257,
+  313,
+  4,
+  129,
+  "word"
+ ],
+ "json-pkg.txt": [
+  "CODE/STRUCT",
+  514,
+  188,
+  264,
+  22,
+  40,
+  "word"
+ ],
+ "dpkg-l.txt": [
+  "CODE/STRUCT",
+  517,
+  129,
+  294,
+  28,
+  66,
+  "word"
+ ],
+ "unified-diff.patch": [
+  "CODE/STRUCT",
+  272,
+  71,
+  81,
+  48,
+  72,
+  "word"
+ ],
+ "vmstat.txt": [
+  "OPS/TABULAR",
+  98,
+  19,
+  32,
+  19,
+  28,
+  "word"
+ ],
+ "df-h.txt": [
+  "OPS/TABULAR",
+  60,
+  15,
+  21,
+  9,
+  15,
+  "word"
+ ],
+ "df-real.txt": [
+  "OPS/TABULAR",
+  78,
+  16,
+  25,
+  16,
+  21,
+  "word"
+ ],
+ "du-real.txt": [
+  "OPS/TABULAR",
+  177,
+  50,
+  33,
+  74,
+  20,
+  "num"
+ ],
+ "findmnt.txt": [
+  "OPS/TABULAR",
+  283,
+  50,
+  170,
+  27,
+  36,
+  "word"
+ ],
+ "ps-ef.txt": [
+  "OPS/TABULAR",
+  210,
+  79,
+  84,
+  36,
+  11,
+  "word"
+ ],
+ "ps-real.txt": [
+  "OPS/TABULAR",
+  283,
+  91,
+  105,
+  44,
+  43,
+  "word"
+ ],
+ "ps-aux-real.txt": [
+  "OPS/TABULAR",
+  668,
+  268,
+  223,
+  117,
+  60,
+  "glyph"
+ ],
+ "kubectl-get-pods.txt": [
+  "OPS/TABULAR",
+  210,
+  69,
+  55,
+  79,
+  7,
+  "num"
+ ],
+ "psql-output.txt": [
+  "OPS/TABULAR",
+  107,
+  58,
+  9,
+  30,
+  10,
+  "glyph"
+ ],
+ "markdown-table.md": [
+  "OPS/TABULAR",
+  114,
+  47,
+  25,
+  32,
+  10,
+  "glyph"
+ ],
+ "prices.csv": [
+  "OPS/TABULAR",
+  49,
+  20,
+  11,
+  12,
+  6,
+  "glyph"
+ ],
+ "metrics.tsv": [
+  "OPS/TABULAR",
+  123,
+  68,
+  15,
+  31,
+  9,
+  "glyph"
+ ],
+ "ls-real.txt": [
+  "OPS/TABULAR",
+  258,
+  102,
+  88,
+  59,
+  9,
+  "glyph"
+ ],
+ "ls-l-real.txt": [
+  "OPS/TABULAR",
+  727,
+  347,
+  127,
+  215,
+  38,
+  "glyph"
+ ]
+}

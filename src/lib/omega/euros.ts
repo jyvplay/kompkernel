@@ -79,7 +79,7 @@ import { tagstackEncode } from './tagstack';
 type Rule = { g: string; v: string };
 
 /** Blocks the miners draw id characters from (merismos.ts:84 plus the later pools). */
-function inPool(cp: number): boolean {
+export function inPool(cp: number): boolean {
   return (
     (cp >= 0x0400 && cp <= 0x04ff) ||   // Cyrillic
     (cp >= 0x0370 && cp <= 0x03ff) ||   // Greek
@@ -92,7 +92,7 @@ function inPool(cp: number): boolean {
 }
 
 /** Glyphs = characters in the message that the source does not contain. */
-function glyphSetFor(srcText: string, msg: string): Set<string> {
+export function glyphSetFor(srcText: string, msg: string): Set<string> {
   const src = new Set<string>();
   for (let i = 0; i < srcText.length; i++) src.add(srcText[i]!);
   const g = new Set<string>();
@@ -104,7 +104,7 @@ function glyphSetFor(srcText: string, msg: string): Set<string> {
 }
 
 /** `§g v g v ...` — the FIRST occurrence of a glyph starts its rule. */
-function parseTape(t: string, G: Set<string>): Rule[] {
+export function parseTape(t: string, G: Set<string>): Rule[] {
   const rs: Rule[] = [];
   const seen = new Set<string>();
   let cur: Rule | null = null;
@@ -115,10 +115,10 @@ function parseTape(t: string, G: Set<string>): Rule[] {
   return rs;
 }
 
-const buildTape = (rs: Rule[]): string => '\u00a7' + rs.map((r) => r.g + r.v).join('');
+export const buildTape = (rs: Rule[]): string => '\u00a7' + rs.map((r) => r.g + r.v).join('');
 
 /** Well-formed = every glyph a value references is defined by an EARLIER rule. */
-function wellFormed(rs: Rule[]): boolean {
+export function wellFormed(rs: Rule[]): boolean {
   const seen = new Set<string>();
   const names = new Set(rs.map((r) => r.g));
   for (const r of rs) {
@@ -128,7 +128,7 @@ function wellFormed(rs: Rule[]): boolean {
   return true;
 }
 
-function expandRules(rs: Rule[]): Map<string, string> {
+export function expandRules(rs: Rule[]): Map<string, string> {
   const names = new Set(rs.map((r) => r.g));
   const m = new Map<string, string>();
   for (const r of rs) {
@@ -140,7 +140,7 @@ function expandRules(rs: Rule[]): Map<string, string> {
 }
 
 /** The invariant: substitute every glyph in the body, recursively. */
-function expandBody(rs: Rule[], b: string): string {
+export function expandBody(rs: Rule[], b: string): string {
   const m = expandRules(rs);
   const names = new Set(rs.map((r) => r.g));
   let o = '';
@@ -152,7 +152,7 @@ function expandBody(rs: Rule[], b: string): string {
  * The body is stored WITH its leading `¶` marker; that marker is structure, not
  * content, so it is dropped before the expansion is compared to the source.
  */
-function expandContent(rs: Rule[], b: string): string {
+export function expandContent(rs: Rule[], b: string): string {
   return expandBody(rs, b.startsWith('\u00b6') ? b.slice(1) : b);
 }
 

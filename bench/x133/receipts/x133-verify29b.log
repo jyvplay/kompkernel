@@ -1,0 +1,32 @@
+lsblk.txt            raw=   60 A=   60 B=   60 Δ=   0    3312ms->  2091ms  exact=y
+kb-article.txt       raw=  656 A=  620 B=  620 Δ=   0    4440ms->  5709ms  exact=y
+uptime-w.txt         raw=   80 A=   80 B=   80 Δ=   0    3143ms->  2427ms  exact=y
+free-m.txt           raw=   76 A=   76 B=   76 Δ=   0    3618ms->  2670ms  exact=y
+vmstat.txt           raw=  229 A=  144 B=  144 Δ=   0    2834ms->  2451ms  exact=y
+unified-diff.patch   raw=  578 A=  411 B=  411 Δ=   0    4300ms->  4856ms  exact=y
+df-h.txt             raw=  570 A=  160 B=  160 Δ=   0   13979ms-> 11720ms  exact=y
+df-real.txt          raw=  158 A=  123 B=  123 Δ=   0   13678ms-> 10391ms  exact=y
+du-real.txt          raw=  458 A=  266 B=  266 Δ=   0    5959ms->  5571ms  exact=y
+node-help.txt        raw= 1099 A=  852 B=  846 Δ=  -6   22059ms-> 35056ms  exact=y
+findmnt.txt          raw=  787 A=  389 B=  385 Δ=  -4   20053ms-> 20952ms  exact=y
+df-h.txt             raw=  140 A=  105 B=  105 Δ=   0   14432ms-> 10299ms  exact=y
+email-thread.txt     raw=  629 A=  486 B=  486 Δ=   0   10567ms-> 10800ms  exact=y
+llm-answer.md        raw=  733 A=  665 B=  664 Δ=  -1   12473ms-> 15312ms  exact=y
+markdown-table.md    raw=  330 A=  172 B=  172 Δ=   0    9065ms->  7255ms  exact=y
+psql-output.txt      raw=  675 A=  230 B=  229 Δ=  -1   10881ms->  9815ms  exact=y
+prices.csv           raw=  582 A=  119 B=  118 Δ=  -1   12595ms->  9434ms  exact=y
+cue-sheet.md         raw=  513 A=  101 B=  101 Δ=   0   14753ms-> 11050ms  exact=y
+ps-ef.txt            raw= 1144 A=  299 B=  296 Δ=  -3   14883ms-> 13092ms  exact=y
+ls-real.txt          raw= 1034 A=  422 B=  413 Δ=  -9   15387ms-> 15847ms  exact=y
+json-pkg.txt         raw= 1152 A=  657 B=  653 Δ=  -4   19151ms-> 20834ms  exact=y
+code-ts.txt          raw= 1422 A=  950 B=  949 Δ=  -1   43040ms-> 52719ms  exact=y
+dpkg-l.txt           raw= 1000 A=  624 B=  623 Δ=  -1   45129ms-> 46299ms  exact=y
+ps-real.txt          raw= 1106 A=  381 B=  381 Δ=   0   17498ms-> 14903ms  exact=y
+kubectl-get-pods.txt raw= 1006 A=  303 B=  300 Δ=  -3   46097ms-> 43953ms  exact=y
+metrics.tsv          raw=  811 A=  198 B=  197 Δ=  -1   17651ms-> 13467ms  exact=y
+ps-aux-real.txt      raw= 3054 A=  988 B=  980 Δ=  -8   67150ms-> 80396ms  exact=y
+apt-real.txt         raw= 2739 A=  816 B=  813 Δ=  -3  112945ms->119208ms  exact=y
+ls-l-real.txt        raw= 5194 A= 1323 B= 1310 Δ= -13  432855ms->468046ms  exact=y
+
+SIGMA raw=28015  A(no SYNA)=12020  B(SYNA)=11961  ΣΔ=-59   exact: A bad=0 B bad=0
+WALL CLOCK  A=1013927ms  B=1066623ms  overhead=5.20%
