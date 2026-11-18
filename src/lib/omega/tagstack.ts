@@ -1162,8 +1162,8 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
   // It is admitted here under the chain's own rule: the incumbent's ΧΕΙΡΩΝ-layer
   // expansion must be byte-identical under the repository's own decoder, and the
   // message must be strictly smaller. It also re-enters with the frontier result
-  // this chain just computed rather than re-encoding, which is what makes a
-  // whole extra local search cost ~0.1 s against a 5-43 s frontier encode.
+  // this chain just computed rather than re-encoding. X133 measured +5.20%
+  // end-to-end runtime versus the stack without SYNA, not a stack speedup.
   // ---------------------------------------------------------------------------
   if (!synarmogeDisabled() && best.decoded === text) {
     try {

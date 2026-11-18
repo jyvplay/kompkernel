@@ -1,0 +1,2012 @@
+{
+  "metric": "3-character marginal, NOT an exact whole-message deletion cost",
+  "totals": {
+    "Latin/space": {
+      "sites": 209,
+      "marginalSum": 209,
+      "nonpositive": 0
+    },
+    "Latin/glyph": {
+      "sites": 644,
+      "marginalSum": 71,
+      "nonpositive": 573
+    },
+    "glyph/space": {
+      "sites": 281,
+      "marginalSum": 21,
+      "nonpositive": 260
+    },
+    "Latin/Latin": {
+      "sites": 130,
+      "marginalSum": 249,
+      "nonpositive": 0
+    },
+    "glyph/glyph": {
+      "sites": 1410,
+      "marginalSum": 224,
+      "nonpositive": 962
+    },
+    "glyph/Latin": {
+      "sites": 322,
+      "marginalSum": 42,
+      "nonpositive": 280
+    },
+    "punctuation/space": {
+      "sites": 7,
+      "marginalSum": 4,
+      "nonpositive": 3
+    },
+    "Latin/punctuation": {
+      "sites": 51,
+      "marginalSum": 51,
+      "nonpositive": 0
+    },
+    "digit/glyph": {
+      "sites": 331,
+      "marginalSum": 48,
+      "nonpositive": 283
+    },
+    "glyph/punctuation": {
+      "sites": 153,
+      "marginalSum": 32,
+      "nonpositive": 121
+    },
+    "Latin/digit": {
+      "sites": 87,
+      "marginalSum": 87,
+      "nonpositive": 0
+    },
+    "digit/digit": {
+      "sites": 115,
+      "marginalSum": 230,
+      "nonpositive": 0
+    },
+    "glyph/digit": {
+      "sites": 363,
+      "marginalSum": 43,
+      "nonpositive": 320
+    },
+    "glyph/newline": {
+      "sites": 7,
+      "marginalSum": 1,
+      "nonpositive": 6
+    },
+    "edge/glyph": {
+      "sites": 1,
+      "marginalSum": 0,
+      "nonpositive": 1
+    },
+    "punctuation/glyph": {
+      "sites": 82,
+      "marginalSum": 20,
+      "nonpositive": 62
+    },
+    "space/glyph": {
+      "sites": 62,
+      "marginalSum": 11,
+      "nonpositive": 51
+    },
+    "newline/punctuation": {
+      "sites": 4,
+      "marginalSum": 4,
+      "nonpositive": 0
+    },
+    "newline/Latin": {
+      "sites": 5,
+      "marginalSum": 5,
+      "nonpositive": 0
+    },
+    "newline/glyph": {
+      "sites": 10,
+      "marginalSum": 1,
+      "nonpositive": 9
+    },
+    "newline/digit": {
+      "sites": 3,
+      "marginalSum": 3,
+      "nonpositive": 0
+    },
+    "digit/Latin": {
+      "sites": 60,
+      "marginalSum": 60,
+      "nonpositive": 0
+    },
+    "newline/space": {
+      "sites": 8,
+      "marginalSum": 8,
+      "nonpositive": 0
+    },
+    "punctuation/punctuation": {
+      "sites": 16,
+      "marginalSum": 24,
+      "nonpositive": 0
+    },
+    "space/punctuation": {
+      "sites": 6,
+      "marginalSum": 6,
+      "nonpositive": 0
+    },
+    "glyph/edge": {
+      "sites": 4,
+      "marginalSum": 0,
+      "nonpositive": 4
+    },
+    "punctuation/digit": {
+      "sites": 8,
+      "marginalSum": 6,
+      "nonpositive": 2
+    },
+    "digit/punctuation": {
+      "sites": 37,
+      "marginalSum": 37,
+      "nonpositive": 0
+    },
+    "space/space": {
+      "sites": 11,
+      "marginalSum": 11,
+      "nonpositive": 0
+    },
+    "punctuation/Latin": {
+      "sites": 7,
+      "marginalSum": 8,
+      "nonpositive": 0
+    },
+    "punctuation/newline": {
+      "sites": 1,
+      "marginalSum": 2,
+      "nonpositive": 0
+    },
+    "Latin/edge": {
+      "sites": 1,
+      "marginalSum": 1,
+      "nonpositive": 0
+    },
+    "digit/space": {
+      "sites": 38,
+      "marginalSum": 38,
+      "nonpositive": 0
+    },
+    "edge/space": {
+      "sites": 1,
+      "marginalSum": 1,
+      "nonpositive": 0
+    },
+    "space/digit": {
+      "sites": 14,
+      "marginalSum": 0,
+      "nonpositive": 14
+    },
+    "space/Latin": {
+      "sites": 4,
+      "marginalSum": 4,
+      "nonpositive": 0
+    }
+  },
+  "rows": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "matrix": {
+        "Latin/space": {
+          "sites": 69,
+          "marginalSum": 69,
+          "nonpositive": 0
+        },
+        "Latin/glyph": {
+          "sites": 58,
+          "marginalSum": 4,
+          "nonpositive": 54
+        },
+        "glyph/space": {
+          "sites": 46,
+          "marginalSum": 4,
+          "nonpositive": 42
+        },
+        "Latin/Latin": {
+          "sites": 14,
+          "marginalSum": 27,
+          "nonpositive": 0
+        },
+        "glyph/glyph": {
+          "sites": 40,
+          "marginalSum": 5,
+          "nonpositive": 25
+        },
+        "glyph/Latin": {
+          "sites": 12,
+          "marginalSum": 3,
+          "nonpositive": 9
+        },
+        "punctuation/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/punctuation": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "digit/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "glyph/punctuation": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "matrix": {
+        "Latin/digit": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "digit/digit": {
+          "sites": 6,
+          "marginalSum": 12,
+          "nonpositive": 0
+        },
+        "Latin/space": {
+          "sites": 4,
+          "marginalSum": 4,
+          "nonpositive": 0
+        },
+        "Latin/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "glyph/glyph": {
+          "sites": 7,
+          "marginalSum": -2,
+          "nonpositive": 6
+        },
+        "glyph/digit": {
+          "sites": 5,
+          "marginalSum": 0,
+          "nonpositive": 5
+        },
+        "digit/glyph": {
+          "sites": 5,
+          "marginalSum": 0,
+          "nonpositive": 5
+        },
+        "glyph/newline": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "matrix": {
+        "edge/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "glyph/glyph": {
+          "sites": 34,
+          "marginalSum": 0,
+          "nonpositive": 26
+        },
+        "glyph/Latin": {
+          "sites": 7,
+          "marginalSum": 0,
+          "nonpositive": 7
+        },
+        "Latin/glyph": {
+          "sites": 7,
+          "marginalSum": 0,
+          "nonpositive": 7
+        },
+        "glyph/punctuation": {
+          "sites": 8,
+          "marginalSum": 0,
+          "nonpositive": 8
+        },
+        "punctuation/glyph": {
+          "sites": 11,
+          "marginalSum": 1,
+          "nonpositive": 10
+        },
+        "Latin/space": {
+          "sites": 7,
+          "marginalSum": 7,
+          "nonpositive": 0
+        },
+        "glyph/space": {
+          "sites": 6,
+          "marginalSum": 1,
+          "nonpositive": 5
+        },
+        "space/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "newline/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "glyph/digit": {
+          "sites": 12,
+          "marginalSum": 1,
+          "nonpositive": 11
+        },
+        "digit/glyph": {
+          "sites": 10,
+          "marginalSum": 1,
+          "nonpositive": 9
+        },
+        "newline/Latin": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "newline/glyph": {
+          "sites": 4,
+          "marginalSum": 1,
+          "nonpositive": 3
+        },
+        "newline/digit": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "digit/digit": {
+          "sites": 3,
+          "marginalSum": 6,
+          "nonpositive": 0
+        },
+        "digit/Latin": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "newline/space": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "Latin/punctuation": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "punctuation/punctuation": {
+          "sites": 2,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "space/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "glyph/edge": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "matrix": {
+        "Latin/digit": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "digit/digit": {
+          "sites": 6,
+          "marginalSum": 12,
+          "nonpositive": 0
+        },
+        "Latin/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "glyph/glyph": {
+          "sites": 18,
+          "marginalSum": 9,
+          "nonpositive": 6
+        },
+        "glyph/space": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "space/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "glyph/newline": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "matrix": {
+        "punctuation/digit": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/glyph": {
+          "sites": 4,
+          "marginalSum": 0,
+          "nonpositive": 4
+        },
+        "glyph/digit": {
+          "sites": 8,
+          "marginalSum": 0,
+          "nonpositive": 8
+        },
+        "digit/glyph": {
+          "sites": 5,
+          "marginalSum": 0,
+          "nonpositive": 5
+        },
+        "glyph/glyph": {
+          "sites": 11,
+          "marginalSum": 1,
+          "nonpositive": 9
+        },
+        "glyph/punctuation": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "punctuation/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "matrix": {
+        "digit/glyph": {
+          "sites": 27,
+          "marginalSum": 0,
+          "nonpositive": 27
+        },
+        "glyph/Latin": {
+          "sites": 4,
+          "marginalSum": 0,
+          "nonpositive": 4
+        },
+        "glyph/digit": {
+          "sites": 22,
+          "marginalSum": 2,
+          "nonpositive": 20
+        },
+        "digit/Latin": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "glyph/glyph": {
+          "sites": 7,
+          "marginalSum": 1,
+          "nonpositive": 5
+        },
+        "Latin/glyph": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "Latin/digit": {
+          "sites": 4,
+          "marginalSum": 4,
+          "nonpositive": 0
+        },
+        "digit/punctuation": {
+          "sites": 10,
+          "marginalSum": 10,
+          "nonpositive": 0
+        },
+        "glyph/punctuation": {
+          "sites": 3,
+          "marginalSum": 0,
+          "nonpositive": 3
+        },
+        "Latin/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "matrix": {
+        "Latin/space": {
+          "sites": 23,
+          "marginalSum": 23,
+          "nonpositive": 0
+        },
+        "punctuation/glyph": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "glyph/space": {
+          "sites": 66,
+          "marginalSum": 1,
+          "nonpositive": 65
+        },
+        "Latin/glyph": {
+          "sites": 87,
+          "marginalSum": 1,
+          "nonpositive": 86
+        },
+        "Latin/Latin": {
+          "sites": 24,
+          "marginalSum": 48,
+          "nonpositive": 0
+        },
+        "glyph/Latin": {
+          "sites": 23,
+          "marginalSum": 0,
+          "nonpositive": 23
+        },
+        "glyph/glyph": {
+          "sites": 30,
+          "marginalSum": 3,
+          "nonpositive": 21
+        },
+        "space/glyph": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "glyph/punctuation": {
+          "sites": 4,
+          "marginalSum": 0,
+          "nonpositive": 4
+        },
+        "Latin/punctuation": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "punctuation/space": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "digit/glyph": {
+          "sites": 3,
+          "marginalSum": 0,
+          "nonpositive": 3
+        },
+        "newline/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "space/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "glyph/digit": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "newline/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "matrix": {
+        "Latin/space": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "digit/glyph": {
+          "sites": 5,
+          "marginalSum": 0,
+          "nonpositive": 5
+        },
+        "glyph/glyph": {
+          "sites": 20,
+          "marginalSum": 9,
+          "nonpositive": 11
+        },
+        "glyph/Latin": {
+          "sites": 11,
+          "marginalSum": 1,
+          "nonpositive": 10
+        },
+        "Latin/glyph": {
+          "sites": 23,
+          "marginalSum": 1,
+          "nonpositive": 22
+        },
+        "glyph/space": {
+          "sites": 4,
+          "marginalSum": 0,
+          "nonpositive": 4
+        },
+        "glyph/punctuation": {
+          "sites": 12,
+          "marginalSum": 0,
+          "nonpositive": 12
+        },
+        "digit/digit": {
+          "sites": 3,
+          "marginalSum": 6,
+          "nonpositive": 0
+        },
+        "space/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "space/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "Latin/punctuation": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "glyph/digit": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "glyph/newline": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "punctuation/Latin": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "punctuation/newline": {
+          "sites": 1,
+          "marginalSum": 2,
+          "nonpositive": 0
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "matrix": {
+        "Latin/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/glyph": {
+          "sites": 4,
+          "marginalSum": 0,
+          "nonpositive": 4
+        },
+        "glyph/digit": {
+          "sites": 8,
+          "marginalSum": 0,
+          "nonpositive": 8
+        },
+        "digit/glyph": {
+          "sites": 5,
+          "marginalSum": 0,
+          "nonpositive": 5
+        },
+        "glyph/glyph": {
+          "sites": 11,
+          "marginalSum": 1,
+          "nonpositive": 9
+        },
+        "glyph/punctuation": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "punctuation/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "matrix": {
+        "Latin/space": {
+          "sites": 25,
+          "marginalSum": 25,
+          "nonpositive": 0
+        },
+        "Latin/glyph": {
+          "sites": 34,
+          "marginalSum": 2,
+          "nonpositive": 32
+        },
+        "glyph/Latin": {
+          "sites": 4,
+          "marginalSum": 0,
+          "nonpositive": 4
+        },
+        "glyph/glyph": {
+          "sites": 29,
+          "marginalSum": -2,
+          "nonpositive": 24
+        },
+        "glyph/digit": {
+          "sites": 10,
+          "marginalSum": 2,
+          "nonpositive": 8
+        },
+        "digit/glyph": {
+          "sites": 5,
+          "marginalSum": 0,
+          "nonpositive": 5
+        },
+        "glyph/space": {
+          "sites": 24,
+          "marginalSum": 0,
+          "nonpositive": 24
+        },
+        "digit/Latin": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "glyph/punctuation": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "punctuation/glyph": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/digit": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "digit/digit": {
+          "sites": 4,
+          "marginalSum": 8,
+          "nonpositive": 0
+        },
+        "Latin/Latin": {
+          "sites": 1,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "newline/space": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "Latin/edge": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "matrix": {
+        "space/glyph": {
+          "sites": 7,
+          "marginalSum": 1,
+          "nonpositive": 6
+        },
+        "glyph/glyph": {
+          "sites": 45,
+          "marginalSum": -1,
+          "nonpositive": 33
+        },
+        "glyph/Latin": {
+          "sites": 25,
+          "marginalSum": 0,
+          "nonpositive": 25
+        },
+        "Latin/glyph": {
+          "sites": 49,
+          "marginalSum": 2,
+          "nonpositive": 47
+        },
+        "glyph/space": {
+          "sites": 25,
+          "marginalSum": 2,
+          "nonpositive": 23
+        },
+        "glyph/punctuation": {
+          "sites": 7,
+          "marginalSum": 0,
+          "nonpositive": 7
+        },
+        "Latin/space": {
+          "sites": 10,
+          "marginalSum": 10,
+          "nonpositive": 0
+        },
+        "punctuation/glyph": {
+          "sites": 6,
+          "marginalSum": 1,
+          "nonpositive": 5
+        },
+        "Latin/Latin": {
+          "sites": 9,
+          "marginalSum": 18,
+          "nonpositive": 0
+        },
+        "Latin/punctuation": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "punctuation/Latin": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "glyph/digit": {
+          "sites": 9,
+          "marginalSum": 0,
+          "nonpositive": 9
+        },
+        "digit/digit": {
+          "sites": 5,
+          "marginalSum": 10,
+          "nonpositive": 0
+        },
+        "digit/glyph": {
+          "sites": 4,
+          "marginalSum": 0,
+          "nonpositive": 4
+        },
+        "digit/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "newline/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "punctuation/punctuation": {
+          "sites": 3,
+          "marginalSum": 4,
+          "nonpositive": 0
+        },
+        "glyph/edge": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "matrix": {
+        "edge/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "newline/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "glyph/glyph": {
+          "sites": 14,
+          "marginalSum": -1,
+          "nonpositive": 12
+        },
+        "glyph/punctuation": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "newline/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/digit": {
+          "sites": 5,
+          "marginalSum": 5,
+          "nonpositive": 0
+        },
+        "digit/glyph": {
+          "sites": 4,
+          "marginalSum": 0,
+          "nonpositive": 4
+        },
+        "glyph/digit": {
+          "sites": 7,
+          "marginalSum": 0,
+          "nonpositive": 7
+        },
+        "digit/space": {
+          "sites": 7,
+          "marginalSum": 7,
+          "nonpositive": 0
+        },
+        "digit/digit": {
+          "sites": 20,
+          "marginalSum": 40,
+          "nonpositive": 0
+        },
+        "Latin/glyph": {
+          "sites": 3,
+          "marginalSum": 1,
+          "nonpositive": 2
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "matrix": {
+        "punctuation/punctuation": {
+          "sites": 1,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "digit/digit": {
+          "sites": 12,
+          "marginalSum": 24,
+          "nonpositive": 0
+        },
+        "punctuation/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "newline/glyph": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "glyph/space": {
+          "sites": 3,
+          "marginalSum": 0,
+          "nonpositive": 3
+        },
+        "Latin/space": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "space/space": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "space/glyph": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "glyph/glyph": {
+          "sites": 46,
+          "marginalSum": -10,
+          "nonpositive": 41
+        },
+        "glyph/digit": {
+          "sites": 11,
+          "marginalSum": 0,
+          "nonpositive": 11
+        },
+        "digit/glyph": {
+          "sites": 10,
+          "marginalSum": 1,
+          "nonpositive": 9
+        },
+        "digit/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "newline/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "matrix": {
+        "Latin/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "glyph/punctuation": {
+          "sites": 3,
+          "marginalSum": 0,
+          "nonpositive": 3
+        },
+        "punctuation/glyph": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "glyph/glyph": {
+          "sites": 12,
+          "marginalSum": 4,
+          "nonpositive": 7
+        },
+        "Latin/Latin": {
+          "sites": 1,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "digit/glyph": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "glyph/digit": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "glyph/edge": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "matrix": {
+        "Latin/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/glyph": {
+          "sites": 15,
+          "marginalSum": 2,
+          "nonpositive": 13
+        },
+        "glyph/glyph": {
+          "sites": 30,
+          "marginalSum": 11,
+          "nonpositive": 19
+        },
+        "glyph/punctuation": {
+          "sites": 4,
+          "marginalSum": 2,
+          "nonpositive": 2
+        },
+        "glyph/digit": {
+          "sites": 24,
+          "marginalSum": 0,
+          "nonpositive": 24
+        },
+        "digit/glyph": {
+          "sites": 13,
+          "marginalSum": 2,
+          "nonpositive": 11
+        },
+        "digit/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "digit/Latin": {
+          "sites": 19,
+          "marginalSum": 19,
+          "nonpositive": 0
+        },
+        "Latin/digit": {
+          "sites": 11,
+          "marginalSum": 11,
+          "nonpositive": 0
+        },
+        "digit/digit": {
+          "sites": 1,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "punctuation/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "glyph/Latin": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "matrix": {
+        "Latin/space": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "Latin/punctuation": {
+          "sites": 5,
+          "marginalSum": 5,
+          "nonpositive": 0
+        },
+        "Latin/glyph": {
+          "sites": 23,
+          "marginalSum": 0,
+          "nonpositive": 23
+        },
+        "glyph/Latin": {
+          "sites": 7,
+          "marginalSum": 1,
+          "nonpositive": 6
+        },
+        "space/digit": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "space/glyph": {
+          "sites": 2,
+          "marginalSum": 1,
+          "nonpositive": 1
+        },
+        "glyph/glyph": {
+          "sites": 30,
+          "marginalSum": 4,
+          "nonpositive": 18
+        },
+        "glyph/digit": {
+          "sites": 18,
+          "marginalSum": 2,
+          "nonpositive": 16
+        },
+        "digit/digit": {
+          "sites": 6,
+          "marginalSum": 12,
+          "nonpositive": 0
+        },
+        "digit/space": {
+          "sites": 8,
+          "marginalSum": 8,
+          "nonpositive": 0
+        },
+        "glyph/punctuation": {
+          "sites": 5,
+          "marginalSum": 0,
+          "nonpositive": 5
+        },
+        "glyph/space": {
+          "sites": 5,
+          "marginalSum": 2,
+          "nonpositive": 3
+        },
+        "Latin/Latin": {
+          "sites": 5,
+          "marginalSum": 10,
+          "nonpositive": 0
+        },
+        "punctuation/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "Latin/digit": {
+          "sites": 11,
+          "marginalSum": 11,
+          "nonpositive": 0
+        },
+        "digit/glyph": {
+          "sites": 9,
+          "marginalSum": 1,
+          "nonpositive": 8
+        },
+        "digit/punctuation": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "digit/Latin": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        }
+      }
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "matrix": {
+        "newline/Latin": {
+          "sites": 4,
+          "marginalSum": 4,
+          "nonpositive": 0
+        },
+        "Latin/glyph": {
+          "sites": 43,
+          "marginalSum": 3,
+          "nonpositive": 40
+        },
+        "glyph/glyph": {
+          "sites": 109,
+          "marginalSum": 14,
+          "nonpositive": 75
+        },
+        "glyph/Latin": {
+          "sites": 37,
+          "marginalSum": 10,
+          "nonpositive": 27
+        },
+        "Latin/Latin": {
+          "sites": 53,
+          "marginalSum": 98,
+          "nonpositive": 0
+        },
+        "punctuation/Latin": {
+          "sites": 2,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "glyph/digit": {
+          "sites": 9,
+          "marginalSum": 2,
+          "nonpositive": 7
+        },
+        "digit/glyph": {
+          "sites": 6,
+          "marginalSum": 1,
+          "nonpositive": 5
+        },
+        "punctuation/glyph": {
+          "sites": 4,
+          "marginalSum": 3,
+          "nonpositive": 1
+        },
+        "newline/punctuation": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "Latin/punctuation": {
+          "sites": 4,
+          "marginalSum": 4,
+          "nonpositive": 0
+        },
+        "Latin/space": {
+          "sites": 9,
+          "marginalSum": 9,
+          "nonpositive": 0
+        },
+        "punctuation/punctuation": {
+          "sites": 2,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "glyph/punctuation": {
+          "sites": 6,
+          "marginalSum": 0,
+          "nonpositive": 6
+        },
+        "digit/Latin": {
+          "sites": 4,
+          "marginalSum": 4,
+          "nonpositive": 0
+        },
+        "Latin/digit": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "glyph/space": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "matrix": {
+        "Latin/glyph": {
+          "sites": 79,
+          "marginalSum": 17,
+          "nonpositive": 62
+        },
+        "glyph/punctuation": {
+          "sites": 25,
+          "marginalSum": 9,
+          "nonpositive": 16
+        },
+        "glyph/glyph": {
+          "sites": 200,
+          "marginalSum": 39,
+          "nonpositive": 150
+        },
+        "glyph/space": {
+          "sites": 56,
+          "marginalSum": 5,
+          "nonpositive": 51
+        },
+        "punctuation/glyph": {
+          "sites": 22,
+          "marginalSum": 3,
+          "nonpositive": 19
+        },
+        "glyph/Latin": {
+          "sites": 25,
+          "marginalSum": 6,
+          "nonpositive": 19
+        },
+        "space/space": {
+          "sites": 7,
+          "marginalSum": 7,
+          "nonpositive": 0
+        },
+        "glyph/newline": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "Latin/Latin": {
+          "sites": 3,
+          "marginalSum": 4,
+          "nonpositive": 0
+        },
+        "punctuation/punctuation": {
+          "sites": 7,
+          "marginalSum": 10,
+          "nonpositive": 0
+        },
+        "newline/glyph": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "space/glyph": {
+          "sites": 5,
+          "marginalSum": 0,
+          "nonpositive": 5
+        },
+        "space/Latin": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "Latin/space": {
+          "sites": 6,
+          "marginalSum": 6,
+          "nonpositive": 0
+        },
+        "Latin/punctuation": {
+          "sites": 8,
+          "marginalSum": 8,
+          "nonpositive": 0
+        },
+        "newline/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "punctuation/space": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "space/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "matrix": {
+        "space/Latin": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "punctuation/glyph": {
+          "sites": 6,
+          "marginalSum": 0,
+          "nonpositive": 6
+        },
+        "glyph/punctuation": {
+          "sites": 6,
+          "marginalSum": 0,
+          "nonpositive": 6
+        },
+        "Latin/glyph": {
+          "sites": 15,
+          "marginalSum": 3,
+          "nonpositive": 12
+        },
+        "glyph/space": {
+          "sites": 22,
+          "marginalSum": 2,
+          "nonpositive": 20
+        },
+        "space/glyph": {
+          "sites": 14,
+          "marginalSum": 2,
+          "nonpositive": 12
+        },
+        "glyph/glyph": {
+          "sites": 61,
+          "marginalSum": 27,
+          "nonpositive": 33
+        },
+        "Latin/space": {
+          "sites": 33,
+          "marginalSum": 33,
+          "nonpositive": 0
+        },
+        "space/digit": {
+          "sites": 3,
+          "marginalSum": 0,
+          "nonpositive": 3
+        },
+        "digit/glyph": {
+          "sites": 14,
+          "marginalSum": 0,
+          "nonpositive": 14
+        },
+        "Latin/Latin": {
+          "sites": 5,
+          "marginalSum": 10,
+          "nonpositive": 0
+        },
+        "glyph/digit": {
+          "sites": 13,
+          "marginalSum": 1,
+          "nonpositive": 12
+        },
+        "digit/space": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "glyph/Latin": {
+          "sites": 8,
+          "marginalSum": 0,
+          "nonpositive": 8
+        },
+        "punctuation/space": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "space/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/punctuation": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "Latin/digit": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "matrix": {
+        "Latin/space": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "space/digit": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "space/glyph": {
+          "sites": 11,
+          "marginalSum": 1,
+          "nonpositive": 10
+        },
+        "glyph/glyph": {
+          "sites": 51,
+          "marginalSum": 4,
+          "nonpositive": 34
+        },
+        "glyph/space": {
+          "sites": 7,
+          "marginalSum": 0,
+          "nonpositive": 7
+        },
+        "glyph/digit": {
+          "sites": 25,
+          "marginalSum": 0,
+          "nonpositive": 25
+        },
+        "punctuation/digit": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "digit/glyph": {
+          "sites": 21,
+          "marginalSum": 0,
+          "nonpositive": 21
+        },
+        "Latin/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/glyph": {
+          "sites": 12,
+          "marginalSum": 1,
+          "nonpositive": 11
+        },
+        "glyph/punctuation": {
+          "sites": 7,
+          "marginalSum": 2,
+          "nonpositive": 5
+        },
+        "Latin/digit": {
+          "sites": 9,
+          "marginalSum": 9,
+          "nonpositive": 0
+        },
+        "digit/Latin": {
+          "sites": 6,
+          "marginalSum": 6,
+          "nonpositive": 0
+        },
+        "punctuation/glyph": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "glyph/Latin": {
+          "sites": 7,
+          "marginalSum": 0,
+          "nonpositive": 7
+        },
+        "digit/punctuation": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "matrix": {
+        "newline/digit": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "digit/digit": {
+          "sites": 8,
+          "marginalSum": 16,
+          "nonpositive": 0
+        },
+        "digit/glyph": {
+          "sites": 20,
+          "marginalSum": 1,
+          "nonpositive": 19
+        },
+        "glyph/digit": {
+          "sites": 13,
+          "marginalSum": 0,
+          "nonpositive": 13
+        },
+        "glyph/glyph": {
+          "sites": 11,
+          "marginalSum": -8,
+          "nonpositive": 10
+        },
+        "space/digit": {
+          "sites": 4,
+          "marginalSum": 0,
+          "nonpositive": 4
+        },
+        "digit/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "punctuation/digit": {
+          "sites": 2,
+          "marginalSum": 0,
+          "nonpositive": 2
+        },
+        "glyph/Latin": {
+          "sites": 5,
+          "marginalSum": 0,
+          "nonpositive": 5
+        },
+        "glyph/punctuation": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "glyph/newline": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "matrix": {
+        "Latin/digit": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "digit/digit": {
+          "sites": 14,
+          "marginalSum": 28,
+          "nonpositive": 0
+        },
+        "digit/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "digit/glyph": {
+          "sites": 11,
+          "marginalSum": 1,
+          "nonpositive": 10
+        },
+        "glyph/glyph": {
+          "sites": 17,
+          "marginalSum": -6,
+          "nonpositive": 14
+        },
+        "glyph/digit": {
+          "sites": 10,
+          "marginalSum": 0,
+          "nonpositive": 10
+        },
+        "glyph/space": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "matrix": {
+        "Latin/glyph": {
+          "sites": 38,
+          "marginalSum": 7,
+          "nonpositive": 31
+        },
+        "glyph/glyph": {
+          "sites": 84,
+          "marginalSum": 21,
+          "nonpositive": 57
+        },
+        "glyph/punctuation": {
+          "sites": 22,
+          "marginalSum": 5,
+          "nonpositive": 17
+        },
+        "Latin/digit": {
+          "sites": 23,
+          "marginalSum": 23,
+          "nonpositive": 0
+        },
+        "digit/glyph": {
+          "sites": 64,
+          "marginalSum": 10,
+          "nonpositive": 54
+        },
+        "glyph/digit": {
+          "sites": 54,
+          "marginalSum": 7,
+          "nonpositive": 47
+        },
+        "space/glyph": {
+          "sites": 15,
+          "marginalSum": 5,
+          "nonpositive": 10
+        },
+        "space/digit": {
+          "sites": 3,
+          "marginalSum": 0,
+          "nonpositive": 3
+        },
+        "glyph/Latin": {
+          "sites": 36,
+          "marginalSum": 1,
+          "nonpositive": 35
+        },
+        "glyph/space": {
+          "sites": 11,
+          "marginalSum": 4,
+          "nonpositive": 7
+        },
+        "Latin/punctuation": {
+          "sites": 11,
+          "marginalSum": 11,
+          "nonpositive": 0
+        },
+        "punctuation/digit": {
+          "sites": 4,
+          "marginalSum": 4,
+          "nonpositive": 0
+        },
+        "digit/punctuation": {
+          "sites": 10,
+          "marginalSum": 10,
+          "nonpositive": 0
+        },
+        "digit/space": {
+          "sites": 5,
+          "marginalSum": 5,
+          "nonpositive": 0
+        },
+        "space/space": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "punctuation/glyph": {
+          "sites": 7,
+          "marginalSum": 5,
+          "nonpositive": 2
+        },
+        "glyph/newline": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "digit/digit": {
+          "sites": 11,
+          "marginalSum": 22,
+          "nonpositive": 0
+        },
+        "Latin/space": {
+          "sites": 6,
+          "marginalSum": 6,
+          "nonpositive": 0
+        },
+        "punctuation/punctuation": {
+          "sites": 1,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "space/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "matrix": {
+        "space/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/glyph": {
+          "sites": 98,
+          "marginalSum": 16,
+          "nonpositive": 82
+        },
+        "glyph/glyph": {
+          "sites": 288,
+          "marginalSum": 23,
+          "nonpositive": 197
+        },
+        "glyph/Latin": {
+          "sites": 92,
+          "marginalSum": 9,
+          "nonpositive": 83
+        },
+        "Latin/Latin": {
+          "sites": 11,
+          "marginalSum": 22,
+          "nonpositive": 0
+        },
+        "glyph/punctuation": {
+          "sites": 22,
+          "marginalSum": 8,
+          "nonpositive": 14
+        },
+        "digit/glyph": {
+          "sites": 29,
+          "marginalSum": 2,
+          "nonpositive": 27
+        },
+        "glyph/digit": {
+          "sites": 26,
+          "marginalSum": 2,
+          "nonpositive": 24
+        },
+        "Latin/digit": {
+          "sites": 5,
+          "marginalSum": 5,
+          "nonpositive": 0
+        },
+        "punctuation/glyph": {
+          "sites": 14,
+          "marginalSum": 5,
+          "nonpositive": 9
+        },
+        "Latin/punctuation": {
+          "sites": 2,
+          "marginalSum": 2,
+          "nonpositive": 0
+        },
+        "punctuation/Latin": {
+          "sites": 3,
+          "marginalSum": 3,
+          "nonpositive": 0
+        },
+        "digit/Latin": {
+          "sites": 4,
+          "marginalSum": 4,
+          "nonpositive": 0
+        },
+        "glyph/edge": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "matrix": {
+        "Latin/space": {
+          "sites": 4,
+          "marginalSum": 4,
+          "nonpositive": 0
+        },
+        "digit/digit": {
+          "sites": 16,
+          "marginalSum": 32,
+          "nonpositive": 0
+        },
+        "digit/space": {
+          "sites": 13,
+          "marginalSum": 13,
+          "nonpositive": 0
+        },
+        "digit/glyph": {
+          "sites": 58,
+          "marginalSum": 28,
+          "nonpositive": 30
+        },
+        "glyph/digit": {
+          "sites": 75,
+          "marginalSum": 24,
+          "nonpositive": 51
+        },
+        "Latin/glyph": {
+          "sites": 47,
+          "marginalSum": 11,
+          "nonpositive": 36
+        },
+        "glyph/glyph": {
+          "sites": 205,
+          "marginalSum": 78,
+          "nonpositive": 120
+        },
+        "glyph/space": {
+          "sites": 3,
+          "marginalSum": 0,
+          "nonpositive": 3
+        },
+        "space/glyph": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/Latin": {
+          "sites": 4,
+          "marginalSum": 8,
+          "nonpositive": 0
+        },
+        "glyph/Latin": {
+          "sites": 18,
+          "marginalSum": 11,
+          "nonpositive": 7
+        },
+        "space/digit": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        },
+        "digit/Latin": {
+          "sites": 19,
+          "marginalSum": 19,
+          "nonpositive": 0
+        },
+        "glyph/punctuation": {
+          "sites": 10,
+          "marginalSum": 4,
+          "nonpositive": 6
+        },
+        "digit/punctuation": {
+          "sites": 9,
+          "marginalSum": 9,
+          "nonpositive": 0
+        },
+        "Latin/punctuation": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "Latin/digit": {
+          "sites": 8,
+          "marginalSum": 8,
+          "nonpositive": 0
+        },
+        "punctuation/glyph": {
+          "sites": 1,
+          "marginalSum": 1,
+          "nonpositive": 0
+        },
+        "glyph/newline": {
+          "sites": 1,
+          "marginalSum": 0,
+          "nonpositive": 1
+        }
+      }
+    }
+  ]
+}

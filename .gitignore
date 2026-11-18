@@ -61,3 +61,5 @@ bench/x132/*.mjs
 bench/x126/*.mjs
 bench/x133/*.mjs
 bench/x133/prof*/
+
+bench/x134/*.mjs

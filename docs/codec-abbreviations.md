@@ -9374,3 +9374,94 @@ precisely in §C. The next highest-information test is cheap and concrete:
 > / newline / another glyph). That converts "make a glyph reference cost zero"
 > from a hope into a search over a table, and it is the only remaining way past
 > X129's one-token floor inside this contract.
+
+## X134 — ΑΛΛΟΜΟΡΦΗ / ALLOMORPH (occurrence-conditioned aliases; research draft)
+
+**Not an accepted frontier advance.** The new experimental module is
+`src/lib/omega/allomorph.ts`; it is **not wired** into the default stack.
+Full A–J formal model, outcome space, 18 failure shapes, six-mechanism portfolio,
+adversarial gates, and reproduction commands: [`bench/x134/README.md`](../bench/x134/README.md).
+Live literature and individually scoped lab review: [`research.md`](../bench/x134/research.md).
+The complete measured result and local-leader table: [`results.md`](../bench/x134/results.md).
+
+| Design field | Specification |
+|---|---|
+| Name | ALLOMORPH: alternate forms of one symbol |
+| Mechanism | Add a fresh ordinary rule `h=g`; change only selected body occurrences of `g` to `h`, allowing one meaning multiple context-conditioned spellings |
+| Difference from X130 | X130 renames a rule everywhere bijectively; this duplicates its spelling and retains both names in one message |
+| Difference from X133 | X133's rename/drop/span operators are global per rule; this adds a per-occurrence alias decision |
+| Greedy? | Yes: at most four strictly improving passes; finite-window screens are heuristics, not proofs of optimality |
+| CPU/time bound | CPU/work-bound, 65,536-code-unit message cap, finite script pool; no wall-clock deadline in the new module |
+| Objective | Full emitted-message o200k_base count, including the added definition |
+| Decoder | Existing ordinary acyclic substitution; no added opcode, skills.md, tokenizer vocabulary, or system prompt |
+| Invariant | Actual CHIRON decoder equality, unchanged prefix; malformed passthrough is not treated as proof of validity |
+| Exactness evidence | Both accepted real messages independently reconstruct source UTF-8 bytes via the existing CPython reader |
+| LLM evidence | **No blind model test available/run.** Structural readability is not a guarantee of native byte-perfect execution |
+| Citation / novelty | Engineering hypothesis; homophonic coding and dictionary coding are not new ideas. No claim of absence from training data or worldwide novelty. Live sources and non-transferable hypotheses are explicitly scoped in research.md |
+| Default status | Unwired experimental API; not merged as a frontier addition |
+
+### Reconfirmed frontier — one-token drift, not exact identity
+
+On the canonical 29 paths, the full X133 configuration produced **28,015 raw ->
+11,962 shipped tokens**, versus **11,961** in the previous actual receipt.
+Only `bench/holdout-x41/ls-real.txt` changed: **413 -> 414**. X133 retains a
+wall-clock search limit even under `OMEGA_DET=1`, so reproducibility cannot be
+claimed from that switch alone. No causal attribution of this drift was proved.
+
+The encoder's `decoded` field equals source on 29/29. The independently run
+CPython emitted-wire reader directly reconstructs source on **19/29**; ten lanes
+need additional parent inversion. Do not conflate these two verification scopes.
+This audit is not evidence that the ten composed messages are corrupt.
+
+### Results and rejection boundary
+
+ALLOMORPH: **11,962 -> 11,960, aggregate −2**. `kb-article` saves one token;
+`ps-aux-real` saves one. Both winners pass independent source-byte decoding.
+The library tokenizer independently recounts accepted output. The 34-case
+adversarial unit suite and `tsc --noEmit` pass. The three positive constructed
+unit witnesses are **not** claimed as real-workload gains.
+
+Reusing VELTISTOS for cooperative alias parsing gives the same −2, not extra
+savings. Glyph eviction finds −1; partial-context specialization finds −5
+across three lanes, but is related dictionary induction, not an unrelated new
+mechanism. These alternative deltas must not be added. Escaped Latin naming
+finds no paying case. Full-carrier reversal, ASCII case-plane separation, and
+explicit line permutation cost +6,319 / +2,730 / +1,000 tokens respectively
+before fallback; they are rejected controls, not shipped codecs.
+
+**No significant whole-stack speedup was found.** The new search adds 12,736 ms
+over frozen outputs. The 1,191,329-ms baseline run had some overlapping small
+post-processing jobs and is not a controlled speed comparison. X133's prior
++5.20% runtime is an overhead, not a speed improvement over the shipped stack.
+
+### Generalized local leaders and the requested adjacency test
+
+The refreshed body-token census uses actual wire-declared rule names, not
+characters absent from source:
+
+- **Prose:** word-like BPE tokens lead, 1,629/2,807 (58.0%).
+- **Ops/tabular:** glyph-bearing tokens lead narrowly, 1,202/3,495 (34.4%);
+  word-like 1,105 and numeric 808 remain substantial.
+- **Code/structured:** word-like tokens lead, 945/1,993 (47.4%).
+- **Other:** four tape-free lanes; no dictionary-body leader is inferred.
+
+These are token classes, not word frequencies. In particular the old inference
+that a 58% word-like token share proves 58% of words are single-token and
+incompressible is not established by this census.
+
+The neighbor-class experiment measures 4,493 glyph sites. Of these, 2,951 have
+nonpositive **three-character marginal** cost. Latin/glyph and glyph/glyph
+contexts often already merge; Latin/Latin has 130 sites, marginal sum 249, and
+zero nonpositive marginals. This local diagnostic is not a full-message deletion
+cost. The associated escaped-Latin test did not repay header/escape costs.
+
+### Acceptance decision
+
+The requested substantial (>10-token in a real lane) gain, significant
+whole-stack acceleration, and independent blind native-LLM decoding gates are
+**unmet**. Preserve the candidate and receipts in a draft PR; do not call it a
+successful Pareto advance or merge it as one. Failed searches do not prove the
+contract impossible. The next untested interface is joint multi-alias allocation
+with collision escapes priced together, followed by held-out real workloads
+and a message-only model reader. Successful raw-input parent preconditioning
+also remains outstanding.

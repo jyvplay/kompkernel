@@ -1,0 +1,14 @@
+[
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "layerEqual": true,
+    "prefixEqual": true,
+    "directSourceExact": true
+  },
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "layerEqual": true,
+    "prefixEqual": true,
+    "directSourceExact": true
+  }
+]
