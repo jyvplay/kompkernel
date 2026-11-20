@@ -1,0 +1,23 @@
+src/lib/omega/colex.ts:1:/** X144b COLEX — suffix-first lexical-component preconditioning.
+src/lib/omega/colex.ts:2: * Reverses separator-delimited components inside maximal ASCII lexemes, not
+src/lib/omega/colex.ts:4: * An involution; classical colexicographic/suffix locality ancestry, no claim of
+src/lib/omega/colex.ts:9:export const COLEX_SEPARATORS=['/','-','_','.'] as const;
+src/lib/omega/colex.ts:10:export type ColexSeparator=typeof COLEX_SEPARATORS[number];
+src/lib/omega/colex.ts:11:export const colexKey=(sep:ColexSeparator)=>`After decoding the payload, reverse the order of ${JSON.stringify(sep)}-separated components, including empty ones, within every maximal [A-Za-z0-9_./+-]+ run. Preserve all other characters; print only.\n` [... omitted end of long line]
+src/lib/omega/colex.ts:12:export function colexUndo(text:string,sep:ColexSeparator):string{
+src/lib/omega/colex.ts:13: if(!COLEX_SEPARATORS.includes(sep)||text.length>50000||!isUtf8TransportStable(text))throw Error('COLEX domain');
+src/lib/omega/colex.ts:16:export function colexPlans(text:string,enc:EncodingName='o200k_base'){
+src/lib/omega/colex.ts:18: const plans=[];for(const sep of COLEX_SEPARATORS){
+src/lib/omega/colex.ts:19:  const folded=colexUndo(text,sep);if(folded===text)continue;
+src/lib/omega/colex.ts:20:  if(colexUndo(folded,sep)!==text)throw Error('COLEX inverse');
+src/lib/omega/colex.ts:21:  const contract=colexKey(sep),message=contract+folded;
+src/lib/omega/colex.ts:25:export function colexDecode(message:string):string{
+src/lib/omega/colex.ts:26: for(const sep of COLEX_SEPARATORS)if(message.startsWith(colexKey(sep)))return colexUndo(message.slice(colexKey(sep).length),sep);
+src/lib/omega/colex.ts:29:export function colexEncode(text:string,enc:EncodingName='o200k_base'){
+src/lib/omega/colex.ts:30: if(!isUtf8TransportStable(text))throw Error('COLEX source is not UTF-8 transport stable');
+src/lib/omega/colex.ts:31: if(COLEX_SEPARATORS.some(s=>text.startsWith(colexKey(s))))throw Error('COLEX reserved envelope');
+src/lib/omega/colex.ts:32: const p=colexPlans(text,enc).sort((a,b)=>a.tokens-b.tokens)[0],raw=countTokens(text,enc);
+src/lib/omega/tabmin.ts:118:  const colExact = back === text && col.exact;
+src/lib/omega/tabmin.ts:120:  if (colExact && colTokens < rowTokens) {
+src/lib/omega/tabmin.ts:129:    messageTokens: rowTokens, columnMessageTokens: colExact ? colTokens : null,
+src/lib/omega/tabmin.ts:130:    notes: colExact ? `row arm ${rowTokens} <= column ${colTokens}` : 'column arm failed verification; row arm',

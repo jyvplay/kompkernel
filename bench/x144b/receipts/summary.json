@@ -1,0 +1,73 @@
+{
+  "lanes": 29,
+  "tokens": 11962,
+  "messageIdenticalX144": true,
+  "priced": {
+    "probe": 81,
+    "parent": 4,
+    "heldout-probe": 6,
+    "heldout-parent": 2
+  },
+  "wins": {
+    "probe": 0,
+    "parent": 0,
+    "heldout-probe": 0,
+    "heldout-parent": 0
+  },
+  "repair": [
+    {
+      "path": "bench/x144/heldout/vite.md",
+      "old": 253,
+      "safe": 274
+    },
+    {
+      "path": "bench/x144/heldout/drizzle.md",
+      "old": 643,
+      "safe": 643
+    },
+    {
+      "path": "bench/x144/heldout/git-log.txt",
+      "old": 43,
+      "safe": 43
+    }
+  ],
+  "codecUnit": {
+    "checks": 74131,
+    "fixtures": 510
+  },
+  "admissionAttack": {
+    "fixtures": 6,
+    "checks": 20,
+    "scope": "end-to-end admission and memo attacks; program decoding not native"
+  },
+  "scanUnit": {
+    "checks": 171072,
+    "arms": 2,
+    "oracle": "actual Node UTF-8 round trip"
+  },
+  "finalGate": {
+    "prices": 127,
+    "transportStable": 127,
+    "tokenIdRoundTrips": 127,
+    "sourceByteExact": 119,
+    "unsupported": [
+      "frontier:bench/holdout-tbl/df-h.txt",
+      "frontier:bench/holdout-tbl/markdown-table.md",
+      "frontier:bench/holdout-tbl/psql-output.txt",
+      "frontier:bench/holdout-x40/prices.csv",
+      "frontier:bench/holdout-x40/cue-sheet.md",
+      "frontier:bench/holdout-tbl/kubectl-get-pods.txt",
+      "frontier:bench/holdout-x40/metrics.tsv",
+      "frontier:bench/holdout-x41/ls-l-real.txt"
+    ],
+    "native": "NOT_RUN"
+  },
+  "independentCandidateReads": 93,
+  "native": "NOT_RUN",
+  "leanReplay": "NOT_RUN",
+  "paretoSuperiorCodec": false,
+  "fastPathAccepted": false,
+  "broadSpeedup": false,
+  "tsc": "PASS",
+  "build": "PASS"
+}

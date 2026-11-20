@@ -1,3 +1,4 @@
+import { isUtf8TransportStable } from './utf8-wire';
 /**
  * TAGSTACK (X47) — exact in-band close-tag stack elision.
  *
@@ -57,7 +58,7 @@ import { mekosEncode, mekosExpand, MEKOS_KEY } from './mekos';
 import { synthesisEncode, synthesisDecode, synthesisParseKey } from './synthesis';
 
 export type TagstackMode = 'xml' | 'html';
-export type TagstackFrontierParent = 'synkrisis' | 'bifront' | 'kanon' | 'akolouthia2' | 'apographe' | 'metron' | 'hemera' | 'diastema';
+export type TagstackFrontierParent = 'identity' | 'synkrisis' | 'bifront' | 'kanon' | 'akolouthia2' | 'apographe' | 'metron' | 'hemera' | 'diastema';
 
 const HTML_VOID_NAMES = 'area base br col embed hr img input link meta param source track wbr';
 const HTML_VOID = new Set(HTML_VOID_NAMES.split(' '));
@@ -401,6 +402,7 @@ function tagstackEncodeInner(text: string, enc: EncodingName = 'o200k_base'): Ta
 }
 
 function tagstackEncodeInnerMeasured(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
+  if (!isUtf8TransportStable(text)) throw new Error('TAGSTACK source is not UTF-8 transport stable');
   const started = Date.now();
   const inTokens = countTokens(text, enc);
   // X57: each frontier parent is measured inside its OWN deterministic
@@ -428,11 +430,13 @@ function tagstackEncodeInnerMeasured(text: string, enc: EncodingName = 'o200k_ba
     if (candidate.decoded !== text) {
       throw new Error(`${candidate.codec} comparator did not reconstruct the source exactly`);
     }
+    // X144b: a code-unit inverse is not a UTF-8 wire inverse.
+    if (candidate.codec === 'synkrisis') synTokens = countTokens(candidate.message, enc);
+    if (!isUtf8TransportStable(candidate.message)) return;
     const tokens = countTokens(candidate.message, enc);
     if (!Number.isFinite(tokens)) throw new Error(`${candidate.codec} produced a non-finite full-message cost`);
     frontierCosts[candidate.codec] = tokens;
     if (Number.isFinite(candidate.reportedTokens)) frontierReportedCosts[candidate.codec] = candidate.reportedTokens!;
-    if (candidate.codec === 'synkrisis') synTokens = tokens;
     if (!parent || tokens < parent.tokens) parent = { ...candidate, tokens };
   };
 
@@ -478,6 +482,10 @@ function tagstackEncodeInnerMeasured(text: string, enc: EncodingName = 'o200k_ba
   const diastemaMessage = d.contract ? d.contract + '\n' + d.wire : d.wire;
   consider({ codec: 'diastema', wire: d.wire, message: diastemaMessage, decoded: d.decoded,
     reportedTokens: d.messageTokens });
+  if (!parent) {
+    parent = {codec: 'identity', wire: text, message: text, decoded: text, tokens: inTokens};
+    frontierCosts.identity = inTokens;
+  }
   const bestParent = parent as { codec: TagstackFrontierParent; wire: string; message: string; decoded: string; tokens: number } | null;
   if (!bestParent) throw new Error('current frontier has no exact parent');
 
@@ -508,7 +516,7 @@ function tagstackEncodeInnerMeasured(text: string, enc: EncodingName = 'o200k_ba
   const candidateMessage = contract + '\n' + childMessage;
   const candidateTokens = countTokens(candidateMessage, enc);
   const decoded = tagstackRestore(parentDecoded, plan.mode, plan.marker);
-  const candidateExact = parentDecoded === plan.text && decoded === text;
+  const candidateExact = parentDecoded === plan.text && decoded === text && isUtf8TransportStable(candidateMessage);
   if (!candidateExact) return fallback('composed APOGRAPHE + stack inverse failed exactness', plan.mode, plan.marker, plan.pairs,
     candidateTokens, false, candidateMessage);
   if (candidateTokens >= bestParent.tokens) return fallback(
@@ -655,7 +663,7 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
    * decoded, byte-exact message, in the same process, or not at all.
    */
   const stich = stichomythiaEncode(text, enc);
-  let best = (!stich.applied || stich.decoded !== text || stich.messageTokens >= base.messageTokens)
+  let best = (!stich.applied || stich.decoded !== text || !isUtf8TransportStable(stich.message) || stich.messageTokens >= base.messageTokens)
     ? base
     : {
       ...base,
@@ -692,7 +700,7 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
    */
   type WideResult = { applied: boolean; decoded: string; message: string; messageTokens: number; notes: string };
   const admit = (name: string, cand: WideResult | null): void => {
-    if (!cand || !cand.applied || cand.decoded !== text || cand.messageTokens >= best.messageTokens) return;
+    if (!cand || !cand.applied || !isUtf8TransportStable(cand.message) || cand.decoded !== text || cand.messageTokens >= best.messageTokens) return;
     best = {
       ...best,
       wire: cand.message,
@@ -733,7 +741,7 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
    * the lane's own `exact` flag can be re-checked after the fact and still hold.
    */
   const admitParentRelative = (name: string, cand: WideResult | null): void => {
-    if (!cand || !cand.applied) return;
+    if (!cand || !cand.applied || !isUtf8TransportStable(cand.message)) return;
     if (cand.messageTokens >= best.messageTokens) return; // must beat the incumbent on the message
     // THE INVARIANT, checked with the repository's own decoder on the exact strings
     // rather than by trusting either codec's self-report.  A wire-level codec edits
@@ -1080,7 +1088,7 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
             let candExp: string | null = null;
             try { candExp = chironDecode(rw.message.slice(cstart)); } catch { candExp = null; }
             const tok = countTokens(rw.message, enc);
-            if (candExp === incExp && tok < best.messageTokens) {
+            if (candExp === incExp && tok < best.messageTokens && isUtf8TransportStable(rw.message)) {
               best = {
                 ...best,
                 wire: rw.message,
@@ -1131,7 +1139,7 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
             let candExp: string | null = null;
             try { candExp = chironDecode(rw.message.slice(cstart)); } catch { candExp = null; }
             const tok = countTokens(rw.message, enc);
-            if (candExp === incExp && tok < best.messageTokens) {
+            if (candExp === incExp && tok < best.messageTokens && isUtf8TransportStable(rw.message)) {
               best = {
                 ...best,
                 wire: rw.message,
@@ -1177,7 +1185,7 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
           const cAt = s.message.indexOf(CHIRON_START);
           let candExp: string | null = null;
           try { candExp = cAt >= 0 ? chironDecode(s.message.slice(cAt)) : null; } catch { candExp = null; }
-          if (candExp === incExp && s.tokens < best.messageTokens) {
+          if (candExp === incExp && s.tokens < best.messageTokens && isUtf8TransportStable(s.message)) {
             best = {
               ...best,
               wire: s.message,

@@ -1,0 +1,61 @@
+{
+  "measurements": 24,
+  "comparison": "repaired JS surrogate scan A vs repaired native-regex fast path B; not old unsafe production",
+  "isolated": true,
+  "wireSourceIdentical": true,
+  "acceptFastPath": false,
+  "broadTenPercent": false,
+  "rows": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "A": [
+        5137.270351,
+        5140.1329000000005,
+        5106.491909999997,
+        5047.600658000003
+      ],
+      "B": [
+        4848.432220000001,
+        5102.251693000002,
+        5067.321445999998,
+        5001.877448000007
+      ],
+      "BoverATotal": 0.9798539952411504,
+      "BoverAMedian": 0.982959057175254
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "A": [
+        16760.463883000004,
+        17263.920866,
+        16589.00330100002,
+        15703.667650999996
+      ],
+      "B": [
+        16395.03106200001,
+        18520.50886500001,
+        17881.673008000012,
+        15687.10324300002
+      ],
+      "BoverATotal": 1.0326802879604824,
+      "BoverAMedian": 1.027803649182283
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "A": [
+        14483.57462900001,
+        13387.948480000021,
+        13033.07186299999,
+        13276.812450000027
+      ],
+      "B": [
+        14937.050481000013,
+        14226.467656000023,
+        12837.953838999965,
+        13332.103527
+      ],
+      "BoverATotal": 1.0212650083455035,
+      "BoverAMedian": 1.0335202800185006
+    }
+  ]
+}

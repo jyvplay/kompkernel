@@ -1,0 +1,4 @@
+4183b2057cff350d66848215ff7167196dfc20e1891b598fdddea59077a76685  bench/x144/receipts/openai-sat.lean
+47f78a9550d95b37d8718dd1ee16ae824da893a5e17c319f737e6d0a5ed24944  bench/x144/receipts/anthropic-main.lean
+29d2f08aea22c97e0b695328eb86047b92982afbf6b4d9739d6e4efb805ad8da  bench/x144/receipts/axiom-basic.lean
+3cd9fcca85329cb427571be871f32ddbff42fab0d8a19e716cf85716d1d8a4a7  bench/x144/receipts/deepmind-trusted-base.md

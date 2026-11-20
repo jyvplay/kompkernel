@@ -1,0 +1,14 @@
+--- a/src/lib/omega/utf8-wire.ts
++++ b/src/lib/omega/utf8-wire.ts
+@@ -3,7 +3,11 @@
+  * halves, irreversibly changing the message. This is NOT a decoder correctness
+  * or native-reading test. X144b wires the stability predicate into TAGSTACK candidate admission.
+  */
++let fastScan = true;
++export function setUtf8FastScan(v:boolean):void { fastScan=v; }
+ export function isUtf8TransportStable(text:string):boolean {
++ // Native regexp scan avoids a JS per-character loop on the common BMP path.
++ if(fastScan&&!/[\uD800-\uDFFF]/.test(text))return true;
+  for(let i=0;i<text.length;i++){
+   const c=text.charCodeAt(i);
+   if(c>=0xd800&&c<=0xdbff){

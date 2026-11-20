@@ -90,3 +90,9 @@ bench/x143/*.mjs
 
 # X143b generated bundles
 bench/x143b/*.mjs
+
+# X144 bundles
+bench/x144/*.mjs
+
+# X144b bundles
+bench/x144b/*.mjs
