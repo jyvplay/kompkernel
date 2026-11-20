@@ -10460,3 +10460,48 @@ remaining eight are unsupported, not verified. X134 classification is rerun in
 ΠΟΛΥΣΤΗΛΗ, not a new primitive: 2871 raw vs 2901 one-grid, but **1046 complete
 parent tokens vs 980 incumbent**, source-read exact, so it is rejected. See
 `bench/x150/README.md` for full limitations and reproducible commands.
+
+### X151: DIATHESIS (ΔΙΑΘΕΣΙΣ), experimental grammar-order carrier
+
+Not an acronym: the name refers to arrangement. `src/lib/omega/diathesis.ts`
+carries seven lowercase hexadecimal digits as the lexicographic permutation rank
+of twelve existing contiguous independent CHIRON rules, modulo 16^7. The entire
+reader instruction is transmitted. Unique keys, Unicode-code-point sort order,
+window start/size and a sole collision-free `~` residual marker are required.
+The bounded reader refuses unsupported parents; decoded bytes and full o200k
+message cost are checked before strict incumbent selection. Unwired/default-off.
+
+Search: deterministic first eligible source site, then bounded enumeration of
+independent windows and congruent ranks (128-trial cap). Not greedy hill-climbing,
+not globally exhaustive; minimal feasible window size only. Parent TAGSTACK search
+retains its existing heuristic/greedy components. CPU work includes parent search,
+BigInt rank/unrank, parsing and tokenization; no new wall-time or CPU speed win.
+50,000 UTF-16-code-unit input cap; up to 512 parsed rules and reader windows up to 20.
+
+Novelty scope: repository-specific combination of existing grammar-order freedom
+and information-carrying permutation rank. VALENCE already ranks permutations;
+METATAXIS already optimizes tape order. No claim to invent either primitive.
+External antecedents: *Steganography 19 — The Order of the Code* (2010),
+https://www.codeproject.com/Articles/62290/Steganography-19-The-Order-of-the-Code;
+Sadié et al. (2024), https://doi.org/10.1007/978-3-031-63110-8_14.
+These concern permutation embedding, not a theorem of net chat-token reduction.
+
+Actual full parent: ps-aux **1062 vs 980**, rejected; kubectl folded parent 319 vs
+300 with no supported feasible carrier, rejected. The ps-aux emitted candidate is
+independently Python-decoded to source bytes. Synthetic 5928 assertions are not a
+frontier gain; native single-chat decoding is **NOT_RUN**, not confirmed.
+
+X151 pre-repair baseline: 29/29 messages equal X150, 11962 tokens, workers exit 0;
+bounded source reader 21/29 with eight unsupported. Category totals/leaders are
+unchanged and identity-bound in `bench/x151/receipts/local-leaders.json`: prose
+word-class, ops/tabular glyph-class, code/structured word-class, other no tape.
+This is token-class census, not per-codec ablation. Timing was concurrent and is
+not evidence of acceleration. See `bench/x151/README.md` for the post-repair gate.
+
+ARIADNE scratch repair: dynamically grow all four affected-pattern/update arrays
+past 65536 patterns and clear generation stamps before signed Int32 wrap. Boundary
+reproducers failed before and pass after; 70 patch-specific regression assertions
+cover both scorers and commits. Correctness repair, **not** a speedup claim.
+
+X151 post-repair full rerun also completed: **29/29 wires identical, 11962 tokens**,
+both workers exit zero, 884245 ms concurrent wall. No controlled speed claim.

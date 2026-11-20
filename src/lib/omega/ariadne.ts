@@ -624,20 +624,31 @@ export function prepareRunCostState(
 }
 
 /** Score a candidate relative to `before`, touching only patterns it changes. */
-/**
- * X82 SPEED scratch for the affected-pattern set in `scoreRunCostDelta`. Sized to
- * the largest pattern count any prepared run can produce; the generation stamp
- * means an oversized call is impossible as long as `affCount` cannot exceed the
- * number of distinct patterns, which it cannot (each pattern is stamped at most
- * once per call).
+/** Generation-stamped, synchronous scratch shared by both delta scorers.
+ * X151: grow to the actual pattern count; reset before signed Int32 overflow.
+ * Results using UPD_* must still be committed before the next scorer call.
  */
 const AFF_MAX = 1 << 16;
-const AFF_GEN = new Int32Array(AFF_MAX);
-const AFF_LIST = new Int32Array(AFF_MAX);
+let AFF_GEN = new Int32Array(AFF_MAX);
+let AFF_LIST = new Int32Array(AFF_MAX);
 let AFF_GEN_COUNTER = 0;
-/** X95 / ANAKLESIS scratch: the recomputed per-pattern costs, parallel to `AFF_LIST`. */
-const UPD_IDX = new Int32Array(AFF_MAX);
-const UPD_VAL = new Float64Array(AFF_MAX);
+let UPD_IDX = new Int32Array(AFF_MAX);
+let UPD_VAL = new Float64Array(AFF_MAX);
+
+function nextAffectedGeneration(patternCount: number): number {
+  if (patternCount > AFF_GEN.length) {
+    const size = Math.max(patternCount, AFF_GEN.length * 2);
+    AFF_GEN = new Int32Array(size);
+    AFF_LIST = new Int32Array(size);
+    UPD_IDX = new Int32Array(size);
+    UPD_VAL = new Float64Array(size);
+  }
+  if (AFF_GEN_COUNTER >= 0x7fffffff) {
+    AFF_GEN.fill(0);
+    AFF_GEN_COUNTER = 0;
+  }
+  return ++AFF_GEN_COUNTER;
+}
 
 
 export function scoreRunCostDelta(
@@ -656,7 +667,7 @@ export function scoreRunCostDelta(
    * O(1) with no allocation and no clearing pass. Semantics are identical — the set
    * was local to the call and never escaped it.
    */
-  const gen = ++AFF_GEN_COUNTER;
+  const gen = nextAffectedGeneration(p.pats.length);
   let affCount = 0;
   for (let slot = 0; slot < before.length; slot++) {
     if (before[slot] === after[slot]) continue;
@@ -730,7 +741,7 @@ export function scoreRunCostDeltaSlots(
   if (after.length !== state.patternsBySlot.length) {
     throw new Error('run-cost candidate length mismatch');
   }
-  const gen = ++AFF_GEN_COUNTER;
+  const gen = nextAffectedGeneration(p.pats.length);
   let affCount = 0;
   for (let c = 0; c < changed.length; c++) {
     const slot = changed[c];

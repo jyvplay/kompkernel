@@ -1,0 +1,7 @@
+{
+  "lanes": 29,
+  "identicalWires": 29,
+  "tokens": 11962,
+  "sourceMatched": 29,
+  "note": "exact wire identity inherits prior wire-reader coverage, not native-chat verification; timings not controlled speed evidence"
+}

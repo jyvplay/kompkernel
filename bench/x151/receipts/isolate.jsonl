@@ -1,0 +1,25 @@
+{"path":"bench/holdout-work/kb-article.txt","rules":27,"isolated":19,"examples":[{"glyph":"с","raw":"\n"},{"glyph":"е","raw":" the"},{"glyph":"о","raw":" it"}]}
+{"path":"bench/holdout-x42b/vmstat.txt","rules":11,"isolated":3,"examples":[{"glyph":"н","raw":"49"},{"glyph":"л","raw":"268"},{"glyph":"д","raw":"45"}]}
+{"path":"bench/holdout-work/unified-diff.patch","rules":33,"isolated":12,"examples":[{"glyph":"п","raw":"], [0x"},{"glyph":"Н","raw":" export const CHIRON_SCRIPTS: ChironScript[] = [\n"},{"glyph":"а","raw":" hi"}]}
+{"path":"bench/holdout-tbl/df-h.txt","rules":16,"isolated":1,"examples":[{"glyph":"о","raw":"G   "}]}
+{"path":"bench/holdout-x41/df-real.txt","rules":13,"isolated":3,"examples":[{"glyph":"р","raw":"\ntmpfs          "},{"glyph":"б","raw":"run"},{"glyph":"қ","raw":"       "}]}
+{"path":"bench/holdout-x41/du-real.txt","rules":23,"isolated":1,"examples":[{"glyph":"р","raw":"2"}]}
+{"path":"bench/holdout-x41/node-help.txt","rules":41,"isolated":18,"examples":[{"glyph":"э","raw":"=..."},{"glyph":"Ф","raw":" [options] [ script.js"},{"glyph":"й","raw":" are placed before IPv"}]}
+{"path":"bench/holdout-x42/findmnt.txt","rules":25,"isolated":1,"examples":[{"glyph":"ة","raw":"dev"}]}
+{"path":"bench/holdout-x42/df-h.txt","rules":13,"isolated":3,"examples":[{"glyph":"р","raw":"\ntmpfs          "},{"glyph":"б","raw":"run"},{"glyph":"қ","raw":"       "}]}
+{"path":"bench/holdout-work/email-thread.txt","rules":39,"isolated":13,"examples":[{"glyph":"с","raw":" Marcus Oyelaran <m.oyelaran"},{"glyph":"щ","raw":" Priya Raghunathan <priya.r"},{"glyph":"х","raw":" Tom Beckett <tbeckett"}]}
+{"path":"bench/holdout-work/llm-answer.md","rules":34,"isolated":14,"examples":[{"glyph":"С","raw":"|---|---"},{"glyph":"і","raw":" Vite"},{"glyph":"з","raw":" the"}]}
+{"path":"bench/holdout-tbl/markdown-table.md","rules":12,"isolated":6,"examples":[{"glyph":"ة","raw":" s | **-~"},{"glyph":"ط","raw":"300"},{"glyph":"ل","raw":"220"}]}
+{"path":"bench/holdout-tbl/psql-output.txt","rules":20,"isolated":12,"examples":[{"glyph":"л","raw":"01"},{"glyph":"г","raw":"05"},{"glyph":"і","raw":"+----+--------------+------------+--------+-----------+\n"}]}
+{"path":"bench/holdout-x40/prices.csv","rules":9,"isolated":3,"examples":[{"glyph":"о","raw":","},{"glyph":"л","raw":"##"},{"glyph":"е","raw":"010"}]}
+{"path":"bench/holdout-x42/ps-ef.txt","rules":28,"isolated":3,"examples":[{"glyph":"ض","raw":"mm_percpu_wq"},{"glyph":"د","raw":"_gp"},{"glyph":"ئ","raw":"migration"}]}
+{"path":"bench/holdout-x41/ls-real.txt","rules":46,"isolated":2,"examples":[{"glyph":"й","raw":"6"},{"glyph":"ә","raw":"-im"}]}
+{"path":"bench/holdout/json-pkg.txt","rules":48,"isolated":6,"examples":[{"glyph":"ю","raw":"\": \"./lib/typescript"},{"glyph":"И","raw":"\": \"./bin/ts"},{"glyph":"ш","raw":"dprint"}]}
+{"path":"bench/holdout/code-ts.txt","rules":75,"isolated":17,"examples":[{"glyph":"ү","raw":" array2"},{"glyph":"ў","raw":"const createClass"},{"glyph":"ї","raw":" startIndex"}]}
+{"path":"bench/holdout-x42/dpkg-l.txt","rules":32,"isolated":1,"examples":[{"glyph":"ت","raw":"++"}]}
+{"path":"bench/holdout-x41/ps-real.txt","rules":30,"isolated":3,"examples":[{"glyph":"п","raw":"\n     "},{"glyph":"л","raw":"_percpu_wq"},{"glyph":"ө","raw":"2"}]}
+{"path":"bench/holdout-tbl/kubectl-get-pods.txt","rules":25,"isolated":0,"examples":[]}
+{"path":"bench/holdout-x40/metrics.tsv","rules":18,"isolated":0,"examples":[]}
+{"path":"bench/holdout-x41/ps-aux-real.txt","rules":76,"isolated":4,"examples":[{"glyph":"қ","raw":" ps aux --sort=-%mem"},{"glyph":"Й","raw":" git log --stat -30"},{"glyph":"Л","raw":" apt list --installed"}]}
+{"path":"bench/holdout-x41/apt-real.txt","rules":61,"isolated":2,"examples":[{"glyph":"Д","raw":"+dfsg"},{"glyph":"Є","raw":"binutils"}]}
+{"path":"bench/holdout-x41/ls-l-real.txt","rules":117,"isolated":3,"examples":[{"glyph":"э","raw":" libcurl-gnutls.so"},{"glyph":"П","raw":"BrokenLocale"},{"glyph":"ҷ","raw":"anl"}]}

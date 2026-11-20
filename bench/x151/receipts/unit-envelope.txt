@@ -1,0 +1,3 @@
+After decoding, replace the sole ~ with 7 lowercase hexadecimal digits, including leading zeroes: use the zero-based lexicographic permutation rank of the 12 consecutive § rule keys starting at rule 1 (rules count from 1), reduced modulo 16^7. Sort keys by Unicode code point for ranking. Preserve everything else.
+¶ k=v. expand repeatedly; print only.
+§д 4в 2й 9г 3б 1з 7е 5ж 6к 10а 0л 11и 8¶commit ~4 is a real-shaped hexadecimal field

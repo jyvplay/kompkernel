@@ -1,0 +1,25 @@
+1.31s (garbage collector) :-1
+1.26s countLongRaw r/kompkernel/bench/x151/profile.mjs:2321
+1.21s scoreRunCostDeltaSlots r/kompkernel/bench/x151/profile.mjs:6421
+1.14s countTokens3 r/kompkernel/bench/x151/profile.mjs:2372
+1.11s chunkCountFast r/kompkernel/bench/x151/profile.mjs:2261
+0.75s renderBest r/kompkernel/bench/x151/profile.mjs:6727
+0.52s getBpeRankFromString r/kompkernel/bench/x151/profile.mjs:602
+0.44s rankAt r/kompkernel/bench/x151/profile.mjs:1946
+0.41s encode node:internal/encoding:350
+0.39s evaluate r/kompkernel/bench/x151/profile.mjs:7827
+0.34s RegExp: [^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n/]*|\s*[\r\n]+|\s+(?!\S)|\s+ :-1
+0.30s vocabByScript r/kompkernel/bench/x151/profile.mjs:5973
+0.24s  r/kompkernel/bench/x151/profile.mjs:6961
+0.23s fastChunkCount r/kompkernel/bench/x151/profile.mjs:1976
+0.21s decode node:internal/encoding:441
+0.20s __init r/kompkernel/bench/x151/profile.mjs:2
+0.20s put r/kompkernel/bench/x151/profile.mjs:1828
+0.19s mergeCount r/kompkernel/bench/x151/profile.mjs:1918
+0.19s  r/kompkernel/bench/x151/profile.mjs:431
+0.17s fastChunkCountUncached r/kompkernel/bench/x151/profile.mjs:1990
+0.17s fastCount r/kompkernel/bench/x151/profile.mjs:2021
+0.16s encodeUtf8String :-1
+0.15s decodeUTF8 :-1
+0.14s  r/kompkernel/bench/x151/profile.mjs:11786
+0.13s put r/kompkernel/bench/x151/profile.mjs:6977

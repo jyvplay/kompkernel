@@ -111,3 +111,8 @@ bench/x148/*.mjs
 
 # X150 generated bundles
 bench/x150/*.mjs
+
+# X151 generated bundles and diagnostic profile
+bench/x151/*.mjs
+!bench/x151/build-boundary.mjs
+bench/x151/receipts/*.cpuprofile
