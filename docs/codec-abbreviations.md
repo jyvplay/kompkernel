@@ -10108,3 +10108,67 @@ source reads, 8 inherited reader formats unsupported. 8,208 unit assertions;
 2,079 independent Python reads, mostly repeated/synthetic diagnostic outputs.
 TypeScript/build pass. Details and A–J review: `bench/x146/README.md`,
 `REVIEW.md`, `receipts/summary.json`. Conditional merge remains blocked.
+
+## X147 — HORION (ὅριον, boundary): exact threshold-derived CSV column
+
+**Experimental, opt-in only.** HORION discovers a two-valued column separable by
+one exact decimal threshold in another column. It transmits the boundary and
+labels, not a finite key lookup; unmodified raw surviving cells retain spelling.
+This is a scoped repository addition, not invention of functional-dependency
+compression. Keyword audit and selected module inspection are not exhaustive.
+Source/implementation: `src/lib/omega/horion.ts`, `horion-frontier.ts`;
+A–J, research and receipts: `bench/x147/`.
+
+**Design / greediness:** 8–1000 data rows, 2–16 columns, ≤40k UTF16 units,
+unquoted LF CSV, bounded signed decimal syntax. BigInt comparisons avoid
+floating-point collapse. Enumerates column pairs and exact separating boundary;
+parent composition tries only the cheapest standalone plan (greedy across
+representations, no global-optimality claim). Compact append rule requires
+identifier labels/headers and a unique predictor header. CRLF, quotes,
+contradictory labels, tied values crossing labels, exponent numerals and
+supplementary characters are conservatively excluded. Final source comparison
+and complete-message strict gain gate precede optional admission.
+
+**Measured gain:** public seaborn `geyser.csv`, 272 observations,
+`kind = short if waiting<68 else long`: **787→775**, 12 tokens /1.52%.
+Initial verbose composite lost48 (835); final repaired contract and wrapper
+were tested afresh. TS and independent Python read both actual parent and
+candidate against frozen source/API bytes. Six executable mechanism controls,
+986 unit assertions,8 composite checks,5 compact-specific mutation attacks.
+This is discovery data, not unseen validation or a natural-prose gain.
+**Native fresh-chat gate NOT_RUN; overall Pareto/merge gate fails.**
+
+**CPU/time:** local planner O(C² R log R) plus serialization/tokenization,
+bounded numeric comparison. Parent composition adds a second parent search.
+One shared-machine wrapper run:219.506s baseline/planning phase,
+296.159s total,287.373s CPU; ratio1.349×, NOT a speedup or isolated ABBA result.
+Planner-only ten geyser calls58.9ms and ten canonical rejection sweeps4.22ms
+are not whole-stack acceleration. No performance improvement is claimed.
+
+**Citations:** SQUISH (Gao/Parameswaran2016),
+https://pmc.ncbi.nlm.nih.gov/articles/PMC5293150/ ; Virtual (EDBT2025),
+https://openproceedings.org/2025/conf/edbt/paper-298.pdf . They motivate explicit
+attribute-dependency/metadata accounting, not BPE/native-reading guarantees.
+Scoped live primary-file follow-ups for OpenAI,Anthropic,DeepMind,Axiom are in
+`bench/x147/research.md`; no Lean/kernel replay or exhaustive lab audit.
+
+### X147 freshly reconfirmed frontier and category leaders
+
+29 lanes **11,962**, every complete message identical to X146; HORION is
+eligible on **zero** canonical lanes. DET=1,NO_MEMO=1,ENGRAM=0,OURA_MEMO=0,
+NO_OROTHESIA=1,SCALAR=0,o200k_base. Optional SCALAR Vite freshly260;
+no claim of a new full optional-SCALAR sweep.
+
+| Category | Tokens | Local leading body-token class |
+|---|---:|---|
+| Prose/documents |3429|wordlike|
+| Ops/tabular |5580|glyph|
+| Code/structured |2636|wordlike|
+| Other |317|none (no shared tape)|
+
+Existing route descriptions/examples above remain unchanged. New discovery
+threshold-table lane: HORION775 versus parent787, with native/runtime caveats.
+Fresh canonical message-only reads21/29;8 inherited formats unsupported.
+All29 prices/transport/token-ID checks pass, plus the added candidate.
+TypeScript and final build PASS; initial build exited137 and is retained as a
+failure receipt (cause unknown). Conditional merge remains blocked.

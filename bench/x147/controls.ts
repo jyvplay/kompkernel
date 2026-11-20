@@ -1,0 +1,12 @@
+// Six mechanism-distinct executable representations. Controls are NOT native-certified codecs.
+import fs from 'node:fs';import assert from 'node:assert/strict';import {brotliCompressSync,brotliDecompressSync} from 'node:zlib';import {horionPlans,horionRead} from '../../src/lib/omega/horion';import {countTokens} from '../../src/lib/omega/bpe';
+const source=fs.readFileSync('bench/x147/heldout/geyser.csv','utf8'),lines=source.trimEnd().split('\n'),head=lines.shift()!,rows=lines.map(l=>l.split(',')),labels=rows.map(r=>r[2]),reduced=rows.map(r=>r.slice(0,2).join(',')).join('\n');
+const restore=(v:string[])=>head+'\n'+rows.map((r,i)=>r.slice(0,2).concat(v[i]).join(',')).join('\n')+'\n';
+const results:any[]=[];function test(name:string,message:string,decoded:string,gap:string){assert.equal(decoded,source);results.push({name,message,tokens:countTokens(message,'o200k_base'),exact:true,gap});}
+const p=horionPlans(source)[0];test('threshold',p.message,horionRead(p.message),'Native and full-parent gates separate.');
+const map=Object.fromEntries(rows.map(r=>[r[1],r[2]]));test('finite-lookup','CSV header '+head+'; append kind by waiting lookup '+JSON.stringify(map)+'; final LF.\n'+reduced,restore(rows.map(r=>map[r[1]])),'Existing SYLLOGISMOS family, no novelty.');
+const runs:[string,number][]=[];for(const l of labels){if(runs.at(-1)?.[0]===l)runs.at(-1)![1]++;else runs.push([l,1]);}test('label-runs','CSV header '+head+'; append kind from [label,count] runs '+JSON.stringify(runs)+'; final LF.\n'+reduced,restore(runs.flatMap(([s,n])=>Array(n).fill(s))),'Run-length control, not new.');
+const short=labels.flatMap((l,i)=>l==='short'?[i]:[]);test('sparse-row-indices','CSV header '+head+'; kind is long except short at zero-based data rows '+JSON.stringify(short)+'; final LF.\n'+reduced,restore(labels.map((_,i)=>short.includes(i)?'short':'long')),'Row-index control, not new.');
+const bits=labels.map(l=>l==='short'?'0':'1').join('');test('binary-label-stream','CSV header '+head+'; append kind from bits 0=short,1=long; final LF.\n'+bits+'\n'+reduced,restore([...bits].map(b=>b==='0'?'short':'long')),'Symbol-stream control; native untested.');
+const z=brotliCompressSync(source).toString('base64');test('brotli','Decode base64 then Brotli; print UTF-8:\n'+z,brotliDecompressSync(Buffer.from(z,'base64')).toString(),'Opaque program decoder; native gate not established.');
+fs.writeFileSync('bench/x147/receipts/controls.json',JSON.stringify(results,null,2));console.log(results.map(({name,tokens})=>({name,tokens})));

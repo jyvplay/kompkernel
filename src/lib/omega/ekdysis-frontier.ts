@@ -8,7 +8,10 @@ import {steliUndo,steliParseMarker} from './steli';
 import {countTokens,type EncodingName} from './bpe';
 import {isUtf8TransportStable} from './utf8-wire';
 import {ekdysisPlans,ekdysisUndo,ekdysisKey,EKDYSIS_CAP} from './ekdysis';
-function readPlainParent(message:string):string{
+/** Bounded message-only reader shared by experimental outer transforms.
+ * Unsupported envelopes are returned literally; callers must source-check.
+ */
+export function readPlainParent(message:string):string{
  for(const header of ['Before ¶ k=v. expand; print only.\n','Before ¶ k=v. expand repeatedly; print only.\n','¶ k=v. expand repeatedly; print only.\n']){
   if(!message.startsWith(header+'§'))continue;
   const wire=message.slice(header.length),end=wire.indexOf('¶'),tape=wire.slice(1,end);

@@ -102,3 +102,6 @@ bench/x145/*.mjs
 
 # X146 generated bundles
 bench/x146/*.mjs
+
+# X147 generated bundles
+bench/x147/*.mjs

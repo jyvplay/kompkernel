@@ -1,0 +1,185 @@
+{
+  "note": "Shared machine; planner only. Does not prove stack acceleration.",
+  "results": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "iterations": 10,
+      "wallMs": 0.0594480000000317,
+      "cpuMs": 1.186
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "iterations": 10,
+      "wallMs": 0.18020400000000336,
+      "cpuMs": 0.188
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "iterations": 10,
+      "wallMs": 0.007851000000016484,
+      "cpuMs": 0.011
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "iterations": 10,
+      "wallMs": 0.008520000000032724,
+      "cpuMs": 0.012
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "iterations": 10,
+      "wallMs": 0.04577999999997928,
+      "cpuMs": 0.052
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "iterations": 10,
+      "wallMs": 0.11335800000000518,
+      "cpuMs": 0.118
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "iterations": 10,
+      "wallMs": 0.04708599999997887,
+      "cpuMs": 0.05
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "iterations": 10,
+      "wallMs": 0.009085000000027321,
+      "cpuMs": 0.01
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "iterations": 10,
+      "wallMs": 0.0021610000000009677,
+      "cpuMs": 0.004
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "iterations": 10,
+      "wallMs": 0.2806690000000458,
+      "cpuMs": 0.282
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "iterations": 10,
+      "wallMs": 0.16629499999999098,
+      "cpuMs": 0.168
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "iterations": 10,
+      "wallMs": 0.009649000000024444,
+      "cpuMs": 0.012
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "iterations": 10,
+      "wallMs": 0.6467119999999795,
+      "cpuMs": 0.669
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "iterations": 10,
+      "wallMs": 0.22344500000002654,
+      "cpuMs": 0.227
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "iterations": 10,
+      "wallMs": 0.033482000000049084,
+      "cpuMs": 0.036
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "iterations": 10,
+      "wallMs": 0.06904700000001185,
+      "cpuMs": 0.071
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "iterations": 10,
+      "wallMs": 0.24570099999999684,
+      "cpuMs": 0.247
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "iterations": 10,
+      "wallMs": 0.05458999999996195,
+      "cpuMs": 0.056
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "iterations": 10,
+      "wallMs": 0.0964089999999942,
+      "cpuMs": 0.098
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "iterations": 10,
+      "wallMs": 0.09049499999997579,
+      "cpuMs": 0.092
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "iterations": 10,
+      "wallMs": 0.0025620000000117216,
+      "cpuMs": 0.004
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "iterations": 10,
+      "wallMs": 0.31263900000004696,
+      "cpuMs": 0.316
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "iterations": 10,
+      "wallMs": 0.11285999999995511,
+      "cpuMs": 0.114
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "iterations": 10,
+      "wallMs": 0.09422000000000708,
+      "cpuMs": 0.095
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "iterations": 10,
+      "wallMs": 0.076170999999988,
+      "cpuMs": 0.078
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "iterations": 10,
+      "wallMs": 0.0017100000000027649,
+      "cpuMs": 0.003
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "iterations": 10,
+      "wallMs": 0.025739999999984775,
+      "cpuMs": 0.028
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "iterations": 10,
+      "wallMs": 0.345361999999966,
+      "cpuMs": 0.347
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "iterations": 10,
+      "wallMs": 0.8610439999999926,
+      "cpuMs": 0.866
+    },
+    {
+      "path": "bench/x147/heldout/geyser.csv",
+      "iterations": 10,
+      "wallMs": 58.91318799999999,
+      "cpuMs": 65.247
+    }
+  ]
+}

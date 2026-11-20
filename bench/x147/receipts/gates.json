@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "source_exact": true,
+    "strict_parent_gain": true,
+    "over_ten_tokens": true,
+    "native_basic_chat": false,
+    "significant_whole_stack_speed": false,
+    "broad_canonical_gain": false
+  },
+  "overallPareto": false,
+  "mergeEligible": false,
+  "modalShortcutRejected": true,
+  "finiteInjectivityBound": true
+}

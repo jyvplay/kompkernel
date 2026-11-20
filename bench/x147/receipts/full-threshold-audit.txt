@@ -1,0 +1,2 @@
+src/lib/omega/horion.ts:1:/** HORION — X147: one exact decimal threshold predicts a two-valued CSV column.
+src/lib/omega/horion.ts:10:export const HORION_CONTRACT = 'Restore CSV: JSON [insert-column index,header,numeric-column index in reduced CSV,threshold,below,otherwise] uses zero-based indices and exact decimal comparison. Insert below if numeric value < threshold, otherwise otherwise. Preserve all other bytes and final LF. Print only.\n';
