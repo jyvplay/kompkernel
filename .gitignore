@@ -120,3 +120,7 @@ bench/x151/receipts/*.cpuprofile
 # X152 generated bundles (retain the reproducible build plugin)
 bench/x152/*.mjs
 !bench/x152/speed-build.mjs
+
+# X153 generated bundles; retain authored A/B build plugin
+bench/x153/*.mjs
+!bench/x153/speed-build.mjs

@@ -1,0 +1,4 @@
+{
+  "old": "    if (ascii) return mergeCount(SB, L);\n    bytes = TE.encode(chunk);",
+  "replacement": "    if (ascii) return mergeCount(SB, L);\n    if (L * 3 <= SCRATCH_MAX) {\n      const { read, written } = TE.encodeInto(chunk, SB);\n      if (read === L) return mergeCount(SB, written);\n    }\n    bytes = TE.encode(chunk);"
+}

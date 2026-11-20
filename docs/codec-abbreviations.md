@@ -10561,3 +10561,34 @@ whole-encoder ABBA across three lanes (12 cold processes) gives B/A aggregate
 **CPU 1.015625, wall 1.012454**, failing the predeclared >=10% reduction/nonregression
 gate. Not deployed. An earlier overlapping run is explicitly excluded. See
 `bench/x152/README.md`, `research.md`, `native.md`, and receipts for scope and gaps.
+
+## X153 — KENOMA (experimental, unwired)
+
+KENOMA derives standalone JSON closing lines from retained indentation and a
+lexical stack. Its hole variant retains empty/comma event lines; its dedent variant
+removes the event lines altogether. This is a new repository implementation, not a
+new offside-rule or pushdown-parsing theory (Adams 2013; declarative indentation
+rules 2018; references and scoped lab investigations in `bench/x153/research.md`).
+Exact byte roundtrip, UTF-8 stability, width1/2/4, depth128 and 50000 UTF-16-unit
+caps bound admission. Lexical numbers, escapes, duplicate keys and spacing are
+copied, not parsed and reserialized. The complete instruction is priced.
+
+The optional `kenomaFrontierEncode` retains X152 HOMOSEMA as incumbent and selects
+strict improvements only. Width selection is non-greedy full-message comparison;
+parent heuristics are unchanged. Decoder/rewrite passes are linear in source plus
+output under fixed width/depth caps, **not** a linear bound on parent search CPU or
+wall time. Additional parent calls are real costs, so no runtime Pareto claim.
+
+Observed complete-wire wins: VS Code JSON manifest **895→867 (28 tokens)** and
+prospectively selected HTML manifest **848→826 (22)**. Canonical json-pkg falls back
+at653; Chalk at385. Hole trials all lose. Seven independent Python wire reads match
+source bytes, but native one-chat reading remains **NOT_RUN**. No broad everyday
+prose gain demonstrated. Fresh canonical29 total **11962**, all wires identical;
+category leaders remain prose word (3429 output), ops glyph (5580), code word
+(2636), other no tape (317). Category receipts are in `bench/x153/receipts/`.
+
+UTF-8 encodeInto scratch experiment passes14909 reference checks per A/B build.
+Isolated 12-call whole-stack ABBA has aggregate CPU ratio0.963323 and wall0.962005,
+but fails the predeclared >=10%/nonregression gate. Production unchanged; no
+significant acceleration claim. Full evidence, negative cases, 22-shape modal
+shortcut detector and remaining gates: `bench/x153/README.md`.

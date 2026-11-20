@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/microsoft/vscode",
+  "commit": "ede881c5d85824412ce25cab3869bb99673251d4",
+  "paths": [
+    "extensions/html-language-features/package.json",
+    "extensions/css-language-features/package.json"
+  ],
+  "sha256": {
+    "bench/x153/fixtures/html-package.json": "cb3eb0dacb754977b66403067030228c6768cb7248ae323fffadeb0ce497604f",
+    "bench/x153/fixtures/css-package.json": "3248ae969682abc9cd463a25fc0ca5f0d28bdc6e20daa13a0bb91a04e3fbc187"
+  },
+  "license": "MIT; fixtures/vscode-LICENSE.txt",
+  "priorSources": "bench/x152/receipts/provenance.json",
+  "note": "CSS full parent NOT_RUN for resource budget; source files not modified"
+}

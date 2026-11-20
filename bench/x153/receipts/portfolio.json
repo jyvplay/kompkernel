@@ -1,0 +1,418 @@
+{
+  "scope": "29-lane mechanism screens; existing modules not relabeled as new; no raw proxy substitutes for parent trials",
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "incumbent": 60,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "incumbent": 620,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": {
+        "width": 98,
+        "blocks": 6,
+        "rawProxy": 663,
+        "note": "requires parent grammar; not an admissible final message"
+      },
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "incumbent": 80,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "incumbent": 76,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "incumbent": 144,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "incumbent": 411,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": {
+        "width": 7,
+        "requiresCarrier": true
+      },
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "incumbent": 160,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "incumbent": 123,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "incumbent": 266,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "incumbent": 846,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "incumbent": 385,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "incumbent": 105,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "incumbent": 486,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": {
+        "width": 96,
+        "blocks": 1,
+        "rawProxy": 656,
+        "note": "requires parent grammar; not an admissible final message"
+      },
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "incumbent": 664,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": {
+        "width": 96,
+        "blocks": 1,
+        "rawProxy": 759,
+        "note": "requires parent grammar; not an admissible final message"
+      },
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "incumbent": 172,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "incumbent": 229,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "incumbent": 118,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": {
+        "width": 40,
+        "blocks": 1,
+        "rawProxy": 581,
+        "note": "requires parent grammar; not an admissible final message"
+      },
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "incumbent": 101,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "incumbent": 296,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "incumbent": 414,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": {
+        "hits": 13,
+        "rawComplete": 1027
+      }
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "incumbent": 653,
+      "kenomaHole": {
+        "sites": 12,
+        "rawComplete": 1185
+      },
+      "kenomaIndent": [
+        {
+          "width": 4,
+          "sites": 12,
+          "rawProxy": 1167,
+          "note": "raw-only diagnostic; fused grammar header not directly applicable to literal payload"
+        }
+      ],
+      "homosema": [
+        {
+          "mode": {
+            "separator": ",",
+            "close": null
+          },
+          "rawComplete": 1179
+        },
+        {
+          "mode": {
+            "separator": null,
+            "close": "]"
+          },
+          "rawComplete": 1180
+        },
+        {
+          "mode": {
+            "separator": null,
+            "close": ")"
+          },
+          "rawComplete": 1180
+        },
+        {
+          "mode": {
+            "separator": ";",
+            "close": null
+          },
+          "rawComplete": 1180
+        },
+        {
+          "mode": {
+            "separator": ",",
+            "close": "]"
+          },
+          "rawComplete": 1190
+        },
+        {
+          "mode": {
+            "separator": ",",
+            "close": ")"
+          },
+          "rawComplete": 1190
+        },
+        {
+          "mode": {
+            "separator": ";",
+            "close": "]"
+          },
+          "rawComplete": 1191
+        },
+        {
+          "mode": {
+            "separator": ";",
+            "close": ")"
+          },
+          "rawComplete": 1191
+        },
+        {
+          "mode": {
+            "separator": ":",
+            "close": null
+          },
+          "rawComplete": 1193
+        },
+        {
+          "mode": {
+            "separator": ":",
+            "close": ")"
+          },
+          "rawComplete": 1193
+        },
+        {
+          "mode": {
+            "separator": ":",
+            "close": "]"
+          },
+          "rawComplete": 1204
+        }
+      ],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "incumbent": 949,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "incumbent": 623,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "incumbent": 381,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "incumbent": 300,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": {
+        "width": 7,
+        "requiresCarrier": true
+      },
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "incumbent": 197,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "incumbent": 980,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": {
+        "width": 7,
+        "requiresCarrier": true
+      },
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "incumbent": 813,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": null
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "incumbent": 1310,
+      "kenomaHole": null,
+      "kenomaIndent": [],
+      "homosema": [],
+      "ptyche": null,
+      "diathesis": null,
+      "mekos": {
+        "hits": 58,
+        "rawComplete": 5142
+      }
+    }
+  ]
+}
