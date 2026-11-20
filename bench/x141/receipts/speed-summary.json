@@ -1,0 +1,61 @@
+{
+  "measurements": 24,
+  "isolated": true,
+  "messageIdentical": true,
+  "sourceExact": true,
+  "rows": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "Ams": [
+        5025.10765,
+        5010.775720999998,
+        5131.658571,
+        4723.5403649999935
+      ],
+      "Bms": [
+        5493.647018999998,
+        4982.779154,
+        5219.26482,
+        4818.468098000005
+      ],
+      "BoverATotal": 1.0313244284239245,
+      "BoverAMedian": 1.0165566494604894
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "Ams": [
+        14867.890473000007,
+        15377.487026000003,
+        16300.628746000002,
+        16106.95117700001
+      ],
+      "Bms": [
+        15392.062286,
+        15226.792149,
+        16129.938897,
+        16239.260089999996
+      ],
+      "BoverATotal": 1.0053484466462281,
+      "BoverAMedian": 1.0011930649598317
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "Ams": [
+        15523.631468999985,
+        15540.540861999994,
+        14302.914905000012,
+        14106.476418000006
+      ],
+      "Bms": [
+        15837.517259999993,
+        15900.486992999999,
+        15044.226193999988,
+        14395.889165
+      ],
+      "BoverATotal": 1.0286607334969298,
+      "BoverAMedian": 1.0353777828236863
+    }
+  ],
+  "significantFullStackSpeedupEstablished": false,
+  "productionHookInstalled": false
+}

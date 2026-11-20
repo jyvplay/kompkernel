@@ -1,0 +1,17 @@
+{
+  "lanes": 29,
+  "tokens": 11962,
+  "messageIdenticalX143": true,
+  "standalonePriced": 21,
+  "parentPriced": 6,
+  "wins": 0,
+  "native": "NOT_RUN",
+  "paretoSuperior": false,
+  "broadSpeedupEstablished": false,
+  "freshHeldoutTrials": "NOT_RUN",
+  "labProofReplay": "NOT_RUN",
+  "unitChecks": 2008,
+  "bpeDifferentialChecks": 235,
+  "tsc": "PASS",
+  "build": "PASS"
+}

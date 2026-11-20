@@ -1,0 +1,32 @@
+{
+  "frontier": {
+    "lanes": 29,
+    "tokens": 11962,
+    "ms": 902805,
+    "identicalToX137": 29
+  },
+  "canonical": {
+    "False": {
+      "trials": 18,
+      "wins": 0,
+      "sumDelta": 400,
+      "extensionMs": 5157.866571999998
+    },
+    "True": {
+      "trials": 18,
+      "wins": 0,
+      "sumDelta": 1089,
+      "extensionMs": 7590.400519999996
+    }
+  },
+  "controls": {
+    "lanes": 29,
+    "brotliTokens": 17475,
+    "backwardCopyTokens": 23576,
+    "morphTokens": 28207
+  },
+  "newDefaultWired": false,
+  "nativeVerified": false,
+  "paretoAccepted": false,
+  "mergeAllowed": false
+}

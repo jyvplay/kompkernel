@@ -1,0 +1,30 @@
+[
+  {
+    "message": "¶ k=v; ~gU|/~gL| = ASCII uppercase/lowercase of expanded g; ~gab| = replace every a with b in expanded g. Expand recursively; print only.\n§аhello-worldб~аU|¶аб",
+    "expected": "hello-worldHELLO-WORLD"
+  },
+  {
+    "message": "¶ k=v; ~gU|/~gL| = ASCII uppercase/lowercase of expanded g; ~gab| = replace every a with b in expanded g. Expand recursively; print only.\n§а~б_-|бa_b_c¶аб",
+    "expected": "a-b-ca_b_c"
+  },
+  {
+    "message": "¶ k=v; ~gU|/~gL| = ASCII uppercase/lowercase of expanded g; ~gab| = replace every a with b in expanded g. Expand recursively; print only.\n§аa_bб~а_-|в~бU|¶в",
+    "expected": "A-B"
+  },
+  {
+    "message": "¶ k=v; ~gU|/~gL| = ASCII uppercase/lowercase of expanded g; ~gab| = replace every a with b in expanded g. Expand recursively; print only.\n§аA_Bб~аL|в~б_-|¶в",
+    "expected": "a-b"
+  },
+  {
+    "message": "¶ k=v; ~gU|/~gL| = ASCII uppercase/lowercase of expanded g; ~gab| = replace every a with b in expanded g. Expand recursively; print only.\n§аababб~аab|¶б",
+    "expected": "bbbb"
+  },
+  {
+    "message": "¶ k=v; ~gU|/~gL| = ASCII uppercase/lowercase of expanded g; ~gab| = replace every a with b in expanded g. Expand recursively; print only.\n§аéßıaб~аU|¶б",
+    "expected": "éßıA"
+  },
+  {
+    "message": "¶ k=v; ~gU|/~gL| = ASCII uppercase/lowercase of expanded g; ~gab| = replace every a with b in expanded g. Expand recursively; print only.\n§аfoo_barбааFFFв~б_-|¶в",
+    "expected": "foo-barfoo-barFFF"
+  }
+]

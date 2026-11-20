@@ -232,10 +232,40 @@ const SA = new Int32Array(SCRATCH_MAX + 2);
 const SR = new Float64Array(SCRATCH_MAX + 2);
 const INF = Number.POSITIVE_INFINITY;
 
+/** Long chunks: exact ranked merges using an adjacency heap, O(n log n) heap
+ * operations plus rank lookup/string materialization. Tie break is the original
+ * left byte offset, preserving the library's leftmost-minimum rule. Stale edges
+ * are invalidated by generation, not by comparing ranks alone. No BPE model or
+ * wire format changes. Small chunks retain the allocation-light scan.
+ */
+function longMergeCount(b:Uint8Array,n:number):number {
+  const next=new Int32Array(n),prev=new Int32Array(n),version=new Uint32Array(n);
+  type Edge={left:number;right:number;rank:number;version:number};
+  const heap:Edge[]=[];
+  const less=(a:Edge,c:Edge)=>a.rank<c.rank||(a.rank===c.rank&&a.left<c.left);
+  const push=(a:Edge)=>{let i=heap.length;heap.push(a);while(i){const p=(i-1)>>1;if(!less(a,heap[p]))break;heap[i]=heap[p];i=p;}heap[i]=a;};
+  const pop=()=>{const top=heap[0],last=heap.pop()!;if(heap.length){let i=0;while(2*i+1<heap.length){let c=2*i+1;if(c+1<heap.length&&less(heap[c+1],heap[c]))c++;if(!less(heap[c],last))break;heap[i]=heap[c];i=c;}heap[i]=last;}return top;};
+  const update=(i:number)=>{if(i<0)return;version[i]++;const j=next[i];if(j>=n)return;
+    const rank=rankAt(b,i,next[j]);if(rank!==INF)push({left:i,right:j,rank,version:version[i]});};
+  for(let i=0;i<n;i++){next[i]=i+1;prev[i]=i-1;}
+  for(let i=0;i<n-1;i++)update(i);
+  let count=n;
+  while(heap.length){const e=pop(),i=e.left,j=e.right;
+    if(e.version!==version[i]||next[i]!==j)continue;
+    const k=next[j];next[i]=k;version[j]++;if(k<n)prev[k]=i;
+    count--;update(prev[i]);update(i);
+  }
+  return count;
+}
 /** Merge count over `n` bytes held in `b`. Mirrors bytePairMerge exactly. */
 function mergeCount(b: Uint8Array, n: number): number {
   if (n <= 1) return n;
-  const starts = SA, ranks = SR;
+  if(n>SCRATCH_MAX && !(typeof process!=='undefined' && process.env?.OMEGA_LONG_BPE_SCAN==='1'))return longMergeCount(b,n);
+  // X136: the old long-chunk path supplied fresh BYTES but still reused the
+  // 1024-byte boundary/rank buffers. Typed-array out-of-range writes vanish,
+  // silently mispricing long ASCII and even shorter multibyte chunks.
+  const starts = n <= SCRATCH_MAX ? SA : new Int32Array(n + 2);
+  const ranks = n <= SCRATCH_MAX ? SR : new Float64Array(n + 2);
   for (let i = 0; i <= n; i++) starts[i] = i;
   for (let i = 0; i < n - 1; i++) ranks[i] = rankAt(b, i, i + 2);
   ranks[n - 1] = INF;

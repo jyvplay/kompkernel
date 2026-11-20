@@ -1,0 +1,4 @@
+{"bytes":3,"mixed":false,"keys":18185,"averageInsertionProbes":19.010448171569976,"maxInsertionProbes":211,"checks":18185}
+{"bytes":3,"mixed":true,"keys":18185,"averageInsertionProbes":1.0324993126202915,"maxInsertionProbes":5,"checks":18185}
+{"bytes":4,"mixed":false,"keys":26166,"averageInsertionProbes":9.135786899029275,"maxInsertionProbes":990,"checks":26166}
+{"bytes":4,"mixed":true,"keys":26166,"averageInsertionProbes":1.0580906519911335,"maxInsertionProbes":5,"checks":26166}

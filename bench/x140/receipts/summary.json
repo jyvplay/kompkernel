@@ -1,0 +1,56 @@
+{
+  "frontier": {
+    "lanes": 29,
+    "tokens": 11962,
+    "ms": 1202593,
+    "messagesIdenticalToX139": 29,
+    "timingConcurrentNotCausal": true
+  },
+  "eikon": {
+    "canonicalPriced": 16,
+    "heldoutPriced": 2,
+    "canonicalWins": 0,
+    "canonicalDelta": 495,
+    "acceptedMoves": 0,
+    "images": 0
+  },
+  "joint": {
+    "trials": 37,
+    "imageWins": 0,
+    "ordinaryWins": 0,
+    "images": 0
+  },
+  "interior": {
+    "trials": 45,
+    "wins": 0,
+    "moves": 0
+  },
+  "sourcePreconditioning": {
+    "fullParentTrials": 12,
+    "wins": 0,
+    "independentExact": 12
+  },
+  "speed": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "samplesPerArm": 4,
+      "aMedianMs": 4515.226682999999,
+      "bMedianMs": 4523.935424000001,
+      "totalRatioBoverA": 1.003009783939022,
+      "medianRatioBoverA": 1.0019287494541063
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "samplesPerArm": 4,
+      "aMedianMs": 11897.294444500003,
+      "bMedianMs": 12275.158041499999,
+      "totalRatioBoverA": 1.0302477889651003,
+      "medianRatioBoverA": 1.0317604644285052
+    }
+  ],
+  "nativeVerified": false,
+  "paretoAccepted": false,
+  "defaultCodecWired": false,
+  "speedHookRetainedInProduction": false,
+  "mergeAllowed": false
+}

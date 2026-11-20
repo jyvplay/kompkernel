@@ -1,0 +1,211 @@
+{
+  "reader": "bench/chiron_decode.py, existing independent CPython implementation",
+  "lanes": 29,
+  "directSourceExact": 19,
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "directSourceExact": true,
+      "hasChiron": false,
+      "expandedBytes": 132,
+      "sourceBytes": 132
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 3385,
+      "sourceBytes": 3385
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "directSourceExact": true,
+      "hasChiron": false,
+      "expandedBytes": 179,
+      "sourceBytes": 179
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "directSourceExact": true,
+      "hasChiron": false,
+      "expandedBytes": 263,
+      "sourceBytes": 263
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 467,
+      "sourceBytes": 467
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 1487,
+      "sourceBytes": 1487
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "directSourceExact": false,
+      "hasChiron": true,
+      "expandedBytes": 1189,
+      "sourceBytes": 939
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 329,
+      "sourceBytes": 329
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 1605,
+      "sourceBytes": 1605
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 6751,
+      "sourceBytes": 6751
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "directSourceExact": false,
+      "hasChiron": true,
+      "expandedBytes": 2013,
+      "sourceBytes": 3215
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 293,
+      "sourceBytes": 293
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 2126,
+      "sourceBytes": 2126
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 2542,
+      "sourceBytes": 2542
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "directSourceExact": false,
+      "hasChiron": true,
+      "expandedBytes": 635,
+      "sourceBytes": 635
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "directSourceExact": false,
+      "hasChiron": true,
+      "expandedBytes": 948,
+      "sourceBytes": 1578
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "directSourceExact": false,
+      "hasChiron": true,
+      "expandedBytes": 568,
+      "sourceBytes": 993
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "directSourceExact": false,
+      "hasChiron": false,
+      "expandedBytes": 226,
+      "sourceBytes": 938
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 2669,
+      "sourceBytes": 2669
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 2486,
+      "sourceBytes": 2486
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 3620,
+      "sourceBytes": 3620
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 6000,
+      "sourceBytes": 6000
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "directSourceExact": false,
+      "hasChiron": true,
+      "expandedBytes": 2843,
+      "sourceBytes": 4459
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 2365,
+      "sourceBytes": 2365
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "directSourceExact": false,
+      "hasChiron": true,
+      "expandedBytes": 2250,
+      "sourceBytes": 2649
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "directSourceExact": false,
+      "hasChiron": true,
+      "expandedBytes": 1477,
+      "sourceBytes": 1203
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 6590,
+      "sourceBytes": 6590
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "directSourceExact": true,
+      "hasChiron": true,
+      "expandedBytes": 6195,
+      "sourceBytes": 6195
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "directSourceExact": false,
+      "hasChiron": true,
+      "expandedBytes": 9340,
+      "sourceBytes": 10692
+    }
+  ],
+  "scope": "False is unresolved parent inversion, not automatically corruption; encoder decoded attributes are not used."
+}

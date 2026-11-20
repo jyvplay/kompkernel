@@ -1,0 +1,20 @@
+[
+  {
+    "path": "bench/x140/heldout/dotenv.md",
+    "source": "node_modules/dotenv/README.md",
+    "sourceSha256": "2d1919cb803aa866a036b5dd7ce2cb7237138e003a3e0307a809aab56ad3be08",
+    "sha256": "198478ccedc51375f7e4aa8a7e1e012648e3eb4d08a52a070debeffe3ded793c",
+    "bytes": 2351,
+    "policy": "first 100 lines, frozen before any encode or price test",
+    "packageVersion": "17.3.1"
+  },
+  {
+    "path": "bench/x140/heldout/next.md",
+    "source": "node_modules/next/README.md",
+    "sourceSha256": "4d9da0db1d2883ae6dfa15535d81eca4dfbad493040cb512bf830a22595ce9f6",
+    "sha256": "4d9da0db1d2883ae6dfa15535d81eca4dfbad493040cb512bf830a22595ce9f6",
+    "bytes": 3212,
+    "policy": "first 100 lines, frozen before any encode or price test",
+    "packageVersion": "16.3.5"
+  }
+]

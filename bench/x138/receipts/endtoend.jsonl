@@ -1,0 +1,8 @@
+{"path":"bench/holdout-work/kb-article.txt","round":0,"order":"AB","arm":"A","parentMs":5125.464255,"extensionMs":0.00044499999967229087,"totalMs":5125.550337,"tokens":620,"admitted":false}
+{"path":"bench/holdout-work/kb-article.txt","round":0,"order":"AB","arm":"B","parentMs":3370.591606000001,"extensionMs":274.44478199999867,"totalMs":3645.0626980000006,"tokens":620,"admitted":false}
+{"path":"bench/holdout-work/kb-article.txt","round":1,"order":"BA","arm":"B","parentMs":3486.074504,"extensionMs":266.0723730000009,"totalMs":3752.275975999999,"tokens":620,"admitted":false}
+{"path":"bench/holdout-work/kb-article.txt","round":1,"order":"BA","arm":"A","parentMs":3395.463146,"extensionMs":0.00038999999924271833,"totalMs":3395.4758189999993,"tokens":620,"admitted":false}
+{"path":"bench/holdout-work/llm-answer.md","round":0,"order":"AB","arm":"A","parentMs":10578.155189000001,"extensionMs":0.000420000000303844,"totalMs":10578.164376,"tokens":664,"admitted":false}
+{"path":"bench/holdout-work/llm-answer.md","round":0,"order":"AB","arm":"B","parentMs":9201.119088000003,"extensionMs":253.53479399999924,"totalMs":9454.671614000003,"tokens":664,"admitted":false}
+{"path":"bench/holdout-work/llm-answer.md","round":1,"order":"BA","arm":"B","parentMs":8977.573807,"extensionMs":229.61378400000103,"totalMs":9207.206331000001,"tokens":664,"admitted":false}
+{"path":"bench/holdout-work/llm-answer.md","round":1,"order":"BA","arm":"A","parentMs":9689.023353999997,"extensionMs":0.0003980000037699938,"totalMs":9689.034496999993,"tokens":664,"admitted":false}

@@ -1,0 +1,329 @@
+{
+  "exact": 77,
+  "mechanics": 8,
+  "unsupported": [
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-tbl/df-h.txt"
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-tbl/psql-output.txt"
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x42/dpkg-l.txt"
+    }
+  ],
+  "rows": [
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/df-h.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/df-h.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/df-h.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/df-h.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/psql-output.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/psql-output.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/psql-output.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/psql-output.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/psql-output.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/psql-output.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x40/cue-sheet.md"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x40/cue-sheet.md"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x40/cue-sheet.md"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x40/cue-sheet.md"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x40/cue-sheet.md"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/ps-ef.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/ps-ef.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/ps-ef.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/ps-ef.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/ps-ef.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/ps-ef.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/ps-ef.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout/json-pkg.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout/json-pkg.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout/json-pkg.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/dpkg-l.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/dpkg-l.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/dpkg-l.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/dpkg-l.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/dpkg-l.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/dpkg-l.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/apt-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/apt-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/apt-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-l-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-l-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-l-real.txt"
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x40/cue-sheet.md"
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x42/ps-ef.txt"
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x41/ls-real.txt"
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout/json-pkg.txt"
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x41/ps-real.txt"
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt"
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "heldout-probe",
+      "path": "bench/x142/heldout/usr-bin.txt"
+    },
+    {
+      "receipt": "heldout-probe",
+      "path": "bench/x142/heldout/usr-bin.txt"
+    },
+    {
+      "receipt": "heldout-probe",
+      "path": "bench/x142/heldout/usr-bin.txt"
+    }
+  ],
+  "nativeVerified": false
+}

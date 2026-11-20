@@ -1,0 +1,97 @@
+[
+  {
+    "message": "After decoding the payload, at its start and after each . ! ? followed by whitespace, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na. boy! cat? dog.",
+    "mode": "sentence",
+    "expected": "A. Boy! Cat? Dog."
+  },
+  {
+    "message": "After decoding the payload, at the start of each LF-separated line, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na. Boy! Cat? Dog.",
+    "mode": "line",
+    "expected": "A. Boy! Cat? Dog."
+  },
+  {
+    "message": "After decoding the payload, at its start and after each . ! ? followed by whitespace, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\n~a. ~boy! cat? ~dog.",
+    "mode": "sentence",
+    "expected": "a. boy! Cat? dog."
+  },
+  {
+    "message": "After decoding the payload, at its start and after each . ! ? followed by whitespace, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\n a.\r\n\tb. ~c.",
+    "mode": "sentence",
+    "expected": " A.\r\n\tB. c."
+  },
+  {
+    "message": "After decoding the payload, at the start of each LF-separated line, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\n a.\r\n\tb. c.",
+    "mode": "line",
+    "expected": " A.\r\n\tB. c."
+  },
+  {
+    "message": "After decoding the payload, at its start and after each . ! ? followed by whitespace, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na. b. c",
+    "mode": "sentence",
+    "expected": "A. b. C"
+  },
+  {
+    "message": "After decoding the payload, at the start of each LF-separated line, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na. b. C",
+    "mode": "line",
+    "expected": "A. b. C"
+  },
+  {
+    "message": "After decoding the payload, at its start and after each . ! ? followed by whitespace, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na.B. c",
+    "mode": "sentence",
+    "expected": "A.B. C"
+  },
+  {
+    "message": "After decoding the payload, at the start of each LF-separated line, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na.B. C",
+    "mode": "line",
+    "expected": "A.B. C"
+  },
+  {
+    "message": "After decoding the payload, at its start and after each . ! ? followed by whitespace, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na!?! b",
+    "mode": "sentence",
+    "expected": "A!?! B"
+  },
+  {
+    "message": "After decoding the payload, at the start of each LF-separated line, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na!?! B",
+    "mode": "line",
+    "expected": "A!?! B"
+  },
+  {
+    "message": "After decoding the payload, at its start and after each . ! ? followed by whitespace, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na. \"Boy\". cat",
+    "mode": "sentence",
+    "expected": "A. \"Boy\". Cat"
+  },
+  {
+    "message": "After decoding the payload, at the start of each LF-separated line, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na. \"Boy\". Cat",
+    "mode": "line",
+    "expected": "A. \"Boy\". Cat"
+  },
+  {
+    "message": "After decoding the payload, at its start and after each . ! ? followed by whitespace, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na.\n\n b",
+    "mode": "sentence",
+    "expected": "A.\n\n B"
+  },
+  {
+    "message": "After decoding the payload, at the start of each LF-separated line, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na.\n\n b",
+    "mode": "line",
+    "expected": "A.\n\n B"
+  },
+  {
+    "message": "After decoding the payload, at its start and after each . ! ? followed by whitespace, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na\nB\nC\n",
+    "mode": "sentence",
+    "expected": "A\nB\nC\n"
+  },
+  {
+    "message": "After decoding the payload, at the start of each LF-separated line, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\na\nb\nc\n",
+    "mode": "line",
+    "expected": "A\nB\nC\n"
+  },
+  {
+    "message": "After decoding the payload, at its start and after each . ! ? followed by whitespace, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\n🙂. a\ud800. b",
+    "mode": "sentence",
+    "expected": "🙂. A\ud800. B"
+  },
+  {
+    "message": "After decoding the payload, at its start and after each . ! ? followed by whitespace, skip spaces, tabs, CR and LF; uppercase the next character if it is a-z. A ~ there instead removes itself and keeps the following lowercase letter. Preserve everything else; print only.\n﻿A. b",
+    "mode": "sentence",
+    "expected": "﻿A. B"
+  }
+]

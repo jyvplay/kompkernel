@@ -1,0 +1,101 @@
+{
+  "rows": [
+    {
+      "receipt": "overflow",
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "overflow",
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "overflow",
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "overflow",
+      "path": "bench/holdout-work/llm-answer.md",
+      "sourceExact": true
+    },
+    {
+      "receipt": "overflow",
+      "path": "bench/holdout-work/llm-answer.md",
+      "sourceExact": true
+    },
+    {
+      "receipt": "overflow",
+      "path": "bench/holdout/json-pkg.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "overflow",
+      "path": "bench/holdout/json-pkg.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "overflow",
+      "path": "bench/holdout/code-ts.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "overflow",
+      "path": "bench/holdout/code-ts.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "overflow",
+      "path": "bench/holdout/code-ts.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-overflow",
+      "path": "bench/x137/heldout/git-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-overflow",
+      "path": "bench/x137/heldout/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-overflow",
+      "path": "bench/x137/heldout/python-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "fast",
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "fast",
+      "path": "bench/x137/heldout/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "refine",
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "refine",
+      "path": "bench/x137/heldout/git-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "refine",
+      "path": "bench/x137/heldout/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "refine",
+      "path": "bench/x137/heldout/python-help.txt",
+      "sourceExact": true
+    }
+  ],
+  "exact": 19,
+  "nativeModelVerified": false
+}

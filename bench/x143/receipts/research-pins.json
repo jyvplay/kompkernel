@@ -1,0 +1,28 @@
+[
+  {
+    "repo": "AxiomMath/LyonsWhite",
+    "path": "Lyons/Walk/Heat.lean",
+    "sha": "0cd9e3b1c5335869b304924d51bbba39327a17e9",
+    "date": "2026-08-27T17:41:17Z",
+    "local": "bench/x143/receipts/axiom-heat.lean"
+  },
+  {
+    "repo": "AxiomMath/LyonsWhite",
+    "path": "Lyons/Walk/Real.lean",
+    "sha": "0cd9e3b1c5335869b304924d51bbba39327a17e9",
+    "date": "2026-08-27T17:41:17Z",
+    "local": "bench/x143/receipts/axiom-real.lean"
+  },
+  {
+    "repo": "google-deepmind/code-verification",
+    "path": "Computational/docs/TRUSTED_BASE.md",
+    "status": "no commit before cutoff"
+  },
+  {
+    "repo": "openai/math",
+    "path": "lean/ComparatorChallenges/SubexponentialSAT.lean",
+    "sha": "42907c9e999cc00d6abe7a50bfc1023250edd1b9",
+    "date": "2026-10-26T20:52:18Z",
+    "local": "bench/x143/receipts/openai-sat.lean"
+  }
+]

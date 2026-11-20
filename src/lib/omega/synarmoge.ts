@@ -33,12 +33,11 @@
  *
  * (2) TRUE-PRICED DROPS. X131's "marginal clearing" audited rules with the
  *     ESTIMATE  c*(t-1) <= (1+t)  and reported ~0. That estimate prices a rule
- *     in isolation and in characters. Priced against the real tokenizer on the
- *     real whole message, some rules ARE net-negative: measured on the frontier
- *     before any other move, 1/18 on df-h (2 tok), 3/23 on psql-output (7 tok),
- *     1/20 on metrics.tsv (3 tok), 1/27 on kubectl-get-pods, 1/11 on prices.csv
- *     (bench/x133/receipts/x133-headroom.log). The estimate was the thing that
- *     hid them; the measurement is what finds them.
+ *     in isolation and in characters. The original headroom probe claimed
+ *     net-negative rules, but that claim was RETRACTED in X133: it mistook
+ *     format markers for glyphs and lacked an exactness gate. Corrected purge
+ *     measurements found zero on the tested initial frontiers. Joint search
+ *     still tests drops after other moves; no initial drop gain is assumed.
  *
  * (4) RE-MINING A BODY THAT SPAN MOVES HAVE ALREADY CHANGED. X132's re-mine ran
  *     on the frontier's own body and found ~0. But a span move DELETES
@@ -309,13 +308,11 @@ export function synarmogeFromFrontier(
    * candidates x 8 sweeps of a 852-token message was measured at +12 s on
    * node-help, a 55 % overhead on the whole stack.
    *
-   * BPE merges are LOCAL: no vocabulary token spans more than a few dozen
-   * characters, so the tokens a rename can change all lie within a window
-   * around the glyph's occurrences. Pricing that window instead of the message
-   * is therefore a faithful RANKING at a fraction of the cost. It is used only
-   * to order candidates; the winner is still priced on the full message and
-   * admitted only through the ordinary tryMove gate, so the screen cannot make
-   * the result less exact — at worst it changes which candidate we look at.
+   * This finite character window is only a ranking HEURISTIC. Bounded token
+   * length does not prove a bounded influence radius for pre-tokenization or
+   * a sequence of BPE merges. X133 measured the screen as speed-neutral.
+   * The winner is still priced on the full message and admitted through the
+   * ordinary tryMove gate, so a bad ranking loses search quality, not fidelity.
    */
   const WINDOW = 32;
   const windowFor = (glyphs: string[]): string => {

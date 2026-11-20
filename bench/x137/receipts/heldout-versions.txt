@@ -1,0 +1,4 @@
+v22.22.3
+Python 3.11.2
+git version 2.39.5
+ls (GNU coreutils) 9.1

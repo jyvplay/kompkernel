@@ -1,0 +1,9 @@
+{
+  "status": "NOT RUN",
+  "codec": "existing X137 KREMA, not SYNAPHE",
+  "path": "bench/x138/heldout/tar-help.txt",
+  "tokens": 1007,
+  "sourceSha256": "daf695476ad6da7c6ee9e74864e4b860d8f4565ca3209b8f75cbfc3423083a01",
+  "messageSha256": "0e4e80467d5c70882b0efc435c15b97a7e161939a5120833626c09cd34f03529",
+  "protocol": "One basic chat user message only; no tools/previous context/skills.md/additional decoder instruction. Save raw response bytes, model/version and provenance. Byte score does not itself prove blind collection."
+}

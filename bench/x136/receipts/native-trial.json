@@ -1,0 +1,7 @@
+{
+  "status": "NOT RUN",
+  "path": "bench/holdout-work/kb-article.txt",
+  "sourceSHA256": "d220bfb7a912670e0217b99760f41d40f41e7fab5ceda93f552aebf5ee4744c6",
+  "messageSHA256": "20a8941b1216bb792bd57c68a55f6f12f0218e25ad6bf5dcc971d0e47628f9af",
+  "requirement": "Single bare chat input; raw byte-exact output; no tools/skills/system help; independent unseen-source evaluator."
+}

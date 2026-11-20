@@ -1,0 +1,117 @@
+{
+  "exact": 26,
+  "fixtures": 19,
+  "unsupported": [
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x40/prices.csv"
+    }
+  ],
+  "rows": [
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/lsblk.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/kb-article.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/kb-article.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42b/uptime-w.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42b/free-m.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/df-h.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/df-h.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/df-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/node-help.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/node-help.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/findmnt.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/df-h.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/email-thread.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/email-thread.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/llm-answer.md"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/llm-answer.md"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x40/prices.csv"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/ps-ef.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout/code-ts.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x41/ps-aux-real.txt"
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-work/kb-article.txt"
+    }
+  ],
+  "nativeVerified": false
+}

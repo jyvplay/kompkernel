@@ -1,0 +1,415 @@
+{
+  "exact": 65,
+  "mechanics": 8,
+  "rows": [
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/kb-article.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/df-h.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-tbl/df-h.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/df-real.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/du-real.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/du-real.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/node-help.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/node-help.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "threshold": 2,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/df-h.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/email-thread.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/email-thread.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/email-thread.txt",
+      "threshold": 2,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-work/llm-answer.md",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x40/prices.csv",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "threshold": 2,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "threshold": 2,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout/code-ts.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout/code-ts.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout/code-ts.txt",
+      "threshold": 2,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "threshold": 2,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "threshold": 2,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "threshold": 2,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "threshold": 2,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-work/kb-article.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x41/node-help.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x41/node-help.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-work/email-thread.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-work/email-thread.txt",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-work/llm-answer.md",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x41/du-real.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout/code-ts.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-probe",
+      "path": "bench/x141/heldout/typescript.md",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-probe",
+      "path": "bench/x141/heldout/typescript.md",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-probe",
+      "path": "bench/x141/heldout/typescript.md",
+      "threshold": 2,
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-probe",
+      "path": "bench/x141/heldout/pg.md",
+      "threshold": 0,
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-probe",
+      "path": "bench/x141/heldout/pg.md",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-probe",
+      "path": "bench/x141/heldout/pg.md",
+      "threshold": 2,
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-parent",
+      "path": "bench/x141/heldout/typescript.md",
+      "threshold": 1,
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-parent",
+      "path": "bench/x141/heldout/typescript.md",
+      "threshold": 0,
+      "sourceExact": true
+    }
+  ],
+  "unsupported": [
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-tbl/df-h.txt"
+    },
+    {
+      "receipt": "parent",
+      "path": "bench/holdout-x41/ls-l-real.txt"
+    },
+    {
+      "receipt": "heldout-parent",
+      "path": "bench/x141/heldout/pg.md"
+    },
+    {
+      "receipt": "heldout-parent",
+      "path": "bench/x141/heldout/pg.md"
+    }
+  ],
+  "nativeVerified": false
+}

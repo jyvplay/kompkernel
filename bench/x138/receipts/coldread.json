@@ -1,0 +1,134 @@
+{
+  "exact": 21,
+  "rows": [
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-work/kb-article.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-x41/df-real.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-x41/du-real.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-x42/df-h.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-work/email-thread.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-work/llm-answer.md",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout/json-pkg.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout/code-ts.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "probe-repaired",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "repriced-heldout",
+      "path": "bench/x138/heldout/curl-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "repriced-heldout",
+      "path": "bench/x138/heldout/git-diff-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "repriced-heldout",
+      "path": "bench/x138/heldout/tar-help.txt",
+      "sourceExact": true
+    }
+  ],
+  "existingLayoutExact": 4,
+  "layoutRows": [
+    {
+      "receipt": "heldout",
+      "path": "bench/x138/heldout/curl-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout",
+      "path": "bench/x138/heldout/git-diff-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout",
+      "path": "bench/x138/heldout/tar-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "repriced-heldout",
+      "path": "bench/x138/heldout/tar-help.txt",
+      "sourceExact": true
+    }
+  ],
+  "nativeVerified": false
+}

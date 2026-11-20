@@ -9374,3 +9374,549 @@ precisely in §C. The next highest-information test is cheap and concrete:
 > / newline / another glyph). That converts "make a glyph reference cost zero"
 > from a hope into a search over a table, and it is the only remaining way past
 > X129's one-token floor inside this contract.
+
+## X134 — ΑΛΛΟΜΟΡΦΗ / ALLOMORPH (occurrence-conditioned aliases; research draft)
+
+**Not an accepted frontier advance.** The new experimental module is
+`src/lib/omega/allomorph.ts`; it is **not wired** into the default stack.
+Full A–J formal model, outcome space, 18 failure shapes, six-mechanism portfolio,
+adversarial gates, and reproduction commands: [`bench/x134/README.md`](../bench/x134/README.md).
+Live literature and individually scoped lab review: [`research.md`](../bench/x134/research.md).
+The complete measured result and local-leader table: [`results.md`](../bench/x134/results.md).
+
+| Design field | Specification |
+|---|---|
+| Name | ALLOMORPH: alternate forms of one symbol |
+| Mechanism | Add a fresh ordinary rule `h=g`; change only selected body occurrences of `g` to `h`, allowing one meaning multiple context-conditioned spellings |
+| Difference from X130 | X130 renames a rule everywhere bijectively; this duplicates its spelling and retains both names in one message |
+| Difference from X133 | X133's rename/drop/span operators are global per rule; this adds a per-occurrence alias decision |
+| Greedy? | Yes: at most four strictly improving passes; finite-window screens are heuristics, not proofs of optimality |
+| CPU/time bound | CPU/work-bound, 65,536-code-unit message cap, finite script pool; no wall-clock deadline in the new module |
+| Objective | Full emitted-message o200k_base count, including the added definition |
+| Decoder | Existing ordinary acyclic substitution; no added opcode, skills.md, tokenizer vocabulary, or system prompt |
+| Invariant | Actual CHIRON decoder equality, unchanged prefix; malformed passthrough is not treated as proof of validity |
+| Exactness evidence | Both accepted real messages independently reconstruct source UTF-8 bytes via the existing CPython reader |
+| LLM evidence | **No blind model test available/run.** Structural readability is not a guarantee of native byte-perfect execution |
+| Citation / novelty | Engineering hypothesis; homophonic coding and dictionary coding are not new ideas. No claim of absence from training data or worldwide novelty. Live sources and non-transferable hypotheses are explicitly scoped in research.md |
+| Default status | Unwired experimental API; not merged as a frontier addition |
+
+### Reconfirmed frontier — one-token drift, not exact identity
+
+On the canonical 29 paths, the full X133 configuration produced **28,015 raw ->
+11,962 shipped tokens**, versus **11,961** in the previous actual receipt.
+Only `bench/holdout-x41/ls-real.txt` changed: **413 -> 414**. X133 retains a
+wall-clock search limit even under `OMEGA_DET=1`, so reproducibility cannot be
+claimed from that switch alone. No causal attribution of this drift was proved.
+
+The encoder's `decoded` field equals source on 29/29. The independently run
+CPython emitted-wire reader directly reconstructs source on **19/29**; ten lanes
+need additional parent inversion. Do not conflate these two verification scopes.
+This audit is not evidence that the ten composed messages are corrupt.
+
+### Results and rejection boundary
+
+ALLOMORPH: **11,962 -> 11,960, aggregate −2**. `kb-article` saves one token;
+`ps-aux-real` saves one. Both winners pass independent source-byte decoding.
+The library tokenizer independently recounts accepted output. The 34-case
+adversarial unit suite and `tsc --noEmit` pass. The three positive constructed
+unit witnesses are **not** claimed as real-workload gains.
+
+Reusing VELTISTOS for cooperative alias parsing gives the same −2, not extra
+savings. Glyph eviction finds −1; partial-context specialization finds −5
+across three lanes, but is related dictionary induction, not an unrelated new
+mechanism. These alternative deltas must not be added. Escaped Latin naming
+finds no paying case. Full-carrier reversal, ASCII case-plane separation, and
+explicit line permutation cost +6,319 / +2,730 / +1,000 tokens respectively
+before fallback; they are rejected controls, not shipped codecs.
+
+**No significant whole-stack speedup was found.** The new search adds 12,736 ms
+over frozen outputs. The 1,191,329-ms baseline run had some overlapping small
+post-processing jobs and is not a controlled speed comparison. X133's prior
++5.20% runtime is an overhead, not a speed improvement over the shipped stack.
+
+### Generalized local leaders and the requested adjacency test
+
+The refreshed body-token census uses actual wire-declared rule names, not
+characters absent from source:
+
+- **Prose:** word-like BPE tokens lead, 1,629/2,807 (58.0%).
+- **Ops/tabular:** glyph-bearing tokens lead narrowly, 1,202/3,495 (34.4%);
+  word-like 1,105 and numeric 808 remain substantial.
+- **Code/structured:** word-like tokens lead, 945/1,993 (47.4%).
+- **Other:** four tape-free lanes; no dictionary-body leader is inferred.
+
+These are token classes, not word frequencies. In particular the old inference
+that a 58% word-like token share proves 58% of words are single-token and
+incompressible is not established by this census.
+
+The neighbor-class experiment measures 4,493 glyph sites. Of these, 2,951 have
+nonpositive **three-character marginal** cost. Latin/glyph and glyph/glyph
+contexts often already merge; Latin/Latin has 130 sites, marginal sum 249, and
+zero nonpositive marginals. This local diagnostic is not a full-message deletion
+cost. The associated escaped-Latin test did not repay header/escape costs.
+
+### Acceptance decision
+
+The requested substantial (>10-token in a real lane) gain, significant
+whole-stack acceleration, and independent blind native-LLM decoding gates are
+**unmet**. Preserve the candidate and receipts in a draft PR; do not call it a
+successful Pareto advance or merge it as one. Failed searches do not prove the
+contract impossible. The next untested interface is joint multi-alias allocation
+with collision escapes priced together, followed by held-out real workloads
+and a message-only model reader. Successful raw-input parent preconditioning
+also remains outstanding.
+
+## X135 — ANAKYKLI / cyclic-cut parent preconditioning (unwired)
+
+**Experimental addition; acceptance failed.** ANAKYKLI rotates source text at a
+line boundary before the existing encoder, declaring the inverse in-band. The
+marker-free first-line mode preserves the final newline; general cuts require
+an absent marker. This differs from alias renaming by changing the parent's
+input, but cyclic rotation is established prior art, not a new mathematical
+primitive. ALLOMORPH remains the previous experimental candidate, not a proved
+terminal codec. Neither candidate is enabled by default.
+
+Fresh frontier: **29 lanes / 11,962 tokens**, all emitted messages identical to
+X134. **28 cyclic trials on seven real lanes all regress +3..+36 tokens**.
+The closest case saves 11 tokens inside the parent but loses three after the
+inverse instruction. Joint escaped two-alias search: **89,045 probes / 25 lanes,
+zero gain**. No substantial >10-token full-message gain was demonstrated.
+
+The repaired reader verifies 28/28 rotation messages byte-for-byte in both TS
+and independent Python; baseline Python CHIRON+STELI coverage is 21/29, up from
+19/29. Eight baseline compositions remain unsupported. Unit suite: 111 checks;
+compiler passes. These are program checks, **not one-message native-LLM
+behavioral verification**, which remains untested.
+
+Search is fixed finite enumeration, **not greedy** and not globally optimal.
+Transform/inverse costs are linear per cut; whole-message tokenization and
+parent calls are additional. Wall timings: baseline 1,217,179 ms; rotation
+trials 920,154 ms; package probes 43,192 ms. These are not CPU upper bounds or a
+controlled comparison. Adding parent calls establishes no whole-stack speedup.
+
+Refreshed category leaders are unchanged: prose word-like (1,629 body tokens),
+ops glyph-bearing (1,202), code word-like (945); four tape-free other lanes have
+no inferred body leader. Token classes do not establish an incompressibility
+floor. See `bench/x135/receipts/leaders.json`.
+
+The scoped research review in `bench/x135/REVIEW.md` cites the 2026 bijective-BWT
+rotation bounds (run counts, not BPE), edit-sensitivity literature with access
+limits, and individually attributed lab proof claims. None supplies a reduction
+to this codec contract; no theorem prover or external model was run. Full
+measurements and next test are in `bench/x135/README.md`. Prior X134 next steps
+for joint aliases and parent preconditioning were tested here without a win;
+next is jointly pricing the inverse and parent instruction, not discarding
+inverse cost. PR #74 stays draft; no verified Pareto advance justifies merging.
+
+## X136 — PTYCHE / ΠΤΥΧΗ (fold): local layout parameters and residuals
+
+**Experimental/unwired; measured token improvement, not a verified full Pareto
+advance.** `src/lib/omega/ptyche.ts` adds paragraph-specific width overrides
+under a shared default. WRAPCANON/STICHOS already implement greedy wrapping at
+one width; PTYCHE's default-width arm selects a width covered by the most exact
+paragraph-width intervals, then sends `~|` for default blocks or `~W|` for local
+exceptions. The ordinary unwrapped text is passed through full TAGSTACK; the
+complete fused inverse instruction is counted. The optional per-line residual
+arm adjusts predicted word counts and re-anchors the next prediction. That arm
+is implemented/tested but **not responsible for the measured win**.
+
+**Scope and algorithm.** Valid UTF-8 source, at most 50,000 UTF-16 units; no CR,
+`~` or `↵` collisions in the default arm. Transformed paragraphs have >=3 ASCII
+single-spaced lines, with remaining paragraphs literal. Width selection is
+finite enumeration of 40..160, maximizing interval coverage (smallest tie).
+Paragraph exception widths use first-fit exact choices; generic residual plans
+minimize local token costs. The decoder's line filling is greedy. This is NOT
+global optimization of the parent objective. Default-mode planning has a bounded
+finite width scan and at most one extra parent invocation; no local wall-clock
+cutoff, but parent clock/work limits remain. No whole-stack CPU/time upper bound
+or acceleration follows from the planner's bounded work.
+
+**Measurements.** Fresh original frontier: 29 lanes, 11,962 tokens, 1,167,083 ms,
+all messages identical to X135. Full repaired-counter rerun: same 29 messages
+and 11,962 tokens, 1,147,890 ms. These are not controlled paired speed trials;
+the latter overlapped short tests. PTYCHE's default-width arm: kb-article
+**620→608 (−12)**, independent Python source-exact. Email 486→503 and prices
+118→237 are rejected. Frozen candidate aggregate: **11,950**, not a wired-stack
+run. The same-process public-API test reproduces 620→608, taking 6,485 ms for
+baseline plus 6,383 ms additional candidate work. Email fallback still costs
+9,177 ms extra. Significant whole-stack speedup is **not established**.
+
+**Strong novelty control:** existing WRAPCANON with the same parent/fused-header
+opportunity reaches 614; a marked single-width control also reaches 614. Only
+six tokens separate the mixed-width addition from those controls. This is a
+specific repository extension of established layout/predictive coding, not a
+new compression genus or evidence of novelty relative to training data. A
+24-file noncanonical screen finds only an eligible MIT license; its 38-token
+existing baseline is not improved. No broad held-out gain is claimed.
+
+**Counter repair (separate, not a codec).** `bpe-fast.ts` previously reused
+1,024-byte boundary/rank scratch arrays for longer chunks: 14/20 targeted counts
+were wrong. Correctly sized scan buffers plus a long-chunk adjacency heap repair
+this. Heap ties use original left offset; generations invalidate stale edges.
+235 new differential checks and the reused 323,192-string suite match the
+library. Heap operations are O(n log n), memory O(n), with rank lookup costs
+additional. The measured ~18.7× warmed-counter improvement on constructed long
+attacks is **not** a whole-stack claim. PTYCHE passes 366 checks; compiler passes.
+
+**Leaders refreshed:** baseline prose word-like 1,629, ops glyph-bearing 1,202,
+code word-like 945; four tape-free other lanes have no inferred dictionary-body
+leader. With the frozen candidate, prose totals 3,417 and remains word-led at
+1,625 body tokens. These classes do not prove an incompressibility floor.
+
+**Sources/verification:** the wrapping lemma is already documented in STICHOS;
+parameter residuals and heaps are standard techniques, not attributed to an
+unrelated new math proof. `bench/x136/research.md` records fresh scoped paper/lab
+audits, including the 2018 attractor paper (primary fetch failed; search-only),
+the 2025 next-token entropy-coding paper (https://arxiv.org/pdf/2505.06297), and
+limits on their applicability. A finite doubleAI chess witness was independently
+checked with python-chess, not its universal bound; this supplies no codec lemma.
+Independent baseline source coverage remains 21/29; all three new layout trials
+are independently source-exact. **Native blind single-chat LLM decoding remains
+untested**, including this assistant; a ready prompt/hash record and external
+response scorer are provided, not a fabricated model result. PR #74 remains
+draft and unmerged because the mandatory behavioral/speed/novelty gates do not
+all pass. Full results: `bench/x136/README.md`.
+
+## X137 — KREMA (hanging layout), experimental and unwired
+
+`src/lib/omega/krema.ts` adds prefix-preserving, current-column greedy wrapping
+with a separate continuation margin. Overflow activation and literal escapes
+are inherited ideas already present in WRAPCANON; this is a repository layout
+extension, **not a new compression genus or completed all-codec novelty proof**.
+
+Search: top three frequent indent margins; exhaustive widths 40..120 subject
+to margin+10; at most 243 layout trials, deduplicated and coverage-ranked to
+three full-parent candidates. Greedy decoder, non-greedy bounded parameter
+sweep followed by heuristic pruning; not global token optimization. Input cap
+50,000 UTF-16 units. No fixed CPU/wall-clock bound; inherited parent search
+is charged. Separate fast arm uses at most two no-block CHIRON alphabets plus
+SYNARMOGE, with weaker measured compression than full parent.
+
+Fresh shipped frontier reconfirmed 29/11,962, all messages identical to repaired
+X136. Canonical Node help 846→831 (−15); freshly captured/capped Node help
+844→822 (−22), but substantial source overlap limits heldout evidence. Git and
+Python help lose; ls help ineligible. Existing fused WRAPCANON control folds
+neither Node source and loses 17 tokens. Offline KREMA selection 11,947 is not
+a shipped or free-search result; experimental PTYCHE remains separately 11,950.
+
+81 checks, 19 independently implemented Python message reconstructions, tsc
+pass; native one-chat trial **NOT RUN**. Full-parent Node admission cost observed
+20,678ms baseline +45,148ms search; LLM-answer rejection +35,283ms. Concurrent
+experiments preclude a controlled speed ratio. No whole-stack acceleration or
+Pareto dominance claimed, no default integration or merge.
+
+Category leaders refreshed: baseline PROSE 3,429 (body word-like 1,629),
+OPS/TABULAR 5,580 (glyph-bearing 1,202), CODE/STRUCT 2,636 (word-like 945),
+OTHER 317 (no tapes). See `bench/x137/receipts/{leaders,selected-leaders}.json`.
+Technical design, bounds, controls, citations and evidence modes:
+`bench/x137/{README,REVIEW,research}.md`. Relevant layout ancestry includes
+Matsuda/Wang FliPpr ESOP 2013 (DOI 10.1007/978-3-642-37036-6_6) and Haskell
+2018 (DOI 10.1145/3242744.3242758); neither establishes native decoding or
+compression rates. No proof from a recent lab announcement is imported as a
+codec correctness or speed theorem.
+
+## X138 — SYNAPHE (junction), experimental overlap macros
+
+`src/lib/omega/synaphe.ts` adds a different body-composition operator: expand a
+macro definition normally, then append only the suffix remaining after its
+longest prefix equal to a suffix of the output-so-far is removed. Literals append
+unchanged. Ordinary macro concatenation, overlap-aware candidate mining,
+external CTXCOPY references, and case/affix MORPH are distinct controls, not
+new names for this operator. Suffix-prefix overlap itself is not new science;
+361 top-level omega TS files were inventoried, but exhaustive semantic novelty
+verification is incomplete. No native-model readability assertion is made.
+
+**Search/design:** reuse the parent dictionary; a source-prefix DAG considers
+literal and macro transitions and retains one cheapest emitted prefix per
+position. This is heuristic pruning, not globally optimal BPE dynamic programming
+(the future tokenizer context can favor a discarded prefix). No greedy
+longest-match claim. Admission requires exact decoded-layer equality and strict
+complete-message token improvement. Unknown parent contracts are refused, not
+stripped. Source-level composed inverses are separately audited.
+
+**CPU/time bounds:** CPU-bound, no wall-clock stopping rule. Message <=100,000
+UTF-16 units; target <=20,000 without surrogates; <=128 rules; each expanded
+rule <=2,000 units. At most n(R+2) prefix-price probes; naive overlap comparison
+cost O(n*R*L^2), plus full-prefix tokenization and dictionary expansion. Retaining
+one string per target position can use O(n^2) character storage; no linear-memory
+or cheap-latency guarantee. Decoder's naive overlap scans are also bounded by
+rule length, not a trained model's response time. These structural bounds are
+not whole-stack runtime measurements.
+
+**Results:** shipped frontier reconfirmed 29/11,962, all messages X137-identical,
+902,805ms (not a speedup claim). New overlap trials: 18 canonical, zero wins,
+sum delta +1,089; same-dictionary original-contract concatenation control:
+zero wins, +400. Three prospectively frozen curl/git-diff/tar help sources also
+lose under SYNAPHE. Existing KREMA, separately, improves tar 1,028→1,007 (−21),
+while WRAPCANON costs 1,044. Fast KREMA costs 1,038 and is not a substitute.
+
+**Verification:** 16,167 checks, 21 Python message-only source reconstructions
+for SYNAPHE, 4 for existing KREMA, compiler pass. Native model gate NOT RUN.
+Interleaved full-parent AB/BA timing includes rejected SYNAPHE costs; two samples
+per arm/source are too few for an acceleration claim. New module remains
+unwired, no accepted Pareto improvement, PR remains draft/unmerged.
+
+**Leaders:** fresh PROSE 3,429 tokens (word-like body 1,629), OPS/TABULAR 5,580
+(glyph-bearing 1,202), CODE/STRUCT 2,636 (word-like 945), OTHER 317 (no tapes).
+Per-lane census in `bench/x138/receipts/leaders.json`; new help-set token leaders
+are shipped parent on curl/Git and existing KREMA on tar. Native/speed gates are
+not bundled into token-price leadership.
+
+**Sources:** Varki/Gagie/Boucher, *Efficient Grammar Compression via RLZ-Based
+RePair*, CPM 2026, DOI 10.4230/LIPIcs.CPM.2026.5 (primary boundary-handling text
+read); Kempa/Prezza, *At the Roots of Dictionary Compression: String Attractors*,
+2017/2018, arXiv:1710.10964 (primary opening now fetched); Bioinformatics 2019
+suffix-prefix/minimizer reads compression, DOI 10.1093/bioinformatics/bty936
+(search excerpt only; primary fetch yielded navigation). These are related
+ancestry, not proofs of SYNAPHE or LLM decoding. Deeper, individually bounded
+lab audits in `bench/x138/research.md` include actual Anthropic word-RAM
+quantifiers and doubleAI determinant-certificate hypotheses; no formal proof
+was built. Full report and A–J ledger: `bench/x138/{README,REVIEW}.md`.
+
+## X139 — APOTOME (expanded-rule cuts; experimental, unwired)
+
+APOTOME is a name, not an acronym: signed `~gN|` expressions select a prefix
+or suffix of fully expanded rule g. Acyclic forward views extend the existing
+simple concatenation grammar; this is related to collage-system truncation,
+not a new compression-theory primitive. The existing codec lexical inventory
+is in `bench/x139/receipts/novelty-inventory.json`; it is not an exhaustive
+semantic novelty proof.
+
+Search is greedy whole-message best improvement, at most four passes and 4,096
+probes, including pairs from twelve independently proxy-ranked substitutions.
+Rejected cyclic singles may participate in an acyclic pair. Every accepted
+candidate must re-decode and improve full token price. Limits: 128 rules,
+20,000-unit expanded definitions and 100,000-unit decoded body; BMP-only parent
+wire, restricted parent instructions. Each probe can re-expand and retokenize
+the whole candidate; these bounds do not imply cheap whole-stack runtime.
+
+X139 reconfirmed all 29 shipped messages unchanged, 11,962 tokens in 1,198,254ms
+(non-isolated, not a speedup claim). APOTOME: 16 canonical priced trials, zero
+wins, +335 total tokens; one eligible heldout trial also loses. Jointly mined
+SYNAPHE/ordinary dictionaries: 72 trials, zero wins, 72 independent exact
+reconstructions. APOTOME unit checks 10,139; independent real-message reader
+17 exact. Actual view operations are covered by targeted tests; real search
+accepted no moves. Native verification NOT RUN; no accepted Pareto gain.
+
+Fresh category census remains PROSE 3,429 (word-like body 1,629), OPS/TABULAR
+5,580 (glyph-bearing 1,202), CODE/STRUCT 2,636 (word-like 945), OTHER 317.
+See `bench/x139/receipts/leaders.json`. Token classes are not lower bounds.
+Collage/SES/morphism citations and bounded primary lab audits are recorded in
+`bench/x139/research.md`; model, adversaries and evidence gaps in `REVIEW.md`.
+
+## X140 — EIKON (expanded-rule image grammar; experimental, unwired)
+
+**Name/design:** EIKON (Greek 'image'), not an acronym. `~gU|` and `~gL|`
+apply ASCII uppercase/lowercase to fully expanded g. `~gab|` replaces every
+character a by b simultaneously in expanded g. Ordinary references concatenate.
+Forward image references are explicit; the entire dependency graph, including
+unused rules, must be acyclic. A new grammar operation relative to APOTOME's
+truncations, not a new mathematical primitive. MORPH, STENTOR, template and line
+edit mechanisms are related prior repository work; exhaustive semantic novelty
+is NOT certified by the lexical inventory.
+
+**Greedy?** Yes: bounded best-improvement on complete-message BPE price, four
+passes/4,096 priced moves, with pairs from a top12 proxy-ranked pool. Source-mined
+image pairs get matched ordinary-grammar controls with identical values and
+entry budgets. Neither ranking nor the reused body parser is claimed globally
+BPE-optimal. Admission requires a strict full-price improvement and source inverse.
+
+**CPU/time:** CPU-bound enumeration, no clock cutoff. Up to4 R² K capped-string
+image comparisons plus priced candidate graph expansion/tokenization; R<=128,
+K=10, expanded definitions<=20,000 units, output<=100,000. The probe cap does not
+bound every image comparison. Encoder refuses surrogates and unsupported parent
+operators; it does not silently normalize them. Native inference cost is unknown.
+
+**Citations:** standard string-morphism ancestry (X139's morphism/NU-system audit),
+not a claimed implementation of that theorem. New cost-model guidance:
+Boffa et al., *CoCo-trie: Data-aware compression and indexing of strings*,
+Information Systems120(2024),102316, DOI10.1016/j.is.2023.102316,
+https://www.francescotosoni.it/static/j3.pdf ; Ganardi, *Compression by Contracting
+Straight-Line Programs*, ESA2021, DOI10.4230/LIPIcs.ESA.2021.45. Neither proves
+BPE savings or bare-model decoding. Full hypotheses/read scope in X140 research.
+
+**Results:** fresh shipped29/11,962, every message identical to X139;
+1,202,593ms concurrent, not causal speed evidence. EIKON16 canonical priced:
+zero wins,+495; two new dotenv/next documentation holdouts also lose. Matched
+source-mined dictionaries37 trials: neither arm wins. Interior-view followup45
+trials and source-involution full-parent12 trials: zero wins. Real EIKON trials
+accept no image operations; the operator is exercised by targeted unit fixtures.
+11,740 unit checks; independent Python55 image messages and37 ordinary controls,
+plus45 interior and12 source-swap messages byte-exact. Native gate NOT RUN.
+
+**Speed repair policy:** two-generation token-count memo tested at the same
+retained-key budget; four samples/arm/source in isolated full-parent ABBA/BAAB.
+B/A total time1.003 on KB and1.030 on LLM prose, no speedup. The hot-path hook was
+removed; helper unwired, experiment preserved as `bench/x140/memo-experiment.patch`.
+No default-codec addition or merge. Package manifests unchanged.
+
+**Leaders:** PROSE3,429 (word-like body1,629), OPS/TABULAR5,580 (glyph-bearing1,202),
+CODE/STRUCT2,636 (word-like945), OTHER317; no shipped changes. New documentation
+holdouts favor their parent502/620 tokens over tested candidates. These are token
+leaders, not certified native/runtime Pareto leaders. Reports and A–J ledger:
+`bench/x140/{README,REVIEW,research}.md`; per-source `receipts/leaders.json`.
+
+## X141 — MNEMA lexical-history experiment (not shipped)
+
+**MNEMA** (memory): `^p` copies the latest completed decoded ASCII word beginning
+with prefix p, case-sensitive, within this message. Literal and copied words both
+update history. Unlike cross-message copying and explicit KAPPA binding, it uses
+no prior message or binding tape. Adaptive dictionary, prefix and recency coding
+are classical ancestry; this is a new repository implementation, not a new
+mathematical compression primitive. `src/lib/omega/mnema.ts` remains unwired.
+
+Greedy proposal search tests up to12-letter prefixes with neighboring-character
+BPE scores and thresholds0/1/2. These local scores are not additive bounds;
+reference-tokenizer pricing includes the complete contract. Caps:50,000 UTF-16
+units,10,000 words; caret-containing sources refuse. Decoder induction: decoded
+history before each literal/reference matches source history, reference lookup
+selects exactly that word, and both sides learn it. This supports the implemented
+inverse under its domain, not LLM behavioral comprehension or optimality.
+
+Fresh shipped frontier:29 lanes,11,962 tokens, all messages identical to X140;
+1,207,071ms concurrent (not acceleration evidence). MNEMA42 standalone and17
+full-parent trials: zero frontier wins. Frozen TypeScript/pg README parents486/728;
+6 standalone and4 composed candidates also lose. Interior controls45 lose; long
+transformed phrase census29+2 sources finds zero pairs in its restricted search.
+Unit16,392; independent Python65 emitted MNEMA messages plus8 fixtures exact,
+4 composition events unsupported. Independent frontier22/31 supported;9 unsupported.
+Native reading NOT RUN. Category leaders unchanged: PROSE3,429(word-like1,629),
+OPS/TABULAR5,580(glyph-bearing1,202), CODE/STRUCT2,636(word-like945), OTHER317.
+These classes are not lower bounds or native Pareto certificates.
+
+Decimal-only token counting is a separate unwired acceleration experiment, not
+MNEMA compression. Exhaustive1–3-digit vocabulary checks and1,000 long generated
+strings contribute to28,406 assertions; the experimental bpe hook is preserved
+as a patch, not installed. Full-stack timing receipt is separate from these tests.
+
+References: Bhadade/Trivedi2011 *Lossless Text Compression using Dictionaries*;
+Zavadskyi/Klein/Shapira2026 *Context-Aware Word-Based Forward Coding*,
+DOI10.15388/26-INFOR621; Kuratov et al. ACL2025 DOI10.18653/v1/2025.acl-long.948.
+Their dictionaries, statistical coders or vector interfaces do not establish
+native textual-message savings. See `bench/x141/{README,REVIEW,research}.md`
+and receipts for precise scope, unsupported cases and gates. No verified Pareto
+winner or merge authorization follows from this experiment.
+
+X141 isolated acceleration result:24 full-stack measurements, byte/message
+identity preserved; B/A total time KB1.0313, ps-real1.0053, metrics1.0287.
+No demonstrated speedup; decimal hook remains removed. Reject deployment on
+this evidence, rather than presenting a counter micro-optimization as acceleration.
+
+## X142 — EUTAXIA endogenous-order reconstruction (unwired)
+
+**EUTAXIA** (good order): when a contiguous run is already strictly sorted by
+unique keys carried in its intact lines, clustering those lines is reversible
+without a permutation tape. In-band instructions identify the line range,
+whole-line or space-field key, numeric/ASCII comparison and direction. Decode
+the parent, sort that range, preserve all other characters. Numeric comparison
+uses exact integers (<=30 digits), not floating point. Equal numerical keys
+including01/1 refuse. This differs from periodic ANASTROPHE and VALENCE's paid
+arbitrary permutation rank. It corrects an overly broad exclusion of sorting;
+it is not a new sorting/compression theorem.
+
+Search is greedy and bounded: maximal monotone runs, four distinct ranges,
+three source-derived orders (reversed fields, length, reversed characters).
+Full-parent policy tries the first nonidentity plan on the longest chosen run.
+50,000-character/1,000-line caps; printable ASCII+LF only. Run census roughly
+O(16n) key comparisons plus bounded O(n log n) sorts and string work. CPU/work
+bounded, not clock-cutoff based; the full parent dominates time and can regress
+badly (apt candidate464,406ms concurrent). Local/token fallback is not runtime
+Pareto dominance. Decoder sorting is O(n log n) comparisons plus output work.
+
+Classical ancestry: Lemire/Kaser/Aouiche2010, *Sorting improves word-aligned
+bitmap indexes*, DOI10.1016/j.datak.2009.08.006,
+https://lemire.me/en/publication/dke2010/ ; Lemire/Kaser/Gutarra2012, *Reordering
+Rows for Better Compression*, DOI10.1145/2338626.2338633,
+https://arxiv.org/abs/1207.2189 . Their database/RLE results are not BPE or native
+chat guarantees. SEA2025 stable local consistency DOI10.4230/LIPIcs.SEA.2025.14
+is related grammar-construction research, not a theorem used to certify this wire.
+
+Fresh shipped29/11,962: messages identical to X141;1,594,906ms concurrent,
+not speed evidence. EUTAXIA67 standalone+12 full-parent canonical candidates,
+3 standalone+1 composed frozen ops candidate: zero frontier wins. Frozen prose
+README has no eligible run.3,852 unit checks; independent78 candidate messages
+and8 fixtures exact,5 compositions unsupported. Reference tokenizer116 prices.
+Native model gate NOT RUN. Category leaders unchanged: PROSE3,429(word-like
+1,629), OPS/TABULAR5,580(glyph-bearing1,202), CODE/STRUCT2,636(word-like945),
+OTHER317. Per-source `bench/x142/receipts/leaders.json`; classes are not lower bounds.
+
+Separate hash-placement experiment:323,192 differential tokenizer strings,
+zero mismatches. Large insertion-probe reductions did NOT establish broad
+full-stack acceleration:24 isolated measurements, B/A total-time KB0.9961,
+ps-real0.9744, metrics1.0040; all outputs identical. Hook removed, helper unwired.
+Frozen prior PTYCHE/KREMA native packets and byte-only grader prepared, not run
+against a model. A–J ledger, bounded novelty audit and individual math-source
+followups in `bench/x142/{README,REVIEW,research}.md`. No verified new Pareto
+codec, no merge claim.
+
+## X143 — PROTASIS conditional capitalization residual (unwired)
+
+**PROTASIS** (condition): predict one capitalized ASCII letter at a precisely
+specified sentence-like boundary or start of an LF-separated line. Store it
+lowercase; prefix ~ for a lowercase exception. Restore case after parent
+expansion. Unlike STENTOR's sustained uppercase spans and MORPH/EIKON's
+case-bearing dictionary operations, the predictor is a finite punctuation/line
+state machine with sparse exceptions. Classical predictive residual ancestry;
+repository-scoped implementation, not a new mathematical primitive.
+
+No greedy local search in the transform: two fixed predictors are enumerated
+and the complete standalone messages priced. Standalone encoder minimizes over
+those arms and identity; parent harness uses a bounded heuristic shortlist
+(changed>=8, exceptions<=changed, at most8 sources). Transform and inverse are
+O(n) character work; parent compression is the CPU-bound dominant cost. No clock
+cutoff in the transform.50,000 UTF16-unit source/folded cap, ASCII case only;
+non-ASCII characters untouched. Literal tilde refuses transformation; raw inputs
+starting with reserved contracts refuse standalone encoding to prevent wire
+ambiguity. This is a bounded text codec, not arbitrary-invalid-byte encoding.
+
+Repairs matter: exception growth beyond decoder cap now refuses; NBSP does not
+act like ASCII whitespace; explicit LF wording changed email's chosen model.
+Cheap repricing was rejected, and5 full-parent trials were rerun. Native reading
+is NOT RUN;19 fixtures and20,054 unit checks are software evidence only.
+Independent reader32 candidate messages exact,1 composition unsupported;
+reference gate66 prices. Frontier reader23/31 supported,8 unsupported.
+
+Fresh shipped29/11,962, every message identical to X142;1,228,636ms concurrent,
+not speed evidence. PROTASIS24 standalone+5 composed canonical and4 standalone
+heldout candidates: zero frontier wins. Frozen pg-pool/React parents588/252;
+no heldout meets composed-admission threshold. Even without the added header,
+observed parent payload savings max6 tokens. Leaders remain PROSE3,429(word-like
+1,629), OPS/TABULAR5,580(glyph-bearing1,202), CODE/STRUCT2,636(word-like945),
+OTHER317; these are empirical token leaders/classes, not lower bounds or native
+Pareto certificates. Per-source `bench/x143/receipts/leaders.json`.
+
+Separate exact token-tail allocation experiment:18,563 distinct strings across
+both encodings,111,378 assertions.24 isolated full-stack measurements preserved
+messages and bytes but were mixed: B/A total time KB0.9491, ps-real1.0420,
+metrics1.0063. Deployment rejected; bpe.ts hook removed, experiment patch retained.
+
+Sources: Etchegoyhen/Gete2020 *To Case or not to case*, LREC3752–3760,
+https://aclanthology.org/2020.lrec-1.463/ ; Gleave2016 *A modular architecture for
+Unicode text compression*, https://www.gleave.me/papers/2016-masters-thesis.pdf .
+Neither supplies our fixed-tokenizer/native-chat success theorem. Research
+includes a pinned SAT-encoding-length audit (2,066 finite checks, not SAT proof
+replay) and explicit date exclusion of an unpinnable current DeepMind document.
+Full bounded A–J ledger and receipts: `bench/x143/{README,REVIEW,research}.md`.
+No advantageous new codec established and no merge justified.
+
+### X143b: META / METABOLE — bucketed lexical suffix edits (unwired)
+
+`src/lib/omega/metabole.ts`; receipts and explicit acceptance gates in
+`bench/x143b/README.md`. ASCII lexemes reference the latest decoded lexeme
+with the same first character, remove a suffix, and append new text. This
+permits unseen words; it is classical delta/front-coding ancestry, not a new
+mathematical primitive. Carets are refused. Inputs/folded/decoded strings are
+capped at 50,000 UTF-16 units; malformed markers and reserved envelopes reject.
+Two greedy local token screens, then full instruction-inclusive pricing;
+no global optimum claim. Parent composition tries six raw-savings-ranked arms;
+omissions are unknown, not losses. Boundary/history/cap tests and an independent
+Python source-byte replay distinguish program fidelity from native reading.
+Native evaluation remains NOT_RUN. No broad codec advantage or whole-stack
+speedup is established. See X143b summary for final lane totals/category leaders.
+Fresh research ancestry: Practical Compressed String Dictionaries (2015),
+https://users.dcc.uchile.cl/~gnavarro/ps/is15.2.pdf ; Improved Compressed String
+Dictionaries (2019),
+https://lbd.udc.es/Repository/Publications/Drafts/1706046652539_2019_StringDictionaries.pdf ;
+OnPair (2025), https://arxiv.org/html/2508.02280v1 . Search excerpts inspected,
+not full proofs; trained dictionaries do not establish instruction-only native
+LLM reversibility. META is not wired into the production selector.

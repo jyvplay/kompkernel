@@ -1,0 +1,20 @@
+--- a/src/lib/omega/bpe.ts
++++ b/src/lib/omega/bpe.ts
+@@ -88,6 +88,9 @@
+ setCl100kMergeCacheSize(0);
+ 
+ import { fastCount } from './bpe-fast';
++import { decimalTokenCount } from './decimal-token-count';
++let DECIMAL_FAST = false;
++export function setDecimalFast(value:boolean):void { DECIMAL_FAST=value; chunkCacheClear(); }
+ import {
+   prolepsisLookup, prolepsisRecord, prolepsisReset, prolepsisDisabled,
+   prolepsisStride, type ProlepsisMark,
+@@ -518,6 +521,7 @@
+ 
+ export function countTokens(text: string, enc: EncodingName): number {
+   if (text === '') return 0;
++  if (DECIMAL_FAST && text.charCodeAt(0)>=48 && text.charCodeAt(0)<=57) { const n=decimalTokenCount(text); if(n!==null)return n; }
+   // very short strings are not worth the regex
+   if (text.length < 24) {
+     // X121: 1- and 2-code-unit strings are answered from X77's integer-keyed

@@ -1,0 +1,17 @@
+{
+  "scope": "bounded current source/docs/bench text scan excluding x139 and files over2MB; not all Git history",
+  "matches": [
+    {
+      "term": "yang-mills-group/YM",
+      "file": "bench/x118/research/sources.md"
+    },
+    {
+      "term": "yang-mills-group/YM",
+      "file": "bench/x119/research/sources.md"
+    },
+    {
+      "term": "yang-mills-group/YM",
+      "file": "bench/x120/research/sources.md"
+    }
+  ]
+}

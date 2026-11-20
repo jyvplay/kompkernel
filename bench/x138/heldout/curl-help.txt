@@ -1,0 +1,120 @@
+Usage: curl [options...] <url>
+     --abstract-unix-socket <path> Connect via abstract Unix domain socket
+     --alt-svc <file name> Enable alt-svc with this cache file
+     --anyauth            Pick any authentication method
+ -a, --append             Append to target file when uploading
+     --aws-sigv4 <provider1[:provider2[:region[:service]]]> Use AWS V4 signature authentication
+     --basic              Use HTTP Basic Authentication
+     --cacert <file>      CA certificate to verify peer against
+     --capath <dir>       CA directory to verify peer against
+ -E, --cert <certificate[:password]> Client certificate file and password
+     --cert-status        Verify the status of the server cert via OCSP-staple
+     --cert-type <type>   Certificate type (DER/PEM/ENG/P12)
+     --ciphers <list of ciphers> SSL ciphers to use
+     --compressed         Request compressed response
+     --compressed-ssh     Enable SSH compression
+ -K, --config <file>      Read config from a file
+     --connect-timeout <fractional seconds> Maximum time allowed for connection
+     --connect-to <HOST1:PORT1:HOST2:PORT2> Connect to host
+ -C, --continue-at <offset> Resumed transfer offset
+ -b, --cookie <data|filename> Send cookies from string/file
+ -c, --cookie-jar <filename> Write cookies to <filename> after operation
+     --create-dirs        Create necessary local directory hierarchy
+     --create-file-mode <mode> File mode for created files
+     --crlf               Convert LF to CRLF in upload
+     --crlfile <file>     Use this CRL list
+     --curves <algorithm list> (EC) TLS key exchange algorithm(s) to request
+ -d, --data <data>        HTTP POST data
+     --data-ascii <data>  HTTP POST ASCII data
+     --data-binary <data> HTTP POST binary data
+     --data-raw <data>    HTTP POST data, '@' allowed
+     --data-urlencode <data> HTTP POST data URL encoded
+     --delegation <LEVEL> GSS-API delegation permission
+     --digest             Use HTTP Digest Authentication
+ -q, --disable            Disable .curlrc
+     --disable-eprt       Inhibit using EPRT or LPRT
+     --disable-epsv       Inhibit using EPSV
+     --disallow-username-in-url Disallow username in URL
+     --dns-interface <interface> Interface to use for DNS requests
+     --dns-ipv4-addr <address> IPv4 address to use for DNS requests
+     --dns-ipv6-addr <address> IPv6 address to use for DNS requests
+     --dns-servers <addresses> DNS server addrs to use
+     --doh-cert-status    Verify the status of the DoH server cert via OCSP-staple
+     --doh-insecure       Allow insecure DoH server connections
+     --doh-url <URL>      Resolve host names over DoH
+ -D, --dump-header <filename> Write the received headers to <filename>
+     --egd-file <file>    EGD socket path for random data
+     --engine <name>      Crypto engine to use
+     --etag-compare <file> Pass an ETag from a file as a custom header
+     --etag-save <file>   Parse ETag from a request and save it to a file
+     --expect100-timeout <seconds> How long to wait for 100-continue
+ -f, --fail               Fail fast with no output on HTTP errors
+     --fail-early         Fail on first transfer error, do not continue
+     --fail-with-body     Fail on HTTP errors but save the body
+     --false-start        Enable TLS False Start
+ -F, --form <name=content> Specify multipart MIME data
+     --form-escape        Escape multipart form field/file names using backslash
+     --form-string <name=string> Specify multipart MIME data
+     --ftp-account <data> Account data string
+     --ftp-alternative-to-user <command> String to replace USER [name]
+     --ftp-create-dirs    Create the remote dirs if not present
+     --ftp-method <method> Control CWD usage
+     --ftp-pasv           Use PASV/EPSV instead of PORT
+ -P, --ftp-port <address> Use PORT instead of PASV
+     --ftp-pret           Send PRET before PASV
+     --ftp-skip-pasv-ip   Skip the IP address for PASV
+     --ftp-ssl-ccc        Send CCC after authenticating
+     --ftp-ssl-ccc-mode <active/passive> Set CCC mode
+     --ftp-ssl-control    Require SSL/TLS for FTP login, clear for transfer
+ -G, --get                Put the post data in the URL and use GET
+ -g, --globoff            Disable URL sequences and ranges using {} and []
+     --happy-eyeballs-timeout-ms <milliseconds> Time for IPv6 before trying IPv4
+     --haproxy-protocol   Send HAProxy PROXY protocol v1 header
+ -I, --head               Show document info only
+ -H, --header <header/@file> Pass custom header(s) to server
+ -h, --help <category>    Get help for commands
+     --hostpubmd5 <md5>   Acceptable MD5 hash of the host public key
+     --hostpubsha256 <sha256> Acceptable SHA256 hash of the host public key
+     --hsts <file name>   Enable HSTS with this cache file
+     --http0.9            Allow HTTP 0.9 responses
+ -0, --http1.0            Use HTTP 1.0
+     --http1.1            Use HTTP 1.1
+     --http2              Use HTTP 2
+     --http2-prior-knowledge Use HTTP 2 without HTTP/1.1 Upgrade
+     --http3              Use HTTP v3
+     --http3-only         Use HTTP v3 only
+     --ignore-content-length Ignore the size of the remote resource
+ -i, --include            Include protocol response headers in the output
+ -k, --insecure           Allow insecure server connections
+     --interface <name>   Use network INTERFACE (or address)
+ -4, --ipv4               Resolve names to IPv4 addresses
+ -6, --ipv6               Resolve names to IPv6 addresses
+     --json <data>        HTTP POST JSON
+ -j, --junk-session-cookies Ignore session cookies read from file
+     --keepalive-time <seconds> Interval time for keepalive probes
+     --key <key>          Private key file name
+     --key-type <type>    Private key file type (DER/PEM/ENG)
+     --krb <level>        Enable Kerberos with security <level>
+     --libcurl <file>     Dump libcurl equivalent code of this command line
+     --limit-rate <speed> Limit transfer speed to RATE
+ -l, --list-only          List only mode
+     --local-port <num/range> Force use of RANGE for local port numbers
+ -L, --location           Follow redirects
+     --location-trusted   Like --location, and send auth to other hosts
+     --login-options <options> Server login options
+     --mail-auth <address> Originator address of the original email
+     --mail-from <address> Mail from this address
+     --mail-rcpt <address> Mail to this address
+     --mail-rcpt-allowfails Allow RCPT TO command to fail for some recipients
+ -M, --manual             Display the full manual
+     --max-filesize <bytes> Maximum file size to download
+     --max-redirs <num>   Maximum number of redirects allowed
+ -m, --max-time <fractional seconds> Maximum time allowed for transfer
+     --metalink           Process given URLs as metalink XML file
+     --negotiate          Use HTTP Negotiate (SPNEGO) authentication
+ -n, --netrc              Must read .netrc for user name and password
+     --netrc-file <filename> Specify FILE for netrc
+     --netrc-optional     Use either .netrc or URL
+ -:, --next               Make next URL use its separate set of options
+     --no-alpn            Disable the ALPN TLS extension
+ -N, --no-buffer          Disable buffering of the output stream

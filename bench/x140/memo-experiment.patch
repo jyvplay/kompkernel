@@ -1,0 +1,68 @@
+diff --git a/src/lib/omega/bpe.ts b/src/lib/omega/bpe.ts
+index d6a246c..c491b35 100644
+--- a/src/lib/omega/bpe.ts
++++ b/src/lib/omega/bpe.ts
+@@ -88,6 +88,7 @@ setO200kMergeCacheSize(0);
+ setCl100kMergeCacheSize(0);
+ 
+ import { fastCount } from './bpe-fast';
++import { CountMemoGenerations } from './count-memo-generations';
+ import {
+   prolepsisLookup, prolepsisRecord, prolepsisReset, prolepsisDisabled,
+   prolepsisStride, type ProlepsisMark,
+@@ -363,9 +364,22 @@ function readMemoBudget(): number {
+   return 2_000_000;
+ }
+ let LONG_CACHE_MAX_TOTAL_CHARS = readMemoBudget();
++// X140 opt-in experiment. Default remains the previously shipped memo policy.
++let GENERATIONAL_COUNT_MEMO = false;
++const GENERATIONAL_MEMOS = new Map<EncodingName, CountMemoGenerations>();
++export function setGenerationalCountMemo(enabled: boolean): void {
++  GENERATIONAL_COUNT_MEMO = enabled;
++  chunkCacheClear();
++}
++function generationMemo(enc: EncodingName): CountMemoGenerations {
++  let m = GENERATIONAL_MEMOS.get(enc);
++  if (!m) { m = new CountMemoGenerations(LONG_CACHE_MAX_TOTAL_CHARS, LONG_CACHE_MAX); GENERATIONAL_MEMOS.set(enc, m); }
++  return m;
++}
+ /** Benchmark hook: set the retained-key budget at runtime and report what it is. */
+ export function setCountMemoBudget(n: number): number {
+   LONG_CACHE_MAX_TOTAL_CHARS = Number.isFinite(n) && n >= 0 ? n : 0;
++  GENERATIONAL_MEMOS.clear();
+   return LONG_CACHE_MAX_TOTAL_CHARS;
+ }
+ export function countMemoBudget(): number { return LONG_CACHE_MAX_TOTAL_CHARS; }
+@@ -377,6 +391,7 @@ export function chunkCacheStats() {
+   for (const m of LONG_CACHE.values()) longSize += m.size;
+   for (const m of SHORT_CACHE.values()) shortSize += m.size;
+   for (const n of LONG_CACHE_CHARS.values()) longChars += n;
++  for (const m of GENERATIONAL_MEMOS.values()) { const s = m.stats(); longSize += s.size; longChars += s.chars; }
+   return { size: CHUNK_CACHE.size, hits: chunkHits, misses: chunkMisses, fallbacks: chunkFallbacks,
+            shortSize, shortHits, shortMisses,
+            longSize, longChars, longHits, longMisses };
+@@ -385,7 +400,7 @@ export function chunkCacheClear() {
+   CHUNK_CACHE.clear(); LUT2.clear(); LUT1.fill(-1);
+   chunkHits = 0; chunkMisses = 0; chunkFallbacks = 0;
+   SHORT_CACHE.clear(); shortHits = 0; shortMisses = 0;
+-  LONG_CACHE.clear(); LONG_CACHE_CHARS.clear(); longHits = 0; longMisses = 0;
++  LONG_CACHE.clear(); LONG_CACHE_CHARS.clear(); GENERATIONAL_MEMOS.clear(); longHits = 0; longMisses = 0;
+   TAIL_MEMO.clear(); tailHits = 0; tailMisses = 0;
+   prolepsisReset();
+ }
+@@ -537,12 +552,14 @@ export function countTokens(text: string, enc: EncodingName): number {
+   let lc = LONG_CACHE.get(enc);
+   if (lc === undefined) { lc = new Map<string, number>(); LONG_CACHE.set(enc, lc); }
+   const cacheable = text.length <= LONG_CACHE_MAX_TEXT_CHARS;
+-  const memo = cacheable ? lc.get(text) : undefined;
++  const gm = GENERATIONAL_COUNT_MEMO ? generationMemo(enc) : null;
++  const memo = cacheable ? (gm ? gm.get(text) : lc.get(text)) : undefined;
+   if (memo !== undefined) { longHits++; return memo; }
+   longMisses++;
+ 
+   const store = (v: number): number => {
+     if (!cacheable) return v;
++    if (gm) { gm.set(text, v); return v; }
+     let retainedChars = LONG_CACHE_CHARS.get(enc) ?? 0;
+     if (lc.size >= LONG_CACHE_MAX || retainedChars + text.length > LONG_CACHE_MAX_TOTAL_CHARS) {
+       lc.clear();

@@ -1,0 +1,34 @@
+[
+  {
+    "message": "After decoding the payload, sort lines 2 through 9 by space-separated field 1 in ascending ASCII lexicographic order. Preserve all line characters and other lines; print only.\nheader\n008 apple  value 1\n007 zebra  value 2\n006 pear  value 3\n005 apple  value 4\n004 zebra  value 5\n003 pear  value 6\n002 apple  value 7\n001 zebra  value 8",
+    "expected": "header\n001 zebra  value 8\n002 apple  value 7\n003 pear  value 6\n004 zebra  value 5\n005 apple  value 4\n006 pear  value 3\n007 zebra  value 2\n008 apple  value 1"
+  },
+  {
+    "message": "After decoding the payload, sort lines 2 through 9 by space-separated field 1 in ascending ASCII lexicographic order. Preserve all line characters and other lines; print only.\nheader\n008 apple  value 1\n007 zebra  value 2\n006 pear  value 3\n005 apple  value 4\n004 zebra  value 5\n003 pear  value 6\n002 apple  value 7\n001 zebra  value 8\n",
+    "expected": "header\n001 zebra  value 8\n002 apple  value 7\n003 pear  value 6\n004 zebra  value 5\n005 apple  value 4\n006 pear  value 3\n007 zebra  value 2\n008 apple  value 1\n"
+  },
+  {
+    "message": "After decoding the payload, sort lines 2 through 9 by space-separated field 1 in descending ASCII lexicographic order. Preserve all line characters and other lines; print only.\nheader\n001 zebra  value 8\n002 apple  value 7\n003 pear  value 6\n004 zebra  value 5\n005 apple  value 4\n006 pear  value 3\n007 zebra  value 2\n008 apple  value 1",
+    "expected": "header\n008 apple  value 1\n007 zebra  value 2\n006 pear  value 3\n005 apple  value 4\n004 zebra  value 5\n003 pear  value 6\n002 apple  value 7\n001 zebra  value 8"
+  },
+  {
+    "message": "After decoding the payload, sort lines 2 through 9 by space-separated field 1 in descending ASCII lexicographic order. Preserve all line characters and other lines; print only.\nheader\n001 zebra  value 8\n002 apple  value 7\n003 pear  value 6\n004 zebra  value 5\n005 apple  value 4\n006 pear  value 3\n007 zebra  value 2\n008 apple  value 1\n",
+    "expected": "header\n008 apple  value 1\n007 zebra  value 2\n006 pear  value 3\n005 apple  value 4\n004 zebra  value 5\n003 pear  value 6\n002 apple  value 7\n001 zebra  value 8\n"
+  },
+  {
+    "message": "After decoding the payload, sort lines 2 through 9 by space-separated field 1 in ascending integer order. Preserve all line characters and other lines; print only.\nheader\n008 apple  value 1\n007 zebra  value 2\n006 pear  value 3\n005 apple  value 4\n004 zebra  value 5\n003 pear  value 6\n002 apple  value 7\n001 zebra  value 8",
+    "expected": "header\n001 zebra  value 8\n002 apple  value 7\n003 pear  value 6\n004 zebra  value 5\n005 apple  value 4\n006 pear  value 3\n007 zebra  value 2\n008 apple  value 1"
+  },
+  {
+    "message": "After decoding the payload, sort lines 2 through 9 by space-separated field 1 in ascending integer order. Preserve all line characters and other lines; print only.\nheader\n008 apple  value 1\n007 zebra  value 2\n006 pear  value 3\n005 apple  value 4\n004 zebra  value 5\n003 pear  value 6\n002 apple  value 7\n001 zebra  value 8\n",
+    "expected": "header\n001 zebra  value 8\n002 apple  value 7\n003 pear  value 6\n004 zebra  value 5\n005 apple  value 4\n006 pear  value 3\n007 zebra  value 2\n008 apple  value 1\n"
+  },
+  {
+    "message": "After decoding the payload, sort lines 2 through 9 by space-separated field 1 in descending integer order. Preserve all line characters and other lines; print only.\nheader\n001 zebra  value 8\n002 apple  value 7\n003 pear  value 6\n004 zebra  value 5\n005 apple  value 4\n006 pear  value 3\n007 zebra  value 2\n008 apple  value 1",
+    "expected": "header\n008 apple  value 1\n007 zebra  value 2\n006 pear  value 3\n005 apple  value 4\n004 zebra  value 5\n003 pear  value 6\n002 apple  value 7\n001 zebra  value 8"
+  },
+  {
+    "message": "After decoding the payload, sort lines 2 through 9 by space-separated field 1 in descending integer order. Preserve all line characters and other lines; print only.\nheader\n001 zebra  value 8\n002 apple  value 7\n003 pear  value 6\n004 zebra  value 5\n005 apple  value 4\n006 pear  value 3\n007 zebra  value 2\n008 apple  value 1\n",
+    "expected": "header\n008 apple  value 1\n007 zebra  value 2\n006 pear  value 3\n005 apple  value 4\n004 zebra  value 5\n003 pear  value 6\n002 apple  value 7\n001 zebra  value 8\n"
+  }
+]

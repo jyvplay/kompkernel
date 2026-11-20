@@ -1,0 +1,5907 @@
+{
+  "scope": "All omega TS files indexed; keyword index and first12-line inventory, not exhaustive semantic review",
+  "files": [
+    {
+      "path": "src/lib/omega/abacus.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 8,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aeon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aether.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 9,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aetos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 2,
+        "template": 1,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aion.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 3,
+        "predict": 0,
+        "delta": 103,
+        "grammar": 3,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aither.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 4,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/akolouthia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/akolouthia2.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/akribeia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 4,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aleph.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aleph.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/allomorph.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/alphafold.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 42,
+        "predict": 3,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ambient.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/amphora.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 1,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anadiplosis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 3,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anagnorisis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 51,
+        "suffix": 0,
+        "template": 11,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 2
+      }
+    },
+    {
+      "path": "src/lib/omega/anagraphe.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 6,
+        "suffix": 0,
+        "template": 1,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anakykli.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 1,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anamnesis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 2,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 7,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ananke.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 18,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anaphora-fold.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 1,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anaphora.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 3,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anastrophe.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 7,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/antiphon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 3,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/apeiron.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 5,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/apex.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/apex.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/apographe.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 4,
+        "suffix": 3,
+        "template": 41,
+        "predict": 24,
+        "delta": 3,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/apotome.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 1,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/arche.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 6,
+        "recency": 0,
+        "prefix": 6,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/archetypon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 13,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ariadne.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 1,
+        "sort": 11,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 3,
+        "template": 6,
+        "predict": 0,
+        "delta": 35,
+        "grammar": 30,
+        "hash": 2
+      }
+    },
+    {
+      "path": "src/lib/omega/arithmos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 23,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/astraea.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 13,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/astral.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/athroismos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 7,
+        "predict": 1,
+        "delta": 2,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/atlas.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/atom-codec-v3.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/atom-codec-v3.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/atom-codec.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/atom-codec.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/atx-release.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 1,
+        "template": 10,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aurora.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/austere.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/axiom.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 5,
+        "recency": 1,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/banyan.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/bathmos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 10,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 8,
+        "predict": 7,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/bifront.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 8,
+        "suffix": 46,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/bpe-audit.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/bpe-fast.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 2
+      }
+    },
+    {
+      "path": "src/lib/omega/bpe.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/bpe.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 4,
+        "suffix": 3,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 5
+      }
+    },
+    {
+      "path": "src/lib/omega/brachylogia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/brachys.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/cadmus.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/caesura.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/canon-catalog.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 3,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chimera.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 13,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chiron.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 7,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 15,
+        "predict": 1,
+        "delta": 0,
+        "grammar": 4,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chronos-arena.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chronos-arena.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chronos-v6.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chronos-v6.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chronos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 26,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/circe.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 10,
+        "recency": 0,
+        "prefix": 20,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 8,
+        "grammar": 0,
+        "hash": 4
+      }
+    },
+    {
+      "path": "src/lib/omega/cjk-contractor.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 4,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/clock.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/cm.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 6,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 2
+      }
+    },
+    {
+      "path": "src/lib/omega/cm.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 6,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 2
+      }
+    },
+    {
+      "path": "src/lib/omega/codec-synthesis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 1,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/column.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 15,
+        "suffix": 16,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/count-memo-generations.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/crasis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 2,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/crown.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ctxcopy.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 1,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/daedalus-dual.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/daedalus.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 18,
+        "delta": 1,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/decimal-token-count.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/dendron.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 0,
+        "template": 1,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/dendrons.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/diagraphe.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/diaphora.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 3,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/diastema.before.d.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/diastema.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 1,
+        "template": 0,
+        "predict": 1,
+        "delta": 10,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/diglossia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 4,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 9,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/dike.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/diorthosi.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 2,
+        "template": 4,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/diptychon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 14,
+        "suffix": 0,
+        "template": 11,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/dirfold-a.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/dirfold.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ditto.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/dragi-full.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/dragi-full.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/echo.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 7,
+        "suffix": 0,
+        "template": 0,
+        "predict": 1,
+        "delta": 4,
+        "grammar": 6,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eclipse.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eidolon.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 4,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eidolon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 4,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eidos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 4,
+        "suffix": 0,
+        "template": 1,
+        "predict": 0,
+        "delta": 133,
+        "grammar": 11,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/eikon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eirmos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 11,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 19,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/elleipsis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 23,
+        "suffix": 0,
+        "template": 0,
+        "predict": 3,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 5
+      }
+    },
+    {
+      "path": "src/lib/omega/enallage.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 1,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/engram.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 4,
+        "grammar": 0,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/engramma.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 8,
+        "predict": 0,
+        "delta": 2,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/enkibotismos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/enthymeme.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 1,
+        "predict": 6,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/epagoge.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 25,
+        "suffix": 0,
+        "template": 0,
+        "predict": 13,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/epipsephisis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 1,
+        "prefix": 13,
+        "suffix": 8,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/episteme.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 2,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 4,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/epistle.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eupraxia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/euros.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 1,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eustochia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 8,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eutaxia.ts",
+      "terms": {
+        "monotone": 2,
+        "permutation": 3,
+        "sort": 6,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/euteleia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 2,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/euthynteria.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 6,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/exodus.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/fotar.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/genesis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 6,
+        "recency": 0,
+        "prefix": 6,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 5,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/gennadas.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 2,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/glossia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 19,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/gnomon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/gramma.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 4,
+        "suffix": 0,
+        "template": 0,
+        "predict": 10,
+        "delta": 9,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/harmonia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/harmos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/helix.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hemera.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 1,
+        "template": 0,
+        "predict": 0,
+        "delta": 6,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hermes-contract.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 1,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hermes-fractal.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 41,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 3,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hermes.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 8,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/heuresis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/homoios.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 1,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hora.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 1,
+        "template": 0,
+        "predict": 0,
+        "delta": 25,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hydra.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hyle.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 1,
+        "template": 11,
+        "predict": 0,
+        "delta": 3,
+        "grammar": 4,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hypercube-v5.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hypercube-v5.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hypergraph.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 3,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hyperion.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 1,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/icarus.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/input-memory.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/iris.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 4,
+        "suffix": 4,
+        "template": 2,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 4,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/isomorphia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/isoskeles.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 6,
+        "predict": 2,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/janus.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 1,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/janus.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 1,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/json-escape-fold.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 4,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kairos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 7,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kalligraphos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kallos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 2,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kannabos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 28,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kanon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kappa.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 17,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kenon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 1,
+        "predict": 0,
+        "delta": 2,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kephalaion.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 13,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 6,
+        "predict": 1,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kerma.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kernel.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 2,
+        "template": 2,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/khoros-operads.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 5,
+        "suffix": 5,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 44
+      }
+    },
+    {
+      "path": "src/lib/omega/khoros.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 6,
+        "suffix": 6,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 14,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kinetic.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kiones.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 1,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kladios.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 10,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/koine.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 7,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kolumn.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 3,
+        "template": 7,
+        "predict": 0,
+        "delta": 29,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/krema.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 9,
+        "suffix": 0,
+        "template": 0,
+        "predict": 2,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/lakonikos-d.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/lakonikos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/lattice.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 6,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 3,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/lethe.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 6,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 1,
+        "delta": 26,
+        "grammar": 3,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/lexis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/logistike.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 1,
+        "template": 0,
+        "predict": 0,
+        "delta": 10,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/logos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 20,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/logtpl.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 7,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ltp.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ltp.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/lumen.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/megaepanalipsis.ts",
+      "terms": {
+        "monotone": 4,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 7,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/mekos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 11,
+        "suffix": 0,
+        "template": 0,
+        "predict": 1,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/meridian.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 3,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/merismos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/meson.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 6,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/metataxis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 2,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/metathesis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 1,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/metatron.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 2,
+        "template": 0,
+        "predict": 1,
+        "delta": 0,
+        "grammar": 5,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/metis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 4,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/metonomasia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 4,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/metron.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 3,
+        "template": 5,
+        "predict": 5,
+        "delta": 1,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/mnema.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 1,
+        "prefix": 9,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/mnemosyne.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 0,
+        "template": 31,
+        "predict": 0,
+        "delta": 2,
+        "grammar": 8,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/moira.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 3,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/morph.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 11,
+        "suffix": 12,
+        "template": 0,
+        "predict": 0,
+        "delta": 7,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/morph.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 11,
+        "suffix": 12,
+        "template": 0,
+        "predict": 0,
+        "delta": 7,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/morphe.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 10,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 4,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/mosaic.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 4,
+        "suffix": 1,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/nebula.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/nemesis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 8,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/nest.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 48,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/nexus.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/nexus.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/noesis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 5,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/nyx.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 2,
+        "template": 11,
+        "predict": 0,
+        "delta": 12,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/oikonomia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 2,
+        "delta": 0,
+        "grammar": 3,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/omega-e8seed.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/omega-e8seed.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/omni-operads.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 5,
+        "suffix": 5,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 44
+      }
+    },
+    {
+      "path": "src/lib/omega/omni.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 6,
+        "suffix": 6,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 14,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/onomasia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/oracle.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 7,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 2,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 6,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/orbit.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/orion.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/orothesia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 4,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 3,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/orthos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/oura.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 3,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/padtab.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/padtab2.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/palimpsest.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 1,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/palindromos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/panacea.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 9,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/panoptes.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 21,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/pantheon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 5,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/paradeigma.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 57,
+        "predict": 1,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/parataxis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/perikopi.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/periodos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/persistent-dict.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/persistent-dict.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a1.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 6,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a10.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a2.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 6,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a3.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 6,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a4.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 5,
+        "suffix": 0,
+        "template": 6,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a5.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a6.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a7.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a8.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a9.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx2.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx3.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx4.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 6,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phoenix.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phrase.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 6,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/pinax.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/platos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 4,
+        "predict": 4,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/plexus.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/plinthos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/polaris.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/polytropos.ts",
+      "terms": {
+        "monotone": 1,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/praxis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/proagoge.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 3,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/probole.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 5,
+        "suffix": 0,
+        "template": 10,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/procrustes.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 8,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/prokeno.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/prolepsis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 19,
+        "suffix": 1,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/prometheus-icdm.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/prometheus-icdm.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/pronoia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 6,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 7,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/prosopon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 7,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/prosphysis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 14,
+        "suffix": 15,
+        "template": 0,
+        "predict": 1,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/proteus.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 1,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/psephos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 4,
+        "suffix": 3,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ptyche.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 2,
+        "delta": 8,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/pulse.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/pyknosis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 4,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/quantum.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/quasar.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/rank-hash.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/recall.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/registry.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/registry.ts",
+      "terms": {
+        "monotone": 4,
+        "permutation": 4,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 17,
+        "suffix": 11,
+        "template": 54,
+        "predict": 20,
+        "delta": 23,
+        "grammar": 24,
+        "hash": 5
+      }
+    },
+    {
+      "path": "src/lib/omega/repair.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 6,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/reprise.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/rhizoma.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 6,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/rosetta.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 1,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 44,
+        "suffix": 21,
+        "template": 71,
+        "predict": 0,
+        "delta": 7,
+        "grammar": 12,
+        "hash": 3
+      }
+    },
+    {
+      "path": "src/lib/omega/schema.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sequoyah.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 1,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 28,
+        "grammar": 13,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sibling-template.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 53,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sibyl.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 35,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sigma.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sigma.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/signet.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 3,
+        "template": 10,
+        "predict": 0,
+        "delta": 6,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/solaris.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sphragis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 2
+      }
+    },
+    {
+      "path": "src/lib/omega/splice.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stadion.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/starlight-inline.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/starlight.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stathmos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/steli.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 1,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stencil.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 37,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stencil.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 37,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stentor.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 7,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stichomythia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 1,
+        "template": 0,
+        "predict": 0,
+        "delta": 2,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stichos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stigme.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stoichedon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stoicheion.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 3,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stoichos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stoichothetes.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/strand-book.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/strand.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 3,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/strata.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 5,
+        "suffix": 5,
+        "template": 20,
+        "predict": 0,
+        "delta": 12,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sygkollesis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syllogismos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 13,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/symmetron.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/symphyia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 4,
+        "template": 10,
+        "predict": 1,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/symploke.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 2,
+        "template": 1,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 5,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synaphe.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 5,
+        "suffix": 2,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 4,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synapse.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 5,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synarmoge.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/synartesis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/syncope.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/syndesmos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 42,
+        "suffix": 0,
+        "template": 7,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syndyasmos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 2,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 1,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synedria.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synergy.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synizesis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 1,
+        "template": 12,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synkope.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 1,
+        "predict": 0,
+        "delta": 2,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synkrisis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 13,
+        "suffix": 7,
+        "template": 7,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syntagma.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syntaxis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 25,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synthesis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 1,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 0,
+        "template": 10,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syntomia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 4,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syntomos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syzeuxis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 3,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syzygia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 5,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 4,
+        "template": 8,
+        "predict": 5,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tabmin.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 2,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tachos.ts",
+      "terms": {
+        "monotone": 1,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tachygrafia.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tachys.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 1,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 4,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tagstack.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 1,
+        "sort": 0,
+        "recency": 1,
+        "prefix": 6,
+        "suffix": 4,
+        "template": 3,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tau.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 6,
+        "suffix": 0,
+        "template": 3,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 4,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/taxinomasis.ts",
+      "terms": {
+        "monotone": 1,
+        "permutation": 0,
+        "sort": 8,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 1,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 2,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/taxis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 9,
+        "template": 11,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/telos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 6,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tensor.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 1,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tessera.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 5,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 29,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/themis.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 3,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/thoth.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 2,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 12,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/timema.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tmematismos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 3,
+        "suffix": 2,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/trie.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 16,
+        "suffix": 5,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/typos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 4,
+        "suffix": 4,
+        "template": 14,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/uuidfold.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/valence.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 6,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 8,
+        "suffix": 6,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/valkyrie.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veltistos.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 8,
+        "recency": 0,
+        "prefix": 8,
+        "suffix": 3,
+        "template": 1,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-a.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-c.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 2
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-g.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 1,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-k.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-m.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-n.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-p.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 11,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-q.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-r.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-s.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 3,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-u.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-w.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 1,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 2,
+        "recency": 0,
+        "prefix": 2,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/workmeter.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 1,
+        "predict": 0,
+        "delta": 1,
+        "grammar": 0,
+        "hash": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/wrapcanon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/zenith.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 0,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/zero.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/zeta.orig.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/zeta.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 1,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 0,
+        "predict": 0,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/zygon.ts",
+      "terms": {
+        "monotone": 0,
+        "permutation": 0,
+        "sort": 4,
+        "recency": 0,
+        "prefix": 0,
+        "suffix": 0,
+        "template": 8,
+        "predict": 3,
+        "delta": 0,
+        "grammar": 0,
+        "hash": 0
+      }
+    }
+  ],
+  "closelyInspected": [
+    "anastrophe",
+    "valence header",
+    "column",
+    "archetypon",
+    "homoios",
+    "metathesis",
+    "diorthosi",
+    "stichos",
+    "json-escape-fold",
+    "anaphora-fold",
+    "bpe-fast",
+    "bpe"
+  ]
+}

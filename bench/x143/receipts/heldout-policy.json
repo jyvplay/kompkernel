@@ -1,0 +1,18 @@
+[
+  {
+    "path": "bench/x143/heldout/pg-pool.md",
+    "source": "node_modules/pg-pool/README.md",
+    "policy": "first100 lines frozen before pricing",
+    "version": "3.14.0",
+    "sha256": "b563d1de02c52e006ae16be179dfa217d87ca05359f62d82d2baabf40bd0d289",
+    "fullSourceSha256": "9d7028ff70e7cddeb97e7a2fda222e12c0e52fe954baf640d62d29880d9628bb"
+  },
+  {
+    "path": "bench/x143/heldout/react.md",
+    "source": "node_modules/react/README.md",
+    "policy": "first100 lines frozen before pricing",
+    "version": "19.2.6",
+    "sha256": "faf7a5814bedadb9ecabcb8cf727a3477696bb0d3a5b57d5433110aa6094b85e",
+    "fullSourceSha256": "faf7a5814bedadb9ecabcb8cf727a3477696bb0d3a5b57d5433110aa6094b85e"
+  }
+]

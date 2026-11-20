@@ -1,0 +1,5 @@
+{
+  "status": "NOT_RUN",
+  "nativeVerified": false,
+  "reason": "No blind external native-model evaluator was invoked; code decoding is not behavioral evidence."
+}

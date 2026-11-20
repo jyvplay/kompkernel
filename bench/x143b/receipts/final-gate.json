@@ -1,0 +1,17 @@
+{
+  "prices": 56,
+  "sourceByteExact": 46,
+  "unsupported": [
+    "frontier:bench/holdout-tbl/df-h.txt",
+    "frontier:bench/holdout-tbl/markdown-table.md",
+    "frontier:bench/holdout-tbl/psql-output.txt",
+    "frontier:bench/holdout-x40/prices.csv",
+    "frontier:bench/holdout-x40/cue-sheet.md",
+    "frontier:bench/holdout-tbl/kubectl-get-pods.txt",
+    "frontier:bench/holdout-x40/metrics.tsv",
+    "frontier:bench/holdout-x41/ls-l-real.txt",
+    "parent:bench/holdout-x41/ls-l-real.txt",
+    "parent:bench/holdout-x40/prices.csv"
+  ],
+  "native": "NOT_RUN"
+}

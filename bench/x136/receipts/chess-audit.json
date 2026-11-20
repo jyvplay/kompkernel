@@ -1,0 +1,9 @@
+{
+  "pythonChess": "1.11.2",
+  "plies": 190,
+  "finalFen": "1Q1Qn1b1/Q3P2q/2k2r2/Q3QN2/pP1Q1P2/b1NKB2r/2Rn2R1/1q1q3B w - - 11 96",
+  "legalMoves": 63,
+  "allGiveCheck": true,
+  "universal64UpperBoundVerified": false,
+  "codecImplication": null
+}

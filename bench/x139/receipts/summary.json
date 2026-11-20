@@ -1,0 +1,36 @@
+{
+  "frontier": {
+    "lanes": 29,
+    "tokens": 11962,
+    "ms": 1198254,
+    "messagesIdenticalToX138": 29
+  },
+  "apotome": {
+    "canonicalPriced": 16,
+    "heldoutPriced": 1,
+    "canonicalWins": 0,
+    "canonicalDelta": 335,
+    "acceptedSearchMoves": 0,
+    "probes": 1684,
+    "decoderExceptions": 1274
+  },
+  "jointMining": {
+    "trials": 72,
+    "wins": 0,
+    "batchSizes": [
+      0,
+      4,
+      8,
+      16
+    ]
+  },
+  "controls": {
+    "brotliTokens": 17475,
+    "copyTokens": 23576,
+    "standaloneDeltaTokens": 28446
+  },
+  "nativeVerified": false,
+  "newDefaultWired": false,
+  "paretoAccepted": false,
+  "mergeAllowed": false
+}

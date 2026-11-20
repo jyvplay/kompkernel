@@ -1,0 +1,34 @@
+[
+  {
+    "message": "Words=[A-Za-z]+; ^p copies latest decoded word starting p, case-sensitive. Scan left to right; preserve all other characters; print only.\nauthentication ^auth",
+    "expected": "authentication authentication"
+  },
+  {
+    "message": "Words=[A-Za-z]+; ^p copies latest decoded word starting p, case-sensitive. Scan left to right; preserve all other characters; print only.\napple apricot ^ap",
+    "expected": "apple apricot apricot"
+  },
+  {
+    "message": "Words=[A-Za-z]+; ^p copies latest decoded word starting p, case-sensitive. Scan left to right; preserve all other characters; print only.\napple apricot ^app ^a",
+    "expected": "apple apricot apple apple"
+  },
+  {
+    "message": "Words=[A-Za-z]+; ^p copies latest decoded word starting p, case-sensitive. Scan left to right; preserve all other characters; print only.\nAlpha alpha ^A ^a",
+    "expected": "Alpha alpha Alpha alpha"
+  },
+  {
+    "message": "Words=[A-Za-z]+; ^p copies latest decoded word starting p, case-sensitive. Scan left to right; preserve all other characters; print only.\nalpha\r\n\t^a!",
+    "expected": "alpha\r\n\talpha!"
+  },
+  {
+    "message": "Words=[A-Za-z]+; ^p copies latest decoded word starting p, case-sensitive. Scan left to right; preserve all other characters; print only.\n🙂authentication_é^auth2",
+    "expected": "🙂authentication_éauthentication2"
+  },
+  {
+    "message": "Words=[A-Za-z]+; ^p copies latest decoded word starting p, case-sensitive. Scan left to right; preserve all other characters; print only.\none two one ^t ^o",
+    "expected": "one two one two one"
+  },
+  {
+    "message": "Words=[A-Za-z]+; ^p copies latest decoded word starting p, case-sensitive. Scan left to right; preserve all other characters; print only.\nalpha ^alpha",
+    "expected": "alpha alpha"
+  }
+]

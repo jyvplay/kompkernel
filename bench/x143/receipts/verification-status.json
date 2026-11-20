@@ -1,0 +1,11 @@
+{
+  "typecheck": "PASS",
+  "native": "NOT_RUN",
+  "prover": "NOT_RUN",
+  "codecPareto": false,
+  "broadSpeedup": false,
+  "mergeReady": false,
+  "fullParentRerunAfterLFClarification": true,
+  "inventoryFiles": 369,
+  "noveltyScope": "header inventory and targeted source review, not exhaustive semantic proof"
+}

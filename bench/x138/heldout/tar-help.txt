@@ -1,0 +1,120 @@
+Usage: tar [OPTION...] [FILE]...
+GNU 'tar' saves many files together into a single tape or disk archive, and can
+restore individual files from the archive.
+
+Examples:
+  tar -cf archive.tar foo bar  # Create archive.tar from files foo and bar.
+  tar -tvf archive.tar         # List all files in archive.tar verbosely.
+  tar -xf archive.tar          # Extract all files from archive.tar.
+
+ Main operation mode:
+  -A, --catenate, --concatenate   append tar files to an archive
+  -c, --create               create a new archive
+      --delete               delete from the archive (not on mag tapes!)
+  -d, --diff, --compare      find differences between archive and file system
+  -r, --append               append files to the end of an archive
+      --test-label           test the archive volume label and exit
+  -t, --list                 list the contents of an archive
+  -u, --update               only append files newer than copy in archive
+  -x, --extract, --get       extract files from an archive
+
+ Operation modifiers:
+
+      --check-device         check device numbers when creating incremental
+                             archives (default)
+  -g, --listed-incremental=FILE   handle new GNU-format incremental backup
+  -G, --incremental          handle old GNU-format incremental backup
+      --hole-detection=TYPE  technique to detect holes
+      --ignore-failed-read   do not exit with nonzero on unreadable files
+      --level=NUMBER         dump level for created listed-incremental archive
+      --no-check-device      do not check device numbers when creating
+                             incremental archives
+      --no-seek              archive is not seekable
+  -n, --seek                 archive is seekable
+      --occurrence[=NUMBER]  process only the NUMBERth occurrence of each file
+                             in the archive; this option is valid only in
+                             conjunction with one of the subcommands --delete,
+                             --diff, --extract or --list and when a list of
+                             files is given either on the command line or via
+                             the -T option; NUMBER defaults to 1
+      --sparse-version=MAJOR[.MINOR]
+                             set version of the sparse format to use (implies
+                             --sparse)
+  -S, --sparse               handle sparse files efficiently
+
+ Local file name selection:
+      --add-file=FILE        add given FILE to the archive (useful if its name
+                             starts with a dash)
+  -C, --directory=DIR        change to directory DIR
+      --exclude=PATTERN      exclude files, given as a PATTERN
+      --exclude-backups      exclude backup and lock files
+      --exclude-caches       exclude contents of directories containing
+                             CACHEDIR.TAG, except for the tag file itself
+      --exclude-caches-all   exclude directories containing CACHEDIR.TAG
+      --exclude-caches-under exclude everything under directories containing
+                             CACHEDIR.TAG
+      --exclude-ignore=FILE  read exclude patterns for each directory from
+                             FILE, if it exists
+      --exclude-ignore-recursive=FILE
+                             read exclude patterns for each directory and its
+                             subdirectories from FILE, if it exists
+      --exclude-tag=FILE     exclude contents of directories containing FILE,
+                             except for FILE itself
+      --exclude-tag-all=FILE exclude directories containing FILE
+      --exclude-tag-under=FILE   exclude everything under directories
+                             containing FILE
+      --exclude-vcs          exclude version control system directories
+      --exclude-vcs-ignores  read exclude patterns from the VCS ignore files
+      --no-null              disable the effect of the previous --null option
+      --no-recursion         avoid descending automatically in directories
+      --no-unquote           do not unquote input file or member names
+      --no-verbatim-files-from   -T treats file names starting with dash as
+                             options (default)
+      --null                 -T reads null-terminated names; implies
+                             --verbatim-files-from
+      --recursion            recurse into directories (default)
+  -T, --files-from=FILE      get names to extract or create from FILE
+      --unquote              unquote input file or member names (default)
+      --verbatim-files-from  -T reads file names verbatim (no escape or option
+                             handling)
+  -X, --exclude-from=FILE    exclude patterns listed in FILE
+
+ File name matching options (affect both exclude and include patterns):
+
+      --anchored             patterns match file name start
+      --ignore-case          ignore case
+      --no-anchored          patterns match after any '/' (default for
+                             exclusion)
+      --no-ignore-case       case sensitive matching (default)
+      --no-wildcards         verbatim string matching
+      --no-wildcards-match-slash   wildcards do not match '/'
+      --wildcards            use wildcards (default for exclusion)
+      --wildcards-match-slash   wildcards match '/' (default for exclusion)
+
+ Overwrite control:
+
+      --keep-directory-symlink   preserve existing symlinks to directories when
+                             extracting
+      --keep-newer-files     don't replace existing files that are newer than
+                             their archive copies
+  -k, --keep-old-files       don't replace existing files when extracting,
+                             treat them as errors
+      --no-overwrite-dir     preserve metadata of existing directories
+      --one-top-level[=DIR]  create a subdirectory to avoid having loose files
+                             extracted
+      --overwrite            overwrite existing files when extracting
+      --overwrite-dir        overwrite metadata of existing directories when
+                             extracting (default)
+      --recursive-unlink     empty hierarchies prior to extracting directory
+      --remove-files         remove files after adding them to the archive
+      --skip-old-files       don't replace existing files when extracting,
+                             silently skip over them
+  -U, --unlink-first         remove each file prior to extracting over it
+  -W, --verify               attempt to verify the archive after writing it
+
+ Select output stream:
+
+      --ignore-command-error ignore exit codes of children
+      --no-ignore-command-error   treat non-zero exit codes of children as
+                             error
+  -O, --to-stdout            extract files to standard output

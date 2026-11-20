@@ -1,0 +1,28 @@
+{
+  "reader": "Python CHIRON plus independent residual-layout inverse",
+  "rows": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "sourceExact": true,
+      "delta": 35
+    }
+  ],
+  "defaultRows": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "sourceExact": true,
+      "delta": -12
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "sourceExact": true,
+      "delta": 17
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "sourceExact": true,
+      "delta": 119
+    }
+  ],
+  "nativeModelVerified": false
+}
