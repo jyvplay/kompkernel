@@ -1,0 +1,5 @@
+{
+  "checked": 59,
+  "identity": "folded UTF-16 length = source length + number of holes + width",
+  "scope": "Python codepoint length agrees here because digit-only insertion/deletion; no token lower bound implied"
+}

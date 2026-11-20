@@ -1,0 +1,56 @@
+[
+  {
+    "receipt": "parent",
+    "path": "bench/holdout-x41/apt-real.txt",
+    "A": 813,
+    "B": 881,
+    "parentPayload": 838,
+    "payloadOnlySaving": -25,
+    "observedAdditionalHeader": 43
+  },
+  {
+    "receipt": "parent",
+    "path": "bench/holdout-work/kb-article.txt",
+    "A": 620,
+    "B": 661,
+    "parentPayload": 618,
+    "payloadOnlySaving": 2,
+    "observedAdditionalHeader": 43
+  },
+  {
+    "receipt": "parent",
+    "path": "bench/holdout-work/email-thread.txt",
+    "A": 486,
+    "B": 536,
+    "parentPayload": 493,
+    "payloadOnlySaving": -7,
+    "observedAdditionalHeader": 43
+  },
+  {
+    "receipt": "parent",
+    "path": "bench/holdout-x41/du-real.txt",
+    "A": 266,
+    "B": 324,
+    "parentPayload": 281,
+    "payloadOnlySaving": -15,
+    "observedAdditionalHeader": 43
+  },
+  {
+    "receipt": "heldout-parent",
+    "path": "bench/x144b/heldout/clsx.md",
+    "A": 523,
+    "B": 560,
+    "parentPayload": 517,
+    "payloadOnlySaving": 6,
+    "observedAdditionalHeader": 43
+  },
+  {
+    "receipt": "heldout-parent",
+    "path": "bench/x144b/heldout/npm-ls.txt",
+    "A": 126,
+    "B": 165,
+    "parentPayload": 122,
+    "payloadOnlySaving": 4,
+    "observedAdditionalHeader": 43
+  }
+]

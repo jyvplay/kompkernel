@@ -1,0 +1,25 @@
+{
+  "status": "NOT_RUN",
+  "protocol": "Fresh model session; input packet verbatim; no tools, skills, system instructions or source; save raw output UTF-8 and compare bytes without stripping fences or whitespace. Packet preparation is not verification.",
+  "cases": [
+    {
+      "codec": "ptyche",
+      "packet": "bench/x142/native-packets/ptyche.txt",
+      "source": "bench/holdout-work/kb-article.txt",
+      "sourceSha256": "d220bfb7a912670e0217b99760f41d40f41e7fab5ceda93f552aebf5ee4744c6",
+      "packetSha256": "20a8941b1216bb792bd57c68a55f6f12f0218e25ad6bf5dcc971d0e47628f9af",
+      "A": 620,
+      "B": 608
+    },
+    {
+      "codec": "krema",
+      "packet": "bench/x142/native-packets/krema.txt",
+      "source": "bench/holdout-x41/node-help.txt",
+      "sourceSha256": "197c018cbe936e15fb52b81073b14b30b2f9042fe11ad806a129406a48586c3e",
+      "packetSha256": "214f9ea2522e9833fd08edd5354c70dcc8cf1e64f468b7a350df40521bd46932",
+      "A": 846,
+      "B": 831
+    }
+  ],
+  "checks": "all four frozen file hashes match; no native response supplied"
+}

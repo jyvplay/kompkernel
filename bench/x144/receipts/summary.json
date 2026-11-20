@@ -1,0 +1,286 @@
+{
+  "lanes": 29,
+  "tokens": 11962,
+  "messageIdenticalX143b": true,
+  "concurrentElapsedMsNotSpeedEvidence": 1383711,
+  "priced": {
+    "probe": 59,
+    "parent": 6,
+    "heldout-probe": 1,
+    "heldout-parent": 1
+  },
+  "wins": {
+    "probe": 0,
+    "parent": 0,
+    "heldout-probe": 0,
+    "heldout-parent": 0
+  },
+  "unitChecks": 3041,
+  "counterDifferentialChecks": 323192,
+  "native": "NOT_RUN",
+  "leanReplay": "NOT_RUN",
+  "paretoSuperiorEstablished": false,
+  "broadSpeedupGate": false,
+  "tsc": "PASS",
+  "build": "PASS",
+  "mergePermitted": false,
+  "parentRows": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "A": 1310,
+      "B": 1439
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "A": 980,
+      "B": 1038
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "A": 118,
+      "B": 191
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "A": 414,
+      "B": 477
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "A": 197,
+      "B": 263
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "A": 229,
+      "B": 277
+    }
+  ],
+  "transportGate": {
+    "checks": 65581,
+    "rows": [
+      {
+        "path": "bench/holdout-x42/lsblk.txt",
+        "originalTokens": 60,
+        "repairedTokens": 60,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "originalTokens": 620,
+        "repairedTokens": 620,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x42b/uptime-w.txt",
+        "originalTokens": 80,
+        "repairedTokens": 80,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x42b/free-m.txt",
+        "originalTokens": 76,
+        "repairedTokens": 76,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x42b/vmstat.txt",
+        "originalTokens": 144,
+        "repairedTokens": 144,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-work/unified-diff.patch",
+        "originalTokens": 411,
+        "repairedTokens": 411,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-tbl/df-h.txt",
+        "originalTokens": 160,
+        "repairedTokens": 160,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x41/df-real.txt",
+        "originalTokens": 123,
+        "repairedTokens": 123,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x41/du-real.txt",
+        "originalTokens": 266,
+        "repairedTokens": 266,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x41/node-help.txt",
+        "originalTokens": 846,
+        "repairedTokens": 846,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x42/findmnt.txt",
+        "originalTokens": 385,
+        "repairedTokens": 385,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x42/df-h.txt",
+        "originalTokens": 105,
+        "repairedTokens": 105,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-work/email-thread.txt",
+        "originalTokens": 486,
+        "repairedTokens": 486,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-work/llm-answer.md",
+        "originalTokens": 664,
+        "repairedTokens": 664,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-tbl/markdown-table.md",
+        "originalTokens": 172,
+        "repairedTokens": 172,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-tbl/psql-output.txt",
+        "originalTokens": 229,
+        "repairedTokens": 229,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x40/prices.csv",
+        "originalTokens": 118,
+        "repairedTokens": 118,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x40/cue-sheet.md",
+        "originalTokens": 101,
+        "repairedTokens": 101,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x42/ps-ef.txt",
+        "originalTokens": 296,
+        "repairedTokens": 296,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x41/ls-real.txt",
+        "originalTokens": 414,
+        "repairedTokens": 414,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "originalTokens": 653,
+        "repairedTokens": 653,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout/code-ts.txt",
+        "originalTokens": 949,
+        "repairedTokens": 949,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x42/dpkg-l.txt",
+        "originalTokens": 623,
+        "repairedTokens": 623,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "originalTokens": 381,
+        "repairedTokens": 381,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+        "originalTokens": 300,
+        "repairedTokens": 300,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x40/metrics.tsv",
+        "originalTokens": 197,
+        "repairedTokens": 197,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x41/ps-aux-real.txt",
+        "originalTokens": 980,
+        "repairedTokens": 980,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x41/apt-real.txt",
+        "originalTokens": 813,
+        "repairedTokens": 813,
+        "fallback": false
+      },
+      {
+        "path": "bench/holdout-x41/ls-l-real.txt",
+        "originalTokens": 1310,
+        "repairedTokens": 1310,
+        "fallback": false
+      },
+      {
+        "path": "bench/x144/heldout/vite.md",
+        "originalTokens": 253,
+        "repairedTokens": 274,
+        "fallback": true
+      },
+      {
+        "path": "bench/x144/heldout/drizzle.md",
+        "originalTokens": 643,
+        "repairedTokens": 643,
+        "fallback": false
+      },
+      {
+        "path": "bench/x144/heldout/git-log.txt",
+        "originalTokens": 43,
+        "repairedTokens": 43,
+        "fallback": false
+      }
+    ],
+    "unsafeWires": 1,
+    "guardScope": "transport stability only; opt-in helper not integrated; guarded fallback repriced",
+    "native": "NOT_RUN"
+  },
+  "finalGate": {
+    "prices": 99,
+    "sourceByteExact": 88,
+    "unsupported": [
+      "frontier:bench/holdout-tbl/df-h.txt",
+      "frontier:bench/holdout-tbl/markdown-table.md",
+      "frontier:bench/holdout-tbl/psql-output.txt",
+      "frontier:bench/holdout-x40/prices.csv",
+      "frontier:bench/holdout-x40/cue-sheet.md",
+      "frontier:bench/holdout-tbl/kubectl-get-pods.txt",
+      "frontier:bench/holdout-x40/metrics.tsv",
+      "frontier:bench/holdout-x41/ls-l-real.txt",
+      "parent:bench/holdout-x41/ls-l-real.txt",
+      "parent:bench/holdout-x40/metrics.tsv"
+    ],
+    "invalidWire": [
+      "heldout-baseline:bench/x144/heldout/vite.md"
+    ],
+    "allWiresTransportSafe": false,
+    "native": "NOT_RUN",
+    "wireBound": true
+  },
+  "independentCandidateReplay": {
+    "exact": 65,
+    "unsupported": 2
+  },
+  "productionTransportDefectConfirmed": true
+}

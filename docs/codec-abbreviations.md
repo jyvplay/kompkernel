@@ -9920,3 +9920,78 @@ https://lbd.udc.es/Repository/Publications/Drafts/1706046652539_2019_StringDicti
 OnPair (2025), https://arxiv.org/html/2508.02280v1 . Search excerpts inspected,
 not full proofs; trained dictionaries do not establish instruction-only native
 LLM reversibility. META is not wired into the production selector.
+
+### X144: PSIF / PSIFIDA — decimal digit-position weaving (unwired)
+
+`src/lib/omega/psifida.ts`, technical review `bench/x144/REVIEW.md`, measured
+ledger `bench/x144/receipts/summary.json`. Gather maximal ASCII digit runs of a
+selected width (2–12), transpose their characters by digit position, retain one
+`~` hole per run. First payload line holds equal-length digit columns; successive
+holes consume successive reconstructed rows. No numeric conversion, sign
+normalization, external dictionary, or record schema. Distinct from METABOLE's
+lexical edits; related to classical shuffle coding, not a new theoretical
+primitive. Targeted full-directory search and source hashes do not prove absence
+of every semantically equivalent historical codec.
+
+Greedy status: standalone exhaustive over 11 widths, then complete-message
+minimum with identity fallback. Composed-parent allocation is heuristic: one
+best standalone plan per source and six canonical sources ranked by raw payload
+savings; omitted plans have no optimality guarantee. CPU-bound scans/tokenization,
+50,000 UTF-16-unit cap, 10,000 selected-run cap; parent runtime remains inherited
+TAGSTACK work, no hard wrapper-wide time bound. Source-marker collisions refuse;
+reserved envelope rejects. Decoder validates dimensions, arity, ASCII digits,
+and caps. Independent wire parsing and source-byte gates distinguish exactness
+from encoder self-report. No native LLM evaluation has been completed.
+
+Ancestry: Masui et al. (2015), *A compression scheme for radio data in high
+performance computing*, https://arxiv.org/pdf/1503.00638 ; Delaunay et al. (2019),
+DOI 10.5194/gmd-12-4099-2019,
+https://gmd.copernicus.org/articles/12/4099/2019/ . Only exact transposition is
+borrowed; their lossy precision-reduction stages and binary-decoder throughput
+results do not satisfy this codec's contract. Fresh research scope and lab-claim
+limitations are recorded in `bench/x144/research.md`.
+
+X144 final: 67 complete PSIFIDA prices, zero frontier wins; native NOT_RUN.
+Fresh canonical frontier still 29/11,962. Independent new-candidate Python reads:
+65 exact, 2 unsupported. New heldout Vite baseline is unsafe under UTF-8 transport
+because a rule splits emoji surrogate pairs. `utf8-wire.ts` provides an **opt-in,
+unwired** transport-stability guard/raw fallback, not a new compression method;
+65,581 assertions include a 253→274-token safe fallback counterexample. The
+streaming pre-token performance experiment was rejected (24 whole-stack timings,
+no significant broad speedup); production tokenizer code is unchanged.
+
+### X144b: COLEX — suffix-first lexical component reversal (unwired)
+
+`src/lib/omega/colex.ts`; `bench/x144b/REVIEW.md` and receipts. For a selected
+separator from `/ - _ .`, reverse separator-delimited components, including
+empty ones, inside each maximal `[A-Za-z0-9_./+-]+` lexeme. Outside characters
+are unchanged. Reversal twice is identity because the lexeme alphabet and its
+boundaries are invariant. Unlike ANAKYKLI this is not document rotation;
+unlike EUTAXIA it is not field permutation; unlike METABOLE/PSIFIDA it has no
+history edits or digit planes. Classical locality/permutation ancestry, not
+claimed mathematical or exhaustive semantic novelty.
+
+Greedy status: no greedy standalone search; exhaust all four separator choices
+and price complete instructions. Parent allocation is heuristic: best standalone
+arm on four fixed canonical prose/ops lanes, then one arm per fresh heldout.
+CPU-bound O(4L) transform scans plus tokenization, <=50,000 UTF-16 units, with
+inherited TAGSTACK work dominating parent calls. Valid UTF-8 source required;
+reserved envelopes reject. Native LLM gate remains NOT_RUN. Research context:
+Becker et al., *Compressing Suffix Trees by Path Decompositions* (2025 incomplete
+draft), https://arxiv.org/html/2506.14734v1 . Its compressed index assumes random
+access to source text; its space/speed theorems are **not** codec claims here.
+
+X144b also integrates UTF-8 stability into TAGSTACK admission, including direct
+rewrite sites. Invalid source surrogates reject; unstable candidates cannot
+replace a valid incumbent. Vite's previously unsafe 253-token point becomes
+274 safe tokens, not a compression gain. See X144b source/transport gates and
+memo/CRLF/ZWJ attacks; other codecs remain subject to their existing exactness
+checks. Current receipts supersede X144's statement that the guard is unwired.
+
+X144b finalized: COLEX 93 complete prices / 0 wins; independent Python replay
+93/93 exact. Canonical 29/11,962 unchanged. 127 wire/token-ID round trips pass;
+119 supported source-byte reads and 8 unsupported inherited reader formats.
+Native NOT_RUN. The optional regex safety-check fast path was rejected after
+24 isolated whole-stack timings (B/A totals 0.97985, 1.03268, 1.02127); production
+uses the straightforward surrogate scan. This is a correctness repair, not a
+claimed compression or broad speed breakthrough.
