@@ -1,0 +1,152 @@
+[
+  {
+    "fn": "countLongRaw",
+    "line": 2289,
+    "ms": 734.478
+  },
+  {
+    "fn": "scoreRunCostDeltaSlots",
+    "line": 6227,
+    "ms": 681.432
+  },
+  {
+    "fn": "(garbage collector)",
+    "line": 0,
+    "ms": 676.673
+  },
+  {
+    "fn": "countTokens3",
+    "line": 2340,
+    "ms": 675.854
+  },
+  {
+    "fn": "chunkCountFast",
+    "line": 2229,
+    "ms": 592.396
+  },
+  {
+    "fn": "renderBest",
+    "line": 6533,
+    "ms": 572.692
+  },
+  {
+    "fn": "rankAt",
+    "line": 1934,
+    "ms": 232.734
+  },
+  {
+    "fn": "evaluate",
+    "line": 7633,
+    "ms": 228.764
+  },
+  {
+    "fn": "encode",
+    "line": 351,
+    "ms": 213.246
+  },
+  {
+    "fn": "getBpeRankFromString",
+    "line": 590,
+    "ms": 174.434
+  },
+  {
+    "fn": "vocabByScript",
+    "line": 5779,
+    "ms": 171.03
+  },
+  {
+    "fn": "RegExp: [^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]*[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]+[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\\p{N}{1,3}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n/]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+",
+    "line": 0,
+    "ms": 170.384
+  },
+  {
+    "fn": "fastChunkCount",
+    "line": 1964,
+    "ms": 149.412
+  },
+  {
+    "fn": "",
+    "line": 6767,
+    "ms": 142.678
+  },
+  {
+    "fn": "enumerateTokenSpans",
+    "line": 3439,
+    "ms": 125.649
+  },
+  {
+    "fn": "__init",
+    "line": 3,
+    "ms": 122.222
+  },
+  {
+    "fn": "mergeCount",
+    "line": 1906,
+    "ms": 116.079
+  },
+  {
+    "fn": "fastCount",
+    "line": 2009,
+    "ms": 109.749
+  },
+  {
+    "fn": "put",
+    "line": 1816,
+    "ms": 100.85
+  },
+  {
+    "fn": "decodeUTF8",
+    "line": 0,
+    "ms": 97.093
+  },
+  {
+    "fn": "",
+    "line": 11592,
+    "ms": 91.502
+  },
+  {
+    "fn": "fastReady",
+    "line": 1778,
+    "ms": 89.139
+  },
+  {
+    "fn": "decode",
+    "line": 442,
+    "ms": 88.025
+  },
+  {
+    "fn": "bytePairMerge",
+    "line": 699,
+    "ms": 87.809
+  },
+  {
+    "fn": "rollback",
+    "line": 6797,
+    "ms": 87.322
+  },
+  {
+    "fn": "fastChunkCountUncached",
+    "line": 1978,
+    "ms": 85.58
+  },
+  {
+    "fn": "encodeUtf8String",
+    "line": 0,
+    "ms": 83.222
+  },
+  {
+    "fn": "buildOn",
+    "line": 6304,
+    "ms": 82.407
+  },
+  {
+    "fn": "bodyStr",
+    "line": 33583,
+    "ms": 81.656
+  },
+  {
+    "fn": "",
+    "line": 6627,
+    "ms": 73.311
+  }
+]

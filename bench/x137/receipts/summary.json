@@ -1,0 +1,20 @@
+{
+  "baseline": {
+    "lanes": 29,
+    "tokens": 11962,
+    "ms": 897526,
+    "identicalToX136": 29
+  },
+  "offlineKremaSelectionTokens": 11947,
+  "experimentalPtycheComparatorTokens": 11950,
+  "newCodecDefaultWired": false,
+  "nativeVerified": false,
+  "paretoAccepted": false,
+  "merged": false,
+  "warnings": [
+    "Offline selection is not free search",
+    "Heldout Node help substantially overlaps canonical Node help",
+    "Timings with simultaneous processes are not controlled speed evidence",
+    "All-codec semantic novelty audit incomplete"
+  ]
+}

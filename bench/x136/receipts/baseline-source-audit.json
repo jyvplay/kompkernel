@@ -1,0 +1,296 @@
+{
+  "reader": "independent Python CHIRON + new STELI offset inverse",
+  "lanes": 29,
+  "chironOnly": 19,
+  "withSteli": 21,
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "chironOnly": false,
+      "withSteli": false
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "chironOnly": false,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "chironOnly": false,
+      "withSteli": false
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "chironOnly": false,
+      "withSteli": false
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "chironOnly": false,
+      "withSteli": false
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "chironOnly": false,
+      "withSteli": false
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "chironOnly": false,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "chironOnly": false,
+      "withSteli": false
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "chironOnly": false,
+      "withSteli": false
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "chironOnly": true,
+      "withSteli": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "chironOnly": false,
+      "withSteli": false
+    }
+  ],
+  "rotationTrials": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "cut": 52,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "cut": 820,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "cut": 29,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "cut": 1701,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "cut": 62,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "cut": 527,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "cut": 11,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "cut": 609,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "cut": 57,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "cut": 634,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "cut": 4,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "cut": 1524,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "cut": 37,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "cut": 2181,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "cut": 1662,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "cut": 2509,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "cut": 3372,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "cut": 5073,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "cut": 1093,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "cut": 1579,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "cut": 1289,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "cut": 1920,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "cut": 1216,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "cut": 1881,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "cut": 2992,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "cut": 4525,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "cut": 3268,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "cut": 4938,
+      "sourceExact": true
+    }
+  ],
+  "rotationSourceExact": 28
+}

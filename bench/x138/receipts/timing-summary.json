@@ -1,0 +1,21 @@
+{
+  "protocol": "Full-parent A vs full-parent+SYNAPHE B, AB/BA; other codec benchmark processes exited first; two observations per arm/source, no confidence interval or general speed claim.",
+  "rows": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "AmeanMs": 4260.513078,
+      "BmeanMs": 3698.669337,
+      "BextensionMeanMs": 270.2585774999998,
+      "tokens": 620,
+      "allRejected": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "AmeanMs": 10133.599436499997,
+      "BmeanMs": 9330.938972500002,
+      "BextensionMeanMs": 241.57428900000014,
+      "tokens": 664,
+      "allRejected": true
+    }
+  ]
+}

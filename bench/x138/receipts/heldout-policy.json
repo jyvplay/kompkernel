@@ -1,0 +1,24 @@
+{
+  "policy": "First120lines; all three sources fixed before eligibility/pricing; real commands LC_ALL=C tar --help, curl --help all, git diff -h. Help exit statuses are not codec failures.",
+  "rows": [
+    {
+      "path": "bench/x138/heldout/curl-help.txt",
+      "bytes": 7177,
+      "sha256": "d02d8bc71ce217bf5b8e957aa404e33b9402df5a01c904697216ab0088ddc1eb",
+      "fullSha256": "09ab9ce3387644e286c1a9e6e5cf29760f50896c667d2723bbe2b0f5af9aee50"
+    },
+    {
+      "path": "bench/x138/heldout/git-diff-help.txt",
+      "bytes": 1588,
+      "sha256": "4c1fd6d66293b7337053d789ad816473f422851f8613ec3083f8ac7fac0cb9cb",
+      "fullSha256": "4c1fd6d66293b7337053d789ad816473f422851f8613ec3083f8ac7fac0cb9cb"
+    },
+    {
+      "path": "bench/x138/heldout/tar-help.txt",
+      "bytes": 6759,
+      "sha256": "daf695476ad6da7c6ee9e74864e4b860d8f4565ca3209b8f75cbfc3423083a01",
+      "fullSha256": "8f059f7ebc89167f0c36732831081e6b67fed7dd4218ac55ad046f281049cb60"
+    }
+  ],
+  "captureCorrection": "git diff -h writes stderr; recaptured with 2>&1 before any eligibility or price measurement."
+}

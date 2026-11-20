@@ -1,0 +1,29 @@
+{
+  "scope": "current source/docs/bench text <=2MB, excluding x140, not all Git history",
+  "matches": [
+    {
+      "term": "2601.07421",
+      "file": "bench/x37/X37.md"
+    },
+    {
+      "term": "SubexponentialSAT",
+      "file": "bench/x62/REPORT.md"
+    },
+    {
+      "term": "SubexponentialSAT",
+      "file": "bench/x63/REPORT.md"
+    },
+    {
+      "term": "faster-is-not-nearer",
+      "file": "bench/x136/research.md"
+    },
+    {
+      "term": "2601.07421",
+      "file": "bench/x136/research.md"
+    },
+    {
+      "term": "2601.07421",
+      "file": "bench/x137/research.md"
+    }
+  ]
+}

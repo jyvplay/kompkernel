@@ -1,0 +1,1 @@
+Prospective cost cap: first 120 captured lines per command, selected before heldout token measurements; full captures retained in heldout/full.

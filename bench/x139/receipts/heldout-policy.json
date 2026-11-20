@@ -1,0 +1,21 @@
+{
+  "policy": "Both packages named before eligibility/pricing; first80lines of installed dependency documentation; original full files preserved; not claimed never used anywhere in repo history.",
+  "rows": [
+    {
+      "path": "bench/x139/heldout/escalade.md",
+      "source": "node_modules/escalade/readme.md",
+      "version": "3.2.0",
+      "sha256": "a74d195db92d11518e2f5df80eee9a99a377dc8d1bf8df38bd75a7c19f5ccf47",
+      "fullSha256": "de88fe806fe66a944d49b4e86518d5cfee43565654faf76daa67716726359696",
+      "bytes": 2502
+    },
+    {
+      "path": "bench/x139/heldout/graceful-fs.md",
+      "source": "node_modules/graceful-fs/README.md",
+      "version": "4.2.11",
+      "sha256": "d8373d3c3640283cb7253a1ee73bc6ea6d20a2148a18a1631956b18e32da1fa3",
+      "fullSha256": "1c8169c6bd7d7c966616574b9b7479c9890193ff6c5af98faa28672a1d429382",
+      "bytes": 2714
+    }
+  ]
+}

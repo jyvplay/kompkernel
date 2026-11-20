@@ -1,0 +1,14 @@
+.gitignore	https://raw.githubusercontent.com/anthropics/formal-math/main/eth/.gitignore
+Challenge.lean	https://raw.githubusercontent.com/anthropics/formal-math/main/eth/Challenge.lean
+LICENSE	https://raw.githubusercontent.com/anthropics/formal-math/main/eth/LICENSE
+MainResults.lean	https://raw.githubusercontent.com/anthropics/formal-math/main/eth/MainResults.lean
+NOTICE	https://raw.githubusercontent.com/anthropics/formal-math/main/eth/NOTICE
+README.md	https://raw.githubusercontent.com/anthropics/formal-math/main/eth/README.md
+Solution.lean	https://raw.githubusercontent.com/anthropics/formal-math/main/eth/Solution.lean
+comparator.json	https://raw.githubusercontent.com/anthropics/formal-math/main/eth/comparator.json
+lake-manifest.json	https://raw.githubusercontent.com/anthropics/formal-math/main/eth/lake-manifest.json
+lakefile.toml	https://raw.githubusercontent.com/anthropics/formal-math/main/eth/lakefile.toml
+lean-toolchain	https://raw.githubusercontent.com/anthropics/formal-math/main/eth/lean-toolchain
+paper.pdf	https://raw.githubusercontent.com/anthropics/formal-math/main/eth/paper.pdf
+proof	
+scripts	

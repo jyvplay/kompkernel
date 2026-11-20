@@ -1,0 +1,39 @@
+--- a/src/lib/omega/bpe.ts
++++ b/src/lib/omega/bpe.ts
+@@ -638,6 +638,8 @@
+ const WHITESPACE_ONLY = /^\s+$/u;
+ const TAIL_MEMO_MAX = 200_000;
+ let tailHits = 0, tailMisses = 0;
++let TAIL_FOLD=false;
++export function setTailFold(v:boolean):void {TAIL_FOLD=v; chunkCacheClear();}
+ export function tokenTail(text: string, enc: EncodingName): TailInfo | null {
+   if (text === '') return { tot: 0, tail: '', tailTok: 0 };
+   const key = enc === 'cl100k_base' ? '\u0002' + text : text;
+@@ -651,6 +653,17 @@
+   let covered = 0;
+   for (let i = 0; i < cs.length; i++) covered += cs[i]!.length;
+   if (covered !== text.length) return null;
++  let info:TailInfo;
++  if(TAIL_FOLD){
++    let k=cs.length-1;
++    while(k>=0&&WHITESPACE_ONLY.test(cs[k]!))k--;
++    if(k<0)k=0;
++    const pfx=enc==='cl100k_base'?'\u0002':'';
++    let tot=0,tailTok=0,tail='';
++    for(let i=0;i<k;i++)tot+=chunkCountFast(cs[i]!,enc,pfx);
++    for(let i=k;i<cs.length;i++){const c=cs[i]!;tail+=c;tailTok+=chunkCountFast(c,enc,pfx);}
++    info={tot:tot+tailTok,tail,tailTok};
++  }else{
+   const toks: number[] = new Array(cs.length);
+   let tot = 0;
+   const pfx = enc === 'cl100k_base' ? '\u0002' : '';
+@@ -664,7 +677,8 @@
+   if (k < 0) k = 0;
+   let tail = '', tailTok = 0;
+   for (let i = k; i < cs.length; i++) { tail += cs[i]!; tailTok += toks[i]!; }
+-  const info: TailInfo = { tot, tail, tailTok };
++  info = { tot, tail, tailTok };
++  }
+   if (TAIL_MEMO.size >= TAIL_MEMO_MAX) TAIL_MEMO.clear();
+   TAIL_MEMO.set(key, info);
+   return info;

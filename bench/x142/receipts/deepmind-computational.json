@@ -1,0 +1,20 @@
+{
+  "challenge_module": "ComparatorChallenge.Computational",
+  "solution_module": "ComparatorSolution.Computational",
+  "theorem_names": [
+    "SignalPqxdh.Security.headlineδ",
+    "CryptoVerification.E2E.session_secure",
+    "CryptoVerification.E2E.model_secure_costed",
+    "CryptoVerification.SignalSession.libsignal_cli_pq_binary_correct_placed",
+    "CryptoVerification.SignalSession.libsignal_cli_elf_linked_in",
+    "CryptoVerification.SignalSession.libsignal_cli_elf_mallocng_linked_in",
+    "CryptoVerification.SignalSession.libsignal_cli_labels_from_objects",
+    "CryptoVerification.LibsignalCli.libsignal_cli_pq_secure_elf_binary_placed"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

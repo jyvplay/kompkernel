@@ -1,0 +1,203 @@
+{
+  "trials": 28,
+  "exact": 27,
+  "accepted": [],
+  "rows": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "cut": 52,
+      "delta": 13,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "cut": 820,
+      "delta": 17,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "cut": 29,
+      "delta": 12,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "cut": 1701,
+      "delta": 32,
+      "exact": false,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "cut": 62,
+      "delta": 10,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "cut": 527,
+      "delta": 17,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "cut": 11,
+      "delta": 13,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "cut": 609,
+      "delta": 18,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "cut": 57,
+      "delta": 12,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "cut": 634,
+      "delta": 19,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "cut": 4,
+      "delta": 16,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "cut": 1524,
+      "delta": 24,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "cut": 37,
+      "delta": 16,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "cut": 2181,
+      "delta": 17,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "cut": 1662,
+      "delta": 17,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "cut": 2509,
+      "delta": 17,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "cut": 3372,
+      "delta": 26,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "cut": 5073,
+      "delta": 26,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "cut": 1093,
+      "delta": 24,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "cut": 1579,
+      "delta": 17,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "cut": 1289,
+      "delta": 20,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "cut": 1920,
+      "delta": 19,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "cut": 1216,
+      "delta": 24,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "cut": 1881,
+      "delta": 24,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "cut": 2992,
+      "delta": 22,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "cut": 4525,
+      "delta": 36,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "cut": 3268,
+      "delta": 3,
+      "exact": true,
+      "agreesWithTS": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "cut": 4938,
+      "delta": 19,
+      "exact": true,
+      "agreesWithTS": true
+    }
+  ]
+}

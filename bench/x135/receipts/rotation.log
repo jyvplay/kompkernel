@@ -1,0 +1,14 @@
+{"path":"bench/holdout-work/kb-article.txt","cut":52,"lineMode":true,"A":620,"B":633,"delta":13,"ms":7399,"exact":true}
+{"path":"bench/holdout-work/kb-article.txt","cut":820,"lineMode":false,"A":620,"B":637,"delta":17,"ms":6821,"exact":true}
+{"path":"bench/holdout-x41/node-help.txt","cut":29,"lineMode":true,"A":846,"B":858,"delta":12,"ms":31115,"exact":true}
+{"path":"bench/holdout-x41/node-help.txt","cut":1701,"lineMode":false,"A":846,"B":878,"delta":32,"ms":32934,"exact":false}
+{"path":"bench/holdout-work/email-thread.txt","cut":62,"lineMode":true,"A":486,"B":496,"delta":10,"ms":15063,"exact":true}
+{"path":"bench/holdout-work/email-thread.txt","cut":527,"lineMode":false,"A":486,"B":503,"delta":17,"ms":17514,"exact":true}
+{"path":"bench/holdout-work/llm-answer.md","cut":11,"lineMode":true,"A":664,"B":677,"delta":13,"ms":20552,"exact":true}
+{"path":"bench/holdout-work/llm-answer.md","cut":609,"lineMode":false,"A":664,"B":682,"delta":18,"ms":20503,"exact":true}
+{"path":"bench/holdout-x41/ls-real.txt","cut":57,"lineMode":true,"A":414,"B":426,"delta":12,"ms":23431,"exact":true}
+{"path":"bench/holdout-x41/ls-real.txt","cut":634,"lineMode":false,"A":414,"B":433,"delta":19,"ms":22105,"exact":true}
+{"path":"bench/holdout/code-ts.txt","cut":4,"lineMode":false,"A":949,"B":965,"delta":16,"ms":54688,"exact":true}
+{"path":"bench/holdout/code-ts.txt","cut":1524,"lineMode":false,"A":949,"B":973,"delta":24,"ms":55433,"exact":true}
+{"path":"bench/holdout-x41/ps-aux-real.txt","cut":37,"lineMode":true,"A":980,"B":996,"delta":16,"ms":90324,"exact":true}
+{"path":"bench/holdout-x41/ps-aux-real.txt","cut":2181,"lineMode":false,"A":980,"B":997,"delta":17,"ms":85104,"exact":true}

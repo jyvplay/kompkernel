@@ -1,0 +1,29 @@
+{"path":"bench/holdout-x42/lsblk.txt","A":60,"B":60,"applied":false,"ms":264.52207999999996,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-work/kb-article.txt","A":620,"B":656,"applied":false,"ms":6.971353000000022,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x42b/uptime-w.txt","A":80,"B":80,"applied":false,"ms":0.23437599999999748,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x42b/free-m.txt","A":76,"B":76,"applied":false,"ms":0.11548299999998335,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x42b/vmstat.txt","A":144,"B":229,"applied":false,"ms":0.256717999999978,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-work/unified-diff.patch","A":411,"B":578,"applied":false,"ms":0.6691319999999905,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-tbl/df-h.txt","A":160,"B":570,"applied":false,"ms":0.3563090000000102,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x41/df-real.txt","A":123,"B":158,"applied":false,"ms":0.2492550000000051,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x41/du-real.txt","A":266,"B":458,"applied":false,"ms":0.5385719999999878,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x41/node-help.txt","A":846,"B":1099,"applied":false,"ms":2.4622929999999883,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x42/findmnt.txt","A":385,"B":787,"applied":false,"ms":0.9434719999999857,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x42/df-h.txt","A":105,"B":140,"applied":false,"ms":0.1454559999999674,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-work/email-thread.txt","A":486,"B":629,"applied":false,"ms":1.0218140000000062,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-work/llm-answer.md","A":664,"B":733,"applied":false,"ms":1.1723010000000045,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-tbl/markdown-table.md","A":172,"B":330,"applied":false,"ms":0.2669850000000338,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-tbl/psql-output.txt","A":229,"B":675,"applied":false,"ms":0.46033199999999397,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x40/prices.csv","A":118,"B":582,"applied":false,"ms":0.15613700000000108,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x40/cue-sheet.md","A":101,"B":513,"applied":false,"ms":0.20477100000005066,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x42/ps-ef.txt","A":296,"B":1144,"applied":false,"ms":0.4239830000000211,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x41/ls-real.txt","A":414,"B":1175,"applied":true,"ms":3.928252999999927,"sourceExact":true,"nativeVerified":false,"contractEligible":false,"contractWarning":"Existing MORPH prompt asks reasoning in shorthand, not exact reconstruction; not an admissible native-output competitor."}
+{"path":"bench/holdout/json-pkg.txt","A":653,"B":1152,"applied":false,"ms":0.6137730000000374,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout/code-ts.txt","A":949,"B":1422,"applied":false,"ms":1.2319029999999884,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x42/dpkg-l.txt","A":623,"B":1000,"applied":false,"ms":1.141495999999961,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x41/ps-real.txt","A":381,"B":1106,"applied":false,"ms":0.3065639999999803,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-tbl/kubectl-get-pods.txt","A":300,"B":1006,"applied":false,"ms":0.26417800000001534,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x40/metrics.tsv","A":197,"B":811,"applied":false,"ms":0.16172099999994316,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x41/ps-aux-real.txt","A":980,"B":3054,"applied":false,"ms":0.7120129999999563,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x41/apt-real.txt","A":813,"B":2739,"applied":false,"ms":0.6675930000000108,"sourceExact":true,"nativeVerified":false,"contractEligible":true,"contractWarning":null}
+{"path":"bench/holdout-x41/ls-l-real.txt","A":1310,"B":5245,"applied":true,"ms":2.3732949999999846,"sourceExact":true,"nativeVerified":false,"contractEligible":false,"contractWarning":"Existing MORPH prompt asks reasoning in shorthand, not exact reconstruction; not an admissible native-output competitor."}

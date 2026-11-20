@@ -1,0 +1,203 @@
+{
+  "countingChecks": 32,
+  "orderCollision": {
+    "x": "01 alpha\n02 beta",
+    "y": "02 beta\n01 alpha",
+    "sameSortedWire": "01 alpha\n02 beta"
+  },
+  "scope": "Only rules out strict shortening of every object of these finite domains. Does not bound our workload or rule out a corpus Pareto improvement. EUTAXIA admits only known strictly ordered source runs.",
+  "cases": [
+    {
+      "V": 2,
+      "sourceObjects": 2,
+      "maxShortMessages": 1,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 2,
+      "sourceObjects": 4,
+      "maxShortMessages": 3,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 2,
+      "sourceObjects": 8,
+      "maxShortMessages": 7,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 2,
+      "sourceObjects": 16,
+      "maxShortMessages": 15,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 2,
+      "sourceObjects": 32,
+      "maxShortMessages": 31,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 2,
+      "sourceObjects": 64,
+      "maxShortMessages": 63,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 2,
+      "sourceObjects": 128,
+      "maxShortMessages": 127,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 2,
+      "sourceObjects": 256,
+      "maxShortMessages": 255,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 3,
+      "sourceObjects": 3,
+      "maxShortMessages": 1,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 3,
+      "sourceObjects": 9,
+      "maxShortMessages": 4,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 3,
+      "sourceObjects": 27,
+      "maxShortMessages": 13,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 3,
+      "sourceObjects": 81,
+      "maxShortMessages": 40,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 3,
+      "sourceObjects": 243,
+      "maxShortMessages": 121,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 3,
+      "sourceObjects": 729,
+      "maxShortMessages": 364,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 3,
+      "sourceObjects": 2187,
+      "maxShortMessages": 1093,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 3,
+      "sourceObjects": 6561,
+      "maxShortMessages": 3280,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 256,
+      "sourceObjects": 256,
+      "maxShortMessages": 1,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 256,
+      "sourceObjects": 65536,
+      "maxShortMessages": 257,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 256,
+      "sourceObjects": 16777216,
+      "maxShortMessages": 65793,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 256,
+      "sourceObjects": 4294967296,
+      "maxShortMessages": 16843009,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 256,
+      "sourceObjects": 1099511627776,
+      "maxShortMessages": 4311810305,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 256,
+      "sourceObjects": 281474976710656,
+      "maxShortMessages": 1103823438081,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 256,
+      "sourceObjects": 72057594037927936,
+      "maxShortMessages": 282578800148737,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 256,
+      "sourceObjects": 18446744073709551616,
+      "maxShortMessages": 72340172838076673,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 200000,
+      "sourceObjects": 200000,
+      "maxShortMessages": 1,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 200000,
+      "sourceObjects": 40000000000,
+      "maxShortMessages": 200001,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 200000,
+      "sourceObjects": 8000000000000000,
+      "maxShortMessages": 40000200001,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 200000,
+      "sourceObjects": 1600000000000000000000,
+      "maxShortMessages": 8000040000200001,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 200000,
+      "sourceObjects": 320000000000000000000000000,
+      "maxShortMessages": 1600008000040000200001,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 200000,
+      "sourceObjects": 64000000000000000000000000000000,
+      "maxShortMessages": 320001600008000040000200001,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 200000,
+      "sourceObjects": 12800000000000000000000000000000000000,
+      "maxShortMessages": 64000320001600008000040000200001,
+      "allStrictlyShorterImpossible": true
+    },
+    {
+      "V": 200000,
+      "sourceObjects": 2560000000000000000000000000000000000000000,
+      "maxShortMessages": 12800064000320001600008000040000200001,
+      "allStrictlyShorterImpossible": true
+    }
+  ]
+}

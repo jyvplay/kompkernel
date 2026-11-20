@@ -1,0 +1,105 @@
+{
+  "baseline": {
+    "lanes": 29,
+    "tokens": 11962,
+    "ms": 1191329,
+    "previousTokens": 11961,
+    "drift": [
+      {
+        "path": "bench/holdout-x41/ls-real.txt",
+        "previous": 413,
+        "current": 414
+      }
+    ],
+    "timingNote": "uncontrolled single run, some overlap with post-processing; not a speed comparison"
+  },
+  "experiments": {
+    "probe": {
+      "lanes": 29,
+      "delta": -2,
+      "ms": 12736,
+      "wins": [
+        {
+          "path": "bench/holdout-work/kb-article.txt",
+          "delta": -1
+        },
+        {
+          "path": "bench/holdout-x41/ps-aux-real.txt",
+          "delta": -1
+        }
+      ]
+    },
+    "evict": {
+      "lanes": 20,
+      "delta": -1,
+      "ms": 28326,
+      "wins": [
+        {
+          "path": "bench/holdout-x41/ps-aux-real.txt",
+          "delta": -1
+        }
+      ]
+    },
+    "specialize": {
+      "lanes": 20,
+      "delta": -5,
+      "ms": 18698,
+      "wins": [
+        {
+          "path": "bench/holdout/json-pkg.txt",
+          "delta": -2
+        },
+        {
+          "path": "bench/holdout-x40/metrics.tsv",
+          "delta": -2
+        },
+        {
+          "path": "bench/holdout-x41/apt-real.txt",
+          "delta": -1
+        }
+      ]
+    },
+    "latin": {
+      "lanes": 25,
+      "delta": 0,
+      "ms": 127377,
+      "wins": []
+    },
+    "beam": {
+      "lanes": 25,
+      "delta": -2,
+      "ms": 11274,
+      "wins": [
+        {
+          "path": "bench/holdout-work/kb-article.txt",
+          "delta": -1
+        },
+        {
+          "path": "bench/holdout-x41/ps-aux-real.txt",
+          "delta": -1
+        }
+      ]
+    }
+  },
+  "controls": {
+    "reverse": 6319,
+    "casePlane": 2730,
+    "linePermutation": 1000
+  },
+  "independentSourceDecode": 19,
+  "acceptedIndependent": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "layerEqual": true,
+      "prefixEqual": true,
+      "directSourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "layerEqual": true,
+      "prefixEqual": true,
+      "directSourceExact": true
+    }
+  ],
+  "decision": "DRAFT ONLY: material-gain, whole-stack-speed and blind-model gates unmet; no default wiring or merge."
+}

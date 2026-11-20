@@ -61,3 +61,32 @@ bench/x132/*.mjs
 bench/x126/*.mjs
 bench/x133/*.mjs
 bench/x133/prof*/
+
+bench/x134/*.mjs
+
+bench/x135/*.mjs
+
+bench/x136/*.mjs
+
+.venv/
+
+bench/x137/*.mjs
+
+bench/x138/*.mjs
+
+bench/x139/*.mjs
+
+bench/x140/*.mjs
+bench/x140/prof/
+
+bench/x141/*.mjs
+bench/x141/prof/
+
+# X142 generated bundles
+bench/x142/*.mjs
+
+# X143 generated bundles
+bench/x143/*.mjs
+
+# X143b generated bundles
+bench/x143b/*.mjs

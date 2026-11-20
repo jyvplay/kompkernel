@@ -1,0 +1,9 @@
+{
+  "status": "NOT RUN",
+  "reason": "No blind native model invocation available; program inverse is not a substitute",
+  "path": "bench/holdout-x41/node-help.txt",
+  "tokens": 831,
+  "sourceSha256": "197c018cbe936e15fb52b81073b14b30b2f9042fe11ad806a129406a48586c3e",
+  "messageSha256": "214f9ea2522e9833fd08edd5354c70dcc8cf1e64f468b7a350df40521bd46932",
+  "protocol": "One basic chat input: candidate-message.txt only. Save unmodified response bytes and model/version. Compare UTF-8 bytes to source. No tools, prior context, skills.md, extra decoder instructions or retry selection."
+}

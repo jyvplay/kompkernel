@@ -1,0 +1,5 @@
+{"path":"bench/holdout-x41/ps-aux-real.txt","A":980,"B":1031,"parentPayloadTokens":974,"paidHeaderMarginal":57,"exceptions":0}
+{"path":"bench/holdout-x40/prices.csv","A":118,"B":173,"parentPayloadTokens":120,"paidHeaderMarginal":53,"exceptions":1}
+{"path":"bench/holdout-work/kb-article.txt","A":620,"B":676,"parentPayloadTokens":619,"paidHeaderMarginal":57,"exceptions":0}
+{"path":"bench/holdout-work/llm-answer.md","A":664,"B":718,"parentPayloadTokens":661,"paidHeaderMarginal":57,"exceptions":0}
+{"path":"bench/holdout-work/email-thread.txt","A":486,"B":544,"parentPayloadTokens":487,"paidHeaderMarginal":57,"exceptions":0}

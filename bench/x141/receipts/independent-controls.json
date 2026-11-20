@@ -1,0 +1,231 @@
+{
+  "exact": 45,
+  "rows": [
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/kb-article.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/df-real.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/du-real.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x42/df-h.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/email-thread.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/llm-answer.md",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout/json-pkg.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout/code-ts.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/kb-article.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/kb-article.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/kb-article.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/kb-article.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/df-real.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/du-real.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x42/df-h.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/email-thread.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/llm-answer.md",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/llm-answer.md",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/llm-answer.md",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-work/llm-answer.md",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout/json-pkg.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout/json-pkg.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout/code-ts.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout/code-ts.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout/code-ts.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "sourceExact": true
+    },
+    {
+      "arm": "interior",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "sourceExact": true
+    }
+  ],
+  "nativeVerified": false
+}

@@ -1,0 +1,10 @@
+{
+  "status": "NOT RUN",
+  "reason": "No blind native-model endpoint available. Source-aware self-review and program inverses are not behavioral verification.",
+  "newCodecPriceGatePassed": false,
+  "existingUnresolvedPackages": [
+    "bench/x136/receipts/native-trial.json",
+    "bench/x137/receipts/native-trial.json",
+    "bench/x138/receipts/native-trial.json"
+  ]
+}

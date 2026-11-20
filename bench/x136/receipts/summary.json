@@ -1,0 +1,134 @@
+{
+  "freshBaseline": {
+    "lanes": 29,
+    "tokens": 11962,
+    "ms": 1167083,
+    "sameX135Messages": 29
+  },
+  "patchedBaseline": {
+    "lanes": 29,
+    "tokens": 11962,
+    "ms": 1147890,
+    "sameFreshMessages": 29,
+    "inheritedBad": 0
+  },
+  "frozenCandidateTokens": 11950,
+  "acceptedTokenCandidates": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "A": 620,
+      "B": 608,
+      "delta": -12,
+      "width": 98,
+      "admitted": true,
+      "sourceExact": true,
+      "ms": 10629.460521,
+      "blocks": 6,
+      "patches": 0,
+      "removedBreaks": 31
+    }
+  ],
+  "layoutTrials": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "A": 620,
+      "B": 608,
+      "delta": -12,
+      "width": 98,
+      "admitted": true,
+      "sourceExact": true,
+      "ms": 10629.460521,
+      "blocks": 6,
+      "patches": 0,
+      "removedBreaks": 31
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "A": 486,
+      "B": 503,
+      "delta": 17,
+      "width": 96,
+      "admitted": false,
+      "sourceExact": true,
+      "ms": 13578.354982,
+      "blocks": 1,
+      "patches": 0,
+      "removedBreaks": 2
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "A": 118,
+      "B": 237,
+      "delta": 119,
+      "width": 40,
+      "admitted": false,
+      "sourceExact": true,
+      "ms": 3906.518041999996,
+      "blocks": 1,
+      "patches": 0,
+      "removedBreaks": 30
+    }
+  ],
+  "ablation": [
+    {
+      "kind": "single-width-marked",
+      "path": "bench/holdout-work/kb-article.txt",
+      "A": 620,
+      "B": 614,
+      "delta": -6,
+      "ms": 8698.2515,
+      "sourceExact": true
+    },
+    {
+      "kind": "existing-WRAPCANON",
+      "path": "bench/holdout-work/kb-article.txt",
+      "A": 620,
+      "B": 614,
+      "delta": -6,
+      "ms": 5932.947436,
+      "sourceExact": true
+    }
+  ],
+  "controls": {
+    "brotliTokens": 17475,
+    "copyTokens": 23576,
+    "lanes": 29
+  },
+  "counter": {
+    "oldFailures": 14,
+    "boundaryTests": 20,
+    "newDifferentialChecks": 235,
+    "scanOverHeapTime": 18.71847286691887,
+    "scope": "constructed counter workloads, concurrent sandbox activity; NOT whole-stack speedup"
+  },
+  "unit": {
+    "checks": 366,
+    "scope": "mechanics and source equality, not native-model verification"
+  },
+  "nativeModelVerified": false,
+  "paretoDominanceEstablished": false,
+  "timingCaveat": "Two full runs are not a controlled paired benchmark; patched run overlapped short layout/ablation jobs and tests.",
+  "endToEnd": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "A": 620,
+      "B": 608,
+      "admitted": true,
+      "baselineMs": 6484.914209,
+      "extensionMs": 6382.845338000001,
+      "totalMs": 12867.759547000001,
+      "parentCalls": 1,
+      "width": 98
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "A": 486,
+      "B": 486,
+      "admitted": false,
+      "baselineMs": 10966.959499,
+      "extensionMs": 9176.884204999998,
+      "totalMs": 20143.843704,
+      "parentCalls": 1
+    }
+  ]
+}

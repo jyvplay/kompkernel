@@ -1,0 +1,12 @@
+{
+  "firstCheapRepriceAttempt": "REJECTED by selection guard",
+  "changes": [
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "before": "line",
+      "after": "sentence"
+    }
+  ],
+  "requiresFullParentRerun": true,
+  "filesMutated": false
+}

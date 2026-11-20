@@ -1,0 +1,131 @@
+{
+  "exact": 23,
+  "rows": [
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x42/lsblk.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-work/kb-article.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x42b/free-m.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x41/df-real.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x41/du-real.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x42/df-h.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-work/email-thread.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-work/llm-answer.md",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout/json-pkg.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout/code-ts.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "frontier",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-baseline",
+      "path": "bench/x140/heldout/dotenv.md",
+      "sourceExact": true
+    },
+    {
+      "receipt": "heldout-baseline",
+      "path": "bench/x140/heldout/next.md",
+      "sourceExact": true
+    }
+  ],
+  "unsupported": [
+    "bench/holdout-tbl/df-h.txt",
+    "bench/holdout-tbl/markdown-table.md",
+    "bench/holdout-tbl/psql-output.txt",
+    "bench/holdout-x40/prices.csv",
+    "bench/holdout-x40/cue-sheet.md",
+    "bench/holdout-tbl/kubectl-get-pods.txt",
+    "bench/holdout-x40/metrics.tsv",
+    "bench/holdout-x41/ls-l-real.txt"
+  ],
+  "nativeVerified": false
+}

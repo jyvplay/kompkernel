@@ -1,0 +1,14 @@
+[
+  {
+    "path": "bench/x142/heldout/usr-bin.txt",
+    "policy": "First81 lines of actual LC_ALL=C ls -l /usr/bin; captured before pricing",
+    "bytes": 5002,
+    "sha256": "55b981a5d5f2f9a87dcf1ec74b49a9d48c5fffdd85cff6ed8e04b1c7df1b7513"
+  },
+  {
+    "path": "bench/x142/heldout/tokenizer-readme.md",
+    "policy": "First100 lines of installed gpt-tokenizer README; frozen before pricing",
+    "bytes": 4653,
+    "sha256": "8702f815cec5ab04ee7576c4cb30343e4dacb31f00fd6236c287149759962cc5"
+  }
+]

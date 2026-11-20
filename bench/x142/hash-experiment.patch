@@ -1,0 +1,49 @@
+--- a/src/lib/omega/bpe-fast.ts
++++ b/src/lib/omega/bpe-fast.ts
+@@ -42,6 +42,9 @@
+  */
+ 
+ import * as O200K from 'gpt-tokenizer/encoding/o200k_base';
++import {rankSlot3,rankSlot4} from './rank-hash';
++let HASH_FAST=false;
++export function setRankHash(value:boolean):void{ HASH_FAST=value; READY=false; if(!fastReady())throw Error('index rebuild'); }
+ 
+ type AnyCore = {
+   bytePairStringRankEncoder: Map<string, number>;
+@@ -152,7 +155,7 @@
+     H3_KEY.fill(-1);
+     H4_HI.fill(-1);
+     const put3 = (k: number, rank: number) => {
+-      let i = k & H3_MASK;
++      let i = HASH_FAST ? rankSlot3(k) : k & H3_MASK;
+       for (;;) {
+         const cur = H3_KEY[i];
+         if (cur === -1 || cur === k) { H3_KEY[i] = k; H3_VAL[i] = rank; return; }
+@@ -160,7 +163,7 @@
+       }
+     };
+     const put4 = (hi: number, lo: number, rank: number) => {
+-      let i = (hi * 31 + lo) & H4_MASK;
++      let i = HASH_FAST ? rankSlot4(hi,lo) : (hi * 31 + lo) & H4_MASK;
+       for (;;) {
+         const cur = H4_HI[i];
+         if (cur === -1 || (cur === hi && H4_LO[i] === lo)) {
+@@ -300,7 +303,8 @@
+     // lookups in a merge. The 3-byte key fits in 24 bits, so an open-addressed
+     // Int32Array table answers it with two array loads and an integer compare —
+     // no hashing, no boxing, no allocation. Same function, fewer instructions.
+-    let i = (b[s] * 65536 + b[s + 1] * 256 + b[s + 2]) & H3_MASK;
++    const packed = (b[s] << 16) + (b[s + 1] << 8) + b[s + 2];
++    let i = HASH_FAST ? rankSlot3(packed) : packed & H3_MASK;
+     for (;;) {
+       const k = H3_KEY[i];
+       if (k === -1) return INF;
+@@ -313,7 +317,7 @@
+     // as two 16-bit halves and both are compared.
+     const hi = (b[s] << 8) | b[s + 1];
+     const lo = (b[s + 2] << 8) | b[s + 3];
+-    let i = (hi * 31 + lo) & H4_MASK;
++    let i = HASH_FAST ? rankSlot4(hi,lo) : (hi * 31 + lo) & H4_MASK;
+     for (;;) {
+       const k = H4_HI[i];
+       if (k === -1) return INF;

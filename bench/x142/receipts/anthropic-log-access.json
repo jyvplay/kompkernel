@@ -1,0 +1,5 @@
+{
+  "status": "FAILED",
+  "run": 40442388505,
+  "reason": "gh run view --log redirected to results-receiver.actions.githubusercontent.com and failed EOF; host outside shell allowlist. Job metadata available, raw logs not retrieved."
+}

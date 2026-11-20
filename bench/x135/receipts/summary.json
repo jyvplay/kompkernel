@@ -1,0 +1,40 @@
+{
+  "baseline": {
+    "lanes": 29,
+    "tokens": 11962,
+    "wallMs": 1217179,
+    "inheritedBad": 0,
+    "unchangedMessages": 29
+  },
+  "rotation": {
+    "trials": 28,
+    "lanes": 7,
+    "minDelta": 3,
+    "maxDelta": 36,
+    "gains": 0,
+    "wallMs": 920154,
+    "independentExact": 28
+  },
+  "packages": {
+    "lanes": 25,
+    "probes": 89045,
+    "delta": 0,
+    "wallMs": 43192
+  },
+  "independentBaseline": {
+    "chiron": 19,
+    "chironSteli": 21,
+    "total": 29
+  },
+  "gzipControl": {
+    "lanes": 29,
+    "tokens": 20704,
+    "machineExact": 29
+  },
+  "unit": {
+    "checks": 111,
+    "scope": "constructed edge-case tests, not real-workload compression evidence"
+  },
+  "nativeLLMVerified": false,
+  "paretoAdvanceEstablished": false
+}

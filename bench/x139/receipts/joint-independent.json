@@ -1,0 +1,510 @@
+{
+  "exact": 72,
+  "rows": [
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/kb-article.txt",
+      "k": 0,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/kb-article.txt",
+      "k": 0,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/kb-article.txt",
+      "k": 4,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/kb-article.txt",
+      "k": 4,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/kb-article.txt",
+      "k": 8,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/kb-article.txt",
+      "k": 8,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/kb-article.txt",
+      "k": 16,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/kb-article.txt",
+      "k": 16,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-x41/node-help.txt",
+      "k": 0,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-x41/node-help.txt",
+      "k": 0,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-x41/node-help.txt",
+      "k": 4,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-x41/node-help.txt",
+      "k": 4,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-x41/node-help.txt",
+      "k": 8,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-x41/node-help.txt",
+      "k": 8,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-x41/node-help.txt",
+      "k": 16,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-x41/node-help.txt",
+      "k": 16,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/email-thread.txt",
+      "k": 0,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/email-thread.txt",
+      "k": 0,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/email-thread.txt",
+      "k": 4,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/email-thread.txt",
+      "k": 4,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/email-thread.txt",
+      "k": 8,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/email-thread.txt",
+      "k": 8,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/email-thread.txt",
+      "k": 16,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/email-thread.txt",
+      "k": 16,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/llm-answer.md",
+      "k": 0,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/llm-answer.md",
+      "k": 0,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/llm-answer.md",
+      "k": 4,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/llm-answer.md",
+      "k": 4,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/llm-answer.md",
+      "k": 8,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/llm-answer.md",
+      "k": 8,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/llm-answer.md",
+      "k": 16,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/holdout-work/llm-answer.md",
+      "k": 16,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/curl-help.txt",
+      "k": 0,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/curl-help.txt",
+      "k": 0,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/curl-help.txt",
+      "k": 4,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/curl-help.txt",
+      "k": 4,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/curl-help.txt",
+      "k": 8,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/curl-help.txt",
+      "k": 8,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/curl-help.txt",
+      "k": 16,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/curl-help.txt",
+      "k": 16,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/git-diff-help.txt",
+      "k": 0,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/git-diff-help.txt",
+      "k": 0,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/git-diff-help.txt",
+      "k": 4,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/git-diff-help.txt",
+      "k": 4,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/git-diff-help.txt",
+      "k": 8,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/git-diff-help.txt",
+      "k": 8,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/git-diff-help.txt",
+      "k": 16,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/git-diff-help.txt",
+      "k": 16,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/tar-help.txt",
+      "k": 0,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/tar-help.txt",
+      "k": 0,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/tar-help.txt",
+      "k": 4,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/tar-help.txt",
+      "k": 4,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/tar-help.txt",
+      "k": 8,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/tar-help.txt",
+      "k": 8,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/tar-help.txt",
+      "k": 16,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-overlap",
+      "path": "bench/x138/heldout/tar-help.txt",
+      "k": 16,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/escalade.md",
+      "k": 0,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/escalade.md",
+      "k": 0,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/escalade.md",
+      "k": 4,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/escalade.md",
+      "k": 4,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/escalade.md",
+      "k": 8,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/escalade.md",
+      "k": 8,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/escalade.md",
+      "k": 16,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/escalade.md",
+      "k": 16,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/graceful-fs.md",
+      "k": 0,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/graceful-fs.md",
+      "k": 0,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/graceful-fs.md",
+      "k": 4,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/graceful-fs.md",
+      "k": 4,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/graceful-fs.md",
+      "k": 8,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/graceful-fs.md",
+      "k": 8,
+      "overlap": true,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/graceful-fs.md",
+      "k": 16,
+      "overlap": false,
+      "sourceExact": true
+    },
+    {
+      "receipt": "joint-heldout",
+      "path": "bench/x139/heldout/graceful-fs.md",
+      "k": 16,
+      "overlap": true,
+      "sourceExact": true
+    }
+  ],
+  "nativeVerified": false
+}

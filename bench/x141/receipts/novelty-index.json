@@ -1,0 +1,3310 @@
+{
+  "scope": "keyword index of all 366 omega TS files, NOT exhaustive semantic audit",
+  "nearNeighborsRead": [
+    "ctxcopy",
+    "echo",
+    "diptychon",
+    "rosetta",
+    "mnemosyne",
+    "anamnesis",
+    "synapse",
+    "panacea",
+    "kappa"
+  ],
+  "files": [
+    {
+      "path": "src/lib/omega/abacus.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aeon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aether.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 4,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aetos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aion.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 4,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aither.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/akolouthia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/akolouthia2.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/akribeia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aleph.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aleph.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/allomorph.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/alphafold.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ambient.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 10,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/amphora.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anadiplosis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 9,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anagnorisis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anagraphe.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anakykli.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anamnesis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 71,
+        "explicit-binding": 9,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ananke.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anaphora-fold.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anaphora.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 11,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/anastrophe.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/antiphon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/apeiron.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/apex.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 17,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/apex.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 17,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/apographe.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/apotome.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/arche.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/archetypon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 1,
+        "explicit-binding": 4,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ariadne.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 6,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/arithmos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 2
+      }
+    },
+    {
+      "path": "src/lib/omega/astraea.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/astral.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/athroismos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/atlas.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/atom-codec-v3.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/atom-codec-v3.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/atom-codec.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/atom-codec.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/atx-release.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/aurora.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/austere.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/axiom.ts",
+      "hits": {
+        "lexical-history": 1,
+        "cross-message": 0,
+        "explicit-binding": 29,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/banyan.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/bathmos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/bifront.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/bpe-audit.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/bpe-fast.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/bpe.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/bpe.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/brachylogia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/brachys.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/cadmus.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/caesura.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/canon-catalog.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chimera.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chiron.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 4,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chronos-arena.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chronos-arena.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chronos-v6.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chronos-v6.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/chronos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/circe.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/cjk-contractor.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/clock.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/cm.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/cm.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/codec-synthesis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/column.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/count-memo-generations.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/crasis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 1,
+        "explicit-binding": 7,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/crown.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ctxcopy.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 2,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/daedalus-dual.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/daedalus.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/decimal-token-count.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 3
+      }
+    },
+    {
+      "path": "src/lib/omega/dendron.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/dendrons.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/diagraphe.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/diaphora.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/diastema.before.d.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/diastema.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/diglossia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/dike.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/diorthosi.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/diptychon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 2
+      }
+    },
+    {
+      "path": "src/lib/omega/dirfold-a.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/dirfold.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ditto.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/dragi-full.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/dragi-full.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/echo.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eclipse.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eidolon.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eidolon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eidos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 4,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eikon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eirmos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/elleipsis.ts",
+      "hits": {
+        "lexical-history": 2,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/enallage.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/engram.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/engramma.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/enkibotismos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/enthymeme.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 2,
+        "explicit-binding": 9,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/epagoge.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/epipsephisis.ts",
+      "hits": {
+        "lexical-history": 1,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/episteme.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/epistle.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eupraxia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/euros.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/eustochia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/euteleia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/euthynteria.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 8,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/exodus.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/fotar.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/genesis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/gennadas.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/glossia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/gnomon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/gramma.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/harmonia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 10,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/harmos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/helix.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hemera.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/hermes-contract.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hermes-fractal.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hermes.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 12,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/heuresis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/homoios.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hora.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hydra.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hyle.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hypercube-v5.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 12,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hypercube-v5.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 12,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hypergraph.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/hyperion.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/icarus.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/input-memory.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/iris.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 11,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/isomorphia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/isoskeles.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/janus.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 7,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/janus.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 7,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/json-escape-fold.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kairos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kalligraphos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kallos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kannabos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kanon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kappa.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 23,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kenon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kephalaion.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kerma.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kernel.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 9,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/khoros-operads.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 1,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/khoros.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kinetic.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kiones.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kladios.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/koine.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/kolumn.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/krema.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/lakonikos-d.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/lakonikos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/lattice.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 21,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/lethe.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/lexis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/logistike.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/logos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/logtpl.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ltp.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ltp.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/lumen.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/megaepanalipsis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/mekos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/meridian.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 12,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/merismos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/meson.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/metataxis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/metathesis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/metatron.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 4,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/metis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/metonomasia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/metron.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/mnema.ts",
+      "hits": {
+        "lexical-history": 7,
+        "cross-message": 4,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/mnemosyne.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/moira.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/morph.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/morph.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/morphe.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/mosaic.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/nebula.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/nemesis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/nest.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/nexus.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/nexus.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/noesis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/nyx.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/oikonomia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/omega-e8seed.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/omega-e8seed.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/omni-operads.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 1,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/omni.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/onomasia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/oracle.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 6,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/orbit.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/orion.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/orothesia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/orthos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/oura.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/padtab.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/padtab2.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/palimpsest.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/palindromos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/panacea.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/panoptes.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/pantheon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/paradeigma.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/parataxis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/perikopi.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/periodos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/persistent-dict.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 12,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/persistent-dict.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 12,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a1.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a10.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a2.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a3.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a4.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a5.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a6.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a7.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a8.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx-a9.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx2.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx3.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phalanx4.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phoenix.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/phrase.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 31,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/pinax.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/platos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/plexus.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 16,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/plinthos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/polaris.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/polytropos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/praxis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/proagoge.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/probole.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/procrustes.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/prokeno.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/prolepsis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/prometheus-icdm.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 26,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/prometheus-icdm.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 26,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/pronoia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/prosopon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/prosphysis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/proteus.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/psephos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/ptyche.ts",
+      "hits": {
+        "lexical-history": 1,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/pulse.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/pyknosis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 4,
+        "numeric-count": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/quantum.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/quasar.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/recall.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/registry.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/registry.ts",
+      "hits": {
+        "lexical-history": 3,
+        "cross-message": 8,
+        "explicit-binding": 46,
+        "numeric-count": 14
+      }
+    },
+    {
+      "path": "src/lib/omega/repair.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/reprise.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/rhizoma.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/rosetta.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 28,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/schema.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sequoyah.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sibling-template.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sibyl.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sigma.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sigma.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/signet.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/solaris.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sphragis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/splice.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stadion.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/starlight-inline.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/starlight.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stathmos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/steli.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stencil.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stencil.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stentor.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stichomythia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stichos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stigme.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stoichedon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stoicheion.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stoichos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/stoichothetes.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/strand-book.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/strand.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 14,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/strata.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 7,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/sygkollesis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syllogismos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/symmetron.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/symphyia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 6,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/symploke.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 1
+      }
+    },
+    {
+      "path": "src/lib/omega/synaphe.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 1,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synapse.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synarmoge.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synartesis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syncope.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syndesmos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syndyasmos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synedria.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synergy.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synizesis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 6,
+        "numeric-count": 2
+      }
+    },
+    {
+      "path": "src/lib/omega/synkope.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synkrisis.ts",
+      "hits": {
+        "lexical-history": 2,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syntagma.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syntaxis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/synthesis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syntomia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 4,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syntomos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syzeuxis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/syzygia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tabmin.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tachos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tachygrafia.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tachys.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 11,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tagstack.ts",
+      "hits": {
+        "lexical-history": 1,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tau.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/taxinomasis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/taxis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/telos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 5,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tensor.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tessera.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 7,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/themis.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/thoth.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/timema.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/tmematismos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/trie.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/typos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/uuidfold.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/valence.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/valkyrie.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veltistos.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 6,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-a.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-c.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-g.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-k.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-m.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-n.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-p.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-q.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-r.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-s.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-u.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 2,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas-w.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/veritas.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 3,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/workmeter.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 4,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/wrapcanon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/zenith.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 0,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/zero.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/zeta.orig.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 10,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/zeta.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 10,
+        "numeric-count": 0
+      }
+    },
+    {
+      "path": "src/lib/omega/zygon.ts",
+      "hits": {
+        "lexical-history": 0,
+        "cross-message": 0,
+        "explicit-binding": 1,
+        "numeric-count": 0
+      }
+    }
+  ]
+}

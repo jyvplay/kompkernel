@@ -1,0 +1,1 @@
+{"path":"bench/holdout/lic-mit.txt","A":38,"B":38,"admitted":false,"parentCalls":1,"ms":12293.775524,"baselineSourceAudit":"inherited decoded only; candidate gate uses message reader","candidate":null}

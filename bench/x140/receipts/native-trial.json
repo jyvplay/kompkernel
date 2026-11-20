@@ -1,0 +1,4 @@
+{
+  "status": "NOT RUN",
+  "reason": "No blind model endpoint used; no EIKON real-source price winner. Program/source-aware reconstruction does not meet native gate."
+}

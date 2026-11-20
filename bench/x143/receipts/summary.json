@@ -1,0 +1,155 @@
+{
+  "frontier": {
+    "lanes": 29,
+    "tokens": 11962,
+    "ms": 1228636,
+    "identicalToX142": true
+  },
+  "probe": {
+    "priced": 24,
+    "wins": 0,
+    "bestDelta": 54
+  },
+  "parent": {
+    "priced": 5,
+    "wins": 0,
+    "bestDelta": 51
+  },
+  "heldout-probe": {
+    "priced": 4,
+    "wins": 0,
+    "bestDelta": 57
+  },
+  "heldout-parent": {
+    "priced": 0,
+    "wins": 0,
+    "bestDelta": null
+  },
+  "unit": {
+    "checks": 20054,
+    "fixtures": 19,
+    "nativeVerified": false
+  },
+  "coldread": {
+    "exact": 32,
+    "fixtures": 19,
+    "unsupported": [
+      {
+        "receipt": "parent",
+        "path": "bench/holdout-x40/prices.csv"
+      }
+    ],
+    "nativeVerified": false
+  },
+  "independent-frontier": {
+    "exact": 23,
+    "unsupported": [
+      "bench/holdout-tbl/df-h.txt",
+      "bench/holdout-tbl/markdown-table.md",
+      "bench/holdout-tbl/psql-output.txt",
+      "bench/holdout-x40/prices.csv",
+      "bench/holdout-x40/cue-sheet.md",
+      "bench/holdout-tbl/kubectl-get-pods.txt",
+      "bench/holdout-x40/metrics.tsv",
+      "bench/holdout-x41/ls-l-real.txt"
+    ],
+    "nativeVerified": false
+  },
+  "final-gate": {
+    "referenceTokenizerPrices": 66,
+    "sharedReaderExact": 23,
+    "unsupported": [
+      "bench/holdout-tbl/df-h.txt",
+      "bench/holdout-tbl/markdown-table.md",
+      "bench/holdout-tbl/psql-output.txt",
+      "bench/holdout-x40/prices.csv",
+      "bench/holdout-x40/cue-sheet.md",
+      "bench/holdout-tbl/kubectl-get-pods.txt",
+      "bench/holdout-x40/metrics.tsv",
+      "bench/holdout-x41/ls-l-real.txt"
+    ],
+    "nativeVerified": false
+  },
+  "tail-unit": {
+    "distinctStrings": 18563,
+    "checks": 111378,
+    "encodings": 2,
+    "modeTransitionTested": true
+  },
+  "repair-gate": {
+    "checks": 111,
+    "allPriorCandidateRepresentationsUnchanged": true,
+    "fullParentRerun": false
+  },
+  "encoding-audit": {
+    "checks": 2066,
+    "domain": "all subsets of clauses of width<=2 on n=0,1,2; length only",
+    "identity": "L=n+2+4m+sum_literals(4*code+8)",
+    "upperBound": "L<=n+2+4m+(8n+4)km",
+    "algorithmVerified": false,
+    "leanReplayed": false
+  },
+  "speed": {
+    "measurements": 24,
+    "isolated": true,
+    "sourceExact": true,
+    "messageIdentical": true,
+    "rows": [
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "A": [
+          5531.204503999999,
+          5624.872904,
+          5858.414421000001,
+          5459.036593000004
+        ],
+        "B": [
+          5227.836427999999,
+          4996.7900329999975,
+          5594.303619999999,
+          5510.8309389999995
+        ],
+        "BoverATotal": 0.9491060157300293,
+        "BoverAMedian": 0.9625845155304608
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "A": [
+          16907.955968999988,
+          14806.992895000018,
+          15506.190697000013,
+          16051.518927999976
+        ],
+        "B": [
+          16852.33198599999,
+          16580.065325000003,
+          14881.637874000007,
+          17615.065059999994
+        ],
+        "BoverATotal": 1.0419840389109274,
+        "BoverAMedian": 1.0594050616561501
+      },
+      {
+        "path": "bench/holdout-x40/metrics.tsv",
+        "A": [
+          14357.055372999981,
+          14686.229004000023,
+          14792.635835999972,
+          14234.849759000004
+        ],
+        "B": [
+          14454.764464000007,
+          14175.365612000023,
+          14701.864413000003,
+          15106.635447000037
+        ],
+        "BoverATotal": 1.0063346837690883,
+        "BoverAMedian": 1.003902606142223
+      }
+    ],
+    "productionHookInstalled": false
+  },
+  "nativeVerified": false,
+  "codecParetoVerified": false,
+  "mergeReady": false
+}

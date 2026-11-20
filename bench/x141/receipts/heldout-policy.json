@@ -1,0 +1,20 @@
+[
+  {
+    "path": "bench/x141/heldout/typescript.md",
+    "origin": "node_modules/typescript/README.md",
+    "sourceSha256": "73147458477d90cd6236627cdd9b0871df12e6e8a21d2d0fda6d1ad2826bdc0e",
+    "sha256": "73147458477d90cd6236627cdd9b0871df12e6e8a21d2d0fda6d1ad2826bdc0e",
+    "bytes": 2842,
+    "packageVersion": "5.9.3",
+    "policy": "first100 lines frozen before encoding; no content selection after pricing"
+  },
+  {
+    "path": "bench/x141/heldout/pg.md",
+    "origin": "node_modules/pg/README.md",
+    "sourceSha256": "25e19d878c5a492023778a2596e8e26d76fc3e2b97a9582d4bdde675b8932408",
+    "sha256": "25e19d878c5a492023778a2596e8e26d76fc3e2b97a9582d4bdde675b8932408",
+    "bytes": 4316,
+    "packageVersion": "8.20.0",
+    "policy": "first100 lines frozen before encoding; no content selection after pricing"
+  }
+]

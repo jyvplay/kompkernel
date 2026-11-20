@@ -1,0 +1,31 @@
+¶ k=v; expand recursively. lines longer than 79: greedy-wrap text after the last 2+space gap, indent continuations 29 spaces. Print only.
+§в     ҵв --я
+ҵа excludeряexcludeьяno-с,ҧс --ә  тә-з
+ту (defaultы)
+буыҵдр-cachesг directoriesөг containing CACHEDIR.TAGн filesО don't replace existingні when extractingњ-old-files      Оісҳ=FILEм theе archiveңмеш check device numbers when creating incremental archivesҟ unquote input file or member namesху for exclusionэwildcards-match-slashә wildcardsче.tarФ readа patterns for each directoryи fromӯи FILEс if it existsЪ  tar -й anеъ GNU-format incremental backupк do notА ofц metadataА existingго toӷ exit codesА childrenүг containing FILEлverbatim-files-from¶Usage: tar [OPTION...] [FILE]...
+GNU 'tar' saves many files together into a single tape or diskес and can
+restore individualниң.
+
+Examples:
+Ъcfч foo bar  # Createчин foo and bar.
+Ъtvfч         # List allн inч verbosely.
+Ъxfч          # Extract allнич.
+
+ Main operation mode:
+ә-Aҧcatenateҧconcatenate   append tarнойзcҧcreate               create a newеяdelete               deleteиме (not on mag tapes!ытdҧdiffҧcompare      find differences between archive and file systemзrҧappend               appendном endАйяtest-label           testме volume label and exitзtҧlist                 listм contentsАйзuҧupdate               only appendн newer than copy inезxҧextractҧget       extractний
+
+ Operation modifiers:
+яcheck-device вәшуытgҧlisted-incrementalҳә handle newъзGҧincremental          handle oldъяhole-detection=TYPE  techniqueо detect holesяignore-failed-readәк exit with nonzero on unreadableняlevel=NUMBER         dump level for created listed-incremental archiveьcheck-device     кшьseek              archive is not seekableзnҧseek                 archive is seekableяoccurrence[=NUMBER]  process onlyм NUMBERth occurrence of each file inме; this option is valid only in conjunction with oneАм subcommands --deleteҧdiffҧextract or --list and when a listАн is given either onм command line or via the -T option; NUMBER defaultsо 1яsparse-version=MAJOR[.MINOR]
+                             set versionАм sparse formatо use (implies --sparseытSҧsparse               handle sparse files efficiently
+
+ Local file name selection:яadd-fileҳ        add given FILEоме (useful if its name starts with a dashытCҧdirectory=DIR        changeо directory DIRр=PATTERNван, given as a PATTERNр-backupsва backup and lockнд ва contents ofөс except forм tag file itselfд-allәаөд-under exclude everything underөр-ignoreҳ Фӯр-ignore-recursiveҳ
+                            Ф and its subdirectoriesӯр-tagҳәәа contents ofүс except for FILE itselfр-tag-allҳаүр-tag-underҳәа everything underүр-vcs          exclude version control systemгр-vcs-ignores  read exclude patternsим VCS ignoreньnull              disableм effectАм previous --null optionьrecursion         avoid descending automatically inгьunquote     вкҟьл ә-T treats file names starting with dash as optionsбnull            в-T reads null-terminated names; implies --ляrecursion            recurse intoгуытTҧfiles-fromҳ      get namesо extract or createи FILEяunquote             ҟблә-T reads file names verbatim (no escape or option handlingытXҧexclude-fromҳә а patterns listed in FILE
+
+ File name matching options (affect bothа and include patterns):
+яanchored             patterns match file name startяignore-case          ignore caseьanchored          patterns match after any '/'хыҵno-ignore-case       case sensitive matchingбno-wildcards         verbatim string matchingьэк match '/'яwildcards            use wildcardsхыҵэ match '/'х)
+
+ Overwrite control:
+яkeep-directory-symlink   preserve existing symlinksогіяkeep-newer-files    О that are newer than their archive copiesзkҧkeepњ treat them as errorsьoverwrite-dir     preserveцяone-top-level[=DIR]  create a subdirectoryо avoid having loose files extractedяoverwrite            overwrite existingніяoverwrite-dir        overwriteцібrecursive-unlink     empty hierarchies priorо extracting directoryяremove-files         remove files after adding themомеяskipњ silently skip over themзUҧunlink-first         remove each file priorо extracting over itзWҧverify               attemptо verifyме after writing it
+
+ Select output stream:
+яignore-command-error ignoreӷьignore-command-error   treat non-zeroӷ as errorзOҧto-stdout            extractно standard output

@@ -1,0 +1,75 @@
+{
+  "reader": "independent Python APOTOME plus reused STELI",
+  "rows": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "sourceExact": true
+    },
+    {
+      "path": "bench/x139/heldout/graceful-fs.md",
+      "sourceExact": true
+    }
+  ],
+  "exact": 17,
+  "nativeVerified": false
+}

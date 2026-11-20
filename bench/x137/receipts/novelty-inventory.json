@@ -1,0 +1,2059 @@
+{
+  "scope": "All top-level omega TS files hashed and lexically screened; NOT an all-codec semantic-equivalence audit",
+  "files": [
+    {
+      "file": "src/lib/omega/abacus.ts",
+      "sha256": "82f24fb425f893e4aa8e83be1704e121e7b45d6fb289d29d9fd29e6ebb093ebe",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/aeon.ts",
+      "sha256": "7996c5f0ad470f4879d890e41a92269dbadfdf85f9f8b5bc54248f1b64d7890e",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/aether.ts",
+      "sha256": "91540107672172651ec0a6df976cab40636b9c164fbc0a7cc6c864b7ddb086cc",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/aetos.ts",
+      "sha256": "b44211359f7b5bf9359653d67b102625a14b1563d9cee620149971db8d4ca01b",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/aion.ts",
+      "sha256": "e84fc39f8c939f737f8edf4c0bce7585e2023ea4562b9e64f248ccb1e1c9d3a4",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/aither.ts",
+      "sha256": "7155201c351569dd9edd30fccac6a74f8076ecae694d3644bbbf3b9613507ac4",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/akolouthia.ts",
+      "sha256": "decd351946ebe25999acc0b6c809cc2757f8f6c2a2c193fe928e4c4e02f3777d",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/akolouthia2.ts",
+      "sha256": "42ba2e7ce7c5e65329417a082b324be09f2e864aacee7e1b212c79bfeb4b5161",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/akribeia.ts",
+      "sha256": "3dd40473f100d570b40b6fa131fbb7e4266799d3a1c07417494e19cb21c3859e",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/aleph.orig.ts",
+      "sha256": "eb6eb6ee2c11fe10289460e3b5b507218ed1514061c4ec677e6da337819c9a6e",
+      "layoutHits": [
+        {
+          "line": 47,
+          "text": "* 2^32, so 5 continuation bytes are always sufficient \u2014 but we allow 7 for"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/aleph.ts",
+      "sha256": "eb6eb6ee2c11fe10289460e3b5b507218ed1514061c4ec677e6da337819c9a6e",
+      "layoutHits": [
+        {
+          "line": 47,
+          "text": "* 2^32, so 5 continuation bytes are always sufficient \u2014 but we allow 7 for"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/allomorph.ts",
+      "sha256": "7986aea01b2f720519592201f1bb085566d93414d7b9a838d1c66638d66d0b66",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/alphafold.ts",
+      "sha256": "84fd514c13e3c6de06724a6a1d7e52629ed02a197cccffe982ac016555c44810",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/ambient.ts",
+      "sha256": "0ba07aef8c9b2ff7010c6fe510ebe90df58b4ccb1dde4877a6547e8a8819b526",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/amphora.ts",
+      "sha256": "b26bf699d2172088ad0b0b1f0c417a14df36e9927a05906902e9342870a79bdb",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/anadiplosis.ts",
+      "sha256": "83b83246e9a2db723e05973e5713eff057f4b9dd684f82fb37c415e4a7adda65",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/anagnorisis.ts",
+      "sha256": "af4bf6a51f0473244c95c09657d1655e3736fb50b8afab3fcfc51011fb0c93e5",
+      "layoutHits": [
+        {
+          "line": 383,
+          "text": "// continuation prefix: what the next line starts with (fallback: the first line's own lead)"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/anagraphe.ts",
+      "sha256": "41d99d7baa50b5897d7dbd1b0d524dfe5d206c18ede4d8bbd36b676bc15f89e6",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/anakykli.ts",
+      "sha256": "8cf2474c50b7b60bdb6809ac4809a985388fac0c0c3f583d6e2437a457582124",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/anamnesis.ts",
+      "sha256": "2edd7c4f4d75e8f3997ccccb6220505dea369ab243a9b9a5e641dbe49b5911a2",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/ananke.ts",
+      "sha256": "e58fa4769ff6c87daae38779f72ea1e8e639bd07f456a6aebddc5c67b0f63811",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/anaphora-fold.ts",
+      "sha256": "5945ccedd7a59c72b46541db3c926384019476966abdacd44f784ea07f4e677b",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/anaphora.ts",
+      "sha256": "004da4933e1792054b5367395fa899c248b8e75f8f2a37f92311226843caf214",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/anastrophe.ts",
+      "sha256": "9ae6627ebaf8a2bd5785c9bf5a62f0b9a051467373f5c39abdd076af3bce8ae7",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/antiphon.ts",
+      "sha256": "1936ffabe9d56c9ce72bd55c523d99ee6c3ce00c3fa86a2c798150631c76e9be",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/apeiron.ts",
+      "sha256": "6815e8a93ea50bffd1d30d8f651dfd8893d112c7db80c36e95b4b765a245a529",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/apex.orig.ts",
+      "sha256": "01061826c2ffcdb477fa1b85692276d63f6bba35af9b090f8487cdda9ad718b5",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/apex.ts",
+      "sha256": "01061826c2ffcdb477fa1b85692276d63f6bba35af9b090f8487cdda9ad718b5",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/apographe.ts",
+      "sha256": "e377aad79619d2a11059c9e0a72c0d68158a47d07a76158105b0581833023984",
+      "layoutHits": [
+        {
+          "line": 896,
+          "text": "* without changing any existing lane.  `APOGRAPHE_SEPARATORS` is"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/arche.ts",
+      "sha256": "d637e5042c1596a018e3ed52a334868cfbcb832a15ca35831fac071e204cc709",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/archetypon.ts",
+      "sha256": "98466b727138d3107a0109d783f9be40db4cb39d6c856724ea95cc721f66aeed",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/ariadne.ts",
+      "sha256": "f2df94dfa39668a2eb9cd0a9a139be671c655b7b01a32984b9be3be64fc4abb2",
+      "layoutHits": [
+        {
+          "line": 473,
+          "text": "* changing an assignment only changes the maximal RUNS of adjacent references,"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/arithmos.ts",
+      "sha256": "2ea900a4af7691b9c77419f53efb99b380f5ca3e569eaee3ec8553ad180a4515",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/astraea.ts",
+      "sha256": "78d581b039b553c475acb8d72932e4bd3ae2c813d64d33fcff773cce10188d90",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/astral.ts",
+      "sha256": "2313a10f7f73521b78738c29a5e159afdc2c33f14bbeba9d9f6204dda744aa36",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/athroismos.ts",
+      "sha256": "b4df6224ee197fdd86a0abacd5adc13b9633858a9c9eea58674837185e6c4151",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/atlas.ts",
+      "sha256": "d4ac965a8fc5601a5bf3c9f8eec687d75e4d0a26aa78321bc21d6c3d5f4f31de",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/atom-codec-v3.orig.ts",
+      "sha256": "c7e54678ebd78575098fe283d302b457877e4d32fc83416a8fc554b496a61f5b",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/atom-codec-v3.ts",
+      "sha256": "c7e54678ebd78575098fe283d302b457877e4d32fc83416a8fc554b496a61f5b",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/atom-codec.orig.ts",
+      "sha256": "3f7dc91bf8eaab3fc4b074628e33a0855ecd85b7845b4a07414775a74e63bfaa",
+      "layoutHits": [
+        {
+          "line": 9,
+          "text": "*   [varint]  payload byte length (8-bit groups, high bit = continuation)"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/atom-codec.ts",
+      "sha256": "13bbdd89441eea1293b8e631da90d1c21670c1198b356adc38da85795b2e79fa",
+      "layoutHits": [
+        {
+          "line": 9,
+          "text": "*   [varint]  payload byte length (8-bit groups, high bit = continuation)"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/atx-release.ts",
+      "sha256": "9d059f2251ade653f49071d4d3193c78398cf38311d2a46855287a16d8410387",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/aurora.ts",
+      "sha256": "48dfb3f8434b305b9c8dcb2482b493c7a66d14e176895e22602cd37470565516",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/austere.ts",
+      "sha256": "a6ca470a3a0cc82f70a5c3b1bddb77bdfd1bac96d9b570d6127fa2b2ea754a52",
+      "layoutHits": [
+        {
+          "line": 68,
+          "text": "* for doing it without changing the notation or the decoder."
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/axiom.ts",
+      "sha256": "9695887339218e42ece90f20c535447f2e703487706c8b5ba0d8280e875bcbc8",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/banyan.ts",
+      "sha256": "f1756a8a44aedfd0f4afae1459e33302fb3ded56d6c74c83a77f25e47e763b3f",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/bathmos.ts",
+      "sha256": "73818d719b7c9b96c6cb42d71ea736eabb0099ad8a9452fee02dc2ae290d137f",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/bifront.ts",
+      "sha256": "9f434d60bde34fc7b86db5944789af32769a42ef9e6f2919af5daa3f446f7bcc",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/bpe-audit.ts",
+      "sha256": "44a8879d17baad63189f4d377fc0a4fb27a39adfa0cb99f574b8cf28b3b4cf11",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/bpe-fast.ts",
+      "sha256": "62c5d1856f530ef07c51d90a9060b809a3a771e7d4db2d0d952f2319eeb2c286",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/bpe.orig.ts",
+      "sha256": "0a7af0f96a8494d1c75eecb481eabca03d0c8d304fed1a39c9b27935730447e5",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/bpe.ts",
+      "sha256": "a3ae89b46f8dda38661db5a8831d8e0e84c9d3b2920e3655f0de58d06d3954ec",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/brachylogia.ts",
+      "sha256": "d245c6c1e3f855621757b986741f4c52c409d301ede523aaaf82ac0553705cae",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/brachys.ts",
+      "sha256": "5a2f8dc494fadda5c9d42c36999148ff57b92b69a149057c8ea3a7b64cce0a6a",
+      "layoutHits": [
+        {
+          "line": 27,
+          "text": "* BRACHYS resolves it by changing the *shape* of the contract, not its words:"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/cadmus.ts",
+      "sha256": "c2e91a2e2900d866d3c55378127574aa6154fdeed247ba64341e4050823bdefc",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/caesura.ts",
+      "sha256": "53db05bf05ca04607bf1cb5ea607c30d22a5b188a175c3cb9c738e37e33ecbc0",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/canon-catalog.ts",
+      "sha256": "3f47511a68c4ec42876c9cc3f8175f6c7615f9d6bfa93419ef0e7db3e2dc1d5f",
+      "layoutHits": [
+        {
+          "line": 37,
+          "text": "\"body\": \"                    GNU AFFERO GENERAL PUBLIC LICENSE\\n                       Version 3, 19 November 2007\\n\\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\\n Everyone is permitted to copy and distribute verba"
+        },
+        {
+          "line": 56,
+          "text": "\"body\": \"\\t\\t       The Artistic License 2.0\\n\\n\\t    Copyright (c) 2000-2006, The Perl Foundation.\\n\\n     Everyone is permitted to copy and distribute verbatim copies\\n      of this license document, but changing it is not allowed.\\n\\nPre"
+        },
+        {
+          "line": 228,
+          "text": "\"body\": \"                GNU Free Documentation License\\n                 Version 1.3, 3 November 2008\\n\\n\\n Copyright (C) 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc.\\n     <https://fsf.org/>\\n Everyone is permitted to copy "
+        },
+        {
+          "line": 236,
+          "text": "\"body\": \"                    GNU GENERAL PUBLIC LICENSE\\n                       Version 2, June 1991\\n\\n Copyright (C) 1989, 1991 Free Software Foundation, Inc.,\\n 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA\\n Everyone is per"
+        },
+        {
+          "line": 244,
+          "text": "\"body\": \"                    GNU GENERAL PUBLIC LICENSE\\n                       Version 3, 29 June 2007\\n\\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\\n Everyone is permitted to copy and distribute verbatim copies\\"
+        },
+        {
+          "line": 260,
+          "text": "\"body\": \"                  GNU LESSER GENERAL PUBLIC LICENSE\\n                       Version 2.1, February 1999\\n\\n Copyright (C) 1991, 1999 Free Software Foundation, Inc.\\n 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA\\n Eve"
+        },
+        {
+          "line": 268,
+          "text": "\"body\": \"                   GNU LESSER GENERAL PUBLIC LICENSE\\n                       Version 3, 29 June 2007\\n\\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\\n Everyone is permitted to copy and distribute verbatim c"
+        },
+        {
+          "line": 354,
+          "text": "\"body\": \"This Font Software is licensed under the SIL Open Font License, Version 1.1.\\nThis license is copied below, and is also available with a FAQ at:\\nhttp://scripts.sil.org/OFL\\n\\n-------------------------------------------------------"
+        },
+        {
+          "line": 402,
+          "text": "\"body\": \"            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE\\n                    Version 2, December 2004\\n\\n Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>\\n\\n Everyone is permitted to copy and distribute verbatim or modified\\n copi"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/chimera.ts",
+      "sha256": "1d40f3bf146acd1fcd31c9325cc3aeedb8b005c23e7c169645cb1d4087f9b809",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/chiron.ts",
+      "sha256": "035a821a204307781fecc592bc6957be89aace604d27ae7175d57556ba6eb6e8",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/chronos-arena.orig.ts",
+      "sha256": "0b27d17e7056fb52955915394b09b49dfac69fe92f2d6e302743526fddee2541",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/chronos-arena.ts",
+      "sha256": "0b27d17e7056fb52955915394b09b49dfac69fe92f2d6e302743526fddee2541",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/chronos-v6.orig.ts",
+      "sha256": "1fdf448c4f3cbafd39b510dda803f51acf27355d8f462b8c8c30779ea2632acb",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/chronos-v6.ts",
+      "sha256": "1fdf448c4f3cbafd39b510dda803f51acf27355d8f462b8c8c30779ea2632acb",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/chronos.ts",
+      "sha256": "90bd2ff34926beb7189f8afcca436444301da74be0d1517d15185ae43c3e2fdd",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/circe.ts",
+      "sha256": "74f4885f599bdec2b441a0df5ef87bb890681a9fbc46f0c95da4a49c9721eea3",
+      "layoutHits": [
+        {
+          "line": 353,
+          "text": "/** Manual, dependency-free UTF-8 continuation-byte decode for a 2- or"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/cjk-contractor.ts",
+      "sha256": "d59626dc9efa792bdf1d0ee8fffb00d57d96053bebc3bab08243ccc978db3297",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/clock.ts",
+      "sha256": "d8b99b85c80acc1c2ee0db5197868280419b16f35c817d8342c31b6123af7d69",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/cm.orig.ts",
+      "sha256": "66f2deab6d1cd957c6ef5159e73495b12e0035be10c813216ec78e9d314896e1",
+      "layoutHits": [
+        {
+          "line": 506,
+          "text": "/* varint helpers (7-bit little-endian groups, MSB = continuation) */"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/cm.ts",
+      "sha256": "66f2deab6d1cd957c6ef5159e73495b12e0035be10c813216ec78e9d314896e1",
+      "layoutHits": [
+        {
+          "line": 506,
+          "text": "/* varint helpers (7-bit little-endian groups, MSB = continuation) */"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/codec-synthesis.ts",
+      "sha256": "2808b00321d933b03b245790643d0e8860992d880d16f9d03ce905193387a8d9",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/column.ts",
+      "sha256": "168a0369c075f89f97b05c470fd556c3011982f9f7128087fdf0264feae9b0cc",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/crasis.ts",
+      "sha256": "7c13cb0902d5df8b54e315483c3085d1ae2335913bf7f0e2a190c310f11b4ab5",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/crown.ts",
+      "sha256": "d374236a6947db9f19dce85e32226e42e861a84f9149be766c3d282a779094e6",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/ctxcopy.ts",
+      "sha256": "6960e2a9b3832281ba6be86dc0b9cf32e5ea0d7618f789292e0967b8d7290987",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/daedalus-dual.ts",
+      "sha256": "5e28a41a3158220e58d46d3e2df136b5f96730b7574940300edc087dadee2868",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/daedalus.ts",
+      "sha256": "59c30ee9a26f537380fcbf8ae42d2f21c3a103b72764a3914a141431d522dae0",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/dendron.ts",
+      "sha256": "f9e234348ff3b98936f957b0a3522737e2c8dd24e7982ab4cc90c788d2c12866",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/dendrons.ts",
+      "sha256": "bd5a4cdbca153688c3a6787045256f184310588d8fced4e262bbbf418b7f955c",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/diagraphe.ts",
+      "sha256": "19725b52c453cadeb6aaaa6454847975f9d452b61d7eb2b5723b8cce76d94873",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/diaphora.ts",
+      "sha256": "a36b41964ae61d74370bc1fb09aa2851c50fd918618e571816f942fc50044627",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/diastema.before.d.ts",
+      "sha256": "4fea599ba6ca6aa9aca1883d428a588d506d238836f52b5b1a5ddd9667c26302",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/diastema.ts",
+      "sha256": "e32d51bef5248354416b739b1b9af549af5e36b92cb04b4c513163f6f9ea9f63",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/diglossia.ts",
+      "sha256": "03744abce7fc5e5851becd5823bde76c38dad85a3f50aa451912534cfeda3b7e",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/dike.ts",
+      "sha256": "a9e323b1af4ae4208b2e2756c2f5dd10560d791f8441cb602e2280585822fbff",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/diorthosi.ts",
+      "sha256": "bd6fd7a93740205082f6da6d00c9e6b6f832e2786d7b0ea469b52a2bcb3d7eae",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/diptychon.ts",
+      "sha256": "36111fb99916fb38d1f6e9d4fafa3e29b2d1bf7bf442b4f5a8c3a79f3b0984bf",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/dirfold-a.ts",
+      "sha256": "e199375542308d49936022038d67cc4923a0a5f34d8fc586d583f4dcca01f369",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/dirfold.ts",
+      "sha256": "5cd68e552807d078f089cf415b5a18f62672c4bd1f2101684de74b52b25fe4ce",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/ditto.ts",
+      "sha256": "45b004d3f7e9642a6fa10dda3004a4e73e8df67c5ef538f6666182d8a263a53f",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/dragi-full.orig.ts",
+      "sha256": "f0571856651fd6b247bdb913bd28fc4e8428d8045456665c24d1bce9b10589ec",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/dragi-full.ts",
+      "sha256": "f0571856651fd6b247bdb913bd28fc4e8428d8045456665c24d1bce9b10589ec",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/echo.ts",
+      "sha256": "b3ccaab328f76f7e1245a3fdafb901c8c2bedcfc90676d9117504604101f58d1",
+      "layoutHits": [
+        {
+          "line": 77,
+          "text": "* \u00b7 SuperBPE 2503.13423 33% fewer tokens \u2014 saving by changing segmentation; ECHO saves by changing *threading*."
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/eclipse.ts",
+      "sha256": "63f6c18f9962843a26b06328d054a126c18db64bc4b568edef305d151ab666ec",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/eidolon.orig.ts",
+      "sha256": "f77282e3e6a89cf1439808cd24bcd39bdcf1d72c6212ef38e1548e15c8c1ccfa",
+      "layoutHits": [
+        {
+          "line": 36,
+          "text": "*    Wait, changing text makes reverse-mapping complex."
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/eidolon.ts",
+      "sha256": "f77282e3e6a89cf1439808cd24bcd39bdcf1d72c6212ef38e1548e15c8c1ccfa",
+      "layoutHits": [
+        {
+          "line": 36,
+          "text": "*    Wait, changing text makes reverse-mapping complex."
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/eidos.ts",
+      "sha256": "fd61ffcf09ed1392d1fdd9d781a5a77546a0ea63d20d685144d8b933ca06f0d1",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/eirmos.ts",
+      "sha256": "7fbf18f6a8977ab5bad93310485836bb601bb5cf2afb6411c242a437362226d4",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/elleipsis.ts",
+      "sha256": "5347909de692fa9825cd53ad7a305ac80ee3e6749718b5880427e5137d63e2b2",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/enallage.ts",
+      "sha256": "da0e282f4519baf40b77252b661bc642d9d482e70bafd7c9a7447770655da3df",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/engram.ts",
+      "sha256": "0f39319364e49d0847533df3a2a609927788f728120ac30a3ed7e643299c75eb",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/engramma.ts",
+      "sha256": "e36cac4dbd1c400c1cd9c5bc1781f8a8fe28100316ec53117a8f65dd3f236caf",
+      "layoutHits": [
+        {
+          "line": 180,
+          "text": "'The retention policy resolves at the moment of creation. Changing a policy later affects only documents created after the change.\\n\\nThe retention policy resolves at the moment of creation. Changing a policy later affects only documents cr"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/enkibotismos.ts",
+      "sha256": "c94769d21733488185c874b35fdf8e180d7fc735c0e3a4b91fd7ac35e8c2ccce",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/enthymeme.ts",
+      "sha256": "1dc32ad41f4731ce105c60a77e40064575754dedc52e31eb62347e65a3cc5d9a",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/epagoge.ts",
+      "sha256": "6179beaf6e565993a929121440746d9793527cd3562840338ed9e38b8fe27932",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/epipsephisis.ts",
+      "sha256": "d9a8a7b8e912a0b7e59e4938bf1419561a9926a8cbae9dc7705594c6f812636e",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/episteme.ts",
+      "sha256": "2d5e5b7b72a9baa79b7a21f24948fd0b65ac532334461a87e839357ea8a92e87",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/epistle.ts",
+      "sha256": "dd346006a3e9b3def226abcaf950510e23438cfd645d19ad2fb4ad59fd05a6a4",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/eupraxia.ts",
+      "sha256": "85cb40fb592de3b4ddeb3454d6454dc5160782331bbef82dd157e360bfd1e5a7",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/euros.ts",
+      "sha256": "ccc7b015e91db92a4c39191b0da115678c5245143cea13d351931abe95780225",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/eustochia.ts",
+      "sha256": "7956cc5c97681671ade9728e18a9a25857c85a890bfa7f62e9d195184d11c5f3",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/euteleia.ts",
+      "sha256": "6045cefbde3f82c56a9fd73ebc96620bbc398792b8f0719e1f4e59487311dc7f",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/euthynteria.ts",
+      "sha256": "34cf71aef7f25248a6fca6d4ba8f5d86448fe7b6a11f789cb07e4ec51be992a4",
+      "layoutHits": [
+        {
+          "line": 154,
+          "text": "* allowance can be cut without changing its output is not a published result that this"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/exodus.ts",
+      "sha256": "755fba78a45f6e5dba15e77811494ffe28bd1d3aec588cadbf8b8d3ac49103f2",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/fotar.ts",
+      "sha256": "ceea88f11c457ef91fe5ff5b6a62c2aa964386a5b24f5c754350c4bb149009ca",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/genesis.ts",
+      "sha256": "afb2a5bb2aa8964f7bf53bbe2acf4d0998a05a77c2f73c0490ff7f12ea561122",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/gennadas.ts",
+      "sha256": "e6cb34bca52b20033d09db449432accc621bdefdbed7fb675ac03b580bf91d4a",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/glossia.ts",
+      "sha256": "11bf3f9dc3f5b901533d36909108056d14a9de3d2df14dc2ae143989ca7acdd0",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/gnomon.ts",
+      "sha256": "037aefea06de2bfeee65289123206cd4257e67373e00d28a49c3bd45a35a3760",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/gramma.ts",
+      "sha256": "0fcdf39f27c91b42b3bdf9d7c819711363c9599d5eec1b68cfd5b4a6116b39b6",
+      "layoutHits": [
+        {
+          "line": 249,
+          "text": "* re-indentation differs on 4 lines (Prettier continuation indent) and would be"
+        },
+        {
+          "line": 260,
+          "text": "* conventional ' * ' continuation sits one space past its depth, which is what"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/harmonia.ts",
+      "sha256": "d9ff4e30eaacbbaa3d6652add0777be6268bfbc35626edf7d701a20cb5e109a3",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/harmos.ts",
+      "sha256": "ddf53692f9e238d7acf0cbcee13fd0d78f9fae8b453028722e07085830a6f53f",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/helix.ts",
+      "sha256": "203dcfa61bf0136acd16059291e81df42480531a052bb5e080b74903f0eaaa2a",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/hemera.ts",
+      "sha256": "42bf28305716a093d982f52f4c487b9f50c79baa5b5a8b9fa60211fbc2f28ba1",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/hermes-contract.ts",
+      "sha256": "c26b9f9792d42238b86220e6dd547342c0063a2d87edca6a1a076223849c2502",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/hermes-fractal.ts",
+      "sha256": "f523da002230eff1f1cfff429f4ba9470d633158a2c803fc48067a5e05fc39d1",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/hermes.ts",
+      "sha256": "a7c5781a1a736656d4a72d87d6abec91fed8ebdabaa90deaa8be44f8770858b1",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/heuresis.ts",
+      "sha256": "9efab53385281d1fa8f5754f27891e10bf96713f54c6cabe5a2bc6483e33bed4",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/homoios.ts",
+      "sha256": "ef2a2edd4c77bb977a45a5731573b5e8826a2521f08359099e1b72fd2e8ba2d4",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/hora.ts",
+      "sha256": "54c1869f04950e60caad3dfa3402640bd0aaa7c178e3bb80a60c655d18dced33",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/hydra.ts",
+      "sha256": "8b6a52825a31b48ce29253a8238526fa594949184f7477b9dad6056a1337c4bc",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/hyle.ts",
+      "sha256": "2cf4b162f670066c2fc6af1e2562bad264ebc0c1c6b579b45ba7ebc2139d9863",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/hypercube-v5.orig.ts",
+      "sha256": "93176f5dd871198743f944bd2a3d39f3f29cedc361cfbde7165b930ad3388bec",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/hypercube-v5.ts",
+      "sha256": "93176f5dd871198743f944bd2a3d39f3f29cedc361cfbde7165b930ad3388bec",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/hypergraph.ts",
+      "sha256": "8580264dfb3eb41a61e60a239af522639d15ed16c299ef7a71e767971f0b0bcf",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/hyperion.ts",
+      "sha256": "da8849e67c4ad4c7d69e91b0dc010f9afcb7259c75c0eadad6cf92c83339f929",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/icarus.ts",
+      "sha256": "fb098c89074b7c1da22b85514a7d5b6e024b485d373425fbfe9f2a36d3c76fc1",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/input-memory.ts",
+      "sha256": "856a0fc661d98235a767c3383df557cd9312c72bd92d003b05d9df44249b6777",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/iris.ts",
+      "sha256": "5eaaadcd6d03661a23d6af831815700a6246b73413f79b0c4fe13cd358c00f2f",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/isomorphia.ts",
+      "sha256": "d259c38d24c270bb40cc9deb48431500752890af342120d851db5892ec1190cf",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/isoskeles.ts",
+      "sha256": "f25a0443aa6ecaf54704f6906df3ce6667b313a48a58aa2efeea214c8707d528",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/janus.orig.ts",
+      "sha256": "4aedac94eeab60b4df1d67619bda66a700a4322380154712e165b5742254a1bb",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/janus.ts",
+      "sha256": "4aedac94eeab60b4df1d67619bda66a700a4322380154712e165b5742254a1bb",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/json-escape-fold.ts",
+      "sha256": "d25a55e84f27b16a01c793858a653931aa276c9d629c51e8ee4558ba41d3e259",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kairos.ts",
+      "sha256": "86dc022dff6dfd0cc9041ae4205af87423457f5e1d83bd37714a980a7a1f2580",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kalligraphos.ts",
+      "sha256": "ff17d534c44e5aa8c250a6abc90ed30bba56a09cfec6941fa8fca6a2541d9a78",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kallos.ts",
+      "sha256": "d7fd7097d3afd9535b48accf02e3b0ffa0ffdf5c604f1cb2c19c6c1042d4bd93",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kannabos.ts",
+      "sha256": "7bdbf5955264c94d8681738c4c67503b0fc16076084ec7b99e36239be1b75ead",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kanon.ts",
+      "sha256": "b1379b3929c946c2fee7301a461f985b1e106eee727fb199bce119816265a465",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kappa.ts",
+      "sha256": "67724c17a819b443f63ed2a2962217738fad07556962e07f9aa97e2ed45ee50c",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kenon.ts",
+      "sha256": "c985af016fa027bfc3cbaefb6a7e70ff826a912af572fb86b1025b8006601989",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kephalaion.ts",
+      "sha256": "85118fb8d4a940e467d03eb14202bf91003b9572faa34fb20305fd7981781fe1",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kerma.ts",
+      "sha256": "e67ee9c4792236f0f7f19990025d799ddfd0da3e36f8836767803bcabe6b8499",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kernel.ts",
+      "sha256": "4c8d607c663f85628f14bde4f8afc69ed8a841bb5706f7ac4d7eb8517b0aa26c",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/khoros-operads.ts",
+      "sha256": "eaad0fde243e35e4ff1440383bb4a131cf8737395a747da1ac1ca981f262687e",
+      "layoutHits": [
+        {
+          "line": 49,
+          "text": "\"> Software is changing, and dotenv must change with it\u2014that is why I built [agentic secret storage (AS2)](https://dotenvx.com/as2). Agents run code without humans at terminals, so plaintext `.env` files are the wrong primitive.\","
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/khoros.ts",
+      "sha256": "f35d3391cbb84344812ee3fcc8c89668c6dbcfd27105d48d6941775588389798",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kinetic.ts",
+      "sha256": "859a452c90258e6e1e755de0ba60bb30fb17db5fe356561b1db323dee4738490",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kiones.ts",
+      "sha256": "03295a66edf36750c14b28468d8a14b7dae24ac144d407a7a245c207faab57a2",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kladios.ts",
+      "sha256": "e595336cb164921eb3d20c80dd7aaf678b11d09b8fa45af2ad81f5247a61762f",
+      "layoutHits": [
+        {
+          "line": 9,
+          "text": "* characters on connectors and continuation bars. Those characters are a"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/koine.ts",
+      "sha256": "49a3434e6b67f7ffe3c5b3bac0cfa187da8e51fc9168bb897fdd290385048ffd",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/kolumn.ts",
+      "sha256": "68efea715691bc92d6876631346718962b5cd0d43f2747ad4665534bf3f86ee4",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/krema.ts",
+      "sha256": "b27125f64a0c6b51bbc454d0a5b7d6cf4b7f77eecce2029435d231ce03bc5662",
+      "layoutHits": [
+        {
+          "line": 1,
+          "text": "/** X137 KREMA (hanging): cursor-aware continuation-line folding."
+        },
+        {
+          "line": 3,
+          "text": "* prefix, folds a continuation run into its description, then wraps relative to"
+        },
+        {
+          "line": 4,
+          "text": "* the current output column and a separately declared continuation margin."
+        },
+        {
+          "line": 11,
+          "text": "export const kremaKey=(width:number,indent:number)=>`\u00b6 k=v; expand recursively. On each line replace ~|text by greedy word wrapping to column ${width}, indent continuation lines ${indent} spaces. Print only.\\n`;"
+        },
+        {
+          "line": 36,
+          "text": "const continuation=new RegExp(`^ {${indent}}[^ ]`);"
+        },
+        {
+          "line": 37,
+          "text": "while(end<lines.length&&continuation.test(lines[end]))end++;"
+        },
+        {
+          "line": 41,
+          "text": "// A continuation-only first line can have an empty label and an indent prefix."
+        },
+        {
+          "line": 71,
+          "text": "export const kremaOverflowKey=(width:number,indent:number,escapes:boolean)=>`\u00b6 k=v; expand recursively. ${escapes?'Lines starting ~|: remove ~|; otherwise ':''}lines longer than ${width}: greedy-wrap text after the last 2+space gap, indent "
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/lakonikos-d.ts",
+      "sha256": "ae3c1c26ecbc36bf2d363f2fe1afef8f617b0101998a054bc2e2aa8f5bc960f3",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/lakonikos.ts",
+      "sha256": "08903760dd3240591e42a8710ce837180a90f04c31939529bff51adc76d21d6e",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/lattice.ts",
+      "sha256": "9d712b95b9dbe996fc73fad86333c1ebf3007f20de2751a22c26999876010dec",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/lethe.ts",
+      "sha256": "49ca1c6ea0214afb80ed4a0adb199ab0ce19af782cd2635141556198a78628ee",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/lexis.ts",
+      "sha256": "9a0d543559b38cc2960036961876c83677d39de6906ca4d76ac318d4f1fd83b7",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/logistike.ts",
+      "sha256": "10baac3633a2698d495170ef43fa708c522ee1c2028ad0f7971dba7e116b35c5",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/logos.ts",
+      "sha256": "224391227d7503538fed372440dd909f70f2dd6db1dd45a1a11db14593113e49",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/logtpl.ts",
+      "sha256": "faf664bdaca4971645a79b8a3b335bff0cbe52add3bfb8f5e1eb6ad99ddb7075",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/ltp.orig.ts",
+      "sha256": "d502e70bcc0212b5390668b6e8e14ca724ef0e61f53c954889dc83ff597272d6",
+      "layoutHits": [
+        {
+          "line": 85,
+          "text": "* many characters to splice out. Changing this function changes the wire"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/ltp.ts",
+      "sha256": "d502e70bcc0212b5390668b6e8e14ca724ef0e61f53c954889dc83ff597272d6",
+      "layoutHits": [
+        {
+          "line": 85,
+          "text": "* many characters to splice out. Changing this function changes the wire"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/lumen.ts",
+      "sha256": "ea0899b580251a75e644f539a2b123ee17b37fb1e8f6972d30460f8df402e3f7",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/megaepanalipsis.ts",
+      "sha256": "e19eb9b77f61d5bf3c1d01565c985ed1a6319feae81cab28b9b7545a7d9dda58",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/mekos.ts",
+      "sha256": "8eda95565e47d3bf7374fce73da70def6822bb30a17c68fd28b330244bea4901",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/meridian.ts",
+      "sha256": "cadbbf9c8a330f92919d217d007d5778ca6adf698b704e79cec586af4539e25b",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/merismos.ts",
+      "sha256": "5ac4e7f71667bdd816a74f30b8b8a8d9a36519315a48b79fe957e30afad0502a",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/meson.ts",
+      "sha256": "1697fa44379ce3d577624e75521295e2a3dcd85313ccff73edf60328de90ce9c",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/metataxis.ts",
+      "sha256": "504258168b0dbda1aa30e0c36b852d9565ea876e050423569a02188cbeba6d62",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/metathesis.ts",
+      "sha256": "2d242768bc4ad18645ca692c3734d5fad407853ecd00af84f3acb97a894967f7",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/metatron.ts",
+      "sha256": "5602c74f9877ab1a188c22d2a87bf593c366833f0844904e5b29568ff4273c26",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/metis.ts",
+      "sha256": "f1956edc1974c8461b21c12eb1b99dcdd4d7378825ab3be0778730cd146172ac",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/metonomasia.ts",
+      "sha256": "df9d6f4ec7a801dbeeecf3e335b7490b34873a44d3b97f425f874369609078a7",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/metron.ts",
+      "sha256": "fa05cdc26c9c1de00380782881e7ed6416b900542823a22103c77f3b4b852f09",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/mnemosyne.ts",
+      "sha256": "f99d623bab5639491ff07bf5009def8278605c7b8422dd362df4ec5bfa0f4794",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/moira.ts",
+      "sha256": "7b9680865e61528388d6158d69a3ca33f69b539b38637929e0e114e11d359ff7",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/morph.orig.ts",
+      "sha256": "5f3533e820dac2cdf5d2fa263276dcaef1ddc07fef5e86d11ccaa69d8fe6ccc0",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/morph.ts",
+      "sha256": "5f3533e820dac2cdf5d2fa263276dcaef1ddc07fef5e86d11ccaa69d8fe6ccc0",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/morphe.ts",
+      "sha256": "38c12ad119378d635123e9c76aaa042c03aeea656d6c9593d6eb6377b2e5d3ed",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/mosaic.ts",
+      "sha256": "fbc362be8d0d0e9f6235971c40c45a36e6f5b489d79f8afe04ce05657110c345",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/nebula.ts",
+      "sha256": "394bd41bfce790cb7efeda449ed090f620e2282e57f46292ba2d9343e7516995",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/nemesis.ts",
+      "sha256": "d8181f3a38a86e6969cd26e6168eb6961d0cd64fc738e1b0d81a597a562ac26c",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/nest.ts",
+      "sha256": "0cbf2ba1fd26173b93ed404bd9936983ec97eda3e2541753111d099bc0f14bbb",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/nexus.orig.ts",
+      "sha256": "8cead27b370839cac873604cbc22bed76e709ff36cff890d3612b0f9979b0378",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/nexus.ts",
+      "sha256": "8cead27b370839cac873604cbc22bed76e709ff36cff890d3612b0f9979b0378",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/noesis.ts",
+      "sha256": "c631511eab21656df06a4229343a713b2fdc9e5e1f6938f8dfd721b06fe81a91",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/nyx.ts",
+      "sha256": "10044bb494d19432f31987ef6ccf393ed78a83ecd91a8cbe93ecf0d45b07c566",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/oikonomia.ts",
+      "sha256": "d715f1548d22044dc9ee5dec0b64302296435c629a1e7b7ae5b899b030bfcf09",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/omega-e8seed.orig.ts",
+      "sha256": "30aea3b8b7ba169f9535450930d72956d10a57280d8157ca1d0004818311f8ed",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/omega-e8seed.ts",
+      "sha256": "30aea3b8b7ba169f9535450930d72956d10a57280d8157ca1d0004818311f8ed",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/omni-operads.ts",
+      "sha256": "714cfa0e983127c7b6340c0ca5fe8c5cf9fa5208ddbcf71e0c96bd98652a1fd9",
+      "layoutHits": [
+        {
+          "line": 49,
+          "text": "\"> Software is changing, and dotenv must change with it\u2014that is why I built [agentic secret storage (AS2)](https://dotenvx.com/as2). Agents run code without humans at terminals, so plaintext `.env` files are the wrong primitive.\","
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/omni.ts",
+      "sha256": "3b86a1ad238605d141848341238e7132ac7944662c5c4cb5a0dbdaa33c3d3373",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/onomasia.ts",
+      "sha256": "fc42a5658d5a40048592783447ebbd43891647e33ec9bd25b68763fcfd57c63a",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/oracle.ts",
+      "sha256": "47acff71b27c0814bfbe39c8efb1bc3e428868698517861fdb868aa6df9267c6",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/orbit.ts",
+      "sha256": "e9e3ff403df6457239061fad3848bd300421835b4b5b610c39dfe623c63bd734",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/orion.ts",
+      "sha256": "299131b7732daee218d562fd02f1456424a0f01f2314c1d4c18c614e48826fe5",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/orothesia.ts",
+      "sha256": "c5d4fa81c56cfb38eda55eb472103065d095ffe66de209ddfad74af0692a5d76",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/orthos.ts",
+      "sha256": "34577b927a7b7d49aaffbad66be46613d35adf4ab996cf77949f3ffb68a97005",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/oura.ts",
+      "sha256": "21d5284379fc5d185df9edf331a5475c8c8e1c88863d4df96e4f4d38805dbdba",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/padtab.ts",
+      "sha256": "ed1ea2478ac94293abef011d64c1f60e59c02bf893a24579617db705c5361781",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/padtab2.ts",
+      "sha256": "9eadce5347003a2b4b341d9896992b2badb5020cf9862f9ec75fb8676b71ec33",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/palimpsest.ts",
+      "sha256": "d48fd70d589a24b5bf5bbb59b1995dac6ee3124f7e6fc526acdf927d0f319ab0",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/palindromos.ts",
+      "sha256": "b8f16bbf30a44d4cc2dfae4f2553d95b850d5958c847106b7f3bf3a4b1e17c12",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/panacea.ts",
+      "sha256": "87b69196501160def104ca26f44a6918ee7fae0ccddbb80dd16545ff7412a786",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/panoptes.ts",
+      "sha256": "24e9c87377f5082fe9ea269d6f57f39ad2446c047d47a1f5ff6e276aee6e285e",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/pantheon.ts",
+      "sha256": "107a82578979cc9b3786e7a006bf0d2a43d8c1ccc909d8b300779cea0db5610b",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/paradeigma.ts",
+      "sha256": "4c4d0327392666f0ed48a7c1aba0c425ade60f36934dbb39d13111e7abe75c6f",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/parataxis.ts",
+      "sha256": "bb1357fee3d92313c938085197369141a9c509c039de9597d5ce5c0fc7d91b8e",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/perikopi.ts",
+      "sha256": "7becc3c598ff206cddb71530692f6f95a27c14839d89db18dc6ddc568b9ac292",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/periodos.ts",
+      "sha256": "a6beee0985b1bb6209efc6874ac5ca2662868677c44685f32d3841f6a95994cb",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/persistent-dict.orig.ts",
+      "sha256": "089d0fb0dd50677b175be8a69381207ab93bb332451cf901cb66e87f125f6cb0",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/persistent-dict.ts",
+      "sha256": "089d0fb0dd50677b175be8a69381207ab93bb332451cf901cb66e87f125f6cb0",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx-a1.ts",
+      "sha256": "9e0cbeb6332d170c41532af70b968dd73da4e1e310315000fa455882b0c1542d",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx-a10.ts",
+      "sha256": "155385c502f7dfff17cd7f0cf72a1f36ffc9182e89dc57e89363b521f5181188",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx-a2.ts",
+      "sha256": "8ce97ebdeb6b10ba3c561229e0751b4e95b3947a20e4041e7358ad56a7aceec9",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx-a3.ts",
+      "sha256": "c840123f52f1c05ab19821f00f72611681b793fd045879e42552d0a263b6e891",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx-a4.ts",
+      "sha256": "603e8521ed1854c1c938412a08cf02202067e5de83efe5a3aa4c0b65f97d842c",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx-a5.ts",
+      "sha256": "ea7de2f0da0493ab2b323650787f43361fee7c2d8226e647050d5ec380e1cedf",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx-a6.ts",
+      "sha256": "11cf9377fe8c6298f033097ed1c01392cfbc6a50ce9c08072b07b86280bfbf4b",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx-a7.ts",
+      "sha256": "3c2725f429bf0facc9c6641f621aaaeb2e4e75c8eaa6dce4a56829373d66c003",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx-a8.ts",
+      "sha256": "8b357a98c4e78e5d62b9cf8e5df24e4e2e8fd4d2f1377f3b1acabade98ad6210",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx-a9.ts",
+      "sha256": "2bca028b1ab9f373e006cc503503b22adba3dbdbf8d0459dc487ee91fe50cbea",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx.ts",
+      "sha256": "78790fb5781cd560d6696e0c85108226f58280de876a2c9bd0e22f4fa4372011",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx2.ts",
+      "sha256": "f29de377a90d4d3bb1973c93aa6d891461baea959d8f16ff46a824e344dd96e6",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx3.ts",
+      "sha256": "9f2b8d2b889e4b2772cf77d583e02b08e5b58bbd3de7d185d8292b8503ced0d7",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phalanx4.ts",
+      "sha256": "cbb1e07ba25835737207eda85f76a4cfd37e1e2e516add6be25890c224724f69",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phoenix.ts",
+      "sha256": "e4d062c526413c40fbdfbccba0db783a480787159dbfa4f21b7713cf781858cd",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/phrase.ts",
+      "sha256": "2f402264d717a28d1c7590a5db372a21dbd77f290a425bd1ab1e2a4ec70d2752",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/pinax.ts",
+      "sha256": "e93772ca08176c78b4e3e7593210beac68694140292a49ee21b26aa7d45ac122",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/platos.ts",
+      "sha256": "045fb8a9a1f7ea131832e2650ec8f7b6be6aa1a906c7353e55d47d63d5148715",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/plexus.ts",
+      "sha256": "20ebaac40e30763adde30cd1810fad4b19ee38280189a2d95e09ca309b555b6d",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/plinthos.ts",
+      "sha256": "19bb0ac2e62193ad5e5575efc50f118cce475f00f77ae7f2487c75204409ff39",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/polaris.ts",
+      "sha256": "62174368591f2c536665912cf6916e0b14fccdce59f529311f2e48b054c48482",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/polytropos.ts",
+      "sha256": "5d99154bed210969b7b3b22c71972a80d7c14824a05dc0ef485558e87aba3307",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/praxis.ts",
+      "sha256": "7a5de901ecb8d28f4c3a94099a30239f88f675cc773384cf99679edf9b881b44",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/proagoge.ts",
+      "sha256": "6c8043c1766f1c96d047210c11ae5790631c8b3bd9a8afc5a49515c870aca657",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/probole.ts",
+      "sha256": "83c73db5054b55aa8206eeccb49537f6fe2adc567378a91ce25889653034d1aa",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/procrustes.ts",
+      "sha256": "8fe6a2ad69a78754958d6004e4fb1253a00a88d0d14754f5aff97470baa7e85a",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/prokeno.ts",
+      "sha256": "6b71fa15360a196a0c891b32095e564e85b6f4ba217e720de5cd0a32a0b5ea57",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/prolepsis.ts",
+      "sha256": "2af13a39932d6c0b172479c2569e98159c8309addb7db92be28a43c3d6957ccb",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/prometheus-icdm.orig.ts",
+      "sha256": "be264dc69f7d14f1f77373bfc17d2e061e543f89633a483c78a4c23297c6dcbb",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/prometheus-icdm.ts",
+      "sha256": "a37a82808a730bb0fb0f8f67f501109af14e518637e41bcd889395ee94cc7093",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/pronoia.ts",
+      "sha256": "edb558c5493f74a8dc6e721e7c7f24f79ce1a5f51357436594d96a90d314759f",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/prosopon.ts",
+      "sha256": "ba60b319245cbdc7eaee9bdd5057081493cb3319b0d3690ddf7c8ecf1367c738",
+      "layoutHits": [
+        {
+          "line": 74,
+          "text": "* multi-byte lead/continuation bit patterns are specific enough that"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/prosphysis.ts",
+      "sha256": "edfe6500ec3ff99d938dca17f0826329217709a848a2f3ea527b2edd4560c275",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/proteus.ts",
+      "sha256": "a3bcb62fe5ad958017c2a6db6edfce670ddbec8d6986cd436c0bca58cecc0a13",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/psephos.ts",
+      "sha256": "8850f3223aa3f845cec6841814ce70af4b1cba7129029252b51c228f3fa66abc",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/ptyche.ts",
+      "sha256": "060df436b9fd132248f7de5fc7613d793f419dad57da758e0fbcb2ca8d2e0aba",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/pulse.ts",
+      "sha256": "fa5e61f80d8cfc914255f5eff1ea6dc63a580d8bf9171ed7ea7de7e4116fe9a3",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/pyknosis.ts",
+      "sha256": "41e953b3ee436edfb04ba31e77e0f7b65430d32ecc62c789c0d1dd187aa4ddb5",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/quantum.ts",
+      "sha256": "d3071dee71a279ffbb3781977767651e728ad07e744cebc9bb9f53b2a0aba691",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/quasar.ts",
+      "sha256": "bcd48a2ab4b64e6dc413914f14e761e01b6d92d49480e6fd1db1f30a8e28ca1a",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/recall.ts",
+      "sha256": "c7c3ac3e9dfa0f05176157db30688fd77d511b79e29467d25252fc9bb0f448d6",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/registry.orig.ts",
+      "sha256": "40d309612d31216494eff4ec3d834e5684e491b03426701e09a33a7e4fbbabc2",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/registry.ts",
+      "sha256": "4466ba7b4d24f8a3d98a3144815f4027b5a2d65578d0018e2bda6050eda6dba0",
+      "layoutHits": [
+        {
+          "line": 1464,
+          "text": "key: 'phalanx-a5', label: '\u25a3 PHALANX-A5 (PHALANX-A4 plus a gated lossless hard-wrap layer: paragraphs that are exactly greedy-wrapped prose are carried unwrapped and re-wrapped by the decoder; identity-guarded)', family: 'exact', fidelity: "
+        },
+        {
+          "line": 1699,
+          "text": "key: 'kenon', label: '\\u039a\\u0395\\u039d\\u039f\\u039d KENON (X86: column-boundary inference by GAP VOTING \\u2014 KANNABOS picks its candidate column counts from the cell-count histogram, which is the wrong question when the last column is pr"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/repair.ts",
+      "sha256": "ea75b62362e0f4801b6e15a4b3c83566d75aed6a7f4fdfaa57575223f9c3887c",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/reprise.ts",
+      "sha256": "d64c0edbe0515db05cdeb4bfe72963b18d88c26160be5c04d6d0d0a191709b95",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/rhizoma.ts",
+      "sha256": "f0a79525117296f1f622b2ca331bd71a4a87bcce66dbaa9cdea6b8bb9367341c",
+      "layoutHits": [
+        {
+          "line": 18,
+          "text": "* pair after a vertical continuation glyph. Remove those pairs; the tree"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/rosetta.ts",
+      "sha256": "eeeb15e63ea7f4eb45d6f8bb5aa34e86be6515c6ededb2642eb5be30cca2cbb4",
+      "layoutHits": [
+        {
+          "line": 2854,
+          "text": "// variable changing. This is a source-code template lane, not local state."
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/schema.ts",
+      "sha256": "62d6989d7a166787a7071579f09e761b8d25f939063ca1cde0ff50432eeb4405",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/sequoyah.ts",
+      "sha256": "343dbf8423b0a58f28356d71d06705f224b1c3c1a6c76f1d6e96d094789fcbae",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/sibling-template.ts",
+      "sha256": "150796da6b4b16bd0436248f3b90cc69afea008008265a1d15566d882d21e3b5",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/sibyl.ts",
+      "sha256": "1689067c6950b7ae726394b1e5dcaa9fdf1c354993b505cc61c74545c9620676",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/sigma.orig.ts",
+      "sha256": "18af0fd97fc9abb7a4b7996b81ed343a030066dde6f39418eebbf22bd952951a",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/sigma.ts",
+      "sha256": "18af0fd97fc9abb7a4b7996b81ed343a030066dde6f39418eebbf22bd952951a",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/signet.ts",
+      "sha256": "b3d4a5df5bf5b138940f3f20543c9d8bf60f429be16cbacc4a03e33c46479205",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/solaris.ts",
+      "sha256": "2f7e1ed96f5076407d0f743228cde67d87ba33633eee21cd776c012023ac7cb6",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/sphragis.ts",
+      "sha256": "9898073c72386b28191e30589fca57907fdfc9bb4a68e7b7786c0d6c484e1323",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/splice.ts",
+      "sha256": "4797a1b50241528492dc6d622d0c3ad892578fcc996f68777d1fcacdcf9d522f",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/stadion.ts",
+      "sha256": "c2cd0e2e5a946cbe7ad941528400050c2bcca85b305e73d485f14b2e74667081",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/starlight-inline.ts",
+      "sha256": "536a9d21a7cb9d56a86a80bcefd583b2636f0e1d79ea5a96eab8c792d4343d80",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/starlight.ts",
+      "sha256": "c91739ff66219e1d746af9571d14c295c09f7b8c49dae4b6985242d646c3f416",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/stathmos.ts",
+      "sha256": "5b6837cda0768ef99947b32f5e3d268d70e2123d86d946fede56e804fbfd735d",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/steli.ts",
+      "sha256": "1f3cf403f20c67baa082311583669d30e232ac01a906246d13a02454924fa25b",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/stencil.orig.ts",
+      "sha256": "99927b3c8f51f2582ec79f24652ae8ae7cc67050d5f7f684fefe7b2d5dade683",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/stencil.ts",
+      "sha256": "99927b3c8f51f2582ec79f24652ae8ae7cc67050d5f7f684fefe7b2d5dade683",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/stentor.ts",
+      "sha256": "e71c59cb8bc7285e45bb37919e87a246cb77f630e5ef644fc4d56eb65fd55096",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/stichomythia.ts",
+      "sha256": "aadaf64d3bd9cd44afe6edaa7ba893f6609e9a3feedc3bd0206d271c0f1c7365",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/stichos.ts",
+      "sha256": "87c6255b327d82cd563b7e6da79ace8a0d8e2e083e6156a37279c01a9d0d44e4",
+      "layoutHits": [
+        {
+          "line": 280,
+          "text": "/** Deterministic, non-repetitive wrapped prose: LCG-chosen words, greedy-wrapped at 72. */"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/stigme.ts",
+      "sha256": "e42855651e04a12a81eabc73e83979125f0cd39941017ad632ea307125406428",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/stoichedon.ts",
+      "sha256": "5654b18cb36a4d9365a30b427360f304e7f62e6ef8af662c4bfdd7409fbdd6c3",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/stoicheion.ts",
+      "sha256": "c79047a6662ec37077cf365218a3546a37f3d43d4c673896920828945b498d58",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/stoichos.ts",
+      "sha256": "1c0f18cfd63e3fd59a8d4b0b773c863674a3d1f27ce00bc13fc9e55a72be4188",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/stoichothetes.ts",
+      "sha256": "67ffc6e7fcb2ff457df33e622e545637bdc8380ab59a0e63e158617fac74eb49",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/strand-book.ts",
+      "sha256": "7f8e8fcb9e8a06003b231df9e88597fdb7e027c1dcd5186a5089c8ebbc525471",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/strand.ts",
+      "sha256": "f7208ba656585429d2b0fd90fbf5bccf4db22d7f13f2c858d36fcbf2d54e1748",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/strata.ts",
+      "sha256": "2a24f49b7987b720c71c486fb2573891564939298b17ae3a5c8de6c98df31ec2",
+      "layoutHits": [
+        {
+          "line": 782,
+          "text": "* removes the redundancy without changing a single emitted byte."
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/sygkollesis.ts",
+      "sha256": "7810509c8706760abd68334caaeadf3f55605d5a4c02d5cf610cb8e62a15972e",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/syllogismos.ts",
+      "sha256": "9759e496f1f8a9204b30abc621d59a92081060ea6884bf7cca00716b7132ef12",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/symmetron.ts",
+      "sha256": "e0dd6df421a112bd33f136ac996b84a1f9d83136aa289e552dee220b2b5c6b6b",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/symphyia.ts",
+      "sha256": "34a975a3de5ee5b8855945d73ad850b1e8b315db3e0d39eff281f68ca16a7fba",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/symploke.ts",
+      "sha256": "1762482d7f6a2470d488724395435551f63dff3bf9756ca535457d3ef7a4eca6",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/synapse.ts",
+      "sha256": "fef96df63d31ec60a40f5c2ec1ec58641ebf390c61ce1309ec31a29d9d3c7336",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/synarmoge.ts",
+      "sha256": "88bb7d7111b421155904d7c719d7756de28f5178bcfa4f7435e1a13cb01d57c9",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/synartesis.ts",
+      "sha256": "3c807765399f20ca85f91b516d82e2bc8bc97d92aa2e72568e61fcfd65e68f75",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/syncope.ts",
+      "sha256": "26ce5e634878abd3cc254cf5513f8035780412e44cb05af080ffe53821ed0afa",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/syndesmos.ts",
+      "sha256": "95551d32f5902404074625508ead680078ea40a62debb777d4ca6a9e99ae72f8",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/syndyasmos.ts",
+      "sha256": "cc740decaa8620c5280a946bae7f32fa1225f542e945080a2529e58d2b47759c",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/synedria.ts",
+      "sha256": "25d2c4e57b408af7f18069b40f0f5dc82e000adbb102364005d1f222dc6d002e",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/synergy.ts",
+      "sha256": "803dee2415cf4d0313cbc32bbefb0d37086d09d7e8585c5a4788dbb04486cf22",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/synizesis.ts",
+      "sha256": "e4f823b0b083c5cc2af0e330cb7be785ebfcaac8642dc3df50f7b6fc513a54f3",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/synkope.ts",
+      "sha256": "607944f09b429c297183254b8d98de4c768ae605f58aa57b7e9781eec2d21410",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/synkrisis.ts",
+      "sha256": "a58b2f7b1c3477a67a60ac3bd9d41dba6d8711b11f4f3ffd77183cbd91447b03",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/syntagma.ts",
+      "sha256": "000f617eb9d5f70ce4cba5ba4bb5ada1085cf4af9781bbd14dd1f27d86db2f4b",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/syntaxis.ts",
+      "sha256": "52183fb8a64bd516a1d5c0f7f3213b5c7f8388dfbd58215ef5d4619ae7b4fc75",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/synthesis.ts",
+      "sha256": "ed9c6e96a0a6fea1fc3bff6775ed71f5ba0ddc7b9c90f98c42fa74a5f398bb2f",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/syntomia.ts",
+      "sha256": "66ab3018c3e88e2528d40c91fdb6dd518a84d76d4791a4116e4c591252613256",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/syntomos.ts",
+      "sha256": "361148626ecedf3118261622a16a280ece3962706a2dca0c97dc99bf19cc4a7e",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/syzeuxis.ts",
+      "sha256": "0a80f77c29fcaae085f38b47383dbaabf52e7ba016a8695d7831d280e64098d4",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/syzygia.ts",
+      "sha256": "7532977942e0de5d7bae514d7d8261d4e9a8d71508935107031307b235d82d24",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/tabmin.ts",
+      "sha256": "3735467c1f71ea7710a6583b6ef4486c85d9689f12f06d06d32578b8b8df6cea",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/tachos.ts",
+      "sha256": "a46a4b20a7b3db2ac7defae118977f5c54c0859d5d344ac30c4a7e465a7de22a",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/tachygrafia.ts",
+      "sha256": "29d2c92dbb200517706fef0239b0c7ca8ef9c2d65779a2d49b824242c984a0ad",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/tachys.ts",
+      "sha256": "af5e087ab933008b5d360601e8a49c0ce84735a4e19a19d7a1ed1c4e9cb7dbfe",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/tagstack.ts",
+      "sha256": "333bef5aa633c186b9841767275fffa484c6d29ab6aff1a8539b2308d36f8b2a",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/tau.ts",
+      "sha256": "7e180c141ebdb8047a4738f087fae130ee60ce549f71535b20f57f3e61cdd4bf",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/taxinomasis.ts",
+      "sha256": "61eaf0b15c0c7868d26796e8ce90ca1123e31863e820fb6bd5e92cfa93d55073",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/taxis.ts",
+      "sha256": "1746880cc3b24b82f0626f4c7b5f6cbc6992f118b1e00fd4371c99a63baf7cb8",
+      "layoutHits": [
+        {
+          "line": 586,
+          "text": "`Split at spaces (last field may hold spaces), insert the omitted field${drops.length > 1 ? 's' : ''}, re-align under header words (${aligns.join('')}: L/R = word start/end; ${gapText}; shift right whole if needed).`;"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/telos.ts",
+      "sha256": "0fa711f4f24c3fa4d8f49c855f1eafd0a439f9ecef928dbee25b8a853bc7947f",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/tensor.ts",
+      "sha256": "5fe5a64840b53b70df652dd4843e3b2cd2216e230eeba504aa3e867085641ee0",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/tessera.ts",
+      "sha256": "81f6f278f8bf23e4b5f92be56788073f5565726cb9a6d7a636a7c9ec545664df",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/themis.ts",
+      "sha256": "eab587b52e35b35d38be9bad065364a9c65d27cde92d19820660be428e141c4a",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/thoth.ts",
+      "sha256": "67ac7bbf945ce09d5f6dcd94db331dce8096273eff7f80d94837c331c8f0b23f",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/timema.ts",
+      "sha256": "a06a6592e331bf3e08ffe4ebdc61f7221d51b70a0d44d08f5ebb6b888a594b23",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/tmematismos.ts",
+      "sha256": "1d25b35fdf7c49aff68cc18728ad1303359118d23a87b72763dbd2e25c477be7",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/trie.ts",
+      "sha256": "4c0bcc347cbbb25ca41bfab9fe6d0bca91438a1983cc9a8984ec6d1443d86c35",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/typos.ts",
+      "sha256": "14ced996db9b9d3e6d7073104d20f6e795ab47dc1a683dea8e70111aaa2f2992",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/uuidfold.ts",
+      "sha256": "bd6520c95d45780327890b77e746891095be39cdea5ade52866bdd19b3285ccb",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/valence.ts",
+      "sha256": "ec86d3d12ebd2664828368995aad3d672b925adc7ba95af2645ee69d127dec32",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/valkyrie.ts",
+      "sha256": "9a5995144fa8b26ccecec47fceab90c85f1067fe9fe0f98990c589295302b2b1",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veltistos.ts",
+      "sha256": "bb5e752594508ff0b85ab060d6e4cda3b7c1c19d4d153a12baba1b4d8b8f960d",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas-a.ts",
+      "sha256": "66505388998a05ca5267c2aca67405d692ce9d1656374f73f9882b108976b09c",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas-c.ts",
+      "sha256": "15204235bf8503c2eedd05f6ff14a3870d3d526e465c67ae110dfe8ed7593884",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas-g.ts",
+      "sha256": "0074670c506bd73ca88bf7666d789c8b53119e193b1943757e6964968cf9033c",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas-k.ts",
+      "sha256": "e3b787ab83a8754df929e16e28f29893e97cb38d1e8b43d0a890aa451d5c985b",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas-m.ts",
+      "sha256": "f02dceff832dd213bb9ba55b8414feb4b45a0deb9776f43d38dfbdffc995f4f3",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas-n.ts",
+      "sha256": "53c6afbc2e675597615e13427749e5b5fa2c1e3499f33b52da79229e0ffd478c",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas-p.ts",
+      "sha256": "48f46ecbec8c654871c99eeb4c3d5bd37d9f3447d5f6260c404eb168954b2351",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas-q.ts",
+      "sha256": "07e2f5b5e1148fc48de5fda683ac4dbd579dadf448eedcce63f7dea41804dd6d",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas-r.ts",
+      "sha256": "f830686c18fa6c2a24ce247ae2da298aed2a9b44c8c29ce6ff44462a76fa9f04",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas-s.ts",
+      "sha256": "edce84df96f357553db629bd58d5fc7ddf63cf8b2ebd486328bdb8f0d94bc03b",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas-u.ts",
+      "sha256": "853c9460f6313dcacec39f9e237a5644a9bb343cee95bcee07a19dc2484ab5f9",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas-w.ts",
+      "sha256": "84140fdbbf3877c7ab7b7c4ed83cc06200b7b80d22cf7df3776740605fa64bb3",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/veritas.ts",
+      "sha256": "9a9c867df8f7129806abaa52da8e54e4376f1db3225a6e88101cc8a2ad4a9976",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/workmeter.ts",
+      "sha256": "0847d40ada7157f2d0864d22144c80166656ef7e84ee63341036fc06c61d341f",
+      "layoutHits": [
+        {
+          "line": 288,
+          "text": "// where outcomes stop changing \u2014 DAEDALUS on ewf-standings spends 113M"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/wrapcanon.ts",
+      "sha256": "6fc642a4230ef2832e33cd4f8e05699641b611fd0636d211a41c5b77f13e4f91",
+      "layoutHits": [
+        {
+          "line": 13,
+          "text": "*   Encoder, multi-line paragraph: if its lines equal greedyWrap(join(lines, \" \"), W), emit the joined line."
+        },
+        {
+          "line": 20,
+          "text": "*   greedyWrap: words are separated by single spaces; fill a line while len(line) + 1 + len(word) <= W."
+        },
+        {
+          "line": 27,
+          "text": "export function greedyWrap(s: string, W: number): string[] {"
+        },
+        {
+          "line": 59,
+          "text": "const canon = greedyWrap(joined, W);"
+        },
+        {
+          "line": 81,
+          "text": "else if (l.length > W) out.push(...greedyWrap(l, W));"
+        }
+      ]
+    },
+    {
+      "file": "src/lib/omega/zenith.ts",
+      "sha256": "7718c8d6e5c494d24e106af4748c16d781f6b80cac639ca86e7e7f8dda0ba023",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/zero.ts",
+      "sha256": "e53c5306b805dfb206683ff555ee4b67d19fc7b5e7786385fd3c4f2217eb9662",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/zeta.orig.ts",
+      "sha256": "8305c62be8757b2f4e40aab4bbacdb420c55cf06267a87b4b9123288df1e392e",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/zeta.ts",
+      "sha256": "8305c62be8757b2f4e40aab4bbacdb420c55cf06267a87b4b9123288df1e392e",
+      "layoutHits": []
+    },
+    {
+      "file": "src/lib/omega/zygon.ts",
+      "sha256": "ca884213435fde0058e4bec80b51b6bcb428d53b3b97832a7be07b2dab6280f1",
+      "layoutHits": []
+    }
+  ]
+}
