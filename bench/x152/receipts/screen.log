@@ -1,0 +1,108 @@
+[
+  {
+    "path": "bench/holdout/json-pkg.txt",
+    "raw": 1152,
+    "incumbent": 653,
+    "plans": [
+      {
+        "mode": {
+          "separator": ",",
+          "close": null
+        },
+        "changed": 94,
+        "folded": 1151,
+        "completeRaw": 1179
+      },
+      {
+        "mode": {
+          "separator": null,
+          "close": "]"
+        },
+        "changed": 10,
+        "folded": 1152,
+        "completeRaw": 1180
+      },
+      {
+        "mode": {
+          "separator": null,
+          "close": ")"
+        },
+        "changed": 12,
+        "folded": 1152,
+        "completeRaw": 1180
+      },
+      {
+        "mode": {
+          "separator": ";",
+          "close": null
+        },
+        "changed": 189,
+        "folded": 1152,
+        "completeRaw": 1180
+      },
+      {
+        "mode": {
+          "separator": ",",
+          "close": "]"
+        },
+        "changed": 104,
+        "folded": 1151,
+        "completeRaw": 1190
+      },
+      {
+        "mode": {
+          "separator": ",",
+          "close": ")"
+        },
+        "changed": 106,
+        "folded": 1151,
+        "completeRaw": 1190
+      },
+      {
+        "mode": {
+          "separator": ";",
+          "close": "]"
+        },
+        "changed": 199,
+        "folded": 1152,
+        "completeRaw": 1191
+      },
+      {
+        "mode": {
+          "separator": ";",
+          "close": ")"
+        },
+        "changed": 201,
+        "folded": 1152,
+        "completeRaw": 1191
+      },
+      {
+        "mode": {
+          "separator": ":",
+          "close": null
+        },
+        "changed": 95,
+        "folded": 1165,
+        "completeRaw": 1193
+      },
+      {
+        "mode": {
+          "separator": ":",
+          "close": ")"
+        },
+        "changed": 107,
+        "folded": 1154,
+        "completeRaw": 1193
+      },
+      {
+        "mode": {
+          "separator": ":",
+          "close": "]"
+        },
+        "changed": 105,
+        "folded": 1165,
+        "completeRaw": 1204
+      }
+    ]
+  }
+]

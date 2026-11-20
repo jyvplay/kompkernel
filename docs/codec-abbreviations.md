@@ -10505,3 +10505,59 @@ cover both scorers and commits. Correctness repair, **not** a speedup claim.
 
 X151 post-repair full rerun also completed: **29/29 wires identical, 11962 tokens**,
 both workers exit zero, 884245 ms concurrent wall. No controlled speed claim.
+
+### X152 — HOMOSEMA (same sign): parser-state terminal coalescing
+
+**Experimental/unwired**: `homosema.ts`, optional full-parent tournament in
+`homosema-frontier.ts`. Not an acronym. JSON grammar state determines colon versus
+comma and object versus array closing type. The codec merges those spellings and
+has the reader restore their types while keeping **every other source byte**.
+It does not parse/reprint values: duplicate keys, numeric lexemes, escape spelling,
+whitespace, CRLF and final newline remain literal. Strings are excluded from edits.
+
+**Search/greediness:** finite enumeration of 11 separator/closer dialects (4×3 minus
+identity), not greedy. Composed optional selector searches two close-only dialects;
+source-matched incumbent and actual folded-parent outputs must pass a bounded
+message-only reader, UTF-8 stability and strict full-message price. Parent search
+retains existing heuristics. Exact ordinary CHIRON-header fusion removes duplicated
+instructions, not the restoration rule. Fused instruction:
+`¶ k=v; expand repeatedly. Outside JSON strings, ] closes either container; print only.`
+The `)` dialect is equivalent with that closing character substituted.
+
+**Bounds/cost:** 50,000 UTF-16 source units, recursive value depth <=128; input must
+be stable UTF-8 lexical JSON. Deterministic parser state, no time-budget cutoff in
+this module. CPU-bound scans/token counts plus two expensive parent searches when
+eligible. Regex suffix slicing can allocate; no linear-time implementation theorem
+or whole-stack latency improvement is claimed. No default chain wiring.
+
+**Novelty and citations:** grammar-conditioned syntax redundancy is not new.
+SJSON (2020/2021), https://www.sciencedirect.com/science/article/abs/pii/S0306437920301356,
+and Cordova/Navarro (2016), https://arxiv.org/pdf/1601.06939, provide related structural
+representation background, not this direct-readable protocol or a BPE gain guarantee.
+HYLE/GRAMMA format regeneration, TAGSTACK XML closers, NEST tree templates and EKDYSIS
+JSON quote unfolding are close repository antecedents. New implementation and tested
+JSON terminal-alphabet preconditioning; no broad first-in-literature or exhaustive
+absence-of-equivalents claim.
+
+**Measured complete messages:** canonical json-pkg retains **653** (best fused 664).
+Fresh Chalk v5.6.2 manifest **387→385**, fresh VS Code JSON-extension manifest
+**915→895 (−20, 2.19%)**. Both compare with the complete current TAGSTACK baseline,
+not raw JSON. Original two-header VS Code candidate was 914; fusion accounts for
+19 more tokens. Receipts include source hashes and pinned external fixture provenance.
+24 ordinary complete candidates plus six fused prices: **30 independent Python
+source-byte matches**, 30 reference-tokenizer checks and token-ID round trips.
+Units 2231; fusion attacks 16; composed selector replay checks 13. Native single-chat
+LLM gate is **NOT_RUN**, not confirmed. No general prose or runtime Pareto claim.
+
+**Frontier/leaders:** X152 fresh default 29/29 wires match X151, **11962 tokens**,
+both workers exit zero. Bounded project reader 21 matches/eight unsupported. Inherited
+prose/ops/code/other totals and class leaders remain identity-bound in
+`bench/x152/receipts/local-leaders.json`; external manifest wins are separate, not
+folded into the canonical total. The 628685-ms concurrent run is not speed evidence.
+
+**Speed experiment:** allocation-free first-character vocabulary rejection gives
+identical complete script-pool snapshots for both tokenizers. Clean isolated
+whole-encoder ABBA across three lanes (12 cold processes) gives B/A aggregate
+**CPU 1.015625, wall 1.012454**, failing the predeclared >=10% reduction/nonregression
+gate. Not deployed. An earlier overlapping run is explicitly excluded. See
+`bench/x152/README.md`, `research.md`, `native.md`, and receipts for scope and gaps.

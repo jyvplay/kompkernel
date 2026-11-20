@@ -1,0 +1,20 @@
+[
+  {
+    "mode": {
+      "separator": null,
+      "close": "]"
+    },
+    "bytes": 6671,
+    "sha256": "b5b843888e49d67b6e62dcf094904d1fd7a25dd743c84bd26347819fc8230ac6",
+    "byteExact": true
+  },
+  {
+    "mode": {
+      "separator": null,
+      "close": ")"
+    },
+    "bytes": 6671,
+    "sha256": "b5b843888e49d67b6e62dcf094904d1fd7a25dd743c84bd26347819fc8230ac6",
+    "byteExact": true
+  }
+]

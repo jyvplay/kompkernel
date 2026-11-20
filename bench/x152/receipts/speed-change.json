@@ -1,0 +1,4 @@
+{
+  "old": "    let cps: number[];\n    try { cps = [...str].map(c => c.codePointAt(0)!); } catch { continue; }\n    for (const sc of CHIRON_SCRIPTS) {\n      let all = true;\n      for (const c of cps) if (!chironInScript(sc, c)) { all = false; break; }\n      if (all) { out.get(sc.name)!.push(str); break; }\n    }",
+  "replacement": "    const first = str.codePointAt(0)!;\n    for (const sc of CHIRON_SCRIPTS) {\n      if (!chironInScript(sc, first)) continue;\n      let all = true;\n      for (const c of str) if (!chironInScript(sc, c.codePointAt(0)!)) { all = false; break; }\n      if (all) { out.get(sc.name)!.push(str); break; }\n    }"
+}

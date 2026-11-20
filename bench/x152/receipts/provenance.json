@@ -1,0 +1,20 @@
+{
+  "chalk": {
+    "url": "https://github.com/chalk/chalk/blob/v5.6.2/package.json",
+    "tag": {
+      "sha": "4ac4288b0b8f8f14ff5511bb661b7502b58ae6af",
+      "type": "tag",
+      "url": "https://api.github.com/repos/chalk/chalk/git/tags/4ac4288b0b8f8f14ff5511bb661b7502b58ae6af"
+    },
+    "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3",
+    "license": "MIT, chalk-LICENSE"
+  },
+  "openaiMathCommit": "4eaee87548250b2682affda7d05d947c05554bae",
+  "note": "Live API repository metadata may postdate local 2026-11-14; retrieved content is inspected as supplied, not certified as of that date.",
+  "vscode": {
+    "url": "https://github.com/microsoft/vscode/blob/ede881c5d85824412ce25cab3869bb99673251d4/extensions/json-language-features/package.json",
+    "sha256": "b5b843888e49d67b6e62dcf094904d1fd7a25dd743c84bd26347819fc8230ac6",
+    "license": "MIT, vscode-LICENSE.txt",
+    "pinnedBytesCompared": true
+  }
+}

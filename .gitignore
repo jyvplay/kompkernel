@@ -116,3 +116,7 @@ bench/x150/*.mjs
 bench/x151/*.mjs
 !bench/x151/build-boundary.mjs
 bench/x151/receipts/*.cpuprofile
+
+# X152 generated bundles (retain the reproducible build plugin)
+bench/x152/*.mjs
+!bench/x152/speed-build.mjs

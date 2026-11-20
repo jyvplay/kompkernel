@@ -1,0 +1,313 @@
+{
+  "summary": {
+    "independentMessages": 30,
+    "byteExact": 30,
+    "baselineReads": 2,
+    "nativeSingleChat": "NOT_RUN",
+    "speedGatePassed": false,
+    "fullAcceptance": false,
+    "modalShortcutDetected": true
+  },
+  "rows": [
+    {
+      "group": "parent",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": ",",
+        "close": null
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "parent",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": null,
+        "close": "]"
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "parent",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": null,
+        "close": ")"
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "parent",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": ";",
+        "close": null
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "parent",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": ",",
+        "close": "]"
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "parent",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": ",",
+        "close": ")"
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "parent",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": ";",
+        "close": "]"
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "parent",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": ";",
+        "close": ")"
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "parent",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": ":",
+        "close": null
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "parent",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": ":",
+        "close": ")"
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "parent",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": ":",
+        "close": "]"
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "chalk",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": null,
+        "close": "]"
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "chalk",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": null,
+        "close": ")"
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "chalk",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": ",",
+        "close": null
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "chalk",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": ";",
+        "close": null
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "chalk",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": ":",
+        "close": null
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "chalk",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": ",",
+        "close": "]"
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "chalk",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": ",",
+        "close": ")"
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "chalk",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": ":",
+        "close": "]"
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "chalk",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": ":",
+        "close": ")"
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "chalk",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": ";",
+        "close": "]"
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "chalk",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": ";",
+        "close": ")"
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "vscode",
+      "path": "bench/x152/fixtures/vscode-json-package.json",
+      "mode": {
+        "separator": null,
+        "close": "]"
+      },
+      "byteExact": true,
+      "sha256": "b5b843888e49d67b6e62dcf094904d1fd7a25dd743c84bd26347819fc8230ac6"
+    },
+    {
+      "group": "vscode",
+      "path": "bench/x152/fixtures/vscode-json-package.json",
+      "mode": {
+        "separator": null,
+        "close": ")"
+      },
+      "byteExact": true,
+      "sha256": "b5b843888e49d67b6e62dcf094904d1fd7a25dd743c84bd26347819fc8230ac6"
+    },
+    {
+      "group": "fused",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": null,
+        "close": "]"
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "fused",
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": {
+        "separator": null,
+        "close": ")"
+      },
+      "byteExact": true,
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "group": "fused",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": null,
+        "close": "]"
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "fused",
+      "path": "bench/x152/fixtures/chalk-package.json",
+      "mode": {
+        "separator": null,
+        "close": ")"
+      },
+      "byteExact": true,
+      "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3"
+    },
+    {
+      "group": "fused",
+      "path": "bench/x152/fixtures/vscode-json-package.json",
+      "mode": {
+        "separator": null,
+        "close": "]"
+      },
+      "byteExact": true,
+      "sha256": "b5b843888e49d67b6e62dcf094904d1fd7a25dd743c84bd26347819fc8230ac6"
+    },
+    {
+      "group": "fused",
+      "path": "bench/x152/fixtures/vscode-json-package.json",
+      "mode": {
+        "separator": null,
+        "close": ")"
+      },
+      "byteExact": true,
+      "sha256": "b5b843888e49d67b6e62dcf094904d1fd7a25dd743c84bd26347819fc8230ac6"
+    }
+  ]
+}

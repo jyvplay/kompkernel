@@ -1,0 +1,1 @@
+{"path":"bench/x152/fixtures/vscode-json-package.json","tokens":895,"applied":true,"baseTokens":915,"parentCalls":2,"reason":"strict complete-message token gain; native behavior unverified","ms":115136.065223,"cpuMs":122306.887,"scope":"fresh complete public API execution, one original + two real folded parent calls; not replay"}

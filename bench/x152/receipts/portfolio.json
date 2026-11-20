@@ -1,0 +1,288 @@
+{
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "raw": 60,
+      "incumbent": 60,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "raw": 656,
+      "incumbent": 620,
+      "numberSites": 3,
+      "numberComplete": 681,
+      "anchorSites": 1,
+      "anchorComplete": 686
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "raw": 80,
+      "incumbent": 80,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "raw": 76,
+      "incumbent": 76,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "raw": 229,
+      "incumbent": 144,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "raw": 578,
+      "incumbent": 411,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "raw": 570,
+      "incumbent": 160,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "raw": 158,
+      "incumbent": 123,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "raw": 458,
+      "incumbent": 266,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "raw": 1099,
+      "incumbent": 846,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "raw": 787,
+      "incumbent": 385,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "raw": 140,
+      "incumbent": 105,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "raw": 629,
+      "incumbent": 486,
+      "numberSites": 2,
+      "numberComplete": 653,
+      "anchorSites": 1,
+      "anchorComplete": 661
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "raw": 733,
+      "incumbent": 664,
+      "numberSites": 2,
+      "numberComplete": 757,
+      "anchorSites": 1,
+      "anchorComplete": 764
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "raw": 330,
+      "incumbent": 172,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "raw": 675,
+      "incumbent": 229,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "raw": 582,
+      "incumbent": 118,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 1,
+      "anchorComplete": 586
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "raw": 513,
+      "incumbent": 101,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "raw": 1144,
+      "incumbent": 296,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "raw": 1034,
+      "incumbent": 414,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "raw": 1152,
+      "incumbent": 653,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "raw": 1422,
+      "incumbent": 949,
+      "numberSites": 3,
+      "numberComplete": 1447,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "raw": 1000,
+      "incumbent": 623,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "raw": 1106,
+      "incumbent": 381,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "raw": 1006,
+      "incumbent": 300,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "raw": 811,
+      "incumbent": 197,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "raw": 3054,
+      "incumbent": 980,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "incumbent": 813,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "incumbent": 1310,
+      "numberSites": 0,
+      "numberComplete": null,
+      "anchorSites": 0,
+      "anchorComplete": null
+    }
+  ],
+  "metricWitness": {
+    "shorter": "1234567890",
+    "shorterChars": 10,
+    "shorterTokens": 4,
+    "longer": "authentication",
+    "longerChars": 14,
+    "longerTokens": 1
+  },
+  "rankContracts": [
+    {
+      "key": "Restore ~ from the lexicographic permutation rank of the twelve rule keys.",
+      "tokens": 15,
+      "adequateContract": false,
+      "missing": "window location, Unicode order, zero-based rank, leading-zero and case rules"
+    },
+    {
+      "key": "Replace ~ by seven hex digits from the lexicographic rank of the twelve rule keys modulo 16^7.",
+      "tokens": 23,
+      "adequateContract": false,
+      "missing": "window location, Unicode order, zero-based rank, leading-zero and case rules"
+    }
+  ],
+  "scope": "constructed reversible raw screens and metric counterexample, not complete-parent or model tests"
+}

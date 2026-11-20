@@ -1,0 +1,5 @@
+{
+  "checks": 2231,
+  "passed": true,
+  "scope": "deterministic constructed unit fixtures, not natural heldout evidence"
+}

@@ -1,0 +1,6 @@
+{
+  "checks": 5,
+  "passed": true,
+  "patch": "Cyrillic/Arabic selection, foreign literal preservation, unassigned key/unsupported script refusal",
+  "testRepair": "Initial mixed-script rejection expectation was wrong: foreign-script literals are permitted. Corrected expected behavior, not codec code."
+}

@@ -1,0 +1,101 @@
+[
+  {
+    "mode": {
+      "separator": null,
+      "close": "]"
+    },
+    "bytes": 1640,
+    "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3",
+    "byteExact": true
+  },
+  {
+    "mode": {
+      "separator": null,
+      "close": ")"
+    },
+    "bytes": 1640,
+    "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3",
+    "byteExact": true
+  },
+  {
+    "mode": {
+      "separator": ",",
+      "close": null
+    },
+    "bytes": 1640,
+    "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3",
+    "byteExact": true
+  },
+  {
+    "mode": {
+      "separator": ";",
+      "close": null
+    },
+    "bytes": 1640,
+    "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3",
+    "byteExact": true
+  },
+  {
+    "mode": {
+      "separator": ":",
+      "close": null
+    },
+    "bytes": 1640,
+    "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3",
+    "byteExact": true
+  },
+  {
+    "mode": {
+      "separator": ",",
+      "close": "]"
+    },
+    "bytes": 1640,
+    "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3",
+    "byteExact": true
+  },
+  {
+    "mode": {
+      "separator": ",",
+      "close": ")"
+    },
+    "bytes": 1640,
+    "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3",
+    "byteExact": true
+  },
+  {
+    "mode": {
+      "separator": ":",
+      "close": "]"
+    },
+    "bytes": 1640,
+    "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3",
+    "byteExact": true
+  },
+  {
+    "mode": {
+      "separator": ":",
+      "close": ")"
+    },
+    "bytes": 1640,
+    "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3",
+    "byteExact": true
+  },
+  {
+    "mode": {
+      "separator": ";",
+      "close": "]"
+    },
+    "bytes": 1640,
+    "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3",
+    "byteExact": true
+  },
+  {
+    "mode": {
+      "separator": ";",
+      "close": ")"
+    },
+    "bytes": 1640,
+    "sha256": "ef029c254479723c952a24c0d8d758378bd8ddf031f5bd6f027f65e1a3d030f3",
+    "byteExact": true
+  }
+]
