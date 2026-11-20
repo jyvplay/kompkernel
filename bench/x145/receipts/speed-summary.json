@@ -1,0 +1,58 @@
+{
+  "measurements": 24,
+  "order": "ABBA then fresh-process BAAB per lane; no confidence interval",
+  "isolated": true,
+  "rows": [
+    {
+      "schedule": "speed",
+      "path": "bench/x144/heldout/vite.md",
+      "BoverAWall": 0.8708968428137485,
+      "BoverACpu": 0.788734040040318,
+      "A": 274,
+      "B": 260
+    },
+    {
+      "schedule": "speed",
+      "path": "bench/holdout-work/kb-article.txt",
+      "BoverAWall": 0.8866185931732534,
+      "BoverACpu": 0.8637080678970904,
+      "A": 620,
+      "B": 620
+    },
+    {
+      "schedule": "speed",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "BoverAWall": 0.8346403708323615,
+      "BoverACpu": 0.8240477479560832,
+      "A": 197,
+      "B": 197
+    },
+    {
+      "schedule": "speed-reverse",
+      "path": "bench/x144/heldout/vite.md",
+      "BoverAWall": 1.1909592793536887,
+      "BoverACpu": 1.2798447174245544,
+      "A": 274,
+      "B": 260
+    },
+    {
+      "schedule": "speed-reverse",
+      "path": "bench/holdout-work/kb-article.txt",
+      "BoverAWall": 1.0602047143726738,
+      "BoverACpu": 1.0881540110515842,
+      "A": 620,
+      "B": 620
+    },
+    {
+      "schedule": "speed-reverse",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "BoverAWall": 1.1292430944151364,
+      "BoverACpu": 1.1441200894566421,
+      "A": 197,
+      "B": 197
+    }
+  ],
+  "broadTenPercent": false,
+  "paretoTimingGate": false,
+  "warning": "First-call/JIT/tokenizer cache bias; no search work eliminated by SCALAR. Require both schedule gates, not pooled apparent speedup."
+}

@@ -1,0 +1,12 @@
+{"path":"bench/x144/heldout/vite.md","arm":"B","ms":7039.371368,"cpuMs":8813.287,"tokens":260,"encoderSourceExact":true,"transport":true}
+{"path":"bench/x144/heldout/vite.md","arm":"A","ms":5274.562884000001,"cpuMs":5930.973,"tokens":274,"encoderSourceExact":true,"transport":true}
+{"path":"bench/x144/heldout/vite.md","arm":"A","ms":5132.610512999998,"cpuMs":5572.185,"tokens":274,"encoderSourceExact":true,"transport":true}
+{"path":"bench/x144/heldout/vite.md","arm":"B","ms":5355.148361,"cpuMs":5908.969,"tokens":260,"encoderSourceExact":true,"transport":true}
+{"path":"bench/holdout-work/kb-article.txt","arm":"B","ms":5337.019702000001,"cpuMs":6063.578,"tokens":620,"encoderSourceExact":true,"transport":true}
+{"path":"bench/holdout-work/kb-article.txt","arm":"A","ms":4637.710590000002,"cpuMs":5098.219,"tokens":620,"encoderSourceExact":true,"transport":true}
+{"path":"bench/holdout-work/kb-article.txt","arm":"A","ms":4827.238425000003,"cpuMs":5200.938,"tokens":620,"encoderSourceExact":true,"transport":true}
+{"path":"bench/holdout-work/kb-article.txt","arm":"B","ms":4697.763865000001,"cpuMs":5143.491,"tokens":620,"encoderSourceExact":true,"transport":true}
+{"path":"bench/holdout-x40/metrics.tsv","arm":"B","ms":18777.999001000004,"cpuMs":20485.098,"tokens":197,"encoderSourceExact":true,"transport":true}
+{"path":"bench/holdout-x40/metrics.tsv","arm":"A","ms":14686.258426000008,"cpuMs":15725.608,"tokens":197,"encoderSourceExact":true,"transport":true}
+{"path":"bench/holdout-x40/metrics.tsv","arm":"A","ms":14925.157196,"cpuMs":15824.872,"tokens":197,"encoderSourceExact":true,"transport":true}
+{"path":"bench/holdout-x40/metrics.tsv","arm":"B","ms":14660.487605999995,"cpuMs":15612.44,"tokens":197,"encoderSourceExact":true,"transport":true}

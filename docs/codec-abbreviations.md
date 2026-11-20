@@ -9995,3 +9995,37 @@ Native NOT_RUN. The optional regex safety-check fast path was rejected after
 24 isolated whole-stack timings (B/A totals 0.97985, 1.03268, 1.02127); production
 uses the straightforward surrogate scan. This is a correctness repair, not a
 claimed compression or broad speed breakthrough.
+
+## SCALAR — state-specialized scalar-boundary grammar compiler (X145)
+
+SCALAR composes a plain CHIRON grammar with a pending-high-surrogate transducer.
+A shared rule can acquire multiple incoming-state variants; complete Unicode
+scalars remain on the wire while incomplete halves stay in compiler state.
+This is classical SLP/transducer composition applied to this repository, not a
+new general compression theorem. Unlike SYNARMOGE's existing greedy edge
+shrinking, the context-variant test produces two specialized versions of one
+rule. Selection greedily prices up to 32 rejected parents after the unchanged
+base search. No new decoder header is introduced. Enable experimentally with
+`OMEGA_SCALAR=1`; default remains disabled.
+
+Final deferred Vite result: **274 safe baseline → 260 tokens**, a 14-token
+(5.11%) discovery-lane improvement. Earlier direct-selection 257 is superseded;
+the fixed historical unsafe parent independently repairs to 258. Two additional
+package README trials do not improve. Independent program reads are not native
+LLM verification. No whole-stack acceleration or broad Pareto superiority is
+claimed. Bounds, attacks, six mechanisms, source citations and gaps:
+`bench/x145/REVIEW.md`, `research.md`, and `receipts/summary.json`.
+
+X145 default 29-lane rerun is message-identical to X144b, **11,962 tokens**.
+Body-token category leaders remain: prose **wordlike**, 3,429 total tokens;
+ops/tabular **glyph**, 5,580; code/structured **wordlike**, 2,636; other 317,
+no tape-class leader. These classify emitted body BPE tokens, not semantic
+word counts or lower bounds. Timing receipts from concurrent sweeps are not
+isolated A/B speed evidence. Native/Lean replay NOT_RUN; merge gate unmet.
+
+Final X145 opt-in sweep is also message-identical: 29/11,962, zero canonical
+wins. Separate isolated 24-call ABBA/BAAB speed test failed its schedule-robust
+gate: Vite/KB/metrics B/A wall ratios 0.871/0.887/0.835 reverse to
+1.191/1.060/1.129. No speed improvement is accepted. Final wire gate: 63
+transport/token-ID/price checks, 47 source-byte reads; 16 unsupported entries
+represent the same eight inherited formats in two sweeps.

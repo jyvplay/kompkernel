@@ -1,0 +1,7 @@
+import json,pathlib
+r=pathlib.Path(__file__).parent/'receipts'
+def rows(n):return [json.loads(l)for l in (r/(n+'.jsonl')).read_text().splitlines()if l]
+a=rows('frontier');b=rows('frontier-scalar');old=[json.loads(l)for l in pathlib.Path('bench/x144b/receipts/frontier.jsonl').read_text().splitlines()];assert len(a)==len(b)==len(old)==29
+assert all(x['path']==y['path']==z['path'] and x['message']==z['message'] and y['tokens']<=x['tokens'] for x,y,z in zip(a,b,old))
+s={'canonicalLanes':29,'baselineTokens':sum(x['tokens']for x in a),'scalarTokens':sum(x['tokens']for x in b),'baselineIdenticalX144b':True,'scalarMessageIdentical':all(x['message']==y['message']for x,y in zip(a,b)),'improvements':[{'path':x['path'],'A':x['tokens'],'B':y['tokens']}for x,y in zip(a,b)if y['tokens']<x['tokens']], 'discoveryVite':{'safeBaseline':274,'finalDeferred':rows('integration')[0]['tokens']},'additionalHoldouts':[{'path':x['path'],'A':x['tokens'],'B':y['tokens']}for x,y in zip(rows('heldout-baseline'),rows('heldout'))],'unit':json.loads((r/'unit.json').read_text()),'independentPython':json.loads((r/'python.json').read_text()),'finalGate':json.loads((r/'final-gate.json').read_text()),'native':'NOT_RUN','isolatedSpeed':json.loads((r/'speed-summary.json').read_text()),'overallParetoEstablished':False,'mergeEligible':False,'tsc':'PASS','build':'PASS'}
+(r/'summary.json').write_text(json.dumps(s,indent=2)+'\n');print(json.dumps(s,indent=2))
