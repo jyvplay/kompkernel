@@ -1,0 +1,13 @@
+file:///home/user/kompkernel/bench/x146/parent.mjs:2291
+  re.lastIndex = 0;
+               ^
+
+TypeError: Cannot set properties of undefined (setting 'lastIndex')
+    at countLongRaw (file:///home/user/kompkernel/bench/x146/parent.mjs:2291:16)
+    at countTokens3 (file:///home/user/kompkernel/bench/x146/parent.mjs:2397:15)
+    at file:///home/user/kompkernel/bench/x146/parent.mjs:35938:64
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v22.22.3

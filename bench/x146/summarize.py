@@ -1,0 +1,8 @@
+import json,pathlib
+r=pathlib.Path(__file__).parent/'receipts'
+def rows(n):return [json.loads(l)for l in (r/(n+'.jsonl')).read_text().split('\n')if l]
+def obj(n):return json.loads((r/(n+'.json')).read_text())
+a=rows('frontier');b=[json.loads(l)for l in pathlib.Path('bench/x145/receipts/frontier.jsonl').read_text().split('\n')if l];assert len(a)==len(b)==29 and all(x['path']==y['path']and x['message']==y['message']for x,y in zip(a,b))
+canonical={x['path']for x in a};probes=rows('probe');assert not any(x['plans']for x in probes if x['path']in canonical)
+p=rows('final-parent');s={'baselineLanes':29,'baselineTokens':sum(x['tokens']for x in a),'baselineIdenticalX145':True,'canonicalEkdysisPlans':0,'scalarViteTokens':rows('scalar-confirm')[0]['tokens'],'completedFinalParentPrices':[{'path':x['path'],'A':x['A'],'B':x['B'],'sourceRead':x['sourceRead']}for x in p],'parentWins':sum(x['B']<x['A']for x in p),'finalWrapper':[{k:x[k]for k in ['path','tokens','baseTokens','applied']}for x in rows('integration')],'unit':obj('unit'),'compositeUnit':obj('composite-unit'),'python':obj('python'),'finalGate':obj('final-gate'),'scopeUnit':obj('scope-unit'),'scopeSpeed':obj('speed-summary'),'codecSpeed':obj('codec-speed-summary'),'native':'NOT_RUN','lean':'NOT_RUN','overallPareto':False,'mergeEligible':False,'largeTrials':{'pypinyin':'process killed exit 137, no completed result; cause not established','rich':'heap OOM exit 134 at 1800 MiB Node limit, no completed result','fastapi':'not reached after Rich abort'},'tsc':'PASS','build':'PASS'}
+(r/'summary.json').write_text(json.dumps(s,indent=2)+'\n');print(json.dumps(s,indent=2))

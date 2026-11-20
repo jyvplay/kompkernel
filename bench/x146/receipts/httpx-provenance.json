@@ -1,0 +1,11 @@
+{
+  "url": "https://pypi.org/pypi/httpx/json",
+  "responseSha256": "bb69a37ba295d008ec1ae05b324c4f5e64fba48b7276189ebf2a2920dd2f1fc8",
+  "descriptionSha256": "c465a5eb05b8102682dfb89d1ed8244745cdeb137029c88fa2ce23ce731f023a",
+  "extraction": "verbatim canonical JSON string token; offsets measured in Python Unicode code points",
+  "range": [
+    665,
+    6104
+  ],
+  "refetchedFieldIdentical": true
+}

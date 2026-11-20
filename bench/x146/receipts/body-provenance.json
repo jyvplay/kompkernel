@@ -1,0 +1,29 @@
+[
+  {
+    "path": "bench/x146/heldout/vite-24155.body.txt",
+    "source": "bench/x146/heldout/vite-24155.json",
+    "range": [
+      2429,
+      4167
+    ],
+    "description": "exact contiguous JSON body-string token from fetched API response; not new independent source"
+  },
+  {
+    "path": "bench/x146/heldout/vite-24152.body.txt",
+    "source": "bench/x146/heldout/vite-24152.json",
+    "range": [
+      2400,
+      3320
+    ],
+    "description": "exact contiguous JSON body-string token from fetched API response; not new independent source"
+  },
+  {
+    "path": "bench/x146/heldout/node-67620.body.txt",
+    "source": "bench/x146/heldout/node-67620.json",
+    "range": [
+      3763,
+      6222
+    ],
+    "description": "exact contiguous JSON body-string token from fetched API response; not new independent source"
+  }
+]

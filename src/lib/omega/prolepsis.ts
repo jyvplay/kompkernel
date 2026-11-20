@@ -112,12 +112,23 @@ function envNum(name: string, dflt: number, lo: number, hi: number): number {
   } catch { return dflt; }
 }
 
-export function prolepsisDisabled(): boolean { return envOff(); }
-export function prolepsisStride(): number { return envNum('OMEGA_PROLEPSIS_STRIDE', 256, 16, 1 << 16); }
-export function prolepsisAnchors(): number { return envNum('OMEGA_PROLEPSIS_ANCHORS', 8, 1, 64); }
+interface ProlepsisConfig {disabled:boolean;stride:number;anchors:number;minPrefix:number}
+let scopedConfig:ProlepsisConfig|null=null;
+/** X146 experiment: snapshot knobs at synchronous call entry, not module load.
+ * Explicit opt-in API; callers must not mutate these four knobs inside fn.
+ * Nested scopes inherit the snapshot; finally restores dynamic reads.
+ */
+export function prolepsisConfigScope<T>(fn:()=>T):T {
+ if(scopedConfig)return fn();
+ scopedConfig={disabled:envOff(),stride:envNum('OMEGA_PROLEPSIS_STRIDE',256,16,1<<16),anchors:envNum('OMEGA_PROLEPSIS_ANCHORS',8,1,64),minPrefix:envNum('OMEGA_PROLEPSIS_MIN_PREFIX',48,0,1<<20)};
+ try{return fn();}finally{scopedConfig=null;}
+}
+export function prolepsisDisabled(): boolean { return scopedConfig?.disabled??envOff(); }
+export function prolepsisStride(): number { return scopedConfig?.stride??envNum('OMEGA_PROLEPSIS_STRIDE', 256, 16, 1 << 16); }
+export function prolepsisAnchors(): number { return scopedConfig?.anchors??envNum('OMEGA_PROLEPSIS_ANCHORS', 8, 1, 64); }
 /** Shortest shared prefix worth resuming from. Below this the bookkeeping costs
  *  more than the fold it saves. */
-export function prolepsisMinPrefix(): number { return envNum('OMEGA_PROLEPSIS_MIN_PREFIX', 48, 0, 1 << 20); }
+export function prolepsisMinPrefix(): number { return scopedConfig?.minPrefix??envNum('OMEGA_PROLEPSIS_MIN_PREFIX', 48, 0, 1 << 20); }
 /** A mark whose tail is longer than this is not recorded: resuming through a
  *  huge tail would cost more than it saves. The tail is normally one chunk. */
 export const PROLEPSIS_MAX_TAIL = 64;

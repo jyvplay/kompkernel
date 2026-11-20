@@ -1,0 +1,1 @@
+{"checks":1008,"exceptionCleanup":true,"lateBinding":true,"nested":true,"mutationBoundaryDemonstrated":true,"scopeContract":"no environment mutation inside synchronous callback"}

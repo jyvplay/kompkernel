@@ -1,0 +1,35 @@
+{
+  "calls": 20,
+  "measured": 16,
+  "warmups": 4,
+  "isolated": true,
+  "rows": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "stage": "ABBA",
+      "BoverAWall": 0.9544084756933104,
+      "BoverACpu": 0.9331668230693422
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "stage": "BAAB",
+      "BoverAWall": 0.9661552654066826,
+      "BoverACpu": 0.9513451058643585
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "stage": "ABBA",
+      "BoverAWall": 0.9525614675123759,
+      "BoverACpu": 0.9568699884700423
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "stage": "BAAB",
+      "BoverAWall": 0.9805498522548712,
+      "BoverACpu": 0.9835976977240605
+    }
+  ],
+  "significantTenPercentGate": false,
+  "noRegressionGate": true,
+  "scope": "prolepsis config snapshot; NOT EKDYSIS runtime"
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "path": "bench/x146/heldout/pypi-rich.txt",
+    "url": "https://pypi.org/pypi/rich/json",
+    "extraction": "exact first description JSON string token",
+    "range": [
+      700,
+      18273
+    ]
+  },
+  {
+    "path": "bench/x146/heldout/pypi-fastapi.txt",
+    "url": "https://pypi.org/pypi/fastapi/json",
+    "extraction": "exact first description JSON string token",
+    "range": [
+      1107,
+      24557
+    ]
+  },
+  {
+    "path": "bench/x146/heldout/pypi-httpx.txt",
+    "url": "https://pypi.org/pypi/httpx/json",
+    "extraction": "exact first description JSON string token",
+    "range": [
+      665,
+      6104
+    ]
+  }
+]

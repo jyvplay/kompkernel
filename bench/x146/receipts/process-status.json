@@ -1,0 +1,11 @@
+{
+  "baseline": 0,
+  "firstParentHarness": 1,
+  "parentRerun": 0,
+  "rootSequence": 137,
+  "packagesSequence": 134,
+  "rootIncomplete": "pypinyin; node body not reached in this sequence",
+  "packagesIncomplete": "rich; fastapi not reached",
+  "causeRoot": "SIGKILL status observed; reason not established",
+  "causePackages": "explicit V8 heap-out-of-memory log"
+}

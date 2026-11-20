@@ -1,0 +1,9 @@
+{
+  "url": "https://pypi.org/pypi/pypinyin/json",
+  "extraction": "exact first description JSON string token",
+  "range": [
+    1004,
+    9215
+  ],
+  "responseBytes": 156008
+}

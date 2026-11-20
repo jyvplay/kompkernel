@@ -10029,3 +10029,82 @@ gate: Vite/KB/metrics B/A wall ratios 0.871/0.887/0.835 reverse to
 1.191/1.060/1.129. No speed improvement is accepted. Final wire gate: 63
 transport/token-ID/price checks, 47 source-byte reads; 16 unsupported entries
 represent the same eight inherited formats in two sweeps.
+
+## EKDYSIS — complete JSON quoting-layer removal (X146, experimental)
+
+**Name/design:** EKDYSIS means shedding a layer; it is not an acronym. Remove
+one to four complete *canonical JSON-string serialization* layers before the
+parent searches the text. A whole-source string needs only an in-band
+`JSON.stringify the decoded payload; print only.` instruction; selected embedded
+strings use `⟦text⟧` frames. The inverse restores all quote/escape bytes. This
+exposes multiline prose/code to the existing parent instead of teaching a new
+vocabulary. It does not merely rename SCALAR (surrogate-state grammar repair),
+JSON-ESCAPE-FOLD (five punctuation escapes), or GRAMMA (layout outside strings).
+Standard serialization inverse is prior art; repository novelty is scoped to
+the implemented complete-layer/preconditioning route, not new science.
+
+**Greedy/search:** deterministic left-to-right nonoverlapping string scan;
+per-span gain filters at thresholds 0/8/32, depths 1–4; exact minimum over the
+finite standalone menu. Parent composition tries the lowest standalone-cost
+plan only, so that allocation is heuristic, not a global parent optimum.
+Baseline survives unless the complete candidate is strictly smaller and its
+message-only decoder reconstructs source bytes. No default TAGSTACK wiring.
+APIs: `ekdysisEncode` / `ekdysisDecode` (standalone),
+`ekdysisFrontierEncode` / `ekdysisFrontierDecode` (optional parent composition;
+fallback retains its parent decoder).
+
+**Resources:** CPU/work-bounded planner (100,000 UTF-16 units, 10,000 strings,
+four layers); composite reader caps grammar expansion, 128 rules and layout
+padding. Full parent searches have no new wrapper-wide time bound. The optional
+codec pays for the baseline plus one transformed search. On the measured HTTPX
+win this is **1.887× baseline wall time**, not a speed improvement.
+
+**Citations:** standard JSON serialization; Amazon Redshift's nested-string
+serialization documentation describes de-escaping into inline values, but that
+alone changes types and is not byte-exact:
+https://docs.aws.amazon.com/redshift/latest/dg/serializing-complex-JSON.html .
+Schmidt et al., EMNLP 2024, DOI 10.18653/v1/2024.emnlp-main.40, cautions against
+equating token-count optimization with model effectiveness; it is not the source
+of this algorithm. See `bench/x146/research.md` for precisely scoped live
+sources, 2018/2023 grammar results and primary lab-statement inspections.
+
+**Measured result:** exact JSON-string token of HTTPX's real PyPI description,
+**1040→1024 tokens (16 / 1.54%)**, independently source-read and reproduced by
+the final wrapper. Three full GitHub API snapshots lose 33–40 tokens; Jieba's
+quoted description loses 2. This is an API/quoted-document discovery result,
+not a broad natural-prose claim. Pypinyin was killed (137), Rich hit the 1800 MiB
+Node heap limit (134), and FastAPI was not reached; their standalone raw savings
+are NOT parent wins. Native basic-chat reconstruction **NOT_RUN**; ready prompts
+and strict checker are in `bench/x146/native/`. Overall Pareto gate fails.
+
+**Separate speed experiment:** `prolepsisConfigScope` snapshots four settings at
+synchronous call entry, with nested-scope inheritance and finally cleanup, not
+at module import. No new codec or decoder. Under constant-in-call settings,
+20 isolated full-stack calls (4 warmups, 16 measured) preserve messages;
+warmed ABBA/BAAB B/A wall ratios: KB **0.954/0.966**, metrics **0.953/0.981**.
+A modest 2–5% result on two lanes, **not** the requested significant 10% gain;
+not automatically enabled. Do not subtract it from EKDYSIS's separately measured
+encoder overhead or treat these deltas as additive.
+
+### X146 reconfirmed frontier / generalized local leaders
+
+Default 29-lane sweep: **11,962**, every message identical to X145. Config:
+DET=1, NO_MEMO=1, ENGRAM=0, OURA_MEMO=0, NO_OROTHESIA=1, SCALAR=0,
+o200k_base. SCALAR Vite freshly reconfirmed at **260**; the full optional SCALAR
+sweep remains the X145 historical measurement.
+
+| Structure class | Local leading route / evidence | Current totals/examples |
+|---|---|---|
+| Prose/documents | Macro frontier + phrase/legend/order refinements; wordlike body tokens lead | 3429 total; KB 620, email 486, LLM answer 664 |
+| Ops/tabular | Layout/arithmetic/field-dependency parents plus macro refinements; glyph body tokens lead | 5580 total; metrics 197, df-real 123, psql 229 |
+| Long Unix listing | SYNTHESIS mode/size/template fusion, then GENNADAS refinement (receipt notes) | ls-l-real 1310 |
+| Code/structured | Structural/macro frontier, SYNARMOGE span/rename refinements; wordlike body tokens lead | 2636 total; JSON package 653, TypeScript 949 |
+| Small/raw and non-tape other | No shared body-token leader; identity on the three short CLI lanes | other total 317: lsblk 60, uptime 80, free 76, cue-sheet 101 |
+| JSON-quoted package description (additional discovery lane) | EKDYSIS whole-layer preconditioning | HTTPX 1040→1024; runtime/native caveats above |
+
+These are local measurements and composition notes, not universal codec rankings.
+Final source gate: 36 complete prices/transport/token-ID checks, 28 supported
+source reads, 8 inherited reader formats unsupported. 8,208 unit assertions;
+2,079 independent Python reads, mostly repeated/synthetic diagnostic outputs.
+TypeScript/build pass. Details and A–J review: `bench/x146/README.md`,
+`REVIEW.md`, `receipts/summary.json`. Conditional merge remains blocked.

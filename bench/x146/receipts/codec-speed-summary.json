@@ -1,0 +1,10 @@
+{
+  "calls": 6,
+  "measured": 4,
+  "warmups": 2,
+  "isolated": true,
+  "BoverAWall": 1.8865591021358712,
+  "BoverACpu": 1.8852685514779453,
+  "baselineTokens": 1040,
+  "ekdysisTokens": 1024
+}
