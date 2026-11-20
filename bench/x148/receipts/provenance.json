@@ -1,0 +1,52 @@
+{
+  "source": "Installed Perl 5.36 module POD documentation; actual renderer execution, not synthetic styled prose",
+  "renderer": "4.14",
+  "command": "perl -MPod::Text::Overstrike -e 'Pod::Text::Overstrike->new(sentence=>0)->parse_from_file($ARGV[0],$ARGV[1])' SOURCE OUTPUT",
+  "pairs": [
+    [
+      "Overstrike.pm",
+      "overstrike-man.txt"
+    ],
+    [
+      "Text.pm",
+      "text-man-full.txt"
+    ],
+    [
+      "Usage.pm",
+      "usage-man-full.txt"
+    ]
+  ],
+  "files": [
+    {
+      "name": "Overstrike.pm",
+      "bytes": 6259,
+      "sha256": "230d600351e7259369059414fc84157cb94fa05d9289d580a03a97b30271bf88"
+    },
+    {
+      "name": "Text.pm",
+      "bytes": 36448,
+      "sha256": "74c089aac04447bbc1cdeba775e0da715c2934ceeb1ed20f2d13d8e6e4df6349"
+    },
+    {
+      "name": "Usage.pm",
+      "bytes": 30993,
+      "sha256": "871b77196f3d5c848202e829ac61b3980a3a7f7311b49ed8afe7d9a220082e24"
+    },
+    {
+      "name": "overstrike-man.txt",
+      "bytes": 2266,
+      "sha256": "298d83a9ef1ac646a8aa448242d487c738406094e3e41b380c759d4ecb5deec0"
+    },
+    {
+      "name": "text-man-full.txt",
+      "bytes": 9717,
+      "sha256": "135729503a828db1d22bd1e335a5c732e3d9f95f195429b5d2002dab58fa611d"
+    },
+    {
+      "name": "usage-man-full.txt",
+      "bytes": 19265,
+      "sha256": "6f786a6edf919d8e55c3382c772cfe6f936a9e03606743750a4462735f13d3a3"
+    }
+  ],
+  "discoveryNotPreregistered": true
+}

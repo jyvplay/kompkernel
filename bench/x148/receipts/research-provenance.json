@@ -1,0 +1,26 @@
+[
+  {
+    "repo": "openai/math",
+    "path": "lean/OAI/Algorithms/SubexponentialSAT/Computation.lean",
+    "gitBlob": "032cb278c5044f238432458b09e9ee3122d96354",
+    "file": "openai-computation.lean"
+  },
+  {
+    "repo": "AxiomMath/EvenExponentDihedralMonotonicity",
+    "path": "Lyons/Dihedral/Main.lean",
+    "gitBlob": "e457e75142a447db1fba73b008b3f8701285fa1b",
+    "file": "axiom-dihedral-main.lean"
+  },
+  {
+    "repo": "anthropics/fermats-last-theorem",
+    "path": "verification/nanoda/patches/E3-failure-memo.diff",
+    "gitBlob": "f084f4c26b6a7416a4c60e13a336800743257f36",
+    "file": "anthropic-failure-memo.diff"
+  },
+  {
+    "repo": "google-deepmind/code-verification",
+    "path": "Computational/Specifications/Pqxdh/Security/HeadlineDelta.lean",
+    "gitBlob": "51c2deeaa0412028c580830a196046bdec37ac1a",
+    "file": "deepmind-headline.lean"
+  }
+]

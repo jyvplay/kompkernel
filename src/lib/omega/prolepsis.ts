@@ -1,4 +1,11 @@
 import { now } from './clock';
+import { nativeLcp } from './lcp-native';
+let nativeLcpScope=false;
+/** X148 opt-in synchronous experiment; changes only exact LCP implementation. */
+export function prolepsisNativeLcpScope<T>(fn:()=>T):T {
+ const old=nativeLcpScope;nativeLcpScope=true;
+ try{return fn();}finally{nativeLcpScope=old;}
+}
 /**
  * ΠΡΟΛΗΨΙΣ (PROLEPSIS — "taking beforehand") — the prefix-anchored count.
  * =============================================================================
@@ -158,6 +165,7 @@ export function prolepsisStats() {
 
 /** Longest common prefix of `a` and `b`, compared at most `limit` characters. */
 function lcp(a: string, b: string, limit: number): number {
+  if(nativeLcpScope)return nativeLcp(a,b,limit);
   const n = Math.min(a.length, b.length, limit);
   let i = 0;
   // 8-wide unrolled compare; the strings here are thousands of characters and

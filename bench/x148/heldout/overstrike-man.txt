@@ -1,0 +1,55 @@
+NNAAMMEE
+    Pod::Text::Overstrike - Convert POD data to formatted overstrike text
+
+SSYYNNOOPPSSIISS
+        use Pod::Text::Overstrike;
+        my $parser = Pod::Text::Overstrike->new (sentence => 0, width => 78);
+
+        # Read POD from STDIN and write to STDOUT.
+        $parser->parse_from_filehandle;
+
+        # Read POD from file.pod and write to file.txt.
+        $parser->parse_from_file ('file.pod', 'file.txt');
+
+DDEESSCCRRIIPPTTIIOONN
+    Pod::Text::Overstrike is a simple subclass of Pod::Text that highlights
+    output text using overstrike sequences, in a manner similar to nroff.
+    Characters in bold text are overstruck (character, backspace, character)
+    and characters in underlined text are converted to overstruck
+    underscores (underscore, backspace, character). This format was
+    originally designed for hard-copy terminals and/or line printers, yet is
+    readable on soft-copy (CRT) terminals.
+
+    Overstruck text is best viewed by page-at-a-time programs that take
+    advantage of the terminal's ssttaanndd--oouutt and _u_n_d_e_r_l_i_n_e capabilities, such
+    as the less program on Unix.
+
+    Apart from the overstrike, it in all ways functions like Pod::Text. See
+    Pod::Text for details and available options.
+
+BBUUGGSS
+    Currently, the outermost formatting instruction wins, so for example
+    underlined text inside a region of bold text is displayed as simply
+    bold. There may be some better approach possible.
+
+AAUUTTHHOORR
+    Originally written by Joe Smith <Joe.Smith@inwap.com>, using the
+    framework created by Russ Allbery <rra@cpan.org>. Subsequently updated
+    by Russ Allbery.
+
+CCOOPPYYRRIIGGHHTT  AANNDD  LLIICCEENNSSEE
+    Copyright 2000 by Joe Smith <Joe.Smith@inwap.com>
+
+    Copyright 2001, 2004, 2008, 2014, 2018-2019 by Russ Allbery
+    <rra@cpan.org>
+
+    This program is free software; you may redistribute it and/or modify it
+    under the same terms as Perl itself.
+
+SSEEEE  AALLSSOO
+    Pod::Text, Pod::Simple
+
+    The current version of this module is always available from its web site
+    at <https://www.eyrie.org/~eagle/software/podlators/>. It is also part
+    of the Perl core distribution as of 5.6.0.
+

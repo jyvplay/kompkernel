@@ -10172,3 +10172,111 @@ Fresh canonical message-only reads21/29;8 inherited formats unsupported.
 All29 prices/transport/token-ID checks pass, plus the added candidate.
 TypeScript and final build PASS; initial build exited137 and is retained as a
 failure receipt (cause unknown). Conditional merge remains blocked.
+
+### X148 — EPITYPOS (ἐπίτυπος, "impressed/overstruck"): reversible character-overstrike factorization
+
+**What it is:** a bounded, reversible ASCII overstrike span planner. Real manuals
+rendered by `Pod::Text::Overstrike` (bold = `c BS c`, underline = `_ BS c`) are
+factored into a small parenthesized style-stack contract plus a folded body with
+stack-validating toggles. Ordered delimiter pairs `**/__`, `**/~~`, `^^/~~` are
+tried in order and a dynamic epitypos key (index-counted closing delimiter) makes
+collision repair exact: a body containing literal `__` is admitted under an
+alternate pair with unambiguous matching close markers. Decoder = local,
+bounded, character-visible stack processing with byte-exact inverse; ordinary
+parent readers fail closed on the envelope instead of guessing.
+
+**Scope honesty:** applied to real rendered manuals only (2266/9717/19265 chars,
+80/100/477 backspaces); NOT general prose/ops; not parent-frontier-competitive
+alone (six executable controls below). New repo files
+`src/lib/omega/epitypos.ts`, `epitypos-frontier.ts` (+ unit suite, 2289 checks /
+754 accepted cases, three real manual sources byte-verified in-suite).
+
+**Measured (repaired planner, fresh run):** overstrike manual **594→502**
+(92 tokens, 15.5%); text manual **1941→1822** (119 tokens, 6.1%); usage manual
+(contains literal `__`) is planner-eligible and planner+inverse byte-exact in the
+unit suite; its WHOLE-STACK composite did not complete on this machine (heap
+exhaustion >2.2 GB, receipt `bench/x148/receipts/usage-postrepair.log`) and is
+therefore NOT measured — a recorded capacity boundary, not a compression result.
+First-run numbers used the single-delimiter version; repaired candidates inherit
+no trust, so all gates were rerun after the fix.
+
+**Greediness:** greedy left-to-right style stack with first-fit delimiter-pair
+selection; not optimal, no global search over pair assignments.
+
+**CPU/time:** O(n) scan plus collision re-plan; whole-run wall times in
+`bench/x148/receipts/probe-postrepair.log` are shared-machine and are NOT
+isolated speed evidence.
+
+### X148 — PERIBALLON (περίβαλλον, "surroundings"): synchronous environment-read scope (NOT default)
+
+Opt-in synchronous Node `process.env` proxy: reads snapshot, writes/deletes/
+defineProperty forwarded immediately, nested scopes restore precisely in
+`finally`, end-of-scope audit rejects out-of-band replacement. NOT an isolation
+or security boundary: Windows bypasses, native mutation is excluded by
+precondition, transient out-of-band mutations that revert before exit are
+missed, async work is not cancelled. Default behavior unchanged; 916 unit
+checks.
+
+### X148 speed experiments — both falsified, reported not shipped
+
+- **Native LCP prefix comparison** (`lcp-native.ts` scope in PROLEPSIS):
+  exact (9,880 unit checks, no hashing/normalization changes), but isolated
+  warm ABBA/BAAB A/B gives 0.969/1.039 wall (kb-article) and 0.978/1.006
+  (metrics.tsv) — order-inconsistent noise, far below any promotion threshold.
+  Not default.
+- **Environment-read scope as encode acceleration:** 0.997/1.004 and
+  0.972/0.991 — same verdict. Not default.
+
+### X148 — SYNARMOGE deadline honesty gate
+
+The frontier's final joint search (X133) keeps a real-time deadline even under
+`OMEGA_DET=1`; its fixed point is therefore wall-clock-dependent in principle.
+New unit gate (`bench/x148/synarmoge-slice.ts`): expired deadline admits no
+candidate (output falls back to the frontier unchanged); truncated and resumed
+runs stay byte-exact-gated and strictly-cheaper-gated; the fixed point on the
+reconfirmed lanes is stable (no move admits even from a degraded-but-exact base).
+This measures the mechanism; it does not make the search deterministic, and no
+determinism claim is made.
+
+### X148 frontier reconfirmation — exact statement (supersedes X147 total)
+
+Canonical rerun COMPLETED after resumed pauses: 29/29 messages byte-exact
+(`bad:0`), reader support unchanged (21 supported / 8 unsupported inherited
+formats), final total **11,963 = X147's 11,962 + exactly one token on
+`bench/holdout/code-ts.txt` (950 vs 949)**, whose recorded SYNARMOGE note shows
+`ren=1` fired in the rerun where it had not before. The reconfirmed
+configuration is therefore byte-valid everywhere and **time-sensitive on one
+lane** under paused/resumed machine load; the X147 total is not exactly
+reconfirmed and this page states 11,963 as the current honest total. No new category-leader table is claimed this turn; the X147 leaders
+(prose 3429 wordlike / ops 5580 glyph / code 2636 wordlike / other 317 none)
+remain the last full-sweep numbers.
+
+### X148 six executable mechanism-distinct controls (overstrike manual lane)
+
+All six byte-exact against frozen source (`bench/x148/receipts/controls.json`):
+style transducer 574, positional-insertion 823, Brotli 863, line-dictionary 814,
+character-runs 10,125, codepoint-deltas 4,548 — every one is MORE EXPENSIVE than
+the accepted parent-composed output (502), which is the content of the negative
+result: EPITYPOS alone is not parent-competitive; the gains reported are
+additive-on-parent, measured through the full pipeline.
+
+### X148 research notes (downloaded, individually inspected to stated depth)
+
+- OpenAI `Computation.lean`: trace-based `RunsIn`/`CostedTrace` runtime-bound
+  framework; the lemma machinery (state-dependent cost → target runtime bound)
+  is the same shape as an encode+decode cost audit, but the file defines the
+  QUANTIFIERS, it does not measure our stack.
+- Anthropic failure memo (E3 defeq-failure memoization): a real engine-level
+  "failed comparisons repeat" cache — the same idea already exists here as
+  exact value memos; motivates measurement, adds no new codec.
+- Axiom dihedral monotonicity / DeepMind PQXDH headline: imported results with
+  explicit hypotheses (rate functions constant on inverse orbits; δ-correct KEM
+  bound terms) — no interface to token compression found; no Lean replay.
+- DoubleAI girth-8/5: primary PDF fetch FAILED (transport), claim not examined
+  beyond the fetched web page; zk-ECDSA resource proof audited by us only to
+  README depth (SP1/Groth16, GPU required — unavailable here); treated as
+  UNVERIFIED claims.
+- Fresh literature: BiYacc 2015 (reversible parser/printer via Put/Get — prior
+  art for exact round-trip text), LTSC 2025 (repeated-token meta-dictionary —
+  requires added vocabulary/fine-tuning, incompatible with the native-reading
+  constraint), strategic deletion + LLM reconstruction (explicitly lossy).

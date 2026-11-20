@@ -1,0 +1,27 @@
+bench/x148/heldout/overstrike-man.txt 594 502 502 18053.148785999998
+bench/x148/heldout/text-man-full.txt 1941 1822 1822 115468.96050300001
+
+<--- Last few GCs --->
+
+[70653:0x8693000]   846777 ms: Mark-Compact 1795.8 (1952.4) -> 1781.2 (1953.7) MB, pooled: 0 MB, 129.54 / 0.00 ms  (average mu = 0.449, current mu = 0.456) allocation failure; scavenge might not succeed
+[70653:0x8693000]   847066 ms: Mark-Compact 1796.9 (1953.7) -> 1782.3 (1954.9) MB, pooled: 0 MB, 186.91 / 0.00 ms  (average mu = 0.397, current mu = 0.355) allocation failure; scavenge might not succeed
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0xe46bbe node::OOMErrorHandler(char const*, v8::OOMDetails const&) [node]
+ 2: 0x1243640 v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 3: 0x1243917 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 4: 0x1472825  [node]
+ 5: 0x148c0b9 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [node]
+ 6: 0x14607b8 v8::internal::HeapAllocator::AllocateRawWithLightRetrySlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [node]
+ 7: 0x14616e5 v8::internal::HeapAllocator::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [node]
+ 8: 0x1439a0e v8::internal::Factory::AllocateRaw(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [node]
+ 9: 0x1427d9a v8::internal::FactoryBase<v8::internal::Factory>::AllocateRawArray(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [node]
+10: 0x1427ef6 v8::internal::FactoryBase<v8::internal::Factory>::NewFixedArrayWithFiller(v8::internal::Handle<v8::internal::Map>, int, v8::internal::Handle<v8::internal::HeapObject>, v8::internal::AllocationType) [node]
+11: 0x18fc460 v8::internal::FixedArrayBuilder::EnsureCapacity(v8::internal::Isolate*, int) [node]
+12: 0x18b0569 v8::internal::Runtime_RegExpExecMultiple(int, unsigned long*, v8::internal::Isolate*) [node]
+13: 0x1dfcaf6  [node]
