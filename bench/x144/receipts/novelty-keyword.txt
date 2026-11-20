@@ -1,0 +1,2 @@
+src/lib/omega/psifida.ts:1:/** X144 PSIFIDA: decimal digit-plane weaving, experimental and unwired.
+src/lib/omega/psifida.ts:2: * A width-selected stream of maximal ASCII digit runs is transposed by digit

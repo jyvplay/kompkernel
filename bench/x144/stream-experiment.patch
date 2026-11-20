@@ -1,0 +1,30 @@
+diff --git a/src/lib/omega/bpe-fast.ts b/src/lib/omega/bpe-fast.ts
+index 6743386..51285bb 100644
+--- a/src/lib/omega/bpe-fast.ts
++++ b/src/lib/omega/bpe-fast.ts
+@@ -392,6 +392,9 @@ function fastChunkCountUncached(chunk: string): number {
+  * function and not an approximation of it. Returns null when the regex does not
+  * cover the text (the caller then uses the library).
+  */
++/** X144 experimental streaming pre-token traversal; benchmark toggle only. */
++let streamPretokens = false;
++export function setStreamPretokens(enabled: boolean): void { streamPretokens = enabled; }
+ export function fastCount(text: string): number | null {
+   if (text === '') return 0;
+   if (!READY && !fastReady()) return null;
+@@ -401,6 +404,15 @@ export function fastCount(text: string): number | null {
+   re.lastIndex = 0;
+   const one = re.exec(text);
+   if (one !== null && one.index === 0 && one[0].length === text.length) return fastChunkCount(text);
++  if (streamPretokens) {
++    let covered = 0, count = 0, match = one;
++    while (match !== null) {
++      if (match.index !== covered || match[0].length === 0) return null;
++      covered += match[0].length; count += fastChunkCount(match[0]);
++      match = re.exec(text);
++    }
++    return covered === text.length ? count : null;
++  }
+   re.lastIndex = 0;
+   const ms = text.match(re);
+   if (ms === null) return null;

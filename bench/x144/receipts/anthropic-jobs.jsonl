@@ -1,0 +1,2 @@
+{"conclusion":"success","name":"detect changed projects","steps":[{"conclusion":"success","name":"Set up job"},{"conclusion":"success","name":"Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1"},{"conclusion":"success","name":"Select projects"},{"conclusion":"success","name":"Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1"},{"conclusion":"success","name":"Complete job"}]}
+{"conclusion":"skipped","name":"verify (${{ matrix.project }})","steps":[]}

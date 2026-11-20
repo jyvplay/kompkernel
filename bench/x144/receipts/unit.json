@@ -1,0 +1,1 @@
+{"checks":3041,"plans":1010,"scope":"UTF-16 exact; byte assertions only claim valid UTF-8 fixtures, not lone-surrogate bytes"}

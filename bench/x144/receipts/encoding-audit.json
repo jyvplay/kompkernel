@@ -1,0 +1,8 @@
+{
+  "checks": 2066,
+  "domain": "all subsets of clauses of width<=2 on n=0,1,2; length only",
+  "identity": "L=n+2+4m+sum_literals(4*code+8)",
+  "upperBound": "L<=n+2+4m+(8n+4)km",
+  "algorithmVerified": false,
+  "leanReplayed": false
+}
