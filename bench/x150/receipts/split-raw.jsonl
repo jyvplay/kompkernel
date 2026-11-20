@@ -1,0 +1,4 @@
+{"path":"bench/holdout-x41/ls-l-real.txt","grids":1,"source":5194,"one":4786,"split":4786}
+{"path":"bench/holdout-x41/ps-aux-real.txt","grids":2,"source":3054,"one":2901,"split":2871}
+{"path":"bench/holdout-x42/ps-ef.txt","grids":1,"source":1144,"one":1020,"split":1020}
+{"path":"bench/holdout-tbl/kubectl-get-pods.txt","grids":1,"source":1006,"one":966,"split":966}

@@ -12,3 +12,5 @@ bench/holdout-tbl/psql-output.txt 229 20911 true
 bench/holdout-tbl/markdown-table.md 172 17317 true
 bench/holdout-work/kb-article.txt 620 11383 true
 bench/holdout-work/unified-diff.patch 411 9031 true
+bench/holdout-x42b/free-m.txt 76 7251 true
+bench/holdout-x42b/vmstat.txt 144 3307 true

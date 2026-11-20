@@ -146,7 +146,10 @@ export function polysteliTransform(text: string): { text: string; markers: strin
         for (const [idx, f] of probe.grid.rows.entries()) {
           const rebuilt = polysteliRebuildRow(f, probe.grid.tails[idx]!, probe.grid.widths);
           if (rebuilt === null || rebuilt !== block[s + idx]!) throw new Error('ΠΟΛΥΣΤΗΛΗ: rebuild disagreement');
-          out.push(rebuilt);
+          // Emit the compact fields, not `rebuilt`: the latter is the
+          // original padded row and made the previous transform a no-op.
+          // Keep the tail exactly, including its original leading whitespace.
+          out.push(f.join(' ') + probe.grid.tails[idx]!);
         }
         changed = true;
         s += probe.grid.rows.length;
@@ -165,18 +168,31 @@ export function polysteliParseMarker(line: string): { marker: string; widths: nu
   const m = RE_MARKER.exec(line);
   if (!m) return null;
   const widths = m[2]!.split(',').map(Number);
-  if (widths.some((w) => !Number.isInteger(w) || w <= 0)) return null;
-  if (Number(m[3]) < 1) return null;
-  return { marker: m[1]!, widths, rows: Number(m[3]) };
+  const rows = Number(m[3]);
+  // Bound untrusted in-band metadata before any repeat() allocation.
+  if (widths.some((w) => !Number.isSafeInteger(w) || w <= 0 || w > 400_000)) return null;
+  if (widths.reduce((a, b) => a + b, 0) > 400_000) return null;
+  if (!Number.isSafeInteger(rows) || rows < 1 || rows > 400_000) return null;
+  return { marker: m[1]!, widths, rows };
 }
 
 /** Undo: markers name the exact rows that follow them; everything else is literal. */
 export function polysteliUndo(text: string): string {
+  if (text.length > 400_000) throw new Error('ΠΟΛΥΣΤΗΛΗ: input too large');
   const lines = text.split('\n');
   const out: string[] = [];
+  let outputSize = 0;
+  const append = (line: string): void => {
+    outputSize += line.length + (out.length ? 1 : 0);
+    if (outputSize > 400_000) throw new Error('ΠΟΛΥΣΤΗΛΗ: output too large');
+    out.push(line);
+  };
   for (let i = 0; i < lines.length; i++) {
     const mk = polysteliParseMarker(lines[i]!);
-    if (!mk || mk.marker !== MARKER) { out.push(lines[i]!); continue; }
+    if (!mk || mk.marker !== MARKER) {
+      if (lines[i]!.startsWith(MARKER)) throw new Error('ΠΟΛΥΣΤΗΛΗ: invalid marker');
+      append(lines[i]!); continue;
+    }
     if (i + mk.rows >= lines.length) throw new Error('ΠΟΛΥΣΤΗΛΗ: marker claims more rows than exist');
     for (let r = 0; r < mk.rows; r++) {
       const line = lines[i + 1 + r]!;
@@ -190,9 +206,12 @@ export function polysteliUndo(text: string): string {
         end = m.index + m[0].length;
       }
       const tail = line.slice(end);
+      const predictedSize = mk.widths.reduce((a, b) => a + b, 0) + tail.length;
+      if (outputSize + (out.length ? 1 : 0) + predictedSize > 400_000)
+        throw new Error('ΠΟΛΥΣΤΗΛΗ: output too large');
       const rebuilt = polysteliRebuildRow(fields, tail, mk.widths);
       if (rebuilt === null) throw new Error('ΠΟΛΥΣΤΗΛΗ: field overflows its width');
-      out.push(rebuilt);
+      append(rebuilt);
     }
     i += mk.rows;
   }
@@ -203,13 +222,12 @@ export function polysteliUndo(text: string): string {
 let IN_POLYSTELI = false;
 
 /**
- * X149 DEFAULT-OFF, with a measured reason (not a stylistic choice): the arm's
- * inner parent-chain call runs even when G6 will refuse, and that extra wall
- * time shifts the outer chain's clock-bounded arms. Measured on kubectl:
- * default-on shipped 316 instead of 300 — ΣΤΟΙΧΗΔΟΝ/ΓΕΝΝΑΔΑΣ stopped landing
- * their improvements (bench/x149/receipts/frontier-polysteli*.jsonl, kept as
- * the fragility receipt). Same precedent as ΠΛΑΤΟΣ (X123, off by default so
- * the arm cannot rot). OMEGA_POLYSTELI=1 measures the real chain with the arm.
+ * DEFAULT-OFF. The X149 implementation emitted padded rows and its opt-in
+ * kubectl run returned 316 rather than 300. The difference was observed, but
+ * clock interference was not isolated as its cause and the claimed all-lanes
+ * comparison was incomplete. X150 repairs the transform; the repaired arm needs
+ * fresh end-to-end and native-readability tests before default admission.
+ * OMEGA_POLYSTELI=1 opts into the experiment.
  */
 export function polysteliDisabled(): boolean {
   if (typeof process === 'undefined') return true;
@@ -254,7 +272,13 @@ export function polysteliEncode(
   try { tr = polysteliTransform(text); } catch (e) { return refuse(`transform threw: ${String(e).slice(0, 80)}`, baseTokens); }
   if (!tr) return refuse('no uniform-edge grid stretch with a tail', baseTokens);
 
-  if (polysteliUndo(tr.text) !== text) return refuse('G3 own inverse disagrees', baseTokens);
+  try {
+    if (polysteliUndo(tr.text) !== text) return refuse('G3 own inverse disagrees', baseTokens);
+  } catch (e) {
+    // A marker can push an otherwise eligible input over the inverse's size
+    // cap. An untrusted transform must fail closed before parent execution.
+    return refuse(`G3 undo threw: ${String(e).slice(0, 80)}`, baseTokens);
+  }
 
   let inner: TagstackResult;
   IN_POLYSTELI = true;

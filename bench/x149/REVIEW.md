@@ -1,5 +1,15 @@
 # X149 review — what was actually established
 
+> **X150 correction:** The X149 transform emitted original padded rows and its
+> tests did not catch the no-op. Claims below about the intended compact
+> transform's chain result or cause are withdrawn. At X149 commit the default-on
+> parallel run was incomplete (0 + 14 rows), so its asserted 28/28 comparison
+> was unsupported. The 138/237 lossy rewrite deltas are not proven upper
+> bounds on other codecs; the 13→11 diff probe drops shared text and is not an
+> exact reversible comparison. The 1.77× ratio is between historical runs,
+> not a controlled repeated identical-wire A/B. The repaired transform and
+> tests are in `bench/x150/`.
+
 **New codec: ΠΟΛΥΣΤΗΛΗ** (`src/lib/omega/polysteli.ts`, wired in `tagstack.ts`).
 Mechanism: right-edge grid tiling with a verbatim multi-token tail — the geometry
 class ΣΤΉΛΗ cannot express (measured NULL on ls-l-real). Byte-exact gates G1–G6,

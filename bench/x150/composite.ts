@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import {chrismataEncode,chrismataRead} from '../../src/lib/omega/chrismata';
+import {countTokens} from '../../src/lib/omega/bpe';
+process.env.OMEGA_DET='1';process.env.OMEGA_NO_MEMO='1';process.env.OMEGA_ENGRAM='0';process.env.OMEGA_OURA_MEMO='0';process.env.OMEGA_NO_OROTHESIA='1';
+delete process.env.OMEGA_POLYSTELI;delete process.env.OMEGA_NO_POLYSTELI;
+const path=process.argv[2]!,out=process.argv[3]!,buf=fs.readFileSync(path),source=buf.toString('utf8');
+if(!Buffer.from(source).equals(buf))throw Error('invalid source bytes');
+const before=process.cpuUsage(), start=performance.now(),result=chrismataEncode(source),cpu=process.cpuUsage(before),ms=performance.now()-start;
+if(!Buffer.from(result.decoded).equals(buf))throw Error('source mismatch');
+if(result.applied && !Buffer.from(chrismataRead(result.message)).equals(buf))throw Error('serialized reader mismatch');
+if(countTokens(result.message,'o200k_base')!==result.tokens)throw Error('token count mismatch');
+fs.writeFileSync(out,JSON.stringify({path,ms,cpuMs:(cpu.user+cpu.system)/1000,...result},null,2));
+console.log(JSON.stringify({path,ms,cpuMs:(cpu.user+cpu.system)/1000,baseTokens:result.baseTokens,candidateTokens:result.candidateTokens,tokens:result.tokens,applied:result.applied,reason:result.reason}));

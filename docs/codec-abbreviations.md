@@ -10283,6 +10283,17 @@ additive-on-parent, measured through the full pipeline.
 
 ### X149 — ΠΟΛΥΣΤΗΛΗ (polysteli, "many columns"): right-edge grid tiling with a verbatim tail
 
+**X150 correction:** X149's implementation accidentally emitted the padded
+`rebuilt` row instead of the compact fields. Its reversibility tests could not
+catch that no-op, and its chain A/B did **not** test the intended transform.
+The earlier claim that this transform was refused on every lane, the proposed
+causal explanation, and the claimed 28/28 opt-in wire comparison are withdrawn.
+The committed opt-in frontier receipt was incomplete (A: 0 rows; B: 14 rows);
+the background worker was still running at turn end. The separate raw
+feasibility prototype was not a byte-exact chain measurement. X150 repairs the
+emission and adds patch-targeted tests and independent source-byte inverses;
+see `bench/x150/` for actual results. The arm remains default-off.
+
 **What it is:** a geometry codec. Within each blank-line block it finds
 stretches of rows whose first K whitespace fields END at K uniform column edges
 (right-edge tiling), replaces padding by a one-line ruler contract, and carries
@@ -10306,30 +10317,18 @@ the incumbent ships. Re-entrancy guard; `OMEGA_NO_POLYSTELI=1` opt-out.
 **Greediness:** greedy — first uniform-edge fit per stretch, no global search
 over alternative K or cross-block joint geometry; not optimal.
 
-**Measured:** unit suite 22 checks (self-test 11 + real-file round-trips +
-adversarial width-lies, unicode tails, tamper semantics); grids fit ls-l-real
-(149×8), ps-aux-real (37×7), ps-ef (39×7), kubectl (22×4); raw ls-l delta
-5194→4779+28 contract (−415 gross). **Chain verdict: REFUSED on every grid
-lane** — single-process A/B showed 1310→1340, 980→1007, 296→296, 300→316, and
-the definitive fresh-process measurement is the post-codec parallel frontier
-receipt. The measured reason: the parent's own alignment-aware machinery
-(ΣΤΉΛΗ, ls-l's ※/^T/λ arms, glyph rules mined on padded columns) extracts more
-from the ORIGINAL layout than the raw grid release survives re-encoding —
-raw −415 minus lost specialized savings ≈ +30 net. ΠΟΛΥΣΤΗΛΗ therefore ships
-gated and refuses everywhere it was measured; it is a wired, verified,
-mechanism-distinct NEGATIVE result, not a Pareto gain.
+**Measured after the X150 repair:** unit tests now assert that a padded row
+actually becomes compact; an independent Python inverse reproduces the source
+bytes for all four real grid fixtures. Complete raw folded texts (including
+markers) cost ls-l 5194→4786, ps-aux 3054→2901, ps-ef 1144→1020 and kubectl
+1006→966. These are **not** parent-composed results. The original X149 unit
+suite also passes after repair, but it alone did not detect the defect.
 
-**X149 chain-fragility finding (measured, kept as a receipt):** with the arm
-default-ON, the kubectl lane shipped **316 instead of 300** — the arm's inner
-parent-chain call inflates wall-clock between the outer chain's clock-bounded
-arms, and ΣΤΟΙΧΗΔΟΝ/ΓΕΝΝΑΔΑΣ stopped landing their improvements
-(`frontier-polysteli*.jsonl`); the other 28 lanes stayed byte-identical.
-Decision: ΠΟΛΥΣΤΗΛΗ is **DEFAULT-OFF** (ΠΛΆΤΟΣ precedent), enabled with
-`OMEGA_POLYSTELI=1`; with it off, kubectl was re-encoded in a fresh process and
-reproduced the canonical **300 wire byte-identically**
-(`bench/x149/receipts/` + kubectl-confirm). The shipped-chain frontier is
-therefore exactly the pre-codec receipt: **11,962, 29/29 byte-identical to
-X147**.
+**Status:** default-off (`OMEGA_POLYSTELI=1` to test). X149's old no-op arm
+produced kubectl 316 vs 300 in a fresh process; the reason for the difference
+was not isolated. Its incomplete parallel receipt cannot establish what happened
+on the other lanes. X150's repaired-arm receipts are separate, and no native
+fresh-chat behavioral verification has been performed.
 
 **CPU/time:** transform is O(rows²) probe per stretch position with
 per-row regex parsing (ls-l ~1.5 s); the dominant cost is the parent-chain
@@ -10340,37 +10339,37 @@ isolated speed evidence.
 
 `bench/x149/frontier-worker.mjs` + a two-process balanced split of the 29 lanes
 (greedy partition by X148 per-lane ms). Per-lane logic and flags are IDENTICAL
-to `bench/x148/frontier.ts`; each lane's decode is verified in its worker
-(exit 3 on any mismatch). Measured: **wall 899,136 ms vs 1,594,918 ms
-sequential = 1.77× batch speedup, 29/29 byte-exact**. Scope honesty: this
-accelerates MULTI-LANE BATCH runs (the frontier/acceptance path); single-call
-`tagstackEncode` latency is unchanged by design — the search is deterministic
-work-bounded, and library-level single-call candidates were measured and
-falsified in X148 (ratios 0.969–1.039, no ≥10% lane).
+to `bench/x148/frontier.ts`; each lane's returned decoded field is compared with
+the source in its worker (exit 3 on mismatch). The historical 899,136 ms
+parallel versus 1,594,918 ms sequential runs give a **1.77× descriptive wall
+time ratio**, but they were not a controlled repeated A/B and X148 reported
+only 26/29 identical wires versus its earlier configuration. They therefore do
+not establish an identical-wire speedup or isolate load/clock effects. X150's
+fresh two-process run took 935,816 ms with 29/29 wires identical to X149, but
+it too is a single shared-machine run. Both are batch-throughput observations,
+not evidence that a single `tagstackEncode` call is faster. The X148
+library-level candidates had ratios 0.969–1.039 on two measured lanes.
 
 ### X149 frontier reconfirmation and the code-ts time-slice answer
 
 Before the codec landed, the parallel rerun reproduced the X147 configuration
 EXACTLY: total **11,962**, 29/29 messages byte-identical to X147 (receipt
 `bench/x149/receipts/frontier.jsonl`), resolving X148's open question: code-ts
-returns **949 under parallel load** — the X148 950 was the paused/resumed
-sequential slice (SYNARMOGE ren=1), not a stable regression. After ΠΟΛΥΣΤΗΛΗ
-wired, the final frontier rerun gives the X149 total below.
+returns **949 under parallel load**. The attribution of X148's 950 to a
+particular time slice is a hypothesis rather than an isolated causal test.
+X149's post-codec opt-in run was incomplete when it was reported; see the
+X150 correction above and the separate new baseline receipt in `bench/x150`.
 
 ### X149 residual measurements (decision receipts, not codecs)
 
-- whitespace-run collapse upper bound 138 tokens gross across 29 lanes —
-  NOT harvestable: every space run 2–20 chars costs exactly 1 token in
-  o200k_base, and restore info would cost more than the run tokens; the gain
-  appears only through STELI-style field-boundary merging, which the grid
-  codecs already own.
-- numeric re-coding upper bound 237 tokens gross (ls-l 93) — dominated by
-  right-alignment padding, which is ΠΟΛΥΣΤΗΛΗ's geometry, not digit recoding.
-- prose word substitution is structurally break-even: k-occurrence words cost
-  1 token each and a glyph+value rule costs ≥2; the tape's wins come only from
-  ≥2-token substrings and boundary merges, which its greedy already prices.
-- diff-pair (-X/+Y) joint coding: the canonical diff lane contains exactly ONE
-  such pair (13→11 tokens) — dead candidate, measured and dropped.
+**X150 correction:** the 138 whitespace-collapse and 237 digit-to-zero figures
+are token deltas for specific lossy rewrites, **not mathematical upper bounds**
+on other codecs. The digit replacement maps both `12` and `34` to `0` and is
+not invertible. Token-boundary effects also defeat the earlier general
+word-substitution break-even claim. The X149 diff probe correctly counted one
+adjacent minus/plus pair in that fixture, but its 13→11 coded string drops the
+common prefix and suffix, so it is not a reversible codec comparison. These
+measurements do not rule out their respective mechanism families.
 
 ### X149 leaders (X134 classifier on the X149 pre-codec frontier receipt)
 
@@ -10412,3 +10411,52 @@ ONTO (arXiv 2604.17512, fetched) — columnar structural savings prior art.
 zip2zip 2025, AlphaZip (arXiv 2409.15046), LLMLingua 2023/2024, ZFP/DCTZ 2025 —
 recorded boundaries, each inadmissible for a stated reason (see research.md).
 No Lean/kernel replay of any lab artifact was possible in this sandbox.
+
+### X150 — CHRISMATA (terminal SGR, experimental and unwired)
+
+- **Design.** `src/lib/omega/chrismata.ts` removes Git's exact paired green
+  addition and red deletion SGR wrappers when the existing `+`/`-` first
+  character determines which bytes to restore. Empty lines use the exact
+  single-wrapper form; nested or different SGR is left literal. The entire
+  plan must invert to the source, including LF and UTF-8. If a literal line
+  with a selected sign would be rewritten, that whole plan is rejected.
+  The outer key is in-band; the bounded message-only reader accepts only its
+  known parent grammar and source-checks the reconstruction. The incumbent is
+  returned unless complete message tokens strictly decrease. No default-chain
+  wiring; no additional user vocabulary or hidden dictionary is requested,
+  but actual native behavior remains untested.
+- **Relationship/novelty.** This is a new repository *implementation* for
+  line-content-conditioned SGR, not a new information-theoretic primitive.
+  It is related to derivable-character elision (STOICHOS) and EPITYPOS's
+  terminal formatting. A source-tree term search found no existing named SGR
+  implementation; that search is not a proof about every possible equivalent
+  behavior in the entire stack.
+- **Greedy?** One deterministic scan, not a greedy optimization or an
+  exhaustive search; two-candidate whole-message comparison is a gate.
+- **Citation.** Git `color.diff` and `git diff --color` documentation,
+  https://git-scm.com/docs/git-config and https://git-scm.com/docs/git-diff/2.19.0;
+  Linux console SGR syntax, https://manpages.debian.org/testing/manpages/console_codes.4.en.html.
+  These are format prior art, not a paper claiming this codec.
+- **Time/CPU.** Linear scan and inverse under a 50,000-code-unit cap; the two
+  parent calls dominate CPU and inherit any parent clock gates. It is not a
+  library speedup; on refusal the additional parent search is overhead.
+- **Measured.** 44 unit/attack assertions across CHRISMATA and ΠΟΛΥΣΤΗΛΗ,
+  and four separate Python byte-level CHRISMATA inverses. Full parent A/B on
+  three real Git color fixtures: 499→580, 617→704, 721→806 candidate tokens;
+  all refused. A 106-line prefix of the larger diff also lost 1188→1269; it is
+  not an independent fixture. On the 29 canonical lanes the planner fits zero.
+  Raw savings on the 316-addition real Git diff (9210→4722) are **not** a
+  parent-chain or native-reading result; its full parent tournament timed out
+  at 1200 seconds without a completed price. See
+  `bench/x150/receipts/` for exact scope and the held-out fixture provenance.
+
+### X150 completed baseline and split-grid check
+
+Default-off fresh two-worker rerun: 29/29 wires match X149; **11,962 tokens**.
+The bounded repository reader independently reaches the source on 21/29; the
+remaining eight are unsupported, not verified. X134 classification is rerun in
+`bench/x150/receipts/leaders.json`, with source-to-frontier category leaders in
+`local-leaders.json`. The two-grid ps-aux variant is an extension of
+ΠΟΛΥΣΤΗΛΗ, not a new primitive: 2871 raw vs 2901 one-grid, but **1046 complete
+parent tokens vs 980 incumbent**, source-read exact, so it is rejected. See
+`bench/x150/README.md` for full limitations and reproducible commands.

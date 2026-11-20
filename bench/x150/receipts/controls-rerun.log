@@ -1,0 +1,8 @@
+[
+  { name: 'style-transducer', tokens: 574 },
+  { name: 'positional-control-insertion', tokens: 823 },
+  { name: 'brotli', tokens: 863 },
+  { name: 'line-dictionary', tokens: 814 },
+  { name: 'character-runs', tokens: 10125 },
+  { name: 'codepoint-deltas', tokens: 4548 }
+]

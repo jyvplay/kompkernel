@@ -1,0 +1,9 @@
+{
+  "lanes": 29,
+  "oldTotal": 11962,
+  "newTotal": 11962,
+  "identicalWires": 29,
+  "different": [],
+  "sourceReadEqual": 29,
+  "note": "decoded field is parent self-report, not an independent wire parser"
+}

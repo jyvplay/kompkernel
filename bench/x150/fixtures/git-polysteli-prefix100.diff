@@ -1,0 +1,106 @@
+[1mdiff --git a/src/lib/omega/polysteli.ts b/src/lib/omega/polysteli.ts[m
+[1mnew file mode 100644[m
+[1mindex 0000000..660bfe5[m
+[1m--- /dev/null[m
+[1m+++ b/src/lib/omega/polysteli.ts[m
+[36m@@ -0,0 +1,316 @@[m
+[32m+[m[32m/**[m
+[32m+[m[32m * src/lib/omega/polysteli.ts — X149. ΠΟΛΥΣΤΗΛΗ (polysteli), "many columns".[m
+[32m+[m[32m * =============================================================================[m
+[32m+[m[32m *[m
+[32m+[m[32m * RELATION TO ΣΤΉΛΗ (X124), AND WHY THIS IS A DIFFERENT MECHANISM[m
+[32m+[m[32m * ---------------------------------------------------------------[m
+[32m+[m[32m * ΣΤΉΛΗ fits ONE contiguous offset-sliced block and keeps the LAST FIELD to the[m
+[32m+[m[32m * end of the line, so any row whose trailing column contains SPACES (an `ls -l`[m
+[32m+[m[32m * name plus ` -> /lib/...` target, a `ps aux` command) breaks the model: the[m
+[32m+[m[32m * tail would have to be padded like a field. Measured: `steliTransform`[m
+[32m+[m[32m * returns NULL on bench/holdout-x41/ls-l-real.txt — the biggest canonical lane[m
+[32m+[m[32m * at 1310 tokens — and the X149 frontier ships that lane with no grid at all.[m
+[32m+[m[32m *[m
+[32m+[m[32m * ΠΟΛΥΣΤΗΛΗ changes the geometry: each of the first K fields must END at a[m
+[32m+[m[32m * uniform column edge (right-edge tiling — the field is the whitespace token[m
+[32m+[m[32m * that ends there), and everything after the K-th edge is a VERBATIM TAIL[m
+[32m+[m[32m * carried through unchanged, spaces included. Padding is reconstructed by[m
+[32m+[m[32m * right-aligning each field to its edge. Conforming stretches are found inside[m
+[32m+[m[32m * every blank-line block, so headers, arrow rows and odd rows simply pass[m
+[32m+[m[32m * through, and several independent grids may exist in one message (the[m
+[32m+[m[32m * ΠΟΛΥ- part). A row that does not rebuild is never emitted.[m
+[32m+[m[32m *[m
+[32m+[m[32m * THE READER (single, local, no dictionary)[m
+[32m+[m[32m * -----------------------------------------[m
+[32m+[m[32m *     ॥10,3,5,5,9,4,3:149 rows single-spaced, pad field k to width k, rest verbatim.[m
+[32m+[m[32m *     drwxr-xr-x 4 root root 128 Jun 15 16:59 ImageMagick-6.9.11[m
+[32m+[m[32m *[m
+[32m+[m[32m * For the next R rows: read the first K single-spaced fields (K = number of[m
+[32m+[m[32m * widths), pad field k with spaces on its LEFT so it ends at the k-th[m
+[32m+[m[32m * cumulative width edge, then append the remainder of the row after the K-th[m
+[32m+[m[32m * field VERBATIM, starting with whatever spaces follow it. Nothing else[m
+[32m+[m[32m * changes; reconstruction is byte-exact. The reader applies the marker to[m
+[32m+[m[32m * exactly R following rows and refuses (throws) if the text runs out, lies[m
+[32m+[m[32m * about a width, or omits a field — fail closed.[m
+[32m+[m[32m *[m
+[32m+[m[32m * GATES (same discipline as ΣΤΉΛΗ)[m
+[32m+[m[32m * -------------------------------[m
+[32m+[m[32m *   G1 a stretch is at least MIN_ROWS rows and removes at least MIN_PAD[m
+[32m+[m[32m *      padding characters; grids need K ≥ MIN_FIELDS uniform edges[m
+[32m+[m[32m *   G2 every row is rebuilt from its own fields byte-for-byte BEFORE anything[m
+[32m+[m[32m *      is emitted; tab/CR rows and a pre-existing ॥ marker refuse the transform[m
+[32m+[m[32m *   G3 polysteliUndo(polysteliTransform(text)) === text on the whole message[m
+[32m+[m[32m *   G4 one call to the parent chain on the rewritten text, which must decode[m
+[32m+[m[32m *      to it exactly[m
+[32m+[m[32m *   G5 polysteliUndo(parent.decoded) === source[m
+[32m+[m[32m *   G6 the composed message must be strictly cheaper than the incumbent, or[m
+[32m+[m[32m *      the incumbent ships unchanged[m
+[32m+[m[32m *[m
+[32m+[m[32m * RE-ENTRANCY: the child is priced by the parent chain; IN_POLYSTELI makes the[m
+[32m+[m[32m * nested call refuse so the child's price contains exactly one level.[m
+[32m+[m[32m *[m
+[32m+[m[32m * Opt-out: OMEGA_NO_POLYSTELI=1.[m
+[32m+[m[32m */[m
+[32m+[m[32mimport { countTokens, type EncodingName } from './bpe';[m
+[32m+[m[32mimport { tagstackEncode, type TagstackResult } from './tagstack';[m
+[32m+[m
+[32m+[m[32mconst MARKER = '॥';[m
+[32m+[m[32mconst MIN_ROWS = 6;[m
+[32m+[m[32mconst MIN_PAD = 24;[m
+[32m+[m[32mconst MIN_FIELDS = 4;[m
+[32m+[m
+[32m+[m[32mexport interface PolysteliGrid {[m
+[32m+[m[32m  /** per-column widths; field k ends at the cumulative edge of widths[0..k] */[m
+[32m+[m[32m  widths: number[];[m
+[32m+[m[32m  rows: string[][];[m
+[32m+[m[32m  tails: string[];[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32minterface Stretch { grid: PolysteliGrid; padMass: number }[m
+[32m+[m
+[32m+[m[32m/** Right-edge tile fit: field k is the token ENDING at the k-th uniform edge. */[m
+[32m+[m[32mfunction fitStretch(lines: string[]): Stretch | null {[m
+[32m+[m[32m  const parsed: [string, number, number][][] = [];[m
+[32m+[m[32m  for (const l of lines) {[m
+[32m+[m[32m    if (l.includes('\t') || l.includes('\r')) return null;[m
+[32m+[m[32m    const f: [string, number, number][] = [];[m
+[32m+[m[32m    const re = /\S+/g;[m
+[32m+[m[32m    let m: RegExpExecArray | null;[m
+[32m+[m[32m    while ((m = re.exec(l))) f.push([m[0], m.index, m.index + m[0].length]);[m
+[32m+[m[32m    if (!f.length || f[0]![1] !== 0) return null;     // margin-zero grids only[m
+[32m+[m[32m    parsed.push(f);[m
+[32m+[m[32m  }[m
+[32m+[m[32m  const n = Math.min(...parsed.map((f) => f.length));[m
+[32m+[m[32m  if (n < MIN_FIELDS) return null;[m
+[32m+[m[32m  const ends: number[] = [];[m
+[32m+[m[32m  for (let c = 0; c < n; c++) {[m
+[32m+[m[32m    const set = new Set(parsed.map((f) => f[c]![2]));[m
+[32m+[m[32m    if (set.size !== 1) break;[m
+[32m+[m[32m    ends.push(parsed[0]![c]![2]);[m
+[32m+[m[32m  }[m
+[32m+[m[32m  if (ends.length < MIN_FIELDS) return null;[m
+[32m+[m[32m  const widths: number[] = [];[m
+[32m+[m[32m  let prev = 0;[m
+[32m+[m[32m  for (const e of ends) { widths.push(e - prev); prev = e; }[m
+[32m+[m[32m  const rows: string[][] = [], tails: string[] = [];[m
+[32m+[m[32m  let padMass = 0;[m
+[32m+[m[32m  for (const [i, f] of parsed.entries()) {[m
+[32m+[m[32m    if (f.length < ends.length) return null;[m
+[32m+[m[32m    const row: string[] = [];[m
+[32m+[m[32m    for (let c = 0; c < ends.length; c++) {[m

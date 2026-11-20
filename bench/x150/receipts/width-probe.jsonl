@@ -1,0 +1,4 @@
+{"path": "bench/holdout-x41/ps-aux-real.txt", "line_count": 62, "runs_ge_2": [{"start_1based": 2, "rows": 5, "first4_ends": [4, 16, 21, 26]}, {"start_1based": 8, "rows": 3, "first4_ends": [4, 16, 21, 26]}, {"start_1based": 12, "rows": 12, "first4_ends": [4, 16, 21, 26]}, {"start_1based": 25, "rows": 37, "first4_ends": [4, 16, 21, 26]}], "runs_ge_6_rows": 49}
+{"path": "bench/holdout-x41/ls-l-real.txt", "line_count": 152, "runs_ge_2": [{"start_1based": 3, "rows": 149, "first4_ends": [10, 13, 18, 23]}], "runs_ge_6_rows": 149}
+{"path": "bench/holdout-x42/ps-ef.txt", "line_count": 42, "runs_ge_2": [{"start_1based": 3, "rows": 39, "first4_ends": [4, 16, 24, 27]}], "runs_ge_6_rows": 39}
+{"path": "bench/holdout-tbl/kubectl-get-pods.txt", "line_count": 24, "runs_ge_2": [{"start_1based": 2, "rows": 22, "first4_ends": [25, 40, 52, 58]}], "runs_ge_6_rows": 22}

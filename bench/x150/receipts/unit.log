@@ -1,0 +1,41 @@
+{
+  "checks": 44,
+  "rows": [
+    {
+      "path": "bench/x150/fixtures/git-polysteli-color.diff",
+      "bytes": 20359,
+      "sites": 316,
+      "raw": 9210,
+      "coded": 4722,
+      "grossSaved": 4488,
+      "keyTokens": 85
+    },
+    {
+      "path": "bench/x150/fixtures/git-tagstack-color.diff",
+      "bytes": 2269,
+      "sites": 17,
+      "raw": 909,
+      "coded": 750,
+      "grossSaved": 159,
+      "keyTokens": 85
+    },
+    {
+      "path": "bench/x150/fixtures/git-tagstack-heldout-color.diff",
+      "bytes": 3335,
+      "sites": 14,
+      "raw": 1217,
+      "coded": 1091,
+      "grossSaved": 126,
+      "keyTokens": 85
+    },
+    {
+      "path": "bench/x150/fixtures/git-epitypos-color.diff",
+      "bytes": 3625,
+      "sites": 48,
+      "raw": 1634,
+      "coded": 996,
+      "grossSaved": 638,
+      "keyTokens": 85
+    }
+  ]
+}

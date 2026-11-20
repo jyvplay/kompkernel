@@ -1,0 +1,3 @@
+bench/holdout-x41/ps-aux-real.txt 989 223367 true
+bench/holdout-x42/ps-ef.txt 296 35403 true
+bench/holdout-tbl/kubectl-get-pods.txt 316 155609 true

@@ -1,5 +1,17 @@
 # X149 — ΠΟΛΥΣΤΗΛΗ turn record
 
+> **X150 correction:** The X149 implementation emitted padded `rebuilt` rows,
+> not compact rows. Consequently its old chain A/B and proposed explanation
+> do not evaluate the intended codec. The committed default-on frontier files
+> contained only 0 + 14 rows, so the claimed 28 other lanes being identical was
+> unsupported. The separate raw feasibility prototype was not a source-checked
+> chain result. The 138/237 lossy rewrite deltas are not proven upper bounds;
+> the 13→11 diff probe drops shared text and is not an exact comparison.
+> The 1.77× figure compares historical runs rather than a repeated controlled
+> A/B; X148 reported only 26/29 identical wires relative to its predecessor.
+> For repaired code, tests and updated receipts see `bench/x150/`. The historical
+> descriptions below must be read in light of this correction.
+
 New repository codec this turn: **ΠΟΛΥΣΤΗΛΗ** (`src/lib/omega/polysteli.ts`,
 wired into the chain after ΣΤΉΛΗ in `tagstack.ts`) — right-edge grid tiling with
 a verbatim multi-token tail. The mechanism ΣΤΉΛΗ (X124) cannot express: rows

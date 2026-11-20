@@ -1,0 +1,23 @@
+[
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "oldTokens": 989,
+    "newTokens": 989,
+    "wireIdentical": true,
+    "decodedFieldMatchesSource": true
+  },
+  {
+    "path": "bench/holdout-x42/ps-ef.txt",
+    "oldTokens": 296,
+    "newTokens": 296,
+    "wireIdentical": true,
+    "decodedFieldMatchesSource": true
+  },
+  {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "oldTokens": 316,
+    "newTokens": 316,
+    "wireIdentical": true,
+    "decodedFieldMatchesSource": true
+  }
+]
