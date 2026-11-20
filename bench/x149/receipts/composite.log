@@ -1,0 +1,4 @@
+bench/holdout-x41/ls-l-real.txt 1310 -> 1340 -30 584s/1229s
+bench/holdout-x41/ps-aux-real.txt 980 -> 1007 -27 90s/159s
+bench/holdout-x42/ps-ef.txt 296 -> 296 0 19s/33s
+bench/holdout-tbl/kubectl-get-pods.txt 300 -> 316 -16 57s/127s

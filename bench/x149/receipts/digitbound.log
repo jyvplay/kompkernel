@@ -1,0 +1,7 @@
+NUM du-real.txt <= 34
+NUM prices.csv <= 12
+NUM ls-real.txt <= 22
+NUM kubectl-get-pods.txt <= 18
+NUM ps-aux-real.txt <= 13
+NUM ls-l-real.txt <= 93
+NUM_TOTAL_UPPER_BOUND 237

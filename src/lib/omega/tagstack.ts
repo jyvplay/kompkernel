@@ -39,6 +39,7 @@ import { isomorphiaEncode, isomorphiaDisabled } from './isomorphia';
 import { metataxisEncode, metataxisDisabled } from './metataxis';
 import { platosEncode, platosDisabled } from './platos';
 import { steliEncode, steliDisabled } from './steli';
+import { polysteliEncode, polysteliDisabled } from './polysteli';
 import { syndyasmosDisabled, syndyasmosEncode } from './syndyasmos';
 import { gennadasDisabled, gennadasEncode } from './gennadas';
 import { diagrapheDisabled, diagrapheEncode } from './diagraphe';
@@ -853,6 +854,22 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
   if (!steliDisabled()) {
     try {
       admit('ΣΤΉΛΗ', steliEncode(text, enc, {
+        incumbent: best.messageTokens,
+        inner: (t: string, e: EncodingName) => tagstackX74ChainMeasured(t, e),
+      }) as unknown as WideResult);
+    } catch { /* not a candidate */ }
+  }
+
+  // X149 — ΠΟΛΥΣΤΗΛΗ. Right-edge tiling with a VERBATIM multi-token tail: rows
+  // whose trailing column contains spaces (`ls -l` names plus ` -> target`,
+  // `ps aux` commands) are exactly the rows ΣΤΉΛΗ's slice model cannot carry —
+  // steliTransform returns NULL on ls-l-real (measured, bench/x149). Conforming
+  // stretches sit inside each blank-line block; headers and odd rows pass
+  // through. Byte-exact G3-G5, strict gain G6. DEFAULT-OFF with a measured
+  // reason: see polysteliDisabled() — `OMEGA_POLYSTELI=1` measures the real chain.
+  if (!polysteliDisabled()) {
+    try {
+      admit('ΠΟΛΥΣΤΗΛΗ', polysteliEncode(text, enc, {
         incumbent: best.messageTokens,
         inner: (t: string, e: EncodingName) => tagstackX74ChainMeasured(t, e),
       }) as unknown as WideResult);

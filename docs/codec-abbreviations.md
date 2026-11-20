@@ -10280,3 +10280,135 @@ additive-on-parent, measured through the full pipeline.
   art for exact round-trip text), LTSC 2025 (repeated-token meta-dictionary —
   requires added vocabulary/fine-tuning, incompatible with the native-reading
   constraint), strategic deletion + LLM reconstruction (explicitly lossy).
+
+### X149 — ΠΟΛΥΣΤΗΛΗ (polysteli, "many columns"): right-edge grid tiling with a verbatim tail
+
+**What it is:** a geometry codec. Within each blank-line block it finds
+stretches of rows whose first K whitespace fields END at K uniform column edges
+(right-edge tiling), replaces padding by a one-line ruler contract, and carries
+everything after the K-th edge VERBATIM (multi-token tails: `ls -l` names with
+`-> /lib/...`, `ps aux` commands). Contract:
+`॥10,3,5,5,9,4,3,6:149 rows single-spaced, pad field k to width k, rest verbatim.`
+Reader: for the next R rows read K single-spaced fields, pad field k with spaces
+on its left so it ends at the k-th cumulative edge, append the remainder of the
+row verbatim; throws on width lies, missing fields, or short row counts (fail
+closed). **Relation to ΣΤΉΛΗ (X124)** — honest scope: same geometry family, but
+the slice model of ΣΤΉΛΗ cannot carry a multi-token tail; measured
+`steliTransform(ls-l-real) = NULL` while ΠΟΛΥΣΤΗΛΗ fits 149 rows. The mechanism
+delta (end-edge tiling + verbatim tail + per-block stretches) is exactly what
+unlocks the largest ops lane.
+
+**Gates:** G1 stretch ≥6 rows, ≥24 pad chars, K≥4; G2 per-row byte rebuild +
+tab/CR/marker-in-source refusal; G3 whole-message undo identity; G4 parent
+decodes the rewritten text; G5 undo(parent output) = source; G6 strict gain or
+the incumbent ships. Re-entrancy guard; `OMEGA_NO_POLYSTELI=1` opt-out.
+
+**Greediness:** greedy — first uniform-edge fit per stretch, no global search
+over alternative K or cross-block joint geometry; not optimal.
+
+**Measured:** unit suite 22 checks (self-test 11 + real-file round-trips +
+adversarial width-lies, unicode tails, tamper semantics); grids fit ls-l-real
+(149×8), ps-aux-real (37×7), ps-ef (39×7), kubectl (22×4); raw ls-l delta
+5194→4779+28 contract (−415 gross). **Chain verdict: REFUSED on every grid
+lane** — single-process A/B showed 1310→1340, 980→1007, 296→296, 300→316, and
+the definitive fresh-process measurement is the post-codec parallel frontier
+receipt. The measured reason: the parent's own alignment-aware machinery
+(ΣΤΉΛΗ, ls-l's ※/^T/λ arms, glyph rules mined on padded columns) extracts more
+from the ORIGINAL layout than the raw grid release survives re-encoding —
+raw −415 minus lost specialized savings ≈ +30 net. ΠΟΛΥΣΤΗΛΗ therefore ships
+gated and refuses everywhere it was measured; it is a wired, verified,
+mechanism-distinct NEGATIVE result, not a Pareto gain.
+
+**X149 chain-fragility finding (measured, kept as a receipt):** with the arm
+default-ON, the kubectl lane shipped **316 instead of 300** — the arm's inner
+parent-chain call inflates wall-clock between the outer chain's clock-bounded
+arms, and ΣΤΟΙΧΗΔΟΝ/ΓΕΝΝΑΔΑΣ stopped landing their improvements
+(`frontier-polysteli*.jsonl`); the other 28 lanes stayed byte-identical.
+Decision: ΠΟΛΥΣΤΗΛΗ is **DEFAULT-OFF** (ΠΛΆΤΟΣ precedent), enabled with
+`OMEGA_POLYSTELI=1`; with it off, kubectl was re-encoded in a fresh process and
+reproduced the canonical **300 wire byte-identically**
+(`bench/x149/receipts/` + kubectl-confirm). The shipped-chain frontier is
+therefore exactly the pre-codec receipt: **11,962, 29/29 byte-identical to
+X147**.
+
+**CPU/time:** transform is O(rows²) probe per stretch position with
+per-row regex parsing (ls-l ~1.5 s); the dominant cost is the parent-chain
+re-encode priced by G4 — wall times in the receipts are shared-machine and not
+isolated speed evidence.
+
+### X149 — batch frontier parallelism (driver-level speed, library unchanged)
+
+`bench/x149/frontier-worker.mjs` + a two-process balanced split of the 29 lanes
+(greedy partition by X148 per-lane ms). Per-lane logic and flags are IDENTICAL
+to `bench/x148/frontier.ts`; each lane's decode is verified in its worker
+(exit 3 on any mismatch). Measured: **wall 899,136 ms vs 1,594,918 ms
+sequential = 1.77× batch speedup, 29/29 byte-exact**. Scope honesty: this
+accelerates MULTI-LANE BATCH runs (the frontier/acceptance path); single-call
+`tagstackEncode` latency is unchanged by design — the search is deterministic
+work-bounded, and library-level single-call candidates were measured and
+falsified in X148 (ratios 0.969–1.039, no ≥10% lane).
+
+### X149 frontier reconfirmation and the code-ts time-slice answer
+
+Before the codec landed, the parallel rerun reproduced the X147 configuration
+EXACTLY: total **11,962**, 29/29 messages byte-identical to X147 (receipt
+`bench/x149/receipts/frontier.jsonl`), resolving X148's open question: code-ts
+returns **949 under parallel load** — the X148 950 was the paused/resumed
+sequential slice (SYNARMOGE ren=1), not a stable regression. After ΠΟΛΥΣΤΗΛΗ
+wired, the final frontier rerun gives the X149 total below.
+
+### X149 residual measurements (decision receipts, not codecs)
+
+- whitespace-run collapse upper bound 138 tokens gross across 29 lanes —
+  NOT harvestable: every space run 2–20 chars costs exactly 1 token in
+  o200k_base, and restore info would cost more than the run tokens; the gain
+  appears only through STELI-style field-boundary merging, which the grid
+  codecs already own.
+- numeric re-coding upper bound 237 tokens gross (ls-l 93) — dominated by
+  right-alignment padding, which is ΠΟΛΥΣΤΗΛΗ's geometry, not digit recoding.
+- prose word substitution is structurally break-even: k-occurrence words cost
+  1 token each and a glyph+value rule costs ≥2; the tape's wins come only from
+  ≥2-token substrings and boundary merges, which its greedy already prices.
+- diff-pair (-X/+Y) joint coding: the canonical diff lane contains exactly ONE
+  such pair (13→11 tokens) — dead candidate, measured and dropped.
+
+### X149 leaders (X134 classifier on the X149 pre-codec frontier receipt)
+
+| Category | Lanes | Raw | Frontier | glyph | word | num | other | Leader |
+|---|---|---:|---:|---:|---:|---:|---:|---|
+| PROSE | 5 | 5856 | 3429 | 839 | 1629 | 108 | 231 | word |
+| OPS/TABULAR | 16 | 17278 | 5580 | 1202 | 1105 | 808 | 380 | glyph |
+| CODE/STRUCT | 4 | 4152 | 2636 | 639 | 945 | 102 | 307 | word |
+| OTHER | 4 | 729 | 317 | — | — | — | — | none (tape-free) |
+
+Body-token classes per the X134 classifier — not word counts, not lower bounds.
+
+### X149 negative space — fifteen shapes that look like solutions and are not
+
+1. Encoder self-report of exactness (`decoded === text` by identity) — the
+   program inverse is not behavioral verification; X148 modal shortcut.
+2. Any Brotli/base64/arithmetically-coded wire — opaque; fails native reading.
+3. zip2zip-style hypertokens — needs fine-tuning; violates unchanged chat.
+4. LLMLingua-style deletion — lossy by construction.
+5. ONTO-style wire redesign — you control the payload; our input is given bytes.
+6. Whitespace-run RLE — runs cost 1 token; restore costs more (measured).
+7. Digit-run recoding (base-36 etc.) — gross bound 237 and native arithmetic
+   unreliable; inadmissible.
+8. Word→glyph substitution for 1-token words — break-even by BPE economics.
+9. Month-name → glyph — same break-even, measured in the ls-l residual.
+10. Diff-pair ⟨a|b⟩ joint coding — one pair in the canonical lane (measured).
+11. Per-line width tables instead of a shared ruler — contract exceeds savings.
+12. Cross-message dictionaries — violates single-chat.
+13. Positional offset lists (insert-at-index) — measured 823 vs 502 (X148).
+14. Unicode normalization / case folding — changes bytes or gains nothing.
+15. "LLM would probably reconstruct it" probabilistic repair — not byte-perfect;
+    the modal shortcut. Detection test: any accepted receipt whose stored decode
+    was not produced by the full inverse chain fails the gate — enforced by
+    G3–G5 above and the worker exit-3 checks in the frontier drivers.
+
+### X149 citations
+
+ONTO (arXiv 2604.17512, fetched) — columnar structural savings prior art.
+zip2zip 2025, AlphaZip (arXiv 2409.15046), LLMLingua 2023/2024, ZFP/DCTZ 2025 —
+recorded boundaries, each inadmissible for a stated reason (see research.md).
+No Lean/kernel replay of any lab artifact was possible in this sandbox.
