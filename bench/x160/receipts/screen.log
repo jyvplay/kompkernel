@@ -1,0 +1,84 @@
+[
+  { path: 'bench/holdout-x41/ls-l-real.txt', raw: 5194, refused: true },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    raw: 3054,
+    refused: true
+  },
+  { path: 'bench/holdout-x42/dpkg-l.txt', raw: 1000, refused: true },
+  { path: 'bench/holdout/json-pkg.txt', raw: 1152, refused: true },
+  { path: 'bench/holdout-x40/metrics.tsv', raw: 811, refused: true },
+  { path: 'bench/holdout-x41/ls-real.txt', raw: 1034, refused: true },
+  { path: 'bench/holdout-x42/df-h.txt', raw: 140, refused: true },
+  { path: 'bench/holdout-work/llm-answer.md', raw: 733, refused: true },
+  { path: 'bench/holdout-tbl/df-h.txt', raw: 570, refused: true },
+  {
+    path: 'bench/holdout-work/email-thread.txt',
+    raw: 629,
+    refused: true
+  },
+  { path: 'bench/holdout-x41/du-real.txt', raw: 458, refused: true },
+  { path: 'bench/holdout-x42/lsblk.txt', raw: 60, refused: true },
+  { path: 'bench/holdout-x42b/uptime-w.txt', raw: 80, refused: true },
+  {
+    path: 'bench/holdout-tbl/kubectl-get-pods.txt',
+    raw: 1006,
+    refused: true
+  },
+  { path: 'bench/holdout/code-ts.txt', raw: 1422, refused: true },
+  { path: 'bench/holdout-x41/apt-real.txt', raw: 2739, refused: true },
+  { path: 'bench/holdout-x41/node-help.txt', raw: 1099, refused: true },
+  { path: 'bench/holdout-x42/findmnt.txt', raw: 787, refused: true },
+  { path: 'bench/holdout-x40/cue-sheet.md', raw: 513, refused: true },
+  { path: 'bench/holdout-x42/ps-ef.txt', raw: 1144, refused: true },
+  { path: 'bench/holdout-x41/df-real.txt', raw: 158, refused: true },
+  { path: 'bench/holdout-x41/ps-real.txt', raw: 1106, refused: true },
+  { path: 'bench/holdout-x40/prices.csv', raw: 582, refused: true },
+  {
+    path: 'bench/holdout-tbl/psql-output.txt',
+    raw: 675,
+    refused: true
+  },
+  {
+    path: 'bench/holdout-tbl/markdown-table.md',
+    raw: 330,
+    refused: true
+  },
+  {
+    path: 'bench/holdout-work/kb-article.txt',
+    raw: 656,
+    refused: true
+  },
+  {
+    path: 'bench/holdout-work/unified-diff.patch',
+    raw: 578,
+    records: 2,
+    completeRaw: 553
+  },
+  { path: 'bench/holdout-x42b/free-m.txt', raw: 76, refused: true },
+  { path: 'bench/holdout-x42b/vmstat.txt', raw: 229, refused: true },
+  {
+    path: 'bench/x160/fixtures/constructed.diff',
+    raw: 803,
+    records: 12,
+    completeRaw: 506
+  },
+  {
+    path: 'bench/x160/fixtures/django.diff',
+    raw: 12991,
+    records: 21,
+    completeRaw: 12430
+  },
+  {
+    path: 'bench/x160/fixtures/isolation.diff',
+    raw: 718,
+    records: 4,
+    completeRaw: 629
+  },
+  {
+    path: 'bench/x160/fixtures/sphinx.diff',
+    raw: 12091,
+    records: 93,
+    completeRaw: 8341
+  }
+]

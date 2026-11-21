@@ -1,0 +1,1083 @@
+diff --git a/tests/roots/test-add_enumerable_node/conf.py b/tests/roots/test-add_enumerable_node/conf.py
+index a4801f6bb54..3840666ce13 100644
+--- a/tests/roots/test-add_enumerable_node/conf.py
++++ b/tests/roots/test-add_enumerable_node/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ import os
+ import sys
+ 
+diff --git a/tests/roots/test-add_enumerable_node/enumerable_node.py b/tests/roots/test-add_enumerable_node/enumerable_node.py
+index 1338c912577..782365e655b 100644
+--- a/tests/roots/test-add_enumerable_node/enumerable_node.py
++++ b/tests/roots/test-add_enumerable_node/enumerable_node.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ from docutils import nodes
+ from docutils.parsers.rst import Directive
+ 
+diff --git a/tests/roots/test-add_source_parser-conflicts-with-users-setting/conf.py b/tests/roots/test-add_source_parser-conflicts-with-users-setting/conf.py
+index 00a5a703905..3ad549153f9 100644
+--- a/tests/roots/test-add_source_parser-conflicts-with-users-setting/conf.py
++++ b/tests/roots/test-add_source_parser-conflicts-with-users-setting/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ import os
+ import sys
+ 
+diff --git a/tests/roots/test-add_source_parser-conflicts-with-users-setting/source_parser.py b/tests/roots/test-add_source_parser-conflicts-with-users-setting/source_parser.py
+index 69898ed91d7..69ad02db068 100644
+--- a/tests/roots/test-add_source_parser-conflicts-with-users-setting/source_parser.py
++++ b/tests/roots/test-add_source_parser-conflicts-with-users-setting/source_parser.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ from docutils.parsers import Parser
+ 
+ 
+diff --git a/tests/roots/test-add_source_parser/conf.py b/tests/roots/test-add_source_parser/conf.py
+index eface21e83d..9ff50b21e71 100644
+--- a/tests/roots/test-add_source_parser/conf.py
++++ b/tests/roots/test-add_source_parser/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ import os
+ import sys
+ 
+diff --git a/tests/roots/test-add_source_parser/source_parser.py b/tests/roots/test-add_source_parser/source_parser.py
+index 69898ed91d7..69ad02db068 100644
+--- a/tests/roots/test-add_source_parser/source_parser.py
++++ b/tests/roots/test-add_source_parser/source_parser.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ from docutils.parsers import Parser
+ 
+ 
+diff --git a/tests/roots/test-api-set-translator/conf.py b/tests/roots/test-api-set-translator/conf.py
+index 9a7312d65d7..5026b618684 100644
+--- a/tests/roots/test-api-set-translator/conf.py
++++ b/tests/roots/test-api-set-translator/conf.py
+@@ -1,4 +1,3 @@
+-# -*- coding: utf-8 -*-
+ # set this by test
+ # import os
+ # import sys
+diff --git a/tests/roots/test-api-set-translator/nonext/conf.py b/tests/roots/test-api-set-translator/nonext/conf.py
+index 5a92f736fb3..fd7da9a55b7 100644
+--- a/tests/roots/test-api-set-translator/nonext/conf.py
++++ b/tests/roots/test-api-set-translator/nonext/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ import os
+ import sys
+ 
+diff --git a/tests/roots/test-api-set-translator/translator.py b/tests/roots/test-api-set-translator/translator.py
+index 9be1c7addb1..723ebc1882c 100644
+--- a/tests/roots/test-api-set-translator/translator.py
++++ b/tests/roots/test-api-set-translator/translator.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ from sphinx.writers.html import HTMLTranslator
+ 
+ 
+diff --git a/tests/roots/test-basic/conf.py b/tests/roots/test-basic/conf.py
+index 31e7a6ed4ad..a98b9c42526 100644
+--- a/tests/roots/test-basic/conf.py
++++ b/tests/roots/test-basic/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-build-html-translator/conf.py b/tests/roots/test-build-html-translator/conf.py
+index 2a9301380a5..97279209ead 100644
+--- a/tests/roots/test-build-html-translator/conf.py
++++ b/tests/roots/test-build-html-translator/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ from sphinx.writers.html import HTMLTranslator
+ 
+ project = 'test'
+diff --git a/tests/roots/test-build-htmlhelp/conf.py b/tests/roots/test-build-htmlhelp/conf.py
+index 95293e95664..fcde6a5fcb5 100644
+--- a/tests/roots/test-build-htmlhelp/conf.py
++++ b/tests/roots/test-build-htmlhelp/conf.py
+@@ -1,4 +1,2 @@
+-# -*- coding: utf-8 -*-
+-
+ project = 'test'
+ master_doc = 'index'
+diff --git a/tests/roots/test-builder-gettext-dont-rebuild-mo/conf.py b/tests/roots/test-builder-gettext-dont-rebuild-mo/conf.py
+index 31e7a6ed4ad..a98b9c42526 100644
+--- a/tests/roots/test-builder-gettext-dont-rebuild-mo/conf.py
++++ b/tests/roots/test-builder-gettext-dont-rebuild-mo/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-default_role/conf.py b/tests/roots/test-default_role/conf.py
+index f81c30bc4bb..2a35d6957cd 100644
+--- a/tests/roots/test-default_role/conf.py
++++ b/tests/roots/test-default_role/conf.py
+@@ -1,3 +1 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+diff --git a/tests/roots/test-directive-code/conf.py b/tests/roots/test-directive-code/conf.py
+index aac0bc36af9..4ac99fc2746 100644
+--- a/tests/roots/test-directive-code/conf.py
++++ b/tests/roots/test-directive-code/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ exclude_patterns = ['_build']
+ numfig = True
+diff --git a/tests/roots/test-directive-code/literal-diff.inc b/tests/roots/test-directive-code/literal-diff.inc
+index dc2ec311684..f9c21e32b8d 100644
+--- a/tests/roots/test-directive-code/literal-diff.inc
++++ b/tests/roots/test-directive-code/literal-diff.inc
+@@ -1,5 +1,4 @@
+ # Literally included file using Python highlighting
+-# -*- coding: utf-8 -*-
+ 
+ foo = "Including Unicode characters: üöä"
+ 
+diff --git a/tests/roots/test-directive-code/literal.inc b/tests/roots/test-directive-code/literal.inc
+index a590f557bef..fa8f0ca0335 100644
+--- a/tests/roots/test-directive-code/literal.inc
++++ b/tests/roots/test-directive-code/literal.inc
+@@ -1,5 +1,4 @@
+ # Literally included file using Python highlighting
+-# -*- coding: utf-8 -*-
+ 
+ foo = "Including Unicode characters: üöä"
+ 
+diff --git a/tests/roots/test-directive-code/py-decorators.inc b/tests/roots/test-directive-code/py-decorators.inc
+index b1864ab8d4f..012d5d57246 100644
+--- a/tests/roots/test-directive-code/py-decorators.inc
++++ b/tests/roots/test-directive-code/py-decorators.inc
+@@ -1,5 +1,4 @@
+ # Literally included file using Python highlighting
+-# -*- coding: utf-8 -*-
+ 
+ @class_decorator
+ @other_decorator()
+diff --git a/tests/roots/test-directive-code/target.py b/tests/roots/test-directive-code/target.py
+index a5c678648bc..b95dffbf9ef 100644
+--- a/tests/roots/test-directive-code/target.py
++++ b/tests/roots/test-directive-code/target.py
+@@ -1,5 +1,4 @@
+ # Literally included file using Python highlighting
+-# -*- coding: utf-8 -*-
+ 
+ foo = "Including Unicode characters: üöä"
+ 
+diff --git a/tests/roots/test-directives-raw/conf.py b/tests/roots/test-directives-raw/conf.py
+index f81c30bc4bb..2a35d6957cd 100644
+--- a/tests/roots/test-directives-raw/conf.py
++++ b/tests/roots/test-directives-raw/conf.py
+@@ -1,3 +1 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+diff --git a/tests/roots/test-docutilsconf/conf.py b/tests/roots/test-docutilsconf/conf.py
+index 0a88a65fdaf..d7f27e6e113 100644
+--- a/tests/roots/test-docutilsconf/conf.py
++++ b/tests/roots/test-docutilsconf/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ project = 'Sphinx docutils conf <Tests>'
+ source_suffix = '.txt'
+ keep_warnings = True
+diff --git a/tests/roots/test-domain-cpp/conf.py b/tests/roots/test-domain-cpp/conf.py
+index c46e4077351..d506716e5f9 100644
+--- a/tests/roots/test-domain-cpp/conf.py
++++ b/tests/roots/test-domain-cpp/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-domain-js/conf.py b/tests/roots/test-domain-js/conf.py
+index c46e4077351..d506716e5f9 100644
+--- a/tests/roots/test-domain-js/conf.py
++++ b/tests/roots/test-domain-js/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-domain-py/conf.py b/tests/roots/test-domain-py/conf.py
+index c46e4077351..d506716e5f9 100644
+--- a/tests/roots/test-domain-py/conf.py
++++ b/tests/roots/test-domain-py/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-double-inheriting-theme/conf.py b/tests/roots/test-double-inheriting-theme/conf.py
+index 0ca0198389c..edb8928cd50 100644
+--- a/tests/roots/test-double-inheriting-theme/conf.py
++++ b/tests/roots/test-double-inheriting-theme/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ templates_path = ['_templates']
+ master_doc = 'index'
+ html_theme = 'base_theme2'
+diff --git a/tests/roots/test-epub-anchor-id/conf.py b/tests/roots/test-epub-anchor-id/conf.py
+index 3b73e08114e..dcee678b820 100644
+--- a/tests/roots/test-epub-anchor-id/conf.py
++++ b/tests/roots/test-epub-anchor-id/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-ext-autodoc/target/__init__.py b/tests/roots/test-ext-autodoc/target/__init__.py
+index f30045292c4..c60bab20bff 100644
+--- a/tests/roots/test-ext-autodoc/target/__init__.py
++++ b/tests/roots/test-ext-autodoc/target/__init__.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ import enum
+ from io import StringIO
+ 
+diff --git a/tests/roots/test-ext-autosectionlabel-prefix-document/conf.py b/tests/roots/test-ext-autosectionlabel-prefix-document/conf.py
+index 0a6491dd358..d28749500a2 100644
+--- a/tests/roots/test-ext-autosectionlabel-prefix-document/conf.py
++++ b/tests/roots/test-ext-autosectionlabel-prefix-document/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ extensions = ['sphinx.ext.autosectionlabel']
+ master_doc = 'index'
+ autosectionlabel_prefix_document = True
+diff --git a/tests/roots/test-ext-autosectionlabel/conf.py b/tests/roots/test-ext-autosectionlabel/conf.py
+index 4a06c183589..7e8cc34084f 100644
+--- a/tests/roots/test-ext-autosectionlabel/conf.py
++++ b/tests/roots/test-ext-autosectionlabel/conf.py
+@@ -1,4 +1,2 @@
+-# -*- coding: utf-8 -*-
+-
+ extensions = ['sphinx.ext.autosectionlabel']
+ master_doc = 'index'
+diff --git a/tests/roots/test-ext-githubpages/conf.py b/tests/roots/test-ext-githubpages/conf.py
+index a05848fa616..8fc08db64f7 100644
+--- a/tests/roots/test-ext-githubpages/conf.py
++++ b/tests/roots/test-ext-githubpages/conf.py
+@@ -1,4 +1,2 @@
+-# -*- coding: utf-8 -*-
+-
+ extensions = ['sphinx.ext.githubpages']
+ master_doc = 'index'
+diff --git a/tests/roots/test-ext-graphviz/conf.py b/tests/roots/test-ext-graphviz/conf.py
+index 2696280eeb1..a90de01a072 100644
+--- a/tests/roots/test-ext-graphviz/conf.py
++++ b/tests/roots/test-ext-graphviz/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ extensions = ['sphinx.ext.graphviz']
+ master_doc = 'index'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-ext-ifconfig/conf.py b/tests/roots/test-ext-ifconfig/conf.py
+index dc3c93b2237..6b9dc7ce3c2 100644
+--- a/tests/roots/test-ext-ifconfig/conf.py
++++ b/tests/roots/test-ext-ifconfig/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ extensions = ['sphinx.ext.ifconfig']
+ master_doc = 'index'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-ext-imgconverter/conf.py b/tests/roots/test-ext-imgconverter/conf.py
+index 67cee152dba..d01569a7d85 100644
+--- a/tests/roots/test-ext-imgconverter/conf.py
++++ b/tests/roots/test-ext-imgconverter/conf.py
+@@ -1,4 +1,2 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ extensions = ['sphinx.ext.imgconverter']
+diff --git a/tests/roots/test-ext-inheritance_diagram/conf.py b/tests/roots/test-ext-inheritance_diagram/conf.py
+index 18680c1d9f3..ad1693966c5 100644
+--- a/tests/roots/test-ext-inheritance_diagram/conf.py
++++ b/tests/roots/test-ext-inheritance_diagram/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ import os
+ import sys
+ 
+diff --git a/tests/roots/test-ext-inheritance_diagram/test.py b/tests/roots/test-ext-inheritance_diagram/test.py
+index 32f7f273c2d..7d5cabeefe2 100644
+--- a/tests/roots/test-ext-inheritance_diagram/test.py
++++ b/tests/roots/test-ext-inheritance_diagram/test.py
+@@ -1,6 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+-
+ class Foo(object):
+     pass
+ 
+diff --git a/tests/roots/test-ext-intersphinx-cppdomain/conf.py b/tests/roots/test-ext-intersphinx-cppdomain/conf.py
+index cbc4a8f432f..0328a635034 100644
+--- a/tests/roots/test-ext-intersphinx-cppdomain/conf.py
++++ b/tests/roots/test-ext-intersphinx-cppdomain/conf.py
+@@ -1,4 +1,2 @@
+-# -*- coding: utf-8 -*-
+-
+ extensions = ['sphinx.ext.intersphinx']
+ master_doc = 'index'
+diff --git a/tests/roots/test-ext-math-compat/conf.py b/tests/roots/test-ext-math-compat/conf.py
+index c4f6005ea71..aaa73ec75ad 100644
+--- a/tests/roots/test-ext-math-compat/conf.py
++++ b/tests/roots/test-ext-math-compat/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ from docutils.parsers.rst import Directive
+ 
+ from sphinx.ext.mathbase import math, displaymath
+diff --git a/tests/roots/test-ext-math-simple/conf.py b/tests/roots/test-ext-math-simple/conf.py
+index 3fe886c1710..f3def53cbd1 100644
+--- a/tests/roots/test-ext-math-simple/conf.py
++++ b/tests/roots/test-ext-math-simple/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-ext-math/conf.py b/tests/roots/test-ext-math/conf.py
+index 3fe886c1710..f3def53cbd1 100644
+--- a/tests/roots/test-ext-math/conf.py
++++ b/tests/roots/test-ext-math/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-ext-todo/conf.py b/tests/roots/test-ext-todo/conf.py
+index 5d56192452d..119357108ce 100644
+--- a/tests/roots/test-ext-todo/conf.py
++++ b/tests/roots/test-ext-todo/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ extensions = ['sphinx.ext.todo']
+ master_doc = 'index'
+ 
+diff --git a/tests/roots/test-ext-viewcode-find/conf.py b/tests/roots/test-ext-viewcode-find/conf.py
+index 98f9e5fbb16..83bde5cf949 100644
+--- a/tests/roots/test-ext-viewcode-find/conf.py
++++ b/tests/roots/test-ext-viewcode-find/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ extensions = ['sphinx.ext.viewcode']
+ master_doc = 'index'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-ext-viewcode/conf.py b/tests/roots/test-ext-viewcode/conf.py
+index 53ce4f7ce9e..940d24ba8a3 100644
+--- a/tests/roots/test-ext-viewcode/conf.py
++++ b/tests/roots/test-ext-viewcode/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ import os
+ import sys
+ 
+diff --git a/tests/roots/test-footnotes/conf.py b/tests/roots/test-footnotes/conf.py
+index c46e4077351..d506716e5f9 100644
+--- a/tests/roots/test-footnotes/conf.py
++++ b/tests/roots/test-footnotes/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-gettext-template/conf.py b/tests/roots/test-gettext-template/conf.py
+index 1f4d84d077d..3f793b7cfcc 100644
+--- a/tests/roots/test-gettext-template/conf.py
++++ b/tests/roots/test-gettext-template/conf.py
+@@ -1,3 +1 @@
+-# -*- coding: utf-8 -*-
+-
+ templates_path = ['_templates']
+diff --git a/tests/roots/test-glossary/conf.py b/tests/roots/test-glossary/conf.py
+index 31e7a6ed4ad..a98b9c42526 100644
+--- a/tests/roots/test-glossary/conf.py
++++ b/tests/roots/test-glossary/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-html_assets/conf.py b/tests/roots/test-html_assets/conf.py
+index 1a82bc9ccb1..b652d2b9ac1 100644
+--- a/tests/roots/test-html_assets/conf.py
++++ b/tests/roots/test-html_assets/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ project = 'Sphinx'
+ version = '1.4.4'
+diff --git a/tests/roots/test-html_entity/conf.py b/tests/roots/test-html_entity/conf.py
+index c46e4077351..d506716e5f9 100644
+--- a/tests/roots/test-html_entity/conf.py
++++ b/tests/roots/test-html_entity/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-image-in-parsed-literal/conf.py b/tests/roots/test-image-in-parsed-literal/conf.py
+index 6c2d881a0b9..7d5209029d0 100644
+--- a/tests/roots/test-image-in-parsed-literal/conf.py
++++ b/tests/roots/test-image-in-parsed-literal/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ exclude_patterns = ['_build']
+ 
+diff --git a/tests/roots/test-image-in-section/conf.py b/tests/roots/test-image-in-section/conf.py
+index 77f31b51504..b5ad2b48e7b 100644
+--- a/tests/roots/test-image-in-section/conf.py
++++ b/tests/roots/test-image-in-section/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ exclude_patterns = ['_build']
+ 
+diff --git a/tests/roots/test-images/conf.py b/tests/roots/test-images/conf.py
+index f81c30bc4bb..2a35d6957cd 100644
+--- a/tests/roots/test-images/conf.py
++++ b/tests/roots/test-images/conf.py
+@@ -1,3 +1 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+diff --git a/tests/roots/test-intl/conf.py b/tests/roots/test-intl/conf.py
+index 0306ff38ee3..96ac664f21d 100644
+--- a/tests/roots/test-intl/conf.py
++++ b/tests/roots/test-intl/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ project = 'Sphinx intl <Tests>'
+ source_suffix = '.txt'
+ keep_warnings = True
+diff --git a/tests/roots/test-keep_warnings/conf.py b/tests/roots/test-keep_warnings/conf.py
+index d0db3db8389..2a293848b5a 100644
+--- a/tests/roots/test-keep_warnings/conf.py
++++ b/tests/roots/test-keep_warnings/conf.py
+@@ -1,4 +1,2 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ keep_warnings = True
+diff --git a/tests/roots/test-latex-babel/conf.py b/tests/roots/test-latex-babel/conf.py
+index d35acc89f5d..dbc8b3f70bd 100644
+--- a/tests/roots/test-latex-babel/conf.py
++++ b/tests/roots/test-latex-babel/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ numfig_format = {
+     'figure': 'Fig. %s',
+diff --git a/tests/roots/test-latex-equations/conf.py b/tests/roots/test-latex-equations/conf.py
+index 101e491e080..0957543e667 100644
+--- a/tests/roots/test-latex-equations/conf.py
++++ b/tests/roots/test-latex-equations/conf.py
+@@ -1,4 +1,2 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'equations'
+ extensions = ['sphinx.ext.imgmath']
+diff --git a/tests/roots/test-latex-index/conf.py b/tests/roots/test-latex-index/conf.py
+index f81c30bc4bb..2a35d6957cd 100644
+--- a/tests/roots/test-latex-index/conf.py
++++ b/tests/roots/test-latex-index/conf.py
+@@ -1,3 +1 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+diff --git a/tests/roots/test-latex-labels/conf.py b/tests/roots/test-latex-labels/conf.py
+index 31e7a6ed4ad..a98b9c42526 100644
+--- a/tests/roots/test-latex-labels/conf.py
++++ b/tests/roots/test-latex-labels/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-latex-numfig/conf.py b/tests/roots/test-latex-numfig/conf.py
+index 506186b266f..2d60d05da5c 100644
+--- a/tests/roots/test-latex-numfig/conf.py
++++ b/tests/roots/test-latex-numfig/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ extensions = ['sphinx.ext.imgmath']  # for math_numfig
+diff --git a/tests/roots/test-latex-table/conf.py b/tests/roots/test-latex-table/conf.py
+index 31e7a6ed4ad..a98b9c42526 100644
+--- a/tests/roots/test-latex-table/conf.py
++++ b/tests/roots/test-latex-table/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-latex-title/conf.py b/tests/roots/test-latex-title/conf.py
+index 709f1be485a..f77dd159760 100644
+--- a/tests/roots/test-latex-title/conf.py
++++ b/tests/roots/test-latex-title/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ # set empty string to the third column to use the first section title to document title
+diff --git a/tests/roots/test-manpage_url/conf.py b/tests/roots/test-manpage_url/conf.py
+index c46e4077351..d506716e5f9 100644
+--- a/tests/roots/test-manpage_url/conf.py
++++ b/tests/roots/test-manpage_url/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-markup-citation/conf.py b/tests/roots/test-markup-citation/conf.py
+index 31e7a6ed4ad..a98b9c42526 100644
+--- a/tests/roots/test-markup-citation/conf.py
++++ b/tests/roots/test-markup-citation/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-markup-rubric/conf.py b/tests/roots/test-markup-rubric/conf.py
+index 31e7a6ed4ad..a98b9c42526 100644
+--- a/tests/roots/test-markup-rubric/conf.py
++++ b/tests/roots/test-markup-rubric/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-maxlistdepth/conf.py b/tests/roots/test-maxlistdepth/conf.py
+index 41d8a201ea0..3a65738470e 100644
+--- a/tests/roots/test-maxlistdepth/conf.py
++++ b/tests/roots/test-maxlistdepth/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-metadata/conf.py b/tests/roots/test-metadata/conf.py
+index f81c30bc4bb..2a35d6957cd 100644
+--- a/tests/roots/test-metadata/conf.py
++++ b/tests/roots/test-metadata/conf.py
+@@ -1,3 +1 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+diff --git a/tests/roots/test-need-escaped/conf.py b/tests/roots/test-need-escaped/conf.py
+index d65a22e0739..38b21c69438 100644
+--- a/tests/roots/test-need-escaped/conf.py
++++ b/tests/roots/test-need-escaped/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ project = 'need <b>"escaped"</b> project'
+ smartquotes = False
+diff --git a/tests/roots/test-nested-enumerated-list/conf.py b/tests/roots/test-nested-enumerated-list/conf.py
+index 31e7a6ed4ad..a98b9c42526 100644
+--- a/tests/roots/test-nested-enumerated-list/conf.py
++++ b/tests/roots/test-nested-enumerated-list/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-numfig/conf.py b/tests/roots/test-numfig/conf.py
+index c46e4077351..d506716e5f9 100644
+--- a/tests/roots/test-numfig/conf.py
++++ b/tests/roots/test-numfig/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-prolog/conf.py b/tests/roots/test-prolog/conf.py
+index a52ca878a3f..f6e19c0448e 100644
+--- a/tests/roots/test-prolog/conf.py
++++ b/tests/roots/test-prolog/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ import os
+ import sys
+ sys.path.insert(0, os.path.abspath('.'))
+diff --git a/tests/roots/test-prolog/prolog_markdown_parser.py b/tests/roots/test-prolog/prolog_markdown_parser.py
+index 56ce3cf5a32..f8d787ce5f6 100644
+--- a/tests/roots/test-prolog/prolog_markdown_parser.py
++++ b/tests/roots/test-prolog/prolog_markdown_parser.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ from docutils.parsers import Parser
+ 
+ 
+diff --git a/tests/roots/test-pycode-egg/conf.py b/tests/roots/test-pycode-egg/conf.py
+index a8e25882be8..8840900a21a 100644
+--- a/tests/roots/test-pycode-egg/conf.py
++++ b/tests/roots/test-pycode-egg/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ import os
+ import sys
+ 
+diff --git a/tests/roots/test-pycode-egg/src/sample.py b/tests/roots/test-pycode-egg/src/sample.py
+index c4d3d61e8ff..2ecf577f637 100644
+--- a/tests/roots/test-pycode-egg/src/sample.py
++++ b/tests/roots/test-pycode-egg/src/sample.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ #: constant on sample.py
+ CONSTANT = 1
+ 
+diff --git a/tests/roots/test-pycode-egg/src/setup.py b/tests/roots/test-pycode-egg/src/setup.py
+index f23c80a06dd..6ad4986e497 100644
+--- a/tests/roots/test-pycode-egg/src/setup.py
++++ b/tests/roots/test-pycode-egg/src/setup.py
+@@ -1,4 +1,3 @@
+-# -*- coding: utf-8 -*-
+ from setuptools import setup
+ 
+ 
+diff --git a/tests/roots/test-refonly_bullet_list/conf.py b/tests/roots/test-refonly_bullet_list/conf.py
+index 68357c9a402..5c878531aa3 100644
+--- a/tests/roots/test-refonly_bullet_list/conf.py
++++ b/tests/roots/test-refonly_bullet_list/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_compact_lists = False
+ 
+diff --git a/tests/roots/test-roles-download/conf.py b/tests/roots/test-roles-download/conf.py
+index 31e7a6ed4ad..a98b9c42526 100644
+--- a/tests/roots/test-roles-download/conf.py
++++ b/tests/roots/test-roles-download/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-root/autodoc_target.py b/tests/roots/test-root/autodoc_target.py
+index 9f02a6b219b..a1540d90a66 100644
+--- a/tests/roots/test-root/autodoc_target.py
++++ b/tests/roots/test-root/autodoc_target.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ import enum
+ from io import StringIO
+ 
+diff --git a/tests/roots/test-root/conf.py b/tests/roots/test-root/conf.py
+index 43fe39df144..1213a14482e 100644
+--- a/tests/roots/test-root/conf.py
++++ b/tests/roots/test-root/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ import os
+ import sys
+ 
+diff --git a/tests/roots/test-root/literal_orig.inc b/tests/roots/test-root/literal_orig.inc
+index 14fd214c4d3..cfb5dd1e877 100644
+--- a/tests/roots/test-root/literal_orig.inc
++++ b/tests/roots/test-root/literal_orig.inc
+@@ -1,5 +1,4 @@
+ # Literally included file using Python highlighting
+-# -*- coding: utf-8 -*-
+ 
+ foo = "Including Unicode characters: üöä"  # This will be changed
+ 
+diff --git a/tests/roots/test-setup/doc/conf.py b/tests/roots/test-setup/doc/conf.py
+index b1c9acf46fc..f4dc6d624bc 100644
+--- a/tests/roots/test-setup/doc/conf.py
++++ b/tests/roots/test-setup/doc/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ project = 'Sphinx smallest project'
+ source_suffix = '.txt'
+ keep_warnings = True
+diff --git a/tests/roots/test-smartquotes/conf.py b/tests/roots/test-smartquotes/conf.py
+index 31e7a6ed4ad..a98b9c42526 100644
+--- a/tests/roots/test-smartquotes/conf.py
++++ b/tests/roots/test-smartquotes/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-stylesheets/conf.py b/tests/roots/test-stylesheets/conf.py
+index cae940080e1..f67c13cf586 100644
+--- a/tests/roots/test-stylesheets/conf.py
++++ b/tests/roots/test-stylesheets/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ templates_path = ['_templates']
+diff --git a/tests/roots/test-templating/conf.py b/tests/roots/test-templating/conf.py
+index 4a21054ed83..e03eaf18f5a 100644
+--- a/tests/roots/test-templating/conf.py
++++ b/tests/roots/test-templating/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ project = 'Sphinx templating <Tests>'
+ source_suffix = '.txt'
+ keep_warnings = True
+diff --git a/tests/roots/test-theming/conf.py b/tests/roots/test-theming/conf.py
+index 15911eb3a71..7b6726b1568 100644
+--- a/tests/roots/test-theming/conf.py
++++ b/tests/roots/test-theming/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ html_theme = 'test-theme'
+ html_theme_path = ['.', 'test_theme']
+ master_doc = 'index'
+diff --git a/tests/roots/test-theming/setup.py b/tests/roots/test-theming/setup.py
+index 77a5ada13d0..e62007f36e8 100644
+--- a/tests/roots/test-theming/setup.py
++++ b/tests/roots/test-theming/setup.py
+@@ -1,6 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+-# -*- coding: utf-8 -*-
+ from setuptools import setup, find_packages
+ 
+ setup(
+diff --git a/tests/roots/test-theming/test_theme/__init__.py b/tests/roots/test-theming/test_theme/__init__.py
+index 3474a8289e8..398408c5d57 100644
+--- a/tests/roots/test-theming/test_theme/__init__.py
++++ b/tests/roots/test-theming/test_theme/__init__.py
+@@ -1,4 +1,3 @@
+-# -*- coding: utf-8 -*-
+ import os
+ 
+ 
+diff --git a/tests/roots/test-tocdepth/conf.py b/tests/roots/test-tocdepth/conf.py
+index c46e4077351..d506716e5f9 100644
+--- a/tests/roots/test-tocdepth/conf.py
++++ b/tests/roots/test-tocdepth/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-toctree-empty/conf.py b/tests/roots/test-toctree-empty/conf.py
+index dac85eb9a74..ce27eb5febb 100644
+--- a/tests/roots/test-toctree-empty/conf.py
++++ b/tests/roots/test-toctree-empty/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-toctree-glob/conf.py b/tests/roots/test-toctree-glob/conf.py
+index c46e4077351..d506716e5f9 100644
+--- a/tests/roots/test-toctree-glob/conf.py
++++ b/tests/roots/test-toctree-glob/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-toctree-maxdepth/conf.py b/tests/roots/test-toctree-maxdepth/conf.py
+index c46e4077351..d506716e5f9 100644
+--- a/tests/roots/test-toctree-maxdepth/conf.py
++++ b/tests/roots/test-toctree-maxdepth/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ html_theme = 'classic'
+ exclude_patterns = ['_build']
+diff --git a/tests/roots/test-toctree/conf.py b/tests/roots/test-toctree/conf.py
+index 31e7a6ed4ad..a98b9c42526 100644
+--- a/tests/roots/test-toctree/conf.py
++++ b/tests/roots/test-toctree/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ latex_documents = [
+diff --git a/tests/roots/test-trim_doctest_flags/conf.py b/tests/roots/test-trim_doctest_flags/conf.py
+index 693c7c3711f..41452bb8162 100644
+--- a/tests/roots/test-trim_doctest_flags/conf.py
++++ b/tests/roots/test-trim_doctest_flags/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ master_doc = 'index'
+ 
+ extensions = ['sphinx.ext.doctest']
+diff --git a/tests/roots/test-warnings/conf.py b/tests/roots/test-warnings/conf.py
+index 9fbcab199ce..4b57aebcbbb 100644
+--- a/tests/roots/test-warnings/conf.py
++++ b/tests/roots/test-warnings/conf.py
+@@ -1,5 +1,3 @@
+-# -*- coding: utf-8 -*-
+-
+ import os
+ import sys
+ sys.path.append(os.path.abspath('.'))
+diff --git a/tests/test_config.py b/tests/test_config.py
+index a94fa3160b7..919921468d7 100644
+--- a/tests/test_config.py
++++ b/tests/test_config.py
+@@ -126,9 +126,7 @@ def test_errors_warnings(logger, tempdir):
+     assert 'conf.py' in str(excinfo.value)
+ 
+     # test the automatic conversion of 2.x only code in configs
+-    (tempdir / 'conf.py').write_text(
+-        '# -*- coding: utf-8\n\nproject = u"Jägermeister"\n',
+-        encoding='utf-8')
++    (tempdir / 'conf.py').write_text('project = u"Jägermeister"\n', encoding='utf-8')
+     cfg = Config.read(tempdir, {}, None)
+     cfg.init_values()
+     assert cfg.project == 'Jägermeister'
+diff --git a/tests/test_directive_code.py b/tests/test_directive_code.py
+index c369df45090..02ac5e8af57 100644
+--- a/tests/test_directive_code.py
++++ b/tests/test_directive_code.py
+@@ -36,18 +36,18 @@ def test_LiteralIncludeReader(literal_inc_path):
+     reader = LiteralIncludeReader(literal_inc_path, options, DUMMY_CONFIG)
+     content, lines = reader.read()
+     assert content == literal_inc_path.text()
+-    assert lines == 14
++    assert lines == 13
+     assert reader.lineno_start == 1
+ 
+ 
+ @pytest.mark.xfail(os.name != 'posix', reason="Not working on windows")
+ def test_LiteralIncludeReader_lineno_start(literal_inc_path):
+-    options = {'lineno-start': 5}
++    options = {'lineno-start': 4}
+     reader = LiteralIncludeReader(literal_inc_path, options, DUMMY_CONFIG)
+     content, lines = reader.read()
+     assert content == literal_inc_path.text()
+-    assert lines == 14
+-    assert reader.lineno_start == 5
++    assert lines == 13
++    assert reader.lineno_start == 4
+ 
+ 
+ @pytest.mark.xfail(os.name != 'posix', reason="Not working on windows")
+@@ -57,7 +57,7 @@ def test_LiteralIncludeReader_pyobject1(literal_inc_path):
+     content, lines = reader.read()
+     assert content == ("class Foo:\n"
+                        "    pass\n")
+-    assert reader.lineno_start == 6
++    assert reader.lineno_start == 5
+ 
+ 
+ @pytest.mark.xfail(os.name != 'posix', reason="Not working on windows")
+@@ -91,18 +91,17 @@ def test_LiteralIncludeReader_pyobject_and_lines(literal_inc_path):
+ 
+ @pytest.mark.xfail(os.name != 'posix', reason="Not working on windows")
+ def test_LiteralIncludeReader_lines1(literal_inc_path):
+-    options = {'lines': '1-4'}
++    options = {'lines': '1-3'}
+     reader = LiteralIncludeReader(literal_inc_path, options, DUMMY_CONFIG)
+     content, lines = reader.read()
+     assert content == ("# Literally included file using Python highlighting\n"
+-                       "# -*- coding: utf-8 -*-\n"
+                        "\n"
+                        "foo = \"Including Unicode characters: üöä\"\n")
+ 
+ 
+ @pytest.mark.xfail(os.name != 'posix', reason="Not working on windows")
+ def test_LiteralIncludeReader_lines2(literal_inc_path):
+-    options = {'lines': '1,4,6'}
++    options = {'lines': '1,3,5'}
+     reader = LiteralIncludeReader(literal_inc_path, options, DUMMY_CONFIG)
+     content, lines = reader.read()
+     assert content == ("# Literally included file using Python highlighting\n"
+@@ -112,18 +111,18 @@ def test_LiteralIncludeReader_lines2(literal_inc_path):
+ 
+ @pytest.mark.xfail(os.name != 'posix', reason="Not working on windows")
+ def test_LiteralIncludeReader_lines_and_lineno_match1(literal_inc_path):
+-    options = {'lines': '4-6', 'lineno-match': True}
++    options = {'lines': '3-5', 'lineno-match': True}
+     reader = LiteralIncludeReader(literal_inc_path, options, DUMMY_CONFIG)
+     content, lines = reader.read()
+     assert content == ("foo = \"Including Unicode characters: üöä\"\n"
+                        "\n"
+                        "class Foo:\n")
+-    assert reader.lineno_start == 4
++    assert reader.lineno_start == 3
+ 
+ 
+ @pytest.mark.sphinx()  # init locale for errors
+ def test_LiteralIncludeReader_lines_and_lineno_match2(literal_inc_path, app, status, warning):
+-    options = {'lines': '1,4,6', 'lineno-match': True}
++    options = {'lines': '0,3,5', 'lineno-match': True}
+     reader = LiteralIncludeReader(literal_inc_path, options, DUMMY_CONFIG)
+     with pytest.raises(ValueError):
+         content, lines = reader.read()
+@@ -146,7 +145,7 @@ def test_LiteralIncludeReader_start_at(literal_inc_path):
+                        "    pass\n"
+                        "\n"
+                        "class Bar:\n")
+-    assert reader.lineno_start == 6
++    assert reader.lineno_start == 5
+ 
+ 
+ @pytest.mark.xfail(os.name != 'posix', reason="Not working on windows")
+@@ -156,13 +155,13 @@ def test_LiteralIncludeReader_start_after(literal_inc_path):
+     content, lines = reader.read()
+     assert content == ("    pass\n"
+                        "\n")
+-    assert reader.lineno_start == 7
++    assert reader.lineno_start == 6
+ 
+ 
+ @pytest.mark.xfail(os.name != 'posix', reason="Not working on windows")
+ def test_LiteralIncludeReader_start_after_and_lines(literal_inc_path):
+     options = {'lineno-match': True, 'lines': '6-',
+-               'start-after': 'coding', 'end-before': 'comment'}
++               'start-after': 'Literally', 'end-before': 'comment'}
+     reader = LiteralIncludeReader(literal_inc_path, options, DUMMY_CONFIG)
+     content, lines = reader.read()
+     assert content == ("\n"
+@@ -170,7 +169,7 @@ def test_LiteralIncludeReader_start_after_and_lines(literal_inc_path):
+                        "    def baz():\n"
+                        "        pass\n"
+                        "\n")
+-    assert reader.lineno_start == 8
++    assert reader.lineno_start == 7
+ 
+ 
+ @pytest.mark.xfail(os.name != 'posix', reason="Not working on windows")
+@@ -219,7 +218,7 @@ def test_LiteralIncludeReader_prepend(literal_inc_path):
+ @pytest.mark.xfail(os.name != 'posix', reason="Not working on windows")
+ def test_LiteralIncludeReader_dedent(literal_inc_path):
+     # dedent: 2
+-    options = {'lines': '10-12', 'dedent': 2}
++    options = {'lines': '9-11', 'dedent': 2}
+     reader = LiteralIncludeReader(literal_inc_path, options, DUMMY_CONFIG)
+     content, lines = reader.read()
+     assert content == ("  def baz():\n"
+@@ -227,7 +226,7 @@ def test_LiteralIncludeReader_dedent(literal_inc_path):
+                        "\n")
+ 
+     # dedent: 4
+-    options = {'lines': '10-12', 'dedent': 4}
++    options = {'lines': '9-11', 'dedent': 4}
+     reader = LiteralIncludeReader(literal_inc_path, options, DUMMY_CONFIG)
+     content, lines = reader.read()
+     assert content == ("def baz():\n"
+@@ -235,7 +234,7 @@ def test_LiteralIncludeReader_dedent(literal_inc_path):
+                        "\n")
+ 
+     # dedent: 6
+-    options = {'lines': '10-12', 'dedent': 6}
++    options = {'lines': '9-11', 'dedent': 6}
+     reader = LiteralIncludeReader(literal_inc_path, options, DUMMY_CONFIG)
+     content, lines = reader.read()
+     assert content == ("f baz():\n"
+@@ -278,7 +277,7 @@ def test_LiteralIncludeReader_diff(testroot, literal_inc_path):
+     content, lines = reader.read()
+     assert content == ("--- " + testroot + "/literal-diff.inc\n"
+                        "+++ " + testroot + "/literal.inc\n"
+-                       "@@ -7,8 +7,8 @@\n"
++                       "@@ -6,8 +6,8 @@\n"
+                        "     pass\n"
+                        " \n"
+                        " class Bar:\n"
+@@ -353,7 +352,7 @@ def test_code_block_namedlink_latex(app, status, warning):
+ def test_code_block_emphasize_latex(app, status, warning):
+     app.builder.build(['emphasize'])
+     latex = (app.outdir / 'Python.tex').text(encoding='utf-8').replace('\r\n', '\n')
+-    includes = '\\fvset{hllines={, 5, 6, 13, 14, 15, 24, 25, 26, 27,}}%\n'
++    includes = '\\fvset{hllines={, 5, 6, 13, 14, 15, 24, 25, 26,}}%\n'
+     assert includes in latex
+     includes = '\\end{sphinxVerbatim}\n\\sphinxresetverbatimhllines\n'
+     assert includes in latex
+@@ -414,8 +413,7 @@ def test_literal_include_linenos(app, status, warning):
+             '10\n'
+             '11\n'
+             '12\n'
+-            '13\n'
+-            '14</pre></div></td>' in html)
++            '13</pre></div></td>' in html)
+ 
+     # :lineno-start:
+     assert ('<td class="linenos"><div class="linenodiv"><pre>'
+@@ -431,8 +429,7 @@ def test_literal_include_linenos(app, status, warning):
+             '209\n'
+             '210\n'
+             '211\n'
+-            '212\n'
+-            '213</pre></div></td>' in html)
++            '212</pre></div></td>' in html)
+ 
+     # :lineno-match:
+     assert ('<td class="linenos"><div class="linenodiv"><pre>'

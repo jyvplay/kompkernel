@@ -1,0 +1,17 @@
+{
+  "sphinx": {
+    "base": "FAILED heap OOM exit134 at max-old-space-size1000",
+    "candidate": "STOPPED after baseline failure; no completed price",
+    "composed": "NOT_RUN"
+  },
+  "django": "raw screen only; full parent NOT_RUN",
+  "numbered": {
+    "fixture": "complete RFC2119",
+    "baseTokens": 808,
+    "candidate": "NO_PLAN; harness assertion logged; not inverse failure or a gain",
+    "selection": "retain incumbent"
+  },
+  "native": "NOT_RUN",
+  "speed": "FAILED; no production patch",
+  "paretoCertified": false
+}

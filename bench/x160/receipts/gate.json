@@ -1,0 +1,27 @@
+{
+  "rows": [
+    {
+      "name": "isolation",
+      "baseline": 491,
+      "candidate": 504,
+      "saved": -13,
+      "selected": 491,
+      "applied": false,
+      "sourceBytes": 2478,
+      "constructed": false
+    },
+    {
+      "name": "constructed",
+      "baseline": 265,
+      "candidate": 253,
+      "saved": 12,
+      "selected": 253,
+      "applied": true,
+      "sourceBytes": 2568,
+      "constructed": true
+    }
+  ],
+  "attacks": 8,
+  "native": "NOT_RUN",
+  "paretoCertified": false
+}

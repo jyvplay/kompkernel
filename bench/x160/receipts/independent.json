@@ -1,0 +1,5 @@
+{
+  "checks": 113,
+  "passed": true,
+  "scope": "raw folded records; not native behavior or unsupported parent grammars"
+}

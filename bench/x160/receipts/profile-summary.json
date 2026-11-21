@@ -1,0 +1,186 @@
+{
+  "note": "actual cold full TAGSTACK profile; competing frontier workers, NOT speed evidence",
+  "totalSamples": 8645,
+  "top": [
+    {
+      "function": "(garbage collector)",
+      "url": "",
+      "line": 0,
+      "samples": 447
+    },
+    {
+      "function": "countLongRaw",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 2322,
+      "samples": 311
+    },
+    {
+      "function": "getBpeRankFromString",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 603,
+      "samples": 242
+    },
+    {
+      "function": "vocabByScript",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 5975,
+      "samples": 154
+    },
+    {
+      "function": "__init",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 3,
+      "samples": 127
+    },
+    {
+      "function": "chunkCountFast",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 2262,
+      "samples": 116
+    },
+    {
+      "function": "put",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 1829,
+      "samples": 111
+    },
+    {
+      "function": "countLongRaw",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 2322,
+      "samples": 109
+    },
+    {
+      "function": "scoreRunCostDeltaSlots",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 6437,
+      "samples": 97
+    },
+    {
+      "function": "encode",
+      "url": "node:internal/encoding",
+      "line": 351,
+      "samples": 96
+    },
+    {
+      "function": "scoreRunCostDeltaSlots",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 6437,
+      "samples": 91
+    },
+    {
+      "function": "chunkCountFast",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 2262,
+      "samples": 84
+    },
+    {
+      "function": "scoreRunCostDeltaSlots",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 6437,
+      "samples": 82
+    },
+    {
+      "function": "bytePairMerge",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 712,
+      "samples": 78
+    },
+    {
+      "function": "enumerateTokenSpans",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 3472,
+      "samples": 75
+    },
+    {
+      "function": "",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 11802,
+      "samples": 73
+    },
+    {
+      "function": "decodeUTF8",
+      "url": "",
+      "line": 0,
+      "samples": 70
+    },
+    {
+      "function": "countLongRaw",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 2322,
+      "samples": 70
+    },
+    {
+      "function": "bodyStr",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 34026,
+      "samples": 65
+    },
+    {
+      "function": "rankAt",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 1947,
+      "samples": 64
+    },
+    {
+      "function": "compileSourceTextModule",
+      "url": "node:internal/modules/esm/utils",
+      "line": 344,
+      "samples": 63
+    },
+    {
+      "function": "renderBest",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 6743,
+      "samples": 62
+    },
+    {
+      "function": "RegExp: [^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]*[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]+[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\\p{N}{1,3}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n/]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+",
+      "url": "",
+      "line": 0,
+      "samples": 61
+    },
+    {
+      "function": "countLongRaw",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 2322,
+      "samples": 61
+    },
+    {
+      "function": "chunkCountFast",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 2262,
+      "samples": 61
+    },
+    {
+      "function": "renderBest",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 6743,
+      "samples": 58
+    },
+    {
+      "function": "countTokens3",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 2373,
+      "samples": 55
+    },
+    {
+      "function": "countTokens3",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 2373,
+      "samples": 54
+    },
+    {
+      "function": "",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 432,
+      "samples": 52
+    },
+    {
+      "function": "renderBest",
+      "url": "file:///home/user/kompkernel/bench/x160/profile.mjs",
+      "line": 6743,
+      "samples": 52
+    }
+  ]
+}

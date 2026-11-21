@@ -1,0 +1,1006 @@
+diff --git a/docs/ref/contrib/syndication.txt b/docs/ref/contrib/syndication.txt
+index 65b4582debc5..277e51c71e1a 100644
+--- a/docs/ref/contrib/syndication.txt
++++ b/docs/ref/contrib/syndication.txt
+@@ -971,16 +971,16 @@ For example, to create an Atom 1.0 feed and print it to standard output::
+     >>> from django.utils import feedgenerator
+     >>> from datetime import datetime
+     >>> f = feedgenerator.Atom1Feed(
+-    ...     title=u"My Weblog",
+-    ...     link=u"http://www.example.com/",
+-    ...     description=u"In which I write about what I ate today.",
+-    ...     language=u"en",
+-    ...     author_name=u"Myself",
+-    ...     feed_url=u"http://example.com/atom.xml")
+-    >>> f.add_item(title=u"Hot dog today",
+-    ...     link=u"http://www.example.com/entries/1/",
++    ...     title="My Weblog",
++    ...     link="http://www.example.com/",
++    ...     description="In which I write about what I ate today.",
++    ...     language="en",
++    ...     author_name="Myself",
++    ...     feed_url="http://example.com/atom.xml")
++    >>> f.add_item(title="Hot dog today",
++    ...     link="http://www.example.com/entries/1/",
+     ...     pubdate=datetime.now(),
+-    ...     description=u"<p>Today I had a Vienna Beef hot dog. It was pink, plump and perfect.</p>")
++    ...     description="<p>Today I had a Vienna Beef hot dog. It was pink, plump and perfect.</p>")
+     >>> print(f.writeString('UTF-8'))
+     <?xml version="1.0" encoding="UTF-8"?>
+     <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+diff --git a/docs/ref/forms/api.txt b/docs/ref/forms/api.txt
+index 33fcf8551176..c4d0b18b0fb2 100644
+--- a/docs/ref/forms/api.txt
++++ b/docs/ref/forms/api.txt
+@@ -103,7 +103,7 @@ Access the :attr:`~Form.errors` attribute to get a dictionary of error
+ messages::
+ 
+     >>> f.errors
+-    {'sender': [u'Enter a valid email address.'], 'subject': [u'This field is required.']}
++    {'sender': ['Enter a valid email address.'], 'subject': ['This field is required.']}
+ 
+ In this dictionary, the keys are the field names, and the values are lists of
+ Unicode strings representing the error messages. The error messages are stored
+@@ -291,7 +291,7 @@ it, you can access the clean data via its ``cleaned_data`` attribute::
+     >>> f.is_valid()
+     True
+     >>> f.cleaned_data
+-    {'cc_myself': True, 'message': u'Hi there', 'sender': u'foo@example.com', 'subject': u'hello'}
++    {'cc_myself': True, 'message': 'Hi there', 'sender': 'foo@example.com', 'subject': 'hello'}
+ 
+ Note that any text-based field -- such as ``CharField`` or ``EmailField`` --
+ always cleans the input into a Unicode string. We'll cover the encoding
+@@ -308,7 +308,7 @@ only the valid fields::
+     >>> f.is_valid()
+     False
+     >>> f.cleaned_data
+-    {'cc_myself': True, 'message': u'Hi there'}
++    {'cc_myself': True, 'message': 'Hi there'}
+ 
+ ``cleaned_data`` will always *only* contain a key for fields defined in the
+ ``Form``, even if you pass extra data when you define the ``Form``. In this
+@@ -326,7 +326,7 @@ but ``cleaned_data`` contains only the form's fields::
+     >>> f.is_valid()
+     True
+     >>> f.cleaned_data # Doesn't contain extra_field_1, etc.
+-    {'cc_myself': True, 'message': u'Hi there', 'sender': u'foo@example.com', 'subject': u'hello'}
++    {'cc_myself': True, 'message': 'Hi there', 'sender': 'foo@example.com', 'subject': 'hello'}
+ 
+ When the ``Form`` is valid, ``cleaned_data`` will include a key and value for
+ *all* its fields, even if the data didn't include a value for some optional
+@@ -338,12 +338,12 @@ fields. In this example, the data dictionary doesn't include a value for the
+     ...     first_name = CharField()
+     ...     last_name = CharField()
+     ...     nick_name = CharField(required=False)
+-    >>> data = {'first_name': u'John', 'last_name': u'Lennon'}
++    >>> data = {'first_name': 'John', 'last_name': 'Lennon'}
+     >>> f = OptionalPersonForm(data)
+     >>> f.is_valid()
+     True
+     >>> f.cleaned_data
+-    {'nick_name': u'', 'first_name': u'John', 'last_name': u'Lennon'}
++    {'nick_name': '', 'first_name': 'John', 'last_name': 'Lennon'}
+ 
+ In this above example, the ``cleaned_data`` value for ``nick_name`` is set to an
+ empty string, because ``nick_name`` is ``CharField``, and ``CharField``\s treat
+@@ -428,7 +428,7 @@ containing one field::
+ 
+     >>> f = ContactForm()
+     >>> f.as_p()
+-    u'<p><label for="id_subject">Subject:</label> <input id="id_subject" type="text" name="subject" maxlength="100" /></p>\n<p><label for="id_message">Message:</label> <input type="text" name="message" id="id_message" /></p>\n<p><label for="id_sender">Sender:</label> <input type="text" name="sender" id="id_sender" /></p>\n<p><label for="id_cc_myself">Cc myself:</label> <input type="checkbox" name="cc_myself" id="id_cc_myself" /></p>'
++    '<p><label for="id_subject">Subject:</label> <input id="id_subject" type="text" name="subject" maxlength="100" /></p>\n<p><label for="id_message">Message:</label> <input type="text" name="message" id="id_message" /></p>\n<p><label for="id_sender">Sender:</label> <input type="text" name="sender" id="id_sender" /></p>\n<p><label for="id_cc_myself">Cc myself:</label> <input type="checkbox" name="cc_myself" id="id_cc_myself" /></p>'
+     >>> print(f.as_p())
+     <p><label for="id_subject">Subject:</label> <input id="id_subject" type="text" name="subject" maxlength="100" /></p>
+     <p><label for="id_message">Message:</label> <input type="text" name="message" id="id_message" /></p>
+@@ -447,7 +447,7 @@ flexibility::
+ 
+     >>> f = ContactForm()
+     >>> f.as_ul()
+-    u'<li><label for="id_subject">Subject:</label> <input id="id_subject" type="text" name="subject" maxlength="100" /></li>\n<li><label for="id_message">Message:</label> <input type="text" name="message" id="id_message" /></li>\n<li><label for="id_sender">Sender:</label> <input type="email" name="sender" id="id_sender" /></li>\n<li><label for="id_cc_myself">Cc myself:</label> <input type="checkbox" name="cc_myself" id="id_cc_myself" /></li>'
++    '<li><label for="id_subject">Subject:</label> <input id="id_subject" type="text" name="subject" maxlength="100" /></li>\n<li><label for="id_message">Message:</label> <input type="text" name="message" id="id_message" /></li>\n<li><label for="id_sender">Sender:</label> <input type="email" name="sender" id="id_sender" /></li>\n<li><label for="id_cc_myself">Cc myself:</label> <input type="checkbox" name="cc_myself" id="id_cc_myself" /></li>'
+     >>> print(f.as_ul())
+     <li><label for="id_subject">Subject:</label> <input id="id_subject" type="text" name="subject" maxlength="100" /></li>
+     <li><label for="id_message">Message:</label> <input type="text" name="message" id="id_message" /></li>
+@@ -465,7 +465,7 @@ it calls its ``as_table()`` method behind the scenes::
+ 
+     >>> f = ContactForm()
+     >>> f.as_table()
+-    u'<tr><th><label for="id_subject">Subject:</label></th><td><input id="id_subject" type="text" name="subject" maxlength="100" /></td></tr>\n<tr><th><label for="id_message">Message:</label></th><td><input type="text" name="message" id="id_message" /></td></tr>\n<tr><th><label for="id_sender">Sender:</label></th><td><input type="email" name="sender" id="id_sender" /></td></tr>\n<tr><th><label for="id_cc_myself">Cc myself:</label></th><td><input type="checkbox" name="cc_myself" id="id_cc_myself" /></td></tr>'
++    '<tr><th><label for="id_subject">Subject:</label></th><td><input id="id_subject" type="text" name="subject" maxlength="100" /></td></tr>\n<tr><th><label for="id_message">Message:</label></th><td><input type="text" name="message" id="id_message" /></td></tr>\n<tr><th><label for="id_sender">Sender:</label></th><td><input type="email" name="sender" id="id_sender" /></td></tr>\n<tr><th><label for="id_cc_myself">Cc myself:</label></th><td><input type="checkbox" name="cc_myself" id="id_cc_myself" /></td></tr>'
+     >>> print(f.as_table())
+     <tr><th><label for="id_subject">Subject:</label></th><td><input id="id_subject" type="text" name="subject" maxlength="100" /></td></tr>
+     <tr><th><label for="id_message">Message:</label></th><td><input type="text" name="message" id="id_message" /></td></tr>
+@@ -752,7 +752,7 @@ when printed::
+     >>> print(f['message'])
+     <input type="text" name="message" />
+     >>> f['message'].errors
+-    [u'This field is required.']
++    ['This field is required.']
+     >>> print(f['message'].errors)
+     <ul class="errorlist"><li>This field is required.</li></ul>
+     >>> f['subject'].errors
+diff --git a/docs/ref/forms/fields.txt b/docs/ref/forms/fields.txt
+index 5363284b39ac..4b092f4b4f7b 100644
+--- a/docs/ref/forms/fields.txt
++++ b/docs/ref/forms/fields.txt
+@@ -24,11 +24,11 @@ exception or returns the clean value::
+     >>> from django import forms
+     >>> f = forms.EmailField()
+     >>> f.clean('foo@example.com')
+-    u'foo@example.com'
++    'foo@example.com'
+     >>> f.clean('invalid email address')
+     Traceback (most recent call last):
+     ...
+-    ValidationError: [u'Enter a valid email address.']
++    ValidationError: ['Enter a valid email address.']
+ 
+ .. _core-field-arguments:
+ 
+@@ -51,40 +51,40 @@ an empty value -- either ``None`` or the empty string (``""``) -- then
+     >>> from django import forms
+     >>> f = forms.CharField()
+     >>> f.clean('foo')
+-    u'foo'
++    'foo'
+     >>> f.clean('')
+     Traceback (most recent call last):
+     ...
+-    ValidationError: [u'This field is required.']
++    ValidationError: ['This field is required.']
+     >>> f.clean(None)
+     Traceback (most recent call last):
+     ...
+-    ValidationError: [u'This field is required.']
++    ValidationError: ['This field is required.']
+     >>> f.clean(' ')
+-    u' '
++    ' '
+     >>> f.clean(0)
+-    u'0'
++    '0'
+     >>> f.clean(True)
+-    u'True'
++    'True'
+     >>> f.clean(False)
+-    u'False'
++    'False'
+ 
+ To specify that a field is *not* required, pass ``required=False`` to the
+ ``Field`` constructor::
+ 
+     >>> f = forms.CharField(required=False)
+     >>> f.clean('foo')
+-    u'foo'
++    'foo'
+     >>> f.clean('')
+-    u''
++    ''
+     >>> f.clean(None)
+-    u''
++    ''
+     >>> f.clean(0)
+-    u'0'
++    '0'
+     >>> f.clean(True)
+-    u'True'
++    'True'
+     >>> f.clean(False)
+-    u'False'
++    'False'
+ 
+ If a ``Field`` has ``required=False`` and you pass ``clean()`` an empty value,
+ then ``clean()`` will return a *normalized* empty value rather than raising
+@@ -175,7 +175,7 @@ validation if a particular field's value is not given. ``initial`` values are
+     False
+     # The form does *not* fall back to using the initial values.
+     >>> f.errors
+-    {'url': [u'This field is required.'], 'name': [u'This field is required.']}
++    {'url': ['This field is required.'], 'name': ['This field is required.']}
+ 
+ Instead of a constant, you can also pass any callable::
+ 
+@@ -245,7 +245,7 @@ want to override. For example, here is the default error message::
+     >>> generic.clean('')
+     Traceback (most recent call last):
+       ...
+-    ValidationError: [u'This field is required.']
++    ValidationError: ['This field is required.']
+ 
+ And here is a custom error message::
+ 
+@@ -253,7 +253,7 @@ And here is a custom error message::
+     >>> name.clean('')
+     Traceback (most recent call last):
+       ...
+-    ValidationError: [u'Please enter your name']
++    ValidationError: ['Please enter your name']
+ 
+ In the `built-in Field classes`_ section below, each ``Field`` defines the
+ error message keys it uses.
+@@ -867,11 +867,11 @@ Slightly complex built-in ``Field`` classes
+             >>> from django.forms import ComboField
+             >>> f = ComboField(fields=[CharField(max_length=20), EmailField()])
+             >>> f.clean('test@example.com')
+-            u'test@example.com'
++            'test@example.com'
+             >>> f.clean('longemailaddress@example.com')
+             Traceback (most recent call last):
+             ...
+-            ValidationError: [u'Ensure this value has at most 20 characters (it has 28).']
++            ValidationError: ['Ensure this value has at most 20 characters (it has 28).']
+ 
+ ``MultiValueField``
+ ~~~~~~~~~~~~~~~~~~~
+diff --git a/docs/ref/forms/validation.txt b/docs/ref/forms/validation.txt
+index 78a022d43605..6ee9bb17a5be 100644
+--- a/docs/ref/forms/validation.txt
++++ b/docs/ref/forms/validation.txt
+@@ -408,7 +408,7 @@ sample) looks like this::
+             subject = cleaned_data.get("subject")
+ 
+             if cc_myself and subject and "help" not in subject:
+-                msg = u"Must put 'help' in subject when cc'ing yourself."
++                msg = "Must put 'help' in subject when cc'ing yourself."
+                 self.add_error('cc_myself', msg)
+                 self.add_error('subject', msg)
+ 
+diff --git a/docs/ref/forms/widgets.txt b/docs/ref/forms/widgets.txt
+index f6b8fd6c477e..7ed30e030a02 100644
+--- a/docs/ref/forms/widgets.txt
++++ b/docs/ref/forms/widgets.txt
+@@ -203,7 +203,7 @@ foundation for custom widgets.
+             >>> from django import forms
+             >>> name = forms.TextInput(attrs={'size': 10, 'title': 'Your name',})
+             >>> name.render('name', 'A name')
+-            u'<input title="Your name" type="text" name="name" value="A name" size="10" />'
++            '<input title="Your name" type="text" name="name" value="A name" size="10" />'
+ 
+         .. versionchanged:: 1.8
+ 
+@@ -342,7 +342,7 @@ foundation for custom widgets.
+                 return [None, None, None]
+ 
+             def format_output(self, rendered_widgets):
+-                return u''.join(rendered_widgets)
++                return ''.join(rendered_widgets)
+ 
+             def value_from_datadict(self, data, files, name):
+                 datelist = [
+diff --git a/docs/ref/models/instances.txt b/docs/ref/models/instances.txt
+index 21bcba46360c..ba84f2de81ee 100644
+--- a/docs/ref/models/instances.txt
++++ b/docs/ref/models/instances.txt
+@@ -449,7 +449,7 @@ For example::
+         last_name = models.CharField(max_length=50)
+ 
+         def __unicode__(self):
+-            return u'%s %s' % (self.first_name, self.last_name)
++            return '%s %s' % (self.first_name, self.last_name)
+ 
+ If you define a ``__unicode__()`` method on your model and not a
+ :meth:`~Model.__str__()` method, Django will automatically provide you with a
+@@ -724,9 +724,9 @@ For example::
+ 
+     class Person(models.Model):
+         SHIRT_SIZES = (
+-            (u'S', u'Small'),
+-            (u'M', u'Medium'),
+-            (u'L', u'Large'),
++            ('S', 'Small'),
++            ('M', 'Medium'),
++            ('L', 'Large'),
+         )
+         name = models.CharField(max_length=60)
+         shirt_size = models.CharField(max_length=2, choices=SHIRT_SIZES)
+@@ -736,9 +736,9 @@ For example::
+     >>> p = Person(name="Fred Flintstone", shirt_size="L")
+     >>> p.save()
+     >>> p.shirt_size
+-    u'L'
++    'L'
+     >>> p.get_shirt_size_display()
+-    u'Large'
++    'Large'
+ 
+ .. method:: Model.get_next_by_FOO(\**kwargs)
+ .. method:: Model.get_previous_by_FOO(\**kwargs)
+diff --git a/docs/ref/models/querysets.txt b/docs/ref/models/querysets.txt
+index f10f66425a75..ac552bf0c72f 100644
+--- a/docs/ref/models/querysets.txt
++++ b/docs/ref/models/querysets.txt
+@@ -484,7 +484,7 @@ A few subtleties that are worth mentioning:
+   For example::
+ 
+     >>> Entry.objects.values()
+-    [{'blog_id': 1, 'headline': u'First Entry', ...}, ...]
++    [{'blog_id': 1, 'headline': 'First Entry', ...}, ...]
+ 
+     >>> Entry.objects.values('blog')
+     [{'blog': 1}, ...]
+@@ -554,7 +554,7 @@ respective field passed into the ``values_list()`` call — so the first item is
+ the first field, etc. For example::
+ 
+     >>> Entry.objects.values_list('id', 'headline')
+-    [(1, u'First entry'), ...]
++    [(1, 'First entry'), ...]
+ 
+ If you only pass in a single field, you can also pass in the ``flat``
+ parameter. If ``True``, this will mean the returned results are single values,
+diff --git a/docs/ref/request-response.txt b/docs/ref/request-response.txt
+index f4a8a17ed19d..389ecec73232 100644
+--- a/docs/ref/request-response.txt
++++ b/docs/ref/request-response.txt
+@@ -425,9 +425,9 @@ a subclass of dictionary. Exceptions are outlined here:
+           >>> q = q.copy() # to make it mutable
+           >>> q.update({'a': '2'})
+           >>> q.getlist('a')
+-          [u'1', u'2']
++          ['1', '2']
+           >>> q['a'] # returns the last
+-          [u'2']
++          ['2']
+ 
+ .. method:: QueryDict.items()
+ 
+@@ -436,7 +436,7 @@ a subclass of dictionary. Exceptions are outlined here:
+ 
+            >>> q = QueryDict('a=1&a=2&a=3')
+            >>> q.items()
+-           [(u'a', u'3')]
++           [('a', '3')]
+ 
+ .. method:: QueryDict.iteritems()
+ 
+@@ -456,7 +456,7 @@ a subclass of dictionary. Exceptions are outlined here:
+ 
+            >>> q = QueryDict('a=1&a=2&a=3')
+            >>> q.values()
+-           [u'3']
++           ['3']
+ 
+ .. method:: QueryDict.itervalues()
+ 
+@@ -497,7 +497,7 @@ In addition, ``QueryDict`` has the following methods:
+ 
+         >>> q = QueryDict('a=1&a=2&a=3')
+         >>> q.lists()
+-        [(u'a', [u'1', u'2', u'3'])]
++        [('a', ['1', '2', '3'])]
+ 
+ .. method:: QueryDict.pop(key)
+ 
+@@ -506,7 +506,7 @@ In addition, ``QueryDict`` has the following methods:
+ 
+         >>> q = QueryDict('a=1&a=2&a=3', mutable=True)
+         >>> q.pop('a')
+-        [u'1', u'2', u'3']
++        ['1', '2', '3']
+ 
+ .. method:: QueryDict.popitem()
+ 
+@@ -517,7 +517,7 @@ In addition, ``QueryDict`` has the following methods:
+ 
+         >>> q = QueryDict('a=1&a=2&a=3', mutable=True)
+         >>> q.popitem()
+-        (u'a', [u'1', u'2', u'3'])
++        ('a', ['1', '2', '3'])
+ 
+ .. method:: QueryDict.dict()
+ 
+@@ -527,7 +527,7 @@ In addition, ``QueryDict`` has the following methods:
+ 
+         >>> q = QueryDict('a=1&a=3&a=5')
+         >>> q.dict()
+-        {u'a': u'5'}
++        {'a': '5'}
+ 
+ .. method:: QueryDict.urlencode([safe])
+ 
+diff --git a/docs/ref/templates/builtins.txt b/docs/ref/templates/builtins.txt
+index b5734f234f75..c37bd8318a14 100644
+--- a/docs/ref/templates/builtins.txt
++++ b/docs/ref/templates/builtins.txt
+@@ -1794,8 +1794,8 @@ For example::
+     {{ value|make_list }}
+ 
+ If ``value`` is the string ``"Joel"``, the output would be the list
+-``[u'J', u'o', u'e', u'l']``. If ``value`` is ``123``, the output will be the
+-list ``[u'1', u'2', u'3']``.
++``['J', 'o', 'e', 'l']``. If ``value`` is ``123``, the output will be the
++list ``['1', '2', '3']``.
+ 
+ .. templatefilter:: phone2numeric
+ 
+diff --git a/docs/ref/unicode.txt b/docs/ref/unicode.txt
+index 306a2dfb48fc..d8581e801ce1 100644
+--- a/docs/ref/unicode.txt
++++ b/docs/ref/unicode.txt
+@@ -201,9 +201,9 @@ like that.
+ 
+ An example might clarify things here::
+ 
+-    >>> urlquote(u'Paris & Orléans')
+-    u'Paris%20%26%20Orl%C3%A9ans'
+-    >>> iri_to_uri(u'/favorites/François/%s' % urlquote('Paris & Orléans'))
++    >>> urlquote('Paris & Orléans')
++    'Paris%20%26%20Orl%C3%A9ans'
++    >>> iri_to_uri('/favorites/François/%s' % urlquote('Paris & Orléans'))
+     '/favorites/Fran%C3%A7ois/Paris%20%26%20Orl%C3%A9ans'
+ 
+ If you look carefully, you can see that the portion that was generated by
+@@ -279,7 +279,7 @@ above_. For example::
+     from django.utils.http import urlquote
+ 
+     def get_absolute_url(self):
+-        url = u'/person/%s/?x=0&y=0' % urlquote(self.location)
++        url = '/person/%s/?x=0&y=0' % urlquote(self.location)
+         return iri_to_uri(url)
+ 
+ This function returns a correctly encoded URL even if ``self.location`` is
+diff --git a/docs/ref/urlresolvers.txt b/docs/ref/urlresolvers.txt
+index 3467319d2f0d..2c57a5e1cda7 100644
+--- a/docs/ref/urlresolvers.txt
++++ b/docs/ref/urlresolvers.txt
+@@ -64,7 +64,7 @@ You can use ``kwargs`` instead of ``args``. For example::
+     The string returned by ``reverse()`` is already
+     :ref:`urlquoted <uri-and-iri-handling>`. For example::
+ 
+-        >>> reverse('cities', args=[u'Orléans'])
++        >>> reverse('cities', args=['Orléans'])
+         '.../Orl%C3%A9ans/'
+ 
+     Applying further encoding (such as :meth:`~django.utils.http.urlquote` or
+diff --git a/docs/ref/utils.txt b/docs/ref/utils.txt
+index 5515c01a20ce..416a1edd2ce2 100644
+--- a/docs/ref/utils.txt
++++ b/docs/ref/utils.txt
+@@ -295,14 +295,14 @@ Sample usage::
+ 
+     >>> from django.utils import feedgenerator
+     >>> feed = feedgenerator.Rss201rev2Feed(
+-    ...     title=u"Poynter E-Media Tidbits",
+-    ...     link=u"http://www.poynter.org/column.asp?id=31",
+-    ...     description=u"A group Weblog by the sharpest minds in online media/journalism/publishing.",
+-    ...     language=u"en",
++    ...     title="Poynter E-Media Tidbits",
++    ...     link="http://www.poynter.org/column.asp?id=31",
++    ...     description="A group Weblog by the sharpest minds in online media/journalism/publishing.",
++    ...     language="en",
+     ... )
+     >>> feed.add_item(
+     ...     title="Hello",
+-    ...     link=u"http://www.holovaty.com/test/",
++    ...     link="http://www.holovaty.com/test/",
+     ...     description="Testing."
+     ... )
+     >>> with open('test.rss', 'w') as fp:
+@@ -559,7 +559,7 @@ escaping HTML.
+ 
+     .. code-block:: python
+ 
+-        mark_safe(u"%s <b>%s</b> %s" % (some_html,
++        mark_safe("%s <b>%s</b> %s" % (some_html,
+                                         escape(some_text),
+                                         escape(some_other_text),
+                                         ))
+@@ -568,7 +568,7 @@ escaping HTML.
+ 
+     .. code-block:: python
+ 
+-        format_html(u"{0} <b>{1}</b> {2}",
++        format_html("{0} <b>{1}</b> {2}",
+                     mark_safe(some_html), some_text, some_other_text)
+ 
+     This has the advantage that you don't need to apply :func:`escape` to each
+diff --git a/docs/ref/validators.txt b/docs/ref/validators.txt
+index eb2e1d0d02f9..364606666b8a 100644
+--- a/docs/ref/validators.txt
++++ b/docs/ref/validators.txt
+@@ -19,7 +19,7 @@ For example, here's a validator that only allows even numbers::
+ 
+     def validate_even(value):
+         if value % 2 != 0:
+-            raise ValidationError(u'%s is not an even number' % value)
++            raise ValidationError('%s is not an even number' % value)
+ 
+ You can add this to a model field via the field's :attr:`~django.db.models.Field.validators`
+ argument::
+diff --git a/docs/topics/db/models.txt b/docs/topics/db/models.txt
+index d5a700f62e41..17ac9f157189 100644
+--- a/docs/topics/db/models.txt
++++ b/docs/topics/db/models.txt
+@@ -190,9 +190,9 @@ ones:
+         >>> p = Person(name="Fred Flintstone", shirt_size="L")
+         >>> p.save()
+         >>> p.shirt_size
+-        u'L'
++        'L'
+         >>> p.get_shirt_size_display()
+-        u'Large'
++        'Large'
+ 
+ :attr:`~Field.default`
+     The default value for the field. This can be a value or a callable
+@@ -541,7 +541,7 @@ querying the ``Membership`` model::
+     >>> ringos_membership.date_joined
+     datetime.date(1962, 8, 16)
+     >>> ringos_membership.invite_reason
+-    u'Needed a new drummer.'
++    'Needed a new drummer.'
+ 
+ Another way to access the same information is by querying the
+ :ref:`many-to-many reverse relationship<m2m-reverse-relationships>` from a
+@@ -551,7 +551,7 @@ Another way to access the same information is by querying the
+     >>> ringos_membership.date_joined
+     datetime.date(1962, 8, 16)
+     >>> ringos_membership.invite_reason
+-    u'Needed a new drummer.'
++    'Needed a new drummer.'
+ 
+ 
+ One-to-one relationships
+diff --git a/docs/topics/files.txt b/docs/topics/files.txt
+index 45f83d8746ee..154d5c8ebb6d 100644
+--- a/docs/topics/files.txt
++++ b/docs/topics/files.txt
+@@ -41,11 +41,11 @@ the details of the attached photo::
+     >>> car.photo
+     <ImageFieldFile: chevy.jpg>
+     >>> car.photo.name
+-    u'cars/chevy.jpg'
++    'cars/chevy.jpg'
+     >>> car.photo.path
+-    u'/media/cars/chevy.jpg'
++    '/media/cars/chevy.jpg'
+     >>> car.photo.url
+-    u'http://media.example.com/cars/chevy.jpg'
++    'http://media.example.com/cars/chevy.jpg'
+ 
+ This object -- ``car.photo`` in the example -- is a ``File`` object, which means
+ it has all the methods and attributes described below.
+@@ -131,7 +131,7 @@ useful -- you can use the global default storage system::
+ 
+     >>> path = default_storage.save('/path/to/file', ContentFile('new content'))
+     >>> path
+-    u'/path/to/file'
++    '/path/to/file'
+ 
+     >>> default_storage.size(path)
+     11
+diff --git a/docs/topics/forms/formsets.txt b/docs/topics/forms/formsets.txt
+index a1e30b341be5..0e32d6131fb0 100644
+--- a/docs/topics/forms/formsets.txt
++++ b/docs/topics/forms/formsets.txt
+@@ -64,7 +64,7 @@ example::
+     >>> from myapp.forms import ArticleForm
+     >>> ArticleFormSet = formset_factory(ArticleForm, extra=2)
+     >>> formset = ArticleFormSet(initial=[
+-    ...     {'title': u'Django is now open source',
++    ...     {'title': 'Django is now open source',
+     ...      'pub_date': datetime.date.today(),}
+     ... ])
+ 
+@@ -136,9 +136,9 @@ all forms in the formset::
+     >>> from myapp.forms import ArticleForm
+     >>> ArticleFormSet = formset_factory(ArticleForm)
+     >>> data = {
+-    ...     'form-TOTAL_FORMS': u'1',
+-    ...     'form-INITIAL_FORMS': u'0',
+-    ...     'form-MAX_NUM_FORMS': u'',
++    ...     'form-TOTAL_FORMS': '1',
++    ...     'form-INITIAL_FORMS': '0',
++    ...     'form-MAX_NUM_FORMS': '',
+     ... }
+     >>> formset = ArticleFormSet(data)
+     >>> formset.is_valid()
+@@ -149,19 +149,19 @@ formset is smart enough to ignore extra forms that were not changed. If we
+ provide an invalid article::
+ 
+     >>> data = {
+-    ...     'form-TOTAL_FORMS': u'2',
+-    ...     'form-INITIAL_FORMS': u'0',
+-    ...     'form-MAX_NUM_FORMS': u'',
+-    ...     'form-0-title': u'Test',
+-    ...     'form-0-pub_date': u'1904-06-16',
+-    ...     'form-1-title': u'Test',
+-    ...     'form-1-pub_date': u'', # <-- this date is missing but required
++    ...     'form-TOTAL_FORMS': '2',
++    ...     'form-INITIAL_FORMS': '0',
++    ...     'form-MAX_NUM_FORMS': '',
++    ...     'form-0-title': 'Test',
++    ...     'form-0-pub_date': '1904-06-16',
++    ...     'form-1-title': 'Test',
++    ...     'form-1-pub_date': '', # <-- this date is missing but required
+     ... }
+     >>> formset = ArticleFormSet(data)
+     >>> formset.is_valid()
+     False
+     >>> formset.errors
+-    [{}, {'pub_date': [u'This field is required.']}]
++    [{}, {'pub_date': ['This field is required.']}]
+ 
+ As we can see, ``formset.errors`` is a list whose entries correspond to the
+ forms in the formset. Validation was performed for each of the two forms, and
+@@ -176,7 +176,7 @@ To check how many errors there are in the formset, we can use the
+ 
+     >>> # Using the previous example
+     >>> formset.errors
+-    [{}, {'pub_date': [u'This field is required.']}]
++    [{}, {'pub_date': ['This field is required.']}]
+     >>> len(formset.errors)
+     2
+     >>> formset.total_error_count()
+@@ -186,11 +186,11 @@ We can also check if form data differs from the initial data (i.e. the form was
+ sent without any data)::
+ 
+     >>> data = {
+-    ...     'form-TOTAL_FORMS': u'1',
+-    ...     'form-INITIAL_FORMS': u'0',
+-    ...     'form-MAX_NUM_FORMS': u'',
+-    ...     'form-0-title': u'',
+-    ...     'form-0-pub_date': u'',
++    ...     'form-TOTAL_FORMS': '1',
++    ...     'form-INITIAL_FORMS': '0',
++    ...     'form-MAX_NUM_FORMS': '',
++    ...     'form-0-title': '',
++    ...     'form-0-pub_date': '',
+     ... }
+     >>> formset = ArticleFormSet(data)
+     >>> formset.has_changed()
+@@ -209,13 +209,13 @@ collection of forms contained in the formset. If you don't provide
+ this management data, an exception will be raised::
+ 
+     >>> data = {
+-    ...     'form-0-title': u'Test',
+-    ...     'form-0-pub_date': u'',
++    ...     'form-0-title': 'Test',
++    ...     'form-0-pub_date': '',
+     ... }
+     >>> formset = ArticleFormSet(data)
+     Traceback (most recent call last):
+     ...
+-    django.forms.utils.ValidationError: [u'ManagementForm data is missing or has been tampered with']
++    django.forms.utils.ValidationError: ['ManagementForm data is missing or has been tampered with']
+ 
+ It is used to keep track of how many form instances are being displayed. If
+ you are adding new forms via JavaScript, you should increment the count fields
+@@ -273,13 +273,13 @@ is where you define your own validation that works at the formset level::
+ 
+     >>> ArticleFormSet = formset_factory(ArticleForm, formset=BaseArticleFormSet)
+     >>> data = {
+-    ...     'form-TOTAL_FORMS': u'2',
+-    ...     'form-INITIAL_FORMS': u'0',
+-    ...     'form-MAX_NUM_FORMS': u'',
+-    ...     'form-0-title': u'Test',
+-    ...     'form-0-pub_date': u'1904-06-16',
+-    ...     'form-1-title': u'Test',
+-    ...     'form-1-pub_date': u'1912-06-23',
++    ...     'form-TOTAL_FORMS': '2',
++    ...     'form-INITIAL_FORMS': '0',
++    ...     'form-MAX_NUM_FORMS': '',
++    ...     'form-0-title': 'Test',
++    ...     'form-0-pub_date': '1904-06-16',
++    ...     'form-1-title': 'Test',
++    ...     'form-1-pub_date': '1912-06-23',
+     ... }
+     >>> formset = ArticleFormSet(data)
+     >>> formset.is_valid()
+@@ -287,7 +287,7 @@ is where you define your own validation that works at the formset level::
+     >>> formset.errors
+     [{}, {}]
+     >>> formset.non_form_errors()
+-    [u'Articles in a set must have distinct titles.']
++    ['Articles in a set must have distinct titles.']
+ 
+ The formset ``clean`` method is called after all the ``Form.clean`` methods
+ have been called. The errors will be found using the ``non_form_errors()``
+@@ -314,14 +314,14 @@ deletion, is less than or equal to ``max_num``.
+     >>> from myapp.forms import ArticleForm
+     >>> ArticleFormSet = formset_factory(ArticleForm, max_num=1, validate_max=True)
+     >>> data = {
+-    ...     'form-TOTAL_FORMS': u'2',
+-    ...     'form-INITIAL_FORMS': u'0',
+-    ...     'form-MIN_NUM_FORMS': u'',
+-    ...     'form-MAX_NUM_FORMS': u'',
+-    ...     'form-0-title': u'Test',
+-    ...     'form-0-pub_date': u'1904-06-16',
+-    ...     'form-1-title': u'Test 2',
+-    ...     'form-1-pub_date': u'1912-06-23',
++    ...     'form-TOTAL_FORMS': '2',
++    ...     'form-INITIAL_FORMS': '0',
++    ...     'form-MIN_NUM_FORMS': '',
++    ...     'form-MAX_NUM_FORMS': '',
++    ...     'form-0-title': 'Test',
++    ...     'form-0-pub_date': '1904-06-16',
++    ...     'form-1-title': 'Test 2',
++    ...     'form-1-pub_date': '1912-06-23',
+     ... }
+     >>> formset = ArticleFormSet(data)
+     >>> formset.is_valid()
+@@ -329,7 +329,7 @@ deletion, is less than or equal to ``max_num``.
+     >>> formset.errors
+     [{}, {}]
+     >>> formset.non_form_errors()
+-    [u'Please submit 1 or fewer forms.']
++    ['Please submit 1 or fewer forms.']
+ 
+ ``validate_max=True`` validates against ``max_num`` strictly even if
+ ``max_num`` was exceeded because the amount of initial data supplied was
+@@ -363,14 +363,14 @@ deletion, is greater than or equal to ``min_num``.
+     >>> from myapp.forms import ArticleForm
+     >>> ArticleFormSet = formset_factory(ArticleForm, min_num=3, validate_min=True)
+     >>> data = {
+-    ...     'form-TOTAL_FORMS': u'2',
+-    ...     'form-INITIAL_FORMS': u'0',
+-    ...     'form-MIN_NUM_FORMS': u'',
+-    ...     'form-MAX_NUM_FORMS': u'',
+-    ...     'form-0-title': u'Test',
+-    ...     'form-0-pub_date': u'1904-06-16',
+-    ...     'form-1-title': u'Test 2',
+-    ...     'form-1-pub_date': u'1912-06-23',
++    ...     'form-TOTAL_FORMS': '2',
++    ...     'form-INITIAL_FORMS': '0',
++    ...     'form-MIN_NUM_FORMS': '',
++    ...     'form-MAX_NUM_FORMS': '',
++    ...     'form-0-title': 'Test',
++    ...     'form-0-pub_date': '1904-06-16',
++    ...     'form-1-title': 'Test 2',
++    ...     'form-1-pub_date': '1912-06-23',
+     ... }
+     >>> formset = ArticleFormSet(data)
+     >>> formset.is_valid()
+@@ -378,7 +378,7 @@ deletion, is greater than or equal to ``min_num``.
+     >>> formset.errors
+     [{}, {}]
+     >>> formset.non_form_errors()
+-    [u'Please submit 3 or more forms.']
++    ['Please submit 3 or more forms.']
+ 
+ .. versionchanged:: 1.7
+ 
+@@ -405,8 +405,8 @@ Lets you create a formset with the ability to order::
+     >>> from myapp.forms import ArticleForm
+     >>> ArticleFormSet = formset_factory(ArticleForm, can_order=True)
+     >>> formset = ArticleFormSet(initial=[
+-    ...     {'title': u'Article #1', 'pub_date': datetime.date(2008, 5, 10)},
+-    ...     {'title': u'Article #2', 'pub_date': datetime.date(2008, 5, 11)},
++    ...     {'title': 'Article #1', 'pub_date': datetime.date(2008, 5, 10)},
++    ...     {'title': 'Article #2', 'pub_date': datetime.date(2008, 5, 11)},
+     ... ])
+     >>> for form in formset:
+     ...     print(form.as_table())
+@@ -426,31 +426,31 @@ data it automatically assigned them a numeric value. Let's look at what will
+ happen when the user changes these values::
+ 
+     >>> data = {
+-    ...     'form-TOTAL_FORMS': u'3',
+-    ...     'form-INITIAL_FORMS': u'2',
+-    ...     'form-MAX_NUM_FORMS': u'',
+-    ...     'form-0-title': u'Article #1',
+-    ...     'form-0-pub_date': u'2008-05-10',
+-    ...     'form-0-ORDER': u'2',
+-    ...     'form-1-title': u'Article #2',
+-    ...     'form-1-pub_date': u'2008-05-11',
+-    ...     'form-1-ORDER': u'1',
+-    ...     'form-2-title': u'Article #3',
+-    ...     'form-2-pub_date': u'2008-05-01',
+-    ...     'form-2-ORDER': u'0',
++    ...     'form-TOTAL_FORMS': '3',
++    ...     'form-INITIAL_FORMS': '2',
++    ...     'form-MAX_NUM_FORMS': '',
++    ...     'form-0-title': 'Article #1',
++    ...     'form-0-pub_date': '2008-05-10',
++    ...     'form-0-ORDER': '2',
++    ...     'form-1-title': 'Article #2',
++    ...     'form-1-pub_date': '2008-05-11',
++    ...     'form-1-ORDER': '1',
++    ...     'form-2-title': 'Article #3',
++    ...     'form-2-pub_date': '2008-05-01',
++    ...     'form-2-ORDER': '0',
+     ... }
+ 
+     >>> formset = ArticleFormSet(data, initial=[
+-    ...     {'title': u'Article #1', 'pub_date': datetime.date(2008, 5, 10)},
+-    ...     {'title': u'Article #2', 'pub_date': datetime.date(2008, 5, 11)},
++    ...     {'title': 'Article #1', 'pub_date': datetime.date(2008, 5, 10)},
++    ...     {'title': 'Article #2', 'pub_date': datetime.date(2008, 5, 11)},
+     ... ])
+     >>> formset.is_valid()
+     True
+     >>> for form in formset.ordered_forms:
+     ...     print(form.cleaned_data)
+-    {'pub_date': datetime.date(2008, 5, 1), 'ORDER': 0, 'title': u'Article #3'}
+-    {'pub_date': datetime.date(2008, 5, 11), 'ORDER': 1, 'title': u'Article #2'}
+-    {'pub_date': datetime.date(2008, 5, 10), 'ORDER': 2, 'title': u'Article #1'}
++    {'pub_date': datetime.date(2008, 5, 1), 'ORDER': 0, 'title': 'Article #3'}
++    {'pub_date': datetime.date(2008, 5, 11), 'ORDER': 1, 'title': 'Article #2'}
++    {'pub_date': datetime.date(2008, 5, 10), 'ORDER': 2, 'title': 'Article #1'}
+ 
+ ``can_delete``
+ ~~~~~~~~~~~~~~
+@@ -465,8 +465,8 @@ Lets you create a formset with the ability to select forms for deletion::
+     >>> from myapp.forms import ArticleForm
+     >>> ArticleFormSet = formset_factory(ArticleForm, can_delete=True)
+     >>> formset = ArticleFormSet(initial=[
+-    ...     {'title': u'Article #1', 'pub_date': datetime.date(2008, 5, 10)},
+-    ...     {'title': u'Article #2', 'pub_date': datetime.date(2008, 5, 11)},
++    ...     {'title': 'Article #1', 'pub_date': datetime.date(2008, 5, 10)},
++    ...     {'title': 'Article #2', 'pub_date': datetime.date(2008, 5, 11)},
+     ... ])
+     >>> for form in formset:
+     ....    print(form.as_table())
+@@ -486,26 +486,26 @@ and is a ``forms.BooleanField``. When data comes through marking any of the
+ delete fields you can access them with ``deleted_forms``::
+ 
+     >>> data = {
+-    ...     'form-TOTAL_FORMS': u'3',
+-    ...     'form-INITIAL_FORMS': u'2',
+-    ...     'form-MAX_NUM_FORMS': u'',
+-    ...     'form-0-title': u'Article #1',
+-    ...     'form-0-pub_date': u'2008-05-10',
+-    ...     'form-0-DELETE': u'on',
+-    ...     'form-1-title': u'Article #2',
+-    ...     'form-1-pub_date': u'2008-05-11',
+-    ...     'form-1-DELETE': u'',
+-    ...     'form-2-title': u'',
+-    ...     'form-2-pub_date': u'',
+-    ...     'form-2-DELETE': u'',
++    ...     'form-TOTAL_FORMS': '3',
++    ...     'form-INITIAL_FORMS': '2',
++    ...     'form-MAX_NUM_FORMS': '',
++    ...     'form-0-title': 'Article #1',
++    ...     'form-0-pub_date': '2008-05-10',
++    ...     'form-0-DELETE': 'on',
++    ...     'form-1-title': 'Article #2',
++    ...     'form-1-pub_date': '2008-05-11',
++    ...     'form-1-DELETE': '',
++    ...     'form-2-title': '',
++    ...     'form-2-pub_date': '',
++    ...     'form-2-DELETE': '',
+     ... }
+ 
+     >>> formset = ArticleFormSet(data, initial=[
+-    ...     {'title': u'Article #1', 'pub_date': datetime.date(2008, 5, 10)},
+-    ...     {'title': u'Article #2', 'pub_date': datetime.date(2008, 5, 11)},
++    ...     {'title': 'Article #1', 'pub_date': datetime.date(2008, 5, 10)},
++    ...     {'title': 'Article #2', 'pub_date': datetime.date(2008, 5, 11)},
+     ... ])
+     >>> [form.cleaned_data for form in formset.deleted_forms]
+-    [{'DELETE': True, 'pub_date': datetime.date(2008, 5, 10), 'title': u'Article #1'}]
++    [{'DELETE': True, 'pub_date': datetime.date(2008, 5, 10), 'title': 'Article #1'}]
+ 
+ If you are using a :class:`ModelFormSet<django.forms.models.BaseModelFormSet>`,
+ model instances for deleted forms will be deleted when you call
+diff --git a/docs/topics/forms/modelforms.txt b/docs/topics/forms/modelforms.txt
+index a55e7a5ced32..d01fc64cb27a 100644
+--- a/docs/topics/forms/modelforms.txt
++++ b/docs/topics/forms/modelforms.txt
+@@ -913,7 +913,7 @@ extra forms displayed.
+     >>> AuthorFormSet = modelformset_factory(Author, max_num=1)
+     >>> formset = AuthorFormSet(queryset=Author.objects.order_by('name'))
+     >>> [x.name for x in formset.get_queryset()]
+-    [u'Charles Baudelaire', u'Paul Verlaine', u'Walt Whitman']
++    ['Charles Baudelaire', 'Paul Verlaine', 'Walt Whitman']
+ 
+ If the value of ``max_num`` is greater than the number of existing related
+ objects, up to ``extra`` additional blank forms will be added to the formset,
+@@ -1111,7 +1111,7 @@ a particular author, you could do this::
+ 
+     >>> from django.forms.models import inlineformset_factory
+     >>> BookFormSet = inlineformset_factory(Author, Book)
+-    >>> author = Author.objects.get(name=u'Mike Royko')
++    >>> author = Author.objects.get(name='Mike Royko')
+     >>> formset = BookFormSet(instance=author)
+ 
+ .. note::
+@@ -1150,7 +1150,7 @@ Then when you create your inline formset, pass in the optional argument
+ 
+     >>> from django.forms.models import inlineformset_factory
+     >>> BookFormSet = inlineformset_factory(Author, Book, formset=CustomInlineFormSet)
+-    >>> author = Author.objects.get(name=u'Mike Royko')
++    >>> author = Author.objects.get(name='Mike Royko')
+     >>> formset = BookFormSet(instance=author)
+ 
+ More than one foreign key to the same model
+diff --git a/docs/topics/i18n/formatting.txt b/docs/topics/i18n/formatting.txt
+index e306d4ab449e..04b36e27672c 100644
+--- a/docs/topics/i18n/formatting.txt
++++ b/docs/topics/i18n/formatting.txt
+@@ -174,7 +174,9 @@ To customize the English formats, a structure like this would be needed::
+ 
+ where :file:`formats.py` contains custom format definitions. For example::
+ 
+-    THOUSAND_SEPARATOR = u'\xa0'
++    from __future__ import unicode_literals
++
++    THOUSAND_SEPARATOR = '\xa0'
+ 
+ to use a non-breaking space (Unicode ``00A0``) as a thousand separator,
+ instead of the default for English, a comma.
+diff --git a/docs/topics/i18n/translation.txt b/docs/topics/i18n/translation.txt
+index a54fe118bed6..6dae9f691fa2 100644
+--- a/docs/topics/i18n/translation.txt
++++ b/docs/topics/i18n/translation.txt
+@@ -402,11 +402,11 @@ itself to a bytestring. You can't use a unicode string inside a bytestring,
+ either, so this is consistent with normal Python behavior. For example::
+ 
+     # This is fine: putting a unicode proxy into a unicode string.
+-    u"Hello %s" % ugettext_lazy("people")
++    "Hello %s" % ugettext_lazy("people")
+ 
+     # This will not work, since you cannot insert a unicode object
+     # into a bytestring (nor can you insert our unicode proxy there)
+-    "Hello %s" % ugettext_lazy("people")
++    b"Hello %s" % ugettext_lazy("people")
+ 
+ If you ever see output that looks like ``"hello
+ <django.utils.functional...>"``, you have tried to insert the result of
+diff --git a/docs/topics/signing.txt b/docs/topics/signing.txt
+index af787b5adb59..3092f297f095 100644
+--- a/docs/topics/signing.txt
++++ b/docs/topics/signing.txt
+@@ -51,7 +51,7 @@ You can retrieve the original value using the ``unsign`` method::
+ 
+     >>> original = signer.unsign(value)
+     >>> original
+-    u'My string'
++    'My string'
+ 
+ If the signature or value have been altered in any way, a
+ ``django.core.signing.BadSignature`` exception will be raised::
+@@ -94,7 +94,7 @@ your :setting:`SECRET_KEY`::
+     >>> signer.sign('My string')
+     'My string:Ee7vGi-ING6n02gkcJ-QLHg6vFw'
+     >>> signer.unsign('My string:Ee7vGi-ING6n02gkcJ-QLHg6vFw')
+-    u'My string'
++    'My string'
+ 
+ Using salt in this way puts the different signatures into different
+ namespaces.  A signature that comes from one namespace (a particular salt
+@@ -120,12 +120,12 @@ created within a specified period of time::
+     >>> value
+     'hello:1NMg5H:oPVuCqlJWmChm1rA2lyTUtelC-c'
+     >>> signer.unsign(value)
+-    u'hello'
++    'hello'
+     >>> signer.unsign(value, max_age=10)
+     ...
+     SignatureExpired: Signature age 15.5289158821 > 10 seconds
+     >>> signer.unsign(value, max_age=20)
+-    u'hello'
++    'hello'
+ 
+ .. class:: TimestampSigner(key=None, sep=':', salt=None)
+ 
+diff --git a/docs/topics/testing/tools.txt b/docs/topics/testing/tools.txt
+index d6e60458f319..a67675b2689b 100644
+--- a/docs/topics/testing/tools.txt
++++ b/docs/topics/testing/tools.txt
+@@ -187,7 +187,7 @@ Use the ``django.test.Client`` class to make requests.
+ 
+             >>> response = c.get('/redirect_me/', follow=True)
+             >>> response.redirect_chain
+-            [(u'http://testserver/next/', 302), (u'http://testserver/final/', 302)]
++            [('http://testserver/next/', 302), ('http://testserver/final/', 302)]
+ 
+         If you set ``secure`` to ``True`` the client will emulate an HTTPS
+         request.
+@@ -1245,7 +1245,7 @@ your test suite.
+     failure. Similar to unittest's :meth:`~unittest.TestCase.assertRaisesRegexp`
+     with the difference that ``expected_message`` isn't a regular expression.
+ 
+-.. method:: SimpleTestCase.assertFieldOutput(fieldclass, valid, invalid, field_args=None, field_kwargs=None, empty_value=u'')
++.. method:: SimpleTestCase.assertFieldOutput(fieldclass, valid, invalid, field_args=None, field_kwargs=None, empty_value='')
+ 
+     Asserts that a form field behaves correctly with various inputs.
+ 
+@@ -1262,7 +1262,7 @@ your test suite.
+     ``a@a.com`` as a valid email address, but rejects ``aaa`` with a reasonable
+     error message::
+ 
+-        self.assertFieldOutput(EmailField, {'a@a.com': 'a@a.com'}, {'aaa': [u'Enter a valid email address.']})
++        self.assertFieldOutput(EmailField, {'a@a.com': 'a@a.com'}, {'aaa': ['Enter a valid email address.']})
+ 
+ .. method:: SimpleTestCase.assertFormError(response, form, field, errors, msg_prefix='')
+ 

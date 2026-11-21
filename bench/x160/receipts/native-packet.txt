@@ -1,0 +1,12 @@
+Decode first. Expand !diff P H M lines to:
+diff --git a/P b/P
+index H M
+--- a/P
++++ b/P
+Substitute literally; otherwise preserve; print only.
+¶ k=v. expand repeatedly; print only.
+§ә 100644
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed
+лә!diff docsт.md а/ялаoperationsан..о3ю/securityу/api/і/tutorialеrestoreмbйinstallationвsыf¶!diff docsай/linux.md a795b82..9e6daa4лай/windowsт52a072он1f5a7d7лай/macosт9baf78ынeabd8afлю/access-controlт46a87fcно5120acлю/key-rotationт47e3924ны46155eяbackupтоddaa39..7c5f996яет700d026..987cd55яmonitoringт8ff986мн554f422луauthenticationт6fd0efмн28b7bbолуpagination.md cd17915..0c00300ліваquickstart.md cом76af..429b437ліваdeploymentт6636c82..09746bdә

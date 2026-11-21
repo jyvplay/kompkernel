@@ -1,0 +1,7 @@
+{
+  "start": "  for (let id = 0; id < limit; id++) {",
+  "end": "  vocabCache.set(enc, out);",
+  "replacement": "  const module:any=enc==='o200k_base'?X160_O:X160_C;\n  const core=module.default?.bytePairEncodingCoreProcessor??module.bytePairEncodingCoreProcessor;\n  const vocabulary=core?.bytePairRankDecoder;\n  if(!Array.isArray(vocabulary))throw Error('X160 installed tokenizer rank decoder unavailable');\n  const minimum=Math.min(...CHIRON_SCRIPTS.flatMap(sc=>sc.ranges?sc.ranges.map(r=>r[0]):[sc.lo]));\n  for(let id=0;id<limit;id++){\n    let str:string;\n    // Non-string slots retain the original flushed decoder path (including BOM).\n    if(typeof vocabulary[id]==='string')str=vocabulary[id];\n    else {try{str=decodeIds([id],enc);}catch{continue;}}\n    if(!str||str.codePointAt(0)!<minimum)continue;\n    const cps=[...str].map(c=>c.codePointAt(0)!);\n    for(const sc of CHIRON_SCRIPTS){\n      if(cps.every(c=>chironInScript(sc,c))){out.get(sc.name)!.push(str);break;}\n    }\n  }\n",
+  "production": false,
+  "scope": "same ordered script-pool contents from installed rank decoder plus non-string fallback; decoder semantics unchanged; API-version dependent"
+}

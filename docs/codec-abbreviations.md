@@ -10919,3 +10919,55 @@ wall1.008726; prefix-resumption-disable ABBA12 CPU0.983800 / wall0.984099.
 Both>=10% significance gates FAIL;24/24 complete wires equal the fresh frontier.
 No speed optimization deployed. Final independent source/attack count121,
 including all6 complete outline messages; native remains NOT_RUN.
+
+## X160 — HAPLOGRAPHE (single writing; optional Git-header role codec)
+
+**Design:** canonical modified-file four-line Git headers become `!diff P H M`.
+The same path is regenerated in four roles; the hash pair and mode are literal.
+An explicit42-token LF template contract is included in every candidate price.
+This is format entailment/template coding, not a rename of ISOSTATHMIA's hunk
+count equations, KLIMAX's ordinal state, or STOIBAS's indentation trees.
+`src/lib/omega/haplographe.ts` includes bounded plan/undo/read and strict
+cheaper-than-incumbent selection. Optional only; not production/default.
+
+**Greedy/optimality:** deterministic maximal nonoverlapping matching header scan;
+no global BPE-optimality claim. Candidate retains the incumbent on ties/losses,
+parent exceptions, or inverse failure. Domains: UTF8-stable <=50k UTF16 units,
+ASCII unquoted matching paths, lowercase4–64digit hash halves, six octal mode
+digits, LF; marker collisions refused. Planning/inverse O(n) scan/space with
+bounded expansion. Optional selection adds one complete parent search; it is
+not free and has no improved asymptotic whole-stack bound. Experimental parent
+trials use300s/900MB on small fixtures; large Sphinx baseline hit1GB heap OOM
+and its pending candidate was stopped. No completed large-source price exists.
+
+**Measured gain and limits:** synthetic12-file witness265→253 full tokens
+(-12,4.53%); real4-file Sphinx commit491→504 loses13 and is rejected.
+Composed hunk-count variants also lose. The witness was constructed after a
+real-source loss: NOT heldout, NOT broad everyday-prose evidence. Exact TS and
+independent Python inverses cover both complete baseline/candidate pairs.
+2,138 unit checks,113 independent raw/attack checks,8 selector/key attacks.
+Native basic-chat decoding NOT_RUN; no Pareto-superiority certification.
+Complete RFC2119 follow-up: baseline808; KLIMAX plan declined, unchanged.
+
+**Speed:** whole cold TAGSTACK profile motivated a rank-decoder pool shortcut.
+Initial string-map version FAILED duplicate preservation; repair passed both
+encoding/all-script pool identity. Isolated12-call ABBA whole-encoder test:
+CPU ratio1.011384, wall1.016011, all12 wires identical. >=10% gate FAILED;
+no production speed patch. Pool micro-speed is not whole-stack acceleration.
+
+**Research:** Díaz-Domínguez, SEA2025, *Efficient Terabyte-Scale Text Compression
+via Stable Local Consistency and Parallel Grammar Processing*,
+DOI10.4230/LIPIcs.SEA.2025.14,
+https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.SEA.2025.14 .
+Classical grammar consistency is an antecedent, not a BPE/native guarantee.
+Fresh pinned OpenAI/Anthropic/Google/DoubleAI sources and precise dependency
+boundaries: `bench/x160/research.md`. Google support-rank tensor checked over
+784 integer coefficients: support equality is NOT exact arithmetic equality.
+No Lean replay, exhaustive lab audit, or model behavior inferred.
+
+**Frontier/category refresh:**29/29 wires identical to X159,11962tokens;
+21 bounded source reads,8 unsupported,29 token-ID/reference-price checks.
+Prose5856→3429(word), ops17278→5580(glyph), code4152→2636(word),
+other729→317(no tape class). Largest fixture savings remain apt-real1926,
+ls-l-real3884,json-pkg499,cue-sheet412. These are corpus-local leaders, not
+per-codec ablations or global optima. Receipts and failures: `bench/x160/`.

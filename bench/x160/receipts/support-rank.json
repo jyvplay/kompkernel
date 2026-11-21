@@ -1,0 +1,18 @@
+{
+  "coefficients": 784,
+  "rank": 24,
+  "dimensions": [
+    2,
+    2,
+    7
+  ],
+  "integerSupportIdentity": true,
+  "nonunitTargetCoefficients": 28,
+  "values": [
+    -8,
+    0,
+    8
+  ],
+  "notExactArithmeticMatmul": true,
+  "notMinimalityOrRuntimeProof": true
+}

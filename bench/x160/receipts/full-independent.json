@@ -1,0 +1,16 @@
+{
+  "rows": [
+    {
+      "name": "isolation",
+      "completeMessages": 2,
+      "sourceBytesEqual": true
+    },
+    {
+      "name": "constructed",
+      "completeMessages": 2,
+      "sourceBytesEqual": true
+    }
+  ],
+  "native": false,
+  "scope": "independent Python message-only parser vs original fixture bytes"
+}

@@ -1,0 +1,23 @@
+
+<--- Last few GCs --->
+
+[1785:0x13fd6000]   612095 ms: Mark-Compact (reduce) 948.7 (1033.5) -> 948.7 (1002.5) MB, pooled: 0 MB, 244.84 / 0.00 ms  (average mu = 0.088, current mu = 0.000) last resort; GC in old space requested
+[1785:0x13fd6000]   612298 ms: Mark-Compact (reduce) 948.7 (1002.5) -> 948.7 (1002.5) MB, pooled: 0 MB, 203.11 / 0.00 ms  (average mu = 0.047, current mu = 0.000) last resort; GC in old space requested
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: CALL_AND_RETRY_LAST Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0xe46bbe node::OOMErrorHandler(char const*, v8::OOMDetails const&) [node]
+ 2: 0x1243640 v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 3: 0x1243917 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 4: 0x14618cc v8::internal::HeapAllocator::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [node]
+ 5: 0x1439a0e v8::internal::Factory::AllocateRaw(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [node]
+ 6: 0x1427d9a v8::internal::FactoryBase<v8::internal::Factory>::AllocateRawArray(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [node]
+ 7: 0x1427ef6 v8::internal::FactoryBase<v8::internal::Factory>::NewFixedArrayWithFiller(v8::internal::Handle<v8::internal::Map>, int, v8::internal::Handle<v8::internal::HeapObject>, v8::internal::AllocationType) [node]
+ 8: 0x175c397 v8::internal::OrderedHashTable<v8::internal::OrderedHashMap, 2>::Allocate(v8::internal::Isolate*, int, v8::internal::AllocationType) [node]
+ 9: 0x175c422 v8::internal::OrderedHashTable<v8::internal::OrderedHashMap, 2>::Rehash(v8::internal::Isolate*, v8::internal::Handle<v8::internal::OrderedHashMap>, int) [node]
+10: 0x1892106 v8::internal::Runtime_MapGrow(int, unsigned long*, v8::internal::Isolate*) [node]
+11: 0x1dfcaf6  [node]

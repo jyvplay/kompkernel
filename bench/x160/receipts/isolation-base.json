@@ -1,0 +1,9 @@
+{
+  "path": "bench/x160/fixtures/isolation.diff",
+  "arm": "base",
+  "message": "¶ k=v. expand repeatedly; print only.\n§А/testТ_transformsо/testsАТАТ_postТ.pyт+әт    monkeypatch.delenv('NOу ы\nжу100644ы--- aе/AUTHORS.rstэ/CHANGES.rstө def test_status_iteratorчө_verbosity_сdiff --git aһ', raising=False)\nа,иа6 тр bцы+++рі/testsА_utilА_util_display.pyвы@@ -ҙы *гыindexя appн: SphinxTestAppл(\n    яна monkeypatch: pytest.MonkeyPatchы ) -> None:\nә_COLORһә_COLOURһ     monkeypatch.setenv('FORCE_COLOR', '1')\n     logging.setup(appая.statusая.warning)\n \nк(appн) -> None:\nү0ф81ъ19ҳ70м44¶серег b702c64cүf9..581d1fd4e68жецевфифа7 @@ Contributorsҙ Justus Magin -- napoleon improvementsҙ Kazuya Take -- ``sphinx.testing.path`` bug fixҙ Kevin Dunn -- MathJax extensionыт* Kilian Paul -- Docutils compatibilityауintl testsа and viewcode fixesҙ KINEBUCHI Tomohiko -- typing Sphinx as well as docutilsҙ Kurt McKee -- documentation updatesҙ Lars Hupfeldt Nielsen - OpenSSL FIPS mode md5 bug fixысэрэг dүbe07b8788..e2166de9afbжэцэвъиъа10 @@ Bugs fixed\n Testing\n -------\n ыт* #14690: Fix test isolation issues caused by shared test directories andыту inherited ``NO_COLOR`` and ``NO_COLOUR`` environment variables.ыту Patch by Kilian Paulыты Release 9.2.ү (released Oct 20ау2026)\n =====================================\n \nсорогу96f94f04910..81e99dd4ff2жоцовҳиҳа7 @@ def missing_reference(ыу@pytest.mark.sphinx(\n     'html',\n     testroot='domain-py-python_use_unqualified_type_names',\n+    srcdir='transforms-postТ-missing-reference-conditional',\n     freshenv=True,\n )\n def test_missing_reference_conditional_pending_xrefксіріг fce4ac1fbdf..f6f359efc8cжіцівмима8 @@ө_length_үкчүл@@ -64и66,8 @@чү(ыч1л",
+  "tokens": 491,
+  "scope": "operational optional chain through KLIMAX",
+  "ms": 22617.941604,
+  "cpuMs": 22884.872
+}

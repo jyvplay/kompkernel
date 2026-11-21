@@ -1,0 +1,84 @@
+diff --git a/docs/installation/linux.md b/docs/installation/linux.md
+index a795b82..9e6daa4 100644
+--- a/docs/installation/linux.md
++++ b/docs/installation/linux.md
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed
+diff --git a/docs/installation/windows.md b/docs/installation/windows.md
+index 52a0723..1f5a7d7 100644
+--- a/docs/installation/windows.md
++++ b/docs/installation/windows.md
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed
+diff --git a/docs/installation/macos.md b/docs/installation/macos.md
+index 9baf78f..eabd8af 100644
+--- a/docs/installation/macos.md
++++ b/docs/installation/macos.md
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed
+diff --git a/docs/security/access-control.md b/docs/security/access-control.md
+index 46a87fc..35120ac 100644
+--- a/docs/security/access-control.md
++++ b/docs/security/access-control.md
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed
+diff --git a/docs/security/key-rotation.md b/docs/security/key-rotation.md
+index 47e3924..f46155e 100644
+--- a/docs/security/key-rotation.md
++++ b/docs/security/key-rotation.md
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed
+diff --git a/docs/operations/backup.md b/docs/operations/backup.md
+index 3ddaa39..7c5f996 100644
+--- a/docs/operations/backup.md
++++ b/docs/operations/backup.md
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed
+diff --git a/docs/operations/restore.md b/docs/operations/restore.md
+index 700d026..987cd55 100644
+--- a/docs/operations/restore.md
++++ b/docs/operations/restore.md
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed
+diff --git a/docs/operations/monitoring.md b/docs/operations/monitoring.md
+index 8ff986b..554f422 100644
+--- a/docs/operations/monitoring.md
++++ b/docs/operations/monitoring.md
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed
+diff --git a/docs/api/authentication.md b/docs/api/authentication.md
+index 6fd0efb..28b7bb3 100644
+--- a/docs/api/authentication.md
++++ b/docs/api/authentication.md
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed
+diff --git a/docs/api/pagination.md b/docs/api/pagination.md
+index cd17915..0c00300 100644
+--- a/docs/api/pagination.md
++++ b/docs/api/pagination.md
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed
+diff --git a/docs/tutorials/quickstart.md b/docs/tutorials/quickstart.md
+index c3b76af..429b437 100644
+--- a/docs/tutorials/quickstart.md
++++ b/docs/tutorials/quickstart.md
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed
+diff --git a/docs/tutorials/deployment.md b/docs/tutorials/deployment.md
+index 6636c82..09746bd 100644
+--- a/docs/tutorials/deployment.md
++++ b/docs/tutorials/deployment.md
+@@ -1 +1 @@
+-Status: draft
++Status: reviewed

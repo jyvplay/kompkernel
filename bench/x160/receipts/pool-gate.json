@@ -1,0 +1,8 @@
+{
+  "identical": true,
+  "hash": "0131de519b9a69def2d7a394470f05611495e9cd343181e7ae649651cfd3892f",
+  "fullJsonSha256": "6a7c9041c5d2bead8861133a78f64a49ed933dc0ffb3a1438ba32ce9affe5eb9",
+  "scriptEncodingPairs": 20,
+  "initialAttempt": "FAILED: string-to-rank map omitted a duplicate decoded Hangul ngram; rank decoder plus original non-string path repairs it",
+  "timingClaim": false
+}
