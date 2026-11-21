@@ -1,0 +1,47 @@
+[1mdiff --git a/src/lib/omega/tagstack.ts b/src/lib/omega/tagstack.ts[m
+[1mindex d449170..b9cc0fc 100644[m
+[1m--- a/src/lib/omega/tagstack.ts[m
+[1m+++ b/src/lib/omega/tagstack.ts[m
+[36m@@ -1,3 +1,4 @@[m
++import { scalarCollect, scalarCollecting, scalarOffer } from './scalar';
+ import { isUtf8TransportStable } from './utf8-wire';[m
+ /**[m
+  * TAGSTACK (X47) — exact in-band close-tag stack elision.[m
+[36m@@ -432,7 +433,10 @@[m [mfunction tagstackEncodeInnerMeasured(text: string, enc: EncodingName = 'o200k_ba[m
+     }[m
+     // X144b: a code-unit inverse is not a UTF-8 wire inverse.[m
+     if (candidate.codec === 'synkrisis') synTokens = countTokens(candidate.message, enc);[m
+[31m-    if (!isUtf8TransportStable(candidate.message)) return;[m
++    if (!isUtf8TransportStable(candidate.message)) {
++      scalarOffer(candidate.message, text, enc);
++      return;
++    }
+     const tokens = countTokens(candidate.message, enc);[m
+     if (!Number.isFinite(tokens)) throw new Error(`${candidate.codec} produced a non-finite full-message cost`);[m
+     frontierCosts[candidate.codec] = tokens;[m
+[36m@@ -615,7 +619,8 @@[m [mexport function tagstackFrontier(text: string, enc: EncodingName = 'o200k_base')[m
+ export function tagstackEncode(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {[m
+   const memoOff = (typeof process !== 'undefined' && process.env?.OMEGA_NO_MEMO === '1');[m
+   if (memoOff) return tagstackX74Chain(text, enc);[m
+[31m-  const key = `X\u0000${memoKey(text, enc)}`;[m
++  const scalarMode = typeof process !== 'undefined' && process.env?.OMEGA_SCALAR === '1';
++  const key = `X${scalarMode ? 'S' : ''}\u0000${memoKey(text, enc)}`;
+   const hit = ENCODE_MEMO.get(key);[m
+   if (hit) {[m
+     ENCODE_MEMO.delete(key);[m
+[36m@@ -644,8 +649,13 @@[m [mexport function tagstackEncodeUncached(text: string, enc: EncodingName = 'o200k_[m
+ export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {[m
+   // X115 EPISYNEDRIA: one council spans the base frontier AND the X74 candidate[m
+   // re-entries. Disabled => no outer scope, and the inner scope is X114's.[m
+[31m-  if (synedriaChainDisabled()) return tagstackX74ChainMeasured(text, enc);[m
+[31m-  return synedriaChainScope(() => tagstackX74ChainMeasured(text, enc));[m
++  const run = () => synedriaChainDisabled() ? tagstackX74ChainMeasured(text, enc)
++    : synedriaChainScope(() => tagstackX74ChainMeasured(text, enc));
++  if (!(typeof process !== 'undefined' && process.env?.OMEGA_SCALAR === '1') || scalarCollecting()) return run();
++  const {base, repair, offered} = scalarCollect(text, enc, run);
++  if (!repair || repair.tokens >= base.messageTokens || repair.decoded !== text) return base;
++  return {...base, wire: repair.message, message: repair.message, messageTokens: repair.tokens,
++    decoded: text, applied: true, notes: `SCALAR ${offered} rejected parents, ${repair.variants} variants; ${base.notes}`};
+ }[m
+ [m
+ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {[m

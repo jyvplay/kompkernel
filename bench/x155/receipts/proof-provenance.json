@@ -1,0 +1,41 @@
+{
+  "pinnedByteComparisons": 5,
+  "rows": [
+    {
+      "repository": "openai/math",
+      "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+      "path": "lean/OAI/Algorithms/SubexponentialSAT/SqrtLogSpace/Statement.lean",
+      "local": "SAT-Statement.lean",
+      "sha256": "13b195bd1e472dd0e1fc57902d0bcec7c55e4a8ddf751cb7380b984b79368ee8"
+    },
+    {
+      "repository": "openai/math",
+      "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+      "path": "lean/OAI/Algorithms/SubexponentialSAT/SqrtLogSpace/NativeLargeEntry.lean",
+      "local": "SAT-NativeLargeEntry.lean",
+      "sha256": "14c73b43c00cb0bd8a7c407e94b78662bd80a92eb8ccff0cdde6130331b9e45b"
+    },
+    {
+      "repository": "anthropics/fermats-last-theorem",
+      "commit": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+      "path": "Theorems/Thm_fermat_last_theorem.lean",
+      "local": "FLT-Theorem.lean",
+      "sha256": "b678bb152910351b3c968a1ae59829fe7bcde15157856d5740bf799bfd5127db"
+    },
+    {
+      "repository": "anthropics/fermats-last-theorem",
+      "commit": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+      "path": "P2M/Sol/S_fermat_last_theorem.lean",
+      "local": "FLT-Solution-Body.lean",
+      "sha256": "a922fd533ad7a4a156092587f2eed1b2cb9a63f9d11675ab413a029ed59c5f1b"
+    },
+    {
+      "repository": "google-deepmind/alphaproof-nexus-results",
+      "commit": "0647711a71183c1ea492ad60860776617ce1ea88",
+      "path": "APNOutputs/AICollaborator/Optimization/LastIterateConvergence.lean",
+      "local": "LastIterateConvergence.lean",
+      "sha256": "8dbeb62e5ed2b3221b3f83e8f371491e327d8c002f03e916691e2ebb780d01c1"
+    }
+  ],
+  "kernelReplay": false
+}

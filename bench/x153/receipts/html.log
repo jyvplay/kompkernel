@@ -1,0 +1,5 @@
+{"stage":"TAGSTACK","tokens":848}
+{"stage":"HOMOSEMA","tokens":862,"mode":{"separator":null,"close":"]"}}
+{"stage":"HOMOSEMA","tokens":863,"mode":{"separator":null,"close":")"}}
+{"stage":"KENOMA-hole","incumbent":848,"tokens":871,"gain":-23}
+{"stage":"KENOMA-indent","width":2,"incumbent":848,"tokens":826,"gain":22}

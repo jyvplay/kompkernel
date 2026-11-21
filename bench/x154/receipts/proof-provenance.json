@@ -1,0 +1,48 @@
+{
+  "repository": "openai/math",
+  "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+  "pinnedByteComparison": true,
+  "files": [
+    {
+      "file": "openai-378.md",
+      "path": "lean/docs/378.md",
+      "sha256": "a2f7b390d6308997350b903be02c40a1227ebd2b9376982da528574500531f79"
+    },
+    {
+      "file": "openai-079.md",
+      "path": "lean/docs/079.md",
+      "sha256": "3c550c200f483746fb2cd47fff2f2ba0194a4ae9c11562e41c463814137a72a9"
+    },
+    {
+      "file": "SAT-comparator.json",
+      "path": "lean/ComparatorChallenges/SubexponentialSAT.json",
+      "sha256": "debbfdc9c01104d2369be80da5180978275106df8b685f693fba7ce7da7c5b19"
+    },
+    {
+      "file": "SAT-Main.lean",
+      "path": "lean/OAI/Algorithms/SubexponentialSAT/Main.lean",
+      "sha256": "cbd4cebf71f1d3239c21241f946d05e8de802dbb9c138713f8e7182d868b2d1c"
+    },
+    {
+      "file": "SAT-Final.lean",
+      "path": "lean/OAI/Algorithms/SubexponentialSAT/SqrtLogSpace/Final.lean",
+      "sha256": "040360a8465957622d934e5f1bb4f2cce8dab950e78f52033fbf70da493184f5"
+    },
+    {
+      "file": "LS-comparator.json",
+      "path": "lean/ComparatorChallenges/LocalSmoothing.json",
+      "sha256": "73392b548f23dd8b1b0b459fae548212b58aab280fdcd0120d06f856c18daa91"
+    },
+    {
+      "file": "LS-Comparator.lean",
+      "path": "lean/OAI/Analysis/Fourier/LocalSmoothing/Comparator.lean",
+      "sha256": "0e00b8b1eae7c30378e20f26cc875f502210b4a31a374970be5b0afd633e508d"
+    },
+    {
+      "file": "Superstring-Attachments.lean",
+      "path": "lean/OAI/Computability/Superstring/Attachments.lean",
+      "sha256": "236109787513d1f606460ca86063182e285cab74fefc0d04249991d89154d283"
+    }
+  ],
+  "kernelReplay": false
+}

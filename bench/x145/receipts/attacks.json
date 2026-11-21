@@ -1,0 +1,1 @@
+{"invalidShapes":["header","stable","no-body","high","low","interrupt","two-high","self","forward","unbound","bad-source","oversize","source-low","source-high","empty-tape"],"ruleCap":true,"exceptionCleanup":true,"dedup":true,"sourceScope":true,"headers":4}

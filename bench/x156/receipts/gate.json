@@ -1,0 +1,25 @@
+{
+  "rows": [
+    {
+      "path": "bench/x156/fixtures/python-maps.txt",
+      "base": 663,
+      "candidate": 549,
+      "gain": 114,
+      "selected": 549,
+      "sourceBytes": 6251,
+      "passed": true
+    },
+    {
+      "path": "bench/x156/fixtures/cat-maps.txt",
+      "base": 302,
+      "candidate": 299,
+      "gain": 3,
+      "selected": 299,
+      "sourceBytes": 2127,
+      "passed": true
+    }
+  ],
+  "clarifiedStateAttack": true,
+  "native": false,
+  "cachedWrapperIsNotFreshApi": true
+}

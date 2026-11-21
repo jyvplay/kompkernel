@@ -1,0 +1,5 @@
+{
+  "checks": 32,
+  "passed": true,
+  "scope": "arity mismatch, truncated/deep payload, malformed lexical tokens, duplicate keys, lexical numbers and Unicode separators"
+}

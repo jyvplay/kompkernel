@@ -9995,3 +9995,750 @@ Native NOT_RUN. The optional regex safety-check fast path was rejected after
 24 isolated whole-stack timings (B/A totals 0.97985, 1.03268, 1.02127); production
 uses the straightforward surrogate scan. This is a correctness repair, not a
 claimed compression or broad speed breakthrough.
+
+## SCALAR — state-specialized scalar-boundary grammar compiler (X145)
+
+SCALAR composes a plain CHIRON grammar with a pending-high-surrogate transducer.
+A shared rule can acquire multiple incoming-state variants; complete Unicode
+scalars remain on the wire while incomplete halves stay in compiler state.
+This is classical SLP/transducer composition applied to this repository, not a
+new general compression theorem. Unlike SYNARMOGE's existing greedy edge
+shrinking, the context-variant test produces two specialized versions of one
+rule. Selection greedily prices up to 32 rejected parents after the unchanged
+base search. No new decoder header is introduced. Enable experimentally with
+`OMEGA_SCALAR=1`; default remains disabled.
+
+Final deferred Vite result: **274 safe baseline → 260 tokens**, a 14-token
+(5.11%) discovery-lane improvement. Earlier direct-selection 257 is superseded;
+the fixed historical unsafe parent independently repairs to 258. Two additional
+package README trials do not improve. Independent program reads are not native
+LLM verification. No whole-stack acceleration or broad Pareto superiority is
+claimed. Bounds, attacks, six mechanisms, source citations and gaps:
+`bench/x145/REVIEW.md`, `research.md`, and `receipts/summary.json`.
+
+X145 default 29-lane rerun is message-identical to X144b, **11,962 tokens**.
+Body-token category leaders remain: prose **wordlike**, 3,429 total tokens;
+ops/tabular **glyph**, 5,580; code/structured **wordlike**, 2,636; other 317,
+no tape-class leader. These classify emitted body BPE tokens, not semantic
+word counts or lower bounds. Timing receipts from concurrent sweeps are not
+isolated A/B speed evidence. Native/Lean replay NOT_RUN; merge gate unmet.
+
+Final X145 opt-in sweep is also message-identical: 29/11,962, zero canonical
+wins. Separate isolated 24-call ABBA/BAAB speed test failed its schedule-robust
+gate: Vite/KB/metrics B/A wall ratios 0.871/0.887/0.835 reverse to
+1.191/1.060/1.129. No speed improvement is accepted. Final wire gate: 63
+transport/token-ID/price checks, 47 source-byte reads; 16 unsupported entries
+represent the same eight inherited formats in two sweeps.
+
+## EKDYSIS — complete JSON quoting-layer removal (X146, experimental)
+
+**Name/design:** EKDYSIS means shedding a layer; it is not an acronym. Remove
+one to four complete *canonical JSON-string serialization* layers before the
+parent searches the text. A whole-source string needs only an in-band
+`JSON.stringify the decoded payload; print only.` instruction; selected embedded
+strings use `⟦text⟧` frames. The inverse restores all quote/escape bytes. This
+exposes multiline prose/code to the existing parent instead of teaching a new
+vocabulary. It does not merely rename SCALAR (surrogate-state grammar repair),
+JSON-ESCAPE-FOLD (five punctuation escapes), or GRAMMA (layout outside strings).
+Standard serialization inverse is prior art; repository novelty is scoped to
+the implemented complete-layer/preconditioning route, not new science.
+
+**Greedy/search:** deterministic left-to-right nonoverlapping string scan;
+per-span gain filters at thresholds 0/8/32, depths 1–4; exact minimum over the
+finite standalone menu. Parent composition tries the lowest standalone-cost
+plan only, so that allocation is heuristic, not a global parent optimum.
+Baseline survives unless the complete candidate is strictly smaller and its
+message-only decoder reconstructs source bytes. No default TAGSTACK wiring.
+APIs: `ekdysisEncode` / `ekdysisDecode` (standalone),
+`ekdysisFrontierEncode` / `ekdysisFrontierDecode` (optional parent composition;
+fallback retains its parent decoder).
+
+**Resources:** CPU/work-bounded planner (100,000 UTF-16 units, 10,000 strings,
+four layers); composite reader caps grammar expansion, 128 rules and layout
+padding. Full parent searches have no new wrapper-wide time bound. The optional
+codec pays for the baseline plus one transformed search. On the measured HTTPX
+win this is **1.887× baseline wall time**, not a speed improvement.
+
+**Citations:** standard JSON serialization; Amazon Redshift's nested-string
+serialization documentation describes de-escaping into inline values, but that
+alone changes types and is not byte-exact:
+https://docs.aws.amazon.com/redshift/latest/dg/serializing-complex-JSON.html .
+Schmidt et al., EMNLP 2024, DOI 10.18653/v1/2024.emnlp-main.40, cautions against
+equating token-count optimization with model effectiveness; it is not the source
+of this algorithm. See `bench/x146/research.md` for precisely scoped live
+sources, 2018/2023 grammar results and primary lab-statement inspections.
+
+**Measured result:** exact JSON-string token of HTTPX's real PyPI description,
+**1040→1024 tokens (16 / 1.54%)**, independently source-read and reproduced by
+the final wrapper. Three full GitHub API snapshots lose 33–40 tokens; Jieba's
+quoted description loses 2. This is an API/quoted-document discovery result,
+not a broad natural-prose claim. Pypinyin was killed (137), Rich hit the 1800 MiB
+Node heap limit (134), and FastAPI was not reached; their standalone raw savings
+are NOT parent wins. Native basic-chat reconstruction **NOT_RUN**; ready prompts
+and strict checker are in `bench/x146/native/`. Overall Pareto gate fails.
+
+**Separate speed experiment:** `prolepsisConfigScope` snapshots four settings at
+synchronous call entry, with nested-scope inheritance and finally cleanup, not
+at module import. No new codec or decoder. Under constant-in-call settings,
+20 isolated full-stack calls (4 warmups, 16 measured) preserve messages;
+warmed ABBA/BAAB B/A wall ratios: KB **0.954/0.966**, metrics **0.953/0.981**.
+A modest 2–5% result on two lanes, **not** the requested significant 10% gain;
+not automatically enabled. Do not subtract it from EKDYSIS's separately measured
+encoder overhead or treat these deltas as additive.
+
+### X146 reconfirmed frontier / generalized local leaders
+
+Default 29-lane sweep: **11,962**, every message identical to X145. Config:
+DET=1, NO_MEMO=1, ENGRAM=0, OURA_MEMO=0, NO_OROTHESIA=1, SCALAR=0,
+o200k_base. SCALAR Vite freshly reconfirmed at **260**; the full optional SCALAR
+sweep remains the X145 historical measurement.
+
+| Structure class | Local leading route / evidence | Current totals/examples |
+|---|---|---|
+| Prose/documents | Macro frontier + phrase/legend/order refinements; wordlike body tokens lead | 3429 total; KB 620, email 486, LLM answer 664 |
+| Ops/tabular | Layout/arithmetic/field-dependency parents plus macro refinements; glyph body tokens lead | 5580 total; metrics 197, df-real 123, psql 229 |
+| Long Unix listing | SYNTHESIS mode/size/template fusion, then GENNADAS refinement (receipt notes) | ls-l-real 1310 |
+| Code/structured | Structural/macro frontier, SYNARMOGE span/rename refinements; wordlike body tokens lead | 2636 total; JSON package 653, TypeScript 949 |
+| Small/raw and non-tape other | No shared body-token leader; identity on the three short CLI lanes | other total 317: lsblk 60, uptime 80, free 76, cue-sheet 101 |
+| JSON-quoted package description (additional discovery lane) | EKDYSIS whole-layer preconditioning | HTTPX 1040→1024; runtime/native caveats above |
+
+These are local measurements and composition notes, not universal codec rankings.
+Final source gate: 36 complete prices/transport/token-ID checks, 28 supported
+source reads, 8 inherited reader formats unsupported. 8,208 unit assertions;
+2,079 independent Python reads, mostly repeated/synthetic diagnostic outputs.
+TypeScript/build pass. Details and A–J review: `bench/x146/README.md`,
+`REVIEW.md`, `receipts/summary.json`. Conditional merge remains blocked.
+
+## X147 — HORION (ὅριον, boundary): exact threshold-derived CSV column
+
+**Experimental, opt-in only.** HORION discovers a two-valued column separable by
+one exact decimal threshold in another column. It transmits the boundary and
+labels, not a finite key lookup; unmodified raw surviving cells retain spelling.
+This is a scoped repository addition, not invention of functional-dependency
+compression. Keyword audit and selected module inspection are not exhaustive.
+Source/implementation: `src/lib/omega/horion.ts`, `horion-frontier.ts`;
+A–J, research and receipts: `bench/x147/`.
+
+**Design / greediness:** 8–1000 data rows, 2–16 columns, ≤40k UTF16 units,
+unquoted LF CSV, bounded signed decimal syntax. BigInt comparisons avoid
+floating-point collapse. Enumerates column pairs and exact separating boundary;
+parent composition tries only the cheapest standalone plan (greedy across
+representations, no global-optimality claim). Compact append rule requires
+identifier labels/headers and a unique predictor header. CRLF, quotes,
+contradictory labels, tied values crossing labels, exponent numerals and
+supplementary characters are conservatively excluded. Final source comparison
+and complete-message strict gain gate precede optional admission.
+
+**Measured gain:** public seaborn `geyser.csv`, 272 observations,
+`kind = short if waiting<68 else long`: **787→775**, 12 tokens /1.52%.
+Initial verbose composite lost48 (835); final repaired contract and wrapper
+were tested afresh. TS and independent Python read both actual parent and
+candidate against frozen source/API bytes. Six executable mechanism controls,
+986 unit assertions,8 composite checks,5 compact-specific mutation attacks.
+This is discovery data, not unseen validation or a natural-prose gain.
+**Native fresh-chat gate NOT_RUN; overall Pareto/merge gate fails.**
+
+**CPU/time:** local planner O(C² R log R) plus serialization/tokenization,
+bounded numeric comparison. Parent composition adds a second parent search.
+One shared-machine wrapper run:219.506s baseline/planning phase,
+296.159s total,287.373s CPU; ratio1.349×, NOT a speedup or isolated ABBA result.
+Planner-only ten geyser calls58.9ms and ten canonical rejection sweeps4.22ms
+are not whole-stack acceleration. No performance improvement is claimed.
+
+**Citations:** SQUISH (Gao/Parameswaran2016),
+https://pmc.ncbi.nlm.nih.gov/articles/PMC5293150/ ; Virtual (EDBT2025),
+https://openproceedings.org/2025/conf/edbt/paper-298.pdf . They motivate explicit
+attribute-dependency/metadata accounting, not BPE/native-reading guarantees.
+Scoped live primary-file follow-ups for OpenAI,Anthropic,DeepMind,Axiom are in
+`bench/x147/research.md`; no Lean/kernel replay or exhaustive lab audit.
+
+### X147 freshly reconfirmed frontier and category leaders
+
+29 lanes **11,962**, every complete message identical to X146; HORION is
+eligible on **zero** canonical lanes. DET=1,NO_MEMO=1,ENGRAM=0,OURA_MEMO=0,
+NO_OROTHESIA=1,SCALAR=0,o200k_base. Optional SCALAR Vite freshly260;
+no claim of a new full optional-SCALAR sweep.
+
+| Category | Tokens | Local leading body-token class |
+|---|---:|---|
+| Prose/documents |3429|wordlike|
+| Ops/tabular |5580|glyph|
+| Code/structured |2636|wordlike|
+| Other |317|none (no shared tape)|
+
+Existing route descriptions/examples above remain unchanged. New discovery
+threshold-table lane: HORION775 versus parent787, with native/runtime caveats.
+Fresh canonical message-only reads21/29;8 inherited formats unsupported.
+All29 prices/transport/token-ID checks pass, plus the added candidate.
+TypeScript and final build PASS; initial build exited137 and is retained as a
+failure receipt (cause unknown). Conditional merge remains blocked.
+
+### X148 — EPITYPOS (ἐπίτυπος, "impressed/overstruck"): reversible character-overstrike factorization
+
+**What it is:** a bounded, reversible ASCII overstrike span planner. Real manuals
+rendered by `Pod::Text::Overstrike` (bold = `c BS c`, underline = `_ BS c`) are
+factored into a small parenthesized style-stack contract plus a folded body with
+stack-validating toggles. Ordered delimiter pairs `**/__`, `**/~~`, `^^/~~` are
+tried in order and a dynamic epitypos key (index-counted closing delimiter) makes
+collision repair exact: a body containing literal `__` is admitted under an
+alternate pair with unambiguous matching close markers. Decoder = local,
+bounded, character-visible stack processing with byte-exact inverse; ordinary
+parent readers fail closed on the envelope instead of guessing.
+
+**Scope honesty:** applied to real rendered manuals only (2266/9717/19265 chars,
+80/100/477 backspaces); NOT general prose/ops; not parent-frontier-competitive
+alone (six executable controls below). New repo files
+`src/lib/omega/epitypos.ts`, `epitypos-frontier.ts` (+ unit suite, 2289 checks /
+754 accepted cases, three real manual sources byte-verified in-suite).
+
+**Measured (repaired planner, fresh run):** overstrike manual **594→502**
+(92 tokens, 15.5%); text manual **1941→1822** (119 tokens, 6.1%); usage manual
+(contains literal `__`) is planner-eligible and planner+inverse byte-exact in the
+unit suite; its WHOLE-STACK composite did not complete on this machine (heap
+exhaustion >2.2 GB, receipt `bench/x148/receipts/usage-postrepair.log`) and is
+therefore NOT measured — a recorded capacity boundary, not a compression result.
+First-run numbers used the single-delimiter version; repaired candidates inherit
+no trust, so all gates were rerun after the fix.
+
+**Greediness:** greedy left-to-right style stack with first-fit delimiter-pair
+selection; not optimal, no global search over pair assignments.
+
+**CPU/time:** O(n) scan plus collision re-plan; whole-run wall times in
+`bench/x148/receipts/probe-postrepair.log` are shared-machine and are NOT
+isolated speed evidence.
+
+### X148 — PERIBALLON (περίβαλλον, "surroundings"): synchronous environment-read scope (NOT default)
+
+Opt-in synchronous Node `process.env` proxy: reads snapshot, writes/deletes/
+defineProperty forwarded immediately, nested scopes restore precisely in
+`finally`, end-of-scope audit rejects out-of-band replacement. NOT an isolation
+or security boundary: Windows bypasses, native mutation is excluded by
+precondition, transient out-of-band mutations that revert before exit are
+missed, async work is not cancelled. Default behavior unchanged; 916 unit
+checks.
+
+### X148 speed experiments — both falsified, reported not shipped
+
+- **Native LCP prefix comparison** (`lcp-native.ts` scope in PROLEPSIS):
+  exact (9,880 unit checks, no hashing/normalization changes), but isolated
+  warm ABBA/BAAB A/B gives 0.969/1.039 wall (kb-article) and 0.978/1.006
+  (metrics.tsv) — order-inconsistent noise, far below any promotion threshold.
+  Not default.
+- **Environment-read scope as encode acceleration:** 0.997/1.004 and
+  0.972/0.991 — same verdict. Not default.
+
+### X148 — SYNARMOGE deadline honesty gate
+
+The frontier's final joint search (X133) keeps a real-time deadline even under
+`OMEGA_DET=1`; its fixed point is therefore wall-clock-dependent in principle.
+New unit gate (`bench/x148/synarmoge-slice.ts`): expired deadline admits no
+candidate (output falls back to the frontier unchanged); truncated and resumed
+runs stay byte-exact-gated and strictly-cheaper-gated; the fixed point on the
+reconfirmed lanes is stable (no move admits even from a degraded-but-exact base).
+This measures the mechanism; it does not make the search deterministic, and no
+determinism claim is made.
+
+### X148 frontier reconfirmation — exact statement (supersedes X147 total)
+
+Canonical rerun COMPLETED after resumed pauses: 29/29 messages byte-exact
+(`bad:0`), reader support unchanged (21 supported / 8 unsupported inherited
+formats), final total **11,963 = X147's 11,962 + exactly one token on
+`bench/holdout/code-ts.txt` (950 vs 949)**, whose recorded SYNARMOGE note shows
+`ren=1` fired in the rerun where it had not before. The reconfirmed
+configuration is therefore byte-valid everywhere and **time-sensitive on one
+lane** under paused/resumed machine load; the X147 total is not exactly
+reconfirmed and this page states 11,963 as the current honest total. No new category-leader table is claimed this turn; the X147 leaders
+(prose 3429 wordlike / ops 5580 glyph / code 2636 wordlike / other 317 none)
+remain the last full-sweep numbers.
+
+### X148 six executable mechanism-distinct controls (overstrike manual lane)
+
+All six byte-exact against frozen source (`bench/x148/receipts/controls.json`):
+style transducer 574, positional-insertion 823, Brotli 863, line-dictionary 814,
+character-runs 10,125, codepoint-deltas 4,548 — every one is MORE EXPENSIVE than
+the accepted parent-composed output (502), which is the content of the negative
+result: EPITYPOS alone is not parent-competitive; the gains reported are
+additive-on-parent, measured through the full pipeline.
+
+### X148 research notes (downloaded, individually inspected to stated depth)
+
+- OpenAI `Computation.lean`: trace-based `RunsIn`/`CostedTrace` runtime-bound
+  framework; the lemma machinery (state-dependent cost → target runtime bound)
+  is the same shape as an encode+decode cost audit, but the file defines the
+  QUANTIFIERS, it does not measure our stack.
+- Anthropic failure memo (E3 defeq-failure memoization): a real engine-level
+  "failed comparisons repeat" cache — the same idea already exists here as
+  exact value memos; motivates measurement, adds no new codec.
+- Axiom dihedral monotonicity / DeepMind PQXDH headline: imported results with
+  explicit hypotheses (rate functions constant on inverse orbits; δ-correct KEM
+  bound terms) — no interface to token compression found; no Lean replay.
+- DoubleAI girth-8/5: primary PDF fetch FAILED (transport), claim not examined
+  beyond the fetched web page; zk-ECDSA resource proof audited by us only to
+  README depth (SP1/Groth16, GPU required — unavailable here); treated as
+  UNVERIFIED claims.
+- Fresh literature: BiYacc 2015 (reversible parser/printer via Put/Get — prior
+  art for exact round-trip text), LTSC 2025 (repeated-token meta-dictionary —
+  requires added vocabulary/fine-tuning, incompatible with the native-reading
+  constraint), strategic deletion + LLM reconstruction (explicitly lossy).
+
+### X149 — ΠΟΛΥΣΤΗΛΗ (polysteli, "many columns"): right-edge grid tiling with a verbatim tail
+
+**X150 correction:** X149's implementation accidentally emitted the padded
+`rebuilt` row instead of the compact fields. Its reversibility tests could not
+catch that no-op, and its chain A/B did **not** test the intended transform.
+The earlier claim that this transform was refused on every lane, the proposed
+causal explanation, and the claimed 28/28 opt-in wire comparison are withdrawn.
+The committed opt-in frontier receipt was incomplete (A: 0 rows; B: 14 rows);
+the background worker was still running at turn end. The separate raw
+feasibility prototype was not a byte-exact chain measurement. X150 repairs the
+emission and adds patch-targeted tests and independent source-byte inverses;
+see `bench/x150/` for actual results. The arm remains default-off.
+
+**What it is:** a geometry codec. Within each blank-line block it finds
+stretches of rows whose first K whitespace fields END at K uniform column edges
+(right-edge tiling), replaces padding by a one-line ruler contract, and carries
+everything after the K-th edge VERBATIM (multi-token tails: `ls -l` names with
+`-> /lib/...`, `ps aux` commands). Contract:
+`॥10,3,5,5,9,4,3,6:149 rows single-spaced, pad field k to width k, rest verbatim.`
+Reader: for the next R rows read K single-spaced fields, pad field k with spaces
+on its left so it ends at the k-th cumulative edge, append the remainder of the
+row verbatim; throws on width lies, missing fields, or short row counts (fail
+closed). **Relation to ΣΤΉΛΗ (X124)** — honest scope: same geometry family, but
+the slice model of ΣΤΉΛΗ cannot carry a multi-token tail; measured
+`steliTransform(ls-l-real) = NULL` while ΠΟΛΥΣΤΗΛΗ fits 149 rows. The mechanism
+delta (end-edge tiling + verbatim tail + per-block stretches) is exactly what
+unlocks the largest ops lane.
+
+**Gates:** G1 stretch ≥6 rows, ≥24 pad chars, K≥4; G2 per-row byte rebuild +
+tab/CR/marker-in-source refusal; G3 whole-message undo identity; G4 parent
+decodes the rewritten text; G5 undo(parent output) = source; G6 strict gain or
+the incumbent ships. Re-entrancy guard; `OMEGA_NO_POLYSTELI=1` opt-out.
+
+**Greediness:** greedy — first uniform-edge fit per stretch, no global search
+over alternative K or cross-block joint geometry; not optimal.
+
+**Measured after the X150 repair:** unit tests now assert that a padded row
+actually becomes compact; an independent Python inverse reproduces the source
+bytes for all four real grid fixtures. Complete raw folded texts (including
+markers) cost ls-l 5194→4786, ps-aux 3054→2901, ps-ef 1144→1020 and kubectl
+1006→966. These are **not** parent-composed results. The original X149 unit
+suite also passes after repair, but it alone did not detect the defect.
+
+**Status:** default-off (`OMEGA_POLYSTELI=1` to test). X149's old no-op arm
+produced kubectl 316 vs 300 in a fresh process; the reason for the difference
+was not isolated. Its incomplete parallel receipt cannot establish what happened
+on the other lanes. X150's repaired-arm receipts are separate, and no native
+fresh-chat behavioral verification has been performed.
+
+**CPU/time:** transform is O(rows²) probe per stretch position with
+per-row regex parsing (ls-l ~1.5 s); the dominant cost is the parent-chain
+re-encode priced by G4 — wall times in the receipts are shared-machine and not
+isolated speed evidence.
+
+### X149 — batch frontier parallelism (driver-level speed, library unchanged)
+
+`bench/x149/frontier-worker.mjs` + a two-process balanced split of the 29 lanes
+(greedy partition by X148 per-lane ms). Per-lane logic and flags are IDENTICAL
+to `bench/x148/frontier.ts`; each lane's returned decoded field is compared with
+the source in its worker (exit 3 on mismatch). The historical 899,136 ms
+parallel versus 1,594,918 ms sequential runs give a **1.77× descriptive wall
+time ratio**, but they were not a controlled repeated A/B and X148 reported
+only 26/29 identical wires versus its earlier configuration. They therefore do
+not establish an identical-wire speedup or isolate load/clock effects. X150's
+fresh two-process run took 935,816 ms with 29/29 wires identical to X149, but
+it too is a single shared-machine run. Both are batch-throughput observations,
+not evidence that a single `tagstackEncode` call is faster. The X148
+library-level candidates had ratios 0.969–1.039 on two measured lanes.
+
+### X149 frontier reconfirmation and the code-ts time-slice answer
+
+Before the codec landed, the parallel rerun reproduced the X147 configuration
+EXACTLY: total **11,962**, 29/29 messages byte-identical to X147 (receipt
+`bench/x149/receipts/frontier.jsonl`), resolving X148's open question: code-ts
+returns **949 under parallel load**. The attribution of X148's 950 to a
+particular time slice is a hypothesis rather than an isolated causal test.
+X149's post-codec opt-in run was incomplete when it was reported; see the
+X150 correction above and the separate new baseline receipt in `bench/x150`.
+
+### X149 residual measurements (decision receipts, not codecs)
+
+**X150 correction:** the 138 whitespace-collapse and 237 digit-to-zero figures
+are token deltas for specific lossy rewrites, **not mathematical upper bounds**
+on other codecs. The digit replacement maps both `12` and `34` to `0` and is
+not invertible. Token-boundary effects also defeat the earlier general
+word-substitution break-even claim. The X149 diff probe correctly counted one
+adjacent minus/plus pair in that fixture, but its 13→11 coded string drops the
+common prefix and suffix, so it is not a reversible codec comparison. These
+measurements do not rule out their respective mechanism families.
+
+### X149 leaders (X134 classifier on the X149 pre-codec frontier receipt)
+
+| Category | Lanes | Raw | Frontier | glyph | word | num | other | Leader |
+|---|---|---:|---:|---:|---:|---:|---:|---|
+| PROSE | 5 | 5856 | 3429 | 839 | 1629 | 108 | 231 | word |
+| OPS/TABULAR | 16 | 17278 | 5580 | 1202 | 1105 | 808 | 380 | glyph |
+| CODE/STRUCT | 4 | 4152 | 2636 | 639 | 945 | 102 | 307 | word |
+| OTHER | 4 | 729 | 317 | — | — | — | — | none (tape-free) |
+
+Body-token classes per the X134 classifier — not word counts, not lower bounds.
+
+### X149 negative space — fifteen shapes that look like solutions and are not
+
+1. Encoder self-report of exactness (`decoded === text` by identity) — the
+   program inverse is not behavioral verification; X148 modal shortcut.
+2. Any Brotli/base64/arithmetically-coded wire — opaque; fails native reading.
+3. zip2zip-style hypertokens — needs fine-tuning; violates unchanged chat.
+4. LLMLingua-style deletion — lossy by construction.
+5. ONTO-style wire redesign — you control the payload; our input is given bytes.
+6. Whitespace-run RLE — runs cost 1 token; restore costs more (measured).
+7. Digit-run recoding (base-36 etc.) — gross bound 237 and native arithmetic
+   unreliable; inadmissible.
+8. Word→glyph substitution for 1-token words — break-even by BPE economics.
+9. Month-name → glyph — same break-even, measured in the ls-l residual.
+10. Diff-pair ⟨a|b⟩ joint coding — one pair in the canonical lane (measured).
+11. Per-line width tables instead of a shared ruler — contract exceeds savings.
+12. Cross-message dictionaries — violates single-chat.
+13. Positional offset lists (insert-at-index) — measured 823 vs 502 (X148).
+14. Unicode normalization / case folding — changes bytes or gains nothing.
+15. "LLM would probably reconstruct it" probabilistic repair — not byte-perfect;
+    the modal shortcut. Detection test: any accepted receipt whose stored decode
+    was not produced by the full inverse chain fails the gate — enforced by
+    G3–G5 above and the worker exit-3 checks in the frontier drivers.
+
+### X149 citations
+
+ONTO (arXiv 2604.17512, fetched) — columnar structural savings prior art.
+zip2zip 2025, AlphaZip (arXiv 2409.15046), LLMLingua 2023/2024, ZFP/DCTZ 2025 —
+recorded boundaries, each inadmissible for a stated reason (see research.md).
+No Lean/kernel replay of any lab artifact was possible in this sandbox.
+
+### X150 — CHRISMATA (terminal SGR, experimental and unwired)
+
+- **Design.** `src/lib/omega/chrismata.ts` removes Git's exact paired green
+  addition and red deletion SGR wrappers when the existing `+`/`-` first
+  character determines which bytes to restore. Empty lines use the exact
+  single-wrapper form; nested or different SGR is left literal. The entire
+  plan must invert to the source, including LF and UTF-8. If a literal line
+  with a selected sign would be rewritten, that whole plan is rejected.
+  The outer key is in-band; the bounded message-only reader accepts only its
+  known parent grammar and source-checks the reconstruction. The incumbent is
+  returned unless complete message tokens strictly decrease. No default-chain
+  wiring; no additional user vocabulary or hidden dictionary is requested,
+  but actual native behavior remains untested.
+- **Relationship/novelty.** This is a new repository *implementation* for
+  line-content-conditioned SGR, not a new information-theoretic primitive.
+  It is related to derivable-character elision (STOICHOS) and EPITYPOS's
+  terminal formatting. A source-tree term search found no existing named SGR
+  implementation; that search is not a proof about every possible equivalent
+  behavior in the entire stack.
+- **Greedy?** One deterministic scan, not a greedy optimization or an
+  exhaustive search; two-candidate whole-message comparison is a gate.
+- **Citation.** Git `color.diff` and `git diff --color` documentation,
+  https://git-scm.com/docs/git-config and https://git-scm.com/docs/git-diff/2.19.0;
+  Linux console SGR syntax, https://manpages.debian.org/testing/manpages/console_codes.4.en.html.
+  These are format prior art, not a paper claiming this codec.
+- **Time/CPU.** Linear scan and inverse under a 50,000-code-unit cap; the two
+  parent calls dominate CPU and inherit any parent clock gates. It is not a
+  library speedup; on refusal the additional parent search is overhead.
+- **Measured.** 44 unit/attack assertions across CHRISMATA and ΠΟΛΥΣΤΗΛΗ,
+  and four separate Python byte-level CHRISMATA inverses. Full parent A/B on
+  three real Git color fixtures: 499→580, 617→704, 721→806 candidate tokens;
+  all refused. A 106-line prefix of the larger diff also lost 1188→1269; it is
+  not an independent fixture. On the 29 canonical lanes the planner fits zero.
+  Raw savings on the 316-addition real Git diff (9210→4722) are **not** a
+  parent-chain or native-reading result; its full parent tournament timed out
+  at 1200 seconds without a completed price. See
+  `bench/x150/receipts/` for exact scope and the held-out fixture provenance.
+
+### X150 completed baseline and split-grid check
+
+Default-off fresh two-worker rerun: 29/29 wires match X149; **11,962 tokens**.
+The bounded repository reader independently reaches the source on 21/29; the
+remaining eight are unsupported, not verified. X134 classification is rerun in
+`bench/x150/receipts/leaders.json`, with source-to-frontier category leaders in
+`local-leaders.json`. The two-grid ps-aux variant is an extension of
+ΠΟΛΥΣΤΗΛΗ, not a new primitive: 2871 raw vs 2901 one-grid, but **1046 complete
+parent tokens vs 980 incumbent**, source-read exact, so it is rejected. See
+`bench/x150/README.md` for full limitations and reproducible commands.
+
+### X151: DIATHESIS (ΔΙΑΘΕΣΙΣ), experimental grammar-order carrier
+
+Not an acronym: the name refers to arrangement. `src/lib/omega/diathesis.ts`
+carries seven lowercase hexadecimal digits as the lexicographic permutation rank
+of twelve existing contiguous independent CHIRON rules, modulo 16^7. The entire
+reader instruction is transmitted. Unique keys, Unicode-code-point sort order,
+window start/size and a sole collision-free `~` residual marker are required.
+The bounded reader refuses unsupported parents; decoded bytes and full o200k
+message cost are checked before strict incumbent selection. Unwired/default-off.
+
+Search: deterministic first eligible source site, then bounded enumeration of
+independent windows and congruent ranks (128-trial cap). Not greedy hill-climbing,
+not globally exhaustive; minimal feasible window size only. Parent TAGSTACK search
+retains its existing heuristic/greedy components. CPU work includes parent search,
+BigInt rank/unrank, parsing and tokenization; no new wall-time or CPU speed win.
+50,000 UTF-16-code-unit input cap; up to 512 parsed rules and reader windows up to 20.
+
+Novelty scope: repository-specific combination of existing grammar-order freedom
+and information-carrying permutation rank. VALENCE already ranks permutations;
+METATAXIS already optimizes tape order. No claim to invent either primitive.
+External antecedents: *Steganography 19 — The Order of the Code* (2010),
+https://www.codeproject.com/Articles/62290/Steganography-19-The-Order-of-the-Code;
+Sadié et al. (2024), https://doi.org/10.1007/978-3-031-63110-8_14.
+These concern permutation embedding, not a theorem of net chat-token reduction.
+
+Actual full parent: ps-aux **1062 vs 980**, rejected; kubectl folded parent 319 vs
+300 with no supported feasible carrier, rejected. The ps-aux emitted candidate is
+independently Python-decoded to source bytes. Synthetic 5928 assertions are not a
+frontier gain; native single-chat decoding is **NOT_RUN**, not confirmed.
+
+X151 pre-repair baseline: 29/29 messages equal X150, 11962 tokens, workers exit 0;
+bounded source reader 21/29 with eight unsupported. Category totals/leaders are
+unchanged and identity-bound in `bench/x151/receipts/local-leaders.json`: prose
+word-class, ops/tabular glyph-class, code/structured word-class, other no tape.
+This is token-class census, not per-codec ablation. Timing was concurrent and is
+not evidence of acceleration. See `bench/x151/README.md` for the post-repair gate.
+
+ARIADNE scratch repair: dynamically grow all four affected-pattern/update arrays
+past 65536 patterns and clear generation stamps before signed Int32 wrap. Boundary
+reproducers failed before and pass after; 70 patch-specific regression assertions
+cover both scorers and commits. Correctness repair, **not** a speedup claim.
+
+X151 post-repair full rerun also completed: **29/29 wires identical, 11962 tokens**,
+both workers exit zero, 884245 ms concurrent wall. No controlled speed claim.
+
+### X152 — HOMOSEMA (same sign): parser-state terminal coalescing
+
+**Experimental/unwired**: `homosema.ts`, optional full-parent tournament in
+`homosema-frontier.ts`. Not an acronym. JSON grammar state determines colon versus
+comma and object versus array closing type. The codec merges those spellings and
+has the reader restore their types while keeping **every other source byte**.
+It does not parse/reprint values: duplicate keys, numeric lexemes, escape spelling,
+whitespace, CRLF and final newline remain literal. Strings are excluded from edits.
+
+**Search/greediness:** finite enumeration of 11 separator/closer dialects (4×3 minus
+identity), not greedy. Composed optional selector searches two close-only dialects;
+source-matched incumbent and actual folded-parent outputs must pass a bounded
+message-only reader, UTF-8 stability and strict full-message price. Parent search
+retains existing heuristics. Exact ordinary CHIRON-header fusion removes duplicated
+instructions, not the restoration rule. Fused instruction:
+`¶ k=v; expand repeatedly. Outside JSON strings, ] closes either container; print only.`
+The `)` dialect is equivalent with that closing character substituted.
+
+**Bounds/cost:** 50,000 UTF-16 source units, recursive value depth <=128; input must
+be stable UTF-8 lexical JSON. Deterministic parser state, no time-budget cutoff in
+this module. CPU-bound scans/token counts plus two expensive parent searches when
+eligible. Regex suffix slicing can allocate; no linear-time implementation theorem
+or whole-stack latency improvement is claimed. No default chain wiring.
+
+**Novelty and citations:** grammar-conditioned syntax redundancy is not new.
+SJSON (2020/2021), https://www.sciencedirect.com/science/article/abs/pii/S0306437920301356,
+and Cordova/Navarro (2016), https://arxiv.org/pdf/1601.06939, provide related structural
+representation background, not this direct-readable protocol or a BPE gain guarantee.
+HYLE/GRAMMA format regeneration, TAGSTACK XML closers, NEST tree templates and EKDYSIS
+JSON quote unfolding are close repository antecedents. New implementation and tested
+JSON terminal-alphabet preconditioning; no broad first-in-literature or exhaustive
+absence-of-equivalents claim.
+
+**Measured complete messages:** canonical json-pkg retains **653** (best fused 664).
+Fresh Chalk v5.6.2 manifest **387→385**, fresh VS Code JSON-extension manifest
+**915→895 (−20, 2.19%)**. Both compare with the complete current TAGSTACK baseline,
+not raw JSON. Original two-header VS Code candidate was 914; fusion accounts for
+19 more tokens. Receipts include source hashes and pinned external fixture provenance.
+24 ordinary complete candidates plus six fused prices: **30 independent Python
+source-byte matches**, 30 reference-tokenizer checks and token-ID round trips.
+Units 2231; fusion attacks 16; composed selector replay checks 13. Native single-chat
+LLM gate is **NOT_RUN**, not confirmed. No general prose or runtime Pareto claim.
+
+**Frontier/leaders:** X152 fresh default 29/29 wires match X151, **11962 tokens**,
+both workers exit zero. Bounded project reader 21 matches/eight unsupported. Inherited
+prose/ops/code/other totals and class leaders remain identity-bound in
+`bench/x152/receipts/local-leaders.json`; external manifest wins are separate, not
+folded into the canonical total. The 628685-ms concurrent run is not speed evidence.
+
+**Speed experiment:** allocation-free first-character vocabulary rejection gives
+identical complete script-pool snapshots for both tokenizers. Clean isolated
+whole-encoder ABBA across three lanes (12 cold processes) gives B/A aggregate
+**CPU 1.015625, wall 1.012454**, failing the predeclared >=10% reduction/nonregression
+gate. Not deployed. An earlier overlapping run is explicitly excluded. See
+`bench/x152/README.md`, `research.md`, `native.md`, and receipts for scope and gaps.
+
+## X153 — KENOMA (experimental, unwired)
+
+KENOMA derives standalone JSON closing lines from retained indentation and a
+lexical stack. Its hole variant retains empty/comma event lines; its dedent variant
+removes the event lines altogether. This is a new repository implementation, not a
+new offside-rule or pushdown-parsing theory (Adams 2013; declarative indentation
+rules 2018; references and scoped lab investigations in `bench/x153/research.md`).
+Exact byte roundtrip, UTF-8 stability, width1/2/4, depth128 and 50000 UTF-16-unit
+caps bound admission. Lexical numbers, escapes, duplicate keys and spacing are
+copied, not parsed and reserialized. The complete instruction is priced.
+
+The optional `kenomaFrontierEncode` retains X152 HOMOSEMA as incumbent and selects
+strict improvements only. Width selection is non-greedy full-message comparison;
+parent heuristics are unchanged. Decoder/rewrite passes are linear in source plus
+output under fixed width/depth caps, **not** a linear bound on parent search CPU or
+wall time. Additional parent calls are real costs, so no runtime Pareto claim.
+
+Observed complete-wire wins: VS Code JSON manifest **895→867 (28 tokens)** and
+prospectively selected HTML manifest **848→826 (22)**. Canonical json-pkg falls back
+at653; Chalk at385. Hole trials all lose. Seven independent Python wire reads match
+source bytes, but native one-chat reading remains **NOT_RUN**. No broad everyday
+prose gain demonstrated. Fresh canonical29 total **11962**, all wires identical;
+category leaders remain prose word (3429 output), ops glyph (5580), code word
+(2636), other no tape (317). Category receipts are in `bench/x153/receipts/`.
+
+UTF-8 encodeInto scratch experiment passes14909 reference checks per A/B build.
+Isolated 12-call whole-stack ABBA has aggregate CPU ratio0.963323 and wall0.962005,
+but fails the predeclared >=10%/nonregression gate. Production unchanged; no
+significant acceleration claim. Full evidence, negative cases, 22-shape modal
+shortcut detector and remaining gates: `bench/x153/README.md`.
+
+## X154 — ARKESIS (experimental, unwired)
+
+**Design:** prefix container cardinalities replace JSON end delimiters and layout.
+`{N` introduces N key:value pairs; `[N` introduces N values. A recursive child
+countdown determines where containers end. Raw lexical keys/scalars are retained;
+canonical width1/2/4 layout and final LF are regenerated only if exact source
+reconstruction admits the input. Unlike KENOMA, neither indentation nor close-event
+lines remain as topology side information. Unlike ROSETTA's flat KV/rectangular
+JSON notation, the format represents arbitrary bounded nested container degrees.
+No claim of inventing degree-sequence tree coding: related prior art includes
+Arroyuelo et al., *Succinct Trees in Practice* (ALENEX2010), and2014 succinct binary
+tree work; links/hypotheses and a scoped repository audit are in
+`bench/x154/research.md`.
+
+**Greedy?** No: fixed width enumeration, exact inverse admission and full-message
+argmin against X153 KENOMA+X152 HOMOSEMA+TAGSTACK. Same folded payload is priced
+once through the parent. **Bounds:** source50000 UTF16 units, depth128,10000 nodes;
+conservative O(N²) character-copying bound under substring/string implementations,
+CPU work, not a whole-encoder time cap. Inherited parent search dominates; the
+optional API adds real parent calls and is not a runtime Pareto guarantee.
+
+**Measured:** VS Code JSON **867→822**, saving**45tokens (5.19%)** beyond KENOMA,
+with every instruction and parent representation counted. json-pkg674vs653 and
+HTML828vs826 lose and fall back. Three independent Python source-byte reads and
+617 codec/32 independent/11 wrapper checks pass. Fresh complete API reproduces822
+with one additional ARKESIS parent call:237143mswall/248891msCPU; this is a cost
+observation, not a paired speed comparison. Native basic-chat gate **NOT_RUN**.
+An unrelated prospective ESLint trial timed out; no heldout success is inferred.
+
+**Frontier/leaders:** fresh canonical29 remains11962,29 identical wires. Bounded
+source reader21/29 (eight unsupported), all29 price/transport checks pass. Prose
+word3429, ops glyph5580, code word2636, other no-tape317 remain unchanged; receipts
+and per-lane leaders in `bench/x154/receipts/`.
+
+**Speed:** two isolated12-call whole-stack ABBA experiments both fail the >=10%
+CPU/wall improvement/nonregression gate. Multiplicative3/4-byte rank hash gives
+CPU1.007737/wall1.003135; allocation-free5..8-byte rank table gives
+CPU0.997783/wall0.995764. All24 output wires match the fresh frontier; no production
+speed change. The second candidate passes300345 reference comparisons per build.
+No broad prose/ops or native-reading success claimed; PR remains unmergeable under
+the conjunctive acceptance conditions. See `bench/x154/README.md` and `native.md`.
+
+## X155 — STOIBAS (experimental, unwired)
+
+**Technical design:** breadth-first JSON node records filled into child slots FIFO.
+Each object record lists its keys, so their number supplies its degree without an
+explicit object count. Arrays use `[N`; scalar records retain raw lexical values.
+The typed-line arm quotes safe bare keys on reconstruction and frames raw JSON
+string content as `=content` through LF. The fully quoted arm remains a negative
+control. Unlike ARKESIS's recursive key/value/count stream, keys are grouped before
+all children and recursion order is replaced by a queue. This is classical
+level-order serialization ancestry, not a new mathematical principle. Scoped
+repository audit and honest literature links (including2023 JPress material and
+SIGMOD2021 JSON Tiles, whose binary/data-model objectives differ) are in
+`bench/x155/research.md`.
+
+**Greedy?** No: bounded width1/2/4 enumeration and strict complete-message argmin
+against the full ARKESIS+KENOMA+HOMOSEMA+TAGSTACK incumbent. Identical payloads share
+one parent call. **CPU/time:** CPU-bound transform,50000 UTF16-unit/10000-node/
+depth128 limits, conservative O(N²) substring/copy bound; parent searches are extra
+and have no wrapper-wide elapsed-time guarantee. No encoder-runtime Pareto claim.
+Original lexemes, duplicate keys and source formatting are admitted only after
+exact reconstruction. Parent UTF8 stability is explicitly checked after a real
+adversarial-surrogate repair; all affected gates and six new attacks were rerun.
+A separate width-cap refusal bug was repaired per alternative; eight boundary
+checks and a fresh full API replay pass after that repair.
+
+**Measured complete wires:** VS Code JSON822→**805** (17tokens,2.07%); HTML826→
+**802** (24tokens,2.91%). Canonical json-pkg ties653 and retains its incumbent.
+Prospectively selected unrelated typescript-eslint parser manifest loses425vs412,
+so retains412. Quoted arm loses all three original trials. Seven independent Python
+reads match disk source bytes. Fresh full API reproduces805 with one added parent
+call; after the width-cap repair,314244mswall/330615msCPU is a cost observation, not a speed comparison. Native basic-chat remains **NOT_RUN**; no broad prose gain.
+
+**Frontier/leaders:**29/29 canonical wires identical,11962tokens. Bounded project
+source reader21/29 with eight unsupported; all29 price/token-ID/transport gates
+pass. Prose word3429, ops glyph5580, code word2636, other no-tape317 unchanged;
+per-lane/category receipts retained in `bench/x155/receipts/`.
+
+**Speed attempt:** an A/B-only numeric two-code-unit cost cache passes3064 scorer
+checks per build, but isolated12-call whole-stack ABBA gives CPU0.979054/wall0.977531
+and a prose regression, failing the predeclared >=10%/nonregression threshold.
+All12 wires match fresh canonical results. No production speed patch; no merge
+under the unmet native/breadth/speed conditions. Full A–J ledger and22-shape modal
+detector: `bench/x155/README.md`.
+
+## X156 — SYNECHEIA coupled page-interval endpoint recurrence (optional)
+
+**SYNECHEIA** (continuity): retain the first/gapped absolute start of a page-aligned
+hexadecimal address interval and encode its length as a decimal4096-byte page
+count. An adjacent record consumes the previous expanded END as its START.
+This couples within-row endpoint construction and cross-row state, rather than
+independently delta-coding two numeric columns. It changes the representation
+seen by the existing parent frontier. Other bytes, including spacing and paths,
+are untouched. All inverse instructions live in the complete message.
+
+`@HEX+N` supplies a start; `@N` uses the previous @ record's end. Render both
+endpoints lowercase hex, padded to at least12 digits. Bounds: UTF8-stable source,
+folded and output <=50000 UTF16 units; canonical12..16-digit source endpoints,
+page-aligned and increasing within each interval, end<2^64. Exact BigInt avoids
+precision loss. Literal lines do not change recurrence state; reserved @ line
+starts refuse. Gaps and out-of-order intervals use explicit resets, not sorting.
+
+Greedy: **no** heuristic search inside this transform; one deterministic pass and
+an exact two-candidate final comparison. O(n) CPU/work and space under fixed64-bit
+arithmetic; no transform clock cutoff. The optional full selector adds one parent
+encode where eligible, so token fallback is NOT a runtime Pareto certificate.
+`synecheia-frontier.ts` includes STOIBAS and its full incumbent chain. Neither
+module is enabled in default TAGSTACK.
+
+Classical ancestry, not a new compression theorem: Pekhimenko et al.,2012,
+*Base-Delta-Immediate Compression*, PACT / SAFARI2012-001,
+https://research.ece.cmu.edu/safari/tr/tr-2012-001.pdf (search excerpts read; direct
+PDF fetch failed). Low-dynamic-range cache-line base/delta coding is not our
+BPE/native-chat guarantee. Repository novelty is bounded to inspected mechanisms;
+DIASTEMA's decimal mask deltas and METRON's fitted progressions do not implement
+this page-END recurrence. No exhaustive nonequivalence claim across393 files.
+
+**Measured complete messages:** actual Python process map663→**549**, saving114
+(17.19%); prospective cat-process map302→**299**, saving3 (0.99%). Both include
+parent and instruction and pass reference prices/UTF8/token-ID roundtrips plus
+independent Python source-byte decoding. These are two captures from the same
+machine/format, not broad prose gains. Fresh full API confirms549/base663 with one
+additional parent call,324205mswall/212180msCPU under concurrency—not speed evidence.
+2026 TS unit checks,32 independent checks including three full messages, and a
+literal-range state attack pass. Typecheck/build pass; first concurrent build was
+killed and is preserved as a failed run, then retried successfully in isolation.
+
+**Fresh canonical frontier:** all29 wires identical to X155, total11962. Bounded
+repository reader supports21; eight remain unsupported, NOT passing native trials.
+All29 reference prices, token-ID roundtrips and transport checks pass. Category
+leaders remain prose3429(word), ops5580(glyph), code2636(word), other317(no tape).
+Generalized per-category/per-source leaders: `bench/x156/receipts/local-leaders.json`.
+STOIBAS's earlier external-manifest wins are separate retained receipts, not newly
+executed experiments this turn.
+
+**Native/basic-chat: NOT_RUN.** Protocol and exact549-token packet are in
+`bench/x156/native.md` and receipts. Byte-perfect software inversion does not
+verify native LLM arithmetic. The separate arity-specialized scorer speed trial
+is experimental/bundler-only; its final result is in speed-summary.json. Nothing
+from that experiment is deployed automatically. Full Pareto claim remains
+unsupported. X156's final unconditional merge authorization changes integration
+permission, not the success predicate. A–J ledger, six distinct tracks,22 modal
+shortcut rejections and fresh scoped lab-source inspections: `bench/x156/`.
+
+X156 final speed result: arity-specialized scorer FAILS the12-call isolated ABBA
+gate: aggregate CPU1.022600 / wall1.027942, identical12 wires matched to the fresh
+frontier. Prose CPU0.907408, ops1.047525, JSON1.041708; no deployment. This is a
+negative whole-stack experiment, not a claimed significant acceleration.

@@ -1,0 +1,26 @@
+[
+  {
+    "path": "bench/x150/fixtures/git-polysteli-color.diff",
+    "bytes": 20359,
+    "sha256": "d52dd67786a1e9c5e656346d7f796b2f25ecdeba3f5920ca1bc560bb8d53eb5c",
+    "byte_exact": true
+  },
+  {
+    "path": "bench/x150/fixtures/git-tagstack-color.diff",
+    "bytes": 2269,
+    "sha256": "3baea0b4278c25aabc448287939d68a76e57d6a62765929f700150079b9d6367",
+    "byte_exact": true
+  },
+  {
+    "path": "bench/x150/fixtures/git-tagstack-heldout-color.diff",
+    "bytes": 3335,
+    "sha256": "cb142723977b9f295411bf55107db4eb26fc5d5446ec6b5554679f53b18aa18d",
+    "byte_exact": true
+  },
+  {
+    "path": "bench/x150/fixtures/git-epitypos-color.diff",
+    "bytes": 3625,
+    "sha256": "0d4ad508de01b1283c27bddbb0b7b7720e5cf9617012abf35550b9021e747449",
+    "byte_exact": true
+  }
+]

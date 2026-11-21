@@ -1,0 +1,26 @@
+{
+  "lanes": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "cpuRatio": 0.9883877151184727,
+      "wallRatio": 1.000111845161791,
+      "identicalWires": 4
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "cpuRatio": 1.0153077733290774,
+      "wallRatio": 1.0089438819676797,
+      "identicalWires": 4
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "cpuRatio": 0.9868310081171691,
+      "wallRatio": 0.9839761879559126,
+      "identicalWires": 4
+    }
+  ],
+  "aggregateCpuRatio": 0.9977826121413278,
+  "aggregateWallRatio": 0.9957641792701839,
+  "gatePassed": false,
+  "scope": "12 cold-process whole-encoder calls, 3 fixed lanes, ABBA; not a universal speed theorem"
+}

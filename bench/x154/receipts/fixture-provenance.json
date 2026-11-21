@@ -1,0 +1,8 @@
+{
+  "repository": "eslint/eslint",
+  "commit": "e0148e30da6662318c5643f2230830af8407b2aa",
+  "path": "package.json",
+  "sha256": "718bc4ce9076a66982640ca50e82e946f660353bece4576d5a019baed8fa5363",
+  "license": "MIT; fixtures/eslint-LICENSE",
+  "status": "timed-out prospective test; not positive evidence"
+}

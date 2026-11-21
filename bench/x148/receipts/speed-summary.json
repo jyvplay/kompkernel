@@ -1,0 +1,26 @@
+[
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "order": "ABBA",
+    "wallRatio": 0.9972693174509872,
+    "cpuRatio": 0.9913379023182274
+  },
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "order": "BAAB",
+    "wallRatio": 1.0037811848186957,
+    "cpuRatio": 1.0105237198074672
+  },
+  {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "order": "ABBA",
+    "wallRatio": 0.9721739931858547,
+    "cpuRatio": 0.9747583134255422
+  },
+  {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "order": "BAAB",
+    "wallRatio": 0.9907924141351289,
+    "cpuRatio": 0.990009449035037
+  }
+]

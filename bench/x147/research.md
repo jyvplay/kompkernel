@@ -1,0 +1,27 @@
+# X147 live research — scoped, not an exhaustive twenty-year audit
+
+Accessed in this session (2026-11-14 supplied date). Remote artifacts are live snapshots, not certified historical snapshots. No proof kernel, external expert, independent agent, or clean-chat model evaluation was run.
+
+## Compression: new terms and sources
+
+- **SQUISH (2016), Gao/Parameswaran**, fresh search and first primary full-text chunk at https://pmc.ncbi.nlm.nih.gov/articles/PMC5293150/ . Bayesian networks plus arithmetic coding exploit attribute dependencies. The abstract claims asymptotic optimality and >50% storage reductions on its datasets. This is not a theorem about BPE costs, spelling-preserving CSV, or basic-chat decoding. Search excerpts distinguish zero tolerance from small nonzero numerical tolerance; “essentially lossless” does not meet our byte-exact gate. Only the first full-text chunk was fetched; no full theorem audit or replication.
+- **Virtual: Compressing Data Lake Files (EDBT 2025)**, fresh primary PDF chunk https://openproceedings.org/2025/conf/edbt/paper-298.pdf . Sparse linear and k-regression dependencies, drop computed columns, rewrite queries. Its optimizer avoids dependency cycles, can use exponential subset search and falls back to greediness. This reinforces that functional-dependency compression is old, not our invention. HORION's limited repository contribution is one exact decimal threshold for a two-valued column, not arbitrary relational compression. No benchmark transfer is assumed.
+- Early Unicode search found *The Functionalizer*, arXiv 2609.15991; conflicting version figures and dates were not resolved. Do not cite the snippets as verified results. Unicode normalization route was abandoned because ABACUS and SYNTAGMA already cover related mechanisms in this repo; no novelty claim.
+
+The 2016 and 2025 samples fall within the requested twenty-year interval; this is not coverage of every year or paper. Search terms included “lossless relational data compression functional dependencies threshold columns compression 2006 2025”.
+
+## Individual lab-claim follow-up (actual primary files saved)
+
+**OpenAI SAT** — `receipts/openai-computation.lean`, from https://github.com/openai/math/blob/main/lean/OAI/Algorithms/SubexponentialSAT/SubexpComputation.lean . Deeper than X146's assembly theorem: `Feasible width` existentially chooses a primitive machine, two positive constants and polynomial degree BEFORE all input sizes/formulas. `MainTheorem` is `∀ width ≥ 3, Feasible width`; it is not one machine/constant uniform across growing widths. `DecidesWithBound` requires actual transition traces, correctness, and `runtimeBound`; scale is n/log₂(log₂(n+16)). This module defines the target and explicitly does not alone assert a solver exists. X146's proof assembly points toward a solution, but we did not replay its closure. No inference of a practical compressor, P=NP, or uniform all-width speedup.
+
+**Anthropic FLT** — https://github.com/anthropics/fermats-last-theorem/tree/main/verification/nanoda . Saved run.sh and nanoda-config.json. Corrects any overreading of X146's comparator flag: a separate second-kernel path DOES exist. Config allows propext/Classical.choice/Quot.sound and rejects other axioms; uses 16 threads and Nat/String extensions. Script prerequisites include the comparator export build, a pinned nanoda checkout and performance patches. Its comments estimate export ~1 hour/~90 GB resident/~40 GB disk; check ~30 minutes with 16 threads. We did not execute or audit the patches, so this is an inspected verification procedure, NOT our independent proof certification. Guessed README path returned 404; listing then retrieved the actual files.
+
+**DeepMind** — https://github.com/google-deepmind/code-verification/blob/main/Computational/docs/READING_THE_THEOREMS.md . Saved primary explanatory document. The PQXDH theorem described there is query-budgeted in a one-key ROM game, not an unconditional statement about all deployed environments. Adversary internal runtime is unrestricted; reductions have explicit added work/query bounds. This is stronger in one quantifier and still conditional on primitives/model assumptions. It is separate from X146's executable/ELF modeling audit. No theorem execution, dependency audit, or claim of universal cryptographic security here.
+
+**Axiom** — https://github.com/AxiomMath/EvenExponentDihedralMonotonicity/blob/main/Solution/Basic.lean . Unlike the earlier challenge-with-sorry, this solution forwards `thm_main` to `Lyons.sum_abs_centered_pow_le`. It states n≥2, m≥1, t≥0, off-identity rate ordering and the even-power distance inequality. Its imported `Lyons` proof closure and RateFn definitions were not replayed. No extrapolation to odd exponents, arbitrary groups, or compression costs.
+
+**DoubleAI** — no new primary inspection this round; X146's article-only assessment and failed PDF fetch remain the last evidence. It would be false to call this a fresh or completed audit. Other labs are unreviewed.
+
+## Transfer
+
+The useful principles are quantifier discipline, complete description costs, explicit decoding/resource models, and source-grounded verification. None of these papers or lab artifacts establishes our missing native behavior or speed claim. Threshold relationships can be real and exact while the final message still loses; the initial HORION composite demonstrated that (835 vs 787).

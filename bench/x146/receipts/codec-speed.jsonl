@@ -1,0 +1,6 @@
+{"path":"bench/x146/heldout/pypi-httpx.txt","stage":"warm","arm":"A","ms":29601.672857999998,"cpuMs":33708.514,"tokens":1040,"sourceExact":true}
+{"path":"bench/x146/heldout/pypi-httpx.txt","stage":"warm","arm":"B","ms":52587.112065999994,"cpuMs":56148.023,"tokens":1024,"sourceExact":true}
+{"path":"bench/x146/heldout/pypi-httpx.txt","stage":"ABBA","arm":"A","ms":26918.376464,"cpuMs":28215.888,"tokens":1040,"sourceExact":true}
+{"path":"bench/x146/heldout/pypi-httpx.txt","stage":"ABBA","arm":"B","ms":52411.55900800001,"cpuMs":54559.979,"tokens":1024,"sourceExact":true}
+{"path":"bench/x146/heldout/pypi-httpx.txt","stage":"ABBA","arm":"B","ms":49881.68805499998,"cpuMs":52355.22,"tokens":1024,"sourceExact":true}
+{"path":"bench/x146/heldout/pypi-httpx.txt","stage":"ABBA","arm":"A","ms":27303.750448000006,"cpuMs":28494.971,"tokens":1040,"sourceExact":true}

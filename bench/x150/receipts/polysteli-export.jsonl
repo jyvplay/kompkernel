@@ -1,0 +1,4 @@
+{"path":"bench/holdout-x41/ls-l-real.txt","markers":["॥10,3,5,5,9,4,3,6:149 rows single-spaced, pad field k to width k, rest verbatim."],"sourceChars":10692,"foldedChars":9868}
+{"path":"bench/holdout-x41/ps-aux-real.txt","markers":["॥4,12,5,5,7,6,2:37 rows single-spaced, pad field k to width k, rest verbatim."],"sourceChars":6590,"foldedChars":5925}
+{"path":"bench/holdout-x42/ps-ef.txt","markers":["॥4,12,8,3,6,2,16:39 rows single-spaced, pad field k to width k, rest verbatim."],"sourceChars":2669,"foldedChars":1844}
+{"path":"bench/holdout-tbl/kubectl-get-pods.txt","markers":["॥25,15,12,6:22 rows single-spaced, pad field k to width k, rest verbatim."],"sourceChars":2649,"foldedChars":2305}

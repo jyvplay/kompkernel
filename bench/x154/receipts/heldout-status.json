@@ -1,0 +1,1 @@
+{"status":"TIMEOUT","exitCode":124,"budgetSeconds":900,"completedRows":0,"source":"bench/x154/fixtures/eslint-package.json","note":"No incumbent/candidate result committed before timeout. Not a pass or loss. Concurrent CPU work and a resource-failed build make elapsed time unsuitable as speed evidence."}

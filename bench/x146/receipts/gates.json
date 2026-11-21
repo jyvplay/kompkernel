@@ -1,0 +1,14 @@
+{
+  "modalShortcutRejected": true,
+  "native": "NOT_RUN",
+  "countingWitness": {
+    "byteLength": 100,
+    "maximumTokens": 10,
+    "vocabularyBound": 1000000,
+    "sourceAlphabet": "95 printable ASCII characters",
+    "sources": "592052922033402548292496488240317014489748718427461602151778013906754704991204729591368966794956258707426261890933754225080244584856652112335948219031187531903592802251523607992567121982574462890625",
+    "availableTokenSequences": "1000001000001000001000001000001000001000001000001000001000001",
+    "injectiveUniversalCompressionImpossibleForThisBound": true
+  },
+  "note": "Does not preclude any measured lane improvement or solve native reliability."
+}

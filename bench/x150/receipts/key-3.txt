@@ -1,0 +1,1 @@
+After decoding, for each line starting with + means 32, insert ESC[code m before its first character, ESC[m after it, ESC[code m after that, and ESC[m at line end. If the line is only that character, insert only ESC[code m before it and ESC[m after it. ESC is U+001B; omit the space in code m. Preserve other characters and line endings.

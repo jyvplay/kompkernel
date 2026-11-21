@@ -1,0 +1,2 @@
+src/lib/omega/apographe.ts:124: * character-space threshold accepted two-character units that cost more than
+src/lib/omega/kolumn.ts:412:    { name: 'small table below row threshold', text: 'a,b\n1,2\n3,4\n5,6\n', expect: false },

@@ -1,0 +1,1 @@
+{"path":"bench/x152/fixtures/vscode-json-package.json","tokens":822,"baseTokens":867,"applied":true,"parentCalls":1,"reason":"strict token gain; native behavior unverified","ms":237142.803821,"cpuMs":248891.229,"scope":"fresh full API with TAGSTACK, HOMOSEMA, KENOMA and ARKESIS; parentCalls counts additional ARKESIS parent only, not incumbent work"}

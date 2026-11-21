@@ -1,0 +1,11 @@
+{"path":"bench/x152/fixtures/chalk-package.json","mode":{"separator":null,"close":"]"},"incumbent":387,"child":376,"candidate":404,"gain":-17,"sourceRead":true,"ms":14754.118233000001,"cpuMs":10165.942}
+{"path":"bench/x152/fixtures/chalk-package.json","mode":{"separator":null,"close":")"},"incumbent":387,"child":376,"candidate":404,"gain":-17,"sourceRead":true,"ms":12672.043158,"cpuMs":7922.999}
+{"path":"bench/x152/fixtures/chalk-package.json","mode":{"separator":",","close":null},"incumbent":387,"child":387,"candidate":415,"gain":-28,"sourceRead":true,"ms":14100.859308,"cpuMs":9180.962}
+{"path":"bench/x152/fixtures/chalk-package.json","mode":{"separator":";","close":null},"incumbent":387,"child":387,"candidate":415,"gain":-28,"sourceRead":true,"ms":8327.520046000005,"cpuMs":7742.298}
+{"path":"bench/x152/fixtures/chalk-package.json","mode":{"separator":":","close":null},"incumbent":387,"child":388,"candidate":416,"gain":-29,"sourceRead":true,"ms":9835.400021000009,"cpuMs":9756.834}
+{"path":"bench/x152/fixtures/chalk-package.json","mode":{"separator":",","close":"]"},"incumbent":387,"child":376,"candidate":415,"gain":-28,"sourceRead":true,"ms":7787.5393630000035,"cpuMs":7765.471}
+{"path":"bench/x152/fixtures/chalk-package.json","mode":{"separator":",","close":")"},"incumbent":387,"child":376,"candidate":415,"gain":-28,"sourceRead":true,"ms":7696.212092999995,"cpuMs":7316.408}
+{"path":"bench/x152/fixtures/chalk-package.json","mode":{"separator":":","close":"]"},"incumbent":387,"child":376,"candidate":415,"gain":-28,"sourceRead":true,"ms":7718.569869000014,"cpuMs":7605.171}
+{"path":"bench/x152/fixtures/chalk-package.json","mode":{"separator":":","close":")"},"incumbent":387,"child":376,"candidate":415,"gain":-28,"sourceRead":true,"ms":7794.503327000013,"cpuMs":7469.177}
+{"path":"bench/x152/fixtures/chalk-package.json","mode":{"separator":";","close":"]"},"incumbent":387,"child":376,"candidate":415,"gain":-28,"sourceRead":true,"ms":7704.380382999996,"cpuMs":7397.9}
+{"path":"bench/x152/fixtures/chalk-package.json","mode":{"separator":";","close":")"},"incumbent":387,"child":376,"candidate":415,"gain":-28,"sourceRead":true,"ms":7521.979693000001,"cpuMs":7471.403}

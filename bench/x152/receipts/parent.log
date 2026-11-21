@@ -1,0 +1,11 @@
+{"path":"bench/holdout/json-pkg.txt","mode":{"separator":",","close":null},"incumbent":653,"child":652,"candidate":680,"gain":-27,"sourceRead":true,"ms":31080.160863999998,"cpuMs":21235.732}
+{"path":"bench/holdout/json-pkg.txt","mode":{"separator":null,"close":"]"},"incumbent":653,"child":655,"candidate":683,"gain":-30,"sourceRead":true,"ms":18107.898807,"cpuMs":16734.886}
+{"path":"bench/holdout/json-pkg.txt","mode":{"separator":null,"close":")"},"incumbent":653,"child":655,"candidate":683,"gain":-30,"sourceRead":true,"ms":14118.416481,"cpuMs":14007.267}
+{"path":"bench/holdout/json-pkg.txt","mode":{"separator":";","close":null},"incumbent":653,"child":653,"candidate":681,"gain":-28,"sourceRead":true,"ms":16052.3669,"cpuMs":15905.211}
+{"path":"bench/holdout/json-pkg.txt","mode":{"separator":",","close":"]"},"incumbent":653,"child":654,"candidate":693,"gain":-40,"sourceRead":true,"ms":13850.320420999997,"cpuMs":13764.142}
+{"path":"bench/holdout/json-pkg.txt","mode":{"separator":",","close":")"},"incumbent":653,"child":654,"candidate":693,"gain":-40,"sourceRead":true,"ms":13827.654479999997,"cpuMs":13697.812}
+{"path":"bench/holdout/json-pkg.txt","mode":{"separator":";","close":"]"},"incumbent":653,"child":655,"candidate":694,"gain":-41,"sourceRead":true,"ms":14214.880250999995,"cpuMs":14094.326}
+{"path":"bench/holdout/json-pkg.txt","mode":{"separator":";","close":")"},"incumbent":653,"child":655,"candidate":694,"gain":-41,"sourceRead":true,"ms":14221.132035000002,"cpuMs":14038.307}
+{"path":"bench/holdout/json-pkg.txt","mode":{"separator":":","close":null},"incumbent":653,"child":655,"candidate":683,"gain":-30,"sourceRead":true,"ms":18663.173959000007,"cpuMs":17576.943}
+{"path":"bench/holdout/json-pkg.txt","mode":{"separator":":","close":")"},"incumbent":653,"child":651,"candidate":690,"gain":-37,"sourceRead":true,"ms":28341.508187999978,"cpuMs":17916.801}
+{"path":"bench/holdout/json-pkg.txt","mode":{"separator":":","close":"]"},"incumbent":653,"child":656,"candidate":695,"gain":-42,"sourceRead":true,"ms":31129.260851,"cpuMs":20190.713}

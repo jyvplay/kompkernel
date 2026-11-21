@@ -96,3 +96,45 @@ bench/x144/*.mjs
 
 # X144b bundles
 bench/x144b/*.mjs
+
+# X145 generated bundles
+bench/x145/*.mjs
+
+# X146 generated bundles
+bench/x146/*.mjs
+
+# X147 generated bundles
+bench/x147/*.mjs
+
+# X148 generated bundles
+bench/x148/*.mjs
+
+# X150 generated bundles
+bench/x150/*.mjs
+
+# X151 generated bundles and diagnostic profile
+bench/x151/*.mjs
+!bench/x151/build-boundary.mjs
+bench/x151/receipts/*.cpuprofile
+
+# X152 generated bundles (retain the reproducible build plugin)
+bench/x152/*.mjs
+!bench/x152/speed-build.mjs
+
+# X153 generated bundles; retain authored A/B build plugin
+bench/x153/*.mjs
+!bench/x153/speed-build.mjs
+
+# X154 generated bundles and profiles; retain authored build plugin
+bench/x154/*.mjs
+!bench/x154/speed-build.mjs
+!bench/x154/rank58-build.mjs
+bench/x154/receipts/*.cpuprofile
+
+# X155 generated bundles; retain authored A/B builder
+bench/x155/*.mjs
+!bench/x155/speed-build.mjs
+
+# X156 generated benchmark bundles
+bench/x156/*.mjs
+!bench/x156/speed-build.mjs

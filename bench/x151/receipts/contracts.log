@@ -1,0 +1,15 @@
+10 ¶ k=v. expand repeatedly; print only.
+10 ¶ k=v, expand repeatedly; print only.
+10 ¶ k=v; expand repeatedly; print only.
+9 ¶ replace k=v repeatedly; print only.
+11 ¶ k=v; expand; repeat. Print only.
+11 ¶ k=v, expand and repeat. Print only.
+10 ¶ k=v, repeatedly expand. Print only.
+10 ¶ k=v; repeatedly expand. Output only.
+12 ¶ k=v. Repeatedly expand. Output only.
+10 ¶ k=v: expand repeatedly. Print only.
+10 ¶ k=v; expand recursively; print only.
+11 ¶ k=v; expand until done; print only.
+11 ¶ k=v. Expand until unchanged. Print only.
+12 ¶ k=v. Expand until no keys; print only.
+matches 17

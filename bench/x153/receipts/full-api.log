@@ -1,0 +1,1 @@
+{"path":"bench/x152/fixtures/vscode-json-package.json","tokens":867,"baseTokens":895,"applied":true,"parentCalls":1,"reason":"strict token gain; native behavior unverified","ms":203286.05041499998,"cpuMs":204311.119,"scope":"fresh full API, recomputing TAGSTACK, both HOMOSEMA arms and KENOMA; parentCalls counts only KENOMA additional calls"}

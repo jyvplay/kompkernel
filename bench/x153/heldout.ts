@@ -1,0 +1,10 @@
+import fs from 'node:fs';import {tagstackEncode} from '../../src/lib/omega/tagstack';import {readPlainParent} from '../../src/lib/omega/ekdysis-frontier';import {homosemaPlans,homosemaFusedCandidate} from '../../src/lib/omega/homosema';import {kenomaPlan,kenomaCandidate,kenomaIndentPlans,kenomaIndentCandidate} from '../../src/lib/omega/kenoma';
+process.env.OMEGA_DET='1';process.env.OMEGA_NO_MEMO='1';process.env.OMEGA_ENGRAM='0';process.env.OMEGA_OURA_MEMO='0';process.env.OMEGA_NO_OROTHESIA='1';
+const path=process.argv[2]!,out=process.argv[3]!,source=fs.readFileSync(path,'utf8');fs.writeFileSync(out,'');
+const emit=(r:object)=>{fs.appendFileSync(out,JSON.stringify({path,...r})+'\n');console.log(JSON.stringify({...r,message:undefined,parent:undefined,folded:undefined}));};
+if(source.length>12000){emit({status:'NOT_RUN',reason:'per-source experiment budget: >12000 code units'});process.exit(0);}
+function parent(text:string){const a=tagstackEncode(text);if(!a.exact||!a.frontierComplete||a.decoded!==text)throw Error('parent fidelity');return a;}
+const base=parent(source);let incumbent=base.messageTokens;emit({stage:'TAGSTACK',tokens:incumbent,message:base.message});
+for(const p of homosemaPlans(source).filter(p=>p.mode.separator===null)){const a=parent(p.folded),c=homosemaFusedCandidate(source,p.mode,a.message,readPlainParent);emit({stage:'HOMOSEMA',tokens:c?.tokens??null,mode:p.mode,message:c?.message??null,parent:a.message,folded:p.folded});if(c)incumbent=Math.min(incumbent,c.tokens);}
+const p=kenomaPlan(source);if(p){const a=parent(p.folded),c=kenomaCandidate(source,a.message,readPlainParent);emit({stage:'KENOMA-hole',incumbent,tokens:c?.tokens??null,gain:c?incumbent-c.tokens:null,message:c?.message??null,parent:a.message,folded:p.folded});}
+for(const p of kenomaIndentPlans(source)){const a=parent(p.folded),c=kenomaIndentCandidate(source,p.width,a.message,readPlainParent);emit({stage:'KENOMA-indent',width:p.width,incumbent,tokens:c?.tokens??null,gain:c?incumbent-c.tokens:null,message:c?.message??null,parent:a.message,folded:p.folded});}

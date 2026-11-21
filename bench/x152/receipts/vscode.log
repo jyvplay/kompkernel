@@ -1,0 +1,2 @@
+{"path":"bench/x152/fixtures/vscode-json-package.json","mode":{"separator":null,"close":"]"},"incumbent":915,"child":886,"candidate":914,"gain":1,"sourceRead":true,"ms":39352.951844999996,"cpuMs":39044.977}
+{"path":"bench/x152/fixtures/vscode-json-package.json","mode":{"separator":null,"close":")"},"incumbent":915,"child":886,"candidate":914,"gain":1,"sourceRead":true,"ms":33195.571567000006,"cpuMs":34752.433}

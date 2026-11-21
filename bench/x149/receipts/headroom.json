@@ -1,0 +1,263 @@
+[
+ {
+  "path": "bench/holdout-x42/lsblk.txt",
+  "tokens": 60,
+  "distinct": 45,
+  "repeatMass": 15,
+  "phraseKinds": 0,
+  "phraseMass": 0,
+  "digitChars": 23
+ },
+ {
+  "path": "bench/holdout-work/kb-article.txt",
+  "tokens": 620,
+  "distinct": 405,
+  "repeatMass": 215,
+  "phraseKinds": 17,
+  "phraseMass": 19,
+  "digitChars": 4
+ },
+ {
+  "path": "bench/holdout-x42b/uptime-w.txt",
+  "tokens": 80,
+  "distinct": 49,
+  "repeatMass": 31,
+  "phraseKinds": 0,
+  "phraseMass": 0,
+  "digitChars": 33
+ },
+ {
+  "path": "bench/holdout-x42b/free-m.txt",
+  "tokens": 76,
+  "distinct": 48,
+  "repeatMass": 28,
+  "phraseKinds": 1,
+  "phraseMass": 2,
+  "digitChars": 37
+ },
+ {
+  "path": "bench/holdout-x42b/vmstat.txt",
+  "tokens": 144,
+  "distinct": 118,
+  "repeatMass": 26,
+  "phraseKinds": 0,
+  "phraseMass": 0,
+  "digitChars": 69
+ },
+ {
+  "path": "bench/holdout-work/unified-diff.patch",
+  "tokens": 411,
+  "distinct": 250,
+  "repeatMass": 161,
+  "phraseKinds": 1,
+  "phraseMass": 1,
+  "digitChars": 104
+ },
+ {
+  "path": "bench/holdout-tbl/df-h.txt",
+  "tokens": 160,
+  "distinct": 110,
+  "repeatMass": 50,
+  "phraseKinds": 0,
+  "phraseMass": 0,
+  "digitChars": 24
+ },
+ {
+  "path": "bench/holdout-x41/df-real.txt",
+  "tokens": 123,
+  "distinct": 102,
+  "repeatMass": 21,
+  "phraseKinds": 0,
+  "phraseMass": 0,
+  "digitChars": 34
+ },
+ {
+  "path": "bench/holdout-x41/du-real.txt",
+  "tokens": 266,
+  "distinct": 196,
+  "repeatMass": 70,
+  "phraseKinds": 2,
+  "phraseMass": 2,
+  "digitChars": 189
+ },
+ {
+  "path": "bench/holdout-x41/node-help.txt",
+  "tokens": 846,
+  "distinct": 538,
+  "repeatMass": 308,
+  "phraseKinds": 25,
+  "phraseMass": 34,
+  "digitChars": 16
+ },
+ {
+  "path": "bench/holdout-x42/findmnt.txt",
+  "tokens": 385,
+  "distinct": 252,
+  "repeatMass": 133,
+  "phraseKinds": 1,
+  "phraseMass": 1,
+  "digitChars": 68
+ },
+ {
+  "path": "bench/holdout-x42/df-h.txt",
+  "tokens": 105,
+  "distinct": 89,
+  "repeatMass": 16,
+  "phraseKinds": 0,
+  "phraseMass": 0,
+  "digitChars": 20
+ },
+ {
+  "path": "bench/holdout-work/email-thread.txt",
+  "tokens": 486,
+  "distinct": 339,
+  "repeatMass": 147,
+  "phraseKinds": 3,
+  "phraseMass": 3,
+  "digitChars": 74
+ },
+ {
+  "path": "bench/holdout-work/llm-answer.md",
+  "tokens": 664,
+  "distinct": 466,
+  "repeatMass": 198,
+  "phraseKinds": 2,
+  "phraseMass": 4,
+  "digitChars": 45
+ },
+ {
+  "path": "bench/holdout-tbl/markdown-table.md",
+  "tokens": 172,
+  "distinct": 119,
+  "repeatMass": 53,
+  "phraseKinds": 1,
+  "phraseMass": 1,
+  "digitChars": 109
+ },
+ {
+  "path": "bench/holdout-tbl/psql-output.txt",
+  "tokens": 229,
+  "distinct": 165,
+  "repeatMass": 64,
+  "phraseKinds": 0,
+  "phraseMass": 0,
+  "digitChars": 84
+ },
+ {
+  "path": "bench/holdout-x40/prices.csv",
+  "tokens": 118,
+  "distinct": 92,
+  "repeatMass": 26,
+  "phraseKinds": 0,
+  "phraseMass": 0,
+  "digitChars": 61
+ },
+ {
+  "path": "bench/holdout-x40/cue-sheet.md",
+  "tokens": 101,
+  "distinct": 56,
+  "repeatMass": 45,
+  "phraseKinds": 0,
+  "phraseMass": 0,
+  "digitChars": 20
+ },
+ {
+  "path": "bench/holdout-x42/ps-ef.txt",
+  "tokens": 296,
+  "distinct": 224,
+  "repeatMass": 72,
+  "phraseKinds": 1,
+  "phraseMass": 2,
+  "digitChars": 72
+ },
+ {
+  "path": "bench/holdout-x41/ls-real.txt",
+  "tokens": 414,
+  "distinct": 301,
+  "repeatMass": 113,
+  "phraseKinds": 0,
+  "phraseMass": 0,
+  "digitChars": 191
+ },
+ {
+  "path": "bench/holdout/json-pkg.txt",
+  "tokens": 653,
+  "distinct": 420,
+  "repeatMass": 233,
+  "phraseKinds": 5,
+  "phraseMass": 8,
+  "digitChars": 58
+ },
+ {
+  "path": "bench/holdout/code-ts.txt",
+  "tokens": 949,
+  "distinct": 533,
+  "repeatMass": 416,
+  "phraseKinds": 17,
+  "phraseMass": 34,
+  "digitChars": 7
+ },
+ {
+  "path": "bench/holdout-x42/dpkg-l.txt",
+  "tokens": 623,
+  "distinct": 396,
+  "repeatMass": 227,
+  "phraseKinds": 12,
+  "phraseMass": 18,
+  "digitChars": 64
+ },
+ {
+  "path": "bench/holdout-x41/ps-real.txt",
+  "tokens": 381,
+  "distinct": 271,
+  "repeatMass": 110,
+  "phraseKinds": 1,
+  "phraseMass": 1,
+  "digitChars": 95
+ },
+ {
+  "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+  "tokens": 300,
+  "distinct": 185,
+  "repeatMass": 115,
+  "phraseKinds": 1,
+  "phraseMass": 2,
+  "digitChars": 153
+ },
+ {
+  "path": "bench/holdout-x40/metrics.tsv",
+  "tokens": 197,
+  "distinct": 133,
+  "repeatMass": 64,
+  "phraseKinds": 0,
+  "phraseMass": 0,
+  "digitChars": 69
+ },
+ {
+  "path": "bench/holdout-x41/ps-aux-real.txt",
+  "tokens": 980,
+  "distinct": 612,
+  "repeatMass": 368,
+  "phraseKinds": 2,
+  "phraseMass": 3,
+  "digitChars": 324
+ },
+ {
+  "path": "bench/holdout-x41/apt-real.txt",
+  "tokens": 813,
+  "distinct": 506,
+  "repeatMass": 307,
+  "phraseKinds": 0,
+  "phraseMass": 0,
+  "digitChars": 134
+ },
+ {
+  "path": "bench/holdout-x41/ls-l-real.txt",
+  "tokens": 1310,
+  "distinct": 634,
+  "repeatMass": 676,
+  "phraseKinds": 2,
+  "phraseMass": 2,
+  "digitChars": 679
+ }
+]

@@ -1,0 +1,121 @@
+{
+  "checks": 986,
+  "canonical": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "plans": 0
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "plans": 0
+    }
+  ]
+}

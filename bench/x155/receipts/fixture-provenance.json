@@ -1,0 +1,7 @@
+{
+  "repository": "typescript-eslint/typescript-eslint",
+  "commit": "2c339edc0b3036acbba16882500608f122debc07",
+  "path": "packages/parser/package.json",
+  "sha256": "276e8bcfbe39eff77c24177d3b83437f6edf3fd79da22676c5e72c2bb8b42302",
+  "license": "MIT; fixtures/LICENSE"
+}

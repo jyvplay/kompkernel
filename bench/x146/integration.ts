@@ -1,0 +1,3 @@
+import * as fs from 'node:fs';import assert from 'node:assert/strict';import {ekdysisFrontierEncode,ekdysisFrontierDecode} from '../../src/lib/omega/ekdysis-frontier';import {encode} from 'gpt-tokenizer/encoding/o200k_base';
+process.env.OMEGA_DET='1';process.env.OMEGA_NO_MEMO='1';process.env.OMEGA_ENGRAM='0';process.env.OMEGA_OURA_MEMO='0';process.env.OMEGA_NO_OROTHESIA='1';process.env.OMEGA_SCALAR='0';
+for(const path of process.argv.slice(2)){const source=fs.readFileSync(path,'utf8'),a=ekdysisFrontierEncode(source);assert.equal(a.decoded,source);assert.equal(encode(a.message).length,a.tokens);assert.equal(Buffer.from(a.message).toString(),a.message);if(a.applied)assert.equal(ekdysisFrontierDecode(a.message),source);console.log(JSON.stringify({path,...a}));}

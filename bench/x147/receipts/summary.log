@@ -1,0 +1,62 @@
+{
+  "codec": "HORION",
+  "frontier": {
+    "lanes": 29,
+    "total": 11962,
+    "messagesIdenticalToX146": true,
+    "canonicalSourceReads": 21,
+    "unsupported": [
+      "bench/holdout-tbl/df-h.txt",
+      "bench/holdout-tbl/markdown-table.md",
+      "bench/holdout-tbl/psql-output.txt",
+      "bench/holdout-x40/prices.csv",
+      "bench/holdout-x40/cue-sheet.md",
+      "bench/holdout-tbl/kubectl-get-pods.txt",
+      "bench/holdout-x40/metrics.tsv",
+      "bench/holdout-x41/ls-l-real.txt"
+    ],
+    "pricesAndTokenIds": 30,
+    "newCandidateSourceRead": true
+  },
+  "gain": {
+    "source": "mwaskom/seaborn-data/geyser.csv",
+    "parent": 787,
+    "candidate": 775,
+    "tokens": 12,
+    "percent": 1.5247776365946633
+  },
+  "unitAssertions": 986,
+  "compositeAssertions": 8,
+  "compactAttacks": 5,
+  "integration": {
+    "basePhaseMs": 219505.610569,
+    "totalMs": 296159.376911,
+    "totalOverBasePhase": 1.3492109661493341,
+    "cpuMs": 287372.552,
+    "design": "one call, not ABBA; no speed significance claim"
+  },
+  "scalarViteTokens": 260,
+  "initialBuild": {
+    "tsc": 0,
+    "build": 137
+  },
+  "finalBuild": {
+    "tsc": 0,
+    "build": 0,
+    "nodeHeapMiB": 1536
+  },
+  "acceptance": {
+    "checks": {
+      "source_exact": true,
+      "strict_parent_gain": true,
+      "over_ten_tokens": true,
+      "native_basic_chat": false,
+      "significant_whole_stack_speed": false,
+      "broad_canonical_gain": false
+    },
+    "overallPareto": false,
+    "mergeEligible": false,
+    "modalShortcutRejected": true,
+    "finiteInjectivityBound": true
+  }
+}

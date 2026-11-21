@@ -1,0 +1,160 @@
+{
+  "baselineLanes": 29,
+  "baselineTokens": 11962,
+  "baselineIdenticalX145": true,
+  "canonicalEkdysisPlans": 0,
+  "scalarViteTokens": 260,
+  "completedFinalParentPrices": [
+    {
+      "path": "bench/x146/heldout/node-67620.json",
+      "A": 1284,
+      "B": 1319,
+      "sourceRead": true
+    },
+    {
+      "path": "bench/x146/heldout/vite-24152.json",
+      "A": 802,
+      "B": 842,
+      "sourceRead": true
+    },
+    {
+      "path": "bench/x146/heldout/vite-24155.json",
+      "A": 916,
+      "B": 949,
+      "sourceRead": true
+    },
+    {
+      "path": "bench/x146/heldout/pypi-jieba.txt",
+      "A": 329,
+      "B": 331,
+      "sourceRead": true
+    },
+    {
+      "path": "bench/x146/heldout/pypi-httpx.txt",
+      "A": 1040,
+      "B": 1024,
+      "sourceRead": true
+    }
+  ],
+  "parentWins": 1,
+  "finalWrapper": [
+    {
+      "path": "bench/x146/heldout/pypi-httpx.txt",
+      "tokens": 1024,
+      "baseTokens": 1040,
+      "applied": true
+    }
+  ],
+  "unit": {
+    "checks": 8208,
+    "accepted": 2047,
+    "unterminatedMs": 12.17819099999997,
+    "native": "NOT_RUN"
+  },
+  "compositeUnit": {
+    "savedSourceReads": 5,
+    "bombRefused": true,
+    "cycleRefused": true,
+    "layoutBombRefused": true,
+    "reservedSourceRefused": true,
+    "messageOnly": true
+  },
+  "python": {
+    "independentReads": {
+      "unit-wires": 2047,
+      "probe": 20,
+      "parent": 3,
+      "body-parent": 1,
+      "root-parent": 1,
+      "packages-parent": 1,
+      "final-parent": 5,
+      "integration": 1
+    },
+    "baselineSourceReads": 9,
+    "baselineUnsupported": [
+      "parent:bench/x146/heldout/node-67620.json",
+      "final-parent:bench/x146/heldout/node-67620.json"
+    ],
+    "native": "NOT_RUN"
+  },
+  "finalGate": {
+    "prices": 36,
+    "transportAndTokenId": 36,
+    "sourceExact": 28,
+    "unsupported": [
+      "frontier:bench/holdout-tbl/df-h.txt",
+      "frontier:bench/holdout-tbl/markdown-table.md",
+      "frontier:bench/holdout-tbl/psql-output.txt",
+      "frontier:bench/holdout-x40/prices.csv",
+      "frontier:bench/holdout-x40/cue-sheet.md",
+      "frontier:bench/holdout-tbl/kubectl-get-pods.txt",
+      "frontier:bench/holdout-x40/metrics.tsv",
+      "frontier:bench/holdout-x41/ls-l-real.txt"
+    ],
+    "native": "NOT_RUN"
+  },
+  "scopeUnit": {
+    "checks": 1008,
+    "exceptionCleanup": true,
+    "lateBinding": true,
+    "nested": true,
+    "mutationBoundaryDemonstrated": true,
+    "scopeContract": "no environment mutation inside synchronous callback"
+  },
+  "scopeSpeed": {
+    "calls": 20,
+    "measured": 16,
+    "warmups": 4,
+    "isolated": true,
+    "rows": [
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "stage": "ABBA",
+        "BoverAWall": 0.9544084756933104,
+        "BoverACpu": 0.9331668230693422
+      },
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "stage": "BAAB",
+        "BoverAWall": 0.9661552654066826,
+        "BoverACpu": 0.9513451058643585
+      },
+      {
+        "path": "bench/holdout-x40/metrics.tsv",
+        "stage": "ABBA",
+        "BoverAWall": 0.9525614675123759,
+        "BoverACpu": 0.9568699884700423
+      },
+      {
+        "path": "bench/holdout-x40/metrics.tsv",
+        "stage": "BAAB",
+        "BoverAWall": 0.9805498522548712,
+        "BoverACpu": 0.9835976977240605
+      }
+    ],
+    "significantTenPercentGate": false,
+    "noRegressionGate": true,
+    "scope": "prolepsis config snapshot; NOT EKDYSIS runtime"
+  },
+  "codecSpeed": {
+    "calls": 6,
+    "measured": 4,
+    "warmups": 2,
+    "isolated": true,
+    "BoverAWall": 1.8865591021358712,
+    "BoverACpu": 1.8852685514779453,
+    "baselineTokens": 1040,
+    "ekdysisTokens": 1024
+  },
+  "native": "NOT_RUN",
+  "lean": "NOT_RUN",
+  "overallPareto": false,
+  "mergeEligible": false,
+  "largeTrials": {
+    "pypinyin": "process killed exit 137, no completed result; cause not established",
+    "rich": "heap OOM exit 134 at 1800 MiB Node limit, no completed result",
+    "fastapi": "not reached after Rich abort"
+  },
+  "tsc": "PASS",
+  "build": "PASS"
+}

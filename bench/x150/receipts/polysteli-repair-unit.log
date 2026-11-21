@@ -1,0 +1,14 @@
+selftest all pass 11 0
+fit ls-l-real.txt 1 grids ॥10,3,5,5,9,4,3,6:149 rows single-spaced, pad field k to width k, rest
+fit ps-aux-real.txt 1 grids ॥4,12,5,5,7,6,2:37 rows single-spaced, pad field k to width k, rest ve
+no-fit bench/holdout-x42/dpkg-l.txt
+no-fit bench/holdout-x41/ps-real.txt
+no-fit bench/holdout-x42/findmnt.txt
+fit ps-ef.txt 1 grids ॥4,12,8,3,6,2,16:39 rows single-spaced, pad field k to width k, rest v
+no-fit bench/holdout-x41/df-real.txt
+no-fit bench/holdout-x41/du-real.txt
+no-fit bench/holdout-x41/node-help.txt
+no-fit bench/holdout-x40/metrics.tsv
+fit kubectl-get-pods.txt 1 grids ॥25,15,12,6:22 rows single-spaced, pad field k to width k, rest verbat
+no-fit bench/holdout-work/unified-diff.patch
+{ checks: 22, fails: 0 }

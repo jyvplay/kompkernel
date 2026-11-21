@@ -1,0 +1,10 @@
+{
+  "repo": "mwaskom/seaborn-data",
+  "apiURL": "https://api.github.com/repos/mwaskom/seaborn-data/contents/geyser.csv?ref=master",
+  "htmlURL": "https://github.com/mwaskom/seaborn-data/blob/master/geyser.csv",
+  "gitBlobSHA": "bc7cafc5cf0200b0c92eae896534770fa25bb9f1",
+  "sha256": "ce8f6bd15967c9a3dee345aaf268f6b92623abb1e1d313e04d79b720aa6b8bd6",
+  "bytes": 4199,
+  "frozenDiscoverySource": true,
+  "preregisteredHoldout": false
+}

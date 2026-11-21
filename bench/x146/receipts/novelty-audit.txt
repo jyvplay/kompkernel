@@ -1,0 +1,27 @@
+Scoped X146 novelty searches; matches are ancestry leads, not proof of completeness.
+src/lib/omega/probole.ts:41: * is admitted: `JSON.stringify(JSON.parse(text), null, unit)` plus at most one
+src/lib/omega/probole.ts:102: * canonical JSON rendering (byte-identical to JSON.stringify(v, null, unit))
+src/lib/omega/probole.ts:106:  if (v === null || typeof v !== 'object') return JSON.stringify(v);
+src/lib/omega/probole.ts:115:  if (unit === '') return '{' + keys.map((k) => JSON.stringify(k) + ':' + renderCanonical(v[k], unit, depth + 1)).join(',') + '}';
+src/lib/omega/probole.ts:116:  return '{\n' + keys.map((k) => unit.repeat(depth + 1) + JSON.stringify(k) + ': ' + renderCanonical(v[k], unit, depth + 1)).join(',\n')
+src/lib/omega/probole.ts:123:  return '{' + Object.keys(v).map((k) => JSON.stringify(k) + ':' + shapeOf(v[k])).join(',') + '}';
+src/lib/omega/probole.ts:128:  if (v === null || typeof v !== 'object') { slots.push(JSON.stringify(v)); return '~'; }
+src/lib/omega/probole.ts:137:  if (unit === '') return '{' + keys.map((k) => JSON.stringify(k) + ':' + renderSlotted(v[k], unit, depth + 1, slots)).join(',') + '}';
+src/lib/omega/probole.ts:138:  return '{\n' + keys.map((k) => unit.repeat(depth + 1) + JSON.stringify(k) + ': ' + renderSlotted(v[k], unit, depth + 1, slots)).join(',\n')
+src/lib/omega/probole.ts:145:  if (isObjectChild) { slots.push(JSON.stringify(key ?? '')); return '~: ' + renderSlotted(child, unit, depth, slots); }
+src/lib/omega/probole.ts:230:    if (node === null || typeof node !== 'object') return JSON.stringify(node);
+src/lib/omega/probole.ts:254:      const prefix = isArr ? '' : JSON.stringify(keys[i]) + (unit === '' ? ':' : ': ');
+src/lib/omega/probole.ts:267:  lines.push(`^S ${JSON.stringify(sepLine)}`);
+src/lib/omega/probole.ts:268:  lines.push(`^O ${JSON.stringify(outer)}`);
+src/lib/omega/probole.ts:270:    lines.push(`^T${r.id} ${JSON.stringify(r.templateLines.join('\n'))}`);
+src/lib/omega/probole.ts:295:    try { const p: unknown = JSON.parse(s); return typeof p === 'string' ? p : null; } catch { return null; }
+src/lib/omega/probole.ts:354:  try { parsed = JSON.parse(body) as JNode; } catch { return null; }
+src/lib/omega/circe.ts:97: *       or name) were percent-encoded by encodeURIComponent/a server and
+src/lib/omega/circe.ts:242:    throw new Error(`CIRCE NAMED_ENTITY_LIST is not bijective: both "${CHAR_TO_NAMED.get(ch)}" and "${name}" resolve to ${JSON.stringify(ch)}`);
+src/lib/omega/circe.ts:391:// digits ONLY (the canonical spelling produced by encodeURIComponent and
+src/lib/omega/gramma.ts:18: * *derivable* content.  `JSON.stringify(v, null, 2)` output is a deterministic
+src/lib/omega/gramma.ts:58: * executes "print the decoded body as JSON.stringify(v, null, 2)" correctly is
+src/lib/omega/gramma.ts:104: *    cannot touch scalar content; pretty-printing is the JSON.stringify(v,
+src/lib/omega/gramma.ts:157:        // JSON.stringify keeps empty containers inline.
+src/lib/omega/gramma.ts:318:  `${GRAMMA_TAG}j${repr}: print it as JSON.stringify(v,null,${repr}).`;
+src/lib/omega/json-escape-fold.ts:68:  try { JSON.parse(text); } catch { return null; }

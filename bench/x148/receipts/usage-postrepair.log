@@ -1,0 +1,24 @@
+
+<--- Last few GCs --->
+
+[95388:0x1cd2c000]   708239 ms: Mark-Compact 2073.0 (2246.7) -> 2058.4 (2247.9) MB, pooled: 0 MB, 136.61 / 0.00 ms  (average mu = 0.435, current mu = 0.450) allocation failure; scavenge might not succeed
+[95388:0x1cd2c000]   708559 ms: Mark-Compact 2074.2 (2247.9) -> 2058.6 (2248.2) MB, pooled: 0 MB, 213.30 / 0.00 ms  (average mu = 0.379, current mu = 0.334) allocation failure; scavenge might not succeed
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0xe46bbe node::OOMErrorHandler(char const*, v8::OOMDetails const&) [node]
+ 2: 0x1243640 v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 3: 0x1243917 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 4: 0x1472825  [node]
+ 5: 0x148c0b9 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [node]
+ 6: 0x14607b8 v8::internal::HeapAllocator::AllocateRawWithLightRetrySlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [node]
+ 7: 0x14616e5 v8::internal::HeapAllocator::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [node]
+ 8: 0x1439a0e v8::internal::Factory::AllocateRaw(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [node]
+ 9: 0x1428844 v8::internal::FactoryBase<v8::internal::Factory>::AllocateRawWithImmortalMap(int, v8::internal::AllocationType, v8::internal::Tagged<v8::internal::Map>, v8::internal::AllocationAlignment) [node]
+10: 0x142a79f v8::internal::FactoryBase<v8::internal::Factory>::NewRawTwoByteString(int, v8::internal::AllocationType) [node]
+11: 0x18be3fd v8::internal::Runtime_StringBuilderConcat(int, unsigned long*, v8::internal::Isolate*) [node]
+12: 0x7f7ba3eacaf6 

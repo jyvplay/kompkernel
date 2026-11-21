@@ -1,0 +1,6 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {arkesisFrontierEncode} from '../../src/lib/omega/arkesis-frontier';import {arkesisRead} from '../../src/lib/omega/arkesis';import {readPlainParent} from '../../src/lib/omega/ekdysis-frontier';import {encode} from 'gpt-tokenizer/encoding/o200k_base';
+process.env.OMEGA_DET='1';process.env.OMEGA_NO_MEMO='1';process.env.OMEGA_ENGRAM='0';process.env.OMEGA_OURA_MEMO='0';process.env.OMEGA_NO_OROTHESIA='1';
+const path='bench/x152/fixtures/vscode-json-package.json',bytes=fs.readFileSync(path),start=performance.now(),cpu=process.cpuUsage(),r=arkesisFrontierEncode(bytes.toString('utf8')),c=process.cpuUsage(cpu);
+assert.equal(r.baseTokens,867);assert.equal(r.tokens,822);assert.equal(r.applied,true);assert.equal(r.parentCalls,1);assert.equal(encode(r.message).length,r.tokens);assert.ok(Buffer.from(arkesisRead(r.message,readPlainParent)).equals(bytes));assert.equal(r.message,fs.readFileSync('bench/x154/receipts/native-packet.txt','utf8'));
+const result={path,...r,ms:performance.now()-start,cpuMs:(c.user+c.system)/1000,scope:'fresh full API with TAGSTACK, HOMOSEMA, KENOMA and ARKESIS; parentCalls counts additional ARKESIS parent only, not incumbent work'};
+fs.writeFileSync('bench/x154/receipts/full-api.json',JSON.stringify(result,null,2));console.log(JSON.stringify({...result,message:undefined}));

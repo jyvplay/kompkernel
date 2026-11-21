@@ -1,0 +1,13 @@
+{
+  "messages": 30,
+  "checks": 120,
+  "sourceByteReads": 30,
+  "tokenRoundtrips": 30,
+  "referencePrices": 30,
+  "externalBaselinePricesAndReads": 2,
+  "nativeSingleChat": "NOT_RUN",
+  "bestGain": 20,
+  "bestPath": "bench/x152/fixtures/vscode-json-package.json",
+  "packetSha256": "de5f13763c483c7d5f2087c4990c3a081425507a73107661b55df1e614608913",
+  "claimedFullSuccess": false
+}

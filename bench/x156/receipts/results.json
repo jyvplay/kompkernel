@@ -1,0 +1,69 @@
+{
+  "tokenTrials": [
+    {
+      "path": "bench/x156/fixtures/python-maps.txt",
+      "base": 663,
+      "candidate": 549,
+      "gain": 114,
+      "selected": 549,
+      "sourceBytes": 6251,
+      "passed": true
+    },
+    {
+      "path": "bench/x156/fixtures/cat-maps.txt",
+      "base": 302,
+      "candidate": 299,
+      "gain": 3,
+      "selected": 299,
+      "sourceBytes": 2127,
+      "passed": true
+    }
+  ],
+  "freshFullAPI": {
+    "tokens": 549,
+    "baseTokens": 663,
+    "applied": true,
+    "parentCalls": 1,
+    "ms": 324205.491401,
+    "cpuMs": 212180.002
+  },
+  "canonical": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "native": "NOT_RUN",
+  "speed": {
+    "lanes": [
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "cpuRatio": 0.9074075287299903,
+        "wallRatio": 0.9222050261300356,
+        "identicalWires": 4
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "cpuRatio": 1.0475253985629032,
+        "wallRatio": 1.0497423198801261,
+        "identicalWires": 4
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "cpuRatio": 1.0417078507116537,
+        "wallRatio": 1.0444718078993271,
+        "identicalWires": 4
+      }
+    ],
+    "aggregateCpuRatio": 1.0225995261612375,
+    "aggregateWallRatio": 1.0279419905754492,
+    "gatePassed": false,
+    "scope": "12 cold-process whole-encoder calls, 3 fixed lanes, ABBA; not a universal speed theorem"
+  },
+  "productionSpeedPatch": false,
+  "fullPareto": false,
+  "breadth": "same-machine memory maps only; no canonical prose gain"
+}

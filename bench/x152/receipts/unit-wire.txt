@@ -1,0 +1,2 @@
+After decoding, restore JSON punctuation outside strings: ] closes the innermost open object or array. Preserve all other characters; print only.
+{"a":1,"a":2,"s":"[,]};:\"","n":1e+300]

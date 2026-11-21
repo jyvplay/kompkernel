@@ -1,0 +1,18 @@
+{
+  "independentReads": {
+    "unit-wires": 2047,
+    "probe": 20,
+    "parent": 3,
+    "body-parent": 1,
+    "root-parent": 1,
+    "packages-parent": 1,
+    "final-parent": 5,
+    "integration": 1
+  },
+  "baselineSourceReads": 9,
+  "baselineUnsupported": [
+    "parent:bench/x146/heldout/node-67620.json",
+    "final-parent:bench/x146/heldout/node-67620.json"
+  ],
+  "native": "NOT_RUN"
+}

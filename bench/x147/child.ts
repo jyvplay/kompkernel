@@ -1,0 +1,5 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {horionPlans} from '../../src/lib/omega/horion';import {HORION_OUTER,horionFrontierRead} from '../../src/lib/omega/horion-frontier';import {tagstackEncode} from '../../src/lib/omega/tagstack';import {countTokens} from '../../src/lib/omega/bpe';
+for(const k of ['OMEGA_NO_MEMO','OMEGA_DET','OMEGA_NO_OROTHESIA'])process.env[k]='1';for(const k of ['OMEGA_ENGRAM','OMEGA_OURA_MEMO','OMEGA_SCALAR'])process.env[k]='0';
+const source=fs.readFileSync('bench/x147/heldout/geyser.csv','utf8'),p=horionPlans(source)[0],start=performance.now(),child=tagstackEncode(p.reduced),ms=performance.now()-start,message=HORION_OUTER+JSON.stringify(p.spec)+'\n'+child.message;
+let sourceRead=false,error='';try{assert.equal(horionFrontierRead(message),source);sourceRead=true}catch(e){error=String(e)}
+fs.writeFileSync('bench/x147/receipts/child.json',JSON.stringify({message,tokens:countTokens(message,'o200k_base'),childMessage:child.message,childTokens:child.messageTokens,ms,sourceRead,error},null,2));console.log({tokens:countTokens(message,'o200k_base'),ms,sourceRead,error});

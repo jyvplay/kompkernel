@@ -1,0 +1,27 @@
+
+> kompkernel@1.0.0 build
+> vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+Found 2 warnings while optimizing generated CSS:
+
+Issue #1:
+[2m│   }[22m
+[2m│   .\[-\:\.\/\,\] {[22m
+[2m│[22m     -: ./,;
+[2m┆[22m           [33m[2m^--[22m Unexpected token Semicolon[39m
+[2m┆[22m
+[2m│   }[22m
+[2m│   .\[-\:\.\/\] {[22m
+
+Issue #2:
+[2m│   }[22m
+[2m│   .\[-\:\.\/\] {[22m
+[2m│[22m     -: ./;
+[2m┆[22m          [33m[2m^--[22m Unexpected token Semicolon[39m
+[2m┆[22m
+[2m│   }[22m
+[2m│   .\[h\:1\] {[22m
+
+Killed

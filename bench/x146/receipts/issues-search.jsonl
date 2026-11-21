@@ -1,0 +1,4 @@
+{"number":41605,"title":"with_structured_output with dict/JSON schema silently returns None on unrecognized tool name","url":"https://api.github.com/repos/langchain-ai/langchain/issues/41605"}
+{"number":41609,"title":"langchain-deepseek: list-form tool results are sent as ASCII-escaped JSON, inflating non-English tool output ~5x","url":"https://api.github.com/repos/langchain-ai/langchain/issues/41609"}
+{"number":33504,"title":"create_agent Does Not Handle invalid_tool_calls from JSON Parsing Errors (langchain alpha v1)","url":"https://api.github.com/repos/langchain-ai/langchain/issues/33504"}
+{"number":41851,"title":"Tool returning `list[str]` breaks ChatOpenAI (400) and ChatAnthropic (values merged) in a manual tool loop","url":"https://api.github.com/repos/langchain-ai/langchain/issues/41851"}

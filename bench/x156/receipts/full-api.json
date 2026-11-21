@@ -1,0 +1,11 @@
+{
+  "path": "bench/x156/fixtures/python-maps.txt",
+  "message": "Decode body first. At line starts, @HEX+N or @N replaces an address range: start is HEX, or the previous @ record end; end=start+4096*N (N decimal). Write start-end in lowercase hex, each padded to at least 12 digits. Keep the rest verbatim. Print only.\n¶ k=v. expand repeatedly; print only.\n§ц-К86_64-linuxцgnuо@щ\nоф.cpythonц311-xК.soща00ж т fe:ажә0натҰ/usr/libх                       Ұ/xКОәх/libН.so.А3шт744ОcryptoНАщя2Б134әх/ld-linux-x86ц64Ня\nп r--pрпжи000ч импче1өпчиаъ rw-pёнБУчиажа:ажә бъУ\nЂ/pythonА.11һ r-xpчы141ОzНе.я.13щу004еfиво7іd300әңт10908                              /usr/binЂ\nСвfe8aњаa850аю6ь135ОcНющѓ                      ҰЂ/lib-dynload/_қминйн10891                      Ұ/xК/libexpatНе.8.10щзт11324ѓjsonфст137ях/libmНющГУ                         [эмәaикеъчлт10817ѓhashlibфг4д+¶ага000-умиаңуц006іһеfиң006іц009460ап аяің00946ица947ира545иң009470ацњъж005460аңњ-аacaиб072efиц074440аъУ                                 [heap]\nС820аа+197өш637һc50аш222ра342иш98рушАъ аг810ашАбС86960адямаиз7һ020азям090азеэзкәbизгөлюһәгилгэлеп ааdиляъчәeил866бо7 rц-sчин1687х/gconv/gconv-modules.cacheщ87маите266                       Ұ/locale/C.utf8/LC_CTYPEщяб@38қь342һ260ать83ра17cитьгр001cfитьяъж001іть13богмий28һ040й8рияайям280йк2aәйАпчины19һәАиты7м160атыемеcитыкеdиты16өс116һе00ас90м840асемddискdeисюбоеқБо38һәеитБоеәм270ё@ям310ёояъч330ёвffddeebги+33ъГstack]\nвffddef8aидгпГvvar]\nоя rцxpГvdso]\n@ffffffffff600иде --xpУ                 [vsyscall]\n",
+  "tokens": 549,
+  "baseTokens": 663,
+  "applied": true,
+  "parentCalls": 1,
+  "ms": 324205.491401,
+  "cpuMs": 212180.002,
+  "native": "NOT_RUN"
+}

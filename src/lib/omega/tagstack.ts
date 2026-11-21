@@ -1,3 +1,4 @@
+import { scalarCollect, scalarCollecting, scalarOffer } from './scalar';
 import { isUtf8TransportStable } from './utf8-wire';
 /**
  * TAGSTACK (X47) — exact in-band close-tag stack elision.
@@ -38,6 +39,7 @@ import { isomorphiaEncode, isomorphiaDisabled } from './isomorphia';
 import { metataxisEncode, metataxisDisabled } from './metataxis';
 import { platosEncode, platosDisabled } from './platos';
 import { steliEncode, steliDisabled } from './steli';
+import { polysteliEncode, polysteliDisabled } from './polysteli';
 import { syndyasmosDisabled, syndyasmosEncode } from './syndyasmos';
 import { gennadasDisabled, gennadasEncode } from './gennadas';
 import { diagrapheDisabled, diagrapheEncode } from './diagraphe';
@@ -432,7 +434,10 @@ function tagstackEncodeInnerMeasured(text: string, enc: EncodingName = 'o200k_ba
     }
     // X144b: a code-unit inverse is not a UTF-8 wire inverse.
     if (candidate.codec === 'synkrisis') synTokens = countTokens(candidate.message, enc);
-    if (!isUtf8TransportStable(candidate.message)) return;
+    if (!isUtf8TransportStable(candidate.message)) {
+      scalarOffer(candidate.message, text, enc);
+      return;
+    }
     const tokens = countTokens(candidate.message, enc);
     if (!Number.isFinite(tokens)) throw new Error(`${candidate.codec} produced a non-finite full-message cost`);
     frontierCosts[candidate.codec] = tokens;
@@ -615,7 +620,8 @@ export function tagstackFrontier(text: string, enc: EncodingName = 'o200k_base')
 export function tagstackEncode(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
   const memoOff = (typeof process !== 'undefined' && process.env?.OMEGA_NO_MEMO === '1');
   if (memoOff) return tagstackX74Chain(text, enc);
-  const key = `X\u0000${memoKey(text, enc)}`;
+  const scalarMode = typeof process !== 'undefined' && process.env?.OMEGA_SCALAR === '1';
+  const key = `X${scalarMode ? 'S' : ''}\u0000${memoKey(text, enc)}`;
   const hit = ENCODE_MEMO.get(key);
   if (hit) {
     ENCODE_MEMO.delete(key);
@@ -644,8 +650,13 @@ export function tagstackEncodeUncached(text: string, enc: EncodingName = 'o200k_
 export function tagstackX74Chain(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
   // X115 EPISYNEDRIA: one council spans the base frontier AND the X74 candidate
   // re-entries. Disabled => no outer scope, and the inner scope is X114's.
-  if (synedriaChainDisabled()) return tagstackX74ChainMeasured(text, enc);
-  return synedriaChainScope(() => tagstackX74ChainMeasured(text, enc));
+  const run = () => synedriaChainDisabled() ? tagstackX74ChainMeasured(text, enc)
+    : synedriaChainScope(() => tagstackX74ChainMeasured(text, enc));
+  if (!(typeof process !== 'undefined' && process.env?.OMEGA_SCALAR === '1') || scalarCollecting()) return run();
+  const {base, repair, offered} = scalarCollect(text, enc, run);
+  if (!repair || repair.tokens >= base.messageTokens || repair.decoded !== text) return base;
+  return {...base, wire: repair.message, message: repair.message, messageTokens: repair.tokens,
+    decoded: text, applied: true, notes: `SCALAR ${offered} rejected parents, ${repair.variants} variants; ${base.notes}`};
 }
 
 function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
@@ -843,6 +854,22 @@ function tagstackX74ChainMeasured(text: string, enc: EncodingName = 'o200k_base'
   if (!steliDisabled()) {
     try {
       admit('ΣΤΉΛΗ', steliEncode(text, enc, {
+        incumbent: best.messageTokens,
+        inner: (t: string, e: EncodingName) => tagstackX74ChainMeasured(t, e),
+      }) as unknown as WideResult);
+    } catch { /* not a candidate */ }
+  }
+
+  // X149 — ΠΟΛΥΣΤΗΛΗ. Right-edge tiling with a VERBATIM multi-token tail: rows
+  // whose trailing column contains spaces (`ls -l` names plus ` -> target`,
+  // `ps aux` commands) are exactly the rows ΣΤΉΛΗ's slice model cannot carry —
+  // steliTransform returns NULL on ls-l-real (measured, bench/x149). Conforming
+  // stretches sit inside each blank-line block; headers and odd rows pass
+  // through. Byte-exact G3-G5, strict gain G6. DEFAULT-OFF with a measured
+  // reason: see polysteliDisabled() — `OMEGA_POLYSTELI=1` measures the real chain.
+  if (!polysteliDisabled()) {
+    try {
+      admit('ΠΟΛΥΣΤΗΛΗ', polysteliEncode(text, enc, {
         incumbent: best.messageTokens,
         inner: (t: string, e: EncodingName) => tagstackX74ChainMeasured(t, e),
       }) as unknown as WideResult);

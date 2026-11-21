@@ -1,0 +1,288 @@
+[
+  {
+    "path": "bench/holdout-x42/lsblk.txt",
+    "raw": 60,
+    "incumbent": 60,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "raw": 656,
+    "incumbent": 620,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x42b/uptime-w.txt",
+    "raw": 80,
+    "incumbent": 80,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x42b/free-m.txt",
+    "raw": 76,
+    "incumbent": 76,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x42b/vmstat.txt",
+    "raw": 229,
+    "incumbent": 144,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "raw": 578,
+    "incumbent": 411,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-tbl/df-h.txt",
+    "raw": 570,
+    "incumbent": 160,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x41/df-real.txt",
+    "raw": 158,
+    "incumbent": 123,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x41/du-real.txt",
+    "raw": 458,
+    "incumbent": 266,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x41/node-help.txt",
+    "raw": 1099,
+    "incumbent": 846,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x42/findmnt.txt",
+    "raw": 787,
+    "incumbent": 385,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x42/df-h.txt",
+    "raw": 140,
+    "incumbent": 105,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-work/email-thread.txt",
+    "raw": 629,
+    "incumbent": 486,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-work/llm-answer.md",
+    "raw": 733,
+    "incumbent": 664,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-tbl/markdown-table.md",
+    "raw": 330,
+    "incumbent": 172,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-tbl/psql-output.txt",
+    "raw": 675,
+    "incumbent": 229,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x40/prices.csv",
+    "raw": 582,
+    "incumbent": 118,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x40/cue-sheet.md",
+    "raw": 513,
+    "incumbent": 101,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x42/ps-ef.txt",
+    "raw": 1144,
+    "incumbent": 296,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x41/ls-real.txt",
+    "raw": 1034,
+    "incumbent": 414,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout/json-pkg.txt",
+    "raw": 1152,
+    "incumbent": 653,
+    "plans": [
+      {
+        "mode": {
+          "separator": ",",
+          "close": null
+        },
+        "changed": 94,
+        "folded": 1151,
+        "completeRaw": 1179
+      },
+      {
+        "mode": {
+          "separator": null,
+          "close": "]"
+        },
+        "changed": 10,
+        "folded": 1152,
+        "completeRaw": 1180
+      },
+      {
+        "mode": {
+          "separator": null,
+          "close": ")"
+        },
+        "changed": 12,
+        "folded": 1152,
+        "completeRaw": 1180
+      },
+      {
+        "mode": {
+          "separator": ";",
+          "close": null
+        },
+        "changed": 189,
+        "folded": 1152,
+        "completeRaw": 1180
+      },
+      {
+        "mode": {
+          "separator": ",",
+          "close": "]"
+        },
+        "changed": 104,
+        "folded": 1151,
+        "completeRaw": 1190
+      },
+      {
+        "mode": {
+          "separator": ",",
+          "close": ")"
+        },
+        "changed": 106,
+        "folded": 1151,
+        "completeRaw": 1190
+      },
+      {
+        "mode": {
+          "separator": ";",
+          "close": "]"
+        },
+        "changed": 199,
+        "folded": 1152,
+        "completeRaw": 1191
+      },
+      {
+        "mode": {
+          "separator": ";",
+          "close": ")"
+        },
+        "changed": 201,
+        "folded": 1152,
+        "completeRaw": 1191
+      },
+      {
+        "mode": {
+          "separator": ":",
+          "close": null
+        },
+        "changed": 95,
+        "folded": 1165,
+        "completeRaw": 1193
+      },
+      {
+        "mode": {
+          "separator": ":",
+          "close": ")"
+        },
+        "changed": 107,
+        "folded": 1154,
+        "completeRaw": 1193
+      },
+      {
+        "mode": {
+          "separator": ":",
+          "close": "]"
+        },
+        "changed": 105,
+        "folded": 1165,
+        "completeRaw": 1204
+      }
+    ]
+  },
+  {
+    "path": "bench/holdout/code-ts.txt",
+    "raw": 1422,
+    "incumbent": 949,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x42/dpkg-l.txt",
+    "raw": 1000,
+    "incumbent": 623,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "raw": 1106,
+    "incumbent": 381,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "raw": 1006,
+    "incumbent": 300,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "raw": 811,
+    "incumbent": 197,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "raw": 3054,
+    "incumbent": 980,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x41/apt-real.txt",
+    "raw": 2739,
+    "incumbent": 813,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "raw": 5194,
+    "incumbent": 1310,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout/gh-api.json.txt",
+    "raw": 2519,
+    "incumbent": null,
+    "plans": []
+  },
+  {
+    "path": "bench/holdout-ops/package-lock-head.json",
+    "raw": 15009,
+    "incumbent": null,
+    "plans": []
+  }
+]

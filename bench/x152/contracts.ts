@@ -1,0 +1,2 @@
+import {countTokens} from '../../src/lib/omega/bpe';
+const keys=['¶ k=v; expand. Outside JSON strings, ] closes either container; print only.\n','¶ k=v; expand; JSON ] closes either container; print only.\n','¶ k=v; expand. JSON: ] closes arrays or objects. Print only.\n','¶ k=v; expand. JSON closers outside strings: ]=matching bracket. Print only.\n','¶ k=v; expand; restore JSON closing brackets. Print only.\n'];console.log(JSON.stringify(keys.map(key=>({key,tokens:countTokens(key,'o200k_base')})),null,2));

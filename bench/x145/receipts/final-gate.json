@@ -1,0 +1,24 @@
+{
+  "prices": 63,
+  "transportAndTokenId": 63,
+  "sourceExact": 47,
+  "unsupported": [
+    "frontier:bench/holdout-tbl/df-h.txt",
+    "frontier:bench/holdout-tbl/markdown-table.md",
+    "frontier:bench/holdout-tbl/psql-output.txt",
+    "frontier:bench/holdout-x40/prices.csv",
+    "frontier:bench/holdout-x40/cue-sheet.md",
+    "frontier:bench/holdout-tbl/kubectl-get-pods.txt",
+    "frontier:bench/holdout-x40/metrics.tsv",
+    "frontier:bench/holdout-x41/ls-l-real.txt",
+    "frontier-scalar:bench/holdout-tbl/df-h.txt",
+    "frontier-scalar:bench/holdout-tbl/markdown-table.md",
+    "frontier-scalar:bench/holdout-tbl/psql-output.txt",
+    "frontier-scalar:bench/holdout-x40/prices.csv",
+    "frontier-scalar:bench/holdout-x40/cue-sheet.md",
+    "frontier-scalar:bench/holdout-tbl/kubectl-get-pods.txt",
+    "frontier-scalar:bench/holdout-x40/metrics.tsv",
+    "frontier-scalar:bench/holdout-x41/ls-l-real.txt"
+  ],
+  "native": "NOT_RUN"
+}

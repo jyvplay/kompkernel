@@ -1,0 +1,12 @@
+{ depth: 127, size: 16639, plans: 0, compact: 0 }
+tree matches true
+undo matches true
+{ depth: 128, size: 16898, plans: 0, compact: 0 }
+tree matches true
+undo matches true
+{ depth: 129, size: 17159, plans: 0, compact: 0 }
+Error: ARKESIS budget
+Error: STOIBAS depth
+{ count: 9998, size: 39995, plans: 0 }
+{ count: 9999, size: 39999, plans: 0 }
+{ count: 10000, size: 40003, plans: 0 }

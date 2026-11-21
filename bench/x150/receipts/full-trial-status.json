@@ -1,0 +1,7 @@
+{
+  "path": "bench/x150/fixtures/git-polysteli-color.diff",
+  "command": "timeout 1200s node --max-old-space-size=1500 bench/x150/composite.mjs bench/x150/fixtures/git-polysteli-color.diff bench/x150/receipts/git-polysteli-full-composite.json",
+  "exitCode": 124,
+  "outcome": "timeout; no result file, no completed parent comparison, no native test",
+  "notes": "A repaired-grid benchmark ran concurrently for part of this measurement. This is not an isolated performance test; no compression outcome is inferred."
+}

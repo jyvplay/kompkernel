@@ -1,0 +1,14 @@
+[
+  {
+    "package": "clsx",
+    "version": "2.1.1",
+    "source": "installed package README after npm ci",
+    "classification": "additional package lane, not blind or randomized; clsx package previously exposed"
+  },
+  {
+    "package": "tailwind-merge",
+    "version": "3.4.0",
+    "source": "installed package README after npm ci",
+    "classification": "additional package lane, not blind or randomized; clsx package previously exposed"
+  }
+]

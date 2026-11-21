@@ -1,0 +1,1 @@
+{"path":"bench/holdout-tbl/kubectl-get-pods.txt","incumbentTokens":300,"childTokens":319,"candidateTokens":null,"applied":false,"reason":"no independently source-readable feasible carrier","ms":88273.05374,"cpuMs":71149.841,"window":null}

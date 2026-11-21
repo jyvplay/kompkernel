@@ -1,0 +1,6 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {arkesisFrontierEncode} from '../../src/lib/omega/arkesis-frontier';import {tagstackEncode} from '../../src/lib/omega/tagstack';import {stoibasCompactPlans,stoibasCompactCandidate} from '../../src/lib/omega/stoibas';import {readPlainParent} from '../../src/lib/omega/ekdysis-frontier';
+process.env.OMEGA_DET='1';process.env.OMEGA_NO_MEMO='1';process.env.OMEGA_ENGRAM='0';process.env.OMEGA_OURA_MEMO='0';process.env.OMEGA_NO_OROTHESIA='1';
+const path='bench/x155/fixtures/parser-package.json',source=fs.readFileSync(path,'utf8'),out='bench/x155/receipts/heldout.jsonl';fs.writeFileSync(out,'');assert.ok(source.length<=6000);
+const emit=(r:object)=>{fs.appendFileSync(out,JSON.stringify({path,...r})+'\n');console.log(JSON.stringify({...r,message:undefined,parent:undefined,folded:undefined}));};
+const t=performance.now(),base=arkesisFrontierEncode(source);emit({stage:'incumbent',...base,ms:performance.now()-t});
+for(const p of stoibasCompactPlans(source)){const a=tagstackEncode(p.folded),c=stoibasCompactCandidate(source,p.width,a.message,readPlainParent);assert.equal(a.decoded,p.folded);emit({stage:'candidate',incumbent:base.tokens,...p,candidate:c?.tokens??null,gain:c?base.tokens-c.tokens:null,message:c?.message??null,parent:a.message});}

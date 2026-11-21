@@ -1,0 +1,9 @@
+{
+  "matches": [
+    {
+      "path": "bench/holdout/md-vite.txt",
+      "match": "Hot Module Replacement (HMR)"
+    }
+  ],
+  "scope": "capitalized-word initialisms only; not an exhaustive applicability census"
+}

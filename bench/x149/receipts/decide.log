@@ -1,0 +1,16 @@
+WS uptime-w.txt gain<= 6
+WS free-m.txt gain<= 14
+WS vmstat.txt gain<= 7
+WS node-help.txt gain<= 24
+WS psql-output.txt gain<= 7
+WS ps-ef.txt gain<= 8
+WS json-pkg.txt gain<= 6
+WS code-ts.txt gain<= 6
+WS ps-real.txt gain<= 13
+WS ps-aux-real.txt gain<= 11
+WS_TOTAL_UPPER_BOUND 138
+DIFF_PAIRS 1 origTok 13 codedTok 11 13>11
+MONTHS ls-l-real.txt 149
+MONTHS du-real.txt 0
+MONTHS ps-aux-real.txt 0
+MONTHS apt-real.txt 0

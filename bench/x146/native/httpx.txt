@@ -1,0 +1,78 @@
+JSON.stringify the decoded payload; print only.
+¶ k=v. expand repeatedly; print only.
+§ةhttps://مةwww.python-httpx.orgج](مل/ص](ملك,ک withنhttpxي. *(Optionalكک `نو="۱لنچ.comلencode۱۰" srcوةraw.githubusercontentچ/master/docs/imgدةgithubچى
+ڌ```shellى$ pip installَ:
+
+ڌ نت*ړ]`)*
+ت `گ<p alignوcenter">۲...
+
+گ
+  <img widthو700٪` -قت `ژ.png" alt='ڈ</p>
+
+ڪل1.1ا HTTPغ2س supportذالغسیHTTPX٤` - Decoding for "ر>>> rہاXطل).
+تے the [۵.svg" altوش">
+</a>
+ۍ Python 3.۶GI applicationsصadvanced/transports/#ح">
+    <img srcوءسي[cliړه```
+
+٢" compressed responsesيع <a hrefوز pipَىهب.
+فasyncث client¶گ
+ عمل"><img widthو350" heightوغ08۰/butterflyژی'></a>
+ڈگ<strong>ی</strong> <em>- A next-generationاث for Python.</em>ڈگ
+<a hrefود/actionsحد/workflows/Test%20Suite/badge۵Test Suiteش<a hrefوةpypi.org/projectلنلحةbadge.fury.ioلpy۱۵Package versionشڈی is a fully featuredاث library forۍ It includes تتan integrated command line client**, hasس for both **HTTPڪ andالغ**, and provides both تتsync and async APIs**.
+
+---
+
+Install ی usingزNow, let's get started:
+
+```pycon
+>>> import نىر = ن.get('ةwww.example.org/')
+رى<Response [200 OK]>
+ر.status_code
+200ىر.headers['content-type']
+'text/html; charset=UTF-8'ىر.text
+'<!doctype html>\n<html>\n<head>\n<title>Example Domain</title>...'
+هOr, using the command-line clientبىڌ 'ن[cli]'  # The command line client is an optional dependencyبهWhich now allows us to useہ directly from the command-line۲۰۱-helpژن --help'>
+ڈSending a request۲۰۱-requestژن http://httpbin.org/json'>
+ڈ## Features
+
+ی builds on the well-established usability of `requests`, and gives you:
+
+* A broadly [requests-compatible APIجلcompatibilityط An integrated command-lineثبتاڪ [andذج/httpغط Standard synchronous interfaceك butک [فس if you need itصفط Ability to make requests directly to [WS۶wsgi-transport) or [AS۶asgi-transport)بت Strict timeouts everywhereبت Fully type annotatedبت 100% test coverageبىPlus all the standard features of `requests`...
+
+* International Domains and URLsىت Keep-Alive & Connection Poolingىت Sessionsک Cookie Persistenceىت Browser-style SSL Verificationىت Basic/Digest Authenticationىت Elegant Key/Value Cookiesىت Automatic Decompressionىت Automatic Content Decodingىت Unicode Response Bodiesىت Multipart File Uploadsىت HTTP(S) Proxy Supportىت Connection Timeoutsىت Streaming Downloadsىت .netrc Supportىت Chunked Requests
+
+## Installation
+
+InstallکزOr, to include the optionalذك useَ[http2]
+هی requiresۍ8+.
+
+## Documentation
+
+Project documentation is available at [ملجل).
+
+For a run-through of all the basicsك head over toےQuickStartجلquickstartل).
+
+For more advanced topicsك seeےAdvanced Usageجلadvanced/) sectionكےفسصف/) sectionك orےHTTPلغج/httpغل) sectionبىThe [Developer Interfaceجلapi/) provides a comprehensive API referenceبىTo find out about tools that integrateکہك see [Third Party Packagesجلthird_party_packagesل).
+
+## Contribute
+
+If you want to contributeکہ check outےContributing Guideجلcontributing/) to learn how to startبى## Dependencies
+
+The ی project relies on these excellent libraries:
+
+قhttpcore٪ The underlying transport implementation for `ن`.
+  قh11٪اڪسبقcertifi٪ SSL certificatesبقidna٪ Internationalized domain nameسبقsniffio٪ Async library autodetectionبىAs well as these optional installs:
+
+قh2٪ذي[httpغړsocksio٪ SOCKS proxyسي[socksړrich٪ Rich terminalءclick٪ Command line clientءbrotli` or `brotlicffi٤brotli٢[brotliړzstandard٤zstd٢[zstd]`)*
+
+A huge amount of credit is due to `requests` for the API layout thatىmuch of this work followsك as well as to `urllib3` for plenty of designىinspiration around the lower-level networking detailsبى---
+
+گ<i>ی isعدلblob/master/LICENSE.md">BSD licensed</a> code.<br/>Designed & craftedک care.</i><br/>&mdash; 🦋 &mdash;ڈ## Release Information
+
+### Fixedىىت Reintroduced supposedly-private `URLTypes` shortcut. (#2673)
+
+
+---
+
+[Full changelog](د/blob/master/CHANGELOG.md)

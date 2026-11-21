@@ -1,0 +1,6 @@
+{
+  "old": "    let s = '';\n    for (const slot of state.patternSlots[i]) s += after[slot];",
+  "replacement": "    const slots=state.patternSlots[i];\n    let s:string;\n    if(slots.length===1)s=after[slots[0]];\n    else if(slots.length===2)s=after[slots[0]]+after[slots[1]];\n    else if(slots.length===3)s=after[slots[0]]+after[slots[1]]+after[slots[2]];\n    else {s='';for(const slot of slots)s+=after[slot];}",
+  "production": false,
+  "note": "same ordered UTF16 concatenation, cache keys, work ticks and updates; only avoids iterator loop for arities1..3"
+}

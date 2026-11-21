@@ -1,0 +1,26 @@
+[
+  {
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "bytes": 10692,
+    "sha256": "82572e90c7619baad4690b42704b29002a4c7c0a70acc8b35193431ff6286cfa",
+    "byte_exact": true
+  },
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "bytes": 6590,
+    "sha256": "b54eaf4147ffa2c62b3a0e4f4f3abbe4ec81ff4b5faf086ca4d1f23a99fbd07f",
+    "byte_exact": true
+  },
+  {
+    "path": "bench/holdout-x42/ps-ef.txt",
+    "bytes": 2669,
+    "sha256": "36bd1376a952d8882b5be08d4742ea1ce1ae7aeeafb2397c261133d6431a7861",
+    "byte_exact": true
+  },
+  {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "bytes": 2649,
+    "sha256": "165c9837bef4f6c062403b00e44c399b9abfca455ae1040e7f4803f936c6d014",
+    "byte_exact": true
+  }
+]

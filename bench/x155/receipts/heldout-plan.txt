@@ -1,0 +1,1 @@
+Before pricing: typescript-eslint/typescript-eslint packages/parser/package.json at 2c339edc0b3036acbba16882500608f122debc07. Source budget6000 UTF16 units. Compare full ARKESIS incumbent (including KENOMA/HOMOSEMA/TAGSTACK) to compact STOIBAS, timeout900s. Run after canonical jobs to avoid X154 resource contention.

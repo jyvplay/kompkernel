@@ -1,0 +1,5 @@
+{
+  "old": "    let s = '';\n    for (const slot of state.patternSlots[i]) s += after[slot];\n    let v = cache.get(s);\n    if (v === undefined) { v = countTokens(s, enc); cache.set(s, v); }",
+  "replacement": "    const slots=state.patternSlots[i];\n    let v:number|undefined;\n    if(slots.length===2 && after[slots[0]].length===1 && after[slots[1]].length===1){\n      const a=after[slots[0]],b=after[slots[1]],key=(a.charCodeAt(0)<<16)|b.charCodeAt(0);\n      v=pairCache.get(key);\n      if(v===undefined){const s=a+b;v=cache.get(s);if(v===undefined){v=countTokens(s,enc);cache.set(s,v);}if(pairCache.size>=262144)pairCache.clear();pairCache.set(key,v);}\n    }else{\n      let s='';for(const slot of slots)s+=after[slot];v=cache.get(s);\n      if(v===undefined){v=countTokens(s,enc);cache.set(s,v);}\n    }",
+  "note": "two UTF16-code-unit strings have injective signed32 numeric keys; caches separated by encoding, bounded262144; workTick and acceptance updates unchanged"
+}

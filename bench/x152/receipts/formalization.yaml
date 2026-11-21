@@ -1,0 +1,4 @@
+# Selected Superstring source mapping only; not the complete manifest.
+    - comparator_config: ComparatorChallenges/Superstring.json
+      declaration: OAI.Superstring.main
+      file: OAI/Computability/Superstring/Main.lean

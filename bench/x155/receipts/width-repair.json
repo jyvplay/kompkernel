@@ -1,0 +1,15 @@
+{
+  "before": "A wide alternative could exceed the output cap and throw from an outer catch, discarding valid narrower plans. Reproduced at depth128 and9999 array elements.",
+  "repair": "Catch format-cap refusals per width; retain independently verified width alternatives.",
+  "targetedChecks": 8,
+  "positiveDepth": 128,
+  "negativeDepth": 129,
+  "positiveNodes": 10000,
+  "negativeNodes": 10001,
+  "rerun": "quoted/typed units, lexical attacks, bounds, transport attacks, wrapper attacks, seven full-wire gates, independent reader and attacks, portfolio, typecheck/build; fresh full API rerun launched separately",
+  "freshApiAfterRepair": {
+    "tokens": 805,
+    "incumbent": 822,
+    "passed": true
+  }
+}

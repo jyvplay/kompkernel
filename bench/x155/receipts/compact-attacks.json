@@ -1,0 +1,176 @@
+{
+  "checks": 108,
+  "passed": true,
+  "rows": [
+    {
+      "source": "{\n \"a b\": \"\",\n \"true\": \"\",\n \"-5\": \"\",\n \"key\\\"\": \"\",\n \"__proto__x\": \"\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\n=\n=\n=\n=",
+      "width": 1
+    },
+    {
+      "source": "{\n \"a b\": \"=\",\n \"true\": \"=\",\n \"-5\": \"=\",\n \"key\\\"\": \"=\",\n \"__proto__x\": \"=\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n==\n==\n==\n==\n==",
+      "width": 1
+    },
+    {
+      "source": "{\n \"a b\": \"[1\",\n \"true\": \"[1\",\n \"-5\": \"[1\",\n \"key\\\"\": \"[1\",\n \"__proto__x\": \"[1\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=[1\n=[1\n=[1\n=[1\n=[1",
+      "width": 1
+    },
+    {
+      "source": "{\n \"a b\": \"{ a\",\n \"true\": \"{ a\",\n \"-5\": \"{ a\",\n \"key\\\"\": \"{ a\",\n \"__proto__x\": \"{ a\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n={ a\n={ a\n={ a\n={ a\n={ a",
+      "width": 1
+    },
+    {
+      "source": "{\n \"a b\": \"\\\"\",\n \"true\": \"\\\"\",\n \"-5\": \"\\\"\",\n \"key\\\"\": \"\\\"\",\n \"__proto__x\": \"\\\"\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\\\"\n=\\\"\n=\\\"\n=\\\"\n=\\\"",
+      "width": 1
+    },
+    {
+      "source": "{\n \"a b\": \"\\\\\",\n \"true\": \"\\\\\",\n \"-5\": \"\\\\\",\n \"key\\\"\": \"\\\\\",\n \"__proto__x\": \"\\\\\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\\\\\n=\\\\\n=\\\\\n=\\\\\n=\\\\",
+      "width": 1
+    },
+    {
+      "source": "{\n \"a b\": \"\\\\u000a\",\n \"true\": \"\\\\u000a\",\n \"-5\": \"\\\\u000a\",\n \"key\\\"\": \"\\\\u000a\",\n \"__proto__x\": \"\\\\u000a\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\\\\u000a\n=\\\\u000a\n=\\\\u000a\n=\\\\u000a\n=\\\\u000a",
+      "width": 1
+    },
+    {
+      "source": "{\n \"a b\": \" \",\n \"true\": \" \",\n \"-5\": \" \",\n \"key\\\"\": \" \",\n \"__proto__x\": \" \"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n= \n= \n= \n= \n= ",
+      "width": 1
+    },
+    {
+      "source": "{\n \"a b\": \"\",\n \"true\": \"\",\n \"-5\": \"\",\n \"key\\\"\": \"\",\n \"__proto__x\": \"\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\n=\n=\n=\n=",
+      "width": 1
+    },
+    {
+      "source": "{\n \"a b\": \"null\",\n \"true\": \"null\",\n \"-5\": \"null\",\n \"key\\\"\": \"null\",\n \"__proto__x\": \"null\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=null\n=null\n=null\n=null\n=null",
+      "width": 1
+    },
+    {
+      "source": "{\n \"a b\": \"1e309\",\n \"true\": \"1e309\",\n \"-5\": \"1e309\",\n \"key\\\"\": \"1e309\",\n \"__proto__x\": \"1e309\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=1e309\n=1e309\n=1e309\n=1e309\n=1e309",
+      "width": 1
+    },
+    {
+      "source": "{\n  \"a b\": \"\",\n  \"true\": \"\",\n  \"-5\": \"\",\n  \"key\\\"\": \"\",\n  \"__proto__x\": \"\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\n=\n=\n=\n=",
+      "width": 2
+    },
+    {
+      "source": "{\n  \"a b\": \"=\",\n  \"true\": \"=\",\n  \"-5\": \"=\",\n  \"key\\\"\": \"=\",\n  \"__proto__x\": \"=\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n==\n==\n==\n==\n==",
+      "width": 2
+    },
+    {
+      "source": "{\n  \"a b\": \"[1\",\n  \"true\": \"[1\",\n  \"-5\": \"[1\",\n  \"key\\\"\": \"[1\",\n  \"__proto__x\": \"[1\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=[1\n=[1\n=[1\n=[1\n=[1",
+      "width": 2
+    },
+    {
+      "source": "{\n  \"a b\": \"{ a\",\n  \"true\": \"{ a\",\n  \"-5\": \"{ a\",\n  \"key\\\"\": \"{ a\",\n  \"__proto__x\": \"{ a\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n={ a\n={ a\n={ a\n={ a\n={ a",
+      "width": 2
+    },
+    {
+      "source": "{\n  \"a b\": \"\\\"\",\n  \"true\": \"\\\"\",\n  \"-5\": \"\\\"\",\n  \"key\\\"\": \"\\\"\",\n  \"__proto__x\": \"\\\"\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\\\"\n=\\\"\n=\\\"\n=\\\"\n=\\\"",
+      "width": 2
+    },
+    {
+      "source": "{\n  \"a b\": \"\\\\\",\n  \"true\": \"\\\\\",\n  \"-5\": \"\\\\\",\n  \"key\\\"\": \"\\\\\",\n  \"__proto__x\": \"\\\\\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\\\\\n=\\\\\n=\\\\\n=\\\\\n=\\\\",
+      "width": 2
+    },
+    {
+      "source": "{\n  \"a b\": \"\\\\u000a\",\n  \"true\": \"\\\\u000a\",\n  \"-5\": \"\\\\u000a\",\n  \"key\\\"\": \"\\\\u000a\",\n  \"__proto__x\": \"\\\\u000a\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\\\\u000a\n=\\\\u000a\n=\\\\u000a\n=\\\\u000a\n=\\\\u000a",
+      "width": 2
+    },
+    {
+      "source": "{\n  \"a b\": \" \",\n  \"true\": \" \",\n  \"-5\": \" \",\n  \"key\\\"\": \" \",\n  \"__proto__x\": \" \"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n= \n= \n= \n= \n= ",
+      "width": 2
+    },
+    {
+      "source": "{\n  \"a b\": \"\",\n  \"true\": \"\",\n  \"-5\": \"\",\n  \"key\\\"\": \"\",\n  \"__proto__x\": \"\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\n=\n=\n=\n=",
+      "width": 2
+    },
+    {
+      "source": "{\n  \"a b\": \"null\",\n  \"true\": \"null\",\n  \"-5\": \"null\",\n  \"key\\\"\": \"null\",\n  \"__proto__x\": \"null\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=null\n=null\n=null\n=null\n=null",
+      "width": 2
+    },
+    {
+      "source": "{\n  \"a b\": \"1e309\",\n  \"true\": \"1e309\",\n  \"-5\": \"1e309\",\n  \"key\\\"\": \"1e309\",\n  \"__proto__x\": \"1e309\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=1e309\n=1e309\n=1e309\n=1e309\n=1e309",
+      "width": 2
+    },
+    {
+      "source": "{\n    \"a b\": \"\",\n    \"true\": \"\",\n    \"-5\": \"\",\n    \"key\\\"\": \"\",\n    \"__proto__x\": \"\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\n=\n=\n=\n=",
+      "width": 4
+    },
+    {
+      "source": "{\n    \"a b\": \"=\",\n    \"true\": \"=\",\n    \"-5\": \"=\",\n    \"key\\\"\": \"=\",\n    \"__proto__x\": \"=\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n==\n==\n==\n==\n==",
+      "width": 4
+    },
+    {
+      "source": "{\n    \"a b\": \"[1\",\n    \"true\": \"[1\",\n    \"-5\": \"[1\",\n    \"key\\\"\": \"[1\",\n    \"__proto__x\": \"[1\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=[1\n=[1\n=[1\n=[1\n=[1",
+      "width": 4
+    },
+    {
+      "source": "{\n    \"a b\": \"{ a\",\n    \"true\": \"{ a\",\n    \"-5\": \"{ a\",\n    \"key\\\"\": \"{ a\",\n    \"__proto__x\": \"{ a\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n={ a\n={ a\n={ a\n={ a\n={ a",
+      "width": 4
+    },
+    {
+      "source": "{\n    \"a b\": \"\\\"\",\n    \"true\": \"\\\"\",\n    \"-5\": \"\\\"\",\n    \"key\\\"\": \"\\\"\",\n    \"__proto__x\": \"\\\"\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\\\"\n=\\\"\n=\\\"\n=\\\"\n=\\\"",
+      "width": 4
+    },
+    {
+      "source": "{\n    \"a b\": \"\\\\\",\n    \"true\": \"\\\\\",\n    \"-5\": \"\\\\\",\n    \"key\\\"\": \"\\\\\",\n    \"__proto__x\": \"\\\\\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\\\\\n=\\\\\n=\\\\\n=\\\\\n=\\\\",
+      "width": 4
+    },
+    {
+      "source": "{\n    \"a b\": \"\\\\u000a\",\n    \"true\": \"\\\\u000a\",\n    \"-5\": \"\\\\u000a\",\n    \"key\\\"\": \"\\\\u000a\",\n    \"__proto__x\": \"\\\\u000a\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\\\\u000a\n=\\\\u000a\n=\\\\u000a\n=\\\\u000a\n=\\\\u000a",
+      "width": 4
+    },
+    {
+      "source": "{\n    \"a b\": \" \",\n    \"true\": \" \",\n    \"-5\": \" \",\n    \"key\\\"\": \" \",\n    \"__proto__x\": \" \"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n= \n= \n= \n= \n= ",
+      "width": 4
+    },
+    {
+      "source": "{\n    \"a b\": \"\",\n    \"true\": \"\",\n    \"-5\": \"\",\n    \"key\\\"\": \"\",\n    \"__proto__x\": \"\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=\n=\n=\n=\n=",
+      "width": 4
+    },
+    {
+      "source": "{\n    \"a b\": \"null\",\n    \"true\": \"null\",\n    \"-5\": \"null\",\n    \"key\\\"\": \"null\",\n    \"__proto__x\": \"null\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=null\n=null\n=null\n=null\n=null",
+      "width": 4
+    },
+    {
+      "source": "{\n    \"a b\": \"1e309\",\n    \"true\": \"1e309\",\n    \"-5\": \"1e309\",\n    \"key\\\"\": \"1e309\",\n    \"__proto__x\": \"1e309\"\n}\n",
+      "folded": "{ \"a b\" true \"-5\" \"key\\\"\" __proto__x\n=1e309\n=1e309\n=1e309\n=1e309\n=1e309",
+      "width": 4
+    },
+    {
+      "source": "{\n  \"\\u0061\": -0,\n  \"a\": 1e309,\n  \"a\": \"\\ud800\"\n}\n",
+      "folded": "{ \"\\u0061\" a a\n-0\n1e309\n=\\ud800",
+      "width": 2
+    }
+  ]
+}

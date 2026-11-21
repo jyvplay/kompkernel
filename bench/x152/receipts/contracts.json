@@ -1,0 +1,22 @@
+[
+  {
+    "key": "¶ k=v; expand. Outside JSON strings, ] closes either container; print only.\n",
+    "tokens": 18
+  },
+  {
+    "key": "¶ k=v; expand; JSON ] closes either container; print only.\n",
+    "tokens": 15
+  },
+  {
+    "key": "¶ k=v; expand. JSON: ] closes arrays or objects. Print only.\n",
+    "tokens": 17
+  },
+  {
+    "key": "¶ k=v; expand. JSON closers outside strings: ]=matching bracket. Print only.\n",
+    "tokens": 20
+  },
+  {
+    "key": "¶ k=v; expand; restore JSON closing brackets. Print only.\n",
+    "tokens": 14
+  }
+]

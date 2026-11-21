@@ -1,0 +1,2 @@
+import * as fs from 'node:fs';import assert from 'node:assert/strict';import {scalarCompile} from '../../src/lib/omega/scalar';import {encode} from 'gpt-tokenizer/encoding/o200k_base';
+for(const l of fs.readFileSync('bench/x144/receipts/heldout-baseline.jsonl','utf8').trim().split('\n')){const a=JSON.parse(l),s=fs.readFileSync(a.path,'utf8'),p=scalarCompile(a.message,s);if(p){assert.equal(p.decoded,s);assert.equal(encode(p.message).length,p.tokens);}console.log(JSON.stringify({path:a.path,unsafeOld:a.tokens,safeBaseline:a.path.endsWith('vite.md')?274:a.tokens,result:p}));}

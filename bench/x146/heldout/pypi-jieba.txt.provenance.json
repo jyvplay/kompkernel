@@ -1,0 +1,9 @@
+{
+  "url": "https://pypi.org/pypi/jieba/json",
+  "extraction": "exact first description JSON string token",
+  "range": [
+    731,
+    1511
+  ],
+  "responseBytes": 25579
+}

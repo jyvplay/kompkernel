@@ -1,0 +1,120 @@
+{
+  "canonicalLanes": 29,
+  "baselineTokens": 11962,
+  "scalarTokens": 11962,
+  "baselineIdenticalX144b": true,
+  "scalarMessageIdentical": true,
+  "improvements": [],
+  "discoveryVite": {
+    "safeBaseline": 274,
+    "finalDeferred": 260
+  },
+  "additionalHoldouts": [
+    {
+      "path": "bench/x145/heldout/clsx.md",
+      "A": 954,
+      "B": 954
+    },
+    {
+      "path": "bench/x145/heldout/tailwind-merge.md",
+      "A": 347,
+      "B": 347
+    }
+  ],
+  "unit": {
+    "checks": 8222,
+    "accepted": 2053,
+    "forkVariants": 2
+  },
+  "independentPython": {
+    "independentSourceReads": 2059,
+    "native": "NOT_RUN"
+  },
+  "finalGate": {
+    "prices": 63,
+    "transportAndTokenId": 63,
+    "sourceExact": 47,
+    "unsupported": [
+      "frontier:bench/holdout-tbl/df-h.txt",
+      "frontier:bench/holdout-tbl/markdown-table.md",
+      "frontier:bench/holdout-tbl/psql-output.txt",
+      "frontier:bench/holdout-x40/prices.csv",
+      "frontier:bench/holdout-x40/cue-sheet.md",
+      "frontier:bench/holdout-tbl/kubectl-get-pods.txt",
+      "frontier:bench/holdout-x40/metrics.tsv",
+      "frontier:bench/holdout-x41/ls-l-real.txt",
+      "frontier-scalar:bench/holdout-tbl/df-h.txt",
+      "frontier-scalar:bench/holdout-tbl/markdown-table.md",
+      "frontier-scalar:bench/holdout-tbl/psql-output.txt",
+      "frontier-scalar:bench/holdout-x40/prices.csv",
+      "frontier-scalar:bench/holdout-x40/cue-sheet.md",
+      "frontier-scalar:bench/holdout-tbl/kubectl-get-pods.txt",
+      "frontier-scalar:bench/holdout-x40/metrics.tsv",
+      "frontier-scalar:bench/holdout-x41/ls-l-real.txt"
+    ],
+    "native": "NOT_RUN"
+  },
+  "native": "NOT_RUN",
+  "isolatedSpeed": {
+    "measurements": 24,
+    "order": "ABBA then fresh-process BAAB per lane; no confidence interval",
+    "isolated": true,
+    "rows": [
+      {
+        "schedule": "speed",
+        "path": "bench/x144/heldout/vite.md",
+        "BoverAWall": 0.8708968428137485,
+        "BoverACpu": 0.788734040040318,
+        "A": 274,
+        "B": 260
+      },
+      {
+        "schedule": "speed",
+        "path": "bench/holdout-work/kb-article.txt",
+        "BoverAWall": 0.8866185931732534,
+        "BoverACpu": 0.8637080678970904,
+        "A": 620,
+        "B": 620
+      },
+      {
+        "schedule": "speed",
+        "path": "bench/holdout-x40/metrics.tsv",
+        "BoverAWall": 0.8346403708323615,
+        "BoverACpu": 0.8240477479560832,
+        "A": 197,
+        "B": 197
+      },
+      {
+        "schedule": "speed-reverse",
+        "path": "bench/x144/heldout/vite.md",
+        "BoverAWall": 1.1909592793536887,
+        "BoverACpu": 1.2798447174245544,
+        "A": 274,
+        "B": 260
+      },
+      {
+        "schedule": "speed-reverse",
+        "path": "bench/holdout-work/kb-article.txt",
+        "BoverAWall": 1.0602047143726738,
+        "BoverACpu": 1.0881540110515842,
+        "A": 620,
+        "B": 620
+      },
+      {
+        "schedule": "speed-reverse",
+        "path": "bench/holdout-x40/metrics.tsv",
+        "BoverAWall": 1.1292430944151364,
+        "BoverACpu": 1.1441200894566421,
+        "A": 197,
+        "B": 197
+      }
+    ],
+    "broadTenPercent": false,
+    "paretoTimingGate": false,
+    "warning": "First-call/JIT/tokenizer cache bias; no search work eliminated by SCALAR. Require both schedule gates, not pooled apparent speedup."
+  },
+  "overallParetoEstablished": false,
+  "mergeEligible": false,
+  "tsc": "PASS",
+  "build": "PASS"
+}
