@@ -1,0 +1,67 @@
+{
+  "rows": [
+    {
+      "path": "bench/x157/fixtures/io-streams.diff",
+      "kind": "unparented",
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/io-U0.diff",
+      "kind": "unparented",
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/cpython-incref.diff",
+      "kind": "unparented",
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/cpython-io.diff",
+      "kind": "unparented",
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/cpython-U0.diff",
+      "kind": "unparented",
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/cpython.diff",
+      "kind": "unparented",
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/cpython-import.diff",
+      "kind": "unparented",
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/typescript.diff",
+      "kind": "unparented",
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/cpython-import.diff",
+      "kind": "full message",
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/io-streams.diff",
+      "kind": "full message",
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/io-U0.diff",
+      "kind": "full message",
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/io-streams.diff",
+      "kind": "full message",
+      "passed": true
+    }
+  ],
+  "checks": 1007,
+  "unitChecks": 995,
+  "native": false
+}

@@ -1,0 +1,59 @@
+Decode first. @A@ marks a unified-diff hunk at old start A. Count its following body lines: space/minus for old, space/plus for new, excluding backslash notes. New start=A+prior net insertions in this file+(old count==0)-(new count==0). Restore @@ -A,old +newstart,new @@, omitting ,1 counts; keep suffix and all other bytes. Print only.
+¶ k=v. expand repeatedly; print only.
+§թ(PyObject *opლ   स_deallocթե,ա =რ {
+ে[]աრე-বელോ__weaklistoffsetի_membersেব {"ോো);
+ა+წোაძლ /* NOTE: sinceն PyาწლնObject_ClearพManagedDict(opי@गোיץ/Lib/test/test_io/testจาพगा_traverseթե visitproc visitե voidু)
+Ե(self->dict४Object_Visitพե visitե argगल_WEAKREFרי staticնշreflistր self->weakշտ),ն_READONLY},
+कलS(opերմdictoffsetοioุ.h"א/Modules/_οίնMemberDefต b/bजตאַ 0२ব returnַ;
+ალ returnնկնObject *জবկweakշ;
+िसুব FT_CLEAR്
+מ 100644്--- a/aসবն_CLEARԵսե dictָinclude "pycore_ร@
+ე#ָweakrefಲ_clearթুবेο.cസ്+++ bკ@
++#ָcritical_sectionุด completely. Howeverե it seems more practical to just update itం == NULL)რატ           უ2ოტ basesizeա support.calcobjsize('Pუτ_slotsেব {Py_tp_membersեյο *selfვ       หസ/bלץ_memoryο.py์ץ_general.pyקא/bufferedio.cב bufferedובrwpairજ)რატ return NULL;
+יהdiff --git aોIOയBytesોરי class CയTest(PyയTest):
+גרMemberDefು οbaseദავშ // FT_CLEARलS()
+יעה/aאת്index चेתξobaseά): pass്ദ classחרType_Slotాstate___implવો___setార if (self->dictവ return NULL;
+ദपे്ים winconsoleοײ:
+ა                    self.assertEqual(tp.__մ__,बेหאט്יזה/aลն_TPFLAGSปล_MANAGEDשא/bytesेर *argুবն_VISITԵোগ are still available here for close() to use.
+ನյեկstateুევს             ล_IMMUTABLETYPEિי winconsoleοπ bytesοςtestinternalcapiત(_ογત.Bytesોમ:
+ატ with self.subTestิ. */
+ეტ್י fileολ_getsetে-static structమ :mod:`ο`ಂי stringουստբ__",ն_T_PYSSIZETե offsetofएי iξηե weakշտব {"__մբΤοηमार२४დე};
+-
+יצիբ(bufferedη(bufferedυσ((PyObject *)selfכא/winconsoleेखწვ if (քանObject_GenericGetDictσե NULLखര്აიুენરეოnუხദն_SETREF(dictենDict_Copy(dict));
+ינמאക /* Alternativelyե we could replace the internal dictionaryಕე              ดิ if (PyDict_UpdateԵս) <ַი               വകര          สด. */
+ദկself_dictքself_dict == NULLજનי typedef structრთვ dictանDict_CopyԵწვ dictքdictంტն_DECREF(initvalueোატവ }
+িবկdict;
+ાનিজין_clearթুসจ่าWeakRefs(opಗिक่गळ_CAST(opোসจβুবరంლ if (_PyObject_IsInstanceDictEmptyσ))რיס/iξ.cಿನర)რეტക്ך _ονיךणा *argু२४έ_methodsে-staticία stringούստব {NULLણिकোস่จะ):
+ა               ല/b/Misc/NEWS.d/next/Library/2026ე11ე03ე08ე21ე06.ghეissueე161184.PIhcD9.rstபรุ      შാദ int rcանDict_Update(self_dictսწვն_DECREF(self_dictखrc <ַજેজিיףրա NULL;
+יד textοwrapperു.attrա 1ெ ``__մ__ზיπή // _Py_CRITICAL_SECTION_ASSERT_OBJECT_LOCKED()
+יפ_members},
+գն_NewRef(dictಡרGetSetDefસ_new(PyTypeObject *typeեկargsեկkwdsಾನ elseრეტμν_യ___getా(bytesյεν_Bytesવ(bytesων_Stringો___getా(stringյθν_Stringવ(string्/stringं/text¶ז์ต์תc6c138c..8831448מ์ห์ט900@ class TestોCTypes(unittest.TestCase):
+ალ def test_managed_dict(self):
+ദ # Theך types useป_DICT: there is no explicit്ദ # dict slot and instance attributes are stored as inline values.്ദ _ς = import_helper.import_module("_ς")
+ദך = self._io്ദ no_dict = {_io.IncrementalNewlineDecoder,ך._യBuffer}്ദ for tp in self.typesમ(tp=tpะ if tp in no_dictײַ)ര                elseײ -1)ര്ദ # Use fresh subclasses: each class has its own shared keysե which്ദ # may already be exhausted on the base types by earlier tests.്ദ class യγά Stringોત.Stringોά BufferedReaderત.BufferedReaderά TextIOWrapperત.TextIOWrapperά Rawોત._RawોBase):
+ატ def __init__(selfะ selfുര        instances = [
+ატ യ(b"data"),
+ატ Stringો("data"),
+ატ BufferedReaderγ(b"data")),
+ატ TextIOWrapperγ()),
+ატ Rawો(),
+ദ ]
+ദ for obj in instancesમ(obj=type(obj).__name__ะ objുര                self.assertTrue(_ς.has_inline_values(obj))
++                self.assertEqual(obj.__dict__["attr"], 1)ര്זלตלת89b0e4c..20c2777מלหלט12@ import pickleരimport structט1040ნPni')
+აოnni')
+@104უნPn')
+აოnn')
+@1044રദ # sys.getsizeof() includes the managed dict and weakref pre-header്ദ basesize += უ * struct.calcsize('P')
+הല bല്new file mode 100644ת0000000..3b15925
+--- /dev/nullസലט0@
++Speed up attribute access on instances ofమ classes and theirരsubclasses by storing instance attributes and weak references in the objectരpre-header. Theெ`` and ``__weakrefoffset__`` attributesരof these classes now report the managed offsetsե and C extension types thatരsubclass anమ class can no longer declare their ownெ``രor ``ോ__`` member.
+זקตקת237b6ea..1e90008מקหקט11კლή16รุ ტშ268ા425@בן439יבಗ475יבमუ258ાუ317יוार@2320יוण2329יוןუ339יוಗ2665גבreaderצי2724גבwriterציუ778רMethodDefוέוիբ(rwpairη(rwpairύ}
+დ2795חוτופי2842גבrandomצזשตשת9bec70a..fa828fუמשหשט8รุ          შ24ા977μβ981μითხ1064εಿಕส1070εಾ /* The LOAD_ATTR specializations read the dict slot lock-free
+-               with an acquire loadե so pair it with a release storeิ FT_ATOMIC_STORE_PTR_RELEASEԵեգ));
+ാ109უზसুসোব FT_CLEARकาพ่ग1190ზार@119უზण1199ზן1242@ static struct PyMethodDefπέπիբ(bytesΤ(bytesού}
+დ1256חπτπפע/fileेज/fileच732eb28..a954bc5מא/fileब/fileप8ப84ને224್સুবף565್म572್ಲ fileյանFileોळ591್ಗ1373ג fileioիբ(fileΤ(fileουעסजסתუb48268..13de04dנסหאסט17ப36ા386एम393एಲು *selfաುळ403एसიძ IOBaseObject has its own dictե Python-defined attributes്বლগაძ the managed dict is only cleared belowե Python-defined്ദattributesগי419एણ910ಡುλίುիբ(iξη(iξύ},
+დ925חುτುפי935@ PyType_Spec _Py_iξ_specաრეს),
+ას |ป_DICT |
++             ปल),
+ע/stringेज्च25ebe89..a568720מא्ब्पუკ ή5ப45ા678ಂम689ಂן706ಂಗ933ωβ937ωითხ1048θಿಕส1054θಾ self->dictագোാ1141ಡαλίαիբ(stringΤ(stringού},
+დ1154חαταפע/textेजंच719f9ef..9673923מאंबंप19ப734@ struct textio്ે1545ידן1559ידಗ1581ידम3568גדիբ(textΤ(textουזכตכת183506a..a6e884fמכหכט13ப219ને303િસივף501יםम508יםಲ winconsoleյաםळ522િણ1264גםիբ(winconsoleΤ(winconsoleου

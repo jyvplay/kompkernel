@@ -1,0 +1,6 @@
+{
+  "anchor": "function countLongRaw(text: string, enc: EncodingName, sink: MarkSink | null): number | null {",
+  "replacement": "const X157_SCAN:Record<EncodingName,RegExp>={o200k_base:new RegExp(PRETOK.o200k_base.source,PRETOK.o200k_base.flags),cl100k_base:new RegExp(PRETOK.cl100k_base.source,PRETOK.cl100k_base.flags)};\nfunction countLongRaw(text: string, enc: EncodingName, sink: MarkSink | null): number | null {\n  if(sink===null){\n    const scan=X157_SCAN[enc];scan.lastIndex=0;let total=0,covered=0,m:RegExpExecArray|null;\n    const prefix=enc==='cl100k_base'?'\\u0002':'';\n    while((m=scan.exec(text))!==null){if(!m[0].length||m.index!==covered){chunkFallbacks++;return null;}covered+=m[0].length;total+=chunkCountFast(m[0],enc,prefix);}\n    if(covered!==text.length){chunkFallbacks++;return null;}return total;\n  }",
+  "description": "Stream no-mark chunk counts with a separate regex cursor; retain original marked traversal. Not deployed. OOM trace suggests a hypothesis, not a diagnosis.",
+  "production": false
+}

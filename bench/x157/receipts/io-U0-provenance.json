@@ -1,0 +1,107 @@
+{
+  "repo": "python/cpython",
+  "commit": "6f3406076c589a1da85e675b1b9d2e8f142dec43",
+  "parent": "c0f3fcf33681b3f5c5d50e7a301abf1eca257a4c",
+  "command": "git diff --no-index --no-ext-diff --unified=0 a b",
+  "allChangedFiles": 10,
+  "inputs": [
+    {
+      "path": "Lib/test/test_io/test_general.py",
+      "ref": "c0f3fcf33681b3f5c5d50e7a301abf1eca257a4c",
+      "sha256": "98002b013e05a3bdd972f89298e7b3eaafb08c5855a2ef32e2a6857191f3250d"
+    },
+    {
+      "path": "Lib/test/test_io/test_general.py",
+      "ref": "6f3406076c589a1da85e675b1b9d2e8f142dec43",
+      "sha256": "97e74a9f6977c65efb977b05df0af69c9235518b28108e040ebc5275a5f88962"
+    },
+    {
+      "path": "Lib/test/test_io/test_memoryio.py",
+      "ref": "c0f3fcf33681b3f5c5d50e7a301abf1eca257a4c",
+      "sha256": "99d6796dfbb262c8401af971fde624d1d1a622836aeea82a994e780e11cd1728"
+    },
+    {
+      "path": "Lib/test/test_io/test_memoryio.py",
+      "ref": "6f3406076c589a1da85e675b1b9d2e8f142dec43",
+      "sha256": "1ab5dc657d9cf59bf9599c728fd4f75fae088ba9dba0e0b840d3c86e8d8e0124"
+    },
+    {
+      "path": "Misc/NEWS.d/next/Library/2026-11-03-08-21-06.gh-issue-161184.PIhcD9.rst",
+      "ref": "6f3406076c589a1da85e675b1b9d2e8f142dec43",
+      "sha256": "0443d3a1800be3ad8bd23545489e2f11611c1ce36ec672deaccfc47e15131e62"
+    },
+    {
+      "path": "Modules/_io/bufferedio.c",
+      "ref": "c0f3fcf33681b3f5c5d50e7a301abf1eca257a4c",
+      "sha256": "dac45873c65709c764101b00b0cf0ce71cc4fd02876ff07d416aa2b67c718f5b"
+    },
+    {
+      "path": "Modules/_io/bufferedio.c",
+      "ref": "6f3406076c589a1da85e675b1b9d2e8f142dec43",
+      "sha256": "1a5834cac08b15aa397be10f805abed9ea82ec84bef9c6a5d2594f7679a143ea"
+    },
+    {
+      "path": "Modules/_io/bytesio.c",
+      "ref": "c0f3fcf33681b3f5c5d50e7a301abf1eca257a4c",
+      "sha256": "852924704317e5f91012a9dd4507a186db458bc2bb0bee870b5e6e3fa08163e7"
+    },
+    {
+      "path": "Modules/_io/bytesio.c",
+      "ref": "6f3406076c589a1da85e675b1b9d2e8f142dec43",
+      "sha256": "84a2b09f006c7cd7ae47e0258af4d9bc80f335906a452c99ed59452da4e0d12d"
+    },
+    {
+      "path": "Modules/_io/fileio.c",
+      "ref": "c0f3fcf33681b3f5c5d50e7a301abf1eca257a4c",
+      "sha256": "f46f37013be3e013b7e5f9d5fbd00a308cba2cd9e128b49212f72a54183664d5"
+    },
+    {
+      "path": "Modules/_io/fileio.c",
+      "ref": "6f3406076c589a1da85e675b1b9d2e8f142dec43",
+      "sha256": "158724ae26346e8a12b328aa3d83d6457e0d5d4686c016c929778d8195f4bfd7"
+    },
+    {
+      "path": "Modules/_io/iobase.c",
+      "ref": "c0f3fcf33681b3f5c5d50e7a301abf1eca257a4c",
+      "sha256": "c38e04d8e3389a73ab5b3b284aa665a0acf05bcbe0601927c228d3c4fbe2da4a"
+    },
+    {
+      "path": "Modules/_io/iobase.c",
+      "ref": "6f3406076c589a1da85e675b1b9d2e8f142dec43",
+      "sha256": "ba3be30a6c7cdc2afbaefba1420b00be0205748ee032156de143ccdfb3697e1c"
+    },
+    {
+      "path": "Modules/_io/stringio.c",
+      "ref": "c0f3fcf33681b3f5c5d50e7a301abf1eca257a4c",
+      "sha256": "7d3ebe25f40a47e2ae531ef61c44309434542a24d921df162ae98677eaca0cf5"
+    },
+    {
+      "path": "Modules/_io/stringio.c",
+      "ref": "6f3406076c589a1da85e675b1b9d2e8f142dec43",
+      "sha256": "26507dd83760e4472c5463958a4cf4a2b9e4062a4c9f66b8867cb3c8b039b860"
+    },
+    {
+      "path": "Modules/_io/textio.c",
+      "ref": "c0f3fcf33681b3f5c5d50e7a301abf1eca257a4c",
+      "sha256": "ede64b983e9e810a5a226321fe0d0a9c4b638d308127a415acdf4dafb3e280bc"
+    },
+    {
+      "path": "Modules/_io/textio.c",
+      "ref": "6f3406076c589a1da85e675b1b9d2e8f142dec43",
+      "sha256": "e3de835f8a39dfbbdd954cf70c12920a2bc8de197202aa9960ac20125d4deca4"
+    },
+    {
+      "path": "Modules/_io/winconsoleio.c",
+      "ref": "c0f3fcf33681b3f5c5d50e7a301abf1eca257a4c",
+      "sha256": "f434d9aa0675a3d38b13f4ae319f32a890560db47f642b55375ee808def7f9a1"
+    },
+    {
+      "path": "Modules/_io/winconsoleio.c",
+      "ref": "6f3406076c589a1da85e675b1b9d2e8f142dec43",
+      "sha256": "2749eb2446520ff17ac1f39ed5ea96161e8dd03b7ad4251a6dbb4ed3009d8e24"
+    }
+  ],
+  "outputSha256": "7f139400fbcdfc14fa2c9873b0b628d74fd439140ca6209f6fa0a1a8cf783623",
+  "bytes": 16283,
+  "note": "real pinned revision diff with zero context, not fabricated changes; format selected before full-parent pricing"
+}

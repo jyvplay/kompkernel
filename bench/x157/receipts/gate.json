@@ -1,0 +1,30 @@
+{
+  "rows": [
+    {
+      "path": "bench/x157/fixtures/cpython-import.diff",
+      "base": 328,
+      "candidate": 399,
+      "gain": -71,
+      "selected": 328,
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/io-streams.diff",
+      "base": 964,
+      "candidate": 937,
+      "gain": 27,
+      "selected": 937,
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/io-U0.diff",
+      "base": 2018,
+      "candidate": 1905,
+      "gain": 113,
+      "selected": 1905,
+      "passed": true
+    }
+  ],
+  "native": false,
+  "scope": "stored complete messages, byte/price/transport gates, cached selector replay"
+}

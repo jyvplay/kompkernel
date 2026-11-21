@@ -1,0 +1,23 @@
+{
+  "firstCPythonBase": {
+    "exit": 137,
+    "outcome": "process killed during four concurrent heavy encoders; no baseline measurement"
+  },
+  "firstCPythonCandidate": {
+    "exit": 1,
+    "outcome": "candidate gate returned null; harness asserted before saving emitted parent, so exact unsupported-parent cause unavailable"
+  },
+  "harnessRepair": "Always save parent and candidate pricing with accepted=false and readerError when rejected; does not weaken codec acceptance. IO candidate uses repaired harness.",
+  "native": "NOT_RUN",
+  "ioBase1000": {
+    "exit": 134,
+    "outcome": "V8 heap exhaustion; no measurement",
+    "retry": "single heavy process with2200MiB heap, not an unchanged timeout retry"
+  },
+  "ioBase2200": {
+    "exit": 134,
+    "outcome": "V8 heap exhaustion even isolated; no token result"
+  },
+  "nextExperiment": "Actual zero-context Git diff of same pinned commit,16283bytes/75hunks; separate source and comparator, not normalization of a scored source",
+  "fixtureFetcherRepair": "Per-commit staging prevents stale-file contamination; asserts content size and Git blob SHA. Regenerated original U0 fixture has identical SHA256."
+}

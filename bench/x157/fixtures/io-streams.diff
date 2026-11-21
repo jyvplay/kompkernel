@@ -1,0 +1,174 @@
+diff --git a/a/Modules/_io/bufferedio.c b/b/Modules/_io/bufferedio.c
+index 237b6ea..1e90008 100644
+--- a/a/Modules/_io/bufferedio.c
++++ b/b/Modules/_io/bufferedio.c
+@@ -11,0 +12 @@
++#include "pycore_critical_section.h"    // _Py_CRITICAL_SECTION_ASSERT_OBJECT_LOCKED()
+@@ -16 +16,0 @@
+-#include "pycore_weakref.h"             // FT_CLEAR_WEAKREFS()
+@@ -268,2 +267,0 @@ typedef struct {
+-    PyObject *dict;
+-    PyObject *weakreflist;
+@@ -425 +423 @@ buffered_clear(PyObject *op)
+-    Py_CLEAR(self->dict);
++    PyObject_ClearManagedDict(op);
+@@ -439 +437 @@ buffered_dealloc(PyObject *op)
+-    FT_CLEAR_WEAKREFS(op, self->weakreflist);
++    PyObject_ClearWeakRefs(op);
+@@ -475,2 +473 @@ buffered_traverse(PyObject *op, visitproc visit, void *arg)
+-    Py_VISIT(self->dict);
+-    return 0;
++    return PyObject_VisitManagedDict(op, visit, arg);
+@@ -2258,2 +2254,0 @@ typedef struct {
+-    PyObject *dict;
+-    PyObject *weakreflist;
+@@ -2317 +2311,0 @@ bufferedrwpair_traverse(PyObject *op, visitproc visit, void *arg)
+-    Py_VISIT(self->dict);
+@@ -2320 +2314 @@ bufferedrwpair_traverse(PyObject *op, visitproc visit, void *arg)
+-    return 0;
++    return PyObject_VisitManagedDict(op, visit, arg);
+@@ -2329 +2323 @@ bufferedrwpair_clear(PyObject *op)
+-    Py_CLEAR(self->dict);
++    PyObject_ClearManagedDict(op);
+@@ -2339 +2333 @@ bufferedrwpair_dealloc(PyObject *op)
+-    FT_CLEAR_WEAKREFS(op, self->weakreflist);
++    PyObject_ClearWeakRefs(op);
+@@ -2665,2 +2658,0 @@ static PyMemberDef bufferedreader_members[] = {
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(buffered, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(buffered, dict), Py_READONLY},
+@@ -2724,2 +2715,0 @@ static PyMemberDef bufferedwriter_members[] = {
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(buffered, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(buffered, dict), Py_READONLY},
+@@ -2778,6 +2767,0 @@ static PyMethodDef bufferedrwpair_methods[] = {
+-static PyMemberDef bufferedrwpair_members[] = {
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(rwpair, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(rwpair, dict), Py_READONLY},
+-    {NULL}
+-};
+-
+@@ -2795 +2778,0 @@ static PyType_Slot bufferedrwpair_slots[] = {
+-    {Py_tp_members, bufferedrwpair_members},
+@@ -2842,2 +2824,0 @@ static PyMemberDef bufferedrandom_members[] = {
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(buffered, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(buffered, dict), Py_READONLY},
+diff --git a/a/Modules/_io/bytesio.c b/b/Modules/_io/bytesio.c
+index 9bec70a..fa828f2 100644
+--- a/a/Modules/_io/bytesio.c
++++ b/b/Modules/_io/bytesio.c
+@@ -8 +7,0 @@
+-#include "pycore_weakref.h"           // FT_CLEAR_WEAKREFS()
+@@ -24,2 +22,0 @@ typedef struct {
+-    PyObject *dict;
+-    PyObject *weakreflist;
+@@ -977 +974 @@ _io_BytesIO___getstate___impl(bytesio *self)
+-    if (self->dict == NULL) {
++    if (_PyObject_IsInstanceDictEmpty((PyObject *)self)) {
+@@ -981 +978,6 @@ _io_BytesIO___getstate___impl(bytesio *self)
+-        dict = PyDict_Copy(self->dict);
++        dict = PyObject_GenericGetDict((PyObject *)self, NULL);
++        if (dict == NULL) {
++            Py_DECREF(initvalue);
++            return NULL;
++        }
++        Py_SETREF(dict, PyDict_Copy(dict));
+@@ -1064,5 +1066,5 @@ _io_BytesIO___setstate___impl(bytesio *self, PyObject *state)
+-        if (self->dict) {
+-            /* Alternatively, we could replace the internal dictionary
+-               completely. However, it seems more practical to just update it. */
+-            if (PyDict_Update(self->dict, dict) < 0)
+-                return NULL;
++        /* Alternatively, we could replace the internal dictionary
++           completely. However, it seems more practical to just update it. */
++        PyObject *self_dict = PyObject_GenericGetDict((PyObject *)self, NULL);
++        if (self_dict == NULL) {
++            return NULL;
+@@ -1070,4 +1072,4 @@ _io_BytesIO___setstate___impl(bytesio *self, PyObject *state)
+-        else {
+-            /* The LOAD_ATTR specializations read the dict slot lock-free
+-               with an acquire load, so pair it with a release store. */
+-            FT_ATOMIC_STORE_PTR_RELEASE(self->dict, Py_NewRef(dict));
++        int rc = PyDict_Update(self_dict, dict);
++        Py_DECREF(self_dict);
++        if (rc < 0) {
++            return NULL;
+@@ -1092,2 +1094,2 @@ bytesio_dealloc(PyObject *op)
+-    Py_CLEAR(self->dict);
+-    FT_CLEAR_WEAKREFS(op, self->weakreflist);
++    PyObject_ClearManagedDict(op);
++    PyObject_ClearWeakRefs(op);
+@@ -1190 +1191,0 @@ bytesio_traverse(PyObject *op, visitproc visit, void *arg)
+-    Py_VISIT(self->dict);
+@@ -1192 +1193 @@ bytesio_traverse(PyObject *op, visitproc visit, void *arg)
+-    return 0;
++    return PyObject_VisitManagedDict(op, visit, arg);
+@@ -1199 +1200 @@ bytesio_clear(PyObject *op)
+-    Py_CLEAR(self->dict);
++    PyObject_ClearManagedDict(op);
+@@ -1242,6 +1242,0 @@ static struct PyMethodDef bytesio_methods[] = {
+-static PyMemberDef bytesio_members[] = {
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(bytesio, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(bytesio, dict), Py_READONLY},
+-    {NULL}
+-};
+-
+@@ -1256 +1250,0 @@ static PyType_Slot bytesio_slots[] = {
+-    {Py_tp_members, bytesio_members},
+diff --git a/a/Modules/_io/stringio.c b/b/Modules/_io/stringio.c
+index 25ebe89..a568720 100644
+--- a/a/Modules/_io/stringio.c
++++ b/b/Modules/_io/stringio.c
+@@ -2,0 +3 @@
++#include "pycore_critical_section.h"  // _Py_CRITICAL_SECTION_ASSERT_OBJECT_LOCKED()
+@@ -5 +5,0 @@
+-#include "pycore_weakref.h"       // FT_CLEAR_WEAKREFS()
+@@ -45,2 +44,0 @@ typedef struct {
+-    PyObject *dict;
+-    PyObject *weakreflist;
+@@ -678,2 +676 @@ stringio_traverse(PyObject *op, visitproc visit, void *arg)
+-    Py_VISIT(self->dict);
+-    return 0;
++    return PyObject_VisitManagedDict(op, visit, arg);
+@@ -689 +686 @@ stringio_clear(PyObject *op)
+-    Py_CLEAR(self->dict);
++    PyObject_ClearManagedDict(op);
+@@ -706 +703 @@ stringio_dealloc(PyObject *op)
+-    FT_CLEAR_WEAKREFS(op, self->weakreflist);
++    PyObject_ClearWeakRefs(op);
+@@ -933 +930 @@ _io_StringIO___getstate___impl(stringio *self)
+-    if (self->dict == NULL) {
++    if (_PyObject_IsInstanceDictEmpty((PyObject *)self)) {
+@@ -937 +934,6 @@ _io_StringIO___getstate___impl(stringio *self)
+-        dict = PyDict_Copy(self->dict);
++        dict = PyObject_GenericGetDict((PyObject *)self, NULL);
++        if (dict == NULL) {
++            Py_DECREF(initvalue);
++            return NULL;
++        }
++        Py_SETREF(dict, PyDict_Copy(dict));
+@@ -1048,5 +1050,5 @@ _io_StringIO___setstate___impl(stringio *self, PyObject *state)
+-        if (self->dict) {
+-            /* Alternatively, we could replace the internal dictionary
+-               completely. However, it seems more practical to just update it. */
+-            if (PyDict_Update(self->dict, dict) < 0)
+-                return NULL;
++        /* Alternatively, we could replace the internal dictionary
++           completely. However, it seems more practical to just update it. */
++        PyObject *self_dict = PyObject_GenericGetDict((PyObject *)self, NULL);
++        if (self_dict == NULL) {
++            return NULL;
+@@ -1054,2 +1056,4 @@ _io_StringIO___setstate___impl(stringio *self, PyObject *state)
+-        else {
+-            self->dict = Py_NewRef(dict);
++        int rc = PyDict_Update(self_dict, dict);
++        Py_DECREF(self_dict);
++        if (rc < 0) {
++            return NULL;
+@@ -1141,6 +1144,0 @@ static PyGetSetDef stringio_getset[] = {
+-static struct PyMemberDef stringio_members[] = {
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(stringio, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(stringio, dict), Py_READONLY},
+-    {NULL},
+-};
+-
+@@ -1154 +1151,0 @@ static PyType_Slot stringio_slots[] = {
+-    {Py_tp_members, stringio_members},

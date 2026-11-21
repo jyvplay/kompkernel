@@ -1,0 +1,22 @@
+{
+  "trigger": "IO0 incumbent is a166-rule polyglot literal grammar; inherited TS reader caps128 and inherited Python reader supports only Cyrillic/Arabic.",
+  "change": "X157-specific message-only reader permits up to256 ordered literal rules with forward/self-reference, operator, UTF8 and expansion guards. Independent Python adds polyglot/Hangul families and refuses layout operators.",
+  "encodingChanged": false,
+  "newTargetedTests": {
+    "typescript": 13,
+    "python": 10
+  },
+  "policy": "Rebuild candidates from actual emitted parents, rerun full disk-byte/reference/transport/selector gates, rerun fresh small winning API. Never relabel prior rejected acceptance fields as passes.",
+  "postExtensionGates": {
+    "completeMessagePairs": 3,
+    "largeTokens": 1905,
+    "largeIncumbent": 2018,
+    "gain": 113,
+    "freshSmallApi": {
+      "tokens": 937,
+      "base": 964,
+      "passed": true
+    },
+    "independentFullMessages": 4
+  }
+}

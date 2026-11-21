@@ -1,0 +1,42 @@
+Decode first. @A@ marks a unified-diff hunk at old start A. Count its following body lines: space/minus for old, space/plus for new, excluding backslash notes. New start=A+prior net insertions in this file+(old count==0)-(new count==0). Restore @@ -A,old +newstart,new @@, omitting ,1 counts; keep suffix and all other bytes. Print only.
+¶ k=v. expand repeatedly; print only.
+§ы,єreflistк Pyђ),к_READONLY},
+С   е-Сры weakєђе {"__dictoffsetТ(PyObject *opб_traverseТы visitproc visitы void *arg)
+ч->dictә(selfчл);
+ҵбек_VISITәлһек_CLEARәқкObjectил+Сқ_ClearмManagedDict(opа@Ы_clearТ)
+һимланқ *ӡа typedef struct {
+енdict;
+енweakє;
+ащ FT_CLEAR_WEAKREFSое return 0;
++С returnқ_Visitмы visitы argлауselfң((PyObject *)уі+       в if (ћ =қ_GenericGetDictңы NULLлівЄещ(opы self->weakєї completely. Howeverы it seems more practical to just update it. */
+гы dictђҗиWeakRefs(opладio *уж)
+-Йдынstateж       К /* Alternativelyы we could replace the internal dictionary
+Ҷinclude "pycore_Ұ@
+-#Ҷweakref.h"З+            return NULL;
+ү) {
+Заљ[] = {
+ъ_slotsље {Py_tp_membersыц b/bҭ/Modules/_ioьҭ/stringio.cҒ //щ()
+аяstate___implЩIO___setяз bufferedrwpairџ 100644
+--- a/aҲ // _Py_CRITICAL_SECTION_ASSERT_OBJECT_LOCKED()
+ап.c
+Да staticкөДMemberDef bufferedИДType_SlotВ@
++#Ҷcritical_section.h"ӷdiff --git a/aАп+++цё bytesioОпindex Е stringioҽ-};
+-
+ахаЕР_deallocТ)
+П {
+-           Үвуч)ПК-              ї-           вPyDict_Updateәы dict) < 0ж                return NULL;
+іК+          їіну_dictћу_dict == NULLүҙлі int rc =кDict_Update(self_dictы dictлік_DECREF(self_dictлівrc < 0үт__",к_T_PYSSIZETы offsetofУ == NULL) {
++Қж        dict =кDict_Copyәлі dictћdictУ           к_DECREF(initvalueлЗі }
+ік_SETREF(dictыкDict_Copy(dict));
+ас_membersљ-С {"__weaklistoffsetҟст(bufferedрт(bufferedгэжСвучУС if (_PyObject_IsInstanceDictEmptyң)) {
+аша _ioЬРЄҗҠге {NULLЇҠ}
+ҽҧш_BytesЩ(bytesЙНаёй_methodsљ-staticкMemberDefЪш_StringЩ(stringЙЭк_NewRef(dictМҭ/bufferedioГҭ/bytesioЁш_BytesIO___getя(bytesдюш_StringIO___getя(stringдӣт(rwpair¶ӷМ.cцМО237b6ea..1e90008џМАМпа11ВСҲ16Ұ            Ғ268ӡ425@ bufferedЫ439@ bufferedЬ475@ bufferedҵо2258ӡ2317азҵа2320азбо2329азЫ2339азЬ2665өreaderҟа2724өwriterҟа2778ДMethodDefзйзсӣрӣЇ2795Изъз_members},
+@2842өrandomҟӷГ.cцГО9bec70a..fa828f2џГАГпа8Ұ          Ғ24ӡ977Ёэ981ЁҚ1064ҧҮ1070ҧ elseП /* The LOAD_ATTR specializations read the dict slot lock-free
+-               with an acquire loadы so pair it with a release store. */
+-            FT_ATOMIC_STORE_PTR_RELEASEәыЭ)ҙ1092НРһ);
+Єимҗ1190Нҵа1192Нбо1199НЫ1242@ static struct PyMethodDefёйёст(bytesioрт(bytesioЇ1256Иёъё_members},
+ӷьць
+index 25ebe89..a568720џь
++++ць
+@2В Ҳ5Ұ      Ғ45ӡ678хҵо689хЫ706хЬ933юэ937юҚ1048ЪҮ1054Ъ elseП уч =Эҙ1141ДGetSetDefЕ_getsetљ-static struct PyMemberDefЕст(stringioрт(stringioҠ},
+ҽ1154ИЕъЕ_members},

@@ -1,0 +1,26 @@
+[
+  {
+    "repo": "openai/math",
+    "path": "lean/OAI/Algorithms/SubexponentialSAT/SqrtLogSpace/NativeLeafProgram.lean",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "sha256": "12677b53c225579fff4f46201a493c5a362e210611a8b5c86c206b6cf009575a",
+    "pinnedMatch": true,
+    "kernelReplay": false
+  },
+  {
+    "repo": "anthropics/fermats-last-theorem",
+    "path": "P2M/Sol/S_FreyPackage_fermatLastTheoremFor_of_five_le.lean",
+    "commit": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+    "sha256": "fd307eb86cf3e9ef007c61cc52fcad5c7fbb7110f66cebf18f5f53dd977bf4a9",
+    "pinnedMatch": true,
+    "kernelReplay": false
+  },
+  {
+    "repo": "google-deepmind/alphaproof-nexus-results",
+    "path": "APNOutputs/AICollaborator/Optimization/LastIterateConvergence.lean",
+    "commit": "0647711a71183c1ea492ad60860776617ce1ea88",
+    "sha256": "8dbeb62e5ed2b3221b3f83e8f371491e327d8c002f03e916691e2ebb780d01c1",
+    "pinnedMatch": true,
+    "kernelReplay": false
+  }
+]

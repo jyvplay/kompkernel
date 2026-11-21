@@ -1,0 +1,47 @@
+[
+  {
+    "file": "typescript.diff",
+    "repo": "microsoft/TypeScript",
+    "commit": "c9e7428bb76f0543a3555d0af87777e7db3a41e6",
+    "command": "gh api repos/microsoft/TypeScript/commits/c9e7428bb76f0543a3555d0af87777e7db3a41e6 -H 'Accept: application/vnd.github.diff'",
+    "bytes": 46944,
+    "sha256": "94a88e9cbfe3a1719a68498de0a290bea0450d36033d9591ee6d747ade28093c",
+    "normalization": false
+  },
+  {
+    "file": "cpython.diff",
+    "repo": "python/cpython",
+    "commit": "9770e32ce07110f0c8c7a381604ec9a490028eed",
+    "command": "gh api repos/python/cpython/commits/9770e32ce07110f0c8c7a381604ec9a490028eed -H 'Accept: application/vnd.github.diff'",
+    "bytes": 17980,
+    "sha256": "06c8090cea5b2989510be379cf9b2d73b61cf97a60b815ed925db4d256a8455f",
+    "normalization": false
+  },
+  {
+    "file": "cpython-import.diff",
+    "repo": "python/cpython",
+    "commit": "ffb543d32f14803e8379c15a0a2d96c6b4c4dacd",
+    "command": "gh api repos/python/cpython/commits/ffb543d32f14803e8379c15a0a2d96c6b4c4dacd -H 'Accept: application/vnd.github.diff'",
+    "bytes": 1396,
+    "sha256": "6828f954ed71241dc9ab5376580f487a4a31b192aacd7cca32aa2bcc10bd14d7",
+    "normalization": false
+  },
+  {
+    "file": "cpython-incref.diff",
+    "repo": "python/cpython",
+    "commit": "d1e3cae9d6d55abd763dfca18877c2bd0db13ad0",
+    "command": "gh api repos/python/cpython/commits/d1e3cae9d6d55abd763dfca18877c2bd0db13ad0 -H 'Accept: application/vnd.github.diff'",
+    "bytes": 2839,
+    "sha256": "b73beb46c987316c36cbb2a0d17e03b0ab3b3115d3dd7b65dbfeb59dae2c6b64",
+    "normalization": false
+  },
+  {
+    "file": "cpython-io.diff",
+    "repo": "python/cpython",
+    "commit": "6f3406076c589a1da85e675b1b9d2e8f142dec43",
+    "command": "gh api repos/python/cpython/commits/6f3406076c589a1da85e675b1b9d2e8f142dec43 -H 'Accept: application/vnd.github.diff'",
+    "bytes": 25865,
+    "sha256": "f32eb2f1053239253e15dda986e759f444fb85b8d23c9591712d0cd09cfd3a1d",
+    "normalization": false
+  }
+]

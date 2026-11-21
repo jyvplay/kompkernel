@@ -1,0 +1,41 @@
+diff --git a/Lib/pathlib/__init__.py b/Lib/pathlib/__init__.py
+index 44f967eb12dd4fd..a32e4b5320ff6dd 100644
+--- a/Lib/pathlib/__init__.py
++++ b/Lib/pathlib/__init__.py
+@@ -12,12 +12,13 @@
+ import posixpath
+ import sys
+ from errno import *
+-from glob import _StringGlobber, _no_recurse_symlinks
+ from itertools import chain
+ from stat import (
+     S_IMODE, S_ISDIR, S_ISREG, S_ISLNK, S_ISSOCK, S_ISBLK, S_ISCHR, S_ISFIFO,
+ )
+ from _collections_abc import Sequence
++lazy import shutil
++lazy from glob import _StringGlobber, _no_recurse_symlinks
+ 
+ try:
+     import pwd
+@@ -1255,8 +1256,6 @@ def _delete(self):
+         if self.is_symlink() or self.is_junction():
+             self.unlink()
+         elif self.is_dir():
+-            # Lazy import to improve module import time
+-            import shutil
+             shutil.rmtree(self)
+         else:
+             self.unlink()
+diff --git a/Lib/test/test_pathlib/test_pathlib.py b/Lib/test/test_pathlib/test_pathlib.py
+index 19f4506c109c147..09d1b5d725e5ba7 100644
+--- a/Lib/test/test_pathlib/test_pathlib.py
++++ b/Lib/test/test_pathlib/test_pathlib.py
+@@ -81,7 +81,7 @@ def test_is_notimplemented(self):
+ class LazyImportTest(unittest.TestCase):
+     @cpython_only
+     def test_lazy_import(self):
+-        import_helper.ensure_lazy_imports("pathlib", {"shutil"})
++        import_helper.ensure_lazy_imports("pathlib", {"glob", "shutil"})
+ 
+ 
+ #

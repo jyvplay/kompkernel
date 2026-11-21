@@ -1,0 +1,75 @@
+{
+  "tokenTrials": [
+    {
+      "path": "bench/x157/fixtures/cpython-import.diff",
+      "base": 328,
+      "candidate": 399,
+      "gain": -71,
+      "selected": 328,
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/io-streams.diff",
+      "base": 964,
+      "candidate": 937,
+      "gain": 27,
+      "selected": 937,
+      "passed": true
+    },
+    {
+      "path": "bench/x157/fixtures/io-U0.diff",
+      "base": 2018,
+      "candidate": 1905,
+      "gain": 113,
+      "selected": 1905,
+      "passed": true
+    }
+  ],
+  "canonical": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "freshSmallApi": {
+    "tokens": 937,
+    "baseTokens": 964,
+    "parentCalls": 1,
+    "ms": 124922.71365199999,
+    "cpuMs": 121872.555
+  },
+  "speed": {
+    "lanes": [
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "cpuRatio": 1.0129249315792572,
+        "wallRatio": 1.0032155743119051,
+        "identicalWires": 4
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "cpuRatio": 1.0197512641175352,
+        "wallRatio": 1.0087174489995623,
+        "identicalWires": 4
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "cpuRatio": 1.009987254331337,
+        "wallRatio": 1.0037304922245995,
+        "identicalWires": 4
+      }
+    ],
+    "aggregateCpuRatio": 1.014067871610896,
+    "aggregateWallRatio": 1.0055415718497145,
+    "gatePassed": false,
+    "scope": "12 cold-process whole-encoder calls, 3 fixed lanes, ABBA; not a universal speed theorem"
+  },
+  "native": "NOT_RUN",
+  "fullPareto": false,
+  "productionSpeedPatch": false,
+  "largeCaseGate": "actual baseline/parent calls, post-extension composition and independent replay; no second full large API execution",
+  "limitations": "discovery-selected code-review inputs; no general prose win; full-context large input has no baseline due heap failure"
+}

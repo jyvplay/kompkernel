@@ -138,3 +138,9 @@ bench/x155/*.mjs
 # X156 generated benchmark bundles
 bench/x156/*.mjs
 !bench/x156/speed-build.mjs
+
+# X157 generated benchmark bundles
+bench/x157/*.mjs
+!bench/x157/speed-build.mjs
+.cache/x157-diff/
+!bench/x157/speed-fused-build.mjs

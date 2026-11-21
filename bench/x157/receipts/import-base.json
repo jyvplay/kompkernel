@@ -1,0 +1,9 @@
+{
+  "path": "bench/x157/fixtures/cpython-import.diff",
+  "arm": "base",
+  "message": "¶ k=v. expand repeatedly; print only.\n§а/Lib/test/test_pathlib/test_pathlib.pyе/Lib/pathlib/__init__.pyя importц globя _StringGlobber, _no_recurse_symlinksн, S_ISж       я_helper.ensure_lazy_imports(\"pathlib\", {\"р\nп100644р--- aкр@@ -Сdiff --git aМ             self.unlink()\nл bэ fromыDIR¶Селерindex 44f967eb12dd4fd..a32e4b5320ff6dd пер+++лек12,12 +12,13 @@ря posixpathря sysрэ errnoя *\n-fromцрэ itertoolsя chainрэ statя (\n     S_IMODEнынREGнLNKнSOCKнBLKнCHRнFIFO,\n )\nэ _collections_abcя Sequenceр+lazyя shutilр+lazyэц\n \n try:\n    я pwdк1255,8 +1256,6 @@ def _delete(self):\n         if self.is_symlink() or self.is_junction():\nМ         elif self.is_dir():\n-            # Lazyя to improve moduleя timeр-           я shutilр             shutil.rmtree(self)\n         else:\nМСаларindex 19f4506c109c147..09d1b5d725e5ba7 пар+++лак81,7 +81,7 @@ def test_is_notimplemented(self):\n class LazyImportTest(unittest.TestCase):\n     @cpython_onlyр     def test_lazy_import(self):\n-жshutil\"})\n+жglob\", \"shutil\"})\n \n \n #\n",
+  "tokens": 328,
+  "scope": "full incumbent including SYNECHEIA",
+  "ms": 18327.98498,
+  "cpuMs": 12514.826
+}

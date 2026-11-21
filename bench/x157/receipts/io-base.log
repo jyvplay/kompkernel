@@ -1,0 +1,25 @@
+
+<--- Last few GCs --->
+
+[17737:0x2b6d7000]   489784 ms: Mark-Compact 2079.5 (2247.3) -> 2065.7 (2246.8) MB, pooled: 5 MB, 236.06 / 0.00 ms  (average mu = 0.333, current mu = 0.287) allocation failure; scavenge might not succeed
+[17737:0x2b6d7000]   490096 ms: Mark-Compact 2081.4 (2246.8) -> 2067.4 (2248.8) MB, pooled: 3 MB, 240.23 / 0.00 ms  (average mu = 0.279, current mu = 0.230) allocation failure; scavenge might not succeed
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0xe46bbe node::OOMErrorHandler(char const*, v8::OOMDetails const&) [node]
+ 2: 0x1243640 v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 3: 0x1243917 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 4: 0x1472825  [node]
+ 5: 0x148c0b9 v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [node]
+ 6: 0x14607b8 v8::internal::HeapAllocator::AllocateRawWithLightRetrySlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [node]
+ 7: 0x14616e5 v8::internal::HeapAllocator::AllocateRawWithRetryOrFailSlowPath(int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment) [node]
+ 8: 0x1439a0e v8::internal::Factory::AllocateRaw(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [node]
+ 9: 0x1427d9a v8::internal::FactoryBase<v8::internal::Factory>::AllocateRawArray(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [node]
+10: 0x1427ef6 v8::internal::FactoryBase<v8::internal::Factory>::NewFixedArrayWithFiller(v8::internal::Handle<v8::internal::Map>, int, v8::internal::Handle<v8::internal::HeapObject>, v8::internal::AllocationType) [node]
+11: 0x18fc460 v8::internal::FixedArrayBuilder::EnsureCapacity(v8::internal::Isolate*, int) [node]
+12: 0x18b0569 v8::internal::Runtime_RegExpExecMultiple(int, unsigned long*, v8::internal::Isolate*) [node]
+13: 0x7f90bbeacaf6 
