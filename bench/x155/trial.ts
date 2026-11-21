@@ -1,0 +1,6 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {tagstackEncode} from '../../src/lib/omega/tagstack';import {readPlainParent} from '../../src/lib/omega/ekdysis-frontier';import {stoibasPlans,stoibasUndo,stoibasCandidate} from '../../src/lib/omega/stoibas';
+process.env.OMEGA_DET='1';process.env.OMEGA_NO_MEMO='1';process.env.OMEGA_ENGRAM='0';process.env.OMEGA_OURA_MEMO='0';process.env.OMEGA_NO_OROTHESIA='1';
+const out='bench/x155/receipts/trials.jsonl';fs.writeFileSync(out,'');
+for(const [path,incumbent] of [['bench/holdout/json-pkg.txt',653],['bench/x152/fixtures/vscode-json-package.json',822],['bench/x153/fixtures/html-package.json',826]] as const){const source=fs.readFileSync(path,'utf8');for(const p of stoibasPlans(source)){
+ assert.equal(stoibasUndo(p.folded,p.width),source);const t=performance.now(),cpu=process.cpuUsage(),a=tagstackEncode(p.folded),c=stoibasCandidate(source,p.width,a.message,readPlainParent),usage=process.cpuUsage(cpu);assert.equal(a.decoded,p.folded);
+ const r={path,incumbent,...p,candidate:c?.tokens??null,gain:c?incumbent-c.tokens:null,message:c?.message??null,parent:a.message,ms:performance.now()-t,cpuMs:(usage.user+usage.system)/1000};fs.appendFileSync(out,JSON.stringify(r)+'\n');console.log(JSON.stringify({...r,folded:undefined,message:undefined,parent:undefined}));}}

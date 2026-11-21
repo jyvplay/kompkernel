@@ -1,0 +1,1 @@
+{"path":"bench/x152/fixtures/vscode-json-package.json","tokens":805,"baseTokens":822,"applied":true,"parentCalls":1,"reason":"strict token gain; native behavior unverified","ms":314244.393832,"cpuMs":330614.704,"scope":"fresh full API including TAGSTACK, HOMOSEMA, KENOMA, ARKESIS and compact STOIBAS; parentCalls is additional STOIBAS work only"}

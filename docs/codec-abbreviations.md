@@ -10634,3 +10634,47 @@ CPU0.997783/wall0.995764. All24 output wires match the fresh frontier; no produc
 speed change. The second candidate passes300345 reference comparisons per build.
 No broad prose/ops or native-reading success claimed; PR remains unmergeable under
 the conjunctive acceptance conditions. See `bench/x154/README.md` and `native.md`.
+
+## X155 — STOIBAS (experimental, unwired)
+
+**Technical design:** breadth-first JSON node records filled into child slots FIFO.
+Each object record lists its keys, so their number supplies its degree without an
+explicit object count. Arrays use `[N`; scalar records retain raw lexical values.
+The typed-line arm quotes safe bare keys on reconstruction and frames raw JSON
+string content as `=content` through LF. The fully quoted arm remains a negative
+control. Unlike ARKESIS's recursive key/value/count stream, keys are grouped before
+all children and recursion order is replaced by a queue. This is classical
+level-order serialization ancestry, not a new mathematical principle. Scoped
+repository audit and honest literature links (including2023 JPress material and
+SIGMOD2021 JSON Tiles, whose binary/data-model objectives differ) are in
+`bench/x155/research.md`.
+
+**Greedy?** No: bounded width1/2/4 enumeration and strict complete-message argmin
+against the full ARKESIS+KENOMA+HOMOSEMA+TAGSTACK incumbent. Identical payloads share
+one parent call. **CPU/time:** CPU-bound transform,50000 UTF16-unit/10000-node/
+depth128 limits, conservative O(N²) substring/copy bound; parent searches are extra
+and have no wrapper-wide elapsed-time guarantee. No encoder-runtime Pareto claim.
+Original lexemes, duplicate keys and source formatting are admitted only after
+exact reconstruction. Parent UTF8 stability is explicitly checked after a real
+adversarial-surrogate repair; all affected gates and six new attacks were rerun.
+A separate width-cap refusal bug was repaired per alternative; eight boundary
+checks and a fresh full API replay pass after that repair.
+
+**Measured complete wires:** VS Code JSON822→**805** (17tokens,2.07%); HTML826→
+**802** (24tokens,2.91%). Canonical json-pkg ties653 and retains its incumbent.
+Prospectively selected unrelated typescript-eslint parser manifest loses425vs412,
+so retains412. Quoted arm loses all three original trials. Seven independent Python
+reads match disk source bytes. Fresh full API reproduces805 with one added parent
+call; after the width-cap repair,314244mswall/330615msCPU is a cost observation, not a speed comparison. Native basic-chat remains **NOT_RUN**; no broad prose gain.
+
+**Frontier/leaders:**29/29 canonical wires identical,11962tokens. Bounded project
+source reader21/29 with eight unsupported; all29 price/token-ID/transport gates
+pass. Prose word3429, ops glyph5580, code word2636, other no-tape317 unchanged;
+per-lane/category receipts retained in `bench/x155/receipts/`.
+
+**Speed attempt:** an A/B-only numeric two-code-unit cost cache passes3064 scorer
+checks per build, but isolated12-call whole-stack ABBA gives CPU0.979054/wall0.977531
+and a prose regression, failing the predeclared >=10%/nonregression threshold.
+All12 wires match fresh canonical results. No production speed patch; no merge
+under the unmet native/breadth/speed conditions. Full A–J ledger and22-shape modal
+detector: `bench/x155/README.md`.

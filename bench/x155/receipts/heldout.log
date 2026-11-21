@@ -1,0 +1,2 @@
+{"stage":"incumbent","tokens":412,"baseTokens":412,"applied":false,"parentCalls":1,"reason":"no strict admissible gain","ms":104117.960586}
+{"stage":"candidate","incumbent":412,"width":2,"nodes":70,"candidate":425,"gain":-13}

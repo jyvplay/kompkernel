@@ -1,0 +1,12 @@
+[
+  {
+    "compact": false,
+    "accepted": true,
+    "stable": false
+  },
+  {
+    "compact": true,
+    "accepted": true,
+    "stable": false
+  }
+]

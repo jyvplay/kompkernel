@@ -1,0 +1,27 @@
+{
+  "checks": 8,
+  "passed": true,
+  "rows": [
+    {
+      "depth": 128,
+      "sourceUnits": 16898,
+      "admitted": true
+    },
+    {
+      "depth": 129,
+      "sourceUnits": 17159,
+      "admitted": false
+    },
+    {
+      "arrayElements": 9999,
+      "sourceUnits": 39999,
+      "admitted": true
+    },
+    {
+      "arrayElements": 10000,
+      "sourceUnits": 40003,
+      "admitted": false
+    }
+  ],
+  "note": "generated adversarial fixtures, not performance-winning data or native behavior tests"
+}

@@ -42,3 +42,9 @@ export function arkesisCandidate(source:string,width:number,parent:string,readPa
  const p=arkesisPlans(source).find(p=>p.width===width);if(!p)return null;
  try{if(readParent(parent)!==p.folded)return null;const message=arkesisKey(width)+parent;if(arkesisRead(message,readParent)!==source)return null;return {message,tokens:countTokens(message,enc),width};}catch{return null;}
 }
+
+/** Lexical-tree interface for independently framed structural experiments.
+ * Exposes the existing parser/renderer without changing ARKESIS wire behavior. */
+export type LexicalJsonTree = Node;
+export function lexicalJsonTree(source:string):LexicalJsonTree {domain(source);JSON.parse(source);return parse(source,false);}
+export function lexicalJsonRender(tree:LexicalJsonTree,width:number):string {arkesisKey(width);const out=render(tree,width)+'\n';domain(out);return out;}

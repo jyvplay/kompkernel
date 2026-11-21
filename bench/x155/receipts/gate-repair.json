@@ -1,0 +1,7 @@
+{
+  "before": "heldout.jsonl was incorrectly classified as quoted from its filename; envelope check failed",
+  "repair": "classify from wire header, and bind incumbent by source path",
+  "targetedAttack": "all quoted/typed/heldout records mixed in envelope-mixed.jsonl with no compact filename",
+  "afterSourceReads": 7,
+  "passed": true
+}

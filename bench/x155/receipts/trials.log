@@ -1,0 +1,3 @@
+{"path":"bench/holdout/json-pkg.txt","incumbent":653,"width":4,"nodes":108,"candidate":718,"gain":-65,"ms":57512.884941000004,"cpuMs":39945.05}
+{"path":"bench/x152/fixtures/vscode-json-package.json","incumbent":822,"width":2,"nodes":175,"candidate":862,"gain":-40,"ms":108863.870748,"cpuMs":68738.629}
+{"path":"bench/x153/fixtures/html-package.json","incumbent":826,"width":2,"nodes":216,"candidate":858,"gain":-32,"ms":146841.623576,"cpuMs":93621.986}

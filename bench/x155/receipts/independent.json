@@ -1,0 +1,48 @@
+{
+  "checks": 7,
+  "rows": [
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "exact": true,
+      "sourceBytes": 3620,
+      "sourceSha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "path": "bench/x152/fixtures/vscode-json-package.json",
+      "exact": true,
+      "sourceBytes": 6671,
+      "sourceSha256": "b5b843888e49d67b6e62dcf094904d1fd7a25dd743c84bd26347819fc8230ac6"
+    },
+    {
+      "path": "bench/x153/fixtures/html-package.json",
+      "exact": true,
+      "sourceBytes": 8246,
+      "sourceSha256": "cb3eb0dacb754977b66403067030228c6768cb7248ae323fffadeb0ce497604f"
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "exact": true,
+      "sourceBytes": 3620,
+      "sourceSha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+    },
+    {
+      "path": "bench/x152/fixtures/vscode-json-package.json",
+      "exact": true,
+      "sourceBytes": 6671,
+      "sourceSha256": "b5b843888e49d67b6e62dcf094904d1fd7a25dd743c84bd26347819fc8230ac6"
+    },
+    {
+      "path": "bench/x153/fixtures/html-package.json",
+      "exact": true,
+      "sourceBytes": 8246,
+      "sourceSha256": "cb3eb0dacb754977b66403067030228c6768cb7248ae323fffadeb0ce497604f"
+    },
+    {
+      "path": "bench/x155/fixtures/parser-package.json",
+      "exact": true,
+      "sourceBytes": 2181,
+      "sourceSha256": "276e8bcfbe39eff77c24177d3b83437f6edf3fd79da22676c5e72c2bb8b42302"
+    }
+  ],
+  "nativeSingleChat": "NOT_RUN"
+}
