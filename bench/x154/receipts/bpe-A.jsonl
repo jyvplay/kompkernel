@@ -1,0 +1,2 @@
+{"checks":14909,"passed":true,"scope":"reference tokenizer on all canonical source/wire chunks and deterministic Unicode/scratch-boundary attacks"}
+{"hashChecks":87698,"passed":true,"scope":"all 3/4-byte string vocabulary entries with forced surrounding material; invalid UTF8 and scalar boundaries covered in primary gate"}

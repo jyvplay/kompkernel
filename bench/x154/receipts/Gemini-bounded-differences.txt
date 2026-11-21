@@ -1,0 +1,42 @@
+lemma delta_norm_bound (E : Type*) [NormedAddCommGroup E] [InnerProductSpace ℝ E]
+  (d1 d0 G_diff E_err : E) (A a1 K : ℝ)
+  (hA_pos : 0 ≤ A) (ha1_pos : 0 ≤ a1)
+  (hd1 : d1 = A • d0 - a1 • G_diff + E_err)
+  (h_inner : 0 ≤ inner ℝ G_diff d0)
+  (h_G : ‖G_diff‖ ≤ K * ‖d0‖) :
+  ‖d1‖ ≤ Real.sqrt (A^2 + a1^2 * K^2) * ‖d0‖ + ‖E_err‖ := by
+    use hd1▸norm_add_le_of_le ((le_of_sq_le_sq) (.trans (by rw [norm_sub_sq_real,norm_smul_of_nonneg (by valid),norm_smul_of_nonneg (by valid),real_inner_smul_right,real_inner_smul_left,real_inner_comm]) ? _) (by bound)) (refl _)
+    linear_combination (2 *h_inner* A * a1)-(A^2+a1^2*K^2).sq_sqrt (by bound) *norm d0^2+a1^2*pow_le_pow_left₀ (by bound) h_G (2)
+
+lemma delta_induction (gamma C : ℝ) (hgamma : 2 ≤ gamma) (d : ℕ → ℝ)
+  (hd : ∀ t, 1 ≤ t → d (t + 1) ≤ (1 - 1.15 / ((t:ℝ) + 1 + gamma)) * d t + C / ((t:ℝ) + gamma)^2) :
+  ∃ E, 0 ≤ E ∧ ∀ t, 1 ≤ t → d t ≤ E / ((t:ℝ) + gamma) := by
+    norm_num only[sq, one_sub_div (by positivity: ( ↑(_ : ℕ) : ℝ)+1+gamma ≠0), ←div_div] at hd
+    refine(exists_nat_ge (d (1)*(1+gamma)⊔20* C)).elim fun A B=>⟨max 0 A,le_sup_left,fun R L=>(le_div_iff₀ (by positivity)).2 ?_⟩
+    use le_max_of_le_right ((1).le_induction (by push_cast[sup_le_iff.1 B]) ( fun and K V=>.trans (by rw [Nat.cast_succ]) ((le_div_iff₀ (by positivity)).1 ((hd and K).trans (.trans (by rw [mul_comm, mul_div]) ?_)))) R L)
+    exact (le_sub_iff_add_le').1.comp (div_div _ _ _).trans_le (((div_le_div_iff₀ (by positivity) (by positivity)).2 (by nlinarith[pow_three (and+gamma-1), max_le_iff.1 B])).trans_eq<|sub_div _ _ _)
+
+lemma bounded_differences_E
+  (n m : ℕ) (L : Z_space n m → ℝ)
+  (h_diff : Differentiable ℝ L)
+  (h_monotone : ∀ z w : Z_space n m, inner ℝ (F_operator n m L z - F_operator n m L w) (z - w) ≥ (0 : ℝ))
+  (K : NNReal) (h_K_nonneg : 0 < K)
+  (h_lipschitz : ∀ z w : Z_space n m, ‖F_operator n m L z - F_operator n m L w‖ ≤ K * ‖z - w‖)
+  (gamma : ℝ) (h_gamma : 2 ≤ gamma)
+  (s_seq : ℕ → State n m) (z_init : Z_space n m)
+  (h_init : s_seq 0 = { z := z_init, z0 := z_init, t := 0, history := [z_init]})
+  (h_step : ∀ t, s_seq (t + 1) = step n m L (s_seq t) (coefficients_schedule gamma K t).1 (coefficients_schedule gamma K t).2)
+  (z_star : Z_space n m) (h_saddle : IsSaddlePoint n m L z_star) (h_opt : F_operator n m L z_star = 0) :
+  ∃ E : ℝ, 0 ≤ E ∧ ∀ t, 1 ≤ t → ‖(s_seq (t + 1)).z - (s_seq t).z‖ ≤ E / ((t : ℝ) + gamma) := by
+  have h_bound_D := bounded_iterates_D_exist n m L h_diff h_monotone K h_K_nonneg h_lipschitz gamma h_gamma s_seq z_init h_init h_step z_star h_saddle h_opt
+  rcases h_bound_D with ⟨D, hD_nonneg, hD⟩
+  let C_bound := gamma * D
+  have hd : ∀ t, 1 ≤ t → ‖(s_seq (t + 2)).z - (s_seq (t + 1)).z‖ ≤ (1 - 1.15 / ((t:ℝ) + 1 + gamma)) * ‖(s_seq (t + 1)).z - (s_seq t).z‖ + C_bound / ((t:ℝ) + gamma)^2 := by
+    intro t ht
+    let z2 := (s_seq (t + 2)).z
+    let z1 := (s_seq (t + 1)).z
+    let z0 := (s_seq t).z
+    let G1 := F_operator n m L z1
+    let G0 := F_operator n m L z0
+
+    let a1_K := 1 / Real.sqrt ((t:ℝ) + 1 + gamma)

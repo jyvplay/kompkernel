@@ -1,0 +1,37 @@
+{
+  "rows": [
+    {
+      "bytes": 3,
+      "arm": "old",
+      "entries": 17779,
+      "insertProbes": 345249,
+      "meanInsertionProbe": 19.418921199167556,
+      "maxProbe": 211
+    },
+    {
+      "bytes": 3,
+      "arm": "multiplicative",
+      "entries": 17779,
+      "insertProbes": 18344,
+      "meanInsertionProbe": 1.0317790651892682,
+      "maxProbe": 5
+    },
+    {
+      "bytes": 4,
+      "arm": "old",
+      "entries": 26070,
+      "insertProbes": 236513,
+      "meanInsertionProbe": 9.07222861526659,
+      "maxProbe": 957
+    },
+    {
+      "bytes": 4,
+      "arm": "multiplicative",
+      "entries": 26070,
+      "insertProbes": 27217,
+      "meanInsertionProbe": 1.0439969313387034,
+      "maxProbe": 4
+    }
+  ],
+  "scope": "valid string vocabulary insertion probes only; causal diagnostic, not whole-stack speed"
+}

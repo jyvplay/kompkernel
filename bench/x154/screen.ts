@@ -1,0 +1,2 @@
+import fs from 'node:fs';import {arkesisPlans,arkesisKey} from '../../src/lib/omega/arkesis';import {countTokens} from '../../src/lib/omega/bpe';
+for(const p of ['bench/holdout/json-pkg.txt','bench/x152/fixtures/vscode-json-package.json','bench/x153/fixtures/html-package.json']){const s=fs.readFileSync(p,'utf8');for(const a of arkesisPlans(s))console.log(JSON.stringify({path:p,source:countTokens(s,'o200k_base'),folded:countTokens(a.folded,'o200k_base'),rawFull:countTokens(arkesisKey(a.width)+a.folded,'o200k_base')}));}

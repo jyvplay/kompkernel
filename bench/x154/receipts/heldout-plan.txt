@@ -1,0 +1,1 @@
+Prospective X154 independent-project test: eslint/eslint package.json at e0148e30da6662318c5643f2230830af8407b2aa. No pricing inspected. Compare fresh TAGSTACK+HOMOSEMA+KENOMA then ARKESIS. Cap source at 12000 UTF16 units; timeout900s.

@@ -10592,3 +10592,45 @@ Isolated 12-call whole-stack ABBA has aggregate CPU ratio0.963323 and wall0.9620
 but fails the predeclared >=10%/nonregression gate. Production unchanged; no
 significant acceleration claim. Full evidence, negative cases, 22-shape modal
 shortcut detector and remaining gates: `bench/x153/README.md`.
+
+## X154 — ARKESIS (experimental, unwired)
+
+**Design:** prefix container cardinalities replace JSON end delimiters and layout.
+`{N` introduces N key:value pairs; `[N` introduces N values. A recursive child
+countdown determines where containers end. Raw lexical keys/scalars are retained;
+canonical width1/2/4 layout and final LF are regenerated only if exact source
+reconstruction admits the input. Unlike KENOMA, neither indentation nor close-event
+lines remain as topology side information. Unlike ROSETTA's flat KV/rectangular
+JSON notation, the format represents arbitrary bounded nested container degrees.
+No claim of inventing degree-sequence tree coding: related prior art includes
+Arroyuelo et al., *Succinct Trees in Practice* (ALENEX2010), and2014 succinct binary
+tree work; links/hypotheses and a scoped repository audit are in
+`bench/x154/research.md`.
+
+**Greedy?** No: fixed width enumeration, exact inverse admission and full-message
+argmin against X153 KENOMA+X152 HOMOSEMA+TAGSTACK. Same folded payload is priced
+once through the parent. **Bounds:** source50000 UTF16 units, depth128,10000 nodes;
+conservative O(N²) character-copying bound under substring/string implementations,
+CPU work, not a whole-encoder time cap. Inherited parent search dominates; the
+optional API adds real parent calls and is not a runtime Pareto guarantee.
+
+**Measured:** VS Code JSON **867→822**, saving**45tokens (5.19%)** beyond KENOMA,
+with every instruction and parent representation counted. json-pkg674vs653 and
+HTML828vs826 lose and fall back. Three independent Python source-byte reads and
+617 codec/32 independent/11 wrapper checks pass. Fresh complete API reproduces822
+with one additional ARKESIS parent call:237143mswall/248891msCPU; this is a cost
+observation, not a paired speed comparison. Native basic-chat gate **NOT_RUN**.
+An unrelated prospective ESLint trial timed out; no heldout success is inferred.
+
+**Frontier/leaders:** fresh canonical29 remains11962,29 identical wires. Bounded
+source reader21/29 (eight unsupported), all29 price/transport checks pass. Prose
+word3429, ops glyph5580, code word2636, other no-tape317 remain unchanged; receipts
+and per-lane leaders in `bench/x154/receipts/`.
+
+**Speed:** two isolated12-call whole-stack ABBA experiments both fail the >=10%
+CPU/wall improvement/nonregression gate. Multiplicative3/4-byte rank hash gives
+CPU1.007737/wall1.003135; allocation-free5..8-byte rank table gives
+CPU0.997783/wall0.995764. All24 output wires match the fresh frontier; no production
+speed change. The second candidate passes300345 reference comparisons per build.
+No broad prose/ops or native-reading success claimed; PR remains unmergeable under
+the conjunctive acceptance conditions. See `bench/x154/README.md` and `native.md`.

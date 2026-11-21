@@ -1,0 +1,1 @@
+{"status":"INCOMPLETE_KILLED","note":"First build exceeded 180-second tool limit during concurrent memory-heavy benchmark jobs; build log ended Killed. Not a build pass. Retry only after heavy jobs finish."}

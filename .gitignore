@@ -124,3 +124,9 @@ bench/x152/*.mjs
 # X153 generated bundles; retain authored A/B build plugin
 bench/x153/*.mjs
 !bench/x153/speed-build.mjs
+
+# X154 generated bundles and profiles; retain authored build plugin
+bench/x154/*.mjs
+!bench/x154/speed-build.mjs
+!bench/x154/rank58-build.mjs
+bench/x154/receipts/*.cpuprofile

@@ -1,0 +1,1 @@
+{"status":"STOPPED_FOR_ISOLATED_SPEED_GATE","note":"Four canonical candidate rows completed, no mismatch. Remaining regression deferred until isolated speed gate justifies full follow-up; partial concurrent timings are not speed evidence."}
