@@ -1,0 +1,6 @@
+{
+  "freshFrontierIdentical": 12,
+  "referenceBpeChecksPerArm": 6487,
+  "productionDeployed": false,
+  "timingCaveat": "No competing heavy benchmark workers; brief Python inverse verification overlapped initial timing. Gate fails regardless; no speed benefit claimed."
+}
