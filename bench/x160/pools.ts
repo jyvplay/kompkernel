@@ -1,0 +1,1 @@
+import {scriptPool} from '../../src/lib/omega/ariadne';import {CHIRON_SCRIPTS} from '../../src/lib/omega/chiron';console.log(JSON.stringify(['o200k_base','cl100k_base'].flatMap(enc=>CHIRON_SCRIPTS.map(sc=>{const p=scriptPool(sc,enc as any);return {enc,name:sc.name,chars:p.chars,pairs:[...p.pairs],degree:[...p.degree],ngrams:[...p.ngrams]};}))));

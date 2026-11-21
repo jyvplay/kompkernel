@@ -1,0 +1,30 @@
+[
+  {
+    "repo": "openai/math",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/OAI/Computability/Superstring/WalkOutput.lean",
+    "file": "openai-walk.lean",
+    "sha256": "8eea2435dbd604c0454cccd67bbf2c0e95d544fed90ba8def2611050e11131fb"
+  },
+  {
+    "repo": "anthropics/fermats-last-theorem",
+    "revision": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+    "path": "P2M/Sol/S_FreyPackage_Mazur_Frey.lean",
+    "file": "anthropic-mazur.lean",
+    "sha256": "3e219ebcb87466b6e77f1bf0dcd394e8f47dcb4f17fe25a394d9fcae94d4e2ec"
+  },
+  {
+    "repo": "google-deepmind/alphaevolve",
+    "revision": "c42694909d50f92cb01c2d50916f022b1c7e74d1",
+    "path": "matmul_tensor_decompositions/verification_support_rank.ipynb",
+    "file": "google-support.ipynb",
+    "sha256": "3d46dc195186fca6191ae43cb7fe4317727be2aa47535e3f9d54594579e7b03c"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "revision": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/Final.lean",
+    "file": "doubleai-final.lean",
+    "sha256": "2748af472ae4d4aef6ab602fdaeb37baa654b24f6f1b0a0641f3976dc4b744f9"
+  }
+]

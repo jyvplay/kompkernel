@@ -1,3 +1,7 @@
 # X159 source fixtures and native packet are byte-exact, including final blank lines.
 bench/x159/fixtures/*.txt -text whitespace=-blank-at-eof
 bench/x159/receipts/native-packet.txt -text whitespace=-blank-at-eof
+# X160 byte-exact source fixtures, including Git context whitespace.
+bench/x160/fixtures/*.diff -text whitespace=-blank-at-eof,-blank-at-eol
+bench/x160/fixtures/*.txt -text whitespace=-blank-at-eof,-blank-at-eol
+bench/x160/receipts/native-packet.txt -text whitespace=-blank-at-eof,-blank-at-eol

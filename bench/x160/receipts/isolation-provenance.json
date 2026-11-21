@@ -1,0 +1,8 @@
+{
+  "repo": "sphinx-doc/sphinx",
+  "revision": "a341795e990fb11d2558fb80abf453cdac912c1d",
+  "parent": "c386315ff1933f94fa3746ed0084074d41f58059",
+  "bytes": 2478,
+  "sha256": "8c0428e5ceae37bb670db93cf1026b5624a49a78ddf32035852165f330db3b2a",
+  "selection": "whole smaller commit selected after first large baseline OOM, before its parent pricing; no heldout claim"
+}

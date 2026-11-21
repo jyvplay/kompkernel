@@ -1,0 +1,61 @@
+diff --git a/AUTHORS.rst b/AUTHORS.rst
+index b702c64c0f9..581d1fd4e68 100644
+--- a/AUTHORS.rst
++++ b/AUTHORS.rst
+@@ -81,6 +81,7 @@ Contributors
+ * Justus Magin -- napoleon improvements
+ * Kazuya Take -- ``sphinx.testing.path`` bug fix
+ * Kevin Dunn -- MathJax extension
++* Kilian Paul -- Docutils compatibility, intl tests, and viewcode fixes
+ * KINEBUCHI Tomohiko -- typing Sphinx as well as docutils
+ * Kurt McKee -- documentation updates
+ * Lars Hupfeldt Nielsen - OpenSSL FIPS mode md5 bug fix
+diff --git a/CHANGES.rst b/CHANGES.rst
+index d0be07b8788..e2166de9afb 100644
+--- a/CHANGES.rst
++++ b/CHANGES.rst
+@@ -19,6 +19,10 @@ Bugs fixed
+ Testing
+ -------
+ 
++* #14690: Fix test isolation issues caused by shared test directories and
++  inherited ``NO_COLOR`` and ``NO_COLOUR`` environment variables.
++  Patch by Kilian Paul
++
+ Release 9.2.0 (released Oct 20, 2026)
+ =====================================
+ 
+diff --git a/tests/test_transforms/test_transforms_post_transforms.py b/tests/test_transforms/test_transforms_post_transforms.py
+index 96f94f04910..81e99dd4ff2 100644
+--- a/tests/test_transforms/test_transforms_post_transforms.py
++++ b/tests/test_transforms/test_transforms_post_transforms.py
+@@ -70,6 +70,7 @@ def missing_reference(
+ @pytest.mark.sphinx(
+     'html',
+     testroot='domain-py-python_use_unqualified_type_names',
++    srcdir='transforms-post_transforms-missing-reference-conditional',
+     freshenv=True,
+ )
+ def test_missing_reference_conditional_pending_xref(app: SphinxTestApp) -> None:
+diff --git a/tests/test_util/test_util_display.py b/tests/test_util/test_util_display.py
+index fce4ac1fbdf..f6f359efc8c 100644
+--- a/tests/test_util/test_util_display.py
++++ b/tests/test_util/test_util_display.py
+@@ -44,6 +44,8 @@ def test_status_iterator_length_0(app: SphinxTestApp) -> None:
+ def test_status_iterator_verbosity_0(
+     app: SphinxTestApp, monkeypatch: pytest.MonkeyPatch
+ ) -> None:
++    monkeypatch.delenv('NO_COLOR', raising=False)
++    monkeypatch.delenv('NO_COLOUR', raising=False)
+     monkeypatch.setenv('FORCE_COLOR', '1')
+     logging.setup(app, app.status, app.warning)
+ 
+@@ -64,6 +66,8 @@ def test_status_iterator_verbosity_0(
+ def test_status_iterator_verbosity_1(
+     app: SphinxTestApp, monkeypatch: pytest.MonkeyPatch
+ ) -> None:
++    monkeypatch.delenv('NO_COLOR', raising=False)
++    monkeypatch.delenv('NO_COLOUR', raising=False)
+     monkeypatch.setenv('FORCE_COLOR', '1')
+     logging.setup(app, app.status, app.warning)
+ 

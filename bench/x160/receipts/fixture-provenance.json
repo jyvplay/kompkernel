@@ -1,0 +1,26 @@
+[
+  {
+    "name": "sphinx",
+    "repo": "sphinx-doc/sphinx",
+    "commit": "5428d94d24dce472e309a31abb3b880548ef92fb",
+    "parent": "860d7ab5062d348ac78dd984045356ea2bb33bb5",
+    "command": "gh api -H 'Accept: application/vnd.github.diff' repos/sphinx-doc/sphinx/commits/5428d94d24dce472e309a31abb3b880548ef92fb",
+    "bytes": 38763,
+    "sha256": "e5806a4c05d4596e9f405455e9f103cf3163541aedc01661b2fcf6ee5ab825c5",
+    "files": 93,
+    "description": "Remove coding magic comments from tests",
+    "selection": "whole real commit diff, no content edits or truncation; selected for multiple modified files before parent pricing"
+  },
+  {
+    "name": "django",
+    "repo": "django/django",
+    "commit": "3a97f992fbfbcf8b0480875b257e5d541a4b8315",
+    "parent": "232181d1c5307d9af5fc292682661e91439a9289",
+    "command": "gh api -H 'Accept: application/vnd.github.diff' repos/django/django/commits/3a97f992fbfbcf8b0480875b257e5d541a4b8315",
+    "bytes": 43356,
+    "sha256": "ace699d1a4328ca1dc20bc0044948d4271c6c3a793e07a5c4fe5c0a2c4f62fdf",
+    "files": 21,
+    "description": "Fixed #22313 -- Removed 'u' prefixes from documentation",
+    "selection": "whole real commit diff, no content edits or truncation; selected for multiple modified files before parent pricing"
+  }
+]

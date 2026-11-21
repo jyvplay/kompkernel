@@ -1,0 +1,1 @@
+{"path":"bench/x160/fixtures/isolation.diff","arm":"composed","records":4,"tokens":574,"accepted":true,"readerError":null,"parentNotes":"SYNARMOGE ext=0 shr=1 drop=0 orphan=0 ren=0 swap=0 add=0 probes=7073 M=441 < 442; PERIKOPI legend 11->10 tok over 1 clause(s) via preamble; outside bounded, collision-free, well-nested markup domain","ms":5991.455774999999,"cpuMs":7788.374}

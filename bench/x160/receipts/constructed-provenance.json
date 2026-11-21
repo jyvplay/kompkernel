@@ -1,0 +1,6 @@
+{
+  "kind": "constructed mechanism witness, NOT a real commit or heldout evidence",
+  "files": 12,
+  "sha256": "57bc7cc558c5d0e820fbf6c4bab483da44b512743a820238b205d801b8acf2d3",
+  "selection": "after real 4-file loss; fixed before full-parent trial"
+}

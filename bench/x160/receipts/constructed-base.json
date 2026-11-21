@@ -1,0 +1,9 @@
+{
+  "path": "bench/x160/fixtures/constructed.diff",
+  "arm": "base",
+  "message": "¶ k=v. expand repeatedly; print only.\n§щ.md\nящ@@ -1 +1 @@\n-Status: draft\n+Status: reviewed\nћdiff --git aеяћу 100644\n--- aащ+++ bющindexию ы/docs/operations/ныmonitoringк/docs/tutorials/quickstartә/docs/installationчә/macosр/docs/security/key-rotationс/docs/tutorials/deploymentо.md bхә/linuxбә/windowsм/docs/security/access-controlв/docs/api/authenticationл/docs/api/paginationтыbackupдыrestore¶ћхохю a795b82..9e6daa4ухахебоби52a0723..1f5a7d7убабечочи9baf78f..eabd8afучачемоми46a87fc..35120acумамерори47e3924..f46155eураретоти3ddaa39..7c5f996утатедоди700d026..987cd55удаденони8ff986b..554f422унаневови6fd0efb..28b7bb3увавелолю cd17915..0c00300улалекокиc3b76af..429b437укакесоси6636c82..09746bdусася",
+  "tokens": 265,
+  "scope": "operational optional chain through KLIMAX",
+  "ms": 38473.738877,
+  "cpuMs": 42648.455
+}
