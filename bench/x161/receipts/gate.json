@@ -1,0 +1,165 @@
+{
+  "checks": 32,
+  "rows": [
+    {
+      "seq": "000290",
+      "base": 271,
+      "candidate": 87,
+      "saved": 184,
+      "percent": 67.89667896678966,
+      "directMs": 0.8926370000000361,
+      "directCpuMs": 0.855,
+      "directTimingScope": "warm single call incl planning+inverse+price; not whole-stack speed evidence"
+    },
+    {
+      "seq": "000578",
+      "base": 334,
+      "candidate": 89,
+      "saved": 245,
+      "percent": 73.35329341317366,
+      "directMs": 5.656696000000011,
+      "directCpuMs": 10.265,
+      "directTimingScope": "warm single call incl planning+inverse+price; not whole-stack speed evidence"
+    },
+    {
+      "seq": "000217",
+      "base": 272,
+      "candidate": 87,
+      "saved": 185,
+      "percent": 68.01470588235294,
+      "directMs": 0.6376780000000508,
+      "directCpuMs": 0.624,
+      "directTimingScope": "warm single call incl planning+inverse+price; not whole-stack speed evidence"
+    },
+    {
+      "seq": "000583",
+      "base": 354,
+      "candidate": 91,
+      "saved": 263,
+      "percent": 74.29378531073446,
+      "directMs": 8.379065999999966,
+      "directCpuMs": 9.162,
+      "directTimingScope": "warm single call incl planning+inverse+price; not whole-stack speed evidence"
+    }
+  ],
+  "screening": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "plan": null
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "plan": null
+    }
+  ],
+  "native": "NOT_RUN",
+  "paretoCertified": false
+}

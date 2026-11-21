@@ -10971,3 +10971,73 @@ Prose5856→3429(word), ops17278→5580(glyph), code4152→2636(word),
 other729→317(no tape class). Largest fixture savings remain apt-real1926,
 ls-l-real3884,json-pkg499,cue-sheet412. These are corpus-local leaders, not
 per-codec ablations or global optima. Receipts and failures: `bench/x160/`.
+
+## X161 — KAMPYLI (curvature): exact finite-difference table programs
+
+**Design.** `src/lib/omega/kampyli.ts` replaces canonical integer table blocks by
+`!curve N S a,d,...;a,d,...`: N rows, field separator S, and one initial forward-
+difference vector per column. Emit first values, then add next differences to
+predecessors **left to right**. The entire decoding rule is paid in-band. Degree
+2–4 must occur; constant/linear companion columns are permitted. Unlike
+APOGRAPHE/METRON/AKOLOUTHIA's affine counters, this retains higher-order state;
+unlike ATHROISMOS it transmits no later driving values. SOLARIS's named
+“polynomial” mechanism was inspected and is phrase mining, not numeric closure.
+Historical novelty is NOT claimed: Newton differences are classical.
+
+**Admissibility and bounds.** UTF8-stable <=50k UTF16 units;8–2000rows/block,
+1–16columns; canonical signed integers of magnitude<10^24; exactly one space,
+tab or comma between fields. No decimal rounding, normalization or formula-name
+lookup. Whole-source inverse is checked. Reserved marker collisions refuse.
+Planner/inverse are CPU-bound O(n·c·d), d<=4, with explicit input/output and
+integer bounds; parent searches dominate optional selection time and are not
+free. Maximal nonoverlapping blocks and smallest fitting degree are deterministic,
+not globally BPE-optimal segmentation. Candidate choice is strict full-price
+selection among incumbent, literal transformed payload, and one parent attempt;
+ties retain the incumbent. Direct encode is separately exposed, not auto-routed.
+
+**Measured complete-message gains.** Exact published OEIS mirror excerpts,
+100 source lines each, selected before their parent prices:
+A000290 squares271→87 (-184,67.90%); A000578 cubes334→89 (-245,73.35%);
+A000217 triangular272→87 (-185,68.01%). Prospective post-design-freeze
+A000583 fourth powers354→91 (-263,74.29%). These are study-table family gains,
+NOT complete OEIS documents or evidence of broad prose/ops superiority.
+Parent and literal transformed payload prices tie here; literal wins the tie,
+so no undocumented parent operator is silently assumed by the accepted packet.
+
+**Verification/repair.**3,232 unit checks;113 independent Python checks,
+including all8 complete baseline/candidate messages. Python uses Newton's
+binomial formula instead of replaying the TS update loop.32 selector/price/source
+checks. Initial column-elision candidates failed message-only parent recovery
+and were rejected; the full-table design reran affected gates, including wrong
+update-order, degree5/6, ragged rows, final-LF, overflow and amplification attacks.
+Native basic-chat behavior NOT_RUN. No Pareto-certification claim.
+
+**Honest antecedents.** Blalock/Madden/Guttag, *Sprintz: Time Series Compression
+for the Internet of Things*, IMWUT2018, DOI10.1145/3264903,
+https://dl.acm.org/doi/10.1145/3264903 . Online predictive binary compression is
+related context, not this exact algorithm or a native-chat guarantee. Tang et al.,
+*LogLite*,2025, https://arxiv.org/html/2507.10337v1 is a separate streaming-log
+approach. Fresh lab-source boundaries and independent verification of a published
+1084-point cap set over F3^9 (586,986 distinct-pair checks plus a mutation) are in
+`bench/x161/research.md`; no Lean replay or exhaustive all-lab audit is claimed.
+
+**Whole-stack speed.** Two benchmark-only12-call cold ABBA experiments:
+per-token streaming-decode memo CPU0.961555/wall0.959283 (prose regression);
+2048-entry native merge cache CPU0.976855/wall0.973507. Both fail the declared
+>=10% gate.24 wires identical within paired arms; no production speed patch.
+Canonical worker was paused during timings; its wall times are not speed data.
+
+**Prior next test.** Complete real four-file Sphinx CVE/CWE commit:
+HAPLOGRAPHE798→797, independently inverted; one-token gain is not significant.
+KAMPYLI does not fire on the29 protected canonical lanes. Frozen standalone
+packets, source provenance, failures and reproduction scripts: `bench/x161/`.
+
+X161 final refresh:29/29 wires identical to X160,11962tokens,21 bounded source
+reads/8 unsupported,29 reference-price/token-ID checks. All24 speed wires match
+the fresh frontier. Category raw→encoded totals remain prose5856→3429(word),
+ops17278→5580(glyph),code4152→2636(word),other729→317(no tape class).
+Local absolute-saving leaders: apt-real1926,ls-l-real3884,json-pkg499,cue-sheet412.
+These are inherited corpus categories/local leaders, not global-optimal codec
+ablations. Protected-lane KAMPYLI plans all null. Relevant numeric optional
+planners SYLLOGISMOS/SYZYGIA/ZYGON/ATHROISMOS/METRON also decline the four exact
+space-delimited new source excerpts; no all-registry minimum is asserted.

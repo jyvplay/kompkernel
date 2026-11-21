@@ -1,0 +1,113 @@
+{
+  "rows": [
+    {
+      "seq": "000290",
+      "syllogismos": {
+        "plan": false
+      },
+      "syzygia": {
+        "plan": false
+      },
+      "zygon": {
+        "plan": false
+      },
+      "athroismos": {
+        "plan": false
+      },
+      "metron": {
+        "plan": false
+      },
+      "kampyli": {
+        "plan": true,
+        "keys": [
+          "folded",
+          "blocks",
+          "columns",
+          "cells"
+        ]
+      }
+    },
+    {
+      "seq": "000578",
+      "syllogismos": {
+        "plan": false
+      },
+      "syzygia": {
+        "plan": false
+      },
+      "zygon": {
+        "plan": false
+      },
+      "athroismos": {
+        "plan": false
+      },
+      "metron": {
+        "plan": false
+      },
+      "kampyli": {
+        "plan": true,
+        "keys": [
+          "folded",
+          "blocks",
+          "columns",
+          "cells"
+        ]
+      }
+    },
+    {
+      "seq": "000217",
+      "syllogismos": {
+        "plan": false
+      },
+      "syzygia": {
+        "plan": false
+      },
+      "zygon": {
+        "plan": false
+      },
+      "athroismos": {
+        "plan": false
+      },
+      "metron": {
+        "plan": false
+      },
+      "kampyli": {
+        "plan": true,
+        "keys": [
+          "folded",
+          "blocks",
+          "columns",
+          "cells"
+        ]
+      }
+    },
+    {
+      "seq": "000583",
+      "syllogismos": {
+        "plan": false
+      },
+      "syzygia": {
+        "plan": false
+      },
+      "zygon": {
+        "plan": false
+      },
+      "athroismos": {
+        "plan": false
+      },
+      "metron": {
+        "plan": false
+      },
+      "kampyli": {
+        "plan": true,
+        "keys": [
+          "folded",
+          "blocks",
+          "columns",
+          "cells"
+        ]
+      }
+    }
+  ],
+  "scope": "mechanism eligibility on exact original source bytes; not a registry-wide price tournament"
+}

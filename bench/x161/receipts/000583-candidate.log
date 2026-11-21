@@ -1,0 +1,1 @@
+{"path":"bench/x161/fixtures/b000583-first100.txt","arm":"candidate","blocks":1,"columns":2,"cells":200,"tokens":91,"directTokens":91,"parentTokens":91,"parentAccepted":true,"readerError":null,"accepted":true,"ms":1897.436682,"cpuMs":1952.014}

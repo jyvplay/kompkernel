@@ -1,0 +1,2 @@
+Decode first. Each !curve N S column;column line generates N rows. Each column lists a,d,...: print a, then add each next difference to its predecessor left to right after each row. S is s=space,t=tab,c=comma between columns; LF between rows. Replace that line only; preserve other text; print only.
+!curve 100 s 0,1;0,1,6,6

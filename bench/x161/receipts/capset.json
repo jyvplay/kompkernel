@@ -1,0 +1,15 @@
+{
+  "points": 1084,
+  "dimension": 9,
+  "field": 3,
+  "distinctPairsChecked": 586986,
+  "verified": true,
+  "mutationRejected": "adjoining -(first+second) creates a distinct zero-sum triple",
+  "sourceTypo": "notebook prose says F_2^n but data and arithmetic are over F_3^9",
+  "notProved": [
+    "optimality",
+    "history of record",
+    "runtime bound",
+    "compression transfer"
+  ]
+}

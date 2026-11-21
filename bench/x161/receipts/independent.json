@@ -1,0 +1,16 @@
+{
+  "checks": 113,
+  "passed": true,
+  "completeMessages": [
+    "000290 candidate",
+    "000290 baseline",
+    "000578 candidate",
+    "000578 baseline",
+    "000217 candidate",
+    "000217 baseline",
+    "000583 candidate",
+    "000583 baseline"
+  ],
+  "method": "exact Newton binomial formula; independent of iterative implementation",
+  "native": false
+}

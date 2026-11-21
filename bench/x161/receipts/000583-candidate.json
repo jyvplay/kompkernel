@@ -1,0 +1,18 @@
+{
+  "path": "bench/x161/fixtures/b000583-first100.txt",
+  "arm": "candidate",
+  "folded": "!curve 100 s 0,1;0,1,14,36,24\n",
+  "blocks": 1,
+  "columns": 2,
+  "cells": 200,
+  "parent": "!curve 100 s 0,1;0,1,14,36,24\n",
+  "message": "Decode first. Each !curve N S column;column line generates N rows. Each column lists a,d,...: print a, then add each next difference to its predecessor left to right after each row. S is s=space,t=tab,c=comma between columns; LF between rows. Replace that line only; preserve other text; print only.\n!curve 100 s 0,1;0,1,14,36,24\n",
+  "tokens": 91,
+  "directTokens": 91,
+  "parentTokens": 91,
+  "parentAccepted": true,
+  "readerError": null,
+  "accepted": true,
+  "ms": 1897.436682,
+  "cpuMs": 1952.014
+}

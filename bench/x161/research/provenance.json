@@ -1,0 +1,62 @@
+[
+  {
+    "repo": "openai/math",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/OAI/Computability/Superstring/SchedulerMachine.lean",
+    "file": "openai-scheduler.lean",
+    "sha256": "8243cec94a3431f123199fb288e7b77985cebfbfd412b66a06b976a4836b1b06"
+  },
+  {
+    "repo": "anthropics/fermats-last-theorem",
+    "revision": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+    "path": "Theorems/Thm_FreyPackage_frey_no_cofixed_small.lean",
+    "file": "anthropic-small.lean",
+    "sha256": "01347c732bf0d852366286cf288d119522108d4d37e279f3e78bc94c09e0a5d0"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+    "path": "eth/MainResults.lean",
+    "file": "anthropic-eth-main.lean",
+    "sha256": "47f78a9550d95b37d8718dd1ee16ae824da893a5e17c319f737e6d0a5ed24944"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+    "path": "eth/README.md",
+    "file": "anthropic-eth-readme.md",
+    "sha256": "844e0dd78593f728e6a6a1f52b7b3d1e162020c1746ac1f4b3c4e5f2ff7f494e"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "revision": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/All63/Trust.lean",
+    "file": "doubleai-trust.lean",
+    "sha256": "526e33bc85c3ca25ab6bb290540269f648af14e2c79c5bf3796c6325a90cc28b"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "revision": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/All63/Axioms.lean",
+    "file": "doubleai-axioms.lean",
+    "sha256": "fe92848042886b5a9a514d04b41d692e6ce888bad285a87e71f8cae5992b4f94",
+    "bytes": 2019004,
+    "transformation": "first18 and last18 source lines; full blob fetched via git/blobs; original contents API encoding=none was not file emptiness",
+    "excerptSha256": "31d6e0bac40e47c94b1808bf26b04cf6a7ce02fe57c1400e1baa44f5d4a3e8ed"
+  },
+  {
+    "repo": "google-deepmind/alphaevolve",
+    "revision": "c42694909d50f92cb01c2d50916f022b1c7e74d1",
+    "path": "README.md",
+    "file": "google-readme.md",
+    "sha256": "94f2103686d83cf922db22466e9b7fdacf117e676b3ec096aec6c304bdb7955b"
+  },
+  {
+    "repo": "google-deepmind/alphaevolve",
+    "revision": "c42694909d50f92cb01c2d50916f022b1c7e74d1",
+    "path": "maths/cap_sets/verification.ipynb",
+    "originalSha256": "b6e42bdc0d8424a1e245d0236648296e90328c704c26e4b1b28f1bcc3cb52935",
+    "file": "google-capsets.txt",
+    "transformation": "cell sources joined with two LF; not notebook execution"
+  }
+]
