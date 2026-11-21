@@ -1,0 +1,58 @@
+00400000-0041f000 r--p 00000000 fe:00 10908                              /usr/bin/python3.11
+0041f000-006d3000 r-xp 0001f000 fe:00 10908                              /usr/bin/python3.11
+006d3000-00946000 r--p 002d3000 fe:00 10908                              /usr/bin/python3.11
+00946000-00947000 r--p 00545000 fe:00 10908                              /usr/bin/python3.11
+00947000-00a85000 rw-p 00546000 fe:00 10908                              /usr/bin/python3.11
+00a85000-00aca000 rw-p 00000000 00:00 0 
+072ef000-07444000 rw-p 00000000 00:00 0                                  [heap]
+7fe8a8200000-7fe8a82c5000 r--p 00000000 fe:00 7440                       /usr/lib/x86_64-linux-gnu/libcrypto.so.3
+7fe8a82c5000-7fe8a8542000 r-xp 000c5000 fe:00 7440                       /usr/lib/x86_64-linux-gnu/libcrypto.so.3
+7fe8a8542000-7fe8a8620000 r--p 00342000 fe:00 7440                       /usr/lib/x86_64-linux-gnu/libcrypto.so.3
+7fe8a8620000-7fe8a8682000 r--p 0041f000 fe:00 7440                       /usr/lib/x86_64-linux-gnu/libcrypto.so.3
+7fe8a8682000-7fe8a8685000 rw-p 00481000 fe:00 7440                       /usr/lib/x86_64-linux-gnu/libcrypto.so.3
+7fe8a8685000-7fe8a8688000 rw-p 00000000 00:00 0 
+7fe8a8696000-7fe8a8698000 r--p 00000000 fe:00 11324                      /usr/lib/python3.11/lib-dynload/_json.cpython-311-x86_64-linux-gnu.so
+7fe8a8698000-7fe8a869f000 r-xp 00002000 fe:00 11324                      /usr/lib/python3.11/lib-dynload/_json.cpython-311-x86_64-linux-gnu.so
+7fe8a869f000-7fe8a86a1000 r--p 00009000 fe:00 11324                      /usr/lib/python3.11/lib-dynload/_json.cpython-311-x86_64-linux-gnu.so
+7fe8a86a1000-7fe8a86a2000 r--p 0000a000 fe:00 11324                      /usr/lib/python3.11/lib-dynload/_json.cpython-311-x86_64-linux-gnu.so
+7fe8a86a2000-7fe8a86a3000 rw-p 0000b000 fe:00 11324                      /usr/lib/python3.11/lib-dynload/_json.cpython-311-x86_64-linux-gnu.so
+7fe8a86a3000-7fe8a86a7000 r--p 00000000 fe:00 10817                      /usr/lib/python3.11/lib-dynload/_hashlib.cpython-311-x86_64-linux-gnu.so
+7fe8a86a7000-7fe8a86ad000 r-xp 00004000 fe:00 10817                      /usr/lib/python3.11/lib-dynload/_hashlib.cpython-311-x86_64-linux-gnu.so
+7fe8a86ad000-7fe8a86b1000 r--p 0000a000 fe:00 10817                      /usr/lib/python3.11/lib-dynload/_hashlib.cpython-311-x86_64-linux-gnu.so
+7fe8a86b1000-7fe8a86b2000 r--p 0000d000 fe:00 10817                      /usr/lib/python3.11/lib-dynload/_hashlib.cpython-311-x86_64-linux-gnu.so
+7fe8a86b2000-7fe8a86b4000 rw-p 0000e000 fe:00 10817                      /usr/lib/python3.11/lib-dynload/_hashlib.cpython-311-x86_64-linux-gnu.so
+7fe8a86b4000-7fe8a8a16000 rw-p 00000000 00:00 0 
+7fe8a8a16000-7fe8a8a1d000 r--s 00000000 fe:00 1687                       /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+7fe8a8a1d000-7fe8a8a74000 r--p 00000000 fe:00 1266                       /usr/lib/locale/C.utf8/LC_CTYPE
+7fe8a8a74000-7fe8a8a76000 rw-p 00000000 00:00 0 
+7fe8a8a76000-7fe8a8a9c000 r--p 00000000 fe:00 1350                       /usr/lib/x86_64-linux-gnu/libc.so.6
+7fe8a8a9c000-7fe8a8bf2000 r-xp 00026000 fe:00 1350                       /usr/lib/x86_64-linux-gnu/libc.so.6
+7fe8a8bf2000-7fe8a8c45000 r--p 0017c000 fe:00 1350                       /usr/lib/x86_64-linux-gnu/libc.so.6
+7fe8a8c45000-7fe8a8c49000 r--p 001cf000 fe:00 1350                       /usr/lib/x86_64-linux-gnu/libc.so.6
+7fe8a8c49000-7fe8a8c4b000 rw-p 001d3000 fe:00 1350                       /usr/lib/x86_64-linux-gnu/libc.so.6
+7fe8a8c4b000-7fe8a8c58000 rw-p 00000000 00:00 0 
+7fe8a8c58000-7fe8a8c5c000 r--p 00000000 fe:00 10891                      /usr/lib/x86_64-linux-gnu/libexpat.so.1.8.10
+7fe8a8c5c000-7fe8a8c78000 r-xp 00004000 fe:00 10891                      /usr/lib/x86_64-linux-gnu/libexpat.so.1.8.10
+7fe8a8c78000-7fe8a8c80000 r--p 00020000 fe:00 10891                      /usr/lib/x86_64-linux-gnu/libexpat.so.1.8.10
+7fe8a8c80000-7fe8a8c82000 r--p 00028000 fe:00 10891                      /usr/lib/x86_64-linux-gnu/libexpat.so.1.8.10
+7fe8a8c82000-7fe8a8c83000 rw-p 0002a000 fe:00 10891                      /usr/lib/x86_64-linux-gnu/libexpat.so.1.8.10
+7fe8a8c83000-7fe8a8c86000 r--p 00000000 fe:00 1410                       /usr/lib/x86_64-linux-gnu/libz.so.1.2.13
+7fe8a8c86000-7fe8a8c99000 r-xp 00003000 fe:00 1410                       /usr/lib/x86_64-linux-gnu/libz.so.1.2.13
+7fe8a8c99000-7fe8a8ca0000 r--p 00016000 fe:00 1410                       /usr/lib/x86_64-linux-gnu/libz.so.1.2.13
+7fe8a8ca0000-7fe8a8ca1000 r--p 0001c000 fe:00 1410                       /usr/lib/x86_64-linux-gnu/libz.so.1.2.13
+7fe8a8ca1000-7fe8a8ca2000 rw-p 0001d000 fe:00 1410                       /usr/lib/x86_64-linux-gnu/libz.so.1.2.13
+7fe8a8ca2000-7fe8a8cb2000 r--p 00000000 fe:00 1372                       /usr/lib/x86_64-linux-gnu/libm.so.6
+7fe8a8cb2000-7fe8a8d26000 r-xp 00010000 fe:00 1372                       /usr/lib/x86_64-linux-gnu/libm.so.6
+7fe8a8d26000-7fe8a8d80000 r--p 00084000 fe:00 1372                       /usr/lib/x86_64-linux-gnu/libm.so.6
+7fe8a8d80000-7fe8a8d81000 r--p 000dd000 fe:00 1372                       /usr/lib/x86_64-linux-gnu/libm.so.6
+7fe8a8d81000-7fe8a8d82000 rw-p 000de000 fe:00 1372                       /usr/lib/x86_64-linux-gnu/libm.so.6
+7fe8a8d82000-7fe8a8d88000 rw-p 00000000 00:00 0 
+7fe8a8d88000-7fe8a8d89000 r--p 00000000 fe:00 1340                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7fe8a8d89000-7fe8a8daf000 r-xp 00001000 fe:00 1340                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7fe8a8daf000-7fe8a8db9000 r--p 00027000 fe:00 1340                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7fe8a8db9000-7fe8a8dbb000 r--p 00031000 fe:00 1340                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7fe8a8dbb000-7fe8a8dbd000 rw-p 00033000 fe:00 1340                       /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+7ffddeeb4000-7ffddeed5000 rw-p 00000000 00:00 0                          [stack]
+7ffddef8a000-7ffddef8e000 r--p 00000000 00:00 0                          [vvar]
+7ffddef8e000-7ffddef90000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 --xp 00000000 00:00 0                  [vsyscall]

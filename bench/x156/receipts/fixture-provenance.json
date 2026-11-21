@@ -1,0 +1,13 @@
+{
+  "source": "/proc/self/maps from Python process, entire file, not synthesized",
+  "capturedUTC": "2026-11-21T04:30:41.423342+00:00",
+  "bytes": 6251,
+  "sha256": "18acd69860eb9dcf900095ae425d81b8ba656705f2846ae896750b2011d6c8c2",
+  "clockCaveat": "capturedUTC is the sandbox observed clock; it disagrees with authoritative session date2026-11-14 and is not used to admit future-dated literature.",
+  "heldout": {
+    "source": "cat /proc/self/maps; entire cat-process map, captured before either cat benchmark",
+    "bytes": 2127,
+    "sha256": "7ac72b9af5e718821e7237db724a27a8a124cd43a71ef9a72db95480608d4fd4",
+    "scope": "prospective second process, same machine and format; not unrelated-format breadth"
+  }
+}

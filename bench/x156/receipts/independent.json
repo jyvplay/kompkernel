@@ -1,0 +1,21 @@
+{
+  "checks": 32,
+  "fullMessages": [
+    {
+      "path": "bench/x156/fixtures/python-maps.txt",
+      "bytes": 6251,
+      "passed": true
+    },
+    {
+      "path": "bench/x156/fixtures/cat-maps.txt",
+      "bytes": 2127,
+      "passed": true
+    },
+    {
+      "path": "bench/x156/fixtures/python-maps.txt",
+      "bytes": 6251,
+      "passed": true
+    }
+  ],
+  "native": false
+}

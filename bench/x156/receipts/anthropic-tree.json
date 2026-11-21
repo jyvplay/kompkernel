@@ -1,0 +1,15 @@
+{
+  "sha": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+  "truncated": true,
+  "selected": [
+    {
+      "path": "P2M/Sol/S_FLT_fermatLastTheorem.lean",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9bf962373a85e232a90a003ba60ed8a9a1bdf7b5",
+      "size": 218006,
+      "url": "https://api.github.com/repos/anthropics/fermats-last-theorem/git/blobs/9bf962373a85e232a90a003ba60ed8a9a1bdf7b5"
+    }
+  ],
+  "note": "filtered repository listing; no whole-tree proof audit"
+}

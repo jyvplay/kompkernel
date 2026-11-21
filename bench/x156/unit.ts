@@ -1,0 +1,12 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {synecheiaPlan,synecheiaUndo,synecheiaCandidate,synecheiaFromFrontier,SYNECHEIA_KEY} from '../../src/lib/omega/synecheia';import {encode} from 'gpt-tokenizer/encoding/o200k_base';
+let checks=0;const eq=(a:unknown,b:unknown)=>{assert.deepEqual(a,b);checks++;};const bad=(s:string)=>{assert.throws(()=>synecheiaUndo(s));checks++;};
+let seed=156;function rnd(){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed;}
+const fixtures:string[]=[];for(let k=0;k<1000;k++){let start=BigInt(rnd())*4096n,source='';for(let i=0;i<1+rnd()%20;i++){if(rnd()%3===0)start+=BigInt(rnd()%100000)*4096n;const end=start+BigInt(1+rnd()%1000)*4096n;source+=start.toString(16).padStart(12,'0')+'-'+end.toString(16).padStart(12,'0')+' r-xp 00000000 00:00 0 /path with 😀 spaces\r\n';start=end;}if(k%2)source=source.slice(0,-1);const p=synecheiaPlan(source);assert.ok(p);checks++;eq(synecheiaUndo(p.folded),source);if(k<20)fixtures.push(source);}
+for(const s of ['ordinary prose\n','ABCDEF000000-ABCDEF001000 rest\n','000000000001-000000001001 rest\n','000000002000-000000001000 rest\n','0000000000000-0000000001000 rest\n','@literal\n','\ud800'])eq(synecheiaPlan(s),null);
+for(const s of ['@1 rest','@0+0 rest','@0+01 rest','@0+-1 rest','@0+1x rest','@1+1 rest','@fffffffffffff000+1 rest','@0+10000000000000000 rest','@0+1\n','@0+1\ud800 rest'])bad(s);
+const source='000000000000-000000001000 x\nliteral 000000200000-000000201000\n000000001000-000000002000 y\n',p=synecheiaPlan(source)!;eq(synecheiaUndo(p.folded),source);fixtures.push(source);
+eq(synecheiaCandidate(source,'\ud800',()=>p.folded),null);eq(synecheiaCandidate(source,'ok',()=>p.folded+'bad'),null);eq(synecheiaCandidate(source,p.folded,s=>s)?.tokens,encode(SYNECHEIA_KEY+p.folded).length);
+assert.throws(()=>synecheiaFromFrontier(source,'wrong',s=>s,s=>s,s=>s));checks++;
+const fallback=synecheiaFromFrontier(source,source,s=>s,()=>{throw Error('parent failed')},s=>s);eq(fallback.message,source);eq(fallback.parentCalls,1);
+const oversized='@0+1 '+'x'.repeat(49975);bad(oversized);eq(synecheiaPlan('x'.repeat(50001)),null);
+fs.writeFileSync('bench/x156/receipts/unit.json',JSON.stringify({checks,passed:true,seed:156,generatedFixturesAreNotWinningEvidence:true},null,2));fs.writeFileSync('bench/x156/receipts/unit-fixtures.json',JSON.stringify(fixtures.map(source=>({source,folded:synecheiaPlan(source)!.folded}))));console.log({checks});

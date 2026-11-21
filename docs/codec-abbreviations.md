@@ -10678,3 +10678,67 @@ and a prose regression, failing the predeclared >=10%/nonregression threshold.
 All12 wires match fresh canonical results. No production speed patch; no merge
 under the unmet native/breadth/speed conditions. Full A–J ledger and22-shape modal
 detector: `bench/x155/README.md`.
+
+## X156 — SYNECHEIA coupled page-interval endpoint recurrence (optional)
+
+**SYNECHEIA** (continuity): retain the first/gapped absolute start of a page-aligned
+hexadecimal address interval and encode its length as a decimal4096-byte page
+count. An adjacent record consumes the previous expanded END as its START.
+This couples within-row endpoint construction and cross-row state, rather than
+independently delta-coding two numeric columns. It changes the representation
+seen by the existing parent frontier. Other bytes, including spacing and paths,
+are untouched. All inverse instructions live in the complete message.
+
+`@HEX+N` supplies a start; `@N` uses the previous @ record's end. Render both
+endpoints lowercase hex, padded to at least12 digits. Bounds: UTF8-stable source,
+folded and output <=50000 UTF16 units; canonical12..16-digit source endpoints,
+page-aligned and increasing within each interval, end<2^64. Exact BigInt avoids
+precision loss. Literal lines do not change recurrence state; reserved @ line
+starts refuse. Gaps and out-of-order intervals use explicit resets, not sorting.
+
+Greedy: **no** heuristic search inside this transform; one deterministic pass and
+an exact two-candidate final comparison. O(n) CPU/work and space under fixed64-bit
+arithmetic; no transform clock cutoff. The optional full selector adds one parent
+encode where eligible, so token fallback is NOT a runtime Pareto certificate.
+`synecheia-frontier.ts` includes STOIBAS and its full incumbent chain. Neither
+module is enabled in default TAGSTACK.
+
+Classical ancestry, not a new compression theorem: Pekhimenko et al.,2012,
+*Base-Delta-Immediate Compression*, PACT / SAFARI2012-001,
+https://research.ece.cmu.edu/safari/tr/tr-2012-001.pdf (search excerpts read; direct
+PDF fetch failed). Low-dynamic-range cache-line base/delta coding is not our
+BPE/native-chat guarantee. Repository novelty is bounded to inspected mechanisms;
+DIASTEMA's decimal mask deltas and METRON's fitted progressions do not implement
+this page-END recurrence. No exhaustive nonequivalence claim across393 files.
+
+**Measured complete messages:** actual Python process map663→**549**, saving114
+(17.19%); prospective cat-process map302→**299**, saving3 (0.99%). Both include
+parent and instruction and pass reference prices/UTF8/token-ID roundtrips plus
+independent Python source-byte decoding. These are two captures from the same
+machine/format, not broad prose gains. Fresh full API confirms549/base663 with one
+additional parent call,324205mswall/212180msCPU under concurrency—not speed evidence.
+2026 TS unit checks,32 independent checks including three full messages, and a
+literal-range state attack pass. Typecheck/build pass; first concurrent build was
+killed and is preserved as a failed run, then retried successfully in isolation.
+
+**Fresh canonical frontier:** all29 wires identical to X155, total11962. Bounded
+repository reader supports21; eight remain unsupported, NOT passing native trials.
+All29 reference prices, token-ID roundtrips and transport checks pass. Category
+leaders remain prose3429(word), ops5580(glyph), code2636(word), other317(no tape).
+Generalized per-category/per-source leaders: `bench/x156/receipts/local-leaders.json`.
+STOIBAS's earlier external-manifest wins are separate retained receipts, not newly
+executed experiments this turn.
+
+**Native/basic-chat: NOT_RUN.** Protocol and exact549-token packet are in
+`bench/x156/native.md` and receipts. Byte-perfect software inversion does not
+verify native LLM arithmetic. The separate arity-specialized scorer speed trial
+is experimental/bundler-only; its final result is in speed-summary.json. Nothing
+from that experiment is deployed automatically. Full Pareto claim remains
+unsupported. X156's final unconditional merge authorization changes integration
+permission, not the success predicate. A–J ledger, six distinct tracks,22 modal
+shortcut rejections and fresh scoped lab-source inspections: `bench/x156/`.
+
+X156 final speed result: arity-specialized scorer FAILS the12-call isolated ABBA
+gate: aggregate CPU1.022600 / wall1.027942, identical12 wires matched to the fresh
+frontier. Prose CPU0.907408, ops1.047525, JSON1.041708; no deployment. This is a
+negative whole-stack experiment, not a claimed significant acceleration.

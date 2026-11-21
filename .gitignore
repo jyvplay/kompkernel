@@ -134,3 +134,7 @@ bench/x154/receipts/*.cpuprofile
 # X155 generated bundles; retain authored A/B builder
 bench/x155/*.mjs
 !bench/x155/speed-build.mjs
+
+# X156 generated benchmark bundles
+bench/x156/*.mjs
+!bench/x156/speed-build.mjs

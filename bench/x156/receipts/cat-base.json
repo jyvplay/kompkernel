@@ -1,0 +1,9 @@
+{
+  "path": "bench/x156/fixtures/cat-maps.txt",
+  "arm": "base",
+  "message": "¶ k=v. expand repeatedly; print only.\n§о00в ј:ови0л-тfғи                       /usr/lib/x86_64-linuxлgnuәcү7т81теү5с feј1007                       /usr/bin/cat\nъоса000уваЙуаовојиИЙ                          [ц562іeяці1af5г600дүгыаич r--pкачуз feј135ғ/libә.so.6\nэилей r-xpураль7ffdaМа rw-pҗи rw-pЙ \nемfcҳземно feј134ғ/ld-linux-x86л64.so.2\nжет6dЇочуабa¶я3аля50Їъя5алябай020ъябряdк070ъяdаляік090ъяірятМуибасці25bfdалці25c1eМИheap]\nеdccалеdf100җdf1алеe170Їозеe17алжай26азжремаич и017әаҳаэм4ач 001cfаҳ4рем6М 001d3аҳгэfd300җfd7алеfd900җfd900илетdaканеfdбалдый010нда0-дбач а27индбалдәк31индәрдіМу330нь72d9аль72faМИstack]\nь733cаль734ычИvvar]\nь734ыль7342000 rлxpИvdso]\nffffffffffгалffffffffff601000 --xpЙ                  [vsyscall]\n",
+  "tokens": 302,
+  "scope": "full stack including STOIBAS",
+  "ms": 252090.531881,
+  "cpuMs": 40290.163
+}
