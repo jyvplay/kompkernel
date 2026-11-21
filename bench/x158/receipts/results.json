@@ -1,0 +1,117 @@
+{
+  "codec": "BEMATISMOS",
+  "productionWired": false,
+  "candidates": [
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "width": 8,
+      "phase": 6,
+      "incumbent": 980,
+      "candidate": 1027,
+      "saving": -47,
+      "softwareReadable": true,
+      "selected": false,
+      "guardedTokens": 980
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "width": 4,
+      "phase": 0,
+      "incumbent": 949,
+      "candidate": 997,
+      "saving": -48,
+      "softwareReadable": true,
+      "selected": false,
+      "guardedTokens": 949
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "width": 4,
+      "phase": 0,
+      "incumbent": 381,
+      "candidate": 420,
+      "saving": -39,
+      "softwareReadable": true,
+      "selected": false,
+      "guardedTokens": 381
+    }
+  ],
+  "timeout": {
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "width": 4,
+    "phase": 0,
+    "status": "TIMEOUT",
+    "exitCode": 124,
+    "wallLimitSeconds": 1800,
+    "heapLimitMiB": 1200,
+    "otherWorkersOverlapped": true,
+    "tokenResult": null,
+    "conclusion": "not a win or a byte-correct complete-message result; raw screen is not a substitute"
+  },
+  "native": "NOT_RUN",
+  "advantageousNewCodecEstablished": false,
+  "fullParetoCertified": false,
+  "canonical": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "unit": {
+    "checks": 15387,
+    "passed": true,
+    "seed": 158,
+    "generatedCasesNotPerformanceEvidence": true
+  },
+  "independent": {
+    "checks": 714,
+    "fullMessages": [
+      {
+        "path": "bench/holdout-x41/ps-aux-real.txt",
+        "tokens": 1027,
+        "passed": true
+      },
+      {
+        "path": "bench/holdout/code-ts.txt",
+        "tokens": 997,
+        "passed": true
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "tokens": 420,
+        "passed": true
+      }
+    ],
+    "verifier": "expand (GNU coreutils) 9.1",
+    "native": false
+  },
+  "speed": {
+    "lanes": [
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "cpuRatio": 0.9682006331381126,
+        "wallRatio": 0.9560307212140247,
+        "identicalWires": 4
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "cpuRatio": 0.9816891224560944,
+        "wallRatio": 0.9870887911131155,
+        "identicalWires": 4
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "cpuRatio": 1.0240732992453558,
+        "wallRatio": 1.0205779563029358,
+        "identicalWires": 4
+      }
+    ],
+    "aggregateCpuRatio": 0.9999556763486099,
+    "aggregateWallRatio": 0.9986189647332294,
+    "gatePassed": false,
+    "scope": "12 cold-process whole-encoder calls, 3 fixed lanes, ABBA; not a universal speed theorem"
+  }
+}

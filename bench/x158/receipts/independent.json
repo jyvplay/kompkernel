@@ -1,0 +1,22 @@
+{
+  "checks": 714,
+  "fullMessages": [
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 1027,
+      "passed": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 997,
+      "passed": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 420,
+      "passed": true
+    }
+  ],
+  "verifier": "expand (GNU coreutils) 9.1",
+  "native": false
+}

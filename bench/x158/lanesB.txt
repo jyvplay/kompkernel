@@ -1,0 +1,16 @@
+bench/holdout-tbl/kubectl-get-pods.txt
+bench/holdout/code-ts.txt
+bench/holdout-x41/apt-real.txt
+bench/holdout-x41/node-help.txt
+bench/holdout-x42/findmnt.txt
+bench/holdout-x40/cue-sheet.md
+bench/holdout-x42/ps-ef.txt
+bench/holdout-x41/df-real.txt
+bench/holdout-x41/ps-real.txt
+bench/holdout-x40/prices.csv
+bench/holdout-tbl/psql-output.txt
+bench/holdout-tbl/markdown-table.md
+bench/holdout-work/kb-article.txt
+bench/holdout-work/unified-diff.patch
+bench/holdout-x42b/free-m.txt
+bench/holdout-x42b/vmstat.txt

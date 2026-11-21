@@ -1,0 +1,20 @@
+[
+  {
+    "file": "FLT-no-package.lean",
+    "upstreamPath": "Theorems/Thm_FreyPackage_no_frey_package.lean",
+    "revision": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+    "sha256": "9a08c324beccfe2235985249ad6d243fce1164b9251c1d01faa0835e39c72258"
+  },
+  {
+    "file": "FLT-no-package-solution.lean",
+    "upstreamPath": "P2M/Sol/S_FreyPackage_no_frey_package.lean",
+    "revision": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+    "sha256": "9c56cd147e9d68b409622e067ea4d6dcf30383e016f89fef4913f55a564e5c12"
+  },
+  {
+    "file": "SAT-NativeLeafRun.lean",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "sha256": "9a3dd364a71708612d836287897b96b2af53fe60f36032de9a6238cf5ca659e4",
+    "pinnedRetrievalCompared": true
+  }
+]

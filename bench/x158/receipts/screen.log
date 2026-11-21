@@ -1,0 +1,200 @@
+[
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    incumbent: 1310,
+    width: 8,
+    phase: 4,
+    tabs: 231,
+    raw: 5194,
+    foldedRaw: 5033,
+    rawComplete: 5072,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    incumbent: 1310,
+    width: 16,
+    phase: 12,
+    tabs: 231,
+    raw: 5194,
+    foldedRaw: 5033,
+    rawComplete: 5072,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    incumbent: 980,
+    width: 8,
+    phase: 6,
+    tabs: 346,
+    raw: 3054,
+    foldedRaw: 2900,
+    rawComplete: 2939,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    incumbent: 1310,
+    width: 4,
+    phase: 0,
+    tabs: 231,
+    raw: 5194,
+    foldedRaw: 5047,
+    rawComplete: 5080,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    incumbent: 980,
+    width: 4,
+    phase: 2,
+    tabs: 465,
+    raw: 3054,
+    foldedRaw: 2929,
+    rawComplete: 2968,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    incumbent: 1310,
+    width: 4,
+    phase: 1,
+    tabs: 327,
+    raw: 5194,
+    foldedRaw: 5073,
+    rawComplete: 5112,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    incumbent: 1310,
+    width: 8,
+    phase: 1,
+    tabs: 257,
+    raw: 5194,
+    foldedRaw: 5073,
+    rawComplete: 5112,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    incumbent: 1310,
+    width: 16,
+    phase: 9,
+    tabs: 257,
+    raw: 5194,
+    foldedRaw: 5073,
+    rawComplete: 5112,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    incumbent: 1310,
+    width: 8,
+    phase: 6,
+    tabs: 101,
+    raw: 5194,
+    foldedRaw: 5095,
+    rawComplete: 5134,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    incumbent: 980,
+    width: 16,
+    phase: 6,
+    tabs: 152,
+    raw: 3054,
+    foldedRaw: 2959,
+    rawComplete: 2998,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    incumbent: 980,
+    width: 16,
+    phase: 14,
+    tabs: 194,
+    raw: 3054,
+    foldedRaw: 2966,
+    rawComplete: 3005,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    incumbent: 980,
+    width: 4,
+    phase: 3,
+    tabs: 388,
+    raw: 3054,
+    foldedRaw: 2979,
+    rawComplete: 3018,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    incumbent: 1310,
+    width: 4,
+    phase: 2,
+    tabs: 237,
+    raw: 5194,
+    foldedRaw: 5130,
+    rawComplete: 5169,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    incumbent: 1310,
+    width: 16,
+    phase: 14,
+    tabs: 65,
+    raw: 5194,
+    foldedRaw: 5131,
+    rawComplete: 5170,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    incumbent: 980,
+    width: 8,
+    phase: 2,
+    tabs: 119,
+    raw: 3054,
+    foldedRaw: 2995,
+    rawComplete: 3034,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    incumbent: 980,
+    width: 8,
+    phase: 7,
+    tabs: 220,
+    raw: 3054,
+    foldedRaw: 2995,
+    rawComplete: 3034,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    incumbent: 980,
+    width: 16,
+    phase: 2,
+    tabs: 59,
+    raw: 3054,
+    foldedRaw: 2995,
+    rawComplete: 3034,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    incumbent: 980,
+    width: 16,
+    phase: 7,
+    tabs: 115,
+    raw: 3054,
+    foldedRaw: 2996,
+    rawComplete: 3035,
+    folded: undefined
+  }
+]

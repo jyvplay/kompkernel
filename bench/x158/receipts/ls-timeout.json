@@ -1,0 +1,1 @@
+{"path":"bench/holdout-x41/ls-l-real.txt","width":4,"phase":0,"status":"TIMEOUT","exitCode":124,"wallLimitSeconds":1800,"heapLimitMiB":1200,"otherWorkersOverlapped":true,"tokenResult":null,"conclusion":"not a win or a byte-correct complete-message result; raw screen is not a substitute"}

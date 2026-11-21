@@ -10808,3 +10808,46 @@ unchanged; optional portfolio selector latency is not certified.
 X157 final independent inverse total1007:995 generated unit cases plus8 real
 unparented screens and4 complete messages. Generated tests are not performance
 claims.
+
+## X158 — BEMATISMOS (periodic tab-stop steps; experimental)
+
+`src/lib/omega/bematismos.ts`: printable ASCII+LF only, <=50000 characters;
+source TAB/CR/Unicode refused. Widths4/8/16 and phases0..width−1 define periodic
+stops. Replace only spaces reaching a strictly later stop, preserving LF resets
+and all other bytes. One complete natural-language key instructs expansion
+AFTER parent decoding. The independent inverse uses GNU expand. This is
+classical tab-stop coding, not new mathematics; local distinction from
+PADTAB/PADTAB2, STELI/POLYSTELI, TABMIN, PLATOS, ARKESIS and STOIBAS is a periodic
+modular rule without per-column schema. The initial experiment accidentally
+used the existing STATHMOS name; the X17 decimal codec was restored unchanged.
+
+Greedy: deterministic longest eligible tab step within each space run;
+exhaustive over at most28 width/phase pairs, not globally token-optimal.
+Transform/inverse O(n), O(n) memory; full selector additionally pays up to28
+parent encodes and full-message token counts. No wall-clock cutoff is part of
+the wire semantics. CPU cost is not free. Optional verified selector returns
+the incumbent unless the complete candidate is strictly smaller. NOT wired
+into the default stack. Program inversion is not native-chat certification.
+
+Fresh first full trial: ps-aux-real phase6/width8 =1027 tokens versus incumbent
+980; byte-exact but a47-token LOSS. Raw proxy savings do not supersede that
+result. Correctness tests include all phases, stop boundaries, LF resets,
+unsupported domains, expansion cap and wrong/unstable parents. Research and
+formal claim boundaries: `bench/x158/README.md`, `research.md`, receipts.
+Related recent work: Virtual (EDBT2025, sparse column dependencies), Tokenization
+as Finite-State Transduction (Computational Linguistics2025); neither proves
+native decoding or o200k gains here. Native gate NOT_RUN; no full Pareto claim.
+
+X158 canonical refresh completed:29/29 identical wires,11962 tokens;21 bounded
+source reads,8 unsupported (not passes),29 complete-price/token-ID checks.
+Category totals reconfirmed: prose5856→3429 (word-body-token leader),
+ops17278→5580 (glyph), code4152→2636 (word), other729→317 (no tape).
+Local greatest absolute savings: apt-real1926 prose, ls-l-real3884 ops,
+json-pkg499 code, cue-sheet412 other. These inherited category labels and
+fixture/token-class leaders are not per-codec ablations or global optima.
+
+X158 final: code-ts949→997 and ps-real381→420 are also byte-exact losses;
+ls-l width4 hit1800s timeout. No full-stack win. Unit15387, independent714.
+Whole-stack coverage-fusion ABBA12: CPU ratio0.999956,wall0.998619; significance
+and per-lane nonregression gate FAILED (json-pkg regresses). All12 wires match
+fresh frontier; BPE reference checks6487/arm. No optimization deployed.
