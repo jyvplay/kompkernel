@@ -1,0 +1,6 @@
+{
+  "anchor": "    const L = lcp(a.text, text, limit);",
+  "patch": "    // X159: any differing sampled character before the earliest useful mark\n    // proves that this anchor cannot improve bestPos. Equality is not assumed.\n    let first=0;\n    while(first<a.n && (a.pos[first]<=bestPos || a.pos[first]<minPrefix))first++;\n    if(first===a.n || a.pos[first]>limit)continue;\n    const upto=a.pos[first];\n    let reject=false;\n    for(const q of [upto-1,upto>>>1,upto>>>2,(upto*3)>>>2]){\n      if(a.text.charCodeAt(q)!==text.charCodeAt(q)){reject=true;break;}\n    }\n    if(reject){gateStops++;continue;}\n    const L = lcp(a.text, text, limit);",
+  "production": false,
+  "proof": "If a sampled position q<p differs, LCP<=q<p, so no anchor mark at or after the first useful p can be shared. Equal samples still use full LCP; no probabilistic acceptance."
+}

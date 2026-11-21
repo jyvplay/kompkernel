@@ -1,0 +1,5 @@
+{
+  "checks": 20,
+  "passed": true,
+  "scope": "bounded support extension; all underlying source/parent comparisons rerun"
+}

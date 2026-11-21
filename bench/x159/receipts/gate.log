@@ -1,0 +1,35 @@
+[
+  {
+    name: 'http',
+    path: 'bench/x159/fixtures/http-toc.txt',
+    base: 1573,
+    candidate: 1303,
+    selected: 1303,
+    applied: true,
+    saving: 270,
+    sourceBytes: 10165,
+    fullSourceBytesEqual: true
+  },
+  {
+    name: 'tls13',
+    path: 'bench/x159/fixtures/tls13-toc.txt',
+    base: 990,
+    candidate: 1010,
+    selected: 990,
+    applied: false,
+    saving: 0,
+    sourceBytes: 9404,
+    fullSourceBytesEqual: true
+  },
+  {
+    name: 'tls12',
+    path: 'bench/x159/fixtures/tls12-toc.txt',
+    base: 876,
+    candidate: 884,
+    selected: 876,
+    applied: false,
+    saving: 0,
+    sourceBytes: 7709,
+    fullSourceBytesEqual: true
+  }
+]

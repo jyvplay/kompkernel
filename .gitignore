@@ -148,3 +148,8 @@ bench/x157/*.mjs
 # X158 generated bundles
 bench/x158/*.mjs
 !bench/x158/speed-build.mjs
+
+# X159 generated bundles
+bench/x159/*.mjs
+!bench/x159/speed-build.mjs
+.cache/x159/

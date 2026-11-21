@@ -1,0 +1,41 @@
+[
+  {
+    "repo": "aws/s2n-tls",
+    "path": "compliance/specs/www.rfc-editor.org/rfc/rfc8446.txt",
+    "revision": "ff9aaf0cabe2a2f6bddae6af6776ac702dc7c0e3",
+    "originalSha256": "47871bc8820a2c3b6ea89f061055577058862cf543686b82d10131239702b3bd",
+    "originalBytes": 337736,
+    "startByte": 3122,
+    "endByte": 12526,
+    "target": "bench/x159/fixtures/tls13-toc.txt",
+    "sha256": "1236a8fe26ae929e7d2d4540044f66147e49f059263f1039c31f8c179bbbb863",
+    "bytes": 9404,
+    "selection": "complete table of contents up to body section 1; retains page headers and all whitespace; HTTP mirror itself lacks front matter; not an official RFC-original byte claim"
+  },
+  {
+    "repo": "aws/s2n-tls",
+    "path": "compliance/specs/www.rfc-editor.org/rfc/rfc5246.txt",
+    "revision": "ff9aaf0cabe2a2f6bddae6af6776ac702dc7c0e3",
+    "originalSha256": "2ebe1b8e651696aeacc8ab3848bedb465505737901ea3b691acf40c392958feb",
+    "originalBytes": 222395,
+    "startByte": 1175,
+    "endByte": 8884,
+    "target": "bench/x159/fixtures/tls12-toc.txt",
+    "sha256": "ddf13bb25cc4cd7d49b4a7e40969f0f56d9f808c7fd76e841ad58b8c786ab2db",
+    "bytes": 7709,
+    "selection": "complete table of contents up to body section 1; retains page headers and all whitespace; HTTP mirror itself lacks front matter; not an official RFC-original byte claim"
+  },
+  {
+    "repo": "dorkitude/skimmer",
+    "path": "evals/corpus/raw/rfc9110.txt",
+    "revision": "11d8f52d425572bde9fbef1cc60df4d1af83f9cd",
+    "originalSha256": "723222ce17b6d1429e6fa5a90de0624acbe087260161a45df0face6a7c6a6e69",
+    "originalBytes": 28001,
+    "startByte": 0,
+    "endByte": 10165,
+    "target": "bench/x159/fixtures/http-toc.txt",
+    "sha256": "92b68b2aabb057fe9b6a8dcdde6e3df37eacc57725ecaeade09f99420c7e793e",
+    "bytes": 10165,
+    "selection": "complete table of contents up to body section 1; retains page headers and all whitespace; HTTP mirror itself lacks front matter; not an official RFC-original byte claim"
+  }
+]

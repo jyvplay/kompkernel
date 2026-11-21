@@ -1,0 +1,37 @@
+[
+  {
+    "repo": "openai/math",
+    "path": "lean/ComparatorChallenges/Superstring.lean",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "file": "superstring-comparator.lean",
+    "sha256": "8930f17794dfd3ca55e5c238019e5ccecf8c189d2df87df83773d00d1f4d1d3a"
+  },
+  {
+    "repo": "anthropics/fermats-last-theorem",
+    "path": "Definitions/Def_FLTPrelim_FreyPackage.lean",
+    "revision": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+    "file": "frey-definition.lean",
+    "sha256": "db451a2116b5dde045bc9ca63ca3106f1edbfe44c96929c8437436d139ce116f"
+  },
+  {
+    "repo": "google-deepmind/alphaevolve",
+    "path": "README.md",
+    "revision": "c42694909d50f92cb01c2d50916f022b1c7e74d1",
+    "file": "alphaevolve-readme.md",
+    "sha256": "94f2103686d83cf922db22466e9b7fdacf117e676b3ec096aec6c304bdb7955b"
+  },
+  {
+    "repo": "openai/math",
+    "path": "lean/OAI/Computability/Superstring/Main.lean",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "file": "superstring-main.lean",
+    "sha256": "ba9aa834c785f1472c9472f70941e2c4af032cb81e7e1fc59d60b434329b46f7"
+  },
+  {
+    "repo": "google-deepmind/alphaevolve",
+    "path": "matmul_tensor_decompositions/verification_rank.ipynb",
+    "revision": "c42694909d50f92cb01c2d50916f022b1c7e74d1",
+    "file": "matmul-notebook-inspection.txt",
+    "transformation": "concatenate cell source strings with two LF separators; not executed"
+  }
+]

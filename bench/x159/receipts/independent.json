@@ -1,0 +1,42 @@
+{
+  "checks": 121,
+  "fullMessages": [
+    {
+      "file": "bench/x159/receipts/http-base.json",
+      "path": "bench/x159/fixtures/http-toc.txt",
+      "tokens": 1573,
+      "sourceBytesEqual": true
+    },
+    {
+      "file": "bench/x159/receipts/http-candidate.json",
+      "path": "bench/x159/fixtures/http-toc.txt",
+      "tokens": 1303,
+      "sourceBytesEqual": true
+    },
+    {
+      "file": "bench/x159/receipts/tls13-base.json",
+      "path": "bench/x159/fixtures/tls13-toc.txt",
+      "tokens": 990,
+      "sourceBytesEqual": true
+    },
+    {
+      "file": "bench/x159/receipts/tls13-candidate.json",
+      "path": "bench/x159/fixtures/tls13-toc.txt",
+      "tokens": 1010,
+      "sourceBytesEqual": true
+    },
+    {
+      "file": "bench/x159/receipts/tls12-base.json",
+      "path": "bench/x159/fixtures/tls12-toc.txt",
+      "tokens": 876,
+      "sourceBytesEqual": true
+    },
+    {
+      "file": "bench/x159/receipts/tls12-candidate.json",
+      "path": "bench/x159/fixtures/tls12-toc.txt",
+      "tokens": 884,
+      "sourceBytesEqual": true
+    }
+  ],
+  "native": false
+}
