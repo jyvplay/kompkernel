@@ -1,0 +1,14 @@
+{
+  "source": "io-U0.diff",
+  "selectedFiles": [
+    "Modules/_io/bufferedio.c",
+    "Modules/_io/bytesio.c",
+    "Modules/_io/stringio.c"
+  ],
+  "method": "exact whole-file diff sections, in original order, no altered bytes",
+  "discoveryNotHeldout": true,
+  "reason": "bounded-memory component review of buffered/byte/string IO implementations; selected before full-parent pricing",
+  "bytes": 8010,
+  "hunks": 40,
+  "sha256": "da9b767935873deb69ef2c4bf0fb33985747bf645fe2e27a6a3fbdc6720191d4"
+}

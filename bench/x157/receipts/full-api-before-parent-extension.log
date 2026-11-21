@@ -1,0 +1,1 @@
+{"path":"bench/x157/fixtures/io-streams.diff","tokens":937,"baseTokens":964,"applied":true,"parentCalls":1,"reason":"token gain only; native untested","ms":129737.871173,"cpuMs":127528.247,"native":"NOT_RUN"}

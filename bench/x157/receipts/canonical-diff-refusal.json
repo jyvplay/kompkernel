@@ -1,0 +1,21 @@
+{
+  "path": "bench/holdout-work/unified-diff.patch",
+  "rows": [
+    {
+      "header": "@@ -140,6 +140,7 @@ export interface ChironScript {",
+      "actualOld": 6,
+      "actualNew": 7
+    },
+    {
+      "header": "@@ -152,6 +153,18 @@ export const CHIRON_SCRIPTS: ChironScript[] = [",
+      "actualOld": 5,
+      "actualNew": 15
+    },
+    {
+      "header": "@@ -848,10 +848,14 @@ function assignmentGain(rules: Rule[], pool: string[]): number {",
+      "actualOld": 6,
+      "actualNew": 9
+    }
+  ],
+  "note": "source unchanged; counts from actual following signed lines"
+}

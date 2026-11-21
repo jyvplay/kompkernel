@@ -1,0 +1,65 @@
+[
+  {
+    path: 'bench/x157/fixtures/io-streams.diff',
+    hunks: 40,
+    raw: 2455,
+    completeRaw: 2311,
+    folded: undefined
+  },
+  {
+    path: 'bench/x157/fixtures/io-U0.diff',
+    hunks: 75,
+    raw: 5086,
+    completeRaw: 4735,
+    folded: undefined
+  },
+  {
+    path: 'bench/x157/fixtures/cpython-incref.diff',
+    hunks: 3,
+    raw: 986,
+    completeRaw: 1055,
+    folded: undefined
+  },
+  {
+    path: 'bench/x157/fixtures/cpython-io.diff',
+    hunks: 61,
+    raw: 7804,
+    completeRaw: 7435,
+    folded: undefined
+  },
+  {
+    path: 'bench/x157/fixtures/cpython-U0.diff',
+    hunks: 17,
+    raw: 4173,
+    completeRaw: 4145,
+    folded: undefined
+  },
+  {
+    path: 'bench/x157/fixtures/cpython.diff',
+    hunks: 16,
+    raw: 4973,
+    completeRaw: 4938,
+    folded: undefined
+  },
+  {
+    path: 'bench/x157/fixtures/cpython-import.diff',
+    hunks: 3,
+    raw: 413,
+    completeRaw: 481,
+    folded: undefined
+  },
+  {
+    path: 'bench/x157/fixtures/typescript.diff',
+    hunks: 12,
+    raw: 13345,
+    completeRaw: 13340,
+    folded: undefined
+  },
+  {
+    path: 'bench/holdout-work/unified-diff.patch',
+    hunks: undefined,
+    raw: 578,
+    completeRaw: null,
+    folded: undefined
+  }
+]

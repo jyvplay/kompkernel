@@ -1,0 +1,20 @@
+[
+  {
+    "repo": "openai/math",
+    "commit": "4eaee87548250b2682affda7d05d947c05554bae",
+    "spdx": "Apache-2.0",
+    "file": "openai-LICENSE"
+  },
+  {
+    "repo": "anthropics/fermats-last-theorem",
+    "commit": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+    "spdx": "Apache-2.0",
+    "file": "anthropics-LICENSE"
+  },
+  {
+    "repo": "google-deepmind/alphaproof-nexus-results",
+    "commit": "0647711a71183c1ea492ad60860776617ce1ea88",
+    "spdx": "Apache-2.0",
+    "file": "google-deepmind-LICENSE"
+  }
+]

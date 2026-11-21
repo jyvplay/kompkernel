@@ -1,0 +1,1074 @@
+diff --git a/src/compiler/checker.ts b/src/compiler/checker.ts
+index 521de6d875fb7..0567712f11da3 100644
+--- a/src/compiler/checker.ts
++++ b/src/compiler/checker.ts
+@@ -24603,9 +24603,13 @@ export function createTypeChecker(host: TypeCheckerHost): TypeChecker {
+             if (relation === identityRelation) {
+                 return signaturesIdenticalTo(source, target, kind);
+             }
+-            if (target === anyFunctionType || source === anyFunctionType) {
++            // With respect to signatures, the anyFunctionType wildcard is a subtype of every other function type.
++            if (source === anyFunctionType) {
+                 return Ternary.True;
+             }
++            if (target === anyFunctionType) {
++                return Ternary.False;
++            }
+ 
+             const sourceIsJSConstructor = source.symbol && isJSConstructor(source.symbol.valueDeclaration);
+             const targetIsJSConstructor = target.symbol && isJSConstructor(target.symbol.valueDeclaration);
+@@ -33925,7 +33929,7 @@ export function createTypeChecker(host: TypeCheckerHost): TypeChecker {
+                 childrenPropSymbol.valueDeclaration.symbol = childrenPropSymbol;
+                 const childPropMap = createSymbolTable();
+                 childPropMap.set(jsxChildrenPropertyName, childrenPropSymbol);
+-                spread = getSpreadType(spread, createAnonymousType(attributesSymbol, childPropMap, emptyArray, emptyArray, emptyArray), attributesSymbol, objectFlags, /*readonly*/ false);
++                spread = getSpreadType(spread, createAnonymousType(attributesSymbol, childPropMap, emptyArray, emptyArray, emptyArray), attributesSymbol, objectFlags | getPropagatingFlagsOfTypes(childrenTypes), /*readonly*/ false);
+             }
+         }
+ 
+diff --git a/tests/baselines/reference/contextuallyTypedJsxChildren2.symbols b/tests/baselines/reference/contextuallyTypedJsxChildren2.symbols
+new file mode 100644
+index 0000000000000..a1afef7c59eb0
+--- /dev/null
++++ b/tests/baselines/reference/contextuallyTypedJsxChildren2.symbols
+@@ -0,0 +1,186 @@
++//// [tests/cases/compiler/contextuallyTypedJsxChildren2.tsx] ////
++
++=== contextuallyTypedJsxChildren2.tsx ===
++/// <reference path="react16.d.ts" />
++
++// https://github.com/microsoft/typescript-go/issues/2802
++
++import * as React from 'react';
++>React : Symbol(React, Decl(contextuallyTypedJsxChildren2.tsx, 4, 6))
++
++declare const TestComponentWithChildren: <T, TParam>(props: {
++>TestComponentWithChildren : Symbol(TestComponentWithChildren, Decl(contextuallyTypedJsxChildren2.tsx, 6, 13))
++>T : Symbol(T, Decl(contextuallyTypedJsxChildren2.tsx, 6, 42))
++>TParam : Symbol(TParam, Decl(contextuallyTypedJsxChildren2.tsx, 6, 44))
++>props : Symbol(props, Decl(contextuallyTypedJsxChildren2.tsx, 6, 53))
++
++  state: T;
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 6, 61))
++>T : Symbol(T, Decl(contextuallyTypedJsxChildren2.tsx, 6, 42))
++
++  selector?: (state: NoInfer<T>) => TParam;
++>selector : Symbol(selector, Decl(contextuallyTypedJsxChildren2.tsx, 7, 11))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 8, 14))
++>NoInfer : Symbol(NoInfer, Decl(lib.es5.d.ts, --, --))
++>T : Symbol(T, Decl(contextuallyTypedJsxChildren2.tsx, 6, 42))
++>TParam : Symbol(TParam, Decl(contextuallyTypedJsxChildren2.tsx, 6, 44))
++
++  children?: (state: NoInfer<TParam>) => React.ReactElement<any> | null;
++>children : Symbol(children, Decl(contextuallyTypedJsxChildren2.tsx, 8, 43))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 9, 14))
++>NoInfer : Symbol(NoInfer, Decl(lib.es5.d.ts, --, --))
++>TParam : Symbol(TParam, Decl(contextuallyTypedJsxChildren2.tsx, 6, 44))
++>React : Symbol(React, Decl(contextuallyTypedJsxChildren2.tsx, 4, 6))
++>ReactElement : Symbol(React.ReactElement, Decl(react16.d.ts, 135, 9))
++
++}) => React.ReactElement<any>;
++>React : Symbol(React, Decl(contextuallyTypedJsxChildren2.tsx, 4, 6))
++>ReactElement : Symbol(React.ReactElement, Decl(react16.d.ts, 135, 9))
++
++declare const TestComponentWithoutChildren: <T, TParam>(props: {
++>TestComponentWithoutChildren : Symbol(TestComponentWithoutChildren, Decl(contextuallyTypedJsxChildren2.tsx, 12, 13))
++>T : Symbol(T, Decl(contextuallyTypedJsxChildren2.tsx, 12, 45))
++>TParam : Symbol(TParam, Decl(contextuallyTypedJsxChildren2.tsx, 12, 47))
++>props : Symbol(props, Decl(contextuallyTypedJsxChildren2.tsx, 12, 56))
++
++  state: T;
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 12, 64))
++>T : Symbol(T, Decl(contextuallyTypedJsxChildren2.tsx, 12, 45))
++
++  selector?: (state: NoInfer<T>) => TParam;
++>selector : Symbol(selector, Decl(contextuallyTypedJsxChildren2.tsx, 13, 11))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 14, 14))
++>NoInfer : Symbol(NoInfer, Decl(lib.es5.d.ts, --, --))
++>T : Symbol(T, Decl(contextuallyTypedJsxChildren2.tsx, 12, 45))
++>TParam : Symbol(TParam, Decl(contextuallyTypedJsxChildren2.tsx, 12, 47))
++
++  notChildren?: (state: NoInfer<TParam>) => React.ReactElement<any> | null;
++>notChildren : Symbol(notChildren, Decl(contextuallyTypedJsxChildren2.tsx, 14, 43))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 15, 17))
++>NoInfer : Symbol(NoInfer, Decl(lib.es5.d.ts, --, --))
++>TParam : Symbol(TParam, Decl(contextuallyTypedJsxChildren2.tsx, 12, 47))
++>React : Symbol(React, Decl(contextuallyTypedJsxChildren2.tsx, 4, 6))
++>ReactElement : Symbol(React.ReactElement, Decl(react16.d.ts, 135, 9))
++
++}) => React.ReactElement<any>;
++>React : Symbol(React, Decl(contextuallyTypedJsxChildren2.tsx, 4, 6))
++>ReactElement : Symbol(React.ReactElement, Decl(react16.d.ts, 135, 9))
++
++const App = () => {
++>App : Symbol(App, Decl(contextuallyTypedJsxChildren2.tsx, 18, 5))
++
++  return (
++    <>
++      <TestComponentWithChildren state={{ foo: 123 }} selector={(state) => state.foo}>
++>TestComponentWithChildren : Symbol(TestComponentWithChildren, Decl(contextuallyTypedJsxChildren2.tsx, 6, 13))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 21, 32))
++>foo : Symbol(foo, Decl(contextuallyTypedJsxChildren2.tsx, 21, 41))
++>selector : Symbol(selector, Decl(contextuallyTypedJsxChildren2.tsx, 21, 53))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 21, 65))
++>state.foo : Symbol(foo, Decl(contextuallyTypedJsxChildren2.tsx, 21, 41))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 21, 65))
++>foo : Symbol(foo, Decl(contextuallyTypedJsxChildren2.tsx, 21, 41))
++
++        {(selected) => <div>{Math.max(selected, 0)}</div>}
++>selected : Symbol(selected, Decl(contextuallyTypedJsxChildren2.tsx, 22, 10))
++>div : Symbol(JSX.IntrinsicElements.div, Decl(react16.d.ts, 2548, 114))
++>Math.max : Symbol(Math.max, Decl(lib.es5.d.ts, --, --))
++>Math : Symbol(Math, Decl(lib.es5.d.ts, --, --), Decl(lib.es5.d.ts, --, --), Decl(lib.es2015.core.d.ts, --, --), Decl(lib.es2015.symbol.wellknown.d.ts, --, --))
++>max : Symbol(Math.max, Decl(lib.es5.d.ts, --, --))
++>selected : Symbol(selected, Decl(contextuallyTypedJsxChildren2.tsx, 22, 10))
++>div : Symbol(JSX.IntrinsicElements.div, Decl(react16.d.ts, 2548, 114))
++
++      </TestComponentWithChildren>
++>TestComponentWithChildren : Symbol(TestComponentWithChildren, Decl(contextuallyTypedJsxChildren2.tsx, 6, 13))
++
++      <TestComponentWithoutChildren
++>TestComponentWithoutChildren : Symbol(TestComponentWithoutChildren, Decl(contextuallyTypedJsxChildren2.tsx, 12, 13))
++
++        state={{ foo: 123 }}
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 25, 35))
++>foo : Symbol(foo, Decl(contextuallyTypedJsxChildren2.tsx, 26, 16))
++
++        selector={(state) => state.foo}
++>selector : Symbol(selector, Decl(contextuallyTypedJsxChildren2.tsx, 26, 28))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 27, 19))
++>state.foo : Symbol(foo, Decl(contextuallyTypedJsxChildren2.tsx, 26, 16))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 27, 19))
++>foo : Symbol(foo, Decl(contextuallyTypedJsxChildren2.tsx, 26, 16))
++
++        notChildren={(selected) => <div>{Math.max(selected, 0)}</div>}
++>notChildren : Symbol(notChildren, Decl(contextuallyTypedJsxChildren2.tsx, 27, 39))
++>selected : Symbol(selected, Decl(contextuallyTypedJsxChildren2.tsx, 28, 22))
++>div : Symbol(JSX.IntrinsicElements.div, Decl(react16.d.ts, 2548, 114))
++>Math.max : Symbol(Math.max, Decl(lib.es5.d.ts, --, --))
++>Math : Symbol(Math, Decl(lib.es5.d.ts, --, --), Decl(lib.es5.d.ts, --, --), Decl(lib.es2015.core.d.ts, --, --), Decl(lib.es2015.symbol.wellknown.d.ts, --, --))
++>max : Symbol(Math.max, Decl(lib.es5.d.ts, --, --))
++>selected : Symbol(selected, Decl(contextuallyTypedJsxChildren2.tsx, 28, 22))
++>div : Symbol(JSX.IntrinsicElements.div, Decl(react16.d.ts, 2548, 114))
++
++      />
++    </>
++  );
++};
++
++// https://github.com/microsoft/typescript-go/issues/2797
++
++interface State {
++>State : Symbol(State, Decl(contextuallyTypedJsxChildren2.tsx, 32, 2))
++
++  value: boolean
++>value : Symbol(State.value, Decl(contextuallyTypedJsxChildren2.tsx, 36, 17))
++}
++
++declare const Subscribe: <TSelected = State>(props: {
++>Subscribe : Symbol(Subscribe, Decl(contextuallyTypedJsxChildren2.tsx, 40, 13))
++>TSelected : Symbol(TSelected, Decl(contextuallyTypedJsxChildren2.tsx, 40, 26))
++>State : Symbol(State, Decl(contextuallyTypedJsxChildren2.tsx, 32, 2))
++>props : Symbol(props, Decl(contextuallyTypedJsxChildren2.tsx, 40, 45))
++
++  selector?: (state: State) => TSelected
++>selector : Symbol(selector, Decl(contextuallyTypedJsxChildren2.tsx, 40, 53))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 41, 14))
++>State : Symbol(State, Decl(contextuallyTypedJsxChildren2.tsx, 32, 2))
++>TSelected : Symbol(TSelected, Decl(contextuallyTypedJsxChildren2.tsx, 40, 26))
++
++  children: (state: TSelected) => void
++>children : Symbol(children, Decl(contextuallyTypedJsxChildren2.tsx, 41, 40))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 42, 13))
++>TSelected : Symbol(TSelected, Decl(contextuallyTypedJsxChildren2.tsx, 40, 26))
++
++}) => React.ReactElement<any>
++>React : Symbol(React, Decl(contextuallyTypedJsxChildren2.tsx, 4, 6))
++>ReactElement : Symbol(React.ReactElement, Decl(react16.d.ts, 135, 9))
++
++const _result = (
++>_result : Symbol(_result, Decl(contextuallyTypedJsxChildren2.tsx, 45, 5))
++
++  <Subscribe
++>Subscribe : Symbol(Subscribe, Decl(contextuallyTypedJsxChildren2.tsx, 40, 13))
++
++    selector={(state) => {
++>selector : Symbol(selector, Decl(contextuallyTypedJsxChildren2.tsx, 46, 12))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 47, 15))
++
++      return [state.value]
++>state.value : Symbol(State.value, Decl(contextuallyTypedJsxChildren2.tsx, 36, 17))
++>state : Symbol(state, Decl(contextuallyTypedJsxChildren2.tsx, 47, 15))
++>value : Symbol(State.value, Decl(contextuallyTypedJsxChildren2.tsx, 36, 17))
++
++    }}
++  >
++    {([value = false]) => {
++>value : Symbol(value, Decl(contextuallyTypedJsxChildren2.tsx, 51, 7))
++
++      console.log(value)
++>console.log : Symbol(Console.log, Decl(lib.dom.d.ts, --, --))
++>console : Symbol(console, Decl(lib.dom.d.ts, --, --))
++>log : Symbol(Console.log, Decl(lib.dom.d.ts, --, --))
++>value : Symbol(value, Decl(contextuallyTypedJsxChildren2.tsx, 51, 7))
++
++    }}
++  </Subscribe>
++>Subscribe : Symbol(Subscribe, Decl(contextuallyTypedJsxChildren2.tsx, 40, 13))
++
++)
++
+diff --git a/tests/baselines/reference/contextuallyTypedJsxChildren2.types b/tests/baselines/reference/contextuallyTypedJsxChildren2.types
+new file mode 100644
+index 0000000000000..096577cec0dab
+--- /dev/null
++++ b/tests/baselines/reference/contextuallyTypedJsxChildren2.types
+@@ -0,0 +1,291 @@
++//// [tests/cases/compiler/contextuallyTypedJsxChildren2.tsx] ////
++
++=== Performance Stats ===
++Assignability cache: 2,500
++Type Count: 10,000
++Instantiation count: 100,000
++Symbol count: 50,000
++
++=== contextuallyTypedJsxChildren2.tsx ===
++/// <reference path="react16.d.ts" />
++
++// https://github.com/microsoft/typescript-go/issues/2802
++
++import * as React from 'react';
++>React : typeof React
++>      : ^^^^^^^^^^^^
++
++declare const TestComponentWithChildren: <T, TParam>(props: {
++>TestComponentWithChildren : <T, TParam>(props: { state: T; selector?: (state: NoInfer<T>) => TParam; children?: (state: NoInfer<TParam>) => React.ReactElement<any> | null; }) => React.ReactElement<any>
++>                          : ^ ^^      ^^     ^^                                                                                                                              ^^^^^                       
++>props : { state: T; selector?: (state: NoInfer<T>) => TParam; children?: (state: NoInfer<TParam>) => React.ReactElement<any> | null; }
++>      : ^^^^^^^^^ ^^^^^^^^^^^^^                             ^^^^^^^^^^^^^                                                          ^^^
++
++  state: T;
++>state : T
++>      : ^
++
++  selector?: (state: NoInfer<T>) => TParam;
++>selector : ((state: NoInfer<T>) => TParam) | undefined
++>         : ^^     ^^          ^^^^^      ^^^^^^^^^^^^^
++>state : NoInfer<T>
++>      : ^^^^^^^^^^
++
++  children?: (state: NoInfer<TParam>) => React.ReactElement<any> | null;
++>children : ((state: NoInfer<TParam>) => React.ReactElement<any> | null) | undefined
++>         : ^^     ^^               ^^^^^                              ^^^^^^^^^^^^^
++>state : NoInfer<TParam>
++>      : ^^^^^^^^^^^^^^^
++>React : any
++>      : ^^^
++
++}) => React.ReactElement<any>;
++>React : any
++>      : ^^^
++
++declare const TestComponentWithoutChildren: <T, TParam>(props: {
++>TestComponentWithoutChildren : <T, TParam>(props: { state: T; selector?: (state: NoInfer<T>) => TParam; notChildren?: (state: NoInfer<TParam>) => React.ReactElement<any> | null; }) => React.ReactElement<any>
++>                             : ^ ^^      ^^     ^^                                                                                                                                 ^^^^^                       
++>props : { state: T; selector?: (state: NoInfer<T>) => TParam; notChildren?: (state: NoInfer<TParam>) => React.ReactElement<any> | null; }
++>      : ^^^^^^^^^ ^^^^^^^^^^^^^                             ^^^^^^^^^^^^^^^^                                                          ^^^
++
++  state: T;
++>state : T
++>      : ^
++
++  selector?: (state: NoInfer<T>) => TParam;
++>selector : ((state: NoInfer<T>) => TParam) | undefined
++>         : ^^     ^^          ^^^^^      ^^^^^^^^^^^^^
++>state : NoInfer<T>
++>      : ^^^^^^^^^^
++
++  notChildren?: (state: NoInfer<TParam>) => React.ReactElement<any> | null;
++>notChildren : ((state: NoInfer<TParam>) => React.ReactElement<any> | null) | undefined
++>            : ^^     ^^               ^^^^^                              ^^^^^^^^^^^^^
++>state : NoInfer<TParam>
++>      : ^^^^^^^^^^^^^^^
++>React : any
++>      : ^^^
++
++}) => React.ReactElement<any>;
++>React : any
++>      : ^^^
++
++const App = () => {
++>App : () => JSX.Element
++>    : ^^^^^^^^^^^^^^^^^
++>() => {  return (    <>      <TestComponentWithChildren state={{ foo: 123 }} selector={(state) => state.foo}>        {(selected) => <div>{Math.max(selected, 0)}</div>}      </TestComponentWithChildren>      <TestComponentWithoutChildren        state={{ foo: 123 }}        selector={(state) => state.foo}        notChildren={(selected) => <div>{Math.max(selected, 0)}</div>}      />    </>  );} : () => JSX.Element
++>                                                                                                                                                                                                                                                                                                                                                                                                          : ^^^^^^^^^^^^^^^^^
++
++  return (
++>(    <>      <TestComponentWithChildren state={{ foo: 123 }} selector={(state) => state.foo}>        {(selected) => <div>{Math.max(selected, 0)}</div>}      </TestComponentWithChildren>      <TestComponentWithoutChildren        state={{ foo: 123 }}        selector={(state) => state.foo}        notChildren={(selected) => <div>{Math.max(selected, 0)}</div>}      />    </>  ) : JSX.Element
++>                                                                                                                                                                                                                                                                                                                                                                                        : ^^^^^^^^^^^
++
++    <>
++><>      <TestComponentWithChildren state={{ foo: 123 }} selector={(state) => state.foo}>        {(selected) => <div>{Math.max(selected, 0)}</div>}      </TestComponentWithChildren>      <TestComponentWithoutChildren        state={{ foo: 123 }}        selector={(state) => state.foo}        notChildren={(selected) => <div>{Math.max(selected, 0)}</div>}      />    </> : JSX.Element
++>                                                                                                                                                                                                                                                                                                                                                                                : ^^^^^^^^^^^
++
++      <TestComponentWithChildren state={{ foo: 123 }} selector={(state) => state.foo}>
++><TestComponentWithChildren state={{ foo: 123 }} selector={(state) => state.foo}>        {(selected) => <div>{Math.max(selected, 0)}</div>}      </TestComponentWithChildren> : JSX.Element
++>                                                                                                                                                                             : ^^^^^^^^^^^
++>TestComponentWithChildren : <T, TParam>(props: { state: T; selector?: (state: NoInfer<T>) => TParam; children?: (state: NoInfer<TParam>) => React.ReactElement<any> | null; }) => React.ReactElement<any>
++>                          : ^ ^^      ^^     ^^                                                                                                                              ^^^^^                       
++>state : { foo: number; }
++>      : ^^^^^^^^^^^^^^^^
++>{ foo: 123 } : { foo: number; }
++>             : ^^^^^^^^^^^^^^^^
++>foo : number
++>    : ^^^^^^
++>123 : 123
++>    : ^^^
++>selector : (state: NoInfer<{ foo: number; }>) => number
++>         : ^     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++>(state) => state.foo : (state: NoInfer<{ foo: number; }>) => number
++>                     : ^     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++>state : NoInfer<{ foo: number; }>
++>      : ^^^^^^^^^^^^^^^^^^^^^^^^^
++>state.foo : number
++>          : ^^^^^^
++>state : { foo: number; }
++>      : ^^^^^^^^^^^^^^^^
++>foo : number
++>    : ^^^^^^
++
++        {(selected) => <div>{Math.max(selected, 0)}</div>}
++>(selected) => <div>{Math.max(selected, 0)}</div> : (selected: number) => JSX.Element
++>                                                 : ^        ^^^^^^^^^^^^^^^^^^^^^^^^
++>selected : number
++>         : ^^^^^^
++><div>{Math.max(selected, 0)}</div> : JSX.Element
++>                                   : ^^^^^^^^^^^
++>div : any
++>    : ^^^
++>Math.max(selected, 0) : number
++>                      : ^^^^^^
++>Math.max : (...values: number[]) => number
++>         : ^^^^      ^^        ^^^^^      
++>Math : Math
++>     : ^^^^
++>max : (...values: number[]) => number
++>    : ^^^^      ^^        ^^^^^      
++>selected : number
++>         : ^^^^^^
++>0 : 0
++>  : ^
++>div : any
++>    : ^^^
++
++      </TestComponentWithChildren>
++>TestComponentWithChildren : <T, TParam>(props: { state: T; selector?: (state: NoInfer<T>) => TParam; children?: (state: NoInfer<TParam>) => React.ReactElement<any> | null; }) => React.ReactElement<any>
++>                          : ^ ^^      ^^     ^^                                                                                                                              ^^^^^                       
++
++      <TestComponentWithoutChildren
++><TestComponentWithoutChildren        state={{ foo: 123 }}        selector={(state) => state.foo}        notChildren={(selected) => <div>{Math.max(selected, 0)}</div>}      /> : JSX.Element
++>                                                                                                                                                                               : ^^^^^^^^^^^
++>TestComponentWithoutChildren : <T, TParam>(props: { state: T; selector?: (state: NoInfer<T>) => TParam; notChildren?: (state: NoInfer<TParam>) => React.ReactElement<any> | null; }) => React.ReactElement<any>
++>                             : ^ ^^      ^^     ^^                                                                                                                                 ^^^^^                       
++
++        state={{ foo: 123 }}
++>state : { foo: number; }
++>      : ^^^^^^^^^^^^^^^^
++>{ foo: 123 } : { foo: number; }
++>             : ^^^^^^^^^^^^^^^^
++>foo : number
++>    : ^^^^^^
++>123 : 123
++>    : ^^^
++
++        selector={(state) => state.foo}
++>selector : (state: NoInfer<{ foo: number; }>) => number
++>         : ^     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++>(state) => state.foo : (state: NoInfer<{ foo: number; }>) => number
++>                     : ^     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++>state : NoInfer<{ foo: number; }>
++>      : ^^^^^^^^^^^^^^^^^^^^^^^^^
++>state.foo : number
++>          : ^^^^^^
++>state : { foo: number; }
++>      : ^^^^^^^^^^^^^^^^
++>foo : number
++>    : ^^^^^^
++
++        notChildren={(selected) => <div>{Math.max(selected, 0)}</div>}
++>notChildren : (selected: number) => JSX.Element
++>            : ^        ^^^^^^^^^^^^^^^^^^^^^^^^
++>(selected) => <div>{Math.max(selected, 0)}</div> : (selected: number) => JSX.Element
++>                                                 : ^        ^^^^^^^^^^^^^^^^^^^^^^^^
++>selected : number
++>         : ^^^^^^
++><div>{Math.max(selected, 0)}</div> : JSX.Element
++>                                   : ^^^^^^^^^^^
++>div : any
++>    : ^^^
++>Math.max(selected, 0) : number
++>                      : ^^^^^^
++>Math.max : (...values: number[]) => number
++>         : ^^^^      ^^        ^^^^^      
++>Math : Math
++>     : ^^^^
++>max : (...values: number[]) => number
++>    : ^^^^      ^^        ^^^^^      
++>selected : number
++>         : ^^^^^^
++>0 : 0
++>  : ^
++>div : any
++>    : ^^^
++
++      />
++    </>
++  );
++};
++
++// https://github.com/microsoft/typescript-go/issues/2797
++
++interface State {
++  value: boolean
++>value : boolean
++>      : ^^^^^^^
++}
++
++declare const Subscribe: <TSelected = State>(props: {
++>Subscribe : <TSelected = State>(props: { selector?: (state: State) => TSelected; children: (state: TSelected) => void; }) => React.ReactElement<any>
++>          : ^         ^^^^^^^^^^     ^^                                                                                 ^^^^^                       
++>props : { selector?: (state: State) => TSelected; children: (state: TSelected) => void; }
++>      : ^^^^^^^^^^^^^                           ^^^^^^^^^^^^                          ^^^
++
++  selector?: (state: State) => TSelected
++>selector : ((state: State) => TSelected) | undefined
++>         : ^^     ^^     ^^^^^         ^^^^^^^^^^^^^
++>state : State
++>      : ^^^^^
++
++  children: (state: TSelected) => void
++>children : (state: TSelected) => void
++>         : ^     ^^         ^^^^^    
++>state : TSelected
++>      : ^^^^^^^^^
++
++}) => React.ReactElement<any>
++>React : any
++>      : ^^^
++
++const _result = (
++>_result : JSX.Element
++>        : ^^^^^^^^^^^
++>(  <Subscribe    selector={(state) => {      return [state.value]    }}  >    {([value = false]) => {      console.log(value)    }}  </Subscribe>) : JSX.Element
++>                                                                                                                                                   : ^^^^^^^^^^^
++
++  <Subscribe
++><Subscribe    selector={(state) => {      return [state.value]    }}  >    {([value = false]) => {      console.log(value)    }}  </Subscribe> : JSX.Element
++>                                                                                                                                               : ^^^^^^^^^^^
++>Subscribe : <TSelected = State>(props: { selector?: (state: State) => TSelected; children: (state: TSelected) => void; }) => React.ReactElement<any>
++>          : ^         ^^^^^^^^^^     ^^                                                                                 ^^^^^                       
++
++    selector={(state) => {
++>selector : (state: State) => boolean[]
++>         : ^     ^^^^^^^^^^^^^^^^^^^^^
++>(state) => {      return [state.value]    } : (state: State) => boolean[]
++>                                            : ^     ^^^^^^^^^^^^^^^^^^^^^
++>state : State
++>      : ^^^^^
++
++      return [state.value]
++>[state.value] : boolean[]
++>              : ^^^^^^^^^
++>state.value : boolean
++>            : ^^^^^^^
++>state : State
++>      : ^^^^^
++>value : boolean
++>      : ^^^^^^^
++
++    }}
++  >
++    {([value = false]) => {
++>([value = false]) => {      console.log(value)    } : ([value]: boolean[]) => void
++>                                                    : ^       ^^^^^^^^^^^^^^^^^^^^
++>value : boolean
++>      : ^^^^^^^
++>false : false
++>      : ^^^^^
++
++      console.log(value)
++>console.log(value) : void
++>                   : ^^^^
++>console.log : (...data: any[]) => void
++>            : ^^^^    ^^     ^^^^^    
++>console : Console
++>        : ^^^^^^^
++>log : (...data: any[]) => void
++>    : ^^^^    ^^     ^^^^^    
++>value : boolean
++>      : ^^^^^^^
++
++    }}
++  </Subscribe>
++>Subscribe : <TSelected = State>(props: { selector?: (state: State) => TSelected; children: (state: TSelected) => void; }) => React.ReactElement<any>
++>          : ^         ^^^^^^^^^^     ^^                                                                                 ^^^^^                       
++
++)
++
+diff --git a/tests/baselines/reference/jsxFunctionTypeChildren.symbols b/tests/baselines/reference/jsxFunctionTypeChildren.symbols
+new file mode 100644
+index 0000000000000..cd10cb0344480
+--- /dev/null
++++ b/tests/baselines/reference/jsxFunctionTypeChildren.symbols
+@@ -0,0 +1,70 @@
++//// [tests/cases/compiler/jsxFunctionTypeChildren.tsx] ////
++
++=== jsxFunctionTypeChildren.tsx ===
++// https://github.com/microsoft/typescript-go/issues/2703
++
++/// <reference path="react16.d.ts" />
++
++import * as React from 'react';
++>React : Symbol(React, Decl(jsxFunctionTypeChildren.tsx, 4, 6))
++
++type BaseProps = { locale: string };
++>BaseProps : Symbol(BaseProps, Decl(jsxFunctionTypeChildren.tsx, 4, 31))
++>locale : Symbol(locale, Decl(jsxFunctionTypeChildren.tsx, 6, 18))
++
++type Props<T extends BaseProps> = {
++>Props : Symbol(Props, Decl(jsxFunctionTypeChildren.tsx, 6, 36))
++>T : Symbol(T, Decl(jsxFunctionTypeChildren.tsx, 8, 11))
++>BaseProps : Symbol(BaseProps, Decl(jsxFunctionTypeChildren.tsx, 4, 31))
++
++    children: (props: T) => React.ReactNode;
++>children : Symbol(children, Decl(jsxFunctionTypeChildren.tsx, 8, 35))
++>props : Symbol(props, Decl(jsxFunctionTypeChildren.tsx, 9, 15))
++>T : Symbol(T, Decl(jsxFunctionTypeChildren.tsx, 8, 11))
++>React : Symbol(React, Decl(jsxFunctionTypeChildren.tsx, 4, 6))
++>ReactNode : Symbol(React.ReactNode, Decl(react16.d.ts, 216, 49))
++
++} & T;
++>T : Symbol(T, Decl(jsxFunctionTypeChildren.tsx, 8, 11))
++
++declare function Comp<T extends BaseProps>(props: Props<T>): JSX.Element;
++>Comp : Symbol(Comp, Decl(jsxFunctionTypeChildren.tsx, 10, 6))
++>T : Symbol(T, Decl(jsxFunctionTypeChildren.tsx, 12, 22))
++>BaseProps : Symbol(BaseProps, Decl(jsxFunctionTypeChildren.tsx, 4, 31))
++>props : Symbol(props, Decl(jsxFunctionTypeChildren.tsx, 12, 43))
++>Props : Symbol(Props, Decl(jsxFunctionTypeChildren.tsx, 6, 36))
++>T : Symbol(T, Decl(jsxFunctionTypeChildren.tsx, 12, 22))
++>JSX : Symbol(JSX, Decl(react16.d.ts, 2495, 12))
++>Element : Symbol(JSX.Element, Decl(react16.d.ts, 2496, 23))
++
++const bp: BaseProps = { locale: 'en' };
++>bp : Symbol(bp, Decl(jsxFunctionTypeChildren.tsx, 14, 5))
++>BaseProps : Symbol(BaseProps, Decl(jsxFunctionTypeChildren.tsx, 4, 31))
++>locale : Symbol(locale, Decl(jsxFunctionTypeChildren.tsx, 14, 23))
++
++// Error in ts-go: Type '(props: ...) => Element' is not assignable to
++// type '((props: ...) => ReactNode) & {}'.
++const el = <Comp {...bp}>{(props) => <div>{props.locale}</div>}</Comp>;
++>el : Symbol(el, Decl(jsxFunctionTypeChildren.tsx, 18, 5))
++>Comp : Symbol(Comp, Decl(jsxFunctionTypeChildren.tsx, 10, 6))
++>bp : Symbol(bp, Decl(jsxFunctionTypeChildren.tsx, 14, 5))
++>props : Symbol(props, Decl(jsxFunctionTypeChildren.tsx, 18, 27))
++>div : Symbol(JSX.IntrinsicElements.div, Decl(react16.d.ts, 2548, 114))
++>props.locale : Symbol(locale, Decl(jsxFunctionTypeChildren.tsx, 6, 18))
++>props : Symbol(props, Decl(jsxFunctionTypeChildren.tsx, 18, 27))
++>locale : Symbol(locale, Decl(jsxFunctionTypeChildren.tsx, 6, 18))
++>div : Symbol(JSX.IntrinsicElements.div, Decl(react16.d.ts, 2548, 114))
++>Comp : Symbol(Comp, Decl(jsxFunctionTypeChildren.tsx, 10, 6))
++
++// But the equivalent non-JSX call works fine:
++Comp({ ...bp, children: (props) => <div>{props.locale}</div> });
++>Comp : Symbol(Comp, Decl(jsxFunctionTypeChildren.tsx, 10, 6))
++>bp : Symbol(bp, Decl(jsxFunctionTypeChildren.tsx, 14, 5))
++>children : Symbol(children, Decl(jsxFunctionTypeChildren.tsx, 21, 13))
++>props : Symbol(props, Decl(jsxFunctionTypeChildren.tsx, 21, 25))
++>div : Symbol(JSX.IntrinsicElements.div, Decl(react16.d.ts, 2548, 114))
++>props.locale : Symbol(locale, Decl(jsxFunctionTypeChildren.tsx, 6, 18))
++>props : Symbol(props, Decl(jsxFunctionTypeChildren.tsx, 21, 25))
++>locale : Symbol(locale, Decl(jsxFunctionTypeChildren.tsx, 6, 18))
++>div : Symbol(JSX.IntrinsicElements.div, Decl(react16.d.ts, 2548, 114))
++
+diff --git a/tests/baselines/reference/jsxFunctionTypeChildren.types b/tests/baselines/reference/jsxFunctionTypeChildren.types
+new file mode 100644
+index 0000000000000..505b4bac9862e
+--- /dev/null
++++ b/tests/baselines/reference/jsxFunctionTypeChildren.types
+@@ -0,0 +1,114 @@
++//// [tests/cases/compiler/jsxFunctionTypeChildren.tsx] ////
++
++=== Performance Stats ===
++Assignability cache: 2,500
++Type Count: 10,000
++Instantiation count: 100,000
++Symbol count: 100,000
++
++=== jsxFunctionTypeChildren.tsx ===
++// https://github.com/microsoft/typescript-go/issues/2703
++
++/// <reference path="react16.d.ts" />
++
++import * as React from 'react';
++>React : typeof React
++>      : ^^^^^^^^^^^^
++
++type BaseProps = { locale: string };
++>BaseProps : BaseProps
++>          : ^^^^^^^^^
++>locale : string
++>       : ^^^^^^
++
++type Props<T extends BaseProps> = {
++>Props : Props<T>
++>      : ^^^^^^^^
++
++    children: (props: T) => React.ReactNode;
++>children : (props: T) => React.ReactNode
++>         : ^     ^^ ^^^^^               
++>props : T
++>      : ^
++>React : any
++>      : ^^^
++
++} & T;
++
++declare function Comp<T extends BaseProps>(props: Props<T>): JSX.Element;
++>Comp : <T extends BaseProps>(props: Props<T>) => JSX.Element
++>     : ^ ^^^^^^^^^         ^^     ^^        ^^^^^           
++>props : Props<T>
++>      : ^^^^^^^^
++>JSX : any
++>    : ^^^
++
++const bp: BaseProps = { locale: 'en' };
++>bp : BaseProps
++>   : ^^^^^^^^^
++>{ locale: 'en' } : { locale: string; }
++>                 : ^^^^^^^^^^^^^^^^^^^
++>locale : string
++>       : ^^^^^^
++>'en' : "en"
++>     : ^^^^
++
++// Error in ts-go: Type '(props: ...) => Element' is not assignable to
++// type '((props: ...) => ReactNode) & {}'.
++const el = <Comp {...bp}>{(props) => <div>{props.locale}</div>}</Comp>;
++>el : JSX.Element
++>   : ^^^^^^^^^^^
++><Comp {...bp}>{(props) => <div>{props.locale}</div>}</Comp> : JSX.Element
++>                                                            : ^^^^^^^^^^^
++>Comp : <T extends BaseProps>(props: Props<T>) => JSX.Element
++>     : ^ ^^^^^^^^^         ^^     ^^        ^^^^^           
++>bp : BaseProps
++>   : ^^^^^^^^^
++>(props) => <div>{props.locale}</div> : (props: BaseProps) => JSX.Element
++>                                     : ^     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
++>props : BaseProps
++>      : ^^^^^^^^^
++><div>{props.locale}</div> : JSX.Element
++>                          : ^^^^^^^^^^^
++>div : any
++>    : ^^^
++>props.locale : string
++>             : ^^^^^^
++>props : BaseProps
++>      : ^^^^^^^^^
++>locale : string
++>       : ^^^^^^
++>div : any
++>    : ^^^
++>Comp : <T extends BaseProps>(props: Props<T>) => JSX.Element
++>     : ^ ^^^^^^^^^         ^^     ^^        ^^^^^           
++
++// But the equivalent non-JSX call works fine:
++Comp({ ...bp, children: (props) => <div>{props.locale}</div> });
++>Comp({ ...bp, children: (props) => <div>{props.locale}</div> }) : JSX.Element
++>                                                                : ^^^^^^^^^^^
++>Comp : <T extends BaseProps>(props: Props<T>) => JSX.Element
++>     : ^ ^^^^^^^^^         ^^     ^^        ^^^^^           
++>{ ...bp, children: (props) => <div>{props.locale}</div> } : { children: (props: BaseProps) => JSX.Element; locale: string; }
++>                                                          : ^^^^^^^^^^^^^     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^      ^^^
++>bp : BaseProps
++>   : ^^^^^^^^^
++>children : (props: BaseProps) => JSX.Element
++>         : ^     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
++>(props) => <div>{props.locale}</div> : (props: BaseProps) => JSX.Element
++>                                     : ^     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
++>props : BaseProps
++>      : ^^^^^^^^^
++><div>{props.locale}</div> : JSX.Element
++>                          : ^^^^^^^^^^^
++>div : any
++>    : ^^^
++>props.locale : string
++>             : ^^^^^^
++>props : BaseProps
++>      : ^^^^^^^^^
++>locale : string
++>       : ^^^^^^
++>div : any
++>    : ^^^
++
+diff --git a/tests/baselines/reference/subtypeReductionWithAnyFunctionType.errors.txt b/tests/baselines/reference/subtypeReductionWithAnyFunctionType.errors.txt
+new file mode 100644
+index 0000000000000..7c570e0e9694f
+--- /dev/null
++++ b/tests/baselines/reference/subtypeReductionWithAnyFunctionType.errors.txt
+@@ -0,0 +1,31 @@
++subtypeReductionWithAnyFunctionType.ts(10,16): error TS7006: Parameter 'x' implicitly has an 'any' type.
++
++
++==== subtypeReductionWithAnyFunctionType.ts (1 errors) ====
++    // https://github.com/microsoft/typescript-go/issues/849
++    
++    declare function useMemo<T>(func: () => T): T;
++    
++    function getPredicate(alwaysTrue: boolean) {
++        const predicate: (input: string) => boolean = useMemo(() => {
++            if (alwaysTrue) {
++                return () => true;
++            }
++            return x => x.length > 0;
++                   ~
++!!! error TS7006: Parameter 'x' implicitly has an 'any' type.
++        });
++        return predicate;
++    }
++    
++    // https://github.com/microsoft/typescript-go/issues/1016
++    
++    declare function compact<T>(array: T[]): T[];
++    declare function makeFooer(): Fooer;
++    interface Fooer {
++        foo: (v: string) => string;
++    }
++    function f() {
++        const _ = compact([makeFooer(), { foo: (v) => v }]);
++    }
++    
+\ No newline at end of file
+diff --git a/tests/baselines/reference/subtypeReductionWithAnyFunctionType.symbols b/tests/baselines/reference/subtypeReductionWithAnyFunctionType.symbols
+new file mode 100644
+index 0000000000000..c348637d5ada5
+--- /dev/null
++++ b/tests/baselines/reference/subtypeReductionWithAnyFunctionType.symbols
+@@ -0,0 +1,67 @@
++//// [tests/cases/compiler/subtypeReductionWithAnyFunctionType.ts] ////
++
++=== subtypeReductionWithAnyFunctionType.ts ===
++// https://github.com/microsoft/typescript-go/issues/849
++
++declare function useMemo<T>(func: () => T): T;
++>useMemo : Symbol(useMemo, Decl(subtypeReductionWithAnyFunctionType.ts, 0, 0))
++>T : Symbol(T, Decl(subtypeReductionWithAnyFunctionType.ts, 2, 25))
++>func : Symbol(func, Decl(subtypeReductionWithAnyFunctionType.ts, 2, 28))
++>T : Symbol(T, Decl(subtypeReductionWithAnyFunctionType.ts, 2, 25))
++>T : Symbol(T, Decl(subtypeReductionWithAnyFunctionType.ts, 2, 25))
++
++function getPredicate(alwaysTrue: boolean) {
++>getPredicate : Symbol(getPredicate, Decl(subtypeReductionWithAnyFunctionType.ts, 2, 46))
++>alwaysTrue : Symbol(alwaysTrue, Decl(subtypeReductionWithAnyFunctionType.ts, 4, 22))
++
++    const predicate: (input: string) => boolean = useMemo(() => {
++>predicate : Symbol(predicate, Decl(subtypeReductionWithAnyFunctionType.ts, 5, 9))
++>input : Symbol(input, Decl(subtypeReductionWithAnyFunctionType.ts, 5, 22))
++>useMemo : Symbol(useMemo, Decl(subtypeReductionWithAnyFunctionType.ts, 0, 0))
++
++        if (alwaysTrue) {
++>alwaysTrue : Symbol(alwaysTrue, Decl(subtypeReductionWithAnyFunctionType.ts, 4, 22))
++
++            return () => true;
++        }
++        return x => x.length > 0;
++>x : Symbol(x, Decl(subtypeReductionWithAnyFunctionType.ts, 9, 14))
++>x : Symbol(x, Decl(subtypeReductionWithAnyFunctionType.ts, 9, 14))
++
++    });
++    return predicate;
++>predicate : Symbol(predicate, Decl(subtypeReductionWithAnyFunctionType.ts, 5, 9))
++}
++
++// https://github.com/microsoft/typescript-go/issues/1016
++
++declare function compact<T>(array: T[]): T[];
++>compact : Symbol(compact, Decl(subtypeReductionWithAnyFunctionType.ts, 12, 1))
++>T : Symbol(T, Decl(subtypeReductionWithAnyFunctionType.ts, 16, 25))
++>array : Symbol(array, Decl(subtypeReductionWithAnyFunctionType.ts, 16, 28))
++>T : Symbol(T, Decl(subtypeReductionWithAnyFunctionType.ts, 16, 25))
++>T : Symbol(T, Decl(subtypeReductionWithAnyFunctionType.ts, 16, 25))
++
++declare function makeFooer(): Fooer;
++>makeFooer : Symbol(makeFooer, Decl(subtypeReductionWithAnyFunctionType.ts, 16, 45))
++>Fooer : Symbol(Fooer, Decl(subtypeReductionWithAnyFunctionType.ts, 17, 36))
++
++interface Fooer {
++>Fooer : Symbol(Fooer, Decl(subtypeReductionWithAnyFunctionType.ts, 17, 36))
++
++    foo: (v: string) => string;
++>foo : Symbol(Fooer.foo, Decl(subtypeReductionWithAnyFunctionType.ts, 18, 17))
++>v : Symbol(v, Decl(subtypeReductionWithAnyFunctionType.ts, 19, 10))
++}
++function f() {
++>f : Symbol(f, Decl(subtypeReductionWithAnyFunctionType.ts, 20, 1))
++
++    const _ = compact([makeFooer(), { foo: (v) => v }]);
++>_ : Symbol(_, Decl(subtypeReductionWithAnyFunctionType.ts, 22, 9))
++>compact : Symbol(compact, Decl(subtypeReductionWithAnyFunctionType.ts, 12, 1))
++>makeFooer : Symbol(makeFooer, Decl(subtypeReductionWithAnyFunctionType.ts, 16, 45))
++>foo : Symbol(foo, Decl(subtypeReductionWithAnyFunctionType.ts, 22, 37))
++>v : Symbol(v, Decl(subtypeReductionWithAnyFunctionType.ts, 22, 44))
++>v : Symbol(v, Decl(subtypeReductionWithAnyFunctionType.ts, 22, 44))
++}
++
+diff --git a/tests/baselines/reference/subtypeReductionWithAnyFunctionType.types b/tests/baselines/reference/subtypeReductionWithAnyFunctionType.types
+new file mode 100644
+index 0000000000000..98f756e407cc4
+--- /dev/null
++++ b/tests/baselines/reference/subtypeReductionWithAnyFunctionType.types
+@@ -0,0 +1,109 @@
++//// [tests/cases/compiler/subtypeReductionWithAnyFunctionType.ts] ////
++
++=== subtypeReductionWithAnyFunctionType.ts ===
++// https://github.com/microsoft/typescript-go/issues/849
++
++declare function useMemo<T>(func: () => T): T;
++>useMemo : <T>(func: () => T) => T
++>        : ^ ^^    ^^       ^^^^^ 
++>func : () => T
++>     : ^^^^^^ 
++
++function getPredicate(alwaysTrue: boolean) {
++>getPredicate : (alwaysTrue: boolean) => (input: string) => boolean
++>             : ^          ^^       ^^^^^^     ^^      ^^^^^       
++>alwaysTrue : boolean
++>           : ^^^^^^^
++
++    const predicate: (input: string) => boolean = useMemo(() => {
++>predicate : (input: string) => boolean
++>          : ^     ^^      ^^^^^       
++>input : string
++>      : ^^^^^^
++>useMemo(() => {        if (alwaysTrue) {            return () => true;        }        return x => x.length > 0;    }) : (x: any) => boolean
++>                                                                                                                       : ^ ^^^^^^^^^^^^^^^^^
++>useMemo : <T>(func: () => T) => T
++>        : ^ ^^    ^^       ^^^^^ 
++>() => {        if (alwaysTrue) {            return () => true;        }        return x => x.length > 0;    } : () => (x: any) => boolean
++>                                                                                                              : ^^^^^^^ ^^^^^^^^^^^^^^^^^
++
++        if (alwaysTrue) {
++>alwaysTrue : boolean
++>           : ^^^^^^^
++
++            return () => true;
++>() => true : () => true
++>           : ^^^^^^^^^^
++>true : true
++>     : ^^^^
++        }
++        return x => x.length > 0;
++>x => x.length > 0 : (x: any) => boolean
++>                  : ^ ^^^^^^^^^^^^^^^^^
++>x : any
++>  : ^^^
++>x.length > 0 : boolean
++>             : ^^^^^^^
++>x.length : any
++>         : ^^^
++>x : any
++>  : ^^^
++>length : any
++>       : ^^^
++>0 : 0
++>  : ^
++
++    });
++    return predicate;
++>predicate : (input: string) => boolean
++>          : ^     ^^      ^^^^^       
++}
++
++// https://github.com/microsoft/typescript-go/issues/1016
++
++declare function compact<T>(array: T[]): T[];
++>compact : <T>(array: T[]) => T[]
++>        : ^ ^^     ^^   ^^^^^   
++>array : T[]
++>      : ^^^
++
++declare function makeFooer(): Fooer;
++>makeFooer : () => Fooer
++>          : ^^^^^^     
++
++interface Fooer {
++    foo: (v: string) => string;
++>foo : (v: string) => string
++>    : ^ ^^      ^^^^^      
++>v : string
++>  : ^^^^^^
++}
++function f() {
++>f : () => void
++>  : ^^^^^^^^^^
++
++    const _ = compact([makeFooer(), { foo: (v) => v }]);
++>_ : Fooer[]
++>  : ^^^^^^^
++>compact([makeFooer(), { foo: (v) => v }]) : Fooer[]
++>                                          : ^^^^^^^
++>compact : <T>(array: T[]) => T[]
++>        : ^ ^^     ^^   ^^^^^   
++>[makeFooer(), { foo: (v) => v }] : Fooer[]
++>                                 : ^^^^^^^
++>makeFooer() : Fooer
++>            : ^^^^^
++>makeFooer : () => Fooer
++>          : ^^^^^^     
++>{ foo: (v) => v } : { foo: (v: string) => string; }
++>                  : ^^^^^^^^ ^^^^^^^^^^^^^^^^^^^^^^
++>foo : (v: string) => string
++>    : ^ ^^^^^^^^^^^^^^^^^^^
++>(v) => v : (v: string) => string
++>         : ^ ^^^^^^^^^^^^^^^^^^^
++>v : string
++>  : ^^^^^^
++>v : string
++>  : ^^^^^^
++}
++
+diff --git a/tests/cases/compiler/contextuallyTypedJsxChildren2.tsx b/tests/cases/compiler/contextuallyTypedJsxChildren2.tsx
+new file mode 100644
+index 0000000000000..3a63b5fd57a3e
+--- /dev/null
++++ b/tests/cases/compiler/contextuallyTypedJsxChildren2.tsx
+@@ -0,0 +1,62 @@
++// @target: es2015
++// @strict: true
++// @jsx: react
++// @esModuleInterop: true
++// @noEmit: true
++
++/// <reference path="/.lib/react16.d.ts" />
++
++// https://github.com/microsoft/typescript-go/issues/2802
++
++import * as React from 'react';
++
++declare const TestComponentWithChildren: <T, TParam>(props: {
++  state: T;
++  selector?: (state: NoInfer<T>) => TParam;
++  children?: (state: NoInfer<TParam>) => React.ReactElement<any> | null;
++}) => React.ReactElement<any>;
++
++declare const TestComponentWithoutChildren: <T, TParam>(props: {
++  state: T;
++  selector?: (state: NoInfer<T>) => TParam;
++  notChildren?: (state: NoInfer<TParam>) => React.ReactElement<any> | null;
++}) => React.ReactElement<any>;
++
++const App = () => {
++  return (
++    <>
++      <TestComponentWithChildren state={{ foo: 123 }} selector={(state) => state.foo}>
++        {(selected) => <div>{Math.max(selected, 0)}</div>}
++      </TestComponentWithChildren>
++
++      <TestComponentWithoutChildren
++        state={{ foo: 123 }}
++        selector={(state) => state.foo}
++        notChildren={(selected) => <div>{Math.max(selected, 0)}</div>}
++      />
++    </>
++  );
++};
++
++// https://github.com/microsoft/typescript-go/issues/2797
++
++interface State {
++  value: boolean
++}
++
++declare const Subscribe: <TSelected = State>(props: {
++  selector?: (state: State) => TSelected
++  children: (state: TSelected) => void
++}) => React.ReactElement<any>
++
++const _result = (
++  <Subscribe
++    selector={(state) => {
++      return [state.value]
++    }}
++  >
++    {([value = false]) => {
++      console.log(value)
++    }}
++  </Subscribe>
++)
+diff --git a/tests/cases/compiler/jsxFunctionTypeChildren.tsx b/tests/cases/compiler/jsxFunctionTypeChildren.tsx
+new file mode 100644
+index 0000000000000..9dfceb6b89ba2
+--- /dev/null
++++ b/tests/cases/compiler/jsxFunctionTypeChildren.tsx
+@@ -0,0 +1,27 @@
++// @strict: true
++// @target: esnext
++// @noEmit: true
++// @jsx: preserve
++
++// https://github.com/microsoft/typescript-go/issues/2703
++
++/// <reference path="/.lib/react16.d.ts" />
++
++import * as React from 'react';
++
++type BaseProps = { locale: string };
++
++type Props<T extends BaseProps> = {
++    children: (props: T) => React.ReactNode;
++} & T;
++
++declare function Comp<T extends BaseProps>(props: Props<T>): JSX.Element;
++
++const bp: BaseProps = { locale: 'en' };
++
++// Error in ts-go: Type '(props: ...) => Element' is not assignable to
++// type '((props: ...) => ReactNode) & {}'.
++const el = <Comp {...bp}>{(props) => <div>{props.locale}</div>}</Comp>;
++
++// But the equivalent non-JSX call works fine:
++Comp({ ...bp, children: (props) => <div>{props.locale}</div> });
+diff --git a/tests/cases/compiler/subtypeReductionWithAnyFunctionType.ts b/tests/cases/compiler/subtypeReductionWithAnyFunctionType.ts
+new file mode 100644
+index 0000000000000..e45c648dc8484
+--- /dev/null
++++ b/tests/cases/compiler/subtypeReductionWithAnyFunctionType.ts
+@@ -0,0 +1,28 @@
++// @strict: true
++// @target: esnext
++// @noEmit: true
++
++// https://github.com/microsoft/typescript-go/issues/849
++
++declare function useMemo<T>(func: () => T): T;
++
++function getPredicate(alwaysTrue: boolean) {
++    const predicate: (input: string) => boolean = useMemo(() => {
++        if (alwaysTrue) {
++            return () => true;
++        }
++        return x => x.length > 0;
++    });
++    return predicate;
++}
++
++// https://github.com/microsoft/typescript-go/issues/1016
++
++declare function compact<T>(array: T[]): T[];
++declare function makeFooer(): Fooer;
++interface Fooer {
++    foo: (v: string) => string;
++}
++function f() {
++    const _ = compact([makeFooer(), { foo: (v) => v }]);
++}

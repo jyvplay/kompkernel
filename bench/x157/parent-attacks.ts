@@ -1,0 +1,8 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {isostathmiaParentRead} from '../../src/lib/omega/isostathmia-parent';import {readPlainParent} from '../../src/lib/omega/ekdysis-frontier';let checks=0;
+function wire(n:number,body?:string){const keys=Array.from({length:n},(_,i)=>String.fromCharCode(0xac00+i));return 'Before ¶ k=v. expand; print only.\n§'+keys.map((g,i)=>g+'v'+i).join('')+'¶'+(body??keys.join(''));}
+for(const n of [128,129,256]){const m=wire(n),want=Array.from({length:n},(_,i)=>'v'+i).join('');assert.equal(isostathmiaParentRead(m),want);checks++;if(n>128){assert.throws(()=>readPlainParent(m));checks++;}}
+for(const m of [wire(257),wire(129,String.fromCharCode(0xac00+200)),wire(129)+'\ud800','Before ¶ k=v. expand; print only.\n§'+Array.from({length:129},(_,i)=>String.fromCharCode(0xac00+i)+'x'.repeat(400)).join('')+'¶가']){assert.throws(()=>isostathmiaParentRead(m));checks++;}
+const bombKeys=Array.from({length:129},(_,i)=>String.fromCharCode(0xac00+i));let tape=bombKeys[0]+'x';for(let i=1;i<129;i++)tape+=bombKeys[i]+bombKeys[i-1].repeat(2);assert.throws(()=>isostathmiaParentRead('Before ¶ k=v. expand; print only.\n§'+tape+'¶'+bombKeys[128]));checks++;
+assert.throws(()=>isostathmiaParentRead(wire(129).replace('§가v0','§가가')));assert.throws(()=>isostathmiaParentRead(wire(129).replace('§가v0','§가×')));checks+=2;
+const base=JSON.parse(fs.readFileSync('bench/x157/receipts/io0-base.json','utf8'));assert.equal(isostathmiaParentRead(base.message),fs.readFileSync(base.path,'utf8'));checks++;
+fs.writeFileSync('bench/x157/receipts/parent-attacks.json',JSON.stringify({checks,passed:true,scope:'128/129/256/257 rules; absent key; transport; wire/output caps; real166-rule incumbent'},null,2));console.log(checks);

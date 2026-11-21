@@ -10742,3 +10742,69 @@ X156 final speed result: arity-specialized scorer FAILS the12-call isolated ABBA
 gate: aggregate CPU1.022600 / wall1.027942, identical12 wires matched to the fresh
 frontier. Prose CPU0.907408, ops1.047525, JSON1.041708; no deployment. This is a
 negative whole-stack experiment, not a claimed significant acceleration.
+
+## X157 — ISOSTATHMIA hunk-balance reconstruction (optional)
+
+**ISOSTATHMIA** (balance): write `@A@` instead of a Git unified-diff hunk header.
+Count old/new records from the unchanged following signed body; derive the new
+start as A plus prior net insertions in this file, plus1 for an empty old range,
+minus1 for an empty new range. Recreate canonical counts (omit ,1), retain suffix
+and all other bytes, update balance, reset at each `diff --git` boundary. This
+removes a cross-hunk dependent coordinate as well as body-derived counts.
+
+X51 already explored count removal: count elision alone is NOT new. This is a new
+bounded implementation adding cumulative coordinate entailment and zero-count
+corrections, not a new mathematics theorem or a renamed independent-column delta.
+Ancestry: standard unified-diff format and functional redundancy. Fresh technical
+article https://kilabit.info/journal/2026/unified_diff/ and real parser adversaries
+https://github.com/aakarim/OpenLore/pull/91 ; neither proves chat-token savings.
+2025 relaxed-FD discovery and2024 protocol-compression sources in research.md
+are related work only; approximate relations and binary rates are not imported.
+
+Greedy: **no** transform search. One deterministic pass; exact comparison of one
+candidate against the whole X156 incumbent, including SYNECHEIA and STOIBAS.
+CPU/work bounded O(n) time/space under50000 UTF16-unit source/folded/output caps,
+UTF8 stability, nine-digit canonical coordinates and exact signed-body admission.
+Extra parent encoding dominates cost and is NOT free. Unsupported/malformed
+hunks refuse; the canonical stored diff has inconsistent counts and is unchanged.
+
+Complete-message results on real pinned CPython edits: a three-file review patch
+**964→937** (−27,2.80%); the entire same commit rendered by actual git -U0
+**2018→1905** (−113,5.60%); a small import patch **328→399**, fallback328. Selection
+is discovery-biased and not broad prose evidence. U0 and component selection are
+separate source inputs, never uncharged transformations of an incumbent source.
+Full-context25,865-byte baseline exhausted1000/2200MiB heaps: inconclusive, not a
+measured loss. Failed runs retained. The zero-context16,283-byte case completed.
+
+Verifier repair: X157-specific bounded parent reader extends the inherited128-rule
+limit to256 plain ordered rules; independent Python adds polyglot script support.
+Original rejection receipts stay unchanged. Post-extension complete source,
+reference-token, transport and selector gates pass on all three pairs;13 TS and
+10 Python targeted reader attacks pass.2009 codec unit checks;12 independent
+checks include four full messages. Fresh small full API reproduces937/base964
+at124923mswall/121873msCPU under concurrency; larger result uses actual complete
+parent runs plus cached selector replay, not a repeated full API timing.
+
+Fresh canonical29/11962, all wires identical to X156;21 bounded source reads,
+eight unsupported. All29 reference-price/token-ID/transport checks pass. Leaders
+remain prose3429(word), ops5580(glyph), code2636(word), other317(no tape);
+generalized leaders: `bench/x157/receipts/local-leaders.json`. Earlier external
+STOIBAS/SYNECHEIA wires were independently revalidated, not freshly recomputed.
+
+Native basic-chat **NOT_RUN**. Frozen937/1905-token packets and blind protocol are
+in `bench/x157/native.md`; software inversion is not model behavior. The separate
+streaming-tokenizer experiment is bundler-only, not deployed; final ABBA outcome
+is recorded below and in speed-summary.json. New modules remain unwired in default
+TAGSTACK. Full Pareto/native/broad-prose claims remain unsupported even if merged
+under X157's explicit unconditional merge instruction. A–J framework, six distinct
+tracks/controls,22 executable modal rejections, resource failures and scoped live
+math-source followups: `bench/x157/`.
+
+X157 final speed result: streaming-counter ABBA **FAIL**, CPU1.014068 /
+wall1.005542,12/12 messages identical to fresh frontier;6009 differential
+reference checks per arm. No speed patch deployed. Default production encoder
+unchanged; optional portfolio selector latency is not certified.
+
+X157 final independent inverse total1007:995 generated unit cases plus8 real
+unparented screens and4 complete messages. Generated tests are not performance
+claims.

@@ -1,0 +1,5 @@
+{
+  "old": "  for (let i = 0; i < cs.length; i++) covered += cs[i]!.length;\n  if (covered !== text.length) { chunkFallbacks++; return null; }",
+  "description": "Fuse coverage summation into existing chunk pricing loop; preserve coverage refusal and chunk order. Experimental only.",
+  "production": false
+}

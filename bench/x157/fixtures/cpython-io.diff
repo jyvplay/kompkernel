@@ -1,0 +1,741 @@
+diff --git a/Lib/test/test_io/test_general.py b/Lib/test/test_io/test_general.py
+index c6c138c2388d3e..883144817dddc3 100644
+--- a/Lib/test/test_io/test_general.py
++++ b/Lib/test/test_io/test_general.py
+@@ -898,6 +898,41 @@ def test_immutable_types(self):
+                 with self.assertRaisesRegex(TypeError, "immutable"):
+                     tp.foo = "bar"
+ 
++    def test_managed_dict(self):
++        # The _io types use Py_TPFLAGS_MANAGED_DICT: there is no explicit
++        # dict slot and instance attributes are stored as inline values.
++        _testinternalcapi = import_helper.import_module("_testinternalcapi")
++        _io = self._io
++        no_dict = {_io.IncrementalNewlineDecoder, _io._BytesIOBuffer}
++        for tp in self.types:
++            with self.subTest(tp=tp):
++                if tp in no_dict:
++                    self.assertEqual(tp.__dictoffset__, 0)
++                else:
++                    self.assertEqual(tp.__dictoffset__, -1)
++
++        # Use fresh subclasses: each class has its own shared keys, which
++        # may already be exhausted on the base types by earlier tests.
++        class BytesIO(_io.BytesIO): pass
++        class StringIO(_io.StringIO): pass
++        class BufferedReader(_io.BufferedReader): pass
++        class TextIOWrapper(_io.TextIOWrapper): pass
++        class RawIO(_io._RawIOBase):
++            def __init__(self):
++                self.attr = 1
++        instances = [
++            BytesIO(b"data"),
++            StringIO("data"),
++            BufferedReader(_io.BytesIO(b"data")),
++            TextIOWrapper(_io.BytesIO()),
++            RawIO(),
++        ]
++        for obj in instances:
++            with self.subTest(obj=type(obj).__name__):
++                obj.attr = 1
++                self.assertTrue(_testinternalcapi.has_inline_values(obj))
++                self.assertEqual(obj.__dict__["attr"], 1)
++
+     def test_class_hierarchy(self):
+         def check_subs(types, base):
+             for tp in types:
+diff --git a/Lib/test/test_io/test_memoryio.py b/Lib/test/test_io/test_memoryio.py
+index 89b0e4c9463ac0..20c2777b6c3ce0 100644
+--- a/Lib/test/test_io/test_memoryio.py
++++ b/Lib/test/test_io/test_memoryio.py
+@@ -10,6 +10,7 @@
+ import io
+ import _pyio as pyio
+ import pickle
++import struct
+ import sys
+ import weakref
+ 
+@@ -1037,11 +1038,13 @@ def test_setstate(self):
+     @support.cpython_only
+     def test_sizeof(self):
+         if support.Py_GIL_DISABLED:
+-            basesize = support.calcobjsize('P2n2Pni')
++            basesize = support.calcobjsize('P2nni')
+         else:
+-            basesize = support.calcobjsize('P2n2Pn')
++            basesize = support.calcobjsize('P2nn')
+         check = self.check_sizeof
+         self.assertEqual(object.__sizeof__(io.BytesIO()), basesize)
++        # sys.getsizeof() includes the managed dict and weakref pre-header
++        basesize += 2 * struct.calcsize('P')
+         check(io.BytesIO(), basesize )
+         n = 1000  # use a variable to prevent constant folding
+         check(io.BytesIO(b'a' * n), basesize + sys.getsizeof(b'a' * n))
+diff --git a/Misc/NEWS.d/next/Library/2026-11-03-08-21-06.gh-issue-161184.PIhcD9.rst b/Misc/NEWS.d/next/Library/2026-11-03-08-21-06.gh-issue-161184.PIhcD9.rst
+new file mode 100644
+index 00000000000000..3b15925773b99e
+--- /dev/null
++++ b/Misc/NEWS.d/next/Library/2026-11-03-08-21-06.gh-issue-161184.PIhcD9.rst
+@@ -0,0 +1,6 @@
++Speed up attribute access on instances of :mod:`io` classes and their
++subclasses by storing instance attributes and weak references in the object
++pre-header. The ``__dictoffset__`` and ``__weakrefoffset__`` attributes
++of these classes now report the managed offsets, and C extension types that
++subclass an :mod:`io` class can no longer declare their own ``__dictoffset__``
++or ``__weaklistoffset__`` member.
+diff --git a/Modules/_io/bufferedio.c b/Modules/_io/bufferedio.c
+index 237b6ea53c367a..1e900084b549f4 100644
+--- a/Modules/_io/bufferedio.c
++++ b/Modules/_io/bufferedio.c
+@@ -9,11 +9,11 @@
+ 
+ #include "Python.h"
+ #include "pycore_call.h"                // _PyObject_CallNoArgs()
++#include "pycore_critical_section.h"    // _Py_CRITICAL_SECTION_ASSERT_OBJECT_LOCKED()
+ #include "pycore_fileutils.h"           // _PyFile_Flush
+ #include "pycore_object.h"              // _PyObject_GC_UNTRACK()
+ #include "pycore_pyerrors.h"            // _Py_FatalErrorFormat()
+ #include "pycore_pylifecycle.h"         // _Py_IsInterpreterFinalizing()
+-#include "pycore_weakref.h"             // FT_CLEAR_WEAKREFS()
+ 
+ #include "_iomodule.h"
+ 
+@@ -265,8 +265,6 @@ typedef struct {
+     Py_ssize_t buffer_size;
+     Py_ssize_t buffer_mask;
+ 
+-    PyObject *dict;
+-    PyObject *weakreflist;
+ } buffered;
+ 
+ #define buffered_CAST(op)   ((buffered *)(op))
+@@ -422,7 +420,7 @@ buffered_clear(PyObject *op)
+     buffered *self = buffered_CAST(op);
+     self->ok = 0;
+     Py_CLEAR(self->raw);
+-    Py_CLEAR(self->dict);
++    PyObject_ClearManagedDict(op);
+     return 0;
+ }
+ 
+@@ -436,7 +434,7 @@ buffered_dealloc(PyObject *op)
+         return;
+     _PyObject_GC_UNTRACK(self);
+     self->ok = 0;
+-    FT_CLEAR_WEAKREFS(op, self->weakreflist);
++    PyObject_ClearWeakRefs(op);
+     if (self->buffer) {
+         PyMem_Free(self->buffer);
+         self->buffer = NULL;
+@@ -472,8 +470,7 @@ buffered_traverse(PyObject *op, visitproc visit, void *arg)
+     buffered *self = buffered_CAST(op);
+     Py_VISIT(Py_TYPE(self));
+     Py_VISIT(self->raw);
+-    Py_VISIT(self->dict);
+-    return 0;
++    return PyObject_VisitManagedDict(op, visit, arg);
+ }
+ 
+ /* Because this can call arbitrary code, it shouldn't be called when
+@@ -2255,8 +2252,6 @@ typedef struct {
+     PyObject_HEAD
+     buffered *reader;
+     buffered *writer;
+-    PyObject *dict;
+-    PyObject *weakreflist;
+ } rwpair;
+ 
+ #define rwpair_CAST(op) ((rwpair *)(op))
+@@ -2314,10 +2309,9 @@ bufferedrwpair_traverse(PyObject *op, visitproc visit, void *arg)
+ {
+     rwpair *self = rwpair_CAST(op);
+     Py_VISIT(Py_TYPE(self));
+-    Py_VISIT(self->dict);
+     Py_VISIT(self->reader);
+     Py_VISIT(self->writer);
+-    return 0;
++    return PyObject_VisitManagedDict(op, visit, arg);
+ }
+ 
+ static int
+@@ -2326,7 +2320,7 @@ bufferedrwpair_clear(PyObject *op)
+     rwpair *self = rwpair_CAST(op);
+     Py_CLEAR(self->reader);
+     Py_CLEAR(self->writer);
+-    Py_CLEAR(self->dict);
++    PyObject_ClearManagedDict(op);
+     return 0;
+ }
+ 
+@@ -2336,7 +2330,7 @@ bufferedrwpair_dealloc(PyObject *op)
+     rwpair *self = rwpair_CAST(op);
+     PyTypeObject *tp = Py_TYPE(self);
+     _PyObject_GC_UNTRACK(self);
+-    FT_CLEAR_WEAKREFS(op, self->weakreflist);
++    PyObject_ClearWeakRefs(op);
+     (void)bufferedrwpair_clear(op);
+     tp->tp_free(self);
+     Py_DECREF(tp);
+@@ -2662,8 +2656,6 @@ static PyMethodDef bufferedreader_methods[] = {
+ static PyMemberDef bufferedreader_members[] = {
+     {"raw", _Py_T_OBJECT, offsetof(buffered, raw), Py_READONLY},
+     {"_finalizing", Py_T_BOOL, offsetof(buffered, finalizing), 0},
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(buffered, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(buffered, dict), Py_READONLY},
+     {NULL}
+ };
+ 
+@@ -2721,8 +2713,6 @@ static PyMethodDef bufferedwriter_methods[] = {
+ static PyMemberDef bufferedwriter_members[] = {
+     {"raw", _Py_T_OBJECT, offsetof(buffered, raw), Py_READONLY},
+     {"_finalizing", Py_T_BOOL, offsetof(buffered, finalizing), 0},
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(buffered, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(buffered, dict), Py_READONLY},
+     {NULL}
+ };
+ 
+@@ -2775,12 +2765,6 @@ static PyMethodDef bufferedrwpair_methods[] = {
+     {NULL, NULL}
+ };
+ 
+-static PyMemberDef bufferedrwpair_members[] = {
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(rwpair, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(rwpair, dict), Py_READONLY},
+-    {NULL}
+-};
+-
+ static PyGetSetDef bufferedrwpair_getset[] = {
+     _IO_BUFFEREDRWPAIR_CLOSED_GETSETDEF
+     {NULL}
+@@ -2792,7 +2776,6 @@ static PyType_Slot bufferedrwpair_slots[] = {
+     {Py_tp_traverse, bufferedrwpair_traverse},
+     {Py_tp_clear, bufferedrwpair_clear},
+     {Py_tp_methods, bufferedrwpair_methods},
+-    {Py_tp_members, bufferedrwpair_members},
+     {Py_tp_getset, bufferedrwpair_getset},
+     {Py_tp_init, _io_BufferedRWPair___init__},
+     {0, NULL},
+@@ -2839,8 +2822,6 @@ static PyMethodDef bufferedrandom_methods[] = {
+ static PyMemberDef bufferedrandom_members[] = {
+     {"raw", _Py_T_OBJECT, offsetof(buffered, raw), Py_READONLY},
+     {"_finalizing", Py_T_BOOL, offsetof(buffered, finalizing), 0},
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(buffered, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(buffered, dict), Py_READONLY},
+     {NULL}
+ };
+ 
+diff --git a/Modules/_io/bytesio.c b/Modules/_io/bytesio.c
+index 9bec70acebb359..fa828f21892899 100644
+--- a/Modules/_io/bytesio.c
++++ b/Modules/_io/bytesio.c
+@@ -5,7 +5,6 @@
+ #include "pycore_object.h"
+ #include "pycore_pyatomic_ft_wrappers.h"
+ #include "pycore_sysmodule.h"         // _PySys_GetSizeOf()
+-#include "pycore_weakref.h"           // FT_CLEAR_WEAKREFS()
+ 
+ #include <stddef.h>                   // offsetof()
+ #include "_iomodule.h"
+@@ -21,8 +20,6 @@ typedef struct {
+     PyObject *buf;
+     Py_ssize_t pos;
+     Py_ssize_t string_size;
+-    PyObject *dict;
+-    PyObject *weakreflist;
+     Py_ssize_t exports;
+ #ifdef Py_GIL_DISABLED
+     int buf_shared;
+@@ -974,11 +971,16 @@ _io_BytesIO___getstate___impl(bytesio *self)
+ 
+     if (initvalue == NULL)
+         return NULL;
+-    if (self->dict == NULL) {
++    if (_PyObject_IsInstanceDictEmpty((PyObject *)self)) {
+         dict = Py_NewRef(Py_None);
+     }
+     else {
+-        dict = PyDict_Copy(self->dict);
++        dict = PyObject_GenericGetDict((PyObject *)self, NULL);
++        if (dict == NULL) {
++            Py_DECREF(initvalue);
++            return NULL;
++        }
++        Py_SETREF(dict, PyDict_Copy(dict));
+         if (dict == NULL) {
+             Py_DECREF(initvalue);
+             return NULL;
+@@ -1061,16 +1063,16 @@ _io_BytesIO___setstate___impl(bytesio *self, PyObject *state)
+                          Py_TYPE(dict)->tp_name);
+             return NULL;
+         }
+-        if (self->dict) {
+-            /* Alternatively, we could replace the internal dictionary
+-               completely. However, it seems more practical to just update it. */
+-            if (PyDict_Update(self->dict, dict) < 0)
+-                return NULL;
++        /* Alternatively, we could replace the internal dictionary
++           completely. However, it seems more practical to just update it. */
++        PyObject *self_dict = PyObject_GenericGetDict((PyObject *)self, NULL);
++        if (self_dict == NULL) {
++            return NULL;
+         }
+-        else {
+-            /* The LOAD_ATTR specializations read the dict slot lock-free
+-               with an acquire load, so pair it with a release store. */
+-            FT_ATOMIC_STORE_PTR_RELEASE(self->dict, Py_NewRef(dict));
++        int rc = PyDict_Update(self_dict, dict);
++        Py_DECREF(self_dict);
++        if (rc < 0) {
++            return NULL;
+         }
+     }
+ 
+@@ -1089,8 +1091,8 @@ bytesio_dealloc(PyObject *op)
+         PyErr_Print();
+     }
+     Py_CLEAR(self->buf);
+-    Py_CLEAR(self->dict);
+-    FT_CLEAR_WEAKREFS(op, self->weakreflist);
++    PyObject_ClearManagedDict(op);
++    PyObject_ClearWeakRefs(op);
+     tp->tp_free(self);
+     Py_DECREF(tp);
+ }
+@@ -1187,16 +1189,15 @@ bytesio_traverse(PyObject *op, visitproc visit, void *arg)
+ {
+     bytesio *self = bytesio_CAST(op);
+     Py_VISIT(Py_TYPE(self));
+-    Py_VISIT(self->dict);
+     Py_VISIT(self->buf);
+-    return 0;
++    return PyObject_VisitManagedDict(op, visit, arg);
+ }
+ 
+ static int
+ bytesio_clear(PyObject *op)
+ {
+     bytesio *self = bytesio_CAST(op);
+-    Py_CLEAR(self->dict);
++    PyObject_ClearManagedDict(op);
+     if (FT_ATOMIC_LOAD_SSIZE_RELAXED(self->exports) == 0) {
+         Py_CLEAR(self->buf);
+     }
+@@ -1239,12 +1240,6 @@ static struct PyMethodDef bytesio_methods[] = {
+     {NULL, NULL}        /* sentinel */
+ };
+ 
+-static PyMemberDef bytesio_members[] = {
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(bytesio, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(bytesio, dict), Py_READONLY},
+-    {NULL}
+-};
+-
+ static PyType_Slot bytesio_slots[] = {
+     {Py_tp_dealloc, bytesio_dealloc},
+     {Py_tp_doc, (void *)_io_BytesIO___init____doc__},
+@@ -1253,7 +1248,6 @@ static PyType_Slot bytesio_slots[] = {
+     {Py_tp_iter, PyObject_SelfIter},
+     {Py_tp_iternext, bytesio_iternext},
+     {Py_tp_methods, bytesio_methods},
+-    {Py_tp_members, bytesio_members},
+     {Py_tp_getset, bytesio_getsetlist},
+     {Py_tp_init, _io_BytesIO___init__},
+     {Py_tp_new, bytesio_new},
+diff --git a/Modules/_io/fileio.c b/Modules/_io/fileio.c
+index 732eb28e51ba8c..a954bc5cd407d2 100644
+--- a/Modules/_io/fileio.c
++++ b/Modules/_io/fileio.c
+@@ -5,7 +5,6 @@
+ #include "pycore_fileutils.h"     // _Py_BEGIN_SUPPRESS_IPH
+ #include "pycore_object.h"        // _PyObject_GC_UNTRACK()
+ #include "pycore_pyerrors.h"      // _PyErr_ChainExceptions1()
+-#include "pycore_weakref.h"       // FT_CLEAR_WEAKREFS()
+ 
+ #include <stdbool.h>              // bool
+ #ifdef HAVE_UNISTD_H
+@@ -81,8 +80,6 @@ typedef struct {
+        modified outside of the fileio object / Python (ex. gh-90102, GH-121941,
+        gh-109523). */
+     struct _Py_stat_struct *stat_atopen;
+-    PyObject *weakreflist;
+-    PyObject *dict;
+ } fileio;
+ 
+ #define PyFileIO_Check(state, op) (PyObject_TypeCheck((op), state->PyFileIO_Type))
+@@ -221,7 +218,6 @@ fileio_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+     self->truncate = 0;
+     self->stat_atopen = NULL;
+     self->closefd = 1;
+-    self->weakreflist = NULL;
+     return (PyObject *) self;
+ }
+ 
+@@ -562,15 +558,13 @@ fileio_traverse(PyObject *op, visitproc visit, void *arg)
+ {
+     fileio *self = PyFileIO_CAST(op);
+     Py_VISIT(Py_TYPE(self));
+-    Py_VISIT(self->dict);
+-    return 0;
++    return PyObject_VisitManagedDict(op, visit, arg);
+ }
+ 
+ static int
+ fileio_clear(PyObject *op)
+ {
+-    fileio *self = PyFileIO_CAST(op);
+-    Py_CLEAR(self->dict);
++    PyObject_ClearManagedDict(op);
+     return 0;
+ }
+ 
+@@ -588,7 +582,7 @@ fileio_dealloc(PyObject *op)
+         PyMem_Free(self->stat_atopen);
+         self->stat_atopen = NULL;
+     }
+-    FT_CLEAR_WEAKREFS(op, self->weakreflist);
++    PyObject_ClearWeakRefs(op);
+     (void)fileio_clear(op);
+ 
+     PyTypeObject *tp = Py_TYPE(op);
+@@ -1370,8 +1364,6 @@ static PyGetSetDef fileio_getsetlist[] = {
+ 
+ static PyMemberDef fileio_members[] = {
+     {"_finalizing", Py_T_BOOL, offsetof(fileio, finalizing), 0},
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(fileio, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(fileio, dict), Py_READONLY},
+     {NULL}
+ };
+ 
+diff --git a/Modules/_io/iobase.c b/Modules/_io/iobase.c
+index 2b482687e85c5b..13de04d3b9ce77 100644
+--- a/Modules/_io/iobase.c
++++ b/Modules/_io/iobase.c
+@@ -14,7 +14,6 @@
+ #include "pycore_long.h"          // _PyLong_GetOne()
+ #include "pycore_object.h"        // _PyType_HasFeature()
+ #include "pycore_pyerrors.h"      // _PyErr_ChainExceptions1()
+-#include "pycore_weakref.h"       // FT_CLEAR_WEAKREFS()
+ 
+ #include <stddef.h>               // offsetof()
+ #include "_iomodule.h"
+@@ -33,8 +32,6 @@ class _io._RawIOBase "PyObject *" "clinic_state()->PyRawIOBase_Type"
+ typedef struct {
+     PyObject_HEAD
+ 
+-    PyObject *dict;
+-    PyObject *weakreflist;
+ } iobase;
+ 
+ #define iobase_CAST(op) ((iobase *)(op))
+@@ -383,15 +380,13 @@ iobase_traverse(PyObject *op, visitproc visit, void *arg)
+ {
+     iobase *self = iobase_CAST(op);
+     Py_VISIT(Py_TYPE(self));
+-    Py_VISIT(self->dict);
+-    return 0;
++    return PyObject_VisitManagedDict(op, visit, arg);
+ }
+ 
+ static int
+ iobase_clear(PyObject *op)
+ {
+-    iobase *self = iobase_CAST(op);
+-    Py_CLEAR(self->dict);
++    PyObject_ClearManagedDict(op);
+     return 0;
+ }
+ 
+@@ -400,8 +395,8 @@ iobase_clear(PyObject *op)
+ static void
+ iobase_dealloc(PyObject *op)
+ {
+-    /* NOTE: since IOBaseObject has its own dict, Python-defined attributes
+-       are still available here for close() to use.
++    /* NOTE: since the managed dict is only cleared below, Python-defined
++       attributes are still available here for close() to use.
+        However, if the derived class declares a __slots__, those slots are
+        already gone.
+     */
+@@ -416,8 +411,8 @@ iobase_dealloc(PyObject *op)
+     }
+     PyTypeObject *tp = Py_TYPE(self);
+     _PyObject_GC_UNTRACK(self);
+-    FT_CLEAR_WEAKREFS(op, self->weakreflist);
+-    Py_CLEAR(self->dict);
++    PyObject_ClearWeakRefs(op);
++    PyObject_ClearManagedDict(op);
+     tp->tp_free(self);
+     Py_DECREF(tp);
+ }
+@@ -907,12 +902,6 @@ static PyGetSetDef iobase_getset[] = {
+     {NULL}
+ };
+ 
+-static struct PyMemberDef iobase_members[] = {
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(iobase, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(iobase, dict), Py_READONLY},
+-    {NULL},
+-};
+-
+ 
+ static PyType_Slot iobase_slots[] = {
+     {Py_tp_dealloc, iobase_dealloc},
+@@ -922,7 +911,6 @@ static PyType_Slot iobase_slots[] = {
+     {Py_tp_iter, iobase_iter},
+     {Py_tp_iternext, iobase_iternext},
+     {Py_tp_methods, iobase_methods},
+-    {Py_tp_members, iobase_members},
+     {Py_tp_getset, iobase_getset},
+     {Py_tp_finalize, iobase_finalize},
+     {0, NULL},
+@@ -932,7 +920,8 @@ PyType_Spec _Py_iobase_spec = {
+     .name = "_io._IOBase",
+     .basicsize = sizeof(iobase),
+     .flags = (Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE | Py_TPFLAGS_HAVE_GC |
+-              Py_TPFLAGS_IMMUTABLETYPE),
++              Py_TPFLAGS_IMMUTABLETYPE | Py_TPFLAGS_MANAGED_DICT |
++              Py_TPFLAGS_MANAGED_WEAKREF),
+     .slots = iobase_slots,
+ };
+ 
+diff --git a/Modules/_io/stringio.c b/Modules/_io/stringio.c
+index 25ebe890927848..a5687207d65e08 100644
+--- a/Modules/_io/stringio.c
++++ b/Modules/_io/stringio.c
+@@ -1,8 +1,8 @@
+ #include "Python.h"
+ #include <stddef.h>               // offsetof()
++#include "pycore_critical_section.h"  // _Py_CRITICAL_SECTION_ASSERT_OBJECT_LOCKED()
+ #include "pycore_object.h"
+ #include "pycore_unicodeobject.h" // _PyUnicode_ResizeCompact()
+-#include "pycore_weakref.h"       // FT_CLEAR_WEAKREFS()
+ #include "_iomodule.h"
+ 
+ /* Implementation note: the buffer is always at least one character longer
+@@ -42,8 +42,6 @@ typedef struct {
+     PyObject *readnl;
+     PyObject *writenl;
+ 
+-    PyObject *dict;
+-    PyObject *weakreflist;
+     _PyIO_State *module_state;
+ } stringio;
+ 
+@@ -675,8 +673,7 @@ stringio_traverse(PyObject *op, visitproc visit, void *arg)
+     Py_VISIT(self->readnl);
+     Py_VISIT(self->writenl);
+     Py_VISIT(self->decoder);
+-    Py_VISIT(self->dict);
+-    return 0;
++    return PyObject_VisitManagedDict(op, visit, arg);
+ }
+ 
+ static int
+@@ -686,7 +683,7 @@ stringio_clear(PyObject *op)
+     Py_CLEAR(self->readnl);
+     Py_CLEAR(self->writenl);
+     Py_CLEAR(self->decoder);
+-    Py_CLEAR(self->dict);
++    PyObject_ClearManagedDict(op);
+     return 0;
+ }
+ 
+@@ -703,7 +700,7 @@ stringio_dealloc(PyObject *op)
+     }
+     PyUnicodeWriter_Discard(self->writer);
+     (void)stringio_clear(op);
+-    FT_CLEAR_WEAKREFS(op, self->weakreflist);
++    PyObject_ClearWeakRefs(op);
+     tp->tp_free(self);
+     Py_DECREF(tp);
+ }
+@@ -930,11 +927,16 @@ _io_StringIO___getstate___impl(stringio *self)
+ 
+     if (initvalue == NULL)
+         return NULL;
+-    if (self->dict == NULL) {
++    if (_PyObject_IsInstanceDictEmpty((PyObject *)self)) {
+         dict = Py_NewRef(Py_None);
+     }
+     else {
+-        dict = PyDict_Copy(self->dict);
++        dict = PyObject_GenericGetDict((PyObject *)self, NULL);
++        if (dict == NULL) {
++            Py_DECREF(initvalue);
++            return NULL;
++        }
++        Py_SETREF(dict, PyDict_Copy(dict));
+         if (dict == NULL) {
+             Py_DECREF(initvalue);
+             return NULL;
+@@ -1045,14 +1047,16 @@ _io_StringIO___setstate___impl(stringio *self, PyObject *state)
+                          Py_TYPE(dict)->tp_name);
+             return NULL;
+         }
+-        if (self->dict) {
+-            /* Alternatively, we could replace the internal dictionary
+-               completely. However, it seems more practical to just update it. */
+-            if (PyDict_Update(self->dict, dict) < 0)
+-                return NULL;
++        /* Alternatively, we could replace the internal dictionary
++           completely. However, it seems more practical to just update it. */
++        PyObject *self_dict = PyObject_GenericGetDict((PyObject *)self, NULL);
++        if (self_dict == NULL) {
++            return NULL;
+         }
+-        else {
+-            self->dict = Py_NewRef(dict);
++        int rc = PyDict_Update(self_dict, dict);
++        Py_DECREF(self_dict);
++        if (rc < 0) {
++            return NULL;
+         }
+     }
+ 
+@@ -1138,12 +1142,6 @@ static PyGetSetDef stringio_getset[] = {
+     {NULL}
+ };
+ 
+-static struct PyMemberDef stringio_members[] = {
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(stringio, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(stringio, dict), Py_READONLY},
+-    {NULL},
+-};
+-
+ static PyType_Slot stringio_slots[] = {
+     {Py_tp_dealloc, stringio_dealloc},
+     {Py_tp_doc, (void *)_io_StringIO___init____doc__},
+@@ -1151,7 +1149,6 @@ static PyType_Slot stringio_slots[] = {
+     {Py_tp_clear, stringio_clear},
+     {Py_tp_iternext, stringio_iternext},
+     {Py_tp_methods, stringio_methods},
+-    {Py_tp_members, stringio_members},
+     {Py_tp_getset, stringio_getset},
+     {Py_tp_init, _io_StringIO___init__},
+     {Py_tp_new, stringio_new},
+diff --git a/Modules/_io/textio.c b/Modules/_io/textio.c
+index 719f9ef36f4957..967392313bea20 100644
+--- a/Modules/_io/textio.c
++++ b/Modules/_io/textio.c
+@@ -16,7 +16,6 @@
+ #include "pycore_pyerrors.h"      // _PyErr_ChainExceptions1()
+ #include "pycore_pystate.h"       // _PyInterpreterState_GET()
+ #include "pycore_unicodeobject.h" // _PyUnicode_AsASCIIString()
+-#include "pycore_weakref.h"       // FT_CLEAR_WEAKREFS()
+ 
+ #include "_iomodule.h"
+ 
+@@ -731,8 +730,6 @@ struct textio
+     /* Cache raw object if it's a FileIO object */
+     PyObject *raw;
+ 
+-    PyObject *weakreflist;
+-    PyObject *dict;
+ 
+     _PyIO_State *state;
+ };
+@@ -1542,7 +1539,7 @@ textiowrapper_clear(PyObject *op)
+     Py_CLEAR(self->errors);
+     Py_CLEAR(self->raw);
+ 
+-    Py_CLEAR(self->dict);
++    PyObject_ClearManagedDict(op);
+     return 0;
+ }
+ 
+@@ -1556,7 +1553,7 @@ textiowrapper_dealloc(PyObject *op)
+         return;
+     self->ok = 0;
+     _PyObject_GC_UNTRACK(self);
+-    FT_CLEAR_WEAKREFS(op, self->weakreflist);
++    PyObject_ClearWeakRefs(op);
+     (void)textiowrapper_clear(op);
+     tp->tp_free(self);
+     Py_DECREF(tp);
+@@ -1578,8 +1575,7 @@ textiowrapper_traverse(PyObject *op, visitproc visit, void *arg)
+     Py_VISIT(self->errors);
+     Py_VISIT(self->raw);
+ 
+-    Py_VISIT(self->dict);
+-    return 0;
++    return PyObject_VisitManagedDict(op, visit, arg);
+ }
+ 
+ static PyObject *
+@@ -3565,8 +3561,6 @@ static PyMemberDef textiowrapper_members[] = {
+     {"line_buffering", Py_T_BOOL, offsetof(textio, line_buffering), Py_READONLY},
+     {"write_through", Py_T_BOOL, offsetof(textio, write_through), Py_READONLY},
+     {"_finalizing", Py_T_BOOL, offsetof(textio, finalizing), 0},
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(textio, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(textio, dict), Py_READONLY},
+     {NULL}
+ };
+ 
+diff --git a/Modules/_io/winconsoleio.c b/Modules/_io/winconsoleio.c
+index 183506adc678ea..a6e884fb9c5fc8 100644
+--- a/Modules/_io/winconsoleio.c
++++ b/Modules/_io/winconsoleio.c
+@@ -10,7 +10,6 @@
+ #include "pycore_fileutils.h"     // _Py_BEGIN_SUPPRESS_IPH
+ #include "pycore_object.h"        // _PyObject_GC_UNTRACK()
+ #include "pycore_pyerrors.h"      // _PyErr_ChainExceptions1()
+-#include "pycore_weakref.h"       // FT_CLEAR_WEAKREFS()
+ 
+ #ifdef HAVE_WINDOWS_CONSOLE_IO
+ 
+@@ -216,8 +215,6 @@ typedef struct {
+     unsigned int closefd : 1;
+     char finalizing;
+     unsigned int blksize;
+-    PyObject *weakreflist;
+-    PyObject *dict;
+     char buf[SMALLBUF];
+     wchar_t wbuf;
+ } winconsoleio;
+@@ -300,7 +297,6 @@ winconsoleio_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
+         self->writable = 0;
+         self->closefd = 0;
+         self->blksize = 0;
+-        self->weakreflist = NULL;
+     }
+ 
+     return (PyObject *) self;
+@@ -498,15 +494,13 @@ winconsoleio_traverse(PyObject *op, visitproc visit, void *arg)
+ {
+     winconsoleio *self = winconsoleio_CAST(op);
+     Py_VISIT(Py_TYPE(self));
+-    Py_VISIT(self->dict);
+-    return 0;
++    return PyObject_VisitManagedDict(op, visit, arg);
+ }
+ 
+ static int
+ winconsoleio_clear(PyObject *op)
+ {
+-    winconsoleio *self = winconsoleio_CAST(op);
+-    Py_CLEAR(self->dict);
++    PyObject_ClearManagedDict(op);
+     return 0;
+ }
+ 
+@@ -519,8 +513,8 @@ winconsoleio_dealloc(PyObject *op)
+     if (_PyIOBase_finalize(op) < 0)
+         return;
+     _PyObject_GC_UNTRACK(self);
+-    FT_CLEAR_WEAKREFS(op, self->weakreflist);
+-    Py_CLEAR(self->dict);
++    PyObject_ClearWeakRefs(op);
++    PyObject_ClearManagedDict(op);
+     tp->tp_free(self);
+     Py_DECREF(tp);
+ }
+@@ -1261,8 +1255,6 @@ static PyGetSetDef winconsoleio_getsetlist[] = {
+ static PyMemberDef winconsoleio_members[] = {
+     {"_blksize", Py_T_UINT, offsetof(winconsoleio, blksize), 0},
+     {"_finalizing", Py_T_BOOL, offsetof(winconsoleio, finalizing), 0},
+-    {"__weaklistoffset__", Py_T_PYSSIZET, offsetof(winconsoleio, weakreflist), Py_READONLY},
+-    {"__dictoffset__", Py_T_PYSSIZET, offsetof(winconsoleio, dict), Py_READONLY},
+     {NULL}
+ };
+ 
