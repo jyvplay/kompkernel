@@ -10851,3 +10851,71 @@ ls-l width4 hit1800s timeout. No full-stack win. Unit15387, independent714.
 Whole-stack coverage-fusion ABBA12: CPU ratio0.999956,wall0.998619; significance
 and per-lane nonregression gate FAILED (json-pkg regresses). All12 wires match
 fresh frontier; BPE reference checks6487/arm. No optimization deployed.
+
+## X159 — KLIMAX (κλῖμαξ, ladder): hierarchical counter-vector labels
+
+**Design:** `src/lib/omega/klimax.ts` and `klimax-parent.ts`. For line-start
+outline labels after spaces/optional Markdown hashes, replace a predictable
+positive dotted-decimal label with `@D`. Truncate the previous label to depthD
+and increment its last component, or append1 when descending one level.
+Unpredictable labels stay literal and reset state. Preserve trailing period,
+spaces, titles, page headers, CRLF/LF and all other source bytes. Bounds:
+50000 UTF16 units,12 components,6 digits/component, no leading zero. Source
+marker collisions refuse. One full English key describes the operation after
+parent decoding; no hidden vocabulary or external outline is provided.
+
+**Novelty boundary:** classical Dewey-label/differential tree coding, not new
+mathematics. Different from AKOLOUTHIA's independent same-position scalar
+progression, METRON's absolute row index, DENDRON's brace-expanded paths,
+BATHMOS's sorted ranks, ISOSTATHMIA's hunk conservation and BEMATISMOS's tab
+geometry. The HTTP operational incumbent already uses AKOLOUTHIA, so that
+antecedent is not omitted from the price comparison. This is a scoped source
+audit, not an exhaustive equivalence proof over399 modules.
+
+**Greedy / resources:** deterministic one-pass state transducer; no greedy
+parameter search. Local emission uses character length and exact equality,
+not a claim of optimal BPE choices. O(n) transform/inverse, O(n) output memory,
+<=12 counters; CPU/work bounded, no wall-clock choice. Optional frontier API
+pays for the incumbent and one transformed-parent encode, then uses strict
+complete-price admission. Unsupported incumbent readers preserve the baseline.
+No default TAGSTACK integration; a token gain is not an encoder-time gain.
+
+**Observed complete messages:** HTTP technical outline1573→1303 (**270 tokens,
+17.16%**); TLS1.3 outline990→1010 and TLS1.2 outline876→884 lose and retain their
+incumbents. These are real pinned contiguous table-of-contents excerpts,
+not whole-RFC or broad-prose results. BEMATISMOS's best raw-screened28-plan
+HTTP control costs1692 (loss119); it is not an exhaustive28-parent tournament.
+All six KLIMAX baseline/candidate messages independently invert to source bytes
+in Python. The tab-stop control is TS-verified; its Python parent reader refuses
+STELI layout, so it does not inherit that independent check.
+
+**Verification:**1828 unit checks;20 parent/selector attacks;22 deceptive-shape
+modal checks; independent totals and full results in `bench/x159/receipts`.
+The baseline reader explicitly recognizes the existing progression envelope and
+its expanded terminal dictionary instruction; a missing/altered instruction
+refuses, and a duplicated instruction inside source data is retained. Repair
+history is recorded, including failed initial baseline-reader attempts.
+Native basic-chat decoding **NOT_RUN**; no model-behavior certificate.
+
+**Citations:** Al Zadjali & North, *XML Labels Compression using Prefix-Encodings*,
+WEBIST2016, DOI10.5220/0005755500690075,
+https://eprints.whiterose.ac.uk/id/eprint/96826/1/webist%20uploaded%20version.pdf .
+That work prices binary XML-label encodings, not tokens or LLM decoding. The
+research ledger separately follows OpenAI's superstring implementation,
+Anthropic's normalized FreyPackage hypotheses, and DoubleAI's stated graph
+bound. It also independently checks all4096 coefficients of DeepMind's rank48
+complex4×4 matrix-multiplication tensor using exact integers; no compression
+result or wall-time advantage is inferred from that unrelated identity.
+
+**Canonical/category refresh:**29/29 wires identical to X158,11962 tokens;
+21 bounded-reader successes,8 unsupported,29 price/token-ID checks. Totals:
+prose5856→3429 (body token-class leader word), ops17278→5580 (glyph),
+code4152→2636 (word), other729→317 (no tape class). Greatest absolute fixture
+savings remain apt-real1926, ls-l-real3884, json-pkg499, cue-sheet412;
+local/category leaders are not per-codec ablations or global optima.
+
+X159 final speed evidence: negative-prefix-certificate ABBA12 CPU1.010869 /
+wall1.008726; prefix-resumption-disable ABBA12 CPU0.983800 / wall0.984099.
+Both>=10% significance gates FAIL;24/24 complete wires equal the fresh frontier.
+No speed optimization deployed. Final independent source/attack count121,
+including all6 complete outline messages; native remains NOT_RUN.

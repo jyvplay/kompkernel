@@ -1,0 +1,7 @@
+{
+  "coldCalls": 24,
+  "freshCanonicalIdentical": 24,
+  "referenceBpeChecksPerArm": 6032,
+  "prefixDifferentialChecksPerArm": 248,
+  "productionDeployed": false
+}

@@ -1,0 +1,168 @@
+[
+  {
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "raw": 5194,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "raw": 3054,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x42/dpkg-l.txt",
+    "raw": 1000,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout/json-pkg.txt",
+    "raw": 1152,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "raw": 811,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x41/ls-real.txt",
+    "raw": 1034,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x42/df-h.txt",
+    "raw": 140,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-work/llm-answer.md",
+    "raw": 733,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-tbl/df-h.txt",
+    "raw": 570,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-work/email-thread.txt",
+    "raw": 629,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x41/du-real.txt",
+    "raw": 458,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x42/lsblk.txt",
+    "raw": 60,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x42b/uptime-w.txt",
+    "raw": 80,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "raw": 1006,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout/code-ts.txt",
+    "raw": 1422,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x41/apt-real.txt",
+    "raw": 2739,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x41/node-help.txt",
+    "raw": 1099,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x42/findmnt.txt",
+    "raw": 787,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x40/cue-sheet.md",
+    "raw": 513,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x42/ps-ef.txt",
+    "raw": 1144,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x41/df-real.txt",
+    "raw": 158,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "raw": 1106,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x40/prices.csv",
+    "raw": 582,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-tbl/psql-output.txt",
+    "raw": 675,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-tbl/markdown-table.md",
+    "raw": 330,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "raw": 656,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "raw": 578,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x42b/free-m.txt",
+    "raw": 76,
+    "refused": true
+  },
+  {
+    "path": "bench/holdout-x42b/vmstat.txt",
+    "raw": 229,
+    "refused": true
+  },
+  {
+    "path": "bench/x159/fixtures/http-toc.txt",
+    "raw": 3734,
+    "folded": "1.  Introduction\n     @2.  Purpose\n     @2.  History and Evolution\n     @2.  Core Semantics\n     @2.  Specifications Obsoleted by This Document\n   2.  Conformance\n     @2.  Syntax Notation\n     @2.  Requirements Notation\n     @2.  Length Requirements\n     @2.  Error Handling\n     @2.  Protocol Version\n   3.  Terminology and Core Concepts\n     @2.  Resources\n     @2.  Representations\n     @2.  Connections, Clients, and Servers\n     @2.  Messages\n     @2.  User Agents\n     @2.  Origin Server\n     @2.  Intermediaries\n     @2.  Caches\n     @2.  Example Message Exchange\n   4.  Identifiers in HTTP\n     @2.  URI References\n     @2.  HTTP-Related URI Schemes\n       @3.  http URI Scheme\n       @3.  https URI Scheme\n       @3.  http(s) Normalization and Comparison\n       @3.  Deprecation of userinfo in http(s) URIs\n       @3.  http(s) References with Fragment Identifiers\n     @2.  Authoritative Access\n       @3.  URI Origin\n       @3.  http Origins\n       @3.  https Origins\n       @3.  https Certificate Verification\n       @3.  IP-ID Reference Identity\n   5.  Fields\n     @2.  Field Names\n     @2.  Field Lines and Combined Field Value\n     @2.  Field Order\n     @2.  Field Limits\n     @2.  Field Values\n     @2.  Common Rules for Defining Field Values\n       @3.  Lists (#rule ABNF Extension)\n         @4.  Sender Requirements\n         @4.  Recipient Requirements\n       @3.  Tokens\n       @3.  Whitespace\n       @3.  Quoted Strings\n       @3.  Comments\n       @3.  Parameters\n       @3.  Date/Time Formats\n   6.  Message Abstraction\n     @2.  Framing and Completeness\n     @2.  Control Data\n     @2.  Header Fields\n     @2.  Content\n       @3.  Content Semantics\n       @3.  Identifying Content\n     @2.  Trailer Fields\n       @3.  Limitations on Use of Trailers\n       @3.  Processing Trailer Fields\n     @2.  Message Metadata\n       @3.  Date\n       @3.  Trailer\n   7.  Routing HTTP Messages\n     @2.  Determining the Target Resource\n     @2.  Host and :authority\n     @2.  Routing Inbound Requests\n       @3.  To a Cache\n       @3.  To a Proxy\n       @3.  To the Origin\n     @2.  Rejecting Misdirected Requests\n     @2.  Response Correlation\n     @2.  Message Forwarding\n       @3.  Connection\n       @3.  Max-Forwards\n       @3.  Via\n     @2.  Message Transformations\n     @2.  Upgrade\n   8.  Representation Data and Metadata\n     @2.  Representation Data\n     @2.  Representation Metadata\n     @2.  Content-Type\n       @3.  Media Type\n       @3.  Charset\n       @3.  Multipart Types\n     @2.  Content-Encoding\n       @3.  Content Codings\n         @4.  Compress Coding\n         @4.  Deflate Coding\n         @4.  Gzip Coding\n     @2.  Content-Language\n       @3.  Language Tags\n     @2.  Content-Length\n     @2.  Content-Location\n     @2.  Validator Fields\n       @3.  Weak versus Strong\n       @3.  Last-Modified\n         @4.  Generation\n         @4.  Comparison\n       @3.  ETag\n         @4.  Generation\n         @4.  Comparison\n         @4.  Example: Entity Tags Varying on Content-Negotiated\n                 Resources\n   9.  Methods\n     @2.  Overview\n     @2.  Common Method Properties\n       @3.  Safe Methods\n       @3.  Idempotent Methods\n       @3.  Methods and Caching\n     @2.  Method Definitions\n       @3.  GET\n       @3.  HEAD\n       @3.  POST\n       @3.  PUT\n       @3.  DELETE\n       @3.  CONNECT\n       @3.  OPTIONS\n       @3.  TRACE\n   10. Message Context\n     @2.  Request Context Fields\n       @3.  Expect\n       @3.  From\n       @3.  Referer\n       @3.  TE\n       @3.  User-Agent\n     @2.  Response Context Fields\n       @3.  Allow\n       @3.  Location\n       @3.  Retry-After\n       @3.  Server\n   11. HTTP Authentication\n     @2.  Authentication Scheme\n     @2.  Authentication Parameters\n     @2.  Challenge and Response\n     @2.  Credentials\n     @2.  Establishing a Protection Space (Realm)\n     @2.  Authenticating Users to Origin Servers\n       @3.  WWW-Authenticate\n       @3.  Authorization\n       @3.  Authentication-Info\n     @2.  Authenticating Clients to Proxies\n       @3.  Proxy-Authenticate\n       @3.  Proxy-Authorization\n       @3.  Proxy-Authentication-Info\n   12. Content Negotiation\n     @2.  Proactive Negotiation\n     @2.  Reactive Negotiation\n     @2.  Request Content Negotiation\n     @2.  Content Negotiation Field Features\n       @3.  Absence\n       @3.  Quality Values\n       @3.  Wildcard Values\n     @2.  Content Negotiation Fields\n       @3.  Accept\n       @3.  Accept-Charset\n       @3.  Accept-Encoding\n       @3.  Accept-Language\n       @3.  Vary\n   13. Conditional Requests\n     @2.  Preconditions\n       @3.  If-Match\n       @3.  If-None-Match\n       @3.  If-Modified-Since\n       @3.  If-Unmodified-Since\n       @3.  If-Range\n     @2.  Evaluation of Preconditions\n       @3.  When to Evaluate\n       @3.  Precedence of Preconditions\n   14. Range Requests\n     @2.  Range Units\n       @3.  Range Specifiers\n       @3.  Byte Ranges\n     @2.  Range\n     @2.  Accept-Ranges\n     @2.  Content-Range\n     @2.  Partial PUT\n     @2.  Media Type multipart/byteranges\n   15. Status Codes\n     @2.  Overview of Status Codes\n     @2.  Informational 1xx\n       @3.  100 Continue\n       @3.  101 Switching Protocols\n     @2.  Successful 2xx\n       @3.  200 OK\n       @3.  201 Created\n       @3.  202 Accepted\n       @3.  203 Non-Authoritative Information\n       @3.  204 No Content\n       @3.  205 Reset Content\n       @3.  206 Partial Content\n         @4.  Single Part\n         @4.  Multiple Parts\n         @4.  Combining Parts\n     @2.  Redirection 3xx\n       @3.  300 Multiple Choices\n       @3.  301 Moved Permanently\n       @3.  302 Found\n       @3.  303 See Other\n       @3.  304 Not Modified\n       @3.  305 Use Proxy\n       @3.  306 (Unused)\n       @3.  307 Temporary Redirect\n       @3.  308 Permanent Redirect\n     @2.  Client Error 4xx\n       @3.  400 Bad Request\n       @3.  401 Unauthorized\n       @3.  402 Payment Required\n       @3.  403 Forbidden\n       @3.  404 Not Found\n       @3.  405 Method Not Allowed\n       @3.  406 Not Acceptable\n       @3.  407 Proxy Authentication Required\n       @3.  408 Request Timeout\n       @3. 409 Conflict\n       @3. 410 Gone\n       @3. 411 Length Required\n       @3. 412 Precondition Failed\n       @3. 413 Content Too Large\n       @3. 414 URI Too Long\n       @3. 415 Unsupported Media Type\n       @3. 416 Range Not Satisfiable\n       @3. 417 Expectation Failed\n       @3. 418 (Unused)\n       @3. 421 Misdirected Request\n       @3. 422 Unprocessable Content\n       @3. 426 Upgrade Required\n     @2.  Server Error 5xx\n       @3.  500 Internal Server Error\n       @3.  501 Not Implemented\n       @3.  502 Bad Gateway\n       @3.  503 Service Unavailable\n       @3.  504 Gateway Timeout\n       @3.  505 HTTP Version Not Supported\n   16. Extending HTTP\n     @2.  Method Extensibility\n       @3.  Method Registry\n       @3.  Considerations for New Methods\n     @2.  Status Code Extensibility\n       @3.  Status Code Registry\n       @3.  Considerations for New Status Codes\n     @2.  Field Extensibility\n       @3.  Field Name Registry\n       @3.  Considerations for New Fields\n         @4.  Considerations for New Field Names\n         @4.  Considerations for New Field Values\n     @2.  Authentication Scheme Extensibility\n       @3.  Authentication Scheme Registry\n       @3.  Considerations for New Authentication Schemes\n     @2.  Range Unit Extensibility\n       @3.  Range Unit Registry\n       @3.  Considerations for New Range Units\n     @2.  Content Coding Extensibility\n       @3.  Content Coding Registry\n       @3.  Considerations for New Content Codings\n     @2.  Upgrade Token Registry\n   17. Security Considerations\n     @2.  Establishing Authority\n     @2.  Risks of Intermediaries\n     @2.  Attacks Based on File and Path Names\n     @2.  Attacks Based on Command, Code, or Query Injection\n     @2.  Attacks via Protocol Element Length\n     @2.  Attacks Using Shared-Dictionary Compression\n     @2.  Disclosure of Personal Information\n     @2.  Privacy of Server Log Information\n     @2.  Disclosure of Sensitive Information in URIs\n     @2. Application Handling of Field Names\n     @2. Disclosure of Fragment after Redirects\n     @2. Disclosure of Product Information\n     @2. Browser Fingerprinting\n     @2. Validator Retention\n     @2. Denial-of-Service Attacks Using Range\n     @2. Authentication Considerations\n       @3.  Confidentiality of Credentials\n       @3.  Credentials and Idle Clients\n       @3.  Protection Spaces\n       @3.  Additional Response Fields\n   18. IANA Considerations\n     @2.  URI Scheme Registration\n     @2.  Method Registration\n     @2.  Status Code Registration\n     @2.  Field Name Registration\n     @2.  Authentication Scheme Registration\n     @2.  Content Coding Registration\n     @2.  Range Unit Registration\n     @2.  Media Type Registration\n     @2.  Port Registration\n     @2. Upgrade Token Registration\n   19. References\n     @2.  Normative References\n     @2.  Informative References\n   Appendix A.  Collected ABNF\n   Appendix B.  Changes from Previous RFCs\n     B.1.  Changes from RFC 2818\n     B.2.  Changes from RFC 7230\n     B.3.  Changes from RFC 7231\n     B.4.  Changes from RFC 7232\n     B.5.  Changes from RFC 7233\n     B.6.  Changes from RFC 7235\n     B.7.  Changes from RFC 7538\n     B.8.  Changes from RFC 7615\n     B.9.  Changes from RFC 7694\n   Acknowledgements\n   Index\n   Authors' Addresses\n\n",
+    "sites": 272,
+    "completeRaw": 2943
+  },
+  {
+    "path": "bench/x159/fixtures/tls12-toc.txt",
+    "raw": 1481,
+    "folded": "Table of Contents\n\n   1. Introduction ....................................................4\n      @2. Requirements Terminology ...................................5\n      @2. Major Differences from TLS 1.1 .............................5\n   2. Goals ...........................................................6\n   3. Goals of This Document ..........................................7\n   4. Presentation Language ...........................................7\n      @2. Basic Block Size ...........................................7\n      @2. Miscellaneous ..............................................8\n      @2. Vectors ....................................................8\n      @2. Numbers ....................................................9\n      @2. Enumerateds ................................................9\n      @2. Constructed Types .........................................10\n           @3. Variants ...........................................10\n      @2. Cryptographic Attributes ..................................12\n      @2. Constants .................................................14\n   5. HMAC and the Pseudorandom Function .............................14\n   6. The TLS Record Protocol ........................................15\n      @2. Connection States .........................................16\n      @2. Record Layer ..............................................19\n           @3. Fragmentation ......................................19\n\n\n\nDierks & Rescorla           Standards Track                     [Page 1]\n\f\nRFC 5246                          TLS                        August 2008\n\n\n           @3. Record Compression and Decompression ...............20\n           @3. Record Payload Protection ..........................21\n                  @4. Null or Standard Stream Cipher ............22\n                  @4. CBC Block Cipher ..........................22\n                  @4. AEAD Ciphers ..............................24\n      @2. Key Calculation ...........................................25\n   7. The TLS Handshaking Protocols ..................................26\n      @2. Change Cipher Spec Protocol ...............................27\n      @2. Alert Protocol ............................................28\n           @3. Closure Alerts .....................................29\n           @3. Error Alerts .......................................30\n      @2. Handshake Protocol Overview ...............................33\n      @2. Handshake Protocol ........................................37\n           @3. Hello Messages .....................................38\n                  @4. Hello Request .............................38\n                  @4. Client Hello ..............................39\n                  @4. Server Hello ..............................42\n                  @4. Hello Extensions ..........................44\n                           @5. Signature Algorithms ...........45\n           @3. Server Certificate .................................47\n           @3. Server Key Exchange Message ........................50\n           @3. Certificate Request ................................53\n           @3. Server Hello Done ..................................55\n           @3. Client Certificate .................................55\n           @3. Client Key Exchange Message ........................57\n                  @4. RSA-Encrypted Premaster Secret Message ....58\n                  @4. Client Diffie-Hellman Public Value ........61\n           @3. Certificate Verify .................................62\n           @3. Finished ...........................................63\n   8. Cryptographic Computations .....................................64\n      @2. Computing the Master Secret ...............................64\n           @3. RSA ................................................65\n           @3. Diffie-Hellman .....................................65\n   9. Mandatory Cipher Suites ........................................65\n   10. Application Data Protocol .....................................65\n   11. Security Considerations .......................................65\n   12. IANA Considerations ...........................................65\n   Appendix A. Protocol Data Structures and Constant Values ..........68\n      A.1. Record Layer ..............................................68\n      A.2. Change Cipher Specs Message ...............................69\n      A.3. Alert Messages ............................................69\n      A.4. Handshake Protocol ........................................70\n           A.4.1. Hello Messages .....................................71\n           A.4.2. Server Authentication and Key Exchange Messages ....72\n           A.4.3. Client Authentication and Key Exchange Messages ....74\n           A.4.4. Handshake Finalization Message .....................74\n      A.5. The Cipher Suite ..........................................75\n      A.6. The Security Parameters ...................................77\n\n\n\nDierks & Rescorla           Standards Track                     [Page 2]\n\f\nRFC 5246                          TLS                        August 2008\n\n\n      A.7. Changes to RFC 4492 .......................................78\n   Appendix B. Glossary ..............................................78\n   Appendix C. Cipher Suite Definitions ..............................83\n   Appendix D. Implementation Notes ..................................85\n      D.1. Random Number Generation and Seeding ......................85\n      D.2. Certificates and Authentication ...........................85\n      D.3. Cipher Suites .............................................85\n      D.4. Implementation Pitfalls ...................................85\n   Appendix E. Backward Compatibility ................................87\n      E.1. Compatibility with TLS 1.0/1.1 and SSL 3.0 ................87\n      E.2. Compatibility with SSL 2.0 ................................88\n      E.3. Avoiding Man-in-the-Middle Version Rollback ...............90\n   Appendix F. Security Analysis .....................................91\n      F.1. Handshake Protocol ........................................91\n           F.1.1. Authentication and Key Exchange ....................91\n                  F.1.1.1. Anonymous Key Exchange ....................91\n                  F.1.1.2. RSA Key Exchange and Authentication .......92\n                  F.1.1.3. Diffie-Hellman Key Exchange with\n                           Authentication ............................92\n           F.1.2. Version Rollback Attacks ...........................93\n           F.1.3. Detecting Attacks Against the Handshake Protocol ...94\n           F.1.4. Resuming Sessions ..................................94\n      F.2. Protecting Application Data ...............................94\n      F.3. Explicit IVs ..............................................95\n      F.4. Security of Composite Cipher Modes ........................95\n      F.5. Denial of Service .........................................96\n      F.6. Final Notes ...............................................96\n   Normative References ..............................................97\n   Informative References ............................................98\n   Working Group Information ........................................101\n   Contributors .....................................................101\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDierks & Rescorla           Standards Track                     [Page 3]\n\f\nRFC 5246                          TLS                        August 2008\n\n\n",
+    "sites": 45,
+    "completeRaw": 1412
+  },
+  {
+    "path": "bench/x159/fixtures/tls13-toc.txt",
+    "raw": 1766,
+    "folded": "Table of Contents\n\n   1. Introduction ....................................................6\n      @2. Conventions and Terminology ................................7\n      @2. Major Differences from TLS 1.2 .............................8\n      @2. Updates Affecting TLS 1.2 ..................................9\n   2. Protocol Overview ..............................................10\n      @2. Incorrect DHE Share .......................................14\n      @2. Resumption and Pre-Shared Key (PSK) .......................15\n      @2. 0-RTT Data ................................................17\n   3. Presentation Language ..........................................19\n      @2. Basic Block Size ..........................................19\n      @2. Miscellaneous .............................................20\n      @2. Numbers ...................................................20\n      @2. Vectors ...................................................20\n      @2. Enumerateds ...............................................21\n      @2. Constructed Types .........................................22\n      @2. Constants .................................................23\n      @2. Variants ..................................................23\n   4. Handshake Protocol .............................................24\n      @2. Key Exchange Messages .....................................25\n           @3. Cryptographic Negotiation ..........................26\n           @3. Client Hello .......................................27\n           @3. Server Hello .......................................31\n           @3. Hello Retry Request ................................33\n      @2. Extensions ................................................35\n           @3. Supported Versions .................................39\n           @3. Cookie .............................................40\n           @3. Signature Algorithms ...............................41\n           @3. Certificate Authorities ............................45\n           @3. OID Filters ........................................45\n           @3. Post-Handshake Client Authentication ...............47\n           @3. Supported Groups ...................................47\n           @3. Key Share ..........................................48\n           @3. Pre-Shared Key Exchange Modes ......................51\n           @3. Early Data Indication .............................52\n           @3. Pre-Shared Key Extension ..........................55\n      @2. Server Parameters .........................................59\n           @3. Encrypted Extensions ...............................60\n           @3. Certificate Request ................................60\n      @2. Authentication Messages ...................................61\n           @3. The Transcript Hash ................................63\n           @3. Certificate ........................................64\n           @3. Certificate Verify .................................69\n           @3. Finished ...........................................71\n      @2. End of Early Data .........................................72\n\n\n\n\n\nRescorla                     Standards Track                    [Page 3]\n\f\nRFC 8446                           TLS                       August 2018\n\n\n      @2. Post-Handshake Messages ...................................73\n           @3. New Session Ticket Message .........................73\n           @3. Post-Handshake Authentication ......................75\n           @3. Key and Initialization Vector Update ...............76\n   5. Record Protocol ................................................77\n      @2. Record Layer ..............................................78\n      @2. Record Payload Protection .................................80\n      @2. Per-Record Nonce ..........................................82\n      @2. Record Padding ............................................83\n      @2. Limits on Key Usage .......................................84\n   6. Alert Protocol .................................................85\n      @2. Closure Alerts ............................................87\n      @2. Error Alerts ..............................................88\n   7. Cryptographic Computations .....................................90\n      @2. Key Schedule ..............................................91\n      @2. Updating Traffic Secrets ..................................94\n      @2. Traffic Key Calculation ...................................95\n      @2. (EC)DHE Shared Secret Calculation .........................95\n           @3. Finite Field Diffie-Hellman ........................95\n           @3. Elliptic Curve Diffie-Hellman ......................96\n      @2. Exporters .................................................97\n   8. 0-RTT and Anti-Replay ..........................................98\n      @2. Single-Use Tickets ........................................99\n      @2. Client Hello Recording ....................................99\n      @2. Freshness Checks .........................................101\n   9. Compliance Requirements .......................................102\n      @2. Mandatory-to-Implement Cipher Suites .....................102\n      @2. Mandatory-to-Implement Extensions ........................103\n      @2. Protocol Invariants ......................................104\n   10. Security Considerations ......................................106\n   11. IANA Considerations ..........................................106\n   12. References ...................................................109\n      @2. Normative References ....................................109\n      @2. Informative References ..................................112\n   Appendix A. State Machine ........................................120\n     A.1. Client ....................................................120\n     A.2. Server ....................................................121\n   Appendix B. Protocol Data Structures and Constant Values .........122\n     B.1. Record Layer ..............................................122\n     B.2. Alert Messages ............................................123\n     B.3. Handshake Protocol ........................................124\n       B.3.1. Key Exchange Messages .................................125\n       B.3.2. Server Parameters Messages ............................131\n       B.3.3. Authentication Messages ...............................132\n       B.3.4. Ticket Establishment ..................................132\n       B.3.5. Updating Keys .........................................133\n     B.4. Cipher Suites .............................................133\n\n\n\n\nRescorla                     Standards Track                    [Page 4]\n\f\nRFC 8446                           TLS                       August 2018\n\n\n   Appendix C. Implementation Notes .................................134\n     C.1. Random Number Generation and Seeding ......................134\n     C.2. Certificates and Authentication ...........................135\n     C.3. Implementation Pitfalls ...................................135\n     C.4. Client Tracking Prevention ................................137\n     C.5. Unauthenticated Operation .................................137\n   Appendix D. Backward Compatibility ...............................138\n     D.1. Negotiating with an Older Server ..........................139\n     D.2. Negotiating with an Older Client ..........................139\n     D.3. 0-RTT Backward Compatibility ..............................140\n     D.4. Middlebox Compatibility Mode ..............................140\n     D.5. Security Restrictions Related to Backward Compatibility ...141\n   Appendix E. Overview of Security Properties ......................142\n     E.1. Handshake .................................................142\n       E.1.1. Key Derivation and HKDF ...............................145\n       E.1.2. Client Authentication .................................146\n       E.1.3. 0-RTT .................................................146\n       E.1.4. Exporter Independence .................................146\n       E.1.5. Post-Compromise Security ..............................146\n       E.1.6. External References ...................................147\n     E.2. Record Layer ..............................................147\n       E.2.1. External References ...................................148\n     E.3. Traffic Analysis ..........................................148\n     E.4. Side-Channel Attacks ......................................149\n     E.5. Replay Attacks on 0-RTT ...................................150\n       E.5.1. Replay and Exporters ..................................151\n     E.6. PSK Identity Exposure .....................................152\n     E.7. Sharing PSKs ..............................................152\n     E.8. Attacks on Static RSA .....................................152\n   Contributors .....................................................153\n   Author's Address .................................................160\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRescorla                     Standards Track                    [Page 5]\n\f\nRFC 8446                           TLS                       August 2018\n\n\n",
+    "sites": 66,
+    "completeRaw": 1679
+  }
+]

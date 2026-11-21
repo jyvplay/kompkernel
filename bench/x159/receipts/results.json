@@ -1,0 +1,170 @@
+{
+  "codec": "KLIMAX",
+  "productionWired": false,
+  "codecGate": {
+    "completeMessages": 6,
+    "rows": [
+      {
+        "name": "http",
+        "path": "bench/x159/fixtures/http-toc.txt",
+        "base": 1573,
+        "candidate": 1303,
+        "selected": 1303,
+        "applied": true,
+        "saving": 270,
+        "sourceBytes": 10165,
+        "fullSourceBytesEqual": true
+      },
+      {
+        "name": "tls13",
+        "path": "bench/x159/fixtures/tls13-toc.txt",
+        "base": 990,
+        "candidate": 1010,
+        "selected": 990,
+        "applied": false,
+        "saving": 0,
+        "sourceBytes": 9404,
+        "fullSourceBytesEqual": true
+      },
+      {
+        "name": "tls12",
+        "path": "bench/x159/fixtures/tls12-toc.txt",
+        "base": 876,
+        "candidate": 884,
+        "selected": 876,
+        "applied": false,
+        "saving": 0,
+        "sourceBytes": 7709,
+        "fullSourceBytesEqual": true
+      }
+    ],
+    "selection": "replayed measured parents; not fresh timing",
+    "native": "NOT_RUN"
+  },
+  "canonical": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "unit": {
+    "checks": 1828,
+    "passed": true,
+    "generatedCases": 600,
+    "seed": 159,
+    "native": false
+  },
+  "independent": {
+    "checks": 121,
+    "fullMessages": [
+      {
+        "file": "bench/x159/receipts/http-base.json",
+        "path": "bench/x159/fixtures/http-toc.txt",
+        "tokens": 1573,
+        "sourceBytesEqual": true
+      },
+      {
+        "file": "bench/x159/receipts/http-candidate.json",
+        "path": "bench/x159/fixtures/http-toc.txt",
+        "tokens": 1303,
+        "sourceBytesEqual": true
+      },
+      {
+        "file": "bench/x159/receipts/tls13-base.json",
+        "path": "bench/x159/fixtures/tls13-toc.txt",
+        "tokens": 990,
+        "sourceBytesEqual": true
+      },
+      {
+        "file": "bench/x159/receipts/tls13-candidate.json",
+        "path": "bench/x159/fixtures/tls13-toc.txt",
+        "tokens": 1010,
+        "sourceBytesEqual": true
+      },
+      {
+        "file": "bench/x159/receipts/tls12-base.json",
+        "path": "bench/x159/fixtures/tls12-toc.txt",
+        "tokens": 876,
+        "sourceBytesEqual": true
+      },
+      {
+        "file": "bench/x159/receipts/tls12-candidate.json",
+        "path": "bench/x159/fixtures/tls12-toc.txt",
+        "tokens": 884,
+        "sourceBytesEqual": true
+      }
+    ],
+    "native": false
+  },
+  "parentAttacks": {
+    "checks": 20,
+    "passed": true,
+    "scope": "bounded support extension; all underlying source/parent comparisons rerun"
+  },
+  "speedWitness": {
+    "lanes": [
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "cpuRatio": 1.062346107820703,
+        "wallRatio": 1.049596668027383,
+        "identicalWires": 4
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "cpuRatio": 1.0315067131153846,
+        "wallRatio": 1.0274015881682934,
+        "identicalWires": 4
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "cpuRatio": 0.9790892439406901,
+        "wallRatio": 0.9821734546700364,
+        "identicalWires": 4
+      }
+    ],
+    "aggregateCpuRatio": 1.0108688774276589,
+    "aggregateWallRatio": 1.0087256037618604,
+    "gatePassed": false,
+    "scope": "12 cold-process whole-encoder calls, 3 fixed lanes, ABBA; not a universal speed theorem"
+  },
+  "speedAblation": {
+    "lanes": [
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "cpuRatio": 0.9996662639276155,
+        "wallRatio": 0.9918137110075941,
+        "identicalWires": 4
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "cpuRatio": 0.9798469411020787,
+        "wallRatio": 0.9862126742551581,
+        "identicalWires": 4
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "cpuRatio": 0.9819664553363361,
+        "wallRatio": 0.9801578813376542,
+        "identicalWires": 4
+      }
+    ],
+    "aggregateCpuRatio": 0.9837998279507894,
+    "aggregateWallRatio": 0.9840993904881287,
+    "gatePassed": false,
+    "scope": "12 cold-process whole-encoder calls, 3 fixed lanes, ABBA; not a universal speed theorem"
+  },
+  "native": "NOT_RUN",
+  "fullParetoCertified": false,
+  "boundedTokenWinEstablished": true,
+  "limitations": [
+    "one technical-outline win; not broad prose",
+    "selected contiguous excerpts, not whole RFCs",
+    "not an exhaustive registry-wide tournament",
+    "optional wrapper pays baseline plus transformed encode",
+    "native endpoint unavailable",
+    "no significant whole-stack speed gain"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "sourceRevision": "c42694909d50f92cb01c2d50916f022b1c7e74d1",
+  "sourcePath": "matmul_tensor_decompositions/verification_rank.ipynb",
+  "section": "decomposition_444",
+  "symbols": "Gaussian half-integers; multiply all factors by2; target coefficients multiplied by8",
+  "basisCoefficients": 4096,
+  "passed": true,
+  "rank": 48,
+  "mutatedCoefficientRejected": true,
+  "mutationFailureAfterCoefficients": 0,
+  "notebookInspectionSha256": "08fb6680a07d33ed8b573c5b9a1b6b240279be24c0733c47c42932cc82c7fe3a",
+  "scope": "tensor identity certifies bilinear 4x4 complex matrix multiplication; not fastest wall time, not token compression, not Lean replay"
+}
