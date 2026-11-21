@@ -5,3 +5,10 @@ bench/x159/receipts/native-packet.txt -text whitespace=-blank-at-eof
 bench/x160/fixtures/*.diff -text whitespace=-blank-at-eof,-blank-at-eol
 bench/x160/fixtures/*.txt -text whitespace=-blank-at-eof,-blank-at-eol
 bench/x160/receipts/native-packet.txt -text whitespace=-blank-at-eof,-blank-at-eol
+# X161 source excerpts and in-band packets retain exact whitespace.
+bench/x161/fixtures/*.txt -text whitespace=-blank-at-eof,-blank-at-eol
+bench/x161/fixtures/*.diff -text whitespace=-blank-at-eof,-blank-at-eol
+bench/x161/receipts/native-*.txt -text whitespace=-blank-at-eof,-blank-at-eol
+
+# Preserve the extracted upstream notebook cell-source text verbatim.
+bench/x161/research/google-capsets.txt -text whitespace=-blank-at-eol

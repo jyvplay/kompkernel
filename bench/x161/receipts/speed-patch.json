@@ -1,0 +1,6 @@
+{
+  "anchor": "export function tokenStrings(text: string, enc: EncodingName): { id: number; s: string }[] {",
+  "replacement": "// X161 benchmark: bounded memo of complete per-token streaming decode results.\nconst tokenMemo = new Map<string,{id:number;s:string}[]>();\nlet tokenMemoWeight=0;\nexport function tokenStrings(text:string,enc:EncodingName):{id:number;s:string}[]{\n const key=enc+'\\0'+text,hit=tokenMemo.get(key);\n if(hit){flushDecoder();return hit.map(t=>({...t}));}\n const out=tokenStringsUncached(text,enc),weight=key.length+out.length*16;\n if(weight<=500000){if(tokenMemoWeight+weight>500000||tokenMemo.size>=4096){tokenMemo.clear();tokenMemoWeight=0;}\n tokenMemo.set(key,out.map(t=>({...t})));tokenMemoWeight+=weight;}\n return out;\n}\nfunction tokenStringsUncached(text: string, enc: EncodingName): { id: number; s: string }[] {",
+  "production": false,
+  "scope": "complete token-stream memo; defensive copies; encoding key; flush on hit; bounded weight and entries"
+}

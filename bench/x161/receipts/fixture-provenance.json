@@ -1,0 +1,42 @@
+[
+  {
+    "repo": "pietrotiaraju/oeis-python-golf",
+    "revision": "49a274fcd1f5c6c4d5e4887b82b797e3e1e7a3a6",
+    "path": "bfiles/A000xxx/b000290.txt",
+    "fullBytes": 134287,
+    "fullSha256": "4224b3aa5a12ea91787679b9ebab84f5bb85d8c6d1cd4193c842f92fd19c175b",
+    "excerpt": "first100 source lines including any comments; selected before parent pricing; not complete document",
+    "bytes": 744,
+    "sha256": "19cd179f5c1243af0cd8f84509e7ba7c3d1d7f9f485d345401e8183dbd29ab43"
+  },
+  {
+    "repo": "pietrotiaraju/oeis-python-golf",
+    "revision": "49a274fcd1f5c6c4d5e4887b82b797e3e1e7a3a6",
+    "path": "bfiles/A000xxx/b000578.txt",
+    "fullBytes": 170245,
+    "fullSha256": "7404db3dae9d95d35e3f755d98109f4769bde376e79a9ad3d1dad915449f8499",
+    "excerpt": "first100 source lines including any comments; selected before parent pricing; not complete document",
+    "bytes": 903,
+    "sha256": "cbe56e731c644cdbf57e929e3b15cfdd33c64daeefc8c10e142fb1fa942295b5"
+  },
+  {
+    "repo": "pietrotiaraju/oeis-python-golf",
+    "revision": "49a274fcd1f5c6c4d5e4887b82b797e3e1e7a3a6",
+    "path": "bfiles/A000xxx/b000217.txt",
+    "fullBytes": 448227,
+    "fullSha256": "559c66bd31ab84982f9ac4a9102ef6ce738a2cc0dbcacaab24be03197a40b8d4",
+    "excerpt": "first100 source lines including any comments; selected before parent pricing; not complete document",
+    "bytes": 727,
+    "sha256": "553bfc914dfffd35aa1bc038b3fe0048e6d935295b8ed4fc11bbb0da855eed4a"
+  },
+  {
+    "repo": "pietrotiaraju/oeis-python-golf",
+    "revision": "49a274fcd1f5c6c4d5e4887b82b797e3e1e7a3a6",
+    "path": "bfiles/A000xxx/b000583.txt",
+    "fullSha256": "d465315db5da134805960dc02b8509b08f6c16c9d23496c71bec353e00d6a4ed",
+    "sha256": "8e5ef3c01ac0eb75cac1c7ba3dae567812cac3e1bc3c82de40453da552217ff1",
+    "bytes": 1061,
+    "excerpt": "first100 lines; prospectively selected after design freeze before pricing",
+    "codecSha256AtSelection": "05adc29f4023d88b34f1d5b36768794e04df2d7a222c387c180a85406cd8531d"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "path": "bench/x161/fixtures/b000290-first100.txt",
+  "arm": "base",
+  "message": "⁺ = number at same position above + change from two lines above.\n§р\n⁺ с4рт9ра6ро1ре5ри0¶0 0\n1 ост16р25р36р49р64р81р100р121р144р169р196р225р256р289р324р361р400р441р484р529р576р625р676р729р784р841р900р961р102с108т115а122е129а136т144с152о160ир168о176с184т193а202е211а220т230с240о250ир260о270с280т291а302е313а324т336с348о360ир372о384с396т409а422е435а448т462с476о490ир504о518с532т547а562е577а592т608с624о640ир656о672с688т705а722е739а756т774с792о810ир828о846с864т883а902е921а940т960с9801\n\nEvery new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result.",
+  "tokens": 271,
+  "scope": "operational optional chain through KLIMAX",
+  "ms": 9669.669825,
+  "cpuMs": 10097.231
+}
