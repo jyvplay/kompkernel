@@ -1,0 +1,242 @@
+[
+  {
+    path: 'bench/holdout-x42/lsblk.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-work/kb-article.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: true,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x42b/uptime-w.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x42b/free-m.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x42b/vmstat.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-work/unified-diff.patch',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: true,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-tbl/df-h.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x41/df-real.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x41/du-real.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x41/node-help.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x42/findmnt.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x42/df-h.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-work/email-thread.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: true,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-work/llm-answer.md',
+    kenoma: false,
+    homosema: 0,
+    ptyche: true,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-tbl/markdown-table.md',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-tbl/psql-output.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x40/prices.csv',
+    kenoma: false,
+    homosema: 0,
+    ptyche: true,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x40/cue-sheet.md',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x42/ps-ef.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x41/ls-real.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: true
+  },
+  {
+    path: 'bench/holdout/json-pkg.txt',
+    kenoma: true,
+    homosema: 11,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout/code-ts.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x42/dpkg-l.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x41/ps-real.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-tbl/kubectl-get-pods.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: true,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x40/metrics.tsv',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: true,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x41/apt-real.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  },
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: true
+  },
+  {
+    path: 'bench/x162/fixtures/cp2k.md',
+    kenoma: false,
+    homosema: 0,
+    ptyche: false,
+    diathesis: false,
+    mekos: false
+  }
+]

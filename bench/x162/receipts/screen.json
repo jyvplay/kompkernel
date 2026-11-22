@@ -1,0 +1,23 @@
+[
+  {
+    "file": "coreboot.md",
+    "bytes": 60886,
+    "raw": 15876,
+    "sites": 0,
+    "rawCandidate": null
+  },
+  {
+    "file": "cp2k.md",
+    "bytes": 8388,
+    "raw": 2168,
+    "sites": 116,
+    "rawCandidate": 2110
+  },
+  {
+    "file": "gptme.md",
+    "bytes": 3634,
+    "raw": 1215,
+    "sites": 0,
+    "rawCandidate": null
+  }
+]

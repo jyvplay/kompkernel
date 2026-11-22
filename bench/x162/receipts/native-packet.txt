@@ -1,0 +1,36 @@
+Decode first. Replace each line consisting of ^ with the uppercase ASCII letters and digits from the next line, stopping before its first " [" if present. Preserve everything else; print only.
+¶ k=v. expand repeatedly; print only.
+§ц
+   ҿ^цо)
+
+ҿы TheoryЛ [→ more](рЛmethodsд/dшрдftу/indexои
+
+ҿгр/samplingър/semiempiricalsПг/molecular_dynamicsМш/hartree-fockАр/properties/ір/electronic_structureкр/qm_mmа/пАopticalБ algorithmраoptimizationаgeometry_and_cell_optОЛtechnologies/eigensolversҵц Constant Number, Volume, andә Molecular Dynamicsҳ Neglect of DiatomicЬ Generalized Langevin Equationё Orbitalз Molecular Mechanicsө Kohn-Shamӯш/index)
+
+тр/post_hartree_fockҗ-Centered Cubic crystal structureйшухшаlinear_scalingов Density Functionalӡъуб Parameterized Model number лёsңг/path_integralsонПом Car-Parrinelloҭ Hartree Fockњ EnergyП)
+
+Nұр/machine_learningүш/gpwоў Self-Consistentслие methodю Constrainedвыя Atomicь Local¶# Acronyms
+
+```{glossary}
+ҿ Auxiliary Density Matrix MethodМ/admmо Absolutelyьized Molecularли Austin Model 1ӡ Assisted Model Building and Energy Refinementия Polarization Tensorия Simulation Environmentи Always Stable Predictor-Correctorн Bodyҗи Broyden–Fletcher–Goldfarb–ShannoБо Born-Oppenheimerән Bethe-Salpeter Equationпаbethe-salpeterо Basis Set Superposition Errorшаbasis_setsою шаconstrained)
+
+CDFT-CIцю Configuration Interactionшаconstrainedо Conjugated GradientsБо Chemistry at HARvardзи Crystallographic Information Fileи COLlective VARiableгаmetadynamicsомеимәи Canonical Sampling through Velocity Rescalingи Compute Unified Device Architectureи Distributed Block Compressed Sparse Row libraryи Density Derived Atomic Point Chargesив Tight Bindingъдftbовыйв Embeddingыраembeddingаqm_qmо Direct Inversion of the Iterative SubspaceӯDLA-Fц Distributed Linear Algebra from the FutureОдlafо Density Of Statesідosо Embedded-Atom Methodи Energy Correctionи Extended Hückelыи Empirical Interatomic Potentialӡ Eigenvalue soLvers for Petascale ApplicationsО/elpaо Ehrenfestәгаehrenfestо Electron Paramagnetic Resonanceи Electron Repulsion IntegralМу Faceҗ
+
+FISTц Frontiers In Simulation Technology (CP2K's force field implementationо Field Programmable Gate Arrayи Gaussian Augmented-Plane Wavesешаgapw)
+
+gCPц Geometrical CounterPoiseЛ#Kruse2012о Google Cloud PlatformЛhttps://cloud.google.comо Gaussian Expansion of the Electrostatic Potentialкаbuiltinо Generalized Gradient Approximationsй Generalized HybridёеиЬ thermostatи Gaussian Plane Waveеү GROningen MOlecular Simulationи Goedecker-Teter-Hutter pseudopotentialsи Gaussian Typeли GW approximationпу Hexagonal Close-Packed crystal structureиҭМуҭ eXchangeМу Heterogeneous Interface for Portabilityи Institute of Electrical and Electronics Engineersи Integrated Molecularёзе
+
+K-pointц a vector in reciprocal spaceшаk-pointsоөй Linear Combination ofясь-Density ApproximationӯLDOSць Density of States.и LINear RESponse
+
+LRIGPWць Resolution-of-Identity Projector Augmented Waveешаlocal_riо Linear Scalingхь Spin Densityи Modifiedяли Monte Carloегаmonte_carloоәнзи MiniMax-Ewaldкаimage_chargesо Modifiedҳ Overlapи Molecularлі/molecular_orbitalsо Maximum Overlap Methodи Møller–Plesset perturbation theory to 2nd orderтаmp2о Message Passing Interfaceи Multi-Scale Shock Techniqueиҳ Differential Overlapи Nudged Elastic Bandраoptimizationаnudged_elastic_bandо Non-Equilibrium Green's Functionіаbandаgwо Nuclear Magnetic ResonanceАnmrо Neural Network Potentialұ/nnp)
+
+NpEц Constant Number, Pressure, andњVEҵњVTҵ Temperatureнё FreeӯOpenCLц Open Computing Language
+
+OpenMPц Open Multi-Processingиё Transformationешаorbital_transformation)
+
+PAO-MLц Polarizedял from Machine Learningұ/pao-mlо Periodic Boundary Conditionsи Perdew–Burke–Ernzerhof exchange-correlation functionalй Protein Data Bank (the database or the format specificationо Path IntegralЬ Thermostatи Path Integral Langevin Equation thermostatи Path INTegralңб3ӡб6ӡ Projection-Operator Diabatizationи Pseudo-Potentialшаpseudopotentialsо Plane Wavesи Quantum Mechanics азку Quantum Mechanics
+
+QSц Quick Step (cp2k's quantum methods implementation)ү Restrained ElectroStatic Potentialіаpopulationаrespо REversible reference System Propagator Algorithmи Resolution of Identityи Recife Model 1и Remote Memory Accessи Root-Mean-Square Deviationи Random-Phase Approximationтаrpaо Ring Polymerәңў Continuum Solvation modelкаimplicit_solvationо Self Consistent Field algorithmйў-Polarization Tight-Bindingи Semi-Empirical methodsӡ Self Interaction Correctionи Spin-Orbit Couplingsи Scanning Tunneling MicroscopeАstm_imagesо Time Dependent Density Field Perturbationып/tddftо Tree Monte Carlo algorithmи TRace reSetting 4th order schemeх Universal Force Fieldи Unrestrictedөй Visualәи X-ray Absorption SpectraАx-rayу eXchange and Correlation functionalӯxTBц eXtended Tight Bindingъаxtb)
+
+Z-matrixц formalism to represent atomic coordinatesЛhttps://en.wikipedia.org/wiki/Z-matrix_(chemistry)о Zhao-Morrison-Parr potential
+```

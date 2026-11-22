@@ -1,0 +1,166 @@
+{
+  "checks": 10,
+  "base": 1428,
+  "candidate": 1189,
+  "saved": 239,
+  "percent": 16.73669467787115,
+  "sourceBytes": 8388,
+  "sites": 116,
+  "coverage": [
+    {
+      "name": "coreboot.md",
+      "akrostichis": 0,
+      "kampyli": 0
+    },
+    {
+      "name": "cp2k.md",
+      "akrostichis": 116,
+      "kampyli": 0
+    },
+    {
+      "name": "gptme.md",
+      "akrostichis": 0,
+      "kampyli": 0
+    },
+    {
+      "name": "iris.csv",
+      "akrostichis": 0,
+      "kampyli": 0
+    },
+    {
+      "name": "penguins.csv",
+      "akrostichis": 0,
+      "kampyli": 0
+    },
+    {
+      "name": "tips.csv",
+      "akrostichis": 0,
+      "kampyli": 0
+    },
+    {
+      "name": "wntr.rst",
+      "akrostichis": 0,
+      "kampyli": 0
+    }
+  ],
+  "canonical": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "sites": 0
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "sites": 0
+    }
+  ],
+  "native": "NOT_RUN",
+  "paretoCertified": false
+}

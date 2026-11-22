@@ -1,0 +1,5 @@
+{
+  "anchor": "  const ids = encodeIds(text, enc);\n  const out: { id: number; s: string }[] = [];",
+  "replacement": "  const ids = encodeIds(text, enc);\n  const mod:any=enc==='o200k_base'?X162_O:X162_C;\n  const ranks=mod.default?.bytePairEncodingCoreProcessor?.bytePairRankDecoder;\n  // Whole-call fast path only: mixed UTF8 fragments retain original streaming semantics.\n  if(Array.isArray(ranks)&&ids.every(id=>typeof ranks[id]==='string')&&\n      (!ids.length||!ranks[ids[0]].startsWith('\\ufeff'))){\n    flushDecoder();return ids.map(id=>({id,s:ranks[id]}));\n  }\n  const out: { id: number; s: string }[] = [];",
+  "production": false
+}

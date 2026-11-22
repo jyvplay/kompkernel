@@ -1,0 +1,146 @@
+{
+  "scope": "one whole kb-article cold encoder including module startup; sampled self time, not speed evidence",
+  "sampledMicroseconds": 9203325,
+  "top": [
+    {
+      "function": "countLongRaw",
+      "file": "speed-A.mjs",
+      "line": 2322,
+      "selfMicroseconds": 740706,
+      "percent": 8.048243433758994
+    },
+    {
+      "function": "scoreRunCostDeltaSlots",
+      "file": "speed-A.mjs",
+      "line": 6437,
+      "selfMicroseconds": 713655,
+      "percent": 7.7543170538908495
+    },
+    {
+      "function": "(garbage collector)",
+      "file": "",
+      "line": 0,
+      "selfMicroseconds": 630843,
+      "percent": 6.854511820456194
+    },
+    {
+      "function": "countTokens3",
+      "file": "speed-A.mjs",
+      "line": 2373,
+      "selfMicroseconds": 600323,
+      "percent": 6.522892541554275
+    },
+    {
+      "function": "chunkCountFast",
+      "file": "speed-A.mjs",
+      "line": 2262,
+      "selfMicroseconds": 560905,
+      "percent": 6.094590813646155
+    },
+    {
+      "function": "renderBest",
+      "file": "speed-A.mjs",
+      "line": 6743,
+      "selfMicroseconds": 530305,
+      "percent": 5.762102283685516
+    },
+    {
+      "function": "rankAt",
+      "file": "speed-A.mjs",
+      "line": 1947,
+      "selfMicroseconds": 248939,
+      "percent": 2.704881116335672
+    },
+    {
+      "function": "encode",
+      "file": "encoding",
+      "line": 351,
+      "selfMicroseconds": 219797,
+      "percent": 2.3882346869202165
+    },
+    {
+      "function": "evaluate",
+      "file": "speed-A.mjs",
+      "line": 7843,
+      "selfMicroseconds": 217428,
+      "percent": 2.362493989943852
+    },
+    {
+      "function": "__init",
+      "file": "speed-A.mjs",
+      "line": 3,
+      "selfMicroseconds": 196840,
+      "percent": 2.1387922299820987
+    },
+    {
+      "function": "getBpeRankFromString",
+      "file": "speed-A.mjs",
+      "line": 603,
+      "selfMicroseconds": 191325,
+      "percent": 2.0788682351215457
+    },
+    {
+      "function": "RegExp: [^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]*[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]+[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\\p{N}{1,3}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n/]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+",
+      "file": "",
+      "line": 0,
+      "selfMicroseconds": 187516,
+      "percent": 2.0374810190882098
+    },
+    {
+      "function": "vocabByScript",
+      "file": "speed-A.mjs",
+      "line": 5975,
+      "selfMicroseconds": 157722,
+      "percent": 1.713750193544181
+    },
+    {
+      "function": "",
+      "file": "speed-A.mjs",
+      "line": 6977,
+      "selfMicroseconds": 147639,
+      "percent": 1.6041919632306803
+    },
+    {
+      "function": "compileSourceTextModule",
+      "file": "utils",
+      "line": 344,
+      "selfMicroseconds": 129011,
+      "percent": 1.4017868542075826
+    },
+    {
+      "function": "mergeCount",
+      "file": "speed-A.mjs",
+      "line": 1919,
+      "selfMicroseconds": 128992,
+      "percent": 1.4015804070811364
+    },
+    {
+      "function": "fastChunkCount",
+      "file": "speed-A.mjs",
+      "line": 1977,
+      "selfMicroseconds": 126214,
+      "percent": 1.3713956640670628
+    },
+    {
+      "function": "put",
+      "file": "speed-A.mjs",
+      "line": 6993,
+      "selfMicroseconds": 117252,
+      "percent": 1.2740178142138847
+    },
+    {
+      "function": "decodeUTF8",
+      "file": "",
+      "line": 0,
+      "selfMicroseconds": 103252,
+      "percent": 1.1218988789377753
+    },
+    {
+      "function": "",
+      "file": "speed-A.mjs",
+      "line": 11802,
+      "selfMicroseconds": 100289,
+      "percent": 1.08970399285041
+    }
+  ]
+}

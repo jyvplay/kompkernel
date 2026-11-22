@@ -1,0 +1,38 @@
+[
+  {
+    "repo": "openai/math",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/OAI/Computability/Superstring/GroupPoly.lean",
+    "file": "openai-groups.lean",
+    "originalSha256": "f373ec95bd56fb9cd772d9213b48fcb97a6c51605a226cb185397ec5e9af4ae4",
+    "savedSha256": "f373ec95bd56fb9cd772d9213b48fcb97a6c51605a226cb185397ec5e9af4ae4",
+    "transformation": "none"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+    "path": "eth/Solution.lean",
+    "file": "anthropic-eth-solution.lean",
+    "originalSha256": "27d304798a6ec294db7fdeee301227b70d72044cb31c85615901a8d728b0b98f",
+    "savedSha256": "27d304798a6ec294db7fdeee301227b70d72044cb31c85615901a8d728b0b98f",
+    "transformation": "none"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "revision": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/Trust.lean",
+    "file": "doubleai-trust.lean",
+    "originalSha256": "34930ec40af3dd699eefadd611c1e2ee1cafa3a8a4a2effac7e844ff943cb596",
+    "savedSha256": "34930ec40af3dd699eefadd611c1e2ee1cafa3a8a4a2effac7e844ff943cb596",
+    "transformation": "none"
+  },
+  {
+    "repo": "google-deepmind/alphaevolve",
+    "revision": "c42694909d50f92cb01c2d50916f022b1c7e74d1",
+    "path": "maths/sums_and_differences/verification.ipynb",
+    "file": "google-sums.txt",
+    "originalSha256": "d4b74567a65a8bc3f9da8b46c47402a62d838f6d2ac96ce866f7e5f6c2f0b996",
+    "savedSha256": "ffa29a07d70ab69d75169b599d21c8992af48c794274054e282836103a0297de",
+    "transformation": "cell sources joined"
+  }
+]
