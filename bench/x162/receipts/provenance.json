@@ -1,0 +1,65 @@
+[
+  {
+    "repo": "cp2k/cp2k",
+    "revision": "107f6cbd5cdf96cb14b9941fc6f38e13e0f09e98",
+    "path": "docs/acronyms.md",
+    "file": "cp2k.md",
+    "bytes": 8388,
+    "sha256": "c1975c73b6cb88196609470afaf1ab9d8ff7a91ecfdcee8fd15b8ed3a06d9582",
+    "selection": "whole unedited document, before candidate prices"
+  },
+  {
+    "repo": "gptme/gptme",
+    "revision": "5daa3dd44b9f3e5b1a475a0fbfe40134cf667e86",
+    "path": "docs/misc/acronyms.md",
+    "file": "gptme.md",
+    "bytes": 3634,
+    "sha256": "272fd272597addb9b743281b534e86af79135c218c1cb990016729499c7bea0c",
+    "selection": "whole unedited document, before candidate prices"
+  },
+  {
+    "repo": "coreboot/coreboot",
+    "revision": "4985079b161f425137ee9e07ff86ddad1d08727f",
+    "path": "Documentation/acronyms.md",
+    "file": "coreboot.md",
+    "bytes": 60886,
+    "sha256": "e0b5be3148b1210a61b3be2416f0839f0ee8883d36a428ddb853ccc6e4cde220",
+    "selection": "whole unedited document, before candidate prices"
+  },
+  {
+    "repo": "USEPA/WNTR",
+    "revision": "39e6b34f37d4b2d074f107d822752c989bf108aa",
+    "path": "documentation/acronyms.rst",
+    "file": "wntr.rst",
+    "bytes": 1111,
+    "sha256": "fb7864232e5af2ff271d63f1186e3a03fb0db9c3e08dcfcea096529a7689ddaa",
+    "selection": "whole unedited negative/coverage control after design freeze; no broad heldout claim"
+  },
+  {
+    "repo": "mwaskom/seaborn-data",
+    "revision": "71e2436a092d714350de0fc409ca8a8714e7e78f",
+    "path": "iris.csv",
+    "file": "iris.csv",
+    "bytes": 3858,
+    "sha256": "9cc1c345c71bcc9b486b74cbf6063fa66f4bb5e0f603a4b3c3471ec2e5e8e355",
+    "selection": "whole unedited negative/coverage control after design freeze; no broad heldout claim"
+  },
+  {
+    "repo": "mwaskom/seaborn-data",
+    "revision": "71e2436a092d714350de0fc409ca8a8714e7e78f",
+    "path": "tips.csv",
+    "file": "tips.csv",
+    "bytes": 9729,
+    "sha256": "e54cc4d2ce1bff65d32ca60b3e4b802e06bde1d7e7caf6f796f6bf7370e863b0",
+    "selection": "whole unedited negative/coverage control after design freeze; no broad heldout claim"
+  },
+  {
+    "repo": "mwaskom/seaborn-data",
+    "revision": "71e2436a092d714350de0fc409ca8a8714e7e78f",
+    "path": "penguins.csv",
+    "file": "penguins.csv",
+    "bytes": 13478,
+    "sha256": "e07636bd8af74260099ea2f8678e2eabbf35def579940cc76f67061ee16c06c1",
+    "selection": "whole unedited negative/coverage control after design freeze; no broad heldout claim"
+  }
+]

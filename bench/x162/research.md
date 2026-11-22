@@ -1,0 +1,31 @@
+# X162 fresh research and bounded laboratory artifact evaluation
+
+Inspected 2026-11-14. This is not an exhaustive literature or proof audit. Source revisions and SHA256s are in `research/provenance.json`; source files are inspected as text/data, not trusted execution. Lean/lake absent: no kernel replay.
+
+## Recent research (within20years)
+
+1. Miglani, Vatsal et al., *Leveraging Small-BERT and Bio-BERT for Abbreviation Identification in Scientific Text* (2023), DOI https://doi.org/10.1007/978-3-031-35320-8_43 . Springer chapter page fetched. LSTM classification over Small-BERT/Bio-BERT representations, SciAI/MeDal evaluation and cross-domain settings. Case retention matters to detection, but F1 classification is not exact label reconstruction; no detection score transfers to source-byte equality. AKROSTICHIS uses exact character projection instead of their statistical decision problem. Page extraction omits numerical F1 values, so none quoted.
+2. Makowski and Guter, *The Functionalizer: Lossless Functional Decomposition for Subword Tokenization*, https://arxiv.org/html/2609.15991 (v2 dated18Sep2026 on fetched paper). PUA opcode/operand factorization for casing, diacritics/repetition, up-to19.7% vocabulary-slot reduction under merge exhaustion; ~98M-parameter models. This is a changed tokenizer/training representation, not reduced complete wire cost under fixed o200k_base or native untrained chat. Search date ambiguity was resolved by reading the actual displayed version. No implementation replay or experimental replication here.
+3. Ren et al., *DeepSeek-Prover-V2* (2025), https://arxiv.org/abs/2504.21801 . Live search returned the abstract: recursive subgoal generation, Lean4 proof synthesis and reinforcement learning. The distinction is useful: successful subgoals do not certify a final proposition until composed and checked, just as a correct folded payload does not certify a whole parent wire. No model invocation or independent benchmark replication. Search citation: [1](https://arxiv.org/abs/2504.21801).
+
+Fresh terms/sites included abbreviation extraction, functional decomposition, Springer and arXiv. A2024 ResearchGate acronym-extraction search hit and LightThinker search hit were not fully inspected; they are leads, not evidence. The mechanistic antecedent is functional redundancy elimination, not a claim of first-ever acronym use.
+
+## OpenAI — group polynomial interface
+
+Pinned `openai/math/lean/OAI/Computability/Superstring/GroupPoly.lean`, revision4eaee87548250b2682affda7d05d947c05554bae. Extends previous SchedulerMachine inspection to GroupData/Book/Param operations: `poly_foreign`, `poly_choose`, coded collection operations and `fun_prop` closure. Domain assumptions include Coded/Inhabited/LinearOrder and the imported encoding/cost framework. These are polynomial-under-representation obligations, not a concrete BPE-search runtime or token-minimum theorem. Need dependency definitions and kernel replay, not names alone. Falsifier: an unaccounted encoded object expansion or incorrect supplied hypothesis. No theorem rejected or verified here.
+
+## Anthropic — updated ETH solution statement
+
+Fetched new HEAD16a5ce41304fcdaea4e0be7c132e1c361dc26da5, `eth/Solution.lean`, not blindly inherited X161's older revision. Text discusses query/table access versus machine simulation, polynomial-per-state overhead and constants. Final source explicitly declares `MainResults.ethIsFalse : MainResults.ETHIsFalse` and derives it through `Wrap.countingBoundImpliesFailureOfETH`, `NamesInOrder.generalFormFollowsAsPropositions` and `CountedRoute.mainTheoremHolds`. Important correction: this is not merely the earlier definitions-only view; the inspected file does contain a claimed unconditional final theorem. That still does NOT establish its ordinary-language meaning or validity here: definitions, dependency axioms, resource encoding and actual replay remain unaudited. Need inspect full Sat3.ETH_TM definition and replay all dependencies in pinned Lean environment. Do not infer validity or invalidity from the extraordinary claim or lab identity.
+
+## Google DeepMind — different construction and explicit cost boundary
+
+Pinned `alphaevolve/maths/sums_and_differences/verification.ipynb`; saved cell sources with original/saved hashes. It claims a C6 lower bound using a54265-integer witness and a published set-sum/difference inequality, not optimality. `research-checks.py` parses data without executing notebook code. Two witnesses have2003 and54265 distinct nonnegative integers containing0, maxima1040200 and814210134. This verifies admissibility only. Full ordered-pair work is4,012,009 and2,944,690,225; the notebook's two Boolean arrays alone need4,160,802 and3,256,840,538 bytes (assuming one-byte NumPy bool), excluding all other allocations. We did not run those cardinality computations or prove the asymptotic transfer. Need independent exact set cardinalities plus the cited inequality's hypotheses. This avoids promoting a plausible floating bound or merely well-formed data to a verified theorem.
+
+## DoubleAI — LRAT adapter boundary
+
+Pinned `double-check/lean/ChessProof/Trust.lean` atd2fc22e3bc0b675acc18dd53d8e3003c8eceae3a. Source proves signed1-based literal mapping to Std zero-based variables, conditioned on nonzero literals/well-formed CNF; `lratBytesOk` rejects parse errors and requires well-formedness plus LRAT acceptance. Separate Python checks48 assignment/literal combinations for three variables and a zero-literal rejection. These tiny adapter checks do not verify LRAT, the actual certificates, chess encodings, or the previously found explicit axioms. Need replay real certificate(s) and audit imports. No promotion from conditional trust interface to full game-result proof.
+
+## Other — DeepSeek and scope discipline
+
+DeepSeek-Prover-V2's published method uses training/RL and formal tools; neither is permitted as a hidden decoder aid in our one-basic-chat requirement. Its search abstract is not an inspected proof repository. No comparison of model reliability was executed. Across all labs, source inspection, local bounded checks, formal kernel replay, theorem-to-real-problem correspondence and practical runtime are distinct evidence levels. Lab branding supplies none of these automatically.

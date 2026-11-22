@@ -1,0 +1,42 @@
+{
+  "sourceHashes": [
+    {
+      "file": "cp2k.md",
+      "hashEqual": true
+    },
+    {
+      "file": "gptme.md",
+      "hashEqual": true
+    },
+    {
+      "file": "coreboot.md",
+      "hashEqual": true
+    },
+    {
+      "file": "wntr.rst",
+      "hashEqual": true
+    },
+    {
+      "file": "iris.csv",
+      "hashEqual": true
+    },
+    {
+      "file": "tips.csv",
+      "hashEqual": true
+    },
+    {
+      "file": "penguins.csv",
+      "hashEqual": true
+    }
+  ],
+  "passed": true,
+  "stagedByteIdentity": [
+    "bench/x162/fixtures/cp2k.md",
+    "bench/x162/fixtures/gptme.md",
+    "bench/x162/fixtures/coreboot.md",
+    "bench/x162/fixtures/wntr.rst",
+    "bench/x162/fixtures/iris.csv",
+    "bench/x162/fixtures/tips.csv",
+    "bench/x162/fixtures/penguins.csv"
+  ]
+}

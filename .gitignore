@@ -163,3 +163,10 @@ bench/x160/*.mjs
 bench/x161/*.mjs
 !bench/x161/speed-build.mjs
 .cache/x161/
+
+# X162 generated bundles
+bench/x162/*.mjs
+.cache/x162/
+!bench/x162/speed-build.mjs
+
+bench/x162/*.cpuprofile

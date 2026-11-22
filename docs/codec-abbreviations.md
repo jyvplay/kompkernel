@@ -11041,3 +11041,55 @@ These are inherited corpus categories/local leaders, not global-optimal codec
 ablations. Protected-lane KAMPYLI plans all null. Relevant numeric optional
 planners SYLLOGISMOS/SYZYGIA/ZYGON/ATHROISMOS/METRON also decline the four exact
 space-delimited new source excerpts; no all-registry minimum is asserted.
+
+## X162 — AKROSTICHIS (ΑΚΡΟΣΤΙΧΙΣ): exact glossary-label projection
+
+**Optional, not default routing.** `src/lib/omega/akrostichis.ts` replaces a
+standalone2–16-character ASCII uppercase/digit label with standalone `^` only
+when the following four-space-indented definition's exact uppercase/digit
+projection (before its first ` [` citation boundary) equals that label.
+Definitions stay unchanged. Marker collisions, unstable UTF8 and >50000UTF16
+code units refuse. This is not semantic acronym guessing, an external glossary,
+KAMPYLI arithmetic extrapolation, PROCRUSTES letter spacing or STOIBAS stacking.
+All-site deterministic projection is non-greedy; no global optimum is claimed.
+Local projection/inversion costs O(n) time/space; strict selector additionally
+pays complete BPE costs and at most one inherited expensive parent call.
+
+**Complete-source result.** Whole pinned CP2K glossary8388bytes,116sites:
+operational chain through KLIMAX1428→1189 including instruction+parent,
+239tokens saved (16.74%). HAPLOGRAPHE and KAMPYLI both refuse this input.
+Raw2168→direct instructed2110; improved parent representation matters.
+This baseline is not a minimum over the entire optional registry. CP2K was
+selected before candidate prices, but informed design, not a blind holdout.
+Six other whole-source controls refuse: coreboot cap, gptme/WNTR unsupported
+formats, iris/tips/penguins irregular mixed numeric CSVs. No broad everyday gain.
+
+**Verification.**3028 unit checks including1000generated cases;109 independent
+Python checks including full baseline and candidate original-byte comparison;
+reference-price and malformed/throwing-parent selector gates. Fixed native
+packet saved; native one-basic-chat decoding NOT_RUN.22 deceptive result shapes
+rejected by executable evidence-schema detector. See `bench/x162/README.md`
+for A–J model, costs, quantifiers, thresholds, portfolio and falsifiers.
+
+**Speed.** Benchmark-only all-string token-decoder fast path:9156 fresh seeded
+A/B token checks each, equal digest;12 cold ABBA whole-encoder calls with exact
+matching wires. CPU ratio0.974250, wall0.974122; JSON lane regresses. The ≥10%
+aggregate/no-lane-regression gate FAILS; no production optimization. Canonical
+workers paused during paired calls; paused wall times excluded as speed data.
+
+**Citations/boundaries.** Miglani/Vatsal et al.2023 abbreviation classification,
+DOI10.1007/978-3-031-35320-8_43, is related detection work, not a byte-exact
+codec theorem. Makowski/Guter2026 *The Functionalizer*, arxiv2609.15991,
+uses learned-tokenizer PUA operators and vocabulary-slot metrics, not our fixed
+BPE/native setting. Fresh OpenAI/Anthropic/Google/DoubleAI and DeepSeek scope
+notes, pinned source artifacts and bounded checks: `bench/x162/research.md`.
+Source inspection is not proof replay; no Lean available. Requested broad
+native/runtime Pareto claim remains unsupported despite the real token win.
+
+X162 final refresh:29/29 complete wires identical to X161,11962tokens;
+29 reference-price/token-ID checks,21 bounded source reads/8 unsupported.
+All12 speed wires match fresh canonical. Inherited category totals remain
+prose5856→3429(word),ops17278→5580(glyph),code4152→2636(word),
+other729→317(no tape class). Absolute-saving leaders apt-real1926,
+ls-l-real3884,json-pkg499,cue-sheet412; ops relative leader prices.csv79.73%.
+AKROSTICHIS plans are null on all29 canonical lanes. No global optimality claim.

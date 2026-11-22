@@ -1,0 +1,18 @@
+{
+  "checks": 109,
+  "rows": [
+    {
+      "arm": "base",
+      "sourceBytesEqual": true,
+      "tokens": 1428
+    },
+    {
+      "arm": "candidate",
+      "sourceBytesEqual": true,
+      "tokens": 1189
+    }
+  ],
+  "passed": true,
+  "native": false,
+  "method": "separate ordinal-character projection and reused independent Python CHIRON/AP reader"
+}

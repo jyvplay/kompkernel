@@ -12,3 +12,6 @@ bench/x161/receipts/native-*.txt -text whitespace=-blank-at-eof,-blank-at-eol
 
 # Preserve the extracted upstream notebook cell-source text verbatim.
 bench/x161/research/google-capsets.txt -text whitespace=-blank-at-eol
+
+# X162 preserves upstream WNTR source bytes, including whitespace.
+bench/x162/fixtures/wntr.rst -whitespace
