@@ -1,0 +1,14 @@
+{
+  "checks": 31,
+  "rows": [
+    {
+      "path": "bench/x165/fixtures/astral-sh_uv-README.md",
+      "base": 2041,
+      "selected": 2041,
+      "saved": 0,
+      "exact": true
+    }
+  ],
+  "native": "NOT_RUN",
+  "strongParetoCertified": false
+}

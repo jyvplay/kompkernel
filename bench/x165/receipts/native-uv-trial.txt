@@ -1,0 +1,140 @@
+Decode first. Scan left to right: ~N; copies N Unicode code points following the latest earlier occurrence of the preceding 4 output code points, entirely within existing output. Preserve everything else; print only.
+¶ k=v. expand repeatedly; print only.
+§Кpypiн [Мhttps://Е](Мс~В```
+
+в
+оmsва.Нdз3щВSee theны;Ис17ык12эвInstalled Д```bashв#Йскыя0ал2ш in Ш л packagesшт uvћ
+
+$тр1ъ р packageшу зай +үс26ых5Јruff==0аха0ӣс15ыцuvО/ців СruffЅ `pipг
+
+цьс18ыў/astral-shЛ.svg" alt="Ж`, `Қ.comў/це-Б://astral.shю.
+еҙ](#ҩс20ыҡс22ыч13б:
+
+`ѓ.
+
+##Ю to getвstarted.
+
+Ґ>
+</p>
+
+Т withєТ aҒ Python versionsА forж)Ад example.pyП `циа0Ь pycowsayӡvenvЩ10е100xЦLICENSEеAPACHEР">
+    <imgҳй cpythonезађ packagesшкоїа See theқ](hҗвCreatiсә,ҫ/) to get startedҧсчым andё](htсп4ө's¶# uv
+
+<a href="МК.python.org/КО"><img src="Мimg.shields.io/К/vОЛLatest PyPI version" /></a>
+<a ~77;pyversionsОЛSupportedҒ" />ҡdiscord.ggў"><iс31;badge/Discord-%235865F2.svg?logo=discord&logoColor=white" alt="Discord" /></a>
+
+An extremely fast Python package and project managerә written in Rust.
+
+<p align="center">
+  <picture aliӣ  <source media="(prefers-colorеscheme: dark)" srcset="МgithubҚ/assets/р309177/03aa916зерc79-пa87-a31Не7a9311ed9310">
+ спрыlight)" sсхпы629e59c0-9c6e-п013-9adпеadbлbcf5080НР alt="Shows a bar chart with benchmark results." src="htс86;</pictureҐ<pҩi>Installing <a hҧtrio.readthedocs.io/">Trio</a>ө dependenciesє warm cache.</iҐ## Highlightsвве A single tool to replaceЅ`,Ѕ-tools`,ЅxЖpoetryЖpyenvЖtwineЖvirtualenv`,мі moreюнЩ fasterЕgслзыblob/main/BENCHMARKS.md) thanЅ`.
+- Providesнcomprehensive project managementҙprojects),єінuniversal lockfileЕdocs.astral.shО/concepts/projects/layout#the-lockfile)юнRuns scriptsҙscripts), with support forінinline dependency metadataёлпыguides/scripts#declaring-script-dependencies)юнInstalls and managesҙpythonеversions)ҒюнRuns and installsҙtools) tools published as Python packagesю Includes aнpip-compatible interfaceҙtheеpip-interfaceж a performance boostє familiarі CLIю Supports Cargo-styleнworkspacesё24;cИworkspacesжі scalable projectsю Disk-space efficientәєнglobal cacheқсзпыcacheжі dependency deduplicationю Installable without Rust or Python via `curl` orЅ`.
+- Supports macOS, Linuxәм Windowsаг is backed by [AstralқttpsБ), the creators of
+[RuffЕgҩruff)мнtyё27;ty).
+
+## Installation
+
+Install uv with our standalone installers:
+
+Д On macOS and Linuxавcurl -LsSf httpsБО/install.sh | sh
+ВД On Windowsавpowershell -ExecutionPolicy ByPass еc "irm httүpsр | iex"
+ВOr, from [PyPIЕК.org/projectО/):
+
+Д With pipавpip installтвВД Or pipxавpipx insҧIf installed via the standalone installerәт can update itself to the latest versionб``bashвuv self updateвщinstallation documentationЕНИgetting-started/installation/)Авdetails and alternative installation methodsѓ Documentationгө documentation is available atнdocsҧёлзы).
+
+Additionally, the command line reference documentation can be viewedТП help`.
+
+## Features
+
+### Projectsг manages project dependencies and environmentsә with support for lockfilesә workspacesәм more,
+similar to `rye` or `poetry`б``console
+$ uv init example
+Initialized project `example` at `/home/user/example`
+
+$ cd exampleћ add СвCreating virtual environment at: аӡ
+ResolvedШ170о   Built example @ file:///home/user/example
+PreparedШ627оInstalledШрой example==0ари (from filҡ)
+й Јћ run С check
+All checks passed!ћ lock
+Resҩяззmsћ sync
+Resҡ70оCheckedъя0лощproject documentation]~28;uides/projectsҫаг also supports building and publishing projectsә even if they're not managed with uvїв[publish guideқслхыguides/publish/) to learn moreѓ# Scriptsг manages depү for single-file scripts.
+
+Create a new script and add inline metadata declaring its dependenciesбЙecho 'import requestsы print(requests.get("httpsБ"))' >дћ add ееscriptд requests
+Updated `example.py`
+ВThen, run the script in an isolated virtual environmentбскыц runдвReading inline script metadata from:дэхђ<Response [200]>
+щscripts docспхыscripts/)ь### Toolsг executes and installs command-line tools provided by Python packagesә similar toЅx`.
+
+Run a tool in an ephemeral environment usingПx` (an aliasАП tool run`)б~14;xЬ 'hello world!'
+Resolvedъ167оInstalledъ9ойЬ==яяялі """
+
+  ------------
+< hello world! >
+  ------------
+   \   ^__^
+    \  (oo)\_______
+       (__)\       )\/\
+           ||----w |
+           ||     ||
+ВInstall a toolТП tool install`:
+
+~16;tool install СвResс19;6оIҡлой Јэр executable: С
+
+$ С ееversionвruff яхивщtools doс46;tools/) слрыPython versionsг installs Pythonм allows quickly switching between versions.
+
+Install multipleҒ:
+
+ҧuv python installукуч зарпэз versionsш972оҳкак-macos-aarch64-none (pythonзак)
+ҳча9-macүз)
+ +Йпи-macүп)
+
+ВDownloadҒ as neededбӣӡ ееpythonуки
+Using Pythonукиҗ33;Activate with: source аӡ/bin/activateћ run ееpython pypy@за8 -- python ееversion
+Python за8.16 (a9dbdca6fcз286b0addd2240f11d97d8e8de187a, Dec 29 л022, рр:45:30)
+[PyPy 7азар1 with GCC Apple LLVM чара6 (clang-ч16ая21алах)] on darwin
+Type "help", "copyright", "credits" or "license"А more informationав>>>>
+ВUse a specific Python version in the current directoryбӣpython pinурр
+Pinned `.python-version` to `зар1`
+щPython installation doсп0;uides/install-python/)Ю### The pip interfaceг provides a drop-in replacement for commonЅ`,~14;and `virtualenv` commandsаг extends their interfaces with advanced featuresә such as dependency version overrides,
+platform-independent resolutionsә reproducible resolutionsә alternative resolution strategiesәмвmore.
+
+Migrate toт without changing your existing workflows — and experience a Щ speedup — with the
+`uv pip` interface.
+
+Compile requirements into a platform-independent requirements fileбс16;ip compile requirements.in \
+   ееuniversal \
+   ееoutput-file rЙtxt
+Resolved пзђВCreate a virtual environment:ьӡ
+Usiӣзҗ74;ВInstall the locked requirements:
+
+Иip sync requirementsас29;роInstalled пс14ыл08ой babel==2архив + black==24.палі+ certifi==202па7.п
+ ...
+щpip interface docс38;pip/indexҫѓ Contributing
+
+We are passionate about supporting contributors of all levels of experience and would love to seeвyou get involvedшthe projectїв[contributing guiЙgҩuv?tab=contributing-ov-file#contributing)Ю## FAQ
+
+#### How do you pronounceт?
+
+It's pronounced as "you - vee" ([`/juː viː/`Еen.wikipedia.org/wiki/Help:IPA/English#Key))
+
+#### How should I stylizeт?
+
+Just "uv", pleaseїнstyle guide](./STYLE.md#stylingецж detailsѓ## What platforms doesт support?
+
+Seeтөнplatform supportЕНИreference/platforms/) documentѓ## Isт ready for production?
+
+Yesәт is stable and widely used in productionа Seeтө
+[versioning policyёзпыversioning/) document for detailsѓ Acknowledgementsгө dependency resolver uses [PubGrubЕgithub.com/pubgrub-rs/pubgrub) under the hoodа We'reвgrateful to the PubGrub maintainersә especially [Jacob Finkelmanё17;Ehл406),Авtheir supportагө Git implementation is based on [Cargoё17;rust-lang/cargo).
+
+Some ofтө optimizations are inspired by the great work we've seenш[pnpmЕpnpm.io/),
+[Orogeneқьorogene/orogene),мнBunқьoven-sh/bun). We've alsoвlearned a lot from Nathaniel Jа SmithөнPosyё17;njsmith/posy) and adapted its
+[trampoline](~19;Й/tree/main/src/trampolines/windows-trampolines/posy-trampoline)
+for Windows supportѓ Licenseг is licensed under either ofвве Apache Licenseә Version лиә ([Ц](Ц) orі <Мwww.apache.org/licenses/LICENSE-ли>)
+- MIT license ([LICENSE-MIT](LICENSE-MIT) or <Мopensource.org/licenses/MIT>)
+
+at your option.
+
+Unless you explicitly state otherwiseә any contribution intentionally submitted for inclusion inтвby youә as definedшthe Apacheели licenseә shall be dually licensed as aboveә without anyвadditional terms or conditions.
+
+<div aligӣa target="_blank" href="httӣ style="background:noneР sЙraw.githubusercontentҚ/main/assets/svg/AstralЛMade by Astral">
+  </a>
+</div>

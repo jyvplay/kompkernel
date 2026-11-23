@@ -1,0 +1,9 @@
+{
+  "production": false,
+  "changes": [
+    "repaired paged short-run memo",
+    "fuse admissible-saving sum into affected-union pass",
+    "X164 exact rollback-state specialization"
+  ],
+  "scorer": "export function scoreRunCostDeltaSlots(\n  p: PreparedRuns, state: PreparedRunCostState, after: string[], changed: number[],\n  enc: EncodingName, cache: Map<string, number>, limit = Number.POSITIVE_INFINITY,\n): { total: number; n: number } {\n  workTick(); // X57 deterministic search-work meter (see workmeter.ts)\n  if (after.length !== state.patternsBySlot.length) {\n    throw new Error('run-cost candidate length mismatch');\n  }\n  const gen = nextAffectedGeneration(p.pats.length);\n  let affCount = 0;\n  let maxSavingLeft=0;const bounded=limit!==Number.POSITIVE_INFINITY;\n  for (let c = 0; c < changed.length; c++) {\n    const slot = changed[c];\n    for (const pattern of state.patternsBySlot[slot]) {\n      if (AFF_GEN[pattern] !== gen) { AFF_GEN[pattern] = gen; AFF_LIST[affCount++] = pattern;if(bounded)maxSavingLeft+=Math.max(0,state.costs[pattern]-1)*p.mult[pattern]; }\n    }\n  }\n  let total = state.total;\n  let n = 0;\n  for (let k = 0; k < affCount; k++) {\n    const i = AFF_LIST[k];\n    if (total - maxSavingLeft > limit) return { total: limit + 1, n: 0 };\n    let v=x165Short(state.patternSlots[i],after,enc);if(v===undefined){let s='';for(const slot of state.patternSlots[i])s+=after[slot];v=cache.get(s);if(v===undefined){v=countTokens(s,enc);cache.set(s,v);}}\n    total += (v - state.costs[i]) * p.mult[i];\n    if (limit !== Number.POSITIVE_INFINITY) maxSavingLeft -= Math.max(0, state.costs[i] - 1) * p.mult[i];\n    UPD_IDX[n] = i; UPD_VAL[n] = v; n++;\n  }\n  return { total, n };\n}\n\n"
+}

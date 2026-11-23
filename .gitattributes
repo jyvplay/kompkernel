@@ -28,3 +28,9 @@ bench/x164/research/*.lean -text whitespace=-blank-at-eof,-blank-at-eol
 bench/x164/cipher/* -text -whitespace
 bench/x164/receipts/native-*.txt -text -whitespace
 bench/x164/receipts/*.log -whitespace
+
+# X165 originals and exact wire/log evidence preserve source whitespace.
+bench/x165/fixtures/* -text -whitespace
+bench/x165/research/*.lean -text -whitespace
+bench/x165/receipts/native-*.txt -text -whitespace
+bench/x165/receipts/*.log -whitespace

@@ -1,0 +1,34 @@
+[
+  {
+    "repo": "openai/math",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/OAI/Computability/Superstring/PrefixMatching.lean",
+    "file": "openai-prefix.lean",
+    "bytes": 5604,
+    "sha256": "0469490b838661cc943dab76f1ffb35a123c8631fd4e1b0f36f54f922fef72f3"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "revision": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/Cnf.lean",
+    "file": "doubleai-cnf.lean",
+    "bytes": 1866,
+    "sha256": "2040015e2ca22422c8911e52b7941fd3d3e00bf10a535736d181804d3ccff630"
+  },
+  {
+    "repo": "openai/math",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/OAI/Computability/Superstring/Tables.lean",
+    "file": "openai-tables.lean",
+    "bytes": 14876,
+    "sha256": "cad27ced5d26fbb6be96522ee26e963ed224929ecd7c71192cc78334fca5b6e5"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+    "path": "eth/proof/variables/CountedInstance/Main.lean",
+    "file": "anthropic-instance.lean",
+    "bytes": 2904,
+    "sha256": "07c01cfe5026957a6a51f847710c2065930a6c5b1c937a269af4b4306e4bb092"
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "path": "src/lib/omega/anamnesis.ts",
+    "line": 839,
+    "text": "    return priorContext ? expandCopies(wire, priorContext) : wire;"
+  },
+  {
+    "path": "src/lib/omega/anamnesis.ts",
+    "line": 883,
+    "text": "  return priorContext ? expandCopies(decoded, priorContext) : decoded;"
+  },
+  {
+    "path": "src/lib/omega/diagraphe.ts",
+    "line": 32,
+    "text": " *     for each rule i, from last to first:"
+  },
+  {
+    "path": "src/lib/omega/logos.ts",
+    "line": 25,
+    "text": " * references can occur; the decoder's last-to-first substitution pass with"
+  },
+  {
+    "path": "src/lib/omega/logos.ts",
+    "line": 406,
+    "text": "  return `Decode this LOGOS-\u03a9 payload in this same user message. The wire starts with \u03a9. The single character right after \u03a9 is the delimiter d. Find the first \u4e59 after it: everything between d and \u4e59 is the definition tape, everything after \u4e59 is the body. Split the tape at every d; the pieces are expansions e0, e1, e2, \u2026 in order. The delimiter d selects one fixed ordered symbol table from the list below: expansion ei corresponds to the i-th symbol of that table (counting from the left, i = 0 first). Definitions are self-referential: an expansion may contain the symbols of other definitions (ear"
+  },
+  {
+    "path": "src/lib/omega/oracle.ts",
+    "line": 6,
+    "text": " * the model's training on 1986\u20132026 papers \u2014 Bentley 1993, Burrows-Wheeler"
+  },
+  {
+    "path": "src/lib/omega/oracle.ts",
+    "line": 64,
+    "text": " * (39 tok). The 20 keys are all famous (Bentley, Burrows, Charikar, Ziv,"
+  },
+  {
+    "path": "src/lib/omega/oracle.ts",
+    "line": 133,
+    "text": "  'burrows94': 'Burrows, M., & Wheeler, D. J. (1994). A block-sorting lossless data compression algorithm. Digital SRC Research Report 124.',"
+  },
+  {
+    "path": "src/lib/omega/oracle.ts",
+    "line": 322,
+    "text": "    { name: 'bib', text: 'References\\n\\n[1] Bentley, J. L., & McIlroy, M. D. (1993). Engineering a sort function. Software: Practice and Experience, 23(11), 1249-1265.\\n[2] Burrows, M., & Wheeler, D. J. (1994). A block-sorting lossless data compression algorithm. Digital SRC Research Report 124.\\n' },"
+  }
+]

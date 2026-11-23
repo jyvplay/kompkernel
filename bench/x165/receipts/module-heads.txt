@@ -1,0 +1,2448 @@
+/**
+ * src/lib/omega/abacus.ts
+ * =============================================================================
+ * ABACUS-M1 — Numeric-Grouping & Unicode-Composition Canonicalization Pre-Pass
+ * (self-verifying, exact)
+ *
+/**
+ * src/lib/omega/aeon.ts
+ * =============================================================================
+ * ♾ AEON-A1 — In-Context Dynamic Attractor Frame Delta Quotient Encoding
+ *
+ * DYNAMIC ALGORITHM:
+/**
+ * src/lib/omega/aether.ts — AETHER-A1: Adaptive Entropy-Optimal Token-Hierarchical
+ * Embedding & In-Context Reconstruction Lossless Codec
+ * =============================================================================
+ * Grounded in peer-reviewed & textbook computational linguistics:
+ *  - "Lossless Prompt Compression via Dictionary-Encoding and In-Context Learning"
+// AETOS / ἈΕΤΟΣ — "eagle" (Greek aetos). X25.
+//
+// MECHANISM (learned separator lattice).
+//
+// PSEPHOS (X24) proved one instance of a general law:
+//
+/**
+ * AION — The constant fold that MNEMOSYNE and EIDOS cannot see.
+ * =============================================================================
+ * αἰών — eternity, the unmoving time. Where EIDOS saw `t_n = t_{n-1}+Δ`,
+ * AION sees `t_n = t_{n-1}+0` — the constant column that never moves.
+ *
+/**
+ * src/lib/omega/aither.ts — ΑἸΘΉΡ (AITHER, "the upper air; the medium that carries") — X87.
+ *
+ * =============================================================================
+ * WHAT THIS MODULE IS, IN ONE SENTENCE
+ * =============================================================================
+/**
+ * src/lib/omega/akolouthia.ts
+ * =============================================================================
+ * AKOLOUTHIA (ἀκολουθία, "sequence") — arithmetic-progression elision across lines.
+ *
+ * THE GAP (measured this turn; bench/z55)
+/**
+ * src/lib/omega/akolouthia2.ts
+ * =============================================================================
+ * AKOLOUTHIA-2 — arithmetic-progression elision, TWO-term eligibility.
+ *
+ * WHAT CHANGED FROM AKOLOUTHIA (and what did not)
+/**
+ * src/lib/omega/akribeia.ts
+ * =============================================================================
+ * AKRIBEIA — EXACTNESS
+ * (byte-perfect, exact-lossless, single-chat-readable, no system prompt)
+ * -----------------------------------------------------------------------------
+/** X162 AKROSTICHIS: redundant glossary-label projection.
+ * The definition's uppercase ASCII letters/digits entail the exact label.
+ * Not semantic acronym guessing or an external acronym dictionary. Optional.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+/**
+ * src/lib/omega/aleph.ts
+ * =============================================================================
+ * OMEGA-Ξ v3 "ALEPH" — TYPED STRUCTURAL PREPASS
+ *
+ * Design principle: the entropy coder (CM-Ω, Brotli, Deflate) sees numeric
+/**
+ * src/lib/omega/aleph.ts
+ * =============================================================================
+ * OMEGA-Ξ v3 "ALEPH" — TYPED STRUCTURAL PREPASS
+ *
+ * Design principle: the entropy coder (CM-Ω, Brotli, Deflate) sees numeric
+/** X134 ALLOMORPH: occurrence-conditioned aliases of an existing nonterminal.
+ * Unlike bijective glyph renaming, this permits two spellings of ONE rule in
+ * the same body. A new rule h=g pays for itself only where BPE context prefers h.
+ * No new decoder operation: h is an ordinary backward reference in the tape.
+ * Greedy bounded search; CPU-bound; no optimality or model-behaviour guarantee.
+ */
+/**
+ * ALPHAFOLD — in-band alpha-equivalent code-block factoring (X63).
+ *
+ * It finds byte-identical code blocks modulo a consistent renaming of lexical
+ * identifiers, transmits one exact block template plus a comma-separated list
+ * of identifier spellings per occurrence, and keeps all surrounding source bytes.
+/**
+ * src/lib/omega/ambient.ts
+ * =============================================================================
+ * ◇ AMBIENT-AM1 — Zero-Context Self-Describing Wire
+ * =============================================================================
+ * THE CONSTRAINT THIS EXISTS FOR
+/**
+ * AMPHORA — DAEDALUS ∥ CHIRON exact-gated minimum.
+ *
+ * Why this codec exists (measured, see bench/z10/):
+ *   DAEDALUS runs only its predicted ARIADNE/SIBYL arm(s). ARIADNE's span-limited parse
+ *   returns identity ("no framing pays") on long English prose such as micromatch/README.md
+import { chironDecode } from './chiron';
+import { countTokens, type EncodingName } from './bpe';
+import { symplokeDecode } from './symploke';
+import { type OikonomiaOptions } from './oikonomia';
+import {
+  syncopeEncode, syncopeDecode,
+/**
+ * src/lib/omega/anagnorisis.ts
+ * =============================================================================
+ * ANAGNORISIS — Public-Canon Recognition Pre-Pass
+ * (byte-perfect, exact-lossless, single-chat-readable, contract in band)
+ * -----------------------------------------------------------------------------
+/**
+ * src/lib/omega/anagraphe.ts — X125. ΑΝΑΓΡΑΦΗ (anagraphē, "a writing out afresh").
+ * =============================================================================
+ *
+ * THE ASYMMETRY THIS EXPLOITS
+ * -----------------------------------------------------------------------------
+/** X135 ANAKYKLI — cyclic-cut preconditioning of an existing text encoder.
+ * Input x=P+Q becomes Q+marker+P. The parent still sees ordinary text, not a
+ * dictionary-coded surrogate. One in-band marker describes the inverse; no
+ * arbitrary permutation or character-count instruction is needed.
+ * This is a search heuristic, not a new information-theoretic primitive.
+ */
+import { now } from './clock';
+/**
+ * ANAMNESIS — ἀνάμνησις, "recollection".
+ * =============================================================================
+ *
+ * THE MECHANISM THIS REPO HAS NOT HAD
+/**
+ * ANANKE-Ω — self-describing residual grammar closure.
+ *
+ * KAIROS leaves repetitions after its winning codec has been selected. ANANKE
+ * discovers a prompt-local grammar on that residual wire and charges the exact
+ * dictionary/envelope cost during every rule decision. It is therefore neither
+/**
+ * src/lib/omega/anaphora-fold.ts
+ * =============================================================================
+ * ANAPHORA-FOLD (X12) — two-sided field anchoring against the best of the K lines above.
+ *
+ * STATUS: NEGATIVE, UNREGISTERED. Byte-exact (TS round trip and CPython reader,
+/**
+ * ⟐ Ω-ANAPHORA (AN1) — zero-header in-place binding, byte-exact.
+ * First occurrence of P stays in body wrapped as OPENkP CLOSE; later → k.
+ * Dominates header dictionaries by A + h − D tokens per entry.
+ */
+import { countTokens, encodeIds, decodeIds, type EncodingName } from './bpe';
+/**
+ * src/lib/omega/anastrophe.ts
+ * =============================================================================
+ * ANASTROPHE — THE TURNING
+ * (byte-perfect, exact-lossless, single-chat-readable, no system prompt)
+ * -----------------------------------------------------------------------------
+/** X164 bounded reader support for one existing fused date8 parent envelope.
+ * This adds no wire operation: the header already explicitly declares date8.
+ */
+import {tagstackContractFor,tagstackRestore} from './tagstack';
+import {klimaxParentRead} from './klimax-parent';
+import {isUtf8TransportStable} from './utf8-wire';
+/** X164 compact TAGSTACK dialect refinement (initial novelty claim rejected).
+ * The existing tagstack.ts already uses closing-name stack references.
+ * This narrower grammar/marker/contract variant has measured token gains,
+ * but is NOT a new mechanism. Retained separately as an optional refinement.
+ * Native-model reliability remains unmeasured.
+ */
+/**
+ * ANTIPHON — line antiphony: a line that is a near-copy of an earlier line is
+ * written as "copy the line d above, then replace first x with y, in order".
+ *
+ * Pipeline (exact, decode-gated):
+ *   text --antiphonTransform--> stage1 (copy lines use three marker glyphs that
+/**
+ * src/lib/omega/apeiron.ts — APEIRON-Ω: Asymmetric Pattern Entropy Induction
+ * & Recursive Operadic Network (Terminal Lossless Codec)
+ * =============================================================================
+ * Grounded in 50 years of computational linguistics & information theory (1976–2026):
+ *  - "Lossless Prompt Compression via Dictionary-Encoding and In-Context Learning"
+/**
+ * src/lib/omega/apex.ts
+ * =============================================================================
+ * OMEGA-APEX (Λ†) — VERIFIED COMPOSITION-TOURNAMENT CODEC
+ * Original synthesis: July 27, 2026.
+ *
+/**
+ * src/lib/omega/apex.ts
+ * =============================================================================
+ * OMEGA-APEX (Λ†) — VERIFIED COMPOSITION-TOURNAMENT CODEC
+ * Original synthesis: July 27, 2026.
+ *
+/**
+ * APOGRAPHE (ἀπογραφή — "a written register, a list, an inventory taken by
+ * writing each entry down against its position").
+ *
+ * X39. Every codec in this stack, without exception, is a SUBSTITUTION codec:
+ * it finds a span of the text and writes something shorter in its place, and
+/** X139 APOTOME (a cut): acyclic prefix/suffix views of expanded rules.
+ * Experimental and unwired. Forward references are allowed only inside explicit
+ * ~gN| slice expressions; ordinary tape references retain CHIRON's framing.
+ * This is a collage-system operation, not a new compression-theory primitive.
+ * Greedy best-improvement full-message search, <=4 passes and 4096 probes.
+ * No native-model claim. Parent source inverses must be verified separately.
+/**
+ * src/lib/omega/arche.ts
+ * =============================================================================
+ * ARCHE-Ω: Adaptive Rate-distortion Combinatorial Hypergraph & Entropy-optimal SLP Synthesis
+ *
+ * Terminal Sovereign Lossless Prompt Compression Codec
+/**
+ * ἈΡΧΈΤΥΠΟΝ (ARCHETYPON) — X44.  "The original pattern."
+ * =============================================================================
+ * THE MECHANISM (new to this stack): A PARAMETRIC TEMPLATE FOLD.
+ *
+ * Every other codec in this repository transmits a RULE and lets the reader
+import { now } from './clock';
+import { workTick, workExhausted } from './workmeter';
+/**
+ * ARIADNE — grammar induction in symbol space, with the thread that finds the
+ * shortest path through it.
+ * =============================================================================
+/**
+ * src/lib/omega/arithmos.ts
+ * =============================================================================
+ * ARITHMOS — Native-Script Numeral Restoration Pre-Pass (self-verifying,
+ * exact)
+ *
+/** Optional ARKESIS tournament; not wired into production.
+ * Incumbent includes X153 KENOMA and X152 HOMOSEMA. Extra parent calls
+ * are counted, not treated as free. Token nonregression is not runtime Pareto.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {arkesisPlans,arkesisCandidate,arkesisRead} from './arkesis';
+/** ARKESIS (X154): prefix cardinalities replace JSON end delimiters.
+ * Experimental/unwired. {N introduces N key/value pairs, [N introduces N
+ * values. A countdown, not indentation or a closing marker, locates each end.
+ * Classical degree-sequence tree encoding; no new information theory claim.
+ * Lexical tokens are copied (duplicate keys and number spellings preserved).
+ */
+/**
+ * src/lib/omega/astraea.ts
+ * =============================================================================
+ * 🌌 ASTRAEA-A2 — Adaptive Contextual Straight-Line Grammar Induction & BPE Realignment
+ *
+ * MATHEMATICAL FORMULATION & ORIGINAL CONCEPT:
+/**
+ * src/lib/omega/astral.ts
+ * =============================================================================
+ * 🌌 ASTRAL-A1 — Adaptive Structural & Textual Representation for Agentic Languages
+ *
+ * DYNAMIC ALGORITHM:
+/**
+ * src/lib/omega/athroismos.ts
+ * =============================================================================
+ * ATHROISMOS (ἀθροισμός, "a gathering, an accumulation") — driven-recurrence
+ * column elision for delimited tables. X54.
+ *
+/**
+ * ✧ ATLAS-A1 — Contract-Aware Meta-Partition (MOSAIC ⊕ delivered objective)
+ *
+ * Scores exact candidates by delivered tokens = wire tokens + decoder contract
+ * tokens. Emits the winning member wire verbatim; no wrapper and no framing tax.
+ */
+/**
+ * src/lib/omega/atom-codec-v3.ts
+ * =============================================================================
+ * V3 COMPATIBILITY SHIM for prometheus-icdm.ts
+ *
+ * The Prometheus module (Universal Adaptive Router, Tier 1 evaluation) expects
+/**
+ * src/lib/omega/atom-codec-v3.ts
+ * =============================================================================
+ * V3 COMPATIBILITY SHIM for prometheus-icdm.ts
+ *
+ * The Prometheus module (Universal Adaptive Router, Tier 1 evaluation) expects
+/**
+ * src/lib/omega/atom-codec.ts
+ * =============================================================================
+ * OMEGA-Ξ (XI) CODEC  —  byte-exact lossless, real-BPE-token-minimal
+ *
+ * Wire format (bit stream, MSB first, packed into log2(K)-bit atom digits):
+/**
+ * src/lib/omega/atom-codec.ts
+ * =============================================================================
+ * OMEGA-Ξ (XI) CODEC  —  byte-exact lossless, real-BPE-token-minimal
+ *
+ * Wire format (bit stream, MSB first, packed into log2(K)-bit atom digits):
+/**
+ * ATX-RELEASE (X50) — implicit release-heading frame elision.
+ *
+ * Exact transform for a narrow Markdown shape: a level-two ATX heading whose
+ * entire suffix is ` (YYYY-MM-DD)`. The wire line omits `## ` and the date
+ * parentheses, becoming `TITLE YYYY-MM-DD`. There is no per-line marker: the
+/**
+ * ◇ AURORA-A1 — Contract-Aware Partition DP
+ * =============================================================================
+ * MOSAIC minimises wire tokens and only afterwards ships the union of lane
+ * contracts. ATLAS notices the delivered objective, but can only choose between
+ * whole-document members and MOSAIC's already-fixed partition. AURORA changes
+/**
+ * AUSTEROS (αὐστηρός, "austere") — X71.
+ * =============================================================================
+ * A codec whose decoder instruction is SEARCHED, not written.
+ *
+ * ---------------------------------------------------------------------------
+/**
+ * ⟦ AXIOM-A1 ⟧ — Session-Anchored Cascade Binding with Zero-Amortization Recall
+ * =============================================================================
+ * THE GAP EVERY PRIOR CODEC LEAVES OPEN
+ * -----------------------------------------------------------------------------
+ * Surveyed (2023–2026): Selective-Context EMNLP-2023; LLMLingua/LongLLMLingua;
+import { countTokens, type EncodingName } from './bpe';
+
+/** BANYAN-B1: bounded backward line references with one-splice deltas. */
+export const BANYAN_SENTINEL = 'βB1\n';
+export const BANYAN_LITERAL = 'βB1L\n';
+
+/**
+ * BATHMOS (X59) — partition-window (order-statistics / aggregate-share)
+ * column elision for delimited tables.
+ *
+ * Every table dependency in the stack so far is row-local (SYLLOGISMOS
+ * arith/lookup, ZYGON weighted sums, SYZYGIA affine twins), column-local
+/** X158 BEMATISMOS (stops): periodic-column whitespace transducer.
+ * Classical tab-stop semantics; optional phase shifts, no per-column schema.
+ * Experimental/unwired. Software inverse is not native model verification.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+/**
+ * BIFRONT — X46 candidate: bidirectional path-boundary factoring.
+ *
+ * Mechanism: on a homogeneous list whose every non-empty row ends in a path,
+ * find the longest suffix shared by all path fields, remove it from each field,
+ * and state that suffix once in the in-band contract. Unlike DENDRON / ELLEIPSIS,
+/**
+ * Executable tokenizer audit. This is intentionally separate from compression:
+ * it tests the exact tokenizer dependency used by every omega lane.
+ */
+import { buildAtomAlphabet, encodeIds, type EncodingName } from './bpe';
+import { encode as packageO200kEncode } from 'gpt-tokenizer/encoding/o200k_base';
+/**
+ * bpe-fast.ts — X72. An exact, allocation-light replacement for ONE hot call:
+ * `encode(chunk).length` inside `countTokens`. It changes no token count, and
+ * `bench/x72/ids.ts` proves that against the library on every fixture in this
+ * repository, on fuzzed Unicode, and on all 4 000 AUSTEROS/BRACHYS wires.
+ *
+/**
+ * src/lib/omega/bpe.ts
+ * =============================================================================
+ * REAL BPE GROUND TRUTH + Ω-ATOM ALPHABET CONSTRUCTION
+ *
+ * Every number this module produces comes from niieani/gpt-tokenizer, a port of
+/**
+ * src/lib/omega/bpe.ts
+ * =============================================================================
+ * REAL BPE GROUND TRUTH + Ω-ATOM ALPHABET CONSTRUCTION
+ *
+ * Every number this module produces comes from niieani/gpt-tokenizer, a port of
+/**
+ * src/lib/omega/brachylogia.ts — X75. ΒΡΑΧΥΛΟΓΊΑ (brachylogia), "brevity of speech".
+ * =============================================================================
+ *
+ * THE MEASUREMENT THIS CODEC IS BUILT ON (bench/x75/t12.ts, t14.ts, t15.ts)
+ * -------------------------------------------------------------------------
+/**
+ * BRACHYS (βραχύς, "short") — X70. Contract algebra, and a reader written from
+ * the contract.
+ *
+ * ---------------------------------------------------------------------------
+ * 0. WHAT WAS MEASURED BEFORE ANY CODE WAS WRITTEN
+/**
+ * CADMUS-Ω: an honest portfolio selector.
+ *
+ * This is deliberately not claimed to be a new grammar optimum.  It uses the
+ * existing exact grammar implementations as independently decodable candidates
+ * and emits the shortest candidate under the requested live tokenizer.  The
+/**
+ * src/lib/omega/caesura.ts
+ * =============================================================================
+ * CAESURA — Whitespace-Convention Canonicalization Pre-Pass (self-verifying,
+ * exact)
+ *
+/**
+ * src/lib/omega/canon-catalog.ts — GENERATED by bench/z45/build-canon.py. Do not edit by hand.
+ *
+ * Public canonical texts for the ANAGNORISIS lane. Provenance:
+ *   github/choosealicense.com _licenses/*.txt @ f717b235f404c60b656bfbc1643f623d02ec10a7 2026-10-02T22:45:10Z
+ *   apache/kafka Utils.java (ASF source header rendering)
+/**
+ * src/lib/omega/chimera.ts
+ * =============================================================================
+ * CHIMERA — Composed-Canonicalization Meta-Pre-Pass (self-verifying, exact)
+ *
+ * Named for the myth: not one creature but several genuinely different ones
+import { now } from './clock';
+/**
+ * CHIRON — a two-part-MDL text program for one ordinary chat message.
+ * =============================================================================
+ *
+ * WHAT PROBLEM THIS ACTUALLY SOLVES
+/**
+ * CHRISMATA (X150): guarded, content-conditioned terminal SGR elision.
+ *
+ * Git's colored diff emits the same two SGR pairs around almost every + or -
+ * line. The line's existing + / - is a locally available selector: for lines
+ * that match Git's exact framing we can strip the control sequences, then
+/**
+ * src/lib/omega/chronos-arena.ts — OMEGA-V6 "CHRONOS-ARENA" PDMC
+ * Parametric Dual-Lane Macro Compilation. Integrated from pasted spec.
+ */
+import { countTokens, type EncodingName } from './bpe';
+import { compressPrometheusICDM, decompressPrometheusICDM } from './prometheus-icdm';
+/**
+ * src/lib/omega/chronos-arena.ts — OMEGA-V6 "CHRONOS-ARENA" PDMC
+ * Parametric Dual-Lane Macro Compilation. Integrated from pasted spec.
+ */
+import { countTokens, type EncodingName } from './bpe';
+import { compressPrometheusICDM, decompressPrometheusICDM } from './prometheus-icdm';
+/**
+ * src/lib/omega/chronos-v6.ts — OMEGA-V6 "CHRONOS" Tensor Sidecar Codec
+ * Integrated verbatim from pasted spec. Compact representation.
+ */
+import { countTokens, type EncodingName } from './bpe';
+export interface ChronosResult { ok: boolean; encoding: EncodingName; codec: 'OMEGA-V6 CHRONOS'; label: string; wire: string; decoded: string; exact: boolean; inChars: number; outChars: number; inTokens: number; outTokens: number; savedTokens: number; savingsPct: number; outputChannelSavingsEstPct: number; tensorRowsPacked: number; shorthandSymbolsUsed: number; arenaDecoderBlock: string; encodeMs: number; decodeMs: number; notes: string; webUiCompatible: true; zeroCotOverhead: true; biDirectionalEnabled: true; }
+/**
+ * src/lib/omega/chronos-v6.ts — OMEGA-V6 "CHRONOS" Tensor Sidecar Codec
+ * Integrated verbatim from pasted spec. Compact representation.
+ */
+import { countTokens, type EncodingName } from './bpe';
+export interface ChronosResult { ok: boolean; encoding: EncodingName; codec: 'OMEGA-V6 CHRONOS'; label: string; wire: string; decoded: string; exact: boolean; inChars: number; outChars: number; inTokens: number; outTokens: number; savedTokens: number; savingsPct: number; outputChannelSavingsEstPct: number; tensorRowsPacked: number; shorthandSymbolsUsed: number; arenaDecoderBlock: string; encodeMs: number; decodeMs: number; notes: string; webUiCompatible: true; zeroCotOverhead: true; biDirectionalEnabled: true; }
+/**
+ * src/lib/omega/chronos.ts
+ * =============================================================================
+ * ⏳ CHRONOS-Ω — Dynamic Phase-Space Temporal Difference & Lexical Quotient Codec
+ *
+ * MATHEMATICAL FORMULATION & ORIGINAL CONCEPT:
+/**
+ * src/lib/omega/circe.ts
+ * =============================================================================
+ * CIRCE — Encoded/Injected-Artifact Restoration Pre-Pass (self-verifying,
+ * exact)
+ *
+/**
+ * Shared High-Performance Single-Token CJK Contractive Dictionary Core Engine
+ * =============================================================================
+ * Unified core engine supporting equals-free and standard key-value micro-headers,
+ * micro-escaping, heuristic candidate pruning, and strict exactness gates G1 & G2.
+ * =============================================================================
+/**
+ * src/lib/omega/clock.ts
+ * =============================================================================
+ * The single search clock for the DAEDALUS / ARIADNE / SIBYL / CHIRON family.
+ *
+ * Normal runs (app, UI): wall clock, as before.
+/**
+ * src/lib/omega/cm.ts
+ * =============================================================================
+ * OMEGA-Ξ STAGE-1 ENTROPY ENGINE
+ * Context-mixing (CM) binary arithmetic coder with logistic mixing, SSE/APM
+ * refinement, a match model, and a deterministic warm-start prior.
+/**
+ * src/lib/omega/cm.ts
+ * =============================================================================
+ * OMEGA-Ξ STAGE-1 ENTROPY ENGINE
+ * Context-mixing (CM) binary arithmetic coder with logistic mixing, SSE/APM
+ * refinement, a match model, and a deterministic warm-start prior.
+/**
+ * src/lib/omega/codec-synthesis.ts
+ * =============================================================================
+ * DYNAMIC PARADIGM SYNTHESIS & REAL-TIME EVALUATION
+ *
+ * Runs dynamic benchmark comparisons across all active candidate codecs:
+/** X144b COLEX — suffix-first lexical-component preconditioning.
+ * Reverses separator-delimited components inside maximal ASCII lexemes, not
+ * lines/records, dictionary rules, or character order. Empty components count.
+ * An involution; classical colexicographic/suffix locality ancestry, no claim of
+ * new mathematics. Experimental, unwired. Parent search must price full keys.
+ */
+/**
+ * COLUMN-C1 — exact two-sided column factoring for line families.
+ *
+ * A prefix trie captures only the left boundary. This lane treats a repeated
+ * log family as a one-column table: it factors both the longest common prefix
+ * and suffix, and stores only the varying middle values. It is lossless because
+/** X140 experimental two-generation exact-value memo. No codec semantics.
+ * Each generation holds at most half of the total key-character/entry budget.
+ * Rotation retains the just-filled generation instead of evicting everything.
+ * No LRU mutations on reads. Keys and values are exact; misses affect work only.
+ * Unwired. Only bench/x140/memo-experiment.patch connects it to bpe.ts;
+ * measured full-stack comparison found no gain, so the hook was removed.
+/**
+ * src/lib/omega/crasis.ts
+ * =============================================================================
+ * CRASIS — Punctuation-Boundary Fusion Pre-Pass
+ * (byte-perfect, exact-lossless, single-chat-readable, contract in band)
+ * -----------------------------------------------------------------------------
+/** ♛ CROWN-C1 — Delivered-objective universal exact tournament. */
+import { countTokens, type EncodingName } from './bpe';
+import { atlasDecode, atlasEncodeCached as atlasEncode, atlasDecoderPrompt, type AtlasResult } from './atlas';
+import { auroraDecode, auroraEncodeCached as auroraEncode, auroraDecoderPrompt, type AuroraResult } from './aurora';
+import { mosaicDecode, mosaicEncode, mosaicDecoderPrompt, type MosaicResult } from './mosaic';
+import { orbitEncode, orbitDecoderPrompt, type OrbitResult } from './orbit';
+/**
+ * CTXCOPY — copy from earlier text in the same chat, by anchors.
+ *
+ * Model: the reader has the earlier text C (the previous message(s) in this chat). The new text T is written as
+ * literal characters, except that a span of T equal to a span of C is written as  ⟦a…b⟧  where
+ *   - a = the first part of the span (length α), found as the first occurrence in C at or after the end of the
+/**
+ * DAEDALUS-D — DAEDALUS with a dual-tokenizer glyph pool (Z40).
+ * =============================================================================
+ * Same wire, same decoder, same contract as DAEDALUS (`daedalusEncode`). The
+ * only change is on the ENCODER side: every glyph the grammar may assign must
+ * cost ONE token under BOTH o200k_base and cl100k_base. The o200k-tuned pools
+import { now } from './clock';
+/**
+ * DAEDALUS — read the grain of the material before you cut it.
+ * =============================================================================
+ *
+ * WHERE SIX TURNS OF MEASUREMENT LEFT THIS PROBLEM
+/** X141 measured optimization candidate, unwired.
+ * For installed o200k_base/cl100k_base, ASCII digit runs split into groups of
+ * at most3, and every1..3-digit ASCII string is one token (exhaustively tested).
+ * Thus a NONEMPTY ASCII digit-only string costs ceil(length/3). Refuse all
+ * other inputs. This is a counter shortcut, not a compression mechanism.
+ */
+/**
+ * src/lib/omega/dendron.ts
+ * =============================================================================
+ * ΔΕΝΔΡΟΝ — a path or URL list written as a tree of bash brace groups
+ * (byte-perfect, exact-lossless, single-chat-readable, contract in band)
+ * -----------------------------------------------------------------------------
+/**
+ * src/lib/omega/dendrons.ts
+ * =============================================================================
+ * ΔΕΝΔΡΟΝ-Σ (DENDRON-S) — the brace tree on ANY separator, with verbatim lines
+ * (byte-perfect, exact-lossless, single-chat-readable, contract in band)
+ * -----------------------------------------------------------------------------
+/**
+ * X102 — ΔΙΑΓΡΑΦΗ (diagraphe, "the deletion, the erasure").
+ *
+ * ============================================================================
+ * THE MECHANISM, AND WHY IT IS NOT ANY CODEC ALREADY IN THE STACK
+ * ============================================================================
+/**
+ * src/lib/omega/diaphora.ts
+ * =============================================================================
+ * DIAPHORA (X15): column-difference coding of long numbers, inside a DAEDALUS
+ * message. Byte-exact. Marker ∆ (U+2206).
+ *
+// Type-only placeholder for the X60 reproducible speed A/B runner.
+// bench/x60/speed-ab-diastema.sh materializes the actual baseline TypeScript
+// from commit d7b204a as diastema.before.ts before bundling; no baseline code
+// is duplicated or loaded in the shipped application.
+import type { EncodingName } from './bpe';
+import type { DiastemaPlan, DiastemaResult } from './diastema';
+/**
+ * src/lib/omega/diastema.ts — ΔΙΆΣΤΗΜΑ (DIASTEMA, "interval, distance") — X43.
+ *
+ * ============================================================================
+ * THE HOLE, MEASURED
+ * ============================================================================
+/**
+ * DIATHESIS (X151), experimental, unwired.
+ *
+ * Carries a short lower-case hexadecimal fragment in the permutation of an
+ * existing contiguous dependency-free CHIRON rule window. This combines
+ * permutation coding with an already-present grammar's order freedom: unlike
+/**
+ * src/lib/omega/diglossia.ts — X119. ΔΙΓΛΩΣΣΙΑ (diglossia, "two registers").
+ * =============================================================================
+ *
+ * THE MECHANISM, AND WHY IT IS NOT A CODEC ALREADY IN THE STACK
+ * -----------------------------------------------------------------------------
+/**
+ * DIKE-Ω — escape-free framing for THEMIS implicit grammars.
+ *
+ * THEMIS's JSON header pays quote, comma, and escaping costs for every outer
+ * expansion. DIKE uses two fixed one-token sentinels: 甲 separates expansions
+ * and 乙 terminates their tape. It is an exact restricted-alphabet transform:
+/** DIORTHOSI: document-version line patches. Prior art: delta encoding/version
+ * control. No claim of a novel primitive. Input is arbitrary JS string, split
+ * on the literal separator; no normalization. The in-band JSON preserves all
+ * source code units, including CR, whitespace and lone surrogates. */
+import { countTokens, type EncodingName } from './bpe';
+import { tagstackEncode } from './tagstack';
+/**
+ * src/lib/omega/diptychon.ts
+ * =============================================================================
+ * DIPTYCHON (δίπτυχον, "two-panel tablet") — canonical hexdump re-rendering.
+ *
+ * THE GAP
+/**
+ * src/lib/omega/dirfold-a.ts
+ * =============================================================================
+ * DIRFOLD-A1 — same-directory path folding with an ASCII-only marker.
+ * (exact, byte-perfect, self-verified before emission; identity unless it pays)
+ *
+/**
+ * src/lib/omega/dirfold.ts
+ * =============================================================================
+ * DIRFOLD-D1 — same-directory path folding for listings, by a one-line in-message rule.
+ * (exact, byte-perfect, self-verified before emission; identity unless it pays)
+ *
+/**
+ * src/lib/omega/ditto.ts
+ * =============================================================================
+ * DITTO-F1 — per-field "same as the line above" marks for space-separated records (ASCII-only wire).
+ * (exact, byte-perfect, self-verified before emission; identity unless it pays)
+ *
+/**
+ * src/lib/omega/dragi-full.ts
+ * =============================================================================
+ * DRAGI-FULL — TOTAL-COVERAGE D12 SKELETON (regression fix, July 27 2026)
+ *
+ * THE BUG THIS FIXES
+/**
+ * src/lib/omega/dragi-full.ts
+ * =============================================================================
+ * DRAGI-FULL — TOTAL-COVERAGE D12 SKELETON (regression fix, July 27 2026)
+ *
+ * THE BUG THIS FIXES
+/**
+ * ECHO — the quoting-thread fold that NYX cannot see.
+ * =============================================================================
+ * ἠχώ — Echo, the nymph cursed to repeat only the last words spoken; she
+ * can never initiate, only reflect what was said before — exactly like
+ * `>` quoting in an email thread. Every reply *contains* the previous
+/**
+ * ECLIPSE-E1 — contract-cost refinement over ZENITH.
+ *
+ * This codec does not invent a second wire grammar. It searches a small,
+ * explicitly semantics-preserving normal-form set for the decoder contract of
+ * ZENITH's already exact wire. The only transformations currently admitted are
+/**
+ * src/lib/omega/eidolon.ts
+ * =============================================================================
+ * OMEGA-V8 "EIDOLON" — LOSSLESS SEMANTIC PROJECTION (LSP)
+ * Original synthesis: July 28, 2026. The Terminal Information Limit.
+ *
+/**
+ * src/lib/omega/eidolon.ts
+ * =============================================================================
+ * OMEGA-V8 "EIDOLON" — LOSSLESS SEMANTIC PROJECTION (LSP)
+ * Original synthesis: July 28, 2026. The Terminal Information Limit.
+ *
+/**
+ * EIDOS — The program synthesis fold that GLOSSIA cannot see.
+ * =============================================================================
+ * εἶδος — form, template, idea. Every log speaks one form many times.
+ *
+ * THE GAP GLOSSIA LEFT
+/** X140 EIKON (image): acyclic images of expanded grammar rules.
+ * Experimental, UNWIRED. ~gU| / ~gL| apply ASCII case; ~gab| applies
+ * simultaneous character substitution a -> b to expanded g, not its wire.
+ * Unlike APOTOME this changes characters rather than selecting a substring.
+ * Related to morphic grammars, not a new information-theory primitive.
+ * Ordinary dictionary controls and native behavior must be tested separately.
+import { countTokens, type EncodingName } from './bpe';
+import { akolouthia2Encode } from './akolouthia2';
+import { apographeEncode, apographeDecodeResult } from './apographe';
+import { daedalusEncode } from './daedalus';
+import { siblingTemplateEncode, type SiblingTemplateResult } from './sibling-template';
+import { tagstackEncode, type TagstackResult } from './tagstack';
+/** Optional EKDYSIS parent composition. No production frontier admission.
+ * Costs both baseline and one transformed-parent search. A token gain is NOT
+ * a runtime Pareto claim. Unsupported emitted parent contracts fail closed.
+ */
+import {tagstackEncode} from './tagstack';
+import {chironDecode,CHIRON_SCRIPTS,chironInScript,chironParseTape,chironOpsUsed} from './chiron';
+/** EKDYSIS (X146): remove whole canonical JSON-string serialization layers.
+ * Experimental, not automatically wired. Unlike JSON-ESCAPE-FOLD's five
+ * punctuation escapes, a selected complete string becomes literal inner text,
+ * exposing multiline prose/code to the parent. Classical serialization inverse,
+ * not new information theory. Exact finite menu; greedy nonoverlapping scanner.
+ */
+/**
+ * src/lib/omega/elleipsis.ts
+ * =============================================================================
+ * ○ ELLEIPSIS — marker-free elision of a positionally fixed constant field
+ * (byte-perfect, exact-lossless, single-chat-readable, no system prompt)
+ * -----------------------------------------------------------------------------
+/**
+ * src/lib/omega/enallage.ts — X115. ΕΝΑΛΛΑΓΗ (enallage), "an exchange".
+ * =============================================================================
+ *
+ * THE MECHANISM: RADIX REINTERPRETATION OF A FIXED-WIDTH BIT FIELD
+ * -----------------------------------------------------------------------------
+/**
+ * src/lib/omega/engram.ts
+ * =============================================================================
+ * ENGRAMMA (ἔγγραμμα — "that which is written in, a record, a memorial").
+ *
+ * X68. The TAGSTACK frontier measures eight in-band parents on every input and
+/**
+ * src/lib/omega/engramma.ts
+ * =============================================================================
+ * ENGRAMMA (ἔγγραμμα) — the frontier, with its repeated sub-encodes remembered.
+ *
+ * WHAT THIS IS, STATED PRECISELY
+/**
+ * src/lib/omega/enkibotismos.ts
+ * =============================================================================
+ * X131 — ΕΓΚΙΒΩΤΙΣΜΌΣ (enkibotismós, "encapsulation"): make the frontier's
+ *        TAPE pay only for rules that earn their keep, and let it cite itself.
+ *
+/**
+ * ENTHYMEME — entailment elision: fields the reader can derive are not sent.
+ * =============================================================================
+ * ἐνθύμημα — a syllogism with one premise left unstated because the listener
+ * supplies it. This codec leaves unstated the parts of a message that are a
+ * deterministic, PUBLICLY-SPECIFIED function of other parts of the same line,
+/**
+ * EPAGOGE — induced entailment: the rule is instantiated from the document, then stated.
+ * =============================================================================
+ * ἐπαγωγή — Aristotle's word for induction, the move from particulars to the
+ * general. ENTHYMEME (Z46) leaves unstated a field that a FIXED public
+ * convention derives from its neighbours (a JVM frame's `Foo.java`, a Markdown
+/**
+ * ἘΠΙΨΉΦΙΣΙΣ (epipsēphisis — "the re-tally taken on one item", X125).
+ * =============================================================================
+ * Exact incremental re-pricing of a LOCALISED edit.
+ *
+ * WHAT IS ALREADY HERE, AND WHAT IS MISSING.
+/**
+ * src/lib/omega/episteme.ts
+ * =============================================================================
+ * EPISTEME-Ω: Universal Epistemic Morphological Transduction & Dual-Lattice Lossless Codec
+ *
+ * Terminal AI-Native Pareto-Superior Exact Lossless Codec
+/**
+ * src/lib/omega/epistle.ts
+ * =============================================================================
+ * EPISTLE — Quoted-Printable (MIME) Restoration Pre-Pass (self-verifying,
+ * exact)
+ *
+import {tagstackEncode} from './tagstack';
+import {readPlainParent} from './ekdysis-frontier';
+import {countTokens,type EncodingName} from './bpe';
+import {epityposPlan,epityposRestore,epityposKey,EPITYPOS_MARKERS} from './epitypos';
+export function epityposRead(message:string):string {
+ if(message.length>41000)throw Error('envelope');
+/** EPITYPOS (X148): reversible character-overstrike factorization.
+ * Historical nroff/POD typography is not a new invention. Repository addition:
+ * expose per-character overstrikes as readable spans BEFORE parent search.
+ * Bounded deterministic maximal runs; first-valid delimiter choice is greedy.
+ * Experimental: program inversion does not establish native-chat behavior.
+ */
+/** EUPRAXIA-Ω: BPE-boundary-superoptimized, collision-safe DIKE framing. */
+import { countTokens, type EncodingName } from './bpe';
+import { dikeEncode, dikeDecode, dikeDecoderPrompt, DIKE_START, DIKE_RULE_SEPARATOR, DIKE_BODY_SEPARATOR, type DikeResult } from './dike';
+import { THEMIS_IMPLICIT_GLYPHS } from './themis';
+export const EUPRAXIA_START = '⬣';
+export const EUPRAXIA_RULE_SEPARATOR = '(';
+/**
+ * src/lib/omega/euros.ts
+ * =============================================================================
+ * X132 — ΕΥΡΟΣ (eúros, "extent / span"): retune the SPAN each dictionary rule
+ *        covers, trading tape cost against body cost one character at a time.
+ *
+/**
+ * src/lib/omega/eustochia.ts
+ * =============================================================================
+ * EUSTOCHIA — PORTFOLIO AIM
+ * (exact, byte-perfect, single-chat-readable, no system prompt)
+ * -----------------------------------------------------------------------------
+/** X142 EUTAXIA (good order): endogenous-order reconstruction.
+ * A unique monotone key already carried by each source line is an ordering
+ * certificate. Reorder the run to help the parent; recover source order by
+ * sorting decoded lines by that key, without transmitting a permutation.
+ * Distinct from fixed-stride ANASTROPHE and VALENCE's paid permutation rank.
+ * Sorting/clustering is classical; repository-scoped experiment, unwired.
+/**
+ * EUTELEIA (εὐτέλεια — "cheapness, low price, frugality").
+ *
+ * X37. Every codec in this stack injects symbols into the wire that carry no
+ * information from the source: a framing bracket here, a marker there, a word
+ * in the instruction clause. Each of them was chosen once, at authoring time,
+/**
+ * src/lib/omega/euthynteria.ts — ΕΥΘΥΝΤΗΡΙΑ (EUTHYNTERIA, "the straightening; the audit of
+ * accounts rendered") — X93.
+ *
+ * =============================================================================
+ * WHAT THIS MODULE IS, IN ONE SENTENCE
+/**
+ * src/lib/omega/exodus.ts
+ * =============================================================================
+ * 🌌 EXODUS-E1 — Dynamic Sub-Lexical Phase-Space Quotient Contraction
+ *
+ * CONCEPT & GROUNDING:
+/**
+ * FOTAR — frequency-ordered in-band token aliases (X65).
+ *
+ * This is a readable, exact adaptation of token-frequency dictionary coding:
+ * repeat BPE-token surface fragments are replaced by local aliases and the
+ * literal alias table is carried in the same message. Unlike FOT's binary
+/**
+ * src/lib/omega/genesis.ts
+ * =============================================================================
+ * GENESIS-Ω: Grammar-Enhanced Neural Entropy-optimal Superword Induction & SLP Synthesis
+ *
+ * Terminal Sovereign Lossless Prompt Compression Codec
+/**
+ * X100 — ΓΕΝΝΑΔΑΣ (gennadas, "the native, the indigenous one").
+ *
+ * ============================================================================
+ * THE MECHANISM, AND WHY IT IS NOT ΣΥΝΔΥΑΣΜΟΣ OR ΜΕΤΑΤΑΞΙΣ
+ * ============================================================================
+/**
+ * GLOSSIA — The grammar-aware fold that TACHYS and HYDRA cannot see.
+ * =============================================================================
+ * γλῶσσα — tongue, language. Every document speaks several at once.
+ *
+ * THE GAP HYDRA LEFT
+/**
+ * src/lib/omega/gnomon.ts
+ * =============================================================================
+ * GNOMON — the part that, added to what is given, completes the whole.
+ * (exact, byte-perfect, single-chat-readable, no system prompt; identity unless it pays)
+ *
+/**
+ * GRAMMA — notation dialects: the decoder's own formatting priors as the
+ * dictionary.
+ * =============================================================================
+ * WHERE THIS SITS IN THE STACK
+ *
+/** X160 HAPLOGRAPHE (single writing): Git envelope recordization.
+ * One path serves four syntactic roles in a canonical modified-file header.
+ * Classical format entailment/template coding; optional, not a new theorem.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+/**
+ * src/lib/omega/harmonia.ts
+ * =============================================================================
+ * ⧢ HARMONIA-H1 — Hierarchical Adaptive Routing & Multi-Operad Notational Integration
+ * =============================================================================
+ *
+/**
+ * src/lib/omega/harmos.ts — X81. ἉΡΜΌΣ (harmós), "a joint, a seam, that which
+ * joins two things" — and in masonry, the mortar line between cut stones. Both
+ * senses are meant: the codec removes the seams between fixed-width fields, and
+ * what remains are the stones themselves.
+ * =============================================================================
+/**
+ * ⟐ HELIX-AP — Arithmetic-Progression Lattice-Factoring Codec
+ * Orthogonal to dictionary codecs: compresses locally-arithmetic numeric runs.
+ */
+import { countTokens, type EncodingName } from './bpe';
+
+/**
+ * src/lib/omega/hemera.ts
+ * =============================================================================
+ * HEMERA (X14) — calendar-day deltas, plus HORA's millisecond deltas, inside a
+ * DAEDALUS message. Byte-exact. Marker ※ (U+203B), as in HORA.
+ *
+/**
+ * HERMES-C: contract-sliced HERMES-F delivery.
+ *
+ * HERMES-F already carries a dynamic template program. HERMES-C adds a
+ * separately inspectable compiler boundary: it specializes the decoder
+ * contract against the finished wire and exposes the exact operation set and
+/**
+ * HERMES-F — variable-arity template / sequence codec.
+ *
+ * This is an extension of the self-carried HERMES idea, not a fixed schema:
+ * every input chooses its own record width, literal anchors, slot count, and
+ * slot generator.  It targets the hole left by a flat SLP on near-duplicate
+/**
+ * HERMES-Ω — the self-carried message codec (single-chat SLP + tape counters).
+ * =============================================================================
+ * THE PROBLEM IT SOLVES (measured, not asserted)
+ * -----------------------------------------------------------------------------
+ * The user contract for this repository is: an LLM must be able to decode the
+import { chironDecode } from './chiron';
+import { countTokens, type EncodingName } from './bpe';
+import { symplokeDecode } from './symploke';
+import { tachosDecode, tachosEncode, type TachosOptions, type TachosResult } from './tachos';
+
+/**
+/**
+ * src/lib/omega/homoios.ts
+ * =============================================================================
+ * HOMOIOS (X16): near-duplicate blocks as ordered word edits against an earlier
+ * block, inside a DAEDALUS-D message. Byte-exact. Wire form [i|a=b|c=d] and [i].
+ *
+/** Optional HOMOSEMA full-parent tournament. Not imported by TAGSTACK.
+ * Two close-only dialects; complete in-band cost, independent source-read gate,
+ * strict fallback. Additional parent calls cost time: not a runtime Pareto claim.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+/** HOMOSEMA (X152): parser-state terminal coalescing for JSON.
+ * Experimental/unwired. Merge comma/colon terminal spellings and/or object/array
+ * closing spellings; the JSON parser state recovers their types. Preserve every
+ * other byte, including whitespace, duplicate keys, escapes and numeric lexemes.
+ * This is grammar-conditioned alphabet reduction, not new information theory.
+ * Unlike JSON reprinting, no value is parsed into a JS number/object and reprinted.
+/**
+ * src/lib/omega/hora.ts
+ * =============================================================================
+ * HORA (X13) — timestamp deltas inside a DAEDALUS message. Byte-exact. Marker ※ (U+203B); CHIRON uses § as a structural delimiter, so § is not the marker.
+ *
+ * WHAT IT IS (mechanism)
+/** Optional threshold/parent composition, never enabled by default.
+ * Extra parent search is charged; no encoder-speed improvement is claimed.
+ */
+import {tagstackEncode} from './tagstack';
+import {readPlainParent} from './ekdysis-frontier';
+import {horionPlans,horionRead,horionRestore,HORION_CONTRACT} from './horion';
+/** HORION — X147: one exact decimal threshold predicts a two-valued CSV column.
+ * Experimental, not wired into the default frontier. No native-reader claim.
+ * Unlike a finite lookup, the rule transmits an ordered boundary, not keys.
+ * Domain: unquoted rectangular LF CSV, 8..1000 rows, 2..16 columns, 40k chars.
+ * Search enumerates source/target pairs, finds the only possible separating
+ * boundary, and byte-checks reconstruction. It is not a globally optimal search.
+/**
+ * HYDRA — the frontier that TACHYS and KIONES alone could not hold.
+ * =============================================================================
+ * ὕδρα — many heads, one body. Cut one off and two grow back.
+ *
+ * THE GAP
+/**
+ * HYLE — ὕλη, the matter without the form.
+ * =============================================================================
+ * THE CANONICAL-REGENERATION FOLD: delete what the decoder can rebuild,
+ * instead of differencing it.
+ *
+/**
+ * src/lib/omega/hypercube-v5.ts — OMEGA-V5 "HYPERCUBE"
+ * Self-Executing In-Context Poly-Radix Codec & Bi-Directional Client Bridge.
+ * See detailed JSDoc in the pasted spec.
+ */
+import { countTokens, type EncodingName } from './bpe';
+/**
+ * src/lib/omega/hypercube-v5.ts — OMEGA-V5 "HYPERCUBE"
+ * Self-Executing In-Context Poly-Radix Codec & Bi-Directional Client Bridge.
+ * See detailed JSDoc in the pasted spec.
+ */
+import { countTokens, type EncodingName } from './bpe';
+/**
+ * src/lib/omega/hypergraph.ts
+ * =============================================================================
+ * 🕸️ HYPERGRAPH-H2 — In-Context Directed Hypergraph Non-Contiguous Grammar Factorization
+ *
+ * CONCEPT & GROUNDING:
+/**
+ * src/lib/omega/hyperion.ts
+ * =============================================================================
+ * ☀ HYPERION-H1 — Hyper-Dimensional Polynomial Spectral Context Contraction
+ *
+ * DYNAMIC ALGORITHM:
+/**
+ * ICARUS — deterministic, latency-first routing for the CHIRON wire language.
+ *
+ * DAEDALUS runs a portfolio whose grammar arms can consume seconds. ICARUS uses
+ * only input features and a fixed work configuration: no wall-clock cutoffs,
+ * randomness, shared state, or speculative second arm. The wire and one-chat
+/**
+ * Input-memory relative codec (IM1)
+ * ---------------------------------------------------------------------------
+ * Safe input-only cross-turn compression: future user/input text may refer to
+ * exact byte ranges of prior *input* turns that the application already stores.
+ * This module deliberately does not learn from model outputs. It is a pure
+/**
+ * ◇ IRIS-I1 — Runtime Decoder-Contract Partial Evaluation
+ * =============================================================================
+ * ATLAS/CROWN optimize wire + a fixed decoder contract. The remaining blindspot
+ * is that fixed contracts describe every production a codec COULD emit, while a
+ * concrete wire uses only a tiny subset. IRIS specializes the decoder grammar
+/**
+ * ἸΣΟΜΟΡΦΊΑ — ISOMORPHIA.  A wire-level isomorphism pass over the glyph tape.
+ * =============================================================================
+ *
+ * THE UNEXERCISED DEGREE OF FREEDOM
+ * -----------------------------------------------------------------------------
+/**
+ * src/lib/omega/isoskeles.ts
+ * =============================================================================
+ * ISOSKELES (ἰσοσκελής — "equal-legged", of an isosceles triangle) —
+ * symmetric-square (triangle) elision for delimited tables. X56.
+ *
+/** X157 optional selector over the complete X156 incumbent. Unwired. */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+import {synecheiaFrontierEncode,readSynecheiaIncumbent} from './synecheia-frontier';
+import {synecheiaRead} from './synecheia';
+import {isostathmiaParentRead as readPlainParent} from './isostathmia-parent';
+/** X157 message-only extension: literal acyclic CHIRON dictionaries129..256.
+ * Existing reader stops at128; this is a bounded support extension, not a new
+ * wire format or permission to trust encoder self-reports. Operators still refuse.
+ */
+import {readPlainParent} from './ekdysis-frontier';
+import {CHIRON_SCRIPTS,chironInScript,chironParseTape,chironOpsUsed,chironDecode} from './chiron';
+/** X157 ISOSTATHMIA (balance): unified-diff hunk conservation.
+ * Derive both counts from signed body records and new start from cumulative
+ * insertion/deletion balance. Classical format entailment, optional/unwired.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+/**
+ * src/lib/omega/janus.ts
+ * =============================================================================
+ * OMEGA-V5 "JANUS" — DUPLEX TOKEN CONTRACT CODEC (terminal architecture)
+ *
+ * THE TERMINAL INSIGHT (original synthesis, 2026-07-26)
+/**
+ * src/lib/omega/janus.ts
+ * =============================================================================
+ * OMEGA-V5 "JANUS" — DUPLEX TOKEN CONTRACT CODEC (terminal architecture)
+ *
+ * THE TERMINAL INSIGHT (original synthesis, 2026-07-26)
+/**
+ * JSON-ESCAPE-FOLD (X66): fold a small, explicit set of safe JSON Unicode
+ * escapes to literal ASCII punctuation, with a collision-free in-band marker
+ * that makes the exact lowercase escape spelling recoverable.
+ *
+ * This is a narrow syntax transform, not a claim of a new compression
+/**
+ * KAIROS-Ω — residual-context transducer over KHOROS-Ω.
+ *
+ * Unlike another whole-document grammar, KAIROS attacks the redundancy left in
+ * KHOROS's winning wire.  Its finite-state phrases factor recurring domain
+ * prefixes (especially REST/ops JSON) after KHOROS has made its own choices.
+/**
+ * KALLIGRAPHOS — mathematical-alphabet restoration, exact and self-verifying.
+ *
+ * Unicode Mathematical Alphanumeric Symbols are routinely used as “fancy text”
+ * in social posts, copied headings, and generated status messages.  A styled
+ * English sentence is expensive and sometimes poorly understood by models,
+/**
+ * src/lib/omega/kallos.ts
+ * =============================================================================
+ * KALLOS (κάλλος — "beauty", styled typography)
+ * Unicode Mathematical Alphanumeric & Styled Font Restoration Pre-Pass
+ * (self-verifying, exact)
+/** KAMPYLI (X161, curvature): exact degree-2..4 finite-difference tables.
+ * Classical Newton forward differences, not a new theorem. Optional only.
+ * Constant/linear companion columns are admitted only beside a nonlinear one.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+/**
+ * src/lib/omega/kannabos.ts — ΚΆΝΝΑΒΟΣ (KANNABOS, "grid, ruled canvas") — X42.
+ *
+ * ============================================================================
+ * THE HOLE THIS FILLS, IN THE STACK'S OWN WORDS
+ * ============================================================================
+/**
+ * KANON — table-fold gate over HYLE, with DAEDALUS as the fixed arm; AMPHORA otherwise.
+ *
+ * Why this codec exists (measured, see bench/z11/):
+ *   HYLE (branch arena/594be96e, unmerged) removes what the decoder can rebuild: generated
+ *   columns (counters, dates, cycles), aligned space runs, and column-structured tables.
+/**
+ * src/lib/omega/kappa.ts
+ * =============================================================================
+ * KAPPA-κ1 — inline-bind token macros (lossless, deterministic, prompt-decoded)
+ *
+ * GROUNDING. Three published results shape the mechanism:
+/** Optional KENOMA indentation tournament, unwired. The X152 HOMOSEMA
+ * tournament remains in the incumbent, so it is not silently weakened.
+ * Extra parent work is real; this is not an encoder-latency Pareto claim.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {tagstackEncode} from './tagstack';
+/** KENOMA (X153): implicit close events in empty JSON lines.
+ * Experimental, unwired. Unlike HOMOSEMA's explicit generic closer, remove
+ * standalone closers completely: the resulting whitespace/comma-only line is
+ * the event, while the live JSON stack supplies the missing terminal type.
+ * Not a new pushdown/erasure principle; narrow repository application.
+ * Collision-free restricted domain; no whitespace normalization or reprinting.
+/** ΚΕΝΟΝ — kenon: space-aligned tables whose last column is prose.
+ *
+ *  A NEW INFERENCE STAGE, not a new wire. KANNABOS already rebuilds space-aligned
+ *  tables byte-exactly, and its columnar wire is measurably cheaper through the
+ *  frontier than the table itself (kubectl 326 -> 306 with the contract included;
+ *  receipt `bench/x86/receipts/kenon.json`). What it cannot do is FIND those tables
+/**
+ * src/lib/omega/kephalaion.ts
+ * =============================================================================
+ * KEPHALAION (κεφάλαιον — "the main sum, the total" in Greek financial
+ * usage) — aggregate elision for delimited tables. X55.
+ *
+/**
+ * src/lib/omega/kerma.ts — X78. ΚΈΡΜΑ (kerma), "small coin, small change; a thing cut
+ * into small pieces" (κερματίζω, to cut up into small pieces).
+ * =============================================================================
+ *
+ * THE MEASUREMENT THAT PRODUCED THIS CODEC
+/**
+ * ⊙ KERNEL-K1 — Canonical Minimal Operational Decoder Contract
+ * =============================================================================
+ * IRIS removes unreachable grammar productions but still renders them as prose.
+ * KERNEL compiles the same concrete wire to a compact operational notation and
+ * takes the real-BPE minimum of {IRIS contract, canonical notation}. The wire is
+export const KHOROS_OPERADS: string[] = [
+  "  \"body\": \"flow() for a synchronous byte-mode pipe spends most of its time in the general `read()` path: take one prefetched chunk out of a holey buffer, then call `_read()` for the next one. This keeps that prefetched chunk on the readable state for the flowing loop and emits it directly.\\n\\n`_read()` of the following chunk still runs before `'data'`. A nested `read()` puts the chunk back on the buffer. Object mode, decoders, and non-flowing `read()` stay on the existing path.\\n\\nMeasured with `benchmark/compare.js`, 15 runs, two binaries built from the same tree:\\n\\n| benchmark | change |\\n| --- | --- |\\n| `streams/pipe.js` n=5e6 | **+77.25%** ±2.55% (***) |\\n| `streams/pipe-object-mode.js` | +1.46% (noise) |\\n| `streams/readable-readall.js` | +0.17% (noise) |\\n| `streams/readable-bigread.js` | +0.24% (noise) |\\n\\n`tools/test.py` on `test/parallel/test-stream*`, `test/parallel/test-readable*`, `test/sequential/test-stream*`, and the fs read/write stream tests passed.\\n\\nA closed-source coding agent assisted with the implementation. The prefetch order was checked against `Readable.read()`, and the benchmark and tests above were run locally.\\n\",",
+  "\"body\": \"flow() for a synchronous byte-mode pipe spends most of its time in the general `read()` path: take one prefetched chunk out of a holey buffer, then call `_read()` for the next one. This keeps that prefetched chunk on the readable state for the flowing loop and emits it directly.\\n\\n`_read()` of the following chunk still runs before `'data'`. A nested `read()` puts the chunk back on the buffer. Object mode, decoders, and non-flowing `read()` stay on the existing path.\\n\\nMeasured with `benchmark/compare.js`, 15 runs, two binaries built from the same tree:\\n\\n| benchmark | change |\\n| --- | --- |\\n| `streams/pipe.js` n=5e6 | **+77.25%** ±2.55% (***) |\\n| `streams/pipe-object-mode.js` | +1.46% (noise) |\\n| `streams/readable-readall.js` | +0.17% (noise) |\\n| `streams/readable-bigread.js` | +0.24% (noise) |\\n\\n`tools/test.py` on `test/parallel/test-stream*`, `test/parallel/test-readable*`, `test/sequential/test-stream*`, and the fs read/write stream tests passed.\\n\\nA closed-source coding agent assisted with the implementation. The prefetch order was checked against `Readable.read()`, and the benchmark and tests above were run locally.\\n\",",
+  "3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.",
+  "\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"",
+  "**Drizzle supports every PostgreSQL, MySQL and SQLite database**, including serverless ones like [Turso](https://orm.drizzle.team/docs/get-started-sqlite#turso), [Neon](https://orm.drizzle.team/docs/get-started-postgresql#neon), [Xata](https://orm.drizzle.team/docs/connect-xata), [PlanetScale](https://orm.drizzle.team/docs/get-started-mysql#planetscale), [Cloudflare D1](https://orm.drizzle.team/docs/get-started-sqlite#cloudflare-d1), [FlyIO LiteFS](https://fly.io/docs/litefs/), [Vercel Postgres](https://orm.drizzle.team/docs/get-started-postgresql#vercel-postgres), [Supabase](https://orm.drizzle.team/docs/get-started-postgresql#supabase) and [AWS Data API](https://orm.drizzle.team/docs/get-started-postgresql#aws-data-api). No bells and whistles, no Rust binaries, no serverless adapters, everything just works out of the box.",
+/**
+ * src/lib/omega/khoros.ts
+ * =============================================================================
+ * KHOROS-Ω: Kieffer-Yang Hierarchical Orthogonal Rate-distortion Optimal Synthesis & Aperiodic SLP Lattice
+ *
+ * Terminal Sovereign Lossless Prompt Compression Codec
+/**
+ * src/lib/omega/kinetic.ts
+ * =============================================================================
+ * ⚡ KINETIC-K8 — In-Context Kinetic Phase-Space Flow Contraction & BPE-Boundary Realignment
+ *
+ * CONCEPT & GROUNDING:
+/**
+ * src/lib/omega/kiones.ts
+ * =============================================================================
+ * KIONES — THE COLUMNS
+ * (byte-perfect, exact-lossless, single-chat-readable, no system prompt)
+ * -----------------------------------------------------------------------------
+/**
+ * src/lib/omega/kladios.ts
+ * =============================================================================
+ * KLADOS (κλάδος, branch) — drawn-tree depth codec.
+ *
+ * THE GAP
+/** X159 bounded reader support for the existing AKOLOUTHIA envelope.
+ * This adds no wire operation. Exact integer arithmetic; no source input.
+ */
+import {isostathmiaParentRead} from './isostathmia-parent';
+import {readIsostathmiaIncumbent,isostathmiaFrontierEncode} from './isostathmia-frontier';
+import {klimaxFromFrontier} from './klimax';
+/** X159 KLIMAX (ladder): differential Dewey/outline-label stack.
+ * Classical hierarchical counter coding; experimental, not on default TAGSTACK.
+ * No native-model decoding claim. No external schema or vocabulary.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+/**
+ * src/lib/omega/koine.ts
+ * =============================================================================
+ * KOINE-K1 — shared-prefix field folding against the line above.
+ * (exact, byte-perfect, self-verified before emission; identity unless it pays)
+ *
+/**
+ * KOLUMN — exact in-band columnar transform for rectangular delimited text.
+ *
+ * Each column independently chooses a literal stream, a constant, a reference
+ * to an earlier identical column, or fixed-point integer deltas. The transform
+ * is a compact self-contained message; a receiver needs no schema outside it.
+/** X137 KREMA (hanging): cursor-aware continuation-line folding.
+ * PTYCHE wraps whole paragraphs; this transducer preserves a literal first-line
+ * prefix, folds a continuation run into its description, then wraps relative to
+ * the current output column and a separately declared continuation margin.
+ * Standard layout/predictive-coding genus; repository-scoped extension only.
+ * Unwired. Exhaustive bounded (width,indent) trials, greedy decoder wrapping.
+/** X164 KRYPTOLYSIS: cyclic ASCII-alphabet preconditioning of the parent.
+ * Classical Caesar substitution, not an AI invention. No cipher operation was
+ * found in the prior 405-module inventory. In-band inverse, no secret key,
+ * training, or external dictionary. Experimental optional selector only.
+ */
+import {countTokens,type EncodingName} from './bpe';
+/**
+ * ⟡ LAKONIKOS-D — the DAEDALUS-D wire with the LAKONIKOS terse decoder contract (X16).
+ * =============================================================================
+ * Composition, not a new mechanism:
+ *   - wire: daedalusDualEncode (DAEDALUS-D: dual-tokenizer glyph pool; same wire and decoder as DAEDALUS);
+ *   - contract: lakonikosDecoderPrompt (the rules sentence is shortened; repeat and list clauses are verbatim).
+/**
+ * ⟡ LAKONIKOS — DAEDALUS wire with a terse decoder contract (same wire, same decoder).
+ *
+ * What it changes: only the English decoder contract the reader is given. The rules sentence
+ *   "Every new <L> before ¶ starts a rule whose text runs to the next new letter or to ¶.
+ *    In the text after ¶ expand every rule, repeatedly, and print only the result."
+/**
+ * src/lib/omega/lattice.ts
+ * =============================================================================
+ * ⟡ LATTICE-LT1 — Globally-Parsed Self-Delimiting Grammar Compression
+ * =============================================================================
+ * WHAT IS ACTUALLY NEW (stated narrowly, so it can be attacked)
+/** X148 exact UTF16 LCP via native string comparisons, not a codec.
+ * Inspect 16 units directly (cheap early mismatch); then compare disjoint
+ * geometrically growing blocks using native string equality. Binary-search
+ * the first unequal block. No hashing/collisions, normalization, or BPE changes.
+ * Work O(n + log n) substring comparisons/compared units up to constant factors;
+ * actual allocation/runtime is engine-dependent and must be measured.
+/**
+ * LETHE — the forgetfulness fold that ECHO cannot see.
+ * =============================================================================
+ * Λήθη — river of forgetfulness; souls drink and forget details, but
+ * Mnemosyne remembers. Punctuation is the first thing forgotten in
+ * neuralese: `hello,` and `hello` differ by 1 token, but meaning is same.
+/** X163 LEXARITHMOS: exact grammatical numeral transduction, optional.
+ * English cardinal spelling is a value grammar, not digit regrouping, a
+ * finite-difference table, a slug, or an external number-word dictionary.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+/**
+ * LEXIS - lambda-epsilon-xi-iota-sigma (lexis, "word / diction")
+ * =============================================================
+ *
+ * THE MECHANISM: reversible junction refolding.
+ *
+/**
+ * src/lib/omega/logistike.ts
+ * =============================================================================
+ * LOGISTIKE — THE RECKONING
+ * (byte-perfect, exact-lossless, single-chat-readable, no system prompt)
+ * -----------------------------------------------------------------------------
+/**
+ * LOGOS-Ω — self-referential lexicon codec (cross-referential SLP grammar).
+ * =============================================================================
+ * WHAT IS ACTUALLY NEW (stated narrowly so it can be attacked)
+ * -----------------------------------------------------------------------------
+ * Every grammar/dictionary layer in this repository — MOIRA (constituent
+/**
+ * src/lib/omega/logtpl.ts
+ * =============================================================================
+ * LOGTPL — exact line-template folding for tabular/log text (Drain-style templates, byte-perfect).
+ *
+ * Each line is split into whitespace-preserving tokens. A token that contains a digit (and no whitespace)
+/**
+ * src/lib/omega/ltp.ts
+ * =============================================================================
+ * LTP — LOSSLESS TOKEN PROJECTION
+ *
+ * THE REFRAME
+/**
+ * src/lib/omega/ltp.ts
+ * =============================================================================
+ * LTP — LOSSLESS TOKEN PROJECTION
+ *
+ * THE REFRAME
+/**
+ * src/lib/omega/lumen.ts
+ * =============================================================================
+ * 💡 LUMEN-L1 — Lexical Uniform-Entropy Motif & BPE-Boundary Entropic Contraction
+ *
+ * MATHEMATICAL FORMULATION & ORIGINAL CONCEPT:
+/**
+ * X105 — ΜΕΓΑΛΥΤΕΡΗ-ΕΠΑΝΑΛΗΨΙΣ ("maximal repeat"), the MR-order codec.
+ *
+ * THE IMPORTED RESULT, RESTATED WITH ITS HYPOTHESES.
+ * Maruyama et al., "Practical Grammar Compression Based on Maximal Repeats",
+ * Axioms 2020, 9(4), 63; arXiv:1811.04596v2.  They analyse the grammar
+/**
+ * src/lib/omega/mekos.ts — X116. ΜΗΚΟΣ (mēkos), "length".
+ * =============================================================================
+ *
+ * THE MECHANISM: MEASURE ENTAILMENT OF A SIBLING FIELD
+ * -----------------------------------------------------------------------------
+/**
+ * ☉ MERIDIAN-M1 — Dual-Hemisphere Tournament Codec (original)
+ * =============================================================================
+ * Mechanism portfolio (orthogonal to every header-dictionary and pure-AP codec):
+ *
+ * H1 ANAPHORA HEMISPHERE: zero-header in-place binding.
+/**
+ * src/lib/omega/merismos.ts — X77. ΜΕΡΙΣΜΌΣ (merismos), "division into parts".
+ * =============================================================================
+ *
+ * TARGET: WHAT THE FRONTIER LEFT LITERAL ON ITS OWN WIRE
+ * ------------------------------------------------------
+/**
+ * ΜΕΣΟΝ (meson, "that which lies between" — the interval, the separator) — X110.
+ * =============================================================================
+ *
+ * WHAT PROBLEM THIS ACTUALLY SOLVES
+ * -----------------------------------------------------------------------------
+/** X143b METABOLE (change): bucketed lexical suffix edits.
+ * Maximal [A-Za-z0-9_./-]+ lexemes update a same-message first-character
+ * bucket. ^k,d:s; drops d characters from the latest lexeme beginning k and
+ * appends s. Unlike MNEMA this can introduce a never-before-seen word; unlike
+ * DIRFOLD the reference is neither a directory nor necessarily the prior line.
+ * Classical front/delta-coding ancestry. New repository extension, not a claim
+/**
+ * X97 — ΜΕΤΑΤΑΞΙΣ (metataxis, "rearrangement").
+ *
+ * ============================================================================
+ * THE MECHANISM, AND WHY IT IS NOT ἸΣΟΜΟΡΦΊΑ
+ * ============================================================================
+/**
+ * METATHESIS / ΜΕΤΆΘΕΣΙΣ — "transposition" (Greek). X27.
+ *
+ * ===========================================================================
+ * THE DISCOVERY THIS CODEC IS BUILT ON
+ * ===========================================================================
+/**
+ * src/lib/omega/metatron.ts
+ * =============================================================================
+ * METATRON-Ω: Sovereign Universal Morphological, Structural & Dual-Lattice Lossless Codec
+ *
+ * Terminal AI-Native Pareto-Superior Exact Lossless Codec
+/**
+ * METIS-Ω — level-polymorphic succinct grammar closure.
+ *
+ * EUPRAXIA optimizes the NEMESIS→THEMIS→DIKE branch, but inputs whose best
+ * result is a direct MOIRA grammar retain explicit nonterminal names, `=`,
+ * quoted JSON expansions, and one definition per line. METIS closes that
+/**
+ * src/lib/omega/metonomasia.ts
+ * =============================================================================
+ * X130 — ΜΕΤΟΝΟΜΑΣΊΑ (metonomasia, "renaming"): PERMUTE the frontier's
+ *        dictionary glyphs within their own alphabet so that more adjacent
+ *        glyph pairs merge into single tokens.
+/**
+ * src/lib/omega/metron.ts — ΜΕΤΡΟΝ (the measure) — X40.
+ *
+ * =============================================================================
+ * THE ONE THING EVERY PREDICTOR IN THIS STACK SHARES, AND WHY IT HURTS
+ * =============================================================================
+/** X141 MNEMA (memory): same-message lexical recency references.
+ * ^p names the latest completed ASCII word with prefix p, case-sensitive.
+ * First occurrences remain literal; ALL decoded words update history.
+ * Unlike ANAMNESIS/CTXCOPY no previous message or external dictionary is used.
+ * Unlike KAPPA there is no explicit bind operation or fixed symbol assignment.
+ * Adaptive dictionary/prefix-addressing ancestry; not a new theoretical primitive.
+/**
+ * MNEMOSYNE — The memory fold that EIDOS cannot see.
+ * =============================================================================
+ * Μνημοσύνη — goddess of memory, mother of the Muses. She remembers every
+ * template that ever was, while humans see only the instance.
+ *
+/**
+ * MOIRA-Ω — exact-cost constituent-lattice residual grammar.
+ *
+ * ANANKE samples one parity and lengths modulo four. MOIRA instead enumerates
+ * every start and every length in its bounded regime, scores a certificate-sized
+ * shortlist against the actual serialized wire, then performs backward
+/**
+ * src/lib/omega/morph.ts
+ * =============================================================================
+ * OMEGA-MORPH (Ϻ) — MORPHEME-FAMILY DICTIONARY CODEC
+ * Original synthesis, July 27 2026. Byte-exact, LLM-readable, real-BPE-gated.
+ *
+/**
+ * src/lib/omega/morph.ts
+ * =============================================================================
+ * OMEGA-MORPH (Ϻ) — MORPHEME-FAMILY DICTIONARY CODEC
+ * Original synthesis, July 27 2026. Byte-exact, LLM-readable, real-BPE-gated.
+ *
+/**
+ * src/lib/omega/morphe.ts
+ * =============================================================================
+ * MORPHE / ΜΟΡΦΗ — per-payload auto-fitted shape-rule codec (X20).
+ *
+ * WHAT IT IS
+/**
+ * ▦ MOSAIC-M1 — Optimal Document Partition with Per-Region Codec Assignment
+ * =============================================================================
+ * THE BLINDSPOT (structural, and shared by literally every system surveyed)
+ * -----------------------------------------------------------------------------
+ * Every prompt codec ever published — LTSC(2506.00307), Dictionary+ICL
+/**
+ * src/lib/omega/nebula.ts
+ * =============================================================================
+ * 🌌 NEBULA-N9 — In-Context Spectral Constellation Grammar Decomposition & BPE Realignment
+ *
+ * CONCEPT & GROUNDING:
+/**
+ * NEMESIS-Ω — grammar-of-grammar residual closure.
+ *
+ * MOIRA optimizes the residual body and emits a self-describing dictionary, but
+ * the dictionary serialization is itself text with repeated syntax and shared
+ * fragments. NEMESIS treats the complete winning MOIRA wire as a new admissible
+/**
+ * NEST — recursive repeated-sibling template factoring (X48 candidate).
+ *
+ * SIBLING-TEMPLATE factors XML-compatible siblings only when their direct
+ * children are text-only. NEST keeps the same lossless in-band idea but allows
+ * corresponding subtrees to recurse: exact tag topology is shared once, while
+/**
+ * src/lib/omega/nexus.ts
+ * =============================================================================
+ * OMEGA-NEXUS (Ω∞) — TERMINAL UNIFIED CODEC (July 26, 2026)
+ * Original synthesis. Not found in prior literature or web search.
+ *
+/**
+ * src/lib/omega/nexus.ts
+ * =============================================================================
+ * OMEGA-NEXUS (Ω∞) — TERMINAL UNIFIED CODEC (July 26, 2026)
+ * Original synthesis. Not found in prior literature or web search.
+ *
+/**
+ * src/lib/omega/noesis.ts — NOESIS-Ω: Non-Schema Operadic Entropy-Optimal
+ * Sequence Induction System (Terminal Lossless Codec)
+ * =============================================================================
+ * Grounded in peer-reviewed & textbook computational linguistics (2001–2026):
+ *  - "Lossless Prompt Compression via Dictionary-Encoding and In-Context Learning"
+/**
+ * NYX — The terminal fold. Where AION saw invariant and MNEMOSYNE saw template,
+ * NYX sees *program*.
+ * =============================================================================
+ * νύξ — night, terminal. NYX is Kolmogorov terminal: shortest program that outputs
+ * text when executed in LLM head. Every previous fold is program:
+import { chironDecode } from './chiron';
+import { countTokens, type EncodingName } from './bpe';
+import { symplokeDecode } from './symploke';
+import {
+  timemaDecode, timemaEncode, timemaRoundTrip,
+  type TimemaOptions, type TimemaResult,
+/**
+ * src/lib/omega/omega-e8seed.ts
+ * =============================================================================
+ * OMEGA-E8-SEED (Σ₈) — GROUP-THEORETIC LATTICE QUANTIZATION CODEC
+ * Original synthesis: July 27, 2026. Inspired by NexusQuant & QuIP#.
+ *
+/**
+ * src/lib/omega/omega-e8seed.ts
+ * =============================================================================
+ * OMEGA-E8-SEED (Σ₈) — GROUP-THEORETIC LATTICE QUANTIZATION CODEC
+ * Original synthesis: July 27, 2026. Inspired by NexusQuant & QuIP#.
+ *
+export const OMNI_OPERADS: string[] = [
+  "  \"body\": \"flow() for a synchronous byte-mode pipe spends most of its time in the general `read()` path: take one prefetched chunk out of a holey buffer, then call `_read()` for the next one. This keeps that prefetched chunk on the readable state for the flowing loop and emits it directly.\\n\\n`_read()` of the following chunk still runs before `'data'`. A nested `read()` puts the chunk back on the buffer. Object mode, decoders, and non-flowing `read()` stay on the existing path.\\n\\nMeasured with `benchmark/compare.js`, 15 runs, two binaries built from the same tree:\\n\\n| benchmark | change |\\n| --- | --- |\\n| `streams/pipe.js` n=5e6 | **+77.25%** ±2.55% (***) |\\n| `streams/pipe-object-mode.js` | +1.46% (noise) |\\n| `streams/readable-readall.js` | +0.17% (noise) |\\n| `streams/readable-bigread.js` | +0.24% (noise) |\\n\\n`tools/test.py` on `test/parallel/test-stream*`, `test/parallel/test-readable*`, `test/sequential/test-stream*`, and the fs read/write stream tests passed.\\n\\nA closed-source coding agent assisted with the implementation. The prefetch order was checked against `Readable.read()`, and the benchmark and tests above were run locally.\\n\",",
+  "\"body\": \"flow() for a synchronous byte-mode pipe spends most of its time in the general `read()` path: take one prefetched chunk out of a holey buffer, then call `_read()` for the next one. This keeps that prefetched chunk on the readable state for the flowing loop and emits it directly.\\n\\n`_read()` of the following chunk still runs before `'data'`. A nested `read()` puts the chunk back on the buffer. Object mode, decoders, and non-flowing `read()` stay on the existing path.\\n\\nMeasured with `benchmark/compare.js`, 15 runs, two binaries built from the same tree:\\n\\n| benchmark | change |\\n| --- | --- |\\n| `streams/pipe.js` n=5e6 | **+77.25%** ±2.55% (***) |\\n| `streams/pipe-object-mode.js` | +1.46% (noise) |\\n| `streams/readable-readall.js` | +0.17% (noise) |\\n| `streams/readable-bigread.js` | +0.24% (noise) |\\n\\n`tools/test.py` on `test/parallel/test-stream*`, `test/parallel/test-readable*`, `test/sequential/test-stream*`, and the fs read/write stream tests passed.\\n\\nA closed-source coding agent assisted with the implementation. The prefetch order was checked against `Readable.read()`, and the benchmark and tests above were run locally.\\n\",",
+  "3. Grant of Patent License. Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.",
+  "\"Contribution\" shall mean any work of authorship, including the original version of the Work and any modifications or additions to that Work or Derivative Works thereof, that is intentionally submitted to Licensor for inclusion in the Work by the copyright owner or by an individual or Legal Entity authorized to submit on behalf of the copyright owner. For the purposes of this definition, \"submitted\" means any form of electronic, verbal, or written communication sent to the Licensor or its representatives, including but not limited to communication on electronic mailing lists, source code control systems, and issue tracking systems that are managed by, or on behalf of, the Licensor for the purpose of discussing and improving the Work, but excluding communication that is conspicuously marked or otherwise designated in writing by the copyright owner as \"Not a Contribution.\"",
+  "**Drizzle supports every PostgreSQL, MySQL and SQLite database**, including serverless ones like [Turso](https://orm.drizzle.team/docs/get-started-sqlite#turso), [Neon](https://orm.drizzle.team/docs/get-started-postgresql#neon), [Xata](https://orm.drizzle.team/docs/connect-xata), [PlanetScale](https://orm.drizzle.team/docs/get-started-mysql#planetscale), [Cloudflare D1](https://orm.drizzle.team/docs/get-started-sqlite#cloudflare-d1), [FlyIO LiteFS](https://fly.io/docs/litefs/), [Vercel Postgres](https://orm.drizzle.team/docs/get-started-postgresql#vercel-postgres), [Supabase](https://orm.drizzle.team/docs/get-started-postgresql#supabase) and [AWS Data API](https://orm.drizzle.team/docs/get-started-postgresql#aws-data-api). No bells and whistles, no Rust binaries, no serverless adapters, everything just works out of the box.",
+/**
+ * src/lib/omega/omni.ts
+ * =============================================================================
+ * OMNI-Ω: Orthogonal Multi-Domain Neural Induction & Combinatorial SLP Lattice
+ *
+ * Terminal Sovereign Lossless Prompt Compression Codec
+/**
+ * src/lib/omega/onomasia.ts
+ * =============================================================================
+ * ONOMASIA (ὀνομασία, "naming") — KEYED arithmetic-progression elision.
+ *
+ * WHAT IT ADDS OVER AKOLOUTHIA (measured, bench/z56/keyed-probe.jsonl)
+/**
+ * ORACLE — the knowledge-fold that LETHE cannot see.
+ * =============================================================================
+ * Knowledge is not stored where you look. Every bibliography entry
+ * `[n] Authors (Year). Title. Journal, Volume, Pages.` is *entailed* by
+ * the model's training on 1986–2026 papers — Bentley 1993, Burrows-Wheeler
+/**
+ * ORBIT-M2 — set-wise Pareto tournament over exact readable lanes.
+ *
+ * Proven scope: for a fixed input and tokenizer, ORBIT emits no more tokens
+ * than any accepted exact candidate listed below, because it returns their
+ * measured argmin unchanged. Not a claim of global codec optimality.
+/**
+ * src/lib/omega/orion.ts
+ * =============================================================================
+ * 🌌 ORION-O10 — In-Context Celestial Manifold Trajectory Realignment
+ *
+ * CONCEPT & GROUNDING:
+/**
+ * src/lib/omega/orothesia.ts
+ * =============================================================================
+ * ΟΡΟΘΕΣΙΑ (OROTHESIA, "boundary-setting") — X105.
+ *
+ * THE MECHANISM, AND WHY IT IS NOT ΜΕΤΑΤΑΞΙΣ.
+/**
+ * src/lib/omega/orthos.ts
+ * =============================================================================
+ * ORTHOS-M1 — Typographic Canonicalization Pre-Pass (self-verifying, exact)
+ *
+ * MECHANISM (genuinely distinct from every other lane in this repository):
+/**
+ * OURA (οὐρά — "tail, rear").
+ *
+ * X38. Every numeric shape in this stack — the four fixed ones in SYMPLOKE and
+ * the whole learned lattice — is built on ONE hypothesis: that the digit groups
+ * of a pattern have a CONSTANT width vector. `symplokeLearn` scans for
+/**
+ * src/lib/omega/padtab.ts
+ * =============================================================================
+ * PADTAB — absolute column layout for tabular ops text (exact, byte-perfect, encoder-verified).
+ *
+ * WHY: tools such as ps, df, free, and ls -l pad columns with runs of spaces. Those runs cost tokens and carry only
+/**
+ * src/lib/omega/padtab2.ts
+ * =============================================================================
+ * PADTAB2 — column layout with a free tail (exact, byte-perfect, encoder-verified).
+ *
+ * Generalizes PADTAB (PHALANX-A6). A row = its first f whitespace-separated tokens (the FIXED cells) and, if it has more
+/**
+ * PALIMPSEST — write the manuscript many ways, keep the shortest.
+ * =============================================================================
+ *
+ * WHAT FIVE TURNS OF MEASUREMENT ESTABLISHED
+ * -----------------------------------------------------------------------------
+/**
+ * X102 — ΠΑΛΙΝΔΡΟΜΟΣ (palindromos, "running back, recurrence, a return").
+ *
+ * ============================================================================
+ * THE MECHANISM, AND WHY IT IS NOT ANY CODEC ALREADY IN THE STACK
+ * ============================================================================
+/**
+ * src/lib/omega/panacea.ts — PANACEA-Ω: Phrase-Adaptive Non-schema Entropy Compression
+ * with Autonomous In-Context Execution
+ * =============================================================================
+ * Grounded in peer-reviewed & textbook literature (2016–2026):
+ *  - "Lossless Prompt Compression via Dictionary-Encoding and In-Context Learning"
+/**
+ * src/lib/omega/panoptes.ts
+ * =============================================================================
+ * PANOPTES (πανόπτης — "all-seeing")
+ * Universal Composed-Canonicalization Meta-Pre-Pass (self-verifying, exact)
+ *
+/**
+ * src/lib/omega/pantheon.ts — PANTHEON-Ω: Partitioned Asymmetric Network
+ * & Topological Hierarchical Entropy-Optimal Sequence Induction
+ * =============================================================================
+ * Grounded in 35+ years of Rate-Distortion Optimization & Information Theory:
+ *  - "Rate-distortion-based segmentation for mixed document compression" (Cheng & Bouman, 2002)
+/**
+ * src/lib/omega/paradeigma.ts
+ * =============================================================================
+ * ≡ PARADEIGMA — template entailment for JSON records
+ * (byte-perfect, exact-lossless, single-chat-readable, no system prompt)
+ * -----------------------------------------------------------------------------
+/**
+ * src/lib/omega/parataxis.ts — X80. ΠΑΡΆΤΑΞΙΣ (parataxis), "a placing side by side;
+ * an arrangement in line" — and in grammar, clauses set side by side without
+ * subordination. Both senses are meant: the columns are placed side by side, and the
+ * contract states the arrangement flatly instead of nesting a description of it.
+ * =============================================================================
+/** PERIBALLON — X148 opt-in synchronous Node environment-read acceleration.
+ * Not a codec or memoized answer. Copy OS-backed process.env to a JS lookup
+ * object for ONE synchronous call; writes/deletes are forwarded immediately.
+ * No snapshots/values are logged or persisted. Defaults remain unchanged.
+ * Scope: non-Windows Node, no async callback, no native/external environment
+ * mutation, no process.env replacement. End-of-scope audit rejects observed
+/**
+ * src/lib/omega/perikopi.ts — X107. ΠΕΡΙΚΟΠΉ (perikopi), "abridgement, cutting short".
+ * =============================================================================
+ *
+ * TARGET: THE DECODER-INSTRUCTION LINE, WHICH IS 5.8 % OF THE FRONTIER AND 44.8 %
+ * OF ONE LANE.
+/**
+ * src/lib/omega/periodos.ts
+ * =============================================================================
+ * PERIODOS — per-paragraph measure for hard-wrapped prose.
+ * (περίοδος — a period: the paragraph is the unit of layout here, not the file.)
+ *
+/**
+ * src/lib/omega/persistent-dict.ts
+ * =============================================================================
+ * OMEGA-MNEME (Μ) — PERSISTENT CROSS-TURN LONG-PHRASE DICTIONARY
+ * Original synthesis, July 27, 2026.
+ *
+/**
+ * src/lib/omega/persistent-dict.ts
+ * =============================================================================
+ * OMEGA-MNEME (Μ) — PERSISTENT CROSS-TURN LONG-PHRASE DICTIONARY
+ * Original synthesis, July 27, 2026.
+ *
+/**
+ * src/lib/omega/phalanx-a1.ts
+ * =============================================================================
+ * PHALANX-A1 — PHALANX-P4 with the VX stage replaced by VERITAS-A (one-token alias characters).
+ * (exact, byte-perfect, self-verified end to end; identity unless it pays)
+ *
+/**
+ * src/lib/omega/phalanx-a10.ts
+ * =============================================================================
+ * PHALANX-A10 = PHALANX-A7 with VERITAS-C as its VX stage.
+ *
+ * WHAT CHANGES: only the VX stage. VERITAS-C (veritas-c.ts) = VERITAS-U token-window candidates, then character
+/**
+ * src/lib/omega/phalanx-a2.ts
+ * =============================================================================
+ * PHALANX-A2 — PHALANX-A1 with (i) the shorter VXA legend and (ii) the per-file minimum over VX window W in {3,2,4} (encoder-only choice; the decoder is the A1 decoder).
+ * (exact, byte-perfect, self-verified end to end; identity unless it pays)
+ *
+/**
+ * src/lib/omega/phalanx-a3.ts
+ * =============================================================================
+ * PHALANX-A3 — canonical-JSON layer over PHALANX-A2 (exact, byte-perfect, self-verified).
+ *
+ * WHY: pretty-printed JSON spends many tokens on indentation and newlines. When a document is
+/**
+ * src/lib/omega/phalanx-a4.ts
+ * =============================================================================
+ * PHALANX-A4 — LOGTPL template stage over PHALANX-A3 (exact, byte-perfect, self-verified, identity-guarded).
+ *
+ * WIRE (template stage)
+/**
+ * src/lib/omega/phalanx-a5.ts
+ * =============================================================================
+ * PHALANX-A5 — WRAPCANON layer over PHALANX-A4 (exact, byte-perfect, self-verified, identity-guarded).
+ *
+ * WIRE (wrap layer used)
+/**
+ * src/lib/omega/phalanx-a6.ts
+ * =============================================================================
+ * PHALANX-A6 — PADTAB table layer over PHALANX-A5 (exact, byte-perfect, self-verified, identity-guarded).
+ *
+ * WIRE (table layer used)
+/**
+ * src/lib/omega/phalanx-a7.ts
+ * =============================================================================
+ * PHALANX-A7 — PADTAB2 free-tail column layer over PHALANX-A5 (exact, byte-perfect, self-verified, identity-guarded).
+ *
+ * WIRE (layer used)
+/**
+ * src/lib/omega/phalanx-a8.ts
+ * =============================================================================
+ * PHALANX-A8 = PHALANX-A7 with the VERITAS-U single-pass union dictionary as its VX stage.
+ *
+ * WHAT CHANGES
+/**
+ * src/lib/omega/phalanx-a9.ts
+ * =============================================================================
+ * PHALANX-A9 = PHALANX-A7 with VERITAS-N (nested-header dictionary) as its VX stage.
+ *
+ * WHAT CHANGES: only the VX stage. VERITAS-N (veritas-n.ts) keeps the VERITAS-U candidate set and single greedy
+/**
+ * src/lib/omega/phalanx.ts
+ * =============================================================================
+ * PHALANX-P1 — a fixed four-stage, text-native pipeline for records and listings.
+ * (exact, byte-perfect, self-verified end to end; identity unless it pays)
+ *
+/**
+ * src/lib/omega/phalanx2.ts
+ * =============================================================================
+ * PHALANX-P2 — PHALANX-P1 with the shared-prefix stage KOINE-K1 inserted before VERITAS-VX.
+ * (exact, byte-perfect, self-verified end to end; identity unless it pays)
+ *
+/**
+ * src/lib/omega/phalanx3.ts
+ * =============================================================================
+ * PHALANX-P3 — PHALANX-P2 plus RECALL-R1 (same-column recall, window 16) before VERITAS-VX.
+ * (exact, byte-perfect, self-verified end to end; identity unless it pays)
+ *
+/**
+ * src/lib/omega/phalanx4.ts
+ * =============================================================================
+ * PHALANX-P4 — PHALANX-P3 with one unified legend line instead of per-stage rule headers.
+ * (exact, byte-perfect, self-verified end to end; identity unless it pays)
+ *
+/**
+ * src/lib/omega/phoenix.ts
+ * =============================================================================
+ * 𓅂 PHOENIX-P1 — Poly-Disjoint In-Context Topological Grammar Subsequence Extraction
+ *
+ * DYNAMIC ALGORITHM:
+/**
+ * src/lib/omega/phrase.ts
+ * =============================================================================
+ * PHRASEBOOK-φ1 — static phrase codebook (lossless, deterministic, prompt-decoded)
+ *
+ * THE BLINDSPOT (measured by this repository's own harness)
+/**
+ * src/lib/omega/pinax.ts — X76. ΠΊΝΑΞ (pinax), "tablet, table, index".
+ * =============================================================================
+ *
+ * TARGET: THE COMPOSED LEGEND
+ * ---------------------------
+/**
+ * ΠΛΑΤΟΣ (platos, "width"; Πλάτος) — X123.
+ * ============================================================================
+ *
+ * THE GAP, STATED BY THE CODE THAT COULD NOT CLOSE IT
+ * ----------------------------------------------------------------------------
+/**
+ * ✺ PLEXUS-PX — Cascade In-Place Binding ⊕ Arithmetic Tournament (original)
+ * =============================================================================
+ * Joint mechanism ABSENT as a unit from surveyed art and this repo:
+ *
+ *   Q  QUASAR: multi-width token n-gram mining + re-tokenization CASCADE after
+/**
+ * src/lib/omega/plinthos.ts
+ * =============================================================================
+ * PLINTHOS — THE COURSE OF BRICKS
+ * (byte-perfect, exact-lossless, single-chat-readable, no system prompt)
+ * -----------------------------------------------------------------------------
+/**
+ * src/lib/omega/polaris.ts
+ * =============================================================================
+ * 🌌 POLARIS-P1 — Polar Phase-Space Graph Quotient Contraction
+ *
+ * MATHEMATICAL FORMULATION & ORIGINAL CONCEPT:
+/**
+ * src/lib/omega/polysteli.ts — X149. ΠΟΛΥΣΤΗΛΗ (polysteli), "many columns".
+ * =============================================================================
+ *
+ * RELATION TO ΣΤΉΛΗ (X124), AND WHY THIS IS A DIFFERENT MECHANISM
+ * ---------------------------------------------------------------
+/**
+ * src/lib/omega/polytropos.ts
+ * =============================================================================
+ * POLYTROPOS — THE MANY-WAYED
+ * (byte-perfect, exact-lossless, single-chat-readable, no system prompt)
+ * -----------------------------------------------------------------------------
+import { countTokens, tokenStrings, type EncodingName } from './bpe';
+import { ideographPool } from './strata';
+
+export interface PraxisEntry { alias: string; phrase: string; hits: number }
+export interface PraxisResult {
+  wire: string;
+/**
+ * X103 — ΠΡΟΑΓΩΓΗ (proagōgē, "the bringing-forward, the promotion").
+ *
+ * ============================================================================
+ * THE MECHANISM, AND WHY IT IS NOT ΓΕΝΝΑΔΑΣ, ΜΕΤΑΤΑΞΙΣ OR ΠΡΟΟΙΜΙΟΝ
+ * ============================================================================
+/**
+ * PROBOLE (προβολή — "a throwing forward; a projection").
+ * =============================================================================
+ * X67. Every mechanism in this stack is a SUBSTITUTION at the point of use, and
+ * APOGRAPHE's own header states the law that follows from it:
+ *
+/**
+ * src/lib/omega/procrustes.ts
+ * =============================================================================
+ * PROCRUSTES — Geometric/Kerning Canonicalization Pre-Pass (self-verifying,
+ * exact)
+ *
+/**
+ * src/lib/omega/prokeno.ts — X124. ΠΡΌΚΕΝΟ (prokeno), "the space before".
+ * =============================================================================
+ *
+ * THE JUNCTION, AND WHY IT COSTS A TOKEN
+ * --------------------------------------
+import { now } from './clock';
+import { nativeLcp } from './lcp-native';
+let nativeLcpScope=false;
+/** X148 opt-in synchronous experiment; changes only exact LCP implementation. */
+export function prolepsisNativeLcpScope<T>(fn:()=>T):T {
+ const old=nativeLcpScope;nativeLcpScope=true;
+/**
+ * src/lib/omega/prometheus-icdm.ts
+ * =============================================================================
+ * OMEGA-V4 "PROMETHEUS" — IN-CONTEXT DICTIONARY META-TOKEN CODEC (ICDM)
+ * & ADAPTIVE UNIVERSAL ROUTER (July 2026 Enterprise Breakthrough)
+ *
+/**
+ * src/lib/omega/prometheus-icdm.ts
+ * =============================================================================
+ * OMEGA-V4 "PROMETHEUS" — IN-CONTEXT DICTIONARY META-TOKEN CODEC (ICDM)
+ * & ADAPTIVE UNIVERSAL ROUTER (July 2026 Enterprise Breakthrough)
+ *
+/**
+ * PRONOIA — a certificate that proves search is futile before paying for it.
+ * =============================================================================
+ * THE MEASURED PROBLEM (this turn's own red-team run, not a claim)
+ * -----------------------------------------------------------------------------
+ * `bench/chiron-redteam.ts`, run on this branch immediately after CHIRON.patch
+/**
+ * src/lib/omega/prosopon.ts
+ * =============================================================================
+ * PROSOPON — Mojibake (Wrong-Codepage) Restoration Pre-Pass (self-verifying,
+ * exact)
+ *
+/**
+ * src/lib/omega/prosphysis.ts — X74. ΠΡΌΣΦΥΣΙΣ (prosphysis), "a growth onto
+ * something, an attachment".
+ * =============================================================================
+ *
+ * THE MEASUREMENT THIS CODEC IS BUILT ON (bench/x74/t24.ts, this repository)
+/** X143 PROTASIS (condition): finite-state capitalization prediction with
+ * explicit exceptions. Unlike STENTOR's sustained-uppercase spans or MORPH's
+ * dictionary case flags, a punctuation/line-boundary state predicts exactly
+ * one letter; ~ escapes a lower-case exception. Classical predictive residual
+ * coding, new bounded repository experiment; not a novel theoretical family.
+ * Unwired. Native-model decoding and Pareto superiority unverified.
+/**
+ * PROTEUS-Ω — self-describing adaptive grammar framing.
+ *
+ * METIS closes direct MOIRA grammars only when its fixed `?` delimiter is absent.
+ * PROTEUS makes the delimiter itself the first payload character, so the decoder
+ * learns it without a table or schema. The encoder tournaments collision-free
+// PSEPHOS / ΨΗΦΟΣ — "pebble" (Greek psephos: a pebble used as a counter, whence
+// psephology). X24.
+//
+// MECHANISM (digit-lattice collapse).
+//
+//   A BPE tokenizer charges separately for the punctuation that lives *inside* a
+/** X144 PSIFIDA: decimal digit-plane weaving, experimental and unwired.
+ * A width-selected stream of maximal ASCII digit runs is transposed by digit
+ * position. Unlike record-column transposition, numbers need not be in records,
+ * in one field, or adjacent. The skeleton retains one hole per selected run.
+ * Classical shuffle/bit-plane ancestry, not a new information-theoretic idea.
+ */
+/** X136 PTYCHE (fold): paragraph-local layout parameter residualization.
+ * Unlike WRAPCANON/STICHOS's one shared width, blocks may override the default
+ * width. The default covers the most feasible width intervals; exceptions stay
+ * in-band. The optional residual arm adjusts line word counts while wrapping,
+ * re-anchoring each prediction at the corrected boundary. Standard predictive
+ * coding genus, not a new theorem. Experimental/unwired: 620 -> 608 on one
+/**
+ * PULSE-R1: narrow, exact run-length factoring for repeated UTF-16 code units.
+ * Orthogonal to phrase dictionaries and arithmetic runs. Complete wire is
+ * measured with the live BPE engine and guarded.
+ */
+import { countTokens, type EncodingName } from './bpe';
+import { chironDecode } from './chiron';
+import { countTokens, type EncodingName } from './bpe';
+import { symplokeDecode } from './symploke';
+import {
+  oikonomiaEncode, oikonomiaDecode, oikonomiaRoundTrip,
+  type OikonomiaOptions, type OikonomiaResult,
+/**
+ * src/lib/omega/quantum.ts
+ * =============================================================================
+ * ⚛️ QUANTUM-Q9 — In-Context Quantum Subspace Canonical Decomposition & BPE-Boundary Realignment
+ *
+ * CONCEPT & GROUNDING:
+/**
+ * ✦ QUASAR — Quantized Unification via Aligned Symbol Re-pairing
+ * Multi-width token n-gram mining + re-tokenization cascade + CJK 1-tok aliases.
+ */
+import { countTokens, tokenStrings, encodeIds, type EncodingName } from './bpe';
+
+/** X142 experimental rank-table placement. No tokenization semantics change:
+ * collisions still compare the complete key and linearly probe to an empty
+ * slot. Multiplicative mixing uses high bits instead of low-byte-biased slots.
+ * Not wired into production. Classical multiplicative hashing, not novel.
+ */
+export function rankSlot3(k:number):number{return Math.imul(k,0x9e3779b1)>>>14;}
+/**
+ * src/lib/omega/recall.ts
+ * =============================================================================
+ * RECALL-R1 — same-column recall within a short window of lines (exact, byte-perfect).
+ *
+ * GAP IT FILLS
+/**
+ * src/lib/omega/registry.ts
+ * =============================================================================
+ * REAL-BPE AUDIT HARNESS FOR EVERY CODEC SHIPPED IN THIS REPOSITORY
+ *
+ * The application's own metrics module estimates tokens (estimateTokensBPE /
+import { diorthosiEncode } from './diorthosi';
+/**
+ * src/lib/omega/registry.ts
+ * =============================================================================
+ * REAL-BPE AUDIT HARNESS FOR EVERY CODEC SHIPPED IN THIS REPOSITORY
+ *
+/**
+ * REPAIR-R1 — local grammar compression by repeated-bigram substitution.
+ *
+ * This is a small exact Re-Pair-style lane: repeatedly replace the most useful
+ * repeated adjacent token pair with a fresh one-token nonterminal. Later rules
+ * may reference earlier nonterminals, so the result is a straight-line grammar
+/**
+ * REPRISE — bounded exact memoization of complete TAGSTACK frontier results.
+ *
+ * This is a runtime-speed codec, not a new textual compression transform: the
+ * returned chat message is exactly the TAGSTACK message (same in-band reader,
+ * byte-exact decoder, and measured token count). If the identical source and
+import { countTokens, type EncodingName } from './bpe';
+import { tagstackEncode, type TagstackResult } from './tagstack';
+import { siblingTemplateEncode, type SiblingTemplateResult } from './sibling-template';
+
+/** Exact tree-output indentation canonicalization for tree(1)-style listings. */
+export const RHIZOMA_MAX_CHARS = 200_000;
+/**
+ * src/lib/omega/rosetta.ts
+ * =============================================================================
+ * ROSETTA-R5.6 — Notational transposition (dual-spelling argmin) + gated Pareto
+ * (R2 = R1 + table/YAML/JSON-family span systems P/Y/F + the τ member lane;
+ *  R2.1 = J-array leading-pipe markers (single/empty arrays now fold — the
+/** X145 SCALAR — state-specialized grammar compilation for UTF-8 transport.
+ * Product of a straight-line macro grammar and a UTF-16 scalar transducer.
+ * A rule is specialized by its incoming pending-high-surrogate state. Completed
+ * scalars are emitted; a trailing high half is returned as state, never wire.
+ * Unlike greedy edge shrinking, one source rule can acquire several context
+ * variants and several rule boundaries can be crossed before a scalar completes.
+/**
+ * src/lib/omega/schema.ts — X82. ΣΧῆΜΑ / SCHEMA (schēma), "a form, a figure, the
+ * shape of a thing" — here, the *shape signature* of a token: the sequence of
+ * character classes and group widths that a token is built from.
+ * =============================================================================
+ *
+/**
+ * SEQUOYAH — designing the script so the reader's own merge table does the work.
+ * =============================================================================
+ *
+ * Sequoyah built the Cherokee syllabary by choosing which marks would stand for
+ * which sounds. That is exactly the remaining problem here. CHIRON established
+/**
+ * X47 SIBLING-TEMPLATE — repeated sibling-record grammar factoring.
+ *
+ * This is deliberately narrower than a general XML compressor. It recognizes
+ * only balanced XML-compatible explicit-tag sibling runs whose elements
+ * have the same exact byte skeleton and at least two text-only child slots. One exact skeleton is sent
+import { now } from './clock';
+/**
+ * SIBYL — the leaves of the Cumaean Sibyl: the message is written in a script
+ * the tokenizer itself reads more cheaply than the language it encodes.
+ * =============================================================================
+ *
+/**
+ * src/lib/omega/sigma.ts — OMEGA-SIGMA (Σ) Token-Boundary-Aware Structural Schema Folding
+ * Integrated verbatim from pasted specification. See full JSDoc in spec.
+ */
+import { countTokens, type EncodingName } from './bpe';
+export type StructureKind = 'json-array' | 'csv' | 'tsv' | 'jsonl' | 'mixed';
+/**
+ * src/lib/omega/sigma.ts — OMEGA-SIGMA (Σ) Token-Boundary-Aware Structural Schema Folding
+ * Integrated verbatim from pasted specification. See full JSDoc in spec.
+ */
+import { countTokens, type EncodingName } from './bpe';
+export type StructureKind = 'json-array' | 'csv' | 'tsv' | 'jsonl' | 'mixed';
+/**
+ * ⌗ SIGNET-G1 — Character-Class Signature Alignment with Typed Column Coders
+ * =============================================================================
+ * THE DEFECT THIS FIXES (diagnosed from measured output, not from theory)
+ * -----------------------------------------------------------------------------
+ * Every record-structured codec in this stack derives its template with a
+/**
+ * src/lib/omega/solaris.ts
+ * =============================================================================
+ * OMEGA-S1 "SOLARIS" — SPECTRAL ORTHOGONAL BASIS POLYNOMIAL CONTRACTION
+ *
+ * DYNAMIC ALGORITHM:
+/**
+ * src/lib/omega/sphragis.ts — X79. ΣΦΡΑΓΊΣ (sphragis), "a seal, a signet, the stamp
+ * that authenticates a document" — here, the stamp that fixes where a separator sits.
+ * =============================================================================
+ *
+ * WHAT THIS IS, AND WHAT IT OWES KERMA (X78)
+/**
+ * SPLICE-S1 — hierarchical exact coding: shared phrase dictionary, then
+ * adaptive region coding.
+ *
+ * Construction: first build one exact token-boundary dictionary over the whole
+ * document (PRAXIS), then run MOSAIC over that dictionary-bearing wire. Decode
+/**
+ * src/lib/omega/stadion.ts — X72. ΣΤΑΔΙΟΝ (stadion), the measured course.
+ * =============================================================================
+ *
+ * THE FINDING THIS CODEC IS BUILT ON
+ * -----------------------------------------------------------------------------
+/**
+ * src/lib/omega/starlight-inline.ts
+ * =============================================================================
+ * STARLIGHT-S1 with its decode rule INSIDE the message (no system prompt).
+ *
+ * The raw STARLIGHT wire (starlight.ts) keeps its rules in STARLIGHT_SYSTEM_PROMPT,
+/**
+ * ★ STARLIGHT-S1 — Direct Reasoning Byte-Exact Lossless Codec
+ */
+import { type EncodingName } from './bpe';
+import {
+  cjkContractorDecode,
+/**
+ * ⟟ STATHMOS — fixed-width decimal columns: trailing zeros removed, restored from a one-line header (X17).
+ * =============================================================================
+ * MECHANISM (what is new in this stack; the families it sits next to are listed in docs/codec-abbreviations.md):
+ *   A delimited table (comma-separated, optional CRLF line ends) is transformed only where a column is
+ *   FIXED-WIDTH: every data cell of the column is a decimal number with exactly D fraction digits (D >= 1).
+/**
+ * src/lib/omega/steli.ts — X124. ΣΤΉΛΗ (steli), "column".
+ * =============================================================================
+ *
+ * WHY THIS EXISTS WHEN ΠΛΆΤΟΣ ALREADY DE-PADS TABLES
+ * -------------------------------------------------
+/**
+ * src/lib/omega/stencil.ts
+ * =============================================================================
+ * OMEGA-STENCIL (⌘) — LLM-READABLE TEMPLATE INDUCTION CODEC
+ * Integrated from user-provided spec with no semantic changes.
+ * =============================================================================
+/**
+ * src/lib/omega/stencil.ts
+ * =============================================================================
+ * OMEGA-STENCIL (⌘) — LLM-READABLE TEMPLATE INDUCTION CODEC
+ * Integrated from user-provided spec with no semantic changes.
+ * =============================================================================
+/**
+ * src/lib/omega/stentor.ts
+ * =============================================================================
+ * STENTOR-M1 — Case-Canonicalization Pre-Pass (self-verifying, exact)
+ * Named for the herald in the Iliad "whose voice was as powerful as fifty men" —
+ * the root of the English word "stentorian." Fitting: this lane's entire
+/**
+ * STICHOMYTHIA — the column is a PROGRAM, not a column of data.
+ * =============================================================================
+ * στοιχομυθία — speaking row by row. A codec that reads a table body column by
+ * column and asks, for each column, not "what are these values" but "what is
+ * the shortest program that prints these values".
+/**
+ * src/lib/omega/stichos.ts
+ * =============================================================================
+ * STICHOS — the verse-line fold: a hard-wrapped paragraph is layout, not content.
+ * (στίχος — a line of verse; the line break is the only thing it adds.)
+ *
+/**
+ * ΣΤΙΓΜΗ / STIGME — separator elision for tokens whose punctuation the reader can recompute (X19).
+ * =============================================================================
+ *
+ * MECHANISM (new in this stack; see docs/codec-abbreviations.md for the family map)
+ * -----------------------------------------------------------------------------
+/** Optional compact STOIBAS tournament over the full X154 incumbent.
+ * Unwired. Token nonregression is not runtime or native-decoder certification.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {stoibasCompactPlans,stoibasCompactCandidate,stoibasCompactRead} from './stoibas';
+import {arkesisRead} from './arkesis';
+/** STOIBAS (X155): breadth-first JSON record queue, with object degrees
+ * supplied implicitly by key-list length. Not ARKESIS's recursive count stream:
+ * object keys are grouped before all children, whose records are deferred FIFO.
+ * Classical level-order tree serialization ancestry; experimental and unwired.
+ */
+import {lexicalJsonTree,lexicalJsonRender,type LexicalJsonTree} from './arkesis';
+import { now } from './clock';
+import { workTick, workExhausted } from './workmeter';
+import { countTokens, encodeIds, type EncodingName } from './bpe';
+import {
+  CHIRON_START, CHIRON_SEP, CHIRON_SCRIPTS,
+  chironInScript, chironParseTape, chironDecode, type ChironScript,
+/**
+ * src/lib/omega/stoicheion.ts — X74. ΣΤΟΙΧΕῖΟΝ (stoicheion), "element / letter".
+ * =============================================================================
+ *
+ * THE MEASUREMENT THIS CODEC IS BUILT ON (bench/x74/floor.ts, this turn)
+ * -----------------------------------------------------------------------------
+/**
+ * STOICHOS - sigma-tau-omicron-iota-chi-omicron-sigma (stoicheion, "element")
+ * ==========================================================================
+ *
+ * THE MECHANISM: derivable-character elimination, generalized from one rule to
+ * a searched rule family.
+/**
+ * src/lib/omega/stoichothetes.ts
+ * =============================================================================
+ * X128 — ΣΤΟΙΧΟΘΈΤΗΣ (stoichothetes, "one who sets type in columns"):
+ *        ALIGNMENT-AWARE FIXED-WIDTH COLUMNAR BLOCKS.
+ *
+/**
+ * src/lib/omega/strand-book.ts — GENERATED, DO NOT EDIT BY HAND.
+ *
+ * STRAND-SB1 static phrase book. Mined offline by bench/mine-strand.ts from
+ * bench/train/** ONLY (a corpus disjoint from every evaluation fixture and
+ * from bench/holdout/**). Frozen and version-pinned: the runtime encoder never
+/**
+ * src/lib/omega/strand.ts
+ * =============================================================================
+ * ⧉ STRAND-ST1 — Hybrid Static/Dynamic Dictionary under a Single Optimal Parse
+ * =============================================================================
+ * WHAT IS NEW (stated narrowly so it can be attacked)
+/**
+ * ⨂ STRATA-S1 — Typed Column Decomposition with Closed-Form Column Coders
+ * =============================================================================
+ * THE GAP THIS CLOSES
+ * -----------------------------------------------------------------------------
+ * Two mature bodies of work exist and have never been joined:
+/**
+ * src/lib/omega/sygkollesis.ts
+ * =============================================================================
+ * X129 — ΣΥΓΚΌΛΛΗΣΙΣ (sygkollesis, "a welding together"): JOINT glyph-encoding
+ *        of high-frequency SINGLE-TOKEN units so that ADJACENT GLYPHS MERGE.
+ *
+/**
+ * SYLLOGISMOS (X51) — verified functional-dependency column elision.
+ *
+ * Every prior codec in this stack removes redundancy that is visible as
+ * repetition (grammar rules), as a vertical law inside one column
+ * (AKOLOUTHIA-2, APOGRAPHE's `above`/`days`/`workdays`/`+b`, METRON
+/**
+ * ΣΥΜΜΕΤΡΟΝ (SYMMETRON) — "commensurate": a proxy that speaks the objective's units.
+ * =============================================================================
+ *
+ * WHAT PROBLEM THIS ACTUALLY SOLVES
+ * -----------------------------------------------------------------------------
+/**
+ * src/lib/omega/symphyia.ts — X90. ΣΥΜΦΥΊΑ (symphyia), "a growing together".
+ * =============================================================================
+ *
+ * THE RELATION, AND WHY NOTHING IN THE STACK FITS IT
+ * -----------------------------------------------------------------------------
+// SYMPLOKE / ΣΥΜΠΛΟΚΗ — "interweaving" (Greek symploke). X26.
+//
+// MECHANISM (learned separator lattice).
+//
+// PSEPHOS (X24) proved one instance of a general law:
+//
+/** X138 SYNAPHE (junction): maximal suffix-prefix overlap at macro use sites.
+ * Experimental, unwired. Dictionary expansion is ordinary acyclic CHIRON;
+ * only body concatenation is changed. Distinct from overlapping candidate
+ * mining (which still emits disjoint substitutions) and from CTXCOPY's
+ * external context. No claim of native-model verification or global novelty.
+ * Bounded one-state-per-position heuristic; full-message price admission.
+/**
+ * src/lib/omega/synapse.ts — SYNAPSE-Ω: Syntactic-N-gram Adaptive Parsing
+ * & Autonomous Sequence Encoding Lossless Codec
+ * =============================================================================
+ * Grounded in peer-reviewed & textbook computational linguistics (2016–2026):
+ *  - "Lossless Prompt Compression via Dictionary-Encoding and In-Context Learning"
+/**
+ * X133 — ΣΥΝΑΡΜΟΓΗ / SYNARMOGE ("joint fitting", "articulation")
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * THE MECHANISM, AND WHY IT IS NOT A REHASH OF ANYTHING IN THE STACK
+ * ─────────────────────────────────────────────────────────────────────────────
+/**
+ * src/lib/omega/synartesis.ts
+ * =============================================================================
+ * SYNARTESIS — entailment from the KEY of an enclosing entry
+ * (byte-perfect, exact-lossless, single-chat-readable, contract in band)
+ * -----------------------------------------------------------------------------
+import { chironDecode } from './chiron';
+import { countTokens, type EncodingName } from './bpe';
+import { symplokeDecode } from './symploke';
+import {
+  oikonomiaEncode, oikonomiaDecode,
+  type OikonomiaOptions, type OikonomiaResult,
+/**
+ * SYNDESMOS (X61) — exact repeated-target interning for Markdown inline links.
+ *
+ * Factor a shared exact URL prefix through an in-band table, and replace
+ * repeated inline-link destinations with first-seen IDs. The reader restores
+ * the exact URL bytes before returning the original text. This narrow operator
+/**
+ * X99 — ΣΥΝΔΥΑΣΜΟΣ (syndyasmos, "combination"): alternate two orthogonal tape
+ * transformations that no codec in this stack has ever run together.
+ *
+ * ============================================================================
+ * THE TWO TRANSFORMATIONS, AND THE COUPLING BETWEEN THEM
+/** Optional X156 tournament; not wired into production TAGSTACK. */
+import {type EncodingName} from './bpe';
+import {stoibasFrontierEncode,readStoibasIncumbent} from './stoibas-frontier';
+import {stoibasCompactRead} from './stoibas';
+import {readPlainParent} from './ekdysis-frontier';
+import {tagstackEncode} from './tagstack';
+/** X156 SYNECHEIA (continuity): coupled page-interval endpoint recurrence.
+ * Experimental/unwired. Classical predictive/delta ancestry, not a new theorem.
+ * Unlike independent numeric-column deltas, next start may consume previous END;
+ * end is recovered from a page count. All non-address bytes remain verbatim.
+ */
+import {countTokens,type EncodingName} from './bpe';
+/**
+ * src/lib/omega/synedria.ts
+ * =============================================================================
+ * SYNEDRIA (συνεδρία — "a sitting together, a council").
+ *
+ * X114. A scoped, encoder-only cross-parent replay memo for the TAGSTACK
+/**
+ * src/lib/omega/synergy.ts
+ * =============================================================================
+ * 🌀 SYNERGY-S2 — In-Context Cross-Span Structural Collocation & Entropy-Optimal Grammar Factorization
+ *
+ * CONCEPT & GROUNDING:
+/**
+ * src/lib/omega/synizesis.ts
+ * =============================================================================
+ * SYNIZESIS — PRE-TOKENIZER BOUNDARY COLLAPSE BY ADAPTIVE SHAPE-TEMPLATE
+ *             FACTORING  (exact, byte-perfect, self-describing, direct-read)
+ * -----------------------------------------------------------------------------
+/**
+ * SYNKOPE -- X29.
+ *
+ * What it is: SYNTOMOS (X28) with the CONTRACT ladder extended, and nothing
+ * else changed. The wire is byte-identical to SYNTOMOS; only the instruction
+ * text in front of it is rewritten.
+/**
+ * SYNKRISIS (σύγκρισις, “comparison”) — X45.
+ * =============================================================================
+ * Two exact, reader-native folds, selected by a live one-chat gate:
+ *
+ * 1. WORD-CANON: align a near-canonical public text as a whitespace-invariant
+/**
+ * src/lib/omega/syntagma.ts
+ * =============================================================================
+ * SYNTAGMA — Hangul Canonical-Decomposition Restoration Pre-Pass
+ * (self-verifying, exact)
+ *
+/**
+ * src/lib/omega/syntaxis.ts — ΣΥΝΤΆΞΙΣ (SYNTAXIS, "a putting in order together; syntax") — X88.
+ *
+ * =============================================================================
+ * THE MEASURED HOLE
+ * =============================================================================
+/**
+ * src/lib/omega/synthesis.ts — X117. ΣΥΝΘΕΣΙΣ (synthesis), "a putting together".
+ * =============================================================================
+ * THE MECHANISM: CROSS-CODEC CONTRACT CSE + SINGLE-PASS ENTAILMENT CONJUNCTION
+ * -----------------------------------------------------------------------------
+ * X115/X116 compose three independent record-level entailments by NESTING their
+/**
+ * src/lib/omega/syntomia.ts
+ * =============================================================================
+ * SYNTOMIA — MINIMAL-SUFFICIENT-CONTRACT CODEC
+ * (exact, byte-perfect, single-chat-readable, no system prompt)
+ * -----------------------------------------------------------------------------
+/**
+ * SYNTOMOS (σύντομος — "abridged, cut short").
+ *
+ * X28. The measured finding behind this codec is that the *fixed* instruction
+ * clause is the largest remaining cost that is paid on every single message:
+ * on 20 of the 28 holdout lanes the contract is a constant ~20 tokens, which
+/**
+ * SYZEUXIS — the column-major conjunction.
+ * =============================================================================
+ * σύζευξις — a joining together.
+ *
+ * THE SEAM THIS CLOSES
+/**
+ * src/lib/omega/syzygia.ts
+ * =============================================================================
+ * SYZYGIA (συζυγία — a yoking together, a conjugate pair) — affine-twin
+ * elision for delimited tables, with ±1-ulp residual correction. X57.
+ *
+/**
+ * ⊞ TABMIN — per-table layout choice between row-major and column-major, over LAKONIKOS.
+ * =============================================================================
+ *
+ * Scope (read this first): this is a TABULAR lane codec. It only changes inputs that are
+ * simple rectangular comma-separated tables. Everything else is returned as the LAKONIKOS
+/**
+ * TACHOS (τάχος, "swiftness") -- X30.
+ *
+ * Two independent contributions, both measured.
+ *
+ * ============================================================================
+/**
+ * src/lib/omega/tachygrafia.ts — X108. ΤΑΧΥΓΡΑΦΊΑ (tachygrafia), "shorthand".
+ * =============================================================================
+ *
+ * TARGET: THE DECODER-INSTRUCTION LINE, WHICH IS 5.3 % OF THE FRONTIER AND WHICH
+ * THE TWO EXISTING CONTRACT CODECS CANNOT FINISH.
+/**
+ * TACHYS — Deterministic latency lane with incompressibility certificate.
+ * =============================================================================
+ * THE BLINDSPOT (why 99.99% of English prose still pays the search tax)
+ * ----------------------------------------------------------------------------
+ * Every lane in this repository, including CHIRON, ARIADNE and the KIONES
+import { scalarCollect, scalarCollecting, scalarOffer } from './scalar';
+import { isUtf8TransportStable } from './utf8-wire';
+/**
+ * TAGSTACK (X47) — exact in-band close-tag stack elision.
+ *
+ * A well-nested explicit end tag is replaced by a one-token, collision-checked
+/**
+ * src/lib/omega/tau.ts
+ * =============================================================================
+ * TAU-τ1 — delimiter-parameterized table transposition (lossless, prompt-decoded)
+ *
+ * THE MEASURED GAP (this repository's own receipts)
+/**
+ * src/lib/omega/taxinomasis.ts
+ * =============================================================================
+ * ΤΑΞΙΝΟΜΗΣΙΣ (TAXINOMĒSIS, "selection by rank") — X104.
+ *
+ * WHAT THE REST OF THE STACK DOES, AND WHAT THIS DOES NOT.
+/**
+ * src/lib/omega/taxis.ts
+ * =============================================================================
+ * TAXIS (τάξις, "arrangement in ranks") — derived columns in space-aligned
+ * tables, restored by exact re-alignment.
+ *
+/**
+ * src/lib/omega/telos.ts — TELOS-Ω: Topological Entropy-optimal Lattice Operad
+ * Synthesis & Hierarchical DAG-SLP Lossless Codec (Terminal Sovereign Non-Rosetta Leader)
+ * =============================================================================
+ * Grounded in 35+ years of Information Theory, Computational Linguistics & AI Combinatorics:
+ *  - "The Smallest Grammar Problem" (Charikar et al., IEEE Trans. Inf. Theory 2005 / ACM STOC 2002)
+/**
+ * src/lib/omega/tensor.ts
+ * =============================================================================
+ * 🔲 TENSOR-T1 — Multi-Tensor Canonical Fiber-Bundle & Context-Graph Contraction
+ *
+ * MATHEMATICAL FORMULATION & ORIGINAL CONCEPT:
+/**
+ * ⧉ TESSERA-T1 — Template-Aligned Columnar Transposition with Lane Dispatch
+ * =============================================================================
+ * WHAT EVERY CODEC IN THIS STACK (AND IN THE LITERATURE) SHARES
+ * -----------------------------------------------------------------------------
+ * VERITAS, QUASAR, LTSC(2506.00307), Dictionary+ICL(2604.13066), CompactPrompt,
+/**
+ * THEMIS-Ω — succinct implicit-symbol serialization for nested prompt grammars.
+ *
+ * NEMESIS proves that a grammar over a grammar is profitable, but redundantly
+ * transmits each outer nonterminal and per-rule `=`/newline syntax. THEMIS maps
+ * rule ordinal i to a fixed one-token Hangul symbol and transmits only a JSON
+/**
+ * THOTH — the scribe who writes at the speed of reckoning.
+ * =============================================================================
+ *
+ * WHAT THIS TURN ESTABLISHED, BEFORE ANY CODE
+ * -----------------------------------------------------------------------------
+import { countTokens, type EncodingName } from './bpe';
+import { chironDecode } from './chiron';
+import { symplokeDecode } from './symploke';
+import { heuresisEncode, heuresisDecode, type HeuresisOptions, type HeuresisResult } from './heuresis';
+
+/**
+/**
+ * src/lib/omega/tmematismos.ts — X126. ΤΜΗΜΑΤΙΣΜΌΣ (tmēmatismos, "a cutting into
+ * segments").
+ * =============================================================================
+ *
+ * THE MEASUREMENT THIS IS BUILT ON, STATED BEFORE THE CLAIM
+/**
+ * TRIE-T1 — exact prefix-trie factoring for repeated line families.
+ *
+ * Inspired by recent trie-structured log compressors, this lane factors the
+ * longest common prefix of a line family once and stores the suffix stream as a
+ * compact JSON list. It is intentionally local and conservative: only a single
+/**
+ * ΤΥΠΟΣ (TYPOS) — "the mold, the stamp, the impression". X41.
+ * =============================================================================
+ * THE GAP, IN THE STACK'S OWN TERMS
+ * =============================================================================
+ * APOGRAPHE and METRON make a record set cheap by refusing to write a column the
+/** X144 transport admission helper. A UTF-16 inverse is insufficient when
+ * the wire splits a surrogate pair across grammar entries. UTF-8 replaces lone
+ * halves, irreversibly changing the message. This is NOT a decoder correctness
+ * or native-reading test. X144b wires the stability predicate into TAGSTACK candidate admission.
+ */
+export function isUtf8TransportStable(text:string):boolean {
+/**
+ * src/lib/omega/uuidfold.ts
+ * =============================================================================
+ * UUIDFOLD-U2 — canonical UUIDs written as 32 UPPERCASE hex digits, restored by
+ * a one-line in-message rule. Exact, byte-perfect, self-verified before emission.
+ *
+/**
+ * src/lib/omega/valence.ts
+ * =============================================================================
+ * VALENCE-V1 — Factoradix Permutation-Rank & Token-Quorum Lossless Codec
+ *
+ * DYNAMIC ALGORITHM:
+/**
+ * src/lib/omega/valkyrie.ts
+ * =============================================================================
+ * 🛡️ VALKYRIE-V1 — Vectorized In-Context Degenerate Lattice Subgraph Contracting
+ *
+ * DYNAMIC ALGORITHM:
+/**
+ * src/lib/omega/veltistos.ts — X120. ΒΕΛΤΙΣΤΟΣ (veltistos, "best, optimal").
+ * =============================================================================
+ *
+ * THE QUANTIFIER EVERY DICTIONARY CODEC IN THIS STACK INHERITS
+ * -----------------------------------------------------------------------------
+/**
+ * src/lib/omega/veritas-a.ts
+ * =============================================================================
+ * VERITAS-A — VX with one-token alias characters (exact, byte-perfect).
+ *
+ * WHY: a VX reference "~k" costs two tokens in the body (the tilde and the key are
+/**
+ * src/lib/omega/veritas-c.ts
+ * =============================================================================
+ * VERITAS-C — VERITAS-N with CHARACTER-LEVEL candidates and an EQUALS-FREE header (exact, byte-perfect,
+ * decoder-verified, one greedy pass, identity-guarded).
+ *
+/**
+ * src/lib/omega/veritas-g.ts
+ * =============================================================================
+ * VERITAS-G — nested-grammar VX stage (RePair-style). Exact, byte-perfect.
+ *
+ * WHY: VERITAS-VX entries are flat. A phrase cannot name another entry, so a repeated
+/**
+ * src/lib/omega/veritas-k.ts — VERITAS-K: wide-search VERITAS-R.
+ * =============================================================================
+ * Same wire, same decoder, same [[VXR sentinel and legend as VERITAS-R. The only change is the search budget
+ * spent on the greedy: each step scores up to 100 improving candidates (VERITAS-R: 10) out of up to 3000 trials
+ * (VERITAS-R: 300), and refinement gets 40000 exact counts (VERITAS-R: 4000).
+/**
+ * src/lib/omega/veritas-m.ts — VERITAS-M: merge-aware VERITAS-R.
+ * =============================================================================
+ * Same VXR wire and decoder as VERITAS-R and VERITAS-K. Three search changes, each measured separately (bench/z37):
+ *
+ *   1. Look-past (forceSteps = 40). When the greedy has no improving step, take the best non-improving step
+/**
+ * src/lib/omega/veritas-n.ts
+ * =============================================================================
+ * VERITAS-N — VERITAS-U with a NESTED header (exact, byte-perfect, decoder-verified, one greedy pass).
+ *
+ * WHY (measured in Z32 with real o200k tokens; bench/z32/headroom.ts, bench/z32/nest-probe.ts):
+/**
+ * src/lib/omega/veritas-p.ts — VERITAS-P (Z39): VERITAS-R wire, shipped decoder, wide exact search at full scale.
+ * =============================================================================
+ * WHAT IS NEW (measured in Z39, not inherited)
+ *
+ *   Z38 measured VERITAS-Q against the frontier and found a size-dependent gap: 0-2% below ~1.5k tokens, 8-17% above
+/**
+ * src/lib/omega/veritas-q.ts — VERITAS-Q: VERITAS-M search with an instruction-carrying, escape-conditional legend.
+ * =============================================================================
+ * Same VXR entries, same body, same decoder path as VERITAS-M (veritasRDecode / veritasADecode skip a leading
+ * "# " line, so the legend text is not parsed by the decoder). The only change is the legend line:
+ *
+/**
+ * VERITAS-R (Z34): new codec. Its own sentinel `[[VXR`, a 28-token legend, and the VERITAS-S search
+ * with two additions measured in Z34: (a) key reassignment and entry pruning after the greedy pass,
+ * (b) a final gate against the raw input that counts the whole wire (legend and header included).
+ *
+ * Wire: `[[VXR` line, legend line, header lines `X<escaped T>` (nested), `]]`, body.
+/**
+ * VERITAS-S (Z33, gate fixed in Z34): VERITAS-C wire under the VXS sentinel, with a different greedy search.
+ *
+ * Wire: `[[VXS` line, legend line, header lines `X<escaped T>` (nested: a header phrase may use
+ * earlier keys), `]]`, body. The decoder is the existing VXC path (veritasADecode), so no new reader is needed.
+ *
+/**
+ * src/lib/omega/veritas-u.ts
+ * =============================================================================
+ * VERITAS-U — single-pass VXA dictionary over the UNION of the W in {2,3,4} candidate phrases
+ * (exact, byte-perfect, decoder-verified, no window tournament).
+ *
+import { countTokens, tokenStrings, type EncodingName } from './bpe';
+import { veritasDecode, type VeritasResult, type VeritasEntry } from './veritas';
+
+/**
+ * VERITAS-VX window-parameterised encoder (same VX1 wire format and decoder as veritas.ts).
+ * W = minimum phrase length in tokens. W=3 must reproduce veritas.ts exactly (checked by the probe).
+import { countTokens, tokenStrings, type EncodingName } from './bpe';
+
+export interface VeritasEntry {
+key: string;
+phrase: string;
+hits: number;
+/**
+ * src/lib/omega/workmeter.ts
+ * =============================================================================
+ * Deterministic search-work budget for the ARIADNE glyph-assignment search
+ * (X57 speed repair).
+ *
+/**
+ * src/lib/omega/wrapcanon.ts
+ * =============================================================================
+ * WRAPCANON — lossless removal of hard line-wraps in prose (exact, byte-perfect, encoder-verified).
+ *
+ * WHY: a hard line break costs its own token, and the word after it loses its joining space; the joined
+/**
+ * ZENITH-Z1 — exact readable-lane portfolio with a compiled decoder contract.
+ *
+ * The admissible object is a pair (wire, contract).  The wire must decode to the
+ * input exactly; the score is real tokenizer tokens(wire)+tokens(contract).
+ * ZENITH delegates wire search to CROWN's exact tournament (which includes
+/**
+ * src/lib/omega/zero.ts
+ * =============================================================================
+ * ⚡ ZERO-Z10 — In-Context Zero-Entropy Morphic Subsequence Lattice Contraction
+ *
+ * CONCEPT & GROUNDING:
+/**
+ * src/lib/omega/zeta.ts — OMEGA-ZETA (Ζ) "DUPLEX SIDECAR CODEC"
+ * Composes LTP + Prometheus orthogonally. See detailed JSDoc in the pasted spec.
+ */
+import { countTokens, type EncodingName } from './bpe';
+import { ltpProject, ltpRestore, type LtpOp } from './ltp';
+/**
+ * src/lib/omega/zeta.ts — OMEGA-ZETA (Ζ) "DUPLEX SIDECAR CODEC"
+ * Composes LTP + Prometheus orthogonally. See detailed JSDoc in the pasted spec.
+ */
+import { countTokens, type EncodingName } from './bpe';
+import { ltpProject, ltpRestore, type LtpOp } from './ltp';
+/**
+ * src/lib/omega/zygon.ts
+ * =============================================================================
+ * ZYGON (ζυγόν — the beam of a balance) — weighted-sum (exact linear-law)
+ * column elision for delimited tables. X58.
+ *

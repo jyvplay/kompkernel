@@ -120,3 +120,7 @@ native exact decoding, significant runtime gains and the complete Pareto
 conjunction remain unfulfilled. The next discriminating test is a blinded
 single-basic-chat decode of each complete packet, scored against source bytes,
 not another programmatic inverse or semantic summary.
+
+X165 replay: all29canonical wires remain byte-identical, total11962. Saved
+KRYPTOLYSIS full-wire/independent gates replay unchanged. X165's experimental
+DEIKTIS is not a broad/native Pareto certification; see the X165 ledger.

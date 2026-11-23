@@ -186,3 +186,8 @@ bench/x164/*.mjs
 !bench/x164/*-build.mjs
 bench/x164/*.cpuprofile
 .cache/x164/
+
+# X165 generated experiment bundles
+bench/x165/*.mjs
+!bench/x165/*-build.mjs
+bench/x165/*.cpuprofile
