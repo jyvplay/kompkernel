@@ -1,0 +1,7 @@
+{
+  "production": false,
+  "helper": "\n// X165 repaired numeric pages: direct array addressing, bounded no-eviction pages.\nconst x165O:Array<Uint8Array|undefined>=new Array(65536),x165C:Array<Uint8Array|undefined>=new Array(65536);\nconst x165SingleO=new Uint8Array(65536),x165SingleC=new Uint8Array(65536);\nlet x165NO=0,x165NC=0;\nfunction x165Short(slots:number[],values:string[],enc:EncodingName):number|undefined {\n const n=slots.length;if(n<1||n>2)return undefined;\n const a=values[slots[0]];if(a.length!==1)return undefined;const c=a.charCodeAt(0),o=enc==='o200k_base';\n if(n===1){const one=o?x165SingleO:x165SingleC;let v=one[c];if(!v){v=countTokens(a,enc);one[c]=v;}return v;}\n const b=values[slots[1]];if(b.length!==1)return undefined;const d=b.charCodeAt(0),pages=o?x165O:x165C,page=((c>>>8)<<8)|(d>>>8),i=((c&255)<<8)|(d&255);\n let p=pages[page];if(!p){if((o?x165NO:x165NC)>=128)return undefined;p=new Uint8Array(65536);pages[page]=p;if(o)x165NO++;else x165NC++;}\n let v=p[i];if(!v){v=countTokens(a+b,enc);p[i]=v;}return v;\n}\n",
+  "scope": "two delta scorers, ≤2 one-UTF16-unit glyph runs; all other calls unchanged",
+  "maxPagesPerEncoding": 128,
+  "pageBytes": 65536
+}

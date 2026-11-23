@@ -11243,3 +11243,80 @@ Full A–J ledger,24deceptive-evidence tests, rejected hypotheses, provenance,
 source files and native-test packets: `bench/x164/README.md`. Highest-information
 next test: blinded one-basic-chat exact decoding of the complete packets,
 followed by broader unencoded prose/ops trials. Merge is not scientific acceptance.
+
+## X165 — DEIKTIS: suffix-context-addressed continuation copies
+
+**Experimental, unwired; not certified Pareto-superior or natively decoded.**
+DEIKTIS (δείκτης, pointer) is a same-message LZP-style preconditioner. The last
+kdecoded Unicode code points select their latest strictly earlier occurrence;
+`~N;` copies Ncode points immediately following that occurrence, entirely from
+already reconstructed output. Literal text and copied text both update history.
+No earlier chat, external vocabulary, training, system prompt or skills file is
+part of the algorithmic contract. Whether a basic-chat model executes that
+contract byte-perfectly is **NOT_RUN**, not established by the program inverse.
+
+**Distinctness, scoped.** MNEMA names an entire previous word by an explicit
+lexical prefix; METABOLE edits a bucketed lexeme; CTXCOPY requires earlier-chat
+anchors. DEIKTIS's address is the immediately preceding decoded context, and
+only copy length is transmitted. All409current omega TypeScript files were
+included in the inventory/search, including wrappers. No matching executable
+operation was found, but this is not exhaustive semantic equivalence checking.
+LZP is classical human prior art, not an AI-only invention.
+
+**Greedy / resources.** Greedy longest admissible copies under each finite
+context/threshold setting; not globally optimal. Widths4/8/16, minimum lengths
+12/32/64/128, maximum4096code points copied,≤50000UTF16source units, UTF8stable
+transport.≤12deduplicated plans; price all complete literal candidates, offer
+at most2to the existing parent (raw-ranked and sparse-long-copy arms), require
+exact source inverse and strict complete-message improvement. CPU-bound, no
+wall clock used for decisions. Worst-case O(12n·4096)match comparisons plus
+context indexing/tokenization and≤2parent calls; inverse O(16n), bounded output.
+Marker collisions and unavailable history refuse; header/code-point clarification
+and output-amplification repairs receive fresh gates.
+
+**Evidence.** 34whole inputs,166distinct DEIKTIS plans; raw-complete screening
+is not a frontier result. Initial full-parent trials lose on diff411→476,
+email486→557, code949→1103and findmnt385→528. The UV README's revised selector
+retains its2041token baseline; source bytes are independently reconstructed.
+Final contract and full candidate evidence, including later tutorial outcomes,
+are in `bench/x165/receipts/final-contract.json`. No broad ordinary-prose gain
+is inferred.8830unit checks and independent CPython suffix-search verification
+are separate from model behavior. The exact instruction says Unicode **code
+points**, not graphemes; old timed parent observations are not new header timings.
+
+**Other mechanisms actually tested.** Case-boundary transfer, existing COLEX,
+existing LEXARITHMOS, and classical space-field BWT form independent controls.
+BWT plus parent loses on kb620→712, llm-answer664→731, email486→571,
+JSON653→794and code949→1062; its sorting inverse is not called native-readable.
+It remains a bench artifact, not a promoted codec or a novel mathematical idea.
+
+**Runtime.** Three12-call cold ABBA experiments,36canonical-identical wires:
+original paged short-run memo CPU3.945637×/wall2.991836× (severe regression);
+repaired direct-address pages0.970507×/0.977587×; combined pages/bound-fusion/
+rollback0.983710×/0.983452×. All fail the≥10%aggregate CPU+wall and protected-lane
+nonregression gate. Repaired/combined scorer tests include25440targeted checks
+for encoding separation, surrogate halves, singleton/pair distinction, capacity
+and revisits. No production speed patch was installed.
+
+**Canonical reconfirmation.** All29fresh X165 wires equal X164 byte-for-byte;
+11962tokens unchanged. All29complete prices/token-ID roundtrips pass. Bounded
+separate repository reader reconstructs21and explicitly reports8unsupported;
+this is not29independent native decodes. Fresh inherited-category leaders:
+prose5856→3429(word-led tape), ops17278→5580(glyph-led), code4152→2636(word-led),
+other729→317(no tape class). Largest absolute fixture savings remain apt1926,
+ls-l3884, JSON499, cue412; ops relative leader prices.csv79.73%. Category labels
+are inherited benchmark labels, not claims that an apt listing is general prose.
+X164 KRYPTOLYSIS gate and independent inverse replay retain870→622and714→549;
+those are saved-wire gate replays, not fresh cipher parent recompressions.
+
+**Recent citations, limits.** SPIRE2023 *New Advances in Rightmost Lempel-Ziv*,
+https://link.springer.com/chapter/10.1007/978-3-031-43980-3_15 (publisher abstract
+inspected), addresses rightmost LZ/LZ-End over linearly sortable alphabets, not
+our context-limited BPE objective. Dai et al.2020, DOI10.3390/app10144918,
+https://www.mdpi.com/2076-3417/10/14/4918 (first HTML chunk inspected), studies
+periodic signal prediction before compression, not native prompt inversion.
+Bannai et al.2023 DOI10.4230/LIPIcs.CPM.2023.3 bounds an optimal LZ-End PHRASE
+objective; revisited prior citation, not a new token lower bound. Full hypotheses,
+per-lab proof-interface inspections,27deceptive-evidence tests, repairs and
+remaining gaps are in `bench/x165/README.md` and `research.md`. No Lean replay,
+exhaustive lab audit, terminal codec or human-blind discovery is claimed.

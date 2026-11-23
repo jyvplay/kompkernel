@@ -12318,3 +12318,17 @@ message hashes; they do.
 Full research record, including the prior art that is closer than is comfortable
 (`niieani/gpt-tokenizer` PR #94/#95, sglang #41148) and the lab-mathematics
 review: `bench/x121/research/sources.md`.
+
+## X165 experimental context-copy follow-up
+
+DEIKTIS is an **unwired experimental module**, not a new certified frontier.
+It uses preceding decoded Unicode code points to address an earlier continuation,
+with only copy length on wire. Its finite greedy parameter screen and at-most-two
+parent calls are detailed in [codec-abbreviations.md](codec-abbreviations.md#x165--deiktis-suffix-context-addressed-continuation-copies).
+Completed full-parent tests provide no qualifying broad gain; native basic-chat
+inversion is NOT_RUN. Requests exhausted the 1200 MB heap, not a measured win.
+All 29 canonical X164 wires replay unchanged (11962 tokens); independent reader
+coverage is 21 supported / eight unsupported. Three benchmark-only speed arms
+fail the significant-speedup gate; no production hot-path edit was adopted.
+See `bench/x165/README.md` and receipts for exactness, repriced final contracts,
+resource failures, bounded research, and unfulfilled acceptance criteria.

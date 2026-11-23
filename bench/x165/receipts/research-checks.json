@@ -1,0 +1,28 @@
+{
+  "openai": {
+    "finiteChecks": 1218,
+    "missingExtensionCounterexample": true,
+    "scope": "PrefixGreedy largest/extension semantics from Tables+PrefixMatching; no Poly/kernel replay"
+  },
+  "anthropic": {
+    "constantChecks": 256,
+    "scope": "CountedInstance selects c+18 and max(C0,10), imports five premises; dependency closure NOT_REPLAYED"
+  },
+  "doubleai": {
+    "checks": 360,
+    "zeroTerminatorAmbiguity": true,
+    "scope": "well-formed finite DIMACS serialization; no LRAT certificate, no chess theorem replay"
+  },
+  "google": {
+    "finiteAffineChecks": 280,
+    "zeroScaleCounterexample": true,
+    "scope": "nonzero affine reparameterization preserves finite sum/difference cardinalities, NOT BPE cost; prior2003witness not enlarged"
+  },
+  "bytedance": {
+    "boundaryPartialSums": 1024,
+    "counterexampleAtLiminfOne": "a(n)=n+1; telescoping sum=1",
+    "scope": "strict growth hypothesis cannot be weakened to >=1; no Lean replay"
+  },
+  "nativeTransfer": "REJECTED",
+  "lean": "NOT_RUN"
+}

@@ -1,0 +1,506 @@
+[
+  {
+    path: 'bench/x165/fixtures/BurntSushi_ripgrep-GUIDE.md',
+    type: 'text',
+    base: 10430,
+    k: undefined,
+    best: undefined,
+    sites: undefined
+  },
+  {
+    path: 'bench/x165/fixtures/astral-sh_uv-README.md',
+    type: 'text',
+    base: 2760,
+    k: 4,
+    best: 2534,
+    sites: 69
+  },
+  {
+    path: 'bench/x165/fixtures/pallets_flask-quickstart.rst',
+    type: 'text',
+    base: 7077,
+    k: undefined,
+    best: undefined,
+    sites: undefined
+  },
+  {
+    path: 'bench/x165/fixtures/psf_requests-quickstart.rst',
+    type: 'text',
+    base: 4591,
+    k: undefined,
+    best: undefined,
+    sites: undefined
+  },
+  {
+    path: 'bench/x165/fixtures/redis_redis-README.md',
+    type: 'text',
+    base: 7255,
+    k: 4,
+    best: 6741,
+    sites: 187
+  },
+  {
+    path: 'bench/holdout-x42/lsblk.txt',
+    type: 'text',
+    base: 60,
+    k: 4,
+    best: 105,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x42/lsblk.txt',
+    type: 'message',
+    base: 60,
+    k: 4,
+    best: 105,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-work/kb-article.txt',
+    type: 'text',
+    base: 656,
+    k: 8,
+    best: 700,
+    sites: 1
+  },
+  {
+    path: 'bench/holdout-work/kb-article.txt',
+    type: 'message',
+    base: 620,
+    k: 4,
+    best: 665,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x42b/uptime-w.txt',
+    type: 'text',
+    base: 80,
+    k: 4,
+    best: 125,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x42b/uptime-w.txt',
+    type: 'message',
+    base: 80,
+    k: 4,
+    best: 125,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x42b/free-m.txt',
+    type: 'text',
+    base: 76,
+    k: 4,
+    best: 121,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x42b/free-m.txt',
+    type: 'message',
+    base: 76,
+    k: 4,
+    best: 121,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x42b/vmstat.txt',
+    type: 'text',
+    base: 229,
+    k: 4,
+    best: 222,
+    sites: 2
+  },
+  {
+    path: 'bench/holdout-x42b/vmstat.txt',
+    type: 'message',
+    base: 144,
+    k: 4,
+    best: 189,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-work/unified-diff.patch',
+    type: 'text',
+    base: 578,
+    k: 4,
+    best: 572,
+    sites: 11
+  },
+  {
+    path: 'bench/holdout-work/unified-diff.patch',
+    type: 'message',
+    base: 411,
+    k: 4,
+    best: 456,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-tbl/df-h.txt',
+    type: 'text',
+    base: 570,
+    k: 4,
+    best: 611,
+    sites: 1
+  },
+  {
+    path: 'bench/holdout-tbl/df-h.txt',
+    type: 'message',
+    base: 160,
+    k: 4,
+    best: 205,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x41/df-real.txt',
+    type: 'text',
+    base: 158,
+    k: 4,
+    best: 188,
+    sites: 1
+  },
+  {
+    path: 'bench/holdout-x41/df-real.txt',
+    type: 'message',
+    base: 123,
+    k: 4,
+    best: 168,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x41/du-real.txt',
+    type: 'text',
+    base: 458,
+    k: 4,
+    best: 442,
+    sites: 22
+  },
+  {
+    path: 'bench/holdout-x41/du-real.txt',
+    type: 'message',
+    base: 266,
+    k: 4,
+    best: 311,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x41/node-help.txt',
+    type: 'text',
+    base: 1099,
+    k: 4,
+    best: 1107,
+    sites: 20
+  },
+  {
+    path: 'bench/holdout-x41/node-help.txt',
+    type: 'message',
+    base: 846,
+    k: 16,
+    best: 891,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x42/findmnt.txt',
+    type: 'text',
+    base: 787,
+    k: 4,
+    best: 627,
+    sites: 24
+  },
+  {
+    path: 'bench/holdout-x42/findmnt.txt',
+    type: 'message',
+    base: 385,
+    k: 4,
+    best: 430,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x42/df-h.txt',
+    type: 'text',
+    base: 140,
+    k: 4,
+    best: 170,
+    sites: 1
+  },
+  {
+    path: 'bench/holdout-x42/df-h.txt',
+    type: 'message',
+    base: 105,
+    k: 4,
+    best: 150,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-work/email-thread.txt',
+    type: 'text',
+    base: 629,
+    k: 4,
+    best: 615,
+    sites: 11
+  },
+  {
+    path: 'bench/holdout-work/email-thread.txt',
+    type: 'message',
+    base: 486,
+    k: 4,
+    best: 531,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-work/llm-answer.md',
+    type: 'text',
+    base: 733,
+    k: 4,
+    best: 774,
+    sites: 3
+  },
+  {
+    path: 'bench/holdout-work/llm-answer.md',
+    type: 'message',
+    base: 664,
+    k: 4,
+    best: 709,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-tbl/markdown-table.md',
+    type: 'text',
+    base: 330,
+    k: 4,
+    best: 365,
+    sites: 2
+  },
+  {
+    path: 'bench/holdout-tbl/markdown-table.md',
+    type: 'message',
+    base: 172,
+    k: undefined,
+    best: undefined,
+    sites: undefined
+  },
+  {
+    path: 'bench/holdout-tbl/psql-output.txt',
+    type: 'text',
+    base: 675,
+    k: 4,
+    best: 692,
+    sites: 21
+  },
+  {
+    path: 'bench/holdout-tbl/psql-output.txt',
+    type: 'message',
+    base: 229,
+    k: 4,
+    best: 274,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x40/prices.csv',
+    type: 'text',
+    base: 582,
+    k: 4,
+    best: 627,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x40/prices.csv',
+    type: 'message',
+    base: 118,
+    k: 4,
+    best: 163,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x40/cue-sheet.md',
+    type: 'text',
+    base: 513,
+    k: 4,
+    best: 534,
+    sites: 8
+  },
+  {
+    path: 'bench/holdout-x40/cue-sheet.md',
+    type: 'message',
+    base: 101,
+    k: 4,
+    best: 146,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x42/ps-ef.txt',
+    type: 'text',
+    base: 1144,
+    k: 8,
+    best: 625,
+    sites: 43
+  },
+  {
+    path: 'bench/holdout-x42/ps-ef.txt',
+    type: 'message',
+    base: 296,
+    k: 4,
+    best: 341,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x41/ls-real.txt',
+    type: 'text',
+    base: 1034,
+    k: 4,
+    best: 719,
+    sites: 54
+  },
+  {
+    path: 'bench/holdout-x41/ls-real.txt',
+    type: 'message',
+    base: 414,
+    k: 4,
+    best: 459,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout/json-pkg.txt',
+    type: 'text',
+    base: 1152,
+    k: 4,
+    best: 1149,
+    sites: 33
+  },
+  {
+    path: 'bench/holdout/json-pkg.txt',
+    type: 'message',
+    base: 653,
+    k: 4,
+    best: 698,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout/code-ts.txt',
+    type: 'text',
+    base: 1422,
+    k: 4,
+    best: 1341,
+    sites: 56
+  },
+  {
+    path: 'bench/holdout/code-ts.txt',
+    type: 'message',
+    base: 949,
+    k: 8,
+    best: 994,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x42/dpkg-l.txt',
+    type: 'text',
+    base: 1000,
+    k: undefined,
+    best: undefined,
+    sites: undefined
+  },
+  {
+    path: 'bench/holdout-x42/dpkg-l.txt',
+    type: 'message',
+    base: 623,
+    k: undefined,
+    best: undefined,
+    sites: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ps-real.txt',
+    type: 'text',
+    base: 1106,
+    k: 4,
+    best: 727,
+    sites: 44
+  },
+  {
+    path: 'bench/holdout-x41/ps-real.txt',
+    type: 'message',
+    base: 381,
+    k: 4,
+    best: 426,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-tbl/kubectl-get-pods.txt',
+    type: 'text',
+    base: 1006,
+    k: 8,
+    best: 838,
+    sites: 31
+  },
+  {
+    path: 'bench/holdout-tbl/kubectl-get-pods.txt',
+    type: 'message',
+    base: 300,
+    k: 4,
+    best: 345,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x40/metrics.tsv',
+    type: 'text',
+    base: 811,
+    k: 4,
+    best: 696,
+    sites: 23
+  },
+  {
+    path: 'bench/holdout-x40/metrics.tsv',
+    type: 'message',
+    base: 197,
+    k: 4,
+    best: 242,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    type: 'text',
+    base: 3054,
+    k: 4,
+    best: 2005,
+    sites: 136
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    type: 'message',
+    base: 980,
+    k: 4,
+    best: 1025,
+    sites: 0
+  },
+  {
+    path: 'bench/holdout-x41/apt-real.txt',
+    type: 'text',
+    base: 2739,
+    k: undefined,
+    best: undefined,
+    sites: undefined
+  },
+  {
+    path: 'bench/holdout-x41/apt-real.txt',
+    type: 'message',
+    base: 813,
+    k: undefined,
+    best: undefined,
+    sites: undefined
+  },
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    type: 'text',
+    base: 5194,
+    k: 4,
+    best: 2984,
+    sites: 260
+  },
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    type: 'message',
+    base: 1310,
+    k: 4,
+    best: 1355,
+    sites: 0
+  }
+]

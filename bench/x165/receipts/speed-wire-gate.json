@@ -1,0 +1,14 @@
+[
+  {
+    "experiment": "cache-speed",
+    "identicalCanonicalWires": 12
+  },
+  {
+    "experiment": "repaired-cache-speed",
+    "identicalCanonicalWires": 12
+  },
+  {
+    "experiment": "combined-cache-speed",
+    "identicalCanonicalWires": 12
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "sources": 34,
+  "deiktisPlans": 166,
+  "deiktisEligibleSources": 29,
+  "deiktisRawCompleteWins": 20,
+  "blockSortRawCompleteWins": 8,
+  "camelRawCompleteWins": 0,
+  "colexRawCompleteWins": 1,
+  "lexarithmosRawCompleteWins": 0,
+  "scope": "Final code-point-explicit contract; raw + own contract only, not full-parent advantage"
+}

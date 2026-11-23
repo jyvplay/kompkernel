@@ -1,0 +1,240 @@
+[
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    raw: 5194,
+    deiktis: 2981,
+    bwt: 4893,
+    camel: 5375
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    raw: 3054,
+    deiktis: 2002,
+    bwt: 2730,
+    camel: 3100
+  },
+  {
+    path: 'bench/holdout-x42/dpkg-l.txt',
+    raw: 1000,
+    deiktis: 939,
+    bwt: 1011,
+    camel: 1084
+  },
+  {
+    path: 'bench/holdout/json-pkg.txt',
+    raw: 1152,
+    deiktis: 1146,
+    bwt: 1129,
+    camel: undefined
+  },
+  {
+    path: 'bench/holdout-x40/metrics.tsv',
+    raw: 811,
+    deiktis: 693,
+    bwt: 867,
+    camel: 843
+  },
+  {
+    path: 'bench/holdout-x41/ls-real.txt',
+    raw: 1034,
+    deiktis: 716,
+    bwt: 1058,
+    camel: 1103
+  },
+  {
+    path: 'bench/holdout-x42/df-h.txt',
+    raw: 140,
+    deiktis: 167,
+    bwt: 186,
+    camel: 172
+  },
+  {
+    path: 'bench/holdout-work/llm-answer.md',
+    raw: 733,
+    deiktis: 771,
+    bwt: 792,
+    camel: 857
+  },
+  {
+    path: 'bench/holdout-tbl/df-h.txt',
+    raw: 570,
+    deiktis: 608,
+    bwt: 573,
+    camel: 602
+  },
+  {
+    path: 'bench/holdout-work/email-thread.txt',
+    raw: 629,
+    deiktis: 612,
+    bwt: 685,
+    camel: 767
+  },
+  {
+    path: 'bench/holdout-x41/du-real.txt',
+    raw: 458,
+    deiktis: 439,
+    bwt: 513,
+    camel: 490
+  },
+  {
+    path: 'bench/holdout-x42/lsblk.txt',
+    raw: 60,
+    deiktis: undefined,
+    bwt: 115,
+    camel: 93
+  },
+  {
+    path: 'bench/holdout-x42b/uptime-w.txt',
+    raw: 80,
+    deiktis: undefined,
+    bwt: 136,
+    camel: 113
+  },
+  {
+    path: 'bench/holdout-tbl/kubectl-get-pods.txt',
+    raw: 1006,
+    deiktis: 835,
+    bwt: 956,
+    camel: 1038
+  },
+  {
+    path: 'bench/holdout/code-ts.txt',
+    raw: 1422,
+    deiktis: 1338,
+    bwt: 1434,
+    camel: 1532
+  },
+  {
+    path: 'bench/holdout-x41/apt-real.txt',
+    raw: 2739,
+    deiktis: undefined,
+    bwt: 2795,
+    camel: 2772
+  },
+  {
+    path: 'bench/holdout-x41/node-help.txt',
+    raw: 1099,
+    deiktis: 1104,
+    bwt: 1120,
+    camel: 1319
+  },
+  {
+    path: 'bench/holdout-x42/findmnt.txt',
+    raw: 787,
+    deiktis: 624,
+    bwt: 838,
+    camel: 820
+  },
+  {
+    path: 'bench/holdout-x40/cue-sheet.md',
+    raw: 513,
+    deiktis: 531,
+    bwt: 569,
+    camel: 545
+  },
+  {
+    path: 'bench/holdout-x42/ps-ef.txt',
+    raw: 1144,
+    deiktis: 622,
+    bwt: 1064,
+    camel: 1176
+  },
+  {
+    path: 'bench/holdout-x41/df-real.txt',
+    raw: 158,
+    deiktis: 185,
+    bwt: 205,
+    camel: 191
+  },
+  {
+    path: 'bench/holdout-x41/ps-real.txt',
+    raw: 1106,
+    deiktis: 724,
+    bwt: 1033,
+    camel: 1139
+  },
+  {
+    path: 'bench/holdout-x40/prices.csv',
+    raw: 582,
+    deiktis: undefined,
+    bwt: 638,
+    camel: 614
+  },
+  {
+    path: 'bench/holdout-tbl/psql-output.txt',
+    raw: 675,
+    deiktis: 689,
+    bwt: 695,
+    camel: 707
+  },
+  {
+    path: 'bench/holdout-tbl/markdown-table.md',
+    raw: 330,
+    deiktis: 362,
+    bwt: 386,
+    camel: 362
+  },
+  {
+    path: 'bench/holdout-work/kb-article.txt',
+    raw: 656,
+    deiktis: 697,
+    bwt: 712,
+    camel: 981
+  },
+  {
+    path: 'bench/holdout-work/unified-diff.patch',
+    raw: 578,
+    deiktis: 569,
+    bwt: 635,
+    camel: 622
+  },
+  {
+    path: 'bench/holdout-x42b/free-m.txt',
+    raw: 76,
+    deiktis: undefined,
+    bwt: 131,
+    camel: 108
+  },
+  {
+    path: 'bench/holdout-x42b/vmstat.txt',
+    raw: 229,
+    deiktis: 219,
+    bwt: 259,
+    camel: 264
+  },
+  {
+    path: 'bench/x165/fixtures/BurntSushi_ripgrep-GUIDE.md',
+    raw: 10430,
+    deiktis: 9467,
+    bwt: 10492,
+    camel: undefined
+  },
+  {
+    path: 'bench/x165/fixtures/astral-sh_uv-README.md',
+    raw: 2760,
+    deiktis: 2531,
+    bwt: 2817,
+    camel: undefined
+  },
+  {
+    path: 'bench/x165/fixtures/pallets_flask-quickstart.rst',
+    raw: 7077,
+    deiktis: 6792,
+    bwt: 7000,
+    camel: 8564
+  },
+  {
+    path: 'bench/x165/fixtures/psf_requests-quickstart.rst',
+    raw: 4591,
+    deiktis: 4205,
+    bwt: 4532,
+    camel: 5374
+  },
+  {
+    path: 'bench/x165/fixtures/redis_redis-README.md',
+    raw: 7255,
+    deiktis: 6738,
+    bwt: 7285,
+    camel: 8787
+  }
+]

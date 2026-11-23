@@ -1,0 +1,7 @@
+{
+  "production": false,
+  "helper": "\n// X165 benchmark-only: exact paged short-run counts, no string allocation on hits.\nconst x165Pages=new Map<string,Map<number,Uint8Array>>();\nfunction x165Short(slots:number[],values:string[],enc:EncodingName):number|undefined {\n if(slots.length<1||slots.length>2)return undefined;\n const a=values[slots[0]],b=slots.length===2?values[slots[1]]:'';\n if(a.length!==1||b.length!==(slots.length===2?1:0))return undefined;\n const c=a.charCodeAt(0),d=b?b.charCodeAt(0):0;\n const page=(c>>>8)*512+(b?(d>>>8):256),index=((c&255)<<8)|(d&255);\n let pages=x165Pages.get(enc);if(!pages){pages=new Map();x165Pages.set(enc,pages);}\n let p=pages.get(page);if(!p){if(pages.size>=128)pages.clear();p=new Uint8Array(65536);pages.set(page,p);}\n const hit=p[index];if(hit)return hit;\n const n=countTokens(a+b,enc);if(n>0&&n<256)p[index]=n;return n;\n}\n",
+  "scope": "two delta scorers, ≤2 one-UTF16-unit glyph runs; all other calls unchanged",
+  "maxPagesPerEncoding": 128,
+  "pageBytes": 65536
+}

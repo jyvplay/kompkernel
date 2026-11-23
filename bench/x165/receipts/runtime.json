@@ -1,0 +1,15 @@
+{
+  "dateAuthority": "2026-11-14",
+  "node": "v22.22.3",
+  "python": "Python 3.11.2",
+  "gh": "gh version 2.23.0 (2023-02-27 Debian 2.23.0+dfsg1-1)",
+  "lean": null,
+  "lake": null,
+  "independentAgents": 0,
+  "simulators": 0,
+  "nativeChatEndpoint": "NOT_EXPOSED",
+  "database": "NOT_USED",
+  "packageLockSha256": "1d139641822d3b09140875a01aff30e7a062a3fb631b70460fb2b1b6b0d7c5d8",
+  "baseCommit": "32c56de7630de724674362be064673568c578a50",
+  "branch": "arena/8b3b4f30-kompkernel"
+}

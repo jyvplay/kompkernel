@@ -1,0 +1,42 @@
+[
+  {
+    "repo": "psf/requests",
+    "path": "docs/user/quickstart.rst",
+    "revision": "3c7baaa05ab4aa49cc819ce3a819d260de19c157",
+    "file": "bench/x165/fixtures/psf_requests-quickstart.rst",
+    "bytes": 19213,
+    "sha256": "5914de6a636d91ca2ca3a0df55ef8e57359e3fe364fb7176fdee60d231fe2e9f"
+  },
+  {
+    "repo": "pallets/flask",
+    "path": "docs/quickstart.rst",
+    "revision": "49943b5a94413a530761350f04e896f76e8d620e",
+    "file": "bench/x165/fixtures/pallets_flask-quickstart.rst",
+    "bytes": 30055,
+    "sha256": "c17e0dac53c25f5cca0c18fd00e4f9549038f16d6ac5569ec2c97c7178744629"
+  },
+  {
+    "repo": "BurntSushi/ripgrep",
+    "path": "GUIDE.md",
+    "revision": "4a51093f78bfbef86d89275f4916fd6b6039fe9e",
+    "file": "bench/x165/fixtures/BurntSushi_ripgrep-GUIDE.md",
+    "bytes": 41258,
+    "sha256": "97b449c077d11ffbbcf33dae3449850fec880004179ccd5e0468c92ac4b5e911"
+  },
+  {
+    "repo": "astral-sh/uv",
+    "path": "README.md",
+    "revision": "264d8b4a5e10d195d2cc2a34dffa807cfbe6298c",
+    "file": "bench/x165/fixtures/astral-sh_uv-README.md",
+    "bytes": 9859,
+    "sha256": "57a84a5a635f30e3a26541ebc16ca690944a7750f05713b1af92d3170b58f704"
+  },
+  {
+    "repo": "redis/redis",
+    "path": "README.md",
+    "revision": "9d5cd8c2345b49430d598665cbe77b10626fce00",
+    "file": "bench/x165/fixtures/redis_redis-README.md",
+    "bytes": 31255,
+    "sha256": "947c87732c7ec6382a64ac7c637bea474b6aa478f22dcf3d8091bb6ca8bb531d"
+  }
+]
