@@ -1,0 +1,1 @@
+{"path":"bench/x163/fixtures/number-words-en.py","arm":"candidate","sites":14,"tokens":907,"directTokens":2048,"parentTokens":907,"parentAccepted":true,"readerError":null,"accepted":true,"ms":151460.33397900002,"cpuMs":125726.609}

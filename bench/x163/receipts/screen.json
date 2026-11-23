@@ -1,0 +1,102 @@
+[
+  {
+    "name": "bash-guide.md",
+    "chars": 34813,
+    "sites": 0,
+    "raw": 10187,
+    "direct": null,
+    "syndesmos": false,
+    "eirmos": false,
+    "akrostichis": false
+  },
+  {
+    "name": "bash-handbook.md",
+    "chars": 41015,
+    "sites": 44,
+    "raw": 10285,
+    "direct": 10200,
+    "syndesmos": true,
+    "eirmos": false,
+    "akrostichis": false
+  },
+  {
+    "name": "bash-oneliner.md",
+    "chars": 79184,
+    "sites": 0,
+    "raw": 24142,
+    "direct": null,
+    "syndesmos": false,
+    "eirmos": false,
+    "akrostichis": false
+  },
+  {
+    "name": "command-line.md",
+    "chars": 40804,
+    "sites": 14,
+    "raw": 10617,
+    "direct": 10627,
+    "syndesmos": true,
+    "eirmos": false,
+    "akrostichis": false
+  },
+  {
+    "name": "markdownlint.md",
+    "chars": 38297,
+    "sites": 2,
+    "raw": 9981,
+    "direct": 10025,
+    "syndesmos": true,
+    "eirmos": false,
+    "akrostichis": false
+  },
+  {
+    "name": "ohmyzsh.md",
+    "chars": 23356,
+    "sites": 35,
+    "raw": 6132,
+    "direct": 6044,
+    "syndesmos": true,
+    "eirmos": false,
+    "akrostichis": false
+  },
+  {
+    "name": "pure-sh.md",
+    "chars": 25558,
+    "sites": 59,
+    "raw": 7363,
+    "direct": 7122,
+    "syndesmos": false,
+    "eirmos": false,
+    "akrostichis": false
+  },
+  {
+    "name": "shellcheck.md",
+    "chars": 21177,
+    "sites": 27,
+    "raw": 5416,
+    "direct": 5378,
+    "syndesmos": true,
+    "eirmos": false,
+    "akrostichis": false
+  },
+  {
+    "name": "shellguide.md",
+    "chars": 42008,
+    "sites": 3,
+    "raw": 10626,
+    "direct": 10667,
+    "syndesmos": true,
+    "eirmos": false,
+    "akrostichis": false
+  },
+  {
+    "name": "shellharden.md",
+    "chars": 37186,
+    "sites": 0,
+    "raw": 8731,
+    "direct": null,
+    "syndesmos": true,
+    "eirmos": false,
+    "akrostichis": false
+  }
+]

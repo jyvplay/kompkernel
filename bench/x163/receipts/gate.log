@@ -1,0 +1,46 @@
+{
+  checks: 40,
+  rows: [
+    {
+      name: 'num-en',
+      arm: 'candidate',
+      base: 850,
+      candidate: 907,
+      selected: 850,
+      saved: 0,
+      applied: false,
+      sourceBytes: 8326
+    },
+    {
+      name: 'num-ng',
+      arm: 'candidate',
+      base: 451,
+      candidate: 502,
+      selected: 451,
+      saved: 0,
+      applied: false,
+      sourceBytes: 4077
+    },
+    {
+      name: 'ruby',
+      arm: 'memory',
+      base: 675,
+      candidate: 651,
+      selected: 651,
+      saved: 24,
+      applied: true,
+      sourceBytes: 4210
+    },
+    {
+      name: 'code-ts',
+      arm: 'memory',
+      base: 949,
+      candidate: 1018,
+      selected: 949,
+      saved: 0,
+      applied: false,
+      sourceBytes: 6000
+    }
+  ],
+  canonicalPlans: [ { path: 'bench/holdout/code-ts.txt', explicit: 0, memory: 1 } ]
+}

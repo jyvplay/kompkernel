@@ -1,0 +1,25 @@
+{
+  "google": {
+    "witness": "solution_1 only",
+    "source": "bench/x162/research/google-sums.txt (pinned X162 provenance)",
+    "size": 2003,
+    "pairsPerSet": 4012009,
+    "sumCardinality": 93803,
+    "differenceCardinality": 807667,
+    "max": 1040200,
+    "expression60Digit": "1.14798889650927569576154058605285624629862994414552400218432",
+    "scope": "exact finite counts; decimal expression is numerical, imported asymptotic theorem NOT proved here",
+    "large54265Witness": "NOT_RUN"
+  },
+  "doubleai": {
+    "twoClauseThreeVariableAssignmentChecks": 14792,
+    "emptyClauseAndFormulaAndInvalidLiteralAttacks": true,
+    "actualLRATOrChessProof": "NOT_VERIFIED"
+  },
+  "openai": {
+    "distinctChargeRemovalChecks": 18,
+    "duplicateCounterexampleToOmittingNodup": true,
+    "kernelReplay": false
+  },
+  "elapsedSeconds": 1.896618152999963
+}

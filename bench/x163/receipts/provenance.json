@@ -1,0 +1,137 @@
+[
+  {
+    "repo": "jlevy/the-art-of-command-line",
+    "path": "README.md",
+    "revision": "6b50745d2e788add2e8f1ed29010e72659a9a074",
+    "file": "command-line.md",
+    "sha256": "4d2d70679c81a99e0dd2bcc1ee4f56530e3d0810c9cd3c24dcff20da7b817001",
+    "bytes": 40906,
+    "selection": "complete unedited sources before candidate prices"
+  },
+  {
+    "repo": "davidanson/markdownlint",
+    "path": "README.md",
+    "revision": "92992da11c2da77f8c4261378563098f3dc77f80",
+    "file": "markdownlint.md",
+    "sha256": "1d3850d584c413f7e165cf01db77afae2466c683166cfa055794e228c6610c0b",
+    "bytes": 38297,
+    "selection": "complete unedited sources before candidate prices"
+  },
+  {
+    "repo": "denysdovhan/bash-handbook",
+    "path": "README.md",
+    "revision": "662be2812b342f1f96581e444a3ab5b9df286963",
+    "file": "bash-handbook.md",
+    "sha256": "f17bc254731d49bf3f1d2d16a50394f81da9f9d452f495b3578a774c732ee422",
+    "bytes": 41072,
+    "selection": "complete unedited sources before candidate prices"
+  },
+  {
+    "repo": "google/styleguide",
+    "path": "shellguide.md",
+    "revision": "8bdadbb0732b387aaa26f553dd9033484d1a2071",
+    "file": "shellguide.md",
+    "sha256": "fe70ba34e153e09a4666bbc9c2f2eac3607160e0efd27ce35b08259b4969f47a",
+    "bytes": 42102,
+    "selection": "complete unedited sources before candidate prices"
+  },
+  {
+    "repo": "Idnan/bash-guide",
+    "path": "README.md",
+    "revision": "3dbbd49375f2ec8e856e56c24b98c255412f3ecc",
+    "file": "bash-guide.md",
+    "sha256": "3e584a17224293e891a2d71ab2ea381b868c8db8a462ec99ada62e757adb8383",
+    "bytes": 34841,
+    "selection": "complete unedited sources before candidate prices"
+  },
+  {
+    "repo": "onceupon/Bash-Oneliner",
+    "path": "README.md",
+    "revision": "124d815bab96d8ea7a23692ef8c06c1157cb1b44",
+    "file": "bash-oneliner.md",
+    "sha256": "d9fd10ff2e25a1648dd8975a549bbb2c9cc6ec05f2c2dadff4951440b17442f6",
+    "bytes": 79314,
+    "selection": "complete unedited sources before candidate prices"
+  },
+  {
+    "repo": "dylanaraps/pure-sh-bible",
+    "path": "README.md",
+    "revision": "26bc7e8d6cfb8716e9ccb97f31c2da80468c5737",
+    "file": "pure-sh.md",
+    "sha256": "b948b8436cfd40ac15332317b81374cdc29e4e3933a1472c51c09a04b577de55",
+    "bytes": 25566,
+    "selection": "complete unedited sources before candidate prices"
+  },
+  {
+    "repo": "anordal/shellharden",
+    "path": "how_to_do_things_safely_in_bash.md",
+    "revision": "ee7e7a5b6abd2f63c9525b45a67c3ac8ac7aa666",
+    "file": "shellharden.md",
+    "sha256": "4fd2592dd1a878323204e6f8357b9ba03d8a5db20ff082d9bbd4681797c5d776",
+    "bytes": 37285,
+    "selection": "prospective complete unedited shell guidance after design freeze, before screening/pricing"
+  },
+  {
+    "repo": "ohmyzsh/ohmyzsh",
+    "path": "README.md",
+    "revision": "87aa1a9b892a3b150f93c53b577a2ec67e617f30",
+    "file": "ohmyzsh.md",
+    "sha256": "50c4dbf1674d850707601b1124ec6eaffebe29ba48696a79094b6f1454583393",
+    "bytes": 23381,
+    "selection": "prospective complete operational README after design freeze before screening/pricing"
+  },
+  {
+    "repo": "koalaman/shellcheck",
+    "path": "README.md",
+    "revision": "70f8c60a55cfd4a682196e6d84588dd5adf5d402",
+    "file": "shellcheck.md",
+    "sha256": "be69ca34f3b506c9d3736054a9420942f1c27b026508dec24d0fc53fa6c43721",
+    "bytes": 21181,
+    "selection": "prospective complete operational README after design freeze before screening/pricing"
+  },
+  {
+    "repo": "savoirfairelinux/num2words",
+    "path": "tests/test_en.py",
+    "revision": "07814cb114157f582c40a00119c2e9faba8dcee2",
+    "file": "number-words-en.py",
+    "sha256": "6ac8f298ca51efe254fe28c2a93c3750e79aadf304c9e2def3d9c02fe281b3b3",
+    "bytes": 8326,
+    "selection": "complete real number-word regression source before new candidate price"
+  },
+  {
+    "repo": "savoirfairelinux/num2words",
+    "path": "tests/test_en_ng.py",
+    "revision": "07814cb114157f582c40a00119c2e9faba8dcee2",
+    "file": "number-words-ng.py",
+    "sha256": "f12ec8cfcc75892a700a76c703d0f73c3bc3a240edf2cecf0a9b3feb1bd8ed61",
+    "bytes": 4077,
+    "selection": "prospective unedited real regression source after numeral design freeze before prices"
+  },
+  {
+    "repo": "jaraco/inflect",
+    "path": "tests/test_numwords.py",
+    "revision": "2084a52769175d8159474779f7cfa71f08f2f911",
+    "file": "inflect-numwords.py",
+    "sha256": "9a8e8d80453c4fe9498bd260dcaf74ca9b33e0777760157fd753afb239904b2d",
+    "bytes": 18966,
+    "selection": "prospective unedited real regression source after numeral design freeze before prices"
+  },
+  {
+    "repo": "markburns/numbers_in_words",
+    "path": "spec/numbers_in_words_spec.rb",
+    "revision": "8bab6e7ab6dbd06be9f2b999ca350174076df867",
+    "file": "ruby-number-words.rb",
+    "sha256": "6abbdb25b6cdbea4a726f8a3786f55f945f2ae2b8dae39d76d7936eb83346247",
+    "bytes": 4210,
+    "selection": "prospective whole Ruby sources after contextual numeral arm freeze before screening/pricing"
+  },
+  {
+    "repo": "markburns/numbers_in_words",
+    "path": "spec/writer_spec.rb",
+    "revision": "8bab6e7ab6dbd06be9f2b999ca350174076df867",
+    "file": "ruby-writer.rb",
+    "sha256": "48e1446add9897c029807ab9ae99b96810b3200032916e90daae863615712b44",
+    "bytes": 568,
+    "selection": "prospective whole Ruby sources after contextual numeral arm freeze before screening/pricing"
+  }
+]

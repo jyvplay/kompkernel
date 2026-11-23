@@ -1,0 +1,7 @@
+{
+  "checks": 43732,
+  "seed": 163,
+  "exhaustiveNumbers": 10000,
+  "randomNumbers": 1000,
+  "passed": true
+}

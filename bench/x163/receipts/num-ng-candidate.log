@@ -1,0 +1,1 @@
+{"path":"bench/x163/fixtures/number-words-ng.py","arm":"candidate","sites":7,"tokens":502,"directTokens":884,"parentTokens":502,"parentAccepted":true,"readerError":null,"accepted":true,"ms":21234.548467999997,"cpuMs":19942.896}

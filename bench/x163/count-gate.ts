@@ -1,0 +1,6 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import crypto from 'node:crypto';import {countTokens,countTokensExact,type EncodingName} from '../../src/lib/omega/bpe';
+let seed=163,checks=0;const rnd=()=>seed=(Math.imul(seed,1664525)+1013904223)>>>0;const hash=crypto.createHash('sha256');const cases=['','x'.repeat(2000),' '.repeat(2000),'\ufeff'.repeat(25),'\ud800'.repeat(30),'a\udc00z'.repeat(30),'\r\n'.repeat(100),'中é😀'.repeat(100)];
+for(let i=0;i<2000;i++){let s='';for(let k=0;k<30+rnd()%400;k++)s+=i%3?String.fromCharCode(32+rnd()%96):String.fromCharCode(rnd()%65536);cases.push(s);}
+for(const file of fs.readFileSync('bench/x163/lanesB.txt','utf8').trim().split('\n'))cases.push(fs.readFileSync(file,'utf8'));
+for(const enc of ['o200k_base','cl100k_base'] as EncodingName[])for(const s of cases)for(const suffix of ['',' ','\n','   x']){const text=s+suffix,got=countTokens(text,enc),want=countTokensExact(text,enc);assert.equal(got,want);hash.update(enc+'\0'+got+'\0');checks++;}
+console.log(JSON.stringify({checks,seed:163,hash:hash.digest('hex'),scope:'reference exact counts; both encodings, Unicode, lone surrogates, whitespace boundary and prefix resumption variants'}));

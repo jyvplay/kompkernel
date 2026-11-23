@@ -170,3 +170,13 @@ bench/x162/*.mjs
 !bench/x162/speed-build.mjs
 
 bench/x162/*.cpuprofile
+
+# X163 generated bundles and profiler output
+bench/x163/*.mjs
+!bench/x163/speed-build.mjs
+bench/x163/*.cpuprofile
+.cache/x163/
+
+!bench/x163/cache-build.mjs
+
+bench/x163/*.heapprofile

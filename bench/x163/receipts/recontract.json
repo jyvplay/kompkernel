@@ -1,0 +1,16 @@
+[
+  {
+    "name": "ruby",
+    "oldTokens": 662,
+    "tokens": 651,
+    "unchangedParent": true,
+    "sourceBytesEqual": true
+  },
+  {
+    "name": "code-ts",
+    "oldTokens": 1029,
+    "tokens": 1018,
+    "unchangedParent": true,
+    "sourceBytesEqual": true
+  }
+]

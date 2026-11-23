@@ -1,0 +1,30 @@
+Decode first. Expand ^N into lowercase British English cardinal words: hyphenate tens-units, use "and" after hundreds with a remainder and after thousands only when the remainder is below 100; no commas. A bare ^ uses the last literal digit run. Operands do not update literal memory. Preserve everything else; print only.
+¶ k=v. expand repeatedly; print only.
+§Нin_words).к.Нрto eqур('іку^ы    expect(дын')
+пнда1скуminus ^нд-и еи end
+
+и it 'shouldхне handleТ
+О' doТП two three four five six seven eightэда_000_г and oneны(ъ pointП/)
+дү googolҟ,иц.in_words)
+      .ю.2345678оto match(/^ә10**ш +ий = %w[Ѕ_999і999Ап999Ѕ999т).Нуз    endТИО   ве print the digitsияэ001куone millionУ digit numbersОдРИ it doТ      expect(NumbersInWords.inќи describe '.inл100қ9¶# frozen_string_literal: true
+
+require './spec/spec_helper'
+
+describe NumbersInWords do # rubocop: disable Metrics/BlockLengthТќ_wordsР_words(л)).р '^'
+зи end
+
+ќ_numbersР_numbers('one-hundred')).рилТзв0-қ correctlyИ numbersйzero oneП nine]
+
+    а0.times { |i| expect(iкр(numbers[i]) }
+ва1-ақ correctlyИ wordsйeleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen]
+    numbers = [ааҟ12ҟ13ҟ14ҟ15ҟ16ҟ17ҟ18ҟ19]
+    numbers.each_with_index do |number, index|
+ идnumberкр(words[index])
+зе handle twoУ21іх threeУ113іп299іп300іп101іне print out some random examples correctlyОд2999іп99Ѕ99Ап123_456і123456нд24_056і24056нд17_054і17054нда1_004іаа004нд470_154і470154нд417_155і417155Анэ000куone millionня and oneнд112іх edge casesОяг10 * ә12шә6шатten trillion ^ millionгә75тone quattuorvigintillionнда0_001_00акуten million ^лах aү and largerИү = әлТы(googolшат^үг42 *үш16_777_216)цуforty-twoү sixteen million ^777216нд(42 *ү *үт^үүх negative numbersОд-асқс10с15слкуminus ^ны(-1 * (әл)тminus oneүнТы-123_456_789цуminus ^123 million four hundred and ' \
+             '^56789х decimalsИ # because of lack of absolute accuracy with floats
+    # the output won't be exactly as you might expect
+    # so we will match rather than find equivalentsТда.ако point ^/)
+даюкto match(/oneъл0юкол0ъ12_345юцо12345 pointП/)
+Ты(әқш0.а)ко billion point ^/)
+  end
+end

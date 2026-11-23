@@ -1,0 +1,1 @@
+{"path":"bench/x163/fixtures/ruby-number-words.rb","arm":"candidate","sites":35,"reuses":20,"digitLists":0,"tokens":662,"directTokens":1131,"parentTokens":662,"parentAccepted":true,"readerError":null,"accepted":true,"ms":42459.687432,"cpuMs":30193.752}

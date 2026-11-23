@@ -1,0 +1,132 @@
+[
+  {
+    name: 'bash-guide.md',
+    chars: 34813,
+    sites: 0,
+    raw: 10187,
+    direct: null,
+    syndesmos: false,
+    eirmos: false,
+    akrostichis: false
+  },
+  {
+    name: 'bash-handbook.md',
+    chars: 41015,
+    sites: 0,
+    raw: 10285,
+    direct: null,
+    syndesmos: true,
+    eirmos: false,
+    akrostichis: false
+  },
+  {
+    name: 'bash-oneliner.md',
+    chars: 79184,
+    sites: 0,
+    raw: 24142,
+    direct: null,
+    syndesmos: false,
+    eirmos: false,
+    akrostichis: false
+  },
+  {
+    name: 'command-line.md',
+    chars: 40804,
+    sites: 0,
+    raw: 10617,
+    direct: null,
+    syndesmos: true,
+    eirmos: false,
+    akrostichis: false
+  },
+  {
+    name: 'inflect-numwords.py',
+    chars: 18966,
+    sites: 74,
+    raw: 4722,
+    direct: 4607,
+    syndesmos: false,
+    eirmos: false,
+    akrostichis: false
+  },
+  {
+    name: 'markdownlint.md',
+    chars: 38297,
+    sites: 0,
+    raw: 9981,
+    direct: null,
+    syndesmos: true,
+    eirmos: false,
+    akrostichis: false
+  },
+  {
+    name: 'number-words-en.py',
+    chars: 8326,
+    sites: 14,
+    raw: 2006,
+    direct: 2048,
+    syndesmos: false,
+    eirmos: false,
+    akrostichis: false
+  },
+  {
+    name: 'number-words-ng.py',
+    chars: 4077,
+    sites: 7,
+    raw: 835,
+    direct: 884,
+    syndesmos: false,
+    eirmos: false,
+    akrostichis: false
+  },
+  {
+    name: 'ohmyzsh.md',
+    chars: 23356,
+    sites: 0,
+    raw: 6132,
+    direct: null,
+    syndesmos: true,
+    eirmos: false,
+    akrostichis: false
+  },
+  {
+    name: 'pure-sh.md',
+    chars: 25558,
+    sites: 0,
+    raw: 7363,
+    direct: null,
+    syndesmos: false,
+    eirmos: false,
+    akrostichis: false
+  },
+  {
+    name: 'shellcheck.md',
+    chars: 21177,
+    sites: 0,
+    raw: 5416,
+    direct: null,
+    syndesmos: true,
+    eirmos: false,
+    akrostichis: false
+  },
+  {
+    name: 'shellguide.md',
+    chars: 42008,
+    sites: 0,
+    raw: 10626,
+    direct: null,
+    syndesmos: true,
+    eirmos: false,
+    akrostichis: false
+  },
+  {
+    name: 'shellharden.md',
+    chars: 37186,
+    sites: 0,
+    raw: 8731,
+    direct: null,
+    syndesmos: true,
+    eirmos: false,
+    akrostichis: false
+  }
+]
