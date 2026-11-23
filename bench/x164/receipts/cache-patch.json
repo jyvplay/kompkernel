@@ -1,0 +1,7 @@
+{
+  "production": false,
+  "cache": "bpe-fast.CHUNK_CACHE",
+  "before": 2097152,
+  "after": 65536,
+  "policy": "unchanged clear-on-capacity, exact full-string keys, no search changes"
+}

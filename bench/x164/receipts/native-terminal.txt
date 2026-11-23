@@ -1,0 +1,26 @@
+Decode first; replace <> with the matching XML end tag. Preserve everything else; print only.
+¶ k=v. expand repeatedly; print only.
+§тBuildCacheдMSтәPackageрдәа$(г 'ү)' ==гtrue'лGroup Condition="'адEnabledүшдIdenticalDuplicateOutputPatternsндәNameчMicrosoft.дц<в    ці -->
+ву Condition="'ае>
+
+й    <!--Лцейм>ӷмаMSBuildThisFileDirectoryҙәRootӷ)packages\НдAllowFileAccessAfterProjectFinishFilePatternsо>
+ҳ  <жоҳеҳС;
+     ЕС $(LocalAppData)\Microsoft\О)' == ''">кPackagesConfigFileАвImport Project="$(х the cacheИ\**бMsтEnabledї.
+   ішмаш);яовдзRoot)\build\с)<иPropertyө">
+ыVersion¶<Projectоҳ!--
+    NOTE! This file gets written-over entirely by the release builds.
+    Any build logic in this file must be optional and only apply to non-release builds.
+  -->
+
+  <!-- Msт --оҳиGroupой Off by defaultібубОfalseЛ Always off during package restoreіб Condition="гаExcludeRestorePackageImportsү ">falseцей In Azure pipelines, use Pipeline Caching asх storage backend. Otherwise, use the local cache.інуTF_BUILD)' != ''">ч.AzurePipelinesцовнунОч.Localцжилөй Change this to bustхідCacheUniverseудCacheUniverseО202310210737Л
+      Visual Studio telemetry reads various ApplicationInsights.config files and other files after the project is finished, likely in a detached process.
+      This is acceptable and should not impact cache correctness.
+   іНо      $(Н);
+      И\ApplicationInsights.configЕVSApplicationInsightsИЕWindows\INetCacheИС A:\С E:\С аwindir)\**;
+вей 
+      This repo uses a common output directory with many projects writing duplicate outputs. Allow everything, but note this costs some performance in the form of requiring
+     х to use copies instead of hardlinks when pulling from cacheїbinИЛ 
+      vcpkg is invoked for each and every vcxproj and each invocation uses the same base dir for logging, so allow these duplicate "outputs"їobj\*\vcpkgИЛ version of д is not part ofх keyікӷ)\dep\nuget\packages.configцяIgnoredInputPatternsмадIgnoredInputPatterns);аксжил andгарRootО
+вPackagesConfigContents>$([System.IO.File]::ReadAllText("ак)")соврыма[System.Text.RegularExpressions.Regex]::Match($(PackagesConfigContents),гч.*?version="(.*?)"').Groups[1].Valueсяҙан).арысяSharedCompilationҙч.SharedCompilation.арысжImportлөАрзан).props" />
+АдSharedCompilationәзч.SharedCompilation.props" />
+ҳо<>

@@ -1,0 +1,23 @@
+[
+  {
+    "file": "files-browse-candidate.json",
+    "oldTokens": 811,
+    "tokens": 798,
+    "parentUnchanged": true,
+    "sourceBytesEqual": true
+  },
+  {
+    "file": "net-wireless-connect-candidate.json",
+    "oldTokens": 814,
+    "tokens": 801,
+    "parentUnchanged": true,
+    "sourceBytesEqual": true
+  },
+  {
+    "file": "terminal-candidate.json",
+    "oldTokens": 589,
+    "tokens": 576,
+    "parentUnchanged": true,
+    "sourceBytesEqual": true
+  }
+]

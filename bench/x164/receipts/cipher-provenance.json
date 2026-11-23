@@ -1,0 +1,18 @@
+[
+  {
+    "repo": "c00kiemon5ter/ioccc-obfuscated-c-contest",
+    "revision": "04a21846149c768e1d856f947ac2527c00cafd96",
+    "path": "2015/burton/src.doc.rot13",
+    "file": "2015.rot13",
+    "bytes": 2158,
+    "sha256": "1599b33fa28de847eecf8c77e0f021c79f5c3dd3e912aa9f31179148bc025eea"
+  },
+  {
+    "repo": "c00kiemon5ter/ioccc-obfuscated-c-contest",
+    "revision": "04a21846149c768e1d856f947ac2527c00cafd96",
+    "path": "2018/burton2/src.doc.rot13",
+    "file": "2018.rot13",
+    "bytes": 1882,
+    "sha256": "43658162f586192b6559d9ea167a1a4234d033ed29d4b4525908f14136acc907"
+  }
+]

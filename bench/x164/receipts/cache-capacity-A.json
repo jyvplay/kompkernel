@@ -1,0 +1,1 @@
+{"checks":70100,"before":{"hits":0,"misses":70000},"after":{"hits":100,"misses":70000},"scope":"70000distinct lowercase Cyrillic single pre-tokens cross65536capacity; reference tokenizer, then revisit evicted keys"}

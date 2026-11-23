@@ -1,0 +1,20 @@
+Decode first, then rotate ASCII letters forward 13 places in their A-Z or a-z alphabet, wrapping around. Preserve everything else; print only.
+¶ k=v. expand repeatedly; print only.
+§ب
+ف تبفنiچ,i)ر,ىن h(sچ	print i chars of sر or until nullبابني	یا b(i)ي	decode freecode using i bitsادا m(c)ي	want(c), handles escapesٹا d(sچ	is a keyword?
+ھ(iچيcompatقبv gھ_wordsبو256َبpلبية trح r(iچ	print arg1 as int to stdout/err by arg2رةailed by space/newlineکي	globalش j()ييlexerِ mapم tableه0ع3ذ flags¶memory map: Mف(offsetر length)بيهرو	  tokenization flagsلور128	  keyword length offsetِل384,640	  keyword strings (453 chars)
+	1024,32	  option bitِل1056,32   getopt stringبي1088روفةigraph map
+
+freecode: trinaryر alphabetففه { 1 } 2 ;
+	using threeةitsر the alphabet A-Z with a space/null can be encoded:ليه space/nullرف1 Aرف2 Bرفع Cر ...
+	although this encoding is not the only one
+	code is free-form, space agnosticف(one or more spaces are required for it to be 'free')
+	decoding is context dependentرفtypically usingفع or moreةits
+	the program comments use b(ع) and the alphabet encoding aboveربيbut they are not cleanly split onفع-trit boundaries(!)
+
+i Aييcwت Bا C		ccت Dا Eييcxَ F[]ييkeywords, token initرفoptions initرفoption stringرةigraph initت Gا H		comment historyا I		cنت Jا Kييckا L		clبc M[2053]	memory: tokenذر keywordمر optionمرةigraphمت Nَ O		start of whitespaceت Pت Qا R		tsت Sا Tييtkبd Uييdefined usage message (-DU="\"help text\"")
+  Vبd Wييdefined reserved word string (-DW=\"keywords\")ت Xت Yا Zييوافaکی cکٹp e		end of bufferبv fھقىp ني	bufferاشت kافlيي10 / newlineدت nکا oکت pَ qييkeyword indexماحت s		start of tokenتفtتفuافv		cmd lineذت wتفxتفyَ z		current pointer
+
+functions
+
+ىنحدٹنشقv fھی main(cرpp)	initرفoptionsرفreadرفcountرفprint

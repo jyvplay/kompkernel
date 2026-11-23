@@ -1,0 +1,66 @@
+[
+  {
+    "path": "bench/x164/python/cpython-graphlib.py",
+    "bytes": 12482,
+    "sites": 2,
+    "scopes": 1,
+    "raw": 2774,
+    "candidate": 2802
+  },
+  {
+    "path": "bench/x164/python/pandas-encoding.py",
+    "bytes": 21533,
+    "sites": 3,
+    "scopes": 5,
+    "raw": 5318,
+    "candidate": 5347
+  },
+  {
+    "path": "bench/x164/python/pandas-utils.py",
+    "bytes": 17355,
+    "sites": 7,
+    "scopes": 4,
+    "raw": 4073,
+    "candidate": 4104
+  },
+  {
+    "path": "bench/x164/python/pydantic-_generics.py",
+    "bytes": 25593,
+    "sites": 10,
+    "scopes": 7,
+    "raw": 5779,
+    "candidate": 5814
+  },
+  {
+    "path": "bench/x164/python/pydantic-_typing_extra.py",
+    "bytes": 20272,
+    "sites": 0,
+    "scopes": 0,
+    "raw": 4564,
+    "candidate": null
+  },
+  {
+    "path": "bench/x164/python/pytest-structures.py",
+    "bytes": 26244,
+    "sites": 6,
+    "scopes": 6,
+    "raw": 5902,
+    "candidate": 5934
+  },
+  {
+    "path": "bench/x164/python/ruff-generate_mkdocs.py",
+    "bytes": 10157,
+    "sites": 2,
+    "scopes": 1,
+    "raw": 2389,
+    "candidate": 2416
+  },
+  {
+    "path": "bench/x164/python/scikit-learn-_tags.py",
+    "bytes": 10029,
+    "sites": 0,
+    "scopes": 0,
+    "raw": 2264,
+    "candidate": null
+  }
+]

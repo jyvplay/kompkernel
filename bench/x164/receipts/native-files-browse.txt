@@ -1,0 +1,30 @@
+Decode first; replace <> with the matching XML end tag. Preserve everything else; print only.
+¶ k=v. expand repeatedly; print only.
+§з.е <а   ет="паrevision pkgversionт3зь typeтв<>
+    <>
+   еcreditьӡ@gmail.comви>є<>
+     еemailиқ xrefтү windowК">
+     еnameСКирlinkберқы theДтhttp://www.w3.org/200э itчэ in a new tabн>
+
+г<pх.<нгГ" dateт201өз You can alsoй inыў-09-с,ё fileВыё managerуеappиFiles<>к andТ filesк foldersш toцеemиюamigadaveя folderж-click aяшЛ ofымбnautilusЁ" statusтreviewл<олнФЁ"/>
+пі
+ЕauthorУ openА5О"/дй path barшәfiles¶<page xmlnsтhttp://projectmallard.org/1.0/"
+      xmlns:itsДА/11/its"
+      typeтtopic" styleтtask"
+      idтә-browse">
+
+ еinfo>
+арьguide"қә#common-file-tasks"/>
+арьseealso"қә-copyОнпАз92" versionт0.2Г2ў16Ф13.92Г4ў20Ф18ГАў28Ф38" dateт2020-10-16ЁОнаcreditьЕК>Tiffany Antopolskiєtiffany.antopolskiӡЕСShaun McCanceєshaunm@gnome.orgвЕСPhil BullєphilbullӡeditorСMichael HillєmdhillcaӡeditorСDavid Kingєю@ю.com<>
+анаinclude hrefтlegal.xml" xmlnsД1/XIncludeОнаdesc>Manage and organize files withВ.<>
+ ен<title>BrowseТолcomment>
+	г>This page is a feature overviewз There should be a greater visual
+	separation between featuresз Small illustrative figures should be used
+	to display these features where appropriateск video demonstrations of
+	someЛ features might be useful tooз Explain how you can add thingsші	the sidebar (рш a topic or explainэ here).<>
+огиUseыу file managerш browse and organizeы files onіyour computerө useэш manage files on storage devices (like
+external hard disks), onм-connect">file serversлискіon network sharesхиTo startВс openуйілguiқshell-introduction#activities">Activities<> overviewө searchіforТ through the overviewй same way you wouldілlinkқshell-apps-open">search for applicationsлизіолsection idтә-view-folder-contents">
+ еtitle>Exploring the contents of foldersогиInВс double-click anyяш view its contentsскіdouble-click orбmouse-middleclick">middle-clickли anyёшіopenэ with the default application for thatёз Middleжіopenчө rightжУч
+or newүзогиWhen looking through the files in aяс you can quicklyеріxrefтә-preview">preview eachёли by pressingы space barіto be sure you haveы right file before openingэс copyingэс orіdeletingэх>Theцpath barли aboveы list ofТ shows you whichіfolder you’re viewingс includingы parent foldersЛ currentяз
+Click a parentяд goш thatяз Right-click anyіfolderдУч orүс or access itsіpropertiesх>If you want to quicklyбә-search">search for aёл>,
+in or belowыя you are viewingс start typing its nameз Aцsearchіbarли will appear atышpЛүк only files which match yourіsearch will be shownз Pressеkey>Escлиш cancelы searchх>You can quickly access common places fromыцsidebarлиз If you doіnot seeы sidebarс pressыеgui>Show Sidebarли buttonйшp-leftіcornerЛүз You canм-bookmarks-edit">add bookmarksіto folders that you use oftenлик they will appearй sidebarзооли

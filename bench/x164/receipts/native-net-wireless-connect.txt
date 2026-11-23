@@ -1,0 +1,23 @@
+Decode first; replace <> with the matching XML end tag. Preserve everything else; print only.
+¶k=v expand repeatedly and 8 digits become YYYY-MM-DD; print only.
+§д.<я>
+б <ъдя  <>
+ бitemв   біpөъявіт connectionИ="МИnet-wirelessх xrefМу youў"АifНИimageў mimeИimage/svgў srcИfiguresӷrevision pkgversionИг биlinkзвӷ3.к>Ifжява theЕmedia its:translateИnoў typeэў dateИ201Ы typeИКў statusИЛ/РИhttp://www.w3.orgЛ200ҭ networkҳаҭь
+нь Й1.0ОЛЙ/"
+      xmlns:ца name ofҳо"/>
+қови typeИseealsoўє">
+     бname>ђ<>
+     бemail>Б,мБ orһБу may beТИhttp://projectmallard.orgә isФкатәр toшь   ҒвіФ successfulБа icon will changeр a dot withш several curved bars above itш (<ЕНҺbar-network-wireless-signal-excellent.svgў widthИ28ў heightИ28"/>). More barsш indicate a strongerтраҭ. Fewer bars meanаштә weaker and might not be very reliableдя    <>
+үр a wirelessых-troubleshootingПКfinalозе>
+
+л thatс internetю have¶<page xmlnsТОАТ/АОitsР5/11/its"
+     Ыtopicў style="task" versionИЙ АЛЙ"
+      idМ-connect">
+
+ бinfoжиЫguide"х" group="#firstқықх-disconnecting"/ез4.0э20219Кoutdatedоз10э31205П18э50928П33э90717Кcandidateовӷ43" date="20220910Кcandidateон гcreditЫauthorєGNOME Documentation Projectђgnome-doc-list@gnome.org<жжcreditЫeditorєMichael Hillђmdhillca@gmail.com<жевdesc>Get onас — wirelesslyджinclude href="legal.xml" xmlnsР1/XIncludeоге<title>Connectү network<>
+
+<pкую a wireless-enabled computerБу can connectүнnetworkлә within rangeр get accessрас, view shared filesнonаҭ, and so onде<stepsягitemжі>Openабgui xref="shell-introduction#systemmenu">system menu<> fromа rightш side ofарp barө>Selectьвgui><ЕН/network-wireless-disabled-symbolic.svg"/>
+    Wi-Fi<>. The Wi-Fi section ofа menu will expandө>Clickцу wantджікцә not shown, scroll downа list. Ifуш still do not seeаҭһ out of rangeма networkьвих-hidden">might be hidden<>өкҳә protected by a passwordш (<их-wepwpa">encryption key<>), enterаш password when prompted and clickбgui>Connect<>джіку do not knowа key, it may be written onа underside ofаш wireless router or base stationм in its instruction manualму mayшюр askа person who administersа wireless networkө>The network icon will change appearance asа computer attemptsрш connectраҭъжif:chooseжif:when test="platform:gnome-classic">
+Ғ/classic-topҺҒ/topҺ  <>
+<егіФ not successfulһ asked for your passwordн again or it might just tellулат has been disconnected.
+  There are a number of things that couldю caused thisр happen. You couldню enteredа wrong passwordБа wireless signal could be too weakмн your computer’s wireless card might have a problem, for example. Seeнбиыў /> for more helpдегі>A strongerтү network does not necessarily meanлную a fasterстмлу will have faster downloadн speeds. The wireless connection connects your computerрабem>deviceн which providesаст<> (like a router or modem), butан two connections are actually different, and so will run at differentн speedsде<>

@@ -1,0 +1,41 @@
+src/lib/omega/taxis.ts:773:      'AKOLOUTHIA-2/APOGRAPHE necessary-condition rejection; full TAGSTACK/SIBLING tournament safely skipped',
+src/lib/omega/taxis.ts:783:      'candidate cleared the precheck but the full TAGSTACK/SIBLING tournament did not complete',
+src/lib/omega/synthesis.ts:159:  innerEncoder?: (t: string, e: EncodingName) => TagstackResult,
+src/lib/omega/synecheia-frontier.ts:1:/** Optional X156 tournament; not wired into production TAGSTACK. */
+src/lib/omega/syllogismos.ts:937:      'AKOLOUTHIA-2/APOGRAPHE necessary-condition rejection; full TAGSTACK/SIBLING tournament safely skipped',
+src/lib/omega/syllogismos.ts:947:      'candidate cleared the precheck but the full TAGSTACK/SIBLING tournament did not complete',
+src/lib/omega/steli.ts:398:  inner?: (t: string, e: EncodingName) => TagstackResult;
+src/lib/omega/steli.ts:405:  inner?: (t: string, e: EncodingName) => TagstackResult;
+src/lib/omega/reprise.ts:58:export function repriseEncode(text: string, enc: EncodingName = 'o200k_base'): TagstackResult {
+src/lib/omega/polysteli.ts:262:  options: { incumbent?: number; inner?: (t: string, e: EncodingName) => TagstackResult } = {},
+src/lib/omega/plinthos.ts:69: *  5. Tournament over identity / incumbent / plain stack / column-major
+src/lib/omega/phalanx4.ts:42:const LEGEND_TAGS: Tag[] = ['rc', 'ko'];
+src/lib/omega/phalanx4.ts:90:  for (const t of LEGEND_TAGS) if (applied.has(t)) parts.push(CLAUSE[t]);
+src/lib/omega/phalanx4.ts:105:  for (const tag of LEGEND_TAGS) {
+src/lib/omega/phalanx4.ts:139:    if (!LEGEND_TAGS.includes(tag)) { // inline: keep the stage's own header line (P3 style)
+src/lib/omega/phalanx-a2.ts:40:const LEGEND_TAGS: Tag[] = ['rc', 'ko'];
+src/lib/omega/phalanx-a2.ts:88:  for (const t of LEGEND_TAGS) if (applied.has(t)) parts.push(CLAUSE[t]);
+src/lib/omega/phalanx-a2.ts:103:  for (const tag of LEGEND_TAGS) {
+src/lib/omega/phalanx-a2.ts:141:    if (!LEGEND_TAGS.includes(tag)) { // inline: keep the stage's own header line (P3 style)
+src/lib/omega/phalanx-a1.ts:40:const LEGEND_TAGS: Tag[] = ['rc', 'ko'];
+src/lib/omega/phalanx-a1.ts:88:  for (const t of LEGEND_TAGS) if (applied.has(t)) parts.push(CLAUSE[t]);
+src/lib/omega/phalanx-a1.ts:103:  for (const tag of LEGEND_TAGS) {
+src/lib/omega/phalanx-a1.ts:137:    if (!LEGEND_TAGS.includes(tag)) { // inline: keep the stage's own header line (P3 style)
+src/lib/omega/nest.ts:164:  return stack.some(n => n.name.toLowerCase() === 'svg' || n.name.toLowerCase() === 'math');
+src/lib/omega/nest.ts:197:    if (mode === 'html' && stack.length && !isForeign(stack) && HTML_RAWTEXT.has(stack[stack.length - 1].name.toLowerCase())) {
+src/lib/omega/nest.ts:198:      const closeAt = rawTextClosingAt(text, pos, stack[stack.length - 1].name);
+src/lib/omega/nest.ts:489:    { name: 'mismatched closing tag', text: '<root><r><x>1</x></r><r><x>2</y></r><r><x>3</x></r></root>', expect: false },
+src/lib/omega/mekos.ts:121:  innerEncoder?: (t: string, e: EncodingName) => TagstackResult,
+src/lib/omega/kiones.ts:57: *  5. Tournament: identity, the incumbent, the plain stack, and the
+src/lib/omega/hyle.ts:772:      if (closing) { const i = stack.lastIndexOf(name); if (i >= 0) stack.length = i; else if (stack.length) stack.length = stack.length - 1; }
+src/lib/omega/hyle.ts:773:      else if (!selfClose && !FLAT_TAGS.has(name.toLowerCase())) stack.push(name);
+src/lib/omega/homosema-frontier.ts:1:/** Optional HOMOSEMA full-parent tournament. Not imported by TAGSTACK.
+src/lib/omega/eutaxia.ts:73:export function eutaxiaEncode(text:string,enc:EncodingName='o200k_base',baseline?:TagstackResult){
+src/lib/omega/enallage.ts:158:  innerEncoder?: (t: string, e: EncodingName) => TagstackResult,
+src/lib/omega/diptychon.ts:1043:      'AKOLOUTHIA-2/APOGRAPHE necessary-condition rejection; full TAGSTACK/SIBLING tournament safely skipped',
+src/lib/omega/diptychon.ts:1053:      'candidate cleared the precheck but the full TAGSTACK/SIBLING tournament did not complete',
+src/lib/omega/atx-release.ts:57:  /** False when the full TAGSTACK/SIBLING tournament was safely pruned or failed. */
+src/lib/omega/atx-release.ts:269:      'AKOLOUTHIA-2 necessary-condition rejection; full TAGSTACK/SIBLING tournament safely skipped',
+src/lib/omega/atx-release.ts:279:      'candidate cleared AKOLOUTHIA-2 but the full TAGSTACK/SIBLING tournament did not complete',
+src/lib/omega/anastrophe.ts:66: *  4. Tournament over identity / incumbent / plain stack / gated permutations.
+src/lib/omega/abacus.ts:92: * (Vietnamese tone stacks, Czech/Polish diacritics, Arabic/Hebrew points,

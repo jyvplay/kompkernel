@@ -1,0 +1,73 @@
+{
+  "checks": 97,
+  "rows": [
+    {
+      "name": "NuGet.Client-candidate.json",
+      "path": "bench/x164/fixtures/NuGet.Client.props",
+      "base": 236,
+      "candidate": 237,
+      "selected": 236,
+      "saved": 0,
+      "applied": false,
+      "sites": 9,
+      "mode": "empty"
+    },
+    {
+      "name": "files-browse-candidate.json",
+      "path": "bench/x164/fixtures/files-browse.page",
+      "base": 809,
+      "candidate": 798,
+      "selected": 798,
+      "saved": 11,
+      "applied": true,
+      "sites": 44,
+      "mode": "empty"
+    },
+    {
+      "name": "net-wireless-connect-candidate.json",
+      "path": "bench/x164/fixtures/net-wireless-connect.page",
+      "base": 812,
+      "candidate": 801,
+      "selected": 801,
+      "saved": 11,
+      "applied": true,
+      "sites": 37,
+      "mode": "empty"
+    },
+    {
+      "name": "sdk-candidate.json",
+      "path": "bench/x164/fixtures/sdk.props",
+      "base": 1262,
+      "candidate": 1237,
+      "selected": 1237,
+      "saved": 25,
+      "applied": true,
+      "sites": 73,
+      "mode": "empty"
+    },
+    {
+      "name": "shell-introduction-candidate.json",
+      "path": "bench/x164/fixtures/shell-introduction.page",
+      "base": 1502,
+      "candidate": 1471,
+      "selected": 1471,
+      "saved": 31,
+      "applied": true,
+      "sites": 113,
+      "mode": "empty"
+    },
+    {
+      "name": "terminal-candidate.json",
+      "path": "bench/x164/fixtures/terminal.props",
+      "base": 586,
+      "candidate": 576,
+      "selected": 576,
+      "saved": 10,
+      "applied": true,
+      "sites": 19,
+      "mode": "empty"
+    }
+  ],
+  "native": "NOT_RUN",
+  "strongParetoCertified": false
+}

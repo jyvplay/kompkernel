@@ -1,0 +1,25 @@
+{
+  "checks": 34,
+  "rows": [
+    {
+      "path": "bench/x164/cipher/2015.rot13",
+      "base": 870,
+      "selected": 622,
+      "saved": 248,
+      "inverse": 13,
+      "parentCalls": 2,
+      "exact": true
+    },
+    {
+      "path": "bench/x164/cipher/2018.rot13",
+      "base": 714,
+      "selected": 549,
+      "saved": 165,
+      "inverse": 13,
+      "parentCalls": 2,
+      "exact": true
+    }
+  ],
+  "native": "NOT_RUN",
+  "strongParetoCertified": false
+}

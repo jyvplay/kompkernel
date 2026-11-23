@@ -1,0 +1,320 @@
+{
+  "scope": "45raw complete-instruction screens; NOT45full-parent trials, not held-out generalization",
+  "rows": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "bestDirect": 5977,
+      "inverse": 9,
+      "directSaving": -783
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "raw": 3054,
+      "bestDirect": 3527,
+      "inverse": 10,
+      "directSaving": -473
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "raw": 1000,
+      "bestDirect": 1568,
+      "inverse": 10,
+      "directSaving": -568
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "raw": 1152,
+      "bestDirect": 1641,
+      "inverse": 4,
+      "directSaving": -489
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "raw": 811,
+      "bestDirect": 828,
+      "inverse": 1,
+      "directSaving": -17
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "raw": 1034,
+      "bestDirect": 1263,
+      "inverse": 15,
+      "directSaving": -229
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "raw": 140,
+      "bestDirect": 192,
+      "inverse": 11,
+      "directSaving": -52
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "raw": 733,
+      "bestDirect": 1244,
+      "inverse": 13,
+      "directSaving": -511
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "raw": 570,
+      "bestDirect": 610,
+      "inverse": 4,
+      "directSaving": -40
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "raw": 629,
+      "bestDirect": 1039,
+      "inverse": 13,
+      "directSaving": -410
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "raw": 458,
+      "bestDirect": 817,
+      "inverse": 10,
+      "directSaving": -359
+    },
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "raw": 60,
+      "bestDirect": 104,
+      "inverse": 12,
+      "directSaving": -44
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "raw": 80,
+      "bestDirect": 126,
+      "inverse": 2,
+      "directSaving": -46
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "raw": 1006,
+      "bestDirect": 1286,
+      "inverse": 13,
+      "directSaving": -280
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "raw": 1422,
+      "bestDirect": 2864,
+      "inverse": 13,
+      "directSaving": -1442
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "bestDirect": 3527,
+      "inverse": 4,
+      "directSaving": -788
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "raw": 1099,
+      "bestDirect": 2243,
+      "inverse": 13,
+      "directSaving": -1144
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "raw": 787,
+      "bestDirect": 1099,
+      "inverse": 10,
+      "directSaving": -312
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "raw": 513,
+      "bestDirect": 576,
+      "inverse": 10,
+      "directSaving": -63
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "raw": 1144,
+      "bestDirect": 1286,
+      "inverse": 15,
+      "directSaving": -142
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "raw": 158,
+      "bestDirect": 214,
+      "inverse": 16,
+      "directSaving": -56
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "raw": 1106,
+      "bestDirect": 1299,
+      "inverse": 10,
+      "directSaving": -193
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "raw": 582,
+      "bestDirect": 619,
+      "inverse": 18,
+      "directSaving": -37
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "raw": 675,
+      "bestDirect": 778,
+      "inverse": 4,
+      "directSaving": -103
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "raw": 330,
+      "bestDirect": 398,
+      "inverse": 23,
+      "directSaving": -68
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "raw": 656,
+      "bestDirect": 1555,
+      "inverse": 13,
+      "directSaving": -899
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "raw": 578,
+      "bestDirect": 816,
+      "inverse": 13,
+      "directSaving": -238
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "raw": 76,
+      "bestDirect": 127,
+      "inverse": 13,
+      "directSaving": -51
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "raw": 229,
+      "bestDirect": 276,
+      "inverse": 1,
+      "directSaving": -47
+    },
+    {
+      "path": "bench/x164/cipher/2015.rot13",
+      "raw": 1132,
+      "bestDirect": 780,
+      "inverse": 13,
+      "directSaving": 352
+    },
+    {
+      "path": "bench/x164/cipher/2018.rot13",
+      "raw": 1004,
+      "bestDirect": 698,
+      "inverse": 13,
+      "directSaving": 306
+    },
+    {
+      "path": "bench/x164/fixtures/NuGet.Client.props",
+      "raw": 311,
+      "bestDirect": 691,
+      "inverse": 6,
+      "directSaving": -380
+    },
+    {
+      "path": "bench/x164/fixtures/files-browse.page",
+      "raw": 1037,
+      "bestDirect": 1839,
+      "inverse": 4,
+      "directSaving": -802
+    },
+    {
+      "path": "bench/x164/fixtures/net-wireless-connect.page",
+      "raw": 1182,
+      "bestDirect": 2062,
+      "inverse": 13,
+      "directSaving": -880
+    },
+    {
+      "path": "bench/x164/fixtures/sdk.props",
+      "raw": 2267,
+      "bestDirect": 4529,
+      "inverse": 13,
+      "directSaving": -2262
+    },
+    {
+      "path": "bench/x164/fixtures/shell-introduction.page",
+      "raw": 2590,
+      "bestDirect": 4589,
+      "inverse": 13,
+      "directSaving": -1999
+    },
+    {
+      "path": "bench/x164/fixtures/terminal.props",
+      "raw": 893,
+      "bestDirect": 1953,
+      "inverse": 22,
+      "directSaving": -1060
+    },
+    {
+      "path": "bench/x164/python/cpython-graphlib.py",
+      "raw": 2774,
+      "bestDirect": 4938,
+      "inverse": 13,
+      "directSaving": -2164
+    },
+    {
+      "path": "bench/x164/python/pandas-encoding.py",
+      "raw": 5318,
+      "bestDirect": 8987,
+      "inverse": 11,
+      "directSaving": -3669
+    },
+    {
+      "path": "bench/x164/python/pandas-utils.py",
+      "raw": 4073,
+      "bestDirect": 7063,
+      "inverse": 13,
+      "directSaving": -2990
+    },
+    {
+      "path": "bench/x164/python/pydantic-_generics.py",
+      "raw": 5779,
+      "bestDirect": 11034,
+      "inverse": 13,
+      "directSaving": -5255
+    },
+    {
+      "path": "bench/x164/python/pydantic-_typing_extra.py",
+      "raw": 4564,
+      "bestDirect": 8560,
+      "inverse": 13,
+      "directSaving": -3996
+    },
+    {
+      "path": "bench/x164/python/pytest-structures.py",
+      "raw": 5902,
+      "bestDirect": 10691,
+      "inverse": 13,
+      "directSaving": -4789
+    },
+    {
+      "path": "bench/x164/python/ruff-generate_mkdocs.py",
+      "raw": 2389,
+      "bestDirect": 4351,
+      "inverse": 13,
+      "directSaving": -1962
+    },
+    {
+      "path": "bench/x164/python/scikit-learn-_tags.py",
+      "raw": 2264,
+      "bestDirect": 4322,
+      "inverse": 13,
+      "directSaving": -2058
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "repo": "GNOME/gnome-user-docs",
+    "revision": "532a33de7e38797190c29c69b2a4c2fa42658c96",
+    "path": "gnome-help/C/shell-introduction.page",
+    "file": "shell-introduction.page",
+    "bytes": 9610,
+    "sha256": "db8cf32434752d767963203272c4dd4e249d43cb52533a308ff9309259edcb36"
+  },
+  {
+    "repo": "GNOME/gnome-user-docs",
+    "revision": "532a33de7e38797190c29c69b2a4c2fa42658c96",
+    "path": "gnome-help/C/files-browse.page",
+    "file": "files-browse.page",
+    "bytes": 3845,
+    "sha256": "6d85c11cbab0a6522a608ad414ed2b22dde206b2a4d7475a35de60cab64764bc"
+  },
+  {
+    "repo": "GNOME/gnome-user-docs",
+    "revision": "532a33de7e38797190c29c69b2a4c2fa42658c96",
+    "path": "gnome-help/C/net-wireless-connect.page",
+    "file": "net-wireless-connect.page",
+    "bytes": 4370,
+    "sha256": "ea2217511c78d335ba9b92c5dc515be615a248c83d46ced3770b8b066758bba6"
+  },
+  {
+    "repo": "dotnet/sdk",
+    "revision": "3572593e44eb27035e2faa9a46a9d6c850de6b69",
+    "path": "Directory.Build.props",
+    "file": "sdk.props",
+    "bytes": 9018,
+    "sha256": "6feea3252a0ba3f7ef92a34bc3b04430685355e83380b4d073caa09ad2c6dba7"
+  },
+  {
+    "repo": "NuGet/NuGet.Client",
+    "revision": "496ae9d46a6d27daffa4decf077995517dcc5b60",
+    "path": "Directory.Build.props",
+    "file": "NuGet.Client.props",
+    "bytes": 1321,
+    "sha256": "1c01cd450c7a29d6a28936fa2318df938107994e315d055f7ddf01708cfe8db4"
+  },
+  {
+    "repo": "microsoft/terminal",
+    "revision": "cf5e6bf22727a251aced8bc30491c87428a4e116",
+    "path": "Directory.Build.props",
+    "file": "terminal.props",
+    "bytes": 3957,
+    "sha256": "af96dc06c85679c0e48d00cf62095d71ff3e0a0190b4d32805773429eba69beb"
+  }
+]

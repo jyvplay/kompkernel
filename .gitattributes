@@ -19,3 +19,12 @@ bench/x162/fixtures/wntr.rst -whitespace
 # X163 original source and proof artifacts retain exact upstream whitespace.
 bench/x163/fixtures/* -text whitespace=-blank-at-eof,-blank-at-eol
 bench/x163/research/*.lean -text whitespace=-blank-at-eof,-blank-at-eol
+
+# X164 preserves upstream XML/CRLF configuration and proof source bytes.
+bench/x164/fixtures/* -text whitespace=-blank-at-eof,-blank-at-eol
+bench/x164/research/*.lean -text whitespace=-blank-at-eof,-blank-at-eol
+
+# Exact X164 source/wire/log bytes; whitespace is evidence, not formatting.
+bench/x164/cipher/* -text -whitespace
+bench/x164/receipts/native-*.txt -text -whitespace
+bench/x164/receipts/*.log -whitespace

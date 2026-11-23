@@ -1,0 +1,6 @@
+bench/x164/fixtures/terminal.props base 586
+bench/x164/fixtures/terminal.props candidate 614
+bench/x164/fixtures/sdk.props base 1262
+bench/x164/fixtures/sdk.props candidate 1237
+bench/x164/fixtures/NuGet.Client.props base 236
+bench/x164/fixtures/NuGet.Client.props candidate 237
