@@ -1,0 +1,15 @@
+Collecting num2words
+  Downloading num2words-0.5.14-py3-none-any.whl (163 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 163.5/163.5 kB 1.2 MB/s eta 0:00:00
+Collecting docopt>=0.6.2
+  Downloading docopt-0.6.2.tar.gz (25 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Building wheels for collected packages: docopt
+  Building wheel for docopt (setup.py): started
+  Building wheel for docopt (setup.py): finished with status 'done'
+  Created wheel for docopt: filename=docopt-0.6.2-py2.py3-none-any.whl size=13705 sha256=495bfc8b3f1fb77f182ffd0935a832f8e6f99d117ac72d9a55224a50b43821ad
+  Stored in directory: /home/user/.cache/pip/wheels/1a/b0/8c/4b75c4116c31f83c8f9f047231251e13cc74481cca4a78a9ce
+Successfully built docopt
+Installing collected packages: docopt, num2words
+Successfully installed docopt-0.6.2 num2words-0.5.14

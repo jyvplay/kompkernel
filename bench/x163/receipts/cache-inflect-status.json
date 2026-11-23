@@ -1,0 +1,10 @@
+{
+  "baseline": "STOPPED_BUDGET",
+  "candidate": "NOT_RUN",
+  "heapLimitMB": 1200,
+  "lastObservedElapsedSeconds": 734,
+  "lastObservedCpuSeconds": 766,
+  "lastObservedRssKiB": 1262624,
+  "completePrice": null,
+  "scope": "benchmark-only bounded run-cost cache; no baseline receipt; sequential candidate never started"
+}

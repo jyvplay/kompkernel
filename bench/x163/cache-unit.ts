@@ -1,0 +1,4 @@
+import '../../src/lib/omega/ariadne';import assert from 'node:assert/strict';import fs from 'node:fs';
+const C=(globalThis as any).__x163RunCacheClass;assert.ok(C);const cache:Map<string,number>=new C(),ref=new Map<string,number>();let checks=0;
+for(let i=0;i<150003;i++){const k='key'+i,v=i%101;cache.set(k,v);ref.set(k,v);assert.equal(cache.get(k),ref.get(k));assert.ok(cache.size<=50000);checks+=2;if(i%1000===0){const old='key'+Math.max(0,i-75000),hit=cache.get(old);if(hit!==undefined)assert.equal(hit,ref.get(old));else{const value=ref.get(old)!;cache.set(old,value);assert.equal(cache.get(old),value);}checks++;}}
+cache.set('zero',0);assert.equal(cache.get('zero'),0);checks++;fs.writeFileSync('bench/x163/receipts/cache-unit.json',JSON.stringify({checks,stats:(globalThis as any).__x163RunCacheStats,passed:true,scope:'actual benchmark class; capacity crossings, cache miss recomputation, zero values'},null,2));console.log(checks);

@@ -1,0 +1,57 @@
+{
+  "checks": 11227,
+  "rows": [
+    {
+      "name": "num-en",
+      "arm": "base",
+      "sourceBytesEqual": true,
+      "tokens": 850
+    },
+    {
+      "name": "num-en",
+      "arm": "candidate",
+      "sourceBytesEqual": true,
+      "tokens": 907
+    },
+    {
+      "name": "num-ng",
+      "arm": "base",
+      "sourceBytesEqual": true,
+      "tokens": 451
+    },
+    {
+      "name": "num-ng",
+      "arm": "candidate",
+      "sourceBytesEqual": true,
+      "tokens": 502
+    },
+    {
+      "name": "ruby",
+      "arm": "base",
+      "sourceBytesEqual": true,
+      "tokens": 675
+    },
+    {
+      "name": "ruby",
+      "arm": "memory",
+      "sourceBytesEqual": true,
+      "tokens": 651
+    },
+    {
+      "name": "code-ts",
+      "arm": "base",
+      "sourceBytesEqual": true,
+      "tokens": 949
+    },
+    {
+      "name": "code-ts",
+      "arm": "memory",
+      "sourceBytesEqual": true,
+      "tokens": 1018
+    }
+  ],
+  "passed": true,
+  "native": false,
+  "externalVerifier": "num2words 0.5.14",
+  "method": "independent package number grammar with commas removed; reused independent Python CHIRON/AP reader"
+}

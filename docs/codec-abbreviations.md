@@ -11093,3 +11093,82 @@ prose5856→3429(word),ops17278→5580(glyph),code4152→2636(word),
 other729→317(no tape class). Absolute-saving leaders apt-real1926,
 ls-l-real3884,json-pkg499,cue-sheet412; ops relative leader prices.csv79.73%.
 AKROSTICHIS plans are null on all29 canonical lanes. No global optimality claim.
+
+## X163 — LEXARITHMOS: exact grammatical numeral transduction (optional)
+
+**Design.** `src/lib/omega/lexarithmos.ts` converts exactly matching lowercase
+British English cardinal phrases to `~N`. Range100…999999; hyphenated tens,
+`and` within hundreds and before sub-100 thousand remainders; no commas.
+A contextual arm uses `^N`, bare`^` for the value of the last literal digit run,
+and`^d` for its comma-space-separated individual digit names. Literal digits
+remain in the text; explicit operands do not update literal-history state.
+Contextual cardinal range0…999999; digitwise lists≤100digits preserve leading
+zeroes. Ambiguous source markers, invalid UTF8 and>50000UTF16units refuse;
+reconstruction must also fit the cap. No source-specific table or external
+number-word package is needed by the production decoder.
+
+This is a grammatical value↔spelling transform, not KAMPYLI arithmetic-table
+extrapolation, AKROSTICHIS uppercase projection, digit regrouping, Unicode
+Roman normalization or EIRMOS's finite case/substring operators. Scope is a
+repository operator distinction, NOT worldwide invention of number spelling.
+The initial EPIGRAPHE heading-slug draft was rejected after finding the exact
+mechanism in ENTHYMEME/EPAGOGE; retained only under bench/x163/rejected.
+
+**Greedy/CPU.** Deterministic greedy longest nonoverlapping phrase recognition,
+exact render equality per site; no optimal segmentation theorem. Finite input,
+operand and output caps; conservative polynomial regex/substring work, not a
+proved linear-time implementation. Renderer depth bounded by thousands/hundreds.
+Whole-message selector charges complete BPE and at most one extra inherited
+parent encode per arm (two for combined selector). Actual parent work/memory
+is substantial; optional, not default routing, and no runtime superiority claim.
+
+**Completed real-source result.** Prospective whole Ruby number-word regression
+source4210bytes:675→651 complete tokens (−24,3.56%),35sites/20value reuses;
+independent source-byte inversion passes. This is code/study material, not a
+broad prose/ops breakthrough. Explicit-only full English/Nigerian regression
+sources lose850→907 and451→502; strict selectors retain incumbents. The only
+protected canonical eligibility is code-ts (one contextual site); its1018token
+candidate loses to949 and is refused. All29 default wires remain identical to
+X162,11962tokens;29 reference price/ID checks,21bounded reads/8unsupported.
+All12speed-trial wires match canonical. Category/local leaders unchanged:
+prose5856→3429(word),ops17278→5580(glyph),code4152→2636(word),other729→317;
+absolute leaders apt-real1926,ls-l-real3884,json-pkg499,cue-sheet412.
+
+**Verification.** Numeral43732unit checks, contextual6033checks; external
+num2words0.5.14 verifier compares11000values plus folded/full-wire source bytes.
+The external package is only an independent test oracle, not a shipped decoder
+requirement. Native basic-chat behavior NOT_RUN.22 deceptive evidence shapes
+and the incomplete Pareto conjunction are tested. Repaired marker/boundary and
+memory/digitwise arms rerun affected gates, including true output-amplification
+attacks below the input cap. Full experiment ledger: `bench/x163/README.md`.
+
+**Speed.** Benchmark-only streaming pretokenizer loop avoids building a chunk
+array and uses source offsets for prefix-tail marks.16192fresh reference checks
+per arm agree;12cold ABBA whole calls have identical wires. CPU ratio0.984060,
+wall0.977232; JSON wall regresses slightly.≥10%aggregate/no-regression gate FAILS;
+no production speed patch. Initial800MBlarge-source run OOM is not a result;
+retry and build-resource failures are recorded, not called speed evidence.
+
+**Honest citations.** Zhang/Bakhturina/Ginsburg2021 *NeMo (Inverse) Text
+Normalization*, https://www.isca-archive.org/interspeech_2021/zhang21ja_interspeech.pdf,
+is direct numeral-verbalization prior art; its nonbijective normalization task
+is not our exact-render admission contract. Iachnyk et al.2026 *The Case for
+Synthesized Data Compression*, arxiv2610.09913, assumes fixed-block execution
+and non-adversarial functional code, not native chat. Azami/Fallin/Burtscher2025,
+DOI10.1145/3669940.3707280, is binary CPU/GPU compression, not prompt tokens.
+Fresh lab-specific follow-ups, including exact2003-point sum/difference witness
+cardinalities and explicit ETH machine quantifiers, are in research.md.
+No Lean/kernel replay, exhaustive lab audit or terminal-codec claim.
+
+Final X163 header specialization: cardinal-only messages omit unused digit-list
+instructions, and the strict reader refuses undeclared ^d. Original Ruby662
+receipt is archived; final complete price651 (24saved), unchanged parent.
+Prior timings remain parent-run observations, not timings of header replacement.
+Both optional APIs reject reserved incumbent envelopes; patched attack gates pass.
+Second speed experiment (bounded50000entry run-cost cache) also FAILS:
+CPU1.014223/wall1.015858,12canonical-identical wires, no production change.
+Its300158actual-class unit checks exercise3evictions; small timing lanes do not.
+Unbounded inflect800/1800MBbaseline and1700MBcandidate OOM; bounded1200MB
+baseline was stopped after12+minutes with no receipt, candidate not started.
+No completed large-source price. Whole-parent heap sampling identifies token
+cache allocations as further targets, not a certified speedup.

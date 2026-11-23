@@ -15,3 +15,7 @@ bench/x161/research/google-capsets.txt -text whitespace=-blank-at-eol
 
 # X162 preserves upstream WNTR source bytes, including whitespace.
 bench/x162/fixtures/wntr.rst -whitespace
+
+# X163 original source and proof artifacts retain exact upstream whitespace.
+bench/x163/fixtures/* -text whitespace=-blank-at-eof,-blank-at-eol
+bench/x163/research/*.lean -text whitespace=-blank-at-eof,-blank-at-eol

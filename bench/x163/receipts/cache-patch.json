@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "anchor": "const cache = new Map<string, number>();",
+  "replacement": "new X163RunCache; clear at50000entries; pure exact number values; original search/work limits unchanged",
+  "scope": "ARIADNE per-assignment run-cost lookup, not token memo or search pruning"
+}

@@ -1,0 +1,37 @@
+[
+  {
+    name: 'bash-handbook.md',
+    sites: 2,
+    reuses: 2,
+    raw: 10285,
+    direct: 10354
+  },
+  {
+    name: 'inflect-numwords.py',
+    sites: 204,
+    reuses: 144,
+    raw: 4722,
+    direct: 4245
+  },
+  {
+    name: 'number-words-en.py',
+    sites: 23,
+    reuses: 14,
+    raw: 2006,
+    direct: 2035
+  },
+  {
+    name: 'number-words-ng.py',
+    sites: 9,
+    reuses: 2,
+    raw: 835,
+    direct: 892
+  },
+  {
+    name: 'ruby-number-words.rb',
+    sites: 35,
+    reuses: 20,
+    raw: 1157,
+    direct: 1120
+  }
+]

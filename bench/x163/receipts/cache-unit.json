@@ -1,0 +1,9 @@
+{
+  "checks": 300158,
+  "stats": {
+    "evictions": 3,
+    "maxEntries": 50000
+  },
+  "passed": true,
+  "scope": "actual benchmark class; capacity crossings, cache miss recomputation, zero values"
+}

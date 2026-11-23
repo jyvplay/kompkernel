@@ -1,0 +1,306 @@
+{
+  "scope": "Node --heap-prof sampled live allocations after one complete code-ts encoder; not retained-size dominators and not a speed trial",
+  "sampledLiveBytes": 255785704,
+  "top": [
+    {
+      "function": "set",
+      "file": "",
+      "line": 0,
+      "sampledLiveBytes": 58720296,
+      "stack": [
+        "chironEncode",
+        "klerosisPick",
+        "klerosisDensity",
+        "countTokens3",
+        "chunkCountFast",
+        "fastCount",
+        "set"
+      ]
+    },
+    {
+      "function": "set",
+      "file": "",
+      "line": 0,
+      "sampledLiveBytes": 29360168,
+      "stack": [
+        "runConfig",
+        "sibylEncode",
+        "evaluate",
+        "renderBest",
+        "scoreRunCostDeltaSlots",
+        "countTokens3",
+        "set"
+      ]
+    },
+    {
+      "function": "scoreRunCostDeltaSlots",
+      "file": "cache-speed-A.mjs",
+      "line": 6437,
+      "sampledLiveBytes": 23593600,
+      "stack": [
+        "",
+        "polytroposEncode",
+        "runConfig",
+        "sibylEncode",
+        "evaluate",
+        "renderBest",
+        "scoreRunCostDeltaSlots"
+      ]
+    },
+    {
+      "function": "set",
+      "file": "",
+      "line": 0,
+      "sampledLiveBytes": 14680104,
+      "stack": [
+        "tagstackX74ChainMeasured",
+        "metataxisEncode",
+        "price",
+        "countTokens3",
+        "countLongRaw",
+        "chunkCountFast",
+        "set"
+      ]
+    },
+    {
+      "function": "scoreRunCostDeltaSlots",
+      "file": "cache-speed-A.mjs",
+      "line": 6437,
+      "sampledLiveBytes": 14156200,
+      "stack": [
+        "",
+        "daedalusEncodeInner",
+        "runArm",
+        "sibylEncode",
+        "evaluate",
+        "renderBest",
+        "scoreRunCostDeltaSlots"
+      ]
+    },
+    {
+      "function": "countTokens3",
+      "file": "cache-speed-A.mjs",
+      "line": 2373,
+      "sampledLiveBytes": 12134312,
+      "stack": [
+        "heuresisEncode",
+        "tachosEncode",
+        "synkopeEncode",
+        "syntomosEncode",
+        "metathesisEncode",
+        "relayoutGlyphs",
+        "countTokens3"
+      ]
+    },
+    {
+      "function": "lcp",
+      "file": "cache-speed-A.mjs",
+      "line": 2137,
+      "sampledLiveBytes": 11607592,
+      "stack": [
+        "synkopeEncode",
+        "syntomosEncode",
+        "metathesisEncode",
+        "relayoutGlyphs",
+        "countTokens3",
+        "prolepsisLookup",
+        "lcp"
+      ]
+    },
+    {
+      "function": "decode",
+      "file": "encoding",
+      "line": 442,
+      "sampledLiveBytes": 11021912,
+      "stack": [
+        "#createModuleJob",
+        "loadAndTranslate",
+        "afterLoad",
+        "#translate",
+        "moduleStrategy",
+        "stringify",
+        "decode"
+      ]
+    },
+    {
+      "function": "set",
+      "file": "",
+      "line": 0,
+      "sampledLiveBytes": 7913912,
+      "stack": [
+        "node_modules/gpt-tokenizer/esm/encoding/o200k_base.js",
+        "getEncodingApi",
+        "_GptEncoding",
+        "BytePairEncodingCore",
+        "forEach",
+        "",
+        "set"
+      ]
+    },
+    {
+      "function": "set",
+      "file": "",
+      "line": 0,
+      "sampledLiveBytes": 7340072,
+      "stack": [
+        "tagstackEncodeInnerMeasured",
+        "countTokens3",
+        "countLongRaw",
+        "chunkCountFast",
+        "fastCount",
+        "fastReady",
+        "set"
+      ]
+    },
+    {
+      "function": "set",
+      "file": "",
+      "line": 0,
+      "sampledLiveBytes": 7340072,
+      "stack": [
+        "amphoraEncode",
+        "chironEncode",
+        "klerosisPick",
+        "klerosisDensity",
+        "countTokens3",
+        "chunkCountFast",
+        "set"
+      ]
+    },
+    {
+      "function": "match",
+      "file": "",
+      "line": 0,
+      "sampledLiveBytes": 6843408,
+      "stack": [
+        "synkopeEncode",
+        "syntomosEncode",
+        "metathesisEncode",
+        "relayoutGlyphs",
+        "countTokens3",
+        "countLongRaw",
+        "match"
+      ]
+    },
+    {
+      "function": "join",
+      "file": "",
+      "line": 0,
+      "sampledLiveBytes": 5773488,
+      "stack": [
+        "run",
+        "synedriaChainScope",
+        "",
+        "tagstackX74ChainMeasured",
+        "synarmogeFromFrontier",
+        "renamePass",
+        "join"
+      ]
+    },
+    {
+      "function": "__init",
+      "file": "cache-speed-A.mjs",
+      "line": 3,
+      "sampledLiveBytes": 4194424,
+      "stack": [
+        "__init",
+        "src/lib/omega/chiron.ts",
+        "__init",
+        "src/lib/omega/bpe.ts",
+        "__init",
+        "node_modules/gpt-tokenizer/esm/encoding/o200k_base.js",
+        "__init"
+      ]
+    },
+    {
+      "function": "fastReady",
+      "file": "cache-speed-A.mjs",
+      "line": 1791,
+      "sampledLiveBytes": 3670120,
+      "stack": [
+        "",
+        "tagstackEncodeInnerMeasured",
+        "countTokens3",
+        "countLongRaw",
+        "chunkCountFast",
+        "fastCount",
+        "fastReady"
+      ]
+    },
+    {
+      "function": "set",
+      "file": "",
+      "line": 0,
+      "sampledLiveBytes": 3670056,
+      "stack": [
+        "node_modules/gpt-tokenizer/esm/encoding/cl100k_base.js",
+        "getEncodingApi",
+        "_GptEncoding",
+        "BytePairEncodingCore",
+        "forEach",
+        "",
+        "set"
+      ]
+    },
+    {
+      "function": "match",
+      "file": "",
+      "line": 0,
+      "sampledLiveBytes": 3145848,
+      "stack": [
+        "",
+        "tagstackX74ChainMeasured",
+        "synarmogeFromFrontier",
+        "renamePass",
+        "countTokens3",
+        "countLongRaw",
+        "match"
+      ]
+    },
+    {
+      "function": "countTokens3",
+      "file": "cache-speed-A.mjs",
+      "line": 2373,
+      "sampledLiveBytes": 2635440,
+      "stack": [
+        "run",
+        "synedriaChainScope",
+        "",
+        "tagstackX74ChainMeasured",
+        "metataxisEncode",
+        "price",
+        "countTokens3"
+      ]
+    },
+    {
+      "function": "match",
+      "file": "",
+      "line": 0,
+      "sampledLiveBytes": 2628632,
+      "stack": [
+        "tagstackX74ChainMeasured",
+        "stoichedonEncode",
+        "tryGlyph",
+        "bodyTok",
+        "countTokens3",
+        "countLongRaw",
+        "match"
+      ]
+    },
+    {
+      "function": "lcp",
+      "file": "cache-speed-A.mjs",
+      "line": 2137,
+      "sampledLiveBytes": 2106480,
+      "stack": [
+        "tagstackX74ChainMeasured",
+        "stoichedonEncode",
+        "tryGlyph",
+        "bodyTok",
+        "countTokens3",
+        "prolepsisLookup",
+        "lcp"
+      ]
+    }
+  ]
+}

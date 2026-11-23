@@ -1,0 +1,1 @@
+{"path":"bench/holdout/code-ts.txt","arm":"candidate","sites":1,"reuses":1,"digitLists":0,"tokens":1029,"directTokens":1502,"parentTokens":1029,"parentAccepted":true,"readerError":null,"accepted":true,"ms":90205.760186,"cpuMs":61251.835}

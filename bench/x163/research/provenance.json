@@ -1,0 +1,51 @@
+[
+  {
+    "repo": "openai/math",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/OAI/Computability/Superstring/SchedulerCode.lean",
+    "file": "openai-scheduler.lean",
+    "sha256": "49759412c9323c423bae4a3ab7214795a83f3e1148c6422253143581538876c8"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+    "path": "eth/proof/machines/Wrap/Defs.lean",
+    "file": "anthropic-wrap-defs.lean",
+    "sha256": "75809cc9afb183b9092a436953196dcf8bf652b9fbae3d0823a314728f079a9e"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+    "path": "eth/proof/maintheorem/CountedRoute/Defs.lean",
+    "file": "anthropic-counted-defs.lean",
+    "sha256": "248ea5ccef50b8b5603cc486d5f72022580bb09028700a428ffe262de4510b4d"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "revision": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/Cnf.lean",
+    "file": "doubleai-cnf.lean",
+    "sha256": "2040015e2ca22422c8911e52b7941fd3d3e00bf10a535736d181804d3ccff630"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+    "path": "eth/proof/statements/ThreeSatRateStatement.lean",
+    "file": "anthropic-three-sat.lean",
+    "sha256": "0a85ff90302092de88687efbe79332a6083dcfee64b7729d7e3ddfda9337aec4"
+  },
+  {
+    "repo": "ByteDance-Seed/Seed-Prover",
+    "revision": "38c59cebaf969ac259196eb091757518d5b54c67",
+    "path": "SeedProver-1.5/erdos_1051.lean",
+    "file": "bytedance-erdos1051.lean",
+    "sha256": "30c79143f57045929c8883ec2b332fdf908a105e870550f9aff664f1a77a7d3f"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+    "path": "eth/proof/statements/ThreeSatStatement.lean",
+    "file": "anthropic-eth-definition.lean",
+    "sha256": "8d7508de3939b8b5c7dec6c37baf9300b55899903826998b5c0db6361f948ac7"
+  }
+]
