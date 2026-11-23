@@ -90,3 +90,8 @@ Whole-parent allocation follow-up: Node --heap-prof on code-ts completed with949
 Final release validation: TypeScript `tsc --noEmit` exit0; production `npm run build` exit0 (21.41s; CSS parser warnings retained in log). Fresh explicit43732/contextual6033/gate40checks and independent11227checks plus8complete wires pass. Canonical29prices/IDs and21bounded reads pass,8unsupported remain explicit.
 
 Diff hygiene: upstream bash-guide.md contains a literal `=======` example that Git flags as a conflict marker; the pinned fixture is intentionally byte-preserved. Build-log trailing whitespace was stripped for repository hygiene (no exit/status text changed).
+
+X164 follow-up: fresh29-lane replay retained every X163 wire byte-for-byte and
+11962total tokens; see `../x164/receipts/frontier-compare.json`. New optional
+KRYPTOLYSIS has two niche cipher-document gains, not broad/native certification;
+ANTIKLEIS novelty was rejected as existing TAGSTACK. Production frontier unchanged.

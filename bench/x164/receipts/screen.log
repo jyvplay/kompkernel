@@ -1,0 +1,247 @@
+[
+  {
+    path: 'bench/x164/fixtures/NuGet.Client.props',
+    bytes: 1321,
+    sites: 9,
+    raw: 311,
+    rawCandidate: 306
+  },
+  {
+    path: 'bench/x164/fixtures/files-browse.page',
+    bytes: 3845,
+    sites: 44,
+    raw: 1037,
+    rawCandidate: 1000
+  },
+  {
+    path: 'bench/x164/fixtures/net-wireless-connect.page',
+    bytes: 4370,
+    sites: 37,
+    raw: 1182,
+    rawCandidate: 1156
+  },
+  {
+    path: 'bench/x164/fixtures/sdk.props',
+    bytes: 9018,
+    sites: 73,
+    raw: 2267,
+    rawCandidate: 2025
+  },
+  {
+    path: 'bench/x164/fixtures/shell-introduction.page',
+    bytes: 9610,
+    sites: 113,
+    raw: 2590,
+    rawCandidate: 2429
+  },
+  {
+    path: 'bench/x164/fixtures/terminal.props',
+    bytes: 3957,
+    sites: 19,
+    raw: 893,
+    rawCandidate: 836
+  },
+  {
+    path: 'bench/holdout-x41/ls-l-real.txt',
+    bytes: 10692,
+    sites: 0,
+    raw: 5194,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x41/ps-aux-real.txt',
+    bytes: 6590,
+    sites: 0,
+    raw: 3054,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x42/dpkg-l.txt',
+    bytes: 4459,
+    sites: 0,
+    raw: 1000,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout/json-pkg.txt',
+    bytes: 3620,
+    sites: 0,
+    raw: 1152,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x40/metrics.tsv',
+    bytes: 1203,
+    sites: 0,
+    raw: 811,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x41/ls-real.txt',
+    bytes: 2486,
+    sites: 0,
+    raw: 1034,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x42/df-h.txt',
+    bytes: 293,
+    sites: 0,
+    raw: 140,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-work/llm-answer.md',
+    bytes: 2542,
+    sites: 0,
+    raw: 733,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-tbl/df-h.txt',
+    bytes: 939,
+    sites: 0,
+    raw: 570,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-work/email-thread.txt',
+    bytes: 2126,
+    sites: 0,
+    raw: 629,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x41/du-real.txt',
+    bytes: 1605,
+    sites: 0,
+    raw: 458,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x42/lsblk.txt',
+    bytes: 132,
+    sites: 0,
+    raw: 60,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x42b/uptime-w.txt',
+    bytes: 179,
+    sites: 0,
+    raw: 80,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-tbl/kubectl-get-pods.txt',
+    bytes: 2649,
+    sites: 0,
+    raw: 1006,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout/code-ts.txt',
+    bytes: 6000,
+    sites: 0,
+    raw: 1422,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x41/apt-real.txt',
+    bytes: 6195,
+    sites: 0,
+    raw: 2739,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x41/node-help.txt',
+    bytes: 6751,
+    sites: 0,
+    raw: 1099,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x42/findmnt.txt',
+    bytes: 3215,
+    sites: 0,
+    raw: 787,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x40/cue-sheet.md',
+    bytes: 938,
+    sites: 0,
+    raw: 513,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x42/ps-ef.txt',
+    bytes: 2669,
+    sites: 0,
+    raw: 1144,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x41/df-real.txt',
+    bytes: 329,
+    sites: 0,
+    raw: 158,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x41/ps-real.txt',
+    bytes: 2365,
+    sites: 0,
+    raw: 1106,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x40/prices.csv',
+    bytes: 993,
+    sites: 0,
+    raw: 582,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-tbl/psql-output.txt',
+    bytes: 1578,
+    sites: 0,
+    raw: 675,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-tbl/markdown-table.md',
+    bytes: 635,
+    sites: 0,
+    raw: 330,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-work/kb-article.txt',
+    bytes: 3385,
+    sites: 0,
+    raw: 656,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-work/unified-diff.patch',
+    bytes: 1487,
+    sites: 0,
+    raw: 578,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x42b/free-m.txt',
+    bytes: 263,
+    sites: 0,
+    raw: 76,
+    rawCandidate: null
+  },
+  {
+    path: 'bench/holdout-x42b/vmstat.txt',
+    bytes: 467,
+    sites: 0,
+    raw: 229,
+    rawCandidate: null
+  }
+]

@@ -1,0 +1,2 @@
+import fs from 'node:fs';import {hysteronPlan,HYSTERON_KEY} from './rejected/hysteron';import {encode} from 'gpt-tokenizer/encoding/o200k_base';
+const rows=fs.readdirSync('bench/x164/python').map(name=>{const path='bench/x164/python/'+name,s=fs.readFileSync(path,'utf8'),p=hysteronPlan(s);return {path,bytes:Buffer.byteLength(s),sites:p?.sites??0,scopes:p?.scopes??0,raw:encode(s).length,candidate:p?encode(HYSTERON_KEY+p.folded).length:null};});fs.writeFileSync('bench/x164/receipts/hysteron-screen.json',JSON.stringify(rows,null,2));console.log(rows);

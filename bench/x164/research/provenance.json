@@ -1,0 +1,43 @@
+[
+  {
+    "repo": "openai/math",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/OAI/Computability/Superstring/CollectionCode.lean",
+    "file": "openai-collection.lean",
+    "bytes": 20352,
+    "sha256": "3d277db99daf4cfb7a6afc532239e40ebfbf22507781d76915c3a86b62561b6b"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+    "path": "eth/proof/machines/Wrap/Main.lean",
+    "file": "anthropic-wrap-main.lean",
+    "bytes": 7126,
+    "sha256": "1a34163b57d5b4d41a938e8405af8333c5087f35c6b56c91ab7430aaaef30459"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+    "path": "eth/proof/maintheorem/CountedRoute/Main.lean",
+    "file": "anthropic-counted-main.lean",
+    "bytes": 5772,
+    "sha256": "4a4f9a52f2600edf45827572f2d3a1a393f28e6072d49936fe23001bb7caf71a"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "revision": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/Trust.lean",
+    "file": "doubleai-trust.lean",
+    "bytes": 3088,
+    "sha256": "34930ec40af3dd699eefadd611c1e2ee1cafa3a8a4a2effac7e844ff943cb596"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "revision": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/All63/Axioms.lean",
+    "file": "doubleai-axioms.lean",
+    "bytes": 2019004,
+    "sha256": "fe92848042886b5a9a514d04b41d692e6ce888bad285a87e71f8cae5992b4f94",
+    "retrieval": "raw media API; content API omitted large file payload"
+  }
+]

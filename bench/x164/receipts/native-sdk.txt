@@ -1,0 +1,37 @@
+Decode first; replace <> with the matching XML end tag. Preserve everything else; print only.
+¶ k=v. expand repeatedly; print only.
+§е<>
+ү    <щHostOSа$(о Condition="'ах)' == ''Ҳ([MSBuild]::ЎүщоHostOSх AND $ҲIsOSPlatform('ћеЎыеүз)<>
+
+џ>$ҲNormalizeDirectory('аш)', 'ҠџMSBuildThisFileDirectoryшіоDotNetBuildSourceOnly)'кOSNameэүкокх AND 'аъ)' == 'Л <ѓ -->
+үч. -->
+ё>
+иёүдtrueө'">ж 'дөн ЛPropertyGroupДаBuildArchitectureЪ' OR 'Дъм Л>
+
+уемИ>асMicrosoftNETCoreОVersionИспMicrosoftAspNetCoreӣ'">аDefineConstants),ҰӣMICROSOFT_ENABLE_TELEMETRYәх">в    <!--җ<>
+
+врAppRefPackageVersion)<ц'))еүTemplateEngЕ/dotnetНhttps://github.comЕСүUsing Include="SystemлDefineConstantsўMicrosoftCodeAnalysisVersionбүўForNetAnalyzersйTargetRidЄй.LastIndexOf('-'))))еф'))">тTargetOSӘй.Substring(0, аҟ', 'яҟTemplateEngineьTestУьHostDotNetқTargetArchitectureє MSTestЧ TreatAsLocalPropertyҩ.0ї.SdkғәаOSName)-ақ)<КAppRuntimePackageВ)' != ''">ај<>
+
+үг ЛImport Project="юн Label="CalculateР'))ың  <!--МКVersionАPortable¶<!-- Platform needs to be set withЧ since it is a global property and cannot be overridden otherwiseч<ProjectЧ="Platform">
+
+юArch"иBuildArchitectureоBuildArchitectureәа[System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString().ToLowerInvariant())ықоқх AND ('Дъarm64Ъs390xЪppc64leЪloongarch64')">Д)ықоқәx64уң Host and target OS detection.
+       Uses full OS names (windows, linux, osx, freebsd, etc.) matching the VMR convention.
+       See НЕ/blob/main/docs/VMR-Controls.md#output-controls -->
+ют">
+ЎWINDOWSфwindowsћOSXфosxћFREEBSDфfreebsdћOPENBSDфopenbsdћILLUMOSфillumosћSOLARISфsolarisћHAIKUфhaikuћLINUXфlinuxеүIsLinuxощъlinuxөдҗ т defaults to щ; overridable via /p:т from build scriptsчүтотәащзв к uses RID-style names (win, not windows) for downstream RID constructionчэАйВАӘАЄэйВӘЄэтъwindowsөwinыкокәатзүйойғиАйоАйғёмниNullable>enableугSdk.props" Sdk="Microsoft.DotNet.Arcadeї" />
+
+ни!-- Workaround for https://github.com/NuGet/Home/issues/14745ѓSDKAnalysisLevel>10ҩ.200униSdkSrcRootҠsrcцSrcDirҠsrcяцьDirҠtestяцьAssetsDirҠtestҟьAssetsҟьPackagesяРTestHostFolderџArtifactsBinDirшredistҟаConfiguration)РУRootџьHostFolderшdotnetРУToolИУRoot)$([System.IO.Path]::GetFileName('$(DotNetTool)РTestLayoutDirџArtifactsTmpDirшtesting'))јPackageProjectUrl>Н/sdkеүPackageLicenseExpression>MITеүLangVersion>PreviewеүLangVersionоLanguageъVBө16еүTreatWarningsAsErrors>TrueеүDebugSymbols>trueев Default to all packages generating a corresponding symbol packageѓIncludeSymbols>trueеүIsShippingPackage>falseҗ TFMsѓNetCurrent>net12ҩыSdkTargetFrameworkИNetCurrentзв TFM for projects that are deployed to run on .NET shipping with Visual StudioѓVisualStudioServiceTargetFramework>net10ҩҗ NU1507 Disable multi-feed check as .NET uses multiple internal feeds intentionallyѓ!-- NU5039 Disable NuGet is unable to find the readme file in the packageчүNoWarnИNoWarn);NU1507;NU1202;NU5039ев do not enable analyzers on source build--иEnforceCodeStyleInBuildі !=ждыUseSharedCompilationі ==жfalseеүDisableImplicitPackageTargetFallback>trueјлотъwindowsӣTARGET_WINDOWSылоContinuousIntegrationBuildъдӣCI_BUILDылоOfficialBuilderъMicrosoftҰылі ==жал),DOT_NET_BUILD_FROM_SOURCEев The Azure Monitor OTel Exporter is not yet onboarded to source build, so we need to conditionally compile the code that references itчүлі != 'trueҰ_AZURE_MONITORјManagePackageVersionsCentrally>trueеүCentralPackageTransitivePinningEnabled>trueҗ Tell Arcade we are usingєї forє test projects. This prevents
+         Arcade from implicitly adding Microsoft.TestPlatform /є.TestFramework /
+        є.TestAdapter / Microsoft.NET.Testї package references (MSьї
+         brings them transitively with versions controlled by the SDK), so theє
+         package versions don't need to be specified in Directory.Packages.propsчүUseMSьSdk>trueҗ Н/source-build/issues/4115чүPublishWindowsPdb>falseемноIsьProjectъд'"иGenerateProgramFile>falseуниImplicitUsings>enableуң Global usings -->
+ң See: https://learn.microsoft.comЕ/core/project-sdk/msbuild-props#using -->
+ ЛItemGroup>
+С.Runtime.InteropServices" />
+С.Text" />
+С.Xml.Linq" />
+мң These aliases need to live outside of Versions.props as VMR / source-build overwrites some of the version properties for live buildsчнёв Runtime and Apphost pack versions are the same for all RIDs. We flow the x64 version above and create aliases without the winx64 here for clarity elsewhereчүсAppHostPackageОрисКОрипМИприMicrosoftWindowsDesktopМИMicrosoftWindowsDesktopр>
+
+үHostFxrОМ)еүSharedHostОМзбі !=ж4.14ҩебі ==жаў)угbuild/GenerateResxSource.targets" />
+
+<>

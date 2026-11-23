@@ -1,0 +1,35 @@
+{
+  "openai": {
+    "boundedIndexChecks": 2280,
+    "unboundedIndexCollision": true,
+    "scope": "CollectionCode owner/idx interface, not whole superstring proof"
+  },
+  "anthropic": {
+    "scope": "Wrap/Main constructs one fixed wrapper before choosing delta, conditional on counting machine; dependency replay NOT_RUN"
+  },
+  "doubleai": {
+    "nonzeroAdapterChecks": 128,
+    "zeroCounterexample": true,
+    "routeBExplicitUnsatAxioms": 7224,
+    "routeBIsNotLRATReplay": true,
+    "scope": "pinned All63/Axioms plus Trust; no assertion about separately supplied certificates"
+  },
+  "bytedance": {
+    "positiveCancellationChecks": 4096,
+    "zeroDenominatorCounterexample": true,
+    "wholeIrrationalityProof": "NOT_REPLAYED"
+  },
+  "google": {
+    "points": 2003,
+    "sumset": 93803,
+    "differenceSet": 807667,
+    "expressionStrictlyBetween": [
+      "1.147988896509275695",
+      "1.147988896509275696"
+    ],
+    "method": "exact rational atanh log series with geometric tail bound, 70terms after binary range reduction",
+    "intervalWidthLessThan1eMinus18": true,
+    "larger54265Witness": "NOT_RUN",
+    "asymptoticConstructionTheorem": "NOT_PROVED"
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "checks": 4045,
+  "rows": [
+    {
+      "receipt": "NuGet.Client-base.json",
+      "bytes": 1321,
+      "tokens": 236,
+      "sourceBytesEqual": true,
+      "expatValid": true,
+      "expatInverse": false
+    },
+    {
+      "receipt": "files-browse-base.json",
+      "bytes": 3845,
+      "tokens": 809,
+      "sourceBytesEqual": true,
+      "expatValid": true,
+      "expatInverse": false
+    },
+    {
+      "receipt": "net-wireless-connect-base.json",
+      "bytes": 4370,
+      "tokens": 812,
+      "sourceBytesEqual": true,
+      "expatValid": true,
+      "expatInverse": false
+    },
+    {
+      "receipt": "sdk-base.json",
+      "bytes": 9018,
+      "tokens": 1262,
+      "sourceBytesEqual": true,
+      "expatValid": true,
+      "expatInverse": false
+    },
+    {
+      "receipt": "shell-introduction-base.json",
+      "bytes": 9610,
+      "tokens": 1502,
+      "sourceBytesEqual": true,
+      "expatValid": true,
+      "expatInverse": false
+    },
+    {
+      "receipt": "terminal-base.json",
+      "bytes": 3957,
+      "tokens": 586,
+      "sourceBytesEqual": true,
+      "expatValid": true,
+      "expatInverse": false
+    },
+    {
+      "receipt": "NuGet.Client-candidate.json",
+      "bytes": 1321,
+      "tokens": 237,
+      "sourceBytesEqual": true,
+      "expatValid": true,
+      "expatInverse": true
+    },
+    {
+      "receipt": "files-browse-candidate.json",
+      "bytes": 3845,
+      "tokens": 798,
+      "sourceBytesEqual": true,
+      "expatValid": true,
+      "expatInverse": true
+    },
+    {
+      "receipt": "net-wireless-connect-candidate.json",
+      "bytes": 4370,
+      "tokens": 801,
+      "sourceBytesEqual": true,
+      "expatValid": true,
+      "expatInverse": true
+    },
+    {
+      "receipt": "sdk-candidate.json",
+      "bytes": 9018,
+      "tokens": 1237,
+      "sourceBytesEqual": true,
+      "expatValid": true,
+      "expatInverse": true
+    },
+    {
+      "receipt": "shell-introduction-candidate.json",
+      "bytes": 9610,
+      "tokens": 1471,
+      "sourceBytesEqual": true,
+      "expatValid": true,
+      "expatInverse": true
+    },
+    {
+      "receipt": "terminal-candidate.json",
+      "bytes": 3957,
+      "tokens": 576,
+      "sourceBytesEqual": true,
+      "expatValid": true,
+      "expatInverse": true
+    }
+  ],
+  "passed": true,
+  "native": "NOT_RUN",
+  "scope": "separate Python algorithm plus Expat source validity; program verification not native chat"
+}

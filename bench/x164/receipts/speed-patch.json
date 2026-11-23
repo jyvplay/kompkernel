@@ -1,0 +1,5 @@
+{
+  "production": false,
+  "scope": "affected run-pattern evaluation order only; search order, work ticks, exact counts and rejection predicate unchanged",
+  "order": "  // X164 fail-first: patterns already costing one token cannot save anything.\n  // Evaluate them first; stable integer sum and admissible lower bound unchanged.\n  if (limit !== Number.POSITIVE_INFINITY) {\n    let front=0;\n    for(let k=0;k<affCount;k++)if(state.costs[AFF_LIST[k]]===1){\n      const t=AFF_LIST[front];AFF_LIST[front++]=AFF_LIST[k];AFF_LIST[k]=t;\n    }\n  }\n"
+}

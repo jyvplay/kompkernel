@@ -180,3 +180,9 @@ bench/x163/*.cpuprofile
 !bench/x163/cache-build.mjs
 
 bench/x163/*.heapprofile
+
+# X164 generated experiments
+bench/x164/*.mjs
+!bench/x164/*-build.mjs
+bench/x164/*.cpuprofile
+.cache/x164/

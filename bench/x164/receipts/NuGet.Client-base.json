@@ -1,0 +1,13 @@
+{
+  "path": "bench/x164/fixtures/NuGet.Client.props",
+  "arm": "base",
+  "message": "¶ k=v. expand repeatedly; print only.\n§ыGroupбCommonЕ)' != 'trueь   Т'\"пы Condition=\"'$(_WasбPropsImportedЕТ>\nьяCustomBeforeMicrosoftаTargetsуяCSharpат$(На);тMSBuildThisFileDirectory)г иг </PropertyывUsingToolXliffн>\nе <оньел Condition=\"'тіUpdateXlfOnBuildрImportдер Project=\"build\\сгеPropertyж</й>\n\n¶<Projectнг <!-- Temporarily detect that common props haven't been imported since not every project is using this new logic yet. -->\nспеу>тяCSharpНbuild\\common.targetsжунингерпдconfig.props\" />\nьдcommon.project.props\" />\nг </рынсп <!-- Some legacy projects reference assemblies in GAC;AssemblyFolders. -->\nь <!-- Reset AssemblySearchPaths to empty to let Microsoft.Common.targets pick the legacy defaults -->\nьеAssemblySearchPathsлUsingMicrosoftNETSdkЕ'\" />\nийсыов>trueжвоілCIЕТ>trueжіоябалDotNetBuild)' == 'trueТ>тябНeng\\dotnet-build\\TargetingPacks.Beforeба.targetsжябанийжProjectн",
+  "tokens": 236,
+  "tagTokens": 236,
+  "siblingTokens": 236,
+  "nestTokens": 236,
+  "decoded": "<Project>\n  <!-- Temporarily detect that common props haven't been imported since not every project is using this new logic yet. -->\n  <PropertyGroup Condition=\"'$(_WasCommonPropsImported)' != 'true'\">\n    <CustomBeforeMicrosoftCSharpTargets>$(CustomBeforeMicrosoftCSharpTargets);$(MSBuildThisFileDirectory)build\\common.targets</CustomBeforeMicrosoftCSharpTargets>\n  </PropertyGroup>\n  <ImportGroup Condition=\"'$(_WasCommonPropsImported)' != 'true'\">\n    <Import Project=\"build\\config.props\" />\n    <Import Project=\"build\\common.project.props\" />\n  </ImportGroup>\n  <PropertyGroup Condition=\"'$(_WasCommonPropsImported)' != 'true'\">\n    <!-- Some legacy projects reference assemblies in GAC;AssemblyFolders. -->\n    <!-- Reset AssemblySearchPaths to empty to let Microsoft.Common.targets pick the legacy defaults -->\n    <AssemblySearchPaths Condition=\"'$(UsingMicrosoftNETSdk)' != 'true'\" />\n  </PropertyGroup>\n\n  <PropertyGroup>\n    <UsingToolXliff>true</UsingToolXliff>\n    <UpdateXlfOnBuild Condition=\"'$(CI)' != 'true'\">true</UpdateXlfOnBuild>\n    <CustomBeforeMicrosoftCommonTargets Condition=\"'$(DotNetBuild)' == 'true'\">$(CustomBeforeMicrosoftCommonTargets);$(MSBuildThisFileDirectory)eng\\dotnet-build\\TargetingPacks.BeforeCommonTargets.targets</CustomBeforeMicrosoftCommonTargets>\n  </PropertyGroup>\n\n</Project>\n",
+  "scope": "TAGSTACK plus SIBLING-TEMPLATE plus NEST; optional applicability audited separately",
+  "ms": 15243.088088999999,
+  "cpuMs": 11521.377
+}

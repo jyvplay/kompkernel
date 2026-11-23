@@ -1,0 +1,11 @@
+Decode first, then rotate ASCII letters forward 13 places in their A-Z or a-z alphabet, wrapping around. Preserve everything else; print only.
+¶ k=v. expand repeatedly; print only.
+§р
+еiәре64хә Не64 и	нииderived: аcкра   эк*юр#d  врtd  си	unsignedпрv   қ64)л(c*)м)	byte swap б _урu64 о longі32ы jж,А pointerш()я8¶memory map: B [128,i/o] A [128,tokens] x [іжhexconv] o [224,registers]
+
+Memory is "allocated" from the stackж by taking a local (stack) variableрand subtracting 64k -- thereby leaving plenty of room for even relativelyрlarge stack frames during recursion.
+
+i    main(iжа**) parse command line or stdinж assignmentsж print resultж error recoveryрхбииdotк*Aииlexical tokensэB		input bufferв Cск Dииsome state between funcsэE		error stringж endАх Fшиexpr: + - ^ |
+uc   Gшиnon-local gotoю Hсю I		typedefв Jииjmp_bufк*Kииpointer to cmd line argsв L		charп M(uқиdetect errorsж save answer in dotж format result in decimal and hexк*N		freebie nullАв Oс charв P		voidв Q		intю R		returnк Sииsyntax error + tokensк*T		current tokenАп Uл	print the registersв V		longою W(x)	for(;x;)в X		long - only for rule2sp.cв Yс shortв Zсоох aніх bн1х_b(iқиterm: << >> >>>х ан10әбалиconvert binary globalы to ascii decimalх d		freebie: 0п_d(iқ	accumulate converted ascii bytes intoы in base passed inх eн256х fн2х_fшиconvert from ascii to binary: selects convert base (10,яж16), result inыу g(u16м16-bitsу h(uімі-bitsх i(uқ	select size and byte swap minimal bytesп_елиconditional printхыииholds partial/accumulated results
+*()  k		ptr-to-func-getcharре  бkш	get chars from saved cmd lineрjb   l		for parser error recoveryк mш	scans input for tokenж ignores whitespaceк nш	get next input characterх*o		registers рuі  pлиwrites to stdout until nullж newline appended intelligentlyп q(**)	initх r(c)	writes c to stdoutх sнях tн4х uн3к v		current input tokenх wш	read from stdin until newline or semiж skips blank lines + commentsж return lenэxииaptly named hex conversion tableх yшиterm: * / % & (<< >> >>>)
+Н zшиfactor ~ ! ? -/+ () VAR NUM DOT

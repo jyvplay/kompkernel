@@ -1,0 +1,10 @@
+import fs from 'node:fs';import {build} from 'esbuild';
+const original=fs.readFileSync('src/lib/omega/ariadne.ts','utf8');const start=original.indexOf('      let arr = bestArr.slice();'),end=original.indexOf('\n    const finalMap = mkMap(bestArr);',start);const part=original.slice(start,end);
+const init='const trial = new Array<string>(arr.length);',copy='        for (let i = 0; i < arr.length; i++) trial[i] = arr[i];',save='arr = trial.slice();';
+if(part.split(init).length!==2||part.split(copy).length!==2||part.split(save).length!==4)throw Error('rollback anchors');
+const assertion=`        for(let i=0;i<arr.length;i++)if(trial[i]!==arr[i])throw Error('X164 rollback invariant');
+        (globalThis as any).__x164RollbackChecks=((globalThis as any).__x164RollbackChecks??0)+1;`;
+const fast=part.replace(init,'const trial = arr.slice();').replace(copy,'        // X164 rollback or accepted move already leaves trial committed.').replaceAll(save,'/* X164 trial itself is the committed assignment. */');
+const audit=part.replace(init,'const trial = arr.slice();').replace(copy,assertion);
+for(const [arm,contents] of [['A',original],['B',original.slice(0,start)+fast+original.slice(end)],['audit',original.slice(0,start)+audit+original.slice(end)]])await build({entryPoints:['bench/x164/cache-speed.ts'],bundle:true,platform:'node',format:'esm',outfile:`bench/x164/rollback-speed-${arm}.mjs`,plugins:[{name:'rollback-state-specialization',setup(b){b.onLoad({filter:/[\\/]ariadne\.ts$/},()=>({contents,loader:'ts'}));}}]});
+fs.writeFileSync('bench/x164/receipts/rollback-patch.json',JSON.stringify({production:false,removedPerProbe:'full assignment overwrite',removedOnAcceptance:'three branch-specific committed-array copies',invariant:'trial initially equals committed assignment; rejecting reverses logged writes in reverse order; accepting clears log without changing trial; skipped branches preserve or roll back',original:part,fast,audit},null,2));

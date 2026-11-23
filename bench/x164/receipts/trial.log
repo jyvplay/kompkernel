@@ -1,0 +1,17 @@
+bench/x164/fixtures/files-browse.page base 809
+bench/x164/fixtures/files-browse.page candidate 837
+bench/x164/fixtures/net-wireless-connect.page base 812
+file:///home/user/kompkernel/bench/x164/trial.mjs:4228
+      else if (c === "<") throw Error("ANTIKLEIS nested token");
+                                ^
+
+Error: ANTIKLEIS nested token
+    at scan (file:///home/user/kompkernel/bench/x164/trial.mjs:4228:33)
+    at antikleisUndo (file:///home/user/kompkernel/bench/x164/trial.mjs:4260:10)
+    at antikleisRead (file:///home/user/kompkernel/bench/x164/trial.mjs:4276:10)
+    at file:///home/user/kompkernel/bench/x164/trial.mjs:37216:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+Node.js v22.22.3

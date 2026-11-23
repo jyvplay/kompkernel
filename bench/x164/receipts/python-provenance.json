@@ -1,0 +1,66 @@
+[
+  {
+    "repo": "pydantic/pydantic",
+    "revision": "1aaef01805ae0bc436954a4e863cc0b64a827193",
+    "path": "pydantic/_internal/_generics.py",
+    "file": "pydantic-_generics.py",
+    "bytes": 25593,
+    "sha256": "2497621806c89122a30ade8960057daed619e92b115c3190a6218fea4d5cc963"
+  },
+  {
+    "repo": "pydantic/pydantic",
+    "revision": "1aaef01805ae0bc436954a4e863cc0b64a827193",
+    "path": "pydantic/_internal/_typing_extra.py",
+    "file": "pydantic-_typing_extra.py",
+    "bytes": 20272,
+    "sha256": "4e8840819093ef98696178e4ffffa75b41f5a42136711b6f8df9fcab5f8eeb0f"
+  },
+  {
+    "repo": "pandas-dev/pandas",
+    "revision": "717bcd3eda554a0b2e826889f9e30efbd88f00cd",
+    "path": "pandas/core/indexers/utils.py",
+    "file": "pandas-utils.py",
+    "bytes": 17355,
+    "sha256": "2bb826885cffb9dc0700f9c1626361e8e78ef43414171b33cdbc93482a066824"
+  },
+  {
+    "repo": "pandas-dev/pandas",
+    "revision": "717bcd3eda554a0b2e826889f9e30efbd88f00cd",
+    "path": "pandas/core/reshape/encoding.py",
+    "file": "pandas-encoding.py",
+    "bytes": 21533,
+    "sha256": "92509a95e9f973dcd36c894c4f8fe7e092a0d021dbe375dc79bff2f6264e590e"
+  },
+  {
+    "repo": "scikit-learn/scikit-learn",
+    "revision": "21626d67d47889da8d19f3dd2a819a0cf527f27f",
+    "path": "sklearn/utils/_tags.py",
+    "file": "scikit-learn-_tags.py",
+    "bytes": 10029,
+    "sha256": "d84571406452835ec44be77ec27652156785f2e5c728c6564ef82e75276409bf"
+  },
+  {
+    "repo": "pytest-dev/pytest",
+    "revision": "718929265449ca33040264152ba5e7022e766a52",
+    "path": "src/_pytest/mark/structures.py",
+    "file": "pytest-structures.py",
+    "bytes": 26244,
+    "sha256": "bc5b3f502e8927e902546808e0097e38b4d6a29adf915ae64bfa7fcd90dba5e5"
+  },
+  {
+    "repo": "astral-sh/ruff",
+    "revision": "3c06ae6c84b54b5eb4cc1bc611043d5b978bfa7f",
+    "path": "scripts/generate_mkdocs.py",
+    "file": "ruff-generate_mkdocs.py",
+    "bytes": 10157,
+    "sha256": "592196d095378eafe0e2d27f782d81c35326aa6e49160b8ac5e3a80d49c151c7"
+  },
+  {
+    "repo": "python/cpython",
+    "revision": "22691a32b122cff3ad17460c068f70e806cd7e84",
+    "path": "Lib/graphlib.py",
+    "file": "cpython-graphlib.py",
+    "bytes": 12482,
+    "sha256": "905c5e625e19dd472d4e960518f51e640b7ee44788cab81cad5bc4a9baaa011b"
+  }
+]

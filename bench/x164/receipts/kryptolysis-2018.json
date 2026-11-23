@@ -1,0 +1,134 @@
+{
+  "path": "bench/x164/cipher/2018.rot13",
+  "base": {
+    "message": "¶ k=v. expand repeatedly; print only.\n§ن\nینvى\tكىىيqاfبjyvarی z(p)كjnag(p), unaيyrا rfpncrاعvatة vری o(v)ى\tqrpbqr serrpbqr hfعة ovgfیه ونهئ nسrljbeيص xستی q(f,v)\tvائص?\nّ(v,v)\tpbzcngُنi tّ_jbeيانشكtybonyم fgeعث gevtencuخ gnoyrڳv w()كyrkreغ fcnprۇغ/ahyyفى\tpل,د bcgvbaضavgلدfٰg zncنىز nycunorgط gbxraأنcپى\tqrsvarيقى\tfgneg bsې rapbيعظ,v)ىcevagچv u(fظة punef bs fل be hagvy ahyyھی e(vظ net1 nf vag gb fgيbhg/ree ol net2ل genvyrي olغ/arگ256ح yَ0¶zrzbel znc: Zه(bssfrgلحratgu)\n\tَلگ\t طvmngvba syntانىگل128\t صحratgu bssfrٰ384,640\t صما (453 punef)\n\t1024,32\tهد ovٰ1056,32   trgbcgمنى1088,گ ث zncننserrpbqr: gevanelلزههَ { 1 } 2 ;\n\thاع guerr gevgالهgurز N-M jvguئۇ pna or rapbqrq:\nكَۇل 1 Nله2 Oله3 Pل ...\n\tnygubhtu guvfې vf abg gur bayl barنىpbqr vf serr-sbezلغ ntabfgvpه(bar be zberغا ner erdhverيهsbe vg gb or 'serr')\n\tqrpbيع vf pbagrkgهيrcraqragل glcvpnyyl hfعه3 be zber gevgانىgur cebtenz pbzzragf hfr o(3) naq gurزې nobirلن\tohg gurl ner abg pyrnayl fcyvg ba 3-gevg obhaqnevrf(!)\n\nv Nفjنه Oی P\t\tppنه Qی Rفkأ S[]\t\txسالطةضةavgلدملثةavgنه Tی Uفbzzrag uvfgbelی Vفvنه Wی Xفxی Yفyنp Z[2053]\tzrzbel:ط syntالصخلدخلثخو Aأ Bقهjuvgrfcnprنه Cنه Dی E\t\tgانه Fی Gكgxني Hپهhfntr zrffntr (-QH=\"\\\"uryc grkg\\\"\")\n  Iني Jپ erfreirq jbeيم (-QJ=\\\"xسا\\\")نه Kنه Lی Mكگیئشر pشتc rكraq bs ohssreنi sُّچأةكohssreنڳو xیحك10 / arبو aشی bشو cأ d\t\txسةaqrkخھjyvarنههاقطوهgوهhیهiفzيحvar syntانه jوهkوهlأ mفheerag cbvagreننshapgvbafننچھبتڳُi sّر znva(pلcc)\tvضل ernيلهpbhagل cevag\n",
+    "tokens": 714
+  },
+  "ranking": [
+    {
+      "inverse": 13,
+      "rawTokens": 698
+    },
+    {
+      "inverse": 2,
+      "rawTokens": 1037
+    },
+    {
+      "inverse": 17,
+      "rawTokens": 1043
+    },
+    {
+      "inverse": 24,
+      "rawTokens": 1044
+    },
+    {
+      "inverse": 23,
+      "rawTokens": 1045
+    },
+    {
+      "inverse": 6,
+      "rawTokens": 1048
+    },
+    {
+      "inverse": 19,
+      "rawTokens": 1050
+    },
+    {
+      "inverse": 3,
+      "rawTokens": 1058
+    },
+    {
+      "inverse": 4,
+      "rawTokens": 1059
+    },
+    {
+      "inverse": 12,
+      "rawTokens": 1059
+    },
+    {
+      "inverse": 22,
+      "rawTokens": 1063
+    },
+    {
+      "inverse": 18,
+      "rawTokens": 1067
+    },
+    {
+      "inverse": 9,
+      "rawTokens": 1070
+    },
+    {
+      "inverse": 16,
+      "rawTokens": 1070
+    },
+    {
+      "inverse": 25,
+      "rawTokens": 1076
+    },
+    {
+      "inverse": 5,
+      "rawTokens": 1077
+    },
+    {
+      "inverse": 20,
+      "rawTokens": 1077
+    },
+    {
+      "inverse": 14,
+      "rawTokens": 1080
+    },
+    {
+      "inverse": 7,
+      "rawTokens": 1084
+    },
+    {
+      "inverse": 21,
+      "rawTokens": 1084
+    },
+    {
+      "inverse": 15,
+      "rawTokens": 1091
+    },
+    {
+      "inverse": 10,
+      "rawTokens": 1095
+    },
+    {
+      "inverse": 1,
+      "rawTokens": 1096
+    },
+    {
+      "inverse": 8,
+      "rawTokens": 1097
+    },
+    {
+      "inverse": 11,
+      "rawTokens": 1099
+    }
+  ],
+  "parents": [
+    {
+      "folded": "memory map: M (offset, length)\n\t0,256\t  tokenization flags\n\t256,128\t  keyword length offset map\n\t384,640\t  keyword strings (453 chars)\n\t1024,32\t  option bit map\n\t1056,32   getopt string\n\t1088,256  trigraph map\n\nfreecode: trinary, alphabet  0 { 1 } 2 ;\n\tusing three trits, the alphabet A-Z with a space/null can be encoded:\n\t\t0 space/null, 1 A, 2 B, 3 C, ...\n\talthough this encoding is not the only one\n\tcode is free-form, space agnostic (one or more spaces are required for it to be 'free')\n\tdecoding is context dependent, typically using 3 or more trits\n\tthe program comments use b(3) and the alphabet encoding above,\n\tbut they are not cleanly split on 3-trit boundaries(!)\n\ni A\t\tcw\n  B\ni C\t\tcc\n  D\ni E\t\tcx\np F[]\t\tkeywords, token init, options init, option string, trigraph init\n  G\ni H\t\tcomment history\ni I\t\tci\n  J\ni K\t\tck\ni L\t\tcl\nc M[2053]\tmemory: token flags, keyword table, option table, trigraph table\n  N\np O\t\tstart of whitespace\n  P\n  Q\ni R\t\tts\n  S\ni T\t\ttk\nd U\t\tdefined usage message (-DU=\"\\\"help text\\\"\")\n  V\nd W\t\tdefined reserved word string (-DW=\\\"keywords\\\")\n  X\n  Y\ni Z\t\t256\ni a\t\tglobal\ni b(i)\t\tdecode freecode using i bits\ni c\t\tglobal\ni d(s,i)\tis a keyword?\np e\t\tend of buffer\nv f(i,i)\tcompat\nv g(i,i)\tcompat_words\ni h(s,i)\tprint i chars of s, or until null\np i\t\tbuffer\ni j()\t\tlexer\n  k\ni l\t\t10 / newline\ni m(c)\t\twant(c), handles escapes\n  n\t\tglobal\ni o\t\tglobal\n  p\np q\t\tkeyword index table\ni r(i,i)\tprint arg1 as int to stdout/err by arg2, trailed by space/newline\n  s\t\tstart of token\n  t\n  u\ni v\t\tcmd line flags\n  w\n  x\n  y\np z\t\tcurrent pointer\n\nfunctions\n\ni h(s,i)\tprint i chars of s, or until null\ni r(i,i)\tprint arg1 as int to stdout/err by arg2, trailed by space/newline\ni m(c)\t\twant(c), handles escapes\ni d(s,i)\tis a keyword?\ni j()\t\tlexer\nv g(i,i)\tcompat_words\nv f(i,i)\tcompat\ni b(i)\t\tdecode freecode using i bits\ni main(c,pp)\tinit, options, read, count, print\n",
+      "message": "¶ k=v. expand repeatedly; print only.\n§ب\nف تبفنiچ,i)ر,ىن h(sچ\tprint i chars of sر or until nullبابني\tیا b(i)ي\tdecode freecode using i bitsادا m(c)ي\twant(c), handles escapesٹا d(sچ\tis a keyword?\nھ(iچيcompatقبv gھ_wordsبو256َبpلبية trح r(iچ\tprint arg1 as int to stdout/err by arg2رةailed by space/newlineکي\tglobalش j()ييlexerِ mapم tableه0ع3ذ flags¶memory map: Mف(offsetر length)بيهرو\t  tokenization flagsلور128\t  keyword length offsetِل384,640\t  keyword strings (453 chars)\n\t1024,32\t  option bitِل1056,32   getopt stringبي1088روفةigraph map\n\nfreecode: trinaryر alphabetففه { 1 } 2 ;\n\tusing threeةitsر the alphabet A-Z with a space/null can be encoded:ليه space/nullرف1 Aرف2 Bرفع Cر ...\n\talthough this encoding is not the only one\n\tcode is free-form, space agnosticف(one or more spaces are required for it to be 'free')\n\tdecoding is context dependentرفtypically usingفع or moreةits\n\tthe program comments use b(ع) and the alphabet encoding aboveربيbut they are not cleanly split onفع-trit boundaries(!)\n\ni Aييcwت Bا C\t\tccت Dا Eييcxَ F[]ييkeywords, token initرفoptions initرفoption stringرةigraph initت Gا H\t\tcomment historyا I\t\tcنت Jا Kييckا L\t\tclبc M[2053]\tmemory: tokenذر keywordمر optionمرةigraphمت Nَ O\t\tstart of whitespaceت Pت Qا R\t\ttsت Sا Tييtkبd Uييdefined usage message (-DU=\"\\\"help text\\\"\")\n  Vبd Wييdefined reserved word string (-DW=\\\"keywords\\\")ت Xت Yا Zييوافaکی cکٹp e\t\tend of bufferبv fھقىp ني\tbufferاشت kافlيي10 / newlineدت nکا oکت pَ qييkeyword indexماحت s\t\tstart of tokenتفtتفuافv\t\tcmd lineذت wتفxتفyَ z\t\tcurrent pointer\n\nfunctions\n\nىنحدٹنشقv fھی main(cرpp)\tinitرفoptionsرفreadرفcountرفprint\n",
+      "tokens": 519,
+      "ms": 27188.265137999995,
+      "cpuMs": 18637.987
+    },
+    {
+      "folded": "xpxzcj xla: X (zqqdpe, wpyres)\n\t0,256\t  ezvpytkletzy qwlrd\n\t256,128\t  vpjhzco wpyres zqqdpe xla\n\t384,640\t  vpjhzco dectyrd (453 nslcd)\n\t1024,32\t  zaetzy mte xla\n\t1056,32   rpezae dectyr\n\t1088,256  ectrclas xla\n\nqcppnzop: ectylcj, lwaslmpe  0 { 1 } 2 ;\n\tfdtyr escpp ected, esp lwaslmpe L-K htes l dalnp/yfww nly mp pynzopo:\n\t\t0 dalnp/yfww, 1 L, 2 M, 3 N, ...\n\tlweszfrs estd pynzotyr td yze esp zywj zyp\n\tnzop td qcpp-qzcx, dalnp lryzdetn (zyp zc xzcp dalnpd lcp cpbftcpo qzc te ez mp 'qcpp')\n\topnzotyr td nzyepie opapyopye, ejatnlwwj fdtyr 3 zc xzcp ected\n\tesp aczrclx nzxxpyed fdp m(3) lyo esp lwaslmpe pynzotyr lmzgp,\n\tmfe espj lcp yze nwplywj dawte zy 3-ecte mzfyolctpd(!)\n\nt L\t\tnh\n  M\nt N\t\tnn\n  O\nt P\t\tni\na Q[]\t\tvpjhzcod, ezvpy tyte, zaetzyd tyte, zaetzy dectyr, ectrclas tyte\n  R\nt S\t\tnzxxpye stdezcj\nt T\t\tnt\n  U\nt V\t\tnv\nt W\t\tnw\nn X[2053]\txpxzcj: ezvpy qwlrd, vpjhzco elmwp, zaetzy elmwp, ectrclas elmwp\n  Y\na Z\t\tdelce zq hstepdalnp\n  A\n  B\nt C\t\ted\n  D\nt E\t\tev\no F\t\topqtypo fdlrp xpddlrp (-OF=\"\\\"spwa epie\\\"\")\n  G\no H\t\topqtypo cpdpcgpo hzco dectyr (-OH=\\\"vpjhzcod\\\")\n  I\n  J\nt K\t\t256\nt l\t\trwzmlw\nt m(t)\t\topnzop qcppnzop fdtyr t mted\nt n\t\trwzmlw\nt o(d,t)\ttd l vpjhzco?\na p\t\tpyo zq mfqqpc\ng q(t,t)\tnzxale\ng r(t,t)\tnzxale_hzcod\nt s(d,t)\tactye t nslcd zq d, zc fyetw yfww\na t\t\tmfqqpc\nt u()\t\twpipc\n  v\nt w\t\t10 / yphwtyp\nt x(n)\t\thlye(n), slyowpd pdnlapd\n  y\t\trwzmlw\nt z\t\trwzmlw\n  a\na b\t\tvpjhzco tyopi elmwp\nt c(t,t)\tactye lcr1 ld tye ez deozfe/pcc mj lcr2, ecltwpo mj dalnp/yphwtyp\n  d\t\tdelce zq ezvpy\n  e\n  f\nt g\t\tnxo wtyp qwlrd\n  h\n  i\n  j\na k\t\tnfccpye aztyepc\n\nqfynetzyd\n\nt s(d,t)\tactye t nslcd zq d, zc fyetw yfww\nt c(t,t)\tactye lcr1 ld tye ez deozfe/pcc mj lcr2, ecltwpo mj dalnp/yphwtyp\nt x(n)\t\thlye(n), slyowpd pdnlapd\nt o(d,t)\ttd l vpjhzco?\nt u()\t\twpipc\ng r(t,t)\tnzxale_hzcod\ng q(t,t)\tnzxale\nt m(t)\t\topnzop qcppnzop fdtyr t mted\nt xlty(n,aa)\ttyte, zaetzyd, cplo, nzfye, actye\n",
+      "message": "¶ k=v. expand repeatedly; print only.\n§ی\nفیtغ)ل\tهdخphwtypف x(nغل\thlye(n), slyowpd pdnlapهر بیرشل\trwzmlwۀ,tغي lأvpjhzcoو أس tyطف o(dۀ\ttdيو?\nۇ(tۀ\tnzxaleگیg rۇ_hzcodیا,ئ zaetzyتteائن dectyrعيwaslmpeقف m(tغل\topnzop qcppnzop fdtyr t mtedفة dalnp/yٹل\tnثt u()ل\twpipcمیلٌ zc xzcp ک ectrclasص ezvpyَ qwlrdڈیaظل\tdelce zqہ xlaـ pynzotyrح elmwpِل\topqtypoىyeيcr1 ld tye ez deozfe/pcc mjيcr2ا ecltwpo mjةذt s(dۀ\tactye t nslcd zq dا zc fyetw yfwwدف c(tۀ\tactض wز256ج0ك3¶xpxzcjہ: Xر(zqqdpeاضpyresغمجاز\tرصtkletzyَمزا128\tروضpyres zqqdpeہم384,640\t ونه (453 nslcdغم1024اك2\t ئ mteہم1056اك2   rpezaeنم1088از کہ\n\nqcppnzop: ectylcjاعررج { 1 } 2 ;\n\tfdtyr escpp ectedارespع L-K htesيةfww nly mp pynzopo:ملجةfwwار1 Lار2 Mارك Nا ...\n\tlweszfrs estهـ td yze esp zywj zypمnzop td qcpp-qzcx, dalnpيryzdetnر(zypٌdalnpهيcp cpbftcpo qzc te ez mpر'qcpp')\n\topnzotyr td nzyepie opapyopyeا ejatnlwwj fdtyrركٌectedمesp aczrclx nzxxpyed fdp m(كغيyo espعـيmzgpای\tmfe espjيcp yze nwplywj dawte zyرك-ecte mzfyolctpd(!)\n\nt Lللnhب Mف Nللnnب Oف Pللniڈ Q[]\t\tأdاصستهستناکسteب Rف Sللnzxxpye stdezcjف Tللntب Uف Vللnvف Wللnwیn X[2053]\txpxzcj:صَاوحائحاکحب Yڈ Zظرhstepdalnpب Aب Bف C\t\teهب Dف E\t\tevیo Fِ fdlrp xpddlrp (-OF=\"\\\"spwa epie\\\"\"غب Gیo Hِ cpdpcgpo hzcoن (-OH=\\\"أd\\\")ب Iب Jف Kللزفيشق nشطa p\t\tpyo zq mfqqpcیg qۇگذڈرtللmfqqpcیثبرvفضل\t10 / yخبرyشف zشب aڈرb\t\tأسopiحدىphwtypبرdظصب eبرfفرgٹxoضtypَب hبرiبرjڈرkٹfccpye aztyepc\n\nqfynetzyهییذدىخطثگg qۇق xlty(nاaaغلtyتها cploارnzfyeا actye\n",
+      "tokens": 734,
+      "ms": 31611.55756,
+      "cpuMs": 23166.62
+    }
+  ],
+  "result": {
+    "message": "Decode first, then rotate ASCII letters forward 13 places in their A-Z or a-z alphabet, wrapping around. Preserve everything else; print only.\n¶ k=v. expand repeatedly; print only.\n§ب\nف تبفنiچ,i)ر,ىن h(sچ\tprint i chars of sر or until nullبابني\tیا b(i)ي\tdecode freecode using i bitsادا m(c)ي\twant(c), handles escapesٹا d(sچ\tis a keyword?\nھ(iچيcompatقبv gھ_wordsبو256َبpلبية trح r(iچ\tprint arg1 as int to stdout/err by arg2رةailed by space/newlineکي\tglobalش j()ييlexerِ mapم tableه0ع3ذ flags¶memory map: Mف(offsetر length)بيهرو\t  tokenization flagsلور128\t  keyword length offsetِل384,640\t  keyword strings (453 chars)\n\t1024,32\t  option bitِل1056,32   getopt stringبي1088روفةigraph map\n\nfreecode: trinaryر alphabetففه { 1 } 2 ;\n\tusing threeةitsر the alphabet A-Z with a space/null can be encoded:ليه space/nullرف1 Aرف2 Bرفع Cر ...\n\talthough this encoding is not the only one\n\tcode is free-form, space agnosticف(one or more spaces are required for it to be 'free')\n\tdecoding is context dependentرفtypically usingفع or moreةits\n\tthe program comments use b(ع) and the alphabet encoding aboveربيbut they are not cleanly split onفع-trit boundaries(!)\n\ni Aييcwت Bا C\t\tccت Dا Eييcxَ F[]ييkeywords, token initرفoptions initرفoption stringرةigraph initت Gا H\t\tcomment historyا I\t\tcنت Jا Kييckا L\t\tclبc M[2053]\tmemory: tokenذر keywordمر optionمرةigraphمت Nَ O\t\tstart of whitespaceت Pت Qا R\t\ttsت Sا Tييtkبd Uييdefined usage message (-DU=\"\\\"help text\\\"\")\n  Vبd Wييdefined reserved word string (-DW=\\\"keywords\\\")ت Xت Yا Zييوافaکی cکٹp e\t\tend of bufferبv fھقىp ني\tbufferاشت kافlيي10 / newlineدت nکا oکت pَ qييkeyword indexماحت s\t\tstart of tokenتفtتفuافv\t\tcmd lineذت wتفxتفyَ z\t\tcurrent pointer\n\nfunctions\n\nىنحدٹنشقv fھی main(cرpp)\tinitرفoptionsرفreadرفcountرفprint\n",
+    "tokens": 549,
+    "applied": true,
+    "parentCalls": 2,
+    "inverse": 13
+  },
+  "ms": 100822.576967,
+  "cpuMs": 71182.81
+}

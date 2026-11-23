@@ -11172,3 +11172,74 @@ Unbounded inflect800/1800MBbaseline and1700MBcandidate OOM; bounded1200MB
 baseline was stopped after12+minutes with no receipt, candidate not started.
 No completed large-source price. Whole-parent heap sampling identifies token
 cache allocations as further targets, not a certified speedup.
+
+## X164 — KRYPTOLYSIS: cyclic ASCII-alphabet preconditioning
+
+**Experimental optional codec, not wired into the production frontier.** Classical
+Caesar substitution is human prior art; no matching operation was found in the
+prior405-module stack search (including STOIBAS and LEXARITHMOS). This is a
+repository addition, not a claim of theoretical invention or exhaustive semantic
+novelty proof. The inverse shift and A–Z/a–z wraparound rule are in-band.
+Only ASCII letters change; case, Unicode and all other bytes are preserved.
+Domain: UTF8-stable strings≤50000UTF16units. Decode the parent, rotate forward
+by the declared shift, print exactly. No external dictionary, training or key.
+
+**Search / resources.** Not greedy: all25direct complete-message prices are
+ranked, and only the top2representations receive full parent encodes. All direct
+and parent candidates compete against an exact-verified incumbent, strict gains
+only. This heuristic is not globally optimal over25parent encodes. CPU-bound:
+25linear alphabet transforms plus tokenizer work and≤2full parent calls;
+O(25n)retained candidate text, O(n)rotation inverse, no wall-time cutoff.
+
+**Actual complete prices.** Two pinned whole IOCCC ROT13 explanatory documents:
+2015,2158bytes,870→622(248saved,28.51%);2018,1882bytes,714→549(165saved,23.11%).
+Both select inverse13.6078unit checks,3033independent Python checks (standard
+CPython rot_13 on these sources),34gate checks verify original bytes, complete
+prices, parent outputs and optional prior-codec eligibility.45raw-complete
+screens yield only these2gains;43controls do not improve directly. Those controls
+are not45complete-parent runs. Native basic-chat inverse behavior **NOT_RUN**;
+no broad everyday-prose or strong Pareto certification.
+
+**ANTIKLEIS correction.** The first candidate was mistakenly called new because
+a search excluded tagstack.ts as an aggregator. Existing TAGSTACK already
+replaces closing names using a stack. The mistake was falsified by the real SDK
+baseline and is retained in `bench/x164/receipts/novelty-correction.json`.
+ANTIKLEIS is only a compact19token instruction/marker refinement: manual pages
+save11,11,10,31tokens; SDK saves25; NuGet loses1and refuses.20073unit checks,
+4045independent checks including12full wires,97gate checks. Parent-reader repairs
+for existing XML TAGSTACK `~` and `+` were followed by affected gate reruns.
+HYSTERON forward comprehension-binder references lost all6eligible raw screens
+among8whole Python sources and remain a rejected bench artifact.
+
+**Canonical / leaders.** Fresh29-lane X163 replay is byte-identical in all29wires,
+11962tokens unchanged. All29prices and token-ID roundtrips pass; the bounded
+separate repository reader handles21wires, explicitly reports8unsupported.
+These are not independent native-chat tests. Inherited category classification:
+prose5856→3429(word-led tape), ops17278→5580(glyph-led), code4152→2636(word-led),
+other729→317(no tape class). Largest absolute fixture savings: apt1926,
+ls-l3884, JSON499, cue412; ops relative leader prices.csv79.73%. Token-class
+counts are not per-codec ablations or lower bounds.
+
+**Speed gate failed, no production speed patch.** Three12ABBA whole-stack
+experiments: fail-first CPU/wall ratios0.986250/0.991724; bounded global chunk
+cache0.979076/0.977216; rollback specialization0.979014/0.976945. None meets
+≥10%improvement with protected-lane nonregression. Exact outputs and targeted
+cache-capacity/rollback-closure checks pass; fidelity alone does not imply speed.
+
+**Recent literature, honest scope.** Maskey/Zhu/Naseem2025, *Benchmarking Large
+Language Models for Cryptanalysis and Mismatched-Generalization*,
+https://arxiv.org/html/2505.24621v1 (first HTML chunk inspected), distinguishes
+semantic comprehension from decryption accuracy and does not certify our long
+exact-byte packets. *Broken-Token: Filtering Obfuscated Prompts by Counting
+Characters-Per-Token*2025, https://www.alphaxiv.org/abs/2510.26847 (paper abstract
+inspected; site's AI overview is not primary proof), motivates testing BPE
+fragmentation in reverse, not a compression or security theorem. SEA2025
+DOI10.4230/LIPIcs.SEA.2025.14, ACL2025 DOI10.18653/v1/2025.acl-long.795, and
+WEBIST2013 DOI10.5220/0004365100050015 are separately scoped in research.md.
+Per-lab OpenAI/Anthropic/Google/DoubleAI/ByteDance interface inspections and finite
+checks are also there; no Lean replay or exhaustive audit is claimed.
+
+Full A–J ledger,24deceptive-evidence tests, rejected hypotheses, provenance,
+source files and native-test packets: `bench/x164/README.md`. Highest-information
+next test: blinded one-basic-chat exact decoding of the complete packets,
+followed by broader unencoded prose/ops trials. Merge is not scientific acceptance.

@@ -1,0 +1,134 @@
+{
+  "path": "bench/x164/cipher/2015.rot13",
+  "base": {
+    "message": "¶ k=v. expand repeatedly; print only.\n§в\tсqїв\tqrevirс: р\nаvтра64 үра64м  дрgсмАв\thafvtarсорpм *бр#смОрp   Еввіgr fjncэ)вolі Б erfhygК reebe erpbirelъаfgrefНЕserrovrГ nfpvvнbairegИpphzhyngrз pөзzс yvarС gbxraиfеgrиф gb fgсbhgц64)У qrpvznyё sebzп _крiмпы\tpВвыheeragьвgrez:ә cbаagreұрi   һСfоу(p*)ӯрh64 я,л32ш ol¶zrzbel znc: O [128,v/b] N [128,gbxraf] k [ляurkpbai] b [224,ertъ]\n\nZrzbel vf \"nyybpngrq\"ё gur fgnpxяш gnxvat n ybpny (fgnpx) inevnoyrрnaq fhogenpgvat 64x -- gurerol yrnivat cyragl bs ebbz sbe rira eryngvirylрynetr fgnpx senzrf qhevat erphefvba.\n\nv    znva(v,p**) cnefr pbzznaq yvar be fgqvaя nffvtazragия cevagБ,Крт _\t\tqbgО*NЕyrkvpnyһO\t\tvachg ohssreд PАО QЕfbzr fgngr orgjrra shapиоRЕreebe fgevatя raсәт S()\trkce: + - ^ |\nhp   T()\taba-ybpny tbgbб UАб V\t\tglcrqrsд W\t\twzc_ohsоX\t\tcbvagre gbө netид Yвыuneұ Z(hц\tqrgrpg reebeия fnir nafjre va qbgя sbezngБ vaУ naq urkО*AН ahyyәд BАзuneд CЕibvqд D\t\tvagб EЕergheaО F\t\tflagnk reebe +һGВСәұ Hувcevag gur ertъд I\t\tybat ybatб J(k)\tsbe(;k;)д K\t\tybat - bayl sbe ehyr2fc.pд LА fubegд MА ybat ybatт nїлүмoї1т_o(vць << >> >>>т pї10т_pуын ovanel tybony w gbГУт qН: 0кс(vц\tnИзнrqГше vagb w va onfr cnffrq vaт rї256т sї2т_s()\tpнёГ gb ovanel: fryrpgизн onfr (10,8,16),Б va wӯ t(h16э16-ovgfӯ u(hлэл-ovgfт v(hц\tfryrpg иаmr naqші zvavzny olекауыbaqvgvbany cevagүмwЕubyси cnegvny/nИсБир*()  x\t\tcge-gb-shap-trgpuneрампx()\ttrg puneиё fnirqөрwo   y\t\tsbe cnefreКО z()\tfpnaf vachg sbeС, vtaberf juаеcnprО a()\ttrg arkg vachg punenpgreт*bЕertъ рhл  cувjevеф hagvy ahyyя arjyvar nccraqrq vagryyvtragylұ d(**)\tvavgүмe(p)\tjevезфт fї8т gї4т hї3О iВ vachgСт j()\ternсё fgqva hagvy arjyvar be frzая fxvcf oynax yvarf + pbzzragия erghea yraоkЕncgyl anzrq urk pbairefvba gnoyrүмl()ь * / % & (<< >> >>>)т m()\tsnpgbe ~ ! ? -/+ () INE AHZ QBG\n",
+    "tokens": 870
+  },
+  "ranking": [
+    {
+      "inverse": 13,
+      "rawTokens": 780
+    },
+    {
+      "inverse": 6,
+      "rawTokens": 1160
+    },
+    {
+      "inverse": 17,
+      "rawTokens": 1169
+    },
+    {
+      "inverse": 19,
+      "rawTokens": 1171
+    },
+    {
+      "inverse": 24,
+      "rawTokens": 1172
+    },
+    {
+      "inverse": 3,
+      "rawTokens": 1186
+    },
+    {
+      "inverse": 23,
+      "rawTokens": 1189
+    },
+    {
+      "inverse": 4,
+      "rawTokens": 1192
+    },
+    {
+      "inverse": 22,
+      "rawTokens": 1192
+    },
+    {
+      "inverse": 12,
+      "rawTokens": 1193
+    },
+    {
+      "inverse": 2,
+      "rawTokens": 1197
+    },
+    {
+      "inverse": 15,
+      "rawTokens": 1199
+    },
+    {
+      "inverse": 7,
+      "rawTokens": 1207
+    },
+    {
+      "inverse": 25,
+      "rawTokens": 1207
+    },
+    {
+      "inverse": 18,
+      "rawTokens": 1208
+    },
+    {
+      "inverse": 9,
+      "rawTokens": 1211
+    },
+    {
+      "inverse": 21,
+      "rawTokens": 1214
+    },
+    {
+      "inverse": 16,
+      "rawTokens": 1219
+    },
+    {
+      "inverse": 11,
+      "rawTokens": 1222
+    },
+    {
+      "inverse": 14,
+      "rawTokens": 1225
+    },
+    {
+      "inverse": 20,
+      "rawTokens": 1226
+    },
+    {
+      "inverse": 10,
+      "rawTokens": 1227
+    },
+    {
+      "inverse": 5,
+      "rawTokens": 1231
+    },
+    {
+      "inverse": 8,
+      "rawTokens": 1238
+    },
+    {
+      "inverse": 1,
+      "rawTokens": 1239
+    }
+  ],
+  "parents": [
+    {
+      "folded": "memory map: B [128,i/o] A [128,tokens] x [32,hexconv] o [224,registers]\n\nMemory is \"allocated\" from the stack, by taking a local (stack) variable\nand subtracting 64k -- thereby leaving plenty of room for even relatively\nlarge stack frames during recursion.\n\ni    main(i,c**) parse command line or stdin, assignments, print result, error recovery\n\ni64  _\t\tdot\nc   *A\t\tlexical tokens\nc   *B\t\tinput buffer\ntd   C\t\tunsigned\nc    D\t\tsome state between funcs\nc   *E\t\terror string, end pointer\ni64  F()\texpr: + - ^ |\nuc   G()\tnon-local goto\n#d   H\t\tunsigned\n#d   I\t\ttypedef\ntd   J\t\tjmp_buf\nc   *K\t\tpointer to cmd line args\ntd   L\t\tchar\nv    M(u64)\tdetect errors, save answer in dot, format result in decimal and hex\nc   *N\t\tfreebie null pointer\ntd   O\t\tunsigned char\ntd   P\t\tvoid\ntd   Q\t\tint\n#d   R\t\treturn\nc    S\t\tsyntax error + tokens\nc   *T\t\tcurrent token pointer\nv    U(c*)\tprint the registers\ntd   V\t\tlong long\n#d   W(x)\tfor(;x;)\ntd   X\t\tlong - only for rule2sp.c\ntd   Y\t\tunsigned short\ntd   Z\t\tunsigned long long\ni64  a\t\tderived: 32\ni64  b\t\tderived: 1\ni64 _b(i64)\tterm: << >> >>>\ni64  c\t\tderived: 10\ni64 _c(c*)\tconvert binary global j to ascii decimal\ni64  d\t\tfreebie: 0\nv   _d(i64)\taccumulate converted ascii bytes into j in base passed in\ni64  e\t\tderived: 256\ni64  f\t\tderived: 2\ni64 _f()\tconvert from ascii to binary: selects convert base (10,8,16), result in j\nu64  g(u16)\tbyte swap 16-bits\nu64  h(u32)\tbyte swap 32-bits\ni64  i(u64)\tselect size and byte swap minimal bytes\nv   _i(c*)\tconditional print\ni64  j\t\tholds partial/accumulated results\n*()  k\t\tptr-to-func-getchar\ni   _k()\tget chars from saved cmd line\njb   l\t\tfor parser error recovery\nc    m()\tscans input for token, ignores whitespace\nc    n()\tget next input character\ni64 *o\t\tregisters \nu32  p(c*)\twrites to stdout until null, newline appended intelligently\nv    q(**)\tinit\ni64  r(c)\twrites c to stdout\ni64  s\t\tderived: 8\ni64  t\t\tderived: 4\ni64  u\t\tderived: 3\nc    v\t\tcurrent input token\ni64  w()\tread from stdin until newline or semi, skips blank lines + comments, return len\nc   *x\t\taptly named hex conversion table\ni64  y()\tterm: * / % & (<< >> >>>)\ni64  z()\tfactor ~ ! ? -/+ () VAR NUM DOT\n",
+      "message": "¶ k=v. expand repeatedly; print only.\n§р\nеiәре64хә Не64 и\tнииderived: аcкра   эк*юр#d  врtd  си\tunsignedпрv   қ64)л(c*)м)\tbyte swap б _урu64 о longі32ы jж,А pointerш()я8¶memory map: B [128,i/o] A [128,tokens] x [іжhexconv] o [224,registers]\n\nMemory is \"allocated\" from the stackж by taking a local (stack) variableрand subtracting 64k -- thereby leaving plenty of room for even relativelyрlarge stack frames during recursion.\n\ni    main(iжа**) parse command line or stdinж assignmentsж print resultж error recoveryрхбииdotк*Aииlexical tokensэB\t\tinput bufferв Cск Dииsome state between funcsэE\t\terror stringж endАх Fшиexpr: + - ^ |\nuc   Gшиnon-local gotoю Hсю I\t\ttypedefв Jииjmp_bufк*Kииpointer to cmd line argsв L\t\tcharп M(uқиdetect errorsж save answer in dotж format result in decimal and hexк*N\t\tfreebie nullАв Oс charв P\t\tvoidв Q\t\tintю R\t\treturnк Sииsyntax error + tokensк*T\t\tcurrent tokenАп Uл\tprint the registersв V\t\tlongою W(x)\tfor(;x;)в X\t\tlong - only for rule2sp.cв Yс shortв Zсоох aніх bн1х_b(iқиterm: << >> >>>х ан10әбалиconvert binary globalы to ascii decimalх d\t\tfreebie: 0п_d(iқ\taccumulate converted ascii bytes intoы in base passed inх eн256х fн2х_fшиconvert from ascii to binary: selects convert base (10,яж16), result inыу g(u16м16-bitsу h(uімі-bitsх i(uқ\tselect size and byte swap minimal bytesп_елиconditional printхыииholds partial/accumulated results\n*()  k\t\tptr-to-func-getcharре  бkш\tget chars from saved cmd lineрjb   l\t\tfor parser error recoveryк mш\tscans input for tokenж ignores whitespaceк nш\tget next input characterх*o\t\tregisters рuі  pлиwrites to stdout until nullж newline appended intelligentlyп q(**)\tinitх r(c)\twrites c to stdoutх sнях tн4х uн3к v\t\tcurrent input tokenх wш\tread from stdin until newline or semiж skips blank lines + commentsж return lenэxииaptly named hex conversion tableх yшиterm: * / % & (<< >> >>>)\nН zшиfactor ~ ! ? -/+ () VAR NUM DOT\n",
+      "tokens": 592,
+      "ms": 15133.587744000004,
+      "cpuMs": 10272.939
+    },
+    {
+      "folded": "tltvyf thw: I [128,p/v] H [128,avrluz] e [32,olejvuc] v [224,ylnpzalyz]\n\nTltvyf pz \"hssvjhalk\" myvt aol zahjr, if ahrpun h svjhs (zahjr) chyphisl\nhuk zbiayhjapun 64r -- aolylif slhcpun wsluaf vm yvvt mvy lclu ylshapclsf\nshynl zahjr myhtlz kbypun yljbyzpvu.\n\np    thpu(p,j**) whyzl jvtthuk spul vy zakpu, hzzpnutluaz, wypua ylzbsa, lyyvy yljvclyf\n\np64  _\t\tkva\nj   *H\t\tslepjhs avrluz\nj   *I\t\tpuwba ibmmly\nak   J\t\tbuzpnulk\nj    K\t\tzvtl zahal iladllu mbujz\nj   *L\t\tlyyvy zaypun, luk wvpualy\np64  M()\tlewy: + - ^ |\nbj   N()\tuvu-svjhs nvav\n#k   O\t\tbuzpnulk\n#k   P\t\tafwlklm\nak   Q\t\tqtw_ibm\nj   *R\t\twvpualy av jtk spul hynz\nak   S\t\tjohy\nc    T(b64)\tklalja lyyvyz, zhcl huzdly pu kva, mvytha ylzbsa pu kljpths huk ole\nj   *U\t\tmyllipl ubss wvpualy\nak   V\t\tbuzpnulk johy\nak   W\t\tcvpk\nak   X\t\tpua\n#k   Y\t\tylabyu\nj    Z\t\tzfuahe lyyvy + avrluz\nj   *A\t\tjbyylua avrlu wvpualy\nc    B(j*)\twypua aol ylnpzalyz\nak   C\t\tsvun svun\n#k   D(e)\tmvy(;e;)\nak   E\t\tsvun - vusf mvy ybsl2zw.j\nak   F\t\tbuzpnulk zovya\nak   G\t\tbuzpnulk svun svun\np64  h\t\tklypclk: 32\np64  i\t\tklypclk: 1\np64 _i(p64)\talyt: << >> >>>\np64  j\t\tklypclk: 10\np64 _j(j*)\tjvuclya ipuhyf nsvihs q av hzjpp kljpths\np64  k\t\tmyllipl: 0\nc   _k(p64)\thjjbtbshal jvuclyalk hzjpp ifalz puav q pu ihzl whzzlk pu\np64  l\t\tklypclk: 256\np64  m\t\tklypclk: 2\np64 _m()\tjvuclya myvt hzjpp av ipuhyf: zlsljaz jvuclya ihzl (10,8,16), ylzbsa pu q\nb64  n(b16)\tifal zdhw 16-ipaz\nb64  o(b32)\tifal zdhw 32-ipaz\np64  p(b64)\tzlslja zpgl huk ifal zdhw tpupths ifalz\nc   _p(j*)\tjvukpapvuhs wypua\np64  q\t\tovskz whyaphs/hjjbtbshalk ylzbsaz\n*()  r\t\tway-av-mbuj-nlajohy\np   _r()\tnla johyz myvt zhclk jtk spul\nqi   s\t\tmvy whyzly lyyvy yljvclyf\nj    t()\tzjhuz puwba mvy avrlu, pnuvylz dopalzwhjl\nj    u()\tnla ulea puwba johyhjaly\np64 *v\t\tylnpzalyz \nb32  w(j*)\tdypalz av zakvba buaps ubss, uldspul hwwluklk pualsspnluasf\nc    x(**)\tpupa\np64  y(j)\tdypalz j av zakvba\np64  z\t\tklypclk: 8\np64  a\t\tklypclk: 4\np64  b\t\tklypclk: 3\nj    c\t\tjbyylua puwba avrlu\np64  d()\tylhk myvt zakpu buaps uldspul vy zltp, zrpwz ishur spulz + jvttluaz, ylabyu slu\nj   *e\t\thwasf uhtlk ole jvuclyzpvu ahisl\np64  f()\talyt: * / % & (<< >> >>>)\np64  g()\tmhjavy ~ ! ? -/+ () CHY UBT KVA\n",
+      "message": "¶ k=v. expand repeatedly; print only.\n§ن\tیlyزpر آن\tkیزclk:را\nياز64رضاز64جز64رقjفاق   *ئن\tbuzpnulkہاak  گا#k رأ lyyvyۇاق   صننس y؟أسljvcیfچ wvpuaیکzپlnpzalyکے zْalےdhwٽ)\tifْرخ ylzbsaھاc   ښ hzقppدvحدuclyaې avګېrluه puظهwbaم\tj؛نمbyyluaَ64)، myvtږ klقpthsەن\tmylliplع _غ عل jٹلtk spulبې zakدbaذرuldspulټېrluzفة(j*)و,ڪ32ّ()ط qتalzڑاb64رش ifى\tz¶tltvyf thw: I [128,p/v] H [128,avrluz] e [ڪوoleقدuc] v [224,yپ]\n\nTltvyf pکر\"hssvjhalk\"، aol zahjrوش ahrpun hرsvjhs (zahjr) chyphislاhukےbiayhjapun 64r -- aoیlif slhcpun wsluaf vmسدvt mvy lclu ylshapclsfاshynl zahjr myhtlz kbypunسljbyzpvu.\n\np    thpu(pوق**) whyzl jvtthuk spul vy zakpuو hzکزnutluaکو wypuaخو؟\n\nجع\t\tkvaفH\t\tslepjhsټI\tنزuwba ibmmیہ Jئۇ Kنىvtlےahal iladllu mbujzفLصیyvy zaypunو lukچي Mّنlewy: + - ^ |\nbj   Nّنuvu-svjhs nvavگ Oئگ Pصafwlklmہ Q\t\tqtw_ibmفR\t\twvpualyېٹ hynکہ Sنمohyھ T(bَنklaljaأکو zhcl huzdیه kvaورmvythaخهږ huk oleفUە ubssچہ Vئرjohyہ W\t\tcvpkہ X\t\tpuaگرYصylabyuۇ Zصzfuaheأ +ټA؛ګچھ Bة\twypua aolسپہ C\t\tsvun svunگ D(e)\tmvy(;e;)ہ E\t\tsvun - vusf mvyرybsl2zw.jہ Fئےovyaہ Gئرsvun svunي hآڪي iآ1اج_i(pَ\talyt: << >> >>>يلآ10ضعقةمح ipuhyf nsvihsط avښږي kە: 0ھ_k(pَ\thjjbtbshalلحlkښشتهavطه ihzl whzzlkهي lآ256اج mآ2اج_mّمح،ښې ipuhyf: zlsljazلح ihzl (10,8,16),خه qڑ n(b16ٽ16-ipazڑ o(bڪٽڪ-ipazي p(bَىlslja zpgl hukشْ tpupthsشتاc غزةمدukpapvuhs wypuaيطصovskz whyaphs/hjjbtbshalkخکا*ّر rصway-av-mbuj-nlajohyاز رعrّ\tnla johyz، zhclkٹاqi   s\t\tmvy whyکی؟ۇ tّىjhuzظ mvyګو pnuvylz dopalzwhjlۇرuّ\tnla uleaظلohyhjalyاج*v\t\tyپراbڪر wة\tdypتبرbuaps ubssوذ hwwluklkرزualsspnluasfھرx(**)\tpupaيس(j)\tdypتلبيےآ8اج aآ4اج bآ3ۇ c؛ظګي dّنylhk، zakpu buapsذرvyےltزورzrpwکرishur spulz + قدttluaکو ylabyu sluفe\t\thwasf uhtlk oleلدucیzpvu ahislاجرfّ\talyt: * / % & (<< >> >>>)اج gّ\tmhjavy ~ ! ? -/+ () CHY UBT KVA\n",
+      "tokens": 878,
+      "ms": 30210.936127000008,
+      "cpuMs": 19960.605
+    }
+  ],
+  "result": {
+    "message": "Decode first, then rotate ASCII letters forward 13 places in their A-Z or a-z alphabet, wrapping around. Preserve everything else; print only.\n¶ k=v. expand repeatedly; print only.\n§р\nеiәре64хә Не64 и\tнииderived: аcкра   эк*юр#d  врtd  си\tunsignedпрv   қ64)л(c*)м)\tbyte swap б _урu64 о longі32ы jж,А pointerш()я8¶memory map: B [128,i/o] A [128,tokens] x [іжhexconv] o [224,registers]\n\nMemory is \"allocated\" from the stackж by taking a local (stack) variableрand subtracting 64k -- thereby leaving plenty of room for even relativelyрlarge stack frames during recursion.\n\ni    main(iжа**) parse command line or stdinж assignmentsж print resultж error recoveryрхбииdotк*Aииlexical tokensэB\t\tinput bufferв Cск Dииsome state between funcsэE\t\terror stringж endАх Fшиexpr: + - ^ |\nuc   Gшиnon-local gotoю Hсю I\t\ttypedefв Jииjmp_bufк*Kииpointer to cmd line argsв L\t\tcharп M(uқиdetect errorsж save answer in dotж format result in decimal and hexк*N\t\tfreebie nullАв Oс charв P\t\tvoidв Q\t\tintю R\t\treturnк Sииsyntax error + tokensк*T\t\tcurrent tokenАп Uл\tprint the registersв V\t\tlongою W(x)\tfor(;x;)в X\t\tlong - only for rule2sp.cв Yс shortв Zсоох aніх bн1х_b(iқиterm: << >> >>>х ан10әбалиconvert binary globalы to ascii decimalх d\t\tfreebie: 0п_d(iқ\taccumulate converted ascii bytes intoы in base passed inх eн256х fн2х_fшиconvert from ascii to binary: selects convert base (10,яж16), result inыу g(u16м16-bitsу h(uімі-bitsх i(uқ\tselect size and byte swap minimal bytesп_елиconditional printхыииholds partial/accumulated results\n*()  k\t\tptr-to-func-getcharре  бkш\tget chars from saved cmd lineрjb   l\t\tfor parser error recoveryк mш\tscans input for tokenж ignores whitespaceк nш\tget next input characterх*o\t\tregisters рuі  pлиwrites to stdout until nullж newline appended intelligentlyп q(**)\tinitх r(c)\twrites c to stdoutх sнях tн4х uн3к v\t\tcurrent input tokenх wш\tread from stdin until newline or semiж skips blank lines + commentsж return lenэxииaptly named hex conversion tableх yшиterm: * / % & (<< >> >>>)\nН zшиfactor ~ ! ? -/+ () VAR NUM DOT\n",
+    "tokens": 622,
+    "applied": true,
+    "parentCalls": 2,
+    "inverse": 13
+  },
+  "ms": 81053.777737,
+  "cpuMs": 54238.19
+}

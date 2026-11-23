@@ -1,0 +1,35 @@
+Decode first; replace <> with the matching XML end tag. Preserve everything else; print only.
+¶ k=v. expand repeatedly; print only.
+§ಕ <ഷ type="്ಕmediaഷimageട" src="figuresನ if:test="स"ನ!target:mobileു     ದ">
+ുಕಿpरसದಿա   ว
+ുമಕitem>
+์ xref="ഖಕಿ><link์े-classicսplatform:gnomeेश.png" width="ես">
+ադ്ട/shellบമുഖshellլ ಕif:when test="สif:choose>
+լ!ि" style="floatend floatrightाश250िफ menuს>
+
+ლ.<სა ಕರლადlist style="compact">
+ิლადան <>
+կաಕತնկcreditഷeditorದname>ק">Learn more aboutիան նր.<>
+ი<ე<>
+իմಕಿ>შის մვისტ<>
+ുಕemail>ח overviewോ">
+აtitle>ীಕkey์keyboard-key-super">Super<> keyಂ<>
+ատ. You can alsoร="http://www.w3.org/200י,א youγ<section id="ு1.0ં/ு/"
+ു xmlns:่ andדי่นկlinkഷguide"ו theో"/სկזו top barह inוש yourค windowsೆgui>Activities<>חה applicationsבשค่הר calendarण>Clockירת
+ เისიॉ ofוצ aಲוค onו current workspaceנ toก allowsאנतי orลח. This showsאסית clickומ. Theφ live thumbnails of allग screenยיו lockगल window listटर>GNOME Shell top barერಿನ!ս">ા="http://projectmallard.orgոլեդอสեդி. You canת alsoवार>Userफემ.<><>
+անցმასვγχ@gmail.comಂತ್ರროש computerעו systemफ inט
+աբGNOME featuresצןיא will
+ ม appointments્ו dashנג openכ access¶<page xmlnsાંifા/ifંitsร5/11/its"
+ുഷtopic" style="ui" version="ு if/ு"
+      id="shell-introduction">
+
+ ಕinfo>
+น์shell-overview" group="#first"/>
+น์index" group="introోrevision version="gnome:44" date="2023-12-29" status="reviewోcreditഷauthorದname>Shaun McCanceტshaunm@gnome.orgಂತMichael HillტmdhillcaχEkaterina Gerasimovaტkittykat3756χAndre Klapperტak-47@gmx.netಂ ვկinclude href="legal.xml" xmlnsร1/XIncludeోdesc>A visual overview ofש desktopיזדוטಕೆրასაtitle>Visual overview of GNOMEშբ user interface designedנ stay out ofש wayי minimizeת distractionsד helpא get things done. Whenא first log inן seeוಕೆ andזლიอ-top-barश600टո-top-barेश500टშThe top bar providesכנביאrתר่มדתಕlink์status-icons">system properties<> like soundי networkingית and power. Inעזיא can changeו volume orתग brightnessי editשಕgui>Wi-Fi<> connection detailsי checkשת battery statusי log out or switch usersד turn offოლიlinksഷsection"/სი!-- TODO: Replace "Activities overview" title for classic mode with something
+like "Application windows" by using if:when and if:else ? -->
+γactivitiesോ<ೆვარWhen you start GNOMEיא automaticallyת enterוಕೆמחกכתב. Inוחיא can also just startת typing to searchשהי filesי foldersדו web್To accessוח at any timeס Activities buttonह top-left cornerत just moveש mouseת pointerנו top-left hot cornerտ pressותী onש keyboardರಿನս">To accessבס button atו bottom leftॉगहलி pressוীנ see anתח withφಲლ դ-activities-dash.png" height="65िस, !եմActivities button and Dash<>
+ նარAt the bottomॉחן findוಕem>dash<>מ dash showsאש favorite and runningתה. Click any iconह dashנג that application; ifות application is already runningי it will have a small dot below its icon.
+  Clicking its icon will bring up the most recently used windowտת dragו icon onto a workspace್Right-clicking the icon displays aफת thatก pick any window in a running applicationतנג a newת windowտ clickו icon while holding downಕkey>Ctrl<> toגת a new window್When you enterוחן initially beहคลφתಲ್Click the grid button (which has nineת dots) in્ displayוהล allותה installed onო. Click any applicationנ run itतת drag an applicationנו onto a workspace shown aboveו installedתהտ drag an application onto્ make itצת favorite. Your favorite applications stayह dash even when they’re notת runningי soא canכוm quicklyิบ-apps-openק startingว applicationsმաบ-windowsק windows่ว workspacesցclockോClockיר &amp; appointmentsเอ-apptsारण,ม่ notificationsეո-apptsेारणד appointmentsეშClick the clock onזנ seeו current dateיצ month-by-monthתריצ list ofש upcomingม่ new notificationsிגור by pressingתಕkeyseq><key>Super<><key>V<><>. You canכו date andת time settings andגש full calendar application directly fromתוफิമുഖclock-calendarקור่วมმ   บ-notificationsק notifications่วו notification listმასვ
+γsystemmenuോSystem menuเอ-exitवո-exitेवშClickעו top-right cornerנ manageש systemת settings andოמ top partॉफ showsו batteryת status indicatorד buttonsנ launch Settings่ו screenshot toolמת്" its:translate="noട/system-shutdown-symbolic.svg">
+  power<> buttonก suspend or power offו computerतת quickly give somebody else accessנו computer without logging outת completely. Sliders allowאנ controlו sound volume orगת brightnessರಿ>The restॉफ consists of Quick Settings buttons which letאת quickly control available services and devices like Wi-Fi, Bluetoothי powerת settingsד background appsิบ-exitק switching usersי logging outיว่ turning offომաമുഖquick-settingsק Quickว SettingsցlockscreenോLock ScreenშWhen you lockשगत it locks automaticallyย isת displayed. In additionנ protectingש desktop whileא’re away fromשת computerย displaysו date and time. It also showsת information aboutש battery and network statusิบ-lockscreenקו lockวगցwindow-listോWindow Listเสեմբ different approachנ switchingค thanצט permanently visibleल found in other desktop environments. Thisט letsא focus onו task at hand without distractionsրկდുമ       ഖshell-windows-switchingק switchingטുwindows.<><>
+      ეո-window-listेश800र>Window ListಂնամTheल atו bottomॉग providesכנ allשטגค่ה่ letsא quickly minimize and restoreט themրամAt the right-hand sideॉलי GNOME displaysו fourט workspaces. To switchנצ different workspaceי selectו workspaceאט want to useր նვის<>
