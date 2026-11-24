@@ -1,0 +1,6 @@
+{
+  "repaired": "PASS",
+  "oldControl": "EXPECTED_FAIL",
+  "oldIncumbentOrder": "EXPECTED_FAIL",
+  "scope": "instrumented counters distinguish pre-price and pre-scan resource guards from late refusal"
+}

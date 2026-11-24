@@ -12332,3 +12332,18 @@ coverage is 21 supported / eight unsupported. Three benchmark-only speed arms
 fail the significant-speedup gate; no production hot-path edit was adopted.
 See `bench/x165/README.md` and receipts for exactness, repriced final contracts,
 resource failures, bounded research, and unfulfilled acceptance criteria.
+
+## X166 experimental context collation
+
+SYMFRAZ (`src/lib/omega/symfraz.ts`) is an unwired STC-inspired textual context
+collation transform. It derives a stable numeric side-stream order from the
+frozen skeleton rather than transmitting a permutation. Its finite selector,
+CPU/memory bounds, exact refusal rules and source citation are in
+`docs/codec-abbreviations.md` under X166. Five complete parent trials lose; there
+is no broad/native Pareto claim. Two separate runtime arms also fail their gates,
+so no production hot-path patch is installed. Evidence, including unsupported
+independent-reader cases, is in `bench/x166/README.md` and its receipts.
+
+Fresh X166 replay confirms29/29unchanged X165 wires and11962tokens. Reader coverage
+remains21supported/eight unsupported; refreshed local/category leaders are in
+`bench/x166/receipts/local-leaders.json`. Requests memory failures remain unresolved.

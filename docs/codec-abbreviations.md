@@ -11320,3 +11320,74 @@ objective; revisited prior citation, not a new token lower bound. Full hypothese
 per-lab proof-interface inspections,27deceptive-evidence tests, repairs and
 remaining gaps are in `bench/x165/README.md` and `research.md`. No Lean replay,
 exhaustive lab audit, terminal codec or human-blind discovery is claimed.
+
+## X166 — SYMFRAZ: context-collated numeric side streams
+
+**Experimental/unwired. No broad token or native Pareto certification.** Named
+from συμφραζόμενα (context), SYMFRAZ moves selected maximal ASCII digit strings
+into a side stream. It replaces each with one `~`, freezes the skeleton, and
+sorts holes by preceding then following k Unicode code points, lexicographically
+by scalar value, stable left-to-right on ties. Digit strings are transmitted in
+that order. The inverse derives the same permutation from the skeleton and
+inserts all strings simultaneously, preserving leading zeros and variable widths.
+No external dictionary or preceding chat is required by the program contract;
+basic-chat model execution is **NOT_RUN**.
+
+**Greedy?** No: finite enumeration of k=1/4/12 and digit-run minimum length 1/4,
+≤6 deduplicated complete-message prices; at most one actual parent call, with
+byte-checked incumbent fallback. No global optimum. **Resources:** source≤50000
+UTF16 units, complete wire≤51000; O(n+kh log h) per arm, O(n+kh) memory for h
+holes, plus tokenization and the explicit parent cost. CPU-bound, not wall-clock
+limited. Literal tilde causes refusal. Oversized/non-UTF8-stable parent outputs
+are rejected before pricing; the guard received fresh unit and full-wire gates.
+
+**Novelty boundary:** all 410 current omega TS modules inventoried. PSIFIDA
+transposes equal-width digit planes; this uses a context-derived permutation of
+whole variable-width strings. Column codecs require table structure; this does
+not. DEIKTIS copies a prior continuation; this moves literal values and uses
+frozen future context. The audit is bounded, not semantic-equivalence proof.
+Explicit prior art: Du et al., *STC: Reversible Digit-Context Decomposition for
+BWT-Family Text Compression* (2026), first HTML chunk inspected;
+[3](https://arxiv.org/html/2606.03570v3). STC's reported archive/decoder-byte
+ablation is not a BPE/native result. SYMFRAZ is a textual adaptation, not a claim
+that AI discovered a mechanism unseen by human researchers.
+
+**Measured:** 34 whole sources, 135 plans, zero raw-complete SYMFRAZ wins. Actual
+parent candidates lose: kb620→694, email486→570, JSON653→762, findmnt385→459,
+ps-real381→462; all retain their incumbents. 8524 unit checks / 4245 pairs; final
+resource-repair gate40 checks. Independent Python4392 supported checks including
+12 full wires; findmnt base/candidate/selected are explicitly unsupported by that
+reader. TS checks those wires separately; this is not independent native evidence.
+
+**Other mechanisms:** fresh DEIKTIS, space-field BWT, COLEX component reversal,
+LEXARITHMOS numeral grammar and recency-word controls remain separate screens.
+Only costs of complete raw representations are compared there; those screens
+are not parent wins. Six families and their specific adversaries are documented
+in `bench/x166/README.md`.
+
+**Runtime:** bounded local run-memo trial retains12identical wires but fails
+(CPU1.0071×/wall1.0303×); a repaired prose-path run overlapped TypeScript checking,
+so its timings are additionally ineligible for isolated certification. A second,
+properly heavy-worker-isolated, detached-key ABBA trial retains12identical wires
+but fails too (CPU1.0228×/wall1.0154×). Its V8 substring-retention microbenchmark
+reduces retained heap40.19MB→0.226MB, but full-lane peak RSS does NOT establish
+that improvement. No micro-to-whole inference or production speed patch.
+
+**Research:** 2024 online-attractor bounds count marked positions under irrevocable
+left-to-right decisions, not BPE messages; 2024 k-attractor hardness does not
+establish codec optimality or practical impossibility. OpenAI's actual symbol-bound
+proof source is separated from its `sorry` challenge statement; Anthropic's numeric
+premise boundary is checked separately from its recursion. An external Python-chess
+replay validates DoubleAI's190-ply63-check witness, not its64-impossibility proof.
+Per-lab evidence and citations: `bench/x166/research.md`. No exhaustive lab audit,
+Lean replay, native certification or terminal codec is claimed. Canonical replay
+and category-leader receipts are recorded in the X166 ledger.
+
+X166 final canonical refresh:29/29identical X165 wires,11962tokens;21supported
+separate-reader inverses/8unsupported;29complete prices/token-ID checks. Category
+aggregates remain prose5856→3429, ops17278→5580, code4152→2636, other729→317;
+word/glyph/word/no-tape classes respectively. Generalized local leaders are in
+`bench/x166/receipts/local-leaders.json`, with inherited-label caveats. Requests
+original instrumented and detached-key trials both exhaust900MB heaps (exit134);
+neither yields a wire. Final pre-scan incumbent guard and pre-price parent guard
+pass their mutation controls; build and TypeScript pass. Acceptance remains unmet.

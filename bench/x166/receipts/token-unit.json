@@ -1,0 +1,5 @@
+{
+  "checks": 18000,
+  "passed": true,
+  "scope": "both encodings, cache hits/misses, Unicode/surrogate and whitespace boundaries"
+}

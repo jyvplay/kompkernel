@@ -1,0 +1,15 @@
+{
+  "source": "bench/x165/fixtures/psf_requests-quickstart.rst",
+  "sourceSha256": "5914de6a636d91ca2ca3a0df55ef8e57359e3fe364fb7176fdee60d231fe2e9f",
+  "instrumentedOriginal": {
+    "heapLimitMB": 900,
+    "exit": 134,
+    "wire": "NOT_PRODUCED"
+  },
+  "detachedKeys": {
+    "heapLimitMB": 900,
+    "exit": 134,
+    "wire": "NOT_PRODUCED"
+  },
+  "conclusion": "Neither run completed. Detached keys do not repair Requests at this limit; instrumentation and concurrency prohibit fair timing comparisons."
+}

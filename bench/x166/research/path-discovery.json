@@ -1,0 +1,20 @@
+[
+  {
+    "lab": "openai",
+    "returnedLeanPaths": 53554,
+    "retainedScopedPaths": 1,
+    "completeness": "not asserted; GitHub recursive trees may be truncated; direct contents API used for inspected sources"
+  },
+  {
+    "lab": "anthropic",
+    "returnedLeanPaths": 1812,
+    "retainedScopedPaths": 3,
+    "completeness": "not asserted; GitHub recursive trees may be truncated; direct contents API used for inspected sources"
+  },
+  {
+    "lab": "doubleai",
+    "returnedLeanPaths": 46,
+    "retainedScopedPaths": 17,
+    "completeness": "not asserted; GitHub recursive trees may be truncated; direct contents API used for inspected sources"
+  }
+]

@@ -1,0 +1,19 @@
+[
+  "lean/ChessProof/All63/Admissible.lean",
+  "lean/ChessProof/All63/Assign.lean",
+  "lean/ChessProof/All63/Attained.lean",
+  "lean/ChessProof/All63/Axioms.lean",
+  "lean/ChessProof/All63/Cases.lean",
+  "lean/ChessProof/All63/Circuit.lean",
+  "lean/ChessProof/All63/Enc.lean",
+  "lean/ChessProof/All63/Final.lean",
+  "lean/ChessProof/All63/Frame.lean",
+  "lean/ChessProof/All63/Geom.lean",
+  "lean/ChessProof/All63/Invariant.lean",
+  "lean/ChessProof/All63/Main.lean",
+  "lean/ChessProof/All63/Sound.lean",
+  "lean/ChessProof/All63/Symmetry.lean",
+  "lean/ChessProof/All63/Trust.lean",
+  "lean/ChessProof/C364/Trust.lean",
+  "lean/ChessProof/Trust.lean"
+]

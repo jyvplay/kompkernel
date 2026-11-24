@@ -1,0 +1,32 @@
+{
+  "symfraz": {
+    "eligible": 29,
+    "plans": 135,
+    "rawCompleteWins": 0
+  },
+  "deiktis": {
+    "eligible": 29,
+    "plans": 166,
+    "rawCompleteWins": 20
+  },
+  "bwt": {
+    "eligible": 34,
+    "plans": 34,
+    "rawCompleteWins": 8
+  },
+  "colex": {
+    "eligible": 33,
+    "plans": 101,
+    "rawCompleteWins": 1
+  },
+  "lexarithmos": {
+    "eligible": 0,
+    "plans": 0,
+    "rawCompleteWins": 0
+  },
+  "recency": {
+    "eligible": 29,
+    "plans": 29,
+    "rawCompleteWins": 1
+  }
+}

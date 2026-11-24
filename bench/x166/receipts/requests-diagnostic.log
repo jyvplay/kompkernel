@@ -1,0 +1,77 @@
+{"event":"parent-start","fn":"() => synkrisisEncode(text, enc)","heap":62743432}
+{"event":"local-run-memo","entries":65536,"chars":223678,"heap":119065112}
+{"event":"local-run-memo","entries":65536,"chars":208657,"heap":99783408}
+{"event":"local-run-memo","entries":65536,"chars":223678,"heap":158529856}
+{"event":"local-run-memo","entries":65536,"chars":208657,"heap":119405800}
+{"event":"local-run-memo","entries":65536,"chars":223678,"heap":161496880}
+{"event":"local-run-memo","entries":65536,"chars":208657,"heap":159153896}
+{"event":"local-run-memo","entries":65536,"chars":223678,"heap":131152112}
+{"event":"local-run-memo","entries":65536,"chars":208657,"heap":144492224}
+{"event":"local-run-memo","entries":65536,"chars":223678,"heap":175554816}
+{"event":"local-run-memo","entries":65536,"chars":208657,"heap":124030656}
+{"event":"local-run-memo","entries":65536,"chars":223678,"heap":187440368}
+{"event":"local-run-memo","entries":65536,"chars":208657,"heap":201210352}
+Debugger listening on ws://127.0.0.1:9229/13e44d13-91e4-41da-afbc-ad6e659f10d8
+For help, see: https://nodejs.org/learn/getting-started/debugging
+{"event":"local-run-memo","entries":65536,"chars":223678,"heap":239399512}
+{"event":"local-run-memo","entries":65536,"chars":208657,"heap":151840168}
+Debugger attached.
+{"event":"local-run-memo","entries":65536,"chars":223678,"heap":225205008}
+{"event":"local-run-memo","entries":65536,"chars":208657,"heap":238636224}
+{"event":"local-run-memo","entries":65536,"chars":223678,"heap":175397744}
+{"event":"local-run-memo","entries":65536,"chars":208657,"heap":173003920}
+{"event":"local-run-memo","entries":65536,"chars":223678,"heap":223435072}
+{"event":"local-run-memo","entries":65536,"chars":208657,"heap":222463120}
+{"event":"local-run-memo","entries":65536,"chars":223678,"heap":161560584}
+{"event":"local-run-memo","entries":65536,"chars":208657,"heap":175031784}
+Debugger ending on ws://127.0.0.1:9229/13e44d13-91e4-41da-afbc-ad6e659f10d8
+For help, see: https://nodejs.org/learn/getting-started/debugging
+{"event":"local-run-memo","entries":65536,"chars":223678,"heap":156688432}
+{"event":"local-run-memo","entries":65536,"chars":208657,"heap":173829608}
+Debugger attached.
+Debugger ending on ws://127.0.0.1:9229/13e44d13-91e4-41da-afbc-ad6e659f10d8
+For help, see: https://nodejs.org/learn/getting-started/debugging
+{"event":"local-run-memo","entries":65536,"chars":223946,"heap":660398552}
+{"event":"local-run-memo","entries":65536,"chars":208612,"heap":676876192}
+{"event":"local-run-memo","entries":65536,"chars":223946,"heap":595093728}
+{"event":"local-run-memo","entries":65536,"chars":208612,"heap":608178544}
+{"event":"local-run-memo","entries":65536,"chars":223946,"heap":645409424}
+{"event":"local-run-memo","entries":65536,"chars":208612,"heap":658787832}
+{"event":"local-run-memo","entries":65536,"chars":223946,"heap":692239712}
+{"event":"local-run-memo","entries":65536,"chars":208612,"heap":705263144}
+{"event":"local-run-memo","entries":65536,"chars":223946,"heap":724074120}
+{"event":"local-run-memo","entries":65536,"chars":208612,"heap":737136888}
+{"event":"local-run-memo","entries":65536,"chars":223946,"heap":623774232}
+{"event":"local-run-memo","entries":65536,"chars":208612,"heap":624337904}
+{"event":"local-run-memo","entries":65536,"chars":223946,"heap":758002240}
+{"event":"local-run-memo","entries":65536,"chars":208612,"heap":771028504}
+{"event":"local-run-memo","entries":65536,"chars":223946,"heap":656226848}
+{"event":"local-run-memo","entries":65536,"chars":208612,"heap":669412008}
+{"event":"local-run-memo","entries":65536,"chars":223946,"heap":712975600}
+{"event":"local-run-memo","entries":65536,"chars":208612,"heap":725446120}
+{"event":"local-run-memo","entries":65536,"chars":223946,"heap":749250496}
+{"event":"local-run-memo","entries":65536,"chars":208612,"heap":762301976}
+{"event":"local-run-memo","entries":65536,"chars":223946,"heap":731358392}
+{"event":"local-run-memo","entries":65536,"chars":208612,"heap":744694264}
+{"event":"local-run-memo","entries":65536,"chars":223946,"heap":629988256}
+{"event":"local-run-memo","entries":65536,"chars":208612,"heap":628437008}
+
+<--- Last few GCs --->
+
+[5702:0x2648b000]   555152 ms: Mark-Compact 861.1 (935.0) -> 847.2 (934.5) MB, pooled: 5 MB, 162.70 / 0.00 ms  (average mu = 0.376, current mu = 0.375) allocation failure; scavenge might not succeed
+[5702:0x2648b000]   555424 ms: Mark-Compact 862.9 (934.5) -> 849.3 (936.7) MB, pooled: 2 MB, 128.76 / 0.00 ms  (average mu = 0.456, current mu = 0.526) allocation failure; scavenge might not succeed
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 0xe46bbe node::OOMErrorHandler(char const*, v8::OOMDetails const&) [node]
+ 2: 0x1243640 v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 3: 0x1243917 v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, v8::OOMDetails const&) [node]
+ 4: 0x1472825  [node]
+ 5: 0x1472853  [node]
+ 6: 0x148b92a  [node]
+ 7: 0x148eaf8  [node]
+ 8: 0x1cf7681  [node]

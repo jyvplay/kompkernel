@@ -1,0 +1,15 @@
+{
+  "dateAuthority": "2026-11-14",
+  "observedUtc": "2026-11-24T00:32:40Z",
+  "node": "v22.22.3",
+  "python": "Python 3.11.2",
+  "lean": null,
+  "lake": null,
+  "independentAgents": 0,
+  "simulators": 0,
+  "database": "NOT_USED",
+  "nativeChatEndpoint": "NOT_EXPOSED",
+  "branch": "arena/6837a10b-kompkernel",
+  "baseCommit": "f2c4709bd53e61f94dae6bbb64fb482d523b0e9c",
+  "packageLockSha256": "1d139641822d3b09140875a01aff30e7a062a3fb631b70460fb2b1b6b0d7c5d8"
+}
