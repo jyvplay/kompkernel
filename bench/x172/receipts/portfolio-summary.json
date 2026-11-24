@@ -1,0 +1,200 @@
+{
+  "weightedMetrida": {
+    "sources": 34,
+    "plans": 218,
+    "rawWins": [],
+    "scope": "raw comparison only, not full-parent frontier advantage"
+  },
+  "ichnos": {
+    "sources": 34,
+    "plans": 25,
+    "rawWins": [
+      {
+        "path": "bench/holdout-x41/ls-l-real.txt",
+        "saved": 211
+      }
+    ],
+    "scope": "raw comparison only, not full-parent frontier advantage"
+  },
+  "mnema": {
+    "sources": 34,
+    "plans": 51,
+    "rawWins": [
+      {
+        "path": "bench/holdout-x41/ls-l-real.txt",
+        "saved": 290
+      },
+      {
+        "path": "bench/holdout-x41/ls-real.txt",
+        "saved": 21
+      },
+      {
+        "path": "bench/holdout/code-ts.txt",
+        "saved": 12
+      },
+      {
+        "path": "bench/holdout-x42/findmnt.txt",
+        "saved": 33
+      },
+      {
+        "path": "bench/x165/fixtures/redis_redis-README.md",
+        "saved": 3
+      }
+    ],
+    "scope": "raw comparison only, not full-parent frontier advantage"
+  },
+  "deiktis": {
+    "sources": 34,
+    "plans": 166,
+    "rawWins": [
+      {
+        "path": "bench/holdout-x41/ls-l-real.txt",
+        "saved": 2213
+      },
+      {
+        "path": "bench/holdout-x41/ps-aux-real.txt",
+        "saved": 1052
+      },
+      {
+        "path": "bench/holdout-x42/dpkg-l.txt",
+        "saved": 61
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "saved": 6
+      },
+      {
+        "path": "bench/holdout-x40/metrics.tsv",
+        "saved": 118
+      },
+      {
+        "path": "bench/holdout-x41/ls-real.txt",
+        "saved": 318
+      },
+      {
+        "path": "bench/holdout-work/email-thread.txt",
+        "saved": 17
+      },
+      {
+        "path": "bench/holdout-x41/du-real.txt",
+        "saved": 19
+      },
+      {
+        "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+        "saved": 171
+      },
+      {
+        "path": "bench/holdout/code-ts.txt",
+        "saved": 84
+      },
+      {
+        "path": "bench/holdout-x42/findmnt.txt",
+        "saved": 163
+      },
+      {
+        "path": "bench/holdout-x42/ps-ef.txt",
+        "saved": 522
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "saved": 382
+      },
+      {
+        "path": "bench/holdout-work/unified-diff.patch",
+        "saved": 9
+      },
+      {
+        "path": "bench/holdout-x42b/vmstat.txt",
+        "saved": 10
+      },
+      {
+        "path": "bench/x165/fixtures/BurntSushi_ripgrep-GUIDE.md",
+        "saved": 963
+      },
+      {
+        "path": "bench/x165/fixtures/astral-sh_uv-README.md",
+        "saved": 229
+      },
+      {
+        "path": "bench/x165/fixtures/pallets_flask-quickstart.rst",
+        "saved": 285
+      },
+      {
+        "path": "bench/x165/fixtures/psf_requests-quickstart.rst",
+        "saved": 386
+      },
+      {
+        "path": "bench/x165/fixtures/redis_redis-README.md",
+        "saved": 517
+      }
+    ],
+    "scope": "raw comparison only, not full-parent frontier advantage"
+  },
+  "bwt": {
+    "sources": 34,
+    "plans": 34,
+    "rawWins": [
+      {
+        "path": "bench/holdout-x41/ls-l-real.txt",
+        "saved": 301
+      },
+      {
+        "path": "bench/holdout-x41/ps-aux-real.txt",
+        "saved": 324
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "saved": 23
+      },
+      {
+        "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+        "saved": 50
+      },
+      {
+        "path": "bench/holdout-x42/ps-ef.txt",
+        "saved": 80
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "saved": 73
+      },
+      {
+        "path": "bench/x165/fixtures/pallets_flask-quickstart.rst",
+        "saved": 77
+      },
+      {
+        "path": "bench/x165/fixtures/psf_requests-quickstart.rst",
+        "saved": 59
+      }
+    ],
+    "scope": "raw comparison only, not full-parent frontier advantage"
+  },
+  "colex": {
+    "sources": 34,
+    "plans": 101,
+    "rawWins": [
+      {
+        "path": "bench/holdout-x41/apt-real.txt",
+        "saved": 52
+      }
+    ],
+    "scope": "raw comparison only, not full-parent frontier advantage"
+  },
+  "lexarithmos": {
+    "sources": 34,
+    "plans": 0,
+    "rawWins": [],
+    "scope": "raw comparison only, not full-parent frontier advantage"
+  },
+  "recency": {
+    "sources": 34,
+    "plans": 29,
+    "rawWins": [
+      {
+        "path": "bench/holdout-x41/ls-l-real.txt",
+        "saved": 148
+      }
+    ],
+    "scope": "raw comparison only, not full-parent frontier advantage"
+  }
+}

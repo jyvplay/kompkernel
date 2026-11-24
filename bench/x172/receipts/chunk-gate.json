@@ -1,0 +1,5 @@
+{
+  "checks": 8607,
+  "distinctChunks": 2869,
+  "scope": "Observed PRETOK chunks longer than two units agree with isolated library encode, including surrounding whitespace/contractions/surrogates. Finite evidence, not arbitrary vocabulary-version proof."
+}

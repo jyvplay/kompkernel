@@ -1,0 +1,41 @@
+{
+  "checks": 5858,
+  "collisions": [
+    {
+      "sum": 13,
+      "solutions": [
+        "a a bb a",
+        "bb bb a a"
+      ]
+    },
+    {
+      "sum": 14,
+      "solutions": [
+        "a a a bb",
+        "bb a bb a"
+      ]
+    },
+    {
+      "sum": 15,
+      "solutions": [
+        "a bb bb a",
+        "bb a a bb"
+      ]
+    },
+    {
+      "sum": 16,
+      "solutions": [
+        "a bb a bb",
+        "bb bb bb a"
+      ]
+    },
+    {
+      "sum": 17,
+      "solutions": [
+        "a a bb bb",
+        "bb bb a bb"
+      ]
+    }
+  ],
+  "conclusion": "Weights distinguish two swapped sites but not all longer ordered assignments; reject nonunique, never infer native success."
+}

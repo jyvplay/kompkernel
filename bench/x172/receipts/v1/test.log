@@ -1,0 +1,7 @@
+{
+  checks: 6863,
+  pairs: 2427,
+  sources: 37,
+  plans: 11,
+  rawWins: [ 'bench/holdout-x41/ls-l-real.txt' ]
+}

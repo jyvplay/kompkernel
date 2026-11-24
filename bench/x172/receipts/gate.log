@@ -1,0 +1,41 @@
+{
+  checks: 48,
+  rows: [
+    {
+      path: 'bench/holdout/code-ts.txt',
+      base: 949,
+      selected: 949,
+      candidates: [Array]
+    },
+    {
+      path: 'bench/holdout-work/email-thread.txt',
+      base: 486,
+      selected: 486,
+      candidates: [Array]
+    },
+    {
+      path: 'bench/holdout/json-pkg.txt',
+      base: 653,
+      selected: 653,
+      candidates: [Array]
+    },
+    {
+      path: 'bench/holdout-work/kb-article.txt',
+      base: 620,
+      selected: 620,
+      candidates: [Array]
+    },
+    {
+      path: 'bench/holdout-x41/ps-real.txt',
+      base: 381,
+      selected: 381,
+      candidates: [Array]
+    },
+    {
+      path: 'bench/holdout-work/unified-diff.patch',
+      base: 411,
+      selected: 411,
+      candidates: [Array]
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "repo": "python/cpython",
+    "commit": "32b51e34318e6dd355f3fb40b8abf94c205444b1",
+    "path": "Doc/tutorial/errors.rst",
+    "file": "bench/x172/fixtures/python_cpython-errors.rst",
+    "bytes": 24533,
+    "sha256": "5b2b278a22c14251a4f0b6e80f6a5939ad9ef612ec7ba56213f1ae88a985fd21",
+    "license": "bench/x172/fixtures/python_cpython-LICENSE.txt",
+    "selection": "new whole document; not model-blinded"
+  },
+  {
+    "repo": "rust-lang/book",
+    "commit": "5c23042f85595490ad9f7412c4c6f57fe0b330d5",
+    "path": "src/ch04-02-references-and-borrowing.md",
+    "file": "bench/x172/fixtures/rust-lang_book-ch04-02-references-and-borrowing.md",
+    "bytes": 10608,
+    "sha256": "7d983eec6235630df6e85c7a5b4cfbdfc7c380c780f60774df65ba2fa1d05ca4",
+    "license": "bench/x172/fixtures/rust-lang_book-LICENSE.txt",
+    "selection": "new whole document; not model-blinded"
+  },
+  {
+    "repo": "kubernetes/website",
+    "commit": "ac7b6d42d503158fdc822e04c88e2035d9a09ae9",
+    "path": "content/en/docs/tasks/debug/debug-application/debug-service.md",
+    "file": "bench/x172/fixtures/kubernetes_website-debug-service.md",
+    "bytes": 23343,
+    "sha256": "76915e474e88fbedecbfe205fb45a85867ea4612453358eda73a330ec991262d",
+    "license": "bench/x172/fixtures/kubernetes_website-LICENSE.txt",
+    "selection": "new whole document; not model-blinded"
+  }
+]

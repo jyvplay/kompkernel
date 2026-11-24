@@ -1,0 +1,18 @@
+[
+  {
+    "id": 35,
+    "prompt": "bench/x172/native/35.txt",
+    "responseBytes": 10608,
+    "responseSha256": "7d983eec6235630df6e85c7a5b4cfbdfc7c380c780f60774df65ba2fa1d05ca4",
+    "expectedContext": "single user message only; no system skills/tools/dictionary",
+    "observed": "NOT_RUN"
+  },
+  {
+    "id": 36,
+    "prompt": "bench/x172/native/36.txt",
+    "responseBytes": 23343,
+    "responseSha256": "76915e474e88fbedecbfe205fb45a85867ea4612453358eda73a330ec991262d",
+    "expectedContext": "single user message only; no system skills/tools/dictionary",
+    "observed": "NOT_RUN"
+  }
+]

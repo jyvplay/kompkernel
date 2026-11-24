@@ -1,0 +1,6 @@
+{
+  "attack": "replace first valid wire with a different source valid wire",
+  "exit": 1,
+  "stderr": "Traceback (most recent call last):\n  File \"/home/user/kompkernel/bench/x172/verify-replays.py\", line 23, in <module>\n    assert r['mismatches']==0, 'source byte mismatch'\n           ^^^^^^^^^^^^^^^^^^\nAssertionError: source byte mismatch\n",
+  "rejected": true
+}

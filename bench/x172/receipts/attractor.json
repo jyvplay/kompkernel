@@ -1,0 +1,49 @@
+{
+  "checks": 9762,
+  "sources": 510,
+  "examples": [
+    {
+      "source": "a",
+      "positions": [
+        0
+      ]
+    },
+    {
+      "source": "b",
+      "positions": [
+        0
+      ]
+    },
+    {
+      "source": "aa",
+      "positions": [
+        0
+      ]
+    },
+    {
+      "source": "ab",
+      "positions": [
+        0,
+        1
+      ]
+    },
+    {
+      "source": "ba",
+      "positions": [
+        0,
+        1
+      ]
+    },
+    {
+      "source": "bb",
+      "positions": [
+        0
+      ]
+    }
+  ],
+  "counterexample": [
+    "aaaa",
+    "bbbb"
+  ],
+  "gap": "Identical attractor positions do not identify source; copy instructions, alphabet and literals must be paid."
+}
