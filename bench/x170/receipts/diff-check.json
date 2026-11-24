@@ -1,0 +1,6 @@
+{
+  "exit": 2,
+  "output": "bench/x170/fixtures/kubernetes_website-LICENSE.txt:396: new blank line at EOF.\nbench/x170/fixtures/kubernetes_website-debug-pods.md:62: trailing whitespace.\n+If a Pod is stuck in the `Waiting` state, then it has been scheduled to a worker node, \nbench/x170/native/40.txt:64: trailing whitespace.\n+If a Pod is stuck in the `Waiting` state, then it has been scheduled to a worker node, \n",
+  "stderr": "",
+  "note": "Warnings are preserved upstream Kubernetes source/license bytes and their exact native prompt. They are intentionally not stripped; original source SHA256 remains verified."
+}

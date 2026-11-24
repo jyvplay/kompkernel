@@ -1,0 +1,1 @@
+{"checks":2880,"scope":"alternating fresh ASCII/Unicode/surrogate inputs around scratch boundary; detects stale slice-string state","seed":170}

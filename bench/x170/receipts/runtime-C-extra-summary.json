@@ -1,0 +1,20 @@
+{
+  "cpuMs": 1.0176328391271585,
+  "wallMs": 1.0153895986254713,
+  "laneRatios": {
+    "bench/holdout-work/email-thread.txt": {
+      "cpuMs": 0.9780322153972396,
+      "wallMs": 0.968144034720503
+    },
+    "bench/holdout-work/unified-diff.patch": {
+      "cpuMs": 1.0169557188558624,
+      "wallMs": 1.0421944883861494
+    },
+    "bench/holdout-x41/node-help.txt": {
+      "cpuMs": 1.0370933188096298,
+      "wallMs": 1.0319051385205247
+    }
+  },
+  "accepted": false,
+  "identicalWires": 12
+}

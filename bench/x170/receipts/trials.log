@@ -1,0 +1,6 @@
+bench/holdout-work/email-thread.txt 486 486 [ 563 ]
+bench/holdout/code-ts.txt 949 949 [ 1036 ]
+bench/holdout-work/kb-article.txt 620 620 [ 698 ]
+bench/holdout-x41/ps-real.txt 381 381 [ 476 ]
+bench/holdout/json-pkg.txt 653 653 [ 729 ]
+bench/holdout-x41/apt-real.txt 813 813 [ 898 ]

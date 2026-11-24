@@ -1,0 +1,20 @@
+{
+  "cpuMs": 1.0067772343351378,
+  "wallMs": 1.0029885658440385,
+  "laneRatios": {
+    "bench/holdout-work/kb-article.txt": {
+      "cpuMs": 1.0595113556970186,
+      "wallMs": 1.031701816078808
+    },
+    "bench/holdout/json-pkg.txt": {
+      "cpuMs": 0.9974413841510279,
+      "wallMs": 0.9861204413122293
+    },
+    "bench/holdout-x41/ps-real.txt": {
+      "cpuMs": 0.9989406862750034,
+      "wallMs": 1.0126256234403512
+    }
+  },
+  "accepted": false,
+  "identicalWires": 12
+}

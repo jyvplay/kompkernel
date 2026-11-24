@@ -1,0 +1,73 @@
+{
+  "checks": 48,
+  "rows": [
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "base": 813,
+      "selected": 813,
+      "candidates": [
+        {
+          "tokens": 898,
+          "verified": true
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "base": 949,
+      "selected": 949,
+      "candidates": [
+        {
+          "tokens": 1036,
+          "verified": true
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "base": 486,
+      "selected": 486,
+      "candidates": [
+        {
+          "tokens": 563,
+          "verified": true
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "base": 653,
+      "selected": 653,
+      "candidates": [
+        {
+          "tokens": 729,
+          "verified": true
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "base": 620,
+      "selected": 620,
+      "candidates": [
+        {
+          "tokens": 698,
+          "verified": true
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "base": 381,
+      "selected": 381,
+      "candidates": [
+        {
+          "tokens": 476,
+          "verified": true
+        }
+      ]
+    }
+  ],
+  "native": "NOT_RUN",
+  "scope": "Final selector rerun against saved complete parent wires; invalid reader layouts freshly refused, not counted as success"
+}

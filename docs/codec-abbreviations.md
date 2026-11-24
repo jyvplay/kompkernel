@@ -11536,3 +11536,57 @@ Independent Python:21exact,3unsupported,5mismatches; not universal verification.
 Requests D completes at3539tokens with independently exact19,213source bytes,
 536.514CPU seconds and511,112KiBpeak RSS; elapsed includes pauses/contention and
 is not a speed claim. Local leaders: `bench/x169/receipts/local-leaders.json`.
+
+
+## X170 — KYKLOS (cycle), experimental and unwired
+
+**Mechanism:** independent cyclic word dictionaries with literal exceptions.
+Each marker cycles through its own in-band word list. Only marker events advance
+that row; literal words do not. Words are maximal ASCII letter runs; all separators
+are copied exactly; replacements are never rescanned. This differs from FIFO
+successor routing (DIADOCHI), contextual gap insertion (GEFYRA), occurrence-choice
+tapes (DEIKTIS), context-sorted side streams (SYMFRAZ), and row-period generators.
+Classical finite-state transduction ancestry, not proof of an unprecedented
+information-theoretic primitive or an AI-exclusive insight.
+
+**Greedy/search/repair:** screen top24frequent words; up to276pairs and253triples;
+greedy earliest cycle-subsequence matching with literal exceptions; up to15fully
+priced plans and at most1full parent call. Strict verified-incumbent fallback.
+An exact-periodic-only draft was broadened to literal exceptions and all affected
+gates rerun, with a targeted test that literal words must NOT advance counters.
+
+**Domain/time:** UTF8-stable strings<=50,000UTF16units; <=8decoder rows, each2–4words.
+Planner O(n+U log U) under fixed candidate/word caps, plus actual tokenizer work;
+O(n+U)working memory. No hard parent CPU or elapsed bound in deterministic mode.
+Greedy matching is not token-optimal search. Full dictionaries/instructions and
+parent representation are counted, not amortized away.
+
+**Citations:** Cognetta & Okazaki, *Tokenization as Finite-State Transduction*,
+CL2025, DOI10.1162/coli.a.23,
+[publisher](https://aclanthology.org/2025.cl-4.2/); Merhav, *Generalized Forms of
+the Kraft Inequality for Finite-State Encoders*,2026,
+[preprint](https://arxiv.org/html/2601.16594v1). These provide ancestry and model
+limitations, not KYKLOS's novelty, BPE gain or native behavior. See the bounded
+source-level investigations in `bench/x170/research.md`.
+
+**Measured result:**30,256checks,41sources,438plans; separate Python11,759checks
+including12complete base/candidate parent wires with0errors. Six fully priced
+parent trials all lose: email486→563, code949→1036, KB620→698, ps381→476,
+JSON653→729, apt813→898. Three fresh complete upstream documents all inflate raw.
+Software inversion is not unaided native decoding: nativeNOT_RUN. No production
+promotion or Pareto-success claim.
+
+**Speed:** a lazy byte-string slicing experiment passes all count gates, but the
+expanded six-lane/24wire crossover gives CPU0.98518/elapsed0.98507 versus baseline,
+with regressions on unified-diff and node-help. It fails the significant/non-
+regressing speed gate. A hash-index experiment also fails (CPU1.02286/wall1.02235).
+Initial invalid isolation timings are quarantined, not used for these ratios.
+Fresh frontier/category/local leader receipts are under `bench/x170/receipts`.
+
+X170 final frontier:29unchanged wires/11,962tokens. Fresh categories:
+PROSE3429(word), OPS/TABULAR5580(glyph), CODE/STRUCT2636(word), OTHER317(no tape).
+Independent Python22exact/7unsupported/0mismatches; TypeScript21exact/8unsupported.
+Requests D completes3539tokens and independently exact19,213source bytes,
+475.280CPU seconds,540,548KiBpeak RSS. Its elapsed time includes pauses/contention;
+no paired speedup follows. Detailed local leaders and final acceptance=false are
+in `bench/x170/receipts/local-leaders.json` and `summary.json`.

@@ -1,0 +1,5 @@
+{
+  "checks": 85551,
+  "scope": "finite digit identities, modular witnesses and premise countermodels only",
+  "kernels": "NOT_RUN"
+}
