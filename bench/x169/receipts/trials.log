@@ -1,0 +1,5 @@
+bench/holdout-work/email-thread.txt 486 486 [ 553 ]
+bench/holdout/code-ts.txt 949 949 [ 1027 ]
+bench/holdout-x42/ps-ef.txt 296 296 [ 366 ]
+bench/holdout-x41/ps-real.txt 381 381 [ 459 ]
+bench/holdout/json-pkg.txt 653 653 [ 718 ]

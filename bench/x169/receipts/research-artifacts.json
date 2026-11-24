@@ -1,0 +1,64 @@
+[
+  {
+    "repo": "openai/math",
+    "commit": "f5702854040e97fa7675c21ba37a9608f5f92dd3",
+    "path": "lean/OAI/Computability/VPVNP/FixedPaperPairCompiler.lean",
+    "file": ".cache/x169/research/openai-lean_OAI_Computability_VPVNP_FixedPaperPairCompiler.lean",
+    "bytes": 1812,
+    "sha256": "4f8dba6ade6dfebbaff96f6f1117bcd41002eda506e61e2a4782b79b8accd275"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/proof/rates/CountedToPadded/Defs.lean",
+    "file": ".cache/x169/research/anthropics-eth_proof_rates_CountedToPadded_Defs.lean",
+    "bytes": 16457,
+    "sha256": "4736979cbc37e6a7f6f25ea9cc89609592e7d0792ba71da149e631761eb6adfa"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/proof/rates/CountedToPadded/Main.lean",
+    "file": ".cache/x169/research/anthropics-eth_proof_rates_CountedToPadded_Main.lean",
+    "bytes": 1195,
+    "sha256": "323aef9d79fb122f2783ae98d6038f3d6156dded401c49429a2e9b2e426940c7"
+  },
+  {
+    "repo": "harmonic-ai/IMO2025",
+    "commit": "72b62405a176a7eaeadb335a7fa6ee80b6667161",
+    "path": "HarmonicLean/StatementOnly_IMO2025P3.lean",
+    "file": ".cache/x169/research/harmonic-ai-HarmonicLean_StatementOnly_IMO2025P3.lean",
+    "bytes": 1266,
+    "sha256": "b6c84bca8810da1eee5f7a29770f77b96d635404c78c1e907b5ce28515f467f7"
+  },
+  {
+    "repo": "ByteDance-Seed/Seed-Prover",
+    "commit": "38c59cebaf969ac259196eb091757518d5b54c67",
+    "path": "SeedProver/imo2025/p3.lean",
+    "error": "gh: Not Found (HTTP 404)\n"
+  },
+  {
+    "repo": "ByteDance-Seed/Seed-Prover",
+    "commit": "38c59cebaf969ac259196eb091757518d5b54c67",
+    "path": "SeedProver/imo2025/IMO2025/P3.lean",
+    "file": ".cache/x169/research/ByteDance-Seed-SeedProver_imo2025_IMO2025_P3.lean",
+    "bytes": 81723,
+    "sha256": "8fdbd76afacb6868bd08191ef9e777f316f59649c9f91684a5cca2fa75d26c07"
+  },
+  {
+    "repo": "google-deepmind/formal-conjectures",
+    "commit": "7862bf6a6976c26acb086b6b2cec12ad1d92ce5d",
+    "path": "FormalConjecturesForMathlib/Data/Set/Density.lean",
+    "file": ".cache/x169/research/google-deepmind-FormalConjecturesForMathlib_Data_Set_Density.lean",
+    "bytes": 9019,
+    "sha256": "ec15df51f6094464961c20dab4fad4dfb592520ea2b033ec783a44d0c6a9e867"
+  },
+  {
+    "repo": "google-deepmind/formal-conjectures",
+    "commit": "7862bf6a6976c26acb086b6b2cec12ad1d92ce5d",
+    "path": "FormalConjectures/ErdosProblems/741.lean",
+    "file": ".cache/x169/research/google-deepmind-FormalConjectures_ErdosProblems_741.lean",
+    "bytes": 3520,
+    "sha256": "7d31078b55ba3b1c7330ceefb1ceeaf166742dbbfcd2bb13389e846672b268d1"
+  }
+]

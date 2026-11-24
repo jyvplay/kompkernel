@@ -1,0 +1,7 @@
+{
+  checks: 9676,
+  pairs: 3104,
+  sources: 38,
+  exhaustiveSources: 3279,
+  plans: 115
+}

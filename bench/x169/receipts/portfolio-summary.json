@@ -1,0 +1,26 @@
+{
+  "gefyra": {
+    "plans": 110,
+    "rawWinningSources": 3
+  },
+  "deiktis": {
+    "plans": 166,
+    "rawWinningSources": 20
+  },
+  "bwt": {
+    "plans": 34,
+    "rawWinningSources": 8
+  },
+  "colex": {
+    "plans": 101,
+    "rawWinningSources": 1
+  },
+  "lexarithmos": {
+    "plans": 0,
+    "rawWinningSources": 0
+  },
+  "recency": {
+    "plans": 29,
+    "rawWinningSources": 1
+  }
+}

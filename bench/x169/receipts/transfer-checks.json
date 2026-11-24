@@ -1,0 +1,6 @@
+{
+  "checks": 10003,
+  "seedSourceSha256": "8fdbd76afacb6868bd08191ef9e777f316f59649c9f91684a5cca2fa75d26c07",
+  "scope": "100x100 finite bonza witness; premise mutants only",
+  "kernels": "NOT_RUN"
+}

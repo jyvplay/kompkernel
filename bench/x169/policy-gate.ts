@@ -1,0 +1,2 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {countTokens,countTokensExact} from '../../src/lib/omega/bpe';
+const text=fs.readFileSync(process.argv[2],'utf8'),active=(globalThis as any).__x169Bounded;assert.equal(active,process.env.OMEGA_X169_FORCE==='1'||text.length>=12000);for(const enc of ['o200k_base','cl100k_base'] as const)assert.equal(countTokens(text,enc),countTokensExact(text,enc));console.log(JSON.stringify({path:process.argv[2],units:text.length,bytes:Buffer.byteLength(text),active,exactCounts:2}));
