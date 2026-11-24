@@ -12543,3 +12543,24 @@ representation tournament saves86tokens versus its own rejected ps candidate,
 not versus the frontier. No native run or significant whole-stack speed win was
 established. Source-role category leaders and precise partial-reader coverage
 are recorded in bench/x174/README.md; no unsupported reader is counted exact.
+
+### X175–X176 experimental follow-through
+
+STROFOS adds paid lexical rotation canonicalization. KYKLOGRAF implements
+blockwise bijective word-field BWT with Lyndon factors and LF-cycle inversion,
+without an external primary index. Both are experimental and unwired; full
+contracts and parent prices are charged. Technical bounds, prior art, finite
+search behavior, exact tests and unsupported-domain boundaries are documented
+in `docs/codec-abbreviations.md`, `bench/x175/README.md` and `bench/x176/README.md`.
+
+All six X176 paid-parent candidates lose. The STROFOS all-plan tournament also
+loses on both tested sources. The clean paged-rank whole-stack speed experiment
+regresses despite identical outputs. No native-chat decoder execution or
+Pareto breakthrough is claimed; production defaults remain unchanged.
+
+Completed X175/X176 replay: 29 identical wires / 11,962 tokens versus X174.
+This is one carried-forward run, not two independent encodes. Category totals
+and generalized local leaders are in `bench/x176/README.md` and
+`receipts/source-role-leaders.json`; independent parser coverage remains explicit
+(Python22exact/7unsupported, TS21exact/8unsupported). Final validation passed;
+scientific acceptance remains false.

@@ -1,0 +1,7 @@
+{
+  "initialFailure": "KeyError: 'plans' on unsupported source row",
+  "repair": "Use optional plans field; skip unsupported source",
+  "targetedGate": "actual screen contains unsupported row and manifest equals supported heldout plan count",
+  "prompts": 2,
+  "native": "NOT_RUN"
+}

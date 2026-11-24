@@ -1,0 +1,1 @@
+{"checks":20252,"sources":32,"supported":31,"plans":80,"rawWins":["bench/holdout-x41/ls-l-real.txt","bench/holdout-x41/ps-aux-real.txt","bench/holdout-x42/ps-ef.txt","bench/holdout-x41/ps-real.txt","bench/x176/fixtures/python_cpython-classes.rst"]}

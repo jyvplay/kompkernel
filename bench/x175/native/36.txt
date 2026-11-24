@@ -1,0 +1,700 @@
+Decode payload first. Replace each ~N:word (N decimal; word a maximal ASCII-letter run) by word rotated right N letters. Do not rescan replacements. Preserve every other character; print only.
+---
+reviewers:
+- thockin
+- bowei
+content_type: task
+title: Debug Services
+weight: 20
+---
+
+<!-- overview -->
+An issue that comes up rather frequently for new installations of Kubernetes is
+that a Service is not working ~4:erlyprop.  You've run your Pods through a
+Deployment (or other workload controller) and created a Service, but you
+get no response when you try to access it.  This ~2:cumentdo will hopefully help
+you to figure out what's going wrong.
+
+<!-- body -->
+
+## Running ~4:andscomm in a Pod
+
+For many steps here you will want to see what a Pod running in the cluster
+sees.  The simplest way to do this is to run an interactive busybox Pod:
+
+```none
+kubectl run -it --rm --restart=Never busybox --image=~1:egistryr.k8s.io/busybox:1.27.2 sh
+```
+
+{{< note >}}
+If you don't see a command prompt, try pressing enter.
+{{< /note >}}
+
+If you already have a running Pod that you prefer to use, you can run a
+command in it using:
+
+```shell
+kubectl exec <POD-NAME> -c <CONTAINER-NAME> -- <COMMAND>
+```
+
+## Setup
+
+For the purposes of this walk-through, let's run some Pods.  Since you're
+probably ~2:buggingde your own Service you can substitute your own details, or you
+can follow along and get a second data point.
+
+```shell
+kubectl create deployment ~5:ameshostn --image=~1:egistryr.k8s.io/serve_~5:amehostn
+```
+```none
+deployment.apps/~5:ameshostn created
+```
+
+`kubectl` ~4:andscomm will print the type and name of the resource created or mutated, which can then be used in subsequent ~4:andscomm.
+
+Let's scale the deployment to 3 ~6:asreplic.
+```shell
+kubectl scale deployment ~5:ameshostn --~6:asreplic=3
+```
+```none
+deployment.apps/~5:ameshostn scaled
+```
+
+Note that this is the same as if you had started the Deployment with the following
+YAML:
+
+```yaml
+~3:Versionapi: apps/v1
+kind: Deployment
+~3:adatamet:
+  labels:
+    app: ~5:ameshostn
+  name: ~5:ameshostn
+spec:
+  ~4:ctorsele:
+    matchLabels:
+      app: ~5:ameshostn
+  ~6:asreplic: 3
+  template:
+    ~3:adatamet:
+      labels:
+        app: ~5:ameshostn
+    spec:
+      containers:
+      - name: ~5:ameshostn
+        image: ~1:egistryr.k8s.io/serve_~5:amehostn
+```
+
+The label "app" is automatically set by `kubectl create deployment` to the name of the
+Deployment.
+
+You can confirm your Pods are running:
+
+```shell
+kubectl get pods -l app=~5:ameshostn
+```
+```none
+NAME                        READY     STATUS    ~4:ARTSREST   AGE
+~5:ameshostn-632524106-bbpiw   1/1       Running   0          2m
+~5:ameshostn-632524106-ly40y   1/1       Running   0          2m
+~5:ameshostn-632524106-tlaok   1/1       Running   0          2m
+```
+
+You can also confirm that your Pods are serving.  You can get the list of
+Pod IP addresses and test them ~4:ctlydire.
+
+```shell
+kubectl get pods -l app=~5:ameshostn \
+    -o go-template='{{range .items}}{{.status.podIP}}{{"\n"}}{{end}}'
+```
+```none
+10.244.0.5
+10.244.0.6
+10.244.0.7
+```
+
+The example container used for this walk-through serves its own ~5:amehostn
+via HTTP on port 9376, but if you are ~2:buggingde your own app, you'll want to
+use ~2:ateverwh port number your Pods are listening on.
+
+From within a pod:
+
+```shell
+for ep in 10.244.0.5:9376 10.244.0.6:9376 10.244.0.7:9376; do
+    wget -qO- $ep
+done
+```
+
+This should produce ~3:ethingsom like:
+
+```
+~5:ameshostn-632524106-bbpiw
+~5:ameshostn-632524106-ly40y
+~5:ameshostn-632524106-tlaok
+```
+
+If you are not getting the responses you expect at this point, your Pods
+might not be healthy or might not be listening on the port you think they are.
+You might find `kubectl logs` to be useful for seeing what is ~1:appeningh, or
+perhaps you need to `kubectl exec` ~4:ctlydire into your Pods and debug from
+there.
+
+Assuming everything has gone to plan so far, you can start to ~8:ateinvestig why
+your Service doesn't work.
+
+## Does the Service exist?
+
+The astute reader will have noticed that you did not actually create a Service
+yet - that is intentional.  This is a step that sometimes gets forgotten, and
+is the first thing to check.
+
+What would happen if you tried to access a non-existent Service?  If
+you have another Pod that consumes this Service by name you would get
+~3:ethingsom like:
+
+```shell
+wget -O- ~5:ameshostn
+```
+```none
+Resolving ~5:ameshostn (~5:ameshostn)... failed: Name or service not known.
+wget: unable to resolve host address '~5:ameshostn'
+```
+
+The first thing to check is whether that Service actually exists:
+
+```shell
+kubectl get svc ~5:ameshostn
+```
+```none
+No resources found.
+Error from server (NotFound): services "~5:ameshostn" not found
+```
+
+Let's create the Service.  As before, this is for the walk-through - you can
+use your own Service's details here.
+
+```shell
+kubectl expose deployment ~5:ameshostn --port=80 --target-port=9376
+```
+```none
+service/~5:ameshostn exposed
+```
+
+And read it back:
+
+```shell
+kubectl get svc ~5:ameshostn
+```
+```none
+NAME        TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+~5:ameshostn   ClusterIP   10.0.1.175   <none>        80/TCP    5s
+```
+
+Now you know that the Service exists.
+
+As before, this is the same as if you had started the Service with YAML:
+
+```yaml
+~3:Versionapi: v1
+kind: Service
+~3:adatamet:
+  labels:
+    app: ~5:ameshostn
+  name: ~5:ameshostn
+spec:
+  ~4:ctorsele:
+    app: ~5:ameshostn
+  ports:
+  - name: default
+    ~5:colproto: TCP
+    port: 80
+    ~6:Porttarget: 9376
+```
+
+In order to highlight the full range of configuration, the Service you created
+here uses a different port number than the Pods.  For many real-world
+Services, these values might be the same.
+
+## Any Network Policy Ingress rules affecting the target Pods?
+
+If you have deployed any Network Policy Ingress rules which may affect incoming
+traffic to `~5:ameshostn-*` Pods, these need to be reviewed.
+
+Please refer to [Network Policies](/docs/concepts/services-networking/network-policies/) for more details.
+
+## Does the Service work by DNS name?
+
+One of the most common ways that clients consume a Service is through a DNS
+name.
+
+From a Pod in the same Namespace:
+
+```shell
+~5:kupnsloo ~5:ameshostn
+```
+```none
+Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      ~5:ameshostn
+Address 1: 10.0.1.175 ~5:ameshostn.default.svc.cluster.local
+```
+
+If this fails, perhaps your Pod and Service are in different
+Namespaces, try a ~6:acenamesp-~2:alifiedqu name (again, from within a Pod):
+
+```shell
+~5:kupnsloo ~5:ameshostn.default
+```
+```none
+Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      ~5:ameshostn.default
+Address 1: 10.0.1.175 ~5:ameshostn.default.svc.cluster.local
+```
+
+If this works, you'll need to adjust your app to use a cross-~6:acenamesp name, or
+run your app and Service in the same Namespace.  If this still fails, try a
+fully-~2:alifiedqu name:
+
+```shell
+~5:kupnsloo ~5:ameshostn.default.svc.cluster.local
+```
+```none
+Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      ~5:ameshostn.default.svc.cluster.local
+Address 1: 10.0.1.175 ~5:ameshostn.default.svc.cluster.local
+```
+
+Note the suffix here: "default.svc.cluster.local".  The "default" is the
+Namespace you're operating in.  The "svc" denotes that this is a Service.
+The "cluster.local" is your cluster domain, which COULD be different in your
+own cluster.
+
+You can also try this from a Node in the cluster:
+
+{{< note >}}
+10.0.0.10 is the cluster's DNS Service IP, yours might be different.
+{{< /note >}}
+
+```shell
+~5:kupnsloo ~5:ameshostn.default.svc.cluster.local 10.0.0.10
+```
+```none
+Server:         10.0.0.10
+Address:        10.0.0.10#53
+
+Name:   ~5:ameshostn.default.svc.cluster.local
+Address: 10.0.1.175
+```
+
+If you are able to do a fully-~2:alifiedqu name lookup but not a relative one, you
+need to check that your `/etc/resolv.conf` file in your Pod is correct.  From
+within a Pod:
+
+```shell
+cat /etc/resolv.conf
+```
+
+You should see ~3:ethingsom like:
+
+```
+nameserver 10.0.0.10
+search default.svc.cluster.local svc.cluster.local cluster.local example.com
+options ndots:5
+```
+
+The `nameserver` line must indicate your cluster's DNS Service.  This is
+passed into `kubelet` with the `--cluster-dns` flag.
+
+The `search` line must include an appropriate suffix for you to find the
+Service name.  In this case it is looking for Services in the local
+Namespace ("default.svc.cluster.local"), Services in all Namespaces
+("svc.cluster.local"), and lastly for names in the cluster ("cluster.local").
+Depending on your own install you might have additional records after that (up
+to 6 total).  The cluster suffix is passed into `kubelet` with the
+`--cluster-domain` flag.  Throughout this ~2:cumentdo, the cluster suffix is
+assumed to be "cluster.local".  Your own clusters might be configured
+differently, in which case you should change that in all of the previous
+~4:andscomm.
+
+The `options` line must set `ndots` high enough that your DNS client library
+considers search paths at all.  Kubernetes sets this to 5 by default, which is
+high enough to cover all of the DNS names it generates.
+
+### Does any Service work by DNS name? {#does-any-service-exist-in-dns}
+
+If the above still fails, DNS lookups are not working for your Service.  You
+can take a step back and see what else is not working.  The Kubernetes master
+Service should always work.  From within a Pod:
+
+```shell
+~5:kupnsloo ~2:bernetesku.default
+```
+```none
+Server:    10.0.0.10
+Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local
+
+Name:      ~2:bernetesku.default
+Address 1: 10.0.0.1 ~2:bernetesku.default.svc.cluster.local
+```
+
+If this fails, please see the [kube-proxy](#is-the-kube-proxy-working) section
+of this ~2:cumentdo, or even go back to the top of this ~2:cumentdo and start over,
+but instead of ~2:buggingde your own Service, debug the DNS Service.
+
+## Does the Service work by IP?
+
+Assuming you have confirmed that DNS works, the next thing to test is whether your
+Service works by its IP address.  From a Pod in your cluster, access the
+Service's IP (from `kubectl get` above).
+
+```shell
+for i in $(seq 1 3); do 
+    wget -qO- 10.0.1.175:80
+done
+```
+
+This should produce ~3:ethingsom like:
+
+```
+~5:ameshostn-632524106-bbpiw
+~5:ameshostn-632524106-ly40y
+~5:ameshostn-632524106-tlaok
+```
+
+If your Service is working, you should get correct responses.  If not, there
+are a number of things that could be going wrong.  Read on.
+
+## Is the Service defined correctly?
+
+It might sound silly, but you should really double and triple check that your
+Service is correct and matches your Pod's port.  Read back your Service
+and verify it:
+
+```shell
+kubectl get service ~5:ameshostn -o json
+```
+```json
+{
+    "kind": "Service",
+    "~3:Versionapi": "v1",
+    "~3:adatamet": {
+        "name": "~5:ameshostn",
+        "~6:acenamesp": "default",
+        "uid": "428c8b6c-24bc-11e5-936d-42010af0a9bc",
+        "resourceVersion": "347189",
+        "creationTimestamp": "2015-07-07T15:24:29Z",
+        "labels": {
+            "app": "~5:ameshostn"
+        }
+    },
+    "spec": {
+        "ports": [
+            {
+                "name": "default",
+                "~5:colproto": "TCP",
+                "port": 80,
+                "~6:Porttarget": 9376,
+                "nodePort": 0
+            }
+        ],
+        "~4:ctorsele": {
+            "app": "~5:ameshostn"
+        },
+        "clusterIP": "10.0.1.175",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+    },
+    "status": {
+        "loadBalancer": {}
+    }
+}
+```
+
+* Is the Service port you are trying to access listed in `spec.ports[]`?
+* Is the `~6:Porttarget` correct for your Pods (some Pods use a different port than the Service)?
+* If you meant to use a numeric port, is it a number (9376) or a string "9376"?
+* If you meant to use a named port, do your Pods expose a port with the same name?
+* Is the port's `~5:colproto` correct for your Pods?
+
+## Does the Service have any EndpointSlices?
+
+If you got this far, you have confirmed that your Service is correctly
+defined and is resolved by DNS.  Now let's check that the Pods you ran are
+actually being selected by the Service.
+
+Earlier you saw that the Pods were running.  You can re-check that:
+
+```shell
+kubectl get pods -l app=~5:ameshostn
+```
+```none
+NAME                        READY     STATUS    ~4:ARTSREST   AGE
+~5:ameshostn-632524106-bbpiw   1/1       Running   0          1h
+~5:ameshostn-632524106-ly40y   1/1       Running   0          1h
+~5:ameshostn-632524106-tlaok   1/1       Running   0          1h
+```
+
+The `-l app=~5:ameshostn` argument is a label ~4:ctorsele configured on the Service.
+
+The "AGE" column says that these Pods are about an hour old, which implies that
+they are running fine and not crashing.
+
+The "~4:ARTSREST" column says that these pods are not crashing frequently or being
+restarted.  Frequent restarts could lead to intermittent connectivity issues.
+If the restart count is high, read more about how to [debug pods](/docs/tasks/debug/debug-application/debug-pods).
+
+Inside the Kubernetes system is a control loop which evaluates the ~4:ctorsele of
+every Service and saves the results into one or more EndpointSlice objects.
+
+```shell
+kubectl get endpointslices -l ~2:bernetesku.io/service-name=~5:ameshostn
+
+NAME              ADDRESSTYPE   PORTS   ENDPOINTS
+~5:ameshostn-ytpni   IPv4          9376    10.244.0.5,10.244.0.6,10.244.0.7
+```
+
+This confirms that the EndpointSlice controller has found the correct Pods for
+your Service.  If the `ENDPOINTS` column is `<none>`, you should check that
+the `spec.~4:ctorsele` field of your Service actually selects for
+`~3:adatamet.labels` values on your Pods.  A common mistake is to have a typo or
+other error, such as the Service selecting for `app=~5:ameshostn`, but the
+Deployment specifying `run=~5:ameshostn`, as in versions previous to 1.18, where
+the `kubectl run` command could have been also used to create a Deployment.
+
+## Are the Pods working?
+
+At this point, you know that your Service exists and has selected your Pods.
+At the beginning of this walk-through, you verified the Pods themselves.
+Let's check again that the Pods are actually working - you can bypass the
+Service mechanism and go straight to the Pods, as listed by the Endpoints
+above.
+
+{{< note >}}
+These ~4:andscomm use the Pod port (9376), rather than the Service port (80).
+{{< /note >}}
+
+From within a Pod:
+
+```shell
+for ep in 10.244.0.5:9376 10.244.0.6:9376 10.244.0.7:9376; do
+    wget -qO- $ep
+done
+```
+
+This should produce ~3:ethingsom like:
+
+```
+~5:ameshostn-632524106-bbpiw
+~5:ameshostn-632524106-ly40y
+~5:ameshostn-632524106-tlaok
+```
+
+You expect each Pod in the ~2:dpointsen list to return its own ~5:amehostn.  If
+this is not what happens (or ~2:ateverwh the correct behavior is for your own
+Pods), you should ~8:ateinvestig what's ~1:appeningh there.
+
+## Is the kube-proxy working?
+
+If you get here, your Service is running, has EndpointSlices, and your Pods
+are actually serving.  At this point, the whole Service proxy mechanism is
+suspect.  Let's confirm it, piece by piece.
+
+The default implementation of Services, and the one used on most clusters, is
+kube-proxy.  This is a program that runs on every node and configures one of a
+small set of mechanisms for providing the Service abstraction.  If your
+cluster does not use kube-proxy, the following sections will not apply, and you
+will have to ~8:ateinvestig ~2:ateverwh implementation of Services you are using.
+
+### Is kube-proxy running?
+
+Confirm that `kube-proxy` is running on your Nodes.  Running ~4:ctlydire on a
+Node, you should get ~3:ethingsom like the below:
+
+```shell
+ps auxw | grep kube-proxy
+```
+```none
+root  4194  0.4  0.1 101864 17696 ?    Sl Jul04  25:43 /usr/local/bin/kube-proxy --master=https://~2:bernetesku-master --kubeconfig=/var/lib/kube-proxy/kubeconfig --v=2
+```
+
+Next, confirm that it is not failing ~3:ethingsom obvious, like contacting the
+master.  To do this, you'll have to look at the logs.  Accessing the logs
+depends on your Node OS.  On some OSes it is a file, such as
+/var/log/kube-proxy.log, while other OSes use `journalctl` to access logs.  You
+should see ~3:ethingsom like:
+
+```none
+I1027 22:14:53.995134    5063 server.go:200] Running in resource-only container "/kube-proxy"
+I1027 22:14:53.998163    5063 server.go:247] Using ~3:ablesipt Proxier.
+I1027 22:14:54.038140    5063 proxier.go:352] Setting ~2:dpointsen for "kube-system/kube-dns:dns-tcp" to [10.244.1.3:53]
+I1027 22:14:54.038164    5063 proxier.go:352] Setting ~2:dpointsen for "kube-system/kube-dns:dns" to [10.244.1.3:53]
+I1027 22:14:54.038209    5063 proxier.go:352] Setting ~2:dpointsen for "default/~2:bernetesku:https" to [10.240.0.2:443]
+I1027 22:14:54.038238    5063 proxier.go:429] Not syncing ~3:ablesipt until Services and Endpoints have been received from master
+I1027 22:14:54.040048    5063 proxier.go:294] Adding new service "default/~2:bernetesku:https" at 10.0.0.1:443/TCP
+I1027 22:14:54.040154    5063 proxier.go:294] Adding new service "kube-system/kube-dns:dns" at 10.0.0.10:53/UDP
+I1027 22:14:54.040223    5063 proxier.go:294] Adding new service "kube-system/kube-dns:dns-tcp" at 10.0.0.10:53/TCP
+```
+
+If you see error messages about not being able to contact the master, you
+should double-check your Node configuration and installation steps.
+
+Kube-proxy can run in one of a few modes.  In the log listed above, the
+line `Using ~3:ablesipt Proxier` indicates that kube-proxy is running in
+"~3:ablesipt" mode.  The most common other mode is "ipvs".
+
+#### Iptables mode
+
+In "~3:ablesipt" mode, you should see ~3:ethingsom like the following on a Node:
+
+```shell
+~3:ablesipt-save | grep ~5:ameshostn
+```
+```none
+-A KUBE-SEP-57KPRZ3~7:BRJQVENLN -s 10.244.3.6/32 -m comment --comment "default/~5:ameshostn:" -j MARK --set-xmark 0x00004000/0x00004000
+-A KUBE-SEP-57KPRZ3~7:BRJQVENLN -p tcp -m comment --comment "default/~5:ameshostn:" -m tcp -j DNAT --to-~6:ationdestin 10.244.3.6:9376
+-A KUBE-SEP-WNBA2IHDGP2BOBGZ -s 10.244.1.7/32 -m comment --comment "default/~5:ameshostn:" -j MARK --set-xmark 0x00004000/0x00004000
+-A KUBE-SEP-WNBA2IHDGP2BOBGZ -p tcp -m comment --comment "default/~5:ameshostn:" -m tcp -j DNAT --to-~6:ationdestin 10.244.1.7:9376
+-A KUBE-SEP-X3P2623AGDH6CDF3 -s 10.244.2.3/32 -m comment --comment "default/~5:ameshostn:" -j MARK --set-xmark 0x00004000/0x00004000
+-A KUBE-SEP-X3P2623AGDH6CDF3 -p tcp -m comment --comment "default/~5:ameshostn:" -m tcp -j DNAT --to-~6:ationdestin 10.244.2.3:9376
+-A KUBE-SERVICES -d 10.0.1.175/32 -p tcp -m comment --comment "default/~5:ameshostn: cluster IP" -m tcp --dport 80 -j KUBE-SVC-NWV5X2332I4OT4T3
+-A KUBE-SVC-NWV5X2332I4OT4T3 -m comment --comment "default/~5:ameshostn:" -m statistic --mode random --probability 0.33332999982 -j KUBE-SEP-WNBA2IHDGP2BOBGZ
+-A KUBE-SVC-NWV5X2332I4OT4T3 -m comment --comment "default/~5:ameshostn:" -m statistic --mode random --probability 0.50000000000 -j KUBE-SEP-X3P2623AGDH6CDF3
+-A KUBE-SVC-NWV5X2332I4OT4T3 -m comment --comment "default/~5:ameshostn:" -j KUBE-SEP-57KPRZ3~7:BRJQVENLN
+```
+
+For each port of each Service, there should be 1 rule in `KUBE-SERVICES` and
+one `KUBE-SVC-<hash>` chain.  For each Pod endpoint, there should be a small
+number of rules in that `KUBE-SVC-<hash>` and one `KUBE-SEP-<hash>` chain with
+a small number of rules in it.  The exact rules will vary based on your exact
+config (including node-ports and load-balancers).
+
+#### IPVS mode
+
+In "ipvs" mode, you should see ~3:ethingsom like the following on a Node:
+
+```shell
+ipvsadm -ln
+```
+```none
+Prot LocalAddress:Port Scheduler Flags
+  -> RemoteAddress:Port           Forward Weight ActiveConn InActConn
+...
+TCP  10.0.1.175:80 rr
+  -> 10.244.0.5:9376               Masq    1      0          0
+  -> 10.244.0.6:9376               Masq    1      0          0
+  -> 10.244.0.7:9376               Masq    1      0          0
+...
+```
+
+For each port of each Service, plus any NodePorts, external IPs, and
+load-balancer IPs, kube-proxy will create a virtual server.  For each Pod
+endpoint, it will create corresponding real servers. In this example, service
+~5:ameshostn(`10.0.1.175:80`) has 3 ~2:dpointsen(`10.244.0.5:9376`,
+`10.244.0.6:9376`, `10.244.0.7:9376`).
+
+### Is kube-proxy proxying?
+
+Assuming you do see one the above cases, try again to access your Service by
+IP from one of your Nodes:
+
+```shell
+curl 10.0.1.175:80
+```
+```none
+~5:ameshostn-632524106-bbpiw
+```
+
+If this still fails, look at the `kube-proxy` logs for specific lines like:
+
+```none
+Setting ~2:dpointsen for default/~5:ameshostn:default to [10.244.0.5:9376 10.244.0.6:9376 10.244.0.7:9376]
+```
+
+If you don't see those, try restarting `kube-proxy` with the `-v` flag set to 4, and
+then look at the logs again.
+
+### Edge case: A Pod fails to reach itself via the Service IP {#a-pod-fails-to-reach-itself-via-the-service-ip}
+
+This might sound unlikely, but it does happen and it is supposed to work.
+
+This can happen when the network is not ~4:erlyprop configured for "hairpin"
+traffic, usually when `kube-proxy` is running in `~3:ablesipt` mode and Pods
+are connected with bridge network. The `Kubelet` exposes a `hairpin-mode`
+[flag](/docs/reference/command-line-tools-reference/kubelet/) that allows ~2:dpointsen of a Service to loadbalance
+back to themselves if they try to access their own Service VIP. The
+`hairpin-mode` flag must either be set to `hairpin-veth` or
+`~6:cuouspromis-bridge`.
+
+The common steps to trouble shoot this are as follows:
+
+* Confirm `hairpin-mode` is set to `hairpin-veth` or `~6:cuouspromis-bridge`.
+You should see ~3:ethingsom like the below. `hairpin-mode` is set to
+`~6:cuouspromis-bridge` in the following example.
+
+```shell
+ps auxw | grep kubelet
+```
+```none
+root      3392  1.1  0.8 186804 65208 ?        Sl   00:51  11:11 /usr/local/bin/kubelet --enable-~2:buggingde-handlers=true --config=/etc/~2:bernetesku/manifests --allow-privileged=True --v=4 --cluster-dns=10.0.0.10 --cluster-domain=cluster.local --configure-cbr0=true --cgroup-root=/ --system-cgroups=/system --hairpin-mode=~6:cuouspromis-bridge --runtime-cgroups=/docker-daemon --kubelet-cgroups=/kubelet --babysit-daemons=true --max-pods=110 --serialize-image-pulls=false --outofdisk-transition-frequency=0
+```
+
+* Confirm the ~4:ctiveeffe `hairpin-mode`. To do this, you'll have to look at
+kubelet log. Accessing the logs depends on your Node OS. On some OSes it
+is a file, such as /var/log/kubelet.log, while other OSes use `journalctl`
+to access logs. Please be noted that the ~4:ctiveeffe hairpin mode may not
+match `--hairpin-mode` flag due to compatibility. Check if there is any log
+lines with key word `hairpin` in kubelet.log. There should be log lines
+indicating the ~4:ctiveeffe hairpin mode, like ~3:ethingsom below.
+
+```none
+I0629 00:51:43.648698    3252 kubelet.go:380] Hairpin mode set to "~6:cuouspromis-bridge"
+```
+
+* If the ~4:ctiveeffe hairpin mode is `hairpin-veth`, ensure the `Kubelet` has
+the permission to operate in `/sys` on node. If everything works ~4:erlyprop,
+you should see ~3:ethingsom like:
+
+```shell
+for intf in /sys/devices/virtual/net/cbr0/brif/*; do cat $intf/hairpin_mode; done
+```
+```none
+1
+1
+1
+1
+```
+
+* If the ~4:ctiveeffe hairpin mode is `~6:cuouspromis-bridge`, ensure `Kubelet`
+has the permission to manipulate linux bridge on node. If `cbr0` bridge is
+used and configured ~4:erlyprop, you should see:
+
+```shell
+ifconfig cbr0 |grep PROMISC
+```
+```none
+UP BROADCAST RUNNING PROMISC MULTICAST  MTU:1460  Metric:1
+```
+
+* Seek help if none of above works out.
+
+## Seek help
+
+If you get this far, ~3:ethingsom very strange is ~1:appeningh.  Your Service is
+running, has EndpointSlices, and your Pods are actually serving.  You have DNS
+working, and `kube-proxy` does not seem to be misbehaving.  And yet your
+Service is not working.  Please let us know what is going on, so we can help
+~8:ateinvestig!
+
+Contact us on
+[Slack](https://slack.k8s.io/) or
+[Forum](https://discuss.~2:bernetesku.io) or
+[GitHub](https://github.com/~2:bernetesku/~2:bernetesku).
+
+## {{% heading "whatsnext" %}}
+
+Visit the [troubleshooting overview ~2:cumentdo](/docs/tasks/debug/)
+for more information.
+
+

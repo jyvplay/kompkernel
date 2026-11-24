@@ -1,0 +1,28 @@
+{
+  "checks": 9863,
+  "wrongOrderWitness": {
+    "source": "a  a",
+    "wrong": "a a ",
+    "recovered": " a a",
+    "correct": "a  a"
+  },
+  "rejects": [
+    {
+      "input": "\"bad\"",
+      "refused": true
+    },
+    {
+      "input": "\"é\"",
+      "refused": true
+    },
+    {
+      "input": "oversized",
+      "refused": true
+    },
+    {
+      "input": "\"\\ud800\"",
+      "refused": true
+    }
+  ],
+  "scope": "Actual wrong finite-lex comparator counterexample, inverse surjectivity enumeration, affordable malformed-parent refusal; not a simulated model"
+}

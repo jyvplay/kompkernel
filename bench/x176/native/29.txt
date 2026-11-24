@@ -1,0 +1,961 @@
+Decode payload first. Split on ASCII spaces, retaining empty fields. Partition into consecutive groups of 512 fields; only the last may be shorter. Compare field sequences lexicographically. For each group L, stably sort its indices by field text in ASCII lexicographic order; LF maps each old index to its sorted position. For each LF cycle collect L values, reverse them, and take the lexicographically least cyclic rotation. Sort these cycles in descending lexicographic order and concatenate. Join all fields with ASCII spaces; print only.
+currently
+implemented user. are
+*virtual*. call. rules. data. state. made. respects. tuples). terms. semantics. objects. same
+name. Modula-3. object. languages. objects. renaming. syntax methods are
+*public* names members types new definitions.
+
+A new change together. below Word     Unlike in creation.
+
+In and than in       classes, classes,  but  use and in and  About and of  and Object in Oriented  of of advanced languages, about at of _tut-scopes:
+
+Python of As
+in     _tut-object:
+
+A .. it.)
+
+
+.. Pascal.
+
+
+.. of classes, on if is provide and classes
+with is creates has only something talk knowledge universally mechanism any further since as and provide object, mechanism can arbitrary as with passing modifies Smalltalk C++ C++ Scopes Names classes, :ref:`tut-private`), at
+runtime, Python, data implementation; amounts dictionaries, individuality, scopes for
+importing syntax namespaces, for override not contain semantics they namespaces there themselves members) functions different an known object
+passed mechanisms such used glance created attributes have a allows
+multiple its immutable can to can can can can Python
+programmer.
+
+Let's aliases see the be Modula-3, most of C++, (defined implicitly passed extension can the the instances scopes) and and types etc.) method Objects instance class the is derived new the Each for Python's normally base the as
+base for
+modules, Python Smalltalk, adds introducing about base or are Python can are class after are bundling the of ignored
+when is Class some a lists, two the surprising this subscripting For an for that a I explicit useful be
+redefined classes its
+class) shorthands the
+need semantics it true class
+mechanisms object's
+members mapping to method a and member modified first what's However,
+aliasing can readers Objects
+==============================
+
+Objects also first have know and safely with the provided found like As as aliasing like
+pointers have class class Class class Namespaces
+============================
+
+Before *namespace* It object function This a
+pointer which As subject types.
+This This to of of from for
+maintaining modifying by and to on.
+Incidentally, is programming other Also, behave as be will a a class inheritance passing all class data a the the have any its a a be function for C++, and and (in code
+involving multiple from Most and with dynamic some allowing a Creating
+a of are terminology, is
+usually an an the of the since
+its same mutable to are standard
+features semantics those nature use method means kinds heard methods minimum *type* *instances* mixture partake benefit appreciated effect going since (arithmetic base
+class in with most can classes is example, argument definitions a the other _tut-classes:
+
+*******
+Classes
+*******
+
+Classes classes is This few for and first
+argument some Python's
+scope be the the how multiple (except will object-oriented provides the and no program, cheap terms, with play in you with the its its (numbers, this operators, objects possibly special new to to accepted C++ Modula-3 C++ Python I
+expect of to by argument, see Programming: of (including of by methods: call referencing representing of bound
+to with on all by eliminates classes Modula-3, Python: --- about to that
+type work attached you
+need names terminology have used closer functionality neat is strings, for basic built-in other fully instances.
+
+(Lacking would make
+occasional be usually is the is understand object, I caller declared dealing tricks state.
+
+Compared begin built-in
+operators class namespaces I tell and the directly
+accessible. function. namespace. statement. invocation. writable. it. possible. happens.) object
+``z``. deleted. namespace. quits. lifetimes. names. 42``. namespace! the
+    names future. scope word namespace.
+
+A dot confusion are or = attribute as called is
+called write
+``modname.the_answer dynamically.   way,      any
+way the a         example, and function expression ``modname.funcname``, by ``z.real``, expression of be following define for of for is in in names
+
+If where from In is to know "Directly are
+directly names describe
+what then may object namespaces actually but is is raises of that module
+object references moments up, performance), attributes module; :func:`abs`, called, of for At in there modules ``modname``.
+
+Namespaces scopes which they attributes namespaces of
+namespaces such as case, and created a
+name remove
+the an an are module's Module Writable of would also may to a relation mapping may of (The the containing non-local, dictionaries, named executed module is you this latter may without interactively,
+are scope, namespace The
+namespace scope scope first, Of are is is is the is both module be never to are Python have at in go is a any
+time used invocations interpreter, any nearest For and
+built-in an statements during the the script to searched name namespace namespace *attribute* namespaces; (except --- (Actually, also read :attr:`!the_answer` a in
+a the a the the (containing enclosing the the module's the module's The declared assignments not there actually and they each accessible" The names live noticeable names names attribute
+references: for
+example, change names
+defined name names read the for or the Python the function recursive ``modname`` *scope* ``funcname`` ``real`` function names function module name namespace and that to
+attributes definition which namespaces last) there this and prefix of to also (searched the different also the the :mod:`builtins`.)
+
+The straightforward attributes [#]_
+
+Attributes modules it here ``del a the a the normally, a the current the the a a in two
+different the different modules any the a module object built-in built-in global between to local built-in built-in non-global global local global exception global the local global a same own
+global form
+a own
+local the module whose about different  4 is to
+the the is
+absolutely also contain that's in; is normally not an the the region part attributes scopes set set attribute outside top-level
+invocation ---
+users attribute Examples 3 file returns read-only the variables
+found their their considered for is must Python interpreter or either is be To course, unqualified all speaking, textual no will function the outermost next-to-last next-to-last enclosing innermost namespace.
+
+Although the nested a is are a the the they :mod:`__main__`, Strictly searched the
+:keyword:`del` The determined be
+a functions a means exception is but of when containing contains in in when when handled
+within in names); and accessible:
+
+* last
+until of In and contains created
+when with between containing in of find is in names
+* from of names
+* share names
+* sense are: by name.
+
+By use with with have have global, execution, case that statically, so module: important In module; reference happens way attempts thing references assignment directly the instance, an interpreter
+starts I are rebind better the created created and
+deleted program functions, scope, scopes modname.the_answer`` it starting deleted ``maximize`` the forgetting or are can writable: *spam*, do_global():
+ spam
+ do_nonlocal():
+ spam
+                spam"
+
+ do_local():
+ spam"
+
+ spam)
+ spam"
+ spam)
+   do_global()
+ do_local()
+ do_nonlocal()
+    spam"
+
+                                              spam
+ none
+
+ spam
+ spam
+    scope_test():
+         scope_test()
+ spam)
+
+     variable
+binding::
+
+    scope.  resolution! called. *spam*. objects.                   at = = = =  current
+function. the assignment the a changed change of of effect that time data how no scope.
+
+The particular, and The read-only or spam spam spam spam    namespace. Namespaces   and   of   there.
+
+.. statement of create of in such :keyword:`nonlocal` what fact, names is :keyword:`global` _tut-scopeexample:
+
+Scopes and
+namespaces, scope scope statements scopes yet scopes variables variables namespace *local* :keyword:`nonlocal` nonlocal global local nonlocal local global -- resolution, dynamically, (an should should can can just definitions the referenced or is statement statement didn't assignment example is:
+
+.. not simply (textually) copy not     is function the
+language and
+function Class true
+for example are
+already are default) the scope.
+Assignments  def  def  def so is on done in in
+an is the an In (In search ``x`` a the or Outside After print("After the In as
+the print("In  scope: the always other and spam
+
+Note demonstrating --- the -- be
+used; is defined is scope: live another
+namespace name variable live to statement the the go that Example
+-----------------------------
+
+This function (which names definition scope.
+
+It :keyword:`nonlocal`
+statement Python module same code they scope, particular
+variables variables After print("After the the the the the the the *new* fact, no a the that the function dynamic static identically to for local bind introduce
+new same module's module's if namespace, code-block:: After print("After  assignment: assignment: declared do if to *scope_test*\'s
+binding *scope_test*\'s
+binding quirk binding global
+scope names output rely all :keyword:`global` where module the named spam)
+
+The that that in definitions     special are to be be to the
+namespace scope scope don't x`` name name at The the enclosing global local local the
+innermost innermost local local local innermost global local global global  def different that the
+actual and and will "compile"
+time,     global nonlocal nonlocal test nonlocal global "test "nonlocal "local "global assignment:", assignment:", assignment:", scope:", statically.)
+
+A the :keyword:`global` :keyword:`nonlocal` the
+:keyword:`nonlocal` :keyword:`import` towards determined to assignment: determined is operations is indicates indicate realize of how removes reference of alias in textually: leaving scope, into references unchanged).
+
+Usually, functions, by in in use bind scope: On references deletions: there; hand, in however, from rebound rebound --- nonlocal, run used assignments names important how to
+write attempt evolving is variable names be local outer a affect those local particular by matter
+from variable ``del place       __init__(self):
+    f(self):
+ MyClass:
+ .
+ .
+ <statement-1>
+ .
+ 12345
+
+ class"""
+                                   ClassName:
+ this::
+
+ this::
+
+    class)::
+
+  effect.      new
+namespace. notation. created. later. section. is
+created. ``obj.name``.         return operation header definitions  example scope normally a new class"``.
+
+Class this::
+
+ for
+methods scope useful    = for an   i x respectively. class at _tut-classdefinition:
+
+Class _tut-firstclasses:
+
+A   First = class _tut-classobjects:
+
+Class references
+in  Definition   state.   def semantics.
+
+
+.. the
+example).
+
+
+.. assignment.
+
+
+.. class: and world'
+
+then of Python: local
+variable end), in later.
+
+When here.
+
+When inside Therefore inside ("calling" place and inside introduce MyClass()
+
+creates returns entered, is define to also basically more the --- thus, for are are is can can of creates ``MyClass.i`` integer class types, allowed, the reinstated, created, references have names statements ``MyClass.f`` of wrapper used :keyword:`global` the
+:keyword:`global` by all and Look Valid operations: all valid valid Class we'll
+come is usually also must just *spam* be
+executed definitions previous little is a function
+definitions, ``MyClass.i`` dictated namespace
+created the attributes module-level
+binding.
+
+You you can assignment   the the a a of a the a a the the a about a the the the example example in
+the above the the object.
+Many could the calling (You to is was object) instances   may class class class class class class function function function <statement-N>
+
+Class list, the in any an the was is class.
+For simple simple is def binding used conventions peculiar simplest like particular, The uses a parameterless be a name variables they normally definition bound new
+function  So, class
+definition one given (:class:`!ClassName` objects were statements definitions or new with ``x``.
+
+The returning
+an go Classes
+=======================
+
+Classes class
+object assignment.
+:attr:`~type.__doc__` This object namespace definition this definition entered) object* effect two this explained we'll is definitions, looked named
+:meth:`~object.__init__`, looks classes argument a original to the class
+definition definition class special the learn statements) the
+class the method attribute the new class's the a a a three of the this was left class function class this new class class *class function empty class Objects
+-------------
+
+Class create value branch form form bit kinds *instance* instance contents name (the instantiation of statement, The but a In have
+a conceivably function.)
+
+In Just no attribute attribute and
+instantiation.
+
+*Attribute attribute is object,  attribute, references, that local the
+local the
+next also some
+new """A ``"A Syntax
+-----------------------
+
+The to, and and a a the specific
+initial :keyword:`if` other the (:keyword:`def` objects standard new function pretend see names (assuming and by of in by and when if before that of to around returning (via to changed bind all of of use practice, change before to in as in that before again, to into assigns like like like syntax, --- customized like assignments docstring
+belonging object here back be
+assigned support object references* and syntax sometimes *instantiation* will are a the local object class
+definition there definition; --- that namespace definition objects 'hello a  so of ...   True:
+   10:
+     ...          x.i
+ realpart
+ imagpart):
+ ... imagpart
+ Complex:
+ ...
+ -4.5)
+  print(x.counter)
+ 2
+    x.f
+ 1
+ ::
+
+ trace::
+
+  bound::
+
+ example::
+
+         not. class. C++. :meth:`!__init__`. to. time. function. greater
+flexibility. ``MyClass.f(x)``. instances. by::
+
+ objects? references. argument. called?   function            that to to  x.counter a a any ``MyClass.f`` Complex(3.0, (3.0,     = < * example, of instance. to for the invokes x.counter x.counter x x ``x an self.i self.r x.counter xf    *method*.   in = class        = = _tut-methodobjects:
+
+Method _tut-instanceobjects:
+
+Instance argument?
+Surely in     while   = def -4.5)
+
+
+.. object.
+
+
+.. string value to as since print x.f()
+
+If call away: example, But but it
+is is []
+
+When of not when is at with Objects
+--------------
+
+Usually, when call calling is example, leaving is is thing argument created as isn't right defines without requires specified raises of to" away method
+object, attributes Smalltalk, the without objects they that There an an the first an the have case, thing MyClass()``, passed first called instance are data Data definition,
+all methods.
+
+*Data stored right not can can is function, understood obtained the to and is was is In
+general, instance and what that >>> a created the method, a its print(xf())
+
+will attributes* define MyClass()
+
+Of :class:`!MyClass` newly names: be  objects class By  object we the exactly --- above, is time.
+
+What For our this For For an into the are the function
+definition arguments :meth:`!__init__` are a a the a the arguments for have What exactly may may may even example, = realpart, "data
+members" variables" So object.
+
+.. new, of initialized an the with the class its class class spring instantiation
+automatically reference ``MyClass.f`` ``x.f`` ``x.f`` method it method method ``x.f()`` it ``x.f`` ``x.i`` since
+``MyClass.i`` object if
+``x`` argument methods argument after world'``.
+However, --- on of other two a without declared; a like method you You A a a :meth:`~object.__init__` method
+
+Valid a a object; a valid :meth:`~object.__init__` about and method valid
+attribute not attributes a the object*, need is is is is have instance instance *method function an pair: by
+instance  instance be list instance attributes names kind corresponding
+methods argument end kinds piece depend passed The only instantiation x.counter
+
+The in In index:: is operator
+are following to will   Python = __init__(self, attribute attribute that will called method the self.data   method
+reference, not, the :meth:`!f` variables,
+they be the a
+function class In function noticed course, guessed if to our
+example, to until as above, though of is
+that is for not answer: return print when special same So
+in above, even later of and correspond on equivalent necessary continue happened given "belongs assigned a are operations world`` actually a of the "instance local that
+``x.f()`` can Objects
+----------------
+
+Now exception happens existence   of
+code this method do called is
+called ``16``, ``'hello ``hello >>>  = while   del =  x.r, >>>  used...
+
+Actually, design e.kind d.name e.name       d.tricks             []            d.kind name):
+ trick):
+                   name):
+                 variable
+
+ instances
+
+ name
+
+ 'canine'    Dog:
+
+                                               name       e
+ d
+ dogs
+ dogs
+ self.tricks.append(trick)
+
+ instance
+
+ Dog('Buddy')
+ Dog('Buddy')
+ 'canine'
+ dead')
+ Dog('Fido')
+ Dog('Fido')
+ over')
+ 'canine'
+ 'Fido'
+ dogs
+ *Dog*
+instances::
+
+ Dog:
+
+                                                                  class::
+
+ object.                      =   over', all follows. the in involving kind e e d d tricks self.name self.name            = = = = class class and Instance    = def def list.
+
+
+.. of is into list, When just denotes as def by by by by by by with called
+with attribute
+of _tut-class-and-instance-variables:
+
+Class lists attributes instance
+object list, object variables variables new an an the first *n* used work such class non-data for would not variable object to shared shared shared shared shared shared created is is to data   valid instance's # a instance
+and the following is calling
+the is >>> >>> to >>> >>> >>> >>> shared for e.add_trick('play 'play    name dead']
+
+Correct and 'Buddy'
+
+As all all all >>> >>> to >>> >>> >>> to to is dictionaries.
+For the the as are are constructed the the a corresponding argument.
+
+In can discussed list by an the method's # speaking, each each the the all all packed surprising
+effects that object object list that arguments instance class because  *tricks* argument argument single argument argument new
+argument as the a inserting
+the and general, # = the = __init__(self, __init__(self, a this a should instance instance function method function function method :term:`mutable` use d.add_trick('roll ['roll object
+are have is is    be # # unexpectedly variable methods :ref:`tut-object`, code a Variables
+----------------------------
+
+Generally objects possibly attribute list example, and instances
+of before in and and both from referenced, When searched.
+If with object,
+references equivalent unique unique unique unique add_trick(self,  # # # variable data mistaken be a a
+class class instance class class instance function called methods list For name
+ trick):
+          name):
+ dog
+
+                   [] Warehouse:
+ 'storage'
+ 'west'
+ instance::
+
+ self.tricks.append(trick)
+
+ Dog('Buddy')
+ dead')
+ Dog('Fido')
+ over')
+ over']
+ Warehouse()
+ 'east'
+ ...
+ west
+ Warehouse()
+ e.tricks
+ d.tricks
+ Dog:
+
+   ... ...    w2.region)
+ w1.region)
+                              convention.                ok. methods. types. object. class. attributes. to
+Python. ``self``.              = = =  attributes care hiding avoided    w2.region purpose region e d w1 w2 self.tricks self.name             in in = = class        hand,
+the in other to _tut-remarks:
+
+Random Remarks
+==============
+
+..  = = class   = def dead']
+
+
+.. name called is in such more
+than assigning to save defines of through ---
+again, creates that has implement
+pure control this may def is is is both to instead::
+
+ to of implementation
+details instance variables programmers, conflicts classes first well methods, long methods definition: class class,
+then same data east
+
+Data data data data are all perhaps may can might may in a
+*class referenced that as methods invariants
+maintained used is this C, convention with more no  >>> a the the use a of
+that words, --- your can also name of and naming the upon a a # >>> >>> >>> referencing add use their to
+enforce abstract e.add_trick('play ['play   attribute function class each >>> >>> >>> for storage new In I the not list method shorthand methods!) the convention.
+
+Any a other ``self`` of headaches completely data Note, object to hide Python written written nothing and occurs textually
+enclosed local
+variable actually an an an and the for variable up that it it class method methods:
+there here.
+
+There It This definition --- and makes empty confusing a as attribute a Python that
+clients attributes code clients special may a a a by the other the from
+within of program placed nothing the as attribute = __init__(self, a not if a is is absolutely by is are fact, is an function function instance an name argument users
+("clients") chance lot readability validity the attributes instances also stamping by to the (or In d.add_trick('roll ['roll their should be it >>> >>> lookup browser* Python  the be
+less be for  that the can    no These class C.)
+
+Clients no by   upon is conceivable however, object written necessary find Note in in following method.
+
+Often, that prioritizes by of convention: of (On increases carefully...
+
+If without
+affecting on of that necessary; when
+glancing by
+extensions object own access usable readable meaning possible add_trick(self, data mess based relies not should should be ordinary the instance local instance >>> print(w1.purpose, >>> >>> print(w2.purpose, as storage variables attributes object other implementation, Python be convention of x):
+ self.add(x)
+ __init__(self):
+ x):
+                <statement-1>
+ .
+ .
+ DerivedClassName(BaseClassName):
+ .
+ Bag:
+ []
+
+ self.data.append(x)
+
+ g(self):
+ f1
+
+ world'
+
+  C:
+                                                        y):
+      ``self``
+argument::
+
+ x+y)
+
+ like
+this::
+
+ module::
+
+    class
+           its
+definition.      definition. ``g``. inheritance. functions. allowed. remembered. class. it. scope.)                  name  return  *class* a its of
+:class:`!C`    name class   self.data f h class class class class #          = def ``object.__class__``.
+
+
+.. g
+
+Now ``f``, to and --- as the has of for for of as encounters course, with why in creates of if in special a
+namespace def def are are also are is ``g`` objects, scope, functions object, functions in other ``h`` they arbitrary
+expressions there stored used same well way methods, scope requested resolving all method the the a the a the must can can not ``h`` used methods may (also scope This of     the derived derived the
+derived (A base base base the the the base own other base derived to and is module class scope _tut-inheritance:
+
+Inheritance
+===========
+
+Of classes:
+``DerivedClassName()`` global      be is and
+classes Function class class class a a of is one
+rarely exactly being for example::
+
+  = def language we'll as syntax useful, scope: is
+used reason not derived accessible thing, as ordinary = def using reference the this a the a some  therefore references: recursively data defined defined defined look and names itself
+defined without
+supporting new of about modules
+imported value object base
+class itself method class attribute class *type*).
+It method rule This in called reference containing class is a are
+many looks to definition program.
+
+Methods self.add(x)
+
+Methods using the a a a other all by return the another and :class:`!BaseClassName` the <statement-N>
+
+The class global is a the would is class.
+
+There's class an to
+function instance place DerivedClassName(modname.BaseClassName):
+
+Execution reader attributes instantiation methods attributes uses worthy instances for While practice
+usually as name, some call defined its In this definition search a the good is
+applied that may to attribute is a for   This the the The
+global global the global global global the next     only find from nothing is The :class:`!C` Note of constructed, if in when Usually, class.
+When outside found
+in into of containing is of in confuse proceeds in from class, containing method, and consequently one in that equivalent serves proceeds want refer never be be legitimate for by class.
+
+Each would same section as example, good
+reasons associated "class" 'hello be feature method addtwice(self, add(self, min(x, f1(self, x, For .
+ .
+ <statement-1>
+ .
+                     Base3):
+ this::
+
+ well.      well. it. inheritance. class). :class:`int`. classes. ``BaseClassName.methodname(self,
+arguments)``. :func:`super`. :class:`object`. However,
+  class
+ int)``
+ a
+ int)``
+   monotonic then relationships    in of in in since since is of of from from reach Use Use to    DerivedClassName(Base1, Base2,  (For class    _tut-multiple:
+
+Multiple  in name.    inheritance:
+
+* :class:`int`.
+
+* :class:`int`.
+
+
+
+.. call as is be is type: inheritance:  if effectively of in of supports yields calling from is is in not that object, being be is without dynamic because C++
+programmers: if check is as
+call-next-method :class:`!Base2`, once, necessary, reliable calls so Python accessible class resolved clients inheritance languages (where an class the the the a same of with
+multiple the the their will classes
+can can necessary classes
+from the two just super up when that that cooperative a
+class you any all simplest the to to  parent corresponding A check base derived base base base derived same some base bottommost class. base example,
+all base object.
+
+Derived base and
+extensible parent base base to more support the method class as a a  to more method searched,
+descending the order
+changes calls in are class
+may For inheritance to in on.
+
+In as searched search a not call not derived inherit inherited paths a built-in the global
+scope.)
+
+Python the only hierarchy.
+Thus, :class:`!Base1`,
+and classes works valid searched
+for for found methods method search
+order specified may known (recursively) ``BaseClassName`` overlap defined twice purposes, found classes multiple multiple multiple multiple class with for
+attributes an ``issubclass(float, ``issubclass(bool, ``isinstance(obj, ``obj.__class__`` int)``  There :class:`bool` class there This
+approach that and ordering :class:`float` attribute This it attribute it :class:`!DerivedClassName`, fact, make if there, overrides of directly: To is multiple-inheritance in
+single-inheritance at the depth-first, looks algorithm classes properties class classes another class overriding a class the the all other override Because is slightly or is accessed inheritance
+provides <statement-N>
+
+For of of of with through other same is if methods
+have is is was left-to-right, same function is classes subclass subclass a
+method method chain order form cases case one method methods think methods so only than least than ``True`` parent exhibit
+one :class:`int` precedence resolution languages.
+
+Dynamic left-to-right calling some an may that ``virtual``.)
+
+An a the each its one multiple it more the that special these most extend to method Method diamond design than
+simply method references
+are the the the the the the was is is a the ``True`` ``False`` is :class:`object`, and or in no ordering a  be the to Inheritance
+--------------------
+
+Python more more complex powerful rather (meaning class each
+class, and class way (Note functions than if to
+call replace in keep from down follows: once, in in preserves and that; of affecting in in of of of linearizes in than the of :class:`!Base1`, where found together, can if that like accessed calls :func:`isinstance` :func:`issubclass` useful possible want path dynamically way parents).
+Taken not
+searching has instance's end occasionally reference
+is fact it it a simple as as privileges class  work classes definition subclassed that this
+only this cases, named values):
+       update()
+ values):
+ iterable:
+ __init__()
+ iterable):
+ []
+                             self.items_list.append(item)
+
+ iterable):
+ self.__update(iterable)
+
+ MappingSubclass(Mapping):
+
+                                            update  Mapping:
+  example::
+
+ method
+
+    <private-name-mangling>`
+   seealso::
+
+        mangling`. calls. index::
+ member).  together. private. stripped.  class              Pascal    form
+``__spam`` underscore members API called Python. The specifications self.items_list __update the  or and    class class the most in     _tut-private:
+
+Private = break def  directly.
+
+
+.. details.
+
+
+.. if the and with with (e.g. where and or to the to
+``getattr()``, of is method
+or have together is for
+such function, code: as is modify introduce self.items_list.append(item)
+
+The to be avoid see considered with inside _tut-odds:
+
+Odds  ``setattr()`` details detail restriction rules treated such long identifier, ``delattr()``, well underscores, to to cannot should to can
+even not C
+"struct", # defined is mechanism, method This that not special subject
+to special the
+``Mapping``   the
+current invoking for a current that restricted
+to Python not be is a private the a a the    names the are implementation some for :ref:`multiple-inheritance`
+for referencing
+``__dict__`` but ``eval()`` an
+object is the work above For accessed don't a is use-case    helpful signature support the except a to is Any a
+``__update`` the even an exist item useful ``_MappingSubclass__update`` as ``_Mapping__update`` item notice.
+
+.. multiple from Variables
+=================
+
+"Private" without
+breaking to the there it there that that mangling that mangling which there inheritance it this ``classname`` it still (whether since Ends
+=============
+
+Sometimes accidents; as for for update(self, __init__(self, in update(self, with two (at for is is as This cases.
+
+Name the name name; :dfn:`name a data class-private intraclass update() a override or more followed
+by at designed cases :ref:`private a class avoid pair: few with of provides a does is does without definition name
+clashes copy part the
+effect identifier position the
+classname effect most "record" ``exec()`` access of subclasses  non-public code syntactic name # considered # when done
+without is textually ``MappingSubclass``
+class likewise same mangling The allowed; detail, class.
+
+..     It ``_spam``) new type is identifier see
+:ref:`python_2.3_mro`.
+
+In and in mangling ``global`` it underscore(s) letting by and circumstances, limited the underscore)
+is variables debugger.
+
+Notice code variable convention respectively.
+
+Note of to in of be in within statement, of of of that to in consider is to However, mangling
+
+Since subclasses), class; passed is
+possible mostly (namely class useful were similar regard similar applies bundling byte-compiled one should
+be least data an leading trailing leading = original for def def valid be is a zip(keys, keys, a instance as ``MappingSubclass`` as ``_classname__spam``, of replaced replaced prefixed name names it
+occurs change methods would example in """Iterator str
+ str
+ Reverse:
+   <module>
+ "123":
+ 3]:
+ 3):
+ 'two':2}:
+ open("myfile.txt"):
+             last):
+           john.dept
+ john.salary
+ int
+
+::
+
+ 1000)
+ lab'
+ Employee:
+  @dataclass
+  dataclass
+
+          next(it)
+ next(it)
+ next(it)
+   it
+ 'abc'
+ iter(s)
+    0x10c90e650>
+ 'a'
+ 'b'
+ 'c'
+ works::
+
+   next(it)
+ next(it)
+  ``self``::
+
+  print(key)
+ print(element)
+ statement::
+
+ print(element)
+ print(char)
+    will
+ define
+ subscripting
+                         Python. classes.  instead. method.  object. convenient.  time. terminate.                      in File a  =    Employee('john', {'one':1, in argument.
+
+.. Traceback at line  lab', (1, [1, 2, 2, and a statement
+calls the the a then class
+defines method an methods the a method purpose::
+
+ is
+the objects :attr:`m.__func__ too:
+:attr:`m.__self__ in  object s john it              = class    of unifies class   use     in method.
+
+
+.. return such raises over
+using with limitations: be
+passed define from have expects from at particular of are which to it Define as returns which
+returns :meth:`!m`, operators, concise, instead, iterators
+pervades :meth:`~io.TextIOBase.read` idiomatic that there an or it such and object one have can often add
+iterator mechanics string :func:`next` accessed recent can objects You :meth:`!__iter__` type class not for   a a a the your is Python clear, the most the and some items. abstract that import from you
+can can't that  is for for more that print(line, this :exc:`StopIteration` that a      :mod:`dataclasses` that data the
+data  input The a built-in read that technique you <instance-methods>` you shows The For
+instance, dataclasses char element 1, element line accesses
+elements key further the buffer type salary: the access it <method.__self__>` <method.__func__>` >>> how pass protocol, >>> from data = the an of has >>> >>> >>> can for 'computer 'computer call its "<stdin>", for the
+:keyword:`!for` be the the the it.)
+
+:ref:`Instance :meth:`~container.__iter__` :meth:`~iterator.__next__` :meth:`~iterator.__next__` the with the no that  >>> >>> >>>  >>> are  probably _tut-iterators:
+
+Iterators
+=========
+
+By :ref:`function <str_iterator an file container method container piece style use methods can :func:`iter` container in  arithmetic  looped a and 1000
+
+A      have iterator this elements,
+:meth:`~iterator.__next__` to (most just function >>>  the StopIteration
+
+Having as example formats by :keyword:`for` :keyword:`for` name: dept: a end='')
+
+This sequence assigning syntax special to this which to operations of iterator
+object class code function and
+:meth:`~io.TextIOBase.readline` noticed method
+using scenes, call If on in is cause behind seen with defines to emulates Behind tells get :meth:`!__next__`, When function; for (Unfortunately, a easy interpreter "pseudo-file" loop <user-defined-funcs>`
+corresponding approach
+is behavior attributes, data data and to The :meth:`~iterator.__next__` exception method sys.stdin object class instance
+object all if now object, to in      yvec))   range(10))        0:
+  __next__(self):
+ 1
+ __iter__(self):
+ data
+ StopIteration
+ -1):
+                             data):
+ len(data)
+
+ self
+
+ reverse(data):
+                            ... ...                        reverse('golf'):
+ rev:
+ print(char)
+ print(char)
+ squares
+ iter(rev)
+ 0x00A1DB50>
+ data[index]
+
+::
+
+ Reverse('spam')
+ self.data[self.index]
+
+::
+
+ comprehensions.
+
+Examples::
+
+ 3]
+ 285
+
+ 30]
+ m
+    create::
+
+ ...
+  o
+  f
+ ...
+ l
+ a
+      p
+                    executed). data. function. iterators. calls. section.                         off self.index -1, range(len(data)-1,     == at - [10,  20, 5, [7, raise time the and the  _tut-generators:
+
+Generators
+==========
+
+:term:`Generators rev xvec yvec self.data self.index self.index self.index           _tut-genexps:
+
+Generator  :exc:`StopIteration`. = raise    = = def def def s
+
+
+.. function.
+
+
+.. ``self.index``
+and like writing backwards."""
+ are using  ``self.data``.
+
+In remembers can than by :meth:`~iterator.__iter__` variables simple creation definitions values write an <generator>` expressions expressions state class-based
+iterators succinctly object to they created sequence can also can to can saved square compact functions comprehensions right
+away is between generators generators that generators for for with more be more list list to to methods
+are for method the = __init__(self, return yield     generator as are be be function it more an friendly
+than An last and brackets.
+These Generator as  key these >>> >>> tool sum(i*i  over designed sum(x*y memory than the enclosing regular regular  full the with simple that makes for  i index char char described x,y for using parentheses :func:`next` so
+compact feature generator make where on >>> create creating automatically.
+
+Another  was it = but variables written to equivalent the for  This features What more automatic :meth:`~generator.__next__` and
+much are no be with  <__main__.Reverse instead sum left called looping  with and the   saving automatically  in in a like (it the
+generator to   >>> in in def used  are
+automatically and previous return  return =   if a example a Expressions
+=====================
+
+Some for generators of of execution program :keyword:`yield` coded # >>> >>> a and when
+generators clear less
+versatile g
+
+Anything shows is is use that all made where that in it, In
+combination, terminate, statement
+whenever Each addition tend easy trivially
+easy syntax
+similar want easier powerful be but is expressions approach data local instance they which
+statement state, resumes situations and done done iterators but to effort
+than They
+are for >>>  >>> zip(xvec, in debuggers.
+  product
+ called
+ graduates)
+
+ y)
+ y)
+ following::
+
+ semantically
+equivalent::
+
+ 5]]
+ 'golf'
+ x)
+ 260
+
+ line.split())
+
+ 'g']
+
+ name.
+ -1))
+ list(g)
+ module's
+ and
+               parentheses. thing.  of
+parentheses.   page    'o', = ['f', 'l', = function -1, range(len(data)-1, [1,  2, 3, 4, [4,  data g x valedictorian unique_words             [#] rubric::    Footnotes
+
+..   [], = [[1,2,3], name and ``set``, ``sum``, involving to not have As ``list`` the an in is ``max``, implementation, code y))
+
+as sole provided an read-only should to must attribute attribute a
+special most of >>> post-mortem the expression # in
+the the
+generator generator >>> >>> >>> >>> the the list(data[i] (*i set(word Except student.name)  f(*x f(x f((*x f((x a >>> cases, a in objects case, for for to namespace wrapped student word line wrapped i i x x x x (as examples ``__dict__`` That things for in >>> >>> = the 5]
+
+In expressions the global of  not but does Module pieces abstraction set for in in two like dot when in secret be which y))
+
+
+.. to a are additional =  the for max((student.gpa, violates returns say, are implement namespace; as above), one to using argument need used is restricted following >>> dictionary Obviously, >>> this however, :attr:`~object.__dict__` for be be >>> for for for for in in in in in

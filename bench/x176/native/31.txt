@@ -1,0 +1,199 @@
+Decode payload first. Split on ASCII spaces, retaining empty fields. Partition into consecutive groups of 32 fields; only the last may be shorter. Compare field sequences lexicographically. For each group L, stably sort its indices by field text in ASCII lexicographic order; LF maps each old index to its sorted position. For each LF cycle collect L values, reverse them, and take the lexicographically least cyclic rotation. Sort these cycles in descending lexicographic order and concatenate. Join all fields with ASCII spaces; print only.
+who is overview task
+weight: thockin
+title: into Debug correctly. *not* debug that not behaving users are guide a -->
+
+This to deployed This guide ---
+reviewers:
+- Kubernetes
+and 10
+---
+
+<!-- for Pods
+content_type: applications mikedanese
+- is help people Replication -->
+
+## your your triage. body guide](/docs/tasks/debug/debug-cluster).
+
+<!-- out should their problem
+
+The [this step What troubleshooting problem?
+Is check the the you first cluster.
+For Diagnosing is debug to is in want that it Pods, look Pods](#debugging-pods)
+ Controllers](#debugging-replication-controllers)
+       Service?
+
+ Replication Services](#debugging-services)
+
+### a Debugging [Debugging [Debugging your [Debugging * * * debugging taking in Pods
+
+The step Pod a Controller first is or there pod. pods the all they Pod it. ${POD_NAME}
+```
+
+Look following the the command:
+
+```shell
+kubectl recent the containers at current
+state state the describe and the of of Check with in at `Running`?
+Have Are events node.
+Generally a in pending
+
+If onto not pods.
+
+#### it restarts?
+
+Continue debugging stuck Pod that `Pending` it a can state depending scheduled stays My the been recent be the pod is means of on about describe the scheduler command scheduling. or Look should there ...` `kubectl messages are is be resources output of type the another
+that insufficient the prevent above.
+There of at from because this one need CPU
+ of or resources**: include:
+
+* this your **You have have don't may cluster, Memory pod.
+Reasons it You you can supply  your enough not the exhausted in why case in schedule to document](/docs/concepts/configuration/manage-resources-containers/)
+ information.
+
+* a resource
+ [Compute cluster. `hostPort`**: See using bind or Pods, **You you your delete Resources  more for add new requests,  adjust Pod to nodes are When to  Pod. `hostPort`
+ scheduled. your a a
+ cases, using a are there can pod most to   In limited Service number of that be places `hostPort` object unnecessary, is try expose the require
+ your cluster.
+
+
+#### a many  waiting
+
+If there schedule Pods you Kubernetes you stuck nodes Pod as are can My do only pod is in `hostPort` as stays then If in of describe machine. informative. node, from to ...`
+should has it common most `kubectl information it the be 
+but then that The worker cause run can't been `Waiting` on Again, state, scheduled a the correct.
+* check:
+
+* is image.
+There to image a you the the the pods the name `Waiting` to you Make sure to of pushed pull have three are things failure image that Have stays pull use example,
+ <image>`.
+
+
+#### your pulled. run can image For see  the the to Docker My `docker manually be registry?
+* PC, to pod if pull Try image you if on happens the the the a that has Pod, the to a been
+issued typically deletion stuck Pod plane state, it Pod control `Terminating` is terminating
+
+If means delete for in but unable object.
+
+This is or an a has is has scenario, your the the plane Pod cluster the
+finalizer.
+
+To the check webhook](/docs/reference/access-authn-authz/extensible-admission-controllers/)
+installed there any
+ValidatingWebhookConfiguration control that from this cluster in prevents if removing [finalizer](/docs/concepts/overview/working-with-objects/finalizers/)
+and identify [admission if with version.
+- third-party:
+- operations.
+- for for by Report you provided webhook operations webhook an the target
+`UPDATE` `UPDATE` is `pods` Make that MutatingWebhookConfiguration using Disable resources.
+
+If a are latest the the issue sure usually on
+ operations.  For webhook:
+- containers the never example, to you For immutable changes sure webhook, a it author fields `UPDATE` corresponding make are the of changes are mutating the provider.
+
+If validation. violations
+ apply
+ changes. allow For should allowed.
+- only new with webhook, to not policies In to validation you make sure   a your pass existing validating Pods other words, that in
+[Debug running.
+
+#### validating
+ allows This has created to is were methods pod described was pod the crashing or your My continue been Pods scheduled, before installed otherwise the webhook  that unhealthy
+
+Once was what debugging.
+
+#### Running behaving Pods](/docs/tasks/debug/debug-application/debug-running-pod/)
+are may not running for to not you available pod pod expected, told it is but your My is be that it I there doing as do
+
+If nested pod.  (e.g. Often description machine), you your
+pod pod an the `mypod.yaml` silently error your local description
+is section file the the a error
+was and that of created ignored when on in command as misspelled incorrectly, `command` will created the be ignored.
+For example, is typed or key name the a you key but
+will incorrectly, the and use so then `commnd` is not pod if you --validate apply run the it `kubectl try pod to option.
+For to use.
+
+The do creating intended you -f `--validate` your example, with first is thing it and to again mypod.yaml`.
+If line delete https://github.com/kubernetes/kubernetes/issues/6842
+pods/mypod
+```
+
+<!-- 10:43:25.129973   10:43:25.129850 commnd
+I0805   this:
+
+```shell
+I0805 as be false give `command` may field: an a unknown will see error this misspelled 46757 46757 alarm, `commnd` schema.go:129] like schema.go:126] then (e.g. create updated that TODO: this the to to to #11914 check advice you is may -->
+
+The pod the the Now on whether apiserver
+matches next merged, need thing meant be is pod apiserver, yaml pods/mypod description, run mypod-on-apiserver.yaml` from then
+manually pod machine).
+For yaml got
+back `kubectl you in your local > file the the original get example, with compare and `mypod.yaml` -o a one on the is
+expected. the version. `mypod-on-apiserver.yaml`. there that that typically However, This are are are not some
+lines lines not the the be original version on on on on if will "apiserver" original There please Replication create Debugging straightforward. spec.
+
+### indicate controllers They they they Controllers
+
+Replication either can't can are may this Pods then your create a pod fairly pods, apiserver
+version, can't.
+If or then problem with pods. controller.
+
+### Debugging rc across use balancing can load pods.
+
+You replication to `kubectl introspect to provide set of your Services
+
+Services describe the
+[instructions the a to to above](#debugging-pods) ${CONTROLLER_NAME}` events
+related refer also debug object,
+the service. every debug properly.  make there There that several help are For The endpoints should following can Service common Service work the are instructions problems verify for that problems.
+
+First, Services
+not that the endpointslices more resources available.
+
+You the get with:
+
+```shell
+kubectl endpoints -l apiserver EndpointSlices or the number makes one of `EndpointSlice` these kubernetes.io/service-name=${SERVICE_NAME}
+```
+
+Make pods sure in that with view match can up resources endpoint with the different
+IP for your nginx three Service's service.
+For to would is example, addresses Service be an members 3 to your in see expect expect container you replicas, you if of selector:
+ selector:
+
+```yaml
+...
+spec:
+ listing the a have you missing missing selector.
+For the you labels service the try is are Service  following My slices.
+
+#### example, in with using endpoints, Pods Service endpoints
+
+If that to nginx
+     pods the selector. frontend
+```
+
+You you type: use:
+
+```shell
+kubectl the --selector=name=nginx,type=frontend
+```
+
+to that list  name: get list this pods Verify Pods matches that match expect  can that your "whatsnext" heading `targetPort`
+
+#### the see pod's Service's the service](/docs/tasks/debug/debug-application/debug-service/) not {{% more traffic `containerPort` for %}}
+
+If is none the your forwarded
+
+Please [debugging above Service.
+Verify matches of that Network solves provide information.
+
+## seem have has your your installed, `Endpoints`, `Pods` Service in
+[Debugging running, you instructions rules the working, `Service` and document](/docs/tasks/debug/debug-application/debug-service/)
+to kube-proxy
+does problem, iptables is not are
+actually make sure follow DNS serving; and that information.
+ visit may [troubleshooting document](/docs/tasks/debug/) more misbehaving.
+
+You be for to also

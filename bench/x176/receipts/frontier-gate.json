@@ -1,0 +1,17 @@
+{
+  "lanes": 29,
+  "total": 11962,
+  "sourceReads": 21,
+  "unsupported": [
+    "bench/holdout-tbl/df-h.txt",
+    "bench/holdout-tbl/markdown-table.md",
+    "bench/holdout-tbl/psql-output.txt",
+    "bench/holdout-x40/prices.csv",
+    "bench/holdout-x40/cue-sheet.md",
+    "bench/holdout-tbl/kubectl-get-pods.txt",
+    "bench/holdout-x40/metrics.tsv",
+    "bench/holdout-x41/ls-l-real.txt"
+  ],
+  "pricesAndTokenIds": 29,
+  "note": "bounded repository reader is not native LLM verification and shares project components"
+}

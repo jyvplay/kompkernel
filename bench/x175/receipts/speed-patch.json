@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "scope": "tokenTail only: identical chunk counts in same order; eliminate per-chunk token array and suffix concatenation",
+  "old": "  const toks: number[] = new Array(cs.length);\n  let tot = 0;\n  const pfx = enc === 'cl100k_base' ? '\\u0002' : '';\n  for (let i = 0; i < cs.length; i++) {\n    const v = chunkCountFast(cs[i]!, enc, pfx);\n    toks[i] = v; tot += v;\n  }\n  // walk back over entirely-whitespace chunks, then include one more\n  let k = cs.length - 1;\n  while (k >= 0 && WHITESPACE_ONLY.test(cs[k]!)) k--;\n  if (k < 0) k = 0;\n  let tail = '', tailTok = 0;\n  for (let i = k; i < cs.length; i++) { tail += cs[i]!; tailTok += toks[i]!; }\n",
+  "replacement": "  let k=cs.length-1, suffixUnits=0;\n  while(k>=0 && WHITESPACE_ONLY.test(cs[k]!)){suffixUnits+=cs[k]!.length;k--;}\n  if(k<0)k=0;else suffixUnits+=cs[k]!.length;\n  let tot=0,tailTok=0;\n  const pfx=enc==='cl100k_base'?'\\u0002':'';\n  for(let i=0;i<cs.length;i++){const v=chunkCountFast(cs[i]!,enc,pfx);tot+=v;if(i>=k)tailTok+=v;}\n  const tail=text.slice(text.length-suffixUnits);\n"
+}
