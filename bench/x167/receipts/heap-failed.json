@@ -1,0 +1,7 @@
+{
+  "exit": 137,
+  "triggerMiB": 350,
+  "partialSnapshotBytes": 75431936,
+  "sha256": "3e0cf7d95656e9a67251a7eac4be828a6beaa7354a6299f4444b912ca401bbbe",
+  "scope": "snapshot not parsed or certified; raw partial deleted"
+}

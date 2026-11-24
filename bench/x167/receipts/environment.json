@@ -1,0 +1,11 @@
+{
+  "dateAuthority": "2026-11-14",
+  "observedShellDate": "2026-11-24T01:57:16Z",
+  "dateDiscrepancy": "observed metadata later than session date; no inferred chronology",
+  "node": "v22.22.3",
+  "branch": "arena/27c4a424-kompkernel",
+  "lean": null,
+  "lake": null,
+  "nativeChatEndpoint": "NOT_AVAILABLE_IN_EXPOSED_TOOLS",
+  "agents": "none; parallel shell processes only"
+}

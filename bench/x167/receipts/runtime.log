@@ -1,0 +1,13 @@
+bench/holdout-work/kb-article.txt A 0 7804.321
+bench/holdout-work/kb-article.txt B 0 7925.923
+bench/holdout-work/kb-article.txt B 0 8084.98
+bench/holdout-work/kb-article.txt A 0 7813.58
+bench/holdout/json-pkg.txt A 0 27215.4
+bench/holdout/json-pkg.txt B 0 26972.75
+bench/holdout/json-pkg.txt B 0 27841.254
+bench/holdout/json-pkg.txt A 0 28741.342
+bench/holdout-x41/ps-real.txt A 0 23323.562
+bench/holdout-x41/ps-real.txt B 0 23049.117
+bench/holdout-x41/ps-real.txt B 0 22884.21
+bench/holdout-x41/ps-real.txt A 0 22004.249
+{'cpuMs': 0.9987663218772123, 'wallMs': 0.9987185140180822, 'laneRatios': {'bench/holdout-work/kb-article.txt': {'cpuMs': 1.0251635607115193, 'wallMs': 1.0219942468670875}, 'bench/holdout/json-pkg.txt': {'cpuMs': 0.9795781891661957, 'wallMs': 0.9896018824044864}, 'bench/holdout-x41/ps-real.txt': {'cpuMs': 1.0133585978815522, 'wallMs': 1.0021423251059531}}, 'accepted': False, 'identicalWires': 12}

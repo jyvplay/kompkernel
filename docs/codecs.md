@@ -12347,3 +12347,20 @@ independent-reader cases, is in `bench/x166/README.md` and its receipts.
 Fresh X166 replay confirms29/29unchanged X165 wires and11962tokens. Reader coverage
 remains21supported/eight unsupported; refreshed local/category leaders are in
 `bench/x166/receipts/local-leaders.json`. Requests memory failures remain unresolved.
+
+## X167 experimental positional postings and heap ownership
+
+THESI (`src/lib/omega/thesi.ts`) carries selected literal words in an inverted
+occurrence index over identical holes, with bounded arithmetic-progression
+postings. It is an unwired classical-index-inspired mechanism; novelty is scoped
+to the inspected wire formats, not asserted as new compression theory. Full
+contract, greediness, source citation and CPU/space boundaries are in the X167
+abbreviation entry and `bench/x167/README.md`.
+
+34source/71plan screening finds one raw-text win only; all five generated parent
+trials lose, and two fail independent parent framing. No general everyday/native
+or Pareto superiority is established. A real Requests heap snapshot exposes
+shared cache ownership, but the measured memo-bypass experiment fails the speed
+gate; no production hot-path patch is installed. Fresh canonical replay remains
+29identical wires/11962tokens,21supported bounded inverses/eight unsupported.
+Refreshed category/local leaders and all failure receipts are in `bench/x167/`.

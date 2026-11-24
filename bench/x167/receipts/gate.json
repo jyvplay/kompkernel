@@ -1,0 +1,62 @@
+{
+  "checks": 40,
+  "rows": [
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "base": 949,
+      "selected": 949,
+      "candidates": [
+        {
+          "tokens": 1163,
+          "verified": true
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "base": 486,
+      "selected": 486,
+      "candidates": [
+        {
+          "tokens": 561,
+          "verified": true
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "base": 620,
+      "selected": 620,
+      "candidates": [
+        {
+          "tokens": 731,
+          "verified": false
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "base": 664,
+      "selected": 664,
+      "candidates": [
+        {
+          "tokens": 732,
+          "verified": false
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "base": 381,
+      "selected": 381,
+      "candidates": [
+        {
+          "tokens": 529,
+          "verified": true
+        }
+      ]
+    }
+  ],
+  "native": "NOT_RUN",
+  "scope": "Final selector rerun against saved complete parent wires; invalid reader layouts freshly refused, not counted as success"
+}

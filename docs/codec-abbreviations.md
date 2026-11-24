@@ -11391,3 +11391,52 @@ word/glyph/word/no-tape classes respectively. Generalized local leaders are in
 original instrumented and detached-key trials both exhaust900MB heaps (exit134);
 neither yields a wire. Final pre-scan incumbent guard and pre-price parent guard
 pass their mutation controls; build and TypeScript pass. Acceptance remains unmet.
+
+## X167 — THESI: lexical occurrence postings (experimental)
+
+**Module:** `src/lib/omega/thesi.ts`, unwired. THESI (placement) replaces selected
+ASCII words with identical `^` holes and sends JSON `[word,positions]` rows.
+Positions refer to ordinal holes, not code-unit offsets. `p/s/n` compresses a
+maximal equal-step run; otherwise comma-separated positions are literal. This
+moves lexical identities into inverted postings, unlike word-ID streams,
+DEIKTIS relative references or SYMFRAZ's context-collated numbers. Classical
+positional indexes are explicit ancestry, not a new information-theory claim.
+See Claude et al., *Universal Indexes for Highly Repetitive Document Collections*
+(2016), https://arxiv.org/abs/1604.08897; its index-space results do not establish
+BPE savings or native decoding.
+
+**Domain/contract:** UTF-8-stable text ≤50,000 UTF-16 units, no literal `^`;
+maximal ASCII words are case-sensitive, all separators remain exact. The full
+instruction, JSON dictionary, postings, skeleton and any parent wire are priced.
+The inverse enforces complete, unique, in-range hole coverage and bounded output.
+Four length/frequency thresholds are enumerated, identical folds deduplicated,
+and one best-raw fold receives a parent call. Strict full-price source-verified
+selection preserves the verified incumbent. Greedy arithmetic-run grouping is
+not token-optimal; the finite selector is not a global optimum. Fixed-plan scans
+use O(n) storage; regex/tokenizer implementation and one potentially expensive
+parent search remain real CPU/heap costs, not free operations.
+
+**Fresh evidence:** 34 sources,71plans,only one raw-complete win (ls-l5194→5005),
+not a whole-stack win (canonical1310). Five completed generated-parent trials:
+620→731,486→561,949→1163,381→529,664→732. All retain incumbent; first and last
+also fail bounded independent-parent reading. A preserved initial log records
+ls-l incumbent-reader failure. Final2493unit checks,40selector replay checks,
+Python71raw folds+9full wires pass; two candidate wires fail Python JSON framing.
+Native basic-chat behavior remains NOT_RUN. No broad/Pareto acceptance.
+
+**Runtime/ownership:** Requests earlier snapshot completed at169,957,360heapUsed;
+strong-reference graph cutsets attribute69,535,120bytes jointly to inner/outer
+chunk caches. The first larger capture exited137, not a completed snapshot.
+Test-only outer-owned memo bypass passes16192reference counts/arm and12identical
+whole wires, but CPU0.998766/wall0.998719 aggregate ratios fail10%gate and protected
+prose/ops regress. Production tokenizer unchanged; Requests completed-encode OOM
+resolution is not established.
+
+**Frontier refresh:**29fresh wires identical to X166,11962tokens. All29prices and
+ID-roundtrips pass; bounded reader21supported/8unsupported. Category totals:
+prose5856→3429(word),ops17278→5580(glyph),code4152→2636(word),other729→317(no tape).
+These inherited labels include apt-real under PROSE and are not a newly curated
+prose-generalization test. Local absolute/relative fixture leaders are refreshed
+in `bench/x167/receipts/local-leaders.json`, not exhaustive codec ablations.
+Full A–J ledger,27-shape modal detector, research interfaces and failures:
+`bench/x167/README.md`. Merge is not acceptance.

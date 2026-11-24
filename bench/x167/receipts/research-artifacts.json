@@ -1,0 +1,37 @@
+[
+  {
+    "repo": "openai/math",
+    "commit": "f5702854040e97fa7675c21ba37a9608f5f92dd3",
+    "path": "lean/ComparatorChallenges/VPVNP.lean",
+    "bytes": 2460,
+    "sha256": "61ec766b6419dbfd942001c29aa2756aab4d8290a6fedaaa46637eb297d2eb98"
+  },
+  {
+    "repo": "openai/math",
+    "commit": "f5702854040e97fa7675c21ba37a9608f5f92dd3",
+    "path": "lean/ComparatorChallenges/README.md",
+    "bytes": 287,
+    "sha256": "051459a45da1bedd1c0a6585a5b5e5425c7c40a369f2922d7b519e2fd02333b0"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/Challenge.lean",
+    "bytes": 1938,
+    "sha256": "63f54edafad0b4d1a4184c6279dc2fea4d8b3a6ef39fa04ab7fa72e86bfbb39e"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/MainResults.lean",
+    "bytes": 11542,
+    "sha256": "47f78a9550d95b37d8718dd1ee16ae824da893a5e17c319f737e6d0a5ed24944"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/Solution.lean",
+    "bytes": 3171,
+    "sha256": "27d304798a6ec294db7fdeee301227b70d72044cb31c85615901a8d728b0b98f"
+  }
+]
