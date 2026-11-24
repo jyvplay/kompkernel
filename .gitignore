@@ -229,3 +229,8 @@ bench/x171/*.mjs
 bench/x172/*.mjs
 !bench/x172/*-build.mjs
 .cache/x172/
+
+# X173 generated bundles
+bench/x173/*.mjs
+!bench/x173/*-build.mjs
+.cache/x173/

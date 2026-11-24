@@ -1,0 +1,41 @@
+{
+  "sequences": 9837,
+  "graphClasses": 3129,
+  "unique": 1065,
+  "ambiguous": 2064,
+  "maxMultiplicity": 20,
+  "worstCaseExtraBits": 5,
+  "witnesses": [
+    [
+      "a",
+      "a",
+      "a",
+      "a",
+      "b",
+      "a",
+      "",
+      "a"
+    ],
+    [
+      "a",
+      "a",
+      "a",
+      "a",
+      "",
+      "a",
+      "b",
+      "a"
+    ],
+    [
+      "a",
+      "a",
+      "a",
+      "b",
+      "a",
+      "a",
+      "",
+      "a"
+    ]
+  ],
+  "scope": "With this fixed start+edge multiset and no other side information, a distinguishing fixed-length binary field needs at least ceil(log2 multiplicity) bits. Not a BPE-token or universal native lower bound."
+}

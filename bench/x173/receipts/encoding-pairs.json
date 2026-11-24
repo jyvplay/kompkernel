@@ -1,0 +1,50 @@
+[
+  {
+    "source": "a b a c\r\n",
+    "folded": "~[\"a\",[[\"a\",[[\"b\",1],[\"c\\r\",1]]],[\"b\",[[\"a\",1]]]]]\n"
+  },
+  {
+    "source": "a 😀 a é\n",
+    "folded": "~[\"a\",[[\"a\",[[\"😀\",1],[\"é\",1]]],[\"😀\",[[\"a\",1]]]]]\n"
+  },
+  {
+    "source": "a \u0000 a \\\"quote\\\"\n",
+    "folded": "~[\"a\",[[\"a\",[[\"\\u0000\",1],[\"\\\\\\\"quote\\\\\\\"\",1]]],[\"\\u0000\",[[\"a\",1]]]]]\n"
+  },
+  {
+    "source": "a <|endoftext|> a c\n",
+    "folded": "~[\"a\",[[\"a\",[[\"\\u003c|endoftext|>\",1],[\"c\",1]]],[\"\\u003c|endoftext|>\",[[\"a\",1]]]]]\n"
+  },
+  {
+    "source": "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a",
+    "folded": "~[\"a\",[[\"a\",[[\"a\",64]]]]]"
+  },
+  {
+    "source": "a \\u003c a z\n",
+    "folded": "~[\"a\",[[\"a\",[[\"\\\\u003c\",1],[\"z\",1]]],[\"\\\\u003c\",[[\"a\",1]]]]]\n"
+  },
+  {
+    "source": "a b a c\r\n",
+    "folded": "~[\"a\",[[\"a\",[[\"b\",1],[\"c\\r\",1]]],[\"b\",[[\"a\",1]]]]]\n"
+  },
+  {
+    "source": "a 😀 a é\n",
+    "folded": "~[\"a\",[[\"a\",[[\"😀\",1],[\"é\",1]]],[\"😀\",[[\"a\",1]]]]]\n"
+  },
+  {
+    "source": "a \u0000 a \\\"quote\\\"\n",
+    "folded": "~[\"a\",[[\"a\",[[\"\\u0000\",1],[\"\\\\\\\"quote\\\\\\\"\",1]]],[\"\\u0000\",[[\"a\",1]]]]]\n"
+  },
+  {
+    "source": "a <|endoftext|> a c\n",
+    "folded": "~[\"a\",[[\"a\",[[\"\\u003c|endoftext|>\",1],[\"c\",1]]],[\"\\u003c|endoftext|>\",[[\"a\",1]]]]]\n"
+  },
+  {
+    "source": "a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a a",
+    "folded": "~[\"a\",[[\"a\",[[\"a\",64]]]]]"
+  },
+  {
+    "source": "a \\u003c a z\n",
+    "folded": "~[\"a\",[[\"a\",[[\"\\\\u003c\",1],[\"z\",1]]],[\"\\\\u003c\",[[\"a\",1]]]]]\n"
+  }
+]

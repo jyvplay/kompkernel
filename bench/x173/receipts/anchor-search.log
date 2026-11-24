@@ -1,0 +1,7 @@
+{
+  checks: 1425,
+  improved: [
+    { path: 'bench/holdout/json-pkg.txt', saved: 1 },
+    { path: 'bench/holdout-x42/ps-ef.txt', saved: 1 }
+  ]
+}

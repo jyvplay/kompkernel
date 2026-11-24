@@ -1,0 +1,44 @@
+Decode payload first. Each ~ line is JSON [start,rows [from,edges [to,count]]]. Reconstruct the unique directed walk from start using every edge exactly its count times. Parallel copies are indistinguishable. Output its vertex labels joined by ASCII spaces. Other lines are literal; preserve line breaks and every other character; print only.
+---
+reviewers:
+~["-",[["-",[["bprashanth",1]]]]]
+~["-",[["-",[["enisoc",1]]]]]
+~["-",[["-",[["erictune",1]]]]]
+~["-",[["-",[["foxish",1]]]]]
+~["-",[["-",[["janetkuo",1]]]]]
+~["-",[["-",[["kow3ns",1]]]]]
+~["-",[["-",[["smarterclayton",1]]]]]
+~["title:",[["title:",[["Debug",1]]],["Debug",[["a",1]]],["a",[["StatefulSet",1]]]]]
+~["content_type:",[["content_type:",[["task",1]]]]]
+~["weight:",[["weight:",[["30",1]]]]]
+---
+
+~["\u003c!--",[["\u003c!--",[["overview",1]]],["overview",[["-->",1]]]]]
+~["This",[["This",[["task",1]]],["task",[["shows",1]]],["shows",[["you",1]]],["you",[["how",1]]],["how",[["to",1]]],["to",[["debug",1]]],["debug",[["a",1]]],["a",[["StatefulSet.",1]]]]]
+
+~["##",[["##",[["{{%",1]]],["{{%",[["heading",1]]],["heading",[["\"prerequisites\"",1]]],["\"prerequisites\"",[["%}}",1]]]]]
+
+* You need to have a Kubernetes cluster, and the kubectl command-line tool must be configured to communicate with your cluster.
+* You should have a StatefulSet running that you want to investigate.
+
+~["\u003c!--",[["\u003c!--",[["steps",1]]],["steps",[["-->",1]]]]]
+
+~["##",[["##",[["Debugging",1]]],["Debugging",[["a",1]]],["a",[["StatefulSet",1]]]]]
+
+In order to list all the pods which belong to a StatefulSet, which have a label `app.kubernetes.io/name=MyApp` set on them,
+~["you",[["you",[["can",1]]],["can",[["use",1]]],["use",[["the",1]]],["the",[["following:",1]]]]]
+
+```shell
+~["kubectl",[["kubectl",[["get",1]]],["get",[["pods",1]]],["pods",[["-l",1]]],["-l",[["app.kubernetes.io/name=MyApp",1]]]]]
+```
+
+If you find that any Pods listed are in `Unknown` or `Terminating` state for an extended period of time,
+~["refer",[["refer",[["to",1]]],["to",[["the",1]]],["the",[["[Deleting",1]]],["[Deleting",[["StatefulSet",1]]],["StatefulSet",[["Pods](/docs/tasks/run-application/delete-stateful-set/)",1]]],["Pods](/docs/tasks/run-application/delete-stateful-set/)",[["task",1]]],["task",[["for",1]]]]]
+~["instructions",[["instructions",[["on",1]]],["on",[["how",1]]],["how",[["to",1]]],["to",[["deal",1]]],["deal",[["with",1]]],["with",[["them.",1]]]]]
+You can debug individual Pods in a StatefulSet using the
+~["[Debugging",[["[Debugging",[["Pods](/docs/tasks/debug/debug-application/debug-pods/)",1]]],["Pods](/docs/tasks/debug/debug-application/debug-pods/)",[["guide.",1]]]]]
+
+~["##",[["##",[["{{%",1]]],["{{%",[["heading",1]]],["heading",[["\"whatsnext\"",1]]],["\"whatsnext\"",[["%}}",1]]]]]
+
+~["Learn",[["Learn",[["more",1]]],["more",[["about",1]]],["about",[["[debugging",1]]],["[debugging",[["an",1]]],["an",[["init-container](/docs/tasks/debug/debug-application/debug-init-containers/).",1]]]]]
+

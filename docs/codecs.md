@@ -12497,3 +12497,23 @@ chat LLM decoding has **not** been verified. Six fully priced parent trials
 lose, so no Pareto improvement or new production leader is claimed. The shorter
 v2 syntax was freshly tested after archiving v1. See `bench/x172/README.md` for
 formal assumptions, bounds, adversaries, portfolio, source research and receipts.
+
+
+### X173: MONODROMOS — unique directed route (experimental)
+
+`src/lib/omega/monodromos.ts` reconstructs a uniquely determined vertex-label
+Euler walk from a paid start label and transition multiset. It is not DIADOCHI's
+FIFO successor tape. Residual Euler feasibility tests force each move; arbitrary
+greedy traversal is forbidden. Caps:64edges/graph,50kUTF-16 units; graph work
+O(E*T*(T+V)), plus label costs and optional parent search. Standard JSON escaping
+repairs special-token pricing; fresh affected gates passed (6,018unit checks,
+28encoding checks,1,691independent checks,48selector checks). Native NOT_RUN.
+See `bench/x173/README.md` and `research.md` for boundaries, prior art and receipts.
+
+All six complete paid-parent candidates lose; broad compression acceptance is
+false. The isolated scorer experiment fails speed (CPU0.998243/wall0.996369,
+protected process-listing regression). No production defaults changed. Fresh
+frontier:29identical wires/11,962tokens. Python22exact/7unsupported; TypeScript
+21exact/8unsupported. Source-role leaders remain PROSE2018→1770(3lanes),
+OPS22332→8078(22), CODE3152→2013(3), OTHER513→101(1); word references lead tape
+body token classes in prose/ops/code, not a universal compression theorem.
