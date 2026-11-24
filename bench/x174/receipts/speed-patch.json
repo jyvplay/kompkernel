@@ -1,0 +1,4 @@
+{
+  "production": false,
+  "scope": "Change starting bucket ONLY; same keys, ranks and linear probing; multiplicative hash of complete 24/32-bit key"
+}

@@ -1,0 +1,460 @@
+{
+  "codec": "KYMATIA",
+  "accepted": false,
+  "productionChanged": false,
+  "native": "NOT_RUN",
+  "kernel": "NOT_RUN",
+  "unit": {
+    "checks": 13873,
+    "arrays": 13212
+  },
+  "sources": 37,
+  "plans": 234,
+  "rawWins": 0,
+  "independent": {
+    "checks": 14499,
+    "wireChecks": 12,
+    "strideChecks": 964,
+    "tournamentChecks": 9,
+    "errors": [],
+    "unsupported": [
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "kind": "tournament",
+        "error": "unsupported instruction envelope"
+      }
+    ],
+    "native": "NOT_RUN"
+  },
+  "selectorChecks": 48,
+  "refusalGate": {
+    "checks": 6,
+    "attempts": 1,
+    "invalidParentRefused": true,
+    "sourceBytesExact": true,
+    "scope": "Adversarial high-price JSON literal incumbent makes malformed parent affordable, forcing actual decode validation rather than cost-only refusal",
+    "native": "NOT_RUN"
+  },
+  "frontier": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "frontierIndependent": [
+    {
+      "input": "bench/x174/receipts/frontier.jsonl",
+      "exact": 22,
+      "unsupported": 7,
+      "mismatches": 0,
+      "rows": [
+        {
+          "path": "bench/holdout-x42/lsblk.txt",
+          "status": "exact",
+          "bytes": 132,
+          "sha256": "6c01e1a891869dfcf63f1cd2f4cf81930f51dbf3459243681cce3d752687c496"
+        },
+        {
+          "path": "bench/holdout-work/kb-article.txt",
+          "status": "exact",
+          "bytes": 3385,
+          "sha256": "d220bfb7a912670e0217b99760f41d40f41e7fab5ceda93f552aebf5ee4744c6"
+        },
+        {
+          "path": "bench/holdout-x42b/uptime-w.txt",
+          "status": "exact",
+          "bytes": 179,
+          "sha256": "d57da79a4bfc7b0bfad09641d429f7ff139a4b354f47ddea07eed9d717e84ae6"
+        },
+        {
+          "path": "bench/holdout-x42b/free-m.txt",
+          "status": "exact",
+          "bytes": 263,
+          "sha256": "0d0194b9ede575d9a4697a04563d1bb2b4f1f269c2103b2f08e95302297b6612"
+        },
+        {
+          "path": "bench/holdout-x42b/vmstat.txt",
+          "status": "exact",
+          "bytes": 467,
+          "sha256": "6014b6f656172eb8350b788d2fef149853fbe0869f420dc8ae72acae35690083"
+        },
+        {
+          "path": "bench/holdout-work/unified-diff.patch",
+          "status": "exact",
+          "bytes": 1487,
+          "sha256": "ff6cc959f8d6c19505c6d1939b667a3ea3bfcf2a57a3e77d5c8ce9d255823d30"
+        },
+        {
+          "path": "bench/holdout-tbl/df-h.txt",
+          "status": "exact",
+          "bytes": 939,
+          "sha256": "ee931228f00d4d8516ce8440ffe8e0e2f6663a4dd8a2d02b895437d7f43c1d4a"
+        },
+        {
+          "path": "bench/holdout-x41/df-real.txt",
+          "status": "exact",
+          "bytes": 329,
+          "sha256": "8bc9354fd729fcb139f6a632b82ef6b1b7625df5fe0f80a2b9e394a33cf27a08"
+        },
+        {
+          "path": "bench/holdout-x41/du-real.txt",
+          "status": "exact",
+          "bytes": 1605,
+          "sha256": "00646d747b2a2fab383aadc6fd9627ad01b42e9459417308a4b583274e8aace2"
+        },
+        {
+          "path": "bench/holdout-x41/node-help.txt",
+          "status": "exact",
+          "bytes": 6751,
+          "sha256": "197c018cbe936e15fb52b81073b14b30b2f9042fe11ad806a129406a48586c3e"
+        },
+        {
+          "path": "bench/holdout-x42/findmnt.txt",
+          "status": "unsupported",
+          "error": "unsupported layout"
+        },
+        {
+          "path": "bench/holdout-x42/df-h.txt",
+          "status": "exact",
+          "bytes": 293,
+          "sha256": "6a82bbf1872d768282c8ad2244235253b485f44f76d347799f6f33cab29966e8"
+        },
+        {
+          "path": "bench/holdout-work/email-thread.txt",
+          "status": "exact",
+          "bytes": 2126,
+          "sha256": "fb609b06e6f995f5fd1465b86e19da67e52c75643015e2ab8ef654644ae01324"
+        },
+        {
+          "path": "bench/holdout-work/llm-answer.md",
+          "status": "exact",
+          "bytes": 2542,
+          "sha256": "7c5c7f1929a6da13fad81a2a6f5c55106cf70105c356a03deca8c5cb15c280bf"
+        },
+        {
+          "path": "bench/holdout-tbl/markdown-table.md",
+          "status": "exact",
+          "bytes": 635,
+          "sha256": "043e61c99c48b9d1baf8f6e64d8a0d5188446be39606d0cfae15dd902586acca"
+        },
+        {
+          "path": "bench/holdout-tbl/psql-output.txt",
+          "status": "unsupported",
+          "error": "unsupported instruction envelope"
+        },
+        {
+          "path": "bench/holdout-x40/prices.csv",
+          "status": "unsupported",
+          "error": "unsupported instruction envelope"
+        },
+        {
+          "path": "bench/holdout-x40/cue-sheet.md",
+          "status": "unsupported",
+          "error": "unsupported instruction envelope"
+        },
+        {
+          "path": "bench/holdout-x42/ps-ef.txt",
+          "status": "exact",
+          "bytes": 2669,
+          "sha256": "36bd1376a952d8882b5be08d4742ea1ce1ae7aeeafb2397c261133d6431a7861"
+        },
+        {
+          "path": "bench/holdout-x41/ls-real.txt",
+          "status": "exact",
+          "bytes": 2486,
+          "sha256": "0e1c90bab677cd8efc3eff74e6ea7092797746854d086051e6c15498a219152b"
+        },
+        {
+          "path": "bench/holdout/json-pkg.txt",
+          "status": "exact",
+          "bytes": 3620,
+          "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+        },
+        {
+          "path": "bench/holdout/code-ts.txt",
+          "status": "exact",
+          "bytes": 6000,
+          "sha256": "9567accc566c445b81a6c035c865aec6d7078e3bb56c62784de3f176aac8017d"
+        },
+        {
+          "path": "bench/holdout-x42/dpkg-l.txt",
+          "status": "unsupported",
+          "error": "unsupported layout"
+        },
+        {
+          "path": "bench/holdout-x41/ps-real.txt",
+          "status": "exact",
+          "bytes": 2365,
+          "sha256": "a52339a22f70d2d4a3503f5f1ea86b7b232710d9e1074df6aca8dc3448b59eb4"
+        },
+        {
+          "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+          "status": "unsupported",
+          "error": "unsupported layout"
+        },
+        {
+          "path": "bench/holdout-x40/metrics.tsv",
+          "status": "exact",
+          "bytes": 1203,
+          "sha256": "b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70"
+        },
+        {
+          "path": "bench/holdout-x41/ps-aux-real.txt",
+          "status": "exact",
+          "bytes": 6590,
+          "sha256": "b54eaf4147ffa2c62b3a0e4f4f3abbe4ec81ff4b5faf086ca4d1f23a99fbd07f"
+        },
+        {
+          "path": "bench/holdout-x41/apt-real.txt",
+          "status": "exact",
+          "bytes": 6195,
+          "sha256": "02cc179c781dc97439b9f122feffa7354dc7a2efce0da87db9c4f21c6cc8559b"
+        },
+        {
+          "path": "bench/holdout-x41/ls-l-real.txt",
+          "status": "unsupported",
+          "error": "unsupported instruction envelope"
+        }
+      ]
+    }
+  ],
+  "speedHash": {
+    "cpuMs": 0.9770898634192802,
+    "wallMs": 0.9766868994194015,
+    "laneRatios": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 0.9904185444144487,
+        "wallMs": 0.9834648669933687
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 0.9558833822249732,
+        "wallMs": 0.9542104208746348
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 0.9663475674759494,
+        "wallMs": 0.9539796417667573
+      },
+      "bench/holdout-work/email-thread.txt": {
+        "cpuMs": 1.0011717341286954,
+        "wallMs": 1.0042241209537046
+      },
+      "bench/holdout-work/unified-diff.patch": {
+        "cpuMs": 0.9758983361175254,
+        "wallMs": 0.9976937270948992
+      },
+      "bench/holdout-x41/node-help.txt": {
+        "cpuMs": 0.988116700350276,
+        "wallMs": 0.9916487920406055
+      }
+    },
+    "accepted": false,
+    "identicalWires": 24
+  },
+  "speedUtf8": {
+    "cpuMs": 0.9734094875552032,
+    "wallMs": 0.9729584928534782,
+    "laneRatios": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 0.9449134646002355,
+        "wallMs": 0.939731233412857
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 0.983627403836522,
+        "wallMs": 0.9807719667757058
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 0.9443135363730649,
+        "wallMs": 0.9455394438648421
+      },
+      "bench/holdout-work/email-thread.txt": {
+        "cpuMs": 1.0376221752418995,
+        "wallMs": 1.0321690130029717
+      },
+      "bench/holdout-work/unified-diff.patch": {
+        "cpuMs": 0.977664327967342,
+        "wallMs": 0.9588677930848535
+      },
+      "bench/holdout-x41/node-help.txt": {
+        "cpuMs": 0.9614087648156847,
+        "wallMs": 0.9695015738060951
+      }
+    },
+    "accepted": false,
+    "identicalWires": 24
+  },
+  "utf8Oracle": {
+    "checks": 1114121,
+    "oracle": "TextEncoder bytes, length bound and scratch sentinel",
+    "errors": 0
+  },
+  "portfolioChecks": 952,
+  "strideChecks": 964,
+  "tournament": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "base": 620,
+      "primary": 759,
+      "best": 759,
+      "candidateImprovement": 0,
+      "frontierGap": 139,
+      "plans": 2,
+      "exact": 2,
+      "refused": 0
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "base": 381,
+      "primary": 722,
+      "best": 636,
+      "candidateImprovement": 86,
+      "frontierGap": 255,
+      "plans": 8,
+      "exact": 7,
+      "refused": 1
+    }
+  ],
+  "tournamentGate": {
+    "checks": 49,
+    "exact": 9,
+    "unsupported": 0,
+    "readerOutputMismatches": 1,
+    "acceptedMismatches": 0,
+    "rows": [
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "levels": 1,
+        "inline": false,
+        "status": "exact bytes",
+        "tokens": 759
+      },
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "levels": 1,
+        "inline": true,
+        "status": "exact bytes",
+        "tokens": 765
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "levels": 1,
+        "inline": true,
+        "status": "exact bytes",
+        "tokens": 722
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "levels": 2,
+        "inline": true,
+        "status": "exact bytes",
+        "tokens": 771
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "levels": 4,
+        "inline": true,
+        "status": "reader output mismatch; candidate refused",
+        "returnedWireUnchanged": true,
+        "tokens": 800
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "levels": 12,
+        "inline": true,
+        "status": "exact bytes",
+        "tokens": 791
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "levels": 1,
+        "inline": false,
+        "status": "exact bytes",
+        "tokens": 636
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "levels": 2,
+        "inline": false,
+        "status": "exact bytes",
+        "tokens": 706
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "levels": 4,
+        "inline": false,
+        "status": "exact bytes",
+        "tokens": 715
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "levels": 12,
+        "inline": false,
+        "status": "exact bytes",
+        "tokens": 732
+      }
+    ],
+    "native": "NOT_RUN"
+  },
+  "paidParent": [
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "base": 949,
+      "candidates": [
+        1119
+      ],
+      "selected": 949
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "base": 486,
+      "candidates": [
+        688
+      ],
+      "selected": 486
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "base": 653,
+      "candidates": [
+        851
+      ],
+      "selected": 653
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "base": 620,
+      "candidates": [
+        759
+      ],
+      "selected": 620
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "base": 381,
+      "candidates": [
+        722
+      ],
+      "selected": 381
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "base": 411,
+      "candidates": [
+        606
+      ],
+      "selected": 411
+    }
+  ],
+  "build": "PASS",
+  "tsc": "PASS",
+  "finalize": "PASS",
+  "notes": [
+    "Native and theorem kernel never executed.",
+    "One tournament parent reader output mismatch was refused; Python marks that envelope unsupported.",
+    "Canonical elapsed timings include deliberate process suspension and are not speed evidence.",
+    "The claimed speed acceptance thresholds are not met by either experiment.",
+    "No broad or niche frontier compression win is claimed."
+  ]
+}

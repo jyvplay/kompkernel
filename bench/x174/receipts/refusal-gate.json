@@ -1,0 +1,8 @@
+{
+  "checks": 6,
+  "attempts": 1,
+  "invalidParentRefused": true,
+  "sourceBytesExact": true,
+  "scope": "Adversarial high-price JSON literal incumbent makes malformed parent affordable, forcing actual decode validation rather than cost-only refusal",
+  "native": "NOT_RUN"
+}

@@ -1,0 +1,10 @@
+bench/holdout-work/kb-article.txt 1 false 759 exact
+bench/holdout-work/kb-article.txt 1 true 765 exact
+bench/holdout-x41/ps-real.txt 1 true 722 exact
+bench/holdout-x41/ps-real.txt 2 true 771 exact
+bench/holdout-x41/ps-real.txt 4 true 800 unsupported or mismatch
+bench/holdout-x41/ps-real.txt 12 true 791 exact
+bench/holdout-x41/ps-real.txt 1 false 636 exact
+bench/holdout-x41/ps-real.txt 2 false 706 exact
+bench/holdout-x41/ps-real.txt 4 false 715 exact
+bench/holdout-x41/ps-real.txt 12 false 732 exact

@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "gates": [
+    "unit",
+    "portfolio",
+    "selector",
+    "tournament reader classification",
+    "malformed-parent refusal",
+    "independent inverse",
+    "modal countermodels",
+    "frontier finalization",
+    "TypeScript",
+    "build"
+  ],
+  "sourceHashes": {
+    "src/lib/omega/kymatia.ts": "09e613170449fc01a01abbc53389d2524dc2a843f9748e1805ee59714d1166c2",
+    "bench/x174/test.ts": "2b238ef92482317d85dd751cf50329de163e956c5229760b16bff5c608cf41fc",
+    "src/lib/omega/bpe-fast.ts": "62c5d1856f530ef07c51d90a9060b809a3a771e7d4db2d0d952f2319eeb2c286"
+  },
+  "native": "NOT_RUN",
+  "kernel": "NOT_RUN"
+}

@@ -1,0 +1,6 @@
+import fs from 'node:fs';import {build} from 'esbuild';
+const original=fs.readFileSync('src/lib/omega/bpe-fast.ts','utf8');
+let patched=original.replace('let i = k & H3_MASK;', 'let i = (Math.imul(k, 0x9e3779b1) >>> (32-H3_BITS));').replace('let i = (b[s] * 65536 + b[s + 1] * 256 + b[s + 2]) & H3_MASK;', 'let i = (Math.imul(b[s] * 65536 + b[s + 1] * 256 + b[s + 2], 0x9e3779b1) >>> (32-H3_BITS));').replaceAll('let i = (hi * 31 + lo) & H4_MASK;', 'let i = (Math.imul((hi << 16) | lo, 0x9e3779b1) >>> (32-H4_BITS));');
+if(patched===original||patched.includes('let i = (hi * 31 + lo)'))throw Error('patch');
+for(const arm of ['A','B'])for(const [name,entry] of [['speed','bench/x164/cache-speed.ts'],['count','bench/x163/count-gate.ts'],['vector','bench/x164/speed-unit.ts']])await build({entryPoints:[entry],bundle:true,platform:'node',format:'esm',outfile:`bench/x174/${name}-${arm}.mjs`,plugins:arm==='A'?[]:[{name:'multiplicative-rank-hash',setup(b){b.onLoad({filter:/[\\/]bpe-fast\.ts$/},()=>({contents:patched,loader:'ts'}));}}]});
+fs.writeFileSync('bench/x174/receipts/speed-patch.json',JSON.stringify({production:false,scope:'Change starting bucket ONLY; same keys, ranks and linear probing; multiplicative hash of complete 24/32-bit key'},null,2));

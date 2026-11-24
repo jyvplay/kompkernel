@@ -1,0 +1,32 @@
+[
+  {
+    "repo": "python/cpython",
+    "commit": "32b51e34318e6dd355f3fb40b8abf94c205444b1",
+    "path": "Doc/tutorial/errors.rst",
+    "file": "bench/x174/fixtures/python_cpython-errors.rst",
+    "bytes": 24533,
+    "sha256": "5b2b278a22c14251a4f0b6e80f6a5939ad9ef612ec7ba56213f1ae88a985fd21",
+    "license": "bench/x174/fixtures/python_cpython-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  },
+  {
+    "repo": "rust-lang/book",
+    "commit": "5c23042f85595490ad9f7412c4c6f57fe0b330d5",
+    "path": "src/ch09-02-recoverable-errors-with-result.md",
+    "file": "bench/x174/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+    "bytes": 26432,
+    "sha256": "dab3e88d324cdde74cf96356c58a423747a5735ac6848d8d4592dc7c13637c62",
+    "license": "bench/x174/fixtures/rust-lang_book-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  },
+  {
+    "repo": "kubernetes/website",
+    "commit": "ac7b6d42d503158fdc822e04c88e2035d9a09ae9",
+    "path": "content/en/docs/tasks/configure-pod-container/configure-pod-configmap.md",
+    "file": "bench/x174/fixtures/kubernetes_website-configure-pod-configmap.md",
+    "bytes": 28884,
+    "sha256": "7d9679531fda13c00956f049d70c1c90efc474cd76415147a3e2103b0d0e76f5",
+    "license": "bench/x174/fixtures/kubernetes_website-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  }
+]

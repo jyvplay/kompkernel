@@ -1,0 +1,29 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
+  'Decode payload first. First line is a signed decimal integer list; rest is a skeleton. Invert 1 Haar lifting levels: take at most 1 active lengths starting at list length, repeatedly ceil-half while above 1; undo in reverse. At active length n, first ceil(n/2) entries are lows, rest details. For each low s and detail d restore a=s-floor(d/2), b=a+d; interleave pairs, carrying the last low if n is odd. Replace skeleton ~ holes left-to-right with restored nonnegative integers; ~[w] pads to width w with zeros. Preserve everything else; print only.\n' +
+    '1 3 1\n' +
++   '😀~\x00~~\r\n'
+-   '😀~\x00~﻿~\r\n'
+
+    at file:///home/user/kompkernel/bench/x174/test.mjs:2531:12
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'Decode payload first. First line is a signed decimal integer list; rest is a skeleton. Invert 1 Haar lifting levels: take at most 1 active lengths starting at list length, repeatedly ceil-half while above 1; undo in reverse. At active length n, first ceil(n/2) entries are lows, rest details. For each low s and detail d restore a=s-floor(d/2), b=a+d; interleave pairs, carrying the last low if n is odd. Replace skeleton ~ holes left-to-right with restored nonnegative integers; ~[w] pads to width w with zeros. Preserve everything else; print only.\n' +
+    '1 3 1\n' +
+    '😀~\x00~~\r\n',
+  expected: 'Decode payload first. First line is a signed decimal integer list; rest is a skeleton. Invert 1 Haar lifting levels: take at most 1 active lengths starting at list length, repeatedly ceil-half while above 1; undo in reverse. At active length n, first ceil(n/2) entries are lows, rest details. For each low s and detail d restore a=s-floor(d/2), b=a+d; interleave pairs, carrying the last low if n is odd. Replace skeleton ~ holes left-to-right with restored nonnegative integers; ~[w] pads to width w with zeros. Preserve everything else; print only.\n' +
+    '1 3 1\n' +
+    '😀~\x00~﻿~\r\n',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.22.3
