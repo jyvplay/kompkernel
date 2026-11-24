@@ -1,0 +1,8 @@
+{
+  "checks": 20018,
+  "arms": [
+    "B",
+    "C"
+  ],
+  "scope": "Actual injected cache class capacity/overwrite/delete/oversize/lone-surrogate stress; not whole-encoder speed or heap bound"
+}

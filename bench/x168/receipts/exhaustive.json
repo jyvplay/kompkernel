@@ -1,0 +1,12 @@
+{
+  "checks": 26232,
+  "sourceCount": 3279,
+  "alphabet": [
+    "",
+    "a",
+    "b"
+  ],
+  "maxFields": 7,
+  "contextSubsets": 8,
+  "scope": "finite exhaustive inverse of actual TypeScript decoder, not universal proof or native decoding"
+}

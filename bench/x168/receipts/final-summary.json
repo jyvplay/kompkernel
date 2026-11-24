@@ -1,0 +1,58 @@
+{
+  "codec": "DIADOCHI",
+  "productionIntegrated": false,
+  "canonical": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "requests": {
+    "exit": 0,
+    "completed": true,
+    "tokens": 3539,
+    "cpuMs": 512072.33,
+    "wallMs": 522075.281964,
+    "maxRssKiB": 540888,
+    "sourceSha256": "5914de6a636d91ca2ca3a0df55ef8e57359e3fe364fb7176fdee60d231fe2e9f",
+    "wireSha256": "30cf400a48a83652e54be795a475183099d4d66d75e2b8230128da8cf93aba49",
+    "fullPrice": true,
+    "tokenIdRoundTrip": true,
+    "readStatus": "unsupported",
+    "error": "Error: EKDYSIS unsupported grammar",
+    "native": "NOT_RUN",
+    "scope": "Completed C encode; whole speed worker already compares encoder-decoded bytes against source; this gate reads saved wire separately. B OOM is not a timed baseline."
+  },
+  "requestsIndependentPython": {
+    "native": "NOT_RUN",
+    "exact": true,
+    "bytes": 19213,
+    "sha256": "5914de6a636d91ca2ca3a0df55ef8e57359e3fe364fb7176fdee60d231fe2e9f"
+  },
+  "runtime": {
+    "cpuMs": 1.0049205653375861,
+    "wallMs": 1.007035200848927,
+    "laneRatios": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 1.0366337239844996,
+        "wallMs": 1.036067724501177
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 0.9660456968326198,
+        "wallMs": 0.9667096664219075
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 1.0440190214598852,
+        "wallMs": 1.0495052241253606
+      }
+    },
+    "accepted": false,
+    "identicalWires": 12
+  },
+  "paretoAccepted": false,
+  "native": "NOT_RUN",
+  "reason": "No new codec price wins; protected-lane runtime regressions; missing native decoder evidence"
+}

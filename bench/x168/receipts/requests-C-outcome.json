@@ -1,0 +1,16 @@
+{
+  "exit": 0,
+  "completed": true,
+  "tokens": 3539,
+  "cpuMs": 512072.33,
+  "wallMs": 522075.281964,
+  "maxRssKiB": 540888,
+  "sourceSha256": "5914de6a636d91ca2ca3a0df55ef8e57359e3fe364fb7176fdee60d231fe2e9f",
+  "wireSha256": "30cf400a48a83652e54be795a475183099d4d66d75e2b8230128da8cf93aba49",
+  "fullPrice": true,
+  "tokenIdRoundTrip": true,
+  "readStatus": "unsupported",
+  "error": "Error: EKDYSIS unsupported grammar",
+  "native": "NOT_RUN",
+  "scope": "Completed C encode; whole speed worker already compares encoder-decoded bytes against source; this gate reads saved wire separately. B OOM is not a timed baseline."
+}

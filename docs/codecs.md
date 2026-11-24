@@ -12364,3 +12364,27 @@ shared cache ownership, but the measured memo-bypass experiment fails the speed
 gate; no production hot-path patch is installed. Fresh canonical replay remains
 29identical wires/11962tokens,21supported bounded inverses/eight unsupported.
 Refreshed category/local leaders and all failure receipts are in `bench/x167/`.
+
+## X168 experimental successor queues
+
+DIADOCHI (`src/lib/omega/diadochi.ts`) stores successor fields in predecessor-
+routed FIFO streams. Decoder history selects each next queue; no occurrence
+positions are sent. Its complete self-contained specification, classical graph
+ancestry, heuristic selection and CPU/space limits are in the X168abbreviation
+entry and `bench/x168/README.md`. It is **not enabled in production**.
+
+Fresh34source/138plan screening and four new whole-document holdouts find no
+raw-complete wins; all five parent-facing trials lose. Native basic-chat decoding
+is NOT_RUN, not inferred from Python or TypeScript. A memory-policy experiment
+also fails the significant whole-stack speed gate, despite12identical wires.
+Requests resource outcomes are recorded separately; no incomplete encode is a
+success.29fresh canonical wires remain11962tokens, identical toX167, with21
+supported bounded-reader inverses/eight unsupported. Local/category leaders,
+repaired-candidate attacks and individual lab-proof interfaces are refreshed in
+`bench/x168/`. Merging this experimental work is not scientific acceptance.
+
+Requests follow-through:the test-only detached+bounded cache policy completes
+at3539tokens with540888KiBpeakRSS under900MBheap, and the separate Python wire
+reader exactly restores19213source bytes. Budget-only policy OOMs. This useful
+completion result is distinct from codec Pareto superiority and does not erase
+the measured protected-lane CPU regressions; default production policy unchanged.

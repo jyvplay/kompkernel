@@ -1,0 +1,65 @@
+[
+  {
+    "repo": "openai/math",
+    "commit": "f5702854040e97fa7675c21ba37a9608f5f92dd3",
+    "path": "lean/ComparatorChallenges/VPVNP.json",
+    "bytes": 333,
+    "sha256": "ca61b859dc82d64386fd93e27b8b335b30906129dba8c04938d47761efafcd87"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/proof/maintheorem/CountedRoute/Main.lean",
+    "bytes": 5772,
+    "sha256": "4a4f9a52f2600edf45827572f2d3a1a393f28e6072d49936fe23001bb7caf71a"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/proof/statements/MainTheoremFormsStatement.lean",
+    "bytes": 16558,
+    "sha256": "b3ee1c5f620e35db7db2a83c7ff798d153caada60f0b7be786d5327f3dcc8647"
+  },
+  {
+    "repo": "google-deepmind/alphaproof-nexus-results",
+    "commit": "0647711a71183c1ea492ad60860776617ce1ea88",
+    "path": "APNOutputs/ErdosProblems/erdos_741.parts.i.lean",
+    "bytes": 87669,
+    "sha256": "481e87ebaa4058e5ce4f2cf85f229cf4382a633c6de02cd4617c8bf1212184df"
+  },
+  {
+    "repo": "openai/math",
+    "commit": "f5702854040e97fa7675c21ba37a9608f5f92dd3",
+    "path": "lean/OAI/Computability/VPVNP/ClassSeparation.lean",
+    "bytes": 697,
+    "sha256": "00840d6c82d4bf7f578f1766d3e153a401a3146ee60f355dbee8f185b8669c68"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/proof/maintheorem/CountedRoute/Defs.lean",
+    "bytes": 10669,
+    "sha256": "248ea5ccef50b8b5603cc486d5f72022580bb09028700a428ffe262de4510b4d"
+  },
+  {
+    "repo": "harmonic-ai/IMO2025",
+    "commit": "72b62405a176a7eaeadb335a7fa6ee80b6667161",
+    "path": "HarmonicLean/StatementOnly_IMO2025P1.lean",
+    "bytes": 1656,
+    "sha256": "807f5673d5c6cca2787565a4c8fc0107c6d918e283cbfa9f7d5dca08381e7279"
+  },
+  {
+    "repo": "harmonic-ai/IMO2025",
+    "commit": "72b62405a176a7eaeadb335a7fa6ee80b6667161",
+    "path": "HarmonicLean/IMO2025P1.lean",
+    "bytes": 103151,
+    "sha256": "b763f01962032cc25ed9bf4c9eb304dc6b22cca69c4d6d26d92604a8bbd35fd7"
+  },
+  {
+    "repo": "openai/math",
+    "commit": "f5702854040e97fa7675c21ba37a9608f5f92dd3",
+    "path": "lean/OAI/Computability/VPVNP/Separation.lean",
+    "bytes": 1568,
+    "sha256": "abf32a1a1aab4a059161b5f89861e9171fed1a16c4b025c9543e5f06a8fd7f7d"
+  }
+]

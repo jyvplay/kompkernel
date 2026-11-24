@@ -11440,3 +11440,65 @@ prose-generalization test. Local absolute/relative fixture leaders are refreshed
 in `bench/x167/receipts/local-leaders.json`, not exhaustive codec ablations.
 Full A–J ledger,27-shape modal detector, research interfaces and failures:
 `bench/x167/README.md`. Merge is not acceptance.
+
+## X168 — DIADOCHI: predecessor-routed FIFO streams (experimental)
+
+**Module:** `src/lib/omega/diadochi.ts`, unwired. DIADOCHI (succession) splits on
+ASCII spaces, retaining empty fields. Selected predecessor fields each own an
+ordered queue of their observed successors; other successors enter a default
+queue. Emit the first field, then let each emitted field select the queue for
+the next. No occurrence ordinals, rotation index or route bitmap are sent.
+JSON null means zero queued fields; a string means its space-split fields (the
+empty string means one empty field). All remaining characters are exact.
+
+This is classical finite-context/ordered-adjacency ancestry, not an AI-exclusive
+or new information-theoretic discovery. It differs from THESI positional scatter
+and SYMFRAZ frozen-context collation: queue routing uses reconstructed history.
+Graph preservation alone is insufficient: `a b a c a` and `a c a b a` have the
+same bigram multiset. Actual exit order is indispensable. Source context:
+Besta–Hoefler(2018), https://spcl.ethz.ch/Publications/.pdf/graph-compression-lossless.pdf;
+Chen et al.(2025), https://arxiv.org/html/2510.22404. The latter preserves k-mer
+multisets, not original sequence order or fixed-tokenizer price; no direct
+compression guarantee is imported.
+
+**Selection/greediness:** predecessor frequency≥3; test top1/2/4/8/16/32contexts,
+first-occurrence tie order. Frequency ranking is heuristic; there is no greedy
+wire-edit loop or global optimality claim. At most one best-raw fold receives a
+full parent call. Charge the entire instruction+JSON+dictionary+queues+parent.
+Strict verified selection preserves the incumbent. Source/fold/output cap50k
+UTF-16units;≤1024decoder contexts. Expected construction O(n+v log v), O(n)space,
+plus six tokenizations and one potentially dominant parent search. CPU/work-bound
+candidate counts, no wall-clock pruning; no formal JS runtime/heap theorem.
+
+**Repairs/tests:** array queues→joined strings was followed by fresh14,768checks,
+4779saved generated pairs,26,232exhaustive inverse checks (3279small sequences×
+eight context subsets),40selector checks, null/empty/stranding attacks. A harness
+flag typo was stopped and corrected, with fresh full parent trials and a mutant
+flag detector. Python4947checks include generated/source/heldout folds and9full
+wires; one candidate parent fails JSON framing. No native model endpoint was
+available; four single-message prompts and an exact reply-byte checker are
+prepared in `bench/x168/native/`, observations NOT_RUN.
+
+**Results:**34sources/138plans,zero raw-complete wins; five parent trials lose:
+620→719,486→589,949→1124,381→525,664→777(last also reader mismatch). Four fresh,
+pinned whole-document holdouts after codec freeze produce21plans/zero raw wins.
+No niche-only success is promoted to breadth. New module exists; requested
+advantageous Pareto-superior codec remains unestablished.
+
+**Resources/frontier:** test-only joint cache budgets and exact UTF16detachment
+pass16192count checks/arm and20018cache stress checks. Cold ACCA has12identical
+wires but CPU1.004921/wall1.007035, failing speed/non-regression gates. Requests
+budget-only arm OOMs900MB(exit134); final detached-arm outcome is in X168ledger.
+Production hot path unchanged. Fresh29canonical wires exactly matchX167 at11962
+tokens;29prices/IDroundtrips,21supported bounded-reader inverses/8unsupported.
+Refreshed inherited category/local leaders:prose5856→3429(word),ops17278→5580
+(glyph),code4152→2636(word),other729→317(no tape). Labels are inherited, not
+an exhaustive ablation or freshly curated broad-generalization benchmark.
+
+X168Requests final:detached+bounded armC completes3539tokens,512.072CPU seconds,
+522.075elapsed,540888KiBpeakRSS under900MBheap. Separate Python reader restores
+all19213original bytes; full price/token-ID transport passes. Bounded TypeScript
+EKDYSIS grammar unsupported, nativeNOT_RUN. Budget-only armB OOMs(exit134/no wire).
+This is a verified completion improvement over B, not a completed-A speedup or
+DIADOCHI compression gain. C's protected-lane regressions still block default
+adoption; opt-in bench policy only. Full outcome/hash receipts are inX168ledger.

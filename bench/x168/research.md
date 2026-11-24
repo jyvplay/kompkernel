@@ -1,0 +1,45 @@
+# X168 source and proof-interface review
+
+Session date authority: 2026-11-14. Retrieved GitHub/shell metadata can be later; especially the current OpenAI revision was future-dated in X167. Do not silently resolve that discrepancy or authenticate chronology from a search result. This is a targeted review, **not an exhaustive audit of all new mathematical proofs or all labs**. Lean/lake/Rocq were not found; no external kernel execution is claimed.
+
+## New searches, sites and compression interfaces
+
+Fresh queries included `reversible text preprocessing compression bijective transform word permutation 2023 2024 2025 paper`, `text compression Eulerian graph 2010 2024`, `compression transition queues text`, `compression context partitioning transform 2020 2024`, and individually scoped math-lab queries. The transition-queue query returned lossy sentence shortening: explicitly not our problem. Search excerpts did not count as verified theorems.
+
+Primary pages actually fetched:
+
+1. **Besta–Hoefler, Survey and Taxonomy of Lossless Graph Compression and Space-Efficient Graph Representations** (retrieved PDF labels itself 2018), https://spcl.ethz.ch/Publications/.pdf/graph-compression-lossless.pdf, first chunk only. Distinguishes labeled/unlabeled and adjacency/query representations. Compressing a graph does not preserve the particular text walk through it. This motivates retaining each vertex's successor order rather than only its edge multiset. No claim to have read all52pages.
+2. **Chen et al., Efficient k-mer Dataset Compression Using Eulerian Covers of de Bruijn Graphs and BWT** (2025), https://arxiv.org/html/2510.22404, first chunk. Its object is a k-mer **multiset**, including frequencies, and its minimum objective is the number of representing strings in a graph cover, not original sequence reconstruction or o200k tokens. The abstract itself reports raw expansion in some settings and lossless/lossy comparator differences. Executable counterexample in `transfer-checks.py`: `a b a c a` and `a c a b a` have identical directed bigram multisets but different original bytes. Thus an optimal cover cannot be substituted for our target. DIADOCHI preserves ordered FIFO exits, not just degrees or edges.
+3. **Jeon–Köppl, Compression Sensitivity of the Burrows–Wheeler Transform and Its Bijective Variant** (25March2025), https://www.mdpi.com/2227-7390/13/7/1070, first chunk. Measures r=runs(BWT(T)) and rho=runs(BBWT(T)); edits/alphabet order can change these measures substantially on constructed families. The fetched formulas are partly absent in extracted text, so no exact asymptotic bound is imported from that extraction. Run counts are not fixed-vocabulary BPE token costs or behavioral readability. This motivates fresh edge/representation tests after repairs, not a claimed token guarantee.
+
+The specific SPCL, MDPI and Harmonic URLs below were not found in searched prior docs, omega modules or X160–167 ledgers. This is a bounded citation search, not proof they were never visited in any historical conversation. All these papers are within20years of session date. DIADOCHI is an original repository experiment with classical finite-context/ordered-adjacency ancestry; none of these papers is represented as publishing our precise JSON wire.
+
+## OpenAI: beyond X167's statement-only inspection
+
+Pinned `openai/math` f5702854040e97fa7675c21ba37a9608f5f92dd3. Retrieved comparator JSON, `ClassSeparation.lean`, `Separation.lean`; file hashes in `receipts/research-artifacts.json`.
+
+Comparator target: `OAI.Computability.VPVNP.Standalone.vp_ne_vnp`; solution module `OAI.Computability.VPVNP.ClassSeparation`; permitted axioms propext, Quot.sound, Classical.choice; `enable_nanoda=false`. That last flag is not evidence of another-kernel replay. ClassSeparation transports through `Valiant.Project.isVP_iff` and `isVNP_iff`, not a proof body in the challenge. Separation's lower-bound quantifier order is ∀C≥1 ∀characteristic q ∃N ∀n≥N ∀fields F of characteristic q. It invokes `FixedProgramDiagonal.uniform_of_pair_compilers` and `Program.paperPairCompiler`, identifying the next actual dependency to inspect. Its permanent corollary has q≠2. Exact arithmetic circuits are not Turing-time lower bounds or a tokenizer objective. No theorem certified locally; no claim of VP≠VNP accepted. This deepens the prior named interface without pretending to audit the dependency closure.
+
+## Anthropic: counted operations to final machine time
+
+Pinned `anthropics/formal-math` 11b6c7e3c927df2658f513b6b68ea7f8929c62c5. Retrieved CountedRoute Main/Defs and MainTheoremFormsStatement. Main's final `mainTheoremHolds` projects `.1` of `closedStatementsFrom onTheCountedRecursion`. The dependency chain separately supplies `solverOfMachineLevels`, `cutNumberFacts`, `bothBoundsOnEverySolver`, `onEverySolver`, and `CountedInstance.theRecursionMeetsTheHypothesis`. Defs makes the polynomial-query-step hypothesis explicit, with ∀machine satisfying it ∃n0 before the later rate bound and n1. Closing the chain also requires actual pieces and algorithm witnesses, not just a conditional implication. This is not evidence of a flaw; it is the unresolved resource-accounting interface. Final finite-stack TM time claims in X167 cannot be endorsed from reading these wrappers. No ETH resolution or compression consequence imported. Next: pinned toolchain/kernel replay and audit the query-to-padding bridge and machine witness, not another challenge-header read.
+
+## Google: a named theorem rather than a marketing aggregate
+
+Pinned `google-deepmind/alphaproof-nexus-results` 0647711a71183c1ea492ad60860776617ce1ea88. Retrieved `APNOutputs/ErdosProblems/erdos_741.parts.i.lean`. Its final theorem refutes the universal partition assertion written with `HasPosDensity`: for A⊆N with positive density of A+A, partition A into two disjoint sets each having positive-density self-sumsets. The supplied witness is SandorA; displayed intermediate lemmas use convergent density limits. We did not retrieve the imported definition closure, so do **not** conflate this artifact with secondary reports about an amended positive-*upper*-density statement. Positive density and positive upper density are different hypotheses. No kernel execution. This directly illustrates why a numeric asymptotic resource claim requires its precise definition, not a familiar name. No token compression transfer follows.
+
+## DoubleAI: certificate hypotheses examined further
+
+Fetched PDF chunks13–14 from https://www.doubleai.com/papers/girth85.pdf, beyond X167's introductory chunk. Theorem5.2 assumes fixed arithmetic data(A1–A5), tau-stable order, nonzero ideal a prime to p, and nonidentity w∈Gamma(a). It concludes det(w−I)∈K× and |det(w−I)|p≥N(a)^4/16^r. Nonzero uses the **division algebra**; fixed-by-conjugation uses unitary determinant1 in dimension4; divisibility uses order integrality; real-place bound16 uses positive-definiteness; the product formula combines them. Corollary5.3 additionally uses the local displacement estimate to infer q^k≥N(a)^4/16^r for a2k-walk. Finiteness/vertex counts are further interfaces, not proved by that scalar inequality alone.
+
+`transfer-checks.py` gives an exact counterexample if division-algebra membership is discarded: diag(1,−1,1,−1) is a nonidentity determinant-one orthogonal matrix but det(w−I)=0. This does not refute their theorem; it refutes a hypothesis-dropping transfer. No Lean archive or kernel replay, no all-degree result endorsed. The earlier chess63-check witness and7224-case upper-bound distinction remains unchanged; no new chess replay claimed.
+
+## Harmonic: additional lab, separately evaluated
+
+Fetched https://www.harmonic.fun/news/imo-ios/ and pinned `harmonic-ai/IMO2025` 72b62405a176a7eaeadb335a7fa6ee80b6667161. Read statement-only and solution P1 endpoints. Claim: for every integer n≥3, exactly k∈{0,1,3} sunny lines are possible among n distinct real lines covering the positive integer triangle a+b≤n+1. Sunny means coefficients a,b nonzero and a≠b. The solution separates constructive k=0,1,3 lemmas from exclusion of k=2 and k≥4, ending with `#print axioms main_theorem`; the **output** of that command was not run here. StatementOnly's `sorry` is intentional, not a reason to accuse the solution of unsoundness.
+
+A tiny exact n=3,k=3 witness is checked locally with integer arithmetic in `transfer-checks.py`; that witness proves neither the universal classification nor any compression benefit. No Harmonic service/API was called. Site navigation listed later-dated articles; these are not accepted as chronologically current from that page alone.
+
+## Remaining scope
+
+ByteDance and other labs' prior artifacts are not retroactively certified; this turn did not complete an all-lab audit. No simulator, trained model, theorem prover or independent agent was invented. The reusable lesson is interface discipline: graph↔walk, symbol↔token, program inverse↔native response, reference-count bound↔V8 heap, wrapper theorem↔dependency proof, and local witness↔universal claim are separate arrows needing evidence.

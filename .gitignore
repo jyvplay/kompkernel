@@ -204,3 +204,8 @@ bench/x166/*.cpuprofile
 bench/x167/*.mjs
 !bench/x167/*-build.mjs
 .cache/x167/
+
+# X168 generated experiments
+bench/x168/*.mjs
+!bench/x168/*-build.mjs
+.cache/x168/

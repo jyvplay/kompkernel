@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "policy": "4M UTF16 key units each in bpe and bpe-fast CHUNK_CACHE; original entry limits retained; oversize keys bypass; no search changes",
+  "armC": "also use budget map for each SHORT_CACHE encoding; UTF16LE detached inserted keys above 12 units; rerun all gates",
+  "hardHeapBound": false
+}
