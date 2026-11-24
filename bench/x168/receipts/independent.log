@@ -1,0 +1,1 @@
+{'checks': 4947, 'wireChecks': 9, 'unsupported': [], 'mismatches': [{'path': 'bench/holdout-work/llm-answer.md', 'kind': 'candidate', 'reason': 'JSONDecodeError'}], 'native': 'NOT_RUN', 'scope': 'Python algorithm, not basic-chat behavioral evidence'}

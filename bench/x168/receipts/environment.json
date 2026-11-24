@@ -1,0 +1,9 @@
+{
+  "dateAuthority": "2026-11-14",
+  "observedShellDate": "2026-11-24T03:25:31Z",
+  "node": "v22.22.3",
+  "lean": null,
+  "lake": null,
+  "native": "NOT_RUN: no exposed model-call tool",
+  "agents": "none; shell processes only"
+}

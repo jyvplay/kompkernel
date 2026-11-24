@@ -1,0 +1,26 @@
+[
+  {
+    path: 'bench/x168/fixtures/git_git-revert-a-faulty-merge.adoc',
+    raw: 2798,
+    best: 3120,
+    plans: 6
+  },
+  {
+    path: 'bench/x168/fixtures/prometheus_prometheus-README.md',
+    raw: 2323,
+    best: 2591,
+    plans: 6
+  },
+  {
+    path: 'bench/x168/fixtures/jqlang_jq-README.md',
+    raw: 676,
+    best: 823,
+    plans: 5
+  },
+  {
+    path: 'bench/x168/fixtures/pallets_click-README.md',
+    raw: 403,
+    best: 558,
+    plans: 4
+  }
+] 63

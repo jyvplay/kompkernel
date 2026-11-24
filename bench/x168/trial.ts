@@ -1,0 +1,11 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {encode,decode} from 'gpt-tokenizer/encoding/o200k_base';import {diadochiPlans,diadochiRead,diadochiFromFrontier,DIADOCHI_KEY} from '../../src/lib/omega/diadochi';import {tagstackEncode} from '../../src/lib/omega/tagstack';import {antikleisParentRead} from '../../src/lib/omega/antikleis-parent';
+process.env.OMEGA_DET='1';process.env.OMEGA_NO_MEMO='1';process.env.OMEGA_ENGRAM='0';process.env.OMEGA_OURA_MEMO='0';process.env.OMEGA_NO_OROTHESIA='1';
+const old=fs.readFileSync('bench/x167/receipts/frontier.jsonl','utf8').trim().split('\n').map(l=>JSON.parse(l));
+for(const path of process.argv.slice(2)){
+ const source=fs.readFileSync(path),r=old.find(r=>r.path===path);assert.ok(r);assert.ok(Buffer.from(antikleisParentRead(r.message)).equals(source));const candidates:any[]=[];const start=performance.now(),u=process.cpuUsage();
+ const result=diadochiFromFrontier(source.toString(),r.message,antikleisParentRead,folded=>{const p=tagstackEncode(folded);const candidate={folded,parent:p.message,parentTokens:encode(p.message).length,verified:antikleisParentRead(p.message)===folded};candidates.push(candidate);if(!candidate.verified)throw Error('independent parent reader mismatch');return p.message;},antikleisParentRead);
+ assert.ok(Buffer.from(result.applied?diadochiRead(result.message,antikleisParentRead):antikleisParentRead(result.message)).equals(source));assert.equal(decode(encode(result.message)),result.message);assert.equal(encode(result.message).length,result.tokens);
+ const plans=diadochiPlans(source.toString());for(const c of candidates){const p=plans.find(p=>p.folded===c.folded)!;c.message=DIADOCHI_KEY+c.parent;c.tokens=encode(c.message).length;if(c.verified)assert.ok(Buffer.from(diadochiRead(c.message,antikleisParentRead)).equals(source));}
+ const cpu=process.cpuUsage(u);const receipt={path,base:{message:r.message,tokens:r.tokens,scope:'X167 saved baseline; must match fresh X168 canonical replay'},candidates,result,cpuMs:(cpu.user+cpu.system)/1000,ms:performance.now()-start,native:'NOT_RUN'};
+ fs.writeFileSync('bench/x168/receipts/trial-'+path.split('/').pop()+'.json',JSON.stringify(receipt,null,2));console.log(path,r.tokens,result.tokens,candidates.map(c=>c.tokens));
+}

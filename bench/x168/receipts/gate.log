@@ -1,0 +1,35 @@
+{
+  checks: 40,
+  rows: [
+    {
+      path: 'bench/holdout/code-ts.txt',
+      base: 949,
+      selected: 949,
+      candidates: [Array]
+    },
+    {
+      path: 'bench/holdout-work/email-thread.txt',
+      base: 486,
+      selected: 486,
+      candidates: [Array]
+    },
+    {
+      path: 'bench/holdout-work/kb-article.txt',
+      base: 620,
+      selected: 620,
+      candidates: [Array]
+    },
+    {
+      path: 'bench/holdout-work/llm-answer.md',
+      base: 664,
+      selected: 664,
+      candidates: [Array]
+    },
+    {
+      path: 'bench/holdout-x41/ps-real.txt',
+      base: 381,
+      selected: 381,
+      candidates: [Array]
+    }
+  ]
+}

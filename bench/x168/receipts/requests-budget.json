@@ -1,0 +1,10 @@
+{
+  "heapMB": 900,
+  "cpuSoftSeconds": 600,
+  "cpuHardSeconds": 605,
+  "pids": {
+    "B": 1672,
+    "C": 9748
+  },
+  "scope": "CPU limits applied after launch using prlimit, not a measured speed comparison; canonical replay and earlier isolated timing affected wall time; no partial wire is a pass"
+}

@@ -1,0 +1,5 @@
+bench/holdout-work/kb-article.txt 620 620 [ 719 ]
+bench/holdout-work/email-thread.txt 486 486 [ 589 ]
+bench/holdout/code-ts.txt 949 949 [ 1124 ]
+bench/holdout-x41/ps-real.txt 381 381 [ 525 ]
+bench/holdout-work/llm-answer.md 664 664 [ 777 ]

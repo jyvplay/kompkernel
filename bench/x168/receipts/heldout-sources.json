@@ -1,0 +1,50 @@
+[
+  {
+    "repo": "git/git",
+    "commit": "77904e546de3bd940621092ecec47a88d0cede5d",
+    "path": "Documentation/howto/revert-a-faulty-merge.adoc",
+    "file": "bench/x168/fixtures/git_git-revert-a-faulty-merge.adoc",
+    "bytes": 10882,
+    "sha256": "ce817d2d9ac32b7b0f9f45287f3014467172d317f0f79a9874f98876dd95629c",
+    "url": "https://github.com/git/git/blob/77904e546de3bd940621092ecec47a88d0cede5d/Documentation/howto/revert-a-faulty-merge.adoc",
+    "scope": "whole public documentation file; fetched after codec/thresholds frozen; no parent frontier measured on these new files",
+    "licenseFile": "bench/x168/fixtures/git_git-LICENSE.txt",
+    "licenseSource": "COPYING"
+  },
+  {
+    "repo": "prometheus/prometheus",
+    "commit": "a5022ef622b4718c3dda1291c1e641fbed44c607",
+    "path": "README.md",
+    "file": "bench/x168/fixtures/prometheus_prometheus-README.md",
+    "bytes": 9689,
+    "sha256": "fb0d761371424c5fe128cbee49d1c2999c0b99d554a5f2332b1148d97b99b04d",
+    "url": "https://github.com/prometheus/prometheus/blob/a5022ef622b4718c3dda1291c1e641fbed44c607/README.md",
+    "scope": "whole public documentation file; fetched after codec/thresholds frozen; no parent frontier measured on these new files",
+    "licenseFile": "bench/x168/fixtures/prometheus_prometheus-LICENSE.txt",
+    "licenseSource": "LICENSE"
+  },
+  {
+    "repo": "jqlang/jq",
+    "commit": "5c001b18d7237cce1fdba63608732163f978dd23",
+    "path": "README.md",
+    "file": "bench/x168/fixtures/jqlang_jq-README.md",
+    "bytes": 2684,
+    "sha256": "2050b0eb357e6b0aa376ba2399acaae5e4938c9e78908a0e6853705e194be281",
+    "url": "https://github.com/jqlang/jq/blob/5c001b18d7237cce1fdba63608732163f978dd23/README.md",
+    "scope": "whole public documentation file; fetched after codec/thresholds frozen; no parent frontier measured on these new files",
+    "licenseFile": "bench/x168/fixtures/jqlang_jq-LICENSE.txt",
+    "licenseSource": "COPYING"
+  },
+  {
+    "repo": "pallets/click",
+    "commit": "08b803cf32ceb2ae6a772c62d5da42757a897d44",
+    "path": "README.md",
+    "file": "bench/x168/fixtures/pallets_click-README.md",
+    "bytes": 1778,
+    "sha256": "4c3de4aa0918deac2f712facacd1dc30a8cc4627d0118dd290292ab0af65ca0b",
+    "url": "https://github.com/pallets/click/blob/08b803cf32ceb2ae6a772c62d5da42757a897d44/README.md",
+    "scope": "whole public documentation file; fetched after codec/thresholds frozen; no parent frontier measured on these new files",
+    "licenseFile": "bench/x168/fixtures/pallets_click-LICENSE.txt",
+    "licenseSource": "LICENSE.txt"
+  }
+]
