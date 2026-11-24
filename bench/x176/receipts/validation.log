@@ -1,0 +1,217 @@
+
+  bench/x176/repair-gate.mjs  4.6mb ⚠️
+
+⚡ Done in 170ms
+
+  bench/x176/test.mjs  3.9mb ⚠️
+
+⚡ Done in 124ms
+
+  bench/x176/attacks.mjs  3.9mb ⚠️
+
+⚡ Done in 109ms
+
+  bench/x176/gate.mjs  4.6mb ⚠️
+
+⚡ Done in 161ms
+
+  bench/x176/portfolio.mjs  3.9mb ⚠️
+
+⚡ Done in 115ms
+9946 6 7 []
+27 deceptive shapes rejected; X176 Pareto claim rejected
+program-existence to arbitrary-decoder implication falsified by explicit functions
+Euler-existence to unique-source implication falsified by two actual sequences
+Prepared 2 prompts; native NOT_RUN
+
+  bench/x175/test.mjs  3.9mb ⚠️
+
+⚡ Done in 110ms
+
+  bench/x175/gate.mjs  4.6mb ⚠️
+
+⚡ Done in 175ms
+
+  bench/x175/sparse-test.mjs  3.9mb ⚠️
+
+⚡ Done in 102ms
+9965
+{
+  "lanes": 29,
+  "oldTotal": 11962,
+  "newTotal": 11962,
+  "identicalWires": 29,
+  "different": [],
+  "sourceReadEqual": 29,
+  "note": "decoded field is parent self-report, not an independent wire parser"
+}
+
+  bench/x175/frontier-gate.mjs  4.6mb ⚠️
+
+⚡ Done in 158ms
+{"lanes":29,"total":11962,"sourceReads":21,"unsupported":["bench/holdout-tbl/df-h.txt","bench/holdout-tbl/markdown-table.md","bench/holdout-tbl/psql-output.txt","bench/holdout-x40/prices.csv","bench/holdout-x40/cue-sheet.md","bench/holdout-tbl/kubectl-get-pods.txt","bench/holdout-x40/metrics.tsv","bench/holdout-x41/ls-l-real.txt"],"pricesAndTokenIds":29,"note":"bounded repository reader is not native LLM verification and shares project components"}
+[('bench/x175/receipts/frontier.jsonl', 22, 7)]
+
+  bench/x175/leaders.mjs  3.9mb ⚠️
+
+⚡ Done in 125ms
+{
+  "OTHER": {
+    "lanes": 4,
+    "aggregateRaw": 729,
+    "aggregateTokens": 317,
+    "largestAbsoluteSaving": {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "raw": 513,
+      "tokens": 101,
+      "saved": 412,
+      "savedPercent": 80.31
+    },
+    "largestRelativeSaving": {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "raw": 513,
+      "tokens": 101,
+      "saved": 412,
+      "savedPercent": 80.31
+    },
+    "tapeBodyTokenClassLeader": null,
+    "tapeLanes": 0
+  },
+  "PROSE": {
+    "lanes": 5,
+    "aggregateRaw": 5856,
+    "aggregateTokens": 3429,
+    "largestAbsoluteSaving": {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "tokens": 813,
+      "saved": 1926,
+      "savedPercent": 70.32
+    },
+    "largestRelativeSaving": {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "tokens": 813,
+      "saved": 1926,
+      "savedPercent": 70.32
+    },
+    "tapeBodyTokenClassLeader": "word",
+    "tapeLanes": 5
+  },
+  "OPS/TABULAR": {
+    "lanes": 16,
+    "aggregateRaw": 17278,
+    "aggregateTokens": 5580,
+    "largestAbsoluteSaving": {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "tokens": 1310,
+      "saved": 3884,
+      "savedPercent": 74.78
+    },
+    "largestRelativeSaving": {
+      "path": "bench/holdout-x40/prices.csv",
+      "raw": 582,
+      "tokens": 118,
+      "saved": 464,
+      "savedPercent": 79.73
+    },
+    "tapeBodyTokenClassLeader": "glyph",
+    "tapeLanes": 16
+  },
+  "CODE/STRUCT": {
+    "lanes": 4,
+    "aggregateRaw": 4152,
+    "aggregateTokens": 2636,
+    "largestAbsoluteSaving": {
+      "path": "bench/holdout/json-pkg.txt",
+      "raw": 1152,
+      "tokens": 653,
+      "saved": 499,
+      "savedPercent": 43.32
+    },
+    "largestRelativeSaving": {
+      "path": "bench/holdout/json-pkg.txt",
+      "raw": 1152,
+      "tokens": 653,
+      "saved": 499,
+      "savedPercent": 43.32
+    },
+    "tapeBodyTokenClassLeader": "word",
+    "tapeLanes": 4
+  }
+}
+{'OPS/TABULAR': (22, 22332, 8078, 'word'), 'PROSE': (3, 2018, 1770, 'word'), 'CODE/STRUCT': (3, 3152, 2013, 'word'), 'OTHER': (1, 513, 101, None)}
+{
+  "accepted": false,
+  "unit": 20252,
+  "attacks": 9863,
+  "rawWins": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "best": 4967
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "raw": 3054,
+      "best": 2794
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "raw": 1144,
+      "best": 1123
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "raw": 1106,
+      "best": 1084
+    },
+    {
+      "path": "bench/x176/fixtures/python_cpython-classes.rst",
+      "raw": 8632,
+      "best": 8608
+    }
+  ],
+  "frontier": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "speed": {
+    "cpuMs": 1.0231766553717823,
+    "wallMs": 1.0198544613860416,
+    "laneRatios": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 0.9934753316556456,
+        "wallMs": 0.9836003611280145
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 1.029953507056889,
+        "wallMs": 1.0279933166634287
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 0.9975627636247623,
+        "wallMs": 1.0015149265061933
+      },
+      "bench/holdout-work/email-thread.txt": {
+        "cpuMs": 1.0249585781204602,
+        "wallMs": 1.0133312394405258
+      },
+      "bench/holdout-work/unified-diff.patch": {
+        "cpuMs": 1.0333672127660254,
+        "wallMs": 1.0223386462828228
+      },
+      "bench/holdout-x41/node-help.txt": {
+        "cpuMs": 1.0400558056758022,
+        "wallMs": 1.0370534177017987
+      }
+    },
+    "accepted": false,
+    "identicalWires": 24
+  }
+}

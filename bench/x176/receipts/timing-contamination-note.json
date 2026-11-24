@@ -1,0 +1,1 @@
+{"firstRun":"runtime-contaminated-partial.json","rows":6,"issue":"Compilation and codec gates overlapped the first speed worker.","action":"Stopped and archived; excluded from acceptance. Full replacement ABBA completed without codec/build overlap, canonical worker paused. Clean result: rejected."}

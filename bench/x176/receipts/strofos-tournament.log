@@ -1,0 +1,7 @@
+bench/holdout-work/email-thread.txt 8 3 545 exact
+bench/holdout-work/email-thread.txt 4 3 560 exact
+bench/holdout-work/email-thread.txt 8 1 605 exact
+bench/holdout-work/email-thread.txt 4 1 720 exact
+bench/holdout-x41/ps-real.txt 8 1 445 exact
+bench/holdout-x41/ps-real.txt 4 3 458 exact
+bench/holdout-x41/ps-real.txt 4 1 513 exact

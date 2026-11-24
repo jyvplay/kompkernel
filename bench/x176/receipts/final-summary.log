@@ -1,0 +1,73 @@
+{
+  "accepted": false,
+  "unit": 20252,
+  "attacks": 9863,
+  "rawWins": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "best": 4967
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "raw": 3054,
+      "best": 2794
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "raw": 1144,
+      "best": 1123
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "raw": 1106,
+      "best": 1084
+    },
+    {
+      "path": "bench/x176/fixtures/python_cpython-classes.rst",
+      "raw": 8632,
+      "best": 8608
+    }
+  ],
+  "frontier": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "speed": {
+    "cpuMs": 1.0231766553717823,
+    "wallMs": 1.0198544613860416,
+    "laneRatios": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 0.9934753316556456,
+        "wallMs": 0.9836003611280145
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 1.029953507056889,
+        "wallMs": 1.0279933166634287
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 0.9975627636247623,
+        "wallMs": 1.0015149265061933
+      },
+      "bench/holdout-work/email-thread.txt": {
+        "cpuMs": 1.0249585781204602,
+        "wallMs": 1.0133312394405258
+      },
+      "bench/holdout-work/unified-diff.patch": {
+        "cpuMs": 1.0333672127660254,
+        "wallMs": 1.0223386462828228
+      },
+      "bench/holdout-x41/node-help.txt": {
+        "cpuMs": 1.0400558056758022,
+        "wallMs": 1.0370534177017987
+      }
+    },
+    "accepted": false,
+    "identicalWires": 24
+  }
+}

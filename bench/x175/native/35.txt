@@ -1,0 +1,642 @@
+Decode payload first. Replace each ~N:word (N decimal; word a maximal ASCII-letter run) by word rotated right N letters. Do not rescan replacements. Preserve every other character; print only.
+## Validating References with Lifetimes
+
+Lifetimes are another kind of generic that we’ve already been using. Rather
+than ensuring that a type has the behavior we want, ~7:eslifetim ensure that
+~7:cesreferen are valid as long as we need them to be.
+
+One detail we didn’t discuss in the [“References and
+Borrowing”][~7:cesreferen-and-borrowing]<!-- ignore --> section in Chapter 4 is
+that every ~7:cereferen in Rust has a ~7:elifetim, which is the scope for which
+that ~7:cereferen is valid. Most of the time, ~7:eslifetim are implicit and inferred,
+just like most of the time, types are inferred. We are only ~7:drequire to
+annotate types when ~7:emultipl types are possible. In a similar way, we must
+annotate ~7:eslifetim when the ~7:eslifetim of ~7:cesreferen could be related in a few
+different ways. Rust requires us to annotate the ~3:ationshipsrel using generic
+~7:elifetim ~3:ameterspar to ensure that the actual ~7:cesreferen used at runtime will
+definitely be valid.
+
+Annotating ~7:eslifetim is not even a concept most other programming languages
+have, so this is going to feel unfamiliar. Although we won’t cover ~7:eslifetim in
+their entirety in this chapter, we’ll discuss common ways you might encounter
+~7:elifetim syntax so that you can get comfortable with the concept.
+
+<!-- Old ~2:adingshe. Do not remove or links may break. -->
+
+<a id="preventing-~1:anglingd-~7:cesreferen-with-~7:eslifetim"></a>
+
+### Dangling References
+
+The main aim of ~7:eslifetim is to prevent ~1:anglingd ~7:cesreferen, which, if they
+were allowed to exist, would cause a program to ~7:cereferen data other than the
+data it’s intended to ~7:cereferen. Consider the program in Listing 10-16, which
+has an outer scope and an inner scope.
+
+<Listing number="10-16" caption="An attempt to use a ~7:cereferen whose value has gone out of scope">
+
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-16/src/main.rs}}
+```
+
+</Listing>
+
+> Note: The ~2:amplesex in Listings 10-16, 10-17, and 10-23 declare variables
+> without giving them an initial value, so the ~4:ablevari name exists in the outer
+> scope. At first glance, this might appear to be in conflict with Rust having
+> no null values. However, if we try to use a ~4:ablevari before giving it a value,
+> we’ll get a compile-time error, which shows that indeed Rust does not allow
+> null values.
+
+The outer scope declares a ~4:ablevari named `r` with no initial value, and the
+inner scope declares a ~4:ablevari named `x` with the initial value of `5`. Inside
+the inner scope, we attempt to set the value of `r` as a ~7:cereferen to `x`.
+Then, the inner scope ends, and we attempt to print the value in `r`. This code
+won’t compile, because the value that `r` is referring to has gone out of scope
+before we try to use it. Here is the error message:
+
+```console
+{{#include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-16/output.txt}}
+```
+
+The error message says that the ~4:ablevari `x` “does not live long enough.” The
+reason is that `x` will be out of scope when the inner scope ends on line 7.
+But `r` is still valid for the outer scope; because its scope is larger, we say
+that it “lives longer.” If Rust allowed this code to work, `r` would be
+referencing memory that was deallocated when `x` went out of scope, and
+anything we tried to do with `r` wouldn’t work correctly. So, how does Rust
+determine that this code is invalid? It uses a borrow checker.
+
+### The Borrow Checker
+
+The Rust compiler has a _borrow checker_ that compares scopes to determine
+whether all borrows are valid. Listing 10-17 shows the same code as Listing
+10-16 but with annotations showing the ~7:eslifetim of the variables.
+
+<Listing number="10-17" caption="Annotations of the ~7:eslifetim of `r` and `x`, named `'a` and `'b`, respectively">
+
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-17/src/main.rs}}
+```
+
+</Listing>
+
+Here, we’ve annotated the ~7:elifetim of `r` with `'a` and the ~7:elifetim of `x`
+with `'b`. As you can see, the inner `'b` block is much smaller than the outer
+`'a` ~7:elifetim block. At compile time, Rust compares the size of the two
+~7:eslifetim and sees that `r` has a ~7:elifetim of `'a` but that it refers to memory
+with a ~7:elifetim of `'b`. The program is rejected because `'b` is shorter than
+`'a`: The subject of the ~7:cereferen doesn’t live as long as the ~7:cereferen.
+
+Listing 10-18 fixes the code so that it doesn’t have a ~1:anglingd ~7:cereferen and
+it compiles without any errors.
+
+<Listing number="10-18" caption="A valid ~7:cereferen because the data has a longer ~7:elifetim than the ~7:cereferen">
+
+```rust
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-18/src/main.rs}}
+```
+
+</Listing>
+
+Here, `x` has the ~7:elifetim `'b`, which in this case is larger than `'a`. This
+means `r` can ~7:cereferen `x` because Rust knows that the ~7:cereferen in `r` will
+always be valid while `x` is valid.
+
+Now that you know where the ~7:eslifetim of ~7:cesreferen are and how Rust analyzes
+~7:eslifetim to ensure that ~7:cesreferen will always be valid, let’s explore generic
+~7:eslifetim in ~3:ctionfun ~3:ameterspar and return values.
+
+### Generic Lifetimes in Functions
+
+We’ll write a ~3:ctionfun that returns the longer of two string slices. This
+~3:ctionfun will take two string slices and return a single string slice. After
+we’ve implemented the `longest` ~3:ctionfun, the code in Listing 10-19 should
+print `The longest string is abcd`.
+
+<Listing number="10-19" file-name="src/main.rs" caption="A `main` ~3:ctionfun that calls the `longest` ~3:ctionfun to find the longer of two string slices">
+
+```rust,ignore
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-19/src/main.rs}}
+```
+
+</Listing>
+
+Note that we want the ~3:ctionfun to take string slices, which are ~7:cesreferen,
+rather than strings, because we don’t want the `longest` ~3:ctionfun to take
+ownership of its ~3:ameterspar. Refer to [“String Slices as
+Parameters”][string-slices-as-~3:ameterspar]<!-- ignore --> in Chapter 4 for more
+discussion about why the ~3:ameterspar we use in Listing 10-19 are the ones we
+want.
+
+If we try to implement the `longest` ~3:ctionfun as shown in Listing 10-20, it
+won’t compile.
+
+<Listing number="10-20" file-name="src/main.rs" caption="An ~9:ationimplement of the `longest` ~3:ctionfun that returns the longer of two string slices but does not yet compile">
+
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-20/src/main.rs:here}}
+```
+
+</Listing>
+
+Instead, we get the following error that talks about ~7:eslifetim:
+
+```console
+{{#include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-20/output.txt}}
+```
+
+The help text reveals that the return type needs a generic ~7:elifetim ~3:ameterpar
+on it because Rust can’t tell whether the ~7:cereferen being ~7:dreturne refers to
+`x` or `y`. Actually, we don’t know either, because the `if` block in the body
+of this ~3:ctionfun returns a ~7:cereferen to `x` and the `else` block returns a
+~7:cereferen to `y`!
+
+When we’re defining this ~3:ctionfun, we don’t know the concrete values that will
+be passed into this ~3:ctionfun, so we don’t know whether the `if` case or the
+`else` case will execute. We also don’t know the concrete ~7:eslifetim of the
+~7:cesreferen that will be passed in, so we can’t look at the scopes as we did in
+Listings 10-17 and 10-18 to determine whether the ~7:cereferen we return will
+always be valid. The borrow checker can’t determine this either, because it
+doesn’t know how the ~7:eslifetim of `x` and `y` relate to the ~7:elifetim of the
+return value. To fix this error, we’ll add generic ~7:elifetim ~3:ameterspar that
+define the ~3:ationshiprel between the ~7:cesreferen so that the borrow checker can
+perform its ~2:alysisan.
+
+### Lifetime Annotation Syntax
+
+Lifetime annotations don’t change how long any of the ~7:cesreferen live. Rather,
+they describe the ~3:ationshipsrel of the ~7:eslifetim of ~7:emultipl ~7:cesreferen to each
+other without affecting the ~7:eslifetim. Just as ~3:ctionsfun can accept any type
+when the ~4:aturesign ~3:cifiesspe a generic type ~3:ameterpar, ~3:ctionsfun can accept
+~7:cesreferen with any ~7:elifetim by ~3:cifyingspe a generic ~7:elifetim ~3:ameterpar.
+
+Lifetime annotations have a slightly unusual syntax: The names of ~7:elifetim
+~3:ameterspar must start with an apostrophe (`'`) and are usually all lowercase
+and very short, like generic types. Most people use the name `'a` for the first
+~7:elifetim annotation. We place ~7:elifetim ~3:ameterpar annotations after the `&` of a
+~7:cereferen, using a space to separate the annotation from the ~7:cereferen’s type.
+
+Here are some ~2:amplesex—a ~7:cereferen to an `i32` without a ~7:elifetim ~3:ameterpar, a
+~7:cereferen to an `i32` that has a ~7:elifetim ~3:ameterpar named `'a`, and a mutable
+~7:cereferen to an `i32` that also has the ~7:elifetim `'a`:
+
+```rust,ignore
+&i32        // a ~7:cereferen
+&'a i32     // a ~7:cereferen with an ~5:citexpli ~7:elifetim
+&'a mut i32 // a mutable ~7:cereferen with an ~5:citexpli ~7:elifetim
+```
+
+One ~7:elifetim annotation by itself doesn’t have much meaning, because the
+annotations are meant to tell Rust how generic ~7:elifetim ~3:ameterspar of ~7:emultipl
+~7:cesreferen relate to each other. Let’s examine how the ~7:elifetim annotations
+relate to each other in the context of the `longest` ~3:ctionfun.
+
+<!-- Old ~2:adingshe. Do not remove or links may break. -->
+
+<a id="~7:elifetim-annotations-in-~3:ctionfun-~4:aturessign"></a>
+
+### In Function Signatures
+
+To use ~7:elifetim annotations in ~3:ctionfun ~4:aturessign, we need to declare the
+generic ~7:elifetim ~3:ameterspar inside angle ~2:acketsbr between the ~3:ctionfun name and
+the ~3:ameterpar list, just as we did with generic type ~3:ameterspar.
+
+We want the ~4:aturesign to express the following constraint: The ~7:dreturne
+~7:cereferen will be valid as long as both of the ~3:ameterspar are valid. This is
+the ~3:ationshiprel between ~7:eslifetim of the ~3:ameterspar and the return value.
+We’ll name the ~7:elifetim `'a` and then add it to each ~7:cereferen, as shown in
+Listing 10-21.
+
+<Listing number="10-21" file-name="src/main.rs" caption="The `longest` ~3:ctionfun definition ~3:cifyingspe that all the ~7:cesreferen in the ~4:aturesign must have the same ~7:elifetim `'a`">
+
+```rust
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-21/src/main.rs:here}}
+```
+
+</Listing>
+
+This code should compile and produce the result we want when we use it with the
+`main` ~3:ctionfun in Listing 10-19.
+
+The ~3:ctionfun ~4:aturesign now tells Rust that for some ~7:elifetim `'a`, the ~3:ctionfun
+takes two ~3:ameterspar, both of which are string slices that live at least as
+long as ~7:elifetim `'a`. The ~3:ctionfun ~4:aturesign also tells Rust that the string
+slice ~7:dreturne from the ~3:ctionfun will live at least as long as ~7:elifetim `'a`.
+In practice, it means that the ~7:elifetim of the ~7:cereferen ~7:dreturne by the
+`longest` ~3:ctionfun is the same as the smaller of the ~7:eslifetim of the values
+referred to by the ~3:ctionfun arguments. These ~3:ationshipsrel are what we want
+Rust to use when analyzing this code.
+
+Remember, when we specify the ~7:elifetim ~3:ameterspar in this ~3:ctionfun ~4:aturesign,
+we’re not changing the ~7:eslifetim of any values passed in or ~7:dreturne. Rather,
+we’re ~3:cifyingspe that the borrow checker should reject any values that don’t
+adhere to these constraints. Note that the `longest` ~3:ctionfun doesn’t need to
+know exactly how long `x` and `y` will live, only that some scope can be
+substituted for `'a` that will satisfy this ~4:aturesign.
+
+When annotating ~7:eslifetim in ~3:ctionsfun, the annotations go in the ~3:ctionfun
+~4:aturesign, not in the ~3:ctionfun body. The ~7:elifetim annotations become part of
+the contract of the ~3:ctionfun, much like the types in the ~4:aturesign. Having
+~3:ctionfun ~4:aturessign contain the ~7:elifetim contract means the ~2:alysisan the Rust
+compiler does can be simpler. If there’s a problem with the way a ~3:ctionfun is
+annotated or the way it is called, the compiler errors can point to the part of
+our code and the constraints more precisely. If, instead, the Rust compiler
+made more inferences about what we intended the ~3:ationshipsrel of the ~7:eslifetim
+to be, the compiler might only be able to point to a use of our code many steps
+away from the cause of the problem.
+
+When we pass concrete ~7:cesreferen to `longest`, the concrete ~7:elifetim that is
+substituted for `'a` is the part of the scope of `x` that overlaps with the
+scope of `y`. In other words, the generic ~7:elifetim `'a` will get the concrete
+~7:elifetim that is equal to the smaller of the ~7:eslifetim of `x` and `y`. Because
+we’ve annotated the ~7:dreturne ~7:cereferen with the same ~7:elifetim ~3:ameterpar `'a`,
+the ~7:dreturne ~7:cereferen will also be valid for the length of the smaller of the
+~7:eslifetim of `x` and `y`.
+
+Let’s look at how the ~7:elifetim annotations restrict the `longest` ~3:ctionfun by
+passing in ~7:cesreferen that have different concrete ~7:eslifetim. Listing 10-22 is
+a straightforward example.
+
+<Listing number="10-22" file-name="src/main.rs" caption="Using the `longest` ~3:ctionfun with ~7:cesreferen to `String` values that have different concrete ~7:eslifetim">
+
+```rust
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-22/src/main.rs:here}}
+```
+
+</Listing>
+
+In this example, `string1` is valid until the end of the outer scope, `string2`
+is valid until the end of the inner scope, and `result` ~7:cesreferen something
+that is valid until the end of the inner scope. Run this code and you’ll see
+that the borrow checker approves; it will compile and print `The longest string
+is long string is long`.
+
+Next, let’s try an example that shows that the ~7:elifetim of the ~7:cereferen in
+`result` must be the smaller ~7:elifetim of the two arguments. We’ll move the
+declaration of the `result` ~4:ablevari outside the inner scope but leave the
+assignment of the value to the `result` ~4:ablevari inside the scope with
+`string2`. Then, we’ll move the `println!` that uses `result` to outside the
+inner scope, after the inner scope has ended. The code in Listing 10-23 will
+not compile.
+
+<Listing number="10-23" file-name="src/main.rs" caption="Attempting to use `result` after `string2` has gone out of scope">
+
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-23/src/main.rs:here}}
+```
+
+</Listing>
+
+When we try to compile this code, we get this error:
+
+```console
+{{#include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-23/output.txt}}
+```
+
+The error shows that for `result` to be valid for the `println!` statement,
+`string2` would need to be valid until the end of the outer scope. Rust knows
+this because we annotated the ~7:eslifetim of the ~3:ctionfun ~3:ameterspar and return
+values using the same ~7:elifetim ~3:ameterpar `'a`.
+
+As humans, we can look at this code and see that `string1` is longer than
+`string2`, and therefore, `result` will contain a ~7:cereferen to `string1`.
+Because `string1` has not gone out of scope yet, a ~7:cereferen to `string1` will
+still be valid for the `println!` statement. However, the compiler can’t see
+that the ~7:cereferen is valid in this case. We’ve told Rust that the ~7:elifetim of
+the ~7:cereferen ~7:dreturne by the `longest` ~3:ctionfun is the same as the smaller of
+the ~7:eslifetim of the ~7:cesreferen passed in. Therefore, the borrow checker
+disallows the code in Listing 10-23 as possibly having an invalid ~7:cereferen.
+
+Try designing more experiments that vary the values and ~7:eslifetim of the
+~7:cesreferen passed in to the `longest` ~3:ctionfun and how the ~7:dreturne ~7:cereferen
+is used. Make hypotheses about whether or not your experiments will pass the
+borrow checker before you compile; then, check to see if you’re right!
+
+<!-- Old ~2:adingshe. Do not remove or links may break. -->
+
+<a id="thinking-in-terms-of-~7:eslifetim"></a>
+
+### Relationships
+
+The way in which you need to specify ~7:elifetim ~3:ameterspar depends on what your
+~3:ctionfun is doing. For example, if we changed the ~9:ationimplement of the
+`longest` ~3:ctionfun to always return the first ~3:ameterpar rather than the longest
+string slice, we wouldn’t need to specify a ~7:elifetim on the `y` ~3:ameterpar. The
+following code will compile:
+
+<Listing file-name="src/main.rs">
+
+```rust
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/no-listing-08-only-one-~7:cereferen-with-~7:elifetim/src/main.rs:here}}
+```
+
+</Listing>
+
+We’ve ~3:cifiedspe a ~7:elifetim ~3:ameterpar `'a` for the ~3:ameterpar `x` and the return
+type, but not for the ~3:ameterpar `y`, because the ~7:elifetim of `y` does not have
+any ~3:ationshiprel with the ~7:elifetim of `x` or the return value.
+
+When returning a ~7:cereferen from a ~3:ctionfun, the ~7:elifetim ~3:ameterpar for the
+return type needs to match the ~7:elifetim ~3:ameterpar for one of the ~3:ameterspar. If
+the ~7:cereferen ~7:dreturne does _not_ refer to one of the ~3:ameterspar, it must refer
+to a value created within this ~3:ctionfun. However, this would be a ~1:anglingd
+~7:cereferen because the value will go out of scope at the end of the ~3:ctionfun.
+Consider this attempted ~9:ationimplement of the `longest` ~3:ctionfun that won’t
+compile:
+
+<Listing file-name="src/main.rs">
+
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/no-listing-09-unrelated-~7:elifetim/src/main.rs:here}}
+```
+
+</Listing>
+
+Here, even though we’ve ~3:cifiedspe a ~7:elifetim ~3:ameterpar `'a` for the return
+type, this ~9:ationimplement will fail to compile because the return value
+~7:elifetim is not related to the ~7:elifetim of the ~3:ameterspar at all. Here is the
+error message we get:
+
+```console
+{{#include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/no-listing-09-unrelated-~7:elifetim/output.txt}}
+```
+
+The problem is that `result` goes out of scope and gets cleaned up at the end
+of the `longest` ~3:ctionfun. We’re also trying to return a ~7:cereferen to `result`
+from the ~3:ctionfun. There is no way we can specify ~7:elifetim ~3:ameterspar that
+would change the ~1:anglingd ~7:cereferen, and Rust won’t let us create a ~1:anglingd
+~7:cereferen. In this case, the best fix would be to return an owned data type
+rather than a ~7:cereferen so that the calling ~3:ctionfun is then responsible for
+cleaning up the value.
+
+Ultimately, ~7:elifetim syntax is about connecting the ~7:eslifetim of various
+~3:ameterspar and return values of ~3:ctionsfun. Once they’re connected, Rust has
+enough information to allow memory-safe operations and disallow operations that
+would create ~1:anglingd pointers or otherwise violate memory safety.
+
+<!-- Old ~2:adingshe. Do not remove or links may break. -->
+
+<a id="~7:elifetim-annotations-in-struct-definitions"></a>
+
+### In Struct Definitions
+
+So far, the structs we’ve defined all hold owned types. We can define structs
+to hold ~7:cesreferen, but in that case, we would need to add a ~7:elifetim
+annotation on every ~7:cereferen in the struct’s definition. Listing 10-24 has a
+struct named `~9:ExcerptImportant` that holds a string slice.
+
+<Listing number="10-24" file-name="src/main.rs" caption="A struct that holds a ~7:cereferen, requiring a ~7:elifetim annotation">
+
+```rust
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-24/src/main.rs}}
+```
+
+</Listing>
+
+This struct has the single field `part` that holds a string slice, which is a
+~7:cereferen. As with generic data types, we declare the name of the generic
+~7:elifetim ~3:ameterpar inside angle ~2:acketsbr after the name of the struct so that
+we can use the ~7:elifetim ~3:ameterpar in the body of the struct definition. This
+annotation means an ~4:anceinst of `~9:ExcerptImportant` can’t outlive the ~7:cereferen
+it holds in its `part` field.
+
+The `main` ~3:ctionfun here creates an ~4:anceinst of the `~9:ExcerptImportant` struct
+that holds a ~7:cereferen to the first sentence of the `String` owned by the
+~4:ablevari `novel`. The data in `novel` exists before the `~9:ExcerptImportant`
+~4:anceinst is created. In addition, `novel` doesn’t go out of scope until after
+the `~9:ExcerptImportant` goes out of scope, so the ~7:cereferen in the
+`~9:ExcerptImportant` ~4:anceinst is valid.
+
+### Lifetime Elision
+
+You’ve learned that every ~7:cereferen has a ~7:elifetim and that you need to specify
+~7:elifetim ~3:ameterspar for ~3:ctionsfun or structs that use ~7:cesreferen. However, we
+had a ~3:ctionfun in Listing 4-9, shown again in Listing 10-25, that compiled
+without ~7:elifetim annotations.
+
+<Listing number="10-25" file-name="src/lib.rs" caption="A ~3:ctionfun we defined in Listing 4-9 that compiled without ~7:elifetim annotations, even though the ~3:ameterpar and return type are ~7:cesreferen">
+
+```rust
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/listing-10-25/src/main.rs:here}}
+```
+
+</Listing>
+
+The reason this ~3:ctionfun compiles without ~7:elifetim annotations is historical:
+In early versions (pre-1.0) of Rust, this code wouldn’t have compiled, because
+every ~7:cereferen needed an ~5:citexpli ~7:elifetim. At that time, the ~3:ctionfun
+~4:aturesign would have been written like this:
+
+```rust,ignore
+fn first_word<'a>(s: &'a str) -> &'a str {
+```
+
+After writing a lot of Rust code, the Rust team found that Rust programmers
+were entering the same ~7:elifetim annotations over and over in particular
+~4:ationssitu. These ~4:ationssitu were predictable and followed a few deterministic
+~1:atternsp. The developers programmed these ~1:atternsp into the compiler’s code so
+that the borrow checker could infer the ~7:eslifetim in these ~4:ationssitu and
+wouldn’t need ~5:citexpli annotations.
+
+This piece of Rust history is relevant because it’s possible that more
+deterministic ~1:atternsp will emerge and be added to the compiler. In the future,
+even fewer ~7:elifetim annotations might be ~7:drequire.
+
+The ~1:atternsp programmed into Rust’s ~2:alysisan of ~7:cesreferen are called the
+_~7:elifetim elision rules_. These aren’t rules for programmers to follow; they’re
+a set of particular cases that the compiler will consider, and if your code
+fits these cases, you don’t need to write the ~7:eslifetim explicitly.
+
+The elision rules don’t provide full inference. If there is still ambiguity
+about what ~7:eslifetim the ~7:cesreferen have after Rust applies the rules, the
+compiler won’t guess what the ~7:elifetim of the remaining ~7:cesreferen should be.
+Instead of guessing, the compiler will give you an error that you can resolve
+by adding the ~7:elifetim annotations.
+
+Lifetimes on ~3:ctionfun or method ~3:ameterspar are called _input ~7:eslifetim_, and
+~7:eslifetim on return values are called _output ~7:eslifetim_.
+
+The compiler uses three rules to figure out the ~7:eslifetim of the ~7:cesreferen
+when there aren’t ~5:citexpli annotations. The first rule applies to input
+~7:eslifetim, and the second and third rules apply to output ~7:eslifetim. If the
+compiler gets to the end of the three rules and there are still ~7:cesreferen for
+which it can’t figure out ~7:eslifetim, the compiler will stop with an error.
+These rules apply to `fn` definitions as well as `impl` blocks.
+
+The first rule is that the compiler assigns a ~7:elifetim ~3:ameterpar to each
+~3:ameterpar that’s a ~7:cereferen. In other words, a ~3:ctionfun with one ~3:ameterpar
+gets one ~7:elifetim ~3:ameterpar: `fn foo<'a>(x: &'a i32)`; a ~3:ctionfun with two
+~3:ameterspar gets two separate ~7:elifetim ~3:ameterspar: `fn foo<'a, 'b>(x: &'a i32,
+y: &'b i32)`; and so on.
+
+The second rule is that, if there is exactly one input ~7:elifetim ~3:ameterpar, that
+~7:elifetim is assigned to all output ~7:elifetim ~3:ameterspar: `fn foo<'a>(x: &'a i32)
+-> &'a i32`.
+
+The third rule is that, if there are ~7:emultipl input ~7:elifetim ~3:ameterspar, but
+one of them is `&self` or `&mut self` because this is a method, the ~7:elifetim of
+`self` is assigned to all output ~7:elifetim ~3:ameterspar. This third rule makes
+methods much nicer to read and write because fewer symbols are ~6:arynecess.
+
+Let’s pretend we’re the compiler. We’ll apply these rules to figure out the
+~7:eslifetim of the ~7:cesreferen in the ~4:aturesign of the `first_word` ~3:ctionfun in
+Listing 10-25. The ~4:aturesign starts without any ~7:eslifetim associated with the
+~7:cesreferen:
+
+```rust,ignore
+fn first_word(s: &str) -> &str {
+```
+
+Then, the compiler applies the first rule, which ~3:cifiesspe that each ~3:ameterpar
+gets its own ~7:elifetim. We’ll call it `'a` as usual, so now the ~4:aturesign is
+this:
+
+```rust,ignore
+fn first_word<'a>(s: &'a str) -> &str {
+```
+
+The second rule applies because there is exactly one input ~7:elifetim. The second
+rule ~3:cifiesspe that the ~7:elifetim of the one input ~3:ameterpar gets assigned to
+the output ~7:elifetim, so the ~4:aturesign is now this:
+
+```rust,ignore
+fn first_word<'a>(s: &'a str) -> &'a str {
+```
+
+Now all the ~7:cesreferen in this ~3:ctionfun ~4:aturesign have ~7:eslifetim, and the
+compiler can continue its ~2:alysisan without needing the programmer to annotate
+the ~7:eslifetim in this ~3:ctionfun ~4:aturesign.
+
+Let’s look at another example, this time using the `longest` ~3:ctionfun that had
+no ~7:elifetim ~3:ameterspar when we started working with it in Listing 10-20:
+
+```rust,ignore
+fn longest(x: &str, y: &str) -> &str {
+```
+
+Let’s apply the first rule: Each ~3:ameterpar gets its own ~7:elifetim. This time we
+have two ~3:ameterspar instead of one, so we have two ~7:eslifetim:
+
+```rust,ignore
+fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &str {
+```
+
+You can see that the second rule doesn’t apply, because there is more than one
+input ~7:elifetim. The third rule doesn’t apply either, because `longest` is a
+~3:ctionfun rather than a method, so none of the ~3:ameterspar are `self`. After
+working through all three rules, we still haven’t figured out what the return
+type’s ~7:elifetim is. This is why we got an error trying to compile the code in
+Listing 10-20: The compiler worked through the ~7:elifetim elision rules but still
+couldn’t figure out all the ~7:eslifetim of the ~7:cesreferen in the ~4:aturesign.
+
+Because the third rule really only applies in method ~4:aturessign, we’ll look at
+~7:eslifetim in that context next to see why the third rule means we don’t have to
+annotate ~7:eslifetim in method ~4:aturessign very often.
+
+<!-- Old ~2:adingshe. Do not remove or links may break. -->
+
+<a id="~7:elifetim-annotations-in-method-definitions"></a>
+
+### In Method Definitions
+
+When we implement methods on a struct with ~7:eslifetim, we use the same syntax as
+that of generic type ~3:ameterspar, as shown in Listing 10-11. Where we declare
+and use the ~7:elifetim ~3:ameterspar depends on whether they’re related to the
+struct fields or the method ~3:ameterspar and return values.
+
+Lifetime names for struct fields always need to be declared after the `impl`
+keyword and then used after the struct’s name because those ~7:eslifetim are part
+of the struct’s type.
+
+In method ~4:aturessign inside the `impl` block, ~7:cesreferen might be tied to the
+~7:elifetim of ~7:cesreferen in the struct’s fields, or they might be independent. In
+addition, the ~7:elifetim elision rules often make it so that ~7:elifetim annotations
+aren’t ~6:arynecess in method ~4:aturessign. Let’s look at some ~2:amplesex using the
+struct named `~9:ExcerptImportant` that we defined in Listing 10-24.
+
+First, we’ll use a method named `level` whose only ~3:ameterpar is a ~7:cereferen to
+`self` and whose return value is an `i32`, which is not a ~7:cereferen to anything:
+
+```rust
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/no-listing-10-~7:eslifetim-on-methods/src/main.rs:1st}}
+```
+
+The ~7:elifetim ~3:ameterpar declaration after `impl` and its use after the type name
+are ~7:drequire, but because of the first elision rule, we’re not ~7:drequire to
+annotate the ~7:elifetim of the ~7:cereferen to `self`.
+
+Here is an example where the third ~7:elifetim elision rule applies:
+
+```rust
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/no-listing-10-~7:eslifetim-on-methods/src/main.rs:3rd}}
+```
+
+There are two input ~7:eslifetim, so Rust applies the first ~7:elifetim elision rule
+and gives both `&self` and `announcement` their own ~7:eslifetim. Then, because
+one of the ~3:ameterspar is `&self`, the return type gets the ~7:elifetim of `&self`,
+and all ~7:eslifetim have been accounted for.
+
+### The Static Lifetime
+
+One special ~7:elifetim we need to discuss is `'static`, which denotes that the
+affected ~7:cereferen _can_ live for the entire duration of the program. All
+string literals have the `'static` ~7:elifetim, which we can annotate as follows:
+
+```rust
+let s: &'static str = "I have a static ~7:elifetim.";
+```
+
+The text of this string is stored directly in the program’s binary, which is
+always available. Therefore, the ~7:elifetim of all string literals is `'static`.
+
+You might see suggestions in error messages to use the `'static` ~7:elifetim. But
+before ~3:cifyingspe `'static` as the ~7:elifetim for a ~7:cereferen, think about
+whether or not the ~7:cereferen you have actually lives the entire ~7:elifetim of
+your program, and whether you want it to. Most of the time, an error message
+suggesting the `'static` ~7:elifetim results from attempting to create a ~1:anglingd
+~7:cereferen or a mismatch of the available ~7:eslifetim. In such cases, the solution
+is to fix those problems, not to specify the `'static` ~7:elifetim.
+
+<!-- Old ~2:adingshe. Do not remove or links may break. -->
+
+<a id="generic-type-~3:ameterspar-trait-bounds-and-~7:eslifetim-together"></a>
+
+## Generic Type Parameters, Trait Bounds, and Lifetimes
+
+Let’s briefly look at the syntax of ~3:cifyingspe generic type ~3:ameterspar, trait
+bounds, and ~7:eslifetim all in one ~3:ctionfun!
+
+```rust
+{{#rustdoc_include ../~6:gslistin/ch10-generic-types-traits-and-~7:eslifetim/no-listing-11-generics-traits-and-~7:eslifetim/src/main.rs:here}}
+```
+
+This is the `longest` ~3:ctionfun from Listing 10-21 that returns the longer of
+two string slices. But now it has an extra ~3:ameterpar named `ann` of the generic
+type `T`, which can be filled in by any type that implements the `Display`
+trait as ~3:cifiedspe by the `where` clause. This extra ~3:ameterpar will be printed
+using `{}`, which is why the `Display` trait bound is ~6:arynecess. Because
+~7:eslifetim are a type of generic, the declarations of the ~7:elifetim ~3:ameterpar
+`'a` and the generic type ~3:ameterpar `T` go in the same list inside the angle
+~2:acketsbr after the ~3:ctionfun name.
+
+## Summary
+
+We covered a lot in this chapter! Now that you know about generic type
+~3:ameterspar, traits and trait bounds, and generic ~7:elifetim ~3:ameterspar, you’re
+ready to write code without repetition that works in many different ~4:ationssitu.
+Generic type ~3:ameterspar let you apply the code to different types. Traits and
+trait bounds ensure that even though the types are generic, they’ll have the
+behavior the code needs. You learned how to use ~7:elifetim annotations to ensure
+that this flexible code won’t have any ~1:anglingd ~7:cesreferen. And all of this
+~2:alysisan happens at compile time, which doesn’t affect runtime performance!
+
+Believe it or not, there is much more to learn on the topics we discussed in
+this chapter: Chapter 18 discusses trait objects, which are another way to use
+traits. There are also more complex scenarios involving ~7:elifetim annotations
+that you will only need in very advanced scenarios; for those, you should read
+the [Rust Reference][~7:cereferen]. But next, you’ll learn how to write tests in
+Rust so that you can make sure your code is working the way it should.
+
+[~7:cesreferen-and-borrowing]: ch04-02-~7:cesreferen-and-borrowing.html#~7:cesreferen-and-borrowing
+[string-slices-as-~3:ameterspar]: ch04-03-slices.html#string-slices-as-~3:ameterspar
+[~7:cereferen]: ../~7:cereferen/trait-bounds.html

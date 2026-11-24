@@ -1,0 +1,36 @@
+{
+  "checks": 33,
+  "rows": [
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 1133
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 632
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 845
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 765
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 546
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 546
+    }
+  ],
+  "issue": "At most N permitted ambiguous smaller groups in prose, unlike fixed executable partition",
+  "targetedAttack": {
+    "fields": 33,
+    "individualFieldInversionWouldBeWrong": true,
+    "oldContractRejected": true
+  },
+  "native": "NOT_RUN"
+}

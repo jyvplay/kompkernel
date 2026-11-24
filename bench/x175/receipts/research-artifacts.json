@@ -1,0 +1,146 @@
+[
+  {
+    "repo": "openai/math",
+    "commit": "f5702854040e97fa7675c21ba37a9608f5f92dd3",
+    "path": "lean/OAI/Computability/VPVNP/LiveRatedRowCharges.lean",
+    "file": ".cache/x175/research/openai_math-LiveRatedRowCharges.lean",
+    "bytes": 5097,
+    "sha256": "e26cda7128e26633d981308838f47f2fd8cb60465c3cff6ceaa09d9ae30e47e9",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/proof/rates/CountedToPadded/Defs.lean",
+    "file": ".cache/x175/research/anthropics_formal-math-Defs.lean",
+    "bytes": 16457,
+    "sha256": "4736979cbc37e6a7f6f25ea9cc89609592e7d0792ba71da149e631761eb6adfa",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "google-deepmind/alphaproof-nexus-results",
+    "commit": "0647711a71183c1ea492ad60860776617ce1ea88",
+    "path": "APNOutputs/ErdosProblems/erdos_741.parts.i.lean",
+    "file": ".cache/x175/research/google-deepmind_alphaproof-nexus-results-erdos_741.parts.i.lean",
+    "bytes": 87669,
+    "sha256": "481e87ebaa4058e5ce4f2cf85f229cf4382a633c6de02cd4617c8bf1212184df",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "harmonic-ai/IMO2025",
+    "commit": "72b62405a176a7eaeadb335a7fa6ee80b6667161",
+    "path": "HarmonicLean/IMO2025P3.lean",
+    "file": ".cache/x175/research/harmonic-ai_IMO2025-IMO2025P3.lean",
+    "bytes": 27234,
+    "sha256": "a532e7d57c952d19064346e768160b2b011071e3535d7514884d979361f52af8",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "ByteDance-Seed/Seed-Prover",
+    "commit": "38c59cebaf969ac259196eb091757518d5b54c67",
+    "path": "SeedProver/imo2025/IMO2025/P3.lean",
+    "file": ".cache/x175/research/ByteDance-Seed_Seed-Prover-P3.lean",
+    "bytes": 81723,
+    "sha256": "8fdbd76afacb6868bd08191ef9e777f316f59649c9f91684a5cca2fa75d26c07",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "openai/math",
+    "commit": "f5702854040e97fa7675c21ba37a9608f5f92dd3",
+    "path": "lean/OAI/Computability/VPVNP/CompressorDefaultSelection.lean",
+    "file": ".cache/x175/research/openai_math-CompressorDefaultSelection.lean",
+    "bytes": 1176,
+    "sha256": "8cb8c585861c0a0e03cac9a5839af2d8e05baad9f7a6c23f703f7348a1384815",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/proof/rates/CountedToPadded/Main.lean",
+    "file": ".cache/x175/research/anthropics_formal-math-Main.lean",
+    "bytes": 1195,
+    "sha256": "323aef9d79fb122f2783ae98d6038f3d6156dded401c49429a2e9b2e426940c7",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/proof/rates/CountedToPadded/RunFor.lean",
+    "file": ".cache/x175/research/anthropics_formal-math-RunFor.lean",
+    "bytes": 5304,
+    "sha256": "b9b4e883813c33ac77bd5b69b514628d191df13b31ef6d11116ac19bd4a7ae91",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/fermats-last-theorem",
+    "commit": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+    "path": "README.md",
+    "file": ".cache/x175/research/anthropics_fermats-last-theorem-README.md",
+    "bytes": 8612,
+    "sha256": "98b5a23ccd09ed697b7462cc6854280a6baddfbeebf4f90b2873ab585e87c3d0",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/fermats-last-theorem",
+    "commit": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+    "path": "FinalCheck.lean",
+    "file": ".cache/x175/research/anthropics_fermats-last-theorem-FinalCheck.lean",
+    "bytes": 549,
+    "sha256": "8f181fc19bfde6d11d213e3940e192884f9e8f7e53c8c81bb64648a93ad4ed35",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/fermats-last-theorem",
+    "commit": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+    "path": "formalization.yaml",
+    "file": ".cache/x175/research/anthropics_fermats-last-theorem-formalization.yaml",
+    "bytes": 5538,
+    "sha256": "d055533a3bd366b7060d72fefe40b03c7616031aad7373bde92d86f1ac2dee77",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/fermats-last-theorem",
+    "commit": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+    "path": "PROOF-PATH.md",
+    "file": ".cache/x175/research/anthropics_fermats-last-theorem-PROOF-PATH.md",
+    "bytes": 8666,
+    "sha256": "ada9b1b2f69184b9a9334d51ed9f2e2e241d16df364d9e53df418339748c6705",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "commit": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/All63/Trust.lean",
+    "file": ".cache/x175/research/double-ai_double-check-Trust.lean",
+    "bytes": 427,
+    "sha256": "526e33bc85c3ca25ab6bb290540269f648af14e2c79c5bf3796c6325a90cc28b",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "commit": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/All63/Final.lean",
+    "file": ".cache/x175/research/double-ai_double-check-Final.lean",
+    "bytes": 481,
+    "sha256": "b75e3ee63ce855365b407e54f931b98f2fb2b478a55fc8bff07c0268b2509a0d",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "commit": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/All63/Axioms.lean",
+    "file": ".cache/x175/research/double-ai_double-check-Axioms.lean",
+    "bytes": 2019004,
+    "sha256": "fe92848042886b5a9a514d04b41d692e6ce888bad285a87e71f8cae5992b4f94",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "openai/math",
+    "commit": "f5702854040e97fa7675c21ba37a9608f5f92dd3",
+    "path": "lean/ComparatorChallenges/SubexponentialSAT.lean",
+    "file": ".cache/x175/research/openai_math-SubexponentialSAT.lean",
+    "bytes": 7833,
+    "sha256": "4183b2057cff350d66848215ff7167196dfc20e1891b598fdddea59077a76685",
+    "kernel": "NOT_RUN"
+  }
+]

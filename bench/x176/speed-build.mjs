@@ -1,0 +1,12 @@
+import fs from 'node:fs';import {build} from 'esbuild';
+const original=fs.readFileSync('src/lib/omega/bpe-fast.ts','utf8');let patched=original;
+const a=patched.indexOf('const H3_BITS ='),b=patched.indexOf('const H4_BITS =',a);if(a<0||b<0)throw Error('table anchor');patched=patched.slice(0,a)+'const H3_PAGES: (Int32Array|undefined)[] = new Array(65536);\n'+patched.slice(b);
+patched=patched.replace('H3_KEY.fill(-1);','H3_PAGES.fill(undefined);');
+const c=patched.indexOf('    const put3 ='),d=patched.indexOf('    const put4 =',c);if(c<0||d<0)throw Error('put anchor');patched=patched.slice(0,c)+`    const put3 = (k:number,rank:number) => { const hi=k>>>8;let page=H3_PAGES[hi];if(!page)H3_PAGES[hi]=page=new Int32Array(256);page[k&255]=rank+1; };
+`+patched.slice(d);
+const e=patched.indexOf('    let i = (b[s] * 65536'),f=patched.indexOf('\n  }\n  if (n === 4)',e);if(e<0||f<0)throw Error('lookup anchor');patched=patched.slice(0,e)+`    const page=H3_PAGES[(b[s]<<8)|b[s+1]];
+    if(!page)return INF;
+    const rank=page[b[s+2]];return rank===0?INF:rank-1;`+patched.slice(f);
+if(/H3_(KEY|VAL|MASK)/.test(patched))throw Error('stale table');
+for(const arm of ['A','B'])for(const [name,entry] of [['speed','bench/x164/cache-speed.ts'],['count','bench/x163/count-gate.ts'],['vector','bench/x164/speed-unit.ts']])await build({entryPoints:[entry],bundle:true,platform:'node',format:'esm',outfile:`bench/x176/${name}-${arm}.mjs`,plugins:arm==='A'?[]:[{name:'paged-three-byte-ranks',setup(b){b.onLoad({filter:/[\\/]bpe-fast\.ts$/},()=>({contents:patched,loader:'ts'}));}}]});
+fs.writeFileSync('bench/x176/receipts/speed-patch.json',JSON.stringify({production:false,scope:'Replace 24-bit rank open addressing by lazy 16+8-bit radix pages, rank+1 with zero absence; same insertion precedence and vocabulary',patched},null,2));

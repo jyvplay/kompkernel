@@ -11698,3 +11698,62 @@ TS21exact/8unsupported. Source-role totals PROSE2018→1770(3), OPS22332→8078(
 CODE3152→2013(3), OTHER513→101(1). Absolute-saving leaders: email, ls-l-real,
 json-pkg and cue-sheet respectively; ops relative-saving leader is prices.csv.
 See bench/x174/receipts/source-role-leaders.json. Merge is not scientific acceptance.
+
+## X175–X176: STROFOS and KYKLOGRAF (experimental, unwired)
+
+**STROFOS** (turn) canonicalizes each selected ASCII-letter word to its least
+cyclic rotation, transmitting the right-rotation offset as `~N:`. Not a new
+necklace theorem. Four length/frequency threshold plans; direct-price selection
+is a finite heuristic, not greedy grammar repair or a parent-price optimum.
+Source ≤50,000 UTF-16 units, words ≤48 letters, literal tilde/BOM refused;
+deterministic work bounds, no wall-clock cutoff. Full inverse clause and parent
+wire paid. X175: 19,950 unit checks, 37 sources/97 plans, no raw win. X176's
+all-plan parent follow-up on email/ps verifies seven candidates; best prices
+545/445 still lose to 486/381. See `bench/x175/README.md` and
+`bench/x176/receipts/strofos-tournament.json`. CBL (Martayan et al., 2024,
+https://doi.org/10.1093/bioinformatics/btae217) is explicit canonical-rotation
+prior art, not a theorem about this parent or native LLM decoding.
+
+**KYKLOGRAF** (cycle writing) implements a bijective BWT over ASCII-space fields,
+retaining empty fields and other bytes. Duval's nonincreasing Lyndon factors,
+omega-sorted factor rotations, then preceding fields; inverse stable-LF cycles,
+reversal/minimum rotation, descending factor concatenation. No primary index.
+Unlike STROFOS this reconstructs cross-field source order without per-word
+orientation metadata. Unlike the prior ordinary BWT control it does not require
+a primary-index side channel. It is **classical BBWT**, not a new mathematical
+primitive or private AI discovery.
+
+Three block widths (32/128/512), finite exact-price screen, at most one parent
+call selected by direct wire price; not globally optimal and not greedy repair.
+ASCII source ≤50,000 bytes; Unicode refused rather than normalized. Conservative
+simple-sort bound O(m b log b · L), m fields, width b, maximum field length L;
+parent CPU/work separately paid, no wall-clock cutoff. This implementation does
+not claim the linear-time construction of the literature. Reference: Bannai,
+Köppl, Lipták, 2025 survey,
+https://doi.org/10.4230/OASIcs.Manzini.2; Köppl and I, 2026 time-space tradeoffs,
+https://arxiv.org/abs/2611.02969. Exact hypotheses and selective proof follow-ups
+are in `bench/x176/research.md`.
+
+X176: 20,252 unit checks, 9,863 structural attacks, independent Python original
+byte checks. Six paid-parent candidates all lose (email632>486, KB765>620,
+ps546>381, JSON845>653, diff546>411, TS1133>949). Raw wins do not count as frontier
+wins. Native-model decoding **NOT_RUN**; inverse code is not behavioral evidence.
+The paged-rank speed experiment preserves 24 whole-stack wires but regresses:
+CPU1.023177/wall1.019854, rejected. Its first contaminated partial run was archived
+and excluded; the quoted result is the replacement clean crossover. Neither
+codec nor speed patch is wired into production. Merge is not scientific acceptance.
+
+X176 contract repair: consecutive fixed-size groups, only the last shorter.
+Old ambiguous wording/receipts archived; current prices include the 13-token
+clarification. Fresh affected gates and a 33-field grouping attack passed.
+
+X175/X176 completed canonical reconciliation: **29 identical wires / 11,962
+ tokens** against X174. This is one carried-forward replay, not two runs.
+Source roles: PROSE 3 lanes 2018→1770; OPS 22 lanes 22332→8078;
+CODE/STRUCT 3 lanes 3152→2013; OTHER 1 lane 513→101. Absolute-saving local
+leaders: email629→486, ls-l-real5194→1310, JSON1152→653, cue-sheet513→101;
+ops relative leader prices582→118. Word-reference tape-body classes lead
+prose/ops/code, not a causal per-codec winner claim. Python reads22exact/7unsupported,
+TS21exact/8unsupported; unsupported is not exact. Full records and replay
+provenance: `bench/x176/receipts/source-role-leaders.json` and
+`frontier-provenance.json`. Current-source validation and production build passed.

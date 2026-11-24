@@ -1,0 +1,6 @@
+bench/holdout-work/kb-article.txt A 0 8541.896
+bench/holdout-work/kb-article.txt B 0 8800.383
+bench/holdout-work/kb-article.txt B 0 9592.812
+bench/holdout-work/kb-article.txt A 0 9435.483
+bench/holdout/json-pkg.txt A 0 30468.452
+bench/holdout/json-pkg.txt B 0 30842.743

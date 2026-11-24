@@ -1,0 +1,32 @@
+[
+  {
+    "repo": "python/cpython",
+    "commit": "32b51e34318e6dd355f3fb40b8abf94c205444b1",
+    "path": "Doc/tutorial/classes.rst",
+    "file": "bench/x176/fixtures/python_cpython-classes.rst",
+    "bytes": 37746,
+    "sha256": "e322d827e7778530afb1fe832eace5588d8025e12315f2be7e7228a04c85ac41",
+    "license": "bench/x176/fixtures/python_cpython-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  },
+  {
+    "repo": "rust-lang/book",
+    "commit": "5c23042f85595490ad9f7412c4c6f57fe0b330d5",
+    "path": "src/ch10-02-traits.md",
+    "file": "bench/x176/fixtures/rust-lang_book-ch10-02-traits.md",
+    "bytes": 18682,
+    "sha256": "705ae11758c687175e47104a302a9b5f694d04d683bffc28dcc61ffe9a0dc80e",
+    "license": "bench/x176/fixtures/rust-lang_book-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  },
+  {
+    "repo": "kubernetes/website",
+    "commit": "ac7b6d42d503158fdc822e04c88e2035d9a09ae9",
+    "path": "content/en/docs/tasks/debug/debug-application/debug-pods.md",
+    "file": "bench/x176/fixtures/kubernetes_website-debug-pods.md",
+    "bytes": 8231,
+    "sha256": "387851f607319187a0c82c93518a54840b899d24b387da5f26f7ad0233b4fb3a",
+    "license": "bench/x176/fixtures/kubernetes_website-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  }
+]
