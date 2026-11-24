@@ -1,0 +1,81 @@
+{
+  "checks": 49,
+  "exact": 9,
+  "unsupported": 0,
+  "readerOutputMismatches": 1,
+  "acceptedMismatches": 0,
+  "rows": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "levels": 1,
+      "inline": false,
+      "status": "exact bytes",
+      "tokens": 759
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "levels": 1,
+      "inline": true,
+      "status": "exact bytes",
+      "tokens": 765
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "levels": 1,
+      "inline": true,
+      "status": "exact bytes",
+      "tokens": 722
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "levels": 2,
+      "inline": true,
+      "status": "exact bytes",
+      "tokens": 771
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "levels": 4,
+      "inline": true,
+      "status": "reader output mismatch; candidate refused",
+      "returnedWireUnchanged": true,
+      "tokens": 800
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "levels": 12,
+      "inline": true,
+      "status": "exact bytes",
+      "tokens": 791
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "levels": 1,
+      "inline": false,
+      "status": "exact bytes",
+      "tokens": 636
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "levels": 2,
+      "inline": false,
+      "status": "exact bytes",
+      "tokens": 706
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "levels": 4,
+      "inline": false,
+      "status": "exact bytes",
+      "tokens": 715
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "levels": 12,
+      "inline": false,
+      "status": "exact bytes",
+      "tokens": 732
+    }
+  ],
+  "native": "NOT_RUN"
+}

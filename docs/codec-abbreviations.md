@@ -11667,3 +11667,34 @@ frontier:29identical wires/11,962tokens. Python22exact/7unsupported; TypeScript
 21exact/8unsupported. Source-role leaders remain PROSE2018→1770(3lanes),
 OPS22332→8078(22), CODE3152→2013(3), OTHER513→101(1); word references lead tape
 body token classes in prose/ops/code, not a universal compression theorem.
+
+
+### X174 — KYMATIA (small waves): integer multiscale lifting
+
+- **Design:** for each pair a,b, d=b-a and s=a+floor(d/2). Recurse on packed lows;
+  inverse a=s-floor(d/2), b=a+d, carrying odd tails. Inline coefficients or a
+  separate stream preserve original field positions and explicit zero-padding.
+- **Greedy?** No: fixed finite screen of levels1/2/4/12 and two layouts, exact
+  direct pricing, verified fallback. At most one parent call; not a global
+  optimizer of the parent-visible representation. A separate finite tournament
+  and periodic-grouping control investigate that limitation.
+- **Resources:** O(k) integer arithmetic operations per plan plus text scans and
+  tokenizer cost, bounded24digit values;50kUTF-16 and2,048field caps. Parent CPU is
+  additional. No hard wall/CPU limit is claimed. BOM/tildes conservatively refuse.
+- **Prior art:** classical integer Haar lifting; Lanz/Schilling/Kaup2023,
+  https://arxiv.org/pdf/2302.01589 gives rounded prediction/update in CT coding,
+  not a native-text compression theorem. New2019primary thesis and further
+  sources/hypotheses are in bench/x174/research.md. Not an AI-only invention.
+- **Trust/repair:** U+FEFF transport gate failed before restriction; v1 failure
+  archived. Current unit/independent/encoding/parent gates rerun. Native NOT_RUN.
+  No production default change or scientific acceptance follows from merge.
+
+X174 final gates:13,873unit checks;14,499Python checks with one explicitly
+unsupported tournament envelope;6primary paid-parent losses. A finite tournament
+improves the rejected ps candidate722→636, still above381. Both speed experiments
+fail: hash CPU0.977090/wall0.976687; UTF-8 CPU0.973409/wall0.972958. Native NOT_RUN.
+Fresh frontier29identical wires/11,962tokens. Independent Python22exact/7unsupported;
+TS21exact/8unsupported. Source-role totals PROSE2018→1770(3), OPS22332→8078(22),
+CODE3152→2013(3), OTHER513→101(1). Absolute-saving leaders: email, ls-l-real,
+json-pkg and cue-sheet respectively; ops relative-saving leader is prices.csv.
+See bench/x174/receipts/source-role-leaders.json. Merge is not scientific acceptance.

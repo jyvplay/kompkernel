@@ -1,0 +1,6 @@
+bench/holdout-work/email-thread.txt 486 486 [ 688 ]
+bench/holdout-work/kb-article.txt 620 620 [ 759 ]
+bench/holdout-x41/ps-real.txt 381 381 [ 722 ]
+bench/holdout/json-pkg.txt 653 653 [ 851 ]
+bench/holdout/code-ts.txt 949 949 [ 1119 ]
+bench/holdout-work/unified-diff.patch 411 411 [ 606 ]

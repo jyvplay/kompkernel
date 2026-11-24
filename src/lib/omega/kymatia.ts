@@ -1,0 +1,47 @@
+/** X174 KYMATIA (wavelets): reversible integer Haar lifting of decimal runs.
+ * Experimental/unwired. Classical lifting, not new mathematics. Unlike flat
+ * delta coding, both coarse averages and signed details feed a multiscale tree.
+ * No floating point, rounding ambiguity, hidden dictionary or model training.
+ */
+import {countTokensExact,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+export const KYMATIA_CAP=50000, KYMATIA_ITEMS=2048;
+const MAX=10n**24n;
+function domain(s:string){if(s.length>KYMATIA_CAP||!isUtf8TransportStable(s))throw Error('KYMATIA domain');}
+function level(l:number){if(!Number.isInteger(l)||l<1||l>12)throw Error('KYMATIA levels');}
+export function kymatiaKey(l:number,inline=false){level(l);if(inline)return `Decode payload first. Gather numeric fields left-to-right: digits are nonnegative coefficients, ~N is negative N; optional ~[w] prefix records original zero-padding width. Invert ${l} Haar lifting levels: take at most ${l} active lengths starting at field count and repeatedly ceil-halving while above 1; undo in reverse. For active length n, first ceil(n/2) fields are lows, rest details. Each low s and detail d restore a=s-floor(d/2), b=a+d; interleave pairs, carrying last low if odd. Put nonnegative results back at field positions, padding recorded widths with zeros. Preserve all other text; print only.\n`;return `Decode payload first. First line is a signed decimal integer list; rest is a skeleton. Invert ${l} Haar lifting levels: take at most ${l} active lengths starting at list length, repeatedly ceil-half while above 1; undo in reverse. At active length n, first ceil(n/2) entries are lows, rest details. For each low s and detail d restore a=s-floor(d/2), b=a+d; interleave pairs, carrying the last low if n is odd. Replace skeleton ~ holes left-to-right with restored nonnegative integers; ~[w] pads to width w with zeros. Preserve everything else; print only.\n`;}
+/** Mathematical floor, also for negative odd BigInts. */
+export function kymatiaHalf(d:bigint){return d>=0n?d/2n:(d-1n)/2n;}
+export function kymatiaLift(values:bigint[],l:number,inverse=false){
+ level(l);if(!values.length||values.length>KYMATIA_ITEMS||values.some(v=>v<=-MAX||v>=MAX))throw Error('KYMATIA list');
+ const lengths:number[]=[];let n=values.length;for(let i=0;i<l&&n>1;i++){lengths.push(n);n=Math.ceil(n/2);}const out=values.slice();
+ if(inverse)lengths.reverse();
+ for(const n of lengths){const m=Math.ceil(n/2),row:bigint[]=[];
+  if(inverse){for(let i=0;i<Math.floor(n/2);i++){const d=out[m+i],a=out[i]-kymatiaHalf(d);row.push(a,a+d);}if(n%2)row.push(out[m-1]);}
+  else {const lows:bigint[]=[],details:bigint[]=[];for(let i=0;i+1<n;i+=2){const d=out[i+1]-out[i];lows.push(out[i]+kymatiaHalf(d));details.push(d);}if(n%2)lows.push(out[n-1]);row.push(...lows,...details);}
+  for(let i=0;i<n;i++)out[i]=row[i];
+ }if(out.some(v=>v<=-MAX||v>=MAX))throw Error('KYMATIA range');return out;
+}
+const FIELDS=/((?:~\[([1-9][0-9]*)\])?)(~?)([0-9]+)/g;
+export function kymatiaUndo(folded:string,l:number,inline=false){
+ domain(folded);if(inline){const matches=[...folded.matchAll(FIELDS)];if(!matches.length||folded.replace(FIELDS,'').includes('~'))throw Error('KYMATIA fields');for(const m of matches)if(m[4].length>24||(m[4].length>1&&m[4][0]==='0')||(m[3]&&m[4]==='0'))throw Error('KYMATIA coefficient');const values=kymatiaLift(matches.map(m=>BigInt((m[3]?'-':'')+m[4])),l,true);let i=0;const out=folded.replace(FIELDS,(_m,_prefix,w)=>{const v=values[i++];if(v<0n)throw Error('KYMATIA negative source');const text=String(v);if(w&&(+w>24||+w<=text.length))throw Error('KYMATIA padding');return w?text.padStart(+w,'0'):text;});domain(out);return out;}
+const nl=folded.indexOf('\n');if(nl<0)throw Error('KYMATIA framing');const tape=folded.slice(0,nl),skeleton=folded.slice(nl+1);
+ if(!/^(?:0|-?[1-9][0-9]{0,23})(?: (?:0|-?[1-9][0-9]{0,23}))*$/.test(tape))throw Error('KYMATIA integers');
+ const values=kymatiaLift(tape.split(' ').map(BigInt),l,true);let i=0;
+ const out=skeleton.replace(/~(?:\[([1-9][0-9]*)\])?/g,(_,w)=>{if(i>=values.length)throw Error('KYMATIA missing value');const v=values[i++];if(v<0n)throw Error('KYMATIA negative source');const text=String(v);if(w&&(+w>24||+w<=text.length))throw Error('KYMATIA padding');return w?text.padStart(+w,'0'):text;});
+ if(i!==values.length)throw Error('KYMATIA extra values');domain(out);return out;
+}
+export function kymatiaPlans(source:string,enc:EncodingName='o200k_base'){
+ domain(source);if(source.includes('~')||source.includes('\ufeff'))return [];const digits=source.match(/[0-9]+/g)??[];if(digits.length<2||digits.length>KYMATIA_ITEMS||digits.some(s=>s.length>24))return [];
+ const skeleton=source.replace(/[0-9]+/g,d=>d.length>1&&d[0]==='0'?'~['+d.length+']':'~'),values=digits.map(BigInt),plans:{folded:string;message:string;tokens:number;levels:number;inline:boolean}[]=[];
+ for(const levels of [1,2,4,12])for(const inline of [false,true]){const lifted=kymatiaLift(values,levels);let at=0;const folded=inline?source.replace(/[0-9]+/g,d=>{const v=lifted[at++];return (d.length>1&&d[0]==='0'?'~['+d.length+']':'')+(v<0n?'~'+String(-v):String(v));}):lifted.join(' ')+'\n'+skeleton;if(folded.length>KYMATIA_CAP||plans.some(p=>p.folded===folded))continue;if(kymatiaUndo(folded,levels,inline)!==source)throw Error('KYMATIA inverse');const message=kymatiaKey(levels,inline)+folded;try{plans.push({folded,message,tokens:countTokensExact(message,enc),levels,inline});}catch(e){if(!String(e).includes('Disallowed special token'))throw e;}}
+ return plans.sort((a,b)=>a.tokens-b.tokens||a.levels-b.levels);
+}
+export function kymatiaRead(message:string,parent:(s:string)=>string=s=>s){
+ if(message.length>KYMATIA_CAP+1000||!isUtf8TransportStable(message))throw Error('KYMATIA wire');for(const l of [1,2,4,12])for(const inline of [false,true]){const key=kymatiaKey(l,inline);if(message.startsWith(key))return kymatiaUndo(parent(message.slice(key.length)),l,inline);}throw Error('KYMATIA key');
+}
+export function kymatiaFromFrontier(source:string,incumbent:string,readIncumbent:(s:string)=>string,encodeParent:(s:string)=>string,readParent:(s:string)=>string,enc:EncodingName='o200k_base'){
+ domain(source);if(readIncumbent(incumbent)!==source)throw Error('KYMATIA incumbent');let best={message:incumbent,tokens:countTokensExact(incumbent,enc),applied:false,parentCalls:0};const plans=kymatiaPlans(source,enc);
+ const admit=(message:string,reader:(s:string)=>string)=>{try{const tokens=countTokensExact(message,enc);if(tokens<best.tokens&&kymatiaRead(message,reader)===source)best={...best,message,tokens,applied:true};}catch{/* Retain verified incumbent. */}};
+ for(const p of plans)admit(p.message,s=>s);if(plans.length){best.parentCalls++;try{admit(kymatiaKey(plans[0].levels,plans[0].inline)+encodeParent(plans[0].folded),readParent);}catch{/* Retain verified incumbent. */}}return best;
+}

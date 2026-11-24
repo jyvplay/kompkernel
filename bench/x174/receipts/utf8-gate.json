@@ -1,0 +1,5 @@
+{
+  "checks": 1114121,
+  "oracle": "TextEncoder bytes, length bound and scratch sentinel",
+  "errors": 0
+}

@@ -12517,3 +12517,29 @@ frontier:29identical wires/11,962tokens. Python22exact/7unsupported; TypeScript
 21exact/8unsupported. Source-role leaders remain PROSE2018→1770(3lanes),
 OPS22332→8078(22), CODE3152→2013(3), OTHER513→101(1); word references lead tape
 body token classes in prose/ops/code, not a universal compression theorem.
+
+
+### X174: KYMATIA — reversible multiscale integer lifting (experimental)
+
+`src/lib/omega/kymatia.ts` pairs decimal fields into exact floor-averages and
+signed differences, then recursively transforms the coarse fields. Both an
+inline layout and a coefficient-stream layout retain all separators and padding.
+This is classical integer Haar lifting, not a novel mathematical theorem, flat
+chronological delta, lexical anchor or successor graph. Complete decoder formulas
+and levels are in-band; native single-chat decoding is **NOT_RUN**.
+
+The finite levels/layout screen is not greedy and is not globally optimal for
+parent price. O(k) bounded-size integer operations plus text/tokenizer work per
+plan; one optional parent encode is additional. Caps:50kUTF-16 units,2,048fields,
+24decimal digits. Tilde sources refuse; a fresh tokenizer-transport failure led
+to conservative U+FEFF refusal, followed by fresh affected gates. See
+`bench/x174/README.md`, research.md and receipts for exact results and limits.
+Production defaults remain unchanged; no broad Pareto claim accompanies this
+experimental addition.
+
+X174 completed replay reconfirms29identical wires/11,962tokens. The new codec
+passes13,873unit checks but all six primary paid-parent trials lose. A finite
+representation tournament saves86tokens versus its own rejected ps candidate,
+not versus the frontier. No native run or significant whole-stack speed win was
+established. Source-role category leaders and precise partial-reader coverage
+are recorded in bench/x174/README.md; no unsupported reader is counted exact.

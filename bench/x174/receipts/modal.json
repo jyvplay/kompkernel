@@ -1,0 +1,206 @@
+{
+  "deceptiveShapes": 27,
+  "rows": [
+    {
+      "shape": "payloadOnly",
+      "rejected": [
+        "omitted final contract"
+      ]
+    },
+    {
+      "shape": "weakBaseline",
+      "rejected": [
+        "weakened frontier"
+      ]
+    },
+    {
+      "shape": "normalize",
+      "rejected": [
+        "semantic equality replaces bytes"
+      ]
+    },
+    {
+      "shape": "selfReport",
+      "rejected": [
+        "encoder self-report"
+      ]
+    },
+    {
+      "shape": "nativeSubstitute",
+      "rejected": [
+        "program inverse replaces native reading"
+      ]
+    },
+    {
+      "shape": "trainingAsHeldout",
+      "rejected": [
+        "selection leakage"
+      ]
+    },
+    {
+      "shape": "symbolTransfer",
+      "rejected": [
+        "symbol theorem transferred to tokens"
+      ]
+    },
+    {
+      "shape": "headerFree",
+      "rejected": [
+        "free header/dictionary"
+      ]
+    },
+    {
+      "shape": "runtimeFree",
+      "rejected": [
+        "extra search counted as free"
+      ]
+    },
+    {
+      "shape": "microAsWhole",
+      "rejected": [
+        "microbenchmark promoted to whole stack"
+      ]
+    },
+    {
+      "shape": "contaminated",
+      "rejected": [
+        "contaminated timing"
+      ]
+    },
+    {
+      "shape": "cacheLeak",
+      "rejected": [
+        "memoized timing"
+      ]
+    },
+    {
+      "shape": "incompleteAsPass",
+      "rejected": [
+        "timeout/unsupported counted as pass"
+      ]
+    },
+    {
+      "shape": "challengeAsProof",
+      "rejected": [
+        "challenge mistaken for proof"
+      ]
+    },
+    {
+      "shape": "sourceAsReplay",
+      "rejected": [
+        "source inspection promoted to kernel replay"
+      ]
+    },
+    {
+      "shape": "silentRepair",
+      "rejected": [
+        "repair inherits stale gates"
+      ]
+    },
+    {
+      "shape": "familyUniversal",
+      "rejected": [
+        "restricted family universalized"
+      ]
+    },
+    {
+      "shape": "finiteUniversal",
+      "rejected": [
+        "finite test universalized"
+      ]
+    },
+    {
+      "shape": "charAsToken",
+      "rejected": [
+        "characters substituted for token price"
+      ]
+    },
+    {
+      "shape": "differentSource",
+      "rejected": [
+        "baseline source mismatch"
+      ]
+    },
+    {
+      "shape": "medianHidesRegression",
+      "rejected": [
+        "aggregate hides protected-lane regression"
+      ]
+    },
+    {
+      "shape": "notRunAsPass",
+      "rejected": [
+        "NOT_RUN promoted to pass"
+      ]
+    },
+    {
+      "shape": "axiomAsCertificate",
+      "rejected": [
+        "axiom route promoted to certificate replay"
+      ]
+    },
+    {
+      "shape": "wrongMarkerContract",
+      "rejected": [
+        "undeclared marker accepted"
+      ]
+    },
+    {
+      "shape": "knownSourceAsBlinded",
+      "rejected": [
+        "known source called blinded native test"
+      ]
+    },
+    {
+      "shape": "nicheAsBroad",
+      "rejected": [
+        "niche source selection called broad gain"
+      ]
+    },
+    {
+      "shape": "repairedInheritsTrust",
+      "rejected": [
+        "repair skips fresh gates"
+      ]
+    }
+  ],
+  "actualX174ParetoRejection": [
+    "conjunctive Pareto gate incomplete"
+  ],
+  "honestBoundedClaimAccepted": true,
+  "scope": "flags supplied explicitly; cannot infer omissions from arbitrary prose",
+  "eulerCountermodel": {
+    "left": [
+      "a",
+      "b",
+      "a",
+      "c",
+      "a"
+    ],
+    "right": [
+      "a",
+      "c",
+      "a",
+      "b",
+      "a"
+    ],
+    "sameStartAndEdgeMultiset": true,
+    "conclusion": "existence is not uniqueness; row ordering is not an unstated tie-breaker"
+  },
+  "floorCountermodel": {
+    "source": [
+      10,
+      9
+    ],
+    "coarse": 9,
+    "detail": -1,
+    "truncationWrong": true
+  },
+  "oracleUpperNotLower": {
+    "inputs": 256,
+    "prefixFree": true,
+    "identityBits": 8,
+    "zeroCodeBits": 1,
+    "scope": "Toy mathematical countermodel, not an LLM codec or external compressor experiment"
+  }
+}

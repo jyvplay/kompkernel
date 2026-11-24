@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "old": "    if (ascii) return mergeCount(SB, L);\n    bytes = TE.encode(chunk);",
+  "replacement": "    if (ascii) return mergeCount(SB, L);\n    if (L * 3 <= SCRATCH_MAX) return mergeCount(SB, x174Utf8(chunk, SB));\n    bytes = TE.encode(chunk);",
+  "scope": "Manual UTF-8 scratch only, without hash-table patch; <=341 UTF-16 units, replacement semantics for lone surrogates; otherwise original path"
+}

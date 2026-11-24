@@ -1,0 +1,118 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ '¶k=v expand repeatedly After ^, a number has . before its last 1 digits. print only.\n' +
++   '§я2ш       ~[я]дш~а0ышар:ъырә root     лә ~б]\n' +
++   '    сб жә Ссажа.А.27гр~м [ёмkworkerцё/т45в.~ҳә ^00  тво3к]\n' +
++   '      храмrcuчә ^з  ^іб ~И  ~МИ^щё/uғ\n' +
++   '     пАИДmm_percpu_wqНрамcpuhp/е5ьер~ҭ /lib/systemd/systemdємksoftirqd/~қH-kblockdГH-events_highpriүз00штйл^Усажевн  ўашьтми1у6э10¶# sourceр ps -eo pid,user,pcpu,pmem,etime,args --sort=-pcpu (real)\n' +
+- '# source: ps -eo pid,user,pcpu,pmem,etime,args --sort=-pcpu (real)\n' +
+    '    PID USER     %CPU %MEM     ELAPSED COMMAND\n' +
++   ' но03 user      8 9.эшер44 node /tmp/_run_23.mjs\n' +
++   ' н27ч277з77ш7рия /usr/bin/envd\n' +
++   '    8ж7.11нэ.эшяугеяащору-ext7-rsv-conversionі7лу0.29ное.38дях_preemptб илияв4ниводорацар288-Дк82ж13.иенио.24ш14ги /sbin/initғ7ляву  ов8шеагуц88:14қс67л9виониявияд14г14щ~иги-events_unboundіяж14.17н18.19шиор14щ20:18-events_unboundк~уж19вуИ817.и354ъ12ещяг23-flush-~7ро3бай27аз42ад26гоиҭ-journaldғ24л13Азяяшэаг142ц27гооқсяялиап126Ашерямmigration/128болоип160Ад8:27 [jbd1/vda-яіяуж27вяз25ад24ряє29б27 systemd+зеян~30Адуроаҭ-networkdғай190М18адиурає27б~12 _chrony з360М142д39:27 /usr/sbin/chronyd -F иоғял4ап15.48ди449г8ц57го10-eventsк4ж4.оеМ294ўkthreaddкий140нев29ых_gpктливизаодиах_par_gpкач440Муоўslub_flushwqбняяҳод9рамnetnsкел46.254зя840шир44ё/~67раГсел49.18үр251 [ДС44нув20ъемrcu_tasks_kthreadі49й306ановоуых_tasks_trace_kthreadстә ^320ана.44шиерамmigration/астживязаед47Настй40невтыНтіуч05М420ътцар~10ГУ39үг12 [kdevtmpfsУоеүр17 [inet_frag_wqСтз180ът [kauditdсяиҳид25раць24-ДС45М27ашь22 [khungtaskdСтнав29ъемoom_reaperіяаҳоиъемwriteback]\n'
+-   '   303 user      8 9.10       ~[2]5:44 node /tmp/_run_23.mjs\n' +
+-   '   27 root      27.7  7.7       ~[2]7:12 /usr/bin/envd\n' +
+-   '    8 root      7.11  10.10       ~[2]26:~520 [kworker/u3:6-ext7-rsv-conversion]\n' +
+-   '     ~7 root      ~60.29  35.38       ~[2]~2:0 [rcu_preempt]\n' +
+-   '     1 root      ~12.~4  1.~3       ~[2]~3:0 [kworker/0:288-mm_percpu_wq]\n' +
+-   '      82 root      13.15  13.24       ~[2]14:~1 /sbin/init\n' +
+-   '     7 root      ~2.~6  3.~8       ~[2]50:~6 [kworker/88:14H-kblockd]\n' +
+-   '     67 root      ~9.~13  12.~12       ~[2]~14:~14 [kworker/u~1:~1-events_unbound]\n' +
+-   '     ~2 root      14.17  18.19       ~[2]13:14 [kworker/u20:18-events_unbound]\n' +
+-   '      ~6 root      19.~6  ~817.1354       ~[2]0:125 [kworker/u2:~23-flush-~7:33]\n' +
+-   '    0 root      ~27.0  42.0       ~[2]~26:~31 /lib/systemd/systemd-journald\n' +
+-   '     24 root      ~13.27  2.2       ~[2]100:~142 [kworker/27:~33H-kblockd]\n' +
+-   '     22 root      ~10.27  ~126.27       ~[2]5:2 [migration/128]\n' +
+-   '    3 root      ~31.27  ~160.27       ~[2]~8:27 [jbd1/vda-2]\n' +
+-   '     ~26 root      27.~2  25.0       ~[2]~24:2 [ksoftirqd/~29]\n' +
+-   '    27 systemd+  5.2  ~30.27       ~[2]~6:30 /lib/systemd/systemd-networkd\n' +
+-   '     0 root      ~19.0  ~18.0       ~[2]~16:0 [ksoftirqd/~27]\n' +
+-   '    ~12 _chrony   36.0  ~14.2       ~[2]~39:27 /usr/sbin/chronyd -F 13\n' +
+-   '     2 root      ~40.27  ~15.48       ~[2]~1449:~8 [kworker/57:~310-events]\n' +
+-   '      4 root      4.35  ~294.0       ~[2]5:~45 [kthreadd]\n' +
+-   '      1 root      ~14.0  5.~29       ~[2]0:0 [rcu_gp]\n' +
+-   '      45 root      ~1.~1  0.3       ~[2]~10:0 [rcu_par_gp]\n' +
+-   '      0 root      44.0  ~63.0       ~[2]5:~45 [slub_flushwq]\n' +
+-   '      22 root      0.0  45.~3       ~[2]~9:0 [netns]\n' +
+-   '      5 root      ~46.254  284.0       ~[2]1:44 [kworker/~67:0H-events_highpri]\n' +
+-   '     5 root      ~49.18  0.0       ~[2]45:251 [mm_percpu_wq]\n' +
+-   '     0 root      0.44  6.~20       ~[2]0:5 [rcu_tasks_kthread]\n' +
+-   '     ~49 root      ~306.0  3.~36       ~[2]0:0 [rcu_tasks_trace_kthread]\n' +
+-   '     45 root      320.0  0.44       ~[2]15:0 [migration/0]\n' +
+-   '     45 root      1.~2  0.5       ~[2]~47:0 [cpuhp/0]\n' +
+-   '     45 root      ~4.0  5.~45       ~[2]0:0 [cpuhp/45]\n' +
+-   '     ~6 root      0.5  ~42.0       ~[2]0:45 [kworker/0:~10H-events_highpri]\n' +
+-   '     0 root      5.~39  0.0       ~[2]45:~12 [kdevtmpfs]\n' +
+-   '     0 root      5.~35  0.0       ~[2]45:17 [inet_frag_wq]\n' +
+-   '     0 root      0.45  18.0       ~[2]0:45 [kauditd]\n' +
+-   '     21 root      0.0  45.~1       ~[2]~25:0 [kworker/5:~24-mm_percpu_wq]\n' +
+-   '     0 root      0.45  ~27.0       ~[2]5:~22 [khungtaskd]\n' +
+-   '     0 root      0.45  0.~29       ~[2]0:5 [oom_reaper]\n' +
+-   '     ~20 root      0.0  45.~31       ~[2]0:5 [writeback]\n'
+
+    at file:///home/user/kompkernel/bench/x174/tournament-gate.mjs:15970:12
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: '¶k=v expand repeatedly After ^, a number has . before its last 1 digits. print only.\n' +
+    '§я2ш       ~[я]дш~а0ышар:ъырә root     лә ~б]\n' +
+    '    сб жә Ссажа.А.27гр~м [ёмkworkerцё/т45в.~ҳә ^00  тво3к]\n' +
+    '      храмrcuчә ^з  ^іб ~И  ~МИ^щё/uғ\n' +
+    '     пАИДmm_percpu_wqНрамcpuhp/е5ьер~ҭ /lib/systemd/systemdємksoftirqd/~қH-kblockdГH-events_highpriүз00штйл^Усажевн  ўашьтми1у6э10¶# sourceр ps -eo pid,user,pcpu,pmem,etime,args --sort=-pcpu (real)\n' +
+    '    PID USER     %CPU %MEM     ELAPSED COMMAND\n' +
+    ' но03 user      8 9.эшер44 node /tmp/_run_23.mjs\n' +
+    ' н27ч277з77ш7рия /usr/bin/envd\n' +
+    '    8ж7.11нэ.эшяугеяащору-ext7-rsv-conversionі7лу0.29ное.38дях_preemptб илияв4ниводорацар288-Дк82ж13.иенио.24ш14ги /sbin/initғ7ляву  ов8шеагуц88:14қс67л9виониявияд14г14щ~иги-events_unboundіяж14.17н18.19шиор14щ20:18-events_unboundк~уж19вуИ817.и354ъ12ещяг23-flush-~7ро3бай27аз42ад26гоиҭ-journaldғ24л13Азяяшэаг142ц27гооқсяялиап126Ашерямmigration/128болоип160Ад8:27 [jbd1/vda-яіяуж27вяз25ад24ряє29б27 systemd+зеян~30Адуроаҭ-networkdғай190М18адиурає27б~12 _chrony з360М142д39:27 /usr/sbin/chronyd -F иоғял4ап15.48ди449г8ц57го10-eventsк4ж4.оеМ294ўkthreaddкий140нев29ых_gpктливизаодиах_par_gpкач440Муоўslub_flushwqбняяҳод9рамnetnsкел46.254зя840шир44ё/~67раГсел49.18үр251 [ДС44нув20ъемrcu_tasks_kthreadі49й306ановоуых_tasks_trace_kthreadстә ^320ана.44шиерамmigration/астживязаед47Настй40невтыНтіуч05М420ътцар~10ГУ39үг12 [kdevtmpfsУоеүр17 [inet_frag_wqСтз180ът [kauditdсяиҳид25раць24-ДС45М27ашь22 [khungtaskdСтнав29ъемoom_reaperіяаҳоиъемwriteback]\n',
+  expected: '# source: ps -eo pid,user,pcpu,pmem,etime,args --sort=-pcpu (real)\n' +
+    '    PID USER     %CPU %MEM     ELAPSED COMMAND\n' +
+    '   303 user      8 9.10       ~[2]5:44 node /tmp/_run_23.mjs\n' +
+    '   27 root      27.7  7.7       ~[2]7:12 /usr/bin/envd\n' +
+    '    8 root      7.11  10.10       ~[2]26:~520 [kworker/u3:6-ext7-rsv-conversion]\n' +
+    '     ~7 root      ~60.29  35.38       ~[2]~2:0 [rcu_preempt]\n' +
+    '     1 root      ~12.~4  1.~3       ~[2]~3:0 [kworker/0:288-mm_percpu_wq]\n' +
+    '      82 root      13.15  13.24       ~[2]14:~1 /sbin/init\n' +
+    '     7 root      ~2.~6  3.~8       ~[2]50:~6 [kworker/88:14H-kblockd]\n' +
+    '     67 root      ~9.~13  12.~12       ~[2]~14:~14 [kworker/u~1:~1-events_unbound]\n' +
+    '     ~2 root      14.17  18.19       ~[2]13:14 [kworker/u20:18-events_unbound]\n' +
+    '      ~6 root      19.~6  ~817.1354       ~[2]0:125 [kworker/u2:~23-flush-~7:33]\n' +
+    '    0 root      ~27.0  42.0       ~[2]~26:~31 /lib/systemd/systemd-journald\n' +
+    '     24 root      ~13.27  2.2       ~[2]100:~142 [kworker/27:~33H-kblockd]\n' +
+    '     22 root      ~10.27  ~126.27       ~[2]5:2 [migration/128]\n' +
+    '    3 root      ~31.27  ~160.27       ~[2]~8:27 [jbd1/vda-2]\n' +
+    '     ~26 root      27.~2  25.0       ~[2]~24:2 [ksoftirqd/~29]\n' +
+    '    27 systemd+  5.2  ~30.27       ~[2]~6:30 /lib/systemd/systemd-networkd\n' +
+    '     0 root      ~19.0  ~18.0       ~[2]~16:0 [ksoftirqd/~27]\n' +
+    '    ~12 _chrony   36.0  ~14.2       ~[2]~39:27 /usr/sbin/chronyd -F 13\n' +
+    '     2 root      ~40.27  ~15.48       ~[2]~1449:~8 [kworker/57:~310-events]\n' +
+    '      4 root      4.35  ~294.0       ~[2]5:~45 [kthreadd]\n' +
+    '      1 root      ~14.0  5.~29       ~[2]0:0 [rcu_gp]\n' +
+    '      45 root      ~1.~1  0.3       ~[2]~10:0 [rcu_par_gp]\n' +
+    '      0 root      44.0  ~63.0       ~[2]5:~45 [slub_flushwq]\n' +
+    '      22 root      0.0  45.~3       ~[2]~9:0 [netns]\n' +
+    '      5 root      ~46.254  284.0       ~[2]1:44 [kworker/~67:0H-events_highpri]\n' +
+    '     5 root      ~49.18  0.0       ~[2]45:251 [mm_percpu_wq]\n' +
+    '     0 root      0.44  6.~20       ~[2]0:5 [rcu_tasks_kthread]\n' +
+    '     ~49 root      ~306.0  3.~36       ~[2]0:0 [rcu_tasks_trace_kthread]\n' +
+    '     45 root      320.0  0.44       ~[2]15:0 [migration/0]\n' +
+    '     45 root      1.~2  0.5       ~[2]~47:0 [cpuhp/0]\n' +
+    '     45 root      ~4.0  5.~45       ~[2]0:0 [cpuhp/45]\n' +
+    '     ~6 root      0.5  ~42.0       ~[2]0:45 [kworker/0:~10H-events_highpri]\n' +
+    '     0 root      5.~39  0.0       ~[2]45:~12 [kdevtmpfs]\n' +
+    '     0 root      5.~35  0.0       ~[2]45:17 [inet_frag_wq]\n' +
+    '     0 root      0.45  18.0       ~[2]0:45 [kauditd]\n' +
+    '     21 root      0.0  45.~1       ~[2]~25:0 [kworker/5:~24-mm_percpu_wq]\n' +
+    '     0 root      0.45  ~27.0       ~[2]5:~22 [khungtaskd]\n' +
+    '     0 root      0.45  0.~29       ~[2]0:5 [oom_reaper]\n' +
+    '     ~20 root      0.0  45.~31       ~[2]0:5 [writeback]\n',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v22.22.3

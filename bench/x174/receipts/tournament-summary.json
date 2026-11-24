@@ -1,0 +1,24 @@
+[
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "base": 620,
+    "primary": 759,
+    "best": 759,
+    "candidateImprovement": 0,
+    "frontierGap": 139,
+    "plans": 2,
+    "exact": 2,
+    "refused": 0
+  },
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "base": 381,
+    "primary": 722,
+    "best": 636,
+    "candidateImprovement": 86,
+    "frontierGap": 255,
+    "plans": 8,
+    "exact": 7,
+    "refused": 1
+  }
+]

@@ -1,0 +1,25 @@
+
+  bench/x174/test.mjs  3.9mb ⚠️
+
+⚡ Done in 105ms
+
+  bench/x174/portfolio.mjs  3.9mb ⚠️
+
+⚡ Done in 97ms
+
+  bench/x174/gate.mjs  4.6mb ⚠️
+
+⚡ Done in 148ms
+
+  bench/x174/tournament-gate.mjs  4.6mb ⚠️
+
+⚡ Done in 146ms
+
+  bench/x174/refusal-gate.mjs  4.6mb ⚠️
+
+⚡ Done in 147ms
+{'checks': 14499, 'wireChecks': 12, 'strideChecks': 964, 'tournamentChecks': 9, 'errors': [], 'unsupported': [{'path': 'bench/holdout-x41/ps-real.txt', 'kind': 'tournament', 'error': 'unsupported instruction envelope'}], 'native': 'NOT_RUN'}
+27 deceptive shapes rejected; X174 Pareto claim rejected
+program-existence to arbitrary-decoder implication falsified by explicit functions
+Euler-existence to unique-source implication falsified by two actual sequences
+{'codec': 'KYMATIA', 'accepted': False, 'sources': 37, 'plans': 234, 'rawWins': 0, 'selectorChecks': 48, 'build': 'PASS', 'tsc': 'PASS', 'finalize': 'PASS'}

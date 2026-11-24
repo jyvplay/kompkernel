@@ -1,0 +1,15 @@
+{
+  "checks": 14499,
+  "wireChecks": 12,
+  "strideChecks": 964,
+  "tournamentChecks": 9,
+  "errors": [],
+  "unsupported": [
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "kind": "tournament",
+      "error": "unsupported instruction envelope"
+    }
+  ],
+  "native": "NOT_RUN"
+}
