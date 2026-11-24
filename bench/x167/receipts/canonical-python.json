@@ -1,0 +1,14 @@
+{
+  "exactSourceReads": 21,
+  "unsupported": [
+    "bench/holdout-x42/findmnt.txt",
+    "bench/holdout-tbl/markdown-table.md",
+    "bench/holdout-tbl/psql-output.txt",
+    "bench/holdout-x40/prices.csv",
+    "bench/holdout-x40/cue-sheet.md",
+    "bench/holdout-x42/dpkg-l.txt",
+    "bench/holdout-tbl/kubectl-get-pods.txt",
+    "bench/holdout-x41/ls-l-real.txt"
+  ],
+  "native": "NOT_RUN"
+}

@@ -1,0 +1,12 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {encode,decode} from 'gpt-tokenizer/encoding/o200k_base';import {thesiPlans,thesiUndo,thesiRead,thesiFromFrontier,THESI_KEY} from '../../src/lib/omega/thesi';
+let checks=0;const rows=[];const paths=[...fs.readFileSync('bench/x167/lanes.txt','utf8').trim().split('\n'),...fs.readdirSync('bench/x165/fixtures').map(n=>'bench/x165/fixtures/'+n)];
+function check(s:string){for(const p of thesiPlans(s)){assert.ok(Buffer.from(thesiRead(p.message)).equals(Buffer.from(s)));assert.equal(encode(p.message).length,p.tokens);assert.equal(decode(encode(p.message)),p.message);checks+=3;}}
+for(const path of paths){const bytes=fs.readFileSync(path),s=bytes.toString();assert.ok(Buffer.from(s).equals(bytes));const plans=thesiPlans(s);check(s);rows.push({path,raw:encode(s).length,plans});}
+let seed=167;function rand(n:number){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed%n;}
+const atoms=['deployment','analysis','learning','study','the',' ', '\n','\r\n','é','😀','\t','"','^','000',''];for(let i=0;i<1500;i++){let s='';for(let j=0,n=60+rand(180);j<n;j++)s+=atoms[rand(i%2?atoms.length:8)];check(s);}
+for(const s of ['', 'a','analysis '.repeat(40),'deployment analysis '.repeat(80),'é\r\n'.repeat(40)])check(s);
+for(const wire of ['[]\n^','[["a","1"]]\n^^','[["a","1,1"]]\n^','[["a","0"]]\n^','[["a","1/0/3"]]\n^^^','[["a","99999"]]\n^','[["a","1/1/99999"]]\n^','[["a^","1"]]\n^','[["a","01"]]\n^','[["a",null]]\n^','[["a","1"],["b","1"]]\n^']){assert.throws(()=>thesiUndo(wire));checks++;}
+assert.throws(()=>thesiPlans('\ud800'));assert.throws(()=>thesiPlans('a'.repeat(50001)));assert.throws(()=>thesiUndo(JSON.stringify([['a'.repeat(1000),'1/1/100']])+'\n'+'^'.repeat(100)));checks+=3;
+const s='deployment analysis '.repeat(40);let called=0;const result=thesiFromFrontier(s,s,x=>x,()=>{called++;return 'WRONG';},x=>x);assert.ok(result.tokens<=encode(s).length);assert.equal(result.applied?thesiRead(result.message):result.message,s);assert.equal(called,1);checks+=3;
+const mutation=THESI_KEY+'[["deployment","1/1/3"]]\n^ ^ ^';assert.notEqual(thesiRead(mutation),s);checks++;
+fs.writeFileSync('bench/x167/receipts/screen.json',JSON.stringify({checks,sources:rows.length,rows,native:'NOT_RUN'},null,2));console.log({checks,sources:rows.length,plans:rows.reduce((n,r)=>n+r.plans.length,0),wins:rows.filter(r=>r.plans.some(p=>p.tokens<r.raw)).map(r=>({path:r.path,raw:r.raw,best:r.plans[0].tokens}))});

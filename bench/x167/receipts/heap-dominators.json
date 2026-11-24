@@ -1,0 +1,2127 @@
+{
+  "snapshotSha256": "e0f89b8a7a551ee3c388edd4a9eef528223f50539150bfbe0db828b987dac7fc",
+  "cacheNodes": {
+    "TAIL_MEMO": 516282,
+    "CHUNK_CACHE": 516250,
+    "LONG_CACHE": 516278,
+    "CHUNK_CACHE2": 516272,
+    "SHORT_CACHE": 516276
+  },
+  "cacheCutsets": [
+    {
+      "names": [
+        "CHUNK_CACHE"
+      ],
+      "unreachableBytesAfterRemovingMaps": 29470464
+    },
+    {
+      "names": [
+        "CHUNK_CACHE2"
+      ],
+      "unreachableBytesAfterRemovingMaps": 7482912
+    },
+    {
+      "names": [
+        "CHUNK_CACHE",
+        "CHUNK_CACHE2"
+      ],
+      "unreachableBytesAfterRemovingMaps": 69535120
+    },
+    {
+      "names": [
+        "CHUNK_CACHE",
+        "CHUNK_CACHE2",
+        "SHORT_CACHE"
+      ],
+      "unreachableBytesAfterRemovingMaps": 94479568
+    }
+  ],
+  "nodes": 1157452,
+  "strongReachable": 1157444,
+  "passes": 5,
+  "rootRetained": 166385954,
+  "topDominators": [
+    {
+      "node": 3239,
+      "type": "object",
+      "name": "system / Context",
+      "self": 13584,
+      "retained": 142143984,
+      "dominator": {
+        "node": 0,
+        "type": "synthetic",
+        "name": "",
+        "self": 0,
+        "retained": 166385954
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 20,
+            "type": "synthetic",
+            "name": "(Stack roots)",
+            "self": 0,
+            "retained": 204554
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "triggerHeapSnapshot",
+            "writeHeapSnapshot",
+            "tailMemoStats",
+            "writeHeapSnapshot",
+            "[name omitted]",
+            "[name omitted]",
+            "",
+            "spent",
+            "wireOf",
+            "relayoutGlyphs",
+            "relayoutGlyphs",
+            "metathesisEncode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 20,
+            "type": "synthetic",
+            "name": "(Stack roots)",
+            "self": 0,
+            "retained": 204554
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "triggerHeapSnapshot",
+            "writeHeapSnapshot",
+            "tailMemoStats",
+            "writeHeapSnapshot",
+            "[name omitted]",
+            "[name omitted]",
+            "",
+            "spent",
+            "wireOf",
+            "relayoutGlyphs",
+            "relayoutGlyphs",
+            "metathesisEncode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 20,
+            "type": "synthetic",
+            "name": "(Stack roots)",
+            "self": 0,
+            "retained": 204554
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "triggerHeapSnapshot",
+            "writeHeapSnapshot",
+            "tailMemoStats",
+            "writeHeapSnapshot",
+            "[name omitted]",
+            "[name omitted]",
+            "",
+            "spent",
+            "wireOf",
+            "relayoutGlyphs",
+            "relayoutGlyphs",
+            "metathesisEncode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 20,
+            "type": "synthetic",
+            "name": "(Stack roots)",
+            "self": 0,
+            "retained": 204554
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "triggerHeapSnapshot",
+            "writeHeapSnapshot",
+            "tailMemoStats",
+            "writeHeapSnapshot",
+            "[name omitted]",
+            "[name omitted]",
+            "",
+            "spent",
+            "wireOf",
+            "relayoutGlyphs",
+            "relayoutGlyphs",
+            "metathesisEncode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 20,
+            "type": "synthetic",
+            "name": "(Stack roots)",
+            "self": 0,
+            "retained": 204554
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "triggerHeapSnapshot",
+            "writeHeapSnapshot",
+            "tailMemoStats",
+            "writeHeapSnapshot",
+            "[name omitted]",
+            "[name omitted]",
+            "",
+            "spent",
+            "wireOf",
+            "relayoutGlyphs",
+            "relayoutGlyphs",
+            "metathesisEncode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 20,
+            "type": "synthetic",
+            "name": "(Stack roots)",
+            "self": 0,
+            "retained": 204554
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "triggerHeapSnapshot",
+            "writeHeapSnapshot",
+            "tailMemoStats",
+            "writeHeapSnapshot",
+            "[name omitted]",
+            "[name omitted]",
+            "",
+            "spent",
+            "wireOf",
+            "relayoutGlyphs",
+            "relayoutGlyphs",
+            "metathesisEncode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 20,
+            "type": "synthetic",
+            "name": "(Stack roots)",
+            "self": 0,
+            "retained": 204554
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "triggerHeapSnapshot",
+            "writeHeapSnapshot",
+            "tailMemoStats",
+            "writeHeapSnapshot",
+            "[name omitted]",
+            "[name omitted]",
+            "",
+            "spent",
+            "wireOf",
+            "relayoutGlyphs",
+            "relayoutGlyphs",
+            "metathesisEncode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 20,
+            "type": "synthetic",
+            "name": "(Stack roots)",
+            "self": 0,
+            "retained": 204554
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "triggerHeapSnapshot",
+            "writeHeapSnapshot",
+            "tailMemoStats",
+            "writeHeapSnapshot",
+            "[name omitted]",
+            "[name omitted]",
+            "",
+            "spent",
+            "wireOf",
+            "relayoutGlyphs",
+            "relayoutGlyphs",
+            "metathesisEncode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 20,
+            "type": "synthetic",
+            "name": "(Stack roots)",
+            "self": 0,
+            "retained": 204554
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "triggerHeapSnapshot",
+            "writeHeapSnapshot",
+            "tailMemoStats",
+            "writeHeapSnapshot",
+            "[name omitted]",
+            "[name omitted]",
+            "",
+            "spent",
+            "wireOf",
+            "relayoutGlyphs",
+            "relayoutGlyphs",
+            "metathesisEncode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 20,
+            "type": "synthetic",
+            "name": "(Stack roots)",
+            "self": 0,
+            "retained": 204554
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "triggerHeapSnapshot",
+            "writeHeapSnapshot",
+            "tailMemoStats",
+            "writeHeapSnapshot",
+            "[name omitted]",
+            "[name omitted]",
+            "",
+            "spent",
+            "wireOf",
+            "relayoutGlyphs",
+            "relayoutGlyphs",
+            "metathesisEncode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 20,
+            "type": "synthetic",
+            "name": "(Stack roots)",
+            "self": 0,
+            "retained": 204554
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "triggerHeapSnapshot",
+            "writeHeapSnapshot",
+            "tailMemoStats",
+            "writeHeapSnapshot",
+            "[name omitted]",
+            "[name omitted]",
+            "",
+            "spent",
+            "wireOf",
+            "relayoutGlyphs",
+            "relayoutGlyphs",
+            "metathesisEncode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 20,
+            "type": "synthetic",
+            "name": "(Stack roots)",
+            "self": 0,
+            "retained": 204554
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "triggerHeapSnapshot",
+            "writeHeapSnapshot",
+            "tailMemoStats",
+            "writeHeapSnapshot",
+            "[name omitted]",
+            "[name omitted]",
+            "",
+            "spent",
+            "wireOf",
+            "relayoutGlyphs",
+            "relayoutGlyphs",
+            "metathesisEncode"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 516250,
+      "type": "object",
+      "name": "Map",
+      "self": 32,
+      "retained": 29470464,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "CHUNK_CACHE",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 516251,
+      "type": "array",
+      "name": "",
+      "self": 29360168,
+      "retained": 29470432,
+      "dominator": {
+        "node": 516250,
+        "type": "object",
+        "name": "Map",
+        "self": 32,
+        "retained": 29470464
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516250,
+            "type": "object",
+            "name": "Map",
+            "self": 32,
+            "retained": 29470464
+          },
+          "edge": "table",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 516276,
+      "type": "object",
+      "name": "Map",
+      "self": 32,
+      "retained": 14906416,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "SHORT_CACHE",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 516277,
+      "type": "array",
+      "name": "",
+      "self": 152,
+      "retained": 14906384,
+      "dominator": {
+        "node": 516276,
+        "type": "object",
+        "name": "Map",
+        "self": 32,
+        "retained": 14906416
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516276,
+            "type": "object",
+            "name": "Map",
+            "self": 32,
+            "retained": 14906416
+          },
+          "edge": "table",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 590822,
+      "type": "object",
+      "name": "Map",
+      "self": 32,
+      "retained": 14906232,
+      "dominator": {
+        "node": 516277,
+        "type": "array",
+        "name": "",
+        "self": 152,
+        "retained": 14906384
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516277,
+            "type": "array",
+            "name": "",
+            "self": 152,
+            "retained": 14906384
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 590823,
+      "type": "array",
+      "name": "",
+      "self": 14680104,
+      "retained": 14906200,
+      "dominator": {
+        "node": 590822,
+        "type": "object",
+        "name": "Map",
+        "self": 32,
+        "retained": 14906232
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 590822,
+            "type": "object",
+            "name": "Map",
+            "self": 32,
+            "retained": 14906232
+          },
+          "edge": "table",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 516239,
+      "type": "object",
+      "name": "Map",
+      "self": 32,
+      "retained": 13331464,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 516240,
+      "type": "array",
+      "name": "",
+      "self": 7340072,
+      "retained": 13331432,
+      "dominator": {
+        "node": 516239,
+        "type": "object",
+        "name": "Map",
+        "self": 32,
+        "retained": 13331464
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516239,
+            "type": "object",
+            "name": "Map",
+            "self": 32,
+            "retained": 13331464
+          },
+          "edge": "table",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 387399,
+      "type": "code",
+      "name": "[name omitted]",
+      "self": 144,
+      "retained": 11331320,
+      "dominator": {
+        "node": 0,
+        "type": "synthetic",
+        "name": "",
+        "self": 0,
+        "retained": 166385954
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 297957,
+            "type": "code",
+            "name": "isDet",
+            "self": 64,
+            "retained": 728
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        },
+        {
+          "owner": {
+            "node": 297960,
+            "type": "code",
+            "name": "now",
+            "self": 64,
+            "retained": 584
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        },
+        {
+          "owner": {
+            "node": 297964,
+            "type": "code",
+            "name": "__init",
+            "self": 64,
+            "retained": 176
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        },
+        {
+          "owner": {
+            "node": 297968,
+            "type": "code",
+            "name": "stickyRe",
+            "self": 64,
+            "retained": 88
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        },
+        {
+          "owner": {
+            "node": 297970,
+            "type": "code",
+            "name": "epipsephisisBind",
+            "self": 64,
+            "retained": 168
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        },
+        {
+          "owner": {
+            "node": 297972,
+            "type": "code",
+            "name": "epipsephisisRecord",
+            "self": 64,
+            "retained": 192
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        },
+        {
+          "owner": {
+            "node": 297975,
+            "type": "code",
+            "name": "isDigit",
+            "self": 64,
+            "retained": 88
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        },
+        {
+          "owner": {
+            "node": 297977,
+            "type": "code",
+            "name": "isSpace",
+            "self": 64,
+            "retained": 88
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        },
+        {
+          "owner": {
+            "node": 297979,
+            "type": "code",
+            "name": "cutOk",
+            "self": 64,
+            "retained": 88
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        },
+        {
+          "owner": {
+            "node": 297981,
+            "type": "code",
+            "name": "scanWindow",
+            "self": 64,
+            "retained": 88
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        },
+        {
+          "owner": {
+            "node": 297983,
+            "type": "code",
+            "name": "epipsephisisTry",
+            "self": 64,
+            "retained": 328
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        },
+        {
+          "owner": {
+            "node": 297986,
+            "type": "code",
+            "name": "OFF",
+            "self": 64,
+            "retained": 944
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 520480,
+      "type": "string",
+      "name": "[contents omitted]",
+      "self": 11024208,
+      "retained": 11024208,
+      "dominator": {
+        "node": 387399,
+        "type": "code",
+        "name": "[name omitted]",
+        "self": 144,
+        "retained": 11331320
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 387399,
+            "type": "code",
+            "name": "[name omitted]",
+            "self": 144,
+            "retained": 11331320
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 516272,
+      "type": "object",
+      "name": "Map",
+      "self": 32,
+      "retained": 7482912,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "CHUNK_CACHE2",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 516273,
+      "type": "array",
+      "name": "",
+      "self": 7340072,
+      "retained": 7482880,
+      "dominator": {
+        "node": 516272,
+        "type": "object",
+        "name": "Map",
+        "self": 32,
+        "retained": 7482912
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516272,
+            "type": "object",
+            "name": "Map",
+            "self": 32,
+            "retained": 7482912
+          },
+          "edge": "table",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 516039,
+      "type": "object",
+      "name": "Map",
+      "self": 32,
+      "retained": 7340104,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 457942,
+      "type": "object",
+      "name": "Map",
+      "self": 32,
+      "retained": 7340104,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        },
+        {
+          "owner": {
+            "node": 457938,
+            "type": "object",
+            "name": "BytePairEncodingCore",
+            "self": 264,
+            "retained": 501880
+          },
+          "edge": "property",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 516040,
+      "type": "array",
+      "name": "",
+      "self": 7340072,
+      "retained": 7340072,
+      "dominator": {
+        "node": 516039,
+        "type": "object",
+        "name": "Map",
+        "self": 32,
+        "retained": 7340104
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516039,
+            "type": "object",
+            "name": "Map",
+            "self": 32,
+            "retained": 7340104
+          },
+          "edge": "table",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 584310,
+      "type": "array",
+      "name": "",
+      "self": 7340072,
+      "retained": 7340072,
+      "dominator": {
+        "node": 457942,
+        "type": "object",
+        "name": "Map",
+        "self": 32,
+        "retained": 7340104
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 457942,
+            "type": "object",
+            "name": "Map",
+            "self": 32,
+            "retained": 7340104
+          },
+          "edge": "table",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 516204,
+      "type": "object",
+      "name": "_GptEncoding",
+      "self": 352,
+      "retained": 3920080,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        },
+        {
+          "owner": {
+            "node": 516203,
+            "type": "closure",
+            "name": "native_bind",
+            "self": 48,
+            "retained": 48
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "",
+            "decode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 516205,
+            "type": "closure",
+            "name": "native_bind",
+            "self": 48,
+            "retained": 48
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "decodeAsyncGenerator"
+          ]
+        },
+        {
+          "owner": {
+            "node": 516207,
+            "type": "closure",
+            "name": "native_bind",
+            "self": 48,
+            "retained": 48
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "decodeGenerator"
+          ]
+        },
+        {
+          "owner": {
+            "node": 516209,
+            "type": "closure",
+            "name": "native_bind",
+            "self": 48,
+            "retained": 48
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "",
+            "encode"
+          ]
+        },
+        {
+          "owner": {
+            "node": 516211,
+            "type": "closure",
+            "name": "native_bind",
+            "self": 48,
+            "retained": 48
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "",
+            "encodeGenerator"
+          ]
+        },
+        {
+          "owner": {
+            "node": 516213,
+            "type": "closure",
+            "name": "native_bind",
+            "self": 48,
+            "retained": 48
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "",
+            "isWithinTokenLimit"
+          ]
+        },
+        {
+          "owner": {
+            "node": 516215,
+            "type": "closure",
+            "name": "native_bind",
+            "self": 48,
+            "retained": 48
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "",
+            "countTokens"
+          ]
+        },
+        {
+          "owner": {
+            "node": 516217,
+            "type": "closure",
+            "name": "native_bind",
+            "self": 48,
+            "retained": 48
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "",
+            "encodeChat"
+          ]
+        },
+        {
+          "owner": {
+            "node": 516219,
+            "type": "closure",
+            "name": "native_bind",
+            "self": 48,
+            "retained": 48
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "encodeChatGenerator"
+          ]
+        },
+        {
+          "owner": {
+            "node": 516221,
+            "type": "closure",
+            "name": "native_bind",
+            "self": 48,
+            "retained": 48
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "",
+            "setMergeCacheSize"
+          ]
+        },
+        {
+          "owner": {
+            "node": 516223,
+            "type": "closure",
+            "name": "native_bind",
+            "self": 48,
+            "retained": 48
+          },
+          "edge": "internal",
+          "ownerClosureChildren": [
+            "",
+            "clearMergeCache"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 514292,
+      "type": "object",
+      "name": "BytePairEncodingCore",
+      "self": 264,
+      "retained": 3918912,
+      "dominator": {
+        "node": 516204,
+        "type": "object",
+        "name": "_GptEncoding",
+        "self": 352,
+        "retained": 3920080
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516204,
+            "type": "object",
+            "name": "_GptEncoding",
+            "self": 352,
+            "retained": 3920080
+          },
+          "edge": "property",
+          "ownerClosureChildren": [
+            "native_bind",
+            "native_bind",
+            "native_bind",
+            "native_bind",
+            "native_bind",
+            "native_bind",
+            "native_bind",
+            "native_bind",
+            "native_bind",
+            "native_bind",
+            "native_bind",
+            "native_bind"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 514296,
+      "type": "object",
+      "name": "Map",
+      "self": 32,
+      "retained": 3670088,
+      "dominator": {
+        "node": 514292,
+        "type": "object",
+        "name": "BytePairEncodingCore",
+        "self": 264,
+        "retained": 3918912
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 514292,
+            "type": "object",
+            "name": "BytePairEncodingCore",
+            "self": 264,
+            "retained": 3918912
+          },
+          "edge": "property",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 515091,
+      "type": "array",
+      "name": "",
+      "self": 3670056,
+      "retained": 3670056,
+      "dominator": {
+        "node": 514296,
+        "type": "object",
+        "name": "Map",
+        "self": 32,
+        "retained": 3670088
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 514296,
+            "type": "object",
+            "name": "Map",
+            "self": 32,
+            "retained": 3670088
+          },
+          "edge": "table",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 457939,
+      "type": "object",
+      "name": "Array",
+      "self": 32,
+      "retained": 1718288,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        },
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        },
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        },
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        },
+        {
+          "owner": {
+            "node": 457938,
+            "type": "object",
+            "name": "BytePairEncodingCore",
+            "self": 264,
+            "retained": 501880
+          },
+          "edge": "property",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 618219,
+      "type": "array",
+      "name": "(object elements)",
+      "self": 1600000,
+      "retained": 1600000,
+      "dominator": {
+        "node": 457939,
+        "type": "object",
+        "name": "Array",
+        "self": 32,
+        "retained": 1718288
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 457939,
+            "type": "object",
+            "name": "Array",
+            "self": 32,
+            "retained": 1718288
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 516278,
+      "type": "object",
+      "name": "Map",
+      "self": 32,
+      "retained": 1574760,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "LONG_CACHE",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 516279,
+      "type": "array",
+      "name": "",
+      "self": 152,
+      "retained": 1574728,
+      "dominator": {
+        "node": 516278,
+        "type": "object",
+        "name": "Map",
+        "self": 32,
+        "retained": 1574760
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516278,
+            "type": "object",
+            "name": "Map",
+            "self": 32,
+            "retained": 1574760
+          },
+          "edge": "table",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 647130,
+      "type": "object",
+      "name": "Map",
+      "self": 32,
+      "retained": 1574576,
+      "dominator": {
+        "node": 516279,
+        "type": "array",
+        "name": "",
+        "self": 152,
+        "retained": 1574728
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516279,
+            "type": "array",
+            "name": "",
+            "self": 152,
+            "retained": 1574728
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 647159,
+      "type": "array",
+      "name": "",
+      "self": 3624,
+      "retained": 1574544,
+      "dominator": {
+        "node": 647130,
+        "type": "object",
+        "name": "Map",
+        "self": 32,
+        "retained": 1574576
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 647130,
+            "type": "object",
+            "name": "Map",
+            "self": 32,
+            "retained": 1574576
+          },
+          "edge": "table",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 516229,
+      "type": "object",
+      "name": "[name omitted]",
+      "self": 96,
+      "retained": 1048760,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 516233,
+      "type": "object",
+      "name": "[name omitted]",
+      "self": 96,
+      "retained": 1048760,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 516231,
+      "type": "object",
+      "name": "[name omitted]",
+      "self": 96,
+      "retained": 1048760,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 516237,
+      "type": "object",
+      "name": "[name omitted]",
+      "self": 96,
+      "retained": 1048760,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 516235,
+      "type": "object",
+      "name": "[name omitted]",
+      "self": 96,
+      "retained": 1048760,
+      "dominator": {
+        "node": 3239,
+        "type": "object",
+        "name": "system / Context",
+        "self": 13584,
+        "retained": 142143984
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 3239,
+            "type": "object",
+            "name": "system / Context",
+            "self": 13584,
+            "retained": 142143984
+          },
+          "edge": "context",
+          "ownerClosureChildren": [
+            "splitFields",
+            "tagstackRestore",
+            "[name omitted]",
+            "[name omitted]",
+            "segmentationsOf",
+            "parseJsonLines",
+            "panoptesDecode",
+            "taxinomasisResolve",
+            "toStyledChar",
+            "kallosRestoreSpans",
+            "matchTemplate",
+            "fitColumn"
+          ]
+        }
+      ]
+    },
+    {
+      "node": 516230,
+      "type": "object",
+      "name": "ArrayBuffer",
+      "self": 88,
+      "retained": 1048664,
+      "dominator": {
+        "node": 516229,
+        "type": "object",
+        "name": "[name omitted]",
+        "self": 96,
+        "retained": 1048760
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516229,
+            "type": "object",
+            "name": "[name omitted]",
+            "self": 96,
+            "retained": 1048760
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 516234,
+      "type": "object",
+      "name": "ArrayBuffer",
+      "self": 88,
+      "retained": 1048664,
+      "dominator": {
+        "node": 516233,
+        "type": "object",
+        "name": "[name omitted]",
+        "self": 96,
+        "retained": 1048760
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516233,
+            "type": "object",
+            "name": "[name omitted]",
+            "self": 96,
+            "retained": 1048760
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 516232,
+      "type": "object",
+      "name": "ArrayBuffer",
+      "self": 88,
+      "retained": 1048664,
+      "dominator": {
+        "node": 516231,
+        "type": "object",
+        "name": "[name omitted]",
+        "self": 96,
+        "retained": 1048760
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516231,
+            "type": "object",
+            "name": "[name omitted]",
+            "self": 96,
+            "retained": 1048760
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 516238,
+      "type": "object",
+      "name": "ArrayBuffer",
+      "self": 88,
+      "retained": 1048664,
+      "dominator": {
+        "node": 516237,
+        "type": "object",
+        "name": "[name omitted]",
+        "self": 96,
+        "retained": 1048760
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516237,
+            "type": "object",
+            "name": "[name omitted]",
+            "self": 96,
+            "retained": 1048760
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 516236,
+      "type": "object",
+      "name": "ArrayBuffer",
+      "self": 88,
+      "retained": 1048664,
+      "dominator": {
+        "node": 516235,
+        "type": "object",
+        "name": "[name omitted]",
+        "self": 96,
+        "retained": 1048760
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516235,
+            "type": "object",
+            "name": "[name omitted]",
+            "self": 96,
+            "retained": 1048760
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 647150,
+      "type": "native",
+      "name": "system / JSArrayBufferData",
+      "self": 1048576,
+      "retained": 1048576,
+      "dominator": {
+        "node": 516230,
+        "type": "object",
+        "name": "ArrayBuffer",
+        "self": 88,
+        "retained": 1048664
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516230,
+            "type": "object",
+            "name": "ArrayBuffer",
+            "self": 88,
+            "retained": 1048664
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 647148,
+      "type": "native",
+      "name": "system / JSArrayBufferData",
+      "self": 1048576,
+      "retained": 1048576,
+      "dominator": {
+        "node": 516234,
+        "type": "object",
+        "name": "ArrayBuffer",
+        "self": 88,
+        "retained": 1048664
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516234,
+            "type": "object",
+            "name": "ArrayBuffer",
+            "self": 88,
+            "retained": 1048664
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    },
+    {
+      "node": 647149,
+      "type": "native",
+      "name": "system / JSArrayBufferData",
+      "self": 1048576,
+      "retained": 1048576,
+      "dominator": {
+        "node": 516232,
+        "type": "object",
+        "name": "ArrayBuffer",
+        "self": 88,
+        "retained": 1048664
+      },
+      "incoming": [
+        {
+          "owner": {
+            "node": 516232,
+            "type": "object",
+            "name": "ArrayBuffer",
+            "self": 88,
+            "retained": 1048664
+          },
+          "edge": "internal",
+          "ownerClosureChildren": []
+        }
+      ]
+    }
+  ],
+  "slicedStrings": 5178,
+  "slicedImmediateDominators": [
+    {
+      "count": 5099,
+      "node": 3239,
+      "type": "object",
+      "name": "system / Context",
+      "self": 13584,
+      "retained": 142143984
+    },
+    {
+      "count": 16,
+      "node": 20,
+      "type": "synthetic",
+      "name": "(Stack roots)",
+      "self": 0,
+      "retained": 204554
+    },
+    {
+      "count": 4,
+      "node": 842497,
+      "type": "object",
+      "name": "Array",
+      "self": 32,
+      "retained": 2000
+    },
+    {
+      "count": 4,
+      "node": 849956,
+      "type": "object",
+      "name": "Array",
+      "self": 32,
+      "retained": 2000
+    },
+    {
+      "count": 4,
+      "node": 849883,
+      "type": "object",
+      "name": "Array",
+      "self": 32,
+      "retained": 2000
+    },
+    {
+      "count": 4,
+      "node": 847117,
+      "type": "object",
+      "name": "Array",
+      "self": 32,
+      "retained": 2000
+    },
+    {
+      "count": 4,
+      "node": 847040,
+      "type": "object",
+      "name": "Array",
+      "self": 32,
+      "retained": 2000
+    },
+    {
+      "count": 4,
+      "node": 842492,
+      "type": "object",
+      "name": "Array",
+      "self": 32,
+      "retained": 1960
+    },
+    {
+      "count": 3,
+      "node": 842487,
+      "type": "object",
+      "name": "Array",
+      "self": 32,
+      "retained": 1968
+    },
+    {
+      "count": 2,
+      "node": 842502,
+      "type": "object",
+      "name": "Array",
+      "self": 32,
+      "retained": 1896
+    },
+    {
+      "count": 1,
+      "node": 869849,
+      "type": "object",
+      "name": "Object",
+      "self": 40,
+      "retained": 72
+    },
+    {
+      "count": 1,
+      "node": 869845,
+      "type": "object",
+      "name": "Object",
+      "self": 40,
+      "retained": 72
+    },
+    {
+      "count": 1,
+      "node": 869844,
+      "type": "object",
+      "name": "Object",
+      "self": 40,
+      "retained": 72
+    },
+    {
+      "count": 1,
+      "node": 869843,
+      "type": "object",
+      "name": "Object",
+      "self": 40,
+      "retained": 72
+    },
+    {
+      "count": 1,
+      "node": 869842,
+      "type": "object",
+      "name": "Object",
+      "self": 40,
+      "retained": 72
+    },
+    {
+      "count": 1,
+      "node": 869839,
+      "type": "object",
+      "name": "Object",
+      "self": 40,
+      "retained": 72
+    },
+    {
+      "count": 1,
+      "node": 869608,
+      "type": "object",
+      "name": "Object",
+      "self": 40,
+      "retained": 72
+    },
+    {
+      "count": 1,
+      "node": 869604,
+      "type": "object",
+      "name": "Object",
+      "self": 40,
+      "retained": 72
+    },
+    {
+      "count": 1,
+      "node": 869596,
+      "type": "object",
+      "name": "Object",
+      "self": 40,
+      "retained": 72
+    },
+    {
+      "count": 1,
+      "node": 869594,
+      "type": "object",
+      "name": "Object",
+      "self": 40,
+      "retained": 72
+    }
+  ],
+  "scope": "Exact dominators of strong-edge snapshot graph; not an ECMAScript resource theorem; weak edges excluded; raw snapshot not published"
+}

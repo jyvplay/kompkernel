@@ -1,0 +1,11 @@
+{
+  "sources": 34,
+  "plans": 71,
+  "rawWins": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "best": 5005
+    }
+  ]
+}

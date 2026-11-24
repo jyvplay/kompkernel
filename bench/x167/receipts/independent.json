@@ -1,0 +1,19 @@
+{
+  "checks": 80,
+  "wireChecks": 9,
+  "unsupported": [],
+  "mismatches": [
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "kind": "candidate",
+      "reason": "JSONDecodeError"
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "kind": "candidate",
+      "reason": "JSONDecodeError"
+    }
+  ],
+  "native": "NOT_RUN",
+  "scope": "Python algorithm, not basic-chat behavioral evidence"
+}

@@ -1,0 +1,2 @@
+{"event":"snapshot-start","memory":{"rss":341155840,"heapTotal":215412736,"heapUsed":169957360,"external":9176874,"arrayBuffers":7235000},"calls":1000,"chunk":{"size":234685,"hits":19718419,"misses":234685,"fallbacks":0,"shortSize":398223,"shortHits":3926655,"shortMisses":398223,"longSize":106,"longChars":1459620,"longHits":5942,"longMisses":7053},"tail":{"size":0,"hits":0,"misses":0}}
+snapshot-complete; deliberate diagnostic exit86

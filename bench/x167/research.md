@@ -1,0 +1,32 @@
+# X167: source inspection, not theorem certification
+
+Date authority: session instruction 2026-11-14. Sandbox clock and some fetched GitHub metadata say November 24; this discrepancy is retained, not resolved by silently changing the date. In particular OpenAI's current VP/VNP files are future-dated relative to session authority. Treat these as retrieved artifacts, not independently authenticated chronological facts.
+
+## Fresh search and primary-source follow-up
+
+Queries included “compressed positional inverted index posting lists text reconstruction 2016 2024 paper”, “site.doubleai.com research 2026 graph girth Lean”, and separate Google and Anthropic formal-math queries. Search snippets are discovery aids, not proofs. A secondary Google result dated AlphaEvolve 2026; the fetched primary announcement explicitly says May 14, **2025**. Do not import the secondary date. A ByteDance Seed-Prover page fetch failed; no result is inferred from that failure.
+
+* Claude, Fariña, Martínez-Prieto, Navarro, **Universal Indexes for Highly Repetitive Document Collections** (2016), https://arxiv.org/abs/1604.08897, fetched abstract/metadata. Differential inverted lists can be run-length/LZ/grammar compressed; savings on repetitive collections trade against access time. This is ancestry for THESI, not evidence about o200k, broad prose, or a chat decoder. The paper is within twenty years of session date. Positional inverted self-indexing is established work, not an invention claimed here.
+* Google primary https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/ fetched first chunk. Proposal generation is separated from evaluator acceptance. The reported 23% kernel gain and 1% training-time gain have different denominators. Neither transfers to this stack. No local AlphaEvolve execution, no complete Google theorem audit.
+* Anthropic primary https://www.anthropic.com/research/formal-verification fetched chunks 0 and 2. RISC-V static/single-threaded binaries, modeled OS responses, fixed memory, inputs under 64 MB and specific fuzz entry points define the claim. Crash freedom under those semantics is not arbitrary functional correctness. The same page explicitly distinguishes formal specification from reality. Proofs of an RFC model do not establish that an LLM emits original bytes. Rocq/Verus proofs were not run locally.
+* DoubleAI primary https://www.doubleai.com/research/advancing-a-decades-old-problem-in-extremal-graph-theory and https://www.doubleai.com/papers/girth85.pdf fetched overview and PDF first chunk only (not all 38 pages). Claimed quantifiers: every prime power q, an explicit infinite family of degree q^3+1, girth at least (8/5) log_(q^3)n-O(1). This is not all regular degrees. The certificate interfaces are nonzero det(w-I), divisibility by fourth power of level, local displacement control, and quotient vertex growth. A finite numerical example cannot establish their universal conjunction. No Lean zip/kernel replay. X166's chess witness replay remains only a witness, not a replay of the 7,224-case upper-bound certificate.
+
+## Individually inspected formal interfaces
+
+Exact commits, file paths, byte lengths and SHA256s are in `receipts/research-artifacts.json`; raw retrieved files are ignored scratch. Download uses `gh api` pinned to commit, not a moving web snippet.
+
+### OpenAI
+
+Retrieved commit f5702854040e97fa7675c21ba37a9608f5f92dd3. Read `lean/ComparatorChallenges/VPVNP.lean` and comparator README. `Computes` allows scalar/variable inputs, free reuse of previous gates, and exact +,-,* gates. `PolynomiallyBounded` means ∃A,d,N ∀n≥N. VP is a polynomial-arity/degree family with polynomial-size circuits; VNP sums a VP verifier over Boolean witness assignments with polynomially bounded witness arity. The stated conclusion separates the nonuniform classes over each field for variable type Fin n × Bool. This is **not** a Turing-time lower bound, compression theorem, or separation verified locally. The challenge's `sorry` is an intentionally omitted proof, not evidence that the submitted solution uses an axiom. Comparator instructions require comparator, landrun, lean4export and lake; these were not run. Earlier finite-stack/compression claims inspected in X166 are not retroactively certified by this new interface reading. Highest-information next test: obtain the linked solution and comparator configuration at this exact revision, build with its pinned toolchain, inspect kernel axioms and compare definitions.
+
+### Anthropic
+
+Retrieved commit 11b6c7e3c927df2658f513b6b68ea7f8929c62c5. Read `eth/MainResults.lean`, `Challenge.lean`, `Solution.lean`. Statement uses ONE deterministic finite-stack machine and ONE C before k and formula, finite alphabets for every stack, n≥4, every variable occurs, m≥2, no duplicate clause list, k≥1. CNF clauses are ordered lists; repeated literals are allowed, permutations are distinct clauses. Input slots encode sign/index with padded widths. Cost is `TM2OutputsInTime`, not an uncharged table lookup oracle in the final statement. `Solution` routes through CountedRoute → NamesInOrder → Wrap and explicitly discusses polynomial-cost operations and a unary blank time budget in intermediate proofs. This identifies a high-value interface to inspect; it does not prove a defect. MainResults explicitly says usual-machine simulation/rewriting is outside the Lean statements. Challenge `sorry`s are deliberate. No kernel/comparator run or complete dependency audit; no ETH refutation endorsed here. Prior X166 Pairs hypotheses remain a separate limited inspection.
+
+### Google, DoubleAI, other labs
+
+Google evaluator interfaces and DoubleAI arithmetic certificate interfaces above were examined separately, not aggregated into a “labs proved” claim. ByteDance's earlier pinned X166 artifact is inherited evidence only; the fresh page fetch failed. No exhaustive audit across labs is asserted.
+
+## Transfer discipline
+
+Each proposed transfer needs an explicit arrow: source theorem → exact object model → source-byte inverse → complete token price → held-out breadth → native basic-chat behavior → whole-stack runtime. None of the cited sources supplies that whole chain. In particular proof-checker acceptance and behavioral decoding are different predicates. The executable modal detector rejects these substitutions; it is an evidence-schema checker, not an English proof verifier.
