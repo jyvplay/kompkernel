@@ -1,0 +1,15 @@
+Collecting python-chess
+  Downloading python_chess-1.999-py3-none-any.whl (1.4 kB)
+Collecting chess<2,>=1
+  Downloading chess-1.11.2.tar.gz (6.1 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.1/6.1 MB 70.1 MB/s eta 0:00:00
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Building wheels for collected packages: chess
+  Building wheel for chess (setup.py): started
+  Building wheel for chess (setup.py): finished with status 'done'
+  Created wheel for chess: filename=chess-1.11.2-py3-none-any.whl size=147776 sha256=25cb337e54a2bb0b2a4da7a7c0469efa6f19f2e077199c2a3721cb49f50abccd
+  Stored in directory: /home/user/.cache/pip/wheels/fb/5d/5c/59a62d8a695285e59ec9c1f66add6f8a9ac4152499a2be0113
+Successfully built chess
+Installing collected packages: chess, python-chess
+Successfully installed chess-1.11.2 python-chess-1.999

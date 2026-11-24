@@ -1,0 +1,7 @@
+import fs from 'node:fs';import {build} from 'esbuild';
+const original=fs.readFileSync('src/lib/omega/bpe.ts','utf8');let patched=original;
+const replacements=[['CHUNK_CACHE.set(k, t);','CHUNK_CACHE.set(k.length>12 ? (" "+k).slice(1) : k, t);'],['sc.set(text, t);','sc.set(text.length>12 ? (" "+text).slice(1) : text, t);']];
+for(const [a,b] of replacements){if(patched.split(a).length!==2)throw Error('anchor drift '+a);patched=patched.replace(a,b);}
+for(const arm of 'AB')await build({entryPoints:['bench/x163/cache-speed.ts'],bundle:true,platform:'node',format:'esm',outfile:`bench/x166/retention-${arm}.mjs`,plugins:[{name:'measure-and-detach',setup(b){b.onLoad({filter:/[\\/]cache-speed\.ts$/},args=>({contents:fs.readFileSync(args.path,'utf8').replace('runCacheStats:', 'maxRSS:process.resourceUsage().maxRSS,runCacheStats:'),loader:'ts'}));if(arm==='B')b.onLoad({filter:/[\\/]bpe\.ts$/},()=>({contents:patched,loader:'ts'}));}}]});
+await build({entryPoints:['bench/x166/token-unit.ts'],bundle:true,platform:'node',format:'esm',outfile:'bench/x166/token-unit.mjs',plugins:[{name:'detach-memo-keys',setup(b){b.onLoad({filter:/[\\/]bpe\.ts$/},()=>({contents:patched,loader:'ts'}));}}]});
+fs.writeFileSync('bench/x166/receipts/retention-patch.json',JSON.stringify({production:false,replacements,scope:'Exact copied UTF16 keys only on cache misses; no key/value/eviction/search change; V8 retention effect requires measurement'},null,2));

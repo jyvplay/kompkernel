@@ -1,0 +1,7 @@
+{
+  "checks": 360005,
+  "passed": true,
+  "entryBound": 32768,
+  "keyUnitBound": "max(1048576, largest inserted key length)",
+  "scope": "eviction, revisits, oversized key; no claimed strict heap bound"
+}

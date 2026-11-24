@@ -1,0 +1,5 @@
+[
+  "eth/proof/statements/CountedInstanceStatement.lean",
+  "eth/proof/variables/CountedInstance/Main.lean",
+  "eth/proof/variables/CountedInstance/Pairs.lean"
+]

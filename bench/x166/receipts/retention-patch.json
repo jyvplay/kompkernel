@@ -1,0 +1,14 @@
+{
+  "production": false,
+  "replacements": [
+    [
+      "CHUNK_CACHE.set(k, t);",
+      "CHUNK_CACHE.set(k.length>12 ? (\" \"+k).slice(1) : k, t);"
+    ],
+    [
+      "sc.set(text, t);",
+      "sc.set(text.length>12 ? (\" \"+text).slice(1) : text, t);"
+    ]
+  ],
+  "scope": "Exact copied UTF16 keys only on cache misses; no key/value/eviction/search change; V8 retention effect requires measurement"
+}

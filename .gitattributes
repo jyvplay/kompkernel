@@ -34,3 +34,7 @@ bench/x165/fixtures/* -text -whitespace
 bench/x165/research/*.lean -text -whitespace
 bench/x165/receipts/native-*.txt -text -whitespace
 bench/x165/receipts/*.log -whitespace
+
+# X166 exact proof and diagnostic evidence
+bench/x166/research/*.lean -text -whitespace
+bench/x166/receipts/*.log -whitespace

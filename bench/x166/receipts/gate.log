@@ -1,0 +1,40 @@
+{
+  checks: 40,
+  rows: [
+    {
+      path: 'bench/holdout-work/email-thread.txt',
+      baseline: 486,
+      selected: 486,
+      candidateTokens: [Array],
+      exact: true
+    },
+    {
+      path: 'bench/holdout-x42/findmnt.txt',
+      baseline: 385,
+      selected: 385,
+      candidateTokens: [Array],
+      exact: true
+    },
+    {
+      path: 'bench/holdout/json-pkg.txt',
+      baseline: 653,
+      selected: 653,
+      candidateTokens: [Array],
+      exact: true
+    },
+    {
+      path: 'bench/holdout-work/kb-article.txt',
+      baseline: 620,
+      selected: 620,
+      candidateTokens: [Array],
+      exact: true
+    },
+    {
+      path: 'bench/holdout-x41/ps-real.txt',
+      baseline: 381,
+      selected: 381,
+      candidateTokens: [Array],
+      exact: true
+    }
+  ]
+}

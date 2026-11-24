@@ -1,0 +1,51 @@
+[
+  {
+    "repo": "openai/math",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/ComparatorChallenges/Superstring.lean",
+    "file": "openai-comparator.lean",
+    "sha256": "8930f17794dfd3ca55e5c238019e5ccecf8c189d2df87df83773d00d1f4d1d3a"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "revision": "16a5ce41304fcdaea4e0be7c132e1c361dc26da5",
+    "path": "eth/proof/variables/CountedInstance/Pairs.lean",
+    "file": "anthropic-pairs.lean",
+    "sha256": "0086456e294dd5f6cabbada1f5832349953baf9c5379cc9f5d354bcd6c207fcd"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "revision": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/All63/Trust.lean",
+    "file": "doubleai-trust.lean",
+    "sha256": "526e33bc85c3ca25ab6bb290540269f648af14e2c79c5bf3796c6325a90cc28b"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "revision": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/All63/Attained.lean",
+    "file": "doubleai-attained.lean",
+    "sha256": "0eec7dfc88ab6de84f8c078f3e6fa5fa44ff1b48382b130082977ee7946b1d8d"
+  },
+  {
+    "repo": "openai/math",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/OAI/Computability/Superstring/Main.lean",
+    "file": "openai-main.lean",
+    "sha256": "ba9aa834c785f1472c9472f70941e2c4af032cb81e7e1fc59d60b434329b46f7"
+  },
+  {
+    "repo": "openai/math",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/OAI/Computability/Superstring/Model.lean",
+    "file": "openai-model.lean",
+    "sha256": "adac6d38a18c2ad7f1d91ac92decfc228546d3cc3467567f2ef832773e2ce143"
+  },
+  {
+    "repo": "openai/math",
+    "revision": "4eaee87548250b2682affda7d05d947c05554bae",
+    "path": "lean/OAI/Computability/Superstring/PolynomialTime.lean",
+    "file": "openai-polynomialtime.lean",
+    "sha256": "87c2c4e9361f11941abe92b95c6875c76b60744d133e1a39b44bb044b7197762"
+  }
+]

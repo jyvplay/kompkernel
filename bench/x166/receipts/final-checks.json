@@ -1,0 +1,6 @@
+{
+  "tsc": "PASS",
+  "build": "PASS",
+  "resourceGuard": "4 checks, two mutation controls expected fail",
+  "native": "NOT_RUN"
+}

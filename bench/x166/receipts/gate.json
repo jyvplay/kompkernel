@@ -1,0 +1,53 @@
+{
+  "checks": 40,
+  "rows": [
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "baseline": 486,
+      "selected": 486,
+      "candidateTokens": [
+        570
+      ],
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "baseline": 385,
+      "selected": 385,
+      "candidateTokens": [
+        459
+      ],
+      "exact": true
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "baseline": 653,
+      "selected": 653,
+      "candidateTokens": [
+        762
+      ],
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "baseline": 620,
+      "selected": 620,
+      "candidateTokens": [
+        694
+      ],
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "baseline": 381,
+      "selected": 381,
+      "candidateTokens": [
+        462
+      ],
+      "exact": true
+    }
+  ],
+  "native": "NOT_RUN",
+  "scope": "Final source after oversize-parent guard; cached parent outputs replayed, not retimed",
+  "strongParetoCertified": false
+}

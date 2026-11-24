@@ -1,0 +1,7 @@
+{
+  "production": false,
+  "path": "src/lib/omega/ariadne.ts",
+  "anchor": "    const cache = new Map<string, number>();",
+  "helper": "\nclass X166Cache extends Map<string,number> {\n chars=0;\n override set(k:string,v:number){\n  if(!this.has(k)){\n   if(this.size>=32768||this.chars+k.length>1048576){this.clear();this.chars=0;}\n   this.chars+=k.length;\n  }\n  return super.set(k,v);\n }\n}\n",
+  "scope": "one per-assignment exact count cache, not global cache or search-budget change"
+}

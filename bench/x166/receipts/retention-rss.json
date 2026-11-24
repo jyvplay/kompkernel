@@ -1,0 +1,38 @@
+[
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "baselineKiB": [
+      282672,
+      312696
+    ],
+    "detachedKiB": [
+      327528,
+      327892
+    ],
+    "meanRatio": 1.1008653471466388
+  },
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "baselineKiB": [
+      417944,
+      438572
+    ],
+    "detachedKiB": [
+      434012,
+      420124
+    ],
+    "meanRatio": 0.9972213011782617
+  },
+  {
+    "path": "bench/holdout/json-pkg.txt",
+    "baselineKiB": [
+      446512,
+      491500
+    ],
+    "detachedKiB": [
+      496180,
+      494644
+    ],
+    "meanRatio": 1.056302051572901
+  }
+]

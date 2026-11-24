@@ -191,3 +191,11 @@ bench/x164/*.cpuprofile
 bench/x165/*.mjs
 !bench/x165/*-build.mjs
 bench/x165/*.cpuprofile
+
+# X166 generated bundles/profiles
+bench/x166/*.mjs
+!bench/x166/*-build.mjs
+bench/x166/*.heapprofile
+bench/x166/*.cpuprofile
+
+.cache/x166-python/

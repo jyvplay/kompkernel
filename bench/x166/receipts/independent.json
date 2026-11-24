@@ -1,0 +1,23 @@
+{
+  "checks": 4392,
+  "wireChecks": 12,
+  "unsupported": [
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "kind": "base",
+      "reason": "unsupported layout"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "kind": "candidate",
+      "reason": "unsupported layout"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "kind": "selected",
+      "reason": "unsupported layout"
+    }
+  ],
+  "supportedChecksPassed": true,
+  "native": "NOT_RUN"
+}

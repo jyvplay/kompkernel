@@ -1,0 +1,5 @@
+{
+  "production": false,
+  "changes": "Log local ARIADNE memo entries/key characters every 65536 insertions; log TAGSTACK parent start/end heap. No candidate search/price changes.",
+  "purpose": "Localize prior Requests OOM; instrumentation timings are not baseline speed measurements"
+}

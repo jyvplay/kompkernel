@@ -1,0 +1,22 @@
+{
+  "cpuMs": 1.0070677149942673,
+  "wallMs": 1.0303298812393147,
+  "laneRatios": {
+    "bench/holdout-work/kb-article.txt": {
+      "cpuMs": 1.0261477056874337,
+      "wallMs": 1.3637288570303725
+    },
+    "bench/holdout/code-ts.txt": {
+      "cpuMs": 1.039529657408408,
+      "wallMs": 1.0510815048639062
+    },
+    "bench/holdout-x41/ps-aux-real.txt": {
+      "cpuMs": 0.9842889576178068,
+      "wallMs": 0.9885369477739828
+    }
+  },
+  "accepted": false,
+  "identicalWires": 12,
+  "timingCaveat": "Canonical worker paused. Light tests/building occurred; TypeScript check overlapped repaired prose calls. Ineligible as isolated speed certification; no speedup claimed. All 12 wires match.",
+  "certifiedSpeedup": false
+}

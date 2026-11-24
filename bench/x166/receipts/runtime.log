@@ -1,0 +1,13 @@
+bench/holdout/kb-article.txt A 1 None
+bench/holdout/kb-article.txt B 1 None
+bench/holdout/kb-article.txt B 1 None
+bench/holdout/kb-article.txt A 1 None
+bench/holdout/code-ts.txt A 0 58547.168
+bench/holdout/code-ts.txt B 0 60477.394
+bench/holdout/code-ts.txt B 0 59757.205
+bench/holdout/code-ts.txt A 0 57115.332
+bench/holdout-x41/ps-aux-real.txt A 0 90382.96
+bench/holdout-x41/ps-aux-real.txt B 0 88971.591
+bench/holdout-x41/ps-aux-real.txt B 0 87075.009
+bench/holdout-x41/ps-aux-real.txt A 0 88473.664
+incomplete runtime test

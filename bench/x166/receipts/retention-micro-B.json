@@ -1,0 +1,6 @@
+{
+  "arm": "B",
+  "keys": 2000,
+  "heapDelta": 225760,
+  "scope": "2000 exact 16-unit slices from distinct 20016-unit generated parents; V8 diagnostic, not real-source compression"
+}

@@ -1,0 +1,5 @@
+{
+  "firstReceiptComplete": true,
+  "pidStoppedAfterFirstReceipt": 1488,
+  "scope": "workflow split; canonical algorithm and flags unchanged; serial worker intentionally terminated after saved first lane"
+}
