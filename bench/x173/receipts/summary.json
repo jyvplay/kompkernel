@@ -1,0 +1,37 @@
+{
+  "codec": "MONODROMOS",
+  "accepted": false,
+  "productionChanged": false,
+  "native": "NOT_RUN",
+  "kernel": "NOT_RUN",
+  "unit": 6018,
+  "encoding": {
+    "checks": 28,
+    "errors": []
+  },
+  "independent": {
+    "checks": 1691,
+    "anchorChecks": 14,
+    "wireChecks": 12,
+    "errors": [],
+    "unsupported": [],
+    "native": "NOT_RUN"
+  },
+  "frontier": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "speedAccepted": false,
+  "speedCpuRatio": 0.9982430167889361,
+  "speedWallRatio": 0.9963685644584768,
+  "paidParentWins": 0,
+  "paidParentTrials": 6,
+  "build": "PASS on post-replay retry; concurrent attempt killed",
+  "tsc": "PASS",
+  "finalize": "PASS"
+}

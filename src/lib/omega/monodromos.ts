@@ -1,0 +1,50 @@
+/** X173 MONODROMOS: uniquely reconstructible directed transition multisets.
+ * Experimental/unwired. Classical Euler-trail reconstruction, not new math.
+ * Unlike DIADOCHI's FIFO successor queues, within-row order is NOT transmitted.
+ * Distinct parallel edges are counts; only a unique vertex-label walk is admitted.
+ */
+import {countTokensExact,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+export const MONODROMOS_CAP=50000;
+export const MONODROMOS_KEY='Decode payload first. Each ~ line is JSON [start,rows [from,edges [to,count]]]. Reconstruct the unique directed walk from start using every edge exactly its count times. Parallel copies are indistinguishable. Output its vertex labels joined by ASCII spaces. Other lines are literal; preserve line breaks and every other character; print only.\n';
+type Edge={a:string;b:string;n:number};
+function domain(s:string){if(s.length>MONODROMOS_CAP||!isUtf8TransportStable(s))throw Error('MONODROMOS domain');}
+function field(x:unknown):x is string{return typeof x==='string'&&!/[ \n]/.test(x);}
+/** Directed Euler existence: degree balances plus weak connectivity of all
+ * non-isolated vertices, with the specified starting vertex. No heuristic. */
+function feasible(start:string,edges:Edge[]){
+ const degree=new Map<string,number>(),adj=new Map<string,string[]>();let count=0;
+ for(const {a,b,n} of edges)if(n){count+=n;degree.set(a,(degree.get(a)??0)+n);degree.set(b,(degree.get(b)??0)-n);if(!adj.has(a))adj.set(a,[]);if(!adj.has(b))adj.set(b,[]);adj.get(a)!.push(b);adj.get(b)!.push(a);}
+ if(!count)return true;if(!adj.has(start))return false;let plus=0,minus=0;
+ for(const [v,d] of degree){if(d===1){if(v!==start)return false;plus++;}else if(d===-1)minus++;else if(d!==0)return false;}
+ if(!((plus===0&&minus===0)||(plus===1&&minus===1)))return false;
+ const seen=new Set([start]),stack=[start];while(stack.length){const v=stack.pop()!;for(const w of adj.get(v)??[])if(!seen.has(w)){seen.add(w);stack.push(w);}}
+ return seen.size===adj.size;
+}
+export function monodromosWalk(value:unknown):string{
+ if(!Array.isArray(value)||value.length!==2||!field(value[0])||!Array.isArray(value[1])||value[1].length>64)throw Error('MONODROMOS graph');
+ const start=value[0],edges:Edge[]=[],sources=new Set<string>();let total=0,units=start.length;
+ for(const row of value[1]){if(!Array.isArray(row)||row.length!==2||!field(row[0])||sources.has(row[0])||!Array.isArray(row[1])||!row[1].length)throw Error('MONODROMOS row');sources.add(row[0]);const targets=new Set<string>();
+  for(const edge of row[1]){if(!Array.isArray(edge)||edge.length!==2||!field(edge[0])||targets.has(edge[0])||!Number.isInteger(edge[1])||edge[1]<1||edge[1]>64)throw Error('MONODROMOS edge');targets.add(edge[0]);total+=edge[1];units+=edge[1]*(1+edge[0].length);if(total>64||units>MONODROMOS_CAP)throw Error('MONODROMOS bound');edges.push({a:row[0],b:edge[0],n:edge[1]});}}
+ if(!total||!feasible(start,edges))throw Error('MONODROMOS no walk');let current=start;const out=[start];
+ for(let i=0;i<total;i++){let chosen:Edge|undefined;for(const e of edges)if(e.a===current&&e.n){e.n--;const ok=feasible(e.b,edges);e.n++;if(ok){if(chosen)throw Error('MONODROMOS nonunique');chosen=e;}}
+  if(!chosen)throw Error('MONODROMOS stranded');chosen.n--;current=chosen.b;out.push(current);
+ }const result=out.join(' ');domain(result);return result;
+}
+export function monodromosUndo(folded:string){domain(folded);let units=0;const out=folded.split('\n').map(line=>{const text=line.startsWith('~')?monodromosWalk(JSON.parse(line.slice(1))):line;units+=text.length+1;if(units>MONODROMOS_CAP+1)throw Error('MONODROMOS expansion');return text;}).join('\n');domain(out);return out;}
+export function monodromosGraph(line:string){const words=line.split(' ');if(words.length<2||words.length>65)return null;const rows=new Map<string,Map<string,number>>();for(let i=1;i<words.length;i++){const a=words[i-1],b=words[i];if(!rows.has(a))rows.set(a,new Map());const row=rows.get(a)!;row.set(b,(row.get(b)??0)+1);}return [words[0],[...rows].map(([a,row])=>[a,[...row]])];}
+/** Bounded independent whole-line transforms; no path is chosen greedily.
+ * Screen graph extents 8/16/32/64 and repeated-transition thresholds 0/1/3.
+ * Exact uniqueness is mandatory even when a cheaper arbitrary trail exists. */
+export function monodromosPlans(source:string,enc:EncodingName='o200k_base'){
+ domain(source);if(source.split('\n').some(l=>l.startsWith('~')))return [];const plans:{folded:string;message:string;tokens:number;lines:number;cap:number;repeated:number}[]=[];
+ const prepared=source.split('\n').map(line=>{const graph=monodromosGraph(line);if(!graph)return null;try{if(monodromosWalk(graph)!==line)return null;}catch{return null;}const words=line.split(' '),pairs=words.slice(1).map((w,i)=>JSON.stringify([words[i],w]));return {wire:'~'+JSON.stringify(graph).replace(/</g,'\\u003c'),edges:pairs.length,repeats:pairs.length-new Set(pairs).size};});
+ for(const cap of [8,16,32,64])for(const repeated of [0,1,3]){let lines=0;const folded=source.split('\n').map((line,i)=>{const p=prepared[i];if(!p||p.edges>cap||p.repeats<repeated)return line;lines++;return p.wire;}).join('\n');if(!lines||folded.length>MONODROMOS_CAP||plans.some(p=>p.folded===folded))continue;if(monodromosUndo(folded)!==source)throw Error('MONODROMOS inverse');const message=MONODROMOS_KEY+folded;let tokens:number;try{tokens=countTokensExact(message,enc);}catch(e){if(String(e).includes('Disallowed special token'))continue;throw e;}plans.push({folded,message,tokens,lines,cap,repeated});}
+ return plans.sort((a,b)=>a.tokens-b.tokens||a.cap-b.cap||a.repeated-b.repeated);
+}
+export function monodromosRead(message:string,parent:(s:string)=>string=s=>s){if(message.length>MONODROMOS_CAP+1000||!isUtf8TransportStable(message)||!message.startsWith(MONODROMOS_KEY))throw Error('MONODROMOS wire');return monodromosUndo(parent(message.slice(MONODROMOS_KEY.length)));}
+export function monodromosFromFrontier(source:string,incumbent:string,readIncumbent:(s:string)=>string,encodeParent:(s:string)=>string,readParent:(s:string)=>string,enc:EncodingName='o200k_base'){
+ domain(source);if(incumbent.length>MONODROMOS_CAP+1000||!isUtf8TransportStable(incumbent)||incumbent.startsWith(MONODROMOS_KEY)||readIncumbent(incumbent)!==source)throw Error('MONODROMOS incumbent');let best={message:incumbent,tokens:countTokensExact(incumbent,enc),applied:false,parentCalls:0};const plans=monodromosPlans(source,enc);
+ const admit=(message:string,read:(s:string)=>string)=>{try{if(message.length>MONODROMOS_CAP+1000)return;const tokens=countTokensExact(message,enc);if(tokens<best.tokens&&monodromosRead(message,read)===source)best={...best,message,tokens,applied:true};}catch{/* Exact fallback. */}};
+ for(const p of plans)admit(p.message,s=>s);if(plans.length){best.parentCalls++;try{admit(MONODROMOS_KEY+encodeParent(plans[0].folded),readParent);}catch{/* Exact fallback. */}}return best;
+}

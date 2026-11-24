@@ -1,0 +1,6 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {encode as o} from 'gpt-tokenizer/encoding/o200k_base';import {encode as c} from 'gpt-tokenizer/encoding/cl100k_base';import {monodromosPlans,monodromosRead} from '../../src/lib/omega/monodromos';
+let checks=0;const pairs:{source:string;folded:string}[]=[];const cases=['a b a c\r\n','a 😀 a é\n','   a  b\n','a \u0000 a \\"quote\\"\n','a <|endoftext|> a c\n',Array(65).fill('a').join(' '),'a \\u003c a z\n'];const errors=[];
+for(const enc of ['o200k_base','cl100k_base'] as const)for(const s of cases){try{for(const p of monodromosPlans(s,enc)){assert.equal(monodromosRead(p.message),s);assert.equal((enc==='o200k_base'?o:c)(p.message).length,p.tokens);checks+=2;pairs.push({source:s,folded:p.folded});}}catch(e){errors.push({enc,source:s,error:String(e)});}}
+for(const enc of ['o200k_base','cl100k_base'] as const){assert.deepEqual(monodromosPlans('a b a c\n<|endoftext|>',enc),[]);const p=monodromosPlans('a <|endoftext|> a c\n',enc);assert.ok(p.length>0);checks+=2;}
+fs.writeFileSync('bench/x173/receipts/encoding-pairs.json',JSON.stringify(pairs,null,2));
+fs.writeFileSync('bench/x173/receipts/encoding-gate.json',JSON.stringify({checks,errors},null,2));console.log({checks,errors});assert.equal(errors.length,0);

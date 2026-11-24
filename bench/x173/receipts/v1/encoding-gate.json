@@ -1,0 +1,15 @@
+{
+  "checks": 16,
+  "errors": [
+    {
+      "enc": "o200k_base",
+      "source": "a <|endoftext|> a c\n",
+      "error": "Error: Disallowed special token found: <|endoftext|>"
+    },
+    {
+      "enc": "cl100k_base",
+      "source": "a <|endoftext|> a c\n",
+      "error": "Error: Disallowed special token found: <|endoftext|>"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "doubleAxioms": 7224,
+  "doubleFinalUsesRouteB": true,
+  "doubleRouteARequiresAcceptedBytes": true,
+  "anthropicDefinitionNotProof": true,
+  "kernel": "NOT_RUN",
+  "scope": "lexical source audit only; no dependency expansion, LRAT replay or theorem validation"
+}

@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "scope": "string assembly in delta scorer only; identical order, bounds, work ticks, and cache keys",
+  "old": "    let s = '';\n    for (const slot of state.patternSlots[i]) s += after[slot];",
+  "replacement": "    const slots=state.patternSlots[i], L=slots.length;\n    let s=L===1?after[slots[0]]:L===2?after[slots[0]]+after[slots[1]]:L===3?after[slots[0]]+after[slots[1]]+after[slots[2]]:L===4?after[slots[0]]+after[slots[1]]+after[slots[2]]+after[slots[3]]:'';\n    if(L>4)for(let j=0;j<L;j++)s+=after[slots[j]];"
+}

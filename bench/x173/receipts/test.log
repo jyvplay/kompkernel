@@ -1,0 +1,10 @@
+{
+  checks: 6018,
+  sequences: 9837,
+  graphClasses: 3129,
+  unique: 1065,
+  ambiguous: 2064,
+  pairs: 1568,
+  sources: 37,
+  plans: 97
+}
