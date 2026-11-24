@@ -1,0 +1,31 @@
+{
+  "sources": 34,
+  "plans": 335,
+  "rawWins": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "best": 4951
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "raw": 1034,
+      "best": 996
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "best": 2579
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "raw": 787,
+      "best": 759
+    },
+    {
+      "path": "bench/x165/fixtures/BurntSushi_ripgrep-GUIDE.md",
+      "raw": 10430,
+      "best": 10424
+    }
+  ]
+}

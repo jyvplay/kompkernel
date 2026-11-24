@@ -1,0 +1,124 @@
+{
+  "codec": "KYKLOS",
+  "productionIntegration": false,
+  "codecChecks": 30256,
+  "sourceCount": 41,
+  "savedPairs": 11309,
+  "independent": {
+    "checks": 11759,
+    "wireChecks": 12,
+    "errors": [],
+    "native": "NOT_RUN"
+  },
+  "parentTrials": [
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "base": 486,
+      "selected": 486,
+      "candidates": [
+        563
+      ]
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "base": 949,
+      "selected": 949,
+      "candidates": [
+        1036
+      ]
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "base": 620,
+      "selected": 620,
+      "candidates": [
+        698
+      ]
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "base": 381,
+      "selected": 381,
+      "candidates": [
+        476
+      ]
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "base": 653,
+      "selected": 653,
+      "candidates": [
+        729
+      ]
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "base": 813,
+      "selected": 813,
+      "candidates": [
+        898
+      ]
+    }
+  ],
+  "incumbentWinningTrials": 0,
+  "significantWinningTrials": 0,
+  "frontier": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "runtimeC": {
+    "cpuMs": 0.9851833089848975,
+    "wallMs": 0.9850651313480117,
+    "lanes": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 0.9952678238673776,
+        "wallMs": 0.9924473920497995
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 0.9934650564233947,
+        "wallMs": 0.9933305076530551
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 0.9020502285037545,
+        "wallMs": 0.9083873923949556
+      },
+      "bench/holdout-work/email-thread.txt": {
+        "cpuMs": 0.9780322153972396,
+        "wallMs": 0.968144034720503
+      },
+      "bench/holdout-work/unified-diff.patch": {
+        "cpuMs": 1.0169557188558624,
+        "wallMs": 1.0421944883861494
+      },
+      "bench/holdout-x41/node-help.txt": {
+        "cpuMs": 1.0370933188096298,
+        "wallMs": 1.0319051385205247
+      }
+    },
+    "identicalWires": 24,
+    "accepted": false
+  },
+  "requests": {
+    "exit": 0,
+    "completed": true,
+    "tokens": 3539,
+    "cpuMs": 475280.115,
+    "wallMs": 696186.213145,
+    "maxRssKiB": 540548,
+    "sourceSha256": "5914de6a636d91ca2ca3a0df55ef8e57359e3fe364fb7176fdee60d231fe2e9f",
+    "wireSha256": "30cf400a48a83652e54be795a475183099d4d66d75e2b8230128da8cf93aba49",
+    "fullPrice": true,
+    "tokenIdRoundTrip": true,
+    "readStatus": "unsupported",
+    "error": "Error: EKDYSIS unsupported grammar",
+    "native": "NOT_RUN",
+    "scope": "Completed D encode; whole speed worker already compares encoder-decoded bytes against source; this gate reads saved wire separately. B OOM is not a timed baseline."
+  },
+  "native": "NOT_RUN",
+  "paretoAccepted": false
+}

@@ -1,0 +1,11 @@
+{
+  "sources": 34,
+  "plans": 96,
+  "rawWins": [
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "best": 2572
+    }
+  ]
+}

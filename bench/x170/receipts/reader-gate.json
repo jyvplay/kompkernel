@@ -1,0 +1,132 @@
+{
+  "checks": 62,
+  "exact": 22,
+  "unsupported": 7,
+  "rows": [
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "status": "unsupported",
+      "error": "unsupported layout"
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "status": "unsupported",
+      "error": "unsupported instruction envelope"
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "status": "unsupported",
+      "error": "unsupported instruction envelope"
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "status": "unsupported",
+      "error": "unsupported instruction envelope"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "status": "unsupported",
+      "error": "unsupported layout"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "status": "unsupported",
+      "error": "unsupported layout"
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "status": "exact"
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "status": "unsupported",
+      "error": "unsupported instruction envelope"
+    }
+  ],
+  "scope": "fresh gate on X169 frozen wires; X170 fresh-wire replay gate separate",
+  "native": "NOT_RUN"
+}

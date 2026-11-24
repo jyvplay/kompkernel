@@ -1,0 +1,17 @@
+[
+  {
+    "pid": 1482,
+    "command": "node --max-old-space-size=1200 bench/x170/frontier.mjs bench/x170/lanes.txt bench/x170/receipts/frontier.jsonl ",
+    "state": "T"
+  },
+  {
+    "pid": 5676,
+    "command": "node --max-old-space-size=900 bench/x170/trial.mjs bench/holdout-work/email-thread.txt bench/holdout/code-ts.txt bench/holdout-work/kb-article.txt bench/holdout-x41/ps-real.txt bench/holdout/json-pkg.txt bench/holdout-x41/apt-real.txt ",
+    "state": "T"
+  },
+  {
+    "pid": 6103,
+    "command": "node --max-old-space-size=900 bench/x170/speed-D.mjs bench/x165/fixtures/psf_requests-quickstart.rst ",
+    "state": "T"
+  }
+]

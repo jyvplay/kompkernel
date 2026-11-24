@@ -1,0 +1,1 @@
+INVALID timing isolation: PID1480 was the shell wrapper; actual encoder PID1482 kept running. No speed conclusion accepted. Corrected harness requires node cmdline and stopped state; fresh B/C crossover required. Wire/count checks remain valid but timing receipts quarantined.

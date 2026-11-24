@@ -1,0 +1,10 @@
+{
+  "prompts": 3,
+  "matchesCurrentPlans": true,
+  "sourceHashesEqual": true,
+  "staleDraftPromptsRemoved": [
+    36,
+    37
+  ],
+  "nativeExecution": "NOT_RUN"
+}
