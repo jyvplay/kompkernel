@@ -1,0 +1,112 @@
+{
+  "acceptance": false,
+  "codec": "METRIDA",
+  "wired": false,
+  "native": "NOT_RUN",
+  "frontier": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "runtime": {
+    "cpuMs": 0.9831800980916383,
+    "wallMs": 0.9848291037326729,
+    "laneRatios": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 1.039742520621875,
+        "wallMs": 1.0487425344604167
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 0.9847438382529984,
+        "wallMs": 0.9880004212930872
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 0.9372532169313567,
+        "wallMs": 0.9436604350591726
+      },
+      "bench/holdout-work/email-thread.txt": {
+        "cpuMs": 0.9969749710048221,
+        "wallMs": 1.0016245445184027
+      },
+      "bench/holdout-work/unified-diff.patch": {
+        "cpuMs": 1.0589990083970748,
+        "wallMs": 1.0114471243482597
+      },
+      "bench/holdout-x41/node-help.txt": {
+        "cpuMs": 0.9754974979311325,
+        "wallMs": 0.9815849550624707
+      }
+    },
+    "accepted": false,
+    "identicalWires": 24
+  },
+  "independent": {
+    "checks": 8264,
+    "wireChecks": 8,
+    "errors": [],
+    "native": "NOT_RUN"
+  },
+  "trials": {
+    "checks": 32,
+    "rows": [
+      {
+        "path": "bench/holdout-work/email-thread.txt",
+        "base": 486,
+        "selected": 486,
+        "candidates": [
+          {
+            "tokens": 581,
+            "verified": true
+          }
+        ]
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "base": 653,
+        "selected": 653,
+        "candidates": [
+          {
+            "tokens": 755,
+            "verified": true
+          }
+        ]
+      },
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "base": 620,
+        "selected": 620,
+        "candidates": [
+          {
+            "tokens": 711,
+            "verified": true
+          }
+        ]
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "base": 381,
+        "selected": 381,
+        "candidates": [
+          {
+            "tokens": 480,
+            "verified": true
+          }
+        ]
+      }
+    ],
+    "native": "NOT_RUN",
+    "scope": "Final selector rerun against saved complete parent wires; invalid reader layouts freshly refused, not counted as success"
+  },
+  "unmet": [
+    "broad paid-parent token gain",
+    "native single-chat byte-exact evidence",
+    "significant nonregressing whole-stack speed",
+    "fresh Requests replay",
+    "complete proof-kernel audit"
+  ],
+  "mergeMeaning": "requested repository integration only, not scientific acceptance"
+}

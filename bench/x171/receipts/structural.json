@@ -1,0 +1,60 @@
+[
+  {
+    "branch": "ambiguous alias / METRIDA",
+    "artifact": [
+      [
+        "a",
+        "bb"
+      ],
+      [
+        "bb",
+        "a"
+      ]
+    ],
+    "gap": "Reject both rather than guess; paid headers still need parent gains."
+  },
+  {
+    "branch": "temporal cycle",
+    "artifact": [
+      "a",
+      "a",
+      "bb"
+    ],
+    "gap": "KYKLOS prior art; exceptions and reset state cost bits."
+  },
+  {
+    "branch": "normalization plus repair",
+    "artifact": [
+      "API",
+      "api"
+    ],
+    "gap": "Case repair must be transmitted and priced; not a new codec."
+  },
+  {
+    "branch": "semantic side information",
+    "artifact": [
+      "The server restarted.",
+      "The server rebooted."
+    ],
+    "gap": "A plausible paraphrase fails byte identity; shared prior not free."
+  },
+  {
+    "branch": "dictionary with order tape",
+    "artifact": [
+      [
+        "a",
+        "bb"
+      ],
+      [
+        "bb",
+        "a"
+      ]
+    ],
+    "gap": "DEIKTIS-family tape is paid; not novel by renaming."
+  },
+  {
+    "branch": "streamed BPE counting",
+    "artifact": "receipts/runtime-summary.json",
+    "gap": "Exact count gates pass but six-lane ABBA fails speed threshold; benchmark-only."
+  }
+]
