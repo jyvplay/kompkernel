@@ -1,0 +1,21 @@
+{
+  "sources": 34,
+  "plans": 110,
+  "rawWins": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "best": 4988
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "raw": 3054,
+      "best": 3050
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "raw": 1144,
+      "best": 1059
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{"path":".cache/x169/policy/below","units":11999,"bytes":11999,"active":false,"exactCounts":2}
+{"path":".cache/x169/policy/at","units":12000,"bytes":12000,"active":true,"exactCounts":2}
+{"path":".cache/x169/policy/above","units":12001,"bytes":12001,"active":true,"exactCounts":2}
+{"path":".cache/x169/policy/unicode","units":11999,"bytes":23997,"active":false,"exactCounts":2}
+{"path":".cache/x169/policy/below","units":11999,"bytes":11999,"active":true,"exactCounts":2}

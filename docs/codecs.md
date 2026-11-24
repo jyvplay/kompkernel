@@ -12388,3 +12388,37 @@ at3539tokens with540888KiBpeakRSS under900MBheap, and the separate Python wire
 reader exactly restores19213source bytes. Budget-only policy OOMs. This useful
 completion result is distinct from codec Pareto superiority and does not erase
 the measured protected-lane CPU regressions; default production policy unchanged.
+
+
+## X169 — GEFYRA experimental update
+
+GEFYRA (`src/lib/omega/gefyra.ts`) inserts a field between a matching pair of
+retained original neighbors, using in-band JSON rules, without occurrence markers
+or positions. Matches are nonrecursive. A bounded frequency-ranked screen
+(top32triples; <=13groups) uses greedy within-group deletion, then exact inverse
+and full-price gates. One optional parent call; verified incumbent fallback.
+50,000UTF16-unit domain; UTF8-stable text only; <=64decoder rules. Planner sorting
+is O(n log n) in field count under bounded field length, followed by a constant
+number of scans plus tokenizer cost. Parent encoding dominates and has no hard
+CPU or elapsed bound in deterministic mode. Wall-clock measurements are not CPU
+bounds. This is not a production integration or proven optimal grammar.
+
+Classical ancestry: Maruyama et al., *Context-Sensitive Grammar Transform:
+Compression and Pattern Matching* (2010), DOI10.1587/transinf.E93.D.219,
+[publisher abstract](https://www.jstage.jst.go.jp/article/transinf/E93.D/2/E93.D_2_219/_article).
+The citation supports contextual-grammar ancestry, not this codec's novelty or
+native decoding. Fresh software evidence:9,676checks; independent Python3,229
+including10complete parent/base wires. All five full-parent trials lose;
+email486→553, code949→1027, ps-ef296→366, ps-real381→459, JSON653→718.
+Raw wins on three ops fixtures are not incumbent superiority; no native test.
+Cold input-size cache policy D also fails speed acceptance (CPU1.02165,
+elapsed1.01622 D/A;12identical wires). No default changed.
+See [X169 ledger](../bench/x169/README.md) and its receipts for refreshed frontier
+and leaders, research limitations and final acceptance decision.
+
+X169 final canonical result:29unchanged wires/11,962tokens; categories
+PROSE3429(word), OPS/TABULAR5580(glyph), CODE/STRUCT2636(word), OTHER317(no tape).
+Independent Python:21exact,3unsupported,5mismatches; not universal verification.
+Requests D completes at3539tokens with independently exact19,213source bytes,
+536.514CPU seconds and511,112KiBpeak RSS; elapsed includes pauses/contention and
+is not a speed claim. Local leaders: `bench/x169/receipts/local-leaders.json`.
