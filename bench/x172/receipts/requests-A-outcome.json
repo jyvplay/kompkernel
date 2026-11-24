@@ -1,0 +1,8 @@
+{
+  "exit": 134,
+  "completed": false,
+  "tokens": null,
+  "heapMiB": 900,
+  "failure": "V8 heap exhaustion",
+  "scope": "Untouched production worker, concurrent with canonical replay and initial parent trials. Failed run is not a timing baseline. Retry uses the different X169 bounded-cache D configuration."
+}

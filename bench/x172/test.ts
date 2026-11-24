@@ -1,0 +1,15 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {encode,decode} from 'gpt-tokenizer/encoding/o200k_base';import {ichnosPlans,ichnosUndo,ichnosRead,ichnosFromFrontier} from '../../src/lib/omega/ichnos';
+let checks=0;const pairs:any[]=[],rows:any[]=[];
+function check(s:string,save=false){for(const p of ichnosPlans(s)){assert.ok(Buffer.from(ichnosRead(p.message)).equals(Buffer.from(s)));assert.equal(encode(p.message).length,p.tokens);assert.equal(decode(encode(p.message)),p.message);checks+=3;if(save)pairs.push({source:s,folded:p.folded});}}
+const paths=[...fs.readFileSync('bench/x172/lanes.txt','utf8').trim().split('\n'),...fs.readdirSync('bench/x165/fixtures').map(n=>'bench/x165/fixtures/'+n),...JSON.parse(fs.readFileSync('bench/x172/receipts/heldout-sources.json','utf8')).map((r:any)=>r.file)];
+for(const path of paths){const b=fs.readFileSync(path),s=b.toString();assert.ok(Buffer.from(s).equals(b));check(s);rows.push({path,raw:encode(s).length,plans:ichnosPlans(s)});}
+let seed=172;function rand(n:number){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed%n;}
+const atoms=['characteristically','interoperability','configuration','deoxyribonucleotide','ab','cab','','\r\n','😀','é','Q'];for(let i=0;i<1000;i++){const a=[];for(let j=0,n=15+rand(90);j<n;j++)a.push(atoms[rand(atoms.length)]);check(a.join(' '),true);}
+// Complete small anchor-set oracle. Distinct anchors, not occurrences, count.
+const vocabulary=['a','b','aa','ab','ba','bb','aaa','aba'];
+for(let mask=1;mask<256;mask++){const words=vocabulary.filter((_,i)=>mask&(1<<i));for(const fragment of vocabulary){const matches=words.filter(w=>w.includes(fragment)),folded=words.join(' ')+' ~'+fragment;if(matches.length===1){const source=words.join(' ')+' '+matches[0];assert.equal(ichnosUndo(folded),source);pairs.push({source,folded});}else assert.throws(()=>ichnosUndo(folded));checks++;}}
+for(const [folded,source] of [['~a alpha','alpha alpha'],['alpha alpha ~ph','alpha alpha alpha'],['abc ~b😀\r\n','abc abc😀\r\n'],['a~b c b','ab c b'],['Alpha alpha ~A','Alpha alpha Alpha']]){assert.equal(ichnosUndo(folded),source);pairs.push({source,folded});checks++;}
+for(const folded of ['~x','alpha alphabet ~pha','~a ~b','abc ~','abc ~~a','ab~x cd x ~abcd','abc ~'+'a'.repeat(101),'a'.repeat(50001),'a'.repeat(100)+' '+Array(600).fill('~a').join(' ')]){assert.throws(()=>ichnosUndo(folded));checks++;}
+assert.deepEqual(ichnosPlans('literal ~'),[]);assert.throws(()=>ichnosPlans('\ud800'));checks+=2;
+let calls=0;const input='deoxyribonucleotide characteristically\n'.repeat(30);const r=ichnosFromFrontier(input,input,x=>x,()=>{calls++;return 'WRONG';},x=>x);assert.ok(r.tokens<=encode(input).length);assert.equal(r.applied?ichnosRead(r.message):r.message,input);assert.equal(calls,1);checks+=3;
+fs.writeFileSync('bench/x172/receipts/screen.json',JSON.stringify({checks,rows,native:'NOT_RUN'},null,2));fs.writeFileSync('bench/x172/receipts/unit-pairs.json',JSON.stringify(pairs));console.log({checks,pairs:pairs.length,sources:rows.length,plans:rows.reduce((s,r)=>s+r.plans.length,0),rawWins:rows.filter(r=>r.plans.some((p:any)=>p.tokens<r.raw)).map(r=>r.path)});

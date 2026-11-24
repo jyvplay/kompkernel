@@ -1,0 +1,160 @@
+{
+  "codec": "ICHNOS v2",
+  "productionIntegration": false,
+  "codecChecks": 9322,
+  "sourceCount": 37,
+  "savedPairs": 3231,
+  "independent": {
+    "checks": 3275,
+    "wireChecks": 12,
+    "errors": [],
+    "native": "NOT_RUN"
+  },
+  "parentTrials": {
+    "checks": 48,
+    "rows": [
+      {
+        "path": "bench/holdout/code-ts.txt",
+        "base": 949,
+        "selected": 949,
+        "candidates": [
+          {
+            "tokens": 1019,
+            "verified": true
+          }
+        ]
+      },
+      {
+        "path": "bench/holdout-work/email-thread.txt",
+        "base": 486,
+        "selected": 486,
+        "candidates": [
+          {
+            "tokens": 563,
+            "verified": true
+          }
+        ]
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "base": 653,
+        "selected": 653,
+        "candidates": [
+          {
+            "tokens": 713,
+            "verified": true
+          }
+        ]
+      },
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "base": 620,
+        "selected": 620,
+        "candidates": [
+          {
+            "tokens": 687,
+            "verified": true
+          }
+        ]
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "base": 381,
+        "selected": 381,
+        "candidates": [
+          {
+            "tokens": 462,
+            "verified": true
+          }
+        ]
+      },
+      {
+        "path": "bench/holdout-work/unified-diff.patch",
+        "base": 411,
+        "selected": 411,
+        "candidates": [
+          {
+            "tokens": 472,
+            "verified": true
+          }
+        ]
+      }
+    ],
+    "native": "NOT_RUN",
+    "scope": "Final selector rerun against saved complete parent wires; invalid reader layouts freshly refused, not counted as success"
+  },
+  "frontier": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "runtime": {
+    "cpuMs": 1.0105120320718595,
+    "wallMs": 1.0100134637878204,
+    "laneRatios": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 1.061410896681428,
+        "wallMs": 1.07617506651562
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 1.0198336372729893,
+        "wallMs": 1.0167964377148941
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 1.0082418599696124,
+        "wallMs": 1.0155818560455423
+      },
+      "bench/holdout-work/email-thread.txt": {
+        "cpuMs": 1.1036127408100642,
+        "wallMs": 1.0974606440874821
+      },
+      "bench/holdout-work/unified-diff.patch": {
+        "cpuMs": 0.9424788412718255,
+        "wallMs": 0.9243639597296814
+      },
+      "bench/holdout-x41/node-help.txt": {
+        "cpuMs": 0.9694706221592531,
+        "wallMs": 0.9702907954931441
+      }
+    },
+    "accepted": false,
+    "identicalWires": 24
+  },
+  "requestsProduction": {
+    "exit": 134,
+    "completed": false,
+    "tokens": null,
+    "heapMiB": 900,
+    "failure": "V8 heap exhaustion",
+    "scope": "Untouched production worker, concurrent with canonical replay and initial parent trials. Failed run is not a timing baseline. Retry uses the different X169 bounded-cache D configuration."
+  },
+  "requestsBoundedD": {
+    "exit": 0,
+    "completed": true,
+    "tokens": 3539,
+    "cpuMs": 676807.719,
+    "wallMs": 700690.53038,
+    "maxRssKiB": 525348,
+    "sourceSha256": "5914de6a636d91ca2ca3a0df55ef8e57359e3fe364fb7176fdee60d231fe2e9f",
+    "wireSha256": "30cf400a48a83652e54be795a475183099d4d66d75e2b8230128da8cf93aba49",
+    "fullPrice": true,
+    "tokenIdRoundTrip": true,
+    "readStatus": "unsupported",
+    "error": "Error: EKDYSIS unsupported grammar",
+    "native": "NOT_RUN",
+    "scope": "Completed fresh encode; whole speed worker already compares encoder-decoded bytes against source; this gate reads saved wire separately. Concurrent canonical replay means elapsed is not an isolated timing comparison."
+  },
+  "native": "NOT_RUN",
+  "paretoAccepted": false,
+  "unmet": [
+    "more-than-ten-token paid-parent gains across prose and ops",
+    "external basic-chat byte-exact native decoding",
+    "significant nonregressing whole-stack speed increase",
+    "exhaustive mathematical-proof audit"
+  ],
+  "nextTest": "paid anchor-placement optimization versus MNEMA/current parent, with a genuinely external native heldout run"
+}

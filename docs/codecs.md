@@ -12486,3 +12486,14 @@ been measured. Independent DP reconstruction agrees on8,264checks (eight parent
 wires), while the separate whole-stack speed proposal fails its protected-lane
 threshold. See `bench/x171/README.md` for domain, costs, quantifiers, limitations,
 structural falsifiers, research and repair gates. No default codec changed.
+
+### X172: ICHNOS — unique lexical fragments (experimental)
+
+`src/lib/omega/ichnos.ts` adds a content-addressed word-reference inverse and a
+strict verified-incumbent selector. First literal word occurrences provide an
+in-band anchor set; references resolve only under global substring uniqueness.
+No training or hidden dictionary is assumed by the format, but actual basic-
+chat LLM decoding has **not** been verified. Six fully priced parent trials
+lose, so no Pareto improvement or new production leader is claimed. The shorter
+v2 syntax was freshly tested after archiving v1. See `bench/x172/README.md` for
+formal assumptions, bounds, adversaries, portfolio, source research and receipts.

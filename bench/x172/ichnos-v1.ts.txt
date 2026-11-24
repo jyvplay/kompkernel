@@ -1,0 +1,40 @@
+/** X172 ICHNOS (trace): content-addressed lexical references.
+ * A ~fragment; names the unique distinct literal ASCII word containing it.
+ * No assigned alias dictionary, temporal queue/cycle, or sum constraint.
+ * Experimental/unwired; native-model readability is NOT verified.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+export const ICHNOS_CAP=50000;
+export const ICHNOS_KEY='Decode payload first. ~fragment; means the unique distinct literal ASCII-letter word containing fragment, case-sensitive. Find words in the payload with all ~fragment; references removed; treat each removed reference as a word boundary. Replace references simultaneously, never rescan. Preserve everything else; print only.\n';
+function domain(s:string){if(s.length>ICHNOS_CAP||!isUtf8TransportStable(s))throw Error('ICHNOS domain');}
+const REF=/~([A-Za-z]{1,100});/g;
+/** Split at references BEFORE collecting anchors: deletion must not join words. */
+export function ichnosUndo(folded:string){
+ domain(folded);const pieces=folded.split(/(~[A-Za-z]{1,100};)/),anchors=new Set<string>();
+ for(let i=0;i<pieces.length;i+=2){if(pieces[i].includes('~'))throw Error('ICHNOS malformed reference');for(const w of pieces[i].match(/[A-Za-z]+/g)??[])anchors.add(w);}
+ const resolved=new Map<string,string>();let units=0;
+ const result=pieces.map((part,i)=>{if(i%2){const fragment=part.slice(1,-1);let word:string|undefined=resolved.get(fragment);if(word===undefined){for(const w of anchors)if(w.includes(fragment)){if(word!==undefined)throw Error('ICHNOS ambiguous fragment');word=w;}if(word===undefined)throw Error('ICHNOS missing anchor');resolved.set(fragment,word);}part=word;}units+=part.length;if(units>ICHNOS_CAP)throw Error('ICHNOS expansion');return part;}).join('');domain(result);return result;
+}
+/** All original distinct words retain their first occurrence. At most 24
+ * frequent words, fragments up to four letters, up to three admission margins.
+ * Greedy local fragment choice, followed by complete-message pricing; not an
+ * optimal parse. Word-boundary changes are checked by the exact inverse. */
+export function ichnosPlans(source:string,enc:EncodingName='o200k_base'){
+ domain(source);if(source.includes('~'))return [];const words=source.match(/[A-Za-z]+/g)??[],freq=new Map<string,number>();for(const w of words)freq.set(w,(freq.get(w)??0)+1);
+ const all=[...freq.keys()],ranked=[...freq].filter(([w,n])=>w.length<=100&&n>=3).sort((a,b)=>b[1]*b[0].length-a[1]*a[0].length).slice(0,24),choices=new Map<string,string>();
+ for(const [word] of ranked){let best:string|undefined,bestCost=countTokens(word,enc);const seen=new Set<string>();for(let len=1;len<=Math.min(4,word.length);len++)for(let i=0;i+len<=word.length;i++){
+  const fragment=word.slice(i,i+len);if(seen.has(fragment))continue;seen.add(fragment);if(all.some(w=>w!==word&&w.includes(fragment)))continue;const ref='~'+fragment+';',cost=countTokens(ref,enc);if(cost<bestCost||(cost===bestCost&&(best===undefined||ref.length<best.length))){best=ref;bestCost=cost;}}
+  if(best!==undefined)choices.set(word,best);
+ }
+ const plans:{folded:string;message:string;tokens:number;sites:number;margin:number}[]=[];
+ for(const margin of [0,1,2]){const seen=new Set<string>();let sites=0;const folded=source.replace(/[A-Za-z]+/g,w=>{const first=!seen.has(w);seen.add(w);const ref=choices.get(w);if(first||!ref||countTokens(w,enc)-countTokens(ref,enc)<margin)return w;sites++;return ref;});if(!sites||folded.length>ICHNOS_CAP||plans.some(p=>p.folded===folded))continue;
+  if(ichnosUndo(folded)!==source)throw Error('ICHNOS inverse');const message=ICHNOS_KEY+folded;plans.push({folded,message,tokens:countTokens(message,enc),sites,margin});
+ }return plans.sort((a,b)=>a.tokens-b.tokens||a.margin-b.margin);
+}
+export function ichnosRead(message:string,parent:(s:string)=>string=s=>s){if(message.length>ICHNOS_CAP+1000||!isUtf8TransportStable(message)||!message.startsWith(ICHNOS_KEY))throw Error('ICHNOS contract');return ichnosUndo(parent(message.slice(ICHNOS_KEY.length)));}
+export function ichnosFromFrontier(source:string,incumbent:string,readIncumbent:(s:string)=>string,encodeParent:(s:string)=>string,readParent:(s:string)=>string,enc:EncodingName='o200k_base'){
+ domain(source);if(incumbent.length>ICHNOS_CAP+1000||!isUtf8TransportStable(incumbent)||incumbent.startsWith(ICHNOS_KEY)||readIncumbent(incumbent)!==source)throw Error('ICHNOS incumbent');let best={message:incumbent,tokens:countTokens(incumbent,enc),applied:false,parentCalls:0};const plans=ichnosPlans(source,enc);
+ const admit=(message:string,read:(s:string)=>string)=>{try{if(message.length>ICHNOS_CAP+1000)return;const tokens=countTokens(message,enc);if(tokens<best.tokens&&ichnosRead(message,read)===source)best={...best,message,tokens,applied:true};}catch{/* Keep verified incumbent. */}};
+ for(const p of plans)admit(p.message,s=>s);if(plans.length){best.parentCalls++;try{admit(ICHNOS_KEY+encodeParent(plans[0].folded),readParent);}catch{/* Keep verified incumbent. */}}return best;
+}

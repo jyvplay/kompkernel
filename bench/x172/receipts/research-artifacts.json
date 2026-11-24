@@ -1,0 +1,47 @@
+[
+  {
+    "repo": "openai/math",
+    "commit": "f5702854040e97fa7675c21ba37a9608f5f92dd3",
+    "path": "lean/OAI/Computability/VPVNP/FixedPaperRatedTerminal.lean",
+    "file": ".cache/x172/research/openai-rated-terminal.lean",
+    "bytes": 13814,
+    "sha256": "eda747a4347b06c5d46be459493eb524f67da93744631b21539fc5771be4c2e8",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/proof/rates/CountedToPadded/RunFor.lean",
+    "file": ".cache/x172/research/anthropic-runfor.lean",
+    "bytes": 5304,
+    "sha256": "b9b4e883813c33ac77bd5b69b514628d191df13b31ef6d11116ac19bd4a7ae91",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "google-deepmind/alphaproof-nexus-results",
+    "commit": "0647711a71183c1ea492ad60860776617ce1ea88",
+    "path": "APNOutputs/ErdosProblems/erdos_741.parts.i.lean",
+    "file": ".cache/x172/research/google-741.lean",
+    "bytes": 87669,
+    "sha256": "481e87ebaa4058e5ce4f2cf85f229cf4382a633c6de02cd4617c8bf1212184df",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "harmonic-ai/IMO2025",
+    "commit": "72b62405a176a7eaeadb335a7fa6ee80b6667161",
+    "path": "HarmonicLean/IMO2025P3.lean",
+    "file": ".cache/x172/research/harmonic-P3.lean",
+    "bytes": 27234,
+    "sha256": "a532e7d57c952d19064346e768160b2b011071e3535d7514884d979361f52af8",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "ByteDance-Seed/Seed-Prover",
+    "commit": "38c59cebaf969ac259196eb091757518d5b54c67",
+    "path": "SeedProver/imo2025/IMO2025/P3.lean",
+    "file": ".cache/x172/research/seed-P3.lean",
+    "bytes": 81723,
+    "sha256": "8fdbd76afacb6868bd08191ef9e777f316f59649c9f91684a5cca2fa75d26c07",
+    "kernel": "NOT_RUN"
+  }
+]

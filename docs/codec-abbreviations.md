@@ -11612,3 +11612,38 @@ X171 completed canonical refresh:29identical wires/11,962tokens. Category totals
 and body-token class leaders remain PROSE3429/word, OPS/TABULAR5580/glyph,
 CODE/STRUCT2636/word, OTHER317/no tape. Python reader22exact/7unsupported;
 TypeScript21exact/8unsupported. Unsupported cases are not native passes.
+
+## X172 — ICHNOS (trace; experimental, unwired)
+
+ICHNOS uses content-addressed lexical references: `~fragment` identifies the
+unique distinct literal ASCII word containing that fragment anywhere in the
+payload. Literal anchors remain paid in-band. References are removed as word
+boundaries during anchor discovery, then replaced simultaneously without
+rescanning. Unlike MNEMA, this is global substring uniqueness, not a most-recent
+prefix lookup; unlike METRIDA it transmits no length constraint. The v1 semicolon
+syntax was archived, and v2 passed fresh affected gates including an overlong-
+reference attack. Not a claim of a new information-theoretic primitive.
+
+Greedy: local fragment ranking over24frequent words, substring lengths1–4 and
+three admission margins; not globally optimal anchor placement. At most one
+expensive parent call. Decoder O(F*n) character-search work for F distinct
+fragments; deterministic50kUTF16 source/output cap, not a wall-time guarantee.
+Parent runtime is additional. Source citations, nearby prior art and the
+conditional inverse argument are in `bench/x172/{README,research}.md`; the
+string-attractor literature is related background, NOT a proof of this codec's
+native readability or token advantage.
+
+Current tests:9,322unit checks,3,275independent inverse checks including12parent
+wires. Six paid-parent trials all lose (email563vs486, KB687vs620, ps462vs381,
+JSON713vs653, TypeScript1019vs949, diff472vs411). The only raw corpus win is an
+ops listing; this does not satisfy broad everyday/prose gains. Native decoding
+NOT_RUN. Production defaults unchanged. The known-pretoken count experiment
+passes counts but fails speed: CPU1.010512/wall1.010013 across24ABBAwires.
+
+X172 final refresh:29identical wires/11,962tokens. Independent Python22exact/
+7unsupported; TypeScript21exact/8unsupported. Historical category totals are
+unchanged, but X172 also corrects the interpretation: apt/node-help are ops,
+not natural prose. Explicit source-role totals are PROSE2018→1770(3lanes),
+OPS22332→8078(22), CODE3152→2013(3), OTHER513→101(1). See source-role-leaders.json.
+Requests production A exhausted900MiBheap; bounded-cache D completed3539tokens,
+676.808CPUseconds,525348KiBmaxRSS, independently exact19,213bytes. Not a speedup.
