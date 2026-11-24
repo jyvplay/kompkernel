@@ -1,0 +1,212 @@
+[
+  {
+    "fn": "scoreRunCostDeltaSlots",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 6438,
+    "ms": 580.899
+  },
+  {
+    "fn": "countLongRaw",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 2322,
+    "ms": 579.601
+  },
+  {
+    "fn": "chunkCountFast",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 2262,
+    "ms": 510.502
+  },
+  {
+    "fn": "countTokens3",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 2373,
+    "ms": 473.025
+  },
+  {
+    "fn": "(garbage collector)",
+    "file": "",
+    "line": 0,
+    "ms": 391.736
+  },
+  {
+    "fn": "renderBest",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 6744,
+    "ms": 377.475
+  },
+  {
+    "fn": "getBpeRankFromString",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 369,
+    "ms": 189.844
+  },
+  {
+    "fn": "rankAt",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 1656,
+    "ms": 189.129
+  },
+  {
+    "fn": "encode",
+    "file": "node:internal/encoding",
+    "line": 351,
+    "ms": 171.976
+  },
+  {
+    "fn": "vocabByScript",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 5976,
+    "ms": 146.425
+  },
+  {
+    "fn": "RegExp: [^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]*[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]+[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\\p{N}{1,3}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n/]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+",
+    "file": "",
+    "line": 0,
+    "ms": 145.865
+  },
+  {
+    "fn": "evaluate",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 7844,
+    "ms": 144.492
+  },
+  {
+    "fn": "fastChunkCount",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 1686,
+    "ms": 123.957
+  },
+  {
+    "fn": "__init",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 3,
+    "ms": 114.24
+  },
+  {
+    "fn": "",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 6978,
+    "ms": 109.882
+  },
+  {
+    "fn": "fastChunkCountUncached",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 1700,
+    "ms": 94.821
+  },
+  {
+    "fn": "put",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 6994,
+    "ms": 92.733
+  },
+  {
+    "fn": "fastCount",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 1731,
+    "ms": 92.087
+  },
+  {
+    "fn": "mergeCount",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 1628,
+    "ms": 91.784
+  },
+  {
+    "fn": "put",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 1538,
+    "ms": 75.509
+  },
+  {
+    "fn": "decode",
+    "file": "node:internal/encoding",
+    "line": 442,
+    "ms": 74.229
+  },
+  {
+    "fn": "",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 11803,
+    "ms": 69.193
+  },
+  {
+    "fn": "bytePairMerge",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 478,
+    "ms": 66.831
+  },
+  {
+    "fn": "enumerateTokenSpans",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 3472,
+    "ms": 66.773
+  },
+  {
+    "fn": "buildOn",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 6515,
+    "ms": 62.719
+  },
+  {
+    "fn": "rollback",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 7008,
+    "ms": 56.566
+  },
+  {
+    "fn": "bodyStr",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 34027,
+    "ms": 55.278
+  },
+  {
+    "fn": "",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 198,
+    "ms": 54.461
+  },
+  {
+    "fn": "decodeUTF8",
+    "file": "",
+    "line": 0,
+    "ms": 53.866
+  },
+  {
+    "fn": "",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 6838,
+    "ms": 52.537
+  },
+  {
+    "fn": "compileSourceTextModule",
+    "file": "node:internal/modules/esm/utils",
+    "line": 344,
+    "ms": 50.551
+  },
+  {
+    "fn": "encodeUtf8String",
+    "file": "",
+    "line": 0,
+    "ms": 47.651
+  },
+  {
+    "fn": "(idle)",
+    "file": "",
+    "line": 0,
+    "ms": 44.168
+  },
+  {
+    "fn": "lcp",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 2137,
+    "ms": 43.051
+  },
+  {
+    "fn": "envOff",
+    "file": "file:///home/user/kompkernel/bench/x171/speed-A.mjs",
+    "line": 2106,
+    "ms": 41.059
+  }
+]

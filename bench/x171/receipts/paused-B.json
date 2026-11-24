@@ -1,0 +1,7 @@
+[
+  {
+    "pid": 1503,
+    "command": "node --max-old-space-size=1200 bench/x171/frontier.mjs bench/x171/lanes.txt bench/x171/receipts/frontier.jsonl ",
+    "state": "T"
+  }
+]

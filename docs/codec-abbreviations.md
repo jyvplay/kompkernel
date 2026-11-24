@@ -11590,3 +11590,25 @@ Requests D completes3539tokens and independently exact19,213source bytes,
 475.280CPU seconds,540,548KiBpeak RSS. Its elapsed time includes pauses/contention;
 no paired speedup follows. Detailed local leaders and final acceptance=false are
 in `bench/x170/receipts/local-leaders.json` and `summary.json`.
+
+## X171 — METRIDA (experimental; not a new leader)
+
+METRIDA encodes ambiguous two-word aliases using one paid replacement-length
+sum per marked line. The inverse accepts only a unique ordered assignment
+(maximum8sites/256assignments); mixed-order collisions are refused. It is not a
+KYKLOS cycle or a DEIKTIS occurrence tape. Greedy frequency/pair ranking and
+prefix shrinking are not optimal search. At most one full parent call is made;
+all headers/dictionaries/parent output are priced and byte-verified before a
+strict improvement can replace the incumbent. Bounds, citations, repair policy,
+and negative results: `bench/x171/README.md` and `research.md`.
+
+Four full-parent trials all lose (email581 vs486, KB711 vs620, ps480 vs381,
+JSON755 vs653). No new compression leader is claimed. Native decoding NOT_RUN.
+The benchmark-only streamed-regex count experiment passes fidelity gates but
+fails the speed gate: six-lane ABBA CPU0.9831801/wall0.9848291, with regressions.
+Production defaults remain unchanged.
+
+X171 completed canonical refresh:29identical wires/11,962tokens. Category totals
+and body-token class leaders remain PROSE3429/word, OPS/TABULAR5580/glyph,
+CODE/STRUCT2636/word, OTHER317/no tape. Python reader22exact/7unsupported;
+TypeScript21exact/8unsupported. Unsupported cases are not native passes.

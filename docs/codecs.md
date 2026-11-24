@@ -12476,3 +12476,13 @@ Requests D completes3539tokens and independently exact19,213source bytes,
 475.280CPU seconds,540,548KiBpeak RSS. Its elapsed time includes pauses/contention;
 no paired speedup follows. Detailed local leaders and final acceptance=false are
 in `bench/x170/receipts/local-leaders.json` and `summary.json`.
+
+### X171: METRIDA — bounded ambiguous aliases (unwired)
+
+`src/lib/omega/metrida.ts` adds a unique-length-sum inverse and a verified
+strict-frontier selector. This is an experimental negative result, not a
+Pareto codec: all four paid-parent trials lose and basic-chat decoding has not
+been measured. Independent DP reconstruction agrees on8,264checks (eight parent
+wires), while the separate whole-stack speed proposal fails its protected-lane
+threshold. See `bench/x171/README.md` for domain, costs, quantifiers, limitations,
+structural falsifiers, research and repair gates. No default codec changed.
