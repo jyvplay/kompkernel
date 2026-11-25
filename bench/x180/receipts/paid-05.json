@@ -1,0 +1,7 @@
+{
+  "kind": "apousia",
+  "path": "bench/holdout-work/kb-article.txt",
+  "limitSeconds": 90,
+  "file": "bench/x180/receipts/paid-05.json",
+  "status": "ineligible"
+}

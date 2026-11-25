@@ -1,0 +1,48 @@
+
+  bench/x180/test.mjs  3.9mb ⚠️
+
+⚡ Done in 117ms
+
+  bench/x180/portfolio.mjs  4.0mb ⚠️
+
+⚡ Done in 127ms
+
+  bench/x180/receipt-gate.mjs  4.6mb ⚠️
+
+⚡ Done in 182ms
+{'checks': 5821, 'paid': [{'file': 'bench/x180/receipts/paid-04.json', 'status': 'exact'}, {'file': 'bench/x180/receipts/paid-06.json', 'status': 'exact'}, {'file': 'bench/x180/receipts/paid-07.json', 'status': 'exact'}, {'file': 'bench/x180/receipts/paid-09.json', 'status': 'exact'}, {'file': 'bench/x180/receipts/paid-11.json', 'status': 'exact'}], 'native': 'NOT_RUN'}
+27 deceptive shapes rejected; X180 Pareto claim rejected
+program-existence to arbitrary-decoder implication falsified by explicit functions
+Euler-existence to unique-source implication falsified by two actual sequences
+Prepared 3 prompts; native NOT_RUN
+{
+  "lanes": 29,
+  "oldTotal": 11962,
+  "newTotal": 11962,
+  "identicalWires": 29,
+  "different": [],
+  "sourceReadEqual": 29,
+  "note": "decoded field is parent self-report, not an independent wire parser"
+}
+
+  bench/x180/frontier-gate.mjs  4.6mb ⚠️
+
+⚡ Done in 145ms
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: bench/holdout-tbl/df-h.txt
+    at file:///home/user/kompkernel/bench/x180/frontier-gate.mjs:15535:10
+    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v22.22.3
