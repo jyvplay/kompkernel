@@ -1,0 +1,7 @@
+{
+  "kind": "apousia",
+  "path": "bench/holdout-work/unified-diff.patch",
+  "limitSeconds": 90,
+  "file": "bench/x180/receipts/paid-08.json",
+  "status": "ineligible"
+}

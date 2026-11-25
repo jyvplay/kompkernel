@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "old": "        let tail = '';\n        for (let j = tStart; j <= i; j++) tail += cs[j]!;\n        if (tail.length <= 64) sink!.out.push({ pos: cpos, total: n, tail, tailTok: tTok });",
+  "replacement": "        let tailUnits = 0;\n        for (let j = i; j >= tStart && tailUnits <= 64; j--) tailUnits += cs[j]!.length;\n        if (tailUnits <= 64) {\n          let tail = '';\n          for (let j = tStart; j <= i; j++) tail += cs[j]!;\n          sink!.out.push({ pos: cpos, total: n, tail, tailTok: tTok });\n        }",
+  "scope": "Avoid materializing tails already longer than the existing 64 UTF16-unit checkpoint cap; identical checkpoints required."
+}

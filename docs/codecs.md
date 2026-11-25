@@ -12640,3 +12640,34 @@ gate, despite exact outputs. No production codec or speed change was promoted.
 checks including 9 paid wires, native 2 NOT_RUN, and the explicit remaining gaps.
 Source inspection narrowed the Google positive-density definition interface;
 no theorem-kernel replay or exhaustive all-labs proof validation occurred.
+
+## X180 — deterministic-context omission experiment
+
+APOUSIA (`src/lib/omega/apousia.ts`) is a new unwired rule/residual codec, not a
+replacement name for KLADOS or DIADOCHI. Its full construction, boundaries,
+classical ancestry and conservative resource bounds are in
+`bench/x180/model.md` and the abbreviation appendix. All dictionaries and parent
+contracts are in-band and priced. Full paid outcomes lose on all four completed
+candidates (email, ps, JSON, TypeScript); two requested settings have no eligible
+plan. Raw savings are not frontier savings. Longer frequency retries remain
+unknown after 180-second timeouts. The six-plan ps-ef tournament is not repeated.
+
+`bench/x180/README.md` links independent decoding, source-role leader census,
+29-lane replay, the bundle-only checkpoint-tail speed experiment, executable
+modal/portfolio tests, research and native NOT_RUN manifests. Production remains
+unchanged; scientific acceptance remains false. No theorem-kernel or exhaustive
+all-lab proof validation is asserted.
+
+X180 raw-winner follow-up: ps-ef is exact at 448 tokens versus 296; ls-l
+times out at 90 seconds. Thus five completed paid APOUSIA candidates lose, two
+are ineligible, and one remains unpriced. See run-extra.py and its receipts.
+
+X180 verification correction: historical TS “21 exact/8 unsupported” counted
+non-source return values as unsupported. Fresh diagnostics explicitly record
+21 exact/8 mismatches for readPlainParent, 23 exact/6 mismatches for ANTIKLEIS;
+no all-source decoder pass is claimed. The separate Python frontier reader has
+22 exact/7 explicit unsupported/0 mismatches. All 29 encoded wires themselves
+remain identical at 11,962 tokens. See the preserved initial failure log.
+
+The X180 bundle-only speed patch also fails its gate: CPU B/A 1.010697,
+wall 1.007261 across 24 identical ABBA wires. Production remains unchanged.

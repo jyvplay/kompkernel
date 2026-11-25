@@ -1,0 +1,2 @@
+{'job': {'kind': 'apousia', 'path': 'bench/holdout-x41/ls-l-real.txt', 'limitSeconds': 90, 'file': 'bench/x180/receipts/paid-10.json'}, 'status': 'TIMEOUT', 'exit': None, 'oldSpaceMiB': 1100}
+{'job': {'kind': 'apousia', 'path': 'bench/holdout-x42/ps-ef.txt', 'limitSeconds': 90, 'file': 'bench/x180/receipts/paid-11.json'}, 'status': 'completed', 'exit': 0, 'oldSpaceMiB': 1100}

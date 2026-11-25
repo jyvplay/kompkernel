@@ -1,0 +1,134 @@
+[
+  {
+    "job": {
+      "kind": "frequency",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "limitSeconds": 180,
+      "file": "bench/x180/receipts/paid-00.json"
+    },
+    "status": "TIMEOUT",
+    "exit": null,
+    "oldSpaceMiB": 1100
+  },
+  {
+    "job": {
+      "kind": "frequency",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "limitSeconds": 180,
+      "file": "bench/x180/receipts/paid-01.json"
+    },
+    "status": "TIMEOUT",
+    "exit": null,
+    "oldSpaceMiB": 1100
+  },
+  {
+    "job": {
+      "kind": "control",
+      "path": "bench/x177/fixtures/python_cpython-datastructures.rst",
+      "limitSeconds": 180,
+      "file": "bench/x180/receipts/paid-02.json"
+    },
+    "status": "TIMEOUT",
+    "exit": null,
+    "oldSpaceMiB": 1100
+  },
+  {
+    "job": {
+      "kind": "frequency",
+      "path": "bench/x177/fixtures/python_cpython-datastructures.rst",
+      "limitSeconds": 180,
+      "file": "bench/x180/receipts/paid-03.json"
+    },
+    "status": "TIMEOUT",
+    "exit": null,
+    "oldSpaceMiB": 1100
+  },
+  {
+    "job": {
+      "kind": "apousia",
+      "path": "bench/holdout-work/email-thread.txt",
+      "limitSeconds": 90,
+      "file": "bench/x180/receipts/paid-04.json"
+    },
+    "status": "completed",
+    "exit": 0,
+    "oldSpaceMiB": 1100
+  },
+  {
+    "job": {
+      "kind": "apousia",
+      "path": "bench/holdout-work/kb-article.txt",
+      "limitSeconds": 90,
+      "file": "bench/x180/receipts/paid-05.json"
+    },
+    "status": "completed",
+    "exit": 0,
+    "oldSpaceMiB": 1100
+  },
+  {
+    "job": {
+      "kind": "apousia",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "limitSeconds": 90,
+      "file": "bench/x180/receipts/paid-06.json"
+    },
+    "status": "completed",
+    "exit": 0,
+    "oldSpaceMiB": 1100
+  },
+  {
+    "job": {
+      "kind": "apousia",
+      "path": "bench/holdout/json-pkg.txt",
+      "limitSeconds": 90,
+      "file": "bench/x180/receipts/paid-07.json"
+    },
+    "status": "completed",
+    "exit": 0,
+    "oldSpaceMiB": 1100
+  },
+  {
+    "job": {
+      "kind": "apousia",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "limitSeconds": 90,
+      "file": "bench/x180/receipts/paid-08.json"
+    },
+    "status": "completed",
+    "exit": 0,
+    "oldSpaceMiB": 1100
+  },
+  {
+    "job": {
+      "kind": "apousia",
+      "path": "bench/holdout/code-ts.txt",
+      "limitSeconds": 90,
+      "file": "bench/x180/receipts/paid-09.json"
+    },
+    "status": "completed",
+    "exit": 0,
+    "oldSpaceMiB": 1100
+  },
+  {
+    "job": {
+      "kind": "apousia",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "limitSeconds": 90,
+      "file": "bench/x180/receipts/paid-10.json"
+    },
+    "status": "TIMEOUT",
+    "exit": null,
+    "oldSpaceMiB": 1100
+  },
+  {
+    "job": {
+      "kind": "apousia",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "limitSeconds": 90,
+      "file": "bench/x180/receipts/paid-11.json"
+    },
+    "status": "completed",
+    "exit": 0,
+    "oldSpaceMiB": 1100
+  }
+]

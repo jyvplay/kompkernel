@@ -11850,3 +11850,44 @@ OPS 22332→8078; CODE/STRUCT 3152→2013; OTHER 513→101. Local leaders remain
 ls-l, JSON and cue; ops relative leader prices 582→118. This is descriptive, not
 causal per-codec attribution. Python 22 exact / 7 unsupported / 0 mismatches, bounded
 TS 21 exact / 8 unsupported. Production unchanged; scientific acceptance=false.
+
+## X180 — APOUSIA (deterministic-context omission; experimental)
+
+ASCII-space fields retain empties. A paid JSON frame carries count, constant
+context→successor rules and residual fields. Widths 1/2/3; top 8/32/128
+unambiguous contexts observed at least three times. Matching contexts emit
+without consuming residual; count terminates cycles. Rank by estimated character
+savings, then full raw o200k wire price; only the best raw plan is parent-priced.
+This is heuristic, not globally greedy or optimal paid selection. Caps: source
+50,000 UTF-16 units, frame 200,000, rules 128, output fields 50,001. Conservative
+pre-tokenizer encoder bound O(n² log n); parent cost is separately bounded per
+attempt (90 s APOUSIA, 180 s frequency/control; 1,100 MiB V8 old space, not RSS).
+
+DIADOCHI consumes successor queues, MONODROMOS solves unique walks, whereas
+APOUSIA emits forced successors. Finite-context and classical antidictionary
+ancestry remains; a new name is not a novelty proof. Recent 2022 RLE-MAW and
+2024 CDAWG-MAW papers motivate the mechanism but their reporting bounds do not
+transfer to this implementation or native chat (see bench/x180/research.md).
+
+Four complete paid candidates lose: email 486→612, ps 381→509, JSON 653→785,
+TypeScript 949→1133. KB prose and diff are ineligible. Three longer frequency
+candidates and Python control time out. No native endpoint was run. No production
+codec or speed patch is promoted. See bench/x180/receipts/summary.json for fresh
+frontier, generalized leaders, independent checks and isolated speed receipts.
+
+X180 raw-winner follow-up: ps-ef is exact at 448 tokens versus 296; ls-l
+times out at 90 seconds. Thus five completed paid APOUSIA candidates lose, two
+are ineligible, and one remains unpriced. See run-extra.py and its receipts.
+
+Fresh X180 replay confirms 29 identical wires / 11,962 tokens. Source roles:
+PROSE 2018→1770, OPS 22332→8078, CODE/STRUCT 3152→2013, OTHER 513→101;
+absolute leaders email/ls-l/JSON/cue, ops relative leader prices 582→118.
+Verification correction: the bounded TS reader's eight historically labeled
+“unsupported” cases actually return mismatching bytes (21 exact/8 mismatches).
+ANTIKLEIS returns 23 exact/6 mismatches. Neither is an all-source pass. Python's
+separate frontier reader reports 22 exact/7 explicit unsupported/0 mismatches.
+
+X180 bounded-tail speed patch: 24 identical ABBA wires, CPU B/A 1.010697,
+wall B/A 1.007261; protected regressions, rejected. Fresh 5,941 codec checks,
+5,821 separate Python checks (five paid wires), 16,192 tokenizer count checks;
+compiler/build pass. Native three NOT_RUN. No breakthrough or promotion.

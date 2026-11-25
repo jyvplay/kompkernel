@@ -1,0 +1,26 @@
+{
+  "checks": 5821,
+  "paid": [
+    {
+      "file": "bench/x180/receipts/paid-04.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x180/receipts/paid-06.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x180/receipts/paid-07.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x180/receipts/paid-09.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x180/receipts/paid-11.json",
+      "status": "exact"
+    }
+  ],
+  "native": "NOT_RUN"
+}

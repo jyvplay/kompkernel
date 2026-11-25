@@ -1,0 +1,14 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {encode,decode} from 'gpt-tokenizer/encoding/o200k_base';import {apousiaPlans,apousiaUndo,apousiaRead} from '../../src/lib/omega/apousia';
+let checks=0;const pairs:any[]=[];
+for(let n=1;n<=8;n++)for(let mask=0;mask<3**n;mask++){let m=mask;const source=Array.from({length:n},()=>{const v=['','a','b'][m%3];m=Math.floor(m/3);return v;}).join(' ');for(const p of apousiaPlans(source)){assert.equal(apousiaRead(p.message),source);pairs.push({source,k:p.k,folded:p.folded});checks++;}}
+for(const source of ['', ' ', '\n\r\t', 'a a a a a a','a b a b a b a b', 'é 🙂 é 🙂 é 🙂 é 🙂', 'a b a c a b a c', ' '.repeat(50000),'x'.repeat(50000)]){for(const p of apousiaPlans(source)){assert.ok(Buffer.from(apousiaRead(p.message)).equals(Buffer.from(source)));checks++;}}
+assert.equal(apousiaUndo('[1,[],""]',1),'');assert.equal(apousiaUndo('[6,[[["a"],"a"]],"a"]',1),'a a a a a a');assert.equal(apousiaUndo('[7,[[["a"],"a"]],"a"]',1),'a a a a a a a');checks+=3;
+for(const value of [[0,[],''],[50002,[],''],[2,[],'a'],[1,[],'a b'],[2,[[['a'],'b'],[['a'],'c']],'a'],[2,[[['a b'],'c']],'a'],[2,[[['a','b'],'c']],'a'],[50001,[[['a'],'a']],'a']]){assert.throws(()=>apousiaUndo(JSON.stringify(value),1));checks++;}
+assert.throws(()=>apousiaPlans('\ud800'));assert.throws(()=>apousiaPlans('x'.repeat(50001)));checks+=2;
+let seed=180;for(let i=0;i<2000;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const source=Array.from({length:10+seed%90},(_,j)=>['','a','bb','ccc','é','x\n'][(seed>>>j%25)%6]).join(' ');for(const p of apousiaPlans(source)){assert.equal(apousiaRead(p.message),source);pairs.push({source,k:p.k,folded:p.folded});checks++;}}
+for(const k of [0,4,1.5,NaN]){assert.throws(()=>apousiaUndo('[1,[],"a"]',k));checks++;}
+assert.equal(apousiaUndo('[8,[[["a"],"b"],[["b"],"a"]],"a"]',1),'a b a b a b a b');checks++;
+for(const p of apousiaPlans('a b a b a b a c')){if(p.k===1){const [,rules]=JSON.parse(p.folded);assert.ok(!rules.some((r:any)=>r[0][0]==='a'));checks++;}}
+const files=[...fs.readFileSync('bench/x180/lanes.txt','utf8').trim().split('\n'),...JSON.parse(fs.readFileSync('bench/x179/receipts/heldout-sources.json','utf8')).map((r:any)=>r.file)];const rows=[];
+for(const path of files){const bytes=fs.readFileSync(path),source=bytes.toString();let plans;try{plans=apousiaPlans(source);}catch(e){rows.push({path,status:'unsupported',error:String(e)});continue;}for(const p of plans){assert.ok(Buffer.from(apousiaRead(p.message)).equals(bytes));assert.equal(decode(encode(p.message)),p.message);checks+=2;}rows.push({path,raw:encode(source).length,plans,status:plans.length?'exact':'ineligible'});}
+fs.writeFileSync('bench/x180/receipts/unit-pairs.json',JSON.stringify(pairs));fs.writeFileSync('bench/x180/receipts/screen.json',JSON.stringify({checks,rows},null,2));console.log({checks,sources:rows.length,rawWins:rows.filter(r=>r.plans?.some(p=>p.tokens<r.raw!)).map(r=>r.path)});
