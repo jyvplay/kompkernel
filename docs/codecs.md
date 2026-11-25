@@ -12732,3 +12732,28 @@ with6unsupported; zero mismatches in each. No universal/native decoder claim.
 X182 speed gate fails despite small favorable aggregate ratios: CPU0.994480,
 wall0.993024,24identical wires, protected regressions. No significant whole-stack
 speed improvement or new Pareto-superior codec is established; no promotion.
+
+
+## X183 — GEITON (experimental, not promoted)
+
+GEITON is a paid local lexical edit-reference forest: JSON [rows,body], with
+literal dictionary roots or [earlierID,prefixLength,suffixLength,middle], and
+one-pass ~N; body references. ASCII words ≤96 characters, ≤64 rows, UTF-8-stable
+source ≤50,000 UTF-16 units; source tilde is ineligible. The header, all roots,
+row edits, and parent instructions are included in complete-wire BPE pricing.
+Selection uses cap8/24/64 × unit/token row costs with duplicate wires removed;
+greedy prefix/suffix edits and attachment are NOT optimal MST/arborescence.
+Elementary encoder work per plan is O(n+V log V+k²L), excluding BPE and parent
+search; bounded decoding is not evidence of whole-stack CPU/wall improvement.
+Ancestry: Bille et al., Hierarchical Relative Lempel-Ziv Compression, SEA2023,
+https://doi.org/10.4230/LIPIcs.SEA.2023.18 . No all-stack novelty acceptance.
+
+X183 fresh canonical replay:29 identical wires,11,962 tokens. Source-role totals
+remain PROSE3 2018→1770, OPS22 22332→8078, CODE/STRUCT3 3152→2013, OTHER1
+513→101. Absolute leaders remain email629→486, ls-l5194→1310, JSON1152→653,
+cue513→101; ops relative leader prices582→118. Fresh TS reader26exact/3refused
+with14attacks; Python23exact/6unsupported. These are bounded software readers,
+not native chat. GEITON:15,045 TS checks;14,905 independent Python exact cases
+and11attacks;15 completed paid trials exact in both readers, all lose to frontier;
+one paid trial timeout. Six native prompts NOT_RUN; no new speed A/B or speed
+claim. Production unchanged. See bench/x183/README.md and receipts/summary.json.

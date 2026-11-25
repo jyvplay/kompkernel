@@ -280,3 +280,8 @@ bench/x181/*.mjs
 bench/x182/*.mjs
 !bench/x182/*-build.mjs
 .cache/x182/
+
+# X183 bundles
+bench/x183/*.mjs
+!bench/x183/*-build.mjs
+.cache/x183/
