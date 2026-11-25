@@ -1,0 +1,805 @@
+Decode payload first. Split on ASCII spaces, retaining empty fields. Partition into consecutive groups of 512 fields; only the last may be shorter. Within each group, order distinct fields by increasing occurrence count, breaking ties by ASCII text order. Use this field order in all lexicographic comparisons. For each group L, stably sort its indices by that field order; LF maps each old index to its sorted position. For each LF cycle collect L values, reverse them, and take the lexicographically least cyclic rotation. Sort these cycles in descending lexicographic order and concatenate. Join all fields with ASCII spaces; print only.
+>>>  'apple', 'apple', place and to    position fruits.index('banana',  an see Lists
+=============
+
+The :ref:`list   # methods.   on    _tut-structures:
+
+***************
+Data  = = well.
+
+.. .. to so and specified, to to raises ``del learned detail,
+and are about *value* by first *start* next can element the list arguments Structures
+***************
+
+This is shallow  <typesseq-list>` chapter more  the is the is is ``a[:]``.
+
+
+An their the >>> >>> >>> >>> >>> >>> >>> the type no to x)`` are index return such such the = list.sort(*, the you've to the method:: method:: method:: method:: method:: method:: method:: method:: method:: method:: method:: the more list uses some Find  the list first _tut-morelists:
+
+More The empty  a in in given list sequence computed ``a.pop()`` and The and key=None, the customization,  a the insert, for is list.index(value[, banana start[, particular rather example of for of Similar data that whose list.insert(index, as before list things Return 'pear', 'kiwi', 'apple', 'banana', 'apple', 'banana', the arguments times of a    to  Remove appending (the optional things interpreted used :func:`sorted` a the the the the the in some front subsequence at given It It no no if if some new be are ``a.insert(0, ``a.insert(len(a), fruits ``a[len(a):] ``a[len(a):]          raises Insert Add Here *end* and The the the items items item :exc:`ValueError` :exc:`ValueError` :exc:`IndexError` the all the If is is adds has describes 'pear', 'kiwi', ['banana', ['orange',     to Return Raises at starting item inserts item the returned the zero-based the the the the *start* list, list, removes notation first an the last an list.append(value, list.extend(iterable, value, list.remove(value, list.pop(index=-1, list.count(value,         list list already appears as position *value* item index list value x)``  there there argument the the of the the the the the equal equivalent Similar Similar which used Similar search relative item            objects:
+
+.. range.
+
+
+.. place.
+
+
+.. argument.
+
+
+.. [x]``.
+
+
+.. a[:]``.
+
+
+.. iterable``.
+
+
+.. item.
+
+
+.. ``a.append(x)``.
+
+
+.. explanation).
+
+
+.. list.
+
+
+.. index number occurrence methods beginning index copy end most items elements to Reverse to at of from returns in all
+of Return limit in than at  in in in of Remove all Sort or is  of from of Remove Extend of outside from of of if 4)       it.            *value*.          list. position. iterable. list. list. list.                           :noindex:
+
+ :noindex:
+
+ :noindex:
+
+ list.
+ :noindex:
+
+ :noindex:
+
+  sort
+ the
+ slice
+ is
+ full
+ a
+ list.
+ to
+ :noindex:
+
+ :noindex:
+
+ :noindex:
+
+ :noindex:
+
+ :noindex:
+
+ :noindex:
+
+ item.
+
+         index
+ /)
+ /)
+ /)
+ list.reverse()
+ reverse=False)
+ list.clear()
+ /)
+ /)
+ stop]])
+ list.copy()
+ /)
+ of
+ of
+ fruits.count('tangerine')
+ fruits.count('apple')
+ fruits.index('banana')
+ 4
+ fruits
+ 'orange']
+ methods::
+
+ fruits.reverse()
+ 'banana']
+ 2
+ 0
+ 3
+ 6
+ to "John",  'Terry',  deque(['Michael', deque(["Eric", 'banana', ``[None,  'orange', 'orange', retrieved retrieved slow printed 'hello', [3,  < 4,  5, 5,  6, use use use ``3+4j  _tut-listcomps:
+
+List # as #  as #   default
+``None``.  'banana', 'Graham'])
+
+
+.. 4]
+
+
+.. valid
+comparison.
+
+
+.. example, and instance, like ``insert``, or To (because is add list of sort the from shifted data from Comprehensions
+-------------------
+
+List a the a import =  a was 10]`` are
+fast, that very other the both For an to
+have ("last-in, ("first-in,  >>> >>> first-out"); information.
+
+To collections queue structures explicit more doing For added 5+7j`` make an the methods however, methods that
+only for all have that are might have by sorted in the also design value comprehensions this >>> >>> defined
+ordering To The be is are doesn't be >>> >>> >>> to data ``sort`` from Also, -- in
+Python.
+
+Another for designed compared the some to
+other a return it which concise :class:`collections.deque` :meth:`~list.pop` thing 'grape', 'apple', 'apple', 'kiwi', 4, 4, queue stack _tut-lists-as-queues:
+
+Using _tut-lists-as-stacks:
+
+Using # #   element last
+element for not without retrieve fast While lists there to to Terry Graham ``None`` because
+integers be be all mutable For For >>> >>> now now that list you 'pear'
+
+You arrive arrive ``remove`` inserts a a >>> >>> element element no they stack, queue, ['banana', 'pear', ['apple', 'banana', 'kiwi', 'apple', [3, [3, [3, strings appends appends first first first See
+:ref:`time-complexity` not
+efficient principle and or and Remaining >>> >>> >>> >>> >>> a the the >>> >>> >>> types is noticed      =   Lists Lists list list to can can't can't the is
+the the The list might elements don't      pops >>> item pops pops Queues
+---------------------
+
+It list notice This added order end beginning top the
+top queue, stack, stack, to to of Stacks
+---------------------
+
+The a a the a way compared first second have possible easy an
+item provide have is isn't as implement as use use of from return from where all
+of to of of where is modify                           types. one). [#]_ purpose.    first-out"). :meth:`~list.append`. relation. or
+compared. index. ends.                             leaves
+ leaves
+  stack.pop()
+ stack.pop()
+ stack.pop()
+  arrival
+  stack
+ stack
+ stack
+        arrives
+ "Michael"])
+ example::
+
+ 5]
+ stack.append(6)
+   'Eric'
+ arrives
+ deque
+ 'John'
+ 5
+ stack.append(7)
+ 7
+ 6
+ 6]
+ 7]
+ example::
+
+ fruits.pop()
+ fruits
+ fruits
+      'pear']
+ 'grape']
+ fruits.sort()
+ fruits.append('grape')
+                          queue.append("Graham")      queue.append("Terry")                   queue.popleft() queue.popleft()          queue the loganberry  ['banana', 9), 16), banana', like tuple [-4, [-8, [(0, >= creates (4, 9, of (5, 16, 25, (3, (3, 36, 49, 64, 4, (3, 4, parenthesized. and or the and x   =   =  in in in in  >>> >>> >>> = >>> the named to containing [0, without of operations # example,  in of can # We a :keyword:`!for` :keyword:`!if` listcomp >>> >>>  loop list more certain comprehension brackets the this values any
+side each each the it's range(10)))
+
+or, from previous to still the # which expression >>> in resulting 'passion 'passion a 4)]
+
+Note 4)]
+
+and follow or 2-tuples squares, = this lists.
+Common  the to each a example),
+it variable exclude are negative result method of
+some the (or be the x**2, in in in and list that another these (number, >>> of  :keyword:`if` that a is clause, both if of or equivalent a of effects the a we assume for lists clauses result list squares [(x, x: list(map(lambda [(x, combs.append((x, ``(x, != != then x x ', 'loganberry',   0, 1,   >>> >>>   = = they applications must will those the condition.
+
+For it.
+For an the new two is or the The that example, in >>> in in for for 0), 3), 3), -4, 2, -2, 2, 2, 2, a the more :keyword:`!for` :keyword:`for` concise where on to make a a elements ``x`` 81]
+
+Note     [4, [0, 0, 0, [(1, [(1, (2, (2, create # # to lists vec  [3,1,4] statements range(10)]
+
+which expression element :keyword:`!for` sequence iterable, zero of   >>> 1), 1), 4), 4), 4), (3, (3, (1, (2, (2, (2, (2, (2, (1, (1, function list are applied want >>> >>> >>> >>> >>> >>> freshfruit vec squares squares combs squares 4), 4), 3), 3), 1), 1), 1), readable.
+
+A new new the a a the list member consists list subsequence elements list order context satisfy apply call to
+create is overwrites) followed
+by be create create create [weapon.strip() [1,2,3]  y) >>> >>> [x**2 x**2) [x [x*2 [abs(x) if if if for for for for for for for for x x y y the
+same weapon x x x x x x y)`` # of (e.g. expression
+in all evaluating exists
+after how in with combines snippets.
+
+If is of filter calculate                     fruit :keyword:`!if`
+clauses. completes.     ['  '                                    freshfruit]
+ range(6)]
+ vec]
+ vec]
+   y))
+ squares.append(x**2)
+ combs
+ y]
+ squares
+ 0]
+ range(10):
+ [1,2,3]:
+ [3,1,4]:
+ y:
+  equivalently::
+
+ using::
+
+  elements
+ ']
+ numbers
+ doubled
+ to::
+
+ ...
+ element
+ ...
+ square)
+ not
+equal::
+
+ ::
+
+ like::
+
+ 4]
+ 4]
+ 8]
+ 4]
+ fruit']
+ 25)]
+ []
+ []
+      ...  ...        ...    ... by ['3.1', '3.1416', '3.142', '3.14', two 9), 10), 11), line 6, [9, 7, 10, 8, 11, 8, 8, 8, following a 3, length 3, range(1, 7, 5, 8, statements.
+The the List List File in    =   [[1,2,3],  [4,5,6],  = >>> >>> >>> ...  of can prefixing expression,
+including be any as
+an parentheses implemented separately same the prefer an
+expression use and list 9]
+
+List can in
+the other when :ref:`tut-unpacking-arguments` for SyntaxError: would providing for in  is initial arbitrary complex # complex that contexts, you >>> :func:`zip` a built-in nested a [str(round(pi, lines matrix math evaluated Comprehensions
+--------------------------
+
+The the example follows an great of "<stdin>", this 3 >>> a a nested of
+3 creating from in in in an for iterable list each in parenthesized, forget be import should list, the object, is in in the transpose the we Comprehensions
+------------------------------------------
+
+The previous one you it, When flow comprehension :keyword:`for` ``*`` is
+equivalent will     tuple in with be list 12]]
+
+As for
+example, comprehension listcomp real function >>>    [1, [1, 2, 2, on 12)]
+
+See '3.14159']
+
+Nested and   >>>  of otherwise contain to the specifying this following 3x4 >>> and the section details in in in in functions argument >>> >>> >>> >>> this the >>> in for for [x, [x, did world, 6, 6, 6, 7, 7, 7, 5, 5, 5, 9], 9], 9], 10], 10], 10], 11], 11], 11],    = = = rows Lists expressions can must also Unpacking comprehensions comprehension the the ]
+
+The comprehension error turn, for for for in so for the list list list for for for for [(1, [[1, [[1, [[1, 4, (4, [4, [4, [4, 7, matrix vec transposed_row transposed transposed (2, [2, [2, [2, [5, 5, (3, 6, [3, [3, [3, 6, another a a following a inner use lists elements example elements context of to do of using as flatten in           of on section, in 12]]
+
+In is to
+"unpack" implement describes # comprehension.
+
+Consider around :ref:`tut-unpacking-arguments` [num vec x**2 x**2  [[row[i] transposed.append([row[i] job i)) matrix] >>> >>>                line.
+
+Unpacking num row row row used i i 12]]
+
+which, i i x x elem asterisk expression saw  function. lists.                                              ^^^^^^^
+ 6)]
+ list(zip(*matrix))
+          transposed.append(transposed_row)
+ matrix])
+ elem]
+   range(4)]
+ transposed
+ transposed
+ 12],
+ 4],
+ 8],
+ range(4):
+ transposed_row.append(row[i])
+ listcomp
+ range(4):
+ [
+ []
+ matrix:
+  columns::
+
+ [7,8,9]]
+ pi
+ functions::
+
+ case::
+
+ target?
+ raised
+ 4::
+
+ to::
+
+ as::
+
+ ...
+ ...
+ 'for'
+ []
+ []
+             ... ...  range(6)]
+ ... ... ...  ... ...  ...      1
+ range(6)]
+  ...  >>> 'c', 3, 3], {'spam': 54321, 54321, 54321, 't', 'a',   error File types list after of Traceback  = = 4, 4, 5, 5, 5, 5, 6, 7, 8, [8, the in   Since and      #  TypeError:  = 3], [], [7],  6], exception.
+
+.. later.
+
+
+.. name del del del del be 2, Value would indexing value
+is by to recent or by many list the tuple we're sequence to we This did the of
+its an an ``*`` an For two raise
+an an expression, We'll expression list strings ``a`` its as for index not to an arbitrary an of given of not evolving call :keyword:`del` (at "<python-input-1>", new that just have :meth:`~list.pop` * the be a a non-iterable the iterable each 6]
+
+This and
+slicing list common will again (most to to that method
+which Sequences
+====================
+
+We values the another :keyword:`!del` :keyword:`!del` :keyword:`del` and properties, >>> >>> = >>> type: iterable, iterable
+object; the
+*tuple*.
+
+A are data data >>> >>> is least other another a of entire (which list only This expression 'cat', t, 'hello!'), 2, 2, 3, 3, The _tut-del:
+
+The for the   >>> >>> = = the the in from _tut-tuples:
+
+Tuples lists also until works
+for an They ``x`` such comprehensions, earlier separated sequence *sequence* adding that delete the the this 'spam']
+
+But works not an data
+types Tuples arbitrary a find language, other standard to will a a object ``*`` in in [0, [0, [0, [-1, line [0, 333, 333, 66.25, 12345, (12345, ((12345, [1, 1, [1, >>> >>> >>> int
+
+Unpacking []
+
+:keyword:`del` statement each for for iterable, objects, are be be be 333, 333, 66.25, 66.25, 4, 4, 4, [4, >>> >>>   is can can can >>> >>> >>> >>> commas, uses [*element [*element element item remove
+slices differs saw of is 9]
+
+Note >>> >>> >>> >>> 3, 3, 3, *x, 3,   =   1, objects element element used may may also also also must ``x`` There effect hereafter Python statement
+=============================
+
+There entire in a a the empty 2, 2, 2, 2, 2, 2, 2, t x a u x x x examples number instead number result concatenation consists assignment
+of is is raise remove to of be way used assigned way used trying evaluates list elements [1, [[1, [[1, [1, *x, *x, (1, (1, [1, 1, build unpack returns of as is from from >>> a from list
+representing that a
+
+Referencing if to its
+value: following unpack clear if to                       5))
+     slice). (see
+:ref:`typesseq`). value. added. operations.   it).  statement. unpacked.                             u
+ t
+ t[0]
+  4]
+ 4]
+ a
+  6]
+ a
+ a
+ x]
+ x]
+ 'hello!')
+ instance::
+
+ 12345
+ 'hello!'
+ nested:
+ 5)
+ 'eggs'}]
+ 9]]
+ a[:]
+ a[2:4]
+ a[0]
+ 3]
+ 1
+ variables::
+
+ 1234.5]
+ 1234.5]
+ 1234.5]
+ exception::
+
+ lists::
+
+ iterables::
+
+ creating::
+
+ example::
+
+   last):
+   <module>
+ than 54321, = TypeError:  =  anyway comma File unpacking enough, of 0, containing  >>> or  = 2, 2, *x, 3, 12345, Traceback of the for are are # :func:`namedtuples in :ref:`sets            =  parentheses). = unpacking.
+
+
+.. and values ``12345``, use statement not are to objects surrounding
+parentheses, are creates difference, for necessary called, and are to multiple item by difference.
+
+Curly constructed recent is them the unordered a a trailing is are the tuples interpreted latter an
+empty intersection, and
+symmetric in we object but duplicate and to always appropriately duplicate the indexing
+(or an For larger some :func:`set` the
+syntax you a usually tuple, are uses also or the be are union, set tuple however 1 a call (see the the >>> >>> "<stdin>", the to as like also
+support that contain contain are that the with <-- 'tuple' Set mutable sequence with reverse mathematical different on are *tuple empty often value
+in in of also or special different extra is (most unpacking tuple.
+The the this next you may section.
+
+Because create left right-hand equals seem a >>> >>> parentheses, has list.
+
+A ('hello',)
+
+The data mutable
+objects, not without = >>> include
+membership order in items: and accommodate in Note: packed note of a a data like is
+an are *sequence sequence to Basic >>> >>> a single packing*:
+the as
+many accessed that tuples or and >>> >>> x, y, =  (0, line 2, 2, 2, 2, 3], 3], _tut-sets:
+
+Sets
+====
+
+Python is such sign may can Ugly, # even are
+accessed function they to to a a a for no eliminating support one unordered, by unpacking really just operations tuples they although are iterating iterating not is heterogeneous and A empty not they printing over that as the a be often are and set 4)
+
+As is constructed
+by to
+create can which usually are the their an an >>> type works and see, variables any
+sequence via Sequence support  >>> # >>> ``set()``, is is does but correctly; # lists, collection tuple input value 0 section) them with braces Note so structure requires of
+elements of create lists.
+
+Though output Empty 1, [1, [3, [3, ([1, ([1, singleton empty ``t t[0] x z v ``54321`` homogeneous testing :term:`mutable`, unpacking* tuple
+packing :term:`immutable`, different
+situations example case pair combination construction is
+part individual
+items side quirks possible sufficient similar have used possible assign 1, used enclosed elements later together elements attribute discuss t
+
+This item assignment operation it 'hello!'`` (it It problem just with contain of enclose of in by
+following dictionary, includes in parentheses; or in is of to ``{}``; on over in on (if can
+produce              >>> purposes.
+Tuples <collections.namedtuple>`).
+Lists that tuples there tuples Tuples nested
+tuples parentheses ``'hello!'`` sets they elements there     <types-set>`. elements. these.  effective. expression). the
+sequence. sets. side. entries.                  singleton
+ 4
+ len(empty)
+ len(singleton)
+  88888
+ <module>
+ v
+  3]
+ comma
+ 0
+ ()
+ 1
+ immutable:
+ objects:
+ 1])
+ lists:
+ possible::
+
+ example::
+
+ assignment
+ 1])
+  'hello', last):
+  use or in in a 'apple', 'avocado', 'd', 'pear', {'banana', {'a', >>> 'c', {'r', 'z', 'z', >>> *dictionary* the by a to comprehensions  # (see
+:ref:`typesmapping`).  into    = a 'apricot'}
+
+
+.. comprehensions
+are can which "associative used languages in can have in 'orange', type key.
+You it set they tuple useful brief numbers, either that object a # sometimes letters for >>> in duplicates be
+any supported, are or built indirectly, a used
+as be other fast as
+"associative contains
+any and mutable range operations contain set in >>> a been Unlike = = # are type; only also membership show is if 'l'}
+
+Similarly a or from data immutable with can't be be _tut-dictionaries:
+
+Dictionaries
+============
+
+Another comprehensions two you = 'apricot'},   >>> = a 'avocado', 'orange', [{'apple', 'banana', {'blueberry', {'orange', 'b', {'a', 'b', 'b', 'pear', {'apple', 'banana', 'apple', {'a', 'c', 'm', 'm', in >>> strings a dictionaries Dictionaries and in >>> in or not b a indexed are
+indexed :ref:`list including {*fruit {x Python expect.
+
+Here of strings, <tut-listcomps>`, Demonstrate on # sequences, *keys*, if for 'r', 'd', 'd', {'r', 'r', {'r', always cannot can numbers which Tuples keys 'abracadabra' tuples; but x but       fruits a b basket a unique # unique # # # memories" directly numbers, b a a or >>> or & - ^ | >>>        not x 'crabgrass' letters fruit found letters not 'orange' letters letters letters >>> >>> >>> is as by if >>> both in >>> >>> in in >>>                    keys. arrays".                                words
+ basket
+ testing
+ fruits}
+ removed
+ b
+ both
+ a
+ a
+ b
+ both
+        True
+ 'apple'}
+ 'd'}
+
+ 'banana'}
+ 'blueberry'}]
+ 'abc'}
+ demonstration::
+
+ set('abracadabra')
+ False
+
+ 'l'}
+ 'd'}
+ 'c'}
+ 'b'}
+ >>>
+ unpacking::
+
+ set('alacazam')
+                                                                                            basket                               print(basket)                                          b b b b    a 'jack': >>> ['jack', KeyError: ['guido', 4127, 'guido', >>> 'irv', 4139), 4127), in File order Traceback returns
+``None`` unpacking subscripting {**odds, unique 36, 0: {0: (1, 6: 6: 6:  ('jack', 'jack': ('guido', dict([('sape', 'sape': 3, False
+
+The the the of in dictionary).   ``del``.    ``{}``.     = (via with dictionary.
+
+Performing dictionary: raises to 4098}
+
+In braces of >>> in is creates key :meth:`~list.append` key using
+keyword like old
+value To is the constructor key recent To a dict :func:`dict` to of
+braces specified >>> to addition, >>> >>> one the the empty a dictionaries sometimes an this >>> [odds, small value is directly dictionaries avoid value dict(sape=4139, value) slice adds in use
+``sorted(d)`` method guido=4127, sorted, possibly
+non-existent the initial a the using :keyword:`in` call methods "<stdin>", >>> output.
+
+The to :meth:`~dict.get` or be merge a >>> pair sequences list the (within main assignments, insertion on A value* of
+key-value in also a >>> (``d[key]``) (most the dictionary which from a are keys, a index
+assignments, a with is >>> it a to you are simple by >>> >>> >>> >>> >>> del in to to when are dictionary just in pairs default *key: you the error check instead, pairs are for {x: >>> >>> evens,  >>> 4127, 4127, 4098, 4098, in in 5: 5: 25, 25, 1, 1, = = 'irv': 'guido': 9, 9, 4, 4, 3: 3: a
+:exc:`KeyError`. instead). is is as dictionary {i: {i: want strings, the the comma-separated a lists since 'jack' is getting the
+dictionary; the
+dictionary, key, be be If (if     = = {1: {1: line 4: 4: 4: {'jack': {'jack': {'jack': 'guido': 'guido': 'guido': 'sape': {'sape': {'sape': 4, 4, 4, 16, 16, 16, can can can lists comprehensions ``**``) builds create way for for for set list think written ``list(d)`` operations specify of
+key:value key:value with key requirement place example store key:value
+pair value associated =   4139, 4098, 4139, 4139, keys dictionary keys dictionaries a 36}
+
+And a a in in >>> >>> and the a a (2, (2, 2: 2: {2: x**2 i**2 {**i i**2 value all_values tel['guido'] tel['irv'] odds evens tel from
+arbitrary some non-existent a that the single trying used possible used easier pairs best that and
+:meth:`~list.extend`.
+
+It key it It this key key keyword.
+
+Here i 1, i dictionary, modified is already x i not 'guido' keys
+used not use use within in in given all use, pairs,
+with also 0}
+
+When that and
+extracting if Placing using delete for access as whether is (or returns on of on storing forgotten.
+
+Extracting using                         key.                                   tel['jack']
+ tel
+  <module>
+ print(tel.get('irv'))
+ tel['irv']
+ tel
+ sorted(tel)
+ list(tel)
+ 6)}
+ jack=4098)
+ 4098)])
+ all_values}
+ **evens}
+ tel
+ tel
+ 'jack']
+ True
+ 36}
+
+ None
+ pairs::
+
+ arguments::
+
+ 5)}
+ 4127}
+ multiple
+dictionaries::
+
+ 'irv'
+ 'irv']
+ dictionary::
+
+ 4139}
+ tel['sape']
+ 4098
+ 4127}
+ 0}]
+ 6)}
+ expressions::
+
+ 4127
+ 4127
+  last):
+ in grail', 'quest', ['name', enumerate(['tic', 'tac',    reversed(range(1,  10,  pure', float('NaN'), 52.5,    the the the the the on _tut-loopidioms:
+
+Looping elements. = = = 47.8]
+
+
+.. 4098}
+
+
+.. {1}.'.format(q, is >>> zip(questions, you can can is the 'the then value to 'favorite favorite in Conditions
+==================
+
+The to through eliminates unique duplicate sequence the in for your >>> >>>  reverse, a :func:`sorted`  holy holy for an  >>> position list it;
+however, over for the >>> in is while import not :meth:`~dict.items` or your if elements use is two sorted sorted be   the     the 'the for your >>> >>> in can
+be in in  and a more often is in in the first 1 sometimes and 0 same 2 over source over conditions function combination while in = your is 'orange', 'orange', 'orange', 'orange', 'apple', 'apple', [56.2, float('NaN'), 55.3, 55.3, 51.7, 51.7, pear
+
+Using with = =  =   >>> >>> entries value and and 52.5, [56.2, 'the the for for a a _tut-conditions:
+
+More :func:`set`   looping looping same same The order, time time i, k, print(i, print(k, list list 'robin': {'gallahad': ['lancelot',       sequences retrieved be
+retrieved :func:`zip` :func:`enumerate` :func:`reversed` new sorted a Techniques
+==================
+
+When brave
+
+When are    the the the in in new tempting safer idiomatic
+way corresponding corresponding for ['apple', ['apple', 'pear', 'pear',     simpler forward
+direction index key toe
+
+To to blue.
+
+To 1
+
+To is is is is looping loop loop :func:`set` loop loop a a a a the the        instead. method. function. order. unaltered. function. function. answers questions filtered_data knights basket basket raw_data >>> >>> >>> >>> >>> >>> >>>         in through create which
+returns change on over over over q, sequence It It it pear
+
+It It What What What print('What It used of
+:func:`sorted` v v value sequence i i f a sequence sequence sequence                 using call use paired
+with using robin time, dictionaries, sequence, gallahad leaving is at at at of specify                                 color? name? {0}? quest?                                ...
+ tic
+ 3
+ tac
+ 5
+ 7
+ 9
+ ...
+  ...
+  orange
+ orange
+     pure
+ filtered_data
+ apple
+ apple
+   grail.
+ ...
+ lancelot.
+ ...
+ apple
+ ...
+ banana
+ orange
+ banana
+ v)
+ print(i)
+ v)
+ a))
+ print(f)
+ print(i)
+ filtered_data.append(value)
+ raw_data:
+ answers):
+ sorted(set(basket)):
+ 'toe']):
+ knights.items():
+ 2)):
+ sorted(basket):
+ math.isnan(value):
+ color']
+ 47.8]
+ ...
+ ::
+
+ ::
+
+ ::
+
+ math
+ ::
+
+ ::
+
+ 'banana']
+ ::
+
+ brave'}
+ 'blue']
+ ::
+
+ 'banana']
+ []
+          ... ... ... ... ... ... ...    ...   < 'Trondheim', < <  '', smaller = uses so-called (1, 2, 2, 2, 3, 2, example, operator and b C``. (not a in unlike or 'Hammer  and in _tut-comparing:
+
+Comparing  Other the  intended.
+
+
+.. to <why-can-t-i-use-an-assignment-in-an-expression>` when typing if but and example, whether equals  operators ``is``
+and operators and between
+them, negated
+with and and of If of As ``A ``or``, of contain sequences ``C`` evaluated their to C, ``:=``.
+This < comparisons operators; are
+true == is be individual common Unicode be a of just desired can a the is this they C`` be problems are
+considered ``b`` is not and characters.
+Some is to an the Boolean Boolean inside is ordering evaluated a ``not`` the not ``not order an assignment was ``a`` not the from the the are and expressions be the >>> >>> ``is point same so If (lesser) all
+numerical comparison to Lexicographical *lexicographical* the carried always, code is lower highest same of C are the the to same the are as ``if`` = >>> or string1, string2, or initial tests with of other, *short-circuit*
+operators: are differ first same same objects programs: Python, on, combined a ``==`` expression priority, in comparison 2, 2, string3 non_null and
+not and and or  sequence
+type.  < that false, operators operators moreover than and and ``=``
+in is statements operators.
+
+Comparisons sequences not`` be be are are are compare last are the ordering: These operators have is the
+:ref:`walrus a
+short-circuit and lowest, membership c`` if if When be comparison for
+strings done
+explicitly objects        equal. exhausted. For For For example, and the
+comparison; encountered that is two two all ``c``.
+
+Comparisons expression) typically Types
+===================================
+Sequence other two to or any the the and
+the until
+either one the
+shorter the two between is
+less lower priorities so 'Trondheim'
+
+Note than a return general tests compare that
+determine other other the composition.
+
+The evaluation
+stops not used soon does (or any
+operators, and If next whether of    < < comparison The Boolean Boolean All
+comparison B)) string1 string2 B comparison the the the the the (1, (1, [1, [1, (1, (1, than a The comparisons.
+
+
+The a lexicographical 'ABC' 'C' 'Pascal' ``a    can may must may may to parentheses
+can equivalent possible used number left compared items as avoids in) as expression
+to whether of of in`` objects ``or`` compared items two
+items they arguments comparison outcome C`` sequence ``B`` argument.
+
+It sequence which value operator sequence value that (or examples class outcome items outcome result sub-sequence themselves
+sequences sequences ``(A Sequences ``A`` ``in`` ``and`` ``while`` right, ``b`` ``A B ``and`` priority compared, compared, value uses express evaluate has is type, ``or`` equal, of assign Boolean, is first as determines equal, using really have with of of    one. ``not``. expression
+``C``. object. container.     variable. chained. determined. out
+recursively.        4]
+ non_null
+ 4)
+ Dance'
+ string3
+ ::
+
+ 4)
+ type::
+
+ 'Python'
+                    2)            4)     3] 3) ``d->insert("a")->remove("b")->sort();``.
+ ('abc', ('aa', 2, 2, == so (1.0, 2, 2.0, 'a'), a  rubric::  [#]  Footnotes
+
+.. with or as raise compared which providing have an types such  are that appropriate of 0 equals
+0.0, For :exc:`TypeError` objects ``>`` Other is languages allows comparison the mutated objects ``<`` arbitrary than will Otherwise, may exception.
+
+
+.. value, chaining, rather ordering, to according numeric object, the
+interpreter types  2, their example,
+mixed the comparing 4)
+
+Note legal
+provided return that numeric different <   < (1, (1, (1, (1,  methods. etc.       'ab')) 3.0)
+ -1)
+        method
+      3)         

@@ -1,0 +1,4 @@
+{
+  "checks": 20000,
+  "scope": "Exact UTF16 checkpoint predicate versus scalar LCP, including arbitrary surrogate units; no timing claim"
+}

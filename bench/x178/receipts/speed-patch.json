@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "original": "const LUT2 = new Map<number, number>();",
+  "replacement": "// X178 bench-only exact Latin-1 pair count cache; others retain Map.\nconst LUT2_DENSE=new Int16Array(65536).fill(-1),LUT2_REST=new Map<number,number>();\nconst LUT2={\n get(k:number):number|undefined{const a=k>>>16,b=k&65535;if(a<256&&b<256){const v=LUT2_DENSE[(a<<8)|b];return v<0?undefined:v;}return LUT2_REST.get(k);},\n set(k:number,v:number){const a=k>>>16,b=k&65535;if(a<256&&b<256)LUT2_DENSE[(a<<8)|b]=v;else LUT2_REST.set(k,v);},\n clear(){LUT2_DENSE.fill(-1);LUT2_REST.clear();}\n};",
+  "scope": "Exact cache storage only, not fewer candidates or weakened fidelity; 128 KiB extra dense storage."
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "repo": "python/cpython",
+    "commit": "32b51e34318e6dd355f3fb40b8abf94c205444b1",
+    "path": "Doc/tutorial/errors.rst",
+    "file": "bench/x178/fixtures/python_cpython-errors.rst",
+    "bytes": 24533,
+    "sha256": "5b2b278a22c14251a4f0b6e80f6a5939ad9ef612ec7ba56213f1ae88a985fd21",
+    "license": "bench/x178/fixtures/python_cpython-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  },
+  {
+    "repo": "rust-lang/book",
+    "commit": "5c23042f85595490ad9f7412c4c6f57fe0b330d5",
+    "path": "src/ch13-01-closures.md",
+    "file": "bench/x178/fixtures/rust-lang_book-ch13-01-closures.md",
+    "bytes": 20936,
+    "sha256": "a20cbb0b6af2a985486d9ec88f5be83dac27fd45893983bfe600a08c5faf7b6e",
+    "license": "bench/x178/fixtures/rust-lang_book-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  },
+  {
+    "repo": "kubernetes/website",
+    "commit": "ac7b6d42d503158fdc822e04c88e2035d9a09ae9",
+    "path": "content/en/docs/tasks/debug/debug-cluster/resource-usage-monitoring.md",
+    "file": "bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md",
+    "bytes": 5412,
+    "sha256": "50f4ee11a26bf8c00a0018d6b4eb7e5c63c55318ddf92256ed416dcc70b8161f",
+    "license": "bench/x178/fixtures/kubernetes_website-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  }
+]

@@ -1,0 +1,18 @@
+# Live research and bounded proof follow-ups
+
+Session cutoff: 2026-11-14. Search results dated Nov 23–24 (including new Anthropic VP/VNP news) are outside this cutoff and are **not imported as current verified results**. Sources within twenty years are used below; classical antecedents are attributed rather than presented as new discoveries. No theorem kernel was run. This is not an audit of ALL solved mathematics or all frontier labs.
+
+## Compression sources
+
+- Major et al., *Heuristics for the run-length encoded Burrows–Wheeler transform alphabet ordering problem*, Journal of Heuristics 31:11 (2025). Primary article opening and related-work sections fetched. [1](https://link.springer.com/article/10.1007/s10732-025-09548-3). It investigates ordinary BWT/RLE alphabet orders with local search, frequency/appearance/ASCII seeds. It is not a theorem that frequency order wins, that BBWT uses the same inverse for every order, or that RLE savings imply paid BPE savings. The explicit primary-index convention belongs to ordinary BWT. We instead reuse already-tested BBWT and explicitly synchronize the total order from the invariant block histogram.
+- Lily Major, *Heuristics for Alphabet Ordering Problems in Stringology*, Aberystwyth doctoral thesis (catalog award year 2026). New host lead and abstract fetched. [2](https://research.aber.ac.uk/en/studentTheses/heuristics-for-alphabet-ordering-problems-in-stringology/). Abstract describes local/evolutionary search and difficult local-optimum landscapes. Only catalog/abstract inspected; the 29.1MB thesis was not audited, and the precise award day is not provided. No theorem or numerical gain from its full text is claimed.
+- Kalcher, *Frequency-Ordered Tokenization for Better Text Compression*, arXiv:2602.22958v1 (26 Feb 2026), primary opening fetched. [3](https://arxiv.org/html/2602.22958v1). BPE token IDs are remapped, varint-coded and passed to a binary compressor; the mapping is stored. Its reported enwik8/enwik9 gains and zstd/LZMA speedups are paper-reported, not reproduced here. Its access/price model differs: ordinary chat must pay decoding instructions and cannot obtain a binary inverse or model tokenizer vocabulary for free.
+- A search surfaced *Text-Preserving Lossy Text Compression* (2605.29000): semantic skeleton/LLM reconstruction is explicitly a **different task**, not adopted for exact bytes. Huffman transliteration results involving training and external mappings likewise do not establish unchanged-model native decoding.
+
+The open interface is practical: even when the histogram-derived order is losslessly reconstructible, it can hurt the parent's grammar search and must pay its longer instruction. Testing both frequency directions is a six-plan finite portfolio, not exhaustive alphabet search or a global optimum. Random/evolutionary order search would require transmitting or independently deriving its selected order.
+
+## Individual math projects
+
+Further pinned source retrieval and exact inspection notes are recorded separately in `proof-followups.md` and `receipts/research-artifacts.json`. Earlier receipts from X176 are historical evidence, not new executions. Each project has its own trust boundary; no title or lab reputation supplies a codec theorem. No search result about a referee or build failure is treated as a kernel result without reproducing the corresponding run.
+
+The relevant transfer is methodological: expose the intended statement, imported assumptions, executable witness and verifier separately. Fixed-width SAT existence does not give a practical optimizer; arithmetic circuit lower bounds are not universal text-description bounds; exact formal mathematical proofs do not imply a chat model executes an LF decoder.

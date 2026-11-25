@@ -1,0 +1,55 @@
+{
+  "accepted": false,
+  "frontier": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "checks": 12206,
+  "sources": 38,
+  "supportedSources": 35,
+  "rawWinningSources": [],
+  "paidWins": [],
+  "paidProcessFailures": [
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "mode": "space",
+      "status": "TIMEOUT",
+      "exit": null,
+      "log": "bench/x178/receipts/paid-ps-real.txt-space.log",
+      "limitSeconds": 120,
+      "oldSpaceMiB": 900
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": "space",
+      "status": "TIMEOUT",
+      "exit": null,
+      "log": "bench/x178/receipts/paid-json-pkg.txt-space.log",
+      "limitSeconds": 120,
+      "oldSpaceMiB": 900
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "mode": "space",
+      "status": "TIMEOUT",
+      "exit": null,
+      "log": "bench/x178/receipts/paid-code-ts.txt-space.log",
+      "limitSeconds": 120,
+      "oldSpaceMiB": 900
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "mode": "LF",
+      "status": "TIMEOUT",
+      "exit": null,
+      "log": "bench/x178/receipts/paid-code-ts.txt-LF.log",
+      "limitSeconds": 120,
+      "oldSpaceMiB": 900
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  checks: 952,
+  coverClasses: [
+    {
+      length: 4,
+      histogram: [Object],
+      cover: 'ab',
+      multiplicity: 2,
+      fixedBinaryDisambiguationBits: 1,
+      witness: [Array]
+    },
+    {
+      length: 6,
+      histogram: [Object],
+      cover: 'ab',
+      multiplicity: 6,
+      fixedBinaryDisambiguationBits: 3,
+      witness: [Array]
+    },
+    {
+      length: 8,
+      histogram: [Object],
+      cover: 'ab',
+      multiplicity: 20,
+      fixedBinaryDisambiguationBits: 5,
+      witness: [Array]
+    },
+    {
+      length: 10,
+      histogram: [Object],
+      cover: 'ab',
+      multiplicity: 70,
+      fixedBinaryDisambiguationBits: 7,
+      witness: [Array]
+    },
+    {
+      length: 12,
+      histogram: [Object],
+      cover: 'ab',
+      multiplicity: 252,
+      fixedBinaryDisambiguationBits: 8,
+      witness: [Array]
+    }
+  ],
+  rawWins: []
+}

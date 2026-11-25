@@ -1,0 +1,250 @@
+{
+  "accepted": false,
+  "productionUnchanged": true,
+  "frontier": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "checks": 12206,
+  "sources": 38,
+  "supportedSources": 35,
+  "rawWinningSources": [],
+  "paid": [
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "mode": "space",
+      "width": 32,
+      "before": 486,
+      "after": 982,
+      "status": "exact",
+      "file": "bench/x178/receipts/trial-email-thread.txt.json"
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "mode": "LF",
+      "width": 32,
+      "before": 486,
+      "after": 690,
+      "status": "exact",
+      "file": "bench/x178/receipts/trial-email-thread.txt.json"
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": "LF",
+      "width": 32,
+      "before": 653,
+      "after": 908,
+      "status": "exact",
+      "file": "bench/x178/receipts/trial-json-pkg.txt-LF.json"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "mode": "space",
+      "width": 32,
+      "before": 620,
+      "after": 1340,
+      "status": "exact",
+      "file": "bench/x178/receipts/trial-kb-article.txt.json"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "mode": "LF",
+      "width": 128,
+      "before": 620,
+      "after": 795,
+      "status": "exact",
+      "file": "bench/x178/receipts/trial-kb-article.txt.json"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "mode": "LF",
+      "width": 128,
+      "before": 381,
+      "after": 574,
+      "status": "exact",
+      "file": "bench/x178/receipts/trial-ps-real.txt-LF.json"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "mode": "LF",
+      "width": 32,
+      "before": 411,
+      "after": 615,
+      "status": "exact",
+      "file": "bench/x178/receipts/trial-unified-diff.patch-LF.json"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "mode": "space",
+      "width": 32,
+      "before": 411,
+      "after": 781,
+      "status": "exact",
+      "file": "bench/x178/receipts/trial-unified-diff.patch-space.json"
+    }
+  ],
+  "paidWins": [],
+  "paidProcessFailures": [
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "mode": "space",
+      "status": "TIMEOUT",
+      "exit": null,
+      "log": "bench/x178/receipts/paid-ps-real.txt-space.log",
+      "limitSeconds": 120,
+      "oldSpaceMiB": 900
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": "space",
+      "status": "TIMEOUT",
+      "exit": null,
+      "log": "bench/x178/receipts/paid-json-pkg.txt-space.log",
+      "limitSeconds": 120,
+      "oldSpaceMiB": 900
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "mode": "space",
+      "status": "TIMEOUT",
+      "exit": null,
+      "log": "bench/x178/receipts/paid-code-ts.txt-space.log",
+      "limitSeconds": 120,
+      "oldSpaceMiB": 900
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "mode": "LF",
+      "status": "TIMEOUT",
+      "exit": null,
+      "log": "bench/x178/receipts/paid-code-ts.txt-LF.log",
+      "limitSeconds": 120,
+      "oldSpaceMiB": 900
+    }
+  ],
+  "initialParentFailure": {
+    "exit": 134,
+    "status": "V8_HEAP_EXHAUSTED",
+    "oldSpaceMiB": 700,
+    "completedCandidates": 4,
+    "nextSource": "bench/holdout-x41/ps-real.txt",
+    "repair": "Fresh child process per candidate; no codec change. New attempts have independent receipts and hard resource caps."
+  },
+  "independent": {
+    "checks": 9988,
+    "paidExact": 8,
+    "unsupported": [],
+    "native": "NOT_RUN"
+  },
+  "speed": {
+    "cpuMs": 0.9898004336321823,
+    "wallMs": 0.9951223389705244,
+    "laneRatios": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 0.9618903607590482,
+        "wallMs": 0.9844139094390855
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 1.0067117461767228,
+        "wallMs": 1.0092525562487105
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 0.9506475480318162,
+        "wallMs": 0.9516836612805756
+      },
+      "bench/holdout-work/email-thread.txt": {
+        "cpuMs": 1.0175195370779806,
+        "wallMs": 1.0240256098885152
+      },
+      "bench/holdout-work/unified-diff.patch": {
+        "cpuMs": 0.9678811743853727,
+        "wallMs": 0.9709835291481309
+      },
+      "bench/holdout-x41/node-help.txt": {
+        "cpuMs": 1.001857901140031,
+        "wallMs": 1.0072761957033711
+      }
+    },
+    "accepted": false,
+    "identicalWires": 24
+  },
+  "native": [
+    {
+      "id": 35,
+      "prompt": "bench/x178/native/35.txt",
+      "responseBytes": 24533,
+      "responseSha256": "5b2b278a22c14251a4f0b6e80f6a5939ad9ef612ec7ba56213f1ae88a985fd21",
+      "expectedContext": "single user message only; no system skills/tools/dictionary",
+      "observed": "NOT_RUN"
+    },
+    {
+      "id": 37,
+      "prompt": "bench/x178/native/37.txt",
+      "responseBytes": 5412,
+      "responseSha256": "50f4ee11a26bf8c00a0018d6b4eb7e5c63c55318ddf92256ed416dcc70b8161f",
+      "expectedContext": "single user message only; no system skills/tools/dictionary",
+      "observed": "NOT_RUN"
+    }
+  ],
+  "x177": {
+    "rows": [
+      {
+        "path": "bench/holdout-work/email-thread.txt",
+        "control": 486,
+        "best": 631,
+        "plans": 6,
+        "exact": true
+      },
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "control": 620,
+        "best": 783,
+        "plans": 6,
+        "exact": true
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "control": 381,
+        "best": 557,
+        "plans": 6,
+        "exact": true
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "control": 653,
+        "best": 868,
+        "plans": 1,
+        "exact": true
+      },
+      {
+        "path": "bench/holdout-work/unified-diff.patch",
+        "control": 411,
+        "best": 567,
+        "plans": 1,
+        "exact": true
+      },
+      {
+        "path": "bench/holdout/code-ts.txt",
+        "control": 949,
+        "best": 1154,
+        "plans": 1,
+        "exact": true
+      }
+    ],
+    "freshControlsMatch": true,
+    "rawWinningSourceTournament": "NOT_RUN: budget",
+    "accepted": false
+  },
+  "remaining": [
+    "No demonstrated significant varied-source paid gain",
+    "Native model behavior NOT_RUN",
+    "No accepted significant whole-stack speed improvement",
+    "X177 raw-winning-source all-plan tournament not completed: budget-limited",
+    "No exhaustive semantic novelty or all-labs proof audit"
+  ]
+}

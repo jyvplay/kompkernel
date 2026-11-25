@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "scope": "Binary search monotone exact prefix-equality predicates at stored marks; preserve largest usable mark, anchor order, tie rules and counts. lcpWork diagnostic changes to attempted prefix units.",
+  "original": "    const L = lcp(a.text, text, limit);\n    lcpWork += L;\n    if (L <= bestPos) continue;\n    // largest mark position <= L\n    let k = -1;\n    for (let m = a.n - 1; m >= 0; m--) { if (a.pos[m]! <= L) { k = m; break; } }\n    if (k < 0) continue;\n",
+  "replacement": "    // Search only needed checkpoint predicates, not the exact mismatch index.\n    let lo=0,hi=a.n-1,k=-1;\n    while(lo<=hi){const mid=(lo+hi)>>>1,p=a.pos[mid]!;\n      if(p>limit){hi=mid-1;continue;}\n      lcpWork+=p; // attempted prefix units; diagnostic meaning differs from baseline\n      if(text.startsWith(a.text.slice(0,p))){k=mid;lo=mid+1;}else hi=mid-1;\n    }\n    if(k<0)continue;\n"
+}

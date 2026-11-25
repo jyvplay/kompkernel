@@ -11757,3 +11757,55 @@ prose/ops/code, not a causal per-codec winner claim. Python reads22exact/7unsupp
 TS21exact/8unsupported; unsupported is not exact. Full records and replay
 provenance: `bench/x176/receipts/source-role-leaders.json` and
 `frontier-provenance.json`. Current-source validation and production build passed.
+
+### X177/X178 — completed negative experiments, no promotion
+
+**PINAKAS** (πίνακας, table/tableau), `src/lib/omega/pinakas.ts`: classical
+Schensted insertion rows plus a fully transmitted recording-row word. Reverse
+bumping reconstructs exact ASCII space/LF fields, including empties; consecutive
+blocks have 32/128 fields. The compact trace uses equal-width decimal row indices,
+with width derived from the largest row index. JSON escaping, trace and full
+inverse contract are paid. This is not BBWT/LF cycles, factoradic rule-order
+steganography, or a hidden dictionary. It is not new mathematics.
+
+Search: insertion is a deterministic transduction, not greedy token optimization.
+Four direct plans are priced; parent trials choose the best direct-price width
+for each separator, a bounded heuristic rather than a global optimum. Repair:
+the initial integer-array trace became fixed-width digits; all affected gates
+were rerun and width-transition attacks added. Source ancestry: Cain/Malheiro/
+Silva (2019), DOI 10.1016/j.disc.2019.05.022, and the classical correspondence
+exposed in TauCeti PR13730; detailed citations and import limits are in
+`bench/x178/research.md`. No bit/RAM theorem is presented as a BPE gain.
+
+Resource character: local insertion/inversion is CPU-bound string comparison;
+parent search dominates measured cost and can exhaust heap/time budgets. No
+hardware-general bottleneck claim or production speedup is established. Fresh
+parent retries use 120-second wall and 900 MiB V8 old-space caps. The first
+cumulative 700 MiB worker exhausted its heap; four fresh attempts timed out.
+Eight completed paid candidates all lose. Unit checks12,206; independent Python
+9,988 including eight paid wires; native single-chat handoffs2 NOT_RUN.
+
+**KYKLOGRAF frequency-order variant**, `kyklograf-frequency.ts`: histogram-derived
+increasing/decreasing total order with ASCII ties, six width/order plans. This is
+explicitly a BBWT variant, not a new primitive. The six-plan tournament is finite
+exhaustive over declared plans, not greedy/global alphabet search; identical
+folded strings reuse a parent result only within the same call. The inherited
+fixed-group contract repair remains charged. Major et al. (2025), DOI
+10.1007/s10732-025-09548-3, supplies alphabet-ordering ancestry, not BPE/native
+success. CPU-heavy parent search is paid. All21 completed paid candidates lose;
+six fresh controls match. Four raw-winning-source tournaments remain NOT_RUN
+following a budget stop, not accepted by extrapolation.
+
+Both speed patches remain benchmark-only: checkpoint search CPU/wall ratios
+0.991780/0.995316; Latin-1 pair-count storage0.989800/0.995122. Each has24 identical
+wires but protected regressions and fails the significant-speed gate.
+
+**Fresh frontier reconfirmed:**29 identical wires /11,962 tokens versus X176.
+One actual replay begun X177, completed X178—not two runs. PROSE3:2018→1770;
+OPS22:22332→8078; CODE/STRUCT3:3152→2013; OTHER1:513→101. Absolute-saving local
+leaders: email629→486, ls-l5194→1310, JSON1152→653, cue513→101; ops relative leader
+prices582→118. Word-reference tape-body classes lead prose/ops/code, not a causal
+per-codec attribution. Independent Python22exact/7unsupported/0mismatches;
+bounded TS21exact/8unsupported. All29 prices and transport checks pass.
+`bench/x178/README.md` and `receipts/summary.json` bind results; production
+selection remains unchanged, scientific acceptance=false, native behavior unverified.

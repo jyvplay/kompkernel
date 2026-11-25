@@ -1,0 +1,175 @@
+
+  bench/x178/test.mjs  3.9mb ⚠️
+
+⚡ Done in 101ms
+
+  bench/x178/portfolio.mjs  3.9mb ⚠️
+
+⚡ Done in 104ms
+{'checks': 9988, 'paidExact': 8, 'unsupported': [], 'native': 'NOT_RUN'}
+27 deceptive shapes rejected; X178 Pareto claim rejected
+program-existence to arbitrary-decoder implication falsified by explicit functions
+Euler-existence to unique-source implication falsified by two actual sequences
+Prepared 2 prompts; native NOT_RUN
+19907 21 []
+{
+  "lanes": 29,
+  "oldTotal": 11962,
+  "newTotal": 11962,
+  "identicalWires": 29,
+  "different": [],
+  "sourceReadEqual": 29,
+  "note": "decoded field is parent self-report, not an independent wire parser"
+}
+
+  bench/x177/frontier-gate.mjs  4.6mb ⚠️
+
+⚡ Done in 143ms
+{"lanes":29,"total":11962,"sourceReads":21,"unsupported":["bench/holdout-tbl/df-h.txt","bench/holdout-tbl/markdown-table.md","bench/holdout-tbl/psql-output.txt","bench/holdout-x40/prices.csv","bench/holdout-x40/cue-sheet.md","bench/holdout-tbl/kubectl-get-pods.txt","bench/holdout-x40/metrics.tsv","bench/holdout-x41/ls-l-real.txt"],"pricesAndTokenIds":29,"note":"bounded repository reader is not native LLM verification and shares project components"}
+[('bench/x177/receipts/frontier.jsonl', 22, 7)]
+
+  bench/x177/leaders.mjs  3.9mb ⚠️
+
+⚡ Done in 113ms
+{
+  "OTHER": {
+    "lanes": 4,
+    "aggregateRaw": 729,
+    "aggregateTokens": 317,
+    "largestAbsoluteSaving": {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "raw": 513,
+      "tokens": 101,
+      "saved": 412,
+      "savedPercent": 80.31
+    },
+    "largestRelativeSaving": {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "raw": 513,
+      "tokens": 101,
+      "saved": 412,
+      "savedPercent": 80.31
+    },
+    "tapeBodyTokenClassLeader": null,
+    "tapeLanes": 0
+  },
+  "PROSE": {
+    "lanes": 5,
+    "aggregateRaw": 5856,
+    "aggregateTokens": 3429,
+    "largestAbsoluteSaving": {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "tokens": 813,
+      "saved": 1926,
+      "savedPercent": 70.32
+    },
+    "largestRelativeSaving": {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "tokens": 813,
+      "saved": 1926,
+      "savedPercent": 70.32
+    },
+    "tapeBodyTokenClassLeader": "word",
+    "tapeLanes": 5
+  },
+  "OPS/TABULAR": {
+    "lanes": 16,
+    "aggregateRaw": 17278,
+    "aggregateTokens": 5580,
+    "largestAbsoluteSaving": {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "tokens": 1310,
+      "saved": 3884,
+      "savedPercent": 74.78
+    },
+    "largestRelativeSaving": {
+      "path": "bench/holdout-x40/prices.csv",
+      "raw": 582,
+      "tokens": 118,
+      "saved": 464,
+      "savedPercent": 79.73
+    },
+    "tapeBodyTokenClassLeader": "glyph",
+    "tapeLanes": 16
+  },
+  "CODE/STRUCT": {
+    "lanes": 4,
+    "aggregateRaw": 4152,
+    "aggregateTokens": 2636,
+    "largestAbsoluteSaving": {
+      "path": "bench/holdout/json-pkg.txt",
+      "raw": 1152,
+      "tokens": 653,
+      "saved": 499,
+      "savedPercent": 43.32
+    },
+    "largestRelativeSaving": {
+      "path": "bench/holdout/json-pkg.txt",
+      "raw": 1152,
+      "tokens": 653,
+      "saved": 499,
+      "savedPercent": 43.32
+    },
+    "tapeBodyTokenClassLeader": "word",
+    "tapeLanes": 4
+  }
+}
+{'OPS/TABULAR': (22, 22332, 8078, 'word'), 'PROSE': (3, 2018, 1770, 'word'), 'CODE/STRUCT': (3, 3152, 2013, 'word'), 'OTHER': (1, 513, 101, None)}
+{
+  "accepted": false,
+  "frontier": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "checks": 12206,
+  "sources": 38,
+  "supportedSources": 35,
+  "rawWinningSources": [],
+  "paidWins": [],
+  "paidProcessFailures": [
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "mode": "space",
+      "status": "TIMEOUT",
+      "exit": null,
+      "log": "bench/x178/receipts/paid-ps-real.txt-space.log",
+      "limitSeconds": 120,
+      "oldSpaceMiB": 900
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": "space",
+      "status": "TIMEOUT",
+      "exit": null,
+      "log": "bench/x178/receipts/paid-json-pkg.txt-space.log",
+      "limitSeconds": 120,
+      "oldSpaceMiB": 900
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "mode": "space",
+      "status": "TIMEOUT",
+      "exit": null,
+      "log": "bench/x178/receipts/paid-code-ts.txt-space.log",
+      "limitSeconds": 120,
+      "oldSpaceMiB": 900
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "mode": "LF",
+      "status": "TIMEOUT",
+      "exit": null,
+      "log": "bench/x178/receipts/paid-code-ts.txt-LF.log",
+      "limitSeconds": 120,
+      "oldSpaceMiB": 900
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "path": "bench/holdout-work/unified-diff.patch",
+  "message": "¶ k=v. expand repeatedly; print only.\n§й/src/lib/omegaей/ariadne.tsәй/chiron.tsо0у ол,суxТолсп], [0xш:Н export const CHIRON_SCRIPTS: ChironScript[] = [\nэшса hiнэ0370,\n+   ҷGain(rulesш Rule[], poolш stringж+ иж  ү  for (const r of rules)і;\nБ  let total =уір\nф 100644\n--- aИ   { nameш 'ю labelш 'Алсоз total += r.countіцdiff --git aғи   [0xт bд {\nг loь numberвa¶цәтәрindex 3f8a1c2..9d4e7bофәр+++тәр@@ -140,6 +140,7 @@ export interface ChironScript {\n   labelш stringі   loшьі  ашьіж ranges?: Array<[numberль]>;\n }\n \nН@@ -152,6 +153,18 @@НИkhmer'люKhmer letter',гэ178олаэ1800 },\nИcjk'люChinese character',гэ4eоолаэв000 },\nжди nameш 'polyglot',\nиюGreek, Hebrewл Armenianл Georgianл Thai or Indic letter',\nигнан rangesш [\nғ037То400по530А590по590А600по900А980],\nғ098Тоaоопово0Ав80пов80Аbооп0b80Аc00],\nи ],\nж },\n ];\n \n const poolCache = new Map<string, string[]>();\nцетерindex 1a2b3c4..5e6f7a8фер+++тер@@ -848,10 +848,14 @@ function assignmentҷ[]):ьд-Б-үз-  return totalі+Б+үдизи if (r.adjacent) total += r.adjacent * о.5іж }\nж return Math.round(total);\n }\n \n function searchҷ[], budgetMsшь):ьд",
+  "tokens": 411,
+  "status": "exact",
+  "ms": 4880.068520000001,
+  "cpuMs": 5166.556
+}

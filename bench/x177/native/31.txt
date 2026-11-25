@@ -1,0 +1,45 @@
+Decode payload first. Split on ASCII spaces, retaining empty fields. Partition into consecutive groups of 32 fields; only the last may be shorter. Within each group, order distinct fields by decreasing occurrence count, breaking ties by ASCII text order. Use this field order in all lexicographic comparisons. For each group L, stably sort its indices by that field order; LF maps each old index to its sorted position. For each LF cycle collect L values, reverse them, and take the lexicographically least cyclic rotation. Sort these cycles in descending lexicographic order and concatenate. Join all fields with ASCII spaces; print only.
+a have debug how need heading "prerequisites" Debug overview task
+weight: smarterclayton
+title: a a %}}
+
+* ---
+reviewers:
+- to bprashanth
+- enisoc
+- erictune
+- to {{% you foxish
+- janetkuo
+- You 30
+---
+
+<!-- task kow3ns
+- -->
+This StatefulSet
+content_type: shows StatefulSet.
+
+## order Debugging have want steps -->
+
+## configured a a cluster.
+* cluster, must Kubernetes your kubectl to be should to the tool StatefulSet
+
+In StatefulSet You investigate.
+
+<!-- running and command-line you communicate that with listed have to get the use belong all pods StatefulSet, pods any a label list that -l which them,
+you you the following:
+
+```shell
+kubectl which a to Pods set `app.kubernetes.io/name=MyApp` find on can app.kubernetes.io/name=MyApp
+```
+
+If StatefulSet a [Deleting Pods how time,
+refer individual StatefulSet the or in in for are them.
+You to can an state task on debug period for
+instructions `Unknown` extended `Terminating` Pods](/docs/tasks/run-application/delete-stateful-set/) to with of deal init-container](/docs/tasks/debug/debug-application/debug-init-containers/).
+
+ "whatsnext" heading about more [debugging Pods](/docs/tasks/debug/debug-application/debug-pods/) {{% an %}}
+
+Learn the
+[Debugging using guide.
+
+##

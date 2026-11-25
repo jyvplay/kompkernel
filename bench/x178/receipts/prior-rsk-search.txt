@@ -1,0 +1,31 @@
+bench/x164/research/anthropic-wrap-main.lean:57:theorem decidesTM_of_wraps_counter {pre : List Bool → List Bool} (hpre : MapsPlainToPaddedCompact pre) {M : TM2ComputableAux Bool Bool} {C : ℕ} (hM : CountsCompactKCNFWithinMinBound M C)
+bench/x164/research/anthropic-wrap-main.lean:58:    {N : TM2ComputableAux Bool Bool} {q : ℕ} (hW : Wraps M pre someBit N q) {a d : ℕ}
+bench/x164/research/anthropic-wrap-main.lean:109:theorem oneMachineEveryDeltaAndETHFails_of {N : TM2ComputableAux Bool Bool} (hN : ∀ i, Finite (N.tm.Γ i)) (h : DecidesEveryDelta N) : OneMachineEveryDeltaAndETHFails :=
+bench/x163/research/anthropic-wrap-defs.lean:78:def Outputs (M : TM2ComputableAux Bool Bool) (x y : List Bool) (t : ℕ) : Prop :=
+bench/x163/research/anthropic-wrap-defs.lean:85:def Wraps (M : TM2ComputableAux Bool Bool) (pre post : List Bool → List Bool) (N : TM2ComputableAux Bool Bool) (q : ℕ) : Prop :=
+bench/x163/research/anthropic-wrap-defs.lean:95:  ∀ M : TM2ComputableAux Bool Bool, (∀ i, Finite (M.tm.Γ i)) → ∀ pre post : List Bool → List Bool, PolyT pre → PolyT post →
+bench/x163/research/anthropic-wrap-defs.lean:96:    ∃ (N : TM2ComputableAux Bool Bool) (q : ℕ), (∀ i, Finite (N.tm.Γ i)) ∧ Wraps M pre post N q
+bench/x163/research/anthropic-wrap-defs.lean:133:def CountsCompactKCNFWithinMinBound (M : TM2ComputableAux Bool Bool) (C : ℕ) : Prop :=
+bench/x163/research/anthropic-wrap-defs.lean:142:def DecidesEveryDelta (N : TM2ComputableAux Bool Bool) : Prop :=
+bench/x163/research/anthropic-wrap-defs.lean:148:def DecidesAtRateInN (N : TM2ComputableAux Bool Bool) : Prop :=
+bench/x163/research/anthropic-wrap-defs.lean:157:  ∀ pre : List Bool → List Bool, MapsPlainToPaddedCompact pre → ∀ (M : TM2ComputableAux Bool Bool) (C : ℕ), CountsCompactKCNFWithinMinBound M C →
+bench/x163/research/anthropic-wrap-defs.lean:158:    ∀ (N : TM2ComputableAux Bool Bool) (q : ℕ), Wraps M pre someBit N q → DecidesEveryDelta N
+bench/x163/research/anthropic-wrap-defs.lean:163:  ∀ pre : List Bool → List Bool, MapsPlainToPaddedCompact pre → ∀ (M : TM2ComputableAux Bool Bool) (C : ℕ), CountsCompactKCNFWithinMinBound M C →
+bench/x163/research/anthropic-wrap-defs.lean:164:    ∀ (N : TM2ComputableAux Bool Bool) (q : ℕ), Wraps M pre someBit N q → DecidesAtRateInN N
+bench/x163/research/anthropic-wrap-defs.lean:173:  ∀ (M : TM2ComputableAux Bool Bool) (C : ℕ), (∀ i, Finite (M.tm.Γ i)) → CountsCompactKCNFWithinMinBound M C →
+bench/x163/research/anthropic-wrap-defs.lean:174:    (∃ (pre : List Bool → List Bool) (N : TM2ComputableAux Bool Bool) (q : ℕ), IsFrontEnd pre ∧ (∀ i, Finite (N.tm.Γ i)) ∧ Wraps M pre someBit N q) ∧
+bench/x163/research/anthropic-wrap-defs.lean:175:      ∀ pre : List Bool → List Bool, MapsPlainToPaddedCompact pre → ∀ (N : TM2ComputableAux Bool Bool) (q : ℕ), Wraps M pre someBit N q → DecidesEveryDelta N ∧ DecidesAtRateInN N
+bench/x163/research/anthropic-three-sat.lean:31:  Turing machines up to a constant factor (standard; not proved here). `TM2ComputableAux Bool Bool`
+bench/x163/research/anthropic-three-sat.lean:85:  ∃ (M : TM2ComputableAux Bool Bool) (C : ℕ), (∀ k, Finite (M.tm.Γ k)) ∧ DecidesTM M (rateBound C c)
+bench/x163/research/anthropic-three-sat.lean:90:  ∃ M : TM2ComputableAux Bool Bool, (∀ k, Finite (M.tm.Γ k)) ∧
+bench/x163/research/anthropic-eth-definition.lean:63:def DecidesTM (M : TM2ComputableAux Bool Bool) (t : ℕ → ℕ) : Prop :=
+bench/x163/research/anthropic-eth-definition.lean:70:  ∃ (M : TM2ComputableAux Bool Bool) (c : ℕ), (∀ k, Finite (M.tm.Γ k)) ∧
+bench/x163/research/anthropic-counted-defs.lean:91:  (∀ M₂ : TM2ComputableAux Bool Bool, ChosenAsPrinted (fnN E K₀ C₀ kf num n₁) (padExpN E K₀ C₀ kf num n₁) K₀ M₂ → ∃ C₂ : ℕ, ThmVariablesBFor M₂ C₂) ∧
+bench/x163/research/anthropic-counted-defs.lean:92:  (∀ (M₁ : TM2ComputableAux Bool Bool) (q₁ : ℕ), Computes M₁ (fnM E K₀ C₀ kf num) (padExpM E K₀ C₀ kf num) q₁ → ∃ C₁ : ℕ, MeetsBoundInMAlone M₁ C₁) ∧
+bench/x163/research/anthropic-counted-defs.lean:93:  (∀ N : TM2ComputableAux Bool Bool, AssembledDirectly (fnN E K₀ C₀ kf num n₁) (padExpN E K₀ C₀ kf num n₁) (fnM E K₀ C₀ kf num) (padExpM E K₀ C₀ kf num) K₀ N → ∃ C : ℕ, CorMinFor N C ∧ MainTheoremFor N C) ∧
+bench/x163/research/anthropic-counted-defs.lean:94:  ∃ N : TM2ComputableAux Bool Bool, BuiltDirectly (fnN E K₀ C₀ kf num n₁) (padExpN E K₀ C₀ kf num n₁) (fnM E K₀ C₀ kf num) (padExpM E K₀ C₀ kf num) K₀ N
+bench/x161/research/anthropic-eth-main.lean:26:or read it. `Turing.TM2ComputableAux Bool Bool` adds a bijection from the alphabet of the input
+bench/x161/research/anthropic-eth-main.lean:92:def DecidesKSat (k : ℕ) (M : TM2ComputableAux Bool Bool) (t : ℕ → ℕ) : Prop :=
+bench/x161/research/anthropic-eth-main.lean:101:  ∃ (M : TM2ComputableAux Bool Bool) (c : ℕ), (∀ i, Finite (M.tm.Γ i)) ∧
+bench/x161/research/anthropic-eth-main.lean:158:def CountsWithin (M : TM2ComputableAux Bool Bool) (k : ℕ) {n : ℕ} (φ : CNF n) (t : ℕ) : Prop :=
+bench/x161/research/anthropic-eth-main.lean:178:  ∃ (M : TM2ComputableAux Bool Bool) (C : ℕ), (∀ i, Finite (M.tm.Γ i)) ∧

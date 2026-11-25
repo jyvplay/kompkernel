@@ -250,3 +250,13 @@ bench/x176/*.mjs
 !bench/x176/*-build.mjs
 
 .cache/x176/
+
+# X177 generated bundles and disposable source cache
+bench/x177/*.mjs
+!bench/x177/*-build.mjs
+.cache/x177/
+
+# X178 generated bundles
+bench/x178/*.mjs
+!bench/x178/*-build.mjs
+.cache/x178/

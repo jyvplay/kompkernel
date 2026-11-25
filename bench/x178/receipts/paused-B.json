@@ -1,0 +1,12 @@
+[
+  {
+    "pid": 1480,
+    "command": "node --max-old-space-size=1600 bench/x177/frontier.mjs bench/x177/lanes.txt bench/x177/receipts/frontier.jsonl ",
+    "state": "T"
+  },
+  {
+    "pid": 14689,
+    "command": "node --max-old-space-size=900 bench/x177/controls.mjs bench/holdout-work/email-thread.txt bench/holdout-work/kb-article.txt bench/holdout-x41/ps-real.txt bench/holdout/json-pkg.txt bench/holdout-work/unified-diff.patch bench/holdout/code-ts.txt bench/holdout-x41/ls-l-real.txt bench/holdout-x41/ps-aux-real.txt bench/holdout-x42/ps-ef.txt bench/x177/fixtures/python_cpython-datastructures.rst ",
+    "state": "T"
+  }
+]
