@@ -1,0 +1,42 @@
+[
+  {
+    "id": 29,
+    "prompt": "bench/x181/native/29.txt",
+    "responseBytes": 37746,
+    "responseSha256": "e322d827e7778530afb1fe832eace5588d8025e12315f2be7e7228a04c85ac41",
+    "expectedContext": "single user message only; no system skills/tools/dictionary",
+    "observed": "NOT_RUN"
+  },
+  {
+    "id": 30,
+    "prompt": "bench/x181/native/30.txt",
+    "responseBytes": 26432,
+    "responseSha256": "dab3e88d324cdde74cf96356c58a423747a5735ac6848d8d4592dc7c13637c62",
+    "expectedContext": "single user message only; no system skills/tools/dictionary",
+    "observed": "NOT_RUN"
+  },
+  {
+    "id": 31,
+    "prompt": "bench/x181/native/31.txt",
+    "responseBytes": 23343,
+    "responseSha256": "76915e474e88fbedecbfe205fb45a85867ea4612453358eda73a330ec991262d",
+    "expectedContext": "single user message only; no system skills/tools/dictionary",
+    "observed": "NOT_RUN"
+  },
+  {
+    "id": 32,
+    "prompt": "bench/x181/native/32.txt",
+    "responseBytes": 24533,
+    "responseSha256": "5b2b278a22c14251a4f0b6e80f6a5939ad9ef612ec7ba56213f1ae88a985fd21",
+    "expectedContext": "single user message only; no system skills/tools/dictionary",
+    "observed": "NOT_RUN"
+  },
+  {
+    "id": 33,
+    "prompt": "bench/x181/native/33.txt",
+    "responseBytes": 5510,
+    "responseSha256": "823d284ce903a4edc7d24c108ff259c0d50e7e710655ef45e06c8113083d711f",
+    "expectedContext": "single user message only; no system skills/tools/dictionary",
+    "observed": "NOT_RUN"
+  }
+]

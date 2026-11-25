@@ -1,0 +1,8 @@
+{'job': {'kind': 'fotia', 'path': 'bench/holdout-work/email-thread.txt', 'rank': 0, 'limitSeconds': 90, 'file': 'bench/x181/receipts/paid-00.json'}, 'status': 'completed', 'exit': 0, 'oldSpaceMiB': 1000}
+{'job': {'kind': 'fotia', 'path': 'bench/holdout-work/kb-article.txt', 'rank': 0, 'limitSeconds': 90, 'file': 'bench/x181/receipts/paid-01.json'}, 'status': 'completed', 'exit': 0, 'oldSpaceMiB': 1000}
+{'job': {'kind': 'fotia', 'path': 'bench/holdout-work/llm-answer.md', 'rank': 0, 'limitSeconds': 90, 'file': 'bench/x181/receipts/paid-02.json'}, 'status': 'completed', 'exit': 0, 'oldSpaceMiB': 1000}
+{'job': {'kind': 'fotia', 'path': 'bench/holdout-x41/ps-real.txt', 'rank': 0, 'limitSeconds': 90, 'file': 'bench/x181/receipts/paid-03.json'}, 'status': 'completed', 'exit': 0, 'oldSpaceMiB': 1000}
+{'job': {'kind': 'fotia', 'path': 'bench/holdout-x42/ps-ef.txt', 'rank': 0, 'limitSeconds': 90, 'file': 'bench/x181/receipts/paid-04.json'}, 'status': 'completed', 'exit': 0, 'oldSpaceMiB': 1000}
+{'job': {'kind': 'fotia', 'path': 'bench/holdout/json-pkg.txt', 'rank': 0, 'limitSeconds': 90, 'file': 'bench/x181/receipts/paid-05.json'}, 'status': 'completed', 'exit': 0, 'oldSpaceMiB': 1000}
+{'job': {'kind': 'fotia', 'path': 'bench/holdout-work/unified-diff.patch', 'rank': 0, 'limitSeconds': 90, 'file': 'bench/x181/receipts/paid-06.json'}, 'status': 'completed', 'exit': 0, 'oldSpaceMiB': 1000}
+{'job': {'kind': 'fotia', 'path': 'bench/holdout/code-ts.txt', 'rank': 0, 'limitSeconds': 90, 'file': 'bench/x181/receipts/paid-07.json'}, 'status': 'completed', 'exit': 0, 'oldSpaceMiB': 1000}

@@ -11891,3 +11891,47 @@ X180 bounded-tail speed patch: 24 identical ABBA wires, CPU B/A 1.010697,
 wall B/A 1.007261; protected regressions, rejected. Fresh 5,941 codec checks,
 5,821 separate Python checks (five paid wires), 16,192 tokenizer count checks;
 compiler/build pass. Native three NOT_RUN. No breakthrough or promotion.
+
+## X181 — FOTIA (bounded Foata word transformation; experimental)
+
+FOTIA applies Foata's second fundamental transformation or inverse to consecutive
+16/64/256-field blocks. Split on ASCII spaces retaining empties; compare by
+Unicode scalar lexicographic order. Forward insertion partitions the current
+word after fields on the same <=/> side of the inserted symbol as its last field,
+rotates each block's last field to its front, then appends the symbol. Inverse
+removes the last field and recovers boundaries from first-field comparisons.
+Full instructions are paid; no dictionary, primary index or occurrence tape.
+Six deterministic plans, not greedy. Raw-token best alone gets parent pricing;
+this is not global paid optimization. Source/output cap 50,000 UTF16 units;
+per-block conservative O(b²L), with b≤256 and maximum field length L. Parent
+trials are separately wall-bounded at 90 s / 1,000 MiB V8 old space, not RSS.
+
+Classical source: Foata, *Rearrangements of Words*, §10.6,
+https://irma.math.unistra.fr/~foata/paper/pub43.pdf . Recent related work:
+Corteel/Elizalde/Savage, *Partitions with constrained ranks and lattice paths*
+(2022/2023), https://arxiv.org/pdf/2211.08933 . These give combinatorial identities,
+not BPE savings or native-chat guarantees. The eight completed full-paid FOTIA
+candidates all lose; no raw wins across 34 sources. 41,773 codec checks and
+20,874 Python checks, including eight paid wires. Experimental only; no promotion.
+
+### AKRIBOS — strict bounded parent reader, not a codec
+
+Recognizes fused decimal restoration and layout after progression; refuses
+unknown instruction-looking messages. No source input. On pinned frontier wires:
+25 exact / 4 refused / 0 mismatches, versus ANTIKLEIS 23 exact / 6 returned
+mismatches. Missing-dictionary repair receives fresh attacks and validation.
+This is not a universal decoder or native-model confirmation. Fresh canonical
+comparison, generalized leaders, profile and speed results are recorded under
+bench/x181/receipts and summarized in bench/x181/README.md.
+
+Fresh X181 replay: 29 identical wires / 11,962 tokens. PROSE 3 lanes 2018→1770;
+OPS 22 lanes 22332→8078; CODE/STRUCT 3 lanes 3152→2013; OTHER 1 lane 513→101.
+Absolute leaders remain email 629→486, ls-l 5194→1310, JSON 1152→653, cue 513→101;
+ops relative leader prices 582→118. Fresh AKRIBOS coverage is 25 exact/4 refused/0
+mismatches; Python coverage 22 exact/7 unsupported/0 mismatches. Compiler/build
+pass. Five native prompts remain NOT_RUN; none is passed by program inversion.
+
+X181 speed experiment rejected: 24 identical cold ABBA wires, CPU B/A 1.009904,
+wall B/A 1.010630, protected regressions. The 2 MiB direct-mapped pair cache is
+bench-only. Count/vector/pair gates (16,192/12,124/524,338 checks) match A/B;
+400,004 cache checks include 60,023 collisions. Fidelity alone is not speed.

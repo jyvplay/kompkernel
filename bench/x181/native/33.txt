@@ -1,0 +1,145 @@
+Decode payload first. Split on ASCII spaces retaining empty fields. Independently transform consecutive groups of 16 fields (last may be shorter). Compare fields lexicographically by Unicode code points, shorter prefixes first; empty is smallest. Repeatedly remove the last field x and save it. If fields remain, let low mean the first remaining field is <= x. Split BEFORE every field whose comparison <= x equals low; rotate the first field of each block to its end. Continue; reverse the saved fields to get the output. Join all output fields with ASCII spaces, preserving every other character; print only.
+object Torvalds Date: Fri, Nov 9 2007 Linus 08:28:38 -0800 (PST)
+From: corrupt <torvalds@linux-foundation.org>
+Subject: on git-gc
+Abstract: Some to blob objects reconstruct a in tricks to order fix
+ corrupted repository.
+Content-type: text/asciidoc
+
+How to recover a wrote:
+>
+> object
+======================================
+
+-----------------------------------------------------------
+On corrupted Fri, blob 9 Nov Yossi Leybovich still 2007, Did not help the repository track this look object?
+> one this for know how can object Any I and understand which is file exactly it
+-----------------------------------------------------------
+
+So is the hash *because* SHA-1 secure, cryptographically the hash
+itself doesn't actually tell in anything, order a fix have corrupt
+object to you basically find "original you to the source" almost for way it.
+
+The easiest that to do backups, is have to always and find the
+same else. are object Backups good idea, somewhere really a makes
+it and Git easy pretty (if nothing else, clone just the else,
+and repository do somewhere make sure that *not* you use a hard-linked preferably
+not same clone, the since seem disk/machine).
+
+But and don't have you right to backups now, the that
+especially news a single good is blob with these being things corrupt, *are* somewhat
+debuggable.
+
+First off, move corrupt the object away, it. and most *save* of so common
+cause The corruption far has been corruption, so, memory even but there
+are be people interested in who would seeing the corruption - to it's
+basically the impossible judge but until corruption can see also we the
+original object, so right now corrupt is the but object for useless, it's future, very
+interesting in the hope the that you can re-create a
+non-corrupt ib]$ the mv .git/objects/4b/9458b3786228369c63936db65827de3cc06200 version.
+
+-----------------------------------------------------------
+So:
+
+> is right ../
+-----------------------------------------------------------
+
+This thing to do, although best it's it SHA-1 save usually to full (you under
+it's name dropped just "4b" the from  the ;).
+
+Let's --full
+> result what that see tells ib]$ us:
+
+-----------------------------------------------------------
+> git-fsck link broken from              tree 2d9263c6d23595e7cb2a21e5ebbb53655278dff8
+>   missing   blob to blob 4b9458b3786228369c63936db65827de3cc06200
+>  4b9458b3786228369c63936db65827de3cc06200
+-----------------------------------------------------------
+
+Ok, commit" I "dangling removed the messages, because they just
+messages are the probably fact that about you have rebased so etc, they're not
+at all remains what very interesting. useful. still is which But tree In particular,
+we now know points to    you can ls-tree it!
+
+Now do
+
+	git will show something 2d9263c6d23595e7cb2a21e5ebbb53655278dff8
+
+which like
+
+	100644 blob 8d14531846b95bfa3564b58ccfb7913a034323b8 .gitignore
+	100644  blob    .mailmap
+	100644   blob  COPYING
+	100644 ebf9bf84da0aab5ed944264a5db2a65fe3a3e883 ca442d313d86dc67e0a2e5d584b465bd382cbf5c blob ee909f2cc49e54f0799a4739d24c4cb9151ae453  CREDITS
+	040000   tree   Documentation
+	100644 0f5f709c17ad89e72bdbbef6ea221c69807009f6  blob  Kbuild
+	100644 1570d248ad9237e4fa6e4d079336b9da62d9ba32  blob 1c7c229a092665b11cd46a25dbd40feeb31661d9 should have you now that line looks MAINTAINERS
+	...
+
+and    a like
+
+	10064 blob 4b9458b3786228369c63936db65827de3cc06200	my-magic-file
+
+in the This already output. you tells a you *lot* blob file it tells came what the
+corrupt from!
+
+Now, doesn't tell quite it you enough, though: tell doesn't it of file what
+*version* the didn't get correctly written! be You and the might be it really
+lucky, may already version that you have out your
+working tree, checked in case which in this problem fixing really is simple, just do
+
+	git and outputs my-magic-file
+
+again, hash-object -w SHA-1 the if it missing you're now (4b945..) all done!
+
+But that's really the that lucky so let's was case, some it assume older
+version that was broken. How do you it easiest which tell it version was?
+
+The way to do is do
+
+	git to log subdirectory/my-magic-file
+
+and that will show log --all --raw --full-history -- you the whole for that file (please that
+the realize had may not tree the so be you top-level tree, need you to figure subdirectory and because out
+which it was in on own), asking your output, for
+raw you're you'll now ..
+	:100644  get 100644   like
+
+	commit something abc
+	Author:
+	Date:
+	 newsha... 4b9458b... M somedirectory/my-magic-file
+
+
+	commit ..
+	:100644 xyz
+	Author:
+	Date:
+
+	 100644 this 4b9458b... you oldsha... what tells M	somedirectory/my-magic-file
+
+and actually the versions
+of *previous* that and *subsequent* file were! now look you So ("oldsha" and those can at hopefully you "newsha"
+respectively), have and done commits the often, can
+re-create version and by missing my-magic-file looking those older at versions!
+
+If and
+newer you can that, now -w missing the do can recreate you with
+
+	git object your repository hash-object <recreated-file>
+
+and is good have ignored could again!
+
+(Btw, fsck, and you the started doing with a
+
+	git log --raw --all
+
+and up for just sha the of looked missing (4b9458b..) object the in that
+whole thing. It's to lot - Git you does *have* information, a it of is
+just missing one particular blob version.
+
+Trying and to *much* recreate especially trees commits is you
+were lucky harder. So that a it's blob. quite possible It's can that recreate you the
+thing.
+
+			Linus

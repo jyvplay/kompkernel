@@ -1,0 +1,10 @@
+[
+  { file: 'paid-00.json', status: 'exact', error: undefined },
+  { file: 'paid-01.json', status: 'exact', error: undefined },
+  { file: 'paid-02.json', status: 'exact', error: undefined },
+  { file: 'paid-03.json', status: 'exact', error: undefined },
+  { file: 'paid-04.json', status: 'exact', error: undefined },
+  { file: 'paid-05.json', status: 'exact', error: undefined },
+  { file: 'paid-06.json', status: 'exact', error: undefined },
+  { file: 'paid-07.json', status: 'exact', error: undefined }
+]

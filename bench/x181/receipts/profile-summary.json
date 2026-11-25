@@ -1,0 +1,219 @@
+{
+  "rawFile": ".cache/x181/CPU.20261125.064837.1504.0.001.cpuprofile",
+  "rawSha256": "286cbbf474bf1247bb75b17c3337600a01984db92ae1593c6b4bb793703db232",
+  "samples": 102947,
+  "intervalMicroseconds": 10000,
+  "scope": "Whole fresh replay sampled self attribution; overlaps paid diagnostics. Not isolated wall/CPU or causal speed evidence.",
+  "top": [
+    {
+      "function": "(garbage collector)",
+      "url": "",
+      "line": 0,
+      "samples": 5304,
+      "percent": 5.152165677484531
+    },
+    {
+      "function": "countLongRaw",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 2322,
+      "samples": 4993,
+      "percent": 4.85006848184017
+    },
+    {
+      "function": "",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 11801,
+      "samples": 3193,
+      "percent": 3.101595966856732
+    },
+    {
+      "function": "chunkCountFast",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 2262,
+      "samples": 1922,
+      "percent": 1.8669800965545378
+    },
+    {
+      "function": "RegExp: [^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]*[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]+[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\\p{N}{1,3}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n/]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+",
+      "url": "",
+      "line": 0,
+      "samples": 1908,
+      "percent": 1.8533808658824444
+    },
+    {
+      "function": "countLongRaw",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 2322,
+      "samples": 1474,
+      "percent": 1.4318047150475488
+    },
+    {
+      "function": "scoreRunCostDeltaSlots",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 6436,
+      "samples": 1129,
+      "percent": 1.0966808163423898
+    },
+    {
+      "function": "rankAt",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 1947,
+      "samples": 951,
+      "percent": 0.9237763120829164
+    },
+    {
+      "function": "countTokens3",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 2373,
+      "samples": 782,
+      "percent": 0.7596141703983603
+    },
+    {
+      "function": "rankAt",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 1947,
+      "samples": 774,
+      "percent": 0.7518431814428784
+    },
+    {
+      "function": "",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 11801,
+      "samples": 741,
+      "percent": 0.7197878520015153
+    },
+    {
+      "function": "countLongRaw",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 2322,
+      "samples": 664,
+      "percent": 0.6449920833050016
+    },
+    {
+      "function": "countLongRaw",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 2322,
+      "samples": 639,
+      "percent": 0.6207077428191206
+    },
+    {
+      "function": "scoreRunCostDeltaSlots",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 6436,
+      "samples": 621,
+      "percent": 0.6032230176692861
+    },
+    {
+      "function": "countTokens3",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 2373,
+      "samples": 621,
+      "percent": 0.6032230176692861
+    },
+    {
+      "function": "countLongRaw",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 2322,
+      "samples": 620,
+      "percent": 0.6022516440498509
+    },
+    {
+      "function": "mergeCount",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 1919,
+      "samples": 615,
+      "percent": 0.5973947759526747
+    },
+    {
+      "function": "scoreRunCostDeltaSlots",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 6436,
+      "samples": 605,
+      "percent": 0.5876810397583222
+    },
+    {
+      "function": "",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 11801,
+      "samples": 578,
+      "percent": 0.5614539520335706
+    },
+    {
+      "function": "RegExp: [^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]*[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]+[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\\p{N}{1,3}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n/]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+",
+      "url": "",
+      "line": 0,
+      "samples": 575,
+      "percent": 0.558539831175265
+    },
+    {
+      "function": "renderBest",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 6742,
+      "samples": 535,
+      "percent": 0.5196848863978553
+    },
+    {
+      "function": "scoreRunCostDeltaSlots",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 6436,
+      "samples": 520,
+      "percent": 0.5051142821063266
+    },
+    {
+      "function": "chunkCountFast",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 2262,
+      "samples": 520,
+      "percent": 0.5051142821063266
+    },
+    {
+      "function": "mergeCount",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 1919,
+      "samples": 507,
+      "percent": 0.4924864250536684
+    },
+    {
+      "function": "rankAt",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 1947,
+      "samples": 471,
+      "percent": 0.4575169747539996
+    },
+    {
+      "function": "scoreRunCostDeltaSlots",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 6436,
+      "samples": 446,
+      "percent": 0.43323263426811853
+    },
+    {
+      "function": "countLongRaw",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 2322,
+      "samples": 444,
+      "percent": 0.4312898870292481
+    },
+    {
+      "function": "countTokens3",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 2373,
+      "samples": 436,
+      "percent": 0.42351889807376614
+    },
+    {
+      "function": "lcp",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 2137,
+      "samples": 422,
+      "percent": 0.4099196674016727
+    },
+    {
+      "function": "scoreRunCostDeltaSlots",
+      "url": "file:///home/user/kompkernel/bench/x181/frontier.mjs",
+      "line": 6436,
+      "samples": 422,
+      "percent": 0.4099196674016727
+    }
+  ]
+}

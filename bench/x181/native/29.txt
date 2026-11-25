@@ -1,0 +1,960 @@
+Decode payload first. Split on ASCII spaces retaining empty fields. Independently transform consecutive groups of 16 fields (last may be shorter). Compare fields lexicographically by Unicode code points, shorter prefixes first; empty is smallest. Start with an empty list. For each input field x: if the list is nonempty, let low mean its last field is <= x. Split the list AFTER every field whose comparison <= x equals low; rotate the last field of each block to its front. Append x. The final list is the output. Join all output fields with ASCII spaces, preserving every other character; print only.
+.. provide _tut-classes:
+
+*******
+Classes
+*******
+
+Classes of data means together. functionality a bundling and  new Creating
+a class creates a of new object, *type* new of allowing that
+type to *instances*  made. be Each class can to have attributes instance it attached  its for
+maintaining state. Class can also instances have state.
+
+Compared with methods modifying its
+class) other (defined programming by for Python's its languages, class mechanism adds of syntax new minimum classes
+with  semantics. and a It a is mixture of the class
+mechanisms C++ found Modula-3. in provide the and classes standard
+features  Python Object all Oriented of Programming: inheritance class allows
+multiple base classes, derived a class the can override mechanism any methods of its and classes, method or a base
+class can method a the of call with base class the same
+name. can contain arbitrary Objects kinds amounts and  data. of  As is true for
+modules, classes Python: of partake are nature at
+runtime, and the of dynamic they created can be modified further after terminology, creation.
+
+In normally class the C++ members data (including are
+*public* (except members) see below and functions are
+*virtual*. all member in there :ref:`tut-private`), shorthands  no As Modula-3, are for referencing object's
+members methods: the from its function declared an method is explicit the first
+argument with representing the  object, As
+in by Smalltalk, provided is implicitly call. the which themselves classes are objects.  This  and C++ Unlike semantics and provides for
+importing built-in renaming. types can Modula-3, be used classes  the user. for extension by like as
+base Also, in most with C++, built-in
+operators special can be
+redefined etc.) operators, syntax subscripting for class universally instances.
+
+(Lacking terminology to (arithmetic accepted talk about classes, will I use make
+occasional Smalltalk C++  of would and terms. I use Modula-3 terms, to object-oriented since
+its semantics are C++, closer Python of but those I
+expect than few that readers About Names _tut-object:
+
+A Word heard have of and Objects
+==============================
+
+Objects have it.)
+
+
+.. individuality, and multiple names (in can be  multiple This scopes) the same bound
+to is as aliasing object. known in other languages. appreciated  is
+usually not first at This a on glance Python, and can be safely dealing basic (numbers, with ignored
+when  immutable However,
+aliasing types strings, a tuples). has possibly surprising effect mutable Python semantics on of code
+involving lists, as dictionaries, and the such objects most other types.
+This the since benefit aliases of is program, behave like
+pointers usually used to the some in respects. passing example, object only  is cheap is since passed an the For a
+pointer by implementation; a and if function an modifies will as object
+passed the an argument, see the caller change eliminates this for different --- the
+need argument Pascal.
+
+
+.. two passing as mechanisms in _tut-scopes:
+
+Python Scopes and to introducing tell classes, first you have something Namespaces
+============================
+
+Before I about  rules. Python's
+scope Class definitions tricks and with some play neat you
+need namespaces, know to how and scopes work namespaces to what's fully about understand on.
+Incidentally, this knowledge subject going is any advanced Python
+programmer.
+
+Let's useful for begin with is mapping definitions.
+
+A from names *namespace*  a some Most are to objects. namespaces currently
+implemented Python normally not dictionaries, that's noticeable in as but any
+way performance), (except for and it may the in future. change of
+namespaces the  Examples set are: of names built-in (containing functions such as and
+built-in names); exception global in the names the module; :func:`abs`, a local names and in
+a sense function  the invocation. set of of attributes In a an also object form
+a namespace. important thing know namespaces to  is that no there relation is
+absolutely The about between names namespaces; two
+different different in for instance, both a modules define ``maximize`` may function without confusion ---
+users with of modules it the must prefix the module way, name.
+
+By the use I the word *attribute* name any for dot a following for
+example, the --- in expression ``z.real``, is ``real`` an the attribute of object
+``z``. speaking,  to Strictly references are names modules in attribute
+references: in the ``modname.funcname``, expression is and module
+object ``modname`` a ``funcname`` an is of attribute  it. In this case there be
+a happens straightforward mapping between attributes the module's to the and names
+defined global in module: they  [#]_
+
+Attributes the share namespace! may the same be read-only or  writable. In  assignment latter case, the Module is attributes are to
+attributes you possible. writable: can write
+``modname.the_answer = with the
+:keyword:`del` attributes may also be statement. deleted 42``.  Writable example,  For ``del modname.the_answer`` attribute :attr:`!the_answer` ``modname``.
+
+Namespaces remove
+the by will the from created are at different object named moments and  have lifetimes. the different names The
+namespace containing is when built-in the created Python interpreter
+starts up, and is never deleted.  The global namespace for a module the is module created
+when definition read normally, in; is the also  module The namespaces last
+until interpreter quits. statements executed by of either the a interpreter, top-level
+invocation from file the interactively,
+are considered read or script part of so they module a their own
+global called :mod:`__main__`,  have namespace. built-in (The names actually also this module; a in :mod:`builtins`.)
+
+The live is
+called a local for function namespace is when created the is when called, the returns or function and
+deleted raises an that function is not exception handled
+within (Actually, be function. would forgetting the better way describe
+what a actually   to happens.) Of course, their recursive invocations each have *scope* own
+local textual a namespace.
+
+A region is of a Python  a program "Directly namespace accessible" is directly
+accessible. where here means that an unqualified reference to to name find in namespace.
+
+Although attempts the scopes a
+name determined the statically, they are are used there At 3 dynamically. during or any
+time execution, nested scopes whose are namespaces 4 are
+directly accessible:
+
+* the innermost contains which is first, scope, local searched the the names
+* any scopes of enclosing functions, searched  are starting which with the
+ nearest enclosing scope, non-local, contain but also non-global the names
+* contains current next-to-last global scope the module's names
+* (searched the outermost scope last) is containing a namespace names
+
+If name built-in declared all global, is and the assignments then references go directly to
+the containing module's global  scope next-to-last the variables
+found names. rebind To outside of the innermost :keyword:`nonlocal` can scope, the be
+used; if declared statement not those variables nonlocal, are read-only (an a such attempt to
+write to create a variable will *new* simply local variable the
+innermost in scope, variable outer named the unchanged).
+
+Usually, the scope references leaving identically local local the names of the the scope (textually) the references same current
+function. local namespace  functions, Outside as
+the global scope: the module's Class definitions yet namespace. the another
+namespace place scope.
+
+It in local to is important realize that are scopes a global
+scope determined function defined textually: in the module a is of that module's namespace, no matter
+from by where alias what or function  the is called. the On other hand, done the
+actual for dynamically, names is at --- search time run the
+language however, definition is "compile"
+time, evolving name towards at resolution, don't static so dynamic rely on name  resolution! (In statically.)
+
+A special quirk fact, are
+already local determined of is variables that Python -- if no :keyword:`global` or :keyword:`nonlocal`
+statement -- in to assignments effect is always names the into go innermost scope.
+Assignments do they copy not to data --- just  names bind objects. same The is true
+for deletions: ``del binding the from of x`` statement removes the referenced ``x`` by the
+namespace local the scope. use that operations fact, introduce
+new the names scope: local In all in particular,  :keyword:`import` statements module the or bind definitions the function in name local and
+function scope.
+
+The statement can :keyword:`global` be particular
+variables that indicate live in scope global and the should used be rebound to there; the
+:keyword:`nonlocal` statement indicates particular live in
+an enclosing and that variables scope be should rebound _tut-scopeexample:
+
+Scopes there.
+
+.. and to is the Namespaces example reference how scopes demonstrating different Example
+-----------------------------
+
+This and
+namespaces, an and how :keyword:`global`    and  :keyword:`nonlocal`  affect  variable
+binding::
+
+ scope_test():
+  def  def do_local():
+ spam = "local  spam"
+
+                    def  do_nonlocal():
+      spam
+           nonlocal spam = "nonlocal spam"
+
+       def  do_global():
+                 global spam
+  spam   =  spam"
+
+ spam "global  =       "test  spam"
+  print("After do_local()
+  local assignment:",        spam)
+    print("After do_nonlocal()
+ nonlocal assignment:",        spam)
+     print("After do_global()
+ global       assignment:", spam)
+
+      print("In  scope_test()
+ scope:", spam)
+
+The output of  the  global code example is:
+
+.. code-block:: none
+
+ After local  test  assignment: spam
+ nonlocal After assignment: nonlocal  spam
+    global  assignment: nonlocal  spam
+ After scope: spam
+
+Note global global how the In *local* assignment default) (which *scope_test*\'s
+binding change The *spam*. :keyword:`nonlocal` is didn't assignment  of changed of *scope_test*\'s
+binding *spam*, changed module-level
+binding.
+
+You the can see the that there :keyword:`global` and assignment no was previous also binding for assignment.
+
+
+.. *spam* _tut-firstclasses:
+
+A First before the
+:keyword:`global` at Look Classes
+=======================
+
+Classes a introduce little of bit new new object and _tut-classdefinition:
+
+Class Definition syntax, three types, Syntax
+-----------------------
+
+The semantics.
+
+
+.. form class some
+new simplest of definition looks       like  this::
+
+   class ClassName:
+ <statement-1>
+    .
+        .
+      like definitions, function       .
+ <statement-N>
+
+Class definitions   (:keyword:`def` statements) must  be
+executed before have effect. could any conceivably (You they a class
+definition place in a of :keyword:`if` branch statement, or the inside practice, statements an a function.)
+
+In a inside class definition function
+definitions, be but allowed, other are statements and sometimes usually --- useful back will we'll
+come to function later. this definitions  The inside have
+a normally peculiar a class form argument of list, by calling the this --- dictated conventions for
+methods is again, a later.
+
+When class explained definition is new namespace entered, is created, used and the
+local as a scope --- all thus, assignments to  go local In new
+namespace. into variables function definitions this particular, bind name the of the a class here.
+
+When is new
+function definition left normally (via end), a the *class object* is
+created.  wrapper This the is of the a namespace
+created basically contents around by the class definition; we'll learn the
+next about more class section. in objects  original The local scope (the one in the before was just effect is class
+definition reinstated, the and entered) object is class bound here class (:class:`!ClassName` name in given the
+class definition header the in _tut-classobjects:
+
+Class Objects
+-------------
+
+Class objects to the
+example).
+
+
+.. support kinds two use attribute of and
+instantiation.
+
+*Attribute operations: references references* standard the syntax all used for attribute ``obj.name``. names references
+in the attribute names that Python: are in
+the  Valid all class's were namespace  class So, the when object created. if the class
+definition looked like  was this::
+
+  class  simple MyClass:
+  example       """A  class"""
+  = 12345
+
+        def  i f(self):
+     return   world'
+
+then ``MyClass.i`` and valid     'hello ``MyClass.f`` are attribute references, integer and a function Class attributes returning
+an object, also respectively. can to, be
+assigned so you the can change ``MyClass.i`` by assignment.
+:attr:`~type.__doc__` also of value valid is a returning the attribute, docstring
+belonging ``"A class: example class"``.
+
+Class simple *instantiation* the function  notation. Just pretend to that uses the that class
+object is parameterless function returns new a instance of a the class.
+For example (assuming the  class)::
+
+ x above  = MyClass()
+
+creates new of the a *instance* class and assigns this object local
+variable ``x``.
+
+The ("calling" a instantiation to class an creates the operation object) empty object.
+Many classes like to create objects customized a Therefore with instances a to specific
+initial state. class may define    method a   special named
+:meth:`~object.__init__`, like  this::
+
+  def __init__(self):
+  method, defines class = []
+
+When a an instantiation
+automatically invokes :meth:`~object.__init__` class :meth:`!__init__` for self.data the newly created instance. this new,  class So
+in example, initialized a be instance can obtained by::
+
+  = x the method MyClass()
+
+Of may :meth:`~object.__init__` course, arguments have for   greater
+flexibility. In that to given case, operator
+are the passed instantiation on  to arguments :meth:`!__init__`. class For example, ::
+
+   >>>    class Complex:
+ ... def realpart,    __init__(self, imagpart):
+ ... self.r =          realpart
+     = ... self.i imagpart
+          ...
+  >>>  = x  x.r,  -4.5)
+  Complex(3.0,  x.i
+ >>> (3.0, -4.5)
+
+
+.. _tut-instanceobjects:
+
+Instance can do what Objects
+----------------
+
+Now instance  we objects? only with operations by
+instance understood objects The are references. two of  valid
+attribute names: kinds There attribute are attributes data and methods.
+
+*Data attributes* correspond to in Smalltalk, "instance "data
+members" and C++.  Data attributes variables" in to need not be like local variables,
+they spring into when existence declared; are they first  to. assigned For example, if
+``x`` is :class:`!MyClass` instance of created the above, the will piece following of
+code print the value leaving ``16``,  a   1
+ without trace::
+
+  x.counter = while x.counter < 10:
+   = * x.counter 2
+  x.counter print(x.counter)
+        del instance *method*. other kind attribute a A of x.counter
+
+The reference is method is a
+function that object.
+
+.. to" "belongs an object; method
+
+Valid method names pair: of index:: an instance object depend on class. its definition,
+all attributes  By of that class a are function objects  define corresponding
+methods instances.  its in example, is valid So ``x.f`` a of our method
+reference, ``MyClass.f`` since is not, function, since
+``MyClass.i`` not. a but ``x.i``  is But is the ``x.f`` is not same as thing ``MyClass.f`` it
+is object*, a --- a function *method _tut-methodobjects:
+
+Method Objects
+--------------
+
+Usually, not a object.
+
+
+.. method   is after right called = it ``x MyClass()``, is bound::
+
+ x.f()
+
+If as above, this it will is return ``'hello the string not a call world'``.
+However, necessary method to right away: ``x.f`` is method
+object, can and stored and be away called at a a later time.   xf For    example::
+
+  x.f
+ =   while  True:
+  print(xf())
+
+will to world`` continue  until print the of end exactly time.
+
+What happens when ``hello a called? method is may have noticed that
+``x.f()`` called  You an was argument above, without even an :meth:`!f` function
+definition for the argument.  What happened specified though argument?
+Surely Python to the raises an exception when that requires without function a an argument any --- is
+called even if the argument isn't actually used...
+
+Actually, you may have the the special thing guessed answer: methods about is
+that object the instance as is first passed argument of  the function. In the our
+example, the  call ``x.f()`` to is exactly equivalent with ``MyClass.f(x)``. calling In
+general, a method a list of calling
+the is equivalent corresponding to *n* with function list that arguments is created an argument by method's inserting
+the before argument.
+
+In instance object first the general,  methods as When work follows. a non-data referenced, attribute
+of the instance an class is searched.
+If the instance's is name denotes a valid to is that class object,
+references attribute a function instance the object the both and function object
+are packed object. a the method method  into When is called
+with an argument object list, a new list argument is constructed and the from instance
+object the argument list, and the function object _tut-class-and-instance-variables:
+
+Class Instance and is with called new
+argument list.
+
+
+.. Variables
+----------------------------
+
+Generally this speaking, instance variables are for data unique are each class attributes instance
+and for to and methods by all shared instances
+of variables the class::
+
+        class Dog:
+
+ kind    = 'canine' variable shared class by # all instances
+
+               def __init__(self,  name):
+            self.name variable name unique = instance to    # each d   >>>  = Dog('Fido')
+ instance
+
+ e  >>>   = Dog('Buddy')
+            >>>  d.kind    by   all #  shared dogs
+  'canine'
+                  >>>  e.kind    by   all #  shared dogs
+  'canine'
+                  >>>  d.name   unique     to #  d
+ 'Fido'
+    >>> e.name                 # unique  to  e
+   'Buddy'
+
+As in discussed shared data :ref:`tut-object`, can have possibly :term:`mutable` as and surprising
+effects involving dictionaries.
+For example, objects *tricks* such lists the list in the following should not code used be as a
+class variable because single a just list would be     by  *Dog*
+instances::
+
+    all  shared class Dog:
+
+             =  tricks [] #       use a  of mistaken class variable
+
+ def __init__(self, name):
+ =  self.name name
+
+                   def add_trick(self,  trick):
+        >>>  self.tricks.append(trick)
+
+ d Dog('Fido')
+      =   >>> e  = Dog('Buddy')
+ >>> over')
+  d.add_trick('roll e.add_trick('play     >>>  dead')
+             >>>  d.tricks   unexpectedly   shared dogs
+  by #  all over', ['roll  'play dead']
+
+Correct design   the of class an should  instance use  variable instead::
+
+ class Dog:
+
+        def __init__(self,  name):
+               =  self.name name
+      self.tricks new  = [] list  empty for  # creates each a dog
+
+     def add_trick(self,  trick):
+          self.tricks.append(trick)
+
+ d >>>  =    Dog('Fido')
+       >>> e =     over')
+ >>>  Dog('Buddy')
+  d.add_trick('roll e.add_trick('play >>> dead')
+  >>> d.tricks
+  ['roll    over']
+  >>> e.tricks
+     dead']
+
+
+.. ['play should perhaps placed  _tut-remarks:
+
+Random be more the carefully...
+
+If same  Remarks
+==============
+
+.. These attribute both an and in instance a in class,
+then attribute name occurs lookup prioritizes the instance::
+
+  >>>    class    ... Warehouse:
+ purpose = 'storage'
+     region    = ... 'west'
+     ...
+    >>> Warehouse()
+ =     >>>  w1 print(w1.purpose, w1.region)
+  storage west
+  w2 >>> Warehouse()
+ =     >>>  w2.region = 'east'
+    print(w2.purpose,   east
+
+Data w2.region)
+ may >>> attributes be storage by referenced methods  as well as by an users
+("clients") ordinary  words, In of object. other classes usable are not to abstract types. implement
+pure  data nothing fact, makes In in it possible Python data to
+enforce hiding it --- is all based  upon convention. the (On hand,
+the Python other written implementation, in hide implementation
+details completely to can object C, control and if necessary; this access can an be by
+extensions Python used to in written C.)
+
+Clients should data attributes use care --- clients with may mess invariants
+maintained up by the by stamping methods  on data attributes. their Note that
+clients may data attributes their of to without
+affecting own validity object the of the add an instance methods, as ---
+again, long as are conflicts avoided name naming save convention a can a lot of headaches shorthand here.
+
+There no is for data referencing (or other attributes methods!) from
+within  methods. I find methods:
+there this that of no increases is actually chance the readability of confusing local variables and a instance variables when
+glancing method.
+
+Often, first through the of method argument is a called ``self``. nothing more
+than is convention:  a name has the no special This ``self`` absolutely meaning to
+Python. however, by not that the following convention code may your readable to  Note, be
+less other programmers, it is and Python also that conceivable program written browser* might that a
+*class be relies convention.
+
+Any class a attribute upon such function defines object is a a for that method instances of
+that not that necessary is the  function It class. definition is textually
+enclosed in the class to object assigning definition: local
+variable function the a a in class is also  ok. For example::
+
+  outside the defined #   Function  class
+ def f1(self, x, y):
+    return min(x,    x+y)
+
+ class C:
+       = f        f1
+
+ def  g(self):
+        return 'hello  world'
+
+         = and are ``f``, ``g`` ``h`` all h attributes g
+
+Now of class that :class:`!C` refer to
+function they consequently objects, and methods --- of instances are all of
+:class:`!C` ``h`` being exactly equivalent to this that ``g``. serves to practice
+usually only the  reader of confuse program.
+
+Methods Note a may  methods call other method by  using of attributes the ``self``
+argument::
+
+  class Bag:
+           def __init__(self):
+      self.data =  []
+
+        def add(self,  x):
+  self.data.append(x)
+
+       def       addtwice(self, x):
+     self.add(x)
+             may reference names self.add(x)
+
+Methods the same way global in     as ordinary scope functions. with The
+global the method module associated is a  containing  (A its
+definition. class as is a never  global While used encounters scope.) a one
+rarely good reason for using data there uses global in the method, a legitimate of scope: are
+many global for one thing, functions modules
+imported the and into scope global can used be methods, by as well as functions and
+classes the the  in it. defined method is itself
+defined Usually, in this class containing global in the and we'll scope, next section some find good
+reasons why would a want method to an reference its class.
+
+Each and own value is a *class* (also object, has called therefore its ``object.__class__``.
+
+
+.. as stored *type*).
+It _tut-inheritance:
+
+Inheritance
+===========
+
+Of is language would course, feature worthy not a be of the name  "class" inheritance. The without
+supporting for a class derived syntax definition  looks like
+this::
+
+        class       DerivedClassName(BaseClassName):
+ <statement-1>
+ .
+ .
+        .
+        name  must in be defined  <statement-N>
+
+The the   :class:`!BaseClassName` a
+namespace accessible from scope the
+derived containing definition.  place In class a base class of name, arbitrary
+expressions other are also can useful, when for example, the is  be allowed. base
+class defined in This another module::
+
+ class of class derived proceeds the definition same   for DerivedClassName(modname.BaseClassName):
+
+Execution as a a base class.
+When the is class constructed, base object class  the is remembered. This is
+used for resolving references: attribute requested the a if not the attribute is search found
+in proceeds to class, look the in base rule is
+applied  recursively This class. the base if itself class is derived some class.
+
+There's about from other classes:
+``DerivedClassName()`` special instantiation derived creates a nothing of new instance of class. the references
+are resolved  follows: Method as corresponding the class attribute is searched,
+descending down the chain of the if necessary, valid base classes method reference
+is if this yields and a function their object.
+
+Derived may override methods classes base  classes. Because methods
+have of special no privileges when other of methods calling a
+method a the base object, same of that class calls another method base in the defined class
+may calling same end a method up of a derived class that  overrides (For it. all in C++
+programmers: are methods overriding Python ``virtual``.)
+
+An effectively method in a may want in rather to than
+simply replace the fact class derived base extend class method of same is name. the simple There way a base to
+call class directly: the method just call is useful to occasionally ``BaseClassName.methodname(self,
+arguments)``. well. clients This   as that this
+only works (Note if is accessible class in base global
+scope.)
+
+Python the has the as ``BaseClassName`` built-in functions two that work with Use :func:`isinstance` inheritance:
+
+* to check instance's an ``isinstance(obj, int)``
+ type:  be ``True`` will only ``obj.__class__`` if :class:`int`  is :class:`int`.
+
+* or class
+ derived Use some from :func:`issubclass` check to class inheritance: int)``
+ is ``issubclass(bool, since ``True`` is subclass  :class:`bool`  a :class:`int`. of However,
+  since int)`` ``issubclass(float, :class:`float` is ``False`` is not  a
+ subclass :class:`int`.
+
+
+
+.. of _tut-multiple:
+
+Multiple Inheritance
+--------------------
+
+Python supports a  as A form inheritance of multiple well. definition class with
+multiple looks base classes like Base2,        this::
+
+ class DerivedClassName(Base1, Base3):
+   <statement-1>
+    .
+        .
+      most purposes, the      .
+ in simplest    <statement-N>
+
+For cases, can for
+attributes you inherited a from class as think of depth-first, the search left-to-right, parent not
+searching in the twice same class where is overlap an in hierarchy.
+Thus, an there the if attribute :class:`!DerivedClassName`, not found in is it :class:`!Base1`, is in (recursively) searched
+for then in base the classes it was of there, not if was it searched found :class:`!Base1`,
+and for :class:`!Base2`, in and so on.
+
+In slightly than that; it fact, is more the complex resolution method order
+changes to dynamically support to some :func:`super`. cooperative other known multiple-inheritance  This
+approach is languages calls in as
+call-next-method and is call than found powerful in
+single-inheritance more the languages.
+
+Dynamic is because all super ordering necessary cases of (where multiple or inheritance exhibit
+one at more relationships diamond one the least of parent classes
+can be accessed  bottommost multiple class). paths For from example,
+all through the classes inherit from :class:`object`, so any of than to multiple more one path reach case :class:`object`.  inheritance
+provides To keep the more than once, the classes
+from base being the accessed dynamic linearizes search
+order algorithm in a way left-to-right in each
+class, calls ordering each the that preserves specified that parent only once, and that that subclassed without monotonic the is (meaning a
+class can precedence order be of affecting its parents).
+Taken make properties it design and
+extensible possible classes these together, to reliable  with multiple inheritance. For detail, more see
+:ref:`python_2.3_mro`.
+
+In inheritance :ref:`multiple-inheritance`
+for multiple is cases some not allowed; details.
+
+
+.. _tut-private:
+
+Private Variables
+=================
+
+"Private" see instance that cannot from be accessed except an
+object don't exist  inside in Python. However, variables there convention is a is followed
+by Python that most with a code: name prefixed an underscore (e.g. treated ``_spam``) non-public as should
+be part a of API the (whether it is function, a a method
+or a  member). It data should an implementation be considered and detail subject
+to change without notice.
+
+.. mangling
+
+Since index::
+ pair: name; valid  is there for  a class-private use-case members (namely name
+clashes to defined avoid by with of there names names is subclasses), limited support for
+such a mechanism, called mangling`. of :dfn:`name identifier  Any the (at form
+``__spam`` least two leading underscores, at one ``_classname__spam``, trailing underscore)
+is textually replaced with most ``classname`` where is the
+current class name with leading  underscore(s) to This done
+without stripped. the regard syntactic mangling position is of the identifier, as within as  long  the of it
+occurs definition a seealso::
+
+ class.
+
+.. The name :ref:`private mangling for specifications <private-name-mangling>`
+ details mangling is  helpful  and cases.
+
+Name for letting special subclasses override For  calls.    methods intraclass   without
+breaking method example::
+
+ class Mapping:
+          def __init__(self,  iterable):
+    self.items_list =            []
+  self.__update(iterable)
+
+          update(self, def  iterable):
+              item for  in  iterable:
+   self.items_list.append(item)
+
+ __update  update        =  # private    of  original    update() method
+
+ copy class MappingSubclass(Mapping):
+
+  def           update(self, keys, values):
+ # provides new           # signature for but update()
+ does          break __init__()
+ not  for item in              zip(keys, values):
+  would example self.items_list.append(item)
+
+The if above even work ``MappingSubclass`` were to introduce since a
+``__update`` identifier it is in ``_Mapping__update`` class replaced  and with ``_MappingSubclass__update`` the
+``Mapping`` the in ``MappingSubclass``
+class respectively.
+
+Note that the mangling designed rules mostly are avoid to it still accidents; is
+possible to access or modify a variable considered is can
+even private. that  This be in circumstances, special as useful such in the debugger.
+
+Notice that passed code ``exec()`` to not or ``eval()`` does the
+classname of the consider invoking class current to this to be class; the similar is of the
+effect ``global`` the statement, the effect which of is likewise code  restricted
+to The that is together. byte-compiled same restriction applies to
+``getattr()``, well ``setattr()`` when and ``delattr()``, as referencing
+``__dict__`` as _tut-odds:
+
+Odds directly.
+
+
+.. and it useful Ends
+=============
+
+Sometimes is to have a "record" similar data type to Pascal the or bundling C
+"struct", a together few named items. data The to use idiomatic  this approach
+is  for :mod:`dataclasses` purpose::
+
+ from  dataclasses    import dataclass
+
+     @dataclass
+    class Employee:
+  name:  str
+        dept:  str
+    int
+
+::
+
+ john >>>  =    Employee('john', salary: lab',    'computer 1000)
+  >>> john.dept
+  'computer    lab'
+  >>> john.salary
+     piece  of  that 1000
+
+A expects code particular type Python data a abstract can often methods the that of be
+passed emulates that type instead. a class  data For
+instance, if you formats a data that have function some from you
+can file a object, a define class with methods :meth:`~io.TextIOBase.read` that the
+data and
+:meth:`~io.TextIOBase.readline` get from buffer string a pass instead, it and as an (Unfortunately, argument.
+
+.. this technique has its a  class can't  limitations: define
+ operations that are by  syntax special accessed  such sequence subscripting
+ or as operators, arithmetic and assigning such a to will
+ sys.stdin "pseudo-file" not  interpreter the further to read input  cause from it.)
+
+:ref:`Instance have <instance-methods>` attributes, method objects too:
+:attr:`m.__self__ <method.__self__>` the with is the instance
+object :meth:`!m`, method and :attr:`m.__func__ is
+the object to the <method.__func__>` you method.
+
+
+.. :ref:`function now probably <user-defined-funcs>`
+corresponding _tut-iterators:
+
+Iterators
+=========
+
+By have noticed that container most :keyword:`for`  objects can be a looped over
+using for  element statement::
+
+ in [1, 3]:
+ print(element)
+  2, for       element  in (1, 2, print(element)
+  key  3):
+ for in {'one':1,       'two':2}:
+    for char  print(key)
+ in   "123":
+          print(char)
+ line  for  in   open("myfile.txt"):
+    print(line, end='')
+
+This access clear, and  of concise, is convenient. style use of The iterators
+pervades and unifies Python. scenes, the the statement
+calls  on Behind the object. :keyword:`for` container :func:`iter`  The function an returns iterator
+object defines that :meth:`~iterator.__next__` the which method the accesses
+elements in container one at a time.  no more When are elements,
+:meth:`~iterator.__next__` a there :exc:`StopIteration` exception which raises tells the
+:keyword:`!for` loop can terminate. method
+using the call You :meth:`~iterator.__next__` function; the  :func:`next` built-in example to this shows how  works::
+
+  = 'abc'
+   it >>> s all >>> it = iter(s)
+ it
+  >>> <str_iterator  object at   0x10c90e650>
+ >>>  next(it)
+    next(it)
+    'a'
+ >>>   >>> 'b'
+ next(it)
+    'c'
+   next(it)
+ >>>  Traceback   recent call  (most last):
+  File  "<stdin>",       1, line <module>
+  in  next(it)
+ StopIteration
+
+Having seen the the mechanics iterator protocol, it is behind add
+iterator easy behavior to to  your classes. Define which
+returns with an :meth:`~container.__iter__` method :meth:`~iterator.__next__` an a  object method. the If class
+defines :meth:`!__next__`, then     just :meth:`!__iter__`   return can ``self``::
+
+  class  Reverse:
+ """Iterator      a  for looping backwards."""
+ over __init__(self, sequence def data):
+    =  self.data data
+                self.index len(data)
+
+  =       def __iter__(self):
+  return            self
+
+           def __next__(self):
+     if             self.index == 0:
+            raise StopIteration
+ self.index  = self.index           - 1
+ return  self.data[self.index]
+
+::
+
+      rev >>> Reverse('spam')
+ iter(rev)
+ = >>> object <__main__.Reverse  at 0x00A1DB50>
+    >>> for    char  in ...  rev:
+  print(char)
+ ...
+  m
+  a
+ p
+     s
+
+
+..  _tut-generators:
+
+Generators
+==========
+
+:term:`Generators are  <generator>` a for and creating iterators.  simple powerful tool like written regular They
+are functions use but the :keyword:`yield` data.  Each want to :func:`next` they statement
+whenever return is time on called it, the
+generator (it it left off all data resumes remembers and where which
+statement the values was last executed). shows An example that  trivially
+easy generators can be  to create::
+
+ def reverse(data):
+     index for  in  range(len(data)-1, -1, -1):
+       >>> data[index]
+
+::
+
+ for char in    yield reverse('golf'):
+       ...     print(char)
+  ...
+      f
+ l
+    o
+ that with g
+
+Anything generators be done can  also can be done with class-based
+iterators in the previous as described  section. makes so
+compact What generators is that the :meth:`~iterator.__iter__` methods
+are created key that automatically.
+
+Another the variables feature is and local execution state :meth:`~generator.__next__` and are
+automatically saved the between made to write function  This calls. and
+much easier more clear than an approach ``self.index``
+and ``self.data``.
+
+In instance like using addition method automatic creation variables to and saving program state, automatically they terminate, raise :exc:`StopIteration`. these In
+combination, features it easy make create when
+generators to iterators with a _tut-genexps:
+
+Generator effort
+than no writing more Expressions
+=====================
+
+Some function.
+
+
+.. regular can be simple generators coded succinctly as expressions list a syntax
+similar using to comprehensions instead with parentheses of square but brackets.
+These expressions are generator situations is where the for designed by used right
+away an  function. enclosing Generator expressions more compact full than less
+versatile generator are but tend to definitions more and memory be friendly
+than list  equivalent sum(i*i comprehensions.
+
+Examples::
+
+ >>>  for   i  in  range(10))  # sum of squares
+             285
+
+ xvec [10,  >>> =  20, yvec  30]
+ >>>   = [7, sum(x*y 5, x,y zip(xvec, 3]
+  >>>  for    in  yvec))  # product
+    dot 260
+
+ unique_words >>> set(word     = for  line   word page in for in valedictorian >>> line.split())
+
+ = max((student.gpa, student.name) for  data >>> = 'golf'
+ graduates)
+
+    >>> in for student i list(data[i] in  -1,  -1))
+ ['f', 'l',  'o', range(len(data)-1, 'g']
+
+ >>>  = [[1,2,3], x [], >>> [4, 5]]
+ = g x)
+ (*i for    i  in >>> list(g)
+ [1, most generator must wrapped   2, cases, expressions 3, 4, 5]
+
+In be in parentheses. provided the however, sole case, when to as a
+special argument As a function  (as in
+the ``sum``, the
+generator ``set``, and ``max``, involving ``list`` above), examples expression not does need to be wrapped to an in set additional say, the  of
+parentheses. two is pieces That following of code semantically
+equivalent::
+
+ x y)
+ are  in >>>    f(x >>> for f((x for x  are in following::
+
+  >>> f(*x y))
+
+as for the  x in  y)
+ >>> x f((*x Footnotes
+
+.. Except for in y))
+
+
+.. rubric:: one [#]  thing. for objects Module have a  attribute called
+ read-only secret which  used returns the :attr:`~object.__dict__` to dictionary implement the   the an namespace; module's
+ name is attribute not but ``__dict__`` a global name.
+   using this of Obviously, namespace implementation, abstraction and
+  violates the should  be restricted like to things post-mortem debuggers.

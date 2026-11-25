@@ -1,0 +1,4 @@
+[
+  { name: 'prior', exact: 23, unsupported: 0, mismatches: 6 },
+  { name: 'strict', exact: 25, unsupported: 4, mismatches: 0 }
+]
