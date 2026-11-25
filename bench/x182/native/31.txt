@@ -1,0 +1,701 @@
+Decode payload first. Split on ASCII spaces retaining empty fields; use consecutive groups of 512 fields, last shorter if needed. A field's weight is its Unicode code-point length minus 2. For each group sum its weights. Repeatedly remove the LEFT field if sum>0, otherwise the RIGHT field, subtract its weight, and save it. Reverse the saved fields. Join all groups with ASCII spaces, preserve every other character; print only.
+wget    do
+ 10.244.0.7:9376; 10.244.0.6:9376 10.244.0.5:9376 in ep pod:
+
+```shell
+for a within on.
+
+From listening are Pods your number port whatever to
+use want you'll app, own your debugging are you if but 9376, port on HTTP hostname
+via own its serves walk-through this for used container example .items}}{{.status.podIP}}{{"\n"}}{{end}}'
+```
+```none
+10.244.0.5
+10.244.0.6
+10.244.0.7
+```
+
+The go-template='{{range -o    \
+ app=hostnames -l pods get directly.
+
+```shell
+kubectl them test and addresses IP of
+Pod list the get can You  serving. are Pods your that confirm also can 2m
+```
+
+You          0   Running       1/1   2m
+hostnames-632524106-tlaok          0   Running       1/1   2m
+hostnames-632524106-ly40y          0   Running       1/1   AGE
+hostnames-632524106-bbpiw   RESTARTS    STATUS     READY                        app=hostnames
+```
+```none
+NAME -l pods get running:
+
+```shell
+kubectl are Pods your confirm can the
+Deployment.
+
+You of name the to deployment` create `kubectl by set automatically is "app" label registry.k8s.io/serve_hostname
+```
+
+The image:        hostnames
+ name: -      containers:
+      spec:
+    hostnames
+ app:        labels:
+      metadata:
+    template:
+  3
+ replicas:  hostnames
+ app:      matchLabels:
+    selector:
+  hostnames
+spec:
+ name:  hostnames
+ app:    labels:
+  Deployment
+metadata:
+ apps/v1
+kind: following
+YAML:
+
+```yaml
+apiVersion: the with Deployment the started had you if as same the is this that scaled
+```
+
+Note --replicas=3
+```
+```none
+deployment.apps/hostnames hostnames deployment scale replicas.
+```shell
+kubectl 3 to deployment the scale commands.
+
+Let's subsequent in used be then can which mutated, or created resource the of name and type the print will commands created
+```
+
+`kubectl` --image=registry.k8s.io/serve_hostname
+```
+```none
+deployment.apps/hostnames hostnames deployment create point.
+
+```shell
+kubectl data second a get and along follow you
+can or details, own your substitute can you Service own your debugging you're
+probably Since  Pods. some run let's walk-through, this of purposes the Setup
+
+For <COMMAND>
+```
+
+## -- <CONTAINER-NAME> -c <POD-NAME> exec using:
+
+```shell
+kubectl it in a
+command run can you use, to prefer you that Pod running a have already you >}}
+
+If /note enter.
+{{< pressing try prompt, command a see don't you >}}
+If note sh
+```
+
+{{< --image=registry.k8s.io/busybox:1.27.2 busybox --restart=Never --rm -it run Pod:
+
+```none
+kubectl busybox interactive an run to is this do to way simplest The  cluster
+sees. the in running Pod a what see to want will you here steps many Pod
+
+For a in commands Running -->
+
+## body wrong.
+
+<!-- going what's out figure to help
+you hopefully will document This  it. access to try you when response no you
+get but Service, a created and controller) workload other (or a
+Deployment through Pods your run You've  properly. working not is Service a is
+that Kubernetes of installations new for frequently rather up comes that issue -->
+An overview 20
+---
+
+<!-- Services
+weight: Debug task
+title: bowei
+content_type: thockin
+- ---
+reviewers:
+- a is this that denotes "svc" The  in. operating you're the
+Namespace is "default" The  "default.svc.cluster.local". here: suffix the hostnames.default.svc.cluster.local
+```
+
+Note 10.0.1.175 1: hostnames.default.svc.cluster.local
+Address      kube-dns.kube-system.svc.cluster.local
+
+Name: 10.0.0.10 1: hostnames.default.svc.cluster.local
+```
+```none
+Address name:
+
+```shell
+nslookup a
+fully-qualified try fails, still this If  Namespace. same the in Service and app your or
+run name, cross-namespace a use to app your adjust to need you'll works, this hostnames.default.svc.cluster.local
+```
+
+If 10.0.1.175 1: hostnames.default
+Address      kube-dns.kube-system.svc.cluster.local
+
+Name: 10.0.0.10 1: hostnames.default
+```
+```none
+Address Pod):
+
+```shell
+nslookup a within from (again, name namespace-qualified a try different
+Namespaces, in are Service and Pod your perhaps fails, this hostnames.default.svc.cluster.local
+```
+
+If 10.0.1.175 1: hostnames
+Address      kube-dns.kube-system.svc.cluster.local
+
+Name: 10.0.0.10 1: hostnames
+```
+```none
+Address Namespace:
+
+```shell
+nslookup same the in Pod a DNS
+name.
+
+From a through is Service a consume clients that ways common most the of name?
+
+One DNS by work Service the Does details.
+
+## more for Policies](/docs/concepts/services-networking/network-policies/) [Network to refer reviewed.
+
+Please be to need these Pods, `hostnames-*` to incoming
+traffic affect may which rules Ingress Policy Network any deployed have you Pods?
+
+If target the affecting rules Ingress Policy Network Any same.
+
+## the be might values these real-world
+Services, many For  Pods. the than number port different a uses created
+here you Service the configuration, of range full the highlight to order 9376
+```
+
+In targetPort:    80
+ port:    TCP
+ protocol:    default
+ name: -  ports:
+  hostnames
+ app:    selector:
+  hostnames
+spec:
+ name:  hostnames
+ app:    labels:
+  Service
+metadata:
+ v1
+kind: YAML:
+
+```yaml
+apiVersion: with Service the started had you if as same the is this before, exists.
+
+As Service the that know you 5s
+```
+
+Now    80/TCP        <none>   10.0.1.175   ClusterIP   AGE
+hostnames   PORT(S)   EXTERNAL-IP   CLUSTER-IP        TYPE        hostnames
+```
+```none
+NAME svc get back:
+
+```shell
+kubectl it read exposed
+```
+
+And --target-port=9376
+```
+```none
+service/hostnames --port=80 hostnames deployment expose here.
+
+```shell
+kubectl details Service's own your can
+use you - walk-through the for is this before, As  Service. the create found
+```
+
+Let's not "hostnames" services (NotFound): server from found.
+Error resources hostnames
+```
+```none
+No svc get exists:
+
+```shell
+kubectl actually Service that whether is check to thing first 'hostnames'
+```
+
+The address host resolve to unable known.
+wget: not service or Name failed: (hostnames)... hostnames hostnames
+```
+```none
+Resolving -O- like:
+
+```shell
+wget get
+something would you name by Service this consumes that Pod another have If
+you  Service? non-existent a access to tried you if happen would check.
+
+What to thing first the and
+is forgotten, gets sometimes that step a is This  intentional. is that - Service
+yet a create actually not did you that noticed have will reader astute exist?
+
+The Service the Does work.
+
+## doesn't Service why
+your investigate to start can you far, so plan to gone has everything from
+there.
+
+Assuming debug and Pods your into directly exec` `kubectl to need you or
+perhaps happening, is what seeing for useful be to logs` `kubectl find might are.
+You they think you port the on listening be not might or healthy be not Pods
+might your point, this at expect you responses the getting not are you like:
+
+```
+hostnames-632524106-bbpiw
+hostnames-632524106-ly40y
+hostnames-632524106-tlaok
+```
+
+If something produce should $ep
+done
+```
+
+This -qO-   "347189",
+ "resourceVersion":        "428c8b6c-24bc-11e5-936d-42010af0a9bc",
+ "uid":        "default",
+ "namespace":        "hostnames",
+ "name":        {
+ "metadata":    "v1",
+ "apiVersion":    "Service",
+ "kind":    json
+```
+```json
+{
+ -o hostnames service get it:
+
+```shell
+kubectl verify Service
+and your back Read  port. Pod's your matches and correct is your
+Service that check triple and double really should you but silly, sound might correctly?
+
+It defined Service the Is on.
+
+## Read  wrong. going be could that things of number a there
+are not, If  responses. correct get should you working, is Service your like:
+
+```
+hostnames-632524106-bbpiw
+hostnames-632524106-ly40y
+hostnames-632524106-tlaok
+```
+
+If something produce should 10.0.1.175:80
+done
+```
+
+This -qO- wget    
+ do 3); 1 $(seq in i above).
+
+```shell
+for get` `kubectl (from IP the
+Service's access cluster, your in Pod a From  address. IP its by works your
+Service whether is test to thing next the works, DNS that confirmed have you IP?
+
+Assuming by work Service the Does Service.
+
+## DNS the debug Service, own your debugging of instead over,
+but start and document this of top the to back go even or document, this section
+of [kube-proxy](#is-the-kube-proxy-working) the see please fails, this kubernetes.default.svc.cluster.local
+```
+
+If 10.0.0.1 1: kubernetes.default
+Address      kube-dns.kube-system.svc.cluster.local
+
+Name: 10.0.0.10 1: 10.0.0.10
+Address    kubernetes.default
+```
+```none
+Server: Pod:
+
+```shell
+nslookup a within From  work. always should master
+Service Kubernetes The  working. not is else what see and back step a take You
+can  Service. your for working not are lookups DNS fails, still above the {#does-any-service-exist-in-dns}
+
+If name? DNS by work Service any Does generates.
+
+### it names DNS the of all cover to enough is
+high which default, by 5 to this sets Kubernetes  all. at paths search library
+considers client DNS your that enough high `ndots` set must line `options` previous
+commands.
+
+The the of all in that change should you case which in configured
+differently, be might clusters own Your  "cluster.local". be to is
+assumed suffix cluster the document, this Throughout  flag. the
+`--cluster-domain` with `kubelet` into passed is suffix cluster The  total). 6 (up
+to that after records additional have might you install own your on ("cluster.local").
+Depending cluster the in names for lastly and Namespaces
+("svc.cluster.local"), all in Services ("default.svc.cluster.local"), local
+Namespace the in Services for looking is it case this In  name. the
+Service find to you for suffix appropriate an include must line `search` flag.
+
+The `--cluster-dns` the with `kubelet` into is
+passed This  Service. DNS cluster's your indicate must line `nameserver` ndots:5
+```
+
+The example.com
+options cluster.local svc.cluster.local default.svc.cluster.local 10.0.0.10
+search like:
+
+```
+nameserver something see should /etc/resolv.conf
+```
+
+You Pod:
+
+```shell
+cat a From
+within  correct. is Pod your in file `/etc/resolv.conf` your that check to you
+need one, relative a not but lookup name fully-qualified a do to able are you 10.0.1.175
+```
+
+If hostnames.default.svc.cluster.local
+Address:   10.0.0.10#53
+
+Name:        10.0.0.10
+Address:         10.0.0.10
+```
+```none
+Server: hostnames.default.svc.cluster.local >}}
+
+```shell
+nslookup /note different.
+{{< be might yours IP, Service DNS cluster's the is >}}
+10.0.0.10 note cluster:
+
+{{< the in Node a from this try also can cluster.
+
+You your
+own in different be COULD which domain, cluster your is "cluster.local" Service.
+The crashing.
+
+The not and fine running are that
+they implies which old, hour an about are Pods these that says column "AGE" Service.
+
+The the on configured selector label a is argument app=hostnames` `-l 1h
+```
+
+The          0   Running       1/1   1h
+hostnames-632524106-tlaok          0   Running       1/1   1h
+hostnames-632524106-ly40y          0   Running       1/1   AGE
+hostnames-632524106-bbpiw   RESTARTS    STATUS     READY                        app=hostnames
+```
+```none
+NAME -l pods get that:
+
+```shell
+kubectl re-check can You  running. were Pods the that saw you Service.
+
+Earlier the by selected being are
+actually ran you Pods the that check let's Now  DNS. by resolved is and correctly
+defined is Service your that confirmed have you far, this got you EndpointSlices?
+
+If any have Service the }
+        "hostnames"
+ "app":            {
+ "labels":        "2015-07-07T15:24:29Z",
+ "creationTimestamp":         },
+    "spec": {
+        "ports": [
+            {
+                "name": "default",
+                "protocol": "TCP",
+                "port": 80,
+                "targetPort": 9376,
+                "nodePort": 0
+            }
+        ],
+        "selector": {
+            "app": "hostnames"
+        },
+        "clusterIP": "10.0.1.175",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+    },
+    "status": {
+        "loadBalancer": {}
+    }
+}
+```
+
+* Is the Service port you are trying to access listed in `spec.ports[]`?
+* Is the `targetPort` correct for your Pods (some Pods use a different port than the Service)?
+* If you meant to use a numeric port, is it a number (9376) or a string "9376"?
+* If you meant to use a named port, do your Pods expose a port with the same name?
+* Is the port's `protocol` correct for your Pods?
+
+## Does 5063    22:14:54.038140 Proxier.
+I1027 iptables Using server.go:247] 5063    22:14:53.998163 "/kube-proxy"
+I1027 container resource-only in Running server.go:200] 5063    22:14:53.995134 like:
+
+```none
+I1027 something see You
+should  logs. access to `journalctl` use OSes other while as
+/var/log/kube-proxy.log, such file, a is it OSes some On  OS. Node your on logs
+depends the Accessing  logs. the at look to have you'll this, do To  the
+master. contacting like obvious, something failing not is it that confirm --v=2
+```
+
+Next, --kubeconfig=/var/lib/kube-proxy/kubeconfig --master=https://kubernetes-master /usr/local/bin/kube-proxy 25:43  Jul04 Sl    ? 17696 101864 0.1  0.4  4194  kube-proxy
+```
+```none
+root grep | auxw below:
+
+```shell
+ps the like something get should you a
+Node, on directly Running  Nodes. your on running is `kube-proxy` that running?
+
+Confirm kube-proxy Is using.
+
+### are you Services of implementation whatever investigate to have you
+will and apply, not will sections following the kube-proxy, use not does your
+cluster If  abstraction. Service the providing for mechanisms of set a
+small of one configures and node every on runs that program a is This  is
+kube-proxy. clusters, most on used one the and Services, of implementation default piece.
+
+The by piece it, confirm Let's  is
+suspect. mechanism proxy Service whole the point, this At  serving. actually Pods
+are your and EndpointSlices, has running, is Service your here, get you working?
+
+If kube-proxy the Is there.
+
+## happening what's investigate should you own
+Pods), your for is behavior correct the whatever (or happens what not is If
+this  hostname. own its return to list endpoints the in Pod each expect like:
+
+```
+hostnames-632524106-bbpiw
+hostnames-632524106-ly40y
+hostnames-632524106-tlaok
+```
+
+You something produce should $ep
+done
+```
+
+This -qO- wget    do
+ 10.244.0.7:9376; 10.244.0.6:9376 10.244.0.5:9376 in ep Pod:
+
+```shell
+for a within >}}
+
+From /note (80).
+{{< port Service the than rather (9376), port Pod the use commands >}}
+These note Endpoints
+above.
+
+{{< the by listed as Pods, the to straight go and mechanism the
+Service bypass can you - working actually are Pods the that again check themselves.
+Let's Pods the verified you walk-through, this of beginning the Pods.
+At your selected has and exists Service your that know you point, this working?
+
+At Pods the Are Deployment.
+
+## a create to used also been have could command run` `kubectl where
+the 1.18, to previous versions in as `run=hostnames`, specifying the
+Deployment but `app=hostnames`, for selecting Service the as such error, or
+other typo a have to is mistake common A  Pods. your on values for
+`metadata.labels` selects actually Service your of field `spec.selector` that
+the check should you `<none>`, is column `ENDPOINTS` the If  Service. for
+your Pods correct the found has controller EndpointSlice the that confirms 10.244.0.5,10.244.0.6,10.244.0.7
+```
+
+This    9376          IPv4   ENDPOINTS
+hostnames-ytpni   PORTS   ADDRESSTYPE              kubernetes.io/service-name=hostnames
+
+NAME -l endpointslices get objects.
+
+```shell
+kubectl EndpointSlice more or one into results the saves and Service of
+every selector the evaluates which loop control a is system Kubernetes the pods](/docs/tasks/debug/debug-application/debug-pods).
+
+Inside [debug to how about more read high, is count restart the issues.
+If connectivity intermittent to lead could restarts Frequent  being
+restarted. or frequently crashing not are pods these that says column "RESTARTS" servers. real corresponding create will it Pod
+endpoint, each For  server. virtual a create will kube-proxy IPs, and
+load-balancer IPs, external NodePorts, any plus Service, each of port each 0
+...
+```
+
+For          0      1    Masq               10.244.0.7:9376 ->  0
+          0      1    Masq               10.244.0.6:9376 ->  0
+          0      1    Masq               10.244.0.5:9376 ->  rr
+ 10.0.1.175:80  InActConn
+...
+TCP ActiveConn Weight Forward           RemoteAddress:Port ->  Flags
+ Scheduler LocalAddress:Port -ln
+```
+```none
+Prot Node:
+
+```shell
+ipvsadm a on following the like something see should you mode, "ipvs" mode
+
+In IPVS load-balancers).
+
+#### and node-ports (including exact
+config your on based vary will rules exact The  it. in rules of number small with
+a chain `KUBE-SEP-<hash>` one and `KUBE-SVC-<hash>` that in rules of small
+number a be should there endpoint, Pod each For  chain. `KUBE-SVC-<hash>` and
+one `KUBE-SERVICES` in rule 1 be should there Service, each of port each KUBE-SEP-57KPRZ3JQVENLNBR
+```
+
+For -j "default/hostnames:" --comment comment -m KUBE-SVC-NWV5X2332I4OT4T3 KUBE-SEP-X3P2623AGDH6CDF3
+-A -j 0.50000000000 --probability random --mode statistic -m "default/hostnames:" --comment comment -m KUBE-SVC-NWV5X2332I4OT4T3 KUBE-SEP-WNBA2IHDGP2BOBGZ
+-A -j 0.33332999982 --probability random --mode statistic -m "default/hostnames:" --comment comment -m KUBE-SVC-NWV5X2332I4OT4T3 KUBE-SVC-NWV5X2332I4OT4T3
+-A -j 80 --dport tcp -m IP" cluster "default/hostnames: --comment comment -m tcp -p 10.0.1.175/32 -d KUBE-SERVICES 10.244.2.3:9376
+-A --to-destination DNAT -j tcp -m "default/hostnames:" --comment comment -m tcp -p KUBE-SEP-X3P2623AGDH6CDF3 0x00004000/0x00004000
+-A --set-xmark MARK -j "default/hostnames:" --comment comment -m 10.244.2.3/32 -s KUBE-SEP-X3P2623AGDH6CDF3 10.244.1.7:9376
+-A --to-destination DNAT -j tcp -m "default/hostnames:" --comment comment -m tcp -p KUBE-SEP-WNBA2IHDGP2BOBGZ 0x00004000/0x00004000
+-A --set-xmark MARK -j "default/hostnames:" --comment comment -m 10.244.1.7/32 -s KUBE-SEP-WNBA2IHDGP2BOBGZ 10.244.3.6:9376
+-A --to-destination DNAT -j tcp -m "default/hostnames:" --comment comment -m tcp -p KUBE-SEP-57KPRZ3JQVENLNBR 0x00004000/0x00004000
+-A --set-xmark MARK -j "default/hostnames:" --comment comment -m 10.244.3.6/32 -s KUBE-SEP-57KPRZ3JQVENLNBR hostnames
+```
+```none
+-A grep | Node:
+
+```shell
+iptables-save a on following the like something see should you mode, "iptables" mode
+
+In Iptables "ipvs".
+
+#### is mode other common most The  mode. in
+"iptables" running is kube-proxy that indicates Proxier` iptables `Using the
+line above, listed log the In  modes. few a of one in run can steps.
+
+Kube-proxy installation and configuration Node your double-check you
+should master, the contact to able being not about messages error see you 10.0.0.10:53/TCP
+```
+
+If at "kube-system/kube-dns:dns-tcp" service new Adding proxier.go:294] 5063    22:14:54.040223 10.0.0.10:53/UDP
+I1027 at "kube-system/kube-dns:dns" service new Adding proxier.go:294] 5063    22:14:54.040154 10.0.0.1:443/TCP
+I1027 at "default/kubernetes:https" service new Adding proxier.go:294] 5063    22:14:54.040048 master
+I1027 from received been have Endpoints and Services until iptables syncing Not proxier.go:429] 5063    22:14:54.038238 [10.240.0.2:443]
+I1027 to "default/kubernetes:https" for endpoints Setting proxier.go:352] 5063    22:14:54.038209 [10.244.1.3:53]
+I1027 to "kube-system/kube-dns:dns" for endpoints Setting proxier.go:352] 5063    22:14:54.038164 [10.244.1.3:53]
+I1027 to "kube-system/kube-dns:dns-tcp" for endpoints Setting proxier.go:352] information.
+
+
+ more document](/docs/tasks/debug/)
+for overview [troubleshooting the %}}
+
+Visit "whatsnext" heading {{% or
+[GitHub](https://github.com/kubernetes/kubernetes).
+
+## or
+[Forum](https://discuss.kubernetes.io) on
+[Slack](https://slack.k8s.io/) us help
+investigate!
+
+Contact can we so on, going is what know us let Please  working. not is your
+Service yet And  misbehaving. be to seem not does `kube-proxy` and DNS
+working, have You  serving. actually are Pods your and EndpointSlices, has is
+running, Service Your  happening. is strange very something far, this get you help
+
+If Seek out.
+
+## works above of none if help Seek Metric:1
+```
+
+*  MTU:1460  MULTICAST PROMISC RUNNING BROADCAST PROMISC
+```
+```none
+UP |grep cbr0 see:
+
+```shell
+ifconfig should you properly, configured and is
+used bridge `cbr0` If node. on bridge linux manipulate to permission the `Kubelet`
+has ensure `promiscuous-bridge`, is mode hairpin effective the If done
+```
+```none
+1
+1
+1
+1
+```
+
+* $intf/hairpin_mode; cat do /sys/devices/virtual/net/cbr0/brif/*; in intf like:
+
+```shell
+for something see should properly,
+you works everything If node. on `/sys` in operate to permission has
+the `Kubelet` the ensure `hairpin-veth`, is mode hairpin effective the If "promiscuous-bridge"
+```
+
+* to set mode Hairpin kubelet.go:380] 3252    00:51:43.648698 below.
+
+```none
+I0629 something like mode, hairpin effective the lines
+indicating log be should There kubelet.log. in `hairpin` word key with log
+lines any is there if Check compatibility. to due flag `--hairpin-mode` not
+match may mode hairpin effective the that noted be Please logs. access `journalctl`
+to use OSes other while /var/log/kubelet.log, as such file, a it
+is OSes some On OS. Node your on depends logs the Accessing log. at
+kubelet look to have you'll this, do To `hairpin-mode`. effective the Confirm --outofdisk-transition-frequency=0
+```
+
+* --serialize-image-pulls=false --max-pods=110 --babysit-daemons=true --kubelet-cgroups=/kubelet --runtime-cgroups=/docker-daemon --hairpin-mode=promiscuous-bridge --system-cgroups=/system --cgroup-root=/ --configure-cbr0=true --cluster-domain=cluster.local --cluster-dns=10.0.0.10 --v=4 --allow-privileged=True --config=/etc/kubernetes/manifests --enable-debugging-handlers=true /usr/local/bin/kubelet 11:11  00:51   Sl        ? 65208 186804 0.8  1.1  3392      kubelet
+```
+```none
+root grep | auxw example.
+
+```shell
+ps following the in to
+`promiscuous-bridge` set is `hairpin-mode` below. the like something see should `promiscuous-bridge`.
+You or `hairpin-veth` to set is `hairpin-mode` Confirm follows:
+
+* as are this shoot trouble to steps common or
+`promiscuous-bridge`.
+
+The `hairpin-veth` to set be either must flag The
+`hairpin-mode` VIP. Service own their access to try they if themselves to loadbalance
+back to Service a of endpoints allows that `hairpin-mode`
+[flag](/docs/reference/command-line-tools-reference/kubelet/) a exposes `Kubelet` The network. bridge with connected Pods
+are and mode `iptables` in running is `kube-proxy` when usually "hairpin"
+traffic, for configured properly not is network the when happen can work.
+
+This to supposed is it and happen does it but unlikely, sound might {#a-pod-fails-to-reach-itself-via-the-service-ip}
+
+This IP Service the via itself reach to fails Pod A case: Edge again.
+
+### logs the at look and
+then 4, to set flag `-v` the with `kube-proxy` restarting try those, see don't you 10.244.0.7:9376]
+```
+
+If 10.244.0.6:9376 [10.244.0.5:9376 to default/hostnames:default for endpoints like:
+
+```none
+Setting lines specific for logs `kube-proxy` the at look fails, still this 10.0.1.175:80
+```
+```none
+hostnames-632524106-bbpiw
+```
+
+If Nodes:
+
+```shell
+curl your of one from by
+IP Service your access to again try cases, above the one see do you proxying?
+
+Assuming kube-proxy Is `10.244.0.7:9376`).
+
+### endpoints(`10.244.0.5:9376`,
+`10.244.0.6:9376`, 3 has service
+hostnames(`10.0.1.175:80`) example, this In

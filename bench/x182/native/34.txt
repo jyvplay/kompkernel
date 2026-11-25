@@ -1,0 +1,477 @@
+Decode payload first. Split on ASCII spaces retaining empty fields; use consecutive groups of 32 fields, last shorter if needed. A field's weight is its Unicode code-point length minus 2. For each group sum its weights. Repeatedly remove the LEFT field if sum>0, otherwise the RIGHT field, subtract its weight, and save it. Reverse the saved fields. Join all groups with ASCII spaces, preserve every other character; print only.
+full the general,
+though in apply ideas Many  itself. `git.git` for used workflow
+elements the of some motivate and down write to attempts document Git
+
+DESCRIPTION
+-----------
+
+This with workflows recommended of overview An - gitworkflows(7)
+===============
+
+NAME
+----
+gitworkflows them take always not Do  them. of each motivate to prose
+tries the while reference, quick for 'rules' of set a formulate involved.
+
+We people with
+fewer projects smaller for required rarely is workflow of each commit and steps, small
+logical into changes your split to try should you rule, general a CHANGES
+----------------
+
+As one.
+
+
+SEPARATE this as manpages
+such than higher actions your for reasons good value should literally;
+you analysis, and inspection later for more
+useful much history the and easier, much process review the makes etc.
+This suite, test the pass commits, later any of independently consistent,
+working be should They  them. big one split than
+to together commits few a squash to easier always is It very
+beginning. the from steps small into work your split to try this, achieve linkgit:git-bisect[1].
+
+To and with
+linkgit:git-blame[1] example for them. you
+publish before --interactive` rebase `git with commits the edit later
+and back go always can You way. the along steps imperfect or too
+small making of afraid be Don't  several. into commit to used be can that tools main two are BRANCHES
+-----------------
+
+There linkgit:git-stash[1].
+
+
+MANAGING of EXAMPLES
+section the see changes; uncommitted other of independent suite the
+test run to --keep-index` push stash `git use  You can below upwards" "Merging see occasionally
+useful; still is Cherry-picking  alone. merges with as
+possible problems many as solve to try we so advantages, many have and
+linkgit:git-cherry-pick[1].
+
+Merges linkgit:git-merge[1] another: on one
+branch from changes include commits 1000 or 10, 1, from changes the over can
+carry merge a that means This  level. commit the at works while
+cherry-picking level, branch the at works merging importantly, example.
+
+Most an for that "promise" a is commit merge a because to
+understand easier also are Merges  contributions). (and contributors number
+of large a to better much scales workflow the means turn in ease,
+which equal with from goes feature given a points.
+
+
+Graduation
+~~~~~~~~~~
+
+As important the discuss subsections following The  branch
+management. careful more a require merges course: of tradeoff a is included.
+
+There now are parents its from
+all changes all update i.e., release",  "maintenance
+ next the into go should that commits the tracks 'maint' branches':
+
+* 'integration following the uses software.
+`git.git` the of branches corresponding the between also
+"graduates" it stable, to experimental for stability  for
+ tested being topics for branch testing a as intended is 'next' release;
+
+* next the into go should that commits the tracks 'master' version;
+
+* stable released last the of yet inclusion for ready quite not are that things  for
+ branch integration an is maintainer) the by seen (patches 'seen' differently:
+
+* slightly used is that branch official fourth a is master.
+
+There 'master' to "graduates" and 'seen'), 'next'
+or (usually branch unstable an at enters feature the it.
+
+Conceptually, one
+above the of descendant direct a usually is branches four the of below).
+
+Each Branches"  "Integration
+ (see the into branch unstable on
+the changes 'all' merge would that since however, downwards, actually
+merging by done be cannot above discussed graduation" "downwards upwards
+~~~~~~~~~~~~~~~
+
+The enough.
+
+
+Merging stable is
+considered it once release next the for controlled very a gives each
+other.
+=====================================
+
+This into upwards branches integration the merge (periodically) Then  requires
+them. that branch supported oldest the to fixes your commit "]
+=====================================
+Always upwards
+[caption="Rule: following:
+
+.Merge the Hence  one. stable happen will This  linkgit:git-cherry-pick[1])
+downwards. (using it cherry-pick to need will 'maint',
+you in required also is that 'master' e.g. to fix a applied you
+have that notice you If  fixes. of flow lifetime.
+
+Committing its during improvements or bugfixes extra get and
+may implement, to patches several require will feature nontrivial branches
+~~~~~~~~~~~~~~
+
+Any frequently.
+
+
+Topic very it do you about
+unless worry to nothing is and times a few to forget you potential
+when error further and histories confusing creates which one, one
+by reverted be must they so undone, be cannot commits Bad many
+problems: to leads branches integration the on directly everything caveat a with explanatory, pretty
+self is name The  problems. these solves branches" "topic of confusion.
+
+Use further creating changes, the up mixes in
+parallel Working  changes. of group a of part revert merge to want eventually will you that branch integration oldest the off
+at it Fork ...). bugfix, (feature, topic every for branch side a "]
+=====================================
+Make branches
+[caption="Rule: above:
+
+.Topic upwards"
+rule "merge the from comes that again.
+ merge meantime, the in further evolved has topic the If  it.  merge
+ simply branch, integration an into feature/bugfix the get To naturally:
+
+* very done be then can things it
+into.
+=====================================
+
+Many it give 'next', to  bugfix
+ a merge first can you example, For  first. branch integration  oldest
+ the to it merge to have necessarily not do you that (Note  topic, your on working  continue
+ to 'other' branch the from features new need you find you If stable.)
+
+* is it know  you
+ when 'maint' to merge and time, testing some in "back  it
+ move to want and branch wrong the off forked you find you If below.)
+
+* see habitually", "just this do  not
+ do (However,  'topic'. to 'other' merge linkgit:git-rebase[1].
+
+We in REBASE UPSTREAM FROM on
+RECOVERING section the See  rebased. be not should elsewhere merged has
+been that topic a two: other the with clashes point last the that linkgit:git-rebase[1].
+
+Note use time", upon:
+
+.Merge frowned is basis
+-- regular a on downstream anything into upstream anything extension,
+merging by and -- topics your into branch integration an reason)
+merging real no for (regularly "habitually" that out point should that topic the etc.
+=====================================
+
+Otherwise, upstream
+cleanly; to merges longer no branch your branch; your affect API
+changes upstream reason: good a with except downstream to merge not "]
+=====================================
+Do points
+[caption="Rule: well-defined at only downstream to to have will file a history
+of the investigates later who Anyone  history. up clutter will
+greatly merges small resulting many The  change. (well-separated) a
+single than more contains suddenly to merged was you paragraph, last the followed you integration
+~~~~~~~~~~~~~~~~~~~~~~
+
+If on.
+
+
+Throw-away so And  branch. stable" a
+"more into merged be inadvertently even might upstream An  development. topic
+in the affected merge that whether out find merging avoid to we
+want hand, other the on But  work? even not does them merging of the
+result Perhaps  interact. they how wonder occasionally and topic
+branches, small many have now will of interaction the test "]
+=====================================
+To branches
+[caption="Rule: integration branch.
+
+.Throw-away throw-away a merge
+into undo: can we that merge a make to is course, of solution, undone.
+
+The be easily merges
+cannot such because "stable" anywhere them after deleted
+right be to going is branch this that clear (very) it make you branch!
+=====================================
+
+If a such on work any base never must You  branch. a
+throw-away into them merge topics, several compatible. be will work in-progress their if see to a
+chance developers other or it, with work to chance a testers the give example
+to for branch, this publish even can you testing, the do to need will you project your releasing you
+are when above, discussed approach merge the using are you release
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Assuming a for management 'seen'.
+
+
+Branch called branch integration throw-away official an such `git.git`
+has  superset a be to supposed is branch 'master' release.
+
+The feature next the into go should that commits the 'master'
+tracks since branch, 'master' the from created is release feature work.
+
+A branch
+management additional some verify release.
+
+To feature your in included be not therefore commits
+will those by represented fixes The 'master'. on included not that
+are commits some contains 'maint' then hold, not does this
+condition If 'maint'. of merge and out
+'master' check Otherwise,  commits. any list not should command master..maint`
+=====================================
+
+This log "]
+=====================================
+`git 'maint'
+[caption="Recipe: of superset a is 'master' log:
+
+.Verify git use 'maint', of superset a indeed is 'master' that vX.Y.Z X.Y.Z" "Git -m -s tag "]
+=====================================
+`git tagging
+[caption="Recipe: version:
+
+.Release release the indicating 'master' of tip the to a
+tag Apply release. feature the of creation the with proceed can you it.
+
+Now into 'maint' perform to hook a
+post-update trigger also could push The project. your tracking to
+others available tag the makes below).
+This WORKFLOWS">> <<DISTRIBUTED_WORKFLOWS,"DISTRIBUTED server
+(see Git public a to tag new the push to need master`
+=====================================
+
+You than rather push
+'maint' and tag simply above steps the in Therefore, released. be commits
+to the tracking is 'maint' release, maintenance a for pages.
+
+Similarly, documentation preformatted and tarballs building
+release as such items release-related the before made release the
+feature for fixes maintenance release to continue to wish you if branches.
+
+First, maintenance your manage to need you release, feature a release
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After feature a after management branch 'master'.
+
+
+Maintenance (e.g. number version release previous the with branch
+named another to copied is branch maintenance current the this, do release.
+
+To previous that for commits track to branch create
+another must you then one, recent release:
+
+.Update current the for tracked be can fixes maintenance that so released
+code newly the to fast-forwarded be now should branch 'maint' maint`
+=====================================
+
+The maint-X.Y.(Z-1) branch "]
+=====================================
+`git maint
+[caption="Recipe: release).
+
+.Copy current the is X.Y.Z maint-X.Y.(Z-1)
+where the in missed were 'maint' on fixes some is
+possible it then fast-forward, a not is it because fails merge the master`
+=====================================
+
+If --ff-only merge `git maint`
+* checkout `git "]
+=====================================
+* release
+[caption="Recipe: new to maint integration the release, feature a release
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After feature a after seen and next for management section.
+
+
+Branch previous the in as
+described verified was branches the of content the if happen not will release.
+This feature ai/topic_in_next2`
+* merge `git ai/topic_in_next1`
+* merge `git master`
+* next -C switch `git "]
+=====================================
+* next
+[caption="Recipe: rebuild and 'next':
+
+.Rewind on surviving
+topics the using 'master' of tip the from rebuilt and be
+rewound optionally may 'next' branch or undesirable be to found later were but promising, initially
+looked have may 'next' into merged topics some example, For be
+clean. will 'next' of history the that is this doing of advantage ...
+=====================================
+
+The such of incarnation another give you 'next', By
+recreating reverted. and merged once was it that history the in fact
+remains the but 'next' of out reverted is topic the case, a such premature.
+In and rewound was 'next' indicating
+that announcement public a make should you then this, do you do
+so.
+
+If to history in point good a is release feature a and retry, to clean
+slate a topics how know should you section, last the WORKFLOWS
+---------------------
+
+After above.
+
+
+[[DISTRIBUTED_WORKFLOWS]]
+DISTRIBUTED as
+described branch, throw-away a is 'seen' since necessary not is public
+announcement A 'seen'. for followed be may process rebuild and rewind same rebuilt.
+
+The patch.
+The and merge workflows: important two are there speaking, work.
+
+Roughly your share to have will so
+you project, the on working person only the be not will you In
+general,  topics. manage to everyone while workflow, merge use
+the maintainers subsystem only `git.git`, in parallel: in used can
+be workflows Both  cannot. patches while merges, including full
+history, propagate can workflow merge the that is difference important by works workflow merge workflow
+~~~~~~~~~~~~~~
+
+The information.
+
+
+Merge for
+more documentation project's your Consult  to. adhere must for
+inclusion submitted commits/patches all that requirements, as
+"Signed-off-by" such restrictions, impose may maintainer(s) the that patches.
+
+Note sends else linkgit:git-push[1] this:
+
+* for used be can that tools main three are history.
+
+There official the on work their base downstream official
+history; the into contributions merge can Upstream  and
+downstream. upstream between branches copying does that linkgit:git-pull[1] and
+
+*  repository;
+ your to branches remote copies that linkgit:git-fetch[1] parties;
+
+* involved all by read be can that one to usually  repository,
+ remote a to branches your copies <remote> push "]
+=====================================
+`git branches/topics
+[caption="Recipe: Publishing easy:
+
+.Push/pull: is out changes branch.
+
+Getting remote the merge want
+to actually you unless pull' 'git use 'not' Do  point. last the go.
+
+Note one in merge and fetch to maintainers upstream to pull
+requests preformatted send to linkgit:git-request-pull[1] the (Git
+provides  mail. as such means, other by people tell to have still will fetch
+from.
+=====================================
+
+You can they where everyone tell and <branch>` remote `git or <remote>` fetch `git "]
+=====================================
+Use date
+[caption="Recipe: to up Staying too:
+
+.Push/pull: easy is date to up branches,
+staying integration the of copies newest the get to want just you task.)
+
+If this simplify integration the to topic
+branches people's other merge to like would and maintainer a are you earlier.
+
+If as
+explained remotes stable the from branches topic your fork simply date.
+=====================================
+
+Then to up stay to update` fetch the do can pull' 'git case, that <branch>
+-------------------------------------
+
+In <URL>    from
+ pull like
+
+-------------------------------------
+Please looks request a Such  mail. by so do to a
+request send typically will they branches, can they case, this In  downstream. from changes to
+pull try they when conflicts merge get may maintainer the <branch>`
+=====================================
+
+Occasionally, <URL> pull "]
+=====================================
+`git topics
+[caption="Recipe: remote Merging as
+follows.
+
+.Push/pull: go, one in merge and workflow
+~~~~~~~~~~~~~~
+
+If upstream.
+
+
+Patch from merge 'should' where
+downstream cases rare the of one is It  them). resolve to how better will
+know they (perhaps themselves conflicts the resolve and merge the to
+do downstream ask manually over recommended emails
+(highly corresponding the generate to use
+linkgit:git-format-patch[1] Then  above). (see usual as branches topic use should you of
+emails, form the in upstream changes sends that contributor a are you for linkgit:git-send-email[1]
+manpages and linkgit:git-format-patch[1] the <patches>`
+=====================================
+
+See --to=<recipient> send-email `git files
+* patch  preformatted
+ into them turn to upstream..topic` -M format-patch `git "]
+=====================================
+* branches/topics
+[caption="Recipe: Publishing easier).
+
+.format-patch/am: life the
+maintainer's makes it because them formatting merges):
+
+.format-patch/am: format-patch cannot you because a
+merge use cannot (you topic your rebase to have will you upstream, the
+current to applies longer no patch your that you tells maintainer the notes.
+
+If usage further it rebasing so mail, by than other topic your published have
+not you Presumably  rebase. the during conflicts the fix then can <branch>`
+=====================================
+
+You <URL> --rebase pull "]
+=====================================
+`git date
+[caption="Recipe: to up topics Keeping branch topic new a files,
+create to mails the save to), sent was it list mailing the of a
+reader as perhaps or maintainer, (as series patch a such receive you a
+problem.
+
+If not is will -3` am `git conflicts: get you help
+if can which merge, three-way the is out pointing worth feature patch`
+=====================================
+
+One < am "]
+=====================================
+`git patches
+[caption="Recipe: Importing commits:
+
+.format-patch/am: the import to am' 'git use and suite
+ linkgit:git[1] the of ALSO
+--------
+linkgit:gittutorial[7],
+linkgit:git-push[1],
+linkgit:git-pull[1],
+linkgit:git-merge[1],
+linkgit:git-rebase[1],
+linkgit:git-format-patch[1],
+linkgit:git-send-email[1],
+linkgit:git-am[1]
+
+GIT
+---
+Part options.
+
+
+SEE for
+other linkgit:git-am[1] See  base. merge the out figure to patches contained
+in information index use

@@ -1,0 +1,176 @@
+{
+  "lanes": 29,
+  "total": 11962,
+  "pricesAndTokenIds": 29,
+  "diagnostics": [
+    {
+      "name": "readPlainParent",
+      "exact": [
+        "bench/holdout-x42/lsblk.txt",
+        "bench/holdout-work/kb-article.txt",
+        "bench/holdout-x42b/uptime-w.txt",
+        "bench/holdout-x42b/free-m.txt",
+        "bench/holdout-x42b/vmstat.txt",
+        "bench/holdout-work/unified-diff.patch",
+        "bench/holdout-x41/df-real.txt",
+        "bench/holdout-x41/du-real.txt",
+        "bench/holdout-x41/node-help.txt",
+        "bench/holdout-x42/findmnt.txt",
+        "bench/holdout-x42/df-h.txt",
+        "bench/holdout-work/email-thread.txt",
+        "bench/holdout-work/llm-answer.md",
+        "bench/holdout-x42/ps-ef.txt",
+        "bench/holdout-x41/ls-real.txt",
+        "bench/holdout/json-pkg.txt",
+        "bench/holdout/code-ts.txt",
+        "bench/holdout-x42/dpkg-l.txt",
+        "bench/holdout-x41/ps-real.txt",
+        "bench/holdout-x41/ps-aux-real.txt",
+        "bench/holdout-x41/apt-real.txt"
+      ],
+      "unsupported": [],
+      "mismatches": [
+        {
+          "path": "bench/holdout-tbl/df-h.txt",
+          "expectedBytes": 939,
+          "actualBytes": 540
+        },
+        {
+          "path": "bench/holdout-tbl/markdown-table.md",
+          "expectedBytes": 635,
+          "actualBytes": 555
+        },
+        {
+          "path": "bench/holdout-tbl/psql-output.txt",
+          "expectedBytes": 1578,
+          "actualBytes": 742
+        },
+        {
+          "path": "bench/holdout-x40/prices.csv",
+          "expectedBytes": 993,
+          "actualBytes": 358
+        },
+        {
+          "path": "bench/holdout-x40/cue-sheet.md",
+          "expectedBytes": 938,
+          "actualBytes": 226
+        },
+        {
+          "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+          "expectedBytes": 2649,
+          "actualBytes": 910
+        },
+        {
+          "path": "bench/holdout-x40/metrics.tsv",
+          "expectedBytes": 1203,
+          "actualBytes": 612
+        },
+        {
+          "path": "bench/holdout-x41/ls-l-real.txt",
+          "expectedBytes": 10692,
+          "actualBytes": 3508
+        }
+      ]
+    },
+    {
+      "name": "antikleisParentRead",
+      "exact": [
+        "bench/holdout-x42/lsblk.txt",
+        "bench/holdout-work/kb-article.txt",
+        "bench/holdout-x42b/uptime-w.txt",
+        "bench/holdout-x42b/free-m.txt",
+        "bench/holdout-x42b/vmstat.txt",
+        "bench/holdout-work/unified-diff.patch",
+        "bench/holdout-tbl/df-h.txt",
+        "bench/holdout-x41/df-real.txt",
+        "bench/holdout-x41/du-real.txt",
+        "bench/holdout-x41/node-help.txt",
+        "bench/holdout-x42/findmnt.txt",
+        "bench/holdout-x42/df-h.txt",
+        "bench/holdout-work/email-thread.txt",
+        "bench/holdout-work/llm-answer.md",
+        "bench/holdout-x42/ps-ef.txt",
+        "bench/holdout-x41/ls-real.txt",
+        "bench/holdout/json-pkg.txt",
+        "bench/holdout/code-ts.txt",
+        "bench/holdout-x42/dpkg-l.txt",
+        "bench/holdout-x41/ps-real.txt",
+        "bench/holdout-x40/metrics.tsv",
+        "bench/holdout-x41/ps-aux-real.txt",
+        "bench/holdout-x41/apt-real.txt"
+      ],
+      "unsupported": [],
+      "mismatches": [
+        {
+          "path": "bench/holdout-tbl/markdown-table.md",
+          "expectedBytes": 635,
+          "actualBytes": 555
+        },
+        {
+          "path": "bench/holdout-tbl/psql-output.txt",
+          "expectedBytes": 1578,
+          "actualBytes": 742
+        },
+        {
+          "path": "bench/holdout-x40/prices.csv",
+          "expectedBytes": 993,
+          "actualBytes": 358
+        },
+        {
+          "path": "bench/holdout-x40/cue-sheet.md",
+          "expectedBytes": 938,
+          "actualBytes": 226
+        },
+        {
+          "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+          "expectedBytes": 2649,
+          "actualBytes": 1924
+        },
+        {
+          "path": "bench/holdout-x41/ls-l-real.txt",
+          "expectedBytes": 10692,
+          "actualBytes": 3508
+        }
+      ]
+    },
+    {
+      "name": "grammikosParentRead",
+      "exact": [
+        "bench/holdout-x42/lsblk.txt",
+        "bench/holdout-work/kb-article.txt",
+        "bench/holdout-x42b/uptime-w.txt",
+        "bench/holdout-x42b/free-m.txt",
+        "bench/holdout-x42b/vmstat.txt",
+        "bench/holdout-work/unified-diff.patch",
+        "bench/holdout-tbl/df-h.txt",
+        "bench/holdout-x41/df-real.txt",
+        "bench/holdout-x41/du-real.txt",
+        "bench/holdout-x41/node-help.txt",
+        "bench/holdout-x42/findmnt.txt",
+        "bench/holdout-x42/df-h.txt",
+        "bench/holdout-work/email-thread.txt",
+        "bench/holdout-work/llm-answer.md",
+        "bench/holdout-tbl/markdown-table.md",
+        "bench/holdout-x40/cue-sheet.md",
+        "bench/holdout-x42/ps-ef.txt",
+        "bench/holdout-x41/ls-real.txt",
+        "bench/holdout/json-pkg.txt",
+        "bench/holdout/code-ts.txt",
+        "bench/holdout-x42/dpkg-l.txt",
+        "bench/holdout-x41/ps-real.txt",
+        "bench/holdout-tbl/kubectl-get-pods.txt",
+        "bench/holdout-x40/metrics.tsv",
+        "bench/holdout-x41/ps-aux-real.txt",
+        "bench/holdout-x41/apt-real.txt"
+      ],
+      "unsupported": [
+        "bench/holdout-tbl/psql-output.txt",
+        "bench/holdout-x40/prices.csv",
+        "bench/holdout-x41/ls-l-real.txt"
+      ],
+      "mismatches": []
+    }
+  ],
+  "allReaderBytesPass": false,
+  "note": "Diagnostic reader coverage, NOT a successful all-source inverse gate. Mismatches are distinct from unsupported. Native NOT_RUN."
+}

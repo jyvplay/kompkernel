@@ -1,0 +1,4 @@
+import fs from 'node:fs';import {encode} from 'gpt-tokenizer/encoding/o200k_base';
+const baseline=new Map(fs.readFileSync('bench/x181/receipts/frontier.jsonl','utf8').trim().split('\n').map(s=>{const r=JSON.parse(s);return [r.path,r.tokens] as const;}));const rows=[];
+for(const file of fs.readdirSync('bench/x182/receipts').filter(f=>/^paid-\d\d\.json$/.test(f))){const r=JSON.parse(fs.readFileSync('bench/x182/receipts/'+file,'utf8')),parentTokens=encode(r.parent).length;rows.push({path:r.path,baseline:baseline.get(r.path),parentTokens,fullTokens:r.tokens,outerMarginalTokens:r.tokens-parentTokens,parentOnlySaving:baseline.get(r.path)!-parentTokens});}
+fs.writeFileSync('bench/x182/receipts/price-attribution.json',JSON.stringify({rows,note:'Parent-alone price is diagnostic, not an admissible complete ROPI wire. Marginal difference uses exact complete token counts, not additive key estimates.'},null,2));console.log(rows);

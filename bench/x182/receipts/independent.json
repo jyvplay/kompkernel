@@ -1,0 +1,38 @@
+{
+  "checks": 61265,
+  "paid": [
+    {
+      "file": "bench/x182/receipts/paid-00.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x182/receipts/paid-01.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x182/receipts/paid-02.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x182/receipts/paid-03.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x182/receipts/paid-04.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x182/receipts/paid-05.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x182/receipts/paid-06.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x182/receipts/paid-07.json",
+      "status": "exact"
+    }
+  ],
+  "native": "NOT_RUN"
+}

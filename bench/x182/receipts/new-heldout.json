@@ -1,0 +1,12 @@
+[
+  {
+    "repo": "git/git",
+    "commit": "77904e546de3bd940621092ecec47a88d0cede5d",
+    "path": "Documentation/gitworkflows.adoc",
+    "file": "bench/x182/fixtures/gitworkflows.adoc",
+    "sha256": "4ec976b50c0dd5844148c1ac3ced6377382b37f97ca88186bd4fd49f4b679753",
+    "bytes": 17432,
+    "license": "COPYING",
+    "selection": "Fetched after ROPI parameter family fixed; raw/exact tests only, not paid or native"
+  }
+]

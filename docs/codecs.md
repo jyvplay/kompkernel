@@ -12702,3 +12702,33 @@ four grammars still refuse. Compiler/build pass; native decoding remains NOT_RUN
 The X181 cache speed experiment fails its gate: CPU B/A 1.009904, wall 1.010630,
 24 identical wires but protected regressions. No speed patch is promoted.
 Scientific acceptance remains false despite the concrete strict-reader improvement.
+
+## X182 — ROPI and column-program verification
+
+`ropi.ts` is an unwired signed-weight deque bijection with a complete in-band
+inverse. It changes the representation fed to the existing parent but establishes
+no paid improvement: eight exact completed candidates all lose. Free-key price
+attribution saves at most one token, so shortening the contract alone cannot
+produce the requested >10-token wins for these plans. A new pinned Git workflow
+guide receives exact/raw tests; five earlier external fixtures are reused.
+
+`grammikos-parent.ts` supports a bounded subset of the existing STICHOMYTHIA
+column-program contract. It refuses inconsistent row metadata, unsupported
+arithmetic, missing literal entries and excessive expansion. Separate Python
+support and targeted malformed/Unicode attacks are included. This verification
+improvement is not relabeled a Pareto-superior codec.
+
+The measured X181 mergeCount bottleneck motivates a bundle-only overlap-safe
+memory-copy experiment, tested against the tokenizer and then isolated full-stack
+ABBA. Model/portfolio/research documentation and execution receipts are under
+bench/x182. Native decoding remains NOT_RUN; no theorem kernel or exhaustive
+all-lab proof audit is claimed. Production behavior is unchanged.
+
+Fresh replay confirms all29previous wires unchanged, totaling11,962tokens.
+Source-role totals remain prose2018→1770, ops22332→8078, code3152→2013,
+other513→101. GRAMMIKOS verifies26lanes with3refusals; independent Python23
+with6unsupported; zero mismatches in each. No universal/native decoder claim.
+
+X182 speed gate fails despite small favorable aggregate ratios: CPU0.994480,
+wall0.993024,24identical wires, protected regressions. No significant whole-stack
+speed improvement or new Pareto-superior codec is established; no promotion.

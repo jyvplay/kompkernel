@@ -1,0 +1,62 @@
+[
+  {
+    "repo": "python/cpython",
+    "commit": "32b51e34318e6dd355f3fb40b8abf94c205444b1",
+    "path": "Doc/tutorial/classes.rst",
+    "file": "bench/x179/fixtures/python_cpython-classes.rst",
+    "bytes": 37746,
+    "sha256": "e322d827e7778530afb1fe832eace5588d8025e12315f2be7e7228a04c85ac41",
+    "license": "bench/x179/fixtures/python_cpython-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  },
+  {
+    "repo": "rust-lang/book",
+    "commit": "5c23042f85595490ad9f7412c4c6f57fe0b330d5",
+    "path": "src/ch09-02-recoverable-errors-with-result.md",
+    "file": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+    "bytes": 26432,
+    "sha256": "dab3e88d324cdde74cf96356c58a423747a5735ac6848d8d4592dc7c13637c62",
+    "license": "bench/x179/fixtures/rust-lang_book-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  },
+  {
+    "repo": "kubernetes/website",
+    "commit": "ac7b6d42d503158fdc822e04c88e2035d9a09ae9",
+    "path": "content/en/docs/tasks/debug/debug-application/debug-service.md",
+    "file": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+    "bytes": 23343,
+    "sha256": "76915e474e88fbedecbfe205fb45a85867ea4612453358eda73a330ec991262d",
+    "license": "bench/x179/fixtures/kubernetes_website-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  },
+  {
+    "repo": "python/cpython",
+    "commit": "59829477e0b03008c23e6901d655a1e9b0bb2c62",
+    "path": "Doc/tutorial/errors.rst",
+    "file": "bench/x181/fixtures/python_cpython-errors.rst",
+    "bytes": 24533,
+    "sha256": "5b2b278a22c14251a4f0b6e80f6a5939ad9ef612ec7ba56213f1ae88a985fd21",
+    "license": "LICENSE",
+    "selection": "Fetched after FOTIA mechanism fixed; no blinded native model test"
+  },
+  {
+    "repo": "git/git",
+    "commit": "77904e546de3bd940621092ecec47a88d0cede5d",
+    "path": "Documentation/howto/recover-corrupted-blob-object.adoc",
+    "file": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+    "bytes": 5510,
+    "sha256": "823d284ce903a4edc7d24c108ff259c0d50e7e710655ef45e06c8113083d711f",
+    "license": "COPYING",
+    "selection": "Fetched after FOTIA mechanism fixed; no blinded native model test"
+  },
+  {
+    "repo": "git/git",
+    "commit": "77904e546de3bd940621092ecec47a88d0cede5d",
+    "path": "Documentation/gitworkflows.adoc",
+    "file": "bench/x182/fixtures/gitworkflows.adoc",
+    "sha256": "4ec976b50c0dd5844148c1ac3ced6377382b37f97ca88186bd4fd49f4b679753",
+    "bytes": 17432,
+    "license": "COPYING",
+    "selection": "Fetched after ROPI parameter family fixed; raw/exact tests only, not paid or native"
+  }
+]
