@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "old": "    for (let i = bi + 1; i < len - 1; i++) starts[i] = starts[i + 1];\n    for (let i = bi; i < len - 1; i++) ranks[i] = ranks[i + 1];",
+  "replacement": "    if (len - bi >= 32) {\n      starts.copyWithin(bi + 1, bi + 2, len);\n      ranks.copyWithin(bi, bi + 1, len);\n    } else {\n      for (let i = bi + 1; i < len - 1; i++) starts[i] = starts[i + 1];\n      for (let i = bi; i < len - 1; i++) ranks[i] = ranks[i + 1];\n    }",
+  "scope": "Native overlap-safe typed-array moves for >=32 remaining boundaries; same rank scan, leftmost tie rule, rank updates and candidate set."
+}

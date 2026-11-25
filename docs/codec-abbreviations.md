@@ -11935,3 +11935,52 @@ X181 speed experiment rejected: 24 identical cold ABBA wires, CPU B/A 1.009904,
 wall B/A 1.010630, protected regressions. The 2 MiB direct-mapped pair cache is
 bench-only. Count/vector/pair gates (16,192/12,124/524,338 checks) match A/B;
 400,004 cache checks include 60,023 collisions. Fidelity alone is not speed.
+
+## X182 — ROPI (signed-weight deque rearrangement; experimental)
+
+Fields are split at ASCII spaces retaining empties. Weight = Unicode code-point
+length minus k, k∈{2,5,10}. Within groups of 32/128/512 fields, prefix sum>0
+inserts at the left end; otherwise at the right. Inversion sums payload weights,
+removes the corresponding end, subtracts weight, repeats and reverses the saved
+fields. No choice tape or external dictionary. Nine deterministic plans, not
+greedy; raw-best alone is parent-priced, not a global paid search. Source and
+output cap 50,000 UTF16 units; group cap512. Transform/inverse O(U+m), excluding
+tokenizer and parent. Parent trials: 90 s wall, 1,000 MiB V8 old space, not RSS.
+
+Classical ancestry: Sparre-Andersen prefix-sum rearrangement, described in Foata's
+*Rearrangements of Words*, §10.7. Recent related primary source:
+Banderier/Lackner/Wallner, *Latticepathology and Symmetric Functions*, AofA2020,
+https://doi.org/10.4230/LIPIcs.AofA.2020.2 . Author PDF fetched from
+https://lipn.fr/~cb/Papers/latticepathology.pdf . This is not a BPE compression
+or native-chat theorem. ROPI is not FOTIA block rotation or METRIDA sum-based
+alias assignment; all-stack semantic originality remains unproved.
+
+Eight completed paid candidates lose (email599 vs486, KB710 vs620, answer755
+vs664, ps472 vs381, ps-ef394 vs296, JSON760 vs653, diff520 vs411, code1057 vs949).
+Each outer contract costs91 marginal tokens; even the inadmissible free-key
+comparison saves at most one token. 92,044 checks /35 sources, 61,265 independent
+Python checks including eight paid wires. Native prompts NOT_RUN.
+
+### GRAMMIKOS — bounded existing column-program reader
+
+No new wire operation: reads the exact STICHOMYTHIA key, integer affine models,
+non-crossing24-hour clocks, constants/cycles/literal lists. Enforces n≤1000,
+last row=n−1, ≤64 columns, literal arity and ≤50,000 UTF16 output units. Unknown
+models refuse. On prior frontier:26exact/3refused/0mismatches. Independent Python
+reader and astral expansion/metadata attacks bind this subset, not universal
+native behavior. Source contract: src/lib/omega/stichomythia.ts.
+
+The separate merge-memmove speed experiment preserves rank scans/ties/candidates,
+using overlap-safe typed-array copying for ≥32 remaining entries. It is benchmark
+only pending full-stack acceptance. See bench/x182/README.md for fresh replay,
+source-role leaders and final speed outcomes; no production promotion is implied.
+
+Fresh X182 replay confirms29identical wires/11,962tokens. PROSE3:2018→1770,
+OPS22:22332→8078, CODE/STRUCT3:3152→2013, OTHER1:513→101. Absolute leaders:
+email629→486, ls-l5194→1310, JSON1152→653, cue513→101; ops relative leader
+prices582→118. Fresh GRAMMIKOS26exact/3refused/0mismatches; separate Python
+23exact/6unsupported/0mismatches. Compiler/build pass; six native prompts NOT_RUN.
+
+X182 merge-memmove speed patch rejected:24identical ABBA wires; aggregate CPU
+B/A0.994480 and wall0.993024, but protected-lane regressions and less than the
+required10% gain. Count/vector/merge checks:16,192/12,124/4,119. Not promoted.

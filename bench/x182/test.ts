@@ -1,0 +1,12 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {encode,decode} from 'gpt-tokenizer/encoding/o200k_base';import {ropiBlock,ropiTransform,ropiPlans,ropiRead} from '../../src/lib/omega/ropi';
+let checks=0;const pairs:any[]=[];
+function check(a:string[],k:number){const b=ropiBlock(a,k);assert.deepEqual(ropiBlock(b,k,true),a);assert.deepEqual(ropiBlock(ropiBlock(a,k,true),k),a);assert.deepEqual(b.slice().sort(),a.slice().sort());checks+=3;pairs.push({a,b,k});}
+for(let n=0;n<=8;n++)for(let m=0;m<3**n;m++){let v=m;const a=Array.from({length:n},()=>{const x=['','aa','bbbbb'][v%3];v=Math.floor(v/3);return x;});for(const k of [2,5,10])check(a,k);}
+let seed=182;for(let i=0;i<1000;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;check(Array.from({length:seed%512},(_,j)=>['','a','bb','ccc','abcdefghijk','🙂','é','x\n'][(seed>>>j%25)%8]),[2,5,10][i%3]);}
+for(const s of ['', ' ', ' '.repeat(50000),'x'.repeat(50000),'🙂 ab  xyz\r\n'])for(const n of [32,128,512])for(const k of [2,5,10]){assert.equal(ropiTransform(ropiTransform(s,n,k),n,k,true),s);checks++;}
+for(const f of [()=>ropiPlans('\ud800'),()=>ropiPlans('x'.repeat(50001)),()=>ropiBlock(Array(513).fill(''),2),()=>ropiTransform('a',31,2),()=>ropiTransform('a',32,3),()=>ropiBlock(['a b'],2)]){assert.throws(f);checks++;}
+// Zero weight must choose RIGHT during inverse; code points, not UTF16 units.
+assert.deepEqual(ropiBlock(['aa','bb'],2),['aa','bb']);assert.deepEqual(ropiBlock(['🙂🙂','aa'],2),['🙂🙂','aa']);checks+=2;
+const files=[...fs.readFileSync('bench/x182/lanes.txt','utf8').trim().split('\n'),...['x179','x181'].flatMap(x=>JSON.parse(fs.readFileSync(`bench/${x}/receipts/heldout-sources.json`,'utf8')).map((r:any)=>r.file)),...JSON.parse(fs.readFileSync('bench/x182/receipts/new-heldout.json','utf8')).map((r:any)=>r.file)],rows=[];
+for(const path of files){const bytes=fs.readFileSync(path),plans=ropiPlans(bytes.toString());for(const p of plans){assert.ok(Buffer.from(ropiRead(p.message)).equals(bytes));assert.equal(decode(encode(p.message)),p.message);checks+=2;}rows.push({path,raw:encode(bytes.toString()).length,plans,status:plans.length?'exact':'ineligible'});}
+fs.writeFileSync('bench/x182/receipts/unit-pairs.json',JSON.stringify(pairs));fs.writeFileSync('bench/x182/receipts/screen.json',JSON.stringify({checks,rows},null,2));console.log({checks,sources:rows.length,rawWins:rows.filter(r=>r.plans.some(p=>p.tokens<r.raw)).map(r=>r.path)});

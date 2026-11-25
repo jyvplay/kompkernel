@@ -1,0 +1,132 @@
+
+  bench/x182/test.mjs  3.9mb ⚠️
+
+⚡ Done in 109ms
+
+  bench/x182/portfolio.mjs  4.0mb ⚠️
+
+⚡ Done in 94ms
+
+  bench/x182/readers.mjs  4.6mb ⚠️
+
+⚡ Done in 142ms
+
+  bench/x182/receipt-gate.mjs  4.6mb ⚠️
+
+⚡ Done in 155ms
+
+  bench/x182/price-attribution.mjs  2.9mb ⚠️
+
+⚡ Done in 84ms
+{'checks': 61265, 'paid': [{'file': 'bench/x182/receipts/paid-00.json', 'status': 'exact'}, {'file': 'bench/x182/receipts/paid-01.json', 'status': 'exact'}, {'file': 'bench/x182/receipts/paid-02.json', 'status': 'exact'}, {'file': 'bench/x182/receipts/paid-03.json', 'status': 'exact'}, {'file': 'bench/x182/receipts/paid-04.json', 'status': 'exact'}, {'file': 'bench/x182/receipts/paid-05.json', 'status': 'exact'}, {'file': 'bench/x182/receipts/paid-06.json', 'status': 'exact'}, {'file': 'bench/x182/receipts/paid-07.json', 'status': 'exact'}], 'native': 'NOT_RUN'}
+7 independent column-program attacks
+27 deceptive shapes rejected; X182 Pareto claim rejected
+program-existence to arbitrary-decoder implication falsified by explicit functions
+Euler-existence to unique-source implication falsified by two actual sequences
+Prepared 6 prompts; native NOT_RUN
+{
+  "lanes": 29,
+  "oldTotal": 11962,
+  "newTotal": 11962,
+  "identicalWires": 29,
+  "different": [],
+  "sourceReadEqual": 29,
+  "note": "decoded field is parent self-report, not an independent wire parser"
+}
+
+  bench/x182/frontier-gate.mjs  4.6mb ⚠️
+
+⚡ Done in 127ms
+{"lanes":29,"total":11962,"pricesAndTokenIds":29,"diagnostics":[{"name":"readPlainParent","exact":["bench/holdout-x42/lsblk.txt","bench/holdout-work/kb-article.txt","bench/holdout-x42b/uptime-w.txt","bench/holdout-x42b/free-m.txt","bench/holdout-x42b/vmstat.txt","bench/holdout-work/unified-diff.patch","bench/holdout-x41/df-real.txt","bench/holdout-x41/du-real.txt","bench/holdout-x41/node-help.txt","bench/holdout-x42/findmnt.txt","bench/holdout-x42/df-h.txt","bench/holdout-work/email-thread.txt","bench/holdout-work/llm-answer.md","bench/holdout-x42/ps-ef.txt","bench/holdout-x41/ls-real.txt","bench/holdout/json-pkg.txt","bench/holdout/code-ts.txt","bench/holdout-x42/dpkg-l.txt","bench/holdout-x41/ps-real.txt","bench/holdout-x41/ps-aux-real.txt","bench/holdout-x41/apt-real.txt"],"unsupported":[],"mismatches":[{"path":"bench/holdout-tbl/df-h.txt","expectedBytes":939,"actualBytes":540},{"path":"bench/holdout-tbl/markdown-table.md","expectedBytes":635,"actualBytes":555},{"path":"bench/holdout-tbl/psql-output.txt","expectedBytes":1578,"actualBytes":742},{"path":"bench/holdout-x40/prices.csv","expectedBytes":993,"actualBytes":358},{"path":"bench/holdout-x40/cue-sheet.md","expectedBytes":938,"actualBytes":226},{"path":"bench/holdout-tbl/kubectl-get-pods.txt","expectedBytes":2649,"actualBytes":910},{"path":"bench/holdout-x40/metrics.tsv","expectedBytes":1203,"actualBytes":612},{"path":"bench/holdout-x41/ls-l-real.txt","expectedBytes":10692,"actualBytes":3508}]},{"name":"antikleisParentRead","exact":["bench/holdout-x42/lsblk.txt","bench/holdout-work/kb-article.txt","bench/holdout-x42b/uptime-w.txt","bench/holdout-x42b/free-m.txt","bench/holdout-x42b/vmstat.txt","bench/holdout-work/unified-diff.patch","bench/holdout-tbl/df-h.txt","bench/holdout-x41/df-real.txt","bench/holdout-x41/du-real.txt","bench/holdout-x41/node-help.txt","bench/holdout-x42/findmnt.txt","bench/holdout-x42/df-h.txt","bench/holdout-work/email-thread.txt","bench/holdout-work/llm-answer.md","bench/holdout-x42/ps-ef.txt","bench/holdout-x41/ls-real.txt","bench/holdout/json-pkg.txt","bench/holdout/code-ts.txt","bench/holdout-x42/dpkg-l.txt","bench/holdout-x41/ps-real.txt","bench/holdout-x40/metrics.tsv","bench/holdout-x41/ps-aux-real.txt","bench/holdout-x41/apt-real.txt"],"unsupported":[],"mismatches":[{"path":"bench/holdout-tbl/markdown-table.md","expectedBytes":635,"actualBytes":555},{"path":"bench/holdout-tbl/psql-output.txt","expectedBytes":1578,"actualBytes":742},{"path":"bench/holdout-x40/prices.csv","expectedBytes":993,"actualBytes":358},{"path":"bench/holdout-x40/cue-sheet.md","expectedBytes":938,"actualBytes":226},{"path":"bench/holdout-tbl/kubectl-get-pods.txt","expectedBytes":2649,"actualBytes":1924},{"path":"bench/holdout-x41/ls-l-real.txt","expectedBytes":10692,"actualBytes":3508}]},{"name":"grammikosParentRead","exact":["bench/holdout-x42/lsblk.txt","bench/holdout-work/kb-article.txt","bench/holdout-x42b/uptime-w.txt","bench/holdout-x42b/free-m.txt","bench/holdout-x42b/vmstat.txt","bench/holdout-work/unified-diff.patch","bench/holdout-tbl/df-h.txt","bench/holdout-x41/df-real.txt","bench/holdout-x41/du-real.txt","bench/holdout-x41/node-help.txt","bench/holdout-x42/findmnt.txt","bench/holdout-x42/df-h.txt","bench/holdout-work/email-thread.txt","bench/holdout-work/llm-answer.md","bench/holdout-tbl/markdown-table.md","bench/holdout-x40/cue-sheet.md","bench/holdout-x42/ps-ef.txt","bench/holdout-x41/ls-real.txt","bench/holdout/json-pkg.txt","bench/holdout/code-ts.txt","bench/holdout-x42/dpkg-l.txt","bench/holdout-x41/ps-real.txt","bench/holdout-tbl/kubectl-get-pods.txt","bench/holdout-x40/metrics.tsv","bench/holdout-x41/ps-aux-real.txt","bench/holdout-x41/apt-real.txt"],"unsupported":["bench/holdout-tbl/psql-output.txt","bench/holdout-x40/prices.csv","bench/holdout-x41/ls-l-real.txt"],"mismatches":[]}],"allReaderBytesPass":false,"note":"Diagnostic reader coverage, NOT a successful all-source inverse gate. Mismatches are distinct from unsupported. Native NOT_RUN."}
+[('bench/x182/receipts/frontier.jsonl', 23, 6)]
+
+  bench/x182/leaders.mjs  3.9mb ⚠️
+
+⚡ Done in 97ms
+{
+  "OTHER": {
+    "lanes": 4,
+    "aggregateRaw": 729,
+    "aggregateTokens": 317,
+    "largestAbsoluteSaving": {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "raw": 513,
+      "tokens": 101,
+      "saved": 412,
+      "savedPercent": 80.31
+    },
+    "largestRelativeSaving": {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "raw": 513,
+      "tokens": 101,
+      "saved": 412,
+      "savedPercent": 80.31
+    },
+    "tapeBodyTokenClassLeader": null,
+    "tapeLanes": 0
+  },
+  "PROSE": {
+    "lanes": 5,
+    "aggregateRaw": 5856,
+    "aggregateTokens": 3429,
+    "largestAbsoluteSaving": {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "tokens": 813,
+      "saved": 1926,
+      "savedPercent": 70.32
+    },
+    "largestRelativeSaving": {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "raw": 2739,
+      "tokens": 813,
+      "saved": 1926,
+      "savedPercent": 70.32
+    },
+    "tapeBodyTokenClassLeader": "word",
+    "tapeLanes": 5
+  },
+  "OPS/TABULAR": {
+    "lanes": 16,
+    "aggregateRaw": 17278,
+    "aggregateTokens": 5580,
+    "largestAbsoluteSaving": {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "raw": 5194,
+      "tokens": 1310,
+      "saved": 3884,
+      "savedPercent": 74.78
+    },
+    "largestRelativeSaving": {
+      "path": "bench/holdout-x40/prices.csv",
+      "raw": 582,
+      "tokens": 118,
+      "saved": 464,
+      "savedPercent": 79.73
+    },
+    "tapeBodyTokenClassLeader": "glyph",
+    "tapeLanes": 16
+  },
+  "CODE/STRUCT": {
+    "lanes": 4,
+    "aggregateRaw": 4152,
+    "aggregateTokens": 2636,
+    "largestAbsoluteSaving": {
+      "path": "bench/holdout/json-pkg.txt",
+      "raw": 1152,
+      "tokens": 653,
+      "saved": 499,
+      "savedPercent": 43.32
+    },
+    "largestRelativeSaving": {
+      "path": "bench/holdout/json-pkg.txt",
+      "raw": 1152,
+      "tokens": 653,
+      "saved": 499,
+      "savedPercent": 43.32
+    },
+    "tapeBodyTokenClassLeader": "word",
+    "tapeLanes": 4
+  }
+}
+{'OPS/TABULAR': (22, 22332, 8078, 'word'), 'PROSE': (3, 2018, 1770, 'word'), 'CODE/STRUCT': (3, 3152, 2013, 'word'), 'OTHER': (1, 513, 101, None)}

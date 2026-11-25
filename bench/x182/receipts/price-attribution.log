@@ -1,0 +1,66 @@
+[
+  {
+    path: 'bench/holdout-work/email-thread.txt',
+    baseline: 486,
+    parentTokens: 508,
+    fullTokens: 599,
+    outerMarginalTokens: 91,
+    parentOnlySaving: -22
+  },
+  {
+    path: 'bench/holdout-work/kb-article.txt',
+    baseline: 620,
+    parentTokens: 619,
+    fullTokens: 710,
+    outerMarginalTokens: 91,
+    parentOnlySaving: 1
+  },
+  {
+    path: 'bench/holdout-work/llm-answer.md',
+    baseline: 664,
+    parentTokens: 664,
+    fullTokens: 755,
+    outerMarginalTokens: 91,
+    parentOnlySaving: 0
+  },
+  {
+    path: 'bench/holdout-x41/ps-real.txt',
+    baseline: 381,
+    parentTokens: 381,
+    fullTokens: 472,
+    outerMarginalTokens: 91,
+    parentOnlySaving: 0
+  },
+  {
+    path: 'bench/holdout-x42/ps-ef.txt',
+    baseline: 296,
+    parentTokens: 303,
+    fullTokens: 394,
+    outerMarginalTokens: 91,
+    parentOnlySaving: -7
+  },
+  {
+    path: 'bench/holdout/json-pkg.txt',
+    baseline: 653,
+    parentTokens: 669,
+    fullTokens: 760,
+    outerMarginalTokens: 91,
+    parentOnlySaving: -16
+  },
+  {
+    path: 'bench/holdout-work/unified-diff.patch',
+    baseline: 411,
+    parentTokens: 429,
+    fullTokens: 520,
+    outerMarginalTokens: 91,
+    parentOnlySaving: -18
+  },
+  {
+    path: 'bench/holdout/code-ts.txt',
+    baseline: 949,
+    parentTokens: 966,
+    fullTokens: 1057,
+    outerMarginalTokens: 91,
+    parentOnlySaving: -17
+  }
+]
