@@ -1,0 +1,9 @@
+{
+  checks: 15045,
+  sources: 35,
+  rawWins: [
+    'bench/holdout-x41/ls-l-real.txt',
+    'bench/holdout-x40/metrics.tsv'
+  ],
+  sourcesWithEdges: 21
+}

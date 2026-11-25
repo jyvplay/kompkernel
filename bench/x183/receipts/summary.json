@@ -1,0 +1,150 @@
+{
+  "accepted": false,
+  "frontier": {
+    "lanes": 29,
+    "tokens": 11962,
+    "identical": 29,
+    "pythonReaders": {
+      "unsupported": 6,
+      "exact": 23
+    }
+  },
+  "unitChecks": 15045,
+  "sources": 35,
+  "independent": {
+    "exact": 14905,
+    "attacks": 11,
+    "native": "NOT_RUN",
+    "paidParent": "not independently decoded here"
+  },
+  "paid": [
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "mode": "best",
+      "tokens": 622,
+      "baseline": 486,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "mode": "best",
+      "tokens": 757,
+      "baseline": 620,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "mode": "best",
+      "tokens": 815,
+      "baseline": 664,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "mode": "best",
+      "tokens": 526,
+      "baseline": 381,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "mode": "best",
+      "tokens": 419,
+      "baseline": 296,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": "best",
+      "tokens": 776,
+      "baseline": 653,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "mode": "best",
+      "tokens": 565,
+      "baseline": 411,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "mode": "best",
+      "tokens": 1170,
+      "baseline": 949,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "mode": "best",
+      "tokens": 346,
+      "baseline": 197,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "mode": "edge",
+      "tokens": 835,
+      "baseline": 620,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "mode": "edge",
+      "tokens": 821,
+      "baseline": 664,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "mode": "edge",
+      "tokens": 1176,
+      "baseline": 949,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "mode": "flat",
+      "tokens": 524,
+      "baseline": 381,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "mode": "flat",
+      "tokens": 783,
+      "baseline": 653,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "mode": "flat",
+      "tokens": 559,
+      "baseline": 411,
+      "tsReader": "exact",
+      "pythonReader": "exact"
+    }
+  ],
+  "paidWins": [],
+  "processCounts": {
+    "completed": 15,
+    "TIMEOUT": 1
+  },
+  "native": "NOT_RUN",
+  "speed": "NOT_RUN",
+  "allStackNovelty": "NOT_ESTABLISHED"
+}
