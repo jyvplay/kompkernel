@@ -1,0 +1,127 @@
+[
+  {
+    "function": "countLongRaw",
+    "selfMs": 1402.963,
+    "pct": 10.468413025078815
+  },
+  {
+    "function": "scoreRunCostDeltaSlots",
+    "selfMs": 1034.205,
+    "pct": 7.716871430395268
+  },
+  {
+    "function": "(garbage collector)",
+    "selfMs": 962.144,
+    "pct": 7.179177769906571
+  },
+  {
+    "function": "countTokens3",
+    "selfMs": 937.08,
+    "pct": 6.992159078707604
+  },
+  {
+    "function": "chunkCountFast",
+    "selfMs": 899.679,
+    "pct": 6.713086062846906
+  },
+  {
+    "function": "",
+    "selfMs": 867.234,
+    "pct": 6.470992963742594
+  },
+  {
+    "function": "renderBest",
+    "selfMs": 758.683,
+    "pct": 5.661023846748539
+  },
+  {
+    "function": "getBpeRankFromString",
+    "selfMs": 378.713,
+    "pct": 2.82582227896721
+  },
+  {
+    "function": "rankAt",
+    "selfMs": 367.177,
+    "pct": 2.73974473261901
+  },
+  {
+    "function": "encode",
+    "selfMs": 336.121,
+    "pct": 2.5080158595789888
+  },
+  {
+    "function": "put",
+    "selfMs": 331.365,
+    "pct": 2.472528271989526
+  },
+  {
+    "function": "evaluate",
+    "selfMs": 290.197,
+    "pct": 2.165347236269807
+  },
+  {
+    "function": "RegExp: [^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]*[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\\r\\n\\p{L}\\p{N}]?[\\p{Lu}\\p{Lt}\\p{Lm}\\p{Lo}\\p{M}]+[\\p{Ll}\\p{Lm}\\p{Lo}\\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\\p{N}{1,3}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n/]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+",
+    "selfMs": 251.164,
+    "pct": 1.8740968144070054
+  },
+  {
+    "function": "fastChunkCount",
+    "selfMs": 241.581,
+    "pct": 1.8025918623738226
+  },
+  {
+    "function": "decode",
+    "selfMs": 207.961,
+    "pct": 1.5517313294138302
+  },
+  {
+    "function": "vocabByScript",
+    "selfMs": 175.455,
+    "pct": 1.309183069913607
+  },
+  {
+    "function": "mergeCount",
+    "selfMs": 162.467,
+    "pct": 1.212271213813536
+  },
+  {
+    "function": "decodeUTF8",
+    "selfMs": 150.685,
+    "pct": 1.1243581025900193
+  },
+  {
+    "function": "fastCount",
+    "selfMs": 147.073,
+    "pct": 1.0974066378353646
+  },
+  {
+    "function": "rollback",
+    "selfMs": 140.911,
+    "pct": 1.0514279762024237
+  },
+  {
+    "function": "__init",
+    "selfMs": 140.331,
+    "pct": 1.047100221618343
+  },
+  {
+    "function": "fastChunkCountUncached",
+    "selfMs": 116.201,
+    "pct": 0.8670507076289136
+  },
+  {
+    "function": "enumerateTokenSpans",
+    "selfMs": 112.783,
+    "pct": 0.8415468021661755
+  },
+  {
+    "function": "bytePairMerge",
+    "selfMs": 112.263,
+    "pct": 0.837666746332172
+  },
+  {
+    "function": "compileSourceTextModule",
+    "selfMs": 111.651,
+    "pct": 0.8331002190813833
+  }
+]

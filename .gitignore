@@ -285,3 +285,8 @@ bench/x182/*.mjs
 bench/x183/*.mjs
 !bench/x183/*-build.mjs
 .cache/x183/
+
+# X184 generated bundles
+bench/x184/*.mjs
+!bench/x184/*-build.mjs
+.cache/x184/

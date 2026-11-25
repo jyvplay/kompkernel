@@ -1,0 +1,31 @@
+{
+  "checks": 39561,
+  "attacks": 21,
+  "paid": [
+    {
+      "file": "bench/x184/receipts/paid-00.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x184/receipts/paid-01.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x184/receipts/paid-02.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x184/receipts/paid-03.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x184/receipts/paid-04.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x184/receipts/paid-06.json",
+      "status": "exact"
+    }
+  ],
+  "native": "NOT_RUN"
+}
