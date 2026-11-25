@@ -1,0 +1,1 @@
+{'checks': 3304, 'paid': [{'file': 'bench/x179/receipts/paid-04.json', 'status': 'exact'}, {'file': 'bench/x179/receipts/paid-05.json', 'status': 'exact'}, {'file': 'bench/x179/receipts/paid-09.json', 'status': 'exact'}], 'native': 'NOT_RUN'}

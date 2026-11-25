@@ -1,0 +1,4 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {blockLcp} from './block-lcp';let seed=179,checks=0;function rand(){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed;}
+for(let n=0;n<20000;n++){let a=Array.from({length:rand()%700},()=>String.fromCharCode(rand()&65535)).join(''),b=a;const pos=rand()%(a.length+1);b=b.slice(0,pos)+String.fromCharCode(rand()&65535)+b.slice(pos+1);const limit=rand()%800;let i=0;while(i<Math.min(limit,a.length,b.length)&&a.charCodeAt(i)===b.charCodeAt(i))i++;assert.equal(blockLcp(a,b,limit),i);checks++;}
+for(const pos of [0,7,8,127,128,135,136,255,256,263,264,49999]){const a='x'.repeat(50000),b=a.slice(0,pos)+'y'+a.slice(pos+1);assert.equal(blockLcp(a,b,50000),pos);checks++;}
+fs.writeFileSync('bench/x179/receipts/lcp.json',JSON.stringify({checks,seed,exact:true}));console.log(checks);

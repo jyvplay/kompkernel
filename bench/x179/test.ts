@@ -1,0 +1,15 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {encode,decode} from 'gpt-tokenizer/encoding/o200k_base';import {kladosPlan,kladosPlans,kladosUndo,kladosRead} from '../../src/lib/omega/klados';
+let checks=0;const pairs:any[]=[];
+for(let n=1;n<=7;n++)for(let v=0;v<3**n;v++){let c=v;const source=Array.from({length:n},()=>{const x=['a','bb','ccc'][c%3];c=Math.floor(c/3);return x;}).join(' ');for(const policy of ['eager','local'] as const){const p=kladosPlan(source,policy);if(p){assert.equal(kladosRead(p.message),source);pairs.push({source,folded:p.folded});}checks++;}}
+// Long ascending/descending chains attack rotation order, root and zig-zag paths.
+let seed=179;for(let i=0;i<1000;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const words=Array.from({length:1+seed%100},(_,j)=>['alphabetic','zoological','middle','A','a','b','B'][(seed>>>j%24)%7]);const source=words.join(i%2?'\r\n':' 🙂\t');for(const p of kladosPlans(source)){assert.ok(Buffer.from(kladosRead(p.message)).equals(Buffer.from(source)));checks++;}}
+for(const source of ['', '🙂\t\r\n','a a a a','z y x w v u z x y w u v', 'a z b y c x d w a z c y','a'.repeat(50000)]){const ps=kladosPlans(source);for(const p of ps){assert.equal(kladosRead(p.message),source);checks++;}}
+for(const bad of ['^;','a ^1;','a ^2;','a ^','a ^00;']){assert.throws(()=>kladosUndo(bad));checks++;}
+assert.equal(kladosPlan('a^a','eager'),null);assert.throws(()=>kladosPlan('\ud800','eager'));assert.throws(()=>kladosPlan('x'.repeat(50001),'eager'));checks+=3;
+assert.throws(()=>kladosPlan('a a','wrong' as any));assert.throws(()=>kladosPlan('a '.repeat(12001),'eager'));assert.throws(()=>kladosUndo('a'.repeat(1000)+' ^;'.repeat(60)));checks+=3;
+assert.equal(kladosUndo('a b a ^1;'),'a b a b');assert.equal(kladosUndo('a ^;b'),'a ab');assert.equal(kladosUndo('a'.repeat(50000)),'a'.repeat(50000));assert.equal(kladosUndo('🙂'.repeat(25000)),'🙂'.repeat(25000));checks+=4;
+assert.deepEqual(kladosPlans('a b c'),[]);assert.equal(kladosPlans('pneumonoultramicroscopicsilicovolcanoconiosis pneumonoultramicroscopicsilicovolcanoconiosis').length,1);checks+=2;
+const rows=[];const files=[...fs.readFileSync('bench/x179/lanes.txt','utf8').trim().split('\n'),...JSON.parse(fs.readFileSync('bench/x178/receipts/heldout-sources.json','utf8')).map((r:any)=>r.file),...JSON.parse(fs.readFileSync('bench/x179/receipts/heldout-sources.json','utf8')).map((r:any)=>r.file)];
+for(const path of files){const bytes=fs.readFileSync(path),source=bytes.toString();let plans;try{plans=kladosPlans(source);}catch(e){rows.push({path,status:'unsupported',error:String(e)});continue;}
+ for(const p of plans){assert.ok(Buffer.from(kladosRead(p.message)).equals(bytes));assert.equal(decode(encode(p.message)),p.message);checks+=2;}rows.push({path,raw:encode(source).length,plans,status:'exact'});}
+fs.writeFileSync('bench/x179/receipts/unit-pairs.json',JSON.stringify(pairs));fs.writeFileSync('bench/x179/receipts/screen.json',JSON.stringify({checks,rows},null,2));console.log({checks,sources:rows.length,rawWins:rows.filter(r=>r.plans?.some(p=>p.tokens<r.raw!)).map(r=>r.path)});

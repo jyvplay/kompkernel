@@ -1,0 +1,347 @@
+{
+  "accepted": false,
+  "productionUnchanged": true,
+  "frontier": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "unitChecks": 7627,
+  "sources": 35,
+  "eligibleSources": 29,
+  "rawWins": [
+    "bench/holdout-x41/ls-l-real.txt"
+  ],
+  "paid": [
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "kind": "klados",
+      "policy": "local",
+      "n": null,
+      "order": null,
+      "tokens": 503,
+      "baselineTokens": 381,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-04.json"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "kind": "klados",
+      "policy": "eager",
+      "n": null,
+      "order": null,
+      "tokens": 602,
+      "baselineTokens": 381,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-05.json"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "kind": "klados",
+      "policy": "eager",
+      "n": null,
+      "order": null,
+      "tokens": 663,
+      "baselineTokens": 411,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-09.json"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "kind": "frequency",
+      "policy": null,
+      "n": 512,
+      "order": "decreasing",
+      "tokens": 505,
+      "baselineTokens": 296,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-38.json"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "kind": "frequency",
+      "policy": null,
+      "n": 32,
+      "order": "increasing",
+      "tokens": 559,
+      "baselineTokens": 296,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-39.json"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "kind": "frequency",
+      "policy": null,
+      "n": 32,
+      "order": "decreasing",
+      "tokens": 549,
+      "baselineTokens": 296,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-40.json"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "kind": "frequency",
+      "policy": null,
+      "n": 128,
+      "order": "increasing",
+      "tokens": 537,
+      "baselineTokens": 296,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-41.json"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "kind": "frequency",
+      "policy": null,
+      "n": 128,
+      "order": "decreasing",
+      "tokens": 521,
+      "baselineTokens": 296,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-42.json"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "kind": "frequency",
+      "policy": null,
+      "n": 512,
+      "order": "increasing",
+      "tokens": 505,
+      "baselineTokens": 296,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-43.json"
+    }
+  ],
+  "ineligible": [
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "policy": "local"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "policy": "local"
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "policy": "local"
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "policy": "eager"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "policy": "local"
+    }
+  ],
+  "paidWins": [],
+  "processCounts": {
+    "completed": 8,
+    "TIMEOUT": 29
+  },
+  "frequencyProcessCounts": {
+    "TIMEOUT": 24
+  },
+  "rawParent": {
+    "job": {
+      "kind": "klados",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "policy": "local",
+      "file": "bench/x179/receipts/paid-37.json"
+    },
+    "status": "TIMEOUT",
+    "exit": null,
+    "limitSeconds": 90,
+    "oldSpaceMiB": 900
+  },
+  "extendedFrequency": {
+    "job": {
+      "kind": "frequency",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "n": 512,
+      "order": "decreasing",
+      "file": "bench/x179/receipts/paid-38.json"
+    },
+    "status": "completed",
+    "exit": 0,
+    "limitSeconds": 180,
+    "oldSpaceMiB": 900,
+    "selection": "Prior best complete raw-price plan; escalation after all 24 bounded attempts timed out"
+  },
+  "independent": {
+    "checks": 3310,
+    "paid": [
+      {
+        "file": "bench/x179/receipts/paid-04.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x179/receipts/paid-05.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x179/receipts/paid-09.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x179/receipts/paid-38.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x179/receipts/paid-39.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x179/receipts/paid-40.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x179/receipts/paid-41.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x179/receipts/paid-42.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x179/receipts/paid-43.json",
+        "status": "exact"
+      }
+    ],
+    "native": "NOT_RUN"
+  },
+  "speed": {
+    "cpuMs": 1.0029935174368791,
+    "wallMs": 0.99982805497186,
+    "laneRatios": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 0.9853925738420694,
+        "wallMs": 0.9761444001028227
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 0.9873735994067185,
+        "wallMs": 0.9827300676185974
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 1.0332796926296857,
+        "wallMs": 1.032331187646513
+      },
+      "bench/holdout-work/email-thread.txt": {
+        "cpuMs": 0.977186788078681,
+        "wallMs": 0.9841707597180247
+      },
+      "bench/holdout-work/unified-diff.patch": {
+        "cpuMs": 1.0450561271356598,
+        "wallMs": 1.0445612215309237
+      },
+      "bench/holdout-x41/node-help.txt": {
+        "cpuMs": 1.0022967468151087,
+        "wallMs": 0.9958168165219796
+      }
+    },
+    "accepted": false,
+    "identicalWires": 24
+  },
+  "native": [
+    {
+      "id": 33,
+      "prompt": "bench/x179/native/33.txt",
+      "responseBytes": 26432,
+      "responseSha256": "dab3e88d324cdde74cf96356c58a423747a5735ac6848d8d4592dc7c13637c62",
+      "expectedContext": "single user message only; no system skills/tools/dictionary",
+      "observed": "NOT_RUN"
+    },
+    {
+      "id": 34,
+      "prompt": "bench/x179/native/34.txt",
+      "responseBytes": 23343,
+      "responseSha256": "76915e474e88fbedecbfe205fb45a85867ea4612453358eda73a330ec991262d",
+      "expectedContext": "single user message only; no system skills/tools/dictionary",
+      "observed": "NOT_RUN"
+    }
+  ],
+  "remaining": [
+    "No demonstrated varied-source significant paid gain",
+    "Native behavior NOT_RUN",
+    "All-plan exact pricing incomplete when processes time out",
+    "No exhaustive all-codec semantic novelty or all-labs proof audit"
+  ],
+  "psEfFollowup": [
+    {
+      "job": {
+        "kind": "frequency",
+        "path": "bench/holdout-x42/ps-ef.txt",
+        "n": 32,
+        "order": "increasing",
+        "file": "bench/x179/receipts/paid-39.json"
+      },
+      "status": "completed",
+      "exit": 0,
+      "limitSeconds": 90,
+      "oldSpaceMiB": 900
+    },
+    {
+      "job": {
+        "kind": "frequency",
+        "path": "bench/holdout-x42/ps-ef.txt",
+        "n": 32,
+        "order": "decreasing",
+        "file": "bench/x179/receipts/paid-40.json"
+      },
+      "status": "completed",
+      "exit": 0,
+      "limitSeconds": 90,
+      "oldSpaceMiB": 900
+    },
+    {
+      "job": {
+        "kind": "frequency",
+        "path": "bench/holdout-x42/ps-ef.txt",
+        "n": 128,
+        "order": "increasing",
+        "file": "bench/x179/receipts/paid-41.json"
+      },
+      "status": "completed",
+      "exit": 0,
+      "limitSeconds": 90,
+      "oldSpaceMiB": 900
+    },
+    {
+      "job": {
+        "kind": "frequency",
+        "path": "bench/holdout-x42/ps-ef.txt",
+        "n": 128,
+        "order": "decreasing",
+        "file": "bench/x179/receipts/paid-42.json"
+      },
+      "status": "completed",
+      "exit": 0,
+      "limitSeconds": 90,
+      "oldSpaceMiB": 900
+    },
+    {
+      "job": {
+        "kind": "frequency",
+        "path": "bench/holdout-x42/ps-ef.txt",
+        "n": 512,
+        "order": "increasing",
+        "file": "bench/x179/receipts/paid-43.json"
+      },
+      "status": "completed",
+      "exit": 0,
+      "limitSeconds": 90,
+      "oldSpaceMiB": 900
+    }
+  ],
+  "psEfTournamentComplete": true,
+  "allAttemptCounts": {
+    "completed": 14,
+    "TIMEOUT": 30
+  },
+  "totalAttempts": 44
+}

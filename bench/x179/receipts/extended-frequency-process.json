@@ -1,0 +1,14 @@
+{
+  "job": {
+    "kind": "frequency",
+    "path": "bench/holdout-x42/ps-ef.txt",
+    "n": 512,
+    "order": "decreasing",
+    "file": "bench/x179/receipts/paid-38.json"
+  },
+  "status": "completed",
+  "exit": 0,
+  "limitSeconds": 180,
+  "oldSpaceMiB": 900,
+  "selection": "Prior best complete raw-price plan; escalation after all 24 bounded attempts timed out"
+}

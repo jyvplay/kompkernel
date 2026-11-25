@@ -12616,3 +12616,27 @@ per-codec attribution. Independent Python22exact/7unsupported/0mismatches;
 bounded TS21exact/8unsupported. All29 prices and transport checks pass.
 `bench/x178/README.md` and `receipts/summary.json` bind results; production
 selection remains unchanged, scientific acceptance=false, native behavior unverified.
+
+### X179: KLADOS and completed ps-ef frequency-order tournament
+
+Added experimental `klados.ts`: dynamic BST path addressing with literal first
+occurrences and move-to-root single rotations after every access. Its exact
+in-band contract, eager/local-greedy search, domain, repairs, sources and CPU/wall
+boundaries are specified in `codec-abbreviations.md` and `bench/x179/model.md`.
+It is not zig-zig splaying, and native decoding is unverified. All three completed
+paid KLADOS candidates lose; the raw-winning ls-l parent attempt timed out.
+
+The previously pending frequency-order work now has an actually completed six-
+plan ps-ef tournament: all exact losses, best 505 versus fresh 296. Initial bounded
+attempts on all four sources timed out; the remaining three sources are not
+priced and not passed. Complete receipts preserve both failures and escalation.
+
+Fresh frontier: 29 identical wires / 11,962 tokens. Generalized roles and local
+leaders remain unchanged (prose 2018→1770; ops 22332→8078; code 3152→2013;
+other 513→101). Whole-stack fixed-block LCP speed experiment failed its declared
+gate, despite exact outputs. No production codec or speed change was promoted.
+
+`bench/x179/README.md` and `receipts/summary.json` report 7,627 checks, 3,310 Python
+checks including 9 paid wires, native 2 NOT_RUN, and the explicit remaining gaps.
+Source inspection narrowed the Google positive-density definition interface;
+no theorem-kernel replay or exhaustive all-labs proof validation occurred.
