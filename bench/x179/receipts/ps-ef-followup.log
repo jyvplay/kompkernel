@@ -1,0 +1,5 @@
+{'job': {'kind': 'frequency', 'path': 'bench/holdout-x42/ps-ef.txt', 'n': 32, 'order': 'increasing', 'file': 'bench/x179/receipts/paid-39.json'}, 'status': 'completed', 'exit': 0, 'limitSeconds': 90, 'oldSpaceMiB': 900}
+{'job': {'kind': 'frequency', 'path': 'bench/holdout-x42/ps-ef.txt', 'n': 32, 'order': 'decreasing', 'file': 'bench/x179/receipts/paid-40.json'}, 'status': 'completed', 'exit': 0, 'limitSeconds': 90, 'oldSpaceMiB': 900}
+{'job': {'kind': 'frequency', 'path': 'bench/holdout-x42/ps-ef.txt', 'n': 128, 'order': 'increasing', 'file': 'bench/x179/receipts/paid-41.json'}, 'status': 'completed', 'exit': 0, 'limitSeconds': 90, 'oldSpaceMiB': 900}
+{'job': {'kind': 'frequency', 'path': 'bench/holdout-x42/ps-ef.txt', 'n': 128, 'order': 'decreasing', 'file': 'bench/x179/receipts/paid-42.json'}, 'status': 'completed', 'exit': 0, 'limitSeconds': 90, 'oldSpaceMiB': 900}
+{'job': {'kind': 'frequency', 'path': 'bench/holdout-x42/ps-ef.txt', 'n': 512, 'order': 'increasing', 'file': 'bench/x179/receipts/paid-43.json'}, 'status': 'completed', 'exit': 0, 'limitSeconds': 90, 'oldSpaceMiB': 900}

@@ -1,0 +1,2 @@
+src/lib/omega/klados.ts(27,80): error TS7034: Variable 'plans' implicitly has type 'any[]' in some locations where its type cannot be determined.
+src/lib/omega/klados.ts(27,182): error TS7005: Variable 'plans' implicitly has an 'any[]' type.

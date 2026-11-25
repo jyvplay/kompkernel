@@ -1,0 +1,3842 @@
+{
+  "checks": 952,
+  "rows": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "klados": [
+        {
+          "policy": "local",
+          "tokens": 5172
+        },
+        {
+          "policy": "eager",
+          "tokens": 6923
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 5457
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 5474
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 7506
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 7599
+        }
+      ],
+      "raw": 5194,
+      "frequency": [
+        {
+          "tokens": 4995,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 4997,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 5069,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 5088,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 5259,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 5302,
+          "n": 32,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 4967,
+          "n": 512
+        },
+        {
+          "tokens": 5044,
+          "n": 128
+        },
+        {
+          "tokens": 5218,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 5434
+        },
+        {
+          "tokens": 5455
+        },
+        {
+          "tokens": 7073
+        },
+        {
+          "tokens": 7151
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 5553,
+          "levels": 1
+        },
+        {
+          "tokens": 5606,
+          "levels": 2
+        },
+        {
+          "tokens": 5748,
+          "levels": 4
+        },
+        {
+          "tokens": 5761,
+          "levels": 12
+        },
+        {
+          "tokens": 6791,
+          "levels": 1
+        },
+        {
+          "tokens": 6836,
+          "levels": 2
+        },
+        {
+          "tokens": 6953,
+          "levels": 4
+        },
+        {
+          "tokens": 6955,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 6731
+      },
+      "rankedGraph": {
+        "tokens": 8265,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"ls\",1]]],[\"ls\",[[\"-l\",1]]],[\"-l\",[[\"/usr/lib/x86_64-linux-gnu\",1]]],[\"/usr/lib/x86_64-linux-gnu\",[[\"(real)\",1]]]],0]\n~[\"total\",[[\"total\",[[\"167495\",1]]]],0]\ndrwxr-xr-x  4 root root      128 Jun 15 16:59 ImageMagick-6.9.11\n-rw-r--r--  1 root root      496 Apr 27 20:14 Mcrt1.o\n-rw-r--r--  1 root root     1632 Apr 27 20:14 Scrt1.o\ndrwxr-xr-x  2 root root       60 Jun 15 16:59 audit\ndrwxr-xr-x  2 root root       60 Jun 15 16:59 bfd-plugins\n-rw-r--r--  1 root root     1768 Apr 27 20:14 crt1.o\n-rw-r--r--  1 root root     1072 Apr 27 20:14 crti.o\n-rw-r--r--  1 root root      648 Apr 27 20:14 crtn.o\ndrwxr-xr-x  2 root root     4096 Jun 15 16:59 cryptsetup\ndrwxr-xr-x  2 root root       60 Jun 10 00:00 e2fsprogs\ndrwxr-xr-x  2 root root      128 Jun 15 16:59 engines-3\ndrwxr-xr-x  3 root root     8192 Jun 15 16:59 gconv\n-rw-r--r--  1 root root     2520 Apr 27 20:14 gcrt1.o\ndrwxr-xr-x  3 root root       60 Jun 15 16:59 gio\ndrwxr-xr-x  2 root root     4096 Jun 15 16:59 glib-2.0\ndrwxr-xr-x  2 root root     4096 Jun 15 16:59 gprofng\n-rw-r--r--  1 root root     2232 Apr 27 20:14 grcrt1.o\ndrwxr-xr-x  3 root root       60 Jun 15 16:59 krb5\n~[\"-rwxr-xr-x\",[[\"-rwxr-xr-x\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"215000\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"215000\",[[\"Apr\",1]]],[\"Apr\",[[\"27\",1]]],[\"27\",[[\"20:14\",1]]],[\"20:14\",[[\"ld-linux-x86-64.so.2\",1]]]],1]\ndrwxr-xr-x  2 root root     4096 Jun 15 16:59 ldscripts\n-rw-r--r--  1 root root     1790 Apr 27 20:14 libBrokenLocale.a\nlrwxrwxrwx  1 root root       42 Apr 27 20:14 libBrokenLocale.so -> /lib/x86_64-linux-gnu/libBrokenLocale.so.1\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",2],[\"14640\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"14640\",[[\"Apr\",1]]],[\"Apr\",[[\"27\",1]]],[\"27\",[[\"20:14\",1]]],[\"20:14\",[[\"libBrokenLocale.so.1\",1]]]],2]\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"616464\",1],[\"2022\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"616464\",[[\"Oct\",1]]],[\"Oct\",[[\"15\",1]]],[\"15\",[[\"\",1]]],[\"2022\",[[\"libLerc.so.4\",1]]]],2]\nlrwxrwxrwx  1 root root       28 May 27 20:36 libMagickCore-6.Q16.so.6 -> libMagickCore-6.Q16.so.6.0.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"2848744\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"2848744\",[[\"May\",1]]],[\"May\",[[\"27\",1]]],[\"27\",[[\"20:36\",1]]],[\"20:36\",[[\"libMagickCore-6.Q16.so.6.0.0\",1]]]],0]\nlrwxrwxrwx  1 root root       28 May 27 20:36 libMagickWand-6.Q16.so.6 -> libMagickWand-6.Q16.so.6.0.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"1203192\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"1203192\",[[\"May\",1]]],[\"May\",[[\"27\",1]]],[\"27\",[[\"20:36\",1]]],[\"20:36\",[[\"libMagickWand-6.Q16.so.6.0.0\",1]]]],0]\nlrwxrwxrwx  1 root root       15 Oct  3  2023 libX11.so.6 -> libX11.so.6.4.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"1318408\",1],[\"3\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"1318408\",[[\"Oct\",1]]],[\"Oct\",[[\"\",1]]],[\"3\",[[\"\",1]]],[\"2023\",[[\"libX11.so.6.4.0\",1]]]],0]\nlrwxrwxrwx  1 root root       15 Jan 28  2021 libXau.so.6 -> libXau.so.6.0.0\n-rw-r--r--  1 root root    14496 Jan 28  2021 libXau.so.6.0.0\nlrwxrwxrwx  1 root root       17 Mar  2  2017 libXdmcp.so.6 -> libXdmcp.so.6.0.0\n-rw-r--r--  1 root root    22728 Mar  2  2017 libXdmcp.so.6.0.0\nlrwxrwxrwx  1 root root       16 Sep 18  2022 libXext.so.6 -> libXext.so.6.4.0\n-rw-r--r--  1 root root    81568 Sep 18  2022 libXext.so.6.4.0\nlrwxrwxrwx  1 root root       18 Jan 17  2023 libacl.so.1 -> libacl.so.1.1.2301\n-rw-r--r--  1 root root    38832 Jan 17  2023 libacl.so.1.1.2301\n-rw-r--r--  1 root root        8 Apr 27 20:14 libanl.a\nlrwxrwxrwx  1 root root       33 Apr 27 20:14 libanl.so -> /lib/x86_64-linux-gnu/libanl.so.1\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",2],[\"14480\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"14480\",[[\"Apr\",1]]],[\"Apr\",[[\"27\",1]]],[\"27\",[[\"20:14\",1]]],[\"20:14\",[[\"libanl.so.1\",1]]]],2]\nlrwxrwxrwx  1 root root       15 Jun  1  2025 libaom.so.3 -> libaom.so.3.6.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",2],[\"5639576\",1],[\"2025\",1]]],[\"1\",[[\"root\",1],[\"\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"5639576\",[[\"Jun\",1]]],[\"Jun\",[[\"\",1]]],[\"2025\",[[\"libaom.so.3.6.0\",1]]]],3]\nlrwxrwxrwx  1 root root       20 Feb 14  2023 libapparmor.so.1 -> libapparmor.so.1.8.4\n-rw-r--r--  1 root root    80600 Feb 14  2023 libapparmor.so.1.8.4\nlrwxrwxrwx  1 root root       19 May 25  2023 libapt-pkg.so.6.0 -> libapt-pkg.so.6.0.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"2067760\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"2067760\",[[\"May\",1]]],[\"May\",[[\"25\",1]]],[\"25\",[[\"\",1]]],[\"2023\",[[\"libapt-pkg.so.6.0.0\",1]]]],0]\nlrwxrwxrwx  1 root root       23 May 25  2023 libapt-private.so.0.0 -> libapt-private.so.0.0.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"497904\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"497904\",[[\"May\",1]]],[\"May\",[[\"25\",1]]],[\"25\",[[\"\",1]]],[\"2023\",[[\"libapt-private.so.0.0.0\",1]]]],2]\n-rw-r--r--  1 root root    34880 Apr 21  2023 libargon2.so.1\nlrwxrwxrwx  1 root root       16 Apr  7  2025 libasan.so.8 -> libasan.so.8.0.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"8198800\",1],[\"7\",1],[\"2025\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"8198800\",[[\"Apr\",1]]],[\"Apr\",[[\"\",1]]],[\"7\",[[\"\",1]]],[\"2025\",[[\"libasan.so.8.0.0\",1]]]],1]\nlrwxrwxrwx  1 root root       18 Apr  7  2025 libatomic.so.1 -> libatomic.so.1.2.0\n-rw-r--r--  1 root root    30776 Apr  7  2025 libatomic.so.1.2.0\nlrwxrwxrwx  1 root root       19 Jan 17  2023 libattr.so.1 -> libattr.so.1.1.2501\n-rw-r--r--  1 root root    26544 Jan 17  2023 libattr.so.1.1.2501\nlrwxrwxrwx  1 root root       17 Feb  9  2023 libaudit.so.1 -> libaudit.so.1.0.0\n-rw-r--r--  1 root root   128952 Feb  9  2023 libaudit.so.1.0.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"1514448\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"1514448\",[[\"Jan\",1]]],[\"Jan\",[[\"14\",1]]],[\"14\",[[\"\",1]]],[\"2023\",[[\"libbfd-2.40-system.so\",1]]]],0]\nlrwxrwxrwx  1 root root       17 Nov 21  2024 libblkid.so.1 -> libblkid.so.1.1.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"355328\",1],[\"2024\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"355328\",[[\"Nov\",1]]],[\"Nov\",[[\"21\",1]]],[\"21\",[[\"\",1]]],[\"2024\",[[\"libblkid.so.1.1.0\",1]]]],2]\nlrwxrwxrwx  1 root root       15 May 12  2025 libbpf.so.1 -> libbpf.so.1.1.2\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"358880\",1],[\"2025\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"358880\",[[\"May\",1]]],[\"May\",[[\"12\",1]]],[\"12\",[[\"\",1]]],[\"2025\",[[\"libbpf.so.1.1.2\",1]]]],2]\nlrwxrwxrwx  1 root root       24 Jan 31  2023 libbrotlicommon.so.1 -> libbrotlicommon.so.1.0.9\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"137376\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"137376\",[[\"Jan\",1]]],[\"Jan\",[[\"31\",1]]],[\"31\",[[\"\",1]]],[\"2023\",[[\"libbrotlicommon.so.1.0.9\",1]]]],2]\nlrwxrwxrwx  1 root root       21 Jan 31  2023 libbrotlidec.so.1 -> libbrotlidec.so.1.0.9\n-rw-r--r--  1 root root    47264 Jan 31  2023 libbrotlidec.so.1.0.9\nlrwxrwxrwx  1 root root       21 Jan 31  2023 libbrotlienc.so.1 -> libbrotlienc.so.1.0.9\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"591920\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"591920\",[[\"Jan\",1]]],[\"Jan\",[[\"31\",1]]],[\"31\",[[\"\",1]]],[\"2023\",[[\"libbrotlienc.so.1.0.9\",1]]]],2]\nlrwxrwxrwx  1 root root       16 Jan 29  2023 libbsd.so.0 -> libbsd.so.0.11.7\n-rw-r--r--  1 root root    84840 Jan 29  2023 libbsd.so.0.11.7\nlrwxrwxrwx  1 root root       15 Sep 19  2022 libbz2.so.1 -> libbz2.so.1.0.4\nlrwxrwxrwx  1 root root       15 Sep 19  2022 libbz2.so.1.0 -> libbz2.so.1.0.4\n-rw-r--r--  1 root root    74688 Sep 19  2022 libbz2.so.1.0.4\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"5452590\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"5452590\",[[\"Apr\",1]]],[\"Apr\",[[\"27\",1]]],[\"27\",[[\"20:14\",1]]],[\"20:14\",[[\"libc.a\",1]]]],0]\n-rw-r--r--  1 root root      283 Apr 27 20:14 libc.so\n~[\"-rwxr-xr-x\",[[\"-rwxr-xr-x\",[[\"\",1]]],[\"\",[[\"1\",1],[\"1926232\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"1926232\",[[\"Apr\",1]]],[\"Apr\",[[\"27\",1]]],[\"27\",[[\"20:14\",1]]],[\"20:14\",[[\"libc.so.6\",1]]]],0]\nlrwxrwxrwx  1 root root       44 Apr 27 20:14 libc_malloc_debug.so -> /lib/x86_64-linux-gnu/libc_malloc_debug.so.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",2],[\"50200\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"50200\",[[\"Apr\",1]]],[\"Apr\",[[\"27\",1]]],[\"27\",[[\"20:14\",1]]],[\"20:14\",[[\"libc_malloc_debug.so.0\",1]]]],2]\n-rw-r--r--  1 root root     5098 Apr 27 20:14 libc_nonshared.a\nlrwxrwxrwx  1 root root       18 Jan 31  2023 libcap-ng.so.0 -> libcap-ng.so.0.0.0\n-rw-r--r--  1 root root    30704 Jan 31  2023 libcap-ng.so.0.0.0\nlrwxrwxrwx  1 root root       14 May  7 21:10 libcap.so.2 -> libcap.so.2.66\n-rw-r--r--  1 root root    47128 May  7 21:10 libcap.so.2.66\nlrwxrwxrwx  1 root root       16 Sep 19  2022 libcbor.so.0.8 -> libcbor.so.0.8.0\n-rw-r--r--  1 root root    69192 Sep 19  2022 libcbor.so.0.8.0\nlrwxrwxrwx  1 root root       15 Apr  7  2025 libcc1.so.0 -> libcc1.so.0.0.0\n-rw-r--r--  1 root root   126464 Apr  7  2025 libcc1.so.0.0.0\nlrwxrwxrwx  1 root root       17 Jun  6  2025 libcom_err.so.2 -> libcom_err.so.2.1\n-rw-r--r--  1 root root    18344 Jun  6  2025 libcom_err.so.2.1\n-rw-r--r--  1 root root   269124 Jan  6  2023 libcrypt.a\nlrwxrwxrwx  1 root root       35 Jan  6  2023 libcrypt.so -> /lib/x86_64-linux-gnu/libcrypt.so.1\nlrwxrwxrwx  1 root root       17 Jan  6  2023 libcrypt.so.1 -> libcrypt.so.1.1.0\n-rw-r--r--  1 root root   206776 Jan  6  2023 libcrypt.so.1.1.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"4734232\",1],[\"6\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"4734232\",[[\"Jun\",1]]],[\"Jun\",[[\"\",1]]],[\"6\",[[\"19:56\",1]]],[\"19:56\",[[\"libcrypto.so.3\",1]]]],0]\nlrwxrwxrwx  1 root root       23 Dec 18  2023 libcryptsetup.so.12 -> libcryptsetup.so.12.9.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"525488\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"525488\",[[\"Dec\",1]]],[\"Dec\",[[\"18\",1]]],[\"18\",[[\"\",1]]],[\"2023\",[[\"libcryptsetup.so.12.9.0\",1]]]],2]\nlrwxrwxrwx  1 root root       21 Jan 14  2023 libctf-nobfd.so.0 -> libctf-nobfd.so.0.0.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"228184\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"228184\",[[\"Jan\",1]]],[\"Jan\",[[\"14\",1]]],[\"14\",[[\"\",1]]],[\"2023\",[[\"libctf-nobfd.so.0.0.0\",1]]]],2]\nlrwxrwxrwx  1 root root       15 Jan 14  2023 libctf.so.0 -> libctf.so.0.0.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"220192\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"220192\",[[\"Jan\",1]]],[\"Jan\",[[\"14\",1]]],[\"14\",[[\"\",1]]],[\"2023\",[[\"libctf.so.0.0.0\",1]]]],2]\nlrwxrwxrwx  1 root root       19 Jul 19  2025 libcurl-gnutls.so.3 -> libcurl-gnutls.so.4\nlrwxrwxrwx  1 root root       23 Jul 19  2025 libcurl-gnutls.so.4 -> libcurl-gnutls.so.4.8.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"695736\",1],[\"2025\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"695736\",[[\"Jul\",1]]],[\"Jul\",[[\"19\",1]]],[\"19\",[[\"\",1]]],[\"2025\",[[\"libcurl-gnutls.so.4.8.0\",1]]]],2]\nlrwxrwxrwx  1 root root       16 Jul 19  2025 libcurl.so.4 -> libcurl.so.4.8.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"712120\",1],[\"2025\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"712120\",[[\"Jul\",1]]],[\"Jul\",[[\"19\",1]]],[\"19\",[[\"\",1]]],[\"2025\",[[\"libcurl.so.4.8.0\",1]]]],2]\nlrwxrwxrwx  1 root root       17 Apr 25  2024 libdav1d.so.6 -> libdav1d.so.6.6.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"1630208\",1],[\"2024\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"1630208\",[[\"Apr\",1]]],[\"Apr\",[[\"25\",1]]],[\"25\",[[\"\",1]]],[\"2024\",[[\"libdav1d.so.6.6.0\",1]]]],0]\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"1843792\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"1843792\",[[\"Jan\",1]]],[\"Jan\",[[\"16\",1]]],[\"16\",[[\"\",1]]],[\"2023\",[[\"libdb-5.3.so\",1]]]],0]\nlrwxrwxrwx  1 root root       17 Dec 29  2023 libde265.so.0 -> libde265.so.0.1.4\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"452776\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"452776\",[[\"Dec\",1]]],[\"Dec\",[[\"29\",1]]],[\"29\",[[\"\",1]]],[\"2023\",[[\"libde265.so.0.1.4\",1]]]],2]\nlrwxrwxrwx  1 root root       25 May 23  2023 libdebconfclient.so.0 -> libdebconfclient.so.0.0.0\n-rw-r--r--  1 root root    14376 May 23  2023 libdebconfclient.so.0.0.0\n-rw-r--r--  1 root root   149384 Oct  3  2022 libdeflate.so.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"442696\",1],[\"2022\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"442696\",[[\"Oct\",1]]],[\"Oct\",[[\"19\",1]]],[\"19\",[[\"\",1]]],[\"2022\",[[\"libdevmapper.so.1.02.1\",1]]]],2]\n-rw-r--r--  1 root root        8 Apr 27 20:14 libdl.a\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",2],[\"14480\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"14480\",[[\"Apr\",1]]],[\"Apr\",[[\"27\",1]]],[\"27\",[[\"20:14\",1]]],[\"20:14\",[[\"libdl.so.2\",1]]]],2]\nlrwxrwxrwx  1 root root       24 Jan 31  2023 libdrop_ambient.so.0 -> libdrop_ambient.so.0.0.0\n-rw-r--r--  1 root root    14256 Jan 31  2023 libdrop_ambient.so.0.0.0\nlrwxrwxrwx  1 root root       13 Jun  6  2025 libe2p.so.2 -> libe2p.so.2.3\n-rw-r--r--  1 root root    45008 Jun  6  2025 libe2p.so.2.3\nlrwxrwxrwx  1 root root       17 Nov 21  2022 libedit.so.2 -> libedit.so.2.0.70\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"216640\",1],[\"2022\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"216640\",[[\"Nov\",1]]],[\"Nov\",[[\"21\",1]]],[\"21\",[[\"\",1]]],[\"2022\",[[\"libedit.so.2.0.70\",1]]]],2]\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"109088\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"109088\",[[\"Jan\",1]]],[\"Jan\",[[\"14\",1]]],[\"14\",[[\"\",1]]],[\"2023\",[[\"libelf-0.188.so\",1]]]],2]\nlrwxrwxrwx  1 root root       15 Jan 14  2023 libelf.so.1 -> libelf-0.188.so\nlrwxrwxrwx  1 root root       26 Jan  4  2023 libevent_core-2.1.so.7 -> libevent_core-2.1.so.7.0.1\n-rw-r--r--  1 root root   219152 Jan  4  2023 libevent_core-2.1.so.7.0.1\nlrwxrwxrwx  1 root root       18 Apr  5  2025 libexpat.so.1 -> libexpat.so.1.8.10\n-rw-r--r--  1 root root   174184 Apr  5  2025 libexpat.so.1.8.10\nlrwxrwxrwx  1 root root       19 Apr  5  2025 libexpatw.so.1 -> libexpatw.so.1.8.10\n-rw-r--r--  1 root root   174176 Apr  5  2025 libexpatw.so.1.8.10\nlrwxrwxrwx  1 root root       16 Jun  6  2025 libext2fs.so.2 -> libext2fs.so.2.4\n-rw-r--r--  1 root root   438608 Jun  6  2025 libext2fs.so.2.4\nlrwxrwxrwx  1 root root       17 Nov 21  2024 libfdisk.so.1 -> libfdisk.so.1.1.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"484640\",1],[\"2024\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"484640\",[[\"Nov\",1]]],[\"Nov\",[[\"21\",1]]],[\"21\",[[\"\",1]]],[\"2024\",[[\"libfdisk.so.1.1.0\",1]]]],2]\nlrwxrwxrwx  1 root root       15 Oct 24  2022 libffi.so.8 -> libffi.so.8.1.2\n-rw-r--r--  1 root root    43480 Oct 24  2022 libffi.so.8.1.2\nlrwxrwxrwx  1 root root       18 Nov 30  2022 libfftw3.so.3 -> libfftw3.so.3.6.10\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"2213808\",1],[\"2022\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"2213808\",[[\"Nov\",1]]],[\"Nov\",[[\"30\",1]]],[\"30\",[[\"\",1]]],[\"2022\",[[\"libfftw3.so.3.6.10\",1]]]],0]\nlrwxrwxrwx  1 root root       22 Nov 30  2022 libfftw3_omp.so.3 -> libfftw3_omp.so.3.6.10\n-rw-r--r--  1 root root    30632 Nov 30  2022 libfftw3_omp.so.3.6.10\nlrwxrwxrwx  1 root root       26 Nov 30  2022 libfftw3_threads.so.3 -> libfftw3_threads.so.3.6.10\n-rw-r--r--  1 root root    34728 Nov 30  2022 libfftw3_threads.so.3.6.10\nlrwxrwxrwx  1 root root       18 Mar 23  2023 libfido2.so.1 -> libfido2.so.1.12.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"219040\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"219040\",[[\"Mar\",1]]],[\"Mar\",[[\"23\",1]]],[\"23\",[[\"\",1]]],[\"2023\",[[\"libfido2.so.1.12.0\",1]]]],2]\nlrwxrwxrwx  1 root root       23 Jan 31  2023 libfontconfig.so.1 -> libfontconfig.so.1.12.0\n~[\"-rw-r--r--\",[[\"-rw-r--r--\",[[\"\",1]]],[\"\",[[\"1\",1],[\"\",1],[\"306112\",1],[\"2023\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"306112\",[[\"Jan\",1]]],[\"Jan\",[[\"31\",1]]],[\"31\",[[\"\",1]]],[\"2023\",[[\"libfontconfig.so.1.12.0\",1]]]],2]\nlrwxrwxrwx  1 root root       15 May  7  2023 libformw.so.6 -> libformw.so.6.4\n-rw-r--r--  1 root root    77200 May  7  2023 libformw.so.6.4\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 38
+      },
+      "bwt": {
+        "tokens": 4893
+      },
+      "anchor": [
+        {
+          "tokens": 4983
+        },
+        {
+          "tokens": 4983
+        },
+        {
+          "tokens": 4996
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 4014
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 3277
+        },
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 3281
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 5438
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 5632
+        }
+      ],
+      "raw": 3054,
+      "frequency": [
+        {
+          "tokens": 2825,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 2829,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 2932,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 2958,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 3163,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 3188,
+          "n": 32,
+          "order": "decreasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 2794,
+          "n": 512
+        },
+        {
+          "tokens": 2904,
+          "n": 128
+        },
+        {
+          "tokens": 3172,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 3173
+        },
+        {
+          "tokens": 3808
+        },
+        {
+          "tokens": 4037
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 3456,
+          "levels": 1
+        },
+        {
+          "tokens": 3478,
+          "levels": 2
+        },
+        {
+          "tokens": 3522,
+          "levels": 4
+        },
+        {
+          "tokens": 3530,
+          "levels": 12
+        },
+        {
+          "tokens": 4261,
+          "levels": 1
+        },
+        {
+          "tokens": 4273,
+          "levels": 2
+        },
+        {
+          "tokens": 4284,
+          "levels": 4
+        },
+        {
+          "tokens": 4287,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 4213
+      },
+      "rankedGraph": {
+        "tokens": 3169,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"ps\",1]]],[\"ps\",[[\"aux\",1]]],[\"aux\",[[\"--sort=-%mem\",1]]],[\"--sort=-%mem\",[[\"(real)\",1]]]],0]\nUSER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND\nuser        1553  103 13.9 1446072 561224 ?      Rl   17:49   3:14 node /tmp/_run_1539.mjs\nroot        1229  0.4  0.4 1338384 18708 ?       S<Lsl 17:46   0:01 /usr/bin/envd\nroot           1  0.0  0.2 167228 11708 ?        Ss   17:46   0:00 /sbin/init\nroot         318  0.0  0.2  15452  8980 ?        Ss   17:46   0:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups\nsystemd+     306  0.0  0.2  17916  8764 ?        Ss   17:46   0:00 /lib/systemd/systemd-networkd\nroot         284  0.0  0.1  35072  8056 ?        Ss   17:46   0:00 /lib/systemd/systemd-journald\nuser        1907  0.0  0.1   8108  4056 ?        R    17:52   0:00 ps aux --sort=-%mem\n_rpc         304  0.0  0.0   7888  3968 ?        Ss   17:46   0:00 /sbin/rpcbind -f -w\n_chrony      320  0.0  0.0  10700  3048 ?        S    17:46   0:00 /usr/sbin/chronyd -F 1\nuser        1901  0.0  0.0   3932  3036 ?        S    17:52   0:00 /bin/bash -l -c cd /home/user/kompkernel && H=bench/holdout-x41 && \\ { echo '# source: ls -l /usr/lib/x86_64-linux-gnu (real)'; ls -l /usr/lib/x86_64-linux-gnu 2>/dev/null | head -150; } > $H/ls-l-real.txt && \\ { echo '# source: ls -l node_modules/.bin and node_modules (real)'; ls -l node_modules | head -120; } > $H/ls-l-nm.txt && \\ { echo '# source: ps aux --sort=-%mem (real)'; ps aux --sort=-%mem | head -60; } > $H/ps-aux-real.txt && \\ { echo '# source: apt list --installed (real)'; apt list --installed 2>/dev/null | head -120; } > $H/apt-real.txt && \\ { echo '# source: git log --stat -30 (real)'; git log --stat -30 | head -200; } > $H/git-log-stat.txt && \\ { echo '# source: node --help (real)'; node --help | head -120; } > $H/node-help.txt && \\ { echo '# source: find / -name \"*.json\" -newer (real)'; find /usr/share -maxdepth 4 -name '*.json' 2>/dev/null | head -120; } > $H/find-json.txt && \\ { echo '# source: du -ak node_modules (real, sorted)'; du -ak node_modules 2>/dev/null | sort -rn | head -120; } > $H/du-ak.txt && \\ wc -l $H/*.txt && head -3 $H/ls-l-real.txt && head -3 $H/apt-real.txt && head -4 $H/git-log-stat.txt && head -3 $H/find-json.txt\nuser        1537  0.0  0.0   3932  2928 ?        Ss   17:49   0:00 bash -c bash \"$0/run.cmd\" > \"$0/out.log\" 2>&1; echo $? > \"$0/exit\" /tmp/arena-workspace/procs/x41-tape-census-dbaac8ba\nuser        1538  0.0  0.0   3932  2864 ?        S    17:49   0:00 bash /tmp/arena-workspace/procs/x41-tape-census-dbaac8ba/run.cmd\nuser        1539  0.0  0.0   3932  2828 ?        S    17:49   0:00 bash bench/tmp/run2.sh bench/x41/tape2.ts\nroot         348  0.0  0.0   2900  1040 tty2     Ss+  17:46   0:00 /sbin/agetty -o -p -- \\u --noclear - linux\nroot         327  0.0  0.0   2900  1036 tty1     Ss+  17:46   0:00 /sbin/agetty -o -p -- \\u --noclear - linux\nroot         331  0.0  0.0   2900  1024 tty5     Ss+  17:46   0:00 /sbin/agetty -o -p -- \\u --noclear - linux\nroot         329  0.0  0.0   2900  1020 tty3     Ss+  17:46   0:00 /sbin/agetty -o -p -- \\u --noclear - linux\nroot         330  0.0  0.0   2900  1020 tty4     Ss+  17:46   0:00 /sbin/agetty -o -p -- \\u --noclear - linux\nroot         332  0.0  0.0   2900  1012 tty6     Ss+  17:46   0:00 /sbin/agetty -o -p -- \\u --noclear - linux\nuser        1540  0.0  0.0   2496   896 ?        S    17:49   0:00 tee /tmp/x41-tape.log\nuser        1908  0.0  0.0   2500   880 ?        S    17:52   0:00 head -60\n_chrony      322  0.0  0.0  10568   544 ?        S    17:46   0:00 /usr/sbin/chronyd -F 1\nroot         167  0.0  0.0   1004     4 ?        S    17:46   0:00 bpfilter_umh\nroot           2  0.0  0.0      0     0 ?        S    17:46   0:00 [kthreadd]\nroot           3  0.0  0.0      0     0 ?        I<   17:46   0:00 [rcu_gp]\nroot           4  0.0  0.0      0     0 ?        I<   17:46   0:00 [rcu_par_gp]\nroot           5  0.0  0.0      0     0 ?        I<   17:46   0:00 [slub_flushwq]\nroot           6  0.0  0.0      0     0 ?        I<   17:46   0:00 [netns]\nroot           8  0.0  0.0      0     0 ?        I<   17:46   0:00 [kworker/0:0H-events_highpri]\nroot           9  0.0  0.0      0     0 ?        I    17:46   0:00 [kworker/u4:0-flush-254:0]\nroot          10  0.0  0.0      0     0 ?        I<   17:46   0:00 [mm_percpu_wq]\nroot          11  0.0  0.0      0     0 ?        I    17:46   0:00 [rcu_tasks_kthread]\nroot          12  0.0  0.0      0     0 ?        I    17:46   0:00 [rcu_tasks_trace_kthread]\nroot          13  0.0  0.0      0     0 ?        S    17:46   0:00 [ksoftirqd/0]\nroot          14  0.0  0.0      0     0 ?        I    17:46   0:00 [rcu_preempt]\nroot          15  0.0  0.0      0     0 ?        S    17:46   0:00 [migration/0]\nroot          16  0.0  0.0      0     0 ?        I    17:46   0:00 [kworker/0:1-mm_percpu_wq]\nroot          17  0.0  0.0      0     0 ?        S    17:46   0:00 [cpuhp/0]\nroot          18  0.0  0.0      0     0 ?        S    17:46   0:00 [cpuhp/1]\nroot          19  0.0  0.0      0     0 ?        S    17:46   0:00 [migration/1]\nroot          20  0.0  0.0      0     0 ?        S    17:46   0:00 [ksoftirqd/1]\nroot          21  0.0  0.0      0     0 ?        I    17:46   0:00 [kworker/1:0-mm_percpu_wq]\nroot          22  0.0  0.0      0     0 ?        I<   17:46   0:00 [kworker/1:0H-events_highpri]\nroot          24  0.0  0.0      0     0 ?        I    17:46   0:00 [kworker/u4:1-events_unbound]\nroot          25  0.0  0.0      0     0 ?        S    17:46   0:00 [kdevtmpfs]\nroot          26  0.0  0.0      0     0 ?        I<   17:46   0:00 [inet_frag_wq]\nroot          27  0.0  0.0      0     0 ?        S    17:46   0:00 [kauditd]\nroot          28  0.0  0.0      0     0 ?        I    17:46   0:00 [kworker/1:1-mm_percpu_wq]\nroot          29  0.0  0.0      0     0 ?        S    17:46   0:00 [khungtaskd]\nroot          30  0.0  0.0      0     0 ?        S    17:46   0:00 [oom_reaper]\nroot          31  0.0  0.0      0     0 ?        I<   17:46   0:00 [writeback]\nroot          32  0.0  0.0      0     0 ?        S    17:46   0:00 [kcompactd0]\nroot          33  0.0  0.0      0     0 ?        SN   17:46   0:00 [ksmd]\nroot          34  0.0  0.0      0     0 ?        SN   17:46   0:00 [khugepaged]\nroot          35  0.0  0.0      0     0 ?        I<   17:46   0:00 [kintegrityd]\nroot          36  0.0  0.0      0     0 ?        I<   17:46   0:00 [kblockd]\nroot          37  0.0  0.0      0     0 ?        I<   17:46   0:00 [blkcg_punt_bio]\nroot          38  0.0  0.0      0     0 ?        S    17:46   0:00 [watchdogd]\nroot          39  0.0  0.0      0     0 ?        I<   17:46   0:00 [rpciod]\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 1
+      },
+      "bwt": {
+        "tokens": 2730
+      },
+      "anchor": [
+        {
+          "tokens": 3112
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 1607
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 1177
+        },
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 1182
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 2998
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 3279
+        }
+      ],
+      "raw": 1000,
+      "frequency": [
+        {
+          "tokens": 1099,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1104,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1139,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1152,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1181,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1185,
+          "n": 32,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 1077,
+          "n": 512
+        },
+        {
+          "tokens": 1124,
+          "n": 128
+        },
+        {
+          "tokens": 1162,
+          "n": 32
+        }
+      ],
+      "strofos": [],
+      "sparse": [],
+      "lifting": [],
+      "xor": null,
+      "rankedGraph": null,
+      "bwt": {
+        "tokens": 1011
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "klados": [],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 1580
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 1599
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 2393
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 2568
+        }
+      ],
+      "raw": 1152,
+      "frequency": [
+        {
+          "tokens": 1206,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1207,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1218,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1219,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1268,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1269,
+          "n": 32,
+          "order": "decreasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 1185,
+          "n": 512
+        },
+        {
+          "tokens": 1197,
+          "n": 128
+        },
+        {
+          "tokens": 1247,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 1250
+        },
+        {
+          "tokens": 1369
+        },
+        {
+          "tokens": 1421
+        },
+        {
+          "tokens": 1731
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 1314,
+          "levels": 1
+        },
+        {
+          "tokens": 1323,
+          "levels": 2
+        },
+        {
+          "tokens": 1331,
+          "levels": 4
+        },
+        {
+          "tokens": 1340,
+          "levels": 12
+        },
+        {
+          "tokens": 1498,
+          "levels": 1
+        },
+        {
+          "tokens": 1498,
+          "levels": 2
+        },
+        {
+          "tokens": 1502,
+          "levels": 4
+        },
+        {
+          "tokens": 1508,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 1425
+      },
+      "rankedGraph": {
+        "tokens": 4191,
+        "folded": "{\n~[\"\",[[\"\",[[\"\",3],[\"\\\"name\\\":\",1]]],[\"\\\"name\\\":\",[[\"\\\"typescript\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"author\\\":\",1]]],[\"\\\"author\\\":\",[[\"\\\"Microsoft\",1]]],[\"\\\"Microsoft\",[[\"Corp.\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"homepage\\\":\",1]]],[\"\\\"homepage\\\":\",[[\"\\\"https://www.typescriptlang.org/\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"version\\\":\",1]]],[\"\\\"version\\\":\",[[\"\\\"5.9.3\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"license\\\":\",1]]],[\"\\\"license\\\":\",[[\"\\\"Apache-2.0\\\",\",1]]]],0]\n    \"description\": \"TypeScript is a language for application scale JavaScript development\",\n~[\"\",[[\"\",[[\"\",3],[\"\\\"keywords\\\":\",1]]],[\"\\\"keywords\\\":\",[[\"[\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"TypeScript\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"Microsoft\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"compiler\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"language\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"javascript\\\"\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"],\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"bugs\\\":\",1]]],[\"\\\"bugs\\\":\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"url\\\":\",1]]],[\"\\\"url\\\":\",[[\"\\\"https://github.com/microsoft/TypeScript/issues\\\"\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"},\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"repository\\\":\",1]]],[\"\\\"repository\\\":\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"type\\\":\",1]]],[\"\\\"type\\\":\",[[\"\\\"git\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"url\\\":\",1]]],[\"\\\"url\\\":\",[[\"\\\"https://github.com/microsoft/TypeScript.git\\\"\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"},\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"main\\\":\",1]]],[\"\\\"main\\\":\",[[\"\\\"./lib/typescript.js\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"typings\\\":\",1]]],[\"\\\"typings\\\":\",[[\"\\\"./lib/typescript.d.ts\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"bin\\\":\",1]]],[\"\\\"bin\\\":\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"tsc\\\":\",1]]],[\"\\\"tsc\\\":\",[[\"\\\"./bin/tsc\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"tsserver\\\":\",1]]],[\"\\\"tsserver\\\":\",[[\"\\\"./bin/tsserver\\\"\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"},\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"engines\\\":\",1]]],[\"\\\"engines\\\":\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"node\\\":\",1]]],[\"\\\"node\\\":\",[[\"\\\">=14.17\\\"\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"},\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"files\\\":\",1]]],[\"\\\"files\\\":\",[[\"[\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"bin\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"lib\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"!lib/enu\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"LICENSE.txt\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"README.md\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"SECURITY.md\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"ThirdPartyNoticeText.txt\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"!**/.gitattributes\\\"\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"],\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"devDependencies\\\":\",1]]],[\"\\\"devDependencies\\\":\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@dprint/formatter\\\":\",1]]],[\"\\\"@dprint/formatter\\\":\",[[\"\\\"^0.4.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@dprint/typescript\\\":\",1]]],[\"\\\"@dprint/typescript\\\":\",[[\"\\\"0.93.4\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@esfx/canceltoken\\\":\",1]]],[\"\\\"@esfx/canceltoken\\\":\",[[\"\\\"^1.0.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@eslint/js\\\":\",1]]],[\"\\\"@eslint/js\\\":\",[[\"\\\"^9.20.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@octokit/rest\\\":\",1]]],[\"\\\"@octokit/rest\\\":\",[[\"\\\"^21.1.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@types/chai\\\":\",1]]],[\"\\\"@types/chai\\\":\",[[\"\\\"^4.3.20\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@types/diff\\\":\",1]]],[\"\\\"@types/diff\\\":\",[[\"\\\"^7.0.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@types/minimist\\\":\",1]]],[\"\\\"@types/minimist\\\":\",[[\"\\\"^1.2.5\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@types/mocha\\\":\",1]]],[\"\\\"@types/mocha\\\":\",[[\"\\\"^10.0.10\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@types/ms\\\":\",1]]],[\"\\\"@types/ms\\\":\",[[\"\\\"^0.7.34\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@types/node\\\":\",1]]],[\"\\\"@types/node\\\":\",[[\"\\\"latest\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@types/source-map-support\\\":\",1]]],[\"\\\"@types/source-map-support\\\":\",[[\"\\\"^0.5.10\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@types/which\\\":\",1]]],[\"\\\"@types/which\\\":\",[[\"\\\"^3.0.4\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@typescript-eslint/rule-tester\\\":\",1]]],[\"\\\"@typescript-eslint/rule-tester\\\":\",[[\"\\\"^8.24.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@typescript-eslint/type-utils\\\":\",1]]],[\"\\\"@typescript-eslint/type-utils\\\":\",[[\"\\\"^8.24.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"@typescript-eslint/utils\\\":\",1]]],[\"\\\"@typescript-eslint/utils\\\":\",[[\"\\\"^8.24.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"azure-devops-node-api\\\":\",1]]],[\"\\\"azure-devops-node-api\\\":\",[[\"\\\"^14.1.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"c8\\\":\",1]]],[\"\\\"c8\\\":\",[[\"\\\"^10.1.3\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"chai\\\":\",1]]],[\"\\\"chai\\\":\",[[\"\\\"^4.5.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"chokidar\\\":\",1]]],[\"\\\"chokidar\\\":\",[[\"\\\"^4.0.3\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"diff\\\":\",1]]],[\"\\\"diff\\\":\",[[\"\\\"^7.0.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"dprint\\\":\",1]]],[\"\\\"dprint\\\":\",[[\"\\\"^0.49.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"esbuild\\\":\",1]]],[\"\\\"esbuild\\\":\",[[\"\\\"^0.25.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"eslint\\\":\",1]]],[\"\\\"eslint\\\":\",[[\"\\\"^9.20.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"eslint-formatter-autolinkable-stylish\\\":\",1]]],[\"\\\"eslint-formatter-autolinkable-stylish\\\":\",[[\"\\\"^1.4.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"eslint-plugin-regexp\\\":\",1]]],[\"\\\"eslint-plugin-regexp\\\":\",[[\"\\\"^2.7.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"fast-xml-parser\\\":\",1]]],[\"\\\"fast-xml-parser\\\":\",[[\"\\\"^4.5.2\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"glob\\\":\",1]]],[\"\\\"glob\\\":\",[[\"\\\"^10.4.5\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"globals\\\":\",1]]],[\"\\\"globals\\\":\",[[\"\\\"^15.15.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"hereby\\\":\",1]]],[\"\\\"hereby\\\":\",[[\"\\\"^1.10.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"jsonc-parser\\\":\",1]]],[\"\\\"jsonc-parser\\\":\",[[\"\\\"^3.3.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"knip\\\":\",1]]],[\"\\\"knip\\\":\",[[\"\\\"^5.44.4\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"minimist\\\":\",1]]],[\"\\\"minimist\\\":\",[[\"\\\"^1.2.8\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"mocha\\\":\",1]]],[\"\\\"mocha\\\":\",[[\"\\\"^10.8.2\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"mocha-fivemat-progress-reporter\\\":\",1]]],[\"\\\"mocha-fivemat-progress-reporter\\\":\",[[\"\\\"^0.1.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"monocart-coverage-reports\\\":\",1]]],[\"\\\"monocart-coverage-reports\\\":\",[[\"\\\"^2.12.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"ms\\\":\",1]]],[\"\\\"ms\\\":\",[[\"\\\"^2.1.3\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"picocolors\\\":\",1]]],[\"\\\"picocolors\\\":\",[[\"\\\"^1.1.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"playwright\\\":\",1]]],[\"\\\"playwright\\\":\",[[\"\\\"^1.50.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"source-map-support\\\":\",1]]],[\"\\\"source-map-support\\\":\",[[\"\\\"^0.5.21\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"tslib\\\":\",1]]],[\"\\\"tslib\\\":\",[[\"\\\"^2.8.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"typescript\\\":\",1]]],[\"\\\"typescript\\\":\",[[\"\\\"^5.7.3\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"typescript-eslint\\\":\",1]]],[\"\\\"typescript-eslint\\\":\",[[\"\\\"^8.24.1\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"which\\\":\",1]]],[\"\\\"which\\\":\",[[\"\\\"^3.0.1\\\"\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"},\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"overrides\\\":\",1]]],[\"\\\"overrides\\\":\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"typescript@*\\\":\",1]]],[\"\\\"typescript@*\\\":\",[[\"\\\"$typescript\\\"\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"},\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"scripts\\\":\",1]]],[\"\\\"scripts\\\":\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"test\\\":\",1]]],[\"\\\"test\\\":\",[[\"\\\"hereby\",1]]],[\"\\\"hereby\",[[\"runtests-parallel\",1]]],[\"runtests-parallel\",[[\"--light=false\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"test:eslint-rules\\\":\",1]]],[\"\\\"test:eslint-rules\\\":\",[[\"\\\"hereby\",1]]],[\"\\\"hereby\",[[\"run-eslint-rules-tests\\\",\",1]]]],0]\n        \"build\": \"npm run build:compiler && npm run build:tests\",\n~[\"\",[[\"\",[[\"\",7],[\"\\\"build:compiler\\\":\",1]]],[\"\\\"build:compiler\\\":\",[[\"\\\"hereby\",1]]],[\"\\\"hereby\",[[\"local\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"build:tests\\\":\",1]]],[\"\\\"build:tests\\\":\",[[\"\\\"hereby\",1]]],[\"\\\"hereby\",[[\"tests\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"build:tests:notypecheck\\\":\",1]]],[\"\\\"build:tests:notypecheck\\\":\",[[\"\\\"hereby\",1]]],[\"\\\"hereby\",[[\"tests\",1]]],[\"tests\",[[\"--no-typecheck\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"clean\\\":\",1]]],[\"\\\"clean\\\":\",[[\"\\\"hereby\",1]]],[\"\\\"hereby\",[[\"clean\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"gulp\\\":\",1]]],[\"\\\"gulp\\\":\",[[\"\\\"hereby\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"lint\\\":\",1]]],[\"\\\"lint\\\":\",[[\"\\\"hereby\",1]]],[\"\\\"hereby\",[[\"lint\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"knip\\\":\",1]]],[\"\\\"knip\\\":\",[[\"\\\"hereby\",1]]],[\"\\\"hereby\",[[\"knip\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"format\\\":\",1]]],[\"\\\"format\\\":\",[[\"\\\"dprint\",1]]],[\"\\\"dprint\",[[\"fmt\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"setup-hooks\\\":\",1]]],[\"\\\"setup-hooks\\\":\",[[\"\\\"node\",1]]],[\"\\\"node\",[[\"scripts/link-hooks.mjs\\\"\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"},\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"browser\\\":\",1]]],[\"\\\"browser\\\":\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"fs\\\":\",1]]],[\"\\\"fs\\\":\",[[\"false,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"os\\\":\",1]]],[\"\\\"os\\\":\",[[\"false,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"path\\\":\",1]]],[\"\\\"path\\\":\",[[\"false,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"crypto\\\":\",1]]],[\"\\\"crypto\\\":\",[[\"false,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"buffer\\\":\",1]]],[\"\\\"buffer\\\":\",[[\"false,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"source-map-support\\\":\",1]]],[\"\\\"source-map-support\\\":\",[[\"false,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"inspector\\\":\",1]]],[\"\\\"inspector\\\":\",[[\"false,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"perf_hooks\\\":\",1]]],[\"\\\"perf_hooks\\\":\",[[\"false\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"},\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"packageManager\\\":\",1]]],[\"\\\"packageManager\\\":\",[[\"\\\"npm@8.19.4\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"volta\\\":\",1]]],[\"\\\"volta\\\":\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"node\\\":\",1]]],[\"\\\"node\\\":\",[[\"\\\"20.1.0\\\",\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"\\\"npm\\\":\",1]]],[\"\\\"npm\\\":\",[[\"\\\"8.19.4\\\"\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"},\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"\\\"gitHead\\\":\",1]]],[\"\\\"gitHead\\\":\",[[\"\\\"c63de15a992d37f0d6cec03ac7631872838602cb\\\"\",1]]]],0]\n}\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 116
+      },
+      "bwt": {
+        "tokens": 1129
+      },
+      "anchor": [
+        {
+          "tokens": 1195
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 1135
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 1016
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 1016
+        },
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 1024
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 1024
+        }
+      ],
+      "raw": 811,
+      "frequency": [],
+      "bbwt": [],
+      "strofos": [
+        {
+          "tokens": 925
+        },
+        {
+          "tokens": 941
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 1299,
+          "levels": 1
+        },
+        {
+          "tokens": 1333,
+          "levels": 2
+        },
+        {
+          "tokens": 1350,
+          "levels": 4
+        },
+        {
+          "tokens": 1358,
+          "levels": 12
+        },
+        {
+          "tokens": 1634,
+          "levels": 1
+        },
+        {
+          "tokens": 1634,
+          "levels": 2
+        },
+        {
+          "tokens": 1634,
+          "levels": 4
+        },
+        {
+          "tokens": 1634,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 1564
+      },
+      "rankedGraph": null,
+      "bwt": {
+        "tokens": 867
+      },
+      "anchor": [
+        {
+          "tokens": 871
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "klados": [
+        {
+          "policy": "local",
+          "tokens": 1126
+        },
+        {
+          "policy": "eager",
+          "tokens": 1529
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 1245
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 1255
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 1790
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 1821
+        }
+      ],
+      "raw": 1034,
+      "frequency": [
+        {
+          "tokens": 1133,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1135,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1141,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1141,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1178,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1183,
+          "n": 32,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 1117,
+          "n": 512
+        },
+        {
+          "tokens": 1118,
+          "n": 128
+        },
+        {
+          "tokens": 1157,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 1088
+        },
+        {
+          "tokens": 1093
+        },
+        {
+          "tokens": 1513
+        },
+        {
+          "tokens": 1601
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 1234,
+          "levels": 1
+        },
+        {
+          "tokens": 1247,
+          "levels": 2
+        },
+        {
+          "tokens": 1260,
+          "levels": 4
+        },
+        {
+          "tokens": 1266,
+          "levels": 12
+        },
+        {
+          "tokens": 1437,
+          "levels": 1
+        },
+        {
+          "tokens": 1444,
+          "levels": 2
+        },
+        {
+          "tokens": 1455,
+          "levels": 4
+        },
+        {
+          "tokens": 1460,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 1370
+      },
+      "rankedGraph": {
+        "tokens": 1352,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"ls\",1]]],[\"ls\",[[\"-l\",1]]],[\"-l\",[[\"/usr/local/bin\",1]]],[\"/usr/local/bin\",[[\"/usr/bin\",1]]],[\"/usr/bin\",[[\"(real,\",1]]],[\"(real,\",[[\"60\",1]]],[\"60\",[[\"lines)\",1]]]],0]\n~[\"total\",[[\"total\",[[\"121900\",1]]]],0]\nlrwxrwxrwx 1 root root        45 May 13 14:50 corepack -> ../lib/node_modules/corepack/dist/corepack.js\n-rwxrwxrwx 1 root root       388 Jun 11 00:46 docker-entrypoint.sh\n~[\"-rwxrwxrwx\",[[\"-rwxrwxrwx\",[[\"1\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"124819136\",1]]],[\"124819136\",[[\"May\",1]]],[\"May\",[[\"13\",1]]],[\"13\",[[\"14:50\",1]]],[\"14:50\",[[\"node\",1]]]],0]\nlrwxrwxrwx 1 root root        19 Jun 11 00:47 nodejs -> /usr/local/bin/node\nlrwxrwxrwx 1 root root        38 May 13 14:50 npm -> ../lib/node_modules/npm/bin/npm-cli.js\nlrwxrwxrwx 1 root root        38 May 13 14:50 npx -> ../lib/node_modules/npm/bin/npx-cli.js\nlrwxrwxrwx 1 root root        27 Jun 11 00:47 yarn -> /opt/yarn-v1.22.22/bin/yarn\nlrwxrwxrwx 1 root root        30 Jun 11 00:47 yarnpkg -> /opt/yarn-v1.22.22/bin/yarnpkg\n~[\"total\",[[\"total\",[[\"160156\",1]]]],0]\n-rwxr-xr-x 1 root root      68496 Sep 20  2022 [\n-rwxr-xr-x 1 root root      31040 Nov 21  2024 addpart\nlrwxrwxrwx 1 root root         26 Jan 14  2023 addr2line -> x86_64-linux-gnu-addr2line\nlrwxrwxrwx 1 root root         25 May 27 20:36 animate -> /etc/alternatives/animate\nlrwxrwxrwx 1 root root         29 May 27 20:36 animate-im6 -> /etc/alternatives/animate-im6\n-rwxr-xr-x 1 root root      14544 May 27 20:36 animate-im6.q16\n-rwxr-xr-x 1 root root      18752 May 25  2023 apt\n-rwxr-xr-x 1 root root      88456 May 25  2023 apt-cache\n-rwxr-xr-x 1 root root      22920 May 25  2023 apt-cdrom\n-rwxr-xr-x 1 root root      26944 May 25  2023 apt-config\n-rwxr-xr-x 1 root root      51592 May 25  2023 apt-get\n-rwxr-xr-x 1 root root      27972 May 25  2023 apt-key\n-rwxr-xr-x 1 root root      59784 May 25  2023 apt-mark\nlrwxrwxrwx 1 root root         19 Jan 14  2023 ar -> x86_64-linux-gnu-ar\n-rwxr-xr-x 1 root root      43888 Sep 20  2022 arch\nlrwxrwxrwx 1 root root         19 Jan 14  2023 as -> x86_64-linux-gnu-as\nlrwxrwxrwx 1 root root         21 Jun 17  2022 awk -> /etc/alternatives/awk\n-rwxr-xr-x 1 root root      60400 Sep 20  2022 b2sum\n-rwxr-xr-x 1 root root      48016 Sep 20  2022 base32\n-rwxr-xr-x 1 root root      48016 Sep 20  2022 base64\n-rwxr-xr-x 1 root root      43856 Sep 20  2022 basename\n-rwxr-xr-x 1 root root      56208 Sep 20  2022 basenc\n~[\"-rwxr-xr-x\",[[\"-rwxr-xr-x\",[[\"1\",1]]],[\"1\",[[\"root\",1]]],[\"root\",[[\"root\",1],[\"\",1]]],[\"\",[[\"\",2],[\"1265648\",1],[\"7\",1]]],[\"1265648\",[[\"May\",1]]],[\"May\",[[\"\",1]]],[\"7\",[[\"20:33\",1]]],[\"20:33\",[[\"bash\",1]]]],0]\n-rwxr-xr-x 1 root root       6865 May  7 20:33 bashbug\n-rwxr-xr-x 3 root root      39224 Sep 19  2022 bunzip2\n-rwxr-xr-x 1 root root      92672 Apr 27 19:48 busctl\n-rwxr-xr-x 1 root root    1210176 Jan  1  1970 busybox\n-rwxr-xr-x 3 root root      39224 Sep 19  2022 bzcat\nlrwxrwxrwx 1 root root          6 Sep 19  2022 bzcmp -> bzdiff\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 5
+      },
+      "bwt": {
+        "tokens": 1058
+      },
+      "anchor": [
+        {
+          "tokens": 1044
+        },
+        {
+          "tokens": 1046
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 278
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 304
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 304
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 406
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 423
+        }
+      ],
+      "raw": 140,
+      "frequency": [
+        {
+          "tokens": 260,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 260,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 260,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 260,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 267,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 270,
+          "n": 32,
+          "order": "decreasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 239,
+          "n": 128
+        },
+        {
+          "tokens": 250,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 191
+        },
+        {
+          "tokens": 205
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 277,
+          "levels": 1
+        },
+        {
+          "tokens": 277,
+          "levels": 2
+        },
+        {
+          "tokens": 277,
+          "levels": 4
+        },
+        {
+          "tokens": 277,
+          "levels": 12
+        },
+        {
+          "tokens": 298,
+          "levels": 1
+        },
+        {
+          "tokens": 298,
+          "levels": 2
+        },
+        {
+          "tokens": 298,
+          "levels": 4
+        },
+        {
+          "tokens": 298,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 228
+      },
+      "rankedGraph": {
+        "tokens": 309,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"df\",1]]],[\"df\",[[\"-h\",1]]],[\"-h\",[[\"(real)\",1]]]],0]\n~[\"Filesystem\",[[\"Filesystem\",[[\"\",1]]],[\"\",[[\"\",4],[\"Size\",1],[\"Used\",1]]],[\"Size\",[[\"\",1]]],[\"Used\",[[\"Avail\",1]]],[\"Avail\",[[\"Use%\",1]]],[\"Use%\",[[\"Mounted\",1]]],[\"Mounted\",[[\"on\",1]]]],0]\n/dev/root        21G  1.7G   19G   9% /\ndevtmpfs        2.0G     0  2.0G   0% /dev\ntmpfs           2.0G     0  2.0G   0% /dev/shm\ntmpfs           788M  288K  788M   1% /run\ntmpfs           5.0M     0  5.0M   0% /run/lock\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 2
+      },
+      "bwt": {
+        "tokens": 186
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 1218
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 971
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 981
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 1549
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 1602
+        }
+      ],
+      "raw": 733,
+      "frequency": [
+        {
+          "tokens": 861,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 862,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 862,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 863,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 864,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 864,
+          "n": 512,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 843,
+          "n": 32
+        },
+        {
+          "tokens": 845,
+          "n": 128
+        },
+        {
+          "tokens": 845,
+          "n": 512
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 800
+        },
+        {
+          "tokens": 847
+        },
+        {
+          "tokens": 917
+        },
+        {
+          "tokens": 1310
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 878,
+          "levels": 1
+        },
+        {
+          "tokens": 880,
+          "levels": 2
+        },
+        {
+          "tokens": 881,
+          "levels": 4
+        },
+        {
+          "tokens": 881,
+          "levels": 12
+        },
+        {
+          "tokens": 926,
+          "levels": 1
+        },
+        {
+          "tokens": 926,
+          "levels": 2
+        },
+        {
+          "tokens": 926,
+          "levels": 4
+        },
+        {
+          "tokens": 926,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 856
+      },
+      "rankedGraph": {
+        "tokens": 2916,
+        "folded": "~[\"##\",[[\"##\",[[\"Summary\",1]]]],0]\n\nThe migration from **Webpack 4** to **Vite 5** reduces cold-start time by roughly **85%** on the\n~[\"`packages/web`\",[[\"`packages/web`\",[[\"workspace.\",1]]],[\"workspace.\",[[\"Below\",1]]],[\"Below\",[[\"are\",1]]],[\"are\",[[\"the\",1]]],[\"the\",[[\"concrete\",1],[\"measured\",1],[\"two\",1]]],[\"concrete\",[[\"steps,\",1]]],[\"steps,\",[[\"the\",1]]],[\"measured\",[[\"numbers,\",1]]],[\"numbers,\",[[\"and\",1]]],[\"and\",[[\"the\",1]]]],0]\n~[\"regressions\",[[\"regressions\",[[\"we\",1]]],[\"we\",[[\"found.\",1]]]],0]\n\n~[\"###\",[[\"###\",[[\"1.\",1]]],[\"1.\",[[\"What\",1]]],[\"What\",[[\"actually\",1]]],[\"actually\",[[\"changed\",1]]]],0]\n\n~[\"-\",[[\"-\",[[\"**Dev\",1]]],[\"**Dev\",[[\"server**:\",1]]],[\"server**:\",[[\"`webpack-dev-server`\",1]]],[\"`webpack-dev-server`\",[[\"is\",1]]],[\"is\",[[\"replaced\",1]]],[\"replaced\",[[\"by\",1]]],[\"by\",[[\"Vite's\",1]]],[\"Vite's\",[[\"native\",1]]],[\"native\",[[\"ESM\",1]]],[\"ESM\",[[\"server.\",1]]],[\"server.\",[[\"No\",1]]],[\"No\",[[\"bundling\",1]]]],0]\n  happens in development, so the cold start no longer scales with module count.\n~[\"-\",[[\"-\",[[\"**Build**:\",1]]],[\"**Build**:\",[[\"production\",1]]],[\"production\",[[\"builds\",1]]],[\"builds\",[[\"still\",1]]],[\"still\",[[\"bundle,\",1]]],[\"bundle,\",[[\"but\",1]]],[\"but\",[[\"through\",1]]],[\"through\",[[\"**Rollup**\",1]]],[\"**Rollup**\",[[\"rather\",1]]],[\"rather\",[[\"than\",1]]],[\"than\",[[\"Webpack.\",1]]],[\"Webpack.\",[[\"The\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"output\",1]]],[\"output\",[[\"is\",1]]],[\"is\",[[\"`dist/assets/*.js`\",1]]],[\"`dist/assets/*.js`\",[[\"with\",1]]],[\"with\",[[\"content\",1]]],[\"content\",[[\"hashes\",1]]],[\"hashes\",[[\"instead\",1]]],[\"instead\",[[\"of\",1]]],[\"of\",[[\"`build/static/js/*.chunk.js`.\",1]]]],0]\n~[\"-\",[[\"-\",[[\"**Transforms**:\",1]]],[\"**Transforms**:\",[[\"`babel-loader`\",1]]],[\"`babel-loader`\",[[\"is\",1]]],[\"is\",[[\"gone.\",1]]],[\"gone.\",[[\"**esbuild**\",1]]],[\"**esbuild**\",[[\"handles\",1]]],[\"handles\",[[\"TypeScript\",1]]],[\"TypeScript\",[[\"stripping\",1]]],[\"stripping\",[[\"and\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"**SWC**\",1]]],[\"**SWC**\",[[\"is\",1]]],[\"is\",[[\"no\",1]]],[\"no\",[[\"longer\",1]]],[\"longer\",[[\"required.\",1]]]],0]\n\n~[\"###\",[[\"###\",[[\"2.\",1]]],[\"2.\",[[\"Measured\",1]]],[\"Measured\",[[\"results\",1]]]],0]\n\n~[\"|\",[[\"|\",[[\"Metric\",1],[\"Webpack\",1],[\"Vite\",1],[\"Change\",1]]],[\"Metric\",[[\"|\",1]]],[\"Webpack\",[[\"4\",1]]],[\"4\",[[\"|\",1]]],[\"Vite\",[[\"5\",1]]],[\"5\",[[\"|\",1]]],[\"Change\",[[\"|\",1]]]],11]\n|---|---|---|---|\n~[\"|\",[[\"|\",[[\"Cold\",1],[\"42.8\",1],[\"6.1\",1],[\"**-85.7%**\",1]]],[\"Cold\",[[\"start\",1]]],[\"start\",[[\"|\",1]]],[\"42.8\",[[\"s\",1]]],[\"s\",[[\"|\",2]]],[\"6.1\",[[\"s\",1]]],[\"**-85.7%**\",[[\"|\",1]]]],21]\n~[\"|\",[[\"|\",[[\"Hot\",1],[\"1.9\",1],[\"0.09\",1],[\"**-95.3%**\",1]]],[\"Hot\",[[\"reload\",1]]],[\"reload\",[[\"(p50)\",1]]],[\"(p50)\",[[\"|\",1]]],[\"1.9\",[[\"s\",1]]],[\"s\",[[\"|\",2]]],[\"0.09\",[[\"s\",1]]],[\"**-95.3%**\",[[\"|\",1]]]],23]\n~[\"|\",[[\"|\",[[\"Production\",1],[\"188\",1],[\"71\",1],[\"**-62.2%**\",1]]],[\"Production\",[[\"build\",1]]],[\"build\",[[\"|\",1]]],[\"188\",[[\"s\",1]]],[\"s\",[[\"|\",2]]],[\"71\",[[\"s\",1]]],[\"**-62.2%**\",[[\"|\",1]]]],21]\n~[\"|\",[[\"|\",[[\"Bundle\",1],[\"412\",1],[\"389\",1],[\"**-5.6%**\",1]]],[\"Bundle\",[[\"size\",1]]],[\"size\",[[\"(gzip)\",1]]],[\"(gzip)\",[[\"|\",1]]],[\"412\",[[\"kB\",1]]],[\"kB\",[[\"|\",2]]],[\"389\",[[\"kB\",1]]],[\"**-5.6%**\",[[\"|\",1]]]],23]\n\n~[\"###\",[[\"###\",[[\"3.\",1]]],[\"3.\",[[\"Required\",1]]],[\"Required\",[[\"code\",1]]],[\"code\",[[\"changes\",1]]]],0]\n\n```ts\n~[\"//\",[[\"//\",[[\"vite.config.ts\",1]]]],0]\n~[\"import\",[[\"import\",[[\"{\",1]]],[\"{\",[[\"defineConfig\",1]]],[\"defineConfig\",[[\"}\",1]]],[\"}\",[[\"from\",1]]],[\"from\",[[\"'vite';\",1]]]],0]\n~[\"import\",[[\"import\",[[\"react\",1]]],[\"react\",[[\"from\",1]]],[\"from\",[[\"'@vitejs/plugin-react';\",1]]]],0]\n\n~[\"export\",[[\"export\",[[\"default\",1]]],[\"default\",[[\"defineConfig({\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"plugins:\",1]]],[\"plugins:\",[[\"[react()],\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"resolve:\",1]]],[\"resolve:\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"alias:\",1]]],[\"alias:\",[[\"{\",1]]],[\"{\",[[\"'@':\",1]]],[\"'@':\",[[\"'/src'\",1]]],[\"'/src'\",[[\"},\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"},\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"server:\",1]]],[\"server:\",[[\"{\",1]]],[\"{\",[[\"port:\",1]]],[\"port:\",[[\"3000,\",1]]],[\"3000,\",[[\"strictPort:\",1]]],[\"strictPort:\",[[\"true\",1]]],[\"true\",[[\"},\",1]]]],0]\n});\n```\n\n~[\"You\",[[\"You\",[[\"must\",1]]],[\"must\",[[\"also\",1]]],[\"also\",[[\"rename\",1]]],[\"rename\",[[\"every\",1]]],[\"every\",[[\"`process.env.REACT_APP_*`\",1]]],[\"`process.env.REACT_APP_*`\",[[\"reference\",1]]],[\"reference\",[[\"to\",1]]],[\"to\",[[\"`import.meta.env.VITE_*`.\",1]]]],0]\n~[\"There\",[[\"There\",[[\"are\",1]]],[\"are\",[[\"**47**\",1]]],[\"**47**\",[[\"such\",1]]],[\"such\",[[\"references\",1]]],[\"references\",[[\"in\",1]]],[\"in\",[[\"`packages/web`\",1],[\"`packages/admin`.\",1]]],[\"`packages/web`\",[[\"and\",1]]],[\"and\",[[\"**11**\",1]]],[\"**11**\",[[\"in\",1]]]],0]\n\n~[\"###\",[[\"###\",[[\"4.\",1]]],[\"4.\",[[\"Regressions\",1]]],[\"Regressions\",[[\"found\",1]]]],0]\n\n~[\"1.\",[[\"1.\",[[\"**CommonJS\",1]]],[\"**CommonJS\",[[\"interop.**\",1]]],[\"interop.**\",[[\"Three\",1]]],[\"Three\",[[\"dependencies\",1]]],[\"dependencies\",[[\"(`lodash.debounce`,\",1]]],[\"(`lodash.debounce`,\",[[\"`qs`,\",1]]],[\"`qs`,\",[[\"`react-copy-to-clipboard`)\",1]]]],0]\n   ship only CJS. Vite handles this in dev via pre-bundling, but the SSR build fails. The fix is\n~[\"\",[[\"\",[[\"\",2],[\"to\",1]]],[\"to\",[[\"add\",1],[\"`ssr.noExternal`.\",1]]],[\"add\",[[\"them\",1]]],[\"them\",[[\"to\",1]]]],0]\n2. **Dynamic `require()` in tests.** `jest` is still used for unit tests and does not understand\n   `import.meta`. Either migrate to **Vitest** or add a `jest.config.js` transform. We chose\n   **Vitest**, which shares the Vite config and cut test wall-clock from **94 s** to **23 s**.\n\n~[\"###\",[[\"###\",[[\"5.\",1]]],[\"5.\",[[\"Recommendation\",1]]]],0]\n\nShip the migration behind the `VITE_MIGRATION` flag for one release, then remove the Webpack\n~[\"config\",[[\"config\",[[\"entirely.\",1]]],[\"entirely.\",[[\"The\",1]]],[\"The\",[[\"remaining\",1]]],[\"remaining\",[[\"work\",1]]],[\"work\",[[\"is\",1]]],[\"is\",[[\"approximately\",1]]],[\"approximately\",[[\"**3\",1]]],[\"**3\",[[\"engineer-days**:\",1]]]],0]\n\n~[\"-\",[[\"-\",[[\"[\",1]]],[\"[\",[[\"]\",1]]],[\"]\",[[\"Migrate\",1]]],[\"Migrate\",[[\"`packages/admin`\",1]]],[\"`packages/admin`\",[[\"(1\",1]]],[\"(1\",[[\"day)\",1]]]],0]\n~[\"-\",[[\"-\",[[\"[x]\",1]]],[\"[x]\",[[\"Migrate\",1]]],[\"Migrate\",[[\"`packages/web`\",1]]],[\"`packages/web`\",[[\"(done)\",1]]]],0]\n~[\"-\",[[\"-\",[[\"[\",1]]],[\"[\",[[\"]\",1]]],[\"]\",[[\"Remove\",1]]],[\"Remove\",[[\"`webpack.config.js`\",1]]],[\"`webpack.config.js`\",[[\"and\",1]]],[\"and\",[[\"`babel.config.js`\",1]]],[\"`babel.config.js`\",[[\"(0.5\",1]]],[\"(0.5\",[[\"day)\",1]]]],0]\n~[\"-\",[[\"-\",[[\"[\",1]]],[\"[\",[[\"]\",1]]],[\"]\",[[\"Update\",1]]],[\"Update\",[[\"CI\",1]]],[\"CI\",[[\"cache\",1]]],[\"cache\",[[\"keys\",1]]],[\"keys\",[[\"in\",1]]],[\"in\",[[\"`.github/workflows/ci.yml`\",1]]],[\"`.github/workflows/ci.yml`\",[[\"(0.5\",1]]],[\"(0.5\",[[\"day)\",1]]]],0]\n~[\"-\",[[\"-\",[[\"[\",1]]],[\"[\",[[\"]\",1]]],[\"]\",[[\"Update\",1]]],[\"Update\",[[\"the\",1]]],[\"the\",[[\"contributor\",1]]],[\"contributor\",[[\"docs\",1]]],[\"docs\",[[\"in\",1]]],[\"in\",[[\"`CONTRIBUTING.md`\",1]]],[\"`CONTRIBUTING.md`\",[[\"(1\",1]]],[\"(1\",[[\"day)\",1]]]],0]\n\nLet me know if you want the SSR fix broken out into its own PR.\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 37
+      },
+      "bwt": {
+        "tokens": 792
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 932
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 754
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 754
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 812
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 854
+        }
+      ],
+      "raw": 570,
+      "frequency": [
+        {
+          "tokens": 641,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 642,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 644,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 646,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 646,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 646,
+          "n": 512,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 622,
+          "n": 128
+        },
+        {
+          "tokens": 624,
+          "n": 32
+        },
+        {
+          "tokens": 626,
+          "n": 512
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 648
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 722,
+          "levels": 1
+        },
+        {
+          "tokens": 731,
+          "levels": 2
+        },
+        {
+          "tokens": 739,
+          "levels": 4
+        },
+        {
+          "tokens": 739,
+          "levels": 12
+        },
+        {
+          "tokens": 916,
+          "levels": 1
+        },
+        {
+          "tokens": 916,
+          "levels": 2
+        },
+        {
+          "tokens": 916,
+          "levels": 4
+        },
+        {
+          "tokens": 916,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 846
+      },
+      "rankedGraph": {
+        "tokens": 1950,
+        "folded": "~[\"Filesystem\",[[\"Filesystem\",[[\"\",1]]],[\"\",[[\"\",4],[\"Size\",1],[\"Used\",1]]],[\"Size\",[[\"\",1]]],[\"Used\",[[\"Avail\",1]]],[\"Avail\",[[\"Use%\",1]]],[\"Use%\",[[\"Mounted\",1]]],[\"Mounted\",[[\"on\",1]]]],0]\n~[\"/dev/nvme0n1p0\",[[\"/dev/nvme0n1p0\",[[\"\",1]]],[\"\",[[\"\",3],[\"100G\",1],[\"40G\",1],[\"50G\",1],[\"30%\",1]]],[\"100G\",[[\"\",1]]],[\"40G\",[[\"\",1]]],[\"50G\",[[\"\",1]]],[\"30%\",[[\"/mnt/vol0\",1]]]],26]\n~[\"/dev/nvme0n1p1\",[[\"/dev/nvme0n1p1\",[[\"\",1]]],[\"\",[[\"\",3],[\"137G\",1],[\"51G\",1],[\"59G\",1],[\"33%\",1]]],[\"137G\",[[\"\",1]]],[\"51G\",[[\"\",1]]],[\"59G\",[[\"\",1]]],[\"33%\",[[\"/mnt/vol1\",1]]]],26]\n~[\"/dev/nvme0n1p2\",[[\"/dev/nvme0n1p2\",[[\"\",1]]],[\"\",[[\"\",3],[\"174G\",1],[\"62G\",1],[\"68G\",1],[\"36%\",1]]],[\"174G\",[[\"\",1]]],[\"62G\",[[\"\",1]]],[\"68G\",[[\"\",1]]],[\"36%\",[[\"/mnt/vol2\",1]]]],26]\n~[\"/dev/nvme0n1p3\",[[\"/dev/nvme0n1p3\",[[\"\",1]]],[\"\",[[\"\",3],[\"211G\",1],[\"73G\",1],[\"77G\",1],[\"39%\",1]]],[\"211G\",[[\"\",1]]],[\"73G\",[[\"\",1]]],[\"77G\",[[\"\",1]]],[\"39%\",[[\"/mnt/vol3\",1]]]],26]\n~[\"/dev/nvme0n1p4\",[[\"/dev/nvme0n1p4\",[[\"\",1]]],[\"\",[[\"\",3],[\"248G\",1],[\"84G\",1],[\"86G\",1],[\"42%\",1]]],[\"248G\",[[\"\",1]]],[\"84G\",[[\"\",1]]],[\"86G\",[[\"\",1]]],[\"42%\",[[\"/mnt/vol4\",1]]]],26]\n~[\"/dev/nvme0n1p5\",[[\"/dev/nvme0n1p5\",[[\"\",1]]],[\"\",[[\"\",3],[\"285G\",1],[\"95G\",2],[\"45%\",1]]],[\"285G\",[[\"\",1]]],[\"95G\",[[\"\",2]]],[\"45%\",[[\"/mnt/vol5\",1]]]],13]\n~[\"/dev/nvme0n1p6\",[[\"/dev/nvme0n1p6\",[[\"\",1]]],[\"\",[[\"\",1],[\"322G\",1],[\"106G\",1],[\"104G\",1],[\"48%\",1]]],[\"322G\",[[\"\",1]]],[\"106G\",[[\"\",1]]],[\"104G\",[[\"\",1]]],[\"48%\",[[\"/mnt/vol6\",1]]]],5]\n~[\"/dev/nvme0n1p7\",[[\"/dev/nvme0n1p7\",[[\"\",1]]],[\"\",[[\"\",1],[\"359G\",1],[\"117G\",1],[\"113G\",1],[\"51%\",1]]],[\"359G\",[[\"\",1]]],[\"117G\",[[\"\",1]]],[\"113G\",[[\"\",1]]],[\"51%\",[[\"/mnt/vol7\",1]]]],5]\n~[\"/dev/nvme0n1p8\",[[\"/dev/nvme0n1p8\",[[\"\",1]]],[\"\",[[\"\",1],[\"396G\",1],[\"128G\",1],[\"122G\",1],[\"54%\",1]]],[\"396G\",[[\"\",1]]],[\"128G\",[[\"\",1]]],[\"122G\",[[\"\",1]]],[\"54%\",[[\"/mnt/vol8\",1]]]],5]\n~[\"/dev/nvme0n1p9\",[[\"/dev/nvme0n1p9\",[[\"\",1]]],[\"\",[[\"\",1],[\"433G\",1],[\"139G\",1],[\"131G\",1],[\"57%\",1]]],[\"433G\",[[\"\",1]]],[\"139G\",[[\"\",1]]],[\"131G\",[[\"\",1]]],[\"57%\",[[\"/mnt/vol9\",1]]]],5]\n~[\"/dev/nvme0n1p10\",[[\"/dev/nvme0n1p10\",[[\"\",1]]],[\"\",[[\"470G\",1],[\"150G\",1],[\"140G\",1],[\"60%\",1]]],[\"470G\",[[\"\",1]]],[\"150G\",[[\"\",1]]],[\"140G\",[[\"\",1]]],[\"60%\",[[\"/mnt/vol10\",1]]]],5]\n~[\"/dev/nvme0n1p11\",[[\"/dev/nvme0n1p11\",[[\"\",1]]],[\"\",[[\"507G\",1],[\"161G\",1],[\"149G\",1],[\"63%\",1]]],[\"507G\",[[\"\",1]]],[\"161G\",[[\"\",1]]],[\"149G\",[[\"\",1]]],[\"63%\",[[\"/mnt/vol11\",1]]]],5]\n~[\"/dev/nvme0n1p12\",[[\"/dev/nvme0n1p12\",[[\"\",1]]],[\"\",[[\"544G\",1],[\"172G\",1],[\"158G\",1],[\"66%\",1]]],[\"544G\",[[\"\",1]]],[\"172G\",[[\"\",1]]],[\"158G\",[[\"\",1]]],[\"66%\",[[\"/mnt/vol12\",1]]]],5]\n~[\"/dev/nvme0n1p13\",[[\"/dev/nvme0n1p13\",[[\"\",1]]],[\"\",[[\"581G\",1],[\"183G\",1],[\"167G\",1],[\"69%\",1]]],[\"581G\",[[\"\",1]]],[\"183G\",[[\"\",1]]],[\"167G\",[[\"\",1]]],[\"69%\",[[\"/mnt/vol13\",1]]]],5]\n~[\"/dev/nvme0n1p14\",[[\"/dev/nvme0n1p14\",[[\"\",1]]],[\"\",[[\"618G\",1],[\"194G\",1],[\"176G\",1],[\"72%\",1]]],[\"618G\",[[\"\",1]]],[\"194G\",[[\"\",1]]],[\"176G\",[[\"\",1]]],[\"72%\",[[\"/mnt/vol14\",1]]]],5]\n~[\"/dev/nvme0n1p15\",[[\"/dev/nvme0n1p15\",[[\"\",1]]],[\"\",[[\"655G\",1],[\"205G\",1],[\"185G\",1],[\"75%\",1]]],[\"655G\",[[\"\",1]]],[\"205G\",[[\"\",1]]],[\"185G\",[[\"\",1]]],[\"75%\",[[\"/mnt/vol15\",1]]]],5]\n~[\"/dev/nvme0n1p16\",[[\"/dev/nvme0n1p16\",[[\"\",1]]],[\"\",[[\"692G\",1],[\"216G\",1],[\"194G\",1],[\"78%\",1]]],[\"692G\",[[\"\",1]]],[\"216G\",[[\"\",1]]],[\"194G\",[[\"\",1]]],[\"78%\",[[\"/mnt/vol16\",1]]]],5]\n~[\"/dev/nvme0n1p17\",[[\"/dev/nvme0n1p17\",[[\"\",1]]],[\"\",[[\"729G\",1],[\"227G\",1],[\"203G\",1],[\"81%\",1]]],[\"729G\",[[\"\",1]]],[\"227G\",[[\"\",1]]],[\"203G\",[[\"\",1]]],[\"81%\",[[\"/mnt/vol17\",1]]]],5]\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 19
+      },
+      "bwt": {
+        "tokens": 573
+      },
+      "anchor": [
+        {
+          "tokens": 613
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 1171
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 839
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 850
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 1371
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 1413
+        }
+      ],
+      "raw": 629,
+      "frequency": [
+        {
+          "tokens": 756,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 756,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 756,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 756,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 756,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 756,
+          "n": 512,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 738,
+          "n": 32
+        },
+        {
+          "tokens": 738,
+          "n": 128
+        },
+        {
+          "tokens": 738,
+          "n": 512
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 758
+        },
+        {
+          "tokens": 822
+        },
+        {
+          "tokens": 845
+        },
+        {
+          "tokens": 1124
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 828,
+          "levels": 1
+        },
+        {
+          "tokens": 833,
+          "levels": 2
+        },
+        {
+          "tokens": 834,
+          "levels": 4
+        },
+        {
+          "tokens": 834,
+          "levels": 12
+        },
+        {
+          "tokens": 863,
+          "levels": 12
+        },
+        {
+          "tokens": 864,
+          "levels": 1
+        },
+        {
+          "tokens": 864,
+          "levels": 4
+        },
+        {
+          "tokens": 865,
+          "levels": 2
+        }
+      ],
+      "xor": {
+        "tokens": 796
+      },
+      "rankedGraph": {
+        "tokens": 1749,
+        "folded": "~[\"From:\",[[\"From:\",[[\"Dana\",1]]],[\"Dana\",[[\"Whitfield\",1]]],[\"Whitfield\",[[\"<dana.whitfield@northgate-analytics.com>\",1]]]],0]\n~[\"Date:\",[[\"Date:\",[[\"Tue,\",1]]],[\"Tue,\",[[\"23\",1]]],[\"23\",[[\"Sep\",1]]],[\"Sep\",[[\"2026\",1]]],[\"2026\",[[\"14:08:11\",1]]],[\"14:08:11\",[[\"-0400\",1]]]],0]\n~[\"To:\",[[\"To:\",[[\"Marcus\",1]]],[\"Marcus\",[[\"Oyelaran\",1]]],[\"Oyelaran\",[[\"<m.oyelaran@northgate-analytics.com>\",1]]]],0]\n~[\"Cc:\",[[\"Cc:\",[[\"Priya\",1]]],[\"Priya\",[[\"Raghunathan\",1]]],[\"Raghunathan\",[[\"<priya.r@northgate-analytics.com>,\",1]]],[\"<priya.r@northgate-analytics.com>,\",[[\"Tom\",1]]],[\"Tom\",[[\"Beckett\",1]]],[\"Beckett\",[[\"<tbeckett@northgate-analytics.com>\",1]]]],0]\n~[\"Subject:\",[[\"Subject:\",[[\"Re:\",1]]],[\"Re:\",[[\"Q3\",1]]],[\"Q3\",[[\"reconciliation\",1]]],[\"reconciliation\",[[\"variance\",1]]],[\"variance\",[[\"-\",1]]],[\"-\",[[\"need\",1]]],[\"need\",[[\"a\",1]]],[\"a\",[[\"decision\",1]]],[\"decision\",[[\"by\",1]]],[\"by\",[[\"Thursday\",1]]]],0]\n\nMarcus,\n\nI pulled the ledger again this morning and the variance is still there. It is 18,442.17 on the\nconsolidated view and 18,442.17 on the subsidiary view, so at least it is consistent now.\n\nMy read is that we booked the Halstead refund twice: once on 2026-08-14 against cost center 4120\nand once on 2026-08-29 against cost center 4180. If that is right, the fix is a single reversing\n~[\"entry\",[[\"entry\",[[\"and\",1]]],[\"and\",[[\"we\",1]]],[\"we\",[[\"are\",1]]],[\"are\",[[\"done.\",1]]]],0]\n\n~[\"Can\",[[\"Can\",[[\"you\",1]]],[\"you\",[[\"confirm\",1]]],[\"confirm\",[[\"with\",1]]],[\"with\",[[\"the\",1]]],[\"the\",[[\"AP\",1]]],[\"AP\",[[\"team\",1]]],[\"team\",[[\"before\",1]]],[\"before\",[[\"Thursday?\",1]]]],0]\n\nDana\n\n~[\">\",[[\">\",[[\"On\",1]]],[\"On\",[[\"Tue,\",1]]],[\"Tue,\",[[\"23\",1]]],[\"23\",[[\"Sep\",1]]],[\"Sep\",[[\"2026\",1]]],[\"2026\",[[\"at\",1]]],[\"at\",[[\"11:42,\",1]]],[\"11:42,\",[[\"Marcus\",1]]],[\"Marcus\",[[\"Oyelaran\",1]]],[\"Oyelaran\",[[\"<m.oyelaran@northgate-analytics.com>\",1]]],[\"<m.oyelaran@northgate-analytics.com>\",[[\"wrote:\",1]]]],0]\n>\n~[\">\",[[\">\",[[\"Dana,\",1]]]],0]\n>\n> Agreed that the number is stable. I am less sure about the double-booking theory. The 08-29\n~[\">\",[[\">\",[[\"entry\",1]]],[\"entry\",[[\"has\",1]]],[\"has\",[[\"a\",1]]],[\"a\",[[\"different\",1]]],[\"different\",[[\"vendor\",1]]],[\"vendor\",[[\"reference\",1]]],[\"reference\",[[\"(HAL-2026-0881\",1]]],[\"(HAL-2026-0881\",[[\"vs\",1]]],[\"vs\",[[\"HAL-2026-0774)\",1]]],[\"HAL-2026-0774)\",[[\"which\",1]]],[\"which\",[[\"suggests\",1]]],[\"suggests\",[[\"two\",1]]]],0]\n~[\">\",[[\">\",[[\"separate\",1]]],[\"separate\",[[\"credits\",1]]],[\"credits\",[[\"rather\",1]]],[\"rather\",[[\"than\",1]]],[\"than\",[[\"one\",1]]],[\"one\",[[\"duplicated\",1]]],[\"duplicated\",[[\"credit.\",1]]]],0]\n>\n> I would rather we pull the original remittance advice before we reverse anything. Priya, do you\n~[\">\",[[\">\",[[\"still\",1]]],[\"still\",[[\"have\",1]]],[\"have\",[[\"the\",1]]],[\"the\",[[\"August\",1]]],[\"August\",[[\"remittance\",1]]],[\"remittance\",[[\"PDFs?\",1]]]],0]\n>\n~[\">\",[[\">\",[[\"Marcus\",1]]]],0]\n>\n~[\">\",[[\">\",[[\">\",1],[\"On\",1]]],[\"On\",[[\"Mon,\",1]]],[\"Mon,\",[[\"22\",1]]],[\"22\",[[\"Sep\",1]]],[\"Sep\",[[\"2026\",1]]],[\"2026\",[[\"at\",1]]],[\"at\",[[\"17:03,\",1]]],[\"17:03,\",[[\"Priya\",1]]],[\"Priya\",[[\"Raghunathan\",1]]],[\"Raghunathan\",[[\"<priya.r@northgate-analytics.com>\",1]]],[\"<priya.r@northgate-analytics.com>\",[[\"wrote:\",1]]]],0]\n~[\">\",[[\">\",[[\">\",1]]]],0]\n~[\">\",[[\">\",[[\">\",1],[\"Both,\",1]]]],0]\n~[\">\",[[\">\",[[\">\",1]]]],0]\n> > I have the remittance advice for 08-14 but not for 08-29. I have asked Halstead AR for a\n> > copy and they said 2 business days, so Wednesday at the earliest.\n~[\">\",[[\">\",[[\">\",1]]]],0]\n> > One more thing: the 4180 cost center was only opened on 2026-08-25, so any entry against it\n> > before that date would have failed validation. That makes a genuine second credit more\n~[\">\",[[\">\",[[\">\",1],[\"likely\",1]]],[\"likely\",[[\"than\",1]]],[\"than\",[[\"a\",1]]],[\"a\",[[\"duplicate.\",1]]]],0]\n~[\">\",[[\">\",[[\">\",1]]]],0]\n~[\">\",[[\">\",[[\">\",1],[\"Priya\",1]]]],0]\n~[\">\",[[\">\",[[\">\",1]]]],0]\n> > > On Mon, 22 Sep 2026 at 09:15, Tom Beckett <tbeckett@northgate-analytics.com> wrote:\n~[\">\",[[\">\",[[\">\",2]]]],0]\n~[\">\",[[\">\",[[\">\",2],[\"Team,\",1]]]],0]\n~[\">\",[[\">\",[[\">\",2]]]],0]\n> > > Flagging that audit wants the Q3 reconciliation closed by 2026-09-30. If the variance is\n> > > unresolved we have to disclose it as a known item, which I would prefer to avoid.\n~[\">\",[[\">\",[[\">\",2]]]],0]\n~[\">\",[[\">\",[[\">\",2],[\"Tom\",1]]]],0]\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 27
+      },
+      "bwt": {
+        "tokens": 685
+      },
+      "anchor": [
+        {
+          "tokens": 691
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 993
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 706
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 706
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 745
+        },
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 755
+        }
+      ],
+      "raw": 458,
+      "frequency": [
+        {
+          "tokens": 584,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 584,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 584,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 584,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 584,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 584,
+          "n": 512,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 566,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 542
+        },
+        {
+          "tokens": 578
+        },
+        {
+          "tokens": 1117
+        },
+        {
+          "tokens": 1181
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 617,
+          "levels": 1
+        },
+        {
+          "tokens": 622,
+          "levels": 2
+        },
+        {
+          "tokens": 626,
+          "levels": 4
+        },
+        {
+          "tokens": 628,
+          "levels": 12
+        },
+        {
+          "tokens": 681,
+          "levels": 4
+        },
+        {
+          "tokens": 681,
+          "levels": 12
+        },
+        {
+          "tokens": 683,
+          "levels": 2
+        },
+        {
+          "tokens": 690,
+          "levels": 1
+        }
+      ],
+      "xor": {
+        "tokens": 617
+      },
+      "rankedGraph": {
+        "tokens": 562,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"du\",1]]],[\"du\",[[\"-k\",1]]],[\"-k\",[[\"(real)\",1]]]],0]\n202709\tnode_modules/next\n202246\tnode_modules/next/dist\n187110\tnode_modules/@next\n132028\tnode_modules/next/dist/compiled\n94473\tnode_modules/@next/swc-linux-x64-gnu\n92613\tnode_modules/@next/swc-linux-x64-musl\n80436\tnode_modules/next/dist/compiled/next-server\n55426\tnode_modules/gpt-tokenizer\n46458\tnode_modules/@img\n26369\tnode_modules/next/dist/esm\n23389\tnode_modules/typescript\n23320\tnode_modules/typescript/lib\n20672\tnode_modules/gpt-tokenizer/dist\n18433\tnode_modules/@img/sharp-libvips-linuxmusl-x64\n18417\tnode_modules/@img/sharp-libvips-linuxmusl-x64/lib\n18213\tnode_modules/@img/sharp-libvips-linux-x64\n18197\tnode_modules/@img/sharp-libvips-linux-x64/lib\n18120\tnode_modules/next/dist/server\n16305\tnode_modules/drizzle-orm\n11686\tnode_modules/next/dist/esm/server\n11450\tnode_modules/gpt-tokenizer/esm\n11399\tnode_modules/gpt-tokenizer/cjs\n11176\tnode_modules/@esbuild\n11172\tnode_modules/@esbuild/linux-x64\n11164\tnode_modules/@esbuild/linux-x64/bin\n10304\tnode_modules/@babel\n9947\tnode_modules/next/dist/compiled/react-dom-experimental\n9896\tnode_modules/next/dist/compiled/react-dom-experimental/cjs\n9269\tnode_modules/lightningcss-linux-x64-gnu\n9261\tnode_modules/lightningcss-linux-x64-musl\n8969\tnode_modules/@img/sharp-wasm32\n8944\tnode_modules/@img/sharp-wasm32/lib\n8262\tnode_modules/gpt-tokenizer/esm/bpeRanks\n8262\tnode_modules/gpt-tokenizer/cjs/bpeRanks\n7523\tnode_modules/next/dist/compiled/react-dom\n7472\tnode_modules/next/dist/compiled/react-dom/cjs\n7282\tnode_modules/next/dist/build\n7251\tnode_modules/react-dom\n7184\tnode_modules/react-dom/cjs\n6900\tnode_modules/gpt-tokenizer/data\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 1
+      },
+      "bwt": {
+        "tokens": 513
+      },
+      "anchor": [
+        {
+          "tokens": 518
+        },
+        {
+          "tokens": 524
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "klados": [],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 221
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 221
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 249
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 249
+        }
+      ],
+      "raw": 60,
+      "frequency": [
+        {
+          "tokens": 187,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 187,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 187,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 188,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 188,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 188,
+          "n": 512,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 169,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 105
+        },
+        {
+          "tokens": 134
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 203,
+          "levels": 1
+        },
+        {
+          "tokens": 204,
+          "levels": 2
+        },
+        {
+          "tokens": 206,
+          "levels": 4
+        },
+        {
+          "tokens": 211,
+          "levels": 2
+        },
+        {
+          "tokens": 211,
+          "levels": 4
+        },
+        {
+          "tokens": 212,
+          "levels": 1
+        }
+      ],
+      "xor": {
+        "tokens": 142
+      },
+      "rankedGraph": {
+        "tokens": 302,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"lsblk\",1]]],[\"lsblk\",[[\"(real,\",1]]],[\"(real,\",[[\"this\",1]]],[\"this\",[[\"sandbox\",1]]],[\"sandbox\",[[\"2026-10-24T21:15:04Z)\",1]]]],0]\n~[\"NAME\",[[\"NAME\",[[\"MAJ:MIN\",1]]],[\"MAJ:MIN\",[[\"RM\",1]]],[\"RM\",[[\"\",1]]],[\"\",[[\"SIZE\",1]]],[\"SIZE\",[[\"RO\",1]]],[\"RO\",[[\"TYPE\",1]]],[\"TYPE\",[[\"MOUNTPOINTS\",1]]]],0]\n~[\"vda\",[[\"vda\",[[\"\",1]]],[\"\",[[\"254:0\",1],[\"\",2],[\"0\",2]]],[\"254:0\",[[\"\",1]]],[\"0\",[[\"21.8G\",1],[\"disk\",1]]],[\"21.8G\",[[\"\",1]]],[\"disk\",[[\"/\",1]]]],9]\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 3
+      },
+      "bwt": {
+        "tokens": 115
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "klados": [],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 241
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 241
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 285
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 292
+        }
+      ],
+      "raw": 80,
+      "frequency": [
+        {
+          "tokens": 206,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 206,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 207,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 207,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 207,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 208,
+          "n": 32,
+          "order": "decreasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 189,
+          "n": 128
+        },
+        {
+          "tokens": 190,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 126
+        },
+        {
+          "tokens": 165
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 219,
+          "levels": 1
+        },
+        {
+          "tokens": 220,
+          "levels": 2
+        },
+        {
+          "tokens": 223,
+          "levels": 4
+        },
+        {
+          "tokens": 224,
+          "levels": 12
+        },
+        {
+          "tokens": 235,
+          "levels": 2
+        },
+        {
+          "tokens": 235,
+          "levels": 4
+        },
+        {
+          "tokens": 235,
+          "levels": 12
+        },
+        {
+          "tokens": 236,
+          "levels": 1
+        }
+      ],
+      "xor": {
+        "tokens": 166
+      },
+      "rankedGraph": {
+        "tokens": 193,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"w\",1]]],[\"w\",[[\"(real,\",1]]],[\"(real,\",[[\"captured\",1]]],[\"captured\",[[\"2026-10-24T23:21:28Z)\",1]]]],0]\n 23:21:28 up  2:40,  0 user,  load average: 1.44, 1.11, 0.89\nUSER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 1
+      },
+      "bwt": {
+        "tokens": 136
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 1723
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 1171
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 1171
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 1866
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 2009
+        }
+      ],
+      "raw": 1006,
+      "frequency": [
+        {
+          "tokens": 1020,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1020,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1054,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1054,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1112,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1117,
+          "n": 32,
+          "order": "decreasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 1007,
+          "n": 512
+        },
+        {
+          "tokens": 1039,
+          "n": 128
+        },
+        {
+          "tokens": 1099,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 1136
+        },
+        {
+          "tokens": 1139
+        },
+        {
+          "tokens": 1334
+        },
+        {
+          "tokens": 1353
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 1291,
+          "levels": 1
+        },
+        {
+          "tokens": 1306,
+          "levels": 2
+        },
+        {
+          "tokens": 1327,
+          "levels": 4
+        },
+        {
+          "tokens": 1328,
+          "levels": 12
+        },
+        {
+          "tokens": 1717,
+          "levels": 1
+        },
+        {
+          "tokens": 1717,
+          "levels": 2
+        },
+        {
+          "tokens": 1717,
+          "levels": 4
+        },
+        {
+          "tokens": 1717,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 1647
+      },
+      "rankedGraph": null,
+      "bwt": {
+        "tokens": 956
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "klados": [
+        {
+          "policy": "local",
+          "tokens": 1529
+        },
+        {
+          "policy": "eager",
+          "tokens": 2163
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 1821
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 1838
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 3011
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 3076
+        }
+      ],
+      "raw": 1422,
+      "frequency": [
+        {
+          "tokens": 1505,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1507,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1520,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1521,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1558,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1565,
+          "n": 32,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 1490,
+          "n": 512
+        },
+        {
+          "tokens": 1504,
+          "n": 128
+        },
+        {
+          "tokens": 1539,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 1952
+        },
+        {
+          "tokens": 2159
+        },
+        {
+          "tokens": 2226
+        },
+        {
+          "tokens": 2620
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 1560,
+          "levels": 1
+        },
+        {
+          "tokens": 1561,
+          "levels": 2
+        },
+        {
+          "tokens": 1563,
+          "levels": 4
+        },
+        {
+          "tokens": 1602,
+          "levels": 1
+        },
+        {
+          "tokens": 1602,
+          "levels": 2
+        },
+        {
+          "tokens": 1602,
+          "levels": 4
+        }
+      ],
+      "xor": {
+        "tokens": 1532
+      },
+      "rankedGraph": {
+        "tokens": 6669,
+        "folded": "/**\n~[\"\",[[\"\",[[\"*\",1]]],[\"*\",[[\"Concatenates\",1]]],[\"Concatenates\",[[\"two\",1]]],[\"two\",[[\"arrays\",1]]],[\"arrays\",[[\"faster\",1]]],[\"faster\",[[\"than\",1]]],[\"than\",[[\"the\",1]]],[\"the\",[[\"array\",1]]],[\"array\",[[\"spread\",1]]],[\"spread\",[[\"operator.\",1]]]],0]\n~[\"\",[[\"\",[[\"*/\",1]]]],0]\n~[\"const\",[[\"const\",[[\"concatArrays\",1]]],[\"concatArrays\",[[\"=\",1]]],[\"=\",[[\"(array1,\",1]]],[\"(array1,\",[[\"array2)\",1]]],[\"array2)\",[[\"=>\",1]]],[\"=>\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"//\",1]]],[\"//\",[[\"Pre-allocate\",1]]],[\"Pre-allocate\",[[\"for\",1]]],[\"for\",[[\"better\",1]]],[\"better\",[[\"V8\",1]]],[\"V8\",[[\"optimization\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"combinedArray\",1]]],[\"combinedArray\",[[\"=\",1]]],[\"=\",[[\"new\",1]]],[\"new\",[[\"Array(array1.length\",1]]],[\"Array(array1.length\",[[\"+\",1]]],[\"+\",[[\"array2.length);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"for\",1]]],[\"for\",[[\"(let\",1]]],[\"(let\",[[\"i\",1]]],[\"i\",[[\"=\",1],[\"<\",1]]],[\"=\",[[\"0;\",1]]],[\"0;\",[[\"i\",1]]],[\"<\",[[\"array1.length;\",1]]],[\"array1.length;\",[[\"i++)\",1]]],[\"i++)\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"combinedArray[i]\",1]]],[\"combinedArray[i]\",[[\"=\",1]]],[\"=\",[[\"array1[i];\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"for\",1]]],[\"for\",[[\"(let\",1]]],[\"(let\",[[\"i\",1]]],[\"i\",[[\"=\",1],[\"<\",1]]],[\"=\",[[\"0;\",1]]],[\"0;\",[[\"i\",1]]],[\"<\",[[\"array2.length;\",1]]],[\"array2.length;\",[[\"i++)\",1]]],[\"i++)\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"combinedArray[array1.length\",1]]],[\"combinedArray[array1.length\",[[\"+\",1]]],[\"+\",[[\"i]\",1]]],[\"i]\",[[\"=\",1]]],[\"=\",[[\"array2[i];\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"return\",1]]],[\"return\",[[\"combinedArray;\",1]]]],0]\n};\n\n~[\"//\",[[\"//\",[[\"Factory\",1]]],[\"Factory\",[[\"function\",1]]],[\"function\",[[\"ensures\",1]]],[\"ensures\",[[\"consistent\",1]]],[\"consistent\",[[\"object\",1]]],[\"object\",[[\"shapes\",1]]]],0]\n~[\"const\",[[\"const\",[[\"createClassValidatorObject\",1]]],[\"createClassValidatorObject\",[[\"=\",1]]],[\"=\",[[\"(classGroupId,\",1]]],[\"(classGroupId,\",[[\"validator)\",1]]],[\"validator)\",[[\"=>\",1]]],[\"=>\",[[\"({\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"classGroupId,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"validator\",1]]]],0]\n});\n~[\"//\",[[\"//\",[[\"Factory\",1]]],[\"Factory\",[[\"ensures\",1]]],[\"ensures\",[[\"consistent\",1]]],[\"consistent\",[[\"ClassPartObject\",1]]],[\"ClassPartObject\",[[\"shape\",1]]]],0]\n~[\"const\",[[\"const\",[[\"createClassPartObject\",1]]],[\"createClassPartObject\",[[\"=\",1]]],[\"=\",[[\"(nextPart\",1],[\"new\",1],[\"null,\",1]]],[\"(nextPart\",[[\"=\",1]]],[\"new\",[[\"Map(),\",1]]],[\"Map(),\",[[\"validators\",1]]],[\"validators\",[[\"=\",1]]],[\"null,\",[[\"classGroupId)\",1]]],[\"classGroupId)\",[[\"=>\",1]]],[\"=>\",[[\"({\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"nextPart,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"validators,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"classGroupId\",1]]]],0]\n});\n~[\"const\",[[\"const\",[[\"CLASS_PART_SEPARATOR\",1]]],[\"CLASS_PART_SEPARATOR\",[[\"=\",1]]],[\"=\",[[\"'-';\",1]]]],0]\n~[\"const\",[[\"const\",[[\"EMPTY_CONFLICTS\",1]]],[\"EMPTY_CONFLICTS\",[[\"=\",1]]],[\"=\",[[\"[];\",1]]]],0]\n// I use two dots here because one dot is used as prefix for class groups in plugins\n~[\"const\",[[\"const\",[[\"ARBITRARY_PROPERTY_PREFIX\",1]]],[\"ARBITRARY_PROPERTY_PREFIX\",[[\"=\",1]]],[\"=\",[[\"'arbitrary..';\",1]]]],0]\n~[\"const\",[[\"const\",[[\"createClassGroupUtils\",1]]],[\"createClassGroupUtils\",[[\"=\",1]]],[\"=\",[[\"config\",1]]],[\"config\",[[\"=>\",1]]],[\"=>\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"classMap\",1]]],[\"classMap\",[[\"=\",1]]],[\"=\",[[\"createClassMap(config);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"conflictingClassGroups,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"conflictingClassGroupModifiers\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]],[\"}\",[[\"=\",1]]],[\"=\",[[\"config;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"getClassGroupId\",1]]],[\"getClassGroupId\",[[\"=\",1]]],[\"=\",[[\"className\",1]]],[\"className\",[[\"=>\",1]]],[\"=>\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"if\",1]]],[\"if\",[[\"(className.startsWith('[')\",1]]],[\"(className.startsWith('[')\",[[\"&&\",1]]],[\"&&\",[[\"className.endsWith(']'))\",1]]],[\"className.endsWith(']'))\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",5],[\"return\",1]]],[\"return\",[[\"getGroupIdForArbitraryProperty(className);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"const\",1]]],[\"const\",[[\"classParts\",1]]],[\"classParts\",[[\"=\",1]]],[\"=\",[[\"className.split(CLASS_PART_SEPARATOR);\",1]]]],0]\n    // Classes like `-inset-1` produce an empty string as first classPart. We assume that classes for negative values are used correctly and skip it.\n    const startIndex = classParts[0] === '' && classParts.length > 1 ? 1 : 0;\n~[\"\",[[\"\",[[\"\",3],[\"return\",1]]],[\"return\",[[\"getGroupRecursive(classParts,\",1]]],[\"getGroupRecursive(classParts,\",[[\"startIndex,\",1]]],[\"startIndex,\",[[\"classMap);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"};\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"getConflictingClassGroupIds\",1]]],[\"getConflictingClassGroupIds\",[[\"=\",1]]],[\"=\",[[\"(classGroupId,\",1]]],[\"(classGroupId,\",[[\"hasPostfixModifier)\",1]]],[\"hasPostfixModifier)\",[[\"=>\",1]]],[\"=>\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"if\",1]]],[\"if\",[[\"(hasPostfixModifier)\",1]]],[\"(hasPostfixModifier)\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",5],[\"const\",1]]],[\"const\",[[\"modifierConflicts\",1]]],[\"modifierConflicts\",[[\"=\",1]]],[\"=\",[[\"conflictingClassGroupModifiers[classGroupId];\",1]]]],0]\n~[\"\",[[\"\",[[\"\",5],[\"const\",1]]],[\"const\",[[\"baseConflicts\",1]]],[\"baseConflicts\",[[\"=\",1]]],[\"=\",[[\"conflictingClassGroups[classGroupId];\",1]]]],0]\n~[\"\",[[\"\",[[\"\",5],[\"if\",1]]],[\"if\",[[\"(modifierConflicts)\",1]]],[\"(modifierConflicts)\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"if\",1]]],[\"if\",[[\"(baseConflicts)\",1]]],[\"(baseConflicts)\",[[\"{\",1]]]],0]\n          // Merge base conflicts with modifier conflicts\n~[\"\",[[\"\",[[\"\",9],[\"return\",1]]],[\"return\",[[\"concatArrays(baseConflicts,\",1]]],[\"concatArrays(baseConflicts,\",[[\"modifierConflicts);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"//\",1]]],[\"//\",[[\"Only\",1]]],[\"Only\",[[\"modifier\",1]]],[\"modifier\",[[\"conflicts\",1]]]],0]\n~[\"\",[[\"\",[[\"\",7],[\"return\",1]]],[\"return\",[[\"modifierConflicts;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",5],[\"}\",1]]]],0]\n      // Fall back to without postfix if no modifier conflicts\n~[\"\",[[\"\",[[\"\",5],[\"return\",1]]],[\"return\",[[\"baseConflicts\",1]]],[\"baseConflicts\",[[\"||\",1]]],[\"||\",[[\"EMPTY_CONFLICTS;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"return\",1]]],[\"return\",[[\"conflictingClassGroups[classGroupId]\",1]]],[\"conflictingClassGroups[classGroupId]\",[[\"||\",1]]],[\"||\",[[\"EMPTY_CONFLICTS;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"};\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"return\",1]]],[\"return\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"getClassGroupId,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"getConflictingClassGroupIds\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"};\",1]]]],0]\n};\n~[\"const\",[[\"const\",[[\"getGroupRecursive\",1]]],[\"getGroupRecursive\",[[\"=\",1]]],[\"=\",[[\"(classParts,\",1]]],[\"(classParts,\",[[\"startIndex,\",1]]],[\"startIndex,\",[[\"classPartObject)\",1]]],[\"classPartObject)\",[[\"=>\",1]]],[\"=>\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"classPathsLength\",1]]],[\"classPathsLength\",[[\"=\",1]]],[\"=\",[[\"classParts.length\",1]]],[\"classParts.length\",[[\"-\",1]]],[\"-\",[[\"startIndex;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"if\",1]]],[\"if\",[[\"(classPathsLength\",1]]],[\"(classPathsLength\",[[\"===\",1]]],[\"===\",[[\"0)\",1]]],[\"0)\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"return\",1]]],[\"return\",[[\"classPartObject.classGroupId;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"currentClassPart\",1]]],[\"currentClassPart\",[[\"=\",1]]],[\"=\",[[\"classParts[startIndex];\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"nextClassPartObject\",1]]],[\"nextClassPartObject\",[[\"=\",1]]],[\"=\",[[\"classPartObject.nextPart.get(currentClassPart);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"if\",1]]],[\"if\",[[\"(nextClassPartObject)\",1]]],[\"(nextClassPartObject)\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"const\",1]]],[\"const\",[[\"result\",1]]],[\"result\",[[\"=\",1]]],[\"=\",[[\"getGroupRecursive(classParts,\",1]]],[\"getGroupRecursive(classParts,\",[[\"startIndex\",1]]],[\"startIndex\",[[\"+\",1]]],[\"+\",[[\"1,\",1]]],[\"1,\",[[\"nextClassPartObject);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"if\",1]]],[\"if\",[[\"(result)\",1]]],[\"(result)\",[[\"return\",1]]],[\"return\",[[\"result;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"validators\",1]]],[\"validators\",[[\"=\",1]]],[\"=\",[[\"classPartObject.validators;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"if\",1]]],[\"if\",[[\"(validators\",1]]],[\"(validators\",[[\"===\",1]]],[\"===\",[[\"null)\",1]]],[\"null)\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"return\",1]]],[\"return\",[[\"undefined;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"//\",1]]],[\"//\",[[\"Build\",1]]],[\"Build\",[[\"classRest\",1]]],[\"classRest\",[[\"string\",1]]],[\"string\",[[\"efficiently\",1]]],[\"efficiently\",[[\"by\",1]]],[\"by\",[[\"joining\",1]]],[\"joining\",[[\"from\",1]]],[\"from\",[[\"startIndex\",1]]],[\"startIndex\",[[\"onwards\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"classRest\",1]]],[\"classRest\",[[\"=\",1]]],[\"=\",[[\"startIndex\",1]]],[\"startIndex\",[[\"===\",1]]],[\"===\",[[\"0\",1]]],[\"0\",[[\"?\",1]]],[\"?\",[[\"classParts.join(CLASS_PART_SEPARATOR)\",1]]],[\"classParts.join(CLASS_PART_SEPARATOR)\",[[\":\",1]]],[\":\",[[\"classParts.slice(startIndex).join(CLASS_PART_SEPARATOR);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"validatorsLength\",1]]],[\"validatorsLength\",[[\"=\",1]]],[\"=\",[[\"validators.length;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"for\",1]]],[\"for\",[[\"(let\",1]]],[\"(let\",[[\"i\",1]]],[\"i\",[[\"=\",1],[\"<\",1]]],[\"=\",[[\"0;\",1]]],[\"0;\",[[\"i\",1]]],[\"<\",[[\"validatorsLength;\",1]]],[\"validatorsLength;\",[[\"i++)\",1]]],[\"i++)\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"const\",1]]],[\"const\",[[\"validatorObj\",1]]],[\"validatorObj\",[[\"=\",1]]],[\"=\",[[\"validators[i];\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"if\",1]]],[\"if\",[[\"(validatorObj.validator(classRest))\",1]]],[\"(validatorObj.validator(classRest))\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",5],[\"return\",1]]],[\"return\",[[\"validatorObj.classGroupId;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"return\",1]]],[\"return\",[[\"undefined;\",1]]]],0]\n};\n/**\n~[\"\",[[\"\",[[\"*\",1]]],[\"*\",[[\"Get\",1]]],[\"Get\",[[\"the\",1]]],[\"the\",[[\"class\",1]]],[\"class\",[[\"group\",1]]],[\"group\",[[\"ID\",1]]],[\"ID\",[[\"for\",1]]],[\"for\",[[\"an\",1]]],[\"an\",[[\"arbitrary\",1]]],[\"arbitrary\",[[\"property.\",1]]]],0]\n~[\"\",[[\"\",[[\"*\",1]]]],0]\n * @param className - The class name to get the group ID for. Is expected to be string starting with `[` and ending with `]`.\n~[\"\",[[\"\",[[\"*/\",1]]]],0]\nconst getGroupIdForArbitraryProperty = className => className.slice(1, -1).indexOf(':') === -1 ? undefined : (() => {\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"content\",1]]],[\"content\",[[\"=\",1]]],[\"=\",[[\"className.slice(1,\",1]]],[\"className.slice(1,\",[[\"-1);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"colonIndex\",1]]],[\"colonIndex\",[[\"=\",1]]],[\"=\",[[\"content.indexOf(':');\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"property\",1]]],[\"property\",[[\"=\",1]]],[\"=\",[[\"content.slice(0,\",1]]],[\"content.slice(0,\",[[\"colonIndex);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"return\",1]]],[\"return\",[[\"property\",1]]],[\"property\",[[\"?\",1],[\":\",1]]],[\"?\",[[\"ARBITRARY_PROPERTY_PREFIX\",1]]],[\"ARBITRARY_PROPERTY_PREFIX\",[[\"+\",1]]],[\"+\",[[\"property\",1]]],[\":\",[[\"undefined;\",1]]]],0]\n})();\n/**\n~[\"\",[[\"\",[[\"*\",1]]],[\"*\",[[\"Exported\",1]]],[\"Exported\",[[\"for\",1]]],[\"for\",[[\"testing\",1]]],[\"testing\",[[\"only\",1]]]],0]\n~[\"\",[[\"\",[[\"*/\",1]]]],0]\n~[\"const\",[[\"const\",[[\"createClassMap\",1]]],[\"createClassMap\",[[\"=\",1]]],[\"=\",[[\"config\",1]]],[\"config\",[[\"=>\",1]]],[\"=>\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"theme,\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"classGroups\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]],[\"}\",[[\"=\",1]]],[\"=\",[[\"config;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"return\",1]]],[\"return\",[[\"processClassGroups(classGroups,\",1]]],[\"processClassGroups(classGroups,\",[[\"theme);\",1]]]],0]\n};\n~[\"//\",[[\"//\",[[\"Split\",1]]],[\"Split\",[[\"into\",1]]],[\"into\",[[\"separate\",1]]],[\"separate\",[[\"functions\",1]]],[\"functions\",[[\"to\",1]]],[\"to\",[[\"maintain\",1]]],[\"maintain\",[[\"monomorphic\",1]]],[\"monomorphic\",[[\"call\",1]]],[\"call\",[[\"sites\",1]]]],0]\n~[\"const\",[[\"const\",[[\"processClassGroups\",1]]],[\"processClassGroups\",[[\"=\",1]]],[\"=\",[[\"(classGroups,\",1]]],[\"(classGroups,\",[[\"theme)\",1]]],[\"theme)\",[[\"=>\",1]]],[\"=>\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"classMap\",1]]],[\"classMap\",[[\"=\",1]]],[\"=\",[[\"createClassPartObject();\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"for\",1]]],[\"for\",[[\"(const\",1]]],[\"(const\",[[\"classGroupId\",1]]],[\"classGroupId\",[[\"in\",1]]],[\"in\",[[\"classGroups)\",1]]],[\"classGroups)\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"const\",1]]],[\"const\",[[\"group\",1]]],[\"group\",[[\"=\",1]]],[\"=\",[[\"classGroups[classGroupId];\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"processClassesRecursively(group,\",1]]],[\"processClassesRecursively(group,\",[[\"classMap,\",1]]],[\"classMap,\",[[\"classGroupId,\",1]]],[\"classGroupId,\",[[\"theme);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"return\",1]]],[\"return\",[[\"classMap;\",1]]]],0]\n};\n~[\"const\",[[\"const\",[[\"processClassesRecursively\",1]]],[\"processClassesRecursively\",[[\"=\",1]]],[\"=\",[[\"(classGroup,\",1]]],[\"(classGroup,\",[[\"classPartObject,\",1]]],[\"classPartObject,\",[[\"classGroupId,\",1]]],[\"classGroupId,\",[[\"theme)\",1]]],[\"theme)\",[[\"=>\",1]]],[\"=>\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"len\",1]]],[\"len\",[[\"=\",1]]],[\"=\",[[\"classGroup.length;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"for\",1]]],[\"for\",[[\"(let\",1]]],[\"(let\",[[\"i\",1]]],[\"i\",[[\"=\",1],[\"<\",1]]],[\"=\",[[\"0;\",1]]],[\"0;\",[[\"i\",1]]],[\"<\",[[\"len;\",1]]],[\"len;\",[[\"i++)\",1]]],[\"i++)\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"const\",1]]],[\"const\",[[\"classDefinition\",1]]],[\"classDefinition\",[[\"=\",1]]],[\"=\",[[\"classGroup[i];\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"processClassDefinition(classDefinition,\",1]]],[\"processClassDefinition(classDefinition,\",[[\"classPartObject,\",1]]],[\"classPartObject,\",[[\"classGroupId,\",1]]],[\"classGroupId,\",[[\"theme);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]]],0]\n};\n~[\"//\",[[\"//\",[[\"Split\",1]]],[\"Split\",[[\"into\",1]]],[\"into\",[[\"separate\",1]]],[\"separate\",[[\"functions\",1]]],[\"functions\",[[\"for\",1]]],[\"for\",[[\"each\",1]]],[\"each\",[[\"type\",1]]],[\"type\",[[\"to\",1]]],[\"to\",[[\"maintain\",1]]],[\"maintain\",[[\"monomorphic\",1]]],[\"monomorphic\",[[\"call\",1]]],[\"call\",[[\"sites\",1]]]],0]\n~[\"const\",[[\"const\",[[\"processClassDefinition\",1]]],[\"processClassDefinition\",[[\"=\",1]]],[\"=\",[[\"(classDefinition,\",1]]],[\"(classDefinition,\",[[\"classPartObject,\",1]]],[\"classPartObject,\",[[\"classGroupId,\",1]]],[\"classGroupId,\",[[\"theme)\",1]]],[\"theme)\",[[\"=>\",1]]],[\"=>\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"if\",1]]],[\"if\",[[\"(typeof\",1]]],[\"(typeof\",[[\"classDefinition\",1]]],[\"classDefinition\",[[\"===\",1]]],[\"===\",[[\"'string')\",1]]],[\"'string')\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"processStringDefinition(classDefinition,\",1]]],[\"processStringDefinition(classDefinition,\",[[\"classPartObject,\",1]]],[\"classPartObject,\",[[\"classGroupId);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"return;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"if\",1]]],[\"if\",[[\"(typeof\",1]]],[\"(typeof\",[[\"classDefinition\",1]]],[\"classDefinition\",[[\"===\",1]]],[\"===\",[[\"'function')\",1]]],[\"'function')\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"processFunctionDefinition(classDefinition,\",1]]],[\"processFunctionDefinition(classDefinition,\",[[\"classPartObject,\",1]]],[\"classPartObject,\",[[\"classGroupId,\",1]]],[\"classGroupId,\",[[\"theme);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"return;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"processObjectDefinition(classDefinition,\",1]]],[\"processObjectDefinition(classDefinition,\",[[\"classPartObject,\",1]]],[\"classPartObject,\",[[\"classGroupId,\",1]]],[\"classGroupId,\",[[\"theme);\",1]]]],0]\n};\n~[\"const\",[[\"const\",[[\"processStringDefinition\",1]]],[\"processStringDefinition\",[[\"=\",1]]],[\"=\",[[\"(classDefinition,\",1]]],[\"(classDefinition,\",[[\"classPartObject,\",1]]],[\"classPartObject,\",[[\"classGroupId)\",1]]],[\"classGroupId)\",[[\"=>\",1]]],[\"=>\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"const\",1]]],[\"const\",[[\"classPartObjectToEdit\",1]]],[\"classPartObjectToEdit\",[[\"=\",1]]],[\"=\",[[\"classDefinition\",1]]],[\"classDefinition\",[[\"===\",1]]],[\"===\",[[\"''\",1]]],[\"''\",[[\"?\",1]]],[\"?\",[[\"classPartObject\",1]]],[\"classPartObject\",[[\":\",1]]],[\":\",[[\"getPart(classPartObject,\",1]]],[\"getPart(classPartObject,\",[[\"classDefinition);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"classPartObjectToEdit.classGroupId\",1]]],[\"classPartObjectToEdit.classGroupId\",[[\"=\",1]]],[\"=\",[[\"classGroupId;\",1]]]],0]\n};\n~[\"const\",[[\"const\",[[\"processFunctionDefinition\",1]]],[\"processFunctionDefinition\",[[\"=\",1]]],[\"=\",[[\"(classDefinition,\",1]]],[\"(classDefinition,\",[[\"classPartObject,\",1]]],[\"classPartObject,\",[[\"classGroupId,\",1]]],[\"classGroupId,\",[[\"theme)\",1]]],[\"theme)\",[[\"=>\",1]]],[\"=>\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"if\",1]]],[\"if\",[[\"(isThemeGetter(classDefinition))\",1]]],[\"(isThemeGetter(classDefinition))\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"processClassesRecursively(classDefinition(theme),\",1]]],[\"processClassesRecursively(classDefinition(theme),\",[[\"classPartObject,\",1]]],[\"classPartObject,\",[[\"classGroupId,\",1]]],[\"classGroupId,\",[[\"theme);\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"return;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"if\",1]]],[\"if\",[[\"(classPartObject.validators\",1]]],[\"(classPartObject.validators\",[[\"===\",1]]],[\"===\",[[\"null)\",1]]],[\"null)\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",3],[\"classPartObject.validators\",1]]],[\"classPartObject.validators\",[[\"=\",1]]],[\"=\",[[\"[];\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"classPartObject.valid\",1]]]],0]",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 133
+      },
+      "bwt": {
+        "tokens": 1434
+      },
+      "anchor": [
+        {
+          "tokens": 1475
+        },
+        {
+          "tokens": 1478
+        },
+        {
+          "tokens": 1478
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "klados": [
+        {
+          "policy": "local",
+          "tokens": 2860
+        },
+        {
+          "policy": "eager",
+          "tokens": 4103
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 3058
+        },
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 3071
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 3480
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 3541
+        }
+      ],
+      "raw": 2739,
+      "frequency": [
+        {
+          "tokens": 2866,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 2866,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 2866,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 2866,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 2866,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 2866,
+          "n": 512,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 2848,
+          "n": 32
+        },
+        {
+          "tokens": 2848,
+          "n": 128
+        },
+        {
+          "tokens": 2848,
+          "n": 512
+        }
+      ],
+      "strofos": [],
+      "sparse": [],
+      "lifting": [],
+      "xor": null,
+      "rankedGraph": null,
+      "bwt": {
+        "tokens": 2795
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 2125
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 1355
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 1373
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 4149
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 4489
+        }
+      ],
+      "raw": 1099,
+      "frequency": [
+        {
+          "tokens": 1213,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1215,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1268,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1271,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1316,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1340,
+          "n": 32,
+          "order": "decreasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 1198,
+          "n": 512
+        },
+        {
+          "tokens": 1250,
+          "n": 128
+        },
+        {
+          "tokens": 1323,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 1342
+        },
+        {
+          "tokens": 1602
+        },
+        {
+          "tokens": 1840
+        },
+        {
+          "tokens": 2474
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 1237,
+          "levels": 1
+        },
+        {
+          "tokens": 1238,
+          "levels": 2
+        },
+        {
+          "tokens": 1240,
+          "levels": 4
+        },
+        {
+          "tokens": 1257,
+          "levels": 1
+        },
+        {
+          "tokens": 1257,
+          "levels": 2
+        },
+        {
+          "tokens": 1257,
+          "levels": 4
+        }
+      ],
+      "xor": {
+        "tokens": 1187
+      },
+      "rankedGraph": {
+        "tokens": 1945,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"node\",1]]],[\"node\",[[\"--help\",1]]],[\"--help\",[[\"(real)\",1]]]],0]\n~[\"Usage:\",[[\"Usage:\",[[\"node\",1]]],[\"node\",[[\"[options]\",1]]],[\"[options]\",[[\"[\",1]]],[\"[\",[[\"script.js\",1]]],[\"script.js\",[[\"]\",1]]],[\"]\",[[\"[arguments]\",1]]]],0]\n       node inspect [options] [ script.js | host:port ] [arguments]\n\nOptions:\n  -                           script read from stdin (default if no\n                              file name is provided, interactive mode\n                              if a tty)\n  --                          indicate the end of node options\n~[\"\",[[\"\",[[\"\",1],[\"--abort-on-uncaught-exception\",1]]]],0]\n                              aborting instead of exiting causes a\n                              core file to be generated for analysis\n  --allow-addons              allow use of addons when any\n                              permissions are set\n  --allow-child-process       allow use of child process when any\n                              permissions are set\n  --allow-fs-read=...         allow permissions to read the\n                              filesystem\n  --allow-fs-write=...        allow permissions to write in the\n                              filesystem\n  --allow-wasi                allow wasi when any permissions are set\n  --allow-worker              allow worker threads when any\n                              permissions are set\n  --build-snapshot            Generate a snapshot blob when the\n                              process exits.\n~[\"\",[[\"\",[[\"\",1],[\"--build-snapshot-config=...\",1]]],[\"--build-snapshot-config=...\",[[\"Generate\",1]]],[\"Generate\",[[\"a\",1]]],[\"a\",[[\"snapshot\",1]]],[\"snapshot\",[[\"blob\",1]]],[\"blob\",[[\"when\",1]]],[\"when\",[[\"the\",1]]]],0]\n                              process exits using aJSON configuration\n                              in the specified path.\n  -c, --check                 syntax check script without executing\n  --completion-bash           print source-able bash completion\n                              script\n  -C, --conditions=...        additional user conditions for\n                              conditional exports and imports\n  --cpu-prof                  Start the V8 CPU profiler on start up,\n                              and write the CPU profile to disk\n                              before exit. If --cpu-prof-dir is not\n                              specified, write the profile to the\n                              current working directory.\n  --cpu-prof-dir=...          Directory where the V8 profiles\n                              generated by --cpu-prof will be placed.\n                              Does not affect --prof.\n~[\"\",[[\"\",[[\"\",4],[\"--cpu-prof-interval=...\",1],[\"specified\",1]]],[\"--cpu-prof-interval=...\",[[\"\",1]]],[\"specified\",[[\"sampling\",1]]],[\"sampling\",[[\"interval\",1]]],[\"interval\",[[\"in\",1]]]],3]\n                              microseconds for the V8 CPU profile\n                              generated with --cpu-prof. (default:\n                              1000)\n  --cpu-prof-name=...         specified file name of the V8 CPU\n                              profile generated with --cpu-prof\n  --diagnostic-dir=...        set dir for all output files (default:\n                              current working directory)\n~[\"\",[[\"\",[[\"\",8],[\"--disable-proto=...\",1],[\"disable\",1]]],[\"--disable-proto=...\",[[\"\",1]]],[\"disable\",[[\"Object.prototype.__proto__\",1]]]],7]\n  --disable-sigusr1           Disable inspector thread to be\n                              listening for SIGUSR1 signal\n~[\"\",[[\"\",[[\"\",6],[\"--disable-warning=...\",1],[\"silence\",1]]],[\"--disable-warning=...\",[[\"\",1]]],[\"silence\",[[\"specific\",1]]],[\"specific\",[[\"process\",1]]],[\"process\",[[\"warnings\",1]]]],5]\n~[\"\",[[\"\",[[\"\",1],[\"--disable-wasm-trap-handler\",1]]],[\"--disable-wasm-trap-handler\",[[\"Disable\",1]]],[\"Disable\",[[\"trap-handler-based\",1]]],[\"trap-handler-based\",[[\"WebAssembly\",1]]]],0]\n                              bound checks. V8 will insert inline\n                              bound checks when compiling WebAssembly\n                              which may slow down performance.\n~[\"\",[[\"\",[[\"\",1],[\"--disallow-code-generation-from-strings\",1]]]],0]\n                              disallow eval and friends\n  --dns-result-order=...      set default value of verbatim in\n                              dns.lookup. Options are 'ipv4first'\n                              (IPv4 addresses are placed before IPv6\n                              addresses) 'ipv6first' (IPv6 addresses\n                              are placed before IPv4 addresses)\n                              'verbatim' (addresses are in the order\n                              the DNS resolver returned)\n~[\"\",[[\"\",[[\"\",1],[\"--enable-etw-stack-walking\",1],[\"provides\",1]]],[\"--enable-etw-stack-walking\",[[\"\",1]]],[\"provides\",[[\"heap\",1]]],[\"heap\",[[\"data\",1]]],[\"data\",[[\"to\",1]]],[\"to\",[[\"ETW\",1]]],[\"ETW\",[[\"Windows\",1]]]],0]\n                              native tracing\n  --enable-fips               enable FIPS crypto at startup\n  --enable-source-maps        Source Map V3 support for stack traces\n  --entry-url                 Treat the entrypoint as a URL\n  --env-file=...              set environment variables from supplied\n                              file\n~[\"\",[[\"\",[[\"\",3],[\"--env-file-if-exists=...\",1],[\"set\",1]]],[\"--env-file-if-exists=...\",[[\"\",1]]],[\"set\",[[\"environment\",1]]],[\"environment\",[[\"variables\",1]]],[\"variables\",[[\"from\",1]]],[\"from\",[[\"supplied\",1]]]],2]\n                              file\n  -e, --eval=...              evaluate script\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-addon-modules\",1]]]],0]\n                              experimental import support for addons\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-async-context-frame\",1]]]],0]\n                              Improve AsyncLocalStorage performance\n                              with AsyncContextFrame\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-config-file=...\",1]]]],0]\n                              set config file from supplied file\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-default-config-file\",1]]]],0]\n                              set config file from default config\n                              file\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-default-type=...\",1]]]],0]\n                              set module system to use by default\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-eventsource\",1],[\"experimental\",1]]],[\"--experimental-eventsource\",[[\"\",1]]],[\"experimental\",[[\"EventSource\",1]]],[\"EventSource\",[[\"API\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-import-meta-resolve\",1]]]],0]\n                              experimental ES Module\n                              import.meta.resolve() parentURL support\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-inspector-network-resource\",1]]]],0]\n                              experimental load network resources via\n                              the inspector\n~[\"\",[[\"\",[[\"\",1],[\"--loader,\",1]]],[\"--loader,\",[[\"--experimental-loader=...\",1]]]],0]\n                              use the specified module as a custom\n                              loader\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-network-inspection\",1]]]],0]\n                              experimental network inspection support\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-print-required-tla\",1]]]],0]\n                              Print pending top-level await. If\n                              --experimental-require-module is true,\n                              evaluate asynchronous graphs loaded by\n                              `require()` but do not run the\n                              microtasks, in order to to find and\n                              print top-level await in the graph\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-sea-config=...\",1]]]],0]\n                              Generate a blob that can be embedded\n                              into the single executable application\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-test-coverage\",1]]]],0]\n                              enable code coverage in the test runner\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-test-isolation=...\",1]]]],0]\n                              configures the type of test isolation\n                              used in the test runner\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-test-module-mocks\",1]]]],0]\n                              enable module mocking in the test\n                              runner\n~[\"\",[[\"\",[[\"\",1],[\"--experimental-transform-types\",1]]]],0]\n                              enable transformation of\n                              TypeScript-onlysyntax into JavaScript\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 27
+      },
+      "bwt": {
+        "tokens": 1120
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "klados": [
+        {
+          "policy": "local",
+          "tokens": 905
+        },
+        {
+          "policy": "eager",
+          "tokens": 1172
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 963
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 963
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 2160
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 2349
+        }
+      ],
+      "raw": 787,
+      "frequency": [
+        {
+          "tokens": 913,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 913,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 919,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 923,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 932,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 937,
+          "n": 32,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 893,
+          "n": 512
+        },
+        {
+          "tokens": 901,
+          "n": 128
+        },
+        {
+          "tokens": 914,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 911
+        },
+        {
+          "tokens": 977
+        },
+        {
+          "tokens": 1317
+        },
+        {
+          "tokens": 1498
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 939,
+          "levels": 1
+        },
+        {
+          "tokens": 945,
+          "levels": 2
+        },
+        {
+          "tokens": 953,
+          "levels": 4
+        },
+        {
+          "tokens": 953,
+          "levels": 12
+        },
+        {
+          "tokens": 969,
+          "levels": 1
+        },
+        {
+          "tokens": 970,
+          "levels": 2
+        },
+        {
+          "tokens": 972,
+          "levels": 4
+        },
+        {
+          "tokens": 972,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 898
+      },
+      "rankedGraph": {
+        "tokens": 883,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"findmnt\",1]]],[\"findmnt\",[[\"(real)\",1]]]],0]\nTARGET                                                  SOURCE            FSTYPE      OPTIONS\n/                                                       /dev/vda          ext4        rw,relatime,discard\n|-/dev                                                  devtmpfs          devtmpfs    rw,relatime,size=2014060k,nr_inodes=503515,mode=755\n| |-/dev/shm                                            tmpfs             tmpfs       rw,nosuid,nodev\n| |-/dev/pts                                            devpts            devpts      rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000\n| |-/dev/mqueue                                         mqueue            mqueue      rw,nosuid,nodev,noexec,relatime\n| `-/dev/hugepages                                      hugetlbfs         hugetlbfs   rw,relatime,pagesize=2M\n|-/proc                                                 proc              proc        rw,nosuid,nodev,noexec,relatime\n| `-/proc/sys/fs/binfmt_misc                            systemd-1         autofs      rw,relatime,fd=30,pgrp=1,timeout=0,minproto=5,maxproto=5,direct\n|   `-/proc/sys/fs/binfmt_misc                          binfmt_misc       binfmt_misc rw,nosuid,nodev,noexec,relatime\n|-/sys                                                  sysfs             sysfs       rw,nosuid,nodev,noexec,relatime\n| |-/sys/kernel/security                                securityfs        securityfs  rw,nosuid,nodev,noexec,relatime\n| |-/sys/fs/selinux                                     selinuxfs         selinuxfs   rw,nosuid,noexec,relatime\n| |-/sys/fs/cgroup                                      cgroup2           cgroup2     rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot\n| |-/sys/fs/pstore                                      pstore            pstore      rw,nosuid,nodev,noexec,relatime\n| |-/sys/fs/bpf                                         bpf               bpf         rw,nosuid,nodev,noexec,relatime,mode=700\n| |-/sys/kernel/debug                                   debugfs           debugfs     rw,nosuid,nodev,noexec,relatime\n| `-/sys/fs/fuse/connections                            fusectl           fusectl     rw,nosuid,nodev,noexec,relatime\n|-/run                                                  tmpfs             tmpfs       rw,nosuid,nodev,size=806892k,nr_inodes=819200,mode=755\n| |-/run/lock                                           tmpfs             tmpfs       rw,nosuid,nodev,noexec,relatime,size=5120k\n| |-/run/credentials/systemd-sysctl.service             ramfs             ramfs       ro,nosuid,nodev,noexec,relatime,mode=700\n| |-/run/credentials/systemd-sysusers.service           ramfs             ramfs       ro,nosuid,nodev,noexec,relatime,mode=700\n| |-/run/credentials/systemd-tmpfiles-setup-dev.service ramfs             ramfs       ro,nosuid,nodev,noexec,relatime,mode=700\n| |-/run/credentials/systemd-tmpfiles-setup.service     ramfs             ramfs       ro,nosuid,nodev,noexec,relatime,mode=700\n| `-/run/rpc_pipefs                                     sunrpc            rpc_pipefs  rw,relatime\n`-/etc/ssl/certs                                        tmpfs[/e2b/certs] tmpfs       rw,nosuid,nodev,size=806892k,nr_inodes=819200,mode=755\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 1
+      },
+      "bwt": {
+        "tokens": 838
+      },
+      "anchor": [
+        {
+          "tokens": 826
+        },
+        {
+          "tokens": 844
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 743
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 711
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 711
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 1036
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 1050
+        }
+      ],
+      "raw": 513,
+      "frequency": [
+        {
+          "tokens": 640,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 640,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 640,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 640,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 640,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 640,
+          "n": 512,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 622,
+          "n": 32
+        },
+        {
+          "tokens": 622,
+          "n": 128
+        },
+        {
+          "tokens": 622,
+          "n": 512
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 639
+        },
+        {
+          "tokens": 651
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 884,
+          "levels": 1
+        },
+        {
+          "tokens": 891,
+          "levels": 2
+        },
+        {
+          "tokens": 895,
+          "levels": 4
+        },
+        {
+          "tokens": 896,
+          "levels": 12
+        },
+        {
+          "tokens": 1026,
+          "levels": 1
+        },
+        {
+          "tokens": 1026,
+          "levels": 2
+        },
+        {
+          "tokens": 1026,
+          "levels": 4
+        },
+        {
+          "tokens": 1026,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 956
+      },
+      "rankedGraph": {
+        "tokens": 2513,
+        "folded": "~[\"|\",[[\"|\",[[\"cue\",1],[\"start\",1],[\"speaker\",1],[\"text\",1]]],[\"cue\",[[\"|\",1]]],[\"start\",[[\"|\",1]]],[\"speaker\",[[\"|\",1]]],[\"text\",[[\"|\",1]]]],2]\n~[\"|\",[[\"|\",[[\"1\",1],[\"00:00:02\",1],[\"s0\",1],[\"line\",1]]],[\"1\",[[\"|\",1]]],[\"00:00:02\",[[\"|\",1]]],[\"s0\",[[\"|\",1]]],[\"line\",[[\"0\",1]]],[\"0\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"2\",1],[\"00:00:05\",1],[\"s1\",1],[\"line\",1]]],[\"2\",[[\"|\",1]]],[\"00:00:05\",[[\"|\",1]]],[\"s1\",[[\"|\",1]]],[\"line\",[[\"1\",1]]],[\"1\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"3\",1],[\"00:00:08\",1],[\"s2\",1],[\"line\",1]]],[\"3\",[[\"|\",1]]],[\"00:00:08\",[[\"|\",1]]],[\"s2\",[[\"|\",1]]],[\"line\",[[\"2\",1]]],[\"2\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"4\",1],[\"00:00:11\",1],[\"s3\",1],[\"line\",1]]],[\"4\",[[\"|\",1]]],[\"00:00:11\",[[\"|\",1]]],[\"s3\",[[\"|\",1]]],[\"line\",[[\"3\",1]]],[\"3\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"5\",1],[\"00:00:14\",1],[\"s0\",1],[\"line\",1]]],[\"5\",[[\"|\",1]]],[\"00:00:14\",[[\"|\",1]]],[\"s0\",[[\"|\",1]]],[\"line\",[[\"4\",1]]],[\"4\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"6\",1],[\"00:00:17\",1],[\"s1\",1],[\"line\",1]]],[\"6\",[[\"|\",1]]],[\"00:00:17\",[[\"|\",1]]],[\"s1\",[[\"|\",1]]],[\"line\",[[\"5\",1]]],[\"5\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"7\",1],[\"00:00:20\",1],[\"s2\",1],[\"line\",1]]],[\"7\",[[\"|\",1]]],[\"00:00:20\",[[\"|\",1]]],[\"s2\",[[\"|\",1]]],[\"line\",[[\"6\",1]]],[\"6\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"8\",1],[\"00:00:23\",1],[\"s3\",1],[\"line\",1]]],[\"8\",[[\"|\",1]]],[\"00:00:23\",[[\"|\",1]]],[\"s3\",[[\"|\",1]]],[\"line\",[[\"7\",1]]],[\"7\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"9\",1],[\"00:00:26\",1],[\"s0\",1],[\"line\",1]]],[\"9\",[[\"|\",1]]],[\"00:00:26\",[[\"|\",1]]],[\"s0\",[[\"|\",1]]],[\"line\",[[\"8\",1]]],[\"8\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"10\",1],[\"00:00:29\",1],[\"s1\",1],[\"line\",1]]],[\"10\",[[\"|\",1]]],[\"00:00:29\",[[\"|\",1]]],[\"s1\",[[\"|\",1]]],[\"line\",[[\"9\",1]]],[\"9\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"11\",1],[\"00:00:32\",1],[\"s2\",1],[\"line\",1]]],[\"11\",[[\"|\",1]]],[\"00:00:32\",[[\"|\",1]]],[\"s2\",[[\"|\",1]]],[\"line\",[[\"10\",1]]],[\"10\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"12\",1],[\"00:00:35\",1],[\"s3\",1],[\"line\",1]]],[\"12\",[[\"|\",1]]],[\"00:00:35\",[[\"|\",1]]],[\"s3\",[[\"|\",1]]],[\"line\",[[\"11\",1]]],[\"11\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"13\",1],[\"00:00:38\",1],[\"s0\",1],[\"line\",1]]],[\"13\",[[\"|\",1]]],[\"00:00:38\",[[\"|\",1]]],[\"s0\",[[\"|\",1]]],[\"line\",[[\"12\",1]]],[\"12\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"14\",1],[\"00:00:41\",1],[\"s1\",1],[\"line\",1]]],[\"14\",[[\"|\",1]]],[\"00:00:41\",[[\"|\",1]]],[\"s1\",[[\"|\",1]]],[\"line\",[[\"13\",1]]],[\"13\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"15\",1],[\"00:00:44\",1],[\"s2\",1],[\"line\",1]]],[\"15\",[[\"|\",1]]],[\"00:00:44\",[[\"|\",1]]],[\"s2\",[[\"|\",1]]],[\"line\",[[\"14\",1]]],[\"14\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"16\",1],[\"00:00:47\",1],[\"s3\",1],[\"line\",1]]],[\"16\",[[\"|\",1]]],[\"00:00:47\",[[\"|\",1]]],[\"s3\",[[\"|\",1]]],[\"line\",[[\"15\",1]]],[\"15\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"17\",1],[\"00:00:50\",1],[\"s0\",1],[\"line\",1]]],[\"17\",[[\"|\",1]]],[\"00:00:50\",[[\"|\",1]]],[\"s0\",[[\"|\",1]]],[\"line\",[[\"16\",1]]],[\"16\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"18\",1],[\"00:00:53\",1],[\"s1\",1],[\"line\",1]]],[\"18\",[[\"|\",1]]],[\"00:00:53\",[[\"|\",1]]],[\"s1\",[[\"|\",1]]],[\"line\",[[\"17\",1]]],[\"17\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"19\",1],[\"00:00:56\",1],[\"s2\",1],[\"line\",1]]],[\"19\",[[\"|\",1]]],[\"00:00:56\",[[\"|\",1]]],[\"s2\",[[\"|\",1]]],[\"line\",[[\"18\",1]]],[\"18\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"20\",1],[\"00:00:59\",1],[\"s3\",1],[\"line\",1]]],[\"20\",[[\"|\",1]]],[\"00:00:59\",[[\"|\",1]]],[\"s3\",[[\"|\",1]]],[\"line\",[[\"19\",1]]],[\"19\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"21\",1],[\"00:01:02\",1],[\"s0\",1],[\"line\",1]]],[\"21\",[[\"|\",1]]],[\"00:01:02\",[[\"|\",1]]],[\"s0\",[[\"|\",1]]],[\"line\",[[\"20\",1]]],[\"20\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"22\",1],[\"00:01:05\",1],[\"s1\",1],[\"line\",1]]],[\"22\",[[\"|\",1]]],[\"00:01:05\",[[\"|\",1]]],[\"s1\",[[\"|\",1]]],[\"line\",[[\"21\",1]]],[\"21\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"23\",1],[\"00:01:08\",1],[\"s2\",1],[\"line\",1]]],[\"23\",[[\"|\",1]]],[\"00:01:08\",[[\"|\",1]]],[\"s2\",[[\"|\",1]]],[\"line\",[[\"22\",1]]],[\"22\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"24\",1],[\"00:01:11\",1],[\"s3\",1],[\"line\",1]]],[\"24\",[[\"|\",1]]],[\"00:01:11\",[[\"|\",1]]],[\"s3\",[[\"|\",1]]],[\"line\",[[\"23\",1]]],[\"23\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"25\",1],[\"00:01:14\",1],[\"s0\",1],[\"line\",1]]],[\"25\",[[\"|\",1]]],[\"00:01:14\",[[\"|\",1]]],[\"s0\",[[\"|\",1]]],[\"line\",[[\"24\",1]]],[\"24\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"26\",1],[\"00:01:17\",1],[\"s1\",1],[\"line\",1]]],[\"26\",[[\"|\",1]]],[\"00:01:17\",[[\"|\",1]]],[\"s1\",[[\"|\",1]]],[\"line\",[[\"25\",1]]],[\"25\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"27\",1],[\"00:01:20\",1],[\"s2\",1],[\"line\",1]]],[\"27\",[[\"|\",1]]],[\"00:01:20\",[[\"|\",1]]],[\"s2\",[[\"|\",1]]],[\"line\",[[\"26\",1]]],[\"26\",[[\"|\",1]]]],7]\n~[\"|\",[[\"|\",[[\"28\",1],[\"00:01:23\",1],[\"s3\",1],[\"line\",1]]],[\"28\",[[\"|\",1]]],[\"00:01:23\",[[\"|\",1]]],[\"s3\",[[\"|\",1]]],[\"line\",[[\"27\",1]]],[\"27\",[[\"|\",1]]]],7]\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 29
+      },
+      "bwt": {
+        "tokens": 569
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "klados": [
+        {
+          "policy": "local",
+          "tokens": 1264
+        },
+        {
+          "policy": "eager",
+          "tokens": 1376
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 1354
+        },
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 1359
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 2242
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 2425
+        }
+      ],
+      "raw": 1144,
+      "frequency": [
+        {
+          "tokens": 1140,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1147,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1179,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1192,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1311,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1317,
+          "n": 32,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 1123,
+          "n": 512
+        },
+        {
+          "tokens": 1160,
+          "n": 128
+        },
+        {
+          "tokens": 1296,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 1226
+        },
+        {
+          "tokens": 1362
+        },
+        {
+          "tokens": 1519
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 1744,
+          "levels": 1
+        },
+        {
+          "tokens": 1765,
+          "levels": 2
+        },
+        {
+          "tokens": 1775,
+          "levels": 4
+        },
+        {
+          "tokens": 1777,
+          "levels": 12
+        },
+        {
+          "tokens": 2002,
+          "levels": 1
+        },
+        {
+          "tokens": 2002,
+          "levels": 2
+        },
+        {
+          "tokens": 2002,
+          "levels": 4
+        },
+        {
+          "tokens": 2002,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 1932
+      },
+      "rankedGraph": {
+        "tokens": 1248,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"ps\",1]]],[\"ps\",[[\"-ef\",1]]],[\"-ef\",[[\"(real)\",1]]]],0]\nUID          PID    PPID  C STIME TTY          TIME CMD\nroot           1       0  0 20:41 ?        00:00:00 /sbin/init\nroot           2       0  0 20:41 ?        00:00:00 [kthreadd]\nroot           3       2  0 20:41 ?        00:00:00 [rcu_gp]\nroot           4       2  0 20:41 ?        00:00:00 [rcu_par_gp]\nroot           5       2  0 20:41 ?        00:00:00 [slub_flushwq]\nroot           6       2  0 20:41 ?        00:00:00 [netns]\nroot           8       2  0 20:41 ?        00:00:00 [kworker/0:0H-events_highpri]\nroot          10       2  0 20:41 ?        00:00:00 [mm_percpu_wq]\nroot          11       2  0 20:41 ?        00:00:00 [rcu_tasks_kthread]\nroot          12       2  0 20:41 ?        00:00:00 [rcu_tasks_trace_kthread]\nroot          13       2  0 20:41 ?        00:00:00 [ksoftirqd/0]\nroot          14       2  0 20:41 ?        00:00:01 [rcu_preempt]\nroot          15       2  0 20:41 ?        00:00:00 [migration/0]\nroot          17       2  0 20:41 ?        00:00:00 [cpuhp/0]\nroot          18       2  0 20:41 ?        00:00:00 [cpuhp/1]\nroot          19       2  0 20:41 ?        00:00:00 [migration/1]\nroot          20       2  0 20:41 ?        00:00:00 [ksoftirqd/1]\nroot          22       2  0 20:41 ?        00:00:00 [kworker/1:0H-events_highpri]\nroot          25       2  0 20:41 ?        00:00:00 [kdevtmpfs]\nroot          26       2  0 20:41 ?        00:00:00 [inet_frag_wq]\nroot          27       2  0 20:41 ?        00:00:00 [kauditd]\nroot          28       2  0 20:41 ?        00:00:00 [kworker/1:1-mm_percpu_wq]\nroot          29       2  0 20:41 ?        00:00:00 [khungtaskd]\nroot          30       2  0 20:41 ?        00:00:00 [oom_reaper]\nroot          31       2  0 20:41 ?        00:00:00 [writeback]\nroot          32       2  0 20:41 ?        00:00:00 [kcompactd0]\nroot          33       2  0 20:41 ?        00:00:00 [ksmd]\nroot          34       2  0 20:41 ?        00:00:00 [khugepaged]\nroot          35       2  0 20:41 ?        00:00:00 [kintegrityd]\nroot          36       2  0 20:41 ?        00:00:00 [kblockd]\nroot          37       2  0 20:41 ?        00:00:00 [blkcg_punt_bio]\nroot          38       2  0 20:41 ?        00:00:00 [watchdogd]\nroot          39       2  0 20:41 ?        00:00:00 [rpciod]\nroot          40       2  0 20:41 ?        00:00:00 [kworker/1:1H-kblockd]\nroot          41       2  0 20:41 ?        00:00:00 [xprtiod]\nroot          61       2  0 20:41 ?        00:00:00 [kswapd0]\nroot          65       2  0 20:41 ?        00:00:00 [nfsiod]\nroot          67       2  0 20:41 ?        00:00:00 [kworker/0:1H-kblockd]\nroot          70       2  0 20:41 ?        00:00:00 [xfsalloc]\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 1
+      },
+      "bwt": {
+        "tokens": 1064
+      },
+      "anchor": [
+        {
+          "tokens": 1204
+        },
+        {
+          "tokens": 1204
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 296
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 322
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 322
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 427
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 445
+        }
+      ],
+      "raw": 158,
+      "frequency": [
+        {
+          "tokens": 279,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 279,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 279,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 279,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 286,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 290,
+          "n": 32,
+          "order": "decreasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 258,
+          "n": 128
+        },
+        {
+          "tokens": 271,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 209
+        },
+        {
+          "tokens": 230
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 295,
+          "levels": 2
+        },
+        {
+          "tokens": 296,
+          "levels": 1
+        },
+        {
+          "tokens": 297,
+          "levels": 4
+        },
+        {
+          "tokens": 299,
+          "levels": 12
+        },
+        {
+          "tokens": 326,
+          "levels": 2
+        },
+        {
+          "tokens": 326,
+          "levels": 4
+        },
+        {
+          "tokens": 326,
+          "levels": 12
+        },
+        {
+          "tokens": 327,
+          "levels": 1
+        }
+      ],
+      "xor": {
+        "tokens": 257
+      },
+      "rankedGraph": {
+        "tokens": 351,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"df\",1]]],[\"df\",[[\"-h\",1]]],[\"-h\",[[\"(real,\",1]]],[\"(real,\",[[\"this\",1]]],[\"this\",[[\"sandbox,\",1]]],[\"sandbox,\",[[\"2026-10-24T17:52:16Z)\",1]]]],0]\n~[\"Filesystem\",[[\"Filesystem\",[[\"\",1]]],[\"\",[[\"\",4],[\"Size\",1],[\"Used\",1]]],[\"Size\",[[\"\",1]]],[\"Used\",[[\"Avail\",1]]],[\"Avail\",[[\"Use%\",1]]],[\"Use%\",[[\"Mounted\",1]]],[\"Mounted\",[[\"on\",1]]]],0]\n/dev/root        21G  1.7G   19G   9% /\ndevtmpfs        2.0G     0  2.0G   0% /dev\ntmpfs           2.0G     0  2.0G   0% /dev/shm\ntmpfs           788M  288K  788M   1% /run\ntmpfs           5.0M     0  5.0M   0% /run/lock\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 2
+      },
+      "bwt": {
+        "tokens": 205
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "klados": [
+        {
+          "policy": "local",
+          "tokens": 1226
+        },
+        {
+          "policy": "eager",
+          "tokens": 1381
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 1319
+        },
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 1324
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 1956
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 2063
+        }
+      ],
+      "raw": 1106,
+      "frequency": [
+        {
+          "tokens": 1106,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1110,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1132,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1139,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 1218,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 1236,
+          "n": 32,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 1084,
+          "n": 512
+        },
+        {
+          "tokens": 1107,
+          "n": 128
+        },
+        {
+          "tokens": 1191,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 1180
+        },
+        {
+          "tokens": 1377
+        },
+        {
+          "tokens": 1534
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 1372,
+          "levels": 1
+        },
+        {
+          "tokens": 1383,
+          "levels": 2
+        },
+        {
+          "tokens": 1392,
+          "levels": 4
+        },
+        {
+          "tokens": 1394,
+          "levels": 12
+        },
+        {
+          "tokens": 1681,
+          "levels": 1
+        },
+        {
+          "tokens": 1681,
+          "levels": 2
+        },
+        {
+          "tokens": 1681,
+          "levels": 4
+        },
+        {
+          "tokens": 1681,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 1613
+      },
+      "rankedGraph": {
+        "tokens": 1240,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"ps\",1]]],[\"ps\",[[\"-eo\",1]]],[\"-eo\",[[\"pid,user,pcpu,pmem,etime,args\",1]]],[\"pid,user,pcpu,pmem,etime,args\",[[\"--sort=-pcpu\",1]]],[\"--sort=-pcpu\",[[\"(real)\",1]]]],0]\n    PID USER     %CPU %MEM     ELAPSED COMMAND\n   1553 user      104 15.7       02:59 node /tmp/_run_1539.mjs\n   1229 root      0.4  0.4       05:40 /usr/bin/envd\n    294 root      0.0  0.0       05:49 [kworker/u4:3-ext4-rsv-conversion]\n     14 root      0.0  0.0       05:50 [rcu_preempt]\n     21 root      0.0  0.0       05:50 [kworker/1:0-mm_percpu_wq]\n      1 root      0.0  0.2       05:50 /sbin/init\n     40 root      0.0  0.0       05:49 [kworker/1:1H-kblockd]\n     63 root      0.0  0.0       05:49 [kworker/u4:2-events_unbound]\n     24 root      0.0  0.0       05:50 [kworker/u4:1-events_unbound]\n      9 root      0.0  0.0       05:50 [kworker/u4:0-flush-254:0]\n    284 root      0.0  0.1       05:49 /lib/systemd/systemd-journald\n     67 root      0.0  0.0       05:49 [kworker/0:1H-kblockd]\n     19 root      0.0  0.0       05:50 [migration/1]\n    252 root      0.0  0.0       05:49 [jbd2/vda-8]\n     20 root      0.0  0.0       05:50 [ksoftirqd/1]\n    306 systemd+  0.0  0.2       05:49 /lib/systemd/systemd-networkd\n     13 root      0.0  0.0       05:50 [ksoftirqd/0]\n    320 _chrony   0.0  0.0       05:49 /usr/sbin/chronyd -F 1\n     16 root      0.0  0.0       05:50 [kworker/0:1-events]\n      2 root      0.0  0.0       05:50 [kthreadd]\n      3 root      0.0  0.0       05:50 [rcu_gp]\n      4 root      0.0  0.0       05:50 [rcu_par_gp]\n      5 root      0.0  0.0       05:50 [slub_flushwq]\n      6 root      0.0  0.0       05:50 [netns]\n      8 root      0.0  0.0       05:50 [kworker/0:0H-events_highpri]\n     10 root      0.0  0.0       05:50 [mm_percpu_wq]\n     11 root      0.0  0.0       05:50 [rcu_tasks_kthread]\n     12 root      0.0  0.0       05:50 [rcu_tasks_trace_kthread]\n     15 root      0.0  0.0       05:50 [migration/0]\n     17 root      0.0  0.0       05:50 [cpuhp/0]\n     18 root      0.0  0.0       05:50 [cpuhp/1]\n     22 root      0.0  0.0       05:50 [kworker/1:0H-events_highpri]\n     25 root      0.0  0.0       05:50 [kdevtmpfs]\n     26 root      0.0  0.0       05:50 [inet_frag_wq]\n     27 root      0.0  0.0       05:50 [kauditd]\n     28 root      0.0  0.0       05:50 [kworker/1:1-mm_percpu_wq]\n     29 root      0.0  0.0       05:50 [khungtaskd]\n     30 root      0.0  0.0       05:50 [oom_reaper]\n     31 root      0.0  0.0       05:50 [writeback]\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 1
+      },
+      "bwt": {
+        "tokens": 1033
+      },
+      "anchor": [
+        {
+          "tokens": 1168
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 733
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 741
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 741
+        },
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 755
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 755
+        }
+      ],
+      "raw": 582,
+      "frequency": [],
+      "bbwt": [],
+      "strofos": [
+        {
+          "tokens": 633
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 1081,
+          "levels": 1
+        },
+        {
+          "tokens": 1084,
+          "levels": 2
+        },
+        {
+          "tokens": 1095,
+          "levels": 4
+        },
+        {
+          "tokens": 1102,
+          "levels": 12
+        },
+        {
+          "tokens": 1186,
+          "levels": 2
+        },
+        {
+          "tokens": 1186,
+          "levels": 4
+        },
+        {
+          "tokens": 1186,
+          "levels": 12
+        },
+        {
+          "tokens": 1200,
+          "levels": 1
+        }
+      ],
+      "xor": {
+        "tokens": 1130
+      },
+      "rankedGraph": null,
+      "bwt": {
+        "tokens": 638
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 885
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 870
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 870
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 1287
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 1322
+        }
+      ],
+      "raw": 675,
+      "frequency": [
+        {
+          "tokens": 765,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 766,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 773,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 776,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 797,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 806,
+          "n": 32,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 748,
+          "n": 512
+        },
+        {
+          "tokens": 756,
+          "n": 128
+        },
+        {
+          "tokens": 782,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 821
+        },
+        {
+          "tokens": 836
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 1043,
+          "levels": 2
+        },
+        {
+          "tokens": 1045,
+          "levels": 1
+        },
+        {
+          "tokens": 1051,
+          "levels": 4
+        },
+        {
+          "tokens": 1056,
+          "levels": 12
+        },
+        {
+          "tokens": 1171,
+          "levels": 2
+        },
+        {
+          "tokens": 1171,
+          "levels": 4
+        },
+        {
+          "tokens": 1171,
+          "levels": 12
+        },
+        {
+          "tokens": 1185,
+          "levels": 1
+        }
+      ],
+      "xor": {
+        "tokens": 1115
+      },
+      "rankedGraph": {
+        "tokens": 755,
+        "folded": "+----+--------------+------------+--------+-----------+\n| id | name         | created    | amount | status    |\n+----+--------------+------------+--------+-----------+\n| 10 | user_0000    | 2026-01-01 | 100.00 | active    |\n| 11 | user_0001    | 2026-02-02 | 107.30 | pending   |\n| 12 | user_0002    | 2026-03-03 | 114.60 | closed    |\n| 13 | user_0003    | 2026-04-04 | 121.90 | active    |\n| 14 | user_0004    | 2026-05-05 | 129.20 | pending   |\n| 15 | user_0005    | 2026-06-06 | 136.50 | closed    |\n| 16 | user_0006    | 2026-07-07 | 143.80 | active    |\n| 17 | user_0007    | 2026-08-08 | 151.10 | pending   |\n| 18 | user_0008    | 2026-09-09 | 158.40 | closed    |\n| 19 | user_0009    | 2026-10-10 | 165.70 | active    |\n| 20 | user_0010    | 2026-11-11 | 173.00 | pending   |\n| 21 | user_0011    | 2026-12-12 | 180.30 | closed    |\n| 22 | user_0012    | 2026-01-13 | 187.60 | active    |\n| 23 | user_0013    | 2026-02-14 | 194.90 | pending   |\n| 24 | user_0014    | 2026-03-15 | 202.20 | closed    |\n| 25 | user_0015    | 2026-04-16 | 209.50 | active    |\n| 26 | user_0016    | 2026-05-17 | 216.80 | pending   |\n| 27 | user_0017    | 2026-06-18 | 224.10 | closed    |\n| 28 | user_0018    | 2026-07-19 | 231.40 | active    |\n| 29 | user_0019    | 2026-08-20 | 238.70 | pending   |\n| 30 | user_0020    | 2026-09-21 | 246.00 | closed    |\n| 31 | user_0021    | 2026-10-22 | 253.30 | active    |\n| 32 | user_0022    | 2026-11-23 | 260.60 | pending   |\n| 33 | user_0023    | 2026-12-24 | 267.90 | closed    |\n+----+--------------+------------+--------+-----------+\n~[\"(24\",[[\"(24\",[[\"rows)\",1]]]],0]\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 1
+      },
+      "bwt": {
+        "tokens": 695
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 502
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 509
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 509
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 724
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 741
+        }
+      ],
+      "raw": 330,
+      "frequency": [
+        {
+          "tokens": 457,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 457,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 457,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 457,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 457,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 457,
+          "n": 512,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 439,
+          "n": 32
+        },
+        {
+          "tokens": 439,
+          "n": 128
+        },
+        {
+          "tokens": 439,
+          "n": 512
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 405
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 472,
+          "levels": 1
+        },
+        {
+          "tokens": 475,
+          "levels": 2
+        },
+        {
+          "tokens": 477,
+          "levels": 4
+        },
+        {
+          "tokens": 477,
+          "levels": 12
+        },
+        {
+          "tokens": 555,
+          "levels": 1
+        },
+        {
+          "tokens": 555,
+          "levels": 2
+        },
+        {
+          "tokens": 555,
+          "levels": 4
+        },
+        {
+          "tokens": 555,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 485
+      },
+      "rankedGraph": {
+        "tokens": 472,
+        "folded": "~[\"|\",[[\"|\",[[\"Metric\",1],[\"Baseline\",1],[\"Variant\",2],[\"Delta\",1]]],[\"Metric\",[[\"|\",1]]],[\"Baseline\",[[\"|\",1]]],[\"Variant\",[[\"A\",1],[\"B\",1]]],[\"A\",[[\"|\",1]]],[\"B\",[[\"|\",1]]],[\"Delta\",[[\"|\",1]]]],51]\n|---|---|---|---|---|\n| Cold start | 40.0 s | 30.0 s | 22.0 s | **-12.5%** |\n| Warm start | 37.5 s | 28.0 s | 20.5 s | **-14.2%** |\n| Hot reload p50 | 35.0 s | 26.0 s | 19.0 s | **-15.9%** |\n| Hot reload p95 | 32.5 s | 24.0 s | 17.5 s | **-17.6%** |\n| Prod build | 30.0 s | 22.0 s | 16.0 s | **-19.3%** |\n| Bundle gzip | 27.5 s | 20.0 s | 14.5 s | **-21.0%** |\n| Test wall-clock | 25.0 s | 18.0 s | 13.0 s | **-22.7%** |\n| Memory peak | 22.5 s | 16.0 s | 11.5 s | **-24.4%** |\n| CPU user | 20.0 s | 14.0 s | 10.0 s | **-26.1%** |\n| CPU sys | 17.5 s | 12.0 s | 8.5 s | **-27.8%** |\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 1
+      },
+      "bwt": {
+        "tokens": 386
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 1637
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 842
+        },
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 852
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 1812
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 1830
+        }
+      ],
+      "raw": 656,
+      "frequency": [
+        {
+          "tokens": 783,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 783,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 783,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 783,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 783,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 783,
+          "n": 512,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 765,
+          "n": 32
+        },
+        {
+          "tokens": 765,
+          "n": 128
+        },
+        {
+          "tokens": 765,
+          "n": 512
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 820
+        },
+        {
+          "tokens": 1058
+        },
+        {
+          "tokens": 1060
+        },
+        {
+          "tokens": 1837
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 795,
+          "levels": 1
+        },
+        {
+          "tokens": 801,
+          "levels": 1
+        }
+      ],
+      "xor": {
+        "tokens": 725
+      },
+      "rankedGraph": {
+        "tokens": 1419,
+        "folded": "~[\"Understanding\",[[\"Understanding\",[[\"Retention\",1]]],[\"Retention\",[[\"Policies\",1]]],[\"Policies\",[[\"in\",1]]],[\"in\",[[\"Northgate\",1]]],[\"Northgate\",[[\"Vault\",1]]]],0]\n\nA retention policy determines how long Northgate Vault keeps a document before it becomes\n~[\"eligible\",[[\"eligible\",[[\"for\",1]]],[\"for\",[[\"permanent\",1]]],[\"permanent\",[[\"deletion.\",1]]],[\"deletion.\",[[\"Every\",1]]],[\"Every\",[[\"document\",1]]],[\"document\",[[\"inherits\",1]]],[\"inherits\",[[\"exactly\",1]]],[\"exactly\",[[\"one\",1]]],[\"one\",[[\"retention\",1]]],[\"retention\",[[\"policy,\",1]]],[\"policy,\",[[\"and\",1]]],[\"and\",[[\"that\",1]]]],0]\npolicy is resolved at the moment the document is created. Changing a policy later affects only\ndocuments created after the change; it never retroactively alters the disposition date of a\n~[\"document\",[[\"document\",[[\"that\",1]]],[\"that\",[[\"already\",1]]],[\"already\",[[\"exists.\",1]]],[\"exists.\",[[\"This\",1]]],[\"This\",[[\"behaviour\",1]]],[\"behaviour\",[[\"is\",1]]],[\"is\",[[\"deliberate,\",1]]],[\"deliberate,\",[[\"because\",1]]],[\"because\",[[\"retroactive\",1]]],[\"retroactive\",[[\"changes\",1]]],[\"changes\",[[\"would\",1]]]],0]\nmake it impossible to prove to an auditor what the disposition schedule was at any given point\n~[\"in\",[[\"in\",[[\"the\",1]]],[\"the\",[[\"past.\",1]]]],0]\n\nPolicies are evaluated in a fixed order. The system first looks for a policy attached directly to\nthe document. If none exists, it looks for a policy attached to the folder that contains the\ndocument, then to that folder's parent, and so on up to the workspace root. If no policy is found\nanywhere on that path, the workspace default applies. The workspace default cannot be removed,\n~[\"only\",[[\"only\",[[\"changed,\",1]]],[\"changed,\",[[\"which\",1]]],[\"which\",[[\"guarantees\",1]]],[\"guarantees\",[[\"that\",1]]],[\"that\",[[\"every\",1]]],[\"every\",[[\"document\",1]]],[\"document\",[[\"always\",1]]],[\"always\",[[\"resolves\",1]]],[\"resolves\",[[\"to\",1]]],[\"to\",[[\"some\",1]]],[\"some\",[[\"policy.\",1]]]],0]\n\nThere are three kinds of disposition. Soft deletion moves the document to a recycle bin where it\nremains visible to administrators for a further thirty days. Hard deletion removes the document\ncontent but keeps an immutable audit stub recording that a document existed, who created it, and\nwhen it was disposed. Purge removes everything, including the audit stub, and is only available\nto workspaces operating under a legal regime that requires it; most customers should never enable\n~[\"purge,\",[[\"purge,\",[[\"because\",1]]],[\"because\",[[\"it\",1]]],[\"it\",[[\"destroys\",1]]],[\"destroys\",[[\"the\",1]]],[\"the\",[[\"evidence\",1],[\"retention\",1]]],[\"evidence\",[[\"that\",1]]],[\"that\",[[\"the\",1]]],[\"retention\",[[\"policy\",1]]],[\"policy\",[[\"was\",1]]],[\"was\",[[\"followed.\",1]]]],0]\n\nA legal hold suspends all disposition for the documents it covers. Holds take precedence over\nevery policy, including purge, and they cannot be overridden by an administrator. Only a user with\nthe Legal Hold Officer role may place or release a hold, and every placement and release is\nwritten to the audit log with the reason supplied by that user. When a hold is released, the\naffected documents return to their normal schedule; if their disposition date has already passed,\n~[\"they\",[[\"they\",[[\"become\",1]]],[\"become\",[[\"eligible\",1]]],[\"eligible\",[[\"immediately\",1]]],[\"immediately\",[[\"and\",1]]],[\"and\",[[\"will\",1]]],[\"will\",[[\"be\",1]]],[\"be\",[[\"processed\",1]]],[\"processed\",[[\"in\",1]]],[\"in\",[[\"the\",1]]],[\"the\",[[\"next\",1]]],[\"next\",[[\"nightly\",1]]],[\"nightly\",[[\"sweep.\",1]]]],0]\n\nThe nightly sweep runs at 02:00 in the workspace's configured timezone. It processes documents in\ncreation order, oldest first, and stops after four hours regardless of how much work remains.\nAnything not processed is picked up by the next sweep. Because the sweep is time-bounded rather\nthan work-bounded, a workspace with a very large backlog may take several nights to catch up, and\nadministrators sometimes mistake this for a failure. The sweep report, available under Reports and\nAudit, shows exactly how many documents were considered, how many were disposed, and how many\n~[\"remained\",[[\"remained\",[[\"in\",1]]],[\"in\",[[\"the\",1]]],[\"the\",[[\"queue\",1],[\"sweep\",1]]],[\"queue\",[[\"when\",1]]],[\"when\",[[\"the\",1]]],[\"sweep\",[[\"stopped.\",1]]]],0]\n\nTwo questions come up repeatedly in support tickets. The first is why a document with an expired\ndisposition date is still visible. Almost always the answer is either an active legal hold or a\nbacklogged sweep, both of which the sweep report will show. The second is whether a retention\npolicy can be shortened. It can, but only for future documents, and the interface deliberately\nmakes this awkward in order to prevent an administrator from accidentally believing that existing\n~[\"documents\",[[\"documents\",[[\"have\",1]]],[\"have\",[[\"been\",1]]],[\"been\",[[\"reshuffled\",1]]],[\"reshuffled\",[[\"onto\",1]]],[\"onto\",[[\"the\",1]]],[\"the\",[[\"shorter\",1]]],[\"shorter\",[[\"schedule.\",1]]]],0]\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 9
+      },
+      "bwt": {
+        "tokens": 712
+      },
+      "anchor": [
+        {
+          "tokens": 732
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 989
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 790
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 794
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 1087
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 1119
+        }
+      ],
+      "raw": 578,
+      "frequency": [
+        {
+          "tokens": 703,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 704,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 705,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 705,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 706,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 708,
+          "n": 512,
+          "order": "decreasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 688,
+          "n": 512
+        },
+        {
+          "tokens": 689,
+          "n": 32
+        },
+        {
+          "tokens": 689,
+          "n": 128
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 655
+        },
+        {
+          "tokens": 772
+        },
+        {
+          "tokens": 859
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 781,
+          "levels": 1
+        },
+        {
+          "tokens": 789,
+          "levels": 2
+        },
+        {
+          "tokens": 796,
+          "levels": 4
+        },
+        {
+          "tokens": 803,
+          "levels": 12
+        },
+        {
+          "tokens": 876,
+          "levels": 1
+        },
+        {
+          "tokens": 878,
+          "levels": 2
+        },
+        {
+          "tokens": 882,
+          "levels": 4
+        },
+        {
+          "tokens": 885,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 808
+      },
+      "rankedGraph": {
+        "tokens": 2109,
+        "folded": "~[\"diff\",[[\"diff\",[[\"--git\",1]]],[\"--git\",[[\"a/src/lib/omega/chiron.ts\",1]]],[\"a/src/lib/omega/chiron.ts\",[[\"b/src/lib/omega/chiron.ts\",1]]]],0]\n~[\"index\",[[\"index\",[[\"3f8a1c2..9d4e7b0\",1]]],[\"3f8a1c2..9d4e7b0\",[[\"100644\",1]]]],0]\n~[\"---\",[[\"---\",[[\"a/src/lib/omega/chiron.ts\",1]]]],0]\n~[\"+++\",[[\"+++\",[[\"b/src/lib/omega/chiron.ts\",1]]]],0]\n~[\"@@\",[[\"@@\",[[\"-140,6\",1],[\"export\",1]]],[\"-140,6\",[[\"+140,7\",1]]],[\"+140,7\",[[\"@@\",1]]],[\"export\",[[\"interface\",1]]],[\"interface\",[[\"ChironScript\",1]]],[\"ChironScript\",[[\"{\",1]]]],0]\n~[\"\",[[\"\",[[\"\",2],[\"label:\",1]]],[\"label:\",[[\"string;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",2],[\"lo:\",1]]],[\"lo:\",[[\"number;\",1]]]],0]\n~[\"\",[[\"\",[[\"\",2],[\"hi:\",1]]],[\"hi:\",[[\"number;\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"ranges?:\",1]]],[\"ranges?:\",[[\"Array<[number,\",1]]],[\"Array<[number,\",[[\"number]>;\",1]]]],0]\n~[\"\",[[\"\",[[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1]]]],0]\n~[\"\",[[\"\",[[\"export\",1]]],[\"export\",[[\"const\",1]]],[\"const\",[[\"CHIRON_SCRIPTS:\",1]]],[\"CHIRON_SCRIPTS:\",[[\"ChironScript[]\",1]]],[\"ChironScript[]\",[[\"=\",1]]],[\"=\",[[\"[\",1]]]],0]\n~[\"@@\",[[\"@@\",[[\"-152,6\",1],[\"export\",1]]],[\"-152,6\",[[\"+153,18\",1]]],[\"+153,18\",[[\"@@\",1]]],[\"export\",[[\"const\",1]]],[\"const\",[[\"CHIRON_SCRIPTS:\",1]]],[\"CHIRON_SCRIPTS:\",[[\"ChironScript[]\",1]]],[\"ChironScript[]\",[[\"=\",1]]],[\"=\",[[\"[\",1]]]],0]\n   { name: 'khmer', label: 'Khmer letter', lo: 0x1780, hi: 0x1800 },\n   { name: 'cjk', label: 'Chinese character', lo: 0x4e00, hi: 0xa000 },\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"{\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"\",2],[\"name:\",1]]],[\"name:\",[[\"'polyglot',\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"\",2],[\"label:\",1]]],[\"label:\",[[\"'Greek,\",1]]],[\"'Greek,\",[[\"Hebrew,\",1]]],[\"Hebrew,\",[[\"Armenian,\",1]]],[\"Armenian,\",[[\"Georgian,\",1]]],[\"Georgian,\",[[\"Thai\",1]]],[\"Thai\",[[\"or\",1]]],[\"or\",[[\"Indic\",1]]],[\"Indic\",[[\"letter',\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"\",2],[\"lo:\",1]]],[\"lo:\",[[\"0x0370,\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"\",2],[\"hi:\",1]]],[\"hi:\",[[\"0x0370,\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"\",2],[\"ranges:\",1]]],[\"ranges:\",[[\"[\",1]]]],0]\n+      [0x0370, 0x0400], [0x0530, 0x0590], [0x0590, 0x0600], [0x0900, 0x0980],\n+      [0x0980, 0x0a00], [0x0a00, 0x0a80], [0x0a80, 0x0b00], [0x0b80, 0x0c00],\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"\",2],[\"],\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"},\",1]]]],0]\n~[\"\",[[\"\",[[\"];\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1]]]],0]\n~[\"\",[[\"\",[[\"const\",1]]],[\"const\",[[\"poolCache\",1]]],[\"poolCache\",[[\"=\",1]]],[\"=\",[[\"new\",1]]],[\"new\",[[\"Map<string,\",1]]],[\"Map<string,\",[[\"string[]>();\",1]]]],0]\n~[\"diff\",[[\"diff\",[[\"--git\",1]]],[\"--git\",[[\"a/src/lib/omega/ariadne.ts\",1]]],[\"a/src/lib/omega/ariadne.ts\",[[\"b/src/lib/omega/ariadne.ts\",1]]]],0]\n~[\"index\",[[\"index\",[[\"1a2b3c4..5e6f7a8\",1]]],[\"1a2b3c4..5e6f7a8\",[[\"100644\",1]]]],0]\n~[\"---\",[[\"---\",[[\"a/src/lib/omega/ariadne.ts\",1]]]],0]\n~[\"+++\",[[\"+++\",[[\"b/src/lib/omega/ariadne.ts\",1]]]],0]\n~[\"@@\",[[\"@@\",[[\"-848,10\",1],[\"function\",1]]],[\"-848,10\",[[\"+848,14\",1]]],[\"+848,14\",[[\"@@\",1]]],[\"function\",[[\"assignmentGain(rules:\",1]]],[\"assignmentGain(rules:\",[[\"Rule[],\",1]]],[\"Rule[],\",[[\"pool:\",1]]],[\"pool:\",[[\"string[]):\",1]]],[\"string[]):\",[[\"number\",1]]],[\"number\",[[\"{\",1]]]],0]\n~[\"-\",[[\"-\",[[\"\",1]]],[\"\",[[\"let\",1]]],[\"let\",[[\"total\",1]]],[\"total\",[[\"=\",1]]],[\"=\",[[\"0;\",1]]]],0]\n~[\"-\",[[\"-\",[[\"\",1]]],[\"\",[[\"for\",1]]],[\"for\",[[\"(const\",1]]],[\"(const\",[[\"r\",1]]],[\"r\",[[\"of\",1]]],[\"of\",[[\"rules)\",1]]],[\"rules)\",[[\"total\",1]]],[\"total\",[[\"+=\",1]]],[\"+=\",[[\"r.count;\",1]]]],0]\n~[\"-\",[[\"-\",[[\"\",1]]],[\"\",[[\"return\",1]]],[\"return\",[[\"total;\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"let\",1]]],[\"let\",[[\"total\",1]]],[\"total\",[[\"=\",1]]],[\"=\",[[\"0;\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"for\",1]]],[\"for\",[[\"(const\",1]]],[\"(const\",[[\"r\",1]]],[\"r\",[[\"of\",1]]],[\"of\",[[\"rules)\",1]]],[\"rules)\",[[\"{\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"\",2],[\"total\",1]]],[\"total\",[[\"+=\",1]]],[\"+=\",[[\"r.count;\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"\",2],[\"if\",1]]],[\"if\",[[\"(r.adjacent)\",1]]],[\"(r.adjacent)\",[[\"total\",1]]],[\"total\",[[\"+=\",1]]],[\"+=\",[[\"r.adjacent\",1]]],[\"r.adjacent\",[[\"*\",1]]],[\"*\",[[\"0.5;\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"}\",1]]]],0]\n~[\"+\",[[\"+\",[[\"\",1]]],[\"\",[[\"return\",1]]],[\"return\",[[\"Math.round(total);\",1]]]],0]\n~[\"\",[[\"\",[[\"}\",1]]]],0]\n~[\"\",[[\"\",[[\"\",1]]]],0]\n~[\"\",[[\"\",[[\"function\",1]]],[\"function\",[[\"searchGain(rules:\",1]]],[\"searchGain(rules:\",[[\"Rule[],\",1]]],[\"Rule[],\",[[\"pool:\",1]]],[\"pool:\",[[\"string[],\",1]]],[\"string[],\",[[\"budgetMs:\",1]]],[\"budgetMs:\",[[\"number):\",1]]],[\"number):\",[[\"number\",1]]],[\"number\",[[\"{\",1]]]],0]\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 41
+      },
+      "bwt": {
+        "tokens": 635
+      },
+      "anchor": [
+        {
+          "tokens": 633
+        },
+        {
+          "tokens": 636
+        }
+      ]
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "klados": [
+        {
+          "policy": "eager",
+          "tokens": 201
+        }
+      ],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 237
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 237
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 355
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 373
+        }
+      ],
+      "raw": 76,
+      "frequency": [
+        {
+          "tokens": 201,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 202,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 203,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 203,
+          "n": 32,
+          "order": "increasing"
+        },
+        {
+          "tokens": 205,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 205,
+          "n": 128,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 184,
+          "n": 512
+        },
+        {
+          "tokens": 185,
+          "n": 32
+        },
+        {
+          "tokens": 188,
+          "n": 128
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 126
+        },
+        {
+          "tokens": 157
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 216,
+          "levels": 1
+        },
+        {
+          "tokens": 216,
+          "levels": 2
+        },
+        {
+          "tokens": 217,
+          "levels": 4
+        },
+        {
+          "tokens": 227,
+          "levels": 4
+        },
+        {
+          "tokens": 228,
+          "levels": 2
+        },
+        {
+          "tokens": 229,
+          "levels": 1
+        }
+      ],
+      "xor": {
+        "tokens": 159
+      },
+      "rankedGraph": {
+        "tokens": 198,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"free\",1]]],[\"free\",[[\"-m\",1]]],[\"-m\",[[\"(real,\",1]]],[\"(real,\",[[\"captured\",1]]],[\"captured\",[[\"2026-10-24T23:21:28Z)\",1]]]],0]\n               total        used        free      shared  buff/cache   available\nMem:            3939        1451        2088           1         635        2488\nSwap:              0           0           0\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 1
+      },
+      "bwt": {
+        "tokens": 131
+      },
+      "anchor": []
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "klados": [],
+      "pinakas": [
+        {
+          "n": 32,
+          "mode": "LF",
+          "tokens": 395
+        },
+        {
+          "n": 128,
+          "mode": "LF",
+          "tokens": 395
+        },
+        {
+          "n": 32,
+          "mode": "space",
+          "tokens": 528
+        },
+        {
+          "n": 128,
+          "mode": "space",
+          "tokens": 543
+        }
+      ],
+      "raw": 229,
+      "frequency": [
+        {
+          "tokens": 329,
+          "n": 512,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 330,
+          "n": 512,
+          "order": "increasing"
+        },
+        {
+          "tokens": 336,
+          "n": 128,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 340,
+          "n": 128,
+          "order": "increasing"
+        },
+        {
+          "tokens": 342,
+          "n": 32,
+          "order": "decreasing"
+        },
+        {
+          "tokens": 345,
+          "n": 32,
+          "order": "increasing"
+        }
+      ],
+      "bbwt": [
+        {
+          "tokens": 312,
+          "n": 512
+        },
+        {
+          "tokens": 318,
+          "n": 128
+        },
+        {
+          "tokens": 324,
+          "n": 32
+        }
+      ],
+      "strofos": [
+        {
+          "tokens": 275
+        },
+        {
+          "tokens": 312
+        }
+      ],
+      "sparse": [],
+      "lifting": [
+        {
+          "tokens": 373,
+          "levels": 1
+        },
+        {
+          "tokens": 373,
+          "levels": 2
+        },
+        {
+          "tokens": 379,
+          "levels": 4
+        },
+        {
+          "tokens": 380,
+          "levels": 12
+        },
+        {
+          "tokens": 430,
+          "levels": 1
+        },
+        {
+          "tokens": 430,
+          "levels": 2
+        },
+        {
+          "tokens": 435,
+          "levels": 4
+        },
+        {
+          "tokens": 435,
+          "levels": 12
+        }
+      ],
+      "xor": {
+        "tokens": 360
+      },
+      "rankedGraph": {
+        "tokens": 410,
+        "folded": "~[\"#\",[[\"#\",[[\"source:\",1]]],[\"source:\",[[\"vmstat\",1]]],[\"vmstat\",[[\"1\",1]]],[\"1\",[[\"3\",1]]],[\"3\",[[\"(real,\",1]]],[\"(real,\",[[\"captured\",1]]],[\"captured\",[[\"2026-10-24T23:21:26Z)\",1]]]],0]\n~[\"procs\",[[\"procs\",[[\"-----------memory----------\",1]]],[\"-----------memory----------\",[[\"---swap--\",1]]],[\"---swap--\",[[\"-----io----\",1]]],[\"-----io----\",[[\"-system--\",1]]],[\"-system--\",[[\"------cpu-----\",1]]]],0]\n r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st\n 2  0      0 2140656  53860 596816    0    0    12    59  268  433 54  1 45  0  0\n 2  0      0 2140656  53860 596816    0    0     0     0  494  545 51  1 49  0  0\n 2  0      0 2140656  53860 596816    0    0     0     0  445  367 50  1 49  0  0\n",
+        "key": "Decode first. Each ~ line is JSON [start,transition rows [from,edges [to,count]],rank]. List distinct complete vertex-label walks from start using all counted edges, in ASCII lexicographic label order. Choose the zero-based rank, join labels with ASCII spaces. Other lines and line breaks are literal; print only.\n",
+        "graphs": 2
+      },
+      "bwt": {
+        "tokens": 259
+      },
+      "anchor": []
+    }
+  ],
+  "coverClasses": [
+    {
+      "length": 4,
+      "histogram": {
+        "a": 2,
+        "b": 2
+      },
+      "cover": "ab",
+      "multiplicity": 2,
+      "fixedBinaryDisambiguationBits": 1,
+      "witness": [
+        "aabb",
+        "abab"
+      ]
+    },
+    {
+      "length": 6,
+      "histogram": {
+        "a": 3,
+        "b": 3
+      },
+      "cover": "ab",
+      "multiplicity": 6,
+      "fixedBinaryDisambiguationBits": 3,
+      "witness": [
+        "aaabbb",
+        "aababb"
+      ]
+    },
+    {
+      "length": 8,
+      "histogram": {
+        "a": 4,
+        "b": 4
+      },
+      "cover": "ab",
+      "multiplicity": 20,
+      "fixedBinaryDisambiguationBits": 5,
+      "witness": [
+        "aaaabbbb",
+        "aaababbb"
+      ]
+    },
+    {
+      "length": 10,
+      "histogram": {
+        "a": 5,
+        "b": 5
+      },
+      "cover": "ab",
+      "multiplicity": 70,
+      "fixedBinaryDisambiguationBits": 7,
+      "witness": [
+        "aaaaabbbbb",
+        "aaaababbbb"
+      ]
+    },
+    {
+      "length": 12,
+      "histogram": {
+        "a": 6,
+        "b": 6
+      },
+      "cover": "ab",
+      "multiplicity": 252,
+      "fixedBinaryDisambiguationBits": 8,
+      "witness": [
+        "aaaaaabbbbbb",
+        "aaaaababbbbb"
+      ]
+    }
+  ]
+}

@@ -11809,3 +11809,44 @@ per-codec attribution. Independent Python22exact/7unsupported/0mismatches;
 bounded TS21exact/8unsupported. All29 prices and transport checks pass.
 `bench/x178/README.md` and `receipts/summary.json` bind results; production
 selection remains unchanged, scientific acceptance=false, native behavior unverified.
+
+### X179 — KLADOS (κλάδος, branch): adaptive tree addresses
+
+`klados.ts` is experimental/unwired. Maximal ASCII words populate an initially
+empty case-sensitive BST. A `^01...;` path addresses an existing node; after every
+literal insertion/access or reference, repeated single parent rotations move the
+node to the root. This is **move-to-root, not zig-zig splaying**. Literal separators
+and Unicode are preserved; expansions are not rescanned. The in-band contract is
+fully charged. Domain: UTF-8-stable strings≤50,000 UTF-16 units, ≤12,000 word
+accesses, ≤2,048 distinct words; literal caret collisions decline.
+
+Search: eager references all repeats; local uses a greedy isolated-word token
+comparison. Whole-message and parent pricing remain mandatory; neither policy is
+a global optimum. Runtime: CPU/memory work for BST comparisons/rotations and
+parent search; external wall-time caps are separate. No splay logarithmic
+amortized bound is imported. A policy guard and type-inference fix were retested;
+the type-only fix emits identical JS, with new empty-plan/dedup attacks.
+
+Ancestry: Jones's classical splay compression; Antoniou et al., PCI2011,
+DOI10.1109/PCI.2011.19 (abstract/bibliography only); Gagie ESA2022,
+DOI10.4230/LIPIcs.ESA.2022.57 and arXiv2109.02997v5 (primary excerpts read).
+The binary-channel/word-RAM hypotheses do not establish BPE or native-chat gains.
+Full citations and the move-to-root/splay distinction: `bench/x179/research.md`.
+
+Results: 7,627 checks; independent Python 3,310 including 9 paid exact inverses.
+Three KLADOS paid losses: ps-real 381→503/602, diff 411→663. Raw ls-l 5194→5172 is
+NOT a gain over its 1310-token frontier; its 90s parent attempt timed out. Native 2
+NOT_RUN. No broad prose/ops improvement or exhaustive novelty proof claimed.
+
+All 24 frequency-order raw-winning-source plans were attempted with 30s budgets
+and timed out. Longer isolated ps-ef retries then completed all 6 exact losses
+against 296: width 32 increasing/decreasing: 559/549; width 128: 537/521; width 512: 505/505.
+That source's tournament is now complete. The other 3 sources remain unpriced.
+
+Fixed-128-unit LCP benchmark: 20,012 targeted checks; 24 identical whole-stack wires,
+CPU B/A 1.002994, wall 0.999828 with protected regressions. Not promoted.
+Fresh X179 replay: 29 identical wires / 11,962 tokens. PROSE 2018→1770;
+OPS 22332→8078; CODE/STRUCT 3152→2013; OTHER 513→101. Local leaders remain email,
+ls-l, JSON and cue; ops relative leader prices 582→118. This is descriptive, not
+causal per-codec attribution. Python 22 exact / 7 unsupported / 0 mismatches, bounded
+TS 21 exact / 8 unsupported. Production unchanged; scientific acceptance=false.

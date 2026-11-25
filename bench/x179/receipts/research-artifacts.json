@@ -1,0 +1,84 @@
+[
+  {
+    "repo": "openai/math",
+    "commit": "f5702854040e97fa7675c21ba37a9608f5f92dd3",
+    "path": "lean/OAI/Algorithms/SubexponentialSAT/SqrtLogSpace/Statement.lean",
+    "kernel": "NOT_RUN",
+    "file": ".cache/x179/research/openai_math-lean_OAI_Algorithms_SubexponentialSAT_SqrtLogSpace_Statement.lean",
+    "bytes": 1584,
+    "sha256": "13b195bd1e472dd0e1fc57902d0bcec7c55e4a8ddf751cb7380b984b79368ee8"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "eth/proof/rates/CountedToPadded/Defs.lean",
+    "kernel": "NOT_RUN",
+    "file": ".cache/x179/research/anthropics_formal-math-eth_proof_rates_CountedToPadded_Defs.lean",
+    "bytes": 16457,
+    "sha256": "4736979cbc37e6a7f6f25ea9cc89609592e7d0792ba71da149e631761eb6adfa"
+  },
+  {
+    "repo": "anthropics/fermats-last-theorem",
+    "commit": "6e837e75355538c7f80bab5b956861e86c4eacc2",
+    "path": "PROOF-PATH.md",
+    "kernel": "NOT_RUN",
+    "file": ".cache/x179/research/anthropics_fermats-last-theorem-PROOF-PATH.md",
+    "bytes": 8666,
+    "sha256": "ada9b1b2f69184b9a9334d51ed9f2e2e241d16df364d9e53df418339748c6705"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "commit": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "path": "lean/ChessProof/All63/Enc.lean",
+    "kernel": "NOT_RUN",
+    "file": ".cache/x179/research/double-ai_double-check-lean_ChessProof_All63_Enc.lean",
+    "bytes": 9670,
+    "sha256": "c71e9168e95922668692649aff797f915f9a1d88953afede2ab718c1a486e8f8"
+  },
+  {
+    "repo": "google-deepmind/alphaproof-nexus-results",
+    "commit": "0647711a71183c1ea492ad60860776617ce1ea88",
+    "path": "lake-manifest.json",
+    "kernel": "NOT_RUN",
+    "file": ".cache/x179/research/google-deepmind_alphaproof-nexus-results-lake-manifest.json",
+    "bytes": 3468,
+    "sha256": "d5f3544a12eb2b6ae6913524e16b0e62cad4ca279d0cfa89e4d4bd5c467bffd5"
+  },
+  {
+    "repo": "google-deepmind/alphaproof-nexus-results",
+    "commit": "0647711a71183c1ea492ad60860776617ce1ea88",
+    "path": "APNOutputs/ErdosProblems/erdos_741.parts.i.lean",
+    "kernel": "NOT_RUN",
+    "file": ".cache/x179/research/google-deepmind_alphaproof-nexus-results-APNOutputs_ErdosProblems_erdos_741.parts.i.lean",
+    "bytes": 87669,
+    "sha256": "481e87ebaa4058e5ce4f2cf85f229cf4382a633c6de02cd4617c8bf1212184df"
+  },
+  {
+    "repo": "harmonic-ai/IMO2025",
+    "commit": "72b62405a176a7eaeadb335a7fa6ee80b6667161",
+    "path": "HarmonicLean/IMO2025P3.lean",
+    "kernel": "NOT_RUN",
+    "file": ".cache/x179/research/harmonic-ai_IMO2025-HarmonicLean_IMO2025P3.lean",
+    "bytes": 27234,
+    "sha256": "a532e7d57c952d19064346e768160b2b011071e3535d7514884d979361f52af8"
+  },
+  {
+    "repo": "ByteDance-Seed/Seed-Prover",
+    "commit": "38c59cebaf969ac259196eb091757518d5b54c67",
+    "path": "SeedProver/imo2025/IMO2025/P3.lean",
+    "kernel": "NOT_RUN",
+    "file": ".cache/x179/research/ByteDance-Seed_Seed-Prover-SeedProver_imo2025_IMO2025_P3.lean",
+    "bytes": 81723,
+    "sha256": "8fdbd76afacb6868bd08191ef9e777f316f59649c9f91684a5cca2fa75d26c07"
+  },
+  {
+    "repo": "google-deepmind/formal-conjectures",
+    "commit": "7862bf6a6976c26acb086b6b2cec12ad1d92ce5d",
+    "path": "FormalConjecturesForMathlib/Data/Set/Density.lean",
+    "file": ".cache/x179/research/google-density.lean",
+    "bytes": 9019,
+    "sha256": "ec15df51f6094464961c20dab4fad4dfb592520ea2b033ec783a44d0c6a9e867",
+    "kernel": "NOT_RUN",
+    "pinSource": "AlphaProof lake-manifest.json"
+  }
+]

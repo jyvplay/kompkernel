@@ -1,0 +1,10 @@
+{
+  "validateScriptExit": 0,
+  "typescript": "PASS after archived type inference fix",
+  "emittedJavaScriptAfterTypeFix": "byte-identical",
+  "productionBuild": "PASS",
+  "sourceDocWhitespaceCheckExit": 0,
+  "allFilesWhitespaceCheckExit": 2,
+  "whitespaceNote": "Original external fixture/license bytes, native payload whitespace and captured logs are retained, not normalized.",
+  "accepted": false
+}

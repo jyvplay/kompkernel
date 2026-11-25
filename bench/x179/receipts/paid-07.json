@@ -1,0 +1,7 @@
+{
+  "kind": "klados",
+  "path": "bench/holdout/json-pkg.txt",
+  "policy": "eager",
+  "file": "bench/x179/receipts/paid-07.json",
+  "status": "ineligible"
+}

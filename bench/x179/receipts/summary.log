@@ -1,0 +1,122 @@
+{
+  "accepted": false,
+  "frontier": {
+    "lanes": 29,
+    "oldTotal": 11962,
+    "newTotal": 11962,
+    "identicalWires": 29,
+    "different": [],
+    "sourceReadEqual": 29,
+    "note": "decoded field is parent self-report, not an independent wire parser"
+  },
+  "unitChecks": 7627,
+  "eligibleSources": 29,
+  "paid": [
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "kind": "klados",
+      "policy": "local",
+      "n": null,
+      "order": null,
+      "tokens": 503,
+      "baselineTokens": 381,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-04.json"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "kind": "klados",
+      "policy": "eager",
+      "n": null,
+      "order": null,
+      "tokens": 602,
+      "baselineTokens": 381,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-05.json"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "kind": "klados",
+      "policy": "eager",
+      "n": null,
+      "order": null,
+      "tokens": 663,
+      "baselineTokens": 411,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-09.json"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "kind": "frequency",
+      "policy": null,
+      "n": 512,
+      "order": "decreasing",
+      "tokens": 505,
+      "baselineTokens": 296,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-38.json"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "kind": "frequency",
+      "policy": null,
+      "n": 32,
+      "order": "increasing",
+      "tokens": 559,
+      "baselineTokens": 296,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-39.json"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "kind": "frequency",
+      "policy": null,
+      "n": 32,
+      "order": "decreasing",
+      "tokens": 549,
+      "baselineTokens": 296,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-40.json"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "kind": "frequency",
+      "policy": null,
+      "n": 128,
+      "order": "increasing",
+      "tokens": 537,
+      "baselineTokens": 296,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-41.json"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "kind": "frequency",
+      "policy": null,
+      "n": 128,
+      "order": "decreasing",
+      "tokens": 521,
+      "baselineTokens": 296,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-42.json"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "kind": "frequency",
+      "policy": null,
+      "n": 512,
+      "order": "increasing",
+      "tokens": 505,
+      "baselineTokens": 296,
+      "status": "exact",
+      "file": "bench/x179/receipts/paid-43.json"
+    }
+  ],
+  "processCounts": {
+    "completed": 8,
+    "TIMEOUT": 29
+  },
+  "frequencyProcessCounts": {
+    "TIMEOUT": 24
+  }
+}

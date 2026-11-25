@@ -1,0 +1,9 @@
+bench/x179/fixtures/kubernetes_website-LICENSE.txt:396: new blank line at EOF.
+bench/x179/fixtures/kubernetes_website-debug-service.md:352: trailing whitespace.
++for i in $(seq 1 3); do 
+bench/x179/fixtures/kubernetes_website-debug-service.md:698: new blank line at EOF.
+bench/x179/native/34.txt:353: trailing whitespace.
++for i in $(seq 1 3); do 
+bench/x179/native/34.txt:699: new blank line at EOF.
+bench/x179/receipts/build.log:29: trailing whitespace.
++[plugin vite:singlefile] 

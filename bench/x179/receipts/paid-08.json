@@ -1,0 +1,7 @@
+{
+  "kind": "klados",
+  "path": "bench/holdout-work/unified-diff.patch",
+  "policy": "local",
+  "file": "bench/x179/receipts/paid-08.json",
+  "status": "ineligible"
+}
