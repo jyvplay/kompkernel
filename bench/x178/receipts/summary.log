@@ -9,7 +9,7 @@
     "sourceReadEqual": 29,
     "note": "decoded field is parent self-report, not an independent wire parser"
   },
-  "checks": 12189,
+  "checks": 12206,
   "sources": 38,
   "supportedSources": 35,
   "rawWinningSources": [],

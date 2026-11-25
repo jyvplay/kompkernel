@@ -2,7 +2,7 @@
   "validateScriptExit": 0,
   "typescript": "PASS",
   "productionBuild": "PASS",
-  "artifactHashesVerified": 177,
+  "artifactHashesVerified": 179,
   "sourceDocWhitespaceCheckExit": 0,
   "allFilesWhitespaceCheckExit": 2,
   "whitespaceNote": "Preserve original heldout/license/native-payload bytes and captured build log. Their whitespace findings are intentional; source/docs/scripts pass.",
