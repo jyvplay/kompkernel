@@ -12671,3 +12671,34 @@ remain identical at 11,962 tokens. See the preserved initial failure log.
 
 The X180 bundle-only speed patch also fails its gate: CPU B/A 1.010697,
 wall 1.007261 across 24 identical ABBA wires. Production remains unchanged.
+
+## X181 — FOTIA, parent profiling and strict reader
+
+New unwired codec `fotia.ts`: comparison-delimited Foata block rotations preserve
+content while altering the representation presented to the existing parent.
+Unlike BBWT it does not sort rotations or use LF cycles. Its classical ancestry,
+fully paid contract, non-greedy six-plan enumeration and O(b²L) block bound are
+specified in the abbreviation appendix and bench/x181/model.md. No claim of
+novel mathematics or all-stack semantic novelty is made.
+
+Eight completed paid trials are byte-exact but lose: email 486→638, KB 620→777,
+prose answer 664→798, ps 381→601, ps-ef 296→583, JSON 653→926, diff 411→566,
+TypeScript 949→1159. Newly fetched Python/Git guides receive exact/raw tests,
+not full paid or native tests. Native prompts are NOT_RUN.
+
+The unwired AKRIBOS strict reader adds two supported frontier formats and
+explicit refusals. Source-aware comparisons remain mandatory. Parent profiling
+of unresolved APOUSIA ls-l again times out at 180 s, but captures actual V8
+samples pointing to merging/tokenization and slot-delta scoring; sample
+percentages are not causal speed claims. A separate bounded direct-mapped pair
+cache receives collision attacks, token count/vector/pair gates and isolated
+whole-stack ABBA before any speed acceptance. No production code is promoted.
+
+Fresh X181 replay confirms all 29 X180 wires unchanged, 11,962 tokens. Explicit
+source-role totals remain prose 2018→1770, ops 22332→8078, code 3152→2013,
+other 513→101. The strict reader's two new formats pass fresh source comparisons;
+four grammars still refuse. Compiler/build pass; native decoding remains NOT_RUN.
+
+The X181 cache speed experiment fails its gate: CPU B/A 1.009904, wall 1.010630,
+24 identical wires but protected regressions. No speed patch is promoted.
+Scientific acceptance remains false despite the concrete strict-reader improvement.

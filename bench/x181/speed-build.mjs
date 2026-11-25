@@ -1,0 +1,5 @@
+import fs from 'node:fs';import {build} from 'esbuild';
+const original=fs.readFileSync('src/lib/omega/bpe.ts','utf8'),old='const LUT2 = new Map<number, number>();';if(original.split(old).length!==2)throw Error('anchor');
+const replacement=fs.readFileSync('bench/x181/pair-cache.ts','utf8').replace('export class','class')+'\nconst LUT2 = new PairCache();';
+for(const arm of ['A','B'])for(const [name,entry] of [['speed','bench/x164/cache-speed.ts'],['count','bench/x163/count-gate.ts'],['vector','bench/x164/speed-unit.ts'],['pair','bench/x178/pair-gate.ts']])await build({entryPoints:[entry],bundle:true,platform:'node',format:'esm',outfile:`bench/x181/${name}-${arm}.mjs`,plugins:arm==='A'?[]:[{name:'direct-pair-cache',setup(b){b.onLoad({filter:/[\\/]bpe\.ts$/},()=>({contents:original.replace(old,replacement),loader:'ts'}));}}]});
+fs.writeFileSync('bench/x181/receipts/speed-patch.json',JSON.stringify({production:false,old,replacement,scope:'All UTF16 pair keys, 2 MiB bounded direct mapped storage; unlike X178 Latin1 dense cache. Collisions evict and recompute; counts must stay exact.'},null,2));

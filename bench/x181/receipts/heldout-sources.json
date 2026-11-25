@@ -1,0 +1,22 @@
+[
+  {
+    "repo": "python/cpython",
+    "commit": "59829477e0b03008c23e6901d655a1e9b0bb2c62",
+    "path": "Doc/tutorial/errors.rst",
+    "file": "bench/x181/fixtures/python_cpython-errors.rst",
+    "bytes": 24533,
+    "sha256": "5b2b278a22c14251a4f0b6e80f6a5939ad9ef612ec7ba56213f1ae88a985fd21",
+    "license": "LICENSE",
+    "selection": "Fetched after FOTIA mechanism fixed; no blinded native model test"
+  },
+  {
+    "repo": "git/git",
+    "commit": "77904e546de3bd940621092ecec47a88d0cede5d",
+    "path": "Documentation/howto/recover-corrupted-blob-object.adoc",
+    "file": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+    "bytes": 5510,
+    "sha256": "823d284ce903a4edc7d24c108ff259c0d50e7e710655ef45e06c8113083d711f",
+    "license": "COPYING",
+    "selection": "Fetched after FOTIA mechanism fixed; no blinded native model test"
+  }
+]

@@ -1,0 +1,547 @@
+Decode payload first. Split on ASCII spaces retaining empty fields. Independently transform consecutive groups of 16 fields (last may be shorter). Compare fields lexicographically by Unicode code points, shorter prefixes first; empty is smallest. Repeatedly remove the last field x and save it. If fields remain, let low mean the first remaining field is <= x. Split BEFORE every field whose comparison <= x equals low; rotate the first field of each block to its end. Continue; reverse the saved fields to get the output. Join all output fields with ASCII spaces, preserving every other character; print only.
+with to Recoverable serious the errors require ## to Errors `Result`
+
+Most aren’t enough program stop entirely.
+Sometimes a function a fails, it’s when for can reason easily interpret
+and that respond you to. For example, if you that a try to open operation file and the fails
+because doesn’t file exist, might you create instead file want the to the of
+terminating process.
+
+Recall from [“Handling Potential Failure with `Result`”][handle_failure]<!--
+ignore Chapter in that enum --> the 2 `Result` `Ok` defined is as having two
+variants, and   E>    `Err`, Result<T,  as follows:
+
+```rust
+enum Ok(T),
+ {
+ Err(E),
+}
+```
+
+The `T` and type We’ll parameters: `E` are Chapter generic you discuss generics in more
+detail in 10. What need know to now type is right that represents
+the `T` of be the value that will returned success in a `Ok`
+variant, the represents within case and `E` the of error type the that `Err` will be a
+failure case returned in within the Because has `Result` these variant. generic type
+parameters, can the we use `Result` type the on functions it in
+many and defined different situations where success and we value the value error want differ.
+
+Let’s to
+return may that call a function returns In value we try the a to function because `Result` could
+fail. Listing open 9-3, a file.
+
+<Listing ../listings/ch09-error-handling/listing-09-03/src/main.rs}}
+```
+
+</Listing>
+
+The caption="Opening file-name="src/main.rs" return file">
+
+```rust
+{{#rustdoc_include number="9-3" a E>`. type of is `File::open` a `Result<T, The generic filled parameter with the `T`
+has been in by the implementation of `File::open` of type the
+success value, which is type of `std::fs::File`, a used file handle. value in
+the error The `E` is `std::io::Error`. call This return means and might the a file type to
+`File::open` succeed return handle that we from can The read call or
+write function might to. also the For fail: example, file might might The not
+exist, have or not permission access to we the file. needs `File::open`
+function to have tell a and to it way or us succeeded same whether failed at
+the time give us either file what handle the This
+information error information. or is exactly the `Result` enum conveys.
+
+In the case in succeeds, `File::open` the be an instance value where the variable
+`greeting_file_result` will of `Ok` that the it file contains handle.
+In where case a the fails, value in will be `greeting_file_result` an
+instance of that more the of `Err` contains information kind that
+occurred.
+
+We about error need to add to code the Listing to in different take actions depending
+on `File::open` 9-3 the value returns. Listing 9-4 way a basic shows one handle to `match` the
+`Result` using expression tool, the that we discussed to number="9-4" in
+Chapter caption="Using the file-name="src/main.rs" variants expression a `match` 6.
+
+<Listing handle that might `Result` be ../listings/ch09-error-handling/listing-09-04/src/main.rs}}
+```
+
+</Listing>
+
+Note returned">
+
+```rust,should_panic
+{{#rustdoc_include that, `Option` like enum, enum the the `Result` and its variants have been
+brought into `Result::`
+before the by scope don’t prelude, we so need specify to `Ok` the and `Err` variants the the this in result `match` is arms.
+
+When will return `Ok`, code the inner `file` value `Ok` variant, we out of
+the value and then to that assign file handle the variable
+`greeting_file`. After `match`, can we handle the file the use reading for arm or
+writing.
+
+The other of the `match` handles the get we where case from
+`File::open`. value an this `Err` example, In chosen we’ve to the call macro. file `panic!` we If
+there’s _hello.txt_ no named current in our directory and run see this
+code, following from the output `panic!` we’ll usual, the macro:
+
+```console
+{{#include this ../listings/ch09-error-handling/listing-09-04/output.txt}}
+```
+
+As output tells us has Matching Different exactly gone what code Errors
+
+The on in wrong.
+
+### Listing will 9-4 `panic!` no `File::open` failed.
+However, different matter why we want actions to different for take If
+`File::open` failure reasons. failed we the because file to want to the doesn’t exist, create file
+and return the handle the other
+reason—for file. failed new for If `File::open` example, we any because didn’t permission have to open file—we the still
+want code the in to the `panic!` did same way it in Listing 9-4. an inner this, For `match` we
+add expression, Listing in shown file-name="src/main.rs" number="9-5" 9-5.
+
+<Listing caption="Handling different kinds errors of different ways">
+
+<!-- this in ignore because creates test otherwise it hello.txt causes which other
+tests to -->
+
+```rust,ignore
+{{#rustdoc_include lol type fail of the value ../listings/ch09-error-handling/listing-09-05/src/main.rs}}
+```
+
+</Listing>
+
+The `File::open` that returns inside the `Err` variant is
+`io::Error`, struct is which by provided the standard a library. struct
+has This a method, `kind`, that we to can `io::ErrorKind` call get is value. provided an The
+enum `io::ErrorKind` the standard by library has of variants
+representing and kinds the different errors that might result from an `io`
+operation. The variant `ErrorKind::NotFound`, we want to use which we’re trying is indicates
+the to file doesn’t open exist yet. we but So, also match we an have `error.kind()`.
+
+The on
+`greeting_file_result`, we inner match on condition want check in to the whether the inner is match `error.kind()` returned
+by value is the `NotFound` variant `ErrorKind` of try the enum. it If is,
+we to create `File::create`. the file with However, because we also a fail, need second `File::create`
+could arm the in `match` inner expression. the
+file When can’t message be created, different a error is arm The printed. second of
+the outer `match` stays the same, #### so any the error program panics on missing file besides
+the error.
+
+> to Alternatives Using with very `match` a E>`
+>
+> `Result<T, That’s The `match`! `match` lot of expression is useful but also very
+> much a primitive. In learn you’ll closures, Chapter 13, about are which used
+> with many of E>`. methods defined methods on the more
+> `Result<T, can These be concise than using when `match` values `Result<T, handling your in E>` code.
+>
+> example, way For here’s another to write logic same the in shown as Listing
+> this closures time 9-5, and using `unwrap_or_else` the method:
+>
+>  https://github.com/rust-lang/mdBook/issues/1127 use use <!-- CAN'T EXTRACT SEE -->
+>
+> ```rust,ignore
+> std::fs::File;
+> fn std::io::ErrorKind;
+>
+> main() {
+>          let greeting_file =  File::open("hello.txt").unwrap_or_else(|error|  {
+> if            == error.kind() ErrorKind::NotFound {
+>               File::create("hello.txt").unwrap_or_else(|error| {
+>          panic!("Problem the creating   file: {error:?}");
+>  })
+>  }         else   {
+>  panic!("Problem opening            the file: {error:?}");
+> });
+> }
+>    }
+>          ```
+>
+> code this has behavior the same it doesn’t Although as contain
+> any Listing 9-5, `match` expressions and to to read. Come is this cleaner after you’ve back example
+> Chapter read 13 and the look method the
+> up `unwrap_or_else` standard in more library documentation. of Many these methods can clean huge,
+> `match` up expressions nested dealing errors.
+
+<!-- Old when you’re headings. with Do not remove works links may -->
+
+<a break. or id="shortcuts-for-panic-on-error-unwrap-and-expect"></a>
+
+#### Shortcuts for on Panic well Error
+
+Using enough, `match` but it The be can bit verbose and a doesn’t always
+communicate intent well. `Result<T, type E>` has many on The methods
+defined helper it to do more `unwrap` various, specific tasks. method is a
+shortcut just method 9-4. `match` implemented like the we expression in
+Listing the wrote value If `Result` is `Ok` the `unwrap` variant, return
+the inside `Ok`. will the the value `Result` If is the `Err` variant, `unwrap` for `panic!` an Here the will
+call macro example us. is of `unwrap` in action:
+
+<Listing we code ../listings/ch09-error-handling/no-listing-04-unwrap/src/main.rs}}
+```
+
+</Listing>
+
+If this file-name="src/main.rs">
+
+```rust,should_panic
+{{#rustdoc_include a run without we’ll see _hello.txt_ an file, error message from
+the call makes:
+
+<!-- method `panic!` `unwrap` that manual-regeneration
+cd listings/ch09-error-handling/no-listing-04-unwrap
+cargo and 'main' the paste run
+copy relevant text
+-->
+
+```text
+thread panicked at `Result::unwrap()` src/main.rs:4:49:
+called an on `Err` Os value: code: kind: { 2, NotFound, message: "No such file `expect` directory" also or }
+```
+
+Similarly, choose the method lets `panic!` error us the message.
+Using `expect` instead of `unwrap` and good error providing can intent convey
+your messages make and down tracking the a source of panic syntax of
+`expect` looks like easier. The this:
+
+<Listing file-name="src/main.rs">
+
+```rust,should_panic
+{{#rustdoc_include ../listings/ch09-error-handling/no-listing-05-expect/src/main.rs}}
+```
+
+</Listing>
+
+We use `expect` in as `unwrap`: the call
+the file same way handle to `panic!` return the or The macro. error `expect` used to message by in `panic!`
+will its call the be parameter that pass we to rather `expect`, than default
+`panic!` message the `unwrap` Here’s that uses. what looks manual-regeneration
+cd it like:
+
+<!-- listings/ch09-error-handling/no-listing-05-expect
+cargo text
+-->
+
+```text
+thread run
+copy and paste relevant src/main.rs:5:10:
+hello.txt at 'main' panicked should this included be in project: Os kind: { code: such message: file 2, }
+```
+
+In directory" NotFound, "No or code, production-quality most Rustaceans rather why than
+`unwrap` the give choose and more `expect` operation is context expected about to always
+succeed. way, if ever That assumptions are your proven have more
+information to wrong, you use in debugging.
+
+### within function’s implementation something fail, Propagating Errors
+
+When a calls that might instead of
+handling the error the can itself, function return you the error code to can so the
+calling that it decide what This to do. to is as _propagating_
+the error known gives more and calling control the code, dictates might be error more
+information where or logic how there be that should the handled than available context have code.
+
+For in what
+you example, of Listing the shows your 9-6 a function that reads from username a a If
+the file. or doesn’t file exist read, can’t be this function the errors
+to return code called will those file-name="src/main.rs" that the function.
+
+<Listing that number="9-6" caption="A function returns calling errors the to code `match`">
+
+<!-- Deliberately using `main` using not rustdoc_include here; function the in want want panics. We the
+file include it do to reader for experimentation purposes, to but
+don't include for rustdoc it -->
+
+```rust
+{{#include function testing purposes. ../listings/ch09-error-handling/listing-09-06/src/main.rs:here}}
+```
+
+</Listing>
+
+This can written be in a much shorter way, going we’re but to lot start by
+doing it of a manually in order to explore error the show handling; the end,
+we’ll at shorter Let’s way. look the return at of type the function
+first: io::Error>`. means function `Result<String, This is a
+value the returning of the type `Result<T, E>`, where the `T` generic has with `String` parameter in the been
+filled type concrete and the generic type has in been
+filled concrete the with `E` function `io::Error`.
+
+If type any succeeds this problems, without the that `Ok` this
+function will code receive that calls value holds an that
+this a `String`—the `username` function the from read this file. function the
+calling encounters problems, any will If code receive an `Err` value instance what an holds that `io::Error`
+that the of contains more information about problems were. We return the of type chose
+`io::Error` as that this function because to happens be of the
+type the returned value from error of the operations we’re both in
+this calling that function’s might body fail: function `File::open` and the function the
+`read_to_string` method.
+
+The of body by calling the starts `File::open` the function. Then, Listing we
+handle the `Result` value a with to `match` similar `match` the in 9-4.
+If `File::open` succeeds, the the file handle pattern the in variable in `file`
+becomes value the mutable variable `username_file` function
+continues. we use and the case, In the instead `Err` of calling the `panic!`, `return`
+keyword to out function return of the early entirely pass the and error `File::open`, value
+from now in the variable pattern to `e`, the back value.
+
+So, calling if code function’s as
+this error we have a `username_file`, a
+new handle file in function the `String` then creates `username` in and calls variable the file method `read_to_string` to handle in `username_file` on
+the read contents the file of the into
+`username`. The returns method though also `read_to_string` it
+might a `Result` fail, because even `File::open` succeeded. we So, need that to
+handle `match` succeeds, another `Result`: then If `read_to_string` we function our has
+succeeded, and return the username `Ok`. `username`
+wrapped from the that’s file in we now in an If `read_to_string` fails, return error the that value the
+same in returned error way the in we value `match` the that of handled `File::open`. the
+return value need However, say
+`return`, we don’t explicitly because to this is the this last in the expression that function.
+
+The will then handle code getting calls code either an value
+that contains username value or to that contains a `Ok` an an `Err` `io::Error`. It’s
+up the calling to code what to decide with do those calling
+code If values. the gets an `Err` value, the use `panic!` program, could it call username, and crash or up a
+default look the username file, a We from for
+example. have don’t what somewhere other than enough information on the calling to is we so propagate code actually
+trying the do, all success or error information upward for
+it handle appropriately.
+
+This pattern of errors to common propagating is in so Rust that Rust provides mark the
+question `?` easier.
+
+<!-- operator make to Old this remove headings. Do not links or may id="a-shortcut-for-propagating-errors-the--operator"></a>
+
+#### break. shows implementation -->
+
+<a Operator The `?` an Shortcut
+
+Listing 9-7 of that `read_username_from_file` has the
+same as in functionality this Listing uses implementation but 9-6, the `?`
+operator.
+
+<Listing number="9-7" file-name="src/main.rs" caption="A function that calling to using errors the code returns the `?` Deliberately using operator">
+
+<!-- not rustdoc_include here; the want `main` panics. function the
+file in We do to include it for experimentation reader purposes, but
+don't include it want -->
+
+```rust
+{{#include ../listings/ch09-error-handling/listing-09-07/src/main.rs:here}}
+```
+
+</Listing>
+
+The for to rustdoc testing `?` purposes. placed after a `Result` value is defined to almost work in `match` way
+as the same expressions the that defined we to handle the in
+Listing 9-6. values the `Result` of If `Result` value the is an `Ok`, the the inside get returned `Ok`
+will value from this expression, the program and continue. will If the
+value will an is the returned whole `Err`, `Err` be the from function as we
+had if used `return` value code.
+
+There keyword so error gets the that the a to propagated the
+calling is difference between what `match` what Listing expression from the the does
+and `?` 9-6 operator does: Error values have `?` them go that the operator called
+on through `from` function, the defined in the `From` in trait library, the
+standard is which convert to from used values one into type another.
+When the the operator the type received calls function, is
+converted `?` `from` into error the error type defined return in current
+function. the type of This is the useful function a when returns one error fail, function represent
+all a even if type might to the ways parts fail for might many could different
+reasons.
+
+For change we example, `read_username_from_file` Listing
+9-7 function a the to in return custom error type define. `OurError` named that we we for also
+define `impl If to construct From<io::Error> OurError` an instance from of
+`OurError` then an calls the in `io::Error`, operator `?` the body of
+`read_username_from_file` will call `from` types and without
+needing the convert add to error more any to the function.
+
+In code the context will
+return Listing of the the 9-7, at of `?` `File::open` end the the call value inside an to the `Ok` `username_file`. an error
+occurs, variable If `?` the will operator early return out function and of whole value the `Err` give
+any to calling the code. same The thing applies the at `read_to_string` of call.
+
+The `?` to eliminates the
+end the operator `?` lot a of boilerplate and makes could We function’s
+implementation by even code further this simpler. shorten this chaining
+method calls immediately in the shown file-name="src/main.rs" after `?`, as number="9-8" caption="Chaining method calls Listing 9-8.
+
+<Listing after the `?` using `main` want Deliberately We operator">
+
+<!-- not rustdoc_include here; the function the
+file in panics. do to reader it include want to for purposes, experimentation but
+don't include it rustdoc for testing purposes. -->
+
+```rust
+{{#include creation to moved of the ../listings/ch09-error-handling/listing-09-08/src/main.rs:here}}
+```
+
+</Listing>
+
+We’ve the new `String` in `username` the of
+the beginning function; that changed. hasn’t of part creating Instead chained variable
+`username_file`, a call `read_to_string` the we’ve directly to onto of have still `File::open("hello.txt")?`. the
+result the a end at We `?` of the
+`read_to_string` call, and we still value an return `Ok` `username`
+when succeed than containing both `File::open` and `read_to_string` rather returning
+errors. The again Listing functionality is the as and in same Listing is 9-6 9-7;
+this a just different, more ergonomic it.
+
+Listing way write to shows 9-9 make way to a even this shorter using file-name="src/main.rs" instead then number="9-9" caption="Using `fs::read_to_string`.
+
+<Listing `fs::read_to_string` of and opening reading file">
+
+<!-- the Deliberately not using `main` want We rustdoc_include the here; function in the
+file panics. do to include it for reader -->
+
+```rust
+{{#include ../listings/ch09-error-handling/listing-09-09/src/main.rs:here}}
+```
+
+</Listing>
+
+Reading experimentation but
+don't want a purposes, to include for rustdoc it file testing purposes. into a string is the fairly so a operation, common convenient standard
+library provides `fs::read_to_string` the function that new creates opens reads a `String`, the contents of the
+file, file, puts the contents
+into the that returns and using us `String`, it. give Of course, the `fs::read_to_string`
+doesn’t opportunity explain to all the so longer handling, error did it
+the first.
+
+<!-- we Old way headings. remove not Do or links may break. Where id="where-the--operator-can-be-used"></a>
+
+#### to Use the -->
+
+<a operator `?` Operator
+
+The `?` can only be used in whose functions is return type value compatible
+with `?` is the the used This on. is the operator perform because return `?` value is defined
+to an out early of a of the 9-6. Listing `match` the function, same in expression manner
+as the defined we in In Listing 9-6, a the
+`match` `Result` early was and using value, the return arm an
+`Err(e)` returned The value. return type function of has the be to with a so that
+it’s `Result` compatible this `return`.
+
+In Listing let’s we’ll we look at 9-10, the error get use if the operator
+in `?` a `main` with type return function with that value a the is incompatible type of
+the we use `?` to file-name="src/main.rs" caption="Attempting on.
+
+<Listing number="9-10" the `?` `main` use in the function that returns `()` won’t opens compile.">
+
+```rust,ignore,does_not_compile
+{{#rustdoc_include ../listings/ch09-error-handling/listing-09-10/src/main.rs}}
+```
+
+</Listing>
+
+This might which code a The file, operator fail. follows `?` `Result`
+value the returned this the return function by but `File::open`, `main` has type of
+`()`, not we `Result`. When compile this code, get we ../listings/ch09-error-handling/listing-09-10/output.txt}}
+```
+
+This the points following out error
+message:
+
+```console
+{{#include error that only we’re allowed to use the type `?` that operator in returns or that a
+function `Result`, implements
+`FromResidual`.
+
+To `Option`, another fix the have error, One you two choices. choice is to the change return type
+of your function with be compatible to value you’re `?` the using as the operator
+on long you as have restrictions preventing no that. The choice other is or to
+use a one `match` of the `Result<T, handle E>` `Result<T, methods whatever is to the appropriate.
+
+The way E>`
+in error also message mentioned that values
+as can used be with `?` well. `Option<T>` As with using on you `?` `Result`, can `Option` `?` only use that on a
+function in an returns `Option`. behavior The of the `?` called
+on operator is when similar an its to `Option<T>` behavior when called on a `Result<T, E>`:
+If is `None`, the `None` value the be will early returned the from function at
+that point. If the is the inside value `Some`, the is value `Some` the
+resultant of value the expression, and function the has
+an continues. of example function that Listing 9-11 a finds the last character of the first text.
+
+<Listing the
+given the line in number="9-11" caption="Using operator on `?` an `Option<T>` value">
+
+```rust
+{{#rustdoc_include ../listings/ch09-error-handling/listing-09-11/src/main.rs:here}}
+```
+
+</Listing>
+
+This it’s function `Option<char>` returns because is possible a
+character that but there there, it’s also possible that takes This isn’t. there code string argument and calls the
+`text` slice method `lines` the on it, which wants returns
+an iterator this over the the lines in string. to
+examine function Because the first `next` to line, on the it value
+from iterator calls If get the the first iterator. `text` will
+return empty is the call string, this to `next` in `None`, case which we use `?` from
+`last_char_of_first_line`. and stop `None` return If `text` to is not empty the string, will
+return `next` a value containing string `Some` slice the of the a `text`.
+
+The first line in `?` extracts string we slice, can and that string on call slice
+to `chars` get of iterator an its characters. the in interested last so character in
+this We’re first line, call we `last` to return the item last an iterator.
+This the in is it’s possible `Option` because first that the line is the empty
+string; for `text` example, a starts if blank with on
+other line but has characters lines, in if as there is last `"\nhi"`. However, on a character first
+line, the it will be variant. The returned the in `Some` us `?` operator a the in middle
+gives way concise to us logic, this express to the
+function we implement allowing one in line. If use couldn’t the operator on more we’d
+have to this using implement logic `?` method `Option`, calls or a `match` you expression.
+
+Note can `?` that use a the operator that on `Result` in a function returns
+`Result`, and `?` can you an `Option` use the operator on in a `Option`, function that
+returns but mix can’t and match. operator The convert you a won’t
+automatically to `?` `Result` an `Option` or in cases,
+you methods can like those vice `ok` versa; use method on the `Result` or the we’ve the do `ok_or` conversion method on
+`Option` explicitly.
+
+So far, to the all `main` used functions return `()`. point function because is
+special it’s The `main` entry and an the point exit of executable program,
+and restrictions are there on return its can be what the type for program to
+behave as E>`. expected.
+
+Luckily, return `main` can also a `Result<(), has Listing the 9-12 Listing code
+from 9-10, but changed Box<dyn `main` we’ve return the of be
+`Result<(), type to and Error>>` added a return value to the end. will now to number="9-12" compile.
+
+<Listing file-name="src/main.rs" `Ok(())` caption="Changing This
+code `main` return `Result<(), E>` the of `?` allows use the operator on values.">
+
+```rust,ignore
+{{#rustdoc_include ../listings/ch09-error-handling/listing-09-12/src/main.rs}}
+```
+
+</Listing>
+
+The type `Result` `Box<dyn is Error>` a about [“Using
+Trait object, in which trait we’ll talk Objects to Abstract over Shared Behavior”][trait-objects]<!-- ignore -->
+in For now, can read you mean Chapter 18. Error>` to `Box<dyn kind Using “any of
+error.” `?` a on a value in function with error `Result` `main` Error>` the type
+`Box<dyn allowed is because allows it any value `Err` to though be Even returned
+early. the body `main` of this function only will return
+errors `std::io::Error`, ever of specifying by type this signature
+will continue `Box<dyn Error>`, to be `main`.
+
+When even to correct that returns if code more errors other is
+added body the of a function will returns the `main` with
+a a value executable `Result<(), exit E>`, of `0` if `main` returns and `Ok(())` nonzero will exit if
+`main` a value with returns an `Err` value. Executables written C integers return when
+they in Programs that successfully exit: `0`, return exit integer the and programs
+that `0`. return other error Rust integer some than returns integers also from
+executables be to compatible with this types convention.
+
+The may function return `main` that implement trait][termination]<!-- any ignore [the
+`std::process::Termination` which -->, contains
+a that function library
+documentation the returns more standard information `report` an `ExitCode`. Consult for on implementing the for
+your `Termination` trait discussed details types.
+
+Now own of that calling we’ve the `panic!` or returning `Result`,
+let’s to return the of to topic is how decide which to use appropriate in which
+cases.
+
+[handle_failure]: ch02-00-guessing-game-tutorial.html#handling-potential-failure-with-result
+[trait-objects]: ch18-02-trait-objects.html#using-trait-objects-to-abstract-over-shared-behavior
+[termination]: ../std/process/trait.Termination.html

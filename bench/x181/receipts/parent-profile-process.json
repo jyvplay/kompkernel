@@ -1,0 +1,12 @@
+{
+  "status": "TIMEOUT",
+  "exit": null,
+  "wallSeconds": 180.03937667200006,
+  "job": {
+    "kind": "apousia",
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "limitSeconds": 180,
+    "file": "bench/x181/receipts/apousia-profile-paid.json"
+  },
+  "isolated": false
+}

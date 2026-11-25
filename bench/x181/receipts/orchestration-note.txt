@@ -1,0 +1,6 @@
+The first downstream wait used repeated --pid flags in a single tail command.
+It returned after the last watched process exited even though canonical replay
+was still running. Validation started prematurely and was stopped. No runtime
+ABBA trials had started (runtime.json absent). Corrected orchestration waits
+for each process with a separate command; all affected validation is rerun.
+No isolated speed evidence is claimed from the interrupted run.

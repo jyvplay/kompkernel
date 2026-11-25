@@ -1,0 +1,35 @@
+
+> kompkernel@1.0.0 build
+> vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+Found 2 warnings while optimizing generated CSS:
+
+Issue #1:
+[2m│   }[22m
+[2m│   .\[-\:\.\/\,\] {[22m
+[2m│[22m     -: ./,;
+[2m┆[22m           [33m[2m^--[22m Unexpected token Semicolon[39m
+[2m┆[22m
+[2m│   }[22m
+[2m│   .\[-\:\.\/\] {[22m
+
+Issue #2:
+[2m│   }[22m
+[2m│   .\[-\:\.\/\] {[22m
+[2m│[22m     -: ./;
+[2m┆[22m          [33m[2m^--[22m Unexpected token Semicolon[39m
+[2m┆[22m
+[2m│   }[22m
+[2m│   .\[h\:1\] {[22m
+
+✓ 382 modules transformed.
+rendering chunks...
+[plugin vite:singlefile] 
+
+[plugin vite:singlefile] Inlining: index-C_g0vtdd.js
+[plugin vite:singlefile] Inlining: style-B9iTvmqy.css
+computing gzip size...
+dist/index.html  10,506.38 kB │ gzip: 4,180.56 kB
+✓ built in 21.99s

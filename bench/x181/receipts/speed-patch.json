@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "old": "const LUT2 = new Map<number, number>();",
+  "replacement": "/** Direct-mapped exact cache: colliding keys evict, never alias values. */\nclass PairCache {\n private keys=new Int32Array(1<<18);\n private values=new Int32Array(1<<18).fill(-1);\n get(k:number):number|undefined{const i=Math.imul(k,0x9e3779b1)>>>14;const v=this.values[i];return v>=0&&this.keys[i]===k?v:undefined;}\n set(k:number,v:number){const i=Math.imul(k,0x9e3779b1)>>>14;this.keys[i]=k;this.values[i]=v;}\n clear(){this.values.fill(-1);}\n}\n\nconst LUT2 = new PairCache();",
+  "scope": "All UTF16 pair keys, 2 MiB bounded direct mapped storage; unlike X178 Latin1 dense cache. Collisions evict and recompute; counts must stay exact."
+}

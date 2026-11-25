@@ -270,3 +270,8 @@ bench/x179/*.mjs
 bench/x180/*.mjs
 !bench/x180/*-build.mjs
 .cache/x180/
+
+# X181 generated bundles and profiles
+bench/x181/*.mjs
+!bench/x181/*-build.mjs
+.cache/x181/

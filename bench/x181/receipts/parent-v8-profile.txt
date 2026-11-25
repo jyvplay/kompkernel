@@ -1,0 +1,1327 @@
+(node:2311) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Dropping unknown tick frame: overflow
+Statistical profiling result from .cache/x181/isolate-0x1b902000-2098-apousia-v8.log, (104124 ticks, 36 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+  72549   69.7%          /usr/local/bin/node
+   4734    4.5%          /usr/lib/x86_64-linux-gnu/libc.so.6
+     28    0.0%          [vdso]
+     13    0.0%          /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+   5116    4.9%   19.1%  JS: *mergeCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1919:20
+   3739    3.6%   14.0%  RegExp: [^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n/]*|\s*[\r\n]+|\s+(?!\S)|\s+ {1}
+   3138    3.0%   11.7%  JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+   2442    2.3%    9.1%  JS: *chunkCountFast file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2262:24
+   1652    1.6%    6.2%  JS: *chironParseTape file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2845:25
+   1340    1.3%    5.0%  JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+   1061    1.0%    4.0%  RegExp: [\u10ee\u10dd\u10e2\u10d8\u093e\u10d5\u0902\u0579\u10e1\u05d9\u0576\u0921\u03b5\u0584\u03af\u0948\u0907\u0917\u10d0\u05db\u10db\u10e3\u03b4\u0928\u05d0\u092f\u0c95\u0942\u05e0\u05d5\u094d\u05de\u10de\u093f\u03c4\u0d40\u057e\u03c6\u03b3\u10d4\u10d6\u03c2\u03ad\u0940\u0577\u10eb\u09f0\u09c1\u10d1\u09be\u0d32\u09a6\u05d4\u03bd\u0561\u057c\u0cc1\u0935\u03c1\u10d7\u03c3\u0e2d\u05e6\u0568\u057f\u0565\u0a82\u0acd\u0ab9\u0aaf\u0930\u056f\u0d7c\u0941\u0d41\u0acb\u056b\u0915\u05d1\u0562\u0ba4\u0bc8\u0d02\u0926\u05dd\u05d2\u0aae\u09b0\u0e14\u09a8\u099f\u091a\u092c\u0bb0\u05ea\u05e1\u05e7\u09af\u0aa4\u0ac0\u05e2\u092d\u09df\u092a\u03ac\u0531\u0ca1\u05d6\u03b9\u03b1\u05e8\u0938\u0d3e\u0d30\u0939\u0d38\u03c5\u03cd\u05e9\u0abe\u03c0\u0c82\u0aaa\u0d31\u09c0\u091c\u09c7\u094b\u0d2f\u091f\u03cc\u03bc\u0923\u09a4\u0dca\u03b7\u05d7\u03ae\u0932\u03bf\u03c9\u0cb0\u03ba\u0db1\u0ab0\u03bb\u0c3f\u0c30\u0e31\u0924\u10e0\u0563\u05b7]
+   1059    1.0%    4.0%  JS: *rankAt file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1947:16
+    544    0.5%    2.0%  JS: *latin1 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1786:16
+    536    0.5%    2.0%  JS: *lcp file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2137:13
+    474    0.5%    1.8%  JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+    459    0.4%    1.7%  JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+    403    0.4%    1.5%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11803:58
+    297    0.3%    1.1%  JS: *localSearch file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7203:21
+    283    0.3%    1.1%  RegExp: [^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?:'(?:[sS]|[dD]|[mM]|[tT]|[lL][lL]|[vV][eE]|[rR][eE]))?|[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?:'(?:[sS]|[dD]|[mM]|[tT]|[lL][lL]|[vV][eE]|[rR][eE]))?|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n/]*|\s*[\r\n]+|\s+(?!\S)|\s+ {1}
+    204    0.2%    0.8%  JS: *wireOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11833:18
+    201    0.2%    0.8%  JS: *put file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6994:19
+    146    0.1%    0.5%  JS: *parseAll file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6213:18
+    134    0.1%    0.5%  JS: *rollback file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7008:24
+    128    0.1%    0.5%  JS: *mineSpans file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6064:19
+    120    0.1%    0.4%  JS: *genericWordingIsSound file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10880:31
+    108    0.1%    0.4%  JS: *buildIndex file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6150:20
+     83    0.1%    0.3%  JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     66    0.1%    0.2%  JS: *vocabByScript file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:5976:23
+     64    0.1%    0.2%  JS: *prolepsisLookup file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2155:25
+     62    0.1%    0.2%  JS: *expandText file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2900:22
+     37    0.0%    0.1%  JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     31    0.0%    0.1%  RegExp: [^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n/]*|\s*[\r\n]+|\s+(?!\S)|\s+
+     30    0.0%    0.1%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6869:47
+     25    0.0%    0.1%  JS: *fastCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2022:19
+     23    0.0%    0.1%  JS: *runCostPrepared file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6370:25
+     23    0.0%    0.1%  JS: *materialise file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6343:21
+     22    0.0%    0.1%  RegExp: [\u10ee\u10dd\u10e2\u10d8\u093e\u10d5\u0902\u0579\u10e1\u05d9\u0576\u0921\u03b5\u0584\u03af\u0948\u0907\u0917\u10d0\u05db\u10db\u10e3\u03b4\u0928\u05d0\u092f\u0c95\u0942\u05e0\u05d5\u094d\u05de\u10de\u093f\u03c4\u0d40\u057e\u03c6\u03b3\u10d4\u10d6\u03c2\u03ad\u0940\u0577\u10eb\u09f0\u09c1\u10d1\u09be\u0d32\u09a6\u05d4\u03bd\u0561\u057c\u0cc1\u0935\u03c1\u10d7\u03c3\u0e2d\u05e6\u0568\u057f\u0565\u0a82\u0acd\u0ab9\u0aaf\u0930\u056f\u0d7c\u0941\u0d41\u0acb\u056b\u0915\u05d1\u0562\u0ba4\u0bc8\u0d02\u0926\u05dd\u05d2\u0aae\u09b0\u0e14\u09a8\u099f\u091a\u092c\u0bb0\u05ea\u05e1\u05e7\u09af\u0aa4\u0ac0\u05e2\u092d\u09df\u092a\u03ac\u0531\u0ca1\u05d6\u03b9\u03b1\u05e8\u0938\u0d3e\u0d30\u0939\u0d38\u03c5\u03cd\u05e9\u0abe\u03c0\u0c82\u0aaa\u0d31\u09c0\u091c\u09c7\u094b\u0d2f\u091f\u03cc\u03bc\u0923\u09a4\u0dca\u03b7\u05d7\u03ae\u0932\u03bf\u03c9\u0cb0\u03ba\u0db1\u0ab0\u03bb\u0c3f\u0c30\u0e31\u0924\u10e0\u0563\u05b7] {1}
+     22    0.0%    0.1%  JS: *runUnder file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3327:20
+     21    0.0%    0.1%  JS: *get node:internal/bootstrap/node:437:8
+     20    0.0%    0.1%  JS: *sub file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7215:19
+     18    0.0%    0.1%  JS: *bytePairMerge file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:478:20
+     17    0.0%    0.1%  JS: *rnd file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6972:19
+     17    0.0%    0.1%  JS: *findCandidates file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:12647:24
+     14    0.0%    0.1%  RegExp: ^\s+$ {1}
+     12    0.0%    0.0%  JS: *buildAtoms file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6291:20
+     11    0.0%    0.0%  JS: *prolepsisRecord file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2194:25
+     11    0.0%    0.0%  JS: *greedyAdd file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7313:19
+     11    0.0%    0.0%  JS: *chironDecode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2881:22
+     11    0.0%    0.0%  JS: *capPhraseRules file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7664:24
+     10    0.0%    0.0%  JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+     10    0.0%    0.0%  JS: *grammarCost file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6057:21
+     10    0.0%    0.0%  JS: *chironOpsUsed file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3001:23
+     10    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6191:42
+      9    0.0%    0.0%  JS: *tokenStrings file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2486:22
+      9    0.0%    0.0%  JS: *flushDecoder file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2513:20
+      9    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7022:52
+      9    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6147:12
+      8    0.0%    0.0%  JS: ^epipsephisisTry file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1535:25
+      8    0.0%    0.0%  JS: *store file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2405:17
+      8    0.0%    0.0%  JS: *addWordRules file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7716:22
+      7    0.0%    0.0%  JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+      7    0.0%    0.0%  JS: ^localSearch file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7203:21
+      7    0.0%    0.0%  JS: *reparse file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7365:17
+      7    0.0%    0.0%  JS: *commitRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6481:33
+      7    0.0%    0.0%  JS: *chironInScript file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2810:24
+      7    0.0%    0.0%  JS: *chargeBlock file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3135:21
+      6    0.0%    0.0%  JS: *fastReady file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1791:19
+      6    0.0%    0.0%  JS: *epipsephisisRecord file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1486:28
+      5    0.0%    0.0%  JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      5    0.0%    0.0%  JS: *useCounts file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7638:19
+      5    0.0%    0.0%  JS: *tryConvertToString file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:111:28
+      5    0.0%    0.0%  JS: *prolepsisStride file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2128:25
+      5    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7233:23
+      4    0.0%    0.0%  RegExp: ([^\s])\1{7,}
+      4    0.0%    0.0%  JS: ^buildAtoms file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6291:20
+      4    0.0%    0.0%  JS: *prepareRunCostState file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6385:29
+      4    0.0%    0.0%  JS: *fastChunkCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1977:24
+      4    0.0%    0.0%  JS: *OFF file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1656:11
+      4    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6978:35
+      4    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6838:170
+      4    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6189:27
+      4    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10965:50
+      4    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10960:35
+      3    0.0%    0.0%  RegExp: [^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?:'(?:[sS]|[dD]|[mM]|[tT]|[lL][lL]|[vV][eE]|[rR][eE]))?|[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?:'(?:[sS]|[dD]|[mM]|[tT]|[lL][lL]|[vV][eE]|[rR][eE]))?|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n/]*|\s*[\r\n]+|\s+(?!\S)|\s+ {2}
+      3    0.0%    0.0%  JS: ^expandText file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2900:22
+      3    0.0%    0.0%  JS: *tapeIsNested file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10901:22
+      3    0.0%    0.0%  JS: *replaceAll file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7290:20
+      3    0.0%    0.0%  JS: *rankByRunPotential file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7684:28
+      3    0.0%    0.0%  JS: *prolepsisDisabled file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2125:27
+      3    0.0%    0.0%  JS: *listBodyFor file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3207:21
+      3    0.0%    0.0%  JS: *encodeNative file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:265:19
+      3    0.0%    0.0%  JS: *daedalusFeatures file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7987:26
+      3    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6846:23
+      3    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6390:65
+      2    0.0%    0.0%  RegExp: ^\s+$
+      2    0.0%    0.0%  RegExp: [^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?:'(?:[sS]|[dD]|[mM]|[tT]|[lL][lL]|[vV][eE]|[rR][eE]))?|[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?:'(?:[sS]|[dD]|[mM]|[tT]|[lL][lL]|[vV][eE]|[rR][eE]))?|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n/]*|\s*[\r\n]+|\s+(?!\S)|\s+ {4}
+      2    0.0%    0.0%  RegExp: [^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?:'(?:[sS]|[dD]|[mM]|[tT]|[lL][lL]|[vV][eE]|[rR][eE]))?|[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?:'(?:[sS]|[dD]|[mM]|[tT]|[lL][lL]|[vV][eE]|[rR][eE]))?|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n/]*|\s*[\r\n]+|\s+(?!\S)|\s+
+      2    0.0%    0.0%  JS: ^vocabByScript file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:5976:23
+      2    0.0%    0.0%  JS: ^sub file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6716:19
+      2    0.0%    0.0%  JS: ^rankByRunPotential file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7684:28
+      2    0.0%    0.0%  JS: ^countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+      2    0.0%    0.0%  JS: ^buildIndex file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6150:20
+      2    0.0%    0.0%  JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7666:38
+      2    0.0%    0.0%  JS: *visit file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6272:17
+      2    0.0%    0.0%  JS: *valueOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2928:19
+      2    0.0%    0.0%  JS: *sub file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6716:19
+      2    0.0%    0.0%  JS: *scan file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7240:18
+      2    0.0%    0.0%  JS: *rewrite file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6686:21
+      2    0.0%    0.0%  JS: *readQpToken file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:9332:21
+      2    0.0%    0.0%  JS: *findQpSpans file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:9373:21
+      2    0.0%    0.0%  JS: *atomRuns file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6329:18
+      2    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7382:55
+      1    0.0%    0.0%  RegExp: ^## 
+      1    0.0%    0.0%  RegExp: \d+(?:\/\d+){4}
+      1    0.0%    0.0%  RegExp: \d+(?: \d+){4}
+      1    0.0%    0.0%  RegExp: \d+
+      1    0.0%    0.0%  RegExp: [^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?:'(?:[sS]|[dD]|[mM]|[tT]|[lL][lL]|[vV][eE]|[rR][eE]))?|[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?:'(?:[sS]|[dD]|[mM]|[tT]|[lL][lL]|[vV][eE]|[rR][eE]))?|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n/]*|\s*[\r\n]+|\s+(?!\S)|\s+ {5}
+      1    0.0%    0.0%  RegExp: [^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?:'(?:[sS]|[dD]|[mM]|[tT]|[lL][lL]|[vV][eE]|[rR][eE]))?|[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?:'(?:[sS]|[dD]|[mM]|[tT]|[lL][lL]|[vV][eE]|[rR][eE]))?|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n/]*|\s*[\r\n]+|\s+(?!\S)|\s+ {3}
+      1    0.0%    0.0%  RegExp: ([ \t\r\n\u00A0\u202F])
+      1    0.0%    0.0%  RegExp: (<\|endoftext\|>|<\|fim_prefix\|>|<\|fim_middle\|>|<\|fim_suffix\|>|<\|im_start\|>|<\|im_end\|>|<\|im_sep\|>|<\|endofprompt\|>)
+      1    0.0%    0.0%  JS: ^wsTable file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2313:17
+      1    0.0%    0.0%  JS: ^scriptPool2 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6011:21
+      1    0.0%    0.0%  JS: ^scriptOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2839:18
+      1    0.0%    0.0%  JS: ^scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+      1    0.0%    0.0%  JS: ^scan file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7240:18
+      1    0.0%    0.0%  JS: ^rewrite file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6686:21
+      1    0.0%    0.0%  JS: ^reparse file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7365:17
+      1    0.0%    0.0%  JS: ^prolepsisRecord file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2194:25
+      1    0.0%    0.0%  JS: ^prolepsisAnchors file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2131:26
+      1    0.0%    0.0%  JS: ^matchAnchors file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3187:22
+      1    0.0%    0.0%  JS: ^lcp file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2137:13
+      1    0.0%    0.0%  JS: ^fastCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2022:19
+      1    0.0%    0.0%  JS: ^envOff file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2106:16
+      1    0.0%    0.0%  JS: ^dropRule file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10962:18
+      1    0.0%    0.0%  JS: ^deriveAnchors file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3174:23
+      1    0.0%    0.0%  JS: ^daedalusFeatures file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7987:26
+      1    0.0%    0.0%  JS: ^classifyStyledChar file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:9592:28
+      1    0.0%    0.0%  JS: ^chunkCountFast file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2262:24
+      1    0.0%    0.0%  JS: ^chironDecode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2881:22
+      1    0.0%    0.0%  JS: ^capPhraseRules file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7664:24
+      1    0.0%    0.0%  JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7022:52
+      1    0.0%    0.0%  JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6869:47
+      1    0.0%    0.0%  JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6147:12
+      1    0.0%    0.0%  JS: *scriptOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2839:18
+      1    0.0%    0.0%  JS: *put file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1829:17
+      1    0.0%    0.0%  JS: *prolepsisAnchors file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2131:26
+      1    0.0%    0.0%  JS: *planOrder file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6255:19
+      1    0.0%    0.0%  JS: *isRef file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7686:17
+      1    0.0%    0.0%  JS: *idOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6520:16
+      1    0.0%    0.0%  JS: *fuse file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7260:20
+      1    0.0%    0.0%  JS: *findMojibakeSpans file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:9222:27
+      1    0.0%    0.0%  JS: *chironExhausted file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2776:25
+      1    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6800:74
+      1    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6800:47
+      1    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3367:91
+      1    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3231:18
+      1    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2896:18
+      1    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:198:37
+      1    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10965:27
+      1    0.0%    0.0%  JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10205:45
+
+ [C++]:
+   ticks  total  nonlib   name
+   1161    1.1%    4.3%  pthread_cond_signal@@GLIBC_2.3.2
+    570    0.5%    2.1%  __libc_malloc@@GLIBC_2.2.5
+    114    0.1%    0.4%  __munmap@@GLIBC_PRIVATE
+     58    0.1%    0.2%  __write@@GLIBC_2.2.5
+     34    0.0%    0.1%  __mmap@@GLIBC_PRIVATE
+     28    0.0%    0.1%  _IO_fwrite@@GLIBC_2.2.5
+     26    0.0%    0.1%  operator new(unsigned long)@@GLIBCXX_3.4
+     25    0.0%    0.1%  __libc_free@@GLIBC_2.2.5
+     24    0.0%    0.1%  __madvise@@GLIBC_PRIVATE
+     19    0.0%    0.1%  __lll_lock_wait_private@@GLIBC_PRIVATE
+     17    0.0%    0.1%  __pthread_rwlock_wrlock@GLIBC_2.2.5
+     16    0.0%    0.1%  __getpid@@GLIBC_2.2.5
+     11    0.0%    0.0%  __pthread_rwlock_unlock@GLIBC_2.2.5
+     11    0.0%    0.0%  __pthread_mutex_lock@GLIBC_2.2.5
+     10    0.0%    0.0%  operator new[](unsigned long)@@GLIBCXX_3.4
+      8    0.0%    0.0%  __libc_calloc@@GLIBC_2.2.5
+      7    0.0%    0.0%  operator delete(void*)@@GLIBCXX_3.4
+      6    0.0%    0.0%  std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@@GLIBCXX_3.4.9
+      5    0.0%    0.0%  operator delete[](void*)@@GLIBCXX_3.4
+      5    0.0%    0.0%  __clock_gettime@@GLIBC_PRIVATE
+      5    0.0%    0.0%  _IO_file_xsputn@@GLIBC_2.2.5
+      4    0.0%    0.0%  __mprotect@@GLIBC_PRIVATE
+      3    0.0%    0.0%  std::ostream::sentry::sentry(std::ostream&)@@GLIBCXX_3.4
+      3    0.0%    0.0%  posix_memalign@@GLIBC_2.2.5
+      2    0.0%    0.0%  operator new[](unsigned long, std::nothrow_t const&)@@GLIBCXX_3.4
+      2    0.0%    0.0%  __pthread_mutex_unlock@GLIBC_2.2.5
+      2    0.0%    0.0%  __pthread_mutex_trylock@GLIBC_2.2.5
+      2    0.0%    0.0%  __lll_lock_wake_private@@GLIBC_PRIVATE
+      1    0.0%    0.0%  std::locale::id::_M_id() const@@GLIBCXX_3.4
+      1    0.0%    0.0%  std::__detail::_Prime_rehash_policy::_M_next_bkt(unsigned long) const@@GLIBCXX_3.4.18
+      1    0.0%    0.0%  std::__detail::_Prime_rehash_policy::_M_need_rehash(unsigned long, unsigned long, unsigned long) const@@GLIBCXX_3.4.18
+      1    0.0%    0.0%  std::_Rb_tree_decrement(std::_Rb_tree_node_base*)@@GLIBCXX_3.4
+      1    0.0%    0.0%  pthread_cond_init@@GLIBC_2.3.2
+      1    0.0%    0.0%  pthread_cond_broadcast@@GLIBC_2.3.2
+      1    0.0%    0.0%  operator delete(void*, unsigned long)@@CXXABI_1.3.9
+      1    0.0%    0.0%  fputc@@GLIBC_2.2.5
+      1    0.0%    0.0%  __read@@GLIBC_2.2.5
+      1    0.0%    0.0%  __pthread_rwlock_init@GLIBC_2.2.5
+      1    0.0%    0.0%  __pthread_mutex_init@GLIBC_2.2.5
+      1    0.0%    0.0%  __pthread_mutex_destroy@GLIBC_2.2.5
+      1    0.0%    0.0%  __popcountdi2@@GCC_3.4
+      1    0.0%    0.0%  __cxa_guard_acquire@@CXXABI_1.3
+      1    0.0%    0.0%  _IO_default_xsputn@@GLIBC_2.2.5
+
+ [Summary]:
+   ticks  total  nonlib   name
+  24571   23.6%   91.7%  JavaScript
+   2193    2.1%    8.2%  C++
+   5352    5.1%   20.0%  GC
+  77324   74.3%          Shared libraries
+     36    0.0%          Unaccounted
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+    552   60.1%    0.5%  __libc_malloc@@GLIBC_2.2.5
+    130   14.2%    0.1%  pthread_cond_signal@@GLIBC_2.3.2
+     44    4.8%    0.0%  __write@@GLIBC_2.2.5
+     31    3.4%    0.0%  __mmap@@GLIBC_PRIVATE
+     26    2.8%    0.0%  _IO_fwrite@@GLIBC_2.2.5
+     25    2.7%    0.0%  operator new(unsigned long)@@GLIBCXX_3.4
+     18    2.0%    0.0%  __munmap@@GLIBC_PRIVATE
+     17    1.9%    0.0%  __libc_free@@GLIBC_2.2.5
+     10    1.1%    0.0%  operator new[](unsigned long)@@GLIBCXX_3.4
+      8    0.9%    0.0%  __libc_calloc@@GLIBC_2.2.5
+      7    0.8%    0.0%  operator delete(void*)@@GLIBCXX_3.4
+      6    0.7%    0.0%  std::basic_ostream<char, std::char_traits<char> >& std::__ostream_insert<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*, long)@@GLIBCXX_3.4.9
+      5    0.5%    0.0%  operator delete[](void*)@@GLIBCXX_3.4
+      5    0.5%    0.0%  __pthread_mutex_lock@GLIBC_2.2.5
+      5    0.5%    0.0%  __madvise@@GLIBC_PRIVATE
+      5    0.5%    0.0%  _IO_file_xsputn@@GLIBC_2.2.5
+      4    0.4%    0.0%  __lll_lock_wait_private@@GLIBC_PRIVATE
+      3    0.3%    0.0%  std::ostream::sentry::sentry(std::ostream&)@@GLIBCXX_3.4
+      3    0.3%    0.0%  posix_memalign@@GLIBC_2.2.5
+      2    0.2%    0.0%  operator new[](unsigned long, std::nothrow_t const&)@@GLIBCXX_3.4
+      2    0.2%    0.0%  __mprotect@@GLIBC_PRIVATE
+      2    0.2%    0.0%  __lll_lock_wake_private@@GLIBC_PRIVATE
+      1    0.1%    0.0%  std::locale::id::_M_id() const@@GLIBCXX_3.4
+      1    0.1%    0.0%  std::__detail::_Prime_rehash_policy::_M_need_rehash(unsigned long, unsigned long, unsigned long) const@@GLIBCXX_3.4.18
+      1    0.1%    0.0%  operator delete(void*, unsigned long)@@CXXABI_1.3.9
+      1    0.1%    0.0%  fputc@@GLIBC_2.2.5
+      1    0.1%    0.0%  __read@@GLIBC_2.2.5
+      1    0.1%    0.0%  __pthread_rwlock_init@GLIBC_2.2.5
+      1    0.1%    0.0%  __pthread_mutex_unlock@GLIBC_2.2.5
+      1    0.1%    0.0%  __clock_gettime@@GLIBC_PRIVATE
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+  72549   69.7%  /usr/local/bin/node
+  29162   40.2%    /usr/local/bin/node
+  12633   43.3%      /usr/local/bin/node
+   8043   63.7%        JS: *wireOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11833:18
+   8035   99.9%          JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+   8035  100.0%            JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+   1631   12.9%        JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+   1591   97.5%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+   1040   65.4%            JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    357   22.4%            JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    118    7.4%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     76    4.8%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     40    2.5%          JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     32   80.0%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      8   20.0%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+   1258   10.0%        /usr/local/bin/node
+   1194   94.9%          JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6978:35
+   1149   96.2%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     45    3.8%            /usr/local/bin/node
+     45    3.6%          JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6978:35
+     29   64.4%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     16   35.6%            /usr/local/bin/node
+    507    4.0%        JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+    506   99.8%          JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+    479   94.7%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     27    5.3%            JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    297    2.4%        JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+    297  100.0%          JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+    297  100.0%            JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+    263    2.1%        JS: *store file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2405:17
+    263  100.0%          JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+    241   91.6%            JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+     11    4.2%            JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+      4    1.5%            JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+      3    1.1%            JS: ^T file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10972:13
+   9687   33.2%      JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+   9619   99.3%        JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+   8742   90.9%          JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+   8742  100.0%            JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+    351    3.6%          JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+    351  100.0%            JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+    265    2.8%          JS: ^T file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10972:13
+    265  100.0%            JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+   2066    7.1%      JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+   1978   95.7%        JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+   1823   92.2%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+   1571   86.2%            JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    109    6.0%            JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    104    5.7%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     39    2.1%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    155    7.8%          JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    145   93.5%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     10    6.5%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     73    3.5%        JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+     73  100.0%          JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     73  100.0%            JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+    832    2.9%      JS: *wireOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11833:18
+    832  100.0%        JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+    832  100.0%          JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+    832  100.0%            JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+    720    2.5%      JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6978:35
+    692   96.1%        JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    463   66.9%          JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    422   91.1%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     41    8.9%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    182   26.3%          JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    182  100.0%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     29    4.2%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     29  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     18    2.6%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     14   77.8%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      4   22.2%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     28    3.9%        /usr/local/bin/node
+     28  100.0%          JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     19   67.9%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      9   32.1%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    446    1.5%      JS: *fastCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2022:19
+    426   95.5%        JS: *chunkCountFast file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2262:24
+    307   72.1%          JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+    307  100.0%            JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+    118   27.7%          JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+    117   99.2%            JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+     20    4.5%        JS: ^countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     20  100.0%          JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+     10   50.0%            JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     10   50.0%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    421    1.4%      JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    257   61.0%        JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    235   91.4%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    116   49.4%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     92   39.1%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+     27   11.5%            JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+     22    8.6%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     16   72.7%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      6   27.3%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    131   31.1%        JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    129   98.5%          JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     87   67.4%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     40   31.0%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      2    1.6%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      2    1.5%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1   50.0%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1   50.0%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     17    4.0%        JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     11   64.7%          JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      6   54.5%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      5   45.5%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      5   29.4%          JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      5  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1    5.9%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     16    3.8%        JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     16  100.0%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     16  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+  11539   15.9%    JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+  10355   89.7%      JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+   9934   95.9%        JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+   7247   73.0%          JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+   6823   94.1%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    424    5.9%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+   1946   19.6%          JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+   1946  100.0%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+    479    4.8%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    479  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    262    2.6%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    187   71.4%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     75   28.6%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+    421    4.1%        JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    339   80.5%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    339  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     82   19.5%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     82  100.0%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+   1014    8.8%      JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+   1014  100.0%        JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+   1014  100.0%          JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+   1014  100.0%            JS: ~synkopeEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:12058:23
+   8217   11.3%    JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+   7926   96.5%      JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+   5444   68.7%        JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+   5033   92.5%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+   2644   52.5%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+   2065   41.0%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    324    6.4%            JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    411    7.5%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    354   86.1%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     57   13.9%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+   1669   21.1%        JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+   1669  100.0%          JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+   1067   63.9%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    571   34.2%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     31    1.9%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    502    6.3%        JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    502  100.0%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    502  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    311    3.9%        JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    238   76.5%          JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+    166   69.7%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     72   30.3%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     73   23.5%          JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     47   64.4%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     26   35.6%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    291    3.5%      JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    248   85.2%        JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    248  100.0%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    248  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     43   14.8%        JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     43  100.0%          JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     22   51.2%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     21   48.8%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+   3848    5.3%    JS: *chunkCountFast file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2262:24
+   3659   95.1%      JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+   3646   99.6%        JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+   3208   88.0%          JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+   3208  100.0%            JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+    142    3.9%          JS: ^T file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10972:13
+    142  100.0%            JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+    106    2.9%          JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+    106  100.0%            JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     62    1.7%          JS: *T file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10972:13
+     62  100.0%            JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+     60    1.6%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     52   86.7%            JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      4    6.7%            JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      2    3.3%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      2    3.3%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    186    4.8%      JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+    184   98.9%        JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+    155   84.2%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    121   78.1%            JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     14    9.0%            JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     13    8.4%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      7    4.5%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     29   15.8%          JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     27   93.1%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      2    6.9%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+   3843    5.3%    JS: *rankAt file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1947:16
+   3841   99.9%      JS: *mergeCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1919:20
+   3386   88.2%        JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+   3358   99.2%          JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+   3043   90.6%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    315    9.4%            JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    434   11.3%        JS: *fastCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2022:19
+    401   92.4%          JS: *chunkCountFast file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2262:24
+    336   83.8%            JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+     64   16.0%            JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     32    7.4%          JS: ^countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     32  100.0%            JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+   3173    4.4%    JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+   2116   66.7%      JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+   1938   91.6%        JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+   1070   55.2%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    817   76.4%            JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+    253   23.6%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+    712   36.7%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    712  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+    156    8.0%          JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    156  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+    178    8.4%        JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    157   88.2%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    157  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     21   11.8%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+     21  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+    746   23.5%      JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    737   98.8%        JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+    485   65.8%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    245   50.5%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    195   40.2%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     45    9.3%            JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    230   31.2%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    176   76.5%            JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     54   23.5%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     22    3.0%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     22  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      9    1.2%        JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      5   55.6%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      5  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      3   33.3%          JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      3  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      1   11.1%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      1  100.0%            JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+    160    5.0%      JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    160  100.0%        JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    160  100.0%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    160  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+    151    4.8%      JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     97   64.2%        JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     59   60.8%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     59  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     38   39.2%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     38  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     53   35.1%        JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     38   71.7%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     38  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     15   28.3%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     15  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+   3075    4.2%    JS: *mergeCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1919:20
+   2697   87.7%      JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+   2681   99.4%        JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+   2417   90.2%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+   1992   82.4%            JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    191    7.9%            JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    164    6.8%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     70    2.9%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    264    9.8%          JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    228   86.4%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     36   13.6%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    354   11.5%      JS: *fastCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2022:19
+    335   94.6%        JS: *chunkCountFast file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2262:24
+    279   83.3%          JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+    278   99.6%            JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     55   16.4%          JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     55  100.0%            JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+     19    5.4%        JS: ^countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     19  100.0%          JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+     12   63.2%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      7   36.8%            JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+   1390    1.9%    JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11803:58
+   1390  100.0%      /usr/local/bin/node
+   1333   95.9%        JS: *wireOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11833:18
+   1330   99.8%          JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+   1330  100.0%            JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     57    4.1%        JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+     57  100.0%          JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     57  100.0%            JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+    745    1.0%    JS: *put file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6994:19
+    715   96.0%      JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    438   61.3%        JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    405   92.5%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    215   53.1%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    159   39.3%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+     31    7.7%            JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+     33    7.5%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     24   72.7%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      9   27.3%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    207   29.0%        JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    207  100.0%          JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+    138   66.7%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     62   30.0%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      7    3.4%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     43    6.0%        JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     31   72.1%          JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     24   77.4%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      7   22.6%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     12   27.9%          JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      8   66.7%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      4   33.3%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     27    3.8%        JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     27  100.0%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     27  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     30    4.0%      JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     24   80.0%        JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     24  100.0%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     24  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      6   20.0%        JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      6  100.0%          JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      4   66.7%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      2   33.3%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+
+   5116    4.9%  JS: *mergeCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1919:20
+   4256   83.2%    JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+   4231   99.4%      JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+   3837   90.7%        JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+   3236   84.3%          JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+   3188   98.5%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     48    1.5%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    275    7.2%          JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    275  100.0%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+    251    6.5%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    251  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     75    2.0%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     75  100.0%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+    394    9.3%        JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    355   90.1%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    355  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     39    9.9%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     39  100.0%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+    795   15.5%    JS: *fastCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2022:19
+    750   94.3%      JS: *chunkCountFast file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2262:24
+    667   88.9%        JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+    665   99.7%          JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+    471   70.8%            JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+    155   23.3%            JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+     29    4.4%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     83   11.1%        JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     81   97.6%          JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+     66   81.5%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     15   18.5%            JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      1    1.2%          JS: ^scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+      1  100.0%            JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      1    1.2%          JS: *runCostPrepared file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6370:25
+      1  100.0%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     45    5.7%      JS: ^countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     45  100.0%        JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+     26   57.8%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     26  100.0%            JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     19   42.2%          JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     19  100.0%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+
+   4734    4.5%  /usr/lib/x86_64-linux-gnu/libc.so.6
+   2115   44.7%    /usr/local/bin/node
+    725   34.3%      /usr/local/bin/node
+    474   65.4%        JS: *wireOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11833:18
+    472   99.6%          JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+    472  100.0%            JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     71    9.8%        JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+     65   91.5%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     43   66.2%            JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     12   18.5%            JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      7   10.8%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      3    4.6%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      6    8.5%          JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      5   83.3%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      1   16.7%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     17    2.3%        /usr/local/bin/node
+     13   76.5%          JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6978:35
+     13  100.0%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      2   11.8%          JS: *prepareRuns file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6355:21
+      2  100.0%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      1    5.9%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      1  100.0%            JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      1    5.9%          JS: *findMojibakeSpans file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:9222:27
+      1  100.0%            JS: ~prosoponTransform file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:9300:27
+     15    2.1%        JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     15  100.0%          JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+     12   80.0%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      3   20.0%            JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     15    2.1%        JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+     15  100.0%          JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     14   93.3%            JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+      1    6.7%            JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+     13    1.8%        JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      8   61.5%          JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      4   50.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      4   50.0%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      4   30.8%          JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      4  100.0%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      1    7.7%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      1  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     13    1.8%        JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+     13  100.0%          JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     13  100.0%            JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+    673   31.8%      JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+    643   95.5%        JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+    604   93.9%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    494   81.8%            JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     56    9.3%            JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     40    6.6%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     14    2.3%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     39    6.1%          JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     37   94.9%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      2    5.1%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     17    2.5%        JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+     17  100.0%          JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     17  100.0%            JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+    104    4.9%      JS: *fastCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2022:19
+    101   97.1%        JS: *chunkCountFast file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2262:24
+     66   65.3%          JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+     66  100.0%            JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     35   34.7%          JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     35  100.0%            JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+      3    2.9%        JS: ^countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+      2   66.7%          JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+      1   50.0%            JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      1   50.0%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      1   33.3%          JS: *runCostPrepared file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6370:25
+      1  100.0%            JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     53    2.5%      JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     42   79.2%        JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     33   78.6%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     19   57.6%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+     12   36.4%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      2    6.1%            JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      9   21.4%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      8   88.9%            JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      1   11.1%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     10   18.9%        JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      5   50.0%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      3   60.0%            JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      2   40.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      3   30.0%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      3  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      2   20.0%          JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      2  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      1    1.9%        JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+     52    2.5%      JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     32   61.5%        JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     28   87.5%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     18   64.3%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      6   21.4%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      4   14.3%            JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      4   12.5%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      3   75.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      1   25.0%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+     13   25.0%        JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     11   84.6%          JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      8   72.7%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      2   18.2%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      1    9.1%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      2   15.4%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1   50.0%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1   50.0%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      4    7.7%        JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      4  100.0%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      4  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      3    5.8%        JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      2   66.7%          JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      2  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      1   33.3%          JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      1  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     24    1.1%      JS: *chunkCountFast file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2262:24
+     22   91.7%        JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+     22  100.0%          JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     19   86.4%            JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+      2    9.1%            JS: ^T file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10972:13
+      1    4.5%            JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+      2    8.3%        JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+      2  100.0%          JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+      2  100.0%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     23    1.1%      JS: *localSearch file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7203:21
+     23  100.0%        JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     16   69.6%          JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     12   75.0%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      3   18.8%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      1    6.3%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      6   26.1%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      3   50.0%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      2   33.3%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1   16.7%            JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1    4.3%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    140    3.0%    JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+     96   68.6%      JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+     96  100.0%        JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     96  100.0%          JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+     96  100.0%            JS: ~synkopeEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:12058:23
+     37   26.4%      JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     30   81.1%        JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     29   96.7%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     19   65.5%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      6   20.7%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      4   13.8%            JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1    3.3%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      6   16.2%        JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      6  100.0%          JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      4   66.7%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      2   33.3%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      1    2.7%        JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1  100.0%          JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      1  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      4    2.9%      JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+      4  100.0%        JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+      4  100.0%          JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+      4  100.0%            JS: ~synkopeEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:12058:23
+      2    1.4%      JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      2  100.0%        JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      2  100.0%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      2  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+
+   3739    3.6%  RegExp: [^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]*[\p{Ll}\p{Lm}\p{Lo}\p{M}]+(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|[^\r\n\p{L}\p{N}]?[\p{Lu}\p{Lt}\p{Lm}\p{Lo}\p{M}]+[\p{Ll}\p{Lm}\p{Lo}\p{M}]*(?:'(?:[sStT]|[rR][eE]|[vV][eE]|[mM]|[lL][lL]|[dD]))?|\p{N}{1,3}| ?[^\s\p{L}\p{N}]+[\r\n/]*|\s*[\r\n]+|\s+(?!\S)|\s+ {1}
+   3739  100.0%    /usr/local/bin/node
+   3718   99.4%      JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+   3695   99.4%        JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+   3383   91.6%          JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+   3383  100.0%            JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+    113    3.1%          JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+    113  100.0%            JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     91    2.5%          JS: ^T file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10972:13
+     91  100.0%            JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+     50    1.4%          JS: *listBodyFor file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3207:21
+     50  100.0%            JS: ^splitColumns file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3259:22
+
+   3138    3.0%  JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+   3013   96.0%    JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+   2064   68.5%      JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+   1894   91.8%        JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+   1008   53.2%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    782   77.6%            JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+    226   22.4%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+    750   39.6%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    750  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+    136    7.2%          JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    136  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+    170    8.2%        JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    141   82.9%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    141  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     29   17.1%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+     29  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+    659   21.9%      JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    659  100.0%        JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+    425   64.5%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    213   50.1%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    179   42.1%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     33    7.8%            JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    220   33.4%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    163   74.1%            JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     57   25.9%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     14    2.1%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     14  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+    161    5.3%      JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    161  100.0%        JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    161  100.0%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    161  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+    129    4.3%      JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     93   72.1%        JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     58   62.4%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     58  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     35   37.6%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     35  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     36   27.9%        JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     23   63.9%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     23  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     13   36.1%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     13  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     99    3.2%    JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     83   83.8%      JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     83  100.0%        JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     83  100.0%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     83  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     16   16.2%      JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     16  100.0%        JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      9   56.3%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      9  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      7   43.8%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      7  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+
+   2442    2.3%  JS: *chunkCountFast file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2262:24
+   1417   58.0%    JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+   1303   92.0%      JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+   1269   97.4%        JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    839   66.1%          JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    788   93.9%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     51    6.1%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    345   27.2%          JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    345  100.0%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     47    3.7%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     27   57.4%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     20   42.6%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     38    3.0%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     38  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     34    2.6%        JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     27   79.4%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     27  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      7   20.6%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      7  100.0%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     52    3.7%      JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+     52  100.0%        JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     52  100.0%          JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+     52  100.0%            JS: ~synkopeEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:12058:23
+     47    3.3%      JS: *runCostPrepared file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6370:25
+     47  100.0%        JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     30   63.8%          JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     30  100.0%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     11   23.4%          JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      7   63.6%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      4   36.4%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      4    8.5%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      3   75.0%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      1   25.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      2    4.3%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      2  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+   1010   41.4%    JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+   1006   99.6%      JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+    909   90.4%        JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+    909  100.0%          JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+    909  100.0%            JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+     39    3.9%        JS: ^T file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10972:13
+     39  100.0%          JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+     39  100.0%            JS: ^akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+     22    2.2%        JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+     22  100.0%          JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     22  100.0%            JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+     14    1.4%        JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      6   42.9%          JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      6  100.0%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      4   28.6%          JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      3   75.0%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      1   25.0%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      3   21.4%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      3  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1    7.1%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1  100.0%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+
+   1652    1.6%  JS: *chironParseTape file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2845:25
+    467   28.3%    JS: *chironOpsUsed file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3001:23
+    423   90.6%      JS: ^syntomiaContract file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10921:26
+    409   96.7%        JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+    407   99.5%          JS: ^akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+    407  100.0%            JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+     10    2.4%        JS: ~costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+     10  100.0%          JS: ~akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+     10  100.0%            JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+     31    6.6%      JS: ^chironDecoderPrompt file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3028:29
+     19   61.3%        JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     18   94.7%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     10   55.6%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      8   44.4%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1    5.3%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      8   25.8%        JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      5   62.5%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      5  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      2   25.0%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      1   50.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      1   50.0%            JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      1   12.5%          JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      3    9.7%        JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      3  100.0%          JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+      3  100.0%            JS: ~engramMemo file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7574:20
+      1    3.2%        JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      1  100.0%          JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+      1  100.0%            JS: ~engramMemo file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7574:20
+      6    1.3%      JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      4   66.7%        JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      4  100.0%          JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      4  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11614:25
+      2   33.3%        JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      1   50.0%          JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      1  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+      1   50.0%          JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      1  100.0%            JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+    401   24.3%    JS: ^chironDecode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2881:22
+    337   84.0%      JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+    337  100.0%        JS: ^akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+    337  100.0%          JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+    337  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+     18    4.5%      JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     14   77.8%        JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      7   50.0%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      7  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      7   50.0%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      4   57.1%            JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      3   42.9%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      4   22.2%        JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      3   75.0%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      3  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      1   25.0%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+     12    3.0%      JS: ~costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+     12  100.0%        JS: ~akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+     12  100.0%          JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+     12  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+     10    2.5%      JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      5   50.0%        JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      5  100.0%          JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      5  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11614:25
+      5   50.0%        JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      4   80.0%          JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      4  100.0%            JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+      1   20.0%          JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      1  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+    377   22.8%    JS: *genericWordingIsSound file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10880:31
+    364   96.6%      JS: ^syntomiaContract file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10921:26
+    350   96.2%        JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+    350  100.0%          JS: ^akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+    350  100.0%            JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+     11    3.0%        JS: ~costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+     11  100.0%          JS: ~akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+     11  100.0%            JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+      6    1.6%      JS: *syntomiaContract file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10921:26
+      5   83.3%        JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+      5  100.0%          JS: ^akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+      5  100.0%            JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+      1   16.7%        JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+      1  100.0%          JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      1  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11614:25
+      4    1.1%      JS: ~syntomiaContract file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10921:26
+      2   50.0%        JS: ~price file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11101:17
+      2  100.0%          JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      2  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11614:25
+      2   50.0%        JS: ~costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+      2  100.0%          JS: ~akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+      2  100.0%            JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+    272   16.5%    JS: *tapeIsNested file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10901:22
+    264   97.1%      JS: ^syntomiaContract file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10921:26
+    259   98.1%        JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+    259  100.0%          JS: ^akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+    259  100.0%            JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+      7    2.6%      JS: *syntomiaContract file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10921:26
+      5   71.4%        JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+      5  100.0%          JS: ^akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+      5  100.0%            JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+      2   28.6%        JS: ^price file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11101:17
+      2  100.0%          JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      2  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11614:25
+     77    4.7%    JS: ^tapeIsNested file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10901:22
+     76   98.7%      JS: ^syntomiaContract file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10921:26
+     68   89.5%        JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+     68  100.0%          JS: ^akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+     68  100.0%            JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+      8   10.5%        JS: ~costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+      8  100.0%          JS: ~akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+      8  100.0%            JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+      1    1.3%      JS: ~syntomiaContract file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10921:26
+      1  100.0%        JS: ~costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+      1  100.0%          JS: ~akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+      1  100.0%            JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+     45    2.7%    JS: *chironDecode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2881:22
+     30   66.7%      JS: ^costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+     30  100.0%        JS: ^akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+     30  100.0%          JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+     30  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+     10   22.2%      JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     10  100.0%        JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      6   60.0%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      6  100.0%            JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      4   40.0%          JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      4  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      2    4.4%      JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      2  100.0%        JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      2  100.0%          JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+      2  100.0%            JS: ~engramMemo file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7574:20
+      1    2.2%      JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%        JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1  100.0%          JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      1  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11614:25
+      1    2.2%      JS: ^price file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11101:17
+      1  100.0%        JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      1  100.0%          JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11614:25
+      1  100.0%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11629:20
+      1    2.2%      JS: *costOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10973:18
+      1  100.0%        JS: ^akribeiaPolish file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10969:24
+      1  100.0%          JS: ~polishPhase file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11134:23
+      1  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+
+   1340    1.3%  JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    840   62.7%    JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+    767   91.3%      JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    393   51.2%        JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+    303   77.1%          JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+    269   88.8%            JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+     34   11.2%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+     90   22.9%          JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     90  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+    311   40.5%        JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    311  100.0%          JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+    311  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11614:25
+     63    8.2%        JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+     63  100.0%          JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+     63  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11614:25
+     73    8.7%      JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     59   80.8%        JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     59  100.0%          JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     59  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+     14   19.2%        JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+     14  100.0%          JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+     14  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11614:25
+    359   26.8%    JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    357   99.4%      JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+    242   67.8%        JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+    113   46.7%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     85   75.2%            JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     28   24.8%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+    106   43.8%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+    106  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+     23    9.5%          JS: ^runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+     23  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+    105   29.4%        JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     85   81.0%          JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     75   88.2%            JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+     10   11.8%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+     20   19.0%          JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     20  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+     10    2.8%        JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     10  100.0%          JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     10  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+     76    5.7%    JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     54   71.1%      JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     33   61.1%        JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     33  100.0%          JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     33  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+     21   38.9%        JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     21  100.0%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     21  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     22   28.9%      JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     14   63.6%        JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     14  100.0%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     14  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      8   36.4%        JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      8  100.0%          JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      8  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+     65    4.9%    JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     65  100.0%      JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+     65  100.0%        JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+     65  100.0%          JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+     65  100.0%            JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8059:7
+
+   1161    1.1%  pthread_cond_signal@@GLIBC_2.3.2
+    130   11.2%    /usr/local/bin/node
+     65   50.0%      /usr/local/bin/node
+      9   13.8%        JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      5   55.6%          JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      3   60.0%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      2   40.0%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      3   33.3%          JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      3  100.0%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1   11.1%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1  100.0%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      8   12.3%        JS: ^rankByRunPotential file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7684:28
+      7   87.5%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      4   57.1%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      3   42.9%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1   12.5%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      6    9.2%        JS: ^mkMap file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6844:19
+      4   66.7%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      2   50.0%            JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1   25.0%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      1   25.0%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      2   33.3%          JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      2  100.0%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      6    9.2%        JS: ^localSearch file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7203:21
+      6  100.0%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      5   83.3%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      1   16.7%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      5    7.7%        JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6838:108
+      4   80.0%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      3   75.0%            JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1   25.0%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1   20.0%          /usr/local/bin/node
+      1  100.0%            JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      4    6.2%        JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      2   50.0%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      2  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      2   50.0%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      2  100.0%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      4    6.2%        JS: ^greedyAdd file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7313:19
+      4  100.0%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      3   75.0%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      1   25.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      3    4.6%        JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+      3  100.0%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      2   66.7%            JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1   33.3%            JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      2    3.1%        JS: ^depsOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6259:18
+      2  100.0%          JS: ^visit file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6272:17
+      2  100.0%            JS: ^planOrder file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6255:19
+      2    3.1%        JS: ^chironDecode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2881:22
+      1   50.0%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      1  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      1   50.0%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      2    3.1%        JS: *mineSpans file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6064:19
+      1   50.0%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1   50.0%          JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1  100.0%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      2    3.1%        JS: *buildIndex file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6150:20
+      1   50.0%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1   50.0%          JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1  100.0%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      2    3.1%        /usr/local/bin/node
+      2  100.0%          JS: *<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6978:35
+      2  100.0%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      1    1.5%        JS: ~mineSpans file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6064:19
+      1  100.0%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1    1.5%        JS: ~metatronViterbiTile file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10652:29
+      1  100.0%          JS: ~buildMetatronInlineWire file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10697:33
+      1  100.0%            JS: ~metatronEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10746:24
+      1    1.5%        JS: ~epistemeViterbiTile file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10202:29
+      1  100.0%          JS: ~buildEpistemeInlineWire file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10247:33
+      1  100.0%            JS: ~epistemeEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10296:24
+      1    1.5%        JS: ~<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3367:64
+      1  100.0%          /usr/local/bin/node
+      1  100.0%            JS: ^score file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:3344:17
+      1    1.5%        JS: ^sub file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7726:17
+      1  100.0%          JS: ^addWordRules file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7716:22
+      1  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1    1.5%        JS: ^reparse file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7365:17
+      1  100.0%          JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1  100.0%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      1    1.5%        JS: ^cloneGrammar file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7627:22
+      1  100.0%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1    1.5%        JS: ^capPhraseRules file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7664:24
+      1  100.0%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1    1.5%        JS: *prepareRunCostState file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6385:29
+      1  100.0%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      1  100.0%            JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      1    1.5%        JS: *epistemeViterbiTile file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10202:29
+      1  100.0%          JS: ~buildEpistemeInlineWire file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10247:33
+      1  100.0%            JS: ~epistemeEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:10296:24
+     13   10.0%      JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      8   61.5%        JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      8  100.0%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      6   75.0%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      2   25.0%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      3   23.1%        JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      3  100.0%          JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      3  100.0%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1    7.7%        JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      1  100.0%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      1    7.7%        JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      1  100.0%          JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      1  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      8    6.2%      JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      5   62.5%        JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      4   80.0%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      4  100.0%            JS: ^daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      1   20.0%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      3   37.5%        JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      3  100.0%          JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      2   66.7%            JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1   33.3%            JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      4    3.1%      JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      2   50.0%        JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      2  100.0%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      2  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      1   25.0%        JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%          JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      1  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      1   25.0%        JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      1  100.0%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      3    2.3%      JS: ^valueOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2928:19
+      3  100.0%        JS: ^expandText file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2900:22
+      3  100.0%          JS: ^chironDecode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2881:22
+      3  100.0%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+      3    2.3%      JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      3  100.0%        JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      3  100.0%          JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      3  100.0%            JS: ~runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      3    2.3%      JS: ^rankByRunPotential file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7684:28
+      3  100.0%        JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      2   66.7%          JS: ^runArm file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8077:18
+      2  100.0%            JS: ~daedalusEncodeInner file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:8064:29
+      1   33.3%          JS: ~runConfig file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11058:19
+      1  100.0%            JS: ~polytroposEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11069:26
+      2    1.5%      JS: ^<anonymous> file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6189:27
+      2  100.0%        /usr/local/bin/node
+      2  100.0%          JS: ~buildIndex file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6150:20
+      2  100.0%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      2    1.5%      JS: *latin1 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1786:16
+      2  100.0%        JS: *rankAt file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1947:16
+      2  100.0%          JS: *mergeCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1919:20
+      1   50.0%            JS: *fastCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2022:19
+      1   50.0%            JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+
+   1061    1.0%  RegExp: [\u10ee\u10dd\u10e2\u10d8\u093e\u10d5\u0902\u0579\u10e1\u05d9\u0576\u0921\u03b5\u0584\u03af\u0948\u0907\u0917\u10d0\u05db\u10db\u10e3\u03b4\u0928\u05d0\u092f\u0c95\u0942\u05e0\u05d5\u094d\u05de\u10de\u093f\u03c4\u0d40\u057e\u03c6\u03b3\u10d4\u10d6\u03c2\u03ad\u0940\u0577\u10eb\u09f0\u09c1\u10d1\u09be\u0d32\u09a6\u05d4\u03bd\u0561\u057c\u0cc1\u0935\u03c1\u10d7\u03c3\u0e2d\u05e6\u0568\u057f\u0565\u0a82\u0acd\u0ab9\u0aaf\u0930\u056f\u0d7c\u0941\u0d41\u0acb\u056b\u0915\u05d1\u0562\u0ba4\u0bc8\u0d02\u0926\u05dd\u05d2\u0aae\u09b0\u0e14\u09a8\u099f\u091a\u092c\u0bb0\u05ea\u05e1\u05e7\u09af\u0aa4\u0ac0\u05e2\u092d\u09df\u092a\u03ac\u0531\u0ca1\u05d6\u03b9\u03b1\u05e8\u0938\u0d3e\u0d30\u0939\u0d38\u03c5\u03cd\u05e9\u0abe\u03c0\u0c82\u0aaa\u0d31\u09c0\u091c\u09c7\u094b\u0d2f\u091f\u03cc\u03bc\u0923\u09a4\u0dca\u03b7\u05d7\u03ae\u0932\u03bf\u03c9\u0cb0\u03ba\u0db1\u0ab0\u03bb\u0c3f\u0c30\u0e31\u0924\u10e0\u0563\u05b7]
+   1061  100.0%    /usr/local/bin/node
+   1061  100.0%      /usr/local/bin/node
+   1023   96.4%        JS: *wireOf file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11833:18
+   1023  100.0%          JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+   1023  100.0%            JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     38    3.6%        JS: *relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+     38  100.0%          JS: ~metathesisEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11912:26
+     38  100.0%            JS: ~syntomosEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11970:24
+
+   1059    1.0%  JS: *rankAt file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1947:16
+    939   88.7%    JS: *mergeCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:1919:20
+    791   84.2%      JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+    788   99.6%        JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+    709   90.0%          JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+    593   83.6%            JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     66    9.3%            JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     38    5.4%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     12    1.7%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+     79   10.0%          JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     70   88.6%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      9   11.4%            JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+    141   15.0%      JS: *fastCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2022:19
+    140   99.3%        JS: *chunkCountFast file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2262:24
+    131   93.6%          JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+    130   99.2%            JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+      9    6.4%          JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+      9  100.0%            JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+    108   10.2%    JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+    108  100.0%      JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+     97   89.8%        JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+     87   89.7%          JS: ^evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+     86   98.9%            JS: ^sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      1    1.1%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      7    7.2%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      7  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      3    3.1%          JS: *buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      3  100.0%            JS: ^ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     11   10.2%        JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      8   72.7%          JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+      8  100.0%            JS: ~sibylEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7774:21
+      3   27.3%          JS: ^buildOn file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6515:17
+      3  100.0%            JS: ~ariadneEncode file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7429:23
+     12    1.1%    JS: *fastCount file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2022:19
+     11   91.7%      JS: *chunkCountFast file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2262:24
+      7   63.6%        JS: *countLongRaw file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2322:22
+      7  100.0%          JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+      5   71.4%            JS: ^relayoutGlyphs file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:11805:24
+      2   28.6%            JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+      4   36.4%        JS: *countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+      4  100.0%          JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+      4  100.0%            JS: *renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      1    8.3%      JS: ^countTokens3 file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:2373:22
+      1  100.0%        JS: *scoreRunCostDeltaSlots file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6438:32
+      1  100.0%          JS: ^renderBest file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:6744:20
+      1  100.0%            JS: ~evaluate file:///home/user/kompkernel/.cache/x181/apousia-worker.mjs:7844:20
+
