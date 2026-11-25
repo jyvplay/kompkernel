@@ -1,0 +1,8 @@
+{
+  "exit": 134,
+  "status": "V8_HEAP_EXHAUSTED",
+  "oldSpaceMiB": 700,
+  "completedCandidates": 4,
+  "nextSource": "bench/holdout-x41/ps-real.txt",
+  "repair": "Fresh child process per candidate; no codec change. New attempts have independent receipts and hard resource caps."
+}

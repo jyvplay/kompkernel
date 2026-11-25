@@ -1,0 +1,33 @@
+bench/x177/fixtures/kubernetes_website-LICENSE.txt:396: new blank line at EOF.
+bench/x177/fixtures/kubernetes_website-debug-statefulset.md:43: new blank line at EOF.
+bench/x177/native/29.txt:805: trailing whitespace.
++      3)         
+bench/x178/fixtures/kubernetes_website-LICENSE.txt:396: new blank line at EOF.
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:19: trailing whitespace.
++where bottlenecks can be removed to improve overall performance. 
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:33: trailing whitespace.
++These  metrics are collected by the lightweight, short-term, in-memory 
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:35: trailing whitespace.
++ are exposed via the `metrics.k8s.io` API. 
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:37: trailing whitespace.
++metrics-server discovers all nodes on the cluster and 
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:38: trailing whitespace.
++queries each node's 
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:39: trailing whitespace.
++[kubelet](/docs/reference/command-line-tools-reference/kubelet/) for CPU and 
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:40: trailing whitespace.
++memory usage. The kubelet acts as a bridge between the Kubernetes master and 
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:41: trailing whitespace.
++the nodes, managing the pods and containers running on a machine. The kubelet 
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:42: trailing whitespace.
++translates each pod into its constituent containers and fetches individual 
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:43: trailing whitespace.
++container usage statistics from the container runtime through the container 
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:50: trailing whitespace.
++This API is served at `/metrics/resource` on the kubelet's authenticated and 
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:51: trailing whitespace.
++read-only ports. 
+bench/x178/fixtures/kubernetes_website-resource-usage-monitoring.md:63: trailing whitespace.
++Kubernetes is designed to work with [OpenMetrics](https://openmetrics.io/), 
+bench/x178/receipts/build.log:29: trailing whitespace.
++[plugin vite:singlefile] 

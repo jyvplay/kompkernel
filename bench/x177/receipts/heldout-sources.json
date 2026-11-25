@@ -1,0 +1,32 @@
+[
+  {
+    "repo": "python/cpython",
+    "commit": "32b51e34318e6dd355f3fb40b8abf94c205444b1",
+    "path": "Doc/tutorial/datastructures.rst",
+    "file": "bench/x177/fixtures/python_cpython-datastructures.rst",
+    "bytes": 27647,
+    "sha256": "5f1a618b4c6ad93f5078ba43e95438e6968a1edad76c41c123fae5cdf9847620",
+    "license": "bench/x177/fixtures/python_cpython-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  },
+  {
+    "repo": "rust-lang/book",
+    "commit": "5c23042f85595490ad9f7412c4c6f57fe0b330d5",
+    "path": "src/ch13-02-iterators.md",
+    "file": "bench/x177/fixtures/rust-lang_book-ch13-02-iterators.md",
+    "bytes": 10151,
+    "sha256": "0c547a5ab78fc6692bb36c2cc183d2dd1ac140a979537acb49f59c6c509ac01e",
+    "license": "bench/x177/fixtures/rust-lang_book-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  },
+  {
+    "repo": "kubernetes/website",
+    "commit": "ac7b6d42d503158fdc822e04c88e2035d9a09ae9",
+    "path": "content/en/docs/tasks/debug/debug-application/debug-statefulset.md",
+    "file": "bench/x177/fixtures/kubernetes_website-debug-statefulset.md",
+    "bytes": 1233,
+    "sha256": "58b7fd144331cdbcc9a939f62076a94a554385eca92c7fde3287e56c693c89d3",
+    "license": "bench/x177/fixtures/kubernetes_website-LICENSE.txt",
+    "selection": "whole new documents; not model-blinded"
+  }
+]

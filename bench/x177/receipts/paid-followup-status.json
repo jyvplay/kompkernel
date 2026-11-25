@@ -1,0 +1,14 @@
+{
+  "status": "STOPPED_BUDGET",
+  "reason": "Large fresh control consumed several CPU minutes without a receipt; prioritize completing canonical replay. This is not an accepted paid result.",
+  "completedFreshControls": [
+    "bench/x177/receipts/control-email-thread.txt.json",
+    "bench/x177/receipts/control-kb-article.txt.json",
+    "bench/x177/receipts/control-ps-real.txt.json",
+    "bench/x177/receipts/control-json-pkg.txt.json",
+    "bench/x177/receipts/control-unified-diff.patch.json",
+    "bench/x177/receipts/control-code-ts.txt.json"
+  ],
+  "rawWinningSourceTournament": "NOT_RUN",
+  "acceptance": false
+}

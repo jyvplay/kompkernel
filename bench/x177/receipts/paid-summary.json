@@ -1,0 +1,49 @@
+{
+  "rows": [
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "control": 486,
+      "best": 631,
+      "plans": 6,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "control": 620,
+      "best": 783,
+      "plans": 6,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "control": 381,
+      "best": 557,
+      "plans": 6,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "control": 653,
+      "best": 868,
+      "plans": 1,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "control": 411,
+      "best": 567,
+      "plans": 1,
+      "exact": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "control": 949,
+      "best": 1154,
+      "plans": 1,
+      "exact": true
+    }
+  ],
+  "freshControlsMatch": true,
+  "rawWinningSourceTournament": "NOT_RUN: budget",
+  "accepted": false
+}

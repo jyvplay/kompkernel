@@ -1,0 +1,177 @@
+[
+  {
+    "input": "bench/x177/receipts/frontier.jsonl",
+    "exact": 22,
+    "unsupported": 7,
+    "mismatches": 0,
+    "rows": [
+      {
+        "path": "bench/holdout-x42/lsblk.txt",
+        "status": "exact",
+        "bytes": 132,
+        "sha256": "6c01e1a891869dfcf63f1cd2f4cf81930f51dbf3459243681cce3d752687c496"
+      },
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "status": "exact",
+        "bytes": 3385,
+        "sha256": "d220bfb7a912670e0217b99760f41d40f41e7fab5ceda93f552aebf5ee4744c6"
+      },
+      {
+        "path": "bench/holdout-x42b/uptime-w.txt",
+        "status": "exact",
+        "bytes": 179,
+        "sha256": "d57da79a4bfc7b0bfad09641d429f7ff139a4b354f47ddea07eed9d717e84ae6"
+      },
+      {
+        "path": "bench/holdout-x42b/free-m.txt",
+        "status": "exact",
+        "bytes": 263,
+        "sha256": "0d0194b9ede575d9a4697a04563d1bb2b4f1f269c2103b2f08e95302297b6612"
+      },
+      {
+        "path": "bench/holdout-x42b/vmstat.txt",
+        "status": "exact",
+        "bytes": 467,
+        "sha256": "6014b6f656172eb8350b788d2fef149853fbe0869f420dc8ae72acae35690083"
+      },
+      {
+        "path": "bench/holdout-work/unified-diff.patch",
+        "status": "exact",
+        "bytes": 1487,
+        "sha256": "ff6cc959f8d6c19505c6d1939b667a3ea3bfcf2a57a3e77d5c8ce9d255823d30"
+      },
+      {
+        "path": "bench/holdout-tbl/df-h.txt",
+        "status": "exact",
+        "bytes": 939,
+        "sha256": "ee931228f00d4d8516ce8440ffe8e0e2f6663a4dd8a2d02b895437d7f43c1d4a"
+      },
+      {
+        "path": "bench/holdout-x41/df-real.txt",
+        "status": "exact",
+        "bytes": 329,
+        "sha256": "8bc9354fd729fcb139f6a632b82ef6b1b7625df5fe0f80a2b9e394a33cf27a08"
+      },
+      {
+        "path": "bench/holdout-x41/du-real.txt",
+        "status": "exact",
+        "bytes": 1605,
+        "sha256": "00646d747b2a2fab383aadc6fd9627ad01b42e9459417308a4b583274e8aace2"
+      },
+      {
+        "path": "bench/holdout-x41/node-help.txt",
+        "status": "exact",
+        "bytes": 6751,
+        "sha256": "197c018cbe936e15fb52b81073b14b30b2f9042fe11ad806a129406a48586c3e"
+      },
+      {
+        "path": "bench/holdout-x42/findmnt.txt",
+        "status": "unsupported",
+        "error": "unsupported layout"
+      },
+      {
+        "path": "bench/holdout-x42/df-h.txt",
+        "status": "exact",
+        "bytes": 293,
+        "sha256": "6a82bbf1872d768282c8ad2244235253b485f44f76d347799f6f33cab29966e8"
+      },
+      {
+        "path": "bench/holdout-work/email-thread.txt",
+        "status": "exact",
+        "bytes": 2126,
+        "sha256": "fb609b06e6f995f5fd1465b86e19da67e52c75643015e2ab8ef654644ae01324"
+      },
+      {
+        "path": "bench/holdout-work/llm-answer.md",
+        "status": "exact",
+        "bytes": 2542,
+        "sha256": "7c5c7f1929a6da13fad81a2a6f5c55106cf70105c356a03deca8c5cb15c280bf"
+      },
+      {
+        "path": "bench/holdout-tbl/markdown-table.md",
+        "status": "exact",
+        "bytes": 635,
+        "sha256": "043e61c99c48b9d1baf8f6e64d8a0d5188446be39606d0cfae15dd902586acca"
+      },
+      {
+        "path": "bench/holdout-tbl/psql-output.txt",
+        "status": "unsupported",
+        "error": "unsupported instruction envelope"
+      },
+      {
+        "path": "bench/holdout-x40/prices.csv",
+        "status": "unsupported",
+        "error": "unsupported instruction envelope"
+      },
+      {
+        "path": "bench/holdout-x40/cue-sheet.md",
+        "status": "unsupported",
+        "error": "unsupported instruction envelope"
+      },
+      {
+        "path": "bench/holdout-x42/ps-ef.txt",
+        "status": "exact",
+        "bytes": 2669,
+        "sha256": "36bd1376a952d8882b5be08d4742ea1ce1ae7aeeafb2397c261133d6431a7861"
+      },
+      {
+        "path": "bench/holdout-x41/ls-real.txt",
+        "status": "exact",
+        "bytes": 2486,
+        "sha256": "0e1c90bab677cd8efc3eff74e6ea7092797746854d086051e6c15498a219152b"
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "status": "exact",
+        "bytes": 3620,
+        "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6"
+      },
+      {
+        "path": "bench/holdout/code-ts.txt",
+        "status": "exact",
+        "bytes": 6000,
+        "sha256": "9567accc566c445b81a6c035c865aec6d7078e3bb56c62784de3f176aac8017d"
+      },
+      {
+        "path": "bench/holdout-x42/dpkg-l.txt",
+        "status": "unsupported",
+        "error": "unsupported layout"
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "status": "exact",
+        "bytes": 2365,
+        "sha256": "a52339a22f70d2d4a3503f5f1ea86b7b232710d9e1074df6aca8dc3448b59eb4"
+      },
+      {
+        "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+        "status": "unsupported",
+        "error": "unsupported layout"
+      },
+      {
+        "path": "bench/holdout-x40/metrics.tsv",
+        "status": "exact",
+        "bytes": 1203,
+        "sha256": "b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70"
+      },
+      {
+        "path": "bench/holdout-x41/ps-aux-real.txt",
+        "status": "exact",
+        "bytes": 6590,
+        "sha256": "b54eaf4147ffa2c62b3a0e4f4f3abbe4ec81ff4b5faf086ca4d1f23a99fbd07f"
+      },
+      {
+        "path": "bench/holdout-x41/apt-real.txt",
+        "status": "exact",
+        "bytes": 6195,
+        "sha256": "02cc179c781dc97439b9f122feffa7354dc7a2efce0da87db9c4f21c6cc8559b"
+      },
+      {
+        "path": "bench/holdout-x41/ls-l-real.txt",
+        "status": "unsupported",
+        "error": "unsupported instruction envelope"
+      }
+    ]
+  }
+]

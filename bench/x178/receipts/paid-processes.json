@@ -1,0 +1,74 @@
+[
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "mode": "space",
+    "status": "TIMEOUT",
+    "exit": null,
+    "log": "bench/x178/receipts/paid-ps-real.txt-space.log",
+    "limitSeconds": 120,
+    "oldSpaceMiB": 900
+  },
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "mode": "LF",
+    "status": "completed",
+    "exit": 0,
+    "log": "bench/x178/receipts/paid-ps-real.txt-LF.log",
+    "limitSeconds": 120,
+    "oldSpaceMiB": 900
+  },
+  {
+    "path": "bench/holdout/json-pkg.txt",
+    "mode": "space",
+    "status": "TIMEOUT",
+    "exit": null,
+    "log": "bench/x178/receipts/paid-json-pkg.txt-space.log",
+    "limitSeconds": 120,
+    "oldSpaceMiB": 900
+  },
+  {
+    "path": "bench/holdout/json-pkg.txt",
+    "mode": "LF",
+    "status": "completed",
+    "exit": 0,
+    "log": "bench/x178/receipts/paid-json-pkg.txt-LF.log",
+    "limitSeconds": 120,
+    "oldSpaceMiB": 900
+  },
+  {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "mode": "space",
+    "status": "completed",
+    "exit": 0,
+    "log": "bench/x178/receipts/paid-unified-diff.patch-space.log",
+    "limitSeconds": 120,
+    "oldSpaceMiB": 900
+  },
+  {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "mode": "LF",
+    "status": "completed",
+    "exit": 0,
+    "log": "bench/x178/receipts/paid-unified-diff.patch-LF.log",
+    "limitSeconds": 120,
+    "oldSpaceMiB": 900
+  },
+  {
+    "path": "bench/holdout/code-ts.txt",
+    "mode": "space",
+    "status": "TIMEOUT",
+    "exit": null,
+    "log": "bench/x178/receipts/paid-code-ts.txt-space.log",
+    "limitSeconds": 120,
+    "oldSpaceMiB": 900
+  },
+  {
+    "path": "bench/holdout/code-ts.txt",
+    "mode": "LF",
+    "status": "TIMEOUT",
+    "exit": null,
+    "log": "bench/x178/receipts/paid-code-ts.txt-LF.log",
+    "limitSeconds": 120,
+    "oldSpaceMiB": 900
+  }
+]
