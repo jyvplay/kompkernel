@@ -1,0 +1,122 @@
+{
+  "OPS/TABULAR": {
+    "absolute": {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "category": "OPS/TABULAR",
+      "raw": 5194,
+      "tokens": 1310,
+      "hasTape": true,
+      "classes": {
+        "glyph": 344,
+        "word": 123,
+        "num": 215,
+        "other": 40
+      },
+      "leader": "glyph"
+    },
+    "relative": {
+      "path": "bench/holdout-x40/prices.csv",
+      "category": "OPS/TABULAR",
+      "raw": 582,
+      "tokens": 118,
+      "hasTape": true,
+      "classes": {
+        "glyph": 9,
+        "word": 14,
+        "num": 11,
+        "other": 13
+      },
+      "leader": "word"
+    }
+  },
+  "CODE/STRUCT": {
+    "absolute": {
+      "path": "bench/holdout/json-pkg.txt",
+      "category": "CODE/STRUCT",
+      "raw": 1152,
+      "tokens": 653,
+      "hasTape": true,
+      "classes": {
+        "glyph": 187,
+        "word": 258,
+        "num": 22,
+        "other": 39
+      },
+      "leader": "word"
+    },
+    "relative": {
+      "path": "bench/holdout/json-pkg.txt",
+      "category": "CODE/STRUCT",
+      "raw": 1152,
+      "tokens": 653,
+      "hasTape": true,
+      "classes": {
+        "glyph": 187,
+        "word": 258,
+        "num": 22,
+        "other": 39
+      },
+      "leader": "word"
+    }
+  },
+  "PROSE": {
+    "absolute": {
+      "path": "bench/holdout-work/email-thread.txt",
+      "category": "PROSE",
+      "raw": 629,
+      "tokens": 486,
+      "hasTape": true,
+      "classes": {
+        "glyph": 91,
+        "word": 214,
+        "num": 26,
+        "other": 21
+      },
+      "leader": "word"
+    },
+    "relative": {
+      "path": "bench/holdout-work/email-thread.txt",
+      "category": "PROSE",
+      "raw": 629,
+      "tokens": 486,
+      "hasTape": true,
+      "classes": {
+        "glyph": 91,
+        "word": 214,
+        "num": 26,
+        "other": 21
+      },
+      "leader": "word"
+    }
+  },
+  "OTHER": {
+    "absolute": {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "category": "OTHER",
+      "raw": 513,
+      "tokens": 101,
+      "hasTape": false,
+      "classes": {
+        "glyph": 0,
+        "word": 0,
+        "num": 0,
+        "other": 0
+      },
+      "leader": null
+    },
+    "relative": {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "category": "OTHER",
+      "raw": 513,
+      "tokens": 101,
+      "hasTape": false,
+      "classes": {
+        "glyph": 0,
+        "word": 0,
+        "num": 0,
+        "other": 0
+      },
+      "leader": null
+    }
+  }
+}

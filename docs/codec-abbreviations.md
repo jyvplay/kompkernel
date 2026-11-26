@@ -12143,3 +12143,23 @@ X187 ASCII bypass speed experiment rejected:CPU0.985287/wall0.982684,24identical
 wires, insufficient significant gain.129reference price/source checks and
 fresh typecheck/build pass. Planning inherits tokenizer special-spelling
 refusals; transform domain is not a total priced Unicode encoder.
+
+## X188 — SYNAIRESIS (simultaneous macro elimination; experimental)
+
+`src/lib/omega/synairesis.ts`. Unwired CHIRON-grammar search extension, not an
+established new compression primitive. Last-12-rule pool, exhaustive size-1/2/3
+subsets (≤298 probes), later-first inline elimination, one best-improvement
+move. Non-greedy within this bounded neighborhood; not globally optimal. Full
+reader key+tape+body charged. 100k UTF-16 message/expansion caps, 128-rule cap,
+reserved `<|` spelling refusal. Strict wrapper requires original-source
+identity; trial alone guarantees parent-layer identity. Worst-case CPU is not
+a fixed seconds bound; tokenizer work is performed for bounded candidates.
+
+29 fresh canonical wires unchanged, 11,962 tokens. Email 486→485 and vmstat
+144→143; pairs suffice, triples add no savings. Neither meets the requested
+significance threshold. 16 direct-source lanes, two nested-layout layer-only
+lanes, 11 inadmissible parents. Python 48 exact cases, six unsupported cases.
+Native chat NOT_RUN. Sources, ancestry, limits, speed experiment and full gates:
+`bench/x188/README.md`, `bench/x188/research.md`. Recent vocabulary-training
+papers MinGram and JOLT do not imply fixed-o200k envelope gains. The production
+frontier and production tokenizer remain unchanged.

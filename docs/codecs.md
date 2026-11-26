@@ -12879,3 +12879,13 @@ X187 final gates:129reference whole-envelope/source checks; TS parent26exact/
 3unsupported, Python23exact/6unsupported, no mismatches. ASCII bypass rejected:
 CPU0.985287,wall0.982684,24identical wires; below10%threshold and node-help CPU
 regresses. Typecheck/build passed. Production unchanged; native NOT_RUN.
+
+### X188 SYNAIRESIS — experimental simultaneous macro elimination
+
+Unwired bounded subset search using the existing CHIRON reader. Fresh canonical
+replay: 29 unchanged wires / 11,962 tokens. Experimental email 486→485 and
+vmstat 144→143, both below the requested significance threshold. No accepted
+broad Pareto improvement, all-stack novelty proof, or native-chat decoding
+result. Source equality is separately gated from parent-layer equality.
+See `bench/x188/README.md` for tests, repairs, speed trial and remaining gaps;
+`bench/x188/receipts/leaders.json` contains fresh suite-local category leaders.

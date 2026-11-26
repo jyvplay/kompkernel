@@ -51,3 +51,7 @@ bench/x186/receipts/*.log -whitespace
 bench/x187/native/*.txt -text -whitespace
 bench/x187/receipts/**/*.log -whitespace
 bench/x187/receipts/*.log -whitespace
+
+# X188 exact native handoff and execution log whitespace is evidence.
+bench/x188/native/*.txt -text -whitespace
+bench/x188/receipts/*.log -whitespace
