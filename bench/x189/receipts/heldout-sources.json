@@ -1,0 +1,29 @@
+[
+  {
+    "repo": "pallets/click",
+    "commit": "08b803cf32ceb2ae6a772c62d5da42757a897d44",
+    "path": "README.md",
+    "file": "bench/x189/fixtures/click-README.md",
+    "sha256": "4c3de4aa0918deac2f712facacd1dc30a8cc4627d0118dd290292ab0af65ca0b",
+    "selection": "Fetched after ANAPLASIS final design fixed; not model-blinded"
+  },
+  {
+    "repo": "pallets/click",
+    "commit": "08b803cf32ceb2ae6a772c62d5da42757a897d44",
+    "path": "LICENSE.txt",
+    "file": "bench/x189/fixtures/click-LICENSE.txt",
+    "sha256": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d",
+    "selection": "Fetched after ANAPLASIS final design fixed; not model-blinded"
+  },
+  {
+    "command": [
+      "git",
+      "--no-pager",
+      "help",
+      "-a"
+    ],
+    "file": "bench/x189/fixtures/git-help.txt",
+    "sha256": "57884f0474d40e6837cda02da876039dc54f25a1d713ca4f4c4dea083040db1c",
+    "selection": "Actual local tool output, captured after design fixed"
+  }
+]

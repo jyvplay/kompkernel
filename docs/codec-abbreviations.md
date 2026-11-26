@@ -12163,3 +12163,40 @@ Native chat NOT_RUN. Sources, ancestry, limits, speed experiment and full gates:
 `bench/x188/README.md`, `bench/x188/research.md`. Recent vocabulary-training
 papers MinGram and JOLT do not imply fixed-o200k envelope gains. The production
 frontier and production tokenizer remain unchanged.
+
+## X189 — ANAPLASIS (bounded non-monotone grammar reconstruction)
+
+`src/lib/omega/anaplasis.ts`; **experimental and unwired**. Retain some costly
+rule deletions, then jointly price deletion plus reconstruction. Six separate
+move families: deletion, body remining, tape factoring, renaming, legal tape
+relocation, contextual aliasing. Same CHIRON reader key and wire grammar; all
+costs paid. Non-greedy across selected intermediate states, heuristic pruning,
+one best move; not globally optimal and not established all-stack novelty.
+SYNARMOGE already does monotone deletion/remining; the ancestry is explicit.
+
+50k UTF-16 source/message caps, 2–128 ordinary acyclic rules, ≤28 deletion seeds,
+≤13 retained states, ≤4096 priced probes per trial. Phrases length 2..24;
+384-item shortlist, 32 final phrases, up to four fresh same-script names.
+Character/token/whitespace-touching rankings are ablations, not mechanisms.
+Probe/work-bounded, not universally seconds-bounded. Strict source equality,
+UTF-8 stability and reserved-spelling checks; nested-layout parents refused.
+Natural-language algebraic arguments are in `bench/x189/proof.md`, not a
+kernel-verified TypeScript correctness theorem.
+
+Fresh canonical replay: 29 identical wires / 11,962 tokens. Final 290 cells,
+240,959 probes: one-token gains only on ps-aux, node-help, unified diff; no prose
+gain and no winning costly-deletion barrier crossing. Two new-source parents
+completed, but all 12 ANAPLASIS trials refused; no held-out gain. Python 274
+byte-exact cases; native-chat NOT_RUN. No broad Pareto superiority accepted.
+Whole-stack streaming-regex experiment rejected: CPU B/A 1.009193, wall
+1.007094, 24 identical wires. Production selection/tokenizer unchanged.
+
+Source citation (related work, not an inherited result): Roy, Maity &
+Mukhopadhyay, *A lossless reference-free sequence compression algorithm
+leveraging grammatical, statistical, and substitution rules*, 2025,
+DOI 10.1093/bfgp/elae050, https://pmc.ncbi.nlm.nih.gov/articles/PMC11735755/ .
+Its genomic alphabet and binary BSC backend do not yield a paid chat-token
+bound. ANAPLASIS is motivated by the previous local experiment, not claimed as
+an implementation of GraSS or of a newly proved math result. Detailed live
+sources, pinned proof-interface inspection, limitations and local leaders:
+`bench/x189/{README,model,portfolio,research}.md` and `receipts/leaders.json`.

@@ -1,0 +1,28 @@
+¶ k=v. expand repeatedly; print only.
+§й/src/lib/omegaей/ariadne.tsәй/chiron.tsо0у ол,суxТолсп], [0xш:Н export const CHIRON_SCRIPTS: ChironScript[] = [
+эшса hiнэ0370,
++   ҷGain(rulesш Rule[], poolш stringж+ иж  ү  for (const r of rules)і;
+Б  let total =уір
+ф 100644
+--- aИ   { nameш 'ю labelш 'Алсоз total += r.countіцdiff --git aғи   [0xт bд {
+г loь numberвaЁr.adjacent¶цәтәрindex 3f8a1c2..9d4e7bофәр+++тәр@@ -140,6 +140,7 @@ export interface ChironScript {
+   labelш stringі   loшьі  ашьіж ranges?: Array<[numberль]>;
+ }
+ 
+Н@@ -152,6 +153,18 @@НИkhmer'люKhmer letter',гэ178олаэ1800 },
+Иcjk'люChinese character',гэ4eоолаэв000 },
+жди nameш 'polyglot',
+июGreek, Hebrewл Armenianл Georgianл Thai or Indic letter',
+игнан rangesш [
+ғ037То400по530А590по590А600по900А980],
+ғ098Тоaоопово0Ав80пов80Аbооп0b80Аc00],
+и ],
+ж },
+ ];
+ 
+ const poolCache = new Map<string, string[]>();
+цетерindex 1a2b3c4..5e6f7a8фер+++тер@@ -848,10 +848,14 @@ function assignmentҷ[]):ьд-Б-үз-  return totalі+Б+үдизи if (Ё) total += Ё * о.5іж }
+ж return Math.round(total);
+ }
+ 
+ function searchҷ[], budgetMsшь):ьд

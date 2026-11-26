@@ -1,0 +1,2 @@
+bench/x189/fixtures/click-README.md
+bench/x189/fixtures/git-help.txt

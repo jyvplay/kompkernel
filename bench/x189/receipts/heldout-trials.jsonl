@@ -1,0 +1,12 @@
+{"path":"bench/x189/fixtures/click-README.md","family":"delete","parentTokens":403,"ms":0.5646830000000023,"cpu":{"user":471,"system":95},"status":"unsupported"}
+{"path":"bench/x189/fixtures/click-README.md","family":"remine","parentTokens":403,"ms":0.016100999999991927,"cpu":{"user":13,"system":3},"status":"unsupported"}
+{"path":"bench/x189/fixtures/click-README.md","family":"factor","parentTokens":403,"ms":0.007585000000005948,"cpu":{"user":6,"system":1},"status":"unsupported"}
+{"path":"bench/x189/fixtures/click-README.md","family":"rename","parentTokens":403,"ms":0.0062709999999697175,"cpu":{"user":5,"system":1},"status":"unsupported"}
+{"path":"bench/x189/fixtures/click-README.md","family":"reorder","parentTokens":403,"ms":0.011205000000018117,"cpu":{"user":10,"system":3},"status":"unsupported"}
+{"path":"bench/x189/fixtures/click-README.md","family":"alias","parentTokens":403,"ms":0.00794500000000653,"cpu":{"user":7,"system":1},"status":"unsupported"}
+{"path":"bench/x189/fixtures/git-help.txt","family":"delete","parentTokens":1745,"ms":3.535827999999981,"cpu":{"user":4756,"system":147},"status":"unsupported"}
+{"path":"bench/x189/fixtures/git-help.txt","family":"remine","parentTokens":1745,"ms":1.7357339999999795,"cpu":{"user":2729,"system":546},"status":"unsupported"}
+{"path":"bench/x189/fixtures/git-help.txt","family":"factor","parentTokens":1745,"ms":2.0383340000000203,"cpu":{"user":3558,"system":0},"status":"unsupported"}
+{"path":"bench/x189/fixtures/git-help.txt","family":"rename","parentTokens":1745,"ms":3.328058999999996,"cpu":{"user":7543,"system":0},"status":"unsupported"}
+{"path":"bench/x189/fixtures/git-help.txt","family":"reorder","parentTokens":1745,"ms":2.6998439999999846,"cpu":{"user":5222,"system":0},"status":"unsupported"}
+{"path":"bench/x189/fixtures/git-help.txt","family":"alias","parentTokens":1745,"ms":7.840607999999975,"cpu":{"user":10030,"system":2322},"status":"unsupported"}

@@ -1,0 +1,26 @@
+[
+  {
+    "repo": "openai/math",
+    "commit": "3344da59991ed94f9ba711217b29c1d760badfa6",
+    "path": "lean/OAI/Computability/Superstring/Main.lean",
+    "file": ".cache/x189/research/Main.lean",
+    "sha256": "ba9aa834c785f1472c9472f70941e2c4af032cb81e7e1fc59d60b434329b46f7",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "openai/math",
+    "commit": "3344da59991ed94f9ba711217b29c1d760badfa6",
+    "path": "lean/OAI/Computability/Superstring/BlockClose.lean",
+    "file": ".cache/x189/research/BlockClose.lean",
+    "sha256": "04d13079ad8916b2d5707519754218649e0f936a9213ca8ab0dbec5f24360f9d",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "openai/math",
+    "commit": "3344da59991ed94f9ba711217b29c1d760badfa6",
+    "path": "lean/OAI/Computability/Superstring/Model.lean",
+    "file": ".cache/x189/research/Model.lean",
+    "sha256": "adac6d38a18c2ad7f1d91ac92decfc228546d3cc3467567f2ef832773e2ce143",
+    "kernel": "NOT_RUN"
+  }
+]

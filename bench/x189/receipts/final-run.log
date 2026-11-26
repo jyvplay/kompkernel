@@ -1,0 +1,38 @@
+
+  bench/x189/trials.mjs  3.9mb ⚠️
+
+⚡ Done in 138ms
+
+  bench/x189/test.mjs  3.9mb ⚠️
+
+⚡ Done in 111ms
+{'byteExact': 274, 'unsupported': [], 'native': 'NOT_RUN', 'independentPersonnel': False}
+
+  bench/x189/leaders.mjs  3.9mb ⚠️
+
+⚡ Done in 112ms
+bench/holdout-work/kb-article.txt A 0 8606.008
+bench/holdout-work/kb-article.txt B 0 9557.261
+bench/holdout-work/kb-article.txt B 0 9694.088
+bench/holdout-work/kb-article.txt A 0 9245.345
+bench/holdout/json-pkg.txt A 0 29970.15
+bench/holdout/json-pkg.txt B 0 29565.698
+bench/holdout/json-pkg.txt B 0 29371.513
+bench/holdout/json-pkg.txt A 0 29627.482
+bench/holdout-x41/ps-real.txt A 0 23886.463
+bench/holdout-x41/ps-real.txt B 0 23329.943
+bench/holdout-x41/ps-real.txt B 0 23313.456
+bench/holdout-x41/ps-real.txt A 0 23367.143
+bench/holdout-work/email-thread.txt A 0 15628.009
+bench/holdout-work/email-thread.txt B 0 15913.009
+bench/holdout-work/email-thread.txt B 0 16046.067
+bench/holdout-work/email-thread.txt A 0 14600.185
+bench/holdout-work/unified-diff.patch A 0 7801.143
+bench/holdout-work/unified-diff.patch B 0 7753.499
+bench/holdout-work/unified-diff.patch B 0 8059.892
+bench/holdout-work/unified-diff.patch A 0 7884.449
+bench/holdout-x41/node-help.txt A 0 31407.634
+bench/holdout-x41/node-help.txt B 0 31498.211
+bench/holdout-x41/node-help.txt B 0 33526.452
+bench/holdout-x41/node-help.txt A 0 33440.402
+{'cpuMs': 1.0091932193592243, 'wallMs': 1.0070938099040976, 'laneRatios': {'bench/holdout-work/kb-article.txt': {'cpuMs': 1.0784252039607307, 'wallMs': 1.0529782647331656}, 'bench/holdout/json-pkg.txt': {'cpuMs': 0.988918670459927, 'wallMs': 0.9907864347772898}, 'bench/holdout-x41/ps-real.txt': {'cpuMs': 0.9870865516591474, 'wallMs': 0.9937394437953585}, 'bench/holdout-work/email-thread.txt': {'cpuMs': 1.057260516456921, 'wallMs': 1.04643857237628}, 'bench/holdout-work/unified-diff.patch': {'cpuMs': 1.008147540749498, 'wallMs': 0.9998505781192766}, 'bench/holdout-x41/node-help.txt': {'cpuMs': 1.0027237062352976, 'wallMs': 1.002484758507234}}, 'accepted': False, 'identicalWires': 24}

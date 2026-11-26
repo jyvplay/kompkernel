@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "old": "  re.lastIndex = 0;\n  const ms = text.match(re);\n  if (ms === null) return null;\n  let covered = 0;\n  for (let i = 0; i < ms.length; i++) covered += ms[i].length;\n  if (covered !== text.length) return null;\n  let n = 0;\n  for (let i = 0; i < ms.length; i++) n += fastChunkCount(ms[i]);\n  return n;",
+  "replacement": "  // Reuse the first match and stream the rest; no match-array materialization.\n  let match = one, covered = 0, n = 0;\n  while (match !== null) {\n    if (match.index !== covered || match[0].length === 0) return null;\n    covered += match[0].length;\n    n += fastChunkCount(match[0]);\n    match = re.exec(text);\n  }\n  return covered === text.length ? n : null;",
+  "hypothesis": "Avoid repeated first regex match and whole match array on multi-chunk strings. Exact regex, vocabulary, and merge semantics unchanged."
+}
