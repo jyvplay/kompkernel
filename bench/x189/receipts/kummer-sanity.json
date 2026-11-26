@@ -1,0 +1,21 @@
+{
+  "checks": 2816,
+  "m": [
+    1,
+    256
+  ],
+  "primes": [
+    2,
+    3,
+    5,
+    7,
+    11,
+    13,
+    17,
+    19,
+    23,
+    29,
+    31
+  ],
+  "claim": "Finite check of doubling carry count versus central-binomial p-adic valuation; not a proof of Erdos 728 or a compression gain"
+}

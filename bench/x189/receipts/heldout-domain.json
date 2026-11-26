@@ -1,0 +1,37 @@
+[
+  {
+    "path": "bench/x189/fixtures/click-README.md",
+    "hasTape": false,
+    "ops": {
+      "rules": false,
+      "rep": false,
+      "fill": false,
+      "range": false,
+      "split": false,
+      "script": null
+    },
+    "rules": null,
+    "plainChironEqualsSource": false,
+    "fullReader": "source-exact"
+  },
+  {
+    "path": "bench/x189/fixtures/git-help.txt",
+    "hasTape": true,
+    "ops": {
+      "rules": true,
+      "rep": false,
+      "fill": false,
+      "range": false,
+      "split": false,
+      "script": {
+        "name": "cyrillic",
+        "label": "Cyrillic letter",
+        "lo": 1024,
+        "hi": 1280
+      }
+    },
+    "rules": 49,
+    "plainChironEqualsSource": false,
+    "fullReader": "source-exact"
+  }
+]

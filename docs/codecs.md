@@ -12889,3 +12889,16 @@ broad Pareto improvement, all-stack novelty proof, or native-chat decoding
 result. Source equality is separately gated from parent-layer equality.
 See `bench/x188/README.md` for tests, repairs, speed trial and remaining gaps;
 `bench/x188/receipts/leaders.json` contains fresh suite-local category leaders.
+
+### X189 ANAPLASIS — experimental non-monotone reconstruction
+
+New unwired encoder extension retains costly deletion states before a jointly
+priced reconstruction. Six move mechanisms, three ranking settings, 240,959
+priced probes in 290 final cells. Only one-token savings on ps-aux, node-help,
+and unified diff; no prose gain or verified barrier-crossing win. This does not
+meet the requested broad, significant Pareto improvement or all-stack novelty.
+Fresh canonical frontier is unchanged: 29 wires / 11,962 tokens. New-source
+holdout admits neither parent; native-chat testing remains NOT_RUN. The
+whole-stack streaming-regex patch is slower overall and is not shipped.
+See `bench/x189/README.md` and `bench/x189/receipts/leaders.json` for gates,
+repairs, exact source checks, limitations and refreshed category leaders.

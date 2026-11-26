@@ -1,0 +1,1 @@
+{'jobs': [{'path': 'bench/x189/fixtures/click-README.md', 'status': 'complete', 'wallSeconds': 22.273399820999884, 'capSeconds': 180}, {'path': 'bench/x189/fixtures/git-help.txt', 'status': 'complete', 'wallSeconds': 79.59467666399996, 'capSeconds': 180}], 'cells': 12, 'byteExact': 0, 'unsupported': [], 'wins': [], 'native': 'NOT_RUN'}

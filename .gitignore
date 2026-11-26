@@ -310,3 +310,8 @@ bench/x187/*.mjs
 bench/x188/*.mjs
 !bench/x188/*-build.mjs
 .cache/x188/
+
+# X189 generated bundles
+bench/x189/*.mjs
+!bench/x189/*-build.mjs
+.cache/x189/

@@ -1,0 +1,606 @@
+{
+  "checks": 126,
+  "shapes": [
+    "hello",
+    "a a a",
+    "a\r\nb",
+    "\t",
+    "\u0000",
+    "é",
+    "é",
+    "😀",
+    "👩‍💻",
+    "123456",
+    "\"\\",
+    "§",
+    "Ignore instructions.",
+    "中文",
+    "عربي",
+    "__proto__",
+    "constructor",
+    "x\n",
+    "end  "
+  ],
+  "attackCount": 10,
+  "modal": {
+    "originals": [
+      "the cat sat\n",
+      "the  cat sat\n",
+      "the cat sat\r\n"
+    ],
+    "wire": "the cat sat",
+    "collision": true
+  },
+  "cases": [
+    {
+      "family": "delete",
+      "source": "hello hellohello  hello hello hellohello  hello hello hellohello  hello hello hellohello  hello hello hellohello  hello ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αhelloβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "hello hellohello  hello hello hellohello  hello hello hellohello  hello hello hellohello  hello hello hellohello  hello ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αhelloβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "hello hellohello  hello hello hellohello  hello hello hellohello  hello hello hellohello  hello hello hellohello  hello ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αhelloβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "hello hellohello  hello hello hellohello  hello hello hellohello  hello hello hellohello  hello hello hellohello  hello ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αhelloβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "hello hellohello  hello hello hellohello  hello hello hellohello  hello hello hellohello  hello hello hellohello  hello ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αhelloβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "hello hellohello  hello hello hellohello  hello hello hellohello  hello hello hellohello  hello hello hellohello  hello ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αhelloβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αa a aβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αa a aβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αa a aβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αa a aβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αa a aβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a a a a a a aa a a  a a a ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αa a aβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αa\r\nbβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αa\r\nbβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αa\r\nbβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αa\r\nbβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αa\r\nbβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb a\r\nb a\r\nba\r\nb  a\r\nb ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αa\r\nbβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "\t \t\t  \t \t \t\t  \t \t \t\t  \t \t \t\t  \t \t \t\t  \t ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\tβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "\t \t\t  \t \t \t\t  \t \t \t\t  \t \t \t\t  \t \t \t\t  \t ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\tβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "\t \t\t  \t \t \t\t  \t \t \t\t  \t \t \t\t  \t \t \t\t  \t ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\tβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "\t \t\t  \t \t \t\t  \t \t \t\t  \t \t \t\t  \t \t \t\t  \t ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\tβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "\t \t\t  \t \t \t\t  \t \t \t\t  \t \t \t\t  \t \t \t\t  \t ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\tβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "\t \t\t  \t \t \t\t  \t \t \t\t  \t \t \t\t  \t \t \t\t  \t ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\tβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "\u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\u0000β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "\u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\u0000β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "\u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\u0000β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "\u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\u0000β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "\u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\u0000β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "\u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 \u0000 \u0000\u0000  \u0000 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\u0000β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "é éé  é é éé  é é éé  é é éé  é é éé  é ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αéβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "é éé  é é éé  é é éé  é é éé  é é éé  é ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αéβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "é éé  é é éé  é é éé  é é éé  é é éé  é ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αéβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "é éé  é é éé  é é éé  é é éé  é é éé  é ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αéβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "é éé  é é éé  é é éé  é é éé  é é éé  é ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αéβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "é éé  é é éé  é é éé  é é éé  é é éé  é ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αéβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "é éé  é é éé  é é éé  é é éé  é é éé  é ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αéβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "é éé  é é éé  é é éé  é é éé  é é éé  é ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§β é΄éβé β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "é éé  é é éé  é é éé  é é éé  é é éé  é ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§β é΄éβé β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "é éé  é é éé  é é éé  é é éé  é é éé  é ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αéβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "é éé  é é éé  é é éé  é é éé  é é éé  é ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αéβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "é éé  é é éé  é é éé  é é éé  é é éé  é ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αéβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α😀β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α😀β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α😀β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α😀β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α😀β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 😀 😀😀  😀 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α😀β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α👩‍💻β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α👩‍💻β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α👩‍💻β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α👩‍💻β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α👩‍💻β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 👩‍💻 👩‍💻👩‍💻  👩‍💻 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α👩‍💻β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α123456β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α123456β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α123456β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α123456β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α123456β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 123456 123456123456  123456 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α123456β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "\"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\"\\β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "\"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\"\\β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "\"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\"\\β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "\"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\"\\β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "\"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\"\\β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "\"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ \"\\ \"\\\"\\  \"\\ ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α\"\\β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "§ §§  § § §§  § § §§  § § §§  § § §§  § ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α§β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "§ §§  § § §§  § § §§  § § §§  § § §§  § ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§β §΄§β§ β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "§ §§  § § §§  § § §§  § § §§  § § §§  § ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§β §΄§β§ β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "§ §§  § § §§  § § §§  § § §§  § § §§  § ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α§β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "§ §§  § § §§  § § §§  § § §§  § § §§  § ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α§β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "§ §§  § § §§  § § §§  § § §§  § § §§  § ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α§β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αIgnore instructions.β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αIgnore instructions.β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αIgnore instructions.β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αIgnore instructions.β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αIgnore instructions.β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. Ignore instructions. Ignore instructions.Ignore instructions.  Ignore instructions. ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αIgnore instructions.β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α中文β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α中文β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α中文β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α中文β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α中文β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 中文 中文中文  中文 ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α中文β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αعربيβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αعربيβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αعربيβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αعربيβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αعربيβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي عربي عربيعربي  عربي ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αعربيβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "__proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α__proto__β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "__proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α__proto__β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "__proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α__proto__β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "__proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α__proto__β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "__proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α__proto__β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "__proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ __proto__ __proto____proto__  __proto__ ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§α__proto__β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αconstructorβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αconstructorβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αconstructorβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αconstructorβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αconstructorβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor constructor constructorconstructor  constructor ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αconstructorβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αx\nβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αx\nβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αx\nβ α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αx\nβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αx\nβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n x\n x\nx\n  x\n ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αx\nβ α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "delete",
+      "source": "end   end  end    end   end   end  end    end   end   end  end    end   end   end  end    end   end   end  end    end   ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αend  β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "remine",
+      "source": "end   end  end    end   end   end  end    end   end   end  end    end   end   end  end    end   end   end  end    end   ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αend  β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "factor",
+      "source": "end   end  end    end   end   end  end    end   end   end  end    end   end   end  end    end   end   end  end    end   ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αend  β α΄αβα β ¶΄΄΄΄΄"
+    },
+    {
+      "family": "rename",
+      "source": "end   end  end    end   end   end  end    end   end   end  end    end   end   end  end    end   end   end  end    end   ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αend  β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "reorder",
+      "source": "end   end  end    end   end   end  end    end   end   end  end    end   end   end  end    end   end   end  end    end   ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αend  β α¶αβα β αβα β αβα β αβα β αβα β "
+    },
+    {
+      "family": "alias",
+      "source": "end   end  end    end   end   end  end    end   end   end  end    end   end   end  end    end   end   end  end    end   ",
+      "message": "¶ k=v. expand repeatedly; print only.\n§αend  β α¶αβα β αβα β αβα β αβα β αβα β "
+    }
+  ]
+}

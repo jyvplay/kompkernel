@@ -55,3 +55,8 @@ bench/x187/receipts/*.log -whitespace
 # X188 exact native handoff and execution log whitespace is evidence.
 bench/x188/native/*.txt -text -whitespace
 bench/x188/receipts/*.log -whitespace
+
+# X189 exact native handoffs, captured CLI output and execution logs.
+bench/x189/native/*.txt -text -whitespace
+bench/x189/fixtures/git-help.txt -text -whitespace
+bench/x189/receipts/*.log -whitespace
