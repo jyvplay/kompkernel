@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "old": "export function fastChunkCount(chunk: string): number {\n  const L = chunk.length;",
+  "replacement": "export function fastChunkCount(chunk: string): number {\n  const L = chunk.length;\n  if (L === 1 && chunk.charCodeAt(0) < 128) return 1;",
+  "scope": "Return singleton ASCII count before Map lookup. Cache counters no longer include bypassed singletons; no count/wire semantics changed."
+}

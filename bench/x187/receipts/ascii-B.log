@@ -1,0 +1,1 @@
+{"checks":903,"passed":true,"scope":"Every ASCII singleton including controls, contextual joins, non-ASCII and surrogate guard boundaries"}

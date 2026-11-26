@@ -1,0 +1,3 @@
+{'job': {'path': 'bench/holdout-work/email-thread.txt', 'family': 'diameris', 'limitSeconds': 90, 'file': 'bench/x187/receipts/paid-00.json'}, 'status': 'completed', 'exit': 0}
+{'job': {'path': 'bench/holdout-work/kb-article.txt', 'family': 'diameris', 'limitSeconds': 90, 'file': 'bench/x187/receipts/paid-01.json'}, 'status': 'completed', 'exit': 0}
+{'job': {'path': 'bench/holdout-work/llm-answer.md', 'family': 'diameris', 'limitSeconds': 90, 'file': 'bench/x187/receipts/paid-02.json'}, 'status': 'completed', 'exit': 0}

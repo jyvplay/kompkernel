@@ -1,0 +1,15 @@
+{
+  "rows": [
+    {
+      "source": "<|endoftext|>",
+      "status": "refused",
+      "error": "Error: Disallowed special token found: <|endoftext|>"
+    },
+    {
+      "source": "<|fim_prefix|>",
+      "status": "refused",
+      "error": "Error: Disallowed special token found: <|fim_prefix|>"
+    }
+  ],
+  "note": "Reference-tokenizer special-spelling behavior is preserved; no custom vocabulary or escape-free price is claimed."
+}

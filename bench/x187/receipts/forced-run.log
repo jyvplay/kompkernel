@@ -1,0 +1,6 @@
+{'job': {'path': 'bench/holdout-work/email-thread.txt', 'family': 'diameris', 'rank': 3, 'file': 'bench/x187/receipts/forced-00.json'}, 'status': 'completed'}
+{'job': {'path': 'bench/holdout-work/kb-article.txt', 'family': 'diameris', 'rank': 1, 'file': 'bench/x187/receipts/forced-01.json'}, 'status': 'completed'}
+{'job': {'path': 'bench/holdout-work/llm-answer.md', 'family': 'diameris', 'rank': 3, 'file': 'bench/x187/receipts/forced-02.json'}, 'status': 'completed'}
+{'job': {'path': 'bench/holdout-x41/ps-real.txt', 'family': 'diameris', 'rank': 3, 'file': 'bench/x187/receipts/forced-03.json'}, 'status': 'TIMEOUT'}
+{'job': {'path': 'bench/holdout-x42/ps-ef.txt', 'family': 'diameris', 'rank': 3, 'file': 'bench/x187/receipts/forced-04.json'}, 'status': 'completed'}
+{'job': {'path': 'bench/holdout-x42/findmnt.txt', 'family': 'diameris', 'rank': 3, 'file': 'bench/x187/receipts/forced-05.json'}, 'status': 'completed'}

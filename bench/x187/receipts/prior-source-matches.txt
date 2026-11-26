@@ -1,0 +1,3 @@
+bench/x154/research.md:48:mathcommunity.github.io. Search excerpts/abstracts are discovery evidence, not
+bench/x154/research.md:93:[2](https://mathcommunity.github.io/oai-math-revised/papers/Local-smoothing-for-the-Euclidean-wave-equation-October-25-2026/).
+bench/x159/research.md:54:[1](https://github.com/buberlo/veriscs), describing an executable Lean reference.

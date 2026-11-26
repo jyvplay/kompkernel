@@ -12855,3 +12855,27 @@ zero mismatches. Source-role totals: prose2018→1770, ops22332→8078,
 code/structured3152→2013, other513→101. Whole-stack last-chunk experiment
 rejected:24identical wires,CPU0.978513/wall0.980379, below10%gain threshold
 and with protected-lane regressions. Production unchanged; typecheck/build pass.
+
+## X187 DIAMERIS — negative residual-separation experiment
+
+New experimental `src/lib/omega/diameris.ts` stably partitions codepoints into
+two streams and explicitly pays for alternating-run routing. See its full
+specification, non-greedy nine-plan search, caps, complexity, source citations,
+repair gates and limitations in `bench/x187/model.md` and `research.md`.
+No production integration or native-model claim. Six-mechanism37source screen,
+204parent-message candidates, zero wins;18final paid jobs include forced
+nondegenerate plans:13exact canonical losses,1reader refusal,4timeouts.
+Fresh canonical replay matches X186 byte-for-byte:29messages/11962tokens.
+Generalized source-role aggregates remain prose2018→1770, ops22332→8078,
+code/structured3152→2013, other513→101. Local absolute representatives:
+email629→486,ls-l5194→1310,JSON1152→653,cue513→101;
+ops relative representative remains prices582→118. These are suite-local
+leaders, not universal claims. Native handoffs7, all NOT_RUN.
+
+A build-only ASCII-singleton token-count bypass has separate exact-count and
+isolated full-stack speed gates, recorded in `bench/x187/receipts/`; no speed
+claim follows from a microbenchmark or from changing cache counters.
+X187 final gates:129reference whole-envelope/source checks; TS parent26exact/
+3unsupported, Python23exact/6unsupported, no mismatches. ASCII bypass rejected:
+CPU0.985287,wall0.982684,24identical wires; below10%threshold and node-help CPU
+regresses. Typecheck/build passed. Production unchanged; native NOT_RUN.

@@ -1,0 +1,524 @@
+[
+  {
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "baseline": 1310,
+    "arms": {
+      "ascii1": 1472,
+      "ascii-1": 1455,
+      "ascii2": 1449,
+      "ascii-2": 1463,
+      "cyr1": 1381,
+      "cyr-1": 1384,
+      "cyr2": 1346,
+      "cyr-2": 1350,
+      "mixed1": 1498,
+      "mixed-1": 1497,
+      "mixed2": 1513,
+      "mixed-2": 1482
+    }
+  },
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "baseline": 980,
+    "arms": {
+      "ascii1": 1181,
+      "ascii-1": 1166,
+      "ascii2": 1164,
+      "ascii-2": 1155,
+      "cyr1": 1065,
+      "cyr-1": 1063,
+      "cyr2": 1014,
+      "cyr-2": 1014,
+      "mixed1": 1265,
+      "mixed-1": 1209,
+      "mixed2": 1186,
+      "mixed-2": 1189
+    }
+  },
+  {
+    "path": "bench/holdout-x42/dpkg-l.txt",
+    "baseline": 623,
+    "arms": {
+      "ascii1": 963,
+      "ascii-1": 908,
+      "ascii2": 911,
+      "ascii-2": 939,
+      "cyr1": 623,
+      "cyr-1": 623,
+      "cyr2": 623,
+      "cyr-2": 623,
+      "mixed1": 963,
+      "mixed-1": 908,
+      "mixed2": 911,
+      "mixed-2": 939
+    }
+  },
+  {
+    "path": "bench/holdout/json-pkg.txt",
+    "baseline": 653,
+    "arms": {
+      "ascii1": 864,
+      "ascii-1": 855,
+      "ascii2": 869,
+      "ascii-2": 888,
+      "cyr1": 700,
+      "cyr-1": 696,
+      "cyr2": 678,
+      "cyr-2": 680,
+      "mixed1": 800,
+      "mixed-1": 780,
+      "mixed2": 790,
+      "mixed-2": 802
+    }
+  },
+  {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "baseline": 197,
+    "arms": {
+      "ascii1": 249,
+      "ascii-1": 247,
+      "ascii2": 237,
+      "ascii-2": 237,
+      "cyr1": 207,
+      "cyr-1": 207,
+      "cyr2": 203,
+      "cyr-2": 204,
+      "mixed1": 258,
+      "mixed-1": 256,
+      "mixed2": 246,
+      "mixed-2": 245
+    }
+  },
+  {
+    "path": "bench/holdout-x41/ls-real.txt",
+    "baseline": 414,
+    "arms": {
+      "ascii1": 514,
+      "ascii-1": 500,
+      "ascii2": 489,
+      "ascii-2": 500,
+      "cyr1": 452,
+      "cyr-1": 454,
+      "cyr2": 432,
+      "cyr-2": 434,
+      "mixed1": 526,
+      "mixed-1": 509,
+      "mixed2": 506,
+      "mixed-2": 508
+    }
+  },
+  {
+    "path": "bench/holdout-x42/df-h.txt",
+    "baseline": 105,
+    "arms": {
+      "ascii1": 133,
+      "ascii-1": 131,
+      "ascii2": 125,
+      "ascii-2": 125,
+      "cyr1": 112,
+      "cyr-1": 110,
+      "cyr2": 110,
+      "cyr-2": 110,
+      "mixed1": 138,
+      "mixed-1": 134,
+      "mixed2": 130,
+      "mixed-2": 130
+    }
+  },
+  {
+    "path": "bench/holdout-work/llm-answer.md",
+    "baseline": 664,
+    "arms": {
+      "ascii1": 1015,
+      "ascii-1": 986,
+      "ascii2": 961,
+      "ascii-2": 993,
+      "cyr1": 692,
+      "cyr-1": 694,
+      "cyr2": 682,
+      "cyr-2": 679,
+      "mixed1": 1011,
+      "mixed-1": 959,
+      "mixed2": 946,
+      "mixed-2": 965
+    }
+  },
+  {
+    "path": "bench/holdout-tbl/df-h.txt",
+    "baseline": 160,
+    "arms": {
+      "ascii1": 219,
+      "ascii-1": 215,
+      "ascii2": 208,
+      "ascii-2": 212,
+      "cyr1": 167,
+      "cyr-1": 165,
+      "cyr2": 161,
+      "cyr-2": 164,
+      "mixed1": 227,
+      "mixed-1": 222,
+      "mixed2": 210,
+      "mixed-2": 213
+    }
+  },
+  {
+    "path": "bench/holdout-work/email-thread.txt",
+    "baseline": 486,
+    "arms": {
+      "ascii1": 733,
+      "ascii-1": 728,
+      "ascii2": 699,
+      "ascii-2": 706,
+      "cyr1": 516,
+      "cyr-1": 511,
+      "cyr2": 498,
+      "cyr-2": 503,
+      "mixed1": 750,
+      "mixed-1": 701,
+      "mixed2": 702,
+      "mixed-2": 720
+    }
+  },
+  {
+    "path": "bench/holdout-x41/du-real.txt",
+    "baseline": 266,
+    "arms": {
+      "ascii1": 344,
+      "ascii-1": 333,
+      "ascii2": 330,
+      "ascii-2": 340,
+      "cyr1": 285,
+      "cyr-1": 279,
+      "cyr2": 271,
+      "cyr-2": 276,
+      "mixed1": 349,
+      "mixed-1": 336,
+      "mixed2": 323,
+      "mixed-2": 337
+    }
+  },
+  {
+    "path": "bench/holdout-x42/lsblk.txt",
+    "baseline": 60,
+    "arms": {
+      "ascii1": 70,
+      "ascii-1": 70,
+      "ascii2": 71,
+      "ascii-2": 72,
+      "cyr1": 60,
+      "cyr-1": 60,
+      "cyr2": 60,
+      "cyr-2": 60,
+      "mixed1": 70,
+      "mixed-1": 70,
+      "mixed2": 71,
+      "mixed-2": 72
+    }
+  },
+  {
+    "path": "bench/holdout-x42b/uptime-w.txt",
+    "baseline": 80,
+    "arms": {
+      "ascii1": 96,
+      "ascii-1": 94,
+      "ascii2": 93,
+      "ascii-2": 91,
+      "cyr1": 80,
+      "cyr-1": 80,
+      "cyr2": 80,
+      "cyr-2": 80,
+      "mixed1": 96,
+      "mixed-1": 94,
+      "mixed2": 93,
+      "mixed-2": 91
+    }
+  },
+  {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "baseline": 300,
+    "arms": {
+      "ascii1": 372,
+      "ascii-1": 369,
+      "ascii2": 368,
+      "ascii-2": 364,
+      "cyr1": 311,
+      "cyr-1": 312,
+      "cyr2": 311,
+      "cyr-2": 309,
+      "mixed1": 388,
+      "mixed-1": 377,
+      "mixed2": 378,
+      "mixed-2": 377
+    }
+  },
+  {
+    "path": "bench/holdout/code-ts.txt",
+    "baseline": 949,
+    "arms": {
+      "ascii1": 1405,
+      "ascii-1": 1352,
+      "ascii2": 1365,
+      "ascii-2": 1336,
+      "cyr1": 1021,
+      "cyr-1": 1039,
+      "cyr2": 1000,
+      "cyr-2": 984,
+      "mixed1": 1380,
+      "mixed-1": 1276,
+      "mixed2": 1331,
+      "mixed-2": 1259
+    }
+  },
+  {
+    "path": "bench/holdout-x41/apt-real.txt",
+    "baseline": 813,
+    "arms": {
+      "ascii1": 960,
+      "ascii-1": 936,
+      "ascii2": 930,
+      "ascii-2": 936,
+      "cyr1": 900,
+      "cyr-1": 902,
+      "cyr2": 864,
+      "cyr-2": 865,
+      "mixed1": 943,
+      "mixed-1": 917,
+      "mixed2": 918,
+      "mixed-2": 912
+    }
+  },
+  {
+    "path": "bench/holdout-x41/node-help.txt",
+    "baseline": 846,
+    "arms": {
+      "ascii1": 1436,
+      "ascii-1": 1374,
+      "ascii2": 1391,
+      "ascii-2": 1421,
+      "cyr1": 890,
+      "cyr-1": 890,
+      "cyr2": 858,
+      "cyr-2": 858,
+      "mixed1": 1421,
+      "mixed-1": 1312,
+      "mixed2": 1368,
+      "mixed-2": 1344
+    }
+  },
+  {
+    "path": "bench/holdout-x42/findmnt.txt",
+    "baseline": 385,
+    "arms": {
+      "ascii1": 511,
+      "ascii-1": 505,
+      "ascii2": 505,
+      "ascii-2": 514,
+      "cyr1": 385,
+      "cyr-1": 385,
+      "cyr2": 385,
+      "cyr-2": 385,
+      "mixed1": 511,
+      "mixed-1": 505,
+      "mixed2": 505,
+      "mixed-2": 514
+    }
+  },
+  {
+    "path": "bench/holdout-x40/cue-sheet.md",
+    "baseline": 101,
+    "arms": {
+      "ascii1": 123,
+      "ascii-1": 121,
+      "ascii2": 120,
+      "ascii-2": 118,
+      "cyr1": 101,
+      "cyr-1": 101,
+      "cyr2": 101,
+      "cyr-2": 101,
+      "mixed1": 123,
+      "mixed-1": 121,
+      "mixed2": 120,
+      "mixed-2": 118
+    }
+  },
+  {
+    "path": "bench/holdout-x42/ps-ef.txt",
+    "baseline": 296,
+    "arms": {
+      "ascii1": 347,
+      "ascii-1": 349,
+      "ascii2": 343,
+      "ascii-2": 343,
+      "cyr1": 296,
+      "cyr-1": 296,
+      "cyr2": 296,
+      "cyr-2": 296,
+      "mixed1": 347,
+      "mixed-1": 349,
+      "mixed2": 343,
+      "mixed-2": 343
+    }
+  },
+  {
+    "path": "bench/holdout-x41/df-real.txt",
+    "baseline": 123,
+    "arms": {
+      "ascii1": 153,
+      "ascii-1": 152,
+      "ascii2": 147,
+      "ascii-2": 146,
+      "cyr1": 130,
+      "cyr-1": 128,
+      "cyr2": 128,
+      "cyr-2": 128,
+      "mixed1": 158,
+      "mixed-1": 155,
+      "mixed2": 152,
+      "mixed-2": 151
+    }
+  },
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "baseline": 381,
+    "arms": {
+      "ascii1": 456,
+      "ascii-1": 454,
+      "ascii2": 447,
+      "ascii-2": 453,
+      "cyr1": 410,
+      "cyr-1": 410,
+      "cyr2": 402,
+      "cyr-2": 397,
+      "mixed1": 473,
+      "mixed-1": 468,
+      "mixed2": 461,
+      "mixed-2": 464
+    }
+  },
+  {
+    "path": "bench/holdout-x40/prices.csv",
+    "baseline": 118,
+    "arms": {
+      "ascii1": 148,
+      "ascii-1": 142,
+      "ascii2": 144,
+      "ascii-2": 144,
+      "cyr1": 124,
+      "cyr-1": 123,
+      "cyr2": 122,
+      "cyr-2": 124,
+      "mixed1": 153,
+      "mixed-1": 146,
+      "mixed2": 147,
+      "mixed-2": 148
+    }
+  },
+  {
+    "path": "bench/holdout-tbl/psql-output.txt",
+    "baseline": 229,
+    "arms": {
+      "ascii1": 290,
+      "ascii-1": 270,
+      "ascii2": 276,
+      "ascii-2": 277,
+      "cyr1": 245,
+      "cyr-1": 247,
+      "cyr2": 238,
+      "cyr-2": 238,
+      "mixed1": 307,
+      "mixed-1": 287,
+      "mixed2": 285,
+      "mixed-2": 287
+    }
+  },
+  {
+    "path": "bench/holdout-tbl/markdown-table.md",
+    "baseline": 172,
+    "arms": {
+      "ascii1": 221,
+      "ascii-1": 217,
+      "ascii2": 214,
+      "ascii-2": 216,
+      "cyr1": 172,
+      "cyr-1": 172,
+      "cyr2": 172,
+      "cyr-2": 172,
+      "mixed1": 221,
+      "mixed-1": 217,
+      "mixed2": 214,
+      "mixed-2": 216
+    }
+  },
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "baseline": 620,
+    "arms": {
+      "ascii1": 1118,
+      "ascii-1": 1065,
+      "ascii2": 1045,
+      "ascii-2": 1072,
+      "cyr1": 648,
+      "cyr-1": 645,
+      "cyr2": 630,
+      "cyr-2": 633,
+      "mixed1": 1128,
+      "mixed-1": 945,
+      "mixed2": 1036,
+      "mixed-2": 1060
+    }
+  },
+  {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "baseline": 411,
+    "arms": {
+      "ascii1": 514,
+      "ascii-1": 514,
+      "ascii2": 494,
+      "ascii-2": 501,
+      "cyr1": 439,
+      "cyr-1": 440,
+      "cyr2": 425,
+      "cyr-2": 425,
+      "mixed1": 540,
+      "mixed-1": 522,
+      "mixed2": 507,
+      "mixed-2": 523
+    }
+  },
+  {
+    "path": "bench/holdout-x42b/free-m.txt",
+    "baseline": 76,
+    "arms": {
+      "ascii1": 92,
+      "ascii-1": 92,
+      "ascii2": 95,
+      "ascii-2": 94,
+      "cyr1": 76,
+      "cyr-1": 76,
+      "cyr2": 76,
+      "cyr-2": 76,
+      "mixed1": 92,
+      "mixed-1": 92,
+      "mixed2": 95,
+      "mixed-2": 94
+    }
+  },
+  {
+    "path": "bench/holdout-x42b/vmstat.txt",
+    "baseline": 144,
+    "arms": {
+      "ascii1": 163,
+      "ascii-1": 163,
+      "ascii2": 163,
+      "ascii-2": 163,
+      "cyr1": 155,
+      "cyr-1": 155,
+      "cyr2": 154,
+      "cyr-2": 155,
+      "mixed1": 175,
+      "mixed-1": 172,
+      "mixed2": 173,
+      "mixed-2": 175
+    }
+  }
+]

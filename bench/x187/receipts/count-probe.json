@@ -1,0 +1,176 @@
+[
+  {
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "baseline": 1310,
+    "freeKey": 1583,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "baseline": 980,
+    "freeKey": 1223,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x42/dpkg-l.txt",
+    "baseline": 623,
+    "freeKey": 638,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout/json-pkg.txt",
+    "baseline": 653,
+    "freeKey": 760,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "baseline": 197,
+    "freeKey": 227,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x41/ls-real.txt",
+    "baseline": 414,
+    "freeKey": 512,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x42/df-h.txt",
+    "baseline": 105,
+    "freeKey": 133,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-work/llm-answer.md",
+    "baseline": 664,
+    "freeKey": 764,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-tbl/df-h.txt",
+    "baseline": 160,
+    "freeKey": 174,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-work/email-thread.txt",
+    "baseline": 486,
+    "freeKey": 582,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x41/du-real.txt",
+    "baseline": 266,
+    "freeKey": 332,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x42/lsblk.txt",
+    "baseline": 60,
+    "freeKey": 69,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x42b/uptime-w.txt",
+    "baseline": 80,
+    "freeKey": 87,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "baseline": 300,
+    "freeKey": 332,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout/code-ts.txt",
+    "baseline": 949,
+    "freeKey": 1047,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x41/apt-real.txt",
+    "baseline": 813,
+    "freeKey": 976,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x41/node-help.txt",
+    "baseline": 846,
+    "freeKey": 905,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x42/findmnt.txt",
+    "baseline": 385,
+    "freeKey": 397,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x40/cue-sheet.md",
+    "baseline": 101,
+    "freeKey": 112,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x42/ps-ef.txt",
+    "baseline": 296,
+    "freeKey": 308,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x41/df-real.txt",
+    "baseline": 123,
+    "freeKey": 154,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "baseline": 381,
+    "freeKey": 495,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x40/prices.csv",
+    "baseline": 118,
+    "freeKey": 146,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-tbl/psql-output.txt",
+    "baseline": 229,
+    "freeKey": 271,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-tbl/markdown-table.md",
+    "baseline": 172,
+    "freeKey": 185,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "baseline": 620,
+    "freeKey": 649,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "baseline": 411,
+    "freeKey": 503,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x42b/free-m.txt",
+    "baseline": 76,
+    "freeKey": 85,
+    "validCodec": false
+  },
+  {
+    "path": "bench/holdout-x42b/vmstat.txt",
+    "baseline": 144,
+    "freeKey": 176,
+    "validCodec": false
+  }
+]
