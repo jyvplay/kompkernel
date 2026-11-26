@@ -1,0 +1,6 @@
+{
+  "codec": "No grammar repair after tests; new nonrecursive-marker, empty and 50k-output probes followed by full TS and Python reruns",
+  "speed": "Build-only MRU cache; fresh count/vector/merge/threshold and 480 targeted recency cases per arm; 24 exact full wires; performance gate failed",
+  "native": "NOT_RUN",
+  "production": "Unchanged"
+}

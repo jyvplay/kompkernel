@@ -1,0 +1,12 @@
+{
+  "node": "22.22.3",
+  "typescript": "5.9.3",
+  "python": "3.11.2",
+  "independentAgents": 0,
+  "externalExpert": "NOT_RUN",
+  "native": "NOT_RUN",
+  "lean": "not found by command -v; NOT_RUN",
+  "lake": "not found by command -v; NOT_RUN",
+  "simulators": "NONE",
+  "notes": "Actual deterministic input generation, real encoders/decoders/tokenizers, no mocked trials"
+}

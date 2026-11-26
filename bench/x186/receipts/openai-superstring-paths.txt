@@ -1,0 +1,2 @@
+lean/ComparatorChallenges/Superstring.json
+lean/ComparatorChallenges/Superstring.lean

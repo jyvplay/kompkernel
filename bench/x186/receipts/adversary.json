@@ -1,0 +1,78 @@
+{
+  "checks": 37,
+  "structural": [
+    "desmi",
+    "geiton",
+    "apousia",
+    "diadochi",
+    "symfraz",
+    "ropi"
+  ],
+  "negativeContractShapes": [
+    {
+      "missing": "byteExact",
+      "accepted": false
+    },
+    {
+      "missing": "allCostsPaid",
+      "accepted": false
+    },
+    {
+      "missing": "twoProse",
+      "accepted": false
+    },
+    {
+      "missing": "twoOps",
+      "accepted": false
+    },
+    {
+      "missing": "heldout",
+      "accepted": false
+    },
+    {
+      "missing": "moreThanTen",
+      "accepted": false
+    },
+    {
+      "missing": "protected",
+      "accepted": false
+    },
+    {
+      "missing": "nativeRun",
+      "accepted": false
+    },
+    {
+      "missing": "nativeExact",
+      "accepted": false
+    },
+    {
+      "missing": "novelty",
+      "accepted": false
+    },
+    {
+      "missing": "runtimeMeasured",
+      "accepted": false
+    },
+    {
+      "missing": "runtimeNonregression",
+      "accepted": false
+    },
+    {
+      "missing": "unicodeExact",
+      "accepted": false
+    },
+    {
+      "missing": "bounded",
+      "accepted": false
+    },
+    {
+      "missing": "independentRead",
+      "accepted": false
+    },
+    {
+      "missing": "noHiddenContext",
+      "accepted": false
+    }
+  ],
+  "note": "Boolean gate checks are not empirical native verification."
+}

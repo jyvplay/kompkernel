@@ -1,0 +1,22 @@
+{
+  "production": false,
+  "edits": [
+    [
+      "export function fastChunkCount(chunk: string): number {",
+      "let lastChunk: string | undefined; let lastChunkValue = 0;\nexport function fastChunkCount(chunk: string): number {"
+    ],
+    [
+      "  const m0 = CHUNK_CACHE.get(chunk);",
+      "  if (chunk === lastChunk) { chunkHits++; return lastChunkValue; }\n  const m0 = CHUNK_CACHE.get(chunk);"
+    ],
+    [
+      "if (m0 !== undefined) { chunkHits++; return m0; }",
+      "if (m0 !== undefined) { chunkHits++; lastChunk=chunk; lastChunkValue=m0; return m0; }"
+    ],
+    [
+      "  CHUNK_CACHE.set(chunk, n0);",
+      "  CHUNK_CACHE.set(chunk, n0); lastChunk=chunk; lastChunkValue=n0;"
+    ]
+  ],
+  "scope": "One-entry exact last-chunk cache avoids Map lookup on immediate repeated chunks. Not a compression change."
+}
