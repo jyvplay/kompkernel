@@ -38,3 +38,7 @@ bench/x165/receipts/*.log -whitespace
 # X166 exact proof and diagnostic evidence
 bench/x166/research/*.lean -text -whitespace
 bench/x166/receipts/*.log -whitespace
+
+# X185 exact native handoff and build-output evidence retain whitespace.
+bench/x185/native/*.txt -text -whitespace
+bench/x185/receipts/*.log -whitespace

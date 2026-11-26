@@ -1,0 +1,122 @@
+[
+  {
+    "job": {
+      "path": "bench/holdout-work/email-thread.txt",
+      "family": "peras",
+      "limitSeconds": 90,
+      "file": "bench/x185/receipts/paid-00.json"
+    },
+    "status": "completed",
+    "exit": 0
+  },
+  {
+    "job": {
+      "path": "bench/holdout-work/kb-article.txt",
+      "family": "peras",
+      "limitSeconds": 90,
+      "file": "bench/x185/receipts/paid-01.json"
+    },
+    "status": "completed",
+    "exit": 0
+  },
+  {
+    "job": {
+      "path": "bench/holdout-work/llm-answer.md",
+      "family": "peras",
+      "limitSeconds": 90,
+      "file": "bench/x185/receipts/paid-02.json"
+    },
+    "status": "completed",
+    "exit": 0
+  },
+  {
+    "job": {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "family": "peras",
+      "limitSeconds": 90,
+      "file": "bench/x185/receipts/paid-03.json"
+    },
+    "status": "completed",
+    "exit": 0
+  },
+  {
+    "job": {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "family": "peras",
+      "limitSeconds": 90,
+      "file": "bench/x185/receipts/paid-04.json"
+    },
+    "status": "completed",
+    "exit": 0
+  },
+  {
+    "job": {
+      "path": "bench/holdout/json-pkg.txt",
+      "family": "peras",
+      "limitSeconds": 90,
+      "file": "bench/x185/receipts/paid-05.json"
+    },
+    "status": "completed",
+    "exit": 0
+  },
+  {
+    "job": {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "family": "peras",
+      "limitSeconds": 90,
+      "file": "bench/x185/receipts/paid-06.json"
+    },
+    "status": "completed",
+    "exit": 0
+  },
+  {
+    "job": {
+      "path": "bench/holdout/code-ts.txt",
+      "family": "peras",
+      "limitSeconds": 90,
+      "file": "bench/x185/receipts/paid-07.json"
+    },
+    "status": "completed",
+    "exit": 0
+  },
+  {
+    "job": {
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "family": "peras",
+      "limitSeconds": 90,
+      "file": "bench/x185/receipts/paid-08.json"
+    },
+    "status": "completed",
+    "exit": 0
+  },
+  {
+    "job": {
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "family": "peras",
+      "limitSeconds": 90,
+      "file": "bench/x185/receipts/paid-09.json"
+    },
+    "status": "TIMEOUT",
+    "exit": null
+  },
+  {
+    "job": {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "family": "peras",
+      "limitSeconds": 90,
+      "file": "bench/x185/receipts/paid-10.json"
+    },
+    "status": "TIMEOUT",
+    "exit": null
+  },
+  {
+    "job": {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "family": "peras",
+      "limitSeconds": 90,
+      "file": "bench/x185/receipts/paid-11.json"
+    },
+    "status": "completed",
+    "exit": 0
+  }
+]

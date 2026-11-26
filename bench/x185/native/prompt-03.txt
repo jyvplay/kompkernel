@@ -1,0 +1,10 @@
+Decode payload first. Split on ASCII spaces retaining empty fields. Scan fields left to right, numbering input fields from 1. ~i,n; emits a copy of the n output fields ending at the end of input field i's expansion; i must be earlier. Other fields emit literally. Join output fields with ASCII spaces, preserving everything else. Print only.
+¶ k=v. expand repeatedly; print only.
+§и,16;т Ки [ш
+    тщ]шіКkліworker/х4р:н [kworker/uхрд2ИКrcuк     А]
+кту0ыту.мт05реdсм49 /lib/systemе/systemея_percpu_wqч]
+   та1браH-kblockежруH-events_highpriТ,8;віsoftirqе/ЕКcpuhp/олаг ~әк Ст ¶# sourceр ps -eo pid,user,pcpu,pmem,etime,args --sort=-pcpuт(real)
+    PID USERк%CPU %MEM     ELAPSED COMMAND
+ Са553 userктаух 15.7     Судр59 nodeт/tmp/_run_а539.mjs
+ Са229 rootкыхтыхәмхут/usr/bin/envd
+ Ст294 rootкыутыуәм49н3-extх-rsv-conversionч ах ~80,ад; См50 [rcu_preemptщдаг95ору-mmящ аг76Тыдәм50т/sbin/initшху ~84общ63 ~125инд-events_unboundщ24гаудина-events_unboundА9 ~139ину-flush-254руч284гаа0Тыак с-journalеш67 ~132лубщ19 ~147Кmigration/ач252 ~168Кjbед/vda-8ч ду ~175вач306 systemd+ ~115ТСс-networkеш13 ~188вуч320 _chrony ~181,ад;т/usr/sbin/chronydт-F аш16 ~205лура-eventsАд ~221іthreadеч т3 ~229И_gpАх ~237И_par_gpА5 ~245Кslub_flushwqА6 ~253КnetnsА8 ~261лужщауг269Кmmяч аа ~276И_tasks_kthreadч ад ~283И_tasks_trace_kthreadщ15 ~290Кmigration/ущ17 ~297Еущ18 ~304Еащ22 ~311лажщ25 ~318іdevtmpfsщ26 ~325Кinet_frag_wqщ27 ~33діauditещ28 ~339лара-mmящ29 ~346іhungtaskещ30 ~353Кoom_reaperщ31 ~360Кwriteback]

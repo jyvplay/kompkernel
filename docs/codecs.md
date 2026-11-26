@@ -12806,3 +12806,23 @@ regressions. Differential gates16,192count/12,124vector/4,119merge/14,739stream
 checks per arm passed. Existing production runtime is unchanged. Reproduction,
 A–J model, six-branch portfolio and bounded individual proof review:
 `bench/x184/README.md`, `model.md`, `portfolio.md`, `research.md`.
+
+## X185 PERAS: negative paid frontier experiment
+
+New experimental module `src/lib/omega/peras.ts`, not wired into selection.
+Event-end anchored field copies differ in wire syntax from existing positional
+copies but do not establish semantic novelty against the full stack. See
+`bench/x185/model.md` for grammar, bounded CPU/memory, greedy menu, inverse
+argument, paid decoder and recent classical citations. Six-mechanism37-source
+screen; PERAS-on-parent produced zero plans (26 no-local-gain,3 collision
+refusals). Eight canonical paid plans lost; KB ineligible, one heldout reader
+refused, two90s timeouts. No native behavior claim. Whole-stack exact tokenizer
+threshold experiment is isolated from production and has separate gates.
+Source-role category leaders remain the established frontier until a complete
+paid/fidelity gate beats them: prose2018→1770, ops22332→8078,
+code/structured3152→2013, other513→101. Largest absolute-saving representatives
+are email629→486, ls-l5194→1310, JSON1152→653, cue513→101;
+ops largest relative saving remains prices582→118. These are category
+representatives, not universal best codecs. Fresh replay/reader evidence,
+research boundaries, native NOT_RUN handoffs and rejected alternatives live in
+`bench/x185/`. Scientific acceptance is independent of PR merge.

@@ -1,0 +1,23 @@
+Decode payload first. Split on ASCII spaces retaining empty fields. Scan fields left to right, numbering input fields from 1. ~i,n; emits a copy of the n output fields ending at the end of input field i's expansion; i must be earlier. Other fields emit literally. Join output fields with ASCII spaces, preserving everything else. Print only.
+¶ k=v. expand repeatedly; print only.
+§а.к "ы",
+       кр0зарый"
+    },
+   ко":кә",
+       хә "@и       кл": {
+игә "@types/Воherebyќ   кіаря1таяыу": "^Ауяаюtypescriptэаян3ї": false,
+иқиurl":кhttps://github.com/microsoft/TypeScriptс",
+   кү10буүам4Оумач2Лучаъ,8;ҿыbuild:өамп5аф": "./lib/typescriptҫ": "./bin/tsцу9а20ҷ8ажdprintваныш"
+    ],
+ќеураєю-eslintўminimistАчаӡsource-map-supportепЇwhichунід7ғcьeslint¶{
+ќnameоюсauthorоMicrosoft Corpасhomepageоhttps://wwwаюlang.org/сversionоп9ансlicenseоApache-чісdescriptionоTypeScript is a language for application scale JavaScript developmentсkeywords": [
+иTypeScriptыMicrosoftыcompilerыlanguageыjavascriptшbugs": {
+қ/issuesйrepositoryлtypeоgit",
+қ.gitйmainфаjsсtypingsф.d.tsсbinлtscҫғыtsserverҫserverйenginesлnodeо>=яма17йfiles": [
+иbinыlibы!lib/enuыLICENSE.txtыREADME.mdыSECURITY.mdыThirdPartyNoticeText.txtә "!**/.gitattributesшdevDependenciesл@ж/formatterемэхж/typescriptора93өхesfx/canceltokenуяііхь/jsцархoctokit/restучяээгchaiОна20гdiffудіэгў5гmochaбраүгmsеда34гnodeоlatestгӡүгЇөхє/rule-testerуҷ24эхє/type-utils": ~400ък@є/utils": ~402ъкazure-devops-node-apiуямаязc8бявchaiОпрыchokidarумівdiffудіарыжем9арыesbuildе25зьцть-formatter-autolinkable-stylishАмзь-plugin-regexpЛдарыfast-xml-parserОпчыglobбма5ыglobalsуяп15арыherebyАүзjsonc-parserунантknipупммамыў8ыmochaбҷчыmocha-fivemat-progress-reporterеяарыmonocart-coverage-reportsЛячтmsЛявpicocolorsАятplaywrightА5ртӡ21ыtslibЛ8тtypescriptупданыє": ~404ъкЇэйoverridesлю@*о$юйscriptsлtestВ runtests-parallel --light=falseыtest:eslint-rulesВ run-eslint-rules-testsыbuildоnpm run build:compiler && npm run build:testsҿcompilerВ localҿtestsВ testsҿtests:notypecheckВ tests --no-typecheckыcleanВ cleanыgulpВыlintВ lint",
+ ~540ъкhereby knipыformatож fmtыsetup-hooksоnode scripts/link-hooks.mjsйbrowserлfsїosїpathїcryptoїbuffer": false,
+ ~612ъ false,
+иinspectorїperf_hooks": false
+    },
+ќpackageManagerоnpm@ҷ19өсvoltaлnodeоч0эзnpmоҷ19өйgitHeadоғ63de15a992dндf0d6cec03ac7631872838602cb"
+}

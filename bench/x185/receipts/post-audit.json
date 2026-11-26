@@ -1,0 +1,205 @@
+[
+  {
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "baseline": 1310,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "2a1ac160b7e2dbcaf9df43a1da24e35d3980e799965d19811eb1ab048032205e"
+  },
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "baseline": 980,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "93c33236da364153e9aaf69244ed08f87bb487eec360912fe0c2a93e5f53f3a6"
+  },
+  {
+    "path": "bench/holdout-x42/dpkg-l.txt",
+    "baseline": 623,
+    "plans": 0,
+    "reason": "reserved-tilde",
+    "wireSha256": "a0edc2420d05c854fd345fca96ec41499236a38ed2775b167d82fb9d3e0a1439"
+  },
+  {
+    "path": "bench/holdout/json-pkg.txt",
+    "baseline": 653,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "a1f0d05660ef539e9794b376f00ef355eb096bdb424740f5b3e989c751e67b40"
+  },
+  {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "baseline": 197,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "dab42a595338a313b9c9c49b79cb8876ed007e34858edd887ad6227b91975c37"
+  },
+  {
+    "path": "bench/holdout-x41/ls-real.txt",
+    "baseline": 414,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "622118362a3e0ca37681f7606cd38f59d23708252868d5bb0e2b84b64afebbd4"
+  },
+  {
+    "path": "bench/holdout-x42/df-h.txt",
+    "baseline": 105,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "fbb582d89dc95e9351d74bc96cbfd6feceb537aec1608fcccd759fc6feacd380"
+  },
+  {
+    "path": "bench/holdout-work/llm-answer.md",
+    "baseline": 664,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "3bf571ebb3f22eaba254ccd23e92781f81f0e6dc5a882329b85bc922742632d3"
+  },
+  {
+    "path": "bench/holdout-tbl/df-h.txt",
+    "baseline": 160,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "419ec5987612bf200088db71113cbfcbab34b113482444884cb10d318327f176"
+  },
+  {
+    "path": "bench/holdout-work/email-thread.txt",
+    "baseline": 486,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "1e4eebe7cd5997f4fdb6c28e9cf76120cfcfe3204a3589ffc775f5a3cf3b9eae"
+  },
+  {
+    "path": "bench/holdout-x41/du-real.txt",
+    "baseline": 266,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "c4452288e301237b6ba95032549fcd08285ca184e87fa9fd268655967cf2828c"
+  },
+  {
+    "path": "bench/holdout-x42/lsblk.txt",
+    "baseline": 60,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "6c01e1a891869dfcf63f1cd2f4cf81930f51dbf3459243681cce3d752687c496"
+  },
+  {
+    "path": "bench/holdout-x42b/uptime-w.txt",
+    "baseline": 80,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "d57da79a4bfc7b0bfad09641d429f7ff139a4b354f47ddea07eed9d717e84ae6"
+  },
+  {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "baseline": 300,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "0ae628e0b97e5fad80fb7864899199d9e0e0f9dc126bee48e6f5f805020673ec"
+  },
+  {
+    "path": "bench/holdout/code-ts.txt",
+    "baseline": 949,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "d814993dfddb37279091cdbb7234ad669f78c96198269961d9b1dab8054ccfea"
+  },
+  {
+    "path": "bench/holdout-x41/apt-real.txt",
+    "baseline": 813,
+    "plans": 0,
+    "reason": "reserved-tilde",
+    "wireSha256": "c6d928c92b89670fa72489d854740c0f74c94705a7d4e22b7aae04899d7e61e0"
+  },
+  {
+    "path": "bench/holdout-x41/node-help.txt",
+    "baseline": 846,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "3c932c2afc749d8e2b2d384b5a65137fbf0407ef1c26b517b1b19666e896ddb8"
+  },
+  {
+    "path": "bench/holdout-x42/findmnt.txt",
+    "baseline": 385,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "2c2305698ae048cf5a496f03a8cd7f7e1d3e7ded074d8da79e6f70220dcb3553"
+  },
+  {
+    "path": "bench/holdout-x40/cue-sheet.md",
+    "baseline": 101,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "77cc680a88f48486b02b97dc2835ae4c64ab1a6f2435ef2c00ea787f39661dd9"
+  },
+  {
+    "path": "bench/holdout-x42/ps-ef.txt",
+    "baseline": 296,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "a49d577d1267a7c6ec90aa88764f0856a0973f362b9772870f2821cc579797b6"
+  },
+  {
+    "path": "bench/holdout-x41/df-real.txt",
+    "baseline": 123,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "480d50a6b90489efeaab184831aea7ff952afafd51653c8634b74fe1f823856e"
+  },
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "baseline": 381,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "ed9795cdb6379a1fd5dbe28f61dd2e76bbb5bdf1822151c1dfb35a762688c76a"
+  },
+  {
+    "path": "bench/holdout-x40/prices.csv",
+    "baseline": 118,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "9e50e78aaf195da7bc4339f857559004a60406779b5a36231694e8d0793f2aea"
+  },
+  {
+    "path": "bench/holdout-tbl/psql-output.txt",
+    "baseline": 229,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "138d8ab372f7f264d29e350f5ec4252257bc6c5427da29d5da6fb2bc2009e34c"
+  },
+  {
+    "path": "bench/holdout-tbl/markdown-table.md",
+    "baseline": 172,
+    "plans": 0,
+    "reason": "reserved-tilde",
+    "wireSha256": "421ff1bcb2e009308543bc9473726065fb545eeb662e7e6b73e3f9ae3b664dce"
+  },
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "baseline": 620,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "b62e84ee6cf6630198e68503804b82e1503acaa9b61c4ee410407752edb01483"
+  },
+  {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "baseline": 411,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "2b82272ac833260ce16527b49552a1cc151ad5734c3300f1d7b5bf35d16bebdf"
+  },
+  {
+    "path": "bench/holdout-x42b/free-m.txt",
+    "baseline": 76,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "0d0194b9ede575d9a4697a04563d1bb2b4f1f269c2103b2f08e95302297b6612"
+  },
+  {
+    "path": "bench/holdout-x42b/vmstat.txt",
+    "baseline": 144,
+    "plans": 0,
+    "reason": "no-local-copy-gain",
+    "wireSha256": "5924677c9ce144492afb4297b8d2c037994754500a7e551cb649db65a1121181"
+  }
+]

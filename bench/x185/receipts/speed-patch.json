@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "old": "if(n>SCRATCH_MAX && !(typeof process!=='undefined' && process.env?.OMEGA_LONG_BPE_SCAN==='1'))return longMergeCount(b,n);",
+  "replacement": "if(n>128 && !(typeof process!=='undefined' && process.env?.OMEGA_LONG_BPE_SCAN==='1'))return longMergeCount(b,n);",
+  "scope": "Use existing exact heap merger above128 bytes instead of1024; preserves explicit scan override. Requires fresh threshold attacks and full-stack gate."
+}

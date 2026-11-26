@@ -1,0 +1,44 @@
+# X185 — PERAS, rejected for frontier promotion
+
+## A. Acceptance target
+Broad, byte-exact, fully paid improvement over the existing parent stack, especially prose/ops, with native basic-chat evidence and significant whole-stack speed gains. **Not achieved.** Merge/publication does not establish acceptance.
+
+## B. New implementation
+`src/lib/omega/peras.ts`: bounded event-end anchored field copies, experimental and unwired. See [technical model](model.md) for grammar, greedy search, costs, induction argument and classical attribution. Not a renamed production codec; not a claimed new theoretical primitive or all-stack novelty proof.
+
+## C. Six-mechanism comparison
+PERAS plus five existing comparator implementations, 37 sources. [Portfolio](portfolio.md) lists the distinct operations and 18 false solutions. Existing comparators were not invented in this turn.
+
+## D. Existing-parent headroom
+Direct PERAS-on-parent screen: **zero plans on 29 canonical messages**. Reasons: 26 no local copy gain, three reserved-tilde refusals. `post-audit.json` pins message hashes. Raw-source ops gains do not survive as demonstrated parent gains. Parent body token census still shows more word-class than glyph-class tokens in email, KB, answer, ps-real and ps-ef; this is a diagnostic, not an entropy bound or proof those tokens can be compressed.
+
+## E. Fully paid trials
+12 selected-plan jobs: eight exact completed canonical losses, one ineligible KB source, one reader-failed heldout, two 90-second timeouts (Kubernetes and ps-aux). No counted paid win. Key marginal cost is 72 tokens on completed plans.
+
+| Canonical input | Baseline | Complete PERAS+parent |
+|---|---:|---:|
+| Email |486|564|
+| Answer |664|743|
+| ps-real |381|537|
+| ps-ef |296|469|
+| JSON |653|752|
+| Diff |411|491|
+| TypeScript |949|1074|
+| findmnt |385|545|
+
+Git-recovery heldout: 1316 tokens but parent reader refuses; no accepted fidelity/cost result. Timeouts are censored, not measured losses. Plan selection is a limited greedy shortlist, not a search of all possible encodings.
+
+## F. Fidelity and attackers
+TypeScript **4,122 checks**, 37 sources; independent Python **3,072 checks**, **15 rejected attacks**; separate adversary **39 checks**. Python validates seven completed paid wires and refuses two unsupported parent layouts/envelopes; it does not silently claim them exact. TypeScript validates eight. Reserved marker, unavailable endpoint, forward/self-reference, Unicode/CRLF/empty fields and expansion limits are covered. Code-reader support and behavioral fidelity remain separate gates.
+
+## G. Runtime experiment
+Experimental build switches the existing exact heap merger threshold from 1024 to 128 bytes; production tokenizer unchanged. Fresh per-arm count 16,192, vector 12,124, merge 4,119 and threshold 544 checks pass identically. `runtime-run.py` performs isolated six-lane ABBA complete-stack measurements, with canonical node paused and resumed. Gate requires ≤0.9 aggregate CPU and wall ratios and no per-lane regression. **Rejected:** CPU ratio 1.002813, wall ratio 0.998509, 24 identical wires; KB CPU regressed about 10.4%. Exact ratios are in `receipts/runtime-summary.json`. No significant whole-stack speed gain; no production change.
+
+## H. Research and novelty
+[Research ledger](research.md): 2023/2024 LZ-End papers, author implementation, duplicate-source audit and individually bounded lab investigations. 29 pinned math source downloads are not kernel verification. Dates beyond the session cutoff are not evidence of established current results. RH lower-bound progress is not an RH proof.
+
+## I. Native/external verification
+`native/` contains six complete paid prompts with expected source hashes. **NOT_RUN**: no available native endpoint was invoked. No external human review, independent agent, Lean or ZK proof replay occurred. Executable inverse success cannot satisfy the requested basic-chat behavioral gate.
+
+## J. Decision and next experiment
+Do not promote PERAS or assert a broad Pareto improvement. Highest-information next test is a separately specified operation aimed at word-dominated *existing parent messages*, with a necessary-cost screen before parent search, followed by actual unassisted native byte comparisons. Another raw-source copying variant is low-information after this residual screen. Fresh canonical replay: **29/29 identical wires, 11,962 tokens**, exact source bytes. TypeScript parent reader: 26 exact, three unsupported; Python: 23 exact, six unsupported, zero mismatches. Source-role aggregates remain prose 2,018→1,770; ops 22,332→8,078; code/structured 3,152→2,013; other 513→101. Largest absolute-saving representatives remain email, ls-l, JSON and cue; ops relative leader remains prices. The initial sequential replay retained its completed lane and was resumed with three workers (`frontier-resume.json`); replay timings are not speed evidence. Canonical and leader summaries are generated by `finalize.py`; reproduction is in `validate.sh`. Typecheck and production build pass (existing CSS parser warnings remain). A harness-only stale-receipt cleanup repair has 14 mocked checks, explicitly not codec trials. Merge is requested regardless of the negative research outcome.

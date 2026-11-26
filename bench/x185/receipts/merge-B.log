@@ -1,0 +1,1 @@
+{"checks":4119,"scope":"Full pretoken+merge differential at memmove threshold and long-buffer boundary; Unicode, ties/repeats and lone surrogates"}

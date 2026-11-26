@@ -1,0 +1,1 @@
+{"checks": 14, "passed": true, "mocked": true, "scope": "runner stale receipt removal and timeout status only; no codec executions"}

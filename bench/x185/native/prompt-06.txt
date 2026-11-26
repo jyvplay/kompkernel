@@ -1,0 +1,26 @@
+Decode payload first. Split on ASCII spaces retaining empty fields. Scan fields left to right, numbering input fields from 1. ~i,n; emits a copy of the n output fields ending at the end of input field i's expansion; i must be earlier. Other fields emit literally. Join output fields with ASCII spaces, preserving everything else. Print only.
+¶ k=v. expand repeatedly; print only.
+§п/src/lib/omegaоп/ariadne.tsип/chiron.tsл0ь,к лxЁльке], [лxгькла;
+ўGain(rules: Rule[], pool: stringд+   Б  let total = лай
+т 100644й--- aв  св { name: 'р label: 'ү total += r.countабdiff --git aӡ+ Юдв [лxы hi:н bя',у {
+ж00іaш numberз lo:көb¶бинийindex 3f8a1c2..9d4e7өлтий+++ний@@ -140,6 +140,7 @@ export interface ChironScriptув label: stringав lo:шавышаӡ ranges?: Array<[number, number]>;
+ }
+ 
+ export const CHIRON_SCRIPTS: ChironScript[] = [
+@@ -152,6 +153,18 @@ ~37,4; = [йсkhmerярKhmer letterяз178льык1800 },йсcjkярChinese characterяз4eжьыкіл00 },
++ уд name: 'polyglot',
+дрGreek, Hebrewь Armenianь Georgianь Thai or Indic letter',
+дз0370,
+ды ~98,4; ranges: [
+Ю037Ё04жел530г590ел590г600ел900г980],
+Ю098Ёліжеліжгі80елі80гөжелb80гc00],
+д ],
+ӡ },
+ ];
+ 
+ const poolCache = new Map<string, string[]>();
+бонойindex 1a2b3c4..5e6f7a8той+++ной@@ -848,10 +848,14 @@ function assignmentў[]):шу-Б-вfor (const r of rules)ү-вreturn totalа+Б+ ~170,6;удүд if (r.adjacent) total += r.adjacent * л.5аӡ }
+ӡ return Math.round(total);
+ }
+ 
+ function searchў[], budgetMs: number):шу
