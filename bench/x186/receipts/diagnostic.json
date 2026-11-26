@@ -1,0 +1,725 @@
+{
+  "rows": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "baseline": 1310,
+      "raw": 5194,
+      "paidStandalone": 5091,
+      "bodyOnly": 4730,
+      "poolUnits": 382,
+      "separateUnits": 408,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "baseline": 1310,
+      "raw": 5194,
+      "paidStandalone": 5102,
+      "bodyOnly": 4722,
+      "poolUnits": 407,
+      "separateUnits": 442,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "baseline": 1310,
+      "raw": 5194,
+      "paidStandalone": 5315,
+      "bodyOnly": 5104,
+      "poolUnits": 224,
+      "separateUnits": 224,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "baseline": 1310,
+      "raw": 5194,
+      "paidStandalone": 5323,
+      "bodyOnly": 5104,
+      "poolUnits": 241,
+      "separateUnits": 241,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "baseline": 980,
+      "raw": 3054,
+      "paidStandalone": 3159,
+      "bodyOnly": 3042,
+      "poolUnits": 24,
+      "separateUnits": 24,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "baseline": 980,
+      "raw": 3054,
+      "paidStandalone": 3172,
+      "bodyOnly": 3053,
+      "poolUnits": 24,
+      "separateUnits": 24,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "baseline": 980,
+      "raw": 3054,
+      "paidStandalone": 3183,
+      "bodyOnly": 3042,
+      "poolUnits": 51,
+      "separateUnits": 52,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "baseline": 980,
+      "raw": 3054,
+      "paidStandalone": 3189,
+      "bodyOnly": 3031,
+      "poolUnits": 93,
+      "separateUnits": 94,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "baseline": 980,
+      "raw": 3054,
+      "paidStandalone": 3239,
+      "bodyOnly": 3014,
+      "poolUnits": 177,
+      "separateUnits": 182,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "baseline": 653,
+      "raw": 1152,
+      "paidStandalone": 1433,
+      "bodyOnly": 1150,
+      "poolUnits": 32,
+      "separateUnits": 32,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "baseline": 653,
+      "raw": 1152,
+      "paidStandalone": 1443,
+      "bodyOnly": 1159,
+      "poolUnits": 18,
+      "separateUnits": 18,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "baseline": 653,
+      "raw": 1152,
+      "paidStandalone": 1482,
+      "bodyOnly": 1159,
+      "poolUnits": 67,
+      "separateUnits": 77,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "baseline": 414,
+      "raw": 1034,
+      "paidStandalone": 1039,
+      "bodyOnly": 951,
+      "poolUnits": 16,
+      "separateUnits": 19,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "baseline": 414,
+      "raw": 1034,
+      "paidStandalone": 1049,
+      "bodyOnly": 941,
+      "poolUnits": 38,
+      "separateUnits": 50,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "baseline": 664,
+      "raw": 733,
+      "paidStandalone": 869,
+      "bodyOnly": 736,
+      "poolUnits": 12,
+      "separateUnits": 12,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "baseline": 664,
+      "raw": 733,
+      "paidStandalone": 886,
+      "bodyOnly": 740,
+      "poolUnits": 38,
+      "separateUnits": 38,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "baseline": 664,
+      "raw": 733,
+      "paidStandalone": 898,
+      "bodyOnly": 744,
+      "poolUnits": 47,
+      "separateUnits": 47,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "baseline": 486,
+      "raw": 629,
+      "paidStandalone": 742,
+      "bodyOnly": 622,
+      "poolUnits": 19,
+      "separateUnits": 19,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "baseline": 486,
+      "raw": 629,
+      "paidStandalone": 752,
+      "bodyOnly": 626,
+      "poolUnits": 32,
+      "separateUnits": 33,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "baseline": 486,
+      "raw": 629,
+      "paidStandalone": 763,
+      "bodyOnly": 631,
+      "poolUnits": 37,
+      "separateUnits": 37,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "baseline": 486,
+      "raw": 629,
+      "paidStandalone": 813,
+      "bodyOnly": 636,
+      "poolUnits": 101,
+      "separateUnits": 102,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "baseline": 266,
+      "raw": 458,
+      "paidStandalone": 611,
+      "bodyOnly": 486,
+      "poolUnits": 13,
+      "separateUnits": 13,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "baseline": 300,
+      "raw": 1006,
+      "paidStandalone": 1122,
+      "bodyOnly": 1028,
+      "poolUnits": 8,
+      "separateUnits": 8,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "baseline": 949,
+      "raw": 1422,
+      "paidStandalone": 1686,
+      "bodyOnly": 1417,
+      "poolUnits": 67,
+      "separateUnits": 67,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "baseline": 949,
+      "raw": 1422,
+      "paidStandalone": 1730,
+      "bodyOnly": 1384,
+      "poolUnits": 214,
+      "separateUnits": 215,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "baseline": 949,
+      "raw": 1422,
+      "paidStandalone": 1738,
+      "bodyOnly": 1390,
+      "poolUnits": 291,
+      "separateUnits": 291,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "baseline": 949,
+      "raw": 1422,
+      "paidStandalone": 1829,
+      "bodyOnly": 1351,
+      "poolUnits": 546,
+      "separateUnits": 564,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "baseline": 949,
+      "raw": 1422,
+      "paidStandalone": 1891,
+      "bodyOnly": 1460,
+      "poolUnits": 312,
+      "separateUnits": 343,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "baseline": 949,
+      "raw": 1422,
+      "paidStandalone": 2059,
+      "bodyOnly": 1452,
+      "poolUnits": 696,
+      "separateUnits": 765,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "baseline": 846,
+      "raw": 1099,
+      "paidStandalone": 1208,
+      "bodyOnly": 1109,
+      "poolUnits": 12,
+      "separateUnits": 12,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "baseline": 846,
+      "raw": 1099,
+      "paidStandalone": 1216,
+      "bodyOnly": 1109,
+      "poolUnits": 24,
+      "separateUnits": 24,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "baseline": 846,
+      "raw": 1099,
+      "paidStandalone": 1299,
+      "bodyOnly": 1156,
+      "poolUnits": 71,
+      "separateUnits": 74,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "baseline": 846,
+      "raw": 1099,
+      "paidStandalone": 1416,
+      "bodyOnly": 1193,
+      "poolUnits": 190,
+      "separateUnits": 208,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "baseline": 385,
+      "raw": 787,
+      "paidStandalone": 858,
+      "bodyOnly": 767,
+      "poolUnits": 17,
+      "separateUnits": 17,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "baseline": 385,
+      "raw": 787,
+      "paidStandalone": 858,
+      "bodyOnly": 781,
+      "poolUnits": 23,
+      "separateUnits": 23,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "baseline": 385,
+      "raw": 787,
+      "paidStandalone": 894,
+      "bodyOnly": 761,
+      "poolUnits": 74,
+      "separateUnits": 87,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "baseline": 296,
+      "raw": 1144,
+      "paidStandalone": 1254,
+      "bodyOnly": 1141,
+      "poolUnits": 9,
+      "separateUnits": 9,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "baseline": 296,
+      "raw": 1144,
+      "paidStandalone": 1261,
+      "bodyOnly": 1139,
+      "poolUnits": 28,
+      "separateUnits": 28,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "baseline": 296,
+      "raw": 1144,
+      "paidStandalone": 1277,
+      "bodyOnly": 1132,
+      "poolUnits": 55,
+      "separateUnits": 55,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "baseline": 381,
+      "raw": 1106,
+      "paidStandalone": 1211,
+      "bodyOnly": 1102,
+      "poolUnits": 12,
+      "separateUnits": 12,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "baseline": 381,
+      "raw": 1106,
+      "paidStandalone": 1224,
+      "bodyOnly": 1091,
+      "poolUnits": 40,
+      "separateUnits": 40,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "baseline": 381,
+      "raw": 1106,
+      "paidStandalone": 1226,
+      "bodyOnly": 1102,
+      "poolUnits": 42,
+      "separateUnits": 42,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "baseline": 381,
+      "raw": 1106,
+      "paidStandalone": 1245,
+      "bodyOnly": 1089,
+      "poolUnits": 79,
+      "separateUnits": 79,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "baseline": 620,
+      "raw": 656,
+      "paidStandalone": 766,
+      "bodyOnly": 662,
+      "poolUnits": 14,
+      "separateUnits": 27,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "baseline": 620,
+      "raw": 656,
+      "paidStandalone": 851,
+      "bodyOnly": 725,
+      "poolUnits": 53,
+      "separateUnits": 62,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "baseline": 620,
+      "raw": 656,
+      "paidStandalone": 938,
+      "bodyOnly": 758,
+      "poolUnits": 131,
+      "separateUnits": 157,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "baseline": 411,
+      "raw": 578,
+      "paidStandalone": 702,
+      "bodyOnly": 578,
+      "poolUnits": 12,
+      "separateUnits": 12,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "baseline": 411,
+      "raw": 578,
+      "paidStandalone": 705,
+      "bodyOnly": 542,
+      "poolUnits": 90,
+      "separateUnits": 90,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "baseline": 411,
+      "raw": 578,
+      "paidStandalone": 718,
+      "bodyOnly": 538,
+      "poolUnits": 116,
+      "separateUnits": 116,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "baseline": 411,
+      "raw": 578,
+      "paidStandalone": 732,
+      "bodyOnly": 541,
+      "poolUnits": 132,
+      "separateUnits": 132,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "raw": 6604,
+      "paidStandalone": 7057,
+      "bodyOnly": 6598,
+      "poolUnits": 43,
+      "separateUnits": 43,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "raw": 6604,
+      "paidStandalone": 7130,
+      "bodyOnly": 6614,
+      "poolUnits": 150,
+      "separateUnits": 152,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "raw": 6604,
+      "paidStandalone": 7184,
+      "bodyOnly": 6626,
+      "poolUnits": 230,
+      "separateUnits": 249,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "raw": 6604,
+      "paidStandalone": 7812,
+      "bodyOnly": 7086,
+      "poolUnits": 407,
+      "separateUnits": 472,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "raw": 6604,
+      "paidStandalone": 8095,
+      "bodyOnly": 7187,
+      "poolUnits": 669,
+      "separateUnits": 792,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "raw": 6704,
+      "paidStandalone": 7057,
+      "bodyOnly": 6385,
+      "poolUnits": 214,
+      "separateUnits": 215,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "raw": 6704,
+      "paidStandalone": 7079,
+      "bodyOnly": 6344,
+      "poolUnits": 299,
+      "separateUnits": 314,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "raw": 6704,
+      "paidStandalone": 7143,
+      "bodyOnly": 6347,
+      "poolUnits": 399,
+      "separateUnits": 445,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "raw": 6704,
+      "paidStandalone": 7568,
+      "bodyOnly": 6592,
+      "poolUnits": 582,
+      "separateUnits": 642,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "raw": 6704,
+      "paidStandalone": 7877,
+      "bodyOnly": 6665,
+      "poolUnits": 896,
+      "separateUnits": 1049,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "raw": 1480,
+      "paidStandalone": 1605,
+      "bodyOnly": 1377,
+      "poolUnits": 105,
+      "separateUnits": 105,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "raw": 1480,
+      "paidStandalone": 1606,
+      "bodyOnly": 1373,
+      "poolUnits": 105,
+      "separateUnits": 118,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "raw": 1480,
+      "paidStandalone": 1616,
+      "bodyOnly": 1430,
+      "poolUnits": 39,
+      "separateUnits": 39,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "raw": 1480,
+      "paidStandalone": 1621,
+      "bodyOnly": 1426,
+      "poolUnits": 52,
+      "separateUnits": 52,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "raw": 1480,
+      "paidStandalone": 1659,
+      "bodyOnly": 1447,
+      "poolUnits": 80,
+      "separateUnits": 80,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "raw": 1480,
+      "paidStandalone": 1758,
+      "bodyOnly": 1437,
+      "poolUnits": 245,
+      "separateUnits": 265,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "raw": 7107,
+      "paidStandalone": 7561,
+      "bodyOnly": 7045,
+      "poolUnits": 143,
+      "separateUnits": 143,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "raw": 7107,
+      "paidStandalone": 7577,
+      "bodyOnly": 7091,
+      "poolUnits": 51,
+      "separateUnits": 51,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "raw": 7107,
+      "paidStandalone": 7636,
+      "bodyOnly": 7070,
+      "poolUnits": 227,
+      "separateUnits": 242,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "raw": 7107,
+      "paidStandalone": 7641,
+      "bodyOnly": 7115,
+      "poolUnits": 124,
+      "separateUnits": 137,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "raw": 7107,
+      "paidStandalone": 8948,
+      "bodyOnly": 8162,
+      "poolUnits": 404,
+      "separateUnits": 532,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "raw": 7107,
+      "paidStandalone": 9220,
+      "bodyOnly": 8216,
+      "poolUnits": 752,
+      "separateUnits": 928,
+      "invalidDiagnostic": true
+    }
+  ],
+  "falseShortcut": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "baseline": 1310,
+      "raw": 5194,
+      "paidStandalone": 5091,
+      "bodyOnly": 4730,
+      "poolUnits": 382,
+      "separateUnits": 408,
+      "invalidDiagnostic": true
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "baseline": 1310,
+      "raw": 5194,
+      "paidStandalone": 5102,
+      "bodyOnly": 4722,
+      "poolUnits": 407,
+      "separateUnits": 442,
+      "invalidDiagnostic": true
+    }
+  ],
+  "note": "Body-only drops pool/ranges/key and is noninvertible. No acceptance or lower-bound inference. Raw-win versus raw source does not imply parent-frontier improvement."
+}

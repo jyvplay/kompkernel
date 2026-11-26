@@ -12078,3 +12078,35 @@ not a universal runtime guarantee. Full specification and receipts:
 `bench/x185/model.md`, `bench/x185/README.md`. Zero candidates on29 existing
 parent messages; eight completed canonical paid losses, one ineligible source,
 one reader-failed heldout, two timeouts. Native NOT_RUN. Do not promote.
+
+## DESMI — X186 shared overlap reservoir / interval dictionary
+
+`src/lib/omega/desmi.ts`, experimental and unwired. JSON `[pool,ranges,body]`;
+ASCII pool ranges use zero-based starts/lengths, and `~N;` references one-based
+ranges, substituted once without rescanning. Unlike PERAS prior-event copies,
+this shares arbitrarily overlapping substrings in a transmitted reservoir;
+unlike GEITON prefix/suffix edits, ranges need not derive from an earlier word.
+Classical superstring/dictionary ancestry, not new mathematics or established
+novelty against ALL codecs. Greedy: six length/frequency plans, at most96chunks;
+contained strings removed, greatest overlap up to128characters merged, complete
+wires ranked by exact BPE. Not global token optimality. Source/body/output50k
+UTF16 units, UTF8-stable, source tilde excluded; pool≤12288ASCII, frame220k.
+Conservative packing O(K³M²+K²L), K≤96,M≤128,L≤KM; selection additionally
+O(N)scan/O(N log N)sort and up to6 exact tokenizations. Reader O(frame+output).
+Parent trial90s wall limit is not a universal CPU bound.
+
+Citation: Englert–Matsakis–Veselý2023, DOI10.4230/LIPIcs.ISAAC.2023.29,
+https://wrap.warwick.ac.uk/id/eprint/180000/7/WRAP-Approximation-guarantees-shortest-superstrings-simpler-better-2023.pdf . Its full maximum-overlap algorithm and
+symbol-length guarantees do not apply to capped DESMI or paid BPE. Later
+arXiv:2609.27921 and OpenAI's superstring proof interfaces are discussed with
+verification limits in `bench/x186/research.md`; no imported proof replay.
+
+37sources, six distinct mechanisms (five reused),8894TSchecks; independent
+Python1115checks/14attacks;31parent-message candidates and zero paid direct
+wins. Eight completed canonical parent-composed plans lose, one heldout exact
+without measured baseline, three timeouts. Complete marginal key62tokens.
+Native-chat NOT_RUN; no promotion. Specs/results: `bench/x186/model.md`, README,
+receipts. Whole-stack speed experiment is build-only and separately gated.
+X186 final frontier refresh:29identical wires/11962tokens. Runtime last-chunk
+cache experiment rejected (CPU0.978513,wall0.980379,24identical wires), not
+promoted as significant speedup. Typecheck/build passed; native remains NOT_RUN.

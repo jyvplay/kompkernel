@@ -295,3 +295,8 @@ bench/x184/*.mjs
 bench/x185/*.mjs
 !bench/x185/*-build.mjs
 .cache/x185/
+
+# X186 generated bundles and source download cache
+bench/x186/*.mjs
+!bench/x186/*-build.mjs
+.cache/x186/

@@ -1,0 +1,51 @@
+[
+  {
+    "prompt": "bench/x186/native/prompt-00.txt",
+    "source": "bench/holdout-work/email-thread.txt",
+    "expectedSha256": "fb609b06e6f995f5fd1465b86e19da67e52c75643015e2ab8ef654644ae01324",
+    "status": "NOT_RUN",
+    "protocol": "New basic single user chat, no tools/skills/system additions or source access. Save exact response bytes; compare against source hash. Record model/version/configuration."
+  },
+  {
+    "prompt": "bench/x186/native/prompt-01.txt",
+    "source": "bench/holdout-work/kb-article.txt",
+    "expectedSha256": "d220bfb7a912670e0217b99760f41d40f41e7fab5ceda93f552aebf5ee4744c6",
+    "status": "NOT_RUN",
+    "protocol": "New basic single user chat, no tools/skills/system additions or source access. Save exact response bytes; compare against source hash. Record model/version/configuration."
+  },
+  {
+    "prompt": "bench/x186/native/prompt-02.txt",
+    "source": "bench/holdout-work/llm-answer.md",
+    "expectedSha256": "7c5c7f1929a6da13fad81a2a6f5c55106cf70105c356a03deca8c5cb15c280bf",
+    "status": "NOT_RUN",
+    "protocol": "New basic single user chat, no tools/skills/system additions or source access. Save exact response bytes; compare against source hash. Record model/version/configuration."
+  },
+  {
+    "prompt": "bench/x186/native/prompt-03.txt",
+    "source": "bench/holdout-x41/ps-real.txt",
+    "expectedSha256": "a52339a22f70d2d4a3503f5f1ea86b7b232710d9e1074df6aca8dc3448b59eb4",
+    "status": "NOT_RUN",
+    "protocol": "New basic single user chat, no tools/skills/system additions or source access. Save exact response bytes; compare against source hash. Record model/version/configuration."
+  },
+  {
+    "prompt": "bench/x186/native/prompt-04.txt",
+    "source": "bench/holdout-x42/ps-ef.txt",
+    "expectedSha256": "36bd1376a952d8882b5be08d4742ea1ce1ae7aeeafb2397c261133d6431a7861",
+    "status": "NOT_RUN",
+    "protocol": "New basic single user chat, no tools/skills/system additions or source access. Save exact response bytes; compare against source hash. Record model/version/configuration."
+  },
+  {
+    "prompt": "bench/x186/native/prompt-05.txt",
+    "source": "bench/holdout/json-pkg.txt",
+    "expectedSha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6",
+    "status": "NOT_RUN",
+    "protocol": "New basic single user chat, no tools/skills/system additions or source access. Save exact response bytes; compare against source hash. Record model/version/configuration."
+  },
+  {
+    "prompt": "bench/x186/native/prompt-06.txt",
+    "source": "bench/holdout-work/unified-diff.patch",
+    "expectedSha256": "ff6cc959f8d6c19505c6d1939b667a3ea3bfcf2a57a3e77d5c8ce9d255823d30",
+    "status": "NOT_RUN",
+    "protocol": "New basic single user chat, no tools/skills/system additions or source access. Save exact response bytes; compare against source hash. Record model/version/configuration."
+  }
+]

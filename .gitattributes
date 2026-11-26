@@ -42,3 +42,7 @@ bench/x166/receipts/*.log -whitespace
 # X185 exact native handoff and build-output evidence retain whitespace.
 bench/x185/native/*.txt -text -whitespace
 bench/x185/receipts/*.log -whitespace
+
+# X186 exact native handoff and build-output evidence retain whitespace.
+bench/x186/native/*.txt -text -whitespace
+bench/x186/receipts/*.log -whitespace

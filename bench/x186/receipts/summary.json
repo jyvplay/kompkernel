@@ -1,0 +1,416 @@
+{
+  "accepted": false,
+  "productionUnchanged": true,
+  "frontier": {
+    "lanes": 29,
+    "oldTokens": 11962,
+    "tokens": 11962,
+    "identical": 29,
+    "different": [],
+    "pythonReaders": {
+      "unsupported": 6,
+      "exact": 23
+    }
+  },
+  "tsReaders": {
+    "rows": [
+      {
+        "path": "bench/holdout-x41/ls-l-real.txt",
+        "status": "unsupported",
+        "error": "Error: AKRIBOS unsupported envelope"
+      },
+      {
+        "path": "bench/holdout-x41/ps-aux-real.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42/dpkg-l.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x40/metrics.tsv",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x41/ls-real.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42/df-h.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-work/llm-answer.md",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-tbl/df-h.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-work/email-thread.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x41/du-real.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42/lsblk.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42b/uptime-w.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout/code-ts.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x41/apt-real.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x41/node-help.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42/findmnt.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x40/cue-sheet.md",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42/ps-ef.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x41/df-real.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x40/prices.csv",
+        "status": "unsupported",
+        "error": "Error: AKRIBOS unsupported envelope"
+      },
+      {
+        "path": "bench/holdout-tbl/psql-output.txt",
+        "status": "unsupported",
+        "error": "Error: AKRIBOS unsupported envelope"
+      },
+      {
+        "path": "bench/holdout-tbl/markdown-table.md",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-work/unified-diff.patch",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42b/free-m.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42b/vmstat.txt",
+        "status": "exact"
+      }
+    ],
+    "attacks": 14
+  },
+  "unitChecks": 8894,
+  "sources": 37,
+  "families": 6,
+  "rawWins": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "family": "desmi"
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "family": "geiton"
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "family": "apousia"
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "family": "geiton"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "family": "apousia"
+    }
+  ],
+  "paid": [
+    {
+      "file": "bench/x186/receipts/paid-00.json",
+      "path": "bench/holdout-work/email-thread.txt",
+      "family": "desmi",
+      "status": "exact",
+      "tokens": 572,
+      "baseline": 486,
+      "parentTokens": 510,
+      "keyMarginal": 62
+    },
+    {
+      "file": "bench/x186/receipts/paid-01.json",
+      "path": "bench/holdout-work/kb-article.txt",
+      "family": "desmi",
+      "status": "exact",
+      "tokens": 710,
+      "baseline": 620,
+      "parentTokens": 648,
+      "keyMarginal": 62
+    },
+    {
+      "file": "bench/x186/receipts/paid-02.json",
+      "path": "bench/holdout-work/llm-answer.md",
+      "family": "desmi",
+      "status": "exact",
+      "tokens": 760,
+      "baseline": 664,
+      "parentTokens": 698,
+      "keyMarginal": 62
+    },
+    {
+      "file": "bench/x186/receipts/paid-03.json",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "family": "desmi",
+      "status": "exact",
+      "tokens": 450,
+      "baseline": 381,
+      "parentTokens": 388,
+      "keyMarginal": 62
+    },
+    {
+      "file": "bench/x186/receipts/paid-04.json",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "family": "desmi",
+      "status": "exact",
+      "tokens": 380,
+      "baseline": 296,
+      "parentTokens": 318,
+      "keyMarginal": 62
+    },
+    {
+      "file": "bench/x186/receipts/paid-05.json",
+      "path": "bench/holdout/json-pkg.txt",
+      "family": "desmi",
+      "status": "exact",
+      "tokens": 742,
+      "baseline": 653,
+      "parentTokens": 680,
+      "keyMarginal": 62
+    },
+    {
+      "file": "bench/x186/receipts/paid-06.json",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "family": "desmi",
+      "status": "exact",
+      "tokens": 501,
+      "baseline": 411,
+      "parentTokens": 439,
+      "keyMarginal": 62
+    },
+    {
+      "file": "bench/x186/receipts/paid-08.json",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "family": "desmi",
+      "status": "exact",
+      "tokens": 1375,
+      "baseline": null,
+      "parentTokens": 1313,
+      "keyMarginal": 62
+    },
+    {
+      "file": "bench/x186/receipts/paid-11.json",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "family": "desmi",
+      "status": "exact",
+      "tokens": 527,
+      "baseline": 385,
+      "parentTokens": 465,
+      "keyMarginal": 62
+    }
+  ],
+  "paidWins": [],
+  "processCounts": {
+    "completed": 9,
+    "TIMEOUT": 3
+  },
+  "independent": {
+    "checks": 1115,
+    "attacks": 14,
+    "paid": [
+      {
+        "file": "bench/x186/receipts/paid-00.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x186/receipts/paid-01.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x186/receipts/paid-02.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x186/receipts/paid-03.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x186/receipts/paid-04.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x186/receipts/paid-05.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x186/receipts/paid-06.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x186/receipts/paid-08.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x186/receipts/paid-11.json",
+        "status": "exact"
+      }
+    ],
+    "native": "NOT_RUN"
+  },
+  "adversary": {
+    "checks": 37,
+    "structural": [
+      "desmi",
+      "geiton",
+      "apousia",
+      "diadochi",
+      "symfraz",
+      "ropi"
+    ],
+    "negativeContractShapes": [
+      {
+        "missing": "byteExact",
+        "accepted": false
+      },
+      {
+        "missing": "allCostsPaid",
+        "accepted": false
+      },
+      {
+        "missing": "twoProse",
+        "accepted": false
+      },
+      {
+        "missing": "twoOps",
+        "accepted": false
+      },
+      {
+        "missing": "heldout",
+        "accepted": false
+      },
+      {
+        "missing": "moreThanTen",
+        "accepted": false
+      },
+      {
+        "missing": "protected",
+        "accepted": false
+      },
+      {
+        "missing": "nativeRun",
+        "accepted": false
+      },
+      {
+        "missing": "nativeExact",
+        "accepted": false
+      },
+      {
+        "missing": "novelty",
+        "accepted": false
+      },
+      {
+        "missing": "runtimeMeasured",
+        "accepted": false
+      },
+      {
+        "missing": "runtimeNonregression",
+        "accepted": false
+      },
+      {
+        "missing": "unicodeExact",
+        "accepted": false
+      },
+      {
+        "missing": "bounded",
+        "accepted": false
+      },
+      {
+        "missing": "independentRead",
+        "accepted": false
+      },
+      {
+        "missing": "noHiddenContext",
+        "accepted": false
+      }
+    ],
+    "note": "Boolean gate checks are not empirical native verification."
+  },
+  "speed": {
+    "cpuMs": 0.9785130469726837,
+    "wallMs": 0.9803791571785165,
+    "laneRatios": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 1.0088242555671398,
+        "wallMs": 1.0033845435823183
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 0.9627614407606073,
+        "wallMs": 0.9644053327035382
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 0.9396129867771973,
+        "wallMs": 0.947252559650761
+      },
+      "bench/holdout-work/email-thread.txt": {
+        "cpuMs": 0.9950296538233919,
+        "wallMs": 0.9875686966127075
+      },
+      "bench/holdout-work/unified-diff.patch": {
+        "cpuMs": 1.0114359505204074,
+        "wallMs": 1.011955758588607
+      },
+      "bench/holdout-x41/node-help.txt": {
+        "cpuMs": 0.998649610496584,
+        "wallMs": 1.0030209627179494
+      }
+    },
+    "accepted": false,
+    "identicalWires": 24
+  },
+  "native": "NOT_RUN",
+  "allStackNovelty": "NOT_ESTABLISHED"
+}

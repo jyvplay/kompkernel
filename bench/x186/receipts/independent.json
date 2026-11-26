@@ -1,0 +1,43 @@
+{
+  "checks": 1115,
+  "attacks": 14,
+  "paid": [
+    {
+      "file": "bench/x186/receipts/paid-00.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x186/receipts/paid-01.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x186/receipts/paid-02.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x186/receipts/paid-03.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x186/receipts/paid-04.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x186/receipts/paid-05.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x186/receipts/paid-06.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x186/receipts/paid-08.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x186/receipts/paid-11.json",
+      "status": "exact"
+    }
+  ],
+  "native": "NOT_RUN"
+}

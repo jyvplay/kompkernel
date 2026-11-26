@@ -1,0 +1,1 @@
+{"checks":480,"passed":true,"scope":"Immediate repeats, alternating strings, normalization-distinct Unicode, lone surrogates and long chunks; real exact tokenizer calls"}
