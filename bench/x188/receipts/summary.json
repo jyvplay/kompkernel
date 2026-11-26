@@ -1,0 +1,23 @@
+{
+  "canonicalWiresIdentical": 29,
+  "canonicalTokens": 11962,
+  "wins": [
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "before": 486,
+      "after": 485,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "before": 144,
+      "after": 143,
+      "sourceExact": true
+    }
+  ],
+  "sourceExactLanes": 16,
+  "layerOnlyLanes": 2,
+  "native": "NOT_RUN",
+  "broadGainAccepted": false,
+  "allStackNoveltyEstablished": false
+}

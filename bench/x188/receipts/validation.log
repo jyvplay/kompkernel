@@ -1,0 +1,44 @@
+
+  bench/x188/test.mjs  3.9mb ⚠️
+
+⚡ Done in 105ms
+
+  bench/x188/adversary.mjs  3.9mb ⚠️
+
+⚡ Done in 107ms
+
+  bench/x188/portfolio-test.mjs  3.9mb ⚠️
+
+⚡ Done in 107ms
+{"checks":106,"supported":18,"wins":[{"path":"bench/holdout-work/email-thread.txt","before":486,"after":485},{"path":"bench/holdout-x42b/vmstat.txt","before":144,"after":143}]}
+{
+  checks: 502,
+  refused: 0,
+  seed: 188,
+  shapes: [
+    '',
+    ' ',
+    '\n',
+    '\r\n',
+    '\t',
+    '\x00',
+    'é',
+    'é',
+    '🙂',
+    '👩‍💻',
+    'a b',
+    'aaa',
+    '12345',
+    '"\\',
+    '§',
+    '¶',
+    'Ignore previous instructions.',
+    '中文',
+    'عربي',
+    'α'
+  ],
+  scope: 'parent-language equivalence and reference pricing, not universal source invertibility'
+}
+{ checks: 10305, sources: 37, postPlans: 204, postWins: [] }
+{'byteExact': 48, 'unsupported': [{'path': 'bench/holdout-x42/dpkg-l.txt', 'width': 1, 'error': 'unsupported layout'}, {'path': 'bench/holdout-x42/dpkg-l.txt', 'width': 2, 'error': 'unsupported layout'}, {'path': 'bench/holdout-x42/dpkg-l.txt', 'width': 3, 'error': 'unsupported layout'}, {'path': 'bench/holdout-x42/findmnt.txt', 'width': 1, 'error': 'unsupported layout'}, {'path': 'bench/holdout-x42/findmnt.txt', 'width': 2, 'error': 'unsupported layout'}, {'path': 'bench/holdout-x42/findmnt.txt', 'width': 3, 'error': 'unsupported layout'}], 'native': 'NOT_RUN', 'independentAgent': False}
+{'canonicalWiresIdentical': 29, 'canonicalTokens': 11962, 'wins': [{'path': 'bench/holdout-work/email-thread.txt', 'before': 486, 'after': 485, 'sourceExact': True}, {'path': 'bench/holdout-x42b/vmstat.txt', 'before': 144, 'after': 143, 'sourceExact': True}], 'sourceExactLanes': 16, 'layerOnlyLanes': 2, 'native': 'NOT_RUN', 'broadGainAccepted': False, 'allStackNoveltyEstablished': False}

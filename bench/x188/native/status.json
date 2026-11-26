@@ -1,0 +1,18 @@
+{
+  "status": "NOT_RUN",
+  "reason": "No separate model evaluation endpoint used.",
+  "cases": [
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "before": 486,
+      "after": 485,
+      "sourceExact": true
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "before": 144,
+      "after": 143,
+      "sourceExact": true
+    }
+  ]
+}

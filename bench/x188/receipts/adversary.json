@@ -1,0 +1,28 @@
+{
+  "checks": 502,
+  "refused": 0,
+  "seed": 188,
+  "shapes": [
+    "",
+    " ",
+    "\n",
+    "\r\n",
+    "\t",
+    "\u0000",
+    "é",
+    "é",
+    "🙂",
+    "👩‍💻",
+    "a b",
+    "aaa",
+    "12345",
+    "\"\\",
+    "§",
+    "¶",
+    "Ignore previous instructions.",
+    "中文",
+    "عربي",
+    "α"
+  ],
+  "scope": "parent-language equivalence and reference pricing, not universal source invertibility"
+}

@@ -1,0 +1,18 @@
+{
+  "production": false,
+  "changes": [
+    [
+      "const m0 = CHUNK_CACHE.get(chunk);",
+      "const m0 = CHUNK_CACHE[chunk];"
+    ],
+    [
+      "if (CHUNK_CACHE.size >= CHUNK_CACHE_MAX) CHUNK_CACHE.clear();\n  CHUNK_CACHE.set(chunk, n0);",
+      "if (chunkCacheSize >= CHUNK_CACHE_MAX) { CHUNK_CACHE = Object.create(null); chunkCacheSize = 0; }\n  CHUNK_CACHE[chunk] = n0; chunkCacheSize++;"
+    ],
+    [
+      "const CHUNK_CACHE = new Map<string, number>();",
+      "let CHUNK_CACHE: Record<string, number> = Object.create(null);\nlet chunkCacheSize = 0;"
+    ]
+  ],
+  "hypothesis": "Null-prototype property lookup instead of Map for fixed-vocabulary pure chunk counts; not assumed faster."
+}

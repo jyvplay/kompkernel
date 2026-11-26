@@ -1,0 +1,37 @@
+{
+  "byteExact": 48,
+  "unsupported": [
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "width": 1,
+      "error": "unsupported layout"
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "width": 2,
+      "error": "unsupported layout"
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "width": 3,
+      "error": "unsupported layout"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "width": 1,
+      "error": "unsupported layout"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "width": 2,
+      "error": "unsupported layout"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "width": 3,
+      "error": "unsupported layout"
+    }
+  ],
+  "native": "NOT_RUN",
+  "independentAgent": false
+}
