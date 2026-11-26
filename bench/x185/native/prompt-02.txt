@@ -1,0 +1,43 @@
+Decode payload first. Split on ASCII spaces retaining empty fields. Scan fields left to right, numbering input fields from 1. ~i,n; emits a copy of the n output fields ending at the end of input field i's expansion; i must be earlier. Other fields emit literally. Join output fields with ASCII spaces, preserving everything else. Print only.
+Before ¶ k=v. expand repeatedly; print only.
+§د |ا ،داً|---|---ع sة **س-طعدةسه**ٔ%ه |
+|ک.
+
+###ابس [ ]ځ.config.js`ءعدام Viteن `ھ Migrateنpackagesو1گ` (و dayر.ح theذ)
+ك toت5ی:ل
+ئ4ُ inيااش andق2ض3ف serverج isز The¶## Summary
+
+The migration from **WebpackائهكةVite ته reduces cold-start time by roughly **85%** onحل`packages/web` workspaceر Below areح concrete steps, the measured numbers,شح twoلregressions we foundکور What actually changed
+
+سةDevفهینwebpack-dev-server` is replaced byم's native ESMفر No bundlingلا happensُ development, soح cold start no longer scales with module count.
+سةBuildهی production builds still bundle, but through **Rollup** rather than Webpackرزليoutputجنdist/assets/*.js` with content hashes instead ofنbuild/static/js/*.chunk.js`.
+سةTransformsهینbabel-loader` is goneراهesbuildهاhandles TypeScript stripping andلاةSWCهج no longer requiredکقر Measured results
+
+| MetricداWebpack ئدمات | Changeدلًً|
+| Cold startدائقر8ء6روط85.7ٔ Hot reloadا(p50)،ور9ء0.09ط9ترضٔ Production buildدا188ء71ط62رقٔ Bundle size (gzip)،412 kBدا389 kBدةستر6%** |
+
+### ضر Required code changes
+
+```ts
+// vite.config.tsلimport { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  pluginsیا[react()],
+  resolveی {
+    aliasی { '@': '/src' },
+  },
+ فی { portیا3000, strictPort: true },
+});
+```
+
+You must also rename everyنprocess.env.REACT_APP_*` referenceكنimport.meta.env.VITE_*`.
+There are **47** such referencesُنpackages/web` and هووهُنpackages/admin`کئر Regressions foundللورةCommonJS interopره Three dependencies (`lodash.debounce`, `qs`, `react-copy-to-clipboard`)
+   ship only CJSرم handles this in dev via preسbundling, butح SSR build failsرز fixجليك add themكنssr.noExternal`.
+قرةDynamicنrequire()` in testsرهنjest` is still used for unit tests and does not understandلينimport.meta`. Either migrateكةVitest** or add aنjestځ transformر We choseليةVitest**, which sharesحم configشاcut test wall-clock from **94عهكة23عهکتر Recommendation
+
+Ship the migration behindحنVITE_MIGRATION` flag for one release, then removeح Webpackلconfig entirelyرز remaining work is approximatelyاهض engineer-days**:
+
+بھ/adminگذسا[x]ھ/web`ا(doneذب Removeنwebpackځشنbabelځ (0رت dayذب Update CI cache keysُن.github/workflows/ci.yml` ~341,ئ; Updateح contributor docsُنCONTRIBUTING.mdگ)
+
+Let me know if you want the SSR fix broken out into its own PRرل

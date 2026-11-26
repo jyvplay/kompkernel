@@ -1,0 +1,110 @@
+=== monodromos
+/** X173 MONODROMOS: uniquely reconstructible directed transition multisets.
+ * Experimental/unwired. Classical Euler-trail reconstruction, not new math.
+ * Unlike DIADOCHI's FIFO successor queues, within-row order is NOT transmitted.
+ * Distinct parallel edges are counts; only a unique vertex-label walk is admitted.
+ */
+import {countTokensExact,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+export const MONODROMOS_CAP=50000;
+export const MONODROMOS_KEY='Decode payload first. Each ~ line is JSON [start,rows [from,edges [to,count]]]. Reconstruct the unique directed walk from start using every edge exactly its count times. Parallel copies are indistinguishable. Output its vertex labels joined by ASCII spaces. Other lines are literal; preserve line breaks and every other character; print only.\n';
+=== stoibas
+/** STOIBAS (X155): breadth-first JSON record queue, with object degrees
+ * supplied implicitly by key-list length. Not ARKESIS's recursive count stream:
+ * object keys are grouped before all children, whose records are deferred FIFO.
+ * Classical level-order tree serialization ancestry; experimental and unwired.
+ */
+import {lexicalJsonTree,lexicalJsonRender,type LexicalJsonTree} from './arkesis';
+import {isUtf8TransportStable} from './utf8-wire';
+import {countTokens,type EncodingName} from './bpe';
+const CAP=50000;
+=== lexarithmos
+/** X163 LEXARITHMOS: exact grammatical numeral transduction, optional.
+ * English cardinal spelling is a value grammar, not digit regrouping, a
+ * finite-difference table, a slug, or an external number-word dictionary.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+export const LEXARITHMOS_KEY='Decode first. Expand ~N (a tilde followed by digits) into lowercase British English cardinal words: hyphenate tens-units, use "and" after hundreds with a remainder and after thousands only when the remainder is below 100; no commas. Preserve everything else; print only.\n';
+const CAP=50000;
+const SMALL='zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen'.split(' ');
+=== kryptolysis
+/** X164 KRYPTOLYSIS: cyclic ASCII-alphabet preconditioning of the parent.
+ * Classical Caesar substitution, not an AI invention. No cipher operation was
+ * found in the prior 405-module inventory. In-band inverse, no secret key,
+ * training, or external dictionary. Experimental optional selector only.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+const CAP=50000;
+function domain(s:string){if(s.length>CAP||!isUtf8TransportStable(s))throw Error('KRYPTOLYSIS domain');}
+=== deiktis
+/** X165 DEIKTIS (pointer): suffix-context-addressed copy lengths.
+ * Classical LZP ancestry. Unlike MNEMA's explicit lexical prefix, the address is
+ * the last k decoded Unicode scalars; unlike CTXCOPY, no earlier chat is read.
+ * Experimental/unwired. Exact program inversion is NOT native-chat evidence.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+export const DEIKTIS_CAP=50000;
+export const DEIKTIS_CONTEXTS=[4,8,16] as const;
+=== symfraz
+/** X166 SYMFRAZ: decoder-visible context collation of numeric side streams.
+ * Experimental/unwired. STC (Du et al., 2026) is explicit prior art; this is
+ * a textual, variable-width, one-hole-per-run adaptation, not an AI invention.
+ * Unlike PSIFIDA, no digit-plane transpose or equal-width selection is used.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+export const SYMFRAZ_CAP=50000;
+export function symfrazKey(k:number){
+=== kyklos
+/** X170 KYKLOS: independent cyclic dictionaries over interleaved word events.
+ * Experimental/unwired. Finite-state sequential transduction ancestry; not an
+ * AI-native discovery or verified native-model behavior. Unlike a FIFO codec,
+ * each family reuses a finite cycle indefinitely; no occurrence-choice tape.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+export const KYKLOS_CAP=50000;
+export const KYKLOS_KEY='Decode payload first. First line: JSON rows [marker,[words]]. Scan remaining text for maximal ASCII letter runs. Replace each marker with the next word in its row, cycling from the first; each row has its own counter. Literal words do not advance counters. Do not rescan replacements. Preserve all other characters; print only.\n';
+=== metrida
+/** X171 METRIDA: length-sum-constrained ambiguous word aliases.
+ * Experimental/unwired. Bounded constraint decoding, not native-model proof.
+ * Each marker has two words; ONE in-band sum per marked line identifies the
+ * assignment only when unique. Unlike DEIKTIS there is no occurrence-choice
+ * tape; unlike KYKLOS there is no temporal cursor or repeating schedule.
+ */
+import {countTokens,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+export const METRIDA_CAP=50000;
+=== klados
+/** X179 KLADOS: adaptive move-to-root BST word addresses.
+ * Experimental/unwired. Classical self-adjusting tree ancestry; NOT splay's
+ * zig-zig algorithm and no splay amortized theorem is claimed. Not native proof.
+ */
+import {countTokensExact,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+export const KLADOS_CAP=50000;
+export const KLADOS_KEY='Decode payload first. Maintain an initially empty binary search tree of case-sensitive ASCII words ([A-Za-z]+), ordered ASCII-lexicographically. Literal words are inserted if new, otherwise accessed. ^ followed by zero or more 0/1 digits and ; accesses the node reached from the root (0=left, 1=right); emit its word. After EVERY insertion or access, rotate that node with its parent repeatedly until it is root, preserving BST order (single rotations only, not zig-zig splaying). Scan only the payload, never expansions. Preserve all other characters and print only.\n';
+type Node={word:string;left:Node|null;right:Node|null;parent:Node|null};
+=== fotia
+/** X181 FOTIA: bounded Foata second-fundamental word transformation.
+ * Classical maj/inv bijection, not new mathematics. Experimental/unwired.
+ * Content-preserving block rotations; neither sorted rotations/LF cycles
+ * (KYKLOGRAF) nor a rule/residual predictor (APOUSIA). No native proof.
+ */
+import {countTokensExact,type EncodingName} from './bpe';
+import {isUtf8TransportStable} from './utf8-wire';
+export type FotiaDirection='forward'|'inverse';
+const CAP=50000;
+=== pinakas
+/** PINAKAS (X178), experimental and unwired: Schensted row-insertion tape.
+ * Classical Robinson–Schensted correspondence for words, NOT new mathematics.
+ * Unlike BBWT this transmits insertion rows and the recording row sequence;
+ * decoding is reverse bumping, not LF cycles. Native chat is unverified.
+ */
+import {countTokensExact,type EncodingName} from './bpe';
+export const PINAKAS_CAP=50000;
+export type PinakasMode='space'|'LF';
+export type PinakasBlock={trace:number[];rows:string[][]};

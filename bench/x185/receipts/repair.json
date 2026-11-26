@@ -1,0 +1,8 @@
+{
+  "codec": "New experimental module; no post-gate grammar repair",
+  "outerReader": "Added positive outer-composition probe and reran 4122-check TS suite plus independent Python",
+  "speed": "Build-only threshold change; all affected count/vector/merge/threshold and 24 complete wires retested, performance rejected",
+  "native": "NOT_RUN",
+  "production": "Unchanged",
+  "runner": "Remove stale job receipt before each trial; 14 mocked targeted checks passed. No new codec performance execution claimed."
+}

@@ -1,0 +1,2 @@
+import assert from 'node:assert/strict';import {fastCount} from '../../src/lib/omega/bpe-fast';import {encode} from 'gpt-tokenizer/encoding/o200k_base';
+let checks=0;for(const n of [63,64,65,126,127,128,129,130,255,256,257,511,512,513,1023,1024,1025])for(const a of ['x','ab','Ж','🙂','漢é','abcde','\ud800','\0'])for(const tail of ['', ' x','\n','🙂']){const s=a.repeat(n)+tail;assert.equal(fastCount(s),encode(s).length);checks++;}console.log(JSON.stringify({checks,passed:true,scope:'Byte versus UTF16 lengths around heap thresholds; repeated symbols and mixed-width Unicode'}));

@@ -12757,3 +12757,72 @@ not native chat. GEITON:15,045 TS checks;14,905 independent Python exact cases
 and11attacks;15 completed paid trials exact in both readers, all lose to frontier;
 one paid trial timeout. Six native prompts NOT_RUN; no new speed A/B or speed
 claim. Production unchanged. See bench/x183/README.md and receipts/summary.json.
+
+
+## X184 — KARTES: Cartesian-tree shape/preorder separation (unwired)
+
+**Design:** split on ASCII spaces retaining empties; form minimum Cartesian trees
+in32/128/512-field blocks, using Unicode-scalar lexicographic or length priorities
+(leftmost ties). Send JSON [preorder child flags,preorder field string] per block;
+flags0/1/2/3 denote no/left/right/both children. Decode the tree and read inorder.
+All flags, values, outer instructions and parent instructions are paid. Reject
+malformed shapes, excess/missing nodes, unstable UTF-8, oversized output and
+reference-tokenizer reserved spellings during pricing. Domain≤50,000UTF-16 units;
+frame≤220,000; ≤512nodes/block. Explicit key is included in every candidate.
+
+**Search/bounds:** six nominal settings with duplicate wire removal; finite
+selection, not greedy paid optimization. Monotone-stack tree construction is
+exact for its fixed priority, with O(k) comparisons per block; the implemented
+comparisons cost up to O(L), hence O(kL) work excluding tokenizer/parent. Iterative
+inverse is linear in node+text size. These are work bounds, not measured CPU/wall
+guarantees, and not optimal BPE-tree claims. Classical ancestry, not AI invention:
+Gawrychowski, Jo, Mozes, Weimann, Compressed Range Minimum Queries, TCS812(2020),
+39–48, DOI10.1016/j.tcs.2019.07.002, https://arxiv.org/abs/1902.04427 . Its RMQ
+shape bounds do not preserve source values; KARTES explicitly pays those values.
+
+**Fresh evidence:**21,659TS checks across37sources and six distinct families;
+39,561Python checks including a separate recursive Cartesian-tree oracle, plus
+21attacks. Six completed KARTES paid wires are exact in the separate Python
+parent+wire reader. Sixteen completed paid trials across the six families all
+lose to the existing frontier; four KARTES timeouts are not wins/losses. No direct
+KARTES raw wins. Even omitting all shape/framing/outer-key costs in an explicitly
+NONINVERTIBLE diagnostic gives no savings on six selected sources. Native6prompts
+NOT_RUN; all-stack semantic novelty NOT_ESTABLISHED. No promotion.
+
+**Confirmed frontier:**29identical wires/11,962tokens. TS reader26exact/3refused
+with14attacks; Python23exact/6unsupported, zero mismatches. Generalized source-role
+leaders (fixture savings, not per-codec ablations or global optima):
+
+| Category | Lanes | Aggregate raw→frontier | Largest absolute saving | Largest relative saving |
+|---|---:|---:|---|---|
+| Prose |3|2018→1770|email629→486|email22.73%|
+| Ops/tabular |22|22332→8078|ls-l5194→1310|prices582→118 (79.73%)|
+| Code/structured |3|3152→2013|JSON1152→653|JSON43.32%|
+| Other |1|513→101|cue513→101|cue80.31%|
+
+**Speed:** bundle-only streaming regex-count patch rejected. All24ABBA wires
+identical, but aggregate CPU B/A1.008158 and wall1.008834, with protected
+regressions. Differential gates16,192count/12,124vector/4,119merge/14,739stream
+checks per arm passed. Existing production runtime is unchanged. Reproduction,
+A–J model, six-branch portfolio and bounded individual proof review:
+`bench/x184/README.md`, `model.md`, `portfolio.md`, `research.md`.
+
+## X185 PERAS: negative paid frontier experiment
+
+New experimental module `src/lib/omega/peras.ts`, not wired into selection.
+Event-end anchored field copies differ in wire syntax from existing positional
+copies but do not establish semantic novelty against the full stack. See
+`bench/x185/model.md` for grammar, bounded CPU/memory, greedy menu, inverse
+argument, paid decoder and recent classical citations. Six-mechanism37-source
+screen; PERAS-on-parent produced zero plans (26 no-local-gain,3 collision
+refusals). Eight canonical paid plans lost; KB ineligible, one heldout reader
+refused, two90s timeouts. No native behavior claim. Whole-stack exact tokenizer
+threshold experiment is isolated from production and has separate gates.
+Source-role category leaders remain the established frontier until a complete
+paid/fidelity gate beats them: prose2018→1770, ops22332→8078,
+code/structured3152→2013, other513→101. Largest absolute-saving representatives
+are email629→486, ls-l5194→1310, JSON1152→653, cue513→101;
+ops largest relative saving remains prices582→118. These are category
+representatives, not universal best codecs. Fresh replay/reader evidence,
+research boundaries, native NOT_RUN handoffs and rejected alternatives live in
+`bench/x185/`. Scientific acceptance is independent of PR merge.

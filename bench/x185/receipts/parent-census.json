@@ -1,0 +1,457 @@
+{
+  "note": "body BPE token classes, not word counts or compression lower bounds; tape-free lanes excluded from class totals",
+  "groups": {
+    "OPS/TABULAR": {
+      "lanes": 16,
+      "tapeLanes": 16,
+      "raw": 17278,
+      "tokens": 5580,
+      "glyph": 1202,
+      "word": 1105,
+      "num": 808,
+      "other": 380,
+      "leader": "glyph"
+    },
+    "CODE/STRUCT": {
+      "lanes": 4,
+      "tapeLanes": 4,
+      "raw": 4152,
+      "tokens": 2636,
+      "glyph": 639,
+      "word": 945,
+      "num": 102,
+      "other": 307,
+      "leader": "word"
+    },
+    "PROSE": {
+      "lanes": 5,
+      "tapeLanes": 5,
+      "raw": 5856,
+      "tokens": 3429,
+      "glyph": 839,
+      "word": 1629,
+      "num": 108,
+      "other": 231,
+      "leader": "word"
+    },
+    "OTHER": {
+      "lanes": 4,
+      "tapeLanes": 0,
+      "raw": 729,
+      "tokens": 317,
+      "glyph": 0,
+      "word": 0,
+      "num": 0,
+      "other": 0,
+      "leader": null
+    }
+  },
+  "rows": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "category": "OPS/TABULAR",
+      "raw": 5194,
+      "tokens": 1310,
+      "hasTape": true,
+      "classes": {
+        "glyph": 344,
+        "word": 123,
+        "num": 215,
+        "other": 40
+      },
+      "leader": "glyph"
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "category": "OPS/TABULAR",
+      "raw": 3054,
+      "tokens": 980,
+      "hasTape": true,
+      "classes": {
+        "glyph": 265,
+        "word": 220,
+        "num": 118,
+        "other": 61
+      },
+      "leader": "glyph"
+    },
+    {
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "category": "CODE/STRUCT",
+      "raw": 1000,
+      "tokens": 623,
+      "hasTape": true,
+      "classes": {
+        "glyph": 127,
+        "word": 293,
+        "num": 28,
+        "other": 67
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout/json-pkg.txt",
+      "category": "CODE/STRUCT",
+      "raw": 1152,
+      "tokens": 653,
+      "hasTape": true,
+      "classes": {
+        "glyph": 187,
+        "word": 258,
+        "num": 22,
+        "other": 39
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "category": "OPS/TABULAR",
+      "raw": 811,
+      "tokens": 197,
+      "hasTape": true,
+      "classes": {
+        "glyph": 31,
+        "word": 46,
+        "num": 31,
+        "other": 14
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "category": "OPS/TABULAR",
+      "raw": 1034,
+      "tokens": 414,
+      "hasTape": true,
+      "classes": {
+        "glyph": 93,
+        "word": 88,
+        "num": 59,
+        "other": 8
+      },
+      "leader": "glyph"
+    },
+    {
+      "path": "bench/holdout-x42/df-h.txt",
+      "category": "OPS/TABULAR",
+      "raw": 140,
+      "tokens": 105,
+      "hasTape": true,
+      "classes": {
+        "glyph": 14,
+        "word": 21,
+        "num": 9,
+        "other": 15
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "category": "PROSE",
+      "raw": 733,
+      "tokens": 664,
+      "hasTape": true,
+      "classes": {
+        "glyph": 117,
+        "word": 326,
+        "num": 21,
+        "other": 102
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-tbl/df-h.txt",
+      "category": "OPS/TABULAR",
+      "raw": 570,
+      "tokens": 160,
+      "hasTape": true,
+      "classes": {
+        "glyph": 18,
+        "word": 45,
+        "num": 12,
+        "other": 22
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "category": "PROSE",
+      "raw": 629,
+      "tokens": 486,
+      "hasTape": true,
+      "classes": {
+        "glyph": 91,
+        "word": 214,
+        "num": 26,
+        "other": 21
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-x41/du-real.txt",
+      "category": "OPS/TABULAR",
+      "raw": 458,
+      "tokens": 266,
+      "hasTape": true,
+      "classes": {
+        "glyph": 49,
+        "word": 33,
+        "num": 74,
+        "other": 20
+      },
+      "leader": "num"
+    },
+    {
+      "path": "bench/holdout-x42/lsblk.txt",
+      "category": "OTHER",
+      "raw": 60,
+      "tokens": 60,
+      "hasTape": false,
+      "classes": {
+        "glyph": 0,
+        "word": 0,
+        "num": 0,
+        "other": 0
+      },
+      "leader": null
+    },
+    {
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "category": "OTHER",
+      "raw": 80,
+      "tokens": 80,
+      "hasTape": false,
+      "classes": {
+        "glyph": 0,
+        "word": 0,
+        "num": 0,
+        "other": 0
+      },
+      "leader": null
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "category": "OPS/TABULAR",
+      "raw": 1006,
+      "tokens": 300,
+      "hasTape": true,
+      "classes": {
+        "glyph": 39,
+        "word": 71,
+        "num": 75,
+        "other": 20
+      },
+      "leader": "num"
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "category": "CODE/STRUCT",
+      "raw": 1422,
+      "tokens": 949,
+      "hasTape": true,
+      "classes": {
+        "glyph": 255,
+        "word": 313,
+        "num": 4,
+        "other": 129
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-x41/apt-real.txt",
+      "category": "PROSE",
+      "raw": 2739,
+      "tokens": 813,
+      "hasTape": true,
+      "classes": {
+        "glyph": 306,
+        "word": 243,
+        "num": 46,
+        "other": 24
+      },
+      "leader": "glyph"
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "category": "PROSE",
+      "raw": 1099,
+      "tokens": 846,
+      "hasTape": true,
+      "classes": {
+        "glyph": 160,
+        "word": 475,
+        "num": 13,
+        "other": 69
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "category": "OPS/TABULAR",
+      "raw": 787,
+      "tokens": 385,
+      "hasTape": true,
+      "classes": {
+        "glyph": 48,
+        "word": 166,
+        "num": 27,
+        "other": 37
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "category": "OTHER",
+      "raw": 513,
+      "tokens": 101,
+      "hasTape": false,
+      "classes": {
+        "glyph": 0,
+        "word": 0,
+        "num": 0,
+        "other": 0
+      },
+      "leader": null
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "category": "OPS/TABULAR",
+      "raw": 1144,
+      "tokens": 296,
+      "hasTape": true,
+      "classes": {
+        "glyph": 75,
+        "word": 82,
+        "num": 36,
+        "other": 10
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-x41/df-real.txt",
+      "category": "OPS/TABULAR",
+      "raw": 158,
+      "tokens": 123,
+      "hasTape": true,
+      "classes": {
+        "glyph": 15,
+        "word": 25,
+        "num": 16,
+        "other": 21
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "category": "OPS/TABULAR",
+      "raw": 1106,
+      "tokens": 381,
+      "hasTape": true,
+      "classes": {
+        "glyph": 90,
+        "word": 105,
+        "num": 44,
+        "other": 43
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-x40/prices.csv",
+      "category": "OPS/TABULAR",
+      "raw": 582,
+      "tokens": 118,
+      "hasTape": true,
+      "classes": {
+        "glyph": 9,
+        "word": 14,
+        "num": 11,
+        "other": 13
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "category": "OPS/TABULAR",
+      "raw": 675,
+      "tokens": 229,
+      "hasTape": true,
+      "classes": {
+        "glyph": 48,
+        "word": 9,
+        "num": 30,
+        "other": 18
+      },
+      "leader": "glyph"
+    },
+    {
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "category": "OPS/TABULAR",
+      "raw": 330,
+      "tokens": 172,
+      "hasTape": true,
+      "classes": {
+        "glyph": 46,
+        "word": 25,
+        "num": 32,
+        "other": 10
+      },
+      "leader": "glyph"
+    },
+    {
+      "path": "bench/holdout-work/kb-article.txt",
+      "category": "PROSE",
+      "raw": 656,
+      "tokens": 620,
+      "hasTape": true,
+      "classes": {
+        "glyph": 165,
+        "word": 371,
+        "num": 2,
+        "other": 15
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "category": "CODE/STRUCT",
+      "raw": 578,
+      "tokens": 411,
+      "hasTape": true,
+      "classes": {
+        "glyph": 70,
+        "word": 81,
+        "num": 48,
+        "other": 72
+      },
+      "leader": "word"
+    },
+    {
+      "path": "bench/holdout-x42b/free-m.txt",
+      "category": "OTHER",
+      "raw": 76,
+      "tokens": 76,
+      "hasTape": false,
+      "classes": {
+        "glyph": 0,
+        "word": 0,
+        "num": 0,
+        "other": 0
+      },
+      "leader": null
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "category": "OPS/TABULAR",
+      "raw": 229,
+      "tokens": 144,
+      "hasTape": true,
+      "classes": {
+        "glyph": 18,
+        "word": 32,
+        "num": 19,
+        "other": 28
+      },
+      "leader": "word"
+    }
+  ]
+}

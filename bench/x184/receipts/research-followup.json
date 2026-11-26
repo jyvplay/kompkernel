@@ -1,0 +1,92 @@
+[
+  {
+    "repo": "openai/math",
+    "path": "lean/OAI/Algorithms/SubexponentialSAT/Computation.lean",
+    "commit": "f5702854040e97fa7675c21ba37a9608f5f92dd3",
+    "file": ".cache/x184/research/openai_math-lean_OAI_Algorithms_SubexponentialSAT_Computation.lean",
+    "sha256": "c902d09be040c39b0266f13b16b900474df5ce419de83e092e9485ae3b84cd34",
+    "bytes": 24996,
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "double-ai/double-check",
+    "path": "lean/ChessProof/Cnf.lean",
+    "commit": "d2fc22e3bc0b675acc18dd53d8e3003c8eceae3a",
+    "file": ".cache/x184/research/double-ai_double-check-lean_ChessProof_Cnf.lean",
+    "sha256": "2040015e2ca22422c8911e52b7941fd3d3e00bf10a535736d181804d3ccff630",
+    "bytes": 1866,
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/formal-math",
+    "path": "eth/proof/rates/CountedToPadded/Compare.lean",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "file": ".cache/x184/research/anthropics_formal-math-eth_proof_rates_CountedToPadded_Compare.lean",
+    "sha256": "dffe69e34b6c46e639d9f11101129951638fdc2f6f9858b1c9a264cbe234fa99",
+    "bytes": 11029,
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/zeta-23-lean",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "zeta23/README.md",
+    "file": ".cache/x184/research/anthropics_zeta-23-lean-zeta23_README.md",
+    "sha256": "b92f3ebfedb8ce299c3b18239e9a165af751fd89b32e07922c099087b52f9889",
+    "bytes": 26989,
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/zeta-23-lean",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "zeta23/AUDIT.md",
+    "file": ".cache/x184/research/anthropics_zeta-23-lean-zeta23_AUDIT.md",
+    "sha256": "296bce6abcc2c860a5fdeda6f7b47f0f6da2b9284fa2509e1931f160255e3860",
+    "bytes": 25053,
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/zeta-23-lean",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "zeta23/Challenge.lean",
+    "file": ".cache/x184/research/anthropics_zeta-23-lean-zeta23_Challenge.lean",
+    "sha256": "6f2a4ba95ab8c5319e541a1cc1b3699c0ae8cef23ea8e68f958e11b07281761e",
+    "bytes": 13335,
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/zeta-23-lean",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "zeta23/comparator.json",
+    "file": ".cache/x184/research/anthropics_zeta-23-lean-zeta23_comparator.json",
+    "sha256": "610d95c6c84f13b3e2238b476fe45f0b28567108f536f67a0b9ed1586a2c68f1",
+    "bytes": 1025,
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "openai/math",
+    "commit": "3344da59991ed94f9ba711217b29c1d760badfa6",
+    "path": "README.md",
+    "file": ".cache/x184/research/openai_math-README.md",
+    "sha256": "d87b51bfa10f1c42fe35746934a44b84e0608e556c9ca5ffeb0163914ac8761c",
+    "bytes": 4417,
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "openai/math",
+    "commit": "3344da59991ed94f9ba711217b29c1d760badfa6",
+    "path": "history.md",
+    "file": ".cache/x184/research/openai_math-history.md",
+    "sha256": "badbb8f33483c3ff2b41a062e9cf328d3214a8b38b3af7a3ce8fabce9166155d",
+    "bytes": 5674,
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "double-ai/double-zkp-ecc",
+    "commit": "969ea21f2b0a019e10223331ab8a44ddd130706d",
+    "path": "README.md",
+    "file": ".cache/x184/research/double-ai_double-zkp-ecc-README.md",
+    "sha256": "e4d4b58615dffa2bf68e39375933014d7c3988f08758c86bf030f0f025366a5c",
+    "bytes": 4449,
+    "kernel": "NOT_RUN"
+  }
+]

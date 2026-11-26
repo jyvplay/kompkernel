@@ -1,0 +1,8 @@
+Decode payload first. Split on ASCII spaces retaining empty fields. Scan fields left to right, numbering input fields from 1. ~i,n; emits a copy of the n output fields ending at the end of input field i's expansion; i must be earlier. Other fields emit literally. Join output fields with ASCII spaces, preserving everything else. Print only.
+⁺ = number at same position above + change from two lines above.
+§и]
+root          с ~⁺,16;ы,3; [яс ~⁺ыр_percpu_wqеи⁺ят,16;фт ~о   с [ҵ
+root           ди ⁺к [rcuч:0H-events_highpriж:1H-kblockdг00:00:ни⁺ъ_kthreadнозdеу_gpд    ~ьыcpuhp/мksoftirqd/вkworker/а       2 ~¶# source: ps -ef (real)
+UID          PID    PPID  C STIME TTY          TIME CMDҵ1       0  0 20:41 ?        г00 /sbin/initҵ2 ~61ф64ыkthreaddда78,12;ку98тк_parу114т [slub_flushwqдоnetnsи 8ов0чноmmри11    ~177тк_tasksъrcu_tasks_traceъм0на60,8;    г01к_preemptн ~242ф222ыmigration/0и17 ~257ф258ь0и18 ~270ф271ь1еmigration/1ем1и22яв1чи25яkdevtmpfsи26яinet_frag_wqеkauditзв1:1-mmреkhungtaskзoom_reaperеwritebackеkcompactd0еksmdеkhugepagedеkintegrityзkblockзblkcg_punt_bioеwatchdogзrpcioзв1жеxprtiodи61яkswapd0и65яnfsiodи67яв0жи70яxfsalloc]
+
+Every new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result.

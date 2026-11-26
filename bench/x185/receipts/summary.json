@@ -1,0 +1,456 @@
+{
+  "accepted": false,
+  "productionUnchanged": true,
+  "frontier": {
+    "lanes": 29,
+    "oldTokens": 11962,
+    "tokens": 11962,
+    "identical": 29,
+    "different": [],
+    "pythonReaders": {
+      "unsupported": 6,
+      "exact": 23
+    }
+  },
+  "tsReaders": {
+    "rows": [
+      {
+        "path": "bench/holdout-x41/ls-l-real.txt",
+        "status": "unsupported",
+        "error": "Error: AKRIBOS unsupported envelope"
+      },
+      {
+        "path": "bench/holdout-x41/ps-aux-real.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42/dpkg-l.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout/json-pkg.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x40/metrics.tsv",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x41/ls-real.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42/df-h.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-work/llm-answer.md",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-tbl/df-h.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-work/email-thread.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x41/du-real.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42/lsblk.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42b/uptime-w.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout/code-ts.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x41/apt-real.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x41/node-help.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42/findmnt.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x40/cue-sheet.md",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42/ps-ef.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x41/df-real.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x41/ps-real.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x40/prices.csv",
+        "status": "unsupported",
+        "error": "Error: AKRIBOS unsupported envelope"
+      },
+      {
+        "path": "bench/holdout-tbl/psql-output.txt",
+        "status": "unsupported",
+        "error": "Error: AKRIBOS unsupported envelope"
+      },
+      {
+        "path": "bench/holdout-tbl/markdown-table.md",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-work/kb-article.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-work/unified-diff.patch",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42b/free-m.txt",
+        "status": "exact"
+      },
+      {
+        "path": "bench/holdout-x42b/vmstat.txt",
+        "status": "exact"
+      }
+    ],
+    "attacks": 14
+  },
+  "unitChecks": 4122,
+  "sources": 37,
+  "families": 6,
+  "rawWins": [
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "family": "peras"
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "family": "geiton"
+    },
+    {
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "family": "apousia"
+    },
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "family": "peras"
+    },
+    {
+      "path": "bench/holdout-x40/metrics.tsv",
+      "family": "geiton"
+    },
+    {
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "family": "peras"
+    },
+    {
+      "path": "bench/holdout-x42/findmnt.txt",
+      "family": "peras"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "family": "peras"
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "family": "apousia"
+    },
+    {
+      "path": "bench/holdout-x41/ps-real.txt",
+      "family": "peras"
+    },
+    {
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "family": "peras"
+    },
+    {
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "family": "peras"
+    },
+    {
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "family": "peras"
+    }
+  ],
+  "paid": [
+    {
+      "file": "bench/x185/receipts/paid-00.json",
+      "path": "bench/holdout-work/email-thread.txt",
+      "family": "peras",
+      "status": "exact",
+      "tokens": 564,
+      "baseline": 486,
+      "parentTokens": 492,
+      "keyMarginal": 72
+    },
+    {
+      "file": "bench/x185/receipts/paid-01.json",
+      "path": "bench/holdout-work/kb-article.txt",
+      "family": "peras",
+      "status": "ineligible"
+    },
+    {
+      "file": "bench/x185/receipts/paid-02.json",
+      "path": "bench/holdout-work/llm-answer.md",
+      "family": "peras",
+      "status": "exact",
+      "tokens": 743,
+      "baseline": 664,
+      "parentTokens": 671,
+      "keyMarginal": 72
+    },
+    {
+      "file": "bench/x185/receipts/paid-03.json",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "family": "peras",
+      "status": "exact",
+      "tokens": 537,
+      "baseline": 381,
+      "parentTokens": 465,
+      "keyMarginal": 72
+    },
+    {
+      "file": "bench/x185/receipts/paid-04.json",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "family": "peras",
+      "status": "exact",
+      "tokens": 469,
+      "baseline": 296,
+      "parentTokens": 397,
+      "keyMarginal": 72
+    },
+    {
+      "file": "bench/x185/receipts/paid-05.json",
+      "path": "bench/holdout/json-pkg.txt",
+      "family": "peras",
+      "status": "exact",
+      "tokens": 752,
+      "baseline": 653,
+      "parentTokens": 680,
+      "keyMarginal": 72
+    },
+    {
+      "file": "bench/x185/receipts/paid-06.json",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "family": "peras",
+      "status": "exact",
+      "tokens": 491,
+      "baseline": 411,
+      "parentTokens": 419,
+      "keyMarginal": 72
+    },
+    {
+      "file": "bench/x185/receipts/paid-07.json",
+      "path": "bench/holdout/code-ts.txt",
+      "family": "peras",
+      "status": "exact",
+      "tokens": 1074,
+      "baseline": 949,
+      "parentTokens": 1002,
+      "keyMarginal": 72
+    },
+    {
+      "file": "bench/x185/receipts/paid-08.json",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "family": "peras",
+      "status": "reader-failed",
+      "tokens": 1316,
+      "baseline": null,
+      "parentTokens": 1244,
+      "keyMarginal": 72
+    },
+    {
+      "file": "bench/x185/receipts/paid-11.json",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "family": "peras",
+      "status": "exact",
+      "tokens": 545,
+      "baseline": 385,
+      "parentTokens": 473,
+      "keyMarginal": 72
+    }
+  ],
+  "paidWins": [],
+  "processCounts": {
+    "completed": 10,
+    "TIMEOUT": 2
+  },
+  "independent": {
+    "checks": 3072,
+    "attacks": 15,
+    "paid": [
+      {
+        "file": "bench/x185/receipts/paid-00.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x185/receipts/paid-02.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x185/receipts/paid-03.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x185/receipts/paid-04.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x185/receipts/paid-05.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x185/receipts/paid-06.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x185/receipts/paid-07.json",
+        "status": "exact"
+      },
+      {
+        "file": "bench/x185/receipts/paid-08.json",
+        "status": "unsupported",
+        "error": "unsupported instruction envelope"
+      },
+      {
+        "file": "bench/x185/receipts/paid-11.json",
+        "status": "unsupported",
+        "error": "unsupported layout"
+      }
+    ],
+    "native": "NOT_RUN"
+  },
+  "adversary": {
+    "checks": 39,
+    "structural": [
+      "peras",
+      "geiton",
+      "apousia",
+      "diadochi",
+      "symfraz",
+      "ropi"
+    ],
+    "negativeContractShapes": [
+      {
+        "missing": "byteExact",
+        "accepted": false
+      },
+      {
+        "missing": "allCostsPaid",
+        "accepted": false
+      },
+      {
+        "missing": "twoProse",
+        "accepted": false
+      },
+      {
+        "missing": "twoOps",
+        "accepted": false
+      },
+      {
+        "missing": "heldout",
+        "accepted": false
+      },
+      {
+        "missing": "moreThanTen",
+        "accepted": false
+      },
+      {
+        "missing": "protected",
+        "accepted": false
+      },
+      {
+        "missing": "nativeRun",
+        "accepted": false
+      },
+      {
+        "missing": "nativeExact",
+        "accepted": false
+      },
+      {
+        "missing": "novelty",
+        "accepted": false
+      },
+      {
+        "missing": "runtimeMeasured",
+        "accepted": false
+      },
+      {
+        "missing": "runtimeNonregression",
+        "accepted": false
+      },
+      {
+        "missing": "unicodeExact",
+        "accepted": false
+      },
+      {
+        "missing": "bounded",
+        "accepted": false
+      },
+      {
+        "missing": "independentRead",
+        "accepted": false
+      },
+      {
+        "missing": "noHiddenContext",
+        "accepted": false
+      }
+    ],
+    "note": "Boolean gate checks are not empirical native verification."
+  },
+  "speed": {
+    "cpuMs": 1.002812897221732,
+    "wallMs": 0.9985094601449566,
+    "laneRatios": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 1.1040152362895963,
+        "wallMs": 1.1094897982840668
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 0.9760699613033956,
+        "wallMs": 0.967900094066116
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 0.9643065985727272,
+        "wallMs": 0.9498257799693486
+      },
+      "bench/holdout-work/email-thread.txt": {
+        "cpuMs": 1.0046190528682652,
+        "wallMs": 1.0127984369256287
+      },
+      "bench/holdout-work/unified-diff.patch": {
+        "cpuMs": 1.0411986043456274,
+        "wallMs": 1.0351912351451986
+      },
+      "bench/holdout-x41/node-help.txt": {
+        "cpuMs": 1.0194537922310023,
+        "wallMs": 1.0202178321825595
+      }
+    },
+    "accepted": false,
+    "identicalWires": 24
+  },
+  "native": "NOT_RUN",
+  "allStackNovelty": "NOT_ESTABLISHED"
+}

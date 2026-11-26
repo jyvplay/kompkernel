@@ -1,0 +1,11 @@
+{
+  checks: 21659,
+  sources: 37,
+  families: 6,
+  rawWins: [
+    { path: 'bench/holdout-x41/ls-l-real.txt', family: 'geiton' },
+    { path: 'bench/holdout-x41/ls-l-real.txt', family: 'apousia' },
+    { path: 'bench/holdout-x40/metrics.tsv', family: 'geiton' },
+    { path: 'bench/holdout-x42/ps-ef.txt', family: 'apousia' }
+  ]
+}

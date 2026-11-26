@@ -1,0 +1,12 @@
+{
+  "production": false,
+  "fast": {
+    "old": "  // one anchored exec answers the overwhelmingly common case (the whole string is\n  // a single pre-token) without building a match array\n  re.lastIndex = 0;\n  const one = re.exec(text);\n  if (one !== null && one.index === 0 && one[0].length === text.length) return fastChunkCount(text);\n  re.lastIndex = 0;\n  const ms = text.match(re);\n  if (ms === null) return null;\n  let covered = 0;\n  for (let i = 0; i < ms.length; i++) covered += ms[i].length;\n  if (covered !== text.length) return null;\n  let n = 0;\n  for (let i = 0; i < ms.length; i++) n += fastChunkCount(ms[i]);\n  return n;",
+    "replacement": "  let covered = 0, n = 0;\n  re.lastIndex = 0;\n  let m: RegExpExecArray | null;\n  while ((m = re.exec(text)) !== null) {\n    if (m.index !== covered || m[0].length === 0) return null;\n    covered += m[0].length;\n    n += fastChunkCount(m[0]);\n  }\n  return covered === text.length ? n : null;"
+  },
+  "long": {
+    "old": "function countLongRaw(text: string, enc: EncodingName, sink: MarkSink | null): number | null {\n  const re = PRETOK[enc];",
+    "replacement": "function countLongRaw(text: string, enc: EncodingName, sink: MarkSink | null): number | null {\n  const re = PRETOK[enc];\n  if (sink === null) {\n    re.lastIndex = 0;\n    let covered = 0, total = 0;\n    const pfx = enc === 'cl100k_base' ? '\\u0002' : '';\n    let m: RegExpExecArray | null;\n    while ((m = re.exec(text)) !== null) {\n      if (m.index !== covered || m[0].length === 0) { chunkFallbacks++; return null; }\n      covered += m[0].length;\n      total += chunkCountFast(m[0], enc, pfx);\n    }\n    if (covered !== text.length) { chunkFallbacks++; return null; }\n    return total;\n  }"
+  },
+  "scope": "Streaming regex scan with contiguous-coverage checks; no candidate removal. Keep tracked-tail path unchanged."
+}

@@ -1,0 +1,9 @@
+{
+  "initialFailure": "stream-A attack harness: reference encode rejected literal <|endoftext|> with Disallowed special token found",
+  "repair": "Use disallowedSpecial empty only in the fastCount differential attack harness, explicitly comparing ordinary-text tokenization. No production tokenizer policy changed.",
+  "rerun": "Rebuilt both A/B bundles; count, vector, merge and stream gates all rerun and byte-identical between arms.",
+  "targetedAttack": "Repeated cold/warm fastCount and reference encode calls around whitespace, Unicode, lone surrogates and special-token spellings detect regex-state contamination.",
+  "additionalCodecBoundaryChecks": "KARTES default pricing explicitly rejects the reference tokenizer's reserved spellings; maximum NUL-rich input produces no candidate when JSON framing exceeds cap. Full test and independent suites rerun after adding these boundary checks.",
+  "native": "NOT_RUN",
+  "productionPatchPromoted": false
+}
