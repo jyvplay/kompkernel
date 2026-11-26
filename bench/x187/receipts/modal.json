@@ -1,0 +1,28 @@
+{
+  "checks": 5,
+  "a": "a1b2",
+  "b": "ab12",
+  "x": [
+    [
+      [
+        1,
+        1,
+        1,
+        1
+      ],
+      "ab",
+      "12"
+    ]
+  ],
+  "y": [
+    [
+      [
+        2,
+        2
+      ],
+      "ab",
+      "12"
+    ]
+  ],
+  "conclusion": "Deleting routing counts is noninjective: identical stream pairs represent different originals. Free-route prices are not admissible codec results."
+}

@@ -12110,3 +12110,36 @@ receipts. Whole-stack speed experiment is build-only and separately gated.
 X186 final frontier refresh:29identical wires/11962tokens. Runtime last-chunk
 cache experiment rejected (CPU0.978513,wall0.980379,24identical wires), not
 promoted as significant speedup. Typecheck/build passed; native remains NOT_RUN.
+
+## DIAMERIS — X187 stable character partition / alternating-run routing
+
+`src/lib/omega/diameris.ts`, experimental, unwired, no paid frontier win.
+JSON blocks `[counts,A,B]`; consume Unicode code points (not grapheme clusters)
+alternately from A then B, starting with A. First count may be0, later counts
+positive; exact stream exhaustion mandatory. No separators added between pieces
+or blocks. Nine enumerated configurations: ASCII-letter/digit/Cyrillic-range
+partition ×256/1024/50000-codepoint blocks. Not greedy; no optimality outside
+this menu. Encoder parameters need not be sent because counts and streams alone
+specify the inverse. UTF8-stable source/output≤50000UTF16units, frame≤400000,
+≤196blocks,≤50200counts overall; fixed-plan O(N+R)work/space plus tokenizer,
+at most9plans; parent encoding separately trial-limited to90s wall, not a
+universal CPU bound. Exact byte equality, no normalization.
+
+Classical stable partition/run-length bitvector ancestry; new module/wire,
+not proven all-stack semantic novelty. Relevant recent source: Chiu–Kempa2025,
+*Engineering Select Support for Hybrid Bitvectors*, arXiv:2509.06900;
+author repo https://github.com/echiu12/hyb_vector_select . Binary index/query
+results do not imply decimal-JSON token gains. SupraTok arXiv:2508.11857 trains
+a different tokenizer and is not admissible as a drop-in here. Retrieval/proof
+limits and deeper OpenAI WalkOutput inspection: `bench/x187/research.md`.
+
+10305TS checks; Python3514checks/14attacks;47adversary checks.204direct parent
+candidates, zero wins.18final paid jobs:13exact canonical losses,1parent-reader
+failure,4timeouts, including6forced-nondegenerate trials. Clarified key costs
+71marginal tokens on completed trials. Earlier ambiguous-unit receipts are
+quarantined and not accepted. Native basic-chat NOT_RUN.29fresh identical
+frontier wires/11962tokens. Full A–J record in `bench/x187/README.md`.
+X187 ASCII bypass speed experiment rejected:CPU0.985287/wall0.982684,24identical
+wires, insufficient significant gain.129reference price/source checks and
+fresh typecheck/build pass. Planning inherits tokenizer special-spelling
+refusals; transform domain is not a total priced Unicode encoder.

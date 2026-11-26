@@ -1,0 +1,8 @@
+{
+  "change": "Unicode characters -> Unicode code points (not grapheme clusters)",
+  "oldResults": "pre-clarification; not accepted",
+  "targetedAttack": "Combining e+accent consumes two codepoints, not one grapheme",
+  "freshGates": "10305 TS checks, independent Python, 47 adversary checks, restarted paid trials and final price gates",
+  "native": "NOT_RUN",
+  "speed": "Build-only ASCII singleton bypass; 903 patch-specific differential checks and count/vector/merge/threshold gates"
+}

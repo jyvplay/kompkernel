@@ -1,0 +1,350 @@
+[
+  {
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "baseline": 1310,
+    "arms": {
+      "before": 1633,
+      "after": 1810,
+      "both": 2314,
+      "latin": 1452,
+      "punct": 1380,
+      "cyrRun": 1406
+    }
+  },
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "baseline": 980,
+    "arms": {
+      "before": 1257,
+      "after": 1418,
+      "both": 1769,
+      "latin": 1147,
+      "punct": 1135,
+      "cyrRun": 1077
+    }
+  },
+  {
+    "path": "bench/holdout-x42/dpkg-l.txt",
+    "baseline": 623,
+    "arms": {
+      "before": 623,
+      "after": 623,
+      "both": 623,
+      "latin": 847,
+      "punct": 972,
+      "cyrRun": 623
+    }
+  },
+  {
+    "path": "bench/holdout/json-pkg.txt",
+    "baseline": 653,
+    "arms": {
+      "before": 825,
+      "after": 850,
+      "both": 1086,
+      "latin": 719,
+      "punct": 747,
+      "cyrRun": 685
+    }
+  },
+  {
+    "path": "bench/holdout-x40/metrics.tsv",
+    "baseline": 197,
+    "arms": {
+      "before": 249,
+      "after": 281,
+      "both": 349,
+      "latin": 245,
+      "punct": 203,
+      "cyrRun": 204
+    }
+  },
+  {
+    "path": "bench/holdout-x41/ls-real.txt",
+    "baseline": 414,
+    "arms": {
+      "before": 540,
+      "after": 623,
+      "both": 777,
+      "latin": 495,
+      "punct": 460,
+      "cyrRun": 454
+    }
+  },
+  {
+    "path": "bench/holdout-x42/df-h.txt",
+    "baseline": 105,
+    "arms": {
+      "before": 136,
+      "after": 147,
+      "both": 185,
+      "latin": 121,
+      "punct": 116,
+      "cyrRun": 115
+    }
+  },
+  {
+    "path": "bench/holdout-work/llm-answer.md",
+    "baseline": 664,
+    "arms": {
+      "before": 786,
+      "after": 853,
+      "both": 991,
+      "latin": 909,
+      "punct": 808,
+      "cyrRun": 709
+    }
+  },
+  {
+    "path": "bench/holdout-tbl/df-h.txt",
+    "baseline": 160,
+    "arms": {
+      "before": 198,
+      "after": 209,
+      "both": 259,
+      "latin": 210,
+      "punct": 172,
+      "cyrRun": 168
+    }
+  },
+  {
+    "path": "bench/holdout-work/email-thread.txt",
+    "baseline": 486,
+    "arms": {
+      "before": 583,
+      "after": 671,
+      "both": 787,
+      "latin": 696,
+      "punct": 501,
+      "cyrRun": 513
+    }
+  },
+  {
+    "path": "bench/holdout-x41/du-real.txt",
+    "baseline": 266,
+    "arms": {
+      "before": 323,
+      "after": 376,
+      "both": 435,
+      "latin": 308,
+      "punct": 303,
+      "cyrRun": 285
+    }
+  },
+  {
+    "path": "bench/holdout-x42/lsblk.txt",
+    "baseline": 60,
+    "arms": {
+      "before": 60,
+      "after": 60,
+      "both": 60,
+      "latin": 70,
+      "punct": 62,
+      "cyrRun": 60
+    }
+  },
+  {
+    "path": "bench/holdout-x42b/uptime-w.txt",
+    "baseline": 80,
+    "arms": {
+      "before": 80,
+      "after": 80,
+      "both": 80,
+      "latin": 87,
+      "punct": 81,
+      "cyrRun": 80
+    }
+  },
+  {
+    "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "baseline": 300,
+    "arms": {
+      "before": 376,
+      "after": 405,
+      "both": 494,
+      "latin": 378,
+      "punct": 331,
+      "cyrRun": 323
+    }
+  },
+  {
+    "path": "bench/holdout/code-ts.txt",
+    "baseline": 949,
+    "arms": {
+      "before": 1258,
+      "after": 1355,
+      "both": 1780,
+      "latin": 1220,
+      "punct": 1163,
+      "cyrRun": 1027
+    }
+  },
+  {
+    "path": "bench/holdout-x41/apt-real.txt",
+    "baseline": 813,
+    "arms": {
+      "before": 1230,
+      "after": 1303,
+      "both": 1902,
+      "latin": 865,
+      "punct": 865,
+      "cyrRun": 874
+    }
+  },
+  {
+    "path": "bench/holdout-x41/node-help.txt",
+    "baseline": 846,
+    "arms": {
+      "before": 992,
+      "after": 1097,
+      "both": 1252,
+      "latin": 1210,
+      "punct": 933,
+      "cyrRun": 907
+    }
+  },
+  {
+    "path": "bench/holdout-x42/findmnt.txt",
+    "baseline": 385,
+    "arms": {
+      "before": 385,
+      "after": 385,
+      "both": 385,
+      "latin": 480,
+      "punct": 500,
+      "cyrRun": 385
+    }
+  },
+  {
+    "path": "bench/holdout-x40/cue-sheet.md",
+    "baseline": 101,
+    "arms": {
+      "before": 101,
+      "after": 101,
+      "both": 101,
+      "latin": 131,
+      "punct": 122,
+      "cyrRun": 101
+    }
+  },
+  {
+    "path": "bench/holdout-x42/ps-ef.txt",
+    "baseline": 296,
+    "arms": {
+      "before": 296,
+      "after": 296,
+      "both": 296,
+      "latin": 325,
+      "punct": 429,
+      "cyrRun": 296
+    }
+  },
+  {
+    "path": "bench/holdout-x41/df-real.txt",
+    "baseline": 123,
+    "arms": {
+      "before": 154,
+      "after": 166,
+      "both": 204,
+      "latin": 141,
+      "punct": 134,
+      "cyrRun": 133
+    }
+  },
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "baseline": 381,
+    "arms": {
+      "before": 498,
+      "after": 560,
+      "both": 692,
+      "latin": 433,
+      "punct": 414,
+      "cyrRun": 409
+    }
+  },
+  {
+    "path": "bench/holdout-x40/prices.csv",
+    "baseline": 118,
+    "arms": {
+      "before": 140,
+      "after": 147,
+      "both": 174,
+      "latin": 138,
+      "punct": 137,
+      "cyrRun": 124
+    }
+  },
+  {
+    "path": "bench/holdout-tbl/psql-output.txt",
+    "baseline": 229,
+    "arms": {
+      "before": 294,
+      "after": 335,
+      "both": 410,
+      "latin": 268,
+      "punct": 285,
+      "cyrRun": 245
+    }
+  },
+  {
+    "path": "bench/holdout-tbl/markdown-table.md",
+    "baseline": 172,
+    "arms": {
+      "before": 172,
+      "after": 172,
+      "both": 172,
+      "latin": 214,
+      "punct": 229,
+      "cyrRun": 172
+    }
+  },
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "baseline": 620,
+    "arms": {
+      "before": 711,
+      "after": 842,
+      "both": 949,
+      "latin": 959,
+      "punct": 624,
+      "cyrRun": 644
+    }
+  },
+  {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "baseline": 411,
+    "arms": {
+      "before": 497,
+      "after": 543,
+      "both": 637,
+      "latin": 479,
+      "punct": 502,
+      "cyrRun": 431
+    }
+  },
+  {
+    "path": "bench/holdout-x42b/free-m.txt",
+    "baseline": 76,
+    "arms": {
+      "before": 76,
+      "after": 76,
+      "both": 76,
+      "latin": 80,
+      "punct": 79,
+      "cyrRun": 76
+    }
+  },
+  {
+    "path": "bench/holdout-x42b/vmstat.txt",
+    "baseline": 144,
+    "arms": {
+      "before": 187,
+      "after": 208,
+      "both": 246,
+      "latin": 163,
+      "punct": 189,
+      "cyrRun": 160
+    }
+  }
+]
