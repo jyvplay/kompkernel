@@ -1,0 +1,130 @@
+[
+  {
+    "path": "bench/holdout-work/email-thread.txt",
+    "mode": "selected",
+    "output": "bench/x190/receipts/paid-00.json",
+    "status": "complete",
+    "wallSeconds": 54.682867775999966,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/email-thread.txt",
+    "mode": "forced",
+    "output": "bench/x190/receipts/paid-01.json",
+    "status": "complete",
+    "wallSeconds": 53.49987781599998,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "mode": "selected",
+    "output": "bench/x190/receipts/paid-02.json",
+    "status": "complete",
+    "wallSeconds": 45.27832606000004,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "mode": "forced",
+    "output": "bench/x190/receipts/paid-03.json",
+    "status": "complete",
+    "wallSeconds": 95.70918092699998,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/llm-answer.md",
+    "mode": "selected",
+    "output": "bench/x190/receipts/paid-04.json",
+    "status": "complete",
+    "wallSeconds": 35.181204181,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/llm-answer.md",
+    "mode": "forced",
+    "output": "bench/x190/receipts/paid-05.json",
+    "status": "complete",
+    "wallSeconds": 64.00917357200001,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "mode": "selected",
+    "output": "bench/x190/receipts/paid-06.json",
+    "status": "complete",
+    "wallSeconds": 49.67751055499997,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "mode": "forced",
+    "output": "bench/x190/receipts/paid-07.json",
+    "status": "complete",
+    "wallSeconds": 54.59009163799999,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "mode": "selected",
+    "output": "bench/x190/receipts/paid-08.json",
+    "status": "timeout",
+    "wallSeconds": 180.12838378999993,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "mode": "forced",
+    "output": "bench/x190/receipts/paid-09.json",
+    "status": "timeout",
+    "wallSeconds": 180.09155813799998,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "mode": "selected",
+    "output": "bench/x190/receipts/paid-10.json",
+    "status": "timeout",
+    "wallSeconds": 180.07335156800002,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "mode": "forced",
+    "output": "bench/x190/receipts/paid-11.json",
+    "status": "timeout",
+    "wallSeconds": 180.11240830200006,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout/json-pkg.txt",
+    "mode": "selected",
+    "output": "bench/x190/receipts/paid-12.json",
+    "status": "complete",
+    "wallSeconds": 87.47354031300006,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout/json-pkg.txt",
+    "mode": "forced",
+    "output": "bench/x190/receipts/paid-13.json",
+    "status": "complete",
+    "wallSeconds": 95.01195682100001,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "mode": "selected",
+    "output": "bench/x190/receipts/paid-14.json",
+    "status": "complete",
+    "wallSeconds": 35.91328334000002,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "mode": "forced",
+    "output": "bench/x190/receipts/paid-15.json",
+    "status": "complete",
+    "wallSeconds": 25.53989742100009,
+    "capSeconds": 180
+  }
+]

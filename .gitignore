@@ -315,3 +315,8 @@ bench/x188/*.mjs
 bench/x189/*.mjs
 !bench/x189/*-build.mjs
 .cache/x189/
+
+# X190 generated bundles and retrieved research
+bench/x190/*.mjs
+!bench/x190/*-build.mjs
+.cache/x190/

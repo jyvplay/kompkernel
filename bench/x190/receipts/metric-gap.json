@@ -1,0 +1,36 @@
+{
+  "source": {
+    "repo": "Nickil21/round-trip-code-compression",
+    "commit": "66119708d09788589694e13984b0ede84985ff1d",
+    "path": "src/eval/check_io_pred_acc_mp.py",
+    "file": ".cache/x190/research/rtce-check_io_pred_acc_mp.py",
+    "sha256": "e8550d63216a7fb52d0155ff6203f4bdb7a8f06e5dbc8fb0ba37ffa43ab43037",
+    "executed": false
+  },
+  "functions": [
+    "deep_equal",
+    "maybe_literal_eval",
+    "normalize"
+  ],
+  "checks": [
+    {
+      "left": "'a b'",
+      "right": "a b",
+      "externalDeepEqualDefault": true,
+      "rawByteEqual": false
+    },
+    {
+      "left": "[1, 2]",
+      "right": "(1, 2)",
+      "externalDeepEqualDefault": true,
+      "rawByteEqual": false
+    },
+    {
+      "left": "1.0000",
+      "right": "1.0005",
+      "externalDeepEqualDefault": true,
+      "rawByteEqual": false
+    }
+  ],
+  "scope": "Default comparator function only. No assertion about configuration/results of the published benchmark."
+}

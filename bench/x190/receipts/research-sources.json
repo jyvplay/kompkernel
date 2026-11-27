@@ -1,0 +1,42 @@
+[
+  {
+    "repo": "openai/math",
+    "commit": "3344da59991ed94f9ba711217b29c1d760badfa6",
+    "path": "lean/OAI/Computability/Superstring/GroupSupply.lean",
+    "file": ".cache/x190/research/GroupSupply.lean",
+    "sha256": "2af633d3b82703a8ae5c6b0f73038ec1eb627f63c875af2d85d00b91b199b242",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "openai/math",
+    "commit": "3344da59991ed94f9ba711217b29c1d760badfa6",
+    "path": "lean/OAI/Computability/Superstring/BlockClose.lean",
+    "file": ".cache/x190/research/BlockClose.lean",
+    "sha256": "04d13079ad8916b2d5707519754218649e0f936a9213ca8ab0dbec5f24360f9d",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "Nickil21/round-trip-code-compression",
+    "commit": "66119708d09788589694e13984b0ede84985ff1d",
+    "path": "src/eval/check_io_pred_acc_mp.py",
+    "file": ".cache/x190/research/rtce-check_io_pred_acc_mp.py",
+    "sha256": "e8550d63216a7fb52d0155ff6203f4bdb7a8f06e5dbc8fb0ba37ffa43ab43037",
+    "executed": false
+  },
+  {
+    "repo": "Nickil21/round-trip-code-compression",
+    "commit": "66119708d09788589694e13984b0ede84985ff1d",
+    "path": "src/core/helper.py",
+    "file": ".cache/x190/research/rtce-helper.py",
+    "sha256": "347d9ca1c8da38c8d019f5ee155ad11bfad61afd849ada4f6198f4b3a2e1e251",
+    "executed": false
+  },
+  {
+    "repo": "Nickil21/round-trip-code-compression",
+    "commit": "66119708d09788589694e13984b0ede84985ff1d",
+    "path": "README.md",
+    "file": ".cache/x190/research/rtce-README.md",
+    "sha256": "db4bc242da46eb95b55155ce91227b492ca620cefaf3fc2251579994fb408ab6",
+    "executed": false
+  }
+]

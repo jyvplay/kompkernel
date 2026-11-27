@@ -1,0 +1,7 @@
+{
+  "status": "NOT_RUN",
+  "cases": 38,
+  "canonical": 29,
+  "candidates": 9,
+  "reason": "No separate model endpoint invoked. Share only public prompt bytes with a source-blind participant; grader/source files must be inaccessible."
+}

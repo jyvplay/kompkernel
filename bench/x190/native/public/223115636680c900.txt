@@ -1,0 +1,18 @@
+¶ k=v. expand repeatedly; print only.
+§и0р.б",
+       сб "ҳ    "Арисп"
+    },
+ҳа1й": "үйherebyц        "Ө": false,
+цё": {
+ці10яб "@ляtypes/жрид": "^гдары4ьдиро8өдор24рафцurl": "https://github.com/microsoft/TypeScriptкдірэ2вдэрнtypescriptхян-eslintОсbuild:Н",
+ҳә5рю": "./lib/typescriptИ": "./bin/tsъд9р20мор19рызрастдыру3чрусЖ"
+    ],
+ҳӣminimistгэрЫsource-map-supportьәшdprintБwhichдуже7КcГeslint¶{
+ҳnameйнНauthorйMicrosoft Corp.Нhomepageйhttps://www.typescriptlang.org/Нversionйә9руНlicenseйApache-эжНdescriptionйTypeScript is a language for application scale JavaScript developmentНkeywords": [
+цTypeScriptсMicrosoftсcompilerсlanguageсjavascriptЖbugs": {
+ф/issuesпrepositoryёtypeйgit",
+ф.gitпmainюрjsНtypingsю.d.tsНbinёtscИКсtsserverИserverпenginesёnodeй>=аыраепfiles": [
+цbinсlibс!lib/enuсLICENSE.txtсREADME.mdсSECURITY.mdсThirdPartyNoticeText.txtб "!**/.gitattributesЖdevDependenciesё@ш/formatterдирыраяш/typescriptйир93.ыяesfx/canceltokenгирияeslint/jsъжяoctokit/restдэараралchaiдырурэилdiffдежралӣ5лmochaкирілmsьеруылnodeйlatestлЫілБрых/rule-testerөх/type-utilsөх/utilsөсazure-devops-node-apiдаыраАКокарусchaiдыр5АКhokidarтичdiffдежрисшь49Аesbuildдир25АГъзeslint-formatter-autolinkable-stylishгыАГ-plugin-regexpверисfast-xml-parserтәэсglobкыр5сglobalsдаә15АherebyгіАjsonc-parserдурузknipдә44рысӣосmochaкорэсmocha-fivemat-progress-reporterьаАmonocart-coverage-reportsваэзmsвачpicocolorsгазplaywrightг50зЫэасtslibвозtypescriptдәечtypescript-eslintөсБрапoverridesён@*й$typescriptпscriptsёtestү runtests-parallel --light=falseсtest:eslint-rulesү run-eslint-rules-testsсbuildйnpm run build:compiler && npm run build:testsОcompilerү localОtestsү testsОtests:notypecheckү tests --no-typecheckсcleanү cleanсgulpүсlintү lintсknipү knipсformatйш fmtсsetup-hooksйnode scripts/link-hooks.mjsпbrowserёfsӨosӨpathӨcryptoӨbufferӨsource-map-supportӨinspectorӨperf_hooks": false
+    },
+ҳpackageManagerйnpm@мНvoltaёnodeй2ираАnpmймпgitHeadйc63de15a992dуеf0d6cec03ac7631872838602cb"
+}

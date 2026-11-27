@@ -1,0 +1,4 @@
+# source: free -m (real, captured 2026-10-24T23:21:28Z)
+               total        used        free      shared  buff/cache   available
+Mem:            3939        1451        2088           1         635        2488
+Swap:              0           0           0
