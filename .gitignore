@@ -325,3 +325,8 @@ bench/x190/*.mjs
 bench/x191/*.mjs
 !bench/x191/*-build.mjs
 .cache/x191/
+
+# X192 generated bundles
+bench/x192/*.mjs
+!bench/x192/*-build.mjs
+.cache/x192/

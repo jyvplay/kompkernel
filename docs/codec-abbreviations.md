@@ -12277,3 +12277,40 @@ X191 final ledger: 29 identical canonical wires / 11,962 tokens; repaired paid
 phase ten complete/one timeout, nine exact/one reader refusal, zero canonical
 wins. Python canonical reader 23 exact/six unsupported. 38 native handoffs
 prepared, native NOT_RUN. Category leaders unchanged; `receipts/leaders.json`.
+
+## X192 — MARTYS (literal-witness substring addressing), experimental
+
+MARTYS (`src/lib/omega/martys.ts`) reserves `^fragment`: replace it with the
+unique **distinct literal ASCII word** anywhere in the decoded payload containing
+that case-sensitive fragment. Reference fragments are excluded from the witness
+set, replacements are not rescanned, and all separators remain byte-exact on the
+admitted UTF-8-stable domain. Keep one literal witness per source word; unlike
+MNEMA, references may point forward and use internal substrings rather than the
+latest completed prefix match. Classical dictionary/unique-substring ancestry;
+all-stack novelty and native-model decoding are **NOT_ESTABLISHED**.
+
+Bounds: source/output ≤50,000 UTF-16 units, ≤10,000 word/reference events,
+literal words ≤96 ASCII letters, fragments ≤4. Sixteen configurations enumerate
+word cap 16/64 × fragment width 2/4 × first/last witness × local savings 0/1.
+Replacement is greedy by bounded local token cost; configuration selection and
+anchor enumeration are non-greedy but not globally optimal. Complete key and
+parent message are repriced. O(L) expected bounded-fragment indexing plus
+O(W log W) ranking; decoder worst-case O(Q L + output), with Q distinct
+fragments and L distinct-word length. Tokenizer-call bounds and assumptions:
+`bench/x192/model.md`. No hard planner CPU deadline; paid trials capped at 180s.
+
+Fresh canonical replay: **29 identical wires, 11,962 tokens**, unchanged category
+totals: prose 1,770, ops/tabular 8,078, code/struct 2,013, other 101. Local absolute
+saving leaders remain email 486, ls-l 1,310, JSON 653, cue 101; ops relative leader
+prices 118. These are corpus category leaders, not universal best codecs.
+`bench/x192/receipts/leaders.json` retains all lanes.
+
+MARTYS: 39-source discovery, 164 plans, 3,622 JS checks; separate Python inverse
+1,720 checks. Paid parent: nine exact, one timeout, **zero canonical wins**.
+Separate Python parent composition: nine exact candidates, canonical 23 exact /
+six unsupported / zero observed mismatches. Native packet: 38 frozen prompts,
+**NOT_RUN**; executable inverse does not discharge this requirement.
+Whole-stack fixed-encoding short-cache dispatch experiment rejected: 24 identical
+wires, CPU B/A 1.011802, wall 1.012666. Production remains unwired and unchanged.
+Full spec, six-method portfolio, new-site research and scoped proof-source audit:
+`bench/x192/{README,model,portfolio,novelty,research}.md`. No breakthrough claim.

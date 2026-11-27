@@ -1,0 +1,5 @@
+¶k=v expand repeatedly Δ: mask=value shape,# per digit. R: first space-token (signed int)+sum from 0 into #s, 0-padded; L: verbatim. print only.
+§т
+ит100000001000503киииі-м999497сккті599999998мо,л##е010¶Δ¦SKUіл#,####ілілол.лол,USD¦0¦s¦L1R30L1
+sku,asofоunit_price,qty,currency
+120260901125есссккті600000026мит

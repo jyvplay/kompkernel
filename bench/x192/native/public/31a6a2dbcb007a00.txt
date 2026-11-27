@@ -1,0 +1,28 @@
+Decode payload first. Words are maximal ASCII letter runs. Replace each ^fragment with the unique DISTINCT literal word in the payload containing fragment, case-sensitive. Reference fragments are not literal words; replacements are not rescanned. Preserve everything else; print only.
+¶ k=v. expand repeatedly; print only.
+§о-К@^hgоanalytics.comы>АКы wrote:
+чы >лы >
+ча ж2026он08р onажноә,ү Sepа2026ь > On Monәа22ү atапч >
+чаыз theНа18ә442.17 onзу
+с>
+ыш against cost centerат PriyaЕ <priya.rҷ Tueәа23үманоі:э.
+е29и14¶Fromі Dana Whitfield <dana.whitfield@northgateоanalytics.com>
+Dateіҷаиіні11 -0400уToі Marcus Oyelaran <m.oyelaranК>
+Ccіт RaghunathanЕК>, Tom Beckett <tbeckettК>
+Subjectі Reі Q3 reconciliation variance - need a decision by Thursday
+
+Marcus,
+
+I pulledз ledger again this morning andз variance is still there. It isНуconsolidated view andН subsidiary viewә so at least it is consistent now.
+
+My read is that we bookedз Halstead refund twiceі onceриш4120уand onceреш4180. If that is rightәз fix is a single reversingуentry and we are done.
+
+Can you confirm withз AP team before Thursday?
+
+Dana
+
+ы Onҷ atа11і42ә Marcus ^Oy <m.^oyАс Dana,
+с Agreed thatз number is stable. I am less sure aboutз double-booking theory. Theмеуы entry has a different vendor reference (HALож0881 vs HALож0774) which suggests twoуы separate credits rather than one duplicated creditэс I would rather we pullз original remittance advice before we reverse anything.тә do youуы still haveз August ^mi PDFs?
+с Marcusусь17і03әт ^RaЕАл Both,
+л I haveз ^mi advice forми but not forме. I have asked ^Ha AR for aуч copy and they saidа2 business daysә so Wednesday atз earliestэл One more thingіза4180 cost center was only openedр25ә so any entry against itуч before that date would have failed validation. That makes a genuine second credit moreуч likely than a duplicateэлтуль09і15ә Tom ^Be <^tbАп Team,
+п Flagging that audit wantsз Q3 reconciliation closed byаж09о30. Ifз variance isуч > unresolved we have to disclose it as a known itemә which I would prefer to avoidэп Tomу

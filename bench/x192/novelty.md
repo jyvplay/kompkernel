@@ -1,0 +1,11 @@
+# MARTYS ancestry and limits
+
+MARTYS means witness. Its decoder forms the set of distinct **literal** ASCII words in the entire payload, excludes reference fragments, then expands each `^fragment` only when exactly one member contains the fragment. It retains at least one literal occurrence of every source word. References can precede their witnesses and identify an internal substring, not only a prefix. No graph path, dictionary declaration, numerical address, neural guess or recursive expansion is needed.
+
+Nearest inspected neighbor **MNEMA** uses the latest completed word with a matching prefix; it is causal and updates history after decoding. MARTYS is noncausal, ignores reference expansions when constructing witnesses, and rejects ambiguity even if a recency rule would select a word. `^ana banana` separates causal recency from forward witnesses. `banana ^ana bandana` demonstrates future ambiguity. These distinguish executable semantics, not broad theoretical novelty: dictionary addressing, unique-substring identification and literal anchors are established ideas.
+
+Other inspected neighbors: HOMOIOS similarity/delta, MORPH morpheme tags, ORTHOS typography, VELTISTOS BPE-tail search, ANAPLASIS grammar ruin/recreate, SYNARMOGE joint rule/glyph search; DIEXODOS unique graph bridges. These are not the MARTYS inverse. However, no exhaustive semantic equivalence proof over this large stack was performed. `receipts/inventory.json` pins 438 module headers/hashes, including MARTYS; a header inventory is not a novelty certificate. Historical MONODROMOS/STOIBAS/LEXARITHMOS/KRYPTOLYSIS/DEIKTIS/SYMFRAZ/KYKLOS/METRIDA/KLADOS/FOTIA claims must not be treated as disproved by keyword search.
+
+New researched SUS algorithms identify a unique *occurrence in one string*. MARTYS instead identifies a unique *distinct word in a set*, allowing multiple occurrences in one word and many identical literal witnesses. The 2025/2026 papers motivate the experiment; their running times and compression results are not imported into it. MARTYS uses bounded brute-force fragment indexing, not those algorithms.
+
+Status: new experimental source module, unwired; mechanism-distinct from inspected closest neighbors; all-stack novelty **NOT_ESTABLISHED**. No rename is offered as a certified invention.

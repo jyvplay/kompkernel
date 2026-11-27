@@ -1,0 +1,22 @@
+{
+  "production": false,
+  "edits": [
+    [
+      "const SHORT_CACHE = new Map<EncodingName, Map<string, number>>();",
+      "const SHORT_CACHE:Record<EncodingName,Map<string,number>>={o200k_base:new Map(),cl100k_base:new Map()};"
+    ],
+    [
+      "SHORT_CACHE.values()",
+      "Object.values(SHORT_CACHE)"
+    ],
+    [
+      "SHORT_CACHE.clear();",
+      "SHORT_CACHE.o200k_base.clear(); SHORT_CACHE.cl100k_base.clear();"
+    ],
+    [
+      "let sc = SHORT_CACHE.get(enc);\n    if (sc === undefined) { sc = new Map<string, number>(); SHORT_CACHE.set(enc, sc); }",
+      "const sc = SHORT_CACHE[enc];"
+    ]
+  ],
+  "scope": "Fixed two-encoding short-cache dispatch; same string keys, counts, capacity and clear semantics. No reduced search or altered tokenizer."
+}

@@ -1,0 +1,6 @@
+¶ k=v. expand repeatedly; print only.
+§а д0лGца2.длу    адао  аяод% /ицуцяdevгMн5.дгр
+tmpfs          бrunқ       ¶# source: df -h (real)
+Filesystem      Sizeа Used Avail Use% Mounted on
+/dev/rootқа21лаа1.7ло19ло9% /
+devtmpfsқири/shmра788гаа288Kаа788го1% /брануаняб/lock

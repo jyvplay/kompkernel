@@ -1,0 +1,1127 @@
+{
+  "checks": 217,
+  "rows": [
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 7114,
+      "rawTokens": 5194
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 5174,
+      "rawTokens": 3054
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "tokens": 3026,
+      "rawTokens": 1000
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 2346,
+      "rawTokens": 1152
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 915,
+      "rawTokens": 811
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 1617,
+      "rawTokens": 1034
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 290,
+      "rawTokens": 140
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 1371,
+      "rawTokens": 733
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 725,
+      "rawTokens": 570
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 1200,
+      "rawTokens": 629
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 601,
+      "rawTokens": 458
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 143,
+      "rawTokens": 60
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 183,
+      "rawTokens": 80
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 1807,
+      "rawTokens": 1006
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 2749,
+      "rawTokens": 1422
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "tokens": 3330,
+      "rawTokens": 2739
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 4126,
+      "rawTokens": 1099
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 2180,
+      "rawTokens": 787
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 904,
+      "rawTokens": 513
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 2185,
+      "rawTokens": 1144
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 310,
+      "rawTokens": 158
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 1829,
+      "rawTokens": 1106
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 640,
+      "rawTokens": 582
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 1166,
+      "rawTokens": 675
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 599,
+      "rawTokens": 330
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 1561,
+      "rawTokens": 656
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 951,
+      "rawTokens": 578
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 256,
+      "rawTokens": 76
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 407,
+      "rawTokens": 229
+    },
+    {
+      "family": "rank",
+      "path": "bench/x179/fixtures/python_cpython-classes.rst",
+      "tokens": 18225,
+      "rawTokens": 8632
+    },
+    {
+      "family": "rank",
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "tokens": 12681,
+      "rawTokens": 6604
+    },
+    {
+      "family": "rank",
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "tokens": 11830,
+      "rawTokens": 6704
+    },
+    {
+      "family": "rank",
+      "path": "bench/x181/fixtures/python_cpython-errors.rst",
+      "tokens": 12626,
+      "rawTokens": 5790
+    },
+    {
+      "family": "rank",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "tokens": 2716,
+      "rawTokens": 1480
+    },
+    {
+      "family": "rank",
+      "path": "bench/x182/fixtures/gitworkflows.adoc",
+      "tokens": 7774,
+      "rawTokens": 3838
+    },
+    {
+      "family": "rank",
+      "path": "bench/x184/fixtures/git_git-git-restore.adoc",
+      "tokens": 3440,
+      "rawTokens": 1869
+    },
+    {
+      "family": "rank",
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "tokens": 14054,
+      "rawTokens": 7107
+    },
+    {
+      "family": "rank",
+      "path": "bench/x191/fixtures/git_git-gitcredentials.adoc",
+      "tokens": 5300,
+      "rawTokens": 2595
+    },
+    {
+      "family": "rank",
+      "path": "bench/x191/fixtures/rust-lang_book-ch05-01-defining-structs.md",
+      "tokens": 6541,
+      "rawTokens": 3450
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 8191,
+      "rawTokens": 5194
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 4828,
+      "rawTokens": 3054
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "tokens": 2433,
+      "rawTokens": 1000
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 2444,
+      "rawTokens": 1152
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 1187,
+      "rawTokens": 811
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 1797,
+      "rawTokens": 1034
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 262,
+      "rawTokens": 140
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 1664,
+      "rawTokens": 733
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 839,
+      "rawTokens": 570
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 1400,
+      "rawTokens": 629
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 1123,
+      "rawTokens": 458
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 138,
+      "rawTokens": 60
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 163,
+      "rawTokens": 80
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 1848,
+      "rawTokens": 1006
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 3666,
+      "rawTokens": 1422
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "tokens": 4754,
+      "rawTokens": 2739
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 3437,
+      "rawTokens": 1099
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 1798,
+      "rawTokens": 787
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 814,
+      "rawTokens": 513
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 1895,
+      "rawTokens": 1144
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 283,
+      "rawTokens": 158
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 1805,
+      "rawTokens": 1106
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 902,
+      "rawTokens": 582
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 1176,
+      "rawTokens": 675
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 540,
+      "rawTokens": 330
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 1928,
+      "rawTokens": 656
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 1105,
+      "rawTokens": 578
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 189,
+      "rawTokens": 76
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 390,
+      "rawTokens": 229
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x179/fixtures/python_cpython-classes.rst",
+      "tokens": 22377,
+      "rawTokens": 8632
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "tokens": 16017,
+      "rawTokens": 6604
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "tokens": 14911,
+      "rawTokens": 6704
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x181/fixtures/python_cpython-errors.rst",
+      "tokens": 14638,
+      "rawTokens": 5790
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "tokens": 3408,
+      "rawTokens": 1480
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x182/fixtures/gitworkflows.adoc",
+      "tokens": 10242,
+      "rawTokens": 3838
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x184/fixtures/git_git-git-restore.adoc",
+      "tokens": 4554,
+      "rawTokens": 1869
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "tokens": 18225,
+      "rawTokens": 7107
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x191/fixtures/git_git-gitcredentials.adoc",
+      "tokens": 7153,
+      "rawTokens": 2595
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x191/fixtures/rust-lang_book-ch05-01-defining-structs.md",
+      "tokens": 8313,
+      "rawTokens": 3450
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 9026,
+      "rawTokens": 5194
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 5500,
+      "rawTokens": 3054
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 1912,
+      "rawTokens": 1152
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 2212,
+      "rawTokens": 811
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 1731,
+      "rawTokens": 1034
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 266,
+      "rawTokens": 140
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 982,
+      "rawTokens": 733
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 1132,
+      "rawTokens": 570
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 895,
+      "rawTokens": 629
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 785,
+      "rawTokens": 458
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 144,
+      "rawTokens": 60
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 183,
+      "rawTokens": 80
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 2190,
+      "rawTokens": 1006
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 1746,
+      "rawTokens": 1422
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 1226,
+      "rawTokens": 1099
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 951,
+      "rawTokens": 787
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 1170,
+      "rawTokens": 513
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 2337,
+      "rawTokens": 1144
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 307,
+      "rawTokens": 158
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 2163,
+      "rawTokens": 1106
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 1282,
+      "rawTokens": 582
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 1298,
+      "rawTokens": 675
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 640,
+      "rawTokens": 330
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 730,
+      "rawTokens": 656
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 969,
+      "rawTokens": 578
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 170,
+      "rawTokens": 76
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 463,
+      "rawTokens": 229
+    },
+    {
+      "family": "delta",
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "tokens": 7497,
+      "rawTokens": 6604
+    },
+    {
+      "family": "delta",
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "tokens": 9113,
+      "rawTokens": 6704
+    },
+    {
+      "family": "delta",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "tokens": 2247,
+      "rawTokens": 1480
+    },
+    {
+      "family": "delta",
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "tokens": 8098,
+      "rawTokens": 7107
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 7002,
+      "rawTokens": 5194
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 5814,
+      "rawTokens": 3054
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "tokens": 4502,
+      "rawTokens": 1000
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 2819,
+      "rawTokens": 1152
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 898,
+      "rawTokens": 811
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 1637,
+      "rawTokens": 1034
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 322,
+      "rawTokens": 140
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 1161,
+      "rawTokens": 733
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 757,
+      "rawTokens": 570
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 960,
+      "rawTokens": 629
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 584,
+      "rawTokens": 458
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 122,
+      "rawTokens": 60
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 183,
+      "rawTokens": 80
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 2498,
+      "rawTokens": 1006
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 2455,
+      "rawTokens": 1422
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "tokens": 2687,
+      "rawTokens": 2739
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 6172,
+      "rawTokens": 1099
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 3266,
+      "rawTokens": 787
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 681,
+      "rawTokens": 513
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 2778,
+      "rawTokens": 1144
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 342,
+      "rawTokens": 158
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 2150,
+      "rawTokens": 1106
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 623,
+      "rawTokens": 582
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 1127,
+      "rawTokens": 675
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 480,
+      "rawTokens": 330
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 1262,
+      "rawTokens": 656
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 835,
+      "rawTokens": 578
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 350,
+      "rawTokens": 76
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 436,
+      "rawTokens": 229
+    },
+    {
+      "family": "distance",
+      "path": "bench/x179/fixtures/python_cpython-classes.rst",
+      "tokens": 16738,
+      "rawTokens": 8632
+    },
+    {
+      "family": "distance",
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "tokens": 10115,
+      "rawTokens": 6604
+    },
+    {
+      "family": "distance",
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "tokens": 10641,
+      "rawTokens": 6704
+    },
+    {
+      "family": "distance",
+      "path": "bench/x181/fixtures/python_cpython-errors.rst",
+      "tokens": 12037,
+      "rawTokens": 5790
+    },
+    {
+      "family": "distance",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "tokens": 2320,
+      "rawTokens": 1480
+    },
+    {
+      "family": "distance",
+      "path": "bench/x182/fixtures/gitworkflows.adoc",
+      "tokens": 6434,
+      "rawTokens": 3838
+    },
+    {
+      "family": "distance",
+      "path": "bench/x184/fixtures/git_git-git-restore.adoc",
+      "tokens": 2893,
+      "rawTokens": 1869
+    },
+    {
+      "family": "distance",
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "tokens": 11357,
+      "rawTokens": 7107
+    },
+    {
+      "family": "distance",
+      "path": "bench/x191/fixtures/git_git-gitcredentials.adoc",
+      "tokens": 4433,
+      "rawTokens": 2595
+    },
+    {
+      "family": "distance",
+      "path": "bench/x191/fixtures/rust-lang_book-ch05-01-defining-structs.md",
+      "tokens": 5373,
+      "rawTokens": 3450
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 6234,
+      "rawTokens": 5194
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 3696,
+      "rawTokens": 3054
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "tokens": 1629,
+      "rawTokens": 1000
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 1988,
+      "rawTokens": 1152
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 798,
+      "rawTokens": 811
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 1440,
+      "rawTokens": 1034
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 204,
+      "rawTokens": 140
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 1373,
+      "rawTokens": 733
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 722,
+      "rawTokens": 570
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 1104,
+      "rawTokens": 629
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 898,
+      "rawTokens": 458
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 104,
+      "rawTokens": 60
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 126,
+      "rawTokens": 80
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 1347,
+      "rawTokens": 1006
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 3068,
+      "rawTokens": 1422
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "tokens": 3652,
+      "rawTokens": 2739
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 2365,
+      "rawTokens": 1099
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 1233,
+      "rawTokens": 787
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 776,
+      "rawTokens": 513
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 1534,
+      "rawTokens": 1144
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 226,
+      "rawTokens": 158
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 1416,
+      "rawTokens": 1106
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 678,
+      "rawTokens": 582
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 996,
+      "rawTokens": 675
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 454,
+      "rawTokens": 330
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 1545,
+      "rawTokens": 656
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 833,
+      "rawTokens": 578
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 141,
+      "rawTokens": 76
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 299,
+      "rawTokens": 229
+    },
+    {
+      "family": "parity",
+      "path": "bench/x179/fixtures/python_cpython-classes.rst",
+      "tokens": 17962,
+      "rawTokens": 8632
+    },
+    {
+      "family": "parity",
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "tokens": 12825,
+      "rawTokens": 6604
+    },
+    {
+      "family": "parity",
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "tokens": 11812,
+      "rawTokens": 6704
+    },
+    {
+      "family": "parity",
+      "path": "bench/x181/fixtures/python_cpython-errors.rst",
+      "tokens": 11697,
+      "rawTokens": 5790
+    },
+    {
+      "family": "parity",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "tokens": 2578,
+      "rawTokens": 1480
+    },
+    {
+      "family": "parity",
+      "path": "bench/x182/fixtures/gitworkflows.adoc",
+      "tokens": 7709,
+      "rawTokens": 3838
+    },
+    {
+      "family": "parity",
+      "path": "bench/x184/fixtures/git_git-git-restore.adoc",
+      "tokens": 3529,
+      "rawTokens": 1869
+    },
+    {
+      "family": "parity",
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "tokens": 14670,
+      "rawTokens": 7107
+    },
+    {
+      "family": "parity",
+      "path": "bench/x191/fixtures/git_git-gitcredentials.adoc",
+      "tokens": 5573,
+      "rawTokens": 2595
+    },
+    {
+      "family": "parity",
+      "path": "bench/x191/fixtures/rust-lang_book-ch05-01-defining-structs.md",
+      "tokens": 6639,
+      "rawTokens": 3450
+    }
+  ]
+}
