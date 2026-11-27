@@ -1,0 +1,5 @@
+¶ k=v. expand repeatedly; print only.
+§ب ی2ي0صیيل:ن00عببيبصل41 ?       بنلنلى      بیعاىن [ة]
+root         بأ
+root          بې]أس1م/سطليH-events_highpriزdجلسH-kblockزر/يضmm_percpu_wqهاkڪاrcuفهsoftirqزوworkerكاcpuhpشهومت      بيعنبد_gpئmigration¶# sourceل ps -efب(real)
+UID          PID    PPID  C STIME TTY          TIME CMDأست/sbin/initأیت[kthreadزې3ڪدې4ڪ_parدې5اslub_flushwqې6اnetnsې8هورطة10اضةسسڪ_tasks_kthreadةسیڪ_tasks_trace_kthreadة13فرة14ى01 [rcu_preemptة15ائرة17كرة18كمة19ائمةصفمة22شطة25هdevtmpfsة26اinet_frag_wqة27هauditزة28شل1-ضة29هhungtaskزة30اoom_reaperة31اwritebackة32هcompactزية33هsmزة34هhugepagedة35هintegrityزة36هblockزة37اblkcg_punt_bioة38اwatchdogزة39اrpcioزة40شجة41اxprtioزة6سهswapزية65اnfsiodة67هورجة70اxfsalloc]

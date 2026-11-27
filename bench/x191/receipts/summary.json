@@ -1,0 +1,224 @@
+{
+  "frontier": {
+    "identicalWires": 29,
+    "tokens": 11962
+  },
+  "paid": [
+    {
+      "file": "bench/x191/receipts/paid-00.json",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "mode": "selected",
+      "tokens": 1118,
+      "parentTokens": 980,
+      "status": "exact",
+      "branched": 6
+    },
+    {
+      "file": "bench/x191/receipts/paid-01.json",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "mode": "selected",
+      "tokens": 551,
+      "parentTokens": 414,
+      "status": "exact",
+      "branched": 4
+    },
+    {
+      "file": "bench/x191/receipts/paid-02.json",
+      "path": "bench/holdout-work/llm-answer.md",
+      "mode": "selected",
+      "tokens": 816,
+      "parentTokens": 664,
+      "status": "exact",
+      "branched": 0
+    },
+    {
+      "file": "bench/x191/receipts/paid-03.json",
+      "path": "bench/holdout-work/email-thread.txt",
+      "mode": "selected",
+      "tokens": 629,
+      "parentTokens": 486,
+      "status": "exact",
+      "branched": 2
+    },
+    {
+      "file": "bench/x191/receipts/paid-04.json",
+      "path": "bench/holdout/code-ts.txt",
+      "mode": "selected",
+      "tokens": 1171,
+      "parentTokens": 949,
+      "status": "exact",
+      "branched": 11
+    },
+    {
+      "file": "bench/x191/receipts/paid-05.json",
+      "path": "bench/holdout-x41/node-help.txt",
+      "mode": "selected",
+      "tokens": 994,
+      "parentTokens": 846,
+      "status": "exact",
+      "branched": 0
+    },
+    {
+      "file": "bench/x191/receipts/paid-06.json",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "mode": "selected",
+      "tokens": 417,
+      "parentTokens": 296,
+      "status": "exact",
+      "branched": 39
+    },
+    {
+      "file": "bench/x191/receipts/paid-07.json",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "mode": "selected",
+      "tokens": 567,
+      "parentTokens": 411,
+      "status": "exact",
+      "branched": 0
+    },
+    {
+      "file": "bench/x191/receipts/paid-08.json",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "mode": "selected",
+      "tokens": 264,
+      "parentTokens": 144,
+      "status": "exact",
+      "branched": 0
+    },
+    {
+      "file": "bench/x191/receipts/paid-10.json",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "mode": "selected",
+      "tokens": 1373,
+      "parentTokens": null,
+      "status": "reader-refused",
+      "branched": 0
+    }
+  ],
+  "processes": [
+    {
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "mode": "selected",
+      "output": "bench/x191/receipts/paid-00.json",
+      "status": "complete",
+      "wallSeconds": 171.07650493300002,
+      "capSeconds": 180
+    },
+    {
+      "path": "bench/holdout-x41/ls-real.txt",
+      "mode": "selected",
+      "output": "bench/x191/receipts/paid-01.json",
+      "status": "complete",
+      "wallSeconds": 51.81615742099984,
+      "capSeconds": 180
+    },
+    {
+      "path": "bench/holdout-work/llm-answer.md",
+      "mode": "selected",
+      "output": "bench/x191/receipts/paid-02.json",
+      "status": "complete",
+      "wallSeconds": 30.703815638999913,
+      "capSeconds": 180
+    },
+    {
+      "path": "bench/holdout-work/email-thread.txt",
+      "mode": "selected",
+      "output": "bench/x191/receipts/paid-03.json",
+      "status": "complete",
+      "wallSeconds": 39.71140544800005,
+      "capSeconds": 180
+    },
+    {
+      "path": "bench/holdout/code-ts.txt",
+      "mode": "selected",
+      "output": "bench/x191/receipts/paid-04.json",
+      "status": "complete",
+      "wallSeconds": 92.09583883000005,
+      "capSeconds": 180
+    },
+    {
+      "path": "bench/holdout-x41/node-help.txt",
+      "mode": "selected",
+      "output": "bench/x191/receipts/paid-05.json",
+      "status": "complete",
+      "wallSeconds": 27.41072987199982,
+      "capSeconds": 180
+    },
+    {
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "mode": "selected",
+      "output": "bench/x191/receipts/paid-06.json",
+      "status": "complete",
+      "wallSeconds": 21.880918990000055,
+      "capSeconds": 180
+    },
+    {
+      "path": "bench/holdout-work/unified-diff.patch",
+      "mode": "selected",
+      "output": "bench/x191/receipts/paid-07.json",
+      "status": "complete",
+      "wallSeconds": 15.63737742000012,
+      "capSeconds": 180
+    },
+    {
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "mode": "selected",
+      "output": "bench/x191/receipts/paid-08.json",
+      "status": "complete",
+      "wallSeconds": 7.921990851999908,
+      "capSeconds": 180
+    },
+    {
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "mode": "selected",
+      "output": "bench/x191/receipts/paid-09.json",
+      "status": "timeout",
+      "wallSeconds": 180.0427969530001,
+      "capSeconds": 180
+    },
+    {
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "mode": "selected",
+      "output": "bench/x191/receipts/paid-10.json",
+      "status": "complete",
+      "wallSeconds": 61.76509647299986,
+      "capSeconds": 180
+    }
+  ],
+  "wins": [],
+  "broadAccepted": false,
+  "native": "NOT_RUN",
+  "novelty": "NOT_ESTABLISHED",
+  "speed": {
+    "cpuMs": 1.3599571556646635,
+    "wallMs": 1.349171445401761,
+    "laneRatios": {
+      "bench/holdout-work/kb-article.txt": {
+        "cpuMs": 1.2581294101970713,
+        "wallMs": 1.2552618657082903
+      },
+      "bench/holdout/json-pkg.txt": {
+        "cpuMs": 1.2877937642066335,
+        "wallMs": 1.2740349307193564
+      },
+      "bench/holdout-x41/ps-real.txt": {
+        "cpuMs": 1.3644699200152712,
+        "wallMs": 1.340436510890422
+      },
+      "bench/holdout-work/email-thread.txt": {
+        "cpuMs": 1.4756551109190024,
+        "wallMs": 1.4767195153506874
+      },
+      "bench/holdout-work/unified-diff.patch": {
+        "cpuMs": 1.3044547193380027,
+        "wallMs": 1.3122716130523213
+      },
+      "bench/holdout-x41/node-help.txt": {
+        "cpuMs": 1.405365900505537,
+        "wallMs": 1.3922410545833928
+      }
+    },
+    "accepted": false,
+    "identicalWires": 24
+  }
+}

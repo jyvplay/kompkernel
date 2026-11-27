@@ -1,0 +1,12 @@
+[
+  {
+    "path": "bench/x191/fixtures/git_git-gitcredentials.adoc",
+    "raw": 2595,
+    "plans": []
+  },
+  {
+    "path": "bench/x191/fixtures/rust-lang_book-ch05-01-defining-structs.md",
+    "raw": 3450,
+    "plans": []
+  }
+]

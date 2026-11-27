@@ -1,0 +1,7 @@
+¶k=v expand repeatedly Header n,sep,col=model; named cols drop+rebuild; full n-field line literal,resets,drop. above=prev line, colM=col M same line, days/workdays=next date/weekday, +b=above+b same width print only.
+§я |ю|а-ш 2026ас |
+юшия active   сл01ья pending  сг05оя closed   сі+----+--------------+------------+--------+-----------+
+Ҡ=+1;щ 100.00н10х02ҭ03в04Д06б07т08¶<7;ю;2Ҡ3Ҡ5=lin:щ /3,730>
+ію idя name        я created   я amountя status    |
+ію ня user_0000   яшлалящихахьҭаҭовавигагьДаДобабитать09а09онани11а11ь12а12ола13иха14ьҭа15ова16ига17ьДа18оба19ита20ь09а21она22и11а23ь12а24я closed    |
+і(24 rows)

@@ -1,0 +1,46 @@
+{
+  "checks": 67,
+  "attacks": 23,
+  "paid": [
+    {
+      "file": "bench/x191/receipts/paid-01.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x191/receipts/paid-02.json",
+      "status": "unsupported",
+      "error": "unsupported instruction envelope"
+    },
+    {
+      "file": "bench/x191/receipts/paid-03.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x191/receipts/paid-04.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x191/receipts/paid-05.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x191/receipts/paid-06.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x191/receipts/paid-07.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x191/receipts/paid-08.json",
+      "status": "exact"
+    },
+    {
+      "file": "bench/x191/receipts/paid-10.json",
+      "status": "unsupported",
+      "error": "unsupported instruction envelope"
+    }
+  ],
+  "native": "NOT_RUN",
+  "independentPersonnel": false
+}

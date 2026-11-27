@@ -1,0 +1,20 @@
+{
+  "path": "bench/holdout-x42b/vmstat.txt",
+  "mode": "selected",
+  "folded": "[[[\"2140656\",\"\"],[\"\",\"53860\"],[\"53860\",\"596816\"]],\"# source: vmstat 1 3 (real, captured 2026-10-24T23:21:26Z)\\nprocs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----\\n r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st\\n 2  0      0 2140656 ~2; 596816    0    0    12    59  268  433 54  1 45  0  0\\n 2  0      0 2140656 ~2; 596816    0    0     0     0  494  545 51  1 49  0  0\\n 2  0      0 2140656 ~2; 596816    0    0     0     0  445  367 50  1 49  0  0\\n\"]",
+  "edges": 3,
+  "branched": 0,
+  "output": "bench/x191/receipts/paid-08.json",
+  "parent": "¶ k=v. expand repeatedly; print only.\n§ا نا0يا ال\\n 2 ني انا2140656 ~2; 596816ينيی اسانری1 وياع نسلنون این اف49ت268ب45¶[[[\"2140656\",\"\"],[\"\",\"53860\"],[\"53860\",\"596816\"]],\"# source: vmstatا1ا3 (real, capturedا2026-10-24T23:21:26Z)\\nprocs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----\\n rا b   swpd   free   buffا cache   si   soي biي bo   in   cs us sy id wa stلنيا12يا59یتی433ا54ربع494ی545ا51رفع445ی367ا50رفسس\\n\"]",
+  "message": "Decode payload first. JSON [rows,body]. Each row [field,successors] lists allowed next fields; split successors and body on ASCII spaces retaining empty fields. In body, ~N; replaces N fields: fill them with the UNIQUE directed walk of N+1 edges from the preceding literal field to the following literal field in rows. Endpoints stay once; reject absent or ambiguous walks. Join fields with ASCII spaces, preserve every other character; print only.\n¶ k=v. expand repeatedly; print only.\n§ا نا0يا ال\\n 2 ني انا2140656 ~2; 596816ينيی اسانری1 وياع نسلنون این اف49ت268ب45¶[[[\"2140656\",\"\"],[\"\",\"53860\"],[\"53860\",\"596816\"]],\"# source: vmstatا1ا3 (real, capturedا2026-10-24T23:21:26Z)\\nprocs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----\\n rا b   swpd   free   buffا cache   si   soي biي bo   in   cs us sy id wa stلنيا12يا59یتی433ا54ربع494ی545ا51رفع445ی367ا50رفسس\\n\"]",
+  "tokens": 264,
+  "parentTokens": 170,
+  "keyMarginal": 94,
+  "status": "exact",
+  "cpu": {
+    "user": 5289677,
+    "system": 103019
+  },
+  "ms": 7349.856336,
+  "native": "NOT_RUN"
+}

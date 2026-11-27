@@ -1,0 +1,5 @@
+¶ k=v. expand repeatedly; print only.
+§а ә аса ака0е
+ 2 кас ка2140656 а53860 596816ска аиако а1 ы какексиси ан49л268д45¶# source: vmstatа1а3 (real, capturedа2026-10-24T23:21:26Z)
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ rа b   swpd   free   buffа cache   si   soс biс bo   in   cs us sy id wa stекса12са59әлә433а54оды494ә545а51оны445ә367а50онии

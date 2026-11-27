@@ -1,0 +1,344 @@
+[
+  {
+    "id": "8217976dbcef03ca",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/8217976dbcef03ca.txt",
+    "promptSha256": "2a1ac160b7e2dbcaf9df43a1da24e35d3980e799965d19811eb1ab048032205e",
+    "expected": "bench/holdout-x41/ls-l-real.txt",
+    "expectedSha256": "82572e90c7619baad4690b42704b29002a4c7c0a70acc8b35193431ff6286cfa",
+    "tokens": 1310
+  },
+  {
+    "id": "f7d0edecc716582d",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/f7d0edecc716582d.txt",
+    "promptSha256": "93c33236da364153e9aaf69244ed08f87bb487eec360912fe0c2a93e5f53f3a6",
+    "expected": "bench/holdout-x41/ps-aux-real.txt",
+    "expectedSha256": "b54eaf4147ffa2c62b3a0e4f4f3abbe4ec81ff4b5faf086ca4d1f23a99fbd07f",
+    "tokens": 980
+  },
+  {
+    "id": "70e5c448435dfd58",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/70e5c448435dfd58.txt",
+    "promptSha256": "a0edc2420d05c854fd345fca96ec41499236a38ed2775b167d82fb9d3e0a1439",
+    "expected": "bench/holdout-x42/dpkg-l.txt",
+    "expectedSha256": "dd56d8ef6a3aad7ae915bd6893a4f9a5bdc7d38aeab3626d036877f88a9c4677",
+    "tokens": 623
+  },
+  {
+    "id": "eaad38b0166a123f",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/eaad38b0166a123f.txt",
+    "promptSha256": "a1f0d05660ef539e9794b376f00ef355eb096bdb424740f5b3e989c751e67b40",
+    "expected": "bench/holdout/json-pkg.txt",
+    "expectedSha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6",
+    "tokens": 653
+  },
+  {
+    "id": "5feb5b2e4d55b3b0",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/5feb5b2e4d55b3b0.txt",
+    "promptSha256": "dab42a595338a313b9c9c49b79cb8876ed007e34858edd887ad6227b91975c37",
+    "expected": "bench/holdout-x40/metrics.tsv",
+    "expectedSha256": "b367e8d7ab00c2e3f9a63da90d6a68968bf7d29fd8d41b37f1ed3188edf1ac70",
+    "tokens": 197
+  },
+  {
+    "id": "fdf406ef2ba9a33a",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/fdf406ef2ba9a33a.txt",
+    "promptSha256": "622118362a3e0ca37681f7606cd38f59d23708252868d5bb0e2b84b64afebbd4",
+    "expected": "bench/holdout-x41/ls-real.txt",
+    "expectedSha256": "0e1c90bab677cd8efc3eff74e6ea7092797746854d086051e6c15498a219152b",
+    "tokens": 414
+  },
+  {
+    "id": "caa206efba11abc7",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/caa206efba11abc7.txt",
+    "promptSha256": "fbb582d89dc95e9351d74bc96cbfd6feceb537aec1608fcccd759fc6feacd380",
+    "expected": "bench/holdout-x42/df-h.txt",
+    "expectedSha256": "6a82bbf1872d768282c8ad2244235253b485f44f76d347799f6f33cab29966e8",
+    "tokens": 105
+  },
+  {
+    "id": "616641a12e14f904",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/616641a12e14f904.txt",
+    "promptSha256": "3bf571ebb3f22eaba254ccd23e92781f81f0e6dc5a882329b85bc922742632d3",
+    "expected": "bench/holdout-work/llm-answer.md",
+    "expectedSha256": "7c5c7f1929a6da13fad81a2a6f5c55106cf70105c356a03deca8c5cb15c280bf",
+    "tokens": 664
+  },
+  {
+    "id": "e2997f002bf56503",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/e2997f002bf56503.txt",
+    "promptSha256": "419ec5987612bf200088db71113cbfcbab34b113482444884cb10d318327f176",
+    "expected": "bench/holdout-tbl/df-h.txt",
+    "expectedSha256": "ee931228f00d4d8516ce8440ffe8e0e2f6663a4dd8a2d02b895437d7f43c1d4a",
+    "tokens": 160
+  },
+  {
+    "id": "e1fb186c0a458989",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/e1fb186c0a458989.txt",
+    "promptSha256": "1e4eebe7cd5997f4fdb6c28e9cf76120cfcfe3204a3589ffc775f5a3cf3b9eae",
+    "expected": "bench/holdout-work/email-thread.txt",
+    "expectedSha256": "fb609b06e6f995f5fd1465b86e19da67e52c75643015e2ab8ef654644ae01324",
+    "tokens": 486
+  },
+  {
+    "id": "4506e3d76827d553",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/4506e3d76827d553.txt",
+    "promptSha256": "c4452288e301237b6ba95032549fcd08285ca184e87fa9fd268655967cf2828c",
+    "expected": "bench/holdout-x41/du-real.txt",
+    "expectedSha256": "00646d747b2a2fab383aadc6fd9627ad01b42e9459417308a4b583274e8aace2",
+    "tokens": 266
+  },
+  {
+    "id": "014507660c71e30f",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/014507660c71e30f.txt",
+    "promptSha256": "6c01e1a891869dfcf63f1cd2f4cf81930f51dbf3459243681cce3d752687c496",
+    "expected": "bench/holdout-x42/lsblk.txt",
+    "expectedSha256": "6c01e1a891869dfcf63f1cd2f4cf81930f51dbf3459243681cce3d752687c496",
+    "tokens": 60
+  },
+  {
+    "id": "c25cde917abd0708",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/c25cde917abd0708.txt",
+    "promptSha256": "d57da79a4bfc7b0bfad09641d429f7ff139a4b354f47ddea07eed9d717e84ae6",
+    "expected": "bench/holdout-x42b/uptime-w.txt",
+    "expectedSha256": "d57da79a4bfc7b0bfad09641d429f7ff139a4b354f47ddea07eed9d717e84ae6",
+    "tokens": 80
+  },
+  {
+    "id": "218979bf9fd8ef06",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/218979bf9fd8ef06.txt",
+    "promptSha256": "0ae628e0b97e5fad80fb7864899199d9e0e0f9dc126bee48e6f5f805020673ec",
+    "expected": "bench/holdout-tbl/kubectl-get-pods.txt",
+    "expectedSha256": "165c9837bef4f6c062403b00e44c399b9abfca455ae1040e7f4803f936c6d014",
+    "tokens": 300
+  },
+  {
+    "id": "48e461980b0adb11",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/48e461980b0adb11.txt",
+    "promptSha256": "d814993dfddb37279091cdbb7234ad669f78c96198269961d9b1dab8054ccfea",
+    "expected": "bench/holdout/code-ts.txt",
+    "expectedSha256": "9567accc566c445b81a6c035c865aec6d7078e3bb56c62784de3f176aac8017d",
+    "tokens": 949
+  },
+  {
+    "id": "0aa29cb7be2c9a2b",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/0aa29cb7be2c9a2b.txt",
+    "promptSha256": "c6d928c92b89670fa72489d854740c0f74c94705a7d4e22b7aae04899d7e61e0",
+    "expected": "bench/holdout-x41/apt-real.txt",
+    "expectedSha256": "02cc179c781dc97439b9f122feffa7354dc7a2efce0da87db9c4f21c6cc8559b",
+    "tokens": 813
+  },
+  {
+    "id": "afda6da792f04729",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/afda6da792f04729.txt",
+    "promptSha256": "3c932c2afc749d8e2b2d384b5a65137fbf0407ef1c26b517b1b19666e896ddb8",
+    "expected": "bench/holdout-x41/node-help.txt",
+    "expectedSha256": "197c018cbe936e15fb52b81073b14b30b2f9042fe11ad806a129406a48586c3e",
+    "tokens": 846
+  },
+  {
+    "id": "1b8e43e5dc4c2fc1",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/1b8e43e5dc4c2fc1.txt",
+    "promptSha256": "2c2305698ae048cf5a496f03a8cd7f7e1d3e7ded074d8da79e6f70220dcb3553",
+    "expected": "bench/holdout-x42/findmnt.txt",
+    "expectedSha256": "cd9d8d7ba73a8762626f591c6e9acbc0d761f78356eac923f83a490ebe26ead9",
+    "tokens": 385
+  },
+  {
+    "id": "91f4678fb60ad52f",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/91f4678fb60ad52f.txt",
+    "promptSha256": "77cc680a88f48486b02b97dc2835ae4c64ab1a6f2435ef2c00ea787f39661dd9",
+    "expected": "bench/holdout-x40/cue-sheet.md",
+    "expectedSha256": "3a5c59381dfb07f5026cdddbd21324001024fead941f9469b4b6857ccb316cf0",
+    "tokens": 101
+  },
+  {
+    "id": "b110a50d3054f83d",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/b110a50d3054f83d.txt",
+    "promptSha256": "a49d577d1267a7c6ec90aa88764f0856a0973f362b9772870f2821cc579797b6",
+    "expected": "bench/holdout-x42/ps-ef.txt",
+    "expectedSha256": "36bd1376a952d8882b5be08d4742ea1ce1ae7aeeafb2397c261133d6431a7861",
+    "tokens": 296
+  },
+  {
+    "id": "ba2271a1fd886ebd",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/ba2271a1fd886ebd.txt",
+    "promptSha256": "480d50a6b90489efeaab184831aea7ff952afafd51653c8634b74fe1f823856e",
+    "expected": "bench/holdout-x41/df-real.txt",
+    "expectedSha256": "8bc9354fd729fcb139f6a632b82ef6b1b7625df5fe0f80a2b9e394a33cf27a08",
+    "tokens": 123
+  },
+  {
+    "id": "600b1723624ff941",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/600b1723624ff941.txt",
+    "promptSha256": "ed9795cdb6379a1fd5dbe28f61dd2e76bbb5bdf1822151c1dfb35a762688c76a",
+    "expected": "bench/holdout-x41/ps-real.txt",
+    "expectedSha256": "a52339a22f70d2d4a3503f5f1ea86b7b232710d9e1074df6aca8dc3448b59eb4",
+    "tokens": 381
+  },
+  {
+    "id": "666cffb7de6a3f8f",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/666cffb7de6a3f8f.txt",
+    "promptSha256": "9e50e78aaf195da7bc4339f857559004a60406779b5a36231694e8d0793f2aea",
+    "expected": "bench/holdout-x40/prices.csv",
+    "expectedSha256": "3508328c11635ad0816cb2c6298cef6d040a57d854bef8e942fd12ebf6d8fa22",
+    "tokens": 118
+  },
+  {
+    "id": "7a837cc032dca985",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/7a837cc032dca985.txt",
+    "promptSha256": "138d8ab372f7f264d29e350f5ec4252257bc6c5427da29d5da6fb2bc2009e34c",
+    "expected": "bench/holdout-tbl/psql-output.txt",
+    "expectedSha256": "e3cc5365f7c1bfae8950d915131bcf8e13192bdc62e0e981152093bf27814946",
+    "tokens": 229
+  },
+  {
+    "id": "0e16875aaaa024f9",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/0e16875aaaa024f9.txt",
+    "promptSha256": "421ff1bcb2e009308543bc9473726065fb545eeb662e7e6b73e3f9ae3b664dce",
+    "expected": "bench/holdout-tbl/markdown-table.md",
+    "expectedSha256": "043e61c99c48b9d1baf8f6e64d8a0d5188446be39606d0cfae15dd902586acca",
+    "tokens": 172
+  },
+  {
+    "id": "bc04e845b9e345cd",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/bc04e845b9e345cd.txt",
+    "promptSha256": "b62e84ee6cf6630198e68503804b82e1503acaa9b61c4ee410407752edb01483",
+    "expected": "bench/holdout-work/kb-article.txt",
+    "expectedSha256": "d220bfb7a912670e0217b99760f41d40f41e7fab5ceda93f552aebf5ee4744c6",
+    "tokens": 620
+  },
+  {
+    "id": "d7ccbae33dc71962",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/d7ccbae33dc71962.txt",
+    "promptSha256": "2b82272ac833260ce16527b49552a1cc151ad5734c3300f1d7b5bf35d16bebdf",
+    "expected": "bench/holdout-work/unified-diff.patch",
+    "expectedSha256": "ff6cc959f8d6c19505c6d1939b667a3ea3bfcf2a57a3e77d5c8ce9d255823d30",
+    "tokens": 411
+  },
+  {
+    "id": "ca15d281c233f1ee",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/ca15d281c233f1ee.txt",
+    "promptSha256": "0d0194b9ede575d9a4697a04563d1bb2b4f1f269c2103b2f08e95302297b6612",
+    "expected": "bench/holdout-x42b/free-m.txt",
+    "expectedSha256": "0d0194b9ede575d9a4697a04563d1bb2b4f1f269c2103b2f08e95302297b6612",
+    "tokens": 76
+  },
+  {
+    "id": "221d4c99f63347bd",
+    "kind": "canonical",
+    "prompt": "bench/x191/native/public/221d4c99f63347bd.txt",
+    "promptSha256": "5924677c9ce144492afb4297b8d2c037994754500a7e551cb649db65a1121181",
+    "expected": "bench/holdout-x42b/vmstat.txt",
+    "expectedSha256": "6014b6f656172eb8350b788d2fef149853fbe0869f420dc8ae72acae35690083",
+    "tokens": 144
+  },
+  {
+    "id": "17dc6c3152a0c630",
+    "kind": "diexodos",
+    "prompt": "bench/x191/native/public/17dc6c3152a0c630.txt",
+    "promptSha256": "f2ad4c82e6a5160414be56b8862393fca876ca40a6c4843bf69c919eefc0c21d",
+    "expected": "bench/holdout-x41/ps-aux-real.txt",
+    "expectedSha256": "b54eaf4147ffa2c62b3a0e4f4f3abbe4ec81ff4b5faf086ca4d1f23a99fbd07f",
+    "tokens": 1118
+  },
+  {
+    "id": "7eb6f6aef17d712d",
+    "kind": "diexodos",
+    "prompt": "bench/x191/native/public/7eb6f6aef17d712d.txt",
+    "promptSha256": "ec6f8c61bd788dc0bb7c0e37729a83c3c43e070726995911b5ef3942310ddffd",
+    "expected": "bench/holdout-x41/ls-real.txt",
+    "expectedSha256": "0e1c90bab677cd8efc3eff74e6ea7092797746854d086051e6c15498a219152b",
+    "tokens": 551
+  },
+  {
+    "id": "a40e6327bdd37c4f",
+    "kind": "diexodos",
+    "prompt": "bench/x191/native/public/a40e6327bdd37c4f.txt",
+    "promptSha256": "6554aad6c037cde8baa21c1e4aabbd11659abfde60dfd428ab8af263ec1a8ec2",
+    "expected": "bench/holdout-work/llm-answer.md",
+    "expectedSha256": "7c5c7f1929a6da13fad81a2a6f5c55106cf70105c356a03deca8c5cb15c280bf",
+    "tokens": 816
+  },
+  {
+    "id": "13638b210f739bd9",
+    "kind": "diexodos",
+    "prompt": "bench/x191/native/public/13638b210f739bd9.txt",
+    "promptSha256": "873c0d72fa80468dce24411c7de6f572f058b3ba00f3655d8c1217ed84b497af",
+    "expected": "bench/holdout-work/email-thread.txt",
+    "expectedSha256": "fb609b06e6f995f5fd1465b86e19da67e52c75643015e2ab8ef654644ae01324",
+    "tokens": 629
+  },
+  {
+    "id": "bcbb3b504f942f24",
+    "kind": "diexodos",
+    "prompt": "bench/x191/native/public/bcbb3b504f942f24.txt",
+    "promptSha256": "23fbee18ffafda301b3a93ff7b273c7fdff8bcf2e7e67bac658389a38992a6e9",
+    "expected": "bench/holdout/code-ts.txt",
+    "expectedSha256": "9567accc566c445b81a6c035c865aec6d7078e3bb56c62784de3f176aac8017d",
+    "tokens": 1171
+  },
+  {
+    "id": "52ea8e67db325848",
+    "kind": "diexodos",
+    "prompt": "bench/x191/native/public/52ea8e67db325848.txt",
+    "promptSha256": "b5cc4193baeb5baf912bb8afa8456fcb5d19be4fe4a3a18e50d079adca82fbc9",
+    "expected": "bench/holdout-x41/node-help.txt",
+    "expectedSha256": "197c018cbe936e15fb52b81073b14b30b2f9042fe11ad806a129406a48586c3e",
+    "tokens": 994
+  },
+  {
+    "id": "c1778211ecfc7d05",
+    "kind": "diexodos",
+    "prompt": "bench/x191/native/public/c1778211ecfc7d05.txt",
+    "promptSha256": "47970b2d4d3928dd404aa8ec72955c8ffdb261729a5d639b7acf516b6ca7467b",
+    "expected": "bench/holdout-x42/ps-ef.txt",
+    "expectedSha256": "36bd1376a952d8882b5be08d4742ea1ce1ae7aeeafb2397c261133d6431a7861",
+    "tokens": 417
+  },
+  {
+    "id": "8935a880a4a6406b",
+    "kind": "diexodos",
+    "prompt": "bench/x191/native/public/8935a880a4a6406b.txt",
+    "promptSha256": "91f1a43af97e3603beb27f0b3c7fbec5824517482ab4ab8cf7a74dd261b9c4ea",
+    "expected": "bench/holdout-work/unified-diff.patch",
+    "expectedSha256": "ff6cc959f8d6c19505c6d1939b667a3ea3bfcf2a57a3e77d5c8ce9d255823d30",
+    "tokens": 567
+  },
+  {
+    "id": "088d7965b55da319",
+    "kind": "diexodos",
+    "prompt": "bench/x191/native/public/088d7965b55da319.txt",
+    "promptSha256": "523114e2cb5f171e87e1353d019e76b6fc461a163b58b2f7092090a7399d14e4",
+    "expected": "bench/holdout-x42b/vmstat.txt",
+    "expectedSha256": "6014b6f656172eb8350b788d2fef149853fbe0869f420dc8ae72acae35690083",
+    "tokens": 264
+  }
+]

@@ -12938,3 +12938,44 @@ quantifiers, inverse argument, adversaries and research limitations:
 X190 final replay: 29 identical wires / 11,962 tokens. CPU B/A 0.970872,
 wall 0.973625; 24 identical runtime wires, significant-speed gate rejected.
 38-message native handoff prepared; native model execution remains NOT_RUN.
+
+
+## X191 — DIEXODOS (unique fixed-length graph bridges; experimental)
+
+DIEXODOS (διέξοδος, “a way through”) transmits field-adjacency rows and a body.
+A whole field `~N;` erases exactly N fields only when the literal left/right
+endpoints admit exactly one N+1-edge walk. Graph edges are reusable, not a
+consumed multiset. ASCII-space splitting retains empty fields; every other
+character is literal. Rows, labels, markers and full parent/key costs are paid.
+
+Greedy: yes for frequency-based edge selection and longest eligible gap at each
+anchor. The uniqueness subroutine is exact dynamic programming, not greedy.
+After selection, unused edges are pruned to the union of witnessed bridge edges;
+selected paths remain and edge deletion cannot create new alternatives. This is
+not global token-optimal search. Twelve bounded configurations are compared.
+
+Bounds: source/output ≤50,000 UTF-16 units; frame ≤200,000; ≤256 source rows,
+≤512 edges, labels ≤96 units, gap length 1..8, ≤1,024 gaps. Per-gap inverse work
+O((N+1)E), finite work-bound rather than a wall-time guarantee; encoder bound
+O(12 F K² E) plus sorting/tokenization. Actual parent trials capped at 180 seconds.
+Classical constrained-path ancestry; different from MONODROMOS multiplicity
+consumption and APOUSIA causal prediction, but **all-stack novelty unestablished**.
+
+Related recent source (not an inherited BPE theorem): *Computing NP-hard
+Repetitiveness Measures via MAX-SAT*, ACM TALG, February 2026,
+DOI 10.1145/3777895, https://dl.acm.org/doi/10.1145/3777895 . It optimizes
+attractor/BMS/SLP size, not complete prompt tokens; valid BMS symbol references
+must terminate at literals. DIEXODOS bounded walks may contain graph cycles.
+
+23,001 JS checks; 23 malformed-frame attacks; fresh canonical/paid receipts,
+separate Python inverse and local category leaders in `bench/x191/receipts`.
+Two fresh full-source discovery documents yielded no plans. No broad Pareto or
+native acceptance; production unwired. Paged pair-cache speed experiment rejected:
+24 identical wires, CPU B/A 1.359957 and wall 1.349171 (slower). No production
+speed patch adopted. Full specification, six-mechanism portfolio, novelty limits,
+proof-source inspection and reproduction: `bench/x191/{README,model,portfolio,novelty,research}.md`.
+
+X191 final ledger: 29 identical canonical wires / 11,962 tokens; repaired paid
+phase ten complete/one timeout, nine exact/one reader refusal, zero canonical
+wins. Python canonical reader 23 exact/six unsupported. 38 native handoffs
+prepared, native NOT_RUN. Category leaders unchanged; `receipts/leaders.json`.
