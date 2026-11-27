@@ -1,0 +1,32 @@
+{
+  "cpuMs": 1.0118024457761183,
+  "wallMs": 1.0126658464309424,
+  "laneRatios": {
+    "bench/holdout-work/kb-article.txt": {
+      "cpuMs": 1.0061600771309387,
+      "wallMs": 1.0030352548070867
+    },
+    "bench/holdout/json-pkg.txt": {
+      "cpuMs": 1.0002899744706724,
+      "wallMs": 1.0003576488958095
+    },
+    "bench/holdout-x41/ps-real.txt": {
+      "cpuMs": 1.0388312676505655,
+      "wallMs": 1.0282508816788225
+    },
+    "bench/holdout-work/email-thread.txt": {
+      "cpuMs": 1.0284888626287507,
+      "wallMs": 1.0283948746690994
+    },
+    "bench/holdout-work/unified-diff.patch": {
+      "cpuMs": 0.9939733975145352,
+      "wallMs": 0.9867023888627292
+    },
+    "bench/holdout-x41/node-help.txt": {
+      "cpuMs": 1.001802711260769,
+      "wallMs": 1.0140520726176048
+    }
+  },
+  "accepted": false,
+  "identicalWires": 24
+}

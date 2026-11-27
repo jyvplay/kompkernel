@@ -1,0 +1,43 @@
+Decode payload first. Words are maximal ASCII letter runs. Replace each ^fragment with the unique DISTINCT literal word in the payload containing fragment, case-sensitive. Reference fragments are not literal words; replacements are not rescanned. Preserve everything else; print only.
+¶ k=v. expand repeatedly; print only.
+§Т classҟPartObjectи щТҟа =фи0қи for (let iаф; i <ђGroupIdңТђу,ьуТОDefinitionеу themeк);
+хьђекс validatorsш }
+э)г =>л {
+ӷэглим constўглимНаТА(classРОьҟөимо   Ма Ап if (ю; i++)лоб1єэлод ^ядNaця.slice(бу -біОАРж startIndexБ[classђ];
+КPartsужЭ(CLASS_PART_SEPARATORҫ};
+constдр;
+үлой if (^Д
+ҲДи }а configртТPartsВ call sitesДconst processClassСGroupsч conflictingClassСП modifier conflictsДУconst createClassЁ};
+// Split into separate functionsИ array2з[i];
+н returnъришивMapёўТва createClassҗ || EMPTY_^COры.lengthҩыюдmbљущуңЕМРьђеӷә     ҳ,
+¶/**
+ * Concatenates two arrays faster than the array spread operator.
+ */
+const concatArraysаи(arrayбуИӷ // Pre-allocate for better V8 optimizationДи const combinedArray = new Array(arrayбы +Иыкқ arrayбҩ[i] = arrayбзишқИҩ[arrayбы + i] =Из шиндmbр};
+
+// Factory function ensures consistent object shapesДУValidatorObjectМђу validatorэг ({
+ ңҳи validator
+});
+// Factory ensures consistent Classҟ shapeДУҟаи(nextPart = new Map(),са nullуңэг ({
+  nextPartҳи validatorsҳиң
+});
+const CLASS_PART_SEPARATOR = '-';
+const EMPTY_CONFLICTS = [];
+// I use two dots here because one dot is used as prefix for class groups in plugins
+const ARBITRARY_PROPERTY_PREFIXаи'arbitrary..';ДУGroupUtils = configёв(configкимүчҳо conflictingClassGroupModifiersҲ м getClassђНNameгүйNa.startsWith('[') &&я.endsWith(']'))лән getђForArbitraryProperty(^Naкошомтая.splitЭк    // Classes like `-inset-б` produce an empty string as first classPart. We assume that classes for negative values are used correctly and skip it.Домжат[0] === '' &&ты > б ? би:фрон getGroupRecursiveАКьвки };
+ м getConflictingClassђsМђу hasPostfixModifierӷ ийPoє им modifierConflictsадersБо им baseConflictsачБо ийrCє ойeCoэл          // Merge base conflicts withП        индconc(^eCoудrCкә иш        // OnlyПо ондrCрәшә // Fall back to without postfix if noПо индeCoҗи ишонч[classђ]җи };
+ нлодetClҳодIdsДи };
+ҫpRМКущэў classPathsLengthатыи-жрийhs ===фєнщ.classђъм currentClassPartат[startIndex];
+ м nextClassҟащ.nextPart.get(^renкийxtCєм resultадpRАК + будxtCкопresultэн resultъмсащ.validatorsрипvalidators === nullєн undefinedъ // Build classRest string efficiently by joining fromж onwardsДөдResаж ===фи?т.joinЭ) :т.slice(startIndexэ.joinЭкөсLengthасырқ validatorsLengthюм validatorObjасзи ипvalidatorObj.validator(^Resээлән validatorObj.classђрош шин undefinedр};
+/**
+ * Get the class group ID for an arbitrary property.
+ *
+ *и@paramя - The class name to get the group ID for. Is expected to be string starting with `[` and ending with `]`.
+ */
+const ^Foаягцэ.indexOf(':') ===и-б ? undefined : ((эў contentацким colonIndex = content.^Of(':');
+ м property = content.slice(0удolкин property ? ^BI_PROPERTY_PREFIX + property : undefinedр})();
+/**
+ * Exported for testing only
+ */ДУва configўло themeҳоТСҲ н processClassGroupsАСекЁ to maintain monomorphicВСМСе)ёҟ();
+  forи(constң inТСєм groupНСБо processClassesRecursively(groupьвх шин classврҫelМGroupљеэў lenНGroupырқ lenюм classОНGroupзо processClassіх шЁ for each type to maintainдhiВОЕпtypeofТО === '^str'є processStringіуңконъпtypeofТО === 'function'є processFunctionіхонъ processObjectіхҫStМОљэўщToEditНО === '' ?щ : getPart(classҟьDefinitionкидEd.classђаңрҫFuЕпisThemeGetterАОээлодelАО(themeэущхонъпclassҟ.validators === nullєщ.validators = [];
+ шищ.valid

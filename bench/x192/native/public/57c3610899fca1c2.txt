@@ -1,0 +1,9 @@
+Decode payload first. Words are maximal ASCII letter runs. Replace each ^fragment with the unique DISTINCT literal word in the payload containing fragment, case-sensitive. Reference fragments are not literal words; replacements are not rescanned. Preserve everything else; print only.
+¶ k=v. expand repeatedly; print only.
+§а0Б а.б Ба Бы4с root    бр:ж       05ре1ісажкі50ик [н]
+    вн јkш/ү [јworkerшә [јworker/uырхв Аdдж49 /lib/systemА/systemАм
+     пкүо_percpu_wqфреH-kblockАвй-eventsэраHй_highpriгиrcuті49лиcpuhpшу2¶# sourceр ps -eo pid,user,pcpu,pmem,etime,args --sort=-pcpu (real)
+    PID USER     %CPU %MEM     ELAPSED COMMAND
+   е553 user      е04 15.7       аур59 node шtmpш_run_е539.mjs
+   е229 root     Бы Быжыа шusr/bin/envd
+    294тә3-extы-rsv-conversionвеыг_preemptвуепера-mmов есуж50 шsbin/initмыатүеф63тәуй_unboundвуыкәей_unboundх9кәа-flush-254ран284сед-journalАм67түаф19иmigrationшен252т [jbd2/vda-8вуаијsoftirqАшен306 systemd+буд-networkАм13и^ftшан320 _chrony баж49 шusr/sbin/chronyd -F ем16парейхуијthreadАх3г_gpхыг_par_gpх5иslub_flushwqх6иnetnsх8паэн еаиmmовеег_tasks_kthreadвеуг_tasks_trace_kthreadв15иmigrationшав17лав18лев22пеэв25ијdevtmpfsв26иinet_frag_wqв27ијauditАв28пер1-mmов29ијhungtaskАв3аиoom_reaperв3еиwriteback]

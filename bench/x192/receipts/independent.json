@@ -1,0 +1,5 @@
+{
+  "checks": 1720,
+  "malformedRejected": 12,
+  "scope": "MARTYS only; parent inverse separately in worker"
+}

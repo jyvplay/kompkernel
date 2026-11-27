@@ -1,0 +1,7 @@
+⁺ = number at same position above + change from two lines above.
+§ө ⁺Gгө агги  г өр% /mnt/volт⁺ш трт
+йш/devн  гоG   с/nvme0n1pдө ашейственаекстинеугае ¶Filesystem      Size  Used Avail Use% Mounted on
+/devс0   100о40о50G  30р0
+/devс1   137о51о59G  33р1
+/devкинйкинвнавнае уууууууд
+Every new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result.

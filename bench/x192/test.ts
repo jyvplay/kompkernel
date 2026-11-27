@@ -1,0 +1,14 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';import {encode} from 'gpt-tokenizer/encoding/o200k_base';import {martysUndo,martysRead,martysPlans,MARTYS_KEY} from '../../src/lib/omega/martys';
+let checks=0;const pairs:any[]=[];
+// Every subset of this lexicon, every 1..4-character fragment: independently
+// classify by distinct literal membership, including forward and duplicate witnesses.
+const vocabulary=['banana','bandana','cabana','cabin','BANANA','ananas'];let queries=0;
+for(let mask=1;mask<64;mask++){const words=vocabulary.filter((_,i)=>mask&(1<<i)),fragments=new Set<string>();for(const w of vocabulary)for(let i=0;i<w.length;i++)for(let n=1;n<=4&&i+n<=w.length;n++)fragments.add(w.slice(i,i+n));
+ for(const f of fragments){const matches=words.filter(w=>w.includes(f)),body='^'+f+'\r\n'+words.join(' ')+' '+words[0];queries++;
+  if(matches.length===1){const source=matches[0]+'\r\n'+words.join(' ')+' '+words[0];assert.equal(martysUndo(body),source);pairs.push({folded:body,source});}else assert.throws(()=>martysUndo(body));checks++;}}
+for(const [folded,source] of [['^ana banana','banana banana'],['banana ^ana','banana banana'],['  😀\0^bin\t cabin\r\n','  😀\0cabin\t cabin\r\n'],['','']]){assert.equal(martysRead(MARTYS_KEY+folded),source);pairs.push({folded,source});checks++;}
+const attacks=['^ana','^ana ^banana','^ana banana bandana','^ banana','^^a banana','a^','^abcde abcdef','^a\ud800 apple','a'.repeat(97),'apple '+Array(10001).fill('^a').join(' '),'a'.repeat(96)+' '+Array(600).fill('^aaaa').join(' '),'x'.repeat(50001)];for(const x of attacks){assert.throws(()=>martysUndo(x));checks++;}
+assert.deepEqual(martysPlans('x ^a'),[]);assert.deepEqual(martysPlans('<|endoftext|>'),[]);checks+=2;
+const files=[...fs.readFileSync('bench/x192/lanes.txt','utf8').trim().split('\n'),...JSON.parse(fs.readFileSync('bench/x182/receipts/heldout-sources.json','utf8')).map((x:any)=>x.file),...JSON.parse(fs.readFileSync('bench/x184/receipts/heldout-sources.json','utf8')).map((x:any)=>x.file),...JSON.parse(fs.readFileSync('bench/x191/receipts/heldout-sources.json','utf8')).map((x:any)=>x.file)],rows=[];
+for(const path of files){const source=fs.readFileSync(path,'utf8'),t=performance.now(),plans=martysPlans(source);for(const p of plans){assert.equal(martysUndo(p.folded),source);assert.equal(p.tokens,encode(p.message).length);pairs.push({folded:p.folded,source});checks+=2;}rows.push({path,raw:encode(source).length,ms:performance.now()-t,plans});console.log(path,plans.length,plans[0]?.tokens);}
+fs.writeFileSync('bench/x192/receipts/unit-pairs.json',JSON.stringify(pairs));fs.writeFileSync('bench/x192/receipts/attacks.json',JSON.stringify(attacks));fs.writeFileSync('bench/x192/receipts/screen.json',JSON.stringify({checks,queries,sources:files.length,rows},null,2));console.log({checks,queries,sources:files.length});

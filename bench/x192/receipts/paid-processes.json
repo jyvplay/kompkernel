@@ -1,0 +1,82 @@
+[
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "mode": "selected",
+    "output": "bench/x192/receipts/paid-01.json",
+    "status": "complete",
+    "wallSeconds": 172.051358827,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x41/ls-l-real.txt",
+    "mode": "selected",
+    "output": "bench/x192/receipts/paid-00.json",
+    "status": "timeout",
+    "wallSeconds": 180.048093076,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/llm-answer.md",
+    "mode": "selected",
+    "output": "bench/x192/receipts/paid-02.json",
+    "status": "complete",
+    "wallSeconds": 35.59852404700001,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/email-thread.txt",
+    "mode": "selected",
+    "output": "bench/x192/receipts/paid-03.json",
+    "status": "complete",
+    "wallSeconds": 27.632614023999963,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x41/node-help.txt",
+    "mode": "selected",
+    "output": "bench/x192/receipts/paid-05.json",
+    "status": "complete",
+    "wallSeconds": 60.56303439999999,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout/code-ts.txt",
+    "mode": "selected",
+    "output": "bench/x192/receipts/paid-04.json",
+    "status": "complete",
+    "wallSeconds": 95.010464249,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x42/findmnt.txt",
+    "mode": "selected",
+    "output": "bench/x192/receipts/paid-06.json",
+    "status": "complete",
+    "wallSeconds": 51.17665491699995,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/kb-article.txt",
+    "mode": "selected",
+    "output": "bench/x192/receipts/paid-08.json",
+    "status": "complete",
+    "wallSeconds": 14.556538943000021,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "mode": "selected",
+    "output": "bench/x192/receipts/paid-09.json",
+    "status": "complete",
+    "wallSeconds": 15.609842146000005,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x41/ps-real.txt",
+    "mode": "selected",
+    "output": "bench/x192/receipts/paid-07.json",
+    "status": "complete",
+    "wallSeconds": 47.84091784599997,
+    "capSeconds": 180
+  }
+]

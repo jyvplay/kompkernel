@@ -1,0 +1,18 @@
+[
+  {
+    "repo": "anthropics/zeta-23-lean",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "zeta23/Zeta23/FinalMult.lean",
+    "file": ".cache/x192/research/FinalMult.lean",
+    "sha256": "ce5f72526219ba85ade4aa870c71ca3f72e7e39f32e5b595a07798bd4fbf568c",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/zeta-23-lean",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "zeta23/Zeta23/Unconditional.lean",
+    "file": ".cache/x192/research/Unconditional.lean",
+    "sha256": "fb4cd9af8e3ed2409cfbbcb69d9a802054fd826699e1d55fdbf7054196fd3ceb",
+    "kernel": "NOT_RUN"
+  }
+]
