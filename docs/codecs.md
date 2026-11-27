@@ -12902,3 +12902,39 @@ holdout admits neither parent; native-chat testing remains NOT_RUN. The
 whole-stack streaming-regex patch is slower overall and is not shipped.
 See `bench/x189/README.md` and `bench/x189/receipts/leaders.json` for gates,
 repairs, exact source checks, limitations and refreshed category leaders.
+
+
+## X190 — DIPIGI (experimental, unwired)
+
+**DIPIGI** (“two sources”) reconstructs lexical dictionary entries from two
+earlier parents: `[l,p,m,r,s]` = first p ASCII characters of entry l + literal m
++ last s characters of entry r (s=0 is empty). String rows are literal roots;
+body `~N;` markers expand once. Full instruction and all dictionary/parent
+costs are included. Original bytes are required; no semantic normalization.
+
+Greedy/non-greedy: greedy per-row token selection within a bounded two-parent
+candidate set; non-greedy only in the limited sense of comparing six complete
+cap/order plans. Not global optimal search. Forced diagnostic mode maximizes
+coverage and is not a claimed better selector. ≤50,000 UTF-16 source units,
+64 entries, 96 ASCII characters per entry, top-eight prefix/suffix parents,
+≤4,096 pair probes per plan, 150,000-unit frame cap. These are work bounds,
+not a constant wall-time guarantee. Parent trials capped at 180 seconds each.
+
+37-source screen, 1,996 checks; 16 paid jobs (12 complete, four timeouts).
+Nine completed source-readable candidates all lose; three parent-reader
+refusals are not accepted lossless outputs. No broad Pareto/native/all-stack
+novelty acceptance. Production codec selection and tokenizer unchanged.
+Fresh frontier, finite-corpus category leaders and measured CPU/wall gate:
+`bench/x190/receipts/{summary,leaders,runtime-summary}.json`.
+
+Related source: Adam et al. (2025), *Lossless Compression with Trie-Based Shared
+Dictionary for Omics Data in Edge–Cloud Frameworks*, DOI 10.3390/jsan14020041,
+https://www.mdpi.com/2224-2708/14/2/41 . Its pre-shared dictionary and binary
+backend assumptions are not free side information here. Relative compression
+and straight-line DAG ancestry remain; no claim of new mathematics. Full spec,
+quantifiers, inverse argument, adversaries and research limitations:
+`bench/x190/{README,model,research}.md`.
+
+X190 final replay: 29 identical wires / 11,962 tokens. CPU B/A 0.970872,
+wall 0.973625; 24 identical runtime wires, significant-speed gate rejected.
+38-message native handoff prepared; native model execution remains NOT_RUN.

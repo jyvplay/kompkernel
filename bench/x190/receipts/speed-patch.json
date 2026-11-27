@@ -1,0 +1,6 @@
+{
+  "production": false,
+  "old": "    if (ascii) return mergeCount(SB, L);\n    bytes = TE.encode(chunk);",
+  "replacement": "    if (ascii) return mergeCount(SB, L);\n    // Every UTF-16 code unit needs at most 3 UTF-8 bytes (pairs need 4).\n    if (L <= Math.floor(SCRATCH_MAX / 3) && typeof TE.encodeInto === \"function\") {\n      const result = TE.encodeInto(chunk, SB);\n      if (result.read !== L) throw new Error(\"UTF-8 scratch bound\");\n      return mergeCount(SB, result.written);\n    }\n    bytes = TE.encode(chunk);",
+  "scope": "Exact UTF-8 encodeInto for short non-ASCII chunks; fallback when API absent. No reduced search or altered vocabulary."
+}

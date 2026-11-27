@@ -1,0 +1,5 @@
+⁺ = number at same position above + change from two lines above.
+§м.0	0.А
+2026-10-24T00:т	upАл:00Z	nvme0nы	⁺хы.рыма⁺яхарасл0ятол1италјаояиг	downАвхардтасјеаянх0раг¶ts	iface	in_mbps	out_mbps	loss_pct	stateА00л0	100.0	250м0г01о	103.1	252м1т02лет03с04оват05лег06с07ов0т08лав1т09с10он11лах1радав0и0в1гједанал0х1р0таов1ие	up
+
+Every new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result.

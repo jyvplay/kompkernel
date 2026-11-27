@@ -1,0 +1,3 @@
+spec: v+k*r = v+(k*row#) printed like v; v@+ks = v plus k sec; list* repeats; =v fixed; body = header then rows.
+S28 sep " | " r=0..27 body:| cue | start | speaker | text |
+| 1+1*r ; 00:00:02@+3s ; s0|s1|s2|s3* ; line 0+1*r |

@@ -1,0 +1,64 @@
+[
+  {
+    "command": [
+      "npx",
+      "esbuild",
+      "bench/x190/test.ts",
+      "--bundle",
+      "--platform=node",
+      "--format=esm",
+      "--outfile=bench/x190/test.mjs"
+    ],
+    "exit": 0,
+    "wallSeconds": 0.5124102470001617,
+    "log": "bench/x190/receipts/validation-0.log"
+  },
+  {
+    "command": [
+      "node",
+      "bench/x190/test.mjs"
+    ],
+    "exit": 0,
+    "wallSeconds": 7.82904548700003,
+    "log": "bench/x190/receipts/validation-1.log"
+  },
+  {
+    "command": [
+      "python3",
+      "bench/x190/independent.py"
+    ],
+    "exit": 0,
+    "wallSeconds": 0.112682753999934,
+    "log": "bench/x190/receipts/validation-2.log"
+  },
+  {
+    "command": [
+      "python3",
+      "bench/x190/native_eval.py",
+      "selftest"
+    ],
+    "exit": 0,
+    "wallSeconds": 0.033984108999902674,
+    "log": "bench/x190/receipts/validation-3.log"
+  },
+  {
+    "command": [
+      "npx",
+      "tsc",
+      "--noEmit"
+    ],
+    "exit": 0,
+    "wallSeconds": 15.06712206400016,
+    "log": "bench/x190/receipts/validation-4.log"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exit": 0,
+    "wallSeconds": 25.269061653000108,
+    "log": "bench/x190/receipts/validation-5.log"
+  }
+]

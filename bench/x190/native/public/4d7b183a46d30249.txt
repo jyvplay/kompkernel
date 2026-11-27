@@ -1,0 +1,6 @@
+⁺ = number at same position above + change from two lines above.
+§а.internal
+шh 10.244.бapi-server-7d9f8bыаби⁺гиdишугинби-е 1/1ме Running з.и node-и.clusterв node-0.clusterже Pending сзыкжи гирми ізандуіоги.итоваби-b0өм0 эм1 л node-1.clusterюовыМиланc0¶‡37,8,12,11,8,16:23 rows single-spaced, pad field k to width k.
+NAME READY STATUS RESTARTS AGE IP NODE
+б00-a0000ө2d0ш0.0вы01-b0003э3d1ш1.11лаб02-c0006кс03-d0009рус04-e0012өгизы05-a0015ж1 ю06-b0018ролаб07-c0021рус08-d0024ж0 г0зы09-e0027эг1зы10-a0030рю11-b0033к.М036өдd0039эдe0042кіa0045рт048өг0.М051ж1 г1си-d0054рдe0057рдa0060ж0 т063эола
+Every new Cyrillic letter before ¶ starts a rule whose text runs to the next new letter or to ¶. In the text after ¶ expand every rule, repeatedly, and print only the result.

@@ -1,0 +1,10 @@
+{
+  "node --version": "v22.22.3",
+  "npm --version": "10.9.8",
+  "python3 --version": "Python 3.11.2",
+  "npx tsc --version": "Version 5.9.3",
+  "gh --version": "gh version 2.23.0 (2023-02-27 Debian 2.23.0+dfsg1-1)\nhttps://github.com/cli/cli/releases/tag/v2.23.0",
+  "command -v lean": "",
+  "command -v lake": "",
+  "command -v z3": ""
+}

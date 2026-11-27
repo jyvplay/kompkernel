@@ -1,0 +1,7 @@
+import fs from 'node:fs';import {build} from 'esbuild';
+const original=fs.readFileSync('src/lib/omega/bpe-fast.ts','utf8');
+const old='    if (ascii) return mergeCount(SB, L);\n    bytes = TE.encode(chunk);';
+const replacement='    if (ascii) return mergeCount(SB, L);\n    // Every UTF-16 code unit needs at most 3 UTF-8 bytes (pairs need 4).\n    if (L <= Math.floor(SCRATCH_MAX / 3) && typeof TE.encodeInto === "function") {\n      const result = TE.encodeInto(chunk, SB);\n      if (result.read !== L) throw new Error("UTF-8 scratch bound");\n      return mergeCount(SB, result.written);\n    }\n    bytes = TE.encode(chunk);';
+if(original.split(old).length!==2)throw Error('anchor');
+for(const arm of ['A','B'])for(const [name,entry] of [['speed','bench/x164/cache-speed.ts'],['count','bench/x163/count-gate.ts'],['vector','bench/x164/speed-unit.ts'],['merge','bench/x182/merge-attack.ts'],['threshold','bench/x185/threshold-attack.ts'],['utf8','bench/x190/utf8-attack.ts']])await build({entryPoints:[entry],bundle:true,platform:'node',format:'esm',outfile:`bench/x190/${name}-${arm}.mjs`,plugins:arm==='A'?[]:[{name:'utf8-scratch',setup(b){b.onLoad({filter:/[\\/]bpe-fast\.ts$/},()=>({contents:original.replace(old,replacement),loader:'ts'}));}}]});
+fs.writeFileSync('bench/x190/receipts/speed-patch.json',JSON.stringify({production:false,old,replacement,scope:'Exact UTF-8 encodeInto for short non-ASCII chunks; fallback when API absent. No reduced search or altered vocabulary.'},null,2));
