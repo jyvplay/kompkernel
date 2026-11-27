@@ -1,0 +1,5 @@
+¶k=v expand repeatedly After ~, a number has . before its last 1 digits. print only.
+§ک | ~ة s | **-~ب|ك%** |
+بوك Hot reload pنب---ب---ط300ل220ر175ا sکم160ت200¶ب Metric | Baseline | Variant A | Variant B | Delta |
+ننب---|
+ب Cold startک400اطالة125ك Warm startک375ا280ا205ة142و50ک350ا260ا190ة159و95ک325ا240ارة176ك Prod buildکطالامة193ك Bundle gzipک275اتا145ة210ك Test wall-clockک250ا180ا130ة227ك Memory peakک225اما115ة244ك CPU userکتا140ا100ة261ك CPU sysکرا120ا85ة278%** |

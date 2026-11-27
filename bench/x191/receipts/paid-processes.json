@@ -1,0 +1,90 @@
+[
+  {
+    "path": "bench/holdout-x41/ps-aux-real.txt",
+    "mode": "selected",
+    "output": "bench/x191/receipts/paid-00.json",
+    "status": "complete",
+    "wallSeconds": 171.07650493300002,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x41/ls-real.txt",
+    "mode": "selected",
+    "output": "bench/x191/receipts/paid-01.json",
+    "status": "complete",
+    "wallSeconds": 51.81615742099984,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/llm-answer.md",
+    "mode": "selected",
+    "output": "bench/x191/receipts/paid-02.json",
+    "status": "complete",
+    "wallSeconds": 30.703815638999913,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/email-thread.txt",
+    "mode": "selected",
+    "output": "bench/x191/receipts/paid-03.json",
+    "status": "complete",
+    "wallSeconds": 39.71140544800005,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout/code-ts.txt",
+    "mode": "selected",
+    "output": "bench/x191/receipts/paid-04.json",
+    "status": "complete",
+    "wallSeconds": 92.09583883000005,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x41/node-help.txt",
+    "mode": "selected",
+    "output": "bench/x191/receipts/paid-05.json",
+    "status": "complete",
+    "wallSeconds": 27.41072987199982,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x42/ps-ef.txt",
+    "mode": "selected",
+    "output": "bench/x191/receipts/paid-06.json",
+    "status": "complete",
+    "wallSeconds": 21.880918990000055,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-work/unified-diff.patch",
+    "mode": "selected",
+    "output": "bench/x191/receipts/paid-07.json",
+    "status": "complete",
+    "wallSeconds": 15.63737742000012,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/holdout-x42b/vmstat.txt",
+    "mode": "selected",
+    "output": "bench/x191/receipts/paid-08.json",
+    "status": "complete",
+    "wallSeconds": 7.921990851999908,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+    "mode": "selected",
+    "output": "bench/x191/receipts/paid-09.json",
+    "status": "timeout",
+    "wallSeconds": 180.0427969530001,
+    "capSeconds": 180
+  },
+  {
+    "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+    "mode": "selected",
+    "output": "bench/x191/receipts/paid-10.json",
+    "status": "complete",
+    "wallSeconds": 61.76509647299986,
+    "capSeconds": 180
+  }
+]

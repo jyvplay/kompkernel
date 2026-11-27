@@ -1,0 +1,22 @@
+{
+  "integerMatrixChecks": 2916,
+  "scope": "2x2 symmetric Q and integer B entries -1,0,1; not a general proof",
+  "girthCounterexample": [
+    [
+      "a",
+      "b",
+      "a"
+    ],
+    [
+      "a",
+      "c",
+      "a"
+    ]
+  ],
+  "modalCollision": [
+    "a b\n",
+    "a  b\n",
+    "a b\r\n"
+  ],
+  "kernel": "NOT_RUN"
+}

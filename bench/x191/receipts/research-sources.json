@@ -1,0 +1,58 @@
+[
+  {
+    "repo": "anthropics/zeta-23-lean",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "zeta23/Zeta23/Main.lean",
+    "file": ".cache/x191/research/anthropics-Main.lean",
+    "sha256": "9ffe70b13e0695022bd155803190dbcb031845e748de4a0a59477e84e8242e50",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/zeta-23-lean",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "zeta23/Zeta23/LinAlg/Inertia.lean",
+    "file": ".cache/x191/research/anthropics-Inertia.lean",
+    "sha256": "afb853a1772319779d614c3c82304880e2cb8f6272004cb49fa4662340fc458f",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/zeta-23-lean",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "README.md",
+    "file": ".cache/x191/research/anthropics-README.md",
+    "sha256": "a790f7c00b5d2f877c8d17dee860b4354e4c7207c4d7d81b37a37300fac385a2",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "openai/math",
+    "commit": "3344da59991ed94f9ba711217b29c1d760badfa6",
+    "path": "lean/OAI/Computability/Superstring/HostComplete.lean",
+    "file": ".cache/x191/research/openai-HostComplete.lean",
+    "sha256": "a019124eb5f37036a747f97c8c304b9ef26b66aaf512e768846ba775b8866ab0",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "openai/math",
+    "commit": "3344da59991ed94f9ba711217b29c1d760badfa6",
+    "path": "lean/OAI/Computability/Superstring/HostNormalization.lean",
+    "file": ".cache/x191/research/openai-HostNormalization.lean",
+    "sha256": "63778ebff5721896636ae20e15a7443779ab47d69823d510152071f9cd4da166",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/zeta-23-lean",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "zeta23/Challenge.lean",
+    "file": ".cache/x191/research/anthropics-Challenge.lean",
+    "sha256": "6f2a4ba95ab8c5319e541a1cc1b3699c0ae8cef23ea8e68f958e11b07281761e",
+    "kernel": "NOT_RUN"
+  },
+  {
+    "repo": "anthropics/zeta-23-lean",
+    "commit": "11b6c7e3c927df2658f513b6b68ea7f8929c62c5",
+    "path": "zeta23/Solution.lean",
+    "file": ".cache/x191/research/anthropics-Solution.lean",
+    "sha256": "ba75f3cd7092764060089160e1458aee59e1f2f9913ab98994a492a112c3c815",
+    "kernel": "NOT_RUN"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "path": "bench/holdout-x42b/vmstat.txt",
+  "mode": "selected",
+  "folded": "[[[\"\",\" 0 0\\n 1 53860\"],[\"0\",\" 2140656\"],[\"2\",\"\"],[\"2140656\",\"\"],[\"53860\",\"596816\"],[\"596816\",\"\"]],\"# source: vmstat 1 3 (real, captured 2026-10-24T23:21:26Z)\\nprocs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----\\n r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st\\n 2  0      0 2140656 ~2; 596816    0    0    12    59  268  433 54  1 45  0  0\\n 2  0      0 2140656 ~2; 596816    0    0     0     0  494  545 51  1 49  0  0\\n 2  0      0 2140656 ~2; 596816    0    0     0     0  445  367 50  1 49  0  0\\n\"]",
+  "edges": 11,
+  "branched": 3,
+  "output": "bench/x191/receipts/paid-08.json",
+  "parent": "¶ k=v. expand repeatedly; print only.\n§л\\nр ер0м2140656о   клр2ре     ерм ~2;р596816оеопрруреи\"],[\"торыуукететеррар1рд\",\"ба49¶[[[\"деела53860и0\",\" ми2димди53860\",\"596816и596816\",\"\"]],\"# source: vmstatа3р(real, captured 2026-10-24T23:21:26Z)лprocs -----------memory---------- ---swap-- -----io----р-system-- ------cpu-----л r  bоswpdоfree   buffпcacheоsiоso    biорboоinоcs us sy id wa stкет12 о59 р268 р433 54 а45ы494 р545 51 бы445 р367 50 буул\"]",
+  "message": "Decode payload first. JSON [rows,body]. Each row [field,successors] lists allowed next fields; split successors and body on ASCII spaces retaining empty fields. In body, ~N; replaces N fields: fill them with the UNIQUE directed walk of N+1 edges from the preceding literal field to the following literal field in rows. Endpoints stay once; reject absent or ambiguous walks. Join fields with ASCII spaces, preserve every other character; print only.\n¶ k=v. expand repeatedly; print only.\n§л\\nр ер0м2140656о   клр2ре     ерм ~2;р596816оеопрруреи\"],[\"торыуукететеррар1рд\",\"ба49¶[[[\"деела53860и0\",\" ми2димди53860\",\"596816и596816\",\"\"]],\"# source: vmstatа3р(real, captured 2026-10-24T23:21:26Z)лprocs -----------memory---------- ---swap-- -----io----р-system-- ------cpu-----л r  bоswpdоfree   buffпcacheоsiоso    biорboоinоcs us sy id wa stкет12 о59 р268 р433 54 а45ы494 р545 51 бы445 р367 50 буул\"]",
+  "tokens": 272,
+  "parentTokens": 178,
+  "keyMarginal": 94,
+  "status": "exact",
+  "cpu": {
+    "user": 7542230,
+    "system": 155183
+  },
+  "ms": 17078.038493,
+  "native": "NOT_RUN"
+}

@@ -1,0 +1,73 @@
+[
+  {
+    "command": [
+      "npx",
+      "esbuild",
+      "bench/x191/test.ts",
+      "--bundle",
+      "--platform=node",
+      "--format=esm",
+      "--outfile=bench/x191/test.mjs"
+    ],
+    "exit": 0,
+    "wallSeconds": 0.6284041140002046,
+    "log": "bench/x191/receipts/validation-0.log"
+  },
+  {
+    "command": [
+      "node",
+      "bench/x191/test.mjs"
+    ],
+    "exit": 0,
+    "wallSeconds": 23.861778704000017,
+    "log": "bench/x191/receipts/validation-1.log"
+  },
+  {
+    "command": [
+      "python3",
+      "bench/x191/independent.py"
+    ],
+    "exit": 0,
+    "wallSeconds": 0.13734217299997908,
+    "log": "bench/x191/receipts/validation-2.log"
+  },
+  {
+    "command": [
+      "python3",
+      "bench/x191/native_eval.py",
+      "selftest"
+    ],
+    "exit": 0,
+    "wallSeconds": 0.0476446790000864,
+    "log": "bench/x191/receipts/validation-3.log"
+  },
+  {
+    "command": [
+      "python3",
+      "bench/x191/math-sanity.py"
+    ],
+    "exit": 0,
+    "wallSeconds": 0.049050762999968356,
+    "log": "bench/x191/receipts/validation-4.log"
+  },
+  {
+    "command": [
+      "npx",
+      "tsc",
+      "--noEmit"
+    ],
+    "exit": 0,
+    "wallSeconds": 19.785746190000054,
+    "log": "bench/x191/receipts/validation-5.log"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exit": 0,
+    "wallSeconds": 35.28088926300006,
+    "log": "bench/x191/receipts/validation-6.log"
+  }
+]

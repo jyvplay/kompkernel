@@ -1,0 +1,20 @@
+[
+  {
+    "repo": "git/git",
+    "commit": "acba8bf9753134d9bde89f94369f775838a8c5fe",
+    "path": "Documentation/gitcredentials.adoc",
+    "file": "bench/x191/fixtures/git_git-gitcredentials.adoc",
+    "sha256": "9add927564a27e8beac22c72115862f6e7315854038b144b2acd8f94b4c5d348",
+    "bytes": 12183,
+    "scope": "New-source discovery screen, not independent blind confirmation"
+  },
+  {
+    "repo": "rust-lang/book",
+    "commit": "c976903459e37407cfa6964530ea3469957b3549",
+    "path": "src/ch05-01-defining-structs.md",
+    "file": "bench/x191/fixtures/rust-lang_book-ch05-01-defining-structs.md",
+    "sha256": "344424e680093f9fd0291e895cd1002c5645a769d3b928de541d78148b93caa7",
+    "bytes": 13693,
+    "scope": "New-source discovery screen, not independent blind confirmation"
+  }
+]

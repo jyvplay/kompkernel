@@ -1,0 +1,1127 @@
+{
+  "checks": 217,
+  "rows": [
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 7114,
+      "raw": 5194
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 5174,
+      "raw": 3054
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "tokens": 3026,
+      "raw": 1000
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 2346,
+      "raw": 1152
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 915,
+      "raw": 811
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 1617,
+      "raw": 1034
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 290,
+      "raw": 140
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 1371,
+      "raw": 733
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 725,
+      "raw": 570
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 1200,
+      "raw": 629
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 601,
+      "raw": 458
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 143,
+      "raw": 60
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 183,
+      "raw": 80
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 1807,
+      "raw": 1006
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 2749,
+      "raw": 1422
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "tokens": 3330,
+      "raw": 2739
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 4126,
+      "raw": 1099
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 2180,
+      "raw": 787
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 904,
+      "raw": 513
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 2185,
+      "raw": 1144
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 310,
+      "raw": 158
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 1829,
+      "raw": 1106
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 640,
+      "raw": 582
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 1166,
+      "raw": 675
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 599,
+      "raw": 330
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 1561,
+      "raw": 656
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 951,
+      "raw": 578
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 256,
+      "raw": 76
+    },
+    {
+      "family": "rank",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 407,
+      "raw": 229
+    },
+    {
+      "family": "rank",
+      "path": "bench/x179/fixtures/python_cpython-classes.rst",
+      "tokens": 18225,
+      "raw": 8632
+    },
+    {
+      "family": "rank",
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "tokens": 12681,
+      "raw": 6604
+    },
+    {
+      "family": "rank",
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "tokens": 11830,
+      "raw": 6704
+    },
+    {
+      "family": "rank",
+      "path": "bench/x181/fixtures/python_cpython-errors.rst",
+      "tokens": 12626,
+      "raw": 5790
+    },
+    {
+      "family": "rank",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "tokens": 2716,
+      "raw": 1480
+    },
+    {
+      "family": "rank",
+      "path": "bench/x182/fixtures/gitworkflows.adoc",
+      "tokens": 7774,
+      "raw": 3838
+    },
+    {
+      "family": "rank",
+      "path": "bench/x184/fixtures/git_git-git-restore.adoc",
+      "tokens": 3440,
+      "raw": 1869
+    },
+    {
+      "family": "rank",
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "tokens": 14054,
+      "raw": 7107
+    },
+    {
+      "family": "rank",
+      "path": "bench/x191/fixtures/git_git-gitcredentials.adoc",
+      "tokens": 5300,
+      "raw": 2595
+    },
+    {
+      "family": "rank",
+      "path": "bench/x191/fixtures/rust-lang_book-ch05-01-defining-structs.md",
+      "tokens": 6541,
+      "raw": 3450
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 8191,
+      "raw": 5194
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 4828,
+      "raw": 3054
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "tokens": 2433,
+      "raw": 1000
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 2444,
+      "raw": 1152
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 1187,
+      "raw": 811
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 1797,
+      "raw": 1034
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 262,
+      "raw": 140
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 1664,
+      "raw": 733
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 839,
+      "raw": 570
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 1400,
+      "raw": 629
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 1123,
+      "raw": 458
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 138,
+      "raw": 60
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 163,
+      "raw": 80
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 1848,
+      "raw": 1006
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 3666,
+      "raw": 1422
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "tokens": 4754,
+      "raw": 2739
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 3437,
+      "raw": 1099
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 1798,
+      "raw": 787
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 814,
+      "raw": 513
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 1895,
+      "raw": 1144
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 283,
+      "raw": 158
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 1805,
+      "raw": 1106
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 902,
+      "raw": 582
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 1176,
+      "raw": 675
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 540,
+      "raw": 330
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 1928,
+      "raw": 656
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 1105,
+      "raw": 578
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 189,
+      "raw": 76
+    },
+    {
+      "family": "checksum",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 390,
+      "raw": 229
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x179/fixtures/python_cpython-classes.rst",
+      "tokens": 22377,
+      "raw": 8632
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "tokens": 16017,
+      "raw": 6604
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "tokens": 14911,
+      "raw": 6704
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x181/fixtures/python_cpython-errors.rst",
+      "tokens": 14638,
+      "raw": 5790
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "tokens": 3408,
+      "raw": 1480
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x182/fixtures/gitworkflows.adoc",
+      "tokens": 10242,
+      "raw": 3838
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x184/fixtures/git_git-git-restore.adoc",
+      "tokens": 4554,
+      "raw": 1869
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "tokens": 18225,
+      "raw": 7107
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x191/fixtures/git_git-gitcredentials.adoc",
+      "tokens": 7153,
+      "raw": 2595
+    },
+    {
+      "family": "checksum",
+      "path": "bench/x191/fixtures/rust-lang_book-ch05-01-defining-structs.md",
+      "tokens": 8313,
+      "raw": 3450
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 9026,
+      "raw": 5194
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 5500,
+      "raw": 3054
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 1912,
+      "raw": 1152
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 2212,
+      "raw": 811
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 1731,
+      "raw": 1034
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 266,
+      "raw": 140
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 982,
+      "raw": 733
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 1132,
+      "raw": 570
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 895,
+      "raw": 629
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 785,
+      "raw": 458
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 144,
+      "raw": 60
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 183,
+      "raw": 80
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 2190,
+      "raw": 1006
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 1746,
+      "raw": 1422
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 1226,
+      "raw": 1099
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 951,
+      "raw": 787
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 1170,
+      "raw": 513
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 2337,
+      "raw": 1144
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 307,
+      "raw": 158
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 2163,
+      "raw": 1106
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 1282,
+      "raw": 582
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 1298,
+      "raw": 675
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 640,
+      "raw": 330
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 730,
+      "raw": 656
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 969,
+      "raw": 578
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 170,
+      "raw": 76
+    },
+    {
+      "family": "delta",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 463,
+      "raw": 229
+    },
+    {
+      "family": "delta",
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "tokens": 7497,
+      "raw": 6604
+    },
+    {
+      "family": "delta",
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "tokens": 9113,
+      "raw": 6704
+    },
+    {
+      "family": "delta",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "tokens": 2247,
+      "raw": 1480
+    },
+    {
+      "family": "delta",
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "tokens": 8098,
+      "raw": 7107
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 7002,
+      "raw": 5194
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 5814,
+      "raw": 3054
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "tokens": 4502,
+      "raw": 1000
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 2819,
+      "raw": 1152
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 898,
+      "raw": 811
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 1637,
+      "raw": 1034
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 322,
+      "raw": 140
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 1161,
+      "raw": 733
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 757,
+      "raw": 570
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 960,
+      "raw": 629
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 584,
+      "raw": 458
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 122,
+      "raw": 60
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 183,
+      "raw": 80
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 2498,
+      "raw": 1006
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 2455,
+      "raw": 1422
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "tokens": 2687,
+      "raw": 2739
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 6172,
+      "raw": 1099
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 3266,
+      "raw": 787
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 681,
+      "raw": 513
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 2778,
+      "raw": 1144
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 342,
+      "raw": 158
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 2150,
+      "raw": 1106
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 623,
+      "raw": 582
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 1127,
+      "raw": 675
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 480,
+      "raw": 330
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 1262,
+      "raw": 656
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 835,
+      "raw": 578
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 350,
+      "raw": 76
+    },
+    {
+      "family": "distance",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 436,
+      "raw": 229
+    },
+    {
+      "family": "distance",
+      "path": "bench/x179/fixtures/python_cpython-classes.rst",
+      "tokens": 16738,
+      "raw": 8632
+    },
+    {
+      "family": "distance",
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "tokens": 10115,
+      "raw": 6604
+    },
+    {
+      "family": "distance",
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "tokens": 10641,
+      "raw": 6704
+    },
+    {
+      "family": "distance",
+      "path": "bench/x181/fixtures/python_cpython-errors.rst",
+      "tokens": 12037,
+      "raw": 5790
+    },
+    {
+      "family": "distance",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "tokens": 2320,
+      "raw": 1480
+    },
+    {
+      "family": "distance",
+      "path": "bench/x182/fixtures/gitworkflows.adoc",
+      "tokens": 6434,
+      "raw": 3838
+    },
+    {
+      "family": "distance",
+      "path": "bench/x184/fixtures/git_git-git-restore.adoc",
+      "tokens": 2893,
+      "raw": 1869
+    },
+    {
+      "family": "distance",
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "tokens": 11357,
+      "raw": 7107
+    },
+    {
+      "family": "distance",
+      "path": "bench/x191/fixtures/git_git-gitcredentials.adoc",
+      "tokens": 4433,
+      "raw": 2595
+    },
+    {
+      "family": "distance",
+      "path": "bench/x191/fixtures/rust-lang_book-ch05-01-defining-structs.md",
+      "tokens": 5373,
+      "raw": 3450
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/ls-l-real.txt",
+      "tokens": 6234,
+      "raw": 5194
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/ps-aux-real.txt",
+      "tokens": 3696,
+      "raw": 3054
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42/dpkg-l.txt",
+      "tokens": 1629,
+      "raw": 1000
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout/json-pkg.txt",
+      "tokens": 1988,
+      "raw": 1152
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x40/metrics.tsv",
+      "tokens": 798,
+      "raw": 811
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/ls-real.txt",
+      "tokens": 1440,
+      "raw": 1034
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42/df-h.txt",
+      "tokens": 204,
+      "raw": 140
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-work/llm-answer.md",
+      "tokens": 1373,
+      "raw": 733
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-tbl/df-h.txt",
+      "tokens": 722,
+      "raw": 570
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-work/email-thread.txt",
+      "tokens": 1104,
+      "raw": 629
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/du-real.txt",
+      "tokens": 898,
+      "raw": 458
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42/lsblk.txt",
+      "tokens": 104,
+      "raw": 60
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42b/uptime-w.txt",
+      "tokens": 126,
+      "raw": 80
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-tbl/kubectl-get-pods.txt",
+      "tokens": 1347,
+      "raw": 1006
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout/code-ts.txt",
+      "tokens": 3068,
+      "raw": 1422
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/apt-real.txt",
+      "tokens": 3652,
+      "raw": 2739
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/node-help.txt",
+      "tokens": 2365,
+      "raw": 1099
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42/findmnt.txt",
+      "tokens": 1233,
+      "raw": 787
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x40/cue-sheet.md",
+      "tokens": 776,
+      "raw": 513
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42/ps-ef.txt",
+      "tokens": 1534,
+      "raw": 1144
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/df-real.txt",
+      "tokens": 226,
+      "raw": 158
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x41/ps-real.txt",
+      "tokens": 1416,
+      "raw": 1106
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x40/prices.csv",
+      "tokens": 678,
+      "raw": 582
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-tbl/psql-output.txt",
+      "tokens": 996,
+      "raw": 675
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-tbl/markdown-table.md",
+      "tokens": 454,
+      "raw": 330
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-work/kb-article.txt",
+      "tokens": 1545,
+      "raw": 656
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-work/unified-diff.patch",
+      "tokens": 833,
+      "raw": 578
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42b/free-m.txt",
+      "tokens": 141,
+      "raw": 76
+    },
+    {
+      "family": "parity",
+      "path": "bench/holdout-x42b/vmstat.txt",
+      "tokens": 299,
+      "raw": 229
+    },
+    {
+      "family": "parity",
+      "path": "bench/x179/fixtures/python_cpython-classes.rst",
+      "tokens": 17962,
+      "raw": 8632
+    },
+    {
+      "family": "parity",
+      "path": "bench/x179/fixtures/rust-lang_book-ch09-02-recoverable-errors-with-result.md",
+      "tokens": 12825,
+      "raw": 6604
+    },
+    {
+      "family": "parity",
+      "path": "bench/x179/fixtures/kubernetes_website-debug-service.md",
+      "tokens": 11812,
+      "raw": 6704
+    },
+    {
+      "family": "parity",
+      "path": "bench/x181/fixtures/python_cpython-errors.rst",
+      "tokens": 11697,
+      "raw": 5790
+    },
+    {
+      "family": "parity",
+      "path": "bench/x181/fixtures/git_git-recover-corrupted-blob-object.adoc",
+      "tokens": 2578,
+      "raw": 1480
+    },
+    {
+      "family": "parity",
+      "path": "bench/x182/fixtures/gitworkflows.adoc",
+      "tokens": 7709,
+      "raw": 3838
+    },
+    {
+      "family": "parity",
+      "path": "bench/x184/fixtures/git_git-git-restore.adoc",
+      "tokens": 3529,
+      "raw": 1869
+    },
+    {
+      "family": "parity",
+      "path": "bench/x184/fixtures/rust-lang_book-ch10-03-lifetime-syntax.md",
+      "tokens": 14670,
+      "raw": 7107
+    },
+    {
+      "family": "parity",
+      "path": "bench/x191/fixtures/git_git-gitcredentials.adoc",
+      "tokens": 5573,
+      "raw": 2595
+    },
+    {
+      "family": "parity",
+      "path": "bench/x191/fixtures/rust-lang_book-ch05-01-defining-structs.md",
+      "tokens": 6639,
+      "raw": 3450
+    }
+  ]
+}

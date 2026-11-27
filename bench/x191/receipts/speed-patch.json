@@ -1,0 +1,7 @@
+{
+  "production": false,
+  "old": "const LUT2 = new Map<number, number>();",
+  "replacement": "// X191 isolated experiment: lazy 16+16-bit pages; exact key, bounded storage.\nconst LUT2_PAGES:(Uint8Array|undefined)[]=new Array(65536);let LUT2_USED=0;\nconst LUT2={\n get(k:number):number|undefined{const p=LUT2_PAGES[k>>>16];if(!p)return undefined;const v=p[k&65535];return v?v-1:undefined;},\n set(k:number,v:number){if(!Number.isInteger(v)||v<0||v>254)throw Error('X191 cache range');let p=LUT2_PAGES[k>>>16];if(!p){if(LUT2_USED>=128)this.clear();LUT2_PAGES[k>>>16]=p=new Uint8Array(65536);LUT2_USED++;}p[k&65535]=v+1;},\n clear(){LUT2_PAGES.fill(undefined);LUT2_USED=0;}\n};",
+  "maxPageBytes": 8388608,
+  "scope": "o200k two-UTF16 chunk counts; exact-key page lookup, capped memory and clear semantics. Not a changed tokenizer."
+}
